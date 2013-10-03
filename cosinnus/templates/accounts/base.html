@@ -1,0 +1,12 @@
+{% extends "authentication/base.html" %}
+{% load static i18n %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+{% endblock %}
+
+{% block breadcrumbs %}
+<li>
+    {% trans "Your profile information" %}
+</li>
+{% endblock %}

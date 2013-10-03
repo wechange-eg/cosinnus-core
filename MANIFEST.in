@@ -1,0 +1,8 @@
+include AUTHORS
+include LICENSE
+include README
+recursive-include docs *
+recursive-include cosinnus/locale *
+recursive-include cosinnus/static *
+recursive-include cosinnus/templates *
+recursive-exclude docs/build *

@@ -1,0 +1,63 @@
+{% extends "authentication/base.html" %}
+{% load i18n staticfiles %}
+{% block page_title %}{{ group }}: {% trans "Manage users" %}{% endblock %}
+
+{% block extrahead %}
+<script src="{% static 'js/vendor/jquery.cookie.js' %}"></script>
+{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="active">{{ group }}: {% trans "Members" %}</li>
+{% endblock %}
+
+{% block content %}
+    <a target="_blank" class="btn" href="{% url 'sinn_auth-user-add' group=group.pk %}">{% trans "Add user" %}</a>
+
+    {% if object_list %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>{% trans "User" %}</th>
+                <th>{% trans "Membership status" %}</th>
+            </tr>
+        </thead>
+        {% for user in users %}
+        <tr>
+            <th><a href="{% url 'sinn_auth-user-detail' group=group.pk pk=user.user.pk %}">{{ user.user.username }}</a></th>
+            <td>
+                {% if user.in_group %}
+                <span class="label label-success">{% trans "Member" %}</span> (<a class="remove-from-group" href="{% url 'sinn_auth-user-remove-from-group' group=group.pk user=user.user.pk %}">{% trans "Remove" %}</a>)
+                {% else %}
+                <span class="label">{% trans "No member" %}</span> (<a class="add-to-group" href="{% url 'sinn_auth-user-add-to-group' group=group.pk user=user.user.pk %}">{% trans "Add" %}</a>)
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        {% trans "There are no users." %}
+    {% endif %}
+    <script type="text/javascript">
+    var csrftoken = $.cookie('csrftoken'),
+        remove_handler = function (e) {
+            e.preventDefault();
+            var c_self = this;
+            jQuery.post(this.href, {"csrfmiddlewaretoken": csrftoken}, function () {
+                $(c_self).text("{% trans "Add" %}").siblings(".label").removeClass("label-success").text("{% trans "No member" %}");
+                $(c_self).unbind("click").click(add_handler);
+            });
+            return false;
+        },
+        add_handler = function (e) {
+            e.preventDefault();
+            var c_self = this;
+            jQuery.post(this.href, {"csrfmiddlewaretoken": csrftoken}, function () {
+                $(c_self).text("{% trans "Remove" %}").siblings(".label").addClass("label-success").text("{% trans "Member" %}");
+                $(c_self).unbind("click").click(remove_handler);
+            });
+            return false;
+        };
+    $(".remove-from-group").click(remove_handler);
+    $(".add-to-group").click(add_handler);
+    </script>
+{% endblock %}

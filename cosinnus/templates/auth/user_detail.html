@@ -1,0 +1,57 @@
+{% extends "authentication/base.html" %}
+{% load i18n thumbnail %}
+{% block page_title %}{{ object.username }}{% endblock %}
+
+{% block breadcrumbs %}
+{{ block.super }}
+<li>
+  <a href="{% url 'sinn_auth-group-detail' group=group.pk %}">
+    {{ group.name }}
+  </a>
+  <span class="divider">/</span>
+</li>
+<li class="active">{{ object.username }}</li>
+{% endblock %}
+
+{% block content %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th class="span2">{% trans "Username" %}:</th>
+                <td>{{ object.username }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "Name" %}:</th>
+                <td>{% if object.first_name or object.last_name %}{{ object.first_name }} {{ object.last_name }}{% else %}-{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{% trans "E-mail address" %}:</th>
+                <td>{{ object.email }}</td>
+            </tr>
+            <tr>
+                <th>{% trans "Groups" %}:</th>
+                <td>
+                    <ul>
+                        {% for group in object.groups.all %}
+                            <li><a href="{% url 'sinn_auth-group-detail' group=group.pk %}">{{ group.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+            {% if profile.avatar %}
+            <tr>
+                <th>{% trans "Avatar" %}:</th>
+                <td>
+                  <img src="{% thumbnail profile.avatar 128x128 crop %}" title="{{ object.get_full_name }}" />
+                </td>
+            </tr>
+            {% endif %}
+            {% for field in optional_fields %}
+            <tr>
+              <th>{% trans field.name %}:</th>
+              <td>{{ field.value }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
