@@ -9,8 +9,8 @@ from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, ListView, View
 
-from cosinnus.core.decorators.views import require_admin_group, staff_required
-from cosinnus.core.views.mixins import RequireGroupMixin
+from cosinnus.decorators.views import require_admin_group, staff_required
+from cosinnus.views.mixins import RequireGroupMixin
 from cosinnus.forms.authentication import UserForm
 
 

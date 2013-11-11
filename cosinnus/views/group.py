@@ -6,7 +6,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView
 
 from cosinnus.core.decorators.views import staff_required
-from cosinnus.core.views.mixins.group import RequireGroupMixin
+from cosinnus.views.mixins.group import RequireGroupMixin
 
 
 class GroupDetailView(RequireGroupMixin, DetailView):

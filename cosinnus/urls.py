@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.conf.urls import patterns, url
 
 
-urlpatterns = patterns('cosinnus.core.views',
+urlpatterns = patterns('cosinnus.views',
     url(r'^profile/$', 'profile.detail_view', name='profile-detail'),
     url(r'^profile/edit/$', 'profile.update_view', name='profile-update'),
 
