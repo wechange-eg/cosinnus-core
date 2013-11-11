@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.conf import settings
 from django.utils.importlib import import_module
+
+from cosinnus.conf import settings
 
 
 __all__ = ['BaseRegistry']

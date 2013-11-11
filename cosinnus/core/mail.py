@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.conf import settings
 from django.core.mail import send_mail as django_send_mail
 from django.template.loader import render_to_string
+
+from cosinnus.conf import settings
 
 
 __all__ = ['CELERY_AVAILABLE', 'send_mail']

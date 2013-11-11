@@ -53,6 +53,7 @@ setup(
     install_requires=[
         'Django>=1.5',
         'South>=0.7',
+        'django-appconf>=0.6',
         'django-taggit>=0.10a1',
     ],
     extras_require = {
