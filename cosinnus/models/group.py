@@ -22,4 +22,4 @@ class GroupAdmin(models.Model):
         verbose_name_plural = _('Group admins')
 
     def __str__(self):
-        return self.user
+        return str(self.user)
