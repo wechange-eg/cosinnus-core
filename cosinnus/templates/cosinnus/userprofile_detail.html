@@ -1,0 +1,10 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n %}
+
+{% block content %}
+  {{ object }}
+  {% for field in optional_fields %}
+    {{ field.name }}: {{ field.value }}
+  {% endfor %}
+  <a href="{% url 'cosinnus:profile-update' %}">{% trans "Edit" %}</a>
+{% endblock content %}

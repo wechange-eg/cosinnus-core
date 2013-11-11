@@ -8,6 +8,9 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 
+__all__ = ['GroupAdmin']
+
+
 @python_2_unicode_compatible
 class GroupAdmin(models.Model):
     user = models.ForeignKey(get_user_model(), verbose_name=_('User'),

@@ -7,6 +7,9 @@ from django.utils.translation import ugettext_lazy as _
 from taggit.managers import TaggableManager
 
 
+__all__ = ['TaggableManager']
+
+
 class TaggableModel(models.Model):
 
     tags = TaggableManager(_('Tags'), blank=True)
