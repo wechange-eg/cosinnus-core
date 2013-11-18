@@ -1,13 +1,13 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n %}
 
-{% block page_title %}{% trans "Groups" %}{% endblock %}
+{% block page_title %}{% trans "Add user" %}{% endblock %}
 
 {% block content %}
   <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
     {% csrf_token %}
     {{ form }}
     <button type="submit">{% trans "Save" %}</button>
-    <a href="{% url 'cosinnus:profile-detail' %}" class="btn">{% trans "Cancel" %}</a>
+    <a href="{% url 'cosinnus:user-list' %}" class="btn">{% trans "Cancel" %}</a>
   </form>
-{% endblock content %}
+{% endblock %}

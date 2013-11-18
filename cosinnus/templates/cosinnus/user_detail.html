@@ -1,17 +1,7 @@
-{% extends "authentication/base.html" %}
-{% load i18n thumbnail %}
-{% block page_title %}{{ object.username }}{% endblock %}
+{% extends "cosinnus/base.html" %}
+{% load i18n %}
 
-{% block breadcrumbs %}
-{{ block.super }}
-<li>
-  <a href="{% url 'sinn_auth-group-detail' group=group.pk %}">
-    {{ group.name }}
-  </a>
-  <span class="divider">/</span>
-</li>
-<li class="active">{{ object.username }}</li>
-{% endblock %}
+{% block page_title %}{{ object.username }}{% endblock %}
 
 {% block content %}
     <table class="table">
@@ -33,7 +23,7 @@
                 <td>
                     <ul>
                         {% for group in object.groups.all %}
-                            <li><a href="{% url 'sinn_auth-group-detail' group=group.pk %}">{{ group.name }}</a></li>
+                            <li><a href="{% url 'cosinnus:group-detail' group=group.pk %}">{{ group.name }}</a></li>
                         {% endfor %}
                     </ul>
                 </td>
@@ -42,7 +32,11 @@
             <tr>
                 <th>{% trans "Avatar" %}:</th>
                 <td>
-                  <img src="{% thumbnail profile.avatar 128x128 crop %}" title="{{ object.get_full_name }}" />
+                  {% if user.cosinnus_profile.avatar %}
+                    <img class="avatar" src="{{ user.cosinnus_profile.avatar.url }}" alt="{% trans "Avatar" %}">
+                  {% else %}
+                    <img class="avatar" src="http://placehold.it/128x128" alt="{% trans "Avatar" %}">
+                  {% endif %}
                 </td>
             </tr>
             {% endif %}

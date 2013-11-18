@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import UpdateView
-from django.views.generic.detail import SingleObjectMixin, DetailView
+from django.views.generic import DetailView, UpdateView
+from django.views.generic.detail import SingleObjectMixin
 
 from cosinnus.forms.profile import UserProfileForm
 from cosinnus.models.profile import get_user_profile_model

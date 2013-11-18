@@ -1,0 +1,31 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus %}
+
+{% block page_title %}{{ object.name }}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="span4">
+    <h3>{% trans "Group members" %}</h3>
+    <ul class="media-list">
+      {% for user in users %}
+        <li class="media">
+          <a class="pull-left" href="{% url 'cosinnus:user-detail' username=user.get_username %}">
+            {% if user.cosinnus_profile.avatar %}
+              <img class="avatar" src="{{ user.cosinnus_profile.avatar.url }}">
+            {% else %}
+              <img class="avatar" src="http://placehold.it/30x30">
+            {% endif %}
+          </a>
+          <div class="media-body">
+            <a class="pull-left" href="{% url 'cosinnus:user-detail' username=user.get_username %}">{{ user.get_full_name|default:user.get_username }}</a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="span6">
+    <div id="map" style="height: 640px;"></div>
+  </div>
+</div>
+{% endblock %}

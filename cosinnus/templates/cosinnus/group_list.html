@@ -1,18 +1,7 @@
-{% extends "authentication/base.html" %}
-{% load i18n static bootstrap_toolkit %}
-{% load dajaxice_templatetags %}
+{% extends "cosinnus/base.html" %}
+{% load i18n %}
+
 {% block page_title %}{% trans "Groups" %}{% endblock %}
-
-{% block extrahead %}
-    {{ block.super }}
-    {% dajaxice_js_import %}
-    <script type="text/javascript" src="{% static "/static/dajax/jquery.dajax.core.js" %}"></script>
-{% endblock %}
-
-{% block breadcrumbs %}
-{{ block.super }}
-<li class="active">{% trans "All Groups" %}</li>
-{% endblock %}
 
 {% block content %}
     {% if object_list %}
@@ -28,7 +17,7 @@
             <tr>
             {% if group in user.groups.all %}
                 <td>
-                    <a href="{% url 'sinn_auth-group-detail' group=group.pk %}">{{ group.name }}</a>
+                    <a href="{% url 'cosinnus:group-detail' group=group.pk %}">{{ group.name }}</a>
                 </td>
                 <td>
                 </td>
