@@ -7,4 +7,5 @@ from appconf import AppConf
 
 
 class CosinnusConf(AppConf):
-    USER_PROFILE_MODEL = "cosinnus.UserProfile"
+    TAG_OBJECT_MODEL = 'cosinnus.TagObject'
+    USER_PROFILE_MODEL = 'cosinnus.UserProfile'
