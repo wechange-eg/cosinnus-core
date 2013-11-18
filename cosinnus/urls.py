@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.conf.urls import patterns, url
 
+from cosinnus.core.loaders.urls import cosinnus_site
+
 
 urlpatterns = patterns('cosinnus.views',
     url(r'^profile/$', 'profile.detail_view', name='profile-detail'),
@@ -19,3 +21,6 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^user/(?P<username>[^/]+)/$', 'user.user_detail', name='user-detail'),
     url(r'^user/(?P<username>[^/]+)/edit/$', 'user.user_update', name='user-edit'),
 )
+
+cosinnus_site.autodiscover()
+urlpatterns += cosinnus_site.urlpatterns
