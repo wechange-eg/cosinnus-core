@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group
-from django.db import models
+from django.db import models, transaction
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+
+from cosinnus.conf import settings
 
 
 __all__ = ['GroupAdmin']
@@ -13,7 +14,7 @@ __all__ = ['GroupAdmin']
 
 @python_2_unicode_compatible
 class GroupAdmin(models.Model):
-    user = models.ForeignKey(get_user_model(), verbose_name=_('User'),
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('User'),
         null=False, blank=False, on_delete=models.CASCADE)
     group = models.ForeignKey(Group, verbose_name=_('Group'),
         null=False, blank=False, on_delete=models.CASCADE)
@@ -26,3 +27,10 @@ class GroupAdmin(models.Model):
 
     def __str__(self):
         return str(self.user)
+
+    def save(self, *args, **kwargs):
+        """Atomically add the user to the group if not already a member"""
+        with transaction.commit_on_success():
+            super(GroupAdmin, self).save(*args, **kwargs)
+            if not self.user.groups.filter(id=self.group_id).exists():
+                self.user.groups.add(self.group)

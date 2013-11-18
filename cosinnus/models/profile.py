@@ -3,11 +3,10 @@ from __future__ import unicode_literals
 
 import six
 
-from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.dispatch import receiver
+from django.db.models import signals
 from django.utils.functional import cached_property
 from django.utils.encoding import python_2_unicode_compatible
 
@@ -66,7 +65,8 @@ class BaseUserProfile(models.Model):
             user = request.user
             profile = MyUserProfile.objects.get_for_user(user)
     """
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, editable=False)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, editable=False,
+        related_name='cosinnus_profile')
 
     objects = BaseUserProfileManager()
 
@@ -137,9 +137,22 @@ def get_user_profile_model():
     return user_profile_model
 
 
-@receiver(models.signals.post_save, sender=get_user_model())
 def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        upm = get_user_profile_model()
-        upm.objects.get_or_create(user=instance)
+    """
+    Creates (if necessary) or gets a new user profile for the given user
+    instance.
+    """
+    upm = get_user_profile_model()
+    upm.objects.get_or_create(user=instance)
 
+
+def setup_user_profile_signal(sender, **kwargs):
+    name = '%s.%s' % (sender._meta.app_label, sender._meta.object_name)
+    if name == settings.AUTH_USER_MODEL:
+        signals.post_save.connect(create_user_profile, sender=sender)
+
+try:
+    from django.contrib.auth import get_user_model
+    signals.post_save.connect(create_user_profile, sender=get_user_model())
+except:
+    signals.class_prepared.connect(setup_user_profile_signal)
