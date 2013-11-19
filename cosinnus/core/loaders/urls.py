@@ -18,14 +18,14 @@ class CosinnusSite(object):
         for app in settings.INSTALLED_APPS:
             try:
                 module = import_module('%s.cosinnus_app' % app)
-                if getattr(module, 'IS_COSINNUS_APP', False):
-                    app_name = getattr(module, 'COSINNUS_APP_NAME', app)
-                    urls = import_module('%s.urls' % app)
-                    self._urlpatterns += patterns('',
-                        url(r'', include(urls.urlpatterns, namespace=app_name))
-                    )
             except ImportError:
                 continue
+            if getattr(module, 'IS_COSINNUS_APP', False):
+                app_name = getattr(module, 'COSINNUS_APP_NAME', app)
+                urls = import_module('%s.urls' % app)
+                self._urlpatterns += patterns('',
+                    url(r'', include(urls.urlpatterns, namespace=app_name))
+                )
 
     @property
     def urlpatterns(self):
