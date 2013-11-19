@@ -44,7 +44,7 @@ class BaseTaggableObjectModel(models.Model):
     """
 
     tags = TaggableManager(_(u'Tags'), blank=True)
-    media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL)
+    media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL, blank=True, null=True)
 
     class Meta:
         abstract = True
