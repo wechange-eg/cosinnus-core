@@ -40,10 +40,11 @@ for dirpath, dirnames, filenames in os.walk(django_dir):
     elif filenames:
         data_files.append([dirpath, [os.path.join(dirpath, f) for f in filenames]])
 
+from cosinnus import get_version
 
 setup(
     name='cosinnus',
-    version='0.1a0',
+    version=get_version(),
     description='cosinnus core application',
     long_description=read('README'),
     author='Sinnwerkstatt Medienagentur GmbH Berlin',
