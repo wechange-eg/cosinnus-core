@@ -6,9 +6,6 @@ from django.utils.importlib import import_module
 from cosinnus.conf import settings
 
 
-__all__ = ['BaseRegistry']
-
-
 class BaseRegistry(object):
 
     def __init__(self, module_name):

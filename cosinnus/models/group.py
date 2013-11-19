@@ -9,9 +9,6 @@ from django.utils.translation import ugettext_lazy as _
 from cosinnus.conf import settings
 
 
-__all__ = ['GroupAdmin']
-
-
 @python_2_unicode_compatible
 class GroupAdmin(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('User'),

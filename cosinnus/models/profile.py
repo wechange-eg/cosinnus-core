@@ -13,9 +13,6 @@ from django.utils.encoding import python_2_unicode_compatible
 from cosinnus.conf import settings
 
 
-__all__ = ['BaseUserProfile', 'UserProfile', 'get_user_profile_model']
-
-
 class BaseUserProfileManager(models.Manager):
     use_for_related_fields = True
 
@@ -68,7 +65,9 @@ class BaseUserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, editable=False,
         related_name='cosinnus_profile')
 
-    objects = BaseUserProfileManager()
+    # TODO: uncomment once we move to Django 1.6 -- See ticket 19384
+    # https://code.djangoproject.com/ticket/19384
+    # objects = BaseUserProfileManager()
 
     SKIP_FIELDS = ('id', 'user',)
 
@@ -90,7 +89,7 @@ class BaseUserProfile(models.Model):
     def get_absolute_url(self):
         return reverse('cosinnus:profile-detail')
 
-    @cached_property
+    @property
     def optional_fields(self):
         """
         Iterates over all fields defiend in the user profile and returns a list
@@ -114,6 +113,8 @@ class BaseUserProfile(models.Model):
 
 
 class UserProfile(BaseUserProfile):
+
+    objects = BaseUserProfileManager()
 
     class Meta:
         app_label = 'cosinnus'
