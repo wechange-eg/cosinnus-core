@@ -1,2 +1,11 @@
-*.swp
+.*
+*.egg-info
 *.pyc
+*.swp
+coverage.xml
+build/
+dist/
+docs/_build/
+
+!.coveragerc
+!.gitignore
