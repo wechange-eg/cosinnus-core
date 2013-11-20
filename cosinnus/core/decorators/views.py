@@ -50,7 +50,7 @@ def require_populate_group(group_url_kwarg='group', group_attr='group'):
         def wrapper(self, request, *args, **kwargs):
             group_name = kwargs.get(group_url_kwarg, None)
             if not group_name:
-                raise Http404("No group provided")
+                raise Http404(_("No group provided"))
 
             group = get_object_or_404(Group, name=group_name)
 
@@ -83,7 +83,7 @@ def require_admin_group(group_url_kwarg='group', group_attr='group'):
         def wrapper(self, request, *args, **kwargs):
             group_name = kwargs.get(group_url_kwarg, None)
             if not group_name:
-                raise Http404("No group provided")
+                raise Http404(_("No group provided"))
 
             group = get_object_or_404(Group, name=group_name)
 

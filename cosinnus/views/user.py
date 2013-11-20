@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from cosinnus.core.decorators.views import staff_required, superuser_required
-from cosinnus.forms.authentication import UserForm
+from cosinnus.forms.user import UserForm
 
 
 USER_MODEL = get_user_model()

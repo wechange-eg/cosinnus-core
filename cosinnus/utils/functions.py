@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 
-def unique_aware_slugify(item, slug_source, slug_field, **fkwargs):
+def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
     """Ensures a unique slug field by appending an integer counter to duplicate
     slugs.
 
@@ -18,11 +18,20 @@ def unique_aware_slugify(item, slug_source, slug_field, **fkwargs):
 
         unique_aware_slugify(self, slug_source='title', slug_field='slug')
 
-    where the value of field slug_source will be used to prepopulate the value
-    of slug_field.
+    where the value of field `slug_source` will be used to prepopulate the
+    value of `slug_field`.
 
-    The any additional arguments passed to this function are used during lookup
+    Any additional arguments passed to this function are used during lookup
     existing slugs and can be used to filter them.
+
+    .. note::
+
+        If `slug_field` is already set this function won't do anything!
+
+    :param Model item: A Django model instance
+    :param str slug_source: The name of the field to construct a slug from
+    :param str slug_field: The name of the field to write the slug to
+    :param kwargs: Additional filter attributes on applied to the model
     """
     import re
     from django.template.defaultfilters import slugify
@@ -34,9 +43,9 @@ def unique_aware_slugify(item, slug_source, slug_field, **fkwargs):
     slug = slugify(getattr(item, slug_source))
     model = item.__class__
     # the following gets all existing slug values
-    if not slug_field in fkwargs:
-        fkwargs['%s__startswith' % slug_field] = slug
-    all_slugs = list(model.objects.filter(**fkwargs).values_list(slug_field, flat=True))
+    if not slug_field in kwargs:
+        kwargs['%s__startswith' % slug_field] = slug
+    all_slugs = list(model.objects.filter(**kwargs).values_list(slug_field, flat=True))
     if slug in all_slugs:
         finder = re.compile(r'-\d+$')
         counter = 2

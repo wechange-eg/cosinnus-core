@@ -44,7 +44,7 @@ class FilterGroupMixin(object):
 
 class GroupFormKwargsMixin(object):
     """
-    Works nicely together with .forms.GroupKwargModelFormMixin
+    Works nicely together with :class:`cosinnus.forms.GroupKwargModelFormMixin`
     """
     def get_form_kwargs(self):
         kwargs = super(GroupFormKwargsMixin, self).get_form_kwargs()

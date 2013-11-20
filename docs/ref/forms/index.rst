@@ -9,10 +9,10 @@ forms Package
     :undoc-members:
     :show-inheritance:
 
-:mod:`authentication` Module
-----------------------------
+:mod:`group` Module
+---------------------
 
-.. automodule:: cosinnus.forms.authentication
+.. automodule:: cosinnus.forms.group
     :members:
     :undoc-members:
     :show-inheritance:
@@ -21,6 +21,14 @@ forms Package
 ---------------------
 
 .. automodule:: cosinnus.forms.profile
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`user` Module
+----------------------------
+
+.. automodule:: cosinnus.forms.user
     :members:
     :undoc-members:
     :show-inheritance:
