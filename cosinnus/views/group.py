@@ -19,12 +19,6 @@ class GroupListView(ListView):
     def dispatch(self, *args, **kwargs):
         return super(GroupListView, self).dispatch(*args, **kwargs)
 
-    def get_context_data(self, **kwargs):
-        context = super(GroupListView, self).get_context_data(**kwargs)
-        user = self.request.user
-        context['user'] = user
-        return context
-
 group_list = GroupListView.as_view()
 
 
@@ -39,8 +33,8 @@ class GroupDetailView(RequireGroupMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(GroupDetailView, self).get_context_data(**kwargs)
-        users = self.group.user_set.order_by('first_name', 'last_name')
-        context.update({'users': users})
+        users = self.group.user_set.order_by('first_name', 'last_name').select_related('cosinnus_profile')
+        context['users'] = users
         return context
 
 group_detail = GroupDetailView.as_view()
