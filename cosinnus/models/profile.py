@@ -7,7 +7,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import signals
-from django.utils.functional import cached_property
 from django.utils.encoding import python_2_unicode_compatible
 
 from cosinnus.conf import settings
@@ -156,4 +155,8 @@ try:
     from django.contrib.auth import get_user_model
     signals.post_save.connect(create_user_profile, sender=get_user_model())
 except:
+    if settings.DEBUG:
+        from traceback import print_exc
+        print_exc()
+
     signals.class_prepared.connect(setup_user_profile_signal)
