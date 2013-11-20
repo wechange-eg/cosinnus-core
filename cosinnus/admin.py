@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.contrib import admin
 from django.contrib.auth.admin import Group, GroupAdmin as DjangoGroupAdmin
 
+from cosinnus.forms.group import GroupForm
 from cosinnus.models.group import GroupAdmin
 
 
@@ -21,6 +22,7 @@ class GroupAdminInline(admin.StackedInline):
 
 class GroupAdmin(DjangoGroupAdmin):
     inlines = (GroupAdminInline,)
+    form = GroupForm
 
 admin.site.unregister(Group)
 admin.site.register(Group, GroupAdmin)
