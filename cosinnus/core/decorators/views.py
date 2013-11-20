@@ -8,6 +8,7 @@ from django.contrib.auth.models import Group
 from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import available_attrs
+from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
 
@@ -34,6 +35,9 @@ def require_populate_group(group_url_kwarg='group', group_attr='group'):
     dispatch function in CBVs and checks that the requesting user is a member
     of the given group or has the superuser flag.
 
+    Additionally this function populates the group instance to the view
+    instance as attribute `group_attr`
+
     :param str group_url_kwarg: The name of the key containing the group name.
         Defaults to `'group'`.
     :param str group_attr: The attribute name which can later be used to access
@@ -44,16 +48,17 @@ def require_populate_group(group_url_kwarg='group', group_attr='group'):
     def decorator(function):
         @functools.wraps(function, assigned=available_attrs(function))
         def wrapper(self, request, *args, **kwargs):
-            group_id = kwargs.get(group_url_kwarg, None)
-            if not group_id:
+            group_name = kwargs.get(group_url_kwarg, None)
+            if not group_name:
                 raise Http404("No group provided")
 
-            if not check_ug_membership(request.user, group_id) and \
-                    not request.user.is_superuser:
-                return HttpResponseForbidden("Not a member of this group")
+            group = get_object_or_404(Group, name=group_name)
 
-            setattr(self, group_attr, get_object_or_404(Group, pk=group_id))
-            return function(self, request, *args, **kwargs)
+            if request.user.is_superuser or check_ug_membership(request.user, group):
+                setattr(self, group_attr, group)
+                return function(self, request, *args, **kwargs)
+
+            return HttpResponseForbidden(_("Not a member of this group"))
         return wrapper
     return decorator
 
@@ -63,6 +68,9 @@ def require_admin_group(group_url_kwarg='group', group_attr='group'):
     dispatch function in CBVs and checks that the requesting user is an admin
     of the given group or has the superuser flag.
 
+    Additionally this function populates the group instance to the view
+    instance as attribute `group_attr`
+
     :param str group_url_kwarg: The name of the key containing the group name.
         Defaults to `'group'`.
     :param str group_attr: The attribute name which can later be used to access
@@ -73,15 +81,16 @@ def require_admin_group(group_url_kwarg='group', group_attr='group'):
     def decorator(function):
         @functools.wraps(function, assigned=available_attrs(function))
         def wrapper(self, request, *args, **kwargs):
-            group_id = kwargs.get(group_url_kwarg, None)
-            if not group_id:
+            group_name = kwargs.get(group_url_kwarg, None)
+            if not group_name:
                 raise Http404("No group provided")
 
-            if not check_ug_admin(request.user, group_id) and \
-                    not request.user.is_superuser:
-                return HttpResponseForbidden("Not an admin of this group")
+            group = get_object_or_404(Group, name=group_name)
 
-            setattr(self, group_attr, get_object_or_404(Group, pk=group_id))
-            return function(self, request, *args, **kwargs)
+            if request.user.is_superuser or check_ug_admin(request.user, group):
+                setattr(self, group_attr, group)
+                return function(self, request, *args, **kwargs)
+
+            return HttpResponseForbidden(_("Not a admin of this group"))
         return wrapper
     return decorator

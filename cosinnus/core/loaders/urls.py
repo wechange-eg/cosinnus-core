@@ -33,7 +33,7 @@ class CosinnusSite(object):
                 group_patterns = getattr(urls, 'cosinnus_group_patterns', None)
                 if group_patterns:
                     url_app_name = re_escape(app_name)
-                    url_base = r'^group/(?P<group>\d+)/%s/' % url_app_name
+                    url_base = r'^group/(?P<group>[^/]+)/%s/' % url_app_name
                     self._urlpatterns += patterns('',
                         url(url_base, include(group_patterns, namespace=app_name)),
                     )
