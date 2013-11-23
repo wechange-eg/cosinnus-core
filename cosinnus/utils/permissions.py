@@ -17,7 +17,7 @@ def check_ug_admin(user, group):
     if not isinstance(group, Group):
         raise ValueError('Expecting a group instance as second argument')
 
-    return GroupAdmin.objects.filter(user=user, group_id=group.pk).exists()
+    return GroupAdmin.objects.filter(user_id=user.pk, group_id=group.pk).exists()
 
 
 def check_ug_membership(user, group):
