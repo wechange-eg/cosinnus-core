@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import Group
-from django.db import models, transaction
+from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
@@ -27,7 +27,14 @@ class GroupAdmin(models.Model):
 
     def save(self, *args, **kwargs):
         """Atomically add the user to the group if not already a member"""
-        with transaction.commit_on_success():
+        # TODO: Drop ImportError check when Django 1.5 support is dropped
+        try:
+            from django.db.transaction import atomic
+            context_wrapper = atomic
+        except ImportError as e:
+            from django.db.transaction import commit_on_success
+            context_wrapper = commit_on_success
+        with context_wrapper():
             super(GroupAdmin, self).save(*args, **kwargs)
             if not self.user.groups.filter(id=self.group_id).exists():
                 self.user.groups.add(self.group)
