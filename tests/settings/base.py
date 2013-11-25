@@ -28,6 +28,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'taggit',
     'cosinnus',
+    'tests',
 )
 if django.VERSION[:2] < (1, 6):
     TEST_RUNNER = 'discover_runner.DiscoverRunner'

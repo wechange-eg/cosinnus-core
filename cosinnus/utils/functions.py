@@ -7,8 +7,9 @@ def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
     slugs.
 
     The item's slug field is first prepopulated by slugify-ing the source
-    field. If that value already exists, a counter is appended to the slug, and
-    the counter incremented upward until the value is unique.
+    field up to the maximum length of the slug field - 5. If that value already
+    exists, a counter is appended to the slug, and the counter incremented
+    upward until the value is unique. The maximum counter is therefor 9999.
 
     For instance, if you save an object titled “Daily Roundup”, and the slug
     “daily-roundup” is already taken, this function will try “daily-roundup-2”,
@@ -40,7 +41,9 @@ def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
         # if a slug is already set, do nothing but return
         return
 
-    slug = slugify(getattr(item, slug_source))
+    max_length = item._meta.get_field_by_name(slug_field)[0].max_length
+    slug_len = max_length - 5  # 1 for '-'and 4 for the counter
+    slug = slugify(getattr(item, slug_source)[:slug_len])
     model = item.__class__
     # the following gets all existing slug values
     if not slug_field in kwargs:

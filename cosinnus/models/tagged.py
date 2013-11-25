@@ -8,6 +8,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
+from cosinnus.utils.functions import unique_aware_slugify
 
 
 class LocationModelMixin(models.Model):
@@ -57,8 +58,15 @@ class BaseTaggableObjectModel(models.Model):
     group = models.ForeignKey(Group, verbose_name=_('Group'),
         related_name='%(app_label)s_%(class)s_set', on_delete=models.PROTECT)
 
+    title = models.CharField(_('Title'), max_length=255)
+    slug = models.SlugField(max_length=55)  # human readable part is 50 chars
+
     class Meta:
         abstract = True
 
     def __str__(self):
         return "Tagged object {0}".format(self.pk)
+
+    def save(self, *args, **kwargs):
+        unique_aware_slugify(self, 'title', 'slug', group=self.group)
+        super(BaseTaggableObjectModel, self).save(*args, **kwargs)
