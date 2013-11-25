@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from cosinnus.core.decorators.views import require_populate_group
+from cosinnus.core.decorators.views import require_membership
 
 
 class RequireGroupMixin(object):
-    """This mixin combines the :py:func:`staff_required` and
-    :py:func:`require_populate_group` decorators and also puts the group
-    (resolved) by :py:func:`require_populate_group` to the render context. Each
-    CBV that requires a group given as part of the URL should use this mixin.
+    """
+    This mixin combines the :py:func:`staff_required` and
+    :py:func:`require_membership` decorators and also puts the group (resolved)
+    by :py:func:`require_membership` to the render context. Each CBV that
+    requires a group given as part of the URL should use this mixin.
     """
 
-    @require_populate_group()
+    @require_membership()
     def dispatch(self, request, *args, **kwargs):
         return super(RequireGroupMixin, self).dispatch(request, *args, **kwargs)
 
@@ -26,7 +27,7 @@ class FilterGroupMixin(object):
     given group are returned.
     """
 
-    #: See `group_attr` of :py:func:`require_populate_group` for usage
+    #: See `group_attr` of :py:func:`require_membership` for usage
     group_attr = 'group'
     #: The actual filter keyword used in the queryset's `filter` function
     group_field = 'group'

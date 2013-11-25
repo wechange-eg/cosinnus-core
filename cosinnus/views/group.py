@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, FormView, ListView
 
-from cosinnus.core.decorators.views import require_admin_group
+from cosinnus.core.decorators.views import require_admin
 from cosinnus.views.mixins.group import RequireGroupMixin
 
 
@@ -57,7 +57,7 @@ class GroupUserAddView(RequireGroupMixin, FormView):
 
     http_method_names = ['post']
 
-    @require_admin_group()
+    @require_admin()
     def dispatch(self, request, *args, **kwargs):
         return super(GroupUserAddView, self).dispatch(request, *args, **kwargs)
 
@@ -76,7 +76,7 @@ class GroupUserDeleteView(RequireGroupMixin, FormView):
 
     http_method_names = ['post']
 
-    @require_admin_group()
+    @require_admin()
     def dispatch(self, request, *args, **kwargs):
         return super(GroupUserDeleteView, self).dispatch(request, *args, **kwargs)
 
