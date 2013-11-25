@@ -35,6 +35,7 @@ class GroupForm(forms.ModelForm):
 
     class Meta:
         model = Group
+        fields = ('name',)
 
     def clean_name(self):
         data = self.cleaned_data.get('name')
