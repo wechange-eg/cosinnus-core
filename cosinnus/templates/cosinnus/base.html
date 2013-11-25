@@ -6,9 +6,10 @@
     <title>{% block page_title %}{% endblock page_title %}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    {% block extrahead %}{% endblock %}
+    {% block extrahead %}{% endblock extrahead %}
   </head>
   <body>
     {% block content %}{% endblock content %}
+    {% block extrafooter %}{% endblock extrafooter %}
   </body>
 </html>
