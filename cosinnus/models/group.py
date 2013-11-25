@@ -31,7 +31,7 @@ class GroupAdmin(models.Model):
         try:
             from django.db.transaction import atomic
             context_wrapper = atomic
-        except ImportError as e:
+        except ImportError:
             from django.db.transaction import commit_on_success
             context_wrapper = commit_on_success
         with context_wrapper():

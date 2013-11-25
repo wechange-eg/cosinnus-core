@@ -37,6 +37,7 @@ admin.site.register(Group, GroupAdmin)
 USER_PROFILE_MODEL = get_user_profile_model()
 USER_MODEL = get_user_model()
 
+
 class UserProfileAdmin(admin.ModelAdmin):
     pass
 
