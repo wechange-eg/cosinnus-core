@@ -63,6 +63,7 @@ class BaseTaggableObjectModel(models.Model):
 
     class Meta:
         abstract = True
+        unique_together = (('group', 'slug'),)
 
     def __str__(self):
         return "Tagged object {0}".format(self.pk)
