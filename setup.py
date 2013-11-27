@@ -56,10 +56,10 @@ setup(
         'South>=0.7',
         'django-appconf>=0.6',
         'django-taggit>=0.10a1',
+
+        # TODO: Uncomment once merged! https://github.com/dyve/django-bootstrap3/pull/42
+        # 'django-bootstrap3-py3',
     ],
-    extras_require = {
-        'bootstrap':  ['django-bootstrap-toolkit>=2.11.5'],
-    },
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',
