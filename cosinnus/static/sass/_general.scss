@@ -1,0 +1,88 @@
+@import "variables";
+
+/* Bootstrap Adjustments */
+
+.row {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+/*
+ * Fixes showing dropdown menu when slowly hovering it.
+ */
+.dropdown-toggle {
+  padding-bottom: 20px;
+}
+
+.breadcrumb {
+  padding: 0px 15px 8px 15px;
+  margin-bottom: 20px;
+  list-style: none;
+  border-radius: 4px;
+  font-size: 10px;
+}
+
+.breadcrumb > li {
+  display: inline-block;
+}
+
+.breadcrumb > li + li:before {
+  padding: 0 5px;
+  color: $grey-darkest;
+  content: "\003E";
+}
+
+.breadcrumb > .active {
+  color: $grey-darkest;
+}
+
+.breadcrumb a {
+  color: $grey-darkest;
+}
+
+/* GENERAL */
+
+img {
+  border: 0 none;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+img.left {
+  float: left;
+  margin-right: 40px;
+}
+
+img.right {
+  float: right;
+  margin-left: 40px;
+}
+
+.img-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.displaynone {
+  display: none;
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+
+.clearboth {
+  clear: both;
+}

@@ -1,0 +1,9 @@
+{% load i18n menu_tags %}
+{% spaceless %}
+<ul>
+    {% get_available_languages as languages %}
+    {% for language in languages %}
+        <li><a href="{% page_language_url language.0 %}"{% ifequal current_language language.0 %} class="current"{% endifequal %}>{{ language.0|upper }}</a></li>
+    {% endfor %}
+</ul>
+{% endspaceless %}

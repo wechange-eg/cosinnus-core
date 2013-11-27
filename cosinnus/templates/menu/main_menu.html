@@ -1,0 +1,29 @@
+{% load cms_tags menu_tags %}
+{% spaceless %}
+<ul>
+    {% for child in children %}
+        <li{% if child.children %} class="has-subnavi"{% endif %}>
+            <a{% if child.attr.reverse_id %} class="{{ child.attr.reverse_id }}"{% endif %} href="{{ child.get_absolute_url }}">{{ child.get_menu_title }}</a>
+            {% if child.children %}
+                <div class="subnavi">
+                    {% with child.children as children_l1 %}
+                        {% for child_l1 in children_l1 %}
+                            <div class="subnavi-block">
+                                <a href="{{ child_l1.get_absolute_url }}"><h3>{{ child_l1.get_menu_title }}:</h3></a>
+                                {% if child_l1.children %}
+                                    <ul>
+                                        {% for child_l2 in child_l1.children %}
+                                            <li><a href="{{ child_l2.get_absolute_url }}">{{ child_l2.get_menu_title }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    {% endwith %}
+                </div>
+            {% endif %}
+        </li>
+    {% endfor %}
+    <li><a target="_blank" href="http://facebook.com/ideenhochdrei" class="facebook"></a></li>
+</ul>
+{% endspaceless %}

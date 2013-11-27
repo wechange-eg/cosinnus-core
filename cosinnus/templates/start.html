@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load i18n cms_tags menu_tags sekizai_tags webdesign %}
+{% load static from staticfiles %}
+
+
+{% block body_class %}start-page{% endblock body_class %}
+
+{% block pre_content %}
+<div class="row-fluid">
+    <div class="hexagons-and-teaser span12">
+        <div class="teaser">
+            {% placeholder teaser %}
+        </div>
+        <div class="hexagons">
+            <div class="row1">
+                {% placeholder hexagons_row1 %}
+            </div>
+            <div class="row2">
+                {% placeholder hexagons_row2 %}
+            </div>
+            <div class="row3">
+                {% placeholder hexagons_row3 %}
+            </div>
+            <div class="row4">
+                {% placeholder hexagons_row4 %}
+                <div class="hexagon newsletter">
+                    <div class="center-wrapper">
+                        <div>
+                            <div>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock pre_content %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+{% placeholder "News" %}
+    <hr>
+    {{ block.super }}
+    <ul>
+      <li><a href="{% url 'cosinnus:etherpad:index' 'fzs' %}">Etherpad FZS</a></li>
+      <li><a href="{% url 'cosinnus:event:index' 'fzs' %}">Event FZS</a></li>
+      <li><a href="{% url 'cosinnus:todo:index' 'fzs' %}">ToDo FZS</a></li>
+      <li><a href="{% url 'cosinnus:wiki:index' 'fzs' %}">Wiki FZS</a></li>
+    </ul>
+{% endblock content %}
+
+
+{% block post_content %}
+<div class="row-fluid">
+    <div class="span12 partner">
+        <hr>
+        {#{% show_placeholder "content" "partner" %}#}
+    </div>
+</div>
+{% endblock post_content %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static "js/vendor/jquery.html5-placeholder-shim.js" %}"></script>
+{% endblock javascript %}

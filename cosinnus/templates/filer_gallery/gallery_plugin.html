@@ -1,0 +1,22 @@
+{%  load thumbnail sekizai_tags static %}<ul class="thumbnails">
+    {% for image in instance.gallery.images.all %}
+        <li class="span3">
+            <a class="thumbnail fancybox" rel="{{ instance.gallery.slug }}" href="{{ image.image.url }}"><img src="{% thumbnail image.image "134x0" crop=1 upscale=1 %}"/></a>
+        </li>
+		{% if forloop.counter|divisibleby:4 and not forloop.last %}
+			</ul>
+			<ul class="thumbnails">
+		{% endif %}
+		
+    {% endfor %}
+</ul>
+
+{% addtoblock "js" %}
+<script type="text/javascript" src="{% static "filer_gallery/js/jquery.fancybox.pack.js" %}"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".fancybox").fancybox();
+	});
+</script>
+{% endaddtoblock %}
+{% addtoblock "css" %}<link href="{% static "filer_gallery/css/jquery.fancybox.css" %}" media="screen, projection" rel="stylesheet" type="text/css">{% endaddtoblock %}

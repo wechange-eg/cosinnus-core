@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+
+{% load i18n cms_tags menu_tags sekizai_tags menu_tags_addon %}
+
+
+{% block body_class %}page-basic{% endblock body_class %}
+
+
+{% block hanging_menu %}
+{% if request.current_page.level > 1 %}
+{% show_sibling_menu request.current_page "menu/sibling_menu.html" %}
+{% endif %}
+{% endblock hanging_menu %}
+
+{% block pre_content %}{% endblock %}
+
+{% block title %}{% placeholder pre_content or %}{{ block.super }}{% endplaceholder %}{% endblock %}
+
+{% block breadcrumb %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="breadcrumb">
+            <ul>
+                {% show_breadcrumb 0 "menu/breadcrumb.html" False %}
+            </ul>
+        </div>
+        <!--<div class="page-heading">
+            <img src="/media/uploads/heading-tag-der-ideen.png" alt="Tag der Ideen">
+        </div>-->
+    </div>
+</div>
+{% endblock breadcrumb %}
+
+{% block sidebar %}
+{% if request.current_page.level > 1 and request.current_page.level < 4 %}
+<div class="section nav-sidebar">
+    <ul>
+        {% show_menu request.current_page.level|subtract:1 request.current_page.level|subtract:1 0 0 "menu/sidebar_menu.html" %}
+    </ul>
+</div>
+{% endif %}
+    {{ block.super }}
+{% endblock sidebar %}

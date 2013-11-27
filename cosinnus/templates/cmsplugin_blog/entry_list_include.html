@@ -1,0 +1,25 @@
+{% load i18n placeholder_tags cmsplugin_blog_tags simple_translation_tags %}
+{% for entry in object_list|annotate_with_translations %}
+    {% with entry|get_preferred_translation_from_request:request as title %}
+        <div class="article-preview row-fluid">
+            <div class="span5">
+                {% with entry.placeholders|choose_placeholder:"image" as image %}
+                    {% render_placeholder image %}
+                {% endwith %}
+            </div>
+            {% with entry.placeholders|choose_placeholder:"excerpt" as excerpt %}
+                <div class="article-preview-txt span7">
+                    <h3>{{ title }} <span class="date">({{ entry.pub_date|date:"SHORT_DATE_FORMAT" }})</span></h3>
+                    <p>
+                       {{ entry|render_language_choices:request|safe }}
+                        {% render_placeholder excerpt %}
+                        <a href="{{ entry.get_absolute_url }}">{% trans "Read more" %}</a>
+                    </p>
+                </div>
+            {% endwith %}
+        </div>
+    {% endwith %}
+    {% if not forloop.last %}
+        <hr>
+    {% endif %}
+{% endfor %}

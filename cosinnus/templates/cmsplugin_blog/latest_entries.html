@@ -1,0 +1,12 @@
+{% load i18n %}
+
+{% block extrahead %}
+<link rel="alternate" type="application/rss+xml" title="RSS feed" href="{% url "blog_rss" %}" />
+{% endblock extrahead %}
+
+{% if instance.title %}<h1 id="news">{{ instance.title }}</h1>{% endif %}
+{% if object_list %}
+   {% include "cmsplugin_blog/entry_list_include.html" %}
+{% else %}
+	<p>{% trans "No entries" %}</p>
+{% endif %}

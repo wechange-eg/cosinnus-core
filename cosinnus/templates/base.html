@@ -1,0 +1,102 @@
+{% load i18n cms_tags menu_tags sekizai_tags static cosinnus_tags %}<!doctype html>
+<html lang="de-DE">
+<head>
+    <meta charset="UTF-8">
+    <title>Cosinnus {% if request.current_page.get_menu_title %} &raquo; {{ request.current_page.get_menu_title }}{% endif %}</title>
+    {% render_block "css" %}
+        <link href="{% static "css/vendor/bootstrap.min.css" %}" rel="stylesheet">
+        <!--link href="{% static "css/vendor/bootstrap/responsive.css" %}" rel="stylesheet"-->
+
+    <link href="{% static "css/layout.css" %}" media="screen, projection" rel="stylesheet" type="text/css"/>
+    <link href="{% static "css/content.css" %}" media="screen, projection" rel="stylesheet" type="text/css"/>
+    <!--[if IE]>
+    <link href="{% static "css/ie.css" %}" media="screen, projection" rel="stylesheet" type="text/css"/>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="Cosinnus"/>
+    <meta property="og:title" content="Cosinnus{% if request.current_page.get_menu_title %} &raquo; {{ request.current_page.get_menu_title }}{% endif %}" />
+    <meta property="og:description" content="{% trans "Cosinnus" %}" />
+    {% block extrahead %}{% endblock extrahead %}
+</head>
+
+<body class="{% block body_class %}{% endblock body_class %}">
+<div class="container">
+<div class="row">
+    <div class="header span12">
+        <a href="/">
+            <img class="logo" alt="Logo" src="{% static "img/logo.png" %}">
+        </a>
+        <div class="nav-lang">
+            {#% language_chooser "menu/language_chooser.html" %#}
+        </div>
+        <div class="nav-main clearfix">
+            {% show_menu 0 3 3 3 "menu/main_menu.html" %}
+        </div>
+    </div>
+</div>
+
+{% block hanging_menu %}
+{% endblock hanging_menu %}
+
+{% block pre_content %}{% placeholder pre_content %}{% endblock pre_content %}
+
+{% block body %}
+<div class="row">
+    <div class="span12 page-container-span">
+        <div class="page-container">
+            {% block breadcrumb %}{% endblock breadcrumb %}
+            <div class="row-fluid">
+                {% block main %}
+                <div class="span8">
+                    <div class="content">
+                    {% block content %}
+                        {% block title %}<h1>{{ request.current_page.get_menu_title }}</h1>{% endblock %}
+                        {% placeholder content %}
+                    {% endblock content %}
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="sidebar">
+                        {% block sidebar %}
+                            {% placeholder "Sidebar" %}
+                        {% endblock sidebar %}
+                    </div>
+                </div>
+                {% endblock %}
+            </div>
+            {% block post_content %}{% placeholder post_content %}{% endblock post_content %}
+        </div>
+    </div>
+{% endblock body %}
+
+<div class="row">
+    <div class="footer span12">
+        {#{% show_placeholder "content" "footer" %}#}
+    </div>
+</div>
+</div>
+
+</div>
+{%  block javascript %}
+<script type="text/javascript" src="{% static "js/vendor/jquery.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/vendor/jquery-ui-1.10.2.custom.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/vendor/jquery.ui.datepicker-de.js" %}"></script>
+<script type="text/javascript" src="{% static "js/main.js" %}"></script>
+{%  endblock javascript %}
+{% render_block "js" %}
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://cosinnus.org/piwik//";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+    g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+
+</script>
+<noscript><p><img src="http://cosinnus.org/piwik/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
+</body>
+</html>

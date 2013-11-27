@@ -1,0 +1,26 @@
+{% if nodes %}
+    <div class="row">
+        <div class="span12 nav-second-lvl">
+            <div class="row">
+                <div class="span10 offset2">
+                    <ul>
+                        {% if current_page.level == 3 %}
+                            <li class="parent">
+                                <a href="{{ current_page.get_absolute_url }}">{{ current_page.get_menu_title }}:</a>
+                            </li>
+                        {% elif current_page.level == 4 %}
+                            <li class="parent">
+                                <a href="{{ current_page.parent.get_absolute_url }}">{{ current_page.parent.get_menu_title }}:</a>
+                            </li>
+                        {% endif %}
+                        {% for node in nodes %} 
+                            <li {% if node == current_page %}class="active"{% endif %}>
+                                <a href="{{ node.get_absolute_url }}">{{ node.get_menu_title }}</a>
+                            </li>
+                        {% endfor %} 
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

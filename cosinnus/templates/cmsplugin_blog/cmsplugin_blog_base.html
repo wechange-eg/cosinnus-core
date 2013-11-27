@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+{{ block.super }}
+<link rel="alternate" type="application/rss+xml" title="RSS feed" href="{% url "blog_rss" %}" />
+{% endblock extrahead %}
+
+
+{% block breadcrumb %}{% endblock breadcrumb %}
+{% block pre_content %}{% endblock pre_content %}
+{% block content %}{% block left-col %}{% endblock left-col %}{% endblock content %}
+{% block sidebar %}{% block right-col %}{% endblock right-col %}{% endblock sidebar %}
+{% block post_content %}{% endblock post_content %}

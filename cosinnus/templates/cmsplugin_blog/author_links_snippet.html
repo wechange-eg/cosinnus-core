@@ -1,0 +1,6 @@
+{% load i18n %}
+
+<h2>{% trans "See entries by" %}:</h2>
+  {% for author in authors %}
+    <p><a href="{% url "blog_archive_author" author=author %}">{{ author }}</a></p>
+  {% endfor %}

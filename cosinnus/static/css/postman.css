@@ -1,0 +1,12 @@
+.pm_header dd {
+    margin-bottom: 10px;
+}
+.pm_message {
+    margin-bottom: 20px;
+}
+.pm_body {
+    margin-top: 20px;
+}
+#postman textarea {
+    width: auto;
+}
