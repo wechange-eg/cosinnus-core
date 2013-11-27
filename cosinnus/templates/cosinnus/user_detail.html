@@ -23,7 +23,7 @@
                 <td>
                     <ul>
                         {% for group in object.cosinnus_groups.all %}
-                            <li><a href="{% url 'cosinnus:group-detail' group=group.name %}">{{ group.name }}</a></li>
+                            <li><a href="{% url 'cosinnus:group-detail' group=group.slug %}">{{ group.name }}</a></li>
                         {% endfor %}
                     </ul>
                 </td>

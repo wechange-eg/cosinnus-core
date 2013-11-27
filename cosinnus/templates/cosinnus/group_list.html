@@ -17,7 +17,7 @@
             <tr>
             {% if group in user.cosinnus_groups.all %}
                 <td>
-                    <a href="{% url 'cosinnus:group-detail' group=group.name %}">{{ group.name }}</a>
+                    <a href="{% url 'cosinnus:group-detail' group=group.slug %}">{{ group.name }}</a>
                 </td>
                 <td>
                 </td>
@@ -26,7 +26,7 @@
                     {{ group.name }}
                 </td>
                 <td>
-                    <a href="#request-join-modal" data-group-id="{{ group.name }}" data-group-name="{{ group.name }}" role="button" class="join-model-button btn" data-toggle="modal">{% trans "Join" %}</a>
+                    <a href="#request-join-modal" data-group-id="{{ group.slug }}" data-group-name="{{ group.slug }}" role="button" class="join-model-button btn" data-toggle="modal">{% trans "Join" %}</a>
                 </td>
             {% endif %}
             </tr>
