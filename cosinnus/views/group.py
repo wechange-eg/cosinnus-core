@@ -33,7 +33,7 @@ class GroupDetailView(RequireGroupMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(GroupDetailView, self).get_context_data(**kwargs)
-        users = self.group.user_set.order_by('first_name', 'last_name').select_related('cosinnus_profile')
+        users = self.group.users.order_by('first_name', 'last_name').select_related('cosinnus_profile')
         context['users'] = users
         return context
 
@@ -45,7 +45,7 @@ class GroupUserListView(RequireGroupMixin, ListView):
     template_name = 'cosinnus/group_user_list.html'
 
     def get_queryset(self):
-        return self.group.user_set.all()
+        return self.group.users.all()
 
 group_user_list = GroupUserListView.as_view()
 
@@ -63,7 +63,7 @@ class GroupUserAddView(RequireGroupMixin, FormView):
 
     def post(self, request, *args, **kwargs):
         user = get_object_or_404(get_user_model(), username=kwargs.get('username'))
-        self.group.user_set.add(user)
+        self.group.users.add(user)
         return HttpResponse(status=200)
 
 group_user_add = GroupUserAddView.as_view()
@@ -82,7 +82,7 @@ class GroupUserDeleteView(RequireGroupMixin, FormView):
 
     def post(self, request, *args, **kwargs):
         user = get_object_or_404(get_user_model(), username=kwargs.get('username'))
-        self.group.user_set.remove(user)
+        self.group.users.remove(user)
         return HttpResponse(status=200)
 
 group_user_delete = GroupUserDeleteView.as_view()
