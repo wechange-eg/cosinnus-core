@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib.auth.models import Group
 from django.db import models
 from taggit.managers import TaggableManager
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
+from cosinnus.models import CosinnusGroup
 from cosinnus.utils.functions import unique_aware_slugify
 
 
@@ -55,7 +55,7 @@ class BaseTaggableObjectModel(models.Model):
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
         blank=True, null=True, on_delete=models.PROTECT)
 
-    group = models.ForeignKey(Group, verbose_name=_('Group'),
+    group = models.ForeignKey(CosinnusGroup, verbose_name=_('Group'),
         related_name='%(app_label)s_%(class)s_set', on_delete=models.PROTECT)
 
     title = models.CharField(_('Title'), max_length=255)

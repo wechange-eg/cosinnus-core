@@ -11,10 +11,9 @@ def check_ug_admin(user, group):
     :returns: True if the user is a member of the given group.
     """
     # prevent circular import
-    from django.contrib.auth.models import Group
-    from cosinnus.models.group import GroupAdmin
+    from cosinnus.models import CosinnusGroup, GroupAdmin
 
-    if not isinstance(group, Group):
+    if not isinstance(group, CosinnusGroup):
         raise ValueError('Expecting a group instance as second argument')
 
     return GroupAdmin.objects.filter(user_id=user.pk, group_id=group.pk).exists()
@@ -29,12 +28,14 @@ def check_ug_membership(user, group):
     :returns: True if the user is a member of the group.
     """
     # prevent circular import
-    from django.contrib.auth.models import Group
+    from cosinnus.models import CosinnusGroup
 
-    if not isinstance(group, Group):
+    if not isinstance(group, CosinnusGroup):
         raise ValueError('Expecting a group instance as second argument')
 
-    return user.groups.filter(pk=group.pk).exists() or check_ug_admin(user, group)
+    if user.is_anonymous():
+        return False
+    return user.cosinnus_groups.filter(pk=group.pk).exists() or check_ug_admin(user, group)
 
 
 def check_object_access(user, obj):

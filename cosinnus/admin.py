@@ -3,10 +3,9 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-from django.contrib.auth.admin import Group, GroupAdmin as DjangoGroupAdmin, UserAdmin as DjangoUserAdmin
+from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 
-from cosinnus.forms.group import GroupForm
-from cosinnus.models.group import GroupAdmin
+from cosinnus.models.group import CosinnusGroup, GroupAdmin
 from cosinnus.models.profile import get_user_profile_model
 
 
@@ -24,12 +23,10 @@ class GroupAdminInline(admin.StackedInline):
     extra = 1
 
 
-class GroupAdmin(DjangoGroupAdmin):
+class CosinnusGroupAdmin(admin.ModelAdmin):
     inlines = (GroupAdminInline,)
-    form = GroupForm
 
-admin.site.unregister(Group)
-admin.site.register(Group, GroupAdmin)
+admin.site.register(CosinnusGroup, CosinnusGroupAdmin)
 
 
 ## user / user profile related admin

@@ -15,7 +15,7 @@
         <tbody>
         {% for group in object_list %}
             <tr>
-            {% if group in user.groups.all %}
+            {% if group in user.cosinnus_groups.all %}
                 <td>
                     <a href="{% url 'cosinnus:group-detail' group=group.name %}">{{ group.name }}</a>
                 </td>

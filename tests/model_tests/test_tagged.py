@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib.auth.models import Group
 from django.test import TestCase
+
+from cosinnus.models import CosinnusGroup
 
 from tests.models import SlugTestModel
 
@@ -10,7 +11,7 @@ from tests.models import SlugTestModel
 class SlugTest(TestCase):
 
     def setUp(self):
-        self.group = Group.objects.create(name='Group 1')
+        self.group = CosinnusGroup.objects.create(name='Group 1')
 
     def test_new_slug(self):
         m1 = SlugTestModel.objects.create(group=self.group, title='Some Title')

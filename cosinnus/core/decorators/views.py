@@ -4,11 +4,11 @@ from __future__ import unicode_literals
 import functools
 
 from django.contrib.auth.decorators import user_passes_test
-from django.contrib.auth.models import Group
 from django.http import HttpResponseForbidden, HttpResponseNotFound
 from django.utils.decorators import available_attrs
 from django.utils.translation import ugettext_lazy as _
 
+from cosinnus.models import CosinnusGroup
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
 
 
@@ -52,8 +52,8 @@ def require_membership(group_url_kwarg='group', group_attr='group'):
                 return HttpResponseNotFound(_("No group provided"))
 
             try:
-                group = Group.objects.get(name=group_name)
-            except Group.DoesNotExist:
+                group = CosinnusGroup.objects.get(slug=group_name)
+            except CosinnusGroup.DoesNotExist:
                 return HttpResponseNotFound(_("No group found with this name"))
 
             if request.user.is_superuser or check_ug_membership(request.user, group):
@@ -88,8 +88,8 @@ def require_admin(group_url_kwarg='group', group_attr='group'):
                 return HttpResponseNotFound(_("No group provided"))
 
             try:
-                group = Group.objects.get(name=group_name)
-            except Group.DoesNotExist:
+                group = CosinnusGroup.objects.get(slug=group_name)
+            except CosinnusGroup.DoesNotExist:
                 return HttpResponseNotFound(_("No group found with this name"))
 
             if request.user.is_superuser or check_ug_admin(request.user, group):

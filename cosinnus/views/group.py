@@ -2,18 +2,18 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import Group
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, FormView, ListView
 
 from cosinnus.core.decorators.views import require_admin
+from cosinnus.models import CosinnusGroup
 from cosinnus.views.mixins.group import RequireGroupMixin
 
 
 class GroupListView(ListView):
 
-    model = Group
+    model = CosinnusGroup
     template_name = 'cosinnus/group_list.html'
 
     def dispatch(self, *args, **kwargs):
@@ -25,7 +25,7 @@ group_list = GroupListView.as_view()
 class GroupDetailView(RequireGroupMixin, DetailView):
 
     group_filter_kwarg = None
-    model = Group
+    model = CosinnusGroup
     template_name = 'cosinnus/group_detail.html'
 
     def get_object(self, queryset=None):

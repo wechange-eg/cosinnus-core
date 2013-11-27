@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 
-from django.contrib.auth.models import Group, User, AnonymousUser
+from django.contrib.auth.models import User, AnonymousUser
 from django.http import HttpResponse
 from django.test import TestCase
 from django.test.client import RequestFactory
@@ -11,7 +11,7 @@ from django.views.generic import View
 
 from cosinnus.core.decorators.views import (require_admin,
     require_membership, staff_required, superuser_required)
-from cosinnus.models.group import GroupAdmin
+from cosinnus.models import CosinnusGroup, GroupAdmin
 
 
 class TestAdminView(View):
@@ -101,80 +101,80 @@ class TestRequireAdminDecorator(TestCase):
         self.rf = RequestFactory()
 
     def test_allowed(self):
-        group = Group.objects.create(name='Group 1')
+        group = CosinnusGroup.objects.create(name='Group 1')
         GroupAdmin.objects.create(group_id=group.pk, user_id=self.nostaff.pk)
         GroupAdmin.objects.create(group_id=group.pk, user_id=self.staff.pk)
         GroupAdmin.objects.create(group_id=group.pk, user_id=self.superuser.pk)
 
         request = self.rf.get('/')
         request.user = self.anon
-        response = TestAdminView.as_view()(request, group=group.name)
+        response = TestAdminView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), 'Not an admin of this group')
         self.assertEqual(response.status_code, 403)
 
         request.user = self.nostaff
-        response = TestAdminView.as_view()(request, group=group.name)
+        response = TestAdminView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), group.name)
         self.assertEqual(response.status_code, 200)
 
         request.user = self.staff
-        response = TestAdminView.as_view()(request, group=group.name)
+        response = TestAdminView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), group.name)
         self.assertEqual(response.status_code, 200)
 
         request.user = self.superuser
-        response = TestAdminView.as_view()(request, group=group.name)
+        response = TestAdminView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), group.name)
         self.assertEqual(response.status_code, 200)
 
     def test_no_member(self):
-        group = Group.objects.create(name='Group 1')
+        group = CosinnusGroup.objects.create(name='Group 1')
 
         request = self.rf.get('/')
         request.user = self.anon
-        response = TestAdminView.as_view()(request, group=group.name)
+        response = TestAdminView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), 'Not an admin of this group')
         self.assertEqual(response.status_code, 403)
 
         request.user = self.nostaff
-        response = TestAdminView.as_view()(request, group=group.name)
+        response = TestAdminView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), 'Not an admin of this group')
         self.assertEqual(response.status_code, 403)
 
         request.user = self.staff
-        response = TestAdminView.as_view()(request, group=group.name)
+        response = TestAdminView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), 'Not an admin of this group')
         self.assertEqual(response.status_code, 403)
 
         request.user = self.superuser
-        response = TestAdminView.as_view()(request, group=group.name)
+        response = TestAdminView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), group.name)
         self.assertEqual(response.status_code, 200)
 
     def test_no_admin(self):
-        group = Group.objects.create(name='Group 1')
-        group.user_set.add(self.nostaff)
-        group.user_set.add(self.staff)
-        group.user_set.add(self.superuser)
+        group = CosinnusGroup.objects.create(name='Group 1')
+        group.users.add(self.nostaff)
+        group.users.add(self.staff)
+        group.users.add(self.superuser)
 
         request = self.rf.get('/')
         request.user = self.anon
-        response = TestAdminView.as_view()(request, group=group.name)
+        response = TestAdminView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), 'Not an admin of this group')
         self.assertEqual(response.status_code, 403)
 
         request.user = self.nostaff
-        response = TestAdminView.as_view()(request, group=group.name)
+        response = TestAdminView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), 'Not an admin of this group')
         self.assertEqual(response.status_code, 403)
 
         request.user = self.staff
-        response = TestAdminView.as_view()(request, group=group.name)
+        response = TestAdminView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), 'Not an admin of this group')
         self.assertEqual(response.status_code, 403)
 
         request.user = self.superuser
-        response = TestAdminView.as_view()(request, group=group.name)
+        response = TestAdminView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), group.name)
         self.assertEqual(response.status_code, 200)
 
@@ -235,53 +235,53 @@ class TestRequireMembershipDecorator(TestCase):
         self.rf = RequestFactory()
 
     def test_allowed(self):
-        group = Group.objects.create(name='Group 1')
-        group.user_set.add(self.nostaff)
-        group.user_set.add(self.staff)
-        group.user_set.add(self.superuser)
+        group = CosinnusGroup.objects.create(name='Group 1')
+        group.users.add(self.nostaff)
+        group.users.add(self.staff)
+        group.users.add(self.superuser)
 
         request = self.rf.get('/')
         request.user = self.anon
-        response = TestMembershipView.as_view()(request, group=group.name)
+        response = TestMembershipView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), 'Not a member of this group')
         self.assertEqual(response.status_code, 403)
 
         request.user = self.nostaff
-        response = TestMembershipView.as_view()(request, group=group.name)
+        response = TestMembershipView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), group.name)
         self.assertEqual(response.status_code, 200)
 
         request.user = self.staff
-        response = TestMembershipView.as_view()(request, group=group.name)
+        response = TestMembershipView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), group.name)
         self.assertEqual(response.status_code, 200)
 
         request.user = self.superuser
-        response = TestMembershipView.as_view()(request, group=group.name)
+        response = TestMembershipView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), group.name)
         self.assertEqual(response.status_code, 200)
 
     def test_no_member(self):
-        group = Group.objects.create(name='Group 1')
+        group = CosinnusGroup.objects.create(name='Group 1')
 
         request = self.rf.get('/')
         request.user = self.anon
-        response = TestMembershipView.as_view()(request, group=group.name)
+        response = TestMembershipView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), 'Not a member of this group')
         self.assertEqual(response.status_code, 403)
 
         request.user = self.nostaff
-        response = TestMembershipView.as_view()(request, group=group.name)
+        response = TestMembershipView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), 'Not a member of this group')
         self.assertEqual(response.status_code, 403)
 
         request.user = self.staff
-        response = TestMembershipView.as_view()(request, group=group.name)
+        response = TestMembershipView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), 'Not a member of this group')
         self.assertEqual(response.status_code, 403)
 
         request.user = self.superuser
-        response = TestMembershipView.as_view()(request, group=group.name)
+        response = TestMembershipView.as_view()(request, group=group.slug)
         self.assertEqual(force_text(response.content), group.name)
         self.assertEqual(response.status_code, 200)
 
