@@ -25,8 +25,15 @@ class PeopleModelMixin(models.Model):
         abstract = True
 
 
+class PublicModelMixin(models.Model):
+    public = models.BooleanField(_('Public'), default=False)
+
+    class Meta:
+        abstract = True
+
+
 @python_2_unicode_compatible
-class BaseTagObject(LocationModelMixin, PeopleModelMixin):
+class BaseTagObject(LocationModelMixin, PeopleModelMixin, PublicModelMixin):
 
     class Meta:
         abstract = True
