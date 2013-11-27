@@ -2,12 +2,13 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth import get_user_model
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from cosinnus.core.decorators.views import staff_required, superuser_required
-from cosinnus.forms.user import UserForm
+from cosinnus.forms.user import UserCreationForm, UserChangeForm
 
 
 USER_MODEL = get_user_model()
@@ -23,7 +24,7 @@ user_list = UserListView.as_view()
 
 class UserCreateView(CreateView):
 
-    form_class = UserForm
+    form_class = UserCreationForm
     model = USER_MODEL
     success_url = reverse_lazy('cosinnus:user-list')
     template_name = 'cosinnus/user_form.html'
@@ -31,6 +32,11 @@ class UserCreateView(CreateView):
     @method_decorator(superuser_required)
     def dispatch(self, *args, **kwargs):
         return super(UserCreateView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(UserCreateView, self).get_context_data(**kwargs)
+        context['submit_label'] = _('Create')
+        return context
 
 user_create = UserCreateView.as_view()
 
@@ -60,7 +66,7 @@ user_detail = UserDetailView.as_view()
 
 class UserUpdateView(UpdateView):
 
-    form_class = UserForm
+    form_class = UserChangeForm
     model = USER_MODEL
     slug_field = 'username'
     slug_url_kwarg = 'username'
@@ -69,6 +75,15 @@ class UserUpdateView(UpdateView):
     @method_decorator(staff_required)
     def dispatch(self, *args, **kwargs):
         return super(UserUpdateView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(UserUpdateView, self).get_context_data(**kwargs)
+        context['submit_label'] = _('Update')
+        return context
+
+    def get_success_url(self):
+        return reverse('cosinnus:user-detail',
+            kwargs={'username': self.object.username})
 
 
 user_update = UserUpdateView.as_view()
