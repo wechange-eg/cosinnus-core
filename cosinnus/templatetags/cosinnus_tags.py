@@ -4,7 +4,8 @@ from __future__ import unicode_literals
 import six
 
 from django import template
-from django.core.urlresolvers import reverse
+from django.core.exceptions import ImproperlyConfigured
+from django.core.urlresolvers import resolve, reverse
 from django.template.loader import render_to_string
 
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
@@ -52,14 +53,25 @@ def full_name(value):
 
 @register.simple_tag(takes_context=True)
 def cosinnus_menu(context, template="cosinnus/topmenu.html"):
+    if not 'request' in context:
+        raise ImproperlyConfigured("Current request missing in rendering "
+            "context. Include 'django.core.context_processors.request' in the "
+            "TEMPLATE_CONTEXT_PROCESSORS.")
+
     from cosinnus.core.loaders.apps import cosinnus_app_registry as car
+    request = context['request']
+    current_app = resolve(request.path).app_name
     if 'group' in context:
         group = context['group']
         apps = []
         for (app, name), label in zip(six.iteritems(car.app_names),
                                       six.itervalues(car.app_labels)):
             url = reverse('cosinnus:%s:index' % name, kwargs={'group': group.slug})
-            apps.append({'label': label, 'url': url})
+            apps.append({
+                'active': app == current_app,
+                'label': label,
+                'url': url
+            })
         context.update({
             'apps': apps,
             'app_nav': True,
