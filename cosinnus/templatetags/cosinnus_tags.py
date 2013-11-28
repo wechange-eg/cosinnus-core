@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import six
+
 from django import template
+from django.core.urlresolvers import reverse
+from django.template.loader import render_to_string
 
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
 
@@ -44,3 +48,22 @@ def full_name(value):
     if isinstance(value, AbstractBaseUser):
         return value.get_full_name() or value.get_username()
     return ""
+
+
+@register.simple_tag(takes_context=True)
+def cosinnus_menu(context, template="cosinnus/topmenu.html"):
+    from cosinnus.core.loaders.apps import cosinnus_app_registry as car
+    if 'group' in context:
+        group = context['group']
+        apps = []
+        for (app, name), label in zip(six.iteritems(car.app_names),
+                                      six.itervalues(car.app_labels)):
+            url = reverse('cosinnus:%s:index' % name, kwargs={'group': group.slug})
+            apps.append({'label': label, 'url': url})
+        context.update({
+            'apps': apps,
+            'app_nav': True,
+        })
+    else:
+        context.update({'app_nav': False})
+    return render_to_string(template, context)

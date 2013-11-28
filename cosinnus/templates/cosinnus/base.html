@@ -1,5 +1,6 @@
 {% load static from staticfiles %}
 {% load bootstrap3 %}
+{% load cosinnus_tags %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -15,6 +16,7 @@
     {% block extrahead %}{% endblock extrahead %}
   </head>
   <body>
+    {% cosinnus_menu "cosinnus/topmenu.html" %}
     <div class="container">
       {% block content %}{% endblock content %}
     </div>
