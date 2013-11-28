@@ -28,14 +28,14 @@ class CosinnusSite(object):
                 root_patterns = getattr(urls, 'cosinnus_root_patterns', None)
                 if root_patterns:
                     self._urlpatterns += patterns('',
-                        url(r'', include(root_patterns, namespace=app_name))
+                        url(r'', include(root_patterns, namespace=app_name, app_name=app))
                     )
                 group_patterns = getattr(urls, 'cosinnus_group_patterns', None)
                 if group_patterns:
                     url_app_name = re_escape(app_name)
                     url_base = r'^group/(?P<group>[^/]+)/%s/' % url_app_name
                     self._urlpatterns += patterns('',
-                        url(url_base, include(group_patterns, namespace=app_name)),
+                        url(url_base, include(group_patterns, namespace=app_name, app_name=app)),
                     )
 
     @property
