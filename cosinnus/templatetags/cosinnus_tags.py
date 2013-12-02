@@ -38,7 +38,7 @@ def is_group_member(user, group):
 def full_name(value):
     """Template filter to get a readable name for the given user
 
-    .. code-block:: django+html
+    .. code-block:: django
 
         {{ user|full_name }}
 
