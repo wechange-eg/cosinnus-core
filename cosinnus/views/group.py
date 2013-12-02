@@ -16,8 +16,11 @@ class GroupListView(ListView):
     model = CosinnusGroup
     template_name = 'cosinnus/group_list.html'
 
-    def dispatch(self, *args, **kwargs):
-        return super(GroupListView, self).dispatch(*args, **kwargs)
+    def get_queryset(self):
+        if self.request.user.is_authenticated():
+            return self.model.objects.all()
+        else:
+            return self.model.objects.public().all()
 
 group_list = GroupListView.as_view()
 

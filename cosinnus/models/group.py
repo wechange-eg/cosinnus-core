@@ -19,6 +19,23 @@ def group_name_validator(value):
     )(value)
 
 
+class CosinnusGroupQuerySet(models.query.QuerySet):
+
+    def public(self):
+        return self.filter(public=True)
+
+
+class CosinnusGroupManager(models.Manager):
+
+    use_for_related_fields = True
+
+    def get_query_set(self):
+        return CosinnusGroupQuerySet(self.model, using=self._db)
+
+    def public(self):
+        return self.get_query_set().public()
+
+
 @python_2_unicode_compatible
 class CosinnusGroup(models.Model):
     name = models.CharField(_('Name'), max_length=100,
@@ -27,6 +44,8 @@ class CosinnusGroup(models.Model):
     public = models.BooleanField(_('Public'), default=False)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL,
         related_name='cosinnus_groups', blank=True)
+
+    objects = CosinnusGroupManager()
 
     class Meta:
         app_label = 'cosinnus'
