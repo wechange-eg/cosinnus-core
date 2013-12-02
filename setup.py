@@ -30,9 +30,9 @@ packages, data_files = [], []
 root_dir = os.path.dirname(__file__)
 if root_dir != '':
     os.chdir(root_dir)
-django_dir = 'cosinnus'
+pkgdir = 'cosinnus'
 
-for dirpath, dirnames, filenames in os.walk(django_dir):
+for dirpath, dirnames, filenames in os.walk(pkgdir):
     # Ignore PEP 3147 cache dirs and those whose names start with '.'
     dirnames[:] = [d for d in dirnames if not d.startswith('.') and d != '__pycache__']
     if '__init__.py' in filenames:
@@ -48,7 +48,7 @@ setup(
     description='cosinnus core application',
     long_description=read('README'),
     author='Sinnwerkstatt Medienagentur GmbH Berlin',
-    author_email='web@Sinnwerkstatt.com',
+    author_email='web@sinnwerkstatt.com',
     packages=find_packages(exclude=["tests"]),
     data_files=data_files,
     install_requires=[
@@ -56,9 +56,10 @@ setup(
         'South>=0.7',
         'django-appconf>=0.6',
         'django-taggit>=0.10a1',
-
-        # TODO: Uncomment once merged! https://github.com/dyve/django-bootstrap3/pull/42
-        # 'django-bootstrap3-py3',
+        'django-bootstrap3',
+    ],
+    dependency_links=[
+        'git+git://github.com/Markush2010/django-bootstrap3.git@develop#egg=django-bootstrap3'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
