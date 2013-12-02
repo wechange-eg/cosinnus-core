@@ -26,7 +26,7 @@ class CosinnusGroup(models.Model):
     slug = models.SlugField(_('Slug'), max_length=50)
     public = models.BooleanField(_('Public'), default=False)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL,
-        related_name='cosinnus_groups')
+        related_name='cosinnus_groups', blank=True)
 
     class Meta:
         app_label = 'cosinnus'
