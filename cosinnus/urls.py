@@ -7,6 +7,8 @@ from cosinnus.core.loaders.urls import cosinnus_site
 
 
 urlpatterns = patterns('cosinnus.views',
+    url(r'^$', 'common.index', name='index'),
+
     url(r'^profile/$', 'profile.detail_view', name='profile-detail'),
     url(r'^profile/edit/$', 'profile.update_view', name='profile-edit'),
 
