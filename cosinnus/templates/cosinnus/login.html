@@ -1,0 +1,16 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n bootstrap3 %}
+
+{% block page_title %}{% trans "Login" %}{% endblock %}
+
+{% block content %}
+  <form action="" method="post" class="form-horizontal" role="form">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{% url 'cosinnus:index' %}">
+    {% bootstrap_form form layout="horizontal" %}
+    {% trans "Login" as submit_label %}
+    {% trans "Lost password" as reset_label %}
+    {% url 'cosinnus:password_change' as reset_link %}
+    {% buttons submit=submit_label reset=reset_label reset_link=reset_link layout='horizontal' %}{% endbuttons %}
+  </form>
+{% endblock content %}

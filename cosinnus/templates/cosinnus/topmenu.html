@@ -1,7 +1,8 @@
+{% load i18n cosinnus_tags %}
 <nav class="navbar navbar-default" role="navigation">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-      <span class="sr-only">Toggle navigation</span>
+      <span class="sr-only">{% trans "Toggle navigation" %}</span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -15,17 +16,31 @@
       {% endfor %}
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#">Link</a></li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li class="divider"></li>
-          <li><a href="#">Separated link</a></li>
-        </ul>
-      </li>
+      {% if request.user.is_authenticated %}
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "My Groups" %} <b class="caret"></b></a>
+          {% if request.user.cosinnus_groups %}
+            <ul class="dropdown-menu">
+              {% for group in request.user.cosinnus_groups.all %}
+                <li><a href="{% url 'cosinnus:group-detail' group=group.slug %}">{{ group.name }}</a></li>
+              {% endfor %}
+              <li class="divider"></li>
+              <li><a href="{% url 'cosinnus:group-list' %}">{% trans "List all groups" %}</a></li>
+            </ul>
+          {% else %}
+            
+          {% endif %}
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.user|full_name }} <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Profile" %}</a></li>
+            <li><a href="{% url 'cosinnus:logout' %}">{% trans "Logout" %}</a></li>
+          </ul>
+        </li>
+      {% else %}
+        <li><a href="{% url 'cosinnus:login' %}">{% trans "Login" %}</a></li>
+      {% endif %}
     </ul>
   </div>
 </nav>
