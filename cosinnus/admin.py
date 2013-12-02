@@ -25,6 +25,7 @@ class GroupAdminInline(admin.StackedInline):
 
 class CosinnusGroupAdmin(admin.ModelAdmin):
     inlines = (GroupAdminInline,)
+    prepopulated_fields = {'slug':('name',),}
 
 admin.site.register(CosinnusGroup, CosinnusGroupAdmin)
 
