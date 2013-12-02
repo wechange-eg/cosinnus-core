@@ -1,23 +1,57 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from cosinnus.core.decorators.views import require_membership
+from cosinnus.core.decorators.views import (require_read_access,
+    require_write_access, require_admin_access)
 
 
-class RequireGroupMixin(object):
+class RequireAdminMixin(object):
     """
-    This mixin combines the :py:func:`staff_required` and
-    :py:func:`require_membership` decorators and also puts the group (resolved)
-    by :py:func:`require_membership` to the render context. Each CBV that
-    requires a group given as part of the URL should use this mixin.
+    Mixing to ease the use of :meth:`require_admin_access`.
+
+    .. seealso:: :class:`RequireReadMixin`, :class:`RequireWriteMixin`
     """
 
-    @require_membership()
+    @require_admin_access()
     def dispatch(self, request, *args, **kwargs):
-        return super(RequireGroupMixin, self).dispatch(request, *args, **kwargs)
+        return super(RequireAdminMixin, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(RequireGroupMixin, self).get_context_data(**kwargs)
+        context = super(RequireAdminMixin, self).get_context_data(**kwargs)
+        context.update({'group': self.group})
+        return context
+
+
+class RequireReadMixin(object):
+    """
+    Mixing to ease the use of :meth:`require_read_access`.
+
+    .. seealso:: :class:`RequireAdminMixin`, :class:`RequireWriteMixin`
+    """
+
+    @require_read_access()
+    def dispatch(self, request, *args, **kwargs):
+        return super(RequireReadMixin, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(RequireReadMixin, self).get_context_data(**kwargs)
+        context.update({'group': self.group})
+        return context
+
+
+class RequireWriteMixin(object):
+    """
+    Mixing to ease the use of :meth:`require_write_access`.
+
+    .. seealso:: :class:`RequireAdminMixin`, :class:`RequireReadMixin`
+    """
+
+    @require_write_access()
+    def dispatch(self, request, *args, **kwargs):
+        return super(RequireWriteMixin, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(RequireWriteMixin, self).get_context_data(**kwargs)
         context.update({'group': self.group})
         return context
 
@@ -27,7 +61,7 @@ class FilterGroupMixin(object):
     given group are returned.
     """
 
-    #: See `group_attr` of :py:func:`require_membership` for usage
+    #: See `group_attr` of :py:func:`require_read_access` and similar for usage
     group_attr = 'group'
     #: The actual filter keyword used in the queryset's `filter` function
     group_field = 'group'

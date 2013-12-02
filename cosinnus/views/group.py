@@ -6,12 +6,12 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, FormView, ListView
 
-from cosinnus.core.decorators.views import require_admin
+from cosinnus.core.decorators.views import require_admin_access
 from cosinnus.models import CosinnusGroup
-from cosinnus.views.mixins.group import RequireGroupMixin
+from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin
 
 
-class GroupListView(ListView):
+class GroupListView(RequireReadMixin, ListView):
 
     model = CosinnusGroup
     template_name = 'cosinnus/group_list.html'
@@ -25,7 +25,7 @@ class GroupListView(ListView):
 group_list = GroupListView.as_view()
 
 
-class GroupDetailView(RequireGroupMixin, DetailView):
+class GroupDetailView(RequireReadMixin, DetailView):
 
     group_filter_kwarg = None
     model = CosinnusGroup
@@ -43,7 +43,7 @@ class GroupDetailView(RequireGroupMixin, DetailView):
 group_detail = GroupDetailView.as_view()
 
 
-class GroupUserListView(RequireGroupMixin, ListView):
+class GroupUserListView(RequireReadMixin, ListView):
 
     template_name = 'cosinnus/group_user_list.html'
 
@@ -53,16 +53,12 @@ class GroupUserListView(RequireGroupMixin, ListView):
 group_user_list = GroupUserListView.as_view()
 
 
-class GroupUserAddView(RequireGroupMixin, FormView):
+class GroupUserAddView(RequireAdminMixin, FormView):
     # TODO: I don't like this solution yet. Even though enforcing POST
     # requests, I think I'm missing some security concerns. We'd better use a
     # FormView
 
     http_method_names = ['post']
-
-    @require_admin()
-    def dispatch(self, request, *args, **kwargs):
-        return super(GroupUserAddView, self).dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         user = get_object_or_404(get_user_model(), username=kwargs.get('username'))
@@ -72,14 +68,14 @@ class GroupUserAddView(RequireGroupMixin, FormView):
 group_user_add = GroupUserAddView.as_view()
 
 
-class GroupUserDeleteView(RequireGroupMixin, FormView):
+class GroupUserDeleteView(RequireAdminMixin, FormView):
     # TODO: I don't like this solution yet. Even though enforcing POST
     # requests, I think I'm missing some security concerns. We'd better use a
     # FormView
 
     http_method_names = ['post']
 
-    @require_admin()
+    @require_admin_access()
     def dispatch(self, request, *args, **kwargs):
         return super(GroupUserDeleteView, self).dispatch(request, *args, **kwargs)
 

@@ -4,6 +4,7 @@ import re
 
 from django.core.validators import RegexValidator
 from django.db import models
+from django.db.models.signals import m2m_changed
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
@@ -89,3 +90,16 @@ class GroupAdmin(models.Model):
             super(GroupAdmin, self).save(*args, **kwargs)
             if not self.user.cosinnus_groups.filter(id=self.group_id).exists():
                 self.user.cosinnus_groups.add(self.group)
+
+
+# Due to a bug in Django (#6707) this does not work (yet). E.g. Django admin
+# does not send the post_remove action
+def cleanup_group_admin(sender, **kwargs):
+    if kwargs.get('action', None) == 'post_remove':
+        instance = kwargs.get('instance', None)
+        pk_set = kwargs.get('pk_set', set())
+        if instance.pk and pk_set:
+            GroupAdmin.objects.filter(group_id=instance.pk,
+                                      user_id__in=pk_set).delete()
+
+m2m_changed.connect(cleanup_group_admin, sender=CosinnusGroup.users.through)

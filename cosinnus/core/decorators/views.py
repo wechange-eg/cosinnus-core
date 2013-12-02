@@ -29,10 +29,10 @@ def superuser_required(function):
     return actual_decorator(function)
 
 
-def require_membership(group_url_kwarg='group', group_attr='group'):
+def require_admin_access(group_url_kwarg='group', group_attr='group'):
     """A method decorator that takes the group name from the kwargs of a
-    dispatch function in CBVs and checks that the requesting user is a member
-    of the given group or has the superuser flag.
+    dispatch function in CBVs and checks that the requesting user is allowed to
+    perform administrative operations.
 
     Additionally this function populates the group instance to the view
     instance as attribute `group_attr`
@@ -56,19 +56,21 @@ def require_membership(group_url_kwarg='group', group_attr='group'):
             except CosinnusGroup.DoesNotExist:
                 return HttpResponseNotFound(_("No group found with this name"))
 
-            if request.user.is_superuser or check_ug_membership(request.user, group):
+            user = request.user
+
+            if user.is_superuser or check_ug_admin(user, group):
                 setattr(self, group_attr, group)
                 return function(self, request, *args, **kwargs)
 
-            return HttpResponseForbidden(_("Not a member of this group"))
+            return HttpResponseForbidden(_("Access denied"))
         return wrapper
     return decorator
 
 
-def require_admin(group_url_kwarg='group', group_attr='group'):
+def require_read_access(group_url_kwarg='group', group_attr='group'):
     """A method decorator that takes the group name from the kwargs of a
-    dispatch function in CBVs and checks that the requesting user is an admin
-    of the given group or has the superuser flag.
+    dispatch function in CBVs and checks that the requesting user is allowed to
+    perform read operations.
 
     Additionally this function populates the group instance to the view
     instance as attribute `group_attr`
@@ -92,10 +94,53 @@ def require_admin(group_url_kwarg='group', group_attr='group'):
             except CosinnusGroup.DoesNotExist:
                 return HttpResponseNotFound(_("No group found with this name"))
 
-            if request.user.is_superuser or check_ug_admin(request.user, group):
+            user = request.user
+
+            if group.public or user.is_superuser or \
+                    check_ug_membership(user, group):
                 setattr(self, group_attr, group)
                 return function(self, request, *args, **kwargs)
 
-            return HttpResponseForbidden(_("Not an admin of this group"))
+            return HttpResponseForbidden(_("Access denied"))
+        return wrapper
+    return decorator
+
+
+def require_write_access(group_url_kwarg='group', group_attr='group'):
+    """A method decorator that takes the group name from the kwargs of a
+    dispatch function in CBVs and checks that the requesting user is allowed to
+    perform write operations.
+
+    Additionally this function populates the group instance to the view
+    instance as attribute `group_attr`
+
+    :param str group_url_kwarg: The name of the key containing the group name.
+        Defaults to `'group'`.
+    :param str group_attr: The attribute name which can later be used to access
+        the group from within an view instance (e.g. `self.group`). Defaults to
+        `'group'`.
+    """
+
+    def decorator(function):
+        @functools.wraps(function, assigned=available_attrs(function))
+        def wrapper(self, request, *args, **kwargs):
+            group_name = kwargs.get(group_url_kwarg, None)
+            if not group_name:
+                return HttpResponseNotFound(_("No group provided"))
+
+            try:
+                group = CosinnusGroup.objects.get(slug=group_name)
+            except CosinnusGroup.DoesNotExist:
+                return HttpResponseNotFound(_("No group found with this name"))
+
+            user = request.user
+            is_member = check_ug_membership(user, group)
+
+            if user.is_authenticated() and \
+                    (is_member or user.is_superuser or group.public):
+                setattr(self, group_attr, group)
+                return function(self, request, *args, **kwargs)
+
+            return HttpResponseForbidden(_("Access denied"))
         return wrapper
     return decorator
