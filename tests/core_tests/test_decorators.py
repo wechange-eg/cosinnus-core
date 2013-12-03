@@ -12,7 +12,9 @@ from django.views.generic import View
 from cosinnus.core.decorators.views import (require_admin_access,
     require_read_access, require_write_access, staff_required,
     superuser_required)
-from cosinnus.models import CosinnusGroup, GroupAdmin
+from cosinnus.models import (MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER,
+    MEMBERSHIP_ADMIN, CosinnusGroup as Group,
+    CosinnusGroupMembership as Membership)
 
 
 class TestAdminView(View):
@@ -107,17 +109,20 @@ class TestRequireAdminAccessDecorator(TestCase):
 
         self.anon = AnonymousUser()
         self.user = User.objects.create_user('user', 'user@localhost', 'pw')
+        self.pending = User.objects.create_user('pending', 'pending@localhost', 'pw')
         self.member = User.objects.create_user('member', 'member@localhost', 'pw')
         self.admin = User.objects.create_user('admin', 'admin@localhost', 'pw')
         self.superuser = User.objects.create_superuser('superuser', 'super@localhost', 'pw')
 
-        self.public = CosinnusGroup.objects.create(name='Public group', public=True)
-        self.public.users.add(self.member)
-        GroupAdmin.objects.create(group_id=self.public.pk, user_id=self.admin.pk)
+        self.public = Group.objects.create(name='Public group', public=True)
+        Membership.objects.create(group_id=self.public.pk, user_id=self.pending.pk, status=MEMBERSHIP_PENDING)
+        Membership.objects.create(group_id=self.public.pk, user_id=self.member.pk, status=MEMBERSHIP_MEMBER)
+        Membership.objects.create(group_id=self.public.pk, user_id=self.admin.pk, status=MEMBERSHIP_ADMIN)
 
-        self.private = CosinnusGroup.objects.create(name='Private group')
-        self.private.users.add(self.member)
-        GroupAdmin.objects.create(group_id=self.private.pk, user_id=self.admin.pk)
+        self.private = Group.objects.create(name='Private group')
+        Membership.objects.create(group_id=self.private.pk, user_id=self.pending.pk, status=MEMBERSHIP_PENDING)
+        Membership.objects.create(group_id=self.private.pk, user_id=self.member.pk, status=MEMBERSHIP_MEMBER)
+        Membership.objects.create(group_id=self.private.pk, user_id=self.admin.pk, status=MEMBERSHIP_ADMIN)
 
     def test_anonymous(self):
         request = self.rf.get('/')
@@ -130,9 +135,20 @@ class TestRequireAdminAccessDecorator(TestCase):
         self.assertEqual(force_text(response.content), 'Access denied')
         self.assertEqual(response.status_code, 403)
 
-    def test_nomember(self):
+    def test_user(self):
         request = self.rf.get('/')
         request.user = self.user
+        response = self.view.as_view()(request, group=self.private.slug)
+        self.assertEqual(force_text(response.content), 'Access denied')
+        self.assertEqual(response.status_code, 403)
+
+        response = self.view.as_view()(request, group=self.public.slug)
+        self.assertEqual(force_text(response.content), 'Access denied')
+        self.assertEqual(response.status_code, 403)
+
+    def test_pending(self):
+        request = self.rf.get('/')
+        request.user = self.pending
         response = self.view.as_view()(request, group=self.private.slug)
         self.assertEqual(force_text(response.content), 'Access denied')
         self.assertEqual(response.status_code, 403)
@@ -186,6 +202,11 @@ class TestRequireAdminAccessDecorator(TestCase):
         self.assertEqual(force_text(response.content), 'No group found with this name')
         self.assertEqual(response.status_code, 404)
 
+        request.user = self.pending
+        response = self.view.as_view()(request, group='other-group')
+        self.assertEqual(force_text(response.content), 'No group found with this name')
+        self.assertEqual(response.status_code, 404)
+
         request.user = self.member
         response = self.view.as_view()(request, group='other-group')
         self.assertEqual(force_text(response.content), 'No group found with this name')
@@ -209,6 +230,11 @@ class TestRequireAdminAccessDecorator(TestCase):
         self.assertEqual(response.status_code, 404)
 
         request.user = self.user
+        response = self.view.as_view()(request)
+        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(response.status_code, 404)
+
+        request.user = self.pending
         response = self.view.as_view()(request)
         self.assertEqual(force_text(response.content), 'No group provided')
         self.assertEqual(response.status_code, 404)
@@ -233,17 +259,24 @@ class TestRequireReadAccessDecorator(TestCase):
 
     def setUp(self):
         self.view = TestReadView
+        self.rf = RequestFactory()
+
         self.anon = AnonymousUser()
         self.user = User.objects.create_user('user', 'user@localhost', 'pw')
+        self.pending = User.objects.create_user('pending', 'pending@localhost', 'pw')
         self.member = User.objects.create_user('member', 'member@localhost', 'pw')
         self.admin = User.objects.create_user('admin', 'admin@localhost', 'pw')
         self.superuser = User.objects.create_superuser('superuser', 'super@localhost', 'pw')
-        self.rf = RequestFactory()
-        self.public = CosinnusGroup.objects.create(name='Public group', public=True)
-        self.private = CosinnusGroup.objects.create(name='Private group')
-        GroupAdmin.objects.create(group_id=self.private.pk, user_id=self.admin.pk)
-        self.private.users.add(self.member)
-        self.public.users.add(self.member)
+
+        self.public = Group.objects.create(name='Public group', public=True)
+        Membership.objects.create(group_id=self.public.pk, user_id=self.pending.pk, status=MEMBERSHIP_PENDING)
+        Membership.objects.create(group_id=self.public.pk, user_id=self.member.pk, status=MEMBERSHIP_MEMBER)
+        Membership.objects.create(group_id=self.public.pk, user_id=self.admin.pk, status=MEMBERSHIP_ADMIN)
+
+        self.private = Group.objects.create(name='Private group')
+        Membership.objects.create(group_id=self.private.pk, user_id=self.pending.pk, status=MEMBERSHIP_PENDING)
+        Membership.objects.create(group_id=self.private.pk, user_id=self.member.pk, status=MEMBERSHIP_MEMBER)
+        Membership.objects.create(group_id=self.private.pk, user_id=self.admin.pk, status=MEMBERSHIP_ADMIN)
 
     def test_anonymous(self):
         request = self.rf.get('/')
@@ -256,9 +289,20 @@ class TestRequireReadAccessDecorator(TestCase):
         self.assertEqual(force_text(response.content), 'Public group')
         self.assertEqual(response.status_code, 200)
 
-    def test_nomember(self):
+    def test_user(self):
         request = self.rf.get('/')
         request.user = self.user
+        response = self.view.as_view()(request, group=self.private.slug)
+        self.assertEqual(force_text(response.content), 'Access denied')
+        self.assertEqual(response.status_code, 403)
+
+        response = self.view.as_view()(request, group=self.public.slug)
+        self.assertEqual(force_text(response.content), 'Public group')
+        self.assertEqual(response.status_code, 200)
+
+    def test_pending(self):
+        request = self.rf.get('/')
+        request.user = self.pending
         response = self.view.as_view()(request, group=self.private.slug)
         self.assertEqual(force_text(response.content), 'Access denied')
         self.assertEqual(response.status_code, 403)
@@ -312,6 +356,11 @@ class TestRequireReadAccessDecorator(TestCase):
         self.assertEqual(force_text(response.content), 'No group found with this name')
         self.assertEqual(response.status_code, 404)
 
+        request.user = self.pending
+        response = self.view.as_view()(request, group='other-group')
+        self.assertEqual(force_text(response.content), 'No group found with this name')
+        self.assertEqual(response.status_code, 404)
+
         request.user = self.member
         response = self.view.as_view()(request, group='other-group')
         self.assertEqual(force_text(response.content), 'No group found with this name')
@@ -335,6 +384,11 @@ class TestRequireReadAccessDecorator(TestCase):
         self.assertEqual(response.status_code, 404)
 
         request.user = self.user
+        response = self.view.as_view()(request)
+        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(response.status_code, 404)
+
+        request.user = self.pending
         response = self.view.as_view()(request)
         self.assertEqual(force_text(response.content), 'No group provided')
         self.assertEqual(response.status_code, 404)
@@ -359,17 +413,24 @@ class TestRequireWriteAccessDecorator(TestCase):
 
     def setUp(self):
         self.view = TestWriteView
+        self.rf = RequestFactory()
+
         self.anon = AnonymousUser()
         self.user = User.objects.create_user('user', 'user@localhost', 'pw')
+        self.pending = User.objects.create_user('pending', 'pending@localhost', 'pw')
         self.member = User.objects.create_user('member', 'member@localhost', 'pw')
         self.admin = User.objects.create_user('admin', 'admin@localhost', 'pw')
         self.superuser = User.objects.create_superuser('superuser', 'super@localhost', 'pw')
-        self.rf = RequestFactory()
-        self.public = CosinnusGroup.objects.create(name='Public group', public=True)
-        self.private = CosinnusGroup.objects.create(name='Private group')
-        GroupAdmin.objects.create(group_id=self.private.pk, user_id=self.admin.pk)
-        self.private.users.add(self.member)
-        self.public.users.add(self.member)
+
+        self.public = Group.objects.create(name='Public group', public=True)
+        Membership.objects.create(group_id=self.public.pk, user_id=self.pending.pk, status=MEMBERSHIP_PENDING)
+        Membership.objects.create(group_id=self.public.pk, user_id=self.member.pk, status=MEMBERSHIP_MEMBER)
+        Membership.objects.create(group_id=self.public.pk, user_id=self.admin.pk, status=MEMBERSHIP_ADMIN)
+
+        self.private = Group.objects.create(name='Private group')
+        Membership.objects.create(group_id=self.private.pk, user_id=self.pending.pk, status=MEMBERSHIP_PENDING)
+        Membership.objects.create(group_id=self.private.pk, user_id=self.member.pk, status=MEMBERSHIP_MEMBER)
+        Membership.objects.create(group_id=self.private.pk, user_id=self.admin.pk, status=MEMBERSHIP_ADMIN)
 
     def test_anonymous(self):
         request = self.rf.get('/')
@@ -382,9 +443,20 @@ class TestRequireWriteAccessDecorator(TestCase):
         self.assertEqual(force_text(response.content), 'Access denied')
         self.assertEqual(response.status_code, 403)
 
-    def test_nomember(self):
+    def test_user(self):
         request = self.rf.get('/')
         request.user = self.user
+        response = self.view.as_view()(request, group=self.private.slug)
+        self.assertEqual(force_text(response.content), 'Access denied')
+        self.assertEqual(response.status_code, 403)
+
+        response = self.view.as_view()(request, group=self.public.slug)
+        self.assertEqual(force_text(response.content), 'Public group')
+        self.assertEqual(response.status_code, 200)
+
+    def test_pending(self):
+        request = self.rf.get('/')
+        request.user = self.pending
         response = self.view.as_view()(request, group=self.private.slug)
         self.assertEqual(force_text(response.content), 'Access denied')
         self.assertEqual(response.status_code, 403)
@@ -438,6 +510,11 @@ class TestRequireWriteAccessDecorator(TestCase):
         self.assertEqual(force_text(response.content), 'No group found with this name')
         self.assertEqual(response.status_code, 404)
 
+        request.user = self.pending
+        response = self.view.as_view()(request, group='other-group')
+        self.assertEqual(force_text(response.content), 'No group found with this name')
+        self.assertEqual(response.status_code, 404)
+
         request.user = self.member
         response = self.view.as_view()(request, group='other-group')
         self.assertEqual(force_text(response.content), 'No group found with this name')
@@ -461,6 +538,11 @@ class TestRequireWriteAccessDecorator(TestCase):
         self.assertEqual(response.status_code, 404)
 
         request.user = self.user
+        response = self.view.as_view()(request)
+        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(response.status_code, 404)
+
+        request.user = self.pending
         response = self.view.as_view()(request)
         self.assertEqual(force_text(response.content), 'No group provided')
         self.assertEqual(response.status_code, 404)

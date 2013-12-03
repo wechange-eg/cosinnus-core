@@ -4,12 +4,23 @@ import re
 
 from django.core.validators import RegexValidator
 from django.db import models
-from django.db.models.signals import m2m_changed
 from django.utils.encoding import python_2_unicode_compatible
-from django.utils.translation import ugettext_lazy as _
+from django.utils.timezone import now
+from django.utils.translation import ugettext_lazy as _, pgettext_lazy as p_
 
 from cosinnus.conf import settings
 from cosinnus.utils.functions import unique_aware_slugify
+
+
+MEMBERSHIP_PENDING = 0
+MEMBERSHIP_MEMBER = 1
+MEMBERSHIP_ADMIN = 2
+
+MEMBERSHIP_STATUSES = (
+    (MEMBERSHIP_PENDING, p_('cosinnus membership status', 'pending')),
+    (MEMBERSHIP_MEMBER, p_('cosinnus membership status', 'member')),
+    (MEMBERSHIP_ADMIN, p_('cosinnus membership status', 'admin')),
+)
 
 
 def group_name_validator(value):
@@ -43,8 +54,8 @@ class CosinnusGroup(models.Model):
         validators=[group_name_validator])
     slug = models.SlugField(_('Slug'), max_length=50)
     public = models.BooleanField(_('Public'), default=False)
-    users = models.ManyToManyField(settings.AUTH_USER_MODEL,
-        related_name='cosinnus_groups', blank=True)
+    users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
+        related_name='cosinnus_groups', through='CosinnusGroupMembership')
 
     objects = CosinnusGroupManager()
 
@@ -62,44 +73,52 @@ class CosinnusGroup(models.Model):
 
 
 @python_2_unicode_compatible
-class GroupAdmin(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('User'),
-        null=False, blank=False, on_delete=models.CASCADE)
-    group = models.ForeignKey(CosinnusGroup, verbose_name=_('Group'),
-        null=False, blank=False, on_delete=models.CASCADE)
+class CosinnusGroupMembership(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    group = models.ForeignKey(CosinnusGroup)
+    status = models.PositiveSmallIntegerField(choices=MEMBERSHIP_STATUSES,
+        db_index=True, default=MEMBERSHIP_PENDING)
+    date = models.DateTimeField(auto_now_add=True, editable=False)
 
     class Meta:
         app_label = 'cosinnus'
-        unique_together = ('user', 'group')
-        verbose_name = _('Group admin')
-        verbose_name_plural = _('Group admins')
+        unique_together = (('user', 'group'),)
+        verbose_name = _('Group membership')
+        verbose_name_plural = _('Group memberships')
+
+    def __init__(self, *args, **kwargs):
+        super(CosinnusGroupMembership, self).__init__(*args, **kwargs)
+        self._old_current_status = self.status
 
     def __str__(self):
-        return str(self.user)
+        return "<user: %(user)s, group: %(group)s, status: %(status)d>" % {
+            'user': self.user,
+            'group': self.group,
+            'status': self.status,
+        }
 
     def save(self, *args, **kwargs):
-        """Atomically add the user to the group if not already a member"""
-        # TODO: Drop ImportError check when Django 1.5 support is dropped
-        try:
-            from django.db.transaction import atomic
-            context_wrapper = atomic
-        except ImportError:
-            from django.db.transaction import commit_on_success
-            context_wrapper = commit_on_success
-        with context_wrapper():
-            super(GroupAdmin, self).save(*args, **kwargs)
-            if not self.user.cosinnus_groups.filter(id=self.group_id).exists():
-                self.user.cosinnus_groups.add(self.group)
+        # Only update the date if the the state changes from pending to member
+        # or admin
+        if self._old_current_status == MEMBERSHIP_PENDING and \
+                self.status != self._old_current_status:
+            self.date = now()
+        super(CosinnusGroupMembership, self).save(*args, **kwargs)
 
+    @property
+    def member_since(self):
+        if self.status != MEMBERSHIP_PENDING:
+            return self.date
+        return None
 
-# Due to a bug in Django (#6707) this does not work (yet). E.g. Django admin
-# does not send the post_remove action
-def cleanup_group_admin(sender, **kwargs):
-    if kwargs.get('action', None) == 'post_remove':
-        instance = kwargs.get('instance', None)
-        pk_set = kwargs.get('pk_set', set())
-        if instance.pk and pk_set:
-            GroupAdmin.objects.filter(group_id=instance.pk,
-                                      user_id__in=pk_set).delete()
+    @property
+    def is_pending(self):
+        return self.status == MEMBERSHIP_PENDING
 
-m2m_changed.connect(cleanup_group_admin, sender=CosinnusGroup.users.through)
+    @property
+    def is_member(self):
+        return self.status != MEMBERSHIP_PENDING
+
+    @property
+    def is_admin(self):
+        return self.status == MEMBERSHIP_ADMIN

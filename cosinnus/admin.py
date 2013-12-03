@@ -5,26 +5,26 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 
-from cosinnus.models.group import CosinnusGroup, GroupAdmin
+from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.models.profile import get_user_profile_model
 
 
 ## group related admin
 
-class GroupAdminAdmin(admin.ModelAdmin):
-    list_display = ('group', 'user')
-    list_filter = ('group', 'user')
+class MembershipAdmin(admin.ModelAdmin):
+    list_display = ('group', 'user', 'status', 'date')
+    list_filter = ('group', 'user', 'status')
 
-admin.site.register(GroupAdmin, GroupAdminAdmin)
+admin.site.register(CosinnusGroupMembership, MembershipAdmin)
 
 
-class GroupAdminInline(admin.StackedInline):
-    model = GroupAdmin
-    extra = 1
+class MembershipInline(admin.StackedInline):
+    model = CosinnusGroupMembership
+    extra = 0
 
 
 class CosinnusGroupAdmin(admin.ModelAdmin):
-    inlines = (GroupAdminInline,)
+    inlines = (MembershipInline,)
     prepopulated_fields = {'slug': ('name', )}
 
 admin.site.register(CosinnusGroup, CosinnusGroupAdmin)
