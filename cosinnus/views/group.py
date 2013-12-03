@@ -11,7 +11,7 @@ from cosinnus.models import CosinnusGroup
 from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin
 
 
-class GroupListView(RequireReadMixin, ListView):
+class GroupListView(ListView):
 
     model = CosinnusGroup
     template_name = 'cosinnus/group_list.html'
