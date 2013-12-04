@@ -8,7 +8,9 @@ from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import resolve, reverse
 from django.template.loader import render_to_string
 
-from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
+from cosinnus.models import CosinnusGroup
+from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
+    check_ug_pending)
 
 
 register = template.Library()
@@ -32,6 +34,16 @@ def is_group_member(user, group):
     .. seealso:: func:`cosinnus.utils.permissions.check_ug_membership`
     """
     return check_ug_membership(user, group)
+
+
+@register.filter
+def is_group_pending(user, group):
+    """Template filter to check if the given user is a member of the given
+    group.
+
+    .. seealso:: func:`cosinnus.utils.permissions.check_ug_membership`
+    """
+    return check_ug_pending(user, group)
 
 
 @register.filter
@@ -60,6 +72,10 @@ def cosinnus_menu(context, template="cosinnus/topmenu.html"):
 
     from cosinnus.core.loaders.apps import cosinnus_app_registry as car
     request = context['request']
+    user = request.user
+    if user.is_authenticated():
+        context['groups'] = CosinnusGroup.objects.get_for_user(request.user)
+
     current_app = resolve(request.path).app_name
     if 'group' in context:
         group = context['group']

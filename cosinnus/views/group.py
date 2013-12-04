@@ -20,7 +20,12 @@ class GroupListView(ListView):
         if self.request.user.is_authenticated():
             return self.model.objects.all()
         else:
-            return self.model.objects.public().all()
+            return self.model.objects.public()
+
+    def get_context_data(self, **kwargs):
+        ctx = super(GroupListView, self).get_context_data(**kwargs)
+        # TODO: get_many for membership and pending and adjust template
+        return ctx
 
 group_list = GroupListView.as_view()
 
@@ -36,7 +41,8 @@ class GroupDetailView(RequireReadMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(GroupDetailView, self).get_context_data(**kwargs)
-        users = self.group.users.order_by('first_name', 'last_name').select_related('cosinnus_profile')
+        users = self.group.users.order_by('first_name', 'last_name') \
+                                .select_related('cosinnus_profile')
         context['users'] = users
         return context
 

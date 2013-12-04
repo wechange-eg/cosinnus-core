@@ -12,8 +12,8 @@ from cosinnus.models.profile import get_user_profile_model
 ## group related admin
 
 class MembershipAdmin(admin.ModelAdmin):
-    list_display = ('group', 'user', 'status', 'date')
-    list_filter = ('group', 'user', 'status')
+    list_display = ('group', 'user', 'status', 'date',)
+    list_filter = ('group', 'user', 'status',)
 
 admin.site.register(CosinnusGroupMembership, MembershipAdmin)
 
@@ -24,6 +24,8 @@ class MembershipInline(admin.StackedInline):
 
 
 class CosinnusGroupAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug', 'public',)
+    list_filter = ('public',)
     inlines = (MembershipInline,)
     prepopulated_fields = {'slug': ('name', )}
 

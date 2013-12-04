@@ -19,16 +19,16 @@
       {% if request.user.is_authenticated %}
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "My Groups" %} <b class="caret"></b></a>
-          {% if request.user.cosinnus_groups %}
+          {% if groups %}
             <ul class="dropdown-menu">
-              {% for group in request.user.cosinnus_groups.all %}
+              {% for group in groups %}
                 <li><a href="{% url 'cosinnus:group-detail' group=group.slug %}">{{ group.name }}</a></li>
               {% endfor %}
               <li class="divider"></li>
               <li><a href="{% url 'cosinnus:group-list' %}">{% trans "List all groups" %}</a></li>
             </ul>
           {% else %}
-            
+            <li><a href="{% url 'cosinnus:group-list' %}">{% trans "No groups. Join!" %}</a></li>
           {% endif %}
         </li>
         <li class="dropdown">
