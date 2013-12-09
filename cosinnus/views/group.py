@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, FormView, ListView
 
 from cosinnus.core.decorators.views import require_admin_access
-from cosinnus.models import CosinnusGroup
+from cosinnus.models import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin
 
 
@@ -18,14 +18,22 @@ class GroupListView(ListView):
 
     def get_queryset(self):
         if self.request.user.is_authenticated():
-            return self.model.objects.all()
+            return self.model.objects.get_cached()
         else:
-            return self.model.objects.public()
+            return list(self.model.objects.public())
 
     def get_context_data(self, **kwargs):
         ctx = super(GroupListView, self).get_context_data(**kwargs)
         # TODO: get_many for membership and pending and adjust template
+        _members = CosinnusGroupMembership.objects.get_members(groups=ctx['object_list'])
+        _pendings = CosinnusGroupMembership.objects.get_pendings(groups=ctx['object_list'])
+        members = (_members.get(g.pk, []) for g in ctx['object_list'])
+        pendings = (_pendings.get(g.pk, []) for g in ctx['object_list'])
+        ctx.update({
+            'rows': zip(self.object_list, members, pendings),
+        })
         return ctx
+
 
 group_list = GroupListView.as_view()
 

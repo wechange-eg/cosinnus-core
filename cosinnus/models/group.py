@@ -6,6 +6,7 @@ import six
 from django.core.cache import cache
 from django.core.validators import RegexValidator
 from django.db import models
+from django.utils.datastructures import SortedDict  # TODO: Drop w/o Py2.6
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy as p_
@@ -50,8 +51,8 @@ class CosinnusGroupManager(models.Manager):
     def get_slugs(self):
         slugs = cache.get(_GROUPS_SLUG_CACHE_KEY)
         if slugs is None:
-            slugs = dict(self.values_list('slug', 'id').all())
-            ids = dict((v, k) for k, v in six.iteritems(slugs))
+            slugs = SortedDict(self.values_list('slug', 'id').all())
+            ids = SortedDict((v, k) for k, v in six.iteritems(slugs))
             cache.set(_GROUPS_SLUG_CACHE_KEY, slugs)
             cache.set(_GROUPS_ID_CACHE_KEY, ids)
         return slugs
@@ -59,16 +60,17 @@ class CosinnusGroupManager(models.Manager):
     def get_ids(self):
         ids = cache.get(_GROUPS_ID_CACHE_KEY)
         if ids is None:
-            ids = dict(self.values_list('id', 'slug').all())
-            slugs = dict((v, k) for k, v in six.iteritems(ids))
+            ids = SortedDict(self.values_list('id', 'slug').all())
+            slugs = SortedDict((v, k) for k, v in six.iteritems(ids))
             cache.set(_GROUPS_ID_CACHE_KEY, ids)
             cache.set(_GROUPS_SLUG_CACHE_KEY, slugs)
         return ids
 
     def get_cached(self, slugs=None, ids=None):
         # Check that only one of slug and slugs is set:
+        assert not (slugs and ids)
         if slugs is None and ids is None:
-            slugs = self.get_slugs()
+            slugs = list(self.get_slugs().keys())
 
         if slugs:
             if isinstance(slugs, six.string_types):
@@ -81,18 +83,15 @@ class CosinnusGroupManager(models.Manager):
                 return group
             else:
                 # We request multiple groups by slugs
-                keys = set([_GROUP_CACHE_KEY % s for s in slugs])
+                keys = [_GROUP_CACHE_KEY % s for s in slugs]
                 groups = cache.get_many(keys)
-
                 missing = [key.split('/')[-1] for key in keys if key not in groups]
                 if missing:
-                    query = self.get_query_set()
-                    if not len(missing) == len(keys):
-                        query = query.filter(slug__in=missing)
+                    query = self.get_query_set().filter(slug__in=missing)
                     for group in query:
                         groups[_GROUP_CACHE_KEY % group.slug] = group
-                    cache.set_many(groups, 300)
-                return groups.values()
+                    cache.set_many(groups)
+                return sorted(groups.values(), key=lambda x: x.name)
         else:
             if isinstance(slugs, int):
                 # We request a single group
@@ -127,44 +126,56 @@ class CosinnusGroupMembershipManager(models.Manager):
 
     use_for_related_fields = True
 
-    def get_admins(self, group):
-        pk = isinstance(group, int) and group or group.pk
-        uids = cache.get(_MEMBERSHIP_ADMINS_KEY % pk)
+    def _get_users_for_single_group(self, group_id, cache_key, status):
+        uids = cache.get(cache_key % group_id)
         if uids is None:
-            uids = set(self.filter(group_id=pk, status=MEMBERSHIP_ADMIN)
+            uids = list(self.filter(group_id=group_id, status=status)
                            .values_list('user_id', flat=True).all())
-            cache.set(_MEMBERSHIP_ADMINS_KEY % pk, uids)
+            cache.set(cache_key % group_id, uids)
         return uids
 
-    def get_members(self, group):
-        pk = isinstance(group, int) and group or group.pk
-        uids = cache.get(_MEMBERSHIP_MEMBERS_KEY % pk)
-        if uids is None:
-            uids = set(self.filter(group_id=pk, status__in=MEMBER_STATUS)
-                           .values_list('user_id', flat=True).all())
-            cache.set(_MEMBERSHIP_MEMBERS_KEY % pk, uids)
-        return uids
+    def _get_users_for_multiple_groups(self, group_ids, cache_key, status):
+        keys = [cache_key % g for g in group_ids]
+        users = cache.get_many(keys)
+        missing = map(int, (key.split('/')[-1] for key in keys if key not in users))
+        if missing:
+            _q = self.get_query_set().values_list('user_id', flat=True)
+            if isinstance(status, (list, tuple)):
+                _q = _q.filter(status__in=status)
+            else:
+                _q = _q.filter(status=status)
+            for group in missing:
+                uids = list(_q._clone().filter(group_id=group).all())
+                users[cache_key % group] = uids
+            cache.set_many(users)
+        return dict((int(k.split('/')[-1]), v) for k, v in six.iteritems(users))
 
-    def get_pendings(self, group):
-        pk = isinstance(group, int) and group or group.pk
-        uids = cache.get(_MEMBERSHIP_PENDINGS_KEY % pk)
-        if uids is None:
-            uids = set(self.filter(group_id=pk, status=MEMBERSHIP_PENDING)
-                           .values_list('user_id', flat=True).all())
-            cache.set(_MEMBERSHIP_PENDINGS_KEY % pk, uids)
-        return uids
+    def get_admins(self, group=None, groups=None):
+        assert (group is None) ^ (groups is None)
+        if group:
+            gid = isinstance(group, int) and group or group.pk
+            return self._get_users_for_single_group(gid, _MEMBERSHIP_ADMINS_KEY, MEMBERSHIP_ADMIN)
+        else:
+            gids = [isinstance(g, int) and g or g.pk for g in groups]
+            return self._get_users_for_multiple_groups(gids, _MEMBERSHIP_ADMINS_KEY, MEMBERSHIP_ADMIN)
 
-    # def is_admin(self, user, group):
-    #     uid = isinstance(user, int) and user or user.pk
-    #     return uid in self.get_admins(group)
+    def get_members(self, group=None, groups=None):
+        assert (group is None) ^ (groups is None)
+        if group:
+            gid = isinstance(group, int) and group or group.pk
+            return self._get_users_for_single_group(gid, _MEMBERSHIP_MEMBERS_KEY, MEMBER_STATUS)
+        else:
+            gids = [isinstance(g, int) and g or g.pk for g in groups]
+            return self._get_users_for_multiple_groups(gids, _MEMBERSHIP_MEMBERS_KEY, MEMBER_STATUS)
 
-    # def is_member(self, user, group):
-    #     uid = isinstance(user, int) and user or user.pk
-    #     return uid in self.get_members(group)
-
-    # def is_pending(self, user, group):
-    #     uid = isinstance(user, int) and user or user.pk
-    #     return uid in self.get_pendings(group)
+    def get_pendings(self, group=None, groups=None):
+        assert (group is None) ^ (groups is None)
+        if group:
+            gid = isinstance(group, int) and group or group.pk
+            return self._get_users_for_single_group(gid, _MEMBERSHIP_PENDINGS_KEY, MEMBERSHIP_PENDING)
+        else:
+            gids = [isinstance(g, int) and g or g.pk for g in groups]
+            return self._get_users_for_multiple_groups(gids, _MEMBERSHIP_PENDINGS_KEY, MEMBERSHIP_PENDING)
 
 
 @python_2_unicode_compatible
@@ -193,6 +204,10 @@ class CosinnusGroup(models.Model):
     def __str__(self):
         return self.name
 
+    def delete(self, *args, **kwargs):
+        self._clear_cache()
+        super(CosinnusGroupMembership, self).delete(*args, **kwargs)
+
     def save(self, *args, **kwargs):
         slugs = [self.slug] if self.slug else []
         unique_aware_slugify(self, 'name', 'slug')
@@ -218,6 +233,7 @@ class CosinnusGroup(models.Model):
         uid = isinstance(user, int) and user or user.pk
         return uid in self._pendings
 
+    @classmethod
     def _clear_cache(self, slug=None, slugs=None):
         # TODO: clear membership caches
         keys = [
