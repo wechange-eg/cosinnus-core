@@ -12,6 +12,7 @@ from django.template.loader import render_to_string
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
 from django.contrib.contenttypes.models import ContentType
 
+from cosinnus.core.loaders.apps import cosinnus_app_registry as car
 
 register = template.Library()
 
@@ -60,7 +61,7 @@ def cosinnus_menu(context, template="cosinnus/topmenu.html"):
             "context. Include 'django.core.context_processors.request' in the "
             "TEMPLATE_CONTEXT_PROCESSORS.")
 
-    from cosinnus.core.loaders.apps import cosinnus_app_registry as car
+
     request = context['request']
     current_app = resolve(request.path).app_name
     if 'group' in context:
@@ -88,7 +89,6 @@ def cosinnus_render_attached_objects(context, source):
         raise ImproperlyConfigured("Current request missing in rendering "
             "context. Include 'django.core.context_processors.request' in the "
             "TEMPLATE_CONTEXT_PROCESSORS.")
-    from cosinnus.core.loaders.apps import cosinnus_app_registry as car
     request = context['request']
     
     print (">>> Now trying to access objects attached object...")
@@ -104,7 +104,6 @@ def cosinnus_render_attached_objects(context, source):
     for att in attchs:
         attobj = att.target_object
         content_type = att.content_type.model_class().__name__
-        id = att.object_id
         print("Attaching obj '%s' to typelist '%s' with id '%d'" % (attobj, content_type, id))
         if attobj is not None:
             print(">>> Added object to render list!")
@@ -112,10 +111,18 @@ def cosinnus_render_attached_objects(context, source):
         else:
             print(">>> Object was None, not adding to render list!")
     
-    print(typed_objects)
-    for type,objlist in typed_objects.items():
+    rendered_output = ""
+    for modelname,objects in typed_objects.items():
         # find manager object for attached object type
-        # pass the list to that manager and expect a rendered html string
-        pass
+        print(">>> renderers: ")
+        print(car.attachable_object_renderers)
+        
+        renderer = car.attachable_object_renderers.get(modelname, None)
+        if renderer:
+            # pass the list to that manager and expect a rendered html string
+            rendered_output += renderer.render_attached_objects(context, objects)
+        else:
+            rendered_output += "<i>Renderer for %s not found!</i>" % modelname
     
-    return "<span>renderer says hi! your object was: %s (pk: %d) </span>" % (source.slug + ' of ' + str(source.group), source.pk)#render_to_string("<span>hi!</span>", context)
+    return "<span>renderer says hi! your object was: %s (pk: %d) </span>" % (source.slug + ' of ' + str(source.group), source.pk) \
+        + "<br/>" + rendered_output
