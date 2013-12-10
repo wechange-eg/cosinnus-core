@@ -7,6 +7,7 @@ from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.models.profile import get_user_profile_model
+from cosinnus.models.tagged import AttachedObject
 
 
 ## group related admin
@@ -28,6 +29,7 @@ class CosinnusGroupAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name', )}
 
 admin.site.register(CosinnusGroup, CosinnusGroupAdmin)
+admin.site.register(AttachedObject)
 
 
 ## user / user profile related admin

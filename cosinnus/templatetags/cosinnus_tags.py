@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from collections import defaultdict
 
 import six
 
@@ -9,6 +10,7 @@ from django.core.urlresolvers import resolve, reverse
 from django.template.loader import render_to_string
 
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
+from django.contrib.contenttypes.models import ContentType
 
 
 register = template.Library()
@@ -79,3 +81,41 @@ def cosinnus_menu(context, template="cosinnus/topmenu.html"):
     else:
         context.update({'app_nav': False})
     return render_to_string(template, context)
+
+@register.simple_tag(takes_context=True)
+def cosinnus_render_attached_objects(context, source):
+    if not 'request' in context:
+        raise ImproperlyConfigured("Current request missing in rendering "
+            "context. Include 'django.core.context_processors.request' in the "
+            "TEMPLATE_CONTEXT_PROCESSORS.")
+    from cosinnus.core.loaders.apps import cosinnus_app_registry as car
+    request = context['request']
+    
+    print (">>> Now trying to access objects attached object...")
+    attchs = source.attached_objects.all()
+    print(">>> Success! Got %d attachments" % len(attchs))
+    
+    
+    #obj_type = ContentType.objects.get(app_label="cosinnus_file", model="fileentry")
+    #obj_type.get_object_for_this_type(username='Guido')
+    
+    typed_objects = defaultdict(list)
+    
+    for att in attchs:
+        attobj = att.target_object
+        content_type = att.content_type.model_class().__name__
+        id = att.object_id
+        print("Attaching obj '%s' to typelist '%s' with id '%d'" % (attobj, content_type, id))
+        if attobj is not None:
+            print(">>> Added object to render list!")
+            typed_objects[content_type].append(attobj)
+        else:
+            print(">>> Object was None, not adding to render list!")
+    
+    print(typed_objects)
+    for type,objlist in typed_objects.items():
+        # find manager object for attached object type
+        # pass the list to that manager and expect a rendered html string
+        pass
+    
+    return "<span>renderer says hi! your object was: %s (pk: %d) </span>" % (source.slug + ' of ' + str(source.group), source.pk)#render_to_string("<span>hi!</span>", context)
