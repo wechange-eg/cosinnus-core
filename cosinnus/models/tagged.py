@@ -50,7 +50,7 @@ class TagObject(BaseTagObject):
         app_label = 'cosinnus'
         swappable = 'COSINNUS_TAG_OBJECT_MODEL'
 
-
+@python_2_unicode_compatible
 class AttachedObject(models.Model):
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
