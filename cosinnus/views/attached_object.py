@@ -13,10 +13,10 @@ Created on 11.12.2013
 '''
 
 
-class AttachableMixin(object):
+class AttachableViewMixin(object):
     
     def get_form_kwargs(self):
-        kwargs = CreateView.get_form_kwargs(self)
+        kwargs = self.super_view.get_form_kwargs(self)
         
         print(kwargs)
         source_model_id = self.model._meta.app_label + '.' + self.model._meta.object_name
@@ -48,9 +48,9 @@ class AttachableMixin(object):
         return kwargs
 
 
-class CreateViewAttachable(AttachableMixin, CreateView):
-    pass
+class CreateViewAttachable(AttachableViewMixin, CreateView):
+    super_view = CreateView
 
-class UpdateViewAttachable(AttachableMixin, UpdateView):
-    pass
+class UpdateViewAttachable(AttachableViewMixin, UpdateView):
+    super_view = UpdateView
     

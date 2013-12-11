@@ -22,5 +22,8 @@ class FormAttachable(forms.ModelForm):
         print (">>> cleaned data")
         print(self.cleaned_data)
         
+        """ TODO: save attached_objects to instance """
+        
+        
         return instance
         
