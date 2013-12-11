@@ -91,37 +91,23 @@ def cosinnus_render_attached_objects(context, source):
         raise ImproperlyConfigured("Current request missing in rendering "
             "context. Include 'django.core.context_processors.request' in the "
             "TEMPLATE_CONTEXT_PROCESSORS.")
-    request = context['request']
     
     print (">>> Now trying to access objects attached object...")
-    attchs = source.attached_objects.all()
-    print(">>> Success! Got %d attachments" % len(attchs))
-    
-    
-    #obj_type = ContentType.objects.get(app_label="cosinnus_file", model="fileentry")
-    #obj_type.get_object_for_this_type(username='Guido')
+    attached_objects = source.attached_objects.all()
+    print(">>> Success! Got %d attachments" % len(attached_objects))
     
     typed_objects = defaultdict(list)
-    
-    for att in attchs:
+    for att in attached_objects:
         attobj = att.target_object
-        content_type = att.content_type.model_class().__name__
-        print("Attaching obj '%s' to typelist '%s' with id '%d'" % (attobj, content_type, att.object_id))
+        content_model = att.content_type.app_label + '.' + att.content_type.model_class().__name__
+        print(">>> Attaching obj '%s' to typelist '%s' with id '%d'" % (attobj, content_model, att.object_id))
         if attobj is not None:
             print(">>> Added object to render list!")
-            typed_objects[content_type].append(attobj)
-            
-            """ TODO: anpassen an cosinnus_app.FileEntry aus ContentType """
-            """ TODO: http://docs.python.org/2/library/itertools.html#itertools.groupby """
-        else:
-            print(">>> Object was None, not adding to render list!")
+            typed_objects[content_model].append(attobj)
     
     rendered_output = ""
     for modelname,objects in typed_objects.items():
         # find manager object for attached object type
-        print(">>> renderers: ")
-        print(caor.attachable_object_renderers)
-        
         renderer = caor.attachable_object_renderers.get(modelname, None)
         if renderer:
             # pass the list to that manager and expect a rendered html string
