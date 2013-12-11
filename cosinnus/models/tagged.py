@@ -58,6 +58,7 @@ class AttachedObject(models.Model):
     
     class Meta:
         app_label = 'cosinnus'
+        ordering = ('content_type',)
         unique_together = (('content_type', 'object_id'),)
         verbose_name = _('Attached object')
         verbose_name_plural = _('Attached objects')

@@ -13,6 +13,8 @@ from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
 from django.contrib.contenttypes.models import ContentType
 
 from cosinnus.core.loaders.apps import cosinnus_app_registry as car
+from cosinnus.core.loaders.attached_objects import cosinnus_attached_object_registry as caor
+
 
 register = template.Library()
 
@@ -104,10 +106,13 @@ def cosinnus_render_attached_objects(context, source):
     for att in attchs:
         attobj = att.target_object
         content_type = att.content_type.model_class().__name__
-        print("Attaching obj '%s' to typelist '%s' with id '%d'" % (attobj, content_type, id))
+        print("Attaching obj '%s' to typelist '%s' with id '%d'" % (attobj, content_type, att.object_id))
         if attobj is not None:
             print(">>> Added object to render list!")
             typed_objects[content_type].append(attobj)
+            
+            """ TODO: anpassen an cosinnus_app.FileEntry aus ContentType """
+            """ TODO: http://docs.python.org/2/library/itertools.html#itertools.groupby """
         else:
             print(">>> Object was None, not adding to render list!")
     
@@ -115,14 +120,14 @@ def cosinnus_render_attached_objects(context, source):
     for modelname,objects in typed_objects.items():
         # find manager object for attached object type
         print(">>> renderers: ")
-        print(car.attachable_object_renderers)
+        print(caor.attachable_object_renderers)
         
-        renderer = car.attachable_object_renderers.get(modelname, None)
+        renderer = caor.attachable_object_renderers.get(modelname, None)
         if renderer:
             # pass the list to that manager and expect a rendered html string
             rendered_output += renderer.render_attached_objects(context, objects)
         else:
             rendered_output += "<i>Renderer for %s not found!</i>" % modelname
     
-    return "<span>renderer says hi! your object was: %s (pk: %d) </span>" % (source.slug + ' of ' + str(source.group), source.pk) \
-        + "<br/>" + rendered_output
+    #return "<span>renderer says hi! your object was: %s (pk: %d) </span>" % (source.slug + ' of ' + str(source.group), source.pk) \
+    return "<br/>" + rendered_output
