@@ -46,7 +46,7 @@ setup(
     name='cosinnus',
     version=get_version(),
     description='cosinnus core application',
-    long_description=read('README.md'),
+    long_description=read('README'),
     author='Sinnwerkstatt Medienagentur GmbH Berlin',
     author_email='web@sinnwerkstatt.com',
     packages=find_packages(exclude=["tests"]),
