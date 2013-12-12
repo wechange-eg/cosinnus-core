@@ -9,6 +9,4 @@ from appconf import AppConf
 class CosinnusConf(AppConf):
     TAG_OBJECT_MODEL = 'cosinnus.TagObject'
     USER_PROFILE_MODEL = 'cosinnus.UserProfile'
-    
-    #ATTACHABLE_OBJECTS = {}
-    ATTACHABLE_OBJECTS = {'cosinnus_note.Note' : ['cosinnus_file.FileEntry', 'cosinnus_note.Note']}
+    ATTACHABLE_OBJECTS = {}
