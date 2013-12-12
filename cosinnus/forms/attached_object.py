@@ -1,48 +1,53 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from collections import defaultdict
 from django import forms
+from django.utils.translation import ugettext_lazy as _
 from cosinnus.models.tagged import AttachedObject
 from django.contrib.contenttypes.models import ContentType
+'''
+Created on 11.12.2013
+
+@author: Sascha Narr
+'''
 
 class FormAttachable(forms.ModelForm):
-
+    """
+        Used together with AttachableViewMixin.
+        Extending this form will automatically add fields for all attachable cosinnus models 
+        (as configured in 'settings.COSINNUS_ATTACHABLE_OBJECTS') to a form.
+        Even though there is a different field for each attachable model, this form
+        handles saving all selected objects to the object's 'attached_objects' M2M field.
+    """
     def __init__(self, *args, **kwargs):
-        attached_sets = kwargs.pop('attached_files_querysets', None)
+        attachable_objects_sets = kwargs.pop('attached_files_querysets', None)
         super(FormAttachable, self).__init__(*args, **kwargs)
 
-        print(">>> query_sets passed forward:")
-        print(attached_sets)
+        preselected = defaultdict(list)
+        # retrieve the attached objects ids to select them in the update view
+        if self.instance and self.instance.pk:
+            for attached in self.instance.attached_objects.all():
+                preselected[attached.model_name].append(attached.target_object.pk)
 
-        for model_name, queryset in attached_sets.items():
-            self.fields[model_name] = forms.ModelMultipleChoiceField(queryset=queryset, required=False)  # ,label='FFFFFUUUU')
-            """ TODO: add initial """
-            # self.initial[model_name] = <file.pk of the files that are linked by the instances attached_objects>
+        # add a field for each model type of attachable file provided by cosinnus apps
+        # each field's name is something like 'attached:cosinnus_file.FileEntry'
+        # and fill the field with all available objects for that type (this is passed from our view)
+        for model_name, queryset in attachable_objects_sets.items():
+            initial = preselected[model_name.split(':')[1]]
+            self.fields[model_name] = forms.ModelMultipleChoiceField(queryset=queryset, required=False, initial=initial, label=_(model_name))  # ,label='FFFFFUUUU')
 
 
     def save_attachable(self):
-
-        print (">>> Now in the save func: instance is:")
-        print(self.instance)
-        print (">>> cleaned data")
-        print(self.cleaned_data)
-
-
-        """ TODO: save attached_objects to instance """
-       # import ipdb; ipdb.set_trace();
-
+        """ called by AttachableViewMixin.form_valid() """
+        # we don't want the object to have any attached files other than the ones submitted to the form
+        self.instance.attached_objects.clear()
+        # Find all attached objects in a saved form (their field values are all something like 'attached:cosinnus_file.FileEntry'
+        # and instead of saving them find or create an attachable object for each of the selected objects
         for key, entries in self.cleaned_data.items():
-            if key.startswith('attached_cosinnus'):
+            if key.startswith('attached:cosinnus'):
                 for attached_obj in entries:
-                    print(">>> Found a fitting object with key " + key)
-                    print(attached_obj)
                     object_id = str(attached_obj.pk)
                     content_type = ContentType.objects.get_for_model(attached_obj)
-
-                    print(object_id)
-                    print(content_type)
-                    (ao, created) = AttachedObject.objects.get_or_create(content_type=content_type, object_id=object_id)
-                    print(">>> Finding the linked object, we got back: " + str(created))
-                    print(ao)
+                    (ao, _) = AttachedObject.objects.get_or_create(content_type=content_type, object_id=object_id)
                     self.instance.attached_objects.add(ao)
-                    print("instance saved!")
 

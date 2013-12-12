@@ -52,20 +52,29 @@ class TagObject(BaseTagObject):
 
 @python_2_unicode_compatible
 class AttachedObject(models.Model):
+    """ 
+        A generic object to serve as attachable object connector for 
+        all cosinnus objects.
+    """
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     target_object = generic.GenericForeignKey('content_type', 'object_id')
-    
+
     class Meta:
         app_label = 'cosinnus'
         ordering = ('content_type',)
         unique_together = (('content_type', 'object_id'),)
         verbose_name = _('Attached object')
         verbose_name_plural = _('Attached objects')
-    
+
     def __str__(self):
         return '<attach: %s::%s>' % (self.content_type, self.object_id)
-    
+
+    @property
+    def model_name(self):
+        """ The model name used in the cosinnus attached file configurations 
+            Ex.: 'cosinnus_file.FileEntry' """
+        return self.content_type.app_label + '.' + self.content_type.model_class().__name__
 
 @python_2_unicode_compatible
 class BaseTaggableObjectModel(models.Model):
@@ -79,9 +88,9 @@ class BaseTaggableObjectModel(models.Model):
     tags = TaggableManager(_('Tags'), blank=True)
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
         blank=True, null=True, on_delete=models.PROTECT)
-    
+
     attached_objects = models.ManyToManyField(AttachedObject, blank=True, null=True)
-    
+
     group = models.ForeignKey(CosinnusGroup, verbose_name=_('Group'),
         related_name='%(app_label)s_%(class)s_set', on_delete=models.PROTECT)
 

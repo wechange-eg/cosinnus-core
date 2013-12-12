@@ -14,7 +14,7 @@ from django.contrib.contenttypes.models import ContentType
 
 from cosinnus.core.loaders.apps import cosinnus_app_registry as car
 from cosinnus.core.loaders.attached_objects import cosinnus_attached_object_registry as caor
-
+from cosinnus.conf import settings
 
 register = template.Library()
 
@@ -87,33 +87,34 @@ def cosinnus_menu(context, template="cosinnus/topmenu.html"):
 
 @register.simple_tag(takes_context=True)
 def cosinnus_render_attached_objects(context, source):
+    """
+        Renders all attached files on a given source cosinnus object.
+        This will collect and group all attached files  (obj.attached_files) by 
+        their model group and send them to the configured renderer for that model type
+        (in each cosinnus app's cosinnus_app.ATTACHABLE_OBJECT_RENDERERS).
+    """
     if not 'request' in context:
         raise ImproperlyConfigured("Current request missing in rendering "
             "context. Include 'django.core.context_processors.request' in the "
             "TEMPLATE_CONTEXT_PROCESSORS.")
-    
-    print (">>> Now trying to access objects attached object...")
+
     attached_objects = source.attached_objects.all()
-    print(">>> Success! Got %d attachments" % len(attached_objects))
-    
+
     typed_objects = defaultdict(list)
     for att in attached_objects:
         attobj = att.target_object
-        content_model = att.content_type.app_label + '.' + att.content_type.model_class().__name__
-        print(">>> Attaching obj '%s' to typelist '%s' with id '%d'" % (attobj, content_model, att.object_id))
+        content_model = att.model_name
         if attobj is not None:
-            print(">>> Added object to render list!")
             typed_objects[content_model].append(attobj)
-    
+
     rendered_output = ""
-    for modelname,objects in typed_objects.items():
+    for modelname, objects in typed_objects.items():
         # find manager object for attached object type
         renderer = caor.attachable_object_renderers.get(modelname, None)
         if renderer:
             # pass the list to that manager and expect a rendered html string
             rendered_output += renderer.render_attached_objects(context, objects)
-        else:
+        elif settings.DEBUG:
             rendered_output += "<i>Renderer for %s not found!</i>" % modelname
-    
-    #return "<span>renderer says hi! your object was: %s (pk: %d) </span>" % (source.slug + ' of ' + str(source.group), source.pk) \
-    return "<br/>" + rendered_output
+
+    return rendered_output
