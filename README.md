@@ -11,7 +11,9 @@ Installation
    (https://github.com/dyve/django-bootstrap3/pull/42). Right now the
    installation of this app must be done by hand::
 
-      pip install -e "git+git://github.com/Markush2010/django-bootstrap3.git@develop#egg=django-bootstrap3"
+```
+pip install -e "git+git://github.com/Markush2010/django-bootstrap3.git@develop#egg=django-bootstrap3"
+```
 
    Once the pull request is merged / the app has Python 3 support we can
    activate it in the setup.py.
