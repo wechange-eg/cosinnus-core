@@ -2,6 +2,12 @@
 *.egg-info
 *.pyc
 *.swp
+
+# Eclipse
+.project
+.pydevproject
+.settings/org.eclipse.core.resources.prefs
+
 coverage.xml
 build/
 dist/
