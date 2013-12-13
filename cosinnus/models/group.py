@@ -130,7 +130,7 @@ class CosinnusGroupMembershipManager(models.Manager):
         uids = cache.get(cache_key % group_id)
         if uids is None:
             uids = list(self.filter(group_id=group_id, status=status)
-                           .values_list('user_id', flat=True).all())
+                            .values_list('user_id', flat=True).all())
             cache.set(cache_key % group_id, uids)
         return uids
 

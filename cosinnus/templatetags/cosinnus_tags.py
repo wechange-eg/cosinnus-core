@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from collections import defaultdict
 
 import six
 
@@ -7,11 +8,14 @@ from django import template
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import resolve, reverse
 from django.template.loader import render_to_string
+from django.utils.translation import ugettext_lazy as _
 
+from cosinnus.conf import settings
+from cosinnus.core.loaders.apps import cosinnus_app_registry as car
+from cosinnus.core.loaders.attached_objects import cosinnus_attached_object_registry as caor
 from cosinnus.models import CosinnusGroup
 from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending)
-
 
 register = template.Library()
 
@@ -70,7 +74,6 @@ def cosinnus_menu(context, template="cosinnus/topmenu.html"):
             "context. Include 'django.core.context_processors.request' in the "
             "TEMPLATE_CONTEXT_PROCESSORS.")
 
-    from cosinnus.core.loaders.apps import cosinnus_app_registry as car
     request = context['request']
     user = request.user
     if user.is_authenticated():
@@ -95,3 +98,34 @@ def cosinnus_menu(context, template="cosinnus/topmenu.html"):
     else:
         context.update({'app_nav': False})
     return render_to_string(template, context)
+
+
+@register.simple_tag(takes_context=True)
+def cosinnus_render_attached_objects(context, source):
+    """Renders all attached files on a given source cosinnus object. This will
+    collect and group all attached objects (`source.attached_objects`) by their
+    model group and send them to the configured renderer for that model type
+    (in each cosinnus app's `cosinnus_app.ATTACHABLE_OBJECT_RENDERERS`).
+    """
+    attached_objects = source.attached_objects.all()
+
+    typed_objects = defaultdict(list)
+    for att in attached_objects:
+        attobj = att.target_object
+        content_model = att.model_name
+        if attobj is not None:
+            typed_objects[content_model].append(attobj)
+
+    rendered_output = []
+    for model_name, objects in six.iteritems(typed_objects):
+        # find manager object for attached object type
+        renderer = caor.attachable_object_renderers.get(model_name, None)
+        if renderer:
+            # pass the list to that manager and expect a rendered html string
+            rendered_output.append(renderer.render_attached_objects(context, objects))
+        elif settings.DEBUG:
+            rendered_output.append(_('<i>Renderer for %(model_name)s not found!</i>') % {
+                'model_name': model_name
+            })
+
+    return rendered_output

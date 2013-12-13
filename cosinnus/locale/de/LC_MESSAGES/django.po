@@ -1,356 +1,221 @@
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Translations for cosinnus core
+# Copyright (C) 2013
 # This file is distributed under the same license as the PACKAGE package.
+# Sebastian Henschel <sh@sinnwerkstatt.com>, 2013.
 #
-# Markus Holtermann <info@markusholtermann.eu>, 2013.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-24 12:09+0200\n"
-"PO-Revision-Date: 2013-06-18 17:20+0200\n"
-"Last-Translator: Markus Holtermann <info@markusholtermann.eu>\n"
-"Language-Team: German <>\n"
-"Language: de\n"
+"POT-Creation-Date: 2013-12-04 18:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
+"Language-Team: German\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 1.5\n"
 
-#: forms.py:13 templates/accounts/userprofile_detail.html:22
-msgid "First name"
-msgstr "Vorname"
+#: core/decorators/views.py:52 core/decorators/views.py:90
+#: core/decorators/views.py:129
+msgid "No group provided"
+msgstr "Keine Gruppe angegeben"
 
-#: forms.py:14 templates/accounts/userprofile_detail.html:24
-msgid "Last name"
-msgstr "Nachname"
+#: core/decorators/views.py:57 core/decorators/views.py:95
+#: core/decorators/views.py:134
+msgid "No group found with this name"
+msgstr "Keine Gruppe mit diesem Namen gefunden"
 
-#: forms.py:15 templates/accounts/userprofile_detail.html:26
-msgid "E-mail address"
-msgstr "E-Mail Adresse"
+#: core/decorators/views.py:65 core/decorators/views.py:104
+#: core/decorators/views.py:144
+msgid "Access denied"
+msgstr "Zugriff verweigert"
 
-#: forms.py:24 models.py:44 templates/accounts/userprofile_detail.html:36
-msgid "Location"
-msgstr "Standort"
+#: models/group.py:29
+msgid "Enter a valid group name. Forward slash is not allowed."
+msgstr "Einen gültigen Gruppenamen angeben. Ein Vorwärtsslash ist nicht erlaubt."
 
-#: models.py:23
-msgid "Phone"
-msgstr "Telefonnummer"
-
-#: models.py:24
-msgid "Mobile Phone"
-msgstr "Handy-Nummer"
-
-#: models.py:25
-msgid "Birthday"
-msgstr "Geburtstag"
-
-#: models.py:27
-msgid "Street"
-msgstr "Straße"
-
-#: models.py:28
-msgid "ZIP code"
-msgstr "PLZ"
-
-#: models.py:29
-msgid "City"
-msgstr "Stadt"
-
-#: models.py:31
-msgid "Street (secondary)"
-msgstr "Straße (andere)"
-
-#: models.py:32
-msgid "ZIP code (secondary)"
-msgstr "PLZ (andere)"
-
-#: models.py:33
-msgid "City (secondary)"
-msgstr "Stadt (andere)"
-
-#: models.py:35
-msgid "Occupation"
-msgstr "Beruf"
-
-#: models.py:36
-msgid "Attended events"
-msgstr "Besuchte Veranstaltungen"
-
-#: models.py:37
-msgid "Organizations"
-msgstr "Organisationen"
-
-#: models.py:38
-msgid "Jobs"
-msgstr "Bisherige Jobs und Ausbildungen"
-
-#: models.py:40
-msgid "Offers"
-msgstr "Bietet"
-
-#: models.py:41
-msgid "Looking for"
-msgstr "Suche nach"
-
-#: models.py:43 templates/accounts/userprofile_detail.html:28
-msgid "Avatar"
-msgstr "Avatar"
-
-#: models.py:45
-msgid "Shortly about me"
-msgstr "Kurz über mich"
-
-#: models.py:46
-msgid "About me"
-msgstr "Über mich"
-
-#: models.py:47
-msgid "Ideas"
-msgstr "Ideen"
-
-#: models.py:48
-msgid "Additional information"
-msgstr "Zusätzliche Informationen"
-
-#: models.py:49
-msgid "Profile URL"
-msgstr "Profil-URL"
-
-#: models.py:51
-msgid "Is public (on website)"
-msgstr "Öffentlich anzeigen"
-
-#: templates/accounts/base.html:10
-msgid "Your profile information"
-msgstr "Ihre Profil-Information"
-
-#: templates/accounts/userprofile_detail.html:12
-msgid "Edit"
-msgstr "Bearbeiten"
-
-#: templates/accounts/userprofile_detail.html:20
-msgid "Username"
-msgstr "Benutzername"
-
-#: templates/accounts/userprofile_form.html:18
-msgctxt "sinn"
-msgid "Save"
-msgstr "Speichern"
-
-#: templates/accounts/userprofile_form.html:21
-msgid "Cancel"
-msgstr "Abbrechen"
-
-
-#: ajax.py:23
-#, python-format
-msgid "The user %(user_name)s wants to join the group %(group_name)s"
-msgstr ""
-"Der Benutzer \"%(user_name)s\" möchte der Gruppe %(group_name)s beitreten."
-
-#: ajax.py:45
-msgid "Communication with the email server failed."
-msgstr "Kommunikation mit E-Mail-Server fehlgeschlagen."
-
-#: ajax.py:51
-msgid "Request sent"
-msgstr "Beitrittsanfrage gesendet"
-
-#: ajax.py:52
-msgid "Your join request was sent to the administrator(s) of the group."
-msgstr ""
-"Deine Beitrittsanfrage wurde an die Administratoren der Gruppe gesendet."
-
-#: ajax.py:54
-msgid "Request failed"
-msgstr "Beitrittsanfrage fehlgeschlagen"
-
-#: ajax.py:55
-msgid "Your join request could not be sent! Reason: "
-msgstr "Deine Beitrittsanfrage konnte nicht gesendet werden! Grund: "
-
-#: ajax.py:57
-msgid "Request failed, no administrators"
-msgstr "Beitrittsanfrage fehlgeschlagen, keine Administratoren"
-
-#: ajax.py:59
-#, python-format
-msgid ""
-"Your join request could not be sent because there are no administrators in "
-"the group %(group_name)s."
-msgstr ""
-"Deine Beitrittsanfrage konnte nicht gesendet werden, weil es keine "
-"Administratoren in der Gruppe %(group_name)s gibt."
-
-#: models.py:7 templates/auth/user_list.html:20
-msgid "User"
-msgstr "Benutzer"
-
-#: models.py:8
-msgid "Group"
-msgstr "Gruppe"
-
-#: models.py:12
-msgid "Group admin"
-msgstr "Gruppen-Admin"
-
-#: models.py:13
-msgid "Group admins"
-msgstr "Gruppen-Admins"
-
-#: templates/auth/group_detail.html:45
-msgid "Group members"
-msgstr "Gruppenmitglieder"
-
-#: templates/auth/group_detail.html:63
-msgid "Join this group"
-msgstr "Diese Gruppe beitretten"
-
-#: templates/auth/group_detail.html:65
-msgid "You are a member of this group"
-msgstr "Du bist Mitglied dieser Gruppe"
-
-#: templates/auth/group_list.html:4 templates/auth/user_detail.html:32
-msgid "Groups"
-msgstr "Gruppen"
-
-#: templates/auth/group_list.html:17
-msgid "Group name"
-msgstr "Gruppenname"
-
-#: templates/auth/group_list.html:18
-msgid "Joined"
-msgstr "Beitritt"
-
-#: templates/auth/group_list.html:35
-msgid "Join"
-msgstr "Beitreten"
-
-#: templates/auth/group_list.html:47
-msgid "Join the group"
-msgstr "Die Gruppe beitreten"
-
-#: templates/auth/group_list.html:50
-msgid ""
-"Do you want to send a join request to the administrator(s) of this group?"
-msgstr ""
-"Möchstest Du eine Beitrittsanfrage an die Administratoren dieser Gruppe "
-"senden?"
-
-#: templates/auth/group_list.html:53
-msgid "Cancel"
-msgstr "Schließen"
-
-#: templates/auth/group_list.html:54
-msgid "Request to join"
-msgstr "Sende Beitrittsanfrage"
-
-#: templates/auth/group_list.html:62
-msgid "Response"
-msgstr "Antwort"
-
-#: templates/auth/group_list.html:68 templates/auth/group_list.html.py:110
-msgid "Okay!"
-msgstr "Okay"
-
-#: templates/auth/group_list.html:73
-msgid "There are no groups."
-msgstr "Es gibt keine Gruppen."
-
-#: templates/auth/group_list.html:108
-msgid "Great!"
-msgstr "Toll!"
-
-#: templates/auth/user_detail.html:20
-msgid "Username"
-msgstr "Benutzername"
-
-#: templates/auth/user_detail.html:24
+#: models/group.py:53 templates/cosinnus/user_detail.html:14
 msgid "Name"
 msgstr "Name"
 
-#: templates/auth/user_detail.html:28
-msgid "E-mail address"
-msgstr "E-Mail"
+#: models/group.py:55
+msgid "Slug"
+msgstr "Slug"
 
-#: templates/auth/user_detail.html:43
+#: models/group.py:56 models/tagged.py:29
+msgid "Public"
+msgstr "Öffentlich"
+
+#: models/group.py:64
+msgid "Cosinnus group"
+msgstr "Cosinnus Gruppe"
+
+#: models/group.py:65
+msgid "Cosinnus groups"
+msgstr "Cosinnus Gruppen"
+
+#: models/group.py:86
+msgid "Group membership"
+msgstr "Gruppenmitgliedschaft"
+
+#: models/group.py:87
+msgid "Group memberships"
+msgstr "Gruppenmitgliedschaften"
+
+#: models/tagged.py:61
+msgid "Tags"
+msgstr "Schlagworte"
+
+#: models/tagged.py:65
+msgid "Group"
+msgstr "Gruppe"
+
+#: models/tagged.py:68
+msgid "Title"
+msgstr "Titel"
+
+#: templates/cosinnus/group_detail.html:9
+msgid "Group members"
+msgstr "Gruppenmitglieder"
+
+#: templates/cosinnus/group_list.html:4 templates/cosinnus/user_detail.html:22
+#: templates/cosinnus/userprofile_form.html:4
+msgid "Groups"
+msgstr "Gruppen"
+
+#: templates/cosinnus/group_list.html:11
+msgid "Group name"
+msgstr "Gruppenname"
+
+#: templates/cosinnus/group_list.html:12
+msgid "Joined"
+msgstr "Beigetreten"
+
+#: templates/cosinnus/group_list.html:29
+msgid "Join"
+msgstr "Beitreten"
+
+#: templates/cosinnus/group_list.html:41
+msgid "Join the group"
+msgstr "Dieser Gruppe beitreten"
+
+#: templates/cosinnus/group_list.html:44
+msgid ""
+"Do you want to send a join request to the administrator(s) of this group?"
+msgstr ""
+"Möchtest du den Administratoren dieser Gruppe deine Beitrittsanfrage senden?"
+
+#: templates/cosinnus/group_list.html:47 templates/cosinnus/user_form.html:10
+#: templates/cosinnus/userprofile_form.html:11
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: templates/cosinnus/group_list.html:48
+msgid "Request to join"
+msgstr "Anfrage zum Beitritt"
+
+#: templates/cosinnus/group_list.html:56
+msgid "Response"
+msgstr "Antwort"
+
+#: templates/cosinnus/group_list.html:62
+#: templates/cosinnus/group_list.html:104
+msgid "Okay!"
+msgstr "In Ordnung!"
+
+#: templates/cosinnus/group_list.html:67
+msgid "There are no groups."
+msgstr "Es gibt keine Gruppen."
+
+#: templates/cosinnus/group_list.html:102
+msgid "Great!"
+msgstr "Grossartig!"
+
+#: templates/cosinnus/group_user_list.html:4
+#, python-format
+msgid "Users in group %(group)s"
+msgstr "Nutzer in Gruppe %(group)s"
+
+#: templates/cosinnus/group_user_list.html:7
+#: templates/cosinnus/user_form.html:4 templates/cosinnus/user_list.html:7
+msgid "Add user"
+msgstr "Nutzer hinzufügen"
+
+#: templates/cosinnus/group_user_list.html:13
+#: templates/cosinnus/user_list.html:13
+msgid "User"
+msgstr "Nutzer"
+
+#: templates/cosinnus/group_user_list.html:23
+#: templates/cosinnus/user_list.html:23
+msgid "There are no users."
+msgstr "Es gibt keine Nutzer"
+
+#: templates/cosinnus/logged_out.html:4 templates/cosinnus/logged_out.html:7
+msgid "Logged out"
+msgstr "Abgemeldet"
+
+#: templates/cosinnus/login.html:4 templates/cosinnus/login.html.py:11
+#: templates/cosinnus/topmenu.html:42
+msgid "Login"
+msgstr "Anmelden"
+
+#: templates/cosinnus/login.html:12
+msgid "Lost password"
+msgstr "Passwort vergessen"
+
+#: templates/cosinnus/topmenu.html:5
+msgid "Toggle navigation"
+msgstr "Navigation ab-/abschalten"
+
+#: templates/cosinnus/topmenu.html:21
+msgid "My Groups"
+msgstr "Meine Gruppen"
+
+#: templates/cosinnus/topmenu.html:28
+msgid "List all groups"
+msgstr "Alle Gruppen auflisten"
+
+#: templates/cosinnus/topmenu.html:37
+msgid "Profile"
+msgstr "Profil"
+
+#: templates/cosinnus/topmenu.html:38
+msgid "Logout"
+msgstr "Abmelden"
+
+#: templates/cosinnus/user_detail.html:10
+msgid "Username"
+msgstr "Nutzername"
+
+#: templates/cosinnus/user_detail.html:18
+msgid "E-mail address"
+msgstr "E-mail Adresse"
+
+#: templates/cosinnus/user_detail.html:33
+#: templates/cosinnus/user_detail.html:36
+#: templates/cosinnus/user_detail.html:38
 msgid "Avatar"
 msgstr "Avatar"
 
-#: templates/auth/user_form.html:3 templates/auth/user_list.html:14
-msgid "Add user"
-msgstr "Benutzer hinzufügen"
+#: templates/cosinnus/user_list.html:4
+msgid "Users"
+msgstr "Nutzer"
 
-#: templates/auth/user_form.html:9
+#: templates/cosinnus/userprofile_detail.html:5
+#, python-format
+msgid "User profile: %(username)s"
+msgstr "NutzerprofilÖ %(username)s"
+
+#: templates/cosinnus/userprofile_detail.html:13
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: templates/cosinnus/userprofile_form.html:10
 msgid "Save"
 msgstr "Speichern"
-
-#: templates/auth/user_list.html:3
-msgid "Manage users"
-msgstr "Benutzer verwalten"
-
-#: templates/auth/user_list.html:10 templates/authentication/base.html:17
-msgid "Members"
-msgstr "Mitglieder"
-
-#: templates/auth/user_list.html:21
-msgid "Membership status"
-msgstr "Mitglieder-Status"
-
-#: templates/auth/user_list.html:29 templates/auth/user_list.html.py:55
-msgid "Member"
-msgstr "Mitglied"
-
-#: templates/auth/user_list.html:29 templates/auth/user_list.html.py:55
-msgid "Remove"
-msgstr "Löschen"
-
-#: templates/auth/user_list.html:31 templates/auth/user_list.html.py:46
-msgid "No member"
-msgstr "Keine Mitglied"
-
-#: templates/auth/user_list.html:31 templates/auth/user_list.html.py:46
-msgid "Add"
-msgstr "Hinzufügen"
-
-#: templates/auth/user_list.html:38
-msgid "There are no users."
-msgstr "Es gibt keine Benutzer."
-
-#: templates/authentication/base.html:19
-msgctxt "top menu"
-msgid "Todo"
-msgstr "Aufgaben"
-
-#: templates/authentication/base.html:20
-msgctxt "top menu"
-msgid "Event"
-msgstr "Veranstaltungen"
-
-#: templates/authentication/base.html:21
-msgctxt "top menu"
-msgid "Files"
-msgstr "Dateien"
-
-#: templates/authentication/base.html:22
-msgctxt "top menu"
-msgid "Wiki"
-msgstr "Wiki"
-
-#: templates/authentication/base.html:23
-msgctxt "top menu"
-msgid "Etherpad"
-msgstr "Etherpad"
-
-#: templates/authentication/base.html:24
-msgctxt "top menu"
-msgid "Notes"
-msgstr "Notizen"
-
-#: templates/authentication/base.html:33
-msgid "All Groups"
-msgstr "Alle Gruppen"
 
 #: templates/notify/mail/group_join_request.txt:1
 #, python-format
@@ -361,8 +226,12 @@ msgid ""
 msgstr ""
 "Hallo %(admin_name)s,\n"
 "\n"
-"Der Benutzer \"%(user_name)s\" möchte der Gruppe %(group_name)s beitreten."
+"Die Nutzerin %(user_name)s möchte der Gruppe %(group_name)s beitreten."
 
-#: models.py:12
-msgid "Tags"
-msgstr "Schlagwörter"
+#: views/user.py:38
+msgid "Create"
+msgstr "Erstellen"
+
+#: views/user.py:81
+msgid "Update"
+msgstr "Aktualisieren"
