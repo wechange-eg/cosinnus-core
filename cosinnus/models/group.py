@@ -216,7 +216,7 @@ class CosinnusGroupMembershipManager(models.Manager):
     def _get_users_for_multiple_groups(self, group_ids, cache_key, status):
         keys = [cache_key % g for g in group_ids]
         users = cache.get_many(keys)
-        missing = map(int, (key.split('/')[-1] for key in keys if key not in users))
+        missing = list(map(int, (key.split('/')[-1] for key in keys if key not in users)))
         if missing:
             _q = self.filter_membership_status(status).values_list('user_id', flat=True)
             for group in missing:
