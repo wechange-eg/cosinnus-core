@@ -129,8 +129,12 @@ class CosinnusGroupMembershipManager(models.Manager):
     def _get_users_for_single_group(self, group_id, cache_key, status):
         uids = cache.get(cache_key % group_id)
         if uids is None:
-            uids = list(self.filter(group_id=group_id, status=status)
-                            .values_list('user_id', flat=True).all())
+            query = self.filter(group_id=group_id)
+            if isinstance(status, (list, tuple)):
+                query = query.filter(status__in=status)
+            else:
+                query = query.filter(status=status)
+            uids = list(query.values_list('user_id', flat=True).all())
             cache.set(cache_key % group_id, uids)
         return uids
 
