@@ -5,10 +5,6 @@
   {% blocktrans with group_name=object.name %}Delete group “{{ group_name }}”{% endblocktrans %}
 {% endblock %}
 
-{% block content_title %}
-  {% blocktrans with group_name=object.name %}Delete group “{{ group_name }}”{% endblocktrans %}
-{% endblock content_title %}
-
 {% block content %}
   <form action="" method="post" class="form-horizontal" role="form">
     {% csrf_token %}

@@ -37,31 +37,27 @@ class GroupCreateView(CreateView):
 group_create = GroupCreateView.as_view()
 
 
-class GroupDeletView(DeleteView):
+class GroupDeleteView(DeleteView):
 
-    form_class = CosinnusGroupForm
     model = CosinnusGroup
     slug_url_kwarg = 'group'
+    success_url = reverse_lazy('cosinnus:group-list')
     template_name = 'cosinnus/group_delete.html'
 
     @method_decorator(superuser_required)
     def dispatch(self, *args, **kwargs):
-        return super(GroupDeletView, self).dispatch(*args, **kwargs)
+        return super(GroupDeleteView, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(GroupDeletView, self).get_context_data(**kwargs)
+        context = super(GroupDeleteView, self).get_context_data(**kwargs)
         context['submit_label'] = _('Delete')
         return context
 
-    def get_success_url(self):
-        return reverse('cosinnus:group-list')
-
-group_delete = GroupDeletView.as_view()
+group_delete = GroupDeleteView.as_view()
 
 
 class GroupDetailView(RequireReadMixin, DetailView):
 
-    model = CosinnusGroup
     template_name = 'cosinnus/group_detail.html'
 
     def get_object(self, queryset=None):
@@ -69,9 +65,17 @@ class GroupDetailView(RequireReadMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(GroupDetailView, self).get_context_data(**kwargs)
-        users = self.group.users.order_by('first_name', 'last_name') \
-                    .select_related('cosinnus_profile')
-        context['users'] = users
+        admin_ids = CosinnusGroupMembership.objects.get_admins(group=self.group)
+        member_ids = CosinnusGroupMembership.objects.get_members(group=self.group)
+        pending_ids = CosinnusGroupMembership.objects.get_pendings(group=self.group)
+        _q = get_user_model()._default_manager.order_by('first_name', 'last_name') \
+                             .select_related('cosinnus_profile')
+
+        context.update({
+            'admins': _q._clone().filter(id__in=admin_ids),
+            'members': _q._clone().filter(id__in=member_ids),
+            'pendings': _q._clone().filter(id__in=pending_ids),
+        })
         return context
 
 group_detail = GroupDetailView.as_view()

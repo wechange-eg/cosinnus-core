@@ -22,26 +22,65 @@
 {% block content %}
 <div class="row">
   <div class="span4">
-    <h3>{% trans "Group members" %}</h3>
+    <h3>{% trans "Admins" %}</h3>
     <ul class="media-list">
-      {% for user in users %}
+      {% for admin in admins %}
         <li class="media">
-          <a class="pull-left" href="{% url 'cosinnus:user-detail' username=user.get_username %}">
-            {% if user.cosinnus_profile.avatar %}
-              <img class="avatar" src="{{ user.cosinnus_profile.avatar.url }}">
+          <a class="pull-left" href="{% url 'cosinnus:user-detail' username=admin.get_username %}">
+            {% if admin.cosinnus_profile.avatar %}
+              <img class="avatar" src="{{ admin.cosinnus_profile.avatar.url }}">
             {% else %}
               <img class="avatar" src="http://placehold.it/30x30">
             {% endif %}
           </a>
           <div class="media-body">
-            <a class="pull-left" href="{% url 'cosinnus:user-detail' username=user.get_username %}">{{ user.get_full_name|default:user.get_username }}</a>
+            <a class="pull-left" href="{% url 'cosinnus:user-detail' username=admin.get_username %}">{{ admin.get_full_name|default:admin.get_username }}</a>
           </div>
         </li>
       {% endfor %}
     </ul>
   </div>
-  <div class="span6">
-    <div id="map" style="height: 640px;"></div>
+</div>
+<div class="row">
+  <div class="span4">
+    <h3>{% trans "Members" %}</h3>
+    <ul class="media-list">
+      {% for member in members %}
+        <li class="media">
+          <a class="pull-left" href="{% url 'cosinnus:user-detail' username=member.get_username %}">
+            {% if member.cosinnus_profile.avatar %}
+              <img class="avatar" src="{{ member.cosinnus_profile.avatar.url }}">
+            {% else %}
+              <img class="avatar" src="http://placehold.it/30x30">
+            {% endif %}
+          </a>
+          <div class="media-body">
+            <a class="pull-left" href="{% url 'cosinnus:user-detail' username=member.get_username %}">{{ member.get_full_name|default:member.get_username }}</a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="span4">
+    <h3>{% trans "Pending users" %}</h3>
+    <ul class="media-list">
+      {% for pending in pendings %}
+        <li class="media">
+          <a class="pull-left" href="{% url 'cosinnus:user-detail' username=pending.get_username %}">
+            {% if pending.cosinnus_profile.avatar %}
+              <img class="avatar" src="{{ pending.cosinnus_profile.avatar.url }}">
+            {% else %}
+              <img class="avatar" src="http://placehold.it/30x30">
+            {% endif %}
+          </a>
+          <div class="media-body">
+            <a class="pull-left" href="{% url 'cosinnus:user-detail' username=pending.get_username %}">{{ pending.get_full_name|default:pending.get_username }}</a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
   </div>
 </div>
 {% endblock %}
