@@ -39,15 +39,15 @@
 
               {% if user.pk in members %}
                 <td>
-                  <a href="">{% trans "Leave" %}</a>
+                  <a href="{% url 'cosinnus:group-user-leave' group=group.slug %}">{% trans "Leave" %}</a>
                 </td>
               {% elif user.pk in pendings %}
                 <td>
-                  <a href="">{% trans "Withdraw" %}</a>
+                  <a href="{% url 'cosinnus:group-user-withdraw' group=group.slug %}">{% trans "Withdraw" %}</a>
                 </td>
               {% else %}
                 <td>
-                  <a href="">{% trans "Join" %}</a>
+                  <a href="{% url 'cosinnus:group-user-join' group=group.slug %}">{% trans "Join" %}</a>
                 </td>
               {% endif %}
             </tr>
