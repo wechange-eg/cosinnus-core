@@ -98,9 +98,11 @@ class CosinnusGroupManager(models.Manager):
         slugs = cache.get(_GROUPS_SLUG_CACHE_KEY)
         if slugs is None:
             slugs = SortedDict(self.values_list('slug', 'id').all())
-            ids = SortedDict((v, k) for k, v in six.iteritems(slugs))
-            cache.set(_GROUPS_SLUG_CACHE_KEY, slugs)
-            cache.set(_GROUPS_PK_CACHE_KEY, ids)
+            pks = SortedDict((v, k) for k, v in six.iteritems(slugs))
+            cache.set(_GROUPS_SLUG_CACHE_KEY, slugs,
+                settings.COSINNUS_GROUP_CACHE_TIMEOUT)
+            cache.set(_GROUPS_PK_CACHE_KEY, pks,
+                settings.COSINNUS_GROUP_CACHE_TIMEOUT)
         return slugs
 
     def get_pks(self):
@@ -111,13 +113,15 @@ class CosinnusGroupManager(models.Manager):
         :returns: A :class:`SortedDict` with a `pk => slug` mapping of all
             groups
         """
-        ids = cache.get(_GROUPS_PK_CACHE_KEY)
-        if ids is None:
-            ids = SortedDict(self.values_list('id', 'slug').all())
-            slugs = SortedDict((v, k) for k, v in six.iteritems(ids))
-            cache.set(_GROUPS_PK_CACHE_KEY, ids)
-            cache.set(_GROUPS_SLUG_CACHE_KEY, slugs)
-        return ids
+        pks = cache.get(_GROUPS_PK_CACHE_KEY)
+        if pks is None:
+            pks = SortedDict(self.values_list('id', 'slug').all())
+            slugs = SortedDict((v, k) for k, v in six.iteritems(pks))
+            cache.set(_GROUPS_PK_CACHE_KEY, pks,
+                settings.COSINNUS_GROUP_CACHE_TIMEOUT)
+            cache.set(_GROUPS_SLUG_CACHE_KEY, slugs,
+                settings.COSINNUS_GROUP_CACHE_TIMEOUT)
+        return pks
 
     def get_cached(self, slugs=None, pks=None):
         """
@@ -144,7 +148,8 @@ class CosinnusGroupManager(models.Manager):
                 group = cache.get(_GROUP_CACHE_KEY % slug)
                 if group is None:
                     group = super(CosinnusGroupManager, self).get(slug=slug)
-                    cache.set(_GROUP_CACHE_KEY % group.slug, group)
+                    cache.set(_GROUP_CACHE_KEY % group.slug, group,
+                        settings.COSINNUS_GROUP_CACHE_TIMEOUT)
                 return group
             else:
                 # We request multiple groups by slugs
@@ -155,7 +160,7 @@ class CosinnusGroupManager(models.Manager):
                     query = self.get_query_set().filter(slug__in=missing)
                     for group in query:
                         groups[_GROUP_CACHE_KEY % group.slug] = group
-                    cache.set_many(groups)
+                    cache.set_many(groups, settings.COSINNUS_GROUP_CACHE_TIMEOUT)
                 return sorted(groups.values(), key=lambda x: x.name)
         else:
             if isinstance(pks, int):
