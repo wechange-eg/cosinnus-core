@@ -78,12 +78,11 @@ class UserUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(UserUpdateView, self).get_context_data(**kwargs)
-        context['submit_label'] = _('Update')
+        context['submit_label'] = _('Save')
         return context
 
     def get_success_url(self):
         return reverse('cosinnus:user-detail',
             kwargs={'username': self.object.username})
-
 
 user_update = UserUpdateView.as_view()
