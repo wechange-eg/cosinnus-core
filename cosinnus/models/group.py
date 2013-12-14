@@ -4,6 +4,7 @@ import re
 import six
 
 from django.core.cache import cache
+from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
 from django.utils.datastructures import SortedDict  # TODO: Drop w/o Py2.6
@@ -303,6 +304,8 @@ class CosinnusGroup(models.Model):
     def save(self, *args, **kwargs):
         slugs = [self.slug] if self.slug else []
         unique_aware_slugify(self, 'name', 'slug')
+        if not self.slug:
+            raise ValidationError(_('Slug must not be empty.'))
         super(CosinnusGroup, self).save(*args, **kwargs)
         slugs.append(self.slug)
         self._clear_cache(slug=self.slug)
