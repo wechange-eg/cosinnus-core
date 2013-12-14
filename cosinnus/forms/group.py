@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django import forms
+
+from cosinnus.models import CosinnusGroup
+
 
 class GroupKwargModelFormMixin(object):
     """
@@ -14,3 +18,14 @@ class GroupKwargModelFormMixin(object):
     def __init__(self, *args, **kwargs):
         self.group = kwargs.pop('group', None)
         super(GroupKwargModelFormMixin, self).__init__(*args, **kwargs)
+
+
+class CosinnusGroupForm(forms.ModelForm):
+
+    class Meta:
+        fields = ('name', 'slug', 'public')
+        model = CosinnusGroup
+
+    def __init__(self, *args, **kwargs):
+        super(CosinnusGroupForm, self).__init__(*args, **kwargs)
+        self.fields['slug'].required = False

@@ -2,13 +2,79 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth import get_user_model
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
-from django.views.generic import DetailView, FormView, ListView
+from django.utils.decorators import method_decorator
+from django.utils.translation import ugettext_lazy as _
+from django.views.generic import (CreateView, DeleteView, DetailView, FormView,
+    ListView, UpdateView)
 
-from cosinnus.core.decorators.views import require_admin_access
+from cosinnus.core.decorators.views import superuser_required
+from cosinnus.forms.group import CosinnusGroupForm
 from cosinnus.models import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin
+
+
+class GroupCreateView(CreateView):
+
+    form_class = CosinnusGroupForm
+    model = CosinnusGroup
+    template_name = 'cosinnus/group_form.html'
+
+    @method_decorator(superuser_required)
+    def dispatch(self, *args, **kwargs):
+        return super(GroupCreateView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(GroupCreateView, self).get_context_data(**kwargs)
+        context['submit_label'] = _('Create')
+        return context
+
+    def get_success_url(self):
+        return reverse('cosinnus:group-detail', kwargs={'group': self.object.slug})
+
+group_create = GroupCreateView.as_view()
+
+
+class GroupDeletView(DeleteView):
+
+    form_class = CosinnusGroupForm
+    model = CosinnusGroup
+    slug_url_kwarg = 'group'
+    template_name = 'cosinnus/group_delete.html'
+
+    @method_decorator(superuser_required)
+    def dispatch(self, *args, **kwargs):
+        return super(GroupDeletView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(GroupDeletView, self).get_context_data(**kwargs)
+        context['submit_label'] = _('Delete')
+        return context
+
+    def get_success_url(self):
+        return reverse('cosinnus:group-list')
+
+group_delete = GroupDeletView.as_view()
+
+
+class GroupDetailView(RequireReadMixin, DetailView):
+
+    model = CosinnusGroup
+    template_name = 'cosinnus/group_detail.html'
+
+    def get_object(self, queryset=None):
+        return self.group
+
+    def get_context_data(self, **kwargs):
+        context = super(GroupDetailView, self).get_context_data(**kwargs)
+        users = self.group.users.order_by('first_name', 'last_name') \
+                    .select_related('cosinnus_profile')
+        context['users'] = users
+        return context
+
+group_detail = GroupDetailView.as_view()
 
 
 class GroupListView(ListView):
@@ -34,27 +100,27 @@ class GroupListView(ListView):
         })
         return ctx
 
-
 group_list = GroupListView.as_view()
 
 
-class GroupDetailView(RequireReadMixin, DetailView):
+class GroupUpdateView(RequireAdminMixin, UpdateView):
 
-    group_filter_kwarg = None
+    form_class = CosinnusGroupForm
     model = CosinnusGroup
-    template_name = 'cosinnus/group_detail.html'
+    template_name = 'cosinnus/group_form.html'
 
     def get_object(self, queryset=None):
         return self.group
 
     def get_context_data(self, **kwargs):
-        context = super(GroupDetailView, self).get_context_data(**kwargs)
-        users = self.group.users.order_by('first_name', 'last_name') \
-                                .select_related('cosinnus_profile')
-        context['users'] = users
+        context = super(GroupUpdateView, self).get_context_data(**kwargs)
+        context['submit_label'] = _('Save')
         return context
 
-group_detail = GroupDetailView.as_view()
+    def get_success_url(self):
+        return reverse('cosinnus:group-detail', kwargs={'group': self.group.slug})
+
+group_update = GroupUpdateView.as_view()
 
 
 class GroupUserListView(RequireReadMixin, ListView):
@@ -88,10 +154,6 @@ class GroupUserDeleteView(RequireAdminMixin, FormView):
     # FormView
 
     http_method_names = ['post']
-
-    @require_admin_access()
-    def dispatch(self, request, *args, **kwargs):
-        return super(GroupUserDeleteView, self).dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         user = get_object_or_404(get_user_model(), username=kwargs.get('username'))

@@ -1,7 +1,23 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n %}
+{% load i18n cosinnus_tags %}
 
-{% block page_title %}{{ object.name }}{% endblock %}
+{% block page_title %}
+  {% blocktrans with group_name=object.name %}Group “{{ group_name }}”{% endblocktrans %}
+{% endblock %}
+
+{% block content_title %}
+  {% blocktrans with group_name=object.name %}
+  Group “{{ group_name }}”
+  {% endblocktrans %}
+  {% if user.is_superuser or user|is_group_admin:object %}
+    <div class="btn-group pull-right">
+      <a href="{% url 'cosinnus:group-edit' group=object.slug %}" class="btn btn-primary">{% trans "Edit" %}</a>
+      {% if user.is_superuser %}
+        <a href="{% url 'cosinnus:group-delete' group=object.slug %}" class="btn btn-primary">{% trans "Delete" %}</a>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endblock content_title %}
 
 {% block content %}
 <div class="row">

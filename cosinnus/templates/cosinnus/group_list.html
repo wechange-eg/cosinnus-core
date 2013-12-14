@@ -3,6 +3,15 @@
 
 {% block page_title %}{% trans "Groups" %}{% endblock %}
 
+{% block content_title %}
+  {% trans "Groups" %}
+  {% if user.is_superuser %}
+    <div class="btn-group pull-right">
+      <a href="{% url 'cosinnus:group-add' %}" class="btn btn-success">{% trans "Create Group" %}</a>
+    </div>
+  {% endif %}
+{% endblock content_title %}
+
 {% block content %}
   {% if rows %}
     <table class="table table-bordered table-hover">
@@ -18,7 +27,7 @@
         {% if user.is_authenticated %}
           {% for group, members, pendings in rows %}
             <tr>
-              {% if user.pk in members or group.public %}
+              {% if user.is_superuser or user.pk in members or group.public %}
                 <td>
                   <a href="{% url 'cosinnus:group-detail' group=group.slug %}">{{ group.name }}</a>
                 </td>
