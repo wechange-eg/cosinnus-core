@@ -3,7 +3,8 @@ from __future__ import unicode_literals
 
 from django import forms
 
-from cosinnus.models import CosinnusGroup
+from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership,
+    MEMBERSHIP_MEMBER)
 
 
 class GroupKwargModelFormMixin(object):
@@ -23,9 +24,22 @@ class GroupKwargModelFormMixin(object):
 class CosinnusGroupForm(forms.ModelForm):
 
     class Meta:
-        fields = ('name', 'slug', 'public')
+        fields = ('name', 'slug', 'public',)
         model = CosinnusGroup
 
     def __init__(self, *args, **kwargs):
         super(CosinnusGroupForm, self).__init__(*args, **kwargs)
         self.fields['slug'].required = False
+
+
+class CosinnusGroupSelectUserForm(forms.ModelForm):
+
+    class Meta:
+        fields = ('user', 'status',)
+        model = CosinnusGroupMembership
+
+    def __init__(self, *args, **kwargs):
+        user_qs = kwargs.pop('user_qs')
+        super(CosinnusGroupSelectUserForm, self).__init__(*args, **kwargs)
+        self.fields['user'].queryset = user_qs
+        self.initial['status'] = MEMBERSHIP_MEMBER

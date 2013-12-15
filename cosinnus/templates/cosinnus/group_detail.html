@@ -15,13 +15,21 @@
       {% if user.is_superuser %}
         <a href="{% url 'cosinnus:group-delete' group=object.slug %}" class="btn btn-primary">{% trans "Delete" %}</a>
       {% endif %}
+      <div class="btn-group">
+        <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">{% trans "Users" %} <span class="caret"></span></a>
+        <ul class="dropdown-menu pull-right" role="menu">
+          <li><a href="{% url 'cosinnus:group-user-add' group=object.slug %}">{% trans "Add user" %}</a></li>
+          <li><a href="{% url 'cosinnus:group-user-delete' group=object.slug %}">{% trans "Delete user" %}</a></li>
+        </ul>
+      </div>
+      
     </div>
   {% endif %}
 {% endblock content_title %}
 
 {% block content %}
 <div class="row">
-  <div class="span4">
+  <div class="col-md-12">
     <h3>{% trans "Admins" %}</h3>
     <ul class="media-list">
       {% for admin in admins %}
@@ -35,6 +43,10 @@
           </a>
           <div class="media-body">
             <a class="pull-left" href="{% url 'cosinnus:user-detail' username=admin.get_username %}">{{ admin.get_full_name|default:admin.get_username }}</a>
+            <div class="btn-group btn-group-xs">
+              <a href="{% url 'cosinnus:group-user-add-username' group=object.slug username=admin.get_username %}" class="btn btn-default">{% trans "Change" %}</a>
+              <a href="{% url 'cosinnus:group-user-delete-username' group=object.slug username=admin.get_username %}" class="btn btn-default">{% trans "Delete" %}</a>
+            </div>
           </div>
         </li>
       {% endfor %}
@@ -42,7 +54,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="span4">
+  <div class="col-md-12">
     <h3>{% trans "Members" %}</h3>
     <ul class="media-list">
       {% for member in members %}
@@ -56,6 +68,10 @@
           </a>
           <div class="media-body">
             <a class="pull-left" href="{% url 'cosinnus:user-detail' username=member.get_username %}">{{ member.get_full_name|default:member.get_username }}</a>
+            <div class="btn-group btn-group-xs">
+              <a href="{% url 'cosinnus:group-user-add-username' group=object.slug username=member.get_username %}" class="btn btn-default">{% trans "Change" %}</a>
+              <a href="{% url 'cosinnus:group-user-delete-username' group=object.slug username=member.get_username %}" class="btn btn-default">{% trans "Delete" %}</a>
+            </div>
           </div>
         </li>
       {% endfor %}
@@ -63,7 +79,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="span4">
+  <div class="col-md-12">
     <h3>{% trans "Pending users" %}</h3>
     <ul class="media-list">
       {% for pending in pendings %}
@@ -77,6 +93,10 @@
           </a>
           <div class="media-body">
             <a class="pull-left" href="{% url 'cosinnus:user-detail' username=pending.get_username %}">{{ pending.get_full_name|default:pending.get_username }}</a>
+            <div class="btn-group btn-group-xs">
+              <a href="{% url 'cosinnus:group-user-add-username' group=object.slug username=pending.get_username %}" class="btn btn-default">{% trans "Change" %}</a>
+              <a href="{% url 'cosinnus:group-user-delete-username' group=object.slug username=pending.get_username %}" class="btn btn-default">{% trans "Delete" %}</a>
+            </div>
           </div>
         </li>
       {% endfor %}

@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse, reverse_lazy
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
@@ -14,9 +14,9 @@ from django.views.generic import (CreateView, DeleteView, DetailView, FormView,
     ListView, UpdateView)
 
 from cosinnus.core.decorators.views import superuser_required
-from cosinnus.forms.group import CosinnusGroupForm
+from cosinnus.forms.group import CosinnusGroupForm, CosinnusGroupSelectUserForm
 from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership,
-    MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER)
+    MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER, MEMBER_STATUS)
 from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin
 
 
@@ -221,15 +221,21 @@ class GroupUserLeaveView(GroupConfirmMixin, DetailView):
         return super(GroupUserLeaveView, self).dispatch(request, *args, **kwargs)
 
     def confirm_action(self):
-        try:
-            membership = CosinnusGroupMembership.objects.get(
-                user=self.request.user,
-                group=self.object,
-                status=MEMBERSHIP_MEMBER
+        admins = CosinnusGroupMembership.objects.get_admins(group=self.object)
+        if len(admins) > 1 or self.request.user.pk not in admins:
+            try:
+                membership = CosinnusGroupMembership.objects.get(
+                    user=self.request.user,
+                    group=self.object,
+                    status=MEMBERSHIP_MEMBER
+                )
+                membership.delete()
+            except CosinnusGroupMembership.DoesNotExist:
+                pass
+        else:
+            messages.error(self.request,
+                _('You cannot leave this group. You are the only administrator left.')
             )
-            membership.delete()
-        except CosinnusGroupMembership.DoesNotExist:
-            pass
 
 group_user_leave = GroupUserLeaveView.as_view()
 
@@ -260,26 +266,82 @@ class GroupUserWithdrawView(GroupConfirmMixin, DetailView):
 group_user_withdraw = GroupUserWithdrawView.as_view()
 
 
-class GroupUserAddView(RequireAdminMixin, FormView):
+class UserSelectMixin(object):
 
-    def post(self, request, *args, **kwargs):
-        user = get_object_or_404(get_user_model(), username=kwargs.get('username'))
-        self.group.users.add(user)
-        return HttpResponse(status=200)
+    form_class = CosinnusGroupSelectUserForm
+    template_name = 'cosinnus/group_user_form.html'
+
+    def get_form_kwargs(self):
+        kwargs = super(UserSelectMixin, self).get_form_kwargs()
+        kwargs['user_qs'] = self.get_user_qs()
+        return kwargs
+
+    def get_initial(self):
+        username = self.kwargs.get('username', None)
+        if username:
+            user = get_user_model()._default_manager.get(username=username)
+            return {'user': user}
+
+    def get_success_url(self):
+        return reverse('cosinnus:group-detail', kwargs={'group': self.group.slug})
+
+
+class GroupUserAddView(RequireAdminMixin, UserSelectMixin, FormView):
+
+    def form_valid(self, form):
+        user = form.cleaned_data.get('user')
+        status = form.cleaned_data.get('status')
+        try:
+            m = CosinnusGroupMembership.objects.get(user=user, group=self.group)
+            m.status = status
+            m.save(update_fields=['status'])
+        except CosinnusGroupMembership.DoesNotExist:
+            CosinnusGroupMembership.objects.create(user=user, group=self.group,
+                status=status)
+        return super(GroupUserAddView, self).form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(GroupUserAddView, self).get_context_data(**kwargs)
+        context.update({
+            'submit_label': _('Add'),
+        })
+        return context
+
+    def get_user_qs(self):
+        uids = CosinnusGroupMembership.objects.get_members(group=self.group)
+        return get_user_model()._default_manager.exclude(id__in=uids)
 
 group_user_add = GroupUserAddView.as_view()
 
 
-class GroupUserDeleteView(RequireAdminMixin, FormView):
-    # TODO: I don't like this solution yet. Even though enforcing POST
-    # requests, I think I'm missing some security concerns. We'd better use a
-    # FormView
+class GroupUserDeleteView(RequireAdminMixin, UserSelectMixin, FormView):
 
-    http_method_names = ['post']
+    def form_valid(self, form):
+        user = form.cleaned_data.get('user')
+        admins = CosinnusGroupMembership.objects.get_admins(group=self.object)
+        if (len(admins) > 1 or user.pk not in admins) and user != self.request.user:
+            try:
+                membership = CosinnusGroupMembership.objects.get(
+                    user=user, group=self.group, status__in=MEMBER_STATUS
+                )
+                membership.delete()
+            except CosinnusGroupMembership.DoesNotExist:
+                pass
+        else:
+            messages.error(self.request, _('You cannot remove yourself from a group.'))
+        return super(GroupUserDeleteView, self).form_valid(form)
 
-    def post(self, request, *args, **kwargs):
-        user = get_object_or_404(get_user_model(), username=kwargs.get('username'))
-        self.group.users.remove(user)
-        return HttpResponse(status=200)
+    def get_context_data(self, **kwargs):
+        context = super(GroupUserDeleteView, self).get_context_data(**kwargs)
+        context.update({
+            'submit_label': _('Delete'),
+            'submit_css_classes': 'btn-danger',
+        })
+        return context
+
+    def get_user_qs(self):
+        uids = CosinnusGroupMembership.objects.get_members(group=self.group)
+        return get_user_model()._default_manager.filter(id__in=uids) \
+                               .exclude(id=self.request.user.pk)
 
 group_user_delete = GroupUserDeleteView.as_view()
