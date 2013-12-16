@@ -310,26 +310,38 @@ class CosinnusGroup(models.Model):
         slugs.append(self.slug)
         self._clear_cache(slug=self.slug)
 
-    def is_admin(self, user):
-        """Checks whether the given user is an admin of this group"""
+    @property
+    def admins(self):
         if self._admins is None:
             self._admins = CosinnusGroupMembership.objects.get_admins(self.pk)
+        return self._admins
+
+    def is_admin(self, user):
+        """Checks whether the given user is an admin of this group"""
         uid = isinstance(user, int) and user or user.pk
-        return uid in self._admins
+        return uid in self.admins
+
+    @property
+    def members(self):
+        if self._members is None:
+            self._members = CosinnusGroupMembership.objects.get_members(self.pk)
+        return self._members
 
     def is_member(self, user):
         """Checks whether the given user is a member of this group"""
-        if self._members is None:
-            self._members = CosinnusGroupMembership.objects.get_members(self.pk)
         uid = isinstance(user, int) and user or user.pk
-        return uid in self._members
+        return uid in self.members
+
+    @property
+    def pendings(self):
+        if self._pendings is None:
+            self._pendings = CosinnusGroupMembership.objects.get_pendings(self.pk)
+        return self._pendings
 
     def is_pending(self, user):
         """Checks whether the given user has a pending status on this group"""
-        if self._pendings is None:
-            self._pendings = CosinnusGroupMembership.objects.get_pendings(self.pk)
         uid = isinstance(user, int) and user or user.pk
-        return uid in self._pendings
+        return uid in self.pendings
 
     @classmethod
     def _clear_cache(self, slug=None, slugs=None):
