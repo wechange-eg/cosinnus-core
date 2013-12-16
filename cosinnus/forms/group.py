@@ -32,7 +32,7 @@ class CosinnusGroupForm(forms.ModelForm):
         self.fields['slug'].required = False
 
 
-class CosinnusGroupSelectUserForm(forms.ModelForm):
+class MembershipForm(GroupKwargModelFormMixin, forms.ModelForm):
 
     class Meta:
         fields = ('user', 'status',)
@@ -40,6 +40,12 @@ class CosinnusGroupSelectUserForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         user_qs = kwargs.pop('user_qs')
-        super(CosinnusGroupSelectUserForm, self).__init__(*args, **kwargs)
+        super(MembershipForm, self).__init__(*args, **kwargs)
         self.fields['user'].queryset = user_qs
-        self.initial['status'] = MEMBERSHIP_MEMBER
+        self.initial.setdefault('status', MEMBERSHIP_MEMBER)
+
+    def save(self, *args, **kwargs):
+        obj = super(MembershipForm, self).save(commit=False)
+        obj.group = self.group
+        obj.save()
+        return obj
