@@ -5,7 +5,8 @@ Contents:
 
 .. toctree::
    :maxdepth: 2
-
+    
+   attachments
    permissions
    ref/index
 
