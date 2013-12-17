@@ -137,12 +137,12 @@ class CosinnusGroupManager(models.Manager):
         :raises: If a single object is defined a `CosinnusGroup.DoesNotExist`
             will be raised in case the requested object does not exist.
         """
-        # Check that only one of slug and slugs is set:
+        # Check that at most one of slugs and pks is set
         assert not (slugs and pks)
-        if slugs is None and pks is None:
+        if (slugs is None) and (pks is None):
             slugs = list(self.get_slugs().keys())
 
-        if slugs:
+        if slugs is not None:
             if isinstance(slugs, six.string_types):
                 # We request a single group
                 slug = slugs
@@ -163,7 +163,7 @@ class CosinnusGroupManager(models.Manager):
                         groups[_GROUP_CACHE_KEY % group.slug] = group
                     cache.set_many(groups, settings.COSINNUS_GROUP_CACHE_TIMEOUT)
                 return sorted(groups.values(), key=lambda x: x.name)
-        else:
+        elif pks is not None:
             if isinstance(pks, int):
                 # We request a single group
                 cached_pks = self.get_pks()
@@ -174,10 +174,11 @@ class CosinnusGroupManager(models.Manager):
             else:
                 # We request multiple groups
                 cached_pks = self.get_pks()
-                slugs = filter(None, (cached_pks.get(id, None) for id in pks))
+                slugs = filter(None, (cached_pks.get(id, []) for id in pks))
                 if slugs:
                     return self.get_cached(slugs=slugs)
                 return []  # We rely on the slug and id maps being up to date
+        return []
 
     def get(self, slug=None):
         return self.get_cached(slugs=slug)
