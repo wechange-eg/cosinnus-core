@@ -103,7 +103,7 @@ class BaseTaggableObjectModel(models.Model):
         related_name='%(app_label)s_%(class)s_set', on_delete=models.PROTECT)
 
     title = models.CharField(_('Title'), max_length=255)
-    slug = models.SlugField(max_length=55)  # human readable part is 50 chars
+    slug = models.SlugField(max_length=55, blank=True)  # human readable part is 50 chars
 
     class Meta:
         abstract = True
