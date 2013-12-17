@@ -110,7 +110,11 @@ class BaseTaggableObjectModel(models.Model):
         unique_together = (('group', 'slug'),)
 
     def __str__(self):
-        return "Tagged object {0}".format(self.pk)
+        return self.title
+
+    def __repr__(self):
+        return "<tagged object {0} {1} (ID: {2})>".format(
+            self.__class__.__name__, self.title, self.pk)
 
     def save(self, *args, **kwargs):
         unique_aware_slugify(self, 'title', 'slug', group=self.group)
