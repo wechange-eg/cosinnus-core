@@ -17,6 +17,7 @@ from cosinnus.core.decorators.views import superuser_required
 from cosinnus.forms.group import CosinnusGroupForm, MembershipForm
 from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING)
+from cosinnus.utils.compat import atomic
 from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin
 
 
@@ -27,6 +28,7 @@ class GroupCreateView(CreateView):
     template_name = 'cosinnus/group_form.html'
 
     @method_decorator(superuser_required)
+    @atomic
     def dispatch(self, *args, **kwargs):
         return super(GroupCreateView, self).dispatch(*args, **kwargs)
 
@@ -55,6 +57,7 @@ class GroupDeleteView(DeleteView):
     template_name = 'cosinnus/group_delete.html'
 
     @method_decorator(superuser_required)
+    @atomic
     def dispatch(self, *args, **kwargs):
         return super(GroupDeleteView, self).dispatch(*args, **kwargs)
 
@@ -223,6 +226,7 @@ class GroupUserLeaveView(GroupConfirmMixin, DetailView):
     template_name = 'cosinnus/group_confirm.html'
 
     @method_decorator(login_required)
+    @atomic
     def dispatch(self, request, *args, **kwargs):
         return super(GroupUserLeaveView, self).dispatch(request, *args, **kwargs)
 
@@ -255,6 +259,7 @@ class GroupUserWithdrawView(GroupConfirmMixin, DetailView):
     template_name = 'cosinnus/group_confirm.html'
 
     @method_decorator(login_required)
+    @atomic
     def dispatch(self, request, *args, **kwargs):
         return super(GroupUserWithdrawView, self).dispatch(request, *args, **kwargs)
 
@@ -279,6 +284,10 @@ class UserSelectMixin(object):
     slug_field = 'user__username'
     slug_url_kwarg = 'username'
     template_name = 'cosinnus/group_user_form.html'
+
+    @atomic
+    def dispatch(self, request, *args, **kwargs):
+        return super(UserSelectMixin, self).dispatch(request, *args, **kwargs)
 
     def get_form_kwargs(self):
         kwargs = super(UserSelectMixin, self).get_form_kwargs()
