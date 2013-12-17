@@ -128,4 +128,4 @@ def cosinnus_render_attached_objects(context, source):
                 'model_name': model_name
             })
 
-    return rendered_output
+    return ''.join(rendered_output)

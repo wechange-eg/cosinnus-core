@@ -30,7 +30,8 @@ class FormAttachable(forms.ModelForm):
         # retrieve the attached objects ids to select them in the update view
         if self.instance and self.instance.pk:
             for attached in self.instance.attached_objects.all():
-                preselected[attached.model_name].append(attached.target_object.pk)
+                if attached and attached.target_object:
+                    preselected[attached.model_name].append(attached.target_object.pk)
 
         # add a field for each model type of attachable file provided by cosinnus apps
         # each field's name is something like 'attached:cosinnus_file.FileEntry'
@@ -51,7 +52,7 @@ class FormAttachable(forms.ModelForm):
         # something like 'attached:cosinnus_file.FileEntry' and instead of
         # saving them find or create an attachable object for each of the
         # selected objects
-        for key, entries in six.itemitems(self.cleaned_data):
+        for key, entries in six.iteritems(self.cleaned_data):
             if key.startswith('attached:cosinnus'):
                 for attached_obj in entries:
                     object_id = str(attached_obj.pk)
