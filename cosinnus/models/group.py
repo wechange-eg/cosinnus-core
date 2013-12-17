@@ -276,7 +276,7 @@ class CosinnusGroupMembershipManager(models.Manager):
 class CosinnusGroup(models.Model):
     name = models.CharField(_('Name'), max_length=100,
         validators=[group_name_validator])
-    slug = models.SlugField(_('Slug'), max_length=50, unique=True)
+    slug = models.SlugField(_('Slug'), max_length=50, unique=True, blank=True)
     public = models.BooleanField(_('Public'), default=False)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
         related_name='cosinnus_groups', through='CosinnusGroupMembership')
