@@ -93,7 +93,7 @@
           <div class="media-body">
             <a class="pull-left" href="{% url 'cosinnus:user-detail' username=pending.get_username %}">{{ pending.get_full_name|default:pending.get_username }}</a>
             <div class="btn-group btn-group-xs">
-              <a href="{% url 'cosinnus:group-user-edit' group=object.slug username=pending.get_username %}" class="btn btn-default">{% trans "Change" %}</a>
+              <a href="{% url 'cosinnus:group-user-add' group=object.slug username=pending.get_username %}" class="btn btn-default">{% trans "Add" %}</a>
               <a href="{% url 'cosinnus:group-user-delete' group=object.slug username=pending.get_username %}" class="btn btn-default">{% trans "Delete" %}</a>
             </div>
           </div>
