@@ -30,6 +30,12 @@ class GroupCreateView(CreateView):
     def dispatch(self, *args, **kwargs):
         return super(GroupCreateView, self).dispatch(*args, **kwargs)
 
+    def form_valid(self, form):
+        ret = super(GroupCreateView, self).form_valid(form)
+        CosinnusGroupMembership.objects.create(user=self.request.user,
+            group=self.object, status=MEMBERSHIP_ADMIN)
+        return ret
+
     def get_context_data(self, **kwargs):
         context = super(GroupCreateView, self).get_context_data(**kwargs)
         context['submit_label'] = _('Create')
