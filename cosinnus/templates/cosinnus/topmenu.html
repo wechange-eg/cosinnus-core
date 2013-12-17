@@ -12,7 +12,7 @@
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
       {% for app in apps %}
-        <li{% if app.active %} class="active"{% endif %}><a href="{{ app.url }}">{{ app.label }}</a></li>
+        <li{% if app.active %} class="active"{% endif %}><a href="{{ app.url }}">{% trans app.label %}</a></li>
       {% endfor %}
     </ul>
     <ul class="nav navbar-nav navbar-right">
