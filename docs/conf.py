@@ -11,7 +11,9 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys, os
+from __future__ import unicode_literals
+
+import sys
 
 #sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 sys.path.insert(0, '.')
@@ -46,8 +48,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Cosinnus'
-copyright = u'2013, Sinnwerkstatt Medienagentur GmbH'
+project = 'Cosinnus'
+copyright = '2013, Sinnwerkstatt Medienagentur GmbH'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -189,8 +191,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'Cosinnus.tex', u'Cosinnus Documentation',
-   u'Sinnwerkstatt Medienagentur GmbH', 'manual'),
+  ('index', 'Cosinnus.tex', 'Cosinnus Documentation',
+   'Sinnwerkstatt Medienagentur GmbH', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -219,8 +221,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'cosinnus', u'Cosinnus Documentation',
-     [u'Sinnwerkstatt Medienagentur GmbH'], 1)
+    ('index', 'cosinnus', 'Cosinnus Documentation',
+     ['Sinnwerkstatt Medienagentur GmbH'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -233,8 +235,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'Cosinnus', u'Cosinnus Documentation',
-   u'Sinnwerkstatt Medienagentur GmbH', 'Cosinnus', 'One line description of project.',
+  ('index', 'Cosinnus', 'Cosinnus Documentation',
+   'Sinnwerkstatt Medienagentur GmbH', 'Cosinnus', 'One line description of project.',
    'Miscellaneous'),
 ]
 
