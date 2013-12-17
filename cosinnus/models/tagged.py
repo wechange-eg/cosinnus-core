@@ -50,12 +50,14 @@ class TagObject(BaseTagObject):
         app_label = 'cosinnus'
         swappable = 'COSINNUS_TAG_OBJECT_MODEL'
 
+
 @python_2_unicode_compatible
 class AttachedObject(models.Model):
-    """ 
-        A generic object to serve as attachable object connector for 
-        all cosinnus objects.
     """
+    A generic object to serve as attachable object connector for all cosinnus
+    objects.
+    """
+
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     target_object = generic.GenericForeignKey('content_type', 'object_id')
@@ -72,9 +74,15 @@ class AttachedObject(models.Model):
 
     @property
     def model_name(self):
-        """ The model name used in the cosinnus attached file configurations 
-            Ex.: 'cosinnus_file.FileEntry' """
-        return self.content_type.app_label + '.' + self.content_type.model_class().__name__
+        """
+        The model name used in the cosinnus attached file configurations, e.g.:
+        `'cosinnus_file.FileEntry'`
+        """
+        if not hasattr(self, '_model_name'):
+            ct = self.content_type
+            self._model_name = '%s.%s' % (ct.app_label, ct.model_class().__name__)
+        return self._model_name
+
 
 @python_2_unicode_compatible
 class BaseTaggableObjectModel(models.Model):

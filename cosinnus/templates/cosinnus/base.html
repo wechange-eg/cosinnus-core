@@ -21,14 +21,10 @@
   </head>
   <body>
     {% cosinnus_menu "cosinnus/topmenu.html" %}
-    
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-{{message.tags}}">{{ message }}</div>
-        {% endfor %}
-    {% endif %}
-    
+
     <div class="container">
+      <h1>{% block content_title %}{% endblock content_title %}</h1>
+      {% bootstrap_messages %}
       {% block content %}{% endblock content %}
     </div>
     {% block extrafooter %}{% endblock extrafooter %}

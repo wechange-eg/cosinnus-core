@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django import forms
+
+from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership,
+    MEMBERSHIP_MEMBER)
+
 
 class GroupKwargModelFormMixin(object):
     """
@@ -14,3 +19,33 @@ class GroupKwargModelFormMixin(object):
     def __init__(self, *args, **kwargs):
         self.group = kwargs.pop('group', None)
         super(GroupKwargModelFormMixin, self).__init__(*args, **kwargs)
+
+
+class CosinnusGroupForm(forms.ModelForm):
+
+    class Meta:
+        fields = ('name', 'slug', 'public',)
+        model = CosinnusGroup
+
+    def __init__(self, *args, **kwargs):
+        super(CosinnusGroupForm, self).__init__(*args, **kwargs)
+        self.fields['slug'].required = False
+
+
+class MembershipForm(GroupKwargModelFormMixin, forms.ModelForm):
+
+    class Meta:
+        fields = ('user', 'status',)
+        model = CosinnusGroupMembership
+
+    def __init__(self, *args, **kwargs):
+        user_qs = kwargs.pop('user_qs')
+        super(MembershipForm, self).__init__(*args, **kwargs)
+        self.fields['user'].queryset = user_qs
+        self.initial.setdefault('status', MEMBERSHIP_MEMBER)
+
+    def save(self, *args, **kwargs):
+        obj = super(MembershipForm, self).save(commit=False)
+        obj.group = self.group
+        obj.save()
+        return obj

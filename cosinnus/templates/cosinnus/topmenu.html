@@ -17,20 +17,20 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       {% if request.user.is_authenticated %}
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "My Groups" %} <b class="caret"></b></a>
-          {% if request.user.cosinnus_groups %}
+        {% if groups %}
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "My Groups" %} <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              {% for group in request.user.cosinnus_groups.all %}
+              {% for group in groups %}
                 <li><a href="{% url 'cosinnus:group-detail' group=group.slug %}">{{ group.name }}</a></li>
               {% endfor %}
               <li class="divider"></li>
               <li><a href="{% url 'cosinnus:group-list' %}">{% trans "List all groups" %}</a></li>
             </ul>
-          {% else %}
-            
-          {% endif %}
-        </li>
+          </li>
+        {% else %}
+          <li><a href="{% url 'cosinnus:group-list' %}">{% trans "No Groups. Join!" %}</a></li>
+        {% endif %}
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.user|full_name }} <b class="caret"></b></a>
           <ul class="dropdown-menu">

@@ -1,24 +1,20 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.views.generic.edit import CreateView, UpdateView
 from django.db.models.loading import get_model
+from django.http.response import HttpResponseRedirect
+from django.views.generic.edit import CreateView, UpdateView
 
 from cosinnus.core.loaders.attached_objects import cosinnus_attached_object_registry as caor
-from django.http.response import HttpResponseRedirect
-'''
-Created on 11.12.2013
-
-@author: Sascha Narr
-'''
 
 
 class AttachableViewMixin(object):
     """
-        Used together with FormAttachable.
-        Extending this view will add form fields for Cosinnus attachable 
-        objects to CreateViews and updateViews. Configure which cosinnus 
-        objects may be attached to your object in 'settings.COSINNUS_ATTACHABLE_OBJECTS'.
+    Used together with FormAttachable.
+
+    Extending this view will add form fields for Cosinnus attachable objects to
+    `CreateView`s and `UpdateView`s. Configure which cosinnus objects may be
+    attached to your object in `settings.COSINNUS_ATTACHABLE_OBJECTS`.
     """
     def get_form_kwargs(self):
         kwargs = super(AttachableViewMixin, self).get_form_kwargs()
@@ -32,8 +28,8 @@ class AttachableViewMixin(object):
         for attach_model_id in attachable_objects:
             app_label, model_name = attach_model_id.split('.')
             attach_model_class = get_model(app_label, model_name)
-            query_set = attach_model_class._default_manager.filter(group=self.group)
-            querysets['attached:' + attach_model_id] = query_set
+            queryset = attach_model_class._default_manager.filter(group=self.group)
+            querysets['attached:' + attach_model_id] = queryset
 
         # pass all attachable cosinnus models to FormAttachable via kwargs
         kwargs.update({'attached_files_querysets': querysets})
@@ -48,8 +44,10 @@ class AttachableViewMixin(object):
         form.save_attachable()
         return HttpResponseRedirect(self.get_success_url())
 
+
 class CreateViewAttachable(AttachableViewMixin, CreateView):
     pass
+
 
 class UpdateViewAttachable(AttachableViewMixin, UpdateView):
     pass

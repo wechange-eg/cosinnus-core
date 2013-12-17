@@ -1,110 +1,67 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n %}
+{% load i18n cosinnus_tags %}
 
 {% block page_title %}{% trans "Groups" %}{% endblock %}
 
+{% block content_title %}
+  {% trans "Groups" %}
+  {% if user.is_superuser %}
+    <div class="btn-group pull-right">
+      <a href="{% url 'cosinnus:group-add' %}" class="btn btn-success">{% trans "Create Group" %}</a>
+    </div>
+  {% endif %}
+{% endblock content_title %}
+
 {% block content %}
-    {% if object_list %}
+  {% if rows %}
     <table class="table table-bordered table-hover">
-        <thead>
-          <tr>
-            <th>{% trans "Group name" %}</th>
+      <thead>
+        <tr>
+          <th>{% trans "Group name" %}</th>
+          {% if user.is_authenticated %}
             <th>{% trans "Joined" %}</th>
-          </tr>
-        </thead>
-        <tbody>
-        {% for group in object_list %}
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% if user.is_authenticated %}
+          {% for group, members, pendings in rows %}
             <tr>
-            {% if group in user.cosinnus_groups.all %}
+              {% if user.is_superuser or user.pk in members or group.public %}
                 <td>
-                    <a href="{% url 'cosinnus:group-detail' group=group.slug %}">{{ group.name }}</a>
+                  <a href="{% url 'cosinnus:group-detail' group=group.slug %}">{{ group.name }}</a>
                 </td>
+              {% else %}
                 <td>
+                  {{ group.name }}
                 </td>
-            {% else %}
+              {% endif %}
+
+              {% if user.pk in members %}
                 <td>
-                    {{ group.name }}
+                  <a href="{% url 'cosinnus:group-user-leave' group=group.slug %}">{% trans "Leave" %}</a>
                 </td>
+              {% elif user.pk in pendings %}
                 <td>
-                    <a href="#request-join-modal" data-group-id="{{ group.slug }}" data-group-name="{{ group.slug }}" role="button" class="join-model-button btn" data-toggle="modal">{% trans "Join" %}</a>
+                  <a href="{% url 'cosinnus:group-user-withdraw' group=group.slug %}">{% trans "Withdraw" %}</a>
                 </td>
-            {% endif %}
+              {% else %}
+                <td>
+                  <a href="{% url 'cosinnus:group-user-join' group=group.slug %}">{% trans "Join" %}</a>
+                </td>
+              {% endif %}
             </tr>
-        {% endfor %}
-        </tbody>
+          {% endfor %}
+        {% else %}
+          {% for group in object_list %}
+            <tr>
+              <td><a href="{% url 'cosinnus:group-detail' group=group.slug %}">{{ group.name }}</a></td>
+            </tr>
+          {% endfor %}
+        {% endif %}
+      </tbody>
     </table>
-
-    <!-- Modal request -->
-    <div id="request-join-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel">{% trans "Join the group" %} <span class="group-name"></span></h3>
-        </div>
-        <div class="modal-body">
-            <p>{% trans "Do you want to send a join request to the administrator(s) of this group?"%}</p>
-        </div>
-        <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Cancel" %}</button>
-            <a id="request-join" class="btn btn-primary">{% trans "Request to join" %}</a>
-        </div>
-    </div>
-
-    <!-- Modal response -->
-    <div id="request-join-response-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="request-join-response-title">{% trans "Response" %} </h3>
-        </div>
-        <div class="modal-body">
-            <p id="request-join-response-message"></p>
-        </div>
-        <div class="modal-footer">
-            <button id="response-button" class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Okay!" %} </button>
-        </div>
-    </div>
-
-    {% else %}
-        {% trans "There are no groups." %}
-    {% endif %}
-{% endblock %}
-
-{% block extrafooter %}
-{{ block.super }}
-<script type="text/javascript">
-
-// on click of join button copy the group data to the request-join button
-$(document).on("click", ".join-model-button", function () {
-    // copy the group id and name in the request-join button
-    var groupId = $(this).data("group-id");
-    var groupName = $(this).data("group-name");
-    $(".group-name").html(groupName);
-    $("#request-join").attr("data-group-id", groupId);
-    $("#request-join").attr("data-group-name", groupName);
-});
-
-// on click of the request-join data, send an AJAX request hide the modal
-$(document).on("click", "#request-join", function () {
-    var groupid = $("#request-join").attr("data-group-id");
-    var userid = "{{ user.pk }}";
-
-    // send AJAX request
-    Dajaxice.cosinnus.join_request(join_request_callback, {
-        'groupid': groupid,
-        'userid': userid
-    });
-});
-
-function join_request_callback(data) {
-    $('#request-join-modal').modal('hide')
-    $('#request-join-response-title').html(data.title);
-    $('#request-join-response-message').html(data.message);
-    if(data.success) {
-        $('#response-button').html("{% trans "Great!" %}");
-    } else {
-        $('#response-button').html("{% trans "Okay!" %}");
-    }
-    $('#request-join-response-modal').modal('show')
-}
-
-</script>
+  {% else %}
+    {% trans "There are no groups." %}
+  {% endif %}
 {% endblock %}

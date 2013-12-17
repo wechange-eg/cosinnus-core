@@ -8,13 +8,14 @@ from django import template
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import resolve, reverse
 from django.template.loader import render_to_string
+from django.utils.translation import ugettext_lazy as _
 
-from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
-from django.contrib.contenttypes.models import ContentType
-
+from cosinnus.conf import settings
 from cosinnus.core.loaders.apps import cosinnus_app_registry as car
 from cosinnus.core.loaders.attached_objects import cosinnus_attached_object_registry as caor
-from cosinnus.conf import settings
+from cosinnus.models import CosinnusGroup
+from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
+    check_ug_pending)
 
 register = template.Library()
 
@@ -37,6 +38,16 @@ def is_group_member(user, group):
     .. seealso:: func:`cosinnus.utils.permissions.check_ug_membership`
     """
     return check_ug_membership(user, group)
+
+
+@register.filter
+def is_group_pending(user, group):
+    """Template filter to check if the given user is a member of the given
+    group.
+
+    .. seealso:: func:`cosinnus.utils.permissions.check_ug_membership`
+    """
+    return check_ug_pending(user, group)
 
 
 @register.filter
@@ -63,8 +74,11 @@ def cosinnus_menu(context, template="cosinnus/topmenu.html"):
             "context. Include 'django.core.context_processors.request' in the "
             "TEMPLATE_CONTEXT_PROCESSORS.")
 
-
     request = context['request']
+    user = request.user
+    if user.is_authenticated():
+        context['groups'] = CosinnusGroup.objects.get_for_user(request.user)
+
     current_app = resolve(request.path).app_name
     if 'group' in context:
         group = context['group']
@@ -85,19 +99,14 @@ def cosinnus_menu(context, template="cosinnus/topmenu.html"):
         context.update({'app_nav': False})
     return render_to_string(template, context)
 
+
 @register.simple_tag(takes_context=True)
 def cosinnus_render_attached_objects(context, source):
+    """Renders all attached files on a given source cosinnus object. This will
+    collect and group all attached objects (`source.attached_objects`) by their
+    model group and send them to the configured renderer for that model type
+    (in each cosinnus app's `cosinnus_app.ATTACHABLE_OBJECT_RENDERERS`).
     """
-        Renders all attached files on a given source cosinnus object.
-        This will collect and group all attached files  (obj.attached_files) by 
-        their model group and send them to the configured renderer for that model type
-        (in each cosinnus app's cosinnus_app.ATTACHABLE_OBJECT_RENDERERS).
-    """
-    if not 'request' in context:
-        raise ImproperlyConfigured("Current request missing in rendering "
-            "context. Include 'django.core.context_processors.request' in the "
-            "TEMPLATE_CONTEXT_PROCESSORS.")
-
     attached_objects = source.attached_objects.all()
 
     typed_objects = defaultdict(list)
@@ -107,14 +116,16 @@ def cosinnus_render_attached_objects(context, source):
         if attobj is not None:
             typed_objects[content_model].append(attobj)
 
-    rendered_output = ""
-    for modelname, objects in typed_objects.items():
+    rendered_output = []
+    for model_name, objects in six.iteritems(typed_objects):
         # find manager object for attached object type
-        renderer = caor.attachable_object_renderers.get(modelname, None)
+        renderer = caor.attachable_object_renderers.get(model_name, None)
         if renderer:
             # pass the list to that manager and expect a rendered html string
-            rendered_output += renderer.render_attached_objects(context, objects)
+            rendered_output.append(renderer.render_attached_objects(context, objects))
         elif settings.DEBUG:
-            rendered_output += "<i>Renderer for %s not found!</i>" % modelname
+            rendered_output.append(_('<i>Renderer for %(model_name)s not found!</i>') % {
+                'model_name': model_name
+            })
 
     return rendered_output
