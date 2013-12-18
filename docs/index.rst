@@ -8,6 +8,7 @@ Contents:
     
    attachments
    permissions
+   templatetags
    ref/index
 
 
