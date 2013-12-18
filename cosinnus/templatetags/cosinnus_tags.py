@@ -119,7 +119,7 @@ def cosinnus_render_attached_objects(context, source):
     rendered_output = []
     for model_name, objects in six.iteritems(typed_objects):
         # find manager object for attached object type
-        renderer = caor.attachable_object_renderers.get(model_name, None)
+        renderer = caor.get_renderer(model_name, None)
         if renderer:
             # pass the list to that manager and expect a rendered html string
             rendered_output.append(renderer.render_attached_objects(context, objects))

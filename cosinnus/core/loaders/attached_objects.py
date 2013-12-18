@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import six
 
 from django.utils.datastructures import SortedDict
+from django.utils.importlib import import_module
 
 from cosinnus.core.loaders.registry import BaseRegistry
 from django.core.exceptions import ImproperlyConfigured
@@ -47,5 +48,17 @@ class AttachedObjectRegistry(BaseRegistry):
             self.attachable_to[model_from] = [
                 modelval for modelval in modellist if modelval in self.attachable_objects_models
             ]
+
+    def get_renderer(self, model_name):
+        renderer = self.attachable_object_renderers.get(model_name, None)
+        if isinstance(renderer, six.string_types):
+            modulename, _, klass = renderer.rpartition('.')
+            module = import_module(modulename)
+            renderer = getattr(module, klass, None)
+            if renderer:
+                self.attachable_object_renderers[model_name] = renderer
+            else:
+                del self.attachable_object_renderers[model_name]
+        return renderer
 
 cosinnus_attached_object_registry = AttachedObjectRegistry('cosinnus_app')
