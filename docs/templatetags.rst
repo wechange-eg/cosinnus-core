@@ -7,7 +7,7 @@ Template Tags Bundled With Cosinnus
 Cosinnus provides several templatetags one can use in templates.
 
 
-Autocompletion For Form Fields
+Autocompletion for form fields
 ==============================
 
 Cosinnus uses `Bootstrap 3 Typeahead`_ to provide a autocompletion list. To use
@@ -18,9 +18,9 @@ it, only a few things have to be done:
    .. sourcecode:: python
 
       def get_context_data(self, **kwargs):
-         ctx = super(MyView, self).get_context_data(**kwargs)
-         ctx['tags'] = MyModel.objects.tags()
-         return ctx
+          ctx = super(MyView, self).get_context_data(**kwargs)
+          ctx['tags'] = MyModel.objects.tags()
+          return ctx
 
 2. In the template, include load the ``cosinnus_tags`` and ``static`` templatetags:
 
@@ -30,10 +30,11 @@ it, only a few things have to be done:
       {% load static from staticfiles %}
 
 3. Next, include the typeahead JS:
-  * Make sure to include the ``{{ block.super }}`` call to not override
-    previously defined JS.
-  * Include the reference to ``bootstrap3-typeahead.min.js`` only the first
-    time
+
+   * Make sure to include the ``{{ block.super }}`` call to not override
+     previously defined JS.
+   * Include the reference to ``bootstrap3-typeahead.min.js`` only the first
+     time
    
    .. sourcecode:: html+django
 
