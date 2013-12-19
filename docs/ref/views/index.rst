@@ -9,6 +9,22 @@ views Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`attached_object` Module
+-----------------------------
+
+.. automodule:: cosinnus.views.attached_object
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`common` Module
+--------------------
+
+.. automodule:: cosinnus.views.common
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`group` Module
 -------------------
 

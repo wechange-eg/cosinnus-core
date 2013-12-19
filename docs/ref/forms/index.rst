@@ -9,8 +9,16 @@ forms Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`attached_object` Module
+-----------------------------
+
+.. automodule:: cosinnus.forms.attached_object
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`group` Module
----------------------
+-------------------
 
 .. automodule:: cosinnus.forms.group
     :members:
@@ -26,7 +34,7 @@ forms Package
     :show-inheritance:
 
 :mod:`user` Module
-----------------------------
+------------------
 
 .. automodule:: cosinnus.forms.user
     :members:

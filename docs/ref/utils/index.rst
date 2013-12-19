@@ -9,6 +9,14 @@ utils Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`compat` Module
+--------------------------------
+
+.. automodule:: cosinnus.utils.compat
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`context_processors` Module
 --------------------------------
 

@@ -9,8 +9,8 @@ templatetags Package
     :undoc-members:
     :show-inheritance:
 
-:mod:`cosinnus` Module
-----------------------
+:mod:`cosinnus_tags` Module
+---------------------------
 
 .. automodule:: cosinnus.templatetags.cosinnus_tags
     :members:
