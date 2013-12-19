@@ -32,7 +32,7 @@ class AttachableViewMixin(object):
             querysets['attached:' + attach_model_id] = queryset
 
         # pass all attachable cosinnus models to FormAttachable via kwargs
-        kwargs.update({'attached_files_querysets': querysets})
+        kwargs.update({'attached_objects_querysets': querysets})
         return kwargs
 
     def form_valid(self, form):

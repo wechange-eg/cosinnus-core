@@ -23,7 +23,7 @@ class FormAttachable(forms.ModelForm):
     `attached_objects` M2M field.
     """
     def __init__(self, *args, **kwargs):
-        attachable_objects_sets = kwargs.pop('attached_files_querysets', None)
+        attachable_objects_sets = kwargs.pop('attached_objects_querysets', {})
         super(FormAttachable, self).__init__(*args, **kwargs)
 
         preselected = defaultdict(list)
