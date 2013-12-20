@@ -129,3 +129,11 @@ def cosinnus_render_attached_objects(context, source):
             })
 
     return ''.join(rendered_output)
+
+
+@register.inclusion_tag('cosinnus/autocomplete.html')
+def cosinnus_autocomplete(field, objects):
+    return {
+        'field': field,
+        'objects': objects
+    }
