@@ -57,6 +57,7 @@ setup(
         'django-appconf>=0.6',
         'django-taggit>=0.10a1',
         'django-bootstrap3',
+        'django-bootstrap3-datetimepicker>=2.2.0',
     ],
     dependency_links=[
         'git+git://github.com/Markush2010/django-bootstrap3.git@develop#egg=django-bootstrap3'
