@@ -2,11 +2,12 @@
 from __future__ import unicode_literals
 
 import six
+import django
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.db.models import signals
+from django.db.models.signals import post_save, class_prepared
 from django.utils.encoding import python_2_unicode_compatible
 
 from cosinnus.conf import settings
@@ -145,18 +146,25 @@ def create_user_profile(sender, instance, created, **kwargs):
     upm = get_user_profile_model()
     upm.objects.get_or_create(user=instance)
 
+if django.VERSION[:2] < (1, 7):
+    def setup_user_profile_signal(sender, **kwargs):
+        name = '%s.%s' % (sender._meta.app_label, sender._meta.object_name)
+        if name == settings.AUTH_USER_MODEL:
+            post_save.connect(create_user_profile, sender=sender,
+                dispatch_uid='cosinnus_user_profile_post_save')
 
-def setup_user_profile_signal(sender, **kwargs):
-    name = '%s.%s' % (sender._meta.app_label, sender._meta.object_name)
-    if name == settings.AUTH_USER_MODEL:
-        signals.post_save.connect(create_user_profile, sender=sender)
+    try:
+        from django.contrib.auth import get_user_model
+        post_save.connect(create_user_profile, sender=get_user_model(),
+                dispatch_uid='cosinnus_user_profile_post_save')
+    except:
+        if settings.DEBUG:
+            from traceback import print_exc
+            print_exc()
 
-try:
-    from django.contrib.auth import get_user_model
-    signals.post_save.connect(create_user_profile, sender=get_user_model())
-except:
-    if settings.DEBUG:
-        from traceback import print_exc
-        print_exc()
-
-    signals.class_prepared.connect(setup_user_profile_signal)
+        class_prepared.connect(setup_user_profile_signal)
+else:
+    # Django >= 1.7 supports lazy signal registration
+    # https://github.com/django/django/commit/eb38257e51
+    post_save.connect(create_user_profile, sender=settings.AUTH_USER_MODEL,
+        dispatch_uid='cosinnus_user_profile_post_save')
