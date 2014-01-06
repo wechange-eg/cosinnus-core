@@ -82,11 +82,13 @@ class CosinnusGroupManager(models.Manager):
 
     use_for_related_fields = True
 
-    def get_query_set(self):
+    def get_queryset(self):
         return CosinnusGroupQS(self.model, using=self._db)
 
+    get_query_set = get_queryset
+
     def filter_membership_status(self, status):
-        return self.get_query_set().filter_membership_status(status)
+        return self.get_queryset().filter_membership_status(status)
 
     def get_slugs(self):
         """
@@ -158,7 +160,7 @@ class CosinnusGroupManager(models.Manager):
                 groups = cache.get_many(keys)
                 missing = [key.split('/')[-1] for key in keys if key not in groups]
                 if missing:
-                    query = self.get_query_set().filter(slug__in=missing)
+                    query = self.get_queryset().filter(slug__in=missing)
                     for group in query:
                         groups[_GROUP_CACHE_KEY % group.slug] = group
                     cache.set_many(groups, settings.COSINNUS_GROUP_CACHE_TIMEOUT)
@@ -206,11 +208,13 @@ class CosinnusGroupMembershipManager(models.Manager):
 
     use_for_related_fields = True
 
-    def get_query_set(self):
+    def get_queryset(self):
         return CosinnusGroupMembershipQS(self.model, using=self._db)
 
+    get_query_set = get_queryset
+
     def filter_membership_status(self, status):
-        return self.get_query_set().filter_membership_status(status)
+        return self.get_queryset().filter_membership_status(status)
 
     def _get_users_for_single_group(self, group_id, cache_key, status):
         uids = cache.get(cache_key % group_id)
