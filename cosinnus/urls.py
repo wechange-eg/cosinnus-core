@@ -27,6 +27,12 @@ urlpatterns += patterns('cosinnus.views',
     url(r'^profile/$', 'profile.detail_view', name='profile-detail'),
     url(r'^profile/edit/$', 'profile.update_view', name='profile-edit'),
 
+    url(r'^widgets/list/$', 'widget.widget_list', name='widget-list'),
+    url(r'^widgets/add/user/(?P<app_name>[^/]+)/(?P<widget_name>[^/]+)/$', 'widget.widget_add_user', name='widget-add-user'),
+    url(r'^widgets/add/group/(?P<group>[^/]+)/(?P<app_name>[^/]+)/(?P<widget_name>[^/]+)/$', 'widget.widget_add_group', name='widget-add-group'),
+    url(r'^widgets/(?P<id>\d+)/$', 'widget.widget_detail', name='widget-detail'),
+    url(r'^widgets/(?P<id>\d+)/delete/$', 'widget.widget_delete', name='widget-delete'),
+
     url(r'^groups/$', 'group.group_list', name='group-list'),
     url(r'^groups/add/$', 'group.group_create', name='group-add'),
     url(r'^group/(?P<group>[^/]+)/$', 'group.group_detail', name='group-detail'),
