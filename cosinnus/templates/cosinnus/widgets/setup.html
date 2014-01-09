@@ -1,0 +1,7 @@
+{% load bootstrap3 %}
+<form method="POST" action="">
+  {% csrf_token %}
+  {% bootstrap_form form layout="horizontal" %}
+  {% url 'cosinnus:group-list' as reset_link %}
+  {% buttons submit="Submit" layout='horizontal' %}{% endbuttons %}
+</form>
