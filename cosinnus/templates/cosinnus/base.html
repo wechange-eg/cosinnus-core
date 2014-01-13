@@ -31,6 +31,7 @@
       <script src="{% bootstrap_jquery_url %}"></script>
       <script src="{% bootstrap_javascript_url %}"></script>
     {% endif %}
+    <script type="text/javascript">var cosinnus_base_url = "{{ COSINNUS_BASE_URL|default:'/' }}";</script>
     <script src="{% static "js/cosinnus.js" %}"></script>
     {% block extrafooter %}{% endblock extrafooter %}
   </body>
