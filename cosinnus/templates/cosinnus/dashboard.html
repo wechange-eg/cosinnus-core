@@ -1,0 +1,32 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags %}
+{% load static from staticfiles %}
+
+{% block page_title %}{% trans "Dashboard" %}{% endblock %}
+
+{% block extrahead %}
+  <link href="{% static "css/cosinnus.dashboard.css" %}" rel="stylesheet">
+{% endblock extrahead %}
+
+{% block content_title %}{% trans "Dashboard" %}{% endblock content_title %}
+
+{% block content %}
+  <div id="dashboard" class="row dashboard">
+    {% for id in widgets %}
+      <div class="col-md-4 widget-wrap">
+        <div class="dashboard-widget" data-widget-id="{{ id }}" data-type="widget">
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block extrafooter %}
+  {{ block.super }}
+  <script src="{% static "js/cosinnus.dashboard.js" %}"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var dashboard = window.Cosinnus.dashboard.init("#dashboard", '{% url "cosinnus:index" %}');
+    });
+  </script>
+{% endblock %}

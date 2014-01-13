@@ -92,3 +92,32 @@ def widget_delete(request, id):
     else:
         c = RequestContext(request)
         return render_to_response('cosinnus/widgets/delete.html', {}, c)
+
+
+class DashboardMixin(object):
+    template_name = 'cosinnus/dashboard.html'
+
+    def get_context_data(self, **kwargs):
+        filter = self.get_filter()
+        widgets = WidgetConfig.objects.filter(**filter).values_list('id', flat=True).all()
+        return super(DashboardMixin, self).get_context_data(widgets=widgets, **kwargs)
+
+
+class GroupDashboard(RequireReadMixin, DashboardMixin, TemplateView):
+
+    def get_filter(self):
+        return {'group_id': self.group.pk}
+
+group_dashboard = GroupDashboard.as_view()
+
+
+class UserDashboard(DashboardMixin, TemplateView):
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(UserDashboard, self).dispatch(request, *args, **kwargs)
+
+    def get_filter(self):
+        return {'user_id': self.request.user.pk}
+
+user_dashboard = UserDashboard.as_view()
