@@ -10,13 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     {% if SETTINGS.DEBUG %}
       <link href="{% static "css/vendor/bootstrap.min.css" %}" rel="stylesheet">
-      <script src="{% static "js/vendor/jquery-1.10.2.min.js" %}"></script>
-      <script src="{% static "js/vendor/bootstrap.min.js" %}"></script>
     {% else %}
       <link href="{% bootstrap_css_url %}" rel="stylesheet">
-      <script src="{% bootstrap_jquery_url %}"></script>
-      <script src="{% bootstrap_javascript_url %}"></script>
     {% endif %}
+    <link href="{% static "css/cosinnus.css" %}" rel="stylesheet">
     {% block extrahead %}{% endblock extrahead %}
   </head>
   <body>
@@ -27,6 +24,14 @@
       {% bootstrap_messages %}
       {% block content %}{% endblock content %}
     </div>
+    {% if SETTINGS.DEBUG %}
+      <script src="{% static "js/vendor/jquery-1.10.2.min.js" %}"></script>
+      <script src="{% static "js/vendor/bootstrap.min.js" %}"></script>
+    {% else %}
+      <script src="{% bootstrap_jquery_url %}"></script>
+      <script src="{% bootstrap_javascript_url %}"></script>
+    {% endif %}
+    <script src="{% static "js/cosinnus.js" %}"></script>
     {% block extrafooter %}{% endblock extrafooter %}
   </body>
 </html>
