@@ -7,14 +7,17 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
+from django.utils.decorators import method_decorator
+from django.utils.translation import ugettext_lazy as _
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.generic import TemplateView
 
 from cosinnus.core.decorators.views import require_admin_access_decorator
 from cosinnus.core.loaders.widgets import cosinnus_widget_registry as cwr
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.http import JSONResponse
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
+from cosinnus.views.mixins.group import RequireReadMixin
 
 
 def widget_list(request):
@@ -36,7 +39,10 @@ def widget_add_user(request, app_name, widget_name):
             return JSONResponse({'id': widget.id})
     else:
         form = form_class()
-    d = {'form': form}
+    d = {
+        'form': form,
+        'submit_label': _('Add widget'),
+    }
     c = RequestContext(request)
     return render_to_response('cosinnus/widgets/setup.html', d, c)
 
@@ -53,7 +59,10 @@ def widget_add_group(request, group, app_name, widget_name):
             return JSONResponse({'id': widget.id})
     else:
         form = form_class()
-    d = {'form': form}
+    d = {
+        'form': form,
+        'submit_label': _('Add widget'),
+    }
     c = RequestContext(request)
     return render_to_response('cosinnus/widgets/setup.html', d, c)
 
@@ -71,12 +80,15 @@ def widget_detail(request, id):
     return JSONResponse(data)
 
 
-@csrf_exempt
-@require_POST
+@ensure_csrf_cookie
 def widget_delete(request, id):
     wc = get_object_or_404(WidgetConfig, id=int(id))
     if wc.group and not check_ug_admin(request.user, wc.group) or \
             wc.user and wc.user_id != request.user.pk:
         return HttpResponseForbidden('Access denied!')
-    wc.delete()
-    return HttpResponse('Widget removed')
+    if request.method == "POST":
+        wc.delete()
+        return HttpResponse('Widget removed')
+    else:
+        c = RequestContext(request)
+        return render_to_response('cosinnus/widgets/delete.html', {}, c)
