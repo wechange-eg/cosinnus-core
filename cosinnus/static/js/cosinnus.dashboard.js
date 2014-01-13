@@ -1,19 +1,17 @@
 (function($, cosinnus){
     cosinnus.dashboard = {
-        init: function(holder, base_url) {
+        init: function(holder) {
             var that = this;
             this.holder = holder && $(holder) || $('#cosinnus-dashboard');
-            this.base_url = base_url || '/';
             var widget_tags = $('div[data-type=widget]', this.holder);
             $.each(widget_tags, function() {
-                var id = $(this).data('widget-id');
-                that.load(id, $(this));
+                that.load($(this));
             });
             return this;
         },
         list: function() {
             var that = this;
-            $.ajax(this.base_url + "widgets/list/").done(function(data){
+            $.ajax(Cosinnus.base_url + "widgets/list/").done(function(data){
                 var list = $('<ul></ul>');
                 $.each(data, function(k) {
                     console.log(k);
@@ -30,11 +28,23 @@
                 that.holder.html(list);
             });
         },
-        load: function(widget, holder) {
+        load: function(holder) {
             var that = this;
-            $.ajax(this.base_url + "widget/" + widget + "/").done(function(data){
-                holder.html(data);
-            });
+            var id = holder.data('widget-id');
+            $.ajax({url: Cosinnus.base_url + "widget/" + id + "/"}).done(
+                function(data) {
+                    holder.html(data);
+                }).fail(
+                function() {
+                    var error = $('<div class="alert alert-danger">An error occurred while performing the request. </div>');
+                    var reload = $('<a href="#" class="alert-link">Reload</a>').bind("click", {
+                        holder: holder
+                    }, function(event) {
+                        Cosinnus.dashboard.load(event.data.holder);
+                    });
+                    error.append(reload);
+                    holder.html(error);
+                });
         },
     };
 }(jQuery, window.Cosinnus));
