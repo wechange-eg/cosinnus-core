@@ -31,7 +31,7 @@
         load: function(holder) {
             var that = this;
             var id = holder.data('widget-id');
-            $.ajax({url: Cosinnus.base_url + "widget/" + id + "/"}).done(
+            $.ajax(Cosinnus.base_url + "widget/" + id + "/").done(
                 function(data) {
                     holder.html(data);
                 }).fail(
