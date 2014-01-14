@@ -69,7 +69,8 @@ def widget_add_group(request, group, app_name, widget_name):
 
 def widget_detail(request, id):
     wc = get_object_or_404(WidgetConfig, id=int(id))
-    if wc.group and not check_ug_membership(request.user, wc.group) or \
+    if wc.group and not (check_ug_membership(request.user, wc.group) or
+                         wc.group.public) or \
             wc.user and wc.user_id != request.user.pk:
         return HttpResponseForbidden('Access denied!')
     widget_class = cwr.get(wc.app_name, wc.widget_name)
