@@ -12,7 +12,12 @@ from cosinnus.utils.compat import atomic
 
 class DashboardWidget(object):
 
+    app_name = None
     form_class = forms.Form
+    group_model_attr = 'group'
+    model = None
+    user_model_attr = 'owner'
+    widget_name = None
 
     def __init__(self, request, config_instance):
         self.request = request
@@ -27,13 +32,33 @@ class DashboardWidget(object):
 
     @classmethod
     def get_app_name(cls):
-        app_name = getattr(cls, 'app_name', None)
-        if not app_name:
+        if not cls.app_name:
             raise ImproperlyConfigured('%s must defined an app_name' % cls.__name__)
-        return app_name
+        return cls.app_name
 
     def get_data(self):
         raise NotImplementedError("Subclasses need to implement this method.")
+
+    def get_queryset(self):
+        if not self.model:
+            raise ImproperlyConfigured('%s must define a model', self.__class__.__name__)
+        return self.model._default_manager.filter(**self.get_queryset_filter())
+
+    def get_queryset_filter(self, **kwargs):
+        if self.config.group:
+            return self.get_queryset_group_filter(**kwargs)
+        else:
+            return self.get_queryset_user_filter(**kwargs)
+
+    def get_queryset_group_filter(self, **kwargs):
+        """Defines filter arguments if the widget is used on a group dashboard"""
+        kwargs.update({self.group_model_attr: self.config.group})
+        return kwargs
+
+    def get_queryset_user_filter(self, **kwargs):
+        """Defines filter arguments if the widget is used on a user dashboard"""
+        kwargs.update({self.user_model_attr: self.config.user})
+        return kwargs
 
     @classmethod
     def get_setup_form_class(cls):
@@ -41,10 +66,9 @@ class DashboardWidget(object):
 
     @classmethod
     def get_widget_name(cls):
-        widget_name = getattr(cls, 'widget_name', None)
-        if not widget_name:
+        if not cls.widget_name:
             raise ImproperlyConfigured('%s must defined a widget_name' % cls.__name__)
-        return widget_name
+        return cls.widget_name
 
     @property
     def id(self):
