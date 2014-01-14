@@ -1,7 +1,3 @@
-#dashboard .dashboard-widget {
-    border: 1px solid #ddd;
-    padding: 0 15px 0 15px;
-}
-#dashboard .widget-wrap {
-    margin-bottom: 30px;
+.dashboard [data-type=widget] {
+    text-transform: capitalize;
 }

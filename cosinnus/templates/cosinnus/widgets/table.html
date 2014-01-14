@@ -1,19 +1,21 @@
-<h3>{{ title }}</h3>
-{% if rows %}
-  <table class="table table-striped table-hover table-condensed">
-    <tr>
-      {% for col in titles %}
-        <th>{{ col }}</th>
-      {% endfor %}
-    </tr>
-    {% for row in rows %}
+{% extends "cosinnus/widgets/widget.html" %}
+{% block content %}
+  {% if rows %}
+    <table class="table table-striped table-hover table-condensed">
       <tr>
-        {% for col in row %}
-          <td>{{ col }}</td>
+        {% for col in titles %}
+          <th>{{ col }}</th>
         {% endfor %}
       </tr>
-    {% endfor %}
-  </table>
-{% else %}
-  {{ no_data }}
-{% endif %}
+      {% for row in rows %}
+        <tr>
+          {% for col in row %}
+            <td>{{ col }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    {{ no_data }}
+  {% endif %}
+{% endblock %}

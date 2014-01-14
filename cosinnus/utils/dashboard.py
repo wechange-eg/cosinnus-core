@@ -55,3 +55,7 @@ class DashboardWidget(object):
             self.config.items.all().delete()
             for k, v in six.iteritems(items):
                 self.config[k] = v
+
+    @property
+    def title(self):
+        return ''

@@ -76,8 +76,11 @@ def widget_detail(request, id):
     widget = widget_class(request, wc)
     data = widget.get_data()
     if isinstance(data, six.string_types):
-        return HttpResponse(data)
-    return JSONResponse(data)
+        resp = HttpResponse(data)
+    else:
+        resp = JSONResponse(data)
+    resp['X-Cosinnus-Widget-Title'] = widget.title
+    return resp
 
 
 @ensure_csrf_cookie

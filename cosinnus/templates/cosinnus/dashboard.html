@@ -13,8 +13,18 @@
 {% block content %}
   <div id="dashboard" class="row dashboard">
     {% for id in widgets %}
-      <div class="col-md-4 widget-wrap">
-        <div class="dashboard-widget" data-widget-id="{{ id }}" data-type="widget">
+      <div class="col-md-4" data-widget-id="{{ id }}" data-type="widget">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <span data-target="widget-title">&nbsp;</span>
+              <div class="btn-group pull-right">
+                <button class="btn btn-xs dropdown-toggle" type="button" data-toggle="dropdown"> <span class="caret"></span></button>
+                <ul class="dropdown-menu" data-target="widget-menu"></ul>
+              </div>
+            </h3>
+          </div>
+          <div class="panel-body" data-target="widget-content"></div>
         </div>
       </div>
     {% endfor %}
