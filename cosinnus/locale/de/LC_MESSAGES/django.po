@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-15 16:22+0100\n"
+"POT-Creation-Date: 2014-01-15 16:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -129,7 +129,7 @@ msgid "Edit"
 msgstr "Bearbeiten"
 
 #: templates/cosinnus/group_detail.html:15
-#: templates/cosinnus/group_export.html:14
+#: templates/cosinnus/group_export.html:16
 msgctxt "the verb"
 msgid "Export"
 msgstr "Exportieren"
@@ -176,15 +176,12 @@ msgid "Add"
 msgstr "Hinzufügen"
 
 #: templates/cosinnus/group_export.html:5
+#: templates/cosinnus/group_export.html:9
 #, python-format
 msgid "Export Group “%(group_name)s”"
 msgstr "Exportiere Gruppe “%(group_name)s”"
 
-#: templates/cosinnus/group_export.html:9
-msgid "Export apps"
-msgstr "Exportiere Apps"
-
-#: templates/cosinnus/group_export.html:14
+#: templates/cosinnus/group_export.html:16
 #, python-format
 msgid "Export %(app_label)s"
 msgstr "Exportiere %(app_label)s"
@@ -398,9 +395,6 @@ msgstr ""
 #, python-format
 msgid "Remove user from group “%(group_name)s”?"
 msgstr "Nutzer aus der Gruppe “%(group_name)s” entfernen?"
-
-#~ msgid "Export"
-#~ msgstr "Export"
 
 #~ msgid "Join the group"
 #~ msgstr "Dieser Gruppe beitreten"

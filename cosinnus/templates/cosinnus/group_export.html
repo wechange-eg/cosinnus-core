@@ -5,9 +5,11 @@
   {% blocktrans with group_name=group.name %}Export Group “{{ group_name }}”{% endblocktrans %}
 {% endblock page_title%}
 
-{% block content %}
-<h2>{% trans "Export apps" %}</h2>
+{% block content_title %}
+  {% blocktrans with group_name=group.name %}Export Group “{{ group_name }}”{% endblocktrans %}
+{% endblock content_title%}
 
+{% block content %}
 {% for app in export_apps %}
 <div class="row">
     <div class="col-md-2">{{ app.label }}</div>
