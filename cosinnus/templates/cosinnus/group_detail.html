@@ -12,6 +12,7 @@
   {% if user.is_superuser or user|is_group_admin:object %}
     <div class="btn-group pull-right">
       <a href="{% url 'cosinnus:group-edit' group=object.slug %}" class="btn btn-primary">{% trans "Edit" %}</a>
+      <a href="{% url 'cosinnus:group-export' group=object.slug %}" class="btn btn-primary">{% trans "Export" %}</a>
       {% if user.is_superuser %}
         <a href="{% url 'cosinnus:group-delete' group=object.slug %}" class="btn btn-primary">{% trans "Delete" %}</a>
       {% endif %}
