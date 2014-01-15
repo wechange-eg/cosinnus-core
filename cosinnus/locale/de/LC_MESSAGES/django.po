@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-15 13:53+0100\n"
+"POT-Creation-Date: 2014-01-15 16:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -129,8 +129,10 @@ msgid "Edit"
 msgstr "Bearbeiten"
 
 #: templates/cosinnus/group_detail.html:15
+#: templates/cosinnus/group_export.html:14
+msgctxt "the verb"
 msgid "Export"
-msgstr "Export"
+msgstr "Exportieren"
 
 #: templates/cosinnus/group_detail.html:17
 #: templates/cosinnus/group_detail.html:48
@@ -186,11 +188,6 @@ msgstr "Exportiere Apps"
 #, python-format
 msgid "Export %(app_label)s"
 msgstr "Exportiere %(app_label)s"
-
-#: templates/cosinnus/group_export.html:14
-msgctxt "the verb"
-msgid "Export"
-msgstr "Exportieren"
 
 #: templates/cosinnus/group_form.html:6 templates/cosinnus/group_form.html:14
 #, python-format
@@ -327,6 +324,10 @@ msgstr ""
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>%(model_name)s konnte nicht gerendert werden!</i>"
 
+#: views/export.py:35
+msgid "No model given to export data from."
+msgstr "Kein Modell zum Exportieren der Daten angegeben."
+
 #: views/group.py:46 views/user.py:38
 msgid "Create"
 msgstr "Erstellen"
@@ -397,6 +398,9 @@ msgstr ""
 #, python-format
 msgid "Remove user from group “%(group_name)s”?"
 msgstr "Nutzer aus der Gruppe “%(group_name)s” entfernen?"
+
+#~ msgid "Export"
+#~ msgstr "Export"
 
 #~ msgid "Join the group"
 #~ msgstr "Dieser Gruppe beitreten"
