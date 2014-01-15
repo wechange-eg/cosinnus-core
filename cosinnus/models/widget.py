@@ -63,7 +63,7 @@ class WidgetConfigItem(models.Model):
 
     config = models.ForeignKey(WidgetConfig, on_delete=models.CASCADE, related_name='items')
     config_key = models.CharField(_('key'), max_length=20, db_index=True)
-    config_value = models.TextField(_('value'))  # VARCHAR and TEXT don't mattern in PostgreSQL
+    config_value = models.TextField(_('value'), default='')  # VARCHAR and TEXT don't mattern in PostgreSQL
 
     class Meta:
         app_label = 'cosinnus'
