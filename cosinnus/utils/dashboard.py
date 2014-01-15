@@ -10,10 +10,31 @@ from django.utils.decorators import classonlymethod
 from cosinnus.utils.compat import atomic
 
 
+class DashboardWidgetForm(forms.Form):
+
+    def clean(self):
+        cleaned_data = super(DashboardWidgetForm, self).clean()
+        for key, value in six.iteritems(cleaned_data):
+            if value is None:
+                # We need to find a default value: The approach we are using
+                # here is to first take the initial value from the form and if
+                # this is not defined, take the initial value directly from the
+                # field. If the field has no initial value, fall back to an
+                # empty string
+                if key in self.initial:
+                    value = self.initial[key]
+                elif self.fields[key].initial:
+                    value = self.fields[key].initial
+            if value is None:
+                value = ''
+            cleaned_data[key] = value
+        return cleaned_data
+
+
 class DashboardWidget(object):
 
     app_name = None
-    form_class = forms.Form
+    form_class = DashboardWidgetForm
     group_model_attr = 'group'
     model = None
     user_model_attr = 'owner'
