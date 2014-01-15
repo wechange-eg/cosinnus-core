@@ -62,7 +62,7 @@
   <script src="{% static "js/cosinnus.dashboard.js" %}"></script>
   <script type="text/javascript">
     $(document).ready(function(){
-      var dashboard = window.Cosinnus.dashboard.init("#dashboard", '{% url "cosinnus:index" %}');
+      var dashboard = window.Cosinnus.dashboard.init("#dashboard", "{{ group.slug|escapejs }}");
     });
   </script>
 {% endblock %}

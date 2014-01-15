@@ -1,36 +1,104 @@
 (function($, cosinnus){
     cosinnus.dashboard = {
-        init: function(holder) {
+        init: function(holder, group) {
             var that = this;
             this.holder = holder && $(holder) || $('#cosinnus-dashboard');
+            this.group = group || false;
             var widget_tags = $('[data-type=widget]', this.holder);
             $.each(widget_tags, function() {
                 holder = $(this);
-                $('[data-type=refresh]', holder).bind("click", {
-                    holder: $(this)
-                }, function(event) {
-                    event.preventDefault();
-                    Cosinnus.dashboard.load(event.data.holder);
-                });
-                $('[data-type=edit]', holder).bind("click", {
-                    holder: $(this)
-                }, function(event) {
-                    event.preventDefault();
-                    Cosinnus.dashboard.edit(event.data.holder);
-                });
-                $('[data-type=delete]', holder).bind("click", {
-                    holder: $(this)
-                }, function(event) {
-                    event.preventDefault();
-                    Cosinnus.dashboard.delete(event.data.holder);
-                });
+                that.bind_menu(holder);
                 that.load(holder);
+            });
+            var add_widget = $('[data-type=widget-add]', this.holder);
+            $('[data-target=widget-add-button]', add_widget).bind("click", {
+                holder: $(add_widget)
+            }, function(event) {
+                event.preventDefault();
+                Cosinnus.dashboard.add_empty(event.data.holder);
             });
             return this;
         },
+        add: function(holder, app, widget, data) {
+            var that = this;
+            var url = Cosinnus.base_url + 'widgets/add/';
+            if (that.group === false) {
+                url = url + "user/";
+            } else {
+                url = url + "group/" + Cosinnus.dashboard.group + "/";
+            }
+            url = url + app + "/" + widget + "/";
+            if (data === undefined) {
+                data = {};
+            }
+            $.post(url, data, function(data, textStatus, jqXHR) {
+                if (jqXHR.getResponseHeader('Content-Type') === "application/json") {
+                    var id = data['id'];
+                    holder.attr('data-widget-id', id).attr('data-type', 'widget');
+                    Cosinnus.dashboard.bind_menu(holder);
+                    Cosinnus.dashboard.load(holder);
+                } else {
+                    content = $(data);
+                    var form = $('[type=submit]', content).parents('form');
+                    form.submit(function(event) {
+                        event.preventDefault();
+                        Cosinnus.dashboard.add(holder, app, widget, form.serialize());
+                    });
+                    $('[data-target=widget-content]', holder).html(content);
+                }
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                $('[data-target=widget-content]', holder).html('<div class="alert alert-danger">An error occurred while adding the widget.</div>');
+            });
+        },
+        add_empty: function(holder) {
+            var that = this;
+            $.ajax(Cosinnus.base_url + "widgets/list/").done(function(data, textStatus, jqXHR) {
+                var new_holder = $('[data-type=widget-spare]', that.holder).clone().attr('data-type', 'widget-new');
+                var list = $('<ul></ul>');
+                $.each(data, function(k) {
+                    var app = $('<li></li>').append(k);
+                    var widgets = $('<ul></ul>');
+                    $.each(this, function(i, v) {
+                        var widget = $('<a href="#"></a>').append(v).bind("click", {
+                            holder: new_holder,
+                            app: k,
+                            widget: v
+                        }, function(event) {
+                            event.preventDefault();
+                            Cosinnus.dashboard.add(event.data.holder, event.data.app, event.data.widget);
+                        });
+                        widgets.append($('<li></li>').append(widget));
+                    });
+                    list.append(app.append(widgets));
+                });
+                $('[data-target=widget-content]', new_holder).html(list);
+                $('[data-target=widget-title]', new_holder).html("Select a widget");
+                new_holder.insertBefore(holder);
+            });
+        },
+        bind_menu: function(holder) {
+            $('[data-type=refresh]', holder).bind("click", {
+                holder: holder
+            }, function(event) {
+                event.preventDefault();
+                Cosinnus.dashboard.load(event.data.holder);
+            });
+            $('[data-type=edit]', holder).bind("click", {
+                holder: holder
+            }, function(event) {
+                event.preventDefault();
+                Cosinnus.dashboard.edit(event.data.holder);
+            });
+            $('[data-type=delete]', holder).bind("click", {
+                holder: holder
+            }, function(event) {
+                event.preventDefault();
+                Cosinnus.dashboard.delete(event.data.holder);
+            });
+        },
         delete: function(holder) {
             var that = this;
-            var id = holder.data('widget-id');
+            var id = holder.attr('data-widget-id');
             $.post(Cosinnus.base_url + "widget/" + id + "/delete/", function(data) {
                 holder.remove();
             }).fail(function(jqXHR, textStatus, errorThrown) {
@@ -40,28 +108,9 @@
         edit: function(holder) {
 
         },
-        list: function() {
-            var that = this;
-            $.ajax(Cosinnus.base_url + "widgets/list/").done(function(data){
-                var list = $('<ul></ul>');
-                $.each(data, function(k) {
-                    console.log(k);
-                    var app = $('<li></li>').append(k);
-                    var widgets = $('<ul></ul>');
-                    $.each(this, function(i, v) {
-                        console.log(v);
-                        var widget = $('<li></li>').append(v);
-                        widgets.append(widget);
-                    });
-                    app.append(widgets);
-                    list.append(app);
-                });
-                that.holder.html(list);
-            });
-        },
         load: function(holder) {
             var that = this;
-            var id = holder.data('widget-id');
+            var id = holder.attr('data-widget-id');
             $.ajax(Cosinnus.base_url + "widget/" + id + "/").done(function(data, textStatus, jqXHR) {
                 $('[data-target=widget-content]', holder).html(data);
                 $('[data-target=widget-title]', holder).html(jqXHR.getResponseHeader('X-Cosinnus-Widget-Title'));
