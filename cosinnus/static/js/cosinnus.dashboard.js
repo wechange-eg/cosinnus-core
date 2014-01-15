@@ -3,9 +3,28 @@
         init: function(holder) {
             var that = this;
             this.holder = holder && $(holder) || $('#cosinnus-dashboard');
-            var widget_tags = $('div[data-type=widget]', this.holder);
+            var widget_tags = $('[data-type=widget]', this.holder);
             $.each(widget_tags, function() {
-                that.load($(this));
+                holder = $(this);
+                $('[data-type=refresh]', holder).bind("click", {
+                    holder: $(this)
+                }, function(event) {
+                    event.preventDefault();
+                    Cosinnus.dashboard.load(event.data.holder);
+                });
+                $('[data-type=edit]', holder).bind("click", {
+                    holder: $(this)
+                }, function(event) {
+                    event.preventDefault();
+                    Cosinnus.dashboard.edit(event.data.holder);
+                });
+                $('[data-type=delete]', holder).bind("click", {
+                    holder: $(this)
+                }, function(event) {
+                    event.preventDefault();
+                    Cosinnus.dashboard.delete(event.data.holder);
+                });
+                that.load(holder);
             });
             return this;
         },
@@ -37,47 +56,20 @@
         load: function(holder) {
             var that = this;
             var id = holder.data('widget-id');
-            $.ajax(Cosinnus.base_url + "widget/" + id + "/").done(
-                function(data, textStatus, jqXHR) {
-                    $('[data-target=widget-content]', holder).html(data);
-                    $('[data-target=widget-title]', holder).html(jqXHR.getResponseHeader('X-Cosinnus-Widget-Title'));
-            }).fail(
-                function(jqXHR, textStatus, errorThrown) {
-                    var error = $('<div class="alert alert-danger">An error occurred while loading the widget. </div>');
-                    var reload = $('<a href="#" class="alert-link">Reload</a>').bind("click", {
-                        holder: holder
-                    }, function(event) {
-                        event.preventDefault();
-                        Cosinnus.dashboard.load(event.data.holder);
-                    });
-                    error.append(reload);
-                    $('[data-target=widget-content]', holder).html(error);
-                    $('[data-target=widget-title]', holder).html(textStatus);
-            }).always(
-                function() {
-                    var menu = $('[data-target=widget-menu]', holder).empty();
-                    var li = $('<li></li>');
-                    var link = $('<a href="#">Edit</a>').bind("click", {
-                            holder: holder
-                        }, function(event) {
-                            event.preventDefault();
-                            Cosinnus.dashboard.edit(event.data.holder);
-                        });
-                    menu.append(li.clone().append(link));
-                    link = $('<a href="#">Delete</a>').bind("click", {
-                        holder: holder
-                    }, function(event) {
-                        event.preventDefault();
-                        Cosinnus.dashboard.delete(event.data.holder);
-                    });
-                    menu.append(li.clone().append(link));
-                    link = $('<a href="#">Reload</a>').bind("click", {
-                        holder: holder
-                    }, function(event) {
-                        event.preventDefault();
-                        Cosinnus.dashboard.load(event.data.holder);
-                    });
-                    menu.append(li.clone().append(link));
+            $.ajax(Cosinnus.base_url + "widget/" + id + "/").done(function(data, textStatus, jqXHR) {
+                $('[data-target=widget-content]', holder).html(data);
+                $('[data-target=widget-title]', holder).html(jqXHR.getResponseHeader('X-Cosinnus-Widget-Title'));
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                var error = $('<div class="alert alert-danger">An error occurred while loading the widget. </div>');
+                var reload = $('<a href="#" class="alert-link">Reload</a>').bind("click", {
+                    holder: holder
+                }, function(event) {
+                    event.preventDefault();
+                    Cosinnus.dashboard.load(event.data.holder);
+                });
+                error.append(reload);
+                $('[data-target=widget-content]', holder).html(error);
+                $('[data-target=widget-title]', holder).html(textStatus);
             });
         },
     };
