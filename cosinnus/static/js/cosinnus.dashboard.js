@@ -29,7 +29,13 @@
             return this;
         },
         delete: function(holder) {
-
+            var that = this;
+            var id = holder.data('widget-id');
+            $.post(Cosinnus.base_url + "widget/" + id + "/delete/", function(data) {
+                holder.remove();
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                $('[data-target=widget-content]', holder).html('<div class="alert alert-danger">An error occurred while removing the widget.</div>');
+            });
         },
         edit: function(holder) {
 
