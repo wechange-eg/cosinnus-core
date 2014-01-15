@@ -11,7 +11,7 @@
 {% for app in export_apps %}
 <div class="row">
     <div class="col-md-2">{{ app.label }}</div>
-    <div class="col-md-2"><a href="{{ app.export_url }}" title="{% blocktrans with app_label=app.label %}Export {{ app_label }}{% endblocktrans %}" class="btn btn-default"><span class="glyphicon glyphicon-export"></span> {% trans "Export" %}</a></div>
+    <div class="col-md-2"><a href="{{ app.export_url }}" title="{% blocktrans with app_label=app.label %}Export {{ app_label }}{% endblocktrans %}" class="btn btn-default"><span class="glyphicon glyphicon-export"></span> {% trans "Export" context "the verb" %}</a></div>
 </div>
 {% endfor %}
 {% endblock content %}
