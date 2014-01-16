@@ -19,10 +19,14 @@
             });
             return this;
         },
-        add: function(holder, app, widget, data) {
+        add: function(holder, args) {
             var that = this;
+            args = args || {};
+            var app = args.app;
+            var widget = args.widget;
+            var data = args.data;
             var url = Cosinnus.base_url + 'widgets/add/';
-            if (that.group === false) {
+            if (Cosinnus.dashboard.group === false) {
                 url = url + "user/";
             } else {
                 url = url + "group/" + Cosinnus.dashboard.group + "/";
@@ -38,13 +42,10 @@
                     Cosinnus.dashboard.bind_menu(holder);
                     Cosinnus.dashboard.load(holder);
                 } else {
-                    content = $(data);
-                    var form = $('[type=submit]', content).parents('form');
-                    form.submit(function(event) {
-                        event.preventDefault();
-                        Cosinnus.dashboard.add(holder, app, widget, form.serialize());
+                    Cosinnus.dashboard.show_settings(holder, data, Cosinnus.dashboard.add, {
+                        app: app,
+                        widget: widget
                     });
-                    $('[data-target=widget-content]', holder).html(content);
                 }
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 $('[data-target=widget-content]', holder).html('<div class="alert alert-danger">An error occurred while adding the widget.</div>');
@@ -65,7 +66,10 @@
                             widget: v
                         }, function(event) {
                             event.preventDefault();
-                            Cosinnus.dashboard.add(event.data.holder, event.data.app, event.data.widget);
+                            Cosinnus.dashboard.add(event.data.holder, {
+                                app: event.data.app,
+                                widget: event.data.widget
+                            });
                         });
                         widgets.append($('<li></li>').append(widget));
                     });
@@ -73,7 +77,8 @@
                 });
                 $('[data-target=widget-content]', new_holder).html(list);
                 $('[data-target=widget-title]', new_holder).html("Select a widget");
-                new_holder.insertBefore(holder);
+                new_holder.hide().insertBefore(holder).fadeIn("slow");
+                // new_holder.insertBefore(holder);
             });
         },
         bind_menu: function(holder) {
@@ -100,13 +105,30 @@
             var that = this;
             var id = holder.attr('data-widget-id');
             $.post(Cosinnus.base_url + "widget/" + id + "/delete/", function(data) {
-                holder.remove();
+                holder.fadeOut("slow", function() {
+                    holder.remove();
+                });
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 $('[data-target=widget-content]', holder).html('<div class="alert alert-danger">An error occurred while removing the widget.</div>');
             });
         },
-        edit: function(holder) {
-
+        edit: function(holder, args) {
+            var that = this;
+            args = args || {};
+            var id = holder.attr('data-widget-id');
+            var settings = {};
+            if (args.data !== undefined) {
+                args['type'] = "POST";
+            }
+            $.ajax(Cosinnus.base_url + "widget/" + id + "/edit/", args).done(function(data, textStatus, jqXHR) {
+                if (jqXHR.getResponseHeader('Content-Type') === "application/json") {
+                    Cosinnus.dashboard.load(holder);
+                } else {
+                    Cosinnus.dashboard.show_settings(holder, data, Cosinnus.dashboard.edit);
+                }
+            }).fail(function(jqXHR, textStatus, errorThrown) {
+                $('[data-target=widget-content]', holder).html('<div class="alert alert-danger">An error occurred while configuring the widget.</div>');
+            });
         },
         load: function(holder) {
             var that = this;
@@ -126,6 +148,17 @@
                 $('[data-target=widget-content]', holder).html(error);
                 $('[data-target=widget-title]', holder).html(textStatus);
             });
+        },
+        show_settings: function(holder, data, submit_callback, submit_data) {
+            var content = $(data);
+            var form = $('[type=submit]', content).parents('form');
+            form.submit(function(event) {
+                event.preventDefault();
+                submit_data = submit_data || {};
+                submit_data.data = form.serialize();
+                submit_callback(holder, submit_data);
+            });
+            $('[data-target=widget-content]', holder).html(content);
         },
     };
 }(jQuery, window.Cosinnus));

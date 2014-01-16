@@ -98,6 +98,30 @@ def widget_delete(request, id):
         return render_to_response('cosinnus/widgets/delete.html', {}, c)
 
 
+@ensure_csrf_cookie
+def widget_edit(request, id):
+    wc = get_object_or_404(WidgetConfig, id=int(id))
+    if wc.group and not check_ug_admin(request.user, wc.group) or \
+            wc.user and wc.user_id != request.user.pk:
+        return HttpResponseForbidden('Access denied!')
+    widget_class = cwr.get(wc.app_name, wc.widget_name)
+    form_class = widget_class.get_setup_form_class()
+    widget = widget_class(request, wc)
+    if request.method == "POST":
+        form = form_class(request.POST)
+        if form.is_valid():
+            widget.save_config(form.cleaned_data)
+            return JSONResponse({'id': widget.id})
+    else:
+        form = form_class(initial=dict(widget.config))
+    d = {
+        'form': form,
+        'submit_label': _('Change'),
+    }
+    c = RequestContext(request)
+    return render_to_response('cosinnus/widgets/setup.html', d, c)
+
+
 class DashboardMixin(object):
     template_name = 'cosinnus/dashboard.html'
 

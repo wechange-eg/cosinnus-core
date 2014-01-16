@@ -33,6 +33,7 @@ urlpatterns += patterns('cosinnus.views',
     url(r'^widgets/add/group/(?P<group>[^/]+)/(?P<app_name>[^/]+)/(?P<widget_name>[^/]+)/$', 'widget.widget_add_group', name='widget-add-group'),
     url(r'^widget/(?P<id>\d+)/$', 'widget.widget_detail', name='widget-detail'),
     url(r'^widget/(?P<id>\d+)/delete/$', 'widget.widget_delete', name='widget-delete'),
+    url(r'^widget/(?P<id>\d+)/edit/$', 'widget.widget_edit', name='widget-edit'),
 
     url(r'^groups/$', 'group.group_list', name='group-list'),
     url(r'^groups/add/$', 'group.group_create', name='group-add'),
