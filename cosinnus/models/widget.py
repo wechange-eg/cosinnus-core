@@ -57,6 +57,10 @@ class WidgetConfig(models.Model):
         except WidgetConfigItem.DoesNotExist:
             raise KeyError('No config option for %s found' % key)
 
+    def __iter__(self):
+        for item in self.items.values_list('config_key', 'config_value'):
+            yield item
+
 
 @python_2_unicode_compatible
 class WidgetConfigItem(models.Model):
