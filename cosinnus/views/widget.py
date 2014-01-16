@@ -27,6 +27,7 @@ def widget_list(request):
     return JSONResponse(data)
 
 
+@ensure_csrf_cookie
 @login_required
 def widget_add_user(request, app_name, widget_name):
     widget_class = cwr.get(app_name, widget_name)
@@ -47,6 +48,7 @@ def widget_add_user(request, app_name, widget_name):
     return render_to_response('cosinnus/widgets/setup.html', d, c)
 
 
+@ensure_csrf_cookie
 @require_admin_access_decorator()
 def widget_add_group(request, group, app_name, widget_name):
     widget_class = cwr.get(app_name, widget_name)
