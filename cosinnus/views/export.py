@@ -5,13 +5,11 @@ from __future__ import unicode_literals
 Export views to be used by cosinnus apps
 """
 
-import json
-
-from django.http import HttpResponse
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import View
 
+from cosinnus.utils.http import JSONResponse
 from cosinnus.views.mixins.group import RequireAdminMixin
 
 
@@ -35,7 +33,7 @@ class JSONExportView(RequireAdminMixin, View):
             raise AttributeError(_('No model given to export data from.'))
         super(JSONExportView, self).__init__(*args, **kwargs)
 
-    def get_json(self):
+    def get_data(self):
         data = {
             'group': self.group.name,
             'fields': ['id', 'title'] + self.fields,
@@ -46,13 +44,12 @@ class JSONExportView(RequireAdminMixin, View):
             for field in self.fields:
                 row.append(str(getattr(obj, field, '')))
             data['rows'].append(row)
-        return json.dumps(data)
+        return data
 
     def get(self, request, *args, **kwargs):
-        json_data = self.get_json()
-        response = HttpResponse(json_data, content_type='application/json')
+        data = self.get_data()
+        response = JSONResponse(data)
         filename = '%s.%s.%s.json' % (
             self.file_prefix, self.group.slug, now().strftime('%Y%m%d%H%M%S'))
         response['Content-Disposition'] = 'attachment; filename="%s"' % filename
-
         return response
