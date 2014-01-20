@@ -14,4 +14,4 @@ try:
 except ImportError:
     from django.db.transaction import commit_on_success as atomic  # noqa
 
-__all__ = ['atomic']
+__all__ = ('atomic', )
