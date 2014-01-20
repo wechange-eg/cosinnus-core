@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import json
-
 from django.test import TestCase
 
 from cosinnus.models import CosinnusGroup
@@ -29,7 +27,7 @@ class JSONExportViewTest(TestCase):
         else:
             self.fail()
 
-    def test_get_json_no_fields(self):
+    def test_get_data_no_fields(self):
         """
         Should retrieve a certain JSON string even if no fields specified
         """
@@ -39,14 +37,13 @@ class JSONExportViewTest(TestCase):
             group = self.group
 
         view = ExportView()
-        json_data = view.get_json()
-        data = json.loads(json_data)
+        data = view.get_data()
         self.assertIn('id', data['fields'])
         self.assertIn('title', data['fields'])
         self.assertIn(["1", "title"], data['rows'])
         self.assertIn(self.group.name, data['group'])
 
-    def test_get_json_custom_fields(self):
+    def test_get_data(self):
         """
         Should retrieve a certain JSON format with custom field specified
         """
@@ -57,11 +54,10 @@ class JSONExportViewTest(TestCase):
             fields = ['slug']
 
         view = ExportView()
-        json_data = view.get_json()
-        data = json.loads(json_data)
+        data = view.get_data()
         self.assertIn('slug', data['fields'])
 
-    def test_get_json_two_rows(self):
+    def test_get_data_two_rows(self):
         """
         Should have two rows if there are two objects of that group in database
         """
@@ -73,8 +69,7 @@ class JSONExportViewTest(TestCase):
             model = SlugTestModel
             group = self.group
         view = ExportView()
-        json_data = view.get_json()
-        data = json.loads(json_data)
+        data = view.get_data()
         self.assertEqual(len(SlugTestModel.objects.all()), 3)
         self.assertEqual(len(data['rows']), 2)
 
