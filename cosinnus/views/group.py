@@ -1,19 +1,22 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import six
+
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ImproperlyConfigured
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.core.urlresolvers import reverse, reverse_lazy, NoReverseMatch
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import (CreateView, DeleteView, DetailView,
-    ListView, UpdateView)
+    ListView, UpdateView, TemplateView)
 
 from cosinnus.core.decorators.views import superuser_required
+from cosinnus.core.loaders.apps import cosinnus_app_registry as car
 from cosinnus.forms.group import CosinnusGroupForm, MembershipForm
 from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING)
@@ -399,3 +402,27 @@ class GroupUserDeleteView(RequireAdminMixin, UserSelectMixin, DeleteView):
         return context
 
 group_user_delete = GroupUserDeleteView.as_view()
+
+
+class GroupExportView(RequireAdminMixin, TemplateView):
+
+    template_name = 'cosinnus/group_export.html'
+
+    def get_context_data(self, **kwargs):
+        export_apps = []
+        for (app, name), label in zip(six.iteritems(car.app_names),
+                                      six.itervalues(car.app_labels)):
+            try:
+                url = reverse('cosinnus:%s:export' % name,
+                              kwargs={'group': self.group.slug})
+            except NoReverseMatch:
+                continue
+            export_apps.append({'label': label, 'export_url': url})
+
+        context = super(GroupExportView, self).get_context_data(**kwargs)
+        context.update({
+            'export_apps': export_apps,
+        })
+        return context
+
+group_export = GroupExportView.as_view()
