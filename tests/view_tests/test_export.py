@@ -6,7 +6,7 @@ from django.test import TestCase
 from cosinnus.models import CosinnusGroup
 from cosinnus.views.export import JSONExportView
 
-from tests.models import SlugTestModel
+from tests.models import ChoicesTestModel
 
 
 class JSONExportViewTest(TestCase):
@@ -31,58 +31,61 @@ class JSONExportViewTest(TestCase):
         """
         Should retrieve a certain JSON string even if no fields specified
         """
-        SlugTestModel.objects.create(group=self.group, title='title')
+        ChoicesTestModel.objects.create(group=self.group, title='title')
         class ExportView(JSONExportView):
-            model = SlugTestModel
+            model = ChoicesTestModel
             group = self.group
 
         view = ExportView()
         data = view.get_data()
         self.assertIn('id', data['fields'])
         self.assertIn('title', data['fields'])
-        self.assertIn(["1", "title"], data['rows'])
+        self.assertIn(['1', 'title'], data['rows'])
         self.assertIn(self.group.name, data['group'])
 
     def test_get_data(self):
         """
         Should retrieve a certain JSON format with custom field specified
         """
-        SlugTestModel.objects.create(group=self.group, title='title1')
+        obj = ChoicesTestModel.objects.create(
+            group=self.group,
+            title='title1',
+            state=ChoicesTestModel.STATE_SCHEDULED,
+        )
         class ExportView(JSONExportView):
-            model = SlugTestModel
+            model = ChoicesTestModel
             group = self.group
-            fields = ['slug']
-
+            fields = ['slug', 'state']
         view = ExportView()
         data = view.get_data()
         self.assertIn('slug', data['fields'])
+        self.assertEqual(obj.get_state_display(), data['rows'][0][3])
 
     def test_get_data_two_rows(self):
         """
         Should have two rows if there are two objects of that group in database
         """
-        SlugTestModel.objects.create(group=self.group, title='title1')
-        SlugTestModel.objects.create(group=self.group, title='title2')
+        ChoicesTestModel.objects.create(group=self.group, title='title1')
+        ChoicesTestModel.objects.create(group=self.group, title='title2')
         group2 = CosinnusGroup.objects.create(name='Group 2')
-        SlugTestModel.objects.create(group=group2, title='title2')
+        ChoicesTestModel.objects.create(group=group2, title='title2')
         class ExportView(JSONExportView):
-            model = SlugTestModel
+            model = ChoicesTestModel
             group = self.group
         view = ExportView()
         data = view.get_data()
-        self.assertEqual(len(SlugTestModel.objects.all()), 3)
+        self.assertEqual(len(ChoicesTestModel.objects.all()), 3)
         self.assertEqual(len(data['rows']), 2)
 
     def test_get(self):
         """
         Should have file prefix in response's content-disposition and content-type application/json
         """
-        SlugTestModel.objects.create(group=self.group, title='title')
+        ChoicesTestModel.objects.create(group=self.group, title='title')
         class ExportView(JSONExportView):
-            model = SlugTestModel
+            model = ChoicesTestModel
             group = self.group
             file_prefix = 'file_prefix'
-
         view = ExportView()
         response = view.get(self, None)
         self.assertIn('content-disposition', response)
