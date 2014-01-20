@@ -12,8 +12,8 @@ from cosinnus.conf import settings
 @python_2_unicode_compatible
 class WidgetConfig(models.Model):
 
-    app_name = models.CharField(_('app_name'), max_length=20)
-    widget_name = models.CharField(_('widget_name'), max_length=20)
+    app_name = models.CharField(_('Application name'), max_length=20)
+    widget_name = models.CharField(_('Widget name'), max_length=20)
     group = models.ForeignKey('cosinnus.CosinnusGroup', null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE)
 

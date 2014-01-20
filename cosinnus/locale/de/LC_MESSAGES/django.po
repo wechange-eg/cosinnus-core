@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-15 16:43+0100\n"
+"POT-Creation-Date: 2014-01-20 15:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -17,18 +17,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: core/decorators/views.py:52 core/decorators/views.py:90
-#: core/decorators/views.py:129
+#: core/decorators/views.py:38 core/decorators/views.py:76
+#: core/decorators/views.py:114 core/decorators/views.py:153
 msgid "No group provided"
 msgstr "Keine Gruppe angegeben"
 
-#: core/decorators/views.py:57 core/decorators/views.py:95
-#: core/decorators/views.py:134
+#: core/decorators/views.py:43 core/decorators/views.py:81
+#: core/decorators/views.py:119 core/decorators/views.py:158
 msgid "No group found with this name"
 msgstr "Keine Gruppe mit diesem Namen gefunden"
 
-#: core/decorators/views.py:65 core/decorators/views.py:104
-#: core/decorators/views.py:144
+#: core/decorators/views.py:51 core/decorators/views.py:89
+#: core/decorators/views.py:128 core/decorators/views.py:168
 msgid "Access denied"
 msgstr "Zugriff verweigert"
 
@@ -89,12 +89,74 @@ msgstr "Gruppe"
 msgid "Title"
 msgstr "Titel"
 
+#: models/widget.py:15
+msgid "Application name"
+msgstr "Anwendung"
+
+#: models/widget.py:16
+msgid "Widget name"
+msgstr "Widget"
+
+#: models/widget.py:23
+msgid "Widget configuration"
+msgstr "Widget Konfiguration"
+
+#: models/widget.py:24
+msgid "Widget configurations"
+msgstr "Widget Konfigurationen"
+
+#: models/widget.py:37
+msgid "Either group or user must be defined."
+msgstr "Es muss entweder eine Gruppe oder ein Benutzer ausgewählt sein"
+
+#: models/widget.py:69
+msgid "key"
+msgstr "Schlüssel"
+
+#: models/widget.py:70
+msgid "value"
+msgstr "Wert"
+
+#: models/widget.py:75
+msgid "Widget configuration item"
+msgstr "Konfigurationseinstellung"
+
+#: models/widget.py:76
+msgid "Widget configuration items"
+msgstr "Konfigurationseinstellungen"
+
+#: templates/cosinnus/dashboard.html:5 templates/cosinnus/dashboard.html:11
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: templates/cosinnus/dashboard.html:22 templates/cosinnus/dashboard.html:48
+msgid "Refresh"
+msgstr "Neu laden"
+
+#: templates/cosinnus/dashboard.html:23 templates/cosinnus/dashboard.html:49
+msgid "Configure"
+msgstr "Konfigurieren"
+
+#: templates/cosinnus/dashboard.html:24 templates/cosinnus/dashboard.html:50
+#: templates/cosinnus/group_detail.html:17
+#: templates/cosinnus/group_detail.html:48
+#: templates/cosinnus/group_detail.html:73
+#: templates/cosinnus/group_detail.html:98 views/group.py:69
+#: views/group.py:392
+msgid "Delete"
+msgstr "Löschen"
+
+#: templates/cosinnus/dashboard.html:35 views/widget.py:45 views/widget.py:66
+msgid "Add widget"
+msgstr "Widget hinzufügen"
+
 #: templates/cosinnus/group_confirm.html:14
 #: templates/cosinnus/group_delete.html:16
 #: templates/cosinnus/group_form.html:24
 #: templates/cosinnus/group_user_form.html:16
 #: templates/cosinnus/user_form.html:10
 #: templates/cosinnus/userprofile_form.html:11
+#: templates/cosinnus/widgets/delete.html:5
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -134,14 +196,6 @@ msgctxt "the verb"
 msgid "Export"
 msgstr "Exportieren"
 
-#: templates/cosinnus/group_detail.html:17
-#: templates/cosinnus/group_detail.html:48
-#: templates/cosinnus/group_detail.html:73
-#: templates/cosinnus/group_detail.html:98 views/group.py:69
-#: views/group.py:392
-msgid "Delete"
-msgstr "Löschen"
-
 #: templates/cosinnus/group_detail.html:20 templates/cosinnus/user_list.html:4
 msgid "Users"
 msgstr "Nutzer"
@@ -158,7 +212,7 @@ msgstr "Administratoren"
 
 #
 #: templates/cosinnus/group_detail.html:47
-#: templates/cosinnus/group_detail.html:72
+#: templates/cosinnus/group_detail.html:72 views/widget.py:121
 msgid "Change"
 msgstr "Ändern"
 
@@ -305,6 +359,11 @@ msgstr "Nutzerprofil: %(username)s"
 msgid "Save"
 msgstr "Speichern"
 
+#: templates/cosinnus/widgets/delete.html:4
+#, fuzzy
+msgid "Delete widget"
+msgstr "Löschen"
+
 #: templates/notify/mail/group_join_request.txt:1
 #, python-format
 msgid ""
@@ -321,7 +380,7 @@ msgstr ""
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>%(model_name)s konnte nicht gerendert werden!</i>"
 
-#: views/export.py:35
+#: views/export.py:33
 msgid "No model given to export data from."
 msgstr "Kein Modell zum Exportieren der Daten angegeben."
 
