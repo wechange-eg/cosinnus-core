@@ -20,5 +20,11 @@ Installation
 * Put ``'cosinnus'`` in the ``INSTALLED_APPS``
 * Add ``url(r'^', include('cosinnus.urls', namespace='cosinnus')),`` to your
   ``urls.py``
-* Add ``'cosinnus.utils.context_processors.settings',`` to the
-  ``TEMPLATE_CONTEXT_PROCESSORS``
+* Adjust the ``TEMPLATE_CONTEXT_PROCESSORS``::
+
+    ``TEMPLATE_CONTEXT_PROCESSORS`` = (
+        ...
+        'cosinnus.utils.context_processors.settings',
+        'cosinnus.utils.context_processors.cosinnus',
+        ...
+    )

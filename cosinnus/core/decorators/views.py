@@ -29,6 +29,30 @@ def superuser_required(function):
     return actual_decorator(function)
 
 
+def require_admin_access_decorator(group_url_arg='group'):
+    def decorator(function):
+        @functools.wraps(function, assigned=available_attrs(function))
+        def wrapper(request, *args, **kwargs):
+            group_name = kwargs.get(group_url_arg, None)
+            if not group_name:
+                return HttpResponseNotFound(_("No group provided"))
+
+            try:
+                group = CosinnusGroup.objects.get(slug=group_name)
+            except CosinnusGroup.DoesNotExist:
+                return HttpResponseNotFound(_("No group found with this name"))
+
+            user = request.user
+
+            if user.is_superuser or check_ug_admin(user, group):
+                kwargs['group'] = group
+                return function(request, *args, **kwargs)
+
+            return HttpResponseForbidden(_("Access denied"))
+        return wrapper
+    return decorator
+
+
 def require_admin_access(group_url_kwarg='group', group_attr='group'):
     """A method decorator that takes the group name from the kwargs of a
     dispatch function in CBVs and checks that the requesting user is allowed to

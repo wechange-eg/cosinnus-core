@@ -1,0 +1,10 @@
+{% load i18n bootstrap3 %}
+<form action="" method="post" class="form-horizontal" role="form">
+  {% csrf_token %}
+  {% trans "Delete widget" as submit_label %}
+  {% trans "Cancel" as cancel_label %}
+  {% buttons layout='horizontal' %}
+    {% bootstrap_button submit_label button_type="submit" css_classes="btn-danger" %}
+    {% bootstrap_button cancel_label button_type="button" css_classes="cancel" %}
+  {% endbuttons %}
+</form>

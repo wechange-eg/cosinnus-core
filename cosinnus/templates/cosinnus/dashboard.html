@@ -1,0 +1,68 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags %}
+{% load static from staticfiles %}
+
+{% block page_title %}{% trans "Dashboard" %}{% endblock %}
+
+{% block extrahead %}
+  <link href="{% static "css/cosinnus.dashboard.css" %}" rel="stylesheet">
+{% endblock extrahead %}
+
+{% block content_title %}{% trans "Dashboard" %}{% endblock content_title %}
+
+{% block content %}
+  <div id="dashboard" class="row dashboard">
+    {% for id in widgets %}
+      <div class="col-md-4" data-widget-id="{{ id }}" data-type="widget">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <span data-target="widget-title"></span>&nbsp;
+              <div class="btn-group pull-right">
+                <a href="#" class="btn btn-primary btn-xs" title="{% trans "Refresh" %}" data-type="refresh"><span class="glyphicon glyphicon-refresh"></span></a>
+                <a href="#" class="btn btn-primary btn-xs" title="{% trans "Configure" %}" data-type="edit"><span class="glyphicon glyphicon-wrench"></span></a>
+                <a href="#" class="btn btn-primary btn-xs" title="{% trans "Delete" %}" data-type="delete"><span class="glyphicon glyphicon-remove"></span></a>
+              </div>
+            </h3>
+          </div>
+          <div class="panel-body" data-target="widget-content"></div>
+        </div>
+      </div>
+    {% endfor %}
+    <div class="col-md-4" data-type="widget-add">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{% trans "Add widget" %}</h3>
+        </div>
+        <div class="panel-body" data-widget-id="0" data-target="widget-add-button">
+          <span class="glyphicon glyphicon-plus"></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4" data-type="widget-spare">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <span data-target="widget-title"></span>&nbsp;
+            <div class="btn-group pull-right">
+              <a href="#" class="btn btn-primary btn-xs" title="{% trans "Refresh" %}" data-type="refresh"><span class="glyphicon glyphicon-refresh"></span></a>
+              <a href="#" class="btn btn-primary btn-xs" title="{% trans "Configure" %}" data-type="edit"><span class="glyphicon glyphicon-wrench"></span></a>
+              <a href="#" class="btn btn-primary btn-xs" title="{% trans "Delete" %}" data-type="delete"><span class="glyphicon glyphicon-remove"></span></a>
+            </div>
+          </h3>
+        </div>
+        <div class="panel-body" data-target="widget-content"></div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extrafooter %}
+  {{ block.super }}
+  <script src="{% static "js/cosinnus.dashboard.js" %}"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var dashboard = window.Cosinnus.dashboard.init("#dashboard", "{{ group.slug|escapejs }}");
+    });
+  </script>
+{% endblock %}

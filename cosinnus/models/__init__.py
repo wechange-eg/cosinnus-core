@@ -3,10 +3,10 @@
 from cosinnus.models.group import *  # noqa
 from cosinnus.models.profile import *  # noqa
 from cosinnus.models.tagged import *  # noqa
+from cosinnus.models.widget import *  # noqa
 
-from cosinnus.core.loaders.apps import cosinnus_app_registry
-cosinnus_app_registry.autodiscover()
+from cosinnus.core.loaders import apps, attached_objects, widgets
 
-# TODO: Move this somewhere it doesn't get loaded on server start
-from cosinnus.core.loaders.attached_objects import cosinnus_attached_object_registry
-cosinnus_attached_object_registry.autodiscover()
+apps.cosinnus_app_registry.autodiscover()
+attached_objects.cosinnus_attached_object_registry.autodiscover()
+widgets.cosinnus_widget_registry.autodiscover()

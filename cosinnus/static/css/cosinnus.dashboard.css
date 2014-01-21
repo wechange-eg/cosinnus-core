@@ -1,0 +1,14 @@
+.dashboard [data-type=widget] {
+    text-transform: capitalize;
+}
+.dashboard [data-type=widget-add] [data-target=widget-add-button] {
+    color: #ccc;
+    font-size: 5em;
+    text-align: center;
+}
+.dashboard [data-type=widget-spare] {
+    display: none;
+}
+.dashboard [data-type=widget-new] .panel-heading .btn-group {
+    display: none;
+}
