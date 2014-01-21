@@ -39,10 +39,21 @@ class JSONExportView(RequireAdminMixin, View):
             'fields': ['id', 'title'] + self.fields,
             'rows': [],
         }
+
+        # optimisation to not recalculate display funcnames for each object
+        display_funcnames = {}
+        for field in self.fields:
+            display_funcnames[field] = 'get_%s_display' % field
+
         for obj in self.model.objects.filter(group=self.group).order_by('pk'):
             row = [str(obj.pk), obj.title]
             for field in self.fields:
-                row.append(str(getattr(obj, field, '')))
+                try:
+                    # careful: returns a callable
+                    value = getattr(obj, display_funcnames[field])()
+                except AttributeError:
+                    value = getattr(obj, field, '')
+                row.append(str(value))
             data['rows'].append(row)
         return data
 
