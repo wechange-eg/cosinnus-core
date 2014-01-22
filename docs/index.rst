@@ -1,5 +1,5 @@
-Welcome to Cosinnus's documentation!
-====================================
+Welcome to Cosinnus' documentation!
+===================================
 
 Contents:
 
@@ -7,6 +7,7 @@ Contents:
    :maxdepth: 2
     
    attachments
+   export
    permissions
    templatetags
    ref/index
