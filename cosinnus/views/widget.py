@@ -14,7 +14,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import TemplateView
 
 from cosinnus.core.decorators.views import require_admin_access_decorator
-from cosinnus.core.loaders.widgets import cosinnus_widget_registry as cwr
+from cosinnus.core.registries import widget_registry
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.http import JSONResponse
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
@@ -23,7 +23,7 @@ from cosinnus.views.mixins.group import RequireReadMixin
 
 def widget_list(request):
     data = {}
-    for app, widgets in cwr:
+    for app, widgets in widget_registry:
         data[app] = tuple(widgets)
     return JSONResponse(data)
 
@@ -31,7 +31,7 @@ def widget_list(request):
 @ensure_csrf_cookie
 @login_required
 def widget_add_user(request, app_name, widget_name):
-    widget_class = cwr.get(app_name, widget_name)
+    widget_class = widget_registry.get(app_name, widget_name)
     form_class = widget_class.get_setup_form_class()
     if request.method == "POST":
         form = form_class(request.POST)
@@ -52,7 +52,7 @@ def widget_add_user(request, app_name, widget_name):
 @ensure_csrf_cookie
 @require_admin_access_decorator()
 def widget_add_group(request, group, app_name, widget_name):
-    widget_class = cwr.get(app_name, widget_name)
+    widget_class = widget_registry.get(app_name, widget_name)
     form_class = widget_class.get_setup_form_class()
     if request.method == "POST":
         form = form_class(request.POST)
@@ -76,7 +76,7 @@ def widget_detail(request, id):
                          wc.group.public) or \
             wc.user and wc.user_id != request.user.pk:
         return HttpResponseForbidden('Access denied!')
-    widget_class = cwr.get(wc.app_name, wc.widget_name)
+    widget_class = widget_registry.get(wc.app_name, wc.widget_name)
     widget = widget_class(request, wc)
     data = widget.get_data()
     if isinstance(data, six.string_types):
@@ -108,7 +108,7 @@ def widget_edit(request, id):
     if wc.group and not check_ug_admin(request.user, wc.group) or \
             wc.user and wc.user_id != request.user.pk:
         return HttpResponseForbidden('Access denied!')
-    widget_class = cwr.get(wc.app_name, wc.widget_name)
+    widget_class = widget_registry.get(wc.app_name, wc.widget_name)
     form_class = widget_class.get_setup_form_class()
     widget = widget_class(request, wc)
     if request.method == "POST":

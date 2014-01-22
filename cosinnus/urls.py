@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.conf.urls import patterns, url
 
-from cosinnus.core.loaders.urls import cosinnus_site
+from cosinnus.core.registries import url_registry
 
 
 urlpatterns = patterns('django.contrib.auth.views',
@@ -57,5 +57,4 @@ urlpatterns += patterns('cosinnus.views',
     url(r'^user/(?P<username>[^/]+)/edit/$', 'user.user_update', name='user-edit'),
 )
 
-cosinnus_site.autodiscover()
-urlpatterns += cosinnus_site.urlpatterns
+urlpatterns += url_registry.urlpatterns

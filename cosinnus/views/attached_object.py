@@ -5,7 +5,7 @@ from django.db.models.loading import get_model
 from django.http.response import HttpResponseRedirect
 from django.views.generic.edit import CreateView, UpdateView
 
-from cosinnus.core.loaders.attached_objects import cosinnus_attached_object_registry as caor
+from cosinnus.core.registries import attached_object_registry
 
 
 class AttachableViewMixin(object):
@@ -19,13 +19,12 @@ class AttachableViewMixin(object):
     def get_form_kwargs(self):
         kwargs = super(AttachableViewMixin, self).get_form_kwargs()
         source_model_id = self.model._meta.app_label + '.' + self.model._meta.object_name
-        attachable_objects = caor.attachable_to.get(source_model_id, [])
 
         # for each type of allowed attachable object model, find all instances of
         # this model in the current group, and pass them to the FormAttachable,
         # so fields can be created and filled
         querysets = dict()
-        for attach_model_id in attachable_objects:
+        for attach_model_id in attached_object_registry.get_attachable_to(source_model_id):
             app_label, model_name = attach_model_id.split('.')
             attach_model_class = get_model(app_label, model_name)
             queryset = attach_model_class._default_manager.filter(group=self.group)

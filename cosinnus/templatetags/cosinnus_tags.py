@@ -11,8 +11,7 @@ from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
-from cosinnus.core.loaders.apps import cosinnus_app_registry as car
-from cosinnus.core.loaders.attached_objects import cosinnus_attached_object_registry as caor
+from cosinnus.core.registries import app_registry, attached_object_registry
 from cosinnus.models import CosinnusGroup
 from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending)
@@ -83,8 +82,7 @@ def cosinnus_menu(context, template="cosinnus/topmenu.html"):
     if 'group' in context:
         group = context['group']
         apps = []
-        for (app, name), label in zip(six.iteritems(car.app_names),
-                                      six.itervalues(car.app_labels)):
+        for app, name, label in app_registry.items():
             url = reverse('cosinnus:%s:index' % name, kwargs={'group': group.slug})
             apps.append({
                 'active': app == current_app,
@@ -128,7 +126,7 @@ def cosinnus_render_attached_objects(context, source, filter=None):
     rendered_output = []
     for model_name, objects in six.iteritems(typed_objects):
         # find manager object for attached object type
-        Renderer = caor.get_renderer(model_name)  # Renderer is a class
+        Renderer = attached_object_registry.get(model_name)  # Renderer is a class
         if Renderer:
             # pass the list to that manager and expect a rendered html string
             rendered_output.append(Renderer.render(context, objects))
