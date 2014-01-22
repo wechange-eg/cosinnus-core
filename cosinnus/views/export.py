@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 Export views to be used by cosinnus apps
 """
 
+from django.core.exceptions import ImproperlyConfigured
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import View
@@ -30,7 +31,7 @@ class JSONExportView(RequireAdminMixin, View):
 
     def __init__(self, *args, **kwargs):
         if not self.model:
-            raise AttributeError(_('No model given to export data from.'))
+            raise ImproperlyConfigured(_('No model given to export data from.'))
         super(JSONExportView, self).__init__(*args, **kwargs)
 
     def get_data(self):

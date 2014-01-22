@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.core.exceptions import ImproperlyConfigured
 from django.test import TestCase
 
 from cosinnus.models import CosinnusGroup
@@ -14,7 +15,7 @@ class JSONExportViewTest(TestCase):
     def setUp(self):
         self.group = CosinnusGroup.objects.create(name='Group 1')
 
-    def test_init(self):
+    def test_improperly_configured(self):
         """
         Should raise an AttributeError if model is not specified.
         """
@@ -22,7 +23,7 @@ class JSONExportViewTest(TestCase):
         # object's initialisation
         try:
             view = JSONExportView()
-        except AttributeError:
+        except ImproperlyConfigured:
             pass
         else:
             self.fail()
