@@ -8,6 +8,7 @@ from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.utils.decorators import method_decorator
+from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import TemplateView
@@ -82,7 +83,7 @@ def widget_detail(request, id):
         resp = HttpResponse(data)
     else:
         resp = JSONResponse(data)
-    resp['X-Cosinnus-Widget-Title'] = widget.title
+    resp['X-Cosinnus-Widget-Title'] = force_text(widget.title)
     return resp
 
 
