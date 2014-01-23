@@ -55,7 +55,7 @@ setup(
         'Django>=1.5',
         'South>=0.7',
         'django-appconf>=0.6',
-        'django-taggit>=0.10a1',
+        'django-taggit>=0.11',
         'django-bootstrap3',
         'django-bootstrap3-datetimepicker>=2.2.0',
     ],

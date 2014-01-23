@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404
 
-from taggit.models import Tag
+from taggit.models import Tag, TaggedItem
 
 
 class TaggedListMixin(object):
@@ -18,17 +19,21 @@ class TaggedListMixin(object):
 
     def get_context_data(self, **kwargs):
         context = super(TaggedListMixin, self).get_context_data(**kwargs)
-        tag_ids = set()
-        for o in self.object_list:
-            tag_ids = tag_ids | set(o.tags.values_list('pk', flat=True).all())
+        ct = ContentType.objects.get_for_model(self.model)
+        tag_ids = TaggedItem.objects.filter(content_type=ct,
+                                            object_id__in=self.object_list) \
+                                    .select_related('tag') \
+                                    .values_list('tag_id', flat=True)
         context.update({
             'tag': self.tag,
-            'tags': self.model.tags.filter(pk__in=tag_ids).all().order_by('name')
+            'tags': Tag.objects.filter(pk__in=tag_ids).order_by('name').all(),
         })
         return context
 
     def get_queryset(self):
-        qs = super(TaggedListMixin, self).get_queryset()
+        qs = super(TaggedListMixin, self).get_queryset() \
+                                         .select_related('assigned_to') \
+                                         .prefetch_related('tags')
         if self.tag:
             qs = qs.filter(tags=self.tag)
         return qs

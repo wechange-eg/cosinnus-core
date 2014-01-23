@@ -4,9 +4,10 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
-from taggit.managers import TaggableManager
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+
+from taggit.managers import TaggableManager
 
 from cosinnus.conf import settings
 from cosinnus.models import CosinnusGroup
