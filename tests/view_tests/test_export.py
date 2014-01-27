@@ -6,6 +6,7 @@ import csv
 
 from django.core.exceptions import ImproperlyConfigured
 from django.test import TestCase
+from django.utils.encoding import force_text
 
 from cosinnus.models import CosinnusGroup
 from cosinnus.views.export import JSONExportView, CSVExportView
@@ -42,7 +43,8 @@ class JSONExportViewTest(TestCase):
             group = self.group
 
         view = ExportView()
-        data = json.loads(view.get_response().content)
+        content = force_text(view.get_response().content)
+        data = json.loads(content)
         self.assertIn('id', data['fields'])
         self.assertIn('title', data['fields'])
         self.assertIn(['1', 'title'], data['rows'])
@@ -63,7 +65,8 @@ class JSONExportViewTest(TestCase):
             group = self.group
             fields = ['slug', 'state']
         view = ExportView()
-        data = json.loads(view.get_response().content)
+        content = force_text(view.get_response().content)
+        data = json.loads(content)
         self.assertIn('slug', data['fields'])
         self.assertEqual(obj.get_state_display(), data['rows'][0][3])
 
@@ -80,7 +83,8 @@ class JSONExportViewTest(TestCase):
             model = ChoicesTestModel
             group = self.group
         view = ExportView()
-        data = json.loads(view.get_response().content)
+        content = force_text(view.get_response().content)
+        data = json.loads(content)
         self.assertEqual(len(ChoicesTestModel.objects.all()), 3)
         self.assertEqual(len(data['rows']), 2)
 
@@ -126,7 +130,8 @@ class CSVExportViewTest(TestCase):
             group = self.group
             fields = ['slug', 'state']
         view = ExportView()
-        reader = csv.reader(view.get_response())
+        content = force_text(view.get_response().content)
+        reader = csv.reader(content.split('\n'))
         is_header = True
         for row in reader:
             if not row:

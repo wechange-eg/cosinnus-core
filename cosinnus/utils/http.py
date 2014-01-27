@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import json
 import csv
 import codecs
-import cStringIO
+import six
 
 from django.core.serializers.json import DjangoJSONEncoder
 from django.http import HttpResponse
@@ -41,7 +41,7 @@ class UnicodeWriter:
 
     def __init__(self, f, dialect=csv.excel, encoding="utf-8", **kwds):
         # Redirect output to a queue
-        self.queue = cStringIO.StringIO()
+        self.queue = six.moves.cStringIO()
         self.writer = csv.writer(self.queue, dialect=dialect, **kwds)
         self.stream = f
         self.encoder = codecs.getincrementalencoder(encoding)()
@@ -71,7 +71,11 @@ class CSVResponse(HttpResponse):
     def writerows(self, rows, fieldnames=[]):
         # can't have this in constructor, coz csv module needs initialised file
         # (response) object to write to
-        writer = UnicodeWriter(self)
+        if six.PY2:
+            writer = UnicodeWriter(self)
+        else:
+            writer = csv.writer(self)
+
         if fieldnames:
             writer.writerow(fieldnames)
         writer.writerows(rows)
