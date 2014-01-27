@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import json
+import csv
+
 from django.core.exceptions import ImproperlyConfigured
 from django.test import TestCase
 
 from cosinnus.models import CosinnusGroup
-from cosinnus.views.export import JSONExportView
+from cosinnus.views.export import JSONExportView, CSVExportView
 
 from tests.models import ChoicesTestModel
 
@@ -22,7 +25,7 @@ class JSONExportViewTest(TestCase):
         # assertRaises doesn't work when the exception is happening during
         # object's initialisation
         try:
-            view = JSONExportView()
+            view = JSONExportView()  # noqa
         except ImproperlyConfigured:
             pass
         else:
@@ -33,12 +36,13 @@ class JSONExportViewTest(TestCase):
         Should retrieve a certain JSON string even if no fields specified
         """
         ChoicesTestModel.objects.create(group=self.group, title='title')
+
         class ExportView(JSONExportView):
             model = ChoicesTestModel
             group = self.group
 
         view = ExportView()
-        data = view.get_data()
+        data = json.loads(view.get_response().content)
         self.assertIn('id', data['fields'])
         self.assertIn('title', data['fields'])
         self.assertIn(['1', 'title'], data['rows'])
@@ -53,12 +57,13 @@ class JSONExportViewTest(TestCase):
             title='title1',
             state=ChoicesTestModel.STATE_SCHEDULED,
         )
+
         class ExportView(JSONExportView):
             model = ChoicesTestModel
             group = self.group
             fields = ['slug', 'state']
         view = ExportView()
-        data = view.get_data()
+        data = json.loads(view.get_response().content)
         self.assertIn('slug', data['fields'])
         self.assertEqual(obj.get_state_display(), data['rows'][0][3])
 
@@ -70,11 +75,12 @@ class JSONExportViewTest(TestCase):
         ChoicesTestModel.objects.create(group=self.group, title='title2')
         group2 = CosinnusGroup.objects.create(name='Group 2')
         ChoicesTestModel.objects.create(group=group2, title='title2')
+
         class ExportView(JSONExportView):
             model = ChoicesTestModel
             group = self.group
         view = ExportView()
-        data = view.get_data()
+        data = json.loads(view.get_response().content)
         self.assertEqual(len(ChoicesTestModel.objects.all()), 3)
         self.assertEqual(len(data['rows']), 2)
 
@@ -83,6 +89,7 @@ class JSONExportViewTest(TestCase):
         Should have file prefix in response's content-disposition and content-type application/json
         """
         ChoicesTestModel.objects.create(group=self.group, title='title')
+
         class ExportView(JSONExportView):
             model = ChoicesTestModel
             group = self.group
@@ -93,3 +100,54 @@ class JSONExportViewTest(TestCase):
         self.assertIn('filename="file_prefix', response['content-disposition'])
         self.assertIn('content-type', response)
         self.assertEqual('application/json', response['content-type'])
+
+
+class CSVExportViewTest(TestCase):
+    """
+    Only tests csv-specific output, other issues are already executed by
+    JSONExportViewTest
+    """
+
+    def setUp(self):
+        self.group = CosinnusGroup.objects.create(name='Group 1')
+
+    def test_get_data(self):
+        """
+        Should retrieve a certain CSV format with custom field specified
+        """
+        obj = ChoicesTestModel.objects.create(
+            group=self.group,
+            title='title1',
+            state=ChoicesTestModel.STATE_SCHEDULED,
+        )
+
+        class ExportView(CSVExportView):
+            model = ChoicesTestModel
+            group = self.group
+            fields = ['slug', 'state']
+        view = ExportView()
+        reader = csv.reader(view.get_response())
+        is_header = True
+        for row in reader:
+            if not row:
+                continue
+            if is_header:
+                self.assertEqual(view.fields, row)
+                is_header = False
+            else:
+                self.assertEqual(obj.get_state_display(), row[3])
+
+    def test_get(self):
+        """
+        Should have file prefix in response's content-disposition and content-type text/csv
+        """
+        ChoicesTestModel.objects.create(group=self.group, title='title')
+
+        class ExportView(CSVExportView):
+            model = ChoicesTestModel
+            group = self.group
+        view = ExportView()
+        response = view.get(self, None)
+        self.assertIn('content-disposition', response)
+        self.assertIn('content-type', response)
+        self.assertEqual('text/csv', response['content-type'])
