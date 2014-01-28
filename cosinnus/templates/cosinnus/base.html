@@ -18,6 +18,7 @@
       <link href="{% bootstrap_css_url %}" rel="stylesheet">
     {% endif %}
     <link href="{% static "css/cosinnus.css" %}" rel="stylesheet">
+    {% include 'cosinnus/extrahead.html' %}
     {% block extrahead %}{% endblock extrahead %}
   </head>
   <body>
