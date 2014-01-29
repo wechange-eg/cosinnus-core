@@ -78,7 +78,8 @@ class DictBaseRegistry(BaseRegistry):
 
     def __init__(self):
         super(DictBaseRegistry, self).__init__()
-        self._storage = OrderedDict([])
+        with self.lock:
+            self._storage = OrderedDict([])
 
     def __getitem__(self, key):
         return self._storage[key]
@@ -90,22 +91,25 @@ class DictBaseRegistry(BaseRegistry):
         del self._storage[key]
 
     def __iter__(self):
-        return six.iterkeys(self._storage)
+        with self.lock:
+            return six.iterkeys(self._storage)
 
     def __contains__(self, key):
-        return key in self._storage
+        with self.lock:
+            return key in self._storage
 
     def get(self, key, default=None):
-        try:
-            return self[key]
-        except KeyError:
-            return default
+        with self.lock:
+            try:
+                return self[key]
+            except KeyError:
+                return default
 
     def unregister(self, key):
         """
         Locks the internal storage and removes the object described by the
         given key from the storage if it exists.
         """
-        with self.lock:
-            if key in self:
+        if key in self:
+            with self.lock:
                 del self[key]

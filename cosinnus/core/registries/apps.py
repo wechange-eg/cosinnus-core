@@ -1,27 +1,50 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import re
 import six
 
 from cosinnus.core.registries.base import DictBaseRegistry
 
 
+APP_NAME_RE = re.compile(r'^[a-zA-Z0-9_-]+$')
+
+
 class AppRegistry(DictBaseRegistry):
 
     def register(self, app, app_name, app_label=None):
-        if app_label is None:
-            app_label = app_name.title()
-        self[app] = (app_name, app_label)
+        """
+        Register a new cosinnus Django app. This app will then automatically
+        show up in the top menu.
+
+        :param str app: The full qualified Python package name (as it used to)
+            be in the ``INSTALLED_APPS`` before Django 1.7
+        :param str app: The name which will be used in url namespaces, the urls
+            itself and as a fallback if ``app_label`` is not defined.
+            Only ``[a-zA-Z0-9_-]`` are allowed
+        :param str app_label: A verbose name / label for each app. Eg. used in
+            the top menu.
+        """
+        if not APP_NAME_RE.match(app_name):
+            raise AttributeError('app_name must only contain the characters '
+                '[a-zA-Z0-9_-]. It is "%s"' % app_name)
+        with self.lock:
+            if app_label is None:
+                app_label = app_name.title()
+            self[app] = (app_name, app_label)
 
     def get_name(self, app):
-        return self[app][0]  # name is 1nd element in tuple
+        with self.lock:
+            return self[app][0]  # name is 1nd element in tuple
 
     def get_label(self, app):
-        return self[app][1]  # label is 2nd element in tuple
+        with self.lock:
+            return self[app][1]  # label is 2nd element in tuple
 
     def items(self):
-        for app, (app_name, app_label) in six.iteritems(self._storage):
-            yield app, app_name, app_label
+        with self.lock:
+            for app, (app_name, app_label) in six.iteritems(self._storage):
+                yield app, app_name, app_label
 
 app_registry = AppRegistry()
 
