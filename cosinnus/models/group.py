@@ -350,7 +350,6 @@ class CosinnusGroup(models.Model):
 
     @classmethod
     def _clear_cache(self, slug=None, slugs=None):
-        # TODO: clear membership caches
         keys = [
             _GROUPS_SLUG_CACHE_KEY,
             _GROUPS_PK_CACHE_KEY,
@@ -360,6 +359,11 @@ class CosinnusGroup(models.Model):
         if slugs:
             keys.extend([_GROUP_CACHE_KEY % s for s in slugs])
         cache.delete_many(keys)
+        if isinstance(self, CosinnusGroup):
+            self._clear_local_cache()
+
+    def _clear_local_cache(self):
+        self._admins = self._members = self._pendings = None
 
 
 @python_2_unicode_compatible
@@ -409,3 +413,4 @@ class CosinnusGroupMembership(models.Model):
             _MEMBERSHIP_MEMBERS_KEY % self.group.pk,
             _MEMBERSHIP_PENDINGS_KEY % self.group.pk,
         ])
+        self.group._clear_local_cache()

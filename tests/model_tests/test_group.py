@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.test import TestCase
 
-from cosinnus.models import CosinnusGroup
+from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership,
+    MEMBERSHIP_MEMBER)
 from cosinnus.models.group import (_GROUP_CACHE_KEY, _GROUPS_PK_CACHE_KEY,
     _GROUPS_SLUG_CACHE_KEY)
 
@@ -262,3 +264,54 @@ class CosinnusGroupGetCachedTest(TestCase):
         self.assertEqual(cache.get(_GROUP_CACHE_KEY % ss[1]), gs[1])
         self.assertEqual(cache.get(_GROUPS_SLUG_CACHE_KEY), dict_slugs_pks)
         self.assertEqual(cache.get(_GROUPS_PK_CACHE_KEY), dict_pks_slugs)
+
+
+class MembershipCacheTest(TestCase):
+
+    def tearDown(self):
+        cache.clear()
+
+    def test_clear_local_caching(self):
+        """Regression test for #45"""
+        User = get_user_model()
+        group = CosinnusGroup.objects.create(name='testgroup1')
+        user = User.objects.create(username='test1')
+
+        self.assertIsNone(group._admins)
+        self.assertEqual(group.admins, [])
+        self.assertEqual(group._admins, [])
+
+        self.assertIsNone(group._members)
+        self.assertEqual(group.members, [])
+        self.assertEqual(group._members, [])
+
+        self.assertIsNone(group._pendings)
+        self.assertEqual(group.pendings, [])
+        self.assertEqual(group._pendings, [])
+
+        membership = CosinnusGroupMembership.objects.create(
+            user=user, group=group, status=MEMBERSHIP_MEMBER)
+        self.assertIsNone(group._admins)
+        self.assertEqual(group.admins, [])
+        self.assertEqual(group._admins, [])
+
+        self.assertIsNone(group._members)
+        self.assertEqual(group.members, [user.pk])
+        self.assertEqual(group._members, [user.pk])
+
+        self.assertIsNone(group._pendings)
+        self.assertEqual(group.pendings, [])
+        self.assertEqual(group._pendings, [])
+
+        membership.delete()
+        self.assertIsNone(group._admins)
+        self.assertEqual(group.admins, [])
+        self.assertEqual(group._admins, [])
+
+        self.assertIsNone(group._members)
+        self.assertEqual(group.members, [])
+        self.assertEqual(group._members, [])
+
+        self.assertIsNone(group._pendings)
+        self.assertEqual(group.pendings, [])
+        self.assertEqual(group._pendings, [])
