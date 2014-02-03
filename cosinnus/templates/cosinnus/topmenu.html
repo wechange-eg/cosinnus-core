@@ -12,7 +12,8 @@
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
       {% if group %}
-        <li><a href="{% url 'cosinnus:group-dashboard' group=group.slug %}" class="btn btn-default">{% trans "Dashboard" %}</a></li>
+        {% url 'cosinnus:group-dashboard' group=group.slug as dashboard_url %}
+        <li {% ifequal dashboard_url request.path %} class="active"{% endifequal %}><a href="{{ dashboard_url }}">{% trans "Dashboard" %}</a></li>
       {% endif %}
       {% for app in apps %}
         <li{% if app.active %} class="active"{% endif %}><a href="{{ app.url }}">{{ app.label }}</a></li>
