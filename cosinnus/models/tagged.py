@@ -107,12 +107,11 @@ class BaseTaggableObjectModel(models.Model):
     title = models.CharField(_('Title'), max_length=255)
     slug = models.SlugField(max_length=55, blank=True)  # human readable part is 50 chars
 
-    creator = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL,
         verbose_name=_('Creator'),
+        on_delete=models.PROTECT,
         null=True,
-        on_delete=models.SET_NULL,
-        related_name='basetaggableobject')
+        related_name='%(app_label)s_%(class)s_set')
     created = models.DateTimeField(
         verbose_name=_('Created'),
         editable=False,
