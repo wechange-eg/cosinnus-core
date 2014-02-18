@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-20 15:07+0100\n"
+"POT-Creation-Date: 2014-02-18 13:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -45,7 +45,7 @@ msgstr "Name"
 msgid "Slug"
 msgstr "Slug"
 
-#: models/group.py:284 models/tagged.py:31
+#: models/group.py:284 models/tagged.py:33
 msgid "Public"
 msgstr "Öffentlich"
 
@@ -61,33 +61,41 @@ msgstr "Cosinnus Gruppen"
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
 
-#: models/group.py:379
+#: models/group.py:383
 msgid "Group membership"
 msgstr "Gruppenmitgliedschaft"
 
-#: models/group.py:380
+#: models/group.py:384
 msgid "Group memberships"
 msgstr "Gruppenmitgliedschaften"
 
-#: models/tagged.py:69
+#: models/tagged.py:71
 msgid "Attached object"
 msgstr "Verknüpftes Objekt"
 
-#: models/tagged.py:70
+#: models/tagged.py:72
 msgid "Attached objects"
 msgstr "Verknüpftes Objekt"
 
-#: models/tagged.py:96
+#: models/tagged.py:98
 msgid "Tags"
 msgstr "Schlagworte"
 
-#: models/tagged.py:102
+#: models/tagged.py:104
 msgid "Group"
 msgstr "Gruppe"
 
-#: models/tagged.py:105
+#: models/tagged.py:107
 msgid "Title"
 msgstr "Titel"
+
+#: models/tagged.py:112
+msgid "Creator"
+msgstr "Ersteller"
+
+#: models/tagged.py:117
+msgid "Created"
+msgstr "Erstellt"
 
 #: models/widget.py:15
 msgid "Application name"
@@ -126,6 +134,7 @@ msgid "Widget configuration items"
 msgstr "Konfigurationseinstellungen"
 
 #: templates/cosinnus/dashboard.html:5 templates/cosinnus/dashboard.html:11
+#: templates/cosinnus/topmenu.html:16 templates/cosinnus/topmenu.html.py:42
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -146,7 +155,7 @@ msgstr "Konfigurieren"
 msgid "Delete"
 msgstr "Löschen"
 
-#: templates/cosinnus/dashboard.html:35 views/widget.py:45 views/widget.py:66
+#: templates/cosinnus/dashboard.html:35 views/widget.py:46 views/widget.py:67
 msgid "Add widget"
 msgstr "Widget hinzufügen"
 
@@ -212,7 +221,7 @@ msgstr "Administratoren"
 
 #
 #: templates/cosinnus/group_detail.html:47
-#: templates/cosinnus/group_detail.html:72 views/widget.py:121
+#: templates/cosinnus/group_detail.html:72 views/widget.py:122
 msgid "Change"
 msgstr "Ändern"
 
@@ -302,7 +311,7 @@ msgid "Logged out"
 msgstr "Abgemeldet"
 
 #: templates/cosinnus/login.html:4 templates/cosinnus/login.html.py:11
-#: templates/cosinnus/topmenu.html:42
+#: templates/cosinnus/topmenu.html:47
 msgid "Login"
 msgstr "Anmelden"
 
@@ -314,24 +323,24 @@ msgstr "Passwort vergessen"
 msgid "Toggle navigation"
 msgstr "Navigation ab-/abschalten"
 
-#: templates/cosinnus/topmenu.html:22
+#: templates/cosinnus/topmenu.html:26
 msgid "My Groups"
 msgstr "Meine Gruppen"
 
-#: templates/cosinnus/topmenu.html:28
+#: templates/cosinnus/topmenu.html:32
 msgid "List all groups"
 msgstr "Alle Gruppen auflisten"
 
 #
-#: templates/cosinnus/topmenu.html:32
+#: templates/cosinnus/topmenu.html:36
 msgid "No Groups. Join!"
 msgstr "Mitglied keiner Gruppen. Beitreten!"
 
-#: templates/cosinnus/topmenu.html:37
+#: templates/cosinnus/topmenu.html:41
 msgid "Profile"
 msgstr "Profil"
 
-#: templates/cosinnus/topmenu.html:38
+#: templates/cosinnus/topmenu.html:43
 msgid "Logout"
 msgstr "Abmelden"
 
@@ -380,7 +389,7 @@ msgstr ""
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>%(model_name)s konnte nicht gerendert werden!</i>"
 
-#: views/export.py:33
+#: views/export.py:34
 msgid "No model given to export data from."
 msgstr "Kein Modell zum Exportieren der Daten angegeben."
 
