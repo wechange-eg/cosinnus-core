@@ -110,7 +110,7 @@ def cosinnus_render_attached_objects(context, source, filter=None):
         the source object to check for attached objects
     @param filter:
         a comma seperated list of allowed Object types to be rendered.
-        ex.: 'cosinnus_event.Event,cosinnus_file.FileEntry' will allow only Files 
+        ex.: 'cosinnus_event.Event,cosinnus_file.FileEntry' will allow only Files
         and events to be rendered
     """
     attached_objects = source.attached_objects.all()
