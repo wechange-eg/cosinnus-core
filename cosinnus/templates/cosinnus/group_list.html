@@ -29,7 +29,7 @@
             <tr>
               {% if user.is_superuser or user.pk in members or group.public %}
                 <td>
-                  <a href="{% url 'cosinnus:group-detail' group=group.slug %}">{{ group.name }}</a>
+                  <a href="{% url 'cosinnus:group-dashboard' group=group.slug %}">{{ group.name }}</a>
                 </td>
               {% else %}
                 <td>
@@ -55,7 +55,7 @@
         {% else %}
           {% for group in object_list %}
             <tr>
-              <td><a href="{% url 'cosinnus:group-detail' group=group.slug %}">{{ group.name }}</a></td>
+              <td><a href="{% url 'cosinnus:group-dashboard' group=group.slug %}">{{ group.name }}</a></td>
             </tr>
           {% endfor %}
         {% endif %}

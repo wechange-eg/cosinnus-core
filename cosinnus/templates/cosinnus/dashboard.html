@@ -55,6 +55,9 @@
       </div>
     </div>
   </div>
+  <div>
+    <a href="{% url 'cosinnus:group-detail' group=group.slug %}">{{ group.name }} - Details</a>
+  </div>
 {% endblock %}
 
 {% block extrafooter %}
