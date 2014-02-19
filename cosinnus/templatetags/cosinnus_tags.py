@@ -101,18 +101,27 @@ def cosinnus_menu(context, template="cosinnus/topmenu.html"):
 
 
 @register.simple_tag(takes_context=True)
-def cosinnus_render_attached_objects(context, source):
+def cosinnus_render_attached_objects(context, source, filter=None):
     """Renders all attached files on a given source cosinnus object. This will
     collect and group all attached objects (`source.attached_objects`) by their
     model group and send them to the configured renderer for that model type
     (in each cosinnus app's `cosinnus_app.ATTACHABLE_OBJECT_RENDERERS`).
+    @param source:
+        the source object to check for attached objects
+    @param filter:
+        a comma seperated list of allowed Object types to be rendered.
+        ex.: 'cosinnus_event.Event,cosinnus_file.FileEntry' will allow only Files 
+        and events to be rendered
     """
     attached_objects = source.attached_objects.all()
+    allowed_types = filter.replace(' ', '').split(',') if filter else []
 
     typed_objects = defaultdict(list)
     for att in attached_objects:
         attobj = att.target_object
         content_model = att.model_name
+        if filter and not content_model in allowed_types:
+            continue
         if attobj is not None:
             typed_objects[content_model].append(attobj)
 
