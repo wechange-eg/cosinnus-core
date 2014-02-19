@@ -20,8 +20,10 @@
               <span data-target="widget-title"></span>&nbsp;
               <div class="btn-group pull-right">
                 <a href="#" class="btn btn-primary btn-xs" title="{% trans "Refresh" %}" data-type="refresh"><span class="glyphicon glyphicon-refresh"></span></a>
-                <a href="#" class="btn btn-primary btn-xs" title="{% trans "Configure" %}" data-type="edit"><span class="glyphicon glyphicon-wrench"></span></a>
-                <a href="#" class="btn btn-primary btn-xs" title="{% trans "Delete" %}" data-type="delete"><span class="glyphicon glyphicon-remove"></span></a>
+                {% if user.is_superuser or user|is_group_member:object %}
+                  <a href="#" class="btn btn-primary btn-xs" title="{% trans "Configure" %}" data-type="edit"><span class="glyphicon glyphicon-wrench"></span></a>
+                  <a href="#" class="btn btn-primary btn-xs" title="{% trans "Delete" %}" data-type="delete"><span class="glyphicon glyphicon-remove"></span></a>
+                {% endif %}
               </div>
             </h3>
           </div>
@@ -29,16 +31,18 @@
         </div>
       </div>
     {% endfor %}
-    <div class="col-md-4" data-type="widget-add">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">{% trans "Add widget" %}</h3>
-        </div>
-        <div class="panel-body" data-widget-id="0" data-target="widget-add-button">
-          <span class="glyphicon glyphicon-plus"></span>
+    {% if user.is_superuser or user|is_group_member:object %}
+      <div class="col-md-4" data-type="widget-add">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{% trans "Add widget" %}</h3>
+          </div>
+          <div class="panel-body" data-widget-id="0" data-target="widget-add-button">
+            <span class="glyphicon glyphicon-plus"></span>
+          </div>
         </div>
       </div>
-    </div>
+    {% endif %}
     <div class="col-md-4" data-type="widget-spare">
       <div class="panel panel-primary">
         <div class="panel-heading">
@@ -46,8 +50,10 @@
             <span data-target="widget-title"></span>&nbsp;
             <div class="btn-group pull-right">
               <a href="#" class="btn btn-primary btn-xs" title="{% trans "Refresh" %}" data-type="refresh"><span class="glyphicon glyphicon-refresh"></span></a>
-              <a href="#" class="btn btn-primary btn-xs" title="{% trans "Configure" %}" data-type="edit"><span class="glyphicon glyphicon-wrench"></span></a>
-              <a href="#" class="btn btn-primary btn-xs" title="{% trans "Delete" %}" data-type="delete"><span class="glyphicon glyphicon-remove"></span></a>
+              {% if user.is_superuser or user|is_group_member:object %}
+                <a href="#" class="btn btn-primary btn-xs" title="{% trans "Configure" %}" data-type="edit"><span class="glyphicon glyphicon-wrench"></span></a>
+                <a href="#" class="btn btn-primary btn-xs" title="{% trans "Delete" %}" data-type="delete"><span class="glyphicon glyphicon-remove"></span></a>
+              {% endif %}
             </div>
           </h3>
         </div>
