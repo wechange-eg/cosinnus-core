@@ -17,7 +17,7 @@
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">
-              <span data-target="widget-title"></span>&nbsp;
+              <a href="" data-target="widget-title-url"><span data-target="widget-title"></span>&nbsp;</a>
               <div class="btn-group pull-right">
                 <a href="#" class="btn btn-primary btn-xs" title="{% trans "Refresh" %}" data-type="refresh"><span class="glyphicon glyphicon-refresh"></span></a>
                 {% if user.is_superuser or user|is_group_member:object %}
@@ -47,7 +47,7 @@
       <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title">
-            <span data-target="widget-title"></span>&nbsp;
+            <a href="" data-target="widget-title-url"><span data-target="widget-title"></span>&nbsp;</a>
             <div class="btn-group pull-right">
               <a href="#" class="btn btn-primary btn-xs" title="{% trans "Refresh" %}" data-type="refresh"><span class="glyphicon glyphicon-refresh"></span></a>
               {% if user.is_superuser or user|is_group_member:object %}
