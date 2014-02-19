@@ -21,8 +21,6 @@ class AddFolderView(RequireWriteMixin, FilterGroupMixin,
     template_name = 'cosinnus/hierarchy/add_folder.html'
 
     def __init__(self, *args, **kwargs):
-        if not self.model:
-            raise ImproperlyConfigured(_('No model given for adding folders.'))
         if not self.appname:
             raise ImproperlyConfigured(_('No appname given for adding folders.'))
         super(AddFolderView, self).__init__(*args, **kwargs)
