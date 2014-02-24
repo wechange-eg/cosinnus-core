@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.core.mail import send_mail as django_send_mail
+from django.core.mail import get_connection, EmailMessage
 from django.template.loader import render_to_string
 
 from cosinnus.conf import settings
@@ -19,17 +19,21 @@ if 'djcelery' in settings.INSTALLED_APPS:
         pass
 
 
-def _send_mail(to, subject, template, data, from_email=None):
+
+def _django_send_mail(to, subject, template, data, from_email=None, bcc=None):
+    """ From django.core.mail, extended with bcc """
     if from_email is None:
         from_email = settings.DEFAULT_FROM_EMAIL
     message = render_to_string(template, data)
-    django_send_mail(subject, message, from_email, [to])
+
+    connection = get_connection()
+    return EmailMessage(subject, message, from_email, [to], bcc, connection=connection).send()
 
 
 if CELERY_AVAILABLE:
     @task
-    def send_mail(to, subject, template, data, from_email=None):
-        _send_mail.delay(to, subject, template, data)
+    def send_mail(to, subject, template, data, from_email=None, bcc=None):
+        return _django_send_mail.delay(to, subject, template, data, from_email, bcc)
 else:
-    def send_mail(to, subject, template, data, from_email=None):
-        _send_mail(to, subject, template, data)
+    def send_mail(to, subject, template, data, from_email=None, bcc=None):
+        return _django_send_mail(to, subject, template, data, from_email, bcc)
