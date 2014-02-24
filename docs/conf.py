@@ -49,7 +49,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Cosinnus'
-copyright = '2013, Sinnwerkstatt Medienagentur GmbH'
+copyright = '2013 - 2014, Sinnwerkstatt Medienagentur GmbH'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
