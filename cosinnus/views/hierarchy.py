@@ -29,9 +29,6 @@ class AddFolderView(RequireWriteMixin, FilterGroupMixin,
         return reverse('cosinnus:%s:list' % self.appname,
                        kwargs={'group': self.group.slug})
 
-    def get_object(self, queryset=None):
-        return CreateView.get_object(self, queryset=queryset)
-
     def get_form(self, form_class):
         """Override get_form to use model-specific form"""
         class ModelAddFolderForm(AddFolderForm):
