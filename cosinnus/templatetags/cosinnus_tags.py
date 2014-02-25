@@ -105,7 +105,7 @@ def cosinnus_render_attached_objects(context, source, filter=None):
     collect and group all attached objects (`source.attached_objects`) by their
     model group and send them to the configured renderer for that model type
     (in each cosinnus app's `cosinnus_app.ATTACHABLE_OBJECT_RENDERERS`).
-    
+
     :param source: the source object to check for attached objects
     :param filter: a comma seperated list of allowed Object types to be
         rendered. eg.: 'cosinnus_event.Event,cosinnus_file.FileEntry' will
