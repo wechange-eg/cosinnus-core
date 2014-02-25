@@ -40,11 +40,11 @@
           <ul class="dropdown-menu">
             <li><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Profile" %}</a></li>
             <li><a href="{% url 'cosinnus:user-dashboard' %}">{% trans "Dashboard" %}</a></li>
-            <li><a href="{% url 'cosinnus:logout' %}">{% trans "Logout" %}</a></li>
+            <li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
           </ul>
         </li>
       {% else %}
-        <li><a href="{% url 'cosinnus:login' %}">{% trans "Login" %}</a></li>
+        <li><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
       {% endif %}
     </ul>
   </div>

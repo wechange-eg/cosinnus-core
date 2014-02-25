@@ -6,22 +6,7 @@ from django.conf.urls import patterns, url
 from cosinnus.core.registries import url_registry
 
 
-urlpatterns = patterns('django.contrib.auth.views',
-    url(r'^login/$', 'login', {'template_name': 'cosinnus/login.html'}, name='login'),
-    url(r'^logout/$', 'logout', {'template_name': 'cosinnus/logged_out.html'}, name='logout'),
-
-    # TODO: adjust templates
-    url(r'^password_change/$', 'password_change', name='password_change'),
-    url(r'^password_change/done/$', 'password_change_done', name='password_change_done'),
-    url(r'^password_reset/$', 'password_reset', name='password_reset'),
-    url(r'^password_reset/done/$', 'password_reset_done', name='password_reset_done'),
-    url(r'^reset/(?P<uidb36>[0-9A-Za-z]{1,13})-(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        'password_reset_confirm',
-        name='password_reset_confirm'),
-    url(r'^reset/done/$', 'password_reset_complete', name='password_reset_complete'),
-)
-
-urlpatterns += patterns('cosinnus.views',
+urlpatterns = patterns('cosinnus.views',
     url(r'^$', 'common.index', name='index'),
 
     url(r'^profile/$', 'profile.detail_view', name='profile-detail'),
@@ -38,7 +23,7 @@ urlpatterns += patterns('cosinnus.views',
     url(r'^groups/$', 'group.group_list', name='group-list'),
     url(r'^groups/add/$', 'group.group_create', name='group-add'),
     url(r'^group/(?P<group>[^/]+)/$', 'widget.group_dashboard', name='group-dashboard'),
-    url(r'^group/(?P<group>[^/]+)/details$', 'group.group_detail', name='group-detail'),
+    url(r'^group/(?P<group>[^/]+)/details/$', 'group.group_detail', name='group-detail'),
     url(r'^group/(?P<group>[^/]+)/edit/$', 'group.group_update', name='group-edit'),
     url(r'^group/(?P<group>[^/]+)/delete/$', 'group.group_delete', name='group-delete'),
     url(r'^group/(?P<group>[^/]+)/join/$', 'group.group_user_join', name='group-user-join'),
