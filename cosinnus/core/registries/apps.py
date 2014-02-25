@@ -28,23 +28,19 @@ class AppRegistry(DictBaseRegistry):
         if not APP_NAME_RE.match(app_name):
             raise AttributeError('app_name must only contain the characters '
                 '[a-zA-Z0-9_-]. It is "%s"' % app_name)
-        with self.lock:
-            if app_label is None:
-                app_label = app_name.title()
-            self[app] = (app_name, app_label)
+        if app_label is None:
+            app_label = app_name.title()
+        self[app] = (app_name, app_label)
 
     def get_name(self, app):
-        with self.lock:
-            return self[app][0]  # name is 1nd element in tuple
+        return self[app][0]  # name is 1nd element in tuple
 
     def get_label(self, app):
-        with self.lock:
-            return self[app][1]  # label is 2nd element in tuple
+        return self[app][1]  # label is 2nd element in tuple
 
     def items(self):
-        with self.lock:
-            for app, (app_name, app_label) in six.iteritems(self._storage):
-                yield app, app_name, app_label
+        for app, (app_name, app_label) in six.iteritems(self._storage):
+            yield app, app_name, app_label
 
 app_registry = AppRegistry()
 

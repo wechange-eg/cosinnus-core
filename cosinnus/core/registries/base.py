@@ -85,25 +85,23 @@ class DictBaseRegistry(BaseRegistry):
         return self._storage[key]
 
     def __setitem__(self, key, value):
-        self._storage[key] = value
+        with self.lock:
+            self._storage[key] = value
 
     def __delitem__(self, key):
         del self._storage[key]
 
     def __iter__(self):
-        with self.lock:
-            return six.iterkeys(self._storage)
+        return six.iterkeys(self._storage)
 
     def __contains__(self, key):
-        with self.lock:
-            return key in self._storage
+        return key in self._storage
 
     def get(self, key, default=None):
-        with self.lock:
-            try:
-                return self[key]
-            except KeyError:
-                return default
+        try:
+            return self[key]
+        except KeyError:
+            return default
 
     def unregister(self, key):
         """
@@ -111,5 +109,4 @@ class DictBaseRegistry(BaseRegistry):
         given key from the storage if it exists.
         """
         if key in self:
-            with self.lock:
-                del self[key]
+            del self[key]
