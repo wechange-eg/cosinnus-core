@@ -12,8 +12,7 @@ from cosinnus.core.registries.base import DictBaseRegistry
 class AttachedObjectRegistry(DictBaseRegistry):
 
     def register(self, model, renderer):
-        if model in settings.COSINNUS_ATTACHABLE_OBJECTS:
-            self[model] = renderer
+        self[model] = renderer
 
     def get(self, key, default=None):
         renderer = super(AttachedObjectRegistry, self).get(key, default)
