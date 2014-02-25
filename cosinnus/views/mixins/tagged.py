@@ -32,7 +32,6 @@ class TaggedListMixin(object):
 
     def get_queryset(self):
         qs = super(TaggedListMixin, self).get_queryset() \
-                                         .select_related('assigned_to') \
                                          .prefetch_related('tags')
         if self.tag:
             qs = qs.filter(tags=self.tag)
