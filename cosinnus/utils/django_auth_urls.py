@@ -3,6 +3,8 @@
 # It is also provided as a convenience to those who want to deploy these URLs
 # elsewhere.
 
+import django
+
 from django.conf.urls import patterns, url
 
 urlpatterns = patterns('',
@@ -32,11 +34,25 @@ urlpatterns = patterns('',
     url(r'^password_reset/done/$',
         'django.contrib.auth.views.password_reset_done',
         {'template_name': 'cosinnus/registration/password_reset_done.html'},
-        name='password_reset_done'),
-    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        'django.contrib.auth.views.password_reset_confirm',
-        {'template_name': 'cosinnus/registration/password_reset_confirm.html'},
-        name='password_reset_confirm'),
+        name='password_reset_done')
+)
+
+if django.VERSION[:2] >= (1, 6):
+    urlpatterns += patterns('',
+        url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+            'django.contrib.auth.views.password_reset_confirm',
+            {'template_name': 'cosinnus/registration/password_reset_confirm.html'},
+            name='password_reset_confirm')
+    )
+else:
+    urlpatterns += patterns('',
+        url(r'^reset/(?P<uidb36>[0-9A-Za-z]{1,13})-(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+            'django.contrib.auth.views.password_reset_confirm',
+            {'template_name': 'cosinnus/registration/password_reset_confirm.html'},
+            name='password_reset_confirm')
+    )
+
+urlpatterns += patterns('',
     url(r'^reset/done/$',
         'django.contrib.auth.views.password_reset_complete',
         {'template_name': 'cosinnus/registration/password_reset_complete.html'},
