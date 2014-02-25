@@ -23,7 +23,7 @@ class AttachableViewMixin(object):
         # for each type of allowed attachable object model, find all instances of
         # this model in the current group, and pass them to the FormAttachable,
         # so fields can be created and filled
-        querysets = dict()
+        querysets = {}
         for attach_model_id in attached_object_registry.get_attachable_to(source_model_id):
             app_label, model_name = attach_model_id.split('.')
             attach_model_class = get_model(app_label, model_name)

@@ -50,16 +50,16 @@ class HierarchyTreeMixin(object):
 
     def get_tree(self, object_list):
         """
-            Create a node/children tree structure containing app objects.
-            We assume that ALL (!) pathnames end with a '/'
-            A folder has a pathname of /path/to/folder/foldername/
-            the last path part is the folder itself!)
+        Create a node/children tree structure containing app objects. We
+        assume that ALL (!) pathnames end with a '/'. A folder has a
+        pathname of ``/path/to/folder/foldername/`` the last path part is
+        the folder itself!
         """
         # saves all folder paths that have been created
-        folderdict = dict()
+        folderdict = {}
 
         def get_or_create_folder(path, folder_object, specialname=None):
-            if (path in folderdict.keys()):
+            if path in folderdict.keys():
                 folderEnt = folderdict[path]
                 # attach the folder's object if we were passed one
                 if folder_object is not None:
