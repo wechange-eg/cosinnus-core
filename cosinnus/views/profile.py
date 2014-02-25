@@ -29,7 +29,7 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(UserProfileDetailView, self).get_context_data(**kwargs)
         profile = context['object']
-        context['optional_fields'] = profile.optional_fields
+        context['optional_fields'] = profile.get_optional_fields()
         return context
 
 detail_view = UserProfileDetailView.as_view()

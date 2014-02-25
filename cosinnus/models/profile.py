@@ -105,10 +105,9 @@ class BaseUserProfile(models.Model):
             optional_fields.append(name)
         return optional_fields
 
-    @property
-    def optional_fields(self):
+    def get_optional_fields(self):
         """
-        Iterates over all fields defiend in the user profile and returns a list
+        Iterates over all fields defined in the user profile and returns a list
         of dicts with the keys ``name`` and ``value``.
 
         The list will only contain those fields not listed in ``SKIP_FIELDS``.
