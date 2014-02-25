@@ -6,7 +6,9 @@ Contents:
 .. toctree::
    :maxdepth: 2
     
+   initial_setup
    attachments
+   authentication
    export
    permissions
    templatetags

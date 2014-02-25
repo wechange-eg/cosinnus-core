@@ -14,4 +14,10 @@ try:
 except ImportError:
     from django.db.transaction import commit_on_success as atomic  # noqa
 
-__all__ = ('atomic', )
+
+try:  # pragma: no cover
+    from collections import OrderedDict
+except ImportError:  # pragma: no cover
+    from django.utils.datastructures import SortedDict as OrderedDict  # noqa
+
+__all__ = ('atomic', 'OrderedDict', )

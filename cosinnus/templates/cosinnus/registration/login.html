@@ -10,7 +10,7 @@
     {% bootstrap_form form layout="horizontal" %}
     {% trans "Login" as submit_label %}
     {% trans "Lost password" as reset_label %}
-    {% url 'cosinnus:password_change' as reset_link %}
+    {% url 'password_reset' as reset_link %}
     {% buttons submit=submit_label reset=reset_label reset_link=reset_link layout='horizontal' %}{% endbuttons %}
   </form>
 {% endblock content %}

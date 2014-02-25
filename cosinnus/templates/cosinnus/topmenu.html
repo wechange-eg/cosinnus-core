@@ -26,7 +26,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "My Groups" %}{% if group %} <strong>({{ group }})</strong>{% endif %} <b class="caret"></b></a>
             <ul class="dropdown-menu">
               {% for g in groups %}
-                <li{% if g == group %} class="active"{% endif %}><a href="{% url 'cosinnus:group-detail' group=g.slug %}">{{ g.name }}</a></li>
+                <li{% if g == group %} class="active"{% endif %}><a href="{% url 'cosinnus:group-dashboard' group=g.slug %}">{{ g.name }}</a></li>
               {% endfor %}
               <li class="divider"></li>
               <li><a href="{% url 'cosinnus:group-list' %}">{% trans "List all groups" %}</a></li>
@@ -40,11 +40,11 @@
           <ul class="dropdown-menu">
             <li><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Profile" %}</a></li>
             <li><a href="{% url 'cosinnus:user-dashboard' %}">{% trans "Dashboard" %}</a></li>
-            <li><a href="{% url 'cosinnus:logout' %}">{% trans "Logout" %}</a></li>
+            <li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
           </ul>
         </li>
       {% else %}
-        <li><a href="{% url 'cosinnus:login' %}">{% trans "Login" %}</a></li>
+        <li><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
       {% endif %}
     </ul>
   </div>

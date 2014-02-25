@@ -23,4 +23,4 @@ Subpackages
 .. toctree::
 
     decorators
-    loaders
+    registries
