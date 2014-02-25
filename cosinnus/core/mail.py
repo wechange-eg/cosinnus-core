@@ -19,7 +19,6 @@ if 'djcelery' in settings.INSTALLED_APPS:
         pass
 
 
-
 def _django_send_mail(to, subject, template, data, from_email=None, bcc=None):
     """ From django.core.mail, extended with bcc """
     if from_email is None:
@@ -27,13 +26,16 @@ def _django_send_mail(to, subject, template, data, from_email=None, bcc=None):
     message = render_to_string(template, data)
 
     connection = get_connection()
-    return EmailMessage(subject, message, from_email, [to], bcc, connection=connection).send()
+    return EmailMessage(subject, message, from_email, [to], bcc,
+                        connection=connection).send()
 
 
 if CELERY_AVAILABLE:
     @task
     def send_mail(to, subject, template, data, from_email=None, bcc=None):
-        return _django_send_mail.delay(to, subject, template, data, from_email, bcc)
+        return _django_send_mail.delay(to, subject, template, data,
+                                       from_email=from_email, bcc=bcc)
 else:
     def send_mail(to, subject, template, data, from_email=None, bcc=None):
-        return _django_send_mail(to, subject, template, data, from_email, bcc)
+        return _django_send_mail(to, subject, template, data,
+                                 from_email=from_email, bcc=bcc)
