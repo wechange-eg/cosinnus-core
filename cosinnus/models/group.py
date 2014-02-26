@@ -192,7 +192,7 @@ class CosinnusGroupManager(models.Manager):
         """
         pks = self.filter(memberships__user_id=user.pk) \
                   .filter_membership_status(MEMBER_STATUS) \
-                  .values_list('id', flat=True)
+                  .values_list('id', flat=True).distinct()
         return self.get_cached(pks=pks)
 
     def public(self):
