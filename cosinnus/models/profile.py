@@ -97,13 +97,7 @@ class BaseUserProfile(models.Model):
 
         The list will only contain those fields not listed in ``SKIP_FIELDS``.
         """
-        all_fields = cls._meta.get_all_field_names()
-        optional_fields = []
-        for name in all_fields:
-            if name in cls.SKIP_FIELDS:
-                continue
-            optional_fields.append(name)
-        return optional_fields
+        return list(set(cls._meta.get_all_field_names()) - set(cls.SKIP_FIELDS))
 
     def get_optional_fields(self):
         """
