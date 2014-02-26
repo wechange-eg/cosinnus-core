@@ -10,4 +10,4 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = get_user_profile_model()
-        fields = ()
+        fields = model.get_optional_fieldnames()
