@@ -5,9 +5,9 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 
 
-class AddFolderForm(forms.ModelForm):
+class AddContainerForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(AddFolderForm, self).__init__(*args, **kwargs)
+        super(AddContainerForm, self).__init__(*args, **kwargs)
         self.fields['title'].label = _('Name')
 
     class Meta:

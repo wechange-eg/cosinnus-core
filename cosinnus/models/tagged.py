@@ -139,7 +139,7 @@ class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
     """
     Represents the base for hierarchical cosinnus models.
     """
-    isfolder = models.BooleanField(
+    is_container = models.BooleanField(
         blank=False, null=False, default=False, editable=False)
     path = models.CharField(_('Path'),
         blank=False, null=False, default='/', max_length=100)

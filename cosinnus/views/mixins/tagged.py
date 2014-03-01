@@ -51,49 +51,49 @@ class HierarchyTreeMixin(object):
     def get_tree(self, object_list):
         """
         Create a node/children tree structure containing app objects. We
-        assume that ALL (!) pathnames end with a '/'. A folder has a
-        pathname of ``/path/to/folder/foldername/`` the last path part is
-        the folder itself!
+        assume that ALL (!) pathnames end with a '/'. A container has a
+        pathname of ``/path/to/container/containername/`` the last path part is
+        the container itself!
         """
-        # saves all folder paths that have been created
-        folderdict = {}
+        # saves all container paths that have been created
+        containerdict = {}
 
-        def get_or_create_folder(path, folder_object, specialname=None):
-            if path in folderdict.keys():
-                folderEnt = folderdict[path]
-                # attach the folder's object if we were passed one
-                if folder_object is not None:
-                    folderEnt['folder_object'] = folder_object
-                return folderEnt
+        def get_or_create_container(path, container_object, specialname=None):
+            if path in containerdict.keys():
+                containerEnt = containerdict[path]
+                # attach the container's object if we were passed one
+                if container_object is not None:
+                    containerEnt['container_object'] = container_object
+                return containerEnt
             name = specialname if specialname else basename(path[:-1])
-            newfolder = defaultdict(dict, (
+            newcontainer = defaultdict(dict, (
                 ('objects', []),
-                ('folders', []),
+                ('containers', []),
                 ('name', name),
                 ('path', path),
-                ('folder_object', folder_object),))
-            folderdict[path] = newfolder
+                ('container_object', container_object),))
+            containerdict[path] = newcontainer
             if path != '/':
-                attach_to_parent_folder(newfolder)
-            return newfolder
+                attach_to_parent_container(newcontainer)
+            return newcontainer
 
-        def attach_to_parent_folder(folder):
-            parentpath = dirname(folder['path'][:-1])
+        def attach_to_parent_container(container):
+            parentpath = dirname(container['path'][:-1])
             if parentpath[-1] != '/':
                 parentpath += '/'
-            if parentpath not in folderdict.keys():
-                parentfolder = get_or_create_folder(parentpath, None)
+            if parentpath not in containerdict.keys():
+                parentcontainer = get_or_create_container(parentpath, None)
             else:
-                parentfolder = folderdict[parentpath]
-            parentfolder['folders'].append(folder)
+                parentcontainer = containerdict[parentpath]
+            parentcontainer['containers'].append(container)
 
-        root = get_or_create_folder('/', None)
+        root = get_or_create_container('/', None)
         for obj in object_list:
-            if obj.isfolder:
-                get_or_create_folder(obj.path, obj)
+            if obj.is_container:
+                get_or_create_container(obj.path, obj)
             else:
-                filesfolder = get_or_create_folder(obj.path, None)
-                filesfolder['objects'].append(obj)
+                filescontainer = get_or_create_container(obj.path, None)
+                filescontainer['objects'].append(obj)
 
         return root
 
@@ -107,16 +107,16 @@ class HierarchyPathMixin(object):
     def get_initial(self):
         """
         Supports calling /add under other objects,
-        which creates a new object under the given object/folder's path
+        which creates a new object under the given object/container's path
         """
         initial = super(HierarchyPathMixin, self).get_initial()
 
-        # if a slug is given in the URL, we check if its a folder, and if so,
+        # if a slug is given in the URL, we check if its a container, and if so,
         # let the user create an object under that path
         # if it is an object, we let the user create a new object on the same level
         if 'slug' in self.kwargs.keys():
-            folder = get_object_or_404(self.model, slug=self.kwargs.get('slug'))
-            initial.update({'path': folder.path})
+            container = get_object_or_404(self.model, slug=self.kwargs.get('slug'))
+            initial.update({'path': container.path})
         return initial
 
     def form_valid(self, form):
