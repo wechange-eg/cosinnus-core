@@ -10,6 +10,7 @@ Contents:
    attachments
    authentication
    export
+   hierarchy
    permissions
    templatetags
    ref/index
