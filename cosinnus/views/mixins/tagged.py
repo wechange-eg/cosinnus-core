@@ -56,36 +56,36 @@ class HierarchyTreeMixin(object):
         the container itself!
         """
         # saves all container paths that have been created
-        containerdict = {}
+        container_dict = {}
 
-        def get_or_create_container(path, container_object, specialname=None):
-            if path in containerdict.keys():
-                containerEnt = containerdict[path]
+        def get_or_create_container(path, container_object, special_name=None):
+            if path in container_dict.keys():
+                container_entry = container_dict[path]
                 # attach the container's object if we were passed one
                 if container_object is not None:
-                    containerEnt['container_object'] = container_object
-                return containerEnt
-            name = specialname if specialname else basename(path[:-1])
-            newcontainer = defaultdict(dict, (
+                    container_entry['container_object'] = container_object
+                return container_entry
+            name = special_name if special_name else basename(path[:-1])
+            new_container = defaultdict(dict, (
                 ('objects', []),
                 ('containers', []),
                 ('name', name),
                 ('path', path),
                 ('container_object', container_object),))
-            containerdict[path] = newcontainer
+            container_dict[path] = new_container
             if path != '/':
-                attach_to_parent_container(newcontainer)
-            return newcontainer
+                attach_to_parent_container(new_container)
+            return new_container
 
         def attach_to_parent_container(container):
-            parentpath = dirname(container['path'][:-1])
-            if parentpath[-1] != '/':
-                parentpath += '/'
-            if parentpath not in containerdict.keys():
-                parentcontainer = get_or_create_container(parentpath, None)
+            parent_path = dirname(container['path'][:-1])
+            if parent_path[-1] != '/':
+                parent_path += '/'
+            if parent_path not in container_dict.keys():
+                parent_container = get_or_create_container(parent_path, None)
             else:
-                parentcontainer = containerdict[parentpath]
-            parentcontainer['containers'].append(container)
+                parent_container = container_dict[parent_path]
+            parent_container['containers'].append(container)
 
         root = get_or_create_container('/', None)
         for obj in object_list:
