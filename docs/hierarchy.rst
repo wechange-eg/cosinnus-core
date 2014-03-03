@@ -217,4 +217,67 @@ There is nothing else you would have to do with it.
         [...]
 
 
+Mixin the hierarchy deletion
+============================
+
+Your model delete view should add the `HierarchyDeleteMixin` to its base
+classes. This will delete containers and all objects contained within them.
+
+.. sourcecode:: python
+
+    from cosinnus.views.mixins.tagged import HierarchyDeleteMixin
+
+    class ModelDeleteView(ModelFormMixin, HierarchyDeleteMixin, DeleteView):
+        message_success = None
+        message_error = None
+        [...]
+
+The app's `ModelFormMixin` might define a mechanism to emit error or
+success messages. Since the `HierarchyDeleteMixin` will also emit these kind
+of messages, it might be advisable to suppress the messages emitted via the
+`ModelFormMixin`, hence setting `message_success` and `message_error` to
+`None` in the example above.
+
+The template for the delete view might then look like this:
+
+.. sourcecode:: html+django
+
+    <form action="" method="post" class="form-horizontal">
+      {% csrf_token %}
+      <div class="control-group">
+        <label class="control-label">
+          {% if object.is_container %}
+            <h3>{% trans "Are you sure you want to delete this container and all objects in it?" %}</h3>
+          {% else %}
+            <h3>{% trans "Are you sure you want to delete this object?" %}</h3>
+          {% endif %}
+        </label>
+
+        <input type="hidden" name="objects_to_delete" value="{{ objects_to_delete }}" />
+        <div>
+             <div class="well well-sm">
+              {% for obj in objects_to_delete %}
+                {% if obj.is_container %}
+                  <span class="glyphicon glyphicon-folder-open"></span>
+                {% else %}
+                  <span class="glyphicon glyphicon-file"></span>
+                {% endif %}
+                <span><a href="{% url 'cosinnus:app:object-detail' group=group.slug slug=obj.slug %}" title="{{ obj.title }}">{{ obj.title }}</a></span>
+                <span>{{ obj.path }}</span>
+                {% if not forloop.last %}<br/>{% endif %}
+              {% endfor %}
+            </div>
+        </div>
+
+        <div class="controls">
+          <button type="submit" class="btn btn-danger">
+            {% trans "Delete" %}
+          </button>
+          <a href="{% url 'cosinnus:app:list' group=group.slug %}" class="btn">
+            {% trans "Cancel" %}
+          </a>
+        </div>
+      </div>
+    </form>
+
 You are good to go now, have fun organising your app objects!

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-01 16:17+0100\n"
+"POT-Creation-Date: 2014-03-03 08:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -371,7 +371,7 @@ msgstr "Speichern"
 #: templates/cosinnus/hierarchy/add_container.html:7
 #: templates/cosinnus/hierarchy/add_container.html:13
 msgid "Add container"
-msgstr ""
+msgstr "Zusammenstellung hinzufügen"
 
 #: templates/cosinnus/registration/logged_out.html:4
 #: templates/cosinnus/registration/logged_out.html:7
@@ -576,3 +576,32 @@ msgstr "Nutzer aus der Gruppe “%(group_name)s” entfernen?"
 #: views/hierarchy.py:25
 msgid "No appname given for adding containers."
 msgstr "Kein Appname zum Hinzufügen von Zusammenstellungen angegeben."
+
+#: views/mixins/tagged.py:158
+#, python-format
+msgid ""
+"Container \"%(title)s\" could not be deleted because it contained objects "
+"that could not be deleted."
+msgstr ""
+"Zusammenstellung \"%(title)s\" konnte nicht gelöscht werden, weil sie Objekte "
+"enthielt, die nicht gelöscht werden konnten."
+
+#: views/mixins/tagged.py:169
+#, python-format
+msgid "Object \"%(title)s\" could not be deleted."
+msgstr "Objekt \"%(title)s\" konnte nicht gelöscht werden."
+
+#: views/mixins/tagged.py:195
+#, python-format
+msgid "%(numobjects)d objects were deleted successfully."
+msgstr "%(numobjects)d Objekte wurden erfolgreich gelöscht."
+
+#: views/mixins/tagged.py:200
+#, python-format
+msgid "Object \"%(title)s\" was deleted successfully."
+msgstr "Objekt \"%(title)s\" wurde erfolgreich gelöscht."
+
+#: views/mixins/tagged.py:205
+#, python-format
+msgid "%(numobjects)d other objects were deleted."
+msgstr "%(numobjects)d andere Objekte wurden gelöscht."

@@ -4,8 +4,12 @@ from __future__ import unicode_literals
 from collections import defaultdict
 from os.path import basename, dirname
 
+from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
+from django.http import HttpResponseRedirect
+
 from django.shortcuts import get_object_or_404
+from django.utils.translation import ugettext_lazy as _
 
 from taggit.models import Tag, TaggedItem
 
@@ -128,3 +132,95 @@ class HierarchyPathMixin(object):
         if path:
             form.instance.path = path
         return super(HierarchyPathMixin, self).form_valid(form)
+
+
+class HierarchyDeleteMixin(object):
+    """
+    This mixin can be used in delete views. It deletes an object or container
+    and all objects and containers inside.
+    """
+
+    def _get_objects_in_path(self, path):
+        return self.model.objects.filter(path__startswith=path)
+
+    def _delete_object(self, obj, request):
+        """
+        Sanity check: only delete a container if it is empty
+        (there should only be one object (the container itself) with the
+        path, because we have deleted all its objects before it!
+
+        Returns 1 if given object could be deleted, 0 otherwise. That's handy
+        for accumulating the sum of deleted objects
+        """
+        if obj.is_container:
+            container_objects = self._get_objects_in_path(obj.path)
+            if len(container_objects) > 1:
+                msg = _('Container "%(title)s" could not be deleted because it contained objects that could not be deleted.') % {
+                    'title': obj.title,
+                }
+                messages.error(request, msg)
+                return 0
+
+        deleted_pk = obj.pk
+        obj.delete()
+        # check if deletion was successful
+        try:
+            check_obj = self.model.objects.get(pk=deleted_pk)
+            msg = _('Object "%(title)s" could not be deleted.') % {
+                'title': check_obj.title,
+            }
+            messages.error(request, msg)
+            return 0
+        except self.model.DoesNotExist:
+            return 1
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.is_container:
+            del_list = list(self._get_objects_in_path(self.object.path))
+        else:
+            del_list = [self.object]
+
+        # for a clean deletion, sort so that subelements are always before
+        # their parents and objects always before containers on the same level
+        del_list.sort(key=lambda o: len(o.path) + (0 if o.is_container else 1), reverse=True)
+
+        total_objects = len(del_list)
+        deleted_count = 0
+        for obj in del_list:
+            deleted_count += self._delete_object(obj, request)
+
+        if deleted_count > 0:
+            if deleted_count > 1 and deleted_count == total_objects:
+                msg = _('%(numobjects)d objects were deleted successfully.') % {
+                    'numobjects': deleted_count,
+                }
+                messages.success(request, msg)
+            elif deleted_count == 1 and total_objects == 1:
+                msg = _('Object "%(title)s" was deleted successfully.') % {
+                    'title': obj.title,
+                }
+                messages.success(request, msg)
+            else:
+                msg = _('%(numobjects)d other objects were deleted.') % {
+                    'numobjects': deleted_count,
+                }
+                messages.info(request, msg)
+
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_context_data(self, **kwargs):
+        context = super(HierarchyDeleteMixin, self).get_context_data(**kwargs)
+        del_obj = kwargs.get('object', None)
+
+        del_list = []
+        if del_obj:
+            if del_obj.is_container:
+                # special handling for containers being deleted:
+                path_objects = self._get_objects_in_path(del_obj.path)
+                del_list.extend(path_objects)
+            else:
+                del_list.append(del_obj)
+
+        context['objects_to_delete'] = del_list
+        return context
