@@ -26,8 +26,8 @@ Import `BaseHierarchicalTaggableObjectModel` and extend it:
     class Model(BaseHierarchicalTaggableObjectModel):
         pass
 
-Since `BaseHierarchicalTaggableObjectModel` is an abstract model, you have to
-create a migration for your app model and run it afterwards:
+Since `BaseHierarchicalTaggableObjectModel` is an abstract model, a migration
+for the app model needs to be created and run:
 
 .. sourcecode:: bash
 
@@ -38,7 +38,7 @@ create a migration for your app model and run it afterwards:
 Add URLs
 ========
 
-In your app's ``urls.py`` add the following URLs like this:
+In the app's ``urls.py`` add the following URLs like this:
 
 .. sourcecode:: python
 
@@ -85,7 +85,7 @@ Implement the model-specific container view:
 Mixin the hierarchy tree
 ========================
 
-Your list view should add the `HierarchyTreeMixin` to its base classes. This
+The list view should add the `HierarchyTreeMixin` to its base classes. This
 would give you a method `get_tree` to get a hierarchical tree of the
 objects given as its argument:
 
@@ -173,18 +173,10 @@ With the template `tree.html` looking like that:
       {% for object in node.objects %}
       <div class="media">
         <a class="pull-left" href="{{ object.get_absolute_url }}">
-        {% if object.is_image %}
-          <span><img height=30 src='{{ object.static_image_url }}' title='{{ object.title }}'></img></span>
-        {% else %}
-          {% if object.is_draft %}
-          <span class="glyphicon glyphicon-heart-empty"></span>
-          {% else %}
           <span class="glyphicon glyphicon-file"></span>
-          {% endif %}
-        {% endif %}
         </a>
 
-        <span><a href="{{ object.get_absolute_url }}" title="{{ object.title }}">{{ object.title }} {% if object.is_draft %}({% trans "Draft" %}){% endif %}</a></span>
+        <span><a href="{{ object.get_absolute_url }}" title="{{ object.title }}">{{ object.title }}{% endif %}</a></span>
 
         <div class="btn-group pull-right">
             <a class="btn btn-primary btn-mini" href="{{ object.get_absolute_url }}"><span class="glyphicon glyphicon-eye-open"></span> {% trans "Show" %}</a>
@@ -201,12 +193,35 @@ With the template `tree.html` looking like that:
     {% endif %}
 
 
+If a list template shown as above is used, it is advisable to link a CSS file,
+e.g. `static/css/cosinnus_app.css` which defines a few rules which will prevent
+the dropdown menu from being clipped:
+
+.. sourcecode:: css
+
+	.media, .media-body {
+		overflow: visible;
+	}
+	.media .media-body {
+		display: table-cell;
+		width: 10000px;
+		*width: auto;
+		*zoom: 1;
+	}
+	.media:before, .media:after {
+		content: "";
+		display: table;
+	}
+	.media:after {
+		clear: both;
+	}
+
+
 Mixin the hierarchy path
 ========================
 
-Your model add/edit views should add the `HierarchyPathMixin` to its base
-classes. This will set up the object's path in the hierarchy appropriately.
-There is nothing else you would have to do with it.
+The add/edit views should add the `HierarchyPathMixin` to its base classes.
+This will set up the object's path in the hierarchy appropriately.
 
 .. sourcecode:: python
 
@@ -220,8 +235,8 @@ There is nothing else you would have to do with it.
 Mixin the hierarchy deletion
 ============================
 
-Your model delete view should add the `HierarchyDeleteMixin` to its base
-classes. This will delete containers and all objects contained within them.
+The delete view should add the `HierarchyDeleteMixin` to its base classes.
+This will delete containers and all objects contained within them.
 
 .. sourcecode:: python
 
@@ -280,4 +295,4 @@ The template for the delete view might then look like this:
       </div>
     </form>
 
-You are good to go now, have fun organising your app objects!
+The app is good to go now, have fun organising your app objects!
