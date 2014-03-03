@@ -74,7 +74,7 @@ Implement the model-specific container view:
         def form_valid(self, form):
             """Add model-specific attributes to form.instance"""
             form.instance.created_by = self.request.user
-            return super(DocumentAddContainerView, self).form_valid(form)
+            return super(ModelAddContainerView, self).form_valid(form)
 
    container_add_view = ModelAddContainerView.as_view()
 
