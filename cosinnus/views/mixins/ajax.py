@@ -85,13 +85,20 @@ class AjaxableFormMixin(object):
         else:
             return HttpResponseBadRequest()
 
+
     def post(self, request, *args, **kwargs):
+
         if self.is_ajax_request_url:
             if not request.is_ajax():
                 return HttpResponseBadRequest()
 
             # patch the ajax-post body data into the POST field
-            body_data = urllib.urlencode(json.loads(request.body, encoding=request.encoding))
+            json_data = json.loads(request.body, encoding=request.encoding)
+            # if we update/delete, we need to pass the id from the body as pk kwarg
+            if 'id' in json_data:
+                self.kwargs['pk'] = json_data['id']
+
+            body_data = urllib.urlencode(json_data)
             request._post = QueryDict(body_data, encoding=request.encoding)
             self.request = request
 
