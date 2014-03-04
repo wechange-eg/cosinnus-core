@@ -134,7 +134,6 @@ class BaseTaggableObjectModel(models.Model):
         super(BaseTaggableObjectModel, self).save(*args, **kwargs)
 
 
-@python_2_unicode_compatible
 class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
     """
     Represents the base for hierarchical cosinnus models.
