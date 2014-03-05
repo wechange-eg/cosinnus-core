@@ -40,8 +40,9 @@ class BaseAjaxableResponseMixin(object):
 
             if not self.serializer_class:
                 raise ImproperlyConfigured(
-                    'Missing property serialzer_class for object "%s" (needed by Ajax Mixins)' %
-                    self.__class__.__name__)
+                    'Missing property serialzer_class for object "%s" '
+                    '(needed by Ajax Mixins)' % self.__class__.__name__
+                )
 
             context = {'request': self.request}
             serializer = self.serializer_class(self.get_serializable_content(),
