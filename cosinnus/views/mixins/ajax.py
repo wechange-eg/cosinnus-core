@@ -28,6 +28,9 @@ class BaseAjaxableResponseMixin(object):
     #: Django restframework serializer class for the object of the form
     serializer_class = None
 
+    # different for List/Detail view
+    is_object_collection = False
+
     def get(self, request, *args, **kwargs):
         if self.is_ajax_request_url:
             if not request.is_ajax():
@@ -42,7 +45,7 @@ class BaseAjaxableResponseMixin(object):
 
             context = {'request': self.request}
             serializer = self.serializer_class(self.get_serializable_content(),
-                                          many=True, context=context)
+                                          many=self.is_object_collection, context=context)
 
             response = Response(serializer.data)
             response.accepted_renderer = JSONRenderer()
@@ -61,6 +64,8 @@ class ListAjaxableResponseMixin(BaseAjaxableResponseMixin):
     """
     Mixin to add AJAX support to a ListView.
     """
+    is_object_collection = True
+
     def get_serializable_content(self):
         return self.object_list
 
@@ -69,6 +74,8 @@ class DetailAjaxableResponseMixin(BaseAjaxableResponseMixin):
     """
     Mixin to add AJAX support to a DetailView.
     """
+    is_object_collection = False
+
     def get_serializable_content(self):
         return self.object
 
