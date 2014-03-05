@@ -26,10 +26,26 @@ DUMPS_KWARGS = {
 
 class JSONResponse(HttpResponse):
 
-    def __init__(self, data):
+    def __init__(self, data, status=200, content_type='application/json',
+            **kwargs):
+        """
+        Create a new HTTP response which content_type defaults to
+        ``'application/json'``.
+
+        :param data: Any data type the
+            :class:`~django.core.serializers.json.DjangoJSONEncoder` can
+            handle (unless a different class is defined).
+        :param int status: The HTTP response code. (Defaults to 200)
+        :param str content_type: The content type for the response. (Defaults
+            to ``'application/json'``)
+        :param kwargs: Any additional kwargs are passed to the ``json.dumps``
+            call.
+        """
+        ekwargs = {}
+        ekwargs.update(DUMPS_KWARGS)
+        dump = json.dumps(data, **ekwargs)
         super(JSONResponse, self).__init__(
-            json.dumps(data, **DUMPS_KWARGS),
-            content_type='application/json'
+            content=dump, status=status, content_type=content_type
         )
 
 
