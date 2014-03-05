@@ -94,3 +94,26 @@ its own:
     from cosinnus.core.registries import url_registry
 
     url_registry.register_urlconf('myapp', 'myapp.urls')
+
+
+Using the API URL definitions
+-----------------------------
+
+The normal *Cosinnus* URLs don't include the API URLs for various reasons. One
+of them is the lack of flexibility, e.g. if you want your API URLs to be on a
+different domain. Hence you have to explicitly include them in your projects
+``ROOT_URLCONF``:
+
+.. code-block:: python
+
+    from django.conf.urls import patterns, include, url
+
+    from cosinnus.core.registries import url_registry
+
+    urlpatterns = patterns('',
+        # ...
+        # url(r'^', include('cosinnus.urls', namespace='cosinnus')),
+        # ...
+        url(r'^', include(url_registry.api_urlpatterns, namespace='cosinnus')),
+        # ...
+    )
