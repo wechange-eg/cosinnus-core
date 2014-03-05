@@ -85,22 +85,33 @@ class AjaxableFormMixin(object):
         else:
             return HttpResponseBadRequest()
 
+    def _patch_body_data_to_post(self, request):
+        """
+        Patch the ajax-post body data into the POST field
+        """
+        json_data = json.loads(request.body, encoding=request.encoding)
+        request._post = QueryDict(urllib.urlencode(json_data),
+                                  encoding=request.encoding)
+        self.request = request
+        return request
 
-    def post(self, request, *args, **kwargs):
-
+    def delete(self, request, *args, **kwargs):
         if self.is_ajax_request_url:
             if not request.is_ajax():
                 return HttpResponseBadRequest()
+            # from django.views.generic.edit/DeleteView/
+            self.object = self.get_object()
+            self.object.delete()
+            # return an empty response to signify success, instead of redirecting
+            return HttpResponse('[]')
 
-            # patch the ajax-post body data into the POST field
-            json_data = json.loads(request.body, encoding=request.encoding)
-            # if we update/delete, we need to pass the id from the body as pk kwarg
-            if 'id' in json_data:
-                self.kwargs['pk'] = json_data['id']
+        return super(AjaxableFormMixin, self).delete(request, *args, **kwargs)
 
-            body_data = urllib.urlencode(json_data)
-            request._post = QueryDict(body_data, encoding=request.encoding)
-            self.request = request
+    def post(self, request, *args, **kwargs):
+        if self.is_ajax_request_url:
+            if not request.is_ajax():
+                return HttpResponseBadRequest()
+            request = self._patch_body_data_to_post(request)
 
         return super(AjaxableFormMixin, self).post(request, *args, **kwargs)
 
