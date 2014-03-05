@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 import json
 
-from six.moves import urllib
+from six.moves import urllib_parse
 
 from django.core.exceptions import ImproperlyConfigured
 from django.http import HttpResponse, HttpResponseBadRequest, QueryDict
@@ -154,7 +154,7 @@ class AjaxableFormMixin(object):
         Patch the ajax-post body data into the POST field
         """
         json_data = json.loads(request.body, encoding=request.encoding)
-        request._post = QueryDict(urllib.urlencode(json_data),
+        request._post = QueryDict(urllib_parse.urlencode(json_data),
                                   encoding=request.encoding)
         self.request = request
         return request
