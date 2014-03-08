@@ -89,10 +89,19 @@ class BaseUserProfile(models.Model):
     def get_absolute_url(self):
         return reverse('cosinnus:profile-detail')
 
-    @property
-    def optional_fields(self):
+    @classmethod
+    def get_optional_fieldnames(cls):
         """
-        Iterates over all fields defiend in the user profile and returns a list
+        Iterates over all fields defined in the user profile and returns a list
+        of field names.
+
+        The list will only contain those fields not listed in ``SKIP_FIELDS``.
+        """
+        return list(set(cls._meta.get_all_field_names()) - set(cls.SKIP_FIELDS))
+
+    def get_optional_fields(self):
+        """
+        Iterates over all fields defined in the user profile and returns a list
         of dicts with the keys ``name`` and ``value``.
 
         The list will only contain those fields not listed in ``SKIP_FIELDS``.

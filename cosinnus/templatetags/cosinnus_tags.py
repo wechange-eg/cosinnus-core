@@ -11,8 +11,7 @@ from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
-from cosinnus.core.loaders.apps import cosinnus_app_registry as car
-from cosinnus.core.loaders.attached_objects import cosinnus_attached_object_registry as caor
+from cosinnus.core.registries import app_registry, attached_object_registry
 from cosinnus.models import CosinnusGroup
 from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending)
@@ -83,8 +82,7 @@ def cosinnus_menu(context, template="cosinnus/topmenu.html"):
     if 'group' in context:
         group = context['group']
         apps = []
-        for (app, name), label in zip(six.iteritems(car.app_names),
-                                      six.itervalues(car.app_labels)):
+        for app, name, label in app_registry.items():
             url = reverse('cosinnus:%s:index' % name, kwargs={'group': group.slug})
             apps.append({
                 'active': app == current_app,
@@ -101,25 +99,34 @@ def cosinnus_menu(context, template="cosinnus/topmenu.html"):
 
 
 @register.simple_tag(takes_context=True)
-def cosinnus_render_attached_objects(context, source):
-    """Renders all attached files on a given source cosinnus object. This will
+def cosinnus_render_attached_objects(context, source, filter=None):
+    """
+    Renders all attached files on a given source cosinnus object. This will
     collect and group all attached objects (`source.attached_objects`) by their
     model group and send them to the configured renderer for that model type
     (in each cosinnus app's `cosinnus_app.ATTACHABLE_OBJECT_RENDERERS`).
+
+    :param source: the source object to check for attached objects
+    :param filter: a comma seperated list of allowed Object types to be
+        rendered. eg.: 'cosinnus_event.Event,cosinnus_file.FileEntry' will
+        allow only Files and events to be rendered.
     """
     attached_objects = source.attached_objects.all()
+    allowed_types = filter.replace(' ', '').split(',') if filter else []
 
     typed_objects = defaultdict(list)
     for att in attached_objects:
         attobj = att.target_object
         content_model = att.model_name
+        if filter and not content_model in allowed_types:
+            continue
         if attobj is not None:
             typed_objects[content_model].append(attobj)
 
     rendered_output = []
     for model_name, objects in six.iteritems(typed_objects):
         # find manager object for attached object type
-        Renderer = caor.get_renderer(model_name)  # Renderer is a class
+        Renderer = attached_object_registry.get(model_name)  # Renderer is a class
         if Renderer:
             # pass the list to that manager and expect a rendered html string
             rendered_output.append(Renderer.render(context, objects))

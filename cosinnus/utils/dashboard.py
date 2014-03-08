@@ -6,6 +6,7 @@ import six
 from django import forms
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.decorators import classonlymethod
+from django.core.urlresolvers import reverse
 
 from cosinnus.utils.compat import atomic
 
@@ -104,3 +105,7 @@ class DashboardWidget(object):
     @property
     def title(self):
         return ''
+
+    @property
+    def title_url(self):
+        return reverse('cosinnus:%s:index' % self.app_name, kwargs={'group': self.config.group.slug})

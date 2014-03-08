@@ -136,6 +136,7 @@
             $.ajax(Cosinnus.base_url + "widget/" + id + "/").done(function(data, textStatus, jqXHR) {
                 $('[data-target=widget-content]', holder).html(data);
                 $('[data-target=widget-title]', holder).html(jqXHR.getResponseHeader('X-Cosinnus-Widget-Title'));
+                $('[data-target=widget-title-url]', holder).attr("href", jqXHR.getResponseHeader('X-Cosinnus-Widget-Title-URL'));
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 var error = $('<div class="alert alert-danger">An error occurred while loading the widget. </div>');
                 var reload = $('<a href="#" class="alert-link">Reload</a>').bind("click", {

@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
 from taggit.managers import TaggableManager
@@ -106,6 +107,17 @@ class BaseTaggableObjectModel(models.Model):
     title = models.CharField(_('Title'), max_length=255)
     slug = models.SlugField(max_length=55, blank=True)  # human readable part is 50 chars
 
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL,
+        verbose_name=_('Creator'),
+        on_delete=models.PROTECT,
+        null=True,
+        related_name='%(app_label)s_%(class)s_set')
+    created = models.DateTimeField(
+        verbose_name=_('Created'),
+        editable=False,
+        default=now,
+        auto_now_add=True)
+
     class Meta:
         abstract = True
         unique_together = (('group', 'slug'),)
@@ -120,3 +132,27 @@ class BaseTaggableObjectModel(models.Model):
     def save(self, *args, **kwargs):
         unique_aware_slugify(self, 'title', 'slug', group=self.group)
         super(BaseTaggableObjectModel, self).save(*args, **kwargs)
+
+
+class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
+    """
+    Represents the base for hierarchical cosinnus models.
+    """
+    is_container = models.BooleanField(
+        blank=False, null=False, default=False, editable=False)
+    path = models.CharField(_('Path'),
+        blank=False, null=False, default='/', max_length=100)
+
+    # subclassing from BaseTagglableObjectModel.Meta doesn't seem to work for
+    # abstract base classes
+    class Meta:
+        abstract = True
+        unique_together = (('group', 'slug'),)
+
+    def __str__(self):
+        return '%s (%s)' % (self.title, self.path)
+
+    def save(self, *args, **kwargs):
+        if self.path[-1] != '/':
+            self.path += '/'
+        super(BaseHierarchicalTaggableObjectModel, self).save(*args, **kwargs)

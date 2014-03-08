@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import six
-
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
@@ -16,7 +14,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView,
     ListView, UpdateView, TemplateView)
 
 from cosinnus.core.decorators.views import superuser_required
-from cosinnus.core.loaders.apps import cosinnus_app_registry as car
+from cosinnus.core.registries import app_registry
 from cosinnus.forms.group import CosinnusGroupForm, MembershipForm
 from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING)
@@ -410,8 +408,7 @@ class GroupExportView(RequireAdminMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         export_apps = []
-        for (app, name), label in zip(six.iteritems(car.app_names),
-                                      six.itervalues(car.app_labels)):
+        for app, name, label in app_registry.items():
             try:
                 url = reverse('cosinnus:%s:export' % name,
                               kwargs={'group': self.group.slug})

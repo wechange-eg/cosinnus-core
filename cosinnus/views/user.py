@@ -57,7 +57,7 @@ class UserDetailView(DetailView):
 
         profile = context['user'].cosinnus_profile
         context['profile'] = profile
-        context['optional_fields'] = profile.optional_fields
+        context['optional_fields'] = profile.get_optional_fields()
 
         return context
 

@@ -19,7 +19,7 @@ USE_TZ = True
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 SECRET_KEY = 'test-secret-key'
-ROOT_URLCONF = 'cosinnus.urls'
+ROOT_URLCONF = 'tests.urls'
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',

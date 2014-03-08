@@ -67,8 +67,14 @@ class FilterGroupMixin(object):
     group_field = 'group'
 
     def get_queryset(self, **kwargs):
-        return super(FilterGroupMixin, self).get_queryset().filter(
-            **{self.get_group_field(): self.get_group_attr()})
+        fkwargs = {self.get_group_field(): self.get_group_attr()}
+
+        select_related = set(kwargs.pop('select_related', ()))
+        select_related.add(self.get_group_field())
+
+        return super(FilterGroupMixin, self).get_queryset() \
+            .filter(**fkwargs) \
+            .select_related(*select_related)
 
     def get_group_attr(self):
         return getattr(self, self.group_attr)
