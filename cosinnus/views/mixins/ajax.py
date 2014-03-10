@@ -12,6 +12,8 @@ from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
 
 from cosinnus.utils.http import JSONResponse
+from django.contrib.messages.api import get_messages
+from django.utils.encoding import force_text
 
 
 class BaseAjaxableResponseMixin(object):
@@ -120,6 +122,8 @@ class AjaxableFormMixin(object):
         if self.is_ajax_request_url:
             response = super(AjaxableFormMixin, self).form_invalid(form)
             if self.is_ajax_request_url and self.request.is_ajax():
+                # TODO: get the messages (as in form_valid()
+                # and add them to the response, if that is wished)
                 return self.render_to_json_response(form.errors, status=400)
             else:
                 return response
@@ -136,6 +140,7 @@ class AjaxableFormMixin(object):
                 data = {
                     'pk': self.object.pk,
                     'id': self.object.id,
+                    'messages': [force_text(msg) for msg in get_messages(self.request)],
                 }
                 return self.render_to_json_response(data)
             else:
