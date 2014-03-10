@@ -9,7 +9,9 @@
     <title>{% block page_title %}{% endblock page_title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     {% if SETTINGS.DEBUG %}
+      {% block csshead %}
       <link href="{% static "css/vendor/bootstrap.min.css" %}" rel="stylesheet">
+      {% endblock csshead %}
       <script src="{% static "js/vendor/jquery-1.10.2.min.js" %}"></script>
       <script src="{% static "js/vendor/bootstrap.min.js" %}"></script>
     {% else %}
