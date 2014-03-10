@@ -150,7 +150,7 @@ class AjaxableFormMixin(object):
 
     def render_to_json_response(self, context, **response_kwargs):
         if self.is_ajax_request_url:
-            return JSONResponse(context)
+            return JSONResponse(context, **response_kwargs)
         else:
             return HttpResponseBadRequest()
 
