@@ -58,6 +58,7 @@ setup(
         'django-taggit>=0.11',
         'django-bootstrap3',
         'django-bootstrap3-datetimepicker>=2.2.0',
+        'djangorestframework>=2.3.0',
     ],
     dependency_links=[
         'git+git://github.com/Markush2010/django-bootstrap3.git@develop#egg=django-bootstrap3'
