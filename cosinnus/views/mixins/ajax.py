@@ -5,15 +5,28 @@ import json
 
 from six.moves import urllib_parse
 
+from django.contrib.messages.api import get_messages
 from django.core.exceptions import ImproperlyConfigured
 from django.http import HttpResponse, HttpResponseBadRequest, QueryDict
+from django.utils.encoding import force_text
 
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
 
 from cosinnus.utils.http import JSONResponse
-from django.contrib.messages.api import get_messages
-from django.utils.encoding import force_text
+
+
+def patch_body_json_data(request):
+    """
+    Patch the ajax-post body data into the POST field
+    """
+    body = request.body
+    encoding = request.encoding or 'utf-8'
+    body = force_text(body, encoding=encoding)
+    json_data = json.loads(body, encoding=request.encoding)
+    request._post = QueryDict(urllib_parse.urlencode(json_data),
+                              encoding=request.encoding)
+    return request
 
 
 class BaseAjaxableResponseMixin(object):
@@ -155,16 +168,5 @@ class AjaxableFormMixin(object):
             return HttpResponseBadRequest()
 
     def _patch_body_data_to_post(self, request):
-        """
-        Patch the ajax-post body data into the POST field
-        """
-        body = request.body
-        # TODO: the hasattr check feels just wrong. No idea how to fix it for
-        # Py2 and Py3
-        if request.encoding and hasattr(body, 'decode'):
-            body = body.decode(request.encoding)
-        json_data = json.loads(body, encoding=request.encoding)
-        request._post = QueryDict(urllib_parse.urlencode(json_data),
-                                  encoding=request.encoding)
-        self.request = request
-        return request
+        self.request = patch_body_json_data(request)
+        return self.request
