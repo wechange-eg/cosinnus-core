@@ -19,7 +19,7 @@ from cosinnus.forms.group import CosinnusGroupForm, MembershipForm
 from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING)
 from cosinnus.models.serializers import (GroupSimpleSerializer,
-    UserListSerializer)
+    UserSimpleSerializer)
 from cosinnus.utils.compat import atomic
 from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
     AjaxableFormMixin, ListAjaxableResponseMixin)
@@ -154,7 +154,7 @@ group_update_api = GroupUpdateView.as_view(is_ajax_request_url=True)
 
 class GroupUserListView(ListAjaxableResponseMixin, RequireReadMixin, ListView):
 
-    serializer_class = UserListSerializer
+    serializer_class = UserSimpleSerializer
     template_name = 'cosinnus/group_user_list.html'
 
     def get_queryset(self):

@@ -9,7 +9,7 @@ from cosinnus.models import BaseUserProfile
 
 
 __all__ = ('BaseUserProfileSerializer', 'UserDetailSerializer',
-    'UserListSerializer', )
+    'UserSimpleSerializer', )
 
 
 class BaseUserProfileSerializer(serializers.ModelSerializer):
@@ -27,7 +27,7 @@ class UserDetailSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'cosinnus_profile', 'cosinnus_groups')
 
 
-class UserListSerializer(serializers.ModelSerializer):
+class UserSimpleSerializer(serializers.ModelSerializer):
 
     username = serializers.CharField(source='get_username', read_only=True)
 
