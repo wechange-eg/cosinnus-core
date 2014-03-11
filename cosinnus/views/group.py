@@ -18,11 +18,15 @@ from cosinnus.core.registries import app_registry
 from cosinnus.forms.group import CosinnusGroupForm, MembershipForm
 from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING)
+from cosinnus.models.serializers import (GroupSimpleSerializer,
+    UserListSerializer)
 from cosinnus.utils.compat import atomic
+from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
+    AjaxableFormMixin, ListAjaxableResponseMixin)
 from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin
 
 
-class GroupCreateView(CreateView):
+class GroupCreateView(AjaxableFormMixin, CreateView):
 
     form_class = CosinnusGroupForm
     model = CosinnusGroup
@@ -48,9 +52,10 @@ class GroupCreateView(CreateView):
         return reverse('cosinnus:group-detail', kwargs={'group': self.object.slug})
 
 group_create = GroupCreateView.as_view()
+group_create_api = GroupCreateView.as_view(is_ajax_request_url=True)
 
 
-class GroupDeleteView(DeleteView):
+class GroupDeleteView(AjaxableFormMixin, DeleteView):
 
     model = CosinnusGroup
     slug_url_kwarg = 'group'
@@ -68,11 +73,13 @@ class GroupDeleteView(DeleteView):
         return context
 
 group_delete = GroupDeleteView.as_view()
+group_delete_api = GroupDeleteView.as_view(is_ajax_request_url=True)
 
 
-class GroupDetailView(RequireReadMixin, DetailView):
+class GroupDetailView(DetailAjaxableResponseMixin, RequireReadMixin, DetailView):
 
     template_name = 'cosinnus/group_detail.html'
+    serializer_class = GroupSimpleSerializer
 
     def get_object(self, queryset=None):
         return self.group
@@ -93,12 +100,14 @@ class GroupDetailView(RequireReadMixin, DetailView):
         return context
 
 group_detail = GroupDetailView.as_view()
+group_detail_api = GroupDetailView.as_view(is_ajax_request_url=True)
 
 
-class GroupListView(ListView):
+class GroupListView(ListAjaxableResponseMixin, ListView):
 
     model = CosinnusGroup
     template_name = 'cosinnus/group_list.html'
+    serializer_class = GroupSimpleSerializer
 
     def get_queryset(self):
         if self.request.user.is_authenticated():
@@ -119,9 +128,10 @@ class GroupListView(ListView):
         return ctx
 
 group_list = GroupListView.as_view()
+group_list_api = GroupListView.as_view(is_ajax_request_url=True)
 
 
-class GroupUpdateView(RequireAdminMixin, UpdateView):
+class GroupUpdateView(AjaxableFormMixin, RequireAdminMixin, UpdateView):
 
     form_class = CosinnusGroupForm
     model = CosinnusGroup
@@ -139,16 +149,19 @@ class GroupUpdateView(RequireAdminMixin, UpdateView):
         return reverse('cosinnus:group-detail', kwargs={'group': self.group.slug})
 
 group_update = GroupUpdateView.as_view()
+group_update_api = GroupUpdateView.as_view(is_ajax_request_url=True)
 
 
-class GroupUserListView(RequireReadMixin, ListView):
+class GroupUserListView(ListAjaxableResponseMixin, RequireReadMixin, ListView):
 
+    serializer_class = UserListSerializer
     template_name = 'cosinnus/group_user_list.html'
 
     def get_queryset(self):
         return self.group.users.all()
 
 group_user_list = GroupUserListView.as_view()
+group_user_list_api = GroupUserListView.as_view(is_ajax_request_url=True)
 
 
 class GroupConfirmMixin(object):
@@ -309,7 +322,8 @@ class UserSelectMixin(object):
         return reverse('cosinnus:group-detail', kwargs={'group': self.group.slug})
 
 
-class GroupUserAddView(RequireAdminMixin, UserSelectMixin, CreateView):
+class GroupUserAddView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
+                       CreateView):
 
     def form_valid(self, form):
         user = form.cleaned_data.get('user')
@@ -334,9 +348,11 @@ class GroupUserAddView(RequireAdminMixin, UserSelectMixin, CreateView):
         return get_user_model()._default_manager.exclude(id__in=uids)
 
 group_user_add = GroupUserAddView.as_view()
+group_user_add_api = GroupUserAddView.as_view(is_ajax_request_url=True)
 
 
-class GroupUserUpdateView(RequireAdminMixin, UserSelectMixin, UpdateView):
+class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
+                          UserSelectMixin, UpdateView):
 
     def form_valid(self, form):
         user = form.cleaned_data.get('user')
@@ -363,9 +379,11 @@ class GroupUserUpdateView(RequireAdminMixin, UserSelectMixin, UpdateView):
         return self.group.users
 
 group_user_update = GroupUserUpdateView.as_view()
+group_user_update_api = GroupUserUpdateView.as_view(is_ajax_request_url=True)
 
 
-class GroupUserDeleteView(RequireAdminMixin, UserSelectMixin, DeleteView):
+class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
+                          UserSelectMixin, DeleteView):
 
     template_name = 'cosinnus/group_confirm.html'
 
@@ -400,6 +418,7 @@ class GroupUserDeleteView(RequireAdminMixin, UserSelectMixin, DeleteView):
         return context
 
 group_user_delete = GroupUserDeleteView.as_view()
+group_user_delete_api = GroupUserDeleteView.as_view(is_ajax_request_url=True)
 
 
 class GroupExportView(RequireAdminMixin, TemplateView):

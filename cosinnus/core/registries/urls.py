@@ -22,7 +22,9 @@ class URLRegistry(BaseRegistry):
         super(URLRegistry, self).__init__()
         with self.lock:
             self._urlpatterns = patterns('')
-            self._api_urlpatterns = patterns('')
+            self._api_urlpatterns = patterns('',
+                url(r'', include('cosinnus.urls_api'))
+            )
             self._apps = set()
 
     def register(self, app, root_patterns=None, group_patterns=None,
