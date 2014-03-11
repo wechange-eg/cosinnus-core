@@ -103,6 +103,10 @@ def login_api(request, authentication_form=AuthenticationForm):
     """
     if request.method == "POST":
         request = patch_body_json_data(request)
+
+        # TODO: Django<=1.5: Django 1.6 removed the cookie check in favor of CSRF
+        request.session.set_test_cookie()
+
         form = authentication_form(request, data=request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
