@@ -369,8 +369,9 @@ class CosinnusGroup(models.Model):
 @python_2_unicode_compatible
 class CosinnusGroupMembership(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-        related_name='cosinnus_memberships')
-    group = models.ForeignKey(CosinnusGroup, related_name='memberships')
+        related_name='cosinnus_memberships', on_delete=models.CASCADE)
+    group = models.ForeignKey(CosinnusGroup, related_name='memberships',
+        on_delete=models.CASCADE)
     status = models.PositiveSmallIntegerField(choices=MEMBERSHIP_STATUSES,
         db_index=True, default=MEMBERSHIP_PENDING)
     date = models.DateTimeField(auto_now_add=True, editable=False)
