@@ -21,13 +21,71 @@ class BaseApiTest(TestCase):
     def assertJsonEqual(self, response, obj):
         self.assertEqual(json.loads(force_text(response.content)), obj)
 
-    def post(self, path, data, *args, **kwargs):
-        return self.client.post(path, data=json.dumps(data),
-            content_type='text/json;charset=UTF-8', *args, **kwargs)
+    def delete(self, name, *args, **kwargs):
+        reverse_args = kwargs.pop('reverse_args', ())
+        reverse_kwargs = kwargs.pop('reverse_kwargs', {})
+        return self.client.delete(reverse(name, args=reverse_args, kwargs=reverse_kwargs),
+            *args, **kwargs)
 
-    def put(self, path, data, *args, **kwargs):
-        return self.client.put(path, data=json.dumps(data),
-            content_type='text/json;charset=UTF-8', *args, **kwargs)
+    def get(self, name, *args, **kwargs):
+        reverse_args = kwargs.pop('reverse_args', ())
+        reverse_kwargs = kwargs.pop('reverse_kwargs', {})
+        return self.client.get(reverse(name, args=reverse_args, kwargs=reverse_kwargs),
+            *args, **kwargs)
+
+    def post(self, name, data, *args, **kwargs):
+        reverse_args = kwargs.pop('reverse_args', ())
+        reverse_kwargs = kwargs.pop('reverse_kwargs', {})
+        return self.client.post(reverse(name, args=reverse_args, kwargs=reverse_kwargs),
+            data=json.dumps(data), content_type='text/json;charset=UTF-8',
+            *args, **kwargs)
+
+    def put(self, name, data, *args, **kwargs):
+        reverse_args = kwargs.pop('reverse_args', ())
+        reverse_kwargs = kwargs.pop('reverse_kwargs', {})
+        return self.client.put(reverse(name, args=reverse_args, kwargs=reverse_kwargs),
+            data=json.dumps(data), content_type='text/json;charset=UTF-8',
+            *args, **kwargs)
+
+
+class AuthTest(BaseApiTest):
+
+    def test_login_success(self):
+        User.objects.create_user('user', password='pass')
+        resp = self.post('cosinnus-api:login', {
+            'username': 'user',
+            'password': 'pass',
+        })
+        self.assertEqual(resp.status_code, 200)
+
+    def test_login_wrong_input(self):
+        self.maxDiff = None
+        User.objects.create_user('user', password='pass')
+        resp = self.post('cosinnus-api:login', {
+            'username': 'nobody',
+            'password': 'wrong',
+        })
+        self.assertEqual(resp.status_code, 401)
+        self.assertJsonEqual(resp, {
+            '__all__': ['Please enter a correct username and password. Note '
+                        'that both fields may be case-sensitive.']
+        })
+
+    def test_login_invalid_method(self):
+        self.maxDiff = None
+        User.objects.create_user('user', password='pass')
+        resp = self.get('cosinnus-api:login')
+        self.assertEqual(resp.status_code, 405)
+
+    def test_logout(self):
+        self.maxDiff = None
+        u = User.objects.create_user('user', password='pass')
+        self.client.login(username='user', password='pass')
+        self.assertIn('_auth_user_id', self.client.session)
+        self.assertEqual(self.client.session['_auth_user_id'], u.pk)
+        resp = self.get('cosinnus-api:logout')
+        self.assertEqual(resp.status_code, 200)
+        self.assertNotIn('_auth_user_id', self.client.session)
 
 
 class GroupTest(BaseApiTest):
@@ -36,7 +94,7 @@ class GroupTest(BaseApiTest):
         """
         Tests for an empty list returned if no groups exist
         """
-        resp = self.client.get(reverse('cosinnus-api:group-list'))
+        resp = self.get('cosinnus-api:group-list')
         self.assertJsonEqual(resp, [])
 
     def test_group_list_filled(self):
@@ -46,7 +104,7 @@ class GroupTest(BaseApiTest):
         g1 = CosinnusGroup.objects.create(name='Group 1', public=True)
         g2 = CosinnusGroup.objects.create(name='Group 2', public=True)
         CosinnusGroup.objects.create(name='Group 3', public=False)
-        resp = self.client.get(reverse('cosinnus-api:group-list'))
+        resp = self.get('cosinnus-api:group-list')
         self.assertJsonEqual(resp, [{
             'id': g1.id,
             'name': g1.name,
@@ -69,7 +127,7 @@ class GroupTest(BaseApiTest):
         u = User.objects.create_user('user', password='user')
         CosinnusGroupMembership.objects.create(user=u, group=g3, status=MEMBERSHIP_MEMBER)
         self.client.login(username='user', password='user')
-        resp = self.client.get(reverse('cosinnus-api:group-list'))
+        resp = self.get('cosinnus-api:group-list')
         self.assertJsonEqual(resp, [{
             'id': g1.id,
             'name': g1.name,
@@ -91,8 +149,8 @@ class GroupTest(BaseApiTest):
         """
         Tests that a request to a none-existing group returns a 404
         """
-        resp = self.client.get(reverse('cosinnus-api:group-detail',
-                                       kwargs={'group': 'i-dont-exist'}))
+        resp = self.get('cosinnus-api:group-detail',
+                        reverse_kwargs={'group': 'i-dont-exist'})
         self.assertEqual(force_text(resp.content), 'No group found with this name')
         self.assertEqual(resp.status_code, 404)
 
@@ -101,8 +159,8 @@ class GroupTest(BaseApiTest):
         Tests that a group detail view returns the data about a public group
         """
         g = CosinnusGroup.objects.create(name='Group', public=True)
-        resp = self.client.get(reverse('cosinnus-api:group-detail',
-                                       kwargs={'group': g.slug}))
+        resp = self.get('cosinnus-api:group-detail',
+                        reverse_kwargs={'group': g.slug})
         self.assertJsonEqual(resp, {
             'id': g.id,
             'name': g.name,
@@ -116,8 +174,8 @@ class GroupTest(BaseApiTest):
         not logged in
         """
         g = CosinnusGroup.objects.create(name='Group', public=False)
-        resp = self.client.get(reverse('cosinnus-api:group-detail',
-                                       kwargs={'group': g.slug}))
+        resp = self.get('cosinnus-api:group-detail',
+                        reverse_kwargs={'group': g.slug})
         self.assertEqual(force_text(resp.content), 'Access denied')
         self.assertEqual(resp.status_code, 403)
 
@@ -130,8 +188,8 @@ class GroupTest(BaseApiTest):
         u = User.objects.create_user('user', password='user')
         CosinnusGroupMembership.objects.create(user=u, group=g, status=MEMBERSHIP_MEMBER)
         self.client.login(username='user', password='user')
-        resp = self.client.get(reverse('cosinnus-api:group-detail',
-                                       kwargs={'group': g.slug}))
+        resp = self.get('cosinnus-api:group-detail',
+                        reverse_kwargs={'group': g.slug})
         self.assertJsonEqual(resp, {
             'id': g.id,
             'name': g.name,
@@ -145,7 +203,7 @@ class GroupTest(BaseApiTest):
         """
         self.assertEqual(CosinnusGroup.objects.all().count(), 0)
         self.client.login(username='admin', password='admin')
-        resp = self.post(reverse('cosinnus-api:group-add'), data={
+        resp = self.post('cosinnus-api:group-add', data={
             'name': 'Some Group',
         })
         self.assertEqual(resp.status_code, 200)
@@ -161,7 +219,7 @@ class GroupTest(BaseApiTest):
         """
         self.assertEqual(CosinnusGroup.objects.all().count(), 0)
         self.client.login(username='admin', password='admin')
-        resp = self.post(reverse('cosinnus-api:group-add'), data={
+        resp = self.post('cosinnus-api:group-add', data={
             'name': 'Some Group',
             'slug': 'something-else',
             'public': True,
@@ -180,8 +238,8 @@ class GroupTest(BaseApiTest):
         g = CosinnusGroup.objects.create(name='Group', public=False)
         self.assertEqual(CosinnusGroup.objects.all().count(), 1)
         self.client.login(username='admin', password='admin')
-        resp = self.client.delete(reverse('cosinnus-api:group-delete',
-                                          kwargs={'group': g.slug}))
+        resp = self.delete('cosinnus-api:group-delete',
+                           reverse_kwargs={'group': g.slug})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(CosinnusGroup.objects.all().count(), 0)
 
@@ -198,8 +256,8 @@ class GroupTest(BaseApiTest):
         self.assertEqual(CosinnusGroup.objects.all().count(), 1)
         self.assertEqual(CosinnusGroupMembership.objects.all().count(), 2)
         self.client.login(username='admin', password='admin')
-        resp = self.client.delete(reverse('cosinnus-api:group-delete',
-                                          kwargs={'group': g.slug}))
+        resp = self.delete('cosinnus-api:group-delete',
+                           reverse_kwargs={'group': g.slug})
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(CosinnusGroup.objects.all().count(), 0)
         self.assertEqual(CosinnusGroupMembership.objects.all().count(), 0)
@@ -211,8 +269,8 @@ class GroupTest(BaseApiTest):
         g = CosinnusGroup.objects.create(name='Group', slug='group', public=False)
         self.assertEqual(CosinnusGroup.objects.all().count(), 1)
         self.client.login(username='admin', password='admin')
-        resp = self.put(reverse('cosinnus-api:group-edit',
-                                kwargs={'group': g.slug}), data={
+        resp = self.put('cosinnus-api:group-edit',
+                        reverse_kwargs={'group': g.slug}, data={
             'name': 'Group 2',
             'slug': 'group-2',
             'public': True,
@@ -235,8 +293,8 @@ class GroupUsersTest(BaseApiTest):
         """
         Tests for an empty list returned if group has no users
         """
-        resp = self.client.get(reverse('cosinnus-api:group-user-list',
-                                       kwargs={'group': self.group.slug}))
+        resp = self.get('cosinnus-api:group-user-list',
+                        reverse_kwargs={'group': self.group.slug})
         self.assertJsonEqual(resp, [])
 
     def test_group_list_filled(self):
@@ -251,8 +309,8 @@ class GroupUsersTest(BaseApiTest):
         CosinnusGroupMembership.objects.create(user=u1, group=self.group, status=MEMBERSHIP_ADMIN)
         CosinnusGroupMembership.objects.create(user=u2, group=self.group, status=MEMBERSHIP_MEMBER)
         CosinnusGroupMembership.objects.create(user=u3, group=self.group, status=MEMBERSHIP_PENDING)
-        resp = self.client.get(reverse('cosinnus-api:group-user-list',
-                                       kwargs={'group': self.group.slug}))
+        resp = self.get('cosinnus-api:group-user-list',
+                        reverse_kwargs={'group': self.group.slug})
         self.assertJsonEqual(resp, [{
             'id': u1.id,
             'username': u1.username,

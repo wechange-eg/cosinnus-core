@@ -1,14 +1,20 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, login as auth_login, logout as auth_logout
+from django.contrib.auth.forms import AuthenticationForm
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
+from django.views.decorators.debug import sensitive_post_parameters
+from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_protect
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from cosinnus.core.decorators.views import staff_required, superuser_required
 from cosinnus.forms.user import UserCreationForm, UserChangeForm
+from cosinnus.views.mixins.ajax import patch_body_json_data
+from cosinnus.utils.http import JSONResponse
 
 
 USER_MODEL = get_user_model()
@@ -86,3 +92,30 @@ class UserUpdateView(UpdateView):
             kwargs={'username': self.object.username})
 
 user_update = UserUpdateView.as_view()
+
+
+@sensitive_post_parameters()
+@csrf_protect
+@never_cache
+def login_api(request, authentication_form=AuthenticationForm):
+    """
+    Logs the user specified by the `authentication_form` in.
+    """
+    if request.method == "POST":
+        request = patch_body_json_data(request)
+        form = authentication_form(request, data=request.POST)
+        if form.is_valid():
+            auth_login(request, form.get_user())
+            return JSONResponse({})
+        else:
+            return JSONResponse(form.errors, status=401)
+    else:
+        return JSONResponse({}, status=405)  # Method not allowed
+
+
+def logout_api(request):
+    """
+    Logs the user out.
+    """
+    auth_logout(request)
+    return JSONResponse({})

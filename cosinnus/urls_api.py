@@ -7,6 +7,9 @@ from cosinnus.utils.urls import api_patterns
 
 
 urlpatterns = api_patterns(1, None, False, 'cosinnus.views',
+    url(r'^login/$', 'user.login_api', name='login'),
+    url(r'^logout/$', 'user.logout_api', name='logout'),
+
     url(r'^group/list/$',
         'group.group_list_api',
         name='group-list'),
