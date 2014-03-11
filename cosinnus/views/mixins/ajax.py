@@ -158,7 +158,12 @@ class AjaxableFormMixin(object):
         """
         Patch the ajax-post body data into the POST field
         """
-        json_data = json.loads(request.body, encoding=request.encoding)
+        body = request.body
+        # TODO: the hasattr check feels just wrong. No idea how to fix it for
+        # Py2 and Py3
+        if request.encoding and hasattr(body, 'decode'):
+            body = body.decode(request.encoding)
+        json_data = json.loads(body, encoding=request.encoding)
         request._post = QueryDict(urllib_parse.urlencode(json_data),
                                   encoding=request.encoding)
         self.request = request
