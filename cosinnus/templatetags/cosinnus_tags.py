@@ -149,27 +149,24 @@ def cosinnus_autocomplete(field, objects):
 
 class URLNodeOptional(URLNode):
     """
-    Exactly the same as from `django.template.defaulttags.url` *except*
-    `kwargs` equal to `None` are removed. This allows a bit more flexibility
-    than the use of `{% url %}` where nesting is rested on optional base
-    kw arguments.
+    Exactly the same as `django.template.defaulttags.url` *except* `kwargs`
+    needs to evaluate to `True`. All other `kwargs` are removed. This allows a
+    bit more flexibility than the use of `{% url %}`.
 
     .. seealso:: http://code.djangoproject.com/ticket/9176
     """
     
     def render(self, context):
-        for k, v in self.kwargs.items():
-            if v.resolve(context) is None:
-                self.kwargs.pop(k)
+        self.kwargs = {k: v for k, v in six.iteritems(self.kwargs) if v.resolve(context)}
         return super(URLNodeOptional, self).render(context)
 
 
 @register.tag
 def url_optional(parser, token):
     """
-    Creates the default `URLNode`, then routes it to the optional resolver with
-    the same properties by first creating the `URLNode`, the parsing stays in
-    django core where it belongs.
+    Creates the default `URLNode`, then routes it through the optional resolver
+    with the same properties by first creating the `URLNode`. The parsing stays
+    in Django core where it belongs.
     """
 
     urlnode = url_tag(parser, token)
