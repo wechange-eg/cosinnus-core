@@ -22,7 +22,8 @@
     <script type="text/javascript">
         var cosinnus_base_url = "{{ COSINNUS_BASE_URL|default:'/' }}";
         var cosinnus_active_group = {% if group %}"{{ group.slug }}"{% else %}false{% endif %};
-     </script>
+        var cosinnus_active_user = JSON.parse("{{ COSINNUS_USER|escapejs }}");
+    </script>
     <link href="{% static "css/cosinnus.css" %}" rel="stylesheet">
     {% include 'cosinnus/extrahead.html' %}
     {% block extrahead %}{% endblock extrahead %}
