@@ -7,6 +7,7 @@ import six
 from django import template
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import resolve, reverse
+from django.template.defaulttags import URLNode, url as url_tag
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
@@ -144,3 +145,33 @@ def cosinnus_autocomplete(field, objects):
         'field': field,
         'objects': objects
     }
+
+
+class URLNodeOptional(URLNode):
+    """
+    Exactly the same as from `django.template.defaulttags.url` *except*
+    `kwargs` equal to `None` are removed. This allows a bit more flexibility
+    than the use of `{% url %}` where nesting is rested on optional base
+    kw arguments.
+
+    .. seealso:: http://code.djangoproject.com/ticket/9176
+    """
+    
+    def render(self, context):
+        for k, v in self.kwargs.items():
+            if v.resolve(context) is None:
+                self.kwargs.pop(k)
+        return super(URLNodeOptional, self).render(context)
+
+
+@register.tag
+def url_optional(parser, token):
+    """
+    Creates the default `URLNode`, then routes it to the optional resolver with
+    the same properties by first creating the `URLNode`, the parsing stays in
+    django core where it belongs.
+    """
+
+    urlnode = url_tag(parser, token)
+    return URLNodeOptional(urlnode.view_name, urlnode.args, urlnode.kwargs,
+        urlnode.asvar)
