@@ -157,7 +157,7 @@ class URLNodeOptional(URLNode):
     """
     
     def render(self, context):
-        self.kwargs = {k: v for k, v in six.iteritems(self.kwargs) if v.resolve(context)}
+        self.kwargs = dict((k, v) for k, v in six.iteritems(self.kwargs) if v.resolve(context))
         return super(URLNodeOptional, self).render(context)
 
 
