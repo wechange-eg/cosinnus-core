@@ -2,13 +2,13 @@
 from __future__ import unicode_literals
 
 import json
-
-from six.moves import urllib_parse
+import six
 
 from django.contrib.messages.api import get_messages
 from django.core.exceptions import ImproperlyConfigured
-from django.http import HttpResponse, HttpResponseBadRequest, QueryDict
+from django.http import HttpResponseBadRequest, QueryDict
 from django.utils.encoding import force_text
+from django.utils.http import urlencode, urlquote
 
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
@@ -24,8 +24,14 @@ def patch_body_json_data(request):
     encoding = request.encoding or 'utf-8'
     body = force_text(body, encoding=encoding)
     json_data = json.loads(body, encoding=request.encoding)
-    request._post = QueryDict(urllib_parse.urlencode(json_data),
-                              encoding=request.encoding)
+
+    # urlencode doesn't handle None values correctly:
+    # http://bugs.python.org/issue18857
+    for k, v in six.iteritems(json_data):
+        if v is None:
+            json_data[k] = ''
+
+    request._post = QueryDict(urlencode(json_data), encoding=request.encoding)
     return request
 
 
@@ -63,11 +69,12 @@ class BaseAjaxableResponseMixin(object):
             serializer = self.serializer_class(self.get_serializable_content(),
                                           many=self.is_object_collection, context=context)
 
-            response = Response(serializer.data)
-            response.accepted_renderer = JSONRenderer()
-            response.accepted_media_type = response.accepted_renderer.media_type
-            response.renderer_context = context
-            return response
+            return JSONResponse(serializer.data)
+            # response = Response(serializer.data)
+            # response.accepted_renderer = JSONRenderer()
+            # response.accepted_media_type = response.accepted_renderer.media_type
+            # response.renderer_context = context
+            # return response
 
         else:
             return super(BaseAjaxableResponseMixin, self).get(request, *args, **kwargs)
@@ -118,7 +125,7 @@ class AjaxableFormMixin(object):
             self.object = self.get_object()
             self.object.delete()
             # return an empty response to signify success, instead of redirecting
-            return HttpResponse('[]')
+            return self.render_to_json_response({})
 
         return super(AjaxableFormMixin, self).delete(request, *args, **kwargs)
 

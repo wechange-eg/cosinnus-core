@@ -1,15 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import datetime
 import json
 
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.test import TestCase, Client
+from django.http import QueryDict
+from django.test import Client, SimpleTestCase, TestCase, RequestFactory
 from django.utils.encoding import force_text
 
 from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING)
+
+from cosinnus.views.mixins.ajax import patch_body_json_data
 
 
 class BaseApiTest(TestCase):
@@ -37,15 +41,37 @@ class BaseApiTest(TestCase):
         reverse_args = kwargs.pop('reverse_args', ())
         reverse_kwargs = kwargs.pop('reverse_kwargs', {})
         return self.client.post(reverse(name, args=reverse_args, kwargs=reverse_kwargs),
-            data=json.dumps(data), content_type='text/json;charset=UTF-8',
+            data=json.dumps(data), content_type='text/json; charset=UTF-8',
             *args, **kwargs)
 
     def put(self, name, data, *args, **kwargs):
         reverse_args = kwargs.pop('reverse_args', ())
         reverse_kwargs = kwargs.pop('reverse_kwargs', {})
         return self.client.put(reverse(name, args=reverse_args, kwargs=reverse_kwargs),
-            data=json.dumps(data), content_type='text/json;charset=UTF-8',
+            data=json.dumps(data), content_type='text/json; charset=UTF-8',
             *args, **kwargs)
+
+
+class HelperTest(SimpleTestCase):
+
+    def test_patch_body_json_data(self):
+        """
+        Tests for null values being converted to an empty string in
+        JSON POST data
+        """
+        factory = RequestFactory()
+        data = {
+            'string': 'Stringvalue',
+            'int': 42,
+            'float': 13.37,
+            'none': None,
+        }
+        json_data = json.dumps(data)
+        request = factory.post('/', data=json_data,
+            content_type='text/json; charset=UTF-8')
+        patch_body_json_data(request)
+        query = QueryDict('string=Stringvalue&int=42&float=13.37&none')
+        self.assertEqual(request._post, query)
 
 
 class AuthTest(BaseApiTest):

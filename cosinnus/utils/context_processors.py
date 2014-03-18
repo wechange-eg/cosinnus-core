@@ -27,5 +27,5 @@ def cosinnus(request):
         user_json = json.dumps(False)
     return {
         'COSINNUS_BASE_URL': base_url,
-        'COSINNUS_USER':  user_json,
+        'COSINNUS_USER': user_json,
     }

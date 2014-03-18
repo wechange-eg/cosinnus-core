@@ -155,7 +155,6 @@ class URLNodeOptional(URLNode):
 
     .. seealso:: http://code.djangoproject.com/ticket/9176
     """
-    
     def render(self, context):
         self.kwargs = dict((k, v) for k, v in six.iteritems(self.kwargs) if v.resolve(context))
         return super(URLNodeOptional, self).render(context)
@@ -168,7 +167,6 @@ def url_optional(parser, token):
     with the same properties by first creating the `URLNode`. The parsing stays
     in Django core where it belongs.
     """
-
     urlnode = url_tag(parser, token)
     return URLNodeOptional(urlnode.view_name, urlnode.args, urlnode.kwargs,
         urlnode.asvar)
