@@ -23,6 +23,9 @@
         var cosinnus_base_url = "{{ COSINNUS_BASE_URL|default:'/' }}";
         var cosinnus_active_group = {% if group %}"{{ group.slug }}"{% else %}false{% endif %};
         var cosinnus_active_user = JSON.parse("{{ COSINNUS_USER|escapejs }}");
+        var cosinnus_date_format = 'DD.MM.YYYY';
+        var cosinnus_datetime_format = 'DD.MM.YYYY HH:mm:ss';
+        var cosinnus_time_format = 'HH:mm:ss';
     </script>
     <link href="{% static "css/cosinnus.css" %}" rel="stylesheet">
     {% include 'cosinnus/extrahead.html' %}
