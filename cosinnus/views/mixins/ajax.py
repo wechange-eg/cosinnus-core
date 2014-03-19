@@ -8,10 +8,6 @@ from django.contrib.messages.api import get_messages
 from django.core.exceptions import ImproperlyConfigured
 from django.http import HttpResponseBadRequest, QueryDict
 from django.utils.encoding import force_text
-from django.utils.http import urlencode, urlquote
-
-from rest_framework.response import Response
-from rest_framework.renderers import JSONRenderer
 
 from cosinnus.utils.http import JSONResponse
 
@@ -25,13 +21,17 @@ def patch_body_json_data(request):
     body = force_text(body, encoding=encoding)
     json_data = json.loads(body, encoding=request.encoding)
 
-    # urlencode doesn't handle None values correctly:
-    # http://bugs.python.org/issue18857
+    querydict = QueryDict('', mutable=True)
+
     for k, v in six.iteritems(json_data):
         if v is None:
-            json_data[k] = ''
+            querydict[k] = ''
+        elif isinstance(v, dict):
+            continue
+        else:
+            querydict[k] = force_text(v)
 
-    request._post = QueryDict(urlencode(json_data), encoding=request.encoding)
+    request._post = querydict
     return request
 
 
@@ -67,14 +67,9 @@ class BaseAjaxableResponseMixin(object):
 
             context = {'request': self.request}
             serializer = self.serializer_class(self.get_serializable_content(),
-                                          many=self.is_object_collection, context=context)
-
-            return JSONResponse(serializer.data)
-            # response = Response(serializer.data)
-            # response.accepted_renderer = JSONRenderer()
-            # response.accepted_media_type = response.accepted_renderer.media_type
-            # response.renderer_context = context
-            # return response
+                                               many=self.is_object_collection,
+                                               context=context)
+            return JSONResponse(serializer.data, status=response.status_code)
 
         else:
             return super(BaseAjaxableResponseMixin, self).get(request, *args, **kwargs)
@@ -90,7 +85,7 @@ class ListAjaxableResponseMixin(BaseAjaxableResponseMixin):
     is_object_collection = True
 
     def get_serializable_content(self):
-        return self.object_list
+        return getattr(self, 'object_list', [])  # We need an iterable
 
 
 class DetailAjaxableResponseMixin(BaseAjaxableResponseMixin):
@@ -100,7 +95,7 @@ class DetailAjaxableResponseMixin(BaseAjaxableResponseMixin):
     is_object_collection = False
 
     def get_serializable_content(self):
-        return self.object
+        return getattr(self, 'object', None)  # We need the object or None
 
 
 class AjaxableFormMixin(object):
