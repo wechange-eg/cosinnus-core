@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.test import TestCase
 
-from cosinnus.models import CosinnusGroup
+from cosinnus.models.tagged import CosinnusGroup
 
 from tests.models import SlugTestModel
 

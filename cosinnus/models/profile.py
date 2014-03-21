@@ -42,7 +42,7 @@ class BaseUserProfile(models.Model):
     .. code-block:: python
 
         from django.db import models
-        from cosinnus.models import BaseUserProfile
+        from cosinnus.models.profile import BaseUserProfile
 
         class MyUserProfile(BaseUserProfile):
             myfield = models.CharField('myfield', max_length=10)

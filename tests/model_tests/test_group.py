@@ -5,10 +5,12 @@ from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.test import TestCase
 
-from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership,
-    MEMBERSHIP_MEMBER)
-from cosinnus.models.group import (_GROUP_CACHE_KEY, _GROUPS_PK_CACHE_KEY,
+from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
+    MEMBERSHIP_MEMBER, _GROUP_CACHE_KEY, _GROUPS_PK_CACHE_KEY,
     _GROUPS_SLUG_CACHE_KEY)
+
+
+User = get_user_model()
 
 
 def create_multiple_groups():
@@ -273,7 +275,6 @@ class MembershipCacheTest(TestCase):
 
     def test_clear_local_caching(self):
         """Regression test for #45"""
-        User = get_user_model()
         group = CosinnusGroup.objects.create(name='testgroup1')
         user = User.objects.create(username='test1')
 

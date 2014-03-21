@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from cosinnus.models import BaseTaggableObjectModel
+from cosinnus.models.tagged import BaseTaggableObjectModel
 
 
 class SlugTestModel(BaseTaggableObjectModel):

@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 from taggit.managers import TaggableManager
 
 from cosinnus.conf import settings
-from cosinnus.models import CosinnusGroup
+from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.functions import unique_aware_slugify
 
 
