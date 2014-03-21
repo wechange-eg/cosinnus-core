@@ -65,9 +65,7 @@ class BaseUserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, editable=False,
         related_name='cosinnus_profile')
 
-    # TODO: uncomment once we move to Django 1.6 -- See ticket 19384
-    # https://code.djangoproject.com/ticket/19384
-    # objects = BaseUserProfileManager()
+    objects = BaseUserProfileManager()
 
     SKIP_FIELDS = ('id', 'user',)
 
@@ -123,8 +121,6 @@ class BaseUserProfile(models.Model):
 
 class UserProfile(BaseUserProfile):
 
-    objects = BaseUserProfileManager()
-
     class Meta:
         app_label = 'cosinnus'
         swappable = 'COSINNUS_USER_PROFILE_MODEL'
@@ -155,7 +151,9 @@ def create_user_profile(sender, instance, created, **kwargs):
     upm = get_user_profile_model()
     upm.objects.get_or_create(user=instance)
 
+
 if django.VERSION[:2] < (1, 7):
+
     def setup_user_profile_signal(sender, **kwargs):
         name = '%s.%s' % (sender._meta.app_label, sender._meta.object_name)
         if name == settings.AUTH_USER_MODEL:
@@ -170,7 +168,6 @@ if django.VERSION[:2] < (1, 7):
         if settings.DEBUG:
             from traceback import print_exc
             print_exc()
-
         class_prepared.connect(setup_user_profile_signal)
 else:
     # Django >= 1.7 supports lazy signal registration
