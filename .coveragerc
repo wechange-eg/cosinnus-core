@@ -1,0 +1,4 @@
+[run]
+branch = True
+source = cosinnus/
+omit = cosinnus/__init__.py,cosinnus/dj_migrations/*,cosinnus/migrations/*
