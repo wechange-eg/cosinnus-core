@@ -1,0 +1,338 @@
+/* @import must be at top of file, otherwise CSS will not work */
+/* COLORS */
+/* Bootstrap Adjustments */
+/*
+.row {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+*/
+/*
+ * Fixes showing dropdown menu when slowly hovering it.
+ */
+/*
+.dropdown-toggle {
+  padding-bottom: 20px;
+}
+
+.breadcrumb {
+  padding: 0px 15px 8px 15px;
+  margin-bottom: 20px;
+  list-style: none;
+  border-radius: 4px;
+  font-size: 10px;
+}
+
+.breadcrumb > li {
+  display: inline-block;
+}
+
+.breadcrumb > li + li:before {
+  padding: 0 5px;
+  color: $grey-darkest;
+  content: "\003E";
+}
+
+.breadcrumb > .active {
+  color: $grey-darkest;
+}
+
+.breadcrumb a {
+  color: $grey-darkest;
+}
+*/
+/* GENERAL */
+img.left {
+  float: left;
+  margin-right: 40px;
+}
+
+img.right {
+  float: right;
+  margin-left: 40px;
+}
+
+.img-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.displaynone {
+  display: none;
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+
+.clearboth {
+  clear: both;
+}
+
+.centered {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.centered-h {
+  text-align: center;
+}
+
+.centered-v {
+  vertical-align: middle;
+}
+
+.large-text {
+  font-weight: bold;
+  font-size: large;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.btn-flat {
+  width: 100%;
+  text-align: left;
+  padding: 0;
+}
+
+.btn-bar {
+  width: 15px;
+  background-color: red;
+}
+
+.icon-checkbox-unchecked {
+  background-color: white;
+  border: 1px solid #b07f19;
+}
+
+.icon-checkbox-checked {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-size: 16px;
+  color: #b07f19;
+  background-color: white;
+}
+
+.icon-close {
+  position: relative;
+  top: 1px;
+}
+
+.navbar-default {
+  background-color: #bacfd2;
+}
+
+.container h1 {
+  color: #414141;
+}
+
+.linktd {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  display: block;
+}
+
+.list-group img {
+  vertical-align: inherit;
+}
+
+.list-group-item {
+  width: 100%;
+  height: 40px;
+}
+
+.list-group > * {
+  height: 40px;
+  line-height: 40px;
+}
+
+.item-text {
+  padding: 10px 0px;
+  line-height: 20px;
+}
+
+.item-title:focus {
+  outline: none !important;
+}
+
+.lists-container {
+  background-color: #d1dcd8;
+}
+.lists-container .item-box {
+  height: 39px;
+}
+
+.items-container {
+  padding-top: 15px;
+  background-color: #d1dcd8;
+}
+.items-container .item-box {
+  height: 40px;
+}
+.items-container .item-title {
+  border: 1px solid transparent;
+}
+.items-container .item-title:hover {
+  border: 1px solid #b07f19;
+}
+
+.lists-all-container .list-group-item {
+  border-bottom: 1px solid #fcedce;
+}
+
+.list-group-container .list-group-item {
+  margin-bottom: 5px;
+}
+
+.list-group .item-box {
+  float: left;
+  width: 40px;
+  text-align: center;
+}
+.list-group .item-text {
+  position: absolute;
+  float: left;
+  padding-left: 15px;
+}
+.list-group .item-title {
+  float: left;
+}
+.list-group .item-text-buttons {
+  position: relative;
+  top: -5px;
+  padding-left: 15px;
+  z-index: 20;
+  display: none;
+}
+.list-group .item-text-buttons-wrapper {
+  position: relative;
+}
+.list-group .item-text-padleft {
+  padding-left: 15px;
+}
+.list-group .item-text-right {
+  position: relative;
+  float: left;
+  padding-left: 15px;
+  z-index: 10;
+  background-color: #f1a200;
+}
+.list-group .item-title-input {
+  display: none;
+  background-color: #f1a200;
+  color: white;
+  border: 0 none;
+  padding: 0;
+  margin: 0;
+  outline: 0;
+  resize: none;
+  font-size: 14px;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.list-group .item-title-input:focus {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.item-container-right {
+  float: right;
+}
+
+.todos-colors .list-group-item {
+  color: white;
+  background-color: #f1a200;
+}
+
+.todos-colors .darker {
+  background-color: #b07f19;
+}
+
+.todos-secondary-colors .list-group-item {
+  color: #949494;
+  background-color: white;
+}
+
+.todos-secondary-colors .darker {
+  background-color: #c2c2c2;
+  color: white;
+}
+
+.select2-avatar select {
+  width: 40px !important;
+}
+
+.select2-avatar .select2-choice {
+  width: 40px !important;
+  height: 40px !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+}
+
+.select2-avatar .select2-search-choice-close,
+.select2-avatar .select2-arrow {
+  display: none !important;
+}
+
+.select2-avatar .select2-choice > .select2-chosen {
+  margin-right: 0 !important;
+}
+
+.select2-search {
+  padding: 0;
+}
+
+.select2-search input {
+  padding: 0 0 0 5px !important;
+  border: 0;
+  background: none;
+}
+
+.select2-drop {
+  min-width: 300px;
+}
+
+.select2-drop {
+  border: 0 !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+
+.select2-drop-active {
+  border: 0;
+}
+
+.select2-results {
+  padding: 0;
+  margin: 0;
+}
+
+.select2-results .select2-result-label {
+  padding: 0 !important;
+}
+
+.icon-calendar-new {
+  line-height: 38px;
+  font-size: 1.5em;
+  text-align: right !important;
+}

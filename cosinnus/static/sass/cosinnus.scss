@@ -1,0 +1,232 @@
+@charset "UTF-8";
+
+@import "fonts";
+@import "general";
+@import "icons";
+@import "bootstrap-theme-default";
+
+.container h1 {
+  color: $grey-darkest;
+}
+
+.linktd {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  display: block;
+}
+
+// -------------------------------------------
+$font-size-base: 14px;
+$list-group-item-space: 15px;
+$list-group-item-title-border-size: 1px;
+
+.list-group img {
+  vertical-align: inherit;
+}
+
+.list-group-item {
+  width: 100%;
+  height: $item-height;
+}
+
+.list-group > * {
+  height: $item-width;
+  line-height: $item-height;
+}
+
+.item-text {
+  padding: ($item-height / 4) 0px;
+  line-height: ($item-height / 2);
+}
+
+.item-title:focus {
+  outline: none !important;
+}
+
+.lists-container {
+  background-color: $app-color-bg;
+
+  .item-box {
+    height: ($item-height - 1);
+  }
+}
+
+.items-container {
+  padding-top: 15px;
+  background-color: $app-color-bg;
+
+  .item-box {
+    height: $item-height;
+  }
+
+  .item-title {
+    border: $list-group-item-title-border-size solid transparent;
+  }
+
+  .item-title:hover {
+    border: $list-group-item-title-border-size solid $app-item-title-border-color;
+  }
+}
+
+.lists-all-container .list-group-item {
+  border-bottom: 1px solid $app-color-list-line;
+}
+
+.list-group-container .list-group-item {
+  margin-bottom: 5px;
+}
+
+
+.list-group {
+
+  .item-box {
+    float: left;
+    width: $item-width;
+    text-align: center;
+  }
+
+  .item-text {
+    position: absolute;
+    float: left;
+    padding-left: $list-group-item-space;
+  }
+
+  .item-title {
+    float: left;
+  }
+
+  .item-text-buttons {
+    position: relative;
+    top: -(($item-height / 8));
+    padding-left: $list-group-item-space;
+    z-index: 20;
+    display: none;
+  }
+
+  .item-text-buttons-wrapper {
+    position: relative;
+  }
+
+  .item-text-padleft {
+    padding-left: $list-group-item-space;
+  }
+
+  .item-text-right {
+    position: relative;
+    float: left;
+    padding-left: $list-group-item-space;
+    z-index: 10;
+    background-color: $app-color;
+  }
+
+  .item-title-input {
+    display: none;
+    background-color: $app-color;
+    color: $app-color-text;
+    border: 0 none;
+    padding: 0;
+    margin: 0;
+    outline: 0;
+    resize: none;
+    font-size: $font-size-base;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
+  }
+
+  .item-title-input:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+}
+
+.item-container-right {
+  float: right;
+}
+
+// ------- TODOS
+
+.todos-colors .list-group-item {
+  color: $app-color-text;
+  background-color: $app-color;
+}
+
+.todos-colors .darker {
+  background-color: $app-color-dark;
+}
+
+.todos-secondary-colors .list-group-item {
+  color: $app-secondary-color-text;
+  background-color: $app-secondary-color;
+}
+
+.todos-secondary-colors .darker {
+  background-color: $app-secondary-color-dark;
+  color: $app-secondary-color-dark-text;
+}
+
+// Others
+
+.select2-avatar select {
+  width: $item-width !important;
+  //height: $item-height !important;
+}
+
+.select2-avatar .select2-choice {
+  width: $item-width !important;
+  height: $item-height !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+}
+
+.select2-avatar .select2-search-choice-close,
+.select2-avatar .select2-arrow {
+  display: none !important;
+}
+
+.select2-avatar .select2-choice > .select2-chosen {
+  margin-right: 0 !important;
+}
+
+.select2-search {
+  padding: 0;
+}
+
+.select2-search input {
+  padding: 0 0 0 5px !important;
+  border: 0;
+  background: none;
+}
+
+.select2-drop {
+  min-width: 300px;
+}
+
+.select2-drop {
+  border: 0 !important;;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+
+.select2-drop-active {
+  border: 0;
+}
+.select2-results {
+  padding: 0;
+  margin: 0;
+}
+
+.select2-results .select2-result-label {
+  padding: 0 !important;
+}
+
+.icon-calendar-new {
+  line-height: ($item-height - 2);
+  font-size: 1.5em;
+  text-align: right !important;
+}

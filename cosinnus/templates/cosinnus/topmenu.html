@@ -8,22 +8,11 @@
       <span class="icon-bar"></span>
     </button>
     {% include "cosinnus/brand.html" %}
-  </div>
-  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav">
-      {% if group %}
-        {% url 'cosinnus:group-dashboard' group=group.slug as dashboard_url %}
-        <li {% ifequal dashboard_url request.path %} class="active"{% endifequal %}><a href="{{ dashboard_url }}">{% trans "Dashboard" %}</a></li>
-      {% endif %}
-      {% for app in apps %}
-        <li{% if app.active %} class="active"{% endif %}><a href="{{ app.url }}">{{ app.label }}</a></li>
-      {% endfor %}
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav navbar-left">
       {% if request.user.is_authenticated %}
         {% if groups %}
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "My Groups" %}{% if group %} <strong>({{ group }})</strong>{% endif %} <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% if group %}{{ group }}{% endif %}<b class="caret"></b></a>
             <ul class="dropdown-menu">
               {% for g in groups %}
                 <li{% if g == group %} class="active"{% endif %}><a href="{% url 'cosinnus:group-dashboard' group=g.slug %}">{{ g.name }}</a></li>
@@ -35,6 +24,17 @@
         {% else %}
           <li><a href="{% url 'cosinnus:group-list' %}">{% trans "No Groups. Join!" %}</a></li>
         {% endif %}
+      {% endif %}
+    </ul>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      {% for app in apps %}
+        <li{% if app.active %} class="active"{% endif %}><a href="{{ app.url }}">{{ app.label }}</a></li>
+      {% endfor %}
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      {% if request.user.is_authenticated %}
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.user|full_name }} <b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -49,3 +49,24 @@
     </ul>
   </div>
 </nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-3">
+      <div class="btn-group w100">
+        <button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown">
+          <span class="btn-bar"></span>
+          {% for app in apps %}
+              {{ app.label }}
+          {% endfor %}
+          <span class="caret pull-right"></span>
+        </button>
+        <ul class="dropdown-menu w100" role="menu">
+          {% for app in apps %}
+            <li{% if app.active %} class="active"{% endif %}><a href="{{ app.url }}">{{ app.label }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+/* COLORS */
+$white: #FFFFFF;
+$grey-darkest: #414141;
+
+$app-color: #F1A200;
+$app-color-dark: #B07F19;
+$app-color-text: $white;
+$app-secondary-color: $white;
+$app-secondary-color-text: #949494;
+$app-secondary-color-dark: #C2C2C2;
+$app-secondary-color-dark-text: $white;
+$app-color-bg: #D1DCD8;
+$app-color-list-line: #FCEDCE;
+
+$item-width: 40px;
+$item-height: 40px;
+$item-line-width: 10px;
+$item-line-height: 40px;
+
+$app-item-title-border-color: darken($app-color-dark, 0%);
