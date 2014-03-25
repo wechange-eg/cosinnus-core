@@ -27,6 +27,11 @@ def patch_body_json_data(request):
         if v is None:
             querydict[k] = ''
         elif isinstance(v, dict):
+            # If we find a dict we check if it is a nested object.
+            # Every nested object must have an id.
+            pk = v.get('id', None)
+            if pk is not None:
+                querydict[k] = force_text(pk)
             continue
         else:
             querydict[k] = force_text(v)

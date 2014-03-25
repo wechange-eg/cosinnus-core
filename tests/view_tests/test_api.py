@@ -73,6 +73,43 @@ class HelperTest(SimpleTestCase):
         query = QueryDict('string=Stringvalue&int=42&float=13.37&none')
         self.assertEqual(request._post, query)
 
+    def test_patch_body_json_data_drop_dict(self):
+        """
+        Tests for dicts being removed if no ``'id'`` key exists
+        """
+        factory = RequestFactory()
+        data = {
+            'string': 'Stringvalue',
+            'dict': {
+                'some': 'value',
+            }
+        }
+        json_data = json.dumps(data)
+        request = factory.post('/', data=json_data,
+            content_type='text/json; charset=UTF-8')
+        patch_body_json_data(request)
+        query = QueryDict('string=Stringvalue')
+        self.assertEqual(request._post, query)
+
+    def test_patch_body_json_data_replace_dict(self):
+        """
+        Tests for dicts being replaced by its ``'id'`` if present
+        """
+        factory = RequestFactory()
+        data = {
+            'string': 'Stringvalue',
+            'dict': {
+                'some': 'value',
+                'id': 42,
+            }
+        }
+        json_data = json.dumps(data)
+        request = factory.post('/', data=json_data,
+            content_type='text/json; charset=UTF-8')
+        patch_body_json_data(request)
+        query = QueryDict('string=Stringvalue&dict=42')
+        self.assertEqual(request._post, query)
+
 
 class AuthTest(BaseApiTest):
 
