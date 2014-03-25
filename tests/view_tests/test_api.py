@@ -372,15 +372,29 @@ class GroupUsersTest(BaseApiTest):
         CosinnusGroupMembership.objects.create(user=u1, group=self.group, status=MEMBERSHIP_ADMIN)
         CosinnusGroupMembership.objects.create(user=u2, group=self.group, status=MEMBERSHIP_MEMBER)
         CosinnusGroupMembership.objects.create(user=u3, group=self.group, status=MEMBERSHIP_PENDING)
+        u2.cosinnus_profile.avatar = 'path/to/some/file.png'
+        u2.cosinnus_profile.save()
         resp = self.get('cosinnus-api:group-user-list',
                         reverse_kwargs={'group': self.group.slug})
         self.assertJsonEqual(resp, [{
             'id': u1.id,
             'username': u1.username,
+            'profile': {
+                'id': u1.cosinnus_profile.id,
+                'avatar': None,
+            },
         }, {
             'id': u2.id,
             'username': u2.username,
+            'profile': {
+                'id': u2.cosinnus_profile.id,
+                'avatar': '/media/path/to/some/file.png',
+            },
         }, {
             'id': u3.id,
             'username': u3.username,
+            'profile': {
+                'id': u3.cosinnus_profile.id,
+                'avatar': None,
+            },
         }])

@@ -130,6 +130,10 @@ class UserProfile(BaseUserProfile):
         app_label = 'cosinnus'
         swappable = 'COSINNUS_USER_PROFILE_MODEL'
 
+    @property
+    def avatar_url(self):
+        return self.avatar.url if self.avatar else None
+
 
 def get_user_profile_model():
     "Return the cosinnus user profile model that is active in this project"
