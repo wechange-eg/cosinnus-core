@@ -9,8 +9,10 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import post_save, class_prepared
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
+from cosinnus.utils.files import get_avatar_filename
 
 
 class BaseUserProfileManager(models.Manager):
@@ -120,6 +122,9 @@ class BaseUserProfile(models.Model):
 
 
 class UserProfile(BaseUserProfile):
+
+    avatar = models.ImageField(_("Avatar"), null=True, blank=True,
+        upload_to=get_avatar_filename)
 
     class Meta:
         app_label = 'cosinnus'

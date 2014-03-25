@@ -62,7 +62,7 @@ class DefaultUserProfileTest(TestCase):
 
     def test_get_optional_fieldnames(self):
         optional = UserProfile.get_optional_fieldnames()
-        self.assertEqual(optional, [])
+        self.assertEqual(optional, ['avatar'])
 
     def test_get_optional_fields(self):
         user = User.objects.create_user('somebody')

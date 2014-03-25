@@ -1,10 +1,21 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import hashlib
 import tempfile
 import zipfile
 
 from os import path
+
+from cosinnus.conf import settings
+
+
+def get_avatar_filename(instance, filename):
+    _, ext = path.splitext(filename)
+    filedir = path.join('cosinnus', 'avatars', 'users')
+    name = '%s%d%s' % (settings.SECRET_KEY, instance.user_id, filename)
+    newfilename = hashlib.sha1(name.encode('utf-8')).hexdigest() + ext
+    return path.join(filedir, newfilename)
 
 
 def create_zip_file(files):
