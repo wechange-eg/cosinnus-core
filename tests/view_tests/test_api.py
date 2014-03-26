@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import datetime
 import json
+from os import path, unlink
 
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -352,6 +352,13 @@ class GroupUsersTest(BaseApiTest):
         super(GroupUsersTest, self).setUp()
         self.group = CosinnusGroup.objects.create(name='Group', public=True)
 
+    def tearDown(self):
+        base = path.join('tests', 'util_tests', 'avatar.png')
+        for fn in ['.80x80_q85_crop.png', '.50x50_q85_crop.png', '.40x40_q85_crop.png']:
+            name = base + fn
+            if path.exists(name):
+                unlink(name)
+
     def test_group_list_empty(self):
         """
         Tests for an empty list returned if group has no users
@@ -372,7 +379,7 @@ class GroupUsersTest(BaseApiTest):
         CosinnusGroupMembership.objects.create(user=u1, group=self.group, status=MEMBERSHIP_ADMIN)
         CosinnusGroupMembership.objects.create(user=u2, group=self.group, status=MEMBERSHIP_MEMBER)
         CosinnusGroupMembership.objects.create(user=u3, group=self.group, status=MEMBERSHIP_PENDING)
-        u2.cosinnus_profile.avatar = 'path/to/some/file.png'
+        u2.cosinnus_profile.avatar = path.join('tests', 'util_tests', 'avatar.png')
         u2.cosinnus_profile.save()
         resp = self.get('cosinnus-api:group-user-list',
                         reverse_kwargs={'group': self.group.slug})
@@ -382,13 +389,19 @@ class GroupUsersTest(BaseApiTest):
             'profile': {
                 'id': u1.cosinnus_profile.id,
                 'avatar': None,
+                "avatar_80x80": None,
+                "avatar_50x50": None,
+                "avatar_40x40": None,
             },
         }, {
             'id': u2.id,
             'username': u2.username,
             'profile': {
                 'id': u2.cosinnus_profile.id,
-                'avatar': '/media/path/to/some/file.png',
+                "avatar": "/media/tests/util_tests/avatar.png",
+                "avatar_80x80": "/media/tests/util_tests/avatar.png.80x80_q85_crop.png",
+                "avatar_50x50": "/media/tests/util_tests/avatar.png.50x50_q85_crop.png",
+                "avatar_40x40": "/media/tests/util_tests/avatar.png.40x40_q85_crop.png",
             },
         }, {
             'id': u3.id,
@@ -396,5 +409,8 @@ class GroupUsersTest(BaseApiTest):
             'profile': {
                 'id': u3.cosinnus_profile.id,
                 'avatar': None,
+                "avatar_80x80": None,
+                "avatar_50x50": None,
+                "avatar_40x40": None,
             },
         }])

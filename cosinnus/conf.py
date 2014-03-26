@@ -17,3 +17,8 @@ class CosinnusConf(AppConf):
     DATETIMEPICKER_DATETIME_FORMAT = 'YYYY-MM-DD HH:mm'
     DATETIMEPICKER_DATE_FORMAT = 'YYYY-MM-DD'
     DATETIMEPICKER_TIME_FORMAT = 'HH:mm'
+    USER_PROFILE_AVATAR_THUMBNAIL_SIZES = (
+        (80, 80),
+        (50, 50),
+        (40, 40),
+    )
