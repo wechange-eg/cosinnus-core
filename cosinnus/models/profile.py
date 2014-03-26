@@ -11,6 +11,8 @@ from django.db.models.signals import post_save, class_prepared
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
+from easy_thumbnails.files import get_thumbnailer
+
 from cosinnus.conf import settings
 from cosinnus.utils.files import get_avatar_filename
 
@@ -133,6 +135,24 @@ class UserProfile(BaseUserProfile):
     @property
     def avatar_url(self):
         return self.avatar.url if self.avatar else None
+
+    def get_avatar_thumbnail(self, size=(80, 80)):
+        if not self.avatar:
+            return None
+
+        thumbnails = getattr(self, '_avatar_thumbnails', {})
+        if not size in thumbnails:
+            thumbnailer = get_thumbnailer(self.avatar)
+            thumbnails[size] = thumbnailer.get_thumbnail({
+                'crop': True,
+                'size': size,
+            })
+            setattr(self, '_avatar_thumbnails', thumbnails)
+        return thumbnails[size]
+
+    def get_avatar_thumbnail_url(self, size=(80, 80)):
+        tn = self.get_avatar_thumbnail(size)
+        return tn.url if tn else None
 
 
 def get_user_profile_model():

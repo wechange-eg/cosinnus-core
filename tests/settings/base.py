@@ -27,6 +27,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'taggit',
+    'easy_thumbnails',
     'cosinnus',
     'tests',
 )
