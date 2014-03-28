@@ -16,6 +16,19 @@
   display: block;
 }
 
+.dropdown-icon-header {
+  float: left;
+  line-height: $item-height;
+  font-size: 1.5em;
+  padding-right: $item-distance;
+}
+
+.avatar-top-menu {
+  float: left;
+  margin-right: $item-distance;
+}
+
+
 // -------------------------------------------
 $font-size-base: 14px;
 $list-group-item-space: 15px;
@@ -229,9 +242,4 @@ $list-group-item-title-border-size: 1px;
   line-height: ($item-height - 2);
   font-size: 1.5em;
   text-align: right !important;
-}
-
-.avatar-top-menu {
-  float: left;
-  margin-right: 5px;
 }
