@@ -114,7 +114,44 @@ img.right {
   padding: 0;
 }
 
+$btn-group-height: 50px;
+$btn-bar-width: 10px;
+
 .btn-bar {
-  width: 15px;
-  background-color: red;
+  float: left;
+  width: $btn-bar-width;
+  height: $btn-group-height;
+  background-color: $app-color-dark;
+}
+
+.btn-icon {
+  float: left;
+  padding-left: $btn-bar-width;
+  line-height: $btn-group-height;
+  font-size: 1.5em;
+}
+
+.btn-text {
+  float: left;
+  padding-left: $btn-bar-width;
+  line-height: $btn-group-height;
+}
+
+.caret-right {
+  position: absolute;
+  right: 0;
+  top: ($btn-group-height / 2) - (3);
+  margin-right: $btn-bar-width;
+  border-top-color: $app-color-text !important;
+}
+
+
+.primary-colors {
+  color: $app-color-text !important;
+  background-color: $app-color !important;
+}
+
+.primary-colors:hover {
+  color: $app-color-text !important;
+  background-color: $app-color !important;
 }

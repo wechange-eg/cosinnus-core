@@ -109,8 +109,41 @@ img.right {
 }
 
 .btn-bar {
-  width: 15px;
-  background-color: red;
+  float: left;
+  width: 10px;
+  height: 50px;
+  background-color: #b07f19;
+}
+
+.btn-icon {
+  float: left;
+  padding-left: 10px;
+  line-height: 50px;
+  font-size: 1.5em;
+}
+
+.btn-text {
+  float: left;
+  padding-left: 10px;
+  line-height: 50px;
+}
+
+.caret-right {
+  position: absolute;
+  right: 0;
+  top: 22px;
+  margin-right: 10px;
+  border-top-color: white !important;
+}
+
+.primary-colors {
+  color: white !important;
+  background-color: #f1a200 !important;
+}
+
+.primary-colors:hover {
+  color: white !important;
+  background-color: #f1a200 !important;
 }
 
 .icon-checkbox-unchecked {
