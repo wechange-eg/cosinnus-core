@@ -69,7 +69,7 @@
           </span>
           <span class="caret caret-right"></span>
         </button>
-        <ul class="dropdown-menu w100" role="menu">
+        <ul class="dropdown-menu w100 primary-colors" role="menu">
           {% for app in apps %}
             <li{% if app.active %} class="active"{% endif %}><a href="{{ app.url }}">{{ app.label }}</a></li>
           {% endfor %}

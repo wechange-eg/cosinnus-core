@@ -155,3 +155,10 @@ $btn-bar-width: 10px;
   color: $app-color-text !important;
   background-color: $app-color !important;
 }
+
+.dropdown-menu.primary-colors > .active > a,
+.dropdown-menu.primary-colors > .active > a:hover,
+.dropdown-menu.primary-colors > .active > a:focus {
+  color: $app-color-text !important;
+  background-color: $app-color !important;
+}

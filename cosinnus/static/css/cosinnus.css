@@ -146,6 +146,13 @@ img.right {
   background-color: #f1a200 !important;
 }
 
+.dropdown-menu.primary-colors > .active > a,
+.dropdown-menu.primary-colors > .active > a:hover,
+.dropdown-menu.primary-colors > .active > a:focus {
+  color: white !important;
+  background-color: #f1a200 !important;
+}
+
 .icon-checkbox-unchecked {
   background-color: white;
   border: 1px solid #b07f19;
