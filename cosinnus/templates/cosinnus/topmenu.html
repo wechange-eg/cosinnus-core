@@ -1,52 +1,57 @@
-{% load i18n cosinnus_tags %}
+{% load i18n cosinnus_tags thumbnail %}
 <nav class="navbar navbar-default" role="navigation">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-      <span class="sr-only">{% trans "Toggle navigation" %}</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    {% include "cosinnus/brand.html" %}
-    <ul class="nav navbar-nav navbar-left">
-      {% if request.user.is_authenticated %}
-        {% if groups %}
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% if group %}{{ group }}{% endif %}<b class="caret"></b></a>
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">{% trans "Toggle navigation" %}</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!--{% include "cosinnus/brand.html" %}-->
+      <ul class="nav navbar-nav navbar-left">
+        {% if request.user.is_authenticated %}
+          {% if groups %}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% if group %}{{ group }}{% endif %}<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                {% for g in groups %}
+                  <li{% if g == group %} class="active"{% endif %}><a href="{% url 'cosinnus:group-dashboard' group=g.slug %}">{{ g.name }}</a></li>
+                {% endfor %}
+                <li class="divider"></li>
+                <li><a href="{% url 'cosinnus:group-list' %}">{% trans "List all groups" %}</a></li>
+              </ul>
+            </li>
+          {% else %}
+            <li><a href="{% url 'cosinnus:group-list' %}">{% trans "No Groups. Join!" %}</a></li>
+          {% endif %}
+        {% endif %}
+      </ul>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        {% for app in apps %}
+          <li{% if app.active %} class="active"{% endif %}><a href="{{ app.url }}">{{ app.label }}</a></li>
+        {% endfor %}
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <img class="avatar-img avatar-top-menu" src="{% thumbnail request.user.cosinnus_profile.avatar 40x40 crop=smart %}"/>
+        {% if request.user.is_authenticated %}
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              {{ request.user|full_name }} <b class="caret"></b>
+            </a>
             <ul class="dropdown-menu">
-              {% for g in groups %}
-                <li{% if g == group %} class="active"{% endif %}><a href="{% url 'cosinnus:group-dashboard' group=g.slug %}">{{ g.name }}</a></li>
-              {% endfor %}
-              <li class="divider"></li>
-              <li><a href="{% url 'cosinnus:group-list' %}">{% trans "List all groups" %}</a></li>
+              <li><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Profile" %}</a></li>
+              <li><a href="{% url 'cosinnus:user-dashboard' %}">{% trans "Dashboard" %}</a></li>
+              <li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
             </ul>
           </li>
         {% else %}
-          <li><a href="{% url 'cosinnus:group-list' %}">{% trans "No Groups. Join!" %}</a></li>
+          <li><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
         {% endif %}
-      {% endif %}
-    </ul>
-  </div>
-  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav">
-      {% for app in apps %}
-        <li{% if app.active %} class="active"{% endif %}><a href="{{ app.url }}">{{ app.label }}</a></li>
-      {% endfor %}
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      {% if request.user.is_authenticated %}
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.user|full_name }} <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Profile" %}</a></li>
-            <li><a href="{% url 'cosinnus:user-dashboard' %}">{% trans "Dashboard" %}</a></li>
-            <li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
-          </ul>
-        </li>
-      {% else %}
-        <li><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
-      {% endif %}
-    </ul>
+      </ul>
+    </div>
   </div>
 </nav>
 
