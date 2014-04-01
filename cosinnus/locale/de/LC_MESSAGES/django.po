@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-03 08:11+0100\n"
+"POT-Creation-Date: 2014-04-01 17:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -62,13 +62,19 @@ msgstr "Cosinnus Gruppen"
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
 
-#: models/group.py:383
+#: models/group.py:384
 msgid "Group membership"
 msgstr "Gruppenmitgliedschaft"
 
-#: models/group.py:384
+#: models/group.py:385
 msgid "Group memberships"
 msgstr "Gruppenmitgliedschaften"
+
+#: models/profile.py:128 templates/cosinnus/user_detail.html:33
+#: templates/cosinnus/user_detail.html:36
+#: templates/cosinnus/user_detail.html:38
+msgid "Avatar"
+msgstr "Avatar"
 
 #: models/tagged.py:71
 msgid "Attached object"
@@ -98,7 +104,7 @@ msgstr "Ersteller"
 msgid "Created"
 msgstr "Erstellt"
 
-#: models/tagged.py:144
+#: models/tagged.py:143
 msgid "Path"
 msgstr ""
 
@@ -138,8 +144,12 @@ msgstr "Konfigurationseinstellung"
 msgid "Widget configuration items"
 msgstr "Konfigurationseinstellungen"
 
+#: templates/cosinnus/appsmenu.html:17
+msgid "Choose App"
+msgstr "App auswählen"
+
 #: templates/cosinnus/dashboard.html:5 templates/cosinnus/dashboard.html:11
-#: templates/cosinnus/topmenu.html:16 templates/cosinnus/topmenu.html.py:42
+#: templates/cosinnus/topmenu.html:48
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -155,8 +165,8 @@ msgstr "Konfigurieren"
 #: templates/cosinnus/group_detail.html:17
 #: templates/cosinnus/group_detail.html:48
 #: templates/cosinnus/group_detail.html:73
-#: templates/cosinnus/group_detail.html:98 views/group.py:67
-#: views/group.py:390
+#: templates/cosinnus/group_detail.html:98 views/group.py:72
+#: views/group.py:408
 msgid "Delete"
 msgstr "Löschen"
 
@@ -241,7 +251,7 @@ msgid "Pending users"
 msgstr "Zu bestätigende Benutzer"
 
 #: templates/cosinnus/group_detail.html:97
-#: templates/cosinnus/hierarchy/add_container.html:27 views/group.py:328
+#: templates/cosinnus/hierarchy/add_container.html:27 views/group.py:342
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -282,15 +292,15 @@ msgid "Joined"
 msgstr "Beigetreten"
 
 #
-#: templates/cosinnus/group_list.html:42 views/group.py:223
+#: templates/cosinnus/group_list.html:42 views/group.py:236
 msgid "Leave"
 msgstr "Verlassen"
 
-#: templates/cosinnus/group_list.html:46 views/group.py:256
+#: templates/cosinnus/group_list.html:46 views/group.py:269
 msgid "Withdraw"
 msgstr "Zurückziehen"
 
-#: templates/cosinnus/group_list.html:50 views/group.py:202
+#: templates/cosinnus/group_list.html:50 views/group.py:215
 msgid "Join"
 msgstr "Beitreten"
 
@@ -313,32 +323,28 @@ msgstr "Nutzer"
 msgid "There are no users."
 msgstr "Es gibt keine Nutzer"
 
-#: templates/cosinnus/topmenu.html:5
+#: templates/cosinnus/topmenu.html:6
 msgid "Toggle navigation"
 msgstr "Navigation ab-/abschalten"
 
-#: templates/cosinnus/topmenu.html:26
-msgid "My Groups"
-msgstr "Meine Gruppen"
-
-#: templates/cosinnus/topmenu.html:32
+#: templates/cosinnus/topmenu.html:23
 msgid "List all groups"
 msgstr "Alle Gruppen auflisten"
 
 #
-#: templates/cosinnus/topmenu.html:36
+#: templates/cosinnus/topmenu.html:27
 msgid "No Groups. Join!"
 msgstr "Mitglied keiner Gruppen. Beitreten!"
 
-#: templates/cosinnus/topmenu.html:41
+#: templates/cosinnus/topmenu.html:47
 msgid "Profile"
 msgstr "Profil"
 
-#: templates/cosinnus/topmenu.html:43
+#: templates/cosinnus/topmenu.html:49
 msgid "Logout"
 msgstr "Abmelden"
 
-#: templates/cosinnus/topmenu.html:47
+#: templates/cosinnus/topmenu.html:53
 #: templates/cosinnus/registration/login.html:4
 #: templates/cosinnus/registration/login.html:11
 msgid "Login"
@@ -352,19 +358,13 @@ msgstr "Nutzername"
 msgid "E-mail address"
 msgstr "E-mail Adresse"
 
-#: templates/cosinnus/user_detail.html:33
-#: templates/cosinnus/user_detail.html:36
-#: templates/cosinnus/user_detail.html:38
-msgid "Avatar"
-msgstr "Avatar"
-
 #: templates/cosinnus/userprofile_detail.html:5
 #, python-format
 msgid "User profile: %(username)s"
 msgstr "Nutzerprofil: %(username)s"
 
-#: templates/cosinnus/userprofile_form.html:10 views/group.py:135
-#: views/group.py:358 views/user.py:81
+#: templates/cosinnus/userprofile_form.html:10 views/group.py:145
+#: views/group.py:374 views/user.py:87
 msgid "Save"
 msgstr "Speichern"
 
@@ -493,7 +493,7 @@ msgstr ""
 "\n"
 "Der Nutzer %(user_name)s möchte der Gruppe %(group_name)s beitreten."
 
-#: templatetags/cosinnus_tags.py:134
+#: templatetags/cosinnus_tags.py:140
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>%(model_name)s konnte nicht gerendert werden!</i>"
@@ -502,37 +502,37 @@ msgstr "<i>%(model_name)s konnte nicht gerendert werden!</i>"
 msgid "No model given to export data from."
 msgstr "Kein Modell zum Exportieren der Daten angegeben."
 
-#: views/group.py:44 views/user.py:38
+#: views/group.py:48 views/user.py:44
 msgid "Create"
 msgstr "Erstellen"
 
-#: views/group.py:203
+#: views/group.py:216
 #, python-format
 msgid "Do you want to join the group “%(group_name)s”?"
 msgstr "Möchten sie der Gruppe %(group_name)s beitreten?"
 
-#: views/group.py:204
+#: views/group.py:217
 #, python-format
 msgid "Join group “%(group_name)s”?"
 msgstr "Gruppe %(group_name)s beitreten?"
 
-#: views/group.py:224
+#: views/group.py:237
 #, python-format
 msgid "Do you want to leave the group “%(group_name)s”?"
 msgstr "Möchten sie die Gruppe “%(group_name)s” verlassen?"
 
-#: views/group.py:225
+#: views/group.py:238
 #, python-format
 msgid "Leaving group “%(group_name)s”?"
 msgstr "Gruppe “%(group_name)s” verlassen?"
 
-#: views/group.py:248
+#: views/group.py:261
 msgid "You cannot leave this group. You are the only administrator left."
 msgstr ""
 "Sie können diese Gruppe nicht verlassen, da sie der einzig übrige "
 "Administrator sind."
 
-#: views/group.py:257
+#: views/group.py:270
 #, python-format
 msgid ""
 "Do you want to withdraw your join request to the group “%(group_name)s”?"
@@ -540,27 +540,27 @@ msgstr ""
 "Möchten sie ihre Beitrittsanfrage für die Gruppe “%(group_name)s” "
 "zurückziehen?"
 
-#: views/group.py:258
+#: views/group.py:271
 #, python-format
 msgid "Withdraw join request to group “%(group_name)s”?"
 msgstr "Beitrittsanfrage für die Gruppe “%(group_name)s” zurückziehen?"
 
-#: views/group.py:349
+#: views/group.py:365
 msgid "You cannot change your own admin status."
 msgstr "Sie können ihren eigenen Administratorstatus nicht ändern."
 
-#: views/group.py:351 views/group.py:382
+#: views/group.py:367 views/group.py:400
 #, python-format
 msgid "You cannot remove “%(username)s” form this group. Only one admin left."
 msgstr ""
 "Sie können “%(username)s” nicht von dieser Gruppe entfernen. Er/sie ist der "
 "einzig übrige Administrator."
 
-#: views/group.py:380
+#: views/group.py:398
 msgid "You cannot remove yourself from a group."
 msgstr "Sie können sich nicht selbst von einer Gruppe entfernen."
 
-#: views/group.py:391
+#: views/group.py:409
 #, python-format
 msgid ""
 "Do you want to remove the user “%(username)s”  from the group "
@@ -568,7 +568,7 @@ msgid ""
 msgstr ""
 "Möchten sie Nutzer “%(username)s” aus der Gruppe “%(group_name)s” entfernen?"
 
-#: views/group.py:395
+#: views/group.py:413
 #, python-format
 msgid "Remove user from group “%(group_name)s”?"
 msgstr "Nutzer aus der Gruppe “%(group_name)s” entfernen?"
@@ -583,8 +583,8 @@ msgid ""
 "Container \"%(title)s\" could not be deleted because it contained objects "
 "that could not be deleted."
 msgstr ""
-"Zusammenstellung \"%(title)s\" konnte nicht gelöscht werden, weil sie Objekte "
-"enthielt, die nicht gelöscht werden konnten."
+"Zusammenstellung \"%(title)s\" konnte nicht gelöscht werden, weil sie "
+"Objekte enthielt, die nicht gelöscht werden konnten."
 
 #: views/mixins/tagged.py:169
 #, python-format
@@ -605,3 +605,4 @@ msgstr "Objekt \"%(title)s\" wurde erfolgreich gelöscht."
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d andere Objekte wurden gelöscht."
+

@@ -1,7 +1,4 @@
-{% extends "cosinnus/base.html" %}
-{% load i18n humanize thumbnail cosinnus_tags %}
-
-{% block topmenuafter %}
+{% load i18n %}
 <div class="container">
   <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-3">
@@ -10,11 +7,15 @@
           <span class="btn-bar"></span>
           <span class="icon-menu2 btn-icon"></span>
           <span class="btn-text">
-          {% for app in apps %}
-            {% if app.active %}
-              {{ app.label }}
+            {% if active_app %}
+              {% for app in apps %}
+                {% if app.active %}
+                  {{ app.label }}
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              {% trans "Choose App" %}
             {% endif %}
-          {% endfor %}
           </span>
           <span class="caret caret-right"></span>
         </button>
@@ -27,4 +28,3 @@
     </div>
   </div>
 </div>
-{% endblock topmenuafter %}
