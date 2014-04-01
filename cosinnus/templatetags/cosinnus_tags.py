@@ -80,11 +80,14 @@ def cosinnus_menu(context, template="cosinnus/topmenu.html"):
         context['groups'] = CosinnusGroup.objects.get_for_user(request.user)
 
     current_app = resolve(request.path).app_name
+    active_app = None
     if 'group' in context:
         group = context['group']
         apps = []
         for app, name, label in app_registry.items():
             url = reverse('cosinnus:%s:index' % name, kwargs={'group': group.slug})
+            if app == current_app:
+                active_app = app
             apps.append({
                 'active': app == current_app,
                 'label': label,
@@ -95,7 +98,9 @@ def cosinnus_menu(context, template="cosinnus/topmenu.html"):
             'app_nav': True,
         })
     else:
-        context.update({'app_nav': False})
+        context['app_nav'] = False
+
+    context['active_app'] = active_app
     return render_to_string(template, context)
 
 
