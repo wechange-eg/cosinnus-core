@@ -13,7 +13,7 @@
         {% if request.user.is_authenticated %}
           {% if groups %}
             <li class="dropdown">
-              <span class="icon icon-home2 dropdown-icon-header"></span>
+              <a href="{% for g in groups %}{% if g == group %}{% url 'cosinnus:group-dashboard' group=g.slug %}{% endif %}{% endfor %}" class="icon-home2 header-icon"></a>
               <a href="#" class="dropdown-toggle pull-left" data-toggle="dropdown">{% if group %}{{ group }}{% endif %}<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 {% for g in groups %}
@@ -36,6 +36,7 @@
         {% endfor %}
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <span class="icon-search header-icon pull-left"></span>
         <img class="avatar-img avatar-top-menu" src="{% thumbnail request.user.cosinnus_profile.avatar 40x40 crop=smart %}"/>
         {% if request.user.is_authenticated %}
         <li class="dropdown">
