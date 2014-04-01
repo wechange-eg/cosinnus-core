@@ -35,6 +35,7 @@
   </head>
   <body>
     {% cosinnus_menu "cosinnus/topmenu.html" %}
+    {% block topmenuafter %}{% endblock topmenuafter %}
 
     <div class="container">
       <h1>{% block content_title %}{% endblock content_title %}</h1>

@@ -30,11 +30,11 @@
       </ul>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        {% for app in apps %}
-          <li{% if app.active %} class="active"{% endif %}><a href="{{ app.url }}">{{ app.label }}</a></li>
-        {% endfor %}
-      </ul>
+      <!--<ul class="nav navbar-nav">-->
+        <!--{% for app in apps %}-->
+          <!--<li{% if app.active %} class="active"{% endif %}><a href="{{ app.url }}">{{ app.label }}</a></li>-->
+        <!--{% endfor %}-->
+      <!--</ul>-->
       <ul class="nav navbar-nav navbar-right">
         <span class="icon-search header-icon pull-left"></span>
         <img class="avatar-img avatar-top-menu" src="{% thumbnail request.user.cosinnus_profile.avatar 40x40 crop=smart %}"/>
