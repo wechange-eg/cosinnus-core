@@ -16,7 +16,7 @@
   display: block;
 }
 
-.dropdown-icon-header {
+.header-icon {
   float: left;
   line-height: $item-height;
   font-size: 1.5em;
@@ -27,6 +27,15 @@
   float: left;
   margin-right: $item-distance;
 }
+
+
+// GROUP DASHBOARD
+// -------------------------------------------------
+@import "dashboard";
+
+// Dashboard Widgets
+// --------------------------------------------------
+@import "widgets";
 
 
 // -------------------------------------------
@@ -163,6 +172,11 @@ $list-group-item-title-border-size: 1px;
 
 // ------- TODOS
 
+.todos-colors {
+  color: $app-color-text;
+  background-color: $app-color;
+}
+
 .todos-colors .list-group-item {
   color: $app-color-text;
   background-color: $app-color;
@@ -180,6 +194,58 @@ $list-group-item-title-border-size: 1px;
 .todos-secondary-colors .darker {
   background-color: $app-secondary-color-dark;
   color: $app-secondary-color-dark-text;
+}
+
+// Calendar
+// ---------------------------------------
+
+.calendar-colors {
+  color: $app-calendar-color-text;
+  background-color: $app-calendar-color;
+}
+
+.calendar-colors .darker {
+  color: $app-calendar-color-text;
+  background-color: $app-calendar-color-dark;
+}
+
+// Files
+// ---------------------------------------
+
+.files-colors {
+  color: $app-files-color-text;
+  background-color: $app-files-color;
+}
+
+// Etherpad
+// ---------------------------------------
+.etherpad-colors {
+  color: $app-etherpad-color-text;
+  background-color: $app-etherpad-color;
+}
+
+// Network
+// ---------------------------------------
+.network-colors {
+  color: $app-network-color-text;
+  background-color: $app-network-color;
+}
+
+.network-colors .darker {
+  color: $app-network-color-text;
+  background-color: $app-network-color-dark;
+}
+
+.network-colors .reversed-colors {
+  color: $app-network-color;
+  background-color: $app-network-color-text;
+}
+
+// Neutral
+// ---------------------------------------
+.neutral-colors {
+  color: $app-neutral-color-text;
+  background-color: $app-neutral-color;
 }
 
 // Others

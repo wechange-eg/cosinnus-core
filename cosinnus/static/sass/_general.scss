@@ -68,20 +68,6 @@ img.right {
   display: none;
 }
 
-.clearfix:before,
-.clearfix:after {
-  content: " ";
-  display: table;
-}
-
-.clearfix:after {
-  clear: both;
-}
-
-.clearfix {
-  *zoom: 1;
-}
-
 .clearboth {
   clear: both;
 }
@@ -121,7 +107,6 @@ $btn-bar-width: 10px;
   float: left;
   width: $btn-bar-width;
   height: $btn-group-height;
-  background-color: $app-color-dark;
 }
 
 .btn-icon {
@@ -149,6 +134,11 @@ $btn-bar-width: 10px;
 .primary-colors {
   color: $app-color-text !important;
   background-color: $app-color !important;
+}
+
+.primary-colors .darker {
+  color: $app-color-text !important;
+  background-color: $app-color-dark !important;
 }
 
 .primary-colors:hover {

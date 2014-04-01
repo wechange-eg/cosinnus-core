@@ -1,0 +1,62 @@
+@import "variables";
+
+
+$widget-title-height: 50px;
+$app-item-size: 40px;
+$font-size-small: 0.8em;
+$font-size-smaller: 0.7em;
+
+.dashboard-widgets {
+  margin-top: $item-distance-long;
+}
+
+.widgets-column {
+  background-color: $neww-bg-color;
+}
+
+.inline-block-container {
+  display: inline-block;
+  width: 100%;
+}
+
+.widget-contents {
+
+}
+
+.widget-title {
+  height: $widget-title-height;
+}
+
+.app-item-header {
+  height: $app-item-size;
+}
+
+.app-item-left {
+  float: left;
+  width: $app-item-size;
+  margin-right: $item-distance;
+}
+
+.app-item-title {
+  font-weight: bold;
+}
+
+.app-item-subtitle {
+  font-size: $font-size-smaller;
+}
+
+.app-item-tags {
+}
+
+.app-item-tags-text {
+  font-size: $font-size-small;
+  padding: 2px;
+}
+
+.app-item-tags-icon {
+  padding: 2px;
+}
+
+.app-item-contents {
+  margin-left: $app-item-size;
+}

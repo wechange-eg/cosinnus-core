@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
-$cosinnus-bg-color: #BACFD2;
+@import "variables";
 
 .navbar-default {
-  background-color: $cosinnus-bg-color;
+  background-color: $neww-bg-color;
 }

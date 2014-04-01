@@ -1,5 +1,11 @@
 /* @import must be at top of file, otherwise CSS will not work */
 /* COLORS */
+/* Todos */
+/* Calendar */
+/* Files */
+/* Etherpad */
+/* Neutral */
+/* Network */
 /* Bootstrap Adjustments */
 /*
 .row {
@@ -62,20 +68,6 @@ img.right {
   display: none;
 }
 
-.clearfix:before,
-.clearfix:after {
-  content: " ";
-  display: table;
-}
-
-.clearfix:after {
-  clear: both;
-}
-
-.clearfix {
-  *zoom: 1;
-}
-
 .clearboth {
   clear: both;
 }
@@ -112,7 +104,6 @@ img.right {
   float: left;
   width: 10px;
   height: 50px;
-  background-color: #b07f19;
 }
 
 .btn-icon {
@@ -139,6 +130,11 @@ img.right {
 .primary-colors {
   color: white !important;
   background-color: #f1a200 !important;
+}
+
+.primary-colors .darker {
+  color: white !important;
+  background-color: #b07f19 !important;
 }
 
 .primary-colors:hover {
@@ -172,6 +168,13 @@ img.right {
   top: 1px;
 }
 
+/* COLORS */
+/* Todos */
+/* Calendar */
+/* Files */
+/* Etherpad */
+/* Neutral */
+/* Network */
 .navbar-default {
   background-color: #bacfd2;
 }
@@ -187,7 +190,7 @@ img.right {
   display: block;
 }
 
-.dropdown-icon-header {
+.header-icon {
   float: left;
   line-height: 40px;
   font-size: 1.5em;
@@ -197,6 +200,131 @@ img.right {
 .avatar-top-menu {
   float: left;
   margin-right: 10px;
+}
+
+/* COLORS */
+/* Todos */
+/* Calendar */
+/* Files */
+/* Etherpad */
+/* Neutral */
+/* Network */
+.row-right {
+  margin-left: 0;
+}
+
+.row-left {
+  margin-right: 0;
+}
+
+.group-box {
+  margin-right: 0px;
+  background-color: #bacfd2;
+}
+
+.group-logo {
+  margin-left: -15px;
+}
+
+.group-description {
+  padding-top: 10px;
+  font-size: 0.95em;
+}
+
+.group-title {
+  font-weight: bold;
+}
+
+.group-short-description {
+  padding: 5px 0;
+  font-size: 0.85em;
+  color: #949494;
+}
+
+.group-short-description a {
+  color: #949494;
+  text-decoration: underline;
+}
+
+.group-app-box {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  margin: 3% 20px 3% 0px;
+  padding: 15px 0 5px 0;
+  vertical-align: middle;
+  text-align: center;
+  background-color: red;
+  cursor: pointer;
+}
+
+.group-app-box-icon {
+  font-size: 2.2em;
+  padding-bottom: 5px;
+}
+
+.group-app-box-numbers {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.group-app-box-title {
+  margin-top: -5px;
+}
+
+/* COLORS */
+/* Todos */
+/* Calendar */
+/* Files */
+/* Etherpad */
+/* Neutral */
+/* Network */
+.dashboard-widgets {
+  margin-top: 20px;
+}
+
+.widgets-column {
+  background-color: #bacfd2;
+}
+
+.inline-block-container {
+  display: inline-block;
+  width: 100%;
+}
+
+.widget-title {
+  height: 50px;
+}
+
+.app-item-header {
+  height: 40px;
+}
+
+.app-item-left {
+  float: left;
+  width: 40px;
+  margin-right: 10px;
+}
+
+.app-item-title {
+  font-weight: bold;
+}
+
+.app-item-subtitle {
+  font-size: 0.7em;
+}
+
+.app-item-tags-text {
+  font-size: 0.8em;
+  padding: 2px;
+}
+
+.app-item-tags-icon {
+  padding: 2px;
+}
+
+.app-item-contents {
+  margin-left: 40px;
 }
 
 .list-group img {
@@ -310,6 +438,11 @@ img.right {
   float: right;
 }
 
+.todos-colors {
+  color: white;
+  background-color: #f1a200;
+}
+
 .todos-colors .list-group-item {
   color: white;
   background-color: #f1a200;
@@ -327,6 +460,46 @@ img.right {
 .todos-secondary-colors .darker {
   background-color: #c2c2c2;
   color: white;
+}
+
+.calendar-colors {
+  color: white;
+  background-color: #789d40;
+}
+
+.calendar-colors .darker {
+  color: white;
+  background-color: #4a6228;
+}
+
+.files-colors {
+  color: white;
+  background-color: #00a388;
+}
+
+.etherpad-colors {
+  color: white;
+  background-color: #e8483a;
+}
+
+.network-colors {
+  color: white;
+  background-color: #0a7891;
+}
+
+.network-colors .darker {
+  color: white;
+  background-color: #06495a;
+}
+
+.network-colors .reversed-colors {
+  color: #0a7891;
+  background-color: white;
+}
+
+.neutral-colors {
+  color: #343434;
+  background-color: white;
 }
 
 .select2-avatar select {

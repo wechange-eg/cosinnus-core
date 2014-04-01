@@ -1,7 +1,9 @@
 /* COLORS */
 $white: #FFFFFF;
 $grey-darkest: #414141;
+$neww-bg-color: #BACFD2;
 
+/* Todos */
 $app-color: #F1A200;
 $app-color-dark: #B07F19;
 $app-color-text: $white;
@@ -12,11 +14,42 @@ $app-secondary-color-dark-text: $white;
 $app-color-bg: #D1DCD8;
 $app-color-list-line: #FCEDCE;
 
+/* Calendar */
+$app-calendar-color: #789d40;
+$app-calendar-color-dark: #4a6228;
+$app-calendar-color-text: $white;
+
+/* Files */
+$app-files-color: #00a388;
+$app-files-color-dark: #4a6228;
+$app-files-color-text: $white;
+
+/* Etherpad */
+$app-etherpad-color: #e8483a;
+$app-etherpad-color-dark: #4a6228;
+$app-etherpad-color-text: $white;
+
+/* Neutral */
+$app-neutral-color: $white;
+$app-neutral-color-dark: #4a6228;
+$app-neutral-color-text: #343434;
+
+/* Network */
+$app-network-color: #0a7891;
+$app-network-color-dark: #06495a;
+$app-network-color-text: $white;
+
+
+
+$app-color-font-secondary: #949494;
+
 $item-width: 40px;
 $item-height: 40px;
 $item-line-width: 10px;
 $item-line-height: 40px;
 
 $item-distance: 10px;
+$item-distance-small: 5px;
+$item-distance-long: 20px;
 
 $app-item-title-border-color: darken($app-color-dark, 0%);
