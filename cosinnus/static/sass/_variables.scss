@@ -3,8 +3,13 @@ $white: #FFFFFF;
 $grey-darkest: #414141;
 $neww-bg-color: #BACFD2;
 
+$select-percentage: 10%;
+
 /* Todos */
 $app-color: #F1A200;
+$app-color-selected: darken($app-color, $select-percentage);
+$app-color-dark: #B07F19;
+$app-color-dark-selected: darken($app-color-dark, $select-percentage);
 $app-color-dark: #B07F19;
 $app-color-text: $white;
 $app-secondary-color: $white;
@@ -13,6 +18,17 @@ $app-secondary-color-dark: #C2C2C2;
 $app-secondary-color-dark-text: $white;
 $app-color-bg: #D1DCD8;
 $app-color-list-line: #FCEDCE;
+
+/* Todos */
+$app-todos-color: #F1A200;
+$app-todos-color-selected: darken($app-color, $select-percentage);
+$app-todos-color-dark: #B07F19;
+$app-todos-color-dark-selected: darken($app-color-dark, $select-percentage);
+$app-todos-color-text: $white;
+$app-todos-secondary-color: $white;
+$app-todos-secondary-color-text: #949494;
+$app-todos-secondary-color-dark: #C2C2C2;
+$app-todos-secondary-color-dark-text: $white;
 
 /* Calendar */
 $app-calendar-color: #789d40;

@@ -195,27 +195,28 @@ $list-group-item-title-border-size: 1px;
 // ------- TODOS
 
 .todos-colors {
-  color: $app-color-text;
-  background-color: $app-color;
+  @include todos-colors();
+}
+
+.todos-colors-selected {
+  @include todos-colors-selected();
 }
 
 .todos-colors .list-group-item {
-  color: $app-color-text;
-  background-color: $app-color;
+  @include todos-colors();
 }
 
 .todos-colors .darker {
-  background-color: $app-color-dark;
+  @include todos-colors-darker();
 }
 
 .todos-secondary-colors .list-group-item {
-  color: $app-secondary-color-text;
-  background-color: $app-secondary-color;
+  @include todos-secondary-colors();
 }
 
 .todos-secondary-colors .darker {
-  background-color: $app-secondary-color-dark;
-  color: $app-secondary-color-dark-text;
+  background-color: $app-todos-secondary-color-dark;
+  color: $app-todos-secondary-color-dark-text;
 }
 
 // Calendar

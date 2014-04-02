@@ -27,3 +27,46 @@
   white-space: nowrap;
 }
 
+// NEWW Mixins
+// -------------------------------------------------
+
+@mixin todos-colors() {
+  color: $app-todos-color-text;
+  background-color: $app-todos-color;
+
+  a {
+    color: $app-todos-color-text;
+  }
+}
+
+@mixin todos-colors-important() {
+  color: $app-todos-color-text !important;
+  background-color: $app-todos-color !important;
+
+  a {
+    color: $app-todos-color-text !important;
+  }
+}
+
+@mixin todos-colors-selected() {
+  background-color: $app-todos-color-selected;
+}
+
+@mixin todos-colors-selected-important() {
+  background-color: $app-todos-color-selected !important;
+}
+
+@mixin todos-colors-darker() {
+  color: $app-todos-color-text;
+  background-color: $app-todos-color-dark;
+}
+
+@mixin todos-colors-darker-important() {
+  color: $app-todos-color-text !important;
+  background-color: $app-todos-color-dark !important;
+}
+
+@mixin todos-secondary-colors() {
+  color: $app-todos-secondary-color-text;
+  background-color: $app-todos-secondary-color;
+}

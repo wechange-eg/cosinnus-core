@@ -1,5 +1,5 @@
 @import "variables";
-
+@import "mixins";
 
 $widget-title-height: 50px;
 $app-item-size: 40px;
@@ -17,6 +17,27 @@ $font-size-smaller: 0.7em;
 .inline-block-container {
   display: inline-block;
   width: 100%;
+}
+
+// Widget Todos
+
+.dashboard *[data-app-name='todo'] > .panel {
+  @include todos-colors();
+}
+
+.dashboard *[data-app-name='todo']:hover > .panel {
+  @include todos-colors-important();
+}
+.dashboard *[data-app-name='todo'] .darker {
+  @include todos-colors-darker();
+}
+
+.dashboard *[data-app-name='todo'] tr:first-child {
+  display: none;
+}
+
+.dashboard *[data-app-name='todo'] td {
+  @include todos-colors-important();
 }
 
 .widget-contents {

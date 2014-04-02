@@ -1,6 +1,7 @@
 /* @import must be at top of file, otherwise CSS will not work */
 /* COLORS */
 /* Todos */
+/* Todos */
 /* Calendar */
 /* Files */
 /* Etherpad */
@@ -227,6 +228,7 @@ img.right {
 
 /* COLORS */
 /* Todos */
+/* Todos */
 /* Calendar */
 /* Files */
 /* Etherpad */
@@ -273,6 +275,7 @@ body {
 }
 
 /* COLORS */
+/* Todos */
 /* Todos */
 /* Calendar */
 /* Files */
@@ -353,6 +356,7 @@ body {
 
 /* COLORS */
 /* Todos */
+/* Todos */
 /* Calendar */
 /* Files */
 /* Etherpad */
@@ -370,6 +374,39 @@ body {
 .inline-block-container {
   display: inline-block;
   width: 100%;
+}
+
+.dashboard *[data-app-name='todo'] > .panel {
+  color: white;
+  background-color: #f1a200;
+}
+.dashboard *[data-app-name='todo'] > .panel a {
+  color: white;
+}
+
+.dashboard *[data-app-name='todo']:hover > .panel {
+  color: white !important;
+  background-color: #f1a200 !important;
+}
+.dashboard *[data-app-name='todo']:hover > .panel a {
+  color: white !important;
+}
+
+.dashboard *[data-app-name='todo'] .darker {
+  color: white;
+  background-color: #b07f19;
+}
+
+.dashboard *[data-app-name='todo'] tr:first-child {
+  display: none;
+}
+
+.dashboard *[data-app-name='todo'] td {
+  color: white !important;
+  background-color: #f1a200 !important;
+}
+.dashboard *[data-app-name='todo'] td a {
+  color: white !important;
 }
 
 .widget-title {
@@ -530,13 +567,24 @@ body {
   color: white;
   background-color: #f1a200;
 }
+.todos-colors a {
+  color: white;
+}
+
+.todos-colors-selected {
+  background-color: #be8000;
+}
 
 .todos-colors .list-group-item {
   color: white;
   background-color: #f1a200;
 }
+.todos-colors .list-group-item a {
+  color: white;
+}
 
 .todos-colors .darker {
+  color: white;
   background-color: #b07f19;
 }
 
