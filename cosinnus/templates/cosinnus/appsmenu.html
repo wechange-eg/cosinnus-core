@@ -10,7 +10,7 @@
             {% if active_app %}
               {% for app in apps %}
                 {% if app.active %}
-                  {{active_app_name}}{{ app.label }}
+                  {{ app.label }}
                 {% endif %}
               {% endfor %}
             {% else %}
