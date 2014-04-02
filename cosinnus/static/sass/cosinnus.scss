@@ -192,29 +192,30 @@ $list-group-item-title-border-size: 1px;
   float: right;
 }
 
-// ------- TODOS
+// ------- TODO App
 
-.todos-colors {
-  @include todos-colors();
+.todo-colors,
+.todo-colors:hover {
+  @include todo-colors-important();
 }
 
-.todos-colors-selected {
-  @include todos-colors-selected();
+.todo-colors-selected {
+  @include todo-colors-selected();
 }
 
-.todos-colors .list-group-item {
-  @include todos-colors();
+.todo-colors .list-group-item {
+  @include todo-colors();
 }
 
-.todos-colors .darker {
-  @include todos-colors-darker();
+.todo-colors .darker {
+  @include todo-colors-darker();
 }
 
-.todos-secondary-colors .list-group-item {
-  @include todos-secondary-colors();
+.todo-secondary-colors .list-group-item {
+  @include todo-secondary-colors();
 }
 
-.todos-secondary-colors .darker {
+.todo-secondary-colors .darker {
   background-color: $app-todos-secondary-color-dark;
   color: $app-todos-secondary-color-dark-text;
 }

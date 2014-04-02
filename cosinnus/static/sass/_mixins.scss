@@ -33,7 +33,7 @@
 
 // TODOS Mixins
 
-@mixin todos-colors() {
+@mixin todo-colors() {
   color: $app-todos-color-text;
   background-color: $app-todos-color;
 
@@ -42,30 +42,30 @@
   }
 }
 
-@mixin todos-colors-important() {
+@mixin todo-colors-important() {
   color: $app-todos-color-text !important;
   background-color: $app-todos-color !important;
 }
 
-@mixin todos-colors-selected() {
+@mixin todo-colors-selected() {
   background-color: $app-todos-color-selected;
 }
 
-@mixin todos-colors-selected-important() {
+@mixin todo-colors-selected-important() {
   background-color: $app-todos-color-selected !important;
 }
 
-@mixin todos-colors-darker() {
+@mixin todo-colors-darker() {
   color: $app-todos-color-text;
   background-color: $app-todos-color-dark;
 }
 
-@mixin todos-colors-darker-important() {
+@mixin todo-colors-darker-important() {
   color: $app-todos-color-text !important;
   background-color: $app-todos-color-dark !important;
 }
 
-@mixin todos-secondary-colors() {
+@mixin todo-secondary-colors() {
   color: $app-todos-secondary-color-text;
   background-color: $app-todos-secondary-color;
 }

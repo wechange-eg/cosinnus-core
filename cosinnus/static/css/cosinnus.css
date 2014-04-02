@@ -590,37 +590,35 @@ body {
   float: right;
 }
 
-.todos-colors {
-  color: white;
-  background-color: #f1a200;
-}
-.todos-colors a {
-  color: white;
+.todo-colors,
+.todo-colors:hover {
+  color: white !important;
+  background-color: #f1a200 !important;
 }
 
-.todos-colors-selected {
+.todo-colors-selected {
   background-color: #be8000;
 }
 
-.todos-colors .list-group-item {
+.todo-colors .list-group-item {
   color: white;
   background-color: #f1a200;
 }
-.todos-colors .list-group-item a {
+.todo-colors .list-group-item a {
   color: white;
 }
 
-.todos-colors .darker {
+.todo-colors .darker {
   color: white;
   background-color: #b07f19;
 }
 
-.todos-secondary-colors .list-group-item {
+.todo-secondary-colors .list-group-item {
   color: #949494;
   background-color: white;
 }
 
-.todos-secondary-colors .darker {
+.todo-secondary-colors .darker {
   background-color: #c2c2c2;
   color: white;
 }

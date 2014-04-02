@@ -26,14 +26,14 @@ $font-size-smaller: 0.7em;
 // Widget Todos
 
 .dashboard *[data-app-name='todo'] > .panel {
-  @include todos-colors();
+  @include todo-colors();
 }
 
 .dashboard *[data-app-name='todo']:hover > .panel {
-  @include todos-colors-important();
+  @include todo-colors-important();
 }
 .dashboard *[data-app-name='todo'] .darker {
-  @include todos-colors-darker();
+  @include todo-colors-darker();
 }
 
 .dashboard *[data-app-name='todo'] tr:first-child {
@@ -41,7 +41,7 @@ $font-size-smaller: 0.7em;
 }
 
 .dashboard *[data-app-name='todo'] td {
-  @include todos-colors-important();
+  @include todo-colors-important();
 }
 
 

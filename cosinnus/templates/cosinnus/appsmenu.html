@@ -3,14 +3,14 @@
   <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-3">
       <div class="btn-group w100">
-        <button type="button" class="btn btn-default btn-flat neutral-colors dropdown-toggle" data-toggle="dropdown">
+        <button type="button" class="btn btn-default btn-flat {% if active_app %}{{active_app_name}}-colors{% else %}neutral-colors{% endif %} dropdown-toggle" data-toggle="dropdown">
           <span class="btn-bar"></span>
           <span class="icon-menu2 btn-icon"></span>
           <span class="btn-text">
             {% if active_app %}
               {% for app in apps %}
                 {% if app.active %}
-                  {{ app.label }}
+                  {{active_app_name}}{{ app.label }}
                 {% endif %}
               {% endfor %}
             {% else %}
