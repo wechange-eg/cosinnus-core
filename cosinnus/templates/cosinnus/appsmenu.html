@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-3">
       <div class="btn-group w100">
-        <button type="button" class="btn btn-default btn-flat primary-colors dropdown-toggle" data-toggle="dropdown">
+        <button type="button" class="btn btn-default btn-flat neutral-colors dropdown-toggle" data-toggle="dropdown">
           <span class="btn-bar"></span>
           <span class="icon-menu2 btn-icon"></span>
           <span class="btn-text">
@@ -19,7 +19,7 @@
           </span>
           <span class="caret caret-right"></span>
         </button>
-        <ul class="dropdown-menu w100 primary-colors" role="menu">
+        <ul class="dropdown-menu w100 neutral-colors" role="menu">
           {% for app in apps %}
             <li{% if app.active %} class="active"{% endif %}><a href="{{ app.url }}">{{ app.label }}</a></li>
           {% endfor %}

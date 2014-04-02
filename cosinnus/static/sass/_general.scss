@@ -152,3 +152,59 @@ $btn-bar-width: 10px;
   color: $app-color-text !important;
   background-color: $app-color !important;
 }
+
+
+// Neutral
+// ---------------------------------------
+.neutral-colors {
+  color: $app-neutral-color-text;
+  background-color: $app-neutral-color;
+}
+
+.btn-default.neutral-colors:hover,
+.btn-default.neutral-colors:focus,
+.btn-default.neutral-colors:active,
+.btn-default.neutral-colors.active {
+  color: $app-neutral-color-text !important;
+  background-color: $app-neutral-color !important;
+}
+
+.dropdown-menu.neutral-colors > .active > a,
+.dropdown-menu.neutral-colors > .active > a:hover,
+.dropdown-menu.neutral-colors > .active > a:focus {
+  color: $app-neutral-color-text !important;
+  background-color: $app-neutral-color !important;
+}
+
+.neutral-colors:hover {
+  color: $app-neutral-color-text !important;
+  background-color: $app-neutral-color !important;
+}
+
+
+// Dashboard
+// ---------------------------------------+
+.dashboard-colors {
+  color: $app-dashboard-color-text;
+  background-color: $app-dashboard-color;
+}
+
+.btn-default.dashboard-colors:hover,
+.btn-default.dashboard-colors:focus,
+.btn-default.dashboard-colors:active,
+.btn-default.dashboard-colors.active {
+  color: $app-dashboard-color-text !important;
+  background-color: $app-dashboard-color !important;
+}
+
+.dropdown-menu.dashboard-colors > .active > a,
+.dropdown-menu.dashboard-colors > .active > a:hover,
+.dropdown-menu.dashboard-colors > .active > a:focus {
+  color: $app-dashboard-color-text !important;
+  background-color: $app-dashboard-color !important;
+}
+
+.dashboard-colors:hover {
+  color: $app-dashboard-color-text !important;
+  background-color: $app-dashboard-color !important;
+}

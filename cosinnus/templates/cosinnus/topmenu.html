@@ -9,13 +9,13 @@
         <span class="icon-bar"></span>
       </button>
       <!--{% include "cosinnus/brand.html" %}-->
-      <ul class="nav navbar-nav navbar-left">
+      <ul class="nav navbar-nav navbar-left neutral-colors">
         {% if request.user.is_authenticated %}
           {% if groups %}
             <li class="dropdown">
               <a href="{% for g in groups %}{% if g == group %}{% url 'cosinnus:group-dashboard' group=g.slug %}{% endif %}{% endfor %}" class="icon-home2 header-icon"></a>
               <a href="#" class="dropdown-toggle pull-left" data-toggle="dropdown">{% if group %}{{ group }}{% endif %}<b class="caret"></b></a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu neutral-colors">
                 {% for g in groups %}
                   <li{% if g == group %} class="active"{% endif %}><a href="{% url 'cosinnus:group-dashboard' group=g.slug %}">{{ g.name }}</a></li>
                 {% endfor %}
@@ -39,11 +39,11 @@
         <span class="icon-search header-icon pull-left"></span>
         <img class="avatar-img avatar-top-menu" src="{% thumbnail request.user.cosinnus_profile.avatar 40x40 crop=smart %}"/>
         {% if request.user.is_authenticated %}
-        <li class="dropdown">
+        <li class="dropdown neutral-colors">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               {{ request.user|full_name }} <b class="caret"></b>
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu neutral-colors">
               <li><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Profile" %}</a></li>
               <li><a href="{% url 'cosinnus:user-dashboard' %}">{% trans "Dashboard" %}</a></li>
               <li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>

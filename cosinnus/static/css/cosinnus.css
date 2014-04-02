@@ -6,6 +6,7 @@
 /* Etherpad */
 /* Neutral */
 /* Network */
+/* Dashboard */
 /* Bootstrap Adjustments */
 /*
 .row {
@@ -149,6 +150,56 @@ img.right {
   background-color: #f1a200 !important;
 }
 
+.neutral-colors {
+  color: #777777;
+  background-color: #d8e3e5;
+}
+
+.btn-default.neutral-colors:hover,
+.btn-default.neutral-colors:focus,
+.btn-default.neutral-colors:active,
+.btn-default.neutral-colors.active {
+  color: #777777 !important;
+  background-color: #d8e3e5 !important;
+}
+
+.dropdown-menu.neutral-colors > .active > a,
+.dropdown-menu.neutral-colors > .active > a:hover,
+.dropdown-menu.neutral-colors > .active > a:focus {
+  color: #777777 !important;
+  background-color: #d8e3e5 !important;
+}
+
+.neutral-colors:hover {
+  color: #777777 !important;
+  background-color: #d8e3e5 !important;
+}
+
+.dashboard-colors {
+  color: white;
+  background-color: #d8e3e5;
+}
+
+.btn-default.dashboard-colors:hover,
+.btn-default.dashboard-colors:focus,
+.btn-default.dashboard-colors:active,
+.btn-default.dashboard-colors.active {
+  color: white !important;
+  background-color: #d8e3e5 !important;
+}
+
+.dropdown-menu.dashboard-colors > .active > a,
+.dropdown-menu.dashboard-colors > .active > a:hover,
+.dropdown-menu.dashboard-colors > .active > a:focus {
+  color: white !important;
+  background-color: #d8e3e5 !important;
+}
+
+.dashboard-colors:hover {
+  color: white !important;
+  background-color: #d8e3e5 !important;
+}
+
 .icon-checkbox-unchecked {
   background-color: white;
   border: 1px solid #b07f19;
@@ -175,6 +226,7 @@ img.right {
 /* Etherpad */
 /* Neutral */
 /* Network */
+/* Dashboard */
 .navbar-default {
   background-color: #bacfd2;
 }
@@ -209,6 +261,7 @@ img.right {
 /* Etherpad */
 /* Neutral */
 /* Network */
+/* Dashboard */
 .row-right {
   margin-left: 0;
 }
@@ -279,6 +332,7 @@ img.right {
 /* Etherpad */
 /* Neutral */
 /* Network */
+/* Dashboard */
 .dashboard-widgets {
   margin-top: 20px;
 }
@@ -494,11 +548,6 @@ img.right {
 
 .network-colors .reversed-colors {
   color: #0a7891;
-  background-color: white;
-}
-
-.neutral-colors {
-  color: #343434;
   background-color: white;
 }
 

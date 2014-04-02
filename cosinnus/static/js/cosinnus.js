@@ -39,3 +39,10 @@
     };
     $.fn.cosinnus = Cosinnus.init(cosinnus_base_url);
 }(jQuery, this, this.document));
+
+// Dashboard: activate links
+$('.js-todo-link').on('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    location.href = location.pathname + 'todo/';
+});
