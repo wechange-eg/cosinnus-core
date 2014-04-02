@@ -143,11 +143,8 @@ class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
     path = models.CharField(_('Path'),
         blank=False, null=False, default='/', max_length=100)
 
-    # subclassing from BaseTagglableObjectModel.Meta doesn't seem to work for
-    # abstract base classes
-    class Meta:
+    class Meta(BaseTaggableObjectModel.Meta):
         abstract = True
-        unique_together = (('group', 'slug'),)
 
     def __str__(self):
         return '%s (%s)' % (self.title, self.path)

@@ -74,12 +74,14 @@ class DashboardWidget(object):
 
     def get_queryset_group_filter(self, **kwargs):
         """Defines filter arguments if the widget is used on a group dashboard"""
-        kwargs.update({self.group_model_attr: self.config.group})
+        if self.group_model_attr:
+            kwargs.update({self.group_model_attr: self.config.group})
         return kwargs
 
     def get_queryset_user_filter(self, **kwargs):
         """Defines filter arguments if the widget is used on a user dashboard"""
-        kwargs.update({self.user_model_attr: self.config.user})
+        if self.user_model_attr:
+            kwargs.update({self.user_model_attr: self.config.user})
         return kwargs
 
     @classmethod
@@ -108,4 +110,7 @@ class DashboardWidget(object):
 
     @property
     def title_url(self):
-        return reverse('cosinnus:%s:index' % self.app_name, kwargs={'group': self.config.group.slug})
+        if self.config.group:
+            return reverse('cosinnus:%s:index' % self.app_name,
+                           kwargs={'group': self.config.group.slug})
+        return None
