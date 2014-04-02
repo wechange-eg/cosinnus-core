@@ -137,6 +137,8 @@
                 $('[data-target=widget-content]', holder).html(data);
                 $('[data-target=widget-title]', holder).html(jqXHR.getResponseHeader('X-Cosinnus-Widget-Title'));
                 $('[data-target=widget-title-url]', holder).attr("href", jqXHR.getResponseHeader('X-Cosinnus-Widget-Title-URL'));
+                holder.attr("data-app-name", jqXHR.getResponseHeader('X-Cosinnus-Widget-App-Name'));
+                holder.attr("data-widget-name", jqXHR.getResponseHeader('X-Cosinnus-Widget-Widget-Name'));
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 var error = $('<div class="alert alert-danger">An error occurred while loading the widget. </div>');
                 var reload = $('<a href="#" class="alert-link">Reload</a>').bind("click", {
