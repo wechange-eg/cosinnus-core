@@ -175,6 +175,11 @@ img.right {
   background-color: #d8e3e5 !important;
 }
 
+.neutral-colors .darker {
+  color: #777777 !important;
+  background-color: #d8e3e5 !important;
+}
+
 .dashboard-colors {
   color: white;
   background-color: #d8e3e5;
