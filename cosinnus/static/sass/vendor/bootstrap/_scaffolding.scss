@@ -69,7 +69,6 @@ img {
 
 // Rounded corners
 .img-rounded {
-  border-radius: $border-radius-large;
 }
 
 // Image thumbnails
@@ -80,7 +79,6 @@ img {
   line-height: $line-height-base;
   background-color: $thumbnail-bg;
   border: 1px solid $thumbnail-border;
-  border-radius: $thumbnail-border-radius;
   @include transition(all .2s ease-in-out);
 
   // Keep them at most 100% wide
@@ -89,7 +87,6 @@ img {
 
 // Perfect circle
 .img-circle {
-  border-radius: 50%; // set radius in percents
 }
 
 

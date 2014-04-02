@@ -15,10 +15,6 @@
 
   // Prevent floats from breaking the navbar
   @include clearfix();
-
-  @media (min-width: $grid-float-breakpoint) {
-    border-radius: $navbar-border-radius;
-  }
 }
 
 
@@ -180,7 +176,6 @@
   @include navbar-vertical-align(34px);
   background-color: transparent;
   border: 1px solid transparent;
-  border-radius: $border-radius-base;
 
   // Bars
   .icon-bar {
