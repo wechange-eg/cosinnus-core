@@ -45,10 +45,6 @@
 @mixin todos-colors-important() {
   color: $app-todos-color-text !important;
   background-color: $app-todos-color !important;
-
-  a {
-    color: $app-todos-color-text !important;
-  }
 }
 
 @mixin todos-colors-selected() {

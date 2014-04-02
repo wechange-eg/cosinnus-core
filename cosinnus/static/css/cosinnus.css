@@ -376,6 +376,10 @@ body {
   width: 100%;
 }
 
+.dashboard .table {
+  font-size: 12px;
+}
+
 .dashboard *[data-app-name='todo'] > .panel {
   color: white;
   background-color: #f1a200;
@@ -387,9 +391,6 @@ body {
 .dashboard *[data-app-name='todo']:hover > .panel {
   color: white !important;
   background-color: #f1a200 !important;
-}
-.dashboard *[data-app-name='todo']:hover > .panel a {
-  color: white !important;
 }
 
 .dashboard *[data-app-name='todo'] .darker {
@@ -404,9 +405,6 @@ body {
 .dashboard *[data-app-name='todo'] td {
   color: white !important;
   background-color: #f1a200 !important;
-}
-.dashboard *[data-app-name='todo'] td a {
-  color: white !important;
 }
 
 .dashboard *[data-app-name='note'] > .panel {
