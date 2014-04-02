@@ -32,5 +32,5 @@ class TagListSerializer(serializers.WritableField):
         Serialize objects -> primitives.
         """
         if not isinstance(obj, (list, tuple)):
-            return list(map(self._quote_string, obj.all()))
+            return ', '.join(map(self._quote_string, obj.all()))
         return obj
