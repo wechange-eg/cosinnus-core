@@ -5,6 +5,10 @@
 @import "icons";
 @import "bootstrap-theme-default";
 
+body {
+  font-family: Verdana, Geneva, sans-serif;
+}
+
 .group1-background {
   background: url("../images/todos-backgroud.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -79,6 +83,16 @@ $list-group-item-title-border-size: 1px;
 
   .item-box {
     height: ($item-height - 1);
+    font-size: $font-size-bigger;
+  }
+  .item-text {
+    font-size: $font-size-small;
+  }
+}
+
+.lists-new-container {
+  .item-text {
+    font-size: $font-size;
   }
 }
 

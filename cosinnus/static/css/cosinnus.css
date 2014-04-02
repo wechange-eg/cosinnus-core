@@ -118,6 +118,7 @@ img.right {
   float: left;
   padding-left: 10px;
   line-height: 50px;
+  font-size: 12px;
 }
 
 .caret-right {
@@ -236,6 +237,10 @@ img.right {
   background-color: #bacfd2;
 }
 
+body {
+  font-family: Verdana, Geneva, sans-serif;
+}
+
 .group1-background {
   background: url("../images/todos-backgroud.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -275,6 +280,10 @@ img.right {
 /* Neutral */
 /* Network */
 /* Dashboard */
+.group-top-dropdown-menu {
+  font-size: 16px;
+}
+
 .row-right {
   margin-left: 0;
 }
@@ -422,6 +431,14 @@ img.right {
 }
 .lists-container .item-box {
   height: 39px;
+  font-size: 16px;
+}
+.lists-container .item-text {
+  font-size: 0.8em;
+}
+
+.lists-new-container .item-text {
+  font-size: 12px;
 }
 
 .items-container {
