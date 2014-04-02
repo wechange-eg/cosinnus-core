@@ -2,7 +2,7 @@
 {% load bootstrap3 %}
 {% load cosinnus_tags %}
 <!DOCTYPE html>
-<html>
+<html class="htmlclass">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -33,7 +33,7 @@
     {% include 'cosinnus/extrahead.html' %}
     {% block extrahead %}{% endblock extrahead %}
   </head>
-  <body>
+  <body class="bodyclass">
     {% cosinnus_menu "cosinnus/topmenu.html" %}
     {% if group %}
       {% cosinnus_menu "cosinnus/appsmenu.html" %}
