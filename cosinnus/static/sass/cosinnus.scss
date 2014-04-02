@@ -5,6 +5,14 @@
 @import "icons";
 @import "bootstrap-theme-default";
 
+.group1-background {
+  background: url("../images/todos-backgroud.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 .container h1 {
   color: $grey-darkest;
 }
