@@ -136,7 +136,12 @@
             $.ajax(Cosinnus.base_url + "widget/" + id + "/").done(function(data, textStatus, jqXHR) {
                 $('[data-target=widget-content]', holder).html(data);
                 $('[data-target=widget-title]', holder).html(jqXHR.getResponseHeader('X-Cosinnus-Widget-Title'));
-                $('[data-target=widget-title-url]', holder).attr("href", jqXHR.getResponseHeader('X-Cosinnus-Widget-Title-URL'));
+                var title_url = jqXHR.getResponseHeader('X-Cosinnus-Widget-Title-URL');
+                if (title_url !== null) {
+                    $('[data-target=widget-title-url]', holder).attr("href", title_url);
+                } else {
+                    $('[data-target=widget-title-url]', holder).children().unwrap();
+                }
                 holder.attr("data-app-name", jqXHR.getResponseHeader('X-Cosinnus-Widget-App-Name'));
                 holder.attr("data-widget-name", jqXHR.getResponseHeader('X-Cosinnus-Widget-Widget-Name'));
             }).fail(function(jqXHR, textStatus, errorThrown) {
