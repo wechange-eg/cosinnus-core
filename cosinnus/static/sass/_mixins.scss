@@ -30,6 +30,9 @@
 // NEWW Mixins
 // -------------------------------------------------
 
+
+// TODOS Mixins
+
 @mixin todos-colors() {
   color: $app-todos-color-text;
   background-color: $app-todos-color;
@@ -69,4 +72,35 @@
 @mixin todos-secondary-colors() {
   color: $app-todos-secondary-color-text;
   background-color: $app-todos-secondary-color;
+}
+
+
+// Network Mixins
+
+@mixin network-colors() {
+  color: $app-network-color-text;
+  background-color: $app-network-color;
+
+  a {
+    color: $app-network-color-text;
+  }
+}
+
+@mixin network-colors-important() {
+  color: $app-network-color-text !important;
+  background-color: $app-network-color !important;
+
+  a {
+    color: $app-network-color-text !important;
+  }
+}
+
+@mixin network-colors-darker() {
+  color: $app-network-color-text;
+  background-color: $app-network-color-dark;
+}
+
+@mixin network-colors-darker-important() {
+  color: $app-network-color-text !important;
+  background-color: $app-network-color-dark !important;
 }

@@ -40,6 +40,26 @@ $font-size-smaller: 0.7em;
   @include todos-colors-important();
 }
 
+
+// Widget News/Notes
+
+.dashboard *[data-app-name='note'] > .panel {
+  @include network-colors();
+}
+
+.dashboard *[data-app-name='note']:hover > .panel {
+  @include network-colors-important();
+}
+.dashboard *[data-app-name='note'] .darker {
+  @include network-colors-darker();
+}
+
+.dashboard *[data-app-name='note'] td {
+  @include network-colors-important();
+}
+
+
+
 .widget-contents {
 
 }

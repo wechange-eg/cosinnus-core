@@ -409,6 +409,35 @@ body {
   color: white !important;
 }
 
+.dashboard *[data-app-name='note'] > .panel {
+  color: white;
+  background-color: #0a7891;
+}
+.dashboard *[data-app-name='note'] > .panel a {
+  color: white;
+}
+
+.dashboard *[data-app-name='note']:hover > .panel {
+  color: white !important;
+  background-color: #0a7891 !important;
+}
+.dashboard *[data-app-name='note']:hover > .panel a {
+  color: white !important;
+}
+
+.dashboard *[data-app-name='note'] .darker {
+  color: white;
+  background-color: #06495a;
+}
+
+.dashboard *[data-app-name='note'] td {
+  color: white !important;
+  background-color: #0a7891 !important;
+}
+.dashboard *[data-app-name='note'] td a {
+  color: white !important;
+}
+
 .widget-title {
   height: 50px;
 }
