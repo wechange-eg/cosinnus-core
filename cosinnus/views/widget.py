@@ -85,6 +85,8 @@ def widget_detail(request, id):
         resp = JSONResponse(data)
     resp['X-Cosinnus-Widget-Title'] = force_text(widget.title)
     resp['X-Cosinnus-Widget-Title-URL'] = force_text(widget.title_url)
+    resp['X-Cosinnus-Widget-App-Name'] = force_text(wc.app_name)
+    resp['X-Cosinnus-Widget-Widget-Name'] = force_text(wc.widget_name)
     return resp
 
 
