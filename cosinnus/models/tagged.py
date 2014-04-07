@@ -16,21 +16,21 @@ from cosinnus.utils.functions import unique_aware_slugify
 
 
 class LocationModelMixin(models.Model):
-    place = models.CharField(max_length=255)
+    location_place = models.CharField(max_length=255, default='', blank=True)
 
     class Meta:
         abstract = True
 
 
 class PeopleModelMixin(models.Model):
-    name = models.CharField(max_length=255)
+    people_name = models.CharField(max_length=255, default='', blank=True)
 
     class Meta:
         abstract = True
 
 
 class PublicModelMixin(models.Model):
-    public = models.BooleanField(_('Public'), default=False)
+    public = models.BooleanField(_('Public'), default=False, blank=True)
 
     class Meta:
         abstract = True
@@ -38,6 +38,9 @@ class PublicModelMixin(models.Model):
 
 @python_2_unicode_compatible
 class BaseTagObject(LocationModelMixin, PeopleModelMixin, PublicModelMixin):
+
+    group = models.ForeignKey(CosinnusGroup, verbose_name=_('Group'),
+        related_name='+', null=True)
 
     class Meta:
         abstract = True
