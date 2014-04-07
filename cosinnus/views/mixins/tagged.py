@@ -7,7 +7,6 @@ from os.path import basename, dirname
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseRedirect
-
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 
