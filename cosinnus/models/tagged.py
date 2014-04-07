@@ -156,3 +156,20 @@ class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
         if self.path[-1] != '/':
             self.path += '/'
         super(BaseHierarchicalTaggableObjectModel, self).save(*args, **kwargs)
+
+
+def get_tag_object_model():
+    "Return the cosinnus user profile model that is active in this project"
+    from django.core.exceptions import ImproperlyConfigured
+    from django.db.models import get_model
+    from cosinnus.conf import settings
+
+    try:
+        app_label, model_name = settings.COSINNUS_TAG_OBJECT_MODEL.split('.')
+    except ValueError:
+        raise ImproperlyConfigured("COSINNUS_TAG_OBJECT_MODEL must be of the form 'app_label.model_name'")
+    tag_model = get_model(app_label, model_name)
+    if tag_model is None:
+        raise ImproperlyConfigured("COSINNUS_TAG_OBJECT_MODEL refers to model '%s' that has not been installed" %
+            settings.COSINNUS_TAG_OBJECT_MODEL)
+    return tag_model
