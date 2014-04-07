@@ -20,6 +20,11 @@ class GroupKwargModelFormMixin(object):
         self.group = kwargs.pop('group', None)
         super(GroupKwargModelFormMixin, self).__init__(*args, **kwargs)
 
+    def save(self, *args, **kwargs):
+        if hasattr(self.instance, 'group_id'):
+            self.instance.group_id = self.group.id
+        return super(GroupKwargModelFormMixin, self).save(*args, **kwargs)
+
 
 class CosinnusGroupForm(forms.ModelForm):
 
