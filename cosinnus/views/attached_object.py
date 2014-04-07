@@ -37,11 +37,11 @@ class AttachableViewMixin(object):
     def form_valid(self, form):
         # retrieve the attached objects from the form and save them
         # after saving the object itself
-        self.object.save()
-        if hasattr(form, 'save_m2m'):
-            form.save_m2m()
+        ret = super(AttachableViewMixin, self).form_valid(form)
+        # if hasattr(form, 'save_m2m'):
+        #     form.save_m2m()
         form.save_attachable()
-        return HttpResponseRedirect(self.get_success_url())
+        return ret
 
 
 class CreateViewAttachable(AttachableViewMixin, CreateView):
