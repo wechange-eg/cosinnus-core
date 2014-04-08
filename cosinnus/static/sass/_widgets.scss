@@ -156,6 +156,10 @@ $app-item-link-height: 70px;
   height: $widget-title-height;
 }
 
+.app-item-list .app-item {
+  border-bottom: 1px solid white;
+}
+
 .app-subitem {
   margin-left: $app-item-size;
 }

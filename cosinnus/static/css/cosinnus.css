@@ -541,6 +541,10 @@ body {
   height: 50px;
 }
 
+.app-item-list .app-item {
+  border-bottom: 1px solid white;
+}
+
 .app-subitem {
   margin-left: 40px;
 }
