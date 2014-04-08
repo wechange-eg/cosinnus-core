@@ -40,7 +40,7 @@ class PublicModelMixin(models.Model):
 class BaseTagObject(LocationModelMixin, PeopleModelMixin, PublicModelMixin):
 
     group = models.ForeignKey(CosinnusGroup, verbose_name=_('Group'),
-        related_name='+', null=True)
+        related_name='+', null=True, on_delete=models.SET_NULL)
 
     class Meta:
         abstract = True
