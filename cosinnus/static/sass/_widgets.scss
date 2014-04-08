@@ -8,8 +8,22 @@ $app-item-size: 40px;
   margin-top: $item-distance-long;
 }
 
-.widget {
-  background-color: $neww-bg-color;
+.transparent {
+  //background-color: $neww-bg-color;
+  display: block;
+  position: relative;
+}
+
+.transparent::after {
+  content: "";
+  background: url("../images/white-pixel.png");
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
 }
 
 .widget:not(:first-child) {

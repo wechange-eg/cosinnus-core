@@ -18,7 +18,7 @@
 
 .group-box {
   margin-right: 0px;
-  background-color: $neww-bg-color;
+  //background-color: $neww-bg-color;
 }
 
 .group-logo {
@@ -49,7 +49,7 @@
   display: inline-block;
   width: 100px;
   height: 100px;
-  margin: 3% $item-distance-long 3% 0px;
+  margin: $item-distance-long $item-distance-long $item-distance-long 0px;
   padding: 15px 0 5px 0;
   vertical-align: middle;
   text-align: center;

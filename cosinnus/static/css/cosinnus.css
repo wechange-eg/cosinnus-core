@@ -361,7 +361,6 @@ body {
 
 .group-box {
   margin-right: 0px;
-  background-color: #bacfd2;
 }
 
 .group-logo {
@@ -392,7 +391,7 @@ body {
   display: inline-block;
   width: 100px;
   height: 100px;
-  margin: 3% 20px 3% 0px;
+  margin: 20px 20px 20px 0px;
   padding: 15px 0 5px 0;
   vertical-align: middle;
   text-align: center;
@@ -428,8 +427,21 @@ body {
   margin-top: 20px;
 }
 
-.widget {
-  background-color: #bacfd2;
+.transparent {
+  display: block;
+  position: relative;
+}
+
+.transparent::after {
+  content: "";
+  background: url("../images/white-pixel.png");
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
 }
 
 .widget:not(:first-child) {
