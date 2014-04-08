@@ -156,6 +156,10 @@ $app-item-link-height: 70px;
   height: $widget-title-height;
 }
 
+.app-subitem {
+  margin-left: $app-item-size;
+}
+
 .app-item-header {
   height: $app-item-size;
 }
@@ -196,41 +200,41 @@ $app-item-link-height: 70px;
 
 // CALENDAR ITEM ----------------------------------------------
 
-.app-item-contents--calendar-item {
+.app-item-contents--app-item-summary {
   height: $app-item-size;
 }
 
-.calendar-item-left {
+.app-item-summary-left {
   float: left;
   width: $app-item-size;
   height: $app-item-size;
   text-align: center;
 }
 
-.calendar-item-left--title {
+.app-item-summary-left--title {
   font-size: $font-size-bigger;
 }
 
-.calendar-item-left--subtitle {
+.app-item-summary-left--subtitle {
   position: relative;
   top: -$item-distance-small;
   font-size: $font-size-smaller;
 }
 
-.calendar-item-contents {
+.app-item-summary-contents {
   float: left;
   padding-left: $item-distance;
 }
 
-.calendar-item-contents--title {
+.app-item-summary-contents--title {
   font-size: $font-size-big;
 }
 
-.calendar-item-contents--subtitle {
+.app-item-summary-contents--subtitle {
   font-size: $font-size-small;
 }
 
-.calendar-item-right {
+.app-item-summary-right {
   position: relative;
   float: right;
   height: $app-item-size;
@@ -241,6 +245,6 @@ $app-item-link-height: 70px;
   }
 }
 
-.calendar-item-right-icon {
+.app-item-summary-right-icon {
   padding: 10px;
 }

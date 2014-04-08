@@ -541,6 +541,10 @@ body {
   height: 50px;
 }
 
+.app-subitem {
+  margin-left: 40px;
+}
+
 .app-item-header {
   height: 40px;
 }
@@ -576,51 +580,51 @@ body {
   height: 40px;
 }
 
-.app-item-contents--calendar-item {
+.app-item-contents--app-item-summary {
   height: 40px;
 }
 
-.calendar-item-left {
+.app-item-summary-left {
   float: left;
   width: 40px;
   height: 40px;
   text-align: center;
 }
 
-.calendar-item-left--title {
+.app-item-summary-left--title {
   font-size: 16px;
 }
 
-.calendar-item-left--subtitle {
+.app-item-summary-left--subtitle {
   position: relative;
   top: -5px;
   font-size: 10px;
 }
 
-.calendar-item-contents {
+.app-item-summary-contents {
   float: left;
   padding-left: 10px;
 }
 
-.calendar-item-contents--title {
+.app-item-summary-contents--title {
   font-size: 14px;
 }
 
-.calendar-item-contents--subtitle {
+.app-item-summary-contents--subtitle {
   font-size: 11px;
 }
 
-.calendar-item-right {
+.app-item-summary-right {
   position: relative;
   float: right;
   height: 40px;
 }
-.calendar-item-right .absolute-center {
+.app-item-summary-right .absolute-center {
   height: 20px;
   width: 20px;
 }
 
-.calendar-item-right-icon {
+.app-item-summary-right-icon {
   padding: 10px;
 }
 
