@@ -201,7 +201,6 @@ $app-item-link-height: 70px;
 // CALENDAR ITEM ----------------------------------------------
 
 .app-item-contents--app-item-summary {
-  height: $app-item-size;
 }
 
 .app-item-summary-left {
@@ -223,7 +222,11 @@ $app-item-link-height: 70px;
 
 .app-item-summary-contents {
   float: left;
+  max-width: 70%;
   padding-left: $item-distance;
+  overflow: hidden;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
 }
 
 .app-item-summary-contents--title {

@@ -580,10 +580,6 @@ body {
   height: 40px;
 }
 
-.app-item-contents--app-item-summary {
-  height: 40px;
-}
-
 .app-item-summary-left {
   float: left;
   width: 40px;
@@ -603,7 +599,11 @@ body {
 
 .app-item-summary-contents {
   float: left;
+  max-width: 70%;
   padding-left: 10px;
+  overflow: hidden;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
 }
 
 .app-item-summary-contents--title {
