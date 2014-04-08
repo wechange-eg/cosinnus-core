@@ -117,50 +117,6 @@ $app-item-link-height: 70px;
   .app-item-contents--image {
     height: $app-item-link-height;
   }
-
-  // CALENDAR ITEM ----------------------------------------------
-
-  .app-item-contents--calendar-item {
-    height: $app-item-size;
-  }
-
-  .calendar-item-left {
-    float: left;
-    width: $app-item-size;
-    height: $app-item-size;
-    text-align: center;
-  }
-
-  .calendar-item-left--title {
-    font-size: $font-size-bigger;
-  }
-
-  .calendar-item-left--subtitle {
-    position: relative;
-    top: -$item-distance-small;
-    font-size: $font-size-smaller;
-  }
-
-  .calendar-item-contents {
-    float: left;
-    padding-left: $item-distance;
-  }
-
-  .calendar-item-contents--title {
-    font-size: $font-size-big;
-  }
-
-  .calendar-item-contents--subtitle {
-    font-size: $font-size-small;
-  }
-
-  .calendar-item-right {
-    float: right;
-  }
-
-  .calendar-item-right-icon {
-    padding: 10px;
-  }
 }
 
 .widget-more {
@@ -230,6 +186,61 @@ $app-item-link-height: 70px;
   padding: 2px;
 }
 
-.app-item-contents {
+.margin-left-app-item {
   margin-left: $app-item-size;
+}
+
+.widget-footer {
+  height: $app-item-size;
+}
+
+// CALENDAR ITEM ----------------------------------------------
+
+.app-item-contents--calendar-item {
+  height: $app-item-size;
+}
+
+.calendar-item-left {
+  float: left;
+  width: $app-item-size;
+  height: $app-item-size;
+  text-align: center;
+}
+
+.calendar-item-left--title {
+  font-size: $font-size-bigger;
+}
+
+.calendar-item-left--subtitle {
+  position: relative;
+  top: -$item-distance-small;
+  font-size: $font-size-smaller;
+}
+
+.calendar-item-contents {
+  float: left;
+  padding-left: $item-distance;
+}
+
+.calendar-item-contents--title {
+  font-size: $font-size-big;
+}
+
+.calendar-item-contents--subtitle {
+  font-size: $font-size-small;
+}
+
+.calendar-item-right {
+  position: relative;
+  float: right;
+  height: $app-item-size;
+
+  .absolute-center {
+    height: ($app-item-size / 2);
+    width: ($app-item-size / 2);
+  }
+}
+
+.calendar-item-right-icon {
+  padding: 10px;
 }
