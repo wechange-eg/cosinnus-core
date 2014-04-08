@@ -46,9 +46,14 @@ $app-etherpad-color-dark: #4a6228;
 $app-etherpad-color-text: $white;
 
 /* Neutral */
-$app-neutral-color: #d8e3e5;
+$app-neutral-color: #FFFFFF;
 $app-neutral-color-dark: $app-color-dark;
 $app-neutral-color-text: #777777;
+
+/* main-menu */
+$app-main-menu-color: #d8e3e5;
+$app-main-menu-color-dark: $app-color-dark;
+$app-main-menu-color-text: #777777;
 
 /* Network */
 $app-network-color: #0a7891;

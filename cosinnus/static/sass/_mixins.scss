@@ -129,3 +129,23 @@
     color: $app-neutral-color-text !important;
   }
 }
+
+// Main Menu Mixins
+
+@mixin main-menu-colors() {
+  color: $app-main-menu-color-text;
+  background-color: $app-main-menu-color;
+
+  a {
+    color: $app-main-menu-color-text;
+  }
+}
+
+@mixin main-menu-colors-important() {
+  color: $app-main-menu-color-text !important;
+  background-color: $app-main-menu-color !important;
+
+  a {
+    color: $app-main-menu-color-text !important;
+  }
+}

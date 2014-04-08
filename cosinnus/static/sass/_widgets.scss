@@ -90,15 +90,20 @@ $app-item-link-height: 70px;
 
   .app-item-contents {
     padding-left: $item-distance;
+    font-size: $font-size-small;
     background-color: $white;
   }
 
   .app-item-contents--text {
-    padding: $item-distance 0px;
+    padding: $item-distance 2px $item-distance 0px;
+    
+    a {
+      color: #097891;
+    }
   }
 
   .app-item-contents--link {
-    @include neutral-colors-important();
+    @include main-menu-colors-important();
     height: $app-item-link-height;
   }
 
@@ -142,7 +147,9 @@ $app-item-link-height: 70px;
   height: $app-item-size;
 
   .absolute-center {
-    height: ($app-item-size / 2);
+    height: $app-item-size - $font-size-bigger;
+    font-size: $font-size-bigger;
+    font-weight: bold;
   }
 }
 
@@ -238,7 +245,8 @@ $app-item-link-height: 70px;
 }
 
 .app-item-summary-contents--title {
-  font-size: $font-size-big;
+  font-size: $font-size;
+  text-decoration: underline;
 }
 
 .app-item-summary-contents--subtitle {

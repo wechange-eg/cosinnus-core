@@ -6,6 +6,7 @@
 /* Files */
 /* Etherpad */
 /* Neutral */
+/* main-menu */
 /* Network */
 /* Dashboard */
 /* Bootstrap Adjustments */
@@ -181,7 +182,7 @@ img.right {
 
 .neutral-colors {
   color: #777777 !important;
-  background-color: #d8e3e5 !important;
+  background-color: white !important;
 }
 
 .btn-default.neutral-colors:hover,
@@ -189,22 +190,52 @@ img.right {
 .btn-default.neutral-colors:active,
 .btn-default.neutral-colors.active {
   color: #777777 !important;
-  background-color: #d8e3e5 !important;
+  background-color: white !important;
 }
 
 .dropdown-menu.neutral-colors > .active > a,
 .dropdown-menu.neutral-colors > .active > a:hover,
 .dropdown-menu.neutral-colors > .active > a:focus {
   color: #777777 !important;
-  background-color: #d8e3e5 !important;
+  background-color: white !important;
 }
 
 .neutral-colors:hover {
   color: #777777 !important;
-  background-color: #d8e3e5 !important;
+  background-color: white !important;
 }
 
 .neutral-colors .darker {
+  color: #777777 !important;
+  background-color: white !important;
+}
+
+.main-menu-colors {
+  color: #777777 !important;
+  background-color: #d8e3e5 !important;
+}
+
+.btn-default.main-menu-colors:hover,
+.btn-default.main-menu-colors:focus,
+.btn-default.main-menu-colors:active,
+.btn-default.main-menu-colors.active {
+  color: #777777 !important;
+  background-color: #d8e3e5 !important;
+}
+
+.dropdown-menu.main-menu-colors > .active > a,
+.dropdown-menu.main-menu-colors > .active > a:hover,
+.dropdown-menu.main-menu-colors > .active > a:focus {
+  color: #777777 !important;
+  background-color: #d8e3e5 !important;
+}
+
+.main-menu-colors:hover {
+  color: #777777 !important;
+  background-color: #d8e3e5 !important;
+}
+
+.main-menu-colors .darker {
   color: #777777 !important;
   background-color: #d8e3e5 !important;
 }
@@ -260,6 +291,7 @@ img.right {
 /* Files */
 /* Etherpad */
 /* Neutral */
+/* main-menu */
 /* Network */
 /* Dashboard */
 .navbar-default {
@@ -308,6 +340,7 @@ body {
 /* Files */
 /* Etherpad */
 /* Neutral */
+/* main-menu */
 /* Network */
 /* Dashboard */
 .apps-dropdown-menu {
@@ -388,6 +421,7 @@ body {
 /* Files */
 /* Etherpad */
 /* Neutral */
+/* main-menu */
 /* Network */
 /* Dashboard */
 .dashboard-widgets {
@@ -493,10 +527,14 @@ body {
 }
 .widget-network .app-item-contents {
   padding-left: 10px;
+  font-size: 11px;
   background-color: white;
 }
 .widget-network .app-item-contents--text {
-  padding: 10px 0px;
+  padding: 10px 2px 10px 0px;
+}
+.widget-network .app-item-contents--text a {
+  color: #097891;
 }
 .widget-network .app-item-contents--link {
   color: #777777 !important;
@@ -542,7 +580,9 @@ body {
   height: 40px;
 }
 .widget-more-arrow .absolute-center {
-  height: 20px;
+  height: 24px;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .app-item-contents-meta {
@@ -625,7 +665,8 @@ body {
 }
 
 .app-item-summary-contents--title {
-  font-size: 14px;
+  font-size: 12px;
+  text-decoration: underline;
 }
 
 .app-item-summary-contents--subtitle {

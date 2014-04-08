@@ -213,6 +213,38 @@ $btn-bar-width: 10px;
   background-color: $app-neutral-color !important;
 }
 
+// Main Menu
+// ---------------------------------------
+.main-menu-colors {
+  color: $app-main-menu-color-text !important;
+  background-color: $app-main-menu-color !important;
+}
+
+.btn-default.main-menu-colors:hover,
+.btn-default.main-menu-colors:focus,
+.btn-default.main-menu-colors:active,
+.btn-default.main-menu-colors.active {
+  color: $app-main-menu-color-text !important;
+  background-color: $app-main-menu-color !important;
+}
+
+.dropdown-menu.main-menu-colors > .active > a,
+.dropdown-menu.main-menu-colors > .active > a:hover,
+.dropdown-menu.main-menu-colors > .active > a:focus {
+  color: $app-main-menu-color-text !important;
+  background-color: $app-main-menu-color !important;
+}
+
+.main-menu-colors:hover {
+  color: $app-main-menu-color-text !important;
+  background-color: $app-main-menu-color !important;
+}
+
+.main-menu-colors .darker {
+  color: $app-main-menu-color-text !important;
+  background-color: $app-main-menu-color !important;
+}
+
 
 // Dashboard
 // ---------------------------------------+
