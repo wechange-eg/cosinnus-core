@@ -69,7 +69,7 @@ def full_name(value):
 
 @register.simple_tag(takes_context=True)
 def cosinnus_menu(context, template="cosinnus/topmenu.html"):
-    if not 'request' in context:
+    if 'request' not in context:
         raise ImproperlyConfigured("Current request missing in rendering "
             "context. Include 'django.core.context_processors.request' in the "
             "TEMPLATE_CONTEXT_PROCESSORS.")
@@ -129,7 +129,7 @@ def cosinnus_render_attached_objects(context, source, filter=None):
     for att in attached_objects:
         attobj = att.target_object
         content_model = att.model_name
-        if filter and not content_model in allowed_types:
+        if filter and content_model not in allowed_types:
             continue
         if attobj is not None:
             typed_objects[content_model].append(attobj)

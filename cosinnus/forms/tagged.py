@@ -93,7 +93,6 @@ class TagObjectFormMixin(object):
                 setattr(self.media_tag, name, value)
             self.media_tag.group = self.group
 
-
         # attach the media tag to the current instance
         self.instance.media_tag = self.media_tag
 

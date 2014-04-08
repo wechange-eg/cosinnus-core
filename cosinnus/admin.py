@@ -10,7 +10,7 @@ from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import AttachedObject
 
 
-## group related admin
+# group related admin
 
 class MembershipAdmin(admin.ModelAdmin):
     list_display = ('group', 'user', 'status', 'date',)
@@ -34,7 +34,7 @@ admin.site.register(CosinnusGroup, CosinnusGroupAdmin)
 admin.site.register(AttachedObject)
 
 
-## user / user profile related admin
+# user / user profile related admin
 
 USER_PROFILE_MODEL = get_user_profile_model()
 USER_MODEL = get_user_model()

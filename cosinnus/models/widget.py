@@ -19,7 +19,7 @@ class WidgetConfig(models.Model):
 
     class Meta:
         app_label = 'cosinnus'
-        #ordering = ('position',)
+        # ordering = ('position',)
         verbose_name = _('Widget configuration')
         verbose_name_plural = _('Widget configurations')
 

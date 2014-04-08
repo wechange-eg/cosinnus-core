@@ -46,7 +46,7 @@ def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
     slug = slugify(getattr(item, slug_source)[:slug_len])
     model = item.__class__
     # the following gets all existing slug values
-    if not slug_field in kwargs:
+    if slug_field not in kwargs:
         kwargs['%s__startswith' % slug_field] = slug
     all_slugs = list(model.objects.filter(**kwargs).values_list(slug_field, flat=True))
     if slug in all_slugs:

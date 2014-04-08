@@ -39,7 +39,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
             setattr(self, 'transform_%s' % name, func)
 
 
-
 class UserSimpleSerializer(serializers.ModelSerializer):
 
     username = serializers.CharField(source='get_username', read_only=True)

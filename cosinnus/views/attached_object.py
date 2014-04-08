@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db.models.loading import get_model
-from django.http.response import HttpResponseRedirect
 from django.views.generic.edit import CreateView, UpdateView
 
 from cosinnus.core.registries import attached_object_registry

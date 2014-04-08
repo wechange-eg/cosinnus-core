@@ -141,7 +141,7 @@ class UserProfile(BaseUserProfile):
             return None
 
         thumbnails = getattr(self, '_avatar_thumbnails', {})
-        if not size in thumbnails:
+        if size not in thumbnails:
             thumbnailer = get_thumbnailer(self.avatar)
             thumbnails[size] = thumbnailer.get_thumbnail({
                 'crop': True,
