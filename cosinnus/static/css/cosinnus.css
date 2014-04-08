@@ -60,6 +60,10 @@ img.right {
   margin-left: 40px;
 }
 
+.full-width {
+  min-width: 100%;
+}
+
 .img-center {
   display: block;
   margin-left: auto;
@@ -79,6 +83,15 @@ img.right {
   vertical-align: middle;
 }
 
+.absolute-center {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+
 .centered-h {
   text-align: center;
 }
@@ -87,8 +100,12 @@ img.right {
   vertical-align: middle;
 }
 
-.large-text {
+.large-bold-text {
   font-weight: bold;
+  font-size: large;
+}
+
+.large-text {
   font-size: large;
 }
 
@@ -153,8 +170,8 @@ img.right {
 }
 
 .neutral-colors {
-  color: #777777;
-  background-color: #d8e3e5;
+  color: #777777 !important;
+  background-color: #d8e3e5 !important;
 }
 
 .btn-default.neutral-colors:hover,
@@ -436,6 +453,123 @@ body {
   color: white !important;
 }
 
+.widget-network .app-item:not(:first-child) {
+  padding-top: 10px;
+}
+.widget-network .app-item {
+  padding-bottom: 10px;
+}
+.widget-network .app-item-header {
+  color: white !important;
+  background-color: #0a7891 !important;
+}
+.widget-network .app-item-header a {
+  color: white !important;
+}
+.widget-network .app-item-tags-icon {
+  color: white;
+  background-color: #06495a;
+}
+.widget-network .app-item-tags-text {
+  color: #0a7891 !important;
+  background-color: white !important;
+}
+.widget-network .app-item-tags-text a {
+  color: #0a7891 !important;
+}
+.widget-network .app-item-contents {
+  padding-left: 10px;
+  background-color: white;
+}
+.widget-network .app-item-contents--text {
+  padding: 10px 0px;
+}
+.widget-network .app-item-contents--link {
+  color: #777777 !important;
+  background-color: #d8e3e5 !important;
+  height: 70px;
+}
+.widget-network .app-item-contents--link a {
+  color: #777777 !important;
+}
+.widget-network .app-item-contents--link-image {
+  float: left;
+  margin-right: 10px;
+}
+.widget-network .app-item-contents--link-title {
+  position: relative;
+  top: 10px;
+  font-weight: bold;
+}
+.widget-network .app-item-contents--link-url {
+  position: relative;
+  top: 10px;
+}
+.widget-network .app-item-contents--image {
+  height: 70px;
+}
+.widget-network .app-item-contents--calendar-item {
+  height: 40px;
+}
+.widget-network .calendar-item-left {
+  float: left;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+}
+.widget-network .calendar-item-left--title {
+  font-size: 16px;
+}
+.widget-network .calendar-item-left--subtitle {
+  position: relative;
+  top: -5px;
+  font-size: 10px;
+}
+.widget-network .calendar-item-contents {
+  float: left;
+  padding-left: 10px;
+}
+.widget-network .calendar-item-contents--title {
+  font-size: 14px;
+}
+.widget-network .calendar-item-contents--subtitle {
+  font-size: 11px;
+}
+.widget-network .calendar-item-right {
+  float: right;
+}
+.widget-network .calendar-item-right-icon {
+  padding: 10px;
+}
+
+.widget-more {
+  float: right;
+  height: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.widget-more-text {
+  float: left;
+  padding: 10px;
+}
+
+.widget-more-arrow {
+  position: relative;
+  float: left;
+  width: 40px;
+  height: 40px;
+}
+.widget-more-arrow .absolute-center {
+  height: 20px;
+}
+
+.app-item-contents-meta {
+  padding: 5px 0px;
+  font-size: 11px;
+  color: #777777;
+}
+
 .widget-title {
   height: 50px;
 }
@@ -455,11 +589,11 @@ body {
 }
 
 .app-item-subtitle {
-  font-size: 0.7em;
+  font-size: 10px;
 }
 
 .app-item-tags-text {
-  font-size: 0.8em;
+  font-size: 11px;
   padding: 2px;
 }
 
@@ -502,7 +636,7 @@ body {
   font-size: 16px;
 }
 .lists-container .item-text {
-  font-size: 0.8em;
+  font-size: 11px;
 }
 
 .lists-new-container .item-text {

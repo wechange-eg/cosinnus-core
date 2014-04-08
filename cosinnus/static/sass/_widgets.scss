@@ -3,8 +3,6 @@
 
 $widget-title-height: 50px;
 $app-item-size: 40px;
-$font-size-small: 0.8em;
-$font-size-smaller: 0.7em;
 
 .dashboard-widgets {
   margin-top: $item-distance-long;
@@ -60,6 +58,138 @@ $font-size-smaller: 0.7em;
 
 .dashboard *[data-app-name='note'] td {
   @include network-colors-important();
+}
+
+$app-item-link-height: 70px;
+
+.widget-network {
+
+  .app-item:not(:first-child) {
+    padding-top: $item-distance;
+  }
+
+  .app-item {
+    padding-bottom: $item-distance;
+  }
+
+  .app-item-header {
+    @include network-colors-important();
+  }
+
+  .app-item-tags-icon {
+    @include network-colors-darker();
+  }
+
+  .app-item-tags-text {
+    @include network-reversed-colors-important();
+  }
+
+  .app-item-contents {
+    padding-left: $item-distance;
+    background-color: $white;
+  }
+
+  .app-item-contents--text {
+    padding: $item-distance 0px;
+  }
+
+  .app-item-contents--link {
+    @include neutral-colors-important();
+    height: $app-item-link-height;
+  }
+
+  .app-item-contents--link-image {
+    float: left;
+    margin-right: $item-distance;
+  }
+
+  .app-item-contents--link-title {
+    position: relative;
+    top: $item-distance;
+    font-weight: bold;
+  }
+
+  .app-item-contents--link-url {
+    position: relative;
+    top: $item-distance;
+  }
+
+  .app-item-contents--image {
+    height: $app-item-link-height;
+  }
+
+  // CALENDAR ITEM ----------------------------------------------
+
+  .app-item-contents--calendar-item {
+    height: $app-item-size;
+  }
+
+  .calendar-item-left {
+    float: left;
+    width: $app-item-size;
+    height: $app-item-size;
+    text-align: center;
+  }
+
+  .calendar-item-left--title {
+    font-size: $font-size-bigger;
+  }
+
+  .calendar-item-left--subtitle {
+    position: relative;
+    top: -$item-distance-small;
+    font-size: $font-size-smaller;
+  }
+
+  .calendar-item-contents {
+    float: left;
+    padding-left: $item-distance;
+  }
+
+  .calendar-item-contents--title {
+    font-size: $font-size-big;
+  }
+
+  .calendar-item-contents--subtitle {
+    font-size: $font-size-small;
+  }
+
+  .calendar-item-right {
+    float: right;
+  }
+
+  .calendar-item-right-icon {
+    padding: 10px;
+  }
+}
+
+.widget-more {
+  float: right;
+  height: $app-item-size;
+  text-align: center;
+  cursor: pointer;
+}
+
+.widget-more-text {
+  float: left;
+  padding: $item-distance;
+}
+
+.widget-more-arrow {
+  position: relative;
+  float: left;
+  width: $app-item-size;
+  height: $app-item-size;
+
+  .absolute-center {
+    height: ($app-item-size / 2);
+  }
+}
+
+.app-item-contents-meta {
+  padding: $item-distance-small 0px;
+  font-size: $font-size-small;
+  color: $app-neutral-color-text;
 }
 
 .widget-contents {

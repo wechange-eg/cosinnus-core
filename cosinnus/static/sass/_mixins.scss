@@ -91,6 +91,15 @@
   }
 }
 
+@mixin network-reversed-colors-important() {
+  color: $app-network-color !important;
+  background-color: $app-network-color-text !important;
+
+  a {
+    color: $app-network-color !important;
+  }
+}
+
 @mixin network-colors-darker() {
   color: $app-network-color-text;
   background-color: $app-network-color-dark;
@@ -99,4 +108,24 @@
 @mixin network-colors-darker-important() {
   color: $app-network-color-text !important;
   background-color: $app-network-color-dark !important;
+}
+
+// Neutral Mixins
+
+@mixin neutral-colors() {
+  color: $app-neutral-color-text;
+  background-color: $app-neutral-color;
+
+  a {
+    color: $app-neutral-color-text;
+  }
+}
+
+@mixin neutral-colors-important() {
+  color: $app-neutral-color-text !important;
+  background-color: $app-neutral-color !important;
+
+  a {
+    color: $app-neutral-color-text !important;
+  }
 }

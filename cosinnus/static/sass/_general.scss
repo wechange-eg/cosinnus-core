@@ -58,6 +58,10 @@ img.right {
   margin-left: 40px;
 }
 
+.full-width {
+  min-width: 100%;
+}
+
 .img-center {
   display: block;
   margin-left: auto;
@@ -77,6 +81,15 @@ img.right {
   vertical-align: middle;
 }
 
+.absolute-center {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+
 .centered-h {
   text-align: center;
 }
@@ -85,8 +98,12 @@ img.right {
   vertical-align: middle;
 }
 
-.large-text {
+.large-bold-text {
   font-weight: bold;
+  font-size: large;
+}
+
+.large-text {
   font-size: large;
 }
 
@@ -158,8 +175,8 @@ $btn-bar-width: 10px;
 // Neutral
 // ---------------------------------------
 .neutral-colors {
-  color: $app-neutral-color-text;
-  background-color: $app-neutral-color;
+  color: $app-neutral-color-text !important;
+  background-color: $app-neutral-color !important;
 }
 
 .btn-default.neutral-colors:hover,
