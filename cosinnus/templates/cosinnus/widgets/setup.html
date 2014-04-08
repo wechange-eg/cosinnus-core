@@ -2,7 +2,10 @@
 <form action="" method="POST" class="form-horizontal" role="form">
   {% csrf_token %}
   {% bootstrap_form form layout="horizontal" label_class="col-md-3" field_class="col-md-9" %}
-  {% buttons layout='horizontal' %}
-    {% bootstrap_button submit_label button_type="submit" %}
-  {% endbuttons %}
+  <div class="form-group">
+    <label class="col-md-2 control-label">&nbsp;</label>
+    <div class="col-md-4">
+      <button class="btn darker" type="submit">Ändern</button>
+    </div>
+  </div>
 </form>

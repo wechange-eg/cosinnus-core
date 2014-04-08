@@ -2,7 +2,7 @@
 {% load bootstrap3 %}
 {% load cosinnus_tags %}
 <!DOCTYPE html>
-<html>
+<html class="htmlclass">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -10,14 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     {% if SETTINGS.DEBUG %}
       {% block csshead %}
-      <link href="{% static "css/vendor/bootstrap.min.css" %}" rel="stylesheet">
+      <link href="{% static 'css/bootstrap3-cosinnus.css' %}" rel="stylesheet">
+      <link href="{% static 'css/vendor/icomoon-font.css' %}" rel="stylesheet">
       {% endblock csshead %}
-      <script src="{% static "js/vendor/jquery-1.10.2.min.js" %}"></script>
-      <script src="{% static "js/vendor/bootstrap.min.js" %}"></script>
+      <script src="{% static 'js/vendor/jquery-1.10.2.min.js' %}"></script>
+      <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
     {% else %}
       <script src="{% bootstrap_jquery_url %}"></script>
       <script src="{% bootstrap_javascript_url %}"></script>
       <link href="{% bootstrap_css_url %}" rel="stylesheet">
+      <link href="{% static 'css/vendor/icomoon-font.css' %}" rel="stylesheet">
     {% endif %}
     <script type="text/javascript">
         var cosinnus_base_url = "{{ COSINNUS_BASE_URL|default:'/' }}";
@@ -31,8 +33,11 @@
     {% include 'cosinnus/extrahead.html' %}
     {% block extrahead %}{% endblock extrahead %}
   </head>
-  <body>
+  <body class="bodyclass group1-background {% block bodyclass %}{% endblock bodyclass %}">
     {% cosinnus_menu "cosinnus/topmenu.html" %}
+    {% if group %}
+      {% cosinnus_menu "cosinnus/appsmenu.html" %}
+    {% endif %}
 
     <div class="container">
       <h1>{% block content_title %}{% endblock content_title %}</h1>
@@ -43,5 +48,11 @@
     </div>
     <script src="{% static "js/cosinnus.js" %}"></script>
     {% block extrafooter %}{% endblock extrafooter %}
+
+    {% if SETTINGS.DEBUG %}
+    <!--<script src='//192.168.1.170:3000/socket.io/socket.io.js'></script>-->
+    <!--<script>var ___socket___ = io.connect('http://192.168.1.170:3000');</script>-->
+    <!--<script src='//192.168.1.170:3001/client/browser-sync-client.0.6.2.js'></script>-->
+    {% endif %}
   </body>
 </html>

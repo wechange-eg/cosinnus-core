@@ -1,0 +1,86 @@
+/* COLORS */
+$white: #FFFFFF;
+$grey-darkest: #414141;
+$neww-bg-color: #BACFD2;
+
+$select-percentage: 10%;
+
+/* Todos */
+$app-color: #F1A200;
+$app-color-selected: darken($app-color, $select-percentage);
+$app-color-dark: #B07F19;
+$app-color-dark-selected: darken($app-color-dark, $select-percentage);
+$app-color-dark: #B07F19;
+$app-color-text: $white;
+$app-secondary-color: $white;
+$app-secondary-color-text: #949494;
+$app-secondary-color-dark: #C2C2C2;
+$app-secondary-color-dark-text: $white;
+$app-color-bg: #D1DCD8;
+$app-color-list-line: #FCEDCE;
+
+/* Todos */
+$app-todos-color: #F1A200;
+$app-todos-color-selected: darken($app-color, $select-percentage);
+$app-todos-color-dark: #B07F19;
+$app-todos-color-dark-selected: darken($app-color-dark, $select-percentage);
+$app-todos-color-text: $white;
+$app-todos-secondary-color: $white;
+$app-todos-secondary-color-text: #949494;
+$app-todos-secondary-color-dark: #C2C2C2;
+$app-todos-secondary-color-dark-text: $white;
+
+/* Calendar */
+$app-calendar-color: #789d40;
+$app-calendar-color-dark: #4a6228;
+$app-calendar-color-text: $white;
+
+/* Files */
+$app-files-color: #00a388;
+$app-files-color-dark: #4a6228;
+$app-files-color-text: $white;
+
+/* Etherpad */
+$app-etherpad-color: #e8483a;
+$app-etherpad-color-dark: #4a6228;
+$app-etherpad-color-text: $white;
+
+/* Neutral */
+$app-neutral-color: #FFFFFF;
+$app-neutral-color-dark: $app-color-dark;
+$app-neutral-color-text: #777777;
+
+/* main-menu */
+$app-main-menu-color: #d8e3e5;
+$app-main-menu-color-dark: $app-color-dark;
+$app-main-menu-color-text: #777777;
+
+/* Network */
+$app-network-color: #0a7891;
+$app-network-color-dark: #06495a;
+$app-network-color-text: $white;
+
+/* Dashboard */
+$app-dashboard-color: #d8e3e5;
+$app-dashboard-color-dark: #06495a;
+$app-dashboard-color-text: $white;
+
+
+$app-color-font-secondary: #949494;
+
+$item-width: 40px;
+$item-height: 40px;
+$item-line-width: 10px;
+$item-line-height: 40px;
+
+$item-distance: 10px;
+$item-distance-small: 5px;
+$item-distance-long: 20px;
+
+$app-item-title-border-color: darken($app-color-dark, 0%);
+
+$font-size-bigger: 16px;
+$font-size-big: 14px;
+$font-size: 12px;
+$font-size-small: 11px;
+$font-size-smaller: 10px;
