@@ -99,6 +99,9 @@ class TagObjectFormMixin(object):
         if commit:
             self.save_media_tag()
             self.instance.save()
+            if hasattr(self, 'save_m2m'):
+                self.save_m2m()
+                delattr(self, 'save_m2m')
             if hasattr(self, 'old_media_tag'):
                 self.old_media_tag.delete()
         return self.instance
