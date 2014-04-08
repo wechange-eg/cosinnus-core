@@ -153,10 +153,15 @@ $app-item-link-height: 70px;
   }
 }
 
-.app-item-contents-meta {
+.app-item-contents--meta {
   padding: $item-distance-small 0px;
   font-size: $font-size-small;
   color: $app-neutral-color-text;
+}
+
+.app-item-contents--meta-item {
+  float: left;
+  padding-right: $item-distance;
 }
 
 .widget-contents {

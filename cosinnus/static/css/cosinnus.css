@@ -585,10 +585,15 @@ body {
   font-weight: bold;
 }
 
-.app-item-contents-meta {
+.app-item-contents--meta {
   padding: 5px 0px;
   font-size: 11px;
   color: #777777;
+}
+
+.app-item-contents--meta-item {
+  float: left;
+  padding-right: 10px;
 }
 
 .widget-title {
