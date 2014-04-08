@@ -98,6 +98,15 @@ img.right {
   vertical-align: middle;
 }
 
+.row-no-margins {
+  margin: 0;
+}
+.row-no-margins [class^="col-"],
+.row-no-margins [class*=" col-"]{
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .large-bold-text {
   font-weight: bold;
   font-size: large;

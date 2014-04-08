@@ -8,8 +8,12 @@ $app-item-size: 40px;
   margin-top: $item-distance-long;
 }
 
-.widgets-column {
+.widget {
   background-color: $neww-bg-color;
+}
+
+.widget:not(:first-child) {
+  margin-top: $item-distance-long;
 }
 
 .inline-block-container {
