@@ -3,6 +3,7 @@
 @import "fonts";
 @import "general";
 @import "icons";
+@import "calendar";
 @import "bootstrap-theme-default";
 
 body {
@@ -230,6 +231,11 @@ $list-group-item-title-border-size: 1px;
 }
 
 .calendar-colors .darker {
+  color: $app-calendar-color-text;
+  background-color: $app-calendar-color-dark;
+}
+
+.calendar-colors.darker {
   color: $app-calendar-color-text;
   background-color: $app-calendar-color-dark;
 }

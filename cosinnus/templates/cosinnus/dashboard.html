@@ -223,6 +223,38 @@
           </div>
           <div class="widget-contents">
 
+            <div class="cal1">
+              <script type="text/template" id="template-calendar">
+                <div class="clndr-controls centered-block">
+                  <span class="calendar-colors">
+                    <span class="clndr-control-button">
+                      <span class="clndr-previous-button darker">&lsaquo;</span>
+                    </span>
+                    <span class="month">
+                      <%= month %> <%= year %>
+                    </span>
+                    <span class="clndr-control-button rightalign">
+                      <span class="clndr-next-button darker">&rsaquo;</span>
+                    </span>
+                  </span>
+                </div>
+                <table class="clndr-table" border="0" cellspacing="0" cellpadding="0">
+                  <tbody>
+                  <% for(var i = 0; i < numberOfRows; i++){ %>
+                    <tr>
+                    <% for(var j = 0; j < 7; j++){ %>
+                    <% var d = j + i * 7; %>
+                    <td class="<%= days[d].classes %>">
+                      <div class="day-contents calendar-colors"><%= days[d].day %></div>
+                    </td>
+                    <% } %>
+                    </tr>
+                  <% } %>
+                  </tbody>
+                </table>
+              </script>
+            </div>
+
             <div class="app-item-list">
               <div class="app-item">
                 <div class="app-item-contents">
@@ -560,6 +592,13 @@
 
 {% block extrafooter %}
   {{ block.super }}
+
+  <script src="{% static 'js/vendor/json2.js' %}"></script>
+  <script src="{% static 'js/vendor/underscore-min.js' %}"></script>
+  <script src="{% static 'js/vendor/moment.min.js' %}"></script>
+  <script src="{% static 'js/vendor/locales/moment.de.js' %}"></script>
+  <script src="{% static 'js/vendor/clndr.min.js' %}"></script>
+
   <script src="{% static "js/cosinnus.dashboard.js" %}"></script>
   <script type="text/javascript">
     $(document).ready(function(){
