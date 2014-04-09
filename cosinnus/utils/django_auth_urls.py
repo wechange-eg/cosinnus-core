@@ -24,13 +24,30 @@ urlpatterns = patterns('',
         'django.contrib.auth.views.password_change_done',
         {'template_name': 'cosinnus/registration/password_change_done.html'},
         name='password_change_done'),
-    url(r'^password_reset/$',
-        'django.contrib.auth.views.password_reset',
-        {
-            'template_name': 'cosinnus/registration/password_reset_form.html',
-            'email_template_name': 'cosinnus/registration/password_reset_email.html',
-        },
-        name='password_reset'),
+)
+
+if django.VERSION[:2] >= (1, 6):
+    urlpatterns += patterns('',
+        url(r'^password_reset/$',
+            'django.contrib.auth.views.password_reset',
+            {
+                'template_name': 'cosinnus/registration/password_reset_form.html',
+                'email_template_name': 'cosinnus/registration/password_reset_email_16.html',
+            },
+            name='password_reset')
+    )
+else:
+    urlpatterns += patterns('',
+        url(r'^password_reset/$',
+            'django.contrib.auth.views.password_reset',
+            {
+                'template_name': 'cosinnus/registration/password_reset_form.html',
+                'email_template_name': 'cosinnus/registration/password_reset_email_15.html',
+            },
+            name='password_reset')
+    )
+
+urlpatterns += patterns('',
     url(r'^password_reset/done/$',
         'django.contrib.auth.views.password_reset_done',
         {'template_name': 'cosinnus/registration/password_reset_done.html'},
