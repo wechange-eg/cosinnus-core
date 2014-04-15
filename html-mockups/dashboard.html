@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html class="htmlclass">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <link href="../cosinnus/static/css/bootstrap3-cosinnus.css" rel="stylesheet">
+    <link href="static/css/vendor/icomoon-font.css" rel="stylesheet">
+    
+    
+      <script src="static/js/vendor/jquery-1.10.2.min.js"></script>
+      <script src="static/js/vendor/bootstrap.min.js"></script>
+    
+    <script type="text/javascript">
+        var cosinnus_base_url = "http://localhost:8000/";
+        var cosinnus_active_group = "test";
+        var cosinnus_active_user = JSON.parse("{\u0022id\u0022: 1, \u0022username\u0022: \u0022tomi\u0022, \u0022profile\u0022: {\u0022id\u0022: 1, \u0022avatar\u0022: null, \u0022avatar_80x80\u0022: null, \u0022avatar_50x50\u0022: null, \u0022avatar_40x40\u0022: null}}");
+        var cosinnus_date_format = "DD.MM.YYYY";
+        var cosinnus_datetime_format = "DD.MM.YYYY HH:mm";
+        var cosinnus_time_format = "HH:mm";
+    </script>
+    <link href="../cosinnus/static/css/cosinnus.css" rel="stylesheet">
+    
+
+    
+  <link href="static/css/cosinnus.dashboard.css" rel="stylesheet">
+
+  </head>
+  <body class="bodyclass group1-background group1-background">
+    
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Navigation ab-/abschalten</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!--
+<a class="navbar-brand" href="/"><img height="18" src="static/img/neww_logo.png" alt="Logo" /></a>
+-->
+      <ul class="nav navbar-nav navbar-left group-top-dropdown-menu main-menu-colors">
+        
+          
+            <li class="dropdown">
+              <a href="/group/test/" class="icon-home2 header-icon"></a>
+              <a href="#" class="dropdown-toggle pull-left" data-toggle="dropdown">Test<b class="caret"></b></a>
+              <ul class="dropdown-menu main-menu-colors">
+                
+                  <li class="active"><a href="/group/test/">Test</a></li>
+                
+                <li class="divider"></li>
+                <li><a href="/groups/">Alle Gruppen auflisten</a></li>
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <!--<ul class="nav navbar-nav">-->
+        <!---->
+          <!--<li><a href="/group/test/message/">Nachricht</a></li>-->
+        <!---->
+          <!--<li><a href="/group/test/note/">Neuigkeiten</a></li>-->
+        <!---->
+          <!--<li><a href="/group/test/etherpad/">Etherpad</a></li>-->
+        <!---->
+          <!--<li><a href="/group/test/event/">Veranstaltungen</a></li>-->
+        <!---->
+          <!--<li><a href="/group/test/file/">Dateien</a></li>-->
+        <!---->
+          <!--<li><a href="/group/test/todo/">Todos</a></li>-->
+        <!---->
+          <!--<li><a href="/group/test/document/">Dokumente</a></li>-->
+        <!---->
+      <!--</ul>-->
+      <ul class="nav navbar-nav navbar-right">
+        <span class="icon-search header-icon pull-left"></span>
+        <img class="avatar-img avatar-top-menu" src=""/>
+        
+        <li class="dropdown main-menu-colors">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              tomi <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu main-menu-colors">
+              <li><a href="/profile/">Profil</a></li>
+              <li><a href="/profile/dashboard/">Dashboard</a></li>
+              <li><a href="/logout/">Abmelden</a></li>
+            </ul>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+      
+<div class="container">
+<!--
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-3">
+      <div class="btn-group w100">
+        <button type="button" class="btn btn-default btn-flat neutral-colors dropdown-toggle" data-toggle="dropdown">
+          <span class="btn-bar"></span>
+          <span class="icon-menu2 btn-icon"></span>
+          <span class="btn-text">
+            
+              App auswählen
+            
+          </span>
+          <span class="caret caret-right"></span>
+        </button>
+        <ul class="dropdown-menu apps-dropdown-menu w100 neutral-colors" role="menu">
+          
+            <li><a href="/group/test/message/">Nachricht</a></li>
+          
+            <li><a href="/group/test/note/">Neuigkeiten</a></li>
+          
+            <li><a href="/group/test/etherpad/">Etherpad</a></li>
+          
+            <li><a href="/group/test/event/">Veranstaltungen</a></li>
+          
+            <li><a href="/group/test/file/">Dateien</a></li>
+          
+            <li><a href="/group/test/todo/">Todos</a></li>
+          
+            <li><a href="/group/test/document/">Dokumente</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </div> -->
+<h1> </h1>
+</div>
+
+    
+
+    <div class="container">
+    
+  <div class="row row-right group-box">
+    <div class="col-lg-5 col-md-5 col-sm-5 transparent">
+      <div class="row">
+        <div class="col-lg-4 col-md-4">
+          <img class="group-logo" src="static/images/group-logo-1.jpg" alt="Group logo"/>
+        </div>
+        <div class="group-description col-lg-8 col-md-8">
+          <div class="group-title">Test</div>
+          <div class="group-short-description">
+            <a href="#">Umsetzung</a> & <a href="#">Vermittlung</a> in
+            <a href="#">Wanne-Eckel</a> seit 2011
+          </div>
+          <div class="group-text-more">
+            Als lokale Initiative in Wanne-Eckel setzen wir gemeinsam mit anderen Aktivisten Projekte in unserer Region ...
+            <a href="#">weiterlesen</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7 col-md-7 col-sm-7 transparent">
+      <div class="row row-left">
+        <div class="col-lg-12 col-md-12">
+          <div class="group-app-box calendar-colors">
+            <div class="group-app-box-icon icon-calendar"></div>
+            <div class="group-app-box-numbers">32</div>
+            <div class="group-app-box-title">Termine</div>
+          </div>
+          <div class="group-app-box todo-colors js-todo-link">
+            <div class="group-app-box-icon icon-menu2"></div>
+            <div class="group-app-box-numbers">26</div>
+            <div class="group-app-box-title">Aufgaben</div>
+          </div>
+          <div class="group-app-box files-colors">
+            <div class="group-app-box-icon icon-images"></div>
+            <div class="group-app-box-numbers">14</div>
+            <div class="group-app-box-title">Dateien</div>
+          </div>
+          <div class="group-app-box etherpad-colors">
+            <div class="group-app-box-icon icon-file3"></div>
+            <div class="group-app-box-numbers">9</div>
+            <div class="group-app-box-title">Etherpads</div>
+          </div>
+          <div class="group-app-box neutral-colors">
+            <div class="group-app-box-icon icon-arrow-right"></div>
+            weitere<br/>Apps
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row dashboard-widgets">
+    <div class="col-lg-4 col-md-4 col-sm-4">
+      <div class="widgets-column">
+        <div class="widget transparent widget-network">
+          <div class="widget-contents clearfix">
+
+            <div class="app-item">
+              <div class="app-item-header">
+                <span class="app-item-left">
+                  <img src="http://placehold.it/40x40" alt="Photo"/>
+                </span>
+                <span class="app-item-header">
+                  <span class="app-item-title">
+                    Anne Schwarm
+                  </span>
+                  <span class="app-item-subtitle">vor 2 Tagen</span><br/>
+                  <span class="app-item-tags">
+                    <span class="app-item-tags-icon icon-tag"></span>
+                    <span class="app-item-tags-text">energiewende</span>
+                  </span>
+                </span>
+              </div>
+
+              <div class="app-item-contents margin-left-app-item">
+                <div class="app-item-contents--text">
+                  Das hier ist ein spannender Link. <a href="#">#schlagwort</a> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci alias aliquid atque consectetur corporis delectus, dolor dolorum esse est fuga in ipsam natus numquam pariatur, perspiciatis quidem rem voluptates.
+                  <a href="#">weiterlesen</a>
+                </div>
+                <div class="app-item-contents--link clearfix">
+                  <span class="app-item-contents--link-image">
+                    <img src="http://placehold.it/70x70" alt="Photo"/>
+                  </span>
+                  <span class="app-item-contents--link-title">Energiewende-Demo: Aufruf zur Demo</span><br/>
+                  <span class="app-item-contents--link-url">www.energiewende-demo.de</span>
+                </div>
+                <div class="row-no-margins clearfix app-item-contents--meta">
+                  <div class="app-item-contents--meta-item">
+                    <span class="icon-heart"></span> 3 Likes
+                  </div>
+                  <div class="app-item-contents--meta-item">
+                    <span class="icon-bubble"></span> 2 Kommentare
+                  </div>
+                  <div class="app-item-contents--meta-item">
+                    <span class="icon-tag"></span> 6 Schlagworte
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="app-item">
+              <div class="app-item-header">
+                <span class="app-item-left">
+                  <img src="http://placehold.it/40x40" alt="Photo"/>
+                </span>
+                <span class="app-item-header">
+                  <span class="app-item-title">
+                    Prinzessinnengärten
+                  </span>
+                  <span class="app-item-subtitle">vor einer Woche</span><br/>
+                  <span class="app-item-tags">
+                    <span class="app-item-tags-icon icon-tag"></span>
+                    <span class="app-item-tags-text">urbangarderning</span>
+                  </span>
+                </span>
+              </div>
+
+              <div class="app-item-contents margin-left-app-item">
+                <div class="app-item-contents--text">
+                  Wir haben diese Bild gefunden und glauben es könnte euch weiterhelfen. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi asperiores deleniti earum enim illo, in ipsum labore magni molestias nam nulla!
+                  <a href="#">weiterlesen</a>
+                </div>
+                <img class="app-item-contents--image full-width" src="http://placehold.it/170x70" alt="Photo"/>
+                <div class="row-no-margins clearfix app-item-contents--meta">
+                  <div class="app-item-contents--meta-item">
+                    <span class="icon-heart"></span> 3 Likes
+                  </div>
+                  <div class="app-item-contents--meta-item">
+                    <span class="icon-bubble"></span> 2 Kommentare
+                  </div>
+                  <div class="app-item-contents--meta-item">
+                    <span class="icon-tag"></span> 6 Schlagworte
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="app-item">
+              <div class="app-item-header">
+                <span class="app-item-left">
+                  <img src="http://placehold.it/40x40" alt="Photo"/>
+                </span>
+                <span class="app-item-header">
+                  <span class="app-item-title">
+                    Shivana Dana
+                  </span>
+                  <span class="app-item-subtitle">vor einer Woche</span><br/>
+                  <span class="app-item-tags">
+                  </span>
+                </span>
+              </div>
+
+              <div class="app-item-contents margin-left-app-item">
+                <div class="app-item-contents--text">
+                  Die de:growth 2014 findet lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi asperiores deleniti earum enim illo, in ipsum labore magni molestias nam nulla!
+                  <a href="#">weiterlesen</a>
+                </div>
+                <div class="app-item-contents--app-item-summary calendar-colors clearfix">
+                  <div class="app-item-summary-left darker">
+                    <span class="app-item-summary-left--title">28</span><br/>
+                    <span class="app-item-summary-left--subtitle">DEZ</span>
+                  </div>
+                  <div class="app-item-summary-contents">
+                    <span class="app-item-summary-contents--title">de:growth Call for Papers</span><br/>
+                    <span class="app-item-summary-contents--subtitle">Leipzig, Germany</span>
+                  </div>
+                  <div class="app-item-summary-right app-item-summary-right-icon">
+                    <span class="icon-calendar large-text"></span>
+                  </div>
+                </div>
+                <div class="row-no-margins clearfix app-item-contents--meta">
+                  <div class="app-item-contents--meta-item">
+                    <span class="icon-heart"></span> 3 Likes
+                  </div>
+                  <div class="app-item-contents--meta-item">
+                    <span class="icon-bubble"></span> 2 Kommentare
+                  </div>
+                  <div class="app-item-contents--meta-item">
+                    <span class="icon-tag"></span> 6 Schlagworte
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="widget-footer">
+              <div class="widget-more network-colors">
+                <div class="widget-more-text">mehr</div>
+                <div class="widget-more-arrow darker">
+                  <span class="absolute-center">&rsaquo;</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- /widget-contents -->
+        </div>
+        <!-- /widget -->
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+      <div class="widgets-column">
+        <div class="widget transparent">
+          <div class="widget-title inline-block-container calendar-colors">
+            <span class="btn-bar darker"></span>
+            <span class="icon-calendar btn-icon"></span>
+            <span class="btn-text">Kalender</span>
+          </div>
+          <div class="widget-contents">
+
+            <div class="cal1">
+              <script type="text/template" id="template-calendar">
+                <div class="clndr-controls centered-block">
+                  <span class="calendar-colors">
+                    <span class="clndr-control-button">
+                      <span class="clndr-previous-button darker">&lsaquo;</span>
+                    </span>
+                    <span class="month">
+                      <%= month %> <%= year %>
+                    </span>
+                    <span class="clndr-control-button rightalign">
+                      <span class="clndr-next-button darker">&rsaquo;</span>
+                    </span>
+                  </span>
+                </div>
+                <table class="clndr-table" border="0" cellspacing="0" cellpadding="0">
+                  <tbody>
+                  <% for(var i = 0; i < numberOfRows; i++){ %>
+                    <tr>
+                    <% for(var j = 0; j < 7; j++){ %>
+                    <% var d = j + i * 7; %>
+                    <td class="<%= days[d].classes %>">
+                      <div class="day-contents calendar-colors"><%= days[d].day %></div>
+                    </td>
+                    <% } %>
+                    </tr>
+                  <% } %>
+                  </tbody>
+                </table>
+              </script>
+            </div>
+
+            <div class="app-item-list">
+              <div class="app-item">
+                <div class="app-item-contents">
+                  <div class="app-item-contents--app-item-summary calendar-colors clearfix">
+                    <div class="app-item-summary-left darker">
+                      <span class="app-item-summary-left--title">19</span><br/>
+                      <span class="app-item-summary-left--subtitle">DEZ</span>
+                    </div>
+                    <div class="app-item-summary-contents">
+                      <span class="app-item-summary-contents--title">thinkfarm Jahresabschluss</span><br/>
+                      <span class="app-item-summary-contents--subtitle">#thinkfarmberlin</span>
+                    </div>
+                    <div class="app-item-summary-right app-item-summary-right-icon">
+                      <span class="icon-calendar large-text"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="app-item">
+                <div class="app-item-contents">
+                  <div class="app-item-contents--app-item-summary calendar-colors clearfix">
+                    <div class="app-item-summary-left darker">
+                      <span class="app-item-summary-left--title">28</span><br/>
+                      <span class="app-item-summary-left--subtitle">DEZ</span>
+                    </div>
+                    <div class="app-item-summary-contents">
+                      <span class="app-item-summary-contents--title">de:growth Call for Papers</span><br/>
+                      <span class="app-item-summary-contents--subtitle">Leipzig, Germany</span>
+                    </div>
+                    <div class="app-item-summary-right app-item-summary-right-icon">
+                      <span class="icon-calendar large-text"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="app-item">
+                <div class="app-item-contents">
+                  <div class="app-item-contents--app-item-summary calendar-colors clearfix">
+                    <div class="app-item-summary-left darker">
+                      <span class="app-item-summary-left--title">13</span><br/>
+                      <span class="app-item-summary-left--subtitle">JAN</span>
+                    </div>
+                    <div class="app-item-summary-contents">
+                      <span class="app-item-summary-contents--title">Netzwerk N: Jahreshauptversammlung</span><br/>
+                      <span class="app-item-summary-contents--subtitle">#netzwerk-n</span>
+                    </div>
+                    <div class="app-item-summary-right app-item-summary-right-icon">
+                      <span class="icon-calendar large-text"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="widget-footer">
+            <div class="widget-more calendar-colors">
+              <div class="widget-more-text">mehr</div>
+              <div class="widget-more-arrow darker">
+                <span class="absolute-center">&rsaquo;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /widget -->
+
+        <div class="widget transparent">
+
+          <div class="widget-title inline-block-container network-colors">
+            <span class="btn-bar darker"></span>
+            <span class="icon-calendar btn-icon"></span>
+            <span class="btn-text">Mein Netzwerk</span>
+          </div>
+
+          <div class="widget-contents">
+            <div class="row-no-margins clearfix">
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <img class="app-item-contents--image full-width" src="http://placehold.it/70x70" alt="Photo"/>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <img class="app-item-contents--image full-width" src="http://placehold.it/70x70" alt="Photo"/>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <img class="app-item-contents--image full-width" src="http://placehold.it/70x70" alt="Photo"/>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <img class="app-item-contents--image full-width" src="http://placehold.it/70x70" alt="Photo"/>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <img class="app-item-contents--image full-width" src="http://placehold.it/70x70" alt="Photo"/>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <img class="app-item-contents--image full-width" src="http://placehold.it/70x70" alt="Photo"/>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <img class="app-item-contents--image full-width" src="http://placehold.it/70x70" alt="Photo"/>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <img class="app-item-contents--image full-width" src="http://placehold.it/70x70" alt="Photo"/>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <img class="app-item-contents--image full-width" src="http://placehold.it/70x70" alt="Photo"/>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <img class="app-item-contents--image full-width" src="http://placehold.it/70x70" alt="Photo"/>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <img class="app-item-contents--image full-width" src="http://placehold.it/70x70" alt="Photo"/>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3">
+                <img class="app-item-contents--image full-width" src="http://placehold.it/70x70" alt="Photo"/>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="widget-footer">
+            <div class="widget-more network-colors">
+              <div class="widget-more-text">mehr</div>
+              <div class="widget-more-arrow darker">
+                <span class="absolute-center">&rsaquo;</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /widget -->
+
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4">
+      <div class="widgets-column">
+        <div class="widget transparent">
+          <div class="widget-title inline-block-container todo-colors">
+            <span class="btn-bar darker"></span>
+            <span class="icon-menu2 btn-icon"></span>
+            <span class="btn-text">Meine Aufgaben</span>
+          </div>
+          <div class="widget-contents">
+            <div class="app-item-list">
+              <div class="app-item">
+                <div class="app-item-contents">
+                  <div class="app-item-contents--app-item-summary todo-colors clearfix">
+                    <div class="app-item-summary-left darker">
+                      <span class="app-item-summary-left--title">2</span><br/>
+                      <span class="app-item-summary-left--subtitle">TASKS</span>
+                    </div>
+                    <div class="app-item-summary-contents">
+                      <span class="app-item-summary-contents--title">Januarnewsletter versenden</span><br/>
+                      <span class="app-item-summary-contents--subtitle">#netzwerk-n</span>
+                    </div>
+                    <div class="app-item-summary-right app-item-summary-right-icon">
+                      <span class="icon-menu2 large-text"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="app-item app-subitem">
+                <div class="app-item-contents">
+                  <div class="app-item-contents--app-item-summary todo-colors clearfix">
+                    <div class="app-item-summary-left darker">
+                      <span class="app-item-left">
+                        <img src="http://placehold.it/40x40" alt="Photo"/>
+                      </span>
+                    </div>
+                    <div class="app-item-summary-contents">
+                      <span class="app-item-summary-contents--title">Editorial schreiben</span><br/>
+                      <span class="app-item-summary-contents--subtitle">(fällig bis 04.12.)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="app-item app-subitem">
+                <div class="app-item-contents">
+                  <div class="app-item-contents--app-item-summary todo-colors clearfix">
+                    <div class="app-item-summary-left darker">
+                      <span class="app-item-left">
+                        <img src="http://placehold.it/40x40" alt="Photo"/>
+                      </span>
+                    </div>
+                    <div class="app-item-summary-contents">
+                      <span class="app-item-summary-contents--title">Empfängerliste aktualisieren</span><br/>
+                      <span class="app-item-summary-contents--subtitle"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="app-item">
+                <div class="app-item-contents">
+                  <div class="app-item-contents--app-item-summary todo-colors clearfix">
+                    <div class="app-item-summary-left darker">
+                      <span class="app-item-summary-left--title">5</span><br/>
+                      <span class="app-item-summary-left--subtitle">TASKS</span>
+                    </div>
+                    <div class="app-item-summary-contents">
+                      <span class="app-item-summary-contents--title">Prinzessinnengärtenfest machen</span><br/>
+                      <span class="app-item-summary-contents--subtitle">#prinzessinnengärten</span>
+                    </div>
+                    <div class="app-item-summary-right app-item-summary-right-icon">
+                      <span class="icon-menu2 large-text"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="app-item app-subitem">
+                <div class="app-item-contents">
+                  <div class="app-item-contents--app-item-summary todo-colors clearfix">
+                    <div class="app-item-summary-left darker">
+                      <span class="app-item-left">
+                        <img src="http://placehold.it/40x40" alt="Photo"/>
+                      </span>
+                    </div>
+                    <div class="app-item-summary-contents">
+                      <span class="app-item-summary-contents--title">Johannes kontaktieren: Er ist für die Unterbringung der Geranien zuständig.</span><br/>
+                      <span class="app-item-summary-contents--subtitle"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="app-item app-subitem">
+                <div class="app-item-contents">
+                  <div class="app-item-contents--app-item-summary todo-colors clearfix">
+                    <div class="app-item-summary-left darker">
+                      <span class="app-item-left">
+                        <img src="http://placehold.it/40x40" alt="Photo"/>
+                      </span>
+                    </div>
+                    <div class="app-item-summary-contents">
+                      <span class="app-item-summary-contents--title">Gewürzregale abdecken</span><br/>
+                      <span class="app-item-summary-contents--subtitle">(fällig bis 25.11.)</span>
+                    </div>
+                    <div class="app-item-summary-right app-item-summary-right-icon">
+                      <span class="icon-bell"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="app-item app-subitem">
+                <div class="app-item-contents">
+                  <div class="app-item-contents--app-item-summary todo-colors clearfix">
+                    <div class="app-item-summary-left darker">
+                      <span class="app-item-left">
+                        <img src="http://placehold.it/40x40" alt="Photo"/>
+                      </span>
+                    </div>
+                    <div class="app-item-summary-contents">
+                      <span class="app-item-summary-contents--title">Heizstrahler für Cafe bauen</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="widget-footer">
+            <div class="widget-more todo-colors">
+              <div class="widget-more-text">mehr</div>
+              <div class="widget-more-arrow darker">
+                <span class="absolute-center">&rsaquo;</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!--<div id="dashboard" class="row dashboard">-->
+    <!---->
+    <!---->
+      <!--<div class="col-md-4" data-type="widget-add">-->
+        <!--<div class="panel panel-default">-->
+          <!--<div class="panel-heading">-->
+            <!--<h3 class="panel-title">Widget hinzufügen</h3>-->
+          <!--</div>-->
+          <!--<div class="panel-body" data-widget-id="0" data-target="widget-add-button">-->
+            <!--<span class="glyphicon glyphicon-plus"></span>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="col-md-4" data-type="widget-spare">-->
+        <!--<div class="panel">-->
+          <!--<div class="panel-heading">-->
+            <!--<h3 class="panel-title">-->
+              <!--<a href="" data-target="widget-title-url"><span data-target="widget-title"></span>&nbsp;</a>-->
+              <!--<div class="btn-group pull-right">-->
+                <!--<a href="#" class="btn btn-xs darker" title="Neu laden" data-type="refresh"><span class="glyphicon glyphicon-refresh"></span></a>-->
+                <!---->
+                  <!--<a href="#" class="btn btn-xs darker" title="Konfigurieren" data-type="edit"><span class="glyphicon glyphicon-wrench"></span></a>-->
+                  <!--<a href="#" class="btn btn-xs darker" title="Löschen" data-type="delete"><span class="glyphicon glyphicon-remove"></span></a>-->
+                <!---->
+              <!--</div>-->
+            <!--</h3>-->
+          <!--</div>-->
+          <!--<div class="panel-body" data-target="widget-content"></div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!---->
+  <!--</div>-->
+  <div>
+    <a href="/group/test/details/">Test - Details</a>
+  </div>
+
+      
+      
+    </div>
+    <script src="static/js/cosinnus.js"></script>
+
+
+
+  <script src="static/js/vendor/json2.js"></script>
+  <script src="static/js/vendor/underscore-min.js"></script>
+  <script src="static/js/vendor/moment.min.js"></script>
+  <script src="static/js/vendor/locales/moment.de.js"></script>
+  <script src="static/js/vendor/clndr.min.js"></script>
+
+  <script src="static/js/cosinnus.dashboard.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var dashboard = window.Cosinnus.dashboard.init("#dashboard", "test");
+    });
+  </script>
+
+
+<script src='//localhost:3000/socket.io/socket.io.js'></script>
+<script>var ___socket___ = io.connect('http://localhost:3000');</script>
+<script src='//localhost:3001/client/browser-sync-client.0.6.2.js'></script>
+
+
+  </body>
+</html>

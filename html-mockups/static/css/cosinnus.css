@@ -1,0 +1,1148 @@
+@charset "UTF-8";
+/* @import must be at top of file, otherwise CSS will not work */
+/* COLORS */
+/* Todos */
+/* Todos */
+/* Calendar */
+/* Files */
+/* Etherpad */
+/* Neutral */
+/* main-menu */
+/* Network */
+/* Dashboard */
+/* Bootstrap Adjustments */
+/*
+.row {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+*/
+/*
+ * Fixes showing dropdown menu when slowly hovering it.
+ */
+/*
+.dropdown-toggle {
+  padding-bottom: 20px;
+}
+
+.breadcrumb {
+  padding: 0px 15px 8px 15px;
+  margin-bottom: 20px;
+  list-style: none;
+  border-radius: 4px;
+  font-size: 10px;
+}
+
+.breadcrumb > li {
+  display: inline-block;
+}
+
+.breadcrumb > li + li:before {
+  padding: 0 5px;
+  color: $grey-darkest;
+  content: "\003E";
+}
+
+.breadcrumb > .active {
+  color: $grey-darkest;
+}
+
+.breadcrumb a {
+  color: $grey-darkest;
+}
+*/
+/* GENERAL */
+img.left {
+  float: left;
+  margin-right: 40px;
+}
+
+img.right {
+  float: right;
+  margin-left: 40px;
+}
+
+.full-width {
+  min-width: 100%;
+}
+
+.img-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.centered-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.displaynone {
+  display: none;
+}
+
+.clearboth {
+  clear: both;
+}
+
+.centered {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.absolute-center {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+
+.centered-h {
+  text-align: center;
+}
+
+.centered-v {
+  vertical-align: middle;
+}
+
+.row-no-margins {
+  margin: 0;
+}
+
+.row-no-margins [class^="col-"],
+.row-no-margins [class*=" col-"] {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.large-bold-text {
+  font-weight: bold;
+  font-size: large;
+}
+
+.large-text {
+  font-size: large;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.btn-flat {
+  width: 100%;
+  text-align: left;
+  padding: 0;
+}
+
+.btn-bar {
+  float: left;
+  width: 10px;
+  height: 50px;
+}
+
+.btn-icon {
+  float: left;
+  padding-left: 10px;
+  line-height: 50px;
+  font-size: 1.5em;
+}
+
+.btn-text {
+  float: left;
+  padding-left: 10px;
+  line-height: 50px;
+  font-size: 12px;
+}
+
+.caret-right {
+  position: absolute;
+  right: 0;
+  top: 22px;
+  margin-right: 10px;
+  border-top-color: white !important;
+}
+
+.primary-colors {
+  color: white !important;
+  background-color: #f1a200 !important;
+}
+
+.primary-colors .darker {
+  color: white !important;
+  background-color: #b07f19 !important;
+}
+
+.primary-colors:hover {
+  color: white !important;
+  background-color: #f1a200 !important;
+}
+
+.dropdown-menu.primary-colors > .active > a,
+.dropdown-menu.primary-colors > .active > a:hover,
+.dropdown-menu.primary-colors > .active > a:focus {
+  color: white !important;
+  background-color: #f1a200 !important;
+}
+
+.neutral-colors {
+  color: #777777 !important;
+  background-color: white !important;
+}
+
+.btn-default.neutral-colors:hover,
+.btn-default.neutral-colors:focus,
+.btn-default.neutral-colors:active,
+.btn-default.neutral-colors.active {
+  color: #777777 !important;
+  background-color: white !important;
+}
+
+.dropdown-menu.neutral-colors > .active > a,
+.dropdown-menu.neutral-colors > .active > a:hover,
+.dropdown-menu.neutral-colors > .active > a:focus {
+  color: #777777 !important;
+  background-color: white !important;
+}
+
+.neutral-colors:hover {
+  color: #777777 !important;
+  background-color: white !important;
+}
+
+.neutral-colors .darker {
+  color: #777777 !important;
+  background-color: white !important;
+}
+
+.main-menu-colors {
+  color: #777777 !important;
+  background-color: #d8e3e5 !important;
+}
+
+.btn-default.main-menu-colors:hover,
+.btn-default.main-menu-colors:focus,
+.btn-default.main-menu-colors:active,
+.btn-default.main-menu-colors.active {
+  color: #777777 !important;
+  background-color: #d8e3e5 !important;
+}
+
+.dropdown-menu.main-menu-colors > .active > a,
+.dropdown-menu.main-menu-colors > .active > a:hover,
+.dropdown-menu.main-menu-colors > .active > a:focus {
+  color: #777777 !important;
+  background-color: #d8e3e5 !important;
+}
+
+.main-menu-colors:hover {
+  color: #777777 !important;
+  background-color: #d8e3e5 !important;
+}
+
+.main-menu-colors .darker {
+  color: #777777 !important;
+  background-color: #d8e3e5 !important;
+}
+
+.dashboard-colors {
+  color: white;
+  background-color: #d8e3e5;
+}
+
+.btn-default.dashboard-colors:hover,
+.btn-default.dashboard-colors:focus,
+.btn-default.dashboard-colors:active,
+.btn-default.dashboard-colors.active {
+  color: white !important;
+  background-color: #d8e3e5 !important;
+}
+
+.dropdown-menu.dashboard-colors > .active > a,
+.dropdown-menu.dashboard-colors > .active > a:hover,
+.dropdown-menu.dashboard-colors > .active > a:focus {
+  color: white !important;
+  background-color: #d8e3e5 !important;
+}
+
+.dashboard-colors:hover {
+  color: white !important;
+  background-color: #d8e3e5 !important;
+}
+
+.icon-checkbox-unchecked {
+  background-color: white;
+  border: 1px solid #b07f19;
+}
+
+.icon-checkbox-checked {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-size: 16px;
+  color: #b07f19;
+  background-color: white;
+}
+
+.icon-close {
+  position: relative;
+  top: 1px;
+}
+
+/* COLORS */
+/* Todos */
+/* Todos */
+/* Calendar */
+/* Files */
+/* Etherpad */
+/* Neutral */
+/* main-menu */
+/* Network */
+/* Dashboard */
+.cal1 {
+  margin: 30px auto;
+  max-width: 600px;
+  font-size: 14px;
+}
+
+.cal1 .clndr .clndr-controls {
+  margin-bottom: 10px;
+}
+
+.cal1 .clndr .clndr-controls .month {
+  width: 33%;
+  text-align: center;
+}
+
+.cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button {
+  display: inline-block;
+  width: 20px;
+  text-align: center;
+  cursor: pointer;
+  -webkit-user-select: none;
+  /* Chrome/Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+ */
+}
+
+.cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button:hover {
+  background: #ddd;
+}
+
+.cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button.inactive {
+  opacity: 0.5;
+}
+
+.cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button.inactive:hover {
+  background: none;
+  cursor: default;
+}
+
+.cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button {
+  display: inline-block;
+  width: 20px;
+  text-align: center;
+  cursor: pointer;
+  -webkit-user-select: none;
+  /* Chrome/Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+ */
+}
+
+.cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button:hover {
+  background: #ddd;
+}
+
+.cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button.inactive {
+  opacity: 0.5;
+}
+
+.cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button.inactive:hover {
+  background: none;
+  cursor: default;
+}
+
+.cal1 .clndr .clndr-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.cal1 .clndr .clndr-table .header-days {
+  height: 30px;
+  font-size: 10px;
+  background: #0D70A6;
+}
+
+.cal1 .clndr .clndr-table .header-days .header-day {
+  vertical-align: middle;
+  text-align: center;
+  border-left: 8px solid transparent;
+  border-top: 8px solid transparent;
+  color: #fff;
+}
+
+.cal1 .clndr .clndr-table .header-days .header-day:last-child {
+  border-right: 8px solid transparent;
+}
+
+.cal1 .clndr .clndr-table tr td {
+  vertical-align: top;
+}
+
+.cal1 .clndr .clndr-table tr .day {
+  border-left: 8px solid transparent;
+  border-top: 8px solid transparent;
+  width: 100%;
+  height: inherit;
+}
+
+.cal1 .clndr .clndr-table tr .day:hover {
+  background: #eee;
+}
+
+.cal1 .clndr .clndr-table tr .day.today {
+  background: white;
+}
+
+.cal1 .clndr .clndr-table tr .day.today:hover {
+  background: white;
+}
+
+.cal1 .clndr .clndr-table tr .day.today.event {
+  background: #a7dbc1;
+}
+
+.cal1 .clndr .clndr-table tr .day.event {
+  background: #B4E09F;
+}
+
+.cal1 .clndr .clndr-table tr .day.event:hover {
+  background: #96d478;
+}
+
+.cal1 .clndr .clndr-table tr .day.inactive {
+  background: #ddd;
+}
+
+.cal1 .clndr .clndr-table tr .day:last-child {
+  border-right: 8px solid transparent;
+}
+
+.cal1 .clndr .clndr-table tr .day .day-contents {
+  box-sizing: border-box;
+  padding: 8px;
+  font-size: 12px;
+  text-align: right;
+}
+
+.cal1 .clndr .clndr-table tr .empty,
+.cal1 .clndr .clndr-table tr .adjacent-month {
+  visibility: hidden;
+}
+
+.cal1 .clndr .clndr-table tr .empty:hover,
+.cal1 .clndr .clndr-table tr .adjacent-month:hover {
+  background: #ddd;
+}
+
+.cal1 .clndr .clndr-table tr .empty:last-child,
+.cal1 .clndr .clndr-table tr .adjacent-month:last-child {
+  border-right: 8px solid transparent;
+}
+
+.cal1 .clndr .clndr-table tr:last-child .day {
+  border-bottom: 8px solid transparent;
+}
+
+.cal1 .clndr .clndr-table tr:last-child .empty {
+  border-bottom: 8px solid transparent;
+}
+
+/* COLORS */
+/* Todos */
+/* Todos */
+/* Calendar */
+/* Files */
+/* Etherpad */
+/* Neutral */
+/* main-menu */
+/* Network */
+/* Dashboard */
+.navbar-default {
+  background-color: #bacfd2;
+}
+
+body {
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+.row {
+  background-color: #00a200 !important;
+}
+
+.group1-background {
+  background: url("../images/todos-backgroud.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.container h1 {
+  color: #414141;
+}
+
+.linktd {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  display: block;
+}
+
+.header-icon {
+  float: left;
+  line-height: 40px;
+  font-size: 1.5em;
+  padding-right: 10px;
+}
+
+.avatar-top-menu {
+  float: left;
+  margin-right: 10px;
+}
+
+/* COLORS */
+/* Todos */
+/* Todos */
+/* Calendar */
+/* Files */
+/* Etherpad */
+/* Neutral */
+/* main-menu */
+/* Network */
+/* Dashboard */
+.apps-dropdown-menu {
+  font-size: 12px;
+}
+
+.group-top-dropdown-menu {
+  font-size: 16px;
+}
+
+.row-right {
+  margin-left: 0;
+}
+
+.row-left {
+  margin-right: 0;
+}
+
+.group-box {
+  margin-right: 0px;
+}
+
+.group-logo {
+  margin-left: -15px;
+}
+
+.group-description {
+  padding-top: 10px;
+  font-size: 0.95em;
+}
+
+.group-title {
+  font-weight: bold;
+}
+
+.group-short-description {
+  padding: 5px 0;
+  font-size: 0.85em;
+  color: #949494;
+}
+
+.group-short-description a {
+  color: #949494;
+  text-decoration: underline;
+}
+
+.group-app-box {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  margin: 20px 20px 20px 0px;
+  padding: 15px 0 5px 0;
+  vertical-align: middle;
+  text-align: center;
+  background-color: red;
+  cursor: pointer;
+}
+
+.group-app-box-icon {
+  font-size: 2.2em;
+  padding-bottom: 5px;
+}
+
+.group-app-box-numbers {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.group-app-box-title {
+  margin-top: -5px;
+}
+
+/* COLORS */
+/* Todos */
+/* Todos */
+/* Calendar */
+/* Files */
+/* Etherpad */
+/* Neutral */
+/* main-menu */
+/* Network */
+/* Dashboard */
+.dashboard-widgets {
+  margin-top: 20px;
+}
+
+.transparent {
+  display: block;
+  position: relative;
+}
+
+.transparent::after {
+  content: "";
+  background: url("../images/white-pixel.png");
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.widget:not(:first-child) {
+  margin-top: 20px;
+}
+
+.inline-block-container {
+  display: inline-block;
+  width: 100%;
+}
+
+.dashboard .table {
+  font-size: 12px;
+}
+
+.dashboard *[data-app-name='todo'] > .panel {
+  color: white;
+  background-color: #f1a200;
+}
+.dashboard *[data-app-name='todo'] > .panel a {
+  color: white;
+}
+
+.dashboard *[data-app-name='todo']:hover > .panel {
+  color: white !important;
+  background-color: #f1a200 !important;
+}
+
+.dashboard *[data-app-name='todo'] .darker {
+  color: white;
+  background-color: #b07f19;
+}
+
+.dashboard *[data-app-name='todo'] tr:first-child {
+  display: none;
+}
+
+.dashboard *[data-app-name='todo'] td {
+  color: white !important;
+  background-color: #f1a200 !important;
+}
+
+.dashboard *[data-app-name='note'] > .panel {
+  color: white;
+  background-color: #0a7891;
+}
+.dashboard *[data-app-name='note'] > .panel a {
+  color: white;
+}
+
+.dashboard *[data-app-name='note']:hover > .panel {
+  color: white !important;
+  background-color: #0a7891 !important;
+}
+.dashboard *[data-app-name='note']:hover > .panel a {
+  color: white !important;
+}
+
+.dashboard *[data-app-name='note'] .darker {
+  color: white;
+  background-color: #06495a;
+}
+
+.dashboard *[data-app-name='note'] td {
+  color: white !important;
+  background-color: #0a7891 !important;
+}
+.dashboard *[data-app-name='note'] td a {
+  color: white !important;
+}
+
+.widget-network .app-item:not(:first-child) {
+  padding-top: 10px;
+}
+.widget-network .app-item {
+  padding-bottom: 10px;
+}
+.widget-network .app-item-header {
+  color: white !important;
+  background-color: #0a7891 !important;
+}
+.widget-network .app-item-header a {
+  color: white !important;
+}
+.widget-network .app-item-tags-icon {
+  color: white;
+  background-color: #06495a;
+}
+.widget-network .app-item-contents {
+  padding-left: 10px;
+  font-size: 11px;
+  background-color: white;
+}
+.widget-network .app-item-contents--text {
+  padding: 10px 2px 10px 0px;
+}
+.widget-network .app-item-contents--text a {
+  color: #097891;
+}
+.widget-network .app-item-contents--link {
+  color: #777777 !important;
+  background-color: #d8e3e5 !important;
+  height: 70px;
+}
+.widget-network .app-item-contents--link a {
+  color: #777777 !important;
+}
+.widget-network .app-item-contents--link-image {
+  float: left;
+  margin-right: 10px;
+}
+.widget-network .app-item-contents--link-title {
+  position: relative;
+  top: 10px;
+  font-weight: bold;
+}
+.widget-network .app-item-contents--link-url {
+  position: relative;
+  top: 10px;
+}
+.widget-network .app-item-contents--image {
+  height: 70px;
+}
+
+.widget-more {
+  float: right;
+  height: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.widget-more-text {
+  float: left;
+  padding: 10px;
+}
+
+.widget-more-arrow {
+  position: relative;
+  float: left;
+  width: 40px;
+  height: 40px;
+}
+.widget-more-arrow .absolute-center {
+  height: 24px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.app-item-contents--meta {
+  padding: 5px 0px;
+  font-size: 11px;
+  color: #777777;
+}
+
+.app-item-contents--meta-item {
+  float: left;
+  padding-right: 10px;
+}
+
+.widget-title {
+  height: 50px;
+}
+
+.app-item-list .app-item {
+  border-bottom: 1px solid white;
+}
+
+.app-subitem {
+  margin-left: 40px;
+}
+
+.app-item-header {
+  height: 40px;
+}
+
+.app-item-left {
+  float: left;
+  width: 40px;
+  margin-right: 10px;
+}
+
+.app-item-title {
+  font-weight: bold;
+}
+
+.app-item-subtitle {
+  font-size: 10px;
+}
+
+.app-item-tags {
+  color: #0a7891 !important;
+  background-color: white !important;
+  display: table;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.app-item-tags a {
+  color: #0a7891 !important;
+}
+
+.app-item-tags-text {
+  font-size: 11px;
+  padding: 2px 6px;
+  display: table-cell;
+}
+
+.app-item-tags-icon {
+  padding: 3px;
+  display: table-cell;
+}
+
+.margin-left-app-item {
+  margin-left: 40px;
+}
+
+.widget-footer {
+  height: 40px;
+}
+
+.app-item-summary-left {
+  float: left;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+}
+
+.app-item-summary-left--title {
+  font-size: 16px;
+}
+
+.app-item-summary-left--subtitle {
+  position: relative;
+  top: -5px;
+  font-size: 10px;
+}
+
+.app-item-summary-contents {
+  float: left;
+  max-width: 70%;
+  padding-left: 10px;
+  overflow: hidden;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+}
+
+.app-item-summary-contents--title {
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+.app-item-summary-contents--subtitle {
+  font-size: 11px;
+}
+
+.app-item-summary-right {
+  position: relative;
+  float: right;
+  height: 40px;
+}
+.app-item-summary-right .absolute-center {
+  height: 20px;
+  width: 20px;
+}
+
+.app-item-summary-right-icon {
+  padding: 10px;
+}
+
+.list-group img {
+  vertical-align: inherit;
+}
+
+.list-group-item {
+  width: 100%;
+  height: 40px;
+}
+
+.list-group > * {
+  height: 40px;
+  line-height: 40px;
+}
+
+.item-text {
+  padding: 10px 0px;
+  line-height: 20px;
+}
+
+.item-title:focus {
+  outline: none !important;
+}
+
+.lists-container {
+  background-color: #d1dcd8;
+}
+.lists-container .item-box {
+  height: 39px;
+  font-size: 16px;
+}
+.lists-container .item-text {
+  font-size: 11px;
+}
+
+.lists-new-container .item-text {
+  font-size: 12px;
+}
+
+.items-container {
+  padding-top: 15px;
+  background-color: #d1dcd8;
+}
+.items-container .item-box {
+  height: 40px;
+}
+.items-container .item-title {
+  border: 1px solid transparent;
+}
+.items-container .item-title:hover {
+  border: 1px solid #b07f19;
+}
+
+.lists-all-container .list-group-item {
+  border-bottom: 1px solid #fcedce;
+}
+
+.list-group-container .list-group-item {
+  margin-bottom: 5px;
+}
+
+.list-group .item-box {
+  float: left;
+  width: 40px;
+  text-align: center;
+}
+.list-group .item-text {
+  position: absolute;
+  float: left;
+  padding-left: 15px;
+}
+.list-group .item-title {
+  float: left;
+}
+.list-group .item-text-buttons {
+  position: relative;
+  top: -5px;
+  padding-left: 15px;
+  z-index: 20;
+  display: none;
+}
+.list-group .item-text-buttons-wrapper {
+  position: relative;
+}
+.list-group .item-text-padleft {
+  padding-left: 15px;
+}
+.list-group .item-text-right {
+  position: relative;
+  float: left;
+  padding-left: 15px;
+  z-index: 10;
+  background-color: #f1a200;
+}
+.list-group .item-title-input {
+  display: none;
+  background-color: #f1a200;
+  color: white;
+  border: 0 none;
+  padding: 0;
+  margin: 0;
+  outline: 0;
+  resize: none;
+  font-size: 14px;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.list-group .item-title-input:focus {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.item-container-right {
+  float: right;
+}
+
+.todo-colors,
+.todo-colors:hover {
+  color: white !important;
+  background-color: #f1a200 !important;
+}
+
+.todo-colors-selected {
+  background-color: #be8000;
+}
+
+.todo-colors .list-group-item {
+  color: white;
+  background-color: #f1a200;
+}
+.todo-colors .list-group-item a {
+  color: white;
+}
+
+.todo-colors .darker {
+  color: white;
+  background-color: #b07f19;
+}
+
+.todo-secondary-colors .list-group-item {
+  color: #949494;
+  background-color: white;
+}
+
+.todo-secondary-colors .darker {
+  background-color: #c2c2c2;
+  color: white;
+}
+
+.calendar-colors {
+  color: white;
+  background-color: #789d40;
+}
+
+.calendar-colors .darker {
+  color: white;
+  background-color: #4a6228;
+}
+
+.calendar-colors.darker {
+  color: white;
+  background-color: #4a6228;
+}
+
+.files-colors {
+  color: white;
+  background-color: #00a388;
+}
+
+.etherpad-colors {
+  color: white;
+  background-color: #e8483a;
+}
+
+.network-colors {
+  color: white;
+  background-color: #0a7891;
+}
+
+.network-colors .darker {
+  color: white;
+  background-color: #06495a;
+}
+
+.network-colors .reversed-colors {
+  color: #0a7891;
+  background-color: white;
+}
+
+.select2-avatar select {
+  width: 40px !important;
+}
+
+.select2-avatar .select2-choice {
+  width: 40px !important;
+  height: 40px !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+}
+
+.select2-avatar .select2-search-choice-close,
+.select2-avatar .select2-arrow {
+  display: none !important;
+}
+
+.select2-avatar .select2-choice > .select2-chosen {
+  margin-right: 0 !important;
+}
+
+.select2-search {
+  padding: 0;
+}
+
+.select2-search input {
+  padding: 0 0 0 5px !important;
+  border: 0;
+  background: none;
+}
+
+.select2-drop {
+  min-width: 300px;
+}
+
+.select2-drop {
+  border: 0 !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+
+.select2-drop-active {
+  border: 0;
+}
+
+.select2-results {
+  padding: 0;
+  margin: 0;
+}
+
+.select2-results .select2-result-label {
+  padding: 0 !important;
+}
+
+.icon-calendar-new {
+  line-height: 38px;
+  font-size: 1.5em;
+  text-align: right !important;
+}

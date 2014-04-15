@@ -31,7 +31,9 @@ module.exports = function (grunt) {
                 },
                 files: {
                     'cosinnus/static/css/cosinnus.css': base + '/sass/cosinnus.scss',
-                    'cosinnus/static/css/bootstrap3-cosinnus.css': base + '/sass/vendor/bootstrap/bootstrap.scss'
+                    'cosinnus/static/css/bootstrap3-cosinnus.css': base + '/sass/vendor/bootstrap/bootstrap.scss',
+                    'html-mockups/static/css/cosinnus.css': 'html-mockups/static/sass/cosinnus.scss',
+                    'html-mockups/static/css/bootstrap3-cosinnus.css': 'html-mockups/static/sass/vendor/bootstrap/bootstrap.scss'
                 }
             }
         },
@@ -41,6 +43,7 @@ module.exports = function (grunt) {
                     src : [
                         base + 'css/cosinnus.css',
                         'cosinnus/templates/cosinnus/*.html',
+                        'html-mockups/static/css/cosinnus.css'
                     ]
                 },
                 options: {

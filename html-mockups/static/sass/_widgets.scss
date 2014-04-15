@@ -1,0 +1,294 @@
+@import "variables";
+@import "mixins";
+
+$widget-title-height: 50px;
+$app-item-size: 40px;
+
+.dashboard-widgets {
+  margin-top: $item-distance-long;
+}
+
+.transparent {
+  //background-color: $neww-bg-color;
+  display: block;
+  position: relative;
+}
+
+.transparent::after {
+  content: "";
+  background: url("../images/white-pixel.png");
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.widget:not(:first-child) {
+  margin-top: $item-distance-long;
+}
+
+.inline-block-container {
+  display: inline-block;
+  width: 100%;
+}
+
+.dashboard .table {
+  font-size: $font-size;
+}
+
+// Widget Todos
+
+.dashboard *[data-app-name='todo'] > .panel {
+  @include todo-colors();
+}
+
+.dashboard *[data-app-name='todo']:hover > .panel {
+  @include todo-colors-important();
+}
+.dashboard *[data-app-name='todo'] .darker {
+  @include todo-colors-darker();
+}
+
+.dashboard *[data-app-name='todo'] tr:first-child {
+  display: none;
+}
+
+.dashboard *[data-app-name='todo'] td {
+  @include todo-colors-important();
+}
+
+
+// Widget News/Notes
+
+.dashboard *[data-app-name='note'] > .panel {
+  @include network-colors();
+}
+
+.dashboard *[data-app-name='note']:hover > .panel {
+  @include network-colors-important();
+}
+.dashboard *[data-app-name='note'] .darker {
+  @include network-colors-darker();
+}
+
+.dashboard *[data-app-name='note'] td {
+  @include network-colors-important();
+}
+
+$app-item-link-height: 70px;
+
+.widget-network {
+
+  .app-item:not(:first-child) {
+    padding-top: $item-distance;
+  }
+
+  .app-item {
+    padding-bottom: $item-distance;
+  }
+
+  .app-item-header {
+    @include network-colors-important();
+  }
+
+  .app-item-tags-icon {
+    @include network-colors-darker();
+  }
+
+  .app-item-tags-text {
+
+  }
+
+  .app-item-contents {
+    padding-left: $item-distance;
+    font-size: $font-size-small;
+    background-color: $white;
+  }
+
+  .app-item-contents--text {
+    padding: $item-distance 2px $item-distance 0px;
+    
+    a {
+      color: #097891;
+    }
+  }
+
+  .app-item-contents--link {
+    @include main-menu-colors-important();
+    height: $app-item-link-height;
+  }
+
+  .app-item-contents--link-image {
+    float: left;
+    margin-right: $item-distance;
+  }
+
+  .app-item-contents--link-title {
+    position: relative;
+    top: $item-distance;
+    font-weight: bold;
+  }
+
+  .app-item-contents--link-url {
+    position: relative;
+    top: $item-distance;
+  }
+
+  .app-item-contents--image {
+    height: $app-item-link-height;
+  }
+}
+
+.widget-more {
+  float: right;
+  height: $app-item-size;
+  text-align: center;
+  cursor: pointer;
+}
+
+.widget-more-text {
+  float: left;
+  padding: $item-distance;
+}
+
+.widget-more-arrow {
+  position: relative;
+  float: left;
+  width: $app-item-size;
+  height: $app-item-size;
+
+  .absolute-center {
+    height: $app-item-size - $font-size-bigger;
+    font-size: $font-size-bigger;
+    font-weight: bold;
+  }
+}
+
+.app-item-contents--meta {
+  padding: $item-distance-small 0px;
+  font-size: $font-size-small;
+  color: $app-neutral-color-text;
+}
+
+.app-item-contents--meta-item {
+  float: left;
+  padding-right: $item-distance;
+}
+
+.widget-contents {
+
+}
+
+.widget-title {
+  height: $widget-title-height;
+}
+
+.app-item-list .app-item {
+  border-bottom: 1px solid white;
+}
+
+.app-subitem {
+  margin-left: $app-item-size;
+}
+
+.app-item-header {
+  height: $app-item-size;
+}
+
+.app-item-left {
+  float: left;
+  width: $app-item-size;
+  margin-right: $item-distance;
+}
+
+.app-item-title {
+  font-weight: bold;
+}
+
+.app-item-subtitle {
+	font-size: $font-size-smaller;
+}
+
+.app-item-tags {
+	@include network-reversed-colors-important();
+	display:table;
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+.app-item-tags-text {
+	font-size: $font-size-small;
+	padding: 2px 6px;
+	display:table-cell;
+}
+
+.app-item-tags-icon {
+	padding: 3px;
+	display:table-cell;
+}
+
+.margin-left-app-item {
+	margin-left: $app-item-size;
+}
+
+.widget-footer {
+	height: $app-item-size;
+}
+
+// CALENDAR ITEM ----------------------------------------------
+
+.app-item-contents--app-item-summary {
+}
+
+.app-item-summary-left {
+  float: left;
+  width: $app-item-size;
+  height: $app-item-size;
+  text-align: center;
+}
+
+.app-item-summary-left--title {
+  font-size: $font-size-bigger;
+}
+
+.app-item-summary-left--subtitle {
+  position: relative;
+  top: -$item-distance-small;
+  font-size: $font-size-smaller;
+}
+
+.app-item-summary-contents {
+  float: left;
+  max-width: 70%;
+  padding-left: $item-distance;
+  overflow: hidden;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+}
+
+.app-item-summary-contents--title {
+  font-size: $font-size;
+  text-decoration: underline;
+}
+
+.app-item-summary-contents--subtitle {
+  font-size: $font-size-small;
+}
+
+.app-item-summary-right {
+  position: relative;
+  float: right;
+  height: $app-item-size;
+
+  .absolute-center {
+    height: ($app-item-size / 2);
+    width: ($app-item-size / 2);
+  }
+}
+
+.app-item-summary-right-icon {
+  padding: 10px;
+}

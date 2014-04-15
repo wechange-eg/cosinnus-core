@@ -1,0 +1,343 @@
+
+
+
+<!DOCTYPE html>
+<html class="htmlclass">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>
+Aufgaben @ Test | Aufgaben
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <link href="../cosinnus/static/css/bootstrap3-cosinnus.css" rel="stylesheet">
+    <link href="../cosinnus/static/css/vendor/icomoon-font.css" rel="stylesheet">
+    
+    
+      <script src="../cosinnus/static/js/vendor/jquery-1.10.2.min.js"></script>
+      <script src="../cosinnus/static/js/vendor/bootstrap.min.js"></script>
+    
+    <script type="text/javascript">
+        var cosinnus_base_url = "http://localhost:8000/";
+        var cosinnus_active_group = "test";
+        var cosinnus_active_user = JSON.parse("{\u0022id\u0022: 1, \u0022username\u0022: \u0022tomi\u0022, \u0022profile\u0022: {\u0022id\u0022: 1, \u0022avatar\u0022: null, \u0022avatar_80x80\u0022: null, \u0022avatar_50x50\u0022: null, \u0022avatar_40x40\u0022: null}}");
+        var cosinnus_date_format = "DD.MM.YYYY";
+        var cosinnus_datetime_format = "DD.MM.YYYY HH:mm";
+        var cosinnus_time_format = "HH:mm";
+    </script>
+    <link href="../cosinnus/static/css/cosinnus.css" rel="stylesheet">
+    
+
+    
+
+<link rel="stylesheet" href="../cosinnus/static/css/vendor/jquery-ui-1.10.0.custom.css">
+<link rel="stylesheet" href="../cosinnus/static/css/vendor/select2.css">
+<link rel="stylesheet" href="../cosinnus/static/css/vendor/datepicker3.css">
+<link rel="stylesheet" href="../cosinnus/static/bootstrap3_datetime/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="../cosinnus/static/css/cosinnus_todo.css">
+
+  </head>
+  <body class="bodyclass group1-background ">
+    
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Navigation ab-/abschalten</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!--
+<a class="navbar-brand" href="/"><img height="18" src="../cosinnus/static/img/neww_logo.png" alt="Logo" /></a>
+-->
+      <ul class="nav navbar-nav navbar-left group-top-dropdown-menu main-menu-colors">
+        
+          
+            <li class="dropdown">
+              <a href="/group/test/" class="icon-home2 header-icon"></a>
+              <a href="#" class="dropdown-toggle pull-left" data-toggle="dropdown">Test<b class="caret"></b></a>
+              <ul class="dropdown-menu main-menu-colors">
+                
+                  <li class="active"><a href="/group/test/">Test</a></li>
+                
+                <li class="divider"></li>
+                <li><a href="/groups/">Alle Gruppen auflisten</a></li>
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <!--<ul class="nav navbar-nav">-->
+        <!---->
+          <!--<li><a href="/group/test/message/">Nachricht</a></li>-->
+        <!---->
+          <!--<li><a href="/group/test/note/">Neuigkeiten</a></li>-->
+        <!---->
+          <!--<li><a href="/group/test/etherpad/">Etherpad</a></li>-->
+        <!---->
+          <!--<li><a href="/group/test/event/">Veranstaltungen</a></li>-->
+        <!---->
+          <!--<li><a href="/group/test/file/">Dateien</a></li>-->
+        <!---->
+          <!--<li class="active"><a href="/group/test/todo/">Todos</a></li>-->
+        <!---->
+          <!--<li><a href="/group/test/document/">Dokumente</a></li>-->
+        <!---->
+      <!--</ul>-->
+      <ul class="nav navbar-nav navbar-right">
+        <span class="icon-search header-icon pull-left"></span>
+        <img class="avatar-img avatar-top-menu" src=""/>
+        
+        <li class="dropdown main-menu-colors">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              tomi <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu main-menu-colors">
+              <li><a href="/profile/">Profil</a></li>
+              <li><a href="/profile/dashboard/">Dashboard</a></li>
+              <li><a href="/logout/">Abmelden</a></li>
+            </ul>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+      
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-3">
+      <div class="btn-group w100">
+        <button type="button" class="btn btn-default btn-flat todo-colors dropdown-toggle" data-toggle="dropdown">
+          <span class="btn-bar"></span>
+          <span class="icon-menu2 btn-icon"></span>
+          <span class="btn-text">
+            
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  Todos
+                
+              
+                
+              
+            
+          </span>
+          <span class="caret caret-right"></span>
+        </button>
+        <ul class="dropdown-menu apps-dropdown-menu w100 neutral-colors" role="menu">
+          
+            <li><a href="/group/test/message/">Nachricht</a></li>
+          
+            <li><a href="/group/test/note/">Neuigkeiten</a></li>
+          
+            <li><a href="/group/test/etherpad/">Etherpad</a></li>
+          
+            <li><a href="/group/test/event/">Veranstaltungen</a></li>
+          
+            <li><a href="/group/test/file/">Dateien</a></li>
+          
+            <li class="active"><a href="/group/test/todo/">Todos</a></li>
+          
+            <li><a href="/group/test/document/">Dokumente</a></li>
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    <div class="container">
+      <h1>
+<!--Test: Aufgaben-->
+</h1>
+      
+
+      
+
+
+      
+
+<div id="main-region">
+    <p>Loading ...</p>
+</div>
+
+<div id="dialog-region"></div>
+
+
+<script type="text/template" id="todo-main-layout">
+    <div class="col-lg-3 col-md-3 col-sm-3 ">
+        <div class="lists-container">
+            <div class="lists-all-container"></div>
+            <div class="lists-new-container list-group todos-secondary-colors"></div>
+        </div>
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-9 items-container">
+        <div class="items-all-container"></div>
+        <div class="items-new-container list-group todos-secondary-colors"></div>
+    </div>
+</script>
+
+<script type="text/template" id="lists-item">
+    <span class="item-box darker">
+        <%= item_count %>
+    </span>
+    <span class="item-text item-text-padleft item-title">
+        <span class="item-title"><%= title %></span>
+    </span>
+</script>
+
+<script type="text/template" id="lists-new">
+    <span class="item-box darker large-text">+</span>
+    <span class="item-text item-text-padleft item-title js-new-list-title" contenteditable="<% if (CosinnusApp.isUserLoggedIn()){ %>true<% } else { %>false<% } %>">Lege eine neue Liste an</span>
+</script>
+
+
+
+
+
+<script type="text/template" id="todos-item">
+  <div class="list-group-item clearfix">
+        <span class="item-box">
+            <% if (is_completed) { %>
+                <span class="icon-checkbox-checked"></span>
+            <% } else { %>
+                <span class="icon-checkbox-unchecked"></span>
+            <% } %>
+        </span>
+        <span class="item-box">
+            <div class="select2-avatar">
+              <select class="select2-avatar-item">
+                <option value="-1" data-avatar-url="../cosinnus/static/images/avatar-unselected.jpg"> keine Zuweisung</option>
+                <% _.each(CosinnusApp.TodosApp.List.Controller.groupUsers.toJSON(), function(user) { %>
+                  <option <% if (assigned_to !== null && assigned_to.id === user.id) { %>selected <% } %> value="<%= user.id %>" data-avatar-url="<% if (typeof user.profile !== 'undefined') { %><%= user.profile.avatar_40x40 %><% } else { %>none<% } %>">
+                    <%= user.username %>
+                  </option>
+                <% }); %>
+              </select>
+            </div>
+        </span>
+        <span class="item-text">
+            <span class="item-title" contenteditable="<% if (CosinnusApp.isUserLoggedIn()){ %>true<% } else { %>false<% } %>"><%= title %></span>
+            <span class="item-text-buttons">
+                <span class="btn item-btn darker js-item-title-save">Speichern</span>
+                <button type="button" class="btn item-btn darker js-item-title-cancel">
+                  <span class="icon-close"></span>
+                </button>
+            </span>
+        </span>
+        <span class="item-container-right">
+            <span class="item-text-right input-group date date-picker"
+                  data-model-id="<% if (typeof id ==='undefined') { %> -1 <% } else { %><%=id%><% } %>">
+                <span class="input-group-addon">
+                  <% if (due_date) { %>
+                      <%= moment(due_date, cosinnus_datetime_format).fromNow() %>
+                  <% } else { %>
+                      <% if (CosinnusApp.isUserLoggedIn()){ %>
+                          Fälligkeitsdatum wählen
+                      <% } else { %>
+                          Kein Fälligkeitsdatum gewählt
+                      <% } %>
+                  <% } %>
+                </span>
+            </span>
+            <span class="item-box large-text star-box unselectable">
+                <% if (priority === 1) { %>
+                    <span class="icon-star js-icon-star" data-priority="<%= priority %>"></span>
+                <% } else if (priority === 3) { %>
+                    <span class="icon-star3 js-icon-star" data-priority="<%= priority %>"></span>
+                <% } else { %>                
+                    <span class="icon-star2 js-icon-star" data-priority="<%= priority %>"></span>
+                <% } %>
+            </span>
+        </span>
+  </div>
+</script>
+
+<script type="text/template" id="todos-new">
+    <div class="list-group todos-secondary-colors">
+        <div class="list-group-item clearfix">
+            <span class="item item-box"></span>
+            <span class="item item-box darker large-text">?</span>
+            <span class="item item-text">
+                <span class="item-title js-new-todo-title" contenteditable="<% if (CosinnusApp.isUserLoggedIn()){ %>true<% } else { %>false<% } %>">Lege eine neue Aufgabe an</span>
+                <input class="item-title-input" type="text"/>
+            </span>
+            <span class="item-container-right">
+                <span class="item-box icon-calendar icon-calendar-new date-picker-new">
+
+                </span>
+                <span class="item-box large-text">&nbsp;</span>
+            </span>
+        </div>
+    </div>
+</script>
+
+
+
+
+
+      
+    </div>
+    <script src="../cosinnus/static/js/cosinnus.js"></script>
+    
+
+<script src="../cosinnus/static/js/vendor/jquery-ui/jquery.ui.core.js"></script>
+<script src="../cosinnus/static/js/vendor/jquery-ui/jquery.ui.widget.js"></script>
+<script src="../cosinnus/static/js/vendor/jquery-ui/jquery.ui.mouse.js"></script>
+<script src="../cosinnus/static/js/vendor/jquery-ui/jquery.ui.position.js"></script>
+<script src="../cosinnus/static/js/vendor/jquery-ui/jquery.ui.resizable.js"></script>
+<script src="../cosinnus/static/js/vendor/jquery-ui/jquery.ui.draggable.js"></script>
+<script src="../cosinnus/static/js/vendor/jquery-ui/jquery.ui.button.js"></script>
+<script src="../cosinnus/static/js/vendor/jquery-ui/jquery.ui.dialog.js"></script>
+
+<script src="../cosinnus/static/js/vendor/json2.js"></script>
+<script src="../cosinnus/static/js/vendor/underscore.js"></script>
+<script src="../cosinnus/static/js/vendor/backbone.js"></script>
+<script src="../cosinnus/static/js/vendor/backbone.syphon.js"></script>
+<script src="../cosinnus/static/js/vendor/backbone.marionette.js"></script>
+<script src="../cosinnus/static/js/vendor/keymaster.js"></script>
+<script src="../cosinnus/static/js/vendor/select2.min.js"></script>
+<script src="../cosinnus/static/js/vendor/moment.js"></script>
+<script src="../cosinnus/static/bootstrap3_datetime/js/bootstrap-datetimepicker.min.js"></script>
+<script src="../cosinnus/static/bootstrap3_datetime/js/locales/bootstrap-datetimepicker.de.js"></script>
+<script src="../cosinnus/static/js/vendor/locales/moment.de.js"></script>
+
+<script src="../cosinnus/static/js/cosinnus/utils.js"></script>
+<script src="../cosinnus/static/js/cosinnus/cosinnus_app.js"></script>
+
+<script src="../cosinnus/static/js/cosinnus_todo/todo_entities.js"></script>
+<script src="../cosinnus/static/js/cosinnus_todo/todo_app.js"></script>
+<script src="../cosinnus/static/js/cosinnus_todo/todo_views.js"></script>
+<script src="../cosinnus/static/js/cosinnus_todo/todo_controller.js"></script>
+
+<script type="text/javascript">
+    CosinnusApp.start();
+</script>
+
+
+
+    
+    <!--<script src='//192.168.1.170:3000/socket.io/socket.io.js'></script>-->
+    <!--<script>var ___socket___ = io.connect('http://192.168.1.170:3000');</script>-->
+    <!--<script src='//192.168.1.170:3001/client/browser-sync-client.0.6.2.js'></script>-->
+    
+  </body>
+</html>
