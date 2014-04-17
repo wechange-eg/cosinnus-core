@@ -2,53 +2,128 @@
 
 /* Bootstrap Adjustments */
 
+
+.navbar-fixed-top {
+	background-color:transparentize($app-neutral-color-white, 0.35);
+	border-bottom-width:2px;
+}
+
 .main-container {
     margin-top: 60px;
 }
 
-/*
-.row {
-  margin-right: auto !important;
-  margin-left: auto !important;
+
+.btn {
+	padding:0;
+	border-width:0;
+	background-color:transparent;
+	width:10em;
+	float:right;
+	margin-left:5px;
 }
-*/
+
+
+/* media-lists */
+.media-list {
+	margin:0;
+	background-color: $app-neutral-color-white;
+}
+.clickarea-extra-emphasized.media-list,
+.clickarea-extra-emphasized .media-list,
+.clickarea-emphasized.media-list,
+.clickarea-emphasized .media-list {
+	background-color: transparent;
+	color: $app-neutral-color-white;
+}
+
+.media > .pull-left, .media > .pull-right {
+	width:40px;
+	height:40px;
+	line-height:40px;
+	font-size:1.5em;
+	text-align:center;
+	background-color: $app-neutral-color;
+	margin:0;
+}
+.pull-left:empty, .pull-right:empty {
+	background-color: transparent;
+	color: inherit;
+}
+.media > .pull-left {
+	color: $app-neutral-color-white;
+}
+body .media > .pull-right {
+	color: transparent;
+}
+
+.clickarea-extra-emphasized.pull-left,
+.clickarea-extra-emphasized .pull-left,
+.clickarea-emphasized.pull-left,
+.clickarea-emphasized .pull-left,
+.clickarea-extra-emphasized.pull-right,
+.clickarea-extra-emphasized .pull-right,
+.clickarea-emphasized.pull-right,
+.clickarea-emphasized .pull-right {
+	background-color: transparent;
+	color: inherit;
+}
+
+.media:hover .pull-right, .media:active .pull-right,
+button:hover .media .pull-right, button:active .media .pull-right {
+	color: $app-neutral-color-white;
+}
+
+
+/* OL containing another OL of input elements */
+.input-area {
+	background-color: $app-neutral-color-white;
+	color: $app-neutral-color;
+  list-style: none;
+	margin:0;
+	padding:0;
+}
+.input-area > li {
+	padding: 5px;
+}
+.input-area > li + li {
+border-top:1px solid $app-neutral-color-light;
+}
+.input-area > li > ol {
+	margin:0;
+	padding:0;
+  list-style: none;
+}
+// single input fields
+.input-area > li > ol > li {
+	display: inline-block;
+	padding: 4px 7px;
+}
+.input-area > li > ol > li + li {
+	border-left: 1px solid $app-neutral-color-light;
+}
+
+
+.media-body {
+	line-height:37px;
+	padding:0 10px;
+}
+
+/* spaces below element */
+.app-documents .fine-space {
+	border-bottom: 1px solid $app-documents-color-light;
+}
+.regular-space {
+	margin-bottom: 7px;
+}
+.large-space {
+	margin-bottom: 12px;
+}
+
 
 /*
  * Fixes showing dropdown menu when slowly hovering it.
  */
 
-
-/*
-.dropdown-toggle {
-  padding-bottom: 20px;
-}
-
-.breadcrumb {
-  padding: 0px 15px 8px 15px;
-  margin-bottom: 20px;
-  list-style: none;
-  border-radius: 4px;
-  font-size: 10px;
-}
-
-.breadcrumb > li {
-  display: inline-block;
-}
-
-.breadcrumb > li + li:before {
-  padding: 0 5px;
-  color: $grey-darkest;
-  content: "\003E";
-}
-
-.breadcrumb > .active {
-  color: $grey-darkest;
-}
-
-.breadcrumb a {
-  color: $grey-darkest;
-}
-*/
 
 /* GENERAL */
 
@@ -132,154 +207,19 @@ img.right {
 }
 
 .btn-flat {
-  width: 100%;
-  text-align: left;
-  padding: 0;
 }
 
 $btn-group-height: 50px;
 $btn-bar-width: 10px;
 
 .btn-bar {
-  float: left;
-  width: $btn-bar-width;
-  height: $btn-group-height;
+// use media-list instead
 }
 
 .btn-icon {
-  float: left;
-  padding-left: $btn-bar-width;
-  line-height: $btn-group-height;
-  font-size: 1.5em;
+// use media-list instead
 }
 
 .btn-text {
-  float: left;
-  padding-left: $btn-bar-width;
-  line-height: $btn-group-height;
-  font-size: $font-size;
 }
 
-.caret-right {
-  position: absolute;
-  right: 0;
-  top: ($btn-group-height / 2) - (3);
-  margin-right: $btn-bar-width;
-//  border-top-color: $app-color-text !important;
-}
-
-
-.primary-colors {
-//  color: $app-color-text !important;
-//  background-color: $app-color !important;
-}
-
-.primary-colors .darker {
-//  color: $app-color-text !important;
-//  background-color: $app-color-dark !important;
-}
-
-.primary-colors:hover {
-//  color: $app-color-text !important;
-//  background-color: $app-color !important;
-}
-
-.dropdown-menu.primary-colors > .active > a,
-.dropdown-menu.primary-colors > .active > a:hover,
-.dropdown-menu.primary-colors > .active > a:focus {
-//  color: $app-color-text !important;
-//  background-color: $app-color !important;
-}
-
-
-// Neutral
-// ---------------------------------------
-.neutral-colors {
-//  color: $app-neutral-color-text !important;
-  background-color: $app-neutral-color !important;
-}
-
-.btn-default.neutral-colors:hover,
-.btn-default.neutral-colors:focus,
-.btn-default.neutral-colors:active,
-.btn-default.neutral-colors.active {
-//  color: $app-neutral-color-text !important;
-  background-color: $app-neutral-color !important;
-}
-
-.dropdown-menu.neutral-colors > .active > a,
-.dropdown-menu.neutral-colors > .active > a:hover,
-.dropdown-menu.neutral-colors > .active > a:focus {
-//  color: $app-neutral-color-text !important;
-  background-color: $app-neutral-color !important;
-}
-
-.neutral-colors:hover {
-//  color: $app-neutral-color-text !important;
-  background-color: $app-neutral-color !important;
-}
-
-.neutral-colors .darker {
-//  color: $app-neutral-color-text !important;
-  background-color: $app-neutral-color !important;
-}
-
-// Main Menu
-// ---------------------------------------
-.main-menu-colors {
-//  color: $app-main-menu-color-text !important;
-//  background-color: $app-main-menu-color !important;
-}
-
-.btn-default.main-menu-colors:hover,
-.btn-default.main-menu-colors:focus,
-.btn-default.main-menu-colors:active,
-.btn-default.main-menu-colors.active {
-//  color: $app-main-menu-color-text !important;
-//  background-color: $app-main-menu-color !important;
-}
-
-.dropdown-menu.main-menu-colors > .active > a,
-.dropdown-menu.main-menu-colors > .active > a:hover,
-.dropdown-menu.main-menu-colors > .active > a:focus {
-//  color: $app-main-menu-color-text !important;
-//  background-color: $app-main-menu-color !important;
-}
-
-.main-menu-colors:hover {
-//  color: $app-main-menu-color-text !important;
-//  background-color: $app-main-menu-color !important;
-}
-
-.main-menu-colors .darker {
-//  color: $app-main-menu-color-text !important;
-//  background-color: $app-main-menu-color !important;
-}
-
-
-// Dashboard
-// ---------------------------------------+
-.dashboard-colors {
-//  color: $app-dashboard-color-text;
-//  background-color: $app-dashboard-color;
-}
-
-.btn-default.dashboard-colors:hover,
-.btn-default.dashboard-colors:focus,
-.btn-default.dashboard-colors:active,
-.btn-default.dashboard-colors.active {
-//  color: $app-dashboard-color-text !important;
-//  background-color: $app-dashboard-color !important;
-}
-
-.dropdown-menu.dashboard-colors > .active > a,
-.dropdown-menu.dashboard-colors > .active > a:hover,
-.dropdown-menu.dashboard-colors > .active > a:focus {
-//  color: $app-dashboard-color-text !important;
-//  background-color: $app-dashboard-color !important;
-}
-
-.dashboard-colors:hover {
-//  color: $app-dashboard-color-text !important;
-//  background-color: $app-dashboard-color !important;
-}

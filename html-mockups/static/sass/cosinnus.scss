@@ -15,7 +15,7 @@ body {
 	padding-top: 15px;
 	padding-bottom: 15px;
 	// left and right should already be 15px from Bootstrap
-	background-color:transparentize($app-neutral-color-light, 0.4);
+	background-color:transparentize($app-neutral-color-light, 0.7);
 }
 .breadcrumb {
 	margin-left:-15px;
@@ -35,8 +35,19 @@ body {
   background-size: cover;
 }
 
-.container h1 {
-//  color: $grey-darkest;
+
+// put this class somewhere to switch the child elements to corresponding colors:
+// .app-documents
+
+
+.app-documents .clickarea-emphasized {
+	color: $app-neutral-color-white;
+	background-color: $app-documents-color;
+}
+
+.app-documents .clickarea-emphasized:hover, .app-documents .clickarea-emphasized:active, .app-documents .clickarea-extra-emphasized {
+	color: $app-neutral-color-white;
+	background-color: $app-documents-color-dark;
 }
 
 .linktd {

@@ -39,7 +39,7 @@ $text-color:            $app-neutral-color !default;
 //** Global textual link color.
 $link-color:            $app-neutral-color-light !default;
 //** Link hover color set via `darken()` function.
-$link-hover-color:      $app-neutral-color-white !default;
+$link-hover-color:     red !default; // $app-neutral-color-white !default;
 
 
 //== Typography
@@ -149,8 +149,8 @@ $table-border-color:            #ddd !default;
 
 $btn-font-weight:                normal !default;
 
-$btn-default-color:              #333 !default;
-$btn-default-bg:                 #fff !default;
+$btn-default-color:              $app-neutral-color !default;
+$btn-default-bg:                 $app-neutral-color !default;
 $btn-default-border:             #ccc !default;
 
 $btn-primary-color:              #fff !default;
@@ -218,7 +218,7 @@ $input-group-addon-border-color: $input-border !default;
 //## Dropdown menu container and contents.
 
 //** Background for the dropdown menu.
-$dropdown-bg:                    #fff !default;
+$dropdown-bg:                    $app-neutral-color !default;
 //** Dropdown menu `border-color`.
 $dropdown-border:                rgba(0,0,0,.15) !default;
 //** Dropdown menu `border-color` **for IE8**.
@@ -227,9 +227,9 @@ $dropdown-fallback-border:       #ccc !default;
 $dropdown-divider-bg:            #e5e5e5 !default;
 
 //** Dropdown link text color.
-$dropdown-link-color:            $gray-dark !default;
+$dropdown-link-color:            $app-neutral-color-white !default;
 //** Hover color for dropdown links.
-$dropdown-link-hover-color:      darken($gray-dark, 5%) !default;
+$dropdown-link-hover-color:      $app-neutral-color-white !default;
 //** Hover background for dropdown links.
 $dropdown-link-hover-bg:         #f5f5f5 !default;
 
@@ -348,8 +348,7 @@ $navbar-collapse-max-height:       340px !default;
 
 $navbar-default-color:             #777 !default;
 $navbar-default-bg:                #f8f8f8 !default;
-$navbar-default-border:            #16778D !default; // Thomas 15. Apr 2014
-// default: darken($navbar-default-bg, 6.5%) !default;
+$navbar-default-border:            transparentize($app-neutral-color-dark, 0.35) !default;
 
 // Navbar links
 $navbar-default-link-color:                #777 !default;

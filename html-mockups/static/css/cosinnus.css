@@ -8,50 +8,131 @@
 /* Etherpad */
 /* Neutral */
 /* Bootstrap Adjustments */
+.navbar-fixed-top {
+  background-color: rgba(255, 255, 255, 0.65);
+  border-bottom-width: 2px;
+}
+
 .main-container {
   margin-top: 60px;
 }
 
-/*
-.row {
-  margin-right: auto !important;
-  margin-left: auto !important;
+.btn {
+  padding: 0;
+  border-width: 0;
+  background-color: transparent;
+  width: 10em;
+  float: right;
+  margin-left: 5px;
 }
-*/
+
+/* media-lists */
+.media-list {
+  margin: 0;
+  background-color: white;
+}
+
+.clickarea-extra-emphasized.media-list,
+.clickarea-extra-emphasized .media-list,
+.clickarea-emphasized.media-list,
+.clickarea-emphasized .media-list {
+  background-color: transparent;
+  color: white;
+}
+
+.media > .pull-left, .media > .pull-right {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 1.5em;
+  text-align: center;
+  background-color: #949494;
+  margin: 0;
+}
+
+.pull-left:empty, .pull-right:empty {
+  background-color: transparent;
+  color: inherit;
+}
+
+.media > .pull-left {
+  color: white;
+}
+
+body .media > .pull-right {
+  color: transparent;
+}
+
+.clickarea-extra-emphasized.pull-left,
+.clickarea-extra-emphasized .pull-left,
+.clickarea-emphasized.pull-left,
+.clickarea-emphasized .pull-left,
+.clickarea-extra-emphasized.pull-right,
+.clickarea-extra-emphasized .pull-right,
+.clickarea-emphasized.pull-right,
+.clickarea-emphasized .pull-right {
+  background-color: transparent;
+  color: inherit;
+}
+
+.media:hover .pull-right, .media:active .pull-right,
+button:hover .media .pull-right, button:active .media .pull-right {
+  color: white;
+}
+
+/* OL containing another OL of input elements */
+.input-area {
+  background-color: white;
+  color: #949494;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.input-area > li {
+  padding: 5px;
+}
+
+.input-area > li + li {
+  border-top: 1px solid #dbdbdb;
+}
+
+.input-area > li > ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.input-area > li > ol > li {
+  display: inline-block;
+  padding: 4px 7px;
+}
+
+.input-area > li > ol > li + li {
+  border-left: 1px solid #dbdbdb;
+}
+
+.media-body {
+  line-height: 37px;
+  padding: 0 10px;
+}
+
+/* spaces below element */
+.app-documents .fine-space {
+  border-bottom: 1px solid #d5f3ff;
+}
+
+.regular-space {
+  margin-bottom: 7px;
+}
+
+.large-space {
+  margin-bottom: 12px;
+}
+
 /*
  * Fixes showing dropdown menu when slowly hovering it.
  */
-/*
-.dropdown-toggle {
-  padding-bottom: 20px;
-}
-
-.breadcrumb {
-  padding: 0px 15px 8px 15px;
-  margin-bottom: 20px;
-  list-style: none;
-  border-radius: 4px;
-  font-size: 10px;
-}
-
-.breadcrumb > li {
-  display: inline-block;
-}
-
-.breadcrumb > li + li:before {
-  padding: 0 5px;
-  color: $grey-darkest;
-  content: "\003E";
-}
-
-.breadcrumb > .active {
-  color: $grey-darkest;
-}
-
-.breadcrumb a {
-  color: $grey-darkest;
-}
-*/
 /* GENERAL */
 img.left {
   float: left;
@@ -131,64 +212,6 @@ img.right {
 
 .w100 {
   width: 100%;
-}
-
-.btn-flat {
-  width: 100%;
-  text-align: left;
-  padding: 0;
-}
-
-.btn-bar {
-  float: left;
-  width: 10px;
-  height: 50px;
-}
-
-.btn-icon {
-  float: left;
-  padding-left: 10px;
-  line-height: 50px;
-  font-size: 1.5em;
-}
-
-.btn-text {
-  float: left;
-  padding-left: 10px;
-  line-height: 50px;
-  font-size: 12px;
-}
-
-.caret-right {
-  position: absolute;
-  right: 0;
-  top: 22px;
-  margin-right: 10px;
-}
-
-.neutral-colors {
-  background-color: #949494 !important;
-}
-
-.btn-default.neutral-colors:hover,
-.btn-default.neutral-colors:focus,
-.btn-default.neutral-colors:active,
-.btn-default.neutral-colors.active {
-  background-color: #949494 !important;
-}
-
-.dropdown-menu.neutral-colors > .active > a,
-.dropdown-menu.neutral-colors > .active > a:hover,
-.dropdown-menu.neutral-colors > .active > a:focus {
-  background-color: #949494 !important;
-}
-
-.neutral-colors:hover {
-  background-color: #949494 !important;
-}
-
-.neutral-colors .darker {
-  background-color: #949494 !important;
 }
 
 .icon-checkbox-checked {
@@ -364,7 +387,7 @@ body {
   background-color: #dbdbdb;
   padding-top: 15px;
   padding-bottom: 15px;
-  background-color: rgba(219, 219, 219, 0.6);
+  background-color: rgba(219, 219, 219, 0.3);
 }
 
 .breadcrumb {
@@ -382,6 +405,16 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+.app-documents .clickarea-emphasized {
+  color: white;
+  background-color: #009ee3;
+}
+
+.app-documents .clickarea-emphasized:hover, .app-documents .clickarea-emphasized:active, .app-documents .clickarea-extra-emphasized {
+  color: white;
+  background-color: #007999;
 }
 
 .linktd {
@@ -410,10 +443,6 @@ body {
 /* Todos */
 /* Etherpad */
 /* Neutral */
-.apps-dropdown-menu {
-  font-size: 12px;
-}
-
 .group-top-dropdown-menu {
   font-size: 16px;
 }

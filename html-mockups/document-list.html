@@ -59,22 +59,28 @@
 			</div>
 		</nav>
 
-		<!-- now the content -->
-		<div class="container main-container">
+		<!-- start with left navigation -->
+		<div class="container main-container app-documents">
 			<div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-3"><!-- left column -->
-					<div class="btn-group w100">
-						<button type="button" class="btn btn-default btn-flat document-colors dropdown-toggle" data-toggle="dropdown">
-							<span class="btn-bar"></span>
-							<span class="icon-menu2 btn-icon">
-								<i class="fa fa-book"></i>
-							</span>
-							<span class="btn-text">
-								Dokumente
-							</span>
-							<span class="caret caret-right"></span>
+
+					<div class="btn-group w100 clickarea-extra-emphasized large-space">
+						<button type="button" class="btn  dropdown-toggle w100" data-toggle="dropdown">
+							<ul class="media-list">
+								<li class="media">
+									<a class="pull-left" href="#">
+										<i class="fa fa-book"></i>
+									</a>
+									<a class="pull-right" href="#">
+										<i class="fa fa-caret-down"></i>
+									</a>
+									<div class="media-body">
+										Dokumente
+									</div>
+								</li>
+							</ul>
 						</button>
-						<ul class="dropdown-menu apps-dropdown-menu w100 neutral-colors" role="menu">
+						<ul class="dropdown-menu apps-dropdown-menu w100" role="menu">
 							<li><a href="/group/test/message/">Nachricht</a></li>
 							<li><a href="/group/test/note/">Neuigkeiten</a></li>
 							<li><a href="/group/test/etherpad/">Etherpad</a></li>
@@ -84,143 +90,223 @@
 							<li class="active"><a href="/group/test/document/">Dokumente</a></li>
 						</ul>
 					</div><!-- btn-group -->
-					<button type="button" class="btn btn-default w100">
+
+					<button type="button" class="btn w100 clickarea-emphasized fine-space">
 						<ul class="media-list">
 							<li class="media">
-								<a class="pull-left" href="#">
+								<a class="pull-left clickarea-extra-emphasized" href="#">
 									<i class="fa fa-reply"></i>
 								</a>
+								<a class="pull-right" href="#"></a><!-- only block width -->
 								<div class="media-body">
 									Zurück zu „Dokumente“
 								</div>
 							</li>
 						</ul>
-
-
-
-						<span class="icon-menu2 btn-icon">
-						</span>
 					</button>
-					<button type="button" class="btn btn-default w100">Protokolle</button>
-					<button type="button" class="btn btn-default w100">Pressemitteilungen</button>
-					<button type="button" class="btn btn-default w100">Lege einen Dings an</button>
+
+					<button type="button" class="btn w100 clickarea-emphasized fine-space">
+						<ul class="media-list">
+							<li class="media">
+								<a class="pull-left clickarea-extra-emphasized" href="#">
+									4
+								</a>
+								<a class="pull-right" href="#">
+									<i class="fa fa-caret-right"></i>
+								</a>
+								<div class="media-body">
+									Protokolle
+								</div>
+							</li>
+						</ul>
+					</button>
+					<button type="button" class="btn  w100 clickarea-emphasized regular-space">
+						<ul class="media-list">
+							<li class="media">
+								<a class="pull-left clickarea-extra-emphasized" href="#">
+									3
+								</a>
+								<a class="pull-right" href="#"></a><!-- only block width -->
+								<div class="media-body">
+									Pressemitteilungen
+								</div>
+							</li>
+						</ul>
+					</button>
+
+					<button type="button" class="btn w100">
+						<ul class="media-list">
+							<li class="media">
+								<a class="pull-left" href="#">
+									<i class="fa fa-plus"></i>
+								</a>
+								<a class="pull-right" href="#"></a><!-- only block width -->
+								<div class="media-body">
+									Lege einen Dings an
+								</div>
+							</li>
+						</ul>
+					</button>
 
 				</div><!-- left column -->
 
+
+				<!-- now the content -->
 				<div class="col-lg-9 col-md-9 col-sm-9"><!-- right column -->
 
-     
-						<ol class="breadcrumb">
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Library</a></li>
-							<li class="active">Data</li>
-						</ol>
-
+     			<ol class="breadcrumb">
+						<li><a href="#">Testgruppe</a></li>
+						<li><a href="#">Dokumente</a></li>
+						<li class="active">Protokolle</li>
+					</ol>
 
 					<div class="row">
-					<div class="col-xs-12 content-box">
-						<div class="media-list">
-							<div class="media">
-								<a class="pull-left" href="#">
-									<!-- enter js to collapse containers here. -->
-									<span class="glyphicon glyphicon-folder-open"></span>
-								</a>
-								<!-- root container -->
+						<div class="col-xs-12 content-box"><!-- content-box -->
 
-
-								<div class="btn-group pull-right" >
-									<a class="btn btn-primary btn-mini" href="/group/test/document/add/">
-										<span class="glyphicon glyphicon-plus"></span> Dokument hinzufügen
+							<ul class="media-list large-space">
+								<li class="media">
+									<a class="pull-left clickarea-extra-emphasized" href="#">
+										<i class="fa fa-plus"></i>
 									</a>
-									<a class="btn btn-primary btn-mini" href="/group/test/document/add-container/">
-										<span class="glyphicon glyphicon-plus"></span> Erzeuge Zusammenstellung
-									</a>
-								</div>
-
-								<p>
-									// WURZEL //
-								</p>
-
-								<div class="media">
-									<a class="pull-left" href="#">
-										<!-- enter js to collapse containers here. -->
-										<span class="glyphicon glyphicon-folder-open"></span>
-									</a>
-
-
 									<div class="media-body">
-									<!-- regular container -->
-
-										<div class="btn-group pull-right" >
-											<a class="btn btn-primary btn-mini" href="/group/test/document/nja/add/">
-												<span class="glyphicon glyphicon-plus"></span> Dokument hinzufügen
-											</a>
-											<a class="btn btn-primary btn-mini" href="/group/test/document/nja/add-container/">
-												<span class="glyphicon glyphicon-plus"></span> Erzeuge Zusammenstellung
-											</a>
-											<a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
-												<span class="caret"></span>
-											</a>
-
-											<ul class="dropdown-menu">
-												<!--          <li><a href="/group/test/document/nja/edit/">
-													<span class="glyphicon glyphicon-pencil"></span> Bearbeiten</a>
-												</li>-->
-												<li>
-													<a href="/group/test/document/nja/delete/">
-														<span class="glyphicon glyphicon-trash"></span> Löschen
-													</a>
-												</li>
-											</ul>
-										</div>
-
-										<p>
-											Nja
-										</p>
-
-
+										Lege ein neues Dokument an.
 									</div>
-									<div class="media">
-										<a class="pull-left" href="/group/test/document/dfsdf/">
-											<span class="glyphicon glyphicon-file"></span>
+								</li>
+							</ul>
+
+
+							<ul class="media-list clickarea-emphasized regular-space">
+								<li class="media">
+									<a class="pull-left" href="#">
+										<i class="fa fa-book"></i>
+									</a>
+									<a class="pull-right" href="#">
+										<i class="fa  fa-chevron-down"></i>
+									</a>
+									<a class="pull-right" href="#">
+										<i class="fa fa-chain"></i>
+									</a>
+									<div class="media-body">
+										Protokoll vom Plenum am 23.02.2014
+									</div>
+								</li>
+							</ul>
+
+							<ul class="media-list clickarea-emphasized regular-space">
+								<li class="media">
+									<a class="pull-left" href="#">
+										<i class="fa fa-book"></i>
+									</a>
+									<a class="pull-right" href="#">
+										<i class="fa  fa-chevron-down"></i>
+									</a>
+									<a class="pull-right" href="#">
+										<i class="fa fa-chain"></i>
+									</a>
+									<div class="media-body">
+										Protokoll vom Plenum am 26.02.2014
+									</div>
+								</li>
+							</ul>
+
+							<ul class="media-list clickarea-emphasized regular-space">
+								<li class="media">
+									<a class="pull-left" href="#">
+										<i class="fa fa-book"></i>
+									</a>
+									<a class="pull-right" href="#">
+										<i class="fa  fa-chevron-down"></i>
+									</a>
+									<a class="pull-right" href="#">
+										<i class="fa fa-chain"></i>
+									</a>
+									<div class="media-body">
+										Protokoll vom Plenum am 12.07.2013
+									</div>
+								</li>
+							</ul>
+
+							<div class="fadedown">
+								<ul class="media-list clickarea-emphasized">
+									<li class="media">
+										<a class="pull-left" href="#">
+											<i class="fa fa-book"></i>
 										</a>
-
-										<span>
-											<a href="/group/test/document/dfsdf/" title="dfsdf">dfsdf </a>
-										</span>
-
-										<div class="btn-group pull-right">
-											<a class="btn btn-primary btn-mini" href="/group/test/document/dfsdf/">
-												<span class="glyphicon glyphicon-eye-open"></span> Anzeigen
-											</a>
-
-											<a class="btn btn-primary btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
-												<span class="caret"></span>
-											</a>
-											<ul class="dropdown-menu" role="menu">
-												<li>
-													<a href="/group/test/document/dfsdf/edit/">
-														<span class="glyphicon glyphicon-pencil"></span> Bearbeiten
-													</a>
-												</li>
-												<li>
-													<a href="/group/test/document/dfsdf/unpublish/">
-														<span class="glyphicon glyphicon-heart-empty"></span> Veröffentlichung aufheben
-													</a>
-												</li>
-
-												<li>
-													<a href="/group/test/document/dfsdf/delete/">
-														<span class="glyphicon glyphicon-trash"></span> Löschen
-													</a>
-												</li>
-											</ul>
+										<a class="pull-right" href="#">
+											<i class="fa fa-chevron-down"></i>
+										</a>
+										<a class="pull-right" href="#">
+											<i class="fa fa-chain"></i>
+										</a>
+										<div class="media-body">
+											Protokoll vom Plenum am 01.04.2013
 										</div>
-									</div><!-- media -->
-								</div><!-- media-body -->
-							</div><!-- media -->
-						</div><!-- media-list -->
-						</div>
+									</li>
+								</ul>
+
+								<ol class="input-area" style="display:none;">
+									<li>
+										<ol>
+											<li>
+												Personen
+											</li>
+											<li>
+												Tags
+											</li>
+											<li>
+												Anhänge (Termine)
+											</li>
+										</ol>
+									</li>
+									<li>
+										<ol>
+											<li>
+												Ort
+											</li>
+											<li>
+												Uhr
+											</li>
+											<li>
+												Blitz
+											</li>
+											<li>
+												Leuchte
+											</li>
+											<li>
+												Privatsphäre
+											</li>
+										</ol>
+									</li>
+								</ol><!-- input-area -->
+
+
+								<button type="button" class="btn clickarea-emphasized" style="display:none;">
+									<ul class="media-list">
+										<li class="media">
+											<a class="pull-left clickarea-extra-emphasized" href="#">
+												<i class="fa fa-eraser"></i>
+											</a>
+											<div class="media-body">
+												Löschen
+											</div>
+										</li>
+									</ul>
+								</button>
+								<button type="button" class="btn clickarea-emphasized" style="display:none;">
+									<ul class="media-list">
+										<li class="media">
+											<a class="pull-left clickarea-extra-emphasized" href="#">
+												<i class="fa fa-pencil"></i>
+											</a>
+											<div class="media-body">
+												Bearbeiten
+											</div>
+										</li>
+									</ul>
+								</button>
+							</div><!-- fadedown -->
+
+						</div><!-- content-box -->
 					</div><!-- row -->
 				</div><!-- right column -->
 			</div><!-- row -->

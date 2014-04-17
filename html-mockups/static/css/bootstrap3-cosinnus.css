@@ -353,7 +353,7 @@ a {
   text-decoration: none;
 }
 a:hover, a:focus {
-  color: white;
+  color: red;
   text-decoration: underline;
 }
 a:focus {
@@ -2482,7 +2482,7 @@ select[multiple].input-lg,
   outline-offset: -2px;
 }
 .btn:hover, .btn:focus {
-  color: #333333;
+  color: #949494;
   text-decoration: none;
 }
 .btn:active, .btn.active {
@@ -2501,25 +2501,25 @@ select[multiple].input-lg,
 }
 
 .btn-default {
-  color: #333333;
-  background-color: white;
+  color: #949494;
+  background-color: #949494;
   border-color: #cccccc;
 }
 .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
-  color: #333333;
-  background-color: #e6e6e6;
+  color: #949494;
+  background-color: #7b7b7b;
   border-color: #adadad;
 }
 .btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
   background-image: none;
 }
 .btn-default.disabled, .btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled:active, .btn-default.disabled.active, .btn-default[disabled], .btn-default[disabled]:hover, .btn-default[disabled]:focus, .btn-default[disabled]:active, .btn-default[disabled].active, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default:hover, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default:active, fieldset[disabled] .btn-default.active {
-  background-color: white;
+  background-color: #949494;
   border-color: #cccccc;
 }
 .btn-default .badge {
-  color: white;
-  background-color: #333333;
+  color: #949494;
+  background-color: #949494;
 }
 
 .btn-primary {
@@ -2647,7 +2647,7 @@ select[multiple].input-lg,
   border-color: transparent;
 }
 .btn-link:hover, .btn-link:focus {
-  color: white;
+  color: red;
   text-decoration: underline;
   background-color: transparent;
 }
@@ -2760,7 +2760,7 @@ tbody.collapse.in {
   list-style: none;
   font-size: 14px;
   text-align: left;
-  background-color: white;
+  background-color: #949494;
   border: 1px solid #cccccc;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0;
@@ -2784,13 +2784,13 @@ tbody.collapse.in {
   clear: both;
   font-weight: normal;
   line-height: 1.42857;
-  color: #333333;
+  color: white;
   white-space: nowrap;
 }
 
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
   text-decoration: none;
-  color: #262626;
+  color: white;
   background-color: whitesmoke;
 }
 
@@ -3663,7 +3663,7 @@ tbody.collapse.in {
 
 .navbar-default {
   background-color: #f8f8f8;
-  border-color: #16778d;
+  border-color: rgba(51, 51, 51, 0.65);
 }
 .navbar-default .navbar-brand {
   color: #777777;
@@ -3701,7 +3701,7 @@ tbody.collapse.in {
 }
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
-  border-color: #16778d;
+  border-color: rgba(51, 51, 51, 0.65);
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
   background-color: #e7e7e7;
@@ -3879,7 +3879,7 @@ tbody.collapse.in {
 .pagination > li > a:hover, .pagination > li > a:focus,
 .pagination > li > span:hover,
 .pagination > li > span:focus {
-  color: white;
+  color: red;
   background-color: #eeeeee;
   border-color: #dddddd;
 }
