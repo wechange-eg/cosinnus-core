@@ -2,6 +2,10 @@
 
 /* Bootstrap Adjustments */
 
+.main-container {
+    margin-top: 60px;
+}
+
 /*
 .row {
   margin-right: auto !important;
@@ -161,37 +165,37 @@ $btn-bar-width: 10px;
   right: 0;
   top: ($btn-group-height / 2) - (3);
   margin-right: $btn-bar-width;
-  border-top-color: $app-color-text !important;
+//  border-top-color: $app-color-text !important;
 }
 
 
 .primary-colors {
-  color: $app-color-text !important;
-  background-color: $app-color !important;
+//  color: $app-color-text !important;
+//  background-color: $app-color !important;
 }
 
 .primary-colors .darker {
-  color: $app-color-text !important;
-  background-color: $app-color-dark !important;
+//  color: $app-color-text !important;
+//  background-color: $app-color-dark !important;
 }
 
 .primary-colors:hover {
-  color: $app-color-text !important;
-  background-color: $app-color !important;
+//  color: $app-color-text !important;
+//  background-color: $app-color !important;
 }
 
 .dropdown-menu.primary-colors > .active > a,
 .dropdown-menu.primary-colors > .active > a:hover,
 .dropdown-menu.primary-colors > .active > a:focus {
-  color: $app-color-text !important;
-  background-color: $app-color !important;
+//  color: $app-color-text !important;
+//  background-color: $app-color !important;
 }
 
 
 // Neutral
 // ---------------------------------------
 .neutral-colors {
-  color: $app-neutral-color-text !important;
+//  color: $app-neutral-color-text !important;
   background-color: $app-neutral-color !important;
 }
 
@@ -199,83 +203,83 @@ $btn-bar-width: 10px;
 .btn-default.neutral-colors:focus,
 .btn-default.neutral-colors:active,
 .btn-default.neutral-colors.active {
-  color: $app-neutral-color-text !important;
+//  color: $app-neutral-color-text !important;
   background-color: $app-neutral-color !important;
 }
 
 .dropdown-menu.neutral-colors > .active > a,
 .dropdown-menu.neutral-colors > .active > a:hover,
 .dropdown-menu.neutral-colors > .active > a:focus {
-  color: $app-neutral-color-text !important;
+//  color: $app-neutral-color-text !important;
   background-color: $app-neutral-color !important;
 }
 
 .neutral-colors:hover {
-  color: $app-neutral-color-text !important;
+//  color: $app-neutral-color-text !important;
   background-color: $app-neutral-color !important;
 }
 
 .neutral-colors .darker {
-  color: $app-neutral-color-text !important;
+//  color: $app-neutral-color-text !important;
   background-color: $app-neutral-color !important;
 }
 
 // Main Menu
 // ---------------------------------------
 .main-menu-colors {
-  color: $app-main-menu-color-text !important;
-  background-color: $app-main-menu-color !important;
+//  color: $app-main-menu-color-text !important;
+//  background-color: $app-main-menu-color !important;
 }
 
 .btn-default.main-menu-colors:hover,
 .btn-default.main-menu-colors:focus,
 .btn-default.main-menu-colors:active,
 .btn-default.main-menu-colors.active {
-  color: $app-main-menu-color-text !important;
-  background-color: $app-main-menu-color !important;
+//  color: $app-main-menu-color-text !important;
+//  background-color: $app-main-menu-color !important;
 }
 
 .dropdown-menu.main-menu-colors > .active > a,
 .dropdown-menu.main-menu-colors > .active > a:hover,
 .dropdown-menu.main-menu-colors > .active > a:focus {
-  color: $app-main-menu-color-text !important;
-  background-color: $app-main-menu-color !important;
+//  color: $app-main-menu-color-text !important;
+//  background-color: $app-main-menu-color !important;
 }
 
 .main-menu-colors:hover {
-  color: $app-main-menu-color-text !important;
-  background-color: $app-main-menu-color !important;
+//  color: $app-main-menu-color-text !important;
+//  background-color: $app-main-menu-color !important;
 }
 
 .main-menu-colors .darker {
-  color: $app-main-menu-color-text !important;
-  background-color: $app-main-menu-color !important;
+//  color: $app-main-menu-color-text !important;
+//  background-color: $app-main-menu-color !important;
 }
 
 
 // Dashboard
 // ---------------------------------------+
 .dashboard-colors {
-  color: $app-dashboard-color-text;
-  background-color: $app-dashboard-color;
+//  color: $app-dashboard-color-text;
+//  background-color: $app-dashboard-color;
 }
 
 .btn-default.dashboard-colors:hover,
 .btn-default.dashboard-colors:focus,
 .btn-default.dashboard-colors:active,
 .btn-default.dashboard-colors.active {
-  color: $app-dashboard-color-text !important;
-  background-color: $app-dashboard-color !important;
+//  color: $app-dashboard-color-text !important;
+//  background-color: $app-dashboard-color !important;
 }
 
 .dropdown-menu.dashboard-colors > .active > a,
 .dropdown-menu.dashboard-colors > .active > a:hover,
 .dropdown-menu.dashboard-colors > .active > a:focus {
-  color: $app-dashboard-color-text !important;
-  background-color: $app-dashboard-color !important;
+//  color: $app-dashboard-color-text !important;
+//  background-color: $app-dashboard-color !important;
 }
 
 .dashboard-colors:hover {
-  color: $app-dashboard-color-text !important;
-  background-color: $app-dashboard-color !important;
+//  color: $app-dashboard-color-text !important;
+//  background-color: $app-dashboard-color !important;
 }

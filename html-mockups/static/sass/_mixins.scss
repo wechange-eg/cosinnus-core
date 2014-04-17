@@ -34,81 +34,19 @@
 // TODOS Mixins
 
 @mixin todo-colors() {
-  color: $app-todos-color-text;
+  color: $app-neutral-color-white;
   background-color: $app-todos-color;
 
   a {
-    color: $app-todos-color-text;
+    color: $app-neutral-color-white;
   }
 }
 
 @mixin todo-colors-important() {
-  color: $app-todos-color-text !important;
+  color: $app-neutral-color-white !important;
   background-color: $app-todos-color !important;
 }
 
-@mixin todo-colors-selected() {
-  background-color: $app-todos-color-selected;
-}
-
-@mixin todo-colors-selected-important() {
-  background-color: $app-todos-color-selected !important;
-}
-
-@mixin todo-colors-darker() {
-  color: $app-todos-color-text;
-  background-color: $app-todos-color-dark;
-}
-
-@mixin todo-colors-darker-important() {
-  color: $app-todos-color-text !important;
-  background-color: $app-todos-color-dark !important;
-}
-
-@mixin todo-secondary-colors() {
-  color: $app-todos-secondary-color-text;
-  background-color: $app-todos-secondary-color;
-}
-
-
-// Network Mixins
-
-@mixin network-colors() {
-  color: $app-network-color-text;
-  background-color: $app-network-color;
-
-  a {
-    color: $app-network-color-text;
-  }
-}
-
-@mixin network-colors-important() {
-  color: $app-network-color-text !important;
-  background-color: $app-network-color !important;
-
-  a {
-    color: $app-network-color-text !important;
-  }
-}
-
-@mixin network-reversed-colors-important() {
-  color: $app-network-color !important;
-  background-color: $app-network-color-text !important;
-
-  a {
-    color: $app-network-color !important;
-  }
-}
-
-@mixin network-colors-darker() {
-  color: $app-network-color-text;
-  background-color: $app-network-color-dark;
-}
-
-@mixin network-colors-darker-important() {
-  color: $app-network-color-text !important;
-  background-color: $app-network-color-dark !important;
-}
 
 // Neutral Mixins
 
@@ -117,7 +55,7 @@
   background-color: $app-neutral-color;
 
   a {
-    color: $app-neutral-color-text;
+    color: $app-neutral-color-white;
   }
 }
 
@@ -126,26 +64,7 @@
   background-color: $app-neutral-color !important;
 
   a {
-    color: $app-neutral-color-text !important;
+    color: $app-neutral-color-white !important;
   }
 }
 
-// Main Menu Mixins
-
-@mixin main-menu-colors() {
-  color: $app-main-menu-color-text;
-  background-color: $app-main-menu-color;
-
-  a {
-    color: $app-main-menu-color-text;
-  }
-}
-
-@mixin main-menu-colors-important() {
-  color: $app-main-menu-color-text !important;
-  background-color: $app-main-menu-color !important;
-
-  a {
-    color: $app-main-menu-color-text !important;
-  }
-}

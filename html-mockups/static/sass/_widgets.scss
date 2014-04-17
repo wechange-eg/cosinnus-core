@@ -14,6 +14,7 @@ $app-item-size: 40px;
   position: relative;
 }
 
+// What does this mean?
 .transparent::after {
   content: "";
   background: url("../images/white-pixel.png");
@@ -49,7 +50,7 @@ $app-item-size: 40px;
   @include todo-colors-important();
 }
 .dashboard *[data-app-name='todo'] .darker {
-  @include todo-colors-darker();
+//  @include todo-colors-darker();
 }
 
 .dashboard *[data-app-name='todo'] tr:first-child {
@@ -64,18 +65,18 @@ $app-item-size: 40px;
 // Widget News/Notes
 
 .dashboard *[data-app-name='note'] > .panel {
-  @include network-colors();
+//  @include network-colors();
 }
 
 .dashboard *[data-app-name='note']:hover > .panel {
-  @include network-colors-important();
+//  @include network-colors-important();
 }
 .dashboard *[data-app-name='note'] .darker {
-  @include network-colors-darker();
+//  @include network-colors-darker();
 }
 
 .dashboard *[data-app-name='note'] td {
-  @include network-colors-important();
+//  @include network-colors-important();
 }
 
 $app-item-link-height: 70px;
@@ -91,11 +92,11 @@ $app-item-link-height: 70px;
   }
 
   .app-item-header {
-    @include network-colors-important();
+//    @include network-colors-important();
   }
 
   .app-item-tags-icon {
-    @include network-colors-darker();
+//    @include network-colors-darker();
   }
 
   .app-item-tags-text {
@@ -105,7 +106,7 @@ $app-item-link-height: 70px;
   .app-item-contents {
     padding-left: $item-distance;
     font-size: $font-size-small;
-    background-color: $white;
+//    background-color: $white;
   }
 
   .app-item-contents--text {
@@ -117,7 +118,7 @@ $app-item-link-height: 70px;
   }
 
   .app-item-contents--link {
-    @include main-menu-colors-important();
+//    @include main-menu-colors-important();
     height: $app-item-link-height;
   }
 
@@ -170,7 +171,7 @@ $app-item-link-height: 70px;
 .app-item-contents--meta {
   padding: $item-distance-small 0px;
   font-size: $font-size-small;
-  color: $app-neutral-color-text;
+//  color: $app-neutral-color-text;
 }
 
 .app-item-contents--meta-item {
@@ -214,7 +215,7 @@ $app-item-link-height: 70px;
 }
 
 .app-item-tags {
-	@include network-reversed-colors-important();
+//	@include network-reversed-colors-important();
 
 	display:table;
 	border-top-right-radius: 4px;

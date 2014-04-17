@@ -9,6 +9,9 @@ $bootstrap-sass-asset-helper: (twbs-font-path("") != unquote('twbs-font-path("")
 
 //== Colors
 //
+
+@import "../../variables";
+
 //## Gray and brand colors for use across Bootstrap.
 
 $gray-darker:            lighten(#000, 13.5%) !default; // #222
@@ -31,12 +34,12 @@ $brand-danger:          #d9534f !default;
 //** Background color for `<body>`.
 $body-bg:               #fff !default;
 //** Global text color on `<body>`.
-$text-color:            $gray-dark !default;
+$text-color:            $app-neutral-color !default;
 
 //** Global textual link color.
-$link-color:            $brand-primary !default;
+$link-color:            $app-neutral-color-light !default;
 //** Link hover color set via `darken()` function.
-$link-hover-color:      darken($link-color, 15%) !default;
+$link-hover-color:      $app-neutral-color-white !default;
 
 
 //== Typography
@@ -103,9 +106,10 @@ $padding-xs-horizontal:     5px !default;
 $line-height-large:         1.33 !default;
 $line-height-small:         1.5 !default;
 
-$border-radius-base:        4px !default;
-$border-radius-large:       6px !default;
-$border-radius-small:       3px !default;
+$border-radius-base:        0 !default; // Thomas 16 Apr 2014
+$border-radius-large:       0 !default;
+$border-radius-small:       0 !default;
+// defaut: 4px 6px 3px
 
 //** Global color for active items (e.g., navs or dropdowns).
 $component-active-color:    #fff !default;
@@ -766,15 +770,15 @@ $badge-border-radius:         10px !default;
 //##
 
 $breadcrumb-padding-vertical:   8px !default;
-$breadcrumb-padding-horizontal: 15px !default;
+$breadcrumb-padding-horizontal: 0px !default; // Was: 15px
 //** Breadcrumb background color
-$breadcrumb-bg:                 #f5f5f5 !default;
+$breadcrumb-bg:                 transparent !default;
 //** Breadcrumb text color
-$breadcrumb-color:              #ccc !default;
+$breadcrumb-color:              $app-neutral-color-light !default;
 //** Text color of current page in the breadcrumb
-$breadcrumb-active-color:       $gray-light !default;
+$breadcrumb-active-color:       $app-neutral-color-light !default;
 //** Textual separator for between breadcrumb elements
-$breadcrumb-separator:          "/" !default;
+$breadcrumb-separator:          ">" !default;
 
 
 //== Carousel

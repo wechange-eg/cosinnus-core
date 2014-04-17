@@ -96,22 +96,22 @@ $clndr-border-size: 8px;
   background: #eee;
 }
 .cal1 .clndr .clndr-table tr .day.today {
-  background: $white;
+//  background: $white;
 }
 .cal1 .clndr .clndr-table tr .day.today:hover {
-  background: $white;
+//  background: $white;
 }
 .cal1 .clndr .clndr-table tr .day.today.event {
-  background: #a7dbc1;
+//  background: #a7dbc1;
 }
 .cal1 .clndr .clndr-table tr .day.event {
-  background: #B4E09F;
+//  background: #B4E09F;
 }
 .cal1 .clndr .clndr-table tr .day.event:hover {
-  background: #96d478;
+//  background: #96d478;
 }
 .cal1 .clndr .clndr-table tr .day.inactive {
-  background: #ddd;
+//  background: #ddd;
 }
 .cal1 .clndr .clndr-table tr .day:last-child {
   border-right: $clndr-border-size solid transparent;
