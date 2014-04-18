@@ -1,83 +1,38 @@
-@import "variables";
-
-/* Bootstrap Adjustments */
+/* Classes that can be found in many pages and are not part of Twitter Bootstrap */
 
 
-.navbar-fixed-top {
-	background-color:transparentize($app-neutral-color-white, 0.35);
-	border-bottom-width:2px;
-}
-
-.main-container {
-    margin-top: 60px;
-}
-
-
-.btn {
-	padding:0;
-	border-width:0;
-	background-color:transparent;
-	width:10em;
-	float:right;
-	margin-left:5px;
-}
-
-
-/* media-lists */
-.media-list {
+// Set width of element to full width
+.w100 {
+  width: 100%;
 	margin:0;
-	background-color: $app-neutral-color-white;
-}
-.clickarea-extra-emphasized.media-list,
-.clickarea-extra-emphasized .media-list,
-.clickarea-emphasized.media-list,
-.clickarea-emphasized .media-list {
-	background-color: transparent;
-	color: $app-neutral-color-white;
+	float:none;
 }
 
-.media > .pull-left, .media > .pull-right {
-	width:40px;
-	height:40px;
-	line-height:40px;
-	font-size:1.5em;
-	text-align:center;
-	background-color: $app-neutral-color;
-	margin:0;
+// spaces below full width elements
+body .fine-space {
+	border-bottom: 1px solid $app-documents-color-light;
 }
-.pull-left:empty, .pull-right:empty {
-	background-color: transparent;
-	color: inherit;
+body .regular-space {
+	margin-bottom: 7px;
 }
-.media > .pull-left {
-	color: $app-neutral-color-white;
-}
-body .media > .pull-right {
-	color: transparent;
+body .large-space {
+	margin-bottom: 12px;
 }
 
-.clickarea-extra-emphasized.pull-left,
-.clickarea-extra-emphasized .pull-left,
-.clickarea-emphasized.pull-left,
-.clickarea-emphasized .pull-left,
-.clickarea-extra-emphasized.pull-right,
-.clickarea-extra-emphasized .pull-right,
-.clickarea-emphasized.pull-right,
-.clickarea-emphasized .pull-right {
-	background-color: transparent;
-	color: inherit;
-}
-
-.media:hover .pull-right, .media:active .pull-right,
-button:hover .media .pull-right, button:active .media .pull-right {
-	color: $app-neutral-color-white;
+// the nice semi transparent box containing the content
+.content-box {
+	padding: 15px;
+	background-color:transparentize($app-neutral-color-light, 0.7);
+	@include clearfix();
 }
 
 
-/* OL containing another OL of input elements */
+/* input-area is an OL containing another OL of input elements.
+	It looks like a white box full of inputs with gray vertical and horizontal separators.
+*/
 .input-area {
 	background-color: $app-neutral-color-white;
-	color: $app-neutral-color;
+	color: $app-neutral-color-dark;
   list-style: none;
 	margin:0;
 	padding:0;
@@ -100,126 +55,6 @@ border-top:1px solid $app-neutral-color-light;
 }
 .input-area > li > ol > li + li {
 	border-left: 1px solid $app-neutral-color-light;
-}
-
-
-.media-body {
-	line-height:37px;
-	padding:0 10px;
-}
-
-/* spaces below element */
-.app-documents .fine-space {
-	border-bottom: 1px solid $app-documents-color-light;
-}
-.regular-space {
-	margin-bottom: 7px;
-}
-.large-space {
-	margin-bottom: 12px;
-}
-
-
-/*
- * Fixes showing dropdown menu when slowly hovering it.
- */
-
-
-/* GENERAL */
-
-img.left {
-  float: left;
-  margin-right: 40px;
-}
-
-img.right {
-  float: right;
-  margin-left: 40px;
-}
-
-.full-width {
-  min-width: 100%;
-}
-
-.img-center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.centered-block {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
-.displaynone {
-  display: none;
-}
-
-.clearboth {
-  clear: both;
-}
-
-.centered {
-  text-align: center;
-  vertical-align: middle;
-}
-
-.absolute-center {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  margin: auto;
-}
-
-.centered-h {
-  text-align: center;
-}
-
-.centered-v {
-  vertical-align: middle;
-}
-
-.row-no-margins {
-  margin: 0;
-}
-.row-no-margins [class^="col-"],
-.row-no-margins [class*=" col-"]{
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.large-bold-text {
-  font-weight: bold;
-  font-size: large;
-}
-
-.large-text {
-  font-size: large;
-}
-
-.w100 {
-  width: 100%;
-}
-
-.btn-flat {
-}
-
-$btn-group-height: 50px;
-$btn-bar-width: 10px;
-
-.btn-bar {
-// use media-list instead
-}
-
-.btn-icon {
-// use media-list instead
-}
-
-.btn-text {
+	color: $app-neutral-color-dark;
 }
 

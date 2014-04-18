@@ -20,11 +20,11 @@ $gray:                   lighten(#000, 33.5%) !default; // #555
 $gray-light:             lighten(#000, 60%) !default;   // #999
 $gray-lighter:           lighten(#000, 93.5%) !default; // #eee
 
-$brand-primary:         #428bca !default;
-$brand-success:         #5cb85c !default;
-$brand-info:            #5bc0de !default;
-$brand-warning:         #f0ad4e !default;
-$brand-danger:          #d9534f !default;
+$brand-primary:         $app-neutral-color !default;
+$brand-success:         green !default;
+$brand-info:            blue !default;
+$brand-warning:         pink !default;
+$brand-danger:          grey !default;
 
 
 //== Scaffolding
@@ -39,7 +39,7 @@ $text-color:            $app-neutral-color !default;
 //** Global textual link color.
 $link-color:            $app-neutral-color-light !default;
 //** Link hover color set via `darken()` function.
-$link-hover-color:     red !default; // $app-neutral-color-white !default;
+$link-hover-color:     $app-neutral-color-white !default;
 
 
 //== Typography
@@ -218,7 +218,7 @@ $input-group-addon-border-color: $input-border !default;
 //## Dropdown menu container and contents.
 
 //** Background for the dropdown menu.
-$dropdown-bg:                    $app-neutral-color !default;
+$dropdown-bg:                    $app-neutral-color-white !default;
 //** Dropdown menu `border-color`.
 $dropdown-border:                rgba(0,0,0,.15) !default;
 //** Dropdown menu `border-color` **for IE8**.
@@ -227,16 +227,16 @@ $dropdown-fallback-border:       #ccc !default;
 $dropdown-divider-bg:            #e5e5e5 !default;
 
 //** Dropdown link text color.
-$dropdown-link-color:            $app-neutral-color-white !default;
+$dropdown-link-color:            $app-neutral-color-dark !default;
 //** Hover color for dropdown links.
 $dropdown-link-hover-color:      $app-neutral-color-white !default;
 //** Hover background for dropdown links.
-$dropdown-link-hover-bg:         #f5f5f5 !default;
+$dropdown-link-hover-bg:         $app-neutral-color !default;
 
 //** Active dropdown menu item text color.
-$dropdown-link-active-color:     $component-active-color !default;
+$dropdown-link-active-color:     $app-neutral-color-white !default;
 //** Active dropdown menu item background color.
-$dropdown-link-active-bg:        $component-active-bg !default;
+$dropdown-link-active-bg:        $app-neutral-color !default;
 
 //** Disabled dropdown menu item background color.
 $dropdown-link-disabled-color:   $gray-light !default;
@@ -351,18 +351,18 @@ $navbar-default-bg:                #f8f8f8 !default;
 $navbar-default-border:            transparentize($app-neutral-color-dark, 0.35) !default;
 
 // Navbar links
-$navbar-default-link-color:                #777 !default;
-$navbar-default-link-hover-color:          #333 !default;
-$navbar-default-link-hover-bg:             transparent !default;
-$navbar-default-link-active-color:         #555 !default;
-$navbar-default-link-active-bg:            darken($navbar-default-bg, 6.5%) !default;
-$navbar-default-link-disabled-color:       #ccc !default;
+$navbar-default-link-color:                $app-neutral-color-dark !default;
+$navbar-default-link-hover-color:          $app-neutral-color-dark !default;
+$navbar-default-link-hover-bg:             $app-neutral-color-white !default;
+$navbar-default-link-active-color:         $app-neutral-color-dark !default;
+$navbar-default-link-active-bg:            $app-neutral-color-white !default;
+$navbar-default-link-disabled-color:       $app-neutral-color !default;
 $navbar-default-link-disabled-bg:          transparent !default;
 
 // Navbar brand label
-$navbar-default-brand-color:               $navbar-default-link-color !default;
-$navbar-default-brand-hover-color:         darken($navbar-default-brand-color, 10%) !default;
-$navbar-default-brand-hover-bg:            transparent !default;
+$navbar-default-brand-color:               $app-neutral-color-dark !default;
+$navbar-default-brand-hover-color:         $app-neutral-color-dark !default;
+$navbar-default-brand-hover-bg:            $app-neutral-color-white !default;
 
 // Navbar toggle
 $navbar-default-toggle-hover-bg:           #ddd !default;

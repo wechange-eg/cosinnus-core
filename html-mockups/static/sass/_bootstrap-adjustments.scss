@@ -1,0 +1,27 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+
+	font-family: Verdana, Geneva, sans-serif;
+
+	// works in IE 9+: http://css-tricks.com/perfect-full-page-background-image/
+	background: url("../images/background.jpg") no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+/* Navbar at top of page */
+
+.navbar-fixed-top {
+	background-color:transparentize($app-neutral-color-white, 0.35);
+	border-bottom-width:2px;
+}
+
+.breadcrumb a {
+	text-decoration: underline;
+}
+
+
+

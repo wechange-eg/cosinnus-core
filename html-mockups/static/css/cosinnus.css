@@ -1,5 +1,4 @@
 @charset "UTF-8";
-/* @import must be at top of file, otherwise CSS will not work */
 /* main color and news */
 /* Calendar */
 /* Files */
@@ -7,83 +6,356 @@
 /* Todos */
 /* Etherpad */
 /* Neutral */
-/* Bootstrap Adjustments */
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+  font-family: Verdana, Geneva, sans-serif;
+  background: url("../images/background.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/* Navbar at top of page */
 .navbar-fixed-top {
   background-color: rgba(255, 255, 255, 0.65);
   border-bottom-width: 2px;
 }
 
-.main-container {
-  margin-top: 60px;
+.breadcrumb a {
+  text-decoration: underline;
 }
 
+/* The Bootstrap buttons already have the classes btn-default, btn-info, btn-warning and so on.
+	This file adds btn-emphasized, btn-extra-emphasized and btn-appnavi for coloring in the apps's colors.
+*/
 .btn {
   padding: 0;
   border-width: 0;
-  background-color: transparent;
   width: 10em;
   float: right;
-  margin-left: 5px;
+  margin: 0 0 0 5px;
 }
 
 /* media-lists */
 .media-list {
   margin: 0;
+}
+
+.btn-default .media > .media-body,
+.btn-default .media {
   background-color: white;
 }
 
-.clickarea-extra-emphasized.media-list,
-.clickarea-extra-emphasized .media-list,
-.clickarea-emphasized.media-list,
-.clickarea-emphasized .media-list {
-  background-color: transparent;
-  color: white;
+.media-body {
+  line-height: 37px;
+  padding: 0 10px;
 }
 
-.media > .pull-left, .media > .pull-right {
+.media > .pull-left,
+.media > .pull-right {
   width: 40px;
   height: 40px;
   line-height: 40px;
   font-size: 1.5em;
   text-align: center;
-  background-color: #949494;
   margin: 0;
 }
 
-.pull-left:empty, .pull-right:empty {
+.btn-default .media > .pull-left,
+.btn-default .media > .pull-right {
+  background-color: #949494;
+}
+
+.btn-default .media > .pull-left:empty,
+.btn-default .media > .pull-right:empty {
   background-color: transparent;
   color: inherit;
 }
 
-.media > .pull-left {
+.btn-default .media > .pull-left {
   color: white;
 }
 
-body .media > .pull-right {
+.btn-default .media > .pull-right {
   color: transparent;
 }
 
-.clickarea-extra-emphasized.pull-left,
-.clickarea-extra-emphasized .pull-left,
-.clickarea-emphasized.pull-left,
-.clickarea-emphasized .pull-left,
-.clickarea-extra-emphasized.pull-right,
-.clickarea-extra-emphasized .pull-right,
-.clickarea-emphasized.pull-right,
-.clickarea-emphasized .pull-right {
+/* put a class like .app-documents, .app-todos on areas that contain content in app colors.
+	On usual pages it has to be set only once in a global element.
+
+	Whereever the .clickarea-emphasized and .clickarea-extra-emphasized classes occur
+	all buttons will have strong colors then.
+*/
+.btn-appnavi .media a:first-child {
+  width: 10px;
+}
+
+.app-calendar {
+  /* spaces below element */
+}
+.app-calendar .btn-emphasized .media,
+.app-calendar .btn-appnavi .media,
+.app-calendar .btn-emphasized .media > .media-body,
+.app-calendar .btn-appnavi .media > .media-body,
+.app-calendar .btn-emphasized .media > .pull-right,
+.app-calendar .btn-appnavi .media > .pull-left,
+.app-calendar .btn-appnavi .media > .pull-right {
+  color: white;
+  background-color: #779b48;
+}
+.app-calendar .btn-extra-emphasized .media,
+.app-calendar .btn-emphasized:hover .media,
+.app-calendar .btn-appnavi:hover .media,
+.app-calendar .btn-emphasized:hover .media > .media-body,
+.app-calendar .btn-appnavi:hover .media > .media-body,
+.app-calendar .btn-extra-emphasized .media > .media-body,
+.app-calendar .btn-emphasized .media > .pull-left,
+.app-calendar .btn-appnavi .media > .pull-left:first-child,
+.app-calendar .btn-appnavi:hover .media > .pull-left,
+.app-calendar .btn-extra-emphasized .media > .pull-left,
+.app-calendar .btn-extra-emphasized:hover .media > .pull-right,
+.app-calendar .btn-emphasized:hover .media > .pull-right,
+.app-calendar .btn-appnavi:hover .media > .pull-right {
+  color: white;
+  background-color: #4c622f;
+}
+.app-calendar .btn-emphasized .media > .pull-left:empty,
+.app-calendar .btn-emphasized .media > .pull-right:empty,
+.app-calendar .btn-appnavi .media > .pull-left:empty,
+.app-calendar .btn-appnavi .media > .pull-right:empty {
   background-color: transparent;
   color: inherit;
 }
-
-.media:hover .pull-right, .media:active .pull-right,
-button:hover .media .pull-right, button:active .media .pull-right {
-  color: white;
+.app-calendar .btn-emphasized .media > .pull-right,
+.app-calendar .btn-appnavi .media > .pull-right,
+.app-calendar .btn-extra-emphasized .media > .pull-right {
+  color: transparent;
+}
+.app-calendar .fine-space {
+  border-bottom: 1px solid #e1edd2;
 }
 
-/* OL containing another OL of input elements */
+.app-files {
+  /* spaces below element */
+}
+.app-files .btn-emphasized .media,
+.app-files .btn-appnavi .media,
+.app-files .btn-emphasized .media > .media-body,
+.app-files .btn-appnavi .media > .media-body,
+.app-files .btn-emphasized .media > .pull-right,
+.app-files .btn-appnavi .media > .pull-left,
+.app-files .btn-appnavi .media > .pull-right {
+  color: white;
+  background-color: #14a085;
+}
+.app-files .btn-extra-emphasized .media,
+.app-files .btn-emphasized:hover .media,
+.app-files .btn-appnavi:hover .media,
+.app-files .btn-emphasized:hover .media > .media-body,
+.app-files .btn-appnavi:hover .media > .media-body,
+.app-files .btn-extra-emphasized .media > .media-body,
+.app-files .btn-emphasized .media > .pull-left,
+.app-files .btn-appnavi .media > .pull-left:first-child,
+.app-files .btn-appnavi:hover .media > .pull-left,
+.app-files .btn-extra-emphasized .media > .pull-left,
+.app-files .btn-extra-emphasized:hover .media > .pull-right,
+.app-files .btn-emphasized:hover .media > .pull-right,
+.app-files .btn-appnavi:hover .media > .pull-right {
+  color: white;
+  background-color: #0a5d4e;
+}
+.app-files .btn-emphasized .media > .pull-left:empty,
+.app-files .btn-emphasized .media > .pull-right:empty,
+.app-files .btn-appnavi .media > .pull-left:empty,
+.app-files .btn-appnavi .media > .pull-right:empty {
+  background-color: transparent;
+  color: inherit;
+}
+.app-files .btn-emphasized .media > .pull-right,
+.app-files .btn-appnavi .media > .pull-right,
+.app-files .btn-extra-emphasized .media > .pull-right {
+  color: transparent;
+}
+.app-files .fine-space {
+  border-bottom: 1px solid #92ffea;
+}
+
+.app-documents {
+  /* spaces below element */
+}
+.app-documents .btn-emphasized .media,
+.app-documents .btn-appnavi .media,
+.app-documents .btn-emphasized .media > .media-body,
+.app-documents .btn-appnavi .media > .media-body,
+.app-documents .btn-emphasized .media > .pull-right,
+.app-documents .btn-appnavi .media > .pull-left,
+.app-documents .btn-appnavi .media > .pull-right {
+  color: white;
+  background-color: #009ee3;
+}
+.app-documents .btn-extra-emphasized .media,
+.app-documents .btn-emphasized:hover .media,
+.app-documents .btn-appnavi:hover .media,
+.app-documents .btn-emphasized:hover .media > .media-body,
+.app-documents .btn-appnavi:hover .media > .media-body,
+.app-documents .btn-extra-emphasized .media > .media-body,
+.app-documents .btn-emphasized .media > .pull-left,
+.app-documents .btn-appnavi .media > .pull-left:first-child,
+.app-documents .btn-appnavi:hover .media > .pull-left,
+.app-documents .btn-extra-emphasized .media > .pull-left,
+.app-documents .btn-extra-emphasized:hover .media > .pull-right,
+.app-documents .btn-emphasized:hover .media > .pull-right,
+.app-documents .btn-appnavi:hover .media > .pull-right {
+  color: white;
+  background-color: #007999;
+}
+.app-documents .btn-emphasized .media > .pull-left:empty,
+.app-documents .btn-emphasized .media > .pull-right:empty,
+.app-documents .btn-appnavi .media > .pull-left:empty,
+.app-documents .btn-appnavi .media > .pull-right:empty {
+  background-color: transparent;
+  color: inherit;
+}
+.app-documents .btn-emphasized .media > .pull-right,
+.app-documents .btn-appnavi .media > .pull-right,
+.app-documents .btn-extra-emphasized .media > .pull-right {
+  color: transparent;
+}
+.app-documents .fine-space {
+  border-bottom: 1px solid #d5f3ff;
+}
+
+.app-todos {
+  /* spaces below element */
+}
+.app-todos .btn-emphasized .media,
+.app-todos .btn-appnavi .media,
+.app-todos .btn-emphasized .media > .media-body,
+.app-todos .btn-appnavi .media > .media-body,
+.app-todos .btn-emphasized .media > .pull-right,
+.app-todos .btn-appnavi .media > .pull-left,
+.app-todos .btn-appnavi .media > .pull-right {
+  color: white;
+  background-color: #efa02d;
+}
+.app-todos .btn-extra-emphasized .media,
+.app-todos .btn-emphasized:hover .media,
+.app-todos .btn-appnavi:hover .media,
+.app-todos .btn-emphasized:hover .media > .media-body,
+.app-todos .btn-appnavi:hover .media > .media-body,
+.app-todos .btn-extra-emphasized .media > .media-body,
+.app-todos .btn-emphasized .media > .pull-left,
+.app-todos .btn-appnavi .media > .pull-left:first-child,
+.app-todos .btn-appnavi:hover .media > .pull-left,
+.app-todos .btn-extra-emphasized .media > .pull-left,
+.app-todos .btn-extra-emphasized:hover .media > .pull-right,
+.app-todos .btn-emphasized:hover .media > .pull-right,
+.app-todos .btn-appnavi:hover .media > .pull-right {
+  color: white;
+  background-color: #ad7e2c;
+}
+.app-todos .btn-emphasized .media > .pull-left:empty,
+.app-todos .btn-emphasized .media > .pull-right:empty,
+.app-todos .btn-appnavi .media > .pull-left:empty,
+.app-todos .btn-appnavi .media > .pull-right:empty {
+  background-color: transparent;
+  color: inherit;
+}
+.app-todos .btn-emphasized .media > .pull-right,
+.app-todos .btn-appnavi .media > .pull-right,
+.app-todos .btn-extra-emphasized .media > .pull-right {
+  color: transparent;
+}
+.app-todos .fine-space {
+  border-bottom: 1px solid #faebcd;
+}
+
+.app-etherpad {
+  /* spaces below element */
+}
+.app-etherpad .btn-emphasized .media,
+.app-etherpad .btn-appnavi .media,
+.app-etherpad .btn-emphasized .media > .media-body,
+.app-etherpad .btn-appnavi .media > .media-body,
+.app-etherpad .btn-emphasized .media > .pull-right,
+.app-etherpad .btn-appnavi .media > .pull-left,
+.app-etherpad .btn-appnavi .media > .pull-right {
+  color: white;
+  background-color: #e55c55;
+}
+.app-etherpad .btn-extra-emphasized .media,
+.app-etherpad .btn-emphasized:hover .media,
+.app-etherpad .btn-appnavi:hover .media,
+.app-etherpad .btn-emphasized:hover .media > .media-body,
+.app-etherpad .btn-appnavi:hover .media > .media-body,
+.app-etherpad .btn-extra-emphasized .media > .media-body,
+.app-etherpad .btn-emphasized .media > .pull-left,
+.app-etherpad .btn-appnavi .media > .pull-left:first-child,
+.app-etherpad .btn-appnavi:hover .media > .pull-left,
+.app-etherpad .btn-extra-emphasized .media > .pull-left,
+.app-etherpad .btn-extra-emphasized:hover .media > .pull-right,
+.app-etherpad .btn-emphasized:hover .media > .pull-right,
+.app-etherpad .btn-appnavi:hover .media > .pull-right {
+  color: white;
+  background-color: #933d39;
+}
+.app-etherpad .btn-emphasized .media > .pull-left:empty,
+.app-etherpad .btn-emphasized .media > .pull-right:empty,
+.app-etherpad .btn-appnavi .media > .pull-left:empty,
+.app-etherpad .btn-appnavi .media > .pull-right:empty {
+  background-color: transparent;
+  color: inherit;
+}
+.app-etherpad .btn-emphasized .media > .pull-right,
+.app-etherpad .btn-appnavi .media > .pull-right,
+.app-etherpad .btn-extra-emphasized .media > .pull-right {
+  color: transparent;
+}
+.app-etherpad .fine-space {
+  border-bottom: 1px solid #ede2e1;
+}
+
+/* Classes that can be found in many pages and are not part of Twitter Bootstrap */
+.w100 {
+  width: 100%;
+  margin: 0;
+  float: none;
+}
+
+body .fine-space {
+  border-bottom: 1px solid #d5f3ff;
+}
+
+body .regular-space {
+  margin-bottom: 7px;
+}
+
+body .large-space {
+  margin-bottom: 12px;
+}
+
+.content-box {
+  padding: 15px;
+  background-color: rgba(219, 219, 219, 0.3);
+}
+.content-box:before, .content-box:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.content-box:after {
+  clear: both;
+}
+
+/* input-area is an OL containing another OL of input elements.
+	It looks like a white box full of inputs with gray vertical and horizontal separators.
+*/
 .input-area {
   background-color: white;
-  color: #949494;
+  color: #333333;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -110,837 +382,43 @@ button:hover .media .pull-right, button:active .media .pull-right {
 
 .input-area > li > ol > li + li {
   border-left: 1px solid #dbdbdb;
+  color: #333333;
 }
 
-.media-body {
-  line-height: 37px;
-  padding: 0 10px;
+.select2-container .select2-choice,
+.select2-container-multi .select2-choices {
+  border-width: 0;
+  background-image: none;
+  min-width: 10em;
 }
 
-/* spaces below element */
-.app-documents .fine-space {
-  border-bottom: 1px solid #d5f3ff;
+.select2-container .select2-choice .select2-arrow {
+  border-width: 0;
+  background-image: none;
+  background-color: transparent;
+  color: #949494;
 }
 
-.regular-space {
-  margin-bottom: 7px;
-}
-
-.large-space {
-  margin-bottom: 12px;
-}
-
-/*
- * Fixes showing dropdown menu when slowly hovering it.
- */
-/* GENERAL */
-img.left {
-  float: left;
-  margin-right: 40px;
-}
-
-img.right {
-  float: right;
-  margin-left: 40px;
-}
-
-.full-width {
-  min-width: 100%;
-}
-
-.img-center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.centered-block {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
-.displaynone {
-  display: none;
-}
-
-.clearboth {
-  clear: both;
-}
-
-.centered {
-  text-align: center;
-  vertical-align: middle;
-}
-
-.absolute-center {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  margin: auto;
-}
-
-.centered-h {
-  text-align: center;
-}
-
-.centered-v {
-  vertical-align: middle;
-}
-
-.row-no-margins {
-  margin: 0;
-}
-
-.row-no-margins [class^="col-"],
-.row-no-margins [class*=" col-"] {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.large-bold-text {
-  font-weight: bold;
-  font-size: large;
-}
-
-.large-text {
-  font-size: large;
-}
-
-.w100 {
-  width: 100%;
-}
-
-.icon-checkbox-checked {
-  position: relative;
-  top: 1px;
-  display: inline-block;
-  font-size: 16px;
-}
-
-.icon-close {
-  position: relative;
-  top: 1px;
-}
-
-/* main color and news */
-/* Calendar */
-/* Files */
-/* Documents */
-/* Todos */
-/* Etherpad */
-/* Neutral */
-.cal1 {
-  margin: 30px auto;
-  max-width: 600px;
-  font-size: 14px;
-}
-
-.cal1 .clndr .clndr-controls {
-  margin-bottom: 10px;
-}
-
-.cal1 .clndr .clndr-controls .month {
-  width: 33%;
-  text-align: center;
-}
-
-.cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button {
-  display: inline-block;
-  width: 20px;
-  text-align: center;
-  cursor: pointer;
-  -webkit-user-select: none;
-  /* Chrome/Safari */
-  -moz-user-select: none;
-  /* Firefox */
-  -ms-user-select: none;
-  /* IE10+ */
-}
-
-.cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button:hover {
-  background: #ddd;
-}
-
-.cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button.inactive {
-  opacity: 0.5;
-}
-
-.cal1 .clndr .clndr-controls .clndr-control-button .clndr-next-button.inactive:hover {
-  background: none;
-  cursor: default;
-}
-
-.cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button {
-  display: inline-block;
-  width: 20px;
-  text-align: center;
-  cursor: pointer;
-  -webkit-user-select: none;
-  /* Chrome/Safari */
-  -moz-user-select: none;
-  /* Firefox */
-  -ms-user-select: none;
-  /* IE10+ */
-}
-
-.cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button:hover {
-  background: #ddd;
-}
-
-.cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button.inactive {
-  opacity: 0.5;
-}
-
-.cal1 .clndr .clndr-controls .clndr-control-button .clndr-previous-button.inactive:hover {
-  background: none;
-  cursor: default;
-}
-
-.cal1 .clndr .clndr-table {
-  table-layout: fixed;
-  width: 100%;
-}
-
-.cal1 .clndr .clndr-table .header-days {
-  height: 30px;
-  font-size: 10px;
-  background: #0D70A6;
-}
-
-.cal1 .clndr .clndr-table .header-days .header-day {
-  vertical-align: middle;
-  text-align: center;
-  border-left: 8px solid transparent;
-  border-top: 8px solid transparent;
-  color: #fff;
-}
-
-.cal1 .clndr .clndr-table .header-days .header-day:last-child {
-  border-right: 8px solid transparent;
-}
-
-.cal1 .clndr .clndr-table tr td {
-  vertical-align: top;
-}
-
-.cal1 .clndr .clndr-table tr .day {
-  border-left: 8px solid transparent;
-  border-top: 8px solid transparent;
-  width: 100%;
-  height: inherit;
-}
-
-.cal1 .clndr .clndr-table tr .day:hover {
-  background: #eee;
-}
-
-.cal1 .clndr .clndr-table tr .day:last-child {
-  border-right: 8px solid transparent;
-}
-
-.cal1 .clndr .clndr-table tr .day .day-contents {
-  box-sizing: border-box;
-  padding: 8px;
-  font-size: 12px;
-  text-align: right;
-}
-
-.cal1 .clndr .clndr-table tr .empty,
-.cal1 .clndr .clndr-table tr .adjacent-month {
-  visibility: hidden;
-}
-
-.cal1 .clndr .clndr-table tr .empty:hover,
-.cal1 .clndr .clndr-table tr .adjacent-month:hover {
-  background: #ddd;
-}
-
-.cal1 .clndr .clndr-table tr .empty:last-child,
-.cal1 .clndr .clndr-table tr .adjacent-month:last-child {
-  border-right: 8px solid transparent;
-}
-
-.cal1 .clndr .clndr-table tr:last-child .day {
-  border-bottom: 8px solid transparent;
-}
-
-.cal1 .clndr .clndr-table tr:last-child .empty {
-  border-bottom: 8px solid transparent;
-}
-
-/* main color and news */
-/* Calendar */
-/* Files */
-/* Documents */
-/* Todos */
-/* Etherpad */
-/* Neutral */
-body {
-  font-family: Verdana, Geneva, sans-serif;
-}
-
-.content-box {
-  background-color: #dbdbdb;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  background-color: rgba(219, 219, 219, 0.3);
-}
-
-.breadcrumb {
-  margin-left: -15px;
-  margin-right: -15px;
-}
-
-.breadcrumb a {
-  text-decoration: underline;
-}
-
-.group1-background {
-  background: url("../images/background.jpg") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.app-documents .clickarea-emphasized {
-  color: white;
-  background-color: #009ee3;
-}
-
-.app-documents .clickarea-emphasized:hover, .app-documents .clickarea-emphasized:active, .app-documents .clickarea-extra-emphasized {
-  color: white;
-  background-color: #007999;
-}
-
-.linktd {
-  height: 100%;
-  width: 100%;
-  overflow: auto;
-  display: block;
-}
-
-.header-icon {
-  float: left;
-  line-height: 40px;
-  font-size: 1.5em;
-  padding-right: 10px;
-}
-
-.avatar-top-menu {
-  float: left;
-  margin-right: 10px;
-}
-
-/* main color and news */
-/* Calendar */
-/* Files */
-/* Documents */
-/* Todos */
-/* Etherpad */
-/* Neutral */
-.group-top-dropdown-menu {
-  font-size: 16px;
-}
-
-.row-right {
-  margin-left: 0;
-}
-
-.row-left {
-  margin-right: 0;
-}
-
-.group-box {
-  margin-right: 0px;
-}
-
-.group-logo {
-  margin-left: -15px;
-}
-
-.group-description {
-  padding-top: 10px;
-  font-size: 0.95em;
-}
-
-.group-title {
-  font-weight: bold;
-}
-
-.group-short-description {
-  padding: 5px 0;
-  font-size: 0.85em;
-}
-
-.group-short-description a {
-  text-decoration: underline;
-}
-
-.group-app-box {
-  display: inline-block;
-  width: 100px;
-  height: 100px;
-  margin: 20px 20px 20px 0px;
-  padding: 15px 0 5px 0;
-  vertical-align: middle;
-  text-align: center;
-  background-color: red;
-  cursor: pointer;
-}
-
-.group-app-box-icon {
-  font-size: 2.2em;
-  padding-bottom: 5px;
-}
-
-.group-app-box-numbers {
-  font-size: 1.2em;
-  font-weight: bold;
-}
-
-.group-app-box-title {
-  margin-top: -5px;
-}
-
-/* main color and news */
-/* Calendar */
-/* Files */
-/* Documents */
-/* Todos */
-/* Etherpad */
-/* Neutral */
-.dashboard-widgets {
-  margin-top: 20px;
-}
-
-.transparent {
-  display: block;
-  position: relative;
-}
-
-.transparent::after {
-  content: "";
-  background: url("../images/white-pixel.png");
-  opacity: 0.5;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute;
-  z-index: -1;
-}
-
-.widget:not(:first-child) {
-  margin-top: 20px;
-}
-
-.inline-block-container {
-  display: inline-block;
-  width: 100%;
-}
-
-.dashboard .table {
-  font-size: 12px;
-}
-
-.dashboard *[data-app-name='todo'] > .panel {
-  color: white;
-  background-color: #efa02d;
-}
-.dashboard *[data-app-name='todo'] > .panel a {
-  color: white;
-}
-
-.dashboard *[data-app-name='todo']:hover > .panel {
-  color: white !important;
-  background-color: #efa02d !important;
-}
-
-.dashboard *[data-app-name='todo'] tr:first-child {
-  display: none;
-}
-
-.dashboard *[data-app-name='todo'] td {
-  color: white !important;
-  background-color: #efa02d !important;
-}
-
-.widget-network .app-item:not(:first-child) {
-  padding-top: 10px;
-}
-.widget-network .app-item {
-  padding-bottom: 10px;
-}
-.widget-network .app-item-contents {
-  padding-left: 10px;
-  font-size: 11px;
-}
-.widget-network .app-item-contents--text {
-  padding: 10px 2px 10px 0px;
-}
-.widget-network .app-item-contents--text a {
-  color: #097891;
-}
-.widget-network .app-item-contents--link {
-  height: 70px;
-}
-.widget-network .app-item-contents--link-image {
-  float: left;
-  margin-right: 10px;
-}
-.widget-network .app-item-contents--link-title {
-  position: relative;
-  top: 10px;
-  font-weight: bold;
-}
-.widget-network .app-item-contents--link-url {
-  position: relative;
-  top: 10px;
-}
-.widget-network .app-item-contents--image {
-  height: 70px;
-}
-
-.widget-more {
-  float: right;
-  height: 40px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.widget-more-text {
-  float: left;
-  padding: 10px;
-}
-
-.widget-more-arrow {
-  position: relative;
-  float: left;
-  width: 40px;
-  height: 40px;
-}
-.widget-more-arrow .absolute-center {
-  height: 24px;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.app-item-contents--meta {
-  padding: 5px 0px;
-  font-size: 11px;
-}
-
-.app-item-contents--meta-item {
-  float: left;
-  padding-right: 10px;
-}
-
-.widget-title {
-  height: 50px;
-}
-
-.app-item-list .app-item {
-  border-bottom: 1px solid white;
-}
-
-.app-subitem {
-  margin-left: 40px;
-}
-
-.app-item-header {
-  min-height: 40px;
-  padding-bottom: 4px;
-}
-
-.app-item-left {
-  float: left;
-  width: 40px;
-  margin-right: 10px;
-}
-
-.app-item-title {
-  font-weight: bold;
-}
-
-.app-item-subtitle {
-  font-size: 10px;
-}
-
-.app-item-tags {
-  display: table;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-  margin: 4px 0;
-}
-
-.app-item-tags-text {
-  font-size: 11px;
-  padding: 2px 6px;
-  display: table-cell;
-}
-
-.app-item-tags-icon {
-  padding: 3px;
-  display: table-cell;
-}
-
-.margin-left-app-item {
-  margin-left: 40px;
-}
-
-.widget-footer {
-  height: 40px;
-}
-
-.app-item-summary-left {
-  float: left;
-  width: 40px;
-  height: 40px;
-  text-align: center;
-}
-
-.app-item-summary-left--title {
-  font-size: 16px;
-}
-
-.app-item-summary-left--subtitle {
-  position: relative;
-  top: -5px;
-  font-size: 10px;
-}
-
-.app-item-summary-contents {
-  float: left;
-  max-width: 70%;
-  padding-left: 10px;
-  overflow: hidden;
-  box-sizing: border-box;
-  text-overflow: ellipsis;
-}
-
-.app-item-summary-contents--title {
-  font-size: 12px;
-  text-decoration: underline;
-}
-
-.app-item-summary-contents--subtitle {
-  font-size: 11px;
-}
-
-.app-item-summary-right {
-  position: relative;
-  float: right;
-  height: 40px;
-}
-.app-item-summary-right .absolute-center {
-  height: 20px;
-  width: 20px;
-}
-
-.app-item-summary-right-icon {
-  padding: 10px;
-}
-
-.list-group img {
-  vertical-align: inherit;
-}
-
-.list-group-item {
-  width: 100%;
-  height: 40px;
-}
-
-.list-group > * {
-  height: 40px;
-  line-height: 40px;
-}
-
-.item-text {
-  padding: 10px 0px;
-  line-height: 20px;
-}
-
-.item-title:focus {
-  outline: none !important;
-}
-
-.lists-container .item-box {
-  height: 39px;
-  font-size: 16px;
-}
-.lists-container .item-text {
-  font-size: 11px;
-}
-
-.lists-new-container .item-text {
-  font-size: 12px;
-}
-
-.items-container {
-  padding-top: 15px;
-}
-.items-container .item-box {
-  height: 40px;
-}
-.items-container .item-title {
-  border: 1px solid transparent;
-}
-
-.list-group-container .list-group-item {
-  margin-bottom: 5px;
-}
-
-.list-group .item-box {
-  float: left;
-  width: 40px;
-  text-align: center;
-}
-.list-group .item-text {
-  position: absolute;
-  float: left;
-  padding-left: 15px;
-}
-.list-group .item-title {
-  float: left;
-}
-.list-group .item-text-buttons {
-  position: relative;
-  top: -5px;
-  padding-left: 15px;
-  z-index: 20;
-  display: none;
-}
-.list-group .item-text-buttons-wrapper {
-  position: relative;
-}
-.list-group .item-text-padleft {
-  padding-left: 15px;
-}
-.list-group .item-text-right {
-  position: relative;
-  float: left;
-  padding-left: 15px;
-  z-index: 10;
-}
-.list-group .item-title-input {
-  display: none;
-  border: 0 none;
-  padding: 0;
-  margin: 0;
-  outline: 0;
-  resize: none;
-  font-size: 14px;
-  -webkit-transition: none;
-  -moz-transition: none;
-  -ms-transition: none;
-  -o-transition: none;
-  transition: none;
-}
-.list-group .item-title-input:focus {
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
-
-.item-container-right {
-  float: right;
-}
-
-.todo-colors,
-.todo-colors:hover {
-  color: white !important;
-  background-color: #efa02d !important;
-}
-
-.todo-colors .list-group-item {
-  color: white;
-  background-color: #efa02d;
-}
-.todo-colors .list-group-item a {
-  color: white;
-}
-
-.calendar-colors {
-  background-color: #779b48;
-}
-
-.calendar-colors .darker {
-  background-color: #4c622f;
-}
-
-.calendar-colors.darker {
-  background-color: #4c622f;
-}
-
-.files-colors {
-  background-color: #14a085;
-}
-
-.etherpad-colors {
-  background-color: #e55c55;
-}
-
-.select2-avatar select {
-  width: 40px !important;
-}
-
-.select2-avatar .select2-choice {
-  width: 40px !important;
-  height: 40px !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  border: 0 !important;
-}
-
-.select2-avatar .select2-search-choice-close,
-.select2-avatar .select2-arrow {
-  display: none !important;
-}
-
-.select2-avatar .select2-choice > .select2-chosen {
-  margin-right: 0 !important;
-}
-
-.select2-search {
-  padding: 0;
-}
-
-.select2-search input {
-  padding: 0 0 0 5px !important;
-  border: 0;
-  background: none;
-}
-
-.select2-drop {
-  min-width: 300px;
-}
-
-.select2-drop {
-  border: 0 !important;
-  box-shadow: none !important;
-  -webkit-box-shadow: none !important;
-}
-
+.select2-dropdown-open.select2-drop-above .select2-choice,
+.select2-dropdown-open.select2-drop-above .select2-choices,
+.select2-container-multi.select2-container-active .select2-choices,
+.select2-container-multi.select2-container-active .select2-choice,
+.select2-drop.select2-drop-above.select2-drop-active,
+.select2-container-active .select2-choice,
+.select2-container-active .select2-choices,
 .select2-drop-active {
-  border: 0;
+  border-width: 0;
+  background-color: white;
 }
 
-.select2-results {
-  padding: 0;
-  margin: 0;
+.select2-results .select2-highlighted {
+  background-color: #949494;
+  color: white;
 }
 
-.select2-results .select2-result-label {
-  padding: 0 !important;
-}
-
-.icon-calendar-new {
-  line-height: 38px;
-  font-size: 1.5em;
-  text-align: right !important;
+.select2-container-multi .select2-choices .select2-search-choice {
+  border-width: 0;
+  background-image: none;
+  background-color: #dbdbdb;
+  color: #333333;
 }

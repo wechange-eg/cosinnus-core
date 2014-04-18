@@ -1,73 +1,84 @@
 <!DOCTYPE html>
-<html class="htmlclass">
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
 		<title>Gabelstaplerfahren | Dokumente</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<!-- TODO: Favicon -->
 
 		<link href="static/css/bootstrap3-cosinnus.css" rel="stylesheet">
 		<link rel="stylesheet" href="static/css/vendor/font-awesome.min.css">
-
-		<script src="static/js/vendor/jquery-1.10.2.min.js"></script>
-		<script src="static/js/vendor/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="static/css/vendor/select2.css">
 		<link href="static/css/cosinnus.css" rel="stylesheet">
 
+		<script src="static/js/vendor/jquery-2.1.0.min.js"></script>
+		<script src="static/js/vendor/bootstrap.min.js"></script>
+		<script src="static/js/vendor/select2.min.js"></script>
+		<script src="static/js/cosinnus.js"></script>
 	</head>
-	<body class="bodyclass group1-background ">
+	<body>
 		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 			<div class="container">
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Navigation ab-/abschalten</span>
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Navigation an-/abschalten</span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<!--
-						TODO: Logo
-						<a class="navbar-brand" href="/"><img height="18" src="static/img/neww_logo.png" alt="Logo" /></a>
-					-->
-					<ul class="nav navbar-nav navbar-left group-top-dropdown-menu main-menu-colors">
+ 					<a class="navbar-brand" href="#">
+						<!-- TODO: Logo -->
+						<i class="fa fa-home"></i>
+					</a>
+				</div><!-- navbar-header -->
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-left">
 						<li class="dropdown">
-							<a href="/group/test/" class="icon-home2 header-icon"></a>
-							<a href="#" class="dropdown-toggle pull-left" data-toggle="dropdown">Test<b class="caret"></b></a>
-							<ul class="dropdown-menu main-menu-colors">
-								<li class="active"><a href="/group/test/">Test</a></li>
-								<li class="divider"></li>
-								<li><a href="/groups/">Alle Gruppen auflisten</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav navbar-right">
-						<span class="icon-search header-icon pull-left"></span>
-						<img class="avatar-img avatar-top-menu" src=""/>
-						<li class="dropdown main-menu-colors">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-		            Thomas<b class="caret"></b>
+								Gabelstaplerfahren
+								<i class="fa fa-caret-down"></i>
 							</a>
-							<ul class="dropdown-menu main-menu-colors">
-								<li><a href="/profile/">Profil</a></li>
-								<li><a href="/profile/dashboard/">Dashboard</a></li>
-								<li><a href="/logout/">Abmelden</a></li>
+							<ul class="dropdown-menu">
+								<li><a href="#">Mauern</a></li>
+								<li class="active"><a href="#">Gabelstaplerfahren</a></li>
+								<li><a href="#">Fliesen legen</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Alle Gruppen auflisten</a></li>
+							</ul>
+						</li>
+					</ul>
+
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								Alice
+								<i class="fa fa-caret-down"></i>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Profil bearbeiten</a></li>
+								<li><a href="#">Logout</a></li>
 							</ul>
 						</li>
 					</ul>
 				</div>
+
 			</div>
 		</nav>
 
-		<!-- start with left navigation -->
-		<div class="container main-container app-documents">
+		<!-- the whole page is in a row containing a left navigation and the content -->
+		<div class="container app-etherpad">
 			<div class="row">
+				<!-- start with left navigation -->
 				<div class="col-lg-3 col-md-3 col-sm-3"><!-- left column -->
 
-					<div class="btn-group w100 clickarea-extra-emphasized large-space">
-						<button type="button" class="btn  dropdown-toggle w100" data-toggle="dropdown">
+					<div class="btn-group w100 large-space">
+						<button type="button" class="btn btn-appnavi dropdown-toggle w100" data-toggle="dropdown">
 							<ul class="media-list">
 								<li class="media">
+									<a class="pull-left" href="#">
+									</a>
 									<a class="pull-left" href="#">
 										<i class="fa fa-book"></i>
 									</a>
@@ -80,7 +91,7 @@
 								</li>
 							</ul>
 						</button>
-						<ul class="dropdown-menu apps-dropdown-menu w100" role="menu">
+						<ul class="dropdown-menu w100" role="menu">
 							<li><a href="/group/test/message/">Nachricht</a></li>
 							<li><a href="/group/test/note/">Neuigkeiten</a></li>
 							<li><a href="/group/test/etherpad/">Etherpad</a></li>
@@ -91,10 +102,10 @@
 						</ul>
 					</div><!-- btn-group -->
 
-					<button type="button" class="btn w100 clickarea-emphasized fine-space">
+					<button type="button" class="btn w100 btn-emphasized fine-space">
 						<ul class="media-list">
 							<li class="media">
-								<a class="pull-left clickarea-extra-emphasized" href="#">
+								<a class="pull-left" href="#">
 									<i class="fa fa-reply"></i>
 								</a>
 								<a class="pull-right" href="#"></a><!-- only block width -->
@@ -105,10 +116,10 @@
 						</ul>
 					</button>
 
-					<button type="button" class="btn w100 clickarea-emphasized fine-space">
+					<button type="button" class="btn w100 btn-emphasized fine-space">
 						<ul class="media-list">
 							<li class="media">
-								<a class="pull-left clickarea-extra-emphasized" href="#">
+								<a class="pull-left" href="#">
 									4
 								</a>
 								<a class="pull-right" href="#">
@@ -120,10 +131,10 @@
 							</li>
 						</ul>
 					</button>
-					<button type="button" class="btn  w100 clickarea-emphasized regular-space">
+					<button type="button" class="btn  w100 btn-emphasized regular-space">
 						<ul class="media-list">
 							<li class="media">
-								<a class="pull-left clickarea-extra-emphasized" href="#">
+								<a class="pull-left" href="#">
 									3
 								</a>
 								<a class="pull-right" href="#"></a><!-- only block width -->
@@ -134,7 +145,7 @@
 						</ul>
 					</button>
 
-					<button type="button" class="btn w100">
+					<button type="button" class="btn btn-default w100">
 						<ul class="media-list">
 							<li class="media">
 								<a class="pull-left" href="#">
@@ -161,158 +172,178 @@
 					</ol>
 
 					<div class="row">
-						<div class="col-xs-12 content-box"><!-- content-box -->
-
-							<ul class="media-list large-space">
-								<li class="media">
-									<a class="pull-left clickarea-extra-emphasized" href="#">
-										<i class="fa fa-plus"></i>
-									</a>
-									<div class="media-body">
-										Lege ein neues Dokument an.
-									</div>
-								</li>
-							</ul>
-
-
-							<ul class="media-list clickarea-emphasized regular-space">
-								<li class="media">
-									<a class="pull-left" href="#">
-										<i class="fa fa-book"></i>
-									</a>
-									<a class="pull-right" href="#">
-										<i class="fa  fa-chevron-down"></i>
-									</a>
-									<a class="pull-right" href="#">
-										<i class="fa fa-chain"></i>
-									</a>
-									<div class="media-body">
-										Protokoll vom Plenum am 23.02.2014
-									</div>
-								</li>
-							</ul>
-
-							<ul class="media-list clickarea-emphasized regular-space">
-								<li class="media">
-									<a class="pull-left" href="#">
-										<i class="fa fa-book"></i>
-									</a>
-									<a class="pull-right" href="#">
-										<i class="fa  fa-chevron-down"></i>
-									</a>
-									<a class="pull-right" href="#">
-										<i class="fa fa-chain"></i>
-									</a>
-									<div class="media-body">
-										Protokoll vom Plenum am 26.02.2014
-									</div>
-								</li>
-							</ul>
-
-							<ul class="media-list clickarea-emphasized regular-space">
-								<li class="media">
-									<a class="pull-left" href="#">
-										<i class="fa fa-book"></i>
-									</a>
-									<a class="pull-right" href="#">
-										<i class="fa  fa-chevron-down"></i>
-									</a>
-									<a class="pull-right" href="#">
-										<i class="fa fa-chain"></i>
-									</a>
-									<div class="media-body">
-										Protokoll vom Plenum am 12.07.2013
-									</div>
-								</li>
-							</ul>
-
-							<div class="fadedown">
-								<ul class="media-list clickarea-emphasized">
-									<li class="media">
-										<a class="pull-left" href="#">
-											<i class="fa fa-book"></i>
-										</a>
-										<a class="pull-right" href="#">
-											<i class="fa fa-chevron-down"></i>
-										</a>
-										<a class="pull-right" href="#">
-											<i class="fa fa-chain"></i>
-										</a>
-										<div class="media-body">
-											Protokoll vom Plenum am 01.04.2013
-										</div>
-									</li>
-								</ul>
-
-								<ol class="input-area" style="display:none;">
-									<li>
-										<ol>
-											<li>
-												Personen
-											</li>
-											<li>
-												Tags
-											</li>
-											<li>
-												Anhänge (Termine)
-											</li>
-										</ol>
-									</li>
-									<li>
-										<ol>
-											<li>
-												Ort
-											</li>
-											<li>
-												Uhr
-											</li>
-											<li>
-												Blitz
-											</li>
-											<li>
-												Leuchte
-											</li>
-											<li>
-												Privatsphäre
-											</li>
-										</ol>
-									</li>
-								</ol><!-- input-area -->
-
-
-								<button type="button" class="btn clickarea-emphasized" style="display:none;">
+						<div class="col-xs-12">
+							<!-- a box with semi transparent background -->
+							<div class="content-box">
+								<div type="button" class="btn btn-default w100 large-space">
 									<ul class="media-list">
 										<li class="media">
-											<a class="pull-left clickarea-extra-emphasized" href="#">
-												<i class="fa fa-eraser"></i>
+											<a class="pull-left" href="#">
+												<i class="fa fa-plus"></i>
 											</a>
 											<div class="media-body">
-												Löschen
+												Lege ein neues Dokument an.
 											</div>
 										</li>
 									</ul>
-								</button>
-								<button type="button" class="btn clickarea-emphasized" style="display:none;">
+								</div>
+
+								<div type="button" class="btn btn-emphasized w100 regular-space">
 									<ul class="media-list">
 										<li class="media">
-											<a class="pull-left clickarea-extra-emphasized" href="#">
-												<i class="fa fa-pencil"></i>
+											<a class="pull-left" href="#">
+												<i class="fa fa-book"></i>
+											</a>
+											<a class="pull-right" href="#">
+												<i class="fa  fa-chevron-down"></i>
+											</a>
+											<a class="pull-right" href="#">
+												<i class="fa fa-chain"></i>
 											</a>
 											<div class="media-body">
-												Bearbeiten
+												Protokoll vom Plenum am 23.02.2014
 											</div>
 										</li>
 									</ul>
-								</button>
-							</div><!-- fadedown -->
+								</div>
 
-						</div><!-- content-box -->
+								<div type="button" class="btn btn-emphasized w100 regular-space">
+									<ul class="media-list">
+										<li class="media">
+											<a class="pull-left" href="#">
+												<i class="fa fa-book"></i>
+											</a>
+											<a class="pull-right" href="#">
+												<i class="fa  fa-chevron-down"></i>
+											</a>
+											<a class="pull-right" href="#">
+												<i class="fa fa-chain"></i>
+											</a>
+											<div class="media-body">
+												Protokoll vom Plenum am 26.02.2014
+											</div>
+										</li>
+									</ul>
+								</div>
+
+								<div type="button" class="btn btn-emphasized w100 regular-space">
+									<ul class="media-list">
+										<li class="media">
+											<a class="pull-left" href="#">
+												<i class="fa fa-book"></i>
+											</a>
+											<a class="pull-right" href="#">
+												<i class="fa  fa-chevron-down"></i>
+											</a>
+											<a class="pull-right" href="#">
+												<i class="fa fa-chain"></i>
+											</a>
+											<div class="media-body">
+												Protokoll vom Plenum am 12.07.2013
+											</div>
+										</li>
+									</ul>
+								</div>
+
+								<div class="fadedown regular-space">
+									<div class="btn btn-emphasized w100">
+										<ul class="media-list">
+											<li class="media">
+												<a class="pull-left" href="#">
+													<i class="fa fa-book"></i>
+												</a>
+												<a class="pull-right" href="#">
+													<i class="fa fa-chevron-down"></i>
+												</a>
+												<a class="pull-right" href="#">
+													<i class="fa fa-chain"></i>
+												</a>
+												<div class="media-body">
+													Protokoll vom Plenum am 01.04.2013
+												</div>
+											</li>
+										</ul>
+									</div>
+
+									<ol class="input-area" style="Xdisplay:none;">
+										<li>
+											<ol>
+												<li>
+													<i class="fa fa-user"></i>
+													<select class="user-selector" multiple="multiple" data-placeholder="Benutzer">
+														<option value="Al">Alice</option>
+														<option value="Bo">Bob</option>
+														<option value="Cy">Cindy</option>
+													</select>
+												</li>
+												<li>
+													<i class="fa fa-tags"></i>
+														<input type="hidden" class="tags-selector" data-tags="Baustelle, Gewerk, Elektrik" data-placeholder="Tags" />
+												</li>
+												<li>
+													<i class="fa fa-paperclip"></i>
+													(Anhänge)
+												</li>
+											</ol>
+										</li>
+										<li>
+											<ol>
+												<li>
+													<i class="fa fa-map-marker"></i>
+													<input type="hidden" class="location-selector" data-tags="Berlin, Kreuzberg, Oranienhof, Köln, Paris, London, Frankfurt, New York, Peking" data-placeholder="Ort" />
+												</li>
+												<li>
+													<i class="fa fa-clock-o"></i>
+													Uhr
+												</li>
+												<li>
+													Blitz
+												</li>
+												<li>
+													Leuchte
+												</li>
+												<li>
+													<i class="fa fa-fw fa-globe"></i>
+													<select class="privacy-selector">
+														<option selected="selected" value="public">Öffentlich</option>
+														<option value="private"></i>Privat</option>
+													</select>
+												</li>
+											</ol>
+										</li>
+									</ol><!-- input-area -->
+
+									<button type="button" class="btn btn-emphasized" style="Xdisplay:none;">
+										<ul class="media-list">
+											<li class="media">
+												<a class="pull-left" href="#">
+													<i class="fa fa-eraser"></i>
+												</a>
+												<div class="media-body">
+													Löschen
+												</div>
+											</li>
+										</ul>
+									</button>
+									<button type="button" class="btn btn-emphasized" style="Xdisplay:none;">
+										<ul class="media-list">
+											<li class="media">
+												<a class="pull-left" href="#">
+													<i class="fa fa-pencil"></i>
+												</a>
+												<div class="media-body">
+													Bearbeiten
+												</div>
+											</li>
+										</ul>
+									</button>
+								</div><!-- fadedown -->
+							</div><!-- content-box -->
+						</div><!-- col -->
 					</div><!-- row -->
 				</div><!-- right column -->
 			</div><!-- row -->
-		</div><!-- main-container -->
-
-		<script src="static/js/cosinnus.js"></script>
+		</div><!-- main container -->
 
 		<script src='//localhost:3000/socket.io/socket.io.js'></script>
 		<script>var ___socket___ = io.connect('http://localhost:3000');</script>
