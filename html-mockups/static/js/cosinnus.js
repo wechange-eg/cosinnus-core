@@ -133,6 +133,26 @@
 				$(this).addClass('expanded');
 			});
 
+		},
+
+		todosSelect : function() {
+			$('body').on('click','.fa-square-o',function() {
+				$(this).removeClass('fa-square-o');
+				$(this).addClass('fa-check-square-o');
+			});
+			$('body').on('click','.fa-check-square-o',function() {
+				$(this).removeClass('fa-check-square-o');
+				$(this).addClass('fa-square-o');
+			});
+
+			$('body').on('click','.fa-star-o',function() {
+				$(this).removeClass('fa-star-o');
+				$(this).addClass('fa-star');
+			});
+			$('body').on('click','.fa-star',function() {
+				$(this).removeClass('fa-star');
+				$(this).addClass('fa-star-o');
+			});
 		}
 	};
 })( jQuery );
@@ -144,4 +164,5 @@ $(function() {
 	$.cosinnus.selectors();
 	$.cosinnus.fullcalendar();
 	$.cosinnus.searchbar();
+	$.cosinnus.todosSelect();
 });

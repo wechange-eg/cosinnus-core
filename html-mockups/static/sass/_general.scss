@@ -5,7 +5,7 @@
 .w100 {
   width: 100%;
 	margin:0;
-	float:none;
+	float: none;
 }
 
 // spaces below full width elements
@@ -70,7 +70,7 @@ border-top:1px solid $app-neutral-color-light;
 
 /* The serachbar in the fixed top navigation */
 #searchbar {
-	padding: 15px;
+	padding: 15px 15px 6px 10px;
 	white-space: nowrap;
 	color: $app-neutral-color-dark;
 	font-size: 1.1em;
@@ -84,11 +84,13 @@ border-top:1px solid $app-neutral-color-light;
 	display: inline;
 	margin-top: -10px;
 	color: transparent;
+	border-width: 0;
 }
 #searchbar.expanded input {
 	width: 250px;
 	transition: all 500ms linear;
 	color: $app-neutral-color-dark;
+	box-shadow: none;
 }
 
 

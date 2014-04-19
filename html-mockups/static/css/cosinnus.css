@@ -121,12 +121,23 @@ body {
   color: inherit;
 }
 
-.btn-default .media > .pull-left {
+.btn-default .media > .pull-left,
+.btn-default .media > .pull-right
+.fadedown.open .btn-default .media > .pull-right {
   color: white;
 }
 
-.btn-default .media > .pull-right {
+.fadedown .btn-default .media > .pull-right {
   color: transparent;
+}
+
+/* Quadratic images at side of buttons */
+.pull-left img, .pull-right img {
+  width: 40px;
+}
+
+.pull-left input, .pull-right input {
+  border-width: 0;
 }
 
 /* put a class like .app-documents, .app-todos on areas that contain content in app colors.
@@ -163,7 +174,9 @@ body {
 .app-calendar .btn-appnavi:hover .media > .pull-left,
 .app-calendar .btn-extra-emphasized .media > .pull-left,
 .app-calendar .btn-extra-emphasized:hover .media > .pull-right,
+.app-calendar .fadedown .btn-extra-emphasized:hover .media > .pull-right,
 .app-calendar .btn-emphasized:hover .media > .pull-right,
+.app-calendar .fadedown .btn-emphasized:hover .media > .pull-right,
 .app-calendar .btn-appnavi:hover .media > .pull-right {
   color: white;
   background-color: #4c622f;
@@ -175,9 +188,13 @@ body {
   background-color: transparent;
   color: inherit;
 }
-.app-calendar .btn-emphasized .media > .pull-right,
+.app-calendar .fadedown.open .btn-emphasized .media > .pull-right,
+.app-calendar .fadedown.open .btn-extra-emphasized .media > .pull-right {
+  color: white;
+}
+.app-calendar .fadedown .btn-emphasized .media > .pull-right,
 .app-calendar .btn-appnavi .media > .pull-right,
-.app-calendar .btn-extra-emphasized .media > .pull-right {
+.app-calendar .fadedown .btn-extra-emphasized .media > .pull-right {
   color: transparent;
 }
 .app-calendar .fine-space {
@@ -208,7 +225,9 @@ body {
 .app-files .btn-appnavi:hover .media > .pull-left,
 .app-files .btn-extra-emphasized .media > .pull-left,
 .app-files .btn-extra-emphasized:hover .media > .pull-right,
+.app-files .fadedown .btn-extra-emphasized:hover .media > .pull-right,
 .app-files .btn-emphasized:hover .media > .pull-right,
+.app-files .fadedown .btn-emphasized:hover .media > .pull-right,
 .app-files .btn-appnavi:hover .media > .pull-right {
   color: white;
   background-color: #0a5d4e;
@@ -220,9 +239,13 @@ body {
   background-color: transparent;
   color: inherit;
 }
-.app-files .btn-emphasized .media > .pull-right,
+.app-files .fadedown.open .btn-emphasized .media > .pull-right,
+.app-files .fadedown.open .btn-extra-emphasized .media > .pull-right {
+  color: white;
+}
+.app-files .fadedown .btn-emphasized .media > .pull-right,
 .app-files .btn-appnavi .media > .pull-right,
-.app-files .btn-extra-emphasized .media > .pull-right {
+.app-files .fadedown .btn-extra-emphasized .media > .pull-right {
   color: transparent;
 }
 .app-files .fine-space {
@@ -253,7 +276,9 @@ body {
 .app-documents .btn-appnavi:hover .media > .pull-left,
 .app-documents .btn-extra-emphasized .media > .pull-left,
 .app-documents .btn-extra-emphasized:hover .media > .pull-right,
+.app-documents .fadedown .btn-extra-emphasized:hover .media > .pull-right,
 .app-documents .btn-emphasized:hover .media > .pull-right,
+.app-documents .fadedown .btn-emphasized:hover .media > .pull-right,
 .app-documents .btn-appnavi:hover .media > .pull-right {
   color: white;
   background-color: #007999;
@@ -265,9 +290,13 @@ body {
   background-color: transparent;
   color: inherit;
 }
-.app-documents .btn-emphasized .media > .pull-right,
+.app-documents .fadedown.open .btn-emphasized .media > .pull-right,
+.app-documents .fadedown.open .btn-extra-emphasized .media > .pull-right {
+  color: white;
+}
+.app-documents .fadedown .btn-emphasized .media > .pull-right,
 .app-documents .btn-appnavi .media > .pull-right,
-.app-documents .btn-extra-emphasized .media > .pull-right {
+.app-documents .fadedown .btn-extra-emphasized .media > .pull-right {
   color: transparent;
 }
 .app-documents .fine-space {
@@ -298,7 +327,9 @@ body {
 .app-todos .btn-appnavi:hover .media > .pull-left,
 .app-todos .btn-extra-emphasized .media > .pull-left,
 .app-todos .btn-extra-emphasized:hover .media > .pull-right,
+.app-todos .fadedown .btn-extra-emphasized:hover .media > .pull-right,
 .app-todos .btn-emphasized:hover .media > .pull-right,
+.app-todos .fadedown .btn-emphasized:hover .media > .pull-right,
 .app-todos .btn-appnavi:hover .media > .pull-right {
   color: white;
   background-color: #ad7e2c;
@@ -310,9 +341,13 @@ body {
   background-color: transparent;
   color: inherit;
 }
-.app-todos .btn-emphasized .media > .pull-right,
+.app-todos .fadedown.open .btn-emphasized .media > .pull-right,
+.app-todos .fadedown.open .btn-extra-emphasized .media > .pull-right {
+  color: white;
+}
+.app-todos .fadedown .btn-emphasized .media > .pull-right,
 .app-todos .btn-appnavi .media > .pull-right,
-.app-todos .btn-extra-emphasized .media > .pull-right {
+.app-todos .fadedown .btn-extra-emphasized .media > .pull-right {
   color: transparent;
 }
 .app-todos .fine-space {
@@ -343,7 +378,9 @@ body {
 .app-etherpad .btn-appnavi:hover .media > .pull-left,
 .app-etherpad .btn-extra-emphasized .media > .pull-left,
 .app-etherpad .btn-extra-emphasized:hover .media > .pull-right,
+.app-etherpad .fadedown .btn-extra-emphasized:hover .media > .pull-right,
 .app-etherpad .btn-emphasized:hover .media > .pull-right,
+.app-etherpad .fadedown .btn-emphasized:hover .media > .pull-right,
 .app-etherpad .btn-appnavi:hover .media > .pull-right {
   color: white;
   background-color: #933d39;
@@ -355,13 +392,22 @@ body {
   background-color: transparent;
   color: inherit;
 }
-.app-etherpad .btn-emphasized .media > .pull-right,
+.app-etherpad .fadedown.open .btn-emphasized .media > .pull-right,
+.app-etherpad .fadedown.open .btn-extra-emphasized .media > .pull-right {
+  color: white;
+}
+.app-etherpad .fadedown .btn-emphasized .media > .pull-right,
 .app-etherpad .btn-appnavi .media > .pull-right,
-.app-etherpad .btn-extra-emphasized .media > .pull-right {
+.app-etherpad .fadedown .btn-extra-emphasized .media > .pull-right {
   color: transparent;
 }
 .app-etherpad .fine-space {
   border-bottom: 1px solid #ede2e1;
+}
+
+.annotation {
+  float: right;
+  font-size: 0.9em;
 }
 
 /* Classes that can be found in many pages and are not part of Twitter Bootstrap */
@@ -443,7 +489,7 @@ body .large-space {
 
 /* The serachbar in the fixed top navigation */
 #searchbar {
-  padding: 15px;
+  padding: 15px 15px 6px 10px;
   white-space: nowrap;
   color: #333333;
   font-size: 1.1em;
@@ -458,12 +504,14 @@ body .large-space {
   display: inline;
   margin-top: -10px;
   color: transparent;
+  border-width: 0;
 }
 
 #searchbar.expanded input {
   width: 250px;
   transition: all 500ms linear;
   color: #333333;
+  box-shadow: none;
 }
 
 .fadedown:before, .fadedown:after {

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Gabelstaplerfahren | Dokumente</title>
+		<!-- TODO: Favicon -->
+
+		<link href="static/css/bootstrap3-cosinnus.css" rel="stylesheet">
+		<link rel="stylesheet" href="static/css/vendor/font-awesome.min.css">
+		<link rel="stylesheet" href="static/css/vendor/select2.css">
+		<link rel="stylesheet" href="static/css/vendor/fullcalendar.css">
+		<link href="static/css/cosinnus.css" rel="stylesheet">
+
+		<script src="static/js/vendor/jquery-2.1.0.min.js"></script>
+		<script src="static/js/vendor/bootstrap.min.js"></script>
+		<script src="static/js/vendor/select2.min.js"></script>
+		<script src="static/js/vendor/fullcalendar.min.js"></script>
+		<script src="static/js/cosinnus.js"></script>
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Navigation an-/abschalten</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+ 					<a class="navbar-brand" href="#">
+						<!-- TODO: Logo -->
+						<i class="fa fa-home"></i>
+					</a>
+				</div><!-- navbar-header -->
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-left">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								Gabelstaplerfahren
+								<i class="fa fa-caret-down"></i>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Mauern</a></li>
+								<li class="active"><a href="#">Gabelstaplerfahren</a></li>
+								<li><a href="#">Fliesen legen</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Alle Gruppen auflisten</a></li>
+							</ul>
+						</li>
+					</ul>
+
+					<ul class="nav navbar-nav navbar-right">
+						<li id="searchbar">
+							<input class="form-control" placeholder="Suchbegriff" value="" />
+							<i class="fa fa-search"></i>
+						</li>
+						<li>
+							<a href="#">
+								<i class="fa fa-envelope"></i>
+							</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<img src="avatar.png" />
+								Alice
+								<i class="fa fa-caret-down"></i>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Profil bearbeiten</a></li>
+								<li><a href="#">Logout</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+		</nav>
+
+		<!-- the whole page is in a row containing a left navigation and the content -->
+		<div class="container app-documents">
+			<div class="row">
+				<!-- start with left navigation -->
+				<div class="col-lg-3 col-md-3"><!-- left column -->
+
+					<div class="btn-group w100 large-space">
+						<button type="button" class="btn btn-appnavi dropdown-toggle w100" data-toggle="dropdown">
+							<ul class="media-list">
+								<li class="media">
+									<a class="pull-left" href="#">
+									</a>
+									<a class="pull-left" href="#">
+										<i class="fa fa-book"></i>
+									</a>
+									<a class="pull-right" href="#">
+										<i class="fa fa-caret-down"></i>
+									</a>
+									<div class="media-body">
+										Dokumente
+									</div>
+								</li>
+							</ul>
+						</button>
+						<ul class="dropdown-menu w100" role="menu">
+							<li><a href="/group/test/message/">Nachricht</a></li>
+							<li><a href="/group/test/note/">Neuigkeiten</a></li>
+							<li><a href="/group/test/etherpad/">Etherpad</a></li>
+							<li><a href="/group/test/event/">Veranstaltungen</a></li>
+							<li><a href="/group/test/file/">Dateien</a></li>
+							<li><a href="/group/test/todo/">Todos</a></li>
+							<li class="active"><a href="/group/test/document/">Dokumente</a></li>
+						</ul>
+					</div><!-- btn-group -->
+
+					<button type="button" class="btn w100 btn-emphasized">
+						<ul class="media-list">
+							<li class="media">
+								<a class="pull-left" href="#">
+									<i class="fa fa-reply"></i>
+								</a>
+								<a class="pull-right" href="#"></a><!-- only block width -->
+								<div class="media-body">
+									Zurück zu „Protokolle“
+								</div>
+							</li>
+						</ul>
+					</button>
+
+				</div><!-- left column -->
+
+
+				<!-- now the content -->
+				<div class="col-lg-9 col-md-9"><!-- right column -->
+
+     			<ol class="breadcrumb">
+						<li><a href="#">Testgruppe</a></li>
+						<li><a href="#">Dokumente</a></li>
+						<li><a href="#">Protokolle</a></li>
+						<li class="active">Protokoll vom Plenum am 01.04.2014</li>
+					</ol>
+
+					<div class="row">
+						<div class="col-xs-12">
+							<!-- a box with semi transparent background -->
+							<div class="content-box">
+								<div type="button" class="btn btn-default w100 large-space">
+									<ul class="media-list">
+										<li class="media">
+											<a class="pull-left" href="#">
+												<i class="fa fa-plus"></i>
+											</a>
+											<div class="media-body">
+												<input class="form-control"
+													placeholder="Gib den Titel für ein neues Dokument ein."
+													value="" />
+											</div>
+										</li>
+									</ul>
+								</div>
+
+								<div class="btn btn-emphasized w100">
+									<ul class="media-list">
+										<li class="media">
+											<a class="pull-left" href="#">
+												<i class="fa fa-book"></i>
+											</a>
+											<a class="pull-right" href="#">
+												<i class="fa fa-chevron-down"></i>
+											</a>
+											<a class="pull-right" href="#">
+												<i class="fa fa-chain"></i>
+											</a>
+											<div class="media-body">
+												Protokoll vom Plenum am 01.04.2013
+											</div>
+										</li>
+									</ul>
+								</div>
+
+								<ol class="input-area">
+									<li>
+										<ol>
+											<li>
+												<i class="fa fa-user"></i>
+												<select class="user-selector" multiple="multiple" data-placeholder="Benutzer">
+													<option value="Al">Alice</option>
+													<option value="Bo">Bob</option>
+													<option value="Cy">Cindy</option>
+												</select>
+											</li>
+											<li>
+												<i class="fa fa-tags"></i>
+													<input type="hidden" class="tags-selector" data-tags="Baustelle, Gewerk, Elektrik" data-placeholder="Tags" />
+											</li>
+											<li>
+												<i class="fa fa-paperclip"></i>
+												(Anhänge)
+											</li>
+										</ol>
+									</li>
+									<li>
+										<ol>
+											<li>
+												<i class="fa fa-map-marker"></i>
+												<input type="hidden" class="location-selector" data-tags="Berlin, Kreuzberg, Oranienhof, Köln, Paris, London, Frankfurt, New York, Peking" data-placeholder="Ort" />
+											</li>
+											<li>
+												<i class="fa fa-clock-o"></i>
+												Uhr
+											</li>
+											<li>
+												<i class="fa fa-fw fa-bolt"></i>
+												<select class="bolt-selector">
+													<option selected="selected" value="flash">Blitz an</option>
+													<option value="noflash"></i>Blitz aus</option>
+												</select>
+											</li>
+											<li>
+												<i class="fa fa-fw fa-lightbulb-o"></i>
+												<select class="light-selector">
+													<option selected="selected" value="light">mit Licht</option>
+													<option value="dark"></i>im Dunkeln</option>
+												</select>
+											</li>
+											<li>
+												<i class="fa fa-fw fa-globe"></i>
+												<select class="privacy-selector">
+													<option selected="selected" value="public">Öffentlich</option>
+													<option value="private"></i>Privat</option>
+												</select>
+											</li>
+										</ol>
+									</li>
+								</ol><!-- input-area -->
+
+<p>Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans. Ein kleines Bächlein namens Duden fließt durch ihren Ort und versorgt sie mit den nötigen Regelialien.</p>
+
+<p>Es ist ein paradiesmatisches Land, in dem einem gebratene Satzteile in den Mund fliegen. Nicht einmal von der allmächtigen Interpunktion werden die Blindtexte beherrscht – ein geradezu unorthographisches Leben. Eines Tages aber beschloß eine kleine Zeile Blindtext, ihr Name war Lorem Ipsum, hinaus zu gehen in die weite Grammatik.</p>
+
+<p>Der große Oxmox riet ihr davon ab, da es dort wimmele von bösen Kommata, wilden Fragezeichen und hinterhältigen Semikoli, doch das Blindtextchen ließ sich nicht beirren. Es packte seine sieben Versalien, schob sich sein Initial in den Gürtel und machte sich auf den Weg. Als es die ersten Hügel des Kursivgebirges erklommen hatte, warf es einen letzten Blick zurück auf die Skyline seiner Heimatstadt Buchstabhausen, die Headline von Alphabetdorf und die Subline seiner eigenen Straße, der Zeilengasse. Wehmütig lief ihm eine rhetorische Frage über die Wange, dann setzte es seinen Weg fort. Unterwegs traf es eine Copy. Die Copy warnte das Blindtextchen, da, wo sie herkäme wäre sie</p>
+
+								<button type="button" class="btn btn-emphasized">
+									<ul class="media-list">
+										<li class="media">
+											<a class="pull-left" href="#">
+												<i class="fa fa-eraser"></i>
+											</a>
+											<div class="media-body">
+												Löschen
+											</div>
+										</li>
+									</ul>
+								</button>
+								<button type="button" class="btn btn-emphasized">
+									<ul class="media-list">
+										<li class="media">
+											<a class="pull-left" href="#">
+												<i class="fa fa-pencil"></i>
+											</a>
+											<div class="media-body">
+												Bearbeiten
+											</div>
+										</li>
+									</ul>
+								</button>
+				
+							</div><!-- content-box -->
+						</div><!-- col -->
+					</div><!-- row -->
+				</div><!-- right column -->
+			</div><!-- row -->
+		</div><!-- main container -->
+
+	</body>
+</html>
