@@ -2,14 +2,21 @@
 .select2-container-multi .select2-choices {
 	border-width:0;
 	background-image:none;
-	min-width:10em;
+	min-width:8em;
 }
 
 .select2-container .select2-choice .select2-arrow {
 	border-width:0;
 	background-image:none;
 	background-color:transparent;
-	color:$app-neutral-color;
+}
+.select2-container .select2-choice .select2-arrow b {
+	// arrow at right side of selectors a few pixels up
+	background-position:0 -2px;
+}
+
+.select2-container .select2-choice {
+	line-height: inherit;
 }
 
 .select2-dropdown-open.select2-drop-above .select2-choice,

@@ -10,7 +10,7 @@
 
 // spaces below full width elements
 body .fine-space {
-	border-bottom: 1px solid $app-documents-color-light;
+	border-bottom: 1px solid $app-neutral-color-light;
 }
 body .regular-space {
 	margin-bottom: 7px;
@@ -19,11 +19,20 @@ body .large-space {
 	margin-bottom: 12px;
 }
 
+// Avatar
+.navbar-fixed-top img {
+	width:35px;
+	margin:-10px 5px -10px 0;
+}
+
 // the nice semi transparent box containing the content
 .content-box {
 	padding: 15px;
 	background-color:transparentize($app-neutral-color-light, 0.7);
 	@include clearfix();
+}
+.content-box .btn.w100 {
+	text-align:left;
 }
 
 
@@ -56,5 +65,35 @@ border-top:1px solid $app-neutral-color-light;
 .input-area > li > ol > li + li {
 	border-left: 1px solid $app-neutral-color-light;
 	color: $app-neutral-color-dark;
+}
+
+
+/* The serachbar in the fixed top navigation */
+#searchbar {
+	padding: 15px;
+	white-space: nowrap;
+	color: $app-neutral-color-dark;
+	font-size: 1.1em;
+}
+#searchbar:hover {
+	background-color: $app-neutral-color-white;
+
+}
+#searchbar input {
+	width: 0px;
+	display: inline;
+	margin-top: -10px;
+	color: transparent;
+}
+#searchbar.expanded input {
+	width: 250px;
+	transition: all 500ms linear;
+	color: $app-neutral-color-dark;
+}
+
+
+// .fadedown
+.fadedown {
+	@include clearfix();
 }
 

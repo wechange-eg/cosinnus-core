@@ -11,11 +11,13 @@
 		<link href="static/css/bootstrap3-cosinnus.css" rel="stylesheet">
 		<link rel="stylesheet" href="static/css/vendor/font-awesome.min.css">
 		<link rel="stylesheet" href="static/css/vendor/select2.css">
+		<link rel="stylesheet" href="static/css/vendor/fullcalendar.css">
 		<link href="static/css/cosinnus.css" rel="stylesheet">
 
 		<script src="static/js/vendor/jquery-2.1.0.min.js"></script>
 		<script src="static/js/vendor/bootstrap.min.js"></script>
 		<script src="static/js/vendor/select2.min.js"></script>
+		<script src="static/js/vendor/fullcalendar.min.js"></script>
 		<script src="static/js/cosinnus.js"></script>
 	</head>
 	<body>
@@ -51,8 +53,18 @@
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
+						<li id="searchbar">
+							<input class="form-control" placeholder="Suchbegriff" value="" />
+							<i class="fa fa-search"></i>
+						</li>
+						<li>
+							<a href="#">
+								<i class="fa fa-envelope"></i>
+							</a>
+						</li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<img src="avatar.png" />
 								Alice
 								<i class="fa fa-caret-down"></i>
 							</a>
@@ -145,7 +157,7 @@
 						</ul>
 					</button>
 
-					<button type="button" class="btn btn-default w100">
+					<div type="button" class="btn btn-default w100">
 						<ul class="media-list">
 							<li class="media">
 								<a class="pull-left" href="#">
@@ -153,11 +165,11 @@
 								</a>
 								<a class="pull-right" href="#"></a><!-- only block width -->
 								<div class="media-body">
-									Lege einen Dings an
+									<input class="form-control" placeholder="Neuer Ordnername" value="" />
 								</div>
 							</li>
 						</ul>
-					</button>
+					</div>
 
 				</div><!-- left column -->
 
@@ -182,64 +194,9 @@
 												<i class="fa fa-plus"></i>
 											</a>
 											<div class="media-body">
-												Lege ein neues Dokument an.
-											</div>
-										</li>
-									</ul>
-								</div>
-
-								<div type="button" class="btn btn-emphasized w100 regular-space">
-									<ul class="media-list">
-										<li class="media">
-											<a class="pull-left" href="#">
-												<i class="fa fa-book"></i>
-											</a>
-											<a class="pull-right" href="#">
-												<i class="fa  fa-chevron-down"></i>
-											</a>
-											<a class="pull-right" href="#">
-												<i class="fa fa-chain"></i>
-											</a>
-											<div class="media-body">
-												Protokoll vom Plenum am 23.02.2014
-											</div>
-										</li>
-									</ul>
-								</div>
-
-								<div type="button" class="btn btn-emphasized w100 regular-space">
-									<ul class="media-list">
-										<li class="media">
-											<a class="pull-left" href="#">
-												<i class="fa fa-book"></i>
-											</a>
-											<a class="pull-right" href="#">
-												<i class="fa  fa-chevron-down"></i>
-											</a>
-											<a class="pull-right" href="#">
-												<i class="fa fa-chain"></i>
-											</a>
-											<div class="media-body">
-												Protokoll vom Plenum am 26.02.2014
-											</div>
-										</li>
-									</ul>
-								</div>
-
-								<div type="button" class="btn btn-emphasized w100 regular-space">
-									<ul class="media-list">
-										<li class="media">
-											<a class="pull-left" href="#">
-												<i class="fa fa-book"></i>
-											</a>
-											<a class="pull-right" href="#">
-												<i class="fa  fa-chevron-down"></i>
-											</a>
-											<a class="pull-right" href="#">
-												<i class="fa fa-chain"></i>
-											</a>
-											<div class="media-body">
-												Protokoll vom Plenum am 12.07.2013
+												<input class="form-control"
+													placeholder="Gib den Titel für ein neues Dokument ein."
+													value="" />
 											</div>
 										</li>
 									</ul>
@@ -265,7 +222,7 @@
 										</ul>
 									</div>
 
-									<ol class="input-area" style="Xdisplay:none;">
+									<ol class="input-area">
 										<li>
 											<ol>
 												<li>
@@ -297,10 +254,18 @@
 													Uhr
 												</li>
 												<li>
-													Blitz
+													<i class="fa fa-fw fa-bolt"></i>
+													<select class="bolt-selector">
+														<option selected="selected" value="flash">Blitz an</option>
+														<option value="noflash"></i>Blitz aus</option>
+													</select>
 												</li>
 												<li>
-													Leuchte
+													<i class="fa fa-fw fa-lightbulb-o"></i>
+													<select class="light-selector">
+														<option selected="selected" value="light">mit Licht</option>
+														<option value="dark"></i>im Dunkeln</option>
+													</select>
 												</li>
 												<li>
 													<i class="fa fa-fw fa-globe"></i>
@@ -313,7 +278,7 @@
 										</li>
 									</ol><!-- input-area -->
 
-									<button type="button" class="btn btn-emphasized" style="Xdisplay:none;">
+									<button type="button" class="btn btn-emphasized">
 										<ul class="media-list">
 											<li class="media">
 												<a class="pull-left" href="#">
@@ -325,7 +290,7 @@
 											</li>
 										</ul>
 									</button>
-									<button type="button" class="btn btn-emphasized" style="Xdisplay:none;">
+									<button type="button" class="btn btn-emphasized">
 										<ul class="media-list">
 											<li class="media">
 												<a class="pull-left" href="#">
@@ -338,6 +303,314 @@
 										</ul>
 									</button>
 								</div><!-- fadedown -->
+
+								<div class="fadedown regular-space">
+									<div class="btn btn-emphasized w100">
+										<ul class="media-list">
+											<li class="media">
+												<a class="pull-left" href="#">
+													<i class="fa fa-book"></i>
+												</a>
+												<a class="pull-right" href="#">
+													<i class="fa fa-chevron-down"></i>
+												</a>
+												<a class="pull-right" href="#">
+													<i class="fa fa-chain"></i>
+												</a>
+												<div class="media-body">
+													Protokoll vom Plenum am 01.04.2013
+												</div>
+											</li>
+										</ul>
+									</div>
+
+									<ol class="input-area">
+										<li>
+											<ol>
+												<li>
+													<i class="fa fa-user"></i>
+													<select class="user-selector" multiple="multiple" data-placeholder="Benutzer">
+														<option value="Al">Alice</option>
+														<option value="Bo">Bob</option>
+														<option value="Cy">Cindy</option>
+													</select>
+												</li>
+												<li>
+													<i class="fa fa-tags"></i>
+														<input type="hidden" class="tags-selector" data-tags="Baustelle, Gewerk, Elektrik" data-placeholder="Tags" />
+												</li>
+												<li>
+													<i class="fa fa-paperclip"></i>
+													(Anhänge)
+												</li>
+											</ol>
+										</li>
+										<li>
+											<ol>
+												<li>
+													<i class="fa fa-map-marker"></i>
+													<input type="hidden" class="location-selector" data-tags="Berlin, Kreuzberg, Oranienhof, Köln, Paris, London, Frankfurt, New York, Peking" data-placeholder="Ort" />
+												</li>
+												<li>
+													<i class="fa fa-clock-o"></i>
+													Uhr
+												</li>
+												<li>
+													<i class="fa fa-fw fa-bolt"></i>
+													<select class="bolt-selector">
+														<option selected="selected" value="flash">Blitz an</option>
+														<option value="noflash"></i>Blitz aus</option>
+													</select>
+												</li>
+												<li>
+													<i class="fa fa-fw fa-lightbulb-o"></i>
+													<select class="light-selector">
+														<option selected="selected" value="light">mit Licht</option>
+														<option value="dark"></i>im Dunkeln</option>
+													</select>
+												</li>
+												<li>
+													<i class="fa fa-fw fa-globe"></i>
+													<select class="privacy-selector">
+														<option selected="selected" value="public">Öffentlich</option>
+														<option value="private"></i>Privat</option>
+													</select>
+												</li>
+											</ol>
+										</li>
+									</ol><!-- input-area -->
+
+									<button type="button" class="btn btn-emphasized">
+										<ul class="media-list">
+											<li class="media">
+												<a class="pull-left" href="#">
+													<i class="fa fa-eraser"></i>
+												</a>
+												<div class="media-body">
+													Löschen
+												</div>
+											</li>
+										</ul>
+									</button>
+									<button type="button" class="btn btn-emphasized">
+										<ul class="media-list">
+											<li class="media">
+												<a class="pull-left" href="#">
+													<i class="fa fa-pencil"></i>
+												</a>
+												<div class="media-body">
+													Bearbeiten
+												</div>
+											</li>
+										</ul>
+									</button>
+								</div><!-- fadedown -->
+
+								<div class="fadedown regular-space">
+									<div class="btn btn-emphasized w100">
+										<ul class="media-list">
+											<li class="media">
+												<a class="pull-left" href="#">
+													<i class="fa fa-book"></i>
+												</a>
+												<a class="pull-right" href="#">
+													<i class="fa fa-chevron-down"></i>
+												</a>
+												<a class="pull-right" href="#">
+													<i class="fa fa-chain"></i>
+												</a>
+												<div class="media-body">
+													Protokoll vom Plenum am 01.04.2013
+												</div>
+											</li>
+										</ul>
+									</div>
+
+									<ol class="input-area">
+										<li>
+											<ol>
+												<li>
+													<i class="fa fa-user"></i>
+													<select class="user-selector" multiple="multiple" data-placeholder="Benutzer">
+														<option value="Al">Alice</option>
+														<option value="Bo">Bob</option>
+														<option value="Cy">Cindy</option>
+													</select>
+												</li>
+												<li>
+													<i class="fa fa-tags"></i>
+														<input type="hidden" class="tags-selector" data-tags="Baustelle, Gewerk, Elektrik" data-placeholder="Tags" />
+												</li>
+												<li>
+													<i class="fa fa-paperclip"></i>
+													(Anhänge)
+												</li>
+											</ol>
+										</li>
+										<li>
+											<ol>
+												<li>
+													<i class="fa fa-map-marker"></i>
+													<input type="hidden" class="location-selector" data-tags="Berlin, Kreuzberg, Oranienhof, Köln, Paris, London, Frankfurt, New York, Peking" data-placeholder="Ort" />
+												</li>
+												<li>
+													<i class="fa fa-clock-o"></i>
+													Uhr
+												</li>
+												<li>
+													<i class="fa fa-fw fa-bolt"></i>
+													<select class="bolt-selector">
+														<option selected="selected" value="flash">Blitz an</option>
+														<option value="noflash"></i>Blitz aus</option>
+													</select>
+												</li>
+												<li>
+													<i class="fa fa-fw fa-lightbulb-o"></i>
+													<select class="light-selector">
+														<option selected="selected" value="light">mit Licht</option>
+														<option value="dark"></i>im Dunkeln</option>
+													</select>
+												</li>
+												<li>
+													<i class="fa fa-fw fa-globe"></i>
+													<select class="privacy-selector">
+														<option selected="selected" value="public">Öffentlich</option>
+														<option value="private"></i>Privat</option>
+													</select>
+												</li>
+											</ol>
+										</li>
+									</ol><!-- input-area -->
+
+									<button type="button" class="btn btn-emphasized">
+										<ul class="media-list">
+											<li class="media">
+												<a class="pull-left" href="#">
+													<i class="fa fa-eraser"></i>
+												</a>
+												<div class="media-body">
+													Löschen
+												</div>
+											</li>
+										</ul>
+									</button>
+									<button type="button" class="btn btn-emphasized">
+										<ul class="media-list">
+											<li class="media">
+												<a class="pull-left" href="#">
+													<i class="fa fa-pencil"></i>
+												</a>
+												<div class="media-body">
+													Bearbeiten
+												</div>
+											</li>
+										</ul>
+									</button>
+								</div><!-- fadedown -->
+
+								<div class="fadedown regular-space">
+									<div class="btn btn-emphasized w100">
+										<ul class="media-list">
+											<li class="media">
+												<a class="pull-left" href="#">
+													<i class="fa fa-book"></i>
+												</a>
+												<a class="pull-right" href="#">
+													<i class="fa fa-chevron-down"></i>
+												</a>
+												<a class="pull-right" href="#">
+													<i class="fa fa-chain"></i>
+												</a>
+												<div class="media-body">
+													Protokoll vom Plenum am 01.04.2013
+												</div>
+											</li>
+										</ul>
+									</div>
+
+									<ol class="input-area">
+										<li>
+											<ol>
+												<li>
+													<i class="fa fa-user"></i>
+													<select class="user-selector" multiple="multiple" data-placeholder="Benutzer">
+														<option value="Al">Alice</option>
+														<option value="Bo">Bob</option>
+														<option value="Cy">Cindy</option>
+													</select>
+												</li>
+												<li>
+													<i class="fa fa-tags"></i>
+														<input type="hidden" class="tags-selector" data-tags="Baustelle, Gewerk, Elektrik" data-placeholder="Tags" />
+												</li>
+												<li>
+													<i class="fa fa-paperclip"></i>
+													(Anhänge)
+												</li>
+											</ol>
+										</li>
+										<li>
+											<ol>
+												<li>
+													<i class="fa fa-map-marker"></i>
+													<input type="hidden" class="location-selector" data-tags="Berlin, Kreuzberg, Oranienhof, Köln, Paris, London, Frankfurt, New York, Peking" data-placeholder="Ort" />
+												</li>
+												<li>
+													<i class="fa fa-clock-o"></i>
+													Uhr
+												</li>
+												<li>
+													<i class="fa fa-fw fa-bolt"></i>
+													<select class="bolt-selector">
+														<option selected="selected" value="flash">Blitz an</option>
+														<option value="noflash"></i>Blitz aus</option>
+													</select>
+												</li>
+												<li>
+													<i class="fa fa-fw fa-lightbulb-o"></i>
+													<select class="light-selector">
+														<option selected="selected" value="light">mit Licht</option>
+														<option value="dark"></i>im Dunkeln</option>
+													</select>
+												</li>
+												<li>
+													<i class="fa fa-fw fa-globe"></i>
+													<select class="privacy-selector">
+														<option selected="selected" value="public">Öffentlich</option>
+														<option value="private"></i>Privat</option>
+													</select>
+												</li>
+											</ol>
+										</li>
+									</ol><!-- input-area -->
+
+									<button type="button" class="btn btn-emphasized">
+										<ul class="media-list">
+											<li class="media">
+												<a class="pull-left" href="#">
+													<i class="fa fa-eraser"></i>
+												</a>
+												<div class="media-body">
+													Löschen
+												</div>
+											</li>
+										</ul>
+									</button>
+									<button type="button" class="btn btn-emphasized">
+										<ul class="media-list">
+											<li class="media">
+												<a class="pull-left" href="#">
+													<i class="fa fa-pencil"></i>
+												</a>
+												<div class="media-body">
+													Bearbeiten
+												</div>
+											</li>
+										</ul>
+									</button>
+								</div><!-- fadedown -->
+
+<div id="calendar"></div>
 							</div><!-- content-box -->
 						</div><!-- col -->
 					</div><!-- row -->
@@ -345,9 +618,9 @@
 			</div><!-- row -->
 		</div><!-- main container -->
 
-		<script src='//localhost:3000/socket.io/socket.io.js'></script>
+		<!-- <script src='//localhost:3000/socket.io/socket.io.js'></script>
 		<script>var ___socket___ = io.connect('http://localhost:3000');</script>
-		<script src='//localhost:3001/client/browser-sync-client.0.6.2.js'></script>
+		<script src='//localhost:3001/client/browser-sync-client.0.6.2.js'></script> -->
 
 	</body>
 </html>

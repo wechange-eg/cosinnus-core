@@ -27,6 +27,53 @@ body {
   text-decoration: underline;
 }
 
+.form-control {
+  border-width: 0;
+  padding: 0;
+  text-align: left;
+  line-height: inherit;
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+.form-control::-webkit-input-placeholder {
+  text-align: center;
+}
+
+.form-control:-moz-placeholder {
+  text-align: center;
+}
+
+.form-control::-moz-placeholder {
+  text-align: center;
+}
+
+.form-control:-ms-input-placeholder {
+  text-align: center;
+}
+
+.content-box .form-control {
+  text-align: left;
+}
+
+.content-box .form-control::-webkit-input-placeholder {
+  text-align: left;
+}
+
+.content-box .form-control:-moz-placeholder {
+  text-align: left;
+}
+
+.content-box .form-control::-moz-placeholder {
+  text-align: left;
+}
+
+.content-box .form-control:-ms-input-placeholder {
+  text-align: left;
+}
+
 /* The Bootstrap buttons already have the classes btn-default, btn-info, btn-warning and so on.
 	This file adds btn-emphasized, btn-extra-emphasized and btn-appnavi for coloring in the apps's colors.
 */
@@ -325,7 +372,7 @@ body {
 }
 
 body .fine-space {
-  border-bottom: 1px solid #d5f3ff;
+  border-bottom: 1px solid #dbdbdb;
 }
 
 body .regular-space {
@@ -334,6 +381,11 @@ body .regular-space {
 
 body .large-space {
   margin-bottom: 12px;
+}
+
+.navbar-fixed-top img {
+  width: 35px;
+  margin: -10px 5px -10px 0;
 }
 
 .content-box {
@@ -348,6 +400,10 @@ body .large-space {
 }
 .content-box:after {
   clear: both;
+}
+
+.content-box .btn.w100 {
+  text-align: left;
 }
 
 /* input-area is an OL containing another OL of input elements.
@@ -385,18 +441,60 @@ body .large-space {
   color: #333333;
 }
 
+/* The serachbar in the fixed top navigation */
+#searchbar {
+  padding: 15px;
+  white-space: nowrap;
+  color: #333333;
+  font-size: 1.1em;
+}
+
+#searchbar:hover {
+  background-color: white;
+}
+
+#searchbar input {
+  width: 0px;
+  display: inline;
+  margin-top: -10px;
+  color: transparent;
+}
+
+#searchbar.expanded input {
+  width: 250px;
+  transition: all 500ms linear;
+  color: #333333;
+}
+
+.fadedown:before, .fadedown:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.fadedown:after {
+  clear: both;
+}
+
 .select2-container .select2-choice,
 .select2-container-multi .select2-choices {
   border-width: 0;
   background-image: none;
-  min-width: 10em;
+  min-width: 8em;
 }
 
 .select2-container .select2-choice .select2-arrow {
   border-width: 0;
   background-image: none;
   background-color: transparent;
-  color: #949494;
+}
+
+.select2-container .select2-choice .select2-arrow b {
+  background-position: 0 -2px;
+}
+
+.select2-container .select2-choice {
+  line-height: inherit;
 }
 
 .select2-dropdown-open.select2-drop-above .select2-choice,
@@ -421,4 +519,55 @@ body .large-space {
   background-image: none;
   background-color: #dbdbdb;
   color: #333333;
+}
+
+.fc-header-title h2 {
+  font-size: 1.5em;
+  color: #333333;
+}
+
+.fc-button {
+  background-color: #779b48;
+  border-width: 0;
+  background-image: none;
+  padding: 0 0.5em;
+  color: white;
+}
+
+.fc-text-arrow {
+  margin: 0;
+}
+
+.fc-button.fc-state-disabled {
+  opacity: 1;
+  background-color: transparent;
+  color: #333333;
+}
+
+.fc-button.fc-state-default {
+  border-radius: 0;
+  text-shadow: none;
+}
+
+.fc-button + .fc-button {
+  border-left: 1px solid #e1edd2;
+}
+
+.fc-content {
+  background-color: white;
+  color: #333333;
+  font-size: 0.8em;
+}
+
+.fc-state-highlight {
+  background-color: #e1edd2;
+}
+
+.fc-ltr .fc-event-hori.fc-event-end,
+.fc-rtl .fc-event-hori.fc-event-start,
+.fc-ltr .fc-event-hori.fc-event-start,
+.fc-rtl .fc-event-hori.fc-event-end {
+  border-radius: 0;
+  background-color: #779b48;
+  border-color: #779b48;
 }

@@ -1,0 +1,48 @@
+// The header
+.fc-header-title h2 {
+	font-size: 1.5em;
+	color: $app-neutral-color-dark;
+}
+.fc-button {
+	background-color: $app-calendar-color;
+	border-width: 0;
+	background-image: none;
+	padding: 0 0.5em;
+	color: $app-neutral-color-white;
+}
+.fc-text-arrow {
+	margin: 0;
+}
+.fc-button.fc-state-disabled {
+	opacity: 1;
+	background-color: transparent;
+	color: $app-neutral-color-dark;
+}
+.fc-button.fc-state-default {
+	border-radius: 0;
+	text-shadow: none;
+}
+.fc-button + .fc-button {
+	border-left: 1px solid $app-calendar-color-light;
+}
+
+// The events table
+.fc-content {
+	background-color: $app-neutral-color-white;
+	color: $app-neutral-color-dark;
+	font-size: 0.8em;
+}
+.fc-state-highlight {
+	background-color: $app-calendar-color-light;
+}
+
+// Single event in events table
+
+.fc-ltr .fc-event-hori.fc-event-end,
+.fc-rtl .fc-event-hori.fc-event-start,
+.fc-ltr .fc-event-hori.fc-event-start,
+.fc-rtl .fc-event-hori.fc-event-end {
+	border-radius: 0;
+	background-color: $app-calendar-color;
+	border-color: $app-calendar-color;
+}

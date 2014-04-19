@@ -24,4 +24,27 @@ body {
 }
 
 
+// .form-control is a Bootstrap class for INPUT elements.
+// Center some placeholders but align the content left.
+.form-control {
+	border-width: 0;
+	padding: 0;
+	text-align: left;
+	line-height: inherit;
+}
+.form-control:focus {
+	box-shadow: none;
+}
+.form-control::-webkit-input-placeholder { text-align: center; }
+.form-control:-moz-placeholder { text-align: center; }
+.form-control::-moz-placeholder { text-align: center; }
+.form-control:-ms-input-placeholder { text-align: center; }
+
+.content-box .form-control {
+	text-align: left;
+}
+.content-box .form-control::-webkit-input-placeholder { text-align: left; }
+.content-box .form-control:-moz-placeholder { text-align: left; }
+.content-box .form-control::-moz-placeholder { text-align: left; }
+.content-box .form-control:-ms-input-placeholder { text-align: left; }
 
