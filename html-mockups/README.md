@@ -1,3 +1,0 @@
-Mockups of neww templates
--------------------------
-
