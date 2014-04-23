@@ -86,6 +86,8 @@ def cosinnus_menu(context, template="cosinnus/topmenu.html"):
         group = context['group']
         apps = []
         for app, name, label in app_registry.items():
+            if app in settings.COSINNUS_HIDE_APPS:
+                continue
             url = reverse('cosinnus:%s:index' % name, kwargs={'group': group.slug})
             if app == current_app:
                 active_app = app
