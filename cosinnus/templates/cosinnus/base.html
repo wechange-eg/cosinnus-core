@@ -31,7 +31,7 @@
     {% include 'cosinnus/extrahead.html' %}
     {% block extrahead %}{% endblock extrahead %}
   </head>
-  <body>
+  <body class="{{ COSINNUS_CURRENT_APP }}">
     {% cosinnus_menu "cosinnus/topmenu.html" %}
 
     <div class="container">
