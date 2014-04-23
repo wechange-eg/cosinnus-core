@@ -37,10 +37,10 @@ class PublicModelMixin(models.Model):
 
 
 @python_2_unicode_compatible
-class BaseTagObject(LocationModelMixin, PeopleModelMixin, PublicModelMixin):
+class BaseTagObject(models.Model):
 
     group = models.ForeignKey(CosinnusGroup, verbose_name=_('Group'),
-        related_name='+', null=True, on_delete=models.SET_NULL)
+        related_name='+', null=True)
 
     class Meta:
         abstract = True
@@ -49,7 +49,8 @@ class BaseTagObject(LocationModelMixin, PeopleModelMixin, PublicModelMixin):
         return "Tag object {0}".format(self.pk)
 
 
-class TagObject(BaseTagObject):
+class TagObject(LocationModelMixin, PeopleModelMixin, PublicModelMixin,
+                BaseTagObject):
 
     class Meta:
         app_label = 'cosinnus'
