@@ -7,16 +7,38 @@ from appconf import AppConf
 
 
 class CosinnusConf(AppConf):
+
+    #: A mapping of ``{'app1.Model1': ['app2.Model2', 'app3.Model3']}`` that
+    #: defines the tells, that given an instance of ``app1.Model1``, objects
+    #: of type ``app2.Model2`` or ``app3.Model3`` can be attached.
     ATTACHABLE_OBJECTS = {}
+
+    # These are the default values for the bootstrap3-datetime-picker and
+    # are translated in `cosinnus/formats/LOCALE/formats.py`
+
+    #: Default date format used by e.g. the "bootstrap3-datetime-picker"
+    DATETIMEPICKER_DATE_FORMAT = 'YYYY-MM-DD'
+
+    #: Default datetime format used by e.g. the "bootstrap3-datetime-picker"
+    DATETIMEPICKER_DATETIME_FORMAT = 'YYYY-MM-DD HH:mm'
+
+    #: Default time format used by e.g. the "bootstrap3-datetime-picker"
+    DATETIMEPICKER_TIME_FORMAT = 'HH:mm'
+
+    #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = 60 * 60 * 24
+
+    #: A list of app_names (``'cosinnus_note'`` rather than ``note``) that will
+    #: e.g. not be displayed in the cosinnus menu
+    HIDE_APPS = set()
+
+    #: A pointer to the swappable cosinnus tag object model
     TAG_OBJECT_MODEL = 'cosinnus.TagObject'
+
+    #: A pointer to the swappable cosinnus user profile model
     USER_PROFILE_MODEL = 'cosinnus.UserProfile'
 
-    # These are the default values for the bootstrap3-datetime picker and
-    # are translated in `cosinnus/formats/LOCALE/formats.py`
-    DATETIMEPICKER_DATETIME_FORMAT = 'YYYY-MM-DD HH:mm'
-    DATETIMEPICKER_DATE_FORMAT = 'YYYY-MM-DD'
-    DATETIMEPICKER_TIME_FORMAT = 'HH:mm'
+    #: Ths avatar sizes that will be exposed through the API
     USER_PROFILE_AVATAR_THUMBNAIL_SIZES = (
         (80, 80),
         (50, 50),
