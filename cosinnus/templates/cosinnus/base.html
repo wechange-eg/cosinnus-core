@@ -31,7 +31,7 @@
     {% include 'cosinnus/extrahead.html' %}
     {% block extrahead %}{% endblock extrahead %}
   </head>
-  <body class="bodyclass group1-background {% block bodyclass %}{% endblock bodyclass %}">
+  <body class="bodyclass group1-background {% block bodyclass %}{% endblock bodyclass %} {{ COSINNUS_CURRENT_APP }}">
     {% cosinnus_menu "cosinnus/topmenu.html" %}
     {% if group %}
       {% cosinnus_menu "cosinnus/appsmenu.html" %}
