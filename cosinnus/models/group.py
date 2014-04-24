@@ -12,6 +12,8 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy as p_
 
+from taggit.managers import TaggableManager
+
 from cosinnus.conf import settings
 from cosinnus.utils.functions import unique_aware_slugify
 
@@ -284,6 +286,9 @@ class CosinnusGroup(models.Model):
     public = models.BooleanField(_('Public'), default=False)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
         related_name='cosinnus_groups', through='CosinnusGroupMembership')
+    media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
+        blank=True, null=True, on_delete=models.PROTECT)
+    tags = TaggableManager(_('Tags'), blank=True)
 
     objects = CosinnusGroupManager()
 
