@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import six
 
 from django import forms
+from django.core.exceptions import ValidationError
 
 from cosinnus.models.tagged import get_tag_object_model
 
@@ -53,18 +54,32 @@ class TagObjectFormMixin(object):
         self.instance = super(TagObjectFormMixin, self).save(commit=False)
 
         values = {}
+        values_m2m = {}
         defaults = {}
+        defaults_m2m = {}
         for name in self.media_tag_fields_used:
             field = TagObject._meta.get_field_by_name(name)[0]
             default = field.default
             given_value = self.cleaned_data[name]
-            if default != given_value:
-                values[name] = given_value
+            if field in TagObject._meta.many_to_many:
+                # We need to store the m2m data separately, since we need to
+                # apply it to the media tag after storing
+                if default != given_value:
+                    values_m2m[name] = given_value
+                else:
+                    defaults_m2m[name] = default
             else:
-                defaults[name] = default
+                if default != given_value and (
+                        given_value is not None or field.null):
+                    try:
+                        values[name] = field.to_python(given_value)
+                    except ValidationError:
+                        defaults[name] = default
+                else:
+                    defaults[name] = default
 
         if self.instance.media_tag is None:
-            if values:
+            if values or values_m2m:
                 # we need a new media tag
                 self.media_tag = TagObject()
             else:
@@ -72,7 +87,9 @@ class TagObjectFormMixin(object):
                 self.media_tag = None
         else:
             if values:
-                # we need to update the existing media tag
+                # we need to update the existing media tag but
+                # only for non-m2m fields, as they get stored
+                # after the media_tag has been stored
                 self.media_tag = self.instance.media_tag
             else:
                 # no data but existing media tag --> delete media tag
@@ -97,7 +114,14 @@ class TagObjectFormMixin(object):
         self.instance.media_tag = self.media_tag
 
         if commit:
-            self.save_media_tag()
+            self.save_media_tag(commit=True)
+            if self.instance.media_tag is not None and values_m2m:
+                # save the m2m data of the media tag
+                for name, value in six.iteritems(values_m2m):
+                    setattr(self.media_tag, name, value)
+                for name, value in six.iteritems(defaults_m2m):
+                    setattr(self.media_tag, name, value)
+
             self.instance.save()
             if hasattr(self, 'save_m2m'):
                 self.save_m2m()
