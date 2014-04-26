@@ -14,7 +14,7 @@ Contents:
    hierarchy
    permissions
    templatetags
-   ref/index
+   ref/cosinnus
 
 
 Indices and tables
