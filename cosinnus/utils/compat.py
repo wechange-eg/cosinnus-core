@@ -18,10 +18,10 @@ except ImportError:
 
 
 try:  # pragma: no cover
-    warnings.warn("Cosinnus doesn't fully support Python 2.6.",
-                  DeprecationWarning, 2)
     from collections import OrderedDict
 except ImportError:  # pragma: no cover
+    warnings.warn("Cosinnus doesn't fully support Python 2.6.",
+                  DeprecationWarning, 2)
     from django.utils.datastructures import SortedDict as OrderedDict  # noqa
 
 __all__ = ('atomic', 'OrderedDict', )
