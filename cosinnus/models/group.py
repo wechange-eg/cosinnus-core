@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
+from collections import OrderedDict
 import re
 import six
 
@@ -7,7 +9,6 @@ from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
-from django.utils.datastructures import SortedDict  # TODO: Drop w/o Py2.6
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy as p_
@@ -97,13 +98,13 @@ class CosinnusGroupManager(models.Manager):
         Gets all group slugs from the cache or, if the can has not been filled,
         gets the slugs and pks from the database and fills the cache.
 
-        :returns: A :class:`SortedDict` with a `slug => pk` mapping of all
+        :returns: A :class:`OrderedDict` with a `slug => pk` mapping of all
             groups
         """
         slugs = cache.get(_GROUPS_SLUG_CACHE_KEY)
         if slugs is None:
-            slugs = SortedDict(self.values_list('slug', 'id').all())
-            pks = SortedDict((v, k) for k, v in six.iteritems(slugs))
+            slugs = OrderedDict(self.values_list('slug', 'id').all())
+            pks = OrderedDict((v, k) for k, v in six.iteritems(slugs))
             cache.set(_GROUPS_SLUG_CACHE_KEY, slugs,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
             cache.set(_GROUPS_PK_CACHE_KEY, pks,
@@ -115,13 +116,13 @@ class CosinnusGroupManager(models.Manager):
         Gets all group pks from the cache or, if the can has not been filled,
         gets the pks and slugs from the database and fills the cache.
 
-        :returns: A :class:`SortedDict` with a `pk => slug` mapping of all
+        :returns: A :class:`OrderedDict` with a `pk => slug` mapping of all
             groups
         """
         pks = cache.get(_GROUPS_PK_CACHE_KEY)
         if pks is None:
-            pks = SortedDict(self.values_list('id', 'slug').all())
-            slugs = SortedDict((v, k) for k, v in six.iteritems(pks))
+            pks = OrderedDict(self.values_list('id', 'slug').all())
+            slugs = OrderedDict((v, k) for k, v in six.iteritems(pks))
             cache.set(_GROUPS_PK_CACHE_KEY, pks,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
             cache.set(_GROUPS_SLUG_CACHE_KEY, slugs,
@@ -236,7 +237,7 @@ class CosinnusGroupMembershipManager(models.Manager):
                 uids = list(_q._clone().filter(group_id=group).all())
                 users[cache_key % group] = uids
             cache.set_many(users)
-        return dict((int(k.split('/')[-1]), v) for k, v in six.iteritems(users))
+        return {int(k.split('/')[-1]): v for k, v in six.iteritems(users)}
 
     def get_admins(self, group=None, groups=None):
         """

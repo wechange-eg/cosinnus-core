@@ -11,10 +11,9 @@ https://github.com/Markush2010/django-dynamic-forms/tree/f306619e12
 
 from __future__ import unicode_literals
 
+from collections import OrderedDict
 import six
 import threading
-
-from cosinnus.utils.compat import OrderedDict
 
 
 class BaseRegistry(object):

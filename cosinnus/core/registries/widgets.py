@@ -3,12 +3,11 @@ from __future__ import unicode_literals
 
 import six
 
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 
 from django.utils.importlib import import_module
 
 from cosinnus.core.registries.base import DictBaseRegistry
-from cosinnus.utils.compat import OrderedDict
 
 
 class WidgetRegistry(DictBaseRegistry):
