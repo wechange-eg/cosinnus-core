@@ -9,6 +9,8 @@ from __future__ import unicode_literals
     we may use functions from here.
 """
 
+import warnings
+
 try:
     from django.db.transaction import atomic
 except ImportError:
@@ -16,6 +18,7 @@ except ImportError:
 
 
 try:  # pragma: no cover
+    warnings.warn("Cosinnus doesn't fully support Python 2.6.")
     from collections import OrderedDict
 except ImportError:  # pragma: no cover
     from django.utils.datastructures import SortedDict as OrderedDict  # noqa
