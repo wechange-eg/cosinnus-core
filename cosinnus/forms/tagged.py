@@ -88,7 +88,7 @@ def get_form(TaggableObjectModelClass, group=True, attachable=True):
                 # explicitly since we called save() with commit=False before.
                 self.save_m2m()
 
-            return instances
+            return obj
 
         @property
         def instance(self):
