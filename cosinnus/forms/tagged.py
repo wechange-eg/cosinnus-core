@@ -97,6 +97,11 @@ def get_form(TaggableObjectModelClass, group=True, attachable=True):
         @instance.setter
         def instance(self, value):
             self.forms['obj'].instance = value
+            
+        def dispatch_init_prefix(self, name, prefix):
+            if name == 'obj':
+                return InvalidArgument
+            return super(TaggableObjectForm, self).dispatch_init_prefix(name, prefix)
 
         if group:
             def dispatch_init_group(self, name, group):
