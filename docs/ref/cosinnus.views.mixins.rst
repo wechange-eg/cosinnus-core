@@ -28,6 +28,14 @@ cosinnus.views.mixins.tagged module
     :undoc-members:
     :show-inheritance:
 
+cosinnus.views.mixins.user module
+---------------------------------
+
+.. automodule:: cosinnus.views.mixins.user
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Module contents
 ---------------

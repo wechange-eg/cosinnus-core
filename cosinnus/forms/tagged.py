@@ -10,30 +10,24 @@ from django.core.exceptions import ValidationError
 
 from multiform import MultiModelForm, InvalidArgument
 
+from cosinnus.forms.group import GroupKwargModelFormMixin
+from cosinnus.forms.user import UserKwargModelFormMixin
 from cosinnus.models.tagged import get_tag_object_model
 
 
 TagObject = get_tag_object_model()
 
 
-class BaseTagObjectForm(forms.ModelForm):
+class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
+                        forms.ModelForm):
 
     class Meta:
         exclude = ('group',)
         model = TagObject
 
-    def __init__(self, group, *args, **kwargs):
-        self.group = group
-        super(BaseTagObjectForm, self).__init__(*args, **kwargs)
-
     def save(self, commit=True):
         # TODO: Delete the object if it's empty
-        self.instance = super(BaseTagObjectForm, self).save(commit=False)
-        self.instance.group = self.group
-        if commit:
-            self.instance.save()
-            self.save_m2m()
-        return self.instance
+        return super(BaseTagObjectForm, self).save(commit=False)
 
 
 class TagObjectForm(BaseTagObjectForm):
