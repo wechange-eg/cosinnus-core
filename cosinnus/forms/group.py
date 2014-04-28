@@ -19,7 +19,7 @@ class GroupKwargModelFormMixin(object):
     def __init__(self, *args, **kwargs):
         self.group = kwargs.pop('group', None)
         super(GroupKwargModelFormMixin, self).__init__(*args, **kwargs)
-        if hasattr(self.instance, 'group_id'):
+        if self.group and hasattr(self.instance, 'group_id'):
             self.instance.group_id = self.group.id
 
 

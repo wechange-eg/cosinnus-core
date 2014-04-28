@@ -89,5 +89,5 @@ class GroupFormKwargsMixin(object):
     """
     def get_form_kwargs(self):
         kwargs = super(GroupFormKwargsMixin, self).get_form_kwargs()
-        kwargs.update({"group": self.group})
+        kwargs['group'] = self.group
         return kwargs
