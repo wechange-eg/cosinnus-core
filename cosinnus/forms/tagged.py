@@ -48,12 +48,12 @@ def get_tag_object_form():
     return form_class
 
 
-def get_form(TaggableObjectModelClass, group=True, attachable=True):
+def get_form(TaggableObjectFormClass, group=True, attachable=True):
 
     class TaggableObjectForm(MultiModelForm):
 
         base_forms = OrderedDict([
-            ('obj', TaggableObjectModelClass),
+            ('obj', TaggableObjectFormClass),
             ('media_tag', get_tag_object_form()),
         ])
 
@@ -97,7 +97,7 @@ def get_form(TaggableObjectModelClass, group=True, attachable=True):
         @instance.setter
         def instance(self, value):
             self.forms['obj'].instance = value
-            
+
         def dispatch_init_prefix(self, name, prefix):
             if name == 'obj':
                 return InvalidArgument
