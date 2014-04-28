@@ -16,19 +16,35 @@ from cosinnus.models.tagged import get_tag_object_model
 TagObject = get_tag_object_model()
 
 
-class TagObjectForm(forms.ModelForm):
+class BaseTagObjectForm(forms.ModelForm):
 
     class Meta:
         exclude = ('group',)
         model = TagObject
 
+    def __init__(self, group, *args, **kwargs):
+        self.group = group
+        super(BaseTagObjectForm, self).__init__(*args, **kwargs)
+
     def save(self, commit=True):
         # TODO: Delete the object if it's empty
-        return super(TagObjectForm, self).save(commit=commit)
+        self.instance = super(BaseTagObjectForm, self).save(commit=False)
+        self.instance.group = self.group
+        if commit:
+            self.instance.save()
+            self.save_m2m()
+        return self.instance
+
+
+class TagObjectForm(BaseTagObjectForm):
+    pass
 
 
 def get_tag_object_form():
-    "Return the cosinnus user profile model that is active in this project"
+    """
+    Return the cosinnus tag object model form that is defined in
+    :data:`settings.COSINNUS_TAG_OBJECT_FORM`
+    """
     from django.core.exceptions import ImproperlyConfigured
     from django.utils.importlib import import_module
     from cosinnus.conf import settings
@@ -48,19 +64,20 @@ def get_tag_object_form():
     return form_class
 
 
-def get_form(TaggableObjectModelClass, group=True, attachable=True):
+def get_form(TaggableObjectFormClass, attachable=True):
+    """
+    Factory function that creates a class of type
+    class:`multiform.MultiModelForm` with the given TaggableObjectFormClass
+    and a class of type :class:`TagObjectForm` (default) or whatever
+    :data:`settings.COSINNUS_TAG_OBJECT_FORM` defines.
+    """
 
     class TaggableObjectForm(MultiModelForm):
 
         base_forms = OrderedDict([
-            ('obj', TaggableObjectModelClass),
+            ('obj', TaggableObjectFormClass),
             ('media_tag', get_tag_object_form()),
         ])
-
-        def dispatch_init_instance(self, name, instance):
-            if name == 'obj':
-                return instance
-            return super(TaggableObjectForm, self).dispatch_init_instance(name, instance)
 
         def save(self, commit=True):
             """
@@ -75,7 +92,6 @@ def get_form(TaggableObjectModelClass, group=True, attachable=True):
             # Assign the media_tag to the taggable object
             obj.media_tag = media_tag
             # Assign the taggable object's group to the media tag
-            media_tag.group = obj.group
             if commit:
                 # We first save the media tag so that we can use it's id and
                 # assign it to the taggable object, since Django can't handle
@@ -88,6 +104,8 @@ def get_form(TaggableObjectModelClass, group=True, attachable=True):
                 # explicitly since we called save() with commit=False before.
                 self.save_m2m()
 
+            # We do not really care about the media tag as a return value.
+            # We can access it through the object.
             return obj
 
         @property
@@ -97,17 +115,16 @@ def get_form(TaggableObjectModelClass, group=True, attachable=True):
         @instance.setter
         def instance(self, value):
             self.forms['obj'].instance = value
-            
+
+        def dispatch_init_instance(self, name, instance):
+            if name == 'obj':
+                return instance
+            return super(TaggableObjectForm, self).dispatch_init_instance(name, instance)
+
         def dispatch_init_prefix(self, name, prefix):
             if name == 'obj':
                 return InvalidArgument
             return super(TaggableObjectForm, self).dispatch_init_prefix(name, prefix)
-
-        if group:
-            def dispatch_init_group(self, name, group):
-                if name == 'obj':
-                    return group
-                return InvalidArgument
 
         if attachable:
             def dispatch_init_attached_objects_querysets(self, name, qs):
