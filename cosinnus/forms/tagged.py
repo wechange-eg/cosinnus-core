@@ -3,13 +3,118 @@ from __future__ import unicode_literals
 
 import six
 
+from collections import OrderedDict
+
 from django import forms
 from django.core.exceptions import ValidationError
+
+from multiform import MultiModelForm, InvalidArgument
 
 from cosinnus.models.tagged import get_tag_object_model
 
 
 TagObject = get_tag_object_model()
+
+
+class TagObjectForm(forms.ModelForm):
+
+    class Meta:
+        exclude = ('group',)
+        model = TagObject
+
+    def save(self, commit=True):
+        # TODO: Delete the object if it's empty
+        return super(TagObjectForm, self).save(commit=commit)
+
+
+def get_tag_object_form():
+    "Return the cosinnus user profile model that is active in this project"
+    from django.core.exceptions import ImproperlyConfigured
+    from django.utils.importlib import import_module
+    from cosinnus.conf import settings
+
+    try:
+        module_name, _, form_name = settings.COSINNUS_TAG_OBJECT_FORM.rpartition('.')
+    except ValueError:
+        raise ImproperlyConfigured("COSINNUS_TAG_OBJECT_FORM must be of the "
+                                   "form 'path.to.the.ModelForm'")
+    module = import_module(module_name)
+    form_class = getattr(module, form_name, None)
+    if form_class is None or not issubclass(form_class, forms.ModelForm):
+        raise ImproperlyConfigured("COSINNUS_TAG_OBJECT_FORM refers to form "
+                                   "'%s' that does not exist or is not a "
+                                   "ModelForm" %
+            settings.COSINNUS_TAG_OBJECT_FORM)
+    return form_class
+
+
+def get_form(TaggableObjectModelClass, group=True, attachable=True):
+
+    class TaggableObjectForm(MultiModelForm):
+
+        base_forms = OrderedDict([
+            ('obj', TaggableObjectModelClass),
+            ('media_tag', get_tag_object_form()),
+        ])
+
+        def dispatch_init_instance(self, name, instance):
+            if name == 'obj':
+                return instance
+            return super(TaggableObjectForm, self).dispatch_init_instance(name, instance)
+
+        def save(self, commit=True):
+            """
+            Save both forms and attach the media_tag to the taggable object.
+            """
+            instances = super(TaggableObjectForm, self).save(commit=False)
+
+            # For easy access
+            obj = instances['obj']
+            media_tag = instances['media_tag']
+
+            # Assign the media_tag to the taggable object
+            obj.media_tag = media_tag
+            # Assign the taggable object's group to the media tag
+            media_tag.group = obj.group
+            if commit:
+                # We first save the media tag so that we can use it's id and
+                # assign it to the taggable object, since Django can't handle
+                # modifications to a field `fkfield` and update the
+                # `fkfield_id` attribute.
+                media_tag.save()
+                obj.media_tag = media_tag
+                obj.save()
+                # Some forms might contain m2m data. We need to save them
+                # explicitly since we called save() with commit=False before.
+                self.save_m2m()
+
+            return obj
+
+        @property
+        def instance(self):
+            return self.forms['obj'].instance
+
+        @instance.setter
+        def instance(self, value):
+            self.forms['obj'].instance = value
+
+        if group:
+            def dispatch_init_group(self, name, group):
+                if name == 'obj':
+                    return group
+                return InvalidArgument
+
+        if attachable:
+            def dispatch_init_attached_objects_querysets(self, name, qs):
+                if name == 'obj':
+                    return qs
+                return InvalidArgument
+
+            @property
+            def save_attachable(self):
+                return self.forms['obj'].save_attachable
+
+    return TaggableObjectForm
 
 
 class TagObjectFormMixin(object):
@@ -26,6 +131,11 @@ class TagObjectFormMixin(object):
                     model = SomeModel
                     fields = ('field1', 'field2', )
         """
+
+        import warnings
+        warnings.warn('cosinnus.forms.tagged.TagObjectFormMixin is deprecated',
+            DeprecationWarning)
+
         super(TagObjectFormMixin, self).__init__(*args, **kwargs)
 
         if not hasattr(self, 'group'):

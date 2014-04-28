@@ -32,6 +32,9 @@ class CosinnusConf(AppConf):
     #: e.g. not be displayed in the cosinnus menu
     HIDE_APPS = set()
 
+    #: The ModelForm that will be used to modify the :attr:`TAG_OBJECT_MODEL`
+    TAG_OBJECT_FORM = 'cosinnus.forms.tagged.TagObjectForm'
+
     #: A pointer to the swappable cosinnus tag object model
     TAG_OBJECT_MODEL = 'cosinnus.TagObject'
 

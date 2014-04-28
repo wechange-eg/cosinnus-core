@@ -56,14 +56,16 @@ setup(
         'Pillow>=2.1.0',
         'South>=0.7',
         'django-appconf>=0.6',
-        'django-taggit>=0.11',
         'django-bootstrap3',
         'django-bootstrap3-datetimepicker>=2.2.0',
+        'django-multiform',
+        'django-taggit>=0.11',
         'djangorestframework>=2.3.0',
         'easy-thumbnails>=1.4',
     ],
     dependency_links=[
-        'git+git://github.com/Markush2010/django-bootstrap3.git@develop#egg=django-bootstrap3'
+        'git+git://github.com/Markush2010/django-bootstrap3.git@develop#egg=django-bootstrap3',
+        'git+http://git.sinnwerkstatt.com/mh/django-multiform.git@master#egg=django-multiform',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -72,7 +74,6 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.2',
