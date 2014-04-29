@@ -27,7 +27,7 @@ class AttachableViewMixin(object):
             app_label, model_name = attach_model_id.split('.')
             attach_model_class = get_model(app_label, model_name)
             queryset = attach_model_class._default_manager.filter(group=self.group)
-            querysets['attached:' + attach_model_id] = queryset
+            querysets['attached__' + attach_model_id] = queryset
 
         # pass all attachable cosinnus models to FormAttachable via kwargs
         kwargs.update({'attached_objects_querysets': querysets})
