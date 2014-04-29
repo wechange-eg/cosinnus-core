@@ -62,7 +62,7 @@ class FormAttachable(forms.ModelForm):
             self.fields['cosinnus_attachments'] = AttachableObjectSelect2MultipleChoiceField(
                         label=_("Attachments"), 
                         help_text=_("Type the title and/or type of attachment"), 
-                        data_url='/attachmentselect/%s/%s/' % (self.group.slug, source_model_id)
+                        data_url='/attachmentselect/%s/%s' % (self.group.slug, source_model_id)
                         #data_view='cosinnus:attached_object_select2_view'
             )
             

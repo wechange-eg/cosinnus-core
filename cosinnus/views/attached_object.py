@@ -32,6 +32,7 @@ class AttachableViewMixin(object):
         # so fields can be created and filled
         querysets = {}
         for attach_model_id in attached_object_registry.get_attachable_to(source_model_id):
+            # TODO: FIXME: only one entry is needed anymore!
             app_label, model_name = attach_model_id.split('.')
             attach_model_class = get_model(app_label, model_name)
             queryset = attach_model_class._default_manager.filter(group=self.group)
@@ -66,25 +67,39 @@ class AttachableObjectSelect2View(Select2View, RequireReadMixin, GroupFormKwargs
     """
     def check_all_permissions(self, request, *args, **kwargs):
         user = request.user 
-        if not user.is_authenticated():
+        
+        #import ipdb; ipdb.set_trace();
+        
+        currentgroupslug = self.kwargs.get('group', None)
+        # TODO:Sascha: Check if current user is member of this group
+        ismember = True
+        
+        if not user.is_authenticated():# or not ismember:
             raise PermissionDenied
         
     def get_results(self, request, term, page, context):
         term = term.lower() 
         print ">>> term:", term
         
-        import ipdb; ipdb.set_trace();
+        #import ipdb; ipdb.set_trace();
+        """
+            ipdb> self.kwargs
+            {u'model': u'cosinnus_note.Note', u'group': u'newgroup'}
+        """
         
-        # username is not used as filter for the term for now, might confuse users why a search result is found
-        users = User.objects.filter( Q(first_name__icontains=term) | Q(last_name__icontains=term))# | Q(username__icontains=term))
-        # filter all groups the user is a member of, and all public groups for the term
-        # use CosinnusGroup.objects.get_cached() to search in all groups instead
-        groups = set(CosinnusGroup.objects.get_for_user(request.user)).union(CosinnusGroup.objects.public())
-        groups = [ group for group in groups if term in group.name.lower() ]
+        results = []
         
-        # these result sets are what select2 uses to build the choice list
-        results = [ ("user:"+str(user.id), "%s %s" % (user.first_name, user.last_name),) for user in users ]
-        results.extend([ ("group:"+str(group.id), "[[ %s ]]" % (group.name),) for group in groups ])
+        for attach_model_id in attached_object_registry.get_attachable_to(self.kwargs.get('model', None)):
+            app_label, model_name = attach_model_id.split('.')
+            attach_model_class = get_model(app_label, model_name)
+            queryset = attach_model_class._default_manager.filter(group__slug=self.kwargs.get('group', None))
+            queryset = queryset.filter(Q(title__icontains=term))
+            # TODO: Sascha: make a more sophisticated filter that allows filtering for "Event" tokens
+        
+            # these result sets are what select2 uses to build the choice list
+            results.extend( [ (attach_model_id+":"+str(res.id), "%s %s" % (attach_model_id, res.title),) for res in queryset ] )
+        
+        print ">> results"
         
         return (NO_ERR_RESP, False, results) # Any error response, Has more results, options list
 
