@@ -37,7 +37,8 @@ class FormAttachable(forms.ModelForm):
         # each field's name is something like 'attached:cosinnus_file.FileEntry'
         # and fill the field with all available objects for that type (this is passed from our view)
         for model_name, queryset in six.iteritems(attachable_objects_sets):
-            initial = preselected[model_name.split(':', 1)[1]]
+            initial = preselected[model_name.split('__', 1)[1]]
+            model_name = model_name.replace('.', '__')
             self.fields[model_name] = forms.ModelMultipleChoiceField(
                 queryset=queryset, required=False, initial=initial, label=_(model_name)
             )
@@ -53,7 +54,7 @@ class FormAttachable(forms.ModelForm):
         # saving them find or create an attachable object for each of the
         # selected objects
         for key, entries in six.iteritems(self.cleaned_data):
-            if key.startswith('attached:cosinnus'):
+            if key.startswith('attached__cosinnus'):
                 for attached_obj in entries:
                     object_id = str(attached_obj.pk)
                     content_type = ContentType.objects.get_for_model(attached_obj)
