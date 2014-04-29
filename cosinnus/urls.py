@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.conf.urls import patterns, url
 
 from cosinnus.core.registries import url_registry
+from cosinnus.views.attached_object import AttachableObjectSelect2View
 
 
 urlpatterns = patterns('cosinnus.views',
@@ -40,6 +41,10 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^users/add/$', 'user.user_create', name='user-add'),
     url(r'^user/(?P<username>[^/]+)/$', 'user.user_detail', name='user-detail'),
     url(r'^user/(?P<username>[^/]+)/edit/$', 'user.user_update', name='user-edit'),
+    
+    url(r'^attachmentselect/$', 
+        AttachableObjectSelect2View.as_view(), 
+        name='attached_object_select2_view'),
 )
 
 urlpatterns += url_registry.urlpatterns
