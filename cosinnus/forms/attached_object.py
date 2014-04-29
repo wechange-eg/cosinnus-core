@@ -52,14 +52,21 @@ class FormAttachable(forms.ModelForm):
                         data_view='attached_object_select2_view'
             )
         """
+        print ">> init form:"
+        source_model_id = self._meta.model._meta.app_label + '.' + self._meta.model._meta.object_name
+
         
+        #import ipdb; ipdb.set_trace();
         """ TODO: SASCHA: add initial data to this field """
         if attachable_objects_sets and len(attachable_objects_sets) > 0:
             self.fields['cosinnus_attachments'] = AttachableObjectSelect2MultipleChoiceField(
                         label=_("Attachments"), 
                         help_text=_("Type the title and/or type of attachment"), 
-                        data_view='cosinnus:attached_object_select2_view'
+                        data_url='/attachmentselect/%s/%s/' % (self.group.slug, source_model_id)
+                        #data_view='cosinnus:attached_object_select2_view'
             )
+            
+                        
             
             #forms.ModelMultipleChoiceField(
             #    queryset=queryset, required=False, initial=initial, label=_(model_name)
@@ -78,16 +85,19 @@ class FormAttachable(forms.ModelForm):
         for key, entries in six.iteritems(self.cleaned_data):
             if key.startswith('cosinnus_attachments'):
                 for attached_obj in entries:
+                    pass
+                """ >>> moved to field.clean()!
+                
                     object_id = str(attached_obj.pk)
                     content_type = ContentType.objects.get_for_model(attached_obj)
                     (ao, _) = AttachedObject.objects.get_or_create(content_type=content_type, object_id=object_id)
                     self.instance.attached_objects.add(ao)
+                """
                     
                     
 
 class AttachableObjectSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoiceField):
-    queryset = User.objects
-    search_fields = ['username__icontains', ]
+    queryset = AttachedObject
     data_view = AttachableObjectSelect2View
     
     def clean(self, value):
@@ -100,25 +110,13 @@ class AttachableObjectSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoice
                 
         if self.required and not value:
             raise ValidationError(self.error_messages['required'])
-        
-        group_ids = []
-        user_ids = []
-        for val in value:
-            value_type, value_id = val.split(':')
-            if value_type == 'user':
-                user_ids.append(int(value_id))
-            elif value_type == 'group':
-                group_ids.append(int(value_id))
-            else:
-                if settings.DEBUG:
-                    raise Http404("Programming error: message recipient field contained unrecognised id '%s'" % val)
-
-        # unpack the members of the selected groups
-        groups = CosinnusGroup.objects.get_cached(pks=group_ids)
-        recipients = set()
-        for group in groups:
-            recipients.update(group.users.all())
-        # combine the groups users with the directly selected users
-        recipients.update( User.objects.filter(id__in=user_ids) )
-
-        return recipients
+               
+        attached_objects = []        
+        for attached_obj in value:
+            """ TODO: expand id and model type to real AO """
+            object_id = str(attached_obj.pk)
+            content_type = ContentType.objects.get_for_model(attached_obj)
+            (ao, _) = AttachedObject.objects.get_or_create(content_type=content_type, object_id=object_id)
+            attached_objects.add(ao)
+            
+        return attached_objects

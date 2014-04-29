@@ -10,6 +10,9 @@ from django.db.models import Q
 from django.core.exceptions import PermissionDenied
 from cosinnus.models.group import CosinnusGroup
 from django.contrib.auth.models import User
+from cosinnus.views.mixins.group import RequireReadMixin, FilterGroupMixin,\
+    GroupFormKwargsMixin
+from cosinnus.views.mixins.user import UserFormKwargsMixin
 
 
 class AttachableViewMixin(object):
@@ -56,8 +59,8 @@ class UpdateViewAttachable(AttachableViewMixin, UpdateView):
     pass
 
 
-
-class AttachableObjectSelect2View(Select2View):
+class AttachableObjectSelect2View(Select2View, RequireReadMixin, GroupFormKwargsMixin,
+                     UserFormKwargsMixin):
     """
         This view is used as API backend to serve the suggestions for the message recipient field.
     """
@@ -68,6 +71,9 @@ class AttachableObjectSelect2View(Select2View):
         
     def get_results(self, request, term, page, context):
         term = term.lower() 
+        print ">>> term:", term
+        
+        import ipdb; ipdb.set_trace();
         
         # username is not used as filter for the term for now, might confuse users why a search result is found
         users = User.objects.filter( Q(first_name__icontains=term) | Q(last_name__icontains=term))# | Q(username__icontains=term))
