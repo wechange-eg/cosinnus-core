@@ -18,6 +18,7 @@ from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.tagged import AttachedObject
 from cosinnus.conf import settings
 from cosinnus.views.attached_object import AttachableObjectSelect2View
+from cosinnus.core.registries import attached_object_registry
 
 class FormAttachable(forms.ModelForm):
     """
@@ -30,72 +31,42 @@ class FormAttachable(forms.ModelForm):
     `attached_objects` M2M field.
     """
     def __init__(self, *args, **kwargs):
-        attachable_objects_sets = kwargs.pop('attached_objects_querysets', {})
         super(FormAttachable, self).__init__(*args, **kwargs)
         
-        preresults = []
-        preselected = defaultdict(list)
         # retrieve the attached objects ids to select them in the update view
-        
+        preresults = []
         if self.instance and self.instance.pk:
             for attached in self.instance.attached_objects.all():
                 if attached and attached.target_object:
                     obj = attached.target_object
-                    #preselected[attached.model_name].append(attached.target_object.pk)
                     preresults.append( (attached.model_name+":"+str(obj.id), "%s %s" % (attached.model_name, obj.title),)  )
         
-
         # add a field for each model type of attachable file provided by cosinnus apps
         # each field's name is something like 'attached:cosinnus_file.FileEntry'
         # and fill the field with all available objects for that type (this is passed from our view)
-        print ">> initial attachments:", preresults
         source_model_id = self._meta.model._meta.app_label + '.' + self._meta.model._meta.object_name
-
-        """ TODO: clean up -if- """
-        if attachable_objects_sets and len(attachable_objects_sets) > 0:
+        
+        """ Add attachable objects field if this model is configured in settings.py to have objects that can be attached to it """
+        if attached_object_registry.get_attachable_to(source_model_id):
             self.fields['attached_objects'] = AttachableObjectSelect2MultipleChoiceField(
-                        label=_("Attachments"), 
-                        help_text=_("Type the title and/or type of attachment"), 
-                        data_url='/attachmentselect/%s/%s' % (self.group.slug, source_model_id),
-                        required=False
+                label=_("Attachments"), 
+                help_text=_("Type the title and/or type of attachment"), 
+                data_url='/attachmentselect/%s/%s' % (self.group.slug, source_model_id),
+                required=False
             )
+            # we need to cheat our way around select2's annoying way of clearing initial data fields
             self.fields['attached_objects'].choices = preresults #((1, 'hi'),)
             self.fields['attached_objects'].initial = [key for key,val in preresults] #[1]
             
-            
-            #forms.ModelMultipleChoiceField(
-            #    queryset=queryset, required=False, initial=initial, label=_(model_name)
-            #)
 
     def save_attachable(self):
-        """Called by `AttachableViewMixin.form_valid()`"""
-        # we don't want the object to have any attached files other than the
-        # ones submitted to the form
-        
-        print ">>> save_attachable called: self.att-obs:", self.instance.attached_objects.all()
-        #import ipdb; ipdb.set_trace();
-        # Find all attached objects in a saved form (their field values are all
-        # something like 'attached:cosinnus_file.FileEntry' and instead of
-        # saving them find or create an attachable object for each of the
-        # selected objects
-        """ For some reason, this field is not being saved automatically even though field and model field are named the same. """
+        """ Called by `AttachableViewMixin.form_valid()`
+            For some reason, this field is not being saved automatically,
+            even though field and model field are named the same. """
         self.instance.attached_objects.clear()
         for attached_obj in self.cleaned_data.get('attached_objects', []):
             self.instance.attached_objects.add(attached_obj)
         
-        for key, entries in six.iteritems(self.cleaned_data):
-            if key.startswith('cosinnus_attachments'):
-                for attached_obj in entries:
-                    pass
-                """ >>> moved to field.clean()!
-                
-                    object_id = str(attached_obj.pk)
-                    content_type = ContentType.objects.get_for_model(attached_obj)
-                    (ao, _) = AttachedObject.objects.get_or_create(content_type=content_type, object_id=object_id)
-                    self.instance.attached_objects.add(ao)
-                """
-        print ">>> save_attachable after: self.att-obs:", self.instance.attached_objects.all()
-                
                     
 
 class AttachableObjectSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoiceField):

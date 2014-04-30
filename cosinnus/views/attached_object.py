@@ -23,24 +23,6 @@ class AttachableViewMixin(object):
     `CreateView`s and `UpdateView`s. Configure which cosinnus objects may be
     attached to your object in `settings.COSINNUS_ATTACHABLE_OBJECTS`.
     """
-    def get_form_kwargs(self):
-        kwargs = super(AttachableViewMixin, self).get_form_kwargs()
-        source_model_id = self.model._meta.app_label + '.' + self.model._meta.object_name
-
-        # for each type of allowed attachable object model, find all instances of
-        # this model in the current group, and pass them to the FormAttachable,
-        # so fields can be created and filled
-        querysets = {}
-        for attach_model_id in attached_object_registry.get_attachable_to(source_model_id):
-            # TODO: FIXME: only one entry is needed anymore!
-            app_label, model_name = attach_model_id.split('.')
-            attach_model_class = get_model(app_label, model_name)
-            queryset = attach_model_class._default_manager.filter(group=self.group)
-            querysets['attached__' + attach_model_id] = queryset
-
-        # pass all attachable cosinnus models to FormAttachable via kwargs
-        kwargs.update({'attached_objects_querysets': querysets})
-        return kwargs
 
     def form_valid(self, form):
         # retrieve the attached objects from the form and save them
