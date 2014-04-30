@@ -1,22 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import six
-
-from collections import defaultdict
-
 from django import forms
 from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.models import User
 from django_select2 import (HeavyModelSelect2MultipleChoiceField)
 from django.core.exceptions import ValidationError
-from django.http.response import Http404
 from django.db.models import get_model
 
-from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.tagged import AttachedObject
-from cosinnus.conf import settings
 from cosinnus.views.attached_object import AttachableObjectSelect2View
 from cosinnus.core.registries import attached_object_registry
 from django.core.urlresolvers import reverse

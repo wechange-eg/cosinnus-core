@@ -9,10 +9,8 @@ from django_select2.views import Select2View, NO_ERR_RESP
 from django.db.models import Q
 from django.core.exceptions import PermissionDenied
 from cosinnus.models.group import CosinnusGroup
-from django.contrib.auth.models import User
-from cosinnus.views.mixins.group import RequireReadMixin, FilterGroupMixin,\
-    GroupFormKwargsMixin
-from cosinnus.views.mixins.user import UserFormKwargsMixin
+from cosinnus.views.mixins.group import RequireReadMixin
+from cosinnus.conf import settings
 
 
 class AttachableViewMixin(object):
@@ -45,6 +43,15 @@ class UpdateViewAttachable(AttachableViewMixin, UpdateView):
 class AttachableObjectSelect2View(RequireReadMixin, Select2View):
     """
         This view is used as API backend to serve the suggestions for the message recipient field.
+        
+        For each model type use the search terms to both search in the attachable model types 
+        (that is, their configured type aliases (see settings.COSINNUS_ATTACHABLE_OBJECTS_SUGGEST_ALIASES))
+        and their title for good matches.
+        
+        Examples (assumed that 'event' is configured as an alias for [cosinnus_event.Event]: 
+            term: 'even Heilig' would return an [Event] with title 'Heiligabendfeier'
+            term: 'even Heilig' would not find a [File] with title 'Einladung zum Heiligabend'
+            term  'even Heilig' would (!) return a [File] with title 'Invitiation: Heiligabend-Event.pdf'
     """
     def check_all_permissions(self, request, *args, **kwargs):
         user = request.user 
@@ -58,28 +65,29 @@ class AttachableObjectSelect2View(RequireReadMixin, Select2View):
             raise PermissionDenied
         
     def get_results(self, request, term, page, context):
-        term = term.lower() 
-        print ">>> term:", term
-        
-        #import ipdb; ipdb.set_trace();
-        """
-            ipdb> self.kwargs
-            {u'model': u'cosinnus_note.Note', u'group': u'newgroup'}
-        """
+        tokens = term.lower().split()
+        aliases_dict = settings.COSINNUS_ATTACHABLE_OBJECTS_SUGGEST_ALIASES
         
         results = []
-        
+       
         for attach_model_id in attached_object_registry.get_attachable_to(self.kwargs.get('model', None)):
+            aliases = aliases_dict.get(attach_model_id, [])
+            aliases = '||'.join(aliases)
+            
             app_label, model_name = attach_model_id.split('.')
             attach_model_class = get_model(app_label, model_name)
             queryset = attach_model_class._default_manager.filter(group__slug=self.kwargs.get('group', None))
-            queryset = queryset.filter(Q(title__icontains=term))
-            # TODO: Sascha: make a more sophisticated filter that allows filtering for "Event" tokens
-        
+            
+            """ For each token in the search query, filter the full object queryset further down,
+                comparing the titles of these objects, unless: the query is in the special aliases list
+                for that model type (for example 'eve' matches 'events', which is a special alias of 
+                cosinnus_event.Event, and thus only further restrict-filters objects that are not events. """
+            for token in tokens:
+                if not token in aliases:
+                    queryset = queryset.filter(Q(title__icontains=token))
+            
             # these result sets are what select2 uses to build the choice list
             results.extend( [ (attach_model_id+":"+str(res.id), "%s %s" % (attach_model_id, res.title),) for res in queryset ] )
             
-        print ">> results", results
-        
         return (NO_ERR_RESP, False, results) # Any error response, Has more results, options list
 
