@@ -97,7 +97,7 @@ class AttachableObjectSelect2View(Select2View, RequireReadMixin, GroupFormKwargs
             # TODO: Sascha: make a more sophisticated filter that allows filtering for "Event" tokens
         
             # these result sets are what select2 uses to build the choice list
-            results.extend( [ (attach_model_id+":"+str(res.id), "%s %s" % (attach_model_id, res.title),) for res in queryset ] )
+            results.extend( [ (attach_model_id+":"+str(res.pk), "%s %s" % (attach_model_id, res.title),) for res in queryset ] )
         
         print ">> results"
         

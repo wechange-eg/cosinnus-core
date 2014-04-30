@@ -32,13 +32,18 @@ class FormAttachable(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         attachable_objects_sets = kwargs.pop('attached_objects_querysets', {})
         super(FormAttachable, self).__init__(*args, **kwargs)
-
+        
+        preresults = []
         preselected = defaultdict(list)
         # retrieve the attached objects ids to select them in the update view
+        
         if self.instance and self.instance.pk:
             for attached in self.instance.attached_objects.all():
                 if attached and attached.target_object:
-                    preselected[attached.model_name].append(attached.target_object.pk)
+                    obj = attached.target_object
+                    #preselected[attached.model_name].append(attached.target_object.pk)
+                    preresults.append( (attached.model_name+":"+str(obj.id), "%s %s" % (attached.model_name, obj.title),)  )
+        
 
         # add a field for each model type of attachable file provided by cosinnus apps
         # each field's name is something like 'attached:cosinnus_file.FileEntry'
@@ -54,17 +59,19 @@ class FormAttachable(forms.ModelForm):
             )
         """
         print ">> init form:"
+        print ">> initial attachments:", preresults
         source_model_id = self._meta.model._meta.app_label + '.' + self._meta.model._meta.object_name
 
         
         #import ipdb; ipdb.set_trace();
         """ TODO: SASCHA: add initial data to this field """
         if attachable_objects_sets and len(attachable_objects_sets) > 0:
-            self.fields['cosinnus_attachments'] = AttachableObjectSelect2MultipleChoiceField(
+            self.fields['attached_objects'] = AttachableObjectSelect2MultipleChoiceField(
                         label=_("Attachments"), 
                         help_text=_("Type the title and/or type of attachment"), 
                         data_url='/attachmentselect/%s/%s' % (self.group.slug, source_model_id),
-                        required=False
+                        required=False,
+                        initial=preresults
                         #data_view='cosinnus:attached_object_select2_view'
             )
             
@@ -78,12 +85,18 @@ class FormAttachable(forms.ModelForm):
         """Called by `AttachableViewMixin.form_valid()`"""
         # we don't want the object to have any attached files other than the
         # ones submitted to the form
-        self.instance.attached_objects.clear()
-
+        
+        print ">>> save_attachable called: self.att-obs:", self.instance.attached_objects.all()
+        #import ipdb; ipdb.set_trace();
         # Find all attached objects in a saved form (their field values are all
         # something like 'attached:cosinnus_file.FileEntry' and instead of
         # saving them find or create an attachable object for each of the
         # selected objects
+        """ For some reason, this field is not being saved automatically even though field and model field are named the same. """
+        self.instance.attached_objects.clear()
+        for attached_obj in self.cleaned_data.get('attached_objects', []):
+            self.instance.attached_objects.add(attached_obj)
+        
         for key, entries in six.iteritems(self.cleaned_data):
             if key.startswith('cosinnus_attachments'):
                 for attached_obj in entries:
@@ -95,7 +108,8 @@ class FormAttachable(forms.ModelForm):
                     (ao, _) = AttachedObject.objects.get_or_create(content_type=content_type, object_id=object_id)
                     self.instance.attached_objects.add(ao)
                 """
-                    
+        print ">>> save_attachable after: self.att-obs:", self.instance.attached_objects.all()
+                
                     
 
 class AttachableObjectSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoiceField):
@@ -125,5 +139,6 @@ class AttachableObjectSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoice
             (ao, _) = AttachedObject.objects.get_or_create(content_type=content_type, object_id=object_id)
             attached_objects.append(ao)
             print ">> added attached obj:", ao
-            
+        
+        print ">> saving attached object field, saving attachments:", attached_objects
         return attached_objects
