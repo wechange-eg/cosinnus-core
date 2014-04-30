@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import os
 import codecs
+import sys
 from setuptools import setup, find_packages
 
 
@@ -42,6 +43,8 @@ for dirpath, dirnames, filenames in os.walk(pkgdir):
 
 from cosinnus import get_version
 
+django_select2 = 'Django-Select2-Py3>=4.2.1' if sys.version_info[0] == 3 else 'Django-Select2>=4.2.1',
+
 setup(
     name='cosinnus',
     version=get_version(),
@@ -53,7 +56,7 @@ setup(
     data_files=data_files,
     install_requires=[
         'Django>=1.5',
-        'Django-Select2>=4.2.2',
+        django_select2,
         'Pillow>=2.1.0',
         'South>=0.7',
         'django-appconf>=0.6',

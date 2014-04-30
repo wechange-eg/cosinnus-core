@@ -9,6 +9,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
+from django.views.generic.list import MultipleObjectMixin
 
 from taggit.models import Tag, TaggedItem
 
@@ -42,6 +43,19 @@ class TaggedListMixin(object):
         if self.tag:
             qs = qs.filter(tags=self.tag)
         return qs
+
+
+class BaseListMixin(MultipleObjectMixin):
+    """
+    A base view for displaying a list of objects.
+    """
+    def get(self, request, *args, **kwargs):
+        self.object_list = self.get_queryset()
+        return super(BaseListMixin, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        return super(BaseListMixin, self).get_context_data(
+            object_list=self.object_list, **kwargs)
 
 
 class HierarchyTreeMixin(object):
