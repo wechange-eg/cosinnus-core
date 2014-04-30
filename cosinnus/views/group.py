@@ -24,9 +24,10 @@ from cosinnus.utils.compat import atomic
 from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
     AjaxableFormMixin, ListAjaxableResponseMixin)
 from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin
+from cosinnus.views.mixins.user import UserFormKwargsMixin
 
 
-class GroupCreateView(AjaxableFormMixin, CreateView):
+class GroupCreateView(AjaxableFormMixin, UserFormKwargsMixin, CreateView):
 
     form_class = CosinnusGroupForm
     model = CosinnusGroup
@@ -47,6 +48,11 @@ class GroupCreateView(AjaxableFormMixin, CreateView):
         context = super(GroupCreateView, self).get_context_data(**kwargs)
         context['submit_label'] = _('Create')
         return context
+
+    def get_form_kwargs(self):
+        kwargs = super(GroupCreateView, self).get_form_kwargs()
+        kwargs['group'] = self.object
+        return kwargs
 
     def get_success_url(self):
         return reverse('cosinnus:group-detail', kwargs={'group': self.object.slug})
@@ -76,7 +82,8 @@ group_delete = GroupDeleteView.as_view()
 group_delete_api = GroupDeleteView.as_view(is_ajax_request_url=True)
 
 
-class GroupDetailView(DetailAjaxableResponseMixin, RequireReadMixin, DetailView):
+class GroupDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
+                      DetailView):
 
     template_name = 'cosinnus/group_detail.html'
     serializer_class = GroupSimpleSerializer
@@ -131,7 +138,8 @@ group_list = GroupListView.as_view()
 group_list_api = GroupListView.as_view(is_ajax_request_url=True)
 
 
-class GroupUpdateView(AjaxableFormMixin, RequireAdminMixin, UpdateView):
+class GroupUpdateView(AjaxableFormMixin, UserFormKwargsMixin,
+                      RequireAdminMixin, UpdateView):
 
     form_class = CosinnusGroupForm
     model = CosinnusGroup
@@ -144,6 +152,11 @@ class GroupUpdateView(AjaxableFormMixin, RequireAdminMixin, UpdateView):
         context = super(GroupUpdateView, self).get_context_data(**kwargs)
         context['submit_label'] = _('Save')
         return context
+
+    def get_form_kwargs(self):
+        kwargs = super(GroupUpdateView, self).get_form_kwargs()
+        kwargs['group'] = self.group
+        return kwargs
 
     def get_success_url(self):
         return reverse('cosinnus:group-detail', kwargs={'group': self.group.slug})

@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django import forms
 
+from multiform import InvalidArgument
+
 from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_MEMBER)
 
@@ -23,15 +25,31 @@ class GroupKwargModelFormMixin(object):
             self.instance.group_id = self.group.id
 
 
-class CosinnusGroupForm(forms.ModelForm):
+class _CosinnusGroupForm(forms.ModelForm):
 
     class Meta:
         fields = ('name', 'slug', 'public',)
         model = CosinnusGroup
 
     def __init__(self, *args, **kwargs):
-        super(CosinnusGroupForm, self).__init__(*args, **kwargs)
+        super(_CosinnusGroupForm, self).__init__(*args, **kwargs)
         self.fields['slug'].required = False
+
+
+from cosinnus.forms.tagged import get_form  # circular import
+
+
+class CosinnusGroupForm(get_form(_CosinnusGroupForm, attachable=False)):
+
+    def dispatch_init_group(self, name, group):
+        if name == 'media_tag':
+            return group
+        return InvalidArgument
+
+    def dispatch_init_user(self, name, user):
+        if name == 'media_tag':
+            return user
+        return InvalidArgument
 
 
 class MembershipForm(GroupKwargModelFormMixin, forms.ModelForm):

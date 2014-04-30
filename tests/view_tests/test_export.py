@@ -26,7 +26,7 @@ class JSONExportViewTest(TestCase):
         # assertRaises doesn't work when the exception is happening during
         # object's initialisation
         try:
-            view = JSONExportView()  # noqa
+            JSONExportView()
         except ImproperlyConfigured:
             pass
         else:
