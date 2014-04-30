@@ -10,19 +10,26 @@ from rest_framework import serializers
 from cosinnus.conf import settings
 from cosinnus.models.profile import UserProfile
 from cosinnus.models.serializers.group import GroupSimpleSerializer
+from cosinnus.utils.import_utils import import_from_settings
 
 
 __all__ = ('UserProfileSerializer', 'UserDetailSerializer',
     'UserSimpleSerializer', )
 
 
-class UserProfileSerializer(serializers.ModelSerializer):
-
-    avatar = serializers.CharField(source="avatar_url")
+class BaseUserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserProfile
-        fields = ('id', 'avatar', )
+        fields = ('id', )
+
+
+class UserProfileSerializer(BaseUserProfileSerializer):
+
+    avatar = serializers.CharField(source="avatar_url")
+
+    class Meta(BaseUserProfileSerializer.Meta):
+        fields = BaseUserProfileSerializer.Meta.fields + ('avatar', )
 
     def __init__(self, *args, **kwargs):
         super(UserProfileSerializer, self).__init__(*args, **kwargs)
@@ -39,10 +46,21 @@ class UserProfileSerializer(serializers.ModelSerializer):
             setattr(self, 'transform_%s' % name, func)
 
 
+def get_user_profile_serializer():
+    """
+    Return the cosinnus user profile serializer that is defined in
+    :data:`settings.COSINNUS_USER_PROFILE_SERIALIZER`
+    """
+    return import_from_settings('COSINNUS_USER_PROFILE_SERIALIZER')
+
+
+_UserProfileSerializer = get_user_profile_serializer()
+
+
 class UserSimpleSerializer(serializers.ModelSerializer):
 
     username = serializers.CharField(source='get_username', read_only=True)
-    profile = UserProfileSerializer(source='cosinnus_profile', many=False, read_only=True)
+    profile = _UserProfileSerializer(source='cosinnus_profile', many=False, read_only=True)
 
     class Meta:
         model = get_user_model()

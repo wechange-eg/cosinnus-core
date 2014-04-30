@@ -13,6 +13,7 @@ from multiform import MultiModelForm, InvalidArgument
 from cosinnus.forms.group import GroupKwargModelFormMixin
 from cosinnus.forms.user import UserKwargModelFormMixin
 from cosinnus.models.tagged import get_tag_object_model
+from cosinnus.utils.import_utils import import_from_settings
 
 
 TagObject = get_tag_object_model()
@@ -40,17 +41,10 @@ def get_tag_object_form():
     :data:`settings.COSINNUS_TAG_OBJECT_FORM`
     """
     from django.core.exceptions import ImproperlyConfigured
-    from django.utils.importlib import import_module
     from cosinnus.conf import settings
 
-    try:
-        module_name, _, form_name = settings.COSINNUS_TAG_OBJECT_FORM.rpartition('.')
-    except ValueError:
-        raise ImproperlyConfigured("COSINNUS_TAG_OBJECT_FORM must be of the "
-                                   "form 'path.to.the.ModelForm'")
-    module = import_module(module_name)
-    form_class = getattr(module, form_name, None)
-    if form_class is None or not issubclass(form_class, forms.ModelForm):
+    form_class = import_from_settings('COSINNUS_TAG_OBJECT_FORM')
+    if not issubclass(form_class, forms.ModelForm):
         raise ImproperlyConfigured("COSINNUS_TAG_OBJECT_FORM refers to form "
                                    "'%s' that does not exist or is not a "
                                    "ModelForm" %

@@ -15,6 +15,8 @@ from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership,
 
 from cosinnus.views.mixins.ajax import patch_body_json_data
 
+from tests.utils import skipIfCustomUserProfileSerializer
+
 
 class BaseApiTest(TestCase):
 
@@ -367,6 +369,7 @@ class GroupUsersTest(BaseApiTest):
                         reverse_kwargs={'group': self.group.slug})
         self.assertJsonEqual(resp, [])
 
+    @skipIfCustomUserProfileSerializer
     def test_group_list_filled(self):
         """
         Tests that anonymous can all users assigned to a group (pending,
