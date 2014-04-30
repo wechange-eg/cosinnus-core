@@ -49,13 +49,12 @@ class AttachableObjectSelect2View(RequireReadMixin, Select2View):
     def check_all_permissions(self, request, *args, **kwargs):
         user = request.user 
         
-        #import ipdb; ipdb.set_trace();
+        # Check if current user is member of this group
+        current_group = self.kwargs.get('group', None)
+        usergroups = CosinnusGroup.objects.get_for_user(request.user)
+        is_member = any((current_group == group.slug) for group in usergroups)
         
-        currentgroupslug = self.kwargs.get('group', None)
-        # TODO:Sascha: Check if current user is member of this group
-        ismember = True
-        
-        if not user.is_authenticated():# or not ismember:
+        if not user.is_authenticated() or not is_member:
             raise PermissionDenied
         
     def get_results(self, request, term, page, context):
