@@ -48,34 +48,20 @@ class FormAttachable(forms.ModelForm):
         # add a field for each model type of attachable file provided by cosinnus apps
         # each field's name is something like 'attached:cosinnus_file.FileEntry'
         # and fill the field with all available objects for that type (this is passed from our view)
-        """
-        for model_name, queryset in six.iteritems(attachable_objects_sets):
-            initial = preselected[model_name.split('__', 1)[1]]
-            model_name = model_name.replace('.', '__')
-            self.fields[model_name] = AttachableObjectSelect2MultipleChoiceField(
-                        label=_("Attachments"), 
-                        help_text=_("Type the title and/or type of attachment"), 
-                        data_view='attached_object_select2_view'
-            )
-        """
-        print ">> init form:"
         print ">> initial attachments:", preresults
         source_model_id = self._meta.model._meta.app_label + '.' + self._meta.model._meta.object_name
 
-        
-        #import ipdb; ipdb.set_trace();
-        """ TODO: SASCHA: add initial data to this field """
+        """ TODO: clean up -if- """
         if attachable_objects_sets and len(attachable_objects_sets) > 0:
             self.fields['attached_objects'] = AttachableObjectSelect2MultipleChoiceField(
                         label=_("Attachments"), 
                         help_text=_("Type the title and/or type of attachment"), 
                         data_url='/attachmentselect/%s/%s' % (self.group.slug, source_model_id),
-                        required=False,
-                        initial=preresults
-                        #data_view='cosinnus:attached_object_select2_view'
+                        required=False
             )
+            self.fields['attached_objects'].choices = preresults #((1, 'hi'),)
+            self.fields['attached_objects'].initial = [key for key,val in preresults] #[1]
             
-                        
             
             #forms.ModelMultipleChoiceField(
             #    queryset=queryset, required=False, initial=initial, label=_(model_name)

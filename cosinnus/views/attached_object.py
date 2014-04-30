@@ -60,8 +60,7 @@ class UpdateViewAttachable(AttachableViewMixin, UpdateView):
     pass
 
 
-class AttachableObjectSelect2View(Select2View, RequireReadMixin, GroupFormKwargsMixin,
-                     UserFormKwargsMixin):
+class AttachableObjectSelect2View(RequireReadMixin, Select2View):
     """
         This view is used as API backend to serve the suggestions for the message recipient field.
     """
@@ -97,9 +96,9 @@ class AttachableObjectSelect2View(Select2View, RequireReadMixin, GroupFormKwargs
             # TODO: Sascha: make a more sophisticated filter that allows filtering for "Event" tokens
         
             # these result sets are what select2 uses to build the choice list
-            results.extend( [ (attach_model_id+":"+str(res.pk), "%s %s" % (attach_model_id, res.title),) for res in queryset ] )
-        
-        print ">> results"
+            results.extend( [ (attach_model_id+":"+str(res.id), "%s %s" % (attach_model_id, res.title),) for res in queryset ] )
+            
+        print ">> results", results
         
         return (NO_ERR_RESP, False, results) # Any error response, Has more results, options list
 
