@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 from django_select2 import (HeavyModelSelect2MultipleChoiceField)
 from django.core.exceptions import ValidationError
 from django.http.response import Http404
+from django.db.models import get_model
 
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.tagged import AttachedObject
@@ -62,7 +63,8 @@ class FormAttachable(forms.ModelForm):
             self.fields['cosinnus_attachments'] = AttachableObjectSelect2MultipleChoiceField(
                         label=_("Attachments"), 
                         help_text=_("Type the title and/or type of attachment"), 
-                        data_url='/attachmentselect/%s/%s' % (self.group.slug, source_model_id)
+                        data_url='/attachmentselect/%s/%s' % (self.group.slug, source_model_id),
+                        required=False
                         #data_view='cosinnus:attached_object_select2_view'
             )
             
@@ -105,18 +107,23 @@ class AttachableObjectSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoice
             This is a list of mixed ids which could either be groups or users.
             See cosinnus_messages.views.UserSelect2View for how these ids are built.
             
-            Example for <value>: [u'user:1', u'group:4'] 
+            Example for <value>: [u'cosinnus_event.Event:1', u'cosinnus_file.FileEntry:1'] 
         """
                 
         if self.required and not value:
             raise ValidationError(self.error_messages['required'])
-               
+        
+        #import ipdb; ipdb.set_trace();
+        
         attached_objects = []        
-        for attached_obj in value:
+        for attached_obj_str in value:
             """ TODO: expand id and model type to real AO """
-            object_id = str(attached_obj.pk)
-            content_type = ContentType.objects.get_for_model(attached_obj)
+            obj_type, _, object_id = str(attached_obj_str).partition(':')
+            app_label, _, model = obj_type.rpartition('.')
+            print ">> app_label, model", app_label, model
+            content_type = ContentType.objects.get_for_model(get_model(app_label, model))
             (ao, _) = AttachedObject.objects.get_or_create(content_type=content_type, object_id=object_id)
-            attached_objects.add(ao)
+            attached_objects.append(ao)
+            print ">> added attached obj:", ao
             
         return attached_objects
