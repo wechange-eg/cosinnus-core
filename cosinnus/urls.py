@@ -42,7 +42,6 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^user/(?P<username>[^/]+)/$', 'user.user_detail', name='user-detail'),
     url(r'^user/(?P<username>[^/]+)/edit/$', 'user.user_update', name='user-edit'),
     
-    # TODO: Sascha: Check if this is leaky or a security issue
     url(r'^attachmentselect/(?P<group>[^/]+)/(?P<model>[^/]+)$', 
         AttachableObjectSelect2View.as_view(), 
         name='attached_object_select2_view'),

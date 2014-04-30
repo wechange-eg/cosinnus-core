@@ -77,18 +77,13 @@ class AttachableObjectSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoice
         if self.required and not value:
             raise ValidationError(self.error_messages['required'])
         
-        #import ipdb; ipdb.set_trace();
-        
         attached_objects = []        
         for attached_obj_str in value:
-            """ TODO: expand id and model type to real AO """
+            """ expand id and model type to real AO """
             obj_type, _, object_id = str(attached_obj_str).partition(':')
             app_label, _, model = obj_type.rpartition('.')
-            print ">> app_label, model", app_label, model
             content_type = ContentType.objects.get_for_model(get_model(app_label, model))
             (ao, _) = AttachedObject.objects.get_or_create(content_type=content_type, object_id=object_id)
             attached_objects.append(ao)
-            print ">> added attached obj:", ao
         
-        print ">> saving attached object field, saving attachments:", attached_objects
         return attached_objects
