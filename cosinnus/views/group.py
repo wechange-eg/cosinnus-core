@@ -16,10 +16,10 @@ from django.views.generic import (CreateView, DeleteView, DetailView,
 from cosinnus.core.decorators.views import superuser_required
 from cosinnus.core.registries import app_registry
 from cosinnus.forms.group import CosinnusGroupForm, MembershipForm
-from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership,
+from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING)
-from cosinnus.models.serializers import (GroupSimpleSerializer,
-    UserSimpleSerializer)
+from cosinnus.models.serializers.group import GroupSimpleSerializer
+from cosinnus.models.serializers.profile import UserSimpleSerializer
 from cosinnus.utils.compat import atomic
 from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
     AjaxableFormMixin, ListAjaxableResponseMixin)

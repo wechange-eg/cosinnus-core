@@ -8,4 +8,4 @@ INSTALLED_APPS = INSTALLED_APPS + (
 )
 
 COSINNUS_USER_PROFILE_MODEL = 'swappable_models.CustomUserProfile'
-COSINNUS_USER_PROFILE_SERIALIZER = 'cosinnus.models.serializers.profile.BaseUserProfileSerializer'
+COSINNUS_USER_PROFILE_SERIALIZER = 'tests.swappable_models.serializers.CustomUserProfileSerializer'

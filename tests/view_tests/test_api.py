@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import datetime
 import json
+
 from os import path, unlink
 
 from django.contrib.auth.models import User
@@ -10,12 +12,12 @@ from django.http import QueryDict
 from django.test import Client, SimpleTestCase, TestCase, RequestFactory
 from django.utils.encoding import force_text
 
-from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership,
+from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING)
 
 from cosinnus.views.mixins.ajax import patch_body_json_data
 
-from tests.utils import skipIfCustomUserProfileSerializer
+from tests.utils import skipIfCustomUserProfileSerializer, skipUnlessCustomUserProfileSerializer
 
 
 class BaseApiTest(TestCase):
@@ -335,11 +337,12 @@ class GroupTest(BaseApiTest):
         self.assertEqual(CosinnusGroup.objects.all().count(), 1)
         self.client.login(username='admin', password='admin')
         resp = self.put('cosinnus-api:group-edit',
-                        reverse_kwargs={'group': g.slug}, data={
-            'name': 'Group 2',
-            'slug': 'group-2',
-            'public': True,
-        })
+                        reverse_kwargs={'group': g.slug},
+                        data={
+                            'name': 'Group 2',
+                            'slug': 'group-2',
+                            'public': True,
+                        })
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(CosinnusGroup.objects.all().count(), 1)
         g = CosinnusGroup.objects.all().get()
@@ -415,5 +418,45 @@ class GroupUsersTest(BaseApiTest):
                 "avatar_80x80": None,
                 "avatar_50x50": None,
                 "avatar_40x40": None,
+            },
+        }])
+
+    @skipUnlessCustomUserProfileSerializer
+    def test_group_list_filled_custom(self):
+        """
+        Tests that anonymous can all users assigned to a group (pending,
+        member, admin)
+        """
+        u1 = User.objects.create_user('user1')
+        u2 = User.objects.create_user('user2')
+        u3 = User.objects.create_user('user3')
+        User.objects.create_user('user4')
+        CosinnusGroupMembership.objects.create(user=u1, group=self.group, status=MEMBERSHIP_ADMIN)
+        CosinnusGroupMembership.objects.create(user=u2, group=self.group, status=MEMBERSHIP_MEMBER)
+        CosinnusGroupMembership.objects.create(user=u3, group=self.group, status=MEMBERSHIP_PENDING)
+        u2.cosinnus_profile.dob = datetime.date(2014, 4, 25)
+        u2.cosinnus_profile.save()
+        resp = self.get('cosinnus-api:group-user-list',
+                        reverse_kwargs={'group': self.group.slug})
+        self.assertJsonEqual(resp, [{
+            'id': u1.id,
+            'username': u1.username,
+            'profile': {
+                'id': u1.cosinnus_profile.id,
+                'dob': None,
+            },
+        }, {
+            'id': u2.id,
+            'username': u2.username,
+            'profile': {
+                'id': u2.cosinnus_profile.id,
+                'dob': '2014-04-25',
+            },
+        }, {
+            'id': u3.id,
+            'username': u3.username,
+            'profile': {
+                'id': u3.cosinnus_profile.id,
+                'dob': None,
             },
         }])

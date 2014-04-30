@@ -9,4 +9,5 @@ docs:
 	make -C docs clean html
 
 test:
-	tox -r
+	django-admin.py test --pythonpath=./ --settings=tests.settings.base -v 2
+	django-admin.py test --pythonpath=./ --settings=tests.settings.base_swappable -v 2

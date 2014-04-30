@@ -8,19 +8,18 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
 from cosinnus.conf import settings
-from cosinnus.models.profile import UserProfile
+from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.serializers.group import GroupSimpleSerializer
 from cosinnus.utils.import_utils import import_from_settings
 
 
-__all__ = ('UserProfileSerializer', 'UserDetailSerializer',
-    'UserSimpleSerializer', )
+__all__ = ('BaseUserProfileSerializer', 'UserProfileSerializer',
+    'UserDetailSerializer', 'UserSimpleSerializer', )
 
 
 class BaseUserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = UserProfile
         fields = ('id', )
 
 
@@ -29,6 +28,7 @@ class UserProfileSerializer(BaseUserProfileSerializer):
     avatar = serializers.CharField(source="avatar_url")
 
     class Meta(BaseUserProfileSerializer.Meta):
+        model = get_user_profile_model()
         fields = BaseUserProfileSerializer.Meta.fields + ('avatar', )
 
     def __init__(self, *args, **kwargs):
