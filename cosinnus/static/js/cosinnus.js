@@ -56,6 +56,28 @@
 					tags: $(this).attr('data-tags').split(',')
 				});
 			});
+
+			$('.attachments-selector').each(function() {
+				$(this).select2({
+					placeholder: 'Anhänge',
+					escapeMarkup: function(m) { return m; }, // do not escape HTML
+					formatSelection: function(m) {return m.text; }, // do not alter selected elements
+					formatResult: function(m) { console.log(m); return m.text; }, // do not alter found options
+					multiple: true,
+					minimumInputLength: 3,
+					data: [
+						{id:0,text:'<span class="app-calendar-attachment"><i class="fa fa-calendar"></i> Termin: Hamsterwerfen</span>'},
+						{id:1,text:'<span class="app-documents-attachment"><i class="fa fa-file"></i> Dokument</span>'},
+						{id:2,text:'<span class="app-todos-attachment"><i class="fa fa-check-square"></i> Todo-Liste</span>'},
+						{id:3,text:'<span class="app-etherpad-attachment"><i class="fa fa-pencil"></i> Etherpad: Lorem!</span>'},
+						{id:4,text:'<span class="app-etherpad-attachment"><i class="fa fa-pencil"></i> Etherpad: Mauern</span>'},
+						{id:5,text:'<span class="app-etherpad-attachment"><i class="fa fa-pencil"></i> Etherpad: Sinnwerkstatt</span>'},
+						{id:6,text:'<span class="app-etherpad-attachment"><i class="fa fa-pencil"></i> Etherpad: Thinkfarm</span>'},
+						{id:7,text:'<span class="app-etherpad-attachment"><i class="fa fa-pencil"></i> Etherpad: Berlin</span>'},
+						{id:8,text:'<span class="app-etherpad-attachment"><i class="fa fa-pencil"></i> Etherpad: Cosinnus</span>'}
+					]
+				});
+			});
 		},
 
 		fullcalendar : function() {

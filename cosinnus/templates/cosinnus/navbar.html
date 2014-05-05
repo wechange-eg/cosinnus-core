@@ -1,0 +1,78 @@
+{% load i18n cosinnus_tags thumbnail %}
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">{% trans "Toggle navigation" %}</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <!-- TODO: Logo -->
+                <i class="fa fa-home"></i>
+            </a>
+        </div><!-- navbar-header -->
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+                {% if request.user.is_authenticated %}
+	                {% if groups %}
+		                <li class="dropdown">
+		                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		                        {% if group %}{{ group.name }}{% endif %}
+		                        <i class="fa fa-caret-down"></i>
+		                    </a>
+		                    <ul class="dropdown-menu">
+		                        {% for g in groups %}
+				                    <li{% if g == group %} class="active"{% endif %}><a href="{% url 'cosinnus:group-dashboard' group=g.slug %}">{{ g.name }}</a></li>
+				                {% endfor %}
+		                        <li class="divider"></li>
+		                        <li><a href="#">{% trans "List all groups" %}</a></li>
+		                    </ul>
+		                </li>
+	                {% else %}
+		                <li><a href="{% url 'cosinnus:group-list' %}">{% trans "No Groups. Join!" %}</a></li>
+		            {% endif %}
+	            {% endif %}
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li id="searchbar">
+                    <input class="form-control" placeholder="Suchbegriff" value="" />
+                    <i class="fa fa-search"></i>
+                </li>
+                {% if request.user.is_authenticated %}
+	                <li>
+	                    <a href="{% url 'cosinnus:postman_inbox' %}">
+	                        <i class="fa fa-envelope"></i>
+	                    </a>
+	                </li>
+	                <li class="dropdown">
+	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	                        <img src="avatar.png" />
+	                        {{ request.user|full_name }}
+	                        <i class="fa fa-caret-down"></i>
+	                    </a>
+	                    <ul class="dropdown-menu">
+							<li><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Profile" %}</a></li>
+							<li><a href="{% url 'cosinnus:user-dashboard' %}">{% trans "Dashboard" %}</a></li>
+							<li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
+	                    </ul>
+	                </li>
+                {% else %}
+                    <li>
+						<a href="#">
+						    Login
+						</a>
+                    </li>
+		        {% endif %}
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+
+
+

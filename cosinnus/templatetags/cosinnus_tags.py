@@ -68,7 +68,7 @@ def full_name(value):
 
 
 @register.simple_tag(takes_context=True)
-def cosinnus_menu(context, template="cosinnus/topmenu.html"):
+def cosinnus_menu(context, template="cosinnus/navbar.html"):
     if 'request' not in context:
         raise ImproperlyConfigured("Current request missing in rendering "
             "context. Include 'django.core.context_processors.request' in the "

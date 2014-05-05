@@ -793,6 +793,46 @@ body .large-space {
   box-shadow: none;
 }
 
+.attachments-selector {
+  min-width: 15em;
+}
+
+.app-main-attachment {
+  background-color: #16778d;
+  color: white;
+  padding: 0 4px;
+}
+
+.app-calendar-attachment {
+  background-color: #779b48;
+  color: white;
+  padding: 0 4px;
+}
+
+.app-files-attachment {
+  background-color: #14a085;
+  color: white;
+  padding: 0 4px;
+}
+
+.app-documents-attachment {
+  background-color: #009ee3;
+  color: white;
+  padding: 0 4px;
+}
+
+.app-todos-attachment {
+  background-color: #efa02d;
+  color: white;
+  padding: 0 4px;
+}
+
+.app-etherpad-attachment {
+  background-color: #e55c55;
+  color: white;
+  padding: 0 4px;
+}
+
 .app-main {
   /* ##### Small calendar ####### */
 }
