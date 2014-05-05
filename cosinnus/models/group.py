@@ -14,6 +14,7 @@ from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy as p_
 
 from taggit.managers import TaggableManager
+from tinymce.models import HTMLField
 
 from cosinnus.conf import settings
 from cosinnus.utils.functions import unique_aware_slugify
@@ -284,6 +285,7 @@ class CosinnusGroup(models.Model):
     name = models.CharField(_('Name'), max_length=100,
         validators=[group_name_validator])
     slug = models.SlugField(_('Slug'), max_length=50, unique=True, blank=True)
+    description = HTMLField(verbose_name=_('Description'), blank=True)
     public = models.BooleanField(_('Public'), default=False)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
         related_name='cosinnus_groups', through='CosinnusGroupMembership')

@@ -64,6 +64,7 @@ setup(
         'django-multiform',
         'django_select2',
         'django-taggit>=0.11',
+        'django-tinymce==1.5.2',
         'djangorestframework>=2.3.0',
         'easy-thumbnails>=1.4',
     ],
