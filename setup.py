@@ -43,7 +43,6 @@ for dirpath, dirnames, filenames in os.walk(pkgdir):
 
 from cosinnus import get_version
 
-django_select2 = 'Django-Select2-Py3>=4.2.1' if sys.version_info[0] == 3 else 'Django-Select2>=4.2.1',
 
 setup(
     name='cosinnus',
@@ -56,13 +55,13 @@ setup(
     data_files=data_files,
     install_requires=[
         'Django>=1.5',
+        'Django-Select2',
         'Pillow>=2.1.0',
         'South>=0.7',
         'django-appconf>=0.6',
         'django-bootstrap3',
         'django-bootstrap3-datetimepicker>=2.2.0',
         'django-multiform',
-        'django_select2',
         'django-taggit>=0.11',
         'djangorestframework>=2.3.0',
         'easy-thumbnails>=1.4',
@@ -70,7 +69,7 @@ setup(
     dependency_links=[
         'git+git://github.com/Markush2010/django-bootstrap3.git@develop#egg=django-bootstrap3',
         'git+http://git.sinnwerkstatt.com/mh/django-multiform.git@master#egg=django-multiform',
-        'git+git://github.com/sinnwerkstatt/django-select2.git@master#egg=django-select2',
+        'git+git://github.com/sinnwerkstatt/django-select2.git@master#egg=Django-Select2',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
