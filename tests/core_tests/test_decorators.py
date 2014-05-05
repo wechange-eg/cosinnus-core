@@ -12,7 +12,7 @@ from django.views.generic import View
 from cosinnus.core.decorators.views import (require_admin_access,
     require_read_access, require_write_access, staff_required,
     superuser_required)
-from cosinnus.models import (MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER,
+from cosinnus.models.group import (MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER,
     MEMBERSHIP_ADMIN, CosinnusGroup as Group,
     CosinnusGroupMembership as Membership)
 

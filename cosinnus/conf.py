@@ -47,3 +47,6 @@ class CosinnusConf(AppConf):
         (50, 50),
         (40, 40),
     )
+
+    #: The serializer used for the user profile
+    USER_PROFILE_SERIALIZER = 'cosinnus.models.serializers.profile.UserProfileSerializer'

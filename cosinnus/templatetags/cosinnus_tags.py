@@ -13,7 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry, attached_object_registry
-from cosinnus.models import CosinnusGroup
+from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending)
 

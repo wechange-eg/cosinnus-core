@@ -8,21 +8,28 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
 from cosinnus.conf import settings
-from cosinnus.models.profile import UserProfile
+from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.serializers.group import GroupSimpleSerializer
+from cosinnus.utils.import_utils import import_from_settings
 
 
-__all__ = ('UserProfileSerializer', 'UserDetailSerializer',
-    'UserSimpleSerializer', )
+__all__ = ('BaseUserProfileSerializer', 'UserProfileSerializer',
+    'UserDetailSerializer', 'UserSimpleSerializer', )
 
 
-class UserProfileSerializer(serializers.ModelSerializer):
+class BaseUserProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        fields = ('id', )
+
+
+class UserProfileSerializer(BaseUserProfileSerializer):
 
     avatar = serializers.CharField(source="avatar_url")
 
-    class Meta:
-        model = UserProfile
-        fields = ('id', 'avatar', )
+    class Meta(BaseUserProfileSerializer.Meta):
+        model = get_user_profile_model()
+        fields = BaseUserProfileSerializer.Meta.fields + ('avatar', )
 
     def __init__(self, *args, **kwargs):
         super(UserProfileSerializer, self).__init__(*args, **kwargs)
@@ -39,10 +46,21 @@ class UserProfileSerializer(serializers.ModelSerializer):
             setattr(self, 'transform_%s' % name, func)
 
 
+def get_user_profile_serializer():
+    """
+    Return the cosinnus user profile serializer that is defined in
+    :data:`settings.COSINNUS_USER_PROFILE_SERIALIZER`
+    """
+    return import_from_settings('COSINNUS_USER_PROFILE_SERIALIZER')
+
+
+_UserProfileSerializer = get_user_profile_serializer()
+
+
 class UserSimpleSerializer(serializers.ModelSerializer):
 
     username = serializers.CharField(source='get_username', read_only=True)
-    profile = UserProfileSerializer(source='cosinnus_profile', many=False, read_only=True)
+    profile = _UserProfileSerializer(source='cosinnus_profile', many=False, read_only=True)
 
     class Meta:
         model = get_user_model()

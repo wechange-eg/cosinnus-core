@@ -160,7 +160,10 @@ class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
 
 
 def get_tag_object_model():
-    "Return the cosinnus user profile model that is active in this project"
+    """
+    Return the cosinnus tag object model that is defined in
+    :data:`settings.COSINNUS_TAG_OBJECT_MODEL`
+    """
     from django.core.exceptions import ImproperlyConfigured
     from django.db.models import get_model
     from cosinnus.conf import settings

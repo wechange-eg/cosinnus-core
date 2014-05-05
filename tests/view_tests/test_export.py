@@ -8,7 +8,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.test import TestCase
 from django.utils.encoding import force_text
 
-from cosinnus.models import CosinnusGroup
+from cosinnus.models.group import CosinnusGroup
 from cosinnus.views.export import JSONExportView, CSVExportView
 
 from tests.models import ChoicesTestModel

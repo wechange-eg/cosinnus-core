@@ -5,7 +5,7 @@ from django import forms
 
 from multiform import InvalidArgument
 
-from cosinnus.models import (CosinnusGroup, CosinnusGroupMembership,
+from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_MEMBER)
 
 

@@ -8,7 +8,7 @@ from django.http import HttpResponseForbidden, HttpResponseNotFound
 from django.utils.decorators import available_attrs
 from django.utils.translation import ugettext_lazy as _
 
-from cosinnus.models import CosinnusGroup
+from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
 
 

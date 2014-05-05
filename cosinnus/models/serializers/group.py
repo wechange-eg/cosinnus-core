@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from rest_framework import serializers
 
-from cosinnus.models import CosinnusGroup
+from cosinnus.models.group import CosinnusGroup
 
 
 __all__ = ('GroupSimpleSerializer', )
