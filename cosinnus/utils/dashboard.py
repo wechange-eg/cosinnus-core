@@ -7,8 +7,11 @@ from django import forms
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.decorators import classonlymethod
 from django.core.urlresolvers import reverse
+from django.template.loader import render_to_string
+from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.utils.compat import atomic
+from cosinnus.models.group import CosinnusGroup
 
 
 class DashboardWidgetForm(forms.Form):
@@ -114,3 +117,33 @@ class DashboardWidget(object):
             return reverse('cosinnus:%s:index' % self.app_name,
                            kwargs={'group': self.config.group.slug})
         return None
+
+
+
+class GroupDescriptionForm(DashboardWidgetForm):
+    amount = forms.IntegerField(label="Amount", initial=5, min_value=0,
+        help_text="0 means unlimited", required=False)
+
+
+class GroupDescriptionWidget(DashboardWidget):
+
+    app_name = 'cosinnus'
+    form_class = GroupDescriptionForm
+    model = CosinnusGroup
+    title = _('Group Description')
+    user_model_attr = None
+    widget_name = 'group_description'
+
+    def get_data(self):
+        group = self.config.group
+        if group is None:
+            raise ImproperlyConfigured('Group description widget was used in a non-group environment, or group could not be found!')
+        data = {
+            'group': group,
+        }
+        return render_to_string('cosinnus/widgets/group_description.html', data)
+    
+    @property
+    def title_url(self):
+        return ''
+

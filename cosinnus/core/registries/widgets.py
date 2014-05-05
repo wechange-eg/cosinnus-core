@@ -59,3 +59,6 @@ widget_registry = WidgetRegistry()
 
 
 __all__ = ('widget_registry', )
+
+
+widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.GroupDescriptionWidget')
