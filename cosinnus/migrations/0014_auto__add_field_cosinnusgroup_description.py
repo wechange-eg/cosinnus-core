@@ -8,35 +8,16 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Deleting model 'TagObject'
-        db.delete_table(u'cosinnus_tagobject')
-
         # Adding field 'CosinnusGroup.description'
         db.add_column(u'cosinnus_cosinnusgroup', 'description',
                       self.gf('tinymce.models.HTMLField')(default='', blank=True),
                       keep_default=False)
 
 
-        # Changing field 'CosinnusGroup.media_tag'
-        db.alter_column(u'cosinnus_cosinnusgroup', 'media_tag_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['neww.NewwTagObject'], unique=True, null=True, on_delete=models.PROTECT))
-
     def backwards(self, orm):
-        # Adding model 'TagObject'
-        db.create_table(u'cosinnus_tagobject', (
-            ('group', self.gf('django.db.models.fields.related.ForeignKey')(related_name=u'+', null=True, to=orm['cosinnus.CosinnusGroup'])),
-            ('people_name', self.gf('django.db.models.fields.CharField')(default=u'', max_length=255, blank=True)),
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('location_place', self.gf('django.db.models.fields.CharField')(default=u'', max_length=255, blank=True)),
-            ('public', self.gf('django.db.models.fields.BooleanField')(default=False)),
-        ))
-        db.send_create_signal(u'cosinnus', ['TagObject'])
-
         # Deleting field 'CosinnusGroup.description'
         db.delete_column(u'cosinnus_cosinnusgroup', 'description')
 
-
-        # Changing field 'CosinnusGroup.media_tag'
-        db.alter_column(u'cosinnus_cosinnusgroup', 'media_tag_id', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['cosinnus.TagObject'], unique=True, null=True, on_delete=models.PROTECT))
 
     models = {
         u'auth.group': {
@@ -57,7 +38,7 @@ class Migration(SchemaMigration):
             'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
+            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Group']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
@@ -65,7 +46,7 @@ class Migration(SchemaMigration):
             'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
+            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Permission']"}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         },
         u'contenttypes.contenttype': {
@@ -85,7 +66,7 @@ class Migration(SchemaMigration):
             'Meta': {'ordering': "(u'name',)", 'object_name': 'CosinnusGroup'},
             'description': ('tinymce.models.HTMLField', [], {'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'media_tag': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['neww.NewwTagObject']", 'unique': 'True', 'null': 'True', 'on_delete': 'models.PROTECT', 'blank': 'True'}),
+            'media_tag': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['cosinnus.TagObject']", 'unique': 'True', 'null': 'True', 'on_delete': 'models.PROTECT', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'public': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '50', 'blank': 'True'}),
@@ -98,6 +79,14 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'status': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '0', 'db_index': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'cosinnus_memberships'", 'to': u"orm['auth.User']"})
+        },
+        u'cosinnus.tagobject': {
+            'Meta': {'object_name': 'TagObject'},
+            'group': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'+'", 'null': 'True', 'to': u"orm['cosinnus.CosinnusGroup']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'location_place': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '255', 'blank': 'True'}),
+            'people_name': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '255', 'blank': 'True'}),
+            'public': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
         },
         u'cosinnus.userprofile': {
             'Meta': {'object_name': 'UserProfile'},
@@ -119,36 +108,6 @@ class Migration(SchemaMigration):
             'config_key': ('django.db.models.fields.CharField', [], {'max_length': '20', 'db_index': 'True'}),
             'config_value': ('django.db.models.fields.TextField', [], {'default': "u''"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
-        },
-        u'neww.newwtagobject': {
-            'Meta': {'object_name': 'NewwTagObject'},
-            'approach': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'group': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'+'", 'null': 'True', 'to': u"orm['cosinnus.CosinnusGroup']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'likers': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "u'likes+'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['auth.User']"}),
-            'likes': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '0', 'blank': 'True'}),
-            'location': ('osm_field.fields.OSMField', [], {'null': 'True', 'blank': 'True'}),
-            u'location_lat': ('osm_field.fields.LatitudeField', [], {'null': 'True', 'blank': 'True'}),
-            u'location_lon': ('osm_field.fields.LongitudeField', [], {'null': 'True', 'blank': 'True'}),
-            'persons': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "u'+'", 'null': 'True', 'symmetrical': 'False', 'to': u"orm['auth.User']"}),
-            'place': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '100', 'blank': 'True'}),
-            'topics': ('django.db.models.fields.CommaSeparatedIntegerField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'valid_end': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
-            'valid_start': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
-            'visibility': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': '1', 'blank': 'True'})
-        },
-        u'taggit.tag': {
-            'Meta': {'object_name': 'Tag'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '100'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '100'})
-        },
-        u'taggit.taggeditem': {
-            'Meta': {'object_name': 'TaggedItem'},
-            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'taggit_taggeditem_tagged_items'", 'to': u"orm['contenttypes.ContentType']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'object_id': ('django.db.models.fields.IntegerField', [], {'db_index': 'True'}),
-            'tag': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "u'taggit_taggeditem_items'", 'to': u"orm['taggit.Tag']"})
         }
     }
 
