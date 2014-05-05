@@ -1,0 +1,193 @@
+/* The Bootstrap buttons already have the classes btn-default, btn-info, btn-warning and so on.
+	This file adds btn-emphasized, btn-extra-emphasized and btn-appnavi for coloring in the apps's colors.
+*/
+
+.btn {
+	padding: 0;
+	border-width: 0;
+	width: 10em;
+	float: right;
+	margin: 0 0 0 5px;
+}
+.btn .form-control, .select2-container {
+	font-size:1.2em;
+}
+.btn-default {
+	background-color: transparent;
+	border-width: 0;
+}
+.btn-default:hover {
+	background-color: transparent;
+}
+
+/* media-lists */
+.media-list {
+	margin: 0;
+}
+.btn-default .media {
+	background-color: transparent;
+}
+.btn-default .media > .media-body,
+{
+	background-color: $app-neutral-color-white;
+}
+
+.media-body {
+	line-height: 37px;
+	padding: 0 10px;
+	min-height: 40px;
+}
+
+.media > .pull-left,
+.media > .pull-right {
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 1.5em;
+	text-align: center;
+	margin: 0;
+}
+.btn-default .media > .pull-left,
+.btn-default .media > .pull-right {
+	background-color: $app-neutral-color;
+	color: $app-neutral-color-white;
+}
+
+.btn-default .media > .pull-left:empty,
+.btn-default .media > .pull-right:empty {
+	background-color: transparent;
+	color: inherit;
+}
+
+// Icons on the right side are only visible on hover
+.fadedown .btn-default .media > .pull-right {
+	color: transparent;
+}
+
+
+
+/* Quadratic images at side of buttons */
+.pull-left img, .pull-right img {
+	width: 40px;
+}
+.pull-left input, .pull-right input {
+	border-width: 0;
+}
+
+
+/* put a class like .app-documents, .app-todos on areas that contain content in app colors.
+	On usual pages it has to be set only once in a global element.
+
+	Whereever the .clickarea-emphasized and .clickarea-extra-emphasized classes occur
+	all buttons will have strong colors then.
+*/
+
+.btn-appnavi .media a:first-child {
+	width: 10px;
+}
+
+@mixin btn-app-colors($light,$normal,$dark) {
+	.btn-emphasized .media,
+	.btn-appnavi .media,
+	.btn-emphasized .media > .media-body,
+	.btn-appnavi .media > .media-body,
+	.btn-emphasized .media > .pull-right,
+	.btn-appnavi .media > .pull-left,
+	.btn-appnavi .media > .pull-right {
+		color: $app-neutral-color-white;
+		background-color: $normal;
+	}
+
+	.btn-extra-emphasized .media,
+	.btn-emphasized:hover .media,
+	.fadedown.open .btn-emphasized.w100 .media,
+	.btn-appnavi:hover .media,
+	.btn-emphasized:hover .media  > .media-body,
+	.fadedown.open .btn-emphasized.w100 .media  > .media-body,
+	.btn-appnavi:hover .media  > .media-body,
+	.btn-extra-emphasized .media  > .media-body,
+	.btn-emphasized .media > .pull-left,
+	.media > .pull-left.btn-emphasized,
+	.btn-appnavi .media > .pull-left:first-child,
+	.btn-appnavi:hover .media > .pull-left,
+	.btn-extra-emphasized .media > .pull-left,
+	.media > .pull-left.btn-extra-emphasized,
+	.btn-extra-emphasized:hover .media > .pull-right,
+	.fadedown.open .btn-extra-emphasized.w100 .media > .pull-right,
+	.fadedown .btn-extra-emphasized:hover .media > .pull-right,
+	.btn-emphasized:hover .media > .pull-right,
+	.fadedown.open .btn-emphasized.w100 .media > .pull-right,
+	.fadedown .btn-emphasized:hover .media > .pull-right,
+	.btn-appnavi:hover .media > .pull-right {
+		color: $app-neutral-color-white;
+		background-color: $dark;
+	}
+
+	.btn-emphasized .media > .pull-left:empty,
+	.btn-emphasized .media > .pull-right:empty,
+	.btn-appnavi .media > .pull-left:empty,
+	.btn-appnavi .media > .pull-right:empty {
+		background-color: transparent;
+		color: inherit;
+	}
+
+	// Icons on the right side are only visible on hover
+	.btn-emphasized .media > .pull-right,
+	.btn-appnavi .media > .pull-right,
+	.btn-extra-emphasized .media > .pull-right {
+		color: transparent;
+	}
+
+	// ...except of .permanent-visible!
+	.btn-emphasized .media > .pull-right.permanent-visible,
+	.btn-extra-emphasized .media > .pull-right.permanent-visible {
+		color: inherit;
+	}
+
+
+
+	/* spaces below element */
+	.fine-space {
+	// do this simply in neutral gray.
+	// border-bottom: 1px solid $light;
+	}
+}
+
+.app-main {
+	@include btn-app-colors($app-main-color-light,$app-main-color,$app-main-color-dark);
+}
+.app-calendar {
+	@include btn-app-colors($app-calendar-color-light,$app-calendar-color,$app-calendar-color-dark);
+}
+.app-files {
+	@include btn-app-colors($app-files-color-light,$app-files-color,$app-files-color-dark);
+}
+.app-documents {
+	@include btn-app-colors($app-documents-color-light,$app-documents-color,$app-documents-color-dark);
+}
+.app-todos {
+	@include btn-app-colors($app-todos-color-light,$app-todos-color,$app-todos-color-dark);
+}
+.app-etherpad {
+	@include btn-app-colors($app-etherpad-color-light,$app-etherpad-color,$app-etherpad-color-dark);
+}
+
+
+// inside .media-body a small note on the right side.
+.media-body {
+	position: relative;
+
+	.annotation {
+		position: absolute;
+		right: 10px;
+		top: 0;
+		font-size: 0.9em;
+	}
+
+	// Always make a gap between links
+	a + a {
+		margin-left: 15px;
+	}
+}
+
+

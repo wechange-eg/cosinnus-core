@@ -1,0 +1,29 @@
+#calendar-doodle-days-selector {
+	.small-calendar {
+		float: left;
+		margin: 10px;
+	}
+
+	#calendar-doodle-days-selector-list {
+		float: left;
+		margin: 10px;
+
+		td, th {
+			padding: 3px 5px;
+			line-height: 1.1em;
+		}
+
+		table {
+			margin-bottom: 2em;
+		}
+
+		input {
+			width: 6em;
+		}
+
+		p {
+			margin: 8px 0;
+			line-height: 1.1em;
+		}
+	}
+}

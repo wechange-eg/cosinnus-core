@@ -1,0 +1,88 @@
+.doodle-vote-table {
+	white-space: nowrap;
+	overflow-x: auto;
+	padding: 0 0 20px 0;
+	color: $app-neutral-color-dark;
+
+	> div {
+	display: table;
+		border-spacing: 8px 2px;
+
+		> div {
+			display: table-cell;
+			text-align: center;
+			max-width: 40px;
+			min-width: 40px;
+			min-height:5px;
+
+			img {
+				width: 40px;
+				height: 40px;
+			}
+		}
+
+		.doodle-vote-cell + .doodle-vote-cell  {
+			margin-left: 8px;
+		}
+
+		.doodle-vote-date {
+			max-width: 88px;
+			min-width: 88px;
+			color: $app-neutral-color-white;
+			background-color: $app-calendar-color;
+			line-height: 1em;
+			padding: 3px 0;
+		}
+
+		.doodle-vote-time {
+			background-color: transparent;
+			line-height: 1em;
+			padding: 3px 0;
+			height: 30px;
+		}
+
+
+		@mixin doodle-vote-yesmaybeno() {
+			min-height: 40px;
+			line-height: 1.3em;
+			font-size: 1.2em;
+			padding: 10px 0;
+		}
+
+		.doodle-vote-yes {
+			background-color:transparentize($app-main-color-yes, 0.35);
+			@include doodle-vote-yesmaybeno();
+		}
+
+		.doodle-vote-maybe {
+			background-color:transparentize($app-main-color-maybe, 0.35);
+			@include doodle-vote-yesmaybeno();
+		}
+
+		.doodle-vote-no {
+			background-color:transparentize($app-main-color-no, 0.35);
+			@include doodle-vote-yesmaybeno();
+			// color: transparent;
+		}
+
+		.doodle-vote-eventbutton {			
+			background-color: $app-neutral-color-white;
+			@include doodle-vote-yesmaybeno();
+			cursor: pointer;
+		}
+
+	}
+
+	h2 {
+			font-size: 1em;
+			font-weight: bold;
+		}
+
+	.doodle-vote-inputarea {
+		a {
+			color: inherit;
+			display: block;
+		}
+	}
+
+}

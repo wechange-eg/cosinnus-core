@@ -1,86 +1,152 @@
-/* COLORS */
-$white: #FFFFFF;
-$grey-darkest: #414141;
-$neww-bg-color: #BACFD2;
-
-$select-percentage: 10%;
-
-/* Todos */
-$app-color: #F1A200;
-$app-color-selected: darken($app-color, $select-percentage);
-$app-color-dark: #B07F19;
-$app-color-dark-selected: darken($app-color-dark, $select-percentage);
-$app-color-dark: #B07F19;
-$app-color-text: $white;
-$app-secondary-color: $white;
-$app-secondary-color-text: #949494;
-$app-secondary-color-dark: #C2C2C2;
-$app-secondary-color-dark-text: $white;
-$app-color-bg: #D1DCD8;
-$app-color-list-line: #FCEDCE;
-
-/* Todos */
-$app-todos-color: #F1A200;
-$app-todos-color-selected: darken($app-color, $select-percentage);
-$app-todos-color-dark: #B07F19;
-$app-todos-color-dark-selected: darken($app-color-dark, $select-percentage);
-$app-todos-color-text: $white;
-$app-todos-secondary-color: $white;
-$app-todos-secondary-color-text: #949494;
-$app-todos-secondary-color-dark: #C2C2C2;
-$app-todos-secondary-color-dark-text: $white;
-
-/* Calendar */
-$app-calendar-color: #789d40;
-$app-calendar-color-dark: #4a6228;
-$app-calendar-color-text: $white;
-
-/* Files */
-$app-files-color: #00a388;
-$app-files-color-dark: #4a6228;
-$app-files-color-text: $white;
-
-/* Etherpad */
-$app-etherpad-color: #e8483a;
-$app-etherpad-color-dark: #4a6228;
-$app-etherpad-color-text: $white;
-
-/* Neutral */
-$app-neutral-color: #FFFFFF;
-$app-neutral-color-dark: $app-color-dark;
-$app-neutral-color-text: #777777;
-
-/* main-menu */
-$app-main-menu-color: #d8e3e5;
-$app-main-menu-color-dark: $app-color-dark;
-$app-main-menu-color-text: #777777;
-
-/* Network */
-$app-network-color: #0a7891;
-$app-network-color-dark: #06495a;
-$app-network-color-text: $white;
-
-/* Dashboard */
-$app-dashboard-color: #d8e3e5;
-$app-dashboard-color-dark: #06495a;
-$app-dashboard-color-text: $white;
+// Only this file and maybe the logo image should be needed to customize for different installations.
 
 
-$app-color-font-secondary: #949494;
 
-$item-width: 40px;
-$item-height: 40px;
-$item-line-width: 10px;
-$item-line-height: 40px;
+// The colors are from Tobi's 01b_NEWW_Color-Scheme.pdf
+// Farbklima Netzwerk Wachstumswende
+// no other colors should be used in the whole project
 
-$item-distance: 10px;
-$item-distance-small: 5px;
-$item-distance-long: 20px;
+// main color and news
+$app-main-color: #16778D;
+$app-main-color-dark: #104A59;
+$app-main-color-light: #CBE7ED;
 
-$app-item-title-border-color: darken($app-color-dark, 0%);
+$app-main-color-yes: #779B48;
+$app-main-color-maybe: #EFA02D;
+$app-main-color-no: #E55C55;
 
-$font-size-bigger: 16px;
-$font-size-big: 14px;
-$font-size: 12px;
-$font-size-small: 11px;
-$font-size-smaller: 10px;
+// Calendar
+$app-calendar-color: #779B48;
+$app-calendar-color-dark: #4C622F;
+$app-calendar-color-light: #E1EDD2;
+
+// Files
+$app-files-color: #14A085;
+$app-files-color-dark: #0A5D4E;
+$app-files-color-light: #92FFEA;
+
+// Documents
+$app-documents-color: #009EE3;
+$app-documents-color-dark: #007999;
+$app-documents-color-light: #D5F3FF;
+
+// Todos
+$app-todos-color: #EFA02D;
+$app-todos-color-dark: #AD7E2C;
+$app-todos-color-light: #FAEBCD;
+
+// Etherpad
+$app-etherpad-color: #E55C55;
+$app-etherpad-color-dark: #933D39;
+$app-etherpad-color-light: #EDE2E1;
+
+// Neutral
+$app-neutral-color: #949494;
+$app-neutral-color-dark: #333333;
+$app-neutral-color-light: #DBDBDB;
+$app-neutral-color-white: #FFFFFF;
+
+
+body {
+	font-family: Verdana, Geneva, sans-serif;
+
+	background-image: url("../images/background.jpg");
+}
+
+
+
+/*
+// eight years old riding a unicorn
+
+// main color and news
+$app-main-color: #16778D;
+$app-main-color-dark: #104A59;
+$app-main-color-light: #CBE7ED;
+
+// Calendar
+$app-calendar-color: #FFBAFA;
+$app-calendar-color-dark: #00D7C6;
+$app-calendar-color-light: #FFFFFF;
+
+// Files
+$app-files-color: #14A085;
+$app-files-color-dark: #0A5D4E;
+$app-files-color-light: #92FFEA;
+
+// Documents
+$app-documents-color: #009EE3;
+$app-documents-color-dark: #007999;
+$app-documents-color-light: #D5F3FF;
+
+// Todos
+$app-todos-color: #EFA02D;
+$app-todos-color-dark: #AD7E2C;
+$app-todos-color-light: #FAEBCD;
+
+// Etherpad
+$app-etherpad-color: #E55C55;
+$app-etherpad-color-dark: #933D39;
+$app-etherpad-color-light: #EDE2E1;
+
+// Neutral
+$app-neutral-color: #FFA5D3;
+$app-neutral-color-dark: #FF178F;
+$app-neutral-color-light: #A2D5E3;
+$app-neutral-color-white: #E5F6F8;
+
+body {
+	font-family: "Comic Sans MS";
+
+	background-image: url("../images/magic-pony-django-wallpaper.png");
+//	background-color: #FF56F2;
+
+}
+
+*/
+
+
+/*
+// Nerd edition
+
+// main color and news
+$app-main-color: #16778D;
+$app-main-color-dark: #104A59;
+$app-main-color-light: #CBE7ED;
+
+// Calendar
+$app-calendar-color: #6F5D17;
+$app-calendar-color-dark: #B79719;
+$app-calendar-color-light: #9F841A;
+
+// Files
+$app-files-color: #14A085;
+$app-files-color-dark: #0A5D4E;
+$app-files-color-light: #9F841A;
+
+// Documents
+$app-documents-color: #009EE3;
+$app-documents-color-dark: #007999;
+$app-documents-color-light: #D5F3FF;
+
+// Todos
+$app-todos-color: #EFA02D;
+$app-todos-color-dark: #AD7E2C;
+$app-todos-color-light: #FAEBCD;
+
+// Etherpad
+$app-etherpad-color: #E55C55;
+$app-etherpad-color-dark: #933D39;
+$app-etherpad-color-light: #EDE2E1;
+
+// Neutral
+$app-neutral-color: #949494;
+$app-neutral-color-dark: #FFF;
+$app-neutral-color-light: #555;
+$app-neutral-color-white: #000;
+
+body {
+	font-family: Verdana, Geneva, sans-serif;
+
+	background-image: url("../images/tie-fighter.jpg");
+}
+*/

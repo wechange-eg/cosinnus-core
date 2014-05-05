@@ -15,3 +15,5 @@ docs/_build/
 
 !.coveragerc
 !.gitignore
+_old_static
+_old_templates
