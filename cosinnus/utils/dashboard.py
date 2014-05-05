@@ -7,8 +7,11 @@ from django import forms
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.decorators import classonlymethod
 from django.core.urlresolvers import reverse
+from django.template.loader import render_to_string
+from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.utils.compat import atomic
+from cosinnus.models.group import CosinnusGroup
 
 
 class DashboardWidgetForm(forms.Form):
@@ -114,3 +117,42 @@ class DashboardWidget(object):
             return reverse('cosinnus:%s:index' % self.app_name,
                            kwargs={'group': self.config.group.slug})
         return None
+
+
+class GroupDescriptionForm(DashboardWidgetForm):
+    """
+    This is an incomplete start to making the group description editable in the
+    widget itself.
+    """
+
+    # TODO: Continue working on this if the feature is needed.
+
+    # description = forms.CharField(widget=TinyMCE(attrs={'cols': 8, 'rows': 10}), initial='//group.description//')
+    # def clean(self):
+    #     cleaned_data = super(GroupDescriptionForm, self).clean()
+    #     # TODO: save group.description to CosinnusGroup here!
+    #     return cleaned_data
+    pass
+
+
+class GroupDescriptionWidget(DashboardWidget):
+
+    app_name = 'cosinnus'
+    form_class = GroupDescriptionForm
+    model = CosinnusGroup
+    title = _('Group Description')
+    user_model_attr = None
+    widget_name = 'group_description'
+
+    def get_data(self):
+        group = self.config.group
+        if group is None:
+            raise ImproperlyConfigured('Group description widget was used in a non-group environment, or group could not be found!')
+        data = {
+            'group': group,
+        }
+        return render_to_string('cosinnus/widgets/group_description.html', data)
+
+    @property
+    def title_url(self):
+        return ''
