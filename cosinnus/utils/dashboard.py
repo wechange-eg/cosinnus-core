@@ -119,10 +119,20 @@ class DashboardWidget(object):
         return None
 
 
-
 class GroupDescriptionForm(DashboardWidgetForm):
-    amount = forms.IntegerField(label="Amount", initial=5, min_value=0,
-        help_text="0 means unlimited", required=False)
+    """
+    This is an incomplete start to making the group description editable in the
+    widget itself.
+    """
+
+    # TODO: Continue working on this if the feature is needed.
+
+    # description = forms.CharField(widget=TinyMCE(attrs={'cols': 8, 'rows': 10}), initial='//group.description//')
+    # def clean(self):
+    #     cleaned_data = super(GroupDescriptionForm, self).clean()
+    #     # TODO: save group.description to CosinnusGroup here!
+    #     return cleaned_data
+    pass
 
 
 class GroupDescriptionWidget(DashboardWidget):
@@ -142,8 +152,7 @@ class GroupDescriptionWidget(DashboardWidget):
             'group': group,
         }
         return render_to_string('cosinnus/widgets/group_description.html', data)
-    
+
     @property
     def title_url(self):
         return ''
-
