@@ -54,21 +54,43 @@
     <body>
     <!-- class="{{ COSINNUS_CURRENT_APP }}" -->
     
-    {% cosinnus_menu "cosinnus/navbar.html" %}
-    {% if group %}
-      {% cosinnus_menu "cosinnus/appsmenu.html" %}
-    {% endif %}
+        {% cosinnus_menu "cosinnus/navbar.html" %}
+        
+        <div class="container app-main">
+        <!-- <h1>{% block content_title %}{% endblock content_title %}</h1> -->
+            <div class="row">
+            
+                <!-- start with left navigation -->
+                <div class="col-lg-3 col-md-3"><!-- left column -->
+                    {% if group %}
+                        {% cosinnus_menu "cosinnus/appsmenu.html" %}
+				    {% endif %}
+				    {% block leftnav %}{% endblock leftnav %}
+                </div><!-- left column -->
+                
+                
+                <!-- now the content -->
+                <div class="col-lg-9 col-md-9"><!-- right column -->
 
-    <div class="container">
-      <h1>{% block content_title %}{% endblock content_title %}</h1>
-      {% bootstrap_messages %}
-      {% block content %}{% endblock content %}
-      {% block ajax_content %}{% endblock ajax_content %}
-      
-    </div>
-    <script src="{% static "js/cosinnus.js" %}"></script>
+                    <ol class="breadcrumb">
+                        <li><a href="#">Nachrichten</a></li>
+                        <li class="active">Posteingang</li>
+                    </ol>
+                    
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {% bootstrap_messages %}
+							{% block content %}{% endblock content %}
+							{% block ajax_content %}{% endblock ajax_content %}
+                        </div><!-- col -->
+                    </div><!-- row -->
+                </div><!-- right column -->
+            </div><!-- row -->
+        </div><!-- main container -->
+        
     {% block extrafooter %}{% endblock extrafooter %}
-
+    
+    <!-- <script src="{% static "js/cosinnus.js" %}"></script> -->
     {% if SETTINGS.DEBUG %}
     <!--<script src='//192.168.1.170:3000/socket.io/socket.io.js'></script>-->
     <!--<script>var ___socket___ = io.connect('http://192.168.1.170:3000');</script>-->

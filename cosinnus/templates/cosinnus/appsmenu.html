@@ -1,30 +1,30 @@
 {% load i18n %}
-<div class="container">
-  <div class="row">
-    <div class="col-lg-3 col-md-3 col-sm-3">
-      <div class="btn-group w100">
-        <button type="button" class="btn btn-default btn-flat {% if active_app %}{{active_app_name}}-colors{% else %}neutral-colors{% endif %} dropdown-toggle" data-toggle="dropdown">
-          <span class="btn-bar"></span>
-          <span class="icon-menu2 btn-icon"></span>
-          <span class="btn-text">
-            {% if active_app %}
-              {% for app in apps %}
-                {% if app.active %}
-                  {{ app.label }}
-                {% endif %}
-              {% endfor %}
-            {% else %}
-              {% trans "Choose App" %}
-            {% endif %}
-          </span>
-          <span class="caret caret-right"></span>
-        </button>
-        <ul class="dropdown-menu apps-dropdown-menu w100 neutral-colors" role="menu">
-          {% for app in apps %}
-            <li{% if app.active %} class="active"{% endif %}><a href="{{ app.url }}">{{ app.label }}</a></li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
+
+                    <div class="btn-group w100 large-space">
+                        <button type="button" class="btn btn-appnavi dropdown-toggle w100" data-toggle="dropdown">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <a class="pull-left" href="#">
+                                    </a>
+                                    <a class="pull-left" href="#">
+                                        <i class="fa fa-book"></i>
+                                    </a>
+                                    <a class="pull-right" href="#">
+                                        <i class="fa fa-caret-down"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        Nachrichten
+                                    </div>
+                                </li>
+                            </ul>
+                        </button>
+                        <ul class="dropdown-menu w100" role="menu">
+                            <li class="active"><a href="/group/test/message/">Nachricht</a></li>
+                            <li><a href="/group/test/note/">Neuigkeiten</a></li>
+                            <li><a href="/group/test/etherpad/">Etherpad</a></li>
+                            <li><a href="/group/test/event/">Veranstaltungen</a></li>
+                            <li><a href="/group/test/file/">Dateien</a></li>
+                            <li><a href="/group/test/todo/">Todos</a></li>
+                            <li><a href="/group/test/document/">Dokumente</a></li>
+                        </ul>
+                    </div><!-- btn-group -->
