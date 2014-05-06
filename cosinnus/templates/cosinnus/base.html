@@ -71,11 +71,10 @@
                 
                 <!-- now the content -->
                 <div class="col-lg-9 col-md-9"><!-- right column -->
-
-                    <ol class="breadcrumb">
-                        <li><a href="#">Nachrichten</a></li>
-                        <li class="active">Posteingang</li>
-                    </ol>
+                    
+                    {% block breadcrumb %}
+	                    {% include 'cosinnus/breadcrumb.html' %}
+                    {% endblock breadcrumb %}
                     
                     <div class="row">
                         <div class="col-xs-12">
