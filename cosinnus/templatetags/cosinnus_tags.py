@@ -187,6 +187,7 @@ def url_optional(parser, token):
 def do_captureas(parser, token):
     """
         Captures block content into template variables.
+        Source: https://djangosnippets.org/snippets/545/
         Usage:
             {% captureas label %}{% trans "Posteingang" %}{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}{% endcaptureas %}
             {% include "cosinnus/leftnav_button.html" label=label  %}
