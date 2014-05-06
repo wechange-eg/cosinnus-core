@@ -1,0 +1,6 @@
+<script type="text/javascript">
+$(function() {
+  var objects=[{% for object in objects %}"{{ object|escapejs }}"{% if not forloop.last %},{% endif %}{% endfor %}];
+  $('{{ field|escapejs }}').attr('data-provide','typeahead').attr('autocomplete','off').typeahead({source:objects});
+});
+</script>
