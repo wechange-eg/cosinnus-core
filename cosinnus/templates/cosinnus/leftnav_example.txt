@@ -1,70 +1,19 @@
+{% load i18n %}
+{% load cosinnus_tags %}
 
-					<button type="button" class="btn w100 btn-extra-emphasized fine-space">
-						<ul class="media-list">
-							<li class="media">
-								<a class="pull-left" href="#">
-									<i class="fa fa-envelope"></i>
-								</a>
-								<a class="pull-right" href="#"></a><!-- only block width -->
-								<div class="media-body">
-									Posteingang
-								</div>
-							</li>
-						</ul>
-					</button>
+{% captureas href %}{% url 'postman_sent' %}{% endcaptureas %}
+{% captureas label %}{% trans "Gesendet" %}{% endcaptureas %}
+{% include "cosinnus/leftnav_button.html" with extra_classes="fine-space" icon="fa-share" label=label href=href  %}
 
-					<button type="button" class="btn w100 btn-emphasized fine-space">
-						<ul class="media-list">
-							<li class="media">
-								<a class="pull-left" href="#">
-									<i class="fa fa-share"></i>
-								</a>
-								<a class="pull-right" href="#"></a><!-- only block width -->
-								<div class="media-body">
-									Gesendet
-								</div>
-							</li>
-						</ul>
-					</button>
+{% captureas href %}{% url 'postman_archives' %}{% endcaptureas %}
+{% captureas label %}{% trans "Archiv" %}{% endcaptureas %}
+{% include "cosinnus/leftnav_button.html" with extra_classes="fine-space" icon="fa-folder" label=label href=href  %}
 
-					<button type="button" class="btn w100 btn-emphasized fine-space">
-						<ul class="media-list">
-							<li class="media">
-								<a class="pull-left" href="#">
-									<i class="fa fa-folder"></i>
-								</a>
-								<a class="pull-right" href="#"></a><!-- only block width -->
-								<div class="media-body">
-									Archiv
-								</div>
-							</li>
-						</ul>
-					</button>
+{% captureas href %}{% url 'postman_trash' %}{% endcaptureas %}
+{% captureas label %}{% trans "Papierkorb" %}{% endcaptureas %}
+{% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-trash-o" label=label href=href  %}
 
-					<button type="button" class="btn w100 btn-emphasized regular-space">
-						<ul class="media-list">
-							<li class="media">
-								<a class="pull-left" href="#">
-									<i class="fa fa-trash-o"></i>
-								</a>
-								<a class="pull-right" href="#"></a><!-- only block width -->
-								<div class="media-body">
-									Papierkorb
-								</div>
-							</li>
-						</ul>
-					</button>
+{% captureas href %}{% url 'postman_write' %}{% endcaptureas %}
+{% captureas label %}{% trans "Verfassen" %}{% endcaptureas %}
+{% include "cosinnus/leftnav_button.html" with icon="fa-pencil" label=label href=href  %}
 
-					<button type="button" class="btn w100 btn-emphasized">
-						<ul class="media-list">
-							<li class="media">
-								<a class="pull-left" href="#">
-									<i class="fa fa-pencil"></i>
-								</a>
-								<a class="pull-right" href="#"></a><!-- only block width -->
-								<div class="media-body">
-									Verfassen
-								</div>
-							</li>
-						</ul>
-					</button>
