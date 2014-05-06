@@ -29,7 +29,6 @@
 
 
 		selectors : function() {
-			$('.user-selector').select2();
 			$('.privacy-selector').select2({ minimumResultsForSearch: -1});
 			$('.privacy-selector').change(function(){
 				$(this).prev().prev().attr('class',
