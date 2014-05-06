@@ -58,23 +58,41 @@
 			});
 
 			$('.attachments-selector').each(function() {
+				function formatAttachment(hit) {
+					var icon = {
+						main: 'circle',
+						calendar: 'calendar',
+						files: 'folder',
+						documents: 'file',
+						todos: 'check-square',
+						etherpad: 'pencil',
+						messages: 'envelope',
+						notes: 'comment',
+						events: 'clock-o'
+					};
+					var html = '<span class="app-'+hit.app+'-attachment">'+
+						'<i class="fa fa-'+icon[hit.app]+'"></i> '+
+						hit.text+'</span>';
+					return html;
+				}
+
 				$(this).select2({
 					placeholder: 'Anhänge',
 					escapeMarkup: function(m) { return m; }, // do not escape HTML
-					formatSelection: function(m) {return m.text; }, // do not alter selected elements
-					formatResult: function(m) { console.log(m); return m.text; }, // do not alter found options
+					formatSelection: formatAttachment, // do not alter selected elements
+					formatResult: formatAttachment, // do not alter found options
 					multiple: true,
 					minimumInputLength: 3,
 					data: [
-						{id:0,text:'<span class="app-calendar-attachment"><i class="fa fa-calendar"></i> Termin: Hamsterwerfen</span>'},
-						{id:1,text:'<span class="app-documents-attachment"><i class="fa fa-file"></i> Dokument</span>'},
-						{id:2,text:'<span class="app-todos-attachment"><i class="fa fa-check-square"></i> Todo-Liste</span>'},
-						{id:3,text:'<span class="app-etherpad-attachment"><i class="fa fa-pencil"></i> Etherpad: Lorem!</span>'},
-						{id:4,text:'<span class="app-etherpad-attachment"><i class="fa fa-pencil"></i> Etherpad: Mauern</span>'},
-						{id:5,text:'<span class="app-etherpad-attachment"><i class="fa fa-pencil"></i> Etherpad: Sinnwerkstatt</span>'},
-						{id:6,text:'<span class="app-etherpad-attachment"><i class="fa fa-pencil"></i> Etherpad: Thinkfarm</span>'},
-						{id:7,text:'<span class="app-etherpad-attachment"><i class="fa fa-pencil"></i> Etherpad: Berlin</span>'},
-						{id:8,text:'<span class="app-etherpad-attachment"><i class="fa fa-pencil"></i> Etherpad: Cosinnus</span>'}
+						{id:0, app:'calendar', text:'Event: Hamsterwerfen'},
+						{id:1, app:'documents', text:'Dokument: Sitzungsprotokoll'},
+						{id:2, app:'todos', text:'Todo-Liste: Hätte gestern gemacht werden müssen'},
+						{id:3, app:'etherpad', text:'Etherpad: Lorem!'},
+						{id:4, app:'etherpad', text:'Etherpad: Mauern'},
+						{id:5, app:'etherpad', text:'Etherpad: Sinnwerkstatt'},
+						{id:6, app:'etherpad', text:'Etherpad: Thinkfarm'},
+						{id:7, app:'etherpad', text:'Etherpad: Berlin'},
+						{id:8, app:'etherpad', text:'Etherpad: Cosinnus'}
 					]
 				});
 			});
