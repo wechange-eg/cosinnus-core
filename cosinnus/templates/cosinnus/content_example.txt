@@ -1,81 +1,84 @@
-                            <!-- a box with semi transparent background -->
-                            <div class="content-box">
-                            
-								<div class="btn btn-extra-emphasized w100 regular-space">
-									<ul class="media-list">
-										<li class="media">
-											<a class="pull-left" href="#">
-												<i class="fa fa-square-o"></i>
-											</a>
+{% extends "cosinnus_message/base.html" %}
+{% load cosinnus_tags %}
 
-											<div class="media-body">
-												<a href="messages-answer.html">
-													<span class="annotation" data-date="2014-05-06"></span>
-													<strong>Sascha Narr</strong> Re: Let's play together – Livestream
-												</a>
-											</div>
-										</li>
-									</ul>
-								</div>
 
-								<div class="btn btn-emphasized w100 regular-space">
-									<ul class="media-list">
-										<li class="media">
-											<a class="pull-left" href="#">
-												<i class="fa fa-square-o"></i>
-											</a>
+<!-- a box with semi transparent background -->
+<div class="content-box">
 
-											<div class="media-body">
-												<a href="messages-answer.html">
-													<span class="annotation" data-date="2014-05-16"></span>
-													<strong>Matthias Brück</strong> Segeln auf dem Wasserschaden
-												</a>
-											</div>
-										</li>
-									</ul>
-								</div>
+	<div class="btn btn-extra-emphasized w100 regular-space">
+		<ul class="media-list">
+			<li class="media">
+				<a class="pull-left" href="#">
+					<i class="fa fa-square-o"></i>
+				</a>
 
-								<div class="btn btn-emphasized w100">
-									<ul class="media-list">
-										<li class="media">
-											<a class="pull-left" href="#">
-												<i class="fa fa-square-o"></i>
-											</a>
+				<div class="media-body">
+					<a href="messages-answer.html">
+						<span class="annotation" data-date="2014-05-06"></span>
+						<strong>Sascha Narr</strong> Re: Let's play together – Livestream
+					</a>
+				</div>
+			</li>
+		</ul>
+	</div>
 
-											<div class="media-body">
-												<a href="messages-answer.html">
-													<span class="annotation" data-date="2014-05-03"></span>
-													<strong>Markus Holtermann</strong> Kerzen für Stromspar-Tag
-												</a>
-											</div>
-										</li>
-									</ul>
-								</div>
-                            
-                            
+	<div class="btn btn-emphasized w100 regular-space">
+		<ul class="media-list">
+			<li class="media">
+				<a class="pull-left" href="#">
+					<i class="fa fa-square-o"></i>
+				</a>
 
-							</div><!-- content-box -->
-							<button type="button" class="btn btn-emphasized messages-delete-button">
-								<ul class="media-list">
-									<li class="media">
-										<a class="pull-left" href="#">
-											<i class="fa fa-eraser"></i>
-										</a>
-										<div class="media-body">
-											Löschen
-										</div>
-									</li>
-								</ul>
-							</button>
-							<button type="button" class="btn btn-emphasized messages-archive-button">
-								<ul class="media-list">
-									<li class="media">
-										<a class="pull-left" href="#">
-											<i class="fa fa-folder"></i>
-										</a>
-										<div class="media-body">
-											Archivieren
-										</div>
-									</li>
-								</ul>
-							</button>
+				<div class="media-body">
+					<a href="messages-answer.html">
+						<span class="annotation" data-date="2014-05-16"></span>
+						<strong>Matthias Brück</strong> Segeln auf dem Wasserschaden
+					</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	<div class="btn btn-emphasized w100">
+		<ul class="media-list">
+			<li class="media">
+				<a class="pull-left" href="#">
+					<i class="fa fa-square-o"></i>
+				</a>
+
+				<div class="media-body">
+					<a href="messages-answer.html">
+						<span class="annotation" data-date="2014-05-03"></span>
+						<strong>Markus Holtermann</strong> Kerzen für Stromspar-Tag
+					</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+</div><!-- content-box -->
+
+<button type="button" class="btn btn-emphasized messages-delete-button">
+	<ul class="media-list">
+		<li class="media">
+			<a class="pull-left" href="#">
+				<i class="fa fa-eraser"></i>
+			</a>
+			<div class="media-body">
+				Löschen
+			</div>
+		</li>
+	</ul>
+</button>
+<button type="button" class="btn btn-emphasized messages-archive-button">
+	<ul class="media-list">
+		<li class="media">
+			<a class="pull-left" href="#">
+				<i class="fa fa-folder"></i>
+			</a>
+			<div class="media-body">
+				Archivieren
+			</div>
+		</li>
+	</ul>
+</button>

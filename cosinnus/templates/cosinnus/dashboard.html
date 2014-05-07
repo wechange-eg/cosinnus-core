@@ -1,0 +1,18 @@
+{% extends "cosinnus_message/base.html" %}
+{% load cosinnus_tags %}
+
+{% block main_page %}
+<!-- start with left navigation -->
+                <div class="col-lg-4 col-md-4"><!-- left column -->
+                    {% if group %}
+                        {% cosinnus_menu "cosinnus/appsmenu.html" %}
+                    {% endif %}
+Yo
+                </div><!-- left column -->
+                <div class="col-lg-4 col-md-4"><!-- center column -->
+Yo
+                </div><!-- center column -->
+                <div class="col-lg-4 col-md-4"><!-- right column -->
+Yo
+                </div><!-- right column -->
+{% endblock main_page %}
