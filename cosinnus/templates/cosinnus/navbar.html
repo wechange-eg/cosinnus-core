@@ -32,7 +32,7 @@
 				                    <li{% if g == group %} class="active"{% endif %}><a href="{% url 'cosinnus:group-dashboard' group=g.slug %}">{{ g.name }}</a></li>
 				                {% endfor %}
 		                        <li class="divider"></li>
-		                        <li><a href="#">{% trans "List all groups" %}</a></li>
+		                        <li><a href="{% url 'cosinnus:group-list' %}">{% trans "List all groups" %}</a></li>
 		                    </ul>
 		                </li>
 	                {% else %}
