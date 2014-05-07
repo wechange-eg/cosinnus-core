@@ -1,0 +1,33 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n bootstrap3 cosinnus_tags %}
+{% load static from staticfiles %}
+
+
+{% block page_title %}
+  {% trans "Add container" %}
+{{ block.super }}
+{% endblock page_title %}
+
+
+{% block content_title %}
+{{ group.name }}: {% trans "Add container" %}
+{% endblock content_title %}
+
+
+{% block content %}
+<form action="" method="post" class="form-horizontal">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+
+  <div class="control-group">
+    {% if question %}
+      <label class="control-label">{{ question }}</label>
+    {% endif %}
+    <div class="controls">
+      <button type="submit" class="btn btn-primary">{% trans "Add" %}</button>
+      <a href="{{ cancel_url }}" class="btn">{% trans "Cancel" %}</a>
+    </div>
+  </div>
+</form>
+
+{% endblock content %}
