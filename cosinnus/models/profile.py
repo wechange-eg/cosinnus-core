@@ -12,6 +12,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from easy_thumbnails.files import get_thumbnailer
+from easy_thumbnails.exceptions import InvalidImageFormatError
 
 from cosinnus.conf import settings
 from cosinnus.utils.files import get_avatar_filename
@@ -143,12 +144,16 @@ class UserProfile(BaseUserProfile):
         thumbnails = getattr(self, '_avatar_thumbnails', {})
         if size not in thumbnails:
             thumbnailer = get_thumbnailer(self.avatar)
-            thumbnails[size] = thumbnailer.get_thumbnail({
-                'crop': True,
-                'size': size,
-            })
+            try:
+                thumbnails[size] = thumbnailer.get_thumbnail({
+                    'crop': True,
+                    'size': size,
+                })
+            except InvalidImageFormatError:
+                if settings.DEBUG:
+                    raise
             setattr(self, '_avatar_thumbnails', thumbnails)
-        return thumbnails[size]
+        return thumbnails.get(size, None)
 
     def get_avatar_thumbnail_url(self, size=(80, 80)):
         tn = self.get_avatar_thumbnail(size)
