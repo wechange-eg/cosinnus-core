@@ -37,7 +37,7 @@
 	        var cosinnus_time_format = "{{ COSINNUS_TIME_FORMAT }}";
 	    </script>
 	    
-        {% captureas cosinnus_css_class %}{% if COSINNUS_CURRENT_APP %}{{ COSINNUS_CURRENT_APP }}{% else %}main{% endif %}{% endcaptureas %}
+        {% captureas cosinnus_css_class %}{% if COSINNUS_CURRENT_APP == 'todo' %}todos{% elif COSINNUS_CURRENT_APP %}{{ COSINNUS_CURRENT_APP }}{% else %}main{% endif %}{% endcaptureas %}
         
         {% include 'cosinnus/extrahead.html' %}
         {% block extrahead %}{% endblock extrahead %}
@@ -84,7 +84,6 @@
                         <div class="col-xs-12">
                             {% bootstrap_messages %}
 							{% block content %}{% endblock content %}
-							{% block ajax_content %}{% endblock ajax_content %}
                         </div><!-- col -->
                     </div><!-- row -->
                 </div><!-- right column -->
