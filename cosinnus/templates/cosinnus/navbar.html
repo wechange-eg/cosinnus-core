@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{% url 'cosinnus:index' %}">
                 <!-- TODO: Logo -->
                 <i class="fa fa-home"></i>
             </a>
@@ -38,6 +38,8 @@
 	                {% else %}
 		                <li><a href="{% url 'cosinnus:group-list' %}">{% trans "No Groups. Join!" %}</a></li>
 		            {% endif %}
+		        {% else %}
+                    <li><a href="{% url 'cosinnus:group-list' %}">{% trans "List all groups" %}</a></li>
 	            {% endif %}
             </ul>
 
@@ -66,7 +68,7 @@
 	                </li>
                 {% else %}
                     <li>
-						<a href="#">
+						<a href="{% url 'login' %}">
 						    Login
 						</a>
                     </li>
