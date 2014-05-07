@@ -1,8 +1,8 @@
 {% load i18n %}
 
-<li><a href="#">Home</a></li>
-<li class="active">TODO: Implement or overwrite Breadcrumb</li>
-
+{% if group %}
+    <li><a href="#">{{ group.name }}</a></li>
+{% endif %}
 
 
 
