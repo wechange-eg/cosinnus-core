@@ -38,6 +38,9 @@ class CosinnusConf(AppConf):
     #: A pointer to the swappable cosinnus tag object model
     TAG_OBJECT_MODEL = 'cosinnus.TagObject'
 
+    #: The default search index for the :attr:`TAG_OBJECT_MODEL`
+    TAG_OBJECT_SEARCH_INDEX = 'cosinnus.utils.search.DefaultTagObjectIndex'
+
     #: A pointer to the swappable cosinnus user profile model
     USER_PROFILE_MODEL = 'cosinnus.UserProfile'
 
