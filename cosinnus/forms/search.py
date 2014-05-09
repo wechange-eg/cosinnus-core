@@ -44,6 +44,10 @@ class TaggableModelSearchForm(SearchForm):
     :class:`~cosinnus.models.BaseTaggableObjectModel`.
     """
 
+    groups = forms.ChoiceField(label=_('Limit to groups'), required=False, initial='all',
+        choices=(('all', _('All')), ('mine', _('My groups')), ('others', _('Other groups'))),
+        widget=forms.RadioSelect)
+
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request')
         super(TaggableModelSearchForm, self).__init__(*args, **kwargs)
@@ -67,6 +71,7 @@ class TaggableModelSearchForm(SearchForm):
     def search(self):
         sqs = super(TaggableModelSearchForm, self).search()
         sqs = self._filter_for_read_access(sqs)
+        sqs = self._filter_group_selection(sqs)
         return sqs.models(*self.get_models())
 
     def _filter_for_read_access(self, sqs):
@@ -74,7 +79,6 @@ class TaggableModelSearchForm(SearchForm):
         Given a SearchQuerySet, this function adds a filter that limits the
         result set to only include elements with read access.
         """
-
         public_node = (
             SQ(public__exact=True) |  # public on the object itself
             SQ(group_public__exact=True) |  # public group
@@ -92,4 +96,33 @@ class TaggableModelSearchForm(SearchForm):
                 )
         else:
             sqs = sqs.filter_and(public_node)
+        return sqs
+
+
+    def _filter_group_selection(self, sqs):
+        """
+        Checks the request for an query parameter ``groups`` which can be one of
+
+        ``all``
+            Don't filter on groups (except the respective permissions)
+
+        ``mine``
+            Only include results of groups the current user is a member of
+
+        ``others``
+            Only include results of groups the current user is not a member of
+
+        Any other value will be interpreted as ``all``.
+        """
+        user = self.request.user
+        if user.is_authenticated():
+            term = self.request.GET.get('groups', 'all').lower()
+            if term == 'mine':
+                sqs = sqs.filter_and(group_members__contains=user.id)
+            elif term == 'others':
+                sqs = sqs.exclude(group_members__contains=user.id)
+            else:
+                pass
+        # we don't need to limit the result set on anonymous user. They are not
+        # a member of any group.
         return sqs
