@@ -1,7 +1,7 @@
-<button type="button" class="btn w100 btn{% if active %}-extra{% endif %}-emphasized {{ extra_classes }}">
+<button type="button" class="btn w100 btn{% if active %}-extra{% endif %}-emphasized {{ extra_classes }}" href="{{ href }}">
     <ul class="media-list">
         <li class="media">
-            <a class="pull-left" href="{{ href }}">
+            <a class="pull-left" href="#">
                 {% if icon_content %}
                     {{ icon_content }}
                 {% else %}
