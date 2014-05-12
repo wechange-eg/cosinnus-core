@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from collections import defaultdict
 from os.path import basename, dirname
+import urllib
 
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
@@ -83,6 +84,7 @@ class HierarchyTreeMixin(object):
         """
         # saves all container paths that have been created
         container_dict = {}
+        root = urllib.unquote(root)
 
         def get_or_create_container(path, container_object, special_name=None):
             if path in container_dict.keys():
