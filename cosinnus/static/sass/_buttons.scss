@@ -27,9 +27,11 @@
 .btn-default .media {
 	background-color: transparent;
 }
-.btn-default .media > .media-body,
-{
+.btn-default .media > .media-body {
 	background-color: $app-neutral-color-white;
+}
+.btn-default .media > .media-body a {
+	color: $app-neutral-color-dark;
 }
 
 .media-body {
@@ -62,6 +64,12 @@
 // Icons on the right side are only visible on hover
 .fadedown .btn-default .media > .pull-right {
 	color: transparent;
+	background-color: $app-neutral-color-white;
+}
+.fadedown .btn-default:hover .media > .pull-right,
+.fadedown.open .btn-default .media > .pull-right {
+	color: $app-neutral-color-white;
+	background-color: $app-neutral-color;
 }
 
 
@@ -191,3 +199,8 @@
 }
 
 
+// .form-control is a Bootstrap class for INPUT elements.
+// Center some placeholders but align the content left.
+.btn-emphasized .form-control, .btn-extra-emphasized .form-control {
+	color: $app-neutral-color-white;
+}

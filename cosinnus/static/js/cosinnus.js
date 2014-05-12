@@ -56,6 +56,11 @@
 				});
 			});
 
+			$('.user-selector').each(function() {
+				$(this).select2();
+			});
+
+
 			$('.attachments-selector').each(function() {
 				function formatAttachment(hit) {
 					var icon = {
@@ -472,9 +477,14 @@
 			$('button').each(function() {
 				if ($(this).attr('href')) {
 					$(this).click(function() {
-						window.location.href = $(this).attr('href');
+						$(location).attr("href", $(this).attr('href'));
 					});
 				}
+			});
+
+			// Disable all nonsense links a href="#"
+			$('a[href="#"]').click(function(e) {
+				e.preventDefault();
 			});
 		},
 

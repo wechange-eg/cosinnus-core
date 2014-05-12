@@ -1,152 +1,157 @@
 // Only this file and maybe the logo image should be needed to customize for different installations.
 
 
+//$currentcolorscheme: "neww";
 
-// The colors are from Tobi's 01b_NEWW_Color-Scheme.pdf
-// Farbklima Netzwerk Wachstumswende
-// no other colors should be used in the whole project
+//if $currentcolorscheme == "neww" {
+	// The colors are from Tobi's 01b_NEWW_Color-Scheme.pdf
+	// Farbklima Netzwerk Wachstumswende
+	// no other colors should be used in the whole project
 
-// main color and news
-$app-main-color: #16778D;
-$app-main-color-dark: #104A59;
-$app-main-color-light: #CBE7ED;
+	// main color and news
+	$app-main-color: #16778D;
+	$app-main-color-dark: #104A59;
+	$app-main-color-light: #CBE7ED;
 
-$app-main-color-yes: #779B48;
-$app-main-color-maybe: #EFA02D;
-$app-main-color-no: #E55C55;
+	$app-main-color-yes: #779B48;
+	$app-main-color-maybe: #EFA02D;
+	$app-main-color-no: #E55C55;
 
-// Calendar
-$app-calendar-color: #779B48;
-$app-calendar-color-dark: #4C622F;
-$app-calendar-color-light: #E1EDD2;
+	// Calendar
+	$app-calendar-color: #779B48;
+	$app-calendar-color-dark: #4C622F;
+	$app-calendar-color-light: #E1EDD2;
 
-// Files
-$app-files-color: #14A085;
-$app-files-color-dark: #0A5D4E;
-$app-files-color-light: #92FFEA;
+	// Files
+	$app-files-color: #14A085;
+	$app-files-color-dark: #0A5D4E;
+	$app-files-color-light: #92FFEA;
 
-// Documents
-$app-documents-color: #009EE3;
-$app-documents-color-dark: #007999;
-$app-documents-color-light: #D5F3FF;
+	// Documents
+	$app-documents-color: #009EE3;
+	$app-documents-color-dark: #007999;
+	$app-documents-color-light: #D5F3FF;
 
-// Todos
-$app-todos-color: #EFA02D;
-$app-todos-color-dark: #AD7E2C;
-$app-todos-color-light: #FAEBCD;
+	// Todos
+	$app-todos-color: #EFA02D;
+	$app-todos-color-dark: #AD7E2C;
+	$app-todos-color-light: #FAEBCD;
 
-// Etherpad
-$app-etherpad-color: #E55C55;
-$app-etherpad-color-dark: #933D39;
-$app-etherpad-color-light: #EDE2E1;
+	// Etherpad
+	$app-etherpad-color: #E55C55;
+	$app-etherpad-color-dark: #933D39;
+	$app-etherpad-color-light: #EDE2E1;
 
-// Neutral
-$app-neutral-color: #949494;
-$app-neutral-color-dark: #333333;
-$app-neutral-color-light: #DBDBDB;
-$app-neutral-color-white: #FFFFFF;
+	// Neutral
+	$app-neutral-color: #949494;
+	$app-neutral-color-dark: #333333;
+	$app-neutral-color-light: #DBDBDB;
+	$app-neutral-color-white: #FFFFFF;
 
 
-body {
-	font-family: Verdana, Geneva, sans-serif;
+	body {
+		font-family: Verdana, Geneva, sans-serif;
 
-	background-image: url("../images/background.jpg");
+		background-image: url("../images/background.jpg");
+	}
+//}
+
+
+@mixin pink-color-scheme() {
+	// eight years old riding a unicorn
+
+	// main color and news
+	$app-main-color: #16778D;
+	$app-main-color-dark: #104A59;
+	$app-main-color-light: #CBE7ED;
+
+	// Calendar
+	$app-calendar-color: #FFBAFA;
+	$app-calendar-color-dark: #00D7C6;
+	$app-calendar-color-light: #FFFFFF;
+
+	// Files
+	$app-files-color: #14A085;
+	$app-files-color-dark: #0A5D4E;
+	$app-files-color-light: #92FFEA;
+
+	// Documents
+	$app-documents-color: #009EE3;
+	$app-documents-color-dark: #007999;
+	$app-documents-color-light: #D5F3FF;
+
+	// Todos
+	$app-todos-color: #EFA02D;
+	$app-todos-color-dark: #AD7E2C;
+	$app-todos-color-light: #FAEBCD;
+
+	// Etherpad
+	$app-etherpad-color: #E55C55;
+	$app-etherpad-color-dark: #933D39;
+	$app-etherpad-color-light: #EDE2E1;
+
+	// Neutral
+	$app-neutral-color: #FFA5D3;
+	$app-neutral-color-dark: #FF178F;
+	$app-neutral-color-light: #A2D5E3;
+	$app-neutral-color-white: #E5F6F8;
+
+	body {
+		font-family: "Comic Sans MS";
+
+		background-image: url("../images/magic-pony-django-wallpaper.png");
+	//	background-color: #FF56F2;
+
+	}
 }
 
 
+@mixin nerd-color-scheme() {
+	// Black and evil
 
-/*
-// eight years old riding a unicorn
+	// main color and news
+	$app-main-color: #16778D;
+	$app-main-color-dark: #104A59;
+	$app-main-color-light: #CBE7ED;
 
-// main color and news
-$app-main-color: #16778D;
-$app-main-color-dark: #104A59;
-$app-main-color-light: #CBE7ED;
+	// Calendar
+	$app-calendar-color: #6F5D17;
+	$app-calendar-color-dark: #B79719;
+	$app-calendar-color-light: #9F841A;
 
-// Calendar
-$app-calendar-color: #FFBAFA;
-$app-calendar-color-dark: #00D7C6;
-$app-calendar-color-light: #FFFFFF;
+	// Files
+	$app-files-color: #14A085;
+	$app-files-color-dark: #0A5D4E;
+	$app-files-color-light: #9F841A;
 
-// Files
-$app-files-color: #14A085;
-$app-files-color-dark: #0A5D4E;
-$app-files-color-light: #92FFEA;
+	// Documents
+	$app-documents-color: #009EE3;
+	$app-documents-color-dark: #007999;
+	$app-documents-color-light: #D5F3FF;
 
-// Documents
-$app-documents-color: #009EE3;
-$app-documents-color-dark: #007999;
-$app-documents-color-light: #D5F3FF;
+	// Todos
+	$app-todos-color: #EFA02D;
+	$app-todos-color-dark: #AD7E2C;
+	$app-todos-color-light: #FAEBCD;
 
-// Todos
-$app-todos-color: #EFA02D;
-$app-todos-color-dark: #AD7E2C;
-$app-todos-color-light: #FAEBCD;
+	// Etherpad
+	$app-etherpad-color: #E55C55;
+	$app-etherpad-color-dark: #933D39;
+	$app-etherpad-color-light: #EDE2E1;
 
-// Etherpad
-$app-etherpad-color: #E55C55;
-$app-etherpad-color-dark: #933D39;
-$app-etherpad-color-light: #EDE2E1;
+	// Neutral
+	$app-neutral-color: #949494;
+	$app-neutral-color-dark: #FFF;
+	$app-neutral-color-light: #555;
+	$app-neutral-color-white: #000;
 
-// Neutral
-$app-neutral-color: #FFA5D3;
-$app-neutral-color-dark: #FF178F;
-$app-neutral-color-light: #A2D5E3;
-$app-neutral-color-white: #E5F6F8;
+	body {
+		font-family: Verdana, Geneva, sans-serif;
 
-body {
-	font-family: "Comic Sans MS";
-
-	background-image: url("../images/magic-pony-django-wallpaper.png");
-//	background-color: #FF56F2;
-
+		background-image: url("../images/tie-fighter.jpg");
+	}
 }
 
-*/
 
+//@include neww-color-scheme();
 
-/*
-// Nerd edition
-
-// main color and news
-$app-main-color: #16778D;
-$app-main-color-dark: #104A59;
-$app-main-color-light: #CBE7ED;
-
-// Calendar
-$app-calendar-color: #6F5D17;
-$app-calendar-color-dark: #B79719;
-$app-calendar-color-light: #9F841A;
-
-// Files
-$app-files-color: #14A085;
-$app-files-color-dark: #0A5D4E;
-$app-files-color-light: #9F841A;
-
-// Documents
-$app-documents-color: #009EE3;
-$app-documents-color-dark: #007999;
-$app-documents-color-light: #D5F3FF;
-
-// Todos
-$app-todos-color: #EFA02D;
-$app-todos-color-dark: #AD7E2C;
-$app-todos-color-light: #FAEBCD;
-
-// Etherpad
-$app-etherpad-color: #E55C55;
-$app-etherpad-color-dark: #933D39;
-$app-etherpad-color-light: #EDE2E1;
-
-// Neutral
-$app-neutral-color: #949494;
-$app-neutral-color-dark: #FFF;
-$app-neutral-color-light: #555;
-$app-neutral-color-white: #000;
-
-body {
-	font-family: Verdana, Geneva, sans-serif;
-
-	background-image: url("../images/tie-fighter.jpg");
-}
-*/

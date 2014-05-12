@@ -4,99 +4,6 @@ body {
   background-image: url("../images/background.jpg");
 }
 
-/*
-// eight years old riding a unicorn
-
-// main color and news
-$app-main-color: #16778D;
-$app-main-color-dark: #104A59;
-$app-main-color-light: #CBE7ED;
-
-// Calendar
-$app-calendar-color: #FFBAFA;
-$app-calendar-color-dark: #00D7C6;
-$app-calendar-color-light: #FFFFFF;
-
-// Files
-$app-files-color: #14A085;
-$app-files-color-dark: #0A5D4E;
-$app-files-color-light: #92FFEA;
-
-// Documents
-$app-documents-color: #009EE3;
-$app-documents-color-dark: #007999;
-$app-documents-color-light: #D5F3FF;
-
-// Todos
-$app-todos-color: #EFA02D;
-$app-todos-color-dark: #AD7E2C;
-$app-todos-color-light: #FAEBCD;
-
-// Etherpad
-$app-etherpad-color: #E55C55;
-$app-etherpad-color-dark: #933D39;
-$app-etherpad-color-light: #EDE2E1;
-
-// Neutral
-$app-neutral-color: #FFA5D3;
-$app-neutral-color-dark: #FF178F;
-$app-neutral-color-light: #A2D5E3;
-$app-neutral-color-white: #E5F6F8;
-
-body {
-	font-family: "Comic Sans MS";
-
-	background-image: url("../images/magic-pony-django-wallpaper.png");
-//	background-color: #FF56F2;
-
-}
-
-*/
-/*
-// Nerd edition
-
-// main color and news
-$app-main-color: #16778D;
-$app-main-color-dark: #104A59;
-$app-main-color-light: #CBE7ED;
-
-// Calendar
-$app-calendar-color: #6F5D17;
-$app-calendar-color-dark: #B79719;
-$app-calendar-color-light: #9F841A;
-
-// Files
-$app-files-color: #14A085;
-$app-files-color-dark: #0A5D4E;
-$app-files-color-light: #9F841A;
-
-// Documents
-$app-documents-color: #009EE3;
-$app-documents-color-dark: #007999;
-$app-documents-color-light: #D5F3FF;
-
-// Todos
-$app-todos-color: #EFA02D;
-$app-todos-color-dark: #AD7E2C;
-$app-todos-color-light: #FAEBCD;
-
-// Etherpad
-$app-etherpad-color: #E55C55;
-$app-etherpad-color-dark: #933D39;
-$app-etherpad-color-light: #EDE2E1;
-
-// Neutral
-$app-neutral-color: #949494;
-$app-neutral-color-dark: #FFF;
-$app-neutral-color-light: #555;
-$app-neutral-color-white: #000;
-
-body {
-	font-family: Verdana, Geneva, sans-serif;
-
-	background-image: url("../images/tie-fighter.jpg");
-}
-*/
 body {
   padding-top: 70px;
   padding-bottom: 30px;
@@ -231,6 +138,10 @@ textarea {
   background-color: white;
 }
 
+.btn-default .media > .media-body a {
+  color: #333333;
+}
+
 .media-body {
   line-height: 37px;
   padding: 0 10px;
@@ -261,6 +172,13 @@ textarea {
 
 .fadedown .btn-default .media > .pull-right {
   color: transparent;
+  background-color: white;
+}
+
+.fadedown .btn-default:hover .media > .pull-right,
+.fadedown.open .btn-default .media > .pull-right {
+  color: white;
+  background-color: #949494;
 }
 
 /* Quadratic images at side of buttons */
@@ -617,6 +535,10 @@ textarea {
 }
 .media-body a + a {
   margin-left: 15px;
+}
+
+.btn-emphasized .form-control, .btn-extra-emphasized .form-control {
+  color: white;
 }
 
 /* Classes that can be found in many pages and are not part of Twitter Bootstrap */
