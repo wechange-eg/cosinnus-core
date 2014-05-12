@@ -65,12 +65,21 @@ class HierarchyTreeMixin(object):
     a list of objects as argument to be displayed as a tree.
     """
 
-    def get_tree(self, object_list):
+    def get_tree(self, object_list, root='/', include_containers=True,
+                 include_leaves=True, recursive=True):
         """
         Create a node/children tree structure containing app objects. We
         assume that ALL (!) pathnames end with a '/'. A container has a
         pathname of ``/path/to/container/containername/`` the last path part is
         the container itself!
+        @param object_list: All model objects that should be included in the tree
+        @param root: The root path from which the tree should start out
+        @param include_containers: should the tree contain folders?
+        @param include_leaves: should the tree contain the model objects?
+        @param recursive: Should folder levels below the given root path be included?
+                          Note: Setting recursive=True and include_containers=False
+                                really doesn't make any sense, and will result in a 
+                                garbled nonsensical tree structure!
         """
         # saves all container paths that have been created
         container_dict = {}
@@ -104,15 +113,26 @@ class HierarchyTreeMixin(object):
                 parent_container = container_dict[parent_path]
             parent_container['containers'].append(container)
 
-        root = get_or_create_container('/', None)
+        
+        root_container = get_or_create_container(root, None)
+        
         for obj in object_list:
             if obj.is_container:
+                if obj.path == root:
+                    root_container['container_object'] = obj
+                # should we retrieve containers?
+                if not include_containers or (not recursive and obj.path != root+obj.slug+'/'):
+                    continue 
                 get_or_create_container(obj.path, obj)
             else:
+                # should we retrieve leaves?
+                if not include_leaves or (not recursive and obj.path != root):
+                    continue 
+                # this object will be attached to its parent in the tree by calling get_or_create_container(...)
                 filescontainer = get_or_create_container(obj.path, None)
                 filescontainer['objects'].append(obj)
-
-        return root
+            
+        return root_container
 
 
 class HierarchyPathMixin(object):
