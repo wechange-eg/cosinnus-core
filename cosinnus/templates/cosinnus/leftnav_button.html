@@ -2,7 +2,11 @@
     <ul class="media-list">
         <li class="media">
             <a class="pull-left" href="{{ href }}">
-                <i class="fa {{ icon }}"></i>
+                {% if icon_content %}
+                    {{ icon_content }}
+                {% else %}
+                    <i class="fa {{ icon }}"></i>
+                {% endif %}
             </a>
             <a class="pull-right" href="#"></a><!-- only block width -->
             <div class="media-body">
