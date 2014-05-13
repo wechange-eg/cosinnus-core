@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
+from django.db.models import Q
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
@@ -157,6 +158,15 @@ class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
         if self.path[-1] != '/':
             self.path += '/'
         super(BaseHierarchicalTaggableObjectModel, self).save(*args, **kwargs)
+    
+    @property
+    def container(self):
+        if not self.is_container:
+            qs = self.__class__.objects.all().filter(Q(group=self.group) & Q(is_container=True) & Q(path=self.path))
+            first_list = list(qs[:1])
+            if first_list:
+                return first_list[0]
+        return None
 
 
 def get_tag_object_model():
