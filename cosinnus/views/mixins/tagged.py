@@ -169,7 +169,7 @@ class HierarchyPathMixin(object):
         form = self.get_form(form_class)
         container_form_class = self.get_container_form_class()
         container_form = self.get_container_form(container_form_class)
-        return self.render_to_response(self.get_context_data(form=form, container_form=container_form))
+        return super(HierarchyPathMixin, self).render_to_response(self.get_context_data(form=form, container_form=container_form))
 
     def post(self, request, *args, **kwargs):
         self.object = None
