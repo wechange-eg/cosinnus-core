@@ -140,8 +140,8 @@ class HierarchyTreeMixin(object):
 
 class HierarchyPathMixin(object):
     """
-    This mixin can be used in add/edit views. It sets up the path of the
-    hierarchy for an object in forms.
+    This mixin can be used in a hybrid add item + add container view.
+    Not recommended to use in edit/delete views.
     """
     
     container_form_class = AddContainerForm
