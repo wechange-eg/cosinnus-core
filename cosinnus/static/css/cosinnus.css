@@ -800,6 +800,9 @@ body .large-space {
   background-color: #16778d;
   border-color: #16778d;
 }
+.app-main .fc-cell-overlay {
+  background-color: #16778d;
+}
 .app-main .small-calendar {
   width: 225px;
 }
@@ -912,6 +915,9 @@ body .large-space {
   border-radius: 0;
   background-color: #779b48;
   border-color: #779b48;
+}
+.app-calendar .fc-cell-overlay {
+  background-color: #779b48;
 }
 .app-calendar .small-calendar {
   width: 225px;
@@ -1026,6 +1032,9 @@ body .large-space {
   background-color: #14a085;
   border-color: #14a085;
 }
+.app-files .fc-cell-overlay {
+  background-color: #14a085;
+}
 .app-files .small-calendar {
   width: 225px;
 }
@@ -1138,6 +1147,9 @@ body .large-space {
   border-radius: 0;
   background-color: #009ee3;
   border-color: #009ee3;
+}
+.app-documents .fc-cell-overlay {
+  background-color: #009ee3;
 }
 .app-documents .small-calendar {
   width: 225px;
@@ -1252,6 +1264,9 @@ body .large-space {
   background-color: #efa02d;
   border-color: #efa02d;
 }
+.app-todos .fc-cell-overlay {
+  background-color: #efa02d;
+}
 .app-todos .small-calendar {
   width: 225px;
 }
@@ -1364,6 +1379,9 @@ body .large-space {
   border-radius: 0;
   background-color: #e55c55;
   border-color: #e55c55;
+}
+.app-etherpad .fc-cell-overlay {
+  background-color: #e55c55;
 }
 .app-etherpad .small-calendar {
   width: 225px;

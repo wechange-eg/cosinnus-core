@@ -159,7 +159,19 @@
 						start: new Date(2014, 3, 7, 16, 0),
 						allDay: false
 					}
-				]
+				],
+				select: function(startDate, endDate, allDay, jsEvent, view) {
+					$(this.element)
+						.closest('.big-calendar')
+						.trigger('fullCalendarSelect',[startDate, endDate, allDay, jsEvent, view]);
+				},
+				eventClick: function(event, jsEvent, view) {
+					$(this)
+						.closest('.big-calendar')
+						.trigger('fullCalendarEventClick',[event, jsEvent, view]);
+				},
+				selectable: true,
+				selectHelper: true
 			}, german));
 
 			$('.small-calendar').fullCalendar($.extend({
@@ -178,6 +190,97 @@
 
 			}, german));
 
+		},
+
+
+		calendarBig : function() {
+			// The big calendar fills the whole content area and contains the user's events.
+
+			$('.big-calendar')
+				.on("fullCalendarEventClick", function(event, fc_event, jsEvent, view) {
+					// http://arshaw.com/fullcalendar/docs/mouse/eventClick/
+					console.log(
+						"Send the user to the event "+
+						fc_event.title+
+						"!"
+					);
+				});
+
+			$('.big-calendar')
+				.on("fullCalendarSelect", function(event, startDate, endDate, allDay, jsEvent, view) {
+					// Dates have been selected. Now the user might want to add an event.
+					var startDateDataAttr = startDate.getFullYear() + "-"
+						+ ((startDate.getMonth()+1).toString().length === 2
+							? (startDate.getMonth()+1)
+							: "0" + (startDate.getMonth()+1)) + "-"
+						+ (startDate.getDate().toString().length === 2
+							? startDate.getDate()
+							: "0" + startDate.getDate());
+
+					var endDateDataAttr = endDate.getFullYear() + "-"
+						+ ((endDate.getMonth()+1).toString().length === 2
+							? (endDate.getMonth()+1)
+							: "0" + (endDate.getMonth()+1)) + "-"
+						+ (endDate.getDate().toString().length === 2
+							? endDate.getDate()
+							: "0" + endDate.getDate());
+
+					// allDay is always true as times can not be selected.
+
+
+					$('#calendarConfirmEventButton')
+						.attr('data-startDate', startDateDataAttr)
+						.attr('data-endDate', endDateDataAttr);
+
+					moment.lang('de', {
+						calendar : {
+							lastDay : '[gestern]',
+							sameDay : '[heute]',
+							nextDay : '[morgen]',
+							lastWeek : '[letzten] dddd',
+							nextWeek : '[nächsten] dddd',
+							sameElse : 'L'
+						}
+					});
+					moment.lang('de');
+
+					if (startDateDataAttr == endDateDataAttr) {
+						// Event has one day
+						$('#calendarConfirmEventOneday').show();
+						$('#calendarConfirmEventMultiday').hide();
+
+						eventDate = moment(startDateDataAttr);
+						var eventDate = moment(eventDate).calendar();
+						$('#calendarConfirmEventDate').text(eventDate);
+
+						$('#confirmEventModal').modal('show');
+					} else {
+						// Event has multiple days
+						$('#calendarConfirmEventOneday').hide();
+						$('#calendarConfirmEventMultiday').show();
+
+						startDate = moment(startDateDataAttr);
+						var startDate = moment(startDate).calendar();
+						$('#calendarConfirmEventStart').text(startDate);
+
+						endDate = moment(endDateDataAttr);
+						var endDate = moment(endDate).calendar();
+						$('#calendarConfirmEventEnd').text(endDate);
+
+						$('#confirmEventModal').modal('show');
+					}
+			});
+
+			$('#calendarConfirmEventButton').click(function() {
+				console.log(
+					'Create an event from '+
+					$(this).attr('data-startDate')+
+					' till '+
+					$(this).attr('data-endDate')+
+					'!'
+				);
+			});
+					
 		},
 
 		calendarCreateDoodle : function() {
@@ -333,12 +436,39 @@
 		},
 
 		checkBox : function() {
+			// Parents of checkboxes like <i class="fa fa-square-o"></i> are always clickable.
+			// If they contain a <input type="hidden" /> too, this will contain the value.
+
 			$('body .fa-square-o, body .fa-check-square-o').parent().click(function() {
 				if ($(this).find('i').hasClass('fa-check-square-o')) {
 					// already checked
-					$(this).find('i').removeClass('fa-check-square-o').addClass('fa-square-o');
+					$(this)
+						.find('i')
+						.removeClass('fa-check-square-o')
+						.addClass('fa-square-o')
+						.next() // INPUT type="hidden"
+						.attr('value','false');
 				} else {
-					$(this).find('i').removeClass('fa-square-o').addClass('fa-check-square-o');
+					$(this)
+						.find('i')
+						.removeClass('fa-square-o')
+						.addClass('fa-check-square-o')
+						.next() // INPUT type="hidden"
+						.attr('value','true');
+				}
+			});
+
+			// set INPUT type="hidden" value on startup
+			$('body .fa-square-o, body .fa-check-square-o').each(function() {
+				if ($(this).hasClass('fa-check-square-o')) {
+					// checked
+					$(this)
+						.next() // INPUT type="hidden"
+						.attr('value','true');
+				} else {
+					$(this)
+						.next() // INPUT type="hidden"
+						.attr('value','false');
 				}
 			});
 		},
@@ -472,6 +602,26 @@
 			});
 		},
 
+		etherpadList : function() {
+			$('#etherpadCreateInput').val('');
+			$('#etherpadCreateButton').hide();
+			$('#etherpadCreateInput').on('propertychange keyup input paste change', function() {
+				if ($(this).val()) {
+					$('#etherpadCreateButton')
+						.prev()
+						.removeClass('large-space')
+						.next()
+						.show();
+				} else {
+					$('#etherpadCreateButton')
+						.prev()
+						.addClass('large-space')
+						.next()
+						.hide();
+				}
+			});
+		},
+
 		buttonHref : function() {
 			// allow href attribute for buttons
 			$('button').each(function() {
@@ -482,7 +632,7 @@
 				}
 			});
 
-			// Disable all nonsense links a href="#"
+			// Disable all nonsense links <a href="#">
 			$('a[href="#"]').click(function(e) {
 				e.preventDefault();
 			});
@@ -566,12 +716,14 @@ $(function() {
 	$.cosinnus.fadedown();
 	$.cosinnus.selectors();
 	$.cosinnus.fullcalendar();
+	$.cosinnus.calendarBig();
 	$.cosinnus.searchbar();
 	$.cosinnus.todosSelect();
 	$.cosinnus.datePicker();
 	$.cosinnus.annotationDataDate();
 	$.cosinnus.todoCreateTask();
 	$.cosinnus.etherpadEditMeta();
+	$.cosinnus.etherpadList();
 	$.cosinnus.buttonHref();
 	$.cosinnus.calendarCreateDoodle();
 	$.cosinnus.doodleList();

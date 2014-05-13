@@ -49,6 +49,10 @@
 		border-color: $normal;
 	}
 
+	// selected days for event creation
+	.fc-cell-overlay {
+		background-color: $normal;
+	}
 
 	/* ##### Small calendar ####### */
 	.small-calendar {
