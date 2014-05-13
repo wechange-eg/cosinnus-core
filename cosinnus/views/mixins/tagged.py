@@ -13,6 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic.list import MultipleObjectMixin
 
 from taggit.models import Tag, TaggedItem
+from cosinnus.forms.hierarchy import AddContainerForm
 
 
 class TaggedListMixin(object):
@@ -142,6 +143,9 @@ class HierarchyPathMixin(object):
     This mixin can be used in add/edit views. It sets up the path of the
     hierarchy for an object in forms.
     """
+    
+    container_form_class = AddContainerForm
+    container_form_prefix = 'container'
 
     def get_initial(self):
         """
@@ -167,7 +171,90 @@ class HierarchyPathMixin(object):
         if path:
             form.instance.path = path
         return super(HierarchyPathMixin, self).form_valid(form)
+    
 
+    def get(self, request, *args, **kwargs):
+        self.object = None
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        container_form_class = self.get_container_form_class()
+        container_form = self.get_container_form(container_form_class)
+        return self.render_to_response(self.get_context_data(form=form, container_form=container_form))
+
+    def post(self, request, *args, **kwargs):
+        self.object = None
+
+        form_class = self.get_form_class()
+        self.form = self.get_form(form_class)
+        container_form_class = self.get_container_form_class()
+        self.container_form = self.get_container_form(container_form_class)
+        if 'create_container' in request.POST:
+            # Das container form muss einen submit button haben, der
+            # name="create_container" hat.
+            if self.container_form.is_valid():
+                return self.container_form_valid(self.container_form)
+            else:
+                return self.container_form_invalid(self.container_form)
+        else:
+            if self.form.is_valid():
+                return self.form_valid(self.form)
+            else:
+                return self.form_invalid(self.form)
+
+    def get_container_form(self, container_form_class):
+        class ModelAddContainerForm(container_form_class):
+            class Meta(container_form_class.Meta):
+                model = self.model
+        return ModelAddContainerForm(**self.get_container_form_kwargs())
+
+    def get_container_form_class(self):
+        if self.container_form_class:
+            return self.container_form_class
+        raise AttributeError("container_form_class must not be None")
+
+    def get_container_form_kwargs(self):
+        kwargs = {'prefix': self.container_form_prefix}
+        if self.request.method in ('POST', 'PUT'):
+            kwargs.update({
+                'data': self.request.POST,
+            })
+        return kwargs
+
+    def container_form_valid(self, container_form):
+        # analog zu form_valid()
+        """
+        If the form is valid, we need to do the following:
+        - Set instance's is_container to True
+        - Set the instance's group
+        - Set the path again once the slug has been established
+        """
+        container_form.instance.is_container = True
+        container_form.instance.group = self.group
+
+        container = container_form.save()
+        # only after this save do we know the final slug
+        # we still must add it to the end of our path if we're saving a container
+        self.object.path += self.object.slug + '/'
+        self.object.save()
+
+        return HttpResponseRedirect(self.get_success_url())
+
+    def container_form_invalid(self, container_form):
+        # analog zu form_invalid()
+        return self.render_to_response(self.get_context_data(container_form=container_form))
+
+    def get_context_data(self, **kwargs):
+        context = super(HierarchyPathMixin, self).get_context_data(**kwargs)
+        if 'form' not in context and hasattr(self, 'form'):
+            # if container_form_invalid() is called, the 'normal form'
+            # is not defined in the rendering context.
+            context['form'] = self.form
+        if 'container_form' not in context and hasattr(self, 'container_form'):
+            # if form_invalid() is called, the 'container form'
+            # is not defined in the rendering context.
+            context['container_form'] = self.container_form
+        return context
+    
 
 class HierarchyDeleteMixin(object):
     """
