@@ -1,0 +1,53 @@
+{% load i18n %}
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="fa fa-times"></i>
+                </button>
+                <h4 class="modal-title" id="deleteModalLabel">
+                    <i class="fa fa-eraser"></i>
+                    {{ title }}
+                </h4>
+            </div>
+            <div class="modal-body">
+                {{ label }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-emphasized" data-dismiss="modal">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-times"></i>
+                            </a>
+                            <div class="media-body">
+                                {% trans "Abbrechen" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+                {% if form_action %}
+                <form action="{{ form_action }}" method="post"class="form-horizontal">{% csrf_token %}
+                {% endif %} 
+                <button type="submit" class="btn btn-emphasized">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-check"></i>
+                            </a>
+                            <div class="media-body">
+                                {% trans "OK" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+                {% if form_action %}
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div><!-- modal -->
