@@ -162,18 +162,8 @@ class HierarchyPathMixin(object):
             initial.update({'path': container.path})
         return initial
 
-    def form_valid(self, form):
-        """
-        If the form is valid, we need to do pass the path retrieved from the
-        slug over to the non-editable field
-        """
-        path = form.initial.get('path', None)
-        if path:
-            form.instance.path = path
-        return super(HierarchyPathMixin, self).form_valid(form)
-    
-
     def get(self, request, *args, **kwargs):
+        """ Dual form splitting and initialization """
         self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
@@ -188,9 +178,9 @@ class HierarchyPathMixin(object):
         self.form = self.get_form(form_class)
         container_form_class = self.get_container_form_class()
         self.container_form = self.get_container_form(container_form_class)
+        
         if 'create_container' in request.POST:
-            # Das container form muss einen submit button haben, der
-            # name="create_container" hat.
+            # The container_form needs a submit button with name="create_container"
             if self.container_form.is_valid():
                 return self.container_form_valid(self.container_form)
             else:
@@ -219,10 +209,21 @@ class HierarchyPathMixin(object):
                 'data': self.request.POST,
             })
         return kwargs
-
-    def container_form_valid(self, container_form):
-        # analog zu form_valid()
+    
+    def form_valid(self, form):
         """
+        Form for adding model objects.
+        If the form is valid, we need to do pass the path retrieved from the
+        slug over to the non-editable field
+        """
+        path = form.initial.get('path', None)
+        if path:
+            form.instance.path = path
+        return super(HierarchyPathMixin, self).form_valid(form)
+    
+    def container_form_valid(self, container_form):
+        """
+        Form for adding hierarchy container objects.
         If the form is valid, we need to do the following:
         - Set instance's is_container to True
         - Set the instance's group
@@ -230,8 +231,12 @@ class HierarchyPathMixin(object):
         """
         container_form.instance.is_container = True
         container_form.instance.group = self.group
+        # note that we don't set container_form.instance.path here
+        # because we always want to add new folders to root!
+        # uncomment this line to add containers to the current level path:
+        # container_form.instance.path = self.request.path
 
-        container = container_form.save()
+        self.object = container_form.save()
         # only after this save do we know the final slug
         # we still must add it to the end of our path if we're saving a container
         self.object.path += self.object.slug + '/'
