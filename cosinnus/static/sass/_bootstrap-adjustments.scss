@@ -18,12 +18,21 @@ body {
 
 	.fa {
 		// Icons
-		font-size: 20px;
+		font-size: 17px;
 		font-weight: normal;
 	}
 
 	.navbar-brand {
 		height: 53px;
+
+		.fa {
+			// The house looks so tiny!
+			font-size: 20px;
+		}
+	}
+
+	.navbar-nav > li > a {
+		line-height: 20px;
 	}
 }
 

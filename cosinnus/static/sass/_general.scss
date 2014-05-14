@@ -53,30 +53,23 @@ body .large-space {
 	background-color: $app-neutral-color-white;
 	color: $app-neutral-color-dark;
   list-style: none;
-	margin:0;
-	padding:0;
-}
-.input-area > li {
-	padding: 5px;
-}
-.input-area > li + li {
-border-top:1px solid $app-neutral-color-light;
-}
-.input-area > li > ol {
-	margin:0;
-	padding:0;
-  list-style: none;
-}
-// single input fields
-.input-area > li > ol > li {
-	display: inline-block;
-	padding: 4px 7px;
-}
-.input-area > li > ol > li + li {
-	border-left: 1px solid $app-neutral-color-light;
-	color: $app-neutral-color-dark;
-}
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
 
+	// single input fields
+	> li {
+		min-height: 40px;
+		line-height: 25px;
+		margin: -1px 1px 1px -1px;
+		padding: 4px 7px;
+		display: inline-block;
+		float: left;
+		border-left: 1px solid $app-neutral-color-light;
+		border-top: 1px solid $app-neutral-color-light;
+		color: $app-neutral-color-dark;
+	}
+}
 
 /* The serachbar in the fixed top navigation */
 #searchbar {
@@ -85,9 +78,8 @@ border-top:1px solid $app-neutral-color-light;
 	color: $app-neutral-color-dark;
 	font-size: 1.1em;
 }
-#searchbar:hover {
+#searchbar.expanded {
 	background-color: $app-neutral-color-white;
-
 }
 #searchbar input {
 	width: 0px;
@@ -101,6 +93,9 @@ border-top:1px solid $app-neutral-color-light;
 	transition: all 500ms linear;
 	color: $app-neutral-color-dark;
 	box-shadow: none;
+}
+#searchbar i.fa-search {
+	cursor: pointer;
 }
 
 

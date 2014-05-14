@@ -204,3 +204,19 @@
 .btn-emphasized .form-control, .btn-extra-emphasized .form-control {
 	color: $app-neutral-color-white;
 }
+
+// ### magic for mouse cursor
+
+// There are no clickable icons on left side.
+a.pull-left {
+	cursor: default;
+}
+.content-box .btn {
+	cursor: default;
+
+
+}
+.content-box button.btn {
+	// Seems to be a real button
+	cursor: pointer;
+}

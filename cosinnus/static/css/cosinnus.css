@@ -19,11 +19,17 @@ body {
   border-bottom-width: 2px;
 }
 .navbar-fixed-top .fa {
-  font-size: 20px;
+  font-size: 17px;
   font-weight: normal;
 }
 .navbar-fixed-top .navbar-brand {
   height: 53px;
+}
+.navbar-fixed-top .navbar-brand .fa {
+  font-size: 20px;
+}
+.navbar-fixed-top .navbar-nav > li > a {
+  line-height: 20px;
 }
 
 .breadcrumb a {
@@ -541,6 +547,18 @@ textarea {
   color: white;
 }
 
+a.pull-left {
+  cursor: default;
+}
+
+.content-box .btn {
+  cursor: default;
+}
+
+.content-box button.btn {
+  cursor: pointer;
+}
+
 /* Classes that can be found in many pages and are not part of Twitter Bootstrap */
 .w100 {
   width: 100%;
@@ -601,29 +619,17 @@ body .large-space {
   list-style: none;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
-
 .input-area > li {
-  padding: 5px;
-}
-
-.input-area > li + li {
-  border-top: 1px solid #dbdbdb;
-}
-
-.input-area > li > ol {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.input-area > li > ol > li {
-  display: inline-block;
+  min-height: 40px;
+  line-height: 25px;
+  margin: -1px 1px 1px -1px;
   padding: 4px 7px;
-}
-
-.input-area > li > ol > li + li {
+  display: inline-block;
+  float: left;
   border-left: 1px solid #dbdbdb;
+  border-top: 1px solid #dbdbdb;
   color: #333333;
 }
 
@@ -635,7 +641,7 @@ body .large-space {
   font-size: 1.1em;
 }
 
-#searchbar:hover {
+#searchbar.expanded {
   background-color: white;
 }
 
@@ -652,6 +658,10 @@ body .large-space {
   transition: all 500ms linear;
   color: #333333;
   box-shadow: none;
+}
+
+#searchbar i.fa-search {
+  cursor: pointer;
 }
 
 .fadedown:before, .fadedown:after {
@@ -761,6 +771,7 @@ body .large-space {
 .app-main .fc-header-title h2 {
   font-size: 1.5em;
   color: #333333;
+  cursor: default;
 }
 .app-main .fc-button {
   background-color: #16778d;
@@ -877,6 +888,7 @@ body .large-space {
 .app-calendar .fc-header-title h2 {
   font-size: 1.5em;
   color: #333333;
+  cursor: default;
 }
 .app-calendar .fc-button {
   background-color: #779b48;
@@ -993,6 +1005,7 @@ body .large-space {
 .app-files .fc-header-title h2 {
   font-size: 1.5em;
   color: #333333;
+  cursor: default;
 }
 .app-files .fc-button {
   background-color: #14a085;
@@ -1109,6 +1122,7 @@ body .large-space {
 .app-documents .fc-header-title h2 {
   font-size: 1.5em;
   color: #333333;
+  cursor: default;
 }
 .app-documents .fc-button {
   background-color: #009ee3;
@@ -1225,6 +1239,7 @@ body .large-space {
 .app-todos .fc-header-title h2 {
   font-size: 1.5em;
   color: #333333;
+  cursor: default;
 }
 .app-todos .fc-button {
   background-color: #efa02d;
@@ -1341,6 +1356,7 @@ body .large-space {
 .app-etherpad .fc-header-title h2 {
   font-size: 1.5em;
   color: #333333;
+  cursor: default;
 }
 .app-etherpad .fc-button {
   background-color: #e55c55;
