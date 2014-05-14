@@ -1,0 +1,40 @@
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% captureas cosinnus_app_list_url %}cosinnus:{{ COSINNUS_CURRENT_APP }}:list{% endcaptureas %}
+
+{% if current_folder and current_folder.path != '/' %}
+    {% captureas href %}{% url cosinnus_app_list_url group=group.slug %}{% endcaptureas %}
+    {% captureas label %}{% trans "Zurück" %}{% endcaptureas %}
+    {% include "cosinnus/leftnav_button.html" with extra_classes="fine-space" icon="fa-reply" label=label href=href  %}
+{% endif %}
+
+{% for folder in folders %}
+    {% captureas href %}{% url cosinnus_app_list_url group=group.slug slug=folder.container_object.slug %}{% endcaptureas %}
+    {% captureas label %}{{ folder.container_object.title }}{% endcaptureas %}
+    {% captureas button_class %}{% if forloop.last %}regular-space{% else %}fine-space{% endif %}{% endcaptureas %}
+    {% captureas folder_size %}{{ folder.objects|length }}{% endcaptureas %}
+    {% captureas active %}{% if folder.name == current_folder.slug %}True{% endif %}{% endcaptureas %}
+    
+    {% include "cosinnus/leftnav_button.html" with active=active extra_classes=button_class icon_content=folder_size label=label href=href  %}
+{% endfor %}
+
+<form action="" method="post"class="form-horizontal">{% csrf_token %}
+    <!-- This hidden button is needed for the backend to distinguis between different forms. DO NOT REMOVE! -->
+    <button style="display:none" type="submit" name="create_container"></button>
+    
+    <div type="button" class="btn btn-default w100">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-plus"></i>
+                </a>
+                <div class="media-body">
+                    {{ container_form.title.errors }}
+                    <!-- use spaces for centering. CSS padding does not work here. -->
+                    {% captureas placeholder %}{% trans "Neuer Ordnername" %}{% endcaptureas %}
+                    {% render_field container_form.title class+="form-control" placeholder=placeholder %}
+                </div>
+            </li>
+        </ul>
+    </div>
+</form>
