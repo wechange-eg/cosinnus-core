@@ -152,6 +152,7 @@ textarea {
   line-height: 37px;
   padding: 0 10px;
   min-height: 40px;
+  text-overflow: ellipsis;
 }
 
 .media > .pull-left,
@@ -541,6 +542,19 @@ textarea {
 }
 .media-body a + a {
   margin-left: 15px;
+}
+.media-body a {
+  padding-right: 12em;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
 }
 
 .btn-emphasized .form-control, .btn-extra-emphasized .form-control {

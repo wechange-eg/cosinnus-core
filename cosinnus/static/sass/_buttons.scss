@@ -38,6 +38,7 @@
 	line-height: 37px;
 	padding: 0 10px;
 	min-height: 40px;
+	text-overflow: ellipsis;
 }
 
 .media > .pull-left,
@@ -195,6 +196,18 @@
 	// Always make a gap between links
 	a + a {
 		margin-left: 15px;
+	}
+
+	a {
+		// Room for annotations
+		padding-right: 12em; // max annotation width
+		width: 100%;
+		display: block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+		-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+		box-sizing: border-box;         /* Opera/IE 8+ */
 	}
 }
 

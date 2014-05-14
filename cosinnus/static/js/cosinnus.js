@@ -2,7 +2,9 @@
 (function( $ ){
 	$.cosinnus = {
 		fadedown : function() {
-			// toggle editable elements like documents
+			// DIV.fadedown is a wrapper that contains a button with toggle element
+			// and other elements that will be hidden or shown depending on the state.
+
 			$('.fadedown .btn:first-child .fa-chevron-down').parent().click(function() {
 				if ($(this).find('i').hasClass('fa-chevron-up')) {
 					// already open
@@ -29,6 +31,9 @@
 
 
 		selectors : function() {
+			// Various inputs that use jQuery select2 plugin
+			// http://ivaynberg.github.io/select2/
+
 			$('.privacy-selector').select2({ minimumResultsForSearch: -1});
 			$('.privacy-selector').change(function(){
 				$(this).prev().prev().attr('class',
@@ -103,6 +108,12 @@
 		},
 
 		fullcalendar : function() {
+			// There are two kinds of calendar in cosinnus: big and small.
+			// The .big-calendar fills the content and shows events.
+			// Users can add events here.
+			// The .small-calendar is for tooltips or small static date chooser.
+			// both are based on jQuery fullcalendar. http://arshaw.com/fullcalendar/
+
 			var german = {
 				firstDay: 1, // Monday
 				buttonText: {
