@@ -8,7 +8,11 @@
                     <i class="fa {{ icon }}"></i>
                 {% endif %}
             </a>
-            <a class="pull-right" href="#"></a><!-- only block width -->
+            <a class="pull-right" href="#">
+	            {% if active %}
+	                <i class="fa fa-caret-right"></i>
+	            {% endif %}
+            </a><!-- only block width -->
             <div class="media-body">
                 {{ label }}
             </div>
