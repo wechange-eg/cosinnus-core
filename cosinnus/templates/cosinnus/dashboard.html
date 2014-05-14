@@ -1,18 +1,77 @@
 {% extends "cosinnus_message/base.html" %}
-{% load cosinnus_tags %}
+{% load i18n cosinnus_tags %}
+{% load static from staticfiles %}
 
-{% block main_page %}
-<!-- start with left navigation -->
-                <div class="col-lg-4 col-md-4"><!-- left column -->
-                    {% if group %}
-                        {% cosinnus_menu "cosinnus/appsmenu.html" %}
-                    {% endif %}
-Yo
-                </div><!-- left column -->
-                <div class="col-lg-4 col-md-4"><!-- center column -->
-Yo
-                </div><!-- center column -->
-                <div class="col-lg-4 col-md-4"><!-- right column -->
-Yo
-                </div><!-- right column -->
-{% endblock main_page %}
+{% block extrahead %}
+  <link href="{% static "css/cosinnus.dashboard.css" %}" rel="stylesheet">
+{% endblock extrahead %}
+
+
+{% block content %}
+
+  <div id="dashboard" class="row dashboard">
+    {% for id in widgets %}
+      <div class="col-md-4" data-widget-id="{{ id }}" data-type="widget">
+        <div class="panel">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <a href="" data-target="widget-title-url"><span data-target="widget-title"></span>&nbsp;</a>
+              <div class="btn-group pull-right">
+                <a href="#" class="btn darker btn-xs" title="{% trans "Refresh" %}" data-type="refresh"><span class="glyphicon glyphicon-refresh"></span></a>
+                {% if user.is_superuser or user|is_group_member:object %}
+                  <a href="#" class="btn darker btn-xs" title="{% trans "Configure" %}" data-type="edit"><span class="glyphicon glyphicon-wrench"></span></a>
+                  <a href="#" class="btn darker btn-xs" title="{% trans "Delete" %}" data-type="delete"><span class="glyphicon glyphicon-remove"></span></a>
+                {% endif %}
+              </div>
+            </h3>
+          </div>
+          <div class="panel-body" data-target="widget-content"></div>
+        </div>
+      </div>
+    {% endfor %}
+    {% if group and user|is_group_admin:group or not group %}
+      <div class="col-md-4" data-type="widget-add">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{% trans "Add widget" %}</h3>
+          </div>
+          <div class="panel-body" data-widget-id="0" data-target="widget-add-button">
+            <span class="glyphicon glyphicon-plus"></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" data-type="widget-spare">
+        <div class="panel">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <a href="" data-target="widget-title-url"><span data-target="widget-title"></span>&nbsp;</a>
+              <div class="btn-group pull-right">
+                <a href="#" class="btn btn-xs darker" title="{% trans "Refresh" %}" data-type="refresh"><span class="glyphicon glyphicon-refresh"></span></a>
+                {% if user.is_superuser or user|is_group_member:object %}
+                  <a href="#" class="btn btn-xs darker" title="{% trans "Configure" %}" data-type="edit"><span class="glyphicon glyphicon-wrench"></span></a>
+                  <a href="#" class="btn btn-xs darker" title="{% trans "Delete" %}" data-type="delete"><span class="glyphicon glyphicon-remove"></span></a>
+                {% endif %}
+              </div>
+            </h3>
+          </div>
+          <div class="panel-body" data-target="widget-content"></div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+  <div>
+    <a href="{% url 'cosinnus:group-detail' group=group.slug %}">{{ group.name }} - Details</a>
+  </div>
+{% endblock content %}
+
+
+{% block extrafooter %}
+  {{ block.super }}
+
+  <script src="{% static "js/cosinnus.dashboard.js" %}"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var dashboard = window.Cosinnus.dashboard.init("#dashboard", {% if group.slug %}"{{ group.slug }}"{% else %}null{% endif %});
+    });
+  </script>
+{% endblock %}
