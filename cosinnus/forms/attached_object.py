@@ -12,6 +12,7 @@ from cosinnus.models.tagged import AttachedObject
 from cosinnus.views.attached_object import AttachableObjectSelect2View
 from cosinnus.core.registries import attached_object_registry
 from django.core.urlresolvers import reverse
+from django_select2.util import JSFunction
 
 class FormAttachable(forms.ModelForm):
     """
@@ -65,6 +66,12 @@ class FormAttachable(forms.ModelForm):
 class AttachableObjectSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoiceField):
     queryset = AttachedObject
     data_view = AttachableObjectSelect2View
+    
+    def __init__(self, *args, **kwargs):
+        """ Enable returning HTML formatted results in django-select2 return views!
+            Note: You are responsible for cleaning the content, i.e. with  django.utils.html.escape()! """
+        super(AttachableObjectSelect2MultipleChoiceField, self).__init__(*args, **kwargs)
+        self.widget.options['escapeMarkup'] = JSFunction('function(m) { return m; }')
     
     def clean(self, value):
         """ We organize the ids gotten back from the recipient select2 field.
