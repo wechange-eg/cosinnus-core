@@ -144,7 +144,7 @@ class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
     Represents the base for hierarchical cosinnus models.
     """
     is_container = models.BooleanField(
-        blank=False, null=False, default=False, editable=False)
+        blank=False, null=False, default=False, editable=True)
     path = models.CharField(_('Path'),
         blank=False, null=False, default='/', max_length=100)
 
@@ -161,11 +161,20 @@ class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
     
     @property
     def container(self):
-        if not self.is_container:
-            qs = self.__class__.objects.all().filter(Q(group=self.group) & Q(is_container=True) & Q(path=self.path))
-            first_list = list(qs[:1])
-            if first_list:
-                return first_list[0]
+        """ Returns the hierarchical object's parent container or None if root or the object doesn't exist """
+        if self.path == '/':
+            return None
+        if self.is_container:
+            # go to parent folder path
+            parentpath, _, _= self.path[:-1].rpartition('/')
+            path = parentpath + '/'
+        else:
+            path = self.path
+        
+        qs = self.__class__.objects.all().filter(Q(group=self.group) & Q(is_container=True) & Q(path=path))
+        first_list = list(qs[:1])
+        if first_list:
+            return first_list[0]
         return None
 
 

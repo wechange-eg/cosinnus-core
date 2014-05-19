@@ -147,14 +147,13 @@ class HierarchyPathMixin(object):
     container_form_class = AddContainerForm
     container_form_prefix = 'container'
     
+    # do we allow creating and showing folders beyond the root level?
+    allow_deep_hierarchy = True
+    
     def _apply_container_nature(self, container_form):
         """ Make necessary application to the passing form so that it is considered a container """
         container_form.instance.is_container = True
         container_form.instance.group = self.group
-        # note that we don't set container_form.instance.path here
-        # because we always want to add new folders to root!
-        # uncomment this line to add containers to the current level path:
-        # container_form.instance.path = self.request.path
 
     def get_initial(self):
         """
@@ -239,7 +238,10 @@ class HierarchyPathMixin(object):
         - Set the instance's group
         - Set the path again once the slug has been established
         """
-
+        path = self.form.initial.get('path', None)
+        if path:
+            container_form.instance.path = path
+        
         self.object = container_form.save()
         # only after this save do we know the final slug
         # we still must add it to the end of our path if we're saving a container

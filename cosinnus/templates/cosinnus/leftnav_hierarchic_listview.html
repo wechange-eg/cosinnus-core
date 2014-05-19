@@ -3,9 +3,15 @@
 {% captureas cosinnus_app_list_url %}cosinnus:{{ COSINNUS_CURRENT_APP }}:list{% endcaptureas %}
 
 {% if current_folder and current_folder.path != '/' %}
-    {% captureas href %}{% url cosinnus_app_list_url group=group.slug %}{% endcaptureas %}
-    {% captureas label %}{% trans "Zurück" %}{% endcaptureas %}
-    {% include "cosinnus/leftnav_button.html" with extra_classes="fine-space" icon="fa-reply" label=label href=href  %}
+    {% if current_folder.container and current_folder.container.path != '/' %}
+        {% captureas href %}{% url cosinnus_app_list_url group=group.slug slug=current_folder.container.slug %}{% endcaptureas %}
+        {% captureas label %}{% trans "Zurück zu" %} {{ current_folder.container.title }}{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" with extra_classes="fine-space" icon="fa-reply" label=label href=href  %}
+    {% else %}
+	    {% captureas href %}{% url cosinnus_app_list_url group=group.slug %}{% endcaptureas %}
+	    {% captureas label %}{% trans "Zurück zu" %} {% trans COSINNUS_CURRENT_APP context "toplevel_breadcrumb" %}{% endcaptureas %}
+	    {% include "cosinnus/leftnav_button.html" with extra_classes="fine-space" icon="fa-reply" label=label href=href  %}
+    {% endif %}
 {% endif %}
 
 {% for folder in folders %}
