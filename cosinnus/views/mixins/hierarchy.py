@@ -26,7 +26,12 @@ class HierarchicalListCreateViewMixin(TaggedListMixin, HierarchyTreeMixin):
             # insert logic for "this folder doesn't exist" here
             pass
         
-        context.update({'current_folder':current_folder, 'object_list': objects, 'objects':objects, 'folders':folders})
+        context.update({
+            'current_folder':current_folder, 
+            'object_list': objects, 
+            'objects':objects, 
+            'folders':folders
+        })
         return context
     
 

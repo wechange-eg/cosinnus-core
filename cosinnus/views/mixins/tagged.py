@@ -146,6 +146,15 @@ class HierarchyPathMixin(object):
     
     container_form_class = AddContainerForm
     container_form_prefix = 'container'
+    
+    def _apply_container_nature(self, container_form):
+        """ Make necessary application to the passing form so that it is considered a container """
+        container_form.instance.is_container = True
+        container_form.instance.group = self.group
+        # note that we don't set container_form.instance.path here
+        # because we always want to add new folders to root!
+        # uncomment this line to add containers to the current level path:
+        # container_form.instance.path = self.request.path
 
     def get_initial(self):
         """
@@ -181,6 +190,7 @@ class HierarchyPathMixin(object):
         
         if 'create_container' in request.POST:
             # The container_form needs a submit button with name="create_container"
+            self._apply_container_nature(self.container_form)
             if self.container_form.is_valid():
                 return self.container_form_valid(self.container_form)
             else:
@@ -229,19 +239,13 @@ class HierarchyPathMixin(object):
         - Set the instance's group
         - Set the path again once the slug has been established
         """
-        container_form.instance.is_container = True
-        container_form.instance.group = self.group
-        # note that we don't set container_form.instance.path here
-        # because we always want to add new folders to root!
-        # uncomment this line to add containers to the current level path:
-        # container_form.instance.path = self.request.path
 
         self.object = container_form.save()
         # only after this save do we know the final slug
         # we still must add it to the end of our path if we're saving a container
         self.object.path += self.object.slug + '/'
         self.object.save()
-
+        
         return HttpResponseRedirect(self.get_success_url())
 
     def container_form_invalid(self, container_form):
