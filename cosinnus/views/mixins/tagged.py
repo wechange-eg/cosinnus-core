@@ -166,7 +166,7 @@ class HierarchyPathMixin(object):
         # let the user create an object under that path
         # if it is an object, we let the user create a new object on the same level
         if 'slug' in self.kwargs.keys():
-            container = get_object_or_404(self.model, slug=self.kwargs.get('slug'))
+            container = self.get_queryset().get(group=self.group, slug=self.kwargs.get('slug'))
             initial.update({'path': container.path})
         return initial
 
