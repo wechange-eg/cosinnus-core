@@ -14,6 +14,7 @@ from taggit.managers import TaggableManager
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.functions import unique_aware_slugify
+from django.db.models.signals import post_save
 
 
 class LocationModelMixin(models.Model):
@@ -177,6 +178,15 @@ class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
             return first_list[0]
         return None
 
+def ensure_container(sender, **kwargs):
+    """ Creates a root container instance for all hierarchical objects in a newly created group """
+    created = kwargs.get('created', False)
+    if created:
+        for model_class in BaseHierarchicalTaggableObjectModel.__subclasses__():
+            if not model_class._meta.abstract:
+                model_class.objects.create(group=kwargs.get('instance'), slug='_root_', title='_root_', path='/', is_container=True)
+                
+post_save.connect(ensure_container, sender=CosinnusGroup)
 
 def get_tag_object_model():
     """
