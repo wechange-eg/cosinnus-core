@@ -5,7 +5,7 @@
 .btn {
 	padding: 0;
 	border-width: 0;
-	width: 10em;
+	width: 14em;
 	float: right;
 	margin: 0 0 0 5px;
 }
@@ -198,7 +198,7 @@
 		margin-left: 15px;
 	}
 
-	a {
+	> a {
 		// Room for annotations
 		padding-right: 12em; // max annotation width
 		width: 100%;

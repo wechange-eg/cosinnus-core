@@ -31,6 +31,15 @@ body {
 .navbar-fixed-top .navbar-nav > li > a {
   line-height: 20px;
 }
+.navbar-fixed-top #messageCounter {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  background-color: white;
+  border-radius: 1em;
+  padding: 0 0.5em;
+  font-size: 0.8em;
+}
 
 .breadcrumb a {
   text-decoration: underline;
@@ -107,13 +116,24 @@ textarea {
   height: 10em;
 }
 
+.alert.alert-success {
+  color: #333333;
+  background-color: rgba(219, 219, 219, 0.3);
+  border-width: 0;
+}
+.alert .close {
+  color: #333333;
+  opacity: 1;
+  font-size: 16px;
+}
+
 /* The Bootstrap buttons already have the classes btn-default, btn-info, btn-warning and so on.
 	This file adds btn-emphasized, btn-extra-emphasized and btn-appnavi for coloring in the apps's colors.
 */
 .btn {
   padding: 0;
   border-width: 0;
-  width: 10em;
+  width: 14em;
   float: right;
   margin: 0 0 0 5px;
 }
@@ -543,7 +563,7 @@ textarea {
 .media-body a + a {
   margin-left: 15px;
 }
-.media-body a {
+.media-body > a {
   padding-right: 12em;
   width: 100%;
   display: block;
@@ -631,14 +651,20 @@ body .large-space {
   background-color: white;
   color: #333333;
   list-style: none;
-  margin: 0;
   padding: 0;
-  overflow: hidden;
+}
+.input-area:before, .input-area:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.input-area:after {
+  clear: both;
 }
 .input-area > li {
   min-height: 40px;
   line-height: 25px;
-  margin: -1px 1px 1px -1px;
   padding: 4px 7px;
   display: inline-block;
   float: left;
@@ -739,6 +765,10 @@ body .large-space {
   box-shadow: none;
 }
 
+.select2-container.select2-container-multi.w100 {
+  width: 100%;
+}
+
 .attachments-selector {
   min-width: 15em;
 }
@@ -824,6 +854,7 @@ body .large-space {
   border-radius: 0;
   background-color: #16778d;
   border-color: #16778d;
+  cursor: pointer;
 }
 .app-main .fc-cell-overlay {
   background-color: #16778d;
@@ -941,6 +972,7 @@ body .large-space {
   border-radius: 0;
   background-color: #779b48;
   border-color: #779b48;
+  cursor: pointer;
 }
 .app-calendar .fc-cell-overlay {
   background-color: #779b48;
@@ -1058,6 +1090,7 @@ body .large-space {
   border-radius: 0;
   background-color: #14a085;
   border-color: #14a085;
+  cursor: pointer;
 }
 .app-files .fc-cell-overlay {
   background-color: #14a085;
@@ -1175,6 +1208,7 @@ body .large-space {
   border-radius: 0;
   background-color: #009ee3;
   border-color: #009ee3;
+  cursor: pointer;
 }
 .app-documents .fc-cell-overlay {
   background-color: #009ee3;
@@ -1292,6 +1326,7 @@ body .large-space {
   border-radius: 0;
   background-color: #efa02d;
   border-color: #efa02d;
+  cursor: pointer;
 }
 .app-todos .fc-cell-overlay {
   background-color: #efa02d;
@@ -1409,6 +1444,7 @@ body .large-space {
   border-radius: 0;
   background-color: #e55c55;
   border-color: #e55c55;
+  cursor: pointer;
 }
 .app-etherpad .fc-cell-overlay {
   background-color: #e55c55;
@@ -1481,6 +1517,9 @@ body .large-space {
   background-color: red;
 }
 
+#calendar-doodle-days-selector {
+  width: 100%;
+}
 #calendar-doodle-days-selector .small-calendar {
   float: left;
   margin: 10px;
@@ -1578,4 +1617,22 @@ body .large-space {
 .doodle-vote-table .doodle-vote-inputarea a {
   color: inherit;
   display: block;
+}
+
+li.calendar-date-time-chooser {
+  line-height: 30px;
+}
+li.calendar-date-time-chooser input {
+  border-radius: 0;
+  border: 1px solid #dbdbdb;
+}
+li.calendar-date-time-chooser input.calendar-date-time-chooser-date {
+  width: 10em;
+}
+li.calendar-date-time-chooser input.calendar-date-time-chooser-time {
+  width: 5em;
+}
+li.calendar-date-time-chooser .small-calendar {
+  padding: 5px;
+  border-top-width: 0;
 }

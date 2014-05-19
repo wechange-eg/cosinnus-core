@@ -53,15 +53,13 @@ body .large-space {
 	background-color: $app-neutral-color-white;
 	color: $app-neutral-color-dark;
   list-style: none;
-	margin: 0;
 	padding: 0;
-	overflow: hidden;
+	@include clearfix();
 
 	// single input fields
 	> li {
 		min-height: 40px;
 		line-height: 25px;
-		margin: -1px 1px 1px -1px;
 		padding: 4px 7px;
 		display: inline-block;
 		float: left;

@@ -34,7 +34,19 @@ body {
 	.navbar-nav > li > a {
 		line-height: 20px;
 	}
+
+	#messageCounter {
+		position: absolute;
+		right: 5px;
+		top: 10px;
+		background-color: $app-neutral-color-white;
+		border-radius: 1em;
+		padding: 0 0.5em;
+		font-size: 0.8em;
+	}
 }
+
+
 
 
 .breadcrumb a {
@@ -88,3 +100,19 @@ textarea {
 	resize: vertical;
 	height: 10em;
 }
+
+
+.alert {
+	&.alert-success {
+		color: $app-neutral-color-dark;
+		background-color:transparentize($app-neutral-color-light, 0.7);
+		border-width: 0;
+	}
+
+	.close {
+		color: $app-neutral-color-dark;
+		opacity: 1;
+		font-size: 16px;
+	}
+}
+

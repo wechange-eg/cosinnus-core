@@ -1,0 +1,21 @@
+li.calendar-date-time-chooser {
+	line-height: 30px;
+
+	input {
+		border-radius: 0;
+		border: 1px solid $app-neutral-color-light;
+	}
+
+	input.calendar-date-time-chooser-date {
+		width: 10em;
+	}
+
+	input.calendar-date-time-chooser-time {
+		width: 5em;
+	}
+	.small-calendar {
+		padding: 5px;
+		border-top-width: 0;
+	}
+}
+
