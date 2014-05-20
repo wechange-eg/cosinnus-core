@@ -53,6 +53,7 @@ class HierarchicalListCreateViewMixin(TaggedListMixin, HierarchyTreeMixin):
             'object_list': objects, 
             'objects': objects, 
             'folders': folders,
+            'is_deep_hierarchy': self.allow_deep_hierarchy,
         })
         return context
     
