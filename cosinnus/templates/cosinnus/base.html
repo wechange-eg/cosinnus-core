@@ -37,7 +37,7 @@
         <script src="{% static 'js/vendor/moment-with-langs.min.js' %}"></script>
         <script src="{% static 'js/cosinnus.js' %}"></script>
         
-        {% captureas cosinnus_css_class %}{% if COSINNUS_CURRENT_APP == 'todo' %}todos{% elif COSINNUS_CURRENT_APP == 'file' %}files{% elif COSINNUS_CURRENT_APP %}{{ COSINNUS_CURRENT_APP }}{% else %}main{% endif %}{% endcaptureas %}
+        {% captureas cosinnus_css_class %}{% if COSINNUS_CURRENT_APP == 'todo' %}todos{% elif COSINNUS_CURRENT_APP == 'file' %}files{% elif COSINNUS_CURRENT_APP == 'event' %}calendar{% elif COSINNUS_CURRENT_APP %}{{ COSINNUS_CURRENT_APP }}{% else %}main{% endif %}{% endcaptureas %}
         
         {% include 'cosinnus/extrahead.html' %}
         {% block extrahead %}{% endblock extrahead %}
