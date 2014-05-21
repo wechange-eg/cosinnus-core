@@ -48,9 +48,11 @@ def cosinnus(request):
 
     user = request.user
     if user.is_authenticated():
-        user_json = json.dumps(UserSimpleSerializer(request.user).data)
+        user_json = json.dumps(UserSimpleSerializer(user).data)
+        unread_count = Message.objects.inbox_unread_count(user)
     else:
         user_json = json.dumps(False)
+        unread_count = 0
 
     current_app_name = ''
     try:
@@ -58,7 +60,7 @@ def cosinnus(request):
         current_app_name = app_registry.get_name(current_app)
     except KeyError:
         pass  # current_app is not a cosinnus app
-
+    
     return {
         'COSINNUS_BASE_URL': base_url,
         'COSINNUS_CURRENT_APP': current_app_name,
@@ -66,5 +68,5 @@ def cosinnus(request):
         'COSINNUS_DATETIME_FORMAT': get_format('COSINNUS_DATETIMEPICKER_DATETIME_FORMAT'),
         'COSINNUS_TIME_FORMAT': get_format('COSINNUS_DATETIMEPICKER_TIME_FORMAT'),
         'COSINNUS_USER': user_json,
-        'COSINNUS_UNREAD_MESSAGE_COUNT': Message.objects.inbox_unread_count(request.user),
+        'COSINNUS_UNREAD_MESSAGE_COUNT': unread_count,
     }
