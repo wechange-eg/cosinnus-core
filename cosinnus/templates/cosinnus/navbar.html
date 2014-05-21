@@ -52,7 +52,9 @@
 	                <li>
 	                    <a href="{% url 'postman_inbox' %}">
 	                        <i class="fa fa-envelope"></i>
-	                        <span id="messageCounter">{{ COSINNUS_UNREAD_MESSAGE_COUNT }}</span>
+	                        {% if COSINNUS_UNREAD_MESSAGE_COUNT and COSINNUS_UNREAD_MESSAGE_COUNT > 0 %}
+	                           <span id="messageCounter">{{ COSINNUS_UNREAD_MESSAGE_COUNT }}</span>
+	                        {% endif %}
 	                    </a>
 	                </li>
 	                <li class="dropdown">
