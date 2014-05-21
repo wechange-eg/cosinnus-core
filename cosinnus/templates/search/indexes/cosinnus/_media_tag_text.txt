@@ -1,0 +1,4 @@
+{% if object.media_tag %}
+{{ object.media_tag.location_place }}
+{{ object.media_tag.people_name }}
+{% endif %}

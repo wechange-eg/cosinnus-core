@@ -91,3 +91,4 @@ class AttachableObjectSelect2View(RequireReadMixin, Select2View):
             
         return (NO_ERR_RESP, False, results) # Any error response, Has more results, options list
 
+attachable_object_select2_view = AttachableObjectSelect2View.as_view()

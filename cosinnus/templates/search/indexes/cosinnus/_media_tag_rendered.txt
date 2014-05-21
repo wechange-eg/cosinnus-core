@@ -1,0 +1,7 @@
+{% if object.media_tag %}
+<div class="row metadata">
+  <div class="col-md-6">{{ object.media_tag.location_place }}</div>
+  <div class="col-md-4">{{ object.media_tag.people_name }}</div>
+  <div class="col-md-2">{{ object.media_tag.public|yesno:"public,not public" }}</div>
+</div>
+{% endif %}
