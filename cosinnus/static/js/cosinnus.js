@@ -154,23 +154,9 @@
 					right: 'year,month,basicWeek,week' // basicDay
 				},
 
-				events: [
-					{
-						title: 'All Day Event',
-						start: new Date(2014, 3, 23)
-					},
-					{
-						title: 'Long Event',
-						start: new Date(2014, 4, 4),
-						end: new Date(2014, 3, 30)
-					},
-					{
-						id: 999,
-						title: 'Repeating Event',
-						start: new Date(2014, 3, 7, 16, 0),
-						allDay: false
-					}
-				],
+				// cosinnus_calendarEvents is a global var containing the events
+				// set by the backend somewhere in the BODY.
+				events: cosinnus_calendarEvents,
 				select: function(startDate, endDate, allDay, jsEvent, view) {
 					$(this.element)
 						.closest('.big-calendar')
@@ -207,6 +193,7 @@
 		calendarBig : function() {
 			// The big calendar fills the whole content area and contains the user's events.
 
+			/*
 			$('.big-calendar')
 				.on("fullCalendarEventClick", function(event, fc_event, jsEvent, view) {
 					// http://arshaw.com/fullcalendar/docs/mouse/eventClick/
@@ -216,6 +203,7 @@
 						"!"
 					);
 				});
+			*/
 
 			$('.big-calendar')
 				.on("fullCalendarSelect", function(event, startDate, endDate, allDay, jsEvent, view) {
@@ -239,9 +227,8 @@
 					// allDay is always true as times can not be selected.
 
 
-					$('#calendarConfirmEventButton')
-						.attr('data-startDate', startDateDataAttr)
-						.attr('data-endDate', endDateDataAttr);
+					$('#calendarConfirmStartDate').val(startDateDataAttr);
+					$('#calendarConfirmEndDate').val(endDateDataAttr);
 
 					moment.lang('de', {
 						calendar : {
@@ -282,16 +269,6 @@
 					}
 			});
 
-			$('#calendarConfirmEventButton').click(function() {
-				console.log(
-					'Create an event from '+
-					$(this).attr('data-startDate')+
-					' till '+
-					$(this).attr('data-endDate')+
-					'!'
-				);
-			});
-					
 		},
 
 		calendarCreateDoodle : function() {
