@@ -45,8 +45,10 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li id="searchbar">
-                    <input class="form-control" placeholder="Suchbegriff" value="" />
-                    <i class="fa fa-search"></i>
+                    <form action="{% url "cosinnus:search" %}" method="GET">
+                        <input class="form-control" placeholder="Suchbegriff" value="" name="q" />
+                        <i class="fa fa-search"></i>
+                    </form>
                 </li>
                 {% if request.user.is_authenticated %}
 	                <li>
