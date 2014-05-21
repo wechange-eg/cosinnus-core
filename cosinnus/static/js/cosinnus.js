@@ -147,6 +147,7 @@
 				}
 			};
 
+			if ($('.big-calendar').length)
 			$('.big-calendar').fullCalendar($.extend({
 				header: {
 					left: 'prev,next today',
@@ -192,18 +193,6 @@
 
 		calendarBig : function() {
 			// The big calendar fills the whole content area and contains the user's events.
-
-			/*
-			$('.big-calendar')
-				.on("fullCalendarEventClick", function(event, fc_event, jsEvent, view) {
-					// http://arshaw.com/fullcalendar/docs/mouse/eventClick/
-					console.log(
-						"Send the user to the event "+
-						fc_event.title+
-						"!"
-					);
-				});
-			*/
 
 			$('.big-calendar')
 				.on("fullCalendarSelect", function(event, startDate, endDate, allDay, jsEvent, view) {
