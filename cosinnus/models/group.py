@@ -193,10 +193,16 @@ class CosinnusGroupManager(models.Manager):
         :returns: a list of :class:`CosinnusGroup` the given user is a member
             or admin of.
         """
-        pks = self.filter(memberships__user_id=user.pk) \
-                  .filter_membership_status(MEMBER_STATUS) \
-                  .values_list('id', flat=True).distinct()
-        return self.get_cached(pks=pks)
+        return self.get_cached(pks=self.get_for_user_pks(user))
+
+    def get_for_user_pks(self, user):
+        """
+        :returns: a list of primary keys to :class:`CosinnusGroup` the given
+            user is a member or admin of.
+        """
+        return self.filter(memberships__user_id=user.pk) \
+                   .filter_membership_status(MEMBER_STATUS) \
+                   .values_list('id', flat=True).distinct()
 
     def public(self):
         """
