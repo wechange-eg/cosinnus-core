@@ -7,6 +7,7 @@ from django.utils.formats import get_format
 from cosinnus.conf import settings as SETTINGS
 from cosinnus.core.registries import app_registry
 from cosinnus.models.serializers.profile import UserSimpleSerializer
+from postman.models import Message
 import json
 
 
@@ -65,4 +66,5 @@ def cosinnus(request):
         'COSINNUS_DATETIME_FORMAT': get_format('COSINNUS_DATETIMEPICKER_DATETIME_FORMAT'),
         'COSINNUS_TIME_FORMAT': get_format('COSINNUS_DATETIMEPICKER_TIME_FORMAT'),
         'COSINNUS_USER': user_json,
+        'COSINNUS_UNREAD_MESSAGE_COUNT': Message.objects.inbox_unread_count(request.user),
     }
