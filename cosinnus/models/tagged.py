@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.db.models import Q
+from django.db.models.signals import post_save
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
@@ -14,7 +14,6 @@ from taggit.managers import TaggableManager
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.functions import unique_aware_slugify
-from django.db.models.signals import post_save
 
 
 class LocationModelMixin(models.Model):
@@ -41,8 +40,24 @@ class PublicModelMixin(models.Model):
 @python_2_unicode_compatible
 class BaseTagObject(models.Model):
 
+    VISIBILITY_USER = 0
+    VISIBILITY_GROUP = 1
+    VISIBILITY_ALL = 2
+
+    #: Choices for :attr:`visibility`: ``(int, str)``
+    VISIBILITY_CHOICES = (
+        (VISIBILITY_USER, _('User')),
+        (VISIBILITY_GROUP, _('Group')),
+        (VISIBILITY_ALL, _('All')),
+    )
+
     group = models.ForeignKey(CosinnusGroup, verbose_name=_('Group'),
         related_name='+', null=True)
+
+    persons = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
+        null=True, verbose_name=_('Persons'), related_name='+')
+    visibility = models.PositiveSmallIntegerField(_('Permissions'), blank=True,
+        default=VISIBILITY_GROUP, choices=VISIBILITY_CHOICES)
 
     class Meta:
         abstract = True
@@ -188,6 +203,7 @@ def ensure_container(sender, **kwargs):
                 
 post_save.connect(ensure_container, sender=CosinnusGroup)
 
+
 def get_tag_object_model():
     """
     Return the cosinnus tag object model that is defined in
@@ -206,3 +222,19 @@ def get_tag_object_model():
         raise ImproperlyConfigured("COSINNUS_TAG_OBJECT_MODEL refers to model '%s' that has not been installed" %
             settings.COSINNUS_TAG_OBJECT_MODEL)
     return tag_model
+
+
+def get_tagged_object_filter_for_user(user):
+    q = Q(group__public=True)  # All tagged objects in public groups
+    q |= Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)  # All public tagged objects
+    if user.is_authenticated():
+        gids = CosinnusGroup.objects.get_for_user_pks(user)
+        q |= Q(  # all tagged objects in groups the user is a member of
+            media_tag__visibility=BaseTagObject.VISIBILITY_GROUP,
+            group_id__in=gids
+        )
+        q |= Q(  # all tagged objects the user is explicitly a linked to
+            media_tag__visibility=BaseTagObject.VISIBILITY_USER,
+            media_tag__persons__id=user.id
+        )
+    return q
