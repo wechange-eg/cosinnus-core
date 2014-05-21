@@ -7,6 +7,7 @@ from django.utils.translation import get_language
 from bootstrap3_datetime.widgets import DateTimePicker
 
 from cosinnus.utils.dates import datetime_format_js2py
+from django.forms.widgets import SplitDateTimeWidget
 
 
 class BaseL10NPicker(DateTimePicker):
@@ -38,3 +39,15 @@ class DateL10nPicker(BaseL10NPicker):
 
 class TimeL10nPicker(BaseL10NPicker):
     js_format_key = 'COSINNUS_DATETIMEPICKER_TIME_FORMAT'
+    
+    
+class SplitHiddenDateWidget(SplitDateTimeWidget):
+    """
+    A Widget that splits datetime input into a hidden date input and a shown time input.
+    """
+    is_hidden = True
+
+    def __init__(self, attrs=None, date_format=None, time_format=None):
+        super(SplitHiddenDateWidget, self).__init__(attrs, date_format, time_format)
+        self.widgets[0].input_type = 'hidden'
+        self.widgets[0].is_hidden = True
