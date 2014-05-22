@@ -45,6 +45,8 @@ class DashboardWidget(object):
     model = None
     user_model_attr = 'owner'
     widget_name = None
+    allow_on_user = True
+    allow_on_group = True
 
     def __init__(self, request, config_instance):
         self.request = request
@@ -149,6 +151,7 @@ class GroupDescriptionWidget(DashboardWidget):
     title = _('Group Description')
     user_model_attr = None
     widget_name = 'group_description'
+    allow_on_user = False
 
     def get_data(self):
         group = self.config.group

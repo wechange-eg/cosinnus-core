@@ -32,6 +32,8 @@ def widget_list(request):
 @login_required
 def widget_add_user(request, app_name, widget_name):
     widget_class = widget_registry.get(app_name, widget_name)
+    if not widget_class.allow_on_user:
+        return render_to_response('cosinnus/widgets/not_allowed_user.html')
     form_class = widget_class.get_setup_form_class()
     if request.method == "POST":
         form = form_class(request.POST)
@@ -54,6 +56,8 @@ def widget_add_user(request, app_name, widget_name):
 def widget_add_group(request, group, app_name, widget_name):
     widget_class = widget_registry.get(app_name, widget_name)
     form_class = widget_class.get_setup_form_class()
+    if not widget_class.allow_on_group:
+        return render_to_response('cosinnus/widgets/not_allowed_group.html')
     if request.method == "POST":
         form = form_class(request.POST)
         if form.is_valid():
