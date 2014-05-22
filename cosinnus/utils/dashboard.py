@@ -153,7 +153,7 @@ class GroupDescriptionWidget(DashboardWidget):
     def get_data(self):
         group = self.config.group
         if group is None:
-            raise ImproperlyConfigured('Group description widget was used in a non-group environment, or group could not be found!')
+            return ''
         data = {
             'group': group,
         }
