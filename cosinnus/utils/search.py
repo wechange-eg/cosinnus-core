@@ -84,8 +84,10 @@ class BaseTaggableObjectIndex(TagObjectSearchIndex):
 
     title = indexes.NgramField(model_attr='title')
     slug = indexes.CharField(model_attr='slug', indexed=False)
-    creator = indexes.CharField(model_attr='creator')
+    creator = indexes.CharField(model_attr='creator', null=True)
     created = indexes.DateTimeField(model_attr='created')
+
+    get_absolute_url = indexes.CharField(model_attr='get_absolute_url', indexed=False)
 
     group = indexes.IntegerField(model_attr='group_id', indexed=False)
     group_name = indexes.CharField(model_attr='group__name')
