@@ -78,6 +78,7 @@ def widget_add_group(request, group, app_name, widget_name):
     return render_to_response('cosinnus/widgets/setup.html', d, c)
 
 
+@ensure_csrf_cookie
 def widget_detail(request, id):
     wc = get_object_or_404(WidgetConfig, id=int(id))
     if wc.group and not (check_ug_membership(request.user, wc.group) or
