@@ -32,6 +32,8 @@ def widget_list(request):
 @login_required
 def widget_add_user(request, app_name, widget_name):
     widget_class = widget_registry.get(app_name, widget_name)
+    if widget_class is None:
+        return render_to_response('cosinnus/widgets/not_found.html')
     if not widget_class.allow_on_user:
         return render_to_response('cosinnus/widgets/not_allowed_user.html')
     form_class = widget_class.get_setup_form_class()
@@ -55,6 +57,8 @@ def widget_add_user(request, app_name, widget_name):
 @require_admin_access_decorator()
 def widget_add_group(request, group, app_name, widget_name):
     widget_class = widget_registry.get(app_name, widget_name)
+    if widget_class is None:
+        return render_to_response('cosinnus/widgets/not_found.html')
     form_class = widget_class.get_setup_form_class()
     if not widget_class.allow_on_group:
         return render_to_response('cosinnus/widgets/not_allowed_group.html')
@@ -81,6 +85,8 @@ def widget_detail(request, id):
             wc.user and wc.user_id != request.user.pk:
         return HttpResponseForbidden('Access denied!')
     widget_class = widget_registry.get(wc.app_name, wc.widget_name)
+    if widget_class is None:
+        return render_to_response('cosinnus/widgets/not_found.html')
     widget = widget_class(request, wc)
     data = widget.get_data()
     if isinstance(data, six.string_types):
@@ -116,6 +122,8 @@ def widget_edit(request, id):
             wc.user and wc.user_id != request.user.pk:
         return HttpResponseForbidden('Access denied!')
     widget_class = widget_registry.get(wc.app_name, wc.widget_name)
+    if widget_class is None:
+        return render_to_response('cosinnus/widgets/not_found.html')
     form_class = widget_class.get_setup_form_class()
     widget = widget_class(request, wc)
     if request.method == "POST":
