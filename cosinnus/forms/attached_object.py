@@ -9,10 +9,12 @@ from django.core.exceptions import ValidationError
 from django.db.models import get_model
 
 from cosinnus.models.tagged import AttachedObject
-from cosinnus.views.attached_object import AttachableObjectSelect2View
+from cosinnus.views.attached_object import AttachableObjectSelect2View,\
+    build_attachment_field_result
 from cosinnus.core.registries import attached_object_registry
 from django.core.urlresolvers import reverse
 from django_select2.util import JSFunction
+
 
 class FormAttachable(forms.ModelForm):
     """
@@ -33,8 +35,12 @@ class FormAttachable(forms.ModelForm):
             for attached in self.instance.attached_objects.all():
                 if attached and attached.target_object:
                     obj = attached.target_object
-                    preresults.append( (attached.model_name+":"+str(obj.id), "%s %s" % (attached.model_name, obj.title),)  )
-        
+                    text_only = (attached.model_name+":"+str(obj.id), "%s: %s" % (attached.model_name, obj.title),)
+                    #text_only = (attached.model_name+":"+str(obj.id), "&lt;i&gt;%s&lt;/i&gt; %s" % (attached.model_name, obj.title),)  
+                    # TODO: sascha: returning unescaped html here breaks the javascript of django-select2
+                    html = build_attachment_field_result(attached.model_name, obj) 
+                    preresults.append(text_only)
+                    
         # add a field for each model type of attachable file provided by cosinnus apps
         # each field's name is something like 'attached:cosinnus_file.FileEntry'
         # and fill the field with all available objects for that type (this is passed from our view)

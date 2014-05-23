@@ -11,10 +11,17 @@ from django.core.exceptions import PermissionDenied
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.views.mixins.group import RequireReadMixin
 from cosinnus.conf import settings
+from cosinnus.models.tagged import BaseHierarchicalTaggableObjectModel
 from django.template.loader import render_to_string
 from django.utils.html import escape
-from cosinnus.models.tagged import BaseHierarchicalTaggableObjectModel
 
+
+def build_attachment_field_result(obj_type, obj):
+    """ Builds a result that can be fed into a django select2 field """
+    pill_html = render_to_string('cosinnus/attached/attached_object_select_pill.html', {'type':obj_type,'text':escape(obj.title)})
+    ret =(obj_type+":"+str(obj.id), pill_html,) 
+    return ret
+        
 
 class AttachableViewMixin(object):
     """
@@ -103,8 +110,7 @@ class AttachableObjectSelect2View(RequireReadMixin, Select2View):
             
             # these result sets are what select2 uses to build the choice list
             for result in queryset:
-                pill_html = render_to_string('cosinnus/attached/attached_object_select_pill.html', {'type':attach_model_id,'text':escape(result.title)})
-                results.append( (attach_model_id+":"+str(result.id), pill_html,) )
+                results.append( build_attachment_field_result(attach_model_id, result))
             
         return (NO_ERR_RESP, False, results) # Any error response, Has more results, options list
 
