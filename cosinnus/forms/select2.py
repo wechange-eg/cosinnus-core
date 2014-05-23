@@ -1,0 +1,47 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django import forms
+
+from django_select2.fields import Select2MultipleChoiceField
+from django_select2.widgets import Select2MultipleWidget 
+
+
+class CommaSeparatedSelect2MultipleWidget(Select2MultipleWidget):
+    def value_from_datadict(self, data, files, name):
+        # Return a string of comma separated integers since the database, and
+        # field expect a string (not a list).
+        return ','.join(data.getlist(name))
+
+    def render(self, name, value, attrs=None, choices=()):
+        # Convert comma separated integer string to a list, since the checkbox
+        # rendering code expects a list (not a string)
+        if value:
+            value = value.split(',')
+        return super(CommaSeparatedSelect2MultipleWidget, self).render(
+            name, value, attrs=attrs, choices=choices
+        )
+
+
+# Form field
+class CommaSeparatedSelect2MultipleChoiceField(forms.MultipleChoiceField):
+    widget = CommaSeparatedSelect2MultipleWidget
+
+    def to_python(self, value):
+        """
+        Value is stored and retrieved as a string of comma separated
+        integers. We don't want to do processing to convert the value to
+        a list like the normal MultipleChoiceField does.
+        """
+        return value
+
+    def validate(self, value):
+        """
+        If we have a value, then we know it is a string of comma separated
+        integers. To use the MultipleChoiceField validator, we first have
+        to convert the value to a list.
+        """
+        if value:
+            value = value.split(',')
+        super(CommaSeparatedSelect2MultipleChoiceField, self).validate(value)
+
