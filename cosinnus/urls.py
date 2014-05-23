@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.conf.urls import patterns, url
+from django.conf.urls import include, patterns, url
 
 from cosinnus.core.registries import url_registry
 
@@ -44,6 +44,8 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^attachmentselect/(?P<group>[^/]+)/(?P<model>[^/]+)$', 'attached_object.attachable_object_select2_view', name='attached_object_select2_view'),
 
     url(r'^search/$', 'search.search', name='search'),
+
+    url(r'^select2/', include('cosinnus.urls_select2', namespace='select2')),
 )
 
 urlpatterns += url_registry.urlpatterns
