@@ -46,10 +46,11 @@ body .large-space {
 }
 
 
-/* input-area is an OL containing another OL of input elements.
+/* input-area is an OL of input elements.
 	It looks like a white box full of inputs with gray vertical and horizontal separators.
 */
 .input-area {
+	margin: 0;
 	background-color: $app-neutral-color-white;
 	color: $app-neutral-color-dark;
   list-style: none;
@@ -66,6 +67,12 @@ body .large-space {
 		border-left: 1px solid $app-neutral-color-light;
 		border-top: 1px solid $app-neutral-color-light;
 		color: $app-neutral-color-dark;
+	}
+
+	&.input-area-left-column {
+		li {
+			border-width: 0;
+		}
 	}
 }
 
@@ -102,3 +109,9 @@ body .large-space {
 	@include clearfix();
 }
 
+p.navi-explanation {
+	background-color: transparent;
+	color: $app-neutral-color-white;
+	margin: 0;
+	padding: 0 0 8px 0;
+}

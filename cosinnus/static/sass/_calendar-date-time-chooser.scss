@@ -1,4 +1,4 @@
-li.calendar-date-time-chooser {
+.calendar-date-time-chooser {
 	line-height: 30px;
 
 	input {
@@ -17,5 +17,23 @@ li.calendar-date-time-chooser {
 		padding: 5px;
 		border-top-width: 0;
 	}
+}
+
+
+// small date time chooser in left column
+.input-area.input-area-left-column {
+
+	.calendar-date-time-chooser {
+		input.calendar-date-time-chooser-date {
+			// width: 7em;
+		}
+		input.calendar-date-time-chooser-time {
+			// width: 4em;
+		}
+		.small-calendar {
+			background-color: $app-neutral-color-white;
+		}
+	}
+
 }
 

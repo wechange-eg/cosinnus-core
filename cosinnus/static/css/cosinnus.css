@@ -1,4 +1,24 @@
 @charset "UTF-8";
+/*
+		$abcde : blue;
+$currentcolorscheme: neww;
+body {
+  @if $currentcolorscheme == ocean {
+    color: blue;
+  } @else if $currentcolorscheme == matador {
+    color: red;
+  } @else if $currentcolorscheme == neww {
+		$abcde : green;
+  } @else {
+    color: black;
+  }
+}
+
+body {
+	background-color: $abcde !important;
+background-image: none;
+}
+*/
 body {
   font-family: Verdana, Geneva, sans-serif;
   background-image: url("../images/background.jpg");
@@ -116,6 +136,10 @@ textarea {
   height: 10em;
 }
 
+.media-body textarea {
+  border: 1px solid #dbdbdb;
+}
+
 .alert.alert-success {
   color: #333333;
   background-color: rgba(219, 219, 219, 0.3);
@@ -125,6 +149,31 @@ textarea {
   color: #333333;
   opacity: 1;
   font-size: 16px;
+}
+
+ul.pagination li {
+  background-color: white;
+  border-width: 0;
+  margin-right: 5px;
+  display: inline-block;
+}
+ul.pagination li a {
+  color: #333333;
+  border-width: 0;
+}
+ul.pagination li a:hover {
+  color: white;
+  background-color: #333333;
+}
+ul.pagination li.active > a {
+  background-color: white;
+  color: #333333;
+  font-weight: bold;
+  border-width: 0;
+}
+ul.pagination li.active > a:hover {
+  color: white;
+  background-color: #333333;
 }
 
 /* The Bootstrap buttons already have the classes btn-default, btn-info, btn-warning and so on.
@@ -577,6 +626,12 @@ textarea {
   /* Opera/IE 8+ */
 }
 
+.media-body p {
+  line-height: 1.2em;
+  white-space: normal;
+  padding: 0;
+}
+
 .btn-emphasized .form-control, .btn-extra-emphasized .form-control {
   color: white;
 }
@@ -591,6 +646,73 @@ a.pull-left {
 
 .content-box button.btn {
   cursor: pointer;
+}
+
+/* Square icon with date. Something like:
+	<a class="pull-left square-date-icon" href="#">
+		<div>19</div>
+		<div>Dez</div>
+	</a> */
+.square-date-icon div {
+  line-height: 1.6em;
+  font-size: 0.9em;
+}
+.square-date-icon div + div {
+  font-size: 0.65em;
+  line-height: 0.5em;
+}
+
+.button-with-title-image {
+  position: relative;
+}
+.button-with-title-image > img {
+  width: 100%;
+  min-height: 70px;
+}
+.button-with-title-image > img + div {
+  background: -moz-linear-gradient(top, transparent 0%, transparent 57%, rgba(0, 0, 0, 0.34) 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, transparent), color-stop(57%, transparent), color-stop(100%, rgba(0, 0, 0, 0.34)));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, transparent 0%, transparent 57%, rgba(0, 0, 0, 0.34) 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, transparent 0%, transparent 57%, rgba(0, 0, 0, 0.34) 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, transparent 0%, transparent 57%, rgba(0, 0, 0, 0.34) 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, transparent 0%, transparent 57%, rgba(0, 0, 0, 0.34) 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#57000000',GradientType=0 );
+  /* IE6-9 */
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.button-with-title-image > ul.media-list {
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+}
+.button-with-title-image > ul.media-list > li.media {
+  background-color: transparent;
+}
+.button-with-title-image > ul.media-list > li.media > a.pull-right {
+  background-color: transparent;
+}
+.button-with-title-image > ul.media-list > li.media > div.media-body {
+  background-color: transparent;
+}
+
+.btn.btn-white .media,
+.btn.btn-white .media > .media-body,
+.btn.btn-white .media > .media-body > p,
+.btn.btn-white .media > .pull-right,
+.btn.btn-white .media > .pull-left {
+  background-color: white;
+  color: #333333;
 }
 
 /* Classes that can be found in many pages and are not part of Twitter Bootstrap */
@@ -644,10 +766,11 @@ body .large-space {
   text-align: left;
 }
 
-/* input-area is an OL containing another OL of input elements.
+/* input-area is an OL of input elements.
 	It looks like a white box full of inputs with gray vertical and horizontal separators.
 */
 .input-area {
+  margin: 0;
   background-color: white;
   color: #333333;
   list-style: none;
@@ -671,6 +794,9 @@ body .large-space {
   border-left: 1px solid #dbdbdb;
   border-top: 1px solid #dbdbdb;
   color: #333333;
+}
+.input-area.input-area-left-column li {
+  border-width: 0;
 }
 
 /* The serachbar in the fixed top navigation */
@@ -712,6 +838,13 @@ body .large-space {
 }
 .fadedown:after {
   clear: both;
+}
+
+p.navi-explanation {
+  background-color: transparent;
+  color: white;
+  margin: 0;
+  padding: 0 0 8px 0;
 }
 
 .select2-container .select2-choice,
@@ -1619,20 +1752,24 @@ body .large-space {
   display: block;
 }
 
-li.calendar-date-time-chooser {
+.calendar-date-time-chooser {
   line-height: 30px;
 }
-li.calendar-date-time-chooser input {
+.calendar-date-time-chooser input {
   border-radius: 0;
   border: 1px solid #dbdbdb;
 }
-li.calendar-date-time-chooser input.calendar-date-time-chooser-date {
+.calendar-date-time-chooser input.calendar-date-time-chooser-date {
   width: 10em;
 }
-li.calendar-date-time-chooser input.calendar-date-time-chooser-time {
+.calendar-date-time-chooser input.calendar-date-time-chooser-time {
   width: 5em;
 }
-li.calendar-date-time-chooser .small-calendar {
+.calendar-date-time-chooser .small-calendar {
   padding: 5px;
   border-top-width: 0;
+}
+
+.input-area.input-area-left-column .calendar-date-time-chooser .small-calendar {
+  background-color: white;
 }
