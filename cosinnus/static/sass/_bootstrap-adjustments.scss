@@ -100,6 +100,10 @@ textarea {
 	resize: vertical;
 	height: 10em;
 }
+// border if textarea is inside btn style area (white background)
+.media-body textarea {
+	border: 1px solid $app-neutral-color-light;
+}
 
 
 .alert {
@@ -116,3 +120,34 @@ textarea {
 	}
 }
 
+
+ul.pagination {
+	li {
+		background-color: $app-neutral-color-white;
+		border-width: 0;
+		margin-right: 5px;
+		display: inline-block;
+
+		a {
+			color: $app-neutral-color-dark;
+			border-width: 0;
+		}
+		a:hover {
+			color: $app-neutral-color-white;
+			background-color: $app-neutral-color-dark;
+		}
+	}
+	li.active {
+		> a {
+			background-color: $app-neutral-color-white;
+			color: $app-neutral-color-dark;
+			font-weight: bold;
+			border-width: 0;
+		}
+		> a:hover {
+			color: $app-neutral-color-white;
+			background-color: $app-neutral-color-dark;
+		}
+
+	}
+}

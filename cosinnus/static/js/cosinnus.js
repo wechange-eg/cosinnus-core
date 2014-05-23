@@ -219,23 +219,12 @@
 					$('#calendarConfirmStartDate').val(startDateDataAttr);
 					$('#calendarConfirmEndDate').val(endDateDataAttr);
 
-					moment.lang('de', {
-						calendar : {
-							lastDay : '[gestern]',
-							sameDay : '[heute]',
-							nextDay : '[morgen]',
-							lastWeek : '[letzten] dddd',
-							nextWeek : '[nächsten] dddd',
-							sameElse : 'L'
-						}
-					});
-					moment.lang('de');
-
 					if (startDateDataAttr == endDateDataAttr) {
 						// Event has one day
 						$('#calendarConfirmEventOneday').show();
 						$('#calendarConfirmEventMultiday').hide();
 
+						moment.lang(moment.lang(),$.cosinnus.momentShort[moment.lang()]);
 						eventDate = moment(startDateDataAttr);
 						var eventDate = moment(eventDate).calendar();
 						$('#calendarConfirmEventDate').text(eventDate);
@@ -246,6 +235,8 @@
 						$('#calendarConfirmEventOneday').hide();
 						$('#calendarConfirmEventMultiday').show();
 
+						// There is no time, so use momentShort.
+						moment.lang(moment.lang(),$.cosinnus.momentShort[moment.lang()]);
 						startDate = moment(startDateDataAttr);
 						var startDate = moment(startDate).calendar();
 						$('#calendarConfirmEventStart').text(startDate);
@@ -374,20 +365,6 @@
 		// When creating or editing an event the user has to select date and time.
 		// Clicking one date input shows all calendars on the whole page.
 		calendarDayTimeChooser : function() {
-			// This should become global.
-			moment.lang('de', {
-				calendar : {
-					lastDay : '[gestern]',
-					sameDay : '[heute]',
-					nextDay : '[morgen]',
-					lastWeek : '[letzten] dddd',
-					nextWeek : '[nächsten] dddd',
-					sameElse : 'L'
-				}
-			});
-			moment.lang('de');
-
-
 			// Hide calendar when clicking outside
 			$(document).click(function(event) {
 				var thisdaytimechooser = $(event.target).closest('.calendar-date-time-chooser');
@@ -452,6 +429,7 @@
 						.val(dateDataAttr);
 
 					// Update INPUT with human readable date
+					moment.lang(moment.lang(),$.cosinnus.momentShort[moment.lang()]);
 					var humanDateString = moment(dateDataAttr).calendar();
 						$(this)
 							.closest('.calendar-date-time-chooser')
@@ -465,6 +443,7 @@
 				.find('.calendar-date-time-chooser-hiddendate')
 				.val();
 
+			moment.lang(moment.lang(),$.cosinnus.momentShort[moment.lang()]);
 			var humanDateString = moment(dateDataAttr).calendar();
 				$(this)
 					.find('.calendar-date-time-chooser-date')
@@ -604,17 +583,18 @@
 					// When date picked, update date in form
 					$($(this).attr('data-dateelement'))
 						.attr('data-date', dateDataAttr)
-						.trigger('renderAnnotationDataDate');
+						.trigger('renderMomentDataDate');
 				});
 		},
 
 
 
-		annotationDataDate : function() {
-			// when .annotation elements have a data-date attribute, render date.
-
-			$('.annotation').on("renderAnnotationDataDate", function() {
+		renderMomentDataDate : function() {
+			// when .moment-data-date elements have a data-date attribute, render date.
+			$('.moment-data-date').on("renderMomentDataDate", function() {
 				if (!$(this).attr('data-date')) return;
+				// Format: 2014-05-05
+				// Format: 2013-02-08 09:30:26
 				var data_date = $(this).attr('data-date');
 
 				if (data_date == 'today') {
@@ -631,26 +611,14 @@
 					$(this).attr('data-date',data_date);
 				}
 
-				data_date = moment(data_date);
-
-				moment.lang('de', {
-					calendar : {
-						lastDay : '[gestern]',
-						sameDay : '[heute]',
-						nextDay : '[morgen]',
-						lastWeek : '[letzten] dddd',
-						nextWeek : '[nächsten] dddd',
-						sameElse : 'L'
-					}
-				});
-				moment.lang('de');
-
-				var cal = moment(data_date).calendar();
+				moment.lang(moment.lang(),$.cosinnus.momentFull[moment.lang()]);
+				var cal = moment(data_date);
+				cal = cal.calendar();
 				$(this).text(cal);
 			});
 
-			$('.annotation').each(function() {
-				$(this).trigger('renderAnnotationDataDate');
+			$('.moment-data-date').each(function() {
+				$(this).trigger('renderMomentDataDate');
 			});
 		},
 
@@ -672,6 +640,28 @@
 				};
 				console.log(data);
 			});
+		},
+
+		searchChangeSearch : function() {
+			// User enters a new search term on a search page
+
+			$('#searchChangeButton').hide();
+			$('#searchChangeInput').on('propertychange keyup input paste change', function() {
+				if ($(this).val()) {
+					$('#searchChangeButton')
+						.prev()
+						.removeClass('large-space')
+						.next()
+						.show();
+				} else {
+					$('#searchChangeButton')
+						.prev()
+						.addClass('large-space')
+						.next()
+						.hide();
+				}
+			});
+
 		},
 
 		etherpadEditMeta : function() {
@@ -789,6 +779,62 @@
 	};
 })( jQuery );
 
+// Set global language here
+$.cosinnus.lang = "de";
+moment.lang($.cosinnus.lang);
+
+// We need some new flavours of moment().calendar()
+// based on http://momentjs.com/downloads/moment-with-langs.js
+
+// internationalisation objects for momentJs calendar view WITHOUT time:
+$.cosinnus.momentShort = {
+	'de': {
+		calendar : {
+			sameDay: "[heute]",
+			sameElse: "L",
+			nextDay: '[morgen]',
+			nextWeek: 'dddd',
+			lastDay: '[gestern]',
+			lastWeek: '[letzten] dddd'
+		}
+	},
+	'en' : {
+		calendar : {
+			sameDay : '[today]',
+			nextDay : '[tomorrow]',
+			nextWeek : 'dddd',
+			lastDay : '[yesterday]',
+			lastWeek : '[last] dddd',
+			sameElse : 'L'
+		}
+	}
+};
+
+// internationalisation objects for momentJs calendar view WITH time:
+$.cosinnus.momentFull = {
+	'de': {
+		calendar : {
+			sameDay: "[heute um] LT",
+			sameElse: "L",
+			nextDay: '[morgen um] LT',
+			nextWeek: 'dddd [um] LT',
+			lastDay: '[gestern um] LT',
+			lastWeek: '[letzten] dddd'
+		},
+	},
+	'en' : {
+		calendar : {
+			sameDay : '[today at] LT',
+			nextDay : '[tomorrow at] LT',
+			nextWeek : 'dddd [at] LT',
+			lastDay : '[yesterday at] LT',
+			lastWeek : '[last] dddd',
+			sameElse : 'L'
+		}
+	}
+};
+
+
 
 
 $(function() {
@@ -800,10 +846,11 @@ $(function() {
 	$.cosinnus.searchbar();
 	$.cosinnus.todosSelect();
 	$.cosinnus.datePicker();
-	$.cosinnus.annotationDataDate();
+	$.cosinnus.renderMomentDataDate();
 	$.cosinnus.todoCreateTask();
 	$.cosinnus.etherpadEditMeta();
 	$.cosinnus.etherpadList();
+	$.cosinnus.searchChangeSearch();
 	$.cosinnus.buttonHref();
 	$.cosinnus.calendarCreateDoodle();
 	$.cosinnus.calendarDayTimeChooser();

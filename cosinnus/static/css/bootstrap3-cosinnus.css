@@ -1,3 +1,23 @@
+/*
+		$abcde : blue;
+$currentcolorscheme: neww;
+body {
+  @if $currentcolorscheme == ocean {
+    color: blue;
+  } @else if $currentcolorscheme == matador {
+    color: red;
+  } @else if $currentcolorscheme == neww {
+		$abcde : green;
+  } @else {
+    color: black;
+  }
+}
+
+body {
+	background-color: $abcde !important;
+background-image: none;
+}
+*/
 body {
   font-family: Verdana, Geneva, sans-serif;
   background-image: url("../images/background.jpg");
