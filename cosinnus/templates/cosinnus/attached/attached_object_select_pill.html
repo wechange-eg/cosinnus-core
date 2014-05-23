@@ -1,0 +1,8 @@
+<span class="app-main-attachment">
+    {% if type == "cosinnus_file.FileEntry" %}
+        <i class="fa fa-file"></i> 
+    {% elif type == "cosinnus_event.Event" %}
+        <i class="fa fa-clock-o"></i> 
+    {% endif %}
+    {{text}}
+</span>

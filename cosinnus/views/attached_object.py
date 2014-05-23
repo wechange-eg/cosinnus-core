@@ -11,6 +11,9 @@ from django.core.exceptions import PermissionDenied
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.views.mixins.group import RequireReadMixin
 from cosinnus.conf import settings
+from django.template.loader import render_to_string
+from django.utils.html import escape
+from cosinnus.models.tagged import BaseHierarchicalTaggableObjectModel
 
 
 class AttachableViewMixin(object):
@@ -26,6 +29,15 @@ class AttachableViewMixin(object):
         # retrieve the attached objects from the form and save them
         # after saving the object itself
         ret = super(AttachableViewMixin, self).form_valid(form)
+        # if hasattr(form, 'save_m2m'):
+        #     form.save_m2m()
+        form.save_attachable()
+        return ret
+
+    def forms_valid(self, form, inlines):
+        # retrieve the attached objects from the form and save them
+        # after saving the object itself
+        ret = super(AttachableViewMixin, self).forms_valid(form, inlines)
         # if hasattr(form, 'save_m2m'):
         #     form.save_m2m()
         form.save_attachable()
@@ -76,7 +88,10 @@ class AttachableObjectSelect2View(RequireReadMixin, Select2View):
             
             app_label, model_name = attach_model_id.split('.')
             attach_model_class = get_model(app_label, model_name)
-            queryset = attach_model_class._default_manager.filter(group__slug=self.kwargs.get('group', None))
+            if BaseHierarchicalTaggableObjectModel in attach_model_class.__bases__:
+                queryset = attach_model_class._default_manager.filter(group__slug=self.kwargs.get('group', None), is_container=False)
+            else:
+                queryset = attach_model_class._default_manager.filter(group__slug=self.kwargs.get('group', None))
             
             """ For each token in the search query, filter the full object queryset further down,
                 comparing the titles of these objects, unless: the query is in the special aliases list
@@ -87,7 +102,9 @@ class AttachableObjectSelect2View(RequireReadMixin, Select2View):
                     queryset = queryset.filter(Q(title__icontains=token))
             
             # these result sets are what select2 uses to build the choice list
-            results.extend( [ (attach_model_id+":"+str(res.id), "%s %s" % (attach_model_id, res.title),) for res in queryset ] )
+            for result in queryset:
+                pill_html = render_to_string('cosinnus/attached/attached_object_select_pill.html', {'type':attach_model_id,'text':escape(result.title)})
+                results.append( (attach_model_id+":"+str(result.id), pill_html,) )
             
         return (NO_ERR_RESP, False, results) # Any error response, Has more results, options list
 
