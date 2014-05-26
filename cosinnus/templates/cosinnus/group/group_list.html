@@ -1,0 +1,104 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block page_title %}{% trans "Groups" %}{% endblock %}
+
+
+{% block leftnav %}
+	{% captureas href %}{% url 'cosinnus:group-list' %}{% endcaptureas %}
+	{% captureas label %}{% trans "Initiatives" %}{% endcaptureas %}
+	{% include "cosinnus/leftnav_button.html" with active=True extra_classes="regular-space" icon="fa-group" label=label href=href  %}
+{% endblock leftnav %}
+
+{% block override_breadcrumb %}
+{% endblock override_breadcrumb %}
+
+{% block content %}
+
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+        
+        {% if user.is_superuser %}
+	        <div type="button" class="btn btn-default w100 large-space">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <a class="pull-left" href="#">
+	                        <i class="fa fa-plus"></i>
+	                    </a>
+	                    <div class="media-body">
+	                        <input class="form-control"
+	                            placeholder="Gib den Titel für eine neue Gruppe ein."
+	                            value="" />
+	                    </div>
+	                </li>
+	            </ul>
+	        </div>
+        {% endif %}
+    
+	    {% for group, members, pendings in rows %}
+	        {#{% if user.is_authenticated and user.is_superuser or user.pk in members or group.public %}#}
+	        {#{% if user.is_authenticated %}#}
+	        {#{% for group in object_list %}#}
+	{#   {% if user.is_authenticated and user.is_superuser or user.pk in members or group.public %}{% else %}{% endif %}  #}
+	        <div class="fadedown regular-space">
+	            <div class="btn btn-{% if user.is_authenticated and user.pk in members or group.public %}emphasized{% else %}default{% endif %} w100">
+	                <ul class="media-list">
+	                    <li class="media">
+	                        <a class="pull-left" href="#">
+	                            <i class="fa fa-group"></i>
+	                        </a>
+	                        <a class="pull-right" href="#">
+	                            <i class="fa fa-chevron-down"></i>
+	                        </a>
+	                        <a class="pull-right" href="{% url 'cosinnus:group-dashboard' group=group.slug %}">
+	                            <i class="fa fa-chain"></i>
+	                        </a>
+	                        <div class="media-body">
+	                            <a href="{% url 'cosinnus:group-dashboard' group=group.slug %}">
+	                                {{ group.name }}
+	                            </a>
+	                        </div>
+	                    </li>
+	                </ul>
+	            </div>
+	            
+	            {% if group.description and group.description|length > 0 %}
+		            <div class="media-body well">
+	                    {{ group.description|safe }}
+		            </div>
+	            {% endif %}
+	            
+	            {% if user.is_authenticated %}
+	            <button type="button" class="btn btn-emphasized"
+	                   href="{% if user.pk in members %}{% url 'cosinnus:group-user-leave' group=group.slug %}{% trans "Leave" %}{% elif user.pk in pendings %}{% url 'cosinnus:group-user-withdraw' group=group.slug %}{% else %}{% url 'cosinnus:group-user-join' group=group.slug %}{% endif %}">
+	                   
+	                <ul class="media-list">
+	                    <li class="media">
+	                        <a class="pull-left" href="#">
+	                            <i class="fa fa-group"></i>
+	                        </a>
+	                        <div class="media-body">
+	                            {% if user.pk in members %}
+	                                {% trans "Leave" %}
+	                            {% elif user.pk in pendings %}
+	                                {% trans "Withdraw" %}
+	                            {% else %}
+	                                {% trans "Join" %}
+	                            {% endif %}
+	                        </div>
+	                    </li>
+	                </ul>
+	            </button>
+	            {% endif %}
+	            
+	            
+	        </div><!-- fadedown -->
+	    
+		{% empty %}
+		   <p>{% trans "There are no groups." %}</p>
+		{% endfor %}
+        
+    </div>
+
+{% endblock %}
+

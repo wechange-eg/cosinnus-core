@@ -31,7 +31,7 @@ class GroupCreateView(AjaxableFormMixin, UserFormKwargsMixin, CreateView):
 
     form_class = CosinnusGroupForm
     model = CosinnusGroup
-    template_name = 'cosinnus/group_form.html'
+    template_name = 'cosinnus/group/group_form.html'
 
     @method_decorator(superuser_required)
     @atomic
@@ -66,7 +66,7 @@ class GroupDeleteView(AjaxableFormMixin, DeleteView):
     model = CosinnusGroup
     slug_url_kwarg = 'group'
     success_url = reverse_lazy('cosinnus:group-list')
-    template_name = 'cosinnus/group_delete.html'
+    template_name = 'cosinnus/group/group_delete.html'
 
     @method_decorator(superuser_required)
     @atomic
@@ -85,7 +85,7 @@ group_delete_api = GroupDeleteView.as_view(is_ajax_request_url=True)
 class GroupDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
                       DetailView):
 
-    template_name = 'cosinnus/group_detail.html'
+    template_name = 'cosinnus/group/group_detail.html'
     serializer_class = GroupSimpleSerializer
 
     def get_object(self, queryset=None):
@@ -113,7 +113,7 @@ group_detail_api = GroupDetailView.as_view(is_ajax_request_url=True)
 class GroupListView(ListAjaxableResponseMixin, ListView):
 
     model = CosinnusGroup
-    template_name = 'cosinnus/group_list.html'
+    template_name = 'cosinnus/group/group_list.html'
     serializer_class = GroupSimpleSerializer
 
     def get_queryset(self):
@@ -143,7 +143,7 @@ class GroupUpdateView(AjaxableFormMixin, UserFormKwargsMixin,
 
     form_class = CosinnusGroupForm
     model = CosinnusGroup
-    template_name = 'cosinnus/group_form.html'
+    template_name = 'cosinnus/group/group_form.html'
 
     def get_object(self, queryset=None):
         return self.group
@@ -168,7 +168,7 @@ group_update_api = GroupUpdateView.as_view(is_ajax_request_url=True)
 class GroupUserListView(ListAjaxableResponseMixin, RequireReadMixin, ListView):
 
     serializer_class = UserSimpleSerializer
-    template_name = 'cosinnus/group_user_list.html'
+    template_name = 'cosinnus/group/group_user_list.html'
 
     def get_queryset(self):
         return self.group.users.all()
@@ -228,7 +228,7 @@ class GroupUserJoinView(GroupConfirmMixin, DetailView):
     confirm_label = _('Join')
     confirm_question = _('Do you want to join the group “%(group_name)s”?')
     confirm_title = _('Join group “%(group_name)s”?')
-    template_name = 'cosinnus/group_confirm.html'
+    template_name = 'cosinnus/group/group_confirm.html'
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
@@ -250,7 +250,7 @@ class GroupUserLeaveView(GroupConfirmMixin, DetailView):
     confirm_question = _('Do you want to leave the group “%(group_name)s”?')
     confirm_title = _('Leaving group “%(group_name)s”?')
     submit_css_classes = 'btn-danger'
-    template_name = 'cosinnus/group_confirm.html'
+    template_name = 'cosinnus/group/group_confirm.html'
 
     @method_decorator(login_required)
     @atomic
@@ -283,7 +283,7 @@ class GroupUserWithdrawView(GroupConfirmMixin, DetailView):
     confirm_question = _('Do you want to withdraw your join request to the group “%(group_name)s”?')
     confirm_title = _('Withdraw join request to group “%(group_name)s”?')
     submit_css_classes = 'btn-danger'
-    template_name = 'cosinnus/group_confirm.html'
+    template_name = 'cosinnus/group/group_confirm.html'
 
     @method_decorator(login_required)
     @atomic
@@ -310,7 +310,7 @@ class UserSelectMixin(object):
     model = CosinnusGroupMembership
     slug_field = 'user__username'
     slug_url_kwarg = 'username'
-    template_name = 'cosinnus/group_user_form.html'
+    template_name = 'cosinnus/group/group_user_form.html'
 
     @atomic
     def dispatch(self, request, *args, **kwargs):
@@ -398,7 +398,7 @@ group_user_update_api = GroupUserUpdateView.as_view(is_ajax_request_url=True)
 class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
                           UserSelectMixin, DeleteView):
 
-    template_name = 'cosinnus/group_confirm.html'
+    template_name = 'cosinnus/group/group_confirm.html'
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -436,7 +436,7 @@ group_user_delete_api = GroupUserDeleteView.as_view(is_ajax_request_url=True)
 
 class GroupExportView(RequireAdminMixin, TemplateView):
 
-    template_name = 'cosinnus/group_export.html'
+    template_name = 'cosinnus/group/group_export.html'
 
     def get_context_data(self, **kwargs):
         export_apps = []

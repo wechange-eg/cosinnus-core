@@ -63,11 +63,13 @@
                 <!-- now the content -->
                 <div class="col-lg-9 col-md-9"><!-- right column -->
                     
-                    <ol class="breadcrumb">
-	                    {% block breadcrumb %}
-		                    {% include 'cosinnus/breadcrumb.html' %}
-	                    {% endblock breadcrumb %}
-                    </ol>
+                    {% block override_breadcrumb %}
+	                    <ol class="breadcrumb">
+		                    {% block breadcrumb %}
+			                    {% include 'cosinnus/breadcrumb.html' %}
+		                    {% endblock breadcrumb %}
+	                    </ol>
+	                {% endblock override_breadcrumb %}
                     
                     <div class="row">
                         <div class="col-xs-12">
