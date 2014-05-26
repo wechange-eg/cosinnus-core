@@ -153,7 +153,18 @@ class BaseTaggableObjectModel(models.Model):
 
     def save(self, *args, **kwargs):
         unique_aware_slugify(self, 'title', 'slug', group=self.group)
+        if hasattr(self, '_media_tag_cache'):
+            del self._media_tag_cache
         super(BaseTaggableObjectModel, self).save(*args, **kwargs)
+
+    def media_tag_object(self):
+        key = '_media_tag_cache'
+        if not hasattr(self, key):
+            if self.media_tag_id is None:
+                setattr(self, key, self.group.media_tag)
+            else:
+                setattr(self, key, self.media_tag)
+        return getattr(self, key)
 
 
 class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
