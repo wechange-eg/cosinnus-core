@@ -5,19 +5,28 @@
 
 
 {% block leftnav %}
-	{% captureas href %}{% url 'cosinnus:group-list' %}{% endcaptureas %}
-	{% captureas label %}{% trans "Initiatives" %}{% endcaptureas %}
-	{% include "cosinnus/leftnav_button.html" with active=True extra_classes="regular-space" icon="fa-group" label=label href=href  %}
+    {% captureas href %}{% url 'cosinnus:group-list' %}{% endcaptureas %}
+    {% captureas label %}{% trans "Initiatives" %}{% endcaptureas %}
+    {% include "cosinnus/leftnav_button.html" with active=True extra_classes="regular-space" icon="fa-group" label=label href=href  %}
+
+    {% if user.is_superuser %}
+	    {% captureas href %}{% url 'cosinnus:group-add' %}{% endcaptureas %}
+	    {% captureas label %}{% trans "Create Group" %}{% endcaptureas %}
+	    {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-group" label=label href=href  %}
+    {% endif %}
+
 {% endblock leftnav %}
+
 
 {% block override_breadcrumb %}
 {% endblock override_breadcrumb %}
 
-{% block content %}
 
+{% block content %}
     <!-- a box with semi transparent background -->
     <div class="content-box">
         
+        <!-- hidden as long as create link is in the leftnav
         {% if user.is_superuser %}
 	        <div type="button" class="btn btn-default w100 large-space">
 	            <ul class="media-list">
@@ -34,6 +43,7 @@
 	            </ul>
 	        </div>
         {% endif %}
+        -->
     
 	    {% for group, members, pendings in rows %}
 	        {#{% if user.is_authenticated and user.is_superuser or user.pk in members or group.public %}#}
@@ -70,7 +80,7 @@
 	            
 	            {% if user.is_authenticated %}
 	            <button type="button" class="btn btn-emphasized"
-	                   href="{% if user.pk in members %}{% url 'cosinnus:group-user-leave' group=group.slug %}{% trans "Leave" %}{% elif user.pk in pendings %}{% url 'cosinnus:group-user-withdraw' group=group.slug %}{% else %}{% url 'cosinnus:group-user-join' group=group.slug %}{% endif %}">
+	                   href="{% if user.pk in members %}{% url 'cosinnus:group-user-leave' group=group.slug %}{% elif user.pk in pendings %}{% url 'cosinnus:group-user-withdraw' group=group.slug %}{% else %}{% url 'cosinnus:group-user-join' group=group.slug %}{% endif %}">
 	                   
 	                <ul class="media-list">
 	                    <li class="media">
