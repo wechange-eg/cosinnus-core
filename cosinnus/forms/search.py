@@ -47,23 +47,23 @@ class TaggableModelSearchForm(SearchForm):
     groups = forms.ChoiceField(label=_('Limit to groups'), required=False, initial='all',
         choices=(('all', _('All')), ('mine', _('My groups')), ('others', _('Other groups'))),
         widget=forms.RadioSelect)
+    models = forms.MultipleChoiceField(required=False)
+
+    location = forms.CharField(required=False)
+    valid_start = forms.DateField(required=False)
+    valid_end = forms.DateField(required=False)
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request')
         super(TaggableModelSearchForm, self).__init__(*args, **kwargs)
-        self.fields['models'] = forms.MultipleChoiceField(
-            choices=taggable_model_choices(),
-            required=False,
-            label=_('Search In'),
-            widget=forms.CheckboxSelectMultiple
-        )
+        self.fields['models'].choices =taggable_model_choices()
 
     def get_models(self):
         """Return an alphabetical list of model classes in the index."""
         search_models = []
 
         if self.is_valid():
-            for model in self.cleaned_data['models']:
+            for model in self.cleaned_data.get('models', []):
                 search_models.append(models.get_model(*model.split('.')))
 
         return search_models
@@ -72,6 +72,7 @@ class TaggableModelSearchForm(SearchForm):
         sqs = super(TaggableModelSearchForm, self).search()
         sqs = self._filter_for_read_access(sqs)
         sqs = self._filter_group_selection(sqs)
+        sqs = self._filter_media_tags(sqs)
         return sqs.models(*self.get_models())
 
     def _filter_for_read_access(self, sqs):
@@ -116,7 +117,7 @@ class TaggableModelSearchForm(SearchForm):
         """
         user = self.request.user
         if user.is_authenticated():
-            term = self.request.GET.get('groups', 'all').lower()
+            term = self.cleaned_data.get('groups', 'all').lower()
             if term == 'mine':
                 sqs = sqs.filter_and(group_members__contains=user.id)
             elif term == 'others':
@@ -125,4 +126,16 @@ class TaggableModelSearchForm(SearchForm):
                 pass
         # we don't need to limit the result set on anonymous user. They are not
         # a member of any group.
+        return sqs
+
+    def _filter_media_tags(self, sqs):
+        location = self.cleaned_data.get('location', None)
+        if location:
+            sqs = sqs.filter_and(mt_location__contains=location.lower())
+        start = self.cleaned_data.get('valid_start', None)
+        if start:
+            sqs = sqs.filter_and(mt_valid_start__gte=start)
+        end = self.cleaned_data.get('valid_end', None)
+        if end:
+            sqs = sqs.filter_and(mt_valid_end__gte=end)
         return sqs

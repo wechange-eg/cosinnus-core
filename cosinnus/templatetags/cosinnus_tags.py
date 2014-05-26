@@ -3,12 +3,15 @@ from __future__ import unicode_literals
 from collections import defaultdict
 
 import six
+from six.moves.urllib.parse import parse_qsl
 
 from django import template
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import resolve, reverse
+from django.http import HttpRequest
 from django.template.defaulttags import URLNode, url as url_tag
 from django.template.loader import render_to_string
+from django.utils.http import urlencode
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
@@ -200,6 +203,7 @@ def do_captureas(parser, token):
     parser.delete_first_token()
     return CaptureasNode(nodelist, args)
 
+
 class CaptureasNode(template.Node):
     def __init__(self, nodelist, varname):
         self.nodelist = nodelist
@@ -209,3 +213,21 @@ class CaptureasNode(template.Node):
         output = self.nodelist.render(context)
         context[self.varname] = output
         return ""
+
+
+@register.simple_tag(takes_context=True)
+def strip_params(context, qs, *keys):
+    """
+    Given a URL query string (`foo=bar&lorem=ipsum`) and an arbitrary key /
+    list of keys, strips those from the QS:
+    """
+    if isinstance(qs, six.string_types):
+        parsed = dict(parse_qsl(qs))
+    elif isinstance(qs, HttpRequest):
+        from copy import copy
+        parsed = copy(qs.GET.dict())
+    else:
+        parsed = {}
+    for k in keys:
+        parsed.pop(k, None)
+    return urlencode(parsed)
