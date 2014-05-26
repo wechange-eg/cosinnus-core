@@ -714,6 +714,9 @@ a.pull-left {
   background-color: white;
   color: #333333;
 }
+.btn.btn-white a {
+  color: #333333;
+}
 
 /* Classes that can be found in many pages and are not part of Twitter Bootstrap */
 .w100 {
