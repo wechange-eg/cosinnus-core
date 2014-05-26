@@ -64,6 +64,19 @@
 	                            <i class="fa fa-chain"></i>
 	                        </a>
 	                        <div class="media-body">
+	                            {% if user.is_authenticated %}
+                                    <span class="annotation">
+		                                {% if user.pk in members %}
+		                                    {% trans "Member" %}
+		                                {% elif user.pk in pendings %}
+                                            {% trans "Membership requested" %}
+                                        {% elif group.public %}
+                                            {% trans "Public" %}
+                                        {% else %}
+		                                    {% trans "Not a member" %}
+		                                {% endif %}
+		                            </span>
+                                {% endif %}
 	                            <a href="{% url 'cosinnus:group-dashboard' group=group.slug %}">
 	                                {{ group.name }}
 	                            </a>
