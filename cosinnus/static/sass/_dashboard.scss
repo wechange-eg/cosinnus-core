@@ -1,0 +1,134 @@
+div.dashboard-appwidget {
+	margin-bottom: 40px;
+	background-color: red;
+	@include clearfix();
+	background-color:transparentize($app-neutral-color-light, 0.7);
+}
+div.dashboard-appwidget:last-child {
+	margin-bottom: 0;
+}
+
+.btn.dashboard-appwidget-headline {
+	width: 100%;
+	float: none;
+	margin:0;
+
+	.media > a.pull-left:first-child:empty {
+		width: 10px;
+	}
+	.media > a.pull-left:not(:first-child) {
+		background-color: transparent;
+	}
+	.media > a.pull-left {
+		height: 50px;
+		width: 50px;
+		font-size: 28px;
+
+		img {
+			width: 50px;
+		}
+	}
+
+	.media {
+		height: 50px;
+	}
+
+	.media-body {
+		text-align: left;
+		font-size: 15px;
+		line-height: 1em;
+
+		min-height: 0;
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+
+		.group-annotation {
+			line-height: 1.5em;
+		}
+
+		.annotation {
+			font-size: 12px;
+		}
+	}
+
+}
+
+.btn.dashboard-appwidget-contentline,
+.btn.dashboard-appwidget-contentline-indented,
+.btn.dashboard-appwidget-contentline-extra-indented {
+
+	cursor: default;
+	width: 100%;
+	float: none;
+	margin-left: 0;
+	margin-right: 0;
+
+	.media-body {
+		text-align: left;
+		line-height: 1.3em;
+		padding-top: 3px;
+		padding-bottom: 3px;
+
+		a {
+			padding-right: 0;
+			font-weight: bold;
+			white-space: normal;
+		}
+
+		img {
+			width: 100%;
+			margin: 8px 0;
+		}
+
+		&.dashboard-appwidget-networkicons {
+			@include clearfix();
+			padding: 0;
+			a {
+				float: left;
+				width: 25%;
+				padding: 0;
+				margin: 0;
+
+				img {
+					width: 100%;
+					padding: 0;
+					margin: 0;
+				}
+			}
+		}
+
+	}
+}
+
+
+.btn.dashboard-appwidget-contentline,
+.btn.dashboard-appwidget-contentline-indented,
+.btn.dashboard-appwidget-contentline-extra-indented,
+.btn.dashboard-appwidget-headline {
+	.media-body {
+		.group-annotation {
+			font-size: 12px;
+			color: $app-neutral-color-light;
+			font-weight: normal;
+		}
+	}
+}
+
+.btn.dashboard-appwidget-contentline-indented {
+	padding-left: 40px;
+}
+.btn.dashboard-appwidget-contentline-extra-indented {
+	padding-left: 50px;
+}
+
+.btn.dashboard-appwidget-morebutton {
+	width: 10em;
+
+	.media > a.pull-right {
+		
+	}
+}
+
+
+

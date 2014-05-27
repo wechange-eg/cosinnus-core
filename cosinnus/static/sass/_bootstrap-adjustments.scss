@@ -151,3 +151,13 @@ ul.pagination {
 
 	}
 }
+
+
+// Box with content from WYSIWYG-Editor
+.well {
+	border-width: 0;
+	background-color: $app-neutral-color-white;
+	margin: 8px 0 8px 0;
+	font-size: 14px;
+	padding: 0;
+}

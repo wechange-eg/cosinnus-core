@@ -176,6 +176,14 @@ ul.pagination li.active > a:hover {
   background-color: #333333;
 }
 
+.well {
+  border-width: 0;
+  background-color: white;
+  margin: 8px 0 8px 0;
+  font-size: 14px;
+  padding: 0;
+}
+
 /* The Bootstrap buttons already have the classes btn-default, btn-info, btn-warning and so on.
 	This file adds btn-emphasized, btn-extra-emphasized and btn-appnavi for coloring in the apps's colors.
 */
@@ -246,20 +254,10 @@ ul.pagination li.active > a:hover {
   color: inherit;
 }
 
-.fadedown .btn-default .media > .pull-right {
-  color: transparent;
-  background-color: white;
-}
-
-.fadedown .btn-default:hover .media > .pull-right,
-.fadedown.open .btn-default .media > .pull-right {
-  color: white;
-  background-color: #949494;
-}
-
 /* Quadratic images at side of buttons */
 .pull-left img, .pull-right img {
   width: 40px;
+  vertical-align: top;
 }
 
 .pull-left input, .pull-right input {
@@ -302,10 +300,12 @@ ul.pagination li.active > a:hover {
 .app-main .btn-appnavi .media > .pull-left:first-child,
 .app-main .btn-appnavi:hover .media > .pull-left,
 .app-main .btn-extra-emphasized .media > .pull-left,
-.app-main .media > .pull-left.btn-extra-emphasized,
-.app-main .btn-extra-emphasized:hover .media > .pull-right,
+.app-main .media-list > .media > .pull-left.btn-extra-emphasized,
+.app-main .media-list > .media > .pull-left.btn-extra-emphasized:empty,
+.app-main .btn-extra-emphasized .media > .pull-right,
+.app-main .media-list > .media > .btn-extra-emphasized.pull-right,
 .app-main .fadedown.open .btn-extra-emphasized.w100 .media > .pull-right,
-.app-main .fadedown .btn-extra-emphasized:hover .media > .pull-right,
+.app-main .fadedown .btn-extra-emphasized .media > .pull-right,
 .app-main .btn-emphasized:hover .media > .pull-right,
 .app-main .fadedown.open .btn-emphasized.w100 .media > .pull-right,
 .app-main .fadedown .btn-emphasized:hover .media > .pull-right,
@@ -320,14 +320,9 @@ ul.pagination li.active > a:hover {
   background-color: transparent;
   color: inherit;
 }
-.app-main .btn-emphasized .media > .pull-right,
-.app-main .btn-appnavi .media > .pull-right,
-.app-main .btn-extra-emphasized .media > .pull-right {
-  color: transparent;
-}
-.app-main .btn-emphasized .media > .pull-right.permanent-visible,
-.app-main .btn-extra-emphasized .media > .pull-right.permanent-visible {
-  color: inherit;
+.app-main .btn-emphasized .media > .pull-left.btn-default:empty,
+.app-main .btn-emphasized .media > .pull-right.btn-default:empty {
+  background-color: #dbdbdb;
 }
 
 .app-calendar {
@@ -356,10 +351,12 @@ ul.pagination li.active > a:hover {
 .app-calendar .btn-appnavi .media > .pull-left:first-child,
 .app-calendar .btn-appnavi:hover .media > .pull-left,
 .app-calendar .btn-extra-emphasized .media > .pull-left,
-.app-calendar .media > .pull-left.btn-extra-emphasized,
-.app-calendar .btn-extra-emphasized:hover .media > .pull-right,
+.app-calendar .media-list > .media > .pull-left.btn-extra-emphasized,
+.app-calendar .media-list > .media > .pull-left.btn-extra-emphasized:empty,
+.app-calendar .btn-extra-emphasized .media > .pull-right,
+.app-calendar .media-list > .media > .btn-extra-emphasized.pull-right,
 .app-calendar .fadedown.open .btn-extra-emphasized.w100 .media > .pull-right,
-.app-calendar .fadedown .btn-extra-emphasized:hover .media > .pull-right,
+.app-calendar .fadedown .btn-extra-emphasized .media > .pull-right,
 .app-calendar .btn-emphasized:hover .media > .pull-right,
 .app-calendar .fadedown.open .btn-emphasized.w100 .media > .pull-right,
 .app-calendar .fadedown .btn-emphasized:hover .media > .pull-right,
@@ -374,14 +371,9 @@ ul.pagination li.active > a:hover {
   background-color: transparent;
   color: inherit;
 }
-.app-calendar .btn-emphasized .media > .pull-right,
-.app-calendar .btn-appnavi .media > .pull-right,
-.app-calendar .btn-extra-emphasized .media > .pull-right {
-  color: transparent;
-}
-.app-calendar .btn-emphasized .media > .pull-right.permanent-visible,
-.app-calendar .btn-extra-emphasized .media > .pull-right.permanent-visible {
-  color: inherit;
+.app-calendar .btn-emphasized .media > .pull-left.btn-default:empty,
+.app-calendar .btn-emphasized .media > .pull-right.btn-default:empty {
+  background-color: #dbdbdb;
 }
 
 .app-files {
@@ -410,10 +402,12 @@ ul.pagination li.active > a:hover {
 .app-files .btn-appnavi .media > .pull-left:first-child,
 .app-files .btn-appnavi:hover .media > .pull-left,
 .app-files .btn-extra-emphasized .media > .pull-left,
-.app-files .media > .pull-left.btn-extra-emphasized,
-.app-files .btn-extra-emphasized:hover .media > .pull-right,
+.app-files .media-list > .media > .pull-left.btn-extra-emphasized,
+.app-files .media-list > .media > .pull-left.btn-extra-emphasized:empty,
+.app-files .btn-extra-emphasized .media > .pull-right,
+.app-files .media-list > .media > .btn-extra-emphasized.pull-right,
 .app-files .fadedown.open .btn-extra-emphasized.w100 .media > .pull-right,
-.app-files .fadedown .btn-extra-emphasized:hover .media > .pull-right,
+.app-files .fadedown .btn-extra-emphasized .media > .pull-right,
 .app-files .btn-emphasized:hover .media > .pull-right,
 .app-files .fadedown.open .btn-emphasized.w100 .media > .pull-right,
 .app-files .fadedown .btn-emphasized:hover .media > .pull-right,
@@ -428,14 +422,9 @@ ul.pagination li.active > a:hover {
   background-color: transparent;
   color: inherit;
 }
-.app-files .btn-emphasized .media > .pull-right,
-.app-files .btn-appnavi .media > .pull-right,
-.app-files .btn-extra-emphasized .media > .pull-right {
-  color: transparent;
-}
-.app-files .btn-emphasized .media > .pull-right.permanent-visible,
-.app-files .btn-extra-emphasized .media > .pull-right.permanent-visible {
-  color: inherit;
+.app-files .btn-emphasized .media > .pull-left.btn-default:empty,
+.app-files .btn-emphasized .media > .pull-right.btn-default:empty {
+  background-color: #dbdbdb;
 }
 
 .app-documents {
@@ -464,10 +453,12 @@ ul.pagination li.active > a:hover {
 .app-documents .btn-appnavi .media > .pull-left:first-child,
 .app-documents .btn-appnavi:hover .media > .pull-left,
 .app-documents .btn-extra-emphasized .media > .pull-left,
-.app-documents .media > .pull-left.btn-extra-emphasized,
-.app-documents .btn-extra-emphasized:hover .media > .pull-right,
+.app-documents .media-list > .media > .pull-left.btn-extra-emphasized,
+.app-documents .media-list > .media > .pull-left.btn-extra-emphasized:empty,
+.app-documents .btn-extra-emphasized .media > .pull-right,
+.app-documents .media-list > .media > .btn-extra-emphasized.pull-right,
 .app-documents .fadedown.open .btn-extra-emphasized.w100 .media > .pull-right,
-.app-documents .fadedown .btn-extra-emphasized:hover .media > .pull-right,
+.app-documents .fadedown .btn-extra-emphasized .media > .pull-right,
 .app-documents .btn-emphasized:hover .media > .pull-right,
 .app-documents .fadedown.open .btn-emphasized.w100 .media > .pull-right,
 .app-documents .fadedown .btn-emphasized:hover .media > .pull-right,
@@ -482,14 +473,9 @@ ul.pagination li.active > a:hover {
   background-color: transparent;
   color: inherit;
 }
-.app-documents .btn-emphasized .media > .pull-right,
-.app-documents .btn-appnavi .media > .pull-right,
-.app-documents .btn-extra-emphasized .media > .pull-right {
-  color: transparent;
-}
-.app-documents .btn-emphasized .media > .pull-right.permanent-visible,
-.app-documents .btn-extra-emphasized .media > .pull-right.permanent-visible {
-  color: inherit;
+.app-documents .btn-emphasized .media > .pull-left.btn-default:empty,
+.app-documents .btn-emphasized .media > .pull-right.btn-default:empty {
+  background-color: #dbdbdb;
 }
 
 .app-todos {
@@ -518,10 +504,12 @@ ul.pagination li.active > a:hover {
 .app-todos .btn-appnavi .media > .pull-left:first-child,
 .app-todos .btn-appnavi:hover .media > .pull-left,
 .app-todos .btn-extra-emphasized .media > .pull-left,
-.app-todos .media > .pull-left.btn-extra-emphasized,
-.app-todos .btn-extra-emphasized:hover .media > .pull-right,
+.app-todos .media-list > .media > .pull-left.btn-extra-emphasized,
+.app-todos .media-list > .media > .pull-left.btn-extra-emphasized:empty,
+.app-todos .btn-extra-emphasized .media > .pull-right,
+.app-todos .media-list > .media > .btn-extra-emphasized.pull-right,
 .app-todos .fadedown.open .btn-extra-emphasized.w100 .media > .pull-right,
-.app-todos .fadedown .btn-extra-emphasized:hover .media > .pull-right,
+.app-todos .fadedown .btn-extra-emphasized .media > .pull-right,
 .app-todos .btn-emphasized:hover .media > .pull-right,
 .app-todos .fadedown.open .btn-emphasized.w100 .media > .pull-right,
 .app-todos .fadedown .btn-emphasized:hover .media > .pull-right,
@@ -536,14 +524,9 @@ ul.pagination li.active > a:hover {
   background-color: transparent;
   color: inherit;
 }
-.app-todos .btn-emphasized .media > .pull-right,
-.app-todos .btn-appnavi .media > .pull-right,
-.app-todos .btn-extra-emphasized .media > .pull-right {
-  color: transparent;
-}
-.app-todos .btn-emphasized .media > .pull-right.permanent-visible,
-.app-todos .btn-extra-emphasized .media > .pull-right.permanent-visible {
-  color: inherit;
+.app-todos .btn-emphasized .media > .pull-left.btn-default:empty,
+.app-todos .btn-emphasized .media > .pull-right.btn-default:empty {
+  background-color: #dbdbdb;
 }
 
 .app-etherpad {
@@ -572,10 +555,12 @@ ul.pagination li.active > a:hover {
 .app-etherpad .btn-appnavi .media > .pull-left:first-child,
 .app-etherpad .btn-appnavi:hover .media > .pull-left,
 .app-etherpad .btn-extra-emphasized .media > .pull-left,
-.app-etherpad .media > .pull-left.btn-extra-emphasized,
-.app-etherpad .btn-extra-emphasized:hover .media > .pull-right,
+.app-etherpad .media-list > .media > .pull-left.btn-extra-emphasized,
+.app-etherpad .media-list > .media > .pull-left.btn-extra-emphasized:empty,
+.app-etherpad .btn-extra-emphasized .media > .pull-right,
+.app-etherpad .media-list > .media > .btn-extra-emphasized.pull-right,
 .app-etherpad .fadedown.open .btn-extra-emphasized.w100 .media > .pull-right,
-.app-etherpad .fadedown .btn-extra-emphasized:hover .media > .pull-right,
+.app-etherpad .fadedown .btn-extra-emphasized .media > .pull-right,
 .app-etherpad .btn-emphasized:hover .media > .pull-right,
 .app-etherpad .fadedown.open .btn-emphasized.w100 .media > .pull-right,
 .app-etherpad .fadedown .btn-emphasized:hover .media > .pull-right,
@@ -590,14 +575,9 @@ ul.pagination li.active > a:hover {
   background-color: transparent;
   color: inherit;
 }
-.app-etherpad .btn-emphasized .media > .pull-right,
-.app-etherpad .btn-appnavi .media > .pull-right,
-.app-etherpad .btn-extra-emphasized .media > .pull-right {
-  color: transparent;
-}
-.app-etherpad .btn-emphasized .media > .pull-right.permanent-visible,
-.app-etherpad .btn-extra-emphasized .media > .pull-right.permanent-visible {
-  color: inherit;
+.app-etherpad .btn-emphasized .media > .pull-left.btn-default:empty,
+.app-etherpad .btn-emphasized .media > .pull-right.btn-default:empty {
+  background-color: #dbdbdb;
 }
 
 .media-body {
@@ -1775,4 +1755,148 @@ p.navi-explanation {
 
 .input-area.input-area-left-column .calendar-date-time-chooser .small-calendar {
   background-color: white;
+}
+
+div.dashboard-appwidget {
+  margin-bottom: 40px;
+  background-color: red;
+  background-color: rgba(219, 219, 219, 0.3);
+}
+div.dashboard-appwidget:before, div.dashboard-appwidget:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+div.dashboard-appwidget:after {
+  clear: both;
+}
+
+div.dashboard-appwidget:last-child {
+  margin-bottom: 0;
+}
+
+.btn.dashboard-appwidget-headline {
+  width: 100%;
+  float: none;
+  margin: 0;
+}
+.btn.dashboard-appwidget-headline .media > a.pull-left:first-child:empty {
+  width: 10px;
+}
+.btn.dashboard-appwidget-headline .media > a.pull-left:not(:first-child) {
+  background-color: transparent;
+}
+.btn.dashboard-appwidget-headline .media > a.pull-left {
+  height: 50px;
+  width: 50px;
+  font-size: 28px;
+}
+.btn.dashboard-appwidget-headline .media > a.pull-left img {
+  width: 50px;
+}
+.btn.dashboard-appwidget-headline .media {
+  height: 50px;
+}
+.btn.dashboard-appwidget-headline .media-body {
+  text-align: left;
+  font-size: 15px;
+  line-height: 1em;
+  min-height: 0;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.btn.dashboard-appwidget-headline .media-body .group-annotation {
+  line-height: 1.5em;
+}
+.btn.dashboard-appwidget-headline .media-body .annotation {
+  font-size: 12px;
+}
+
+.btn.dashboard-appwidget-contentline,
+.btn.dashboard-appwidget-contentline-indented,
+.btn.dashboard-appwidget-contentline-extra-indented {
+  cursor: default;
+  width: 100%;
+  float: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+.btn.dashboard-appwidget-contentline .media-body,
+.btn.dashboard-appwidget-contentline-indented .media-body,
+.btn.dashboard-appwidget-contentline-extra-indented .media-body {
+  text-align: left;
+  line-height: 1.3em;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+.btn.dashboard-appwidget-contentline .media-body a,
+.btn.dashboard-appwidget-contentline-indented .media-body a,
+.btn.dashboard-appwidget-contentline-extra-indented .media-body a {
+  padding-right: 0;
+  font-weight: bold;
+  white-space: normal;
+}
+.btn.dashboard-appwidget-contentline .media-body img,
+.btn.dashboard-appwidget-contentline-indented .media-body img,
+.btn.dashboard-appwidget-contentline-extra-indented .media-body img {
+  width: 100%;
+  margin: 8px 0;
+}
+.btn.dashboard-appwidget-contentline .media-body.dashboard-appwidget-networkicons,
+.btn.dashboard-appwidget-contentline-indented .media-body.dashboard-appwidget-networkicons,
+.btn.dashboard-appwidget-contentline-extra-indented .media-body.dashboard-appwidget-networkicons {
+  padding: 0;
+}
+.btn.dashboard-appwidget-contentline .media-body.dashboard-appwidget-networkicons:before, .btn.dashboard-appwidget-contentline .media-body.dashboard-appwidget-networkicons:after,
+.btn.dashboard-appwidget-contentline-indented .media-body.dashboard-appwidget-networkicons:before,
+.btn.dashboard-appwidget-contentline-indented .media-body.dashboard-appwidget-networkicons:after,
+.btn.dashboard-appwidget-contentline-extra-indented .media-body.dashboard-appwidget-networkicons:before,
+.btn.dashboard-appwidget-contentline-extra-indented .media-body.dashboard-appwidget-networkicons:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.btn.dashboard-appwidget-contentline .media-body.dashboard-appwidget-networkicons:after,
+.btn.dashboard-appwidget-contentline-indented .media-body.dashboard-appwidget-networkicons:after,
+.btn.dashboard-appwidget-contentline-extra-indented .media-body.dashboard-appwidget-networkicons:after {
+  clear: both;
+}
+.btn.dashboard-appwidget-contentline .media-body.dashboard-appwidget-networkicons a,
+.btn.dashboard-appwidget-contentline-indented .media-body.dashboard-appwidget-networkicons a,
+.btn.dashboard-appwidget-contentline-extra-indented .media-body.dashboard-appwidget-networkicons a {
+  float: left;
+  width: 25%;
+  padding: 0;
+  margin: 0;
+}
+.btn.dashboard-appwidget-contentline .media-body.dashboard-appwidget-networkicons a img,
+.btn.dashboard-appwidget-contentline-indented .media-body.dashboard-appwidget-networkicons a img,
+.btn.dashboard-appwidget-contentline-extra-indented .media-body.dashboard-appwidget-networkicons a img {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.btn.dashboard-appwidget-contentline .media-body .group-annotation,
+.btn.dashboard-appwidget-contentline-indented .media-body .group-annotation,
+.btn.dashboard-appwidget-contentline-extra-indented .media-body .group-annotation,
+.btn.dashboard-appwidget-headline .media-body .group-annotation {
+  font-size: 12px;
+  color: #dbdbdb;
+  font-weight: normal;
+}
+
+.btn.dashboard-appwidget-contentline-indented {
+  padding-left: 40px;
+}
+
+.btn.dashboard-appwidget-contentline-extra-indented {
+  padding-left: 50px;
+}
+
+.btn.dashboard-appwidget-morebutton {
+  width: 10em;
 }

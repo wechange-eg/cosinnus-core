@@ -649,24 +649,29 @@
 		},
 
 		searchChangeSearch : function() {
+			// TODO: REPARIEREN!
 			// User enters a new search term on a search page
 
-			$('#searchChangeButton').hide();
-			$('#searchChangeInput').on('propertychange keyup input paste change', function() {
-				if ($(this).val()) {
-					$('#searchChangeButton')
-						.prev()
-						.removeClass('large-space')
-						.next()
-						.show();
-				} else {
-					$('#searchChangeButton')
-						.prev()
-						.addClass('large-space')
-						.next()
-						.hide();
-				}
-			});
+			$('input.next-button-is-for-sending').hide().each(function() {
+					// save the original margin bottom
+					$(this).closest('.btn')
+						.data('margin-bottom',$(this).closest('.btn').css('margin-bottom'));
+
+					console.log($(this).closest('.btn')
+						.data('margin-bottom'));
+				})
+					.on('propertychange keyup input paste change', function() {
+					var sendbutton = $(this).closest('.btn').nextAll('.btn').first();
+					if ($(this).val()) {
+						sendbutton.show();
+						$(this).closest('.btn').css('margin-top',0);
+					} else {
+						sendbutton.hide();
+						$(this)
+							.closest('.btn')
+							.css('margin-bottom',$(this).closest('.btn').data('margin-bottom'));
+					}
+				});
 
 		},
 
@@ -856,7 +861,7 @@ $(function() {
 	$.cosinnus.todoCreateTask();
 	$.cosinnus.etherpadEditMeta();
 	$.cosinnus.etherpadList();
-	$.cosinnus.searchChangeSearch();
+	// $.cosinnus.searchChangeSearch();
 	$.cosinnus.buttonHref();
 	$.cosinnus.calendarCreateDoodle();
 	$.cosinnus.calendarDayTimeChooser();

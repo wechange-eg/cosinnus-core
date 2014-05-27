@@ -62,22 +62,12 @@
 	color: inherit;
 }
 
-// Icons on the right side are only visible on hover
-.fadedown .btn-default .media > .pull-right {
-	color: transparent;
-	background-color: $app-neutral-color-white;
-}
-.fadedown .btn-default:hover .media > .pull-right,
-.fadedown.open .btn-default .media > .pull-right {
-	color: $app-neutral-color-white;
-	background-color: $app-neutral-color;
-}
-
 
 
 /* Quadratic images at side of buttons */
 .pull-left img, .pull-right img {
 	width: 40px;
+	vertical-align:top;
 }
 .pull-left input, .pull-right input {
 	border-width: 0;
@@ -120,10 +110,12 @@
 	.btn-appnavi .media > .pull-left:first-child,
 	.btn-appnavi:hover .media > .pull-left,
 	.btn-extra-emphasized .media > .pull-left,
-	.media > .pull-left.btn-extra-emphasized,
-	.btn-extra-emphasized:hover .media > .pull-right,
+	.media-list > .media > .pull-left.btn-extra-emphasized,
+	.media-list > .media > .pull-left.btn-extra-emphasized:empty,
+	.btn-extra-emphasized .media > .pull-right,
+	.media-list > .media > .btn-extra-emphasized.pull-right,
 	.fadedown.open .btn-extra-emphasized.w100 .media > .pull-right,
-	.fadedown .btn-extra-emphasized:hover .media > .pull-right,
+	.fadedown .btn-extra-emphasized .media > .pull-right,
 	.btn-emphasized:hover .media > .pull-right,
 	.fadedown.open .btn-emphasized.w100 .media > .pull-right,
 	.fadedown .btn-emphasized:hover .media > .pull-right,
@@ -139,18 +131,9 @@
 		background-color: transparent;
 		color: inherit;
 	}
-
-	// Icons on the right side are only visible on hover
-	.btn-emphasized .media > .pull-right,
-	.btn-appnavi .media > .pull-right,
-	.btn-extra-emphasized .media > .pull-right {
-		color: transparent;
-	}
-
-	// ...except of .permanent-visible!
-	.btn-emphasized .media > .pull-right.permanent-visible,
-	.btn-extra-emphasized .media > .pull-right.permanent-visible {
-		color: inherit;
+	.btn-emphasized .media > .pull-left.btn-default:empty,
+	.btn-emphasized .media > .pull-right.btn-default:empty {
+		background-color: $app-neutral-color-light;
 	}
 
 
