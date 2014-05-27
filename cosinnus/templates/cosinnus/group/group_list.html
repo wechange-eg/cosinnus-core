@@ -6,7 +6,7 @@
 
 {% block leftnav %}
     {% captureas href %}{% url 'cosinnus:group-list' %}{% endcaptureas %}
-    {% captureas label %}{% trans "Initiatives" %}{% endcaptureas %}
+    {% captureas label %}{% trans "Groups" %}{% endcaptureas %}
     {% include "cosinnus/leftnav_button.html" with active=True extra_classes="regular-space" icon="fa-group" label=label href=href  %}
 
     {% if user.is_superuser %}
