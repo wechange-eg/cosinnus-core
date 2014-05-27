@@ -1,0 +1,11 @@
+{% load i18n %}
+{% if group %}
+  <div class="well">{{ group.description|safe }}</div>
+{% else %}
+  {{ no_data }}
+{% endif %}
+
+Members:
+{% for member in members %}
+{{member.username}} |
+{% endfor %}

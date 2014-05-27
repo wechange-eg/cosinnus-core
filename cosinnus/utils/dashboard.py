@@ -12,8 +12,9 @@ from django.utils.decorators import classonlymethod
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.utils.compat import atomic
-from cosinnus.models.group import CosinnusGroup
+from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.models.tagged import get_tagged_object_filter_for_user
+from django.contrib.auth import get_user_model
 
 
 class DashboardWidgetForm(forms.Form):
@@ -146,7 +147,6 @@ class GroupDescriptionForm(DashboardWidgetForm):
 class GroupDescriptionWidget(DashboardWidget):
 
     app_name = 'cosinnus'
-    form_class = GroupDescriptionForm
     model = CosinnusGroup
     title = _('Group Description')
     user_model_attr = None
@@ -161,6 +161,36 @@ class GroupDescriptionWidget(DashboardWidget):
             'group': group,
         }
         return render_to_string('cosinnus/widgets/group_description.html', data)
+    
+    @property
+    def title_url(self):
+        return ''
+    
+
+class GroupMembersWidget(DashboardWidget):
+
+    app_name = 'cosinnus'
+    model = CosinnusGroup
+    title = _('Group Members')
+    user_model_attr = None
+    widget_name = 'group_members'
+    allow_on_user = False
+
+    def get_data(self):
+        group = self.config.group
+        if group is None:
+            return ''
+        
+        admin_ids = CosinnusGroupMembership.objects.get_admins(group=group)
+        member_ids = CosinnusGroupMembership.objects.get_members(group=group)
+        all_ids = set(admin_ids + member_ids)
+        qs = get_user_model()._default_manager.order_by('first_name', 'last_name') \
+                             .select_related('cosinnus_profile')
+        data = {
+            'group': group,
+            'members':qs.filter(id__in=all_ids),
+        }
+        return render_to_string('cosinnus/widgets/group_members.html', data)
 
     @property
     def title_url(self):
