@@ -217,24 +217,6 @@ def ensure_container(sender, **kwargs):
                 
 post_save.connect(ensure_container, sender=CosinnusGroup)
 
-def create_initial_group_widgets(sender, **kwargs):
-    """ Creates a root container instance for all hierarchical objects in a newly created group """
-    created = kwargs.get('created', False)
-    group = kwargs.get('instance')
-    if created:
-        widget_class = widget_registry.get("note", "detailed news list")
-        widget = widget_class.create(None, group=group)
-        widget.save_config({'amount':'5'})
-        widget_class = widget_registry.get("todo", "mine")
-        widget = widget_class.create(None, group=group)
-        widget.save_config({'amount':'5'})
-        #WidgetConfig.objects.create(app_name="event", widget_name="calendar", group=group)
-        #WidgetConfig.objects.create(app_name="etherpad", widget_name="pads", group=group)
-        pass
-    
-post_save.connect(create_initial_group_widgets, sender=CosinnusGroup)
-
-
 def get_tag_object_model():
     """
     Return the cosinnus tag object model that is defined in
