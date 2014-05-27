@@ -42,6 +42,9 @@ div.dashboard-appwidget:last-child {
 		position: relative;
 		top: 50%;
 		transform: translateY(-50%);
+		-ms-transform: translateY(-50%);
+		-webkit-transform: translateY(-50%);
+		-mou-transform: translateY(-50%);
 
 		.group-annotation {
 			line-height: 1.5em;

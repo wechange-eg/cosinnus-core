@@ -274,6 +274,11 @@ ul.pagination li.active > a:hover {
   width: 10px;
 }
 
+ul.appnavi-dropdown-menu {
+  padding: 0;
+  margin-top: 5px;
+}
+
 .app-main {
   /* spaces below element */
 }
@@ -323,6 +328,19 @@ ul.pagination li.active > a:hover {
 .app-main .btn-emphasized .media > .pull-left.btn-default:empty,
 .app-main .btn-emphasized .media > .pull-right.btn-default:empty {
   background-color: #dbdbdb;
+}
+.app-main.appnavi-listelement a {
+  background-color: #16778d;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: white;
+}
+.app-main.appnavi-listelement a i {
+  font-size: 17px;
+  margin-right: 7px;
+}
+.app-main.appnavi-listelement:hover a, .app-main.appnavi-listelement.active a {
+  background-color: #104a59;
 }
 
 .app-calendar {
@@ -375,6 +393,19 @@ ul.pagination li.active > a:hover {
 .app-calendar .btn-emphasized .media > .pull-right.btn-default:empty {
   background-color: #dbdbdb;
 }
+.app-calendar.appnavi-listelement a {
+  background-color: #779b48;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: white;
+}
+.app-calendar.appnavi-listelement a i {
+  font-size: 17px;
+  margin-right: 7px;
+}
+.app-calendar.appnavi-listelement:hover a, .app-calendar.appnavi-listelement.active a {
+  background-color: #4c622f;
+}
 
 .app-files {
   /* spaces below element */
@@ -425,6 +456,19 @@ ul.pagination li.active > a:hover {
 .app-files .btn-emphasized .media > .pull-left.btn-default:empty,
 .app-files .btn-emphasized .media > .pull-right.btn-default:empty {
   background-color: #dbdbdb;
+}
+.app-files.appnavi-listelement a {
+  background-color: #14a085;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: white;
+}
+.app-files.appnavi-listelement a i {
+  font-size: 17px;
+  margin-right: 7px;
+}
+.app-files.appnavi-listelement:hover a, .app-files.appnavi-listelement.active a {
+  background-color: #0a5d4e;
 }
 
 .app-documents {
@@ -477,6 +521,19 @@ ul.pagination li.active > a:hover {
 .app-documents .btn-emphasized .media > .pull-right.btn-default:empty {
   background-color: #dbdbdb;
 }
+.app-documents.appnavi-listelement a {
+  background-color: #009ee3;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: white;
+}
+.app-documents.appnavi-listelement a i {
+  font-size: 17px;
+  margin-right: 7px;
+}
+.app-documents.appnavi-listelement:hover a, .app-documents.appnavi-listelement.active a {
+  background-color: #007999;
+}
 
 .app-todos {
   /* spaces below element */
@@ -528,6 +585,19 @@ ul.pagination li.active > a:hover {
 .app-todos .btn-emphasized .media > .pull-right.btn-default:empty {
   background-color: #dbdbdb;
 }
+.app-todos.appnavi-listelement a {
+  background-color: #efa02d;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: white;
+}
+.app-todos.appnavi-listelement a i {
+  font-size: 17px;
+  margin-right: 7px;
+}
+.app-todos.appnavi-listelement:hover a, .app-todos.appnavi-listelement.active a {
+  background-color: #ad7e2c;
+}
 
 .app-etherpad {
   /* spaces below element */
@@ -578,6 +648,19 @@ ul.pagination li.active > a:hover {
 .app-etherpad .btn-emphasized .media > .pull-left.btn-default:empty,
 .app-etherpad .btn-emphasized .media > .pull-right.btn-default:empty {
   background-color: #dbdbdb;
+}
+.app-etherpad.appnavi-listelement a {
+  background-color: #e55c55;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: white;
+}
+.app-etherpad.appnavi-listelement a i {
+  font-size: 17px;
+  margin-right: 7px;
+}
+.app-etherpad.appnavi-listelement:hover a, .app-etherpad.appnavi-listelement.active a {
+  background-color: #933d39;
 }
 
 .media-body {
@@ -1806,6 +1889,9 @@ div.dashboard-appwidget:last-child {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -mou-transform: translateY(-50%);
 }
 .btn.dashboard-appwidget-headline .media-body .group-annotation {
   line-height: 1.5em;

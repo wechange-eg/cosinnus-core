@@ -85,6 +85,11 @@
 	width: 10px;
 }
 
+ul.appnavi-dropdown-menu {
+	padding: 0;
+	margin-top: 5px;
+}
+
 @mixin btn-app-colors($light,$normal,$dark) {
 	.btn-emphasized .media,
 	.btn-appnavi .media,
@@ -136,7 +141,23 @@
 		background-color: $app-neutral-color-light;
 	}
 
+	// App changer (documents, news, todos, etherpad...)
+	&.appnavi-listelement {
+		a {
+			background-color: $normal;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			color: $app-neutral-color-white;
 
+			i {
+				font-size: 17px;
+				margin-right: 7px;
+			}
+		}
+		&:hover a, &.active a {
+				background-color: $dark;
+		}
+	}
 
 	/* spaces below element */
 	.fine-space {

@@ -705,11 +705,9 @@
 
 		buttonHref : function() {
 			// allow href attribute for buttons
-			$('button').each(function() {
+			$('body').on('click','button',function() {
 				if ($(this).attr('href')) {
-					$(this).click(function() {
-						$(location).attr("href", $(this).attr('href'));
-					});
+					$(location).attr("href", $(this).attr('href'));
 				}
 			});
 

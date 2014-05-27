@@ -192,6 +192,7 @@ $('.js-todo-link').on('click', function(e) {
                 $('[data-target=widget-title]', holder).html(jqXHR.getResponseHeader('X-Cosinnus-Widget-Title'));
                 var title_url = jqXHR.getResponseHeader('X-Cosinnus-Widget-Title-URL');
                 if (title_url !== null) {
+                    console.log($('[data-target=widget-title-url]', holder))
                     $('[data-target=widget-title-url]', holder).attr("href", title_url);
                 } else {
                     $('[data-target=widget-title-url]', holder).children().unwrap();
