@@ -60,11 +60,14 @@ _UserProfileSerializer = get_user_profile_serializer()
 class UserSimpleSerializer(serializers.ModelSerializer):
 
     username = serializers.CharField(source='get_username', read_only=True)
+    first_name = serializers.CharField(read_only=True)
+    last_name = serializers.CharField(read_only=True)
+    
     profile = _UserProfileSerializer(source='cosinnus_profile', many=False, read_only=True)
 
     class Meta:
         model = get_user_model()
-        fields = ('id', 'username', 'profile', )
+        fields = ('id', 'username', 'first_name', 'last_name', 'profile', )
 
 
 class UserDetailSerializer(UserSimpleSerializer):
