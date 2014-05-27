@@ -18,6 +18,7 @@ from tinymce.models import HTMLField
 
 from cosinnus.conf import settings
 from cosinnus.utils.functions import unique_aware_slugify
+from cosinnus.utils.files import get_group_avatar_filename
 
 
 #: Role defining a user has requested to be added to a group
@@ -292,6 +293,8 @@ class CosinnusGroup(models.Model):
         validators=[group_name_validator])
     slug = models.SlugField(_('Slug'), max_length=50, unique=True, blank=True)
     description = HTMLField(verbose_name=_('Description'), blank=True)
+    avatar = models.ImageField(_("Avatar"), null=True, blank=True,
+        upload_to=get_group_avatar_filename)
     public = models.BooleanField(_('Public'), default=False)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
         related_name='cosinnus_groups', through='CosinnusGroupMembership')
@@ -378,6 +381,10 @@ class CosinnusGroup(models.Model):
 
     def _clear_local_cache(self):
         self._admins = self._members = self._pendings = None
+        
+    @property
+    def avatar_url(self):
+        return self.avatar.url if self.avatar else None
 
 
 @python_2_unicode_compatible

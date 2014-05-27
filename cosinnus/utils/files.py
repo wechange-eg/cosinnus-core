@@ -17,6 +17,12 @@ def get_avatar_filename(instance, filename):
     newfilename = hashlib.sha1(name.encode('utf-8')).hexdigest() + ext
     return path.join(filedir, newfilename)
 
+def get_group_avatar_filename(instance, filename):
+    _, ext = path.splitext(filename)
+    filedir = path.join('cosinnus', 'avatars', 'groups')
+    name = '%s%d%s' % (settings.SECRET_KEY, instance.id, filename)
+    newfilename = hashlib.sha1(name.encode('utf-8')).hexdigest() + ext
+    return path.join(filedir, newfilename)
 
 def create_zip_file(files):
     missing = []
