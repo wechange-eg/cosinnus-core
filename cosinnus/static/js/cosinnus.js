@@ -596,6 +596,8 @@
 				// Format: 2014-05-05
 				// Format: 2013-02-08 09:30:26
 				var data_date = $(this).attr('data-date');
+				// Does the format include a specific time?
+				var with_time = (data_date.length > 10);
 
 				if (data_date == 'today') {
 					// if attribute is 'today', fill with current date
@@ -611,7 +613,11 @@
 					$(this).attr('data-date',data_date);
 				}
 
-				moment.lang(moment.lang(),$.cosinnus.momentFull[moment.lang()]);
+				if (with_time) {
+					moment.lang(moment.lang(),$.cosinnus.momentFull[moment.lang()]);
+				} else {
+					moment.lang(moment.lang(),$.cosinnus.momentShort[moment.lang()]);
+				}
 				var cal = moment(data_date);
 				cal = cal.calendar();
 				$(this).text(cal);
@@ -815,11 +821,11 @@ $.cosinnus.momentFull = {
 	'de': {
 		calendar : {
 			sameDay: "[heute um] LT",
-			sameElse: "L",
+			sameElse: "L [um] LT",
 			nextDay: '[morgen um] LT',
 			nextWeek: 'dddd [um] LT',
 			lastDay: '[gestern um] LT',
-			lastWeek: '[letzten] dddd'
+			lastWeek: '[letzten] dddd [um] LT'
 		},
 	},
 	'en' : {
@@ -828,8 +834,8 @@ $.cosinnus.momentFull = {
 			nextDay : '[tomorrow at] LT',
 			nextWeek : 'dddd [at] LT',
 			lastDay : '[yesterday at] LT',
-			lastWeek : '[last] dddd',
-			sameElse : 'L'
+			lastWeek : '[last] dddd [at] LT',
+			sameElse : 'L [at] LT'
 		}
 	}
 };
