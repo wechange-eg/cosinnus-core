@@ -15,6 +15,8 @@ from taggit.managers import TaggableManager
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.functions import unique_aware_slugify
+from cosinnus.models.widget import WidgetConfig
+from cosinnus.core.registries.widgets import widget_registry
 
 
 class LocationModelMixin(models.Model):
@@ -214,6 +216,23 @@ def ensure_container(sender, **kwargs):
                 model_class.objects.create(group=kwargs.get('instance'), slug='_root_', title='_root_', path='/', is_container=True)
                 
 post_save.connect(ensure_container, sender=CosinnusGroup)
+
+def create_initial_group_widgets(sender, **kwargs):
+    """ Creates a root container instance for all hierarchical objects in a newly created group """
+    created = kwargs.get('created', False)
+    group = kwargs.get('instance')
+    if created:
+        widget_class = widget_registry.get("note", "detailed news list")
+        widget = widget_class.create(None, group=group)
+        widget.save_config({'amount':'5'})
+        widget_class = widget_registry.get("todo", "mine")
+        widget = widget_class.create(None, group=group)
+        widget.save_config({'amount':'5'})
+        #WidgetConfig.objects.create(app_name="event", widget_name="calendar", group=group)
+        #WidgetConfig.objects.create(app_name="etherpad", widget_name="pads", group=group)
+        pass
+    
+post_save.connect(create_initial_group_widgets, sender=CosinnusGroup)
 
 
 def get_tag_object_model():
