@@ -147,8 +147,17 @@ class DashboardMixin(object):
 
     def get_context_data(self, **kwargs):
         filter = self.get_filter()
-        widgets = WidgetConfig.objects.filter(**filter).values_list('id', flat=True).all()
-        return super(DashboardMixin, self).get_context_data(widgets=widgets, **kwargs)
+        widgets = WidgetConfig.objects.filter(**filter)
+        ids = widgets.values_list('id', flat=True).all()
+        kwargs.update({
+            'widgets': ids,
+        })
+        """ We sort each unique widget into the context to be accessed hard-coded"""
+        for wc in widgets:
+            context_id = wc.app_name + '__' + wc.widget_name.replace(" ", "_")
+            kwargs.update({context_id : wc.id})
+        
+        return super(DashboardMixin, self).get_context_data(**kwargs)
 
 
 class GroupDashboard(RequireReadMixin, DashboardMixin, TemplateView):

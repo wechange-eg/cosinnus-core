@@ -1,4 +1,4 @@
-{% extends "cosinnus_message/base.html" %}
+{% extends "cosinnus/base.html" %}
 {% load i18n cosinnus_tags %}
 {% load static from staticfiles %}
 
@@ -6,6 +6,8 @@
   <link href="{% static "css/cosinnus.dashboard.css" %}" rel="stylesheet">
 {% endblock extrahead %}
 
+
+{% comment %}  NOTE!: This file is being overwritten in the app project (like NEWW) itself! {% endcomment %}
 
 {% block content %}
 
