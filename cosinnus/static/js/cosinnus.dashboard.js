@@ -242,7 +242,7 @@ var eventArray = [
 // direct click action callbacks come first: click, nextMonth, previousMonth, nextYear, previousYear, or today.
 // then onMonthChange (if the month changed).
 // finally onYearChange (if the year changed).
-
+/**
 calendars.clndr1 = $('.cal1').clndr({
     template: $('#template-calendar').html(),
     events: eventArray,
@@ -286,7 +286,7 @@ calendars.clndr1 = $('.cal1').clndr({
     showAdjacentMonths: true,
     adjacentDaysChangeMonth: false
 });
-
+**/
 //
 //calendars.clndr2 = $('.cal2').clndr({
 //    template: $('#template-calendar').html(),
