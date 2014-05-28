@@ -35,7 +35,7 @@ class FormAttachable(forms.ModelForm):
             for attached in self.instance.attached_objects.all():
                 if attached and attached.target_object:
                     obj = attached.target_object
-                    text_only = (attached.model_name+":"+str(obj.id), "%s: %s" % (attached.model_name, obj.title),)
+                    text_only = (attached.model_name+":"+str(obj.id), "%s" % (obj.title),)
                     #text_only = (attached.model_name+":"+str(obj.id), "&lt;i&gt;%s&lt;/i&gt; %s" % (attached.model_name, obj.title),)  
                     # TODO: sascha: returning unescaped html here breaks the javascript of django-select2
                     html = build_attachment_field_result(attached.model_name, obj) 
