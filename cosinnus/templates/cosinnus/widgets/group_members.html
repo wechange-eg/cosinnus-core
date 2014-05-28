@@ -1,11 +1,21 @@
-{% load i18n %}
-{% if group %}
-  <div class="well">{{ group.description|safe }}</div>
-{% else %}
-  {{ no_data }}
-{% endif %}
+{% load i18n static thumbnail %}
 
-Members:
-{% for member in members %}
-{{member.username}} |
-{% endfor %}
+
+<div type="button" class="btn btn-emphasized dashboard-appwidget-contentline fine-space">
+    <ul class="media-list">
+        <li class="media">
+            <div class="media-body dashboard-appwidget-networkicons">
+                
+                {% for member in members %}
+                    {% if member.cosinnus_profile.avatar %}
+                        <a href="#" title="{{member.first_name}} {{member.last_name}}"><img src="{{ member.cosinnus_profile.avatar_url}}" /></a>
+                    {% else %}
+                        <a href="#" title="{{member.first_name}} {{member.last_name}}"><img src="{% static 'images/jane-doe.png' %}"></img></a>
+                    {% endif %}
+                {% endfor %}
+                
+            </div>
+        </li>
+    </ul>
+</div><!-- btn -->
+

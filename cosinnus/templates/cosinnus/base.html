@@ -1,5 +1,5 @@
 {% load static from staticfiles %}
-{% load bootstrap3 %}
+{% load bootstrap3 i18n %}
 {% load cosinnus_tags %}
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <!-- TODO: override main title that can be extended from (in main app!) -->
-        <title>{% block page_title %}{% endblock page_title %}</title>
+        <title>{% block page_title %}{% endblock page_title %}{% block base_page_title %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %} - {% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% endif %}{% endblock base_page_title %}</title>
         <!-- TODO: Favicon -->
         
         {% block csshead %}
@@ -37,7 +37,7 @@
         <script src="{% static 'js/vendor/moment-with-langs.min.js' %}"></script>
         <script src="{% static 'js/cosinnus.js' %}"></script>
         
-        {% captureas cosinnus_css_class %}{% if COSINNUS_CURRENT_APP == 'todo' %}todos{% elif COSINNUS_CURRENT_APP == 'file' %}files{% elif COSINNUS_CURRENT_APP == 'event' %}calendar{% elif COSINNUS_CURRENT_APP %}{{ COSINNUS_CURRENT_APP }}{% else %}main{% endif %}{% endcaptureas %}
+        {% captureas cosinnus_css_class %}{% if COSINNUS_CURRENT_APP == 'todo' %}app-todos{% elif COSINNUS_CURRENT_APP == 'file' %}app-files{% elif COSINNUS_CURRENT_APP == 'event' %}app-calendar{% elif COSINNUS_CURRENT_APP %}app-{{ COSINNUS_CURRENT_APP }}{% elif group %}app-main{% else %}landing{% endif %}{% endcaptureas %}
         
         {% include 'cosinnus/extrahead.html' %}
         {% block extrahead %}{% endblock extrahead %}
@@ -48,7 +48,7 @@
     
         {% cosinnus_menu "cosinnus/navbar.html" %}
         
-        <div class="container app-{{ cosinnus_css_class }}">
+        <div class="container {{ cosinnus_css_class }}">
             <div class="row">
             
                 {% block main_page %}

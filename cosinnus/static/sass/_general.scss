@@ -57,6 +57,10 @@ body .large-space {
 	padding: 0;
 	@include clearfix();
 
+	+ .input-area {
+		border-top: 1px solid $app-neutral-color-light;
+	}
+
 	// single input fields
 	> li {
 		min-height: 40px;
@@ -64,9 +68,18 @@ body .large-space {
 		padding: 4px 7px;
 		display: inline-block;
 		float: left;
-		border-left: 1px solid $app-neutral-color-light;
-		border-top: 1px solid $app-neutral-color-light;
+
 		color: $app-neutral-color-dark;
+
+		+ li {
+			border-left: 1px solid $app-neutral-color-light;
+		}
+
+		> a > i {
+			color: $app-neutral-color-dark;
+			font-size: 17px;
+			line-height: 25px;
+		}
 	}
 
 	&.input-area-left-column {

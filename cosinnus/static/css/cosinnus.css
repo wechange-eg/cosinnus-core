@@ -130,14 +130,11 @@ textarea {
   width: 100%;
   border-width: 0;
   padding: 8px;
+  margin: 0;
   background-color: white;
   color: #333333;
   resize: vertical;
   height: 10em;
-}
-
-.media-body textarea {
-  border: 1px solid #dbdbdb;
 }
 
 .alert.alert-success {
@@ -851,15 +848,24 @@ body .large-space {
 .input-area:after {
   clear: both;
 }
+.input-area + .input-area {
+  border-top: 1px solid #dbdbdb;
+}
 .input-area > li {
   min-height: 40px;
   line-height: 25px;
   padding: 4px 7px;
   display: inline-block;
   float: left;
-  border-left: 1px solid #dbdbdb;
-  border-top: 1px solid #dbdbdb;
   color: #333333;
+}
+.input-area > li + li {
+  border-left: 1px solid #dbdbdb;
+}
+.input-area > li > a > i {
+  color: #333333;
+  font-size: 17px;
+  line-height: 25px;
 }
 .input-area.input-area-left-column li {
   border-width: 0;

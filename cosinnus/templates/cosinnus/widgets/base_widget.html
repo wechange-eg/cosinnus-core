@@ -16,7 +16,11 @@
             <li class="media">
                 <a class="pull-left btn-extra-emphasized" href="#"></a>
                 <a class="pull-left" href="#">
-                    <i class="fa fa-file-text-o"></i>
+                    {% if widget_icon_content %}
+                        {{ widget_icon_content }}
+                    {% else %}
+                        <i class="fa {{ widget_icon }}"></i>
+                    {% endif %}
                 </a>
                 <div class="media-body">
                     <span data-target="widget-title"></span>
