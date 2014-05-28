@@ -5,24 +5,29 @@
 			// DIV.fadedown is a wrapper that contains a button with toggle element
 			// and other elements that will be hidden or shown depending on the state.
 
-			$('.fadedown .btn:first-child .fa-chevron-down').parent().click(function() {
-				if ($(this).find('i').hasClass('fa-chevron-up')) {
-					// already open
+			$('.fadedown .btn:first-child .fadedown-clickarea, .fadedown .btn:first-child.fadedown-clickarea').click(function() {
+				if (!$(this).closest('.fadedown').hasClass('open')) {
+					// closed
 					$(this)
 						.closest('.fadedown')
-						.find('> :not(:first-child)')
-						.stop()
-						.slideUp();
-					$(this).find('i').removeClass('fa-chevron-up').addClass('fa-chevron-down');
-					$(this).closest('.fadedown').removeClass('open');
-				} else {
-					$(this)
-						.closest('.fadedown')
+						.addClass('open')
 						.find('> :not(:first-child)')
 						.stop()
 						.slideDown();
-					$(this).find('i').removeClass('fa-chevron-down').addClass('fa-chevron-up');
-					$(this).closest('.fadedown').addClass('open');
+					$(this).find('i.fa-chevron-down')
+						.removeClass('fa-chevron-down')
+						.addClass('fa-chevron-up');
+				} else if ($(this).find('i').hasClass('fa-chevron-up')) {
+					// already open and can be closed
+					$(this)
+						.closest('.fadedown')
+						.removeClass('open')
+						.find('> :not(:first-child)')
+						.stop()
+						.slideUp();
+					$(this).find('i.fa-chevron-up')
+						.removeClass('fa-chevron-up')
+						.addClass('fa-chevron-down');
 				}
 			});
 			// hide fadedown boxes unless .open class explicit set
@@ -38,20 +43,6 @@
 			$('.privacy-selector').change(function(){
 				$(this).prev().prev().attr('class',
 					$(this).val() == 'private' ? 'fa fa-fw fa-lock' : 'fa fa-fw fa-globe'
-				);
-			}).trigger('change');
-
-			$('.bolt-selector').select2({ minimumResultsForSearch: -1});
-			$('.bolt-selector').change(function(){
-				$(this).prev().prev().attr('class',
-					$(this).val() == 'flash' ? 'fa fa-fw fa-bolt' : 'fa fa-fw fa-sun-o'
-				);
-			}).trigger('change');
-
-			$('.light-selector').select2({ minimumResultsForSearch: -1});
-			$('.light-selector').change(function(){
-				$(this).prev().prev().attr('class',
-					$(this).val() == 'light' ? 'fa fa-fw fa-lightbulb-o' : 'fa fa-fw fa-moon-o'
 				);
 			}).trigger('change');
 
@@ -104,6 +95,16 @@
 						{id:8, app:'etherpad', text:'Etherpad: Cosinnus'}
 					]
 				});
+			});
+
+			// Small links that expand an input or something somewhere else
+			$('a').each(function () {
+				if ($(this).attr('data-show-id')) {
+					$(this).click(function() {
+						$('#'+$(this).attr('data-show-id')).slideDown();
+						$(this).parent().remove();
+					});
+				}
 			});
 		},
 

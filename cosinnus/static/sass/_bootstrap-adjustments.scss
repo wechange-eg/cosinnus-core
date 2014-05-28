@@ -95,14 +95,11 @@ textarea {
 	width: 100%;
 	border-width: 0;
 	padding: 8px;
+	margin: 0;
 	background-color: $app-neutral-color-white;
 	color: $app-neutral-color-dark;
 	resize: vertical;
 	height: 10em;
-}
-// border if textarea is inside btn style area (white background)
-.media-body textarea {
-	border: 1px solid $app-neutral-color-light;
 }
 
 
