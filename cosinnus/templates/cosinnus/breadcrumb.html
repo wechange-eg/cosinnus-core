@@ -1,7 +1,7 @@
 {% load i18n %}
 
 {% if group %}
-    <li><a href="#">{{ group.name }}</a></li>
+    <li><a href="{% url 'cosinnus:group-dashboard' group=group.slug %}">{{ group.name }}</a></li>
 {% endif %}
 
 
