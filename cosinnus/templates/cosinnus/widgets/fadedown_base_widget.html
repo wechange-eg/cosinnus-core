@@ -1,5 +1,5 @@
 {% extends "cosinnus/widgets/base_widget.html" %}
-{% load i18n cosinnus_tags %}
+{% load i18n static cosinnus_tags %}
 
     
 {% block base_widget_content %}
@@ -21,7 +21,11 @@
 	        <ul class="media-list">
 	            <li class="media">
 	                <a class="pull-left" href="#">
-	                    <img src="avatar.png" />
+	                    {% if request.user.cosinnus_profile.avatar %}
+                            <img src="{{ request.user.cosinnus_profile.avatar_url }}" />
+                        {% else %}
+                            <img src="{% static 'images/jane-doe.png' %}" title="{% trans 'You have not uploaded an avatar yet' %}"></img>
+                        {% endif %}
 	                </a>
 	                <a class="pull-right" href="#">
 	                    <i class="fa fa-pencil"></i>
