@@ -49,6 +49,10 @@
         {% cosinnus_menu "cosinnus/navbar.html" %}
         
         <div class="container {{ cosinnus_css_class }}">
+            
+            {% block main_page_header %}
+            {% endblock main_page_header %}
+            
             <div class="row">
             
                 {% block main_page %}
