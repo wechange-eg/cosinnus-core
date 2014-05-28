@@ -152,10 +152,22 @@ class DashboardMixin(object):
         kwargs.update({
             'widgets': ids,
         })
+        
         """ We sort each unique widget into the context to be accessed hard-coded"""
         for wc in widgets:
             context_id = wc.app_name + '__' + wc.widget_name.replace(" ", "_")
             kwargs.update({context_id : wc.id})
+        
+        """ TODO: FIXME: Sascha """
+        """ This code is a crime to humanity and was only added to have 
+            this working for the beta really quickly. Refactor this into
+            the note widget itself. (But don't put the Form through with 
+            the ajax request in the widget loading algorithm! 
+        """        
+        from cosinnus_note.forms import NoteForm
+        kwargs.update({
+            'form':  NoteForm(group=self.group)
+        })
         
         return super(DashboardMixin, self).get_context_data(**kwargs)
 
