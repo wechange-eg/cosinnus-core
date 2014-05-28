@@ -1992,3 +1992,17 @@ div.dashboard-appwidget:last-child {
 .btn.dashboard-appwidget-morebutton {
   width: 10em;
 }
+
+.dashboard-header {
+  margin-bottom: 30px;
+}
+.dashboard-header > div {
+  background-color: rgba(219, 219, 219, 0.3);
+}
+.dashboard-header > div.dashboard-header-linkbox {
+  background-color: gray;
+  padding: 20px 10px;
+}
+.dashboard-header > div img {
+  width: 100%;
+}

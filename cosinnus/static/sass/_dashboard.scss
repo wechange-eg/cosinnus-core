@@ -134,4 +134,23 @@ div.dashboard-appwidget:last-child {
 }
 
 
+// ###### Header
+
+.dashboard-header {
+
+	margin-bottom: 30px;
+
+	> div { // column
+		background-color:transparentize($app-neutral-color-light, 0.7);
+
+		&.dashboard-header-linkbox {
+			background-color: gray;
+			padding: 20px 10px;
+		}
+
+		img {
+			width: 100%;
+		}
+	}
+}
 

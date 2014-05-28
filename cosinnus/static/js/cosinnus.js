@@ -629,43 +629,20 @@
 			});
 		},
 
-		todoCreateTask : function() {
-			$('#createTodoButton').hide();
-			$('#newTaskDescription').val('');
-			$('#newTaskDescription').on('propertychange keyup input paste change', function() {
-				if ($(this).val()) {
-					$('#createTodoButton').slideDown();
-				} else {
-					$('#createTodoButton').slideUp();
-				}
-			});
 
-			$('#createTodoButton').click(function() {
-				var data = {
-					description: $('#newTaskDescription').val(),
-					date: $('#newTaskDate').attr('data-date')
-				};
-				console.log(data);
-			});
-		},
+		inputDynamicSendButton : function() {
+			// User enters something in a input, this activates the next submit button
 
-		searchChangeSearch : function() {
-			// TODO: REPARIEREN!
-			// User enters a new search term on a search page
-
-			$('input.next-button-is-for-sending').hide().each(function() {
+			$('input.next-button-is-for-sending, textarea.next-button-is-for-sending').each(function() {
 					// save the original margin bottom
 					$(this).closest('.btn')
-						.data('margin-bottom',$(this).closest('.btn').css('margin-bottom'));
-
-					console.log($(this).closest('.btn')
-						.data('margin-bottom'));
+						.data('margin-bottom',parseInt($(this).closest('.btn').css('margin-bottom')));
 				})
 					.on('propertychange keyup input paste change', function() {
 					var sendbutton = $(this).closest('.btn').nextAll('.btn').first();
 					if ($(this).val()) {
 						sendbutton.show();
-						$(this).closest('.btn').css('margin-top',0);
+						$(this).closest('.btn').css('margin-bottom',0);
 					} else {
 						sendbutton.hide();
 						$(this)
@@ -718,25 +695,6 @@
 			});
 		},
 
-		doodleList : function() {
-			$('#newDoodleButton').hide();
-			$('#newDoodleTitle').val('');
-			$('#newDoodleTitle').on('propertychange keyup input paste change', function() {
-				if ($(this).val()) {
-					$('#newDoodleButton')
-						.prev()
-						.removeClass('large-space')
-						.next()
-						.show();
-				} else {
-					$('#newDoodleButton')
-						.prev()
-						.addClass('large-space')
-						.next()
-						.hide();
-				}
-			});
-		},
 
 		fileList : function() {
 			$('#fileToUpload').val('');
@@ -770,19 +728,6 @@
 
 			if (!$('.fa-check-square-o').length) {
 				$('.messages-delete-button, .messages-archive-button').hide();
-			}
-		},
-
-		messagesWrite : function() {
-			$('.app-message-text').on('propertychange keyup input paste change', function() {
-				if ($(this).val()) {
-					$('.app-message-send-button').slideDown();
-				} else {
-					$('.app-message-send-button').slideUp();
-				}
-			});
-			if ($('.app-message-text').length && !$('.app-message-text').val()) {
-				$('.app-message-send-button').hide();
 			}
 		}
 
@@ -857,16 +802,13 @@ $(function() {
 	$.cosinnus.todosSelect();
 	$.cosinnus.datePicker();
 	$.cosinnus.renderMomentDataDate();
-	$.cosinnus.todoCreateTask();
 	$.cosinnus.etherpadEditMeta();
 	$.cosinnus.etherpadList();
-	// $.cosinnus.searchChangeSearch();
+	$.cosinnus.inputDynamicSendButton();
 	$.cosinnus.buttonHref();
 	$.cosinnus.calendarCreateDoodle();
 	$.cosinnus.calendarDayTimeChooser();
-	$.cosinnus.doodleList();
 	$.cosinnus.calendarDoodleVote();
 	$.cosinnus.fileList();
 	$.cosinnus.messagesList();
-	$.cosinnus.messagesWrite();
 });
