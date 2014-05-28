@@ -1,5 +1,5 @@
 {% load static from staticfiles %}
-{% load bootstrap3 %}
+{% load bootstrap3 i18n %}
 {% load cosinnus_tags %}
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <!-- TODO: override main title that can be extended from (in main app!) -->
-        <title>{% block page_title %}{% endblock page_title %}</title>
+        <title>{% block page_title %}{% endblock page_title %}{% block base_page_title %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %} - {% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% endif %}{% endblock base_page_title %}</title>
         <!-- TODO: Favicon -->
         
         {% block csshead %}
