@@ -98,7 +98,8 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
             apps.append({
                 'active': app == current_app,
                 'label': label,
-                'url': url
+                'url': url,
+                'app': app,
             })
         context.update({
             'apps': apps,
