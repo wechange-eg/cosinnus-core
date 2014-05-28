@@ -1,0 +1,58 @@
+{% extends "cosinnus/widgets/base_widget.html" %}
+{% load i18n cosinnus_tags %}
+
+    
+{% block base_widget_content %}
+
+    <div class="fadedown regular-space">
+	    {% comment %} 
+	    The refresh/edit/delete button, left out for now
+	    <div class="btn-group pull-right">
+		    <a href="#" class="btn darker btn-xs" title="{% trans "Refresh" %}" data-type="refresh"><span class="glyphicon glyphicon-refresh"></span></a>
+		    {% if user.is_superuser or user|is_group_member:object %}
+		      <a href="#" class="btn darker btn-xs" title="{% trans "Configure" %}" data-type="edit"><span class="glyphicon glyphicon-wrench"></span></a>
+		      <a href="#" class="btn darker btn-xs" title="{% trans "Delete" %}" data-type="delete"><span class="glyphicon glyphicon-remove"></span></a>
+		    {% endif %}
+		  </div>
+	    {% endcomment %}
+	    
+	    
+	    <div class="btn btn-white dashboard-appwidget-headline fadedown-clickarea">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-left" href="#">
+	                    <img src="avatar.png" />
+	                </a>
+	                <a class="pull-right" href="#">
+	                    <i class="fa fa-pencil"></i>
+	                </a>
+	                <div class="media-body">
+	                        <span data-target="widget-title"></span>
+	                </div>
+	            </li>
+	        </ul>
+	    </div>
+	    
+	    {% block fadedown_content %}
+        {% endblock fadedown_content %}
+        
+    </div>
+    
+    <div data-target="widget-content"></div>
+    
+    
+    <button type="button" class="btn btn-emphasized dashboard-appwidget-morebutton" href="" data-target="widget-title-url">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-right btn-extra-emphasized" href="#">
+                    <i class="fa fa-chevron-right "></i>
+                </a>
+                <div class="media-body">
+                    {% trans "Mehr" %}
+                </div>
+            </li>
+        </ul>
+    </button><!-- btn -->
+{% endblock base_widget_content %}
+
+
