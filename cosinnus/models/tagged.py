@@ -17,6 +17,7 @@ from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.functions import unique_aware_slugify
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.core.registries.widgets import widget_registry
+from django.utils.functional import cached_property
 
 
 class LocationModelMixin(models.Model):
@@ -189,7 +190,7 @@ class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
             self.path += '/'
         super(BaseHierarchicalTaggableObjectModel, self).save(*args, **kwargs)
     
-    @property
+    @cached_property
     def container(self):
         """ Returns the hierarchical object's parent container or None if root or the object doesn't exist """
         if self.path == '/':
