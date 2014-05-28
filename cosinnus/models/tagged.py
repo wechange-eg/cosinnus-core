@@ -168,7 +168,14 @@ class BaseTaggableObjectModel(models.Model):
             else:
                 setattr(self, key, self.media_tag)
         return getattr(self, key)
-
+    
+    @cached_property
+    def attached_image(self):
+        """ Return the first image file attached to the event as the event's image """
+        for attached_file in self.attached_objects.all():
+            if attached_file.model_name == "cosinnus_file.FileEntry" and attached_file.target_object.is_image:
+                return attached_file.target_object
+        return None
 
 class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
     """
