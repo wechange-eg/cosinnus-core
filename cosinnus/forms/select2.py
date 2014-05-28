@@ -2,9 +2,14 @@
 from __future__ import unicode_literals
 
 from django import forms
+from django.core import validators
+from django.core.exceptions import ValidationError
 
-from django_select2.fields import Select2MultipleChoiceField
-from django_select2.widgets import Select2MultipleWidget 
+from taggit.models import Tag
+
+from django_select2.fields import (HeavySelect2FieldBaseMixin,
+    ModelMultipleChoiceField)
+from django_select2.widgets import Select2MultipleWidget, HeavySelect2TagWidget
 
 
 class CommaSeparatedSelect2MultipleWidget(Select2MultipleWidget):
@@ -23,7 +28,6 @@ class CommaSeparatedSelect2MultipleWidget(Select2MultipleWidget):
         )
 
 
-# Form field
 class CommaSeparatedSelect2MultipleChoiceField(forms.MultipleChoiceField):
     widget = CommaSeparatedSelect2MultipleWidget
 
@@ -45,3 +49,42 @@ class CommaSeparatedSelect2MultipleChoiceField(forms.MultipleChoiceField):
             value = value.split(',')
         super(CommaSeparatedSelect2MultipleChoiceField, self).validate(value)
 
+
+class TagSelect2Field(HeavySelect2FieldBaseMixin, ModelMultipleChoiceField):
+
+    widget = HeavySelect2TagWidget
+
+    def __init__(self, *args, **kwargs):
+        kwargs.pop('choices', None)
+        super(TagSelect2Field, self).__init__(*args, **kwargs)
+        if self.queryset is None:
+            self.queryset = Tag.objects
+
+    def to_python(self, value):
+        if value in validators.EMPTY_VALUES:
+            return None
+        try:
+            value = self.queryset.get(name=value)
+        except self.queryset.model.DoesNotExist:
+            value = self.create_new_value(value)
+        return value
+
+    def clean(self, value):
+        if self.required and not value:
+            raise ValidationError(self.error_messages['required'])
+        elif not self.required and not value:
+            return []
+        if not isinstance(value, (list, tuple)):
+            raise ValidationError(self.error_messages['list'])
+        for name in list(value):
+            if not self.queryset.filter(name=name).exists():
+                self.create_new_value(name)
+
+        # Since this overrides the inherited ModelChoiceField.clean
+        # we run custom validators here
+        self.run_validators(value)
+        return value
+
+    def create_new_value(self, value):
+        self.queryset.create(name=value)
+        return value

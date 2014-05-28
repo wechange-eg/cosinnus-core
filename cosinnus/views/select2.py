@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.http import Http404
 
 from django_select2 import Select2View, NO_ERR_RESP
+from taggit.models import Tag
 
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.templatetags.cosinnus_tags import full_name
@@ -39,3 +40,23 @@ class GroupMembersView(RequireGroupMember, Select2View):
         return (NO_ERR_RESP, has_more, results)
 
 group_members = GroupMembersView.as_view()
+
+
+class TagsView(Select2View):
+    
+    def get_results(self, request, term, page, context):
+        term = term.lower()
+        start = (page - 1) * 10
+        end = page * 10
+
+        q = Q(name__icontains=term)
+        count = Tag.objects.filter(q).count()
+        if count < start:
+            raise Http404
+        has_more = count > end
+
+        tags = list(Tag.objects.filter(q).values_list('name', 'name').all()[start:end])
+
+        return (NO_ERR_RESP, has_more, tags)
+
+tags_view = TagsView.as_view()
