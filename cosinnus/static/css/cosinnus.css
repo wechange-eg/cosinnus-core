@@ -24,6 +24,57 @@ body {
   background-image: url("../images/background.jpg");
 }
 
+	/* http://www.mobify.com/blog/multiline-ellipsis-in-pure-css/
+	Add a "more" link at end of text if content does not fit in container
+
+	<div class="multiline-ellipsis">
+		<div class="multiline-ellipsis-prop"></div>
+		<div class="multiline-ellipsis-main">
+			<p>Es gibt im Moment in diese Mannschaft.</p>
+		</div>
+		<div class="multiline-ellipsis-realend"><a href="#">....weiter</a></div>
+	</div>
+	*/
+.multiline-ellipsis {
+  overflow: hidden;
+  height: 100%;
+  line-height: 25px;
+}
+.multiline-ellipsis .multiline-ellipsis-prop {
+  float: left;
+  width: 5px;
+  height: 100%;
+}
+.multiline-ellipsis .multiline-ellipsis-main {
+  float: right;
+  width: 100%;
+  margin-left: -5px;
+}
+.multiline-ellipsis .multiline-ellipsis-realend {
+  color: #333333;
+  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  float: right;
+  position: relative;
+  top: -25px;
+  left: 100%;
+  width: 9em;
+  margin-left: -9em;
+  padding-right: 5px;
+  text-align: right;
+}
+.multiline-ellipsis .multiline-ellipsis-realend a {
+  color: #333333;
+  display: block;
+  padding-right: 7px;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0)), to(white), color-stop(50%, white));
+  background: -moz-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+  background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+  background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), #dbdbdb 50%, #dbdbdb);
+}
+
 body {
   padding-top: 70px;
   padding-bottom: 30px;
@@ -1849,7 +1900,7 @@ p.navi-explanation {
 div.dashboard-appwidget {
   margin-bottom: 40px;
   background-color: red;
-  background-color: rgba(219, 219, 219, 0.3);
+  background-color: rgba(219, 219, 219, 0.7);
 }
 div.dashboard-appwidget:before, div.dashboard-appwidget:after {
   content: " ";
@@ -1995,14 +2046,137 @@ div.dashboard-appwidget:last-child {
 
 .dashboard-header {
   margin-bottom: 30px;
+  background-color: rgba(219, 219, 219, 0.7);
 }
-.dashboard-header > div {
-  background-color: rgba(219, 219, 219, 0.3);
+.dashboard-header:before, .dashboard-header:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
 }
-.dashboard-header > div.dashboard-header-linkbox {
-  background-color: gray;
-  padding: 20px 10px;
+.dashboard-header:after {
+  clear: both;
 }
-.dashboard-header > div img {
-  width: 100%;
+.dashboard-header .dashboard-header-image {
+  float: left;
+}
+.dashboard-header .dashboard-header-image img {
+  width: 100px;
+}
+.dashboard-header .dashboard-header-link {
+  float: right;
+  display: block;
+  height: 70px;
+  width: 70px;
+  margin: 15px 15px 15px 15px;
+  line-height: 1.3em;
+  text-align: center;
+  font-size: 11px;
+}
+.dashboard-header .dashboard-header-link + .dashboard-header-link {
+  margin-right: 0;
+}
+.dashboard-header .dashboard-header-link.app-main {
+  background-color: #16778d;
+}
+.dashboard-header .dashboard-header-link.app-calendar {
+  background-color: #779b48;
+}
+.dashboard-header .dashboard-header-link.app-files {
+  background-color: #14a085;
+}
+.dashboard-header .dashboard-header-link.app-documents {
+  background-color: #009ee3;
+}
+.dashboard-header .dashboard-header-link.app-todos {
+  background-color: #efa02d;
+}
+.dashboard-header .dashboard-header-link.app-etherpad {
+  background-color: #e55c55;
+}
+.dashboard-header .dashboard-header-link i {
+  display: block;
+  font-size: 18px;
+  margin: 6px 0 3px 0;
+}
+.dashboard-header .dashboard-header-link span {
+  font-weight: bold;
+  display: block;
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+.dashboard-header .dashboard-header-text {
+  overflow: hidden;
+  padding: 0 0 0 20px;
+}
+.dashboard-header .dashboard-header-text .multiline-ellipsis-realend {
+  width: 536px;
+  margin-left: -536px;
+}
+.dashboard-header .dashboard-header-text .multiline-ellipsis-realend a {
+  margin-right: 436px;
+}
+.dashboard-header .dashboard-header-text h2 {
+  color: #333333;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 0;
+  margin: 10px 0 1px 0;
+}
+.dashboard-header .dashboard-header-text h3 {
+  color: #333333;
+  font-size: 11px;
+  padding: 0;
+  margin: 0 0 3px 0;
+}
+.dashboard-header .dashboard-header-text p {
+  color: #333333;
+  font-size: 12px;
+  background-color: transparent;
+  padding: 0 0.5em 0.5em 0;
+  margin: 0;
+  line-height: 1.4em;
+}
+.dashboard-header .dashboard-header-text p a {
+  color: #333333;
+  font-weight: bold;
+  text-decoration: underline;
+}
+@media (max-width: 767px) {
+  .dashboard-header .dashboard-header-link {
+    width: 100%;
+    margin: 15px;
+  }
+}
+@media (min-width: 992px) {
+  .dashboard-header .dashboard-header-text {
+    height: 100px;
+  }
+}
+@media (min-width: 1200px) {
+  .dashboard-header .dashboard-header-text {
+    height: 130px;
+  }
+  .dashboard-header .dashboard-header-text .dashboard-header-link {
+    width: 100px;
+    height: 100px;
+  }
+  .dashboard-header .dashboard-header-text .dashboard-header-link i {
+    font-size: 22px;
+    margin: 15px 0 7px 0;
+  }
+  .dashboard-header .dashboard-header-text .dashboard-header-link span {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  .dashboard-header .dashboard-header-text .multiline-ellipsis-realend {
+    width: 686px;
+    margin-left: -686px;
+  }
+  .dashboard-header .dashboard-header-text .multiline-ellipsis-realend a {
+    margin-right: 586px;
+  }
+  .dashboard-header .dashboard-header-image img {
+    width: 130px;
+  }
 }

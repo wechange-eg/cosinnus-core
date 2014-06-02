@@ -19,3 +19,68 @@
   }
 }
 
+
+
+	/* http://www.mobify.com/blog/multiline-ellipsis-in-pure-css/
+	Add a "more" link at end of text if content does not fit in container
+
+	<div class="multiline-ellipsis">
+		<div class="multiline-ellipsis-prop"></div>
+		<div class="multiline-ellipsis-main">
+			<p>Es gibt im Moment in diese Mannschaft.</p>
+		</div>
+		<div class="multiline-ellipsis-realend"><a href="#">....weiter</a></div>
+	</div>
+	*/
+
+	.multiline-ellipsis {
+		overflow: hidden;
+		height: 100%;
+		line-height: 25px;
+
+		.multiline-ellipsis-prop {
+			float: left;
+			width: 5px;
+			height: 100%;
+		}
+
+		.multiline-ellipsis-main {
+			float: right;
+			width: 100%;
+			margin-left: -5px;
+		}
+
+		.multiline-ellipsis-realend {
+			color: $app-neutral-color-dark;
+			a {
+				color: $app-neutral-color-dark;
+				display: block;
+				padding-right: 7px;
+
+				background: -webkit-gradient(linear, left top, right top,
+					from(rgba(255, 255, 255, 0)), to(white), color-stop(50%, white));
+				background: -moz-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);			
+				background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+				background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+				background: linear-gradient(to right, rgba(255, 255, 255, 0), $app-neutral-color-light 50%, $app-neutral-color-light);
+
+			}
+
+
+			box-sizing: content-box;
+			-webkit-box-sizing: content-box;
+			-moz-box-sizing: content-box;
+
+			float: right;
+			position: relative;
+			top: -25px;
+			left: 100%;
+			width: 9em;
+			margin-left: -9em;
+			padding-right: 5px;
+
+			text-align: right;
+
+		}
+	}
+

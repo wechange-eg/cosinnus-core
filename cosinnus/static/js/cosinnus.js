@@ -399,7 +399,7 @@
 						.find('.calendar-date-time-chooser-hiddendate')
 						.val();
 					// "2014-04-28"
-					$(this)
+					if (date) $(this)
 						.find('td[data-date='+date+']')
 						.addClass('selected');
 				})
@@ -440,15 +440,17 @@
 
 			// Set INPUT with human readable date
 			$('.calendar-date-time-chooser').each(function() {
-			var dateDataAttr = $(this)
-				.find('.calendar-date-time-chooser-hiddendate')
-				.val();
+				var dateDataAttr = $(this)
+					.find('.calendar-date-time-chooser-hiddendate')
+					.val();
 
-			moment.lang(moment.lang(),$.cosinnus.momentShort[moment.lang()]);
-			var humanDateString = moment(dateDataAttr).calendar();
-				$(this)
-					.find('.calendar-date-time-chooser-date')
-					.val(humanDateString);
+				if (dateDataAttr) {
+					moment.lang(moment.lang(),$.cosinnus.momentShort[moment.lang()]);
+					var humanDateString = moment(dateDataAttr).calendar();
+						$(this)
+							.find('.calendar-date-time-chooser-date')
+							.val(humanDateString);
+				}
 			});
 		},
 
@@ -729,6 +731,15 @@
 			if (!$('.fa-check-square-o').length) {
 				$('.messages-delete-button, .messages-archive-button').hide();
 			}
+		},
+
+		multilineEllipsis : function() {
+			$('.multiline-ellipsis-realend a').click(function() {
+				$(this)
+					.closest('.multiline-ellipsis')
+					.parent()
+					.css('height','auto');
+			});
 		}
 
 	};
@@ -811,4 +822,5 @@ $(function() {
 	$.cosinnus.calendarDoodleVote();
 	$.cosinnus.fileList();
 	$.cosinnus.messagesList();
+	$.cosinnus.multilineEllipsis();
 });

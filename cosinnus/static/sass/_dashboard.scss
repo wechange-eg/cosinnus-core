@@ -2,7 +2,7 @@ div.dashboard-appwidget {
 	margin-bottom: 40px;
 	background-color: red;
 	@include clearfix();
-	background-color:transparentize($app-neutral-color-light, 0.7);
+	background-color:transparentize($app-neutral-color-light, 0.3);
 }
 div.dashboard-appwidget:last-child {
 	margin-bottom: 0;
@@ -136,21 +136,157 @@ div.dashboard-appwidget:last-child {
 
 // ###### Header
 
+
 .dashboard-header {
-
+	@include clearfix();
 	margin-bottom: 30px;
+	background-color:transparentize($app-neutral-color-light, 0.3);
 
-	> div { // column
-		background-color:transparentize($app-neutral-color-light, 0.7);
-
-		&.dashboard-header-linkbox {
-			background-color: gray;
-			padding: 20px 10px;
-		}
-
+	.dashboard-header-image {
+		float: left;
 		img {
-			width: 100%;
+			width: 100px;
 		}
 	}
+
+	.dashboard-header-link {
+		float: right;
+		display: block;
+		height: 70px;
+		width: 70px;
+		margin: 15px 15px 15px 15px;
+		line-height: 1.3em;
+		text-align: center;
+		font-size: 11px;
+
+		+ .dashboard-header-link {
+			margin-right: 0;
+		}
+
+		&.app-main {
+			background-color: $app-main-color;
+		}
+		&.app-calendar {
+			background-color: $app-calendar-color;
+		}
+		&.app-files {
+			background-color: $app-files-color;
+		}
+		&.app-documents {
+			background-color: $app-documents-color;
+		}
+		&.app-todos {
+			background-color: $app-todos-color;
+		}
+		&.app-etherpad {
+			background-color: $app-etherpad-color;
+		}
+
+		i {
+			display: block;
+			font-size: 18px;
+			margin: 6px 0 3px 0;
+		}
+		span {
+			font-weight: bold;
+			display: block;
+			font-size: 13px;
+			margin-bottom: 3px;
+		}
+	}
+
+	.dashboard-header-text {
+		.multiline-ellipsis-realend {
+			width: 536px;
+			margin-left: -536px;
+			a {
+			margin-right:436px;
+			}
+		}
+
+		overflow: hidden;
+		padding: 0 0 0 20px;
+
+
+		h2 {
+			color: $app-neutral-color-dark;
+			font-size: 17px;
+			font-weight: bold;
+			padding: 0;
+			margin: 10px 0 1px 0;
+		}
+		h3 {
+			color: $app-neutral-color-dark;
+			font-size: 11px;
+			padding: 0;
+			margin: 0 0 3px 0;
+		}
+		p {
+			color: $app-neutral-color-dark;
+			font-size: 12px;
+			background-color: transparent;
+			padding: 0 0.5em 0.5em 0;
+			margin: 0;
+			line-height: 1.4em;
+
+			a {
+				color: $app-neutral-color-dark;
+				font-weight: bold;
+				text-decoration: underline;
+			}
+		}
+
+	}
+
+
+	// xs
+	@media(max-width:767px){
+		.dashboard-header-link {
+			width: 100%;
+			margin: 15px;
+		}
+	}
+	// sm
+	@media(min-width:768px){
+	}
+	// md
+	@media(min-width:992px){
+		.dashboard-header-text {
+			height: 100px;
+		}
+	}
+	// lg
+	@media(min-width:1200px){
+		.dashboard-header-text {
+			height: 130px;
+
+			.dashboard-header-link {
+				width: 100px;
+				height: 100px;
+
+			i {
+				font-size: 22px;
+				margin: 15px 0 7px 0;
+			}
+			span {
+				font-size: 16px;
+				margin-bottom: 5px;
+			}
+			}
+
+			.multiline-ellipsis-realend {
+				width: 686px;
+				margin-left: -686px;
+				a {
+					margin-right:586px;
+				}
+			}
+		}
+
+		.dashboard-header-image img {
+			width: 130px;
+		}
+	}
+
 }
 
