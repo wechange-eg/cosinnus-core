@@ -199,6 +199,7 @@ $('.js-todo-link').on('click', function(e) {
                 }
                 holder.attr("data-app-name", jqXHR.getResponseHeader('X-Cosinnus-Widget-App-Name'));
                 holder.attr("data-widget-name", jqXHR.getResponseHeader('X-Cosinnus-Widget-Widget-Name'));
+                $.cosinnus.renderMomentDataDate();
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 var error = $('<div class="alert alert-danger">An error occurred while loading the widget. </div>');
                 var reload = $('<a href="#" class="alert-link">Reload</a>').bind("click", {
