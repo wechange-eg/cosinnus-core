@@ -23,7 +23,7 @@ USER_MODEL = get_user_model()
 class UserListView(ListView):
 
     model = USER_MODEL
-    template_name = 'cosinnus/user_list.html'
+    template_name = 'cosinnus/user/user_list.html'
 
 user_list = UserListView.as_view()
 
@@ -33,9 +33,8 @@ class UserCreateView(CreateView):
     form_class = UserCreationForm
     model = USER_MODEL
     success_url = reverse_lazy('cosinnus:user-list')
-    template_name = 'cosinnus/user_form.html'
+    template_name = 'cosinnus/user/user_form.html'
 
-    @method_decorator(superuser_required)
     def dispatch(self, *args, **kwargs):
         return super(UserCreateView, self).dispatch(*args, **kwargs)
 
@@ -52,7 +51,7 @@ class UserDetailView(DetailView):
     model = USER_MODEL
     slug_field = 'username'
     slug_url_kwarg = 'username'
-    template_name = 'cosinnus/user_detail.html'
+    template_name = 'cosinnus/user/user_detail.html'
 
     @method_decorator(staff_required)
     def dispatch(self, *args, **kwargs):
@@ -76,7 +75,7 @@ class UserUpdateView(UpdateView):
     model = USER_MODEL
     slug_field = 'username'
     slug_url_kwarg = 'username'
-    template_name = 'cosinnus/user_form.html'
+    template_name = 'cosinnus/user/user_form.html'
 
     @method_decorator(staff_required)
     def dispatch(self, *args, **kwargs):
