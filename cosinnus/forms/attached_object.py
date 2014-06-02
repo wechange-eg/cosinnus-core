@@ -90,8 +90,10 @@ class AttachableObjectSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoice
         if self.required and not value:
             raise ValidationError(self.error_messages['required'])
         
-        attached_objects = []        
+        attached_objects = []    
         for attached_obj_str in value:
+            if not attached_obj_str:
+                continue
             """ expand id and model type to real AO """
             obj_type, _, object_id = str(attached_obj_str).partition(':')
             app_label, _, model = obj_type.rpartition('.')
