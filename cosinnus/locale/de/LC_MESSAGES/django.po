@@ -357,7 +357,7 @@ msgstr "Anhänge"
 
 #: .\forms\attached_object.py:53
 msgid "Type the title and/or type of attachment"
-msgstr ""
+msgstr "Geben sie Titel/Typ des Anhangs ein"
 
 #: .\forms\hierarchy.py:14 .\models\group.py:292
 #: .\templates\cosinnus\user\user_detail.html.py:14
@@ -370,7 +370,7 @@ msgstr "Auf Gruppen beschränken"
 
 #: .\forms\search.py:48 .\models\tagged.py:55
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 #: .\forms\search.py:48
 msgid "My groups"
@@ -391,7 +391,7 @@ msgstr "Slug"
 
 #: .\models\group.py:295
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #: .\models\group.py:296 .\models\profile.py:129
 #: .\templates\cosinnus\user\user_detail.html.py:33
@@ -440,11 +440,11 @@ msgstr "Gruppe"
 
 #: .\models\tagged.py:62
 msgid "Persons"
-msgstr ""
+msgstr "Personen"
 
 #: .\models\tagged.py:63
 msgid "Permissions"
-msgstr ""
+msgstr "Berechtigungen"
 
 #: .\models\tagged.py:96
 msgid "Attached object"
@@ -468,7 +468,7 @@ msgstr "Erstellt"
 
 #: .\models\tagged.py:186
 msgid "Path"
-msgstr ""
+msgstr "Pfad"
 
 #: .\models\widget.py:15
 msgid "Application name"
@@ -547,7 +547,7 @@ msgstr ""
 #: .\templates\cosinnus\navbar.html.py:67
 #: .\templates\cosinnus\widgets\fadedown_base_widget.html.py:28
 msgid "You have not uploaded an avatar yet"
-msgstr ""
+msgstr "Sie haben noch kein Bild hochgeladen"
 
 #: .\templates\cosinnus\navbar.html.py:78
 msgid "User Dashboard"
@@ -564,7 +564,7 @@ msgstr ""
 
 #: .\templates\cosinnus\search.html.py:5 .\templates\cosinnus\search.html.py:6
 msgid "Search"
-msgstr ""
+msgstr "Suche"
 
 #: .\templates\cosinnus\search.html.py:296
 msgid "zurück"
@@ -660,7 +660,7 @@ msgstr "Gruppenmitglieder"
 
 #: .\templates\cosinnus\group\group_list.html.py:72
 msgid "Membership requested"
-msgstr ""
+msgstr "Mitgliedschaft wurde beantragt"
 
 #: .\templates\cosinnus\group\group_list.html.py:76
 msgid "Not a member"
@@ -730,15 +730,15 @@ msgstr ""
 
 #: .\templates\cosinnus\widgets\not_allowed_group.html.py:2
 msgid "You cannot put this widget on a group dashboard."
-msgstr ""
+msgstr "Sie können dieses Widget nicht auf das Gruppendashboard platzieren"
 
 #: .\templates\cosinnus\widgets\not_allowed_user.html.py:2
 msgid "You cannot put this widget on a user dashboard."
-msgstr ""
+msgstr "Sie können dieses Widget nicht auf das Benutzerdashboard platzieren"
 
 #: .\templates\cosinnus\widgets\not_found.html.py:2
 msgid "Widget not found."
-msgstr ""
+msgstr "Widget nicht gefunden"
 
 #: .\templatetags\cosinnus_tags.py:151
 #, python-format
@@ -751,7 +751,7 @@ msgstr "Gruppenbeschreibung"
 
 #: .\utils\dashboard.py:174
 msgid "My Network"
-msgstr ""
+msgstr "Mein Netzwerk"
 
 #: .\views\export.py:34
 msgid "No model given to export data from."
