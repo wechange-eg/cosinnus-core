@@ -7,7 +7,7 @@ from cosinnus.core.registries import url_registry
 
 
 urlpatterns = patterns('cosinnus.views',
-    url(r'^index/$', 'common.index', name='index'),
+    url(r'^$', 'common.index', name='index'),
 
     url(r'^profile/$', 'profile.detail_view', name='profile-detail'),
     url(r'^profile/dashboard/$', 'widget.user_dashboard', name='user-dashboard'),
