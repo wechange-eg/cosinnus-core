@@ -25,10 +25,7 @@
     {% include "cosinnus/leftnav_button.html" with active=active extra_classes=button_class icon="fa-folder" icon_content=folder_size label=label href=href  %}
 {% endfor %}
 
-<form action="" method="post"class="form-horizontal">{% csrf_token %}
-    <!-- This hidden button is needed for the backend to distinguis between different forms. DO NOT REMOVE! -->
-    <button style="display:none" type="submit" name="create_container"></button>
-    
+<form action="" name="container_form" method="post"class="form-horizontal">{% csrf_token %}
     <div type="button" class="btn btn-default w100">
         <ul class="media-list">
             <li class="media">
@@ -39,13 +36,13 @@
                     {{ container_form.title.errors }}
                     <!-- use spaces for centering. CSS padding does not work here. -->
                     {% captureas placeholder %}{% trans "Neuer Ordnername" %}{% endcaptureas %}
-                    {% render_field container_form.title class+="form-control " placeholder=placeholder %}
+                    {% render_field container_form.title class+="form-control next-button-is-for-sending" placeholder=placeholder %}
                     <!-- next-button-is-for-sending -->
                 </div>
             </li>
         </ul>
     </div>
-    <button type="submit" class="btn btn-emphasized large-space" style="display: none;">
+    <button type="submit"  name="create_container" class="btn btn-emphasized large-space" style="display: none;">
         <ul class="media-list">
             <li class="media">
                 <a class="pull-left" href="#">
