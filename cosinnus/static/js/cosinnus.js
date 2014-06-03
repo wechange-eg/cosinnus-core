@@ -633,12 +633,14 @@
 
 
 		inputDynamicSendButton : function() {
-			// User enters something in a input, this activates the next submit button
+			// User enters something in a input or textarea or span.contenteditable,
+			// this activates the next submit button
 
-			$('input.next-button-is-for-sending, textarea.next-button-is-for-sending').each(function() {
+			$('.next-button-is-for-sending').each(function() {
 					// save the original margin bottom
 					$(this).closest('.btn')
-						.data('margin-bottom',parseInt($(this).closest('.btn').css('margin-bottom')));
+						.data('margin-bottom',parseInt($(this).closest('.btn').css('margin-bottom')))
+						.after('<div></div>'); // Fixes Chrome floating bug that hides send button
 				})
 					.on('propertychange keyup input paste change', function() {
 					var sendbutton = $(this).closest('.btn').nextAll('.btn').first();
@@ -824,3 +826,4 @@ $(function() {
 	$.cosinnus.messagesList();
 	$.cosinnus.multilineEllipsis();
 });
+
