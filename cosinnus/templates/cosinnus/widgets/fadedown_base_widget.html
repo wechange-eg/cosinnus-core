@@ -21,11 +21,7 @@
 	        <ul class="media-list">
 	            <li class="media">
 	                <a class="pull-left" href="#">
-	                    {% if request.user.cosinnus_profile.avatar %}
-                            <img src="{{ request.user.cosinnus_profile.avatar_url }}" />
-                        {% else %}
-                            <img src="{% static 'images/jane-doe.png' %}" title="{% trans 'You have not uploaded an avatar yet' %}"></img>
-                        {% endif %}
+	                    {% include "cosinnus/user/user_avatar_image.html" with user=request.user %}
 	                </a>
 	                <a class="pull-right" href="#">
 	                    <i class="fa fa-pencil"></i>

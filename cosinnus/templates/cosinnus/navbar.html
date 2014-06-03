@@ -61,11 +61,7 @@
 	                </li>
 	                <li class="dropdown">
 	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-	                        {% if request.user.cosinnus_profile.avatar %}
-	                            <img src="{{ request.user.cosinnus_profile.avatar_url }}" />
-	                        {% else %}
-	                            <img src="{% static 'images/jane-doe.png' %}" title="{% trans 'You have not uploaded an avatar yet' %}"></img>
-	                        {% endif %}
+	                        {% include "cosinnus/user/user_avatar_image.html" with user=request.user %}
 	                        {{ request.user|full_name }}
 	                        <i class="fa fa-caret-down"></i>
 	                    </a>

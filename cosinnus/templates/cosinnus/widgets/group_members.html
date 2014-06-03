@@ -1,4 +1,4 @@
-{% load i18n static thumbnail %}
+{% load i18n static thumbnail cosinnus_tags %}
 
 
 <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline fine-space">
@@ -7,11 +7,7 @@
             <div class="media-body dashboard-appwidget-networkicons">
                 
                 {% for member in members %}
-                    {% if member.cosinnus_profile.avatar %}
-                        <a href="#" title="{{member.first_name}} {{member.last_name}}"><img src="{{ member.cosinnus_profile.avatar_url}}" /></a>
-                    {% else %}
-                        <a href="#" title="{{member.first_name}} {{member.last_name}}"><img src="{% static 'images/jane-doe.png' %}"></img></a>
-                    {% endif %}
+                    <a href="#" title="{{member|full_name}}">{% include "cosinnus/user/user_avatar_image.html" with user=member %}</a>
                 {% endfor %}
                 
             </div>
