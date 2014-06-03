@@ -39,7 +39,8 @@
                     {{ container_form.title.errors }}
                     <!-- use spaces for centering. CSS padding does not work here. -->
                     {% captureas placeholder %}{% trans "Neuer Ordnername" %}{% endcaptureas %}
-                    {% render_field container_form.title class+="form-control next-button-is-for-sending" placeholder=placeholder %}
+                    {% render_field container_form.title class+="form-control " placeholder=placeholder %}
+                    <!-- next-button-is-for-sending -->
                 </div>
             </li>
         </ul>
