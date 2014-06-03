@@ -264,7 +264,7 @@
                   <i class="fa fa-search"></i>
                 </a>
                 <div class="media-body">
-                  <input class="form-control"
+                  <input class="form-control next-button-is-for-sending"
                     placeholder="Suche"
                     value="{{ query }}"
                     id="searchChangeInput"
@@ -273,18 +273,18 @@
               </li>
             </ul>
           </div>
-          <button type="button" class="btn btn-emphasized large-space" id="searchChangeButton">
-            <ul class="media-list">
-              <li class="media">
-                <a class="pull-left" href="#">
-                  <i class="fa fa-eraser"></i>
-                </a>
-                <div class="media-body">
-                  Suchen
-                </div>
-              </li>
-            </ul>
-          </button>
+			<button type="submit" class="btn btn-emphasized large-space" style="display: none;">
+			    <ul class="media-list">
+			        <li class="media">
+			            <a class="pull-left" href="#">
+			                <i class="fa fa-eraser"></i>
+			            </a>
+			            <div class="media-body">
+			                {% trans "Search" %}
+			            </div>
+			        </li>
+			    </ul>
+			</button>
 
           {% if query %}
             {% for result in page.object_list %}

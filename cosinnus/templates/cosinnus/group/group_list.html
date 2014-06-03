@@ -29,19 +29,31 @@
         <!-- hidden as long as create link is in the leftnav
         {% if user.is_superuser %}
 	        <div type="button" class="btn btn-default w100 large-space">
-	            <ul class="media-list">
-	                <li class="media">
-	                    <a class="pull-left" href="#">
-	                        <i class="fa fa-plus"></i>
-	                    </a>
-	                    <div class="media-body">
-	                        <input class="form-control"
-	                            placeholder="Gib den Titel für eine neue Gruppe ein."
-	                            value="" />
-	                    </div>
-	                </li>
-	            </ul>
-	        </div>
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left" href="#">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                        <div class="media-body">
+                            <input class="form-control next-button-is-for-sending"
+                                placeholder="Gib den Titel für eine neue Gruppe ein."
+                                value="" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <button type="button" class="btn btn-emphasized large-space" style="display: none;">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left" href="#">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                        <div class="media-body">
+                            Erstellen
+                        </div>
+                    </li>
+                </ul>
+            </button>
         {% endif %}
         -->
     
