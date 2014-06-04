@@ -28,12 +28,8 @@ class GroupKwargModelFormMixin(object):
 class _CosinnusGroupForm(forms.ModelForm):
 
     class Meta:
-        fields = ('name', 'slug', 'public', 'description')
+        fields = ('name', 'public', 'description')
         model = CosinnusGroup
-
-    def __init__(self, *args, **kwargs):
-        super(_CosinnusGroupForm, self).__init__(*args, **kwargs)
-        self.fields['slug'].required = False
 
 
 from cosinnus.forms.tagged import get_form  # circular import
