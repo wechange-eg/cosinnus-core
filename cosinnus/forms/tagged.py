@@ -10,6 +10,8 @@ from cosinnus.forms.group import GroupKwargModelFormMixin
 from cosinnus.forms.user import UserKwargModelFormMixin
 from cosinnus.models.tagged import get_tag_object_model
 from cosinnus.utils.import_utils import import_from_settings
+from cosinnus.forms.select2 import TagSelect2Field
+from django.core.urlresolvers import reverse_lazy
 
 
 TagObject = get_tag_object_model()
@@ -48,6 +50,20 @@ def get_tag_object_form():
     return form_class
 
 
+class BaseTaggableObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin, 
+                             forms.ModelForm):
+    
+    class Meta:
+        exclude = ('media_tag', 'group', 'slug', 'creator', 'created')
+    
+    def __init__(self, *args, **kwargs):
+        super(BaseTaggableObjectForm, self).__init__(*args, **kwargs)
+        self.fields['tags'] = TagSelect2Field(required=False, data_url=reverse_lazy('cosinnus:select2:tags'))
+
+        if self.instance.pk:
+            self.fields['tags'].choices = self.instance.tags.values_list('id', 'name').all()
+            self.fields['tags'].initial = self.instance.tags.values_list('id', flat=True).all()
+            
 def get_form(TaggableObjectFormClass, attachable=True):
     """
     Factory function that creates a class of type
