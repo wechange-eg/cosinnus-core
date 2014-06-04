@@ -24,6 +24,9 @@ def taggable_model_choices(using=DEFAULT_ALIAS):
     2. has a haystack index is defined on the default haystack connection
     3. is not abstract
     4. inherits from :class:`~cosinnus.model.tagged.BaseTaggableObjectModel`
+    
+    :returns: Returns a list of 2-tuple of the form
+        `('`cosinnus_todo.TodoEntry', 'TodoEntries')`
     """
     choices = [
         (
