@@ -1,0 +1,19 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n bootstrap3 %}
+
+{% block page_title %}
+  {% blocktrans with group_name=group.name %}Export Group “{{ group_name }}”{% endblocktrans %}
+{% endblock page_title%}
+
+{% block content_title %}
+  {% blocktrans with group_name=group.name %}Export Group “{{ group_name }}”{% endblocktrans %}
+{% endblock content_title%}
+
+{% block content %}
+{% for app in export_apps %}
+<div class="row">
+    <div class="col-xs-2">{{ app.label }}</div>
+    <div class="col-xs-2"><a href="{{ app.export_url }}" title="{% blocktrans with app_label=app.label %}Export {{ app_label }}{% endblocktrans %}" class="btn btn-default"><span class="glyphicon glyphicon-export"></span> {% trans "Export" context "the verb" %}</a></div>
+</div>
+{% endfor %}
+{% endblock content %}
