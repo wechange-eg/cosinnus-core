@@ -62,7 +62,7 @@ class BaseTaggableObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
 
         if self.instance.pk:
             self.fields['tags'].choices = self.instance.tags.values_list('id', 'name').all()
-            self.fields['tags'].initial = self.instance.tags.values_list('id', flat=True).all()
+            self.initial['tags'] = self.instance.tags.values_list('id', flat=True).all()
             
 def get_form(TaggableObjectFormClass, attachable=True):
     """
