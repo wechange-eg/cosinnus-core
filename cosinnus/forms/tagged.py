@@ -58,8 +58,9 @@ class BaseTaggableObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
     
     def __init__(self, *args, **kwargs):
         super(BaseTaggableObjectForm, self).__init__(*args, **kwargs)
+        # needs to be initialized here because using reverser_lazy() at model instantiation time causes problems
         self.fields['tags'] = TagSelect2Field(required=False, data_url=reverse_lazy('cosinnus:select2:tags'))
-
+        
         if self.instance.pk:
             self.fields['tags'].choices = self.instance.tags.values_list('id', 'name').all()
             self.initial['tags'] = self.instance.tags.values_list('id', flat=True).all()
