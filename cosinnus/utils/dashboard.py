@@ -194,4 +194,4 @@ class GroupMembersWidget(DashboardWidget):
 
     @property
     def title_url(self):
-        return ''
+        return '#'
