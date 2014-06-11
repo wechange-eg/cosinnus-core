@@ -22,9 +22,9 @@ def prepare_users(users):
 
 
 class DefaultTagObjectIndex(indexes.SearchIndex):
-    mt_location_place = indexes.CharField(model_attr='media_tag__location_place')
-    mt_people_name = indexes.CharField(model_attr='media_tag__people_name')
-    mt_public = indexes.BooleanField(model_attr='media_tag__public')
+    mt_location_place = indexes.CharField(model_attr='media_tag__location_place', null=True)
+    mt_people_name = indexes.CharField(model_attr='media_tag__people_name', null=True)
+    mt_public = indexes.BooleanField(model_attr='media_tag__public', null=True)
 
 
 def get_tag_object_index():
