@@ -22,9 +22,8 @@
             <a class="pull-left" href="#">
               <i class="fa fa-tasks"></i>
             </a>
-            <a class="pull-right" href="#"></a><!-- only block width -->
             <div class="media-body">
-              Aufgaben
+              {% trans "Aufgaben" %}
             </div>
           </li>
         </ul>
@@ -44,9 +43,8 @@
             <a class="pull-left" href="#">
               <i class="fa fa-file"></i>
             </a>
-            <a class="pull-right" href="#"></a><!-- only block width -->
             <div class="media-body">
-              Dateien
+              {% trans "Dateien" %}
             </div>
           </li>
         </ul>
@@ -66,9 +64,8 @@
             <a class="pull-left" href="#">
               <i class="fa fa-file-text-o"></i>
             </a>
-            <a class="pull-right" href="#"></a><!-- only block width -->
             <div class="media-body">
-              Etherpads
+              {% trans "Etherpads" %}
             </div>
           </li>
         </ul>
@@ -88,9 +85,8 @@
             <a class="pull-left" href="#">
               <i class="fa fa-file-text-o"></i>
             </a>
-            <a class="pull-right" href="#"></a><!-- only block width -->
             <div class="media-body">
-              Neuigkeiten
+              {% trans "Neuigkeiten" %}
             </div>
           </li>
         </ul>
@@ -110,9 +106,8 @@
             <a class="pull-left" href="#">
               <i class="fa fa-calendar"></i>
             </a>
-            <a class="pull-right" href="#"></a><!-- only block width -->
             <div class="media-body">
-              Termine
+              {% trans "Termine" %}
             </div>
           </li>
         </ul>
@@ -147,12 +142,11 @@
     <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "groups" %}&groups=mine">
       <ul class="media-list">
         <li class="media">
-          <!--<a class="pull-left" href="#">
-            3
-          </a>-->
-          <a class="pull-right" href="#"></a><!-- only block width -->
+          <a class="pull-left" href="#">
+              <i class="fa fa-group"></i>
+          </a>
           <div class="media-body">
-            Meine Gruppen
+            {% trans "Meine Gruppen" %}
           </div>
         </li>
       </ul>
@@ -161,12 +155,11 @@
     <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "groups" %}&groups=others">
       <ul class="media-list">
         <li class="media">
-          <!--<a class="pull-left" href="#">
-            14
-          </a>-->
-          <a class="pull-right" href="#"></a><!-- only block width -->
+          <a class="pull-left" href="#">
+              <i class="fa fa-group"></i>
+          </a>
           <div class="media-body">
-            Andere Gruppen
+            {% trans "Andere Gruppen" %}
           </div>
         </li>
       </ul>
