@@ -8,7 +8,30 @@
 {% block main_page %}
 <form method="get" action="" role="form">
   <div class="col-lg-3 col-md-3">
-    <p class="navi-explanation">In Anwendungen suchen:</p>
+    <p class="navi-explanation">{% trans "In Anwendungen suchen" %}:</p>
+    
+    <div class="app-main">
+      <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}">
+        <ul class="media-list">
+          <li class="media">
+    
+            <!--
+            <a class="pull-left" href="#">
+              4
+            </a>
+            <a class="pull-left" style="background-color:inherit;" href="#">
+            -->
+            <a class="pull-left" href="#">
+              <i class="fa fa-search"></i>
+            </a>
+            <div class="media-body">
+              {% trans "Alle" %}
+            </div>
+          </li>
+        </ul>
+      </button>
+    </div>
+    
     <div class="app-todos">
       <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_todo.todoentry">
         <ul class="media-list">
@@ -114,31 +137,26 @@
       </button>
     </div>
 
-    {% if "models" in request.GET %}
-    <div class="app-main">
-      <button type="button" class="btn w100 btn-default large-space" href="?{% strip_params request "models" %}">
-        <ul class="media-list">
-          <li class="media">
-            <!--
-            <a class="pull-left" href="#">
-              4
-            </a>
-            <a class="pull-left" style="background-color:inherit;" href="#">
-            -->
-            <a class="pull-left" href="#">
-              <i class="fa fa-eraser"></i>
-            </a>
-            <div class="media-body">
-              Filter löschen
-            </div>
-          </li>
-        </ul>
-      </button>
-    </div>
-    {% endif %}
 
-
-    <p class="navi-explanation">In Gruppen suchen:</p>
+    <p class="navi-explanation">{% trans "In Gruppen suchen" %}:</p>
+    
+    {% comment %}  {% if "groups" in request.GET %} {% endcomment %}
+    <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "groups" %}">
+      <ul class="media-list">
+        <li class="media">
+          <!--
+          <a class="pull-left" style="background-color:inherit;" href="#">
+          -->
+          <a class="pull-left" href="#">
+            <i class="fa fa-group"></i>
+          </a>
+          <div class="media-body">
+            {% trans "Alle" %}
+          </div>
+        </li>
+      </ul>
+    </button>
+    
     <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "groups" %}&groups=mine">
       <ul class="media-list">
         <li class="media">
@@ -165,26 +183,7 @@
       </ul>
     </button>
 
-    {% if "groups" in request.GET %}
-    <button type="button" class="btn w100 btn-default large-space" href="?{% strip_params request "groups" %}">
-      <ul class="media-list">
-        <li class="media">
-          <!--
-          <a class="pull-left" href="#">
-            4
-          </a>
-          <a class="pull-left" style="background-color:inherit;" href="#">
-          -->
-          <a class="pull-left" href="#">
-            <i class="fa fa-eraser"></i>
-          </a>
-          <div class="media-body">
-            Filter löschen
-          </div>
-        </li>
-      </ul>
-    </button>
-    {% endif %}
+    
 
     {% comment %}
     <p class="navi-explanation">Ergebnisse filtern:</p>
