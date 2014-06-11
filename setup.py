@@ -63,6 +63,7 @@ setup(
         'django-bootstrap3-datetimepicker>=2.2.0',
         'django-multiform',
         'django-taggit>=0.11',
+        'django-tinymce==1.5.2',
         'djangorestframework>=2.3.0',
         'easy-thumbnails>=1.4',
     ],
