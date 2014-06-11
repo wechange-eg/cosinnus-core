@@ -2180,3 +2180,10 @@ div.dashboard-appwidget:last-child {
     width: 130px;
   }
 }
+
+/*
+    TODO: Dirty fix for now so that the note widget doesn't break. Fix this!
+*/
+.select2-container.select2-container-multi {
+    width: 200px !important;
+}
