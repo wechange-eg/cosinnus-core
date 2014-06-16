@@ -12,3 +12,6 @@ div.osmfield-map {
 	top: 30px;
 	z-index: 1000;
 }
+input.osmfield.osmfield-input {
+	border-width: 0;
+}
