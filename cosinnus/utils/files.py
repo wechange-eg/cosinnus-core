@@ -15,7 +15,8 @@ from django.utils.encoding import force_text
 def get_avatar_filename(instance, filename):
     _, ext = path.splitext(filename)
     filedir = path.join('cosinnus', 'avatars', 'users')
-    name = '%s%d%s' % (settings.SECRET_KEY, instance.user_id, filename)
+    my_uuid = force_text(uuid4())
+    name = '%s%s%s' % (settings.SECRET_KEY, my_uuid, filename)
     newfilename = hashlib.sha1(name.encode('utf-8')).hexdigest() + ext
     return path.join(filedir, newfilename)
 

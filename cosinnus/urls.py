@@ -37,7 +37,7 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^group/(?P<group>[^/]+)/export/$', 'group.group_export', name='group-export'),
 
     url(r'^users/$', 'user.user_list', name='user-list'),
-    url(r'^users/add/$', 'user.user_create', name='user-add'),
+    url(r'^signup/$', 'user.user_create', name='user-add'),
     url(r'^user/(?P<username>[^/]+)/$', 'user.user_detail', name='user-detail'),
     url(r'^user/(?P<username>[^/]+)/edit/$', 'user.user_update', name='user-edit'),
 

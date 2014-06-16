@@ -15,6 +15,7 @@ from cosinnus.core.decorators.views import staff_required, superuser_required
 from cosinnus.forms.user import UserCreationForm, UserChangeForm
 from cosinnus.views.mixins.ajax import patch_body_json_data
 from cosinnus.utils.http import JSONResponse
+from django.conf import LazySettings
 
 
 USER_MODEL = get_user_model()
@@ -33,7 +34,7 @@ class UserCreateView(CreateView):
     form_class = UserCreationForm
     model = USER_MODEL
     success_url = reverse_lazy('cosinnus:user-list')
-    template_name = 'cosinnus/user/user_form.html'
+    template_name = 'cosinnus/registration/signup.html'
 
     def dispatch(self, *args, **kwargs):
         return super(UserCreateView, self).dispatch(*args, **kwargs)
@@ -75,7 +76,7 @@ class UserUpdateView(UpdateView):
     model = USER_MODEL
     slug_field = 'username'
     slug_url_kwarg = 'username'
-    template_name = 'cosinnus/user/user_form.html'
+    template_name = 'cosinnus/registration/signup.html'
 
     @method_decorator(staff_required)
     def dispatch(self, *args, **kwargs):

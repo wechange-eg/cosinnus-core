@@ -1,0 +1,130 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n  cosinnus_tags widget_tweaks %}
+
+{% block page_title %}{% trans "Sign up" %}{% endblock %}
+
+{% block breadcrumb %}
+	<li><a href="#">{% trans "Login" %}</a></li>
+	<li class="active">{% trans "Konto erstellen" %}</li>
+{% endblock breadcrumb %}
+
+{% block leftnav %}
+    {% include "cosinnus/registration/leftnav.html" %}
+{% endblock leftnav %}
+
+{% block content %}
+  <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{% url 'cosinnus:index' %}">
+    
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+
+        <div type="button" class="btn btn-default w100 regular-space">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        <i class="fa fa-user"></i>
+                    </a>
+                    <div class="media-body">
+                        {{ form.username.errors }}
+                        {% captureas placeholder %}{% trans "Username" %}{% endcaptureas %}
+                        {% render_field form.username class+="form-control" placeholder=placeholder %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div type="button" class="btn btn-default w100 large-space">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        <i class="fa fa-envelope"></i>
+                    </a>
+                    <div class="media-body">{{ form.email.errors }}
+                        {% captureas placeholder %}{% trans "E-Mail Addresse" %}{% endcaptureas %}
+                        {% render_field form.email class+="form-control" placeholder=placeholder %}
+                    
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div type="button" class="btn btn-default w100 regular-space">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        <i class="fa fa-lock"></i>
+                    </a>
+                    <div class="media-body">
+                        {{ form.password1.errors }}
+                        {% captureas placeholder %}{% trans "Passwort" %}{% endcaptureas %}
+                        {% render_field form.password1 class+="form-control" placeholder=placeholder %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div type="button" class="btn btn-default w100 large-space">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        <i class="fa fa-lock"></i>
+                    </a>
+                    <div class="media-body">
+                        {{ form.password2.errors }}
+                        {% captureas placeholder %}{% trans "Passwort wiederholen" %}{% endcaptureas %}
+                        {% render_field form.password2 class+="form-control" placeholder=placeholder %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div type="button" class="btn btn-default w100 regular-space">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        <i class="fa fa-user"></i>
+                    </a>
+                    <div class="media-body">
+                        {{ form.first_name.errors }}
+                        {% captureas placeholder %}{% trans "Vorname" %}{% endcaptureas %}
+                        {% render_field form.first_name class+="form-control" placeholder=placeholder %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div type="button" class="btn btn-default w100 large-space">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        <i class="fa fa-user"></i>
+                    </a>
+                    <div class="media-body">
+                        {{ form.last_name.errors }}
+                        {% captureas placeholder %}{% trans "Nachname" %}{% endcaptureas %}
+                        {% render_field form.last_name class+="form-control" placeholder=placeholder %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div><!-- content-box -->
+
+    <button type="submit" class="btn btn-emphasized">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-hand-o-right"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "Registrieren" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+
+
+  </form>
+{% endblock content %}
