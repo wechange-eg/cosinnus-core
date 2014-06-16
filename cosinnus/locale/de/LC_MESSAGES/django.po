@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-02 17:17+0200\n"
+"POT-Creation-Date: 2014-06-16 16:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -33,6 +33,8 @@ msgstr "Dashboard"
 #: .\_old_templates\cosinnus\dashboard.html.py:574
 #: .\templates\cosinnus\dashboard.html.py:23
 #: .\templates\cosinnus\dashboard.html.py:52
+#: .\templates\cosinnus\user_dashboard.html.py:23
+#: .\templates\cosinnus\user_dashboard.html.py:52
 msgid "Refresh"
 msgstr "Neu laden"
 
@@ -40,6 +42,8 @@ msgstr "Neu laden"
 #: .\_old_templates\cosinnus\dashboard.html.py:576
 #: .\templates\cosinnus\dashboard.html.py:25
 #: .\templates\cosinnus\dashboard.html.py:54
+#: .\templates\cosinnus\user_dashboard.html.py:25
+#: .\templates\cosinnus\user_dashboard.html.py:54
 msgid "Configure"
 msgstr "Konfigurieren"
 
@@ -47,6 +51,8 @@ msgstr "Konfigurieren"
 #: .\_old_templates\cosinnus\dashboard.html.py:577
 #: .\templates\cosinnus\dashboard.html.py:26
 #: .\templates\cosinnus\dashboard.html.py:55
+#: .\templates\cosinnus\user_dashboard.html.py:26
+#: .\templates\cosinnus\user_dashboard.html.py:55
 #: .\templates\cosinnus\group\group_detail.html.py:17
 #: .\templates\cosinnus\group\group_detail.html.py:48
 #: .\templates\cosinnus\group\group_detail.html.py:73
@@ -56,7 +62,8 @@ msgid "Delete"
 msgstr "Löschen"
 
 #: .\_old_templates\cosinnus\dashboard.html.py:561
-#: .\templates\cosinnus\dashboard.html.py:39 .\views\widget.py:50
+#: .\templates\cosinnus\dashboard.html.py:39
+#: .\templates\cosinnus\user_dashboard.html.py:39 .\views\widget.py:50
 #: .\views\widget.py:75
 msgid "Add widget"
 msgstr "Widget hinzufügen"
@@ -90,22 +97,22 @@ msgstr "Beigetreten"
 
 #
 #: .\_old_templates\cosinnus\group_list.html.py:42
-#: .\templates\cosinnus\group\group_list.html.py:105 .\views\group.py:249
+#: .\templates\cosinnus\group\group_list.html.py:117 .\views\group.py:249
 msgid "Leave"
 msgstr "Verlassen"
 
 #: .\_old_templates\cosinnus\group_list.html.py:46
-#: .\templates\cosinnus\group\group_list.html.py:107 .\views\group.py:282
+#: .\templates\cosinnus\group\group_list.html.py:119 .\views\group.py:282
 msgid "Withdraw"
 msgstr "Zurückziehen"
 
 #: .\_old_templates\cosinnus\group_list.html.py:50
-#: .\templates\cosinnus\group\group_list.html.py:109 .\views\group.py:228
+#: .\templates\cosinnus\group\group_list.html.py:121 .\views\group.py:228
 msgid "Join"
 msgstr "Beitreten"
 
 #: .\_old_templates\cosinnus\group_list.html.py:65
-#: .\templates\cosinnus\group\group_list.html.py:139
+#: .\templates\cosinnus\group\group_list.html.py:151
 msgid "There are no groups."
 msgstr "Es gibt keine Gruppen."
 
@@ -127,12 +134,11 @@ msgid "No Groups. Join!"
 msgstr "Mitglied keiner Gruppen. Beitreten!"
 
 #: .\_old_templates\cosinnus\topmenu.html.py:47
-#: .\templates\cosinnus\navbar.html.py:75
 msgid "Profile"
 msgstr "Profil"
 
 #: .\_old_templates\cosinnus\topmenu.html.py:49
-#: .\templates\cosinnus\navbar.html.py:79
+#: .\templates\cosinnus\navbar.html.py:81
 msgid "Logout"
 msgstr "Abmelden"
 
@@ -142,6 +148,7 @@ msgstr "Abmelden"
 #: .\templates\cosinnus\registration\leftnav.html.py:4
 #: .\templates\cosinnus\registration\login.html.py:4
 #: .\templates\cosinnus\registration\login.html.py:60
+#: .\templates\cosinnus\registration\signup.html.py:7
 msgid "Login"
 msgstr "Anmelden"
 
@@ -159,7 +166,7 @@ msgstr "Bearbeiten"
 
 #: .\_old_templates\cosinnus\userprofile_form.html.py:10
 #: .\templates\cosinnus\user\userprofile_form.html.py:10 .\views\group.py:153
-#: .\views\group.py:387 .\views\user.py:86
+#: .\views\group.py:387 .\views\user.py:87
 msgid "Save"
 msgstr "Speichern"
 
@@ -168,10 +175,9 @@ msgstr "Speichern"
 #: .\_old_templates\cosinnus\widgets\delete.html.py:5
 #: .\templates\cosinnus\group\group_confirm.html.py:14
 #: .\templates\cosinnus\group\group_delete.html.py:16
-#: .\templates\cosinnus\group\group_form.html.py:24
+#: .\templates\cosinnus\group\group_form.html.py:29
 #: .\templates\cosinnus\group\group_user_form.html.py:16
 #: .\templates\cosinnus\hierarchy\add_container.html.py:28
-#: .\templates\cosinnus\user\user_form.html.py:10
 #: .\templates\cosinnus\user\userprofile_form.html.py:11
 #: .\templates\cosinnus\widgets\delete.html.py:5
 msgid "Cancel"
@@ -364,19 +370,19 @@ msgstr "Geben sie Titel/Typ des Anhangs ein"
 msgid "Name"
 msgstr "Name"
 
-#: .\forms\search.py:47
+#: .\forms\search.py:50
 msgid "Limit to groups"
 msgstr "Auf Gruppen beschränken"
 
-#: .\forms\search.py:48 .\models\tagged.py:55
+#: .\forms\search.py:51 .\models\tagged.py:55
 msgid "All"
 msgstr "Alle"
 
-#: .\forms\search.py:48
+#: .\forms\search.py:51
 msgid "My groups"
 msgstr "Meine Gruppen"
 
-#: .\forms\search.py:48
+#: .\forms\search.py:51
 msgid "Other groups"
 msgstr "Andere Gruppen"
 
@@ -401,7 +407,7 @@ msgid "Avatar"
 msgstr "Avatar"
 
 #: .\models\group.py:298 .\models\tagged.py:38
-#: .\templates\cosinnus\group\group_list.html.py:74
+#: .\templates\cosinnus\group\group_list.html.py:86
 msgid "Public"
 msgstr "Öffentlich"
 
@@ -532,26 +538,21 @@ msgstr ""
 msgid "Zurück zu"
 msgstr ""
 
-#: .\templates\cosinnus\leftnav_hierarchic_listview.html.py:41
+#: .\templates\cosinnus\leftnav_hierarchic_listview.html.py:38
 msgid "Neuer Ordnername"
 msgstr ""
 
+#: .\templates\cosinnus\leftnav_hierarchic_listview.html.py:52
+msgid "Create folder"
+msgstr "Ordner erstellen"
+
 #: .\templates\cosinnus\modal_box.html.py:27
 msgid "Abbrechen"
-msgstr ""
+msgstr "Abbrechen"
 
 #: .\templates\cosinnus\modal_box.html.py:42
 msgid "OK"
-msgstr ""
-
-#: .\templates\cosinnus\navbar.html.py:67
-#: .\templates\cosinnus\widgets\fadedown_base_widget.html.py:28
-msgid "You have not uploaded an avatar yet"
-msgstr "Sie haben noch kein Bild hochgeladen"
-
-#: .\templates\cosinnus\navbar.html.py:78
-msgid "User Dashboard"
-msgstr "Benutzer-Dashboard"
+msgstr "OK"
 
 #: .\templates\cosinnus\not_logged_in_alert.html.py:5
 msgid "Nicht eingeloggt."
@@ -563,14 +564,56 @@ msgid ""
 msgstr ""
 
 #: .\templates\cosinnus\search.html.py:5 .\templates\cosinnus\search.html.py:6
+#: .\templates\cosinnus\search.html.py:277
 msgid "Search"
 msgstr "Suche"
 
-#: .\templates\cosinnus\search.html.py:296
+#: .\templates\cosinnus\search.html.py:11
+msgid "In Anwendungen suchen"
+msgstr ""
+
+#: .\templates\cosinnus\search.html.py:28
+#: .\templates\cosinnus\search.html.py:155
+msgid "Alle"
+msgstr "Alle"
+
+#: .\templates\cosinnus\search.html.py:49
+msgid "Aufgaben"
+msgstr ""
+
+#: .\templates\cosinnus\search.html.py:70
+msgid "Dateien"
+msgstr ""
+
+#: .\templates\cosinnus\search.html.py:91
+msgid "Etherpads"
+msgstr ""
+
+#: .\templates\cosinnus\search.html.py:112
+msgid "Neuigkeiten"
+msgstr ""
+
+#: .\templates\cosinnus\search.html.py:133
+msgid "Termine"
+msgstr ""
+
+#: .\templates\cosinnus\search.html.py:141
+msgid "In Gruppen suchen"
+msgstr ""
+
+#: .\templates\cosinnus\search.html.py:168
+msgid "Meine Gruppen"
+msgstr "Meine Gruppen"
+
+#: .\templates\cosinnus\search.html.py:181
+msgid "Andere Gruppen"
+msgstr ""
+
+#: .\templates\cosinnus\search.html.py:290
 msgid "zurück"
 msgstr ""
 
-#: .\templates\cosinnus\search.html.py:302
+#: .\templates\cosinnus\search.html.py:296
 msgid "weiter"
 msgstr ""
 
@@ -612,7 +655,6 @@ msgstr "Nutzer"
 
 #: .\templates\cosinnus\group\group_detail.html.py:22
 #: .\templates\cosinnus\group\group_user_list.html.py:7
-#: .\templates\cosinnus\user\user_form.html.py:4
 #: .\templates\cosinnus\user\user_list.html.py:7
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
@@ -654,45 +696,44 @@ msgid "Edit group “%(group_name)s”"
 msgstr "Gruppe “%(group_name)s” bearbeiten"
 
 #
-#: .\templates\cosinnus\group\group_list.html.py:70
+#: .\templates\cosinnus\group\group_list.html.py:82
 msgid "Member"
 msgstr "Gruppenmitglieder"
 
-#: .\templates\cosinnus\group\group_list.html.py:72
+#: .\templates\cosinnus\group\group_list.html.py:84
 msgid "Membership requested"
 msgstr "Mitgliedschaft wurde beantragt"
 
-#: .\templates\cosinnus\group\group_list.html.py:76
+#: .\templates\cosinnus\group\group_list.html.py:88
 msgid "Not a member"
 msgstr "Kein Mitglied"
 
-#: .\templates\cosinnus\group\group_list.html.py:122
+#: .\templates\cosinnus\group\group_list.html.py:134
 #, python-format
 msgid "Do you really want to leave group „%(title)s“?"
 msgstr "Möchten sie die Gruppe “%(title)s” verlassen?"
 
 #
-#: .\templates\cosinnus\group\group_list.html.py:123
+#: .\templates\cosinnus\group\group_list.html.py:135
 msgid "Leave Group"
 msgstr "Gruppe verlassen"
 
-#: .\templates\cosinnus\group\group_list.html.py:126
+#: .\templates\cosinnus\group\group_list.html.py:138
 #, python-format
 msgid "Do you really want to withdraw your join request to group „%(title)s“?"
 msgstr ""
-"Möchten sie ihre Beitrittsanfrage für die Gruppe “%(title)s” "
-"zurückziehen?"
+"Möchten sie ihre Beitrittsanfrage für die Gruppe “%(title)s” zurückziehen?"
 
-#: .\templates\cosinnus\group\group_list.html.py:127
+#: .\templates\cosinnus\group\group_list.html.py:139
 msgid "Withdraw Join Request"
 msgstr "Beitrittsanfrage zurückziehen"
 
-#: .\templates\cosinnus\group\group_list.html.py:130
+#: .\templates\cosinnus\group\group_list.html.py:142
 #, python-format
 msgid "Do you wish to request to join group „%(title)s“?"
 msgstr "Möchten sie der Gruppe %(title)s beitreten?"
 
-#: .\templates\cosinnus\group\group_list.html.py:131
+#: .\templates\cosinnus\group\group_list.html.py:143
 msgid "Join Group"
 msgstr "Gruppe beitreten"
 
@@ -711,6 +752,7 @@ msgid "Passwort vergessen"
 msgstr ""
 
 #: .\templates\cosinnus\registration\login.html.py:29
+#: .\templates\cosinnus\registration\signup.html.py:31
 #: .\templates\cosinnus\user\user_detail.html.py:10
 msgid "Username"
 msgstr "Nutzername"
@@ -719,12 +761,44 @@ msgstr "Nutzername"
 msgid "Password"
 msgstr "Passwort"
 
+#: .\templates\cosinnus\registration\signup.html.py:4
+msgid "Sign up"
+msgstr ""
+
+#: .\templates\cosinnus\registration\signup.html.py:8
+msgid "Konto erstellen"
+msgstr ""
+
+#: .\templates\cosinnus\registration\signup.html.py:45
+msgid "E-Mail Addresse"
+msgstr "E-Mail Adresse"
+
+#: .\templates\cosinnus\registration\signup.html.py:61
+msgid "Passwort"
+msgstr "Passwort"
+
+#: .\templates\cosinnus\registration\signup.html.py:76
+msgid "Passwort wiederholen"
+msgstr ""
+
+#: .\templates\cosinnus\registration\signup.html.py:91
+msgid "Vorname"
+msgstr "Vorname"
+
+#: .\templates\cosinnus\registration\signup.html.py:106
+msgid "Nachname"
+msgstr "Nachname"
+
+#: .\templates\cosinnus\registration\signup.html.py:122
+msgid "Registrieren"
+msgstr ""
+
 #: .\templates\cosinnus\user\user_detail.html.py:18
 msgid "E-mail address"
 msgstr "E-mail Adresse"
 
 #: .\templates\cosinnus\widgets\base_widget.html.py:44
-#: .\templates\cosinnus\widgets\fadedown_base_widget.html.py:56
+#: .\templates\cosinnus\widgets\fadedown_base_widget.html.py:52
 msgid "Mehr"
 msgstr ""
 
@@ -750,14 +824,14 @@ msgid "Group Description"
 msgstr "Gruppenbeschreibung"
 
 #: .\utils\dashboard.py:174
-msgid "My Network"
-msgstr "Mein Netzwerk"
+msgid "Network"
+msgstr "Netzwerk"
 
 #: .\views\export.py:34
 msgid "No model given to export data from."
 msgstr "Kein Modell zum Exportieren der Daten angegeben."
 
-#: .\views\group.py:49 .\views\user.py:43
+#: .\views\group.py:49 .\views\user.py:44
 msgid "Create"
 msgstr "Erstellen"
 
@@ -860,3 +934,9 @@ msgstr "Objekt \"%(title)s\" wurde erfolgreich gelöscht."
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d andere Objekte wurden gelöscht."
+
+#~ msgid "You have not uploaded an avatar yet"
+#~ msgstr "Sie haben noch kein Bild hochgeladen"
+
+#~ msgid "User Dashboard"
+#~ msgstr "Benutzer-Dashboard"

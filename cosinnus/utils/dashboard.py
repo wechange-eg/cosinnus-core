@@ -171,7 +171,7 @@ class GroupMembersWidget(DashboardWidget):
 
     app_name = 'cosinnus'
     model = CosinnusGroup
-    title = _('My Network')
+    title = _('Network')
     user_model_attr = None
     widget_name = 'group_members'
     allow_on_user = False
