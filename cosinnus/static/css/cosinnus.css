@@ -1,24 +1,3 @@
-@charset "UTF-8";
-/*
-		$abcde : blue;
-$currentcolorscheme: neww;
-body {
-  @if $currentcolorscheme == ocean {
-    color: blue;
-  } @else if $currentcolorscheme == matador {
-    color: red;
-  } @else if $currentcolorscheme == neww {
-		$abcde : green;
-  } @else {
-    color: black;
-  }
-}
-
-body {
-	background-color: $abcde !important;
-background-image: none;
-}
-*/
 body {
   font-family: Verdana, Geneva, sans-serif;
   background-image: url("../images/background.jpg");
@@ -908,6 +887,7 @@ body .large-space {
   padding: 4px 7px;
   display: inline-block;
   float: left;
+  white-space: nowrap;
   color: #333333;
 }
 .input-area > li + li {
@@ -970,96 +950,84 @@ p.navi-explanation {
   padding: 0 0 8px 0;
 }
 
-.select2-container .select2-choice,
-.select2-container-multi .select2-choices {
+body div .select2-container .select2-choice,
+body div .select2-container-multi .select2-choices {
   border-width: 0;
   background-image: none;
   min-width: 8em;
   background-color: transparent;
 }
-
-.select2-container .select2-choice .select2-arrow {
+body div .select2-container .select2-choice .select2-arrow {
   border-width: 0;
   background-image: none;
   background-color: transparent;
 }
-
-.select2-container .select2-choice .select2-arrow b {
+body div .select2-container .select2-choice .select2-arrow b {
   background-position: 0 -2px;
 }
-
-.select2-container .select2-choice {
+body div .select2-container .select2-choice {
   line-height: inherit;
 }
-
-.select2-dropdown-open.select2-drop-above .select2-choice,
-.select2-dropdown-open.select2-drop-above .select2-choices,
-.select2-container-multi.select2-container-active .select2-choices,
-.select2-container-multi.select2-container-active .select2-choice,
-.select2-drop.select2-drop-above.select2-drop-active,
-.select2-container-active .select2-choice,
-.select2-container-active .select2-choices,
-.select2-drop-active {
+body div .select2-dropdown-open.select2-drop-above .select2-choice,
+body div .select2-dropdown-open.select2-drop-above .select2-choices,
+body div .select2-container-multi.select2-container-active .select2-choices,
+body div .select2-container-multi.select2-container-active .select2-choice,
+body div .select2-drop.select2-drop-above.select2-drop-active,
+body div .select2-container-active .select2-choice,
+body div .select2-container-active .select2-choices,
+body div .select2-drop-active {
   border-width: 0;
   background-color: white;
 }
-
-.select2-results .select2-highlighted {
+body div .select2-results .select2-highlighted {
   background-color: #949494;
   color: white;
 }
-
-.select2-container-multi .select2-choices .select2-search-choice {
+body div .select2-container-multi .select2-choices .select2-search-choice {
   border-width: 0;
   background-image: none;
   background-color: #dbdbdb;
   color: #333333;
 }
-
-.select2-container-multi.select2-container-active .select2-choices {
+body div .select2-container-multi.select2-container-active .select2-choices {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
-.select2-container.select2-container-multi.w100 {
+body div .select2-container.select2-container-multi {
+  width: auto;
+}
+body div .select2-container.select2-container-multi.w100 {
   width: 100%;
 }
-
-.attachments-selector {
+body div .attachments-selector {
   min-width: 15em;
 }
-
-.app-main-attachment {
+body div .app-main-attachment {
   background-color: #16778d;
   color: white;
   padding: 0 4px;
 }
-
-.app-calendar-attachment {
+body div .app-calendar-attachment {
   background-color: #779b48;
   color: white;
   padding: 0 4px;
 }
-
-.app-files-attachment {
+body div .app-files-attachment {
   background-color: #14a085;
   color: white;
   padding: 0 4px;
 }
-
-.app-documents-attachment {
+body div .app-documents-attachment {
   background-color: #009ee3;
   color: white;
   padding: 0 4px;
 }
-
-.app-todos-attachment {
+body div .app-todos-attachment {
   background-color: #efa02d;
   color: white;
   padding: 0 4px;
 }
-
-.app-etherpad-attachment {
+body div .app-etherpad-attachment {
   background-color: #e55c55;
   color: white;
   padding: 0 4px;
@@ -2179,11 +2147,4 @@ div.dashboard-appwidget:last-child {
   .dashboard-header .dashboard-header-image img {
     width: 130px;
   }
-}
-
-/*
-    TODO: Dirty fix for now so that the note widget doesn't break. Fix this!
-*/
-.select2-container.select2-container-multi {
-    width: 200px !important;
 }

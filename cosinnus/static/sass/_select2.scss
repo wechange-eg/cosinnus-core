@@ -1,84 +1,93 @@
-.select2-container .select2-choice,
-.select2-container-multi .select2-choices {
-	border-width:0;
-	background-image:none;
-	min-width:8em;
-	background-color: transparent;
-}
+body div {
 
-.select2-container .select2-choice .select2-arrow {
-	border-width:0;
-	background-image:none;
-	background-color:transparent;
-}
-.select2-container .select2-choice .select2-arrow b {
-	// arrow at right side of selectors a few pixels up
-	background-position:0 -2px;
-}
+	.select2-container .select2-choice,
+	.select2-container-multi .select2-choices {
+		border-width:0;
+		background-image:none;
+		min-width:8em;
+		background-color: transparent;
+	}
 
-.select2-container .select2-choice {
-	line-height: inherit;
-}
+	.select2-container .select2-choice .select2-arrow {
+		border-width:0;
+		background-image:none;
+		background-color:transparent;
+	}
+	.select2-container .select2-choice .select2-arrow b {
+		// arrow at right side of selectors a few pixels up
+		background-position:0 -2px;
+	}
 
-.select2-dropdown-open.select2-drop-above .select2-choice,
-.select2-dropdown-open.select2-drop-above .select2-choices,
-.select2-container-multi.select2-container-active .select2-choices,
-.select2-container-multi.select2-container-active .select2-choice,
-.select2-drop.select2-drop-above.select2-drop-active,
-.select2-container-active .select2-choice,
-.select2-container-active .select2-choices,
-.select2-drop-active {
-	border-width:0;
-	background-color: $app-neutral-color-white;
-}
+	.select2-container .select2-choice {
+		line-height: inherit;
+	}
 
-
-.select2-results .select2-highlighted {
-	background-color: $app-neutral-color;
-	color: $app-neutral-color-white;
-}
-
-.select2-container-multi .select2-choices .select2-search-choice {
-	border-width: 0;
-	background-image: none;
-	background-color: $app-neutral-color-light;
-	color: $app-neutral-color-dark;
-}
+	.select2-dropdown-open.select2-drop-above .select2-choice,
+	.select2-dropdown-open.select2-drop-above .select2-choices,
+	.select2-container-multi.select2-container-active .select2-choices,
+	.select2-container-multi.select2-container-active .select2-choice,
+	.select2-drop.select2-drop-above.select2-drop-active,
+	.select2-container-active .select2-choice,
+	.select2-container-active .select2-choices,
+	.select2-drop-active {
+		border-width:0;
+		background-color: $app-neutral-color-white;
+	}
 
 
-.select2-container-multi.select2-container-active .select2-choices {
-	-webkit-box-shadow: none;
-	box-shadow: none;
-}
-.select2-container.select2-container-multi.w100 {
-	width: 100%;
+	.select2-results .select2-highlighted {
+		background-color: $app-neutral-color;
+		color: $app-neutral-color-white;
+	}
+
+	.select2-container-multi .select2-choices .select2-search-choice {
+		border-width: 0;
+		background-image: none;
+		background-color: $app-neutral-color-light;
+		color: $app-neutral-color-dark;
+	}
+
+
+	.select2-container-multi.select2-container-active .select2-choices {
+		-webkit-box-shadow: none;
+		box-shadow: none;
+	}
+
+	.select2-container.select2-container-multi {
+		width: auto;
+	}
+	.select2-container.select2-container-multi.w100 {
+		width: 100%;
+	}
+
+	.attachments-selector {
+		min-width: 15em;
+	}
+
+	@mixin select2attachment($light,$normal,$dark) {
+		background-color: $normal;
+		color: $app-neutral-color-white;
+		padding: 0 4px;
+	}
+
+	.app-main-attachment {
+		@include select2attachment($app-main-color-light,$app-main-color,$app-main-color-dark);
+	}
+	.app-calendar-attachment {
+		@include select2attachment($app-calendar-color-light,$app-calendar-color,$app-calendar-color-dark);
+	}
+	.app-files-attachment {
+		@include select2attachment($app-files-color-light,$app-files-color,$app-files-color-dark);
+	}
+	.app-documents-attachment {
+		@include select2attachment($app-documents-color-light,$app-documents-color,$app-documents-color-dark);
+	}
+	.app-todos-attachment {
+		@include select2attachment($app-todos-color-light,$app-todos-color,$app-todos-color-dark);
+	}
+	.app-etherpad-attachment {
+		@include select2attachment($app-etherpad-color-light,$app-etherpad-color,$app-etherpad-color-dark);
+	}
+
 }
 
-.attachments-selector {
-	min-width: 15em;
-}
-
-@mixin select2attachment($light,$normal,$dark) {
-	background-color: $normal;
-	color: $app-neutral-color-white;
-	padding: 0 4px;
-}
-
-.app-main-attachment {
-	@include select2attachment($app-main-color-light,$app-main-color,$app-main-color-dark);
-}
-.app-calendar-attachment {
-	@include select2attachment($app-calendar-color-light,$app-calendar-color,$app-calendar-color-dark);
-}
-.app-files-attachment {
-	@include select2attachment($app-files-color-light,$app-files-color,$app-files-color-dark);
-}
-.app-documents-attachment {
-	@include select2attachment($app-documents-color-light,$app-documents-color,$app-documents-color-dark);
-}
-.app-todos-attachment {
-	@include select2attachment($app-todos-color-light,$app-todos-color,$app-todos-color-dark);
-}
-.app-etherpad-attachment {
-	@include select2attachment($app-etherpad-color-light,$app-etherpad-color,$app-etherpad-color-dark);
-}

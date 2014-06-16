@@ -1,25 +1,5 @@
 // Only this file and maybe the logo image should be needed to customize for different installations.
 
-/*
-		$abcde : blue;
-$currentcolorscheme: neww;
-body {
-  @if $currentcolorscheme == ocean {
-    color: blue;
-  } @else if $currentcolorscheme == matador {
-    color: red;
-  } @else if $currentcolorscheme == neww {
-		$abcde : green;
-  } @else {
-    color: black;
-  }
-}
-
-body {
-	background-color: $abcde !important;
-background-image: none;
-}
-*/
 
 @mixin neww-standard-scheme() {
 	// The colors are from Tobi's 01b_NEWW_Color-Scheme.pdf
