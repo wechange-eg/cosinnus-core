@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-16 16:21+0200\n"
+"POT-Creation-Date: 2014-06-16 17:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -166,7 +166,7 @@ msgstr "Bearbeiten"
 
 #: .\_old_templates\cosinnus\userprofile_form.html.py:10
 #: .\templates\cosinnus\user\userprofile_form.html.py:10 .\views\group.py:153
-#: .\views\group.py:387 .\views\user.py:87
+#: .\views\group.py:387 .\views\user.py:96
 msgid "Save"
 msgstr "Speichern"
 
@@ -831,7 +831,7 @@ msgstr "Netzwerk"
 msgid "No model given to export data from."
 msgstr "Kein Modell zum Exportieren der Daten angegeben."
 
-#: .\views\group.py:49 .\views\user.py:44
+#: .\views\group.py:49 .\views\user.py:53
 msgid "Create"
 msgstr "Erstellen"
 
@@ -905,6 +905,15 @@ msgstr "Nutzer aus der Gruppe “%(group_name)s” entfernen?"
 #: .\views\hierarchy.py:25
 msgid "No appname given for adding containers."
 msgstr "Kein Appname zum Hinzufügen von Zusammenstellungen angegeben."
+
+#: .\views\user.py:40
+#, python-format
+msgid ""
+"User \"%(user)s\" was registered successfully. You can now log in using this "
+"username."
+msgstr ""
+"Benutzer \"%(user)s\" wurde erfolgreich registriert. Sie können sich jetzt mit diesen "
+"Benutzernamen einloggen."
 
 #: .\views\mixins\tagged.py:291
 #, python-format

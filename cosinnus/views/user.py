@@ -15,7 +15,8 @@ from cosinnus.core.decorators.views import staff_required, superuser_required
 from cosinnus.forms.user import UserCreationForm, UserChangeForm
 from cosinnus.views.mixins.ajax import patch_body_json_data
 from cosinnus.utils.http import JSONResponse
-from django.conf import LazySettings
+from django.contrib import messages
+
 
 
 USER_MODEL = get_user_model()
@@ -33,8 +34,16 @@ class UserCreateView(CreateView):
 
     form_class = UserCreationForm
     model = USER_MODEL
-    success_url = reverse_lazy('cosinnus:user-list')
+    success_url = reverse_lazy('login')
     template_name = 'cosinnus/registration/signup.html'
+
+    message_success = _('User "%(user)s" was registered successfully. You can now log in using this username.')
+    
+    def form_valid(self, form):
+        ret = super(UserCreateView, self).form_valid(form)
+        messages.success(self.request,
+            self.message_success % {'user': self.object.username})
+        return ret
 
     def dispatch(self, *args, **kwargs):
         return super(UserCreateView, self).dispatch(*args, **kwargs)
