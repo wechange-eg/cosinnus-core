@@ -1,33 +1,45 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n bootstrap3 %}
+{% load i18n cosinnus_tags %}
 
 {% block page_title %}
-  {% if object %}
-    {% blocktrans with group_name=object.name %}Edit group “{{ group_name }}”{% endblocktrans %}
-  {% else %}
-    {% trans "Create Group" %}
-  {% endif %}
+	{% if object %}
+	   {% blocktrans with group_name=object.name %}Edit group “{{ group_name }}”{% endblocktrans %}
+	{% else %}
+	   {% trans "Create Group" %}
+    {% endif %}
 {% endblock %}
 
-{% block content_title %}
-  {% if object %}
-    {% blocktrans with group_name=object.name %}Edit group “{{ group_name }}”{% endblocktrans %}
-  {% else %}
-    {% trans "Create Group" %}
-  {% endif %}
-{% endblock content_title %}
+
+{% block leftnav %}
+    {% if object %}
+        {% captureas current_page %}editgroup{% endcaptureas %}
+    {% else %}
+        {% captureas current_page %}addgroup{% endcaptureas %}
+    {% endif %}
+    {% include "cosinnus/group/leftnav.html"  with current_page=current_page %}
+{% endblock leftnav %}
+
+
+{% block override_breadcrumb %}
+{% endblock override_breadcrumb %}
+
 
 {% block content %}
-  <form action="" method="post" class="form-horizontal" role="form">
-    {% csrf_token %}
-    Name: {{ form.forms.obj.name }}
-    Public: {{ form.forms.obj.public }}
-    Description: {{ form.forms.obj.description }}  
-    
-    {% include "cosinnus/media_tags.html" %} 
-    
-    {% trans "Cancel" as reset_label %}
-    {% url 'cosinnus:group-list' as reset_link %}
-    {% buttons submit=submit_label reset=reset_label reset_link=reset_link layout='horizontal' %}{% endbuttons %}
-  </form>
-{% endblock content %}
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+        <form action="" method="post" class="form-horizontal" role="form">
+		    {% csrf_token %}
+		    Name: {{ form.forms.obj.name }}
+		    Public: {{ form.forms.obj.public }}
+		    Description: {{ form.forms.obj.description }}  
+		    
+		    {% include "cosinnus/media_tags.html" %} 
+		    
+		  </form>
+        
+    </div>
+
+{% endblock %}
+
+
+
