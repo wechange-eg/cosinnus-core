@@ -18,6 +18,8 @@
 {% captureas label %}{% trans "Register" %}{% endcaptureas %}
 {% include "cosinnus/leftnav_button.html" with active=is_signup extra_classes="regular-space" icon="fa-user" label=label href=href  %}
 
+{% comment %}  Password reset link hidden until it is re-templated.
 {% captureas href %}{% url "password_change" %}{% endcaptureas %}
 {% captureas label %}{% trans "Passwort vergessen" %}{% endcaptureas %}
 {% include "cosinnus/leftnav_button.html" with active=is_forgotpassword icon="fa-question-circle" label=label href=href  %}
+{% endcomment %}
