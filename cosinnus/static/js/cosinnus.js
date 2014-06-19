@@ -39,12 +39,30 @@
 			// Various inputs that use jQuery select2 plugin
 			// http://ivaynberg.github.io/select2/
 
-			$('.privacy-selector').select2({ minimumResultsForSearch: -1});
-			$('.privacy-selector').change(function(){
-				$(this).prev().prev().attr('class',
-					$(this).val() == 'private' ? 'fa fa-fw fa-lock' : 'fa fa-fw fa-globe'
-				);
-			}).trigger('change');
+			$('.input-area-privacy-selector a').click( function() {
+				var translation = {
+					de: {
+						lock: 'Privat',
+						globe: 'Öffentlich'
+					},
+					en: {
+						lock: 'Private',
+						globe: 'Global'
+					}
+				};
+
+				if ($(this).find('i').hasClass('fa-globe')) {
+					// switch to private
+					$(this).find('i').removeClass('fa-globe').addClass('fa-lock');
+					$(this).find('span').html(translation[$.cosinnus.lang].lock);
+					$(this).find('input').val('private');
+				} else {
+					// switch to public
+					$(this).find('i').addClass('fa-globe').removeClass('fa-lock');
+					$(this).find('span').html(translation[$.cosinnus.lang].globe);
+					$(this).find('input').val('global');
+				}
+			}).trigger('click');
 
 			$('.tags-selector, .location-selector').each(function() {
 				$(this).select2({

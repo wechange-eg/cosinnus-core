@@ -898,8 +898,28 @@ body .large-space {
   font-size: 17px;
   line-height: 25px;
 }
+.input-area > li.input-area-privacy-selector {
+  float: right;
+}
+.input-area > li.input-area-privacy-selector a {
+  color: #333333;
+}
+.input-area > li.input-area-privacy-selector a:hover, .input-area > li.input-area-privacy-selector a:active, .input-area > li.input-area-privacy-selector a:focus {
+  text-decoration: none;
+}
+.input-area > li.input-area-lighter a i {
+  color: #949494;
+}
+.input-area > li.input-area-lighter a i:hover, .input-area > li.input-area-lighter a i:active, .input-area > li.input-area-lighter a i:focus {
+  color: #333333;
+}
 .input-area.input-area-left-column li {
   border-width: 0;
+}
+
+.dashboard-appwidget .input-area li textarea {
+  height: 7em;
+  line-height: 1.3em;
 }
 
 /* The serachbar in the fixed top navigation */

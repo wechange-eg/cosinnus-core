@@ -81,6 +81,25 @@ body .large-space {
 			font-size: 17px;
 			line-height: 25px;
 		}
+
+		&.input-area-privacy-selector {
+			float: right;
+			a {
+				color: $app-neutral-color-dark;
+
+				&:hover, &:active, &:focus {
+					text-decoration: none;
+				}
+			}
+		}
+
+		&.input-area-lighter a i {
+			color: $app-neutral-color;
+
+			&:hover, &:active, &:focus {
+				color: $app-neutral-color-dark;
+			}
+		}
 	}
 
 	&.input-area-left-column {
@@ -89,6 +108,12 @@ body .large-space {
 		}
 	}
 }
+
+.dashboard-appwidget .input-area li textarea {
+	height: 7em;
+	line-height: 1.3em;
+}
+
 
 /* The serachbar in the fixed top navigation */
 #searchbar {
