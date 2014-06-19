@@ -267,7 +267,7 @@ class GroupUserLeaveView(GroupConfirmMixin, DetailView):
                 membership = CosinnusGroupMembership.objects.get(
                     user=self.request.user,
                     group=self.object,
-                    status=MEMBERSHIP_MEMBER
+                    status=MEMBERSHIP_MEMBER if self.request.user.pk not in admins else MEMBERSHIP_ADMIN
                 )
                 membership.delete()
             except CosinnusGroupMembership.DoesNotExist:
