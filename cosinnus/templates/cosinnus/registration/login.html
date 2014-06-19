@@ -13,7 +13,7 @@
 {% block content %}
   <form action="" method="post" class="form-horizontal" role="form">
     {% csrf_token %}
-    <input type="hidden" name="next" value="{% url 'cosinnus:index' %}">
+    <input type="hidden" name="next" value="{% if request.GET.next %}{{ request.GET.next }}{% else %}{% url 'cosinnus:index' %}{% endif %}">
     
     <!-- a box with semi transparent background -->
     <div class="content-box">
