@@ -385,6 +385,12 @@ class CosinnusGroup(models.Model):
     @property
     def avatar_url(self):
         return self.avatar.url if self.avatar else None
+    
+    def media_tag_object(self):
+        key = '_media_tag_cache'
+        if not hasattr(self, key):
+            setattr(self, key, self.media_tag)
+        return getattr(self, key)
 
 
 @python_2_unicode_compatible

@@ -41,6 +41,8 @@
 {% block content %}
 <div class="row">
   <div class="col-md-12">
+    {% include 'cosinnus/media_tags_readonly.html' %}
+    
     <h3>{% trans "Admins" %}</h3>
     <ul class="media-list">
       {% for admin in admins %}
