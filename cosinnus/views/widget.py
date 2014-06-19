@@ -163,11 +163,13 @@ class DashboardMixin(object):
             this working for the beta really quickly. Refactor this into
             the note widget itself. (But don't put the Form through with 
             the ajax request in the widget loading algorithm! 
-        """        
-        from cosinnus_note.forms import NoteForm
-        kwargs.update({
-            'form':  NoteForm(group=self.group)
-        })
+        """   
+        # Only for the group dashboard:
+        if hasattr(self, 'group'):  
+            from cosinnus_note.forms import NoteForm
+            kwargs.update({
+                'form':  NoteForm(group=self.group)
+            })
         
         return super(DashboardMixin, self).get_context_data(**kwargs)
 
@@ -181,12 +183,14 @@ group_dashboard = GroupDashboard.as_view()
 
 
 class UserDashboard(DashboardMixin, TemplateView):
+    template_name = 'cosinnus/user_dashboard.html'
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(UserDashboard, self).dispatch(request, *args, **kwargs)
 
     def get_filter(self):
+        """ Submit the user id so queryset elements can be filtered for that user. """
         return {'user_id': self.request.user.pk}
 
 user_dashboard = UserDashboard.as_view()

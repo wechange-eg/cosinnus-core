@@ -125,7 +125,8 @@ class DashboardWidget(object):
         if self.config.group:
             return reverse('cosinnus:%s:index' % self.app_name,
                            kwargs={'group': self.config.group.slug})
-        return None
+        # return '#' as default url to prevent firefox dropping the <a> tag content
+        return '#'
 
 
 class GroupDescriptionForm(DashboardWidgetForm):

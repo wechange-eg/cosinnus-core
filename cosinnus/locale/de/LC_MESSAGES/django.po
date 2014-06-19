@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-19 14:58+0200\n"
+"POT-Creation-Date: 2014-06-19 18:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -54,9 +54,9 @@ msgstr "Konfigurieren"
 #: .\templates\cosinnus\user_dashboard.html.py:26
 #: .\templates\cosinnus\user_dashboard.html.py:55
 #: .\templates\cosinnus\group\group_detail.html.py:28
-#: .\templates\cosinnus\group\group_detail.html.py:59
-#: .\templates\cosinnus\group\group_detail.html.py:84
-#: .\templates\cosinnus\group\group_detail.html.py:109 .\views\group.py:78
+#: .\templates\cosinnus\group\group_detail.html.py:61
+#: .\templates\cosinnus\group\group_detail.html.py:86
+#: .\templates\cosinnus\group\group_detail.html.py:111 .\views\group.py:78
 #: .\views\group.py:424
 msgid "Delete"
 msgstr "Löschen"
@@ -137,7 +137,7 @@ msgid "Profile"
 msgstr "Profil"
 
 #: .\_old_templates\cosinnus\topmenu.html.py:49
-#: .\templates\cosinnus\navbar.html.py:81
+#: .\templates\cosinnus\navbar.html.py:76
 msgid "Logout"
 msgstr "Abmelden"
 
@@ -159,6 +159,7 @@ msgstr "Nutzerprofil: %(username)s"
 
 #: .\_old_templates\cosinnus\userprofile_detail.html.py:13
 #: .\templates\cosinnus\group\group_detail.html.py:25
+#: .\templates\cosinnus\group\group_list.html.py:131
 #: .\templates\cosinnus\user\userprofile_detail.html.py:13
 msgid "Edit"
 msgstr "Bearbeiten"
@@ -189,7 +190,7 @@ msgid "Add container"
 msgstr "Zusammenstellung hinzufügen"
 
 #: .\_old_templates\cosinnus\hierarchy\add_container.html.py:27
-#: .\templates\cosinnus\group\group_detail.html.py:108
+#: .\templates\cosinnus\group\group_detail.html.py:110
 #: .\templates\cosinnus\hierarchy\add_container.html.py:27
 #: .\views\group.py:358
 msgid "Add"
@@ -424,11 +425,11 @@ msgstr "Cosinnus Gruppen"
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
 
-#: .\models\group.py:405
+#: .\models\group.py:411
 msgid "Group membership"
 msgstr "Gruppenmitgliedschaft"
 
-#: .\models\group.py:406
+#: .\models\group.py:412
 msgid "Group memberships"
 msgstr "Gruppenmitgliedschaften"
 
@@ -551,6 +552,10 @@ msgstr "Abbrechen"
 msgid "OK"
 msgstr "OK"
 
+#: .\templates\cosinnus\navbar.html.py:75
+msgid "User Dashboard"
+msgstr "Persönliches Dashboard"
+
 #: .\templates\cosinnus\not_logged_in_alert.html.py:5
 msgid "Nicht eingeloggt."
 msgstr ""
@@ -666,22 +671,22 @@ msgstr "Nutzer"
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
-#: .\templates\cosinnus\group\group_detail.html.py:44
+#: .\templates\cosinnus\group\group_detail.html.py:46
 msgid "Admins"
 msgstr "Administratoren"
 
 #
-#: .\templates\cosinnus\group\group_detail.html.py:58
-#: .\templates\cosinnus\group\group_detail.html.py:83 .\views\widget.py:139
+#: .\templates\cosinnus\group\group_detail.html.py:60
+#: .\templates\cosinnus\group\group_detail.html.py:85 .\views\widget.py:139
 msgid "Change"
 msgstr "Ändern"
 
 #
-#: .\templates\cosinnus\group\group_detail.html.py:69
+#: .\templates\cosinnus\group\group_detail.html.py:71
 msgid "Members"
 msgstr "Gruppenmitglieder"
 
-#: .\templates\cosinnus\group\group_detail.html.py:94
+#: .\templates\cosinnus\group\group_detail.html.py:96
 msgid "Pending users"
 msgstr "Zu bestätigende Benutzer"
 
@@ -710,7 +715,6 @@ msgid "Group Admin"
 msgstr "Gruppenadministrator"
 
 #: .\templates\cosinnus\group\group_list.html.py:76
-#, fuzzy
 msgid "Group Member"
 msgstr "Mitglied"
 
@@ -719,17 +723,12 @@ msgid "Membership requested"
 msgstr "Mitgliedschaft wurde beantragt"
 
 #: .\templates\cosinnus\group\group_list.html.py:80
-#, fuzzy
 msgid "Public group"
 msgstr "Öffentliche Gruppe"
 
 #: .\templates\cosinnus\group\group_list.html.py:82
 msgid "Not a member"
 msgstr "Nicht Mitglied"
-
-#: .\templates\cosinnus\group\group_list.html.py:131
-msgid "Edit group"
-msgstr "Gruppe bearbeiten"
 
 #: .\templates\cosinnus\group\group_list.html.py:156
 #, python-format
@@ -842,11 +841,11 @@ msgstr "Widget nicht gefunden"
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>%(model_name)s konnte nicht gerendert werden!</i>"
 
-#: .\utils\dashboard.py:151
+#: .\utils\dashboard.py:152
 msgid "Group Description"
 msgstr "Gruppenbeschreibung"
 
-#: .\utils\dashboard.py:174
+#: .\utils\dashboard.py:175
 msgid "Network"
 msgstr "Netzwerk"
 
@@ -967,6 +966,9 @@ msgstr "Objekt \"%(title)s\" wurde erfolgreich gelöscht."
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d andere Objekte wurden gelöscht."
 
+#~ msgid "Edit group"
+#~ msgstr "Gruppe bearbeiten"
+
 #
 #~ msgid "Member"
 #~ msgstr "Mitglied"
@@ -976,6 +978,3 @@ msgstr "%(numobjects)d andere Objekte wurden gelöscht."
 
 #~ msgid "You have not uploaded an avatar yet"
 #~ msgstr "Sie haben noch kein Bild hochgeladen"
-
-#~ msgid "User Dashboard"
-#~ msgstr "Benutzer-Dashboard"
