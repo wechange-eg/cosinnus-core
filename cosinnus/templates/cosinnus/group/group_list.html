@@ -119,6 +119,34 @@
 		                </ul>
 		            </button>
 	            {% endif %}
+                
+                {% if user.is_authenticated and user.pk in admins %}
+	                <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:group-edit' group=group.slug %}">
+	                    <ul class="media-list">
+	                        <li class="media">
+	                            <a class="pull-left" href="#">
+	                                <i class="fa fa-pencil"></i>
+	                            </a>
+	                            <div class="media-body">
+	                                {% trans "Edit" %}
+	                            </div>
+	                        </li>
+	                    </ul>
+	                </button>
+                {% endif %}
+                
+                <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:group-detail' group=group.slug %}">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-group"></i>
+                            </a>
+                            <div class="media-body">
+                                {% trans "Group details" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
 	            
 	            
 	        </div><!-- fadedown -->
