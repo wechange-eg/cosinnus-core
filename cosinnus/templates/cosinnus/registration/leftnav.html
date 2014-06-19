@@ -1,9 +1,23 @@
 {% load i18n cosinnus_tags %}
 
+{% comment %} {{current_page}} is one of: login, signup, forgotpassword {% endcomment %}
+
+{% if current_page == "login" %}
+    {% captureas is_login %}True{% endcaptureas %}
+{% elif current_page == "signup" %}
+    {% captureas is_signup %}True{% endcaptureas %}
+{% elif current_page == "forgotpassword" %}
+    {% captureas is_forgotpassword %}True{% endcaptureas %}
+{% endif %}
+
 {% captureas href %}{% url "login" %}{% endcaptureas %}
 {% captureas label %}{% trans "Login" %}{% endcaptureas %}
-{% include "cosinnus/leftnav_button.html" with active=True extra_classes="regular-space" icon="fa-hand-o-right" label=label href=href  %}
+{% include "cosinnus/leftnav_button.html" with active=is_login extra_classes="fine-space" icon="fa-hand-o-right" label=label href=href  %}
+
+{% captureas href %}{% url "cosinnus:user-add" %}{% endcaptureas %}
+{% captureas label %}{% trans "Register" %}{% endcaptureas %}
+{% include "cosinnus/leftnav_button.html" with active=is_signup extra_classes="regular-space" icon="fa-user" label=label href=href  %}
 
 {% captureas href %}{% url "password_change" %}{% endcaptureas %}
 {% captureas label %}{% trans "Passwort vergessen" %}{% endcaptureas %}
-{% include "cosinnus/leftnav_button.html" with icon="fa-question-circle" label=label href=href  %}
+{% include "cosinnus/leftnav_button.html" with active=is_forgotpassword icon="fa-question-circle" label=label href=href  %}
