@@ -1,9 +1,20 @@
-{% extends "cosinnus/base.html" %}
+{% extends "cosinnus/group/group_base.html" %}
 {% load i18n cosinnus_tags %}
 
 {% block page_title %}
-  {% blocktrans with group_name=object.name %}Group “{{ group_name }}”{% endblocktrans %}
+  {% blocktrans with group_name=object.name %}{{ group_name }} - Group details{% endblocktrans %}
 {% endblock %}
+
+{% block leftnav %}
+    {% include "cosinnus/group/leftnav.html"  with current_page="groupdetails" %}
+{% endblock leftnav %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li><a href="{% url 'cosinnus:group-dashboard' group=object.slug %}">{{ object.name }}</a></li>
+        <li class="active">{% trans "Group details" %}</li>
+{% endblock %}
+
 
 {% block content_title %}
   {% blocktrans with group_name=object.name %}

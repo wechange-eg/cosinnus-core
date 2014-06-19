@@ -1,4 +1,4 @@
-{% extends "cosinnus/base.html" %}
+{% extends "cosinnus/group/group_base.html" %}
 {% load i18n cosinnus_tags %}
 
 {% block page_title %}
@@ -20,8 +20,15 @@
 {% endblock leftnav %}
 
 
-{% block override_breadcrumb %}
-{% endblock override_breadcrumb %}
+{% block breadcrumb %}
+        {{ block.super }}
+        {% if object %}
+            <li><a href="{% url 'cosinnus:group-dashboard' group=object.slug %}">{{ object.name }}</a></li>
+            <li class="active">{% trans "Edit Group" %}</li>
+        {% else %}
+            <li class="active">{% trans "Create Group" %}</li>
+        {% endif %}
+{% endblock %}
 
 
 {% block content %}
@@ -35,6 +42,7 @@
 		    
 		    {% include "cosinnus/media_tags.html" %} 
 		    
+		    <button type="submit">Go</button>
 		  </form>
         
     </div>

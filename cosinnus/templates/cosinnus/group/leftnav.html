@@ -1,6 +1,6 @@
 {% load i18n cosinnus_tags %}
 
-{% comment %} {{current_page}} is one of: grouplist, addgroup, editgroup {% endcomment %}
+{% comment %} {{current_page}} is one of: grouplist, addgroup, editgroup, groupdetails {% endcomment %}
 
 {% if current_page == "grouplist" %}
     {% captureas is_grouplist %}True{% endcaptureas %}
@@ -9,7 +9,7 @@
 {% endif %}
 
 {% captureas href %}{% url 'cosinnus:group-list' %}{% endcaptureas %}
-{% captureas label %}{% trans "Groups" %}{% endcaptureas %}
+{% captureas label %}{% trans "Group overview" %}{% endcaptureas %}
 {% include "cosinnus/leftnav_button.html" with active=is_grouplist extra_classes="regular-space" icon="fa-group" label=label href=href  %}
 
 {% if user.is_superuser %}

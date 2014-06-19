@@ -1,4 +1,4 @@
-{% extends "cosinnus/base.html" %}
+{% extends "cosinnus/group/group_base.html" %}
 {% load i18n cosinnus_tags %}
 
 {% block page_title %}{% trans "Groups" %}{% endblock %}
@@ -9,8 +9,9 @@
 {% endblock leftnav %}
 
 
-{% block override_breadcrumb %}
-{% endblock override_breadcrumb %}
+{% block breadcrumb %}
+        {{ block.super }}
+{% endblock %}
 
 
 {% block content %}
@@ -48,7 +49,7 @@
         {% endif %}
         -->
     
-	    {% for group, members, pendings in rows %}
+	    {% for group, members, pendings, admins in rows %}
 	        {#{% if user.is_authenticated and user.is_superuser or user.pk in members or group.public %}#}
 	        {#{% if user.is_authenticated %}#}
 	        {#{% for group in object_list %}#}
@@ -69,12 +70,14 @@
 	                        <div class="media-body">
 	                            {% if user.is_authenticated %}
                                     <span class="annotation">
-		                                {% if user.pk in members %}
-		                                    {% trans "Member" %}
-		                                {% elif user.pk in pendings %}
+		                                {% if user.pk in admins %}
+                                            {% trans "Group Admin" %}
+                                        {% elif user.pk in members %}
+                                            {% trans "Group Member" %}
+                                        {% elif user.pk in pendings %}
                                             {% trans "Membership requested" %}
                                         {% elif group.public %}
-                                            {% trans "Public" %}
+                                            {% trans "Public group" %}
                                         {% else %}
 		                                    {% trans "Not a member" %}
 		                                {% endif %}

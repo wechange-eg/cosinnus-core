@@ -127,10 +127,13 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
         # TODO: get_many for membership and pending and adjust template
         _members = CosinnusGroupMembership.objects.get_members(groups=ctx['object_list'])
         _pendings = CosinnusGroupMembership.objects.get_pendings(groups=ctx['object_list'])
+        _admins = CosinnusGroupMembership.objects.get_admins(groups=ctx['object_list'])
         members = (_members.get(g.pk, []) for g in ctx['object_list'])
         pendings = (_pendings.get(g.pk, []) for g in ctx['object_list'])
+        admins = (_admins.get(g.pk, []) for g in ctx['object_list'])
+        
         ctx.update({
-            'rows': zip(self.object_list, members, pendings),
+            'rows': zip(self.object_list, members, pendings, admins),
         })
         return ctx
 
@@ -268,7 +271,7 @@ class GroupUserLeaveView(GroupConfirmMixin, DetailView):
                 )
                 membership.delete()
             except CosinnusGroupMembership.DoesNotExist:
-                pass
+                print ">>> error!"
         else:
             messages.error(self.request,
                 _('You cannot leave this group. You are the only administrator left.')

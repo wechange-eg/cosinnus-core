@@ -1,0 +1,7 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block breadcrumb %}
+        <li><a href="{% url 'cosinnus:group-list' %}">{% trans "Group overview" %}</a></li>
+{% endblock %}
+
