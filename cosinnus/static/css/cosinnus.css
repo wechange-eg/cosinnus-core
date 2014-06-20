@@ -156,6 +156,12 @@ p {
   color: #333333;
 }
 
+p.transparent {
+  background-color: transparent;
+  padding: 0;
+  margin: -4px 0 8px 0;
+}
+
 textarea {
   width: 100%;
   border-width: 0;
@@ -209,6 +215,19 @@ ul.pagination li.active > a:hover {
   margin: 8px 0 8px 0;
   font-size: 14px;
   padding: 0;
+}
+
+legend {
+  margin-top: 10px;
+  margin-bottom: 0;
+  border-bottom-width: 0;
+}
+
+label {
+  color: #333333;
+  font-weight: normal;
+  margin-top: 5px;
+  margin-bottom: 4px;
 }
 
 /* The Bootstrap buttons already have the classes btn-default, btn-info, btn-warning and so on.

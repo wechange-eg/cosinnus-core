@@ -90,6 +90,11 @@ p {
 	background-color: $app-neutral-color-white;
 	color: $app-neutral-color-dark;
 }
+p.transparent {
+	background-color: transparent;
+	padding: 0;
+	margin: -4px 0 8px 0;
+}
 
 textarea {
 	width: 100%;
@@ -158,3 +163,19 @@ ul.pagination {
 	font-size: 14px;
 	padding: 0;
 }
+
+
+// FIELDSET LEGEND LABEL
+legend {
+	margin-top: 10px;
+	margin-bottom: 0;
+	border-bottom-width: 0;
+}
+
+label {
+	color: $app-neutral-color-dark;
+	font-weight: normal;
+	margin-top: 5px;
+	margin-bottom: 4px;
+}
+
