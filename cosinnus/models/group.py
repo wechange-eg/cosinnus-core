@@ -9,6 +9,7 @@ from django.core.cache import cache
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
+from django.db.models import Q
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy as p_
@@ -200,12 +201,11 @@ class CosinnusGroupManager(models.Manager):
     def get_for_user_pks(self, user):
         """
         :returns: a list of primary keys to :class:`CosinnusGroup` the given
-            user is a member or admin of.
+            user is a member or admin of, and not a pending member!.
         """
-        return self.filter(memberships__user_id=user.pk) \
-                   .filter_membership_status(MEMBER_STATUS) \
-                   .values_list('id', flat=True).distinct()
-
+        return self.filter(Q(memberships__user_id=user.pk) & Q(memberships__status__in=MEMBER_STATUS)) \
+            .values_list('id', flat=True).distinct()
+        
     def public(self):
         """
         :returns: An iterator over all public groups.
