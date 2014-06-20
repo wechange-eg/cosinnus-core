@@ -101,11 +101,13 @@ class GroupDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
         admins = _q._clone().filter(id__in=admin_ids)
         members = _q._clone().filter(id__in=member_ids)
         pendings = _q._clone().filter(id__in=pending_ids)
+        non_members =  _q._clone().exclude(id__in=member_ids)
         
         context.update({
             'admins': admins,
             'members': members,
             'pendings': pendings,
+            'non_members': non_members,
         })
         return context
 

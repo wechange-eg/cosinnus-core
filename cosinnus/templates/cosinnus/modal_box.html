@@ -30,7 +30,10 @@
                     </ul>
                 </button>
                 {% if form_action %}
-                <form action="{{ form_action }}" method="post"class="form-horizontal">{% csrf_token %}
+                <form action="{{ form_action }}" method="post" class="form-horizontal">{% csrf_token %}
+                    {% if form_extra_fields %}
+                        {{ form_extra_fields }}
+                    {% endif %}
                 {% endif %} 
                 <button type="submit" class="btn btn-emphasized">
                     <ul class="media-list">

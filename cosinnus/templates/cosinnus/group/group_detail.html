@@ -16,104 +16,320 @@
 {% endblock %}
 
 
-{% block content_title %}
-  {% blocktrans with group_name=object.name %}
-  Group “{{ group_name }}”
-  {% endblocktrans %}
-  {% if user.is_superuser or user|is_group_admin:object %}
-    <div class="btn-group pull-right">
-      <a href="{% url 'cosinnus:group-edit' group=object.slug %}" class="btn btn-primary">{% trans "Edit" %}</a>
-      <a href="{% url 'cosinnus:group-export' group=object.slug %}" class="btn btn-primary">{% trans "Export" context "the verb" %}</a>
-      {% if user.is_superuser %}
-        <a href="{% url 'cosinnus:group-delete' group=object.slug %}" class="btn btn-primary">{% trans "Delete" %}</a>
-      {% endif %}
-      <div class="btn-group">
-        <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">{% trans "Users" %} <span class="caret"></span></a>
-        <ul class="dropdown-menu pull-right" role="menu">
-          <li><a href="{% url 'cosinnus:group-user-add-generic' group=object.slug %}">{% trans "Add user" %}</a></li>
-        </ul>
-      </div>
-      
-    </div>
-  {% endif %}
-{% endblock content_title %}
-
 {% block content %}
-<div class="row">
-  <div class="col-md-12">
-    {% include 'cosinnus/media_tags_readonly.html' %}
+  
+    <div class="dashboard-header">
+        <div class="dashboard-header-image">
+            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
+        </div>
+        <div class="dashboard-header-text">
+            <div class="multiline-ellipsis">
+                <div class="multiline-ellipsis-prop"></div>
+                <div class="multiline-ellipsis-main">
+
+                    <div class="dashboard-header-link app-main">
+                        <a href="#" title="Not available in this Beta version">
+                            <i class="fa fa-thumbs-o-up"></i>
+                            {% trans "Gruppe abonnieren" %}
+                        </a>
+                    </div>
+                    
+                    <h2>{{ group.name }}</h2>
+                    
+                    {% if group.description and group.description|length > 0 %}
+                        {{ group.description|safe }}
+                    {% else %}
+                        ({% trans "No Group Description set" %})
+                    {% endif %}
+                    
+                    </div>
+                <div class="multiline-ellipsis-realend"><a href="#">....{% trans "more" %}</a></div>
+            </div>
+        </div>
+  
+        {% include 'cosinnus/media_tags_readonly.html' %}
     
-    <h3>{% trans "Admins" %}</h3>
-    <ul class="media-list">
-      {% for admin in admins %}
-        <li class="media">
-          <a class="pull-left" href="{% url 'cosinnus:user-detail' username=admin.get_username %}">
-            {% if admin.cosinnus_profile.avatar %}
-              <img class="avatar" src="{{ admin.cosinnus_profile.avatar.url }}">
-            {% else %}
-              <img class="avatar" src="http://placehold.it/30x30">
+	    {% if user.is_superuser or user|is_group_admin:object %}
+	        <div>
+	            <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:group-edit' group=group.slug %}">
+	                <ul class="media-list">
+	                    <li class="media">
+	                        <a class="pull-left" href="#">
+	                            <i class="fa fa-pencil"></i>
+	                        </a>
+	                        <div class="media-body">
+	                            {% trans "Edit" %}
+	                        </div>
+	                    </li>
+	                </ul>
+	            </button>
+	            {% comment %} href="{% url 'cosinnus:group-delete' group=object.slug %}" {% endcomment %}
+	            <button type="button" class="btn btn-regular" title="In der Beta-Phase nicht möglich.">
+	                <ul class="media-list">
+	                    <li class="media">
+	                        <a class="pull-left" href="#">
+	                            <i class="fa fa-eraser"></i>
+	                        </a>
+	                        <div class="media-body">
+	                            {% trans "Delete Group" %}
+	                        </div>
+	                    </li>
+	                </ul>
+	            </button>
+	            {% comment %} {% url 'cosinnus:group-export' group=object.slug %} {% endcomment %}
+	            {% comment %}  
+	            <button type="button" class="btn btn-regular" title="In der Beta-Phase nicht möglich.">
+	                <ul class="media-list">
+	                    <li class="media">
+	                        <a class="pull-left" href="#">
+	                            <i class="fa fa-eraser"></i>
+	                        </a>
+	                        <div class="media-body">
+	                            {% trans "Export Group" %}
+	                        </div>
+	                    </li>
+	                </ul>
+	            </button>
+	            {% endcomment %}
+	        </div>
+	    {% endif %}
+	    
+    </div> <!-- Dashboard-header ->>
+  
+  
+  
+  
+
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+        
+        {% if user.is_superuser or user|is_group_admin:object %}
+            <form action="{% url 'cosinnus:group-user-add-generic' group=object.slug %}" method="post">{% csrf_token %}
+	            <div type="button" class="btn btn-default w100 large-space">
+	                <ul class="media-list">
+	                    <li class="media">
+	                        <a class="pull-left" href="#">
+	                            <i class="fa fa-user"></i>
+	                        </a>
+	                        <div class="media-body">
+	                            <select name="user" class="user-selector form-control next-button-is-for-sending" placeholder="Placehold">
+	                                <option value="" default disabled selected>{% trans 'Add a user to this group' %}</option>
+	                                {% for candidate in non_members %}
+	                                   <option value="{{ candidate.pk }}">{{ candidate|full_name }}</option>
+	                                {% endfor %}
+	                            </select>
+	                            <input type="hidden" name="status" value="1" />
+	                        </div>
+	                    </li>
+	                </ul>
+	            </div>
+	            <button type="submit" class="btn btn-emphasized large-space" style="display: none;">
+	                <ul class="media-list">
+	                    <li class="media">
+	                        <a class="pull-left" href="#">
+	                            <i class="fa fa-pencil"></i>
+	                        </a>
+	                        <div class="media-body">
+	                            {% trans "Add user" %}
+	                        </div>
+	                    </li>
+	                </ul>
+	            </button>
+            </form>
+        {% endif %}
+
+
+        <h1>{% trans "Group members" %}</h1>
+    
+        {% for member in members %}
+            {#{% if user.is_authenticated and user.is_superuser or user.pk in members or group.public %}#}
+            {#{% if user.is_authenticated %}#}
+            {#{% for group in object_list %}#}
+    {#   {% if user.is_authenticated and user.is_superuser or user.pk in members or group.public %}{% else %}{% endif %}  #}
+            <div class="fadedown regular-space">
+                <div class="btn btn-emphasized w100">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                {% include "cosinnus/user/user_avatar_image.html" with user=member %}
+                            </a>
+                            {% if user.is_superuser or user|is_group_admin:object %}
+                            <a class="pull-right fadedown-clickarea" href="#">
+                                <i class="fa fa-chevron-down"></i>
+                            </a>
+                            {% endif %}
+                            <div class="media-body">
+                                    <span class="annotation">
+                                        {% if member in admins %}
+                                            {% trans "Group Admin" %}
+                                        {% elif member in members %}
+                                            {% trans "Group Member" %}
+                                        {% endif %}
+                                    </span>
+                                <a href="{% url 'cosinnus:user-detail' username=member.username %}">
+                                    {{ member|full_name }}
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                {% if user.is_superuser or user in admins %}
+                    <div>
+	                    {% captureas modal_kick_id %}userModal_kick_{{member.pk}}{% endcaptureas %}
+	                    {% captureas modal_promote_id %}userModal_promote_{{member.pk}}{% endcaptureas %}
+	                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_kick_id}}">
+	                        <ul class="media-list">
+	                            <li class="media">
+	                                <a class="pull-left" href="#">
+	                                    <i class="fa fa-eraser"></i>
+	                                </a>
+	                                <div class="media-body">
+	                                    {% trans "Kick" %}
+	                                </div>
+	                            </li>
+	                        </ul>
+	                    </button>
+	                    
+	                    <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_promote_id}}">
+	                        <ul class="media-list">
+	                            <li class="media">
+	                                <a class="pull-left" href="#">
+	                                    <i class="fa fa-group"></i>
+	                                </a>
+	                                <div class="media-body">
+	                                    {% if member in admins %}
+	                                        {% trans "Make Member" %}
+	                                    {% else %}
+	                                        {% trans "Make Admin" %}
+	                                    {% endif %}
+	                                </div>
+	                            </li>
+	                        </ul>
+	                    </button>
+                    </div>
+                    
+                {% endif %}
+                
+            </div><!-- fadedown -->
+            
+            {% if user.is_superuser or user in admins %}    
+                {% if member in admins %}
+                    {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to demote administrator „{{ name }}“ to member?{% endblocktrans %}{% endcaptureas %}
+                    {% captureas title %}{% trans "Demote Admin" %}{% endcaptureas %}
+                    {% captureas action %}{% url 'cosinnus:group-user-edit' group=object.slug username=member.username %}{% endcaptureas %}
+                    {% captureas extra_fields %}<input type="hidden" name="user" value="{{member.pk}}" /><input type="hidden" name="status" value="1" />{% endcaptureas %}
+                {% else %}
+                    {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to promote member „{{ name }}“ to administrator?{% endblocktrans %}{% endcaptureas %}
+                    {% captureas title %}{% trans "Promote Member" %}{% endcaptureas %}
+                    {% captureas action %}{% url 'cosinnus:group-user-edit' group=object.slug username=member.username %}{% endcaptureas %}
+                    {% captureas extra_fields %}<input type="hidden" name="user" value="{{member.pk}}" /><input type="hidden" name="status" value="2" />{% endcaptureas %}
+                {% endif %}
+                {% include "cosinnus/modal_box.html" with id=modal_promote_id label=label title=title form_action=action form_extra_fields=extra_fields %}
+                
+                {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to remove member „{{ name }}“ from the Group?{% endblocktrans %}{% endcaptureas %}
+                {% captureas title %}{% trans "Remove Member" %}{% endcaptureas %}
+                {% captureas action %}{% url 'cosinnus:group-user-delete' group=object.slug username=member.username %}{% endcaptureas %}
+                {% include "cosinnus/modal_box.html" with id=modal_kick_id label=label title=title form_action=action %}
+                
             {% endif %}
-          </a>
-          <div class="media-body">
-            <a class="pull-left" href="{% url 'cosinnus:user-detail' username=admin.get_username %}">{{ admin.get_full_name|default:admin.get_username }}</a>
-            <div class="btn-group btn-group-xs">
-              <a href="{% url 'cosinnus:group-user-edit' group=object.slug username=admin.get_username %}" class="btn btn-default">{% trans "Change" %}</a>
-              <a href="{% url 'cosinnus:group-user-delete' group=object.slug username=admin.get_username %}" class="btn btn-default">{% trans "Delete" %}</a>
-            </div>
-          </div>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <h3>{% trans "Members" %}</h3>
-    <ul class="media-list">
-      {% for member in members %}
-        <li class="media">
-          <a class="pull-left" href="{% url 'cosinnus:user-detail' username=member.get_username %}">
-            {% if member.cosinnus_profile.avatar %}
-              <img class="avatar" src="{{ member.cosinnus_profile.avatar.url }}">
-            {% else %}
-              <img class="avatar" src="http://placehold.it/30x30">
-            {% endif %}
-          </a>
-          <div class="media-body">
-            <a class="pull-left" href="{% url 'cosinnus:user-detail' username=member.get_username %}">{{ member.get_full_name|default:member.get_username }}</a>
-            <div class="btn-group btn-group-xs">
-              <a href="{% url 'cosinnus:group-user-edit' group=object.slug username=member.get_username %}" class="btn btn-default">{% trans "Change" %}</a>
-              <a href="{% url 'cosinnus:group-user-delete' group=object.slug username=member.get_username %}" class="btn btn-default">{% trans "Delete" %}</a>
-            </div>
-          </div>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <h3>{% trans "Pending users" %}</h3>
-    <ul class="media-list">
-      {% for pending in pendings %}
-        <li class="media">
-          <a class="pull-left" href="{% url 'cosinnus:user-detail' username=pending.get_username %}">
-            {% if pending.cosinnus_profile.avatar %}
-              <img class="avatar" src="{{ pending.cosinnus_profile.avatar.url }}">
-            {% else %}
-              <img class="avatar" src="http://placehold.it/30x30">
-            {% endif %}
-          </a>
-          <div class="media-body">
-            <a class="pull-left" href="{% url 'cosinnus:user-detail' username=pending.get_username %}">{{ pending.get_full_name|default:pending.get_username }}</a>
-            <div class="btn-group btn-group-xs">
-              <a href="{% url 'cosinnus:group-user-add' group=object.slug username=pending.get_username %}" class="btn btn-default">{% trans "Add" %}</a>
-              <a href="{% url 'cosinnus:group-user-delete' group=object.slug username=pending.get_username %}" class="btn btn-default">{% trans "Delete" %}</a>
-            </div>
-          </div>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
-</div>
+            
+        {% endfor %}
+        
+        
+        {% if user.is_superuser or user in admins or user in pendings %}
+            
+            <h1>{% trans "Membership requests" %}</h1>
+            
+	        {% for member in pendings %}
+	           
+	           {% comment %} In public groups, we enable the logged in user to see himself as pending user {% endcomment %}
+	           {% if not user in pendings or user == member %}
+		            <div class="fadedown regular-space">
+		                <div class="btn btn-default w100">
+		                    <ul class="media-list">
+		                        <li class="media">
+		                            <a class="pull-left" href="#">
+		                                {% include "cosinnus/user/user_avatar_image.html" with user=member %}
+		                            </a>
+		                            {% if user.is_superuser or user|is_group_admin:object %}
+		                            <a class="pull-right fadedown-clickarea" href="#">
+		                                <i class="fa fa-chevron-down"></i>
+		                            </a>
+		                            {% endif %}
+		                            <div class="media-body">
+		                                    <span class="annotation">
+	                                            {% trans "Membership requested" %}
+		                                    </span>
+		                                <a href="{% url 'cosinnus:user-detail' username=member.username %}">
+		                                    {{ member|full_name }}
+		                                </a>
+		                            </div>
+		                        </li>
+		                    </ul>
+		                </div>
+		                
+		                {% if user.is_superuser or user in admins %}
+		                    <div>
+		                        {% captureas modal_kick_id %}userModal_kick_{{member.pk}}{% endcaptureas %}
+		                        {% captureas modal_promote_id %}userModal_promote_{{member.pk}}{% endcaptureas %}
+		                        <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_kick_id}}">
+		                            <ul class="media-list">
+		                                <li class="media">
+		                                    <a class="pull-left" href="#">
+		                                        <i class="fa fa-eraser"></i>
+		                                    </a>
+		                                    <div class="media-body">
+		                                        {% trans "Decline User" %}
+		                                    </div>
+		                                </li>
+		                            </ul>
+		                        </button>
+		                        
+		                        <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_promote_id}}">
+		                            <ul class="media-list">
+		                                <li class="media">
+		                                    <a class="pull-left" href="#">
+		                                        <i class="fa fa-group"></i>
+		                                    </a>
+		                                    <div class="media-body">
+	                                            {% trans "Accept User" %}
+		                                    </div>
+		                                </li>
+		                            </ul>
+		                        </button>
+		                    </div>
+		                    
+		                {% endif %}
+		                
+		            </div><!-- fadedown -->
+		            
+		            {% if user.is_superuser or user in admins %}    
+	                    {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to accept user „{{ name }}“ as a member?{% endblocktrans %}{% endcaptureas %}
+	                    {% captureas title %}{% trans "Accept Member" %}{% endcaptureas %}
+	                    {% captureas action %}{% url 'cosinnus:group-user-edit' group=object.slug username=member.username %}{% endcaptureas %}
+	                    {% captureas extra_fields %}<input type="hidden" name="user" value="{{member.pk}}" /><input type="hidden" name="status" value="1" />{% endcaptureas %}
+		                {% include "cosinnus/modal_box.html" with id=modal_promote_id label=label title=title form_action=action form_extra_fields=extra_fields %}
+		                
+		                {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to decline member „{{ name }}“?{% endblocktrans %}{% endcaptureas %}
+		                {% captureas title %}{% trans "Decline Member" %}{% endcaptureas %}
+		                {% captureas action %}{% url 'cosinnus:group-user-delete' group=object.slug username=member.username %}{% endcaptureas %}
+		                {% include "cosinnus/modal_box.html" with id=modal_kick_id label=label title=title form_action=action %}
+		                
+		            {% endif %}
+	            
+	            {% endif %}
+	            
+	        {% empty %}
+	            <p>{% trans "There are no new membership requests." %}</p>
+	        {% endfor %}
+            
+        
+        {% endif %}
+        
+    </div>
+
+  
+  
+  
 {% endblock %}
