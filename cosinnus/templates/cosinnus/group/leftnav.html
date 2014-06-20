@@ -9,11 +9,11 @@
 {% endif %}
 
 {% captureas href %}{% url 'cosinnus:group-list' %}{% endcaptureas %}
-{% captureas label %}{% trans "Group overview" %}{% endcaptureas %}
+{% captureas label %}{% trans "All groups" %}{% endcaptureas %}
 {% include "cosinnus/leftnav_button.html" with active=is_grouplist extra_classes="regular-space" icon="fa-group" label=label href=href  %}
 
 {% if user.is_superuser %}
     {% captureas href %}{% url 'cosinnus:group-add' %}{% endcaptureas %}
     {% captureas label %}{% trans "Create Group" %}{% endcaptureas %}
-    {% include "cosinnus/leftnav_button.html" with active=is_addgroup extra_classes="regular-space" icon="fa-group" label=label href=href  %}
+    {% include "cosinnus/leftnav_button.html" with active=is_addgroup extra_classes="regular-space" icon="fa-plus" label=label href=href  %}
 {% endif %}
