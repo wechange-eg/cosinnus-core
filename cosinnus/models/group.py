@@ -263,7 +263,7 @@ class CosinnusGroupMembershipManager(models.Manager):
     def get_members(self, group=None, groups=None):
         """
         Given either a group or a list of groups, this function returns all
-        members with the :data:`MEMBERSHIP_MEMBER` role.
+        members with the :data:`MEMBERSHIP_MEMBER` OR `MEMBERSHIP_ADMIN` role.
         """
         assert (group is None) ^ (groups is None)
         if group:

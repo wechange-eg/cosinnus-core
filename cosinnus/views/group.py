@@ -98,11 +98,14 @@ class GroupDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
         pending_ids = CosinnusGroupMembership.objects.get_pendings(group=self.group)
         _q = get_user_model()._default_manager.order_by('first_name', 'last_name') \
                              .select_related('cosinnus_profile')
-
+        admins = _q._clone().filter(id__in=admin_ids)
+        members = _q._clone().filter(id__in=member_ids)
+        pendings = _q._clone().filter(id__in=pending_ids)
+        
         context.update({
-            'admins': _q._clone().filter(id__in=admin_ids),
-            'members': _q._clone().filter(id__in=member_ids),
-            'pendings': _q._clone().filter(id__in=pending_ids),
+            'admins': admins,
+            'members': members,
+            'pendings': pendings,
         })
         return context
 
