@@ -28,7 +28,7 @@ class GroupKwargModelFormMixin(object):
 class _CosinnusGroupForm(forms.ModelForm):
 
     class Meta:
-        fields = ('name', 'public', 'description')
+        fields = ('name', 'public', 'description', 'avatar')
         model = CosinnusGroup
 
 

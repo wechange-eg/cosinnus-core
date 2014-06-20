@@ -38,7 +38,8 @@
 		    {% csrf_token %}
 		    Name: {{ form.forms.obj.name }}
 		    Public: {{ form.forms.obj.public }}
-		    Description: {{ form.forms.obj.description }}  
+		    Description: {{ form.forms.obj.description }} 
+            Avatar: {{ form.forms.obj.avatar }}
 		    
 		    {% include "cosinnus/media_tags.html" %} 
 		    
