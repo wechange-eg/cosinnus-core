@@ -59,6 +59,7 @@ setup(
         'Pillow>=2.1.0',
         'South>=0.7',
         'django-appconf>=0.6',
+        'django-awesome-avatar==1.1.3',
         'django-bootstrap3',
         'django-bootstrap3-datetimepicker>=2.2.0',
         'django-multiform',

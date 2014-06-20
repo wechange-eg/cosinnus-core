@@ -71,13 +71,14 @@
 		                <div class="row">
 		                    {{ form.forms.obj.avatar.errors }}
 		                    
+		                    {% comment %}   
 		                    <div class="col-sm-4 regular-space">
 		                        {% include "cosinnus/group/group_avatar_image.html" with group=group %}
 		                    </div>
 		
-		
 		                    <div class="col-sm-8 regular-space">
 		
+                             {% endcomment %}
 		                        <div type="button" class="btn btn-default w100 regular-space">
 		                            <ul class="media-list">
 		                                <li class="media">
@@ -105,7 +106,7 @@
 		                                </li>
 		                            </ul>
 		                        </button>
-		                    </div><!-- col -->
+		                    <!--</div> col -->
 		                </div><!-- row -->
 		            </div><!-- col -->
 		

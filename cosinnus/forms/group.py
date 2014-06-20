@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django import forms
-
+from awesome_avatar import forms as avatar_forms
 from multiform import InvalidArgument
 
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
@@ -26,7 +26,8 @@ class GroupKwargModelFormMixin(object):
 
 
 class _CosinnusGroupForm(forms.ModelForm):
-
+    avatar = avatar_forms.AvatarField()
+    
     class Meta:
         fields = ('name', 'public', 'description', 'avatar')
         model = CosinnusGroup
