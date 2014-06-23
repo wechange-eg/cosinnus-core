@@ -24,7 +24,7 @@ class UserProfileObjectMixin(SingleObjectMixin):
 
 
 class UserProfileDetailView(UserProfileObjectMixin, DetailView):
-    template_name = 'cosinnus/userprofile_detail.html'
+    template_name = 'cosinnus/user/userprofile_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super(UserProfileDetailView, self).get_context_data(**kwargs)
@@ -37,7 +37,7 @@ detail_view = UserProfileDetailView.as_view()
 
 class UserProfileUpdateView(UserProfileObjectMixin, UpdateView):
     form_class = UserProfileForm
-    template_name = 'cosinnus/userprofile_form.html'
+    template_name = 'cosinnus/user/userprofile_form.html'
 
     def get_success_url(self):
         return reverse('cosinnus:profile-detail')
