@@ -735,7 +735,7 @@ msgstr "Mitglied entfernen"
 
 #: .\templates\cosinnus\group\group_detail.html.py:245
 msgid "Membership requests"
-msgstr "Mitgliedschaft wurde beantragt"
+msgstr "Mitgliedsanträge"
 
 #: .\templates\cosinnus\group\group_detail.html.py:266
 #: .\templates\cosinnus\group\group_list.html.py:78
