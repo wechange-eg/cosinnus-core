@@ -112,7 +112,8 @@
 	                            <i class="fa fa-user"></i>
 	                        </a>
 	                        <div class="media-body">
-	                            <select name="user" class="user-selector form-control next-button-is-for-sending" placeholder="Placehold">
+	                            <select name="user" class="user-selector form-control next-button-is-for-sending" data-placeholder="Placehold">
+	                                <option></option>
 	                                <option value="" default disabled selected>{% trans 'Add a user to this group' %}</option>
 	                                {% for candidate in non_members %}
 	                                   <option value="{{ candidate.pk }}">{{ candidate|full_name }}</option>
@@ -139,7 +140,7 @@
         {% endif %}
 
 
-        <h1>{% trans "Group members" %}</h1>
+        <legend>{% trans "Group members" %}</legend>
     
         {% for member in members %}
             {#{% if user.is_authenticated and user.is_superuser or user.pk in members or group.public %}#}
@@ -239,7 +240,7 @@
         
         {% if user.is_superuser or user in admins or user in pendings %}
             
-            <h1>{% trans "Membership requests" %}</h1>
+            <legend>{% trans "Membership requests" %}</legend>
             
 	        {% for member in pendings %}
 	           
