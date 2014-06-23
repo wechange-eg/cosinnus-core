@@ -65,57 +65,54 @@
 		
 		        <!-- On large screens the long explanation texts are on the right side next to the input elements -->
 		        <div class="row">
-		            <div class="col-md-8">
-		
-		                <!-- image left, inputs right -->
-		                <div class="row">
-		                    {{ form.forms.obj.avatar.errors }}
-		                    
-		                    {% comment %}    
-		                    <div class="col-sm-4 regular-space">
-		                        {% include "cosinnus/group/group_avatar_image.html" with group=group %}
-		                    </div>
-		
-                             {% endcomment %}
-                             
-		                    <div class="col-sm-12 regular-space">
-		                        
-		                        <div id="id_avatar-preview" class="awesome-avatar-preview" style="width:120px;height:120px">
-				                    {% include "cosinnus/group/group_avatar_image.html" with group=object %}
-				                </div>
-		                        
-		                        <div type="button" class="btn btn-default w100 regular-space">
-		                            <ul class="media-list">
-		                                <li class="media">
-		                                    <a class="pull-left" href="#">
-		                                        <i class="fa fa-file-image-o"></i>
-		                                    </a>
-		                                    <div class="media-body">
-		                                        {{ form.forms.obj.avatar }}
-		                                    </div>
-		                                </li>
-		                            </ul>
-		                        </div>
-		                        
-                                    
-                                    <div type="button" class="btn btn-default w100">
-                                        <ul class="media-list">
-                                            <li class="media">
-                                                <a class="pull-left" href="#">
-						                            <i id="avatar_clear_checkbox" class="fa fa-square-o"></i>
-						                            <input type="hidden" name="avatar_clear" >
-						                        </a>
-                                                <div class="media-body">
-                                                    <a href="#" onclick="$('#avatar_clear_checkbox').click();">Löschen</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-		
-		                    </div> <!-- col -->
-		                </div><!-- row -->
-		            </div><!-- col -->
-		
+		        
+                    <div class="col-md-8">
+
+                        <!-- image left, inputs right -->
+                        <div class="row">
+                            
+                            {{ form.forms.obj.avatar.errors }}
+                        
+                            <div class="col-sm-4 regular-space">
+                                {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.width}}px;height:{{SETTINGS.AWESOME_AVATAR.height}}px{% endcaptureas %}
+                                <div id="id_avatar-preview" class="awesome-avatar-preview" style="{{ preview_style }}">
+                                    {% include "cosinnus/group/group_avatar_image.html" with group=object extra_style=preview_style %}
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-8 regular-space">
+
+                                <div type="button" class="btn btn-default w100 regular-space">
+                                    <ul class="media-list">
+                                        <li class="media">
+                                            <a class="pull-left" href="#">
+                                                <i class="fa fa-file-image-o"></i>
+                                            </a>
+                                            <div class="media-body">
+                                                {{ form.forms.obj.avatar }}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div type="button" class="btn btn-default w100">
+                                    <ul class="media-list">
+                                        <li class="media">
+                                            <a class="pull-left" href="#">
+                                                <i id="avatar_clear_checkbox" class="fa fa-square-o"></i>
+                                                <input type="hidden" name="avatar_clear" >
+                                            </a>
+                                            <div class="media-body">
+                                                <a href="#" onclick="$('#avatar_clear_checkbox').click();">Löschen</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div><!-- col -->
+                        </div><!-- row -->
+                    </div><!-- col -->
+		        
 		            <!-- explanation text -->
 		            <div class="col-md-4">
 		                <p class="transparent">Ein Bild hilft, dich in vielen Programmen schnell zu erkennen.</p>
