@@ -59,7 +59,7 @@ setup(
         'Pillow>=2.1.0',
         'South>=0.7',
         'django-appconf>=0.6',
-        'django-awesome-avatar==1.1.3',
+        'django-awesome-avatar',
         'django-bootstrap3',
         'django-bootstrap3-datetimepicker>=2.2.0',
         'django-multiform',
@@ -73,6 +73,7 @@ setup(
         'git+git://github.com/Markush2010/django-bootstrap3.git@develop#egg=django-bootstrap3',
         'git+http://git.sinnwerkstatt.com/mh/django-multiform.git@master#egg=django-multiform',
         'git+git://github.com/sinnwerkstatt/django-select2.git@master#egg=Django-Select2',
+        'git+git://github.com/sinnwerkstatt/django-awesome-avatar.git@master#egg=django-awesome-avatar'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',

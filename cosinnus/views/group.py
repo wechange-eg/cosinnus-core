@@ -26,9 +26,10 @@ from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
 from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin
 from cosinnus.views.mixins.user import UserFormKwargsMixin
 
-from awesome_avatar.fields import AvatarField
+from cosinnus.views.mixins.avatar import AvatarFormMixin
 
-class GroupCreateView(AjaxableFormMixin, UserFormKwargsMixin, CreateView):
+class GroupCreateView(AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin, 
+                      CreateView):
 
     form_class = CosinnusGroupForm
     model = CosinnusGroup
@@ -147,7 +148,7 @@ group_list = GroupListView.as_view()
 group_list_api = GroupListView.as_view(is_ajax_request_url=True)
 
 
-class GroupUpdateView(AjaxableFormMixin, UserFormKwargsMixin,
+class GroupUpdateView(AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
                       RequireAdminMixin, UpdateView):
 
     form_class = CosinnusGroupForm
@@ -161,13 +162,6 @@ class GroupUpdateView(AjaxableFormMixin, UserFormKwargsMixin,
         context = super(GroupUpdateView, self).get_context_data(**kwargs)
         context['submit_label'] = _('Save')
         return context
-    
-    def form_valid(self, form):
-        avatar_field = AvatarField()
-        avatar_field.name = 'avatar'
-        avatar_field.save_form_data(self.object, form.cleaned_data['obj']['avatar'])
-        ret = super(GroupUpdateView, self).form_valid(form)
-        return ret
     
     def get_form_kwargs(self):
         kwargs = super(GroupUpdateView, self).get_form_kwargs()
