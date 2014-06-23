@@ -99,12 +99,17 @@ p.transparent {
 textarea {
 	width: 100%;
 	border-width: 0;
-	padding: 8px;
 	margin: 0;
 	background-color: $app-neutral-color-white;
 	color: $app-neutral-color-dark;
 	resize: vertical;
 	height: 10em;
+
+	&.form-control {
+		padding: 8px;
+		line-height: 1.4em;
+		height: 10em;
+	}
 }
 
 

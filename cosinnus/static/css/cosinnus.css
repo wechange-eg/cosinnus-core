@@ -165,11 +165,15 @@ p.transparent {
 textarea {
   width: 100%;
   border-width: 0;
-  padding: 8px;
   margin: 0;
   background-color: white;
   color: #333333;
   resize: vertical;
+  height: 10em;
+}
+textarea.form-control {
+  padding: 8px;
+  line-height: 1.4em;
   height: 10em;
 }
 
