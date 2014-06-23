@@ -79,7 +79,11 @@
                              {% endcomment %}
                              
 		                    <div class="col-sm-12 regular-space">
-		
+		                        
+		                        <div id="id_avatar-preview" class="awesome-avatar-preview" style="width:120px;height:120px">
+				                    {% include "cosinnus/group/group_avatar_image.html" with group=object %}
+				                </div>
+		                        
 		                        <div type="button" class="btn btn-default w100 regular-space">
 		                            <ul class="media-list">
 		                                <li class="media">
@@ -98,13 +102,11 @@
                                         <ul class="media-list">
                                             <li class="media">
                                                 <a class="pull-left" href="#">
-                                                    <i class="fa fa-eraser"></i>
-                                                </a>
+						                            <i id="avatar_clear_checkbox" class="fa fa-square-o"></i>
+						                            <input type="hidden" name="avatar_clear" >
+						                        </a>
                                                 <div class="media-body">
-                                                    <a href="#">
-                                                        <input id="avatar-clear_id" name="avatar_clear" type="checkbox">
-                                                        <label for="avatar-clear_id">Zurücksetzen</label>
-                                                    </a>
+                                                    <a href="#" onclick="$('#avatar_clear_checkbox').click();">Löschen</a>
                                                 </div>
                                             </li>
                                         </ul>

@@ -1,6 +1,6 @@
 {% load static thumbnail %}
 
-{% if group.avatar %}
+{% if group and group.avatar %}
     <img src="{% thumbnail group.avatar 200x200 crop=1 upscale=1 %}" />
 {% else %}
     <img src="{% static 'images/group-avatar-placeholder.png' %}" title="{{ group.name }}"></img>

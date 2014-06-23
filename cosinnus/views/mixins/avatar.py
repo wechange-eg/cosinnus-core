@@ -11,7 +11,7 @@ class AvatarFormMixin(object):
     avatar_field_name = 'avatar'
     
     def form_valid(self, form):
-        if form.data.get(self.avatar_field_name+'_clear'):
+        if form.data.get(self.avatar_field_name+'_clear', 'false') != "false":
             setattr(form.instance, 'avatar', None)
         elif self.avatar_field_name+'-ratio' in form.data and form.data[self.avatar_field_name+'-ratio']:
             avatar_field = AvatarField()
