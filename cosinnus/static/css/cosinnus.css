@@ -1,6 +1,21 @@
 body {
   font-family: Verdana, Geneva, sans-serif;
-  background-image: url("../images/background.jpg");
+  background: #43757e;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #43757e 0%, #a6bab7 100%) fixed;
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #43757e), color-stop(100%, #a6bab7)) fixed;
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #43757e 0%, #a6bab7 100%) fixed;
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #43757e 0%, #a6bab7 100%) fixed;
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #43757e 0%, #a6bab7 100%) fixed;
+  /* IE10+ */
+  background: linear-gradient(to bottom, #43757e 0%, #a6bab7 100%) fixed;
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#43757e', endColorstr='#a6bab7',GradientType=0 ) fixed;
+  /* IE6-9 */
 }
 
 	/* http://www.mobify.com/blog/multiline-ellipsis-in-pure-css/
@@ -161,6 +176,10 @@ p.transparent {
   padding: 0;
   margin: -4px 0 8px 0;
 }
+p.transparent a {
+  color: #333333;
+  text-decoration: underline;
+}
 
 textarea {
   width: 100%;
@@ -223,14 +242,16 @@ ul.pagination li.active > a:hover {
 
 legend {
   margin-top: 10px;
-  margin-bottom: 0;
+  margin-bottom: 3px;
   border-bottom-width: 0;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 label {
   color: #333333;
   font-weight: normal;
-  margin-top: 5px;
+  margin-top: 4px;
   margin-bottom: 4px;
 }
 
@@ -269,6 +290,7 @@ label {
 
 .btn-default .media > .media-body {
   background-color: white;
+  color: #333333;
 }
 
 .btn-default .media > .media-body a {
@@ -829,6 +851,48 @@ a.pull-left {
 }
 .btn.btn-white a {
   color: #333333;
+}
+
+.btn-headline {
+  width: 100%;
+  float: none;
+  margin: 0;
+}
+.btn-headline .media > a.pull-left:first-child:empty {
+  width: 10px;
+}
+.btn-headline .media > a.pull-left:not(:first-child) {
+  background-color: transparent;
+}
+.btn-headline .media > a.pull-left {
+  height: 50px;
+  width: 50px;
+  font-size: 28px;
+  line-height: 48px;
+}
+.btn-headline .media > a.pull-left img {
+  width: 50px;
+}
+.btn-headline .media {
+  height: 50px;
+}
+.btn-headline .media-body {
+  text-align: left;
+  font-size: 15px;
+  line-height: 1em;
+  min-height: 0;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -mou-transform: translateY(-50%);
+}
+.btn-headline .media-body .group-annotation {
+  line-height: 1.5em;
+}
+.btn-headline .media-body .annotation {
+  font-size: 12px;
 }
 
 /* Classes that can be found in many pages and are not part of Twitter Bootstrap */
@@ -1925,47 +1989,6 @@ div.dashboard-appwidget:after {
 
 div.dashboard-appwidget:last-child {
   margin-bottom: 0;
-}
-
-.btn.dashboard-appwidget-headline {
-  width: 100%;
-  float: none;
-  margin: 0;
-}
-.btn.dashboard-appwidget-headline .media > a.pull-left:first-child:empty {
-  width: 10px;
-}
-.btn.dashboard-appwidget-headline .media > a.pull-left:not(:first-child) {
-  background-color: transparent;
-}
-.btn.dashboard-appwidget-headline .media > a.pull-left {
-  height: 50px;
-  width: 50px;
-  font-size: 28px;
-}
-.btn.dashboard-appwidget-headline .media > a.pull-left img {
-  width: 50px;
-}
-.btn.dashboard-appwidget-headline .media {
-  height: 50px;
-}
-.btn.dashboard-appwidget-headline .media-body {
-  text-align: left;
-  font-size: 15px;
-  line-height: 1em;
-  min-height: 0;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  -mou-transform: translateY(-50%);
-}
-.btn.dashboard-appwidget-headline .media-body .group-annotation {
-  line-height: 1.5em;
-}
-.btn.dashboard-appwidget-headline .media-body .annotation {
-  font-size: 12px;
 }
 
 .btn.dashboard-appwidget-contentline,

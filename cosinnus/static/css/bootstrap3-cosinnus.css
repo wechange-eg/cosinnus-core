@@ -1,6 +1,21 @@
 body {
   font-family: Verdana, Geneva, sans-serif;
-  background-image: url("../images/background.jpg");
+  background: #43757e;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #43757e 0%, #a6bab7 100%) fixed;
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #43757e), color-stop(100%, #a6bab7)) fixed;
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #43757e 0%, #a6bab7 100%) fixed;
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #43757e 0%, #a6bab7 100%) fixed;
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #43757e 0%, #a6bab7 100%) fixed;
+  /* IE10+ */
+  background: linear-gradient(to bottom, #43757e 0%, #a6bab7 100%) fixed;
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#43757e', endColorstr='#a6bab7',GradientType=0 ) fixed;
+  /* IE6-9 */
 }
 
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */

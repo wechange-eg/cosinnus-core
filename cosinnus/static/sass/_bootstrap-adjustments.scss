@@ -94,6 +94,11 @@ p.transparent {
 	background-color: transparent;
 	padding: 0;
 	margin: -4px 0 8px 0;
+
+	a {
+		color: $app-neutral-color-dark;
+		text-decoration: underline;
+	}
 }
 
 textarea {
@@ -173,14 +178,16 @@ ul.pagination {
 // FIELDSET LEGEND LABEL
 legend {
 	margin-top: 10px;
-	margin-bottom: 0;
+	margin-bottom: 3px;
 	border-bottom-width: 0;
+	font-size: 15px;
+	font-weight: bold;
 }
 
 label {
 	color: $app-neutral-color-dark;
 	font-weight: normal;
-	margin-top: 5px;
+	margin-top: 4px;
 	margin-bottom: 4px;
 }
 

@@ -8,55 +8,6 @@ div.dashboard-appwidget:last-child {
 	margin-bottom: 0;
 }
 
-.btn.dashboard-appwidget-headline {
-	width: 100%;
-	float: none;
-	margin:0;
-
-	.media > a.pull-left:first-child:empty {
-		width: 10px;
-	}
-	.media > a.pull-left:not(:first-child) {
-		background-color: transparent;
-	}
-	.media > a.pull-left {
-		height: 50px;
-		width: 50px;
-		font-size: 28px;
-
-		img {
-			width: 50px;
-		}
-	}
-
-	.media {
-		height: 50px;
-	}
-
-	.media-body {
-		text-align: left;
-		font-size: 15px;
-		line-height: 1em;
-
-		min-height: 0;
-		position: relative;
-		top: 50%;
-		transform: translateY(-50%);
-		-ms-transform: translateY(-50%);
-		-webkit-transform: translateY(-50%);
-		-mou-transform: translateY(-50%);
-
-		.group-annotation {
-			line-height: 1.5em;
-		}
-
-		.annotation {
-			font-size: 12px;
-		}
-	}
-
-}
-
 .btn.dashboard-appwidget-contentline,
 .btn.dashboard-appwidget-contentline-indented,
 .btn.dashboard-appwidget-contentline-extra-indented {
