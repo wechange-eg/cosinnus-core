@@ -72,7 +72,7 @@ class BaseUserProfile(models.Model):
 
     objects = BaseUserProfileManager()
 
-    SKIP_FIELDS = ('id', 'user',)
+    SKIP_FIELDS = ('id', 'user', 'media_tag',)
 
     class Meta:
         abstract = True
@@ -125,13 +125,15 @@ class BaseUserProfile(models.Model):
 
 
 class UserProfile(BaseUserProfile):
-
-    avatar = models.ImageField(_("Avatar"), null=True, blank=True,
-        upload_to=get_avatar_filename)
-
+    
     class Meta:
         app_label = 'cosinnus'
         swappable = 'COSINNUS_USER_PROFILE_MODEL'
+    
+    media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
+        blank=True, null=True, editable=False, on_delete=models.PROTECT)
+    avatar = models.ImageField(_("Avatar"), null=True, blank=True,
+        upload_to=get_avatar_filename)
 
     @property
     def avatar_url(self):
@@ -158,6 +160,12 @@ class UserProfile(BaseUserProfile):
     def get_avatar_thumbnail_url(self, size=(80, 80)):
         tn = self.get_avatar_thumbnail(size)
         return tn.url if tn else None
+    
+    def media_tag_object(self):
+        key = '_media_tag_cache'
+        if not hasattr(self, key):
+            setattr(self, key, self.media_tag)
+        return getattr(self, key)
 
 
 def get_user_profile_model():
