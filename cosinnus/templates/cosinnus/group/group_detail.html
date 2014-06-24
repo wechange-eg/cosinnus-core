@@ -18,6 +18,8 @@
 
 {% block content %}
   
+    {% comment %}
+  
     <div class="dashboard-header">
         <div class="dashboard-header-image">
             {% include "cosinnus/group/group_avatar_image.html" with group=group %}
@@ -63,7 +65,7 @@
 	                    </li>
 	                </ul>
 	            </button>
-	            {% comment %} href="{% url 'cosinnus:group-delete' group=object.slug %}" {% endcomment %}
+	            <!-- href="{% url 'cosinnus:group-delete' group=object.slug %}" -->
 	            <button type="button" class="btn btn-regular" title="In der Beta-Phase nicht möglich.">
 	                <ul class="media-list">
 	                    <li class="media">
@@ -76,8 +78,8 @@
 	                    </li>
 	                </ul>
 	            </button>
-	            {% comment %} {% url 'cosinnus:group-export' group=object.slug %} {% endcomment %}
-	            {% comment %}  
+	            <!-- {% url 'cosinnus:group-export' group=object.slug %} 
+	             
 	            <button type="button" class="btn btn-regular" title="In der Beta-Phase nicht möglich.">
 	                <ul class="media-list">
 	                    <li class="media">
@@ -90,11 +92,13 @@
 	                    </li>
 	                </ul>
 	            </button>
-	            {% endcomment %}
+	            -->
 	        </div>
 	    {% endif %}
 	    
     </div> <!-- Dashboard-header ->>
+  
+  {% endcomment %}
   
   
   
