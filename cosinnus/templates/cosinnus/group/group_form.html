@@ -13,10 +13,11 @@
 {% block leftnav %}
     {% if object %}
         {% captureas current_page %}editgroup{% endcaptureas %}
+        {% include "cosinnus/group/leftnav_group.html"  with current_page=current_page %}
     {% else %}
         {% captureas current_page %}addgroup{% endcaptureas %}
+        {% include "cosinnus/group/leftnav_all_groups.html"  with current_page=current_page %}
     {% endif %}
-    {% include "cosinnus/group/leftnav.html"  with current_page=current_page %}
 {% endblock leftnav %}
 
 
