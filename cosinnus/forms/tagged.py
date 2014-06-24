@@ -65,7 +65,7 @@ class BaseTaggableObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
             self.fields['tags'].choices = self.instance.tags.values_list('id', 'name').all()
             self.initial['tags'] = self.instance.tags.values_list('id', flat=True).all()
             
-def get_form(TaggableObjectFormClass, attachable=True):
+def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
     """
     Factory function that creates a class of type
     class:`multiform.MultiModelForm` with the given TaggableObjectFormClass
@@ -118,7 +118,7 @@ def get_form(TaggableObjectFormClass, attachable=True):
             self.forms['obj'].instance = value
 
         def dispatch_init_instance(self, name, instance):
-            if name == 'obj':
+            if name != 'media_tag':
                 return instance
             return super(TaggableObjectForm, self).dispatch_init_instance(name, instance)
 
@@ -136,5 +136,9 @@ def get_form(TaggableObjectFormClass, attachable=True):
             @property
             def save_attachable(self):
                 return self.forms['obj'].save_attachable
+    
+    # attach any extra form classes
+    for form_name, form_class in extra_forms.items():
+        TaggableObjectForm.base_forms[form_name] = form_class
 
     return TaggableObjectForm
