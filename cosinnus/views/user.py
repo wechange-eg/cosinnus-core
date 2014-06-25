@@ -61,7 +61,7 @@ class UserDetailView(DetailView):
     model = USER_MODEL
     slug_field = 'username'
     slug_url_kwarg = 'username'
-    template_name = 'cosinnus/user/user_detail.html'
+    template_name = 'cosinnus/user/userprofile_detail.html'
 
     @method_decorator(staff_required)
     def dispatch(self, *args, **kwargs):

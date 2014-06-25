@@ -1,0 +1,20 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n %}
+
+{% block page_title %}
+  {% blocktrans with username=object.get_username %}User profile: {{ username }}{% endblocktrans %}
+{% endblock %}
+
+{% block content %}
+  {{ object }}
+  
+  {{ profile }}
+  
+  {{ user }}
+  
+  {{ profile.media_tag }}
+  {% for field in optional_fields %}
+    {{ field.name }}: {{ field.value }}
+  {% endfor %}
+  <a href="{% url 'cosinnus:profile-edit' %}">{% trans "Edit" %}</a>
+{% endblock content %}
