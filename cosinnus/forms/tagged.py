@@ -79,7 +79,13 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
             ('obj', TaggableObjectFormClass),
             ('media_tag', get_tag_object_form()),
         ])
+        base_extra_forms = extra_forms
 
+        # attach any extra form classes
+        for form_name, form_class in base_extra_forms.items():
+            base_forms[form_name] = form_class
+            
+        
         def save(self, commit=True):
             """
             Save both forms and attach the media_tag to the taggable object.
@@ -101,6 +107,11 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
                 media_tag.save()
                 obj.media_tag = media_tag
                 obj.save()
+                
+                # save extra forms
+                for extra_form_name in self.base_extra_forms.keys():
+                    instances[extra_form_name].save()
+                    
                 # Some forms might contain m2m data. We need to save them
                 # explicitly since we called save() with commit=False before.
                 self.save_m2m()
@@ -137,8 +148,5 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
             def save_attachable(self):
                 return self.forms['obj'].save_attachable
     
-    # attach any extra form classes
-    for form_name, form_class in extra_forms.items():
-        TaggableObjectForm.base_forms[form_name] = form_class
 
     return TaggableObjectForm
