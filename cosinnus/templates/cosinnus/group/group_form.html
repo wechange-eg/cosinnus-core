@@ -13,10 +13,11 @@
 {% block leftnav %}
     {% if object %}
         {% captureas current_page %}editgroup{% endcaptureas %}
+        {% include "cosinnus/group/leftnav_group.html"  with current_page=current_page %}
     {% else %}
         {% captureas current_page %}addgroup{% endcaptureas %}
+        {% include "cosinnus/group/leftnav_all_groups.html"  with current_page=current_page %}
     {% endif %}
-    {% include "cosinnus/group/leftnav.html"  with current_page=current_page %}
 {% endblock leftnav %}
 
 
@@ -78,6 +79,7 @@
                                 <div id="id_avatar-preview" class="awesome-avatar-preview" style="{{ preview_style }}">
                                     {% include "cosinnus/group/group_avatar_image.html" with group=object extra_style=preview_style %}
                                 </div>
+                                <div id="avatar_deletion_notice" class="hidden"><p>{% trans "Avatar wird beim Speichern der Gruppe gelöscht." %}</p></div>
                             </div>
 
 
@@ -99,12 +101,12 @@
                                 <div type="button" class="btn btn-default w100">
                                     <ul class="media-list">
                                         <li class="media">
-                                            <a class="pull-left" href="#">
+                                            <a class="pull-left" href="#" onclick="$('#avatar_deletion_notice').toggleClass('hidden');">
                                                 <i id="avatar_clear_checkbox" class="fa fa-square-o"></i>
                                                 <input type="hidden" name="avatar_clear" >
                                             </a>
                                             <div class="media-body">
-                                                <a href="#" onclick="$('#avatar_clear_checkbox').click();">Löschen</a>
+                                                <a href="#" onclick="$('#avatar_deletion_notice').toggleClass('hidden');$('#avatar_clear_checkbox').click();">Löschen</a>
                                             </div>
                                         </li>
                                     </ul>

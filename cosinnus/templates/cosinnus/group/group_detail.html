@@ -2,21 +2,23 @@
 {% load i18n cosinnus_tags %}
 
 {% block page_title %}
-  {% blocktrans with group_name=object.name %}{{ group_name }} - Group details{% endblocktrans %}
+  {% blocktrans with group_name=object.name %}{{ group_name }} - Group Members{% endblocktrans %}
 {% endblock %}
 
 {% block leftnav %}
-    {% include "cosinnus/group/leftnav.html"  with current_page="groupdetails" %}
+    {% include "cosinnus/group/leftnav_group.html"  with current_page="groupdetails" %}
 {% endblock leftnav %}
 
 {% block breadcrumb %}
         {{ block.super }}
         <li><a href="{% url 'cosinnus:group-dashboard' group=object.slug %}">{{ object.name }}</a></li>
-        <li class="active">{% trans "Group details" %}</li>
+        <li class="active">{% trans "Group Members" %}</li>
 {% endblock %}
 
 
 {% block content %}
+  
+    {% comment %}
   
     <div class="dashboard-header">
         <div class="dashboard-header-image">
@@ -63,7 +65,7 @@
 	                    </li>
 	                </ul>
 	            </button>
-	            {% comment %} href="{% url 'cosinnus:group-delete' group=object.slug %}" {% endcomment %}
+	            <!-- href="{% url 'cosinnus:group-delete' group=object.slug %}" -->
 	            <button type="button" class="btn btn-regular" title="In der Beta-Phase nicht möglich.">
 	                <ul class="media-list">
 	                    <li class="media">
@@ -76,8 +78,8 @@
 	                    </li>
 	                </ul>
 	            </button>
-	            {% comment %} {% url 'cosinnus:group-export' group=object.slug %} {% endcomment %}
-	            {% comment %}  
+	            <!-- {% url 'cosinnus:group-export' group=object.slug %} 
+	             
 	            <button type="button" class="btn btn-regular" title="In der Beta-Phase nicht möglich.">
 	                <ul class="media-list">
 	                    <li class="media">
@@ -90,11 +92,13 @@
 	                    </li>
 	                </ul>
 	            </button>
-	            {% endcomment %}
+	            -->
 	        </div>
 	    {% endif %}
 	    
     </div> <!-- Dashboard-header ->>
+  
+  {% endcomment %}
   
   
   
