@@ -41,6 +41,7 @@
         <!-- a box with semi transparent background -->
         <div class="content-box">
 	        {{ form.forms.obj.non_field_errors }}
+	        {{ form.forms.media_tag.non_field_errors }}
 		    
 		    <div type="button" class="btn btn-default w100 large-space">
 		        <ul class="media-list">
@@ -79,7 +80,7 @@
                                 <div id="id_avatar-preview" class="awesome-avatar-preview" style="{{ preview_style }}">
                                     {% include "cosinnus/group/group_avatar_image.html" with group=object extra_style=preview_style %}
                                 </div>
-                                <div id="avatar_deletion_notice" class="hidden"><p>{% trans "Avatar wird beim Speichern der Gruppe gelöscht." %}</p></div>
+                                <div id="avatar_deletion_notice" class="hidden"><p>{% trans "Gruppenbild wird beim Speichern der Gruppe gelöscht." %}</p></div>
                             </div>
 
 
@@ -117,20 +118,20 @@
 		        
 		            <!-- explanation text -->
 		            <div class="col-md-4">
-		                <p class="transparent">Ein Bild hilft, dich in vielen Programmen schnell zu erkennen.</p>
+		                <p class="transparent">{% trans "Ein Bild hilft, die Gruppe in vielen Programmen schnell zu erkennen." %}</p>
 		            </div>
 		        </div><!-- row -->
 		    </fieldset>
 		
 		
 		    <fieldset>
-		        <legend>Über die Gruppe</legend>
+		        <legend>{% trans "Über die Gruppe" %}</legend>
 		
 		        <!-- On large screens the long explanation texts are on the right side next to the input elements -->
 		        <div class="row">
 		            <div class="col-md-8 regular-space">
 		                
-                        <label>Beschreibe die Gruppe in ein paar Sätzen.</label>
+                        <label>{% trans "Beschreibe die Gruppe in ein paar Sätzen." %}</label>
                         {{ form.forms.obj.description.errors }}
                         <div type="button" class="btn btn-default w100 regular-space">
                             <ul class="media-list">
@@ -147,7 +148,7 @@
 		                
                         {% include "cosinnus/media_tags_group.html" %} 
 		
-		                <label>Wie öffentlich ist die Gruppe?</label>
+		                <label>{% trans "Wie öffentlich ist die Gruppe?" %}</label>
 		                <div type="button" class="btn btn-default w100">
 		                    <ul class="media-list">
 		                        <li class="media">
@@ -169,9 +170,8 @@
 		            
 		            </div><!-- col -->
 		            <div class="col-md-4">
-		                <p class="transparent"><strong>Gruppe beschreiben</strong></p>
-		                <p class="transparent">Schreibe etwas hier hin, fülle das Formular aus.</p>
-		                <p class="transparent">Der weitere Beschreibungstext fehlt noch.</p>
+		                <p class="transparent"><strong>{% trans "Gruppe beschreiben" %}</strong></p>
+		                <p class="transparent">{% trans "Beschreibe die Gruppe, ihre Aktivitäten und Ziele." %}</p>
 		            </div><!-- col -->
 		        </div><!-- row -->
 	
