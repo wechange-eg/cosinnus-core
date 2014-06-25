@@ -772,6 +772,9 @@ ul.appnavi-dropdown-menu {
   padding: 0;
   user-select: text;
   -moz-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  -o-user-select: text;
 }
 
 .btn-emphasized .form-control, .btn-extra-emphasized .form-control {
