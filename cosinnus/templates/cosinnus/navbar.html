@@ -67,8 +67,8 @@
 	                        <i class="fa fa-caret-down"></i>
 	                    </a>
 	                    <ul class="dropdown-menu">
-							{% comment %} <li><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Profile" %}</a></li>  {% endcomment %}
 							<li><a href="{% url 'cosinnus:user-dashboard' %}">{% trans "User Dashboard" %}</a></li>
+							<li><a href="{% url 'cosinnus:profile-edit' %}">{% trans "Edit Profile" %}</a></li>
 							<li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
 	                    </ul>
 	                </li>

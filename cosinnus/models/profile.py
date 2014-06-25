@@ -13,6 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.exceptions import InvalidImageFormatError
+from tinymce.models import HTMLField
 
 from cosinnus.conf import settings
 from cosinnus.utils.files import get_avatar_filename
@@ -72,7 +73,7 @@ class BaseUserProfile(models.Model):
 
     objects = BaseUserProfileManager()
 
-    SKIP_FIELDS = ('id', 'user',)
+    SKIP_FIELDS = ('id', 'user', 'media_tag',)
 
     class Meta:
         abstract = True
@@ -125,13 +126,18 @@ class BaseUserProfile(models.Model):
 
 
 class UserProfile(BaseUserProfile):
-
-    avatar = models.ImageField(_("Avatar"), null=True, blank=True,
-        upload_to=get_avatar_filename)
-
+    
     class Meta:
         app_label = 'cosinnus'
         swappable = 'COSINNUS_USER_PROFILE_MODEL'
+    
+    avatar = models.ImageField(_("Avatar"), null=True, blank=True,
+        upload_to=get_avatar_filename)
+    description = HTMLField(verbose_name=_('Description'), blank=True, null=True)
+    media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
+        blank=True, null=True, editable=False, on_delete=models.PROTECT)
+    website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
+
 
     @property
     def avatar_url(self):
@@ -158,6 +164,12 @@ class UserProfile(BaseUserProfile):
     def get_avatar_thumbnail_url(self, size=(80, 80)):
         tn = self.get_avatar_thumbnail(size)
         return tn.url if tn else None
+    
+    def media_tag_object(self):
+        key = '_media_tag_cache'
+        if not hasattr(self, key):
+            setattr(self, key, self.media_tag)
+        return getattr(self, key)
 
 
 def get_user_profile_model():

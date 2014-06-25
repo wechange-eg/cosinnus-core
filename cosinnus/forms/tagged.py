@@ -65,7 +65,7 @@ class BaseTaggableObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
             self.fields['tags'].choices = self.instance.tags.values_list('id', 'name').all()
             self.initial['tags'] = self.instance.tags.values_list('id', flat=True).all()
             
-def get_form(TaggableObjectFormClass, attachable=True):
+def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
     """
     Factory function that creates a class of type
     class:`multiform.MultiModelForm` with the given TaggableObjectFormClass
@@ -79,7 +79,13 @@ def get_form(TaggableObjectFormClass, attachable=True):
             ('obj', TaggableObjectFormClass),
             ('media_tag', get_tag_object_form()),
         ])
+        base_extra_forms = extra_forms
 
+        # attach any extra form classes
+        for form_name, form_class in base_extra_forms.items():
+            base_forms[form_name] = form_class
+            
+        
         def save(self, commit=True):
             """
             Save both forms and attach the media_tag to the taggable object.
@@ -101,6 +107,11 @@ def get_form(TaggableObjectFormClass, attachable=True):
                 media_tag.save()
                 obj.media_tag = media_tag
                 obj.save()
+                
+                # save extra forms
+                for extra_form_name in self.base_extra_forms.keys():
+                    instances[extra_form_name].save()
+                    
                 # Some forms might contain m2m data. We need to save them
                 # explicitly since we called save() with commit=False before.
                 self.save_m2m()
@@ -136,5 +147,6 @@ def get_form(TaggableObjectFormClass, attachable=True):
             @property
             def save_attachable(self):
                 return self.forms['obj'].save_attachable
+    
 
     return TaggableObjectForm
