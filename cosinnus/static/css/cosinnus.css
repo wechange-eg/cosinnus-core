@@ -738,11 +738,16 @@ ul.appnavi-dropdown-menu {
 .media-body {
   position: relative;
 }
-.media-body .annotation {
+.media-body span.annotation {
   position: absolute;
   right: 10px;
   top: 0;
-  font-size: 0.9em;
+  font-size: 11px;
+}
+.media-body div.annotation {
+  color: #949494;
+  text-align: right;
+  font-size: 11px;
 }
 .media-body a + a {
   margin-left: 15px;
@@ -765,6 +770,8 @@ ul.appnavi-dropdown-menu {
   line-height: 1.2em;
   white-space: normal;
   padding: 0;
+  user-select: text;
+  -moz-user-select: text;
 }
 
 .btn-emphasized .form-control, .btn-extra-emphasized .form-control {

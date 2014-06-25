@@ -191,12 +191,19 @@ ul.appnavi-dropdown-menu {
 .media-body {
 	position: relative;
 
-	.annotation {
+	span.annotation {
 		position: absolute;
 		right: 10px;
 		top: 0;
-		font-size: 0.9em;
+		font-size: 11px;
 	}
+	div.annotation {
+		color: $app-neutral-color;
+		text-align: right;
+		font-size: 11px;
+//		margin-bottom: -4px;
+	}
+
 
 	// Always make a gap between links
 	a + a {
@@ -221,6 +228,8 @@ ul.appnavi-dropdown-menu {
 	line-height: 1.2em;
 	white-space: normal;
 	padding: 0;
+	user-select: text;
+	-moz-user-select: text;
 }
 
 // .form-control is a Bootstrap class for INPUT elements.
