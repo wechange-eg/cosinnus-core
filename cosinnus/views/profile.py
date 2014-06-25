@@ -9,6 +9,7 @@ from django.views.generic.detail import SingleObjectMixin
 
 from cosinnus.forms.profile import UserProfileForm
 from cosinnus.models.profile import get_user_profile_model
+from cosinnus.views.mixins.avatar import AvatarFormMixin
 
 
 class UserProfileObjectMixin(SingleObjectMixin):
@@ -35,11 +36,11 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
 detail_view = UserProfileDetailView.as_view()
 
 
-class UserProfileUpdateView(UserProfileObjectMixin, UpdateView):
+class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView):
     form_class = UserProfileForm
     template_name = 'cosinnus/user/userprofile_form.html'
 
     def get_success_url(self):
-        return reverse('cosinnus:profile-detail')
+        return reverse('cosinnus:user-dashboard')
 
 update_view = UserProfileUpdateView.as_view()

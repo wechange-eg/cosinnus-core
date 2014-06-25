@@ -1,7 +1,7 @@
 {% load static thumbnail cosinnus_tags %}
 
 {% if user.cosinnus_profile.avatar %}
-    <img src="{% thumbnail user.cosinnus_profile.avatar 200x200 crop=1 upscale=1 %}" title="{{ user|full_name }}" />
+    <img src="{% thumbnail user.cosinnus_profile.avatar 200x200 crop=1 upscale=1 %}" title="{{ user|full_name }}" {% if extra_style %}style="{{ extra_style }}" {% endif %}/>
 {% else %}
-    <img src="{% static 'images/jane-doe.png' %}" title="{{ user|full_name }}"></img>
+    <img src="{% static 'images/jane-doe.png' %}" title="{{ user|full_name }}"{% if extra_style %}style="{{ extra_style }}" {% endif %}></img>
 {% endif %}

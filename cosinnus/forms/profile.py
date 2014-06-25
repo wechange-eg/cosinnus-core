@@ -3,15 +3,18 @@ from __future__ import unicode_literals
 
 from django import forms
 
+from awesome_avatar import forms as avatar_forms
+from multiform.forms import InvalidArgument
+
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.forms.tagged import get_form  
-from django.contrib.auth.forms import UserCreationForm as DjUserCreationForm
 from cosinnus.forms.user import UserChangeForm
-from multiform.forms import InvalidArgument
 
 
 class _UserProfileForm(forms.ModelForm):
-
+    
+    avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
+    
     class Meta:
         model = get_user_profile_model()
         fields = model.get_optional_fieldnames()

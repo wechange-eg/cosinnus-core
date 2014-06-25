@@ -1,15 +1,229 @@
-{% extends "cosinnus/base.html" %}
-{% load i18n bootstrap3 %}
+{% extends "cosinnus/group/group_base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
 
-{% block page_title %}{% trans "Groups" %}{% endblock %}
+{% block page_title %}
+	   {% trans "Edit Your Profile" %}
+{% endblock %}
+
+{% block leftnav %}
+{% endblock leftnav %}
+
+{% block override_breadcrumb %}
+{% endblock override_breadcrumb %}
+
 
 {% block content %}
-  <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+    
+    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
     {% csrf_token %}
-    {% bootstrap_form form layout="horizontal" %}
-    {% trans "Save" as submit_label %}
-    {% trans "Cancel" as reset_label %}
-    {% url 'cosinnus:profile-detail' as reset_link %}
-    {% buttons submit=submit_label reset=reset_label reset_link=reset_link layout='horizontal' %}{% endbuttons %}
-  </form>
-{% endblock content %}
+    {{ form.forms.obj.media }}
+    
+        <!-- a box with semi transparent background -->
+        <div class="content-box">
+	        {{ form.forms.obj.non_field_errors }}
+		    {{ form.forms.user.non_field_errors }}
+            {{ form.forms.media_tag.non_field_errors }}
+		    
+            <fieldset>
+                <legend>{% trans "Basisdaten" %}</legend>
+
+                <!-- On large screens the long explanation texts are on the right side next to the input elements -->
+                <div class="row">
+                    <div class="col-md-8">
+
+                        <div class="row">
+                            <div class="col-sm-6 regular-space">
+                                <div type="button" class="btn btn-default w100">
+                                    <ul class="media-list">
+                                        <li class="media">
+                                            <a class="pull-left" href="#">
+                                                <i class="fa fa-user"></i>
+                                            </a>
+                                            <div class="media-body">
+                                                {{ form.forms.user.first_name.errors }}
+					                            {% captureas placeholder %}{% trans "Vorname" %}{% endcaptureas %}
+					                            {% render_field form.forms.user.first_name class+="form-control" placeholder=placeholder %}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 regular-space">
+                                <div type="button" class="btn btn-default w100">
+                                    <ul class="media-list">
+                                        <li class="media">
+                                            <a class="pull-left" href="#">
+                                                <i class="fa fa-user"></i>
+                                            </a>
+                                            <div class="media-body">
+                                                {{ form.forms.user.last_name.errors }}
+					                            {% captureas placeholder %}{% trans "Nachname" %}{% endcaptureas %}
+					                            {% render_field form.forms.user.last_name class+="form-control" placeholder=placeholder %}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div><!-- row -->
+
+
+                        <div type="button" class="btn btn-default w100 regular-space">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <a class="pull-left" href="#">
+                                        <i class="fa fa-envelope"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        {{ form.forms.user.email.errors }}
+			                            {% captureas placeholder %}{% trans "E-Mail" %}{% endcaptureas %}
+			                            {% render_field form.forms.user.email class+="form-control" placeholder=placeholder %}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div type="button" class="btn btn-default w100 regular-space">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <a class="pull-left" href="#">
+                                        <i class="fa fa-anchor"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        <input class="form-control"
+                                            placeholder="Webseite (Not implemented)" />
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div><!-- col -->
+
+                    <!-- explanation text -->
+                    <div class="col-md-4">
+                        <p class="transparent"></p><!-- Text here if neccessary -->
+                    </div>
+                </div><!-- row -->
+            </fieldset>
+
+		
+		    <fieldset>
+		        <legend>{% trans "Profilbild" %}</legend>
+		
+		        <!-- On large screens the long explanation texts are on the right side next to the input elements -->
+		        <div class="row">
+		        
+                    <div class="col-md-8">
+
+                        <!-- image left, inputs right -->
+                        <div class="row">
+                            
+                            {{ form.forms.obj.avatar.errors }}
+                        
+                            <div class="col-sm-4 regular-space">
+                                {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.width}}px;height:{{SETTINGS.AWESOME_AVATAR.height}}px{% endcaptureas %}
+                                <div id="id_avatar-preview" class="awesome-avatar-preview" style="{{ preview_style }}">
+                                    {% include "cosinnus/user/user_avatar_image.html" with user=request.user extra_style=preview_style %}
+                                </div>
+                                <div id="avatar_deletion_notice" class="hidden"><p>{% trans "Profilbild wird beim Speichern gelöscht." %}</p></div>
+                            </div>
+
+
+                            <div class="col-sm-8 regular-space">
+
+                                <div type="button" class="btn btn-default w100 regular-space">
+                                    <ul class="media-list">
+                                        <li class="media">
+                                            <a class="pull-left" href="#">
+                                                <i class="fa fa-file-image-o"></i>
+                                            </a>
+                                            <div class="media-body">
+                                                {{ form.forms.obj.avatar }}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div type="button" class="btn btn-default w100">
+                                    <ul class="media-list">
+                                        <li class="media">
+                                            <a class="pull-left" href="#" onclick="$('#avatar_deletion_notice').toggleClass('hidden');">
+                                                <i id="avatar_clear_checkbox" class="fa fa-square-o"></i>
+                                                <input type="hidden" name="avatar_clear" >
+                                            </a>
+                                            <div class="media-body">
+                                                <a href="#" onclick="$('#avatar_deletion_notice').toggleClass('hidden');$('#avatar_clear_checkbox').click();">Löschen</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div><!-- col -->
+                        </div><!-- row -->
+                    </div><!-- col -->
+		        
+		            <!-- explanation text -->
+		            <div class="col-md-4">
+		                <p class="transparent">{% trans "Ein Bild hilft, dich in vielen Programmen schnell zu erkennen." %}</p>
+		            </div>
+		        </div><!-- row -->
+		    </fieldset>
+		
+		
+		    <fieldset>
+		        <legend>{% trans "Über die Gruppe" %}</legend>
+		
+		        <!-- On large screens the long explanation texts are on the right side next to the input elements -->
+		        <div class="row">
+		            <div class="col-md-8 regular-space">
+		                
+		                
+                        {% include "cosinnus/media_tags_userprofile.html" %} 
+		
+		                
+                        <label>{% trans "Wer bist du, und was motiviert dich?" %}</label>
+                        {{ form.forms.obj.description.errors }}
+                        <div type="button" class="btn btn-default w100 regular-space">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <a class="pull-left" href="#">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        {% comment %}  {% render_field form.forms.obj.description  %}{% endcomment %}
+                                        <textarea class="form-control" >Not implemented</textarea>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+		            
+		            
+		            </div><!-- col -->
+		            <div class="col-md-4">
+		                <p class="transparent"><strong>{% trans "Weitere Beschreibung" %}</strong></p>
+		                <p class="transparent">{% trans "Beschreibe dich, deine Aktivitäten und Interessen." %}</p>
+		            </div><!-- col -->
+		        </div><!-- row -->
+	
+	    
+	    </div>
+	    
+	    <button type="submit" class="btn btn-emphasized">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-left" href="#">
+	                    <i class="fa fa-check"></i>
+	                </a>
+	                <div class="media-body">
+                        {% trans "Speichern" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+    
+    
+    </form>
+    
+
+{% endblock %}
+
+
+
