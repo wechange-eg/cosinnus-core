@@ -86,11 +86,12 @@
                             <ul class="media-list">
                                 <li class="media">
                                     <a class="pull-left" href="#">
-                                        <i class="fa fa-anchor"></i>
+                                        <i class="fa fa-chain"></i>
                                     </a>
                                     <div class="media-body">
-                                        <input class="form-control"
-                                            placeholder="Webseite (Not implemented)" />
+                                        {{ form.forms.obj.website.errors }}
+                                        {% captureas placeholder %}{% trans "Website" %}{% endcaptureas %}
+                                        {% render_field form.forms.obj.website class+="form-control" placeholder=placeholder %}
                                     </div>
                                 </li>
                             </ul>
@@ -189,7 +190,9 @@
                                     </a>
                                     <div class="media-body">
                                         {% comment %}  {% render_field form.forms.obj.description  %}{% endcomment %}
-                                        <textarea class="form-control" >Not implemented</textarea>
+                                        {{ form.forms.obj.description.errors }}
+                                        {% captureas placeholder %}{% trans "Erzähl etwas über dich!" %}{% endcaptureas %}
+                                        {% render_field form.forms.obj.description class+="form-control" placeholder=placeholder %}
                                     </div>
                                 </li>
                             </ul>

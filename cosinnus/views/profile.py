@@ -4,12 +4,14 @@ from __future__ import unicode_literals
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.utils.decorators import method_decorator
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
 
 from cosinnus.forms.profile import UserProfileForm
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.views.mixins.avatar import AvatarFormMixin
+from django.contrib import messages
 
 
 class UserProfileObjectMixin(SingleObjectMixin):
@@ -39,8 +41,14 @@ detail_view = UserProfileDetailView.as_view()
 class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView):
     form_class = UserProfileForm
     template_name = 'cosinnus/user/userprofile_form.html'
+    message_success = _('Your profile was edited successfully.')
 
     def get_success_url(self):
         return reverse('cosinnus:user-dashboard')
+    
+    def form_valid(self, form):
+        ret = super(UserProfileUpdateView, self).form_valid(form)
+        messages.success(self.request, self.message_success)
+        return ret
 
 update_view = UserProfileUpdateView.as_view()

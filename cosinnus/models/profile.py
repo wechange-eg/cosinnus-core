@@ -13,6 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.exceptions import InvalidImageFormatError
+from tinymce.models import HTMLField
 
 from cosinnus.conf import settings
 from cosinnus.utils.files import get_avatar_filename
@@ -130,10 +131,13 @@ class UserProfile(BaseUserProfile):
         app_label = 'cosinnus'
         swappable = 'COSINNUS_USER_PROFILE_MODEL'
     
-    media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
-        blank=True, null=True, editable=False, on_delete=models.PROTECT)
     avatar = models.ImageField(_("Avatar"), null=True, blank=True,
         upload_to=get_avatar_filename)
+    description = HTMLField(verbose_name=_('Description'), blank=True, null=True)
+    media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
+        blank=True, null=True, editable=False, on_delete=models.PROTECT)
+    website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
+
 
     @property
     def avatar_url(self):
