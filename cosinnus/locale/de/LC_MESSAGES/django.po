@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-24 18:15+0200\n"
+"POT-Creation-Date: 2014-06-25 14:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -67,7 +67,7 @@ msgstr "Widget hinzufügen"
 #: .\_old_templates\cosinnus\group_list.html.py:4
 #: .\_old_templates\cosinnus\group_list.html.py:7
 #: .\_old_templates\cosinnus\userprofile_form.html.py:4
-#: .\templates\cosinnus\navbar.html.py:26
+#: .\templates\cosinnus\navbar.html.py:27
 #: .\templates\cosinnus\group\group_list.html.py:4
 #: .\templates\cosinnus\user\user_detail.html.py:22
 msgid "Groups"
@@ -116,14 +116,14 @@ msgid "Toggle navigation"
 msgstr "Navigation ab-/abschalten"
 
 #: .\_old_templates\cosinnus\topmenu.html.py:23
-#: .\templates\cosinnus\navbar.html.py:35
-#: .\templates\cosinnus\navbar.html.py:42
+#: .\templates\cosinnus\navbar.html.py:36
+#: .\templates\cosinnus\navbar.html.py:43
 msgid "List all groups"
 msgstr "Alle Gruppen auflisten"
 
 #
 #: .\_old_templates\cosinnus\topmenu.html.py:27
-#: .\templates\cosinnus\navbar.html.py:39
+#: .\templates\cosinnus\navbar.html.py:40
 msgid "No Groups. Join!"
 msgstr "Mitglied keiner Gruppen. Beitreten!"
 
@@ -396,11 +396,11 @@ msgstr ""
 msgid "Slug"
 msgstr "Slug"
 
-#: .\models\group.py:295
+#: .\models\group.py:295 .\models\profile.py:136
 msgid "Description"
 msgstr "Beschreibung"
 
-#: .\models\group.py:296 .\models\profile.py:129
+#: .\models\group.py:296 .\models\profile.py:134
 #: .\templates\cosinnus\user\user_detail.html.py:33
 #: .\templates\cosinnus\user\user_detail.html.py:36
 #: .\templates\cosinnus\user\user_detail.html.py:38
@@ -408,7 +408,7 @@ msgid "Avatar"
 msgstr "Avatar"
 
 #: .\models\group.py:298 .\models\tagged.py:38
-#: .\templates\cosinnus\group\group_form.html.py:159
+#: .\templates\cosinnus\group\group_form.html.py:161
 msgid "Public"
 msgstr "Öffentlich"
 
@@ -435,6 +435,11 @@ msgstr "Gruppenmitgliedschaft"
 #: .\models\group.py:412
 msgid "Group memberships"
 msgstr "Gruppenmitgliedschaften"
+
+#: .\models\profile.py:139
+#: .\templates\cosinnus\user\userprofile_form.html.py:93
+msgid "Website"
+msgstr ""
 
 #: .\models\tagged.py:53 .\templates\cosinnus\group\group_user_list.html.py:13
 #: .\templates\cosinnus\user\user_list.html.py:13
@@ -560,9 +565,13 @@ msgstr "Abbrechen"
 msgid "OK"
 msgstr "OK"
 
-#: .\templates\cosinnus\navbar.html.py:71
+#: .\templates\cosinnus\navbar.html.py:70
 msgid "User Dashboard"
 msgstr "Persönliches Dashboard"
+
+#: .\templates\cosinnus\navbar.html.py:71
+msgid "Edit Profile"
+msgstr "Profil bearbeiten"
 
 #: .\templates\cosinnus\not_logged_in_alert.html.py:5
 msgid "Nicht eingeloggt."
@@ -782,20 +791,50 @@ msgstr "Gruppe “%(group_name)s” bearbeiten"
 msgid "Edit Group"
 msgstr "Gruppe bearbeiten"
 
-#: .\templates\cosinnus\group\group_form.html.py:57
+#: .\templates\cosinnus\group\group_form.html.py:58
 msgid "Gib den Namen für die Gruppe ein."
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html.py:65
+#: .\templates\cosinnus\group\group_form.html.py:66
 msgid "Gruppenbild"
 msgstr ""
 
+#: .\templates\cosinnus\group\group_form.html.py:83
+msgid "Gruppenbild wird beim Speichern der Gruppe gelöscht."
+msgstr ""
+
+#: .\templates\cosinnus\group\group_form.html.py:121
+msgid "Ein Bild hilft, die Gruppe in vielen Programmen schnell zu erkennen."
+msgstr ""
+
+#: .\templates\cosinnus\group\group_form.html.py:128
+#: .\templates\cosinnus\user\userprofile_form.html.py:173
+msgid "Über die Gruppe"
+msgstr ""
+
+#: .\templates\cosinnus\group\group_form.html.py:134
+msgid "Beschreibe die Gruppe in ein paar Sätzen."
+msgstr ""
+
+#: .\templates\cosinnus\group\group_form.html.py:151
+msgid "Wie öffentlich ist die Gruppe?"
+msgstr ""
+
 #
-#: .\templates\cosinnus\group\group_form.html.py:158
+#: .\templates\cosinnus\group\group_form.html.py:160
 msgid "Members only"
 msgstr "Nur sichtbar für Gruppenmitglieder"
 
-#: .\templates\cosinnus\group\group_form.html.py:187
+#: .\templates\cosinnus\group\group_form.html.py:173
+msgid "Gruppe beschreiben"
+msgstr ""
+
+#: .\templates\cosinnus\group\group_form.html.py:174
+msgid "Beschreibe die Gruppe, ihre Aktivitäten und Ziele."
+msgstr ""
+
+#: .\templates\cosinnus\group\group_form.html.py:188
+#: .\templates\cosinnus\user\userprofile_form.html.py:220
 msgid "Speichern"
 msgstr ""
 
@@ -894,10 +933,12 @@ msgid "Passwort wiederholen"
 msgstr ""
 
 #: .\templates\cosinnus\registration\signup.html.py:91
+#: .\templates\cosinnus\user\userprofile_form.html.py:44
 msgid "Vorname"
 msgstr "Vorname"
 
 #: .\templates\cosinnus\registration\signup.html.py:106
+#: .\templates\cosinnus\user\userprofile_form.html.py:60
 msgid "Nachname"
 msgstr "Nachname"
 
@@ -912,6 +953,46 @@ msgstr "E-mail Adresse"
 #: .\templates\cosinnus\user\user_list.html.py:4
 msgid "Users"
 msgstr "Nutzer"
+
+#: .\templates\cosinnus\user\userprofile_form.html.py:5
+msgid "Edit Your Profile"
+msgstr ""
+
+#: .\templates\cosinnus\user\userprofile_form.html.py:28
+msgid "Basisdaten"
+msgstr ""
+
+#: .\templates\cosinnus\user\userprofile_form.html.py:78
+msgid "E-Mail"
+msgstr ""
+
+#: .\templates\cosinnus\user\userprofile_form.html.py:111
+msgid "Profilbild"
+msgstr ""
+
+#: .\templates\cosinnus\user\userprofile_form.html.py:128
+msgid "Profilbild wird beim Speichern gelöscht."
+msgstr ""
+
+#: .\templates\cosinnus\user\userprofile_form.html.py:166
+msgid "Ein Bild hilft, dich in vielen Programmen schnell zu erkennen."
+msgstr ""
+
+#: .\templates\cosinnus\user\userprofile_form.html.py:183
+msgid "Wer bist du, und was motiviert dich?"
+msgstr ""
+
+#: .\templates\cosinnus\user\userprofile_form.html.py:195
+msgid "Erzähl etwas über dich!"
+msgstr ""
+
+#: .\templates\cosinnus\user\userprofile_form.html.py:205
+msgid "Weitere Beschreibung"
+msgstr ""
+
+#: .\templates\cosinnus\user\userprofile_form.html.py:206
+msgid "Beschreibe dich, deine Aktivitäten und Interessen."
+msgstr ""
 
 #: .\templates\cosinnus\widgets\base_widget.html.py:44
 #: .\templates\cosinnus\widgets\fadedown_base_widget.html.py:52
@@ -1021,6 +1102,10 @@ msgstr "Nutzer aus der Gruppe “%(group_name)s” entfernen?"
 #: .\views\hierarchy.py:25
 msgid "No appname given for adding containers."
 msgstr "Kein Appname zum Hinzufügen von Zusammenstellungen angegeben."
+
+#: .\views\profile.py:44
+msgid "Your profile was edited successfully."
+msgstr "Dein Profil wurde erfolgreich bearbeitet."
 
 #: .\views\user.py:40
 #, python-format
