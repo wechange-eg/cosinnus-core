@@ -16,7 +16,7 @@ class _UserProfileForm(forms.ModelForm):
         model = get_user_profile_model()
         fields = model.get_optional_fieldnames()
 
-class UserProfileForm(get_form(_UserProfileForm, attachable=False)):#, extra_forms={'userx': UserChangeForm})):
+class UserProfileForm(get_form(_UserProfileForm, attachable=False, extra_forms={'user': UserChangeForm})):
     
     def dispatch_init_group(self, name, group):
         if name == 'media_tag':

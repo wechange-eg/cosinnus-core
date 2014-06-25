@@ -118,7 +118,7 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
             self.forms['obj'].instance = value
 
         def dispatch_init_instance(self, name, instance):
-            if name != 'media_tag':
+            if name == 'obj':
                 return instance
             return super(TaggableObjectForm, self).dispatch_init_instance(name, instance)
 
