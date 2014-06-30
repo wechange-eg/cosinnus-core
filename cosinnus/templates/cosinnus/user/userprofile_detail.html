@@ -2,7 +2,7 @@
 {% load i18n cosinnus_tags %}
 
 {% block page_title %}
-  {% blocktrans with username=user|full_name %}User profile: {{ username }}{% endblocktrans %}{{ block.super }}
+  {% blocktrans with username=this_user|full_name %}User profile: {{ username }}{% endblocktrans %}{{ block.super }}
 {% endblock %}
 
 {% block override_breadcrumb %}
@@ -11,12 +11,12 @@
 {% block content %}
     <div class="row large-space">
         <div class="col-sm-3 large-space">
-            {% include "cosinnus/user/user_avatar_image.html" with user=user extra_classes="w100" %}
+            {% include "cosinnus/user/user_avatar_image.html" with user=this_user extra_classes="w100" %}
         </div>
         <div class="col-sm-9 bottom-align large-space">
-            <legend class="large-space">{{ user|full_name }}</legend>
+            <legend class="large-space">{{ this_user|full_name }}</legend>
 
-            {% if request.user.is_authenticated and request.user == user %}
+            {% if request.user.is_authenticated and request.user == this_user %}
 	            <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:profile-edit' %}">
 	                <ul class="media-list">
 	                    <li class="media">

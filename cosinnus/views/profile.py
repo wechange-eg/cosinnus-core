@@ -64,7 +64,7 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
         context.update({
             'optional_fields': profile.get_optional_fields(),
             'profile': profile,
-            'user': profile.user,
+            'this_user': profile.user,
         })
         return context
 
