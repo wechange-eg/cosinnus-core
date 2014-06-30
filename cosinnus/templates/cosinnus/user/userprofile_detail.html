@@ -1,20 +1,196 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n %}
+{% load i18n cosinnus_tags %}
 
 {% block page_title %}
-  {% blocktrans with username=object.get_username %}User profile: {{ username }}{% endblocktrans %}
+  {% blocktrans with username=user|full_name %}User profile: {{ username }}{% endblocktrans %}{{ block.super }}
 {% endblock %}
 
+{% block override_breadcrumb %}
+{% endblock override_breadcrumb %}
+
 {% block content %}
-  {{ object }}
+    <div class="row large-space">
+        <div class="col-sm-3 large-space">
+            {% include "cosinnus/user/user_avatar_image.html" with user=user extra_classes="w100" %}
+        </div>
+        <div class="col-sm-9 bottom-align large-space">
+            <legend class="large-space">{{ user|full_name }}</legend>
+
+            {% if request.user.is_authenticated and request.user == user %}
+	            <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:profile-edit' %}">
+	                <ul class="media-list">
+	                    <li class="media">
+	                        <a class="pull-left" href="#">
+	                            <i class="fa fa-envelope"></i>
+	                        </a>
+	                        <div class="media-body">
+                                {% trans "Edit Profile" %}
+	                        </div>
+	                    </li>
+	                </ul>
+	            </button>
+            {% else %}
+	            <button type="button" class="btn btn-default">
+	                <ul class="media-list">
+	                    <li class="media">
+	                        <a class="pull-left" href="#">
+	                            <i class="fa fa-hand-o-right "></i>
+	                        </a>
+	                        <div class="media-body">
+	                            <!-- <a href="#"> -->
+	                                {% trans "Abonnieren" %}
+	                            <!-- </a> -->
+	                        </div>
+	                    </li>
+	                </ul>
+	            </button>
+                <button type="button" class="btn btn-default">
+	                <ul class="media-list">
+	                    <li class="media">
+	                        <a class="pull-left" href="#">
+	                            <i class="fa fa-envelope"></i>
+	                        </a>
+	                        <div class="media-body">
+	                            <a href="#">
+	                                {% trans "Nachricht" %}
+	                            </a>
+	                        </div>
+	                    </li>
+	                </ul>
+	            </button>
+            {% endif %} 
+        </div>
+
+
+    </div><!-- row -->
+
+
+    <div class="row">
+        <div class="col-md-6 col-lg-4">
+
+            <div type="button" class="btn btn-emphasized btn-headline">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left btn-extra-emphasized" href="#"></a>
+                        <a class="pull-left" href="#">
+                            <i class="fa fa-user"></i>
+                        </a>
+                        <div class="media-body">
+                            {% trans "Über mich" %}
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- btn -->
+            <div class="content-box large-space">
+                {% if profile.description %} 
+                <p class="transparent">
+                    {{ profile.description|striptags|safe }}
+                </p>
+                {% endif %}
+                
+                {% include "cosinnus/media_tags_userprofile_readonly.html" with object=profile %}
+                
+                {% if profile.website %}
+                <legend>{% trans "Meine Webseite" %}</legend>
+                <p class="transparent">
+                    <i class="fa fa-globe"></i> <a href="{{ profile.website }}">{{ profile.website }}</a>
+                </p>
+                {% endif %}
+            </div><!-- content-box -->
+        </div><!-- column -->
+
+        <div class="col-md-6 col-lg-4">
+
+            <div type="button" class="btn btn-emphasized btn-headline fine-space">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left btn-extra-emphasized" href="#"></a>
+                        <a class="pull-left" href="#">
+                            <i class="fa fa-users"></i>
+                        </a>
+                        <div class="media-body">
+                            {% trans "Meine Gruppen" %}
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- btn -->
+            
+            {% for group in profile.cosinnus_groups %}
+                <div type="button" class="btn btn-default w100 fine-space">
+	                <ul class="media-list">
+	                    <li class="media">
+	                        <a class="pull-left" href="#">
+	                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
+	                        </a>
+	                        <div class="media-body">
+	                            {{ group.name }}
+	                        </div>
+	                    </li>
+	                </ul>
+	            </div>
+            {% endfor %}
+
+            
+            <button type="button" class="btn btn-emphasized large-space">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left" href="#"></a>
+                        <a class="pull-right btn-extra-emphasized" href="#">
+                            <i class="fa fa-chevron-right "></i>
+                        </a>
+                        <div class="media-body">
+                            <a href="#">
+                                {% trans "Mehr" %}
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </button>
+
+
+        </div><!-- column -->
+
+
+        <div class="col-md-6 col-lg-4">
+
+            <div type="button" class="btn btn-emphasized btn-headline fine-space">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left btn-extra-emphasized" href="#"></a>
+                        <a class="pull-left" href="#">
+                            <i class="fa fa-th"></i>
+                        </a>
+                        <div class="media-body">
+                            {% trans "Mein Netzwerk" %}
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- btn -->
+
+            <table>
+                <tr>
+                    <td><a href="#"><img src="avatar.png" class="w100" /></a></td>
+                    <td><a href="#"><img src="avatar2.png" class="w100" /></a></td>
+                    <td><a href="#"><img src="avatar2.png" class="w100" /></a></td>
+                </tr>
+                <tr>
+                    <td><a href="#"><img src="avatar.png" class="w100" /></a></td>
+                    <td><a href="#"><img src="avatar.png" class="w100" /></a></td>
+                    <td><a href="#"><img src="avatar2.png" class="w100" /></a></td>
+                </tr>
+                <tr>
+                    <td><a href="#"><img src="avatar2.png" class="w100" /></a></td>
+                    <td><a href="#"><img src="avatar2.png" class="w100" /></a></td>
+                    <td><a href="#"><img src="avatar.png" class="w100" /></a></td>
+                </tr>
+            </table>
+
+            </div><!-- row -->
+
+        </div><!-- column -->
+
+    </div><!-- row -->
+
   
-  {{ profile }}
   
-  {{ user }}
-  
-  {{ profile.media_tag }}
-  {% for field in optional_fields %}
-    {{ field.name }}: {{ field.value }}
-  {% endfor %}
-  <a href="{% url 'cosinnus:profile-edit' %}">{% trans "Edit" %}</a>
 {% endblock content %}

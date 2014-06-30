@@ -17,6 +17,7 @@ from tinymce.models import HTMLField
 
 from cosinnus.conf import settings
 from cosinnus.utils.files import get_avatar_filename
+from cosinnus.models.group import CosinnusGroup
 
 
 class BaseUserProfileManager(models.Manager):
@@ -123,7 +124,11 @@ class BaseUserProfile(models.Model):
                     'value': value,
                 })
         return optional_fields
-
+    
+    @property
+    def cosinnus_groups(self):
+        """ Returns all groups this user is a member or admin of """
+        return CosinnusGroup.objects.get_for_user(self)
 
 class UserProfile(BaseUserProfile):
     

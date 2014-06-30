@@ -82,7 +82,7 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
             request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('cosinnus:user-dashboard')
+        return reverse('cosinnus:profile-detail')
     
     def form_valid(self, form):
         ret = super(UserProfileUpdateView, self).form_valid(form)
