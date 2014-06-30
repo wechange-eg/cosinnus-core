@@ -15,7 +15,7 @@
         </thead>
         {% for user in object_list %}
         <tr>
-            <th><a href="{% url 'cosinnus:user-detail' username=user.username %}">{{ user.username }}</a></th>
+            <th><a href="{% url 'cosinnus:profile-detail' username=user.username %}">{{ user.username }}</a></th>
         </tr>
         {% endfor %}
     </table>

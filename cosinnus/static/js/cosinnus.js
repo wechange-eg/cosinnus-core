@@ -65,7 +65,9 @@
 			}).trigger('click');
 
 			$('.tags-selector, .location-selector').each(function() {
+console.log("o");
 				$(this).select2({
+					width: 'off',
 					tags: $(this).attr('data-tags').split(',')
 				});
 			});

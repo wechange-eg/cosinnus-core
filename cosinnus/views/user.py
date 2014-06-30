@@ -61,7 +61,7 @@ class UserDetailView(DetailView):
     model = USER_MODEL
     slug_field = 'username'
     slug_url_kwarg = 'username'
-    template_name = 'cosinnus/user/user_detail.html'
+    template_name = 'cosinnus/user/userprofile_detail.html'
 
     @method_decorator(staff_required)
     def dispatch(self, *args, **kwargs):
@@ -97,7 +97,7 @@ class UserUpdateView(UpdateView):
         return context
 
     def get_success_url(self):
-        return reverse('cosinnus:user-detail',
+        return reverse('cosinnus:profile-detail',
             kwargs={'username': self.object.username})
 
 user_update = UserUpdateView.as_view()

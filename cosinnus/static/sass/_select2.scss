@@ -89,5 +89,9 @@ body div {
 		@include select2attachment($app-etherpad-color-light,$app-etherpad-color,$app-etherpad-color-dark);
 	}
 
+	.select2-dropdown-open.select2-drop-above .select2-choices {
+		background-image: none;
+	}
+
 }
 

@@ -155,7 +155,7 @@
                 <div class="btn btn-emphasized w100">
                     <ul class="media-list">
                         <li class="media">
-                            <a class="pull-left" href="#">
+                            <a class="pull-left" href="{{ member.cosinnus_profile.get_absolute_url }}">
                                 {% include "cosinnus/user/user_avatar_image.html" with user=member %}
                             </a>
                             {% if user.is_superuser or user|is_group_admin:object %}
@@ -171,7 +171,7 @@
                                             {% trans "Group Member" %}
                                         {% endif %}
                                     </span>
-                                <a href="{% url 'cosinnus:user-detail' username=member.username %}">
+                                <a href="{% url 'cosinnus:profile-detail' username=member.username %}">
                                     {{ member|full_name }}
                                 </a>
                             </div>
@@ -254,7 +254,7 @@
 		                <div class="btn btn-default w100">
 		                    <ul class="media-list">
 		                        <li class="media">
-		                            <a class="pull-left" href="#">
+		                            <a class="pull-left" href="{{ member.cosinnus_profile.get_absolute_url }}">
 		                                {% include "cosinnus/user/user_avatar_image.html" with user=member %}
 		                            </a>
 		                            {% if user.is_superuser or user|is_group_admin:object %}
@@ -266,7 +266,7 @@
 		                                    <span class="annotation">
 	                                            {% trans "Membership requested" %}
 		                                    </span>
-		                                <a href="{% url 'cosinnus:user-detail' username=member.username %}">
+		                                <a href="{% url 'cosinnus:profile-detail' username=member.username %}">
 		                                    {{ member|full_name }}
 		                                </a>
 		                            </div>

@@ -106,6 +106,10 @@ body {
   font-size: 0.8em;
 }
 
+.row {
+  position: relative;
+}
+
 .breadcrumb a {
   text-decoration: underline;
   color: #dbdbdb;
@@ -189,6 +193,8 @@ textarea {
   color: #333333;
   resize: vertical;
   height: 10em;
+  line-height: 1.5em;
+  padding-top: 9px;
 }
 textarea.form-control {
   padding: 8px;
@@ -246,6 +252,11 @@ legend {
   border-bottom-width: 0;
   font-size: 15px;
   font-weight: bold;
+  color: white;
+}
+
+.content-box legend {
+  color: #333333;
 }
 
 label {
@@ -263,7 +274,13 @@ label {
   border-width: 0;
   width: 14em;
   float: right;
-  margin: 0 0 0 5px;
+  margin: 0;
+}
+.btn + .btn {
+  margin-left: 20px;
+}
+.btn + .btn.w100 {
+  margin-left: 0;
 }
 
 .btn .form-control, .select2-container {
@@ -334,6 +351,10 @@ label {
 
 .pull-left input, .pull-right input {
   border-width: 0;
+}
+
+.pull-left:not([href="#"]) {
+  cursor: pointer;
 }
 
 /* put a class like .app-documents, .app-todos on areas that contain content in app colors.
@@ -865,6 +886,7 @@ a.pull-left {
 
 .btn-headline {
   width: 100%;
+  margin-left: 0;
   float: none;
   margin: 0;
 }
@@ -903,6 +925,10 @@ a.pull-left {
 }
 .btn-headline .media-body .annotation {
   font-size: 12px;
+}
+
+.btn + .btn-headline {
+  margin-left: 0;
 }
 
 /* Classes that can be found in many pages and are not part of Twitter Bootstrap */
@@ -990,6 +1016,21 @@ body .large-space {
 .input-area > li + li {
   border-left: 1px solid #dbdbdb;
 }
+.input-area > li.w100 {
+  padding-right: 20px;
+}
+.input-area > li.w100 > i {
+  vertical-align: top;
+  margin-top: 6px;
+}
+.input-area > li.w100 > i + .select2-container {
+  width: 100%;
+  margin-left: -1px;
+}
+.input-area > li.w100 textarea {
+  margin-left: 6px;
+  padding-top: 5px;
+}
 .input-area > li > a > i {
   color: #333333;
   font-size: 17px;
@@ -1065,6 +1106,15 @@ p.navi-explanation {
   color: white;
   margin: 0;
   padding: 0 0 8px 0;
+}
+
+.bottom-align {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.bottom-align button {
+  float: left;
 }
 
 body div .select2-container .select2-choice,
@@ -1148,6 +1198,9 @@ body div .app-etherpad-attachment {
   background-color: #e55c55;
   color: white;
   padding: 0 4px;
+}
+body div .select2-dropdown-open.select2-drop-above .select2-choices {
+  background-image: none;
 }
 
 .app-main {

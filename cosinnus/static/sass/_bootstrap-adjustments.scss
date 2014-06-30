@@ -47,7 +47,9 @@ body {
 }
 
 
-
+.row {
+	position: relative;
+}
 
 .breadcrumb a {
 	text-decoration: underline;
@@ -109,6 +111,8 @@ textarea {
 	color: $app-neutral-color-dark;
 	resize: vertical;
 	height: 10em;
+	line-height: 1.5em;
+	padding-top: 9px;
 
 	&.form-control {
 		padding: 8px;
@@ -182,6 +186,10 @@ legend {
 	border-bottom-width: 0;
 	font-size: 15px;
 	font-weight: bold;
+	color: $app-neutral-color-white;
+}
+.content-box legend {
+	color: $app-neutral-color-dark;
 }
 
 label {

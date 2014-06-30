@@ -7,7 +7,15 @@
 	border-width: 0;
 	width: 14em;
 	float: right;
-	margin: 0 0 0 5px;
+	margin: 0;
+
+	+ .btn {
+		margin-left: 20px;
+
+		&.w100 {
+			margin-left: 0;
+		}
+	}
 }
 .btn .form-control, .select2-container {
 	font-size:1.2em;
@@ -73,7 +81,9 @@
 .pull-left input, .pull-right input {
 	border-width: 0;
 }
-
+.pull-left:not([href="#"]) {
+	cursor: pointer;
+}
 
 /* put a class like .app-documents, .app-todos on areas that contain content in app colors.
 	On usual pages it has to be set only once in a global element.
@@ -340,6 +350,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 
 .btn-headline {
 	width: 100%;
+	margin-left: 0;
 	float: none;
 	margin:0;
 
@@ -389,5 +400,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 
 }
 
-
+.btn + .btn-headline {
+	margin-left: 0;
+}
 
