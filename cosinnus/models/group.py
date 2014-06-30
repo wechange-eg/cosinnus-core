@@ -20,6 +20,7 @@ from tinymce.models import HTMLField
 from cosinnus.conf import settings
 from cosinnus.utils.functions import unique_aware_slugify
 from cosinnus.utils.files import get_group_avatar_filename
+from django.core.urlresolvers import reverse
 
 
 #: Role defining a user has requested to be added to a group
@@ -391,6 +392,9 @@ class CosinnusGroup(models.Model):
         if not hasattr(self, key):
             setattr(self, key, self.media_tag)
         return getattr(self, key)
+    
+    def get_absolute_url(self):
+        return reverse('cosinnus:group-dashboard', kwargs={'group': self.slug})
 
 
 @python_2_unicode_compatible

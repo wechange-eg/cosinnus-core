@@ -97,7 +97,7 @@ class UserUpdateView(UpdateView):
         return context
 
     def get_success_url(self):
-        return reverse('cosinnus:user-detail',
+        return reverse('cosinnus:profile-detail',
             kwargs={'username': self.object.username})
 
 user_update = UserUpdateView.as_view()

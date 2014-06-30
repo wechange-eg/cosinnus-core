@@ -116,10 +116,10 @@
             </div><!-- btn -->
             
             {% for group in profile.cosinnus_groups %}
-                <div type="button" class="btn btn-default w100 fine-space">
+                <div type="button" class="btn btn-default w100 fine-space" href="{{ group.get_absolute_url }}">
 	                <ul class="media-list">
 	                    <li class="media">
-	                        <a class="pull-left" href="#">
+	                        <a class="pull-left">
 	                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
 	                        </a>
 	                        <div class="media-body">

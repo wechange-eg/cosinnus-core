@@ -92,7 +92,7 @@ class BaseUserProfile(models.Model):
         super(BaseUserProfile, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('cosinnus:profile-detail')
+        return reverse('cosinnus:profile-detail', kwargs={'username': self.user.username})
 
     @classmethod
     def get_optional_fieldnames(cls):
