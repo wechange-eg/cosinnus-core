@@ -76,6 +76,23 @@ body .large-space {
 			border-left: 1px solid $app-neutral-color-light;
 		}
 
+		&.w100 {
+			padding-right: 20px;
+
+			> i {
+				vertical-align: top;
+				margin-top: 6px;
+			}
+			> i + .select2-container {
+				width: 100%;
+				margin-left:-1px;
+			}
+			textarea {
+				margin-left: 6px;
+				padding-top: 5px;
+			}
+		}
+
 		> a > i {
 			color: $app-neutral-color-dark;
 			font-size: 17px;
@@ -153,4 +170,14 @@ p.navi-explanation {
 	color: $app-neutral-color-white;
 	margin: 0;
 	padding: 0 0 8px 0;
+}
+
+.bottom-align {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+
+	button {
+		float: left;
+	}
 }
