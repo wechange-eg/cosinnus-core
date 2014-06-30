@@ -1,5 +1,5 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n cosinnus_tags %}
+{% load i18n static cosinnus_tags %}
 
 {% block page_title %}
   {% blocktrans with username=this_user|full_name %}User profile: {{ username }}{% endblocktrans %}{{ block.super }}
@@ -7,6 +7,25 @@
 
 {% block override_breadcrumb %}
 {% endblock override_breadcrumb %}
+
+
+{% block leftnav %}
+    <button type="button" class="btn w100 btn-emphasized regular-space" href="{{ profile.get_absolute_url }}">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left">
+                    <i class="fa fa-user"></i>
+                </a>
+                <a class="pull-right" href="#">
+                    <i class="fa fa-caret-right"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "Über mich" %}
+                </div>
+            </li>
+        </ul>
+    </button>
+{% endblock leftnav %}
 
 {% block content %}
     <div class="row large-space">
@@ -130,7 +149,7 @@
 	            </div>
             {% endfor %}
 
-            
+            {% comment %} Mehr button is hidden till we can load more results  
             <button type="button" class="btn btn-emphasized large-space">
                 <ul class="media-list">
                     <li class="media">
@@ -146,6 +165,7 @@
                     </li>
                 </ul>
             </button>
+             {% endcomment %}
 
 
         </div><!-- column -->
@@ -169,7 +189,8 @@
 
             <table>
                 <tr>
-                    <td><a href="#"><img src="avatar.png" class="w100" /></a></td>
+                    <td><a href="#"><img src="{% static 'images/feature-placeholder.png' %}" class="w100" /></a></td>
+                {% comment %} Show the network followers here  
                     <td><a href="#"><img src="avatar2.png" class="w100" /></a></td>
                     <td><a href="#"><img src="avatar2.png" class="w100" /></a></td>
                 </tr>
@@ -182,6 +203,7 @@
                     <td><a href="#"><img src="avatar2.png" class="w100" /></a></td>
                     <td><a href="#"><img src="avatar2.png" class="w100" /></a></td>
                     <td><a href="#"><img src="avatar.png" class="w100" /></a></td>
+                {% endcomment %}
                 </tr>
             </table>
 
