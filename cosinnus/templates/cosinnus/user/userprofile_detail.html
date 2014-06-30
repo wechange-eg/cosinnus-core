@@ -21,7 +21,7 @@
 	                <ul class="media-list">
 	                    <li class="media">
 	                        <a class="pull-left" href="#">
-	                            <i class="fa fa-envelope"></i>
+	                            <i class="fa fa-pencil"></i>
 	                        </a>
 	                        <div class="media-body">
                                 {% trans "Edit Profile" %}
@@ -30,6 +30,7 @@
 	                </ul>
 	            </button>
             {% else %}
+                {% comment %} Abonnieren is out for now 
 	            <button type="button" class="btn btn-default">
 	                <ul class="media-list">
 	                    <li class="media">
@@ -44,16 +45,15 @@
 	                    </li>
 	                </ul>
 	            </button>
-                <button type="button" class="btn btn-default">
+	             {% endcomment %}
+                <button type="button" class="btn btn-emphasized" href="{% url 'postman_write' recipients=this_user.username %}">
 	                <ul class="media-list">
 	                    <li class="media">
 	                        <a class="pull-left" href="#">
 	                            <i class="fa fa-envelope"></i>
 	                        </a>
 	                        <div class="media-body">
-	                            <a href="#">
-	                                {% trans "Nachricht" %}
-	                            </a>
+                                {% trans "Nachricht" %}
 	                        </div>
 	                    </li>
 	                </ul>
