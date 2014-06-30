@@ -128,7 +128,7 @@ class BaseUserProfile(models.Model):
     @property
     def cosinnus_groups(self):
         """ Returns all groups this user is a member or admin of """
-        return CosinnusGroup.objects.get_for_user(self)
+        return CosinnusGroup.objects.get_for_user(self.user)
 
 class UserProfile(BaseUserProfile):
     
