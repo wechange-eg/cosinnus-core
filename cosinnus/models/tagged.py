@@ -49,7 +49,9 @@ class BaseTagObject(models.Model):
     VISIBILITY_ALL = 2
 
     #: Choices for :attr:`visibility`: ``(int, str)``
+    # Empty first choice must be included for select2 placeholder compatibility!
     VISIBILITY_CHOICES = (
+        ('', ''),
         (VISIBILITY_USER, _('User')),
         (VISIBILITY_GROUP, _('Group')),
         (VISIBILITY_ALL, _('All')),
