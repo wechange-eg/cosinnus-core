@@ -135,7 +135,7 @@
             </div><!-- btn -->
             
             {% for group in profile.cosinnus_groups %}
-                <div type="button" class="btn btn-default w100 fine-space" href="{{ group.get_absolute_url }}">
+                <button type="button" class="btn btn-default w100 fine-space" href="{{ group.get_absolute_url }}">
 	                <ul class="media-list">
 	                    <li class="media">
 	                        <a class="pull-left">
@@ -146,7 +146,7 @@
 	                        </div>
 	                    </li>
 	                </ul>
-	            </div>
+	            </button>
             {% endfor %}
 
             {% comment %} Mehr button is hidden till we can load more results  
