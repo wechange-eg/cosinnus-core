@@ -1,0 +1,15 @@
+{% for message in messages %}
+    <div class="alert{% if message.tags %} alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}{% endif %} alert-dismissable">
+        {% if message.tags == 'success' %}
+            <i class="fa fa-check fa-3x"></i>
+        {% elif message.tags == 'info' %}
+            <i class="fa fa-info-circle fa-3x"></i>
+        {% elif message.tags == 'warning' %}
+            <i class="fa fa-exclamation-circle fa-3x"></i>
+        {% elif message.tags == 'error' %}
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+        {% endif %}
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#215;</button>
+        <p>{{ message|safe }}</p>
+    </div>
+{% endfor %}
