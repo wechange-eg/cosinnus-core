@@ -135,7 +135,7 @@
             </div><!-- btn -->
             
             {% for group in profile.cosinnus_groups %}
-                <button type="button" class="btn btn-default w100 fine-space" href="{{ group.get_absolute_url }}">
+                <button type="button" class="btn btn-default w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ group.get_absolute_url }}">
 	                <ul class="media-list">
 	                    <li class="media">
 	                        <a class="pull-left">
