@@ -91,6 +91,17 @@ p {
 	padding: 8px;
 	background-color: $app-neutral-color-white;
 	color: $app-neutral-color-dark;
+
+	a {
+		color: $app-main-color-dark;
+		font-weight: bold;
+
+		&:focus, &:active, &:hover {
+			color: $app-main-color-dark;
+			font-weight: bold;
+			text-decoration: underline;
+		}
+	}
 }
 p.transparent {
 	background-color: transparent;
@@ -126,6 +137,7 @@ textarea {
 	border-width: 0;
 	padding: 15px 15px 15px 70px;
 	position: relative;
+	min-height: 62px;
 
 	&.alert-success {
 		color: $app-neutral-color-white;
@@ -142,6 +154,17 @@ textarea {
 	&.alert-danger {
 		color: $app-neutral-color-white;
 		background-color: $app-main-color-no;
+	}
+
+	h4 {
+		margin: 0 0 0 0;
+	}
+
+	p {
+		background-color: transparent;
+		padding: 0;
+		margin: 5px 0 0 0;
+		color: inherit;
 	}
 
 	.close {
