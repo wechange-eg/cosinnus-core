@@ -181,3 +181,27 @@ p.navi-explanation {
 		float: left;
 	}
 }
+
+
+ul.errorlist {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	clear: both;
+	background-color: $app-main-color-no;
+
+	li {
+		padding: 7px 10px 7px 10px;
+		margin: 0 0 0 18px;
+
+		color: $app-neutral-color-white;
+		line-height: 22px;
+		font-size: 14px;
+
+		&:before {
+			font-family: 'FontAwesome';
+			content: '\f071';
+			margin:0 7px 0 -18px;
+		}
+	}
+}

@@ -202,15 +202,42 @@ textarea.form-control {
   height: 10em;
 }
 
+.alert {
+  border-width: 0;
+  padding: 15px 15px 15px 70px;
+  position: relative;
+}
 .alert.alert-success {
+  color: white;
+  background-color: #779b48;
+}
+.alert.alert-info {
   color: #333333;
   background-color: rgba(219, 219, 219, 0.3);
-  border-width: 0;
+}
+.alert.alert-warning {
+  color: white;
+  background-color: #efa02d;
+}
+.alert.alert-danger {
+  color: white;
+  background-color: #e55c55;
 }
 .alert .close {
-  color: #333333;
+  color: inherit;
   opacity: 1;
   font-size: 16px;
+  font-weight: normal;
+  right: 0;
+}
+.alert a {
+  color: inherit;
+  font-weight: bold;
+}
+.alert i {
+  position: absolute;
+  top: 15px;
+  left: 18px;
 }
 
 ul.pagination li {
@@ -1115,6 +1142,26 @@ p.navi-explanation {
 }
 .bottom-align button {
   float: left;
+}
+
+ul.errorlist {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  clear: both;
+  background-color: #e55c55;
+}
+ul.errorlist li {
+  padding: 7px 10px 7px 10px;
+  margin: 0 0 0 18px;
+  color: white;
+  line-height: 22px;
+  font-size: 14px;
+}
+ul.errorlist li:before {
+  font-family: 'FontAwesome';
+  content: '\f071';
+  margin: 0 7px 0 -18px;
 }
 
 body div .select2-container .select2-choice,

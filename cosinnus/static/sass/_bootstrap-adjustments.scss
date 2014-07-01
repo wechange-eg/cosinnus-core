@@ -123,17 +123,45 @@ textarea {
 
 
 .alert {
+	border-width: 0;
+	padding: 15px 15px 15px 70px;
+	position: relative;
+
 	&.alert-success {
+		color: $app-neutral-color-white;
+		background-color: $app-main-color-yes;
+	}
+	&.alert-info {
 		color: $app-neutral-color-dark;
 		background-color:transparentize($app-neutral-color-light, 0.7);
-		border-width: 0;
+	}
+	&.alert-warning {
+		color: $app-neutral-color-white;
+		background-color: $app-main-color-maybe;
+	}
+	&.alert-danger {
+		color: $app-neutral-color-white;
+		background-color: $app-main-color-no;
 	}
 
 	.close {
-		color: $app-neutral-color-dark;
+		color: inherit;
 		opacity: 1;
 		font-size: 16px;
+		font-weight: normal;
+		right: 0;
 	}
+
+	a {
+		color: inherit;
+		font-weight: bold;
+	}
+
+	i {
+		position: absolute;
+		top: 15px;
+		left: 18px;
+ }
 }
 
 
