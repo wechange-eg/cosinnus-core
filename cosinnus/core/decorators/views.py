@@ -10,6 +10,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
+from django.contrib import messages
+from django.http.response import HttpResponseRedirect
+from django.core.urlresolvers import reverse_lazy
 
 
 def staff_required(function):
@@ -119,6 +122,10 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
                 return HttpResponseNotFound(_("No group found with this name"))
 
             user = request.user
+            
+            if not group.public and not user.is_authenticated():
+                messages.error(request, _('Please log in to access this page.'))
+                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
 
             if group.public or user.is_superuser or \
                     check_ug_membership(user, group):
@@ -159,9 +166,12 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
 
             user = request.user
             is_member = check_ug_membership(user, group)
-
-            if user.is_authenticated() and \
-                    (is_member or user.is_superuser or group.public):
+            
+            if not user.is_authenticated():
+                messages.error(request, _('Please log in to access this page.'))
+                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
+                
+            if (is_member or user.is_superuser or group.public):
                 setattr(self, group_attr, group)
                 return function(self, request, *args, **kwargs)
 
