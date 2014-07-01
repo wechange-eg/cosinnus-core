@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-25 14:13+0200\n"
+"POT-Creation-Date: 2014-07-01 17:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -69,7 +69,6 @@ msgstr "Widget hinzufügen"
 #: .\_old_templates\cosinnus\userprofile_form.html.py:4
 #: .\templates\cosinnus\navbar.html.py:27
 #: .\templates\cosinnus\group\group_list.html.py:4
-#: .\templates\cosinnus\user\user_detail.html.py:22
 msgid "Groups"
 msgstr "Gruppen"
 
@@ -141,7 +140,7 @@ msgstr "Abmelden"
 #: .\_old_templates\cosinnus\registration\login.html.py:11
 #: .\templates\cosinnus\registration\leftnav.html.py:15
 #: .\templates\cosinnus\registration\login.html.py:4
-#: .\templates\cosinnus\registration\login.html.py:60
+#: .\templates\cosinnus\registration\login.html.py:61
 #: .\templates\cosinnus\registration\signup.html.py:7
 msgid "Login"
 msgstr "Anmelden"
@@ -154,7 +153,6 @@ msgstr "Nutzerprofil: %(username)s"
 
 #: .\_old_templates\cosinnus\userprofile_detail.html.py:13
 #: .\templates\cosinnus\group\group_list.html.py:132
-#: .\templates\cosinnus\user\userprofile_detail.html.py:13
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -343,20 +341,24 @@ msgstr ""
 "\n"
 "Der Nutzer %(user_name)s möchte der Gruppe %(group_name)s beitreten."
 
-#: .\core\decorators\views.py:38 .\core\decorators\views.py:76
-#: .\core\decorators\views.py:114 .\core\decorators\views.py:153
+#: .\core\decorators\views.py:41 .\core\decorators\views.py:79
+#: .\core\decorators\views.py:117 .\core\decorators\views.py:163
 msgid "No group provided"
 msgstr "Keine Gruppe angegeben"
 
-#: .\core\decorators\views.py:43 .\core\decorators\views.py:81
-#: .\core\decorators\views.py:119 .\core\decorators\views.py:158
+#: .\core\decorators\views.py:46 .\core\decorators\views.py:84
+#: .\core\decorators\views.py:122 .\core\decorators\views.py:168
 msgid "No group found with this name"
 msgstr "Keine Gruppe mit diesem Namen gefunden"
 
-#: .\core\decorators\views.py:51 .\core\decorators\views.py:89
-#: .\core\decorators\views.py:128 .\core\decorators\views.py:168
+#: .\core\decorators\views.py:54 .\core\decorators\views.py:92
+#: .\core\decorators\views.py:138 .\core\decorators\views.py:184
 msgid "Access denied"
 msgstr "Zugriff verweigert"
+
+#: .\core\decorators\views.py:127 .\core\decorators\views.py:174
+msgid "Please log in to access this page."
+msgstr "Bitte melden sie sich an um auf diese Seite zugreifen zu können"
 
 #: .\forms\attached_object.py:52
 msgid "Attachments"
@@ -366,8 +368,7 @@ msgstr "Anhänge"
 msgid "Type the title and/or type of attachment"
 msgstr "Geben sie Titel/Typ des Anhangs ein"
 
-#: .\forms\hierarchy.py:14 .\models\group.py:292
-#: .\templates\cosinnus\user\user_detail.html.py:14
+#: .\forms\hierarchy.py:14 .\models\group.py:293
 msgid "Name"
 msgstr "Name"
 
@@ -375,7 +376,7 @@ msgstr "Name"
 msgid "Limit to groups"
 msgstr "Auf Gruppen beschränken"
 
-#: .\forms\search.py:51 .\models\tagged.py:55
+#: .\forms\search.py:51 .\models\tagged.py:57
 msgid "All"
 msgstr "Alle"
 
@@ -387,98 +388,95 @@ msgstr "Meine Gruppen"
 msgid "Other groups"
 msgstr "Andere Gruppen"
 
-#: .\models\group.py:56
+#: .\models\group.py:57
 msgid "Enter a valid group name. Forward slash is not allowed."
 msgstr ""
 "Bitt einen gültigen Gruppenamen angeben. Ein Vorwärtsslash ist nicht erlaubt."
 
-#: .\models\group.py:294
+#: .\models\group.py:295
 msgid "Slug"
 msgstr "Slug"
 
-#: .\models\group.py:295 .\models\profile.py:136
+#: .\models\group.py:296 .\models\profile.py:141
 msgid "Description"
 msgstr "Beschreibung"
 
-#: .\models\group.py:296 .\models\profile.py:134
-#: .\templates\cosinnus\user\user_detail.html.py:33
-#: .\templates\cosinnus\user\user_detail.html.py:36
-#: .\templates\cosinnus\user\user_detail.html.py:38
+#: .\models\group.py:297 .\models\profile.py:139
 msgid "Avatar"
 msgstr "Avatar"
 
-#: .\models\group.py:298 .\models\tagged.py:38
+#: .\models\group.py:299 .\models\tagged.py:38
 #: .\templates\cosinnus\group\group_form.html.py:161
 msgid "Public"
 msgstr "Öffentlich"
 
-#: .\models\group.py:303 .\models\tagged.py:123
+#: .\models\group.py:304 .\models\tagged.py:125
 msgid "Tags"
 msgstr "Schlagworte"
 
-#: .\models\group.py:310
+#: .\models\group.py:311
 msgid "Cosinnus group"
 msgstr "Cosinnus Gruppe"
 
-#: .\models\group.py:311
+#: .\models\group.py:312
 msgid "Cosinnus groups"
 msgstr "Cosinnus Gruppen"
 
-#: .\models\group.py:330
+#: .\models\group.py:331
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
 
-#: .\models\group.py:411
+#: .\models\group.py:415
 msgid "Group membership"
 msgstr "Gruppenmitgliedschaft"
 
-#: .\models\group.py:412
+#: .\models\group.py:416
 msgid "Group memberships"
 msgstr "Gruppenmitgliedschaften"
 
-#: .\models\profile.py:139
+#: .\models\profile.py:144
 #: .\templates\cosinnus\user\userprofile_form.html.py:93
 msgid "Website"
-msgstr ""
+msgstr "Webseite"
 
-#: .\models\tagged.py:53 .\templates\cosinnus\group\group_user_list.html.py:13
+#: .\models\tagged.py:55 .\templates\cosinnus\group\group_user_list.html.py:13
 #: .\templates\cosinnus\user\user_list.html.py:13
 msgid "User"
 msgstr "Nutzer"
 
-#: .\models\tagged.py:54 .\models\tagged.py:58 .\models\tagged.py:129
+#: .\models\tagged.py:56 .\models\tagged.py:60 .\models\tagged.py:131
 msgid "Group"
 msgstr "Gruppe"
 
-#: .\models\tagged.py:62
+#: .\models\tagged.py:64
 msgid "Persons"
 msgstr "Personen"
 
-#: .\models\tagged.py:63
+#: .\models\tagged.py:65
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: .\models\tagged.py:96
+#: .\models\tagged.py:98
 msgid "Attached object"
 msgstr "Verknüpftes Objekt"
 
-#: .\models\tagged.py:97
+#: .\models\tagged.py:99
 msgid "Attached objects"
 msgstr "Verknüpftes Objekt"
 
-#: .\models\tagged.py:132
+#: .\models\tagged.py:134
 msgid "Title"
 msgstr "Titel"
 
-#: .\models\tagged.py:136
+#: .\models\tagged.py:138
 msgid "Creator"
 msgstr "Ersteller"
 
-#: .\models\tagged.py:141
+#: .\models\tagged.py:143
 msgid "Created"
 msgstr "Erstellt"
 
-#: .\models\tagged.py:186
+#: .\models\tagged.py:188
 msgid "Path"
 msgstr "Pfad"
 
@@ -566,12 +564,12 @@ msgid "OK"
 msgstr "OK"
 
 #: .\templates\cosinnus\navbar.html.py:70
-msgid "User Dashboard"
-msgstr "Persönliches Dashboard"
+msgid "Mein Dashboard"
+msgstr "Mein Dashboard"
 
 #: .\templates\cosinnus\navbar.html.py:71
-msgid "Edit Profile"
-msgstr "Profil bearbeiten"
+msgid "Mein Profil"
+msgstr "Mein Profil"
 
 #: .\templates\cosinnus\not_logged_in_alert.html.py:5
 msgid "Nicht eingeloggt."
@@ -621,6 +619,7 @@ msgid "In Gruppen suchen"
 msgstr ""
 
 #: .\templates\cosinnus\search.html.py:168
+#: .\templates\cosinnus\user\userprofile_detail.html.py:132
 msgid "Meine Gruppen"
 msgstr "Meine Gruppen"
 
@@ -803,12 +802,16 @@ msgstr ""
 msgid "Gruppenbild wird beim Speichern der Gruppe gelöscht."
 msgstr ""
 
+#: .\templates\cosinnus\group\group_form.html.py:110
+#: .\templates\cosinnus\user\userprofile_form.html.py:155
+msgid "Löschen"
+msgstr ""
+
 #: .\templates\cosinnus\group\group_form.html.py:121
 msgid "Ein Bild hilft, die Gruppe in vielen Programmen schnell zu erkennen."
 msgstr ""
 
 #: .\templates\cosinnus\group\group_form.html.py:128
-#: .\templates\cosinnus\user\userprofile_form.html.py:173
 msgid "Über die Gruppe"
 msgstr ""
 
@@ -902,13 +905,12 @@ msgstr "Gruppenmitglieder"
 msgid "Register"
 msgstr "Registrieren"
 
-#: .\templates\cosinnus\registration\login.html.py:29
+#: .\templates\cosinnus\registration\login.html.py:30
 #: .\templates\cosinnus\registration\signup.html.py:31
-#: .\templates\cosinnus\user\user_detail.html.py:10
 msgid "Username"
 msgstr "Nutzername"
 
-#: .\templates\cosinnus\registration\login.html.py:44
+#: .\templates\cosinnus\registration\login.html.py:45
 msgid "Password"
 msgstr "Passwort"
 
@@ -946,13 +948,30 @@ msgstr "Nachname"
 msgid "Registrieren"
 msgstr ""
 
-#: .\templates\cosinnus\user\user_detail.html.py:18
-msgid "E-mail address"
-msgstr "E-mail Adresse"
-
 #: .\templates\cosinnus\user\user_list.html.py:4
 msgid "Users"
 msgstr "Nutzer"
+
+#: .\templates\cosinnus\user\userprofile_detail.html.py:23
+#: .\templates\cosinnus\user\userprofile_detail.html.py:99
+msgid "Über mich"
+msgstr ""
+
+#: .\templates\cosinnus\user\userprofile_detail.html.py:46
+msgid "Edit Profile"
+msgstr "Profil bearbeiten"
+
+#: .\templates\cosinnus\user\userprofile_detail.html.py:76
+msgid "Nachricht"
+msgstr ""
+
+#: .\templates\cosinnus\user\userprofile_detail.html.py:114
+msgid "Meine Webseite"
+msgstr ""
+
+#: .\templates\cosinnus\user\userprofile_detail.html.py:186
+msgid "Mein Netzwerk"
+msgstr "Mein Netzwerk"
 
 #: .\templates\cosinnus\user\userprofile_form.html.py:5
 msgid "Edit Your Profile"
@@ -976,6 +995,10 @@ msgstr ""
 
 #: .\templates\cosinnus\user\userprofile_form.html.py:166
 msgid "Ein Bild hilft, dich in vielen Programmen schnell zu erkennen."
+msgstr ""
+
+#: .\templates\cosinnus\user\userprofile_form.html.py:173
+msgid "Über dich"
 msgstr ""
 
 #: .\templates\cosinnus\user\userprofile_form.html.py:183
@@ -1103,7 +1126,12 @@ msgstr "Nutzer aus der Gruppe “%(group_name)s” entfernen?"
 msgid "No appname given for adding containers."
 msgstr "Kein Appname zum Hinzufügen von Zusammenstellungen angegeben."
 
-#: .\views\profile.py:44
+#: .\views\profile.py:52
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr ""
+
+#: .\views\profile.py:77
 msgid "Your profile was edited successfully."
 msgstr "Dein Profil wurde erfolgreich bearbeitet."
 
@@ -1149,6 +1177,9 @@ msgstr "Objekt \"%(title)s\" wurde erfolgreich gelöscht."
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d andere Objekte wurden gelöscht."
+
+#~ msgid "E-mail address"
+#~ msgstr "E-mail Adresse"
 
 #~ msgid "No Group Description set"
 #~ msgstr "Keine Gruppenbeschreibung verfasst."
