@@ -151,7 +151,7 @@
             {#{% if user.is_authenticated %}#}
             {#{% for group in object_list %}#}
     {#   {% if user.is_authenticated and user.is_superuser or user.pk in members or group.public %}{% else %}{% endif %}  #}
-            <div class="fadedown regular-space">
+            <div class="fadedown {% if not forloop.last %}regular-space{% endif %}">
                 <div class="btn btn-emphasized w100">
                     <ul class="media-list">
                         <li class="media">
@@ -250,7 +250,7 @@
 	           
 	           {% comment %} In public groups, we enable the logged in user to see himself as pending user {% endcomment %}
 	           {% if not user in pendings or user == member %}
-		            <div class="fadedown regular-space">
+		            <div class="fadedown {% if not forloop.last %}regular-space{% endif %}">
 		                <div class="btn btn-default w100">
 		                    <ul class="media-list">
 		                        <li class="media">

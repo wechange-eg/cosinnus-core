@@ -7,16 +7,24 @@
 	border-width: 0;
 	width: 14em;
 	float: right;
-	margin: 0;
+	margin: 0 0 0 20px;
+
+	&.w100 {
+		margin-left: 0;
+	}
+}
+
+.bottom-align .btn {
+	float: left;
+
+	// Left floating buttons only have left margin when not first element.
+	margin-left: 0;
 
 	+ .btn {
 		margin-left: 20px;
-
-		&.w100 {
-			margin-left: 0;
-		}
 	}
 }
+
 .btn .form-control, .select2-container {
 	font-size:1.2em;
 }
@@ -222,7 +230,7 @@ ul.appnavi-dropdown-menu {
 
 	> a {
 		// Room for annotations
-		padding-right: 12em; // max annotation width
+		// padding-right: 12em; // max annotation width
 		width: 100%;
 		display: block;
 		overflow: hidden;

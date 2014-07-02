@@ -259,6 +259,9 @@ textarea.form-control {
   left: 18px;
 }
 
+ul.pagination {
+  margin-bottom: 0;
+}
 ul.pagination li {
   background-color: white;
   border-width: 0;
@@ -320,13 +323,18 @@ label {
   border-width: 0;
   width: 14em;
   float: right;
-  margin: 0;
+  margin: 0 0 0 20px;
 }
-.btn + .btn {
-  margin-left: 20px;
-}
-.btn + .btn.w100 {
+.btn.w100 {
   margin-left: 0;
+}
+
+.bottom-align .btn {
+  float: left;
+  margin-left: 0;
+}
+.bottom-align .btn + .btn {
+  margin-left: 20px;
 }
 
 .btn .form-control, .select2-container {
@@ -820,7 +828,6 @@ ul.appnavi-dropdown-menu {
   margin-left: 15px;
 }
 .media-body > a {
-  padding-right: 12em;
   width: 100%;
   display: block;
   overflow: hidden;
@@ -1158,9 +1165,6 @@ p.navi-explanation {
   position: absolute;
   right: 0;
   bottom: 0;
-}
-.bottom-align button {
-  float: left;
 }
 
 ul.errorlist {
