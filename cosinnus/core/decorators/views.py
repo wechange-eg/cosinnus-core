@@ -158,22 +158,42 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             group_name = kwargs.get(group_url_kwarg, None)
             if not group_name:
                 return HttpResponseNotFound(_("No group provided"))
-
+            
+            
             try:
                 group = CosinnusGroup.objects.get(slug=group_name)
             except CosinnusGroup.DoesNotExist:
                 return HttpResponseNotFound(_("No group found with this name"))
-
+            
+            
             user = request.user
             is_member = check_ug_membership(user, group)
+            is_admin = check_ug_admin(user, group)
             
             if not user.is_authenticated():
                 messages.error(request, _('Please log in to access this page.'))
                 return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
+            
+            # set the group attr    
+            setattr(self, group_attr, group)
+            
+            requested_object = None
+            try:
+                requested_object = self.get_object()
+            except AttributeError:
+                # TODO: SASCHA: HERE CLEAN HANDLING
+                pass
+            
+            if requested_object:
+                # editing/deleting an object, check if we are owner or staff member or group admin or site admin
+                if (requested_object.creator == user or is_admin or user.is_superuser or user.is_staff):
+                    return function(self, request, *args, **kwargs)
+            else:
+                # creating a new object, check if we can create objects in the group
+                if (is_member or is_admin or user.is_superuser or user.is_staff):
+                    return function(self, request, *args, **kwargs)
                 
-            if (is_member or user.is_superuser or group.public):
-                setattr(self, group_attr, group)
-                return function(self, request, *args, **kwargs)
+            
 
             return HttpResponseForbidden(_("Access denied"))
         return wrapper
