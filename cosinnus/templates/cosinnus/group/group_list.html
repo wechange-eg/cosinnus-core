@@ -58,8 +58,8 @@
 	            <div class="btn btn-{% if user.is_authenticated and user.pk in members or group.public %}emphasized{% else %}default{% endif %} w100">
 	                <ul class="media-list">
 	                    <li class="media">
-	                        <a class="pull-left" href="#">
-	                            <i class="fa fa-group"></i>
+	                        <a class="pull-left" href="{% url 'cosinnus:group-dashboard' group=group.slug %}">
+	                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
 	                        </a>
 	                        <a class="pull-right fadedown-clickarea" href="#">
 	                            <i class="fa fa-chevron-down"></i>
