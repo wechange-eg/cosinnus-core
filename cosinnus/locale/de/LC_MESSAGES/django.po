@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-01 17:07+0200\n"
+"POT-Creation-Date: 2014-07-07 15:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -90,22 +90,22 @@ msgstr "Beigetreten"
 
 #
 #: .\_old_templates\cosinnus\group_list.html.py:42
-#: .\templates\cosinnus\group\group_list.html.py:112 .\views\group.py:259
+#: .\templates\cosinnus\group\group_list.html.py:108 .\views\group.py:259
 msgid "Leave"
 msgstr "Verlassen"
 
 #: .\_old_templates\cosinnus\group_list.html.py:46
-#: .\templates\cosinnus\group\group_list.html.py:114 .\views\group.py:292
+#: .\templates\cosinnus\group\group_list.html.py:110 .\views\group.py:292
 msgid "Withdraw"
 msgstr "Zurückziehen"
 
 #: .\_old_templates\cosinnus\group_list.html.py:50
-#: .\templates\cosinnus\group\group_list.html.py:116 .\views\group.py:238
+#: .\templates\cosinnus\group\group_list.html.py:112 .\views\group.py:238
 msgid "Join"
 msgstr "Beitreten"
 
 #: .\_old_templates\cosinnus\group_list.html.py:65
-#: .\templates\cosinnus\group\group_list.html.py:174
+#: .\templates\cosinnus\group\group_list.html.py:170
 msgid "There are no groups."
 msgstr "Es gibt keine Gruppen."
 
@@ -152,7 +152,7 @@ msgid "User profile: %(username)s"
 msgstr "Nutzerprofil: %(username)s"
 
 #: .\_old_templates\cosinnus\userprofile_detail.html.py:13
-#: .\templates\cosinnus\group\group_list.html.py:132
+#: .\templates\cosinnus\group\group_list.html.py:128
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -341,22 +341,18 @@ msgstr ""
 "\n"
 "Der Nutzer %(user_name)s möchte der Gruppe %(group_name)s beitreten."
 
-#: .\core\decorators\views.py:41 .\core\decorators\views.py:79
-#: .\core\decorators\views.py:117 .\core\decorators\views.py:163
+#: .\core\decorators\views.py:47 .\core\decorators\views.py:91
+#: .\core\decorators\views.py:135 .\core\decorators\views.py:180
 msgid "No group provided"
 msgstr "Keine Gruppe angegeben"
 
-#: .\core\decorators\views.py:46 .\core\decorators\views.py:84
-#: .\core\decorators\views.py:122 .\core\decorators\views.py:168
+#: .\core\decorators\views.py:52 .\core\decorators\views.py:96
+#: .\core\decorators\views.py:140 .\core\decorators\views.py:185
 msgid "No group found with this name"
 msgstr "Keine Gruppe mit diesem Namen gefunden"
 
-#: .\core\decorators\views.py:54 .\core\decorators\views.py:92
-#: .\core\decorators\views.py:138 .\core\decorators\views.py:184
-msgid "Access denied"
-msgstr "Zugriff verweigert"
-
-#: .\core\decorators\views.py:127 .\core\decorators\views.py:174
+#: .\core\decorators\views.py:57 .\core\decorators\views.py:101
+#: .\core\decorators\views.py:145 .\core\decorators\views.py:190
 msgid "Please log in to access this page."
 msgstr "Bitte melden sie sich an um auf diese Seite zugreifen zu können"
 
@@ -516,6 +512,18 @@ msgstr "Konfigurationseinstellung"
 msgid "Widget configuration items"
 msgstr "Konfigurationseinstellungen"
 
+#: .\templates\403.html.py:5
+msgid "Access denied"
+msgstr "Zugriff verweigert"
+
+#: .\templates\403.html.py:13
+msgid "Access denied!"
+msgstr "Zugriff verweigert!"
+
+#: .\templates\403.html.py:14
+msgid "You don't have permission to access this site."
+msgstr "Sie haben keine Berechtigungen, auf diese Seite zuzugreifen."
+
 #: .\templates\cosinnus\appsmenu.html.py:26
 #: .\templates\cosinnus\appsmenu.html.py:55
 msgid "Einstellungen"
@@ -657,110 +665,110 @@ msgstr "%(group_name)s - Gruppenmitglieder"
 msgid "Group Members"
 msgstr "Gruppenmitglieder"
 
-#: .\templates\cosinnus\group\group_detail.html.py:120
+#: .\templates\cosinnus\group\group_detail.html.py:34
 msgid "Gib den Namen für ein neues Mitglied ein."
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html.py:122
+#: .\templates\cosinnus\group\group_detail.html.py:36
 msgid "Add a user to this group"
 msgstr "Einen Nutzer als neues Mitglied aufnehmen"
 
-#: .\templates\cosinnus\group\group_detail.html.py:139
+#: .\templates\cosinnus\group\group_detail.html.py:53
 #: .\templates\cosinnus\group\group_user_list.html.py:7
 #: .\templates\cosinnus\user\user_list.html.py:7
 msgid "Add user"
 msgstr "Nutzer hinzufügen"
 
-#: .\templates\cosinnus\group\group_detail.html.py:148
+#: .\templates\cosinnus\group\group_detail.html.py:62
 msgid "Group members"
 msgstr "Gruppenmitglieder"
 
-#: .\templates\cosinnus\group\group_detail.html.py:170
-#: .\templates\cosinnus\group\group_list.html.py:74
+#: .\templates\cosinnus\group\group_detail.html.py:80
+#: .\templates\cosinnus\group\group_list.html.py:70
 msgid "Group Admin"
 msgstr "Gruppenadministrator"
 
-#: .\templates\cosinnus\group\group_detail.html.py:172
-#: .\templates\cosinnus\group\group_list.html.py:76
+#: .\templates\cosinnus\group\group_detail.html.py:82
+#: .\templates\cosinnus\group\group_list.html.py:72
 msgid "Group Member"
 msgstr "Mitglied"
 
-#: .\templates\cosinnus\group\group_detail.html.py:194
+#: .\templates\cosinnus\group\group_detail.html.py:104
 msgid "Kick"
 msgstr "Entfernen"
 
-#: .\templates\cosinnus\group\group_detail.html.py:208
+#: .\templates\cosinnus\group\group_detail.html.py:118
 msgid "Make Member"
 msgstr "Als Mitglied"
 
-#: .\templates\cosinnus\group\group_detail.html.py:210
+#: .\templates\cosinnus\group\group_detail.html.py:120
 msgid "Make Admin"
 msgstr "Als Admin"
 
-#: .\templates\cosinnus\group\group_detail.html.py:224
+#: .\templates\cosinnus\group\group_detail.html.py:134
 #, python-format
 msgid "Do you really want to demote administrator „%(name)s“ to member?"
 msgstr ""
 "Möchten sie Administrator „%(name)s“ wirklich zum Mitglied herabstufen?"
 
-#: .\templates\cosinnus\group\group_detail.html.py:225
+#: .\templates\cosinnus\group\group_detail.html.py:135
 msgid "Demote Admin"
 msgstr "Gruppenadministrator herabstufen"
 
-#: .\templates\cosinnus\group\group_detail.html.py:229
+#: .\templates\cosinnus\group\group_detail.html.py:139
 #, python-format
 msgid "Do you really want to promote member „%(name)s“ to administrator?"
 msgstr "Möchten sie Mitglied „%(name)s“ wirklich zum Administrator befördern?"
 
-#: .\templates\cosinnus\group\group_detail.html.py:230
+#: .\templates\cosinnus\group\group_detail.html.py:140
 msgid "Promote Member"
 msgstr "Mitglied befördern"
 
-#: .\templates\cosinnus\group\group_detail.html.py:236
+#: .\templates\cosinnus\group\group_detail.html.py:146
 #, python-format
 msgid "Do you really want to remove member „%(name)s“ from the Group?"
 msgstr "Möchten sie wirklich „%(name)s“ aus der Gruppe entfernen?"
 
-#: .\templates\cosinnus\group\group_detail.html.py:237
+#: .\templates\cosinnus\group\group_detail.html.py:147
 msgid "Remove Member"
 msgstr "Mitglied entfernen"
 
-#: .\templates\cosinnus\group\group_detail.html.py:248
+#: .\templates\cosinnus\group\group_detail.html.py:158
 msgid "Membership requests"
 msgstr "Mitgliedsanträge"
 
-#: .\templates\cosinnus\group\group_detail.html.py:269
-#: .\templates\cosinnus\group\group_list.html.py:78
+#: .\templates\cosinnus\group\group_detail.html.py:179
+#: .\templates\cosinnus\group\group_list.html.py:74
 msgid "Membership requested"
 msgstr "Mitgliedschaft wurde beantragt"
 
-#: .\templates\cosinnus\group\group_detail.html.py:290
+#: .\templates\cosinnus\group\group_detail.html.py:200
 msgid "Decline User"
 msgstr "Ablehnen"
 
-#: .\templates\cosinnus\group\group_detail.html.py:303
+#: .\templates\cosinnus\group\group_detail.html.py:213
 msgid "Accept User"
 msgstr "Annehmen"
 
-#: .\templates\cosinnus\group\group_detail.html.py:315
+#: .\templates\cosinnus\group\group_detail.html.py:225
 #, python-format
 msgid "Do you really want to accept user „%(name)s“ as a member?"
 msgstr "Möchten sie „%(name)s“ in die Gruppe aufnehmen?"
 
-#: .\templates\cosinnus\group\group_detail.html.py:316
+#: .\templates\cosinnus\group\group_detail.html.py:226
 msgid "Accept Member"
 msgstr "Mitglied aufnehmen"
 
-#: .\templates\cosinnus\group\group_detail.html.py:321
+#: .\templates\cosinnus\group\group_detail.html.py:231
 #, python-format
 msgid "Do you really want to decline member „%(name)s“?"
 msgstr "Möchten sie „%(name)s“'s Mitgliedschaftsantrag wirklich ablehnen?"
 
-#: .\templates\cosinnus\group\group_detail.html.py:322
+#: .\templates\cosinnus\group\group_detail.html.py:232
 msgid "Decline Member"
 msgstr "Mitglied ablehen"
 
-#: .\templates\cosinnus\group\group_detail.html.py:331
+#: .\templates\cosinnus\group\group_detail.html.py:241
 msgid "There are no new membership requests."
 msgstr "Es gibt aktuell keine neuen Mitgliedschaftsanträge."
 
@@ -786,7 +794,7 @@ msgid "Edit group “%(group_name)s”"
 msgstr "Gruppe “%(group_name)s” bearbeiten"
 
 #: .\templates\cosinnus\group\group_form.html.py:28
-#: .\templates\cosinnus\group\leftnav_group.html.py:13
+#: .\templates\cosinnus\group\leftnav_group.html.py:14
 msgid "Edit Group"
 msgstr "Gruppe bearbeiten"
 
@@ -841,44 +849,44 @@ msgstr ""
 msgid "Speichern"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_list.html.py:80
+#: .\templates\cosinnus\group\group_list.html.py:76
 msgid "Public group"
 msgstr "Öffentliche Gruppe"
 
-#: .\templates\cosinnus\group\group_list.html.py:82
+#: .\templates\cosinnus\group\group_list.html.py:78
 msgid "Not a member"
 msgstr "Nicht Mitglied"
 
-#: .\templates\cosinnus\group\group_list.html.py:146
+#: .\templates\cosinnus\group\group_list.html.py:142
 msgid "Group details"
 msgstr "Gruppendetails"
 
-#: .\templates\cosinnus\group\group_list.html.py:157
+#: .\templates\cosinnus\group\group_list.html.py:153
 #, python-format
 msgid "Do you really want to leave group „%(title)s“?"
 msgstr "Möchten sie die Gruppe “%(title)s” verlassen?"
 
 #
-#: .\templates\cosinnus\group\group_list.html.py:158
+#: .\templates\cosinnus\group\group_list.html.py:154
 msgid "Leave Group"
 msgstr "Gruppe verlassen"
 
-#: .\templates\cosinnus\group\group_list.html.py:161
+#: .\templates\cosinnus\group\group_list.html.py:157
 #, python-format
 msgid "Do you really want to withdraw your join request to group „%(title)s“?"
 msgstr ""
 "Möchten sie ihre Beitrittsanfrage für die Gruppe “%(title)s” zurückziehen?"
 
-#: .\templates\cosinnus\group\group_list.html.py:162
+#: .\templates\cosinnus\group\group_list.html.py:158
 msgid "Withdraw Join Request"
 msgstr "Beitrittsanfrage zurückziehen"
 
-#: .\templates\cosinnus\group\group_list.html.py:165
+#: .\templates\cosinnus\group\group_list.html.py:161
 #, python-format
 msgid "Do you wish to request to join group „%(title)s“?"
 msgstr "Möchten sie der Gruppe %(title)s beitreten?"
 
-#: .\templates\cosinnus\group\group_list.html.py:166
+#: .\templates\cosinnus\group\group_list.html.py:162
 msgid "Join Group"
 msgstr "Gruppe beitreten"
 
@@ -897,7 +905,7 @@ msgid "All groups"
 msgstr "Alle Gruppen"
 
 #
-#: .\templates\cosinnus\group\leftnav_group.html.py:17
+#: .\templates\cosinnus\group\leftnav_group.html.py:19
 msgid "Members"
 msgstr "Gruppenmitglieder"
 
@@ -1034,7 +1042,7 @@ msgstr "Sie können dieses Widget nicht auf das Benutzerdashboard platzieren"
 msgid "Widget not found."
 msgstr "Widget nicht gefunden"
 
-#: .\templatetags\cosinnus_tags.py:151
+#: .\templatetags\cosinnus_tags.py:187
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>%(model_name)s konnte nicht gerendert werden!</i>"

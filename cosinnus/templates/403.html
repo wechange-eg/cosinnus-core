@@ -1,0 +1,17 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n bootstrap3 cosinnus_tags %}
+{% load static from staticfiles %}
+
+{% block page_title %}{% trans "Access denied" %}{% endblock page_title %}
+
+{% block override_breadcrumb %}
+{% endblock override_breadcrumb %}
+
+{% block content %}
+    <div class="alert alert-danger alert-dismissable">
+        <i class="fa fa-exclamation-triangle fa-3x"></i>
+        <h4>{% trans "Access denied!" %}</h4>
+        <p>{% trans "You don't have permission to access this site." %}</p>
+    </div>
+{% endblock content %}
+

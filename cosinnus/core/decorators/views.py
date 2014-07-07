@@ -9,13 +9,17 @@ from django.utils.decorators import available_attrs
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.models.group import CosinnusGroup
-from cosinnus.utils.permissions import check_ug_admin, check_ug_membership,\
-    check_object_write_access, check_group_create_objects_access,\
-    check_object_read_access
+from cosinnus.utils.permissions import check_object_write_access,\
+    check_group_create_objects_access, check_object_read_access
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
+from django.core.exceptions import PermissionDenied
 
+
+def redirect_to_403(request):
+    raise PermissionDenied
+    
 
 def staff_required(function):
     """A function decorator to assure a requesting user is a staff user."""
@@ -49,11 +53,17 @@ def require_admin_access_decorator(group_url_arg='group'):
 
             user = request.user
 
+            if not user.is_authenticated():
+                messages.error(request, _('Please log in to access this page.'))
+                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
+
             if check_object_write_access(group, user):
                 kwargs['group'] = group
                 return function(request, *args, **kwargs)
 
-            return HttpResponseForbidden(_("Access denied"))
+            # Access denied, redirect to 403 page and and display an error message
+            return redirect_to_403(request)
+            
         return wrapper
     return decorator
 
@@ -86,12 +96,18 @@ def require_admin_access(group_url_kwarg='group', group_attr='group'):
                 return HttpResponseNotFound(_("No group found with this name"))
 
             user = request.user
+            
+            if not user.is_authenticated():
+                messages.error(request, _('Please log in to access this page.'))
+                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
 
             if check_object_write_access(group, user):
                 setattr(self, group_attr, group)
                 return function(self, request, *args, **kwargs)
 
-            return HttpResponseForbidden(_("Access denied"))
+            # Access denied, redirect to 403 page and and display an error message
+            return redirect_to_403(request)
+            
         return wrapper
     return decorator
 
@@ -134,7 +150,9 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
                 
                 return function(self, request, *args, **kwargs)
 
-            return HttpResponseForbidden(_("Access denied"))
+            # Access denied, redirect to 403 page and and display an error message
+            return redirect_to_403(request)
+            
         return wrapper
     return decorator
 
@@ -190,7 +208,8 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
                 if check_group_create_objects_access(group, user):
                     return function(self, request, *args, **kwargs)
             
-            print "returning access denied"
-            return HttpResponseForbidden(_("Access denied"))
+            # Access denied, redirect to 403 page and and display an error message
+            return redirect_to_403(request)
+            
         return wrapper
     return decorator
