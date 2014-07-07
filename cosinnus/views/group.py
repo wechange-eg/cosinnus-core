@@ -13,7 +13,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import (CreateView, DeleteView, DetailView,
     ListView, UpdateView, TemplateView)
 
-from cosinnus.core.decorators.views import superuser_required
+from cosinnus.core.decorators.views import superuser_required,\
+    membership_required
 from cosinnus.core.registries import app_registry
 from cosinnus.forms.group import CosinnusGroupForm, MembershipForm
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
@@ -35,7 +36,7 @@ class GroupCreateView(AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
     model = CosinnusGroup
     template_name = 'cosinnus/group/group_form.html'
 
-    @method_decorator(superuser_required)
+    @method_decorator(membership_required)
     @atomic
     def dispatch(self, *args, **kwargs):
         return super(GroupCreateView, self).dispatch(*args, **kwargs)
@@ -63,14 +64,13 @@ group_create = GroupCreateView.as_view()
 group_create_api = GroupCreateView.as_view(is_ajax_request_url=True)
 
 
-class GroupDeleteView(AjaxableFormMixin, DeleteView):
+class GroupDeleteView(AjaxableFormMixin, RequireAdminMixin, DeleteView):
 
     model = CosinnusGroup
     slug_url_kwarg = 'group'
     success_url = reverse_lazy('cosinnus:group-list')
     template_name = 'cosinnus/group/group_delete.html'
 
-    @method_decorator(superuser_required)
     @atomic
     def dispatch(self, *args, **kwargs):
         return super(GroupDeleteView, self).dispatch(*args, **kwargs)

@@ -85,8 +85,7 @@ def can_create_groups(user):
     """
     Template filter to check if a user can create CosinnusGroups.
     """
-    return user.is_superuser
-
+    return user.is_authenticated()
 
 
 @register.filter

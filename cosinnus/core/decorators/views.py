@@ -37,6 +37,14 @@ def superuser_required(function):
     )
     return actual_decorator(function)
 
+def membership_required(function):
+    """A function decorator to assure a requesting user is an authenticated member
+    """
+    actual_decorator = user_passes_test(
+        lambda u: u.is_authenticated()
+    )
+    return actual_decorator(function)
+
 
 def require_admin_access_decorator(group_url_arg='group'):
     def decorator(function):
