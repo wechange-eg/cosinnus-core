@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from cosinnus.models.group import CosinnusGroup
+from cosinnus.models.tagged import BaseTaggableObjectModel
 
 
 def check_ug_admin(user, group):
@@ -35,8 +37,55 @@ def check_ug_pending(user, group):
     return group.is_pending(user)
 
 
-def check_object_access(user, obj):
-    """Returns ``True`` if the user is a superuser or a member of the group the
-    object belongs to.
+
+def check_object_read_access(obj, user):
+    """ Checks read permissions for a CosinnusGroup or BaseTaggableObject.
+        Returns ``True`` if the user is either admin, staff member, group admin, group member,
+            or the group is public.
     """
-    return user.is_superuser or check_ug_membership(user, obj.group)
+    # check what kind of object was supplied (CosinnusGroup or BaseTaggableObject)
+    if type(obj) is CosinnusGroup:
+        group = obj
+    elif issubclass(obj.__class__, BaseTaggableObjectModel):
+        group = obj.group
+    else:
+        raise Exception("cosinnus.core.permissions: You must either supply a CosinnusGroup \
+                or a BaseTaggableObject to check_object_read_access(). The supplied object \
+                type was: %s" % (str(obj.__class__) if obj else "None"))
+    
+    is_member = check_ug_membership(user, group)
+    is_admin = check_ug_admin(user, group)
+    
+    return group.public or user.is_superuser or user.is_staff or is_member or is_admin
+
+
+def check_object_write_access(obj, user):
+    """ Checks write permissions for either a CosinnusGroup and BaseTaggableObject.
+        For CosinnusGroups, check if the user can edit/update/delete the group iself:
+            returns ``True`` if the user is either admin, staff member or group admin
+        For BaseTaggableObjects, check if the user can edit/update/delete the item iself:
+            returns ``True`` if the user is either admin, staff member, object owner or group admin 
+                of the group the item belongs to
+        
+    """
+    # check what kind of object was supplied (CosinnusGroup or BaseTaggableObject)
+    if type(obj) is CosinnusGroup:
+        is_admin = check_ug_admin(user, obj)
+        return is_admin or user.is_superuser or user.is_staff
+    elif issubclass(obj.__class__, BaseTaggableObjectModel):
+        # editing/deleting an object, check if we are owner or staff member or group admin or site admin
+        is_admin = check_ug_admin(user, obj.group)
+        return obj.creator == user or is_admin or user.is_superuser or user.is_staff
+    
+    raise Exception("cosinnus.core.permissions: You must either supply a CosinnusGroup \
+            or a BaseTaggableObject to check_object_write_access(). The supplied object \
+            type was: %s" % (str(obj.__class__) if obj else "None"))
+
+def check_group_create_objects_access(group, user):
+    """ Checks permissions of a user to create objects in a CosinnusGroup.
+            returns ``True`` if the user is either admin, staff member or group member
+    """
+    #  check if we can create objects in the group
+    is_member = check_ug_membership(user, group)
+    is_admin = check_ug_admin(user, group)
+    return is_member or is_admin or user.is_superuser or user.is_staff

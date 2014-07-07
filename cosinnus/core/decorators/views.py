@@ -9,7 +9,9 @@ from django.utils.decorators import available_attrs
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.models.group import CosinnusGroup
-from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
+from cosinnus.utils.permissions import check_ug_admin, check_ug_membership,\
+    check_object_write_access, check_group_create_objects_access,\
+    check_object_read_access
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
@@ -47,7 +49,7 @@ def require_admin_access_decorator(group_url_arg='group'):
 
             user = request.user
 
-            if user.is_superuser or check_ug_admin(user, group):
+            if check_object_write_access(group, user):
                 kwargs['group'] = group
                 return function(request, *args, **kwargs)
 
@@ -85,7 +87,7 @@ def require_admin_access(group_url_kwarg='group', group_attr='group'):
 
             user = request.user
 
-            if user.is_superuser or check_ug_admin(user, group):
+            if check_object_write_access(group, user):
                 setattr(self, group_attr, group)
                 return function(self, request, *args, **kwargs)
 
@@ -126,10 +128,10 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
             if not group.public and not user.is_authenticated():
                 messages.error(request, _('Please log in to access this page.'))
                 return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
-
-            if group.public or user.is_superuser or \
-                    check_ug_membership(user, group):
+            
+            if check_object_read_access(group, user):
                 setattr(self, group_attr, group)
+                
                 return function(self, request, *args, **kwargs)
 
             return HttpResponseForbidden(_("Access denied"))
@@ -159,16 +161,12 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             if not group_name:
                 return HttpResponseNotFound(_("No group provided"))
             
-            
             try:
                 group = CosinnusGroup.objects.get(slug=group_name)
             except CosinnusGroup.DoesNotExist:
                 return HttpResponseNotFound(_("No group found with this name"))
             
-            
             user = request.user
-            is_member = check_ug_membership(user, group)
-            is_admin = check_ug_admin(user, group)
             
             if not user.is_authenticated():
                 messages.error(request, _('Please log in to access this page.'))
@@ -181,20 +179,18 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             try:
                 requested_object = self.get_object()
             except AttributeError:
-                # TODO: SASCHA: HERE CLEAN HANDLING
                 pass
             
             if requested_object:
                 # editing/deleting an object, check if we are owner or staff member or group admin or site admin
-                if (requested_object.creator == user or is_admin or user.is_superuser or user.is_staff):
+                if (check_object_write_access(requested_object, user)):
                     return function(self, request, *args, **kwargs)
             else:
                 # creating a new object, check if we can create objects in the group
-                if (is_member or is_admin or user.is_superuser or user.is_staff):
+                if check_group_create_objects_access(group, user):
                     return function(self, request, *args, **kwargs)
-                
             
-
+            print "returning access denied"
             return HttpResponseForbidden(_("Access denied"))
         return wrapper
     return decorator
