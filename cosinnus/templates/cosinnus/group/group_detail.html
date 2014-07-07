@@ -18,96 +18,11 @@
 
 {% block content %}
   
-    {% comment %}
-  
-    <div class="dashboard-header">
-        <div class="dashboard-header-image">
-            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
-        </div>
-        <div class="dashboard-header-text">
-            <div class="multiline-ellipsis">
-                <div class="multiline-ellipsis-prop"></div>
-                <div class="multiline-ellipsis-main">
-
-                    <div class="dashboard-header-link app-main">
-                        <a href="#" title="Not available in this Beta version">
-                            <i class="fa fa-thumbs-o-up"></i>
-                            {% trans "Gruppe abonnieren" %}
-                        </a>
-                    </div>
-                    
-                    <h2>{{ group.name }}</h2>
-                    
-                    {% if group.description and group.description|length > 0 %}
-                        {{ group.description|safe }}
-                    {% else %}
-                        ({% trans "No Group Description set" %})
-                    {% endif %}
-                    
-                    </div>
-                <div class="multiline-ellipsis-realend"><a href="#">....{% trans "more" %}</a></div>
-            </div>
-        </div>
-  
-        {% include 'cosinnus/media_tags_readonly.html' %}
-    
-	    {% if user.is_superuser or user|is_group_admin:object %}
-	        <div>
-	            <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:group-edit' group=group.slug %}">
-	                <ul class="media-list">
-	                    <li class="media">
-	                        <a class="pull-left" href="#">
-	                            <i class="fa fa-pencil"></i>
-	                        </a>
-	                        <div class="media-body">
-	                            {% trans "Edit" %}
-	                        </div>
-	                    </li>
-	                </ul>
-	            </button>
-	            <!-- href="{% url 'cosinnus:group-delete' group=object.slug %}" -->
-	            <button type="button" class="btn btn-regular" title="In der Beta-Phase nicht möglich.">
-	                <ul class="media-list">
-	                    <li class="media">
-	                        <a class="pull-left" href="#">
-	                            <i class="fa fa-eraser"></i>
-	                        </a>
-	                        <div class="media-body">
-	                            {% trans "Delete Group" %}
-	                        </div>
-	                    </li>
-	                </ul>
-	            </button>
-	            <!-- {% url 'cosinnus:group-export' group=object.slug %} 
-	             
-	            <button type="button" class="btn btn-regular" title="In der Beta-Phase nicht möglich.">
-	                <ul class="media-list">
-	                    <li class="media">
-	                        <a class="pull-left" href="#">
-	                            <i class="fa fa-eraser"></i>
-	                        </a>
-	                        <div class="media-body">
-	                            {% trans "Export Group" %}
-	                        </div>
-	                    </li>
-	                </ul>
-	            </button>
-	            -->
-	        </div>
-	    {% endif %}
-	    
-    </div> <!-- Dashboard-header ->>
-  
-  {% endcomment %}
-  
-  
-  
-  
 
     <!-- a box with semi transparent background -->
     <div class="content-box">
         
-        {% if user.is_superuser or user|is_group_admin:object %}
+        {% if user|has_write_access:object %}
             <form action="{% url 'cosinnus:group-user-add-generic' group=object.slug %}" method="post">{% csrf_token %}
 	            <div type="button" class="btn btn-default w100 large-space">
 	                <ul class="media-list">
@@ -147,10 +62,6 @@
         <legend>{% trans "Group members" %}</legend>
     
         {% for member in members %}
-            {#{% if user.is_authenticated and user.is_superuser or user.pk in members or group.public %}#}
-            {#{% if user.is_authenticated %}#}
-            {#{% for group in object_list %}#}
-    {#   {% if user.is_authenticated and user.is_superuser or user.pk in members or group.public %}{% else %}{% endif %}  #}
             <div class="fadedown {% if not forloop.last %}regular-space{% endif %}">
                 <div class="btn btn-emphasized w100">
                     <ul class="media-list">
@@ -158,7 +69,7 @@
                             <a class="pull-left" href="{{ member.cosinnus_profile.get_absolute_url }}">
                                 {% include "cosinnus/user/user_avatar_image.html" with user=member %}
                             </a>
-                            {% if user.is_superuser or user|is_group_admin:object %}
+                            {% if user|has_write_access:object %}
                             <a class="pull-right fadedown-clickarea" href="#">
                                 <i class="fa fa-chevron-down"></i>
                             </a>
@@ -179,7 +90,7 @@
                     </ul>
                 </div>
                 
-                {% if user.is_superuser or user in admins %}
+                {% if user|has_write_access:object %}
                     <div>
 	                    {% captureas modal_kick_id %}userModal_kick_{{member.pk}}{% endcaptureas %}
 	                    {% captureas modal_promote_id %}userModal_promote_{{member.pk}}{% endcaptureas %}
@@ -218,7 +129,7 @@
                 
             </div><!-- fadedown -->
             
-            {% if user.is_superuser or user in admins %}    
+            {% if user|has_write_access:object %}    
                 {% if member in admins %}
                     {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to demote administrator „{{ name }}“ to member?{% endblocktrans %}{% endcaptureas %}
                     {% captureas title %}{% trans "Demote Admin" %}{% endcaptureas %}
@@ -242,7 +153,7 @@
         {% endfor %}
         
         
-        {% if user.is_superuser or user in admins or user in pendings %}
+        {% if user|has_write_access:object or user in pendings %}
             
             <legend>{% trans "Membership requests" %}</legend>
             
@@ -257,7 +168,7 @@
 		                            <a class="pull-left" href="{{ member.cosinnus_profile.get_absolute_url }}">
 		                                {% include "cosinnus/user/user_avatar_image.html" with user=member %}
 		                            </a>
-		                            {% if user.is_superuser or user|is_group_admin:object %}
+		                            {% if user|has_write_access:object %}
 		                            <a class="pull-right fadedown-clickarea" href="#">
 		                                <i class="fa fa-chevron-down"></i>
 		                            </a>
@@ -274,7 +185,7 @@
 		                    </ul>
 		                </div>
 		                
-		                {% if user.is_superuser or user in admins %}
+		                {% if user|has_write_access:object %}
 		                    <div>
 		                        {% captureas modal_kick_id %}userModal_kick_{{member.pk}}{% endcaptureas %}
 		                        {% captureas modal_promote_id %}userModal_promote_{{member.pk}}{% endcaptureas %}
@@ -309,7 +220,7 @@
 		                
 		            </div><!-- fadedown -->
 		            
-		            {% if user.is_superuser or user in admins %}    
+		            {% if user|has_write_access:object %}    
 	                    {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to accept user „{{ name }}“ as a member?{% endblocktrans %}{% endcaptureas %}
 	                    {% captureas title %}{% trans "Accept Member" %}{% endcaptureas %}
 	                    {% captureas action %}{% url 'cosinnus:group-user-edit' group=object.slug username=member.username %}{% endcaptureas %}

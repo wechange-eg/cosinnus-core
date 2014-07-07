@@ -18,7 +18,8 @@ from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry, attached_object_registry
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
-    check_ug_pending)
+    check_ug_pending, check_object_write_access,
+    check_group_create_objects_access, check_object_read_access)
 
 register = template.Library()
 
@@ -51,6 +52,41 @@ def is_group_pending(user, group):
     .. seealso:: func:`cosinnus.utils.permissions.check_ug_membership`
     """
     return check_ug_pending(user, group)
+
+@register.filter
+def has_read_access(user, obj):
+    """
+    Template filter to check if an object (either CosinnusGroup or BaseTaggableObject)
+    is visibible to a user.
+    This factors in all aspects of superusers and group memberships.
+    """
+    return check_object_read_access(obj, user)
+
+@register.filter
+def has_write_access(user, obj):
+    """
+    Template filter to check if a user can edit/update/delete an object 
+    (either CosinnusGroup or BaseTaggableObject).
+    If a CosinnusGroup is supplied, this will check if the user is a group admin or a site admin.
+    This factors in all aspects of superusers and group memberships.
+    """
+    return check_object_write_access(obj, user)
+
+@register.filter
+def can_create_objects_in(user, group):
+    """
+    Template filter to check if a user can create objects in a CosinnusGroup.
+    This factors in all aspects of superusers and group memberships.
+    """
+    return check_group_create_objects_access(group, user)
+
+@register.filter
+def can_create_groups(user):
+    """
+    Template filter to check if a user can create CosinnusGroups.
+    """
+    return user.is_superuser
+
 
 
 @register.filter

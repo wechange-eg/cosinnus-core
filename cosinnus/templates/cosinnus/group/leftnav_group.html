@@ -8,9 +8,11 @@
     {% captureas is_groupdetails %}True{% endcaptureas %}
 {% endif %}
 
-{% captureas href %}{% url 'cosinnus:group-edit' group=group.slug %}{% endcaptureas %}
-{% captureas label %}{% trans "Edit Group" %}{% endcaptureas %}
-{% include "cosinnus/leftnav_button.html" with active=is_editgroup extra_classes="fine-space" icon="fa-info-circle" label=label href=href  %}
+{% if user|has_write_access:object %}
+	{% captureas href %}{% url 'cosinnus:group-edit' group=group.slug %}{% endcaptureas %}
+	{% captureas label %}{% trans "Edit Group" %}{% endcaptureas %}
+	{% include "cosinnus/leftnav_button.html" with active=is_editgroup extra_classes="fine-space" icon="fa-info-circle" label=label href=href  %}
+{% endif %}
 
 {% captureas href %}{% url 'cosinnus:group-detail' group=group.slug %}{% endcaptureas %}
 {% captureas label %}{% trans "Members" %}{% endcaptureas %}
