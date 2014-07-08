@@ -1,8 +1,21 @@
-<span class="app-main-attachment">
-    {% if type == "cosinnus_file.FileEntry" %}
+{% if type == "cosinnus_file.FileEntry" %}
+    <span class="app-files-attachment">
         <i class="fa fa-file"></i> 
-    {% elif type == "cosinnus_event.Event" %}
-        <i class="fa fa-clock-o"></i> 
-    {% endif %}
-    {{text}}
-</span>
+        {{text}}
+    </span>
+{% elif type == "cosinnus_event.Event" %}
+    <span class="app-calendar-attachment">
+        <i class="fa fa-calendar"></i> 
+        {{text}}
+    </span>
+{% elif type == "cosinnus_todo.TodoEntry" %}
+    <span class="app-todos-attachment">
+        <i class="fa fa-tasks"></i> 
+        {{text}}
+    </span>
+{% elif type == "cosinnus_etherpad.Etherpad" %}
+    <span class="app-documents-attachment">
+        <i class="fa fa-file-text-o"></i> 
+        {{text}}
+    </span>
+{% endif %}
