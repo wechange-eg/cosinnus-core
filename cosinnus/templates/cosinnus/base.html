@@ -10,8 +10,8 @@
         
         <!-- TODO: override main title that can be extended from (in main app!) -->
         <title>{% block page_title %}{% endblock page_title %}{% block base_page_title %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %} - {% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% endif %}{% endblock base_page_title %}</title>
-        <link rel="shortcut icon" href="static/images/favicon.ico" type="image/x-icon" />
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="static/images/apple-touch-icon-114x114-precomposed.png" />
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'images/apple-touch-icon-114x114-precomposed.png' %}" />
         
         {% block csshead %}
 	    <link href="{% static 'css/bootstrap3-cosinnus.css' %}" rel="stylesheet">
