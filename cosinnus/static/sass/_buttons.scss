@@ -52,10 +52,19 @@
 }
 
 .media-body {
-	line-height: 37px;
-	padding: 0 10px;
+	line-height: 20px;
+	padding: 9px 10px 5px 10px;
 	min-height: 40px;
 	text-overflow: ellipsis;
+
+	@include clearfix();
+
+	input {
+		margin-top: -9px;
+		margin-bottom: -5px;
+		background-color: transparent;
+		display: inline-block;
+	}
 }
 
 .media > .pull-left,
@@ -208,18 +217,18 @@ ul.appnavi-dropdown-menu {
 // inside .media-body a small note on the right side.
 .media-body {
 	position: relative;
+	white-space: nowrap;
 
 	span.annotation {
-		position: absolute;
-		right: 10px;
-		top: 0;
+		width: auto;
+		float: right;
 		font-size: 11px;
+		margin-bottom: -15px;
 	}
 	div.annotation {
 		color: $app-neutral-color;
 		text-align: right;
 		font-size: 11px;
-//		margin-bottom: -4px;
 	}
 
 
@@ -228,11 +237,10 @@ ul.appnavi-dropdown-menu {
 		margin-left: 15px;
 	}
 
-	> a {
-		// Room for annotations
-		// padding-right: 12em; // max annotation width
+	> a, > span {
+		white-space: normal;
 		width: 100%;
-		display: block;
+
 		overflow: hidden;
 		text-overflow: ellipsis;
 		-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */

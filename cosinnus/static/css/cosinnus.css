@@ -369,10 +369,25 @@ label {
 }
 
 .media-body {
-  line-height: 37px;
-  padding: 0 10px;
+  line-height: 20px;
+  padding: 9px 10px 5px 10px;
   min-height: 40px;
   text-overflow: ellipsis;
+}
+.media-body:before, .media-body:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+.media-body:after {
+  clear: both;
+}
+.media-body input {
+  margin-top: -9px;
+  margin-bottom: -5px;
+  background-color: transparent;
+  display: inline-block;
 }
 
 .media > .pull-left,
@@ -812,12 +827,13 @@ ul.appnavi-dropdown-menu {
 
 .media-body {
   position: relative;
+  white-space: nowrap;
 }
 .media-body span.annotation {
-  position: absolute;
-  right: 10px;
-  top: 0;
+  width: auto;
+  float: right;
   font-size: 11px;
+  margin-bottom: -15px;
 }
 .media-body div.annotation {
   color: #949494;
@@ -827,9 +843,9 @@ ul.appnavi-dropdown-menu {
 .media-body a + a {
   margin-left: 15px;
 }
-.media-body > a {
+.media-body > a, .media-body > span {
+  white-space: normal;
   width: 100%;
-  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-box-sizing: border-box;
