@@ -14,9 +14,10 @@ from cosinnus.views.attached_object import AttachableObjectSelect2View,\
 from cosinnus.core.registries import attached_object_registry
 from django.core.urlresolvers import reverse
 from django_select2.util import JSFunction
+from cosinnus.forms.tagged import BaseTaggableObjectForm
 
 
-class FormAttachable(forms.ModelForm):
+class FormAttachable(BaseTaggableObjectForm):
     """
     Used together with AttachableViewMixin.
 
