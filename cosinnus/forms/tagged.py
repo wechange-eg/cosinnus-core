@@ -23,7 +23,24 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
     class Meta:
         exclude = ('group',)
         model = TagObject
-
+        
+    def __init__(self, *args, **kwargs):
+        """ Initialize and populate the select2 tags field
+        """
+        super(BaseTagObjectForm, self).__init__(*args, **kwargs)
+        
+        # needs to be initialized here because using reverser_lazy() at model instantiation time causes problems
+        self.fields['tags'] = TagSelect2Field(required=False, data_url=reverse_lazy('cosinnus:select2:tags'))
+        
+        if self.instance.pk:
+            preresults = self.instance.tags.values_list('name', 'name').all()
+            self.fields['tags'].choices = preresults
+            self.fields['tags'].initial = [key for key,val in preresults]#[tag.name for tag in self.instance.tags.all()]
+            
+            # we need to remove this from the initials, or it overwrites the select2 fields initials
+            del self.initial['tags']
+            
+        
     def save(self, commit=True):
         # TODO: Delete the object if it's empty
         return super(BaseTagObjectForm, self).save(commit=False)
@@ -55,21 +72,7 @@ class BaseTaggableObjectForm(forms.ModelForm):
     class Meta:
         exclude = ('media_tag', 'group', 'slug', 'creator', 'created')
     
-    def __init__(self, *args, **kwargs):
-        """ Initialize and populate the select2 tags field
-        """
-        super(BaseTaggableObjectForm, self).__init__(*args, **kwargs)
-        
-        # needs to be initialized here because using reverser_lazy() at model instantiation time causes problems
-        self.fields['tags'] = TagSelect2Field(required=False, data_url=reverse_lazy('cosinnus:select2:tags'))
-        
-        if self.instance.pk:
-            preresults = self.instance.tags.values_list('name', 'name').all()
-            self.fields['tags'].choices = preresults
-            self.fields['tags'].initial = [key for key,val in preresults]#[tag.name for tag in self.instance.tags.all()]
-            
-            # we need to remove this from the initials, or it overwrites the select2 fields initials
-            del self.initial['tags']
+
             
 def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
     """
@@ -86,7 +89,14 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
             ('media_tag', get_tag_object_form()),
         ])
         base_extra_forms = extra_forms
-
+        
+        def __init__(self, *args, **kwargs):
+            super(TaggableObjectForm, self).__init__(*args, **kwargs)
+            # we need to do this here ~again~ on top of in the media tag form, to prevent
+            # the select2 field's values from being overwritten 
+            if self.instance.pk and 'tags' in self.forms['media_tag'].initial:
+                del self.forms['media_tag'].initial['tags']
+        
         # attach any extra form classes
         for form_name, form_class in base_extra_forms.items():
             base_forms[form_name] = form_class

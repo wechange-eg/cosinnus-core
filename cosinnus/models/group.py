@@ -301,8 +301,7 @@ class CosinnusGroup(models.Model):
         related_name='cosinnus_groups', through='CosinnusGroupMembership')
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
         blank=True, null=True, editable=False, on_delete=models.PROTECT)
-    tags = TaggableManager(_('Tags'), blank=True)
-
+    
     objects = CosinnusGroupManager()
 
     class Meta:

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from cosinnus.views.mixins.tagged import HierarchyTreeMixin, TaggedListMixin
+from cosinnus.views.mixins.tagged import HierarchyTreeMixin
 from django.shortcuts import get_object_or_404
 from cosinnus.models.tagged import BaseHierarchicalTaggableObjectModel
 from django.http.response import Http404
 
-class HierarchicalListCreateViewMixin(TaggedListMixin, HierarchyTreeMixin):
+class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
     """ Hybrid view for hierarchic items.
         If allow_deep_hierarchy==True: Allows creation of folders inside other folders,
         else only allows creating them on the root level.

@@ -62,9 +62,12 @@ class BaseTagObject(models.Model):
 
     persons = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
         null=True, verbose_name=_('Persons'), related_name='+')
+    
+    tags = TaggableManager(_('Tags'), blank=True)
+
     visibility = models.PositiveSmallIntegerField(_('Permissions'), blank=True,
         default=VISIBILITY_GROUP, choices=VISIBILITY_CHOICES)
-
+    
     class Meta:
         abstract = True
 
@@ -122,7 +125,6 @@ class BaseTaggableObjectModel(models.Model):
     people and so on.
     """
 
-    tags = TaggableManager(_('Tags'), blank=True)
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
         blank=True, null=True, on_delete=models.PROTECT)
 
