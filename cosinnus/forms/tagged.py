@@ -8,7 +8,8 @@ from multiform import MultiModelForm, InvalidArgument
 
 from cosinnus.forms.group import GroupKwargModelFormMixin
 from cosinnus.forms.user import UserKwargModelFormMixin
-from cosinnus.models.tagged import get_tag_object_model
+from cosinnus.models.tagged import get_tag_object_model, BaseTagObject,\
+    BaseTaggableObjectModel
 from cosinnus.utils.import_utils import import_from_settings
 from cosinnus.forms.select2 import TagSelect2Field
 from django.core.urlresolvers import reverse_lazy
@@ -42,8 +43,18 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
             
         
     def save(self, commit=True):
-        # TODO: Delete the object if it's empty
-        return super(BaseTagObjectForm, self).save(commit=False)
+        instance = super(BaseTagObjectForm, self).save(commit=False)
+        
+        # set default visibility tag to correspond to group visibility
+        # GOTCHA: since BaseTagObject.VISIBILITY_USER == 0, we cannot simply check for ``if not <property``
+        if not self.instance.visibility and self.instance.visibility is not BaseTagObject.VISIBILITY_USER:
+            # check if our tag object belongs to a group (i.e: isn't itself a group, or a user):
+            if hasattr(self.instance, 'group') and self.instance.group and self.instance.group.public:
+                self.instance.visibility = BaseTagObject.VISIBILITY_ALL
+            else:
+                self.instance.visibility = BaseTagObject.VISIBILITY_GROUP
+        
+        return instance
 
 
 class TagObjectForm(BaseTagObjectForm):
