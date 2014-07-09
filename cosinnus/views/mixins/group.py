@@ -39,13 +39,19 @@ class RequireReadMixin(object):
         context.update({'group': self.group})
         return context
     
-    def get_queryset(self):
+    def get_queryset(self, **kwargs):
         """ Filter queryset for items which can be accessed by the user given their
             visibility tags
         """
-        qs = super(RequireReadMixin, self).get_queryset()
-        q = get_tagged_object_filter_for_user(self.request.user)
-        qs = qs.filter(q)
+        qs = super(RequireReadMixin, self).get_queryset(**kwargs)
+        
+        # only use this filter on querysets of media_tagged models
+        # alternatively, we could check if qs.model is CosinnusGroup or BaseTaggableObjectModel subclass, 
+        # or BaseUserProfileModel subclass, but this is more elegant:
+        if hasattr(qs.model, 'media_tag'):
+            q = get_tagged_object_filter_for_user(self.request.user)
+            qs = qs.filter(q)
+            
         return qs
 
 class RequireWriteMixin(object):
