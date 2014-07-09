@@ -21,6 +21,7 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^widgets/add/user/(?P<app_name>[^/]+)/(?P<widget_name>[^/]+)/$', 'widget.widget_add_user', name='widget-add-user'),
     url(r'^widgets/add/group/(?P<group>[^/]+)/(?P<app_name>[^/]+)/(?P<widget_name>[^/]+)/$', 'widget.widget_add_group', name='widget-add-group'),
     url(r'^widget/(?P<id>\d+)/$', 'widget.widget_detail', name='widget-detail'),
+    url(r'^widget/(?P<id>\d+)/(?P<offset>\d+)/$', 'widget.widget_detail', name='widget-detail-offset'),
     url(r'^widget/(?P<id>\d+)/delete/$', 'widget.widget_delete', name='widget-delete'),
     url(r'^widget/(?P<id>\d+)/edit/$', 'widget.widget_edit', name='widget-edit'),
 

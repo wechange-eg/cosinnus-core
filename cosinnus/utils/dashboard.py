@@ -65,7 +65,10 @@ class DashboardWidget(object):
             raise ImproperlyConfigured('%s must defined an app_name' % cls.__name__)
         return cls.app_name
 
-    def get_data(self):
+    def get_data(self, offset=0):
+        """ Returns a tuple (data, rows_returned) of the rendered data and how many items were returned.
+            if num_records == 0, the receiving widget will assume no further data can be loaded.
+         """
         raise NotImplementedError("Subclasses need to implement this method.")
 
     def get_queryset(self):
@@ -152,14 +155,14 @@ class GroupDescriptionWidget(DashboardWidget):
     widget_name = 'group_description'
     allow_on_user = False
 
-    def get_data(self):
+    def get_data(self, offset=0):
         group = self.config.group
         if group is None:
             return ''
         data = {
             'group': group,
         }
-        return render_to_string('cosinnus/widgets/group_description.html', data)
+        return (render_to_string('cosinnus/widgets/group_description.html', data), 0)
     
     @property
     def title_url(self):
@@ -175,7 +178,7 @@ class GroupMembersWidget(DashboardWidget):
     widget_name = 'group_members'
     allow_on_user = False
 
-    def get_data(self):
+    def get_data(self, offset=0):
         group = self.config.group
         if group is None:
             return ''
@@ -189,7 +192,7 @@ class GroupMembersWidget(DashboardWidget):
             'group': group,
             'members':qs.filter(id__in=all_ids),
         }
-        return render_to_string('cosinnus/widgets/group_members.html', data)
+        return (render_to_string('cosinnus/widgets/group_members.html', data), 0)
 
     @property
     def title_url(self):

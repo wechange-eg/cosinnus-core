@@ -184,11 +184,30 @@ $('.js-todo-link').on('click', function(e) {
                 $('[data-target=widget-content]', holder).html('<div class="alert alert-danger">An error occurred while configuring the widget.</div>');
             });
         },
-        load: function(holder) {
+        load: function(holder, offset) {
             var that = this;
             var id = holder.attr('data-widget-id');
-            $.ajax(Cosinnus.base_url + "widget/" + id + "/").done(function(data, textStatus, jqXHR) {
-                $('[data-target=widget-content]', holder).html(data);
+            offset = parseInt(offset || 0);
+            
+            $.ajax(Cosinnus.base_url + "widget/" + id + "/" + offset + "/").done(function(data, textStatus, jqXHR) {
+                var rows_returned = parseInt(jqXHR.getResponseHeader('X-Cosinnus-Widget-Num-Rows-Returned') || 0);
+                
+                // display the fetched data if we have actually gotten something back, or if
+                // this is the initial query (we expect a rendered "no content" message)
+                if (rows_returned > 0 || offset == 0) {
+                    $('[data-target=widget-content]', holder).append(data);
+                }
+                if (rows_returned > 0) {
+                    // attach the function to load the next set of data from the backend to the "More" button
+                    $('[data-target=widget-reload-button]', holder).unbind('click');
+                    $('[data-target=widget-reload-button]', holder).click(function() {
+                        that.load(holder, offset + rows_returned);
+                    });
+                } else {
+                    // hide the "More button"
+                    $('[data-target=widget-reload-button]', holder).hide();
+                }
+                    
                 $('[data-target=widget-title]', holder).html(jqXHR.getResponseHeader('X-Cosinnus-Widget-Title'));
                 var title_url = jqXHR.getResponseHeader('X-Cosinnus-Widget-Title-URL');
                 if (title_url !== null) {
@@ -199,6 +218,10 @@ $('.js-todo-link').on('click', function(e) {
                 }
                 holder.attr("data-app-name", jqXHR.getResponseHeader('X-Cosinnus-Widget-App-Name'));
                 holder.attr("data-widget-name", jqXHR.getResponseHeader('X-Cosinnus-Widget-Widget-Name'));
+                
+                
+                    
+                
                 $.cosinnus.renderMomentDataDate();
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 var error = $('<div class="alert alert-danger">An error occurred while loading the widget. </div>');

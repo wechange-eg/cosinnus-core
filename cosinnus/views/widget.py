@@ -79,7 +79,7 @@ def widget_add_group(request, group, app_name, widget_name):
 
 
 @ensure_csrf_cookie
-def widget_detail(request, id):
+def widget_detail(request, id, offset=0):
     wc = get_object_or_404(WidgetConfig, id=int(id))
     if wc.group and not (check_ug_membership(request.user, wc.group) or
                          wc.group.public) or \
@@ -89,7 +89,7 @@ def widget_detail(request, id):
     if widget_class is None:
         return render_to_response('cosinnus/widgets/not_found.html')
     widget = widget_class(request, wc)
-    data = widget.get_data()
+    data, rows_returned = widget.get_data(int(offset))
     if isinstance(data, six.string_types):
         resp = HttpResponse(data)
     else:
@@ -99,6 +99,7 @@ def widget_detail(request, id):
         resp['X-Cosinnus-Widget-Title-URL'] = force_text(widget.title_url)
     resp['X-Cosinnus-Widget-App-Name'] = force_text(wc.app_name)
     resp['X-Cosinnus-Widget-Widget-Name'] = force_text(wc.widget_name)
+    resp['X-Cosinnus-Widget-Num-Rows-Returned'] = rows_returned
     return resp
 
 
