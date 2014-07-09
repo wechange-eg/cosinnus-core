@@ -153,10 +153,20 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
                 messages.error(request, _('Please log in to access this page.'))
                 return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
             
-            if check_object_read_access(group, user):
-                setattr(self, group_attr, group)
-                
-                return function(self, request, *args, **kwargs)
+            setattr(self, group_attr, group)
+            
+            requested_object = None
+            try:
+                requested_object = self.get_object()
+            except AttributeError:
+                pass
+            
+            if requested_object:
+                if check_object_read_access(requested_object, user):
+                    return function(self, request, *args, **kwargs)
+            else:
+                if check_object_read_access(group, user):
+                    return function(self, request, *args, **kwargs)
 
             # Access denied, redirect to 403 page and and display an error message
             return redirect_to_403(request)
