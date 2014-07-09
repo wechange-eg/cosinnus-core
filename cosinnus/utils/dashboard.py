@@ -6,14 +6,13 @@ import six
 from django import forms
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse
-from django.db.models import Q
 from django.template.loader import render_to_string
 from django.utils.decorators import classonlymethod
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.utils.compat import atomic
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
-from cosinnus.models.tagged import get_tagged_object_filter_for_user
+from cosinnus.utils.permissions import get_tagged_object_filter_for_user
 from django.contrib.auth import get_user_model
 
 
@@ -73,9 +72,8 @@ class DashboardWidget(object):
         if not self.model:
             raise ImproperlyConfigured('%s must define a model', self.__class__.__name__)
         qs = self.model._default_manager.filter(**self.get_queryset_filter())
-        if self.config.user:
-            q = get_tagged_object_filter_for_user(self.request.user)
-            qs = qs.filter(q)
+        q = get_tagged_object_filter_for_user(self.request.user)
+        qs = qs.filter(q)
         return qs
 
     def get_queryset_filter(self, **kwargs):

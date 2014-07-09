@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from cosinnus.core.decorators.views import (require_read_access,
     require_write_access, require_admin_access)
+from cosinnus.utils.permissions import get_tagged_object_filter_for_user
 
 
 class RequireAdminMixin(object):
@@ -37,7 +38,15 @@ class RequireReadMixin(object):
         context = super(RequireReadMixin, self).get_context_data(**kwargs)
         context.update({'group': self.group})
         return context
-
+    
+    def get_queryset(self):
+        """ Filter queryset for items which can be accessed by the user given their
+            visibility tags
+        """
+        qs = super(RequireReadMixin, self).get_queryset()
+        q = get_tagged_object_filter_for_user(self.request.user)
+        qs = qs.filter(q)
+        return qs
 
 class RequireWriteMixin(object):
     """

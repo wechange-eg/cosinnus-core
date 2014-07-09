@@ -249,17 +249,3 @@ def get_tag_object_model():
     return tag_model
 
 
-def get_tagged_object_filter_for_user(user):
-    q = Q(group__public=True)  # All tagged objects in public groups
-    q |= Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)  # All public tagged objects
-    if user.is_authenticated():
-        gids = CosinnusGroup.objects.get_for_user_pks(user)
-        q |= Q(  # all tagged objects in groups the user is a member of
-            media_tag__visibility=BaseTagObject.VISIBILITY_GROUP,
-            group_id__in=gids
-        )
-        q |= Q(  # all tagged objects the user is explicitly a linked to
-            media_tag__visibility=BaseTagObject.VISIBILITY_USER,
-            media_tag__persons__id=user.id
-        )
-    return q
