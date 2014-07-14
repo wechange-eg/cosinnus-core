@@ -273,6 +273,8 @@ console.log("o");
 		},
 
 		calendarCreateDoodle : function() {
+		    var CREATE_MULTIPLE_DOODLE_DAYS = true;
+		    
 			function selectDays() {
 				$('#calendar-doodle-days-selector-list table tr').sortElements(function(a, b){
 					return $(a).attr('data-date') > $(b).attr('data-date') ? 1 : -1;
@@ -312,7 +314,7 @@ console.log("o");
 					// unselect all and re-select later
 					$(dayElement).parent().parent().find('td').removeClass('selected');
 
-					if ($('#calendar-doodle-days-selector-list table tr[data-date='+dateDataAttr+']').length===0) {
+					if (CREATE_MULTIPLE_DOODLE_DAYS || $('#calendar-doodle-days-selector-list table tr[data-date='+dateDataAttr+']').length===0) {
 						// add to list (select) now
 
 						$('#calendar-doodle-days-selector-list table tr')
@@ -370,8 +372,7 @@ console.log("o");
 				$('#calendar-doodle-days-selector-list table tbody tr').each(function() {
 					doodleData.dates.push({
 						date: $(this).attr('data-date'),
-						time1: $(this).find('input').first().val(),
-						time2: $(this).find('input').last().val()
+						time1: $(this).find('input').first().val()
 					});
 				});
 				// remove last hidden line
