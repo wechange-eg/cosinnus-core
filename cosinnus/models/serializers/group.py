@@ -13,4 +13,4 @@ class GroupSimpleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CosinnusGroup
-        fields = ('id', 'name', 'slug', 'public', )
+        fields = ('id', 'name', 'slug', 'public', 'description', )
