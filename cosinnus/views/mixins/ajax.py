@@ -59,6 +59,7 @@ class BaseAjaxableResponseMixin(object):
 
     def get(self, request, *args, **kwargs):
         if self.is_ajax_request_url:
+            # Prevent access to ajaxible paths from non-ajax requests
             if not request.is_ajax():
                 return HttpResponseBadRequest()
 

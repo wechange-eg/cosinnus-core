@@ -62,6 +62,9 @@ def require_admin_access_decorator(group_url_arg='group'):
             user = request.user
 
             if not user.is_authenticated():
+                # support for the ajaxable view mixin
+                if getattr(self, 'is_ajax_request_url', False):
+                    return HttpResponseForbidden('Not authenticated')
                 messages.error(request, _('Please log in to access this page.'))
                 return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
 
@@ -106,6 +109,9 @@ def require_admin_access(group_url_kwarg='group', group_attr='group'):
             user = request.user
             
             if not user.is_authenticated():
+                # support for the ajaxable view mixin
+                if getattr(self, 'is_ajax_request_url', False):
+                    return HttpResponseForbidden('Not authenticated')
                 messages.error(request, _('Please log in to access this page.'))
                 return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
 
@@ -150,6 +156,9 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
             user = request.user
             
             if not group.public and not user.is_authenticated():
+                # support for the ajaxable view mixin
+                if getattr(self, 'is_ajax_request_url', False):
+                    return HttpResponseForbidden('Not authenticated')
                 messages.error(request, _('Please log in to access this page.'))
                 return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
             
@@ -205,6 +214,9 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             user = request.user
             
             if not user.is_authenticated():
+                # support for the ajaxable view mixin
+                if getattr(self, 'is_ajax_request_url', False):
+                    return HttpResponseForbidden('Not authenticated')
                 messages.error(request, _('Please log in to access this page.'))
                 return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
             
