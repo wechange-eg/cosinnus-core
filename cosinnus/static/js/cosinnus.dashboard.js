@@ -191,13 +191,14 @@ $('.js-todo-link').on('click', function(e) {
             
             $.ajax(Cosinnus.base_url + "widget/" + id + "/" + offset + "/").done(function(data, textStatus, jqXHR) {
                 var rows_returned = parseInt(jqXHR.getResponseHeader('X-Cosinnus-Widget-Num-Rows-Returned') || 0);
+                var has_more_data = 'true' === (jqXHR.getResponseHeader('X-Cosinnus-Widget-Has-More-Data') || 'false');
                 
                 // display the fetched data if we have actually gotten something back, or if
                 // this is the initial query (we expect a rendered "no content" message)
                 if (rows_returned > 0 || offset == 0) {
                     $('[data-target=widget-content]', holder).append(data);
                 }
-                if (rows_returned > 0) {
+                if (has_more_data > 0) {
                     // attach the function to load the next set of data from the backend to the "More" button
                     $('[data-target=widget-reload-button]', holder).unbind('click');
                     $('[data-target=widget-reload-button]', holder).click(function() {

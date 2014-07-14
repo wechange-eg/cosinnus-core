@@ -66,8 +66,8 @@ class DashboardWidget(object):
         return cls.app_name
 
     def get_data(self, offset=0):
-        """ Returns a tuple (data, rows_returned) of the rendered data and how many items were returned.
-            if num_records == 0, the receiving widget will assume no further data can be loaded.
+        """ Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.
+            if has_more == False, the receiving widget will assume no further data can be loaded.
          """
         raise NotImplementedError("Subclasses need to implement this method.")
 
@@ -156,13 +156,16 @@ class GroupDescriptionWidget(DashboardWidget):
     allow_on_user = False
 
     def get_data(self, offset=0):
+        """ Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.
+            if has_more == False, the receiving widget will assume no further data can be loaded.
+         """
         group = self.config.group
         if group is None:
             return ''
         data = {
             'group': group,
         }
-        return (render_to_string('cosinnus/widgets/group_description.html', data), 0)
+        return (render_to_string('cosinnus/widgets/group_description.html', data), 0, False)
     
     @property
     def title_url(self):
@@ -179,6 +182,9 @@ class GroupMembersWidget(DashboardWidget):
     allow_on_user = False
 
     def get_data(self, offset=0):
+        """ Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.
+            if has_more == False, the receiving widget will assume no further data can be loaded.
+         """
         group = self.config.group
         if group is None:
             return ''
@@ -192,7 +198,7 @@ class GroupMembersWidget(DashboardWidget):
             'group': group,
             'members':qs.filter(id__in=all_ids),
         }
-        return (render_to_string('cosinnus/widgets/group_members.html', data), 0)
+        return (render_to_string('cosinnus/widgets/group_members.html', data), 0, False)
 
     @property
     def title_url(self):
