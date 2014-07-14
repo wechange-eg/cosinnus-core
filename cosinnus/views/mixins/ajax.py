@@ -61,7 +61,7 @@ class BaseAjaxableResponseMixin(object):
         if self.is_ajax_request_url:
             # Prevent access to ajaxible paths from non-ajax requests
             if not request.is_ajax():
-                return HttpResponseBadRequest()
+                return HttpResponseBadRequest("API calls do not supported direct access.")
 
             response = super(BaseAjaxableResponseMixin, self).get(request, *args, **kwargs)
 
