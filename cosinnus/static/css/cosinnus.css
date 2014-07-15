@@ -978,8 +978,9 @@ a.pull-left {
   height: 50px;
 }
 .btn-headline .media-body {
+  padding-top: 6px;
   text-align: left;
-  font-size: 15px;
+  font-size: 13px;
   line-height: 1em;
   min-height: 0;
   position: relative;
@@ -994,6 +995,30 @@ a.pull-left {
 }
 .btn-headline .media-body .annotation {
   font-size: 12px;
+}
+
+.app-main .btn-headline .media-body .group-annotation {
+  color: #cbe7ed;
+}
+
+.app-calendar .btn-headline .media-body .group-annotation {
+  color: #e1edd2;
+}
+
+.app-files .btn-headline .media-body .group-annotation {
+  color: #92ffea;
+}
+
+.app-documents .btn-headline .media-body .group-annotation {
+  color: #d5f3ff;
+}
+
+.app-todos .btn-headline .media-body .group-annotation {
+  color: #faebcd;
+}
+
+.app-etherpad .btn-headline .media-body .group-annotation {
+  color: #ede2e1;
 }
 
 .btn + .btn-headline {
@@ -2211,7 +2236,7 @@ div.dashboard-appwidget:last-child {
 .btn.dashboard-appwidget-contentline-extra-indented .media-body .group-annotation,
 .btn.dashboard-appwidget-headline .media-body .group-annotation {
   font-size: 12px;
-  color: #dbdbdb;
+  color: white;
   font-weight: normal;
 }
 

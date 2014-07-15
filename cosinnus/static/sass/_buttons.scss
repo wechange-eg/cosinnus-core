@@ -393,8 +393,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	}
 
 	.media-body {
+		padding-top: 6px;
 		text-align: left;
-		font-size: 15px;
+		font-size: 13px;
 		line-height: 1em;
 
 		min-height: 0;
@@ -406,6 +407,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 		-mou-transform: translateY(-50%);
 
 		.group-annotation {
+			// color: app dependent, see below
 			line-height: 1.5em;
 		}
 
@@ -415,6 +417,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	}
 
 }
+
+.app-main .btn-headline .media-body .group-annotation { color: $app-main-color-light; }
+.app-calendar .btn-headline .media-body .group-annotation { color: $app-calendar-color-light; }
+.app-files .btn-headline .media-body .group-annotation { color: $app-files-color-light; }
+.app-documents .btn-headline .media-body .group-annotation { color: $app-documents-color-light; }
+.app-todos .btn-headline .media-body .group-annotation { color: $app-todos-color-light; }
+.app-etherpad .btn-headline .media-body .group-annotation { color: $app-etherpad-color-light; }
+
+
 
 .btn + .btn-headline {
 	margin-left: 0;
