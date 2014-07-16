@@ -494,7 +494,16 @@ console.log("o");
 				$(this).parent()
 					.addClass('doodle-vote-'+$(this).attr('data-doodle-option'))
 					.find('input')
-					.val($(this).attr('data-doodle-option'));
+					.val(
+						$(this).attr('data-doodle-option') == 'yes' ? 2 :
+						$(this).attr('data-doodle-option') == 'no' ? 0 : 1
+					);
+				// remove strong elements for all items
+				$(this).parent().children().each(function() {
+				    $(this).html($(this).text());
+				});
+				$(this).html('<strong>' + $(this).text() + '</strong>');
+				
 			});
 		},
 
