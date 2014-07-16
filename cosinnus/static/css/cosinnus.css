@@ -843,6 +843,9 @@ ul.appnavi-dropdown-menu {
 .media-body a + a {
   margin-left: 15px;
 }
+.media-body p a + a {
+  margin-left: 0;
+}
 .media-body > a, .media-body > span {
   white-space: normal;
   width: 100%;
@@ -865,6 +868,10 @@ ul.appnavi-dropdown-menu {
   -webkit-user-select: text;
   -ms-user-select: text;
   -o-user-select: text;
+}
+.media-body p.meta-attribute {
+  font-size: 12px;
+  line-height: 17px;
 }
 
 .btn-emphasized .form-control, .btn-extra-emphasized .form-control {
@@ -995,6 +1002,9 @@ a.pull-left {
 }
 .btn-headline .media-body .annotation {
   font-size: 12px;
+}
+.btn-headline .media-body a {
+  font-weight: bold;
 }
 
 .app-main .btn-headline .media-body .group-annotation {
@@ -1280,35 +1290,47 @@ body div .select2-container.select2-container-multi.w100 {
 body div .attachments-selector {
   min-width: 15em;
 }
-body div .app-main-attachment {
+body div .app-main-attachment, body div .btn-default .media > .media-body .app-main-attachment {
   background-color: #16778d;
   color: white;
-  padding: 0 4px;
+  padding: 0 4px 0 4px;
+  font-weight: normal;
+  margin: 0;
 }
-body div .app-calendar-attachment {
+body div .app-calendar-attachment, body div .btn-default .media > .media-body .app-calendar-attachment {
   background-color: #779b48;
   color: white;
-  padding: 0 4px;
+  padding: 0 4px 0 4px;
+  font-weight: normal;
+  margin: 0;
 }
-body div .app-files-attachment {
+body div .app-files-attachment, body div .btn-default .media > .media-body .app-files-attachment {
   background-color: #14a085;
   color: white;
-  padding: 0 4px;
+  padding: 0 4px 0 4px;
+  font-weight: normal;
+  margin: 0;
 }
-body div .app-documents-attachment {
+body div .app-documents-attachment, body div .btn-default .media > .media-body .app-documents-attachment {
   background-color: #009ee3;
   color: white;
-  padding: 0 4px;
+  padding: 0 4px 0 4px;
+  font-weight: normal;
+  margin: 0;
 }
-body div .app-todos-attachment {
+body div .app-todos-attachment, body div .btn-default .media > .media-body .app-todos-attachment {
   background-color: #efa02d;
   color: white;
-  padding: 0 4px;
+  padding: 0 4px 0 4px;
+  font-weight: normal;
+  margin: 0;
 }
-body div .app-etherpad-attachment {
+body div .app-etherpad-attachment, body div .btn-default .media > .media-body .app-etherpad-attachment {
   background-color: #e55c55;
   color: white;
-  padding: 0 4px;
+  padding: 0 4px 0 4px;
+  font-weight: normal;
+  margin: 0;
 }
 body div .select2-dropdown-open.select2-drop-above .select2-choices {
   background-image: none;
@@ -2056,31 +2078,31 @@ body div .select2-dropdown-open.select2-drop-above .select2-choices {
 }
 .doodle-vote-table > div {
   display: table;
-  border-spacing: 8px 2px;
+  border-spacing: 4px 2px;
 }
 .doodle-vote-table > div > div {
   display: table-cell;
   text-align: center;
-  max-width: 40px;
-  min-width: 40px;
+  min-width: 50px;
   min-height: 5px;
 }
 .doodle-vote-table > div > div img {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
 }
 .doodle-vote-table > div .doodle-vote-cell + .doodle-vote-cell {
   margin-left: 8px;
 }
 .doodle-vote-table > div .doodle-vote-date {
-  max-width: 88px;
-  min-width: 88px;
+  text-align: left;
   color: white;
   background-color: #779b48;
   line-height: 1em;
   padding: 3px 0;
+  margin-bottom: 3px;
 }
 .doodle-vote-table > div .doodle-vote-time {
+  text-align: left;
   background-color: transparent;
   line-height: 1em;
   padding: 3px 0;
@@ -2088,31 +2110,35 @@ body div .select2-dropdown-open.select2-drop-above .select2-choices {
 }
 .doodle-vote-table > div .doodle-vote-yes {
   background-color: rgba(119, 155, 72, 0.65);
-  min-height: 40px;
+  min-height: 50px;
   line-height: 1.3em;
   font-size: 1.2em;
-  padding: 10px 0;
+  padding: 14px 0;
+  margin-bottom: 4px;
 }
 .doodle-vote-table > div .doodle-vote-maybe {
   background-color: rgba(239, 160, 45, 0.65);
-  min-height: 40px;
+  min-height: 50px;
   line-height: 1.3em;
   font-size: 1.2em;
-  padding: 10px 0;
+  padding: 14px 0;
+  margin-bottom: 4px;
 }
 .doodle-vote-table > div .doodle-vote-no {
   background-color: rgba(229, 92, 85, 0.65);
-  min-height: 40px;
+  min-height: 50px;
   line-height: 1.3em;
   font-size: 1.2em;
-  padding: 10px 0;
+  padding: 14px 0;
+  margin-bottom: 4px;
 }
 .doodle-vote-table > div .doodle-vote-eventbutton {
   background-color: white;
-  min-height: 40px;
+  min-height: 50px;
   line-height: 1.3em;
   font-size: 1.2em;
-  padding: 10px 0;
+  padding: 14px 0;
+  margin-bottom: 4px;
   cursor: pointer;
 }
 .doodle-vote-table h2 {

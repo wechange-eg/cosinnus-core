@@ -236,6 +236,10 @@ ul.appnavi-dropdown-menu {
 	a + a {
 		margin-left: 15px;
 	}
+	// But not in text
+	p a + a {
+		margin-left: 0;
+	}
 
 	> a, > span {
 		white-space: normal;
@@ -259,6 +263,13 @@ ul.appnavi-dropdown-menu {
 	-webkit-user-select: text;
 	-ms-user-select: text;
 	-o-user-select: text;
+
+
+	&.meta-attribute {
+		// meta tags
+		font-size: 12px;
+		line-height: 17px;
+	}
 }
 
 // .form-control is a Bootstrap class for INPUT elements.
@@ -413,6 +424,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 
 		.annotation {
 			font-size: 12px;
+		}
+
+		a {
+			font-weight: bold;
 		}
 	}
 

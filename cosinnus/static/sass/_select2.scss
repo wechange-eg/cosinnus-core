@@ -67,8 +67,12 @@ body div {
 	@mixin select2attachment($light,$normal,$dark) {
 		background-color: $normal;
 		color: $app-neutral-color-white;
-		padding: 0 4px;
+		padding: 0 4px 0 4px;
+		font-weight: normal;
+		margin: 0;
 	}
+
+	&, .btn-default .media > .media-body {
 
 	.app-main-attachment {
 		@include select2attachment($app-main-color-light,$app-main-color,$app-main-color-dark);
@@ -87,6 +91,8 @@ body div {
 	}
 	.app-etherpad-attachment {
 		@include select2attachment($app-etherpad-color-light,$app-etherpad-color,$app-etherpad-color-dark);
+	}
+
 	}
 
 	.select2-dropdown-open.select2-drop-above .select2-choices {

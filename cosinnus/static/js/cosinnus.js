@@ -491,8 +491,10 @@ console.log("o");
 				$(this).parent().removeClass('doodle-vote-no');
 
 				// set new selection
-				$(this).parent().addClass('doodle-vote-'+$(this).attr('data-doodle-option'));
-
+				$(this).parent()
+					.addClass('doodle-vote-'+$(this).attr('data-doodle-option'))
+					.find('input')
+					.val($(this).attr('data-doodle-option'));
 			});
 		},
 

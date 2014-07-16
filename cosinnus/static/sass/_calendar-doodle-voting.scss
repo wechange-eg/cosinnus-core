@@ -5,19 +5,20 @@
 	color: $app-neutral-color-dark;
 
 	> div {
-	display: table;
-		border-spacing: 8px 2px;
+		// Horizontal lines
+		display: table;
+		border-spacing: 4px 2px;
 
 		> div {
 			display: table-cell;
 			text-align: center;
-			max-width: 40px;
-			min-width: 40px;
+
+			min-width: 50px;
 			min-height:5px;
 
 			img {
-				width: 40px;
-				height: 40px;
+				width: 50px;
+				height: 50px;
 			}
 		}
 
@@ -26,15 +27,16 @@
 		}
 
 		.doodle-vote-date {
-			max-width: 88px;
-			min-width: 88px;
+			text-align: left;
 			color: $app-neutral-color-white;
 			background-color: $app-calendar-color;
 			line-height: 1em;
 			padding: 3px 0;
+			margin-bottom: 3px;
 		}
 
 		.doodle-vote-time {
+			text-align: left;
 			background-color: transparent;
 			line-height: 1em;
 			padding: 3px 0;
@@ -43,10 +45,11 @@
 
 
 		@mixin doodle-vote-yesmaybeno() {
-			min-height: 40px;
+			min-height: 50px;
 			line-height: 1.3em;
 			font-size: 1.2em;
-			padding: 10px 0;
+			padding: 14px 0;
+			margin-bottom: 4px;
 		}
 
 		.doodle-vote-yes {
