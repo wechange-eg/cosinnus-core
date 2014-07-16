@@ -115,8 +115,8 @@ def get_tagged_object_filter_for_user(user):
     """ A queryset filter to filter for TaggableObjects that respects the visibility tag of the object,
         checking group membership of the user and creator information of the object.
         This is used to filter all list views and queryset gets for BaseTaggableObjects. """
-    #q = Q(group__public=True)  # All tagged objects in public groups
-    q = Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)  # All public tagged objects
+    q = Q(media_tag__isnull=True) # get all objects that don't have a media_tag (folders for example)
+    q |= Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)  # All public tagged objects
     if user.is_authenticated():
         gids = CosinnusGroup.objects.get_for_user_pks(user)
         q |= Q(  # all tagged objects in groups the user is a member of
