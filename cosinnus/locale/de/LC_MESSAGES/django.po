@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-07 15:18+0200\n"
+"POT-Creation-Date: 2014-07-16 17:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -341,26 +341,26 @@ msgstr ""
 "\n"
 "Der Nutzer %(user_name)s möchte der Gruppe %(group_name)s beitreten."
 
-#: .\core\decorators\views.py:47 .\core\decorators\views.py:91
-#: .\core\decorators\views.py:135 .\core\decorators\views.py:180
+#: .\core\decorators\views.py:55 .\core\decorators\views.py:102
+#: .\core\decorators\views.py:149 .\core\decorators\views.py:207
 msgid "No group provided"
 msgstr "Keine Gruppe angegeben"
 
-#: .\core\decorators\views.py:52 .\core\decorators\views.py:96
-#: .\core\decorators\views.py:140 .\core\decorators\views.py:185
+#: .\core\decorators\views.py:60 .\core\decorators\views.py:107
+#: .\core\decorators\views.py:154 .\core\decorators\views.py:212
 msgid "No group found with this name"
 msgstr "Keine Gruppe mit diesem Namen gefunden"
 
-#: .\core\decorators\views.py:57 .\core\decorators\views.py:101
-#: .\core\decorators\views.py:145 .\core\decorators\views.py:190
+#: .\core\decorators\views.py:68 .\core\decorators\views.py:115
+#: .\core\decorators\views.py:162 .\core\decorators\views.py:220
 msgid "Please log in to access this page."
 msgstr "Bitte melden sie sich an um auf diese Seite zugreifen zu können"
 
-#: .\forms\attached_object.py:52
+#: .\forms\attached_object.py:53
 msgid "Attachments"
 msgstr "Anhänge"
 
-#: .\forms\attached_object.py:53
+#: .\forms\attached_object.py:54
 msgid "Type the title and/or type of attachment"
 msgstr "Geben sie Titel/Typ des Anhangs ein"
 
@@ -406,27 +406,23 @@ msgstr "Avatar"
 msgid "Public"
 msgstr "Öffentlich"
 
-#: .\models\group.py:304 .\models\tagged.py:125
-msgid "Tags"
-msgstr "Schlagworte"
-
-#: .\models\group.py:311
+#: .\models\group.py:310
 msgid "Cosinnus group"
 msgstr "Cosinnus Gruppe"
 
-#: .\models\group.py:312
+#: .\models\group.py:311
 msgid "Cosinnus groups"
 msgstr "Cosinnus Gruppen"
 
-#: .\models\group.py:331
+#: .\models\group.py:330
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
 
-#: .\models\group.py:415
+#: .\models\group.py:414
 msgid "Group membership"
 msgstr "Gruppenmitgliedschaft"
 
-#: .\models\group.py:416
+#: .\models\group.py:415
 msgid "Group memberships"
 msgstr "Gruppenmitgliedschaften"
 
@@ -440,7 +436,7 @@ msgstr "Webseite"
 msgid "User"
 msgstr "Nutzer"
 
-#: .\models\tagged.py:56 .\models\tagged.py:60 .\models\tagged.py:131
+#: .\models\tagged.py:56 .\models\tagged.py:60 .\models\tagged.py:133
 msgid "Group"
 msgstr "Gruppe"
 
@@ -448,31 +444,35 @@ msgstr "Gruppe"
 msgid "Persons"
 msgstr "Personen"
 
-#: .\models\tagged.py:65
+#: .\models\tagged.py:66
+msgid "Tags"
+msgstr "Schlagworte"
+
+#: .\models\tagged.py:68
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: .\models\tagged.py:98
+#: .\models\tagged.py:101
 msgid "Attached object"
 msgstr "Verknüpftes Objekt"
 
-#: .\models\tagged.py:99
+#: .\models\tagged.py:102
 msgid "Attached objects"
 msgstr "Verknüpftes Objekt"
 
-#: .\models\tagged.py:134
+#: .\models\tagged.py:136
 msgid "Title"
 msgstr "Titel"
 
-#: .\models\tagged.py:138
+#: .\models\tagged.py:140
 msgid "Creator"
 msgstr "Ersteller"
 
-#: .\models\tagged.py:143
+#: .\models\tagged.py:145
 msgid "Created"
 msgstr "Erstellt"
 
-#: .\models\tagged.py:188
+#: .\models\tagged.py:190
 msgid "Path"
 msgstr "Pfad"
 
@@ -1042,16 +1042,16 @@ msgstr "Sie können dieses Widget nicht auf das Benutzerdashboard platzieren"
 msgid "Widget not found."
 msgstr "Widget nicht gefunden"
 
-#: .\templatetags\cosinnus_tags.py:187
+#: .\templatetags\cosinnus_tags.py:198
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>%(model_name)s konnte nicht gerendert werden!</i>"
 
-#: .\utils\dashboard.py:152
+#: .\utils\dashboard.py:153
 msgid "Group Description"
 msgstr "Gruppenbeschreibung"
 
-#: .\utils\dashboard.py:175
+#: .\utils\dashboard.py:179
 msgid "Network"
 msgstr "Netzwerk"
 
@@ -1059,7 +1059,7 @@ msgstr "Netzwerk"
 msgid "No model given to export data from."
 msgstr "Kein Modell zum Exportieren der Daten angegeben."
 
-#: .\views\group.py:51 .\views\user.py:53
+#: .\views\group.py:52 .\views\user.py:53
 msgid "Create"
 msgstr "Erstellen"
 
@@ -1153,7 +1153,7 @@ msgstr ""
 "mit diesen Benutzernamen einloggen."
 
 #
-#: .\views\widget.py:139
+#: .\views\widget.py:142
 msgid "Change"
 msgstr "Ändern"
 

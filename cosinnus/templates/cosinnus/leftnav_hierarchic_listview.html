@@ -9,7 +9,7 @@
         {% include "cosinnus/leftnav_button.html" with extra_classes="fine-space" icon="fa-reply" label=label href=href  %}
     {% else %}
 	    {% captureas href %}{% url cosinnus_app_list_url group=group.slug %}{% endcaptureas %}
-	    {% captureas label %}{% trans "Zurück zu" %} {% trans COSINNUS_CURRENT_APP context "toplevel_breadcrumb" %}{% endcaptureas %}
+	    {% captureas label %}{% trans "Zurück zu" %} {% trans COSINNUS_CURRENT_APP context "the_app" %}{% endcaptureas %}
 	    {% include "cosinnus/leftnav_button.html" with extra_classes="fine-space" icon="fa-reply" label=label href=href  %}
     {% endif %}
 {% endif %}
