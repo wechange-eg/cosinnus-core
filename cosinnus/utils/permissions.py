@@ -58,10 +58,14 @@ def check_object_read_access(obj, user):
         is_admin = check_ug_admin(user, group)
         # items are readable only if their visibility tag is public, or it is set to group and a group member
         # is accessing the item, or the item's creator is accessing it
-        obj_is_visible = obj.creator == user or \
-                obj.media_tag.visibility == BaseTagObject.VISIBILITY_ALL or \
-                (obj.media_tag.visibility == BaseTagObject.VISIBILITY_GROUP and (is_member or is_admin))
-        
+        if obj.media_tag:
+            obj_is_visible = obj.creator == user or \
+                    obj.media_tag.visibility == BaseTagObject.VISIBILITY_ALL or \
+                    (obj.media_tag.visibility == BaseTagObject.VISIBILITY_GROUP and (is_member or is_admin))
+        else:
+            # catch error cases where no media_tag was created. that case should break, but not here.
+            obj_is_visible = is_member or is_admin
+            
         return user.is_superuser or user.is_staff or obj_is_visible
     
     else:
@@ -86,7 +90,11 @@ def check_object_write_access(obj, user):
     elif issubclass(obj.__class__, BaseTaggableObjectModel):
         # editing/deleting an object, check if we are owner or staff member or group admin or site admin
         is_admin = check_ug_admin(user, obj.group)
-        is_private = obj.media_tag.visibility == BaseTagObject.VISIBILITY_USER
+        if obj.media_tag:
+            is_private = obj.media_tag.visibility == BaseTagObject.VISIBILITY_USER
+        else:
+            # catch error cases where no media_tag was created. that case should break, but not here.
+            is_private = False
         return user.is_superuser or user.is_staff or obj.creator == user or (is_admin and not is_private)
     
     raise Exception("cosinnus.core.permissions: You must either supply a CosinnusGroup \
