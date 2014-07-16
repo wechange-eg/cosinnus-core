@@ -34,6 +34,12 @@ def cosinnus(request):
     ``COSINNUS_DATETIME_FORMAT``
 
     ``COSINNUS_TIME_FORMAT``
+    
+    ``COSINNUS_DJANGO_DATE_FORMAT``
+    
+    ``COSINNUS_DJANGO_DATE_SHORT_FORMAT``
+    
+    ``COSINNUS_DJANGO_TIME_FORMAT``
 
     ``COSINNUS_USER``
         If ``request.user`` is logged in, its a serialized version of
