@@ -104,6 +104,18 @@ def full_name(value):
         return value.get_full_name() or value.get_username()
     return ""
 
+@register.filter
+def multiply(value, arg):
+    """Template filter to multiply two numbers
+    """
+    return value * arg
+
+@register.filter
+def subtract(value, arg):
+    """Template filter to multiply two numbers
+    """
+    return value - arg
+
 
 @register.simple_tag(takes_context=True)
 def cosinnus_menu(context, template="cosinnus/navbar.html"):
