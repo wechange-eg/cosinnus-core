@@ -9,7 +9,7 @@
 		display: table;
 		border-spacing: 4px 2px;
 
-		> div {
+		> div, > form > div {
 			display: table-cell;
 			text-align: center;
 
@@ -68,10 +68,17 @@
 			// color: transparent;
 		}
 
-		.doodle-vote-eventbutton {			
+		button.doodle-vote-eventbutton {
+			border-width: 0;
+			width: 50px;
+			color: $app-neutral-color-dark;
 			background-color: $app-neutral-color-white;
 			@include doodle-vote-yesmaybeno();
 			cursor: pointer;
+
+			&:hover, &:focus, &:active {
+				background-color: $app-neutral-color-light;
+			}
 		}
 
 	}

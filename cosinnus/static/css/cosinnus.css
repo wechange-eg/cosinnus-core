@@ -2068,6 +2068,7 @@ body div .select2-dropdown-open.select2-drop-above .select2-choices {
 #calendar-doodle-days-selector #calendar-doodle-days-selector-list p {
   margin: 8px 0;
   line-height: 1.1em;
+  max-width: 350px;
 }
 
 .doodle-vote-table {
@@ -2080,13 +2081,13 @@ body div .select2-dropdown-open.select2-drop-above .select2-choices {
   display: table;
   border-spacing: 4px 2px;
 }
-.doodle-vote-table > div > div, .doodle-vote-table > form > div > div {
+.doodle-vote-table > div > div, .doodle-vote-table > div > form > div, .doodle-vote-table > form > div > div, .doodle-vote-table > form > div > form > div {
   display: table-cell;
   text-align: center;
   min-width: 50px;
   min-height: 5px;
 }
-.doodle-vote-table > div > div img, .doodle-vote-table > form > div > div img {
+.doodle-vote-table > div > div img, .doodle-vote-table > div > form > div img, .doodle-vote-table > form > div > div img, .doodle-vote-table > form > div > form > div img {
   width: 50px;
   height: 50px;
 }
@@ -2132,7 +2133,10 @@ body div .select2-dropdown-open.select2-drop-above .select2-choices {
   padding: 14px 0;
   margin-bottom: 4px;
 }
-.doodle-vote-table > div .doodle-vote-eventbutton, .doodle-vote-table > form > div .doodle-vote-eventbutton {
+.doodle-vote-table > div button.doodle-vote-eventbutton, .doodle-vote-table > form > div button.doodle-vote-eventbutton {
+  border-width: 0;
+  width: 50px;
+  color: #333333;
   background-color: white;
   min-height: 50px;
   line-height: 1.3em;
@@ -2140,6 +2144,9 @@ body div .select2-dropdown-open.select2-drop-above .select2-choices {
   padding: 14px 0;
   margin-bottom: 4px;
   cursor: pointer;
+}
+.doodle-vote-table > div button.doodle-vote-eventbutton:hover, .doodle-vote-table > div button.doodle-vote-eventbutton:focus, .doodle-vote-table > div button.doodle-vote-eventbutton:active, .doodle-vote-table > form > div button.doodle-vote-eventbutton:hover, .doodle-vote-table > form > div button.doodle-vote-eventbutton:focus, .doodle-vote-table > form > div button.doodle-vote-eventbutton:active {
+  background-color: #dbdbdb;
 }
 .doodle-vote-table h2 {
   font-size: 1em;

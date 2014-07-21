@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   font-family: Verdana, Geneva, sans-serif;
   background: #43757e;
@@ -3849,7 +3850,7 @@ tbody.collapse.in {
   display: inline-block;
 }
 .breadcrumb > li + li:before {
-  content: ">\00a0";
+  content: "»\00a0";
   padding: 0 5px;
   color: #dbdbdb;
 }
