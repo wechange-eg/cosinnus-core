@@ -1,1 +1,7 @@
 <!-- Overwrite this in your main app! -->
+
+{% load cosinnus_tags %}
+
+{% if object.attached_objects.exists %}
+    {% cosinnus_render_attached_objects object %}
+{% endif %}
