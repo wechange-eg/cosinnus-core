@@ -2076,24 +2076,24 @@ body div .select2-dropdown-open.select2-drop-above .select2-choices {
   padding: 0 0 20px 0;
   color: #333333;
 }
-.doodle-vote-table > div {
+.doodle-vote-table > div, .doodle-vote-table > form > div {
   display: table;
   border-spacing: 4px 2px;
 }
-.doodle-vote-table > div > div {
+.doodle-vote-table > div > div, .doodle-vote-table > form > div > div {
   display: table-cell;
   text-align: center;
   min-width: 50px;
   min-height: 5px;
 }
-.doodle-vote-table > div > div img {
+.doodle-vote-table > div > div img, .doodle-vote-table > form > div > div img {
   width: 50px;
   height: 50px;
 }
-.doodle-vote-table > div .doodle-vote-cell + .doodle-vote-cell {
+.doodle-vote-table > div .doodle-vote-cell + .doodle-vote-cell, .doodle-vote-table > form > div .doodle-vote-cell + .doodle-vote-cell {
   margin-left: 8px;
 }
-.doodle-vote-table > div .doodle-vote-date {
+.doodle-vote-table > div .doodle-vote-date, .doodle-vote-table > form > div .doodle-vote-date {
   text-align: left;
   color: white;
   background-color: #779b48;
@@ -2101,14 +2101,14 @@ body div .select2-dropdown-open.select2-drop-above .select2-choices {
   padding: 3px 0;
   margin-bottom: 3px;
 }
-.doodle-vote-table > div .doodle-vote-time {
+.doodle-vote-table > div .doodle-vote-time, .doodle-vote-table > form > div .doodle-vote-time {
   text-align: left;
   background-color: transparent;
   line-height: 1em;
   padding: 3px 0;
   height: 30px;
 }
-.doodle-vote-table > div .doodle-vote-yes {
+.doodle-vote-table > div .doodle-vote-yes, .doodle-vote-table > form > div .doodle-vote-yes {
   background-color: rgba(119, 155, 72, 0.65);
   min-height: 50px;
   line-height: 1.3em;
@@ -2116,7 +2116,7 @@ body div .select2-dropdown-open.select2-drop-above .select2-choices {
   padding: 14px 0;
   margin-bottom: 4px;
 }
-.doodle-vote-table > div .doodle-vote-maybe {
+.doodle-vote-table > div .doodle-vote-maybe, .doodle-vote-table > form > div .doodle-vote-maybe {
   background-color: rgba(239, 160, 45, 0.65);
   min-height: 50px;
   line-height: 1.3em;
@@ -2124,7 +2124,7 @@ body div .select2-dropdown-open.select2-drop-above .select2-choices {
   padding: 14px 0;
   margin-bottom: 4px;
 }
-.doodle-vote-table > div .doodle-vote-no {
+.doodle-vote-table > div .doodle-vote-no, .doodle-vote-table > form > div .doodle-vote-no {
   background-color: rgba(229, 92, 85, 0.65);
   min-height: 50px;
   line-height: 1.3em;
@@ -2132,7 +2132,7 @@ body div .select2-dropdown-open.select2-drop-above .select2-choices {
   padding: 14px 0;
   margin-bottom: 4px;
 }
-.doodle-vote-table > div .doodle-vote-eventbutton {
+.doodle-vote-table > div .doodle-vote-eventbutton, .doodle-vote-table > form > div .doodle-vote-eventbutton {
   background-color: white;
   min-height: 50px;
   line-height: 1.3em;

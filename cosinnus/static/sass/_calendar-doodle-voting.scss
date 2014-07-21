@@ -4,7 +4,7 @@
 	padding: 0 0 20px 0;
 	color: $app-neutral-color-dark;
 
-	> div {
+	> div, > form > div {
 		// Horizontal lines
 		display: table;
 		border-spacing: 4px 2px;
