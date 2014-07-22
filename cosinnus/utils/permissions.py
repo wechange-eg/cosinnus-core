@@ -41,7 +41,7 @@ def check_ug_pending(user, group):
 
 
 def check_object_read_access(obj, user):
-    """ Checks read permissions for a CosinnusGroup or BaseTaggableObject.
+    """ Checks read permissions for a CosinnusGroup or BaseTaggableObject or any object with a creator attribute.
         Returns ``True`` if the user is either admin, staff member, group admin, group member,
             or the group is public.
     """
@@ -65,22 +65,24 @@ def check_object_read_access(obj, user):
         else:
             # catch error cases where no media_tag was created. that case should break, but not here.
             obj_is_visible = is_member or is_admin
-            
         return user.is_superuser or user.is_staff or obj_is_visible
+    elif hasattr(obj, 'creator'):
+        return obj.creator == user or user.is_superuser or user.is_staff
     
-    else:
-        raise Exception("cosinnus.core.permissions: You must either supply a CosinnusGroup \
-                or a BaseTaggableObject to check_object_read_access(). The supplied object \
-                type was: %s" % (str(obj.__class__) if obj else "None"))
+    raise Exception("cosinnus.core.permissions: You must either supply a CosinnusGroup " +\
+            "or a BaseTaggableObject or an object with a ``creator`` property to " +\
+            "check_object_read_access(). The supplied object " +\
+            "type was: %s" % (str(obj.__class__) if obj else "None"))
     
 
 def check_object_write_access(obj, user):
-    """ Checks write permissions for either a CosinnusGroup and BaseTaggableObject.
+    """ Checks write permissions for either a CosinnusGroup and BaseTaggableObject or any object with a creator attribute.
         For CosinnusGroups, check if the user can edit/update/delete the group iself:
             returns ``True`` if the user is either admin, staff member or group admin
         For BaseTaggableObjects, check if the user can edit/update/delete the item iself:
             returns ``True`` if the user is either admin, staff member, object owner or group admin 
                 of the group the item belongs to
+        For Objects with a creator attribute, check if the user is the creator of that object or he is staff or admin.
         
     """
     # check what kind of object was supplied (CosinnusGroup or BaseTaggableObject)
@@ -96,10 +98,13 @@ def check_object_write_access(obj, user):
             # catch error cases where no media_tag was created. that case should break, but not here.
             is_private = False
         return user.is_superuser or user.is_staff or obj.creator == user or (is_admin and not is_private)
+    elif hasattr(obj, 'creator'):
+        return obj.creator == user or user.is_superuser or user.is_staff
     
-    raise Exception("cosinnus.core.permissions: You must either supply a CosinnusGroup \
-            or a BaseTaggableObject to check_object_write_access(). The supplied object \
-            type was: %s" % (str(obj.__class__) if obj else "None"))
+    raise Exception("cosinnus.core.permissions: You must either supply a CosinnusGroup " +\
+            "or a BaseTaggableObject or an object with a ``creator`` property to " +\
+            "check_object_read_access(). The supplied object " +\
+            "type was: %s" % (str(obj.__class__) if obj else "None"))
 
 def check_group_create_objects_access(group, user):
     """ Checks permissions of a user to create objects in a CosinnusGroup.
