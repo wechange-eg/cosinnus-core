@@ -40,6 +40,14 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
             
             # we need to remove this from the initials, or it overwrites the select2 fields initials
             del self.initial['tags']
+        
+        if self.group and not self.instance.pk:
+            # for new TaggableObjects (not groups), set the default visibility corresponding to the group's public status
+            if self.group.public:
+                self.fields['visibility'].initial = BaseTagObject.VISIBILITY_ALL
+            else:
+                self.fields['visibility'].initial = BaseTagObject.VISIBILITY_GROUP
+        
             
         
     def save(self, commit=True):
