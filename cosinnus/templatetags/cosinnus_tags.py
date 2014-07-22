@@ -4,6 +4,7 @@ from collections import defaultdict
 
 import six
 from six.moves.urllib.parse import parse_qsl
+from uuid import uuid1
 
 from django import template
 from django.core.exceptions import ImproperlyConfigured
@@ -261,6 +262,65 @@ class CaptureasNode(template.Node):
         output = self.nodelist.render(context)
         context[self.varname] = output
         return ""
+    
+
+@register.tag
+def djajax_connect(parser, token):
+    """
+    """
+    try:
+        tag_name, obj, prop = token.split_contents()
+    except ValueError:
+        raise template.TemplateSyntaxError("'djajax_connect' requires a variable name.")
+    
+    return DjajaxConnectNode(obj, prop)
+
+
+class DjajaxConnectNode(template.Node):
+    def __init__(self, obj, prop, my_args=None):
+        self.obj = obj
+        self.prop = prop
+        self.my_args = my_args
+
+    def render(self, context):
+        node_id = 'djajax_%s_%s_%d' % (self.obj, self.prop, uuid1())
+        djajax_entry = (context[self.obj], self.prop, node_id)
+        if not 'djajax_connect_list' in context:
+            raise template.TemplateSyntaxError("Djajax not found in context. Have you inserted '{% djajax_setup %}' ?")
+        context['djajax_connect_list'].append(djajax_entry)
+        
+        print ">>> c:", context['djajax_connect_list']
+        return " id='%s'" % (node_id) 
+
+
+@register.tag
+def djajax_setup(parser, token):
+    """
+    """
+    try:
+        tag_name, directive = token.split_contents()
+    except ValueError:
+        directive = 'init'
+    
+    return DjajaxSetupNode(directive)
+
+class DjajaxSetupNode(template.Node):
+    def __init__(self, directive='init'):
+        self.directive = directive
+    
+    def render(self, context):
+        if self.directive == 'init':
+            context['djajax_connect_list'] = []
+            return 'inited'
+        else:
+            #import ipdb; ipdb.set_trace();
+            node_items = context['djajax_connect_list']
+            ret = ''
+            for obj, prop, node_id in node_items:
+                ret += node_id + ' || '
+            
+            return ret
+
 
 
 @register.simple_tag(takes_context=True)
