@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-22 15:08+0200\n"
+"POT-Creation-Date: 2014-07-22 16:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -428,7 +428,7 @@ msgid "Group memberships"
 msgstr "Gruppenmitgliedschaften"
 
 #: .\models\profile.py:144
-#: .\templates\cosinnus\user\userprofile_form.html.py:93
+#: .\templates\cosinnus\user\userprofile_form.html.py:97
 msgid "Website"
 msgstr "Webseite"
 
@@ -631,7 +631,7 @@ msgid "In Gruppen suchen"
 msgstr ""
 
 #: .\templates\cosinnus\search.html.py:168
-#: .\templates\cosinnus\user\userprofile_detail.html.py:132
+#: .\templates\cosinnus\user\userprofile_detail.html.py:124
 msgid "Meine Gruppen"
 msgstr "Meine Gruppen"
 
@@ -810,7 +810,7 @@ msgid "Gruppenbild wird beim Speichern der Gruppe gelöscht."
 msgstr ""
 
 #: .\templates\cosinnus\group\group_form.html.py:109
-#: .\templates\cosinnus\user\userprofile_form.html.py:155
+#: .\templates\cosinnus\user\userprofile_form.html.py:159
 msgid "Löschen"
 msgstr ""
 
@@ -844,7 +844,7 @@ msgid "Beschreibe die Gruppe, ihre Aktivitäten und Ziele."
 msgstr ""
 
 #: .\templates\cosinnus\group\group_form.html.py:187
-#: .\templates\cosinnus\user\userprofile_form.html.py:220
+#: .\templates\cosinnus\user\userprofile_form.html.py:224
 msgid "Speichern"
 msgstr ""
 
@@ -945,12 +945,12 @@ msgid "Passwort wiederholen"
 msgstr ""
 
 #: .\templates\cosinnus\registration\signup.html.py:91
-#: .\templates\cosinnus\user\userprofile_form.html.py:44
+#: .\templates\cosinnus\user\userprofile_form.html.py:48
 msgid "Vorname"
 msgstr "Vorname"
 
 #: .\templates\cosinnus\registration\signup.html.py:106
-#: .\templates\cosinnus\user\userprofile_form.html.py:60
+#: .\templates\cosinnus\user\userprofile_form.html.py:64
 msgid "Nachname"
 msgstr "Nachname"
 
@@ -958,24 +958,34 @@ msgstr "Nachname"
 msgid "Registrieren"
 msgstr ""
 
-#: .\templates\cosinnus\user\userprofile_detail.html.py:23
-#: .\templates\cosinnus\user\userprofile_detail.html.py:99
+#: .\templates\cosinnus\user\leftnav.html.py:13
+#: .\templates\cosinnus\user\userprofile_detail.html.py:91
 msgid "Über mich"
 msgstr ""
 
-#: .\templates\cosinnus\user\userprofile_detail.html.py:46
+#: .\templates\cosinnus\user\userprofile_detail.html.py:11
+#: .\templates\cosinnus\user\userprofile_form.html.py:10
+msgid "Your Profile"
+msgstr "Über mich"
+
+#: .\templates\cosinnus\user\userprofile_detail.html.py:13
+msgid "User Profiles"
+msgstr "Mitglieder-Profile"
+
+#: .\templates\cosinnus\user\userprofile_detail.html.py:38
+#: .\templates\cosinnus\user\userprofile_form.html.py:11
 msgid "Edit Profile"
 msgstr "Profil bearbeiten"
 
-#: .\templates\cosinnus\user\userprofile_detail.html.py:76
+#: .\templates\cosinnus\user\userprofile_detail.html.py:68
 msgid "Nachricht"
 msgstr ""
 
-#: .\templates\cosinnus\user\userprofile_detail.html.py:114
+#: .\templates\cosinnus\user\userprofile_detail.html.py:106
 msgid "Meine Webseite"
 msgstr ""
 
-#: .\templates\cosinnus\user\userprofile_detail.html.py:186
+#: .\templates\cosinnus\user\userprofile_detail.html.py:178
 msgid "Mein Netzwerk"
 msgstr "Mein Netzwerk"
 
@@ -983,43 +993,43 @@ msgstr "Mein Netzwerk"
 msgid "Edit Your Profile"
 msgstr ""
 
-#: .\templates\cosinnus\user\userprofile_form.html.py:28
+#: .\templates\cosinnus\user\userprofile_form.html.py:32
 msgid "Basisdaten"
 msgstr ""
 
-#: .\templates\cosinnus\user\userprofile_form.html.py:78
+#: .\templates\cosinnus\user\userprofile_form.html.py:82
 msgid "E-Mail"
 msgstr ""
 
-#: .\templates\cosinnus\user\userprofile_form.html.py:111
+#: .\templates\cosinnus\user\userprofile_form.html.py:115
 msgid "Profilbild"
 msgstr ""
 
-#: .\templates\cosinnus\user\userprofile_form.html.py:128
+#: .\templates\cosinnus\user\userprofile_form.html.py:132
 msgid "Profilbild wird beim Speichern gelöscht."
 msgstr ""
 
-#: .\templates\cosinnus\user\userprofile_form.html.py:166
+#: .\templates\cosinnus\user\userprofile_form.html.py:170
 msgid "Ein Bild hilft, dich in vielen Programmen schnell zu erkennen."
 msgstr ""
 
-#: .\templates\cosinnus\user\userprofile_form.html.py:173
+#: .\templates\cosinnus\user\userprofile_form.html.py:177
 msgid "Über dich"
 msgstr ""
 
-#: .\templates\cosinnus\user\userprofile_form.html.py:183
+#: .\templates\cosinnus\user\userprofile_form.html.py:187
 msgid "Wer bist du, und was motiviert dich?"
 msgstr ""
 
-#: .\templates\cosinnus\user\userprofile_form.html.py:195
+#: .\templates\cosinnus\user\userprofile_form.html.py:199
 msgid "Erzähl etwas über dich!"
 msgstr ""
 
-#: .\templates\cosinnus\user\userprofile_form.html.py:205
+#: .\templates\cosinnus\user\userprofile_form.html.py:209
 msgid "Weitere Beschreibung"
 msgstr ""
 
-#: .\templates\cosinnus\user\userprofile_form.html.py:206
+#: .\templates\cosinnus\user\userprofile_form.html.py:210
 msgid "Beschreibe dich, deine Aktivitäten und Interessen."
 msgstr ""
 

@@ -5,11 +5,15 @@
 	   {% trans "Edit Your Profile" %}
 {% endblock %}
 
-{% block leftnav %}
-{% endblock leftnav %}
+{% block breadcrumb %}
+        {{ block.super }}
+        <li class="active"><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Your Profile" %}</a></li>
+        <li class="active">{% trans "Edit Profile" %}</li>
+{% endblock %}
 
-{% block override_breadcrumb %}
-{% endblock override_breadcrumb %}
+{% block leftnav %}
+    {% include 'cosinnus/user/leftnav.html' with view="edit_profile" %}
+{% endblock leftnav %}
 
 
 {% block content %}
