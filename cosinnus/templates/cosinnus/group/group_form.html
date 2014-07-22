@@ -1,4 +1,4 @@
-{% extends "cosinnus/group/group_base.html" %}
+{% extends "cosinnus/base.html" %}
 {% load i18n static cosinnus_tags widget_tweaks %}
 
 {% block page_title %}
@@ -24,7 +24,6 @@
 {% block breadcrumb %}
         {{ block.super }}
         {% if object %}
-            <li><a href="{% url 'cosinnus:group-dashboard' group=object.slug %}">{{ object.name }}</a></li>
             <li class="active">{% trans "Edit Group" %}</li>
         {% else %}
             <li class="active">{% trans "Create Group" %}</li>

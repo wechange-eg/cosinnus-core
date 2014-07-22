@@ -1,4 +1,4 @@
-{% extends "cosinnus/group/group_base.html" %}
+{% extends "cosinnus/base.html" %}
 {% load i18n cosinnus_tags %}
 
 {% block page_title %}{% trans "Groups" %}{% endblock %}
@@ -11,6 +11,7 @@
 
 {% block breadcrumb %}
         {{ block.super }}
+        <li class="active">{% trans "Overview" %}</li>
 {% endblock %}
 
 

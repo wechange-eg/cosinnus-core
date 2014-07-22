@@ -2,6 +2,7 @@
 
 {% url 'cosinnus:group-detail' group=group.slug as group_detail_page %}
 {% url 'cosinnus:group-edit' group=group.slug as group_edit_page %}
+{% url 'cosinnus:group-dashboard' group=group.slug as group_dashboard_page %}
 
 <div class="btn-group w100 large-space">
     <button type="button" class="btn btn-appnavi dropdown-toggle w100" data-toggle="dropdown">
@@ -24,6 +25,8 @@
                       {% endfor %}
                     {% elif request.path == group_detail_page or request.path == group_edit_page %}  
                         {% trans "Einstellungen" %}
+                    {% elif request.path == group_dashboard_page %}
+                        {% trans "Dashboard" %}
                     {% else %}
                       {% trans "Choose App" %}
                     {% endif %}

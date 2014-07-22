@@ -1,4 +1,4 @@
-{% extends "cosinnus/group/group_base.html" %}
+{% extends "cosinnus/base.html" %}
 {% load i18n cosinnus_tags %}
 
 {% block page_title %}
@@ -11,7 +11,6 @@
 
 {% block breadcrumb %}
         {{ block.super }}
-        <li><a href="{% url 'cosinnus:group-dashboard' group=object.slug %}">{{ object.name }}</a></li>
         <li class="active">{% trans "Group Members" %}</li>
 {% endblock %}
 
