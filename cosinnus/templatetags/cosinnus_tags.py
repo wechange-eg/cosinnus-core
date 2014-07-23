@@ -281,6 +281,12 @@ def djajax_connect(parser, token):
 
 class DjajaxConnectNode(template.Node):
     
+    # arguments the connect tag can take, and their defaults
+    TAG_ARGUMENTS = {
+        'trigger_on': 'enter_key',
+        'post_to': '/api/v1/taggable_object/update/'
+    }
+    
     def _addArgFromParams(self, add_from_args, add_to_dict, context, arg_name, default_value=None):
         """ Utility function to parse the argument list for a named argument, then 
             take the following argument as that arguments value (parse it either for strings or
@@ -307,8 +313,9 @@ class DjajaxConnectNode(template.Node):
         
         # parse options
         additional_context = {}
-        self._addArgFromParams(self.my_args, additional_context, context, 'trigger_on', 'enter_key')
-        self._addArgFromParams(self.my_args, additional_context, context, 'post_to', '/api/v1/taggable_object/update/')
+        
+        for arg_name, arg_default in DjajaxConnectNode.TAG_ARGUMENTS.items():
+            self._addArgFromParams(self.my_args, additional_context, context, arg_name, arg_default)
         
         print ">>>> add context", additional_context
         
