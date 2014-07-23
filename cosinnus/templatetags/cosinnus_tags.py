@@ -284,7 +284,8 @@ class DjajaxConnectNode(template.Node):
     # arguments the connect tag can take, and their defaults
     TAG_ARGUMENTS = {
         'trigger_on': 'enter_key',
-        'post_to': '/api/v1/taggable_object/update/'
+        'post_to': '/api/v1/taggable_object/update/',
+        'value_selector': 'val'
     }
     
     def _addArgFromParams(self, add_from_args, add_to_dict, context, arg_name, default_value=None):

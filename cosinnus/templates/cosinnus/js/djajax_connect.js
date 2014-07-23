@@ -2,6 +2,7 @@
 
 function djajax_trigger_{{ node_id }}() {
     console.log('called handler for node id {{ node_id }} with value: ' + $('#{{ node_id }}').val());
+    var node_value = $('#{{ node_id }}').{{ value_selector }}()
     
     $.ajax({
          type:"POST",
@@ -11,8 +12,8 @@ function djajax_trigger_{{ node_id }}() {
             'model_name': '{{ model_name }}',
             'pk': '{{ pk }}',
             'property_name': '{{ property_name }}',
-            'property_data':  $('#{{ node_id }}').val(),
-            '{{ property_name }}': $('#{{ node_id }}').val(),
+            'property_data':  node_value,
+            '{{ property_name }}': node_value,
          },
          success: function(data){
              if (data['status'] == 'success') {
