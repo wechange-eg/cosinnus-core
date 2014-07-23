@@ -295,6 +295,17 @@ class DjajaxConnectNode(template.Node):
             additional_context['trigger_on'] = self.my_args[self.my_args.index('trigger_on')+1][1:-1].split(',')
         else:
             additional_context['trigger_on'] = ['enter_key']
+        if 'post_to' in self.my_args:
+            if self.my_args[self.my_args.index('post_to')+1][0] in ['"', "'"]:
+                additional_context['post_to'] = self.my_args[self.my_args.index('post_to')+1][1:-1]
+                print "A"
+            else:
+                additional_context['post_to'] = context[self.my_args[self.my_args.index('post_to')+1]]
+                print "B"
+        else:
+            additional_context['post_to'] = "/api/v1/taggable_object/update/"
+            #import ipdb; ipdb.set_trace();
+        print ">>>> add context", additional_context
         
         djajax_entry = (context[self.obj], self.prop, node_id, additional_context)
         if not 'djajax_connect_list' in context:
@@ -302,7 +313,6 @@ class DjajaxConnectNode(template.Node):
             #raise template.TemplateSyntaxError("Djajax not found in context. Have you inserted '{% djajax_setup %}' ?")
         context.dicts[0]['djajax_connect_list'].append(djajax_entry)
         
-        print ">>> c:", context['djajax_connect_list']
         return " id='%s'" % (node_id) 
 
 

@@ -13,7 +13,6 @@ def taggable_object_update_api(request):
     Logs the user specified by the `authentication_form` in.
     """
     if request.method == "POST":
-        #request = patch_body_json_data(request)
         # TODO: Django<=1.5: Django 1.6 removed the cookie check in favor of CSRF
         request.session.set_test_cookie()
         
@@ -37,7 +36,7 @@ def taggable_object_update_api(request):
         
         #check permissions:
         if not check_object_write_access(instance, request.user):
-            return JSONResponse('You do not have the necessary permissions to modify this object!' % (pk, model_class), status=403)
+            return JSONResponse('You do not have the necessary permissions to modify this object!', status=403)
         # check attribute exists
         if not hasattr(instance, property_name):
             return JSONResponse('Property "%s" not found for class "%s"!' % (property_name, model_class), status=400)
