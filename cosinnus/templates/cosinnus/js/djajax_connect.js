@@ -51,7 +51,6 @@ $('#{{ node_id }}').keydown(function(e) {
 {% endif %}
 
 {% if "value_changed" in trigger_on %}
-    console.log('adding trigger');
     $('#{{ node_id }}').change(function(e) {
         djajax_trigger_{{ node_id }}();
     });
