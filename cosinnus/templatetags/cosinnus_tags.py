@@ -280,6 +280,22 @@ def djajax_connect(parser, token):
 
 
 class DjajaxConnectNode(template.Node):
+    
+    def _addArgFromParams(self, add_from_args, add_to_dict, context, arg_name, default_value=None):
+        """ Utility function to parse the argument list for a named argument, then 
+            take the following argument as that arguments value (parse it either for strings or
+            context reference) """
+        if arg_name in self.my_args:
+            arg_value = self.my_args[self.my_args.index(arg_name)+1]
+        else:
+            arg_value =  '"'+ default_value + '"'
+        
+        if arg_value[0] in ['"', "'"]:
+            add_to_dict[arg_name] = arg_value[1:-1]
+        else:
+            add_to_dict[arg_name] = context[arg_value]
+        
+    
     def __init__(self, obj, prop, my_args):
         self.obj = obj
         self.prop = prop
@@ -291,20 +307,9 @@ class DjajaxConnectNode(template.Node):
         
         # parse options
         additional_context = {}
-        if 'trigger_on' in self.my_args:
-            additional_context['trigger_on'] = self.my_args[self.my_args.index('trigger_on')+1][1:-1].split(',')
-        else:
-            additional_context['trigger_on'] = ['enter_key']
-        if 'post_to' in self.my_args:
-            if self.my_args[self.my_args.index('post_to')+1][0] in ['"', "'"]:
-                additional_context['post_to'] = self.my_args[self.my_args.index('post_to')+1][1:-1]
-                print "A"
-            else:
-                additional_context['post_to'] = context[self.my_args[self.my_args.index('post_to')+1]]
-                print "B"
-        else:
-            additional_context['post_to'] = "/api/v1/taggable_object/update/"
-            #import ipdb; ipdb.set_trace();
+        self._addArgFromParams(self.my_args, additional_context, context, 'trigger_on', 'enter_key')
+        self._addArgFromParams(self.my_args, additional_context, context, 'post_to', '/api/v1/taggable_object/update/')
+        
         print ">>>> add context", additional_context
         
         djajax_entry = (context[self.obj], self.prop, node_id, additional_context)
@@ -346,7 +351,7 @@ class DjajaxSetupNode(template.Node):
                     'pk': obj.pk,
                     'property_name': prop,
                 }
-                print ">>a aaaaa  aaaaad", additional_context
+                #print ">>a aaaaa  aaaaad", additional_context
                 context.update(additional_context)
                 ret += render_to_string('cosinnus/js/djajax_connect.js', context) + '\n\n'
             
