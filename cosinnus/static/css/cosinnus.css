@@ -390,6 +390,27 @@ label {
   display: inline-block;
 }
 
+.media > select.pull-right {
+  font-family: FontAwesome;
+  border-width: 0;
+  margin-right: -100px;
+  width: 140px;
+  color: white;
+  text-align: left;
+  padding-left: 10px;
+  padding-top: 8px;
+}
+.media > select.pull-right option {
+  font-family: FontAwesome;
+  font-size: 14px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: left;
+  background-color: transparent;
+  border-width: 0;
+  color: white;
+}
+
 .media > .pull-left,
 .media > .pull-right {
   width: 40px;

@@ -540,14 +540,16 @@ console.log("o");
 						.removeClass('fa-check-square-o')
 						.addClass('fa-square-o')
 						.next() // INPUT type="hidden"
-						.attr('value','false');
+						.attr('value','false')
+						.trigger('change');
 				} else {
 					$(this)
 						.find('i')
 						.removeClass('fa-square-o')
 						.addClass('fa-check-square-o')
 						.next() // INPUT type="hidden"
-						.attr('value','true');
+						.attr('value','true')
+						.trigger('change');
 				}
 			});
 
