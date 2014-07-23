@@ -283,43 +283,53 @@ class DjajaxConnectNode(template.Node):
         self.my_args = my_args
 
     def render(self, context):
+        """ We're committing the crime of pushing variables to the bottom of the dict stack here... """
         node_id = 'djajax_%s_%s_%d' % (self.obj, self.prop, uuid1())
         djajax_entry = (context[self.obj], self.prop, node_id)
         if not 'djajax_connect_list' in context:
-            raise template.TemplateSyntaxError("Djajax not found in context. Have you inserted '{% djajax_setup %}' ?")
-        context['djajax_connect_list'].append(djajax_entry)
+            context.dicts[0]['djajax_connect_list'] = []
+            #raise template.TemplateSyntaxError("Djajax not found in context. Have you inserted '{% djajax_setup %}' ?")
+        context.dicts[0]['djajax_connect_list'].append(djajax_entry)
         
         print ">>> c:", context['djajax_connect_list']
         return " id='%s'" % (node_id) 
 
 
 @register.tag
-def djajax_setup(parser, token):
+def djajax(parser, token):
     """
     """
     try:
         tag_name, directive = token.split_contents()
     except ValueError:
-        directive = 'init'
+        directive = 'generate'
     
     return DjajaxSetupNode(directive)
+
 
 class DjajaxSetupNode(template.Node):
     def __init__(self, directive='init'):
         self.directive = directive
     
     def render(self, context):
-        if self.directive == 'init':
-            context['djajax_connect_list'] = []
-            return 'inited'
-        else:
+        if self.directive == 'generate':
             #import ipdb; ipdb.set_trace();
             node_items = context['djajax_connect_list']
             ret = ''
             for obj, prop, node_id in node_items:
-                ret += node_id + ' || '
+                #ret += node_id + ' || '
+                context = {
+                    'node_id': node_id,
+                    'app_label': obj.__class__.__module__.split('.')[0],
+                    'model_name': obj.__class__.__name__,
+                    'pk': obj.pk,
+                    'property_name': prop,
+                }
+                ret += render_to_string('cosinnus/js/djajax_connect.js', context) + '\n\n'
             
-            return ret
+            return """<script type="text/javascript">\n%s\n</script>""" % ret
+        else:
+            raise template.TemplateSyntaxError("Djajax: Unknown directive '%s'." % self.directive)
 
 
 

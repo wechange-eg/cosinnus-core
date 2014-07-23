@@ -29,6 +29,12 @@ urlpatterns = api_patterns(1, None, False, 'cosinnus.views',
     url(r'^group/update/(?P<group>[^/]+)/$',
         'group.group_update_api',
         name='group-edit'),
+                           
+    url(r'^taggable_object/update/$',
+        'api.taggable_object_update_api',
+        name='taggable-object-update-api'),
+                           
+                           
 )
 
 urlpatterns += api_patterns(1, None, True, 'cosinnus.views',
