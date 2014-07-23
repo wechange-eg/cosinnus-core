@@ -38,7 +38,7 @@ def taggable_object_update_api(request):
         #check permissions:
         if not check_object_write_access(instance, request.user):
             return JSONResponse('You do not have the necessary permissions to modify this object!' % (pk, model_class), status=403)
-        
+        # check attribute exists
         if not hasattr(instance, property_name):
             return JSONResponse('Property "%s" not found for class "%s"!' % (property_name, model_class), status=400)
         
@@ -46,8 +46,10 @@ def taggable_object_update_api(request):
         setattr(instance, property_name, property_data)
         instance.save()
         
-        #import ipdb; ipdb.set_trace();
-
-        return JSONResponse({property_name: getattr(instance, property_name, '')})
+        # if the save was not successful we return the data that exists in the backend
+        if getattr(instance, property_name, None) != property_data:
+            return JSONResponse({'status':'error', 'property_name': property_name, 'property_data': getattr(instance, property_name, '')})
+        
+        return JSONResponse({'status':'success', 'property_name': property_name, 'property_data': getattr(instance, property_name, '')})
     else:
         return JSONResponse({}, status=405)  # Method not allowed

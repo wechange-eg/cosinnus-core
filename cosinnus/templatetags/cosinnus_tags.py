@@ -268,16 +268,19 @@ class CaptureasNode(template.Node):
 def djajax_connect(parser, token):
     """
     """
+    rest = []
     try:
-        tag_name, obj, prop = token.split_contents()
+        token_array = token.split_contents()
+        tag_name, obj, prop, my_args = token_array[0], token_array[1], token_array[2][1:-1], token_array[3:]
+        print ">> obj, prop", obj, prop, my_args
     except ValueError:
         raise template.TemplateSyntaxError("'djajax_connect' requires a variable name.")
     
-    return DjajaxConnectNode(obj, prop)
+    return DjajaxConnectNode(obj, prop, my_args)
 
 
 class DjajaxConnectNode(template.Node):
-    def __init__(self, obj, prop, my_args=None):
+    def __init__(self, obj, prop, my_args):
         self.obj = obj
         self.prop = prop
         self.my_args = my_args
@@ -285,7 +288,15 @@ class DjajaxConnectNode(template.Node):
     def render(self, context):
         """ We're committing the crime of pushing variables to the bottom of the dict stack here... """
         node_id = 'djajax_%s_%s_%d' % (self.obj, self.prop, uuid1())
-        djajax_entry = (context[self.obj], self.prop, node_id)
+        
+        # parse options
+        additional_context = {}
+        if 'trigger_on' in self.my_args:
+            additional_context['trigger_on'] = self.my_args[self.my_args.index('trigger_on')+1][1:-1].split(',')
+        else:
+            additional_context['trigger_on'] = ['enter_key']
+        
+        djajax_entry = (context[self.obj], self.prop, node_id, additional_context)
         if not 'djajax_connect_list' in context:
             context.dicts[0]['djajax_connect_list'] = []
             #raise template.TemplateSyntaxError("Djajax not found in context. Have you inserted '{% djajax_setup %}' ?")
@@ -316,7 +327,7 @@ class DjajaxSetupNode(template.Node):
             #import ipdb; ipdb.set_trace();
             node_items = context['djajax_connect_list']
             ret = ''
-            for obj, prop, node_id in node_items:
+            for obj, prop, node_id, additional_context in node_items:
                 #ret += node_id + ' || '
                 context = {
                     'node_id': node_id,
@@ -325,6 +336,8 @@ class DjajaxSetupNode(template.Node):
                     'pk': obj.pk,
                     'property_name': prop,
                 }
+                print ">>a aaaaa  aaaaad", additional_context
+                context.update(additional_context)
                 ret += render_to_string('cosinnus/js/djajax_connect.js', context) + '\n\n'
             
             return """<script type="text/javascript">\n%s\n</script>""" % ret
