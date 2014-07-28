@@ -620,7 +620,7 @@
 					// When date picked, update date in form
 					$($(this).attr('data-dateelement'))
 						.attr('data-date', dateDataAttr)
-						.trigger('renderMomentDataDate');
+						.trigger('renderMomentDataDate')
 					    .trigger('change');
 				});
 		},
