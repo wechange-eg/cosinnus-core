@@ -621,6 +621,7 @@
 					$($(this).attr('data-dateelement'))
 						.attr('data-date', dateDataAttr)
 						.trigger('renderMomentDataDate');
+					    .trigger('change');
 				});
 		},
 
