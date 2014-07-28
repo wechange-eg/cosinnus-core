@@ -50,7 +50,7 @@ body .large-space {
 	It looks like a white box full of inputs with gray vertical and horizontal separators.
 */
 .input-area {
-	margin: 0;
+	margin: 0 0 0 0;
 	background-color: $app-neutral-color-white;
 	color: $app-neutral-color-dark;
   list-style: none;
@@ -95,7 +95,7 @@ body .large-space {
 
 		> a > i {
 			color: $app-neutral-color-dark;
-			font-size: 17px;
+			font-size: 1.5em;
 			line-height: 25px;
 		}
 
@@ -200,4 +200,27 @@ ul.errorlist {
 			margin:0 7px 0 -18px;
 		}
 	}
+}
+
+.font11px {
+	font-size: 11px !important;
+}
+.nounderline {
+	text-decoration: none !important;
+	&:hover, &:focus, &:active {
+		// text-decoration: underline !important;
+	}
+}
+.no-vertical-padding {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+	min-height: 0 !important;
+}
+.no-horizontal-padding {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+.comment-background {
+	background-color: $app-main-color-light !important;
 }
