@@ -285,7 +285,8 @@ class DjajaxConnectNode(template.Node):
     TAG_ARGUMENTS = {
         'trigger_on': 'enter_key',
         'post_to': '/api/v1/taggable_object/update/',
-        'value_selector': 'val'
+        'value_selector': 'val',
+        'id': None,
     }
     
     def _addArgFromParams(self, add_from_args, add_to_dict, context, arg_name, default_value=None):
@@ -295,6 +296,8 @@ class DjajaxConnectNode(template.Node):
         if arg_name in self.my_args:
             arg_value = self.my_args[self.my_args.index(arg_name)+1]
         else:
+            if not default_value:
+                return
             arg_value =  '"'+ default_value + '"'
         
         if arg_value[0] in ['"', "'"]:
@@ -310,13 +313,17 @@ class DjajaxConnectNode(template.Node):
 
     def render(self, context):
         """ We're committing the crime of pushing variables to the bottom of the dict stack here... """
-        node_id = 'djajax_%s_%s_%d' % (self.obj, self.prop, uuid1())
-        
         # parse options
         additional_context = {}
-        
         for arg_name, arg_default in DjajaxConnectNode.TAG_ARGUMENTS.items():
             self._addArgFromParams(self.my_args, additional_context, context, arg_name, arg_default)
+
+        custom_id = None
+        if 'id' in additional_context:
+            custom_id = additional_context.pop('id')
+            
+        # get the wished id for the item, or generate one if not supplied
+        node_id = custom_id or 'djajax_%s_%s_%d' % (self.obj, self.prop, uuid1())
         
         print ">>>> add context", additional_context
         
@@ -326,7 +333,7 @@ class DjajaxConnectNode(template.Node):
             #raise template.TemplateSyntaxError("Djajax not found in context. Have you inserted '{% djajax_setup %}' ?")
         context.dicts[0]['djajax_connect_list'].append(djajax_entry)
         
-        return " id='%s'" % (node_id) 
+        return "" if custom_id else " id='%s'" % (node_id) 
 
 
 @register.tag
