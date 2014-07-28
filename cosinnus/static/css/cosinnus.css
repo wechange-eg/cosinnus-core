@@ -210,6 +210,9 @@ textarea.form-control {
   line-height: 1.4em;
   height: 10em;
 }
+textarea.oneline {
+  height: 2em;
+}
 
 .alert {
   border-width: 0;

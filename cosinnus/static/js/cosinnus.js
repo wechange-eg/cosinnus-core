@@ -65,7 +65,6 @@
 			}).trigger('click');
 
 			$('.tags-selector, .location-selector').each(function() {
-console.log("o");
 				$(this).select2({
 					width: 'off',
 					tags: $(this).attr('data-tags').split(',')
@@ -777,6 +776,11 @@ console.log("o");
 					.parent()
 					.css('height','auto');
 			});
+		},
+
+
+		autogrow : function() {
+			$('textarea.autogrow').autogrow();
 		}
 
 	};
@@ -840,6 +844,7 @@ $.cosinnus.momentFull = {
 
 
 
+
 $(function() {
 	$.cosinnus.checkBox();
 	$.cosinnus.fadedown();
@@ -860,5 +865,6 @@ $(function() {
 	$.cosinnus.fileList();
 	$.cosinnus.messagesList();
 	$.cosinnus.multilineEllipsis();
+	$.cosinnus.autogrow();
 });
 
