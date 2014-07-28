@@ -348,7 +348,10 @@ class DjajaxSetupNode(template.Node):
     def render(self, context):
         if self.directive == 'generate':
             #import ipdb; ipdb.set_trace();
-            node_items = context['djajax_connect_list']
+            node_items = context.get('djajax_connect_list', [])
+            if not node_items:
+                return ''
+            
             ret = ''
             for obj, prop, node_id, additional_context in node_items:
                 #ret += node_id + ' || '
