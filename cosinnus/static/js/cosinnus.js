@@ -5,7 +5,7 @@
 			// DIV.fadedown is a wrapper that contains a button with toggle element
 			// and other elements that will be hidden or shown depending on the state.
 
-			$('.fadedown .btn:first-child .fadedown-clickarea, .fadedown .btn:first-child.fadedown-clickarea').click(function() {
+			$('body').on('click','.fadedown .btn:first-child .fadedown-clickarea, .fadedown .btn:first-child.fadedown-clickarea',function() {
 				if (!$(this).closest('.fadedown').hasClass('open')) {
 					// closed
 					$(this)
@@ -65,7 +65,6 @@
 			}).trigger('click');
 
 			$('.tags-selector, .location-selector').each(function() {
-console.log("o");
 				$(this).select2({
 					width: 'off',
 					tags: $(this).attr('data-tags').split(',')
@@ -729,7 +728,7 @@ console.log("o");
 			});
 
 			// Disable all nonsense links <a href="#">
-			$('a[href="#"]').click(function(e) {
+			$('body').on('click','a[href="#"]',function(e) {
 				e.preventDefault();
 			});
 		},
@@ -777,6 +776,11 @@ console.log("o");
 					.parent()
 					.css('height','auto');
 			});
+		},
+
+
+		autogrow : function() {
+			$('textarea.autogrow').autogrow();
 		}
 
 	};
@@ -840,6 +844,7 @@ $.cosinnus.momentFull = {
 
 
 
+
 $(function() {
 	$.cosinnus.checkBox();
 	$.cosinnus.fadedown();
@@ -860,5 +865,6 @@ $(function() {
 	$.cosinnus.fileList();
 	$.cosinnus.messagesList();
 	$.cosinnus.multilineEllipsis();
+	$.cosinnus.autogrow();
 });
 
