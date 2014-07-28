@@ -33,13 +33,16 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
         # needs to be initialized here because using reverser_lazy() at model instantiation time causes problems
         self.fields['tags'] = TagSelect2Field(required=False, data_url=reverse_lazy('cosinnus:select2:tags'))
         
+        # inherit tags from group for new TaggableObjects
         if self.instance.pk:
             preresults = self.instance.tags.values_list('name', 'name').all()
+        else:
+            preresults = self.group.media_tag.tags.values_list('name', 'name').all()
+            
+        if preresults:
             self.fields['tags'].choices = preresults
             self.fields['tags'].initial = [key for key,val in preresults]#[tag.name for tag in self.instance.tags.all()]
-            
-            # we need to remove this from the initials, or it overwrites the select2 fields initials
-            del self.initial['tags']
+            self.initial['tags'] = self.fields['tags'].initial
         
         if self.group and not self.instance.pk:
             # for new TaggableObjects (not groups), set the default visibility corresponding to the group's public status
