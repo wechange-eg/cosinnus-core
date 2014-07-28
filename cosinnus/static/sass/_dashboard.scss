@@ -26,8 +26,14 @@ div.dashboard-appwidget:last-child {
 
 		a {
 			padding-right: 0;
-			font-weight: bold;
+			text-decoration: underline;
 			white-space: normal;
+			&:hover, &:active, &:focus {
+				background-color: $app-neutral-color-light;
+			}
+		}
+		strong a {
+			text-decoration: none;
 		}
 
 		img {

@@ -420,6 +420,10 @@ label {
   text-align: center;
   margin: 0;
 }
+.media > .pull-left.select2-avatar,
+.media > .pull-right.select2-avatar {
+  line-height: 35px;
+}
 
 .btn-default .media > .pull-left,
 .btn-default .media > .pull-right {
@@ -862,10 +866,16 @@ ul.appnavi-dropdown-menu {
   font-size: 11px;
 }
 .media-body a + a {
-  margin-left: 15px;
+  margin-left: 7px;
 }
 .media-body p a + a {
   margin-left: 0;
+}
+.media-body a.pull-right + a {
+  margin-left: 0;
+}
+.media-body a.pull-right + a.pull-right {
+  margin-right: 7px;
 }
 .media-body > a, .media-body > span {
   white-space: normal;
@@ -1111,7 +1121,7 @@ body .large-space {
 	It looks like a white box full of inputs with gray vertical and horizontal separators.
 */
 .input-area {
-  margin: 0;
+  margin: 0 0 0 0;
   background-color: white;
   color: #333333;
   list-style: none;
@@ -1158,7 +1168,7 @@ body .large-space {
 }
 .input-area > li > a > i {
   color: #333333;
-  font-size: 17px;
+  font-size: 1.5em;
   line-height: 25px;
 }
 .input-area > li.input-area-privacy-selector {
@@ -1257,6 +1267,29 @@ ul.errorlist li:before {
   font-family: 'FontAwesome';
   content: '\f071';
   margin: 0 7px 0 -18px;
+}
+
+.font11px {
+  font-size: 11px !important;
+}
+
+.nounderline {
+  text-decoration: none !important;
+}
+
+.no-vertical-padding {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  min-height: 0 !important;
+}
+
+.no-horizontal-padding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.comment-background {
+  background-color: #cbe7ed !important;
 }
 
 body div .select2-container .select2-choice,
@@ -2240,8 +2273,22 @@ div.dashboard-appwidget:last-child {
 .btn.dashboard-appwidget-contentline-indented .media-body a,
 .btn.dashboard-appwidget-contentline-extra-indented .media-body a {
   padding-right: 0;
-  font-weight: bold;
+  text-decoration: underline;
   white-space: normal;
+}
+.btn.dashboard-appwidget-contentline .media-body a:hover, .btn.dashboard-appwidget-contentline .media-body a:active, .btn.dashboard-appwidget-contentline .media-body a:focus,
+.btn.dashboard-appwidget-contentline-indented .media-body a:hover,
+.btn.dashboard-appwidget-contentline-indented .media-body a:active,
+.btn.dashboard-appwidget-contentline-indented .media-body a:focus,
+.btn.dashboard-appwidget-contentline-extra-indented .media-body a:hover,
+.btn.dashboard-appwidget-contentline-extra-indented .media-body a:active,
+.btn.dashboard-appwidget-contentline-extra-indented .media-body a:focus {
+  background-color: #dbdbdb;
+}
+.btn.dashboard-appwidget-contentline .media-body strong a,
+.btn.dashboard-appwidget-contentline-indented .media-body strong a,
+.btn.dashboard-appwidget-contentline-extra-indented .media-body strong a {
+  text-decoration: none;
 }
 .btn.dashboard-appwidget-contentline .media-body img,
 .btn.dashboard-appwidget-contentline-indented .media-body img,
