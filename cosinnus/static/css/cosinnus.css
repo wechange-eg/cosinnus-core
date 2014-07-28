@@ -2263,6 +2263,7 @@ div.dashboard-appwidget:last-child {
   float: none;
   margin-left: 0;
   margin-right: 0;
+  background-color: transparent;
 }
 .btn.dashboard-appwidget-contentline .media-body,
 .btn.dashboard-appwidget-contentline-indented .media-body,

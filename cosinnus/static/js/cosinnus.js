@@ -5,7 +5,7 @@
 			// DIV.fadedown is a wrapper that contains a button with toggle element
 			// and other elements that will be hidden or shown depending on the state.
 
-			$('.fadedown .btn:first-child .fadedown-clickarea, .fadedown .btn:first-child.fadedown-clickarea').click(function() {
+			$('body').on('click','.fadedown .btn:first-child .fadedown-clickarea, .fadedown .btn:first-child.fadedown-clickarea',function() {
 				if (!$(this).closest('.fadedown').hasClass('open')) {
 					// closed
 					$(this)
@@ -620,8 +620,7 @@
 					// When date picked, update date in form
 					$($(this).attr('data-dateelement'))
 						.attr('data-date', dateDataAttr)
-						.trigger('renderMomentDataDate')
-					    .trigger('change');
+						.trigger('renderMomentDataDate');
 				});
 		},
 
@@ -729,7 +728,7 @@
 			});
 
 			// Disable all nonsense links <a href="#">
-			$('a[href="#"]').click(function(e) {
+			$('body').on('click','a[href="#"]',function(e) {
 				e.preventDefault();
 			});
 		},
