@@ -586,10 +586,11 @@ console.log("o");
 		},
 
 		datePicker : function() {
-			$('#datePickerModal').on('shown.bs.modal', function() {
+			$('#datePickerModal').on('shown.bs.modal', function(e) {
+			    var dateElementSelector = $('#'+e.relatedTarget.id).attr('data-dateelement');
 				// read date that is already picked
 				// "#newTaskDate"
-				var dateElementSelector = $(this).find('.small-calendar').attr('data-dateelement');
+				 $(this).find('.small-calendar').attr('data-dateelement', dateElementSelector);
 				// "2014-04-28"
 				var date = $(dateElementSelector).attr('data-date');
 				$('#datePickerModal .modal-body .small-calendar')
