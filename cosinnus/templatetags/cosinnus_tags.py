@@ -288,6 +288,8 @@ class DjajaxConnectNode(template.Node):
         'post_to': '/api/v1/taggable_object/update/',
         'value_selector': 'val',
         'value_selector_arg': None,
+        'value_object_property': None,
+        'value_transform': None,
     }
     
     def _addArgFromParams(self, add_from_args, add_to_dict, context, arg_name, default_value=None):

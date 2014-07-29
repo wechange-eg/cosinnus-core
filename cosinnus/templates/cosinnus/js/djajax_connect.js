@@ -2,8 +2,21 @@
 
 function djajax_trigger_{{ node_id }}() {
     console.log('called handler for node id {{ node_id }} with value: ' + $('#{{ node_id }}').val());
-    var node_value = $('[djajax-id={{ node_id }}]').{{ value_selector }}({% if value_selector_arg %}'{{value_selector_arg}}'{% endif %})
+    {% if value_object_property %}
+        var node_value = $('[djajax-id={{ node_id }}]')[0].{{ value_object_property }};
+    {% else %}
+        var node_value = $('[djajax-id={{ node_id }}]').{{ value_selector }}({% if value_selector_arg %}'{{value_selector_arg}}'{% endif %});
+    {% endif %}
     
+    {% if value_transform %}
+        var transform_function = window["{{ value_transform }}"];
+        if (typeof transform_function === 'function') {
+            node_value = transform_function(node_value);
+        } else {
+            console.warn('Djajax: Value transform could not be applied for node_id "{{node_id}}". Supplied transform function could not be found or was not a function.')
+        }
+    {% endif %}
+       
     $.ajax({
          type:"POST",
          url:"{{ post_to }}",
