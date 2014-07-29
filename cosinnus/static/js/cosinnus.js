@@ -616,11 +616,16 @@
 					$(dayElement).parent().parent().find('td').removeClass('selected');
 					$(dayElement).addClass('selected');
 
-
-					// When date picked, update date in form
-					$($(this).attr('data-dateelement'))
-						.attr('data-date', dateDataAttr)
-						.trigger('renderMomentDataDate');
+					// When submit button pressed, update currently selected date in form
+					var target_element = $(this).attr('data-dateelement');
+                    $('#datePickerModal_submit').unbind('click');
+					$('#datePickerModal_submit').click(function() {
+					    $(target_element)
+                            .attr('data-date', dateDataAttr)
+                            .trigger('renderMomentDataDate')
+                            .trigger('change');
+					});
+					
 				});
 		},
 
