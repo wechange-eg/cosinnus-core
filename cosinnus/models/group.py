@@ -328,6 +328,11 @@ class CosinnusGroup(models.Model):
         unique_aware_slugify(self, 'name', 'slug')
         if not self.slug:
             raise ValidationError(_('Slug must not be empty.'))
+        # sanity check for missing media_tag:
+        if not self.media_tag:
+            from cosinnus.models.tagged import get_tag_object_model
+            media_tag = get_tag_object_model()._default_manager.create()
+            self.media_tag = media_tag
         super(CosinnusGroup, self).save(*args, **kwargs)
         slugs.append(self.slug)
         self._clear_cache(slug=self.slug)
