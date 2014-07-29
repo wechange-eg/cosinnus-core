@@ -286,6 +286,7 @@ class DjajaxConnectNode(template.Node):
         'trigger_on': 'enter_key',
         'post_to': '/api/v1/taggable_object/update/',
         'value_selector': 'val',
+        'value_selector_arg': None,
         'id': None,
     }
     

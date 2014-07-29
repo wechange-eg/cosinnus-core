@@ -2,7 +2,7 @@
 
 function djajax_trigger_{{ node_id }}() {
     console.log('called handler for node id {{ node_id }} with value: ' + $('#{{ node_id }}').val());
-    var node_value = $('#{{ node_id }}').{{ value_selector }}()
+    var node_value = $('#{{ node_id }}').{{ value_selector }}({% if value_selector_arg %}'{{value_selector_arg}}'{% endif %})
     
     $.ajax({
          type:"POST",
