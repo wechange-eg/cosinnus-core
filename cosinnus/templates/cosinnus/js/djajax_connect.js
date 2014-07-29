@@ -2,7 +2,7 @@
 
 function djajax_trigger_{{ node_id }}() {
     console.log('called handler for node id {{ node_id }} with value: ' + $('#{{ node_id }}').val());
-    var node_value = $('#{{ node_id }}').{{ value_selector }}({% if value_selector_arg %}'{{value_selector_arg}}'{% endif %})
+    var node_value = $('[djajax-id={{ node_id }}]').{{ value_selector }}({% if value_selector_arg %}'{{value_selector_arg}}'{% endif %})
     
     $.ajax({
          type:"POST",
@@ -33,26 +33,26 @@ function djajax_trigger_{{ node_id }}() {
 {% comment %}  ****  Triggers  ****  {% endcomment %}
 
 {% if "lose_focus" in trigger_on %}
-    $('#{{ node_id }}').focusout(function(e) {
+    $('[djajax-id={{ node_id }}]').focusout(function(e) {
         djajax_trigger_{{ node_id }}();
     });
 {% endif %}
 
 {% if "enter_key" in trigger_on %}
-$('#{{ node_id }}').keydown(function(e) {
+$('[djajax-id={{ node_id }}]').keydown(function(e) {
     if (e.keyCode == 13) {
         {% if not "lose_focus" in trigger_on %}
             // only triggered here if the blur() event won't trigger anyways
             djajax_trigger_{{ node_id }}();
         {% endif %}
-        $('#{{ node_id }}').blur();
+        $('[djajax-id={{ node_id }}]').blur();
         return false;
     }
 });
 {% endif %}
 
 {% if "value_changed" in trigger_on %}
-    $('#{{ node_id }}').change(function(e) {
+    $('[djajax-id={{ node_id }}]').change(function(e) {
         djajax_trigger_{{ node_id }}();
     });
 {% endif %}
