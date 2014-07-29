@@ -4,6 +4,7 @@ from collections import defaultdict
 
 import six
 from six.moves.urllib.parse import parse_qsl
+from uuid import uuid1
 
 from django import template
 from django.core.exceptions import ImproperlyConfigured
@@ -261,6 +262,123 @@ class CaptureasNode(template.Node):
         output = self.nodelist.render(context)
         context[self.varname] = output
         return ""
+    
+
+@register.tag
+def djajax_connect(parser, token):
+    """
+    """
+    rest = []
+    try:
+        token_array = token.split_contents()
+        tag_name, obj_prop, my_args = token_array[0], token_array[1], token_array[2:]
+        obj, prop = obj_prop.split('.')
+        print ">> obj, prop", obj, prop, my_args
+    except ValueError:
+        raise template.TemplateSyntaxError("'djajax_connect' requires a variable name.")
+    
+    return DjajaxConnectNode(obj, prop, my_args)
+
+
+class DjajaxConnectNode(template.Node):
+    
+    # arguments the connect tag can take, and their defaults
+    TAG_ARGUMENTS = {
+        'trigger_on': 'value_changed',
+        'post_to': '/api/v1/taggable_object/update/',
+        'value_selector': 'val',
+        'value_selector_arg': None,
+        'value_object_property': None,
+        'value_transform': None,
+    }
+    
+    def _addArgFromParams(self, add_from_args, add_to_dict, context, arg_name, default_value=None):
+        """ Utility function to parse the argument list for a named argument, then 
+            take the following argument as that arguments value (parse it either for strings or
+            context reference) """
+        arg_value = None
+        for arg in self.my_args:
+            if arg.startswith(arg_name + '='):
+                arg_value = arg[len(arg_name)+1:]
+        if not arg_value:
+            if not default_value:
+                return
+            arg_value =  '"'+ default_value + '"'
+        
+        
+        if arg_value[0] in ['"', "'"]:
+            add_to_dict[arg_name] = arg_value[1:-1]
+        else:
+            add_to_dict[arg_name] = context[arg_value]
+        
+    
+    def __init__(self, obj, prop, my_args):
+        self.obj = obj
+        self.prop = prop
+        self.my_args = my_args
+
+    def render(self, context):
+        """ We're committing the crime of pushing variables to the bottom of the dict stack here... """
+        # parse options
+        additional_context = {}
+        for arg_name, arg_default in DjajaxConnectNode.TAG_ARGUMENTS.items():
+            self._addArgFromParams(self.my_args, additional_context, context, arg_name, arg_default)
+
+        # get the wished id for the item, or generate one if not supplied
+        node_id = '%s_%s_%d' % (self.obj, self.prop, uuid1())
+        
+        print ">>>> add context", additional_context
+        
+        djajax_entry = (context[self.obj], self.prop, node_id, additional_context)
+        if not 'djajax_connect_list' in context:
+            context.dicts[0]['djajax_connect_list'] = []
+            #raise template.TemplateSyntaxError("Djajax not found in context. Have you inserted '{% djajax_setup %}' ?")
+        context.dicts[0]['djajax_connect_list'].append(djajax_entry)
+        
+        return " djajax-id='%s' " % (node_id) 
+
+
+@register.tag
+def djajax(parser, token):
+    """
+    """
+    try:
+        tag_name, directive = token.split_contents()
+    except ValueError:
+        directive = 'generate'
+    
+    return DjajaxSetupNode(directive)
+
+
+class DjajaxSetupNode(template.Node):
+    def __init__(self, directive='init'):
+        self.directive = directive
+    
+    def render(self, context):
+        if self.directive == 'generate':
+            #import ipdb; ipdb.set_trace();
+            node_items = context.get('djajax_connect_list', [])
+            if not node_items:
+                return ''
+            
+            ret = ''
+            for obj, prop, node_id, additional_context in node_items:
+                #ret += node_id + ' || '
+                context = {
+                    'node_id': node_id,
+                    'app_label': obj.__class__.__module__.split('.')[0],
+                    'model_name': obj.__class__.__name__,
+                    'pk': obj.pk,
+                    'property_name': prop,
+                }
+                #print ">>a aaaaa  aaaaad", additional_context
+                context.update(additional_context)
+                ret += render_to_string('cosinnus/js/djajax_connect.js', context) + '\n\n'
+            
+            return """<script type="text/javascript">\n%s\n</script>""" % ret
+        else:
+            raise template.TemplateSyntaxError("Djajax: Unknown directive '%s'." % self.directive)
+
 
 
 @register.simple_tag(takes_context=True)
