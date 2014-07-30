@@ -62,6 +62,7 @@ setup(
         'django-awesome-avatar',
         'django-bootstrap3',
         'django-bootstrap3-datetimepicker>=2.2.0',
+        'django-filter>=0.7',
         'django-multiform',
         'django_select2',
         'django-taggit>=0.11',
