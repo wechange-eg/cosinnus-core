@@ -15,8 +15,8 @@ class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
     def get_context_data(self, *args, **kwargs):
         # on form invalids, we need to retrieve the objects
         if not hasattr(self, 'object_list'):
-            self.object_list = self.get_queryset()
-            
+            self.object_list = super(HierarchicalListCreateViewMixin, self).get_queryset()
+        
         context = super(HierarchicalListCreateViewMixin, self).get_context_data(**kwargs)
         path = None
         slug = self.kwargs.pop('slug', None)
