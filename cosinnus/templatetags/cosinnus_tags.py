@@ -290,6 +290,7 @@ class DjajaxConnectNode(template.Node):
         'value_selector_arg': None,
         'value_object_property': None,
         'value_transform': None,
+        'empty': 'true',
     }
     
     def _addArgFromParams(self, add_from_args, add_to_dict, context, arg_name, default_value=None):

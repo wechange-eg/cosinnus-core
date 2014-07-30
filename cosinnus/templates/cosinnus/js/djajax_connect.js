@@ -28,6 +28,15 @@ function djajax_trigger_{{ node_id }}(e) {
             console.warn('Djajax: Value transform could not be applied for node_id "{{node_id}}". Supplied transform function could not be found or was not a function.')
         }
     {% endif %}
+    
+    {% if not empty == "true" %}
+        if (node_value == null || node_value == '') {
+            console.log('Submitted field value for {{ node_id }} was found to be empty, but djajax empty=False was set! Restoring last value.');
+            // restore last data
+            djajax_set_value_{{ node_id }}($('[djajax-id={{ node_id }}]').attr('djdjax-last-value'));
+            return;
+        }
+    {% endif %}
        
     $.ajax({
          type:"POST",
