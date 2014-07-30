@@ -18,7 +18,6 @@ function djajax_set_value_{{ node_id }}(value) {
 
 function djajax_trigger_{{ node_id }}(e) {
     console.log('called handler for node id {{ node_id }} with value: ' + $('#{{ node_id }}').val());
-    console.log(e);
     var node_value = djajax_get_value_{{ node_id }}();
     
     {% if value_transform %}
@@ -44,13 +43,22 @@ function djajax_trigger_{{ node_id }}(e) {
          success: function(data){
              if (data['status'] == 'success') {
                  console.log('Success! for {{ node_id }} ! With data ' + JSON.stringify(data));
+                 // save last data
+                 $('[djajax-id={{ node_id }}]').attr('djdjax-last-value', djajax_get_value_{{ node_id }}());
              } else {
                  console.log('Error in Saving! for {{ node_id }} ! With data ' + JSON.stringify(data));
+                 // restore last data
+                 console.log('restoring lasta data:' + $('[djajax-id={{ node_id }}]').attr('djdjax-last-value'))
+                 djajax_set_value_{{ node_id }}($('[djajax-id={{ node_id }}]').attr('djdjax-last-value'));
              }
              
          },
          error: function(data){
              console.log('Error! for {{ node_id }} ! With data ' + JSON.stringify(data));
+             // restore last data
+             console.log('restoring lasta data:' + $('[djajax-id={{ node_id }}]').attr('djdjax-last-value'))
+             djajax_set_value_{{ node_id }}($('[djajax-id={{ node_id }}]').attr('djdjax-last-value'));
+         
          }
          
     });
