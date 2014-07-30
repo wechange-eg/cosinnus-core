@@ -335,7 +335,7 @@ class DjajaxConnectNode(template.Node):
             #raise template.TemplateSyntaxError("Djajax not found in context. Have you inserted '{% djajax_setup %}' ?")
         context.dicts[0]['djajax_connect_list'].append(djajax_entry)
         
-        return " djajax-id='%s' " % (node_id) 
+        return " djajax-id='%s' djajax-last-value='' " % (node_id) 
 
 
 @register.tag
