@@ -532,6 +532,9 @@
 			// If they contain a <input type="hidden" /> too, this will contain the value.
 
 			$('body .fa-square-o, body .fa-check-square-o').parent().click(function() {
+			    if ($(this).attr('disabled')) {
+			        return;
+			    }
 				if ($(this).find('i').hasClass('fa-check-square-o')) {
 					// already checked
 					$(this)
