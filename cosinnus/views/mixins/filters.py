@@ -4,6 +4,7 @@ Created on 30.07.2014
 @author: Sascha Narr
 '''
 from django_filters.views import FilterMixin
+from django_filters.filterset import FilterSet
 
 
 class CosinnusFilterMixin(FilterMixin):
@@ -29,4 +30,11 @@ class CosinnusFilterMixin(FilterMixin):
             'filter': self.filter,
         })
         return context
+
+class CosinnusFilterSet(FilterSet):
     
+    def get_order_by(self, order_value):
+        """ Chain comma-seperated orderings """
+        if ',' in order_value:
+            return order_value.split(',')
+        return super(CosinnusFilterSet, self).get_order_by(order_value)
