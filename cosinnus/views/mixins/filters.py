@@ -5,7 +5,6 @@ Created on 30.07.2014
 '''
 from django_filters.views import FilterMixin
 from django_filters.filterset import FilterSet
-from cosinnus.forms.filters import CosinnusFilterForm
 
 
 class CosinnusFilterMixin(FilterMixin):

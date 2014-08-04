@@ -8,7 +8,6 @@ from __future__ import unicode_literals
 
 from itertools import chain
 from django.template.loader import render_to_string
-from django.forms.forms import Form
 try:
     from urllib.parse import urlencode
 except:
@@ -152,12 +151,3 @@ class DropdownChoiceWidget(forms.Widget):
         }
 
 
-class CosinnusFilterForm(Form):
-    """ A forms that passes a pointer to itself to its widgets """
-    
-    def __init__(self, *args, **kwargs):
-        super(CosinnusFilterForm, self).__init__(*args, **kwargs)
-        for field_name, field in self.fields.items():
-            field.widget.form_instance = self
-            print ">> adding self!!!"
-        
