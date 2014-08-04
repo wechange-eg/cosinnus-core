@@ -831,6 +831,7 @@
 		},
 
 		map : function() {
+			if (!$('#map').length) return;
 			var map = L.map('map').setView([52.5, 13.3], 10);
 			L.tileLayer('https://otile1-s.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
 				attribution: 'Open Streetmap',
