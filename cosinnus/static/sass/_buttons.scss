@@ -12,6 +12,7 @@
 	&.w100 {
 		margin-left: 0;
 	}
+
 }
 
 .bottom-align .btn {
@@ -67,28 +68,37 @@
 	}
 }
 
-.media > select.pull-right {
-		font-family: FontAwesome;
-		border-width: 0;
-		margin-right: -100px;
-		width: 140px;
+.media > a.pull-right .select2-container {
+	// priority selector in todos
+
+	float: right;
+	.select2-arrow {
+		display: none;
+	}
+
+	.select2-choice {
+		height: 40px;
+		border-radius: 0;
+		padding: 0;
+	}
+
+	.select2-chosen {
+		position: absolute;
+		right: 0;
+		top: 0;
+		margin-right: 0px;
+		width: 40px;
+		text-align: center;
 		color: $app-neutral-color-white;
-		text-align: left;
-		padding-left: 10px;
-		padding-top: 8px;
+	}
 
-		option {
-			font-family: FontAwesome;
-			font-size: 14px;
-			padding-top: 10px;
-			padding-bottom: 10px;
-			text-align: left;
-			background-color: transparent;
-			border-width: 0;
-			color: $app-neutral-color-white;
+	&.select2-container-active {
+		.select2-chosen {
+			color: $app-neutral-color-dark;
 		}
-
+	}
 }
+
 
 .media > .pull-left,
 .media > .pull-right {
@@ -185,6 +195,24 @@ ul.appnavi-dropdown-menu {
 		background-color: $dark;
 	}
 
+	.fadedown.open .btn-emphasized.w100.keep-emphasized .media,
+	.fadedown.open .btn-emphasized.w100.keep-emphasized .media  > .media-body,
+	.fadedown.open .btn-extra-emphasized.w100.keep-emphasized .media > .pull-right,
+	.fadedown.open .btn-emphasized.w100.keep-emphasized .media > .pull-right {
+		background-color: $normal;
+	}
+
+	.fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media,
+	.fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media  > .media-body,
+	.fadedown.open .btn-extra-emphasized.w100.keep-emphasized:hover .media > .pull-right,
+	.fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media > .pull-right {
+		background-color: $dark;
+	}
+
+	.fadedown:not(.open) .only-open {
+		display: none;
+	}
+
 	.btn-emphasized .media > .pull-left:empty,
 	.btn-emphasized .media > .pull-right:empty,
 	.btn-appnavi .media > .pull-left:empty,
@@ -247,7 +275,7 @@ ul.appnavi-dropdown-menu {
 	position: relative;
 	white-space: nowrap;
 
-	span.annotation {
+	a.annotation, span.annotation {
 		width: auto;
 		float: right;
 		font-size: 11px;

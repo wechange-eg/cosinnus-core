@@ -64,6 +64,36 @@
 				}
 			}).trigger('click');
 
+			$('.priority-selector').each(function() {
+				function formatSelection(val) {
+					switch (val.id) {
+						case 0: return '<i class="fa fa-exclamation-circle"></i>';
+						case 1: return '<i class="fa fa-exclamation"></i>';
+						case 2: return '<i class="fa fa-minus"></i>';
+					}
+				}
+				function formatResult(val) {
+					switch (val.id) {
+						case 0: return '<i class="fa fa-exclamation-circle"></i> &nbsp; '+val.text;
+						case 1: return '<i class="fa fa-exclamation"></i> &nbsp; '+val.text;
+						case 2: return '<i class="fa fa-minus"></i> &nbsp; '+val.text;
+					}
+				}
+
+				$(this).select2({
+					minimumResultsForSearch: -1,
+					escapeMarkup: function(m) { return m; }, // do not escape HTML
+					formatSelection: formatSelection,
+					formatResult: formatResult,
+					data: [
+						{id:0, text:'Wichtig'},
+						{id:1, text:'Normal'},
+						{id:2, text:'Später'}
+					]
+				});
+// http://stackoverflow.com/questions/16393872/different-display-value-for-selecte-text-using-select2-js
+			});
+
 			$('.tags-selector, .location-selector').each(function() {
 				$(this).select2({
 					width: 'off',
@@ -589,17 +619,23 @@
 
 		datePicker : function() {
 			$('#datePickerModal').on('shown.bs.modal', function(e) {
-			    var dateElementSelector = $('#'+e.relatedTarget.id).attr('data-dateelement');
+				// Find the element that has been clicked
+				// and look up the element that stores the date there.
+				if ($(e.relatedTarget).attr('data-dateelement')) {
+					var dateElement = $($(e.relatedTarget).attr('data-dateelement'));
+				} else {
+					var dateElement = $(e.relatedTarget);
+				}
+				// $('#newTaskDate')
+
 				// read date that is already picked
-				// "#newTaskDate"
-				 $(this).find('.small-calendar').attr('data-dateelement', dateElementSelector);
+				 $(this).find('.small-calendar').data('data-dateelement', dateElement);
 				// "2014-04-28"
-				var date = $(dateElementSelector).attr('data-date');
+				var date = dateElement.attr('data-date');
 				$('#datePickerModal .modal-body .small-calendar')
 					.fullCalendar('render')
 					.find('td[data-date='+date+']')
 					.addClass('selected');
-					// TODO: This does not work!
 			});
 
 			$('#datePickerModal .small-calendar')
@@ -620,13 +656,16 @@
 					$(dayElement).addClass('selected');
 
 					// When submit button pressed, update currently selected date in form
-					var target_element = $(this).attr('data-dateelement');
-                    $('#datePickerModal_submit').unbind('click');
+					var target_element = $(this).data('data-dateelement');
+					$('#datePickerModal_submit').unbind('click');
 					$('#datePickerModal_submit').click(function() {
-					    $(target_element)
-                            .attr('data-date', dateDataAttr)
-                            .trigger('renderMomentDataDate')
-                            .trigger('change');
+						target_element
+							.attr('data-date', dateDataAttr)
+							.trigger('renderMomentDataDate')
+							.trigger('change');
+						if (target_element.next().is('input')) {
+							target_element.next().val(dateDataAttr);
+						}
 					});
 					
 				});
@@ -789,6 +828,26 @@
 
 		autogrow : function() {
 			$('textarea.autogrow').autogrow();
+		},
+
+		map : function() {
+			var map = L.map('map').setView([52.5, 13.3], 10);
+			L.tileLayer('https://otile1-s.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
+				attribution: 'Open Streetmap',
+				maxZoom: 15,
+				minZoom:3
+			}).addTo(map);
+
+
+			// mapdata is a global var set directly in HTML
+			$(mapData).each(function(id,marker) {
+console.log(marker);
+
+				L
+					.marker([marker.lat, marker.lon])
+					.bindPopup(marker.title)
+					.addTo(map);
+			});
 		}
 
 	};
@@ -874,5 +933,6 @@ $(function() {
 	$.cosinnus.messagesList();
 	$.cosinnus.multilineEllipsis();
 	$.cosinnus.autogrow();
+	$.cosinnus.map();
 });
 

@@ -170,6 +170,7 @@ body {
 }
 
 p {
+  margin-bottom: 0;
   padding: 8px;
   background-color: white;
   color: #333333;
@@ -318,6 +319,37 @@ label {
   margin-bottom: 4px;
 }
 
+.content-box .dropdown {
+  margin-bottom: 13px;
+}
+.content-box .dropdown button {
+  text-align: right;
+  color: #333333;
+  width: 10em;
+}
+.content-box .dropdown button:hover, .content-box .dropdown button:active, .content-box .dropdown button:focus {
+  color: #333333;
+  background-color: #dbdbdb;
+}
+.content-box .dropdown.open button.btn-default.dropdown-toggle {
+  color: #333333;
+  background-color: #dbdbdb;
+}
+.content-box .dropdown ul.dropdown-menu {
+  padding: 0;
+}
+.content-box .dropdown ul.dropdown-menu li {
+  border-bottom: 1px solid #dbdbdb;
+}
+.content-box .dropdown ul.dropdown-menu li a {
+  padding: 10px 0 10px 7px;
+  font-size: 14px;
+  color: #333333;
+}
+.content-box .dropdown ul.dropdown-menu li:last-child {
+  border-width: 0;
+}
+
 /* The Bootstrap buttons already have the classes btn-default, btn-info, btn-warning and so on.
 	This file adds btn-emphasized, btn-extra-emphasized and btn-appnavi for coloring in the apps's colors.
 */
@@ -393,25 +425,28 @@ label {
   display: inline-block;
 }
 
-.media > select.pull-right {
-  font-family: FontAwesome;
-  border-width: 0;
-  margin-right: -100px;
-  width: 140px;
-  color: white;
-  text-align: left;
-  padding-left: 10px;
-  padding-top: 8px;
+.media > a.pull-right .select2-container {
+  float: right;
 }
-.media > select.pull-right option {
-  font-family: FontAwesome;
-  font-size: 14px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  text-align: left;
-  background-color: transparent;
-  border-width: 0;
+.media > a.pull-right .select2-container .select2-arrow {
+  display: none;
+}
+.media > a.pull-right .select2-container .select2-choice {
+  height: 40px;
+  border-radius: 0;
+  padding: 0;
+}
+.media > a.pull-right .select2-container .select2-chosen {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-right: 0px;
+  width: 40px;
+  text-align: center;
   color: white;
+}
+.media > a.pull-right .select2-container.select2-container-active .select2-chosen {
+  color: #333333;
 }
 
 .media > .pull-left,
@@ -508,6 +543,21 @@ ul.appnavi-dropdown-menu {
   color: white;
   background-color: #104a59;
 }
+.app-main .fadedown.open .btn-emphasized.w100.keep-emphasized .media,
+.app-main .fadedown.open .btn-emphasized.w100.keep-emphasized .media > .media-body,
+.app-main .fadedown.open .btn-extra-emphasized.w100.keep-emphasized .media > .pull-right,
+.app-main .fadedown.open .btn-emphasized.w100.keep-emphasized .media > .pull-right {
+  background-color: #16778d;
+}
+.app-main .fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media,
+.app-main .fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media > .media-body,
+.app-main .fadedown.open .btn-extra-emphasized.w100.keep-emphasized:hover .media > .pull-right,
+.app-main .fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media > .pull-right {
+  background-color: #104a59;
+}
+.app-main .fadedown:not(.open) .only-open {
+  display: none;
+}
 .app-main .btn-emphasized .media > .pull-left:empty,
 .app-main .btn-emphasized .media > .pull-right:empty,
 .app-main .btn-appnavi .media > .pull-left:empty,
@@ -571,6 +621,21 @@ ul.appnavi-dropdown-menu {
 .app-calendar .btn-appnavi:hover .media > .pull-right {
   color: white;
   background-color: #4c622f;
+}
+.app-calendar .fadedown.open .btn-emphasized.w100.keep-emphasized .media,
+.app-calendar .fadedown.open .btn-emphasized.w100.keep-emphasized .media > .media-body,
+.app-calendar .fadedown.open .btn-extra-emphasized.w100.keep-emphasized .media > .pull-right,
+.app-calendar .fadedown.open .btn-emphasized.w100.keep-emphasized .media > .pull-right {
+  background-color: #779b48;
+}
+.app-calendar .fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media,
+.app-calendar .fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media > .media-body,
+.app-calendar .fadedown.open .btn-extra-emphasized.w100.keep-emphasized:hover .media > .pull-right,
+.app-calendar .fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media > .pull-right {
+  background-color: #4c622f;
+}
+.app-calendar .fadedown:not(.open) .only-open {
+  display: none;
 }
 .app-calendar .btn-emphasized .media > .pull-left:empty,
 .app-calendar .btn-emphasized .media > .pull-right:empty,
@@ -636,6 +701,21 @@ ul.appnavi-dropdown-menu {
   color: white;
   background-color: #0a5d4e;
 }
+.app-files .fadedown.open .btn-emphasized.w100.keep-emphasized .media,
+.app-files .fadedown.open .btn-emphasized.w100.keep-emphasized .media > .media-body,
+.app-files .fadedown.open .btn-extra-emphasized.w100.keep-emphasized .media > .pull-right,
+.app-files .fadedown.open .btn-emphasized.w100.keep-emphasized .media > .pull-right {
+  background-color: #14a085;
+}
+.app-files .fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media,
+.app-files .fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media > .media-body,
+.app-files .fadedown.open .btn-extra-emphasized.w100.keep-emphasized:hover .media > .pull-right,
+.app-files .fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media > .pull-right {
+  background-color: #0a5d4e;
+}
+.app-files .fadedown:not(.open) .only-open {
+  display: none;
+}
 .app-files .btn-emphasized .media > .pull-left:empty,
 .app-files .btn-emphasized .media > .pull-right:empty,
 .app-files .btn-appnavi .media > .pull-left:empty,
@@ -699,6 +779,21 @@ ul.appnavi-dropdown-menu {
 .app-documents .btn-appnavi:hover .media > .pull-right {
   color: white;
   background-color: #007999;
+}
+.app-documents .fadedown.open .btn-emphasized.w100.keep-emphasized .media,
+.app-documents .fadedown.open .btn-emphasized.w100.keep-emphasized .media > .media-body,
+.app-documents .fadedown.open .btn-extra-emphasized.w100.keep-emphasized .media > .pull-right,
+.app-documents .fadedown.open .btn-emphasized.w100.keep-emphasized .media > .pull-right {
+  background-color: #009ee3;
+}
+.app-documents .fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media,
+.app-documents .fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media > .media-body,
+.app-documents .fadedown.open .btn-extra-emphasized.w100.keep-emphasized:hover .media > .pull-right,
+.app-documents .fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media > .pull-right {
+  background-color: #007999;
+}
+.app-documents .fadedown:not(.open) .only-open {
+  display: none;
 }
 .app-documents .btn-emphasized .media > .pull-left:empty,
 .app-documents .btn-emphasized .media > .pull-right:empty,
@@ -764,6 +859,21 @@ ul.appnavi-dropdown-menu {
   color: white;
   background-color: #ad7e2c;
 }
+.app-todos .fadedown.open .btn-emphasized.w100.keep-emphasized .media,
+.app-todos .fadedown.open .btn-emphasized.w100.keep-emphasized .media > .media-body,
+.app-todos .fadedown.open .btn-extra-emphasized.w100.keep-emphasized .media > .pull-right,
+.app-todos .fadedown.open .btn-emphasized.w100.keep-emphasized .media > .pull-right {
+  background-color: #efa02d;
+}
+.app-todos .fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media,
+.app-todos .fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media > .media-body,
+.app-todos .fadedown.open .btn-extra-emphasized.w100.keep-emphasized:hover .media > .pull-right,
+.app-todos .fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media > .pull-right {
+  background-color: #ad7e2c;
+}
+.app-todos .fadedown:not(.open) .only-open {
+  display: none;
+}
 .app-todos .btn-emphasized .media > .pull-left:empty,
 .app-todos .btn-emphasized .media > .pull-right:empty,
 .app-todos .btn-appnavi .media > .pull-left:empty,
@@ -828,6 +938,21 @@ ul.appnavi-dropdown-menu {
   color: white;
   background-color: #933d39;
 }
+.app-etherpad .fadedown.open .btn-emphasized.w100.keep-emphasized .media,
+.app-etherpad .fadedown.open .btn-emphasized.w100.keep-emphasized .media > .media-body,
+.app-etherpad .fadedown.open .btn-extra-emphasized.w100.keep-emphasized .media > .pull-right,
+.app-etherpad .fadedown.open .btn-emphasized.w100.keep-emphasized .media > .pull-right {
+  background-color: #e55c55;
+}
+.app-etherpad .fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media,
+.app-etherpad .fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media > .media-body,
+.app-etherpad .fadedown.open .btn-extra-emphasized.w100.keep-emphasized:hover .media > .pull-right,
+.app-etherpad .fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media > .pull-right {
+  background-color: #933d39;
+}
+.app-etherpad .fadedown:not(.open) .only-open {
+  display: none;
+}
 .app-etherpad .btn-emphasized .media > .pull-left:empty,
 .app-etherpad .btn-emphasized .media > .pull-right:empty,
 .app-etherpad .btn-appnavi .media > .pull-left:empty,
@@ -857,7 +982,7 @@ ul.appnavi-dropdown-menu {
   position: relative;
   white-space: nowrap;
 }
-.media-body span.annotation {
+.media-body a.annotation, .media-body span.annotation {
   width: auto;
   float: right;
   font-size: 11px;
@@ -1169,6 +1294,9 @@ body .large-space {
   margin-left: 6px;
   padding-top: 5px;
 }
+.input-area > li > a {
+  text-decoration: underline;
+}
 .input-area > li > a > i {
   color: #333333;
   font-size: 1.5em;
@@ -1272,6 +1400,70 @@ ul.errorlist li:before {
   margin: 0 7px 0 -18px;
 }
 
+#map {
+  height: 500px;
+}
+
+.app-main .app-background {
+  background-color: #efa02d;
+}
+.app-main .app-background-light {
+  background-color: #faebcd;
+}
+.app-main .app-background-dark {
+  background-color: #ad7e2c;
+}
+
+.app-calendar .app-background {
+  background-color: #efa02d;
+}
+.app-calendar .app-background-light {
+  background-color: #faebcd;
+}
+.app-calendar .app-background-dark {
+  background-color: #ad7e2c;
+}
+
+.app-files .app-background {
+  background-color: #efa02d;
+}
+.app-files .app-background-light {
+  background-color: #faebcd;
+}
+.app-files .app-background-dark {
+  background-color: #ad7e2c;
+}
+
+.app-documents .app-background {
+  background-color: #efa02d;
+}
+.app-documents .app-background-light {
+  background-color: #faebcd;
+}
+.app-documents .app-background-dark {
+  background-color: #ad7e2c;
+}
+
+.app-todos .app-background {
+  background-color: #efa02d;
+}
+.app-todos .app-background-light {
+  background-color: #faebcd;
+}
+.app-todos .app-background-dark {
+  background-color: #ad7e2c;
+}
+
+.app-etherpad .app-background {
+  background-color: #efa02d;
+}
+.app-etherpad .app-background-light {
+  background-color: #faebcd;
+}
+.app-etherpad .app-background-dark {
+  background-color: #ad7e2c;
+}
+
 .font11px {
   font-size: 11px !important;
 }
@@ -1293,6 +1485,35 @@ ul.errorlist li:before {
 
 .comment-background {
   background-color: #cbe7ed !important;
+}
+
+.indented {
+  padding-left: 40px;
+}
+
+.underlined {
+  text-decoration: underline !important;
+}
+
+.light-color {
+  color: #dbdbdb !important;
+}
+
+.dark-color {
+  color: #333333 !important;
+}
+
+.small-padding {
+  padding: 3px 5px 3px 5px;
+}
+
+.inline-list {
+  display: inline-block;
+  margin: 0 10px 10px 0;
+}
+
+.nowrap {
+  white-space: nowrap;
 }
 
 body div .select2-container .select2-choice,
@@ -1391,6 +1612,24 @@ body div .app-etherpad-attachment, body div .btn-default .media > .media-body .a
 }
 body div .select2-dropdown-open.select2-drop-above .select2-choices {
   background-image: none;
+}
+
+.select2-drop.select2-drop-above, .select2-drop.select2-drop-above.select2-drop-active, .select2-drop, .select2-drop.select2-drop-active {
+  border-radius: 0;
+  border-width: 0;
+}
+.select2-drop ul.select2-results {
+  padding: 0;
+  margin: 0;
+}
+.select2-drop ul.select2-results li.select2-result {
+  line-height: 30px;
+  font-size: 14px;
+  color: #333333;
+  border-bottom: 1px solid #dbdbdb;
+}
+.select2-drop ul.select2-results li.select2-result:last-child {
+  border-width: 0;
 }
 
 .app-main {

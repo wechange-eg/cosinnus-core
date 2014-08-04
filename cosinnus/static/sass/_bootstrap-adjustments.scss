@@ -88,6 +88,7 @@ body {
 
 // Simple text
 p {
+	margin-bottom: 0;
 	padding: 8px;
 	background-color: $app-neutral-color-white;
 	color: $app-neutral-color-dark;
@@ -255,3 +256,43 @@ label {
 	margin-bottom: 4px;
 }
 
+.content-box .dropdown {
+	margin-bottom: 13px;
+
+	button {
+		text-align: right;
+		color: $app-neutral-color-dark;
+
+		&:hover, &:active, &:focus {
+			color: $app-neutral-color-dark;
+			background-color: $app-neutral-color-light;
+		}
+
+		width: 10em;
+	}
+
+	&.open {
+		button.btn-default.dropdown-toggle {
+			color: $app-neutral-color-dark;
+			background-color: $app-neutral-color-light;
+		}
+	}
+
+	ul.dropdown-menu {
+		padding: 0;
+
+		li {
+			border-bottom: 1px solid $app-neutral-color-light;
+
+			a {
+				padding: 10px 0 10px 7px;
+				font-size: 14px;
+				color: $app-neutral-color-dark;
+			}
+
+			&:last-child {
+				border-width: 0;
+			}
+		}
+	}
+}

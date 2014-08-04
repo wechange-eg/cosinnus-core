@@ -99,5 +99,34 @@ body div {
 		background-image: none;
 	}
 
+
+}
+
+
+.select2-drop {
+	// Dropdown chooser that has position:absolute (similar to SELECT OPTION)
+
+	
+	&.select2-drop-above,  &.select2-drop-above.select2-drop-active,
+	&,  &.select2-drop-active {
+		border-radius: 0;
+		border-width: 0;
+	}
+
+	ul.select2-results {
+		padding: 0;
+		margin: 0;
+
+		li.select2-result {
+			line-height: 30px;
+			font-size: 14px;
+			color: $app-neutral-color-dark;
+			border-bottom: 1px solid $app-neutral-color-light;
+
+			&:last-child {
+				border-width: 0;
+			}
+		}
+	}
 }
 
