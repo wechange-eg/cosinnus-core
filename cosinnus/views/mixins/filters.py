@@ -26,8 +26,21 @@ class CosinnusFilterMixin(FilterMixin):
     
     def get_context_data(self, **kwargs):
         context = super(CosinnusFilterMixin, self).get_context_data(**kwargs)
+        active_filters = []
+        
+        """ Add [(filter_param, chosen_value_str)] for displaying current filters """
+        for param, value in self.request.GET.items():
+            if value and param in self.filter.filters:
+                if not 'choices' in self.filter.filters[param].extra:
+                    active_filters.append((param, value))
+                else:
+                    choices_dict = dict([(str(key), val) for key, val in self.filter.filters[param].extra['choices']])
+                    chosen_value_str = choices_dict[value]
+                    active_filters.append((param, chosen_value_str))
+        
         context.update({
             'filter': self.filter,
+            'active_filters': active_filters,
         })
         return context
 
