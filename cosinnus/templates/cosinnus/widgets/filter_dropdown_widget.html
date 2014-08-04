@@ -1,0 +1,11 @@
+<div class="dropdown pull-right">
+    <button class="btn btn-default dropdown-toggle" type="button" id="{{ widget_id }}" data-toggle="dropdown">
+        {{ label }}
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="{{ widget_id }}" {{ attrs }}>
+        {% for option in options %}
+	        <li role="presentation"><a role="menuitem" tabindex="-1" href="?{{ option.query_string}}">{{ option.label }}</a></li>
+        {% endfor %}
+    </ul>
+</div>

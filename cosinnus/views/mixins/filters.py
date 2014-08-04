@@ -5,6 +5,7 @@ Created on 30.07.2014
 '''
 from django_filters.views import FilterMixin
 from django_filters.filterset import FilterSet
+from cosinnus.forms.filters import CosinnusFilterForm
 
 
 class CosinnusFilterMixin(FilterMixin):
@@ -46,8 +47,16 @@ class CosinnusFilterMixin(FilterMixin):
 
 class CosinnusFilterSet(FilterSet):
     
+    def __init__(self, data=None, queryset=None, prefix=None, strict=None):
+        """ Add a reference to the form to the form's widgets """
+        super(CosinnusFilterSet, self).__init__(data, queryset, prefix, strict)
+        for field in self.form.fields.values():
+            field.widget.form_instance = self.form
+    
     def get_order_by(self, order_value):
         """ Chain comma-seperated orderings """
         if ',' in order_value:
             return order_value.split(',')
         return super(CosinnusFilterSet, self).get_order_by(order_value)
+    
+    
