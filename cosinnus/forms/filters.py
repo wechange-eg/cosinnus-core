@@ -115,8 +115,12 @@ class SelectUserWidget(BaseChoiceWidget):
         elif (value.first_name or value.last_name):
             return "%s %s" % (value.first_name, value.last_name)
         return super(SelectUserWidget, self).format_label_value(value)
-    
 
+
+class SelectCreatorWidget(SelectUserWidget):
+    """ Basically the same als the select user widget, only it allows no unselecting of users """
+    skip_empty_options = True
+    
 class AllObjectsFilter(ChoiceFilter):
     @property
     def field(self):
