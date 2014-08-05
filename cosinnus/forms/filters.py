@@ -8,7 +8,7 @@ from __future__ import unicode_literals
 
 from itertools import chain
 from django.template.loader import render_to_string
-from django_filters.filters import ChoiceFilter
+from django_filters.filters import ChoiceFilter, DateRangeFilter, _truncate
 from django.core.exceptions import ImproperlyConfigured
 from django.contrib.auth.models import User
 try:
@@ -16,6 +16,8 @@ try:
 except:
     from urllib import urlencode  # noqa
 
+from django.utils.timezone import now
+from datetime import timedelta
 from django import forms
 from django.db.models.fields import BLANK_CHOICE_DASH
 from django.forms.widgets import flatatt
@@ -138,3 +140,25 @@ class AllObjectsFilter(ChoiceFilter):
             value = (True, 'isnull')
         return super(AllObjectsFilter, self).filter(qs, value)
 
+
+class ForwardDateRangeFilter(DateRangeFilter):
+    options = {
+        '': (_('Any date'), lambda qs, name: qs.all()),
+        1: (_('Today'), lambda qs, name: qs.filter(**{
+            '%s__year' % name: now().year,
+            '%s__month' % name: now().month,
+            '%s__day' % name: now().day
+        })),
+        2: (_('Next 7 days'), lambda qs, name: qs.filter(**{
+            '%s__gte' % name: _truncate(now()),
+            '%s__lt' % name: _truncate(now() + timedelta(days=7)),
+        })),
+        3: (_('Next +7-14 days'), lambda qs, name: qs.filter(**{
+            '%s__gte' % name: _truncate(now() + timedelta(days=7)),
+            '%s__lt' % name: _truncate(now() + timedelta(days=14)),
+        })),
+        4: (_('Next month'), lambda qs, name: qs.filter(**{
+            '%s__year' % name: now().year + (1 if now().month == 11 else 0),
+            '%s__month' % name: now().month + 1 if now().month < 11 else 0
+        })),
+    }
