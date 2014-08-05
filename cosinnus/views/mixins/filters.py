@@ -5,7 +5,11 @@ Created on 30.07.2014
 '''
 from django_filters.views import FilterMixin
 from django_filters.filterset import FilterSet
+from cosinnus.forms.filters import DropdownChoiceWidget
 
+from django import forms
+from django.utils.text import capfirst
+from django.utils.translation import ugettext as _
 
 class CosinnusFilterMixin(FilterMixin):
     """
@@ -28,15 +32,22 @@ class CosinnusFilterMixin(FilterMixin):
         context = super(CosinnusFilterMixin, self).get_context_data(**kwargs)
         active_filters = []
         
-        """ Add [(filter_param, chosen_value_str)] for displaying current filters """
-        for param, value in self.request.GET.items():
+        """ Add [(filter_param, chosen_value_str, type<'sort'|'filter'>)] for displaying current filters """
+        for param, value in self.filter.data.items():
             if value and param in self.filter.filters:
                 if not 'choices' in self.filter.filters[param].extra:
-                    active_filters.append((param, value))
+                    active_filters.append((param, value, 'filter'))
                 else:
                     choices_dict = dict([(str(key), val) for key, val in self.filter.filters[param].extra['choices']])
-                    chosen_value_str = choices_dict[value]
-                    active_filters.append((param, chosen_value_str))
+                    if value in choices_dict:
+                        chosen_value_str = choices_dict[value]
+                        active_filters.append((param, chosen_value_str, 'filter'))
+            if value and param == self.filter.order_by_field:
+                ordering_choices_dict = dict(self.filter.ordering_field.choices)
+                if value in ordering_choices_dict:
+                    chosen_value_str = ordering_choices_dict[value]
+                    active_filters.append((param, chosen_value_str, 'sort'))
+                
         
         context.update({
             'filter': self.filter,
@@ -58,4 +69,25 @@ class CosinnusFilterSet(FilterSet):
             return order_value.split(',')
         return super(CosinnusFilterSet, self).get_order_by(order_value)
     
+    def get_ordering_field(self):
+        """ Overriding BaseFilterSet """
+        if self._meta.order_by:
+            if isinstance(self._meta.order_by, (list, tuple)):
+                if isinstance(self._meta.order_by[0], (list, tuple)):
+                    # e.g. (('field', 'Display name'), ...)
+                    choices = [(f[0], f[1]) for f in self._meta.order_by]
+                else:
+                    choices = [(f, _('%s (descending)' % capfirst(f[1:])) if f[0] == '-' else capfirst(f))
+                               for f in self._meta.order_by]
+            else:
+                # add asc and desc field names
+                # use the filter's label if provided
+                choices = []
+                for f, fltr in self.filters.items():
+                    choices.extend([
+                        (fltr.name or f, fltr.label or capfirst(f)),
+                        ("-%s" % (fltr.name or f), _('%s (descending)' % (fltr.label or capfirst(f))))
+                    ])
+            return forms.ChoiceField(label="Ordering", required=False,
+                                     choices=choices, widget=DropdownChoiceWidget)
     
