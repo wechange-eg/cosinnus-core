@@ -10,6 +10,7 @@ from itertools import chain
 from django.template.loader import render_to_string
 from django_filters.filters import ChoiceFilter
 from django.core.exceptions import ImproperlyConfigured
+from django.contrib.auth.models import User
 try:
     from urllib.parse import urlencode
 except:
@@ -109,7 +110,7 @@ class SelectUserWidget(BaseChoiceWidget):
     
     def format_label_value(self, value):
         """ Show the user's full name """
-        if not value:
+        if not value or not getattr(value, '__class__', None) == User:
             return _("Not assigned")
         elif (value.first_name or value.last_name):
             return "%s %s" % (value.first_name, value.last_name)
@@ -124,6 +125,12 @@ class AllObjectsFilter(ChoiceFilter):
         object_qs = getattr(self.model, self.name).field.rel.to._default_manager.filter(id__in=qs)
         self.extra['choices'] = [(o.id, o) for o in object_qs]
         if None in qs:
-            self.extra['choices'].append((None, None))
+            self.extra['choices'].append((None, _("Not assigned")))
         return super(AllObjectsFilter, self).field
+    
+    def filter(self, qs, value):
+        """ Filters for field-is-empty on 'None' parameters """
+        if value == 'None':
+            value = (True, 'isnull')
+        return super(AllObjectsFilter, self).filter(qs, value)
 
