@@ -8,6 +8,8 @@ from __future__ import unicode_literals
 
 from itertools import chain
 from django.template.loader import render_to_string
+from django_filters.filters import ChoiceFilter
+from django.core.exceptions import ImproperlyConfigured
 try:
     from urllib.parse import urlencode
 except:
@@ -24,78 +26,19 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
 
-class LinkWidget(forms.Widget):
-    def __init__(self, attrs=None, choices=()):
-        super(LinkWidget, self).__init__(attrs)
 
+class BaseChoiceWidget(forms.Widget):
+    template_name = None
+    skip_empty_options = False
+    
+    def __init__(self, attrs=None, choices=()):
+        if not self.template_name:
+            raise ImproperlyConfigured("You must provide a template_name for this widget!")
+        super(BaseChoiceWidget, self).__init__(attrs)
         self.choices = choices
 
     def value_from_datadict(self, data, files, name):
-        value = super(LinkWidget, self).value_from_datadict(data, files, name)
-        self.data = data
-        return value
-
-    def render(self, name, value, attrs=None, choices=()):
-        if not hasattr(self, 'data'):
-            self.data = {}
-        if value is None:
-            value = ''
-        final_attrs = self.build_attrs(attrs)
-        output = ['<ul%s>' % flatatt(final_attrs)]
-        options = self.render_options(choices, [value], name)
-        if options:
-            output.append(options)
-        output.append('</ul>')
-        return mark_safe('\n'.join(output))
-
-    def render_options(self, choices, selected_choices, name):
-        selected_choices = set(force_text(v) for v in selected_choices)
-        output = []
-        for option_value, option_label in chain(self.choices, choices):
-            if isinstance(option_label, (list, tuple)):
-                for option in option_label:
-                    output.append(
-                        self.render_option(name, selected_choices, *option))
-            else:
-                output.append(
-                    self.render_option(name, selected_choices,
-                                       option_value, option_label))
-        return '\n'.join(output)
-
-    def render_option(self, name, selected_choices,
-                      option_value, option_label):
-        option_value = force_text(option_value)
-        if option_label == BLANK_CHOICE_DASH[0][1]:
-            option_label = _("All")
-        data = self.data.copy()
-        data[name] = option_value
-        selected = data == self.data or option_value in selected_choices
-        try:
-            url = data.urlencode()
-        except AttributeError:
-            url = urlencode(data)
-        return self.option_string() % {
-             'attrs': selected and ' class="selected"' or '',
-             'query_string': url,
-             'label': force_text(option_label)
-        }
-
-    def option_string(self):
-        return '<li><a%(attrs)s href="?%(query_string)s">%(label)s</a></li>'
-    
-
-
-class DropdownChoiceWidget(forms.Widget):
-    template_name = 'cosinnus/widgets/filter_dropdown_widget.html'
-    skip_empty_options = True
-    
-    def __init__(self, attrs=None, choices=()):
-        super(DropdownChoiceWidget, self).__init__(attrs)
-
-        self.choices = choices
-
-    def value_from_datadict(self, data, files, name):
-        value = super(DropdownChoiceWidget, self).value_from_datadict(data, files, name)
+        value = super(BaseChoiceWidget, self).value_from_datadict(data, files, name)
         self.data = data
         return value
 
@@ -111,7 +54,7 @@ class DropdownChoiceWidget(forms.Widget):
         render_context = {
             'attrs': final_attrs,
             'options': render_options,
-            'widget_id': 'DropdownChoiceWidget%s' % self.form_instance.fields[name].creation_counter,
+            'widget_id': 'FilterChoiceWidget%s' % self.form_instance.fields[name].creation_counter,
             'label': self.form_instance.fields[name].label,
         }
         
@@ -138,6 +81,8 @@ class DropdownChoiceWidget(forms.Widget):
         option_value = force_text(option_value)
         if option_label == BLANK_CHOICE_DASH[0][1]:
             option_label = _("All")
+        else:
+            option_label = self.format_label_value(option_label)
         data = self.data.copy()
         data[name] = option_value
         selected = data == self.data or option_value in selected_choices
@@ -147,7 +92,38 @@ class DropdownChoiceWidget(forms.Widget):
             url = urlencode(data)
         return {
              'query_string': url,
-             'label': force_text(option_label)
+             'label': option_label
         }
+    
+    def format_label_value(self, value):
+        return force_text(value)
 
+
+class DropdownChoiceWidget(BaseChoiceWidget):
+    template_name = 'cosinnus/widgets/filter_dropdown_widget.html'
+    skip_empty_options = True
+
+
+class SelectUserWidget(BaseChoiceWidget):
+    template_name = 'cosinnus/widgets/filter_user_select.html'
+    
+    def format_label_value(self, value):
+        """ Show the user's full name """
+        if not value:
+            return _("Not assigned")
+        elif (value.first_name or value.last_name):
+            return "%s %s" % (value.first_name, value.last_name)
+        return super(SelectUserWidget, self).format_label_value(value)
+    
+
+class AllObjectsFilter(ChoiceFilter):
+    @property
+    def field(self):
+        qs = self.model._default_manager.distinct()
+        qs = qs.order_by(self.name).values_list(self.name, flat=True)
+        object_qs = getattr(self.model, self.name).field.rel.to._default_manager.filter(id__in=qs)
+        self.extra['choices'] = [(o.id, o) for o in object_qs]
+        if None in qs:
+            self.extra['choices'].append((None, None))
+        return super(AllObjectsFilter, self).field
 

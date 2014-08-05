@@ -1,0 +1,9 @@
+<div class="dropdown pull-right">
+    <select name="user" class="user-selector" data-placeholder="{{ label }}" onchange="window.location.href = $(this).val();" {{ attrs }}>
+        <option></option>
+        {% for option in options %}
+            <option value="?{{ option.query_string}}">{{ option.label }}</option>
+        {% endfor %}
+    </select>
+    <input type="hidden" name="status" value="1" />
+</div>
