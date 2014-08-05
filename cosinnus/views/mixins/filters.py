@@ -38,21 +38,21 @@ class CosinnusFilterMixin(FilterMixin):
         context = super(CosinnusFilterMixin, self).get_context_data(**kwargs)
         active_filters = []
         
-        """ Add [(filter_param, chosen_value_str, type<'sort'|'filter'>)] for displaying current filters """
+        """ Add [(filter_param, chosen_value_str, label, type<'sort'|'filter'>)] for displaying current filters """
         for param, value in self.filter.data.items():
             if value and param in self.filter.filters:
                 if not 'choices' in self.filter.filters[param].extra:
-                    active_filters.append((param, value, 'filter'))
+                    active_filters.append((param, value, self.filter.filters[param].label, 'filter'))
                 else:
                     choices_dict = dict([(str(key), val) for key, val in self.filter.filters[param].extra['choices']])
                     if value in choices_dict:
                         chosen_value_str = choices_dict[value]
-                        active_filters.append((param, chosen_value_str, 'filter'))
+                        active_filters.append((param, chosen_value_str, self.filter.filters[param].label, 'filter'))
             if value and param == self.filter.order_by_field:
                 ordering_choices_dict = dict(self.filter.ordering_field.choices)
                 if value in ordering_choices_dict:
                     chosen_value_str = ordering_choices_dict[value]
-                    active_filters.append((param, chosen_value_str, 'sort'))
+                    active_filters.append((param, chosen_value_str, self.filter.ordering_field.label, 'sort'))
                 
         
         context.update({

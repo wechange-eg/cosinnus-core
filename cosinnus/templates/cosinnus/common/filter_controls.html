@@ -4,11 +4,11 @@
     {{ field }}
 {% endfor %}
 
-{% for filter_param, chosen_value, type in active_filters %}
+{% for filter_param, chosen_value, label, type in active_filters %}
     <span class="inline-list nowrap">
         <a href="?{% strip_params request filter_param %}" class="app-background small-padding"><i class="fa fa-times"></i></a
         ><span class="app-background-light dark-color small-padding">
-            {% if type == 'sort' %}{% trans "Sort by" %}: {% endif %}{{ chosen_value }}
+            {{ label }}: {{ chosen_value }}
         </span>
     </span>
 {% endfor %}
