@@ -8,8 +8,10 @@ from django_filters.filterset import FilterSet
 from cosinnus.forms.filters import DropdownChoiceWidget
 
 from django import forms
+from django.db.models import Q
 from django.utils.text import capfirst
 from django.utils.translation import ugettext as _
+from cosinnus.models.tagged import BaseHierarchicalTaggableObjectModel
 
 class CosinnusFilterMixin(FilterMixin):
     """
@@ -18,14 +20,19 @@ class CosinnusFilterMixin(FilterMixin):
     filterset_class = None
     
     def get_queryset(self, **kwargs):
-        qs = super(CosinnusFilterMixin, self).get_queryset(**kwargs)
+        base_qs = super(CosinnusFilterMixin, self).get_queryset(**kwargs)
         filterset_class = self.get_filterset_class()
         kwargs = {
             'data': self.request.GET or None,
-            'queryset': qs
+            'queryset': base_qs
         }
         self.filter = filterset_class(**kwargs)
         qs = self.filter.qs
+        
+        # support for Containers in BaseHierarchical models (keep Containers in QS!)
+        if BaseHierarchicalTaggableObjectModel in self.model.__bases__:
+            qs = base_qs.filter(Q(is_container=True) | Q(pk__in=qs.values('pk')))
+        
         return qs
     
     def get_context_data(self, **kwargs):
