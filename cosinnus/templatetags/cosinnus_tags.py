@@ -5,6 +5,7 @@ from collections import defaultdict
 import six
 from six.moves.urllib.parse import parse_qsl
 from uuid import uuid1
+from copy import copy
 
 from django import template
 from django.core.exceptions import ImproperlyConfigured
@@ -398,3 +399,18 @@ def strip_params(context, qs, *keys):
     for k in keys:
         parsed.pop(k, None)
     return urlencode(parsed)
+
+
+@register.simple_tag(takes_context=True)
+def add_current_params(context):
+    """
+    Given a URL query string (`foo=bar&lorem=ipsum`) and an arbitrary key /
+    list of keys, strips those from the QS:
+    """
+    if not 'request' in context:
+        return ''
+    parsed = copy(context['request'].GET.dict())
+    if not parsed:
+        return ''
+    print ">>pp:", parsed
+    return '?%s' % urlencode(parsed)
