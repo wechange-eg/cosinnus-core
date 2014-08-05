@@ -88,6 +88,6 @@ class CosinnusFilterSet(FilterSet):
                         (fltr.name or f, fltr.label or capfirst(f)),
                         ("-%s" % (fltr.name or f), _('%s (descending)' % (fltr.label or capfirst(f))))
                     ])
-            return forms.ChoiceField(label="Ordering", required=False,
+            return forms.ChoiceField(label=_("Ordering"), required=False,
                                      choices=choices, widget=DropdownChoiceWidget)
     
