@@ -149,13 +149,13 @@ class ForwardDateRangeFilter(DateRangeFilter):
             '%s__month' % name: now().month,
             '%s__day' % name: now().day
         })),
-        2: (_('Next 7 days'), lambda qs, name: qs.filter(**{
-            '%s__gte' % name: _truncate(now()),
-            '%s__lt' % name: _truncate(now() + timedelta(days=7)),
+        2: (_('This week'), lambda qs, name: qs.filter(**{
+            '%s__gte' % name: _truncate(now() - timedelta(days=now().weekday())),
+            '%s__lt' % name: _truncate(now() + timedelta(days=7-now().weekday())),
         })),
-        3: (_('Next +7-14 days'), lambda qs, name: qs.filter(**{
-            '%s__gte' % name: _truncate(now() + timedelta(days=7)),
-            '%s__lt' % name: _truncate(now() + timedelta(days=14)),
+        3: (_('Next week'), lambda qs, name: qs.filter(**{
+            '%s__gte' % name: _truncate(now() + timedelta(days=7-now().weekday())),
+            '%s__lt' % name: _truncate(now() + timedelta(days=14-now().weekday())),
         })),
         4: (_('Next month'), lambda qs, name: qs.filter(**{
             '%s__year' % name: now().year + (1 if now().month == 11 else 0),
