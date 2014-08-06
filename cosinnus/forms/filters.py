@@ -131,7 +131,7 @@ class AllObjectsFilter(ChoiceFilter):
         object_qs = getattr(self.model, self.name).field.rel.to._default_manager.filter(id__in=qs)
         self.extra['choices'] = [(o.id, o) for o in object_qs]
         if None in qs:
-            self.extra['choices'].append((None, _("Not assigned")))
+            self.extra['choices'].insert(0, (None, _("Not assigned")))
         return super(AllObjectsFilter, self).field
     
     def filter(self, qs, value):
