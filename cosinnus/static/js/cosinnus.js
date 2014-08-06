@@ -831,7 +831,7 @@
 
 		map : function() {
 			if (!$('#map').length) return;
-			var map = L.map('map').setView([52.5, 13.3], 10);
+			var map = L.map('map').setView([0,0], 10);
 			L.tileLayer('https://otile1-s.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
 				attribution: 'Open Streetmap',
 				maxZoom: 15,
@@ -839,13 +839,19 @@
 			}).addTo(map);
 
 
+			var markers = [];
 			// mapdata is a global var set directly in HTML
 			$(mapData).each(function(id,marker) {
-				L
+				var marker = L
 					.marker([marker.lat, marker.lon])
 					.bindPopup(marker.title)
 					.addTo(map);
+				markers.push(marker);
 			});
+
+			var markerGroup = new L.featureGroup(markers);
+			map.fitBounds(markerGroup.getBounds());
+
 		}
 
 	};
