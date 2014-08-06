@@ -91,7 +91,6 @@
 						{id:2, text:'Später'}
 					]
 				});
-// http://stackoverflow.com/questions/16393872/different-display-value-for-selecte-text-using-select2-js
 			});
 
 			$('.tags-selector, .location-selector').each(function() {
@@ -842,8 +841,6 @@
 
 			// mapdata is a global var set directly in HTML
 			$(mapData).each(function(id,marker) {
-console.log(marker);
-
 				L
 					.marker([marker.lat, marker.lon])
 					.bindPopup(marker.title)
