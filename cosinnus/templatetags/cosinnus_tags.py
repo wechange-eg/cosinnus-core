@@ -274,7 +274,6 @@ def djajax_connect(parser, token):
         token_array = token.split_contents()
         tag_name, obj_prop, my_args = token_array[0], token_array[1], token_array[2:]
         obj, prop = obj_prop.split('.')
-        print ">> obj, prop", obj, prop, my_args
     except ValueError:
         raise template.TemplateSyntaxError("'djajax_connect' requires a variable name.")
     
@@ -329,8 +328,6 @@ class DjajaxConnectNode(template.Node):
         # get the wished id for the item, or generate one if not supplied
         node_id = '%s_%s_%d' % (self.obj, self.prop, uuid1())
         
-        print ">>>> add context", additional_context
-        
         djajax_entry = (context[self.obj], self.prop, node_id, additional_context)
         if not 'djajax_connect_list' in context:
             context.dicts[0]['djajax_connect_list'] = []
@@ -373,7 +370,6 @@ class DjajaxSetupNode(template.Node):
                     'pk': obj.pk,
                     'property_name': prop,
                 }
-                #print ">>a aaaaa  aaaaad", additional_context
                 context.update(additional_context)
                 ret += render_to_string('cosinnus/js/djajax_connect.js', context) + '\n\n'
             
@@ -412,5 +408,4 @@ def add_current_params(context):
     parsed = copy(context['request'].GET.dict())
     if not parsed:
         return ''
-    print ">>pp:", parsed
     return '?%s' % urlencode(parsed)
