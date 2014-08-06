@@ -236,7 +236,7 @@
 	            {% endif %}
 	            
 	        {% empty %}
-	            <p>{% trans "There are no new membership requests." %}</p>
+	            {% include 'cosinnus/common/empty_button.html' with message="There are no new membership requests." %}
 	        {% endfor %}
             
         

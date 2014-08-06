@@ -168,7 +168,7 @@
             {% endif %}
             
 		{% empty %}
-		   <p>{% trans "There are no groups." %}</p>
+		   {% include 'cosinnus/common/empty_button.html' with message="There are no groups." %}
 		{% endfor %}
         
     </div>
