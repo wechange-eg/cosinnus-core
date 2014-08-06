@@ -398,14 +398,16 @@ def strip_params(context, qs, *keys):
 
 
 @register.simple_tag(takes_context=True)
-def add_current_params(context):
+def add_current_params(context, request=None):
     """
     Given a URL query string (`foo=bar&lorem=ipsum`) and an arbitrary key /
     list of keys, strips those from the QS:
     """
-    if not 'request' in context:
+    if not request and 'request' in context:
+        request = context['request']
+    if not request:
         return ''
-    parsed = copy(context['request'].GET.dict())
+    parsed = copy(request.GET.dict())
     if not parsed:
         return ''
     return '?%s' % urlencode(parsed)
