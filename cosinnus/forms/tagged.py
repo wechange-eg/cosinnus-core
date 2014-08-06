@@ -34,11 +34,12 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
         self.fields['tags'] = TagSelect2Field(required=False, data_url=reverse_lazy('cosinnus:select2:tags'))
         
         # inherit tags from group for new TaggableObjects
+        preresults = []
         if self.instance.pk:
             preresults = self.instance.tags.values_list('name', 'name').all()
-        else:
+        elif self.group:
             preresults = self.group.media_tag.tags.values_list('name', 'name').all()
-            
+
         if preresults:
             self.fields['tags'].choices = preresults
             self.fields['tags'].initial = [key for key,val in preresults]#[tag.name for tag in self.instance.tags.all()]
