@@ -10,9 +10,16 @@
 
 
 {% block breadcrumb %}
-        {{ block.super }}
-        <li class="active">{% trans "Overview" %}</li>
+    {{ block.super }}
+    <li class="active">{% trans "Overview" %}</li>
 {% endblock %}
+
+{% block override_breadcrumb %}
+    {{ block.super }}
+    <div class="clearfix regular-space">
+        <a href="{% url 'cosinnus:group-list-map' %}" class="pull-right light-color underlined">{% trans "show on map" %}</a>
+    </div>
+{% endblock override_breadcrumb %}
 
 
 {% block content %}

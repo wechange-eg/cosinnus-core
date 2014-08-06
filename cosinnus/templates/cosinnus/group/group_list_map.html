@@ -1,0 +1,40 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags %}
+
+{% block page_title %}{% trans "Groups" %}{% endblock %}
+
+
+{% block leftnav %}
+    {% include "cosinnus/group/leftnav_all_groups.html"  with current_page="grouplist" %}
+{% endblock leftnav %}
+
+
+{% block breadcrumb %}
+    {{ block.super }}
+    <li class="active">{% trans "Map" %}</li>
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <link href="{% static 'css/vendor/leaflet.css' %}" rel="stylesheet">
+    <script src="{% static 'js/vendor/leaflet.js' %}"></script>
+{% endblock extrahead %}
+
+{% block content %}
+
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+        <div id="map"></div>
+        <script type="application/javascript">
+            var mapData = [
+                {% for group, members, pendings, admins in rows %}
+                    {% if group.media_tag and group.media_tag.location and group.media_tag.location_lat and group.media_tag.location_lon %}
+                        {lat: {{ group.media_tag.location_lat|stringformat:"f" }}, lon: {{ group.media_tag.location_lon|stringformat:"f" }}, title: '<a href="{{ group.get_absolute_url }}">{{ group.name }}</a>'},
+                    {% endif %}
+		        {% endfor %}
+            ];
+        </script>
+    </div>
+
+{% endblock %}
+

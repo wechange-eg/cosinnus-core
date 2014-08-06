@@ -148,6 +148,11 @@ group_list = GroupListView.as_view()
 group_list_api = GroupListView.as_view(is_ajax_request_url=True)
 
 
+class GroupMapListView(GroupListView):
+    template_name = 'cosinnus/group/group_list_map.html'
+
+group_list_map = GroupMapListView.as_view()
+
 class GroupUpdateView(AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
                       RequireAdminMixin, UpdateView):
 

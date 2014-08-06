@@ -26,6 +26,7 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^widget/(?P<id>\d+)/edit/$', 'widget.widget_edit', name='widget-edit'),
 
     url(r'^groups/$', 'group.group_list', name='group-list'),
+    url(r'^groups/map/$', 'group.group_list_map', name='group-list-map'),
     url(r'^groups/add/$', 'group.group_create', name='group-add'),
     url(r'^group/(?P<group>[^/]+)/$', 'widget.group_dashboard', name='group-dashboard'),
     url(r'^group/(?P<group>[^/]+)/members/$', 'group.group_detail', name='group-detail'),
