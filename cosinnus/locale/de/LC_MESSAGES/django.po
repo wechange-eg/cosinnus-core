@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-22 16:23+0200\n"
+"POT-Creation-Date: 2014-08-06 13:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -365,6 +365,34 @@ msgstr "Anhänge"
 msgid "Type the title and/or type of attachment"
 msgstr "Geben sie Titel/Typ des Anhangs ein"
 
+#: .\forms\filters.py:86 .\forms\search.py:51 .\models\tagged.py:57
+msgid "All"
+msgstr "Alle"
+
+#: .\forms\filters.py:116 .\forms\filters.py:134
+msgid "Not assigned"
+msgstr ""
+
+#: .\forms\filters.py:146
+msgid "Any date"
+msgstr ""
+
+#: .\forms\filters.py:147
+msgid "Today"
+msgstr ""
+
+#: .\forms\filters.py:152
+msgid "This week"
+msgstr "Diese Woche"
+
+#: .\forms\filters.py:156
+msgid "Next week"
+msgstr "Nächste Woche"
+
+#: .\forms\filters.py:160
+msgid "Next month"
+msgstr "Nächsten Monat"
+
 #: .\forms\hierarchy.py:14 .\models\group.py:293
 msgid "Name"
 msgstr "Name"
@@ -372,10 +400,6 @@ msgstr "Name"
 #: .\forms\search.py:50
 msgid "Limit to groups"
 msgstr "Auf Gruppen beschränken"
-
-#: .\forms\search.py:51 .\models\tagged.py:57
-msgid "All"
-msgstr "Alle"
 
 #: .\forms\search.py:51
 msgid "My groups"
@@ -419,11 +443,11 @@ msgstr "Cosinnus Gruppen"
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
 
-#: .\models\group.py:414
+#: .\models\group.py:419
 msgid "Group membership"
 msgstr "Gruppenmitgliedschaft"
 
-#: .\models\group.py:415
+#: .\models\group.py:420
 msgid "Group memberships"
 msgstr "Gruppenmitgliedschaften"
 
@@ -631,7 +655,7 @@ msgid "In Gruppen suchen"
 msgstr ""
 
 #: .\templates\cosinnus\search.html.py:168
-#: .\templates\cosinnus\user\userprofile_detail.html.py:124
+#: .\templates\cosinnus\user\userprofile_detail.html.py:126
 msgid "Meine Gruppen"
 msgstr "Meine Gruppen"
 
@@ -958,8 +982,8 @@ msgstr "Nachname"
 msgid "Registrieren"
 msgstr ""
 
-#: .\templates\cosinnus\user\leftnav.html.py:13
-#: .\templates\cosinnus\user\userprofile_detail.html.py:91
+#: .\templates\cosinnus\user\leftnav.html.py:20
+#: .\templates\cosinnus\user\userprofile_detail.html.py:93
 msgid "Über mich"
 msgstr ""
 
@@ -972,20 +996,20 @@ msgstr "Über mich"
 msgid "User Profiles"
 msgstr "Mitglieder-Profile"
 
-#: .\templates\cosinnus\user\userprofile_detail.html.py:38
+#: .\templates\cosinnus\user\userprofile_detail.html.py:40
 #: .\templates\cosinnus\user\userprofile_form.html.py:11
 msgid "Edit Profile"
 msgstr "Profil bearbeiten"
 
-#: .\templates\cosinnus\user\userprofile_detail.html.py:68
+#: .\templates\cosinnus\user\userprofile_detail.html.py:70
 msgid "Nachricht"
 msgstr ""
 
-#: .\templates\cosinnus\user\userprofile_detail.html.py:106
+#: .\templates\cosinnus\user\userprofile_detail.html.py:108
 msgid "Meine Webseite"
 msgstr ""
 
-#: .\templates\cosinnus\user\userprofile_detail.html.py:178
+#: .\templates\cosinnus\user\userprofile_detail.html.py:180
 msgid "Mein Netzwerk"
 msgstr "Mein Netzwerk"
 
@@ -1050,7 +1074,7 @@ msgstr "Sie können dieses Widget nicht auf das Benutzerdashboard platzieren"
 msgid "Widget not found."
 msgstr "Widget nicht gefunden"
 
-#: .\templatetags\cosinnus_tags.py:198
+#: .\templatetags\cosinnus_tags.py:200
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>%(model_name)s konnte nicht gerendert werden!</i>"
@@ -1164,6 +1188,15 @@ msgstr ""
 #: .\views\widget.py:142
 msgid "Change"
 msgstr "Ändern"
+
+#: .\views\mixins\filters.py:91 .\views\mixins\filters.py:100
+#, python-format
+msgid "%s (descending)"
+msgstr "%s (absteigend)"
+
+#: .\views\mixins\filters.py:102
+msgid "Ordering"
+msgstr "Sortierung"
 
 #: .\views\mixins\tagged.py:291
 #, python-format
