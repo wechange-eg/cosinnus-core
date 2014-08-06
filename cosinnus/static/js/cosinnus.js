@@ -67,16 +67,16 @@
 			$('.priority-selector').each(function() {
 				function formatSelection(val) {
 					switch (val.id) {
-						case 0: return '<i class="fa fa-exclamation-circle"></i>';
-						case 1: return '<i class="fa fa-exclamation"></i>';
-						case 2: return '<i class="fa fa-minus"></i>';
+						case 3: return '<i class="fa fa-exclamation-circle"></i>';
+						case 2: return '<i class="fa fa-exclamation"></i>';
+						case 1: return '<i class="fa fa-minus"></i>';
 					}
 				}
 				function formatResult(val) {
 					switch (val.id) {
-						case 0: return '<i class="fa fa-exclamation-circle"></i> &nbsp; '+val.text;
-						case 1: return '<i class="fa fa-exclamation"></i> &nbsp; '+val.text;
-						case 2: return '<i class="fa fa-minus"></i> &nbsp; '+val.text;
+						case 3: return '<i class="fa fa-exclamation-circle"></i> &nbsp; '+val.text;
+						case 2: return '<i class="fa fa-exclamation"></i> &nbsp; '+val.text;
+						case 1: return '<i class="fa fa-minus"></i> &nbsp; '+val.text;
 					}
 				}
 
@@ -86,9 +86,9 @@
 					formatSelection: formatSelection,
 					formatResult: formatResult,
 					data: [
-						{id:0, text:'Wichtig'},
-						{id:1, text:'Normal'},
-						{id:2, text:'Später'}
+						{id:3, text:'Wichtig'},
+						{id:2, text:'Normal'},
+						{id:1, text:'Später'}
 					]
 				});
 			});
