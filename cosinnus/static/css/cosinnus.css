@@ -1405,43 +1405,43 @@ ul.errorlist li:before {
 }
 
 .app-main .app-background {
-  background-color: #efa02d;
+  background-color: #16778d;
 }
 .app-main .app-background-light {
-  background-color: #faebcd;
+  background-color: #cbe7ed;
 }
 .app-main .app-background-dark {
-  background-color: #ad7e2c;
+  background-color: #104a59;
 }
 
 .app-calendar .app-background {
-  background-color: #efa02d;
+  background-color: #779b48;
 }
 .app-calendar .app-background-light {
-  background-color: #faebcd;
+  background-color: #e1edd2;
 }
 .app-calendar .app-background-dark {
-  background-color: #ad7e2c;
+  background-color: #4c622f;
 }
 
 .app-files .app-background {
-  background-color: #efa02d;
+  background-color: #14a085;
 }
 .app-files .app-background-light {
-  background-color: #faebcd;
+  background-color: #92ffea;
 }
 .app-files .app-background-dark {
-  background-color: #ad7e2c;
+  background-color: #0a5d4e;
 }
 
 .app-documents .app-background {
-  background-color: #efa02d;
+  background-color: #009ee3;
 }
 .app-documents .app-background-light {
-  background-color: #faebcd;
+  background-color: #d5f3ff;
 }
 .app-documents .app-background-dark {
-  background-color: #ad7e2c;
+  background-color: #007999;
 }
 
 .app-todos .app-background {
@@ -1455,13 +1455,13 @@ ul.errorlist li:before {
 }
 
 .app-etherpad .app-background {
-  background-color: #efa02d;
+  background-color: #e55c55;
 }
 .app-etherpad .app-background-light {
-  background-color: #faebcd;
+  background-color: #ede2e1;
 }
 .app-etherpad .app-background-dark {
-  background-color: #ad7e2c;
+  background-color: #933d39;
 }
 
 .font11px {
@@ -1531,8 +1531,23 @@ body div .select2-container .select2-choice .select2-arrow {
 body div .select2-container .select2-choice .select2-arrow b {
   background-position: 0 -2px;
 }
+body div .select2-container.select2-dropdown-open {
+  background-color: #dbdbdb;
+}
 body div .select2-container .select2-choice {
   line-height: inherit;
+  border-radius: 0;
+}
+body div .select2-container .select2-choice .select2-chosen {
+  color: #333333;
+  font-size: 12px;
+  text-align: right;
+}
+body div .select2-container .select2-choice .select2-arrow {
+  color: #333333;
+}
+body div .select2-container .select2-choice:hover {
+  background-color: #dbdbdb;
 }
 body div .select2-dropdown-open.select2-drop-above .select2-choice,
 body div .select2-dropdown-open.select2-drop-above .select2-choices,

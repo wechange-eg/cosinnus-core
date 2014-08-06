@@ -215,13 +215,13 @@ ul.errorlist {
 
 @mixin generic-background-colors($light,$normal,$dark) {
 	.app-background {
-		background-color: $app-todos-color;
+		background-color: $normal;
 	}
 	.app-background-light {
-		background-color: $app-todos-color-light;
+		background-color: $light;
 	}
 	.app-background-dark {
-		background-color: $app-todos-color-dark;
+		background-color: $dark;
 	}
 }
 

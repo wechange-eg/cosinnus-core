@@ -18,8 +18,28 @@ body div {
 		background-position:0 -2px;
 	}
 
-	.select2-container .select2-choice {
-		line-height: inherit;
+	.select2-container {
+		&.select2-dropdown-open {
+			background-color: $app-neutral-color-light;
+		}
+
+		.select2-choice {
+			line-height: inherit;
+			border-radius: 0;
+
+			.select2-chosen {
+				color: $app-neutral-color-dark;
+				font-size: 12px;
+				text-align: right;
+			}
+			.select2-arrow {
+				color: $app-neutral-color-dark;
+			}
+
+			&:hover {
+				background-color: $app-neutral-color-light;
+			}
+		}
 	}
 
 	.select2-dropdown-open.select2-drop-above .select2-choice,
