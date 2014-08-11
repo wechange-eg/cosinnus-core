@@ -46,7 +46,11 @@ class CosinnusFilterMixin(FilterMixin):
                 else:
                     choices_dict = dict([(str(key), val) for key, val in self.filter.filters[param].extra['choices']])
                     if value in choices_dict:
-                        chosen_value_str = choices_dict[value]
+                        format_func = getattr(self.filter.filters[param].field.widget, 'format_label_value', None)
+                        if callable(format_func):
+                            chosen_value_str = format_func(choices_dict[value])
+                        else:
+                            chosen_value_str = choices_dict[value]
                         active_filters.append((param, chosen_value_str, self.filter.filters[param].label, 'filter'))
             if value and param == self.filter.order_by_field:
                 ordering_choices_dict = dict(self.filter.ordering_field.choices)
