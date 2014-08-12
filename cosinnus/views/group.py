@@ -35,6 +35,8 @@ class GroupCreateView(AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
     form_class = CosinnusGroupForm
     model = CosinnusGroup
     template_name = 'cosinnus/group/group_form.html'
+    
+    message_success = _('Group "%(group)s" was created successfully.')
 
     @method_decorator(membership_required)
     @atomic
@@ -45,6 +47,7 @@ class GroupCreateView(AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
         ret = super(GroupCreateView, self).form_valid(form)
         CosinnusGroupMembership.objects.create(user=self.request.user,
             group=self.object, status=MEMBERSHIP_ADMIN)
+        messages.success(self.request, self.message_success % {'group':self.object.name})
         return ret
 
     def get_context_data(self, **kwargs):
@@ -159,7 +162,9 @@ class GroupUpdateView(AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
     form_class = CosinnusGroupForm
     model = CosinnusGroup
     template_name = 'cosinnus/group/group_form.html'
-
+    
+    message_success = _('The changes to the group were saved successfully.')
+    
     def get_object(self, queryset=None):
         return self.group
 
@@ -172,6 +177,10 @@ class GroupUpdateView(AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
         kwargs = super(GroupUpdateView, self).get_form_kwargs()
         kwargs['group'] = self.group
         return kwargs
+    
+    def form_valid(self, form):
+        messages.success(self.request, self.message_success)
+        return super(GroupUpdateView, self).form_valid(form)
 
     def get_success_url(self):
         return reverse('cosinnus:group-detail', kwargs={'group': self.group.slug})
