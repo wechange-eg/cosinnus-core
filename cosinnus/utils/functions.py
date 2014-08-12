@@ -57,3 +57,21 @@ def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
             slug = re.sub(finder, '-%d' % counter, slug)
             counter += 1
     setattr(item, slug_field, slug)
+    
+
+
+def select_related_chain(qs, *args):
+    """ Monkey-patch for django < 1.7  to be able to chain multiple calls
+    to qs.select_related() without losing the args of the first calls. """
+    def _flatten(dic, strin, chain):
+        for key, val in dic.items():
+            if not val:
+                chain.append(strin and strin + '__' + key or key)
+            else:
+                return _flatten(val, strin and strin + '__' + key or key, chain)
+        return chain
+    
+    prev_args = _flatten(qs.query.select_related, '', [])
+    sels = list(args) + prev_args
+    return qs.select_related(*sels)
+    
