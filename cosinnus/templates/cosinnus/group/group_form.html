@@ -146,6 +146,22 @@
                         </div>
 		                
                         {% include "cosinnus/media_tags_group.html" %} 
+                        
+                        <label>{% trans "Welcher Organisation gehört die Gruppe an?" %}</label>
+                        <div type="button" class="btn btn-default w100">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <a class="pull-left" href="#">
+                                        <i class="fa fa-globe"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        {{ form.forms.obj.organisation.errors }}
+						                {% captureas placeholder %}{% trans "Organisation auswählen" %}{% endcaptureas %}
+						                {% render_field form.forms.obj.organisation class+="form-control w100" placeholder=placeholder %}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
 		
 		                <label>{% trans "Wie öffentlich ist die Gruppe?" %}</label>
 		                <div type="button" class="btn btn-default w100">
