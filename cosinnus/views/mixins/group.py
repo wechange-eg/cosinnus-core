@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from cosinnus.core.decorators.views import (require_read_access,
     require_write_access, require_admin_access)
 from cosinnus.utils.permissions import get_tagged_object_filter_for_user
+from cosinnus.models.tagged import BaseTaggableObjectModel
 
 
 class RequireAdminMixin(object):
@@ -74,6 +75,7 @@ class RequireWriteMixin(object):
 class FilterGroupMixin(object):
     """Filters the underlying queryset so that only models referring to the
     given group are returned.
+    Also uses select_related on some of the BaseTaggableObjectModel's attributes
     """
 
     #: See `group_attr` of :py:func:`require_read_access` and similar for usage
@@ -86,8 +88,13 @@ class FilterGroupMixin(object):
 
         select_related = set(kwargs.pop('select_related', ()))
         select_related.add(self.get_group_field())
-
-        return super(FilterGroupMixin, self).get_queryset() \
+        
+        qs = super(FilterGroupMixin, self).get_queryset()
+        if BaseTaggableObjectModel in qs.model.__bases__:
+            select_related.add('creator__cosinnus_profile')
+            select_related.add('media_tag')
+        
+        return qs \
             .filter(**fkwargs) \
             .select_related(*select_related)
 
