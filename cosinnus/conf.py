@@ -27,6 +27,8 @@ class CosinnusConf(AppConf):
 
     #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = 60 * 60 * 24
+    #: How long an organisation should at most stay in cache until it will be removed
+    ORGANISATION_CACHE_TIMEOUT = 60 * 60 * 24
 
     #: A list of app_names (``'cosinnus_note'`` rather than ``note``) that will
     #: e.g. not be displayed in the cosinnus menu
