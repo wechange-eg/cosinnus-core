@@ -403,7 +403,7 @@ class CosinnusOrganisation(models.Model):
 @python_2_unicode_compatible
 class CosinnusOrganisationMembership(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-        related_name='cosinnus_memberships', on_delete=models.CASCADE)
+        related_name='cosinnus_organisation_memberships', on_delete=models.CASCADE)
     organisation = models.ForeignKey(CosinnusOrganisation, related_name='memberships',
         on_delete=models.CASCADE)
     status = models.PositiveSmallIntegerField(choices=ORGANISATION_MEMBERSHIP_STATUSES,
