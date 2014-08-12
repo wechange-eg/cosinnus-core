@@ -3,8 +3,9 @@ from __future__ import unicode_literals
 
 from django.conf.urls import patterns, url
 
+from cosinnus.conf import settings
 
 urlpatterns = patterns('cosinnus.views.select2',
-    url(r'group/(?P<group>[^/]+)/members/$', 'group_members', name='group-members'),
+    url(r'%s/(?P<group>[^/]+)/members/$' % settings.COSINNUS_GROUP_URL_PATH, 'group_members', name='group-members'),
     url(r'tags/$', 'tags_view', name='tags'),
 )

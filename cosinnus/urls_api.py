@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.conf.urls import url
 
+from cosinnus.conf import settings
 from cosinnus.utils.urls import api_patterns
 
 
@@ -10,23 +11,23 @@ urlpatterns = api_patterns(1, None, False, 'cosinnus.views',
     url(r'^login/$', 'user.login_api', name='login'),
     url(r'^logout/$', 'user.logout_api', name='logout'),
 
-    url(r'^group/list/$',
+    url(r'^%s/list/$' % settings.COSINNUS_GROUP_URL_PATH,
         'group.group_list_api',
         name='group-list'),
 
-    url(r'^group/list/(?P<group>[^/]+)/$',
+    url(r'^%s/list/(?P<group>[^/]+)/$' % settings.COSINNUS_GROUP_URL_PATH,
         'group.group_detail_api',
         name='group-detail'),
 
-    url(r'^group/add/$',
+    url(r'^%s/add/$' % settings.COSINNUS_GROUP_URL_PATH,
         'group.group_create_api',
         name='group-add'),
 
-    url(r'^group/delete/(?P<group>[^/]+)/$',
+    url(r'^%s/delete/(?P<group>[^/]+)/$' % settings.COSINNUS_GROUP_URL_PATH,
         'group.group_delete_api',
         name='group-delete'),
 
-    url(r'^group/update/(?P<group>[^/]+)/$',
+    url(r'^%s/update/(?P<group>[^/]+)/$' % settings.COSINNUS_GROUP_URL_PATH,
         'group.group_update_api',
         name='group-edit'),
                            

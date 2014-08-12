@@ -9,6 +9,7 @@ from django.utils import unittest
 from cosinnus.core.registries import (apps, attached_objects, base, urls,
     widgets)
 from cosinnus.utils.compat import OrderedDict
+from cosinnus.conf import settings
 
 
 class TestBaseRegistry(SimpleTestCase):
@@ -119,7 +120,7 @@ class TestURLRegistry(SimpleTestCase):
             url(r'^root/view/$', cls.view_func, name='root-view'),
         )
         cls.group_patterns = patterns('',
-            url(r'^group/view/$', cls.view_func, name='group-view'),
+            url(r'^%s/view/$' % settings.COSINNUS_GROUP_URL_PATH, cls.view_func, name='group-view'),
         )
 
     def setUp(self):
@@ -142,10 +143,10 @@ class TestURLRegistry(SimpleTestCase):
 
         self.assertEqual(group_url.app_name, 'some_app')
         self.assertEqual(group_url.namespace, 'some_name')
-        self.assertEqual(group_url.regex.pattern, '^group/(?P<group>[^/]+)/some_name/')
+        self.assertEqual(group_url.regex.pattern, '^%s/(?P<group>[^/]+)/some_name/' % settings.COSINNUS_GROUP_URL_PATH)
         self.assertEqual(group_url.url_patterns[0].callback, TestURLRegistry.view_func)
         self.assertEqual(group_url.url_patterns[0].name, 'group-view')
-        self.assertEqual(group_url.url_patterns[0].regex.pattern, '^group/view/$')
+        self.assertEqual(group_url.url_patterns[0].regex.pattern, '^%s/view/$' % settings.COSINNUS_GROUP_URL_PATH)
 
 
 class TestWidgetRegistry(SimpleTestCase):

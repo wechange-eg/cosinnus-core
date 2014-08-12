@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-12 17:35+0200\n"
+"POT-Creation-Date: 2014-08-12 18:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -68,7 +68,6 @@ msgstr "Widget hinzufügen"
 #: .\_old_templates\cosinnus\group_list.html.py:4
 #: .\_old_templates\cosinnus\group_list.html.py:7
 #: .\_old_templates\cosinnus\userprofile_form.html.py:4
-#: .\templates\cosinnus\group\group_list.html.py:4
 #: .\templates\cosinnus\group\group_list_map.html.py:4
 msgid "Groups"
 msgstr "Projekte"
@@ -627,6 +626,7 @@ msgid "OK"
 msgstr "OK"
 
 #: .\templates\cosinnus\navbar.html.py:27
+#: .\templates\cosinnus\group\group_list.html.py:4
 msgid "Projects"
 msgstr "Projekte"
 

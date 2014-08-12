@@ -11,6 +11,7 @@ from django.core.exceptions import ImproperlyConfigured
 
 from cosinnus.core.registries.base import BaseRegistry
 from cosinnus.core.registries.apps import app_registry
+from cosinnus.conf import settings
 
 
 class URLRegistry(BaseRegistry):
@@ -44,7 +45,7 @@ class URLRegistry(BaseRegistry):
                 )
             if group_patterns:
                 url_app_name = app_name
-                url_base = r'^group/(?P<group>[^/]+)/%s/' % url_app_name
+                url_base = r'^%s/(?P<group>[^/]+)/%s/' % (settings.COSINNUS_GROUP_URL_PATH, url_app_name)
                 self._urlpatterns += patterns('',
                     url(url_base, include(group_patterns, namespace=app_name, app_name=app)),
                 )

@@ -6,6 +6,8 @@ import re
 from django.conf.urls import patterns
 from django.core.urlresolvers import RegexURLResolver
 
+from cosinnus.conf import settings
+
 
 class APIRegexURLResolver(RegexURLResolver):
     """
@@ -28,7 +30,7 @@ class APIRegexURLResolver(RegexURLResolver):
         if lookup not in self._regex_dict:
             pattern = '^api/v%d/' % self.version
             if self.add_groups:
-                pattern += 'group/(?P<group>[^/]+)/'
+                pattern += '%s/(?P<group>[^/]+)/' % settings.COSINNUS_GROUP_URL_PATH
             if self.app is not None:
                 pattern += '%s/' % self.app
             regex_compiled = re.compile(pattern, re.UNICODE)

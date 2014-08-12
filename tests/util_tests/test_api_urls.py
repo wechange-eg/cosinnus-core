@@ -36,7 +36,7 @@ class NoAppTests(URLTestCaseBase):
 
     def test_reverse(self):
         self.assertEqual(reverse('view', kwargs={'group': 'XYZ'}),
-                         '/api/v1/group/XYZ/some/view/')
+                         '/api/v1/project/XYZ/some/view/')
 
 
 class AllTests(URLTestCaseBase):
@@ -44,4 +44,4 @@ class AllTests(URLTestCaseBase):
 
     def test_reverse(self):
         self.assertEqual(reverse('view', kwargs={'group': 'XYZ'}),
-                         '/api/v1/group/XYZ/myapp/some/view/')
+                         '/api/v1/project/XYZ/myapp/some/view/')
