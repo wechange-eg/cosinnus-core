@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-12 16:02+0200\n"
+"POT-Creation-Date: 2014-08-12 17:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -68,7 +68,6 @@ msgstr "Widget hinzufügen"
 #: .\_old_templates\cosinnus\group_list.html.py:4
 #: .\_old_templates\cosinnus\group_list.html.py:7
 #: .\_old_templates\cosinnus\userprofile_form.html.py:4
-#: .\templates\cosinnus\navbar.html.py:27
 #: .\templates\cosinnus\group\group_list.html.py:4
 #: .\templates\cosinnus\group\group_list_map.html.py:4
 msgid "Groups"
@@ -340,7 +339,8 @@ msgid ""
 msgstr ""
 "Hallo %(admin_name)s,\n"
 "\n"
-"De/dier Benutzer_in %(user_name)s möchte dem Projekt %(group_name)s beitreten."
+"De/dier Benutzer_in %(user_name)s möchte dem Projekt %(group_name)s "
+"beitreten."
 
 #: .\core\decorators\views.py:55 .\core\decorators\views.py:102
 #: .\core\decorators\views.py:149 .\core\decorators\views.py:207
@@ -412,7 +412,8 @@ msgstr "Andere Projekte"
 #: .\models\group.py:58
 msgid "Enter a valid group name. Forward slash is not allowed."
 msgstr ""
-"Bitt einen gültigen Projektnamen angeben. Ein Vorwärtsslash ist nicht erlaubt."
+"Bitt einen gültigen Projektnamen angeben. Ein Vorwärtsslash ist nicht "
+"erlaubt."
 
 #: .\models\group.py:296 .\models\organisation.py:294
 msgid "Slug"
@@ -458,7 +459,8 @@ msgstr "Projektmitarbeiter_in"
 #: .\models\organisation.py:56
 msgid "Enter a valid organisation name. Forward slash is not allowed."
 msgstr ""
-"Bitt einen gültigen Organisationsnamen angeben. Ein Vorwärtsslash ist nicht erlaubt."
+"Bitt einen gültigen Organisationsnamen angeben. Ein Vorwärtsslash ist nicht "
+"erlaubt."
 
 #: .\models\organisation.py:309
 msgid "Cosinnus organisation"
@@ -624,6 +626,10 @@ msgstr "Abbrechen"
 msgid "OK"
 msgstr "OK"
 
+#: .\templates\cosinnus\navbar.html.py:27
+msgid "Projects"
+msgstr "Projekte"
+
 #: .\templates\cosinnus\navbar.html.py:70
 msgid "Mein Dashboard"
 msgstr "Mein Dashboard"
@@ -757,7 +763,8 @@ msgstr "Als Admin"
 #, python-format
 msgid "Do you really want to demote administrator „%(name)s“ to member?"
 msgstr ""
-"Möchten sie Administrator „%(name)s“ wirklich zur/zum Mitarbeiter_in herabstufen?"
+"Möchten sie Administrator „%(name)s“ wirklich zur/zum Mitarbeiter_in "
+"herabstufen?"
 
 #: .\templates\cosinnus\group\group_detail.html.py:134
 msgid "Demote Admin"
@@ -766,7 +773,9 @@ msgstr "Projektadministrator herabstufen"
 #: .\templates\cosinnus\group\group_detail.html.py:138
 #, python-format
 msgid "Do you really want to promote member „%(name)s“ to administrator?"
-msgstr "Möchten sie Mitarbeiter_in „%(name)s“ wirklich zur/zum Administrator_in befördern?"
+msgstr ""
+"Möchten sie Mitarbeiter_in „%(name)s“ wirklich zur/zum Administrator_in "
+"befördern?"
 
 #: .\templates\cosinnus\group\group_detail.html.py:139
 msgid "Promote Member"
@@ -1201,7 +1210,8 @@ msgid ""
 "Do you want to remove the user “%(username)s”  from the group “%(group_name)"
 "s”?"
 msgstr ""
-"Möchten sie Benutzer_in “%(username)s” aus dem Projekt “%(group_name)s” entfernen?"
+"Möchten sie Benutzer_in “%(username)s” aus dem Projekt “%(group_name)s” "
+"entfernen?"
 
 #: .\views\group.py:450
 #, python-format
@@ -1227,8 +1237,8 @@ msgid ""
 "User \"%(user)s\" was registered successfully. You can now log in using this "
 "username."
 msgstr ""
-"Benutzer_in \"%(user)s\" wurde erfolgreich registriert. Sie können sich jetzt "
-"mit diesen Benutzer_innen-Namen einloggen."
+"Benutzer_in \"%(user)s\" wurde erfolgreich registriert. Sie können sich "
+"jetzt mit diesen Benutzer_innen-Namen einloggen."
 
 #
 #: .\views\widget.py:142
