@@ -13,16 +13,18 @@ from django.utils.encoding import force_text
 
 
 def get_avatar_filename(instance, filename):
-    _, ext = path.splitext(filename)
-    filedir = path.join('cosinnus', 'avatars', 'users')
-    my_uuid = force_text(uuid4())
-    name = '%s%s%s' % (settings.SECRET_KEY, my_uuid, filename)
-    newfilename = hashlib.sha1(name.encode('utf-8')).hexdigest() + ext
-    return path.join(filedir, newfilename)
+    return _get_avatar_filename(instance, filename, 'user')
 
 def get_group_avatar_filename(instance, filename):
+    return _get_avatar_filename(instance, filename, 'group')
+
+def get_organisation_avatar_filename(instance, filename):
+    return _get_avatar_filename(instance, filename, 'organisation')
+
+
+def _get_avatar_filename(instance, filename, folder_type):
     _, ext = path.splitext(filename)
-    filedir = path.join('cosinnus', 'avatars', 'groups')
+    filedir = path.join('cosinnus', 'avatars', folder_type)
     my_uuid = force_text(uuid4())
     name = '%s%s%s' % (settings.SECRET_KEY, my_uuid , filename)
     newfilename = hashlib.sha1(name.encode('utf-8')).hexdigest() + ext
