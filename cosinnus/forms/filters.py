@@ -105,6 +105,9 @@ class BaseChoiceWidget(forms.Widget):
 class DropdownChoiceWidget(BaseChoiceWidget):
     template_name = 'cosinnus/widgets/filter_dropdown_widget.html'
     skip_empty_options = True
+    
+class DropdownChoiceWidgetWithEmpty(BaseChoiceWidget):
+    template_name = 'cosinnus/widgets/filter_dropdown_widget.html'
 
 
 class SelectUserWidget(BaseChoiceWidget):
