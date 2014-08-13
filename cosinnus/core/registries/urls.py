@@ -39,15 +39,15 @@ class URLRegistry(BaseRegistry):
             if app in self._apps:
                 return
             self._apps.add(app)
-            if root_patterns:
-                self._urlpatterns += patterns('',
-                    url(r'', include(root_patterns, namespace=app_name, app_name=app))
-                )
             if group_patterns:
                 url_app_name = app_name
                 url_base = r'^%s/(?P<group>[^/]+)/%s/' % (settings.COSINNUS_GROUP_URL_PATH, url_app_name)
                 self._urlpatterns += patterns('',
                     url(url_base, include(group_patterns, namespace=app_name, app_name=app)),
+                )
+            if root_patterns:
+                self._urlpatterns += patterns('',
+                    url(r'', include(root_patterns))
                 )
             if api_patterns:
                 self._api_urlpatterns += patterns('',
