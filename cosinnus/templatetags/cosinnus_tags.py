@@ -204,6 +204,32 @@ def cosinnus_render_attached_objects(context, source, filter=None):
     return ''.join(rendered_output)
 
 
+@register.simple_tag(takes_context=True)
+def cosinnus_render_single_object(context, object):
+    """
+    Render a single cosinnus BaseTaggableObject using the
+     configured renderer for that model type
+    (in each cosinnus app's `cosinnus_app.ATTACHABLE_OBJECT_RENDERERS`).
+
+    :param object: the source object to render
+    """
+    model_name = object.__class__.__module__.split('.')[0] + '.' + object.__class__.__name__
+    
+    # find manager object for attached object type
+    Renderer = attached_object_registry.get(model_name)  # Renderer is a class
+    
+    rendered_output = ''
+    if Renderer:
+        # pass the list to that manager and expect a rendered html string
+        rendered_output = Renderer.render_single(context, object)
+    elif settings.DEBUG:
+        rendered_output = _('<i>Renderer for %(model_name)s not found!</i>') % {
+            'model_name': model_name
+        }
+
+    return rendered_output
+
+
 @register.inclusion_tag('cosinnus/autocomplete.html')
 def cosinnus_autocomplete(field, objects):
     return {

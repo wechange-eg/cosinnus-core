@@ -13,12 +13,27 @@ class BaseRenderer(object):
             raise ImproperlyConfigured('Missing template definition for '
                 'renderer %s' % cls.__name__)
         return cls.template
-
+    
     @classmethod
-    def render(cls, context, **kwargs):
-        context.update(kwargs)
-        return render_to_string(cls.get_template(), context)
+    def get_template_single(cls):
+        if not hasattr(cls, 'template_single'):
+            from django.core.exceptions import ImproperlyConfigured
+            raise ImproperlyConfigured('Missing template_single definition for '
+                'renderer %s' % cls.__name__)
+        return cls.template_single
 
+    
+    @classmethod
+    def render(cls, context, objects=[], **kwargs):
+        context.update(kwargs)
+        context.update({'objects': objects})
+        return render_to_string(cls.get_template(), context)
+    
+    @classmethod
+    def render_single(cls, context, object=None, **kwargs):
+        context.update(kwargs)
+        context.update({'object': object})
+        return render_to_string(cls.get_template_single(), context)
 
 """
 An example renderer for a specific app could be::
