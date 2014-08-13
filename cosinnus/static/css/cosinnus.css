@@ -1516,6 +1516,10 @@ ul.errorlist li:before {
   white-space: nowrap;
 }
 
+.autowidth {
+  width: auto !important;
+}
+
 body div .select2-container .select2-choice,
 body div .select2-container-multi .select2-choices {
   border-width: 0;
