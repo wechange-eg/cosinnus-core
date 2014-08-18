@@ -74,7 +74,7 @@
 	                </li>
                 {% else %}
                     <li>
-						<a href="{% url 'login' %}">
+						<a href="{% url 'login' %}{% if request.path != "/" %}?next={{ request.path }}{% endif %}">
 						    Login
 						</a>
                     </li>
