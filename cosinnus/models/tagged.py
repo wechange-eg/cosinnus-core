@@ -180,6 +180,13 @@ class BaseTaggableObjectModel(models.Model):
             if attached_file.model_name == "cosinnus_file.FileEntry" and attached_file.target_object.is_image:
                 return attached_file.target_object
         return None
+    
+    @property
+    def sort_key(self):
+        """ The main property on which this object model is sorted """
+        if not self.created:
+            return now()
+        return self.created
 
 class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
     """
