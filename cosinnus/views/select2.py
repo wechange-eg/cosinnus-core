@@ -13,7 +13,7 @@ from cosinnus.models.group import CosinnusGroup
 from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus.utils.choices import get_user_choices
 from cosinnus.utils.permissions import check_ug_membership
-from cosinnus.views.mixins.select2 import RequireGroupMember
+from cosinnus.views.mixins.select2 import RequireGroupMember, RequireLoggedIn
 
 
 class GroupMembersView(RequireGroupMember, Select2View):
@@ -40,6 +40,31 @@ class GroupMembersView(RequireGroupMember, Select2View):
         return (NO_ERR_RESP, has_more, results)
 
 group_members = GroupMembersView.as_view()
+
+
+
+class AllMembersView(RequireLoggedIn, Select2View):
+    
+    def get_results(self, request, term, page, context):
+        term = term.lower()
+        start = (page - 1) * 10
+        end = page * 10
+
+        User = get_user_model()
+
+        q = Q(first_name__icontains=term) | Q(last_name__icontains=term) | Q(username__icontains=term)
+
+        count = User.objects.filter(q).count()
+        if count < start:
+            raise Http404
+        has_more = count > end
+
+        users = User.objects.filter(q).all()[start:end]
+        results = get_user_choices(users)
+
+        return (NO_ERR_RESP, has_more, results)
+
+all_members = AllMembersView.as_view()
 
 
 class TagsView(Select2View):
