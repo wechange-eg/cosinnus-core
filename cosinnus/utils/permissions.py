@@ -91,7 +91,7 @@ def check_object_write_access(obj, user):
         return is_admin or user.is_superuser or user.is_staff
     elif issubclass(obj.__class__, BaseTaggableObjectModel):
         # editing/deleting an object, check if we are owner or staff member or group admin or site admin
-        is_admin = check_ug_admin(user, obj.group)
+        is_admin = check_ug_admin(user, obj.group) if obj.group else False
         if obj.media_tag:
             is_private = obj.media_tag.visibility == BaseTagObject.VISIBILITY_USER
         else:
