@@ -695,15 +695,28 @@
 							: "0" + data_date.getDate());
 					$(this).attr('data-date',data_date);
 				}
-
+				
+				/** No moment custom time format for now **/
+				/*
 				if (with_time) {
-					moment.lang(moment.lang(),$.cosinnus.momentFull[moment.lang()]);
+					moment.lang(moment.lang());//,$.cosinnus.momentFull[moment.lang()]);
 				} else {
-					moment.lang(moment.lang(),$.cosinnus.momentShort[moment.lang()]);
+					moment.lang(moment.lang());//,$.cosinnus.momentShort[moment.lang()]);
+				} 
+				*/
+				
+				var mom = moment(data_date);
+				var diff_days = mom.diff(moment(), 'days');
+				
+				if ((diff_days > -1 && diff_days < 1) || diff_days < -4 ) {
+				    // render the date difference for today, tomorrow, and longer than 4 days ago
+				    $(this).text(mom.fromNow());
+				} else {
+				    // render "letzten Montag um 12:00 Uhr" for the last 3 days
+				    $(this).text(mom.calendar());
 				}
-				var cal = moment(data_date);
-				cal = cal.calendar();
-				$(this).text(cal);
+				// add the absolute date as tooltip
+				$(this).attr('title', mom.format('LLLL'));
 			});
 
 			$('.moment-data-date').each(function() {
