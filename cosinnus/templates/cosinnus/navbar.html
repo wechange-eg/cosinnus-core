@@ -63,8 +63,8 @@
                     <li>
                         <a href="{% url 'cosinnus:my_stream' %}" title="{% trans 'My Stream' %}">
                             <i class="fa fa-globe"></i>
-                            {% if 1 == 2 %}
-                               <span id="messageCounter">{{ COSINNUS_UNREAD_MESSAGE_COUNT }}</span>
+                            {% if COSINNUS_STREAM_UNSEEN_COUNT and COSINNUS_STREAM_UNSEEN_COUNT > 0 %}
+                               <span id="messageCounter">{{ COSINNUS_STREAM_UNSEEN_COUNT }}</span>
                             {% endif %}
                         </a>
                     </li>

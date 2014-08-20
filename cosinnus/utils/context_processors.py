@@ -56,9 +56,12 @@ def cosinnus(request):
     if user.is_authenticated():
         user_json = json.dumps(UserSimpleSerializer(user).data)
         unread_count = Message.objects.inbox_unread_count(user)
+        from cosinnus_stream.models import Stream
+        stream_unseen_count = Stream.objects.my_stream_unread_count(user)
     else:
         user_json = json.dumps(False)
         unread_count = 0
+        stream_unseen_count = 0
 
     current_app_name = ''
     try:
@@ -78,4 +81,5 @@ def cosinnus(request):
         'COSINNUS_DJANGO_TIME_FORMAT': get_format('COSINNUS_DJANGO_TIME_FORMAT'),
         'COSINNUS_USER': user_json,
         'COSINNUS_UNREAD_MESSAGE_COUNT': unread_count,
+        'COSINNUS_STREAM_UNSEEN_COUNT': stream_unseen_count,
     }
