@@ -181,6 +181,16 @@ class BaseTaggableObjectModel(models.Model):
                 return attached_file.target_object
         return None
     
+    @cached_property
+    def attached_images(self):
+        """ Return the all image files attached to the event"""
+        images = []
+        for attached_file in self.attached_objects.all():
+            if attached_file.model_name == "cosinnus_file.FileEntry" and attached_file.target_object.is_image:
+                images.append(attached_file.target_object)
+        return images
+    
+    
     @property
     def sort_key(self):
         """ The main property on which this object model is sorted """
