@@ -12,8 +12,20 @@ from cosinnus.conf import settings
 @python_2_unicode_compatible
 class WidgetConfig(models.Model):
 
+    TYPE_DASHBOARD = 1
+    TYPE_MICROSITE = 2
+
+    TYPE_CHOICES = (
+        (TYPE_DASHBOARD, _('Dashboard')),
+        (TYPE_MICROSITE, _('Microsite')),
+    )
+    
     app_name = models.CharField(_('Application name'), max_length=20)
     widget_name = models.CharField(_('Widget name'), max_length=20)
+    type = models.PositiveIntegerField(_('Widget Type'),
+        choices=TYPE_CHOICES, default=TYPE_DASHBOARD,
+        editable=False, null=False, blank=False
+    )
     group = models.ForeignKey('cosinnus.CosinnusGroup', null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE)
 
