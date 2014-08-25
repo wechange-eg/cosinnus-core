@@ -44,6 +44,43 @@ body {
 		padding: 0 0.5em;
 		font-size: 0.8em;
 	}
+
+	.navbar-collapse {
+		@media(max-width:767px){
+			background-color: $app-neutral-color-white;
+				ul {
+					margin-top: 0;
+					margin-bottom: 0;
+					padding-top: 0;
+					padding-bottom: 0;
+
+					li {
+						a:hover {
+							background-color: $app-neutral-color-light !important;
+						}
+						border-bottom: 1px solid $app-neutral-color;
+						&.divider {
+							margin-top: 0;
+						}
+						&#searchbar {
+							width: 100%;
+							padding: 3px 40px 3px 10px;
+							input {
+								margin-top: 0;
+								width: 100%;
+								color: $app-neutral-color-dark;
+								box-shadow: none;
+							}
+
+							&:hover {
+								background-color: $app-neutral-color-light !important;
+							}
+						}
+					}
+				}
+
+		}
+	}
 }
 
 

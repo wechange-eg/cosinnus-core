@@ -11,6 +11,10 @@
 
 	&.w100 {
 		margin-left: 0;
+
+		.media-body {
+			text-align: left;
+		}
 	}
 
 }

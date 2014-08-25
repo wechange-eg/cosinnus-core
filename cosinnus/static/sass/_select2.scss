@@ -67,6 +67,25 @@ body div {
 		color: $app-neutral-color-dark;
 	}
 
+	&.app-main .select2-container .select2-choice:hover {
+		background-color: $app-main-color-light;
+	}
+	&.app-calendar .select2-container .select2-choice:hover {
+		background-color: $app-calendar-color-light;
+	}
+	&.app-files .select2-container .select2-choice:hover {
+		background-color: $app-files-color-light;
+	}
+	&.app-documents .select2-container .select2-choice:hover {
+		background-color: $app-documents-color-light;
+	}
+	&.app-todos .select2-container .select2-choice:hover {
+		background-color: $app-todos-color-light;
+	}
+	&.app-etherpad .select2-container .select2-choice:hover {
+		background-color: $app-etherpad-color-light;
+	}
+
 
 	.select2-container-multi.select2-container-active .select2-choices {
 		-webkit-box-shadow: none;

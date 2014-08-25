@@ -3,7 +3,7 @@
 
 // Set width of element to full width
 .w100 {
-  width: 100%;
+  width: 100% !important;
 	margin:0;
 	float: none;
 }
@@ -250,6 +250,12 @@ ul.errorlist {
 
 .font11px {
 	font-size: 11px !important;
+}
+.font12px {
+	font-size: 12px !important;
+}
+.font14px {
+	font-size: 14px !important;
 }
 .nounderline {
 	text-decoration: none !important;

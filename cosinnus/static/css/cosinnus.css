@@ -105,6 +105,39 @@ body {
   padding: 0 0.5em;
   font-size: 0.8em;
 }
+@media (max-width: 767px) {
+  .navbar-fixed-top .navbar-collapse {
+    background-color: white;
+  }
+  .navbar-fixed-top .navbar-collapse ul {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .navbar-fixed-top .navbar-collapse ul li {
+    border-bottom: 1px solid #949494;
+  }
+  .navbar-fixed-top .navbar-collapse ul li a:hover {
+    background-color: #dbdbdb !important;
+  }
+  .navbar-fixed-top .navbar-collapse ul li.divider {
+    margin-top: 0;
+  }
+  .navbar-fixed-top .navbar-collapse ul li#searchbar {
+    width: 100%;
+    padding: 3px 40px 3px 10px;
+  }
+  .navbar-fixed-top .navbar-collapse ul li#searchbar input {
+    margin-top: 0;
+    width: 100%;
+    color: #333333;
+    box-shadow: none;
+  }
+  .navbar-fixed-top .navbar-collapse ul li#searchbar:hover {
+    background-color: #dbdbdb !important;
+  }
+}
 
 .row {
   position: relative;
@@ -362,6 +395,9 @@ label {
 }
 .btn.w100 {
   margin-left: 0;
+}
+.btn.w100 .media-body {
+  text-align: left;
 }
 
 .bottom-align .btn {
@@ -1196,7 +1232,7 @@ a.pull-left {
 
 /* Classes that can be found in many pages and are not part of Twitter Bootstrap */
 .w100 {
-  width: 100%;
+  width: 100% !important;
   margin: 0;
   float: none;
 }
@@ -1468,6 +1504,14 @@ ul.errorlist li:before {
   font-size: 11px !important;
 }
 
+.font12px {
+  font-size: 12px !important;
+}
+
+.font14px {
+  font-size: 14px !important;
+}
+
 .nounderline {
   text-decoration: none !important;
 }
@@ -1573,6 +1617,24 @@ body div .select2-container-multi .select2-choices .select2-search-choice {
   background-image: none;
   background-color: #dbdbdb;
   color: #333333;
+}
+body div.app-main .select2-container .select2-choice:hover {
+  background-color: #cbe7ed;
+}
+body div.app-calendar .select2-container .select2-choice:hover {
+  background-color: #e1edd2;
+}
+body div.app-files .select2-container .select2-choice:hover {
+  background-color: #92ffea;
+}
+body div.app-documents .select2-container .select2-choice:hover {
+  background-color: #d5f3ff;
+}
+body div.app-todos .select2-container .select2-choice:hover {
+  background-color: #faebcd;
+}
+body div.app-etherpad .select2-container .select2-choice:hover {
+  background-color: #ede2e1;
 }
 body div .select2-container-multi.select2-container-active .select2-choices {
   -webkit-box-shadow: none;
