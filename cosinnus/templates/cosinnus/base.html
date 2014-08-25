@@ -59,16 +59,10 @@
             
                 {% block main_page %}
                 <!-- start with left navigation -->
-                <div class="col-lg-3 col-md-3"><!-- left column -->
-                    {% if group %}
-                        {% cosinnus_menu "cosinnus/appsmenu.html" %}
-				    {% endif %}
-				    {% block leftnav %}{% endblock leftnav %}
-                </div><!-- left column -->
+                
                 
                 <!-- now the content -->
-                <div class="col-lg-9 col-md-9"><!-- right column -->
-                    
+                <div class="col-lg-9 col-md-9 pull-right"><!-- right column -->
                     {% block override_breadcrumb %}
 	                    <ol class="breadcrumb">
 		                    {% block breadcrumb %}
@@ -76,7 +70,16 @@
 		                    {% endblock breadcrumb %}
 	                    </ol>
 	                {% endblock override_breadcrumb %}
-                    
+                </div>
+                
+                <div class="col-lg-3 col-md-3"><!-- left column -->
+                    {% if group %}
+                        {% cosinnus_menu "cosinnus/appsmenu.html" %}
+				    {% endif %}
+				    {% block leftnav %}{% endblock leftnav %}
+                </div><!-- left column -->
+                
+                <div class="col-lg-9 col-md-9"><!-- right column -->
                     <div class="row">
                         <div class="col-xs-12">
                             {% include 'cosinnus/messages.html' %}
