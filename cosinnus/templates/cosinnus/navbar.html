@@ -53,19 +53,21 @@
                 </li>
                 {% if request.user.is_authenticated %}
 	                <li>
-                        <a href="{% url 'postman_inbox' %}" title="{% trans 'Messages' %}">
+                        <a href="{% url 'postman_inbox' %}" title="{% trans "Messages" %}">
                             <i class="fa fa-envelope"></i>
                             {% if COSINNUS_UNREAD_MESSAGE_COUNT and COSINNUS_UNREAD_MESSAGE_COUNT > 0 %}
                                <span id="messageCounter">{{ COSINNUS_UNREAD_MESSAGE_COUNT }}</span>
                             {% endif %}
+                            <span class="visible-xs-inline">&nbsp;{% trans "Messages" %}</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{% url 'cosinnus:my_stream' %}" title="{% trans 'My Stream' %}">
+                        <a href="{% url 'cosinnus:my_stream' %}" title="{% trans "My Stream" %}">
                             <i class="fa fa-globe"></i>
                             {% if COSINNUS_STREAM_UNSEEN_COUNT and COSINNUS_STREAM_UNSEEN_COUNT > 0 %}
                                <span id="messageCounter">{{ COSINNUS_STREAM_UNSEEN_COUNT }}</span>
                             {% endif %}
+                            <span class="visible-xs-inline">&nbsp;{% trans "My Stream" %}</span>
                         </a>
                     </li>
 	                <li class="dropdown">
