@@ -107,6 +107,13 @@ $('.js-todo-link').on('click', function(e) {
         },
         add_empty: function(holder) {
             var that = this;
+            $.ajax(Cosinnus.base_url + "widgets/new/").done(function(data, textStatus, jqXHR) {
+                var new_holder = $('[data-type=widget-spare]', that.holder).clone().attr('data-type', 'widget-new');
+                $('[data-target=widget-content]', new_holder).append(data);
+                $('[data-target=widget-title]', new_holder).html("Configure Widget");
+                new_holder.hide().insertBefore(holder).fadeIn("slow");
+            });
+            return;
             $.ajax(Cosinnus.base_url + "widgets/list/").done(function(data, textStatus, jqXHR) {
                 var new_holder = $('[data-type=widget-spare]', that.holder).clone().attr('data-type', 'widget-new');
                 var list = $('<ul></ul>');

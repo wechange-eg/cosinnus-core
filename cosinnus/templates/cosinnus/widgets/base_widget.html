@@ -33,8 +33,7 @@
 	    
 	    <div data-target="widget-content"></div>
 	    
-	    {% if not is_spare %}
-	    <button type="button" class="btn btn-emphasized dashboard-appwidget-morebutton" data-target="widget-reload-button">
+	    <button type="button" class="btn btn-emphasized dashboard-appwidget-morebutton" data-target="{% if is_spare %}widget-save-button{% endif %}widget-reload-button">
 	        <ul class="media-list">
 	            <li class="media">
 	                <a class="pull-right btn-extra-emphasized" href="#">
@@ -46,7 +45,6 @@
 	            </li>
 	        </ul>
 	    </button><!-- btn -->
-	    {% endif %}
     {% endblock base_widget_content %}
 
 </div><!-- app-widget -->

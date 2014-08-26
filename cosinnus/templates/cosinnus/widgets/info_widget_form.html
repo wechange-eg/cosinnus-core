@@ -1,0 +1,16 @@
+{% load i18n cosinnus_tags widget_tweaks %}
+
+<label>{% trans "Text" %}</label>
+<div type="button" class="btn btn-default w100 regular-space">
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#">
+                <i class="fa fa-chain"></i>
+            </a>
+            <div class="media-body">
+                {% captureas placeholder %}{% trans "Text" %}{% endcaptureas %}
+                {% render_field form.text class+="form-control" placeholder=placeholder %}
+            </div>
+        </li>
+    </ul>
+</div>

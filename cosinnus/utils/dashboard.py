@@ -17,6 +17,7 @@ from django.contrib.auth import get_user_model
 
 
 class DashboardWidgetForm(forms.Form):
+    template_name = None
 
     def clean(self):
         cleaned_data = super(DashboardWidgetForm, self).clean()
@@ -203,3 +204,51 @@ class GroupMembersWidget(DashboardWidget):
     @property
     def title_url(self):
         return '#'
+    
+    
+    
+    
+
+class InfoWidgetForm(DashboardWidgetForm):
+    template_name = 'cosinnus/widgets/info_widget_form.html'
+    
+    text = forms.CharField(label="Text", help_text="Enter a description", required=False)
+
+
+class InfoWidget(DashboardWidget):
+    """ An extremeley simple info widget displaying text.
+        The text is saved in the widget config
+    """
+
+    app_name = 'cosinnus'
+    model = None
+    title = _('About Us')
+    form_class = InfoWidgetForm
+    user_model_attr = None
+    widget_name = 'info_widget'
+    allow_on_user = True
+
+    def get_data(self, offset=0):
+        """ Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.
+            if has_more == False, the receiving widget will assume no further data can be loaded.
+        """
+        """
+        group = self.config.group
+        if group is None:
+            return ''
+        data = {
+            'group': group,
+        }
+        """
+        context = {
+            'text': self.config['text'],
+        }
+        
+        return (render_to_string('cosinnus/widgets/info_widget.html', context), 0, False)
+    
+    @property
+    def title_url(self):
+        return ''
+    
+    def get_queryset(self):
+        return None

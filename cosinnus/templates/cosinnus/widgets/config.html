@@ -1,0 +1,12 @@
+{% load i18n cosinnus_tags %}
+
+<h1>ok, here</h1>
+
+{% for widget in widget_data %}
+	<form action="" method="POST" class="form-horizontal" role="form">{% csrf_token %}
+        <p>{{ widget.widget_name }}:</p>
+        {{ widget.form_content|safe }}
+    </form>
+    
+    <hr/>
+{% endfor %}
