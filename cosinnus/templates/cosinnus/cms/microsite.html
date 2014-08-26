@@ -69,16 +69,14 @@
                     <p class="transparent">Erstens: wir haben nicht offensiv gespielt. Es gibt keine deutsche Mannschaft spielt offensiv und die Name offensiv wie Bayern. Letzte Spiel hatten wir in Platz drei Spitzen: Elber, Jancka und dann Zickler.</p>
                     <p class="transparent">Wir müssen nicht vergessen Zickler. Zickler ist eine Spitzen mehr, Mehmet eh mehr Basler. Ist klar diese Wörter, ist möglich verstehen, was ich hab gesagt? Danke.</p>
                 </div><!-- content-box -->
-                <button type="button" class="btn btn-emphasized large-space">
+                <button type="button" class="btn btn-emphasized large-space" href="#micropages">
                     <ul class="media-list">
                         <li class="media">
-                            <a class="pull-right btn-extra-emphasized" href="#">
+                            <a class="pull-right btn-extra-emphasized" >
                                 <i class="fa fa-chevron-right "></i>
                             </a>
                             <div class="media-body">
-                                <a href="#">
-                                    Mehr
-                                </a>
+                                Mehr
                             </div>
                         </li>
                     </ul>
@@ -263,18 +261,7 @@
                     </ul>
                 </div><!-- btn -->
                 <div class="content-box">
-                    <legend>Herkunft</legend>
-                    <p class="transparent">
-                        <i class="fa fa-map-marker"></i> Berlin, Deutschland
-                    </p>
-
-                    <legend>Themen</legend>
-                    <p class="transparent">
-                        <i class="fa fa-bolt"></i> <a href="http://google.de">Forschung</a>
-                    </p>
-                    <p class="transparent">
-                        <i class="fa fa-lightbulb-o"></i> <a href="http://google.de">Bildung</a>, <a href="http://google.de">Gesundheit</a>
-                    </p>
+                    {% include 'cosinnus/media_tags_group_profile_readonly.html' with object=group %}
                 </div><!-- content-box -->
             </div><!-- widget -->
 
@@ -314,10 +301,10 @@
             </div><!-- widget -->
         </div><!-- column -->
 
-
     </div><!-- row -->
-
+    
     {% with micropages=group.micropages.all %}
+       <a name="micropages"></a>
        <div class="row large-space">
            <div class="col-md-3">
    
