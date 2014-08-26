@@ -106,6 +106,7 @@ def widget_add_user(request, app_name, widget_name):
 @ensure_csrf_cookie
 @require_admin_access_decorator()
 def widget_add_group(request, group, app_name, widget_name):
+    print ">>> request arrived"
     widget_class = widget_registry.get(app_name, widget_name)
     if widget_class is None:
         return render_to_response('cosinnus/widgets/not_found.html')

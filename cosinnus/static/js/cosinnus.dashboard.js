@@ -83,13 +83,16 @@ $('.js-todo-link').on('click', function(e) {
             if (Cosinnus.dashboard.group === false) {
                 url = url + "user/";
             } else {
-                url = url + "group/" + Cosinnus.dashboard.group + "/";
+                url = url + cosinnus_group_url_path + "/" + Cosinnus.dashboard.group + "/";
             }
             url = url + app + "/" + widget + "/";
             if (data === undefined) {
                 data = {};
             }
+            alert('now submitting to '+ url + ', data:' + data);
             $.post(url, data, function(data, textStatus, jqXHR) {
+                alert('got back data but exiting ' + JSON.stringify(data));
+                return;
                 if (jqXHR.getResponseHeader('Content-Type') === "application/json") {
                     var id = data['id'];
                     holder.attr('data-widget-id', id).attr('data-type', 'widget');
@@ -112,6 +115,19 @@ $('.js-todo-link').on('click', function(e) {
                 $('[data-target=widget-content]', new_holder).append(data);
                 $('[data-target=widget-title]', new_holder).html("Configure Widget");
                 new_holder.hide().insertBefore(holder).fadeIn("slow");
+                var save_button = $('[data-target=widget-save-button]', new_holder);
+                console.log(save_button);
+                save_button.unbind('click').bind("click", {
+                    holder: new_holder
+                }, function(event) {
+                    console.log('cliicking the saveer');
+                    event.preventDefault();
+                    Cosinnus.dashboard.add(event.data.holder, {
+                        app: save_button.attr('data-widget-app'),
+                        widget: save_button.attr('data-widget-widget'),
+                        data: $('#'+save_button.attr('data-widget-target-form'), event.data.holder).serialize()
+                    });
+                });
             });
             return;
             $.ajax(Cosinnus.base_url + "widgets/list/").done(function(data, textStatus, jqXHR) {

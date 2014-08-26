@@ -212,7 +212,7 @@ class GroupMembersWidget(DashboardWidget):
 class InfoWidgetForm(DashboardWidgetForm):
     template_name = 'cosinnus/widgets/info_widget_form.html'
     
-    text = forms.CharField(label="Text", help_text="Enter a description", required=False)
+    text = forms.CharField(label="Text", widget=forms.Textarea, help_text="Enter a description", required=False)
 
 
 class InfoWidget(DashboardWidget):
