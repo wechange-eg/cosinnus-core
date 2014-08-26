@@ -1,6 +1,6 @@
 {% load i18n cosinnus_tags %}
 
-<div class="{{widget_class}} dashboard-appwidget" {% if widget_conf_id %}data-widget-id="{{ widget_conf_id }}"{% endif %} data-type="widget" >
+<div class="{{widget_class}} dashboard-appwidget" {% if widget_conf_id %}data-widget-id="{{ widget_conf_id }}"{% endif %} {% if not is_spare %}data-type="widget{% endif %}" >
     
     {% block base_widget_content %}
 	    {% comment %} 
@@ -32,7 +32,8 @@
 	    </button><!-- btn -->
 	    
 	    <div data-target="widget-content"></div>
-	
+	    
+	    {% if not is_spare %}
 	    <button type="button" class="btn btn-emphasized dashboard-appwidget-morebutton" data-target="widget-reload-button">
 	        <ul class="media-list">
 	            <li class="media">
@@ -45,6 +46,7 @@
 	            </li>
 	        </ul>
 	    </button><!-- btn -->
+	    {% endif %}
     {% endblock base_widget_content %}
 
 </div><!-- app-widget -->
