@@ -18,7 +18,7 @@ from django.http.response import HttpResponseNotFound
 from cosinnus.models.cms import CosinnusMicropage
 
 
-class GroupMicrosite(RequireReadMixin, TemplateView):
+class GroupMicrosite(TemplateView):
     """ TODO: Refactor-merge and unify this view to a mixin with DashboardMixin for groups,
         after this view has been generalized to allow Organisations instead of Groups.
     """
