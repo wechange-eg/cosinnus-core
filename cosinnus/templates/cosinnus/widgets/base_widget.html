@@ -1,6 +1,6 @@
 {% load i18n cosinnus_tags %}
 
-<div class="{{widget_class}} dashboard-appwidget" data-widget-id="{{ widget_conf_id }}" data-type="widget" >
+<div class="{{widget_class}} dashboard-appwidget" {% if widget_conf_id %}data-widget-id="{{ widget_conf_id }}"{% endif %} data-type="widget" >
     
     {% block base_widget_content %}
 	    {% comment %} 

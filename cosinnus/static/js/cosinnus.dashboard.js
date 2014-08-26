@@ -189,52 +189,54 @@ $('.js-todo-link').on('click', function(e) {
             var id = holder.attr('data-widget-id');
             offset = parseInt(offset || 0);
             
-            $.ajax(Cosinnus.base_url + "widget/" + id + "/" + offset + "/").done(function(data, textStatus, jqXHR) {
-                var rows_returned = parseInt(jqXHR.getResponseHeader('X-Cosinnus-Widget-Num-Rows-Returned') || 0);
-                var has_more_data = 'true' === (jqXHR.getResponseHeader('X-Cosinnus-Widget-Has-More-Data') || 'false');
-                
-                // display the fetched data if we have actually gotten something back, or if
-                // this is the initial query (we expect a rendered "no content" message)
-                if (rows_returned > 0 || offset == 0) {
-                    $('[data-target=widget-content]', holder).append(data);
-                }
-                if (has_more_data > 0) {
-                    // attach the function to load the next set of data from the backend to the "More" button
-                    $('[data-target=widget-reload-button]', holder).unbind('click');
-                    $('[data-target=widget-reload-button]', holder).click(function() {
-                        that.load(holder, offset + rows_returned);
-                    });
-                } else {
-                    // hide the "More button"
-                    $('[data-target=widget-reload-button]', holder).hide();
-                }
+            if (typeof id !== "undefined") {
+                $.ajax(Cosinnus.base_url + "widget/" + id + "/" + offset + "/").done(function(data, textStatus, jqXHR) {
+                    var rows_returned = parseInt(jqXHR.getResponseHeader('X-Cosinnus-Widget-Num-Rows-Returned') || 0);
+                    var has_more_data = 'true' === (jqXHR.getResponseHeader('X-Cosinnus-Widget-Has-More-Data') || 'false');
                     
-                $('[data-target=widget-title]', holder).html(jqXHR.getResponseHeader('X-Cosinnus-Widget-Title'));
-                var title_url = jqXHR.getResponseHeader('X-Cosinnus-Widget-Title-URL');
-                if (title_url !== null) {
-                    console.log($('[data-target=widget-title-url]', holder))
-                    $('[data-target=widget-title-url]', holder).attr("href", title_url);
-                } else {
-                    $('[data-target=widget-title-url]', holder).children().unwrap();
-                }
-                holder.attr("data-app-name", jqXHR.getResponseHeader('X-Cosinnus-Widget-App-Name'));
-                holder.attr("data-widget-name", jqXHR.getResponseHeader('X-Cosinnus-Widget-Widget-Name'));
-                
-                $.cosinnus.renderMomentDataDate();
-                $.cosinnus.autogrow();
-
-            }).fail(function(jqXHR, textStatus, errorThrown) {
-                var error = $('<div class="alert alert-danger">An error occurred while loading the widget. </div>');
-                var reload = $('<a href="#" class="alert-link">Reload</a>').bind("click", {
-                    holder: holder
-                }, function(event) {
-                    event.preventDefault();
-                    Cosinnus.dashboard.load(event.data.holder);
+                    // display the fetched data if we have actually gotten something back, or if
+                    // this is the initial query (we expect a rendered "no content" message)
+                    if (rows_returned > 0 || offset == 0) {
+                        $('[data-target=widget-content]', holder).append(data);
+                    }
+                    if (has_more_data > 0) {
+                        // attach the function to load the next set of data from the backend to the "More" button
+                        $('[data-target=widget-reload-button]', holder).unbind('click');
+                        $('[data-target=widget-reload-button]', holder).click(function() {
+                            that.load(holder, offset + rows_returned);
+                        });
+                    } else {
+                        // hide the "More button"
+                        $('[data-target=widget-reload-button]', holder).hide();
+                    }
+                        
+                    $('[data-target=widget-title]', holder).html(jqXHR.getResponseHeader('X-Cosinnus-Widget-Title'));
+                    var title_url = jqXHR.getResponseHeader('X-Cosinnus-Widget-Title-URL');
+                    if (title_url !== null) {
+                        console.log($('[data-target=widget-title-url]', holder))
+                        $('[data-target=widget-title-url]', holder).attr("href", title_url);
+                    } else {
+                        $('[data-target=widget-title-url]', holder).children().unwrap();
+                    }
+                    holder.attr("data-app-name", jqXHR.getResponseHeader('X-Cosinnus-Widget-App-Name'));
+                    holder.attr("data-widget-name", jqXHR.getResponseHeader('X-Cosinnus-Widget-Widget-Name'));
+                    
+                    $.cosinnus.renderMomentDataDate();
+                    $.cosinnus.autogrow();
+    
+                }).fail(function(jqXHR, textStatus, errorThrown) {
+                    var error = $('<div class="alert alert-danger">An error occurred while loading the widget. </div>');
+                    var reload = $('<a href="#" class="alert-link">Reload</a>').bind("click", {
+                        holder: holder
+                    }, function(event) {
+                        event.preventDefault();
+                        Cosinnus.dashboard.load(event.data.holder);
+                    });
+                    error.append(reload);
+                    $('[data-target=widget-content]', holder).html(error);
+                    $('[data-target=widget-title]', holder).html(textStatus);
                 });
-                error.append(reload);
-                $('[data-target=widget-content]', holder).html(error);
-                $('[data-target=widget-title]', holder).html(textStatus);
-            });
+            }
         },
         show_settings: function(holder, data, submit_callback, submit_data) {
             var content = $(data);
