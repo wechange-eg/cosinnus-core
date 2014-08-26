@@ -18,6 +18,7 @@ from taggit.managers import TaggableManager
 from tinymce.models import HTMLField
 
 from cosinnus.conf import settings
+from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.utils.functions import unique_aware_slugify
 from cosinnus.utils.files import get_group_avatar_filename
 from django.core.urlresolvers import reverse
@@ -297,6 +298,7 @@ class CosinnusGroup(models.Model):
     description = HTMLField(verbose_name=_('Description'), blank=True)
     avatar = models.ImageField(_("Avatar"), null=True, blank=True,
         upload_to=get_group_avatar_filename)
+    website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
     public = models.BooleanField(_('Public'), default=False)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
         related_name='cosinnus_groups', through='CosinnusGroupMembership')

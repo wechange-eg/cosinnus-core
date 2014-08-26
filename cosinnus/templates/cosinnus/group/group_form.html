@@ -144,6 +144,22 @@
                                 </li>
                             </ul>
                         </div>
+                        
+                        <label>{% trans "Website" %}</label>
+                        {{ form.forms.obj.website.errors }}
+                        <div type="button" class="btn btn-default w100 regular-space">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <a class="pull-left" href="#">
+                                        <i class="fa fa-chain"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        {% captureas placeholder %}{% trans "Website" %}{% endcaptureas %}
+                                        {% render_field form.forms.obj.website class+="form-control" placeholder=placeholder %}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
 		                
                         {% include "cosinnus/media_tags_group.html" %} 
                         
