@@ -14,12 +14,12 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'images/apple-touch-icon-114x114-precomposed.png' %}" />
         
         {% block csshead %}
-	    <link href="{% static 'css/bootstrap3-cosinnus.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap3-cosinnus.css' %}" rel="stylesheet">
         <link href="{% static 'css/vendor/font-awesome.min.css' %}" rel="stylesheet">
         <link href="{% static 'css/vendor/select2.css' %}" rel="stylesheet">
         <link href="{% static 'css/vendor/fullcalendar.css' %}" rel="stylesheet">
         <link href="{% static 'css/cosinnus.css' %}" rel="stylesheet">
-	    {% endblock csshead %}
+        {% endblock csshead %}
         
         <script type="text/javascript">
             var cosinnus_base_url = "{{ COSINNUS_BASE_URL|default:'/' }}";
@@ -55,41 +55,41 @@
             {% block main_page_header %}
             {% endblock main_page_header %}
             
-            <div class="row">
             
-                {% block main_page %}
-                <!-- start with left navigation -->
+            {% block main_page %}
+                <div class="row">
+                    <!-- start with left navigation -->
+                    
+                    <!-- now the content -->
+                    <div class="col-lg-9 col-md-9 pull-right"><!-- right column -->
+                        {% block override_breadcrumb %}
+                            <ol class="breadcrumb">
+                                {% block breadcrumb %}
+                                    {% include 'cosinnus/breadcrumb.html' %}
+                                {% endblock breadcrumb %}
+                            </ol>
+                        {% endblock override_breadcrumb %}
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-3"><!-- left column -->
+                        {% if group %}
+                            {% cosinnus_menu "cosinnus/appsmenu.html" %}
+                        {% endif %}
+                        {% block leftnav %}{% endblock leftnav %}
+                    </div><!-- left column -->
+                    
+                    <div class="col-lg-9 col-md-9"><!-- right column -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                {% include 'cosinnus/messages.html' %}
+                                {% block content %}{% endblock content %}
+                            </div><!-- col -->
+                        </div><!-- row -->
+                    </div><!-- right column -->
                 
+                </div><!-- row -->
+            {% endblock main_page %}
                 
-                <!-- now the content -->
-                <div class="col-lg-9 col-md-9 pull-right"><!-- right column -->
-                    {% block override_breadcrumb %}
-	                    <ol class="breadcrumb">
-		                    {% block breadcrumb %}
-			                    {% include 'cosinnus/breadcrumb.html' %}
-		                    {% endblock breadcrumb %}
-	                    </ol>
-	                {% endblock override_breadcrumb %}
-                </div>
-                
-                <div class="col-lg-3 col-md-3"><!-- left column -->
-                    {% if group %}
-                        {% cosinnus_menu "cosinnus/appsmenu.html" %}
-				    {% endif %}
-				    {% block leftnav %}{% endblock leftnav %}
-                </div><!-- left column -->
-                
-                <div class="col-lg-9 col-md-9"><!-- right column -->
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {% include 'cosinnus/messages.html' %}
-							{% block content %}{% endblock content %}
-                        </div><!-- col -->
-                    </div><!-- row -->
-                </div><!-- right column -->
-                {% endblock main_page %}
-                
-            </div><!-- row -->
         </div><!-- main container -->
         
     {% block extrafooter %}{% endblock extrafooter %}
