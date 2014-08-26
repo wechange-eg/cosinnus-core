@@ -2,8 +2,8 @@
 
 {% with avatar=user.cosinnus_profile.avatar %}
 	{% if avatar %}
-	    <img src="{% thumbnail avatar 200x200 crop=1 upscale=1 %}" title="{{ user|full_name }}" {% if extra_style %} style="{{ extra_style }}" {% endif %} {% if extra_classes %}class="{{ extra_classes }}" {% endif %}/>
+	    <img src="{% thumbnail avatar 200x200 crop=1 upscale=1 %}" title="{{ user|full_name }}" {% if extra_classes %}class="{{ extra_classes }}"{% endif %} {% if extra_style %} style="{{ extra_style }}" {% endif %} {% if extra_classes %}class="{{ extra_classes }}" {% endif %}/>
 	{% else %}
-	    <img src="{% static 'images/jane-doe.png' %}" title="{{ user|full_name }}" {% if extra_style %}style="{{ extra_style }}" {% endif %} {% if extra_classes %}class="{{ extra_classes }}" {% endif %}></img>
+	    <img src="{% static 'images/jane-doe.png' %}" title="{{ user|full_name }}" {% if extra_classes %}class="{{ extra_classes }}"{% endif %} {% if extra_style %}style="{{ extra_style }}" {% endif %} {% if extra_classes %}class="{{ extra_classes }}" {% endif %}></img>
 	{% endif %}
 {% endwith %}

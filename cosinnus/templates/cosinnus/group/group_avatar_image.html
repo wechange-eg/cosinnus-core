@@ -1,7 +1,7 @@
 {% load static thumbnail %}
 
 {% if group and group.avatar %}
-    <img src="{% thumbnail group.avatar 200x200 crop=1 upscale=1 %}" {% if extra_style %}style="{{ extra_style }}" {% endif %}/>
+    <img src="{% thumbnail group.avatar 200x200 crop=1 upscale=1 %}" {% if extra_classes %}class="{{ extra_classes }}"{% endif %} {% if extra_style %}style="{{ extra_style }}" {% endif %}/>
 {% else %}
-    <img src="{% static 'images/group-avatar-placeholder.png' %}" title="{{ group.name }}" {% if extra_style %}style="{{ extra_style }}" {% endif %}></img>
+    <img src="{% static 'images/group-avatar-placeholder.png' %}" title="{{ group.name }}" {% if extra_classes %}class="{{ extra_classes }}"{% endif %} {% if extra_style %}style="{{ extra_style }}" {% endif %}></img>
 {% endif %}
