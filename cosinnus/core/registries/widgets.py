@@ -46,7 +46,6 @@ class WidgetRegistry(DictBaseRegistry):
                     klass, widget))
             else:
                 self.register(app_name, cls)
-                return cls
 
     def __iter__(self):
         if self._unresolved:
