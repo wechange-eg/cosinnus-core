@@ -46,6 +46,76 @@
             <legend class="large-space">{{ group.name }}</legend>
         </div>
     </div><!-- row -->
+    
+    
+    
+    
+    <div id="dashboard" class="row large-space">
+    {% for id in widgets|slice:":3" %}
+        {% comment %}"cosinnus_note/widgets/base_news_widget.html"{% endcomment %}
+        <div class="col-lg-4 col-md-4 large-space">
+	        {% include "cosinnus/widgets/base_widget.html" with widget_conf_id=id widget_icon="fa-question" widget_class="app-main" %}
+	    </div>
+    {% endfor %}
+    
+    
+    {% if group and user|is_group_admin:group or not group %}
+        <div class="col-lg-4 col-md-4 large-space app-todos" data-type="widget-add">
+			<button type="button" class="btn btn-emphasized btn-headline" href="" data-widget-id="0" data-target="widget-add-button">
+			    <ul class="media-list ">
+			        <li class="media">
+			            <a class="pull-left btn-extra-emphasized" href="#"></a>
+			            <a class="pull-left" href="#">
+		                    <i class="fa fa-plus"></i>
+			            </a>
+			            <div class="media-body">
+			                {% trans "Add widget" %}
+			            </div>
+			        </li>
+			    </ul>
+			</button><!-- btn -->
+            <div data-target="widget-add-button">
+                <span class="glyphicon glyphicon-plus"></span>
+            </div>
+        </div>
+      
+
+
+    {% comment %} Need to figure out what to do with spare widget upon add
+      <div class="col-md-4" data-type="widget-spare">
+        <div class="panel">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <a href="" data-target="widget-title-url"><span data-target="widget-title"></span>&nbsp;</a>
+              <div class="btn-group pull-right">
+                <a href="#" class="btn btn-xs darker" title="{% trans "Refresh" %}" data-type="refresh"><span class="glyphicon glyphicon-refresh"></span></a>
+                {% if user|has_write_access:object %}
+                  <a href="#" class="btn btn-xs darker" title="{% trans "Configure" %}" data-type="edit"><span class="glyphicon glyphicon-wrench"></span></a>
+                  <a href="#" class="btn btn-xs darker" title="{% trans "Delete" %}" data-type="delete"><span class="glyphicon glyphicon-remove"></span></a>
+                {% endif %}
+              </div>
+            </h3>
+          </div>
+          <div class="panel-body" data-target="widget-content"></div>
+        </div>
+      </div>
+      {% endcomment %}
+    {% endif %}
+  </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 
     <div class="row">
