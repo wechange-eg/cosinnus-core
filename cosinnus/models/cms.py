@@ -21,12 +21,12 @@ class CosinnusMicropage(models.Model):
     last_edited = models.DateTimeField(verbose_name=_('Last edited'), editable=False,
         default=now, auto_now_add=True)
     last_edited_by = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Last edited by'),
-        on_delete=models.PROTECT, null=True, related_name='%(app_label)s_%(class)s_set')
+        editable=False, on_delete=models.PROTECT, null=True, related_name='%(app_label)s_%(class)s_set')
     
     class Meta:
         app_label = 'cosinnus'
         verbose_name = _('Cosinnus CMS Micropage')
-        verbose_name_plural = _('Widget configurations')
+        verbose_name_plural = _('Cosinnus Micropages')
         
     def __str__(self):
         return "<CosinnusMicropage '%s'>" % self.title
