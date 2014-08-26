@@ -37,96 +37,13 @@
             
 
 {% block main_page %}
-    <div class="row">
-        <!-- start with left navigation -->
-        <div class="col-lg-3 col-md-3"><!-- left column -->
-
-            <div class="btn-group w100 large-space">
-                <button type="button" class="btn btn-appnavi dropdown-toggle w100" data-toggle="dropdown">
-                    <ul class="media-list">
-                        <li class="media">
-                            <a class="pull-left" href="#">
-                            </a>
-                            <a class="pull-left" href="#">
-                                <i class="fa fa-lightbulb-o"></i>
-                            </a>
-                            <a class="pull-right" href="#">
-                                <i class="fa fa-caret-down"></i>
-                            </a>
-                            <div class="media-body">
-                                Microsite
-                            </div>
-                        </li>
-                    </ul>
-                </button>
-                <ul class="dropdown-menu appnavi-dropdown-menu w100" role="menu">
-                    <li class="app-main appnavi-listelement">
-                        <a href="#">
-                            <i class="fa fa-th-large"></i>
-                            Dashboard
-                        </a>
-                    </li>
-                    <li class="app-etherpad appnavi-listelement">
-                        <a href="#">
-                            <i class="fa fa-file-text"></i>
-                            Etherpad
-                        </a>
-                    </li>
-                    <li class="app-calendar appnavi-listelement">
-                        <a href="#">
-                            <i class="fa fa-calendar"></i>
-                            Veranstaltungen
-                        </a>
-                    </li>
-                    <li class="app-files appnavi-listelement">
-                        <a href="#">
-                            <i class="fa fa-file"></i>
-                            Dateien
-                        </a>
-                    </li>
-                    <li class="app-todos appnavi-listelement">
-                        <a href="#">
-                            <i class="fa fa-tasks"></i>
-                            Todos
-                        </a>
-                    </li>
-                    <li class="app-documents appnavi-listelement active">
-                        <a href="#">
-                            <i class="fa fa-book"></i>
-                            Dokumente
-                        </a>
-                    </li>
-                    <li class="app-main appnavi-listelement">
-                        <a href="#">
-                            <i class="fa fa-cogs"></i>
-                            Einstellungen
-                        </a>
-                    </li>
-
-                </ul>
-            </div><!-- btn-group -->
-
-        </div><!-- left column -->
-
-
-        <!-- now the content -->
-        <div class="col-lg-9 col-md-9"><!-- right column -->
-
-        <ol class="breadcrumb">
-                <li><a href="#">Gruppen</a></li>
-                <li><a href="#">Transition erleben</a></li>
-                <li class="active">Microsite</li>
-            </ol>
-        </div>
-    </div><!-- row -->
-
 
     <div class="row large-space">
         <div class="col-sm-2 large-space">
-            <img src="avatar.png" class="w100" />
+           {% include 'cosinnus/group/group_avatar_image.html' with extra_classes="w100" %}>
         </div>
         <div class="col-sm-10 bottom-align large-space">
-            <legend class="large-space">Transition erleben</legend>
+            <legend class="large-space">Transition erlebenn</legend>
         </div>
     </div><!-- row -->
 
@@ -400,83 +317,64 @@
 
     </div><!-- row -->
 
-
-    <div class="row large-space">
-        <div class="col-md-3">
-
-            <div type="button" class="btn btn-emphasized btn-headline regular-space">
-                <ul class="media-list">
-                    <li class="media">
-                        <a class="pull-left btn-extra-emphasized" href="#"></a>
-                        <div class="media-body">
-                            Informationen
-                        </div>
-                    </li>
-                </ul>
-            </div><!-- btn -->
-
-            <div type="button" class="btn btn-emphasized fine-space w100">
-                <ul class="media-list">
-                    <li class="media">
-                        <a class="pull-right btn-extra-emphasized" href="#">
-                            <i class="fa fa-chevron-right"></i>
-                        </a>
-                        <div class="media-body">
-                            Wachstumswende
-                        </div>
-                    </li>
-                </ul>
-            </div><!-- btn -->
-            <div type="button" class="btn btn-emphasized fine-space w100">
-                <ul class="media-list">
-                    <li class="media">
-                        <div class="media-body">
-                            Aktivitäten
-                        </div>
-                    </li>
-                </ul>
-            </div><!-- btn -->
-            <div type="button" class="btn btn-emphasized fine-space w100">
-                <ul class="media-list">
-                    <li class="media">
-                        <div class="media-body">
-                            Förderverein
-                        </div>
-                    </li>
-                </ul>
-            </div><!-- btn -->
-            <div type="button" class="btn btn-emphasized w100">
-                <ul class="media-list">
-                    <li class="media">
-                        <div class="media-body">
-                            Impressum
-                        </div>
-                    </li>
-                </ul>
-            </div><!-- btn -->
-
-        </div><!-- left column -->
-
-        <div class="col-md-9">
-            <div class="content-box">
-                <legend>Wachstumswende</legend>
-                <p class="transparent">Er hörte leise Schritte hinter sich. Das bedeutete nichts Gutes. Wer würde ihm schon folgen, spät in der Nacht und dazu noch in dieser engen Gasse mitten im übel beleumundeten Hafenviertel?</p>
-                <p class="transparent">Gerade jetzt, wo er das Ding seines Lebens gedreht hatte und mit der Beute verschwinden wollte!</p>
-                <p class="transparent">Hatte einer seiner zahllosen Kollegen dieselbe Idee gehabt, ihn beobachtet und abgewartet, um ihn nun um die Früchte seiner Arbeit zu erleichtern?</p>
-
-
-                <div class="row">
-                    <div class="col-sm-3">
-                        <img src="avatar.png" class="w100" />
-                    </div>
-                    <div class="col-sm-9">
-                        <p class="transparent">Oder gehörten die Schritte hinter ihm zu einem der unzähligen Gesetzeshüter dieser Stadt, und die stählerne Acht um seine Handgelenke würde gleich zuschnappen? Er konnte die Aufforderung stehen zu bleiben schon hören.</p>
-                        <p class="transparent">Gehetzt sah er sich um. Plötzlich erblickte er den schmalen Durchgang. Blitzartig drehte er sich nach rechts und verschwand zwischen den beiden Gebäuden. Beinahe wäre er dabei über den umgestürzten Mülleimer gefallen, der mitten im Weg lag.</p>
-                    </div>
-                </div>
-            </div>
-        </div><!-- right column -->
-    </div><!-- row -->
+    {% with micropages=group.micropages.all %}
+       <div class="row large-space">
+           <div class="col-md-3">
+   
+               <div type="button" class="btn btn-emphasized btn-headline regular-space">
+                   <ul class="media-list">
+                       <li class="media">
+                           <a class="pull-left btn-extra-emphasized" href="#"></a>
+                           <div class="media-body">
+                               {% trans "Informations" %}
+                           </div>
+                       </li>
+                   </ul>
+               </div><!-- btn -->
+               
+               {% for micropage in micropages %}
+                  <div type="button" data-id="micropage_{{ forloop.counter }}" data-toggle-group="micropage" class="toggleable_button btn btn-emphasized {% if not forloop.last %}fine-space{% endif %} w100">
+                      <ul class="media-list">
+                          <li class="media">
+                              <a data-id="micropage_{{ forloop.counter }}" data-toggle-group="micropage" {% if not forloop.first %}style="display:none;"{% endif %} class="toggleable_content pull-right btn-extra-emphasized" href="#">
+                                  <i class="fa fa-chevron-right"></i>
+                              </a>
+                              <div class="media-body">
+                                  {{ micropage.title }}
+                              </div>
+                          </li>
+                      </ul>
+                  </div><!-- btn -->
+               {% endfor %}
+   
+           </div><!-- left column -->
+           
+           {% for micropage in micropages %}
+               <div data-id="micropage_{{ forloop.counter }}" data-toggle-group="micropage" {% if not forloop.first %}style="display:none;"{% endif %} class="toggleable_content col-md-9">
+                   <div class="content-box transparent_p">
+                       <legend>{{ micropage.title }}</legend>
+                       {% if micropage.text and micropage.text|length > 0 %}
+                            {{ micropage.text|safe }}
+                       {% else %}
+                           ({% trans "No informations set" %})
+                       {% endif %}
+                   </div>
+               </div><!-- right column -->
+           {% empty %}
+                <div class="col-md-9">
+                   <div class="content-box transparent_p">
+                       <legend>{% trans "Informations" %}</legend>
+                       <p>({% trans "No informations set" %})</p>
+                   </div>
+               </div><!-- right column -->
+           {% endfor %}
+       </div><!-- row -->
+    {% endwith %}
+    
+    <script type="text/javascript">
+        $.cosinnus.toggleable();
+        $('.transparent_p p').addClass('transparent');
+    </script>
 
 
     <div class="row">
