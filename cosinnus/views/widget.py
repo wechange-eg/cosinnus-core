@@ -31,29 +31,8 @@ def widget_list(request):
     return JSONResponse(data)
 
 
-@ensure_csrf_cookie
-@login_required
 def widget_add_user(request, app_name, widget_name):
-    widget_class = widget_registry.get(app_name, widget_name)
-    if widget_class is None:
-        return render_to_response('cosinnus/widgets/not_found.html')
-    if not widget_class.allow_on_user:
-        return render_to_response('cosinnus/widgets/not_allowed_user.html')
-    form_class = widget_class.get_setup_form_class()
-    if request.method == "POST":
-        form = form_class(request.POST)
-        if form.is_valid():
-            widget = widget_class.create(request, user=request.user)
-            widget.save_config(form.cleaned_data)
-            return JSONResponse({'id': widget.id})
-    else:
-        form = form_class()
-    d = {
-        'form': form,
-        'submit_label': _('Add widget'),
-    }
-    c = RequestContext(request)
-    return render_to_response('cosinnus/widgets/setup.html', d, c)
+    return widget_add_group(request, None, app_name, widget_name)
 
 
 @ensure_csrf_cookie
@@ -74,8 +53,10 @@ def widget_add_group(request, group, app_name=None, widget_name=None):
         form = form_class(request.POST)
         if form.is_valid():
             # the onl difference to user seems to be:
-            #widget = widget_class.create(request, user=request.user)
-            widget = widget_class.create(request, group=group)
+            if not group:
+                widget = widget_class.create(request, user=request.user)
+            else:
+                widget = widget_class.create(request, group=group)
             widget.save_config(form.cleaned_data)
             
             return HttpResponse(widget.render())
