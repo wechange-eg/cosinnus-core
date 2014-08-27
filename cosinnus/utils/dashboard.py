@@ -236,7 +236,8 @@ class InfoWidget(DashboardWidget):
     """
 
     app_name = 'cosinnus'
-    template_name = 'cosinnus/widgets/info_widget.html'
+    widget_template_name = 'cosinnus/widgets/info_widget.html'
+    template_name = 'cosinnus/widgets/info_widget_content.html'
     model = None
     title = _('About Us')
     form_class = InfoWidgetForm
@@ -260,7 +261,7 @@ class InfoWidget(DashboardWidget):
             'text': self.config['text'],
         }
         
-        return (render_to_string(self.template_name, context), 0, False)
+        return (render_to_string(self.template_name, context), 0, True)
     
     @property
     def title_url(self):

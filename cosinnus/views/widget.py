@@ -32,6 +32,7 @@ def widget_list(request):
 @login_required
 def widget_new(request):
     template_name = 'cosinnus/widgets/config.html'
+    
     data = []
     for app_name, widgets in widget_registry:
         for widget_name in widgets:

@@ -1,7 +1,17 @@
-<div class="content-box transparent_p">
-    {{ text|linebreaks }}
-</div>
+{% extends "cosinnus/widgets/base_widget.html" %}
+{% load i18n cosinnus_tags %}
 
-<script type="text/javascript">
-    $('.transparent_p p').addClass('transparent');
-</script>
+{% block base_widget_button %}
+    <button type="button" class="btn btn-emphasized" href="#micropages">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-right btn-extra-emphasized" href="#">
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "More" %}
+                </div>
+            </li>
+        </ul>
+    </button><!-- btn -->
+{% endblock base_widget_button %}
