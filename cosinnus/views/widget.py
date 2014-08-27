@@ -21,6 +21,7 @@ from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
 from cosinnus.views.mixins.group import RequireReadMixin
 from django.template.loader import render_to_string
 from django.core.exceptions import ImproperlyConfigured
+from uuid import uuid1
 
 
 def widget_list(request):
@@ -31,7 +32,7 @@ def widget_list(request):
 
 @login_required
 def widget_new(request):
-    template_name = 'cosinnus/widgets/config.html'
+    template_name = 'cosinnus/widgets/add_widget.html'
     
     data = []
     for app_name, widgets in widget_registry:
@@ -52,6 +53,7 @@ def widget_new(request):
                 'app_name': app_name,
                 'widget_name': widget_name,
                 'form_content': widget_form_content,
+                'form_id': '%s_%s_%d' % (app_name, widget_name, uuid1()),
             })
     context = {'widget_data': data}
     return HttpResponse(render_to_string(template_name, context))

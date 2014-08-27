@@ -1,22 +1,13 @@
 {% load i18n cosinnus_tags %}
-
-<h1>ok, here</h1>
-
-{% comment %} TODO: this needs to be proofed against multiple ADD WIDGET forms, for the form id isn't unique {% endcomment %}
-
-{% for widget in widget_data %}
-	<form id="{{ widget.app_name }}_{{ widget.widget_name }}" action="" method="POST" class="form-horizontal" role="form">{% csrf_token %}
-        <p>{{ widget.widget_name }}:</p>
-        {{ widget.form_content|safe }}
-    </form>
-    <script type="text/javascript">
-        $('[data-target=widget-save-button]').first().attr('data-widget-app', "{{ widget.app_name }}")
-            .attr('data-widget-widget', "{{ widget.widget_name }}")
-            .attr('data-widget-target-form', "{{ widget.app_name }}_{{ widget.widget_name }}");
-    </script>
-    
-    <hr/>
-{% endfor %}
-
+<div class="content-box">
+	{% comment %} TODO: this needs to be proofed against multiple ADD WIDGET forms, for the form id isn't unique {% endcomment %}
+	
+	{% for widget in widget_data %}
+		<form id="{{ widget.form_id }}" data-widget-app="{{ widget.app_name }}" data-widget-widget="{{ widget.widget_name }}" action="" method="POST" class="form-horizontal" role="form">{% csrf_token %}
+	        <p>{{ widget.widget_name }}:</p>
+	        {{ widget.form_content|safe }}
+	    </form>
+	{% endfor %}
+</div>
  
 

@@ -98,22 +98,12 @@ $('.js-todo-link').on('click', function(e) {
                 // if (jqXHR.getResponseHeader('Content-Type') === "application/json") {
                 // we assume here we got the rendered widget back and replace the config dialog with the widget
                 var widget_node = $.parseHTML(data);
-                holder.before(widget_node).remove();
-                that.initWidget($('[data-type=widget]', widget_node));
+                holder.before(widget_node);
+                // insert the rendered widget before the config box and remove the config box
+                var widget = holder.prev().hide().fadeIn("slow");
+                holder.remove();
+                that.initWidget(widget);
                 
-                /** old:
-                if (jqXHR.getResponseHeader('Content-Type') === "application/json") {
-                    var id = data['id'];
-                    holder.attr('data-widget-id', id).attr('data-type', 'widget');
-                    Cosinnus.dashboard.bind_menu(holder);
-                    Cosinnus.dashboard.load(holder);
-                } else {
-                    Cosinnus.dashboard.show_settings(holder, data, Cosinnus.dashboard.add, {
-                        app: app,
-                        widget: widget
-                    });
-                }
-                */
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 $('[data-target=widget-content]', holder).prepend('<div class="alert alert-danger">An error occurred while adding the widget.</div>');
             });
@@ -121,51 +111,25 @@ $('.js-todo-link').on('click', function(e) {
         add_empty: function(holder) {
             var that = this;
             $.ajax(Cosinnus.base_url + "widgets/new/").done(function(data, textStatus, jqXHR) {
-                var new_holder = $('[data-type=widget-spare]', that.holder).clone().attr('data-type', 'widget-new');
-                $('[data-target=widget-content]', new_holder).append(data);
-                $('[data-target=widget-title]', new_holder).html("Configure Widget");
-                new_holder.hide().insertBefore(holder).fadeIn("slow");
-                var save_button = $('[data-target=widget-save-button]', new_holder);
-                console.log(save_button);
-                save_button.unbind('click').bind("click", {
-                    holder: new_holder
+                var widget_anchor = $('[data-type=widget-anchor]', that.holder);
+                var widget_node = $.parseHTML(data);
+                widget_anchor.before(widget_node);
+                var widget = widget_anchor.prev();
+                $('[data-target=widget-title]', widget).html("Configure Widget");
+                widget.hide().fadeIn("slow");
+                
+                var save_button = $('[data-target=widget-save-button]', widget);
+                save_button.bind("click", {
+                    holder: widget
                 }, function(event) {
-                    console.log('cliicking the saveer');
                     event.preventDefault();
+                    // save widget: we get the form data of the visible form to POST to backend
                     Cosinnus.dashboard.add(event.data.holder, {
-                        app: save_button.attr('data-widget-app'),
-                        widget: save_button.attr('data-widget-widget'),
-                        data: $('#'+save_button.attr('data-widget-target-form'), event.data.holder).serialize()
+                        app: $('form:visible', widget).attr('data-widget-app'),
+                        widget:$('form:visible', widget).attr('data-widget-widget'),
+                        data: $('form:visible', widget).serialize()
                     });
                 });
-            });
-            return;
-            $.ajax(Cosinnus.base_url + "widgets/list/").done(function(data, textStatus, jqXHR) {
-                var new_holder = $('[data-type=widget-spare]', that.holder).clone().attr('data-type', 'widget-new');
-                var list = $('<ul></ul>');
-                $.each(data, function(k) {
-                    var app = $('<li></li>').append(k);
-                    var widgets = $('<ul></ul>');
-                    $.each(this, function(i, v) {
-                        var widget = $('<a href="#"></a>').append(v).bind("click", {
-                            holder: new_holder,
-                            app: k,
-                            widget: v
-                        }, function(event) {
-                            event.preventDefault();
-                            Cosinnus.dashboard.add(event.data.holder, {
-                                app: event.data.app,
-                                widget: event.data.widget
-                            });
-                        });
-                        widgets.append($('<li></li>').append(widget));
-                    });
-                    list.append(app.append(widgets));
-                });
-                $('[data-target=widget-content]', new_holder).html(list);
-                $('[data-target=widget-title]', new_holder).html("Select a widget");
-                new_holder.hide().insertBefore(holder).fadeIn("slow");
-                // new_holder.insertBefore(holder);
             });
         },
         bind_menu: function(holder) {

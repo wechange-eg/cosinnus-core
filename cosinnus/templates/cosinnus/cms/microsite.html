@@ -58,6 +58,8 @@
     
     
     {% if group and user|is_group_admin:group or not group %}
+        <div data-type="widget-anchor" style="display:none;"></div>
+        
         <div class="col-lg-4 col-md-4 large-space app-todos" data-type="widget-add">
 			<button type="button" class="btn btn-emphasized btn-headline" href="" data-widget-id="0" data-target="widget-add-button">
 			    <ul class="media-list ">
@@ -76,8 +78,6 @@
                 <span class="glyphicon glyphicon-plus"></span>
             </div>
         </div>
-        
-        {% include "cosinnus/widgets/base_widget.html" with is_spare="True" widget_icon="fa-plus" widget_class="app-todos" %}
         
     {% endif %}
   </div>
