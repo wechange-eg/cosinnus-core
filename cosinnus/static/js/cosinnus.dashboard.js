@@ -97,26 +97,31 @@ $('.js-todo-link').on('click', function(e) {
                 console.log("> got back widget data")
                 // if (jqXHR.getResponseHeader('Content-Type') === "application/json") {
                 // we assume here we got the rendered widget back and replace the config dialog with the widget
-                var widget_node = $.parseHTML(data);
-                holder.before(widget_node);
-                // insert the rendered widget before the config box and remove the config box
-                var widget = holder.prev().hide().fadeIn("slow");
-                holder.remove();
+                var widget = that.swapWidgetFromData(data, holder);
                 that.initWidget(widget);
                 
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 $('[data-target=widget-content]', holder).prepend('<div class="alert alert-danger">An error occurred while adding the widget.</div>');
             });
         },
+        /** Exchanges a widget for a new widget that is being parsed from server data HTML.
+         *  return: the widget as a jQuery node. */
+        swapWidgetFromData: function(data, old_widget, dontRemove) {
+            var widget_node = $.parseHTML(data);
+            old_widget.before(widget_node);
+            var widget = old_widget.prev();
+            widget.hide().fadeIn("slow");
+            if (!(dontRemove !== undefined && dontRemove)) {
+                old_widget.remove();
+            }
+            return widget;
+        },
         add_empty: function(holder) {
             var that = this;
             $.ajax(Cosinnus.base_url + "widgets/new/").done(function(data, textStatus, jqXHR) {
                 var widget_anchor = $('[data-type=widget-anchor]', that.holder);
-                var widget_node = $.parseHTML(data);
-                widget_anchor.before(widget_node);
-                var widget = widget_anchor.prev();
+                var widget = that.swapWidgetFromData(data, widget_anchor, true);
                 $('[data-target=widget-title]', widget).html("Configure Widget");
-                widget.hide().fadeIn("slow");
                 
                 var save_button = $('[data-target=widget-save-button]', widget);
                 save_button.bind("click", {
@@ -166,13 +171,21 @@ $('.js-todo-link').on('click', function(e) {
         edit: function(holder, args) {
             var that = this;
             args = args || {};
+            var app = args.app;
+            var widget = args.widget;
+            var extra_url = '';
+            if (app !== undefined && widget !== undefined) {
+                extra_url += app + '/' + widget + '/';
+            }
             var id = holder.attr('data-widget-id');
             var settings = {};
+            
             if (args.data !== undefined) {
                 args['type'] = "POST";
             }
-            $.ajax(Cosinnus.base_url + "widget/" + id + "/edit/", args).done(function(data, textStatus, jqXHR) {
-                if (jqXHR.getResponseHeader('Content-Type') === "application/json") {
+            // either POSTing or GETing here, what we do after depends on that
+            $.ajax(Cosinnus.base_url + "widget/" + id + "/edit/" + extra_url, args).done(function(data, textStatus, jqXHR) {
+                if (args['type'] == "POST") {
                     Cosinnus.dashboard.load(holder);
                 } else {
                     Cosinnus.dashboard.show_settings(holder, data, Cosinnus.dashboard.edit);

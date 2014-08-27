@@ -179,11 +179,16 @@ def widget_delete(request, id):
 
 
 @ensure_csrf_cookie
-def widget_edit(request, id):
+def widget_edit(request, id, app_name=None, widget_name=None):
     wc = get_object_or_404(WidgetConfig, id=int(id))
     if wc.group and not check_ug_admin(request.user, wc.group) or \
             wc.user and wc.user_id != request.user.pk:
         return HttpResponseForbidden('Access denied!')
+    
+    if app_name and widget_name and (wc.app_name != app_name or wc.widget_name != widget_name):
+        print ">>>>> THIS WIDGET WAS SET UP TO BE SWAPPED BY EDITING IT!"
+        import ipdb; ipdb.set_trace();
+    
     widget_class = widget_registry.get(wc.app_name, wc.widget_name)
     if widget_class is None:
         return render_to_response('cosinnus/widgets/not_found.html')

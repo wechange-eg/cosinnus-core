@@ -25,6 +25,7 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^widget/(?P<id>\d+)/(?P<offset>\d+)/$', 'widget.widget_detail', name='widget-detail-offset'),
     url(r'^widget/(?P<id>\d+)/delete/$', 'widget.widget_delete', name='widget-delete'),
     url(r'^widget/(?P<id>\d+)/edit/$', 'widget.widget_edit', name='widget-edit'),
+    url(r'^widget/(?P<id>\d+)/edit/(?P<app_name>[^/]+)/(?P<widget_name>[^/]+)/$', 'widget.widget_edit', name='widget-edit-swap'),
 
     url(r'^%s/$' % settings.COSINNUS_GROUP_PLURAL_URL_PATH, 'group.group_list', name='group-list'),
     url(r'^%s/map/$' % settings.COSINNUS_GROUP_PLURAL_URL_PATH, 'group.group_list_map', name='group-list-map'),

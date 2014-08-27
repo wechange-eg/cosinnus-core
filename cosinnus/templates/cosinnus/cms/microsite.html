@@ -40,7 +40,7 @@
 
     <div class="row large-space">
         <div class="col-sm-2 large-space">
-           {% include 'cosinnus/group/group_avatar_image.html' with extra_classes="w100" %}>
+           {% include 'cosinnus/group/group_avatar_image.html' with extra_classes="w100" %}
         </div>
         <div class="col-sm-10 bottom-align large-space">
             <legend class="large-space">{{ group.name }}</legend>
@@ -57,7 +57,7 @@
     {% endfor %}
     
     
-    {% if group and user|is_group_admin:group or not group %}
+    {% if user.is_authenticated and group and user|is_group_admin:group or user.is_authenticaed and not group %}
         <div data-type="widget-anchor" style="display:none;"></div>
         
         <div class="col-lg-4 col-md-4 large-space app-todos" data-type="widget-add">
