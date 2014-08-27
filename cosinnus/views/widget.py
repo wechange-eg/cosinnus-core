@@ -60,9 +60,11 @@ def widget_add_group(request, group, app_name=None, widget_name=None):
             widget.save_config(form.cleaned_data)
             
             return HttpResponse(widget.render())
+        raise Exception("Form was invalid for widget add: ", app_name, widget_name, form_class)
     else:
         data = []
         for app_name, widgets in widget_registry:
+            form_active = True
             for widget_name in widgets:
                 widget_class = widget_registry.get(app_name, widget_name)
                 if widget_class is None:
@@ -81,7 +83,9 @@ def widget_add_group(request, group, app_name=None, widget_name=None):
                     'widget_name': widget_name,
                     'form_content': widget_form_content,
                     'form_id': '%s_%s_%d' % (app_name, widget_name, uuid1()),
+                    'form_active': form_active,
                 })
+                form_active = False #only first form is active
         context = {'widget_data': data}
         return HttpResponse(render_to_string(template_name, context))
 
@@ -129,6 +133,8 @@ def widget_delete(request, id):
 
 @ensure_csrf_cookie
 def widget_edit(request, id, app_name=None, widget_name=None):
+    template_name = 'cosinnus/widgets/add_widget.html'
+    
     wc = get_object_or_404(WidgetConfig, id=int(id))
     if wc.group and not check_ug_admin(request.user, wc.group) or \
             wc.user and wc.user_id != request.user.pk:
@@ -148,14 +154,41 @@ def widget_edit(request, id, app_name=None, widget_name=None):
         if form.is_valid():
             widget.save_config(form.cleaned_data)
             return JSONResponse({'id': widget.id})
+        raise Exception("Form was invalid for widget edit: ", app_name, widget_name, form_class)
     else:
-        form = form_class(initial=dict(widget.config))
-    d = {
-        'form': form,
-        'submit_label': _('Change'),
-    }
-    c = RequestContext(request)
-    return render_to_response('cosinnus/widgets/setup.html', d, c)
+        data = []
+        for app_name, widgets in widget_registry:
+            for widget_name in widgets:
+                form_active = False
+                
+                widget_class = widget_registry.get(app_name, widget_name)
+                if widget_class is None:
+                    print ">>>>widg not found:", app_name, widget_name
+                    continue
+                form_class = widget_class.get_setup_form_class()
+                if not getattr(form_class, "template_name", None):
+                    #raise ImproperlyConfigured('Widget form "%s %s" has no attribute "template_name" configured!' % (app_name, widget_name))
+                    print '>> ignoring widget "%s %s" without template_name form: ' %  (app_name, widget_name)
+                    continue
+                if app_name == widget.app_name and widget_name == widget.widget_name:
+                    # this is the form of the widget class that the editing widget is of
+                    # init the form with the current widgets config, and set the active widget to this one
+                    form_dict = dict([(k,v) for k,v in widget.config])
+                    context = {'form': form_class(form_dict)}
+                    form_active = True
+                else:
+                    context = {'form': form_class()}
+                print ">> widg trying to:", app_name, widget_name, widget_class, form_class, form_class.template_name
+                widget_form_content = render_to_string(form_class.template_name, context)
+                data.append({
+                    'app_name': app_name,
+                    'widget_name': widget_name,
+                    'form_content': widget_form_content,
+                    'form_id': '%s_%s_%d' % (app_name, widget_name, uuid1()),
+                    'form_active': form_active,
+                })
+        context = {'widget_data': data}
+        return HttpResponse(render_to_string(template_name, context))
 
 
 class DashboardMixin(object):

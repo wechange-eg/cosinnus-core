@@ -195,7 +195,7 @@ $('.js-todo-link').on('click', function(e) {
                 if (args['type'] == "POST") {
                     Cosinnus.dashboard.load(holder);
                 } else {
-                    Cosinnus.dashboard.show_settings(holder, data, Cosinnus.dashboard.edit);
+                    var widget = that.swapWidgetFromData(data, holder);
                 }
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 $('[data-target=widget-content]', holder).html('<div class="alert alert-danger">An error occurred while configuring the widget.</div>');
