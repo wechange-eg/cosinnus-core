@@ -61,8 +61,7 @@ $('.js-todo-link').on('click', function(e) {
             var widget_tags = $('[data-type=widget]', this.holder);
             $.each(widget_tags, function() {
                 holder = $(this);
-                that.bind_menu(holder);
-                that.load(holder);
+                that.initWidget(holder);
             });
             var add_widget = $('[data-type=widget-add]', this.holder);
             $('[data-target=widget-add-button]', add_widget).bind("click", {
@@ -72,6 +71,10 @@ $('.js-todo-link').on('click', function(e) {
                 Cosinnus.dashboard.add_empty(event.data.holder);
             });
             return this;
+        },
+        initWidget: function(widget_node) {
+            this.bind_menu(widget_node);
+            this.load(widget_node);
         },
         add: function(holder, args) {
             var that = this;
@@ -89,10 +92,16 @@ $('.js-todo-link').on('click', function(e) {
             if (data === undefined) {
                 data = {};
             }
-            alert('now submitting to '+ url + ', data:' + data);
+            console.log('now submitting to '+ url + ', data:' + data);
             $.post(url, data, function(data, textStatus, jqXHR) {
-                alert('got back data but exiting ' + JSON.stringify(data));
-                return;
+                console.log("> got back widget data")
+                // if (jqXHR.getResponseHeader('Content-Type') === "application/json") {
+                // we assume here we got the rendered widget back and replace the config dialog with the widget
+                var widget_node = $.parseHTML(data);
+                holder.before(widget_node).remove();
+                that.initWidget($('[data-type=widget]', widget_node));
+                
+                /** old:
                 if (jqXHR.getResponseHeader('Content-Type') === "application/json") {
                     var id = data['id'];
                     holder.attr('data-widget-id', id).attr('data-type', 'widget');
@@ -104,8 +113,9 @@ $('.js-todo-link').on('click', function(e) {
                         widget: widget
                     });
                 }
+                */
             }).fail(function(jqXHR, textStatus, errorThrown) {
-                $('[data-target=widget-content]', holder).html('<div class="alert alert-danger">An error occurred while adding the widget.</div>');
+                $('[data-target=widget-content]', holder).prepend('<div class="alert alert-danger">An error occurred while adding the widget.</div>');
             });
         },
         add_empty: function(holder) {

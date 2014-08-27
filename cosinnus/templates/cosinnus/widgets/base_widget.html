@@ -22,7 +22,7 @@
                             {% if widget_icon_content %}
                                 {{ widget_icon_content }}
                             {% else %}
-                                <i class="fa {{ widget_icon }}"></i>
+                                <i class="fa {% if widget_icon %}{{ widget_icon }}{% else %}fa-question{% endif %}"></i>
                             {% endif %}
                         </a>
                         <div class="media-body">

@@ -113,12 +113,17 @@ def widget_add_group(request, group, app_name, widget_name):
     form_class = widget_class.get_setup_form_class()
     if not widget_class.allow_on_group:
         return render_to_response('cosinnus/widgets/not_allowed_group.html')
+    
+    
     if request.method == "POST":
         form = form_class(request.POST)
         if form.is_valid():
+            # the onl difference to user seems to be:
+            #widget = widget_class.create(request, user=request.user)
             widget = widget_class.create(request, group=group)
             widget.save_config(form.cleaned_data)
-            return JSONResponse({'id': widget.id})
+            
+            return HttpResponse(widget.render())
     else:
         form = form_class()
     d = {

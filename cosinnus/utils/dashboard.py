@@ -127,7 +127,10 @@ class DashboardWidget(object):
                 self.config[k] = v
             if not committed:    
                 self.config.save()
-
+    
+    def render(self):
+        return render_to_string(self.widget_template_name, {'widget_conf_id': self.id})
+    
     @property
     def title(self):
         return ''
@@ -139,6 +142,7 @@ class DashboardWidget(object):
                            kwargs={'group': self.config.group.slug})
         # return '#' as default url to prevent firefox dropping the <a> tag content
         return '#'
+    
 
 
 class GroupDescriptionForm(DashboardWidgetForm):
