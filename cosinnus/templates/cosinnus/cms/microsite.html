@@ -51,11 +51,9 @@
     
     
     <div id="dashboard" class="row large-space">
-    {% for id in widgets|slice:":3" %}
+    {% for widget_template, conf_id in widget_sets %}
         {% comment %}"cosinnus_note/widgets/base_news_widget.html"{% endcomment %}
-        <div class="col-lg-4 col-md-4 large-space">
-	        {% include "cosinnus/widgets/base_widget.html" with widget_conf_id=id widget_icon="fa-question" widget_class="app-main" %}
-	    </div>
+        {% include widget_template with widget_conf_id=conf_id widget_icon="fa-question" widget_class="app-main" %}
     {% endfor %}
     
     
@@ -79,9 +77,7 @@
             </div>
         </div>
         
-        <div class="col-lg-4 col-md-4 large-space" data-type="widget-spare" style="display:none;">
-            {% include "cosinnus/widgets/base_widget.html" with is_spare="True" widget_icon="fa-plus" widget_class="app-todos" %}
-        </div>
+        {% include "cosinnus/widgets/base_widget.html" with is_spare="True" widget_icon="fa-plus" widget_class="app-todos" %}
         
     {% endif %}
   </div>

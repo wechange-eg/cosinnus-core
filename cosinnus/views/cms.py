@@ -16,7 +16,7 @@ from cosinnus.models.widget import WidgetConfig
 from cosinnus.models.group import CosinnusGroup
 from django.http.response import HttpResponseNotFound
 from cosinnus.models.cms import CosinnusMicropage
-
+from cosinnus.core.registries import widget_registry
 
 class GroupMicrosite(TemplateView):
     """ TODO: Refactor-merge and unify this view to a mixin with DashboardMixin for groups,
@@ -42,20 +42,24 @@ class GroupMicrosite(TemplateView):
         widgets = WidgetConfig.objects.filter(**widget_filter)
         ids = widgets.values_list('id', flat=True).all()
         
+        widget_sets = []
+        """ We also sort each unique widget into the context to be accessed hard-coded"""
+        for wc in widgets:
+            wclass = widget_registry.get(wc.app_name, wc.widget_name)
+            widget_handle = wc.app_name + '__' + wc.widget_name.replace(" ", "_")
+            kwargs.update({widget_handle : wc.id})
+            widget_sets.append((wclass.widget_template_name, wc.id))
+        
+        
         kwargs.update({
             'widgets': ids,
             'group': self.group,
+            'widget_sets': widget_sets,
         })
-        
-        """ We also sort each unique widget into the context to be accessed hard-coded"""
-        for wc in widgets:
-            context_id = wc.app_name + '__' + wc.widget_name.replace(" ", "_")
-            kwargs.update({context_id : wc.id})
-        
         return super(GroupMicrosite, self).get_context_data(**kwargs)
 
     def get_filter(self):
-        return {'group_id': self.group.pk}
+        return {'group_id': self.group.pk, 'type': WidgetConfig.TYPE_MICROSITE}
     
 
 group_microsite = GroupMicrosite.as_view()

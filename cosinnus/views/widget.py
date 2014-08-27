@@ -231,7 +231,7 @@ class DashboardMixin(object):
 class GroupDashboard(RequireReadMixin, DashboardMixin, TemplateView):
 
     def get_filter(self):
-        return {'group_id': self.group.pk}
+        return {'group_id': self.group.pk, 'type': WidgetConfig.TYPE_DASHBOARD}
 
 group_dashboard = GroupDashboard.as_view()
 
