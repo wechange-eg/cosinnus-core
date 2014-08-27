@@ -1,1 +1,7 @@
-<p>{{ text|safe }}</p>
+<div class="content-box transparent_p">
+    {{ text|linebreaks }}
+</div>
+
+<script type="text/javascript">
+    $('.transparent_p p').addClass('transparent');
+</script>

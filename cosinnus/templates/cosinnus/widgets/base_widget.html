@@ -1,7 +1,7 @@
 {% load i18n cosinnus_tags %}
 
 <div class="col-lg-4 col-md-4 large-space" {% if is_spare %}data-type="widget-spare" style="display:none;"{% endif %}><!-- left column -->
-    <div class="{{widget_class}} dashboard-appwidget" {% if widget_conf_id %}data-widget-id="{{ widget_conf_id }}"{% endif %} {% if not is_spare %}data-type="widget{% endif %}" >
+    <div class="{{widget_class}}" {% if widget_conf_id %}data-widget-id="{{ widget_conf_id }}"{% endif %} {% if not is_spare %}data-type="widget{% endif %}" >
         
         {% block base_widget_content %}
             {% comment %} 
@@ -15,7 +15,7 @@
               </div>
             {% endcomment %}
             <button type="button" class="btn btn-emphasized btn-headline" href="" data-target="widget-title-url">
-                <ul class="media-list fine-space">
+                <ul class="media-list">
                     <li class="media">
                         <a class="pull-left btn-extra-emphasized" href="#"></a>
                         <a class="pull-left" href="#">
