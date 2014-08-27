@@ -117,10 +117,16 @@ class DashboardWidget(object):
         return self.config.pk
 
     def save_config(self, items):
+        committed = True
         with atomic():
             self.config.items.all().delete()
             for k, v in six.iteritems(items):
+                if hasattr(self.config, k):
+                    setattr(self.config, k, v)
+                    committed = False
                 self.config[k] = v
+            if not committed:    
+                self.config.save()
 
     @property
     def title(self):
@@ -217,7 +223,8 @@ class InfoWidgetForm(DashboardWidgetForm):
     template_name = 'cosinnus/widgets/info_widget_form.html'
     
     text = forms.CharField(label="Text", widget=forms.Textarea, help_text="Enter a description", required=False)
-
+    type = forms.IntegerField()
+    
 
 class InfoWidget(DashboardWidget):
     """ An extremeley simple info widget displaying text.

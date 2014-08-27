@@ -56,13 +56,16 @@ class WidgetConfig(models.Model):
             raise KeyError('No config option for %s found' % key)
 
     def __setitem__(self, key, value):
-        try:
-            ci = self.items.get(config_key=key)
-            ci.config_value = value
-        except WidgetConfigItem.DoesNotExist:
-            ci = WidgetConfigItem(config=self, config_key=key, config_value=value)
-        ci.save()
-
+        if hasattr(self, key):
+            setattr(self, key, value)
+        else:
+            try:
+                ci = self.items.get(config_key=key)
+                ci.config_value = value
+            except WidgetConfigItem.DoesNotExist:
+                ci = WidgetConfigItem(config=self, config_key=key, config_value=value)
+            ci.save()
+            
     def __delitem__(self, key):
         try:
             self.items.get(config_key=key).delete()
