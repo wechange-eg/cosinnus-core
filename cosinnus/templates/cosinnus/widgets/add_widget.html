@@ -1,6 +1,10 @@
 {% extends "cosinnus/widgets/base_widget.html" %}
 {% load i18n cosinnus_tags %}
 
+{% block widget_title %}
+    {% if form_view == 'add' %}{% trans "Add Widget" %}{% else %}{% trans "Edit Widget" %}{% endif %}
+{% endblock widget_title %}
+
 {% block widget_content %}
     {% include 'cosinnus/widgets/config.html' with widget_data=widget_data %}
 {% endblock widget_content %}
@@ -10,10 +14,10 @@
         <ul class="media-list">
             <li class="media">
                 <a class="pull-right btn-extra-emphasized" href="#">
-                    <i class="fa {% if is_spare %}fa-floppy-o{% else %}fa-refresh{% endif %}"></i>
+                    <i class="fa fa-floppy-o"></i>
                 </a>
                 <div class="media-body">
-                    {% trans "Add" %}
+                    {% if form_view == 'add' %}{% trans "Add" %}{% else %}{% trans "Save" %}{% endif %}
                 </div>
             </li>
         </ul>

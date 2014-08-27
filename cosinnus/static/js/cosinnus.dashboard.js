@@ -128,7 +128,6 @@ $('.js-todo-link').on('click', function(e) {
             $.ajax(url).done(function(data, textStatus, jqXHR) {
                 var widget_anchor = $('[data-type=widget-anchor]', that.holder);
                 var widget = that.swapWidgetFromData(data, widget_anchor, true);
-                $('[data-target=widget-title]', widget).html("Configure Widget");
                 
                 var save_button = $('[data-target=widget-save-button]', widget);
                 save_button.bind("click", {
@@ -192,10 +191,29 @@ $('.js-todo-link').on('click', function(e) {
             }
             // either POSTing or GETing here, what we do after depends on that
             $.ajax(Cosinnus.base_url + "widget/" + id + "/edit/" + extra_url, args).done(function(data, textStatus, jqXHR) {
+                
                 if (args['type'] == "POST") {
-                    Cosinnus.dashboard.load(holder);
-                } else {
+                    console.log("> got back widget data from edit")
+                    // if (jqXHR.getResponseHeader('Content-Type') === "application/json") {
+                    // we assume here we got the rendered widget back and replace the config dialog with the widget
                     var widget = that.swapWidgetFromData(data, holder);
+                    that.initWidget(widget);
+                    
+                } else {
+                    /* Swap widget for its edit view widget */
+                    var widget = that.swapWidgetFromData(data, holder);
+                    var save_button = $('[data-target=widget-save-button]', widget);
+                    save_button.bind("click", {
+                        holder: widget
+                    }, function(event) {
+                        event.preventDefault();
+                        // save widget: we get the form data of the visible form to POST to backend
+                        Cosinnus.dashboard.edit(event.data.holder, {
+                            app: $('form:visible', widget).attr('data-widget-app'),
+                            widget:$('form:visible', widget).attr('data-widget-widget'),
+                            data: $('form:visible', widget).serialize()
+                        });
+                    });
                 }
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 $('[data-target=widget-content]', holder).html('<div class="alert alert-danger">An error occurred while configuring the widget.</div>');

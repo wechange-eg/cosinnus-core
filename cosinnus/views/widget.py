@@ -39,7 +39,8 @@ def widget_add_user(request, app_name, widget_name):
 @require_admin_access_decorator()
 def widget_add_group(request, group, app_name=None, widget_name=None):
     template_name = 'cosinnus/widgets/add_widget.html'
-        
+    extra_context = {'form_view': 'add'}
+    
     if request.method == "POST":
         print ">>> request arrived"
         widget_class = widget_registry.get(app_name, widget_name)
@@ -48,7 +49,6 @@ def widget_add_group(request, group, app_name=None, widget_name=None):
         form_class = widget_class.get_setup_form_class()
         if not widget_class.allow_on_group:
             return render_to_response('cosinnus/widgets/not_allowed_group.html')
-        
         
         form = form_class(request.POST)
         if form.is_valid():
@@ -87,6 +87,7 @@ def widget_add_group(request, group, app_name=None, widget_name=None):
                 })
                 form_active = False #only first form is active
         context = {'widget_data': data}
+        context.update(extra_context)
         return HttpResponse(render_to_string(template_name, context))
 
 
@@ -134,6 +135,7 @@ def widget_delete(request, id):
 @ensure_csrf_cookie
 def widget_edit(request, id, app_name=None, widget_name=None):
     template_name = 'cosinnus/widgets/add_widget.html'
+    extra_context = {'form_view': 'edit'}
     
     wc = get_object_or_404(WidgetConfig, id=int(id))
     if wc.group and not check_ug_admin(request.user, wc.group) or \
@@ -142,6 +144,7 @@ def widget_edit(request, id, app_name=None, widget_name=None):
     
     if app_name and widget_name and (wc.app_name != app_name or wc.widget_name != widget_name):
         print ">>>>> THIS WIDGET WAS SET UP TO BE SWAPPED BY EDITING IT!"
+        print ">> TODO: create new widget using create function, transfer important values, then delete this widget! "
         import ipdb; ipdb.set_trace();
     
     widget_class = widget_registry.get(wc.app_name, wc.widget_name)
@@ -149,11 +152,12 @@ def widget_edit(request, id, app_name=None, widget_name=None):
         return render_to_response('cosinnus/widgets/not_found.html')
     form_class = widget_class.get_setup_form_class()
     widget = widget_class(request, wc)
+    
     if request.method == "POST":
         form = form_class(request.POST)
         if form.is_valid():
             widget.save_config(form.cleaned_data)
-            return JSONResponse({'id': widget.id})
+            return HttpResponse(widget.render())
         raise Exception("Form was invalid for widget edit: ", app_name, widget_name, form_class)
     else:
         data = []
@@ -187,7 +191,11 @@ def widget_edit(request, id, app_name=None, widget_name=None):
                     'form_id': '%s_%s_%d' % (app_name, widget_name, uuid1()),
                     'form_active': form_active,
                 })
-        context = {'widget_data': data}
+        context = {
+            'widget_data': data,
+            'widget_conf_id': widget.id,
+       }
+        context.update(extra_context)
         return HttpResponse(render_to_string(template_name, context))
 
 
