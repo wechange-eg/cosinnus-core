@@ -118,7 +118,14 @@ $('.js-todo-link').on('click', function(e) {
         },
         add_empty: function(holder) {
             var that = this;
-            $.ajax(Cosinnus.base_url + "widgets/new/").done(function(data, textStatus, jqXHR) {
+            var url = Cosinnus.base_url + 'widgets/add/';
+            if (Cosinnus.dashboard.group === false) {
+                url = url + "user/";
+            } else {
+                url = url + cosinnus_group_url_path + "/" + Cosinnus.dashboard.group + "/";
+            }
+            
+            $.ajax(url).done(function(data, textStatus, jqXHR) {
                 var widget_anchor = $('[data-type=widget-anchor]', that.holder);
                 var widget = that.swapWidgetFromData(data, widget_anchor, true);
                 $('[data-target=widget-title]', widget).html("Configure Widget");

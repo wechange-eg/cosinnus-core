@@ -30,56 +30,6 @@ def widget_list(request):
         data[app] = tuple(widgets)
     return JSONResponse(data)
 
-@login_required
-def widget_new(request):
-    template_name = 'cosinnus/widgets/add_widget.html'
-    
-    data = []
-    for app_name, widgets in widget_registry:
-        for widget_name in widgets:
-            widget_class = widget_registry.get(app_name, widget_name)
-            if widget_class is None:
-                print ">>>>widg not found:", app_name, widget_name
-                continue
-            form_class = widget_class.get_setup_form_class()
-            if not getattr(form_class, "template_name", None):
-                #raise ImproperlyConfigured('Widget form "%s %s" has no attribute "template_name" configured!' % (app_name, widget_name))
-                print '>> ignoring widget "%s %s" without template_name form: ' %  (app_name, widget_name)
-                continue
-            context = {'form': form_class()}
-            print ">> widg trying to:", app_name, widget_name, widget_class, form_class, form_class.template_name
-            widget_form_content = render_to_string(form_class.template_name, context)
-            data.append({
-                'app_name': app_name,
-                'widget_name': widget_name,
-                'form_content': widget_form_content,
-                'form_id': '%s_%s_%d' % (app_name, widget_name, uuid1()),
-            })
-    context = {'widget_data': data}
-    return HttpResponse(render_to_string(template_name, context))
-
-
-"""
-class WidgetConfigView(TemplateView):
-    template_name = 'cosinnus/widgets/config.html'
-    
-    def dispatch(self, request, *args, **kwargs):
-        data = {}
-        for app, widgets in widget_registry:
-            data[app] = tuple(widgets)
-        self.widget_data = data
-        return super(WidgetConfigView, self).dispatch(request, *args, **kwargs)
-    
-    def get_context_data(self, **kwargs):
-        widget_filter = self.get_filter()
-        widgets = WidgetConfig.objects.filter(**widget_filter)
-        ids = widgets.values_list('id', flat=True).all()
-        
-        kwargs.update({
-            'widgets': ids,
-            'group': self.group,
-        })
-"""
 
 @ensure_csrf_cookie
 @login_required
@@ -108,17 +58,19 @@ def widget_add_user(request, app_name, widget_name):
 
 @ensure_csrf_cookie
 @require_admin_access_decorator()
-def widget_add_group(request, group, app_name, widget_name):
-    print ">>> request arrived"
-    widget_class = widget_registry.get(app_name, widget_name)
-    if widget_class is None:
-        return render_to_response('cosinnus/widgets/not_found.html')
-    form_class = widget_class.get_setup_form_class()
-    if not widget_class.allow_on_group:
-        return render_to_response('cosinnus/widgets/not_allowed_group.html')
-    
-    
+def widget_add_group(request, group, app_name=None, widget_name=None):
+    template_name = 'cosinnus/widgets/add_widget.html'
+        
     if request.method == "POST":
+        print ">>> request arrived"
+        widget_class = widget_registry.get(app_name, widget_name)
+        if widget_class is None:
+            return render_to_response('cosinnus/widgets/not_found.html')
+        form_class = widget_class.get_setup_form_class()
+        if not widget_class.allow_on_group:
+            return render_to_response('cosinnus/widgets/not_allowed_group.html')
+        
+        
         form = form_class(request.POST)
         if form.is_valid():
             # the onl difference to user seems to be:
@@ -128,13 +80,29 @@ def widget_add_group(request, group, app_name, widget_name):
             
             return HttpResponse(widget.render())
     else:
-        form = form_class()
-    d = {
-        'form': form,
-        'submit_label': _('Add widget'),
-    }
-    c = RequestContext(request)
-    return render_to_response('cosinnus/widgets/setup.html', d, c)
+        data = []
+        for app_name, widgets in widget_registry:
+            for widget_name in widgets:
+                widget_class = widget_registry.get(app_name, widget_name)
+                if widget_class is None:
+                    print ">>>>widg not found:", app_name, widget_name
+                    continue
+                form_class = widget_class.get_setup_form_class()
+                if not getattr(form_class, "template_name", None):
+                    #raise ImproperlyConfigured('Widget form "%s %s" has no attribute "template_name" configured!' % (app_name, widget_name))
+                    print '>> ignoring widget "%s %s" without template_name form: ' %  (app_name, widget_name)
+                    continue
+                context = {'form': form_class()}
+                print ">> widg trying to:", app_name, widget_name, widget_class, form_class, form_class.template_name
+                widget_form_content = render_to_string(form_class.template_name, context)
+                data.append({
+                    'app_name': app_name,
+                    'widget_name': widget_name,
+                    'form_content': widget_form_content,
+                    'form_id': '%s_%s_%d' % (app_name, widget_name, uuid1()),
+                })
+        context = {'widget_data': data}
+        return HttpResponse(render_to_string(template_name, context))
 
 
 @ensure_csrf_cookie
