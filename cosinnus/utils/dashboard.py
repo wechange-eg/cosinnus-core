@@ -128,8 +128,10 @@ class DashboardWidget(object):
             if not committed:    
                 self.config.save()
     
-    def render(self):
-        return render_to_string(self.widget_template_name, {'widget_conf_id': self.id})
+    def render(self, **kwargs):
+        context = dict(**kwargs)
+        context.update({'widget_conf_id': self.id})
+        return render_to_string(self.widget_template_name, context)
     
     @property
     def title(self):

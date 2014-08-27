@@ -59,7 +59,7 @@ def widget_add_group(request, group, app_name=None, widget_name=None):
                 widget = widget_class.create(request, group=group)
             widget.save_config(form.cleaned_data)
             
-            return HttpResponse(widget.render())
+            return HttpResponse(widget.render(user=request.user, request=request, group=group))
         raise Exception("Form was invalid for widget add: ", app_name, widget_name, form_class)
     else:
         data = []
@@ -157,7 +157,7 @@ def widget_edit(request, id, app_name=None, widget_name=None):
         form = form_class(request.POST)
         if form.is_valid():
             widget.save_config(form.cleaned_data)
-            return HttpResponse(widget.render())
+            return HttpResponse(widget.render(user=request.user, request=request, group=widget.config.group))
         raise Exception("Form was invalid for widget edit: ", app_name, widget_name, form_class)
     else:
         data = []
