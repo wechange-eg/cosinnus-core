@@ -18,6 +18,8 @@ from django.contrib.auth import get_user_model
 
 class DashboardWidgetForm(forms.Form):
     template_name = None
+    
+    type = forms.IntegerField()
 
     def clean(self):
         cleaned_data = super(DashboardWidgetForm, self).clean()
@@ -229,7 +231,6 @@ class InfoWidgetForm(DashboardWidgetForm):
     template_name = 'cosinnus/widgets/info_widget_form.html'
     
     text = forms.CharField(label="Text", widget=forms.Textarea, help_text="Enter a description", required=False)
-    type = forms.IntegerField()
     
 
 class InfoWidget(DashboardWidget):
