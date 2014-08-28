@@ -5,7 +5,7 @@ import six
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseForbidden
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import get_object_or_404, render_to_response, render
 from django.template import RequestContext
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_text
@@ -88,7 +88,8 @@ def widget_add_group(request, group, app_name=None, widget_name=None):
                 form_active = False #only first form is active
         context = {'widget_data': data}
         context.update(extra_context)
-        return HttpResponse(render_to_string(template_name, context))
+        
+        return HttpResponse(render(request, template_name, context))
 
 
 @ensure_csrf_cookie
@@ -183,7 +184,7 @@ def widget_edit(request, id, app_name=None, widget_name=None):
                 else:
                     context = {'form': form_class()}
                 print ">> widg trying to:", app_name, widget_name, widget_class, form_class, form_class.template_name
-                widget_form_content = render_to_string(form_class.template_name, context)
+                widget_form_content = render(request, form_class.template_name, context)
                 data.append({
                     'app_name': app_name,
                     'widget_name': widget_name,
