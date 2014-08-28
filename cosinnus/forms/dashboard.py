@@ -41,21 +41,14 @@ class InfoWidgetForm(DashboardWidgetForm):
     
     def __init__(self, *args, **kwargs):
         group = kwargs.pop('group', None)
-        
         super(InfoWidgetForm, self).__init__(*args, **kwargs)
         
-        
         from cosinnus.forms.attached_object import AttachableWidgetSelect2Field
-        
         self.fields['images'] = AttachableWidgetSelect2Field(
             label=_("Attachments"), 
             help_text=_("Type the title and/or type of attachment"), 
             data_url=reverse('cosinnus:attached_object_select2_view', kwargs={'group': group.slug, 'model':'cosinnus_file.FileEntry'}) + '?model_as_target=1',
-            required=False
+            required=False,
+            initial = kwargs.get('initial', {}).pop('images', '')
         )
         
-        # we need to cheat our way around select2's annoying way of clearing initial data fields
-        self.fields['images'].choices = ()#preresults #((1, 'hi'),)
-        self.fields['images'].initial = []#[key for key,val in preresults] #[1]
-    
-    

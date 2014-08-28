@@ -107,6 +107,31 @@ class AttachableObjectSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoice
 
 class AttachableWidgetSelect2Field(AttachableObjectSelect2MultipleChoiceField):
     
+    def __init__(self, *args, **kwargs):
+        """ Enable returning HTML formatted results in django-select2 return views!
+            Note: You are responsible for cleaning the content, i.e. with  django.utils.html.escape()! """
+        super(AttachableWidgetSelect2Field, self).__init__(*args, **kwargs)
+        
+        # retrieve the attached objects ids to select them in the update view
+        preresults = []
+        
+        if self.initial:
+            attached_ids = [int(val) for val in self.initial.split(',')]
+            for attached in AttachedObject.objects.filter(id__in=attached_ids):
+                if attached and attached.target_object:
+                    obj = attached.target_object
+                    text_only = (attached.model_name+":"+str(obj.id), "%s" % (obj.title),)
+                    #text_only = (attached.model_name+":"+str(obj.id), "&lt;i&gt;%s&lt;/i&gt; %s" % (attached.model_name, obj.title),)  
+                    # TODO: sascha: returning unescaped html here breaks the javascript of django-select2
+                    #html = build_attachment_field_result(attached.model_name, obj) 
+                    preresults.append(text_only)
+                    
+        # we need to cheat our way around select2's annoying way of clearing initial data fields
+        self.choices = preresults #((1, 'hi'),)
+        self.initial = [key for key,val in preresults] #[1]
+    
+    
+    
     def clean(self, value):
         cleaned_objects = super(AttachableWidgetSelect2Field, self).clean(value)
         obj_string = ",".join(["%d" % (att_obj.id) for att_obj in cleaned_objects])

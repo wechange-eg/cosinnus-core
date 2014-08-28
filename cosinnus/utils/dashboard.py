@@ -247,7 +247,6 @@ class InfoWidget(DashboardWidget):
         }
         """
         images = self.attached_images
-        print ">>> images", images
         
         context = {
             'text': self.config['text'],

@@ -96,8 +96,6 @@ class AttachableObjectSelect2View(RequireReadMixin, Select2View):
         else:
             attach_models = attached_object_registry.get_attachable_to(self.kwargs.get('model', None))
        
-        print ">> attach models is", attach_models
-        
         for attach_model_id in attach_models:
             aliases = aliases_dict.get(attach_model_id, [])
             aliases = '||'.join(aliases)

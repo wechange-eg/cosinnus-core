@@ -179,7 +179,7 @@ def widget_edit(request, id, app_name=None, widget_name=None):
                     # this is the form of the widget class that the editing widget is of
                     # init the form with the current widgets config, and set the active widget to this one
                     form_dict = dict([(k,v) for k,v in widget.config])
-                    context = {'form': form_class(form_dict, group=wc.group)}
+                    context = {'form': form_class(initial=form_dict, group=wc.group)}
                     form_active = True
                 else:
                     context = {'form': form_class(group=wc.group)}
