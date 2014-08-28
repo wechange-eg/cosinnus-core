@@ -50,7 +50,7 @@
     
         {% cosinnus_menu "cosinnus/navbar.html" %}
         
-        <div class="container {{ cosinnus_css_class }}">
+        <div class="{% block container_classes %}container {{ cosinnus_css_class }}{% endblock container_classes %}">
             
             {% block main_page_header %}
             {% endblock main_page_header %}
