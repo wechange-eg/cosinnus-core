@@ -141,6 +141,14 @@ $('.js-todo-link').on('click', function(e) {
                         data: $('form:visible', widget).serialize()
                     });
                 });
+                // cancel button just removes the element
+                var cancel_button = $('[data-target=widget-cancel-button]', widget);
+                cancel_button.bind("click", {
+                    holder: widget
+                }, function(event) {
+                    event.preventDefault();
+                    event.data.holder.fadeOut("slow");
+                });
             });
         },
         bind_menu: function(holder) {
@@ -196,12 +204,15 @@ $('.js-todo-link').on('click', function(e) {
                     console.log("> got back widget data from edit")
                     // if (jqXHR.getResponseHeader('Content-Type') === "application/json") {
                     // we assume here we got the rendered widget back and replace the config dialog with the widget
+                    // first, we destroy the old widget that has been hiding
+                    holder.next().remove();
                     var widget = that.swapWidgetFromData(data, holder);
                     that.initWidget(widget);
                     
                 } else {
-                    /* Swap widget for its edit view widget */
-                    var widget = that.swapWidgetFromData(data, holder);
+                    /* Swap widget for its edit view widget (but only hide the widget) */
+                    var widget = that.swapWidgetFromData(data, holder, true);
+                    holder.hide();
                     var save_button = $('[data-target=widget-save-button]', widget);
                     save_button.bind("click", {
                         holder: widget
@@ -214,10 +225,22 @@ $('.js-todo-link').on('click', function(e) {
                             data: $('form:visible', widget).serialize()
                         });
                     });
+                    var cancel_button = $('[data-target=widget-cancel-button]', widget);
+                    cancel_button.bind("click", {
+                        holder: widget
+                    }, function(event) {
+                        event.preventDefault();
+                        // save widget: we get the form data of the visible form to POST to backend
+                        Cosinnus.dashboard.cancel_edit(event.data.holder);
+                    });
                 }
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 $('[data-target=widget-content]', holder).html('<div class="alert alert-danger">An error occurred while configuring the widget.</div>');
             });
+        },
+        cancel_edit: function(holder) {
+            holder.next().fadeIn("slow");
+            holder.remove();
         },
         load: function(holder, offset) {
             var that = this;

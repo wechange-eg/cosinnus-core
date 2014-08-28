@@ -1,5 +1,10 @@
 {% load i18n cosinnus_tags %}
 
+{% comment %} 
+    WARNING: It is extremely important that this contains only one parent div, 
+    and that this div has the  data-type="widget" attribute!
+{% endcomment %}
+
 <div class="col-lg-4 col-md-4 large-space clearfix" {% if widget_conf_id %}data-widget-id="{{ widget_conf_id }}"{% endif %} data-type="widget"><!-- left column -->
     <div class="{{widget_class}}"  >
         
