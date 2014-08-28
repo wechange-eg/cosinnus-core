@@ -43,7 +43,26 @@
            {% include 'cosinnus/group/group_avatar_image.html' with extra_classes="w100" %}
         </div>
         <div class="col-sm-10 bottom-align large-space">
-            <legend class="large-space">{{ group.name }}</legend>
+            
+            <div class="position-relative"><!-- just for fun -->
+                {% if user|has_write_access:group %}
+                    <div type="button" class="btn btn-emphasized bottom-align">
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-cogs"></i>
+                                </a>
+                                <div class="media-body">
+                                    {% trans "Configure" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </div><!-- btn -->
+                {% endif %}
+                
+                <legend class="large-space">{{ group.name }}</legend>
+            </div>
+    
         </div>
     </div><!-- row -->
     
@@ -57,23 +76,23 @@
     {% endfor %}
     
     
-    {% if user.is_authenticated and group and user|is_group_admin:group or user.is_authenticaed and not group %}
+    {% if user|has_write_access:group %}
         <div data-type="widget-anchor" style="display:none;"></div>
         
         <div class="col-lg-4 col-md-4 large-space app-todos" data-type="widget-add">
-			<button type="button" class="btn btn-emphasized btn-headline" href="" data-widget-id="0" data-target="widget-add-button">
-			    <ul class="media-list ">
-			        <li class="media">
-			            <a class="pull-left btn-extra-emphasized" href="#"></a>
-			            <a class="pull-left" href="#">
-		                    <i class="fa fa-plus"></i>
-			            </a>
-			            <div class="media-body">
-			                {% trans "Add widget" %}
-			            </div>
-			        </li>
-			    </ul>
-			</button><!-- btn -->
+            <button type="button" class="btn btn-emphasized btn-headline" href="" data-widget-id="0" data-target="widget-add-button">
+                <ul class="media-list ">
+                    <li class="media">
+                        <a class="pull-left btn-extra-emphasized" href="#"></a>
+                        <a class="pull-left" href="#">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                        <div class="media-body">
+                            {% trans "Add widget" %}
+                        </div>
+                    </li>
+                </ul>
+            </button><!-- btn -->
             <div data-target="widget-add-button">
                 <span class="glyphicon glyphicon-plus"></span>
             </div>
