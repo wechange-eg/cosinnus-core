@@ -1,5 +1,4 @@
 {% load i18n cosinnus_tags widget_tweaks %}
-{{ form.media }}
 
 <label>{% trans "Text" %}</label>
 <div type="button" class="btn btn-default w100 regular-space">
@@ -15,7 +14,6 @@
                 <hr/>
                 {% captureas placeholder %}{% trans "Bild/Datei anhängen" %}{% endcaptureas %}
                 {% render_field form.images placeholder=placeholder %}
-                hi
             </div>
         </li>
     </ul>

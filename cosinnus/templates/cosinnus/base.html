@@ -1,6 +1,8 @@
 {% load static from staticfiles %}
 {% load bootstrap3 i18n %}
 {% load cosinnus_tags %}
+{% load django_select2_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -14,6 +16,8 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'images/apple-touch-icon-114x114-precomposed.png' %}" />
         
         {% block csshead %}
+        {% comment %} Statics for Select2, always loaded, but only once {% endcomment %}
+        {% import_django_select2_css %}
         <link href="{% static 'css/bootstrap3-cosinnus.css' %}" rel="stylesheet">
         <link href="{% static 'css/vendor/font-awesome.min.css' %}" rel="stylesheet">
         <link href="{% static 'css/vendor/select2.css' %}" rel="stylesheet">
@@ -38,6 +42,8 @@
         <script src="{% static 'js/vendor/jquery.sortElements.js' %}"></script>
         <script src="{% static 'js/vendor/moment-with-langs.min.js' %}"></script>
         <script src="{% static 'js/vendor/jquery.autogrow-textarea.js' %}"></script>
+        {% comment %} Statics for Select2, always loaded, but only once {% endcomment %}
+        {% import_django_select2_js %}
         <script src="{% static 'js/cosinnus.js' %}"></script>
         
         {% captureas cosinnus_css_class %}{% if COSINNUS_CURRENT_APP == 'todo' %}app-todos{% elif COSINNUS_CURRENT_APP == 'note' %}app-main{% elif COSINNUS_CURRENT_APP == 'file' %}app-files{% elif COSINNUS_CURRENT_APP == 'event' %}app-calendar{% elif COSINNUS_CURRENT_APP %}app-{{ COSINNUS_CURRENT_APP }}{% else %}app-main{% endif %} {% if request.path == '/' %}landing{% endif %}{% endcaptureas %}
