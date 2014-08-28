@@ -11,7 +11,21 @@
             <div class="media-body">
                 {% captureas placeholder %}{% trans "Text" %}{% endcaptureas %}
                 {% render_field form.text class+="form-control" placeholder=placeholder %}
-                <hr/>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+<label>{% trans "Image" %}</label>
+<div type="button" class="btn btn-default w100 regular-space">
+    <input type="hidden" name="type" value=2 /> <!-- Microsite -->
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#">
+                <i class="fa fa-image"></i>
+            </a>
+            <div class="media-body">
                 {% captureas placeholder %}{% trans "Bild/Datei anhängen" %}{% endcaptureas %}
                 {% render_field form.images placeholder=placeholder %}
             </div>
