@@ -77,7 +77,7 @@ def widget_add_group(request, group, app_name=None, widget_name=None):
                     continue
                 context = {'form': form_class(group=group)}
                 print ">> widg trying to:", app_name, widget_name, widget_class, form_class, form_class.template_name
-                widget_form_content = render(request, form_class.template_name, context)
+                widget_form_content = render(request, form_class.template_name, context).content
                 data.append({
                     'app_name': app_name,
                     'widget_name': widget_name,
@@ -89,7 +89,7 @@ def widget_add_group(request, group, app_name=None, widget_name=None):
         context = {'widget_data': data}
         context.update(extra_context)
         
-        return HttpResponse(render(request, template_name, context))
+        return render(request, template_name, context)
 
 
 @ensure_csrf_cookie
@@ -184,7 +184,7 @@ def widget_edit(request, id, app_name=None, widget_name=None):
                 else:
                     context = {'form': form_class()}
                 print ">> widg trying to:", app_name, widget_name, widget_class, form_class, form_class.template_name
-                widget_form_content = render(request, form_class.template_name, context)
+                widget_form_content = render(request, form_class.template_name, context).content
                 data.append({
                     'app_name': app_name,
                     'widget_name': widget_name,
@@ -197,7 +197,7 @@ def widget_edit(request, id, app_name=None, widget_name=None):
             'widget_conf_id': widget.id,
        }
         context.update(extra_context)
-        return HttpResponse(render(request, template_name, context))
+        return render(request, template_name, context)
 
 
 class DashboardMixin(object):

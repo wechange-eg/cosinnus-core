@@ -47,7 +47,6 @@ class InfoWidgetForm(DashboardWidgetForm):
     
     def __init__(self, *args, **kwargs):
         group = kwargs.pop('group', None)
-        print ">>> group is:", group
         
         super(InfoWidgetForm, self).__init__(*args, **kwargs)
         """
@@ -71,21 +70,14 @@ class InfoWidgetForm(DashboardWidgetForm):
         """ Add attachable objects field if this model is configured in settings.py to have objects that can be attached to it """
         from cosinnus.forms.attached_object import AttachableObjectSelect2MultipleChoiceField
         
-        print ">> getting field"
         self.fields['image'] = AttachableObjectSelect2MultipleChoiceField(
             label=_("Attachments"), 
             help_text=_("Type the title and/or type of attachment"), 
-            data_url=reverse('cosinnus:attached_object_select2_view', kwargs={'group': group.slug, 'model':'file.FileEntry'}) + '?model_is_target=1',
+            data_url=reverse('cosinnus:attached_object_select2_view', kwargs={'group': group.slug, 'model':'cosinnus_file.FileEntry'}) + '?model_is_target=1',
             required=False
         )
-        print ">> got field"
         
         # we need to cheat our way around select2's annoying way of clearing initial data fields
         self.fields['image'].choices = ()#preresults #((1, 'hi'),)
         self.fields['image'].initial = []#[key for key,val in preresults] #[1]
-        
-        
-        print ">>> self.fields", self.fields
-        from pprint import pprint
-        pprint(self.fields['image'].widget.__dict__)
         
