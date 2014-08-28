@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 import six
 
-from django import forms
+
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
@@ -14,30 +14,8 @@ from cosinnus.utils.compat import atomic
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.utils.permissions import get_tagged_object_filter_for_user
 from django.contrib.auth import get_user_model
+from cosinnus.forms.dashboard import InfoWidgetForm, DashboardWidgetForm
 
-
-class DashboardWidgetForm(forms.Form):
-    template_name = None
-    
-    type = forms.IntegerField()
-
-    def clean(self):
-        cleaned_data = super(DashboardWidgetForm, self).clean()
-        for key, value in six.iteritems(cleaned_data):
-            if value is None:
-                # We need to find a default value: The approach we are using
-                # here is to first take the initial value from the form and if
-                # this is not defined, take the initial value directly from the
-                # field. If the field has no initial value, fall back to an
-                # empty string
-                if key in self.initial:
-                    value = self.initial[key]
-                elif self.fields[key].initial:
-                    value = self.fields[key].initial
-            if value is None:
-                value = ''
-            cleaned_data[key] = value
-        return cleaned_data
 
 
 class DashboardWidget(object):
@@ -224,13 +202,6 @@ class GroupMembersWidget(DashboardWidget):
         return '#'
     
     
-    
-    
-
-class InfoWidgetForm(DashboardWidgetForm):
-    template_name = 'cosinnus/widgets/info_widget_form.html'
-    
-    text = forms.CharField(label="Text", widget=forms.Textarea, help_text="Enter a description", required=False)
     
 
 class InfoWidget(DashboardWidget):

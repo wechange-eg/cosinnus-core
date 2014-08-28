@@ -107,7 +107,7 @@ $('.js-todo-link').on('click', function(e) {
         /** Exchanges a widget for a new widget that is being parsed from server data HTML.
          *  return: the widget as a jQuery node. */
         swapWidgetFromData: function(data, old_widget, dontRemove) {
-            var widget_node = $.parseHTML(data);
+            var widget_node = $.parseHTML(data, keepScripts=true);
             old_widget.before(widget_node);
             var widget = old_widget.prev();
             widget.hide().fadeIn("slow");

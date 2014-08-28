@@ -75,9 +75,9 @@ def widget_add_group(request, group, app_name=None, widget_name=None):
                     #raise ImproperlyConfigured('Widget form "%s %s" has no attribute "template_name" configured!' % (app_name, widget_name))
                     print '>> ignoring widget "%s %s" without template_name form: ' %  (app_name, widget_name)
                     continue
-                context = {'form': form_class()}
+                context = {'form': form_class(group=group)}
                 print ">> widg trying to:", app_name, widget_name, widget_class, form_class, form_class.template_name
-                widget_form_content = render_to_string(form_class.template_name, context)
+                widget_form_content = render(request, form_class.template_name, context)
                 data.append({
                     'app_name': app_name,
                     'widget_name': widget_name,
@@ -197,7 +197,7 @@ def widget_edit(request, id, app_name=None, widget_name=None):
             'widget_conf_id': widget.id,
        }
         context.update(extra_context)
-        return HttpResponse(render_to_string(template_name, context))
+        return HttpResponse(render(request, template_name, context))
 
 
 class DashboardMixin(object):
