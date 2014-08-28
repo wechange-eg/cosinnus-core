@@ -38,10 +38,16 @@
         </ul>
     </button>
     <ul class="dropdown-menu appnavi-dropdown-menu w100" role="menu">
-        <li class="app-main appnavi-listelement">
+        <li class="app-main appnavi-listelement fine-space">
             <a href="{% url 'cosinnus:group-dashboard' group=group.slug %}">
                 <i class="fa fa-th-large"></i>
                 {% trans "Dashboard" %}
+            </a>
+        </li>
+        <li class="app-main appnavi-listelement fine-space">
+            <a href="{{ group_microsite_page }}">
+                <i class="fa fa-lightbulb-o"></i>
+                {% trans "Microsite" %}
             </a>
         </li>
         {% for app in apps %}
@@ -55,12 +61,6 @@
 	            </a>
 	        </li>
         {% endfor %}
-        <li class="app-main appnavi-listelement">
-            <a href="{{ group_microsite_page }}">
-                <i class="fa fa-lightbulb-o"></i>
-                {% trans "Microsite" %}
-            </a>
-        </li>
         <li class="app-main appnavi-listelement">
             <a href="{{ group_detail_page }}">
                 <i class="fa fa-cogs"></i>

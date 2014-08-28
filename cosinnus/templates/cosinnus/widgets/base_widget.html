@@ -1,6 +1,6 @@
 {% load i18n cosinnus_tags %}
 
-<div class="col-lg-4 col-md-4 large-space" {% if widget_conf_id %}data-widget-id="{{ widget_conf_id }}"{% endif %} data-type="widget"><!-- left column -->
+<div class="col-lg-4 col-md-4 large-space clearfix" {% if widget_conf_id %}data-widget-id="{{ widget_conf_id }}"{% endif %} data-type="widget"><!-- left column -->
     <div class="{{widget_class}}"  >
         
         {% block base_widget_content %}
@@ -25,6 +25,14 @@
                                 <i class="fa {% if widget_icon %}{{ widget_icon }}{% else %}fa-question{% endif %}"></i>
                             {% endif %}
                         </a>
+                        {% if user.is_authenticated and group and user|is_group_admin:group or user.is_authenticaed and not group %}
+                            <a class="pull-right" href="#" data-type="delete" title="{% trans "Delete" %}">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                            <a class="pull-right" href="#" data-type="edit" title="{% trans "Edit" %}">
+                                <i class="fa fa-cogs"></i>
+                            </a>
+                        {% endif %}
                         <div class="media-body">
                             <span data-target="widget-title">{% block widget_title %}{% endblock widget_title %}</span>
                         </div>
@@ -33,29 +41,6 @@
             </button><!-- btn -->
             
             <div data-target="widget-content">{% block widget_content %}{% endblock widget_content %}</div>
-            
-            {% if user.is_authenticated and group and user|is_group_admin:group or user.is_authenticaed and not group %}
-            <div type="button" class="pull-left" data-type="edit">
-                <ul class="media-list">
-                    <li class="media">
-                        <a class="pull-left btn-emphasized">
-                            <i class="fa fa-cogs"></i>
-                        </a>
-                        
-                    </li>
-                </ul>
-            </div>
-            <div type="button" class="pull-left" data-type="delete">
-                <ul class="media-list">
-                    <li class="media">
-                        <a class="pull-left btn-emphasized">
-                            <i class="fa fa-trash-o"></i>
-                        </a>
-                        
-                    </li>
-                </ul>
-            </div>
-            {% endif %}
             
             {% block widget_button %}
                 <button type="button" class="btn btn-emphasized dashboard-appwidget-morebutton" data-target="widget-reload-button">
