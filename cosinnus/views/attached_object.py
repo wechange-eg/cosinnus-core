@@ -91,8 +91,8 @@ class AttachableObjectSelect2View(RequireReadMixin, Select2View):
         results = []
        
         attach_models = []
-        if 'model_is_target' in self.request.GET: 
-            attach_models = [self.kwargs.get('model', None)]
+        if 'model_as_target' in self.request.GET: 
+            attach_models = self.kwargs.get('model', '').split(',')
         else:
             attach_models = attached_object_registry.get_attachable_to(self.kwargs.get('model', None))
        

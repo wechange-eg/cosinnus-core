@@ -1,3 +1,6 @@
+{% for image in images %}
+    <img class="w100" src="{{ image.static_image_url }}" />
+{% endfor %}
 <div class="content-box transparent_p">
     {{ text|linebreaks }}
 </div>

@@ -50,7 +50,7 @@ def widget_add_group(request, group, app_name=None, widget_name=None):
         if not widget_class.allow_on_group:
             return render_to_response('cosinnus/widgets/not_allowed_group.html')
         
-        form = form_class(request.POST)
+        form = form_class(request.POST, group=group)
         if form.is_valid():
             # the onl difference to user seems to be:
             if not group:
@@ -155,10 +155,10 @@ def widget_edit(request, id, app_name=None, widget_name=None):
     widget = widget_class(request, wc)
     
     if request.method == "POST":
-        form = form_class(request.POST)
+        form = form_class(request.POST, group=wc.group)
         if form.is_valid():
             widget.save_config(form.cleaned_data)
-            return HttpResponse(widget.render(user=request.user, request=request, group=widget.config.group))
+            return HttpResponse(widget.render(user=request.user, request=request, group=wc.group))
         raise Exception("Form was invalid for widget edit: ", app_name, widget_name, form_class)
     else:
         data = []
@@ -179,10 +179,10 @@ def widget_edit(request, id, app_name=None, widget_name=None):
                     # this is the form of the widget class that the editing widget is of
                     # init the form with the current widgets config, and set the active widget to this one
                     form_dict = dict([(k,v) for k,v in widget.config])
-                    context = {'form': form_class(form_dict)}
+                    context = {'form': form_class(form_dict, group=wc.group)}
                     form_active = True
                 else:
-                    context = {'form': form_class()}
+                    context = {'form': form_class(group=wc.group)}
                 print ">> widg trying to:", app_name, widget_name, widget_class, form_class, form_class.template_name
                 widget_form_content = render(request, form_class.template_name, context).content
                 data.append({

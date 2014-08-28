@@ -103,3 +103,11 @@ class AttachableObjectSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoice
             attached_objects.append(ao)
         
         return attached_objects
+
+
+class AttachableWidgetSelect2Field(AttachableObjectSelect2MultipleChoiceField):
+    
+    def clean(self, value):
+        cleaned_objects = super(AttachableWidgetSelect2Field, self).clean(value)
+        obj_string = ",".join(["%d" % (att_obj.id) for att_obj in cleaned_objects])
+        return obj_string

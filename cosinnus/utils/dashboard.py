@@ -15,6 +15,7 @@ from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.utils.permissions import get_tagged_object_filter_for_user
 from django.contrib.auth import get_user_model
 from cosinnus.forms.dashboard import InfoWidgetForm, DashboardWidgetForm
+from cosinnus.models.tagged import AttachedObject
 
 
 
@@ -125,7 +126,13 @@ class DashboardWidget(object):
         # return '#' as default url to prevent firefox dropping the <a> tag content
         return '#'
     
-
+    def attached_objects_from_field(self, field):
+        """ Resolves attached BaseTaggableObjects from a widget config field that contains
+            ids of AttachableObject connector objects """
+        if field:
+            attached_ids = [int(val) for val in field.split(',')]
+            return AttachedObject.objects.filter(id__in=attached_ids)
+        return []
 
 class GroupDescriptionForm(DashboardWidgetForm):
     """
@@ -218,7 +225,15 @@ class InfoWidget(DashboardWidget):
     user_model_attr = None
     widget_name = 'info_widget'
     allow_on_user = True
-
+    
+    @property
+    def attached_images(self):
+        images = []
+        for att_obj in self.attached_objects_from_field(self.config['images']):
+            if att_obj.model_name == "cosinnus_file.FileEntry" and att_obj.target_object.is_image:
+                images.append(att_obj.target_object)
+        return images
+    
     def get_data(self, offset=0):
         """ Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.
             if has_more == False, the receiving widget will assume no further data can be loaded.
@@ -231,8 +246,12 @@ class InfoWidget(DashboardWidget):
             'group': group,
         }
         """
+        images = self.attached_images
+        print ">>> images", images
+        
         context = {
             'text': self.config['text'],
+            'images': images,
         }
         
         return (render_to_string(self.template_name, context), 0, True)
