@@ -16,6 +16,8 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^profile/$', 'profile.detail_view', name='profile-detail'),
     url(r'^profile/dashboard/$', 'widget.user_dashboard', name='user-dashboard'),
     url(r'^profile/edit/$', 'profile.update_view', name='profile-edit'),
+    url(r'^language/(?P<language>[^/]+)/$', 'common.switch_language', name='switch-language'),
+    
     
     url(r'^widgets/list/$', 'widget.widget_list', name='widget-list'),
     url(r'^widgets/add/user/$', 'widget.widget_add_user', name='widget-add-user-empty'),
