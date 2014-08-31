@@ -162,7 +162,6 @@
 			// Users can add events here.
 			// The .small-calendar is for tooltips or small static date chooser.
 			// both are based on jQuery fullcalendar. http://arshaw.com/fullcalendar/
-
 			var german = {
 				firstDay: 1, // Monday
 				buttonText: {
@@ -227,6 +226,7 @@
 					center: 'title',
 					right: 'next'
 				},
+				events: (typeof cosinnus_calendarWidgetEvents !== "undefined" ? cosinnus_calendarWidgetEvents : []),
 				dayClick: function(date, allDay, jsEvent, view) {
 					$(this).trigger('fullCalendarDayClick',[date,jsEvent]);
 				},
