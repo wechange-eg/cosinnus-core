@@ -8,7 +8,7 @@
     <div class="media-body">
         <select id="widget_select_{{ widget_data.0.form_id }}" class="form-control">
            {% for widget in widget_data %}
-                <option {% if widget.form_active == True %}default{% endif %} value="{{ widget.form_id }}">{{ widget.widget_title }}</option>
+                <option {% if widget.form_active == True %}default selected{% endif %} value="{{ widget.form_id }}">{{ widget.widget_title }}</option>
             {% endfor %}
         </select>
     </div>
