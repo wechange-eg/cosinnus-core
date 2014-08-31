@@ -3,18 +3,22 @@
     {% comment %} TODO: this needs to be proofed against multiple ADD WIDGET forms, for the form id isn't unique {% endcomment %}
     
     <div type="button" class="btn btn-default w100 large-space">
-                <ul class="media-list">
-                    <li class="media">
-    <div class="media-body">
-        <select id="widget_select_{{ widget_data.0.form_id }}" class="form-control">
-           {% for widget in widget_data %}
-                <option {% if widget.form_active == True %}default selected{% endif %} value="{{ widget.form_id }}">{{ widget.widget_title }}</option>
-            {% endfor %}
-        </select>
+        <ul class="media-list">
+            <li class="media">
+             <div class="media-body">
+                 {% if widget_data|length > 1 %}
+                    <select id="widget_select_{{ widget_data.0.form_id }}" class="form-control">
+                       {% for widget in widget_data %}
+                            <option {% if widget.form_active == True %}default selected{% endif %} value="{{ widget.form_id }}">{{ widget.widget_title }}</option>
+                        {% endfor %}
+                    </select>
+                 {% else %}
+                     <p>{{ widget_data.0.widget_title }}</p>
+                 {% endif %}
+             </div>
+          </li>
+        </ul>
     </div>
-    </li>
-                </ul>
-            </div>
     
     <div id="widget_forms_{{ widget_data.0.form_id }}">
         {% for widget in widget_data %}
@@ -25,13 +29,15 @@
         {% endfor %}
     </div>
     
-    <script type="text/javascript">
-       $('#widget_select_{{ widget_data.0.form_id }}').change(function(e) {
-           var form_id = $('#widget_select_{{ widget_data.0.form_id }}').val();
-           $('#widget_forms_{{ widget_data.0.form_id }} form').hide();
-           $('#' + form_id).show();
-       });
-    </script>
+    {% if widget_data|length > 1 %}
+       <script type="text/javascript">
+          $('#widget_select_{{ widget_data.0.form_id }}').change(function(e) {
+              var form_id = $('#widget_select_{{ widget_data.0.form_id }}').val();
+              $('#widget_forms_{{ widget_data.0.form_id }} form').hide();
+              $('#' + form_id).show();
+          });
+       </script>
+    {% endif %}
 </div>
  
 

@@ -147,7 +147,9 @@ def widget_edit(request, id, app_name=None, widget_name=None):
     if app_name and widget_name and (wc.app_name != app_name or wc.widget_name != widget_name):
         print ">>>>> THIS WIDGET WAS SET UP TO BE SWAPPED BY EDITING IT!"
         print ">> TODO: create new widget using create function, transfer important values, then delete this widget! "
-        import ipdb; ipdb.set_trace();
+        # TODO: widget swapping disabled for now!
+        raise Exception("Swapping of widget types is not enabled. \
+            Delete this widget and create a new one if you want one of a different type!")
     
     widget_class = widget_registry.get(wc.app_name, wc.widget_name)
     if widget_class is None:
@@ -184,7 +186,9 @@ def widget_edit(request, id, app_name=None, widget_name=None):
                     context = {'form': form_class(initial=form_dict, group=wc.group)}
                     form_active = True
                 else:
-                    context = {'form': form_class(group=wc.group)}
+                    # TODO: widget swapping disabled for now!
+                    continue
+                    #context = {'form': form_class(group=wc.group)}
                 print ">> widg trying to:", app_name, widget_name, widget_class, form_class, form_class.template_name
                 widget_form_content = render(request, form_class.template_name, context).content
                 data.append({
