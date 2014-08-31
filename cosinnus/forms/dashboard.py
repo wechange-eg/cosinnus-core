@@ -41,6 +41,14 @@ class DashboardWidgetForm(forms.Form):
         return cleaned_data
 
 
+class EmptyWidgetForm(DashboardWidgetForm):
+    template_name = 'cosinnus/widgets/empty_widget_form.html'
+    
+    def __init__(self, *args, **kwargs):
+        kwargs.pop('group', None)
+        super(EmptyWidgetForm, self).__init__(*args, **kwargs)
+        
+
 class InfoWidgetForm(DashboardWidgetForm):
     template_name = 'cosinnus/widgets/info_widget_form.html'
     

@@ -14,7 +14,8 @@ from cosinnus.utils.compat import atomic
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.utils.permissions import get_tagged_object_filter_for_user
 from django.contrib.auth import get_user_model
-from cosinnus.forms.dashboard import InfoWidgetForm, DashboardWidgetForm
+from cosinnus.forms.dashboard import InfoWidgetForm, DashboardWidgetForm,\
+    EmptyWidgetForm
 from cosinnus.models.tagged import AttachedObject
 
 
@@ -92,7 +93,13 @@ class DashboardWidget(object):
         if not cls.widget_name:
             raise ImproperlyConfigured('%s must defined a widget_name' % cls.__name__)
         return cls.widget_name
-
+    
+    @classmethod
+    def get_widget_title(cls):
+        if not cls.title:
+            raise ImproperlyConfigured('%s must defined a title' % cls.__name__)
+        return cls.title
+    
     @property
     def id(self):
         return self.config.pk
@@ -266,3 +273,31 @@ class InfoWidget(DashboardWidget):
     
     def get_queryset(self):
         return None
+    
+class MetaAttributeWidget(DashboardWidget):
+    """ An extremeley simple info widget displaying text.
+        The text is saved in the widget config
+    """
+
+    app_name = 'cosinnus'
+    widget_template_name = 'cosinnus/widgets/meta_attribute_widget.html'
+    template_name = ''
+    model = None
+    title = _('Informations')
+    form_class = EmptyWidgetForm
+    user_model_attr = None
+    widget_name = 'meta_attr_widget'
+    allow_on_user = False
+    
+    
+    def get_data(self, offset=0):
+        # return (no data, no rows, no More button)
+        return ('', 0, False)
+    
+    @property
+    def title_url(self):
+        return ''
+    
+    def get_queryset(self):
+        return None
+    

@@ -81,6 +81,7 @@ def widget_add_group(request, group, app_name=None, widget_name=None):
                 data.append({
                     'app_name': app_name,
                     'widget_name': widget_name,
+                    'widget_title': widget_class.get_widget_title(),
                     'form_content': widget_form_content,
                     'form_id': '%s_%s_%d' % (app_name, widget_name, uuid1()),
                     'form_active': form_active,
@@ -189,6 +190,7 @@ def widget_edit(request, id, app_name=None, widget_name=None):
                 data.append({
                     'app_name': app_name,
                     'widget_name': widget_name,
+                    'widget_title': widget_class.get_widget_title(),
                     'form_content': widget_form_content,
                     'form_id': '%s_%s_%d' % (app_name, widget_name, uuid1()),
                     'form_active': form_active,

@@ -1,14 +1,37 @@
 {% load i18n cosinnus_tags %}
 <div class="content-box">
-	{% comment %} TODO: this needs to be proofed against multiple ADD WIDGET forms, for the form id isn't unique {% endcomment %}
-	
-	{% for widget in widget_data %}
-		<form id="{{ widget.form_id }}" data-widget-app="{{ widget.app_name }}" data-widget-widget="{{ widget.widget_name }}" {% if not widget.form_active or widget.form_active != True %}style="display:none;"{% endif %} action="" method="POST" class="form-horizontal" role="form">
-		    {% csrf_token %}
-	        <p>{{ widget.widget_name }}:</p>
-	        {{ widget.form_content|safe }}
-	    </form>
-	{% endfor %}
+    {% comment %} TODO: this needs to be proofed against multiple ADD WIDGET forms, for the form id isn't unique {% endcomment %}
+    
+    <div type="button" class="btn btn-default w100 large-space">
+                <ul class="media-list">
+                    <li class="media">
+    <div class="media-body">
+        <select id="widget_select_{{ widget_data.0.form_id }}" class="form-control">
+           {% for widget in widget_data %}
+                <option {% if widget.form_active == True %}default{% endif %} value="{{ widget.form_id }}">{{ widget.widget_title }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    </li>
+                </ul>
+            </div>
+    
+    <div id="widget_forms_{{ widget_data.0.form_id }}">
+        {% for widget in widget_data %}
+            <form id="{{ widget.form_id }}" data-widget-app="{{ widget.app_name }}" data-widget-widget="{{ widget.widget_name }}" {% if not widget.form_active or widget.form_active != True %}style="display:none;"{% endif %} action="" method="POST" class="form-horizontal" role="form">
+                {% csrf_token %}
+                {{ widget.form_content|safe }}
+            </form>
+        {% endfor %}
+    </div>
+    
+    <script type="text/javascript">
+       $('#widget_select_{{ widget_data.0.form_id }}').change(function(e) {
+           var form_id = $('#widget_select_{{ widget_data.0.form_id }}').val();
+           $('#widget_forms_{{ widget_data.0.form_id }} form').hide();
+           $('#' + form_id).show();
+       });
+    </script>
 </div>
  
 
