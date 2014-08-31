@@ -23,13 +23,15 @@
                 <ul class="media-list">
                     <li class="media">
                         <a class="pull-left btn-extra-emphasized" href="#"></a>
-                        <a class="pull-left" href="#">
-                            {% if widget_icon_content %}
-                                {{ widget_icon_content }}
-                            {% else %}
-                                <i class="fa {% if widget_icon %}{{ widget_icon }}{% else %}fa-question{% endif %}"></i>
-                            {% endif %}
-                        </a>
+                        {% if widget_icon or widget_icon_content %}
+	                        <a class="pull-left" href="#">
+	                            {% if widget_icon_content %}
+	                                {{ widget_icon_content }}
+	                            {% else %}
+	                                <i class="fa {% if widget_icon %}{{ widget_icon }}{% else %}fa-question{% endif %}"></i>
+	                            {% endif %}
+	                        </a>
+                        {% endif %}
                         {% if request.user.is_authenticated and group and request.user|is_group_admin:group or request.user.is_authenticaed and not group %}
                             <a class="pull-right" href="#" data-type="delete" title="{% trans "Delete" %}">
                                 <i class="fa fa-trash-o"></i>

@@ -71,7 +71,7 @@
     
     <div id="dashboard" class="row large-space">
     {% for widget_config in widget_configs %}
-        {{ widget_config.render|safe }}
+        {% cosinnus_render_widget widget_config %}
     {% endfor %}
     
     
