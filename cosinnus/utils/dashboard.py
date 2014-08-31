@@ -17,6 +17,7 @@ from django.contrib.auth import get_user_model
 from cosinnus.forms.dashboard import InfoWidgetForm, DashboardWidgetForm,\
     EmptyWidgetForm
 from cosinnus.models.tagged import AttachedObject
+from cosinnus.models.widget import WidgetConfig
 
 
 
@@ -120,6 +121,7 @@ class DashboardWidget(object):
         context = dict(**kwargs)
         context.update({
             'widget_conf_id': self.id,
+            'app_name': self.app_name,
             'widget_title': self.config.get('widget_title', None),
             'widget_icon': self.config.get('widget_icon', None),
             'link_label':self.config.get('link_label', None),
@@ -132,6 +134,9 @@ class DashboardWidget(object):
 
     @property
     def title_url(self):
+        if self.config.type == WidgetConfig.TYPE_MICROSITE:
+            return ''
+        
         if self.config.group:
             return reverse('cosinnus:%s:index' % self.app_name,
                            kwargs={'group': self.config.group.slug})

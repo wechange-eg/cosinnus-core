@@ -63,8 +63,8 @@ def widget_add_group(request, group, app_name=None, widget_name=None):
         raise Exception("Form was invalid for widget add: ", app_name, widget_name, form_class)
     else:
         data = []
+        form_active = True
         for app_name, widgets in widget_registry:
-            form_active = True
             for widget_name in widgets:
                 widget_class = widget_registry.get(app_name, widget_name)
                 if widget_class is None:
