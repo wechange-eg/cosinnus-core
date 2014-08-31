@@ -12,7 +12,8 @@ from django.forms.fields import ChoiceField
 class DashboardWidgetForm(forms.Form):
     template_name = None
     
-    type = forms.IntegerField()
+    # type form field needs to be here, but be hidden in the frontend
+    type = forms.IntegerField(widget=forms.HiddenInput())
 
     def clean(self):
         cleaned_data = super(DashboardWidgetForm, self).clean()
