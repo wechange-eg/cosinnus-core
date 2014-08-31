@@ -36,7 +36,11 @@ class BaseUserProfileManager(models.Manager):
         if isinstance(user, int):
             return self.get(user_id=user)
         if isinstance(user, models.Model):
-            return self.get(user_id=user.id)
+            try:
+                profile = self.get(user_id=user.id)
+            except get_user_profile_model().DoesNotExist:
+                profile = self.create(user_id=user.id)
+            return profile
         raise TypeError('user must be of type int or Model but is %s' % type(user))
 
 
