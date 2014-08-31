@@ -159,6 +159,7 @@ def widget_edit(request, id, app_name=None, widget_name=None):
         if form.is_valid():
             widget.save_config(form.cleaned_data)
             return HttpResponse(widget.render(user=request.user, request=request, group=wc.group))
+        
         raise Exception("Form was invalid for widget edit: ", app_name, widget_name, form_class)
     else:
         data = []
@@ -195,7 +196,7 @@ def widget_edit(request, id, app_name=None, widget_name=None):
         context = {
             'widget_data': data,
             'widget_conf_id': widget.id,
-       }
+        }
         context.update(extra_context)
         return render(request, template_name, context)
 

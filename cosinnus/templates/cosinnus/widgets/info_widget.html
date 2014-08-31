@@ -9,7 +9,7 @@
                     <i class="fa fa-chevron-down"></i>
                 </a>
                 <div class="media-body">
-                    {% trans "More" %}
+                    {% if link_label %}{{ link_label }}{% else %}{% trans "Mehr" %}{% endif %}
                 </div>
             </li>
         </ul>

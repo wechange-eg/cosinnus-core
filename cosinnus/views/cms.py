@@ -42,19 +42,20 @@ class GroupMicrosite(TemplateView):
         widgets = WidgetConfig.objects.filter(**widget_filter)
         ids = widgets.values_list('id', flat=True).all()
         
-        widget_sets = []
+        widget_configs = []
         """ We also sort each unique widget into the context to be accessed hard-coded"""
         for wc in widgets:
-            wclass = widget_registry.get(wc.app_name, wc.widget_name)
+            widget_class = widget_registry.get(wc.app_name, wc.widget_name)
             widget_handle = wc.app_name + '__' + wc.widget_name.replace(" ", "_")
             kwargs.update({widget_handle : wc.id})
-            widget_sets.append((wclass.widget_template_name, wc.id))
-        
+            widget = widget_class(self.request, wc)
+            widget_configs.append(widget)
+    
         
         kwargs.update({
             'widgets': ids,
             'group': self.group,
-            'widget_sets': widget_sets,
+            'widget_configs': widget_configs,
         })
         return super(GroupMicrosite, self).get_context_data(**kwargs)
 

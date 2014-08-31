@@ -111,7 +111,12 @@ class DashboardWidget(object):
     
     def render(self, **kwargs):
         context = dict(**kwargs)
-        context.update({'widget_conf_id': self.id})
+        context.update({
+            'widget_conf_id': self.id,
+            'widget_title': self.config.get('widget_title', None),
+            'widget_icon': self.config.get('widget_icon', None),
+            'link_label':self.config.get('link_label', None),
+        })
         return render_to_string(self.widget_template_name, context)
     
     @property

@@ -14,6 +14,13 @@ class DashboardWidgetForm(forms.Form):
     
     # type form field needs to be here, but be hidden in the frontend
     type = forms.IntegerField(widget=forms.HiddenInput())
+    
+    #default fields for all widgets
+    widget_title = forms.CharField(label=_("Widget label"), help_text=_("Enter a title for the widget"), required=False)
+    widget_icon = forms.CharField(label=_("Widget icon"), help_text=_("A font-awesome icon for the widget"), required=False)
+    link_label = forms.CharField(label=_("Link label"), help_text=_("Enter a label for the widget-button"), required=False)
+    
+    
 
     def clean(self):
         cleaned_data = super(DashboardWidgetForm, self).clean()
@@ -37,8 +44,7 @@ class DashboardWidgetForm(forms.Form):
 class InfoWidgetForm(DashboardWidgetForm):
     template_name = 'cosinnus/widgets/info_widget_form.html'
     
-    text = forms.CharField(label="Text", widget=forms.Textarea, help_text="Enter a description", required=False)
-    
+    text = forms.CharField(label=_("Text"), widget=forms.Textarea, help_text=_("Enter a description"), required=False)
     
     def __init__(self, *args, **kwargs):
         group = kwargs.pop('group', None)

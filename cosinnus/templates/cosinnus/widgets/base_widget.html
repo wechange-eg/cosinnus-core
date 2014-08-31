@@ -30,7 +30,7 @@
                                 <i class="fa {% if widget_icon %}{{ widget_icon }}{% else %}fa-question{% endif %}"></i>
                             {% endif %}
                         </a>
-                        {% if user.is_authenticated and group and user|is_group_admin:group or user.is_authenticaed and not group %}
+                        {% if request.user.is_authenticated and group and request.user|is_group_admin:group or request.user.is_authenticaed and not group %}
                             <a class="pull-right" href="#" data-type="delete" title="{% trans "Delete" %}">
                                 <i class="fa fa-trash-o"></i>
                             </a>
@@ -39,7 +39,7 @@
                             </a>
                         {% endif %}
                         <div class="media-body">
-                            <span data-target="widget-title">{% block widget_title %}{% endblock widget_title %}</span>
+                            <span {% if not widget_title %}data-target="widget-title"{% endif %}>{% block widget_title %}{% if widget_title %}{{ widget_title }}{% endif %}{% endblock widget_title %}</span>
                         </div>
                     </li>
                 </ul>
@@ -55,7 +55,7 @@
                                 <i class="fa {% if is_spare %}fa-floppy-o{% else %}fa-refresh{% endif %}"></i>
                             </a>
                             <div class="media-body">
-                                {% trans "Mehr" %}
+                                {% if link_label %}{{ link_label }}{% else %}{% trans "Mehr" %}{% endif %}
                             </div>
                         </li>
                     </ul>
