@@ -90,7 +90,13 @@ class AttachableObjectSelect2View(RequireReadMixin, Select2View):
         
         results = []
        
-        for attach_model_id in attached_object_registry.get_attachable_to(self.kwargs.get('model', None)):
+        attach_models = []
+        if 'model_as_target' in self.request.GET: 
+            attach_models = self.kwargs.get('model', '').split(',')
+        else:
+            attach_models = attached_object_registry.get_attachable_to(self.kwargs.get('model', None))
+       
+        for attach_model_id in attach_models:
             aliases = aliases_dict.get(attach_model_id, [])
             aliases = '||'.join(aliases)
             

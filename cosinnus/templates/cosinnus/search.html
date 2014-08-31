@@ -6,300 +6,302 @@
 {% block content_title %}{% trans "Search" %}{% endblock content_title %}
 
 {% block main_page %}
-<form method="get" action="" role="form">
-  <div class="col-lg-3 col-md-3">
-    <p class="navi-explanation">{% trans "In Anwendungen suchen" %}:</p>
-    
-    <div class="app-main">
-      <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}">
-        <ul class="media-list">
-          <li class="media">
-    
-            <!--
-            <a class="pull-left" href="#">
-              4
-            </a>
-            <a class="pull-left" style="background-color:inherit;" href="#">
-            -->
-            <a class="pull-left" href="#">
-              <i class="fa fa-search"></i>
-            </a>
-            <div class="media-body">
-              {% trans "Alle" %}
-            </div>
-          </li>
-        </ul>
-      </button>
-    </div>
-    
-    <div class="app-todos">
-      <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_todo.todoentry">
-        <ul class="media-list">
-          <li class="media">
-            <!--
-            <a class="pull-left" href="#">
-              2
-            </a>
-            <a class="pull-left" style="background-color:inherit;" href="#">
-            -->
-            <a class="pull-left" href="#">
-              <i class="fa fa-tasks"></i>
-            </a>
-            <div class="media-body">
-              {% trans "Aufgaben" %}
-            </div>
-          </li>
-        </ul>
-      </button>
-    </div>
-
-    <div class="app-files">
-      <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_file.fileentry">
-        <ul class="media-list">
-          <li class="media">
-            <!--
-            <a class="pull-left" href="#">
-              0
-            </a>
-            <a class="pull-left" style="background-color:inherit;" href="#">
-            -->
-            <a class="pull-left" href="#">
-              <i class="fa fa-file"></i>
-            </a>
-            <div class="media-body">
-              {% trans "Dateien" %}
-            </div>
-          </li>
-        </ul>
-      </button>
-    </div>
-
-    <div class="app-etherpad">
-      <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_etherpad.etherpad">
-        <ul class="media-list">
-          <li class="media">
-            <!--
-            <a class="pull-left" href="#">
-              2
-            </a>
-            <a class="pull-left" style="background-color:inherit;" href="#">
-            -->
-            <a class="pull-left" href="#">
-              <i class="fa fa-file-text-o"></i>
-            </a>
-            <div class="media-body">
-              {% trans "Etherpads" %}
-            </div>
-          </li>
-        </ul>
-      </button>
-    </div>
-
-    <div class="app-main">
-      <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_note.note">
-        <ul class="media-list">
-          <li class="media">
-            <!--
-            <a class="pull-left" href="#">
-              2
-            </a>
-            <a class="pull-left" style="background-color:inherit;" href="#">
-            -->
-            <a class="pull-left" href="#">
-              <i class="fa fa-file-text-o"></i>
-            </a>
-            <div class="media-body">
-              {% trans "Neuigkeiten" %}
-            </div>
-          </li>
-        </ul>
-      </button>
-    </div>
-
-    <div class="app-calendar">
-      <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "models" %}&models=cosinnus_event.event">
-        <ul class="media-list">
-          <li class="media">
-            <!--
-            <a class="pull-left" href="#">
-              4
-            </a>
-            <a class="pull-left" style="background-color:inherit;" href="#">
-            -->
-            <a class="pull-left" href="#">
-              <i class="fa fa-calendar"></i>
-            </a>
-            <div class="media-body">
-              {% trans "Termine" %}
-            </div>
-          </li>
-        </ul>
-      </button>
-    </div>
-
-
-    <p class="navi-explanation">{% trans "In Gruppen suchen" %}:</p>
-    
-    {% comment %}  {% if "groups" in request.GET %} {% endcomment %}
-    <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "groups" %}">
-      <ul class="media-list">
-        <li class="media">
-          <!--
-          <a class="pull-left" style="background-color:inherit;" href="#">
-          -->
-          <a class="pull-left" href="#">
-            <i class="fa fa-group"></i>
-          </a>
-          <div class="media-body">
-            {% trans "Alle" %}
-          </div>
-        </li>
-      </ul>
-    </button>
-    
-    <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "groups" %}&groups=mine">
-      <ul class="media-list">
-        <li class="media">
-          <a class="pull-left" href="#">
-              <i class="fa fa-group"></i>
-          </a>
-          <div class="media-body">
-            {% trans "Meine Gruppen" %}
-          </div>
-        </li>
-      </ul>
-    </button>
-
-    <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "groups" %}&groups=others">
-      <ul class="media-list">
-        <li class="media">
-          <a class="pull-left" href="#">
-              <i class="fa fa-group"></i>
-          </a>
-          <div class="media-body">
-            {% trans "Andere Gruppen" %}
-          </div>
-        </li>
-      </ul>
-    </button>
-
-    
-
-    {% comment %}
-    <p class="navi-explanation">Ergebnisse filtern:</p>
-    
-    <ol class="input-area input-area-left-column">
-      <li>
-        <div class="calendar-date-time-chooser">
-          Von
-          <input
-            placeholder="Datum"
-            readonly ="readonly"
-            class="calendar-date-time-chooser-date" />
-          <input type="hidden"
-            class="calendar-date-time-chooser-hiddendate"
-            value="{{ form.cleaned_data.valid_start|date:"c" }}"
-            name="valid_start" />
-          <div class="small-calendar"></div>
-        </div>
-        <div class="calendar-date-time-chooser">
-          Bis
-          <input
-            placeholder="Datum"
-            readonly ="readonly"
-            class="calendar-date-time-chooser-date" />
-          <input type="hidden"
-            class="calendar-date-time-chooser-hiddendate"
-            value="{{ form.cleaned_data.valid_end|date:"c" }}"
-            name="valid_end" />
-          <div class="small-calendar"></div>
-        </div>
-      </li>
-    </ol>
-
-    <ol class="input-area input-area-left-column">
-      <li>
-        <input
-          type="hidden"
-          class="location-selector"
-          data-tags="Berlin,Kreuzberg,Oranienhof,Köln,Paris,London,Frankfurt,New York,Peking"
-          data-placeholder="Ort"
-          name="location"
-          value="{{ form.cleaned_data.location }}" />
-      </li>
-    </ol>
-
-
-    <button type="submit" class="btn btn-default">
-      <ul class="media-list">
-        <li class="media">
-          <a class="pull-left" href="#">
-            <i class="fa fa-search"></i>
-          </a>
-          <div class="media-body">
-            Filtern
-          </div>
-        </li>
-      </ul>
-    </button>
-    {% endcomment %}
-  </div>
-  <div class="col-lg-9 col-md-9">
     <div class="row">
-      <div class="col-xs-12">
-        {% include 'cosinnus/messages.html' %}
-        <div class="content-box">
-          <div type="button" class="btn btn-default w100 large-space">
-            <ul class="media-list">
-              <li class="media">
-                <a class="pull-left" href="#">
-                  <i class="fa fa-search"></i>
-                </a>
-                <div class="media-body">
-                  <input class="form-control next-button-is-for-sending"
-                    placeholder="Suche"
-                    value="{{ query }}"
-                    id="searchChangeInput"
-                    name="q" />
+        <form method="get" action="" role="form">
+          <div class="col-lg-3 col-md-3">
+            <p class="navi-explanation">{% trans "In Anwendungen suchen" %}:</p>
+            
+            <div class="app-main">
+              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}">
+                <ul class="media-list">
+                  <li class="media">
+            
+                    <!--
+                    <a class="pull-left" href="#">
+                      4
+                    </a>
+                    <a class="pull-left" style="background-color:inherit;" href="#">
+                    -->
+                    <a class="pull-left" href="#">
+                      <i class="fa fa-search"></i>
+                    </a>
+                    <div class="media-body">
+                      {% trans "Alle" %}
+                    </div>
+                  </li>
+                </ul>
+              </button>
+            </div>
+            
+            <div class="app-todos">
+              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_todo.todoentry">
+                <ul class="media-list">
+                  <li class="media">
+                    <!--
+                    <a class="pull-left" href="#">
+                      2
+                    </a>
+                    <a class="pull-left" style="background-color:inherit;" href="#">
+                    -->
+                    <a class="pull-left" href="#">
+                      <i class="fa fa-tasks"></i>
+                    </a>
+                    <div class="media-body">
+                      {% trans "Aufgaben" %}
+                    </div>
+                  </li>
+                </ul>
+              </button>
+            </div>
+        
+            <div class="app-files">
+              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_file.fileentry">
+                <ul class="media-list">
+                  <li class="media">
+                    <!--
+                    <a class="pull-left" href="#">
+                      0
+                    </a>
+                    <a class="pull-left" style="background-color:inherit;" href="#">
+                    -->
+                    <a class="pull-left" href="#">
+                      <i class="fa fa-file"></i>
+                    </a>
+                    <div class="media-body">
+                      {% trans "Dateien" %}
+                    </div>
+                  </li>
+                </ul>
+              </button>
+            </div>
+        
+            <div class="app-etherpad">
+              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_etherpad.etherpad">
+                <ul class="media-list">
+                  <li class="media">
+                    <!--
+                    <a class="pull-left" href="#">
+                      2
+                    </a>
+                    <a class="pull-left" style="background-color:inherit;" href="#">
+                    -->
+                    <a class="pull-left" href="#">
+                      <i class="fa fa-file-text-o"></i>
+                    </a>
+                    <div class="media-body">
+                      {% trans "Etherpads" %}
+                    </div>
+                  </li>
+                </ul>
+              </button>
+            </div>
+        
+            <div class="app-main">
+              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_note.note">
+                <ul class="media-list">
+                  <li class="media">
+                    <!--
+                    <a class="pull-left" href="#">
+                      2
+                    </a>
+                    <a class="pull-left" style="background-color:inherit;" href="#">
+                    -->
+                    <a class="pull-left" href="#">
+                      <i class="fa fa-file-text-o"></i>
+                    </a>
+                    <div class="media-body">
+                      {% trans "Neuigkeiten" %}
+                    </div>
+                  </li>
+                </ul>
+              </button>
+            </div>
+        
+            <div class="app-calendar">
+              <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "models" %}&models=cosinnus_event.event">
+                <ul class="media-list">
+                  <li class="media">
+                    <!--
+                    <a class="pull-left" href="#">
+                      4
+                    </a>
+                    <a class="pull-left" style="background-color:inherit;" href="#">
+                    -->
+                    <a class="pull-left" href="#">
+                      <i class="fa fa-calendar"></i>
+                    </a>
+                    <div class="media-body">
+                      {% trans "Termine" %}
+                    </div>
+                  </li>
+                </ul>
+              </button>
+            </div>
+        
+        
+            <p class="navi-explanation">{% trans "In Gruppen suchen" %}:</p>
+            
+            {% comment %}  {% if "groups" in request.GET %} {% endcomment %}
+            <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "groups" %}">
+              <ul class="media-list">
+                <li class="media">
+                  <!--
+                  <a class="pull-left" style="background-color:inherit;" href="#">
+                  -->
+                  <a class="pull-left" href="#">
+                    <i class="fa fa-group"></i>
+                  </a>
+                  <div class="media-body">
+                    {% trans "Alle" %}
+                  </div>
+                </li>
+              </ul>
+            </button>
+            
+            <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "groups" %}&groups=mine">
+              <ul class="media-list">
+                <li class="media">
+                  <a class="pull-left" href="#">
+                      <i class="fa fa-group"></i>
+                  </a>
+                  <div class="media-body">
+                    {% trans "Meine Gruppen" %}
+                  </div>
+                </li>
+              </ul>
+            </button>
+        
+            <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "groups" %}&groups=others">
+              <ul class="media-list">
+                <li class="media">
+                  <a class="pull-left" href="#">
+                      <i class="fa fa-group"></i>
+                  </a>
+                  <div class="media-body">
+                    {% trans "Andere Gruppen" %}
+                  </div>
+                </li>
+              </ul>
+            </button>
+        
+            
+        
+            {% comment %}
+            <p class="navi-explanation">Ergebnisse filtern:</p>
+            
+            <ol class="input-area input-area-left-column">
+              <li>
+                <div class="calendar-date-time-chooser">
+                  Von
+                  <input
+                    placeholder="Datum"
+                    readonly ="readonly"
+                    class="calendar-date-time-chooser-date" />
+                  <input type="hidden"
+                    class="calendar-date-time-chooser-hiddendate"
+                    value="{{ form.cleaned_data.valid_start|date:"c" }}"
+                    name="valid_start" />
+                  <div class="small-calendar"></div>
+                </div>
+                <div class="calendar-date-time-chooser">
+                  Bis
+                  <input
+                    placeholder="Datum"
+                    readonly ="readonly"
+                    class="calendar-date-time-chooser-date" />
+                  <input type="hidden"
+                    class="calendar-date-time-chooser-hiddendate"
+                    value="{{ form.cleaned_data.valid_end|date:"c" }}"
+                    name="valid_end" />
+                  <div class="small-calendar"></div>
                 </div>
               </li>
-            </ul>
-          </div>
-			<button type="submit" class="btn btn-emphasized large-space" style="display: none;">
-			    <ul class="media-list">
-			        <li class="media">
-			            <a class="pull-left" href="#">
-			                <i class="fa fa-eraser"></i>
-			            </a>
-			            <div class="media-body">
-			                {% trans "Search" %}
-			            </div>
-			        </li>
-			    </ul>
-			</button>
-
-          {% if query %}
-            {% for result in page.object_list %}
-              {{ result.rendered|safe }}
-            {% endfor %}
-
-            {% if page.has_previous or page.has_next %}
-              <ul class="pagination">
-                <li>{% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}{% trans "zurück" %}{% if page.has_previous %}</a>{% endif %}</li>
-                <!--<li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li> -->
-                <li>{% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}{% trans "weiter" %}{% if page.has_next %}</a>{% endif %}</li>
+            </ol>
+        
+            <ol class="input-area input-area-left-column">
+              <li>
+                <input
+                  type="hidden"
+                  class="location-selector"
+                  data-tags="Berlin,Kreuzberg,Oranienhof,Köln,Paris,London,Frankfurt,New York,Peking"
+                  data-placeholder="Ort"
+                  name="location"
+                  value="{{ form.cleaned_data.location }}" />
+              </li>
+            </ol>
+        
+        
+            <button type="submit" class="btn btn-default">
+              <ul class="media-list">
+                <li class="media">
+                  <a class="pull-left" href="#">
+                    <i class="fa fa-search"></i>
+                  </a>
+                  <div class="media-body">
+                    Filtern
+                  </div>
+                </li>
               </ul>
-            {% endif %}
-          {% else %}
-            {# Show some example queries to run, maybe query syntax, something else? #}
-          {% endif %}
-        </div><!-- content-box -->
-      </div><!-- col -->
+            </button>
+            {% endcomment %}
+          </div>
+          <div class="col-lg-9 col-md-9">
+            <div class="row">
+              <div class="col-xs-12">
+                {% include 'cosinnus/messages.html' %}
+                <div class="content-box">
+                  <div type="button" class="btn btn-default w100 large-space">
+                    <ul class="media-list">
+                      <li class="media">
+                        <a class="pull-left" href="#">
+                          <i class="fa fa-search"></i>
+                        </a>
+                        <div class="media-body">
+                          <input class="form-control next-button-is-for-sending"
+                            placeholder="Suche"
+                            value="{{ query }}"
+                            id="searchChangeInput"
+                            name="q" />
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                    <button type="submit" class="btn btn-emphasized large-space" style="display: none;">
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-eraser"></i>
+                                </a>
+                                <div class="media-body">
+                                    {% trans "Search" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+        
+                  {% if query %}
+                    {% for result in page.object_list %}
+                      {{ result.rendered|safe }}
+                    {% endfor %}
+        
+                    {% if page.has_previous or page.has_next %}
+                      <ul class="pagination">
+                        <li>{% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}{% trans "zurück" %}{% if page.has_previous %}</a>{% endif %}</li>
+                        <!--<li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li> -->
+                        <li>{% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}{% trans "weiter" %}{% if page.has_next %}</a>{% endif %}</li>
+                      </ul>
+                    {% endif %}
+                  {% else %}
+                    {# Show some example queries to run, maybe query syntax, something else? #}
+                  {% endif %}
+                </div><!-- content-box -->
+              </div><!-- col -->
+            </div><!-- row -->
+          </div><!-- right column -->
+        </form>
     </div><!-- row -->
-  </div><!-- right column -->
-</form>
 {% endblock main_page %}

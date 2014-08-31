@@ -865,7 +865,30 @@
 			var markerGroup = new L.featureGroup(markers);
 			map.fitBounds(markerGroup.getBounds());
 
-		}
+		},
+		
+		/** Enables toggling content by clicking a button.
+		 *    Set this up by giving your button elements: 
+		 *    - a data-id="<num>", different for each
+		 *    - a data-toggle-group="<name>", same for each (if omitted, assumes global group)
+		 *    - the class "toggleable_button" 
+		 *    
+		 *    Give your content elements (multiple supported, for example for content, and a button highlight)
+		 *    - the same data-id
+		 *    - the same data-toggle-group
+		 *    - the class "toggleable_content"
+		 *    */
+		toggleable : function() {
+		    $('.toggleable_button').click(function () {
+		        var group = $(this).data('toggle-group');
+		        if (group) {
+		            $('.toggleable_content[data-toggle-group='+$(this).data('toggle-group')+']').hide();
+		        } else {
+		            $('.toggleable_content').hide();
+		        }
+	            $('.toggleable_content[data-id='+$(this).data('id')+']').show();
+	        });
+        }
 
 	};
 })( jQuery );

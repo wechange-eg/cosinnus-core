@@ -10,6 +10,7 @@ from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import AttachedObject
 from cosinnus.models.organisation import CosinnusOrganisationMembership,\
     CosinnusOrganisation
+from cosinnus.models.cms import CosinnusMicropage
 
 
 # group related admin
@@ -55,6 +56,12 @@ class CosinnusOrganisationAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name', )}
 
 admin.site.register(CosinnusOrganisation, CosinnusOrganisationAdmin)
+
+
+class CosinnusMicropageAdmin(admin.ModelAdmin):
+    list_display = ('title', 'group', 'last_edited_by', 'last_edited')
+
+admin.site.register(CosinnusMicropage, CosinnusMicropageAdmin)
 
 
 

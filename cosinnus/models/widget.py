@@ -12,8 +12,20 @@ from cosinnus.conf import settings
 @python_2_unicode_compatible
 class WidgetConfig(models.Model):
 
+    TYPE_DASHBOARD = 1
+    TYPE_MICROSITE = 2
+
+    TYPE_CHOICES = (
+        (TYPE_DASHBOARD, _('Dashboard')),
+        (TYPE_MICROSITE, _('Microsite')),
+    )
+    
     app_name = models.CharField(_('Application name'), max_length=20)
     widget_name = models.CharField(_('Widget name'), max_length=20)
+    type = models.PositiveIntegerField(_('Widget Type'),
+        choices=TYPE_CHOICES, default=TYPE_DASHBOARD,
+        editable=False, null=False, blank=False
+    )
     group = models.ForeignKey('cosinnus.CosinnusGroup', null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE)
 
@@ -42,25 +54,38 @@ class WidgetConfig(models.Model):
             return ci.config_value
         except WidgetConfigItem.DoesNotExist:
             raise KeyError('No config option for %s found' % key)
-
-    def __setitem__(self, key, value):
+    
+    get_default=object()
+    def get(self, key, default=get_default):
         try:
-            ci = self.items.get(config_key=key)
-            ci.config_value = value
-        except WidgetConfigItem.DoesNotExist:
-            ci = WidgetConfigItem(config=self, config_key=key, config_value=value)
-        ci.save()
-
+            return self[key]
+        except KeyError, err:
+            if default == self.get_default:
+                raise err
+            return default
+    
+    def __setitem__(self, key, value):
+        if hasattr(self, key):
+            setattr(self, key, value)
+        else:
+            try:
+                ci = self.items.get(config_key=key)
+                ci.config_value = value
+            except WidgetConfigItem.DoesNotExist:
+                ci = WidgetConfigItem(config=self, config_key=key, config_value=value)
+            ci.save()
+            
     def __delitem__(self, key):
         try:
             self.items.get(config_key=key).delete()
         except WidgetConfigItem.DoesNotExist:
             raise KeyError('No config option for %s found' % key)
+    
 
     def __iter__(self):
         for item in self.items.values_list('config_key', 'config_value'):
             yield item
-
+    
 
 @python_2_unicode_compatible
 class WidgetConfigItem(models.Model):

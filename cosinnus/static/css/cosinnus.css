@@ -1167,13 +1167,13 @@ a.pull-left {
 .btn-headline .media > a.pull-left:not(:first-child) {
   background-color: transparent;
 }
-.btn-headline .media > a.pull-left {
+.btn-headline .media > a.pull-left, .btn-headline .media > a.pull-right {
   height: 50px;
   width: 50px;
   font-size: 28px;
   line-height: 48px;
 }
-.btn-headline .media > a.pull-left img {
+.btn-headline .media > a.pull-left img, .btn-headline .media > a.pull-right img {
   width: 50px;
 }
 .btn-headline .media {
@@ -1562,6 +1562,10 @@ ul.errorlist li:before {
 
 .autowidth {
   width: auto !important;
+}
+
+.position-relative {
+  position: relative;
 }
 
 body div .select2-container .select2-choice,

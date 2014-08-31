@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 import six
 
-from django import forms
+
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
@@ -14,37 +14,24 @@ from cosinnus.utils.compat import atomic
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.utils.permissions import get_tagged_object_filter_for_user
 from django.contrib.auth import get_user_model
+from cosinnus.forms.dashboard import InfoWidgetForm, DashboardWidgetForm,\
+    EmptyWidgetForm
+from cosinnus.models.tagged import AttachedObject
 
-
-class DashboardWidgetForm(forms.Form):
-
-    def clean(self):
-        cleaned_data = super(DashboardWidgetForm, self).clean()
-        for key, value in six.iteritems(cleaned_data):
-            if value is None:
-                # We need to find a default value: The approach we are using
-                # here is to first take the initial value from the form and if
-                # this is not defined, take the initial value directly from the
-                # field. If the field has no initial value, fall back to an
-                # empty string
-                if key in self.initial:
-                    value = self.initial[key]
-                elif self.fields[key].initial:
-                    value = self.fields[key].initial
-            if value is None:
-                value = ''
-            cleaned_data[key] = value
-        return cleaned_data
 
 
 class DashboardWidget(object):
 
     app_name = None
+    widget_name = None
     form_class = DashboardWidgetForm
+    # the template for the widget itself (header, buttons, etc)
+    widget_template_name = 'cosinnus/widgets/base_widget.html'
+    # the template for the rendereable content of the widget
+    template_name = None
     group_model_attr = 'group'
     model = None
     user_model_attr = 'owner'
-    widget_name = None
     allow_on_user = True
     allow_on_group = True
 
@@ -106,17 +93,39 @@ class DashboardWidget(object):
         if not cls.widget_name:
             raise ImproperlyConfigured('%s must defined a widget_name' % cls.__name__)
         return cls.widget_name
-
+    
+    @classmethod
+    def get_widget_title(cls):
+        if not cls.title:
+            raise ImproperlyConfigured('%s must defined a title' % cls.__name__)
+        return cls.title
+    
     @property
     def id(self):
         return self.config.pk
 
     def save_config(self, items):
+        committed = True
         with atomic():
             self.config.items.all().delete()
             for k, v in six.iteritems(items):
+                if hasattr(self.config, k):
+                    setattr(self.config, k, v)
+                    committed = False
                 self.config[k] = v
-
+            if not committed:    
+                self.config.save()
+    
+    def render(self, **kwargs):
+        context = dict(**kwargs)
+        context.update({
+            'widget_conf_id': self.id,
+            'widget_title': self.config.get('widget_title', None),
+            'widget_icon': self.config.get('widget_icon', None),
+            'link_label':self.config.get('link_label', None),
+        })
+        return render_to_string(self.widget_template_name, context)
+    
     @property
     def title(self):
         return ''
@@ -128,7 +137,14 @@ class DashboardWidget(object):
                            kwargs={'group': self.config.group.slug})
         # return '#' as default url to prevent firefox dropping the <a> tag content
         return '#'
-
+    
+    def attached_objects_from_field(self, field):
+        """ Resolves attached BaseTaggableObjects from a widget config field that contains
+            ids of AttachableObject connector objects """
+        if field:
+            attached_ids = [int(val) for val in field.split(',')]
+            return AttachedObject.objects.filter(id__in=attached_ids)
+        return []
 
 class GroupDescriptionForm(DashboardWidgetForm):
     """
@@ -203,3 +219,85 @@ class GroupMembersWidget(DashboardWidget):
     @property
     def title_url(self):
         return '#'
+    
+    
+    
+
+class InfoWidget(DashboardWidget):
+    """ An extremeley simple info widget displaying text.
+        The text is saved in the widget config
+    """
+
+    app_name = 'cosinnus'
+    widget_template_name = 'cosinnus/widgets/info_widget.html'
+    template_name = 'cosinnus/widgets/info_widget_content.html'
+    model = None
+    title = _('About Us')
+    form_class = InfoWidgetForm
+    user_model_attr = None
+    widget_name = 'info_widget'
+    allow_on_user = True
+    
+    @property
+    def attached_images(self):
+        images = []
+        for att_obj in self.attached_objects_from_field(self.config['images']):
+            if att_obj.model_name == "cosinnus_file.FileEntry" and att_obj.target_object.is_image:
+                images.append(att_obj.target_object)
+        return images
+    
+    def get_data(self, offset=0):
+        """ Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.
+            if has_more == False, the receiving widget will assume no further data can be loaded.
+        """
+        """
+        group = self.config.group
+        if group is None:
+            return ''
+        data = {
+            'group': group,
+        }
+        """
+        images = self.attached_images
+        
+        context = {
+            'text': self.config['text'],
+            'images': images,
+        }
+        
+        return (render_to_string(self.template_name, context), 0, True)
+    
+    @property
+    def title_url(self):
+        return ''
+    
+    def get_queryset(self):
+        return None
+    
+class MetaAttributeWidget(DashboardWidget):
+    """ An extremeley simple info widget displaying text.
+        The text is saved in the widget config
+    """
+
+    app_name = 'cosinnus'
+    widget_template_name = 'cosinnus/widgets/meta_attribute_widget.html'
+    template_name = ''
+    model = None
+    title = _('Informations')
+    form_class = EmptyWidgetForm
+    user_model_attr = None
+    widget_name = 'meta_attr_widget'
+    allow_on_user = False
+    
+    
+    def get_data(self, offset=0):
+        # return (no data, no rows, no More button)
+        return ('', 0, False)
+    
+    @property
+    def title_url(self):
+        return ''
+    
+    def get_queryset(self):
+        return None
+    

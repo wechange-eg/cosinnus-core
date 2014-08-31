@@ -61,8 +61,7 @@ $('.js-todo-link').on('click', function(e) {
             var widget_tags = $('[data-type=widget]', this.holder);
             $.each(widget_tags, function() {
                 holder = $(this);
-                that.bind_menu(holder);
-                that.load(holder);
+                that.initWidget(holder);
             });
             var add_widget = $('[data-type=widget-add]', this.holder);
             $('[data-target=widget-add-button]', add_widget).bind("click", {
@@ -72,6 +71,10 @@ $('.js-todo-link').on('click', function(e) {
                 Cosinnus.dashboard.add_empty(event.data.holder);
             });
             return this;
+        },
+        initWidget: function(widget_node) {
+            this.bind_menu(widget_node);
+            this.load(widget_node);
         },
         add: function(holder, args) {
             var that = this;
@@ -83,56 +86,69 @@ $('.js-todo-link').on('click', function(e) {
             if (Cosinnus.dashboard.group === false) {
                 url = url + "user/";
             } else {
-                url = url + "group/" + Cosinnus.dashboard.group + "/";
+                url = url + cosinnus_group_url_path + "/" + Cosinnus.dashboard.group + "/";
             }
             url = url + app + "/" + widget + "/";
             if (data === undefined) {
                 data = {};
             }
+            console.log('now submitting to '+ url + ', data:' + data);
             $.post(url, data, function(data, textStatus, jqXHR) {
-                if (jqXHR.getResponseHeader('Content-Type') === "application/json") {
-                    var id = data['id'];
-                    holder.attr('data-widget-id', id).attr('data-type', 'widget');
-                    Cosinnus.dashboard.bind_menu(holder);
-                    Cosinnus.dashboard.load(holder);
-                } else {
-                    Cosinnus.dashboard.show_settings(holder, data, Cosinnus.dashboard.add, {
-                        app: app,
-                        widget: widget
-                    });
-                }
+                console.log("> got back widget data")
+                // if (jqXHR.getResponseHeader('Content-Type') === "application/json") {
+                // we assume here we got the rendered widget back and replace the config dialog with the widget
+                var widget = that.swapWidgetFromData(data, holder);
+                that.initWidget(widget);
+                
             }).fail(function(jqXHR, textStatus, errorThrown) {
-                $('[data-target=widget-content]', holder).html('<div class="alert alert-danger">An error occurred while adding the widget.</div>');
+                $('[data-target=widget-content]', holder).prepend('<div class="alert alert-danger">An error occurred while adding the widget.</div>');
             });
+        },
+        /** Exchanges a widget for a new widget that is being parsed from server data HTML.
+         *  return: the widget as a jQuery node. */
+        swapWidgetFromData: function(data, old_widget, dontRemove) {
+            var widget_node = $.parseHTML(data, keepScripts=true);
+            old_widget.before(widget_node);
+            var widget = old_widget.prev();
+            widget.hide().fadeIn("slow");
+            if (!(dontRemove !== undefined && dontRemove)) {
+                old_widget.remove();
+            }
+            return widget;
         },
         add_empty: function(holder) {
             var that = this;
-            $.ajax(Cosinnus.base_url + "widgets/list/").done(function(data, textStatus, jqXHR) {
-                var new_holder = $('[data-type=widget-spare]', that.holder).clone().attr('data-type', 'widget-new');
-                var list = $('<ul></ul>');
-                $.each(data, function(k) {
-                    var app = $('<li></li>').append(k);
-                    var widgets = $('<ul></ul>');
-                    $.each(this, function(i, v) {
-                        var widget = $('<a href="#"></a>').append(v).bind("click", {
-                            holder: new_holder,
-                            app: k,
-                            widget: v
-                        }, function(event) {
-                            event.preventDefault();
-                            Cosinnus.dashboard.add(event.data.holder, {
-                                app: event.data.app,
-                                widget: event.data.widget
-                            });
-                        });
-                        widgets.append($('<li></li>').append(widget));
+            var url = Cosinnus.base_url + 'widgets/add/';
+            if (Cosinnus.dashboard.group === false) {
+                url = url + "user/";
+            } else {
+                url = url + cosinnus_group_url_path + "/" + Cosinnus.dashboard.group + "/";
+            }
+            
+            $.ajax(url).done(function(data, textStatus, jqXHR) {
+                var widget_anchor = $('[data-type=widget-anchor]', that.holder);
+                var widget = that.swapWidgetFromData(data, widget_anchor, true);
+                
+                var save_button = $('[data-target=widget-save-button]', widget);
+                save_button.bind("click", {
+                    holder: widget
+                }, function(event) {
+                    event.preventDefault();
+                    // save widget: we get the form data of the visible form to POST to backend
+                    Cosinnus.dashboard.add(event.data.holder, {
+                        app: $('form:visible', widget).attr('data-widget-app'),
+                        widget:$('form:visible', widget).attr('data-widget-widget'),
+                        data: $('form:visible', widget).serialize()
                     });
-                    list.append(app.append(widgets));
                 });
-                $('[data-target=widget-content]', new_holder).html(list);
-                $('[data-target=widget-title]', new_holder).html("Select a widget");
-                new_holder.hide().insertBefore(holder).fadeIn("slow");
-                // new_holder.insertBefore(holder);
+                // cancel button just removes the element
+                var cancel_button = $('[data-target=widget-cancel-button]', widget);
+                cancel_button.bind("click", {
+                    holder: widget
+                }, function(event) {
+                    event.preventDefault();
+                    event.data.holder.fadeOut("slow");
+                });
             });
         },
         bind_menu: function(holder) {
@@ -169,72 +185,116 @@ $('.js-todo-link').on('click', function(e) {
         edit: function(holder, args) {
             var that = this;
             args = args || {};
+            var app = args.app;
+            var widget = args.widget;
+            var extra_url = '';
+            if (app !== undefined && widget !== undefined) {
+                extra_url += app + '/' + widget + '/';
+            }
             var id = holder.attr('data-widget-id');
             var settings = {};
+            
             if (args.data !== undefined) {
                 args['type'] = "POST";
             }
-            $.ajax(Cosinnus.base_url + "widget/" + id + "/edit/", args).done(function(data, textStatus, jqXHR) {
-                if (jqXHR.getResponseHeader('Content-Type') === "application/json") {
-                    Cosinnus.dashboard.load(holder);
+            // either POSTing or GETing here, what we do after depends on that
+            $.ajax(Cosinnus.base_url + "widget/" + id + "/edit/" + extra_url, args).done(function(data, textStatus, jqXHR) {
+                
+                if (args['type'] == "POST") {
+                    console.log("> got back widget data from edit")
+                    // if (jqXHR.getResponseHeader('Content-Type') === "application/json") {
+                    // we assume here we got the rendered widget back and replace the config dialog with the widget
+                    // first, we destroy the old widget that has been hiding
+                    holder.next().remove();
+                    var widget = that.swapWidgetFromData(data, holder);
+                    that.initWidget(widget);
+                    
                 } else {
-                    Cosinnus.dashboard.show_settings(holder, data, Cosinnus.dashboard.edit);
+                    /* Swap widget for its edit view widget (but only hide the widget) */
+                    var widget = that.swapWidgetFromData(data, holder, true);
+                    holder.hide();
+                    var save_button = $('[data-target=widget-save-button]', widget);
+                    save_button.bind("click", {
+                        holder: widget
+                    }, function(event) {
+                        event.preventDefault();
+                        // save widget: we get the form data of the visible form to POST to backend
+                        Cosinnus.dashboard.edit(event.data.holder, {
+                            app: $('form:visible', widget).attr('data-widget-app'),
+                            widget:$('form:visible', widget).attr('data-widget-widget'),
+                            data: $('form:visible', widget).serialize()
+                        });
+                    });
+                    var cancel_button = $('[data-target=widget-cancel-button]', widget);
+                    cancel_button.bind("click", {
+                        holder: widget
+                    }, function(event) {
+                        event.preventDefault();
+                        // save widget: we get the form data of the visible form to POST to backend
+                        Cosinnus.dashboard.cancel_edit(event.data.holder);
+                    });
                 }
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 $('[data-target=widget-content]', holder).html('<div class="alert alert-danger">An error occurred while configuring the widget.</div>');
             });
+        },
+        cancel_edit: function(holder) {
+            holder.next().fadeIn("slow");
+            holder.remove();
         },
         load: function(holder, offset) {
             var that = this;
             var id = holder.attr('data-widget-id');
             offset = parseInt(offset || 0);
             
-            $.ajax(Cosinnus.base_url + "widget/" + id + "/" + offset + "/").done(function(data, textStatus, jqXHR) {
-                var rows_returned = parseInt(jqXHR.getResponseHeader('X-Cosinnus-Widget-Num-Rows-Returned') || 0);
-                var has_more_data = 'true' === (jqXHR.getResponseHeader('X-Cosinnus-Widget-Has-More-Data') || 'false');
-                
-                // display the fetched data if we have actually gotten something back, or if
-                // this is the initial query (we expect a rendered "no content" message)
-                if (rows_returned > 0 || offset == 0) {
-                    $('[data-target=widget-content]', holder).append(data);
-                }
-                if (has_more_data > 0) {
-                    // attach the function to load the next set of data from the backend to the "More" button
-                    $('[data-target=widget-reload-button]', holder).unbind('click');
-                    $('[data-target=widget-reload-button]', holder).click(function() {
-                        that.load(holder, offset + rows_returned);
-                    });
-                } else {
-                    // hide the "More button"
-                    $('[data-target=widget-reload-button]', holder).hide();
-                }
+            if (typeof id !== "undefined") {
+                $.ajax(Cosinnus.base_url + "widget/" + id + "/" + offset + "/").done(function(data, textStatus, jqXHR) {
+                    var rows_returned = parseInt(jqXHR.getResponseHeader('X-Cosinnus-Widget-Num-Rows-Returned') || 0);
+                    var has_more_data = 'true' === (jqXHR.getResponseHeader('X-Cosinnus-Widget-Has-More-Data') || 'false');
                     
-                $('[data-target=widget-title]', holder).html(jqXHR.getResponseHeader('X-Cosinnus-Widget-Title'));
-                var title_url = jqXHR.getResponseHeader('X-Cosinnus-Widget-Title-URL');
-                if (title_url !== null) {
-                    console.log($('[data-target=widget-title-url]', holder))
-                    $('[data-target=widget-title-url]', holder).attr("href", title_url);
-                } else {
-                    $('[data-target=widget-title-url]', holder).children().unwrap();
-                }
-                holder.attr("data-app-name", jqXHR.getResponseHeader('X-Cosinnus-Widget-App-Name'));
-                holder.attr("data-widget-name", jqXHR.getResponseHeader('X-Cosinnus-Widget-Widget-Name'));
-                
-                $.cosinnus.renderMomentDataDate();
-                $.cosinnus.autogrow();
-
-            }).fail(function(jqXHR, textStatus, errorThrown) {
-                var error = $('<div class="alert alert-danger">An error occurred while loading the widget. </div>');
-                var reload = $('<a href="#" class="alert-link">Reload</a>').bind("click", {
-                    holder: holder
-                }, function(event) {
-                    event.preventDefault();
-                    Cosinnus.dashboard.load(event.data.holder);
+                    // display the fetched data if we have actually gotten something back, or if
+                    // this is the initial query (we expect a rendered "no content" message)
+                    if (rows_returned > 0 || offset == 0) {
+                        $('[data-target=widget-content]', holder).append(data);
+                    }
+                    if (has_more_data > 0) {
+                        // attach the function to load the next set of data from the backend to the "More" button
+                        $('[data-target=widget-reload-button]', holder).unbind('click');
+                        $('[data-target=widget-reload-button]', holder).click(function() {
+                            that.load(holder, offset + rows_returned);
+                        });
+                    } else {
+                        // hide the "More button"
+                        $('[data-target=widget-reload-button]', holder).hide();
+                    }
+                        
+                    $('[data-target=widget-title]', holder).html(jqXHR.getResponseHeader('X-Cosinnus-Widget-Title'));
+                    var title_url = jqXHR.getResponseHeader('X-Cosinnus-Widget-Title-URL');
+                    if (title_url !== null) {
+                        console.log($('[data-target=widget-title-url]', holder))
+                        $('[data-target=widget-title-url]', holder).attr("href", title_url);
+                    } else {
+                        $('[data-target=widget-title-url]', holder).children().unwrap();
+                    }
+                    holder.attr("data-app-name", jqXHR.getResponseHeader('X-Cosinnus-Widget-App-Name'));
+                    holder.attr("data-widget-name", jqXHR.getResponseHeader('X-Cosinnus-Widget-Widget-Name'));
+                    
+                    $.cosinnus.renderMomentDataDate();
+                    $.cosinnus.autogrow();
+    
+                }).fail(function(jqXHR, textStatus, errorThrown) {
+                    var error = $('<div class="alert alert-danger">An error occurred while loading the widget. </div>');
+                    var reload = $('<a href="#" class="alert-link">Reload</a>').bind("click", {
+                        holder: holder
+                    }, function(event) {
+                        event.preventDefault();
+                        Cosinnus.dashboard.load(event.data.holder);
+                    });
+                    error.append(reload);
+                    $('[data-target=widget-content]', holder).html(error);
+                    $('[data-target=widget-title]', holder).html(textStatus);
                 });
-                error.append(reload);
-                $('[data-target=widget-content]', holder).html(error);
-                $('[data-target=widget-title]', holder).html(textStatus);
-            });
+            }
         },
         show_settings: function(holder, data, submit_callback, submit_data) {
             var content = $(data);
@@ -251,76 +311,3 @@ $('.js-todo-link').on('click', function(e) {
 }(jQuery, window.Cosinnus));
 
 
-// CALENDAR
-
-var calendars = {};
-
-// here's some magic to make sure the dates are happening this month.
-var thisMonth = moment().format('YYYY-MM');
-
-var eventArray = [
-{ startDate: thisMonth + '-10', endDate: thisMonth + '-14', title: 'Multi-Day Event' },
-{ startDate: thisMonth + '-21', endDate: thisMonth + '-23', title: 'Another Multi-Day Event' }
-];
-
-// the order of the click handlers is predictable.
-// direct click action callbacks come first: click, nextMonth, previousMonth, nextYear, previousYear, or today.
-// then onMonthChange (if the month changed).
-// finally onYearChange (if the year changed).
-/**
-calendars.clndr1 = $('.cal1').clndr({
-    template: $('#template-calendar').html(),
-    events: eventArray,
-    // constraints: {
-    //   startDate: '2013-11-01',
-    //   endDate: '2013-11-15'
-    // },
-    clickEvents: {
-      click: function(target) {
-        console.log(target);
-        // if you turn the `constraints` option on, try this out:
-        // if($(target.element).hasClass('inactive')) {
-        //   console.log('not a valid datepicker date.');
-        // } else {
-        //   console.log('VALID datepicker date.');
-        // }
-      },
-      nextMonth: function() {
-        console.log('next month.');
-      },
-      previousMonth: function() {
-        console.log('previous month.');
-      },
-      onMonthChange: function() {
-        console.log('month changed.');
-      },
-      nextYear: function() {
-        console.log('next year.');
-      },
-      previousYear: function() {
-        console.log('previous year.');
-      },
-      onYearChange: function() {
-        console.log('year changed.');
-      }
-    },
-    multiDayEvents: {
-      startDate: 'startDate',
-      endDate: 'endDate'
-    },
-    showAdjacentMonths: true,
-    adjacentDaysChangeMonth: false
-});
-**/
-//
-//calendars.clndr2 = $('.cal2').clndr({
-//    template: $('#template-calendar').html(),
-//    events: eventArray,
-//    startWithMonth: moment().add('month', 1),
-//    clickEvents: {
-//      click: function(target) {
-//        console.log(target);
-//      }
-//    },
-//    forceSixRows: true
-//});

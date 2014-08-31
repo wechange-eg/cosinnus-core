@@ -3,6 +3,7 @@
 {% url 'cosinnus:group-detail' group=group.slug as group_detail_page %}
 {% url 'cosinnus:group-edit' group=group.slug as group_edit_page %}
 {% url 'cosinnus:group-dashboard' group=group.slug as group_dashboard_page %}
+{% url 'cosinnus:group-microsite' group=group.slug as group_microsite_page %}
 
 <div class="btn-group w100 large-space">
     <button type="button" class="btn btn-appnavi dropdown-toggle w100" data-toggle="dropdown">
@@ -25,6 +26,8 @@
                       {% endfor %}
                     {% elif request.path == group_detail_page or request.path == group_edit_page %}  
                         {% trans "Einstellungen" %}
+                    {% elif request.path == group_microsite_page %}  
+                        {% trans "Microsite" %}
                     {% elif request.path == group_dashboard_page %}
                         {% trans "Dashboard" %}
                     {% else %}
@@ -35,10 +38,16 @@
         </ul>
     </button>
     <ul class="dropdown-menu appnavi-dropdown-menu w100" role="menu">
-        <li class="app-main appnavi-listelement">
+        <li class="app-main appnavi-listelement fine-space">
             <a href="{% url 'cosinnus:group-dashboard' group=group.slug %}">
                 <i class="fa fa-th-large"></i>
                 {% trans "Dashboard" %}
+            </a>
+        </li>
+        <li class="app-main appnavi-listelement fine-space">
+            <a href="{{ group_microsite_page }}">
+                <i class="fa fa-lightbulb-o"></i>
+                {% trans "Microsite" %}
             </a>
         </li>
         {% for app in apps %}

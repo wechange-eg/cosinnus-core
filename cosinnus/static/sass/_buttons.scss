@@ -455,7 +455,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	.media > a.pull-left:not(:first-child) {
 		background-color: transparent;
 	}
-	.media > a.pull-left {
+	.media > a.pull-left, .media > a.pull-right {
 		height: 50px;
 		width: 50px;
 		font-size: 28px;

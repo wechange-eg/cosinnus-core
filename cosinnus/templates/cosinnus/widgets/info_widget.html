@@ -1,0 +1,17 @@
+{% extends "cosinnus/widgets/base_widget.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block widget_button %}
+    <button type="button" class="btn btn-emphasized" href="#micropages">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-right btn-extra-emphasized" href="#">
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+                <div class="media-body">
+                    {% if link_label %}{{ link_label }}{% else %}{% trans "Mehr" %}{% endif %}
+                </div>
+            </li>
+        </ul>
+    </button><!-- btn -->
+{% endblock widget_button %}

@@ -5,7 +5,7 @@ import six
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseForbidden
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import get_object_or_404, render_to_response, render
 from django.template import RequestContext
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_text
@@ -19,6 +19,9 @@ from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.http import JSONResponse
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
 from cosinnus.views.mixins.group import RequireReadMixin
+from django.template.loader import render_to_string
+from django.core.exceptions import ImproperlyConfigured
+from uuid import uuid1
 
 
 def widget_list(request):
@@ -28,54 +31,66 @@ def widget_list(request):
     return JSONResponse(data)
 
 
-@ensure_csrf_cookie
-@login_required
 def widget_add_user(request, app_name, widget_name):
-    widget_class = widget_registry.get(app_name, widget_name)
-    if widget_class is None:
-        return render_to_response('cosinnus/widgets/not_found.html')
-    if not widget_class.allow_on_user:
-        return render_to_response('cosinnus/widgets/not_allowed_user.html')
-    form_class = widget_class.get_setup_form_class()
-    if request.method == "POST":
-        form = form_class(request.POST)
-        if form.is_valid():
-            widget = widget_class.create(request, user=request.user)
-            widget.save_config(form.cleaned_data)
-            return JSONResponse({'id': widget.id})
-    else:
-        form = form_class()
-    d = {
-        'form': form,
-        'submit_label': _('Add widget'),
-    }
-    c = RequestContext(request)
-    return render_to_response('cosinnus/widgets/setup.html', d, c)
+    return widget_add_group(request, None, app_name, widget_name)
 
 
 @ensure_csrf_cookie
 @require_admin_access_decorator()
-def widget_add_group(request, group, app_name, widget_name):
-    widget_class = widget_registry.get(app_name, widget_name)
-    if widget_class is None:
-        return render_to_response('cosinnus/widgets/not_found.html')
-    form_class = widget_class.get_setup_form_class()
-    if not widget_class.allow_on_group:
-        return render_to_response('cosinnus/widgets/not_allowed_group.html')
+def widget_add_group(request, group, app_name=None, widget_name=None):
+    template_name = 'cosinnus/widgets/add_widget.html'
+    extra_context = {'form_view': 'add'}
+    
     if request.method == "POST":
-        form = form_class(request.POST)
+        print ">>> request arrived"
+        widget_class = widget_registry.get(app_name, widget_name)
+        if widget_class is None:
+            return render_to_response('cosinnus/widgets/not_found.html')
+        form_class = widget_class.get_setup_form_class()
+        if not widget_class.allow_on_group:
+            return render_to_response('cosinnus/widgets/not_allowed_group.html')
+        
+        form = form_class(request.POST, group=group)
         if form.is_valid():
-            widget = widget_class.create(request, group=group)
+            # the onl difference to user seems to be:
+            if not group:
+                widget = widget_class.create(request, user=request.user)
+            else:
+                widget = widget_class.create(request, group=group)
             widget.save_config(form.cleaned_data)
-            return JSONResponse({'id': widget.id})
+            
+            return HttpResponse(widget.render(user=request.user, request=request, group=group))
+        raise Exception("Form was invalid for widget add: ", app_name, widget_name, form_class)
     else:
-        form = form_class()
-    d = {
-        'form': form,
-        'submit_label': _('Add widget'),
-    }
-    c = RequestContext(request)
-    return render_to_response('cosinnus/widgets/setup.html', d, c)
+        data = []
+        for app_name, widgets in widget_registry:
+            form_active = True
+            for widget_name in widgets:
+                widget_class = widget_registry.get(app_name, widget_name)
+                if widget_class is None:
+                    print ">>>>widg not found:", app_name, widget_name
+                    continue
+                form_class = widget_class.get_setup_form_class()
+                if not getattr(form_class, "template_name", None):
+                    #raise ImproperlyConfigured('Widget form "%s %s" has no attribute "template_name" configured!' % (app_name, widget_name))
+                    print '>> ignoring widget "%s %s" without template_name form: ' %  (app_name, widget_name)
+                    continue
+                context = {'form': form_class(group=group)}
+                print ">> widg trying to:", app_name, widget_name, widget_class, form_class, form_class.template_name
+                widget_form_content = render(request, form_class.template_name, context).content
+                data.append({
+                    'app_name': app_name,
+                    'widget_name': widget_name,
+                    'widget_title': widget_class.get_widget_title(),
+                    'form_content': widget_form_content,
+                    'form_id': '%s_%s_%d' % (app_name, widget_name, uuid1()),
+                    'form_active': form_active,
+                })
+                form_active = False #only first form is active
+        context = {'widget_data': data}
+        context.update(extra_context)
+        
+        return render(request, template_name, context)
 
 
 @ensure_csrf_cookie
@@ -120,29 +135,76 @@ def widget_delete(request, id):
 
 
 @ensure_csrf_cookie
-def widget_edit(request, id):
+def widget_edit(request, id, app_name=None, widget_name=None):
+    template_name = 'cosinnus/widgets/add_widget.html'
+    extra_context = {'form_view': 'edit'}
+    
     wc = get_object_or_404(WidgetConfig, id=int(id))
     if wc.group and not check_ug_admin(request.user, wc.group) or \
             wc.user and wc.user_id != request.user.pk:
         return HttpResponseForbidden('Access denied!')
+    
+    if app_name and widget_name and (wc.app_name != app_name or wc.widget_name != widget_name):
+        print ">>>>> THIS WIDGET WAS SET UP TO BE SWAPPED BY EDITING IT!"
+        print ">> TODO: create new widget using create function, transfer important values, then delete this widget! "
+        # TODO: widget swapping disabled for now!
+        raise Exception("Swapping of widget types is not enabled. \
+            Delete this widget and create a new one if you want one of a different type!")
+    
     widget_class = widget_registry.get(wc.app_name, wc.widget_name)
     if widget_class is None:
         return render_to_response('cosinnus/widgets/not_found.html')
     form_class = widget_class.get_setup_form_class()
     widget = widget_class(request, wc)
+    
     if request.method == "POST":
-        form = form_class(request.POST)
+        form = form_class(request.POST, group=wc.group)
         if form.is_valid():
             widget.save_config(form.cleaned_data)
-            return JSONResponse({'id': widget.id})
+            return HttpResponse(widget.render(user=request.user, request=request, group=wc.group))
+        
+        raise Exception("Form was invalid for widget edit: ", app_name, widget_name, form_class)
     else:
-        form = form_class(initial=dict(widget.config))
-    d = {
-        'form': form,
-        'submit_label': _('Change'),
-    }
-    c = RequestContext(request)
-    return render_to_response('cosinnus/widgets/setup.html', d, c)
+        data = []
+        for app_name, widgets in widget_registry:
+            for widget_name in widgets:
+                form_active = False
+                
+                widget_class = widget_registry.get(app_name, widget_name)
+                if widget_class is None:
+                    print ">>>>widg not found:", app_name, widget_name
+                    continue
+                form_class = widget_class.get_setup_form_class()
+                if not getattr(form_class, "template_name", None):
+                    #raise ImproperlyConfigured('Widget form "%s %s" has no attribute "template_name" configured!' % (app_name, widget_name))
+                    print '>> ignoring widget "%s %s" without template_name form: ' %  (app_name, widget_name)
+                    continue
+                if app_name == widget.app_name and widget_name == widget.widget_name:
+                    # this is the form of the widget class that the editing widget is of
+                    # init the form with the current widgets config, and set the active widget to this one
+                    form_dict = dict([(k,v) for k,v in widget.config])
+                    context = {'form': form_class(initial=form_dict, group=wc.group)}
+                    form_active = True
+                else:
+                    # TODO: widget swapping disabled for now!
+                    continue
+                    #context = {'form': form_class(group=wc.group)}
+                print ">> widg trying to:", app_name, widget_name, widget_class, form_class, form_class.template_name
+                widget_form_content = render(request, form_class.template_name, context).content
+                data.append({
+                    'app_name': app_name,
+                    'widget_name': widget_name,
+                    'widget_title': widget_class.get_widget_title(),
+                    'form_content': widget_form_content,
+                    'form_id': '%s_%s_%d' % (app_name, widget_name, uuid1()),
+                    'form_active': form_active,
+                })
+        context = {
+            'widget_data': data,
+            'widget_conf_id': widget.id,
+        }
+        context.update(extra_context)
+        return render(request, template_name, context)
 
 
 class DashboardMixin(object):
@@ -180,7 +242,7 @@ class DashboardMixin(object):
 class GroupDashboard(RequireReadMixin, DashboardMixin, TemplateView):
 
     def get_filter(self):
-        return {'group_id': self.group.pk}
+        return {'group_id': self.group.pk, 'type': WidgetConfig.TYPE_DASHBOARD}
 
 group_dashboard = GroupDashboard.as_view()
 

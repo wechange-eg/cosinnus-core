@@ -1,0 +1,538 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags %}
+{% load static from staticfiles %}
+
+{% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
+
+{% block extrahead %}
+  <link href="{% static "css/cosinnus.dashboard.css" %}" rel="stylesheet">
+{% endblock extrahead %}
+
+
+{% block main_page_header %}
+    
+    <div class="row">
+        <!-- start with left navigation -->
+        <div class="col-lg-3 col-md-3"><!-- left column -->
+            {% if group %}
+                {% cosinnus_menu "cosinnus/appsmenu.html" %}
+            {% endif %}
+        </div><!-- left column -->
+        
+        <!-- now the content -->
+        <div class="col-lg-9 col-md-9"><!-- right column -->
+            
+            <ol class="breadcrumb">
+                {% include 'cosinnus/breadcrumb.html' %}
+                <li class="active">{% trans "Microsite" %}</li>
+            </ol>
+            
+        </div><!-- right column -->
+        
+    </div><!-- row -->
+    
+    {% include 'cosinnus/messages.html' %}
+    
+{% endblock main_page_header %}
+            
+
+{% block main_page %}
+
+    <div class="row large-space">
+        <div class="col-sm-2 large-space">
+           {% include 'cosinnus/group/group_avatar_image.html' with extra_classes="w100" %}
+        </div>
+        <div class="col-sm-10 bottom-align large-space">
+            
+            <div class="position-relative"><!-- just for fun -->
+                {% if user|has_write_access:group %}
+                    <div type="button" class="btn btn-emphasized bottom-align">
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-cogs"></i>
+                                </a>
+                                <div class="media-body">
+                                    {% trans "Configure" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </div><!-- btn -->
+                {% endif %}
+                
+                <legend class="large-space">{{ group.name }}</legend>
+            </div>
+    
+        </div>
+    </div><!-- row -->
+    
+    
+    
+    
+    <div id="dashboard" class="row large-space">
+    {% for widget_config in widget_configs %}
+        {% cosinnus_render_widget widget_config %}
+    {% endfor %}
+    
+    
+    {% if user|has_write_access:group %}
+        <div data-type="widget-anchor" style="display:none;"></div>
+        
+        <div class="col-lg-4 col-md-4 large-space app-todos" data-type="widget-add">
+            <button type="button" class="btn btn-emphasized btn-headline" href="" data-widget-id="0" data-target="widget-add-button">
+                <ul class="media-list ">
+                    <li class="media">
+                        <a class="pull-left btn-extra-emphasized" href="#"></a>
+                        <a class="pull-left" href="#">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                        <div class="media-body">
+                            {% trans "Add widget" %}
+                        </div>
+                    </li>
+                </ul>
+            </button><!-- btn -->
+            <div data-target="widget-add-button">
+                <span class="glyphicon glyphicon-plus"></span>
+            </div>
+        </div>
+        
+    {% endif %}
+  </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <div><!-- widget -->
+                <div type="button" class="btn btn-emphasized btn-headline">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left btn-extra-emphasized" href="#"></a>
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-user"></i>
+                            </a>
+                            <div class="media-body">
+                                Über uns
+                            </div>
+                        </li>
+                    </ul>
+                </div><!-- btn -->
+                <div class="content-box">
+                    <p class="transparent">Es gibt im Moment in diese Mannschaft, oh, einige Spieler vergessen ihnen Profi was sie sind. Ich lese nicht sehr viele Zeitungen, aber ich habe gehört viele Situationen.</p>
+                    <p class="transparent">Erstens: wir haben nicht offensiv gespielt. Es gibt keine deutsche Mannschaft spielt offensiv und die Name offensiv wie Bayern. Letzte Spiel hatten wir in Platz drei Spitzen: Elber, Jancka und dann Zickler.</p>
+                    <p class="transparent">Wir müssen nicht vergessen Zickler. Zickler ist eine Spitzen mehr, Mehmet eh mehr Basler. Ist klar diese Wörter, ist möglich verstehen, was ich hab gesagt? Danke.</p>
+                </div><!-- content-box -->
+                <button type="button" class="btn btn-emphasized large-space" href="#micropages">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-right btn-extra-emphasized" >
+                                <i class="fa fa-chevron-down "></i>
+                            </a>
+                            <div class="media-body">
+                                Mehr
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+            </div><!-- widget -->
+
+
+            <div><!-- widget -->
+                <div type="button" class="btn btn-emphasized btn-headline">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left btn-extra-emphasized" href="#"></a>
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-user"></i>
+                            </a>
+                            <div class="media-body">
+                                Förderverein
+                            </div>
+                        </li>
+                    </ul>
+                </div><!-- btn -->
+                <div class="content-box">
+                    <p class="transparent">Es gibt im Moment in diese Mannschaft, oh, einige Spieler vergessen ihnen Profi was sie sind. Ich lese nicht sehr viele Zeitungen, aber ich habe gehört viele Situationen.</p>
+                    <p class="transparent">Erstens: wir haben nicht offensiv gespielt. Es gibt keine deutsche Mannschaft spielt offensiv und die Name offensiv wie Bayern. Letzte Spiel hatten wir in Platz drei Spitzen: Elber, Jancka und dann Zickler.</p>
+                    <p class="transparent">Wir müssen nicht vergessen Zickler. Zickler ist eine Spitzen mehr, Mehmet eh mehr Basler. Ist klar diese Wörter, ist möglich verstehen, was ich hab gesagt? Danke.</p>
+                </div><!-- content-box -->
+                <button type="button" class="btn btn-emphasized large-space">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-right btn-extra-emphasized" href="#">
+                                <i class="fa fa-chevron-right "></i>
+                            </a>
+                            <div class="media-body">
+                                <a href="#">
+                                    Mehr lesen
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+            </div><!-- widget -->
+
+        </div><!-- column -->
+
+
+        <div class="col-sm-6 col-md-4">
+            <div class="app-calendar"><!-- widget -->
+                <div type="button" class="btn btn-emphasized btn-headline">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left btn-extra-emphasized" href="#"></a>
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-calendar"></i>
+                            </a>
+                            <div class="media-body">
+                                Kalender
+                            </div>
+                        </li>
+                    </ul>
+                </div><!-- btn -->
+                <div class="content-box">
+                    <div class="small-calendar w100 regular-space"></div>
+
+                </div><!-- content-box -->
+
+                    <button type="button" class="btn btn-emphasized w100">
+                        <ul class="media-list fine-space">
+                            <li class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-calendar"></i>
+                                </a>
+                                <a class="pull-right square-date-icon btn-extra-emphasized" href="#">
+                                    <div>19</div>
+                                    <div>Dez</div>
+                                </a>
+                                <div class="media-body">
+                                    <strong><a>de:groth Call for Papers</a></strong>
+                                </div>
+                            </li>
+                        </ul>
+                    </button><!-- btn -->
+                    <button type="button" class="btn btn-emphasized w100">
+                        <ul class="media-list fine-space">
+                            <li class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-calendar"></i>
+                                </a>
+                                <a class="pull-right square-date-icon btn-extra-emphasized" href="#">
+                                    <div>19</div>
+                                    <div>Dez</div>
+                                </a>
+                                <div class="media-body">
+                                    <strong><a>de:groth Call for Papers</a></strong>
+                                </div>
+                            </li>
+                        </ul>
+                    </button><!-- btn -->
+                    <button type="button" class="btn btn-emphasized w100 fine-space">
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-calendar"></i>
+                                </a>
+                                <a class="pull-right square-date-icon btn-extra-emphasized" href="#">
+                                    <div>19</div>
+                                    <div>Dez</div>
+                                </a>
+                                <div class="media-body">
+                                    <strong><a>de:groth Call for Papers</a></strong>
+                                </div>
+                            </li>
+                        </ul>
+                    </button><!-- btn -->
+
+                <button type="button" class="btn btn-emphasized large-space">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-right btn-extra-emphasized" href="#">
+                                <i class="fa fa-chevron-right "></i>
+                            </a>
+                            <div class="media-body">
+                                <a href="#">
+                                    Mehr
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+            </div><!-- widget -->
+
+            <div><!-- widget -->
+                <div type="button" class="btn btn-emphasized btn-headline">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left btn-extra-emphasized" href="#"></a>
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-user"></i>
+                            </a>
+                            <div class="media-body">
+                                Unsere letzte Kampagne
+                            </div>
+                        </li>
+                    </ul>
+                </div><!-- btn -->
+                <img src="avatar.png" class="w100" />
+
+                <div class="content-box">
+                    <p class="transparent">Erstens: wir haben nicht offensiv gespielt. Es gibt keine deutsche Mannschaft spielt offensiv und die Name offensiv wie Bayern. Letzte Spiel hatten wir in Platz drei Spitzen: Elber, Jancka und dann Zickler.</p>
+                    <p class="transparent">Wir müssen nicht vergessen Zickler. Zickler ist eine Spitzen mehr, Mehmet eh mehr Basler. Ist klar diese Wörter, ist möglich verstehen, was ich hab gesagt? Danke.</p>
+                </div><!-- content-box -->
+                <button type="button" class="btn btn-emphasized large-space">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-right btn-extra-emphasized" href="#">
+                                <i class="fa fa-chevron-right "></i>
+                            </a>
+                            <div class="media-body">
+                                <a href="#">
+                                    Mehr lesen
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+            </div><!-- widget -->
+        </div><!-- column -->
+
+
+        <div class="col-sm-6 col-md-4">
+            <div class="large-space"><!-- widget -->
+                <div type="button" class="btn btn-emphasized btn-headline">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left btn-extra-emphasized" href="#"></a>
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-info-circle"></i>
+                            </a>
+                            <div class="media-body">
+                                Informationen
+                            </div>
+                        </li>
+                    </ul>
+                </div><!-- btn -->
+                <div class="content-box">
+                    {% include 'cosinnus/media_tags_group_profile_readonly.html' with object=group %}
+                </div><!-- content-box -->
+            </div><!-- widget -->
+
+            <div class="app-files"><!-- widget -->
+                <div type="button" class="btn btn-emphasized btn-headline">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left btn-extra-emphasized" href="#"></a>
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-download"></i>
+                            </a>
+                            <div class="media-body">
+                                Pressematerial
+                            </div>
+                        </li>
+                    </ul>
+                </div><!-- btn -->
+                <div class="content-box">
+                    <p class="transparent">Es gibt im Moment in diese Mannschaft, oh, einige Spieler vergessen ihnen Profi was sie sind. Ich lese nicht sehr viele Zeitungen, aber ich habe gehört viele Situationen.</p>
+                    <p class="transparent">Erstens: wir haben nicht offensiv gespielt. Es gibt keine deutsche Mannschaft spielt offensiv und die Name offensiv wie Bayern. Letzte Spiel hatten wir in Platz drei Spitzen: Elber, Jancka und dann Zickler.</p>
+                    <p class="transparent">Wir müssen nicht vergessen Zickler. Zickler ist eine Spitzen mehr, Mehmet eh mehr Basler. Ist klar diese Wörter, ist möglich verstehen, was ich hab gesagt? Danke.</p>
+                </div><!-- content-box -->
+                <button type="button" class="btn btn-emphasized large-space">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-right btn-extra-emphasized" href="#">
+                                <i class="fa fa-chevron-right "></i>
+                            </a>
+                            <div class="media-body">
+                                <a href="#">
+                                    Mehr
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+            </div><!-- widget -->
+        </div><!-- column -->
+
+    </div><!-- row -->
+    
+    {% with micropages=group.micropages.all %}
+       <a name="micropages"></a>
+       <div class="row large-space">
+           <div class="col-md-3">
+   
+               <div type="button" class="btn btn-emphasized btn-headline regular-space">
+                   <ul class="media-list">
+                       <li class="media">
+                           <a class="pull-left btn-extra-emphasized" href="#"></a>
+                           <div class="media-body">
+                               {% trans "Informations" %}
+                           </div>
+                       </li>
+                   </ul>
+               </div><!-- btn -->
+               
+               {% for micropage in micropages %}
+                  <div type="button" data-id="micropage_{{ forloop.counter }}" data-toggle-group="micropage" class="toggleable_button btn btn-emphasized {% if not forloop.last %}fine-space{% endif %} w100">
+                      <ul class="media-list">
+                          <li class="media">
+                              <a data-id="micropage_{{ forloop.counter }}" data-toggle-group="micropage" {% if not forloop.first %}style="display:none;"{% endif %} class="toggleable_content pull-right btn-extra-emphasized" href="#">
+                                  <i class="fa fa-chevron-right"></i>
+                              </a>
+                              <div class="media-body">
+                                  {{ micropage.title }}
+                              </div>
+                          </li>
+                      </ul>
+                  </div><!-- btn -->
+               {% endfor %}
+   
+           </div><!-- left column -->
+           
+           {% for micropage in micropages %}
+               <div data-id="micropage_{{ forloop.counter }}" data-toggle-group="micropage" {% if not forloop.first %}style="display:none;"{% endif %} class="toggleable_content col-md-9">
+                   <div class="content-box transparent_p">
+                       <legend>{{ micropage.title }}</legend>
+                       {% if micropage.text and micropage.text|length > 0 %}
+                            {{ micropage.text|safe }}
+                       {% else %}
+                           ({% trans "No informations set" %})
+                       {% endif %}
+                   </div>
+               </div><!-- right column -->
+           {% empty %}
+                <div class="col-md-9">
+                   <div class="content-box transparent_p">
+                       <legend>{% trans "Informations" %}</legend>
+                       <p>({% trans "No informations set" %})</p>
+                   </div>
+               </div><!-- right column -->
+           {% endfor %}
+       </div><!-- row -->
+    {% endwith %}
+    
+    <script type="text/javascript">
+        $.cosinnus.toggleable();
+        $('.transparent_p p').addClass('transparent');
+    </script>
+
+
+    <div class="row">
+        <div class="col-md-3">
+
+            <div type="button" class="btn btn-emphasized btn-headline regular-space">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left btn-extra-emphasized" href="#"></a>
+                        <div class="media-body">
+                            Meldungen
+                        </div>
+                    </li>
+                </ul>
+            </div><!-- btn -->
+        </div><!-- left column -->
+
+        <div class="col-md-9">
+            <div class="content-box">
+                <p class="transparent">Bla</p>
+            </div>
+        </div><!-- right column -->
+    </div><!-- row -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% comment %} Usually we would iterate over {{ widgets }} for the ids to get all widgets {% endcomment %}
+    {% comment %} 
+    <div id="dashboard"> <!-- An extra wrapper div, not in the mockups, but required for the cosinnus dashboard data extension -->
+        <div class="col-lg-4 col-md-4 large-space"><!-- left column -->
+            {% include "cosinnus_note/widgets/base_news_widget.html" with widget_conf_id=note__detailed_news_list widget_icon="fa-question" %}
+        </div><!-- left column -->
+        <div class="col-lg-4 col-md-4 large-space"><!-- center column -->
+            {% include "cosinnus/widgets/base_widget.html" with widget_conf_id=event__upcoming widget_class="app-calendar" widget_icon="fa-calendar" %}
+            {% include "cosinnus/widgets/base_widget.html" with widget_conf_id=cosinnus__group_members widget_icon="fa-user" %}
+        </div><!-- center column -->
+        <div class="col-lg-4 col-md-4 large-space"><!-- right column -->
+            {% include "cosinnus/widgets/base_widget.html" with widget_conf_id=todo__mine widget_class="app-todos" widget_icon="fa-tasks" %}
+            {% include "cosinnus/widgets/base_widget.html" with widget_conf_id=etherpad__latest widget_class="app-etherpad" widget_icon="fa-file-text-o" %}
+        </div><!-- right column -->
+    </div>
+    {% endcomment %}
+      
+    {% comment %} The add widget dialog and spare widget: Adding widgets is disabled for now. {% endcomment %}
+    {% comment %}  
+    {% if group and user|has_write_access:object %}
+      <div class="col-md-4" data-type="widget-add">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{% trans "Add widget" %}</h3>
+          </div>
+          <div class="panel-body" data-widget-id="0" data-target="widget-add-button">
+            <span class="glyphicon glyphicon-plus"></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" data-type="widget-spare">
+        <div class="panel">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <a href="" data-target="widget-title-url"><span data-target="widget-title"></span>&nbsp;</a>
+              <div class="btn-group pull-right">
+                <a href="#" class="btn btn-xs darker" title="{% trans "Refresh" %}" data-type="refresh"><span class="glyphicon glyphicon-refresh"></span></a>
+                {% if user|has_write_access:object %}
+                  <a href="#" class="btn btn-xs darker" title="{% trans "Configure" %}" data-type="edit"><span class="glyphicon glyphicon-wrench"></span></a>
+                  <a href="#" class="btn btn-xs darker" title="{% trans "Delete" %}" data-type="delete"><span class="glyphicon glyphicon-remove"></span></a>
+                {% endif %}
+              </div>
+            </h3>
+          </div>
+          <div class="panel-body" data-target="widget-content"></div>
+        </div>
+      </div>
+    {% endif %}
+    {% endcomment %}
+
+{% endblock main_page %}
+
+
+{% block extrafooter %}
+  {{ block.super }}
+
+  <script src="{% static "js/cosinnus.dashboard.js" %}"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var dashboard = window.Cosinnus.dashboard.init("#dashboard", {% if group.slug %}"{{ group.slug }}"{% else %}null{% endif %});
+    });
+  </script>
+{% endblock %}

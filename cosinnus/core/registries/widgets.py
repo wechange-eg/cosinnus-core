@@ -46,7 +46,6 @@ class WidgetRegistry(DictBaseRegistry):
                     klass, widget))
             else:
                 self.register(app_name, cls)
-                return cls
 
     def __iter__(self):
         if self._unresolved:
@@ -63,3 +62,5 @@ __all__ = ('widget_registry', )
 
 widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.GroupDescriptionWidget')
 widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.GroupMembersWidget')
+widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.InfoWidget')
+widget_registry.register('cosinnus', 'cosinnus.utils.dashboard.MetaAttributeWidget')

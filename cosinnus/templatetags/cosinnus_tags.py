@@ -22,6 +22,7 @@ from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
     check_group_create_objects_access, check_object_read_access)
+from django.utils.safestring import mark_safe
 
 register = template.Library()
 
@@ -163,6 +164,12 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
     })
     return render_to_string(template, context)
 
+@register.simple_tag(takes_context=True)
+def cosinnus_render_widget(context, widget):
+    flat = {}
+    for d in context.dicts:
+        flat.update(d)
+    return mark_safe(widget.render(**flat))
 
 @register.simple_tag(takes_context=True)
 def cosinnus_render_attached_objects(context, source, filter=None):

@@ -1,0 +1,11 @@
+{% extends "cosinnus/widgets/base_widget.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block widget_content %}
+    <div class="content-box">
+        {% include 'cosinnus/media_tags_group_profile_readonly.html' with object=group %}
+    </div>
+{% endblock widget_content %}
+
+{% block widget_button %}
+{% endblock widget_button %}
