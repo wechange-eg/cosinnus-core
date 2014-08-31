@@ -16,6 +16,7 @@ from cosinnus.forms.user import UserCreationForm, UserChangeForm
 from cosinnus.views.mixins.ajax import patch_body_json_data
 from cosinnus.utils.http import JSONResponse
 from django.contrib import messages
+from cosinnus.models.profile import get_user_profile_model
 
 
 
@@ -41,6 +42,8 @@ class UserCreateView(CreateView):
     
     def form_valid(self, form):
         ret = super(UserCreateView, self).form_valid(form)
+        # sanity check, retrieve the user's profile
+        get_user_profile_model()._default_manager.get_for_user(self.object)
         messages.success(self.request,
             self.message_success % {'user': self.object.username})
         return ret
