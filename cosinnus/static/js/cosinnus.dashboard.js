@@ -92,9 +92,7 @@ $('.js-todo-link').on('click', function(e) {
             if (data === undefined) {
                 data = {};
             }
-            console.log('now submitting to '+ url + ', data:' + data);
             $.post(url, data, function(data, textStatus, jqXHR) {
-                console.log("> got back widget data")
                 // if (jqXHR.getResponseHeader('Content-Type') === "application/json") {
                 // we assume here we got the rendered widget back and replace the config dialog with the widget
                 var widget = that.swapWidgetFromData(data, holder);
@@ -201,7 +199,6 @@ $('.js-todo-link').on('click', function(e) {
             $.ajax(Cosinnus.base_url + "widget/" + id + "/edit/" + extra_url, args).done(function(data, textStatus, jqXHR) {
                 
                 if (args['type'] == "POST") {
-                    console.log("> got back widget data from edit")
                     // if (jqXHR.getResponseHeader('Content-Type') === "application/json") {
                     // we assume here we got the rendered widget back and replace the config dialog with the widget
                     // first, we destroy the old widget that has been hiding

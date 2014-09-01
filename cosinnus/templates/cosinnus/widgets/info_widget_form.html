@@ -1,83 +1,38 @@
+{% extends 'cosinnus/widgets/base_widget_form.html' %}
 {% load i18n cosinnus_tags widget_tweaks %}
 
+{% block extra_fields %}
+	<label>{% trans "Text" %}</label>
+	<div type="button" class="btn btn-default w100 regular-space">
+	    <ul class="media-list">
+	        <li class="media">
+	            <a class="pull-left" href="#">
+	                <i class="fa fa-pencil"></i>
+	            </a>
+	            <div class="media-body">
+	                {% captureas placeholder %}{% trans "Text" %}{% endcaptureas %}
+	                {% render_field form.text class+="form-control" placeholder=placeholder %}
+	            </div>
+	        </li>
+	    </ul>
+	</div>
+	
+	
+	<label>{% trans "Attach Image(s)" %}</label>
+	<div type="button" class="btn btn-default w100 regular-space">
+	    <ul class="media-list">
+	        <li class="media">
+	            <a class="pull-left" href="#">
+	                <i class="fa fa-image"></i>
+	            </a>
+	            <div class="media-body">
+	                {% captureas placeholder %}{% trans "Bild/Datei anhängen" %}{% endcaptureas %}
+	                {% render_field form.images placeholder=placeholder %}
+	            </div>
+	        </li>
+	    </ul>
+	</div>
+{% endblock extra_fields %}
 
-<input type="hidden" name="type" value=2 /> <!-- Microsite -->
-
-<label>{% trans "Widget title" %}</label>
-<div type="button" class="btn btn-default w100 regular-space">
-    <ul class="media-list">
-        <li class="media">
-            <a class="pull-left" href="#">
-                <i class="fa fa-pencil"></i>
-            </a>
-            <div class="media-body">
-                {% captureas placeholder %}{% trans "Widget title" %}{% endcaptureas %}
-                {% render_field form.widget_title class+="form-control" placeholder=placeholder %}
-            </div>
-        </li>
-    </ul>
-</div>
-
-<label>{% trans "Text" %}</label>
-<div type="button" class="btn btn-default w100 regular-space">
-    <ul class="media-list">
-        <li class="media">
-            <a class="pull-left" href="#">
-                <i class="fa fa-pencil"></i>
-            </a>
-            <div class="media-body">
-                {% captureas placeholder %}{% trans "Text" %}{% endcaptureas %}
-                {% render_field form.text class+="form-control" placeholder=placeholder %}
-            </div>
-        </li>
-    </ul>
-</div>
-
-
-<label>{% trans "Attach Image(s)" %}</label>
-<div type="button" class="btn btn-default w100 regular-space">
-    <ul class="media-list">
-        <li class="media">
-            <a class="pull-left" href="#">
-                <i class="fa fa-image"></i>
-            </a>
-            <div class="media-body">
-                {% captureas placeholder %}{% trans "Bild/Datei anhängen" %}{% endcaptureas %}
-                {% render_field form.images placeholder=placeholder %}
-            </div>
-        </li>
-    </ul>
-</div>
-
-
-<label>{% trans "Widget Icon (FA)" %}</label>
-<div type="button" class="btn btn-default w100 regular-space">
-    <ul class="media-list">
-        <li class="media">
-            <a class="pull-left" href="#">
-                <i class="fa fa-pencil"></i>
-            </a>
-            <div class="media-body">
-                {% captureas placeholder %}{% trans "Font-awesome Widget Icon" %}{% endcaptureas %}
-                {% render_field form.widget_icon class+="form-control" placeholder=placeholder %}
-            </div>
-        </li>
-    </ul>
-</div>
-
-<label>{% trans "Link label" %}</label>
-<div type="button" class="btn btn-default w100 regular-space">
-    <ul class="media-list">
-        <li class="media">
-            <a class="pull-left" href="#">
-                <i class="fa fa-pencil"></i>
-            </a>
-            <div class="media-body">
-                {% captureas placeholder %}{% trans "Link label" %}{% endcaptureas %}
-                {% render_field form.link_label class+="form-control" placeholder=placeholder %}
-            </div>
-        </li>
-    </ul>
-</div>
 
 

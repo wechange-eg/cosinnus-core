@@ -1,0 +1,72 @@
+{% load i18n cosinnus_tags widget_tweaks %}
+
+
+<input type="hidden" name="type" value=2 /> <!-- Microsite -->
+
+{% block title_field %}
+	<label>{% trans "Widget title" %}</label>
+	<div type="button" class="btn btn-default w100 regular-space">
+	    <ul class="media-list">
+	        <li class="media">
+	            <a class="pull-left" href="#">
+	                <i class="fa fa-pencil"></i>
+	            </a>
+	            <div class="media-body">
+	                {% captureas placeholder %}{% trans "Widget title" %}{% endcaptureas %}
+	                {% render_field form.widget_title class+="form-control" placeholder=placeholder %}
+	            </div>
+	        </li>
+	    </ul>
+	</div>
+{% endblock title_field %}
+
+{% block extra_fields %}
+{% endblock extra_fields %}
+
+{% block common_fields %}
+	<label>{% trans "Widget Icon (FA)" %}</label>
+	<div type="button" class="btn btn-default w100 regular-space">
+	    <ul class="media-list">
+	        <li class="media">
+	            <a class="pull-left" href="#">
+	                <i class="fa fa-pencil"></i>
+	            </a>
+	            <div class="media-body">
+	                {% captureas placeholder %}{% trans "Font-awesome Widget Icon" %}{% endcaptureas %}
+	                {% render_field form.widget_icon class+="form-control" placeholder=placeholder %}
+	            </div>
+	        </li>
+	    </ul>
+	</div>
+    
+    <label>{% trans "Link label" %}</label>
+    <div type="button" class="btn btn-default w100 regular-space">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-pencil"></i>
+                </a>
+                <div class="media-body">
+                    {% captureas placeholder %}{% trans "Link label" %}{% endcaptureas %}
+                    {% render_field form.link_label class+="form-control" placeholder=placeholder %}
+                </div>
+            </li>
+        </ul>
+    </div>
+        
+    <label>{% trans "Sort field" %}</label>
+    <div type="button" class="btn btn-default w100 regular-space">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-sort-numeric-asc"></i>
+                </a>
+                <div class="media-body">
+                    {% captureas placeholder %}{% trans "Sort field" %}{% endcaptureas %}
+                    {% render_field form.sort_field class+="form-control" placeholder=placeholder %}
+                </div>
+            </li>
+        </ul>
+    </div>
+{% endblock common_fields %}
+

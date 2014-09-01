@@ -26,6 +26,7 @@ class WidgetConfig(models.Model):
         choices=TYPE_CHOICES, default=TYPE_DASHBOARD,
         editable=False, null=False, blank=False
     )
+    sort_field = models.CharField(_('Sort field'), max_length=20, null=False, blank=False, default="999")
     group = models.ForeignKey('cosinnus.CosinnusGroup', null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE)
 

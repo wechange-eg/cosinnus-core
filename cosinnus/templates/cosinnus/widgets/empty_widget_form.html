@@ -1,6 +1,26 @@
-{% load i18n %}
+{% extends 'cosinnus/widgets/base_widget_form.html' %}
+{% load i18n cosinnus_tags widget_tweaks %}
 
+{% block title_field %}
+{% endblock title_field %}
 
-<input type="hidden" name="type" value=2 /> <!-- Microsite -->
+{% block extra_fields %}
+	<p>{% trans "(This widget has no additional options)" %}</p>
+{% endblock extra_fields %}
 
-<p>{% trans "(This widget has no additional options)" %}</p>
+{% block common_fields %}
+    <label>{% trans "Sort field" %}</label>
+    <div type="button" class="btn btn-default w100 regular-space">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-sort-numeric-asc"></i>
+                </a>
+                <div class="media-body">
+                    {% captureas placeholder %}{% trans "Sort field" %}{% endcaptureas %}
+                    {% render_field form.sort_field class+="form-control" placeholder=placeholder %}
+                </div>
+            </li>
+        </ul>
+    </div>
+{% endblock common_fields %}

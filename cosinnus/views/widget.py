@@ -42,7 +42,6 @@ def widget_add_group(request, group, app_name=None, widget_name=None):
     extra_context = {'form_view': 'add'}
     
     if request.method == "POST":
-        print ">>> request arrived"
         widget_class = widget_registry.get(app_name, widget_name)
         if widget_class is None:
             return render_to_response('cosinnus/widgets/not_found.html')
@@ -68,15 +67,14 @@ def widget_add_group(request, group, app_name=None, widget_name=None):
             for widget_name in widgets:
                 widget_class = widget_registry.get(app_name, widget_name)
                 if widget_class is None:
-                    print ">>>>widg not found:", app_name, widget_name
+                    #print ">>>>widg not found:", app_name, widget_name
                     continue
                 form_class = widget_class.get_setup_form_class()
                 if not getattr(form_class, "template_name", None):
                     #raise ImproperlyConfigured('Widget form "%s %s" has no attribute "template_name" configured!' % (app_name, widget_name))
-                    print '>> ignoring widget "%s %s" without template_name form: ' %  (app_name, widget_name)
+                    #print '>> ignoring widget "%s %s" without template_name form: ' %  (app_name, widget_name)
                     continue
                 context = {'form': form_class(group=group)}
-                print ">> widg trying to:", app_name, widget_name, widget_class, form_class, form_class.template_name
                 widget_form_content = render(request, form_class.template_name, context).content
                 data.append({
                     'app_name': app_name,
@@ -145,8 +143,8 @@ def widget_edit(request, id, app_name=None, widget_name=None):
         return HttpResponseForbidden('Access denied!')
     
     if app_name and widget_name and (wc.app_name != app_name or wc.widget_name != widget_name):
-        print ">>>>> THIS WIDGET WAS SET UP TO BE SWAPPED BY EDITING IT!"
-        print ">> TODO: create new widget using create function, transfer important values, then delete this widget! "
+        #print ">>>>> THIS WIDGET WAS SET UP TO BE SWAPPED BY EDITING IT!"
+        #print ">> TODO: create new widget using create function, transfer important values, then delete this widget! "
         # TODO: widget swapping disabled for now!
         raise Exception("Swapping of widget types is not enabled. \
             Delete this widget and create a new one if you want one of a different type!")
@@ -172,24 +170,26 @@ def widget_edit(request, id, app_name=None, widget_name=None):
                 
                 widget_class = widget_registry.get(app_name, widget_name)
                 if widget_class is None:
-                    print ">>>>widg not found:", app_name, widget_name
+                    #print ">>>>widg not found:", app_name, widget_name
                     continue
                 form_class = widget_class.get_setup_form_class()
                 if not getattr(form_class, "template_name", None):
                     #raise ImproperlyConfigured('Widget form "%s %s" has no attribute "template_name" configured!' % (app_name, widget_name))
-                    print '>> ignoring widget "%s %s" without template_name form: ' %  (app_name, widget_name)
+                    #print '>> ignoring widget "%s %s" without template_name form: ' %  (app_name, widget_name)
                     continue
                 if app_name == widget.app_name and widget_name == widget.widget_name:
                     # this is the form of the widget class that the editing widget is of
                     # init the form with the current widgets config, and set the active widget to this one
                     form_dict = dict([(k,v) for k,v in widget.config])
+                    form_dict.update({
+                        'sort_field': widget.config.sort_field,
+                    })
                     context = {'form': form_class(initial=form_dict, group=wc.group)}
                     form_active = True
                 else:
                     # TODO: widget swapping disabled for now!
                     continue
                     #context = {'form': form_class(group=wc.group)}
-                print ">> widg trying to:", app_name, widget_name, widget_class, form_class, form_class.template_name
                 widget_form_content = render(request, form_class.template_name, context).content
                 data.append({
                     'app_name': app_name,
