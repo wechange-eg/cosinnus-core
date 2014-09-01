@@ -1,4 +1,4 @@
-<button type="button" class="btn w100 btn-emphasized {{ extra_classes }}" href="{{ href }}">
+<button type="button" class="btn w100 btn-emphasized {{ extra_classes }}" href="{{ href }}" {% if extra_atts %}{{ extra_atts }}{% endif %}>
 {% comment %} <button type="button" class="btn w100 btn{% if active %}-extra{% endif %}-emphasized {{ extra_classes }}" href="{{ href }}"> {% endcomment %}
     <ul class="media-list">
         <li class="media">
