@@ -1,0 +1,34 @@
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+<div type="button" class="btn btn-emphasized btn-headline large-space">
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left btn-extra-emphasized" href="#"></a>
+            <div class="media-body">
+                {% trans standalone_app context "the_app" %}
+            </div>
+        </li>
+    </ul>
+</div><!-- btn -->
+
+
+{% if current_folder and current_folder.path != '/' %}
+    {% if current_folder.container and current_folder.container.path != '/' %}
+        {% captureas label %}{% trans "Zurück zu" %} {{ current_folder.container.title }}{% endcaptureas %}
+        {% include "cosinnus/leftnav_button.html" with extra_classes="fine-space" icon="fa-reply" label=label href=""  %}
+    {% else %}
+	    {% captureas label %}{% trans "Zurück zu" %} {% trans COSINNUS_CURRENT_APP context "the_app" %}{% endcaptureas %}
+	    {% include "cosinnus/leftnav_button.html" with extra_classes="fine-space" icon="fa-reply" label=label href=""  %}
+    {% endif %}
+{% endif %}
+
+{% for folder in folders %}
+    {% captureas label %}{{ folder.container_object.title }}{% endcaptureas %}
+    {% captureas button_class %}{% if forloop.last %}regular-space{% else %}fine-space{% endif %}{% endcaptureas %}
+    {% if not is_deep_hierarchy or is_deep_hierarchy == False %}
+        {% captureas folder_size %}{{ folder.objects|length }}{% endcaptureas %}
+    {% endif %}
+    {% captureas active %}{% if current_folder and folder.name == current_folder.slug %}True{% endif %}{% endcaptureas %}
+    {% include "cosinnus/leftnav_button.html" with active=active extra_classes=button_class icon="fa-folder" icon_content=folder_size label=label href=""  %}
+{% endfor %}
+

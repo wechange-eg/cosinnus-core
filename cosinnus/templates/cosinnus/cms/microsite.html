@@ -172,7 +172,10 @@
     {% endwith %}
     
     {% for item_inline in item_inlines %}
-        {{ item_inline.content|safe }}
+        <a name="micro_{{ item_inline.app_name}}"></a>
+        <div class="{% if item_inline.app_name == 'todo' %}app-todos{% elif item_inline.app_name == 'note' %}app-main{% elif item_inline.app_name == 'file' %}app-files{% elif item_inline.app_name == 'event' %}app-calendar{% elif item_inline.app_name %}app-{{ item_inline.app_name }}{% else %}app-main{% endif %}">
+            {{ item_inline.content|safe }}
+        </div>
         
         <div class="row large-space">
             <div class="col-md-3">

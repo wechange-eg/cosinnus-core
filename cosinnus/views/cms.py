@@ -58,14 +58,16 @@ class GroupMicrosite(TemplateView):
         
         """ Item list inline views """
         item_inlines = []
-        for model_name in ['cosinnus_note.Note']:
+        item_limit = 5
+        for model_name in ['cosinnus_note.Note', 'cosinnus_etherpad.Etherpad']:
             Renderer = attached_object_registry.get(model_name)
             if Renderer:
                 qs_filter = {'group__slug': self.group.slug}
+                app_name = get_cosinnus_app_from_class(Renderer)
                 item_inlines.append({
                     'model': model_name,
-                    'app': get_cosinnus_app_from_class(Renderer),
-                    'content': Renderer.render_list_for_user(self.request.user, self.request, qs_filter, limit=5)
+                    'app_name': app_name,
+                    'content': Renderer.render_list_for_user(self.request.user, self.request, qs_filter, limit=item_limit, standalone_app=app_name)
                 })
         
         kwargs.update({

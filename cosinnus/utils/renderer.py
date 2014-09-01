@@ -49,12 +49,29 @@ class BaseRenderer(object):
         context.update({'objects': objects})
         return render_to_string(cls.get_template(), context)
     
+    
+    def get_context_data(self, *args, **kwargs):
+        """ FIXME: This exists for compatibility with EtherpadRenderer and others,
+            that need to use the HierarchicalListCreateViewMixin to display folder structures
+            in their render_list_for_user() function. 
+            This is horrible, and should be refactored anyways!
+        """
+        return {}
+    
     @classmethod
     def render_single(cls, context, object=None, **kwargs):
         context.update(kwargs)
         context.update({'object': object})
         return render_to_string(cls.get_template_single(), context)
-
+    
+    @classmethod
+    def get_object_list_for_user(cls, user, qs_filter, limit=30):
+        user_filter = get_tagged_object_filter_for_user(user)
+        qs = cls.get_model()._default_manager.filter(user_filter, **qs_filter)
+        if limit > 0:
+            qs = qs[:limit]
+        return qs
+    
     @classmethod
     def render_list_for_user(cls, user, request, qs_filter={}, limit=30, **kwargs):
         """ Will render a standalone list of items of the renderer's model for
@@ -63,10 +80,7 @@ class BaseRenderer(object):
             but any further filtering (group, organization, etc) will have to be
             passed via the qs_filter dict.
         """
-        user_filter = get_tagged_object_filter_for_user(user)
-        qs = cls.get_model()._default_manager.filter(user_filter, **qs_filter)
-        if limit > 0:
-            qs = qs[:limit]
+        qs = cls.get_object_list_for_user(user, qs_filter, limit)
         
         context = {}
         context.update(kwargs)
