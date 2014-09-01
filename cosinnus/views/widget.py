@@ -97,7 +97,7 @@ def widget_add_group(request, group, app_name=None, widget_name=None):
 def widget_detail(request, id, offset=0):
     wc = get_object_or_404(WidgetConfig, id=int(id))
     if wc.group and not (check_ug_membership(request.user, wc.group) or
-                         wc.group.public) or \
+                         wc.group.public or wc.type == WidgetConfig.TYPE_MICROSITE) or \
             wc.user and wc.user_id != request.user.pk:
         return HttpResponseForbidden('Access denied!')
     widget_class = widget_registry.get(wc.app_name, wc.widget_name)
