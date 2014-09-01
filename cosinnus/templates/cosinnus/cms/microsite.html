@@ -11,6 +11,7 @@
 
 {% block main_page_header %}
     
+    <a name="microsite"></a>
     <div class="row">
         <!-- start with left navigation -->
         <div class="col-lg-3 col-md-3"><!-- left column -->
@@ -37,7 +38,7 @@
             
 
 {% block main_page %}
-
+    
     <div class="row large-space">
         <div class="col-sm-2 large-space">
            {% include 'cosinnus/group/group_avatar_image.html' with extra_classes="w100" %}
@@ -154,105 +155,42 @@
                </div><!-- right column -->
            {% endfor %}
        </div><!-- row -->
+       
+       <div class="row large-space">
+            <div class="col-md-3">
+            </div><!-- left column -->
+            <div class="col-md-9">
+               <label>
+                   <a href="#microsite">
+                       <i class="fa fa-fw fa-caret-up"></i>
+                       {% trans "Back to Project Overview" %}
+                   </a>
+               </label>
+           </div><!-- right column -->
+       </div><!-- row -->
+       
     {% endwith %}
     
-    <script type="text/javascript">
-        $.cosinnus.toggleable();
-        $('.transparent_p p').addClass('transparent');
-    </script>
-
-
-    <div class="row">
-        <div class="col-md-3">
-
-            <div type="button" class="btn btn-emphasized btn-headline regular-space">
-                <ul class="media-list">
-                    <li class="media">
-                        <a class="pull-left btn-extra-emphasized" href="#"></a>
-                        <div class="media-body">
-                            Meldungen
-                        </div>
-                    </li>
-                </ul>
-            </div><!-- btn -->
-        </div><!-- left column -->
-
-        <div class="col-md-9">
-            <div class="content-box">
-                <p class="transparent">Bla</p>
-            </div>
-        </div><!-- right column -->
-    </div><!-- row -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    {% comment %} Usually we would iterate over {{ widgets }} for the ids to get all widgets {% endcomment %}
-    {% comment %} 
-    <div id="dashboard"> <!-- An extra wrapper div, not in the mockups, but required for the cosinnus dashboard data extension -->
-        <div class="col-lg-4 col-md-4 large-space"><!-- left column -->
-            {% include "cosinnus_note/widgets/base_news_widget.html" with widget_conf_id=note__detailed_news_list widget_icon="fa-question" %}
-        </div><!-- left column -->
-        <div class="col-lg-4 col-md-4 large-space"><!-- center column -->
-            {% include "cosinnus/widgets/base_widget.html" with widget_conf_id=event__upcoming widget_class="app-calendar" widget_icon="fa-calendar" %}
-            {% include "cosinnus/widgets/base_widget.html" with widget_conf_id=cosinnus__group_members widget_icon="fa-user" %}
-        </div><!-- center column -->
-        <div class="col-lg-4 col-md-4 large-space"><!-- right column -->
-            {% include "cosinnus/widgets/base_widget.html" with widget_conf_id=todo__mine widget_class="app-todos" widget_icon="fa-tasks" %}
-            {% include "cosinnus/widgets/base_widget.html" with widget_conf_id=etherpad__latest widget_class="app-etherpad" widget_icon="fa-file-text-o" %}
-        </div><!-- right column -->
-    </div>
-    {% endcomment %}
-      
-    {% comment %} The add widget dialog and spare widget: Adding widgets is disabled for now. {% endcomment %}
-    {% comment %}  
-    {% if group and user|has_write_access:object %}
-      <div class="col-md-4" data-type="widget-add">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">{% trans "Add widget" %}</h3>
-          </div>
-          <div class="panel-body" data-widget-id="0" data-target="widget-add-button">
-            <span class="glyphicon glyphicon-plus"></span>
-          </div>
+    {% for item_inline in item_inlines %}
+        <a name="micro_{{ item_inline.app_name}}"></a>
+        <div class="{% if item_inline.app_name == 'todo' %}app-todos{% elif item_inline.app_name == 'note' %}app-main{% elif item_inline.app_name == 'file' %}app-files{% elif item_inline.app_name == 'event' %}app-calendar{% elif item_inline.app_name %}app-{{ item_inline.app_name }}{% else %}app-main{% endif %}">
+            {{ item_inline.content|safe }}
         </div>
-      </div>
-      <div class="col-md-4" data-type="widget-spare">
-        <div class="panel">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              <a href="" data-target="widget-title-url"><span data-target="widget-title"></span>&nbsp;</a>
-              <div class="btn-group pull-right">
-                <a href="#" class="btn btn-xs darker" title="{% trans "Refresh" %}" data-type="refresh"><span class="glyphicon glyphicon-refresh"></span></a>
-                {% if user|has_write_access:object %}
-                  <a href="#" class="btn btn-xs darker" title="{% trans "Configure" %}" data-type="edit"><span class="glyphicon glyphicon-wrench"></span></a>
-                  <a href="#" class="btn btn-xs darker" title="{% trans "Delete" %}" data-type="delete"><span class="glyphicon glyphicon-remove"></span></a>
-                {% endif %}
-              </div>
-            </h3>
-          </div>
-          <div class="panel-body" data-target="widget-content"></div>
-        </div>
-      </div>
-    {% endif %}
-    {% endcomment %}
+        
+        <div class="row large-space">
+            <div class="col-md-3">
+            </div><!-- left column -->
+             <div class="col-md-9">
+                <label>
+                    <a href="#microsite">
+                        <i class="fa fa-fw fa-caret-up"></i>
+                        {% trans "Back to Project Overview" %}
+                    </a>
+                </label>
+            </div><!-- right column -->
+        </div><!-- row -->
+    {% endfor %}
+
 
 {% endblock main_page %}
 
@@ -263,7 +201,10 @@
   <script src="{% static "js/cosinnus.dashboard.js" %}"></script>
   <script type="text/javascript">
     $(document).ready(function(){
-      var dashboard = window.Cosinnus.dashboard.init("#dashboard", {% if group.slug %}"{{ group.slug }}"{% else %}null{% endif %});
+        $.cosinnus.toggleable();
+        $('.transparent_p p').addClass('transparent');
+        
+        var dashboard = window.Cosinnus.dashboard.init("#dashboard", {% if group.slug %}"{{ group.slug }}"{% else %}null{% endif %});
     });
   </script>
 {% endblock %}
