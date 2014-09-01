@@ -1,6 +1,12 @@
 {% extends "cosinnus/widgets/base_widget.html" %}
 {% load i18n cosinnus_tags %}
 
+{% block widget_icon %}
+    <a class="pull-left" href="#">
+        <i class="fa fa-info-circle"></i>
+    </a>
+{% endblock widget_icon %}
+
 {% block widget_content %}
     <div class="content-box">
         {% include 'cosinnus/media_tags_group_profile_readonly.html' with object=group %}

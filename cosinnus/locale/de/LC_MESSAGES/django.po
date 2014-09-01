@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-31 17:41+0200\n"
+"POT-Creation-Date: 2014-09-01 12:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -132,7 +132,7 @@ msgid "Profile"
 msgstr "Profil"
 
 #: .\_old_templates\cosinnus\topmenu.html.py:49
-#: .\templates\cosinnus\navbar.html.py:82
+#: .\templates\cosinnus\navbar.html.py:85
 msgid "Logout"
 msgstr "Abmelden"
 
@@ -160,7 +160,7 @@ msgstr "Bearbeiten"
 
 #: .\_old_templates\cosinnus\userprofile_form.html.py:10
 #: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:173
-#: .\views\group.py:411 .\views\user.py:96
+#: .\views\group.py:411 .\views\user.py:99
 msgid "Save"
 msgstr "Speichern"
 
@@ -371,28 +371,26 @@ msgid "Type the title and/or type of attachment"
 msgstr "Geben sie Titel/Typ des Anhangs ein"
 
 #: .\forms\dashboard.py:19
-#, fuzzy
 msgid "Widget label"
-msgstr "Widget"
+msgstr "Widget-Titel"
 
 #: .\forms\dashboard.py:19
 msgid "Enter a title for the widget"
-msgstr ""
+msgstr "Geben sie einen Titel für das Widget ein"
 
 #: .\forms\dashboard.py:20
-#, fuzzy
 msgid "Widget icon"
-msgstr "Widget"
+msgstr "Widget-Icon"
 
 #: .\forms\dashboard.py:20
 msgid "A font-awesome icon for the widget"
-msgstr ""
+msgstr "Ein font-awesome icon für das widget"
 
 #: .\forms\dashboard.py:21
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:71
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:80
+#: .\templates\cosinnus\widgets\info_widget_form.html.py:68
+#: .\templates\cosinnus\widgets\info_widget_form.html.py:76
 msgid "Link label"
-msgstr ""
+msgstr "Link-Button-Titel"
 
 #: .\forms\dashboard.py:21
 msgid "Enter a label for the widget-button"
@@ -400,14 +398,13 @@ msgstr ""
 
 #: .\forms\dashboard.py:55 .\models\cms.py:20
 #: .\templates\cosinnus\widgets\info_widget_form.html.py:21
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:30
+#: .\templates\cosinnus\widgets\info_widget_form.html.py:29
 msgid "Text"
 msgstr ""
 
 #: .\forms\dashboard.py:55
-#, fuzzy
 msgid "Enter a description"
-msgstr "Beschreibung"
+msgstr "Geben sie eine Beschreibung ein"
 
 #: .\forms\filters.py:86 .\forms\search.py:51 .\models\tagged.py:57
 msgid "All"
@@ -415,15 +412,15 @@ msgstr "Alle"
 
 #: .\forms\filters.py:119 .\forms\filters.py:137
 msgid "Not assigned"
-msgstr ""
+msgstr "Nicht zugewiesen"
 
 #: .\forms\filters.py:149
 msgid "Any date"
-msgstr ""
+msgstr "Beliebiges Datum"
 
 #: .\forms\filters.py:150
 msgid "Today"
-msgstr ""
+msgstr "Heute"
 
 #: .\forms\filters.py:155
 msgid "This week"
@@ -466,14 +463,12 @@ msgid "Last edited by"
 msgstr ""
 
 #: .\models\cms.py:28
-#, fuzzy
 msgid "Cosinnus CMS Micropage"
-msgstr "Cosinnus Projekt"
+msgstr "Cosinnus Micropage"
 
 #: .\models\cms.py:29
-#, fuzzy
 msgid "Cosinnus Micropages"
-msgstr "Cosinnus Projekte"
+msgstr "Cosinnus Micropages"
 
 #: .\models\group.py:59
 msgid "Enter a valid group name. Forward slash is not allowed."
@@ -485,15 +480,15 @@ msgstr ""
 msgid "Slug"
 msgstr "Slug"
 
-#: .\models\group.py:298 .\models\organisation.py:295 .\models\profile.py:141
+#: .\models\group.py:298 .\models\organisation.py:295 .\models\profile.py:145
 msgid "Description"
 msgstr "Beschreibung"
 
-#: .\models\group.py:299 .\models\organisation.py:296 .\models\profile.py:139
+#: .\models\group.py:299 .\models\organisation.py:296 .\models\profile.py:143
 msgid "Avatar"
 msgstr "Avatar"
 
-#: .\models\group.py:301 .\models\profile.py:144
+#: .\models\group.py:301 .\models\profile.py:148
 #: .\templates\cosinnus\group\group_form.html.py:148
 #: .\templates\cosinnus\group\group_form.html.py:157
 #: .\templates\cosinnus\user\userprofile_form.html.py:97
@@ -606,9 +601,8 @@ msgid "Widget name"
 msgstr "Widget"
 
 #: .\models\widget.py:25
-#, fuzzy
 msgid "Widget Type"
-msgstr "Widget"
+msgstr "Widget-Typ"
 
 #: .\models\widget.py:35
 msgid "Widget configuration"
@@ -717,11 +711,11 @@ msgid "My Stream"
 msgstr ""
 
 #: .\templates\cosinnus\navbar.html.py:80
-msgid "Mein Dashboard"
+msgid "My Dashboard"
 msgstr "Mein Dashboard"
 
 #: .\templates\cosinnus\navbar.html.py:81
-msgid "Mein Profil"
+msgid "My Profile"
 msgstr "Mein Profil"
 
 #: .\templates\cosinnus\not_logged_in_alert.html.py:5
@@ -788,16 +782,15 @@ msgstr ""
 msgid "weiter"
 msgstr ""
 
-#: .\templates\cosinnus\cms\microsite.html.py:383
-#: .\templates\cosinnus\cms\microsite.html.py:420 .\utils\dashboard.py:286
+#: .\templates\cosinnus\cms\microsite.html.py:114
+#: .\templates\cosinnus\cms\microsite.html.py:151 .\utils\dashboard.py:291
 msgid "Informations"
-msgstr ""
+msgstr "Informationen"
 
-#: .\templates\cosinnus\cms\microsite.html.py:413
-#: .\templates\cosinnus\cms\microsite.html.py:421
-#, fuzzy
+#: .\templates\cosinnus\cms\microsite.html.py:144
+#: .\templates\cosinnus\cms\microsite.html.py:152
 msgid "No informations set"
-msgstr "Keine Projektbeschreibung verfasst."
+msgstr "Keine Beschreibung verfasst."
 
 #: .\templates\cosinnus\group\group_delete.html.py:5
 #, python-format
@@ -1201,14 +1194,12 @@ msgid "Beschreibe dich, deine Aktivitäten und Interessen."
 msgstr ""
 
 #: .\templates\cosinnus\widgets\add_widget.html.py:5
-#, fuzzy
 msgid "Add Widget"
 msgstr "Widget hinzufügen"
 
 #: .\templates\cosinnus\widgets\add_widget.html.py:5
-#, fuzzy
 msgid "Edit Widget"
-msgstr "Widget hinzufügen"
+msgstr "Widget bearbeiten"
 
 #: .\templates\cosinnus\widgets\base_widget.html.py:61
 #: .\templates\cosinnus\widgets\fadedown_base_widget.html.py:52
@@ -1218,30 +1209,28 @@ msgstr ""
 
 #: .\templates\cosinnus\widgets\empty_widget_form.html.py:6
 msgid "(This widget has no additional options)"
-msgstr ""
+msgstr "(Dieses Widget hat keine weiteren Konfigurationsoptionen)"
 
 #: .\templates\cosinnus\widgets\info_widget_form.html.py:6
 #: .\templates\cosinnus\widgets\info_widget_form.html.py:14
-#, fuzzy
 msgid "Widget title"
-msgstr "Widget"
+msgstr "Widget-Title"
 
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:38
-#, fuzzy
+#: .\templates\cosinnus\widgets\info_widget_form.html.py:37
 msgid "Attach Image(s)"
-msgstr "Anhänge"
+msgstr "Bilder anhängen"
 
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:47
+#: .\templates\cosinnus\widgets\info_widget_form.html.py:45
 msgid "Bild/Datei anhängen"
-msgstr ""
+msgstr "Bild/Datei anhängen"
 
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:55
+#: .\templates\cosinnus\widgets\info_widget_form.html.py:53
 msgid "Widget Icon (FA)"
-msgstr ""
+msgstr "Widget-Icon (fa)"
 
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:64
+#: .\templates\cosinnus\widgets\info_widget_form.html.py:61
 msgid "Font-awesome Widget Icon"
-msgstr ""
+msgstr "Font-awesome Widget-Icon"
 
 #: .\templates\cosinnus\widgets\not_allowed_group.html.py:2
 msgid "You cannot put this widget on a group dashboard."
@@ -1260,16 +1249,21 @@ msgstr "Widget nicht gefunden"
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>%(model_name)s konnte nicht gerendert werden!</i>"
 
-#: .\utils\dashboard.py:169
+#: .\utils\dashboard.py:174
 msgid "Group Description"
 msgstr "Projektbeschreibung"
 
-#: .\utils\dashboard.py:195
+#: .\utils\dashboard.py:200
 msgid "Network"
 msgstr "Netzwerk"
 
-#: .\utils\dashboard.py:235
+#: .\utils\dashboard.py:240
 msgid "About Us"
+msgstr ""
+
+#: .\views\common.py:22
+#, python-format
+msgid "The language \"%s\" is not supported"
 msgstr ""
 
 #: .\views\export.py:34
@@ -1281,7 +1275,7 @@ msgstr "Kein Modell zum Exportieren der Daten angegeben."
 msgid "Group \"%(group)s\" was created successfully."
 msgstr "Projekt \"%(group)s\" wurde erfolgreich erstellt."
 
-#: .\views\group.py:55 .\views\user.py:53
+#: .\views\group.py:55 .\views\user.py:56
 msgid "Create"
 msgstr "Erstellen"
 
@@ -1370,7 +1364,7 @@ msgstr ""
 msgid "Your profile was edited successfully."
 msgstr "Dein Profil wurde erfolgreich bearbeitet."
 
-#: .\views\user.py:40
+#: .\views\user.py:41
 #, python-format
 msgid ""
 "User \"%(user)s\" was registered successfully. You can now log in using this "
@@ -1416,6 +1410,12 @@ msgstr "Objekt \"%(title)s\" wurde erfolgreich gelöscht."
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d andere Objekte wurden gelöscht."
+
+#~ msgid "Mein Dashboard"
+#~ msgstr "Mein Dashboard"
+
+#~ msgid "Mein Profil"
+#~ msgstr "Mein Profil"
 
 #
 #~ msgid "Change"
