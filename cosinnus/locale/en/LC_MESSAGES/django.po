@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-01 18:17+0200\n"
+"POT-Creation-Date: 2014-09-02 00:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,7 +76,7 @@ msgstr ""
 #: .\_old_templates\cosinnus\group_list.html.py:10
 #: .\templates\cosinnus\group\group_form.html.py:8
 #: .\templates\cosinnus\group\group_form.html.py:29
-#: .\templates\cosinnus\group\leftnav_all_groups.html.py:19
+#: .\templates\cosinnus\group\leftnav_all_groups.html.py:26
 msgid "Create Group"
 msgstr ""
 
@@ -156,7 +156,7 @@ msgstr ""
 
 #: .\_old_templates\cosinnus\userprofile_form.html.py:10
 #: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:173
-#: .\views\group.py:411 .\views\user.py:99
+#: .\views\group.py:411 .\views\user.py:107
 msgid "Save"
 msgstr ""
 
@@ -1000,10 +1000,11 @@ msgid "Speichern"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_list.html.py:14
+#: .\templates\cosinnus\user\user_list.html.py:14
 msgid "Overview"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_list.html.py:20
+#: .\templates\cosinnus\group\group_list.html.py:24
 msgid "show on map"
 msgstr ""
 
@@ -1059,8 +1060,12 @@ msgstr ""
 msgid "There are no users."
 msgstr ""
 
-#: .\templates\cosinnus\group\leftnav_all_groups.html.py:13
+#: .\templates\cosinnus\group\leftnav_all_groups.html.py:15
 msgid "All groups"
+msgstr ""
+
+#: .\templates\cosinnus\group\leftnav_all_groups.html.py:20
+msgid "All users"
 msgstr ""
 
 #: .\templates\cosinnus\group\leftnav_group.html.py:19
@@ -1117,6 +1122,14 @@ msgstr ""
 #: .\templates\cosinnus\user\leftnav.html.py:20
 #: .\templates\cosinnus\user\userprofile_detail.html.py:93
 msgid "Über mich"
+msgstr ""
+
+#: .\templates\cosinnus\user\user_list.html.py:4
+msgid "Users"
+msgstr ""
+
+#: .\templates\cosinnus\user\user_list.html.py:13
+msgid "User overview"
 msgstr ""
 
 #: .\templates\cosinnus\user\userprofile_detail.html.py:11
@@ -1271,7 +1284,7 @@ msgstr ""
 msgid "Group \"%(group)s\" was created successfully."
 msgstr ""
 
-#: .\views\group.py:55 .\views\user.py:56
+#: .\views\group.py:55 .\views\user.py:64
 msgid "Create"
 msgstr ""
 
@@ -1352,7 +1365,7 @@ msgstr ""
 msgid "Your profile was edited successfully."
 msgstr ""
 
-#: .\views\user.py:41
+#: .\views\user.py:49
 #, python-format
 msgid ""
 "User \"%(user)s\" was registered successfully. You can now log in using this "

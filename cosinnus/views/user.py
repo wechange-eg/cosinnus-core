@@ -19,7 +19,6 @@ from django.contrib import messages
 from cosinnus.models.profile import get_user_profile_model
 
 
-
 USER_MODEL = get_user_model()
 
 
@@ -27,6 +26,15 @@ class UserListView(ListView):
 
     model = USER_MODEL
     template_name = 'cosinnus/user/user_list.html'
+    
+    def get_queryset(self):
+        qs = super(UserListView, self).get_queryset()
+        qs = qs.order_by('first_name', 'last_name')
+        return qs
+    
+    def get_context_data(self, **kwargs):
+        context = super(UserListView, self).get_context_data(**kwargs)
+        return context
 
 user_list = UserListView.as_view()
 

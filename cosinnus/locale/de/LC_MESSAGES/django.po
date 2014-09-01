@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-01 18:17+0200\n"
+"POT-Creation-Date: 2014-09-02 00:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -78,7 +78,7 @@ msgstr "Projekte"
 #: .\_old_templates\cosinnus\group_list.html.py:10
 #: .\templates\cosinnus\group\group_form.html.py:8
 #: .\templates\cosinnus\group\group_form.html.py:29
-#: .\templates\cosinnus\group\leftnav_all_groups.html.py:19
+#: .\templates\cosinnus\group\leftnav_all_groups.html.py:26
 msgid "Create Group"
 msgstr "Projekt erstellen"
 
@@ -160,7 +160,7 @@ msgstr "Bearbeiten"
 
 #: .\_old_templates\cosinnus\userprofile_form.html.py:10
 #: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:173
-#: .\views\group.py:411 .\views\user.py:99
+#: .\views\group.py:411 .\views\user.py:107
 msgid "Save"
 msgstr "Speichern"
 
@@ -1028,10 +1028,11 @@ msgid "Speichern"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_list.html.py:14
+#: .\templates\cosinnus\user\user_list.html.py:14
 msgid "Overview"
 msgstr "Übersicht"
 
-#: .\templates\cosinnus\group\group_list.html.py:20
+#: .\templates\cosinnus\group\group_list.html.py:24
 msgid "show on map"
 msgstr "auf Karte anzeigen"
 
@@ -1089,9 +1090,13 @@ msgstr "Benutzer_in in Projekt %(group)s"
 msgid "There are no users."
 msgstr "Es gibt keine Benutzer_innen"
 
-#: .\templates\cosinnus\group\leftnav_all_groups.html.py:13
+#: .\templates\cosinnus\group\leftnav_all_groups.html.py:15
 msgid "All groups"
 msgstr "Alle Projekte"
+
+#: .\templates\cosinnus\group\leftnav_all_groups.html.py:20
+msgid "All users"
+msgstr "Alle Menschen"
 
 #
 #: .\templates\cosinnus\group\leftnav_group.html.py:19
@@ -1149,6 +1154,14 @@ msgstr ""
 #: .\templates\cosinnus\user\userprofile_detail.html.py:93
 msgid "Über mich"
 msgstr ""
+
+#: .\templates\cosinnus\user\user_list.html.py:4
+msgid "Users"
+msgstr "Benutzer_innen"
+
+#: .\templates\cosinnus\user\user_list.html.py:13
+msgid "User overview"
+msgstr "Benutzer_innen-Übersicht"
 
 #: .\templates\cosinnus\user\userprofile_detail.html.py:11
 #: .\templates\cosinnus\user\userprofile_form.html.py:10
@@ -1302,7 +1315,7 @@ msgstr "Kein Modell zum Exportieren der Daten angegeben."
 msgid "Group \"%(group)s\" was created successfully."
 msgstr "Projekt \"%(group)s\" wurde erfolgreich erstellt."
 
-#: .\views\group.py:55 .\views\user.py:56
+#: .\views\group.py:55 .\views\user.py:64
 msgid "Create"
 msgstr "Erstellen"
 
@@ -1391,7 +1404,7 @@ msgstr ""
 msgid "Your profile was edited successfully."
 msgstr "Dein Profil wurde erfolgreich bearbeitet."
 
-#: .\views\user.py:41
+#: .\views\user.py:49
 #, python-format
 msgid ""
 "User \"%(user)s\" was registered successfully. You can now log in using this "
@@ -1450,9 +1463,6 @@ msgstr "%(numobjects)d andere Objekte wurden gelöscht."
 
 #~ msgid "There are no new membership requests."
 #~ msgstr "Es gibt aktuell keine neuen Mitarbeiter_innen-Anträge."
-
-#~ msgid "Users"
-#~ msgstr "Benutzer_innen"
 
 #~ msgid "E-mail address"
 #~ msgstr "E-mail Adresse"
