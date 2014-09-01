@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-01 12:31+0200\n"
+"POT-Creation-Date: 2014-09-01 18:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,7 +44,7 @@ msgstr ""
 #: .\templates\cosinnus\dashboard.html.py:54
 #: .\templates\cosinnus\user_dashboard.html.py:25
 #: .\templates\cosinnus\user_dashboard.html.py:54
-#: .\templates\cosinnus\cms\microsite.html.py:56
+#: .\templates\cosinnus\cms\microsite.html.py:57
 msgid "Configure"
 msgstr ""
 
@@ -54,7 +54,7 @@ msgstr ""
 #: .\templates\cosinnus\dashboard.html.py:55
 #: .\templates\cosinnus\user_dashboard.html.py:26
 #: .\templates\cosinnus\user_dashboard.html.py:55
-#: .\templates\cosinnus\widgets\base_widget.html.py:37 .\views\group.py:83
+#: .\templates\cosinnus\widgets\base_widget.html.py:39 .\views\group.py:83
 #: .\views\group.py:445
 msgid "Delete"
 msgstr ""
@@ -62,7 +62,7 @@ msgstr ""
 #: .\_old_templates\cosinnus\dashboard.html.py:561
 #: .\templates\cosinnus\dashboard.html.py:39
 #: .\templates\cosinnus\user_dashboard.html.py:39
-#: .\templates\cosinnus\cms\microsite.html.py:90
+#: .\templates\cosinnus\cms\microsite.html.py:91
 msgid "Add widget"
 msgstr ""
 
@@ -150,7 +150,7 @@ msgstr ""
 
 #: .\_old_templates\cosinnus\userprofile_detail.html.py:13
 #: .\templates\cosinnus\group\group_list.html.py:136
-#: .\templates\cosinnus\widgets\base_widget.html.py:40
+#: .\templates\cosinnus\widgets\base_widget.html.py:42
 msgid "Edit"
 msgstr ""
 
@@ -334,7 +334,7 @@ msgstr ""
 
 #: .\core\decorators\views.py:60 .\core\decorators\views.py:107
 #: .\core\decorators\views.py:154 .\core\decorators\views.py:212
-#: .\views\cms.py:36
+#: .\views\cms.py:40 .\views\cms.py:96
 msgid "No group found with this name"
 msgstr ""
 
@@ -343,47 +343,55 @@ msgstr ""
 msgid "Please log in to access this page."
 msgstr ""
 
-#: .\forms\attached_object.py:53 .\forms\dashboard.py:63
+#: .\forms\attached_object.py:53 .\forms\dashboard.py:65
 msgid "Attachments"
 msgstr ""
 
-#: .\forms\attached_object.py:54 .\forms\dashboard.py:64
+#: .\forms\attached_object.py:54 .\forms\dashboard.py:66
 msgid "Type the title and/or type of attachment"
 msgstr ""
 
-#: .\forms\dashboard.py:19
+#: .\forms\dashboard.py:18
+msgid "Sort_field"
+msgstr ""
+
+#: .\forms\dashboard.py:18
+msgid "Enter a number for sort order"
+msgstr ""
+
+#: .\forms\dashboard.py:21
 msgid "Widget label"
 msgstr ""
 
-#: .\forms\dashboard.py:19
+#: .\forms\dashboard.py:21
 msgid "Enter a title for the widget"
 msgstr ""
 
-#: .\forms\dashboard.py:20
+#: .\forms\dashboard.py:22
 msgid "Widget icon"
 msgstr ""
 
-#: .\forms\dashboard.py:20
+#: .\forms\dashboard.py:22
 msgid "A font-awesome icon for the widget"
 msgstr ""
 
-#: .\forms\dashboard.py:21
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:68
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:76
+#: .\forms\dashboard.py:23
+#: .\templates\cosinnus\widgets\base_widget_form.html.py:42
+#: .\templates\cosinnus\widgets\base_widget_form.html.py:50
 msgid "Link label"
 msgstr ""
 
-#: .\forms\dashboard.py:21
+#: .\forms\dashboard.py:23
 msgid "Enter a label for the widget-button"
 msgstr ""
 
-#: .\forms\dashboard.py:55 .\models\cms.py:20
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:21
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:29
+#: .\forms\dashboard.py:57 .\models\cms.py:20
+#: .\templates\cosinnus\widgets\info_widget_form.html.py:5
+#: .\templates\cosinnus\widgets\info_widget_form.html.py:13
 msgid "Text"
 msgstr ""
 
-#: .\forms\dashboard.py:55
+#: .\forms\dashboard.py:57
 msgid "Enter a description"
 msgstr ""
 
@@ -565,7 +573,7 @@ msgstr ""
 
 #: .\models\widget.py:20 .\templates\cosinnus\appsmenu.html.py:30
 #: .\templates\cosinnus\appsmenu.html.py:50
-#: .\templates\cosinnus\cms\microsite.html.py:27
+#: .\templates\cosinnus\cms\microsite.html.py:28
 msgid "Microsite"
 msgstr ""
 
@@ -581,31 +589,39 @@ msgstr ""
 msgid "Widget Type"
 msgstr ""
 
-#: .\models\widget.py:35
-msgid "Widget configuration"
+#: .\models\widget.py:29
+#: .\templates\cosinnus\widgets\base_widget_form.html.py:57
+#: .\templates\cosinnus\widgets\base_widget_form.html.py:65
+#: .\templates\cosinnus\widgets\empty_widget_form.html.py:12
+#: .\templates\cosinnus\widgets\empty_widget_form.html.py:20
+msgid "Sort field"
 msgstr ""
 
 #: .\models\widget.py:36
+msgid "Widget configuration"
+msgstr ""
+
+#: .\models\widget.py:37
 msgid "Widget configurations"
 msgstr ""
 
-#: .\models\widget.py:49
+#: .\models\widget.py:50
 msgid "Either group or user must be defined."
 msgstr ""
 
-#: .\models\widget.py:94
+#: .\models\widget.py:95
 msgid "key"
 msgstr ""
 
-#: .\models\widget.py:95
+#: .\models\widget.py:96
 msgid "value"
 msgstr ""
 
-#: .\models\widget.py:100
+#: .\models\widget.py:101
 msgid "Widget configuration item"
 msgstr ""
 
-#: .\models\widget.py:101
+#: .\models\widget.py:102
 msgid "Widget configuration items"
 msgstr ""
 
@@ -653,6 +669,8 @@ msgstr ""
 #: .\templates\cosinnus\leftnav_hierarchic_itemview.html.py:10
 #: .\templates\cosinnus\leftnav_hierarchic_listview.html.py:8
 #: .\templates\cosinnus\leftnav_hierarchic_listview.html.py:12
+#: .\templates\cosinnus\leftnav_hierarchic_listview_standalone.html.py:17
+#: .\templates\cosinnus\leftnav_hierarchic_listview_standalone.html.py:20
 msgid "Zurück zu"
 msgstr ""
 
@@ -759,14 +777,23 @@ msgstr ""
 msgid "weiter"
 msgstr ""
 
-#: .\templates\cosinnus\cms\microsite.html.py:114
-#: .\templates\cosinnus\cms\microsite.html.py:151 .\utils\dashboard.py:291
+#: .\templates\cosinnus\cms\microsite.html.py:57
+msgid "Done"
+msgstr ""
+
+#: .\templates\cosinnus\cms\microsite.html.py:115
+#: .\templates\cosinnus\cms\microsite.html.py:152 .\utils\dashboard.py:291
 msgid "Informations"
 msgstr ""
 
-#: .\templates\cosinnus\cms\microsite.html.py:144
-#: .\templates\cosinnus\cms\microsite.html.py:152
+#: .\templates\cosinnus\cms\microsite.html.py:145
+#: .\templates\cosinnus\cms\microsite.html.py:153
 msgid "No informations set"
+msgstr ""
+
+#: .\templates\cosinnus\cms\microsite.html.py:166
+#: .\templates\cosinnus\cms\microsite.html.py:187
+msgid "Back to Project Overview"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_delete.html.py:5
@@ -1170,35 +1197,35 @@ msgstr ""
 msgid "Edit Widget"
 msgstr ""
 
-#: .\templates\cosinnus\widgets\base_widget.html.py:61
+#: .\templates\cosinnus\widgets\base_widget.html.py:63
 #: .\templates\cosinnus\widgets\fadedown_base_widget.html.py:52
 #: .\templates\cosinnus\widgets\info_widget.html.py:12
 msgid "Mehr"
 msgstr ""
 
-#: .\templates\cosinnus\widgets\empty_widget_form.html.py:6
-msgid "(This widget has no additional options)"
-msgstr ""
-
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:6
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:14
+#: .\templates\cosinnus\widgets\base_widget_form.html.py:7
+#: .\templates\cosinnus\widgets\base_widget_form.html.py:15
 msgid "Widget title"
 msgstr ""
 
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:37
-msgid "Attach Image(s)"
-msgstr ""
-
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:45
-msgid "Bild/Datei anhängen"
-msgstr ""
-
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:53
+#: .\templates\cosinnus\widgets\base_widget_form.html.py:27
 msgid "Widget Icon (FA)"
 msgstr ""
 
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:61
+#: .\templates\cosinnus\widgets\base_widget_form.html.py:35
 msgid "Font-awesome Widget Icon"
+msgstr ""
+
+#: .\templates\cosinnus\widgets\empty_widget_form.html.py:8
+msgid "(This widget has no additional options)"
+msgstr ""
+
+#: .\templates\cosinnus\widgets\info_widget_form.html.py:21
+msgid "Attach Image(s)"
+msgstr ""
+
+#: .\templates\cosinnus\widgets\info_widget_form.html.py:29
+msgid "Bild/Datei anhängen"
 msgstr ""
 
 #: .\templates\cosinnus\widgets\not_allowed_group.html.py:2
@@ -1213,7 +1240,7 @@ msgstr ""
 msgid "Widget not found."
 msgstr ""
 
-#: .\templatetags\cosinnus_tags.py:207 .\templatetags\cosinnus_tags.py:233
+#: .\templatetags\cosinnus_tags.py:208 .\templatetags\cosinnus_tags.py:234
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr ""
