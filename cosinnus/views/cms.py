@@ -41,7 +41,7 @@ class GroupMicrosite(TemplateView):
 
     def get_context_data(self, **kwargs):
         widget_filter = self.get_filter()
-        widgets = WidgetConfig.objects.filter(**widget_filter)
+        widgets = WidgetConfig.objects.filter(**widget_filter).order_by('sort_field')
         ids = widgets.values_list('id', flat=True).all()
         
         widget_configs = []

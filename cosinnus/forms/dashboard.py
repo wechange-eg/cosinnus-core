@@ -14,6 +14,8 @@ class DashboardWidgetForm(forms.Form):
     
     # type form field needs to be here, but be hidden in the frontend
     type = forms.IntegerField(widget=forms.HiddenInput())
+    # the sort field, arbitrary value field that is sorted on for widget order
+    sort_field = forms.CharField(label=_("Sort_field"), help_text=_("Enter a number for sort order"), required=False)
     
     #default fields for all widgets
     widget_title = forms.CharField(label=_("Widget label"), help_text=_("Enter a title for the widget"), required=False)
