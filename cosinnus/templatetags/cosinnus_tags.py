@@ -166,6 +166,7 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
 
 @register.simple_tag(takes_context=True)
 def cosinnus_render_widget(context, widget):
+    """ Renders a given widget config and passes all context on to its template """
     flat = {}
     for d in context.dicts:
         flat.update(d)

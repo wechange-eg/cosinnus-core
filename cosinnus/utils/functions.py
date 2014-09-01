@@ -75,3 +75,10 @@ def select_related_chain(qs, *args):
     sels = list(args) + prev_args
     return qs.select_related(*sels)
     
+    
+def get_cosinnus_app_from_class(cls):
+    """ Tries to parse the cosinnus app name from any class in a cosinnus app """
+    try:
+        return cls.__module__.split('.')[0].replace('cosinnus_', '')
+    except:
+        return '<not-a-cosinnus-module>'

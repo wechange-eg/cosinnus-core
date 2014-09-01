@@ -19,6 +19,8 @@ from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.core.registries import widget_registry
 from cosinnus.core.decorators.views import redirect_to_403
 from cosinnus.utils.permissions import check_object_write_access
+from cosinnus.core.registries.attached_objects import attached_object_registry
+from cosinnus.utils.functions import get_cosinnus_app_from_class
 
 class GroupMicrosite(TemplateView):
     """ TODO: Refactor-merge and unify this view to a mixin with DashboardMixin for groups,
@@ -52,13 +54,26 @@ class GroupMicrosite(TemplateView):
             kwargs.update({widget_handle : wc.id})
             widget = widget_class(self.request, wc)
             widget_configs.append(widget)
-    
+            
+        
+        """ Item list inline views """
+        item_inlines = []
+        for model_name in ['cosinnus_note.Note']:
+            Renderer = attached_object_registry.get(model_name)
+            if Renderer:
+                qs_filter = {'group__slug': self.group.slug}
+                item_inlines.append({
+                    'model': model_name,
+                    'app': get_cosinnus_app_from_class(Renderer),
+                    'content': Renderer.render_list_for_user(self.request.user, self.request, qs_filter, limit=5)
+                })
         
         kwargs.update({
             'widgets': ids,
             'group': self.group,
             'widget_configs': widget_configs,
             'edit_mode': False,
+            'item_inlines': item_inlines,
         })
         return super(GroupMicrosite, self).get_context_data(**kwargs)
 

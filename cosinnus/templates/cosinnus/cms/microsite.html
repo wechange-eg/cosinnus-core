@@ -161,29 +161,30 @@
         $('.transparent_p p').addClass('transparent');
     </script>
 
-
-    <div class="row">
-        <div class="col-md-3">
-
-            <div type="button" class="btn btn-emphasized btn-headline regular-space">
-                <ul class="media-list">
-                    <li class="media">
-                        <a class="pull-left btn-extra-emphasized" href="#"></a>
-                        <div class="media-body">
-                            Meldungen
-                        </div>
-                    </li>
-                </ul>
-            </div><!-- btn -->
-        </div><!-- left column -->
-
-        <div class="col-md-9">
-            <div class="content-box">
-                <p class="transparent">Bla</p>
-            </div>
-        </div><!-- right column -->
-    </div><!-- row -->
-
+    
+    {% for item_inline in item_inlines %}
+	    <div class="row">
+	        <div class="col-md-3">
+	
+	            <div type="button" class="btn btn-emphasized btn-headline regular-space">
+	                <ul class="media-list">
+	                    <li class="media">
+	                        <a class="pull-left btn-extra-emphasized" href="#"></a>
+	                        <div class="media-body">
+	                            {% trans item_inline.app context "the_app" %}
+	                        </div>
+	                    </li>
+	                </ul>
+	            </div><!-- btn -->
+	        </div><!-- left column -->
+	
+	        <div class="col-md-9">
+	            <div class="content-box">
+	                {{ item_inline.content|safe }}
+	            </div>
+	        </div><!-- right column -->
+	    </div><!-- row -->
+    {% endfor %}
 
 
 
