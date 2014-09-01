@@ -1259,7 +1259,7 @@ msgstr "Netzwerk"
 
 #: .\utils\dashboard.py:240
 msgid "About Us"
-msgstr ""
+msgstr "Über uns"
 
 #: .\views\common.py:22
 #, python-format

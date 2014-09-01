@@ -34,7 +34,7 @@
 		                        </a>
 	                        {% endif %}
                         {% endblock widget_icon %}
-                        {% if request.user.is_authenticated and group and request.user|is_group_admin:group or request.user.is_authenticaed and not group %}
+                        {% if edit_mode != False and group and request.user|is_group_admin:group or edit_mode != False and request.user.is_authenticaed and not group %}
                             <a class="pull-right" href="#" data-type="delete" title="{% trans "Delete" %}">
                                 <i class="fa fa-trash-o"></i>
                             </a>

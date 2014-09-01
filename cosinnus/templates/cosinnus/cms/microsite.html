@@ -46,18 +46,18 @@
             
             <div class="position-relative"><!-- just for fun -->
                 {% if user|has_write_access:group %}
-                    <div type="button" class="btn btn-emphasized bottom-align">
+                    <button type="button" class="btn btn-emphasized bottom-align" href="{% if edit_mode %}{% url 'cosinnus:group-microsite' group=group.slug %}{% else %}{% url 'cosinnus:group-microsite-edit' group=group.slug %}{% endif %}">
                         <ul class="media-list">
                             <li class="media">
                                 <a class="pull-left" href="#">
-                                    <i class="fa fa-cogs"></i>
+                                    <i class="fa {% if edit_mode %}fa-reply{% else %}fa-cogs{% endif %}"></i>
                                 </a>
                                 <div class="media-body">
-                                    {% trans "Configure" %}
+                                    {% if edit_mode %}{% trans "Done" %}{% else %}{% trans "Configure" %}{% endif %}
                                 </div>
                             </li>
                         </ul>
-                    </div><!-- btn -->
+                    </button><!-- btn -->
                 {% endif %}
                 
                 <legend class="large-space">{{ group.name }}</legend>
@@ -75,7 +75,7 @@
     {% endfor %}
     
     
-    {% if user|has_write_access:group %}
+    {% if edit_mode and group and user|has_write_access:group %}
         <div data-type="widget-anchor" style="display:none;"></div>
         
         <div class="col-lg-4 col-md-4 large-space app-todos" data-type="widget-add">
