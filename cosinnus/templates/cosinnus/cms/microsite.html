@@ -11,6 +11,7 @@
 
 {% block main_page_header %}
     
+    <a name="microsite"></a>
     <div class="row">
         <!-- start with left navigation -->
         <div class="col-lg-3 col-md-3"><!-- left column -->
@@ -37,7 +38,7 @@
             
 
 {% block main_page %}
-
+    
     <div class="row large-space">
         <div class="col-sm-2 large-space">
            {% include 'cosinnus/group/group_avatar_image.html' with extra_classes="w100" %}
@@ -154,16 +155,37 @@
                </div><!-- right column -->
            {% endfor %}
        </div><!-- row -->
+       
+       <div class="row large-space">
+            <div class="col-md-3">
+            </div><!-- left column -->
+            <div class="col-md-9">
+               <label>
+                   <a href="#microsite">
+                       <i class="fa fa-fw fa-caret-up"></i>
+                       {% trans "Back to Project Overview" %}
+                   </a>
+               </label>
+           </div><!-- right column -->
+       </div><!-- row -->
+       
     {% endwith %}
-    
-    <script type="text/javascript">
-        $.cosinnus.toggleable();
-        $('.transparent_p p').addClass('transparent');
-    </script>
-
     
     {% for item_inline in item_inlines %}
         {{ item_inline.content|safe }}
+        
+        <div class="row large-space">
+            <div class="col-md-3">
+            </div><!-- left column -->
+             <div class="col-md-9">
+                <label>
+                    <a href="#microsite">
+                        <i class="fa fa-fw fa-caret-up"></i>
+                        {% trans "Back to Project Overview" %}
+                    </a>
+                </label>
+            </div><!-- right column -->
+        </div><!-- row -->
     {% endfor %}
 
 
@@ -176,7 +198,10 @@
   <script src="{% static "js/cosinnus.dashboard.js" %}"></script>
   <script type="text/javascript">
     $(document).ready(function(){
-      var dashboard = window.Cosinnus.dashboard.init("#dashboard", {% if group.slug %}"{{ group.slug }}"{% else %}null{% endif %});
+        $.cosinnus.toggleable();
+        $('.transparent_p p').addClass('transparent');
+        
+        var dashboard = window.Cosinnus.dashboard.init("#dashboard", {% if group.slug %}"{{ group.slug }}"{% else %}null{% endif %});
     });
   </script>
 {% endblock %}
