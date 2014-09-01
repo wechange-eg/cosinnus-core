@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-31 18:10+0200\n"
+"POT-Creation-Date: 2014-09-01 12:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -128,7 +128,7 @@ msgid "Profile"
 msgstr ""
 
 #: .\_old_templates\cosinnus\topmenu.html.py:49
-#: .\templates\cosinnus\navbar.html.py:84
+#: .\templates\cosinnus\navbar.html.py:85
 msgid "Logout"
 msgstr ""
 
@@ -156,7 +156,7 @@ msgstr ""
 
 #: .\_old_templates\cosinnus\userprofile_form.html.py:10
 #: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:173
-#: .\views\group.py:411 .\views\user.py:96
+#: .\views\group.py:411 .\views\user.py:99
 msgid "Save"
 msgstr ""
 
@@ -368,8 +368,8 @@ msgid "A font-awesome icon for the widget"
 msgstr ""
 
 #: .\forms\dashboard.py:21
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:71
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:80
+#: .\templates\cosinnus\widgets\info_widget_form.html.py:68
+#: .\templates\cosinnus\widgets\info_widget_form.html.py:76
 msgid "Link label"
 msgstr ""
 
@@ -379,7 +379,7 @@ msgstr ""
 
 #: .\forms\dashboard.py:55 .\models\cms.py:20
 #: .\templates\cosinnus\widgets\info_widget_form.html.py:21
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:30
+#: .\templates\cosinnus\widgets\info_widget_form.html.py:29
 msgid "Text"
 msgstr ""
 
@@ -459,15 +459,15 @@ msgstr ""
 msgid "Slug"
 msgstr ""
 
-#: .\models\group.py:298 .\models\organisation.py:295 .\models\profile.py:141
+#: .\models\group.py:298 .\models\organisation.py:295 .\models\profile.py:145
 msgid "Description"
 msgstr ""
 
-#: .\models\group.py:299 .\models\organisation.py:296 .\models\profile.py:139
+#: .\models\group.py:299 .\models\organisation.py:296 .\models\profile.py:143
 msgid "Avatar"
 msgstr ""
 
-#: .\models\group.py:301 .\models\profile.py:144
+#: .\models\group.py:301 .\models\profile.py:148
 #: .\templates\cosinnus\group\group_form.html.py:148
 #: .\templates\cosinnus\group\group_form.html.py:157
 #: .\templates\cosinnus\user\userprofile_form.html.py:97
@@ -688,11 +688,11 @@ msgid "My Stream"
 msgstr ""
 
 #: .\templates\cosinnus\navbar.html.py:80
-msgid "Mein Dashboard"
+msgid "My Dashboard"
 msgstr ""
 
 #: .\templates\cosinnus\navbar.html.py:81
-msgid "Mein Profil"
+msgid "My Profile"
 msgstr ""
 
 #: .\templates\cosinnus\not_logged_in_alert.html.py:5
@@ -759,13 +759,13 @@ msgstr ""
 msgid "weiter"
 msgstr ""
 
-#: .\templates\cosinnus\cms\microsite.html.py:383
-#: .\templates\cosinnus\cms\microsite.html.py:420 .\utils\dashboard.py:286
+#: .\templates\cosinnus\cms\microsite.html.py:114
+#: .\templates\cosinnus\cms\microsite.html.py:151 .\utils\dashboard.py:291
 msgid "Informations"
 msgstr ""
 
-#: .\templates\cosinnus\cms\microsite.html.py:413
-#: .\templates\cosinnus\cms\microsite.html.py:421
+#: .\templates\cosinnus\cms\microsite.html.py:144
+#: .\templates\cosinnus\cms\microsite.html.py:152
 msgid "No informations set"
 msgstr ""
 
@@ -1185,19 +1185,19 @@ msgstr ""
 msgid "Widget title"
 msgstr ""
 
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:38
+#: .\templates\cosinnus\widgets\info_widget_form.html.py:37
 msgid "Attach Image(s)"
 msgstr ""
 
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:47
+#: .\templates\cosinnus\widgets\info_widget_form.html.py:45
 msgid "Bild/Datei anhängen"
 msgstr ""
 
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:55
+#: .\templates\cosinnus\widgets\info_widget_form.html.py:53
 msgid "Widget Icon (FA)"
 msgstr ""
 
-#: .\templates\cosinnus\widgets\info_widget_form.html.py:64
+#: .\templates\cosinnus\widgets\info_widget_form.html.py:61
 msgid "Font-awesome Widget Icon"
 msgstr ""
 
@@ -1218,25 +1218,21 @@ msgstr ""
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr ""
 
-#: .\utils\dashboard.py:169
+#: .\utils\dashboard.py:174
 msgid "Group Description"
 msgstr ""
 
-#: .\utils\dashboard.py:195
+#: .\utils\dashboard.py:200
 msgid "Network"
 msgstr ""
 
-#: .\utils\dashboard.py:235
+#: .\utils\dashboard.py:240
 msgid "About Us"
 msgstr ""
 
-#: .\views\common.py:21
+#: .\views\common.py:22
 #, python-format
 msgid "The language \"%s\" is not supported"
-msgstr ""
-
-#: .\views\common.py:24
-msgid "Language was switched successfully."
 msgstr ""
 
 #: .\views\export.py:34
@@ -1248,7 +1244,7 @@ msgstr ""
 msgid "Group \"%(group)s\" was created successfully."
 msgstr ""
 
-#: .\views\group.py:55 .\views\user.py:53
+#: .\views\group.py:55 .\views\user.py:56
 msgid "Create"
 msgstr ""
 
@@ -1329,7 +1325,7 @@ msgstr ""
 msgid "Your profile was edited successfully."
 msgstr ""
 
-#: .\views\user.py:40
+#: .\views\user.py:41
 #, python-format
 msgid ""
 "User \"%(user)s\" was registered successfully. You can now log in using this "
