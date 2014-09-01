@@ -59,7 +59,7 @@ class GroupMicrosite(TemplateView):
         """ Item list inline views """
         item_inlines = []
         item_limit = 5
-        for model_name in ['cosinnus_note.Note', 'cosinnus_etherpad.Etherpad']:
+        for model_name in ['cosinnus_note.Note', 'cosinnus_etherpad.Etherpad', 'cosinnus_file.FileEntry', 'cosinnus_event.Event']:
             Renderer = attached_object_registry.get(model_name)
             if Renderer:
                 qs_filter = {'group__slug': self.group.slug}
