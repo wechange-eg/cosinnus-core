@@ -31,7 +31,8 @@ class UserListView(ListView):
     def get_queryset(self):
         qs = super(UserListView, self).get_queryset()
         # only show users with visbility "public"
-        qs = qs.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
+        # disabled for now
+        #qs = qs.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
         qs = qs.order_by('first_name', 'last_name')
         return qs
     
