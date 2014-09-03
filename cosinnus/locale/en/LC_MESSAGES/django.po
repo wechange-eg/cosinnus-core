@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-02 00:02+0200\n"
+"POT-Creation-Date: 2014-09-03 13:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -156,7 +156,7 @@ msgstr ""
 
 #: .\_old_templates\cosinnus\userprofile_form.html.py:10
 #: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:173
-#: .\views\group.py:411 .\views\user.py:107
+#: .\views\group.py:411 .\views\user.py:110
 msgid "Save"
 msgstr ""
 
@@ -437,6 +437,10 @@ msgstr ""
 
 #: .\forms\search.py:51
 msgid "Other groups"
+msgstr ""
+
+#: .\forms\user.py:40 .\forms\user.py:54
+msgid "This email address already has a registered user!"
 msgstr ""
 
 #: .\models\cms.py:19 .\models\tagged.py:136
@@ -1057,7 +1061,7 @@ msgid "Users in group %(group)s"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_user_list.html.py:23
-msgid "There are no users."
+msgid "There are no visible users."
 msgstr ""
 
 #: .\templates\cosinnus\group\leftnav_all_groups.html.py:15
@@ -1284,7 +1288,7 @@ msgstr ""
 msgid "Group \"%(group)s\" was created successfully."
 msgstr ""
 
-#: .\views\group.py:55 .\views\user.py:64
+#: .\views\group.py:55 .\views\user.py:67
 msgid "Create"
 msgstr ""
 
@@ -1365,7 +1369,7 @@ msgstr ""
 msgid "Your profile was edited successfully."
 msgstr ""
 
-#: .\views\user.py:49
+#: .\views\user.py:52
 #, python-format
 msgid ""
 "User \"%(user)s\" was registered successfully. You can now log in using this "
