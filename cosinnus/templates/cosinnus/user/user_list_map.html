@@ -1,0 +1,43 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags %}
+
+{% block page_title %}{% trans "Users" %} - {% trans "Map" %} {{ block.super }}{% endblock %}
+
+
+{% block leftnav %}
+    {% include "cosinnus/group/leftnav_all_groups.html"  with current_page="userlist" %}
+{% endblock leftnav %}
+
+
+{% block breadcrumb %}
+    <li><a href="{% url 'cosinnus:user-list' %}">{% trans "User overview" %}</a></li>
+    <li class="active">{% trans "Map" %}</li>
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <link href="{% static 'css/vendor/leaflet.css' %}" rel="stylesheet">
+    <script src="{% static 'js/vendor/leaflet.js' %}"></script>
+{% endblock extrahead %}
+
+{% block content %}
+
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+        
+        <div id="map"></div>
+        <script type="application/javascript">
+            var mapData = [
+                {% for user in object_list %}
+	                {% with mt=user.cosinnus_profile.media_tag %}
+	                    {% if mt and mt.location and mt.location_lat and mt.location_lon %}
+	                        {lat: {{ mt.location_lat|stringformat:"f" }}, lon: {{ mt.location_lon|stringformat:"f" }}, title: '<a href="{% url 'cosinnus:profile-detail' username=user.username %}">{{ user|full_name }}</a>'},
+	                    {% endif %}
+	                {% endwith %}
+		        {% endfor %}
+            ];
+        </script>
+    </div>
+
+{% endblock %}
+

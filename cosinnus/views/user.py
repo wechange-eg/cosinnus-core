@@ -43,6 +43,13 @@ class UserListView(ListView):
 user_list = UserListView.as_view()
 
 
+class UserListMapView(UserListView):
+
+    template_name = 'cosinnus/user/user_list_map.html'
+    
+user_list_map = UserListMapView.as_view()
+
+
 class UserCreateView(CreateView):
 
     form_class = UserCreationForm

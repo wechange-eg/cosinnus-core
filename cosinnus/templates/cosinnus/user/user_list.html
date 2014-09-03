@@ -15,6 +15,10 @@
 {% endblock %}
 
 {% block content %}
+    <div class="clearfix regular-space">
+        <a href="{% url 'cosinnus:user-list-map' %}" class="pull-right light-color underlined">{% trans "show on map" %}</a>
+    </div>
+    
     <!-- a box with semi transparent background -->
     <div class="content-box">
         
