@@ -57,7 +57,7 @@
 	            <div class="btn btn-emphasized w100">
 	                <ul class="media-list">
 	                    <li class="media">
-	                        <a class="pull-left" href="{% url 'cosinnus:group-dashboard' group=group.slug %}">
+	                        <a class="pull-left" href="{% url 'cosinnus:profile-detail' username=user.username %}">
 	                            {% include "cosinnus/user/user_avatar_image.html" with user=user %}
 	                        </a>
 	                        {% comment %}   fadedown disabled
