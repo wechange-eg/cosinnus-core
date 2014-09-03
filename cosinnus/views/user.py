@@ -17,6 +17,7 @@ from cosinnus.views.mixins.ajax import patch_body_json_data
 from cosinnus.utils.http import JSONResponse
 from django.contrib import messages
 from cosinnus.models.profile import get_user_profile_model
+from cosinnus.models.tagged import BaseTagObject
 
 
 USER_MODEL = get_user_model()
@@ -29,6 +30,8 @@ class UserListView(ListView):
     
     def get_queryset(self):
         qs = super(UserListView, self).get_queryset()
+        # only show users with visbility "public"
+        qs = qs.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
         qs = qs.order_by('first_name', 'last_name')
         return qs
     
