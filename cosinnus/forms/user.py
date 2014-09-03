@@ -33,12 +33,28 @@ class UserCreationForm(DjUserCreationForm):
             'last_name',
         )
     
+    email = forms.EmailField(_('email address'), required=True) 
+    first_name = forms.CharField(_('first name'), required=True)   
+    
+    def is_valid(self):
+        """ Get the email from the form and set it as username. 
+            If none was set, hide the username field and let validation take its course. """
+        self.data['username'] = self.data['email'][:30]
+        return super(UserCreationForm, self).is_valid()
+
     def clean_email(self):
         email = self.cleaned_data.get('email')
         username = self.cleaned_data.get('username')
         if email and UserCreationForm.Meta.model.objects.filter(email=email).exclude(username=username).count():
             raise forms.ValidationError(_('This email address already has a registered user!'))
         return email
+    
+    def save(self, commit=True):
+        """ Set the username equal to the userid """
+        user = super(UserCreationForm, self).save(commit=True)
+        user.username = str(user.id)
+        user.save()
+        return user
 
 
 class UserChangeForm(forms.ModelForm):

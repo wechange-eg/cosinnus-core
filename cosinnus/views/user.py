@@ -57,9 +57,9 @@ class UserCreateView(CreateView):
         # sanity check, retrieve the user's profile
         get_user_profile_model()._default_manager.get_for_user(self.object)
         messages.success(self.request,
-            self.message_success % {'user': self.object.username})
+            self.message_success % {'user': self.object.email})
         return ret
-
+    
     def dispatch(self, *args, **kwargs):
         return super(UserCreateView, self).dispatch(*args, **kwargs)
 

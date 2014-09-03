@@ -19,21 +19,7 @@
     
     <!-- a box with semi transparent background -->
     <div class="content-box">
-
-        <div type="button" class="btn btn-default w100 regular-space">
-            <ul class="media-list">
-                <li class="media">
-                    <a class="pull-left" href="#" tabindex="-1">
-                        <i class="fa fa-user"></i>
-                    </a>
-                    <div class="media-body">
-                        {{ form.username.errors }}
-                        {% captureas placeholder %}{% trans "Username" %}{% endcaptureas %}
-                        {% render_field form.username class+="form-control" placeholder=placeholder %}
-                    </div>
-                </li>
-            </ul>
-        </div>
+        {{ form.non_field_errors }}
 
         <div type="button" class="btn btn-default w100 large-space">
             <ul class="media-list">
