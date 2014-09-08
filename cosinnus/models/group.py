@@ -456,3 +456,6 @@ class CosinnusGroupMembership(models.Model):
             _MEMBERSHIP_PENDINGS_KEY % self.group.pk,
         ])
         self.group._clear_local_cache()
+        
+    def user_email(self):
+        return self.user.email

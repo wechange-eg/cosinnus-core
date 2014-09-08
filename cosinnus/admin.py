@@ -16,7 +16,7 @@ from cosinnus.models.cms import CosinnusMicropage
 # group related admin
 
 class MembershipAdmin(admin.ModelAdmin):
-    list_display = ('group', 'user', 'status', 'date',)
+    list_display = ('group', 'user_email', 'status', 'date',)
     list_filter = ('group', 'user', 'status',)
 
 admin.site.register(CosinnusGroupMembership, MembershipAdmin)
@@ -30,7 +30,6 @@ class MembershipInline(admin.StackedInline):
 class CosinnusGroupAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'public',)
     list_filter = ('public',)
-    inlines = (MembershipInline,)
     prepopulated_fields = {'slug': ('name', )}
 
 admin.site.register(CosinnusGroup, CosinnusGroupAdmin)
