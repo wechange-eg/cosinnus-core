@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-08 17:36+0200\n"
+"POT-Creation-Date: 2014-09-08 18:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -220,6 +220,8 @@ msgstr "Einloggen"
 #: .\_old_templates\cosinnus\registration\password_reset_confirm.html.py:4
 #: .\_old_templates\cosinnus\registration\password_reset_form.html.py:4
 #: .\_old_templates\cosinnus\registration\password_reset_form.html.py:7
+#: .\templates\cosinnus\registration\password_change_done.html.py:4
+#: .\templates\cosinnus\registration\password_change_form.html.py:4
 #: .\templates\cosinnus\registration\password_reset_confirm.html.py:4
 #: .\templates\cosinnus\registration\password_reset_form.html.py:4
 #: .\templates\cosinnus\registration\password_reset_form.html.py:7
@@ -227,11 +229,13 @@ msgid "Password reset"
 msgstr "Passwort zurücksetzen"
 
 #: .\_old_templates\cosinnus\registration\password_reset_confirm.html.py:10
+#: .\templates\cosinnus\registration\password_change_form.html.py:24
 #: .\templates\cosinnus\registration\password_reset_confirm.html.py:10
 msgid "Enter new password"
 msgstr "Neues Passwort eingeben"
 
 #: .\_old_templates\cosinnus\registration\password_reset_confirm.html.py:12
+#: .\templates\cosinnus\registration\password_change_form.html.py:42
 #: .\templates\cosinnus\registration\password_reset_confirm.html.py:12
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
@@ -239,6 +243,7 @@ msgid ""
 msgstr "Bitte das neue Passwort zur Kontrolle zwei mal eingeben."
 
 #: .\_old_templates\cosinnus\registration\password_reset_confirm.html.py:17
+#: .\templates\cosinnus\registration\password_change_form.html.py:85
 #: .\templates\cosinnus\registration\password_reset_confirm.html.py:17
 msgid "Change my password"
 msgstr "Passwort ändern"
@@ -459,14 +464,12 @@ msgid "Other groups"
 msgstr "Andere Projekte"
 
 #: .\forms\user.py:37
-#, fuzzy
 msgid "email address"
 msgstr "E-mail Adresse"
 
 #: .\forms\user.py:38
-#, fuzzy
 msgid "first name"
-msgstr "Widget"
+msgstr "Vorname"
 
 #: .\forms\user.py:50 .\forms\user.py:71
 msgid "This email address already has a registered user!"
@@ -765,6 +768,7 @@ msgid "My Dashboard"
 msgstr "Mein Dashboard"
 
 #: .\templates\cosinnus\navbar.html.py:81
+#: .\templates\cosinnus\registration\password_change_done.html.py:32
 msgid "My Profile"
 msgstr "Mein Profil"
 
@@ -837,7 +841,7 @@ msgid "Done"
 msgstr "Fertig"
 
 #: .\templates\cosinnus\cms\microsite.html.py:115
-#: .\templates\cosinnus\cms\microsite.html.py:152 .\utils\dashboard.py:307
+#: .\templates\cosinnus\cms\microsite.html.py:152 .\utils\dashboard.py:308
 msgid "Informations"
 msgstr "Informationen"
 
@@ -1150,6 +1154,35 @@ msgstr ""
 msgid "Password"
 msgstr "Passwort"
 
+#: .\templates\cosinnus\registration\password_change_done.html.py:12
+#: .\templates\cosinnus\registration\password_change_form.html.py:12
+#: .\templates\cosinnus\user\userprofile_detail.html.py:11
+#: .\templates\cosinnus\user\userprofile_form.html.py:10
+msgid "Your Profile"
+msgstr "Über mich"
+
+#: .\templates\cosinnus\registration\password_change_done.html.py:13
+#: .\templates\cosinnus\registration\password_change_form.html.py:13
+#: .\templates\cosinnus\user\leftnav.html.py:43
+msgid "Change password"
+msgstr "Passwort ändern"
+
+#: .\templates\cosinnus\registration\password_change_done.html.py:21
+msgid "Your password has been changed successfully!"
+msgstr "Dein Passwort wurde erfolgreich geändert."
+
+#: .\templates\cosinnus\registration\password_change_form.html.py:35
+msgid "Old password"
+msgstr "Altes Passwort"
+
+#: .\templates\cosinnus\registration\password_change_form.html.py:53
+msgid "New Password"
+msgstr "Neues Passwort"
+
+#: .\templates\cosinnus\registration\password_change_form.html.py:68
+msgid "Repeat new Password"
+msgstr "Neues Passwort wiederholen"
+
 #: .\templates\cosinnus\registration\signup.html.py:4
 msgid "Sign up"
 msgstr "Registrieren"
@@ -1184,7 +1217,7 @@ msgstr "Nachname"
 msgid "Registrieren"
 msgstr ""
 
-#: .\templates\cosinnus\user\leftnav.html.py:20
+#: .\templates\cosinnus\user\leftnav.html.py:24
 #: .\templates\cosinnus\user\userprofile_detail.html.py:93
 msgid "Über mich"
 msgstr ""
@@ -1198,11 +1231,6 @@ msgstr "Benutzer_innen"
 #: .\templates\cosinnus\user\user_list_map.html.py:13
 msgid "User overview"
 msgstr "Benutzer_innen-Übersicht"
-
-#: .\templates\cosinnus\user\userprofile_detail.html.py:11
-#: .\templates\cosinnus\user\userprofile_form.html.py:10
-msgid "Your Profile"
-msgstr "Über mich"
 
 #: .\templates\cosinnus\user\userprofile_detail.html.py:13
 msgid "User Profiles"
@@ -1337,7 +1365,7 @@ msgstr "Projektbeschreibung"
 msgid "Network"
 msgstr "Netzwerk"
 
-#: .\utils\dashboard.py:256
+#: .\utils\dashboard.py:257
 msgid "About Us"
 msgstr "Über uns"
 

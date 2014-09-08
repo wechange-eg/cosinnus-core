@@ -1,33 +1,46 @@
 {% load i18n static cosinnus_tags %}
 
-{% captureas href %}{% url 'cosinnus:group-list' %}{% endcaptureas %}
-{% captureas label %}{% trans "All groups" %}{% endcaptureas %}
-{% captureas extra_class %}fine-space{% endcaptureas %}
-{% include "cosinnus/leftnav_button.html" with active=is_grouplist extra_classes=extra_class icon="fa-group" label=label href=href  %}
-
-{% captureas href %}{% url 'cosinnus:user-list' %}{% endcaptureas %}
-{% captureas label %}{% trans "All users" %}{% endcaptureas %}
-{% captureas extra_class %}fine-space{% endcaptureas %}
-{% include "cosinnus/leftnav_button.html" with active=is_userlist extra_classes=extra_class icon="fa-user" label=label href=href  %}
-
 
 <button type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:profile-detail' %}">
     <ul class="media-list">
         <li class="media">
             {% if view == "my_profile" %}
-	            <a class="pull-left">
-	                <i class="fa fa-user"></i>
-	            </a>
-	            <a class="pull-right" href="#">
-	                <i class="fa fa-caret-right"></i>
-	            </a>
-	        {% elif view == "edit_profile" %}
-	           <a class="pull-left">
+                <a class="pull-left">
+                    <i class="fa fa-user"></i>
+                </a>
+                <a class="pull-right" href="#">
+                    <i class="fa fa-caret-right"></i>
+                </a>
+            {% elif view == "edit_profile" %}
+               <a class="pull-left">
                     <i class="fa fa-reply"></i>
                 </a>
-	        {% endif %}
+            {% else %}
+                <a class="pull-left">
+                    <i class="fa fa-user"></i>
+                </a>
+            {% endif %}
             <div class="media-body">
                 {% trans "Über mich" %}
+            </div>
+        </li>
+    </ul>
+</button>
+
+
+<button type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'password_change' %}">
+    <ul class="media-list">
+        <li class="media">
+           <a class="pull-left">
+                <i class="fa fa-lock"></i>
+            </a>
+            {% if view == "change_password" %}
+                <a class="pull-right" href="#">
+                    <i class="fa fa-caret-right"></i>
+                </a>
+            {% endif %}
+            <div class="media-body">
+                {% trans "Change password" %}
             </div>
         </li>
     </ul>
