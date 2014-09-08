@@ -65,7 +65,7 @@
                 <div class="btn btn-emphasized w100">
                     <ul class="media-list">
                         <li class="media">
-                            <a class="pull-left" href="{{ member.cosinnus_profile.get_absolute_url }}">
+                            <a class="pull-left" href="{{ member|profile_url }}">
                                 {% include "cosinnus/user/user_avatar_image.html" with user=member %}
                             </a>
                             {% if user|has_write_access:object %}
@@ -164,7 +164,7 @@
 		                <div class="btn btn-default w100">
 		                    <ul class="media-list">
 		                        <li class="media">
-		                            <a class="pull-left" href="{{ member.cosinnus_profile.get_absolute_url }}">
+		                            <a class="pull-left" href="{{ member|profile_url }}">
 		                                {% include "cosinnus/user/user_avatar_image.html" with user=member %}
 		                            </a>
 		                            {% if user|has_write_access:object %}

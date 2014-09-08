@@ -108,6 +108,22 @@ def full_name(value):
     return ""
 
 @register.filter
+def profile_url(value):
+    """Template filter to get the profile page url for a given user
+
+    .. code-block:: django
+
+        {{ user|profile_url }}
+
+    :param AbstractBaseUser value: the user object
+    :return: the url to the user's profile
+    """
+    from django.contrib.auth.models import AbstractBaseUser
+    if isinstance(value, AbstractBaseUser):
+        return reverse('cosinnus:profile-detail', kwargs={'username': value.username})
+    return ""
+
+@register.filter
 def multiply(value, arg):
     """Template filter to multiply two numbers
     """
