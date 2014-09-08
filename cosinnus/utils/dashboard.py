@@ -201,6 +201,9 @@ class GroupMembersWidget(DashboardWidget):
     user_model_attr = None
     widget_name = 'group_members'
     allow_on_user = False
+    widget_template_name = 'cosinnus/widgets/group_members_widget.html'
+    # disabled so it doesn't show up in the widget chooser yet
+    #template_name = 'cosinnus/widgets/group_members.html' 
 
     def get_data(self, offset=0):
         """ Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.
@@ -210,16 +213,30 @@ class GroupMembersWidget(DashboardWidget):
         if group is None:
             return ''
         
+        #count = int(self.config.get('amount', 24))
+        # FIXME: hardcoded widget item count for now
+        count = 23
+        
         admin_ids = CosinnusGroupMembership.objects.get_admins(group=group)
         member_ids = CosinnusGroupMembership.objects.get_members(group=group)
         all_ids = set(admin_ids + member_ids)
         qs = get_user_model()._default_manager.order_by('first_name', 'last_name') \
                              .select_related('cosinnus_profile')
+        qs = qs.filter(id__in=all_ids)
+        
+        has_more = len(qs) > offset+count
+        more_count = max(0, len(qs) - (offset+count))
+        
+        if count != 0:
+            qs = qs[offset:offset+count]      
+        
         data = {
             'group': group,
-            'members':qs.filter(id__in=all_ids),
+            'members':qs,
+            'has_more': has_more,
+            'more_count': more_count,
         }
-        return (render_to_string('cosinnus/widgets/group_members.html', data), 0, False)
+        return (render_to_string('cosinnus/widgets/group_members.html', data), len(qs), has_more)
 
     @property
     def title_url(self):

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-08 13:46+0200\n"
+"POT-Creation-Date: 2014-09-08 17:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -56,7 +56,7 @@ msgstr "Konfigurieren"
 #: .\templates\cosinnus\user_dashboard.html.py:26
 #: .\templates\cosinnus\user_dashboard.html.py:55
 #: .\templates\cosinnus\widgets\base_widget.html.py:39 .\views\group.py:83
-#: .\views\group.py:445
+#: .\views\group.py:459
 msgid "Delete"
 msgstr "Löschen"
 
@@ -92,17 +92,17 @@ msgstr "Beigetreten"
 
 #
 #: .\_old_templates\cosinnus\group_list.html.py:42
-#: .\templates\cosinnus\group\group_list.html.py:116 .\views\group.py:273
+#: .\templates\cosinnus\group\group_list.html.py:116 .\views\group.py:287
 msgid "Leave"
 msgstr "Verlassen"
 
 #: .\_old_templates\cosinnus\group_list.html.py:46
-#: .\templates\cosinnus\group\group_list.html.py:118 .\views\group.py:306
+#: .\templates\cosinnus\group\group_list.html.py:118 .\views\group.py:320
 msgid "Withdraw"
 msgstr "Zurückziehen"
 
 #: .\_old_templates\cosinnus\group_list.html.py:50
-#: .\templates\cosinnus\group\group_list.html.py:120 .\views\group.py:252
+#: .\templates\cosinnus\group\group_list.html.py:120 .\views\group.py:266
 msgid "Join"
 msgstr "Beitreten"
 
@@ -159,8 +159,8 @@ msgid "Edit"
 msgstr "Bearbeiten"
 
 #: .\_old_templates\cosinnus\userprofile_form.html.py:10
-#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:173
-#: .\views\group.py:411 .\views\user.py:118
+#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:187
+#: .\views\group.py:425 .\views\user.py:119
 msgid "Save"
 msgstr "Speichern"
 
@@ -185,7 +185,7 @@ msgstr "Zusammenstellung hinzufügen"
 
 #: .\_old_templates\cosinnus\hierarchy\add_container.html.py:27
 #: .\templates\cosinnus\hierarchy\add_container.html.py:27
-#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:379
+#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:393
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -442,7 +442,7 @@ msgstr "Nächste Woche"
 msgid "Next month"
 msgstr "Nächsten Monat"
 
-#: .\forms\hierarchy.py:14 .\models\group.py:295 .\models\organisation.py:292
+#: .\forms\hierarchy.py:14 .\models\group.py:298 .\models\organisation.py:292
 msgid "Name"
 msgstr "Name"
 
@@ -516,51 +516,51 @@ msgstr ""
 "Bitt einen gültigen Projektnamen angeben. Ein Vorwärtsslash ist nicht "
 "erlaubt."
 
-#: .\models\group.py:297 .\models\organisation.py:294
+#: .\models\group.py:300 .\models\organisation.py:294
 msgid "Slug"
 msgstr "Slug"
 
-#: .\models\group.py:298 .\models\organisation.py:295 .\models\profile.py:145
+#: .\models\group.py:301 .\models\organisation.py:295 .\models\profile.py:145
 msgid "Description"
 msgstr "Beschreibung"
 
-#: .\models\group.py:299 .\models\organisation.py:296 .\models\profile.py:143
+#: .\models\group.py:302 .\models\organisation.py:296 .\models\profile.py:143
 msgid "Avatar"
 msgstr "Avatar"
 
-#: .\models\group.py:301 .\models\profile.py:148
+#: .\models\group.py:304 .\models\profile.py:148
 #: .\templates\cosinnus\group\group_form.html.py:148
 #: .\templates\cosinnus\group\group_form.html.py:157
 #: .\templates\cosinnus\user\userprofile_form.html.py:97
 msgid "Website"
 msgstr "Webseite"
 
-#: .\models\group.py:302 .\models\organisation.py:298 .\models\tagged.py:38
+#: .\models\group.py:305 .\models\organisation.py:298 .\models\tagged.py:38
 #: .\templates\cosinnus\group\group_form.html.py:192
 msgid "Public"
 msgstr "Öffentlich"
 
-#: .\models\group.py:308
+#: .\models\group.py:311
 msgid "Organisation"
 msgstr "Organisation"
 
-#: .\models\group.py:316
+#: .\models\group.py:319
 msgid "Cosinnus group"
 msgstr "Cosinnus Projekt"
 
-#: .\models\group.py:317
+#: .\models\group.py:320
 msgid "Cosinnus groups"
 msgstr "Cosinnus Projekte"
 
-#: .\models\group.py:336 .\models\organisation.py:329
+#: .\models\group.py:339 .\models\organisation.py:329
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
 
-#: .\models\group.py:425
+#: .\models\group.py:428
 msgid "Group membership"
 msgstr "Projektmitarbeiter_in"
 
-#: .\models\group.py:426
+#: .\models\group.py:429
 msgid "Group memberships"
 msgstr "Projektmitarbeiter_in"
 
@@ -837,7 +837,7 @@ msgid "Done"
 msgstr "Fertig"
 
 #: .\templates\cosinnus\cms\microsite.html.py:115
-#: .\templates\cosinnus\cms\microsite.html.py:152 .\utils\dashboard.py:291
+#: .\templates\cosinnus\cms\microsite.html.py:152 .\utils\dashboard.py:307
 msgid "Informations"
 msgstr "Informationen"
 
@@ -1300,6 +1300,10 @@ msgstr "Font-awesome Widget-Icon"
 msgid "(This widget has no additional options)"
 msgstr "(Dieses Widget hat keine weiteren Konfigurationsoptionen)"
 
+#: .\templates\cosinnus\widgets\group_members_widget.html.py:12
+msgid "All members"
+msgstr "Alle anzeigen"
+
 #: .\templates\cosinnus\widgets\info_widget_form.html.py:21
 msgid "Attach Image(s)"
 msgstr "Bilder anhängen"
@@ -1320,7 +1324,7 @@ msgstr "Sie können dieses Widget nicht auf ihr Dashboard platzieren"
 msgid "Widget not found."
 msgstr "Widget nicht gefunden"
 
-#: .\templatetags\cosinnus_tags.py:208 .\templatetags\cosinnus_tags.py:234
+#: .\templatetags\cosinnus_tags.py:224 .\templatetags\cosinnus_tags.py:250
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>%(model_name)s konnte nicht gerendert werden!</i>"
@@ -1333,7 +1337,7 @@ msgstr "Projektbeschreibung"
 msgid "Network"
 msgstr "Netzwerk"
 
-#: .\utils\dashboard.py:240
+#: .\utils\dashboard.py:256
 msgid "About Us"
 msgstr "Über uns"
 
@@ -1351,41 +1355,41 @@ msgstr "Kein Modell zum Exportieren der Daten angegeben."
 msgid "Group \"%(group)s\" was created successfully."
 msgstr "Projekt \"%(group)s\" wurde erfolgreich erstellt."
 
-#: .\views\group.py:55 .\views\user.py:75
+#: .\views\group.py:55 .\views\user.py:76
 msgid "Create"
 msgstr "Erstellen"
 
-#: .\views\group.py:166
+#: .\views\group.py:180
 msgid "The changes to the group were saved successfully."
 msgstr "Die Änderungen am Projekt wurden erfolgreich geändert."
 
-#: .\views\group.py:253
+#: .\views\group.py:267
 #, python-format
 msgid "Do you want to join the group “%(group_name)s”?"
 msgstr "Möchten sie dem Projekt %(group_name)s beitreten?"
 
-#: .\views\group.py:254
+#: .\views\group.py:268
 #, python-format
 msgid "Join group “%(group_name)s”?"
 msgstr "Projekt %(group_name)s beitreten?"
 
-#: .\views\group.py:274
+#: .\views\group.py:288
 #, python-format
 msgid "Do you want to leave the group “%(group_name)s”?"
 msgstr "Möchten sie die Projekt “%(group_name)s” verlassen?"
 
-#: .\views\group.py:275
+#: .\views\group.py:289
 #, python-format
 msgid "Leaving group “%(group_name)s”?"
 msgstr "Projekt “%(group_name)s” verlassen?"
 
-#: .\views\group.py:298
+#: .\views\group.py:312
 msgid "You cannot leave this group. You are the only administrator left."
 msgstr ""
 "Sie können dieses Projekt nicht verlassen, da sie der einzig übrige "
 "Administrator sind."
 
-#: .\views\group.py:307
+#: .\views\group.py:321
 #, python-format
 msgid ""
 "Do you want to withdraw your join request to the group “%(group_name)s”?"
@@ -1393,27 +1397,27 @@ msgstr ""
 "Möchten sie ihre Beitrittsanfrage für das Projekt “%(group_name)s” "
 "zurückziehen?"
 
-#: .\views\group.py:308
+#: .\views\group.py:322
 #, python-format
 msgid "Withdraw join request to group “%(group_name)s”?"
 msgstr "Beitrittsanfrage für das Projekt “%(group_name)s” zurückziehen?"
 
-#: .\views\group.py:402
+#: .\views\group.py:416
 msgid "You cannot change your own admin status."
 msgstr "Sie können ihren eigenen Administratorstatus nicht ändern."
 
-#: .\views\group.py:404 .\views\group.py:437
+#: .\views\group.py:418 .\views\group.py:451
 #, python-format
 msgid "You cannot remove “%(username)s” form this group. Only one admin left."
 msgstr ""
 "Sie können “%(username)s” nicht von diesem Projekt entfernen. Er/sie ist der "
 "einzig übrige Administrator."
 
-#: .\views\group.py:435
+#: .\views\group.py:449
 msgid "You cannot remove yourself from a group."
 msgstr "Sie können sich nicht selbst von einem Projekt entfernen."
 
-#: .\views\group.py:446
+#: .\views\group.py:460
 #, python-format
 msgid ""
 "Do you want to remove the user “%(username)s”  from the group “%(group_name)"
@@ -1422,7 +1426,7 @@ msgstr ""
 "Möchten sie Benutzer_in “%(username)s” aus dem Projekt “%(group_name)s” "
 "entfernen?"
 
-#: .\views\group.py:450
+#: .\views\group.py:464
 #, python-format
 msgid "Remove user from group “%(group_name)s”?"
 msgstr "Benutzer_in aus dem Projekt “%(group_name)s” entfernen?"
@@ -1440,7 +1444,7 @@ msgstr ""
 msgid "Your profile was edited successfully."
 msgstr "Dein Profil wurde erfolgreich bearbeitet."
 
-#: .\views\user.py:60
+#: .\views\user.py:61
 #, python-format
 msgid ""
 "User \"%(user)s\" was registered successfully. You can now log in using this "

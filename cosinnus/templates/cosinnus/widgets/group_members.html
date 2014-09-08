@@ -10,6 +10,12 @@
                     <a href="{{ member|profile_url }}" title="{{member|full_name}}">{% include "cosinnus/user/user_avatar_image.html" with user=member %}</a>
                 {% endfor %}
                 
+                {% if has_more %}
+                    <a href="{% url 'cosinnus:group-detail' group=group.slug %}" style="position: relative;">
+	                    <img src="{% static 'images/jane-doe.png' %}" />
+	                    <h3 style="position: absolute; top:20px; left:0;" class="w100 text-center">+{{ more_count }}</h3>
+                    </a>
+                {% endif %}
             </div>
         </li>
     </ul>
