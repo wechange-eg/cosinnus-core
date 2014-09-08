@@ -134,14 +134,28 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
 
     def get_context_data(self, **kwargs):
         ctx = super(GroupListView, self).get_context_data(**kwargs)
-        # TODO: get_many for membership and pending and adjust template
-        _members = CosinnusGroupMembership.objects.get_members(groups=ctx['object_list'])
-        _pendings = CosinnusGroupMembership.objects.get_pendings(groups=ctx['object_list'])
-        _admins = CosinnusGroupMembership.objects.get_admins(groups=ctx['object_list'])
-        members = (_members.get(g.pk, []) for g in ctx['object_list'])
-        pendings = (_pendings.get(g.pk, []) for g in ctx['object_list'])
-        admins = (_admins.get(g.pk, []) for g in ctx['object_list'])
+        members, pendings, admins = [], [], []
         
+        # for each group, put the user pk in the appropriate status list if the user is in the group
+        # for this view, we do not care about other users, thus the reduced query
+        for group in ctx['object_list']:
+            _members, _pendings, _admins = [], [], []
+            if self.request.user.is_authenticated():
+                user_pk = self.request.user.pk
+                try:
+                    membership = CosinnusGroupMembership.objects.get(group=group, user__id=user_pk)
+                    if membership.status == MEMBERSHIP_ADMIN:
+                        _admins.append(user_pk)
+                    if membership.status == MEMBERSHIP_MEMBER or membership.status == MEMBERSHIP_ADMIN:
+                        _members.append(user_pk)
+                    if membership.status == MEMBERSHIP_PENDING:
+                        _pendings.append(user_pk)
+                except CosinnusGroupMembership.DoesNotExist:
+                    pass
+            members.append(_members)
+            pendings.append(_pendings)
+            admins.append(_admins)
+            
         ctx.update({
             'rows': zip(self.object_list, members, pendings, admins),
         })
