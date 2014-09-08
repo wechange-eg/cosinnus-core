@@ -34,6 +34,7 @@ class UserListView(ListView):
         # disabled for now
         #qs = qs.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
         qs = qs.order_by('first_name', 'last_name')
+        qs = qs.select_related('cosinnus_profile')
         return qs
     
     def get_context_data(self, **kwargs):
