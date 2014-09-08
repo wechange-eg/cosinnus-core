@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-03 13:40+0200\n"
+"POT-Creation-Date: 2014-09-08 13:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -156,7 +156,7 @@ msgstr ""
 
 #: .\_old_templates\cosinnus\userprofile_form.html.py:10
 #: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:173
-#: .\views\group.py:411 .\views\user.py:110
+#: .\views\group.py:411 .\views\user.py:118
 msgid "Save"
 msgstr ""
 
@@ -439,8 +439,32 @@ msgstr ""
 msgid "Other groups"
 msgstr ""
 
-#: .\forms\user.py:40 .\forms\user.py:54
+#: .\forms\user.py:37
+msgid "email address"
+msgstr ""
+
+#: .\forms\user.py:38
+msgid "first name"
+msgstr ""
+
+#: .\forms\user.py:50 .\forms\user.py:71
 msgid "This email address already has a registered user!"
+msgstr ""
+
+#: .\forms\user.py:77
+msgid ""
+"Please enter a correct email and password. Note that both fields may be case-"
+"sensitive."
+msgstr ""
+
+#: .\forms\user.py:79
+msgid ""
+"Your Web browser doesn't appear to have cookies enabled. Cookies are "
+"required for logging in."
+msgstr ""
+
+#: .\forms\user.py:81
+msgid "This account is inactive."
 msgstr ""
 
 #: .\models\cms.py:19 .\models\tagged.py:136
@@ -1009,6 +1033,7 @@ msgid "Overview"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_list.html.py:24
+#: .\templates\cosinnus\user\user_list.html.py:19
 msgid "show on map"
 msgstr ""
 
@@ -1052,6 +1077,8 @@ msgid "Join Group"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_list_map.html.py:14
+#: .\templates\cosinnus\user\user_list_map.html.py:4
+#: .\templates\cosinnus\user\user_list_map.html.py:14
 msgid "Map"
 msgstr ""
 
@@ -1081,8 +1108,7 @@ msgid "Register"
 msgstr ""
 
 #: .\templates\cosinnus\registration\login.html.py:30
-#: .\templates\cosinnus\registration\signup.html.py:31
-msgid "Username"
+msgid "Email"
 msgstr ""
 
 #: .\templates\cosinnus\registration\login.html.py:45
@@ -1097,29 +1123,29 @@ msgstr ""
 msgid "Konto erstellen"
 msgstr ""
 
-#: .\templates\cosinnus\registration\signup.html.py:45
+#: .\templates\cosinnus\registration\signup.html.py:31
 msgid "E-Mail Addresse"
 msgstr ""
 
-#: .\templates\cosinnus\registration\signup.html.py:61
+#: .\templates\cosinnus\registration\signup.html.py:47
 msgid "Passwort"
 msgstr ""
 
-#: .\templates\cosinnus\registration\signup.html.py:76
+#: .\templates\cosinnus\registration\signup.html.py:62
 msgid "Passwort wiederholen"
 msgstr ""
 
-#: .\templates\cosinnus\registration\signup.html.py:91
+#: .\templates\cosinnus\registration\signup.html.py:77
 #: .\templates\cosinnus\user\userprofile_form.html.py:48
 msgid "Vorname"
 msgstr ""
 
-#: .\templates\cosinnus\registration\signup.html.py:106
+#: .\templates\cosinnus\registration\signup.html.py:92
 #: .\templates\cosinnus\user\userprofile_form.html.py:64
 msgid "Nachname"
 msgstr ""
 
-#: .\templates\cosinnus\registration\signup.html.py:122
+#: .\templates\cosinnus\registration\signup.html.py:108
 msgid "Registrieren"
 msgstr ""
 
@@ -1129,10 +1155,12 @@ msgid "Über mich"
 msgstr ""
 
 #: .\templates\cosinnus\user\user_list.html.py:4
+#: .\templates\cosinnus\user\user_list_map.html.py:4
 msgid "Users"
 msgstr ""
 
 #: .\templates\cosinnus\user\user_list.html.py:13
+#: .\templates\cosinnus\user\user_list_map.html.py:13
 msgid "User overview"
 msgstr ""
 
@@ -1288,7 +1316,7 @@ msgstr ""
 msgid "Group \"%(group)s\" was created successfully."
 msgstr ""
 
-#: .\views\group.py:55 .\views\user.py:67
+#: .\views\group.py:55 .\views\user.py:75
 msgid "Create"
 msgstr ""
 
@@ -1369,7 +1397,7 @@ msgstr ""
 msgid "Your profile was edited successfully."
 msgstr ""
 
-#: .\views\user.py:52
+#: .\views\user.py:60
 #, python-format
 msgid ""
 "User \"%(user)s\" was registered successfully. You can now log in using this "

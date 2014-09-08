@@ -3,7 +3,8 @@ from __future__ import unicode_literals
 
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm as DjUserCreationForm
+from django.contrib.auth.forms import UserCreationForm as DjUserCreationForm,\
+    AuthenticationForm
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -69,3 +70,13 @@ class UserChangeForm(forms.ModelForm):
         if email and UserCreationForm.Meta.model.objects.filter(email=email).exclude(username=self.instance.username).count():
             raise forms.ValidationError(_('This email address already has a registered user!'))
         return email
+
+class UserEmailLoginForm(AuthenticationForm):
+    
+    error_messages = {
+        'invalid_login': _("Please enter a correct email and password. "
+                           "Note that both fields may be case-sensitive."),
+        'no_cookies': _("Your Web browser doesn't appear to have cookies "
+                        "enabled. Cookies are required for logging in."),
+        'inactive': _("This account is inactive."),
+    }

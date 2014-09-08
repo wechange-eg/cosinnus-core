@@ -6,11 +6,13 @@
 import django
 
 from django.conf.urls import patterns, url
+from cosinnus.forms.user import UserEmailLoginForm
 
 urlpatterns = patterns('',
     url(r'^login/$',
         'django.contrib.auth.views.login',
-        {'template_name': 'cosinnus/registration/login.html'},
+        {'template_name': 'cosinnus/registration/login.html',
+         'authentication_form': UserEmailLoginForm},
         name='login'),
     url(r'^logout/$',
         'django.contrib.auth.views.logout',
