@@ -135,7 +135,7 @@ class CosinnusGroupManager(models.Manager):
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
         return pks
 
-    def get_cached(self, slugs=None, pks=None):
+    def get_cached(self, slugs=None, pks=None, select_related_media_tag=True):
         """
         Gets all groups defined by either `slugs` or `pks`.
 
@@ -170,6 +170,9 @@ class CosinnusGroupManager(models.Manager):
                 missing = [key.split('/')[-1] for key in keys if key not in groups]
                 if missing:
                     query = self.get_queryset().filter(slug__in=missing)
+                    if select_related_media_tag:
+                        query = query.select_related('media_tag')
+                    
                     for group in query:
                         groups[_GROUP_CACHE_KEY % group.slug] = group
                     cache.set_many(groups, settings.COSINNUS_GROUP_CACHE_TIMEOUT)
