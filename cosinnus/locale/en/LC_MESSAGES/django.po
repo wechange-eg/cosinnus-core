@@ -105,7 +105,7 @@ msgstr ""
 
 #: .\_old_templates\cosinnus\group_list.html.py:65
 msgid "There are no groups."
-msgstr ""
+msgstr "There are no projects."
 
 #: .\_old_templates\cosinnus\topmenu.html.py:6
 #: .\templates\cosinnus\navbar.html.py:7
@@ -116,7 +116,7 @@ msgstr ""
 #: .\templates\cosinnus\navbar.html.py:36
 #: .\templates\cosinnus\navbar.html.py:43
 msgid "List all groups"
-msgstr ""
+msgstr "List all projects"
 
 #: .\_old_templates\cosinnus\topmenu.html.py:27
 #: .\templates\cosinnus\navbar.html.py:40
@@ -330,13 +330,13 @@ msgstr ""
 #: .\core\decorators\views.py:55 .\core\decorators\views.py:102
 #: .\core\decorators\views.py:149 .\core\decorators\views.py:207
 msgid "No group provided"
-msgstr ""
+msgstr "No project provided"
 
 #: .\core\decorators\views.py:60 .\core\decorators\views.py:107
 #: .\core\decorators\views.py:154 .\core\decorators\views.py:212
 #: .\views\cms.py:40 .\views\cms.py:96
 msgid "No group found with this name"
-msgstr ""
+msgstr "No project found with this name"
 
 #: .\core\decorators\views.py:68 .\core\decorators\views.py:115
 #: .\core\decorators\views.py:162 .\core\decorators\views.py:220
@@ -429,15 +429,15 @@ msgstr ""
 
 #: .\forms\search.py:50
 msgid "Limit to groups"
-msgstr ""
+msgstr "Limit to projects"
 
 #: .\forms\search.py:51
 msgid "My groups"
-msgstr ""
+msgstr "My projects"
 
 #: .\forms\search.py:51
 msgid "Other groups"
-msgstr ""
+msgstr "Other projects"
 
 #: .\forms\user.py:37
 msgid "email address"
@@ -489,7 +489,7 @@ msgstr ""
 
 #: .\models\group.py:59
 msgid "Enter a valid group name. Forward slash is not allowed."
-msgstr ""
+msgstr "Enter a valid project name. Forward slash is not allowed."
 
 #: .\models\group.py:297 .\models\organisation.py:294
 msgid "Slug"
@@ -521,11 +521,11 @@ msgstr ""
 
 #: .\models\group.py:316
 msgid "Cosinnus group"
-msgstr ""
+msgstr "Cosinnus project"
 
 #: .\models\group.py:317
 msgid "Cosinnus groups"
-msgstr ""
+msgstr "Cosinnus projects"
 
 #: .\models\group.py:336 .\models\organisation.py:329
 msgid "Slug must not be empty."
@@ -635,7 +635,7 @@ msgstr ""
 
 #: .\models\widget.py:50
 msgid "Either group or user must be defined."
-msgstr ""
+msgstr "Either project or user must be defined."
 
 #: .\models\widget.py:95
 msgid "key"
@@ -827,16 +827,16 @@ msgstr ""
 #: .\templates\cosinnus\group\group_delete.html.py:5
 #, python-format
 msgid "Delete group “%(group_name)s”"
-msgstr ""
+msgstr "Delete project “%(group_name)s”"
 
 #: .\templates\cosinnus\group\group_delete.html.py:13
 msgid "Are you sure you want to delete this group?"
-msgstr ""
+msgstr "Are you sure you want to delete this prject?"
 
 #: .\templates\cosinnus\group\group_detail.html.py:5
 #, python-format
 msgid "%(group_name)s - Group Members"
-msgstr ""
+msgstr "%(group_name)s - Project Members"
 
 #: .\templates\cosinnus\group\group_detail.html.py:14
 msgid "Group Members"
@@ -848,7 +848,7 @@ msgstr ""
 
 #: .\templates\cosinnus\group\group_detail.html.py:35
 msgid "Add a user to this group"
-msgstr ""
+msgstr "Add a user to this project"
 
 #: .\templates\cosinnus\group\group_detail.html.py:52
 #: .\templates\cosinnus\group\group_user_list.html.py:7
@@ -947,7 +947,7 @@ msgstr ""
 #: .\templates\cosinnus\group\group_export.html.py:9
 #, python-format
 msgid "Export Group “%(group_name)s”"
-msgstr ""
+msgstr "Export Project “%(group_name)s”"
 
 #: .\templates\cosinnus\group\group_export.html.py:16
 #, python-format
@@ -962,7 +962,7 @@ msgstr ""
 #: .\templates\cosinnus\group\group_form.html.py:6
 #, python-format
 msgid "Edit group “%(group_name)s”"
-msgstr ""
+msgstr "Edit project “%(group_name)s”"
 
 #: .\templates\cosinnus\group\group_form.html.py:27
 #: .\templates\cosinnus\group\leftnav_group.html.py:14
@@ -1039,7 +1039,7 @@ msgstr ""
 
 #: .\templates\cosinnus\group\group_list.html.py:84
 msgid "Public group"
-msgstr ""
+msgstr "Public project"
 
 #: .\templates\cosinnus\group\group_list.html.py:86
 msgid "Not a member"
@@ -1052,7 +1052,7 @@ msgstr ""
 #: .\templates\cosinnus\group\group_list.html.py:161
 #, python-format
 msgid "Do you really want to leave group „%(title)s“?"
-msgstr ""
+msgstr "Do you really want to leave project „%(title)s“?"
 
 #: .\templates\cosinnus\group\group_list.html.py:162
 msgid "Leave Group"
@@ -1061,7 +1061,7 @@ msgstr ""
 #: .\templates\cosinnus\group\group_list.html.py:165
 #, python-format
 msgid "Do you really want to withdraw your join request to group „%(title)s“?"
-msgstr ""
+msgstr "Do you really want to withdraw your join request to project „%(title)s“?"
 
 #: .\templates\cosinnus\group\group_list.html.py:166
 msgid "Withdraw Join Request"
@@ -1070,7 +1070,7 @@ msgstr ""
 #: .\templates\cosinnus\group\group_list.html.py:169
 #, python-format
 msgid "Do you wish to request to join group „%(title)s“?"
-msgstr ""
+msgstr "Do you wish to request to join project „%(title)s“?"
 
 #: .\templates\cosinnus\group\group_list.html.py:170
 msgid "Join Group"
@@ -1085,7 +1085,7 @@ msgstr ""
 #: .\templates\cosinnus\group\group_user_list.html.py:4
 #, python-format
 msgid "Users in group %(group)s"
-msgstr ""
+msgstr "Users in project %(group)s"
 
 #: .\templates\cosinnus\group\group_user_list.html.py:23
 msgid "There are no visible users."
@@ -1093,7 +1093,7 @@ msgstr ""
 
 #: .\templates\cosinnus\group\leftnav_all_groups.html.py:15
 msgid "All groups"
-msgstr ""
+msgstr "All projects"
 
 #: .\templates\cosinnus\group\leftnav_all_groups.html.py:20
 msgid "All users"
@@ -1275,7 +1275,7 @@ msgstr ""
 
 #: .\templates\cosinnus\widgets\not_allowed_group.html.py:2
 msgid "You cannot put this widget on a group dashboard."
-msgstr ""
+msgstr "You cannot put this widget on a project dashboard."
 
 #: .\templates\cosinnus\widgets\not_allowed_user.html.py:2
 msgid "You cannot put this widget on a user dashboard."
@@ -1314,7 +1314,7 @@ msgstr ""
 #: .\views\group.py:39
 #, python-format
 msgid "Group \"%(group)s\" was created successfully."
-msgstr ""
+msgstr "Project \"%(group)s\" was created successfully."
 
 #: .\views\group.py:55 .\views\user.py:75
 msgid "Create"
@@ -1322,31 +1322,31 @@ msgstr ""
 
 #: .\views\group.py:166
 msgid "The changes to the group were saved successfully."
-msgstr ""
+msgstr "The changes to the project were saved successfully."
 
 #: .\views\group.py:253
 #, python-format
 msgid "Do you want to join the group “%(group_name)s”?"
-msgstr ""
+msgstr "Do you want to join the project “%(group_name)s”?"
 
 #: .\views\group.py:254
 #, python-format
 msgid "Join group “%(group_name)s”?"
-msgstr ""
+msgstr "Join project “%(group_name)s”?"
 
 #: .\views\group.py:274
 #, python-format
 msgid "Do you want to leave the group “%(group_name)s”?"
-msgstr ""
+msgstr "Do you want to leave the project “%(group_name)s”?"
 
 #: .\views\group.py:275
 #, python-format
 msgid "Leaving group “%(group_name)s”?"
-msgstr ""
+msgstr "Leaving project “%(group_name)s”?"
 
 #: .\views\group.py:298
 msgid "You cannot leave this group. You are the only administrator left."
-msgstr ""
+msgstr "You cannot leave this project. You are the only administrator left."
 
 #: .\views\group.py:307
 #, python-format
@@ -1357,7 +1357,7 @@ msgstr ""
 #: .\views\group.py:308
 #, python-format
 msgid "Withdraw join request to group “%(group_name)s”?"
-msgstr ""
+msgstr "Withdraw join request to project “%(group_name)s”?"
 
 #: .\views\group.py:402
 msgid "You cannot change your own admin status."
@@ -1366,11 +1366,11 @@ msgstr ""
 #: .\views\group.py:404 .\views\group.py:437
 #, python-format
 msgid "You cannot remove “%(username)s” form this group. Only one admin left."
-msgstr ""
+msgstr "You cannot remove “%(username)s” form this project. Only one admin left."
 
 #: .\views\group.py:435
 msgid "You cannot remove yourself from a group."
-msgstr ""
+msgstr "You cannot remove yourself from a project."
 
 #: .\views\group.py:446
 #, python-format
@@ -1382,7 +1382,7 @@ msgstr ""
 #: .\views\group.py:450
 #, python-format
 msgid "Remove user from group “%(group_name)s”?"
-msgstr ""
+msgstr "Remove user from project “%(group_name)s”?"
 
 #: .\views\hierarchy.py:25
 msgid "No appname given for adding containers."
