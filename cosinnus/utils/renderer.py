@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.template.loader import render_to_string
-from cosinnus.utils.permissions import get_tagged_object_filter_for_user
+from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from django.shortcuts import render
 
 
@@ -66,8 +66,8 @@ class BaseRenderer(object):
     
     @classmethod
     def get_object_list_for_user(cls, user, qs_filter, limit=30):
-        user_filter = get_tagged_object_filter_for_user(user)
-        qs = cls.get_model()._default_manager.filter(user_filter, **qs_filter)
+        qs = cls.get_model()._default_manager.filter(**qs_filter)
+        qs = filter_tagged_object_queryset_for_user(qs, user)
         if limit > 0:
             qs = qs[:limit]
         return qs

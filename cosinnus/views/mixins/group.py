@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from cosinnus.core.decorators.views import (require_read_access,
     require_write_access, require_admin_access)
-from cosinnus.utils.permissions import get_tagged_object_filter_for_user
+from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from cosinnus.models.tagged import BaseTaggableObjectModel
 
 
@@ -50,8 +50,7 @@ class RequireReadMixin(object):
         # alternatively, we could check if qs.model is CosinnusGroup or BaseTaggableObjectModel subclass, 
         # or BaseUserProfileModel subclass, but this is more elegant:
         if hasattr(qs.model, 'media_tag'):
-            q = get_tagged_object_filter_for_user(self.request.user)
-            qs = qs.filter(q)
+            qs = filter_tagged_object_queryset_for_user(qs, self.request.user)
             
         return qs
 

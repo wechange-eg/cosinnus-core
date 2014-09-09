@@ -12,7 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.utils.compat import atomic
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
-from cosinnus.utils.permissions import get_tagged_object_filter_for_user
+from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from django.contrib.auth import get_user_model
 from cosinnus.forms.dashboard import InfoWidgetForm, DashboardWidgetForm,\
     EmptyWidgetForm
@@ -63,8 +63,7 @@ class DashboardWidget(object):
         if not self.model:
             raise ImproperlyConfigured('%s must define a model', self.__class__.__name__)
         qs = self.model._default_manager.filter(**self.get_queryset_filter())
-        q = get_tagged_object_filter_for_user(self.request.user)
-        qs = qs.filter(q)
+        qs = filter_tagged_object_queryset_for_user(qs, self.request.user)
         return qs
 
     def get_queryset_filter(self, **kwargs):

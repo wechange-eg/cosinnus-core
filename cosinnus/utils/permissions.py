@@ -116,10 +116,15 @@ def check_group_create_objects_access(group, user):
     return is_member or is_admin or user.is_superuser or user.is_staff
 
 
-def get_tagged_object_filter_for_user(user):
+def filter_tagged_object_queryset_for_user(qs, user):
     """ A queryset filter to filter for TaggableObjects that respects the visibility tag of the object,
         checking group membership of the user and creator information of the object.
-        This is used to filter all list views and queryset gets for BaseTaggableObjects. """
+        This is used to filter all list views and queryset gets for BaseTaggableObjects.
+        
+        Since we are filtering on a many-to-many field (persons), we need to make the QS distinct.
+        
+        @return: the filtered queryset
+         """
     q = Q(media_tag__isnull=True) # get all objects that don't have a media_tag (folders for example)
     q |= Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)  # All public tagged objects
     if user.is_authenticated():
@@ -130,10 +135,10 @@ def get_tagged_object_filter_for_user(user):
         )
         q |= Q(  # all tagged objects the user is explicitly a linked to
             media_tag__visibility=BaseTagObject.VISIBILITY_USER,
-            media_tag__persons__id=user.id
+            media_tag__persons__id__exact=user.id
         )
         q |= Q( # all tagged objects of the user himself
             media_tag__visibility=BaseTagObject.VISIBILITY_USER,
             creator__id=user.id
         )
-    return q
+    return qs.filter(q).distinct()

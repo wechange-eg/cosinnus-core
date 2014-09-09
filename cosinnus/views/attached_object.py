@@ -14,7 +14,7 @@ from cosinnus.conf import settings
 from cosinnus.models.tagged import BaseHierarchicalTaggableObjectModel
 from django.template.loader import render_to_string
 from django.utils.html import escape
-from cosinnus.utils.permissions import get_tagged_object_filter_for_user
+from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 
 
 def build_attachment_field_result(obj_type, obj):
@@ -107,8 +107,7 @@ class AttachableObjectSelect2View(RequireReadMixin, Select2View):
             else:
                 queryset = attach_model_class._default_manager.filter(group__slug=self.kwargs.get('group', None))
             
-            q = get_tagged_object_filter_for_user(self.request.user)
-            queryset = queryset.filter(q)
+            queryset = filter_tagged_object_queryset_for_user(queryset, self.request.user)
             
             """ For each token in the search query, filter the full object queryset further down,
                 comparing the titles of these objects, unless: the query is in the special aliases list
