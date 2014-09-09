@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-08 18:55+0200\n"
+"POT-Creation-Date: 2014-09-09 15:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,6 +138,7 @@ msgstr ""
 #: .\templates\cosinnus\registration\leftnav.html.py:15
 #: .\templates\cosinnus\registration\login.html.py:4
 #: .\templates\cosinnus\registration\login.html.py:61
+#: .\templates\cosinnus\registration\password_reset_complete.html.py:30
 #: .\templates\cosinnus\registration\signup.html.py:7
 msgid "Login"
 msgstr ""
@@ -199,17 +200,16 @@ msgstr ""
 #: .\_old_templates\cosinnus\registration\password_reset_complete.html.py:4
 #: .\_old_templates\cosinnus\registration\password_reset_complete.html.py:8
 #: .\templates\cosinnus\registration\password_reset_complete.html.py:4
-#: .\templates\cosinnus\registration\password_reset_complete.html.py:8
+#: .\templates\cosinnus\registration\password_reset_complete.html.py:19
 msgid "Password reset complete"
 msgstr ""
 
 #: .\_old_templates\cosinnus\registration\password_reset_complete.html.py:10
-#: .\templates\cosinnus\registration\password_reset_complete.html.py:10
+#: .\templates\cosinnus\registration\password_reset_complete.html.py:20
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr ""
 
 #: .\_old_templates\cosinnus\registration\password_reset_complete.html.py:12
-#: .\templates\cosinnus\registration\password_reset_complete.html.py:12
 msgid "Log in"
 msgstr ""
 
@@ -217,22 +217,23 @@ msgstr ""
 #: .\_old_templates\cosinnus\registration\password_reset_form.html.py:4
 #: .\_old_templates\cosinnus\registration\password_reset_form.html.py:7
 #: .\templates\cosinnus\registration\password_change_done.html.py:4
-#: .\templates\cosinnus\registration\password_change_form.html.py:4
 #: .\templates\cosinnus\registration\password_reset_confirm.html.py:4
+#: .\templates\cosinnus\registration\password_reset_confirm.html.py:12
 #: .\templates\cosinnus\registration\password_reset_form.html.py:4
-#: .\templates\cosinnus\registration\password_reset_form.html.py:7
+#: .\templates\cosinnus\registration\password_reset_form.html.py:12
+#: .\templates\cosinnus\registration\password_reset_form.html.py:23
 msgid "Password reset"
 msgstr ""
 
 #: .\_old_templates\cosinnus\registration\password_reset_confirm.html.py:10
 #: .\templates\cosinnus\registration\password_change_form.html.py:24
-#: .\templates\cosinnus\registration\password_reset_confirm.html.py:10
+#: .\templates\cosinnus\registration\password_reset_confirm.html.py:25
 msgid "Enter new password"
 msgstr ""
 
 #: .\_old_templates\cosinnus\registration\password_reset_confirm.html.py:12
 #: .\templates\cosinnus\registration\password_change_form.html.py:42
-#: .\templates\cosinnus\registration\password_reset_confirm.html.py:12
+#: .\templates\cosinnus\registration\password_reset_confirm.html.py:28
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
@@ -240,17 +241,16 @@ msgstr ""
 
 #: .\_old_templates\cosinnus\registration\password_reset_confirm.html.py:17
 #: .\templates\cosinnus\registration\password_change_form.html.py:85
-#: .\templates\cosinnus\registration\password_reset_confirm.html.py:17
 msgid "Change my password"
 msgstr ""
 
 #: .\_old_templates\cosinnus\registration\password_reset_confirm.html.py:23
-#: .\templates\cosinnus\registration\password_reset_confirm.html.py:23
+#: .\templates\cosinnus\registration\password_reset_confirm.html.py:83
 msgid "Password reset unsuccessful"
 msgstr ""
 
 #: .\_old_templates\cosinnus\registration\password_reset_confirm.html.py:25
-#: .\templates\cosinnus\registration\password_reset_confirm.html.py:25
+#: .\templates\cosinnus\registration\password_reset_confirm.html.py:84
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a new password reset."
@@ -259,19 +259,19 @@ msgstr ""
 #: .\_old_templates\cosinnus\registration\password_reset_done.html.py:4
 #: .\_old_templates\cosinnus\registration\password_reset_done.html.py:8
 #: .\templates\cosinnus\registration\password_reset_done.html.py:4
-#: .\templates\cosinnus\registration\password_reset_done.html.py:8
+#: .\templates\cosinnus\registration\password_reset_done.html.py:19
 msgid "Password reset successful"
 msgstr ""
 
 #: .\_old_templates\cosinnus\registration\password_reset_done.html.py:10
-#: .\templates\cosinnus\registration\password_reset_done.html.py:10
+#: .\templates\cosinnus\registration\password_reset_done.html.py:24
 msgid ""
 "We've emailed you instructions for setting your password. You should be "
 "receiving them shortly."
 msgstr ""
 
 #: .\_old_templates\cosinnus\registration\password_reset_done.html.py:12
-#: .\templates\cosinnus\registration\password_reset_done.html.py:12
+#: .\templates\cosinnus\registration\password_reset_done.html.py:26
 msgid ""
 "If you don't receive an email, please make sure you've entered the address "
 "you registered with, and check your spam folder."
@@ -307,14 +307,13 @@ msgid "The %(site_name)s team"
 msgstr ""
 
 #: .\_old_templates\cosinnus\registration\password_reset_form.html.py:9
-#: .\templates\cosinnus\registration\password_reset_form.html.py:9
+#: .\templates\cosinnus\registration\password_reset_form.html.py:26
 msgid ""
 "Forgotten your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
 msgstr ""
 
 #: .\_old_templates\cosinnus\registration\password_reset_form.html.py:15
-#: .\templates\cosinnus\registration\password_reset_form.html.py:15
 msgid "Reset my password"
 msgstr ""
 
@@ -743,7 +742,7 @@ msgid "My Dashboard"
 msgstr ""
 
 #: .\templates\cosinnus\navbar.html.py:81
-#: .\templates\cosinnus\registration\password_change_done.html.py:32
+#: .\templates\cosinnus\registration\password_change_done.html.py:31
 msgid "My Profile"
 msgstr ""
 
@@ -1111,14 +1110,21 @@ msgid "Members"
 msgstr ""
 
 #: .\templates\cosinnus\registration\leftnav.html.py:19
+#: .\templates\cosinnus\registration\signup.html.py:108
 msgid "Register"
 msgstr ""
 
+#: .\templates\cosinnus\registration\leftnav.html.py:23
+msgid "Forgot password?"
+msgstr ""
+
 #: .\templates\cosinnus\registration\login.html.py:30
+#: .\templates\cosinnus\registration\password_reset_form.html.py:36
 msgid "Email"
 msgstr ""
 
 #: .\templates\cosinnus\registration\login.html.py:45
+#: .\templates\cosinnus\registration\signup.html.py:47
 msgid "Password"
 msgstr ""
 
@@ -1135,8 +1141,12 @@ msgstr ""
 msgid "Change password"
 msgstr ""
 
-#: .\templates\cosinnus\registration\password_change_done.html.py:21
+#: .\templates\cosinnus\registration\password_change_done.html.py:20
 msgid "Your password has been changed successfully!"
+msgstr ""
+
+#: .\templates\cosinnus\registration\password_change_form.html.py:4
+msgid "Password change"
 msgstr ""
 
 #: .\templates\cosinnus\registration\password_change_form.html.py:35
@@ -1151,38 +1161,46 @@ msgstr ""
 msgid "Repeat new Password"
 msgstr ""
 
+#: .\templates\cosinnus\registration\password_reset_complete.html.py:12
+#: .\templates\cosinnus\registration\password_reset_done.html.py:12
+msgid "Reset password"
+msgstr ""
+
+#: .\templates\cosinnus\registration\password_reset_confirm.html.py:38
+msgid "New password"
+msgstr ""
+
+#: .\templates\cosinnus\registration\password_reset_confirm.html.py:53
+msgid "New password confirmation"
+msgstr ""
+
+#: .\templates\cosinnus\registration\password_reset_confirm.html.py:69
+#: .\templates\cosinnus\registration\password_reset_form.html.py:52
+msgid "Reset"
+msgstr ""
+
 #: .\templates\cosinnus\registration\signup.html.py:4
 msgid "Sign up"
 msgstr ""
 
 #: .\templates\cosinnus\registration\signup.html.py:8
-msgid "Konto erstellen"
+msgid "Create account"
 msgstr ""
 
 #: .\templates\cosinnus\registration\signup.html.py:31
-msgid "E-Mail Addresse"
-msgstr ""
-
-#: .\templates\cosinnus\registration\signup.html.py:47
-msgid "Passwort"
+msgid "Email address"
 msgstr ""
 
 #: .\templates\cosinnus\registration\signup.html.py:62
-msgid "Passwort wiederholen"
+msgid "Repeat passwort"
 msgstr ""
 
 #: .\templates\cosinnus\registration\signup.html.py:77
-#: .\templates\cosinnus\user\userprofile_form.html.py:48
-msgid "Vorname"
+msgid "First name"
 msgstr ""
 
 #: .\templates\cosinnus\registration\signup.html.py:92
-#: .\templates\cosinnus\user\userprofile_form.html.py:64
-msgid "Nachname"
-msgstr ""
-
-#: .\templates\cosinnus\registration\signup.html.py:108
-msgid "Registrieren"
+msgid "Last name"
 msgstr ""
 
 #: .\templates\cosinnus\user\leftnav.html.py:24
@@ -1227,6 +1245,14 @@ msgstr ""
 
 #: .\templates\cosinnus\user\userprofile_form.html.py:32
 msgid "Basisdaten"
+msgstr ""
+
+#: .\templates\cosinnus\user\userprofile_form.html.py:48
+msgid "Vorname"
+msgstr ""
+
+#: .\templates\cosinnus\user\userprofile_form.html.py:64
+msgid "Nachname"
 msgstr ""
 
 #: .\templates\cosinnus\user\userprofile_form.html.py:82

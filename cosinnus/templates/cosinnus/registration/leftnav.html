@@ -6,8 +6,8 @@
     {% captureas is_login %}True{% endcaptureas %}
 {% elif current_page == "signup" %}
     {% captureas is_signup %}True{% endcaptureas %}
-{% elif current_page == "forgotpassword" %}
-    {% captureas is_forgotpassword %}True{% endcaptureas %}
+{% elif current_page == "reset_password" %}
+    {% captureas is_reset_password %}True{% endcaptureas %}
 {% endif %}
 
 {% captureas href %}{% url "login" %}{% endcaptureas %}
@@ -16,10 +16,8 @@
 
 {% captureas href %}{% url "cosinnus:user-add" %}{% endcaptureas %}
 {% captureas label %}{% trans "Register" %}{% endcaptureas %}
-{% include "cosinnus/leftnav_button.html" with active=is_signup extra_classes="regular-space" icon="fa-user" label=label href=href  %}
+{% include "cosinnus/leftnav_button.html" with active=is_signup extra_classes="large-space" icon="fa-user" label=label href=href  %}
 
-{% comment %}  Password reset link hidden until it is re-templated.
-{% captureas href %}{% url "password_change" %}{% endcaptureas %}
-{% captureas label %}{% trans "Passwort vergessen" %}{% endcaptureas %}
-{% include "cosinnus/leftnav_button.html" with active=is_forgotpassword icon="fa-question-circle" label=label href=href  %}
-{% endcomment %}
+{% captureas href %}{% url "password_reset" %}{% endcaptureas %}
+{% captureas label %}{% trans "Forgot password?" %}{% endcaptureas %}
+{% include "cosinnus/leftnav_button.html" with active=is_reset_password icon="fa-question-circle" label=label href=href  %}
