@@ -42,7 +42,7 @@ def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
         return
 
     max_length = item._meta.get_field_by_name(slug_field)[0].max_length
-    slug_len = max_length - 5  # 1 for '-'and 4 for the counter
+    slug_len = max_length - 10  # 1 for '-'and 4 (+5 for etherpad-id compatibility) for the counter
     slug = slugify(getattr(item, slug_source)[:slug_len])
     model = item.__class__
     # the following gets all existing slug values
