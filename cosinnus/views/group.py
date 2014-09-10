@@ -266,12 +266,23 @@ class GroupUserJoinView(GroupConfirmMixin, DetailView):
     confirm_label = _('Join')
     confirm_question = _('Do you want to join the group “%(group_name)s”?')
     confirm_title = _('Join group “%(group_name)s”?')
+    message_success = _('You have requested to join the group “%(group_name)s”. You will receive an email as soon as a group administrator responds to your request.')
+    
     template_name = 'cosinnus/group/group_confirm.html'
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(GroupUserJoinView, self).dispatch(request, *args, **kwargs)
-
+    
+    def post(self, request, *args, **kwargs):
+        self.referer = request.META.get('HTTP_REFERER', reverse('cosinnus:group-list'))
+        return super(GroupUserJoinView, self).post(request, *args, **kwargs)
+    
+    def get_success_url(self):
+        # self.referer is set in post() method
+        messages.success(self.request, self.message_success % {'group_name': self.object.name})
+        return self.referer
+    
     def confirm_action(self):
         CosinnusGroupMembership.objects.create(
             user=self.request.user,
@@ -288,13 +299,24 @@ class GroupUserLeaveView(GroupConfirmMixin, DetailView):
     confirm_question = _('Do you want to leave the group “%(group_name)s”?')
     confirm_title = _('Leaving group “%(group_name)s”?')
     submit_css_classes = 'btn-danger'
+    message_success = _('You are no longer a member of the group “%(group_name)s”.')
+    
     template_name = 'cosinnus/group/group_confirm.html'
 
     @method_decorator(login_required)
     @atomic
     def dispatch(self, request, *args, **kwargs):
         return super(GroupUserLeaveView, self).dispatch(request, *args, **kwargs)
-
+    
+    def post(self, request, *args, **kwargs):
+        self.referer = request.META.get('HTTP_REFERER', reverse('cosinnus:group-list'))
+        return super(GroupUserLeaveView, self).post(request, *args, **kwargs)
+    
+    def get_success_url(self):
+        # self.referer is set in post() method
+        messages.success(self.request, self.message_success % {'group_name': self.object.name})
+        return self.referer
+    
     def confirm_action(self):
         admins = CosinnusGroupMembership.objects.get_admins(group=self.object)
         if len(admins) > 1 or self.request.user.pk not in admins:
@@ -321,13 +343,24 @@ class GroupUserWithdrawView(GroupConfirmMixin, DetailView):
     confirm_question = _('Do you want to withdraw your join request to the group “%(group_name)s”?')
     confirm_title = _('Withdraw join request to group “%(group_name)s”?')
     submit_css_classes = 'btn-danger'
+    message_success = _('Your join request was withdrawn from group “%(group_name)s” successfully.')
+    
     template_name = 'cosinnus/group/group_confirm.html'
 
     @method_decorator(login_required)
     @atomic
     def dispatch(self, request, *args, **kwargs):
         return super(GroupUserWithdrawView, self).dispatch(request, *args, **kwargs)
-
+    
+    def post(self, request, *args, **kwargs):
+        self.referer = request.META.get('HTTP_REFERER', reverse('cosinnus:group-list'))
+        return super(GroupUserWithdrawView, self).post(request, *args, **kwargs)
+    
+    def get_success_url(self):
+        # self.referer is set in post() method
+        messages.success(self.request, self.message_success % {'group_name': self.object.name})
+        return self.referer
+    
     def confirm_action(self):
         try:
             membership = CosinnusGroupMembership.objects.get(

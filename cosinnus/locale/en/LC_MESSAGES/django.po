@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-09 15:05+0200\n"
+"POT-Creation-Date: 2014-09-10 16:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,7 +55,7 @@ msgstr ""
 #: .\templates\cosinnus\user_dashboard.html.py:26
 #: .\templates\cosinnus\user_dashboard.html.py:55
 #: .\templates\cosinnus\widgets\base_widget.html.py:39 .\views\group.py:83
-#: .\views\group.py:459
+#: .\views\group.py:492
 msgid "Delete"
 msgstr ""
 
@@ -89,12 +89,12 @@ msgid "Joined"
 msgstr ""
 
 #: .\_old_templates\cosinnus\group_list.html.py:42
-#: .\templates\cosinnus\group\group_list.html.py:116 .\views\group.py:287
+#: .\templates\cosinnus\group\group_list.html.py:116 .\views\group.py:298
 msgid "Leave"
 msgstr ""
 
 #: .\_old_templates\cosinnus\group_list.html.py:46
-#: .\templates\cosinnus\group\group_list.html.py:118 .\views\group.py:320
+#: .\templates\cosinnus\group\group_list.html.py:118 .\views\group.py:342
 msgid "Withdraw"
 msgstr ""
 
@@ -157,7 +157,7 @@ msgstr ""
 
 #: .\_old_templates\cosinnus\userprofile_form.html.py:10
 #: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:187
-#: .\views\group.py:425 .\views\user.py:119
+#: .\views\group.py:458 .\views\user.py:119
 msgid "Save"
 msgstr ""
 
@@ -182,7 +182,7 @@ msgstr ""
 
 #: .\_old_templates\cosinnus\hierarchy\add_container.html.py:27
 #: .\templates\cosinnus\hierarchy\add_container.html.py:27
-#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:393
+#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:426
 msgid "Add"
 msgstr ""
 
@@ -815,7 +815,7 @@ msgid "Done"
 msgstr ""
 
 #: .\templates\cosinnus\cms\microsite.html.py:115
-#: .\templates\cosinnus\cms\microsite.html.py:152 .\utils\dashboard.py:308
+#: .\templates\cosinnus\cms\microsite.html.py:152 .\utils\dashboard.py:307
 msgid "Informations"
 msgstr ""
 
@@ -1055,30 +1055,38 @@ msgid "Group details"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_list.html.py:161
+#: .\templates\cosinnus\group\leftnav_group.html.py:27
 #, python-format
 msgid "Do you really want to leave group „%(title)s“?"
 msgstr "Do you really want to leave project „%(title)s“?"
 
 #: .\templates\cosinnus\group\group_list.html.py:162
+#: .\templates\cosinnus\group\leftnav_group.html.py:23
+#: .\templates\cosinnus\group\leftnav_group.html.py:28
 msgid "Leave Group"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_list.html.py:165
+#: .\templates\cosinnus\group\leftnav_group.html.py:37
 #, python-format
 msgid "Do you really want to withdraw your join request to group „%(title)s“?"
 msgstr ""
 "Do you really want to withdraw your join request to project „%(title)s“?"
 
 #: .\templates\cosinnus\group\group_list.html.py:166
+#: .\templates\cosinnus\group\leftnav_group.html.py:38
 msgid "Withdraw Join Request"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_list.html.py:169
+#: .\templates\cosinnus\group\leftnav_group.html.py:47
 #, python-format
 msgid "Do you wish to request to join group „%(title)s“?"
 msgstr "Do you wish to request to join project „%(title)s“?"
 
 #: .\templates\cosinnus\group\group_list.html.py:170
+#: .\templates\cosinnus\group\leftnav_group.html.py:43
+#: .\templates\cosinnus\group\leftnav_group.html.py:48
 msgid "Join Group"
 msgstr ""
 
@@ -1107,6 +1115,10 @@ msgstr ""
 
 #: .\templates\cosinnus\group\leftnav_group.html.py:19
 msgid "Members"
+msgstr ""
+
+#: .\templates\cosinnus\group\leftnav_group.html.py:33
+msgid "Withdraw Request"
 msgstr ""
 
 #: .\templates\cosinnus\registration\leftnav.html.py:19
@@ -1299,7 +1311,7 @@ msgstr ""
 msgid "Edit Widget"
 msgstr ""
 
-#: .\templates\cosinnus\widgets\base_widget.html.py:63
+#: .\templates\cosinnus\widgets\base_widget.html.py:65
 #: .\templates\cosinnus\widgets\fadedown_base_widget.html.py:52
 #: .\templates\cosinnus\widgets\info_widget.html.py:12
 msgid "Mehr"
@@ -1351,15 +1363,15 @@ msgstr ""
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr ""
 
-#: .\utils\dashboard.py:174
+#: .\utils\dashboard.py:173
 msgid "Group Description"
 msgstr ""
 
-#: .\utils\dashboard.py:200
+#: .\utils\dashboard.py:199
 msgid "Network"
 msgstr ""
 
-#: .\utils\dashboard.py:257
+#: .\utils\dashboard.py:256
 msgid "About Us"
 msgstr ""
 
@@ -1395,53 +1407,73 @@ msgstr "Do you want to join the project “%(group_name)s”?"
 msgid "Join group “%(group_name)s”?"
 msgstr "Join project “%(group_name)s”?"
 
-#: .\views\group.py:288
+#: .\views\group.py:269
+#, python-format
+msgid ""
+"You have requested to join the group “%(group_name)s”. You will receive an "
+"email as soon as a group administrator responds to your request."
+msgstr ""
+"You have requested to join the project “%(group_name)s”. You will receive an "
+"email as soon as a group administrator responds to your request."
+
+#: .\views\group.py:299
 #, python-format
 msgid "Do you want to leave the group “%(group_name)s”?"
 msgstr "Do you want to leave the project “%(group_name)s”?"
 
-#: .\views\group.py:289
+#: .\views\group.py:300
 #, python-format
 msgid "Leaving group “%(group_name)s”?"
 msgstr "Leaving project “%(group_name)s”?"
 
-#: .\views\group.py:312
+#: .\views\group.py:302
+#, python-format
+msgid "You are no longer a member of the group “%(group_name)s”."
+msgstr "You are no longer a member of the project “%(group_name)s”."
+
+#: .\views\group.py:334
 msgid "You cannot leave this group. You are the only administrator left."
 msgstr "You cannot leave this project. You are the only administrator left."
 
-#: .\views\group.py:321
+#: .\views\group.py:343
 #, python-format
 msgid ""
 "Do you want to withdraw your join request to the group “%(group_name)s”?"
 msgstr ""
 
-#: .\views\group.py:322
+#: .\views\group.py:344
 #, python-format
 msgid "Withdraw join request to group “%(group_name)s”?"
 msgstr "Withdraw join request to project “%(group_name)s”?"
 
-#: .\views\group.py:416
+#: .\views\group.py:346
+#, python-format
+msgid ""
+"Your join request was withdrawn from group “%(group_name)s” successfully."
+msgstr "Your join request was withdrawn from project “%(group_name)s”."
+
+#: .\views\group.py:449
 msgid "You cannot change your own admin status."
 msgstr ""
 
-#: .\views\group.py:418 .\views\group.py:451
+#: .\views\group.py:451 .\views\group.py:484
 #, python-format
 msgid "You cannot remove “%(username)s” form this group. Only one admin left."
 msgstr ""
 "You cannot remove “%(username)s” form this project. Only one admin left."
 
-#: .\views\group.py:449
+#: .\views\group.py:482
 msgid "You cannot remove yourself from a group."
 msgstr "You cannot remove yourself from a project."
 
-#: .\views\group.py:460
+#: .\views\group.py:493
 #, python-format
 msgid ""
 "Do you want to remove the user “%(username)s”  from the group “%(group_name)"
 "s”?"
 msgstr ""
 
-#: .\views\group.py:464
+#: .\views\group.py:497
 #, python-format
 msgid "Remove user from group “%(group_name)s”?"
 msgstr "Remove user from project “%(group_name)s”?"
@@ -1501,3 +1533,7 @@ msgstr ""
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr ""
+
+#, fuzzy
+#~ msgid "You have requested to join the group “%(group_name)s”. "
+#~ msgstr "Do you want to join the project “%(group_name)s”?"
