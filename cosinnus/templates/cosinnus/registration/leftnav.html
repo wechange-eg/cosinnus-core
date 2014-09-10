@@ -18,9 +18,6 @@
 {% captureas label %}{% trans "Register" %}{% endcaptureas %}
 {% include "cosinnus/leftnav_button.html" with active=is_signup extra_classes="large-space" icon="fa-user" label=label href=href  %}
 
-
-{% comment %}  
 {% captureas href %}{% url "password_reset" %}{% endcaptureas %}
 {% captureas label %}{% trans "Forgot password?" %}{% endcaptureas %}
 {% include "cosinnus/leftnav_button.html" with active=is_reset_password icon="fa-question-circle" label=label href=href  %}
-{% endcomment %}
