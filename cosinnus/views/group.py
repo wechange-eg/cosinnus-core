@@ -28,6 +28,7 @@ from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin
 from cosinnus.views.mixins.user import UserFormKwargsMixin
 
 from cosinnus.views.mixins.avatar import AvatarFormMixin
+from cosinnus.core import signals
 
 class GroupCreateView(AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin, 
                       CreateView):
@@ -280,6 +281,7 @@ class GroupUserJoinView(GroupConfirmMixin, DetailView):
     
     def get_success_url(self):
         # self.referer is set in post() method
+        signals.user_group_join_requested.send(sender=self, group=self.object, user=self.request.user)
         messages.success(self.request, self.message_success % {'group_name': self.object.name})
         return self.referer
     
@@ -440,10 +442,14 @@ class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
 
     def form_valid(self, form):
         user = form.cleaned_data.get('user')
-        current_status = self.get_object().status
+        self.object = self.get_object()
+        current_status = self.object.status
         new_status = form.cleaned_data.get('status')
+        
         if (len(self.group.admins) > 1 or not self.group.is_admin(user)):
             if user != self.request.user or self.request.user.is_superuser:
+                if current_status == MEMBERSHIP_PENDING and new_status == MEMBERSHIP_MEMBER:
+                    signals.user_group_join_accepted.send(sender=self, group=self.object.group, user=user)
                 return super(GroupUserUpdateView, self).form_valid(form)
             else:
                 messages.error(self.request, _('You cannot change your own admin status.'))
@@ -475,6 +481,7 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
         self.object = self.get_object()
         group = self.object.group
         user = self.object.user
+        current_status = self.object.status
         if (len(group.admins) > 1 or not group.is_admin(user)):
             if user != self.request.user or self.request.user.is_superuser:
                 self.object.delete()
@@ -483,6 +490,8 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
         else:
             messages.error(self.request, _('You cannot remove “%(username)s” form '
                 'this group. Only one admin left.') % {'username': user.username})
+        if current_status == MEMBERSHIP_PENDING:
+            signals.user_group_join_declined.send(sender=self, group=group, user=user)
         return HttpResponseRedirect(self.get_success_url())
 
     def get_context_data(self, **kwargs):

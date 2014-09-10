@@ -1,0 +1,14 @@
+{% load i18n %}{% autoescape off %}
+
+{% blocktrans %}Hi, {{ user_name }}!
+
+We're sorry, but your membership request for group {{ group_name }} has been declined.{% endblocktrans %}
+
+{% trans "If you feel this is unfair, we suggest you contact one of the group's administrators for further information:" %}
+{{ protocol }}://{{ site.domain }}{% url 'cosinnus:group-detail' group=group.slug %}
+
+
+
+{% blocktrans %}The {{ site_name }} team{% endblocktrans %}
+
+{% endautoescape %}
