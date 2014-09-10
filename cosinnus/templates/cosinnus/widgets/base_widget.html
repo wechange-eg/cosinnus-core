@@ -49,7 +49,9 @@
                 </ul>
             </button><!-- btn -->
             
-            <div data-target="widget-content">{% block widget_content %}{% endblock widget_content %}</div>
+            {% block override_widget_content %}
+                <div data-target="widget-content">{% block widget_content %}{% endblock widget_content %}</div>
+            {% endblock override_widget_content %}
             
             {% block widget_button %}
                 <button type="button" class="btn btn-emphasized dashboard-appwidget-morebutton" data-target="widget-reload-button">
