@@ -73,9 +73,10 @@ class TaggableModelSearchForm(SearchForm):
 
     def search(self):
         sqs = super(TaggableModelSearchForm, self).search()
-        sqs = self._filter_for_read_access(sqs)
-        sqs = self._filter_group_selection(sqs)
-        sqs = self._filter_media_tags(sqs)
+        if hasattr(self, 'cleaned_data'):
+            sqs = self._filter_for_read_access(sqs)
+            sqs = self._filter_group_selection(sqs)
+            sqs = self._filter_media_tags(sqs)
         return sqs.models(*self.get_models())
 
     def _filter_for_read_access(self, sqs):
