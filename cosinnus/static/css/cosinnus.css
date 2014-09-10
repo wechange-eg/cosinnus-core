@@ -1383,7 +1383,7 @@ body .large-space {
 }
 
 #searchbar.expanded input {
-  width: 250px;
+  width: 125px;
   transition: all 500ms linear;
   color: #333333;
   box-shadow: none;
