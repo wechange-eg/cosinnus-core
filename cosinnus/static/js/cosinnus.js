@@ -195,31 +195,34 @@
 				}
 			};
 
-			if ($('.big-calendar').length)
-			$('.big-calendar').fullCalendar($.extend({
-				header: {
-					left: 'prev,next today',
-					center: 'title',
-					right: 'year,month,basicWeek,week' // basicDay
-				},
-
-				// cosinnus_calendarEvents is a global var containing the events
-				// set by the backend somewhere in the BODY.
-				events: cosinnus_calendarEvents,
-				select: function(startDate, endDate, allDay, jsEvent, view) {
-					$(this.element)
-						.closest('.big-calendar')
-						.trigger('fullCalendarSelect',[startDate, endDate, allDay, jsEvent, view]);
-				},
-				eventClick: function(event, jsEvent, view) {
-					$(this)
-						.closest('.big-calendar')
-						.trigger('fullCalendarEventClick',[event, jsEvent, view]);
-				},
-				selectable: true,
-				selectHelper: true
-			}, german));
-
+			if ($('.big-calendar').length) {
+			    $('.big-calendar').empty();
+    			$('.big-calendar').fullCalendar($.extend({
+    				header: {
+    					left: 'prev,next today',
+    					center: 'title',
+    					right: 'year,month,basicWeek,week' // basicDay
+    				},
+    
+    				// cosinnus_calendarEvents is a global var containing the events
+    				// set by the backend somewhere in the BODY.
+    				events: cosinnus_calendarEvents,
+    				select: function(startDate, endDate, allDay, jsEvent, view) {
+    					$(this.element)
+    						.closest('.big-calendar')
+    						.trigger('fullCalendarSelect',[startDate, endDate, allDay, jsEvent, view]);
+    				},
+    				eventClick: function(event, jsEvent, view) {
+    					$(this)
+    						.closest('.big-calendar')
+    						.trigger('fullCalendarEventClick',[event, jsEvent, view]);
+    				},
+    				selectable: true,
+    				selectHelper: true
+    			}, german));
+			}
+			
+			$('.small-calendar').empty();
 			$('.small-calendar').fullCalendar($.extend({
 				header: {
 					left: 'prev',
