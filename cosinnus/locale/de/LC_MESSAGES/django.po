@@ -1319,7 +1319,7 @@ msgstr "Vorname"
 
 #: .\templates\cosinnus\registration\signup.html.py:92
 msgid "Last name"
-msgstr "Vorname"
+msgstr "Nachname"
 
 #: .\templates\cosinnus\user\leftnav.html.py:24
 #: .\templates\cosinnus\user\userprofile_detail.html.py:93
