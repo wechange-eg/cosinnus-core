@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.core.urlresolvers import reverse, resolve
 from django.utils.formats import get_format
+from django.utils.translation import get_language
 
 from cosinnus.conf import settings as SETTINGS
 from cosinnus.core.registries import app_registry
@@ -82,4 +83,5 @@ def cosinnus(request):
         'COSINNUS_USER': user_json,
         'COSINNUS_UNREAD_MESSAGE_COUNT': unread_count,
         'COSINNUS_STREAM_UNSEEN_COUNT': stream_unseen_count,
+        'COSINNUS_CURRENT_LANGUAGE': get_language(),
     }

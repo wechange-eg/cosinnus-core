@@ -676,6 +676,10 @@
 
 
 		renderMomentDataDate : function() {
+			// set current language for moment formatting
+			var moment_lang = typeof cosinnus_current_language === "undefined" ? "" : cosinnus_current_language; 
+			moment.lang(moment_lang || "en");
+		    
 			// when .moment-data-date elements have a data-date attribute, render date.
 			$('.moment-data-date').on("renderMomentDataDate", function() {
 				if (!$(this).attr('data-date')) return;
