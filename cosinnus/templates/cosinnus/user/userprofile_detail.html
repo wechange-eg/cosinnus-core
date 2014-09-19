@@ -66,7 +66,7 @@
 	                            <i class="fa fa-envelope"></i>
 	                        </a>
 	                        <div class="media-body">
-                                {% trans "Nachricht" %}
+                                {% trans "Send Message" %}
 	                        </div>
 	                    </li>
 	                </ul>
@@ -89,7 +89,7 @@
                             <i class="fa fa-user"></i>
                         </a>
                         <div class="media-body">
-                            {% trans "Über mich" %}
+                            {% trans "About me" %}
                         </div>
                     </li>
                 </ul>
@@ -104,7 +104,7 @@
                 {% include "cosinnus/media_tags_userprofile_readonly.html" with object=profile %}
                 
                 {% if profile.website %}
-                <legend>{% trans "Meine Webseite" %}</legend>
+                <legend>{% trans "My Website" %}</legend>
                 <p class="transparent">
                     <i class="fa fa-globe"></i> <a href="{{ profile.website }}" target="_blank">{{ profile.website }}</a>
                 </p>
@@ -122,7 +122,7 @@
                             <i class="fa fa-users"></i>
                         </a>
                         <div class="media-body">
-                            {% trans "Meine Gruppen" %}
+                            {% trans "My Groups" %}
                         </div>
                     </li>
                 </ul>
@@ -153,7 +153,7 @@
                         </a>
                         <div class="media-body">
                             <a href="#">
-                                {% trans "Mehr" %}
+                                {% trans "More" %}
                             </a>
                         </div>
                     </li>
@@ -164,7 +164,7 @@
 
         </div><!-- column -->
 
-
+        {% comment %} My Network widget deactivated instead of placeholder 
         <div class="col-md-6 col-lg-4">
 
             <div type="button" class="btn btn-emphasized btn-headline fine-space">
@@ -175,7 +175,7 @@
                             <i class="fa fa-th"></i>
                         </a>
                         <div class="media-body">
-                            {% trans "Mein Netzwerk" %}
+                            {% trans "My Network" %}
                         </div>
                     </li>
                 </ul>
@@ -184,26 +184,11 @@
             <table>
                 <tr>
                     <td><a href="#"><img src="{% static 'images/feature-placeholder.png' %}" class="w100" /></a></td>
-                {% comment %} Show the network followers here  
-                    <td><a href="#"><img src="avatar2.png" class="w100" /></a></td>
-                    <td><a href="#"><img src="avatar2.png" class="w100" /></a></td>
-                </tr>
-                <tr>
-                    <td><a href="#"><img src="avatar.png" class="w100" /></a></td>
-                    <td><a href="#"><img src="avatar.png" class="w100" /></a></td>
-                    <td><a href="#"><img src="avatar2.png" class="w100" /></a></td>
-                </tr>
-                <tr>
-                    <td><a href="#"><img src="avatar2.png" class="w100" /></a></td>
-                    <td><a href="#"><img src="avatar2.png" class="w100" /></a></td>
-                    <td><a href="#"><img src="avatar.png" class="w100" /></a></td>
-                {% endcomment %}
                 </tr>
             </table>
 
-            </div><!-- row -->
-
         </div><!-- column -->
+        {% endcomment %}
 
     </div><!-- row -->
 

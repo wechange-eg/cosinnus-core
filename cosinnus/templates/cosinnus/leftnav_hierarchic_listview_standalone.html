@@ -14,10 +14,10 @@
 
 {% if current_folder and current_folder.path != '/' %}
     {% if current_folder.container and current_folder.container.path != '/' %}
-        {% captureas label %}{% trans "Zurück zu" %} {{ current_folder.container.title }}{% endcaptureas %}
+        {% captureas label %}{% trans "Back to" %} {{ current_folder.container.title }}{% endcaptureas %}
         {% include "cosinnus/leftnav_button.html" with extra_classes="fine-space" icon="fa-reply" label=label href=""  %}
     {% else %}
-	    {% captureas label %}{% trans "Zurück zu" %} {% trans COSINNUS_CURRENT_APP context "the_app" %}{% endcaptureas %}
+	    {% captureas label %}{% trans "Back to" %} {% trans COSINNUS_CURRENT_APP context "the_app" %}{% endcaptureas %}
 	    {% include "cosinnus/leftnav_button.html" with extra_classes="fine-space" icon="fa-reply" label=label href=""  %}
     {% endif %}
 {% endif %}

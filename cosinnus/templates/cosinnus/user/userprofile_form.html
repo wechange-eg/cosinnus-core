@@ -29,7 +29,7 @@
             {{ form.forms.media_tag.non_field_errors }}
 		    
             <fieldset>
-                <legend>{% trans "Basisdaten" %}</legend>
+                <legend>{% trans "Basic data" %}</legend>
 
                 <!-- On large screens the long explanation texts are on the right side next to the input elements -->
                 <div class="row">
@@ -112,7 +112,7 @@
 
 		
 		    <fieldset>
-		        <legend>{% trans "Profilbild" %}</legend>
+		        <legend>{% trans "Profile avatar" %}</legend>
 		
 		        <!-- On large screens the long explanation texts are on the right side next to the input elements -->
 		        <div class="row">
@@ -129,7 +129,7 @@
                                 <div id="id_avatar-preview" class="awesome-avatar-preview" style="{{ preview_style }}">
                                     {% include "cosinnus/user/user_avatar_image.html" with user=request.user extra_style=preview_style %}
                                 </div>
-                                <div id="avatar_deletion_notice" class="hidden"><p>{% trans "Profilbild wird beim Speichern gelöscht." %}</p></div>
+                                <div id="avatar_deletion_notice" class="hidden"><p>{% trans "Avatar will be deleted once you save your profile." %}</p></div>
                             </div>
 
 
@@ -156,7 +156,7 @@
                                                 <input type="hidden" name="avatar_clear" >
                                             </a>
                                             <div class="media-body">
-                                                <a href="#" onclick="$('#avatar_clear_checkbox').click();">{% trans "Löschen" %}</a>
+                                                <a href="#" onclick="$('#avatar_clear_checkbox').click();">{% trans "Delete" %}</a>
                                             </div>
                                         </li>
                                     </ul>
@@ -167,14 +167,14 @@
 		        
 		            <!-- explanation text -->
 		            <div class="col-md-4">
-		                <p class="transparent">{% trans "Ein Bild hilft, dich in vielen Programmen schnell zu erkennen." %}</p>
+		                <p class="transparent">{% trans "A picture that lets others recognize you quickly." %}</p>
 		            </div>
 		        </div><!-- row -->
 		    </fieldset>
 		
 		
 		    <fieldset>
-		        <legend>{% trans "Über dich" %}</legend>
+		        <legend>{% trans "About yourself" %}</legend>
 		
 		        <!-- On large screens the long explanation texts are on the right side next to the input elements -->
 		        <div class="row">
@@ -184,7 +184,7 @@
                         {% include "cosinnus/media_tags_userprofile.html" %} 
 		
 		                
-                        <label>{% trans "Wer bist du, und was motiviert dich?" %}</label>
+                        <label>{% trans "Who are you and what motivates you?" %}</label>
                         {{ form.forms.obj.description.errors }}
                         <div type="button" class="btn btn-default w100 regular-space">
                             <ul class="media-list">
@@ -195,7 +195,7 @@
                                     <div class="media-body">
                                         {% comment %}  {% render_field form.forms.obj.description  %}{% endcomment %}
                                         {{ form.forms.obj.description.errors }}
-                                        {% captureas placeholder %}{% trans "Erzähl etwas über dich!" %}{% endcaptureas %}
+                                        {% captureas placeholder %}{% trans "Tell others something about you!" %}{% endcaptureas %}
                                         {% render_field form.forms.obj.description class+="form-control" placeholder=placeholder %}
                                     </div>
                                 </li>
@@ -205,8 +205,8 @@
 		            
 		            </div><!-- col -->
 		            <div class="col-md-4">
-		                <p class="transparent"><strong>{% trans "Weitere Beschreibung" %}</strong></p>
-		                <p class="transparent">{% trans "Beschreibe dich, deine Aktivitäten und Interessen." %}</p>
+		                <p class="transparent"><strong>{% trans "Detailed description" %}</strong></p>
+		                <p class="transparent">{% trans "Describe yourself, your activities and your interests." %}</p>
 		            </div><!-- col -->
 		        </div><!-- row -->
 	
@@ -220,7 +220,7 @@
 	                    <i class="fa fa-check"></i>
 	                </a>
 	                <div class="media-body">
-                        {% trans "Speichern" %}
+                        {% trans "Save" %}
 	                </div>
 	            </li>
 	        </ul>

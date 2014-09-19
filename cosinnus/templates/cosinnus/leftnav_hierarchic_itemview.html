@@ -4,9 +4,9 @@
 
 {% if object.path == '/' %}
     {% captureas href %}{% url cosinnus_app_list_url group=group.slug %}{% endcaptureas %}
-    {% captureas label %}{% trans "Zurück" %}{% endcaptureas %}
+    {% captureas label %}{% trans "Back" %}{% endcaptureas %}
 {% else %}
     {% captureas href %}{% url cosinnus_app_list_url group=group.slug slug=object.container.slug %}{% endcaptureas %}
-    {% captureas label %}{% trans "Zurück zu" %} „{{ object.container.title }}“ {% endcaptureas %}
+    {% captureas label %}{% trans "Back to" %} „{{ object.container.title }}“ {% endcaptureas %}
 {% endif %}
 {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-reply" label=label href=href  %}

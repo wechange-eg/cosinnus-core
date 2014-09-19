@@ -25,7 +25,7 @@
                         {% endif %}
                       {% endfor %}
                     {% elif request.path == group_detail_page or request.path == group_edit_page %}  
-                        {% trans "Einstellungen" %}
+                        {% trans "Settings" %}
                     {% elif request.path == group_microsite_page %}  
                         {% trans "Microsite" %}
                     {% elif request.path == group_dashboard_page %}
@@ -64,7 +64,7 @@
         <li class="app-main appnavi-listelement">
             <a href="{{ group_detail_page }}">
                 <i class="fa fa-cogs"></i>
-                {% trans "Einstellungen" %}
+                {% trans "Settings" %}
             </a>
         </li>
     </ul>

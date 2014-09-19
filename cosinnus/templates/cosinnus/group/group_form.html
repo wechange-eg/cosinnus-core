@@ -54,7 +54,7 @@
 		                </a>
 		                <div class="media-body">
 		                    {{ form.forms.obj.name.errors }}
-	                        {% captureas placeholder %}{% trans "Gib den Namen für die Gruppe ein." %}{% endcaptureas %}
+	                        {% captureas placeholder %}{% trans "Enter a name for the group." %}{% endcaptureas %}
 	                        {% render_field form.forms.obj.name class+="form-control" placeholder=placeholder %}
 		                </div>
 		            </li>
@@ -62,7 +62,7 @@
 		    </div>
 		
 		    <fieldset>
-		        <legend>{% trans "Gruppenbild" %}</legend>
+		        <legend>{% trans "Group avatar" %}</legend>
 		
 		        <!-- On large screens the long explanation texts are on the right side next to the input elements -->
 		        <div class="row">
@@ -79,7 +79,7 @@
                                 <div id="id_avatar-preview" class="awesome-avatar-preview" style="{{ preview_style }}">
                                     {% include "cosinnus/group/group_avatar_image.html" with group=object extra_style=preview_style %}
                                 </div>
-                                <div id="avatar_deletion_notice" class="hidden"><p>{% trans "Gruppenbild wird beim Speichern der Gruppe gelöscht." %}</p></div>
+                                <div id="avatar_deletion_notice" class="hidden"><p>{% trans "Group avatar will be deleted once you save." %}</p></div>
                             </div>
 
 
@@ -106,7 +106,7 @@
                                                 <input type="hidden" name="avatar_clear" >
                                             </a>
                                             <div class="media-body">
-                                                <a href="#" onclick="$('#avatar_clear_checkbox').click();">{% trans "Löschen" %}</a>
+                                                <a href="#" onclick="$('#avatar_clear_checkbox').click();">{% trans "Delete" %}</a>
                                             </div>
                                         </li>
                                     </ul>
@@ -117,20 +117,20 @@
 		        
 		            <!-- explanation text -->
 		            <div class="col-md-4">
-		                <p class="transparent">{% trans "Ein Bild hilft, die Gruppe in vielen Programmen schnell zu erkennen." %}</p>
+		                <p class="transparent">{% trans "A picture that helps recognize the group." %}</p>
 		            </div>
 		        </div><!-- row -->
 		    </fieldset>
 		
 		
 		    <fieldset>
-		        <legend>{% trans "Über die Gruppe" %}</legend>
+		        <legend>{% trans "About the group" %}</legend>
 		
 		        <!-- On large screens the long explanation texts are on the right side next to the input elements -->
 		        <div class="row">
 		            <div class="col-md-8 regular-space">
 		                
-                        <label>{% trans "Beschreibe die Gruppe in ein paar Sätzen." %}</label>
+                        <label>{% trans "Describe the group in a few sentences." %}</label>
                         {{ form.forms.obj.description.errors }}
                         <div type="button" class="btn btn-default w100 regular-space">
                             <ul class="media-list">
@@ -163,7 +163,7 @@
 		                
                         {% include "cosinnus/media_tags_group.html" %} 
                         
-                        <label>{% trans "Welcher Organisation gehört die Gruppe an?" %}</label>
+                        <label>{% trans "Which Organisation does the group belong to?" %}</label>
                         <div type="button" class="btn btn-default w100">
                             <ul class="media-list">
                                 <li class="media">
@@ -172,14 +172,14 @@
                                     </a>
                                     <div class="media-body">
                                         {{ form.forms.obj.organisation.errors }}
-						                {% captureas placeholder %}{% trans "Organisation auswählen" %}{% endcaptureas %}
+						                {% captureas placeholder %}{% trans "Select Organisation" %}{% endcaptureas %}
 						                {% render_field form.forms.obj.organisation class+="form-control w100" placeholder=placeholder %}
                                     </div>
                                 </li>
                             </ul>
                         </div>
 		
-		                <label>{% trans "Wie öffentlich ist die Gruppe?" %}</label>
+		                <label>{% trans "Group Privacy" %}</label>
 		                <div type="button" class="btn btn-default w100">
 		                    <ul class="media-list">
 		                        <li class="media">
@@ -201,8 +201,8 @@
 		            
 		            </div><!-- col -->
 		            <div class="col-md-4">
-		                <p class="transparent"><strong>{% trans "Gruppe beschreiben" %}</strong></p>
-		                <p class="transparent">{% trans "Beschreibe die Gruppe, ihre Aktivitäten und Ziele." %}</p>
+		                <p class="transparent"><strong>{% trans "Group description" %}</strong></p>
+		                <p class="transparent">{% trans "Describe the group, its activities and goals" %}</p>
 		            </div><!-- col -->
 		        </div><!-- row -->
 	
@@ -216,7 +216,7 @@
 	                    <i class="fa fa-check"></i>
 	                </a>
 	                <div class="media-body">
-                        {% trans "Speichern" %}
+                        {% trans "Save" %}
 	                </div>
 	            </li>
 	        </ul>

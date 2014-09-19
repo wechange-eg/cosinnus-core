@@ -5,11 +5,11 @@
 {% if current_folder and current_folder.path != '/' %}
     {% if current_folder.container and current_folder.container.path != '/' %}
         {% captureas href %}{% url cosinnus_app_list_url group=group.slug slug=current_folder.container.slug %}{% add_current_params %}{% endcaptureas %}
-        {% captureas label %}{% trans "Zurück zu" %} {{ current_folder.container.title }}{% endcaptureas %}
+        {% captureas label %}{% trans "Back to" %} {{ current_folder.container.title }}{% endcaptureas %}
         {% include "cosinnus/leftnav_button.html" with extra_classes="fine-space" icon="fa-reply" label=label href=href  %}
     {% else %}
 	    {% captureas href %}{% url cosinnus_app_list_url group=group.slug %}{% add_current_params %}{% endcaptureas %}
-	    {% captureas label %}{% trans "Zurück zu" %} {% trans COSINNUS_CURRENT_APP context "the_app" %}{% endcaptureas %}
+	    {% captureas label %}{% trans "Back to" %} {% trans COSINNUS_CURRENT_APP context "the_app" %}{% endcaptureas %}
 	    {% include "cosinnus/leftnav_button.html" with extra_classes="fine-space" icon="fa-reply" label=label href=href  %}
     {% endif %}
 {% endif %}
@@ -35,7 +35,7 @@
                 <div class="media-body">
                     {{ container_form.title.errors }}
                     <!-- use spaces for centering. CSS padding does not work here. -->
-                    {% captureas placeholder %}{% trans "Neuer Ordnername" %}{% endcaptureas %}
+                    {% captureas placeholder %}{% trans "New folder name" %}{% endcaptureas %}
                     {% render_field container_form.title class+="form-control next-button-is-for-sending" placeholder=placeholder %}
                     <!-- next-button-is-for-sending -->
                 </div>
