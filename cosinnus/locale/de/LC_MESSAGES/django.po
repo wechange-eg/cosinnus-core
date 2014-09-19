@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-19 18:02+0200\n"
+"POT-Creation-Date: 2014-09-19 18:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -45,7 +45,7 @@ msgstr "Neu laden"
 #: .\templates\cosinnus\dashboard.html.py:54
 #: .\templates\cosinnus\user_dashboard.html.py:25
 #: .\templates\cosinnus\user_dashboard.html.py:54
-#: .\templates\cosinnus\cms\microsite.html.py:57
+#: .\templates\cosinnus\cms\microsite.html.py:63
 msgid "Configure"
 msgstr "Konfigurieren"
 
@@ -65,7 +65,7 @@ msgstr "Löschen"
 #: .\_old_templates\cosinnus\dashboard.html.py:561
 #: .\templates\cosinnus\dashboard.html.py:39
 #: .\templates\cosinnus\user_dashboard.html.py:39
-#: .\templates\cosinnus\cms\microsite.html.py:91
+#: .\templates\cosinnus\cms\microsite.html.py:97
 msgid "Add widget"
 msgstr "Widget hinzufügen"
 
@@ -662,7 +662,7 @@ msgstr "Pfad"
 
 #: .\models\widget.py:20 .\templates\cosinnus\appsmenu.html.py:30
 #: .\templates\cosinnus\appsmenu.html.py:50
-#: .\templates\cosinnus\cms\microsite.html.py:28
+#: .\templates\cosinnus\cms\microsite.html.py:34
 msgid "Microsite"
 msgstr "Microsite"
 
@@ -862,22 +862,30 @@ msgstr "Zurück"
 msgid "next"
 msgstr "Weiter"
 
-#: .\templates\cosinnus\cms\microsite.html.py:57
+#: .\templates\cosinnus\cms\microsite.html.py:16
+msgid ""
+"This page is a preview of many good things to come! It is heavily under "
+"development and many features are incomplete or may not work properly yet!"
+msgstr "Diese Seite ist eine Vorschau der zukünftigen Microsite. Die Seite befindet sich "
+"noch mitten im Aufbau und an vielen Features wird noch aktiv gearbeitet. Vieles ist daher "
+"noch nicht fertig gestellt, und es kann vorkommen dass noch vereinzelte Fehler auftreten. Wir bitten um Veständnis! "
+
+#: .\templates\cosinnus\cms\microsite.html.py:63
 msgid "Done"
 msgstr "Fertig"
 
-#: .\templates\cosinnus\cms\microsite.html.py:115
-#: .\templates\cosinnus\cms\microsite.html.py:152 .\utils\dashboard.py:307
+#: .\templates\cosinnus\cms\microsite.html.py:121
+#: .\templates\cosinnus\cms\microsite.html.py:158 .\utils\dashboard.py:307
 msgid "Informations"
 msgstr "Informationen"
 
-#: .\templates\cosinnus\cms\microsite.html.py:145
-#: .\templates\cosinnus\cms\microsite.html.py:153
+#: .\templates\cosinnus\cms\microsite.html.py:151
+#: .\templates\cosinnus\cms\microsite.html.py:159
 msgid "No informations set"
 msgstr "Keine Beschreibung verfasst."
 
-#: .\templates\cosinnus\cms\microsite.html.py:166
-#: .\templates\cosinnus\cms\microsite.html.py:187
+#: .\templates\cosinnus\cms\microsite.html.py:172
+#: .\templates\cosinnus\cms\microsite.html.py:193
 msgid "Back to Project Overview"
 msgstr "Zurück zur Übersicht"
 
