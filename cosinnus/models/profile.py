@@ -144,7 +144,7 @@ class UserProfile(BaseUserProfile):
         upload_to=get_avatar_filename)
     description = HTMLField(verbose_name=_('Description'), blank=True, null=True)
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
-        blank=True, null=True, editable=False, on_delete=models.PROTECT)
+        blank=True, null=True, editable=False, on_delete=models.SET_NULL)
     website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
 
 
