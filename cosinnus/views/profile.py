@@ -14,6 +14,7 @@ from cosinnus.views.mixins.avatar import AvatarFormMixin
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.http.response import Http404
+from cosinnus.models.tagged import BaseTagObject
 
 
 class UserProfileObjectMixin(SingleObjectMixin):
@@ -85,6 +86,10 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
         return reverse('cosinnus:profile-detail')
     
     def form_valid(self, form):
+        # security catch to disallow "nobody" privacy values of users
+        if not self.object.media_tag.visibility in [BaseTagObject.VISIBILITY_ALL, BaseTagObject.VISIBILITY_GROUP]:
+            self.object.media_tag.visibility = BaseTagObject.VISIBILITY_ALL
+        
         ret = super(UserProfileUpdateView, self).form_valid(form)
         messages.success(self.request, self.message_success)
         return ret

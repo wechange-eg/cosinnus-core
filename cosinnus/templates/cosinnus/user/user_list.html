@@ -1,5 +1,5 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n cosinnus_tags %}
+{% load i18n cosinnus_tags static %}
 
 {% block page_title %}{% trans "Users" %}{% endblock %}
 
@@ -53,7 +53,7 @@
         {% endif %}
         -->
 	    {% for user in object_list %}
-	        <div class="fadedown {% if not forloop.last %}regular-space{% endif %}">
+	        <div class="fadedown {% if not forloop.last or hidden_user_count > 0 %}regular-space{% endif %}">
 	            <div class="btn btn-emphasized w100">
 	                <ul class="media-list">
 	                    <li class="media">
@@ -98,7 +98,22 @@
 		   {% include 'cosinnus/common/empty_button.html' with message="There are no visible users." %}
 		{% endfor %}
         
-    </div>
+		{% if hidden_user_count > 0 %}
+            <div class="btn btn-default w100">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left" href="#">
+                            <img src="{% static 'images/jane-doe.png' %}" />
+                        </a>
+                        <div class="media-body">
+                            {% blocktrans with hidden_count=hidden_user_count %}And {{ hidden_count }} private users...{% endblocktrans %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+		{% endif %}
 
+    </div>
+    
 {% endblock %}
 

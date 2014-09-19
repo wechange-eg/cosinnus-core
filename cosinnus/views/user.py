@@ -29,16 +29,21 @@ class UserListView(ListView):
     template_name = 'cosinnus/user/user_list.html'
     
     def get_queryset(self):
-        qs = super(UserListView, self).get_queryset()
+        all_users = super(UserListView, self).get_queryset()
+        # save hidden users qs
+        self.hidden_users = all_users.exclude(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
+        
         # only show users with visbility "public"
-        # disabled for now
-        #qs = qs.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
+        qs = all_users.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
         qs = qs.order_by('first_name', 'last_name')
         qs = qs.select_related('cosinnus_profile')
         return qs
     
     def get_context_data(self, **kwargs):
         context = super(UserListView, self).get_context_data(**kwargs)
+        context.update({
+            'hidden_user_count': self.hidden_users.count(),
+        })
         return context
 
 user_list = UserListView.as_view()

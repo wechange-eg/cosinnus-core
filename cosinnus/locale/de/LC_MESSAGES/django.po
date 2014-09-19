@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-19 12:45+0200\n"
+"POT-Creation-Date: 2014-09-19 14:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -165,7 +165,7 @@ msgstr "Bearbeiten"
 #: .\templates\cosinnus\group\group_form.html.py:219
 #: .\templates\cosinnus\user\userprofile_form.html.py:224
 #: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:188
-#: .\views\group.py:464 .\views\user.py:119
+#: .\views\group.py:464 .\views\user.py:124
 msgid "Save"
 msgstr "Speichern"
 
@@ -1339,6 +1339,11 @@ msgstr "Benutzer_innen"
 msgid "User overview"
 msgstr "Benutzer_innen-Übersicht"
 
+#: .\templates\cosinnus\user\user_list.html.py:111
+#, python-format
+msgid "And %(hidden_count)s private users..."
+msgstr "Und %(hidden_count)s weitere versteckte Benutzer_innen..."
+
 #: .\templates\cosinnus\user\userprofile_detail.html.py:13
 msgid "User Profiles"
 msgstr "Mitarbeiter_innen-Profile"
@@ -1486,7 +1491,7 @@ msgstr "Kein Modell zum Exportieren der Daten angegeben."
 msgid "Group \"%(group)s\" was created successfully."
 msgstr "Projekt \"%(group)s\" wurde erfolgreich erstellt."
 
-#: .\views\group.py:56 .\views\user.py:76
+#: .\views\group.py:56 .\views\user.py:81
 msgid "Create"
 msgstr "Erstellen"
 
@@ -1588,16 +1593,16 @@ msgstr "Benutzer_in aus dem Projekt “%(group_name)s” entfernen?"
 msgid "No appname given for adding containers."
 msgstr "Kein Appname zum Hinzufügen von Zusammenstellungen angegeben."
 
-#: .\views\profile.py:52
+#: .\views\profile.py:53
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
 
-#: .\views\profile.py:77
+#: .\views\profile.py:78
 msgid "Your profile was edited successfully."
 msgstr "Dein Profil wurde erfolgreich bearbeitet."
 
-#: .\views\user.py:61
+#: .\views\user.py:66
 #, python-format
 msgid ""
 "User \"%(user)s\" was registered successfully. You can now log in using this "
