@@ -28,7 +28,7 @@
 </button>
 
 
-<button type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'password_change' %}">
+<button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'password_change' %}">
     <ul class="media-list">
         <li class="media">
            <a class="pull-left">
@@ -41,6 +41,24 @@
             {% endif %}
             <div class="media-body">
                 {% trans "Change password" %}
+            </div>
+        </li>
+    </ul>
+</button>
+
+<button type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:profile-delete' %}">
+    <ul class="media-list">
+        <li class="media">
+           <a class="pull-left">
+                <i class="fa fa-times"></i>
+            </a>
+            {% if view == "delete_profile" %}
+                <a class="pull-right" href="#">
+                    <i class="fa fa-caret-right"></i>
+                </a>
+            {% endif %}
+            <div class="media-body">
+                {% trans "Delete profile" %}
             </div>
         </li>
     </ul>

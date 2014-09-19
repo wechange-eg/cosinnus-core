@@ -13,7 +13,7 @@ from cosinnus.models.profile import get_user_profile_model
 from cosinnus.views.mixins.avatar import AvatarFormMixin
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
-from django.http.response import Http404
+from django.http.response import Http404, HttpResponseRedirect
 from cosinnus.models.tagged import BaseTagObject
 
 
@@ -95,3 +95,31 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
         return ret
 
 update_view = UserProfileUpdateView.as_view()
+
+
+class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, UpdateView):
+    #form_class = UserProfileForm
+    template_name = 'cosinnus/user/userprofile_delete.html'
+    message_success = _('Your profile was deleted successfully. We\'re sorry you are no longer with us.')
+    
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(UserProfileDeleteView, self).dispatch(
+            request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse('cosinnus:index')
+    
+    def _delete_userprofile(self, user):
+        print ">> wouldve deleted"
+        
+    
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self._delete_userprofile(self.object)
+        
+        messages.success(self.request, self.message_success)
+        return HttpResponseRedirect(self.get_success_url())
+    
+
+delete_view = UserProfileDeleteView.as_view()
