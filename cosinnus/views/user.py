@@ -29,7 +29,8 @@ class UserListView(ListView):
     template_name = 'cosinnus/user/user_list.html'
     
     def get_queryset(self):
-        all_users = super(UserListView, self).get_queryset()
+        all_users = super(UserListView, self).get_queryset().exclude(is_active=False)
+        
         # save hidden users qs
         self.hidden_users = all_users.exclude(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
         

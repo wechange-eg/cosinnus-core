@@ -29,12 +29,12 @@ class GroupMembersView(RequireGroupMember, Select2View):
         q = Q(id__in=uids)
         q &= Q(first_name__icontains=term) | Q(last_name__icontains=term) | Q(username__icontains=term)
 
-        count = User.objects.filter(q).count()
+        count = User.objects.exclude(is_active=False).filter(q).count()
         if count < start:
             raise Http404
         has_more = count > end
 
-        users = User.objects.filter(q).all()[start:end]
+        users = User.objects.exclude(is_active=False).filter(q).all()[start:end]
         results = get_user_choices(users)
 
         return (NO_ERR_RESP, has_more, results)
@@ -54,12 +54,12 @@ class AllMembersView(RequireLoggedIn, Select2View):
 
         q = Q(first_name__icontains=term) | Q(last_name__icontains=term) | Q(username__icontains=term)
 
-        count = User.objects.filter(q).count()
+        count = User.objects.exclude(is_active=False).filter(q).count()
         if count < start:
             raise Http404
         has_more = count > end
 
-        users = User.objects.filter(q).all()[start:end]
+        users = User.objects.exclude(is_active=False).filter(q).all()[start:end]
         results = get_user_choices(users)
 
         return (NO_ERR_RESP, has_more, results)

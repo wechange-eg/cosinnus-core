@@ -61,7 +61,12 @@ class UserProfileObjectMixin(SingleObjectMixin):
 
 class UserProfileDetailView(UserProfileObjectMixin, DetailView):
     template_name = 'cosinnus/user/userprofile_detail.html'
-
+    
+    def get_queryset(self):
+        qs = super(UserProfileDetailView, self).get_queryset()
+        qs = qs.exclude(user__is_active=False)
+        return qs
+    
     def get_context_data(self, **kwargs):
         context = super(UserProfileDetailView, self).get_context_data(**kwargs)
         profile = context['object']

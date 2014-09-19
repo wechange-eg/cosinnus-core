@@ -102,7 +102,7 @@ class GroupDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
         admin_ids = CosinnusGroupMembership.objects.get_admins(group=self.group)
         member_ids = CosinnusGroupMembership.objects.get_members(group=self.group)
         pending_ids = CosinnusGroupMembership.objects.get_pendings(group=self.group)
-        _q = get_user_model()._default_manager.order_by('first_name', 'last_name') \
+        _q = get_user_model()._default_manager.exclude(is_active=False).order_by('first_name', 'last_name') \
                              .select_related('cosinnus_profile')
         admins = _q._clone().filter(id__in=admin_ids)
         members = _q._clone().filter(id__in=member_ids)
