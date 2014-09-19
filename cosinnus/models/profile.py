@@ -179,6 +179,14 @@ class UserProfile(BaseUserProfile):
         if not hasattr(self, key):
             setattr(self, key, self.media_tag)
         return getattr(self, key)
+    
+    def save(self, *args, **kwargs):
+        # sanity check for missing media_tag:
+        if not self.media_tag:
+            from cosinnus.models.tagged import get_tag_object_model
+            media_tag = get_tag_object_model()._default_manager.create()
+            self.media_tag = media_tag
+        super(UserProfile, self).save(*args, **kwargs)
 
 
 def get_user_profile_model():
