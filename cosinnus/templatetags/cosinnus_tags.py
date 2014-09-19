@@ -104,6 +104,8 @@ def full_name(value):
     """
     from django.contrib.auth.models import AbstractBaseUser
     if isinstance(value, AbstractBaseUser):
+        if not value.is_active:
+            return _("(Deleted User)")
         return value.get_full_name() or value.get_username()
     return ""
 
@@ -120,6 +122,8 @@ def profile_url(value):
     """
     from django.contrib.auth.models import AbstractBaseUser
     if isinstance(value, AbstractBaseUser):
+        if not value.is_active:
+            return "#"
         return reverse('cosinnus:profile-detail', kwargs={'username': value.username})
     return ""
 
