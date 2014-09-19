@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-19 12:12+0200\n"
+"POT-Creation-Date: 2014-09-19 12:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -234,7 +234,6 @@ msgid "Password reset"
 msgstr "Passwort zurücksetzen"
 
 #: .\_old_templates\cosinnus\registration\password_reset_confirm.html.py:10
-#: .\templates\cosinnus\registration\password_change_form.html.py:24
 #: .\templates\cosinnus\registration\password_reset_confirm.html.py:25
 msgid "Enter new password"
 msgstr "Neues Passwort eingeben"
@@ -810,7 +809,8 @@ msgstr "Nicht eingeloggt"
 
 #: .\templates\cosinnus\not_logged_in_alert.html.py:6
 msgid "You cannot create or edit events until you are logged in!"
-msgstr "Sie können keine Termine anlegen oder bearbeiten bis sie sich einloggen."
+msgstr ""
+"Sie können keine Termine anlegen oder bearbeiten bis sie sich einloggen."
 
 #: .\templates\cosinnus\search.html.py:5 .\templates\cosinnus\search.html.py:6
 #: .\templates\cosinnus\search.html.py:278
@@ -1262,6 +1262,10 @@ msgstr "Dein Passwort wurde erfolgreich geändert."
 #: .\templates\cosinnus\registration\password_change_form.html.py:4
 msgid "Password change"
 msgstr "Passwort ändern"
+
+#: .\templates\cosinnus\registration\password_change_form.html.py:24
+msgid "Enter old password"
+msgstr "Altes Passwort eingeben"
 
 #: .\templates\cosinnus\registration\password_change_form.html.py:35
 msgid "Old password"
