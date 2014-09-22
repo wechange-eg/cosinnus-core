@@ -5,6 +5,7 @@ from django.db.models import Q
 
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject
+from cosinnus.models.profile import BaseUserProfile
 
 
 def check_ug_admin(user, group):
@@ -98,6 +99,8 @@ def check_object_write_access(obj, user):
             # catch error cases where no media_tag was created. that case should break, but not here.
             is_private = False
         return user.is_superuser or user.is_staff or obj.creator == user or (is_admin and not is_private) or obj.grant_extra_write_permissions(user)
+    elif issubclass(obj.__class__, BaseUserProfile):
+        return obj.user == user or user.is_superuser or user.is_staff
     elif hasattr(obj, 'creator'):
         return obj.creator == user or user.is_superuser or user.is_staff
     

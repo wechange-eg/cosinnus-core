@@ -22,6 +22,15 @@
 {% endblock leftnav %}
 
 {% block content %}
+    
+    {% if SETTINGS.DEBUG and not user|cosinnus_setting:"test_msg" %}
+	    <div class="alert alert-info alert-dismissable">
+	        <i class="fa fa-info-circle fa-3x"></i>
+	        <button id="close_button" type="button" class="close" data-dismiss="alert" aria-hidden="true" {% djajax_connect user.cosinnus_profile.settings trigger_on="click" value_selector="attr" value_selector_arg="data-value" %} data-value="test_msg:truee">&#215;</button>
+	        <p>{% trans "This message will never reappear when you remove it." %}</p>
+	    </div>
+    {% endif %}
+
     <div class="row large-space">
         <div class="col-sm-3 large-space">
             {% include "cosinnus/user/user_avatar_image.html" with user=this_user extra_classes="w100" %}
@@ -195,3 +204,8 @@
   
   
 {% endblock content %}
+
+{% block extrafooter %}
+	{{ block.super }}
+    {% djajax generate %}
+{% endblock extrafooter %}

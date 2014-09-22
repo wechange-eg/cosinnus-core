@@ -95,9 +95,15 @@ $('[djajax-id={{ node_id }}]').keydown(function(e) {
 {% endif %}
 
 {% if "value_changed" in trigger_on %}
-    $('[djajax-id={{ node_id }}]').change(function(e) {
-        djajax_trigger_{{ node_id }}(e);
-    });
+$('[djajax-id={{ node_id }}]').change(function(e) {
+    djajax_trigger_{{ node_id }}(e);
+});
+{% endif %}
+
+{% if "click" in trigger_on %}
+$('[djajax-id={{ node_id }}]').click(function(e) {
+    djajax_trigger_{{ node_id }}(e);
+});
 {% endif %}
 
 

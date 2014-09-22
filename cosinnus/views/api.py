@@ -67,8 +67,18 @@ def taggable_object_update_api(request):
             except related_class.DoesNotExist:
                 property_data = None
         
-        # attempt the change the object's attribute
-        setattr(instance, property_name, property_data)
+        value = getattr(instance, property_name, None)
+        
+        if type(value) is dict:
+            # we have a dictionary, set its key to the split data
+            try:
+                key, val = property_data.split(':', 1)
+            except ValueError:
+                raise Exception("Could not split value %s into a 'key,value' pair. Is the value seperated with a colon?" % property_data)
+            value[key] = val
+        else:
+            # attempt the change the object's attribute
+            setattr(instance, property_name, property_data)
         instance.save()
         
         # for related fields, return the pk instead of the object

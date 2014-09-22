@@ -328,7 +328,7 @@ def djajax_connect(parser, token):
     try:
         token_array = token.split_contents()
         tag_name, obj_prop, my_args = token_array[0], token_array[1], token_array[2:]
-        obj, prop = obj_prop.split('.')
+        obj, prop = obj_prop.rsplit('.', 1)
     except ValueError:
         raise template.TemplateSyntaxError("'djajax_connect' requires a variable name.")
     
@@ -380,10 +380,20 @@ class DjajaxConnectNode(template.Node):
         for arg_name, arg_default in DjajaxConnectNode.TAG_ARGUMENTS.items():
             self._addArgFromParams(self.my_args, additional_context, context, arg_name, arg_default)
 
-        # get the wished id for the item, or generate one if not supplied
-        node_id = '%s_%s_%d' % (self.obj, self.prop, uuid1())
         
-        djajax_entry = (context[self.obj], self.prop, node_id, additional_context)
+        if '.' in self.obj:
+            obj, properties = self.obj.split('.', 1)
+            resolved_obj = context[obj]
+            for sub_property in properties.split('.'):
+                resolved_obj = getattr(resolved_obj, sub_property)
+        else:
+            resolved_obj = context[self.obj]
+            
+        # get the wished id for the item, or generate one if not supplied
+        node_id = '%s_%s_%d' % (self.obj.replace('.','_'), self.prop, uuid1())
+        
+            
+        djajax_entry = (resolved_obj, self.prop, node_id, additional_context)
         if not 'djajax_connect_list' in context:
             context.dicts[0]['djajax_connect_list'] = []
             #raise template.TemplateSyntaxError("Djajax not found in context. Have you inserted '{% djajax_setup %}' ?")
@@ -468,3 +478,17 @@ def add_current_params(context, request=None):
     if not parsed:
         return ''
     return '?%s' % urlencode(parsed)
+
+
+@register.filter
+def cosinnus_setting(user, setting):
+    """
+    Retrieves a user setting's value or an empty string if the setting does not exist yet.
+    """
+    from django.contrib.auth.models import AbstractBaseUser
+    if isinstance(user, AbstractBaseUser):
+        value = user.cosinnus_profile.settings.get(setting, None)
+        return value
+    raise ImproperlyConfigured("User setting tag got passed a non-user argument.")
+    
+
