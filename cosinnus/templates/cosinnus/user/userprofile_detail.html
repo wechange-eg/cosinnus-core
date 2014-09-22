@@ -10,9 +10,9 @@
         {% if user == this_user %}
             <li class="active">{% trans "Your Profile" %}</li>
         {% else %}
-	        <li class="active">{% trans "User Profiles" %}</li>
-	        <li class="active">{{ this_user|full_name }}</li>
-	    {% endif %}
+            <li class="active">{% trans "User Profiles" %}</li>
+            <li class="active">{{ this_user|full_name }}</li>
+        {% endif %}
 {% endblock %}
 
 {% block leftnav %}
@@ -24,11 +24,11 @@
 {% block content %}
     
     {% if SETTINGS.DEBUG and not user|cosinnus_setting:"test_msg" %}
-	    <div class="alert alert-info alert-dismissable">
-	        <i class="fa fa-info-circle fa-3x"></i>
-	        <button id="close_button" type="button" class="close" data-dismiss="alert" aria-hidden="true" {% djajax_connect user.cosinnus_profile.settings trigger_on="click" value_selector="attr" value_selector_arg="data-value" %} data-value="test_msg:truee">&#215;</button>
-	        <p>{% trans "This message will never reappear when you remove it." %}</p>
-	    </div>
+        <div class="alert alert-info alert-dismissable">
+            <i class="fa fa-info-circle fa-3x"></i>
+            <button id="close_button" type="button" class="close" data-dismiss="alert" aria-hidden="true" {% djajax_connect user.cosinnus_profile.settings trigger_on="click" value_selector="attr" value_selector_arg="data-value" %} data-value="test_msg:truee">&#215;</button>
+            <p>{% trans "This message will never reappear when you remove it." %}</p>
+        </div>
     {% endif %}
 
     <div class="row large-space">
@@ -39,47 +39,47 @@
             <legend class="large-space">{{ this_user|full_name }}</legend>
 
             {% if request.user.is_authenticated and request.user == this_user %}
-	            <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:profile-edit' %}">
-	                <ul class="media-list">
-	                    <li class="media">
-	                        <a class="pull-left" href="#">
-	                            <i class="fa fa-pencil"></i>
-	                        </a>
-	                        <div class="media-body">
+                <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:profile-edit' %}">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <div class="media-body">
                                 {% trans "Edit Profile" %}
-	                        </div>
-	                    </li>
-	                </ul>
-	            </button>
+                            </div>
+                        </li>
+                    </ul>
+                </button>
             {% else %}
                 {% comment %} Abonnieren is out for now 
-	            <button type="button" class="btn btn-default">
-	                <ul class="media-list">
-	                    <li class="media">
-	                        <a class="pull-left" href="#">
-	                            <i class="fa fa-hand-o-right "></i>
-	                        </a>
-	                        <div class="media-body">
-	                            <!-- <a href="#"> -->
-	                                {% trans "Abonnieren" %}
-	                            <!-- </a> -->
-	                        </div>
-	                    </li>
-	                </ul>
-	            </button>
-	             {% endcomment %}
+                <button type="button" class="btn btn-default">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-hand-o-right "></i>
+                            </a>
+                            <div class="media-body">
+                                <!-- <a href="#"> -->
+                                    {% trans "Abonnieren" %}
+                                <!-- </a> -->
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+                 {% endcomment %}
                 <button type="button" class="btn btn-emphasized" href="{% url 'postman_write' recipients=this_user.username %}">
-	                <ul class="media-list">
-	                    <li class="media">
-	                        <a class="pull-left" href="#">
-	                            <i class="fa fa-envelope"></i>
-	                        </a>
-	                        <div class="media-body">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                            <div class="media-body">
                                 {% trans "Send Message" %}
-	                        </div>
-	                    </li>
-	                </ul>
-	            </button>
+                            </div>
+                        </li>
+                    </ul>
+                </button>
             {% endif %} 
         </div>
 
@@ -139,17 +139,17 @@
             
             {% for group in profile.cosinnus_groups %}
                 <button type="button" class="btn btn-default w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ group.get_absolute_url }}">
-	                <ul class="media-list">
-	                    <li class="media">
-	                        <a class="pull-left">
-	                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
-	                        </a>
-	                        <div class="media-body">
-	                            {{ group.name }}
-	                        </div>
-	                    </li>
-	                </ul>
-	            </button>
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left">
+                                {% include "cosinnus/group/group_avatar_image.html" with group=group %}
+                            </a>
+                            <div class="media-body">
+                                {{ group.name }}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
             {% endfor %}
 
             {% comment %} Mehr button is hidden till we can load more results  
@@ -206,6 +206,6 @@
 {% endblock content %}
 
 {% block extrafooter %}
-	{{ block.super }}
+    {{ block.super }}
     {% djajax generate %}
 {% endblock extrafooter %}
