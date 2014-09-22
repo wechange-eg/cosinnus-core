@@ -13,6 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.exceptions import InvalidImageFormatError
+from jsonfield import JSONField
 from tinymce.models import HTMLField
 
 from cosinnus.conf import settings
@@ -146,7 +147,7 @@ class UserProfile(BaseUserProfile):
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
         blank=True, null=True, editable=False, on_delete=models.SET_NULL)
     website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
-
+    settings = JSONField(default={})
 
     @property
     def avatar_url(self):

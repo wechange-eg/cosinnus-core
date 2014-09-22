@@ -69,6 +69,7 @@ setup(
         'django-tinymce==1.5.2',
         'djangorestframework>=2.3.0',
         'easy-thumbnails>=1.4',
+        'jsonfield>=1.0.0',
     ],
     dependency_links=[
         'git+git://github.com/Markush2010/django-bootstrap3.git@develop#egg=django-bootstrap3',
