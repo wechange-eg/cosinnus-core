@@ -23,6 +23,7 @@ from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
     check_group_create_objects_access, check_object_read_access)
 from django.utils.safestring import mark_safe
+from django.templatetags.static import static
 
 register = template.Library()
 
@@ -427,7 +428,9 @@ class DjajaxSetupNode(template.Node):
                 context.update(additional_context)
                 ret += render_to_string('cosinnus/js/djajax_connect.js', context) + '\n\n'
             
-            return """<script type="text/javascript">\n%s\n</script>""" % ret
+            js_file = static('js/djajax.js')
+            return """<script src="%s"></script>
+                      <script type="text/javascript">\n%s\n</script>""" % (js_file, ret)
         else:
             raise template.TemplateSyntaxError("Djajax: Unknown directive '%s'." % self.directive)
 
