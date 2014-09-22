@@ -197,6 +197,20 @@ class BaseTaggableObjectModel(models.Model):
         if not self.created:
             return now()
         return self.created
+    
+    def grant_extra_read_permissions(self, user):
+        """ An overridable check for whether this object grants certain users read permissions
+            even though by general rules that user couldn't read the object.
+            
+            @param user: The user to check for extra permissions for """
+        return False
+    
+    def grant_extra_write_permissions(self, user):
+        """ An overridable check for whether this object grants certain users write permissions
+            even though by general rules that user couldn't write the object.
+            
+            @param user: The user to check for extra permissions for """
+        return False
 
 class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
     """

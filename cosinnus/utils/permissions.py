@@ -65,7 +65,7 @@ def check_object_read_access(obj, user):
         else:
             # catch error cases where no media_tag was created. that case should break, but not here.
             obj_is_visible = is_member or is_admin
-        return user.is_superuser or user.is_staff or obj_is_visible
+        return user.is_superuser or user.is_staff or obj_is_visible or obj.grant_extra_read_permissions(user)
     elif hasattr(obj, 'creator'):
         return obj.creator == user or user.is_superuser or user.is_staff
     
@@ -97,7 +97,7 @@ def check_object_write_access(obj, user):
         else:
             # catch error cases where no media_tag was created. that case should break, but not here.
             is_private = False
-        return user.is_superuser or user.is_staff or obj.creator == user or (is_admin and not is_private)
+        return user.is_superuser or user.is_staff or obj.creator == user or (is_admin and not is_private) or obj.grant_extra_write_permissions(user)
     elif hasattr(obj, 'creator'):
         return obj.creator == user or user.is_superuser or user.is_staff
     
