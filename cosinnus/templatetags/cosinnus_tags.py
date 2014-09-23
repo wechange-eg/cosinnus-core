@@ -339,12 +339,21 @@ class DjajaxConnectNode(template.Node):
     
     # arguments the connect tag can take, and their defaults
     TAG_ARGUMENTS = {
+         # the jQuery trigger on which the value should be updated
         'trigger_on': 'value_changed',
+        # the URL the value should be POSTed to
         'post_to': '/api/v1/taggable_object/update/',
+        # which jQuery attribute selector do we get the value from the html element?
         'value_selector': 'val',
+        # if the attribute selector isn't val (for example it's "attr", what's the attr argument?
         'value_selector_arg': None,
+        # should the value be gotten from a DOM property instead of a jQuery select?
         'value_object_property': None,
+        # a function that transforms the value read from the HTML element. it's return value is then POSTed
         'value_transform': None,
+        # if this is set, ignore any data and always POST the supplied argument as data update
+        'fixed_value': None,
+        # do we allow sending empty data? if set to false, will not POST when the data is empty or ''
         'empty': 'true',
     }
     
@@ -376,10 +385,18 @@ class DjajaxConnectNode(template.Node):
     def render(self, context):
         """ We're committing the crime of pushing variables to the bottom of the dict stack here... """
         # parse options
+        extra_render = ''
         additional_context = {}
         for arg_name, arg_default in DjajaxConnectNode.TAG_ARGUMENTS.items():
             self._addArgFromParams(self.my_args, additional_context, context, arg_name, arg_default)
-
+        
+        # if we have gotten a fixed value data property, set it as data-value and configure 
+        # to read out the data-value attribute
+        if 'fixed_value' in additional_context:
+            additional_context['value_selector'] = 'attr'
+            additional_context['value_selector_arg'] = 'data-value'
+            extra_render += 'data-value="%s"' % additional_context['fixed_value']
+            del additional_context['fixed_value']
         
         if '.' in self.obj:
             obj, properties = self.obj.split('.', 1)
@@ -399,7 +416,7 @@ class DjajaxConnectNode(template.Node):
             #raise template.TemplateSyntaxError("Djajax not found in context. Have you inserted '{% djajax_setup %}' ?")
         context.dicts[0]['djajax_connect_list'].append(djajax_entry)
         
-        return " djajax-id='%s' djajax-last-value='' " % (node_id) 
+        return " djajax-id='%s' djajax-last-value='' %s " % (node_id, extra_render) 
 
 
 @register.tag

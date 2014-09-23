@@ -33,7 +33,7 @@ function djajax_trigger_{{ node_id }}(e) {
         if (node_value == null || node_value == '') {
             console.log('Submitted field value for {{ node_id }} was found to be empty, but djajax empty=False was set! Restoring last value.');
             // restore last data
-            djajax_set_value_{{ node_id }}($('[djajax-id={{ node_id }}]').attr('djdjax-last-value'));
+            djajax_set_value_{{ node_id }}($('[djajax-id={{ node_id }}]').attr('djajax-last-value'));
             return;
         }
     {% endif %}
@@ -53,20 +53,20 @@ function djajax_trigger_{{ node_id }}(e) {
              if (data['status'] == 'success') {
                  console.log('Success! for {{ node_id }} ! With data ' + JSON.stringify(data));
                  // save last data
-                 $('[djajax-id={{ node_id }}]').attr('djdjax-last-value', djajax_get_value_{{ node_id }}());
+                 $('[djajax-id={{ node_id }}]').attr('djajax-last-value', djajax_get_value_{{ node_id }}());
              } else {
                  console.log('Error in Saving! for {{ node_id }} ! With data ' + JSON.stringify(data));
                  // restore last data
-                 console.log('restoring lasta data:' + $('[djajax-id={{ node_id }}]').attr('djdjax-last-value'))
-                 djajax_set_value_{{ node_id }}($('[djajax-id={{ node_id }}]').attr('djdjax-last-value'));
+                 console.log('restoring lasta data:' + $('[djajax-id={{ node_id }}]').attr('djajax-last-value'))
+                 djajax_set_value_{{ node_id }}($('[djajax-id={{ node_id }}]').attr('djajax-last-value'));
              }
              
          },
          error: function(data){
              console.log('Error! for {{ node_id }} ! With data ' + JSON.stringify(data));
              // restore last data
-             console.log('restoring lasta data:' + $('[djajax-id={{ node_id }}]').attr('djdjax-last-value'))
-             djajax_set_value_{{ node_id }}($('[djajax-id={{ node_id }}]').attr('djdjax-last-value'));
+             console.log('restoring lasta data:' + $('[djajax-id={{ node_id }}]').attr('djajax-last-value'))
+             djajax_set_value_{{ node_id }}($('[djajax-id={{ node_id }}]').attr('djajax-last-value'));
          
          }
          
@@ -108,4 +108,4 @@ $('[djajax-id={{ node_id }}]').click(function(e) {
 
 
 // set last-node-value
-$('[djajax-id={{ node_id }}]').attr('djdjax-last-value', djajax_get_value_{{ node_id }}());
+$('[djajax-id={{ node_id }}]').attr('djajax-last-value', djajax_get_value_{{ node_id }}());

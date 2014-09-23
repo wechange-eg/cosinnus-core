@@ -69,13 +69,14 @@ def taggable_object_update_api(request):
         
         value = getattr(instance, property_name, None)
         
+        dict_key = None
         if type(value) is dict:
             # we have a dictionary, set its key to the split data
             try:
-                key, val = property_data.split(':', 1)
+                dict_key, property_data = property_data.split(':', 1)
             except ValueError:
                 raise Exception("Could not split value %s into a 'key,value' pair. Is the value seperated with a colon?" % property_data)
-            value[key] = val
+            value[dict_key] = property_data
         else:
             # attempt the change the object's attribute
             setattr(instance, property_name, property_data)
@@ -83,12 +84,14 @@ def taggable_object_update_api(request):
         
         # for related fields, return the pk instead of the object
         return_value =  getattr(instance, property_name, '')
+        if dict_key:
+            return_value = return_value[dict_key]
+        # if the save was not successful we return the data as it is in the backend
+        if return_value != property_data:
+            return JSONResponse({'status':'error', 'property_name': property_name, 'property_data': return_value})
+
         if return_value and is_related_field:
             return_value = return_value.pk
-            
-        # if the save was not successful we return the data as it is in the backend
-        if getattr(instance, property_name, None) != property_data:
-            return JSONResponse({'status':'error', 'property_name': property_name, 'property_data': return_value})
         
         return JSONResponse({'status':'success', 'property_name': property_name, 'property_data': return_value})
     else:
