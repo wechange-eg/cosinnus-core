@@ -58,17 +58,22 @@
         -->
     
 	    {% for group, members, pendings, admins in rows %}
+	        {% if user.pk in members or user.pk in admins or group.public %}
+	            {% url 'cosinnus:group-dashboard' group=group.slug as group_url %}
+	        {% else %}
+	            {% url 'cosinnus:group-microsite' group=group.slug as group_url %}
+	        {% endif %}
 	        <div class="fadedown {% if not forloop.last %}regular-space{% endif %}">
 	            <div class="btn btn-{% if user.is_authenticated and user.pk in members or group.public %}emphasized{% else %}default{% endif %} w100">
 	                <ul class="media-list">
 	                    <li class="media">
-	                        <a class="pull-left" href="{% url 'cosinnus:group-dashboard' group=group.slug %}">
+	                        <a class="pull-left" href="{{ group_url }}">
 	                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
 	                        </a>
 	                        <a class="pull-right fadedown-clickarea" href="#">
 	                            <i class="fa fa-chevron-down"></i>
 	                        </a>
-	                        <a class="pull-right" href="{% url 'cosinnus:group-dashboard' group=group.slug %}">
+	                        <a class="pull-right" href="{{ group_url }}">
 	                            <i class="fa fa-chain"></i>
 	                        </a>
 	                        <div class="media-body">
@@ -87,7 +92,7 @@
 		                                {% endif %}
 		                            </span>
                                 {% endif %}
-	                            <a href="{% url 'cosinnus:group-dashboard' group=group.slug %}">
+	                            <a href="{{ group_url }}">
 	                                {{ group.name }}
 	                            </a>
 	                        </div>
