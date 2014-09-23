@@ -5,6 +5,7 @@ from django.conf.urls import include, patterns, url
 
 from cosinnus.core.registries import url_registry
 from cosinnus.conf import settings
+from cosinnus.core.registries.group_models import group_model_registry
 
 urlpatterns = patterns('cosinnus.views',
     url(r'^$', 'common.index', name='index'),
@@ -24,32 +25,11 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^widgets/list/$', 'widget.widget_list', name='widget-list'),
     url(r'^widgets/add/user/$', 'widget.widget_add_user', name='widget-add-user-empty'),
     url(r'^widgets/add/user/(?P<app_name>[^/]+)/(?P<widget_name>[^/]+)/$', 'widget.widget_add_user', name='widget-add-user'),
-    url(r'^widgets/add/%s/(?P<group>[^/]+)/$' % settings.COSINNUS_GROUP_URL_PATH, 'widget.widget_add_group', name='widget-add-group-empty'),
-    url(r'^widgets/add/%s/(?P<group>[^/]+)/(?P<app_name>[^/]+)/(?P<widget_name>[^/]+)/$' % settings.COSINNUS_GROUP_URL_PATH, 'widget.widget_add_group', name='widget-add-group'),
     url(r'^widget/(?P<id>\d+)/$', 'widget.widget_detail', name='widget-detail'),
     url(r'^widget/(?P<id>\d+)/(?P<offset>\d+)/$', 'widget.widget_detail', name='widget-detail-offset'),
     url(r'^widget/(?P<id>\d+)/delete/$', 'widget.widget_delete', name='widget-delete'),
     url(r'^widget/(?P<id>\d+)/edit/$', 'widget.widget_edit', name='widget-edit'),
     url(r'^widget/(?P<id>\d+)/edit/(?P<app_name>[^/]+)/(?P<widget_name>[^/]+)/$', 'widget.widget_edit', name='widget-edit-swap'),
-
-    url(r'^%s/$' % settings.COSINNUS_GROUP_PLURAL_URL_PATH, 'group.group_list', name='group-list'),
-    url(r'^%s/map/$' % settings.COSINNUS_GROUP_PLURAL_URL_PATH, 'group.group_list_map', name='group-list-map'),
-    url(r'^%s/add/$' % settings.COSINNUS_GROUP_PLURAL_URL_PATH, 'group.group_create', name='group-add'),
-    url(r'^%s/(?P<group>[^/]+)/$' % settings.COSINNUS_GROUP_URL_PATH, 'widget.group_dashboard', name='group-dashboard'),
-    url(r'^%s/(?P<group>[^/]+)/microsite/$' % settings.COSINNUS_GROUP_URL_PATH, 'cms.group_microsite', name='group-microsite'),
-    url(r'^%s/(?P<group>[^/]+)/microsite/edit/$' % settings.COSINNUS_GROUP_URL_PATH, 'cms.group_microsite_edit', name='group-microsite-edit'),
-    url(r'^%s/(?P<group>[^/]+)/members/$' % settings.COSINNUS_GROUP_URL_PATH, 'group.group_detail', name='group-detail'),
-    url(r'^%s/(?P<group>[^/]+)/edit/$' % settings.COSINNUS_GROUP_URL_PATH, 'group.group_update', name='group-edit'),
-    url(r'^%s/(?P<group>[^/]+)/delete/$' % settings.COSINNUS_GROUP_URL_PATH, 'group.group_delete', name='group-delete'),
-    url(r'^%s/(?P<group>[^/]+)/join/$' % settings.COSINNUS_GROUP_URL_PATH, 'group.group_user_join', name='group-user-join'),
-    url(r'^%s/(?P<group>[^/]+)/leave/$' % settings.COSINNUS_GROUP_URL_PATH, 'group.group_user_leave', name='group-user-leave'),
-    url(r'^%s/(?P<group>[^/]+)/withdraw/$' % settings.COSINNUS_GROUP_URL_PATH, 'group.group_user_withdraw', name='group-user-withdraw'),
-    url(r'^%s/(?P<group>[^/]+)/users/$' % settings.COSINNUS_GROUP_URL_PATH, 'group.group_user_list', name='group-user-list'),
-    url(r'^%s/(?P<group>[^/]+)/users/add/$' % settings.COSINNUS_GROUP_URL_PATH, 'group.group_user_add', name='group-user-add-generic'),
-    url(r'^%s/(?P<group>[^/]+)/users/add/(?P<username>[^/]+)/$' % settings.COSINNUS_GROUP_URL_PATH, 'group.group_user_add', name='group-user-add'),
-    url(r'^%s/(?P<group>[^/]+)/users/delete/(?P<username>[^/]+)/$' % settings.COSINNUS_GROUP_URL_PATH, 'group.group_user_delete', name='group-user-delete'),
-    url(r'^%s/(?P<group>[^/]+)/users/edit/(?P<username>[^/]+)/$' % settings.COSINNUS_GROUP_URL_PATH, 'group.group_user_update', name='group-user-edit'),
-    url(r'^%s/(?P<group>[^/]+)/export/$' % settings.COSINNUS_GROUP_URL_PATH, 'group.group_export', name='group-export'),
 
     url(r'^attachmentselect/(?P<group>[^/]+)/(?P<model>[^/]+)$', 'attached_object.attachable_object_select2_view', name='attached_object_select2_view'),
 
@@ -57,5 +37,33 @@ urlpatterns = patterns('cosinnus.views',
 
     url(r'^select2/', include('cosinnus.urls_select2', namespace='select2')),
 )
+
+for url_key in group_model_registry:
+    plural_url_key = group_model_registry.get_plural_url_key(url_key, url_key + '_s')
+    prefix = group_model_registry.get_url_name_prefix(url_key, '')
+    
+    urlpatterns += patterns('cosinnus.views',
+        url(r'^%s/$' % plural_url_key, 'group.group_list', name=prefix+'group-list'),
+        url(r'^%s/map/$' % plural_url_key, 'group.group_list_map', name=prefix+'group-list-map'),
+        url(r'^%s/add/$' % plural_url_key, 'group.group_create', name=prefix+'group-add'),
+        url(r'^%s/(?P<group>[^/]+)/$' % url_key, 'widget.group_dashboard', name=prefix+'group-dashboard'),
+        url(r'^%s/(?P<group>[^/]+)/microsite/$' % url_key, 'cms.group_microsite', name=prefix+'group-microsite'),
+        url(r'^%s/(?P<group>[^/]+)/microsite/edit/$' % url_key, 'cms.group_microsite_edit', name=prefix+'group-microsite-edit'),
+        url(r'^%s/(?P<group>[^/]+)/members/$' % url_key, 'group.group_detail', name=prefix+'group-detail'),
+        url(r'^%s/(?P<group>[^/]+)/edit/$' % url_key, 'group.group_update', name=prefix+'group-edit'),
+        url(r'^%s/(?P<group>[^/]+)/delete/$' % url_key, 'group.group_delete', name=prefix+'group-delete'),
+        url(r'^%s/(?P<group>[^/]+)/join/$' % url_key, 'group.group_user_join', name=prefix+'group-user-join'),
+        url(r'^%s/(?P<group>[^/]+)/leave/$' % url_key, 'group.group_user_leave', name=prefix+'group-user-leave'),
+        url(r'^%s/(?P<group>[^/]+)/withdraw/$' % url_key, 'group.group_user_withdraw', name=prefix+'group-user-withdraw'),
+        url(r'^%s/(?P<group>[^/]+)/users/$' % url_key, 'group.group_user_list', name=prefix+'group-user-list'),
+        url(r'^%s/(?P<group>[^/]+)/users/add/$' % url_key, 'group.group_user_add', name=prefix+'group-user-add-generic'),
+        url(r'^%s/(?P<group>[^/]+)/users/add/(?P<username>[^/]+)/$' % url_key, 'group.group_user_add', name=prefix+'group-user-add'),
+        url(r'^%s/(?P<group>[^/]+)/users/delete/(?P<username>[^/]+)/$' % url_key, 'group.group_user_delete', name=prefix+'group-user-delete'),
+        url(r'^%s/(?P<group>[^/]+)/users/edit/(?P<username>[^/]+)/$' % url_key, 'group.group_user_update', name=prefix+'group-user-edit'),
+        url(r'^%s/(?P<group>[^/]+)/export/$' % url_key, 'group.group_export', name=prefix+'group-export'),
+    
+        url(r'^widgets/add/%s/(?P<group>[^/]+)/$' % url_key, 'widget.widget_add_group', name=prefix+'widget-add-group-empty'),
+        url(r'^widgets/add/%s/(?P<group>[^/]+)/(?P<app_name>[^/]+)/(?P<widget_name>[^/]+)/$' % url_key, 'widget.widget_add_group', name=prefix+'widget-add-group'),
+    )
 
 urlpatterns += url_registry.urlpatterns

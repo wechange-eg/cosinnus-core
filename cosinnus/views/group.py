@@ -18,7 +18,8 @@ from cosinnus.core.decorators.views import superuser_required,\
 from cosinnus.core.registries import app_registry
 from cosinnus.forms.group import CosinnusGroupForm, MembershipForm
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
-    MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING)
+    MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, CosinnusProject,
+    CosinnusSociety)
 from cosinnus.models.serializers.group import GroupSimpleSerializer
 from cosinnus.models.serializers.profile import UserSimpleSerializer
 from cosinnus.utils.compat import atomic
@@ -164,6 +165,18 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
 
 group_list = GroupListView.as_view()
 group_list_api = GroupListView.as_view(is_ajax_request_url=True)
+
+
+class ProjectListView(GroupListView):
+    model = CosinnusProject
+
+project_list = ProjectListView.as_view()
+
+class SocietyListView(GroupListView):
+    model = CosinnusSociety
+
+society_list = SocietyListView.as_view()
+
 
 
 class GroupMapListView(GroupListView):

@@ -28,9 +28,6 @@ class CosinnusConf(AppConf):
     #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = 60 * 60 * 24
     
-    # the url pattern for all URLs that lie in groups. i.e: http://example.com/group/todo/list
-    GROUP_URL_PATH = 'project'
-    
     # the url pattern for group overview URLs
     GROUP_PLURAL_URL_PATH = 'projects'
     
