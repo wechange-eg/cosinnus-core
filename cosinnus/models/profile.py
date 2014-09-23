@@ -79,7 +79,7 @@ class BaseUserProfile(models.Model):
 
     objects = BaseUserProfileManager()
 
-    SKIP_FIELDS = ('id', 'user', 'media_tag',)
+    SKIP_FIELDS = ('id', 'user', 'media_tag', 'settings')
 
     class Meta:
         abstract = True
