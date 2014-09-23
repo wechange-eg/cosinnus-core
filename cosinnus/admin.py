@@ -5,7 +5,8 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 
-from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
+from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
+    CosinnusSociety, CosinnusProject
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import AttachedObject
 from cosinnus.models.organisation import CosinnusOrganisationMembership,\
@@ -26,13 +27,28 @@ class MembershipInline(admin.StackedInline):
     model = CosinnusGroupMembership
     extra = 0
 
-
+"""
 class CosinnusGroupAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'public',)
     list_filter = ('public',)
     prepopulated_fields = {'slug': ('name', )}
 
 admin.site.register(CosinnusGroup, CosinnusGroupAdmin)
+"""
+
+class CosinnusProjectAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug', 'public',)
+    list_filter = ('public',)
+    prepopulated_fields = {'slug': ('name', )}
+
+admin.site.register(CosinnusProject, CosinnusProjectAdmin)
+
+class CosinnusSocietyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug', 'public',)
+    list_filter = ('public',)
+    prepopulated_fields = {'slug': ('name', )}
+
+admin.site.register(CosinnusSociety, CosinnusSocietyAdmin)
 
 
 # Organisation related admin

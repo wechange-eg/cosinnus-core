@@ -295,9 +295,21 @@ class CosinnusGroupMembershipManager(models.Manager):
 
 @python_2_unicode_compatible
 class CosinnusGroup(models.Model):
+    TYPE_PROJECT = 0
+    TYPE_SOCIETY = 1
+    
+    #: Choices for :attr:`visibility`: ``(int, str)``
+    TYPE_CHOICES = (
+        (TYPE_PROJECT, _('Group')),
+        (TYPE_SOCIETY, _('Society')),
+    )
+    
     name = models.CharField(_('Name'), max_length=100,
         validators=[group_name_validator])
     slug = models.SlugField(_('Slug'), max_length=50, unique=True, blank=True)
+    type = models.PositiveSmallIntegerField(_('Group Type'), blank=False,
+        default=TYPE_PROJECT, choices=TYPE_CHOICES, editable=False)
+    
     description = HTMLField(verbose_name=_('Description'), blank=True)
     avatar = models.ImageField(_("Avatar"), null=True, blank=True,
         upload_to=get_group_avatar_filename)
@@ -409,6 +421,61 @@ class CosinnusGroup(models.Model):
     def get_absolute_url(self):
         return reverse('cosinnus:group-dashboard', kwargs={'group': self.slug})
 
+
+
+class CosinnusProjectManager(CosinnusGroupManager):
+    def get_queryset(self):
+        return CosinnusGroupQS(self.model, using=self._db).filter(type=CosinnusGroup.TYPE_PROJECT)
+
+    get_query_set = get_queryset
+
+
+@python_2_unicode_compatible
+class CosinnusProject(CosinnusGroup):
+    
+    class Meta:
+        proxy = True
+        app_label = 'cosinnus'
+        ordering = ('name',)
+        verbose_name = _('Cosinnus project')
+        verbose_name_plural = _('Cosinnus projects')
+    
+    objects = CosinnusProjectManager()
+    
+    def save(self, *args, **kwargs):
+        self.type = CosinnusGroup.TYPE_PROJECT
+        super(CosinnusProject, self).save(*args, **kwargs)
+        
+    def __str__(self):
+        return self.name
+    
+    
+class CosinnusSocietyManager(CosinnusGroupManager):
+    def get_queryset(self):
+        return CosinnusGroupQS(self.model, using=self._db).filter(type=CosinnusGroup.TYPE_SOCIETY)
+
+    get_query_set = get_queryset
+
+
+@python_2_unicode_compatible
+class CosinnusSociety(CosinnusGroup):
+    
+    class Meta:
+        proxy = True
+        app_label = 'cosinnus'
+        ordering = ('name',)
+        verbose_name = _('Cosinnus society')
+        verbose_name_plural = _('Cosinnus societies')
+    
+    objects = CosinnusSocietyManager()
+    
+    def save(self, *args, **kwargs):
+        self.type = CosinnusGroup.TYPE_SOCIETY
+        super(CosinnusSociety, self).save(*args, **kwargs)
+        
+    def __str__(self):
+        return self.name
+    
 
 @python_2_unicode_compatible
 class CosinnusGroupMembership(models.Model):
