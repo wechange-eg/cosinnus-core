@@ -31,7 +31,7 @@ class _CosinnusGroupForm(forms.ModelForm):
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
     
     class Meta:
-        fields = ('name', 'public', 'description', 'avatar', 'organisation', 'website')
+        fields = ('name', 'public', 'description', 'avatar', 'website')
         model = CosinnusGroup
 
 

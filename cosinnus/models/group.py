@@ -22,7 +22,6 @@ from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.utils.functions import unique_aware_slugify
 from cosinnus.utils.files import get_group_avatar_filename
 from django.core.urlresolvers import reverse
-from cosinnus.models.organisation import CosinnusOrganisation
 
 
 #: Role defining a user has requested to be added to a group
@@ -319,9 +318,6 @@ class CosinnusGroup(models.Model):
         related_name='cosinnus_groups', through='CosinnusGroupMembership')
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
         blank=True, null=True, editable=False, on_delete=models.PROTECT)
-    
-    organisation = models.ForeignKey(CosinnusOrganisation, verbose_name=_('Organisation'),
-        related_name='groups', null=True, blank=True, on_delete=models.SET_NULL)
     
     objects = CosinnusGroupManager()
 

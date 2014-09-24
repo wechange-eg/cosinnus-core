@@ -9,8 +9,6 @@ from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
     CosinnusSociety, CosinnusProject
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import AttachedObject
-from cosinnus.models.organisation import CosinnusOrganisationMembership,\
-    CosinnusOrganisation
 from cosinnus.models.cms import CosinnusMicropage
 
 
@@ -50,27 +48,6 @@ class CosinnusSocietyAdmin(admin.ModelAdmin):
 
 admin.site.register(CosinnusSociety, CosinnusSocietyAdmin)
 
-
-# Organisation related admin
-
-class OrganisationMembershipAdmin(admin.ModelAdmin):
-    list_display = ('organisation', 'user', 'status', 'date',)
-    list_filter = ('organisation', 'user', 'status',)
-
-admin.site.register(CosinnusOrganisationMembership, OrganisationMembershipAdmin)
-
-
-class OrganisationMembershipInline(admin.StackedInline):
-    model = CosinnusOrganisationMembership
-    extra = 0
-
-
-class CosinnusOrganisationAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug',)
-    inlines = (OrganisationMembershipInline,)
-    prepopulated_fields = {'slug': ('name', )}
-
-admin.site.register(CosinnusOrganisation, CosinnusOrganisationAdmin)
 
 
 class CosinnusMicropageAdmin(admin.ModelAdmin):

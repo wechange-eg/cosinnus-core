@@ -18,9 +18,6 @@ def get_avatar_filename(instance, filename):
 def get_group_avatar_filename(instance, filename):
     return _get_avatar_filename(instance, filename, 'group')
 
-def get_organisation_avatar_filename(instance, filename):
-    return _get_avatar_filename(instance, filename, 'organisation')
-
 
 def _get_avatar_filename(instance, filename, folder_type):
     _, ext = path.splitext(filename)
