@@ -7,12 +7,26 @@ from django.utils.importlib import import_module
 
 from cosinnus.conf import settings
 from cosinnus.core.registries.base import DictBaseRegistry
+from django.core.exceptions import ImproperlyConfigured
 
 
 class GroupModelRegistry(DictBaseRegistry):
-
-    def register(self, url_key, plural_url_key, url_name_prefix, model):
+    
+    def _register(self, url_key, plural_url_key, url_name_prefix, model):
         self[url_key] = (plural_url_key, url_name_prefix, model)
+    
+    def register(self, url_key, plural_url_key, url_name_prefix, model):
+        if url_key == plural_url_key:
+            raise ImproperlyConfigured("You tried to register a group model with matching url_key and plural_url_key (%s, %s)!" % (url_key, plural_url_key))
+        for _url_key in self:
+            _plural_url_key, _url_name_prefix, _model = super(GroupModelRegistry, self).get(_url_key, (None, None, None))
+            
+            if _plural_url_key == plural_url_key or _url_key == url_key or \
+                _plural_url_key == url_key or _url_key == plural_url_key:
+                raise ImproperlyConfigured("You tried to register a group model with url_keys (%s, %s) that already existed!" % (url_key, plural_url_key))
+            if _model == model:
+                raise ImproperlyConfigured("You tried to register a group model with a model (%s) that already existed!" % (model))
+        self._register(url_key, plural_url_key, url_name_prefix, model)
     
     def get_default_group_key(self):
         return self.__iter__().next()
@@ -54,7 +68,7 @@ class GroupModelRegistry(DictBaseRegistry):
                 raise ImportError("Cannot import cosinnus renderer %s from %s" % (
                     klass, model))
             else:
-                self.register(url_key, plural_url_key, url_name_prefix, cls)
+                self._register(url_key, plural_url_key, url_name_prefix, cls)
                 return cls
         else:
             return model
