@@ -8,6 +8,8 @@
     {% captureas is_userlist %}True{% endcaptureas %}
 {% elif current_page == "addgroup" %}
     {% captureas is_addgroup %}True{% endcaptureas %}
+    {% elif current_page == "addsociety" %}
+    {% captureas is_addsociety %}True{% endcaptureas %}
 {% endif %}
 
 {% captureas href %}{% url 'cosinnus:group-list' %}{% endcaptureas %}
@@ -23,5 +25,9 @@
 {% if user|can_create_groups %}
     {% captureas href %}{% url 'cosinnus:group-add' %}{% endcaptureas %}
     {% captureas label %}{% trans "Create Group" %}{% endcaptureas %}
-    {% include "cosinnus/leftnav_button.html" with active=is_addgroup icon="fa-plus" label=label href=href  %}
+    {% include "cosinnus/leftnav_button.html" with active=is_addgroup icon="fa-plus" extra_classes="fine-space" label=label href=href  %}
+
+    {% captureas href %}{% url 'cosinnus:group__group-add' %}{% endcaptureas %}
+    {% captureas label %}{% trans "Create Society" %}{% endcaptureas %}
+    {% include "cosinnus/leftnav_button.html" with active=is_addsociety icon="fa-plus" label=label href=href  %}
 {% endif %}

@@ -15,7 +15,7 @@
         {% captureas current_page %}editgroup{% endcaptureas %}
         {% include "cosinnus/group/leftnav_group.html"  with current_page=current_page %}
     {% else %}
-        {% captureas current_page %}addgroup{% endcaptureas %}
+        {% captureas current_page %}{% if group_model == "CosinnusSociety" %}addsociety{% else %}addgroup{% endif %}{% endcaptureas %}
         {% include "cosinnus/group/leftnav_all_groups.html"  with current_page=current_page %}
     {% endif %}
 {% endblock leftnav %}
@@ -41,6 +41,10 @@
         <div class="content-box">
 	        {{ form.forms.obj.non_field_errors }}
 	        {{ form.forms.media_tag.non_field_errors }}
+	        
+	        {% if group_model == "CosinnusSociety" %}
+	        <p>(Note: This is a society, but the strings for Project haven't been modified!)</p>
+	        {% endif %}
 		    
 		    <div type="button" class="btn btn-default w100 large-space">
 		        <ul class="media-list">

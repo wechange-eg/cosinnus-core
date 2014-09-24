@@ -419,8 +419,16 @@ class CosinnusGroup(models.Model):
     
     def get_absolute_url(self):
         return reverse('cosinnus:group-dashboard', kwargs={'group': self.slug})
-
-
+    
+    def get_parent_typed(self):
+        """ This is the only way to make sure to get the real object of a group's parent
+            (determined by its type), and not just a generic CosinnusGroup. """ 
+        if self.parent_id:
+            from cosinnus.core.registries.group_models import group_model_registry
+            parent = self.parent
+            cls = group_model_registry.get_by_type(parent.type)
+            return cls.objects.all().get(id=parent.id)
+        return None
 
 class CosinnusProjectManager(CosinnusGroupManager):
     def get_queryset(self):
@@ -474,6 +482,9 @@ class CosinnusSociety(CosinnusGroup):
         
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse('cosinnus:group__group-dashboard', kwargs={'group': self.slug})
     
 
 @python_2_unicode_compatible

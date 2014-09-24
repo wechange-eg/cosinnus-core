@@ -44,8 +44,11 @@ class CosinnusGroupFormMixin(object):
         
         group_url_key = self.request.path.split('/')[1]
         form_class = group_model_registry.get_form(group_url_key, None)
+        model_class = group_model_registry.get(group_url_key, None)
         if not form_class:
             form_class = group_model_registry.get_form_by_plural_key(group_url_key, None)
+            model_class = group_model_registry.get_by_plural_key(group_url_key, None)
+        self.group_model_class = model_class
         
         class CosinnusGroupForm(get_form(form_class, attachable=False)):
             def dispatch_init_group(self, name, group):
@@ -59,6 +62,11 @@ class CosinnusGroupFormMixin(object):
                 return InvalidArgument
 
         return CosinnusGroupForm
+    
+    def get_context_data(self, **kwargs):
+        context = super(CosinnusGroupFormMixin, self).get_context_data(**kwargs)
+        context['group_model'] = self.group_model_class.__name__
+        return context
     
 
 class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin, 

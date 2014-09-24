@@ -12,10 +12,12 @@ from django.core.exceptions import ImproperlyConfigured
 
 class GroupModelRegistry(DictBaseRegistry):
     
+    group_type_index = {} 
+    
     def _register(self, url_key, plural_url_key, url_name_prefix, model, form_model):
         self[url_key] = (plural_url_key, url_name_prefix, model, form_model)
     
-    def register(self, url_key, plural_url_key, url_name_prefix, model, form_model):
+    def register(self, url_key, plural_url_key, url_name_prefix, model, form_model, type_index):
         if url_key == plural_url_key:
             raise ImproperlyConfigured("You tried to register a group model with matching url_key and plural_url_key (%s, %s)!" % (url_key, plural_url_key))
         for _url_key in self:
@@ -27,7 +29,12 @@ class GroupModelRegistry(DictBaseRegistry):
                 raise ImproperlyConfigured("You tried to register a group model with a model (%s) that already existed!" % (model))
             if _form_model == form_model:
                 raise ImproperlyConfigured("You tried to register a group form model with a model (%s) that already existed!" % (form_model))
+        
+        self.group_type_index[type_index] = url_key
         self._register(url_key, plural_url_key, url_name_prefix, model, form_model)
+    
+    def get_by_type(self, type_index):
+        return self.get(self.group_type_index[type_index], None)
     
     def get_default_group_key(self):
         return self.__iter__().next()
@@ -113,5 +120,5 @@ group_model_registry = GroupModelRegistry()
 
 __all__ = ('group_model_registry', )
 
-group_model_registry.register('project', 'projects', '', 'cosinnus.models.group.CosinnusProject', 'cosinnus.forms.group._CosinnusProjectForm')
-group_model_registry.register('group', 'groups', 'group__', 'cosinnus.models.group.CosinnusSociety', 'cosinnus.forms.group._CosinnusSocietyForm')
+group_model_registry.register('project', 'projects', '', 'cosinnus.models.group.CosinnusProject', 'cosinnus.forms.group._CosinnusProjectForm', 0) # CosinnusGroup.TYPE_PROJECT
+group_model_registry.register('group', 'groups', 'group__', 'cosinnus.models.group.CosinnusSociety', 'cosinnus.forms.group._CosinnusSocietyForm', 1) # CosinnusGroup.TYPE_SOCIETY
