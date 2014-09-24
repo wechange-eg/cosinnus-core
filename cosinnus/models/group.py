@@ -319,6 +319,9 @@ class CosinnusGroup(models.Model):
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
         blank=True, null=True, editable=False, on_delete=models.PROTECT)
     
+    parent = models.ForeignKey("self", verbose_name=_('Parent Group'),
+        related_name='groups', null=True, blank=True, on_delete=models.SET_NULL)
+    
     objects = CosinnusGroupManager()
 
     class Meta:

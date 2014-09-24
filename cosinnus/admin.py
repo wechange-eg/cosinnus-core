@@ -45,6 +45,10 @@ class CosinnusSocietyAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'public',)
     list_filter = ('public',)
     prepopulated_fields = {'slug': ('name', )}
+    
+    def get_form(self, request, obj=None, **kwargs):
+        self.exclude = ("parent", )
+        return super(CosinnusSocietyAdmin, self).get_form(request, obj, **kwargs)
 
 admin.site.register(CosinnusSociety, CosinnusSocietyAdmin)
 
