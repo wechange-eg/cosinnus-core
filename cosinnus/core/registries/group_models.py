@@ -13,7 +13,10 @@ class GroupModelRegistry(DictBaseRegistry):
 
     def register(self, url_key, plural_url_key, url_name_prefix, model):
         self[url_key] = (plural_url_key, url_name_prefix, model)
-
+    
+    def get_default_group_key(self):
+        return self.__iter__().next()
+    
     def get(self, url_key, default=None):
         _, _, model = super(GroupModelRegistry, self).get(url_key, (None, default))
         return self._resolve(url_key, model)
