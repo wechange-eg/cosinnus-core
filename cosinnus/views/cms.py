@@ -17,7 +17,8 @@ from cosinnus.models.group import CosinnusGroup
 from django.http.response import HttpResponseNotFound
 from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.core.registries import widget_registry
-from cosinnus.core.decorators.views import redirect_to_403
+from cosinnus.core.decorators.views import redirect_to_403,\
+    get_group_for_request
 from cosinnus.utils.permissions import check_object_write_access
 from cosinnus.core.registries.attached_objects import attached_object_registry
 from cosinnus.utils.functions import get_cosinnus_app_from_class
@@ -34,9 +35,8 @@ class GroupMicrosite(TemplateView):
         nothing = CosinnusMicropage.objects.none()
         
         group_name = kwargs.get(self.group_url_kwarg, None)
-        try:
-            group = CosinnusGroup.objects.get(slug=group_name)
-        except CosinnusGroup.DoesNotExist:
+        group = get_group_for_request(group_name, request)
+        if not group:
             return HttpResponseNotFound(_("No group found with this name"))
         self.group = group
         return super(GroupMicrosite, self).dispatch(request, *args, **kwargs)
