@@ -54,4 +54,4 @@ group_model_registry = GroupModelRegistry()
 __all__ = ('group_model_registry', )
 
 group_model_registry.register('project', 'projects', '', 'cosinnus.models.group.CosinnusProject')
-group_model_registry.register('xxx', 'xxxs', 'xxx__', 'cosinnus.models.group.CosinnusSociety')
+group_model_registry.register('group', 'groups', 'group__', 'cosinnus.models.group.CosinnusSociety')
