@@ -393,13 +393,13 @@ class CosinnusGroup(models.Model):
     @classmethod
     def _clear_cache(self, slug=None, slugs=None):
         keys = [
-            self.objects._GROUPS_SLUG_CACHE_KEY,
-            self.objects._GROUPS_PK_CACHE_KEY,
+            self.objects._GROUPS_SLUG_CACHE_KEY % self.objects.__class__.__name__,
+            self.objects._GROUPS_PK_CACHE_KEY % self.objects.__class__.__name__,
         ]
         if slug:
-            keys.append(self.objects._GROUP_CACHE_KEY % (self.__class__.__name__, slug))
+            keys.append(self.objects._GROUP_CACHE_KEY % (self.objects.__class__.__name__, slug))
         if slugs:
-            keys.extend([self.objects._GROUP_CACHE_KEY % (self.__class__.__name__, s) for s in slugs])
+            keys.extend([self.objects._GROUP_CACHE_KEY % (self.objects.__class__.__name__, s) for s in slugs])
         cache.delete_many(keys)
         if isinstance(self, CosinnusGroup):
             self._clear_local_cache()
