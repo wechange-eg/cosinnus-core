@@ -47,7 +47,7 @@ def check_object_read_access(obj, user):
             or the group is public.
     """
     # check what kind of object was supplied (CosinnusGroup or BaseTaggableObject)
-    if type(obj) is CosinnusGroup:
+    if type(obj) is CosinnusGroup or issubclass(obj.__class__, CosinnusGroup):
         group = obj
         is_member = check_ug_membership(user, group)
         is_admin = check_ug_admin(user, group)
@@ -87,7 +87,7 @@ def check_object_write_access(obj, user):
         
     """
     # check what kind of object was supplied (CosinnusGroup or BaseTaggableObject)
-    if type(obj) is CosinnusGroup:
+    if type(obj) is CosinnusGroup or issubclass(obj.__class__, CosinnusGroup):
         is_admin = check_ug_admin(user, obj)
         return is_admin or user.is_superuser or user.is_staff
     elif issubclass(obj.__class__, BaseTaggableObjectModel):

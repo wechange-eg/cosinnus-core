@@ -18,15 +18,15 @@ class GroupModelRegistry(DictBaseRegistry):
         return self.__iter__().next()
     
     def get(self, url_key, default=None):
-        _, _, model = super(GroupModelRegistry, self).get(url_key, (None, default))
-        return self._resolve(url_key, model)
+        plural_url_key, url_name_prefix, model = super(GroupModelRegistry, self).get(url_key, (None, None, default))
+        return self._resolve(url_key, plural_url_key, url_name_prefix, model)
     
     def get_url_name_prefix(self, url_key, default=None):
-        _, prefix, _ = super(GroupModelRegistry, self).get(url_key, (None, default))
+        _, prefix, _ = super(GroupModelRegistry, self).get(url_key, (None, default, None))
         return prefix
     
     def get_plural_url_key(self, url_key, default=None):
-        plural_url_key, _, _ = super(GroupModelRegistry, self).get(url_key, (default, None))
+        plural_url_key, _, _ = super(GroupModelRegistry, self).get(url_key, (default, None, None))
         return plural_url_key
     
     """
@@ -36,7 +36,7 @@ class GroupModelRegistry(DictBaseRegistry):
                 yield m
     """
     
-    def _resolve(self, url_key, model):
+    def _resolve(self, url_key, plural_url_key, url_name_prefix, model):
         if isinstance(model, six.string_types):
             modulename, _, klass = model.rpartition('.')
             module = import_module(modulename)
@@ -46,7 +46,7 @@ class GroupModelRegistry(DictBaseRegistry):
                 raise ImportError("Cannot import cosinnus renderer %s from %s" % (
                     klass, model))
             else:
-                self.register(url_key, cls)
+                self.register(url_key, plural_url_key, url_name_prefix, cls)
                 return cls
         else:
             return model
