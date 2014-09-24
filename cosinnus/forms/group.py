@@ -8,6 +8,7 @@ from multiform import InvalidArgument
 
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_MEMBER)
+from django.forms.util import ErrorList
 
 
 class GroupKwargModelFormMixin(object):
@@ -33,8 +34,14 @@ class _CosinnusGroupForm(forms.ModelForm):
     class Meta:
         fields = ('name', 'public', 'description', 'avatar', 'parent', 'website')
         model = CosinnusGroup
-
-
+    
+    def __init__(self, instance, *args, **kwargs):    
+        super(_CosinnusGroupForm, self).__init__(instance=instance, *args, **kwargs)
+        
+        if instance and instance.type != CosinnusGroup.TYPE_PROJECT:
+            del self.fields['parent']
+            
+            
 from cosinnus.forms.tagged import get_form  # circular import
 
 

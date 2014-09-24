@@ -163,7 +163,8 @@
 		                
                         {% include "cosinnus/media_tags_group.html" %} 
                         
-                        <label>{% trans "Which Organisation does the group belong to?" %}</label>
+                        {% if form.forms.obj.parent %}
+                        <label>{% trans "Which Society does the group belong to?" %}</label>
                         <div type="button" class="btn btn-default w100">
                             <ul class="media-list">
                                 <li class="media">
@@ -171,13 +172,14 @@
                                         <i class="fa fa-globe"></i>
                                     </a>
                                     <div class="media-body">
-                                        {{ form.forms.obj.organisation.errors }}
-						                {% captureas placeholder %}{% trans "Select Organisation" %}{% endcaptureas %}
-						                {% render_field form.forms.obj.organisation class+="form-control w100" placeholder=placeholder %}
+                                        {{ form.forms.obj.parent.errors }}
+						                {% captureas placeholder %}{% trans "Select Society" %}{% endcaptureas %}
+						                {% render_field form.forms.obj.parent class+="form-control w100" placeholder=placeholder %}
                                     </div>
                                 </li>
                             </ul>
                         </div>
+                        {% endif %}
 		
 		                <label>{% trans "Group Privacy" %}</label>
 		                <div type="button" class="btn btn-default w100">
