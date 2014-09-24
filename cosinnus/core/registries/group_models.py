@@ -21,6 +21,14 @@ class GroupModelRegistry(DictBaseRegistry):
         plural_url_key, url_name_prefix, model = super(GroupModelRegistry, self).get(url_key, (None, None, default))
         return self._resolve(url_key, plural_url_key, url_name_prefix, model)
     
+    def get_by_plural_key(self, plural_url_key, default=None):
+        for url_key in self:
+            _plural_url_key, url_name_prefix, model = super(GroupModelRegistry, self).get(url_key, (None, None, default))
+            if _plural_url_key == plural_url_key:
+                return self._resolve(url_key, plural_url_key, url_name_prefix, model)
+        return default
+    
+    
     def get_url_name_prefix(self, url_key, default=None):
         _, prefix, _ = super(GroupModelRegistry, self).get(url_key, (None, default, None))
         return prefix

@@ -43,11 +43,6 @@ MEMBERSHIP_STATUSES = (
 #: A user is a member of a group if either is an explicit member or admin
 MEMBER_STATUS = (MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN,)
 
-
-_GROUPS_SLUG_CACHE_KEY = 'cosinnus/core/groups/slugs'
-_GROUPS_PK_CACHE_KEY = 'cosinnus/core/groups/pks'
-_GROUP_CACHE_KEY = 'cosinnus/core/group/%s'
-
 _MEMBERSHIP_ADMINS_KEY = 'cosinnus/core/membership/admins/%d'
 _MEMBERSHIP_MEMBERS_KEY = 'cosinnus/core/membership/members/%d'
 _MEMBERSHIP_PENDINGS_KEY = 'cosinnus/core/membership/pendings/%d'
@@ -88,6 +83,11 @@ class CosinnusGroupMembershipQS(models.query.QuerySet):
 
 
 class CosinnusGroupManager(models.Manager):
+    
+    _GROUPS_SLUG_CACHE_KEY = 'cosinnus/core/%s/slugs'
+    _GROUPS_PK_CACHE_KEY = 'cosinnus/core/%s/pks'
+    _GROUP_CACHE_KEY = 'cosinnus/core/%s/%s'
+
 
     use_for_related_fields = True
 
@@ -107,13 +107,13 @@ class CosinnusGroupManager(models.Manager):
         :returns: A :class:`OrderedDict` with a `slug => pk` mapping of all
             groups
         """
-        slugs = cache.get(_GROUPS_SLUG_CACHE_KEY)
+        slugs = cache.get(self._GROUPS_SLUG_CACHE_KEY % self.__class__.__name__)
         if slugs is None:
             slugs = OrderedDict(self.values_list('slug', 'id').all())
             pks = OrderedDict((v, k) for k, v in six.iteritems(slugs))
-            cache.set(_GROUPS_SLUG_CACHE_KEY, slugs,
+            cache.set(self._GROUPS_SLUG_CACHE_KEY % self.__class__.__name__, slugs,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
-            cache.set(_GROUPS_PK_CACHE_KEY, pks,
+            cache.set(self._GROUPS_PK_CACHE_KEY % self.__class__.__name__, pks,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
         return slugs
 
@@ -125,13 +125,13 @@ class CosinnusGroupManager(models.Manager):
         :returns: A :class:`OrderedDict` with a `pk => slug` mapping of all
             groups
         """
-        pks = cache.get(_GROUPS_PK_CACHE_KEY)
+        pks = cache.get(self._GROUPS_PK_CACHE_KEY % self.__class__.__name__)
         if pks is None:
             pks = OrderedDict(self.values_list('id', 'slug').all())
             slugs = OrderedDict((v, k) for k, v in six.iteritems(pks))
-            cache.set(_GROUPS_PK_CACHE_KEY, pks,
+            cache.set(self._GROUPS_PK_CACHE_KEY % self.__class__.__name__, pks,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
-            cache.set(_GROUPS_SLUG_CACHE_KEY, slugs,
+            cache.set(self._GROUPS_SLUG_CACHE_KEY % self.__class__.__name__, slugs,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
         return pks
 
@@ -152,20 +152,20 @@ class CosinnusGroupManager(models.Manager):
         assert not (slugs and pks)
         if (slugs is None) and (pks is None):
             slugs = list(self.get_slugs().keys())
-
+            
         if slugs is not None:
             if isinstance(slugs, six.string_types):
                 # We request a single group
                 slug = slugs
-                group = cache.get(_GROUP_CACHE_KEY % slug)
+                group = cache.get(self._GROUP_CACHE_KEY % (self.__class__.__name__, slug))
                 if group is None:
                     group = super(CosinnusGroupManager, self).get(slug=slug)
-                    cache.set(_GROUP_CACHE_KEY % group.slug, group,
+                    cache.set(self._GROUP_CACHE_KEY % (self.__class__.__name__, group.slug), group,
                         settings.COSINNUS_GROUP_CACHE_TIMEOUT)
                 return group
             else:
                 # We request multiple groups by slugs
-                keys = [_GROUP_CACHE_KEY % s for s in slugs]
+                keys = [self._GROUP_CACHE_KEY % (self.__class__.__name__, s) for s in slugs]
                 groups = cache.get_many(keys)
                 missing = [key.split('/')[-1] for key in keys if key not in groups]
                 if missing:
@@ -174,7 +174,7 @@ class CosinnusGroupManager(models.Manager):
                         query = query.select_related('media_tag')
                     
                     for group in query:
-                        groups[_GROUP_CACHE_KEY % group.slug] = group
+                        groups[self._GROUP_CACHE_KEY % (self.__class__.__name__, group.slug)] = group
                     cache.set_many(groups, settings.COSINNUS_GROUP_CACHE_TIMEOUT)
                 return sorted(groups.values(), key=lambda x: x.name)
         elif pks is not None:
@@ -394,13 +394,13 @@ class CosinnusGroup(models.Model):
     @classmethod
     def _clear_cache(self, slug=None, slugs=None):
         keys = [
-            _GROUPS_SLUG_CACHE_KEY,
-            _GROUPS_PK_CACHE_KEY,
+            self._GROUPS_SLUG_CACHE_KEY,
+            self._GROUPS_PK_CACHE_KEY,
         ]
         if slug:
-            keys.append(_GROUP_CACHE_KEY % slug)
+            keys.append(self._GROUP_CACHE_KEY % (self.__class__.__name__, slug))
         if slugs:
-            keys.extend([_GROUP_CACHE_KEY % s for s in slugs])
+            keys.extend([self._GROUP_CACHE_KEY % (self.__class__.__name__, s) for s in slugs])
         cache.delete_many(keys)
         if isinstance(self, CosinnusGroup):
             self._clear_local_cache()

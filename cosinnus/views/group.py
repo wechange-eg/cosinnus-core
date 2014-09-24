@@ -30,6 +30,7 @@ from cosinnus.views.mixins.user import UserFormKwargsMixin
 
 from cosinnus.views.mixins.avatar import AvatarFormMixin
 from cosinnus.core import signals
+from cosinnus.core.registries.group_models import group_model_registry
 
 class GroupCreateView(AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin, 
                       CreateView):
@@ -129,10 +130,14 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
     serializer_class = GroupSimpleSerializer
 
     def get_queryset(self):
+        group_plural_url_key = self.request.path.split('/')[1]
+        group_class = group_model_registry.get_by_plural_key(group_plural_url_key, None)
+        
+        model = group_class or self.model
         if self.request.user.is_authenticated():
-            return self.model.objects.get_cached()
+            return model.objects.get_cached()
         else:
-            return list(self.model.objects.public())
+            return list(model.objects.public())
 
     def get_context_data(self, **kwargs):
         ctx = super(GroupListView, self).get_context_data(**kwargs)
