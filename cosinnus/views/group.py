@@ -42,22 +42,10 @@ class CosinnusGroupFormMixin(object):
     
     def get_form_class(self):
         
-        group_plural_url_key = self.request.path.split('/')[1]
-        group_class = group_model_registry.get_by_plural_key(group_plural_url_key, None)
-        
-        if not group_class:
-            group_url_key = self.request.path.split('/')[1]
-            group_class = group_model_registry.get(group_url_key, None)
-        
-        form_class = None
-        
-        """ FIXME: this form_class is currently hard_coded but should really come from the group_model_registry """
-        print ">> groupclass", group_class
-        if group_class == CosinnusSociety:
-            form_class = _CosinnusSocietyForm
-        else:
-            form_class = _CosinnusProjectForm
-        
+        group_url_key = self.request.path.split('/')[1]
+        form_class = group_model_registry.get_form(group_url_key, None)
+        if not form_class:
+            form_class = group_model_registry.get_form_by_plural_key(group_url_key, None)
         
         class CosinnusGroupForm(get_form(form_class, attachable=False)):
             def dispatch_init_group(self, name, group):
