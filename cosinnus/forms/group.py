@@ -7,8 +7,9 @@ from awesome_avatar import forms as avatar_forms
 from multiform import InvalidArgument
 
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
-    MEMBERSHIP_MEMBER)
+    MEMBERSHIP_MEMBER, CosinnusProject, CosinnusSociety)
 from django.forms.util import ErrorList
+from cosinnus.core.registries.group_models import group_model_registry
 
 
 class GroupKwargModelFormMixin(object):
@@ -27,35 +28,23 @@ class GroupKwargModelFormMixin(object):
             self.instance.group_id = self.group.id
 
 
-class _CosinnusGroupForm(forms.ModelForm):
+class _CosinnusProjectForm(forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
     
     class Meta:
         fields = ('name', 'public', 'description', 'avatar', 'parent', 'website')
-        model = CosinnusGroup
+        model = CosinnusProject
     
-    def __init__(self, instance, *args, **kwargs):    
-        super(_CosinnusGroupForm, self).__init__(instance=instance, *args, **kwargs)
-        
-        if instance and instance.type != CosinnusGroup.TYPE_PROJECT:
-            del self.fields['parent']
-            
-            
-from cosinnus.forms.tagged import get_form  # circular import
 
-
-class CosinnusGroupForm(get_form(_CosinnusGroupForm, attachable=False)):
-
-    def dispatch_init_group(self, name, group):
-        if name == 'media_tag':
-            return group
-        return InvalidArgument
-
-    def dispatch_init_user(self, name, user):
-        if name == 'media_tag':
-            return user
-        return InvalidArgument
+class _CosinnusSocietyForm(forms.ModelForm):
+    
+    avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
+    
+    class Meta:
+        fields = ('name', 'public', 'description', 'avatar', 'website')
+        model = CosinnusSociety
+    
 
 
 class MembershipForm(GroupKwargModelFormMixin, forms.ModelForm):

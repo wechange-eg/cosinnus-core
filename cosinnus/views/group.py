@@ -16,7 +16,8 @@ from django.views.generic import (CreateView, DeleteView, DetailView,
 from cosinnus.core.decorators.views import superuser_required,\
     membership_required
 from cosinnus.core.registries import app_registry
-from cosinnus.forms.group import CosinnusGroupForm, MembershipForm
+from cosinnus.forms.group import MembershipForm, _CosinnusSocietyForm,\
+    _CosinnusProjectForm
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, CosinnusProject,
     CosinnusSociety)
@@ -31,11 +32,53 @@ from cosinnus.views.mixins.user import UserFormKwargsMixin
 from cosinnus.views.mixins.avatar import AvatarFormMixin
 from cosinnus.core import signals
 from cosinnus.core.registries.group_models import group_model_registry
+from multiform.forms import InvalidArgument
 
-class GroupCreateView(AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin, 
+from cosinnus.forms.tagged import get_form  # circular import
+
+
+
+class CosinnusGroupFormMixin(object):
+    
+    def get_form_class(self):
+        
+        group_plural_url_key = self.request.path.split('/')[1]
+        group_class = group_model_registry.get_by_plural_key(group_plural_url_key, None)
+        
+        if not group_class:
+            group_url_key = self.request.path.split('/')[1]
+            group_class = group_model_registry.get(group_url_key, None)
+        
+        form_class = None
+        
+        """ FIXME: this form_class is currently hard_coded but should really come from the group_model_registry """
+        print ">> groupclass", group_class
+        if group_class == CosinnusSociety:
+            form_class = _CosinnusSocietyForm
+        else:
+            form_class = _CosinnusProjectForm
+        
+        
+        class CosinnusGroupForm(get_form(form_class, attachable=False)):
+            def dispatch_init_group(self, name, group):
+                if name == 'media_tag':
+                    return group
+                return InvalidArgument
+            
+            def dispatch_init_user(self, name, user):
+                if name == 'media_tag':
+                    return user
+                return InvalidArgument
+
+        return CosinnusGroupForm
+    
+
+class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin, 
                       CreateView):
 
-    form_class = CosinnusGroupForm
+    #form_class = 
+    # Note: Form_class is set dynamically in CosinnusGroupFormMixin.get_form(), depending on what group model we have!
+
     model = CosinnusGroup
     template_name = 'cosinnus/group/group_form.html'
     
@@ -189,10 +232,12 @@ class GroupMapListView(GroupListView):
 
 group_list_map = GroupMapListView.as_view()
 
-class GroupUpdateView(AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
+class GroupUpdateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
                       RequireAdminMixin, UpdateView):
 
-    form_class = CosinnusGroupForm
+    #form_class = 
+    # Note: Form_class is set dynamically in CosinnusGroupFormMixin.get_form(), depending on what group model we have!
+
     model = CosinnusGroup
     template_name = 'cosinnus/group/group_form.html'
     
