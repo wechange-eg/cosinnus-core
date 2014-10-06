@@ -22,6 +22,7 @@ from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.utils.functions import unique_aware_slugify
 from cosinnus.utils.files import get_group_avatar_filename
 from django.core.urlresolvers import reverse
+from django.utils.functional import cached_property
 
 
 #: Role defining a user has requested to be added to a group
@@ -420,6 +421,7 @@ class CosinnusGroup(models.Model):
     def get_absolute_url(self):
         return reverse('cosinnus:group-dashboard', kwargs={'group': self.slug})
     
+    @cached_property
     def get_parent_typed(self):
         """ This is the only way to make sure to get the real object of a group's parent
             (determined by its type), and not just a generic CosinnusGroup. """ 
