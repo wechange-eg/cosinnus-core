@@ -11,6 +11,39 @@ from django.core.exceptions import ImproperlyConfigured
 
 
 class GroupModelRegistry(DictBaseRegistry):
+    """
+        Registry for different Group models extending CosinnusGroup.
+        These models are different types of Groups that all have the common functionality
+        to house group-specific cosinnus apps and group BaseTaggableObject items together.
+        
+        Using this you can register for example a basic Project that can contain items, 
+        as well as a MemberGroup for just a few members or an Organization for lots of members.
+        Each of these types of Group will have their own URLs with their specific URL fragment
+        preceeding them to seperate them. 
+        
+        Also, all defined URL names for URL matching are prefixed with their registered prefix 
+        so it is possible to target a specific group type using a URL. This happens in the 
+        Cosinnus URL registry based on the CosinnusGroup types registered with group_model_registry.
+        
+        # Example:
+        We register two CosinnusGroup types:
+            - A Project with url-fragment 'project', plural fragment 'projects' and prefix ''
+            - A Group with url-fragemnt 'group', plural fragment 'groups' and prefix 'group__'
+        
+        To point to the overview page of a group you would then form a URL using its prefix in the URL name.
+            - {% url 'cosinnus:group__group-list-map' %} 
+            - (will lead to http://localhost:8000/groups/)
+        instead of for a project (because of the '' prefix)
+            - {% url 'cosinnus:group-list-map' %}
+            - (will lead to http://localhost:8000/projects/)
+        
+        To point to a page within any CosinnusGroup, no matter its type, use the cosinnus_tag 'group_url':
+            - {% group_url 'cosinnus:group-dashboard' group=group.slug as group_url %}
+            - will lead to either http://localhost:8000/group/<group_slug>/microsite/ or
+                http://localhost:8000/project/<group_slug>/microsite/, depending on which type of group
+                the group with the passed slug is.
+    """
+    
     
     group_type_index = {} 
     
@@ -124,5 +157,7 @@ group_model_registry = GroupModelRegistry()
 
 __all__ = ('group_model_registry', )
 
+# schema for registering a new group model and its URL paths:
+#group_model_registry.register(<group-url-fragment>, '<plural-url-fragment>', '<django url-name-prefix>', '<str group model name>', '<str group form>', <int group type>)
 group_model_registry.register('project', 'projects', '', 'cosinnus.models.group.CosinnusProject', 'cosinnus.forms.group._CosinnusProjectForm', 0) # CosinnusGroup.TYPE_PROJECT
 group_model_registry.register('group', 'groups', 'group__', 'cosinnus.models.group.CosinnusSociety', 'cosinnus.forms.group._CosinnusSocietyForm', 1) # CosinnusGroup.TYPE_SOCIETY
