@@ -84,9 +84,11 @@ class CosinnusGroupMembershipQS(models.query.QuerySet):
 
 class CosinnusGroupManager(models.Manager):
     
-    _GROUPS_SLUG_CACHE_KEY = 'cosinnus/core/%s/slugs'
-    _GROUPS_PK_CACHE_KEY = 'cosinnus/core/%s/pks'
-    _GROUP_CACHE_KEY = 'cosinnus/core/%s/%s'
+    _GROUPS_SLUG_CACHE_KEY = 'cosinnus/core/group/%s/slugs'
+    _GROUPS_PK_CACHE_KEY = 'cosinnus/core/group/%s/pks'
+    _GROUP_CACHE_KEY = 'cosinnus/core/group/%s/%s'
+    
+    _GROUP_SLUG_TYPE_CACHE_KEY = 'cosinnus/core/group_slug_type/%s'
 
 
     use_for_related_fields = True

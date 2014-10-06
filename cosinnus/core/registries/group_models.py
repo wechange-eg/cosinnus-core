@@ -66,6 +66,10 @@ class GroupModelRegistry(DictBaseRegistry):
         _, prefix, _, _ = super(GroupModelRegistry, self).get(url_key, (None, default, None, None))
         return prefix
     
+    def get_url_name_prefix_by_type(self, group_type, default=None):
+        _, prefix, _, _ = super(GroupModelRegistry, self).get(self.group_type_index[group_type], (None, default, None, None))
+        return prefix
+    
     def get_plural_url_key(self, url_key, default=None):
         plural_url_key, _, _, _ = super(GroupModelRegistry, self).get(url_key, (default, None, None, None))
         return plural_url_key
