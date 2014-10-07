@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.conf.urls import url
 
 from cosinnus.conf import settings
-from cosinnus.utils.urls import api_patterns
+from cosinnus.utils.url_patterns import api_patterns
 from cosinnus.core.registries.group_models import group_model_registry
 
 
