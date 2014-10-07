@@ -519,9 +519,6 @@ def group_aware_url_name(view_name, group_slug):
         
         @return: A modified URL view name
     """
-    
-    print ">> viewname before", view_name, group_slug
-    
     # retrieve group type cached
     group_type = cache.get(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % group_slug)
     if group_type is None:
@@ -535,9 +532,7 @@ def group_aware_url_name(view_name, group_slug):
         view_name = (":%s" % prefix).join(view_name.rsplit(":", 1))
     else:
         view_name = prefix + view_name
-
     
-    print ">> viewname after", view_name, group_slug
     return view_name
 
 
