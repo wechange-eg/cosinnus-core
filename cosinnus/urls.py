@@ -31,8 +31,6 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^widget/(?P<id>\d+)/edit/$', 'widget.widget_edit', name='widget-edit'),
     url(r'^widget/(?P<id>\d+)/edit/(?P<app_name>[^/]+)/(?P<widget_name>[^/]+)/$', 'widget.widget_edit', name='widget-edit-swap'),
 
-    url(r'^attachmentselect/(?P<group>[^/]+)/(?P<model>[^/]+)$', 'attached_object.attachable_object_select2_view', name='attached_object_select2_view'),
-
     url(r'^search/$', 'search.search', name='search'),
 
     url(r'^select2/', include('cosinnus.urls_select2', namespace='select2')),
@@ -64,6 +62,8 @@ for url_key in group_model_registry:
     
         url(r'^widgets/add/%s/(?P<group>[^/]+)/$' % url_key, 'widget.widget_add_group', name=prefix+'widget-add-group-empty'),
         url(r'^widgets/add/%s/(?P<group>[^/]+)/(?P<app_name>[^/]+)/(?P<widget_name>[^/]+)/$' % url_key, 'widget.widget_add_group', name=prefix+'widget-add-group'),
+        
+        url(r'^%s/(?P<group>[^/]+)/attachmentselect/(?P<model>[^/]+)$' % url_key, 'attached_object.attachable_object_select2_view', name=prefix+'attached_object_select2_view'),
     )
 
 urlpatterns += url_registry.urlpatterns
