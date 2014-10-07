@@ -5,7 +5,7 @@
 	{% if object %}
 	   {% blocktrans with group_name=object.name %}Edit group “{{ group_name }}”{% endblocktrans %}
 	{% else %}
-	   {% trans "Create Group" %}
+	   {% if group_model == "CosinnusSociety" %}{% trans "Create Society" %}{% else %}{% trans "Create Group" %}{% endif %}
     {% endif %}
 {% endblock %}
 
@@ -24,9 +24,9 @@
 {% block breadcrumb %}
         {{ block.super }}
         {% if object %}
-            <li class="active">{% trans "Edit Group" %}</li>
+            <li class="active">{% if group_model == "CosinnusSociety" %}{% trans "Edit Society" %}{% else %}{% trans "Edit Group" %}{% endif %}</li>
         {% else %}
-            <li class="active">{% trans "Create Group" %}</li>
+            <li class="active">{% if group_model == "CosinnusSociety" %}{% trans "Create Society" %}{% else %}{% trans "Create Group" %}{% endif %}</li>
         {% endif %}
 {% endblock %}
 
@@ -42,10 +42,6 @@
 	        {{ form.forms.obj.non_field_errors }}
 	        {{ form.forms.media_tag.non_field_errors }}
 	        
-	        {% if object.type == 1 %}
-	        <p>(Note: This is a society, but the strings for Project haven't been modified!)</p>
-	        {% endif %}
-		    
 		    <div type="button" class="btn btn-default w100 large-space">
 		        <ul class="media-list">
 		            <li class="media">
@@ -58,7 +54,7 @@
 		                </a>
 		                <div class="media-body">
 		                    {{ form.forms.obj.name.errors }}
-	                        {% captureas placeholder %}{% trans "Enter a name for the group." %}{% endcaptureas %}
+	                        {% captureas placeholder %}{% if group_model == "CosinnusSociety" %}{% trans "Enter a name for the society." %}{% else %}{% trans "Enter a name for the group." %}{% endif %}{% endcaptureas %}
 	                        {% render_field form.forms.obj.name class+="form-control" placeholder=placeholder %}
 		                </div>
 		            </li>
@@ -66,7 +62,7 @@
 		    </div>
 		
 		    <fieldset>
-		        <legend>{% trans "Group avatar" %}</legend>
+		        <legend>{% trans "Avatar" %}</legend>
 		
 		        <!-- On large screens the long explanation texts are on the right side next to the input elements -->
 		        <div class="row">
@@ -83,7 +79,7 @@
                                 <div id="id_avatar-preview" class="awesome-avatar-preview" style="{{ preview_style }}">
                                     {% include "cosinnus/group/group_avatar_image.html" with group=object extra_style=preview_style %}
                                 </div>
-                                <div id="avatar_deletion_notice" class="hidden"><p>{% trans "Group avatar will be deleted once you save." %}</p></div>
+                                <div id="avatar_deletion_notice" class="hidden"><p>{% trans "Avatar will be deleted once you save." %}</p></div>
                             </div>
 
 
@@ -121,20 +117,20 @@
 		        
 		            <!-- explanation text -->
 		            <div class="col-md-4">
-		                <p class="transparent">{% trans "A picture that helps recognize the group." %}</p>
+		                <p class="transparent">{% trans "A picture for better recognition." %}</p>
 		            </div>
 		        </div><!-- row -->
 		    </fieldset>
 		
 		
 		    <fieldset>
-		        <legend>{% trans "About the group" %}</legend>
+		        <legend>{% trans "Description and Infos" %}</legend>
 		
 		        <!-- On large screens the long explanation texts are on the right side next to the input elements -->
 		        <div class="row">
 		            <div class="col-md-8 regular-space">
 		                
-                        <label>{% trans "Describe the group in a few sentences." %}</label>
+                        <label>{% if group_model == "CosinnusSociety" %}{% trans "Describe the society in a few sentences." %}{% else %}{% trans "Describe the group in a few sentences." %}{% endif %}</label>
                         {{ form.forms.obj.description.errors }}
                         <div type="button" class="btn btn-default w100 regular-space">
                             <ul class="media-list">
@@ -207,8 +203,8 @@
 		            
 		            </div><!-- col -->
 		            <div class="col-md-4">
-		                <p class="transparent"><strong>{% trans "Group description" %}</strong></p>
-		                <p class="transparent">{% trans "Describe the group, its activities and goals" %}</p>
+		                <p class="transparent"><strong>{% trans "Description" %}</strong></p>
+		                <p class="transparent">{% trans "Describe your activities and goals" %}</p>
 		            </div><!-- col -->
 		        </div><!-- row -->
 	

@@ -1,7 +1,9 @@
 {% load i18n cosinnus_tags %}
-
-
-    <li><a href="{% url 'cosinnus:group-list' %}">{% trans "Group overview" %}</a></li>
+    {% if group and group.type == 1 or group_model == "CosinnusSociety" %}
+        <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "Group overview" context "society" %}</a></li>
+    {% else %}
+        <li><a href="{% url 'cosinnus:group-list' %}">{% trans "Group overview" context "group" %}</a></li>
+    {% endif %}
 {% if group %}
     <li><a href="{% group_url 'cosinnus:group-dashboard' group=group.slug %}">{{ group.name }}</a></li>
 {% endif %}

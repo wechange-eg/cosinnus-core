@@ -32,7 +32,7 @@
 	                        <div class="media-body">
 	                            <select name="user" class="user-selector form-control next-button-is-for-sending" data-placeholder="{% trans 'Gib den Namen für ein neues Mitglied ein.' %}">
 	                                <option></option>
-	                                <option value="" default disabled selected>{% trans 'Add a user to this group' %}</option>
+	                                <option value="" default disabled selected>{% trans 'Add a member' %}</option>
 	                                {% for candidate in non_members %}
 	                                   <option value="{{ candidate.pk }}">{{ candidate|full_name }}</option>
 	                                {% endfor %}
