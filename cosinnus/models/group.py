@@ -494,9 +494,6 @@ class CosinnusSociety(CosinnusGroup):
     def __str__(self):
         return self.name
     
-    def get_absolute_url(self):
-        return group_aware_reverse('cosinnus:group__group-dashboard', kwargs={'group': self.slug})
-    
 
 @python_2_unicode_compatible
 class CosinnusGroupMembership(models.Model):
