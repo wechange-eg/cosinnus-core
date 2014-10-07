@@ -19,6 +19,7 @@ from tinymce.models import HTMLField
 from cosinnus.conf import settings
 from cosinnus.utils.files import get_avatar_filename
 from cosinnus.models.group import CosinnusGroup
+from cosinnus.utils.urls import group_aware_reverse
 
 
 class BaseUserProfileManager(models.Manager):
@@ -97,7 +98,7 @@ class BaseUserProfile(models.Model):
         super(BaseUserProfile, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('cosinnus:profile-detail', kwargs={'username': self.user.username})
+        return group_aware_reverse('cosinnus:profile-detail', kwargs={'username': self.user.username})
 
     @classmethod
     def get_optional_fieldnames(cls):

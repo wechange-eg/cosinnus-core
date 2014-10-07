@@ -35,6 +35,7 @@ from cosinnus.core.registries.group_models import group_model_registry
 from multiform.forms import InvalidArgument
 
 from cosinnus.forms.tagged import get_form  # circular import
+from cosinnus.utils.urls import group_aware_reverse
 
 
 
@@ -103,7 +104,7 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
         return kwargs
 
     def get_success_url(self):
-        return reverse('cosinnus:group-detail', kwargs={'group': self.object.slug})
+        return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.object.slug})
 
 group_create = GroupCreateView.as_view()
 group_create_api = GroupCreateView.as_view(is_ajax_request_url=True)
@@ -259,7 +260,7 @@ class GroupUpdateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
         return super(GroupUpdateView, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse('cosinnus:group-detail', kwargs={'group': self.group.slug})
+        return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.group.slug})
 
 group_update = GroupUpdateView.as_view()
 group_update_api = GroupUpdateView.as_view(is_ajax_request_url=True)
@@ -466,7 +467,7 @@ class UserSelectMixin(object):
         return self.model.objects.filter(group=self.group)
 
     def get_success_url(self):
-        return reverse('cosinnus:group-detail', kwargs={'group': self.group.slug})
+        return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.group.slug})
 
 
 class GroupUserAddView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
@@ -583,7 +584,7 @@ class GroupExportView(RequireAdminMixin, TemplateView):
         export_apps = []
         for app, name, label in app_registry.items():
             try:
-                url = reverse('cosinnus:%s:export' % name,
+                url = group_aware_reverse('cosinnus:%s:export' % name,
                               kwargs={'group': self.group.slug})
             except NoReverseMatch:
                 continue

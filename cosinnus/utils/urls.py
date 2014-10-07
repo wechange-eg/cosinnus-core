@@ -54,12 +54,13 @@ def api_patterns(version, app=None, add_groups=False, prefix='', *args):
         return [APIRegexURLResolver(version, pattern_list, app=app, url_group_key=None,
                                 add_groups=add_groups) ]
         
-_group_aware_url_name = [] # late import because we cannot reference CosinnusGroup models here yet
+_group_aware_url_name = object() # late import because we cannot reference CosinnusGroup models here yet
 def group_aware_reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=None, current_app=None):
     if 'group' in kwargs:
-        if not _group_aware_url_name:
-            _group_aware_url_name.append(import_module('cosinnus.templatetags.cosinnus_tags').group_aware_url_name)
+        global _group_aware_url_name
+        if not hasattr(_group_aware_url_name, '__call__'):
+            _group_aware_url_name = import_module('cosinnus.templatetags.cosinnus_tags').group_aware_url_name
         
-        viewname = _group_aware_url_name[0](viewname, kwargs['group'])
+        viewname = _group_aware_url_name(viewname, kwargs['group'])
     return reverse(viewname, urlconf, args, kwargs, prefix, current_app)
         

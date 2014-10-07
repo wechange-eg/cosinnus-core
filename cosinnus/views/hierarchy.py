@@ -9,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from cosinnus.forms.hierarchy import AddContainerForm
 from cosinnus.views.mixins.group import (RequireWriteMixin, FilterGroupMixin)
 from cosinnus.views.mixins.tagged import HierarchyPathMixin
+from cosinnus.utils.urls import group_aware_reverse
 
 
 class AddContainerView(RequireWriteMixin, FilterGroupMixin,
@@ -26,7 +27,7 @@ class AddContainerView(RequireWriteMixin, FilterGroupMixin,
         super(AddContainerView, self).__init__(*args, **kwargs)
 
     def get_success_url(self):
-        return reverse('cosinnus:%s:list' % self.appname,
+        return group_aware_reverse('cosinnus:%s:list' % self.appname,
                        kwargs={'group': self.group.slug})
 
     def get_form(self, form_class):
@@ -57,6 +58,6 @@ class AddContainerView(RequireWriteMixin, FilterGroupMixin,
 
     def get_context_data(self, *args, **kwargs):
         context = super(AddContainerView, self).get_context_data(*args, **kwargs)
-        context['cancel_url'] = reverse('cosinnus:%s:list' % self.appname,
+        context['cancel_url'] = group_aware_reverse('cosinnus:%s:list' % self.appname,
             kwargs={'group': self.group.slug})
         return context

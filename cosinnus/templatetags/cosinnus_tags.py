@@ -27,6 +27,7 @@ from django.templatetags.static import static
 from django.template.base import TemplateSyntaxError, kwarg_re
 from cosinnus.core.registries.group_models import group_model_registry
 from django.core.cache import cache
+from cosinnus.utils.urls import group_aware_reverse
 
 register = template.Library()
 
@@ -165,7 +166,7 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
         for app, name, label in app_registry.items():
             if app in settings.COSINNUS_HIDE_APPS:
                 continue
-            url = reverse('cosinnus:%s:index' % name, kwargs={'group': group.slug})
+            url = group_aware_reverse('cosinnus:%s:index' % name, kwargs={'group': group.slug})
             if app == current_app:
                 active_app = app
                 active_app_name = name

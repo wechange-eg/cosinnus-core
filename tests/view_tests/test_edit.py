@@ -7,6 +7,7 @@ from django.test import TestCase
 
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.tagged import get_tag_object_model
+from cosinnus.utils.urls import group_aware_reverse
 
 
 TagObject = get_tag_object_model()
@@ -24,7 +25,7 @@ class EditGroupTest(TestCase):
         self.admin = User.objects.create_superuser(
             username=self.credential, email=None, password=self.credential)
         self.client.login(username=self.credential, password=self.credential)
-        self.url = reverse('cosinnus:group-edit',
+        self.url = group_aware_reverse('cosinnus:group-edit',
                            kwargs={'group': self.group.slug})
 
     def test_get_not_logged_in(self):

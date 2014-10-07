@@ -23,6 +23,7 @@ from cosinnus.utils.functions import unique_aware_slugify
 from cosinnus.utils.files import get_group_avatar_filename
 from django.core.urlresolvers import reverse
 from django.utils.functional import cached_property
+from cosinnus.utils.urls import group_aware_reverse
 
 
 #: Role defining a user has requested to be added to a group
@@ -423,7 +424,7 @@ class CosinnusGroup(models.Model):
         return getattr(self, key)
     
     def get_absolute_url(self):
-        return reverse('cosinnus:group-dashboard', kwargs={'group': self.slug})
+        return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.slug})
     
     @cached_property
     def get_parent_typed(self):
@@ -494,7 +495,7 @@ class CosinnusSociety(CosinnusGroup):
         return self.name
     
     def get_absolute_url(self):
-        return reverse('cosinnus:group__group-dashboard', kwargs={'group': self.slug})
+        return group_aware_reverse('cosinnus:group__group-dashboard', kwargs={'group': self.slug})
     
 
 @python_2_unicode_compatible
