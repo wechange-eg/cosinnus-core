@@ -171,6 +171,7 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
     def get_queryset(self):
         group_plural_url_key = self.request.path.split('/')[1]
         group_class = group_model_registry.get_by_plural_key(group_plural_url_key, None)
+        self.group_type = group_class.GROUP_MODEL_TYPE
         
         model = group_class or self.model
         if self.request.user.is_authenticated():
@@ -204,6 +205,7 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
             
         ctx.update({
             'rows': zip(self.object_list, members, pendings, admins),
+            'group_type': self.group_type,
         })
         return ctx
 

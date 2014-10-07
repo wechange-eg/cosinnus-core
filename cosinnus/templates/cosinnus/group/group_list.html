@@ -5,7 +5,11 @@
 
 
 {% block leftnav %}
-    {% include "cosinnus/group/leftnav_all_groups.html"  with current_page="grouplist" %}
+    {% if group_type == 1 %}
+        {% include "cosinnus/group/leftnav_all_groups.html"  with current_page="grouplist__society" %}
+    {% else %}
+        {% include "cosinnus/group/leftnav_all_groups.html"  with current_page="grouplist" %}
+    {% endif %}
 {% endblock leftnav %}
 
 
@@ -59,9 +63,9 @@
     
 	    {% for group, members, pendings, admins in rows %}
 	        {% if user.pk in members or user.pk in admins or group.public %}
-	            {% url 'cosinnus:group-dashboard' group=group.slug as group_url %}
+	            {% group_url 'cosinnus:group-dashboard' group=group.slug as group_url %}
 	        {% else %}
-	            {% url 'cosinnus:group-microsite' group=group.slug as group_url %}
+	            {% group_url 'cosinnus:group-microsite' group=group.slug as group_url %}
 	        {% endif %}
 	        <div class="fadedown {% if not forloop.last %}regular-space{% endif %}">
 	            <div class="btn btn-{% if user.is_authenticated and user.pk in members or group.public %}emphasized{% else %}default{% endif %} w100">

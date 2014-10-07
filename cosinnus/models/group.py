@@ -306,6 +306,8 @@ class CosinnusGroup(models.Model):
         (TYPE_SOCIETY, _('Society')),
     )
     
+    GROUP_MODEL_TYPE = TYPE_PROJECT
+    
     name = models.CharField(_('Name'), max_length=100,
         validators=[group_name_validator])
     slug = models.SlugField(_('Slug'), max_length=50, unique=True, blank=True)
@@ -451,6 +453,8 @@ class CosinnusProject(CosinnusGroup):
         verbose_name = _('Cosinnus project')
         verbose_name_plural = _('Cosinnus projects')
     
+    GROUP_MODEL_TYPE = CosinnusGroup.TYPE_PROJECT
+    
     objects = CosinnusProjectManager()
     
     def save(self, *args, **kwargs):
@@ -477,6 +481,8 @@ class CosinnusSociety(CosinnusGroup):
         ordering = ('name',)
         verbose_name = _('Cosinnus society')
         verbose_name_plural = _('Cosinnus societies')
+    
+    GROUP_MODEL_TYPE = CosinnusGroup.TYPE_SOCIETY
     
     objects = CosinnusSocietyManager()
     
