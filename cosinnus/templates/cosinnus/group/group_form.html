@@ -42,7 +42,7 @@
 	        {{ form.forms.obj.non_field_errors }}
 	        {{ form.forms.media_tag.non_field_errors }}
 	        
-	        {% if group_model == "CosinnusSociety" %}
+	        {% if object.type == 1 %}
 	        <p>(Note: This is a society, but the strings for Project haven't been modified!)</p>
 	        {% endif %}
 		    
