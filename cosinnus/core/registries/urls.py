@@ -51,7 +51,7 @@ class URLRegistry(BaseRegistry):
                 for url_key in group_model_registry:
                     url_base = r'^%s/(?P<group>[^/]+)/%s/' % (url_key, url_app_name)
                     for patt in group_patterns:
-                        patterns_copy.append(url(url_base+patt._regex[1:], patt._callback_str or patt._callback, name=group_model_registry.get_url_name_prefix(url_key, '') + patt.name))
+                        patterns_copy.append(url(url_base+patt._regex[1:], patt._callback_str or patt._callback, patt.default_args, name=group_model_registry.get_url_name_prefix(url_key, '') + patt.name))
                 
                 self._urlpatterns += patterns('',
                     url('', include(patterns_copy, namespace=app_name, app_name=app)),
