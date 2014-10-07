@@ -1,5 +1,5 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n bootstrap3 %}
+{% load i18n bootstrap3 cosinnus_tags %}
 
 {% block page_title %}
   
@@ -14,7 +14,7 @@
     {% csrf_token %}
     {% bootstrap_form form layout="horizontal" %}
     {% trans "Cancel" as reset_label %}
-    {% url 'cosinnus:group-dashboard' group=group.slug as reset_link %}
+    {% group_url 'cosinnus:group-dashboard' group=group.slug as reset_link %}
     {% buttons layout='horizontal' %}
       {% bootstrap_button submit_label button_type="submit" css_classes=submit_css_classes %}
       {% bootstrap_button reset_label link=reset_link %}

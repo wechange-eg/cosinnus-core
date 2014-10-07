@@ -22,7 +22,7 @@
     <div class="content-box">
         
         {% if user|has_write_access:object %}
-            <form action="{% url 'cosinnus:group-user-add-generic' group=object.slug %}" method="post">{% csrf_token %}
+            <form action="{% group_url 'cosinnus:group-user-add-generic' group=object.slug %}" method="post">{% csrf_token %}
 	            <div type="button" class="btn btn-default w100 large-space">
 	                <ul class="media-list">
 	                    <li class="media">
@@ -132,19 +132,19 @@
                 {% if member in admins %}
                     {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to demote administrator „{{ name }}“ to member?{% endblocktrans %}{% endcaptureas %}
                     {% captureas title %}{% trans "Demote Admin" %}{% endcaptureas %}
-                    {% captureas action %}{% url 'cosinnus:group-user-edit' group=object.slug username=member.username %}{% endcaptureas %}
+                    {% captureas action %}{% group_url 'cosinnus:group-user-edit' group=object.slug username=member.username %}{% endcaptureas %}
                     {% captureas extra_fields %}<input type="hidden" name="user" value="{{member.pk}}" /><input type="hidden" name="status" value="1" />{% endcaptureas %}
                 {% else %}
                     {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to promote member „{{ name }}“ to administrator?{% endblocktrans %}{% endcaptureas %}
                     {% captureas title %}{% trans "Promote Member" %}{% endcaptureas %}
-                    {% captureas action %}{% url 'cosinnus:group-user-edit' group=object.slug username=member.username %}{% endcaptureas %}
+                    {% captureas action %}{% group_url 'cosinnus:group-user-edit' group=object.slug username=member.username %}{% endcaptureas %}
                     {% captureas extra_fields %}<input type="hidden" name="user" value="{{member.pk}}" /><input type="hidden" name="status" value="2" />{% endcaptureas %}
                 {% endif %}
                 {% include "cosinnus/modal_box.html" with id=modal_promote_id label=label title=title form_action=action form_extra_fields=extra_fields %}
                 
                 {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to remove member „{{ name }}“ from the Group?{% endblocktrans %}{% endcaptureas %}
                 {% captureas title %}{% trans "Remove Member" %}{% endcaptureas %}
-                {% captureas action %}{% url 'cosinnus:group-user-delete' group=object.slug username=member.username %}{% endcaptureas %}
+                {% captureas action %}{% group_url 'cosinnus:group-user-delete' group=object.slug username=member.username %}{% endcaptureas %}
                 {% include "cosinnus/modal_box.html" with id=modal_kick_id label=label title=title form_action=action %}
                 
             {% endif %}
@@ -222,13 +222,13 @@
 		            {% if user|has_write_access:object %}    
 	                    {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to accept user „{{ name }}“ as a member?{% endblocktrans %}{% endcaptureas %}
 	                    {% captureas title %}{% trans "Accept Member" %}{% endcaptureas %}
-	                    {% captureas action %}{% url 'cosinnus:group-user-edit' group=object.slug username=member.username %}{% endcaptureas %}
+	                    {% captureas action %}{% group_url 'cosinnus:group-user-edit' group=object.slug username=member.username %}{% endcaptureas %}
 	                    {% captureas extra_fields %}<input type="hidden" name="user" value="{{member.pk}}" /><input type="hidden" name="status" value="1" />{% endcaptureas %}
 		                {% include "cosinnus/modal_box.html" with id=modal_promote_id label=label title=title form_action=action form_extra_fields=extra_fields %}
 		                
 		                {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to decline member „{{ name }}“?{% endblocktrans %}{% endcaptureas %}
 		                {% captureas title %}{% trans "Decline Member" %}{% endcaptureas %}
-		                {% captureas action %}{% url 'cosinnus:group-user-delete' group=object.slug username=member.username %}{% endcaptureas %}
+		                {% captureas action %}{% group_url 'cosinnus:group-user-delete' group=object.slug username=member.username %}{% endcaptureas %}
 		                {% include "cosinnus/modal_box.html" with id=modal_kick_id label=label title=title form_action=action %}
 		                
 		            {% endif %}

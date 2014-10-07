@@ -30,7 +30,7 @@
 		                    </a>
 		                    <ul class="dropdown-menu">
 		                        {% for g in groups %}
-				                    <li{% if g == group %} class="active"{% endif %}><a href="{% url 'cosinnus:group-dashboard' group=g.slug %}">{{ g.name }}</a></li>
+				                    <li{% if g == group %} class="active"{% endif %}><a href="{% group_url 'cosinnus:group-dashboard' group=g.slug %}">{{ g.name }}</a></li>
 				                {% endfor %}
 		                        <li class="divider"></li>
 		                        <li><a href="{% url 'cosinnus:group-list' %}">{% trans "List all groups" %}</a></li>
