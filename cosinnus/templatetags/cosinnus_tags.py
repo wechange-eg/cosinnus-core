@@ -512,6 +512,35 @@ def cosinnus_setting(user, setting):
     raise ImproperlyConfigured("User setting tag got passed a non-user argument.")
     
 
+def group_aware_url_name(view_name, group_slug):
+    """ Modifies a URL name that points to a URL within a CosinnusGroup so that the URL
+        points to the correct sub-url of the type of the CosinnusGroup Model for the given
+        group slug.
+        
+        @return: A modified URL view name
+    """
+    
+    print ">> viewname before", view_name, group_slug
+    
+    # retrieve group type cached
+    group_type = cache.get(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % group_slug)
+    if group_type is None:
+        group_type = CosinnusGroup.objects.get(slug=group_slug).type
+        cache.set(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % group_slug, group_type,
+                  31536000) # 1 year cache
+        
+    # retrieve that type's prefix and add to URL viewname
+    prefix = group_model_registry.get_url_name_prefix_by_type(group_type, 0)
+    if ":" in view_name:
+        view_name = (":%s" % prefix).join(view_name.rsplit(":", 1))
+    else:
+        view_name = prefix + view_name
+
+    
+    print ">> viewname after", view_name, group_slug
+    return view_name
+
+
 
 class GroupURLNode(URLNode):
     """ This URL node will adjust its view name to the prefix-type of the CosinnusGroup type. 
@@ -532,23 +561,13 @@ class GroupURLNode(URLNode):
         if not isinstance(group_slug, six.string_types):
             raise TemplateSyntaxError("'group_url' tag requires a group kwarg that is a slug! Have you passed one? (You passed: 'group=%s')" % group_slug)
         
-        # retrieve group type cached
-        group_type = cache.get(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % group_slug)
-        if group_type is None:
-            group_type = CosinnusGroup.objects.get(slug=group_slug).type
-            cache.set(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % group_slug, group_type,
-                      31536000) # 1 year cache
-            
-        # retrieve that type's prefix and add to URL viewname
-        prefix = group_model_registry.get_url_name_prefix_by_type(group_type, 0)
-        if ":" in view_name:
-            view_name = (":%s" % prefix).join(view_name.rsplit(":", 1))
-        else:
-            view_name = prefix + view_name
+        view_name = group_aware_url_name(view_name, group_slug)
+        
         self.view_name.var = view_name
         self.view_name.token = "'%s'" % view_name
         
         return super(GroupURLNode, self).render(context)
+
         
 
 @register.tag

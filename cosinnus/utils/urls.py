@@ -4,11 +4,12 @@ from __future__ import unicode_literals
 import re
 
 from django.conf.urls import patterns
-from django.core.urlresolvers import RegexURLResolver
+from django.core.urlresolvers import RegexURLResolver, reverse
 
 from cosinnus.conf import settings
 from cosinnus.core.registries.group_models import group_model_registry
 from django.core.exceptions import ImproperlyConfigured
+from django.utils.importlib import import_module
 
 
 class APIRegexURLResolver(RegexURLResolver):
@@ -52,3 +53,13 @@ def api_patterns(version, app=None, add_groups=False, prefix='', *args):
     else:
         return [APIRegexURLResolver(version, pattern_list, app=app, url_group_key=None,
                                 add_groups=add_groups) ]
+        
+group_aware_url_name = None
+def group_aware_reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=None, current_app=None):
+    if 'group' in kwargs:
+        if not group_aware_url_name:
+            group_aware_url_name = import_module('cosinnus.templatetags.cosinnus_tags').group_aware_url_name
+        
+        viewname = group_aware_url_name(viewname, kwargs['group'])
+    return reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=None, current_app=None)
+        
