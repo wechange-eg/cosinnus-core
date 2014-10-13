@@ -2,7 +2,7 @@
 {% load i18n cosinnus_tags %}
 
 {% block page_title %}
-  {% blocktrans with group_name=object.name %}{{ group_name }} - Group Members{% endblocktrans %}
+  {% blocktrans with group_name=object.name %}{{ group_name }} - Members{% endblocktrans %}
 {% endblock %}
 
 {% block leftnav %}
@@ -11,7 +11,7 @@
 
 {% block breadcrumb %}
         {{ block.super }}
-        <li class="active">{% trans "Group Members" %}</li>
+        <li class="active">{% trans "Members" %}</li>
 {% endblock %}
 
 
@@ -58,7 +58,7 @@
         {% endif %}
 
 
-        <legend>{% trans "Group members" %}</legend>
+        <legend>{% trans "Members" %}</legend>
     
         {% for member in members %}
             <div class="fadedown {% if not forloop.last %}regular-space{% endif %}">
@@ -76,9 +76,9 @@
                             <div class="media-body">
                                     <span class="annotation">
                                         {% if member in admins %}
-                                            {% trans "Group Admin" %}
+                                            {% trans "Admin" %}
                                         {% elif member in members %}
-                                            {% trans "Group Member" %}
+                                            {% trans "Member" %}
                                         {% endif %}
                                     </span>
                                 <a href="{% url 'cosinnus:profile-detail' username=member.username %}">

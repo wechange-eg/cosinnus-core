@@ -240,14 +240,17 @@ class GroupUpdateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
     model = CosinnusGroup
     template_name = 'cosinnus/group/group_form.html'
     
-    message_success = _('The %(group_type)s  was changed successfully.')
+    message_success = _('The %(group_type)s was changed successfully.')
     
     def get_object(self, queryset=None):
         return self.group
 
     def get_context_data(self, **kwargs):
         context = super(GroupUpdateView, self).get_context_data(**kwargs)
-        context['submit_label'] = _('Save')
+        context.update({
+            'submit_label': _('Save'),
+            'group': self.group}
+        )
         return context
     
     def get_form_kwargs(self):
