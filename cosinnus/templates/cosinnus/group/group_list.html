@@ -184,8 +184,14 @@
             {% endif %}
             
 		{% empty %}
-		   {% include 'cosinnus/common/empty_button.html' with message="There are no groups." %}
+		   
 		{% endfor %}
+		   {% if group_type == 1 %}
+		       {% trans "There are no projects." as no_group_message %}
+		   {% else %}
+		       {% trans "There are no societies." as no_group_message %}
+		   {% endif %}
+		   {% include 'cosinnus/common/empty_button.html' with message=no_group_message %}
         
     </div>
 

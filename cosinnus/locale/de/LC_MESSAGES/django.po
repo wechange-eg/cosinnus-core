@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-13 15:35+0200\n"
+"POT-Creation-Date: 2014-10-13 16:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -932,6 +932,14 @@ msgstr "Projektdetails"
 msgid "Do you really want to leave group „%(title)s“?"
 msgstr "Möchten sie das Projekt “%(title)s” verlassen?"
 
+#: .\templates\cosinnus\group\group_list.html.py:190
+msgid "There are no projects."
+msgstr "Es gibt keine sichtbaren Projekte."
+
+#: .\templates\cosinnus\group\group_list.html.py:192
+msgid "There are no societies."
+msgstr "Es gibt keine sichtbaren Gruppen."
+
 #: .\templates\cosinnus\group\group_list_map.html.py:4
 msgid "Groups"
 msgstr "Projekte"
@@ -1721,9 +1729,6 @@ msgstr "%(numobjects)d andere Objekte wurden gelöscht."
 
 #~ msgid "Joined"
 #~ msgstr "Beigetreten"
-
-#~ msgid "There are no groups."
-#~ msgstr "Es gibt keine Projekte."
 
 #~ msgid "Profile"
 #~ msgstr "Profil"

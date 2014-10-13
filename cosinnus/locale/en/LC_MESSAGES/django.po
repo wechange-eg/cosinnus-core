@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-13 15:35+0200\n"
+"POT-Creation-Date: 2014-10-13 16:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -564,7 +564,7 @@ msgstr ""
 
 #: .\templates\cosinnus\search.html.py:142
 msgid "Search in groups"
-msgstr "There are no projects."
+msgstr ""
 
 #: .\templates\cosinnus\search.html.py:169
 #: .\templates\cosinnus\user\userprofile_detail.html.py:135
@@ -907,6 +907,14 @@ msgstr "Project details"
 #, python-format
 msgid "Do you really want to leave group „%(title)s“?"
 msgstr "Do you really want to leave project „%(title)s“?"
+
+#: .\templates\cosinnus\group\group_list.html.py:190
+msgid "There are no projects."
+msgstr ""
+
+#: .\templates\cosinnus\group\group_list.html.py:192
+msgid "There are no societies."
+msgstr "There are no groups."
 
 #: .\templates\cosinnus\group\group_list_map.html.py:4
 msgid "Groups"
@@ -1632,9 +1640,6 @@ msgstr ""
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr ""
-
-#~ msgid "There are no groups."
-#~ msgstr "There are no projects."
 
 #~ msgid "Join group"
 #~ msgstr "Join Project"
