@@ -52,7 +52,7 @@ _MEMBERSHIP_PENDINGS_KEY = 'cosinnus/core/membership/pendings/%d'
 def group_name_validator(value):
     RegexValidator(
         re.compile('^[^/]+$'),
-        _('Enter a valid group name. Forward slash is not allowed.'),
+        _('Enter a valid name. Forward slash is not allowed.'),
         'invalid'
     )(value)
 

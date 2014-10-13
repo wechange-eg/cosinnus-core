@@ -57,20 +57,20 @@ def _get_common_mail_context(request, group=None, user=None):
 def send_group_join_request_mail(sender, group, user, **kwargs):
     for admin in get_user_model()._default_manager.filter(id__in=group.admins):
         context = _get_common_mail_context(sender.request, group=group, user=user)
-        subject = _('%(group_name)s: %(user_name)s wants to join the group on %(site_name)s!')
+        subject = _('%(user_name)s wants to join %(group_name)s on %(site_name)s!')
         send_mail_or_fail(admin.email, subject % context, 'cosinnus/mail/user_group_join_requested.html', context)
                 
                 
 @receiver(user_group_join_accepted)
 def send_group_join_accepted_mail(sender, group, user, **kwargs):
     context = _get_common_mail_context(sender.request, group=group, user=user)
-    subject = _('%(group_name)s: Your membership request has been accepted on %(site_name)s!')
+    subject = _('Your membership request for %(group_name)s has been accepted on %(site_name)s!')
     send_mail_or_fail(user.email, subject % context, 'cosinnus/mail/user_group_join_accepted.html', context)
 
                 
 @receiver(user_group_join_declined)
 def send_group_join_declined_mail(sender, group, user, **kwargs):
     context = _get_common_mail_context(sender.request, group=group, user=user)
-    subject = _('%(group_name)s: Your membership request has been declined on %(site_name)s.')
+    subject = _('Your membership request for %(group_name)s has been declined on %(site_name)s.')
     send_mail_or_fail(user.email, subject % context, 'cosinnus/mail/user_group_join_declined.html', context)
 
