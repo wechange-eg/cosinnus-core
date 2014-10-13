@@ -53,7 +53,7 @@
             
             <div class="position-relative"><!-- just for fun -->
                 {% if user|has_write_access:group %}
-                    <button type="button" class="btn btn-emphasized bottom-align" href="{% if edit_mode %}{% url 'cosinnus:group-microsite' group=group.slug %}{% else %}{% url 'cosinnus:group-microsite-edit' group=group.slug %}{% endif %}">
+                    <button type="button" class="btn btn-emphasized bottom-align" href="{% if edit_mode %}{% group_url 'cosinnus:group-microsite' group=group.slug %}{% else %}{% group_url 'cosinnus:group-microsite-edit' group=group.slug %}{% endif %}">
                         <ul class="media-list">
                             <li class="media">
                                 <a class="pull-left" href="#">
@@ -86,7 +86,7 @@
                                     <i class="fa fa-sign-in"></i>
                                 </a>
                                 <div class="media-body">
-                                    {% trans "Join group" %} 
+                                    {% trans "Join" %} 
                                 </div>
                             </li>
                         </ul>
@@ -101,12 +101,12 @@
         {% if user.pk in group.pendings %}
             {% captureas label %}{% blocktrans with title=group.name %}Do you really want to withdraw your join request to group „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
             {% captureas title %}{% trans "Withdraw Join Request" %}{% endcaptureas %}
-            {% captureas action %}{% url 'cosinnus:group-user-withdraw' group=group.slug %}{% endcaptureas %}
+            {% captureas action %}{% group_url 'cosinnus:group-user-withdraw' group=group.slug %}{% endcaptureas %}
             {% include "cosinnus/modal_box.html" with id="join_withdraw_modal" label=label title=title form_action=action %}
         {% elif user.is_authenticated %}
             {% captureas label %}{% blocktrans with title=group.name %}Do you wish to request to join group „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
-            {% captureas title %}{% trans "Join Group" %}{% endcaptureas %}
-            {% captureas action %}{% url 'cosinnus:group-user-join' group=group.slug %}{% endcaptureas %}
+            {% captureas title %}{% trans "Join" %}{% endcaptureas %}
+            {% captureas action %}{% group_url 'cosinnus:group-user-join' group=group.slug %}{% endcaptureas %}
             {% include "cosinnus/modal_box.html" with id="join_withdraw_modal" label=label title=title form_action=action %}
         {% endif %}
     </div><!-- row -->

@@ -22,7 +22,8 @@ from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.utils.functions import unique_aware_slugify
 from cosinnus.utils.files import get_group_avatar_filename
 from django.core.urlresolvers import reverse
-from cosinnus.models.organisation import CosinnusOrganisation
+from django.utils.functional import cached_property
+from cosinnus.utils.urls import group_aware_reverse
 
 
 #: Role defining a user has requested to be added to a group
@@ -43,11 +44,6 @@ MEMBERSHIP_STATUSES = (
 #: A user is a member of a group if either is an explicit member or admin
 MEMBER_STATUS = (MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN,)
 
-
-_GROUPS_SLUG_CACHE_KEY = 'cosinnus/core/groups/slugs'
-_GROUPS_PK_CACHE_KEY = 'cosinnus/core/groups/pks'
-_GROUP_CACHE_KEY = 'cosinnus/core/group/%s'
-
 _MEMBERSHIP_ADMINS_KEY = 'cosinnus/core/membership/admins/%d'
 _MEMBERSHIP_MEMBERS_KEY = 'cosinnus/core/membership/members/%d'
 _MEMBERSHIP_PENDINGS_KEY = 'cosinnus/core/membership/pendings/%d'
@@ -56,7 +52,7 @@ _MEMBERSHIP_PENDINGS_KEY = 'cosinnus/core/membership/pendings/%d'
 def group_name_validator(value):
     RegexValidator(
         re.compile('^[^/]+$'),
-        _('Enter a valid group name. Forward slash is not allowed.'),
+        _('Enter a valid name. Forward slash is not allowed.'),
         'invalid'
     )(value)
 
@@ -88,6 +84,13 @@ class CosinnusGroupMembershipQS(models.query.QuerySet):
 
 
 class CosinnusGroupManager(models.Manager):
+    
+    _GROUPS_SLUG_CACHE_KEY = 'cosinnus/core/group/%s/slugs'
+    _GROUPS_PK_CACHE_KEY = 'cosinnus/core/group/%s/pks'
+    _GROUP_CACHE_KEY = 'cosinnus/core/group/%s/%s'
+    
+    _GROUP_SLUG_TYPE_CACHE_KEY = 'cosinnus/core/group_slug_type/%s'
+
 
     use_for_related_fields = True
 
@@ -107,13 +110,13 @@ class CosinnusGroupManager(models.Manager):
         :returns: A :class:`OrderedDict` with a `slug => pk` mapping of all
             groups
         """
-        slugs = cache.get(_GROUPS_SLUG_CACHE_KEY)
+        slugs = cache.get(self._GROUPS_SLUG_CACHE_KEY % self.__class__.__name__)
         if slugs is None:
             slugs = OrderedDict(self.values_list('slug', 'id').all())
             pks = OrderedDict((v, k) for k, v in six.iteritems(slugs))
-            cache.set(_GROUPS_SLUG_CACHE_KEY, slugs,
+            cache.set(self._GROUPS_SLUG_CACHE_KEY % self.__class__.__name__, slugs,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
-            cache.set(_GROUPS_PK_CACHE_KEY, pks,
+            cache.set(self._GROUPS_PK_CACHE_KEY % self.__class__.__name__, pks,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
         return slugs
 
@@ -125,13 +128,13 @@ class CosinnusGroupManager(models.Manager):
         :returns: A :class:`OrderedDict` with a `pk => slug` mapping of all
             groups
         """
-        pks = cache.get(_GROUPS_PK_CACHE_KEY)
+        pks = cache.get(self._GROUPS_PK_CACHE_KEY % self.__class__.__name__)
         if pks is None:
             pks = OrderedDict(self.values_list('id', 'slug').all())
             slugs = OrderedDict((v, k) for k, v in six.iteritems(pks))
-            cache.set(_GROUPS_PK_CACHE_KEY, pks,
+            cache.set(self._GROUPS_PK_CACHE_KEY % self.__class__.__name__, pks,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
-            cache.set(_GROUPS_SLUG_CACHE_KEY, slugs,
+            cache.set(self._GROUPS_SLUG_CACHE_KEY % self.__class__.__name__, slugs,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
         return pks
 
@@ -152,20 +155,20 @@ class CosinnusGroupManager(models.Manager):
         assert not (slugs and pks)
         if (slugs is None) and (pks is None):
             slugs = list(self.get_slugs().keys())
-
+            
         if slugs is not None:
             if isinstance(slugs, six.string_types):
                 # We request a single group
                 slug = slugs
-                group = cache.get(_GROUP_CACHE_KEY % slug)
+                group = cache.get(self._GROUP_CACHE_KEY % (self.__class__.__name__, slug))
                 if group is None:
                     group = super(CosinnusGroupManager, self).get(slug=slug)
-                    cache.set(_GROUP_CACHE_KEY % group.slug, group,
+                    cache.set(self._GROUP_CACHE_KEY % (self.__class__.__name__, group.slug), group,
                         settings.COSINNUS_GROUP_CACHE_TIMEOUT)
                 return group
             else:
                 # We request multiple groups by slugs
-                keys = [_GROUP_CACHE_KEY % s for s in slugs]
+                keys = [self._GROUP_CACHE_KEY % (self.__class__.__name__, s) for s in slugs]
                 groups = cache.get_many(keys)
                 missing = [key.split('/')[-1] for key in keys if key not in groups]
                 if missing:
@@ -174,7 +177,7 @@ class CosinnusGroupManager(models.Manager):
                         query = query.select_related('media_tag')
                     
                     for group in query:
-                        groups[_GROUP_CACHE_KEY % group.slug] = group
+                        groups[self._GROUP_CACHE_KEY % (self.__class__.__name__, group.slug)] = group
                     cache.set_many(groups, settings.COSINNUS_GROUP_CACHE_TIMEOUT)
                 return sorted(groups.values(), key=lambda x: x.name)
         elif pks is not None:
@@ -295,9 +298,23 @@ class CosinnusGroupMembershipManager(models.Manager):
 
 @python_2_unicode_compatible
 class CosinnusGroup(models.Model):
+    TYPE_PROJECT = 0
+    TYPE_SOCIETY = 1
+    
+    #: Choices for :attr:`visibility`: ``(int, str)``
+    TYPE_CHOICES = (
+        (TYPE_PROJECT, _('Group')),
+        (TYPE_SOCIETY, _('Society')),
+    )
+    
+    GROUP_MODEL_TYPE = TYPE_PROJECT
+    
     name = models.CharField(_('Name'), max_length=100,
         validators=[group_name_validator])
     slug = models.SlugField(_('Slug'), max_length=50, unique=True, blank=True)
+    type = models.PositiveSmallIntegerField(_('Group Type'), blank=False,
+        default=TYPE_PROJECT, choices=TYPE_CHOICES, editable=False)
+    
     description = HTMLField(verbose_name=_('Description'), blank=True)
     avatar = models.ImageField(_("Avatar"), null=True, blank=True,
         upload_to=get_group_avatar_filename)
@@ -308,7 +325,7 @@ class CosinnusGroup(models.Model):
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
         blank=True, null=True, editable=False, on_delete=models.PROTECT)
     
-    organisation = models.ForeignKey(CosinnusOrganisation, verbose_name=_('Organisation'),
+    parent = models.ForeignKey("self", verbose_name=_('Parent Group'),
         related_name='groups', null=True, blank=True, on_delete=models.SET_NULL)
     
     objects = CosinnusGroupManager()
@@ -382,13 +399,13 @@ class CosinnusGroup(models.Model):
     @classmethod
     def _clear_cache(self, slug=None, slugs=None):
         keys = [
-            _GROUPS_SLUG_CACHE_KEY,
-            _GROUPS_PK_CACHE_KEY,
+            self.objects._GROUPS_SLUG_CACHE_KEY % self.objects.__class__.__name__,
+            self.objects._GROUPS_PK_CACHE_KEY % self.objects.__class__.__name__,
         ]
         if slug:
-            keys.append(_GROUP_CACHE_KEY % slug)
+            keys.append(self.objects._GROUP_CACHE_KEY % (self.objects.__class__.__name__, slug))
         if slugs:
-            keys.extend([_GROUP_CACHE_KEY % s for s in slugs])
+            keys.extend([self.objects._GROUP_CACHE_KEY % (self.objects.__class__.__name__, s) for s in slugs])
         cache.delete_many(keys)
         if isinstance(self, CosinnusGroup):
             self._clear_local_cache()
@@ -407,8 +424,76 @@ class CosinnusGroup(models.Model):
         return getattr(self, key)
     
     def get_absolute_url(self):
-        return reverse('cosinnus:group-dashboard', kwargs={'group': self.slug})
+        return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.slug})
+    
+    @cached_property
+    def get_parent_typed(self):
+        """ This is the only way to make sure to get the real object of a group's parent
+            (determined by its type), and not just a generic CosinnusGroup. """ 
+        if self.parent_id:
+            from cosinnus.core.registries.group_models import group_model_registry
+            parent = self.parent
+            cls = group_model_registry.get_by_type(parent.type)
+            return cls.objects.all().get(id=parent.id)
+        return None
 
+class CosinnusProjectManager(CosinnusGroupManager):
+    def get_queryset(self):
+        return CosinnusGroupQS(self.model, using=self._db).filter(type=CosinnusGroup.TYPE_PROJECT)
+
+    get_query_set = get_queryset
+
+
+@python_2_unicode_compatible
+class CosinnusProject(CosinnusGroup):
+    
+    class Meta:
+        proxy = True
+        app_label = 'cosinnus'
+        ordering = ('name',)
+        verbose_name = _('Cosinnus project')
+        verbose_name_plural = _('Cosinnus projects')
+    
+    GROUP_MODEL_TYPE = CosinnusGroup.TYPE_PROJECT
+    
+    objects = CosinnusProjectManager()
+    
+    def save(self, *args, **kwargs):
+        self.type = CosinnusGroup.TYPE_PROJECT
+        super(CosinnusProject, self).save(*args, **kwargs)
+        
+    def __str__(self):
+        return self.name
+    
+    
+class CosinnusSocietyManager(CosinnusGroupManager):
+    def get_queryset(self):
+        return CosinnusGroupQS(self.model, using=self._db).filter(type=CosinnusGroup.TYPE_SOCIETY)
+
+    get_query_set = get_queryset
+
+
+@python_2_unicode_compatible
+class CosinnusSociety(CosinnusGroup):
+    
+    class Meta:
+        proxy = True
+        app_label = 'cosinnus'
+        ordering = ('name',)
+        verbose_name = _('Cosinnus society')
+        verbose_name_plural = _('Cosinnus societies')
+    
+    GROUP_MODEL_TYPE = CosinnusGroup.TYPE_SOCIETY
+    
+    objects = CosinnusSocietyManager()
+    
+    def save(self, *args, **kwargs):
+        self.type = CosinnusGroup.TYPE_SOCIETY
+        super(CosinnusSociety, self).save(*args, **kwargs)
+        
+    def __str__(self):
+        return self.name
+    
 
 @python_2_unicode_compatible
 class CosinnusGroupMembership(models.Model):

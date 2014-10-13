@@ -15,6 +15,7 @@ from cosinnus.core.registries import attached_object_registry
 from django.core.urlresolvers import reverse
 from django_select2.util import JSFunction
 from cosinnus.forms.tagged import BaseTaggableObjectForm
+from cosinnus.utils.urls import group_aware_reverse
 
 
 class FormAttachable(BaseTaggableObjectForm):
@@ -52,7 +53,7 @@ class FormAttachable(BaseTaggableObjectForm):
             self.fields['attached_objects'] = AttachableObjectSelect2MultipleChoiceField(
                 label=_("Attachments"), 
                 help_text=_("Type the title and/or type of attachment"), 
-                data_url=reverse('cosinnus:attached_object_select2_view', kwargs={'group': self.group.slug, 'model':source_model_id}),
+                data_url=group_aware_reverse('cosinnus:attached_object_select2_view', kwargs={'group': self.group.slug, 'model':source_model_id}),
                 required=False
             )
             # we need to cheat our way around select2's annoying way of clearing initial data fields

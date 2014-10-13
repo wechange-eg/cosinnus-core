@@ -7,6 +7,7 @@ from django import forms
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.forms.fields import ChoiceField
+from cosinnus.utils.urls import group_aware_reverse
 
 
 class DashboardWidgetForm(forms.Form):
@@ -64,7 +65,7 @@ class InfoWidgetForm(DashboardWidgetForm):
         self.fields['images'] = AttachableWidgetSelect2Field(
             label=_("Attachments"), 
             help_text=_("Type the title and/or type of attachment"), 
-            data_url=reverse('cosinnus:attached_object_select2_view', kwargs={'group': group.slug, 'model':'cosinnus_file.FileEntry'}) + '?model_as_target=1',
+            data_url=group_aware_reverse('cosinnus:attached_object_select2_view', kwargs={'group': group.slug, 'model':'cosinnus_file.FileEntry'}) + '?model_as_target=1',
             required=False,
             initial = kwargs.get('initial', {}).pop('images', '')
         )

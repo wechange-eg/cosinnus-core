@@ -15,10 +15,30 @@ from django.contrib import messages
 from django.http.response import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
 from django.core.exceptions import PermissionDenied
+from cosinnus.core.registries.group_models import group_model_registry
 
 
 def redirect_to_403(request):
     raise PermissionDenied
+
+
+def get_group_for_request(group_name, request):
+    """ Retrieve the proxy group object depending on the URL path regarding 
+        the registered group models.
+        A CosinnusGroup will not be returned if it is requested by an URL
+        path with a different group_model_key than the one it got registered with. """
+    group_url_key = request.path.split('/')[1]
+    group_class = group_model_registry.get(group_url_key, None)
+    
+    if group_class:
+        try:
+            group = group_class.objects.get(slug=group_name)
+            if type(group) is group_class:
+                return group
+        except group_class.DoesNotExist:
+            pass
+    return None
+
     
 
 def staff_required(function):
@@ -54,11 +74,9 @@ def require_admin_access_decorator(group_url_arg='group'):
             if not group_name:
                 return HttpResponseNotFound(_("No group provided"))
 
-            try:
-                group = CosinnusGroup.objects.get(slug=group_name)
-            except CosinnusGroup.DoesNotExist:
+            group = get_group_for_request(group_name, request)
+            if not group:
                 return HttpResponseNotFound(_("No group found with this name"))
-
             user = request.user
 
             if not user.is_authenticated():
@@ -101,11 +119,9 @@ def require_admin_access(group_url_kwarg='group', group_attr='group'):
             if not group_name:
                 return HttpResponseNotFound(_("No group provided"))
 
-            try:
-                group = CosinnusGroup.objects.get(slug=group_name)
-            except CosinnusGroup.DoesNotExist:
+            group = get_group_for_request(group_name, request)
+            if not group:
                 return HttpResponseNotFound(_("No group found with this name"))
-
             user = request.user
             
             if not user.is_authenticated():
@@ -148,11 +164,9 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
             if not group_name:
                 return HttpResponseNotFound(_("No group provided"))
 
-            try:
-                group = CosinnusGroup.objects.get(slug=group_name)
-            except CosinnusGroup.DoesNotExist:
+            group = get_group_for_request(group_name, request)
+            if not group:
                 return HttpResponseNotFound(_("No group found with this name"))
-
             user = request.user
             
             if not group.public and not user.is_authenticated():
@@ -206,11 +220,9 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             if not group_name:
                 return HttpResponseNotFound(_("No group provided"))
             
-            try:
-                group = CosinnusGroup.objects.get(slug=group_name)
-            except CosinnusGroup.DoesNotExist:
+            group = get_group_for_request(group_name, request)
+            if not group:
                 return HttpResponseNotFound(_("No group found with this name"))
-            
             user = request.user
             
             if not user.is_authenticated():

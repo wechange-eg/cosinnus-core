@@ -62,7 +62,7 @@
     {% endif %}
   </div>
   <div>
-    <a href="{% url 'cosinnus:group-detail' group=group.slug %}">{{ group.name }} - Details</a>
+    <a href="{% group_url 'cosinnus:group-detail' group=group.slug %}">{{ group.name }} - Details</a>
   </div>
 {% endblock content %}
 

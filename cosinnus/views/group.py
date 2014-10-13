@@ -16,9 +16,11 @@ from django.views.generic import (CreateView, DeleteView, DetailView,
 from cosinnus.core.decorators.views import superuser_required,\
     membership_required
 from cosinnus.core.registries import app_registry
-from cosinnus.forms.group import CosinnusGroupForm, MembershipForm
+from cosinnus.forms.group import MembershipForm, _CosinnusSocietyForm,\
+    _CosinnusProjectForm
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
-    MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING)
+    MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, CosinnusProject,
+    CosinnusSociety)
 from cosinnus.models.serializers.group import GroupSimpleSerializer
 from cosinnus.models.serializers.profile import UserSimpleSerializer
 from cosinnus.utils.compat import atomic
@@ -29,15 +31,55 @@ from cosinnus.views.mixins.user import UserFormKwargsMixin
 
 from cosinnus.views.mixins.avatar import AvatarFormMixin
 from cosinnus.core import signals
+from cosinnus.core.registries.group_models import group_model_registry
+from multiform.forms import InvalidArgument
 
-class GroupCreateView(AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin, 
+from cosinnus.forms.tagged import get_form  # circular import
+from cosinnus.utils.urls import group_aware_reverse
+
+
+
+class CosinnusGroupFormMixin(object):
+    
+    def get_form_class(self):
+        
+        group_url_key = self.request.path.split('/')[1]
+        form_class = group_model_registry.get_form(group_url_key, None)
+        model_class = group_model_registry.get(group_url_key, None)
+        if not form_class:
+            form_class = group_model_registry.get_form_by_plural_key(group_url_key, None)
+            model_class = group_model_registry.get_by_plural_key(group_url_key, None)
+        self.group_model_class = model_class
+        
+        class CosinnusGroupForm(get_form(form_class, attachable=False)):
+            def dispatch_init_group(self, name, group):
+                if name == 'media_tag':
+                    return group
+                return InvalidArgument
+            
+            def dispatch_init_user(self, name, user):
+                if name == 'media_tag':
+                    return user
+                return InvalidArgument
+
+        return CosinnusGroupForm
+    
+    def get_context_data(self, **kwargs):
+        context = super(CosinnusGroupFormMixin, self).get_context_data(**kwargs)
+        context['group_model'] = self.group_model_class.__name__
+        return context
+    
+
+class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin, 
                       CreateView):
 
-    form_class = CosinnusGroupForm
+    #form_class = 
+    # Note: Form_class is set dynamically in CosinnusGroupFormMixin.get_form(), depending on what group model we have!
+
     model = CosinnusGroup
     template_name = 'cosinnus/group/group_form.html'
     
-    message_success = _('Group "%(group)s" was created successfully.')
+    message_success = _('%(group_type)s "%(group)s" was created successfully.')
 
     @method_decorator(membership_required)
     @atomic
@@ -48,7 +90,7 @@ class GroupCreateView(AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
         ret = super(GroupCreateView, self).form_valid(form)
         CosinnusGroupMembership.objects.create(user=self.request.user,
             group=self.object, status=MEMBERSHIP_ADMIN)
-        messages.success(self.request, self.message_success % {'group':self.object.name})
+        messages.success(self.request, self.message_success % {'group':self.object.name, 'group_type':self.object._meta.verbose_name})
         return ret
 
     def get_context_data(self, **kwargs):
@@ -62,7 +104,7 @@ class GroupCreateView(AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
         return kwargs
 
     def get_success_url(self):
-        return reverse('cosinnus:group-detail', kwargs={'group': self.object.slug})
+        return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.object.slug})
 
 group_create = GroupCreateView.as_view()
 group_create_api = GroupCreateView.as_view(is_ajax_request_url=True)
@@ -128,10 +170,15 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
     serializer_class = GroupSimpleSerializer
 
     def get_queryset(self):
+        group_plural_url_key = self.request.path.split('/')[1]
+        group_class = group_model_registry.get_by_plural_key(group_plural_url_key, None)
+        self.group_type = group_class.GROUP_MODEL_TYPE
+        
+        model = group_class or self.model
         if self.request.user.is_authenticated():
-            return self.model.objects.get_cached()
+            return model.objects.get_cached()
         else:
-            return list(self.model.objects.public())
+            return list(model.objects.public())
 
     def get_context_data(self, **kwargs):
         ctx = super(GroupListView, self).get_context_data(**kwargs)
@@ -159,6 +206,7 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
             
         ctx.update({
             'rows': zip(self.object_list, members, pendings, admins),
+            'group_type': self.group_type,
         })
         return ctx
 
@@ -166,26 +214,43 @@ group_list = GroupListView.as_view()
 group_list_api = GroupListView.as_view(is_ajax_request_url=True)
 
 
+class ProjectListView(GroupListView):
+    model = CosinnusProject
+
+project_list = ProjectListView.as_view()
+
+class SocietyListView(GroupListView):
+    model = CosinnusSociety
+
+society_list = SocietyListView.as_view()
+
+
+
 class GroupMapListView(GroupListView):
     template_name = 'cosinnus/group/group_list_map.html'
 
 group_list_map = GroupMapListView.as_view()
 
-class GroupUpdateView(AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
+class GroupUpdateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
                       RequireAdminMixin, UpdateView):
 
-    form_class = CosinnusGroupForm
+    #form_class = 
+    # Note: Form_class is set dynamically in CosinnusGroupFormMixin.get_form(), depending on what group model we have!
+
     model = CosinnusGroup
     template_name = 'cosinnus/group/group_form.html'
     
-    message_success = _('The changes to the group were saved successfully.')
+    message_success = _('The %(group_type)s was changed successfully.')
     
     def get_object(self, queryset=None):
         return self.group
 
     def get_context_data(self, **kwargs):
         context = super(GroupUpdateView, self).get_context_data(**kwargs)
-        context['submit_label'] = _('Save')
+        context.update({
+            'submit_label': _('Save'),
+            'group': self.group}
+        )
         return context
     
     def get_form_kwargs(self):
@@ -194,11 +259,11 @@ class GroupUpdateView(AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
         return kwargs
     
     def form_valid(self, form):
-        messages.success(self.request, self.message_success)
+        messages.success(self.request, self.message_success % {'group_type':self.object._meta.verbose_name})
         return super(GroupUpdateView, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse('cosinnus:group-detail', kwargs={'group': self.group.slug})
+        return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.group.slug})
 
 group_update = GroupUpdateView.as_view()
 group_update_api = GroupUpdateView.as_view(is_ajax_request_url=True)
@@ -256,18 +321,18 @@ class GroupConfirmMixin(object):
         return self.confirm_label
 
     def get_confirm_question(self):
-        return self.confirm_question % {'group_name': self.object.name}
+        return self.confirm_question % {'group_name': self.object.name, 'group_type':self.object._meta.verbose_name}
 
     def get_confirm_title(self):
-        return self.confirm_title % {'group_name': self.object.name}
+        return self.confirm_title % {'group_name': self.object.name, 'group_type':self.object._meta.verbose_name}
 
 
 class GroupUserJoinView(GroupConfirmMixin, DetailView):
 
     confirm_label = _('Join')
-    confirm_question = _('Do you want to join the group “%(group_name)s”?')
-    confirm_title = _('Join group “%(group_name)s”?')
-    message_success = _('You have requested to join the group “%(group_name)s”. You will receive an email as soon as a group administrator responds to your request.')
+    confirm_question = _('Do you want to join the %(group_type)s “%(group_name)s”?')
+    confirm_title = _('Join %(group_type)s “%(group_name)s”?')
+    message_success = _('You have requested to join the %(group_type)s “%(group_name)s”. You will receive an email as soon as a group administrator responds to your request.')
     
     template_name = 'cosinnus/group/group_confirm.html'
 
@@ -282,7 +347,7 @@ class GroupUserJoinView(GroupConfirmMixin, DetailView):
     def get_success_url(self):
         # self.referer is set in post() method
         signals.user_group_join_requested.send(sender=self, group=self.object, user=self.request.user)
-        messages.success(self.request, self.message_success % {'group_name': self.object.name})
+        messages.success(self.request, self.message_success % {'group_name': self.object.name, 'group_type':self.object._meta.verbose_name})
         return self.referer
     
     def confirm_action(self):
@@ -298,10 +363,10 @@ group_user_join = GroupUserJoinView.as_view()
 class GroupUserLeaveView(GroupConfirmMixin, DetailView):
 
     confirm_label = _('Leave')
-    confirm_question = _('Do you want to leave the group “%(group_name)s”?')
-    confirm_title = _('Leaving group “%(group_name)s”?')
+    confirm_question = _('Do you want to leave the %(group_type)s “%(group_name)s”?')
+    confirm_title = _('Leaving %(group_type)s “%(group_name)s”?')
     submit_css_classes = 'btn-danger'
-    message_success = _('You are no longer a member of the group “%(group_name)s”.')
+    message_success = _('You are no longer a member of the %(group_type)s “%(group_name)s”.')
     
     template_name = 'cosinnus/group/group_confirm.html'
 
@@ -316,7 +381,7 @@ class GroupUserLeaveView(GroupConfirmMixin, DetailView):
     
     def get_success_url(self):
         # self.referer is set in post() method
-        messages.success(self.request, self.message_success % {'group_name': self.object.name})
+        messages.success(self.request, self.message_success % {'group_name': self.object.name, 'group_type':self.object._meta.verbose_name})
         return self.referer
     
     def confirm_action(self):
@@ -333,7 +398,7 @@ class GroupUserLeaveView(GroupConfirmMixin, DetailView):
                 print ">>> error!"
         else:
             messages.error(self.request,
-                _('You cannot leave this group. You are the only administrator left.')
+                _('You cannot leave this %(group_type)s. You are the only administrator left.') % { 'group_type':self.object._meta.verbose_name}
             )
 
 group_user_leave = GroupUserLeaveView.as_view()
@@ -342,10 +407,10 @@ group_user_leave = GroupUserLeaveView.as_view()
 class GroupUserWithdrawView(GroupConfirmMixin, DetailView):
 
     confirm_label = _('Withdraw')
-    confirm_question = _('Do you want to withdraw your join request to the group “%(group_name)s”?')
-    confirm_title = _('Withdraw join request to group “%(group_name)s”?')
+    confirm_question = _('Do you want to withdraw your join request to the %(group_type)s “%(group_name)s”?')
+    confirm_title = _('Withdraw join request to %(group_type)s “%(group_name)s”?')
     submit_css_classes = 'btn-danger'
-    message_success = _('Your join request was withdrawn from group “%(group_name)s” successfully.')
+    message_success = _('Your join request was withdrawn from %(group_type)s “%(group_name)s” successfully.')
     
     template_name = 'cosinnus/group/group_confirm.html'
 
@@ -360,7 +425,7 @@ class GroupUserWithdrawView(GroupConfirmMixin, DetailView):
     
     def get_success_url(self):
         # self.referer is set in post() method
-        messages.success(self.request, self.message_success % {'group_name': self.object.name})
+        messages.success(self.request, self.message_success % {'group_name': self.object.name, 'group_type':self.object._meta.verbose_name})
         return self.referer
     
     def confirm_action(self):
@@ -405,7 +470,7 @@ class UserSelectMixin(object):
         return self.model.objects.filter(group=self.group)
 
     def get_success_url(self):
-        return reverse('cosinnus:group-detail', kwargs={'group': self.group.slug})
+        return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.group.slug})
 
 
 class GroupUserAddView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
@@ -486,7 +551,7 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
             if user != self.request.user or self.request.user.is_superuser:
                 self.object.delete()
             else:
-                messages.error(self.request, _('You cannot remove yourself from a group.'))
+                messages.error(self.request, _('You cannot remove yourself from a %(group_type)s.') % {'group_type':self.object._meta.verbose_name})
         else:
             messages.error(self.request, _('You cannot remove “%(username)s” form '
                 'this group. Only one admin left.') % {'username': user.username})
@@ -499,12 +564,14 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
         group_name = self.object.group.name
         context.update({
             'confirm_label': _('Delete'),
-            'confirm_question': _('Do you want to remove the user “%(username)s”  from the group “%(group_name)s”?') % {
+            'confirm_question': _('Do you want to remove the user “%(username)s”  from the %(group_type)s “%(group_name)s”?') % {
                 'username': self.object.user.get_username(),
                 'group_name': group_name,
+                'group_type':self.object._meta.verbose_name,
             },
-            'confirm_title': _('Remove user from group “%(group_name)s”?') % {
+            'confirm_title': _('Remove user from %(group_type)s “%(group_name)s”?') % {
                 'group_name': group_name,
+                'group_type':self.object._meta.verbose_name,
             },
             'submit_css_classes': 'btn-danger',
         })
@@ -522,7 +589,7 @@ class GroupExportView(RequireAdminMixin, TemplateView):
         export_apps = []
         for app, name, label in app_registry.items():
             try:
-                url = reverse('cosinnus:%s:export' % name,
+                url = group_aware_reverse('cosinnus:%s:export' % name,
                               kwargs={'group': self.group.slug})
             except NoReverseMatch:
                 continue

@@ -10,6 +10,7 @@ from cosinnus.core.registries import app_registry
 from cosinnus.models.serializers.profile import UserSimpleSerializer
 from postman.models import Message
 import json
+from cosinnus.core.registries.group_models import group_model_registry
 
 
 def settings(request):
@@ -41,6 +42,8 @@ def cosinnus(request):
     ``COSINNUS_DJANGO_DATE_SHORT_FORMAT``
     
     ``COSINNUS_DJANGO_TIME_FORMAT``
+    
+    ``COSINNUS_GROUP_URL_PATH``
 
     ``COSINNUS_USER``
         If ``request.user`` is logged in, its a serialized version of
@@ -84,4 +87,5 @@ def cosinnus(request):
         'COSINNUS_UNREAD_MESSAGE_COUNT': unread_count,
         'COSINNUS_STREAM_UNSEEN_COUNT': stream_unseen_count,
         'COSINNUS_CURRENT_LANGUAGE': get_language(),
+        'COSINNUS_GROUP_URL_PATH': group_model_registry.get_default_group_key(),
     }

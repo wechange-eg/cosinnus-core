@@ -18,6 +18,7 @@ from cosinnus.forms.dashboard import InfoWidgetForm, DashboardWidgetForm,\
     EmptyWidgetForm
 from cosinnus.models.tagged import AttachedObject
 from cosinnus.models.widget import WidgetConfig
+from cosinnus.utils.urls import group_aware_reverse
 
 
 
@@ -137,7 +138,7 @@ class DashboardWidget(object):
             return ''
         
         if self.config.group:
-            return reverse('cosinnus:%s:index' % self.app_name,
+            return group_aware_reverse('cosinnus:%s:index' % self.app_name,
                            kwargs={'group': self.config.group.slug})
         # return '#' as default url to prevent firefox dropping the <a> tag content
         return '#'

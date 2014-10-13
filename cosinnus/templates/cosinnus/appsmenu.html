@@ -1,9 +1,9 @@
 {% load i18n cosinnus_tags %}
 
-{% url 'cosinnus:group-detail' group=group.slug as group_detail_page %}
-{% url 'cosinnus:group-edit' group=group.slug as group_edit_page %}
-{% url 'cosinnus:group-dashboard' group=group.slug as group_dashboard_page %}
-{% url 'cosinnus:group-microsite' group=group.slug as group_microsite_page %}
+{% group_url 'cosinnus:group-detail' group=group.slug as group_detail_page %}
+{% group_url 'cosinnus:group-edit' group=group.slug as group_edit_page %}
+{% group_url 'cosinnus:group-dashboard' group=group.slug as group_dashboard_page %}
+{% group_url 'cosinnus:group-microsite' group=group.slug as group_microsite_page %}
 
 <div class="btn-group w100 large-space">
     <button type="button" class="btn btn-appnavi dropdown-toggle w100" data-toggle="dropdown">
@@ -39,7 +39,7 @@
     </button>
     <ul class="dropdown-menu appnavi-dropdown-menu w100" role="menu">
         <li class="app-main appnavi-listelement fine-space">
-            <a href="{% url 'cosinnus:group-dashboard' group=group.slug %}">
+            <a href="{% group_url 'cosinnus:group-dashboard' group=group.slug %}">
                 <i class="fa fa-th-large"></i>
                 {% trans "Dashboard" %}
             </a>

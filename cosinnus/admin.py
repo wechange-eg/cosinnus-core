@@ -5,11 +5,10 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 
-from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
+from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
+    CosinnusSociety, CosinnusProject
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import AttachedObject
-from cosinnus.models.organisation import CosinnusOrganisationMembership,\
-    CosinnusOrganisation
 from cosinnus.models.cms import CosinnusMicropage
 
 
@@ -26,35 +25,33 @@ class MembershipInline(admin.StackedInline):
     model = CosinnusGroupMembership
     extra = 0
 
-
+"""
 class CosinnusGroupAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'public',)
     list_filter = ('public',)
     prepopulated_fields = {'slug': ('name', )}
 
 admin.site.register(CosinnusGroup, CosinnusGroupAdmin)
+"""
 
-
-# Organisation related admin
-
-class OrganisationMembershipAdmin(admin.ModelAdmin):
-    list_display = ('organisation', 'user', 'status', 'date',)
-    list_filter = ('organisation', 'user', 'status',)
-
-admin.site.register(CosinnusOrganisationMembership, OrganisationMembershipAdmin)
-
-
-class OrganisationMembershipInline(admin.StackedInline):
-    model = CosinnusOrganisationMembership
-    extra = 0
-
-
-class CosinnusOrganisationAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug',)
-    inlines = (OrganisationMembershipInline,)
+class CosinnusProjectAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug', 'public',)
+    list_filter = ('public',)
     prepopulated_fields = {'slug': ('name', )}
 
-admin.site.register(CosinnusOrganisation, CosinnusOrganisationAdmin)
+admin.site.register(CosinnusProject, CosinnusProjectAdmin)
+
+class CosinnusSocietyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug', 'public',)
+    list_filter = ('public',)
+    prepopulated_fields = {'slug': ('name', )}
+    
+    def get_form(self, request, obj=None, **kwargs):
+        self.exclude = ("parent", )
+        return super(CosinnusSocietyAdmin, self).get_form(request, obj, **kwargs)
+
+admin.site.register(CosinnusSociety, CosinnusSocietyAdmin)
+
 
 
 class CosinnusMicropageAdmin(admin.ModelAdmin):

@@ -4,39 +4,44 @@ from __future__ import unicode_literals
 from django.conf.urls import url
 
 from cosinnus.conf import settings
-from cosinnus.utils.urls import api_patterns
+from cosinnus.utils.url_patterns import api_patterns
+from cosinnus.core.registries.group_models import group_model_registry
 
 
 urlpatterns = api_patterns(1, None, False, 'cosinnus.views',
     url(r'^login/$', 'user.login_api', name='login'),
     url(r'^logout/$', 'user.logout_api', name='logout'),
-
-    url(r'^%s/list/$' % settings.COSINNUS_GROUP_URL_PATH,
-        'group.group_list_api',
-        name='group-list'),
-
-    url(r'^%s/list/(?P<group>[^/]+)/$' % settings.COSINNUS_GROUP_URL_PATH,
-        'group.group_detail_api',
-        name='group-detail'),
-
-    url(r'^%s/add/$' % settings.COSINNUS_GROUP_URL_PATH,
-        'group.group_create_api',
-        name='group-add'),
-
-    url(r'^%s/delete/(?P<group>[^/]+)/$' % settings.COSINNUS_GROUP_URL_PATH,
-        'group.group_delete_api',
-        name='group-delete'),
-
-    url(r'^%s/update/(?P<group>[^/]+)/$' % settings.COSINNUS_GROUP_URL_PATH,
-        'group.group_update_api',
-        name='group-edit'),
                            
     url(r'^taggable_object/update/$',
         'api.taggable_object_update_api',
         name='taggable-object-update-api'),
                            
-                           
 )
+
+for url_key in group_model_registry:
+    prefix = group_model_registry.get_url_name_prefix(url_key, '')
+    
+    urlpatterns += api_patterns(1, None, False, 'cosinnus.views',
+        url(r'^%s/list/$' % url_key,
+            'group.group_list_api',
+            name=prefix+'group-list'),
+    
+        url(r'^%s/list/(?P<group>[^/]+)/$' % url_key,
+            'group.group_detail_api',
+            name=prefix+'group-detail'),
+    
+        url(r'^%s/add/$' % url_key,
+            'group.group_create_api',
+            name=prefix+'group-add'),
+    
+        url(r'^%s/delete/(?P<group>[^/]+)/$' % url_key,
+            'group.group_delete_api',
+            name=prefix+'group-delete'),
+    
+        url(r'^%s/update/(?P<group>[^/]+)/$' % url_key,
+            'group.group_update_api',
+            name=prefix+'group-edit'),
+    )
 
 urlpatterns += api_patterns(1, None, True, 'cosinnus.views',
     url(r'^user/list/$',

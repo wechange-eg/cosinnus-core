@@ -2,7 +2,7 @@
 {% load i18n cosinnus_tags %}
 
 {% block page_title %}
-  {% blocktrans with group_name=object.name %}{{ group_name }} - Group Members{% endblocktrans %}
+  {% blocktrans with group_name=object.name %}{{ group_name }} - Members{% endblocktrans %}
 {% endblock %}
 
 {% block leftnav %}
@@ -11,7 +11,7 @@
 
 {% block breadcrumb %}
         {{ block.super }}
-        <li class="active">{% trans "Group Members" %}</li>
+        <li class="active">{% trans "Members" %}</li>
 {% endblock %}
 
 
@@ -22,7 +22,7 @@
     <div class="content-box">
         
         {% if user|has_write_access:object %}
-            <form action="{% url 'cosinnus:group-user-add-generic' group=object.slug %}" method="post">{% csrf_token %}
+            <form action="{% group_url 'cosinnus:group-user-add-generic' group=object.slug %}" method="post">{% csrf_token %}
 	            <div type="button" class="btn btn-default w100 large-space">
 	                <ul class="media-list">
 	                    <li class="media">
@@ -32,7 +32,7 @@
 	                        <div class="media-body">
 	                            <select name="user" class="user-selector form-control next-button-is-for-sending" data-placeholder="{% trans 'Gib den Namen für ein neues Mitglied ein.' %}">
 	                                <option></option>
-	                                <option value="" default disabled selected>{% trans 'Add a user to this group' %}</option>
+	                                <option value="" default disabled selected>{% trans 'Add a member' %}</option>
 	                                {% for candidate in non_members %}
 	                                   <option value="{{ candidate.pk }}">{{ candidate|full_name }}</option>
 	                                {% endfor %}
@@ -58,7 +58,7 @@
         {% endif %}
 
 
-        <legend>{% trans "Group members" %}</legend>
+        <legend>{% trans "Members" %}</legend>
     
         {% for member in members %}
             <div class="fadedown {% if not forloop.last %}regular-space{% endif %}">
@@ -76,9 +76,9 @@
                             <div class="media-body">
                                     <span class="annotation">
                                         {% if member in admins %}
-                                            {% trans "Group Admin" %}
+                                            {% trans "Admin" %}
                                         {% elif member in members %}
-                                            {% trans "Group Member" %}
+                                            {% trans "Member" %}
                                         {% endif %}
                                     </span>
                                 <a href="{% url 'cosinnus:profile-detail' username=member.username %}">
@@ -132,19 +132,19 @@
                 {% if member in admins %}
                     {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to demote administrator „{{ name }}“ to member?{% endblocktrans %}{% endcaptureas %}
                     {% captureas title %}{% trans "Demote Admin" %}{% endcaptureas %}
-                    {% captureas action %}{% url 'cosinnus:group-user-edit' group=object.slug username=member.username %}{% endcaptureas %}
+                    {% captureas action %}{% group_url 'cosinnus:group-user-edit' group=object.slug username=member.username %}{% endcaptureas %}
                     {% captureas extra_fields %}<input type="hidden" name="user" value="{{member.pk}}" /><input type="hidden" name="status" value="1" />{% endcaptureas %}
                 {% else %}
                     {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to promote member „{{ name }}“ to administrator?{% endblocktrans %}{% endcaptureas %}
                     {% captureas title %}{% trans "Promote Member" %}{% endcaptureas %}
-                    {% captureas action %}{% url 'cosinnus:group-user-edit' group=object.slug username=member.username %}{% endcaptureas %}
+                    {% captureas action %}{% group_url 'cosinnus:group-user-edit' group=object.slug username=member.username %}{% endcaptureas %}
                     {% captureas extra_fields %}<input type="hidden" name="user" value="{{member.pk}}" /><input type="hidden" name="status" value="2" />{% endcaptureas %}
                 {% endif %}
                 {% include "cosinnus/modal_box.html" with id=modal_promote_id label=label title=title form_action=action form_extra_fields=extra_fields %}
                 
                 {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to remove member „{{ name }}“ from the Group?{% endblocktrans %}{% endcaptureas %}
                 {% captureas title %}{% trans "Remove Member" %}{% endcaptureas %}
-                {% captureas action %}{% url 'cosinnus:group-user-delete' group=object.slug username=member.username %}{% endcaptureas %}
+                {% captureas action %}{% group_url 'cosinnus:group-user-delete' group=object.slug username=member.username %}{% endcaptureas %}
                 {% include "cosinnus/modal_box.html" with id=modal_kick_id label=label title=title form_action=action %}
                 
             {% endif %}
@@ -222,13 +222,13 @@
 		            {% if user|has_write_access:object %}    
 	                    {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to accept user „{{ name }}“ as a member?{% endblocktrans %}{% endcaptureas %}
 	                    {% captureas title %}{% trans "Accept Member" %}{% endcaptureas %}
-	                    {% captureas action %}{% url 'cosinnus:group-user-edit' group=object.slug username=member.username %}{% endcaptureas %}
+	                    {% captureas action %}{% group_url 'cosinnus:group-user-edit' group=object.slug username=member.username %}{% endcaptureas %}
 	                    {% captureas extra_fields %}<input type="hidden" name="user" value="{{member.pk}}" /><input type="hidden" name="status" value="1" />{% endcaptureas %}
 		                {% include "cosinnus/modal_box.html" with id=modal_promote_id label=label title=title form_action=action form_extra_fields=extra_fields %}
 		                
 		                {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to decline member „{{ name }}“?{% endblocktrans %}{% endcaptureas %}
 		                {% captureas title %}{% trans "Decline Member" %}{% endcaptureas %}
-		                {% captureas action %}{% url 'cosinnus:group-user-delete' group=object.slug username=member.username %}{% endcaptureas %}
+		                {% captureas action %}{% group_url 'cosinnus:group-user-delete' group=object.slug username=member.username %}{% endcaptureas %}
 		                {% include "cosinnus/modal_box.html" with id=modal_kick_id label=label title=title form_action=action %}
 		                
 		            {% endif %}
