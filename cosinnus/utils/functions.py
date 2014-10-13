@@ -44,7 +44,12 @@ def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
     max_length = item._meta.get_field_by_name(slug_field)[0].max_length
     slug_len = max_length - 10  # 1 for '-'and 4 (+5 for etherpad-id compatibility) for the counter
     slug = slugify(getattr(item, slug_source)[:slug_len])
+    
+    # resolve proxy classes to their lowest common database model
     model = item.__class__
+    while model._meta.proxy:
+        model =  model.__bases__[0]
+        
     # the following gets all existing slug values
     if slug_field not in kwargs:
         kwargs['%s__startswith' % slug_field] = slug
