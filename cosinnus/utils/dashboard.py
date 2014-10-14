@@ -42,10 +42,10 @@ class DashboardWidget(object):
         self.config = config_instance
 
     @classonlymethod
-    def create(cls, request, group=None, user=None):
+    def create(cls, request, group=None, user=None, widget_type=WidgetConfig.TYPE_DASHBOARD):
         from cosinnus.models.widget import WidgetConfig
         config = WidgetConfig.objects.create(app_name=cls.get_app_name(),
-            widget_name=cls.get_widget_name(), group=group, user=user)
+            widget_name=cls.get_widget_name(), group=group, user=user, type=widget_type)
         return cls(request, config)
 
     @classmethod
@@ -113,6 +113,7 @@ class DashboardWidget(object):
                 if hasattr(self.config, k):
                     setattr(self.config, k, v)
                     committed = False
+                # config items are saved in the WidgetConfig.__setitem__() method!
                 self.config[k] = v
             if not committed:    
                 self.config.save()
