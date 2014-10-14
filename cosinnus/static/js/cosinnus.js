@@ -34,6 +34,17 @@
 			$('.fadedown').not('.open').find('> :not(:first-child)').hide();
 		},
 
+		editThisClickarea : function() {
+			$('.edit-this-clickarea').click(function() {
+				$(this).closest('.btn-emphasized, .btn-extra-emphasized')
+					.removeClass('btn-emphasized')
+					.removeClass('btn-extra-emphasized')
+					.addClass('btn-default');
+				$(this).next().find('a').remove();
+				$(this).next().find('input').show();
+				$(this).hide();
+			});
+		},
 
 		selectors : function() {
 			// Various inputs that use jQuery select2 plugin
@@ -965,6 +976,7 @@ $(function() {
 	$.cosinnus.selectors();
 	$.cosinnus.fullcalendar();
 	$.cosinnus.calendarBig();
+	$.cosinnus.editThisClickarea();
 	$.cosinnus.searchbar();
 	$.cosinnus.todosSelect();
 	$.cosinnus.datePicker();
