@@ -1,0 +1,53 @@
+{% load i18n cosinnus_tags %}
+
+<div class="fadedown">
+    <button type="button" class="btn w100 btn-{% if active %}extra-{% endif %}emphasized {{ extra_classes }}" {% if extra_atts %}{{ extra_atts }}{% endif %}>
+    {% comment %} <button type="button" class="btn w100 btn{% if active %}-extra{% endif %}-emphasized {{ extra_classes }}" href="{{ href }}"> {% endcomment %}
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left btn-extra-emphasized" href="{{ href }}">
+                    {% if icon_content %}
+                        {{ icon_content }}
+                    {% else %}
+                        <i class="fa {{ icon }}"></i>
+                    {% endif %}
+                </a>
+                <a id="folder_clickarea_{{ folder.group.pk }}_{{ folder.pk }}" class="pull-right fadedown-clickarea edit-this-clickarea" title="{% trans "Edit folder" %}" href="#">
+                    <i class="fa fa-pencil"></i>
+                </a>
+                <div class="media-body" href="{{ href }}" >
+                    <span>{{ label }}</span>
+                    {% captureas on_success %}$.cosinnus.restoreThisClickarea('#folder_clickarea_{{ folder.group.pk }}_{{ folder.pk }}'){% endcaptureas %}
+                    <input id="folder_{{ folder.group.pk }}_{{ folder.pk }}" class="form-control" style="display: none;" 
+                        placeholder="{% trans "Folder name" %}" value="{{ label }}" 
+                        {% djajax_connect folder.title trigger_on="enter_key" empty="false" on_success=on_success %} />
+                </div>
+            </li>
+        </ul>
+    </button>
+    
+    <button type="button" class="btn btn-emphasized fine-space" onclick="$.cosinnus.pressEnterOn('#folder_{{ folder.group.pk }}_{{ folder.pk }}')">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-right btn-extra-emphasized" href="#">
+                    <i class="fa fa-floppy-o"></i>
+                </a>
+                <div class="media-body">
+                    Speichern
+                </div>
+            </li>
+        </ul>
+    </button>
+    <button type="button" class="btn btn-emphasized large-space">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-right btn-extra-emphasized" href="#">
+                    <i class="fa fa-trash-o"></i>
+                </a>
+                <div class="media-body">
+                    Löschen
+                </div>
+            </li>
+        </ul>
+    </button>
+</div>

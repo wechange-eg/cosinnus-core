@@ -366,6 +366,10 @@ class DjajaxConnectNode(template.Node):
         'fixed_value': None,
         # do we allow sending empty data? if set to false, will not POST when the data is empty or ''
         'empty': 'true',
+        # which JS function we should execute on successful POST execute
+        'on_success': None,
+        # which JS function we should execute on failed POST execute
+        'on_error': None,
     }
     
     def _addArgFromParams(self, add_from_args, add_to_dict, context, arg_name, default_value=None):

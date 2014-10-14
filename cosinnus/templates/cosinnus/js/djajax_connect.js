@@ -54,6 +54,10 @@ function djajax_trigger_{{ node_id }}(e) {
                  console.log('Success! for {{ node_id }} ! With data ' + JSON.stringify(data));
                  // save last data
                  $('[djajax-id={{ node_id }}]').attr('djajax-last-value', djajax_get_value_{{ node_id }}());
+                 {% if on_success %}
+                 // execute on_success
+                 {{ on_success|safe }}
+                 {% endif %}
              } else {
                  console.log('Error in Saving! for {{ node_id }} ! With data ' + JSON.stringify(data));
                  // restore last data

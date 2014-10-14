@@ -1,11 +1,14 @@
 // wrap in a self executing anonymous function that sets $ as jQuery namespace
 (function( $ ){
 	$.cosinnus = {
-		fadedown : function() {
+		fadedown : function(target) {
 			// DIV.fadedown is a wrapper that contains a button with toggle element
 			// and other elements that will be hidden or shown depending on the state.
-
-			$('body').on('click','.fadedown .btn:first-child .fadedown-clickarea, .fadedown .btn:first-child.fadedown-clickarea',function() {
+		    
+		    if (typeof target === "undefined") {
+		        target = 'body';
+		    }
+			$(target).on('click','.fadedown .btn:first-child .fadedown-clickarea, .fadedown .btn:first-child.fadedown-clickarea',function() {
 				if (!$(this).closest('.fadedown').hasClass('open')) {
 					// closed
 					$(this)
@@ -33,17 +36,38 @@
 			// hide fadedown boxes unless .open class explicit set
 			$('.fadedown').not('.open').find('> :not(:first-child)').hide();
 		},
+		
+		reopenFadedown : function(target) {
+		    target.removeClass('open');
+		    $.cosinnus.fadedown(target.parent());
+		},
 
 		editThisClickarea : function() {
-			$('.edit-this-clickarea').click(function() {
+			$('.edit-this-clickarea').click(function(event) {
+			    event.preventDefault();
 				$(this).closest('.btn-emphasized, .btn-extra-emphasized')
 					.removeClass('btn-emphasized')
 					.removeClass('btn-extra-emphasized')
 					.addClass('btn-default');
-				$(this).next().find('a').remove();
-				$(this).next().find('input').show();
+				var media_body = $(this).next();
+				media_body.attr('_href', media_body.attr('href')).removeAttr('href').find('span').toggle();
+				media_body.find('input').show();
 				$(this).hide();
 			});
+		},
+		
+		restoreThisClickarea : function(target_selector) {
+		    $(target_selector).closest('.btn-default')
+		    .removeClass('btn-default')
+            .addClass('btn-emphasized')
+            .addClass('btn-extra-emphasized');
+		    var media_body = $(target_selector).next();
+		    media_body.attr('href', media_body.attr('_href'))
+		              .removeAttr('_href')
+		              .find('span').text(media_body.find('input').val()).toggle();
+		    media_body.find('input').hide();
+            $(target_selector).show();
+            $.cosinnus.reopenFadedown($(target_selector).closest('.fadedown'));
 		},
 
 		selectors : function() {
@@ -798,7 +822,7 @@
 
 		buttonHref : function() {
 			// allow href attribute for buttons
-			$('body').on('click','button',function() {
+			$('body').on('click','button,div',function() {
 				if ($(this).attr('href')) {
 					$(location).attr("href", $(this).attr('href'));
 				}
@@ -857,8 +881,17 @@
 
 
 		autogrow : function() {
-			$('textarea.autogrow').autogrow();
-		},
+            $('textarea.autogrow').autogrow();
+        },
+        
+        pressEnterOn : function(target_selector) {
+            var e = jQuery.Event("keydown");
+            e.which = 13;
+            e.keyCode = 13;
+            $(target_selector).trigger(e);
+            console.log('pressed enter on');
+            console.log($(target_selector));
+        },
 
 		map : function() {
 			if (!$('#map').length) return;

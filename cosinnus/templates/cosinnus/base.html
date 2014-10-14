@@ -101,7 +101,9 @@
         </div><!-- main container -->
         
     {% include 'cosinnus/extrafooter.html' %}
-    {% block extrafooter %}{% endblock extrafooter %}
+    {% block extrafooter %}
+        {% djajax generate %}
+    {% endblock extrafooter %}
     
   </body>
 </html>
