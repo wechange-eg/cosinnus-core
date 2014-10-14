@@ -43,8 +43,6 @@ def cosinnus(request):
     
     ``COSINNUS_DJANGO_TIME_FORMAT``
     
-    ``COSINNUS_GROUP_URL_PATH``
-
     ``COSINNUS_USER``
         If ``request.user`` is logged in, its a serialized version of
         :class:`~cosinnus.models.serializers.profile.UserSimpleSerializer`. If
@@ -87,5 +85,4 @@ def cosinnus(request):
         'COSINNUS_UNREAD_MESSAGE_COUNT': unread_count,
         'COSINNUS_STREAM_UNSEEN_COUNT': stream_unseen_count,
         'COSINNUS_CURRENT_LANGUAGE': get_language(),
-        'COSINNUS_GROUP_URL_PATH': group_model_registry.get_default_group_key(),
     }

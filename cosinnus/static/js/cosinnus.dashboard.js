@@ -82,11 +82,11 @@ $('.js-todo-link').on('click', function(e) {
             var app = args.app;
             var widget = args.widget;
             var data = args.data;
-            var url = Cosinnus.base_url + 'widgets/add/';
+            var url = Cosinnus.base_url;
             if (Cosinnus.dashboard.group === false) {
-                url = url + "user/";
+                url = url + "widgets/add/user/";
             } else {
-                url = url + cosinnus_group_url_path + "/" + Cosinnus.dashboard.group + "/";
+                url = url + cosinnus_group_url_path + "/" + Cosinnus.dashboard.group + "/widgets/add/";
             }
             url = url + app + "/" + widget + "/";
             if (data === undefined) {
@@ -116,11 +116,11 @@ $('.js-todo-link').on('click', function(e) {
         },
         add_empty: function(holder) {
             var that = this;
-            var url = Cosinnus.base_url + 'widgets/add/';
+            var url = Cosinnus.base_url;
             if (Cosinnus.dashboard.group === false) {
-                url = url + "user/";
+                url = url + "widgets/add/user/";
             } else {
-                url = url + cosinnus_group_url_path + "/" + Cosinnus.dashboard.group + "/";
+                url = url + cosinnus_group_url_path + "/" + Cosinnus.dashboard.group + "/widgets/add/";
             }
             
             $.ajax(url).done(function(data, textStatus, jqXHR) {

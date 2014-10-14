@@ -60,8 +60,8 @@ for url_key in group_model_registry:
         url(r'^%s/(?P<group>[^/]+)/users/edit/(?P<username>[^/]+)/$' % url_key, 'group.group_user_update', name=prefix+'group-user-edit'),
         url(r'^%s/(?P<group>[^/]+)/export/$' % url_key, 'group.group_export', name=prefix+'group-export'),
     
-        url(r'^widgets/add/%s/(?P<group>[^/]+)/$' % url_key, 'widget.widget_add_group', name=prefix+'widget-add-group-empty'),
-        url(r'^widgets/add/%s/(?P<group>[^/]+)/(?P<app_name>[^/]+)/(?P<widget_name>[^/]+)/$' % url_key, 'widget.widget_add_group', name=prefix+'widget-add-group'),
+        url(r'^%s/(?P<group>[^/]+)/widgets/add/$' % url_key, 'widget.widget_add_group', name=prefix+'widget-add-group-empty'),
+        url(r'^%s/(?P<group>[^/]+)/widgets/add/(?P<app_name>[^/]+)/(?P<widget_name>[^/]+)/$' % url_key, 'widget.widget_add_group', name=prefix+'widget-add-group'),
         
         url(r'^%s/(?P<group>[^/]+)/attachmentselect/(?P<model>[^/]+)$' % url_key, 'attached_object.attachable_object_select2_view', name=prefix+'attached_object_select2_view'),
     )

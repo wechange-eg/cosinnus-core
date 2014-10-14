@@ -144,6 +144,13 @@ def subtract(value, arg):
     """
     return value - arg
 
+@register.simple_tag(takes_context=True)
+def cosinnus_group_url_path(context, group=None):
+    group = group or context.get('group', None)
+    if group:
+        return group_model_registry.group_type_index[group.type]
+    else:
+        return group_model_registry.get_default_group_key()
 
 @register.simple_tag(takes_context=True)
 def cosinnus_menu(context, template="cosinnus/navbar.html"):
