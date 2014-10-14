@@ -31,6 +31,13 @@ class CosinnusConf(AppConf):
     # the url pattern for group overview URLs
     GROUP_PLURAL_URL_PATH = 'projects'
     
+    # which apps objects as object lists will be listed on the microsite? 
+    # must be model names of BaseTaggableObjects that can be resolved via a 
+    # render_list_for_user() function in the app's registered Renderer.
+    # example: ['cosinnus_note.Note', 'cosinnus_etherpad.Etherpad']
+    MICROSITE_DISPLAYED_APP_OBJECTS = ['cosinnus_note.Note', 'cosinnus_etherpad.Etherpad',
+        'cosinnus_file.FileEntry', 'cosinnus_event.Event']
+    
     #: How long an organisation should at most stay in cache until it will be removed
     ORGANISATION_CACHE_TIMEOUT = 60 * 60 * 24
 

@@ -1,18 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib import messages
-from django.contrib.auth import get_user_model
-from django.core.exceptions import ImproperlyConfigured
-from django.core.urlresolvers import reverse, reverse_lazy, NoReverseMatch
-from django.http import HttpResponseRedirect
-from django.utils.decorators import method_decorator
-from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import (CreateView, DeleteView, DetailView,
-    ListView, UpdateView, TemplateView)
-from cosinnus.views.mixins.group import RequireReadMixin, RequireWriteMixin
+from django.views.generic import TemplateView
+
+from cosinnus.views.mixins.group import RequireWriteMixin
 from cosinnus.models.widget import WidgetConfig
+from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusGroup
 from django.http.response import HttpResponseNotFound
 from cosinnus.models.cms import CosinnusMicropage
@@ -59,7 +53,7 @@ class GroupMicrosite(TemplateView):
         """ Item list inline views """
         item_inlines = []
         item_limit = 5
-        for model_name in ['cosinnus_note.Note', 'cosinnus_etherpad.Etherpad', 'cosinnus_file.FileEntry', 'cosinnus_event.Event']:
+        for model_name in settings.COSINNUS_MICROSITE_DISPLAYED_APP_OBJECTS:
             Renderer = attached_object_registry.get(model_name)
             if Renderer:
                 qs_filter = {'group__slug': self.group.slug}
