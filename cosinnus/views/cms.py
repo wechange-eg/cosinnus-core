@@ -58,11 +58,16 @@ class GroupMicrosite(TemplateView):
             if Renderer:
                 qs_filter = {'group__slug': self.group.slug}
                 app_name = get_cosinnus_app_from_class(Renderer)
-                item_inlines.append({
-                    'model': model_name,
-                    'app_name': app_name,
-                    'content': Renderer.render_list_for_user(self.request.user, self.request, qs_filter, limit=item_limit, standalone_app=app_name)
-                })
+                content = Renderer.render_list_for_user(self.request.user, self.request, 
+                                qs_filter, limit=item_limit, 
+                                render_if_empty=settings.COSINNUS_MICROSITE_RENDER_EMPTY_APPS, 
+                                standalone_app=app_name)
+                if content:
+                    item_inlines.append({
+                        'model': model_name,
+                        'app_name': app_name,
+                        'content': content,
+                    })
         
         kwargs.update({
             'widgets': ids,

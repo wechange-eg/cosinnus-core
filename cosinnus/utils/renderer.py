@@ -73,7 +73,7 @@ class BaseRenderer(object):
         return qs
     
     @classmethod
-    def render_list_for_user(cls, user, request, qs_filter={}, limit=30, **kwargs):
+    def render_list_for_user(cls, user, request, qs_filter={}, limit=30, render_if_empty=True, **kwargs):
         """ Will render a standalone list of items of the renderer's model for
             a user and a request (important if there are forms in the template).
             This function will filter for access permissions for all of the items,
@@ -81,6 +81,8 @@ class BaseRenderer(object):
             passed via the qs_filter dict.
         """
         qs = cls.get_object_list_for_user(user, qs_filter, limit)
+        if not qs and not render_if_empty:
+            return None
         
         context = {}
         context.update(kwargs)

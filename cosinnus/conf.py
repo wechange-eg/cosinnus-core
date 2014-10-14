@@ -38,6 +38,9 @@ class CosinnusConf(AppConf):
     MICROSITE_DISPLAYED_APP_OBJECTS = ['cosinnus_note.Note', 'cosinnus_etherpad.Etherpad',
         'cosinnus_file.FileEntry', 'cosinnus_event.Event']
     
+    # should empty apps list be displayed at all, or omitted?
+    MICROSITE_RENDER_EMPTY_APPS = True
+    
     #: How long an organisation should at most stay in cache until it will be removed
     ORGANISATION_CACHE_TIMEOUT = 60 * 60 * 24
 
