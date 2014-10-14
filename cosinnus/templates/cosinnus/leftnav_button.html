@@ -1,4 +1,4 @@
-<button type="button" class="btn w100 btn-emphasized {{ extra_classes }}" href="{{ href }}" {% if extra_atts %}{{ extra_atts }}{% endif %}>
+<button type="button" class="btn w100 btn-{% if active %}extra-{% endif %}emphasized {{ extra_classes }}" href="{{ href }}" {% if extra_atts %}{{ extra_atts }}{% endif %}>
 {% comment %} <button type="button" class="btn w100 btn{% if active %}-extra{% endif %}-emphasized {{ extra_classes }}" href="{{ href }}"> {% endcomment %}
     <ul class="media-list">
         <li class="media">
@@ -9,11 +9,6 @@
                     <i class="fa {{ icon }}"></i>
                 {% endif %}
             </a>
-            {% if active %}
-	            <a class="pull-right" href="#">
-		            <i class="fa fa-caret-right"></i>
-	            </a><!-- only block width -->
-            {% endif %}
             <div class="media-body">
                 {{ label }}
             </div>
