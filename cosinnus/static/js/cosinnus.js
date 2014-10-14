@@ -37,7 +37,7 @@
 			$('.fadedown').not('.open').find('> :not(:first-child)').hide();
 		},
 		
-		reopenFadedown : function(target) {
+		closeFadedown : function(target) {
 		    target.removeClass('open');
 		    $.cosinnus.fadedown(target.parent());
 		},
@@ -67,7 +67,7 @@
 		              .find('span').text(media_body.find('input').val()).toggle();
 		    media_body.find('input').hide();
             $(target_selector).show();
-            $.cosinnus.reopenFadedown($(target_selector).closest('.fadedown'));
+            $.cosinnus.closeFadedown($(target_selector).closest('.fadedown'));
 		},
 
 		selectors : function() {

@@ -63,6 +63,10 @@ function djajax_trigger_{{ node_id }}(e) {
                  // restore last data
                  console.log('restoring lasta data:' + $('[djajax-id={{ node_id }}]').attr('djajax-last-value'))
                  djajax_set_value_{{ node_id }}($('[djajax-id={{ node_id }}]').attr('djajax-last-value'));
+                 {% if on_error %}
+                 // execute on_success
+                 {{ on_error|safe }}
+                 {% endif %}
              }
              
          },
@@ -71,7 +75,10 @@ function djajax_trigger_{{ node_id }}(e) {
              // restore last data
              console.log('restoring lasta data:' + $('[djajax-id={{ node_id }}]').attr('djajax-last-value'))
              djajax_set_value_{{ node_id }}($('[djajax-id={{ node_id }}]').attr('djajax-last-value'));
-         
+             {% if on_error %}
+             // execute on_success
+             {{ on_error|safe }}
+             {% endif %}
          }
          
     });
