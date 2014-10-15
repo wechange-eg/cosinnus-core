@@ -33,21 +33,27 @@
                     <i class="fa fa-floppy-o"></i>
                 </a>
                 <div class="media-body">
-                    Speichern
+                    {% trans "Save" %}
                 </div>
             </li>
         </ul>
     </button>
-    <button type="button" class="btn btn-emphasized large-space">
+    <button type="button" class="btn btn-emphasized large-space" title="{% trans "Delete folder" %}" data-toggle="modal" data-target="#deleteFolder_{{folder.pk}}">
         <ul class="media-list">
             <li class="media">
                 <a class="pull-right btn-extra-emphasized" href="#">
                     <i class="fa fa-trash-o"></i>
                 </a>
                 <div class="media-body">
-                    Löschen
+                    {% trans "Delete" %}
                 </div>
             </li>
         </ul>
     </button>
 </div>
+
+{% captureas modal_id %}deleteFolder_{{folder.pk}}{% endcaptureas %}
+{% captureas title %}{% trans "Delete folder" %}{% endcaptureas %}
+{% captureas label %}{% trans "Do you really want to delete this folder and ALL folders and items it contains? This actions CANNOT be reversed!" %}{% endcaptureas %}
+{% include "cosinnus/modal_box.html" with id=modal_id label=label title=title form_action=folder.get_delete_url %}
+        

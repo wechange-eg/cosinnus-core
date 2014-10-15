@@ -18,6 +18,7 @@ from cosinnus.utils.functions import unique_aware_slugify
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.core.registries.widgets import widget_registry
 from django.utils.functional import cached_property
+from django.core.exceptions import ImproperlyConfigured
 
 
 class LocationModelMixin(models.Model):
@@ -211,6 +212,12 @@ class BaseTaggableObjectModel(models.Model):
             
             @param user: The user to check for extra permissions for """
         return False
+    
+    def get_delete_url(self):
+        """ Similar to get_absolute_url, this returns the URL for this object's implemented delete view.
+            Needs to be set by a specific implementation of BaseTaggableObjectModel """
+        raise ImproperlyConfigured("The get_delete_url function must be implemented for model '%s'" % self.__class__)
+    
 
 class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
     """

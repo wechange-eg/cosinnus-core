@@ -14,6 +14,7 @@ from django.views.generic.list import MultipleObjectMixin
 
 from taggit.models import Tag, TaggedItem
 from cosinnus.forms.hierarchy import AddContainerForm
+from django.core.exceptions import PermissionDenied
 
 
 class TaggedListMixin(object):
@@ -309,6 +310,9 @@ class HierarchyDeleteMixin(object):
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
+        if self.object.is_container and self.object.path == "/":
+            raise PermissionDenied("The root file object cannot be deleted!")
+        
         if self.object.is_container:
             del_list = list(self._get_objects_in_path(self.object.path))
         else:
