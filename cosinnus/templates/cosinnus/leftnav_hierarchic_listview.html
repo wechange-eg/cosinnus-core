@@ -22,7 +22,7 @@
         {% captureas folder_size %}{{ folder.objects|length }}{% endcaptureas %}
     {% endif %}
     {% captureas active %}{% if current_folder and folder.name == current_folder.slug %}True{% endif %}{% endcaptureas %}
-    {% captureas button_template %}{% if user|has_write_access:folder.container_object %}cosinnus/leftnav_button_editable_folder.html{% else %}cosinnus/leftnav_button.html{% endif %}{% endcaptureas %}
+    {% captureas button_template %}{% if user|can_create_objects_in:folder.container_object.group %}cosinnus/leftnav_button_editable_folder.html{% else %}cosinnus/leftnav_button.html{% endif %}{% endcaptureas %}
     
     {% include button_template with active=active extra_classes=button_class icon="fa-folder" icon_content=folder_size label=label href=href folder=folder.container_object %}
 {% endfor %}

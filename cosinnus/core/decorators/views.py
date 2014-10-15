@@ -255,3 +255,51 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             
         return wrapper
     return decorator
+
+
+
+def require_create_objects_in_access(group_url_kwarg='group', group_attr='group'):
+    """A method decorator that takes the group name from the kwargs of a
+    dispatch function in CBVs and checks that the requesting user is allowed to
+    perform read operations.
+
+    Additionally this function populates the group instance to the view
+    instance as attribute `group_attr`
+
+    :param str group_url_kwarg: The name of the key containing the group name.
+        Defaults to `'group'`.
+    :param str group_attr: The attribute name which can later be used to access
+        the group from within an view instance (e.g. `self.group`). Defaults to
+        `'group'`.
+    """
+
+    def decorator(function):
+        @functools.wraps(function, assigned=available_attrs(function))
+        def wrapper(self, request, *args, **kwargs):
+            group_name = kwargs.get(group_url_kwarg, None)
+            if not group_name:
+                return HttpResponseNotFound(_("No group provided"))
+
+            group = get_group_for_request(group_name, request)
+            if not group:
+                return HttpResponseNotFound(_("No group found with this name"))
+            user = request.user
+            
+            if not group.public and not user.is_authenticated():
+                # support for the ajaxable view mixin
+                if getattr(self, 'is_ajax_request_url', False):
+                    return HttpResponseForbidden('Not authenticated')
+                messages.error(request, _('Please log in to access this page.'))
+                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
+            
+            setattr(self, group_attr, group)
+            
+            if check_group_create_objects_access(group, user):
+                return function(self, request, *args, **kwargs)
+
+            # Access denied, redirect to 403 page and and display an error message
+            return redirect_to_403(request)
+            
+        return wrapper
+    return decorator
+
