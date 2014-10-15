@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-13 16:03+0200\n"
+"POT-Creation-Date: 2014-10-15 15:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,17 +37,19 @@ msgstr ""
 
 #: .\core\decorators\views.py:75 .\core\decorators\views.py:120
 #: .\core\decorators\views.py:165 .\core\decorators\views.py:221
+#: .\core\decorators\views.py:281
 msgid "No group provided"
 msgstr "No project provided"
 
 #: .\core\decorators\views.py:79 .\core\decorators\views.py:124
 #: .\core\decorators\views.py:169 .\core\decorators\views.py:225
-#: .\views\cms.py:40 .\views\cms.py:96
+#: .\core\decorators\views.py:285 .\views\cms.py:34 .\views\cms.py:95
 msgid "No group found with this name"
 msgstr "No project found with this name"
 
 #: .\core\decorators\views.py:86 .\core\decorators\views.py:131
 #: .\core\decorators\views.py:176 .\core\decorators\views.py:232
+#: .\core\decorators\views.py:292
 msgid "Please log in to access this page."
 msgstr ""
 
@@ -103,7 +105,7 @@ msgstr ""
 msgid "Enter a description"
 msgstr ""
 
-#: .\forms\filters.py:86 .\forms\search.py:51 .\models\tagged.py:57
+#: .\forms\filters.py:86 .\forms\search.py:51 .\models\tagged.py:58
 #: .\templates\cosinnus\search.html.py:29
 #: .\templates\cosinnus\search.html.py:156
 msgid "All"
@@ -177,7 +179,7 @@ msgstr ""
 msgid "This account is inactive."
 msgstr ""
 
-#: .\models\cms.py:19 .\models\tagged.py:136
+#: .\models\cms.py:19 .\models\tagged.py:137
 msgid "Title"
 msgstr ""
 
@@ -201,8 +203,8 @@ msgstr ""
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 
-#: .\models\group.py:306 .\models\tagged.py:56 .\models\tagged.py:60
-#: .\models\tagged.py:133
+#: .\models\group.py:306 .\models\tagged.py:57 .\models\tagged.py:61
+#: .\models\tagged.py:134
 msgid "Group"
 msgstr ""
 
@@ -236,7 +238,7 @@ msgstr ""
 msgid "Website"
 msgstr ""
 
-#: .\models\group.py:322 .\models\tagged.py:38
+#: .\models\group.py:322 .\models\tagged.py:39
 #: .\templates\cosinnus\group\group_form.html.py:194
 #: .\templates\cosinnus\group\group_list.html.py:93
 msgid "Public"
@@ -282,39 +284,39 @@ msgstr ""
 msgid "Group memberships"
 msgstr ""
 
-#: .\models\tagged.py:55 .\templates\cosinnus\group\group_user_list.html.py:13
+#: .\models\tagged.py:56 .\templates\cosinnus\group\group_user_list.html.py:13
 msgid "User"
 msgstr ""
 
-#: .\models\tagged.py:64
+#: .\models\tagged.py:65
 msgid "Persons"
 msgstr ""
 
-#: .\models\tagged.py:66
+#: .\models\tagged.py:67
 msgid "Tags"
 msgstr ""
 
-#: .\models\tagged.py:68
+#: .\models\tagged.py:69
 msgid "Permissions"
 msgstr ""
 
-#: .\models\tagged.py:101
+#: .\models\tagged.py:102
 msgid "Attached object"
 msgstr ""
 
-#: .\models\tagged.py:102
+#: .\models\tagged.py:103
 msgid "Attached objects"
 msgstr ""
 
-#: .\models\tagged.py:140
+#: .\models\tagged.py:141
 msgid "Creator"
 msgstr ""
 
-#: .\models\tagged.py:145
+#: .\models\tagged.py:146
 msgid "Created"
 msgstr ""
 
-#: .\models\tagged.py:221
+#: .\models\tagged.py:228
 msgid "Path"
 msgstr ""
 
@@ -425,6 +427,7 @@ msgstr ""
 
 #: .\templates\cosinnus\dashboard.html.py:26
 #: .\templates\cosinnus\dashboard.html.py:55
+#: .\templates\cosinnus\leftnav_button_editable_folder.html.py:50
 #: .\templates\cosinnus\user_dashboard.html.py:26
 #: .\templates\cosinnus\user_dashboard.html.py:55
 #: .\templates\cosinnus\group\group_form.html.py:109
@@ -438,6 +441,33 @@ msgstr ""
 #: .\templates\cosinnus\user_dashboard.html.py:39
 #: .\templates\cosinnus\cms\microsite.html.py:137
 msgid "Add widget"
+msgstr ""
+
+#: .\templates\cosinnus\leftnav_button_editable_folder.html.py:16
+msgid "Edit folder"
+msgstr ""
+
+#: .\templates\cosinnus\leftnav_button_editable_folder.html.py:23
+msgid "Folder name"
+msgstr ""
+
+#: .\templates\cosinnus\leftnav_button_editable_folder.html.py:38
+#: .\templates\cosinnus\group\group_form.html.py:221
+#: .\templates\cosinnus\user\userprofile_form.html.py:225
+#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:251
+#: .\views\group.py:529 .\views\user.py:125
+msgid "Save"
+msgstr ""
+
+#: .\templates\cosinnus\leftnav_button_editable_folder.html.py:43
+#: .\templates\cosinnus\leftnav_button_editable_folder.html.py:59
+msgid "Delete folder"
+msgstr ""
+
+#: .\templates\cosinnus\leftnav_button_editable_folder.html.py:60
+msgid ""
+"Do you really want to delete this folder and ALL folders and items it "
+"contains? This actions CANNOT be reversed!"
 msgstr ""
 
 #: .\templates\cosinnus\leftnav_example.txt.py:5
@@ -468,11 +498,11 @@ msgstr ""
 msgid "Back to"
 msgstr ""
 
-#: .\templates\cosinnus\leftnav_hierarchic_listview.html.py:38
+#: .\templates\cosinnus\leftnav_hierarchic_listview.html.py:40
 msgid "New folder name"
 msgstr ""
 
-#: .\templates\cosinnus\leftnav_hierarchic_listview.html.py:52
+#: .\templates\cosinnus\leftnav_hierarchic_listview.html.py:54
 msgid "Create folder"
 msgstr ""
 
@@ -626,7 +656,7 @@ msgstr ""
 msgid "Do you wish to request to join group „%(title)s“?"
 msgstr "Do you wish to request to join project „%(title)s“?"
 
-#: .\templates\cosinnus\cms\microsite.html.py:161 .\utils\dashboard.py:308
+#: .\templates\cosinnus\cms\microsite.html.py:161 .\utils\dashboard.py:309
 msgid "Informations"
 msgstr ""
 
@@ -855,13 +885,6 @@ msgstr ""
 
 #: .\templates\cosinnus\group\group_form.html.py:207
 msgid "Describe your activities and goals"
-msgstr ""
-
-#: .\templates\cosinnus\group\group_form.html.py:221
-#: .\templates\cosinnus\user\userprofile_form.html.py:225
-#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:251
-#: .\views\group.py:529 .\views\user.py:125
-msgid "Save"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_list.html.py:4
@@ -1449,20 +1472,20 @@ msgstr ""
 msgid "(Deleted User)"
 msgstr ""
 
-#: .\templatetags\cosinnus_tags.py:233 .\templatetags\cosinnus_tags.py:259
+#: .\templatetags\cosinnus_tags.py:240 .\templatetags\cosinnus_tags.py:266
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr ""
 
-#: .\utils\dashboard.py:174
+#: .\utils\dashboard.py:175
 msgid "Group Description"
 msgstr ""
 
-#: .\utils\dashboard.py:200
+#: .\utils\dashboard.py:201
 msgid "Network"
 msgstr ""
 
-#: .\utils\dashboard.py:257
+#: .\utils\dashboard.py:258
 msgid "About Us"
 msgstr ""
 
@@ -1614,29 +1637,34 @@ msgstr ""
 msgid "Ordering"
 msgstr ""
 
-#: .\views\mixins\tagged.py:291
+#: .\views\mixins\tagged.py:293
 #, python-format
 msgid ""
 "Container \"%(title)s\" could not be deleted because it contained objects "
 "that could not be deleted."
 msgstr ""
 
-#: .\views\mixins\tagged.py:302
+#: .\views\mixins\tagged.py:300
+#, python-format
+msgid "You do not have permissions to delete \"%(title)s\"."
+msgstr ""
+
+#: .\views\mixins\tagged.py:308
 #, python-format
 msgid "Object \"%(title)s\" could not be deleted."
 msgstr ""
 
-#: .\views\mixins\tagged.py:328
+#: .\views\mixins\tagged.py:337
 #, python-format
 msgid "%(numobjects)d objects were deleted successfully."
 msgstr ""
 
-#: .\views\mixins\tagged.py:333
+#: .\views\mixins\tagged.py:342
 #, python-format
 msgid "Object \"%(title)s\" was deleted successfully."
 msgstr ""
 
-#: .\views\mixins\tagged.py:338
+#: .\views\mixins\tagged.py:347
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr ""
