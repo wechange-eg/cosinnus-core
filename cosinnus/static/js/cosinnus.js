@@ -44,9 +44,14 @@
 
 		editThisClickarea : function() {
 			$('.edit-this-clickarea').click(function(event) {
-			    event.preventDefault();
-				$(this).closest('.btn-emphasized, .btn-extra-emphasized')
-					.removeClass('btn-emphasized')
+				event.preventDefault();
+				var button = $(this).closest('.btn-emphasized, .btn-extra-emphasized')
+				if (button.hasClass('btn-extra-emphasized')) {
+					button.attr('_button_class', 'btn-extra-emphasized');
+				} else {
+					button.attr('_button_class', 'btn-emphasized');
+				}
+				button.removeClass('btn-emphasized')
 					.removeClass('btn-extra-emphasized')
 					.addClass('btn-default');
 				var media_body = $(this).next();
@@ -57,17 +62,17 @@
 		},
 		
 		restoreThisClickarea : function(target_selector) {
-		    $(target_selector).closest('.btn-default')
-		    .removeClass('btn-default')
-            .addClass('btn-emphasized')
-            .addClass('btn-extra-emphasized');
-		    var media_body = $(target_selector).next();
-		    media_body.attr('href', media_body.attr('_href'))
-		              .removeAttr('_href')
-		              .find('span').text(media_body.find('input').val()).toggle();
-		    media_body.find('input').hide();
-            $(target_selector).show();
-            $.cosinnus.closeFadedown($(target_selector).closest('.fadedown'));
+			var button = $(target_selector).closest('.btn-default');
+			button.removeClass('btn-default')
+				.addClass(button.attr('_button_class'))
+				.removeAttr('_button_class');
+			var media_body = $(target_selector).next();
+			media_body.attr('href', media_body.attr('_href'))
+					  .removeAttr('_href')
+					  .find('span').text(media_body.find('input').val()).toggle();
+			media_body.find('input').hide();
+			$(target_selector).show();
+			$.cosinnus.closeFadedown($(target_selector).closest('.fadedown'));
 		},
 
 		selectors : function() {
@@ -889,8 +894,6 @@
             e.which = 13;
             e.keyCode = 13;
             $(target_selector).trigger(e);
-            console.log('pressed enter on');
-            console.log($(target_selector));
         },
 
 		map : function() {
