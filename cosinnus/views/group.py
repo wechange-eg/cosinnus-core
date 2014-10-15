@@ -92,6 +92,16 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
             group=self.object, status=MEMBERSHIP_ADMIN)
         messages.success(self.request, self.message_success % {'group':self.object.name, 'group_type':self.object._meta.verbose_name})
         return ret
+    
+    def form_invalid(self, form):
+        # workaround: on validation errors delete the entered tags
+        # because taggit tags that don't exist yet cannot be rendered back properly
+        # (during rendering, the then only string is attempted to be rendered as a tag-id and then not found)
+        try:
+            del form.forms['media_tag'].data['media_tag-tags']
+        except KeyError:
+            pass
+        return super(GroupCreateView, self).form_invalid(form)
 
     def get_context_data(self, **kwargs):
         context = super(GroupCreateView, self).get_context_data(**kwargs)
