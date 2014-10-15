@@ -15,6 +15,7 @@ from django.views.generic.list import MultipleObjectMixin
 from taggit.models import Tag, TaggedItem
 from cosinnus.forms.hierarchy import AddContainerForm
 from django.core.exceptions import PermissionDenied
+from cosinnus.utils.permissions import check_object_write_access
 
 
 class TaggedListMixin(object):
@@ -294,7 +295,11 @@ class HierarchyDeleteMixin(object):
                 }
                 messages.error(request, msg)
                 return 0
-
+            
+        if not check_object_write_access(obj, request.user):
+            messages.error(request, _('You do not have permissions to delete "%(title)s".') % {'title': obj.title})
+            return 0
+        
         deleted_pk = obj.pk
         obj.delete()
         # check if deletion was successful
