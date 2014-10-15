@@ -347,7 +347,7 @@ class HierarchyDeleteMixin(object):
                 msg = _('%(numobjects)d other objects were deleted.') % {
                     'numobjects': deleted_count,
                 }
-                messages.info(request, msg)
+                messages.success(request, msg)
 
         return HttpResponseRedirect(self.get_success_url())
 
