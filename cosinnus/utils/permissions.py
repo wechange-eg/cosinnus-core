@@ -4,7 +4,8 @@ from __future__ import unicode_literals
 from django.db.models import Q
 
 from cosinnus.models.group import CosinnusGroup
-from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject
+from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject,\
+    BaseHierarchicalTaggableObjectModel
 from cosinnus.models.profile import BaseUserProfile
 
 
@@ -101,7 +102,12 @@ def check_object_write_access(obj, user):
         else:
             # catch error cases where no media_tag was created. that case should break, but not here.
             is_private = False
-        return user.is_superuser or user.is_staff or obj.creator == user or (is_admin and not is_private) or obj.grant_extra_write_permissions(user)
+        # folders can be edited by group members (except root folder)
+        folder_for_group_member = issubclass(obj.__class__, BaseHierarchicalTaggableObjectModel) and \
+                obj.is_container and not obj.path == '/' and check_ug_membership(user, obj.group)
+            
+        return user.is_superuser or user.is_staff or obj.creator == user or (is_admin and not is_private) \
+            or obj.grant_extra_write_permissions(user) or folder_for_group_member
     elif issubclass(obj.__class__, BaseUserProfile):
         return obj.user == user or user.is_superuser or user.is_staff
     elif hasattr(obj, 'creator'):
