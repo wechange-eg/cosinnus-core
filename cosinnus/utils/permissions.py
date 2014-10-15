@@ -69,10 +69,13 @@ def check_object_read_access(obj, user):
         return user.is_superuser or user.is_staff or obj_is_visible or obj.grant_extra_read_permissions(user)
     elif hasattr(obj, 'creator'):
         return obj.creator == user or user.is_superuser or user.is_staff
+    elif hasattr(obj, 'grant_extra_read_permissions'):
+        return obj.grant_extra_read_permissions(user)
     
     raise Exception("cosinnus.core.permissions: You must either supply a CosinnusGroup " +\
-            "or a BaseTaggableObject or an object with a ``creator`` property to " +\
-            "check_object_read_access(). The supplied object " +\
+            "or a BaseTaggableObject or an object with a ``creator`` property " +\
+            "or an object with a ``grant_extra_read_permissions(self, user)`` function " +\
+            "to check_object_read_access(). The supplied object " +\
             "type was: %s" % (str(obj.__class__) if obj else "None"))
     
 
@@ -103,10 +106,13 @@ def check_object_write_access(obj, user):
         return obj.user == user or user.is_superuser or user.is_staff
     elif hasattr(obj, 'creator'):
         return obj.creator == user or user.is_superuser or user.is_staff
+    elif hasattr(obj, 'grant_extra_write_permissions'):
+        return obj.grant_extra_write_permissions(user)
     
     raise Exception("cosinnus.core.permissions: You must either supply a CosinnusGroup " +\
-            "or a BaseTaggableObject or an object with a ``creator`` property to " +\
-            "check_object_read_access(). The supplied object " +\
+            "or a BaseTaggableObject or an object with a ``creator`` property  " +\
+            "or an object with a ``grant_extra_write_permissions(self, user)`` function " +\
+            "to check_object_read_access(). The supplied object " +\
             "type was: %s" % (str(obj.__class__) if obj else "None"))
 
 def check_group_create_objects_access(group, user):
