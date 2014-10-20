@@ -10,12 +10,13 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.permissions import check_object_write_access,\
-    check_group_create_objects_access, check_object_read_access
+    check_group_create_objects_access, check_object_read_access, get_user_token
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect
 from django.core.urlresolvers import reverse_lazy
 from django.core.exceptions import PermissionDenied
 from cosinnus.core.registries.group_models import group_model_registry
+from django.contrib.auth.models import User
 
 
 def redirect_to_403(request):
@@ -256,6 +257,76 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
         return wrapper
     return decorator
 
+
+
+def require_user_token_access(token_name, group_url_kwarg='group', group_attr='group'):
+    """ A method decorator that allows access only if the URL params
+    `user=999&token=1234567` are supplied, and if the token supplied matches
+    the specific token (determined by :param ``token_name``) in the supplied 
+    user's settings. Please only use different token_names for each specific purpose.
+        
+    Additionally this function populates the group instance to the view
+    instance as attribute `group_attr` and the resolved token user as attribute `user`
+
+    :param str group_url_kwarg: The name of the key containing the group name.
+        Defaults to `'group'`.
+    :param str group_attr: The attribute name which can later be used to access
+        the group from within an view instance (e.g. `self.group`). Defaults to
+        `'group'`.
+    """
+
+    def decorator(function):
+        @functools.wraps(function, assigned=available_attrs(function))
+        def wrapper(self, request, *args, **kwargs):
+            
+            # assume no user is logged in, and check the user id and token from the args
+            user_id = request.GET.get('user', None)
+            token = request.GET.get('token', None)
+            if not user_id or not token:
+                return HttpResponseForbidden('No authentication supplied!')
+            
+            user = None
+            user_token = None
+            try:
+                user = User.objects.get(id=user_id)
+                user_token = get_user_token(user, token_name)
+            except User.DoesNotExist:
+                pass
+            print bool(user), bool(user_token), bool(user_token == token)
+            if not user or not user_token or not user_token == token:
+                return HttpResponseForbidden('Authentication invalid!')
+            
+            self.user = user
+            
+            group_name = kwargs.get(group_url_kwarg, None)
+            if not group_name:
+                return HttpResponseNotFound(_("No group provided"))
+
+            group = get_group_for_request(group_name, request)
+            if not group:
+                return HttpResponseNotFound(_("No group found with this name"))
+            
+            
+            setattr(self, group_attr, group)
+            
+            requested_object = None
+            try:
+                requested_object = self.get_object()
+            except (AttributeError, TypeError):
+                pass
+            
+            if requested_object:
+                if check_object_read_access(requested_object, user):
+                    return function(self, request, *args, **kwargs)
+            else:
+                if check_object_read_access(group, user):
+                    return function(self, request, *args, **kwargs)
+
+            # Access denied, redirect to 403 page and and display an error message
+            return redirect_to_403(request)
+            
+        return wrapper
+    return decorator
 
 
 def require_create_objects_in_access(group_url_kwarg='group', group_attr='group'):

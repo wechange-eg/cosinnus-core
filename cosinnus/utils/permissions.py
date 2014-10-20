@@ -7,6 +7,7 @@ from cosinnus.models.group import CosinnusGroup
 from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject,\
     BaseHierarchicalTaggableObjectModel
 from cosinnus.models.profile import BaseUserProfile
+from uuid import uuid1
 
 
 def check_ug_admin(user, group):
@@ -157,3 +158,16 @@ def filter_tagged_object_queryset_for_user(qs, user):
             creator__id=user.id
         )
     return qs.filter(q).distinct()
+
+
+def get_user_token(user, token_name):
+    """ Retrieves or generates a permanent token for a user and
+        a given token identifier. Use these tokens only for one
+        specific purpose each! """
+        
+    token = user.cosinnus_profile.settings.get('token:%s' % token_name, None)
+    if not token:
+        token = str(uuid1().int)
+        user.cosinnus_profile.settings['token:%s' % token_name] = token
+        user.cosinnus_profile.save()
+    return token

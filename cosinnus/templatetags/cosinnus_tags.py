@@ -21,7 +21,7 @@ from cosinnus.core.registries import app_registry, attached_object_registry
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupManager
 from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
-    check_group_create_objects_access, check_object_read_access)
+    check_group_create_objects_access, check_object_read_access, get_user_token)
 from django.utils.safestring import mark_safe
 from django.templatetags.static import static
 from django.template.base import TemplateSyntaxError, kwarg_re
@@ -523,6 +523,21 @@ def cosinnus_setting(user, setting):
         return value
     raise ImproperlyConfigured("User setting tag got passed a non-user argument.")
     
+
+@register.simple_tag(takes_context=True)
+def cosinnus_user_token(context, token_name, request=None):
+    """
+    Returns URL params (`user=999&token=1234567`) for the current user and a 
+    permanent token specific to the token_name. If the user does not have a token 
+    for that token_name yet, one will be generated. 
+    """
+    if not request and 'request' in context:
+        request = context['request']
+    if not request or not request.user.is_authenticated:
+        return ''
+    token = get_user_token(request.user, token_name)
+    return 'user=%s&token=%s' % (request.user.id, token)
+
 
 def group_aware_url_name(view_name, group_slug):
     """ Modifies a URL name that points to a URL within a CosinnusGroup so that the URL
