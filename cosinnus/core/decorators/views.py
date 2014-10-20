@@ -181,7 +181,7 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
             requested_object = None
             try:
                 requested_object = self.get_object()
-            except AttributeError:
+            except (AttributeError, TypeError):
                 pass
             
             if requested_object:
@@ -238,7 +238,7 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             requested_object = None
             try:
                 requested_object = self.get_object()
-            except AttributeError:
+            except (AttributeError, TypeError):
                 pass
             
             if requested_object:
