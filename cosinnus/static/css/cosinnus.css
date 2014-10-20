@@ -409,7 +409,7 @@ label {
 }
 
 .btn .form-control, .select2-container {
-  font-size: 1.2em;
+  font-size: 14px;
 }
 
 .btn-default {
@@ -1383,7 +1383,7 @@ body .large-space {
 }
 
 #searchbar.expanded input {
-  width: 125px;
+  width: 250px;
   transition: all 500ms linear;
   color: #333333;
   box-shadow: none;
@@ -1568,6 +1568,10 @@ ul.errorlist li:before {
   position: relative;
 }
 
+textarea, input.form-control {
+  font-size: 14px;
+}
+
 body div .select2-container .select2-choice,
 body div .select2-container-multi .select2-choices {
   border-width: 0;
@@ -1593,7 +1597,7 @@ body div .select2-container .select2-choice {
 body div .select2-container .select2-choice .select2-chosen {
   color: #333333;
   font-size: 12px;
-  text-align: right;
+  text-align: left;
 }
 body div .select2-container .select2-choice .select2-arrow {
   color: #333333;
