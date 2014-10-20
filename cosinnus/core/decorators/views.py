@@ -292,7 +292,6 @@ def require_user_token_access(token_name, group_url_kwarg='group', group_attr='g
                 user_token = get_user_token(user, token_name)
             except User.DoesNotExist:
                 pass
-            print bool(user), bool(user_token), bool(user_token == token)
             if not user or not user_token or not user_token == token:
                 return HttpResponseForbidden('Authentication invalid!')
             
