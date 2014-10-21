@@ -28,6 +28,8 @@ class WidgetRegistry(DictBaseRegistry):
                 self[app_name] = d
 
     def get(self, app_name, widget, default=None):
+        # compatibility mode for legacy widget naming convention
+        widget = widget.replace(" ", "_")
         if app_name in self._unresolved:
             self._resolve(app_name)
         if app_name in self and widget in self[app_name]:

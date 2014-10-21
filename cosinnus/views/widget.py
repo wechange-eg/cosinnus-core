@@ -210,24 +210,26 @@ def widget_edit(request, id, app_name=None, widget_name=None):
 
 class DashboardWidgetMixin(object):
     
+    # any 'app_name.widget_name' entries in here will be filtered out of the context_data
+    disallowed_widgets = []
+    
     def get_context_data(self, **kwargs):
         widget_filter = self.get_filter()
-        widgets = WidgetConfig.objects.filter(**widget_filter).order_by('sort_field')
-        ids = widgets.values_list('id', flat=True).all()
+        widgets_configs = WidgetConfig.objects.filter(**widget_filter).order_by('sort_field')
         
-        widget_objs = []
+        widgets = []
         """ We also sort each unique widget into the context to be accessed hard-coded"""
-        for wc in widgets:
-            widget_handle = wc.app_name + '__' + wc.widget_name.replace(" ", "_")
-            kwargs.update({widget_handle : wc.id})
+        for wc in widgets_configs:
+            # check block list for disallowed widgets (from overriding views)
+            if "%s.%s" % (wc.app_name, wc.widget_name.replace(" ", "_")) in self.disallowed_widgets:
+                continue
             
             widget_class = widget_registry.get(wc.app_name, wc.widget_name)
             widget = widget_class(self.request, wc)
-            widget_objs.append(widget)
+            widgets.append(widget)
             
         kwargs.update({
-            'widgets': ids,
-            'widget_objs': widget_objs,
+            'widgets': widgets,
         })
     
         return super(DashboardWidgetMixin, self).get_context_data(**kwargs)
@@ -240,20 +242,6 @@ class GroupDashboard(RequireReadMixin, DashboardWidgetMixin, TemplateView):
     def get_filter(self):
         return {'group_id': self.group.pk, 'type': WidgetConfig.TYPE_DASHBOARD}
     
-    def get_context_data(self, **kwargs):
-        """ TODO: FIXME: Sascha """
-        """ This code is a crime to humanity and was only added to have 
-            this working for the beta really quickly. Refactor this into
-            the note widget itself. (But don't put the Form through with 
-            the ajax request in the widget loading algorithm! 
-        """   
-        # Only for the group dashboard:
-        if hasattr(self, 'group'):  
-            from cosinnus_note.forms import NoteForm
-            kwargs.update({
-                'form':  NoteForm(group=self.group)
-            })
-        return super(GroupDashboard, self).get_context_data(**kwargs)
 
 group_dashboard = GroupDashboard.as_view()
 
