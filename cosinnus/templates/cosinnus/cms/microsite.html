@@ -117,8 +117,8 @@
     
     
     <div id="dashboard" class="row large-space">
-    {% for widget_config in widget_configs %}
-        {% cosinnus_render_widget widget_config %}
+    {% for widget_obj in widget_objs %}
+        {% cosinnus_render_widget widget_obj %}
     {% endfor %}
     
     

@@ -209,14 +209,13 @@ def widget_edit(request, id, app_name=None, widget_name=None):
 
 
 class DashboardWidgetMixin(object):
-    template_name = 'cosinnus/dashboard.html'
-
+    
     def get_context_data(self, **kwargs):
         widget_filter = self.get_filter()
         widgets = WidgetConfig.objects.filter(**widget_filter).order_by('sort_field')
         ids = widgets.values_list('id', flat=True).all()
         
-        widget_configs = []
+        widget_objs = []
         """ We also sort each unique widget into the context to be accessed hard-coded"""
         for wc in widgets:
             widget_handle = wc.app_name + '__' + wc.widget_name.replace(" ", "_")
@@ -224,21 +223,22 @@ class DashboardWidgetMixin(object):
             
             widget_class = widget_registry.get(wc.app_name, wc.widget_name)
             widget = widget_class(self.request, wc)
-            widget_configs.append(widget)
+            widget_objs.append(widget)
             
         kwargs.update({
             'widgets': ids,
-            'widget_configs': widget_configs,
+            'widget_objs': widget_objs,
         })
     
         return super(DashboardWidgetMixin, self).get_context_data(**kwargs)
 
 
 class GroupDashboard(RequireReadMixin, DashboardWidgetMixin, TemplateView):
-
+    
+    template_name = 'cosinnus/dashboard.html'
+    
     def get_filter(self):
         return {'group_id': self.group.pk, 'type': WidgetConfig.TYPE_DASHBOARD}
-    
     
     def get_context_data(self, **kwargs):
         """ TODO: FIXME: Sascha """
