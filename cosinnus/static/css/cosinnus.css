@@ -455,10 +455,16 @@ label {
   clear: both;
 }
 .media-body input {
-  margin-top: -9px;
-  margin-bottom: -5px;
   background-color: transparent;
   display: inline-block;
+}
+
+.btn ul.media-list .media-body.media-body-form-control {
+  padding: 0;
+}
+.btn ul.media-list .media-body.media-body-form-control input, .btn ul.media-list .media-body.media-body-form-control textarea {
+  margin: 0;
+  padding: 7px 10px 5px 10px;
 }
 
 .media > a.pull-right .select2-container {
@@ -1604,6 +1610,10 @@ body div .select2-container .select2-choice .select2-arrow {
 }
 body div .select2-container .select2-choice:hover {
   background-color: #dbdbdb;
+}
+body div .media-body .select2-container {
+  margin-top: -2px;
+  margin-bottom: -5px;
 }
 body div .select2-dropdown-open.select2-drop-above .select2-choice,
 body div .select2-dropdown-open.select2-drop-above .select2-choices,

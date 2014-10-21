@@ -65,12 +65,23 @@
 	@include clearfix();
 
 	input {
-		margin-top: -9px;
-		margin-bottom: -5px;
 		background-color: transparent;
 		display: inline-block;
 	}
 }
+
+
+.btn ul.media-list .media-body {
+	&.media-body-form-control {
+		padding: 0;
+
+		input, textarea {
+			margin: 0;
+			padding: 7px 10px 5px 10px;
+		}
+	}
+}
+
 
 .media > a.pull-right .select2-container {
 	// priority selector in todos

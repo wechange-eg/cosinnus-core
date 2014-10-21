@@ -55,7 +55,8 @@
 					.removeClass('btn-extra-emphasized')
 					.addClass('btn-default');
 				var media_body = $(this).next();
-				media_body.attr('_href', media_body.attr('href')).removeAttr('href').find('span').toggle();
+				media_body.addClass('media-body-form-control')
+				    .attr('_href', media_body.attr('href')).removeAttr('href').find('span').toggle();
 				media_body.find('input').show();
 				$(this).hide();
 			});
@@ -67,7 +68,8 @@
 				.addClass(button.attr('_button_class'))
 				.removeAttr('_button_class');
 			var media_body = $(target_selector).next();
-			media_body.attr('href', media_body.attr('_href'))
+			media_body.removeClass('media-body-form-control')
+			          .attr('href', media_body.attr('_href'))
 					  .removeAttr('_href')
 					  .find('span').text(media_body.find('input').val()).toggle();
 			media_body.find('input').hide();

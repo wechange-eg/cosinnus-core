@@ -42,6 +42,12 @@ body div {
 		}
 	}
 
+	.media-body .select2-container {
+		margin-top: -2px;
+		margin-bottom: -5px;
+	}
+
+
 	.select2-dropdown-open.select2-drop-above .select2-choice,
 	.select2-dropdown-open.select2-drop-above .select2-choices,
 	.select2-container-multi.select2-container-active .select2-choices,
