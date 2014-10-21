@@ -208,22 +208,39 @@ def widget_edit(request, id, app_name=None, widget_name=None):
         return render(request, template_name, context)
 
 
-class DashboardMixin(object):
+class DashboardWidgetMixin(object):
     template_name = 'cosinnus/dashboard.html'
 
     def get_context_data(self, **kwargs):
-        filter = self.get_filter()
-        widgets = WidgetConfig.objects.filter(**filter)
+        widget_filter = self.get_filter()
+        widgets = WidgetConfig.objects.filter(**widget_filter).order_by('sort_field')
         ids = widgets.values_list('id', flat=True).all()
+        
+        widget_configs = []
+        """ We also sort each unique widget into the context to be accessed hard-coded"""
+        for wc in widgets:
+            widget_handle = wc.app_name + '__' + wc.widget_name.replace(" ", "_")
+            kwargs.update({widget_handle : wc.id})
+            
+            widget_class = widget_registry.get(wc.app_name, wc.widget_name)
+            widget = widget_class(self.request, wc)
+            widget_configs.append(widget)
+            
         kwargs.update({
             'widgets': ids,
+            'widget_configs': widget_configs,
         })
-        
-        """ We sort each unique widget into the context to be accessed hard-coded"""
-        for wc in widgets:
-            context_id = wc.app_name + '__' + wc.widget_name.replace(" ", "_")
-            kwargs.update({context_id : wc.id})
-        
+    
+        return super(DashboardWidgetMixin, self).get_context_data(**kwargs)
+
+
+class GroupDashboard(RequireReadMixin, DashboardWidgetMixin, TemplateView):
+
+    def get_filter(self):
+        return {'group_id': self.group.pk, 'type': WidgetConfig.TYPE_DASHBOARD}
+    
+    
+    def get_context_data(self, **kwargs):
         """ TODO: FIXME: Sascha """
         """ This code is a crime to humanity and was only added to have 
             this working for the beta really quickly. Refactor this into
@@ -236,19 +253,12 @@ class DashboardMixin(object):
             kwargs.update({
                 'form':  NoteForm(group=self.group)
             })
-        
-        return super(DashboardMixin, self).get_context_data(**kwargs)
-
-
-class GroupDashboard(RequireReadMixin, DashboardMixin, TemplateView):
-
-    def get_filter(self):
-        return {'group_id': self.group.pk, 'type': WidgetConfig.TYPE_DASHBOARD}
+        return super(GroupDashboard, self).get_context_data(**kwargs)
 
 group_dashboard = GroupDashboard.as_view()
 
 
-class UserDashboard(DashboardMixin, TemplateView):
+class UserDashboard(DashboardWidgetMixin, TemplateView):
     template_name = 'cosinnus/user_dashboard.html'
 
     @method_decorator(login_required)

@@ -16,8 +16,10 @@ from cosinnus.core.decorators.views import redirect_to_403,\
 from cosinnus.utils.permissions import check_object_write_access
 from cosinnus.core.registries.attached_objects import attached_object_registry
 from cosinnus.utils.functions import get_cosinnus_app_from_class
+from cosinnus.views.widget import DashboardWidgetMixin
 
-class GroupMicrosite(TemplateView):
+
+class GroupMicrosite(DashboardWidgetMixin, TemplateView):
     """ TODO: Refactor-merge and unify this view to a mixin with DashboardMixin for groups,
         after this view has been generalized to allow Organisations instead of Groups.
     """
@@ -26,8 +28,6 @@ class GroupMicrosite(TemplateView):
     
     
     def dispatch(self, request, *args, **kwargs):
-        nothing = CosinnusMicropage.objects.none()
-        
         group_name = kwargs.get(self.group_url_kwarg, None)
         group = get_group_for_request(group_name, request)
         if not group:
@@ -36,19 +36,6 @@ class GroupMicrosite(TemplateView):
         return super(GroupMicrosite, self).dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        widget_filter = self.get_filter()
-        widgets = WidgetConfig.objects.filter(**widget_filter).order_by('sort_field')
-        ids = widgets.values_list('id', flat=True).all()
-        
-        widget_configs = []
-        """ We also sort each unique widget into the context to be accessed hard-coded"""
-        for wc in widgets:
-            widget_class = widget_registry.get(wc.app_name, wc.widget_name)
-            widget_handle = wc.app_name + '__' + wc.widget_name.replace(" ", "_")
-            kwargs.update({widget_handle : wc.id})
-            widget = widget_class(self.request, wc)
-            widget_configs.append(widget)
-            
         
         """ Item list inline views """
         item_inlines = []
@@ -70,9 +57,7 @@ class GroupMicrosite(TemplateView):
                     })
         
         kwargs.update({
-            'widgets': ids,
             'group': self.group,
-            'widget_configs': widget_configs,
             'edit_mode': False,
             'item_inlines': item_inlines,
         })
