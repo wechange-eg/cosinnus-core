@@ -133,6 +133,13 @@ def profile_url(value):
     return ""
 
 @register.filter
+def url_target_blank(link):
+    """ Template filter that turns any html link into a target="_blank" link.
+    """
+    return mark_safe(link.replace('<a ', '<a target="_blank" '))
+
+
+@register.filter
 def multiply(value, arg):
     """Template filter to multiply two numbers
     """
