@@ -31,6 +31,29 @@ class CosinnusConf(AppConf):
     # the url pattern for group overview URLs
     GROUP_PLURAL_URL_PATH = 'projects'
     
+    # widgets listed here will be created for the group dashboard upon CosinnusGroup creation
+    # will check if the cosinnus app is installed and if the widget is registered, so
+    # invalid entries do not produce errors
+    INITIAL_GROUP_WIDGETS = [
+        #(app_name, widget_name, options),
+        ("note", "detailed_news_list", {'amount':'10', 'sort_field':'1'}),
+        ("event", "upcoming", {'amount':'5', 'sort_field':'2'}),
+        ("todo", "mine", {'amount':'5', 'amount_subtask':'2', 'sort_field':'3'}),
+        ("etherpad", "latest", {'amount':'5', 'sort_field':'4'}),
+        ("cosinnus", "group_members", {'amount':'5', 'sort_field':'5'}),
+    ]
+    
+    # widgets listed here will be created for the group microsite upon CosinnusGroup creation
+    # will check if the cosinnus app is installed and if the widget is registered, so
+    # invalid entries do not produce errors
+    INITIAL_GROUP_MICROSITE_WIDGETS = [
+        #(app_name, widget_name, options),
+        ("file", "latest", {'sort_field':'1', 'amount':'5'}),
+        ("event", "upcoming", {'sort_field':'2', 'amount':'5'}),
+        ("cosinnus", "meta_attr_widget", {'sort_field':'3'}),
+        
+    ]
+    
     # which apps objects as object lists will be listed on the microsite? 
     # must be model names of BaseTaggableObjects that can be resolved via a 
     # render_list_for_user() function in the app's registered Renderer.

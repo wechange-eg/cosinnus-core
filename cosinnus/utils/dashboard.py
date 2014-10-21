@@ -10,6 +10,7 @@ from django.template.loader import render_to_string
 from django.utils.decorators import classonlymethod
 from django.utils.translation import ugettext_lazy as _
 
+from cosinnus.conf import settings
 from cosinnus.utils.compat import atomic
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
@@ -19,6 +20,9 @@ from cosinnus.forms.dashboard import InfoWidgetForm, DashboardWidgetForm,\
 from cosinnus.models.tagged import AttachedObject
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.core.signals import group_object_ceated
+from django.dispatch.dispatcher import receiver
+from cosinnus.core.registries.widgets import widget_registry
 
 
 
@@ -323,4 +327,26 @@ class MetaAttributeWidget(DashboardWidget):
     
     def get_queryset(self):
         return None
+    
+    
+@receiver(group_object_ceated)
+def create_initial_group_widgets(sender, group, **kwargs):
+    """ Function responsible for creating the initial widgets of CosinnusGroups
+    (and subtypes) upon creation. Will create all group dashboard and microsite widgets 
+    that are defined in:
+        ``settings.COSINNUS_INITIAL_GROUP_WIDGETS`` and
+        ``settings.COSINNUS_INITIAL_GROUP_MICROSITE_WIDGETS``
+    """
+    for app_name, widget_name, options in settings.COSINNUS_INITIAL_GROUP_WIDGETS:
+        widget_class = widget_registry.get(app_name, widget_name, None)
+        if widget_class:
+            widget = widget_class.create(None, group=group)
+            widget.save_config(options)
+            
+    for app_name, widget_name, options in settings.COSINNUS_INITIAL_GROUP_MICROSITE_WIDGETS:
+        widget_class = widget_registry.get(app_name, widget_name, None)
+        if widget_class:
+            widget = widget_class.create(None, group=group, widget_type=WidgetConfig.TYPE_MICROSITE)
+            widget.save_config(options)
+    
     

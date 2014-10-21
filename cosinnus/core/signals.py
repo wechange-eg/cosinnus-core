@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.core.mail import get_connection, EmailMessage
-from django.template.loader import render_to_string
-
-from cosinnus.conf import settings
-
-
 import django.dispatch as dispatch
+
+""" Called after a CosinnusGroup, or one of its extending models is freshly created """
+group_object_ceated = dispatch.Signal(providing_args=["group"])
 
 """ Called when a user requests membership of a group """
 user_group_join_requested = dispatch.Signal(providing_args=["group", "user"])

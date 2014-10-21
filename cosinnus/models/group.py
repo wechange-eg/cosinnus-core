@@ -24,6 +24,7 @@ from cosinnus.utils.files import get_group_avatar_filename
 from django.core.urlresolvers import reverse
 from django.utils.functional import cached_property
 from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.core import signals
 
 
 #: Role defining a user has requested to be added to a group
@@ -350,6 +351,7 @@ class CosinnusGroup(models.Model):
         self._clear_cache()
 
     def save(self, *args, **kwargs):
+        created = bool(self.pk is None)
         slugs = [self.slug] if self.slug else []
         unique_aware_slugify(self, 'name', 'slug')
         if not self.slug:
@@ -362,6 +364,11 @@ class CosinnusGroup(models.Model):
         super(CosinnusGroup, self).save(*args, **kwargs)
         slugs.append(self.slug)
         self._clear_cache(slug=self.slug)
+        
+        if created:
+            # send creation signal
+            signals.group_object_ceated.send(sender=self, group=self)
+        
 
     @property
     def admins(self):
