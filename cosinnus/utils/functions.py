@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from django.utils.importlib import import_module
 
 
 def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
@@ -87,3 +88,13 @@ def get_cosinnus_app_from_class(cls):
         return cls.__module__.split('.')[0].replace('cosinnus_', '')
     except:
         return '<not-a-cosinnus-module>'
+    
+    
+def resolve_class(path_to_class):
+    modulename, _, klass = path_to_class.rpartition('.')
+    module = import_module(modulename)
+    cls = getattr(module, klass, None)
+    if cls is None:
+        raise ImportError("Cannot import class %s from %s" % (
+            klass, path_to_class))
+    return cls

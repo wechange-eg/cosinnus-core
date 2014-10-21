@@ -19,6 +19,8 @@ from cosinnus.utils.http import JSONResponse
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
 from cosinnus.views.mixins.group import RequireReadMixin
 from uuid import uuid1
+from cosinnus.core.registries.apps import app_registry
+from cosinnus.utils.functions import resolve_class
 
 
 def widget_list(request):
@@ -268,8 +270,30 @@ class GroupDashboard(RequireReadMixin, DashboardWidgetMixin, TemplateView):
     
     template_name = 'cosinnus/dashboard.html'
     
+    app_object_count_mappings = {
+        'cosinnus_event': 'cosinnus_event.models.Event',
+        'cosinnus_todo': 'cosinnus_todo.models.TodoEntry',
+        'cosinnus_file': 'cosinnus_file.models.FileEntry',
+        'cosinnus_etherpad': 'cosinnus_etherpad.models.Etherpad',
+        'cosinnus_note': 'cosinnus_note.models.Note',
+    }
+    
     def get_filter(self):
         return {'group_id': self.group.pk, 'type': WidgetConfig.TYPE_DASHBOARD}
+
+    def get_context_data(self, **kwargs):
+        context = super(GroupDashboard, self).get_context_data(**kwargs)
+        
+        object_counts = {}
+        for app in app_registry:
+            app_name, _ = app_registry.get(app) 
+            if app in self.app_object_count_mappings:
+                model = resolve_class(self.app_object_count_mappings[app]) 
+                object_counts[app_name] = model.get_current(self.group, self.request.user).count()
+        context.update({
+            'object_counts': object_counts,
+        })
+        return context
     
 
 group_dashboard = GroupDashboard.as_view()
