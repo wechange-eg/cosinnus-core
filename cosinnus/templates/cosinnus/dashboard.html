@@ -1,70 +1,171 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n cosinnus_tags %}
+{% load i18n bootstrap3 cosinnus_tags %}
 {% load static from staticfiles %}
+
+{% block page_title %}{{ group.name }}{% endblock page_title %}
 
 {% block extrahead %}
   <link href="{% static "css/cosinnus.dashboard.css" %}" rel="stylesheet">
 {% endblock extrahead %}
 
 
-{% comment %}  NOTE!: This file is being overwritten in the app project (like NEWW) itself! {% endcomment %}
+{% block main_page_header %}
+    
+    <div class="row">
+        <!-- start with left navigation -->
+        <div class="col-lg-3 col-md-3"><!-- left column -->
+            {% if group %}
+                {% cosinnus_menu "cosinnus/appsmenu.html" %}
+            {% endif %}
+        </div><!-- left column -->
+        
+        <!-- now the content -->
+        <div class="col-lg-9 col-md-9"><!-- right column -->
+            
+            <ol class="breadcrumb">
+                {% include 'cosinnus/breadcrumb.html' %}
+                <li class="active">{% trans "Dashboard" %}</li>
+            </ol>
+            
+        </div><!-- right column -->
+        
+    </div><!-- row -->
+    
+    
+    {% include 'cosinnus/messages.html' %}
+    
+    <div class="dashboard-header">
+        <div class="dashboard-header-image">
+            <a href="{% group_url 'cosinnus:group-detail' group=group.slug %}">
+                {% include "cosinnus/group/group_avatar_image.html" with group=group %}
+            </a>
+        </div>
+        <div class="dashboard-header-text">
+            <div class="multiline-ellipsis">
+                <div class="multiline-ellipsis-prop"></div>
+                <div class="multiline-ellipsis-main">
+                    {% if user.pk in group.members or user in group.admins or not user.is_authenticated %}
+                    
+                        {% if "etherpad" in object_counts %}
+                            <div class="dashboard-header-link app-etherpad">
+                                <a href="{% group_url 'cosinnus:etherpad:list' group=group.slug %}">
+                                    <i class="fa fa-file-text-o"></i>
+                                    <span>{{ object_counts.etherpad }}</span>
+                                    {% if object_counts.etherpad == 1 %}{% trans "Etherpad" %}{% else %}{% trans "Etherpads" %}{% endif %}
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if "file" in object_counts %}
+                            <div class="dashboard-header-link app-files">
+                                <a href="{% group_url 'cosinnus:file:list' group=group.slug %}">
+                                    <i class="fa fa-file"></i>
+                                    <span>{{ object_counts.file }}</span>
+                                    {% if object_counts.file == 1 %}{% trans "File" %}{% else %}{% trans "Files" %}{% endif %}
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if "event" in object_counts %}
+                            <div class="dashboard-header-link app-calendar">
+                                <a href="{% group_url 'cosinnus:event:list' group=group.slug %}">
+                                    <i class="fa fa-calendar"></i>
+                                    <span>{{ object_counts.event }}</span>
+                                    {% if object_counts.event == 1 %}{% trans "Event" context "Calendar" %}{% else %}{% trans "Events" context "Calendar" %}{% endif %}
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if "todo" in object_counts %}
+                            <div class="dashboard-header-link app-todos">
+                                <a href="{% group_url 'cosinnus:todo:list' group=group.slug %}">
+                                    <i class="fa fa-tasks"></i>
+                                    <span>{{ object_counts.todo }}</span>
+                                    {% if object_counts.todo == 1 %}{% trans "Todo" %}{% else %}{% trans "Todos" %}{% endif %}
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if "note" in object_counts %}
+                            <div class="dashboard-header-link app-main">
+                                <a href="{% group_url 'cosinnus:note:list' group=group.slug %}">
+                                    <i class="fa fa-book"></i>
+                                    <span>{{ object_counts.note }}</span>
+                                    {% if object_counts.todo == 1 %}{% trans "News" %}{% else %}{% trans "News" %}{% endif %}
+                                </a>
+                            </div>
+                        {% endif %}
+                        
+                    {% elif user.pk in group.pendings %}
+                        <div class="dashboard-header-link app-etherpad" data-toggle="modal" data-target="#join_withdraw_modal">
+                            <a href="#">
+                                <i class="fa fa-sign-out"></i>
+                                <span>{% trans "Withdraw" context "withdraw join group button first item" %}</span>
+                                {% trans "Request" context "withdraw join group button second item" %}
+                            </a>
+                        </div>
+                        <div class="dashboard-header-link app-main">
+                            <i class="fa fa-info-circle"></i>
+                            <span>{% trans "Join" context "join request pending group button first item" %}</span>
+                            {% trans "Requested" context "join request pending group button second item" %}
+                        </div>
+                        {% captureas label %}{% blocktrans with title=group.name %}Do you really want to withdraw your join request to group „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+                        {% captureas title %}{% trans "Withdraw Join Request" %}{% endcaptureas %}
+                        {% captureas action %}{% group_url 'cosinnus:group-user-withdraw' group=group.slug %}{% endcaptureas %}
+                        {% include "cosinnus/modal_box.html" with id="join_withdraw_modal" label=label title=title form_action=action %}
+                    {% else %}
+                        <div class="dashboard-header-link app-main" data-toggle="modal" data-target="#join_withdraw_modal">
+                            <a href="#">
+                                <i class="fa fa-sign-in"></i>
+                                <span>{% trans "Join" context "join group button first item" %}</span>
+                                {% trans "Now" context "join group button second item" %}
+                            </a>
+                        </div>
+                        {% captureas label %}{% blocktrans with title=group.name %}Do you wish to request to join „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+                        {% captureas title %}{% trans "Join" %}{% endcaptureas %}
+                        {% captureas action %}{% group_url 'cosinnus:group-user-join' group=group.slug %}{% endcaptureas %}
+                        
+                        {% include "cosinnus/modal_box.html" with id="join_withdraw_modal" label=label title=title form_action=action %}
+                    {% endif %}
+                    
+                    {% comment %} Group follow button is out for now
+                    <div class="dashboard-header-link app-main">
+                        <a href="#" title="Not available in this Beta version">
+                            <i class="fa fa-thumbs-o-up"></i>
+                            {% trans "Gruppe abonnieren" %}
+                        </a>
+                    </div>
+                     {% endcomment %}
+                    
+                    <h2>{{ group.name }}{% if group.type == 1 %}<i class="fa fa-fw fa-globe"></i>{% endif %}</h2>
+                    
+                    {% with society=group.get_parent_typed %}
+                        {% if society %}
+                            <p><i>{% trans "Society:" %} <a href="{{ society.get_absolute_url }}">{{ society.name }}</a></i></p>
+                        {% endif %}
+                    {% endwith %}
+                    
+                    {% if group.description and group.description|length > 0 %}
+                        {{ group.description|safe }}
+                    {% else %}
+                        ({% trans "No Description set" %})
+                    {% endif %}
+                    
+                    </div>
+                <div class="multiline-ellipsis-realend"><a href="#">....{% trans "more" %}</a></div>
+            </div>
+        </div>
+    </div>
+{% endblock main_page_header %}
+            
 
-{% block content %}
-
-  <div id="dashboard" class="row dashboard">
-    {% for id in widgets %}
-      <div class="col-md-4" data-widget-id="{{ id }}" data-type="widget">
-        <div class="panel">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              <a href="" data-target="widget-title-url"><span data-target="widget-title"></span>&nbsp;</a>
-              <div class="btn-group pull-right">
-                <a href="#" class="btn darker btn-xs" title="{% trans "Refresh" %}" data-type="refresh"><span class="glyphicon glyphicon-refresh"></span></a>
-                {% if user|has_write_access:object %}
-                  <a href="#" class="btn darker btn-xs" title="{% trans "Configure" %}" data-type="edit"><span class="glyphicon glyphicon-wrench"></span></a>
-                  <a href="#" class="btn darker btn-xs" title="{% trans "Delete" %}" data-type="delete"><span class="glyphicon glyphicon-remove"></span></a>
-                {% endif %}
-              </div>
-            </h3>
-          </div>
-          <div class="panel-body" data-target="widget-content"></div>
+{% block main_page %}
+    <div class="row">
+        
+        <div id="dashboard"> <!-- An extra wrapper div, not in the mockups, but required for the cosinnus dashboard data extension -->
+            {% for widget in widgets %}
+                {% cosinnus_render_widget widget %}
+            {% endfor %}
         </div>
-      </div>
-    {% endfor %}
-    {% if group and user|is_group_admin:group or not group %}
-      <div class="col-md-4" data-type="widget-add">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">{% trans "Add widget" %}</h3>
-          </div>
-          <div class="panel-body" data-widget-id="0" data-target="widget-add-button">
-            <span class="glyphicon glyphicon-plus"></span>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4" data-type="widget-spare">
-        <div class="panel">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              <a href="" data-target="widget-title-url"><span data-target="widget-title"></span>&nbsp;</a>
-              <div class="btn-group pull-right">
-                <a href="#" class="btn btn-xs darker" title="{% trans "Refresh" %}" data-type="refresh"><span class="glyphicon glyphicon-refresh"></span></a>
-                {% if user|has_write_access:object %}
-                  <a href="#" class="btn btn-xs darker" title="{% trans "Configure" %}" data-type="edit"><span class="glyphicon glyphicon-wrench"></span></a>
-                  <a href="#" class="btn btn-xs darker" title="{% trans "Delete" %}" data-type="delete"><span class="glyphicon glyphicon-remove"></span></a>
-                {% endif %}
-              </div>
-            </h3>
-          </div>
-          <div class="panel-body" data-target="widget-content"></div>
-        </div>
-      </div>
-    {% endif %}
-  </div>
-  <div>
-    <a href="{% group_url 'cosinnus:group-detail' group=group.slug %}">{{ group.name }} - Details</a>
-  </div>
-{% endblock content %}
+          
+    </div><!-- row -->
+{% endblock main_page %}
 
 
 {% block extrafooter %}
