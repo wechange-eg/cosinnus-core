@@ -270,6 +270,8 @@ class GroupDashboard(RequireReadMixin, DashboardWidgetMixin, TemplateView):
     
     template_name = 'cosinnus/dashboard.html'
     
+    # Object counts as unresolved references to avoid forward dependencies
+    # this will check if the cosinnus app is actually present before including it
     app_object_count_mappings = {
         'cosinnus_event': 'cosinnus_event.models.Event',
         'cosinnus_todo': 'cosinnus_todo.models.TodoEntry',
