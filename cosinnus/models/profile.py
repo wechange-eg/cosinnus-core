@@ -20,6 +20,7 @@ from cosinnus.conf import settings
 from cosinnus.utils.files import get_avatar_filename
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.core import signals
 
 
 class BaseUserProfileManager(models.Manager):
@@ -183,12 +184,18 @@ class UserProfile(BaseUserProfile):
         return getattr(self, key)
     
     def save(self, *args, **kwargs):
+        created = bool(self.pk is None)
         # sanity check for missing media_tag:
         if not self.media_tag:
             from cosinnus.models.tagged import get_tag_object_model
             media_tag = get_tag_object_model()._default_manager.create()
             self.media_tag = media_tag
         super(UserProfile, self).save(*args, **kwargs)
+        
+        if created:
+            # send creation signal
+            signals.userprofile_ceated.send(sender=self, profile=self)
+        
 
 
 def get_user_profile_model():

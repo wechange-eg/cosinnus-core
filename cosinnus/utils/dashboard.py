@@ -20,7 +20,7 @@ from cosinnus.forms.dashboard import InfoWidgetForm, DashboardWidgetForm,\
 from cosinnus.models.tagged import AttachedObject
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus.core.signals import group_object_ceated
+from cosinnus.core.signals import group_object_ceated, userprofile_ceated
 from django.dispatch.dispatcher import receiver
 from cosinnus.core.registries.widgets import widget_registry
 
@@ -340,13 +340,25 @@ def create_initial_group_widgets(sender, group, **kwargs):
     for app_name, widget_name, options in settings.COSINNUS_INITIAL_GROUP_WIDGETS:
         widget_class = widget_registry.get(app_name, widget_name, None)
         if widget_class:
-            widget = widget_class.create(None, group=group)
+            widget = widget_class.create(None, group=group, user=None)
             widget.save_config(options)
             
     for app_name, widget_name, options in settings.COSINNUS_INITIAL_GROUP_MICROSITE_WIDGETS:
         widget_class = widget_registry.get(app_name, widget_name, None)
         if widget_class:
-            widget = widget_class.create(None, group=group, widget_type=WidgetConfig.TYPE_MICROSITE)
+            widget = widget_class.create(None, group=group, user=None, widget_type=WidgetConfig.TYPE_MICROSITE)
             widget.save_config(options)
-    
+
+
+@receiver(userprofile_ceated)
+def create_initial_user_widgets(sender, profile, **kwargs):
+    """ Function responsible for creating the initial widgets of the UserDashboard
+    upon user creation. Will create widgets that are defined in:
+        ``settings.COSINNUS_INITIAL_USER_WIDGETS``
+    """
+    for app_name, widget_name, options in settings.COSINNUS_INITIAL_USER_WIDGETS:
+        widget_class = widget_registry.get(app_name, widget_name, None)
+        if widget_class:
+            widget = widget_class.create(None, group=None, user=profile.user)
+            widget.save_config(options)
     

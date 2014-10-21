@@ -31,8 +31,8 @@ class CosinnusConf(AppConf):
     # the url pattern for group overview URLs
     GROUP_PLURAL_URL_PATH = 'projects'
     
-    # widgets listed here will be created for the group dashboard upon CosinnusGroup creation
-    # will check if the cosinnus app is installed and if the widget is registered, so
+    # widgets listed here will be created for the group dashboard upon CosinnusGroup creation.
+    # this. will check if the cosinnus app is installed and if the widget is registered, so
     # invalid entries do not produce errors
     INITIAL_GROUP_WIDGETS = [
         #(app_name, widget_name, options),
@@ -43,8 +43,8 @@ class CosinnusConf(AppConf):
         ("cosinnus", "group_members", {'amount':'5', 'sort_field':'5'}),
     ]
     
-    # widgets listed here will be created for the group microsite upon CosinnusGroup creation
-    # will check if the cosinnus app is installed and if the widget is registered, so
+    # widgets listed here will be created for the group microsite upon CosinnusGroup creation.
+    # this will check if the cosinnus app is installed and if the widget is registered, so
     # invalid entries do not produce errors
     INITIAL_GROUP_MICROSITE_WIDGETS = [
         #(app_name, widget_name, options),
@@ -52,6 +52,16 @@ class CosinnusConf(AppConf):
         ("event", "upcoming", {'sort_field':'2', 'amount':'5'}),
         ("cosinnus", "meta_attr_widget", {'sort_field':'3'}),
         
+    ]
+    
+    # widgets listed here will be created for the user dashboard upon user creation.
+    # this will check if the cosinnus app is installed and if the widget is registered, so
+    # invalid entries do not produce errors
+    INITIAL_USER_WIDGETS = [
+        #(app_name, widget_name, options),
+        ('stream', 'my_streams', {'amount':'15', 'sort_field':'1'}),
+        ('event', 'upcoming', {'amount':'5', 'sort_field':'2'}),
+        ('todo', 'mine', {'amount':'5', 'amount_subtask':'2', 'sort_field':'3'}),
     ]
     
     # which apps objects as object lists will be listed on the microsite? 

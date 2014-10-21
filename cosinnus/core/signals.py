@@ -6,6 +6,9 @@ import django.dispatch as dispatch
 """ Called after a CosinnusGroup, or one of its extending models is freshly created """
 group_object_ceated = dispatch.Signal(providing_args=["group"])
 
+""" Called after a new user and their profile is freshly created """
+userprofile_ceated = dispatch.Signal(providing_args=["profile"])
+
 """ Called when a user requests membership of a group """
 user_group_join_requested = dispatch.Signal(providing_args=["group", "user"])
 
