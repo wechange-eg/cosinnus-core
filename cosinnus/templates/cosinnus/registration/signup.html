@@ -27,7 +27,7 @@
                     <a class="pull-left" href="#" tabindex="-1">
                         <i class="fa fa-envelope"></i>
                     </a>
-                    <div class="media-body">{{ form.email.errors }}
+                    <div class="media-body media-body-form-control">{{ form.email.errors }}
                         {% captureas placeholder %}{% trans "Email address" %}{% endcaptureas %}
                         {% render_field form.email class+="form-control" placeholder=placeholder %}
                     
@@ -42,7 +42,7 @@
                     <a class="pull-left" href="#" tabindex="-1">
                         <i class="fa fa-lock"></i>
                     </a>
-                    <div class="media-body">
+                    <div class="media-body media-body-form-control">
                         {{ form.password1.errors }}
                         {% captureas placeholder %}{% trans "Password" %}{% endcaptureas %}
                         {% render_field form.password1 class+="form-control" placeholder=placeholder %}
@@ -57,7 +57,7 @@
                     <a class="pull-left" href="#" tabindex="-1">
                         <i class="fa fa-lock"></i>
                     </a>
-                    <div class="media-body">
+                    <div class="media-body media-body-form-control">
                         {{ form.password2.errors }}
                         {% captureas placeholder %}{% trans "Repeat passwort" %}{% endcaptureas %}
                         {% render_field form.password2 class+="form-control" placeholder=placeholder %}
@@ -72,7 +72,7 @@
                     <a class="pull-left" href="#" tabindex="-1">
                         <i class="fa fa-user"></i>
                     </a>
-                    <div class="media-body">
+                    <div class="media-body media-body-form-control">
                         {{ form.first_name.errors }}
                         {% captureas placeholder %}{% trans "First name" %}{% endcaptureas %}
                         {% render_field form.first_name class+="form-control" placeholder=placeholder %}
@@ -87,7 +87,7 @@
                     <a class="pull-left" href="#" tabindex="-1">
                         <i class="fa fa-user"></i>
                     </a>
-                    <div class="media-body">
+                    <div class="media-body media-body-form-control">
                         {{ form.last_name.errors }}
                         {% captureas placeholder %}{% trans "Last name" %}{% endcaptureas %}
                         {% render_field form.last_name class+="form-control" placeholder=placeholder %}

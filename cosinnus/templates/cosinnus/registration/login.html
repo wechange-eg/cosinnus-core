@@ -25,7 +25,7 @@
                     <a class="pull-left" href="#" tabindex="-1">
                         <i class="fa fa-user"></i>
                     </a>
-                    <div class="media-body">
+                    <div class="media-body media-body-form-control">
                         {{ form.username.errors }}
                         {% captureas placeholder %}{% trans "Email" %}{% endcaptureas %}
                         {% render_field form.username class+="form-control" placeholder=placeholder %}
@@ -40,7 +40,7 @@
                     <a class="pull-left" href="#" tabindex="-1">
                         <i class="fa fa-lock"></i>
                     </a>
-                    <div class="media-body">
+                    <div class="media-body media-body-form-control">
                         {{ form.password.errors }}
                         {% captureas placeholder %}{% trans "Password" %}{% endcaptureas %}
                         {% render_field form.password class+="form-control" placeholder=placeholder %}

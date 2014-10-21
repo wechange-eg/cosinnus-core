@@ -52,7 +52,7 @@
 		                       <i class="fa fa-plus"></i>
 		                    {% endif %}
 		                </a>
-		                <div class="media-body">
+		                <div class="media-body media-body-form-control">
 		                    {{ form.forms.obj.name.errors }}
 	                        {% captureas placeholder %}{% if group_model == "CosinnusSociety" %}{% trans "Enter a name for the society." %}{% else %}{% trans "Enter a name for the group." %}{% endif %}{% endcaptureas %}
 	                        {% render_field form.forms.obj.name class+="form-control" placeholder=placeholder %}
@@ -153,7 +153,7 @@
                                     <a class="pull-left" href="#">
                                         <i class="fa fa-chain"></i>
                                     </a>
-                                    <div class="media-body">
+                                    <div class="media-body media-body-form-control">
                                         {% captureas placeholder %}{% trans "Website" %}{% endcaptureas %}
                                         {% render_field form.forms.obj.website class+="form-control" placeholder=placeholder %}
                                     </div>
@@ -171,7 +171,7 @@
                                     <a class="pull-left" href="#">
                                         <i class="fa fa-globe"></i>
                                     </a>
-                                    <div class="media-body">
+                                    <div class="media-body media-body-form-control">
                                         {{ form.forms.obj.parent.errors }}
 						                {% captureas placeholder %}{% trans "Select Society" %}{% endcaptureas %}
 						                {% render_field form.forms.obj.parent class+="form-control w100" placeholder=placeholder %}
@@ -188,7 +188,7 @@
 		                            <a class="pull-left" href="#">
 		                                <i class="fa fa-globe"></i>
 		                            </a>
-		                            <div class="media-body">
+		                            <div class="media-body media-body-form-control">
 		                                <select name="public" class="form-control">
 		                                    <option default value="false">{% trans "Members only" %}</option>
 		                                    <option {% if object and object.public %}selected{% endif %} value="true">{% trans "Public" %}</option>

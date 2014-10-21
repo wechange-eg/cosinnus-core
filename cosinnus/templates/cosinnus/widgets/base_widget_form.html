@@ -11,7 +11,7 @@
 	            <a class="pull-left" href="#">
 	                <i class="fa fa-pencil"></i>
 	            </a>
-	            <div class="media-body">
+	            <div class="media-body media-body-form-control">
 	                {% captureas placeholder %}{% trans "Widget title" %}{% endcaptureas %}
 	                {% render_field form.widget_title class+="form-control" placeholder=placeholder %}
 	            </div>
@@ -31,7 +31,7 @@
 	            <a class="pull-left" href="#">
 	                <i class="fa fa-pencil"></i>
 	            </a>
-	            <div class="media-body">
+	            <div class="media-body media-body-form-control">
 	                {% captureas placeholder %}{% trans "Font-awesome Widget Icon" %}{% endcaptureas %}
 	                {% render_field form.widget_icon class+="form-control" placeholder=placeholder %}
 	            </div>
@@ -46,7 +46,7 @@
                 <a class="pull-left" href="#">
                     <i class="fa fa-pencil"></i>
                 </a>
-                <div class="media-body">
+                <div class="media-body media-body-form-control">
                     {% captureas placeholder %}{% trans "Link label" %}{% endcaptureas %}
                     {% render_field form.link_label class+="form-control" placeholder=placeholder %}
                 </div>
@@ -61,7 +61,7 @@
                 <a class="pull-left" href="#">
                     <i class="fa fa-sort-numeric-asc"></i>
                 </a>
-                <div class="media-body">
+                <div class="media-body media-body-form-control">
                     {% captureas placeholder %}{% trans "Sort field" %}{% endcaptureas %}
                     {% render_field form.sort_field class+="form-control" placeholder=placeholder %}
                 </div>

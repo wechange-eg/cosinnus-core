@@ -43,7 +43,7 @@
                                             <a class="pull-left" href="#">
                                                 <i class="fa fa-user"></i>
                                             </a>
-                                            <div class="media-body">
+                                            <div class="media-body media-body-form-control">
                                                 {{ form.forms.user.first_name.errors }}
 					                            {% captureas placeholder %}{% trans "First name" %}{% endcaptureas %}
 					                            {% render_field form.forms.user.first_name class+="form-control" placeholder=placeholder %}
@@ -59,7 +59,7 @@
                                             <a class="pull-left" href="#">
                                                 <i class="fa fa-user"></i>
                                             </a>
-                                            <div class="media-body">
+                                            <div class="media-body media-body-form-control">
                                                 {{ form.forms.user.last_name.errors }}
 					                            {% captureas placeholder %}{% trans "Last name" %}{% endcaptureas %}
 					                            {% render_field form.forms.user.last_name class+="form-control" placeholder=placeholder %}
@@ -77,7 +77,7 @@
                                     <a class="pull-left" href="#">
                                         <i class="fa fa-envelope"></i>
                                     </a>
-                                    <div class="media-body">
+                                    <div class="media-body media-body-form-control">
                                         {{ form.forms.user.email.errors }}
 			                            {% captureas placeholder %}{% trans "E-Mail" %}{% endcaptureas %}
 			                            {% render_field form.forms.user.email class+="form-control" placeholder=placeholder %}
@@ -92,7 +92,7 @@
                                     <a class="pull-left" href="#">
                                         <i class="fa fa-chain"></i>
                                     </a>
-                                    <div class="media-body">
+                                    <div class="media-body media-body-form-control">
                                         {{ form.forms.obj.website.errors }}
                                         {% captureas placeholder %}{% trans "Website" %}{% endcaptureas %}
                                         {% render_field form.forms.obj.website class+="form-control" placeholder=placeholder %}
@@ -192,7 +192,7 @@
                                     <a class="pull-left" href="#">
                                         <i class="fa fa-pencil"></i>
                                     </a>
-                                    <div class="media-body">
+                                    <div class="media-body media-body-form-control">
                                         {% comment %}  {% render_field form.forms.obj.description  %}{% endcomment %}
                                         {{ form.forms.obj.description.errors }}
                                         {% captureas placeholder %}{% trans "Tell others something about you!" %}{% endcaptureas %}
