@@ -9,7 +9,6 @@ from django.shortcuts import get_object_or_404, render_to_response, render
 from django.template import RequestContext
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_text
-from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import TemplateView
 
@@ -19,8 +18,6 @@ from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.http import JSONResponse
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
 from cosinnus.views.mixins.group import RequireReadMixin
-from django.template.loader import render_to_string
-from django.core.exceptions import ImproperlyConfigured
 from uuid import uuid1
 
 
@@ -212,6 +209,37 @@ class DashboardWidgetMixin(object):
     
     # any 'app_name.widget_name' entries in here will be filtered out of the context_data
     disallowed_widgets = []
+    # fallback ordering of 'app_name.widget_name' for when some widgets have the same sort_field value
+    default_widget_order = []
+    
+    def reorder_equal_widgets(self, widgets):
+        """ Sorts all widgets with equal sort_key by their default_widget_order """
+        if not self.default_widget_order:
+            return widgets
+        
+        def sort_key(widget):
+            try:
+                return self.default_widget_order.index("%s.%s" % (widget.config.app_name, widget.config.widget_name.replace(" ", "_")))
+            except ValueError:
+                return 999
+        
+        sort_fields = sorted(list(set(map(lambda widget:widget.config.sort_field, widgets))))
+        grouped_widgets = [[widget for widget in widgets if widget.config.sort_field == rank] for rank in sort_fields]
+        
+        sorted_widgets = []
+        for group in grouped_widgets:
+            group = sorted(group, key=sort_key)
+            sorted_widgets.extend(group)
+            """
+            for preference in self.default_widget_order:
+                for i in reversed(range(len(group))):
+                    widg = group[i]
+                    if "%s.%s" % (widg.config.app_name, widg.config.widget_name.replace(" ", "_")) == preference:
+                        sorted_widgets.append(widg)
+                        del group[i]
+            sorted_widgets.extend(group)
+            """
+        return sorted_widgets
     
     def get_context_data(self, **kwargs):
         widget_filter = self.get_filter()
@@ -227,7 +255,8 @@ class DashboardWidgetMixin(object):
             widget_class = widget_registry.get(wc.app_name, wc.widget_name)
             widget = widget_class(self.request, wc)
             widgets.append(widget)
-            
+        
+        widgets = self.reorder_equal_widgets(widgets)
         kwargs.update({
             'widgets': widgets,
         })
