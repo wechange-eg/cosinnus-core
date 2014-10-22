@@ -22,7 +22,7 @@ if 'djcelery' in settings.INSTALLED_APPS:
 def _django_send_mail(to, subject, template, data, from_email=None, bcc=None):
     """ From django.core.mail, extended with bcc """
     if from_email is None:
-        from_email = settings.DEFAULT_FROM_EMAIL
+        from_email = settings.COSINNUS_DEFAULT_FROM_EMAIL
     message = render_to_string(template, data)
 
     connection = get_connection()

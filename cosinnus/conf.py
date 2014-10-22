@@ -7,11 +7,61 @@ from appconf import AppConf
 
 
 class CosinnusConf(AppConf):
+    """ Cosinnus settings, any of these values here will be included in the settings,
+     with name prefix 'COSINNUS_'.
+     They can be overwritten defining them again (using the prefix) in the settings.py.
+     
+     If you are looking for third-party default settings needed by cosinnus, 
+     check cosinnus/default_settings.py!
+    """
+    
+    class Meta:
+        prefix = 'COSINNUS'
 
     #: A mapping of ``{'app1.Model1': ['app2.Model2', 'app3.Model3']}`` that
     #: defines the tells, that given an instance of ``app1.Model1``, objects
     #: of type ``app2.Model2`` or ``app3.Model3`` can be attached.
-    ATTACHABLE_OBJECTS = {}
+    ATTACHABLE_OBJECTS = {
+        'cosinnus_note.Note': [
+            'cosinnus_file.FileEntry',
+            'cosinnus_event.Event',
+            'cosinnus_todo.TodoEntry',
+            'cosinnus_etherpad.Etherpad'
+        ],
+        'cosinnus_event.Event': [
+            'cosinnus_file.FileEntry',
+            'cosinnus_todo.TodoEntry',
+            'cosinnus_etherpad.Etherpad'
+        ],
+    }
+    
+    # Configures by which search terms each Attachable Model can be match-restricted in the select 2 box
+    # Each term will act as an additional restriction on search objects. Subterms of these terms will be matched!
+    # Note: this should be configured for all of the ~TARGET~ objects from COSINNUS_ATTACHABLE_OBJECTS
+    ATTACHABLE_OBJECTS_SUGGEST_ALIASES = {
+        'cosinnus_file.FileEntry': [
+            'dateien',
+            'files',
+            'bilder'
+        ],
+        'cosinnus_event.Event': [
+            'veranstaltung',
+            'event'
+        ],
+        'cosinnus_etherpad.Etherpad': [
+            'etherpad',
+            'diskussion'
+        ],
+        'cosinnus_todo.TodoEntry': [
+            'todo',
+            'aufgabe',
+            'task'
+        ],
+    }
+    
+    # The default title for all pages unless the title block is overwritten. 
+    # This is translated through a {% trans %} tag.
+    BASE_PAGE_TITLE_TRANS = 'Cosinnus'
 
     # These are the default values for the bootstrap3-datetime-picker and
     # are translated in `cosinnus/formats/LOCALE/formats.py`
@@ -24,7 +74,10 @@ class CosinnusConf(AppConf):
 
     #: Default time format used by e.g. the "bootstrap3-datetime-picker"
     DATETIMEPICKER_TIME_FORMAT = 'HH:mm'
-
+    
+    # the default send_mail sender email
+    DEFAULT_FROM_EMAIL = 'do-not-reply@example.com'
+    
     #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = 60 * 60 * 24
     
@@ -102,3 +155,4 @@ class CosinnusConf(AppConf):
 
     #: The serializer used for the user profile
     USER_PROFILE_SERIALIZER = 'cosinnus.models.serializers.profile.UserProfileSerializer'
+    
