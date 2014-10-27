@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.utils.importlib import import_module
+from uuid import uuid1
 
 
 def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
@@ -45,6 +46,10 @@ def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
     max_length = item._meta.get_field_by_name(slug_field)[0].max_length
     slug_len = max_length - 10  # 1 for '-'and 4 (+5 for etherpad-id compatibility) for the counter
     slug = slugify(getattr(item, slug_source)[:slug_len])
+    
+    # sanity check, we can never ever have an empty slug!
+    if not slug:
+        slug = str(uuid1().int)[:10]
     
     # resolve proxy classes to their lowest common database model
     model = item.__class__
