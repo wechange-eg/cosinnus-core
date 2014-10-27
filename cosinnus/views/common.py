@@ -27,7 +27,7 @@ class SwitchLanguageView(RedirectView):
         return super(SwitchLanguageView, self).get(request, *args, **kwargs)
         
     def get_redirect_url(self, **kwargs):
-        return self.request.GET.get('next', '/')
+        return self.request.GET.get('next', self.request.META.get('HTTP_REFERER', '/'))
         
 
 switch_language = SwitchLanguageView.as_view()
