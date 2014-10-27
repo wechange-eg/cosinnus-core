@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-21 17:54+0200\n"
+"POT-Creation-Date: 2014-10-27 15:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -136,7 +136,7 @@ msgstr ""
 msgid "Next month"
 msgstr ""
 
-#: .\forms\hierarchy.py:14 .\models\group.py:312
+#: .\forms\hierarchy.py:14 .\models\group.py:313
 msgid "Name"
 msgstr ""
 
@@ -200,88 +200,88 @@ msgstr ""
 msgid "Cosinnus Micropages"
 msgstr ""
 
-#: .\models\group.py:55
+#: .\models\group.py:56
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 
-#: .\models\group.py:306 .\models\tagged.py:57 .\models\tagged.py:61
+#: .\models\group.py:307 .\models\tagged.py:57 .\models\tagged.py:61
 #: .\models\tagged.py:134
 msgid "Group"
 msgstr ""
 
-#: .\models\group.py:307
+#: .\models\group.py:308
 msgid "Society"
 msgstr ""
 
-#: .\models\group.py:314
+#: .\models\group.py:315
 msgid "Slug"
 msgstr ""
 
-#: .\models\group.py:315
+#: .\models\group.py:316
 msgid "Group Type"
 msgstr "Project Type"
 
-#: .\models\group.py:318 .\models\profile.py:147
+#: .\models\group.py:319 .\models\profile.py:148
 #: .\templates\cosinnus\cms\microsite.html.py:198
 #: .\templates\cosinnus\group\group_form.html.py:206
 msgid "Description"
 msgstr ""
 
-#: .\models\group.py:319 .\models\profile.py:145
+#: .\models\group.py:320 .\models\profile.py:146
 #: .\templates\cosinnus\group\group_form.html.py:65
 msgid "Avatar"
 msgstr ""
 
-#: .\models\group.py:321 .\models\profile.py:150
+#: .\models\group.py:322 .\models\profile.py:151
 #: .\templates\cosinnus\group\group_form.html.py:148
 #: .\templates\cosinnus\group\group_form.html.py:157
 #: .\templates\cosinnus\user\userprofile_form.html.py:97
 msgid "Website"
 msgstr ""
 
-#: .\models\group.py:322 .\models\tagged.py:39
+#: .\models\group.py:323 .\models\tagged.py:39
 #: .\templates\cosinnus\group\group_form.html.py:194
 #: .\templates\cosinnus\group\group_list.html.py:93
 msgid "Public"
 msgstr ""
 
-#: .\models\group.py:328
+#: .\models\group.py:329
 msgid "Parent Group"
 msgstr ""
 
-#: .\models\group.py:336
+#: .\models\group.py:337
 msgid "Cosinnus group"
 msgstr "Project"
 
-#: .\models\group.py:337
+#: .\models\group.py:338
 msgid "Cosinnus groups"
 msgstr "Projects"
 
-#: .\models\group.py:356
+#: .\models\group.py:358
 msgid "Slug must not be empty."
 msgstr ""
 
-#: .\models\group.py:454
+#: .\models\group.py:461
 msgid "Cosinnus project"
 msgstr "Project"
 
-#: .\models\group.py:455
+#: .\models\group.py:462
 msgid "Cosinnus projects"
 msgstr "Projects"
 
-#: .\models\group.py:483
+#: .\models\group.py:490
 msgid "Cosinnus society"
 msgstr "Group"
 
-#: .\models\group.py:484
+#: .\models\group.py:491
 msgid "Cosinnus societies"
 msgstr "Groups"
 
-#: .\models\group.py:513
+#: .\models\group.py:520
 msgid "Group membership"
 msgstr ""
 
-#: .\models\group.py:514
+#: .\models\group.py:521
 msgid "Group memberships"
 msgstr ""
 
@@ -600,7 +600,13 @@ msgid "Create folder"
 msgstr ""
 
 #: .\templates\cosinnus\modal_box.html.py:28
-msgid "Abbrechen"
+#: .\templates\cosinnus\group\group_confirm.html.py:14
+#: .\templates\cosinnus\group\group_delete.html.py:16
+#: .\templates\cosinnus\group\group_user_form.html.py:16
+#: .\templates\cosinnus\hierarchy\add_container.html.py:28
+#: .\templates\cosinnus\widgets\add_widget.html.py:32
+#: .\templates\cosinnus\widgets\delete.html.py:5
+msgid "Cancel"
 msgstr ""
 
 #: .\templates\cosinnus\modal_box.html.py:45
@@ -722,7 +728,7 @@ msgstr "Do you wish to request to join project „%(title)s“?"
 msgid "Add widget"
 msgstr ""
 
-#: .\templates\cosinnus\cms\microsite.html.py:161 .\utils\dashboard.py:309
+#: .\templates\cosinnus\cms\microsite.html.py:161 .\utils\dashboard.py:313
 msgid "Informations"
 msgstr ""
 
@@ -734,15 +740,6 @@ msgstr ""
 #: .\templates\cosinnus\cms\microsite.html.py:216
 #: .\templates\cosinnus\cms\microsite.html.py:237
 msgid "Back to Project Overview"
-msgstr ""
-
-#: .\templates\cosinnus\group\group_confirm.html.py:14
-#: .\templates\cosinnus\group\group_delete.html.py:16
-#: .\templates\cosinnus\group\group_user_form.html.py:16
-#: .\templates\cosinnus\hierarchy\add_container.html.py:28
-#: .\templates\cosinnus\widgets\add_widget.html.py:32
-#: .\templates\cosinnus\widgets\delete.html.py:5
-msgid "Cancel"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_delete.html.py:5
@@ -1025,6 +1022,7 @@ msgid "Users in group %(group)s"
 msgstr "Users in project %(group)s"
 
 #: .\templates\cosinnus\group\group_user_list.html.py:23
+#: .\templates\cosinnus\user\user_list.html.py:100
 msgid "There are no visible users."
 msgstr ""
 
@@ -1337,7 +1335,7 @@ msgstr ""
 msgid "User overview"
 msgstr ""
 
-#: .\templates\cosinnus\user\user_list.html.py:111
+#: .\templates\cosinnus\user\user_list.html.py:112
 #, python-format
 msgid "And %(hidden_count)s private users..."
 msgstr ""
@@ -1503,11 +1501,11 @@ msgid "All members"
 msgstr ""
 
 #: .\templates\cosinnus\widgets\info_widget_form.html.py:21
-msgid "Attach Image(s)"
+msgid "Attach Images/Files"
 msgstr ""
 
 #: .\templates\cosinnus\widgets\info_widget_form.html.py:29
-msgid "Bild/Datei anhängen"
+msgid "Attach image/file"
 msgstr ""
 
 #: .\templates\cosinnus\widgets\not_allowed_group.html.py:2
@@ -1537,20 +1535,20 @@ msgstr ""
 msgid "(Deleted User)"
 msgstr ""
 
-#: .\templatetags\cosinnus_tags.py:240 .\templatetags\cosinnus_tags.py:266
+#: .\templatetags\cosinnus_tags.py:247 .\templatetags\cosinnus_tags.py:273
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr ""
 
-#: .\utils\dashboard.py:175
+#: .\utils\dashboard.py:179
 msgid "Group Description"
 msgstr ""
 
-#: .\utils\dashboard.py:201
+#: .\utils\dashboard.py:205
 msgid "Network"
 msgstr ""
 
-#: .\utils\dashboard.py:258
+#: .\utils\dashboard.py:262
 msgid "About Us"
 msgstr ""
 
