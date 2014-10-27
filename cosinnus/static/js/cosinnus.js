@@ -403,7 +403,7 @@
 									.fullCalendar('render');
 							})
 							.next()
-							.text(dateDataAttr)
+							.attr('data-date', dateDataAttr).addClass('moment-data-date')
 							.next()
 							.children()
 							.val('')
@@ -411,13 +411,14 @@
 							.next()
 							.children()
 							.val('');
-
+						
 					} else {
 						// remove from list now
 						$('#calendar-doodle-days-selector-list table tr[data-date='+dateDataAttr+']').remove();
 					}
 
 					selectDays();
+					$.cosinnus.renderMomentDataDate();
 				})
 				.on("fullCalendarViewRender", function(event, cell) {
 					selectDays();
