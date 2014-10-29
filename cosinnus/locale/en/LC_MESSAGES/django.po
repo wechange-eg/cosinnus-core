@@ -211,7 +211,7 @@ msgstr ""
 
 #: .\models\group.py:308
 msgid "Society"
-msgstr ""
+msgstr "Group"
 
 #: .\models\group.py:315
 msgid "Slug"
@@ -405,12 +405,12 @@ msgstr ""
 #: .\templates\cosinnus\breadcrumb.html.py:3
 msgctxt "society"
 msgid "Group overview"
-msgstr ""
+msgstr "Group overview"
 
 #: .\templates\cosinnus\breadcrumb.html.py:5
 msgctxt "group"
 msgid "Group overview"
-msgstr ""
+msgstr "Project overview"
 
 #: .\templates\cosinnus\dashboard.html.py:54
 msgid "Etherpad"
@@ -888,31 +888,31 @@ msgstr "Edit project “%(group_name)s”"
 #: .\templates\cosinnus\group\group_form.html.py:29
 #: .\templates\cosinnus\group\leftnav_all_groups.html.py:40
 msgid "Create Society"
-msgstr ""
+msgstr "Create Group"
 
 #: .\templates\cosinnus\group\group_form.html.py:8
 #: .\templates\cosinnus\group\group_form.html.py:29
 #: .\templates\cosinnus\group\leftnav_all_groups.html.py:36
 msgid "Create Group"
-msgstr ""
+msgstr "Create Project"
 
 #: .\templates\cosinnus\group\group_form.html.py:27
 #: .\templates\cosinnus\group\leftnav_group.html.py:14
 msgid "Edit Society"
-msgstr ""
+msgstr "Edit Group"
 
 #: .\templates\cosinnus\group\group_form.html.py:27
 #: .\templates\cosinnus\group\leftnav_group.html.py:14
 msgid "Edit Group"
-msgstr ""
+msgstr "Edit Project"
 
 #: .\templates\cosinnus\group\group_form.html.py:57
 msgid "Enter a name for the society."
-msgstr ""
+msgstr "Enter a name for the group."
 
 #: .\templates\cosinnus\group\group_form.html.py:57
 msgid "Enter a name for the group."
-msgstr ""
+msgstr "Enter a name for the project."
 
 #: .\templates\cosinnus\group\group_form.html.py:82
 msgid "Avatar will be deleted once you save."
@@ -956,7 +956,7 @@ msgstr ""
 
 #: .\templates\cosinnus\group\group_list.html.py:4
 msgid "Societies"
-msgstr ""
+msgstr "Groups"
 
 #: .\templates\cosinnus\group\group_list.html.py:18
 #: .\templates\cosinnus\user\user_list.html.py:14
@@ -1032,7 +1032,7 @@ msgstr "All projects"
 
 #: .\templates\cosinnus\group\leftnav_all_groups.html.py:24
 msgid "All societies"
-msgstr ""
+msgstr "All groups"
 
 #: .\templates\cosinnus\group\leftnav_all_groups.html.py:30
 msgid "All users"
