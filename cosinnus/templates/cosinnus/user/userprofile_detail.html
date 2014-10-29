@@ -5,26 +5,9 @@
   {% blocktrans with username=this_user|full_name %}User profile: {{ username }}{% endblocktrans %}{{ block.super }}
 {% endblock %}
 
-{% block override_breadcrumb %}
-{% endblock override_breadcrumb %}
 
-{% comment %} 
-{% block breadcrumb %}
-        {{ block.super }}
-        {% if user == this_user %}
-            <li class="active">{% trans "Your Profile" %}</li>
-        {% else %}
-            <li class="active">{% trans "User Profiles" %}</li>
-            <li class="active">{{ this_user|full_name }}</li>
-        {% endif %}
-{% endblock %}
- {% endcomment %}
+{% block main_page %}
 
-{% block leftnav %}
-{% endblock leftnav %}
-
-{% block content %}
-    
     {% if SETTINGS.DEBUG and not user|cosinnus_setting:"test_msg" %}
         <div class="alert alert-info alert-dismissable">
             <i class="fa fa-info-circle fa-3x"></i>
@@ -33,179 +16,185 @@
         </div>
     {% endif %}
 
-    <div class="row large-space">
-        <div class="col-sm-3 large-space">
-            {% include "cosinnus/user/user_avatar_image.html" with user=this_user extra_classes="w100" %}
-        </div>
-        <div class="col-sm-9 bottom-align large-space">
-            <legend class="large-space">{{ this_user|full_name }}</legend>
-
-            {% if request.user.is_authenticated and request.user == this_user %}
-                <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:profile-edit' %}">
-                    <ul class="media-list">
-                        <li class="media">
-                            <a class="pull-left" href="#">
-                                <i class="fa fa-pencil"></i>
-                            </a>
-                            <div class="media-body">
-                                {% trans "Edit Profile" %}
-                            </div>
-                        </li>
-                    </ul>
-                </button>
-            {% else %}
-                {% comment %} Abonnieren is out for now 
-                <button type="button" class="btn btn-default">
-                    <ul class="media-list">
-                        <li class="media">
-                            <a class="pull-left" href="#">
-                                <i class="fa fa-hand-o-right "></i>
-                            </a>
-                            <div class="media-body">
-                                <!-- <a href="#"> -->
-                                    {% trans "Abonnieren" %}
-                                <!-- </a> -->
-                            </div>
-                        </li>
-                    </ul>
-                </button>
-                 {% endcomment %}
-                <button type="button" class="btn btn-emphasized" href="{% url 'postman_write' recipients=this_user.username %}">
-                    <ul class="media-list">
-                        <li class="media">
-                            <a class="pull-left" href="#">
-                                <i class="fa fa-envelope"></i>
-                            </a>
-                            <div class="media-body">
-                                {% trans "Send Message" %}
-                            </div>
-                        </li>
-                    </ul>
-                </button>
-            {% endif %} 
-        </div>
-
-
-    </div><!-- row -->
-
-
     <div class="row">
-        <div class="col-md-6 col-lg-4">
-
-            <div type="button" class="btn btn-emphasized btn-headline">
-                <ul class="media-list">
-                    <li class="media">
-                        <a class="pull-left btn-extra-emphasized" href="#"></a>
-                        <a class="pull-left" href="#">
-                            <i class="fa fa-user"></i>
-                        </a>
-                        <div class="media-body">
-                            {% trans "About me" %}
-                        </div>
-                    </li>
-                </ul>
-            </div><!-- btn -->
-            <div class="content-box large-space">
-                {% if profile.description %} 
-                <p class="transparent">
-                    {{ profile.description|striptags|safe }}
-                </p>
-                {% endif %}
-                
-                {% include "cosinnus/media_tags_userprofile_readonly.html" with object=profile %}
-                
-                {% if profile.website %}
-                <legend>{% trans "My Website" %}</legend>
-                <p class="transparent">
-                    <i class="fa fa-globe"></i> <a href="{{ profile.website }}" target="_blank">{{ profile.website }}</a>
-                </p>
-                {% endif %}
-            </div><!-- content-box -->
-        </div><!-- column -->
-
-        <div class="col-md-6 col-lg-4">
-
-            <div type="button" class="btn btn-emphasized btn-headline fine-space">
-                <ul class="media-list">
-                    <li class="media">
-                        <a class="pull-left btn-extra-emphasized" href="#"></a>
-                        <a class="pull-left" href="#">
-                            <i class="fa fa-users"></i>
-                        </a>
-                        <div class="media-body">
-                            {% trans "My Groups" %}
-                        </div>
-                    </li>
-                </ul>
-            </div><!-- btn -->
-            
-            {% for group in profile.cosinnus_groups %}
-                <button type="button" class="btn btn-default w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ group.get_absolute_url }}">
-                    <ul class="media-list">
-                        <li class="media">
-                            <a class="pull-left">
-                                {% include "cosinnus/group/group_avatar_image.html" with group=group %}
-                            </a>
-                            <div class="media-body">
-                                {{ group.name }}
-                            </div>
-                        </li>
-                    </ul>
-                </button>
-            {% endfor %}
-
-            {% comment %} Mehr button is hidden till we can load more results  
-            <button type="button" class="btn btn-emphasized large-space">
-                <ul class="media-list">
-                    <li class="media">
-                        <a class="pull-left" href="#"></a>
-                        <a class="pull-right btn-extra-emphasized" href="#">
-                            <i class="fa fa-chevron-right "></i>
-                        </a>
-                        <div class="media-body">
-                            <a href="#">
-                                {% trans "More" %}
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </button>
-             {% endcomment %}
-
-
-        </div><!-- column -->
-
-        {% comment %} My Network widget deactivated instead of placeholder 
-        <div class="col-md-6 col-lg-4">
-
-            <div type="button" class="btn btn-emphasized btn-headline fine-space">
-                <ul class="media-list">
-                    <li class="media">
-                        <a class="pull-left btn-extra-emphasized" href="#"></a>
-                        <a class="pull-left" href="#">
-                            <i class="fa fa-th"></i>
-                        </a>
-                        <div class="media-body">
-                            {% trans "My Network" %}
-                        </div>
-                    </li>
-                </ul>
-            </div><!-- btn -->
-
-            <table>
-                <tr>
-                    <td><a href="#"><img src="{% static 'images/feature-placeholder.png' %}" class="w100" /></a></td>
-                </tr>
-            </table>
-
-        </div><!-- column -->
-        {% endcomment %}
-
+		<div class="col-xs-12">
+		
+			<div class="row large-space">
+			    <div class="col-sm-3 large-space">
+			        {% include "cosinnus/user/user_avatar_image.html" with user=this_user extra_classes="w100" %}
+			    </div>
+			    <div class="col-sm-9 bottom-align large-space">
+			        <legend class="large-space">{{ this_user|full_name }}</legend>
+			
+			        {% if request.user.is_authenticated and request.user == this_user %}
+			            <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:profile-edit' %}">
+			                <ul class="media-list">
+			                    <li class="media">
+			                        <a class="pull-left" href="#">
+			                            <i class="fa fa-pencil"></i>
+			                        </a>
+			                        <div class="media-body">
+			                            {% trans "Edit Profile" %}
+			                        </div>
+			                    </li>
+			                </ul>
+			            </button>
+			        {% else %}
+			            {% comment %} Abonnieren is out for now 
+			            <button type="button" class="btn btn-default">
+			                <ul class="media-list">
+			                    <li class="media">
+			                        <a class="pull-left" href="#">
+			                            <i class="fa fa-hand-o-right "></i>
+			                        </a>
+			                        <div class="media-body">
+			                            <!-- <a href="#"> -->
+			                                {% trans "Abonnieren" %}
+			                            <!-- </a> -->
+			                        </div>
+			                    </li>
+			                </ul>
+			            </button>
+			             {% endcomment %}
+			            <button type="button" class="btn btn-emphasized" href="{% url 'postman_write' recipients=this_user.username %}">
+			                <ul class="media-list">
+			                    <li class="media">
+			                        <a class="pull-left" href="#">
+			                            <i class="fa fa-envelope"></i>
+			                        </a>
+			                        <div class="media-body">
+			                            {% trans "Send Message" %}
+			                        </div>
+			                    </li>
+			                </ul>
+			            </button>
+			        {% endif %} 
+			    </div>
+			
+			
+			</div><!-- row -->
+			
+			
+			<div class="row">
+			    <div class="col-md-6 col-lg-4">
+			
+			        <div type="button" class="btn btn-emphasized btn-headline">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+			                    <a class="pull-left" href="#">
+			                        <i class="fa fa-user"></i>
+			                    </a>
+			                    <div class="media-body">
+			                        {% trans "About me" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </div><!-- btn -->
+			        <div class="content-box large-space">
+			            {% if profile.description %} 
+			            <p class="transparent">
+			                {{ profile.description|striptags|safe }}
+			            </p>
+			            {% endif %}
+			            
+			            {% include "cosinnus/media_tags_userprofile_readonly.html" with object=profile %}
+			            
+			            {% if profile.website %}
+			            <legend>{% trans "My Website" %}</legend>
+			            <p class="transparent">
+			                <i class="fa fa-globe"></i> <a href="{{ profile.website }}" target="_blank">{{ profile.website }}</a>
+			            </p>
+			            {% endif %}
+			        </div><!-- content-box -->
+			    </div><!-- column -->
+			
+			    <div class="col-md-6 col-lg-4">
+			
+			        <div type="button" class="btn btn-emphasized btn-headline fine-space">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+			                    <a class="pull-left" href="#">
+			                        <i class="fa fa-users"></i>
+			                    </a>
+			                    <div class="media-body">
+			                        {% trans "My Groups" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </div><!-- btn -->
+			        
+			        {% for group in profile.cosinnus_groups %}
+			            <button type="button" class="btn btn-default w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ group.get_absolute_url }}">
+			                <ul class="media-list">
+			                    <li class="media">
+			                        <a class="pull-left">
+			                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
+			                        </a>
+			                        <div class="media-body">
+			                            {{ group.name }}
+			                        </div>
+			                    </li>
+			                </ul>
+			            </button>
+			        {% endfor %}
+			
+			        {% comment %} Mehr button is hidden till we can load more results  
+			        <button type="button" class="btn btn-emphasized large-space">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left" href="#"></a>
+			                    <a class="pull-right btn-extra-emphasized" href="#">
+			                        <i class="fa fa-chevron-right "></i>
+			                    </a>
+			                    <div class="media-body">
+			                        <a href="#">
+			                            {% trans "More" %}
+			                        </a>
+			                    </div>
+			                </li>
+			            </ul>
+			        </button>
+			         {% endcomment %}
+			
+			
+			    </div><!-- column -->
+			
+			    {% comment %} My Network widget deactivated instead of placeholder 
+			    <div class="col-md-6 col-lg-4">
+			
+			        <div type="button" class="btn btn-emphasized btn-headline fine-space">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+			                    <a class="pull-left" href="#">
+			                        <i class="fa fa-th"></i>
+			                    </a>
+			                    <div class="media-body">
+			                        {% trans "My Network" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </div><!-- btn -->
+			
+			        <table>
+			            <tr>
+			                <td><a href="#"><img src="{% static 'images/feature-placeholder.png' %}" class="w100" /></a></td>
+			            </tr>
+			        </table>
+			
+			    </div><!-- column -->
+			    {% endcomment %}
+			
+			</div><!-- row -->
+			
+        </div><!-- col -->
     </div><!-- row -->
 
   
+{% endblock main_page %}
   
-{% endblock content %}
 
 {% block extrafooter %}
     {{ block.super }}
