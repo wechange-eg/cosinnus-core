@@ -62,6 +62,11 @@ class UserProfileObjectMixin(SingleObjectMixin):
 class UserProfileDetailView(UserProfileObjectMixin, DetailView):
     template_name = 'cosinnus/user/userprofile_detail.html'
     
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super(UserProfileDetailView, self).dispatch(
+            request, *args, **kwargs)
+    
     def get_queryset(self):
         qs = super(UserProfileDetailView, self).get_queryset()
         qs = qs.exclude(user__is_active=False)
