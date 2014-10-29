@@ -18,7 +18,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry, attached_object_registry
-from cosinnus.models.group import CosinnusGroup, CosinnusGroupManager
+from cosinnus.models.group import CosinnusGroup, CosinnusGroupManager,\
+    CosinnusSociety, CosinnusProject
 from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
     check_group_create_objects_access, check_object_read_access, get_user_token)
@@ -169,7 +170,8 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
     request = context['request']
     user = request.user
     if user.is_authenticated():
-        context['groups'] = CosinnusGroup.objects.get_for_user(request.user)
+        context['groups'] = CosinnusProject.objects.get_for_user(request.user)
+        context['societies'] = CosinnusSociety.objects.get_for_user(request.user)
 
     current_app = resolve(request.path).app_name
     active_app = None
@@ -194,6 +196,10 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
             'apps': apps,
             'app_nav': True,
         })
+        if group.type == CosinnusGroup.TYPE_PROJECT:
+            context['appsmenu_group'] = group
+        elif group.type == CosinnusGroup.TYPE_SOCIETY:
+            context['appsmenu_society'] = group
     else:
         context['app_nav'] = False
 
