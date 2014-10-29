@@ -9,7 +9,7 @@
                     <i class="fa fa-times"></i>
                 </button>
                 <h4 class="modal-title" id="{{ id }}Label">
-                    <i class="fa fa-eraser"></i>
+                    <i class="fa {% if title_icon %}{{ title_icon }}{% else %}fa-eraser{% endif %}"></i>
                     {{ title }}
                 </h4>
             </div>
