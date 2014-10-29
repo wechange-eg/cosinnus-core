@@ -10,32 +10,38 @@
     {% captureas is_userlist %}True{% endcaptureas %}
 {% elif current_page == "addgroup" %}
     {% captureas is_addgroup %}True{% endcaptureas %}
-    {% elif current_page == "addsociety" %}
+{% elif current_page == "addsociety" %}
     {% captureas is_addsociety %}True{% endcaptureas %}
 {% endif %}
 
-{% captureas href %}{% url 'cosinnus:group-list' %}{% endcaptureas %}
-{% captureas label %}{% trans "All groups" %}{% endcaptureas %}
-{% captureas extra_class %}fine-space{% endcaptureas %}
-{% include "cosinnus/leftnav_button.html" with active=is_grouplist extra_classes=extra_class icon="fa-group" label=label href=href  %}
+{% if current_page == "grouplist" or current_page == "addgroup" %}
+	{% captureas href %}{% url 'cosinnus:group-list' %}{% endcaptureas %}
+	{% captureas label %}{% trans "All groups" %}{% endcaptureas %}
+	{% include "cosinnus/leftnav_button.html" with active=is_grouplist extra_classes="regular-space" icon="fa-group" label=label href=href  %}
+	
+	{% if user|can_create_groups %}
+	    {% captureas href %}{% url 'cosinnus:group-add' %}{% endcaptureas %}
+	    {% captureas label %}{% trans "Create Group" %}{% endcaptureas %}
+	    {% include "cosinnus/leftnav_button.html" with active=is_addgroup icon="fa-plus" extra_classes="regular-space" label=label href=href  %}
+	{% endif %}
+{% endif %}
 
-{% captureas href %}{% url 'cosinnus:group__group-list' %}{% endcaptureas %}
-{% captureas label %}{% trans "All societies" %}{% endcaptureas %}
-{% captureas extra_class %}fine-space{% endcaptureas %}
-{% include "cosinnus/leftnav_button.html" with active=is_grouplist__society extra_classes=extra_class icon="fa-globe" label=label href=href  %}
+{% if current_page == "grouplist__society" or current_page == "addsociety" %}
+	{% captureas href %}{% url 'cosinnus:group__group-list' %}{% endcaptureas %}
+	{% captureas label %}{% trans "All societies" %}{% endcaptureas %}
+	{% include "cosinnus/leftnav_button.html" with active=is_grouplist__society extra_classes="regular-space" icon="fa-globe" label=label href=href  %}
+	
+	{% if user|can_create_groups %}
+	    {% captureas href %}{% url 'cosinnus:group__group-add' %}{% endcaptureas %}
+	    {% captureas label %}{% trans "Create Society" %}{% endcaptureas %}
+	    {% include "cosinnus/leftnav_button.html" with active=is_addsociety icon="fa-plus" label=label href=href  %}
+	{% endif %}
+{% endif %}
 
-
-{% captureas href %}{% url 'cosinnus:user-list' %}{% endcaptureas %}
-{% captureas label %}{% trans "All users" %}{% endcaptureas %}
-{% captureas extra_class %}{% if user|can_create_groups %}fine-space{% else %}regular_space{% endif %}{% endcaptureas %}
-{% include "cosinnus/leftnav_button.html" with active=is_userlist extra_classes=extra_class icon="fa-user" label=label href=href  %}
-
-{% if user|can_create_groups %}
-    {% captureas href %}{% url 'cosinnus:group-add' %}{% endcaptureas %}
-    {% captureas label %}{% trans "Create Group" %}{% endcaptureas %}
-    {% include "cosinnus/leftnav_button.html" with active=is_addgroup icon="fa-plus" extra_classes="fine-space" label=label href=href  %}
-
-    {% captureas href %}{% url 'cosinnus:group__group-add' %}{% endcaptureas %}
-    {% captureas label %}{% trans "Create Society" %}{% endcaptureas %}
-    {% include "cosinnus/leftnav_button.html" with active=is_addsociety icon="fa-plus" label=label href=href  %}
+{% if current_page == "userlist" %}
+	{% captureas href %}{% url 'cosinnus:user-list' %}{% endcaptureas %}
+	{% captureas label %}{% trans "All users" %}{% endcaptureas %}
+	{% include "cosinnus/leftnav_button.html" with active=is_userlist extra_classes="regular-space" icon="fa-user" label=label href=href  %}
+	
+	<div class="clearfix regular-space"></div>
 {% endif %}
