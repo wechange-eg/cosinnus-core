@@ -5,6 +5,10 @@
   {% blocktrans with username=this_user|full_name %}User profile: {{ username }}{% endblocktrans %}{{ block.super }}
 {% endblock %}
 
+{% block override_breadcrumb %}
+{% endblock override_breadcrumb %}
+
+{% comment %} 
 {% block breadcrumb %}
         {{ block.super }}
         {% if user == this_user %}
@@ -14,11 +18,9 @@
             <li class="active">{{ this_user|full_name }}</li>
         {% endif %}
 {% endblock %}
+ {% endcomment %}
 
 {% block leftnav %}
-    {% if user == this_user %} 
-        {% include 'cosinnus/user/leftnav.html' with view="my_profile" %}
-    {% endif %}
 {% endblock leftnav %}
 
 {% block content %}

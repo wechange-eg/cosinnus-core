@@ -79,12 +79,14 @@
                         {% endblock override_breadcrumb %}
                     </div>
                     
+                    {% block override_leftnav %}
                     <div class="col-lg-3 col-md-3"><!-- left column -->
                         {% if group %}
                             {% cosinnus_menu "cosinnus/appsmenu.html" %}
                         {% endif %}
                         {% block leftnav %}{% endblock leftnav %}
                     </div><!-- left column -->
+                    {% endblock override_leftnav %}
                     
                     <div class="col-lg-9 col-md-9"><!-- right column -->
                         <div class="row">
