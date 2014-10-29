@@ -101,9 +101,9 @@ class CosinnusConf(AppConf):
     # invalid entries do not produce errors
     INITIAL_GROUP_MICROSITE_WIDGETS = [
         #(app_name, widget_name, options),
-        ("file", "latest", {'sort_field':'1', 'amount':'5'}),
+        ("cosinnus", "meta_attr_widget", {'sort_field':'1'}),
         ("event", "upcoming", {'sort_field':'2', 'amount':'5'}),
-        ("cosinnus", "meta_attr_widget", {'sort_field':'3'}),
+        ("file", "latest", {'sort_field':'3', 'amount':'5'}),
         
     ]
     
