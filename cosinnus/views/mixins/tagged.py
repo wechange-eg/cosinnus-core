@@ -276,7 +276,7 @@ class HierarchyDeleteMixin(object):
     """
 
     def _get_objects_in_path(self, path):
-        return self.model.objects.filter(path__startswith=path)
+        return self.model.objects.filter(path__startswith=path, group=self.group)
 
     def _delete_object(self, obj, request):
         """
