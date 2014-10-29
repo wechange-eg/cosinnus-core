@@ -21,12 +21,7 @@
                     {% if groups %}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                {% if appsmenu_group %}
-                                    {% include "cosinnus/group/group_avatar_image.html" with group=appsmenu_group %}
-                                    {{ appsmenu_group.name }}
-                                {% else %}
-                                    {% trans "Projects" %}
-                                {% endif %}
+                                {% trans "Projects" %}
                                 <i class="fa fa-caret-down"></i>
                             </a>
                             <ul class="dropdown-menu">
@@ -44,12 +39,7 @@
                     {% if societies %}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                {% if appsmenu_society %}
-                                    {% include "cosinnus/group/group_avatar_image.html" with group=appsmenu_society %}
-                                    {{ appsmenu_society.name }}
-                                {% else %}
-                                    {% trans "Societies" %}
-                                {% endif %}
+                                {% trans "Societies" %}
                                 <i class="fa fa-caret-down"></i>
                             </a>
                             <ul class="dropdown-menu">
