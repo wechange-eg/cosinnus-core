@@ -36,6 +36,7 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^select2/', include('cosinnus.urls_select2', namespace='select2')),
 )
 
+
 for url_key in group_model_registry:
     plural_url_key = group_model_registry.get_plural_url_key(url_key, url_key + '_s')
     prefix = group_model_registry.get_url_name_prefix(url_key, '')
