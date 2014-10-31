@@ -1,5 +1,6 @@
-{% load cosinnus_tags %}
+{% load djajax_tags %}
 
+/** ******** DJAJAX FUNCTIONS ******** */
 function executeFunctionByName(functionName, context /*, args */) {
     var args = [].slice.call(arguments).splice(2);
     var namespaces = functionName.split(".");
@@ -118,52 +119,44 @@ function djajax_trigger(e, item) {
     });
 };
 
-{% comment %}  ****  Triggers  ****  {% endcomment %}
-
-// ***** DJAJX TRIGGERS ***********
-
+/** ******** DJAJAX ITEMS ******** */
 {% for item in djajax_items %}
     var item_json_{{ item.node_id }} = {{ item|jsonify }};
-    console.log('item_json_{{ item.node_id }} = ');
-    console.log(item_json_{{ item.node_id }});
 {% endfor %}
 
+/** ******** DJAJX TRIGGERS ******** */
+{% spaceless %}
 {% for item in djajax_items %}
     {% with item_id=item.node_id %}
-        
         {% if "lose_focus" in item.trigger_on %}
             $('[djajax-id={{ item_id }}]').focusout(function(e) {
                 djajax_trigger(e, item_json_{{ item.node_id }});
             });
         {% endif %}
-        
         {% if "enter_key" in item.trigger_on %}
-        $('[djajax-id={{ item_id }}]').keydown(function(e) {
-            if (e.keyCode == 13) {
-                {% if not "lose_focus" in item.trigger_on %}
-                    // only triggered here if the blur() event won't trigger anyways
-                    djajax_trigger(e, item_json_{{ item_id }});
-                {% endif %}
-                $('[djajax-id={{ item_id }}]').blur();
-                return false;
-            }
-        });
+            $('[djajax-id={{ item_id }}]').keydown(function(e) {
+                if (e.keyCode == 13) {
+                    {% if not "lose_focus" in item.trigger_on %}
+                        // only triggered here if the blur() event won't trigger anyways
+                        djajax_trigger(e, item_json_{{ item_id }});
+                    {% endif %}
+                    $('[djajax-id={{ item_id }}]').blur();
+                    return false;
+                }
+            });
         {% endif %}
-        
         {% if "value_changed" in item.trigger_on %}
-        $('[djajax-id={{ item_id }}]').change(function(e) {
-            djajax_trigger(e, item_json_{{ item_id }});
-        });
+            $('[djajax-id={{ item_id }}]').change(function(e) {
+                djajax_trigger(e, item_json_{{ item_id }});
+            });
         {% endif %}
-        
         {% if "click" in item.trigger_on %}
-        $('[djajax-id={{ item_id }}]').click(function(e) {
-            djajax_trigger(e, item_json_{{ item_id }});
-        });
+            $('[djajax-id={{ item_id }}]').click(function(e) {
+                djajax_trigger(e, item_json_{{ item_id }});
+            });
         {% endif %}
-        
-        
         // set last-node-value
         $('[djajax-id={{ item_id }}]').attr('djajax-last-value', djajax_get_value(item_json_{{ item_id }}));
     {% endwith %}
 {% endfor %}
+{% endspaceless %}

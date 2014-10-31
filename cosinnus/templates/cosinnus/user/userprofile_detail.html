@@ -1,5 +1,5 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n static cosinnus_tags %}
+{% load i18n static cosinnus_tags djajax_tags %}
 
 {% block page_title %}
   {% blocktrans with username=this_user|full_name %}User profile: {{ username }}{% endblocktrans %}{{ block.super }}

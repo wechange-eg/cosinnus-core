@@ -13,7 +13,7 @@ urlpatterns = api_patterns(1, None, False, 'cosinnus.views',
     url(r'^logout/$', 'user.logout_api', name='logout'),
                            
     url(r'^taggable_object/update/$',
-        'api.taggable_object_update_api',
+        'api.djajax_endpoint',
         name='taggable-object-update-api'),
                            
 )
