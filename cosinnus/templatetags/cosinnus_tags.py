@@ -384,8 +384,12 @@ class DjajaxConnectNode(template.Node):
         'empty': 'true',
         # which JS function we should execute on successful POST execute
         'on_success': None,
+        # which JS function args we should execute on successful POST execute
+        'on_success_args': None,
         # which JS function we should execute on failed POST execute
         'on_error': None,
+        # which JS function args should execute on failed POST execute
+        'on_error_args': None,
     }
     
     def _addArgFromParams(self, add_from_args, add_to_dict, context, arg_name, default_value=None):

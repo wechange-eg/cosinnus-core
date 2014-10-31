@@ -1,5 +1,15 @@
 {% load cosinnus_tags %}
 
+function executeFunctionByName(functionName, context /*, args */) {
+    var args = [].slice.call(arguments).splice(2);
+    var namespaces = functionName.split(".");
+    var func = namespaces.pop();
+    for(var i = 0; i < namespaces.length; i++) {
+      context = context[namespaces[i]];
+    }
+    return context[func].apply(this, args);
+  }
+
 function djajax_get_value(item) {
     if ('value_object_property' in item) {
         return $('[djajax-id='+item.node_id+']')[0][item.value_object_property];
@@ -24,75 +34,93 @@ function djajax_set_value(item, value) {
     }
 };
 
-function djajax_trigger_{{ node_id }}(e) {
-    console.log('called handler for node id {{ node_id }} with value: ' + $('#{{ node_id }}').val());
-    var node_value = djajax_get_value_{{ node_id }}();
+
+function djajax_trigger(e, item) {
+    console.log('called handler for node id ' + item.node_id + ' with value: ' + $('#' + item.node_id).val());
+    var node_value = djajax_get_value(item);
     
-    {% if value_transform %}
-        var transform_function = window["{{ value_transform }}"];
+    if ('value_transform' in item) {
+        var transform_function = window[item.value_transform];
         if (typeof transform_function === 'function') {
             node_value = transform_function(node_value);
         } else {
-            console.warn('Djajax: Value transform could not be applied for node_id "{{node_id}}". Supplied transform function could not be found or was not a function.')
+            console.warn('Djajax: Value transform could not be applied for node_id "' + item.node_id + '". Supplied transform function could not be found or was not a function.')
         }
-    {% endif %}
+    }
     
-    {% if not empty == "true" %}
+    if (item.empty != "true") {
         if (node_value == null || node_value == '') {
-            console.log('Submitted field value for {{ node_id }} was found to be empty, but djajax empty=False was set! Restoring last value.');
+            console.log('Submitted field value for ' + item.node_id + ' was found to be empty, but djajax empty=False was set! Restoring last value.');
             // restore last data
-            djajax_set_value_{{ node_id }}($('[djajax-id={{ node_id }}]').attr('djajax-last-value'));
+            djajax_set_value(item, $('[djajax-id=' + item.node_id + ']').attr('djajax-last-value'));
             return;
         }
-    {% endif %}
-       
+    }
+    
+    var post_data = {
+        'app_label': item.app_label,
+        'model_name': item.model_name,
+        'pk': item.pk,
+        'property_name': item.property_name,
+        'property_data':  node_value,
+    };
+    post_data[item.property_name] = node_value;
+    
     $.ajax({
          type:"POST",
-         url:"{{ post_to }}",
-         data: {
-            'app_label': '{{ app_label }}',
-            'model_name': '{{ model_name }}',
-            'pk': '{{ pk }}',
-            'property_name': '{{ property_name }}',
-            'property_data':  node_value,
-            '{{ property_name }}': node_value,
-         },
+         url: item.post_to,
+         data: post_data,
          success: function(data){
              if (data['status'] == 'success') {
-                 console.log('Success! for {{ node_id }} ! With data ' + JSON.stringify(data));
+                 console.log('Success! for ' + item.node_id + ' ! With data ' + JSON.stringify(data));
                  // save last data
-                 $('[djajax-id={{ node_id }}]').attr('djajax-last-value', djajax_get_value_{{ node_id }}());
-                 {% if on_success %}
-                 // execute on_success
-                 {{ on_success|safe }}
-                 {% endif %}
+                 $('[djajax-id=' + item.node_id + ']').attr('djajax-last-value', djajax_get_value(item));
+                 
+                 if ('on_success' in item) {
+                     if ('on_success_args' in item) {
+                         executeFunctionByName(item.on_success, window, item.on_success_args);
+                     } else {
+                         executeFunctionByName(item.on_success, window);
+                     }
+                 }
+                 
              } else {
-                 console.log('Error in Saving! for {{ node_id }} ! With data ' + JSON.stringify(data));
+                 console.log('Error in Saving! for ' + item.node_id + ' ! With data ' + JSON.stringify(data));
                  // restore last data
-                 console.log('restoring lasta data:' + $('[djajax-id={{ node_id }}]').attr('djajax-last-value'))
-                 djajax_set_value_{{ node_id }}($('[djajax-id={{ node_id }}]').attr('djajax-last-value'));
-                 {% if on_error %}
-                 // execute on_success
-                 {{ on_error|safe }}
-                 {% endif %}
+                 console.log('restoring lasta data:' + $('[djajax-id=' + item.node_id + ']').attr('djajax-last-value'))
+                 djajax_set_value(item, $('[djajax-id=' + item.node_id + ']').attr('djajax-last-value'));
+
+                 if ('on_error' in item) {
+                     if ('on_error_args' in item) {
+                         executeFunctionByName(item.on_error, window, item.on_error_args);
+                     } else {
+                         executeFunctionByName(item.on_error, window);
+                     }
+                 }
              }
              
          },
          error: function(data){
-             console.log('Error! for {{ node_id }} ! With data ' + JSON.stringify(data));
+             console.log('Error! for ' + item.node_id + ' ! With data ' + JSON.stringify(data));
              // restore last data
-             console.log('restoring lasta data:' + $('[djajax-id={{ node_id }}]').attr('djajax-last-value'))
-             djajax_set_value_{{ node_id }}($('[djajax-id={{ node_id }}]').attr('djajax-last-value'));
-             {% if on_error %}
-             // execute on_success
-             {{ on_error|safe }}
-             {% endif %}
+             console.log('restoring lasta data:' + $('[djajax-id=' + item.node_id + ']').attr('djajax-last-value'))
+             djajax_set_value(item, $('[djajax-id=' + item.node_id + ']').attr('djajax-last-value'));
+
+             if ('on_error' in item) {
+                 if ('on_error_args' in item) {
+                     executeFunctionByName(item.on_error, window, item.on_error_args);
+                 } else {
+                     executeFunctionByName(item.on_error, window);
+                 }
+             }
          }
          
     });
 };
 
 {% comment %}  ****  Triggers  ****  {% endcomment %}
+
+// ***** DJAJX TRIGGERS ***********
 
 {% for item in djajax_items %}
     var item_json_{{ item.node_id }} = {{ item|jsonify }};
@@ -103,16 +131,16 @@ function djajax_trigger_{{ node_id }}(e) {
 {% for item in djajax_items %}
     {% with item_id=item.node_id %}
         
-        {% if "lose_focus" in trigger_on %}
+        {% if "lose_focus" in item.trigger_on %}
             $('[djajax-id={{ item_id }}]').focusout(function(e) {
-                djajax_trigger(e, item_json);
+                djajax_trigger(e, item_json_{{ item.node_id }});
             });
         {% endif %}
         
-        {% if "enter_key" in trigger_on %}
+        {% if "enter_key" in item.trigger_on %}
         $('[djajax-id={{ item_id }}]').keydown(function(e) {
             if (e.keyCode == 13) {
-                {% if not "lose_focus" in trigger_on %}
+                {% if not "lose_focus" in item.trigger_on %}
                     // only triggered here if the blur() event won't trigger anyways
                     djajax_trigger(e, item_json_{{ item_id }});
                 {% endif %}
@@ -122,13 +150,13 @@ function djajax_trigger_{{ node_id }}(e) {
         });
         {% endif %}
         
-        {% if "value_changed" in trigger_on %}
+        {% if "value_changed" in item.trigger_on %}
         $('[djajax-id={{ item_id }}]').change(function(e) {
             djajax_trigger(e, item_json_{{ item_id }});
         });
         {% endif %}
         
-        {% if "click" in trigger_on %}
+        {% if "click" in item.trigger_on %}
         $('[djajax-id={{ item_id }}]').click(function(e) {
             djajax_trigger(e, item_json_{{ item_id }});
         });
