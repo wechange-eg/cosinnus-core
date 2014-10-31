@@ -156,3 +156,15 @@ class CosinnusConf(AppConf):
     #: The serializer used for the user profile
     USER_PROFILE_SERIALIZER = 'cosinnus.models.serializers.profile.UserProfileSerializer'
     
+    
+
+class CosinnusDefaultSettings(AppConf):
+    """ Settings without a prefix namespace to provide default setting values for other apps.
+        These are settings used by default in cosinnus apps, such as avatar dimensions, etc.
+    """
+    
+    class Meta:
+        prefix = ''
+        
+    DJAJAX_VIEW_CLASS = 'cosinnus.views.djajax_endpoints.DjajaxCosinnusEndpoint'
+

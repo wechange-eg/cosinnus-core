@@ -62,6 +62,7 @@ setup(
         'django-awesome-avatar',
         'django-bootstrap3',
         'django-bootstrap3-datetimepicker>=2.2.0',
+        'django-djajax',
         'django-filter>=0.7',
         'django-multiform',
         'django_select2',
@@ -76,6 +77,7 @@ setup(
         'git+http://git.sinnwerkstatt.com/mh/django-multiform.git@master#egg=django-multiform',
         'git+git://github.com/sinnwerkstatt/django-select2.git@master#egg=Django-Select2',
         'git+git://github.com/sinnwerkstatt/django-awesome-avatar.git@master#egg=django-awesome-avatar',
+        'git+git://github.com/saschan/django-djajax.git@master#egg=django-djajax',
         'git+git://github.com/sinnwerkstatt/django-osm-field.git@master#egg=django-osm-field'
     ],
     classifiers=[

@@ -11,12 +11,8 @@ from cosinnus.core.registries.group_models import group_model_registry
 urlpatterns = api_patterns(1, None, False, 'cosinnus.views',
     url(r'^login/$', 'user.login_api', name='login'),
     url(r'^logout/$', 'user.logout_api', name='logout'),
-                           
-    url(r'^taggable_object/update/$',
-        'api.taggable_object_update_api',
-        name='taggable-object-update-api'),
-                           
 )
+
 
 for url_key in group_model_registry:
     prefix = group_model_registry.get_url_name_prefix(url_key, '')

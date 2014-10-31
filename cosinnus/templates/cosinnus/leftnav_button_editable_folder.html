@@ -1,4 +1,4 @@
-{% load i18n cosinnus_tags %}
+{% load i18n cosinnus_tags djajax_tags %}
 
 <div class="fadedown">
     <div type="button" class="btn w100 btn-{% if active %}extra-{% endif %}emphasized {{ extra_classes }}" {% if extra_atts %}{{ extra_atts }}{% endif %}>
@@ -17,10 +17,11 @@
                 </a>
                 <div class="media-body" href="{{ href }}" >
                     <span>{{ label }}</span>
-                    {% captureas on_success %}$.cosinnus.restoreThisClickarea('#folder_clickarea_{{ folder.group.pk }}_{{ folder.pk }}'){% endcaptureas %}
+                    {% captureas on_success %}$.cosinnus.restoreThisClickarea{% endcaptureas %}
+                    {% captureas on_success_args %}#folder_clickarea_{{ folder.group.pk }}_{{ folder.pk }}{% endcaptureas %}
                     <input id="folder_{{ folder.group.pk }}_{{ folder.pk }}" class="form-control" style="display: none;" 
                         placeholder="{% trans "Folder name" %}" value="{{ label }}" 
-                        {% djajax_connect folder.title trigger_on="enter_key" empty="false" on_success=on_success %} />
+                        {% djajax_connect folder.title trigger_on="enter_key" empty="false" on_success=on_success on_success_args=on_success_args %} />
                 </div>
             </li>
         </ul>
