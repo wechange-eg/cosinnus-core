@@ -1,19 +1,27 @@
 {% load cosinnus_tags %}
 
-function djajax_get_value_{{ node_id }}() {
-    {% if value_object_property %}
-        return $('[djajax-id={{ node_id }}]')[0].{{ value_object_property }};
-    {% else %}
-        return $('[djajax-id={{ node_id }}]').{{ value_selector }}({% if value_selector_arg %}'{{value_selector_arg}}'{% endif %});
-    {% endif %}  
+function djajax_get_value(item) {
+    if ('value_object_property' in item) {
+        return $('[djajax-id='+item.node_id+']')[0][item.value_object_property];
+    } else {
+        if ('value_selector_arg' in item) {
+            return $('[djajax-id='+item.node_id+']')[item.value_selector](item.value_selector_arg);
+        } else {
+            return $('[djajax-id='+item.node_id+']')[item.value_selector]();
+        }
+    }  
 };
 
-function djajax_set_value_{{ node_id }}(value) {
-    {% if value_object_property %}
-        $('[djajax-id={{ node_id }}]')[0].{{ value_object_property }} = value;
-    {% else %}
-        $('[djajax-id={{ node_id }}]').{{ value_selector }}({% if value_selector_arg %}'{{value_selector_arg}}',{% endif %}value);
-    {% endif %}  
+function djajax_set_value(item, value) {
+    if ('value_object_property' in item) {
+        $('[djajax-id='+item.node_id+']')[0][item.value_object_property] = value;
+    } else {
+        if ('value_selector_arg' in item) {
+            return $('[djajax-id='+item.node_id+']')[item.value_selector](item.value_selector_arg, value);
+        } else {
+            return $('[djajax-id='+item.node_id+']')[item.value_selector](value);
+        }
+    }
 };
 
 function djajax_trigger_{{ node_id }}(e) {
@@ -86,37 +94,48 @@ function djajax_trigger_{{ node_id }}(e) {
 
 {% comment %}  ****  Triggers  ****  {% endcomment %}
 
-{% if "lose_focus" in trigger_on %}
-    $('[djajax-id={{ node_id }}]').focusout(function(e) {
-        djajax_trigger_{{ node_id }}(e);
-    });
-{% endif %}
+{% for item in djajax_items %}
+    var item_json_{{ item.node_id }} = {{ item|jsonify }};
+    console.log('item_json_{{ item.node_id }} = ');
+    console.log(item_json_{{ item.node_id }});
+{% endfor %}
 
-{% if "enter_key" in trigger_on %}
-$('[djajax-id={{ node_id }}]').keydown(function(e) {
-    if (e.keyCode == 13) {
-        {% if not "lose_focus" in trigger_on %}
-            // only triggered here if the blur() event won't trigger anyways
-            djajax_trigger_{{ node_id }}(e);
+{% for item in djajax_items %}
+    {% with item_id=item.node_id %}
+        
+        {% if "lose_focus" in trigger_on %}
+            $('[djajax-id={{ item_id }}]').focusout(function(e) {
+                djajax_trigger(e, item_json);
+            });
         {% endif %}
-        $('[djajax-id={{ node_id }}]').blur();
-        return false;
-    }
-});
-{% endif %}
-
-{% if "value_changed" in trigger_on %}
-$('[djajax-id={{ node_id }}]').change(function(e) {
-    djajax_trigger_{{ node_id }}(e);
-});
-{% endif %}
-
-{% if "click" in trigger_on %}
-$('[djajax-id={{ node_id }}]').click(function(e) {
-    djajax_trigger_{{ node_id }}(e);
-});
-{% endif %}
-
-
-// set last-node-value
-$('[djajax-id={{ node_id }}]').attr('djajax-last-value', djajax_get_value_{{ node_id }}());
+        
+        {% if "enter_key" in trigger_on %}
+        $('[djajax-id={{ item_id }}]').keydown(function(e) {
+            if (e.keyCode == 13) {
+                {% if not "lose_focus" in trigger_on %}
+                    // only triggered here if the blur() event won't trigger anyways
+                    djajax_trigger(e, item_json_{{ item_id }});
+                {% endif %}
+                $('[djajax-id={{ item_id }}]').blur();
+                return false;
+            }
+        });
+        {% endif %}
+        
+        {% if "value_changed" in trigger_on %}
+        $('[djajax-id={{ item_id }}]').change(function(e) {
+            djajax_trigger(e, item_json_{{ item_id }});
+        });
+        {% endif %}
+        
+        {% if "click" in trigger_on %}
+        $('[djajax-id={{ item_id }}]').click(function(e) {
+            djajax_trigger(e, item_json_{{ item_id }});
+        });
+        {% endif %}
+        
+        
+        // set last-node-value
+        $('[djajax-id={{ item_id }}]').attr('djajax-last-value', djajax_get_value(item_json_{{ item_id }}));
+    {% endwith %}
+{% endfor %}
