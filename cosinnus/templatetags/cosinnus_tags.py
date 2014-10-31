@@ -29,6 +29,9 @@ from django.template.base import TemplateSyntaxError, kwarg_re
 from cosinnus.core.registries.group_models import group_model_registry
 from django.core.cache import cache
 from cosinnus.utils.urls import group_aware_reverse
+from django.db.models.query import QuerySet
+from django.core.serializers import serialize
+from django.utils import simplejson
 
 register = template.Library()
 
@@ -470,9 +473,10 @@ class DjajaxSetupNode(template.Node):
             if not node_items:
                 return ''
             
-            ret = ''
+            rendered_js = ''
+            context_items = []
             for obj, prop, node_id, additional_context in node_items:
-                #ret += node_id + ' || '
+                #rendered_js += node_id + ' || '
                 context = {
                     'node_id': node_id,
                     'app_label': obj.__class__.__module__.split('.')[0],
@@ -481,14 +485,26 @@ class DjajaxSetupNode(template.Node):
                     'property_name': prop,
                 }
                 context.update(additional_context)
-                ret += render_to_string('cosinnus/js/djajax_connect.js', context) + '\n\n'
+                context_items.append(context)
+                
+            rendered_js += render_to_string('cosinnus/js/djajax_connect.js', {'djajax_items': context_items}) + '\n\n'
             
             js_file = static('js/djajax.js')
             return """<script src="%s"></script>
-                      <script type="text/javascript">\n%s\n</script>""" % (js_file, ret)
+                      <script type="text/javascript">\n%s\n</script>""" % (js_file, rendered_js)
         else:
             raise template.TemplateSyntaxError("Djajax: Unknown directive '%s'." % self.directive)
 
+@register.filter
+def jsonify(obj):
+    """
+    Returns JSON output for an object
+    """
+    if isinstance(obj, QuerySet):
+        ret = serialize('json', obj)
+    else:
+        ret = simplejson.dumps(obj)
+    return mark_safe(ret)
 
 
 @register.simple_tag(takes_context=True)
