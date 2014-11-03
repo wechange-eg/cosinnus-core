@@ -324,7 +324,7 @@ class CosinnusGroup(models.Model):
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
         related_name='cosinnus_groups', through='CosinnusGroupMembership')
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
-        blank=True, null=True, editable=False, on_delete=models.PROTECT)
+        blank=True, null=True, editable=False, on_delete=models.SET_NULL)
     
     parent = models.ForeignKey("self", verbose_name=_('Parent Group'),
         related_name='groups', null=True, blank=True, on_delete=models.SET_NULL)

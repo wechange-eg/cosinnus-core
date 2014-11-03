@@ -59,7 +59,7 @@ class BaseTagObject(models.Model):
     )
 
     group = models.ForeignKey(CosinnusGroup, verbose_name=_('Group'),
-        related_name='+', null=True)
+        related_name='+', null=True, on_delete=models.CASCADE)
 
     persons = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
         null=True, verbose_name=_('Persons'), related_name='+')
@@ -127,12 +127,12 @@ class BaseTaggableObjectModel(models.Model):
     """
 
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
-        blank=True, null=True, on_delete=models.PROTECT)
+        blank=True, null=True, on_delete=models.SET_NULL)
 
     attached_objects = models.ManyToManyField(AttachedObject, blank=True, null=True)
 
     group = models.ForeignKey(CosinnusGroup, verbose_name=_('Group'),
-        related_name='%(app_label)s_%(class)s_set', on_delete=models.PROTECT)
+        related_name='%(app_label)s_%(class)s_set', on_delete=models.CASCADE)
 
     title = models.CharField(_('Title'), max_length=255)
     slug = models.SlugField(max_length=55, blank=True)  # human readable part is 50 chars
@@ -164,6 +164,11 @@ class BaseTaggableObjectModel(models.Model):
         if hasattr(self, '_media_tag_cache'):
             del self._media_tag_cache
         super(BaseTaggableObjectModel, self).save(*args, **kwargs)
+        
+    def delete(self, *args, **kwargs):
+        #self.user.delete()
+        print ">> call delete of basetagmodel", self
+        return super(self.__class__, self).delete(*args, **kwargs)
 
     def media_tag_object(self):
         key = '_media_tag_cache'
