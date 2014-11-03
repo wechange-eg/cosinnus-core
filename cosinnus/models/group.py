@@ -347,8 +347,9 @@ class CosinnusGroup(models.Model):
         return self.name
 
     def delete(self, *args, **kwargs):
+        slug = self.slug
         super(CosinnusGroup, self).delete(*args, **kwargs)
-        self._clear_cache()
+        self._clear_cache(slug=slug)
 
     def save(self, *args, **kwargs):
         created = bool(self.pk is None)
