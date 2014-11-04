@@ -56,14 +56,13 @@
     </head>
     <body>
     <!-- class="{{ COSINNUS_CURRENT_APP }}" -->
-    
+        {% block body_header %}{% endblock body_header %}
+        
         {% cosinnus_menu "cosinnus/navbar.html" %}
         
         <div class="{% block container_classes %}container {{ cosinnus_css_class }}{% endblock container_classes %}">
             
-            {% block main_page_header %}
-            {% endblock main_page_header %}
-            
+            {% block main_page_header %}{% endblock main_page_header %}
             
             {% block main_page %}
                 <div class="row">
@@ -86,6 +85,7 @@
                             {% cosinnus_menu "cosinnus/appsmenu.html" %}
                         {% endif %}
                         {% block leftnav %}{% endblock leftnav %}
+                        <div class="clearfix regular-space"></div>
                     </div><!-- left column -->
                     {% endblock override_leftnav %}
                     
