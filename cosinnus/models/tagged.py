@@ -164,11 +164,6 @@ class BaseTaggableObjectModel(models.Model):
         if hasattr(self, '_media_tag_cache'):
             del self._media_tag_cache
         super(BaseTaggableObjectModel, self).save(*args, **kwargs)
-        
-    def delete(self, *args, **kwargs):
-        #self.user.delete()
-        print ">> call delete of basetagmodel", self
-        return super(self.__class__, self).delete(*args, **kwargs)
 
     def media_tag_object(self):
         key = '_media_tag_cache'
