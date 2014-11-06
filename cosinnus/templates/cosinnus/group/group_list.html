@@ -62,11 +62,15 @@
         -->
     
 	    {% for group, members, pendings, admins in rows %}
+	        
+	        {% group_url 'cosinnus:group-dashboard' group=group.slug as group_url %}
+	        {% comment %}  Microsite is not being linked to for now
 	        {% if user.pk in members or user.pk in admins or group.public %}
 	            {% group_url 'cosinnus:group-dashboard' group=group.slug as group_url %}
 	        {% else %}
 	            {% group_url 'cosinnus:group-microsite' group=group.slug as group_url %}
 	        {% endif %}
+	        {% endcomment %}
 	        <div class="fadedown {% if not forloop.last %}regular-space{% endif %}">
 	            <div class="btn btn-{% if user.is_authenticated and user.pk in members or group.public %}emphasized{% else %}default{% endif %} w100">
 	                <ul class="media-list">
