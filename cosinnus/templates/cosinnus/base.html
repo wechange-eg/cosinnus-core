@@ -54,7 +54,7 @@
         {% block extrahead %}{% endblock extrahead %}
         
     </head>
-    <body>
+    <body {% block body_attributes %}{% endblock body_attributes %}>
     <!-- class="{{ COSINNUS_CURRENT_APP }}" -->
         {% block body_header %}{% endblock body_header %}
         
