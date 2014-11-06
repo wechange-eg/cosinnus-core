@@ -785,7 +785,7 @@
 						.data('margin-bottom',parseInt($(this).closest('.btn').css('margin-bottom')))
 						.after('<div></div>'); // Fixes Chrome floating bug that hides send button
 				})
-					.on('propertychange keyup input paste change', function() {
+					.on('propertychange input paste change', function() {
 					var sendbutton = $(this).closest('.btn').nextAll('.btn').first();
 					if ($(this).val()) {
 						sendbutton.show();
