@@ -1,0 +1,17 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n bootstrap3 cosinnus_tags %}
+{% load static from staticfiles %}
+
+{% block page_title %}{% trans "Server Error" %}{% endblock page_title %}
+
+{% block override_breadcrumb %}
+{% endblock override_breadcrumb %}
+
+{% block content %}
+    <div class="alert alert-danger alert-dismissable">
+        <i class="fa fa-exclamation-triangle fa-3x"></i>
+        <h4>{% trans "Sorry! Something went wrong..." %}</h4>
+        <p>{% trans "Looks like we had an internal problem while processing your request. The error has been recorded, and we will try to fix it as soon as possible!" %}</p>
+    </div>
+{% endblock content %}
+

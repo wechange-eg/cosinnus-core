@@ -1,0 +1,17 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n bootstrap3 cosinnus_tags %}
+{% load static from staticfiles %}
+
+{% block page_title %}{% trans "Not found" %}{% endblock page_title %}
+
+{% block override_breadcrumb %}
+{% endblock override_breadcrumb %}
+
+{% block content %}
+    <div class="alert alert-danger alert-dismissable">
+        <i class="fa fa-exclamation-triangle fa-3x"></i>
+        <h4>{% trans "Page not found!" %}</h4>
+        <p>{% trans "The page you requested was not found on the server." %}</p>
+    </div>
+{% endblock content %}
+
