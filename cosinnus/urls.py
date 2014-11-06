@@ -8,7 +8,7 @@ from cosinnus.conf import settings
 from cosinnus.core.registries.group_models import group_model_registry
 
 urlpatterns = patterns('cosinnus.views',
-    url(r'^$', 'common.index', name='index'),
+    # we do not define an index anymore and let CMS handle that.
 
     url(r'^signup/$', 'user.user_create', name='user-add'),
     url(r'^users/$', 'user.user_list', name='user-list'),

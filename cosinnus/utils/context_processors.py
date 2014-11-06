@@ -51,7 +51,7 @@ def cosinnus(request):
     base_url = '{scheme}{domain}{path}'.format(
         scheme=request.is_secure() and 'https://' or 'http://',
         domain=request.get_host(),
-        path=reverse('cosinnus:index')
+        path='/'
     )
 
     user = request.user
