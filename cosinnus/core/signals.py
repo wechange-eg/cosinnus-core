@@ -3,6 +3,9 @@ from __future__ import unicode_literals
 
 import django.dispatch as dispatch
 
+""" Called once, after server startup, when we can be absolutely sure that all cosinnus apps are loaded """
+all_cosinnus_apps_loaded = dispatch.Signal()
+
 """ Called after a CosinnusGroup, or one of its extending models is freshly created """
 group_object_ceated = dispatch.Signal(providing_args=["group"])
 
