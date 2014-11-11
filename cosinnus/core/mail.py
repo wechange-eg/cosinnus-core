@@ -67,10 +67,12 @@ def get_common_mail_context(request, group=None, user=None):
     """ Collects common context variables for Email templates """
     
     site = get_current_site(request)
+    protocol = request.is_secure() and 'https' or 'http'
     context = {
         'site': site,
         'site_name': site.name,
-        'protocol': request.is_secure() and 'https' or 'http'
+        'protocol': protocol,
+        'domain_url': "%s://%s" % (protocol, site.domain),
     }
     if group:
         context.update({
