@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from django.utils.importlib import import_module
 from uuid import uuid1
+from django.core.exceptions import ImproperlyConfigured
 
 
 def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
@@ -103,3 +104,18 @@ def resolve_class(path_to_class):
         raise ImportError("Cannot import class %s from %s" % (
             klass, path_to_class))
     return cls
+
+
+def ensure_dict_keys(mydict, keys=[], message=""):
+    """ Raises an ImproperlyConfigured if not all supplied key strings
+        are contained in the given dictionary. """
+    missing_keys = []
+    for key in keys:
+        if not key in mydict:
+            missing_keys.append(key)
+    if missing_keys:
+        if not message:
+            message = "The given dictionary is missing the following keys: '%s'"
+        if not "%s" in message:
+            message += ': %s'
+        raise ImproperlyConfigured(message % ", ".join(missing_keys))
