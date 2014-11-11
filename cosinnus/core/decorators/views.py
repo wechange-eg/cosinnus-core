@@ -98,6 +98,28 @@ def require_admin_access_decorator(group_url_arg='group'):
     return decorator
 
 
+def require_logged_in():
+    """A method decorator that checks that the requesting user is logged in
+    """
+
+    def decorator(function):
+        @functools.wraps(function, assigned=available_attrs(function))
+        def wrapper(self, request, *args, **kwargs):
+            user = request.user
+            
+            if not user.is_authenticated():
+                # support for the ajaxable view mixin
+                if getattr(self, 'is_ajax_request_url', False):
+                    return HttpResponseForbidden('Not authenticated')
+                messages.error(request, _('Please log in to access this page.'))
+                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
+            
+            return function(self, request, *args, **kwargs)
+            
+        return wrapper
+    return decorator
+
+
 def require_admin_access(group_url_kwarg='group', group_attr='group'):
     """A method decorator that takes the group name from the kwargs of a
     dispatch function in CBVs and checks that the requesting user is allowed to
