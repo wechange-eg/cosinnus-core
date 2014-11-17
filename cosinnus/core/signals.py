@@ -13,7 +13,7 @@ group_object_ceated = dispatch.Signal(providing_args=["group"])
 userprofile_ceated = dispatch.Signal(providing_args=["profile"])
 
 """ Called when a user requests membership of a group """
-user_group_join_requested = dispatch.Signal(providing_args=["group", "user"])
+user_group_join_requested = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 """ Called when an admin accepts a user membership request of a group """
 user_group_join_accepted = dispatch.Signal(providing_args=["group", "user"])

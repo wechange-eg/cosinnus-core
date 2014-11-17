@@ -9,14 +9,15 @@ from cosinnus.core.signals import user_group_join_requested,\
     user_group_join_accepted, user_group_join_declined
 from django.contrib.auth import get_user_model
 
-
+""" 
+# This signal is now being used and configured via cosinnus_notifications.py
 @receiver(user_group_join_requested)
 def send_group_join_request_mail(sender, group, user, **kwargs):
     for admin in get_user_model()._default_manager.filter(id__in=group.admins):
         context = get_common_mail_context(sender.request, group=group, user=user)
         subject = _('%(user_name)s wants to join %(group_name)s on %(site_name)s!')
         send_mail_or_fail(admin.email, subject % context, 'cosinnus/mail/user_group_join_requested.html', context)
-                
+"""
                 
 @receiver(user_group_join_accepted)
 def send_group_join_accepted_mail(sender, group, user, **kwargs):

@@ -356,7 +356,7 @@ class GroupUserJoinView(GroupConfirmMixin, DetailView):
     
     def get_success_url(self):
         # self.referer is set in post() method
-        signals.user_group_join_requested.send(sender=self, group=self.object, user=self.request.user)
+        signals.user_group_join_requested.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
         messages.success(self.request, self.message_success % {'group_name': self.object.name, 'group_type':self.object._meta.verbose_name})
         return self.referer
     
