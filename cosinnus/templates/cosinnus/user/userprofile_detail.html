@@ -28,17 +28,29 @@
 			
 			        {% if request.user.is_authenticated and request.user == this_user %}
 			            <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:profile-edit' %}">
-			                <ul class="media-list">
-			                    <li class="media">
-			                        <a class="pull-left" href="#">
-			                            <i class="fa fa-pencil"></i>
-			                        </a>
-			                        <div class="media-body">
-			                            {% trans "Edit Profile" %}
-			                        </div>
-			                    </li>
-			                </ul>
-			            </button>
+                            <ul class="media-list">
+                                <li class="media">
+                                    <a class="pull-left" href="#">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        {% trans "Edit Profile" %}
+                                    </div>
+                                </li>
+                            </ul>
+                        </button>
+                        <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:notifications' %}" title="{% trans "Notification Preferences" %}">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <a class="pull-left" href="#">
+                                        <i class="fa fa-cogs"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        {% trans "Notification Preferences" %}
+                                    </div>
+                                </li>
+                            </ul>
+                        </button>
 			        {% else %}
 			            {% comment %} Abonnieren is out for now 
 			            <button type="button" class="btn btn-default">
