@@ -8,6 +8,8 @@
 
 {% blocktrans %}You're receiving this email because you are an administrator of this group.{% endblocktrans %}
 
+{% url 'cosinnus:notifications' as notification_settings_url %}{% blocktrans %}(Follow this link to edit your notification preferences: {{ domain_url }}{{ notification_settings_url }} ){% endblocktrans %}
+
 
 
 {% blocktrans %}The {{ site_name }} team{% endblocktrans %}
