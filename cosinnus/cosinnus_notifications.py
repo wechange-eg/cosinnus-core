@@ -5,6 +5,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.core.signals import user_group_join_requested
 
+""" Cosinnus:Notifications configuration file. 
+    See http://git.sinnwerkstatt.com/cosinnus/cosinnus-core/wikis/cosinnus-notifications-guidelines.
+"""
 
 """ Signal definitions """
 # see cosinnus.core.signals
