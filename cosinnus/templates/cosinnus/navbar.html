@@ -95,9 +95,12 @@
 	                    <ul class="dropdown-menu">
 							<li><a href="{% url 'cosinnus:user-dashboard' %}">{% trans "My Dashboard" %}</a></li>
 							<li><a href="{% url 'cosinnus:profile-detail' %}">{% trans "My Profile" %}</a></li>
-							{% for code, language in SETTINGS.LANGUAGES %}
-                                <li><a href="{% url 'cosinnus:switch-language' language=code %}?next={{ request.path }}">{% if request.LANGUAGE_CODE == code %}&gt; {% endif %}{{ language }}</a></li>
+							<li><a href="{% url 'cosinnus:notifications' %}">{% trans "Notification Preferences" %}</a></li>
+                            <li class="divider"></li>
+                            {% for code, language in SETTINGS.LANGUAGES %}
+                                <li><a href="{% url 'cosinnus:switch-language' language=code %}?next={{ request.path }}" {% if request.LANGUAGE_CODE == code %}style="font-weight:bold;"{% endif %}>{{ language }}</a></li>
                             {% endfor %}
+                            <li class="divider"></li>
 							<li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
 	                    </ul>
 	                </li>
