@@ -35,7 +35,7 @@ from cosinnus.core.signals import user_group_join_requested
 """ 
 notifications = {
     'user_group_join_requested': {
-        'label': _('A user requests to become a member of this group (admins only)'), 
+        'label': _('A user requested to become a member of this group (admins only)'), 
         'mail_template': 'cosinnus/mail/user_group_join_requested.html',
         'subject_template': 'cosinnus/mail/user_group_join_requested_subj.txt',
         'signals': [user_group_join_requested],

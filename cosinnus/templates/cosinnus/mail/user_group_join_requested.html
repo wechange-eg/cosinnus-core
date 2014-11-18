@@ -1,17 +1,11 @@
-{% load i18n cosinnus_tags %}{% autoescape off %}
+{% load i18n cosinnus_tags %}{% group_url 'cosinnus:group-detail' group=object.slug as group_page_url %}{% autoescape off %}{% blocktrans with group_name=object.name %}User "{{ sender_name }}" has requested to join the group {{ group_name }}.
 
-{% blocktrans with group_name=object.name %}User "{{ sender_name }}" has requested to join the group {{ group_name }}.{% endblocktrans %}
+Please go to the following page to accept or decline the request:
+{{ domain_url }}{{ group_page_url }}
 
-{% trans "Please go to the following page to accept or decline the request:" %}
-{{ protocol }}://{{ site.domain }}{% group_url 'cosinnus:group-detail' group=object.slug %}
+You're receiving this email because you are an administrator of this group.
 
-
-{% blocktrans %}You're receiving this email because you are an administrator of this group.{% endblocktrans %}
-
-{% blocktrans %}(Follow this link to edit your notification preferences: {{ notification_settings_url }} ){% endblocktrans %}
+(Follow this link to edit your notification preferences: {{ notification_settings_url }} )
 
 
-
-{% blocktrans %}The {{ site_name }} team{% endblocktrans %}
-
-{% endautoescape %}
+Your {{ site_name }} Team{% endblocktrans %}{% endautoescape %}
