@@ -13,11 +13,9 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import (CreateView, DeleteView, DetailView,
     ListView, UpdateView, TemplateView)
 
-from cosinnus.core.decorators.views import superuser_required,\
-    membership_required
+from cosinnus.core.decorators.views import membership_required
 from cosinnus.core.registries import app_registry
-from cosinnus.forms.group import MembershipForm, _CosinnusSocietyForm,\
-    _CosinnusProjectForm
+from cosinnus.forms.group import MembershipForm
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, CosinnusProject,
     CosinnusSociety)
@@ -106,13 +104,18 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
     def get_context_data(self, **kwargs):
         context = super(GroupCreateView, self).get_context_data(**kwargs)
         context['submit_label'] = _('Create')
+        # if we have 'group=xx' in the GET, add the parent if we are looking at a project
+        if 'group' in self.request.GET and 'parent' in kwargs['form'].forms['obj']._meta.fields:
+            init_parent = CosinnusGroup.objects.get_cached(pks=int(self.request.GET.get('group')))
+            kwargs['form'].forms['obj'].initial['parent'] = init_parent
+            kwargs['form'].forms['obj'].fields['parent'].initial = init_parent
         return context
 
     def get_form_kwargs(self):
         kwargs = super(GroupCreateView, self).get_form_kwargs()
         kwargs['group'] = self.object
         return kwargs
-
+    
     def get_success_url(self):
         return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.object.slug})
 

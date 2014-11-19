@@ -1,0 +1,17 @@
+{% extends "cosinnus/widgets/base_widget.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block widget_button %}
+    <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:group-add' %}?group={{ group.pk }}">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-right btn-extra-emphasized" href="#">
+                    <i class="fa fa-plus"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "Add project" %}
+                </div>
+            </li>
+        </ul>
+    </button><!-- btn -->
+{% endblock widget_button %}

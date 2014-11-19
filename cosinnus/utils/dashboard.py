@@ -247,6 +247,52 @@ class GroupMembersWidget(DashboardWidget):
     def title_url(self):
         return '#'
     
+
+
+class GroupProjectsWidget(DashboardWidget):
+
+    app_name = 'cosinnus'
+    model = CosinnusGroup
+    title = _('Projects')
+    user_model_attr = None
+    widget_name = 'group_projects'
+    allow_on_user = False
+    widget_template_name = 'cosinnus/widgets/group_projects_widget.html'
+    # disabled so it doesn't show up in the widget chooser yet
+    #template_name = 'cosinnus/widgets/group_members.html' 
+
+    def get_data(self, offset=0):
+        """ Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.
+            if has_more == False, the receiving widget will assume no further data can be loaded.
+         """
+        group = self.config.group
+        if group is None or group.type != CosinnusGroup.TYPE_SOCIETY:
+            return ''
+        
+        #count = int(self.config.get('amount', 24))
+        # FIXME: hardcoded widget item count for now
+        count = 99
+        
+        groups_qs = group.groups.order_by('name').select_related('media_tag')
+        
+        has_more = len(groups_qs) > offset+count
+        more_count = max(0, len(groups_qs) - (offset+count))
+        
+        if count != 0:
+            groups_qs = groups_qs[offset:offset+count]      
+        
+        data = {
+            'group': group,
+            'groups': groups_qs,
+            'has_more': has_more,
+            'more_count': more_count,
+        }
+        return (render_to_string('cosinnus/widgets/group_projects.html', data), len(groups_qs), True) # more (create) button always shown
+
+    @property
+    def title_url(self):
+        return '#'
+    
     
     
 
@@ -342,6 +388,15 @@ def create_initial_group_widgets(sender, group, **kwargs):
         if widget_class:
             widget = widget_class.create(None, group=group, user=None)
             widget.save_config(options)
+            
+    if group.type in settings.COSINNUS_TYPE_DEPENDENT_GROUP_WIDGETS:
+        for app_name, widget_name, options in settings.COSINNUS_TYPE_DEPENDENT_GROUP_WIDGETS[group.type]:
+            widget_class = widget_registry.get(app_name, widget_name, None)
+            print ">>> app_name:", app_name, widget_name, widget_class, options
+            if widget_class:
+                print ">> creating special"
+                widget = widget_class.create(None, group=group, user=None)
+                widget.save_config(options)
             
     for app_name, widget_name, options in settings.COSINNUS_INITIAL_GROUP_MICROSITE_WIDGETS:
         widget_class = widget_registry.get(app_name, widget_name, None)

@@ -1,0 +1,35 @@
+{% load i18n static thumbnail cosinnus_tags %}
+
+
+{% for group in groups %}
+    <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline">
+        <ul class="media-list fine-space">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    {% include "cosinnus/group/group_avatar_image.html" with group=group %}
+                </a>
+                <div class="media-body">
+                    <a href="{{ group.get_absolute_url }}">{{ group.name }}</a>
+                    <div class="group-annotation">
+                            <i class="fa fa-users"></i>
+                            {{ group.members|length }} {% if group.members|length == 1 %}{% trans "Members" %}{% else %}{% trans "Member" %}{% endif %}
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div><!-- btn -->
+{% empty %}
+    <div type="button" class="btn btn-emphasized dashboard-appwidget-contentline fine-space">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-tasks"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "There are no projects in this group yet." %}
+                </div>
+            </li>
+        </ul>
+    </div><!-- btn -->
+{% endfor %}
+

@@ -96,6 +96,11 @@ class CosinnusConf(AppConf):
         ("cosinnus", "group_members", {'amount':'5', 'sort_field':'5'}),
     ]
     
+    TYPE_DEPENDENT_GROUP_WIDGETS = {
+        0: [],
+        1: [("cosinnus", "group_projects", {'amount':'5', 'sort_field':'6'}),],
+    }
+    
     # widgets listed here will be created for the group microsite upon CosinnusGroup creation.
     # this will check if the cosinnus app is installed and if the widget is registered, so
     # invalid entries do not produce errors
