@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import logging
+
 from django.core.exceptions import MiddlewareNotUsed
 from cosinnus.core import signals as cosinnus_signals
 from django.db.models import signals
 from django.utils.functional import curry
 
+logger = logging.getLogger('cosinnus')
 
 startup_middleware_inited = False
 
@@ -16,6 +19,7 @@ class StartupMiddleware(object):
     def __init__(self):
         # check using a global var because this gets executed twice otherwise
         global startup_middleware_inited
+        logger.info('Cosinnus.middleware.StartupMiddleware inited. (inited_before=%s)' % startup_middleware_inited)
         if not startup_middleware_inited:
             startup_middleware_inited = True
             cosinnus_signals.all_cosinnus_apps_loaded.send(sender=self)
