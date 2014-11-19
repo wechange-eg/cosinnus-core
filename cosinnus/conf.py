@@ -96,6 +96,9 @@ class CosinnusConf(AppConf):
         ("cosinnus", "group_members", {'amount':'5', 'sort_field':'5'}),
     ]
     
+    # widgets listed under a TYPE ID here will only be added to a group if it is of the type listed in
+    # TYPE 0: CosinnusProject
+    # TYPE 1: CosinnusSociety ("Group" in the frontend)
     TYPE_DEPENDENT_GROUP_WIDGETS = {
         0: [],
         1: [("cosinnus", "group_projects", {'amount':'5', 'sort_field':'6'}),],

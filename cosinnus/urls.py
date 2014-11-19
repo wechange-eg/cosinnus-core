@@ -32,6 +32,8 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^widget/(?P<id>\d+)/edit/(?P<app_name>[^/]+)/(?P<widget_name>[^/]+)/$', 'widget.widget_edit', name='widget-edit-swap'),
 
     url(r'^search/$', 'search.search', name='search'),
+    
+    url(r'^housekeeping/$', 'housekeeping.housekeeping', name='housekeeping'),
 
     url(r'^select2/', include('cosinnus.urls_select2', namespace='select2')),
 )

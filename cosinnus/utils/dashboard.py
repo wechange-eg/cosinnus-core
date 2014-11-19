@@ -373,7 +373,16 @@ class MetaAttributeWidget(DashboardWidget):
     
     def get_queryset(self):
         return None
-    
+
+
+def ensure_group_widget(group, app_name, widget_name, widget_type, options):
+    """ Checks if a widget exists, and if not, creates it """
+    widget_check = WidgetConfig.objects.filter(group_id=group.pk, app_name=app_name, widget_name__in=[widget_name, widget_name.replace('_', ' ')], type=widget_type)
+    if widget_check.count() <= 0:
+        widget_class = widget_registry.get(app_name, widget_name, None)
+        if widget_class:
+            widget = widget_class.create(None, group=group, user=None, widget_type=widget_type)
+            widget.save_config(options)
     
 @receiver(group_object_ceated)
 def create_initial_group_widgets(sender, group, **kwargs):
@@ -381,28 +390,18 @@ def create_initial_group_widgets(sender, group, **kwargs):
     (and subtypes) upon creation. Will create all group dashboard and microsite widgets 
     that are defined in:
         ``settings.COSINNUS_INITIAL_GROUP_WIDGETS`` and
+        ``settings.COSINNUS_TYPE_DEPENDENT_GROUP_WIDGETS`` and
         ``settings.COSINNUS_INITIAL_GROUP_MICROSITE_WIDGETS``
     """
     for app_name, widget_name, options in settings.COSINNUS_INITIAL_GROUP_WIDGETS:
-        widget_class = widget_registry.get(app_name, widget_name, None)
-        if widget_class:
-            widget = widget_class.create(None, group=group, user=None)
-            widget.save_config(options)
-            
+        ensure_group_widget(group, app_name, widget_name, WidgetConfig.TYPE_DASHBOARD, options)
+    
     if group.type in settings.COSINNUS_TYPE_DEPENDENT_GROUP_WIDGETS:
         for app_name, widget_name, options in settings.COSINNUS_TYPE_DEPENDENT_GROUP_WIDGETS[group.type]:
-            widget_class = widget_registry.get(app_name, widget_name, None)
-            print ">>> app_name:", app_name, widget_name, widget_class, options
-            if widget_class:
-                print ">> creating special"
-                widget = widget_class.create(None, group=group, user=None)
-                widget.save_config(options)
+            ensure_group_widget(group, app_name, widget_name, WidgetConfig.TYPE_DASHBOARD, options)
             
     for app_name, widget_name, options in settings.COSINNUS_INITIAL_GROUP_MICROSITE_WIDGETS:
-        widget_class = widget_registry.get(app_name, widget_name, None)
-        if widget_class:
-            widget = widget_class.create(None, group=group, user=None, widget_type=WidgetConfig.TYPE_MICROSITE)
-            widget.save_config(options)
+        ensure_group_widget(group, app_name, widget_name, WidgetConfig.TYPE_MICROSITE, options)
 
 
 @receiver(userprofile_ceated)
