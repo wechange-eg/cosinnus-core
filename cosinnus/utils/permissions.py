@@ -141,6 +141,10 @@ def filter_tagged_object_queryset_for_user(qs, user):
         
         @return: the filtered queryset
          """
+    # admins may see everything
+    if user.is_superuser:
+        return qs
+    
     q = Q(media_tag__isnull=True) # get all objects that don't have a media_tag (folders for example)
     q |= Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)  # All public tagged objects
     if user.is_authenticated():
