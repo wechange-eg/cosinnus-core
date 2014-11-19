@@ -101,7 +101,7 @@ class CosinnusConf(AppConf):
     # TYPE 1: CosinnusSociety ("Group" in the frontend)
     TYPE_DEPENDENT_GROUP_WIDGETS = {
         0: [],
-        1: [("cosinnus", "group_projects", {'amount':'5', 'sort_field':'6'}),],
+        1: [("cosinnus", "group_projects", {'amount':'5', 'sort_field':'999'}),],
     }
     
     # widgets listed here will be created for the group microsite upon CosinnusGroup creation.
