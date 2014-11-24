@@ -210,11 +210,14 @@ class CosinnusGroupManager(models.Manager):
         """
         return self.get_cached(pks=self.get_for_user_pks(user))
 
-    def get_for_user_pks(self, user):
+    def get_for_user_pks(self, user, include_public=False):
         """
         :returns: a list of primary keys to :class:`CosinnusGroup` the given
             user is a member or admin of, and not a pending member!.
         """
+        if include_public:
+            return self.filter(Q(public__exact=True) | Q(memberships__user_id=user.pk) & Q(memberships__status__in=MEMBER_STATUS)) \
+            .values_list('id', flat=True).distinct()
         return self.filter(Q(memberships__user_id=user.pk) & Q(memberships__status__in=MEMBER_STATUS)) \
             .values_list('id', flat=True).distinct()
         
