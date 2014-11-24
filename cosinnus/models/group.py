@@ -25,6 +25,8 @@ from django.core.urlresolvers import reverse
 from django.utils.functional import cached_property
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.core import signals
+from django.db.models.signals import post_delete
+from django.dispatch.dispatcher import receiver
 
 
 #: Role defining a user has requested to be added to a group
@@ -346,11 +348,6 @@ class CosinnusGroup(models.Model):
     def __str__(self):
         return self.name
 
-    def delete(self, *args, **kwargs):
-        slug = self.slug
-        super(CosinnusGroup, self).delete(*args, **kwargs)
-        self._clear_cache(slug=slug)
-
     def save(self, *args, **kwargs):
         created = bool(self.pk is None)
         slugs = [self.slug] if self.slug else []
@@ -415,7 +412,7 @@ class CosinnusGroup(models.Model):
         if slugs:
             keys.extend([self.objects._GROUP_CACHE_KEY % (self.objects.__class__.__name__, s) for s in slugs])
         cache.delete_many(keys)
-        if isinstance(self, CosinnusGroup):
+        if isinstance(self, CosinnusGroup) or issubclass(self.__class__, CosinnusGroup):
             self._clear_local_cache()
 
     def _clear_local_cache(self):
@@ -555,3 +552,11 @@ class CosinnusGroupMembership(models.Model):
         
     def user_email(self):
         return self.user.email
+    
+    
+    
+@receiver(post_delete)
+def clear_cache_on_group_delete(sender, instance, **kwargs):
+    """ Clears the cache on CosinnusGroups after deleting one of them. """
+    if sender == CosinnusGroup or issubclass(sender, CosinnusGroup):
+        instance._clear_cache(slug=instance.slug)    
