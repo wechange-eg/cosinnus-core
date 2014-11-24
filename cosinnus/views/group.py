@@ -364,10 +364,11 @@ class GroupUserJoinView(GroupConfirmMixin, DetailView):
         return self.referer
     
     def confirm_action(self):
-        CosinnusGroupMembership.objects.create(
+        # default membership status is pending, so if we are already pending or a member, nothing happens,
+        # and if we have no relation to the group, a new pending membership is created.
+        CosinnusGroupMembership.objects.get_or_create(
             user=self.request.user,
-            group=self.object,
-            status=MEMBERSHIP_PENDING
+            group=self.object
         )
 
 group_user_join = GroupUserJoinView.as_view()
