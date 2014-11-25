@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from itertools import chain
+
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
@@ -34,6 +36,7 @@ from multiform.forms import InvalidArgument
 
 from cosinnus.forms.tagged import get_form  # circular import
 from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.models.tagged import BaseTagObject
 
 
 
@@ -162,13 +165,21 @@ class GroupDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
         admins = _q._clone().filter(id__in=admin_ids)
         members = _q._clone().filter(id__in=member_ids)
         pendings = _q._clone().filter(id__in=pending_ids)
-        non_members =  _q._clone().exclude(id__in=member_ids)
+        
+        # for public groups if user not a member of the group, show only public users in widget
+        if not self.request.user.is_authenticated() or not \
+                (self.request.user.pk in admin_ids or self.request.user.pk in member_ids):
+            # admins are always visible in this view, because a they should be contactable
+            members = members.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
+            pendings = pendings.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
+            # concatenate admins into members, because we might have sorted out a private admin, 
+            # and the template iterates only over members to display people
+            members = list(set(chain(members, admins)))
         
         context.update({
             'admins': admins,
             'members': members,
             'pendings': pendings,
-            'non_members': non_members,
         })
         return context
 

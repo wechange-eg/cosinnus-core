@@ -17,7 +17,7 @@ from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from django.contrib.auth import get_user_model
 from cosinnus.forms.dashboard import InfoWidgetForm, DashboardWidgetForm,\
     EmptyWidgetForm
-from cosinnus.models.tagged import AttachedObject
+from cosinnus.models.tagged import AttachedObject, BaseTagObject
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.core.signals import group_object_ceated, userprofile_ceated
@@ -227,6 +227,9 @@ class GroupMembersWidget(DashboardWidget):
         all_ids = set(admin_ids + member_ids)
         qs = get_user_model()._default_manager.order_by('first_name', 'last_name') \
                              .select_related('cosinnus_profile')
+        # for public groups if user not a member of the group, show only public users in widget
+        if not self.request.user.is_authenticated() or not self.request.user.pk in all_ids:
+            qs = qs.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
         qs = qs.filter(id__in=all_ids)
         
         has_more = len(qs) > offset+count
