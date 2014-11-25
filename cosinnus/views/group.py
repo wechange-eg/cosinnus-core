@@ -166,20 +166,24 @@ class GroupDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
         members = _q._clone().filter(id__in=member_ids)
         pendings = _q._clone().filter(id__in=pending_ids)
         
+        hidden_members = 0
         # for public groups if user not a member of the group, show only public users in widget
         if not self.request.user.is_authenticated() or not \
                 (self.request.user.pk in admin_ids or self.request.user.pk in member_ids):
             # admins are always visible in this view, because a they should be contactable
+            count_before = members.count()
             members = members.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
             pendings = pendings.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
             # concatenate admins into members, because we might have sorted out a private admin, 
             # and the template iterates only over members to display people
             members = list(set(chain(members, admins)))
-        
+            hidden_members = count_before - len(members)
+            
         context.update({
             'admins': admins,
             'members': members,
             'pendings': pendings,
+            'hidden_user_count': hidden_members,
         })
         return context
 
