@@ -29,11 +29,11 @@
                                     <li{% if g == appsmenu_group %} class="active"{% endif %}><a href="{% group_url 'cosinnus:group-dashboard' group=g.slug %}">{{ g.name }}{% if g.type == 1 %}<i class="fa fa-fw fa-globe"></i>{% endif %}</a></li>
                                 {% endfor %}
                                 <li class="divider"></li>
-                                <li><a href="{% url 'cosinnus:group-list' %}">{% trans "Projects" %}</a></li>
+                                <li><a href="{% url 'cosinnus:group-list' %}">{% trans "All Projects" %}</a></li>
                             </ul>
                         </li>
                     {% else %}
-                        <li><a href="{% url 'cosinnus:group-list' %}">{% trans "Projects" %}</a></li>
+                        <li><a href="{% url 'cosinnus:group-list' %}">{% trans "All Projects" %}</a></li>
                     {% endif %}
                     
                     {% if societies %}
@@ -47,11 +47,11 @@
                                     <li{% if g == appsmenu_society %} class="active"{% endif %}><a href="{% group_url 'cosinnus:group-dashboard' group=g.slug %}">{{ g.name }}{% if g.type == 1 %}<i class="fa fa-fw fa-globe"></i>{% endif %}</a></li>
                                 {% endfor %}
                                 <li class="divider"></li>
-                                <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "Societies" %}</a></li>
+                                <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "All Societies" %}</a></li>
                             </ul>
                         </li>
                     {% else %}
-                        <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "Societies" %}</a></li>
+                        <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "All Societies" %}</a></li>
                     {% endif %}
                 
 		        {% else %}
