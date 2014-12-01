@@ -826,7 +826,7 @@ msgstr "Mitarbeiter_innen"
 #: .\templates\cosinnus\group\group_detail.html.py:33
 #: .\templates\cosinnus\group\group_detail.html.py:35
 msgid "Add a member"
-msgstr "Mitarbeiter_in hinzuügen"
+msgstr "Mitarbeiter_in hinzufügen"
 
 #: .\templates\cosinnus\group\group_detail.html.py:52
 #: .\templates\cosinnus\group\group_user_list.html.py:7
