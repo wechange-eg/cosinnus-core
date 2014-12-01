@@ -150,6 +150,12 @@ def subtract(value, arg):
     """
     return value - arg
 
+@register.filter
+def intify(value):
+    """Template filter to multiply two numbers
+    """
+    return int(value)
+
 @register.simple_tag(takes_context=True)
 def cosinnus_group_url_path(context, group=None):
     group = group or context.get('group', None)
