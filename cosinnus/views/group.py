@@ -165,6 +165,7 @@ class GroupDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
         admins = _q._clone().filter(id__in=admin_ids)
         members = _q._clone().filter(id__in=member_ids)
         pendings = _q._clone().filter(id__in=pending_ids)
+        non_members =  _q._clone().exclude(id__in=member_ids)
         
         hidden_members = 0
         # for public groups if user not a member of the group, show only public users in widget
@@ -183,6 +184,7 @@ class GroupDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
             'admins': admins,
             'members': members,
             'pendings': pendings,
+            'non_members': non_members,
             'hidden_user_count': hidden_members,
         })
         return context
