@@ -166,22 +166,6 @@ body {
   box-shadow: none;
 }
 
-.form-control::-webkit-input-placeholder {
-  text-align: center;
-}
-
-.form-control:-moz-placeholder {
-  text-align: center;
-}
-
-.form-control::-moz-placeholder {
-  text-align: center;
-}
-
-.form-control:-ms-input-placeholder {
-  text-align: center;
-}
-
 .content-box .form-control {
   text-align: left;
 }
