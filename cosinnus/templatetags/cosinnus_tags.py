@@ -439,6 +439,10 @@ class GroupURLNode(URLNode):
         Group type is found through the group slug, and looked up in the group-slug -> group-type cache.
         Group types never change, so this cache won't need smart resetting.
         ~Should~ be thread-safe.
+        
+        :param group: The group slug for the group's url you are targeting
+        :ignoreErrors: (optional) if set to True, this tag will return silently '' instead of throwing a 
+            DoesNotExist exception when the targeted group is not found
     """
 
     def render(self, context):
@@ -453,13 +457,19 @@ class GroupURLNode(URLNode):
         if not isinstance(group_slug, six.string_types):
             raise TemplateSyntaxError("'group_url' tag requires a group kwarg that is a slug! Have you passed one? (You passed: 'group=%s')" % group_slug)
         
-        view_name = group_aware_url_name(view_name, group_slug)
+        ignoreErrors = 'ignoreErrors' in self.kwargs and self.kwargs.pop('ignoreErrors').resolve(context) or False
+        try:
+            view_name = group_aware_url_name(view_name, group_slug)
+            
+            self.view_name.var = view_name
+            self.view_name.token = "'%s'" % view_name
         
-        self.view_name.var = view_name
-        self.view_name.token = "'%s'" % view_name
-        
-        return super(GroupURLNode, self).render(context)
-
+            return super(GroupURLNode, self).render(context)
+        except:
+            if ignoreErrors:
+                return ''
+            else:
+                raise
         
 
 @register.tag
