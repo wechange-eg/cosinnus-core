@@ -2819,3 +2819,21 @@ div.dashboard-appwidget:last-child {
 .select2-input {
       font-family: Verdana, Geneva, sans-serif !important;
 }
+
+
+.well-document {
+    color: #333333;
+    padding: 10px;
+}
+
+.well-document a {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.well-document a:hover {
+    text-decoration: none;
+}
+
+
+

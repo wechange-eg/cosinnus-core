@@ -307,3 +307,17 @@ ul.errorlist {
 textarea, input.form-control {
 	font-size: 14px;
 }
+
+// Document well for etherpad HTML export view
+.well-document {
+    color: #333333;
+    padding: 10px;
+}
+.well-document a {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.well-document a:hover {
+    text-decoration: none;
+}
