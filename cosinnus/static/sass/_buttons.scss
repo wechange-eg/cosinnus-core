@@ -507,10 +507,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 
 		a {
 			font-weight: bold;
+			
+			.light-link {
+			    font-weight: normal;
+			}
 		}
 	}
 
 }
+
+a.light-link i { display: none; }
+a.light-link:hover i { display: inherit; }
+
 
 .app-main .btn-headline .media-body .group-annotation { color: $app-main-color-light; }
 .app-calendar .btn-headline .media-body .group-annotation { color: $app-calendar-color-light; }

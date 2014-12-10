@@ -1192,6 +1192,16 @@ a.pull-left {
   font-weight: bold;
 }
 
+.btn-headline .media-body a.light-link {
+  font-weight: normal;
+}
+a.light-link i {
+  display: none;
+}
+a.light-link:hover i {
+  display: inherit;
+}
+
 .app-main .btn-headline .media-body .group-annotation {
   color: #cbe7ed;
 }
