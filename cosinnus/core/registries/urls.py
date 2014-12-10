@@ -31,7 +31,7 @@ class URLRegistry(BaseRegistry):
             self._apps = set()
 
     def register(self, app, root_patterns=None, group_patterns=None,
-                 api_patterns=None):
+                 api_patterns=None, url_app_name_override=None):
         with self.lock:
             try:
                 app_name = app_registry.get_name(app)
@@ -46,7 +46,7 @@ class URLRegistry(BaseRegistry):
             # setting to the group base url of that model,
             # and modifying the URL pattern name with the registered group model prefix!
             if group_patterns:
-                url_app_name = app_name
+                url_app_name = url_app_name_override or app_name
                 patterns_copy = []
                 for url_key in group_model_registry:
                     url_base = r'^%s/(?P<group>[^/]+)/%s/' % (url_key, url_app_name)
@@ -65,12 +65,12 @@ class URLRegistry(BaseRegistry):
                     url(r'^', include(api_patterns, namespace=app_name, app_name=app)),
                 )
 
-    def register_urlconf(self, app, urlconf):
+    def register_urlconf(self, app, urlconf, url_app_name_override=None):
         module = importlib.import_module(urlconf)
         root = getattr(module, 'cosinnus_root_patterns', None)
         group = getattr(module, 'cosinnus_group_patterns', None)
         api = getattr(module, 'cosinnus_api_patterns', None)
-        self.register(app, root, group, api)
+        self.register(app, root, group, api, url_app_name_override=url_app_name_override)
 
     @property
     def urlpatterns(self):
