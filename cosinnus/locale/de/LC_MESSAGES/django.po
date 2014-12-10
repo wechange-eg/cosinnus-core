@@ -452,12 +452,12 @@ msgstr "Projektübersicht"
 
 #: .\templates\cosinnus\dashboard.html.py:54
 msgid "Etherpad"
-msgstr "Etherpad"
+msgstr "Dokument"
 
 #: .\templates\cosinnus\dashboard.html.py:54
 #: .\templates\cosinnus\search.html.py:92
 msgid "Etherpads"
-msgstr "Etherpads"
+msgstr "Dokumente"
 
 #: .\templates\cosinnus\dashboard.html.py:63
 msgid "File"
