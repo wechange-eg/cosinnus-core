@@ -8,7 +8,6 @@ from django.http import HttpResponseForbidden, HttpResponseNotFound
 from django.utils.decorators import available_attrs
 from django.utils.translation import ugettext_lazy as _
 
-from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.permissions import check_object_write_access,\
     check_group_create_objects_access, check_object_read_access, get_user_token
 from django.contrib import messages
@@ -17,6 +16,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.core.exceptions import PermissionDenied
 from cosinnus.core.registries.group_models import group_model_registry
 from django.contrib.auth.models import User
+from cosinnus.models.tagged import BaseTagObject
 
 
 def redirect_to_403(request):
@@ -192,13 +192,6 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
                 return HttpResponseNotFound(_("No group found with this name"))
             user = request.user
             
-            if not group.public and not user.is_authenticated():
-                # support for the ajaxable view mixin
-                if getattr(self, 'is_ajax_request_url', False):
-                    return HttpResponseForbidden('Not authenticated')
-                messages.error(request, _('Please log in to access this page.'))
-                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
-            
             setattr(self, group_attr, group)
             
             requested_object = None
@@ -206,6 +199,14 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
                 requested_object = self.get_object()
             except (AttributeError, TypeError):
                 pass
+            
+            obj_public = requested_object and requested_object.media_tag and requested_object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
+            if not (obj_public or group.public or user.is_authenticated()):
+                # support for the ajaxable view mixin
+                if getattr(self, 'is_ajax_request_url', False):
+                    return HttpResponseForbidden('Not authenticated')
+                messages.error(request, _('Please log in to access this page.'))
+                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
             
             if requested_object:
                 if check_object_read_access(requested_object, user):
@@ -248,13 +249,6 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
                 return HttpResponseNotFound(_("No group found with this name"))
             user = request.user
             
-            if not user.is_authenticated():
-                # support for the ajaxable view mixin
-                if getattr(self, 'is_ajax_request_url', False):
-                    return HttpResponseForbidden('Not authenticated')
-                messages.error(request, _('Please log in to access this page.'))
-                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
-            
             # set the group attr    
             setattr(self, group_attr, group)
             
@@ -264,9 +258,17 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             except (AttributeError, TypeError):
                 pass
             
+            obj_public = requested_object and requested_object.media_tag and requested_object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
+            if not (obj_public or user.is_authenticated()):
+                # support for the ajaxable view mixin
+                if getattr(self, 'is_ajax_request_url', False):
+                    return HttpResponseForbidden('Not authenticated')
+                messages.error(request, _('Please log in to access this page.'))
+                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
+            
             if requested_object:
                 # editing/deleting an object, check if we are owner or staff member or group admin or site admin
-                if (check_object_write_access(requested_object, user)):
+                if (obj_public and request.method == 'GET') or (check_object_write_access(requested_object, user)):
                     return function(self, request, *args, **kwargs)
             else:
                 # creating a new object, check if we can create objects in the group
