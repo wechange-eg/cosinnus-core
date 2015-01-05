@@ -20,6 +20,38 @@ from cosinnus.models.widget import WidgetConfig
 from django.contrib.auth import logout
 
 
+def delete_userprofile(user):
+    """ Deactivate and anonymize a user's profile """
+    
+    profile = user.cosinnus_profile
+    
+    # delete user widgets
+    widgets = WidgetConfig.objects.filter(user_id__exact=user.pk)
+    for widget in widgets:
+        widget.delete()
+    
+    # leave all groups
+    for membership in CosinnusGroupMembership.objects.filter(user=user):
+        membership.delete()
+    
+    # delete user media_tag
+    if profile.media_tag:
+        profile.media_tag.delete()
+    
+    # delete user profile
+    if profile.avatar:
+        profile.avatar.delete(False)
+    profile.delete()
+    
+    # set user to inactive and anonymize all data
+    user.first_name = "deleted"
+    user.last_name = "user"
+    user.username = user.id
+    user.email = user.id
+    user.is_active = False
+    user.save()
+
+
 class UserProfileObjectMixin(SingleObjectMixin):
     model = get_user_profile_model()
     slug_field = 'username'
@@ -134,46 +166,15 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
         
         return is_safe
     
-    def _delete_userprofile(self, user):
-        profile = user.cosinnus_profile
-        
-        # delete user widgets
-        widgets = WidgetConfig.objects.filter(user_id__exact=user.pk)
-        for widget in widgets:
-            widget.delete()
-        
-        # leave all groups
-        for membership in CosinnusGroupMembership.objects.filter(user=user):
-            membership.delete()
-        
-        # delete user media_tag
-        if profile.media_tag:
-            profile.media_tag.delete()
-        
-        # delete user profile
-        if profile.avatar:
-            profile.avatar.delete(False)
-        profile.delete()
-        
-        # set user to inactive and anonymize all data
-        user.first_name = "deleted"
-        user.last_name = "user"
-        user.username = user.id
-        user.email = user.id
-        user.is_active = False
-        user.save()
-        
-    
     def get(self, request, *args, **kwargs):
         self._validate_user_delete_safe(self.request.user)
         return super(UserProfileDeleteView, self).post(request, *args, **kwargs)
     
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        
         if not self._validate_user_delete_safe(request.user):
             return HttpResponseRedirect(reverse('cosinnus:profile-delete'))
-        self._delete_userprofile(request.user)
+        delete_userprofile(request.user)
         
         # log user out
         logout(request)
