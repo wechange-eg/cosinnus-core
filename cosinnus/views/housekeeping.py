@@ -4,6 +4,7 @@ from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from django.http.response import HttpResponse, HttpResponseForbidden
 from django.contrib.auth import get_user_model
+from django.db.models import Q
 from cosinnus.views.profile import delete_userprofile
 
 
@@ -32,7 +33,11 @@ def delete_spam_users(request):
     user_csv = ''
     deleted_user_count = 0
     
-    spam_users = get_user_model().objects.filter(email__contains='.pl', date_joined__gt='2014-09-10')
+    spam_users = get_user_model().objects.filter(date_joined__gt='2014-09-10').filter(
+        Q(email__contains='.pl') | Q(cosinnus_profile__website__contains='.pl') | Q(email__contains='makre')
+    ).distinct()
+    
+    
     for user in spam_users:
         user_groups = CosinnusGroup.objects.get_for_user(user)
         if len(user_groups) > 1:
