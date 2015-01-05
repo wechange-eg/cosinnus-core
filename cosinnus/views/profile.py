@@ -143,7 +143,7 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
             widget.delete()
         
         # leave all groups
-        for membership in CosinnusGroupMembership.objects.filter(user=self.request.user):
+        for membership in CosinnusGroupMembership.objects.filter(user=user):
             membership.delete()
         
         # delete user media_tag
