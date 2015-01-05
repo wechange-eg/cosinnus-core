@@ -758,12 +758,18 @@
 				var mom = moment(data_date);
 				var diff_days = mom.diff(moment(), 'days');
 				
-				if ((diff_days > -1 && diff_days < 1) || diff_days < -4 ) {
-				    // render the date difference for today, tomorrow, and longer than 4 days ago
-				    $(this).text(mom.fromNow());
-				} else {
-				    // render "letzten Montag um 12:00 Uhr" for the last 3 days
+				if ($(this).attr('data-date-style') == 'short') {
+				    // render the date without time
+				    moment.lang(moment.lang(),$.cosinnus.momentShort[moment.lang()]);
 				    $(this).text(mom.calendar());
+				} else {
+    				if ((diff_days > -1 && diff_days < 1) || diff_days < -4 ) {
+    				    // render the date difference for today, tomorrow, and longer than 4 days ago
+    				    $(this).text(mom.fromNow());
+    				} else {
+    				    // render "letzten Montag um 12:00 Uhr" for the last 3 days
+    				    $(this).text(mom.calendar());
+    				}
 				}
 				// add the absolute date as tooltip
 				$(this).attr('title', mom.format('LLLL'));
