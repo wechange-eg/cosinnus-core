@@ -149,7 +149,7 @@ class UserProfile(BaseUserProfile):
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
         blank=True, null=True, editable=False, on_delete=models.SET_NULL)
     website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
-    settings = JSONField(default={})
+    settings = JSONField(default={}, editable=False)
 
     @property
     def avatar_url(self):
