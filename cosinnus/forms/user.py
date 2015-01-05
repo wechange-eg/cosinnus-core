@@ -7,6 +7,8 @@ from django.contrib.auth.forms import UserCreationForm as DjUserCreationForm,\
     AuthenticationForm
 from django.utils.translation import ugettext_lazy as _
 
+from captcha.fields import ReCaptchaField
+
 
 class UserKwargModelFormMixin(object):
     """
@@ -36,6 +38,8 @@ class UserCreationForm(DjUserCreationForm):
     
     email = forms.EmailField(_('email address'), required=True) 
     first_name = forms.CharField(_('first name'), required=True)   
+    captcha = ReCaptchaField(attrs={'theme': 'clean'})
+
     
     def is_valid(self):
         """ Get the email from the form and set it as username. 

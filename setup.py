@@ -65,6 +65,7 @@ setup(
         'django-djajax',
         'django-filter>=0.7',
         'django-multiform',
+        'django-recaptcha>=1.0.2',
         'django_select2',
         'django-taggit>=0.11',
         'django-tinymce==1.5.2',
