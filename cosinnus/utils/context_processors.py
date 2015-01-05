@@ -67,7 +67,7 @@ def cosinnus(request):
 
     current_app_name = ''
     try:
-        current_app = resolve(request.path).app_name
+        current_app = resolve(request.path.strip()).app_name
         current_app_name = app_registry.get_name(current_app)
     except KeyError:
         pass  # current_app is not a cosinnus app
