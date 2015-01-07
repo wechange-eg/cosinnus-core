@@ -71,13 +71,14 @@ USER_MODEL = get_user_model()
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('settings',)
 
 admin.site.register(get_user_profile_model(), UserProfileAdmin)
 
 
 class UserProfileInline(admin.StackedInline):
     model = USER_PROFILE_MODEL
+    readonly_fields = ('settings',)
 
 
 class UserAdmin(DjangoUserAdmin):
