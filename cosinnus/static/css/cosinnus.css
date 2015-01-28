@@ -1211,7 +1211,7 @@ a.light-link:hover i {
 }
 
 .app-files .btn-headline .media-body .group-annotation {
-  color: #92ffea;
+  color: #b0e0d7;
 }
 
 .app-documents .btn-headline .media-body .group-annotation {
@@ -1464,7 +1464,7 @@ ul.errorlist li:before {
   background-color: #14a085;
 }
 .app-files .app-background-light {
-  background-color: #92ffea;
+  background-color: #b0e0d7;
 }
 .app-files .app-background-dark {
   background-color: #0a5d4e;
@@ -1637,7 +1637,7 @@ body div.app-calendar .select2-container .select2-choice:hover {
   background-color: #e1edd2;
 }
 body div.app-files .select2-container .select2-choice:hover {
-  background-color: #92ffea;
+  background-color: #b0e0d7;
 }
 body div.app-documents .select2-container .select2-choice:hover {
   background-color: #d5f3ff;
@@ -1989,7 +1989,7 @@ body div .select2-dropdown-open.select2-drop-above .select2-choices {
   text-shadow: none;
 }
 .app-files .fc-button + .fc-button {
-  border-left: 1px solid #92ffea;
+  border-left: 1px solid #b0e0d7;
 }
 .app-files .fc-content {
   background-color: white;
@@ -1997,7 +1997,7 @@ body div .select2-dropdown-open.select2-drop-above .select2-choices {
   font-size: 0.8em;
 }
 .app-files .fc-state-highlight {
-  background-color: #92ffea;
+  background-color: #b0e0d7;
 }
 .app-files .fc-ltr .fc-event-hori.fc-event-end,
 .app-files .fc-rtl .fc-event-hori.fc-event-start,
@@ -2041,7 +2041,7 @@ body div .select2-dropdown-open.select2-drop-above .select2-choices {
   line-height: 1.8em;
 }
 .app-files .small-calendar .fc-day:hover {
-  background-color: #92ffea;
+  background-color: #b0e0d7;
 }
 .app-files .small-calendar .fc-day-header,
 .app-files .small-calendar .fc-border-separate tr.fc-last th,
