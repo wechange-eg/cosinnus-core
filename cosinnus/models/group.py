@@ -28,6 +28,10 @@ from cosinnus.core import signals
 from django.db.models.signals import post_delete
 from django.dispatch.dispatcher import receiver
 
+# this reads the environment and inits the right locale
+import locale
+locale.setlocale(locale.LC_ALL, "")
+
 
 #: Role defining a user has requested to be added to a group
 MEMBERSHIP_PENDING = 0
@@ -182,7 +186,12 @@ class CosinnusGroupManager(models.Manager):
                     for group in query:
                         groups[self._GROUP_CACHE_KEY % (self.__class__.__name__, group.slug)] = group
                     cache.set_many(groups, settings.COSINNUS_GROUP_CACHE_TIMEOUT)
-                return sorted(groups.values(), key=lambda x: x.name)
+                
+                # sort by a good sorting function that acknowldges umlauts, etc
+                group_list = groups.values()
+                group_list.sort(cmp=locale.strcoll, key=lambda x: x.name)
+                return group_list
+            
         elif pks is not None:
             if isinstance(pks, int):
                 # We request a single group
