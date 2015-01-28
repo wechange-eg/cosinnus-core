@@ -258,7 +258,7 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             except (AttributeError, TypeError):
                 pass
             
-            obj_public = requested_object and requested_object.media_tag and requested_object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
+            obj_public = requested_object and hasattr(requested_object, 'media_tag') and requested_object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
             if not (obj_public or user.is_authenticated()):
                 # support for the ajaxable view mixin
                 if getattr(self, 'is_ajax_request_url', False):
