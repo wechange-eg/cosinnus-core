@@ -76,14 +76,19 @@ class TagSelect2Field(HeavySelect2FieldBaseMixin, ModelMultipleChoiceField):
             return []
         if not isinstance(value, (list, tuple)):
             raise ValidationError(self.error_messages['list'])
+        
+        return_value = []
         for name in list(value):
+            # limit tag to 100 chars:
+            name = name[0:99] if len(name) > 99 else name
             if not self.queryset.filter(name=name).exists():
                 self.create_new_value(name)
+            return_value.append(name)
 
         # Since this overrides the inherited ModelChoiceField.clean
         # we run custom validators here
-        self.run_validators(value)
-        return value
+        self.run_validators(return_value)
+        return return_value
 
     def create_new_value(self, value):
         self.queryset.create(name=value)
