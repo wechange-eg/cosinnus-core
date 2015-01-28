@@ -1630,24 +1630,6 @@ body div .select2-container-multi .select2-choices .select2-search-choice {
   background-color: #dbdbdb;
   color: #333333;
 }
-body div.app-main .select2-container .select2-choice:hover {
-  background-color: #cbe7ed;
-}
-body div.app-calendar .select2-container .select2-choice:hover {
-  background-color: #e1edd2;
-}
-body div.app-files .select2-container .select2-choice:hover {
-  background-color: #b0e0d7;
-}
-body div.app-documents .select2-container .select2-choice:hover {
-  background-color: #d5f3ff;
-}
-body div.app-todos .select2-container .select2-choice:hover {
-  background-color: #faebcd;
-}
-body div.app-etherpad .select2-container .select2-choice:hover {
-  background-color: #ede2e1;
-}
 body div .select2-container-multi.select2-container-active .select2-choices {
   -webkit-box-shadow: none;
   box-shadow: none;
