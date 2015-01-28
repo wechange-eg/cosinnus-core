@@ -30,8 +30,10 @@ from django.dispatch.dispatcher import receiver
 
 # this reads the environment and inits the right locale
 import locale
-locale.setlocale(locale.LC_ALL, "")
-
+try:
+    locale.setlocale(locale.LC_ALL, ("de_DE", "utf8"))
+except:
+    locale.setlocale(locale.LC_ALL, "")
 
 #: Role defining a user has requested to be added to a group
 MEMBERSHIP_PENDING = 0
