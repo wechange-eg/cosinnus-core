@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 from awesome_avatar.fields import AvatarField
+from django.contrib import messages
+from django.utils.translation import ugettext_lazy as _
 
 class AvatarFormMixin(object):
     """
@@ -16,6 +18,9 @@ class AvatarFormMixin(object):
         elif self.avatar_field_name+'-ratio' in form.data and form.data[self.avatar_field_name+'-ratio']:
             avatar_field = AvatarField()
             avatar_field.name = self.avatar_field_name
-            avatar_field.save_form_data(form.instance, form.cleaned_data['obj'][self.avatar_field_name])
+            try:
+                avatar_field.save_form_data(form.instance, form.cleaned_data['obj'][self.avatar_field_name])
+            except SystemError:
+                messages.error(self.request, _('There was an error while processing your avatar. Please make sure you selected a large enough part of the image!'))
         ret = super(AvatarFormMixin, self).form_valid(form)
         return ret

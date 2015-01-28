@@ -12,7 +12,7 @@ from cosinnus.forms.profile import UserProfileForm
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.views.mixins.avatar import AvatarFormMixin
 from django.contrib import messages
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.http.response import Http404, HttpResponseRedirect
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
@@ -135,8 +135,16 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
         if not self.object.media_tag.visibility in [BaseTagObject.VISIBILITY_ALL, BaseTagObject.VISIBILITY_GROUP]:
             self.object.media_tag.visibility = BaseTagObject.VISIBILITY_ALL
         
-        ret = super(UserProfileUpdateView, self).form_valid(form)
-        messages.success(self.request, self.message_success)
+        try:
+            ret = super(UserProfileUpdateView, self).form_valid(form)
+            messages.success(self.request, self.message_success)
+        except AttributeError, e:
+            if str(e) == "'dict' object has no attribute '_committed'":
+                # here we couldn't save the avatar
+                messages.error(self.request, _('Sorry, your profile could not be saved because there was an error while processing the avatar!'))
+            else:
+                messages.error(self.request, _('Sorry, something went wrong while saving your profile!'))
+            ret = HttpResponseRedirect(reverse('cosinnus:profile-edit'))
         return ret
 
 update_view = UserProfileUpdateView.as_view()

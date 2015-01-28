@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-01 12:26+0100\n"
+"POT-Creation-Date: 2015-01-28 13:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -40,21 +40,21 @@ msgstr ""
 "Dein Mitgliedsantrag für %(group_name)s wurde abgelehnt auf %(site_name)s."
 
 #: .\core\decorators\views.py:76 .\core\decorators\views.py:143
-#: .\core\decorators\views.py:188 .\core\decorators\views.py:244
-#: .\core\decorators\views.py:324 .\core\decorators\views.py:373
+#: .\core\decorators\views.py:188 .\core\decorators\views.py:245
+#: .\core\decorators\views.py:326 .\core\decorators\views.py:375
 msgid "No group provided"
 msgstr "Kein Projekt angegeben"
 
 #: .\core\decorators\views.py:80 .\core\decorators\views.py:147
-#: .\core\decorators\views.py:192 .\core\decorators\views.py:248
-#: .\core\decorators\views.py:328 .\core\decorators\views.py:377
+#: .\core\decorators\views.py:192 .\core\decorators\views.py:249
+#: .\core\decorators\views.py:330 .\core\decorators\views.py:379
 #: .\views\cms.py:34 .\views\cms.py:80
 msgid "No group found with this name"
 msgstr "Kein Projekt mit diesem Namen gefunden"
 
 #: .\core\decorators\views.py:87 .\core\decorators\views.py:114
-#: .\core\decorators\views.py:154 .\core\decorators\views.py:199
-#: .\core\decorators\views.py:255 .\core\decorators\views.py:384
+#: .\core\decorators\views.py:154 .\core\decorators\views.py:208
+#: .\core\decorators\views.py:266 .\core\decorators\views.py:386
 msgid "Please log in to access this page."
 msgstr "Bitte melden sie sich an um auf diese Seite zugreifen zu können"
 
@@ -156,19 +156,19 @@ msgstr "Meine Projekte"
 msgid "Other groups"
 msgstr "Andere Projekte"
 
-#: .\forms\user.py:37
+#: .\forms\user.py:39
 msgid "email address"
 msgstr "E-mail Adresse"
 
-#: .\forms\user.py:38
+#: .\forms\user.py:40
 msgid "first name"
 msgstr "Vorname"
 
-#: .\forms\user.py:50 .\forms\user.py:71
+#: .\forms\user.py:54 .\forms\user.py:75
 msgid "This email address already has a registered user!"
 msgstr "Unter dieser Email-Addresse ist bereits jemand registriert!"
 
-#: .\forms\user.py:77
+#: .\forms\user.py:81
 msgid ""
 "Please enter a correct email and password. Note that both fields may be case-"
 "sensitive."
@@ -176,7 +176,7 @@ msgstr ""
 "Bitte eine gültige Email-Addresse und ein Passwort eingeben. Beide Felder "
 "berücksichtigen die Groß-/Kleinschreibung."
 
-#: .\forms\user.py:79
+#: .\forms\user.py:83
 msgid ""
 "Your Web browser doesn't appear to have cookies enabled. Cookies are "
 "required for logging in."
@@ -184,7 +184,7 @@ msgstr ""
 "Anscheinend sind Cookies in deinem Browser deaktiviert. Diese werdenzum "
 "Einloggen benötigt!"
 
-#: .\forms\user.py:81
+#: .\forms\user.py:85
 msgid "This account is inactive."
 msgstr "Dieses Benutzerkonto ist deaktiviert worden."
 
@@ -550,7 +550,7 @@ msgstr "Möchten sie %(title)s beitreten?"
 #: .\templates\cosinnus\group\group_list.html.py:134
 #: .\templates\cosinnus\group\group_list.html.py:184
 #: .\templates\cosinnus\group\leftnav_group.html.py:43
-#: .\templates\cosinnus\group\leftnav_group.html.py:48 .\views\group.py:360
+#: .\templates\cosinnus\group\leftnav_group.html.py:48 .\views\group.py:362
 msgid "Join"
 msgstr "Beitreten"
 
@@ -577,8 +577,8 @@ msgstr "Ordnername"
 #: .\templates\cosinnus\leftnav_button_editable_folder.html.py:39
 #: .\templates\cosinnus\group\group_form.html.py:221
 #: .\templates\cosinnus\user\userprofile_form.html.py:225
-#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:279
-#: .\views\group.py:558 .\views\user.py:125
+#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:281
+#: .\views\group.py:560 .\views\user.py:125
 msgid "Save"
 msgstr "Speichern"
 
@@ -591,7 +591,7 @@ msgstr "Ordner löschen"
 #: .\templates\cosinnus\group\group_form.html.py:109
 #: .\templates\cosinnus\user\userprofile_form.html.py:159
 #: .\templates\cosinnus\widgets\base_widget.html.py:39 .\views\group.py:142
-#: .\views\group.py:595
+#: .\views\group.py:597
 msgid "Delete"
 msgstr "Löschen"
 
@@ -745,8 +745,8 @@ msgid "My Profile"
 msgstr "Mein Profil"
 
 #: .\templates\cosinnus\navbar.html.py:113
-#: .\templates\cosinnus\user\userprofile_detail.html.py:42
-#: .\templates\cosinnus\user\userprofile_detail.html.py:49
+#: .\templates\cosinnus\user\userprofile_detail.html.py:43
+#: .\templates\cosinnus\user\userprofile_detail.html.py:50
 msgid "Notification Preferences"
 msgstr "Benachrichtigungseinstellungen"
 
@@ -781,7 +781,7 @@ msgid "Search in groups"
 msgstr "In Projekten suchen"
 
 #: .\templates\cosinnus\search.html.py:169
-#: .\templates\cosinnus\user\userprofile_detail.html.py:135
+#: .\templates\cosinnus\user\userprofile_detail.html.py:136
 msgid "My Groups"
 msgstr "Meine Projekte"
 
@@ -1044,11 +1044,11 @@ msgstr "Nicht Mitarbeiter_in"
 #: .\templates\cosinnus\group\group_list.html.py:130
 #: .\templates\cosinnus\group\group_list.html.py:176
 #: .\templates\cosinnus\group\leftnav_group.html.py:23
-#: .\templates\cosinnus\group\leftnav_group.html.py:28 .\views\group.py:394
+#: .\templates\cosinnus\group\leftnav_group.html.py:28 .\views\group.py:396
 msgid "Leave"
 msgstr "Verlassen"
 
-#: .\templates\cosinnus\group\group_list.html.py:132 .\views\group.py:438
+#: .\templates\cosinnus\group\group_list.html.py:132 .\views\group.py:440
 msgid "Withdraw"
 msgstr "Zurückziehen"
 
@@ -1122,7 +1122,7 @@ msgid "Add container"
 msgstr "Zusammenstellung hinzufügen"
 
 #: .\templates\cosinnus\hierarchy\add_container.html.py:27
-#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:522
+#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:524
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -1213,7 +1213,7 @@ msgid "Login"
 msgstr "Login"
 
 #: .\templates\cosinnus\registration\leftnav.html.py:19
-#: .\templates\cosinnus\registration\signup.html.py:108
+#: .\templates\cosinnus\registration\signup.html.py:124
 msgid "Register"
 msgstr "Registrieren"
 
@@ -1415,7 +1415,7 @@ msgid "Last name"
 msgstr "Nachname"
 
 #: .\templates\cosinnus\user\leftnav.html.py:24
-#: .\templates\cosinnus\user\userprofile_detail.html.py:102
+#: .\templates\cosinnus\user\userprofile_detail.html.py:103
 msgid "About me"
 msgstr "Über mich"
 
@@ -1510,16 +1510,16 @@ msgstr "Benutzer_innen-Profil: %(username)s"
 msgid "This message will never reappear when you remove it."
 msgstr ""
 
-#: .\templates\cosinnus\user\userprofile_detail.html.py:37
+#: .\templates\cosinnus\user\userprofile_detail.html.py:38
 #: .\templates\cosinnus\user\userprofile_form.html.py:11
 msgid "Edit Profile"
 msgstr "Profil bearbeiten"
 
-#: .\templates\cosinnus\user\userprofile_detail.html.py:79
+#: .\templates\cosinnus\user\userprofile_detail.html.py:80
 msgid "Send Message"
 msgstr "Nachricht schicken"
 
-#: .\templates\cosinnus\user\userprofile_detail.html.py:117
+#: .\templates\cosinnus\user\userprofile_detail.html.py:118
 msgid "My Website"
 msgstr "Meine Webseite"
 
@@ -1650,7 +1650,7 @@ msgstr ""
 msgid "(Deleted User)"
 msgstr "(Gelöschter Nutzer)"
 
-#: .\templatetags\cosinnus_tags.py:251 .\templatetags\cosinnus_tags.py:277
+#: .\templatetags\cosinnus_tags.py:257 .\templatetags\cosinnus_tags.py:283
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>%(model_name)s konnte nicht gerendert werden!</i>"
@@ -1685,22 +1685,22 @@ msgstr "%(group_type)s \"%(group)s\" wurde erfolgreich erstellt."
 msgid "Create"
 msgstr "Erstellen"
 
-#: .\views\group.py:271
+#: .\views\group.py:273
 #, python-format
 msgid "The %(group_type)s was changed successfully."
 msgstr "%(group_type)s wurde erfolgreich geändert."
 
-#: .\views\group.py:361
+#: .\views\group.py:363
 #, python-format
 msgid "Do you want to join the %(group_type)s “%(group_name)s”?"
 msgstr "Möchten sie %(group_type)s %(group_name)s beitreten?"
 
-#: .\views\group.py:362
+#: .\views\group.py:364
 #, python-format
 msgid "Join %(group_type)s “%(group_name)s”?"
 msgstr "%(group_type)s %(group_name)s beitreten?"
 
-#: .\views\group.py:363
+#: .\views\group.py:365
 #, python-format
 msgid ""
 "You have requested to join the %(group_type)s “%(group_name)s”. You will "
@@ -1710,23 +1710,23 @@ msgstr ""
 "gestellt. Du erhältst eine E-Mail sobald ein Projektadministrator den Antrag "
 "bearbeitet."
 
-#: .\views\group.py:395
+#: .\views\group.py:397
 #, python-format
 msgid "Do you want to leave the %(group_type)s “%(group_name)s”?"
 msgstr "Möchten sie %(group_type)s “%(group_name)s” verlassen?"
 
-#: .\views\group.py:396
+#: .\views\group.py:398
 #, python-format
 msgid "Leaving %(group_type)s “%(group_name)s”?"
 msgstr "%(group_type)s “%(group_name)s” verlassen?"
 
-#: .\views\group.py:398
+#: .\views\group.py:400
 #, python-format
 msgid "You are no longer a member of the %(group_type)s “%(group_name)s”."
 msgstr ""
 "Du bist jetzt nicht mehr Mitarbeiter_in von %(group_type)s “%(group_name)s”."
 
-#: .\views\group.py:430
+#: .\views\group.py:432
 #, python-format
 msgid ""
 "You cannot leave this %(group_type)s. You are the only administrator left."
@@ -1734,7 +1734,7 @@ msgstr ""
 "Sie können diese(s) %(group_type)s nicht verlassen, da sie der einzig übrige "
 "Administrator sind."
 
-#: .\views\group.py:439
+#: .\views\group.py:441
 #, python-format
 msgid ""
 "Do you want to withdraw your join request to the %(group_type)s “%"
@@ -1743,12 +1743,12 @@ msgstr ""
 "Möchten sie ihre Beitrittsanfrage für %(group_type)s “%(group_name)s” "
 "zurückziehen?"
 
-#: .\views\group.py:440
+#: .\views\group.py:442
 #, python-format
 msgid "Withdraw join request to %(group_type)s “%(group_name)s”?"
 msgstr "Beitrittsanfrage für %(group_type)s “%(group_name)s” zurückziehen?"
 
-#: .\views\group.py:442
+#: .\views\group.py:444
 #, python-format
 msgid ""
 "Your join request was withdrawn from %(group_type)s “%(group_name)s” "
@@ -1757,23 +1757,23 @@ msgstr ""
 "Deine Beitrittsanfrage für %(group_type)s “%(group_name)s” wurde "
 "zurückgezogen."
 
-#: .\views\group.py:549
+#: .\views\group.py:551
 msgid "You cannot change your own admin status."
 msgstr "Sie können ihren eigenen Administratorstatus nicht ändern."
 
-#: .\views\group.py:551 .\views\group.py:585
+#: .\views\group.py:553 .\views\group.py:587
 #, python-format
 msgid "You cannot remove “%(username)s” form this group. Only one admin left."
 msgstr ""
 "Sie können “%(username)s” nicht von diesem Projekt entfernen. Er/sie ist der "
 "einzig übrige Administrator."
 
-#: .\views\group.py:583
+#: .\views\group.py:585
 #, python-format
 msgid "You cannot remove yourself from a %(group_type)s."
 msgstr "Sie können sich nicht selbst von eine(r/m) %(group_type)s entfernen."
 
-#: .\views\group.py:596
+#: .\views\group.py:598
 #, python-format
 msgid ""
 "Do you want to remove the user “%(username)s”  from the %(group_type)s “%"
@@ -1782,7 +1782,7 @@ msgstr ""
 "Möchten sie Benutzer_in “%(username)s” aus %(group_type)s “%(group_name)s” "
 "entfernen?"
 
-#: .\views\group.py:601
+#: .\views\group.py:603
 #, python-format
 msgid "Remove user from %(group_type)s “%(group_name)s”?"
 msgstr "Benutzer_in aus %(group_type)s “%(group_name)s” entfernen?"
@@ -1791,23 +1791,35 @@ msgstr "Benutzer_in aus %(group_type)s “%(group_name)s” entfernen?"
 msgid "No appname given for adding containers."
 msgstr "Kein Appname zum Hinzufügen von Zusammenstellungen angegeben."
 
-#: .\views\profile.py:56
+#: .\views\profile.py:88
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Kein passender %(verbose_name)s für die Anfrage gefunden"
 
-#: .\views\profile.py:91
+#: .\views\profile.py:123
 msgid "Your profile was edited successfully."
 msgstr "Dein Profil wurde erfolgreich bearbeitet."
 
-#: .\views\profile.py:116
+#: .\views\profile.py:144
+msgid ""
+"Sorry, your profile could not be saved because there was an error while "
+"processing the avatar!"
+msgstr ""
+"Entschuldigung, dein Profil konnte nicht gespeichert werden weil es einen "
+"Fehler beim Speichern des Avatars gab!" 
+
+#: .\views\profile.py:146
+msgid "Sorry, something went wrong while saving your profile!"
+msgstr "Entschuldigung, etwas ist beim Speichern deines Profils schief gelaufen!"
+
+#: .\views\profile.py:156
 msgid ""
 "Your profile was deleted successfully. We're sorry you are no longer with us."
 msgstr ""
 "Dein Profil wurde erfolgreich gelöscht. Schade dass du nicht länger bei uns "
 "bist."
 
-#: .\views\profile.py:132
+#: .\views\profile.py:172
 #, python-format
 msgid ""
 "You are the only administrator left for group \"%s\". Please appoint a "
@@ -1825,6 +1837,14 @@ msgid ""
 msgstr ""
 "Benutzer_in \"%(user)s\" wurde erfolgreich registriert. Sie können sich "
 "jetzt mit diesen Benutzer_innen-Namen einloggen."
+
+#: .\views\mixins\avatar.py:24
+msgid ""
+"There was an error while processing your avatar. Please make sure you "
+"selected a large enough part of the image!"
+msgstr ""
+"Es gab einen Fehler beim Verarbeiten der Avatar-Auswahl. Bitte stell sicher "
+"dass du einen gültigen und ausreichend großen Bereich im Bild ausgewählt hast!"
 
 #: .\views\mixins\filters.py:90 .\views\mixins\filters.py:99
 #, python-format
