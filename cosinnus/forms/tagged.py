@@ -13,6 +13,8 @@ from cosinnus.models.tagged import get_tag_object_model, BaseTagObject,\
 from cosinnus.utils.import_utils import import_from_settings
 from cosinnus.forms.select2 import TagSelect2Field
 from django.core.urlresolvers import reverse_lazy
+from django.http.request import QueryDict
+from copy import copy
 
 
 TagObject = get_tag_object_model()
@@ -115,11 +117,24 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
         
         def __init__(self, *args, **kwargs):
             super(TaggableObjectForm, self).__init__(*args, **kwargs)
+            
+            # we reset newly added tags if we ran into a validation error
+            # these would have to be re-added in some weird way I can't figure out, but
+            # simply letting the validation re-fill the form with them causes an error
+            # because their strings are being filled into the field that requires an id
+            # because the tag string has not actually been made a tag, and so has no id            
+            if isinstance(self.data, QueryDict) and not self.is_valid() and any([(datatag not in self.forms['media_tag'].initial['tags']) for datatag in self.data.getlist('media_tag-tags')]):
+                self.data._mutable = True
+                del self.data['media_tag-tags']
+                self.data.setlist('media_tag-tags', copy(self.forms['media_tag'].initial['tags']))
+            
             # we need to do this here ~again~ on top of in the media tag form, to prevent
             # the select2 field's values from being overwritten 
-            if self.instance.pk and 'tags' in self.forms['media_tag'].initial:
-                del self.forms['media_tag'].initial['tags']
-        
+            if self.instance.pk:
+                if self.is_valid() and 'tags' in self.forms['media_tag'].initial:
+                    del self.forms['media_tag'].initial['tags']
+                    
+            
         # attach any extra form classes
         for form_name, form_class in base_extra_forms.items():
             base_forms[form_name] = form_class
