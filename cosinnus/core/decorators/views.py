@@ -192,6 +192,15 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
                 return HttpResponseNotFound(_("No group found with this name"))
             user = request.user
             
+            # catch anyonymous users trying to naviagte to private groups (else self.get_object() throws a Http404!)
+            if not group.public and not user.is_authenticated():
+                # support for the ajaxable view mixin
+                if getattr(self, 'is_ajax_request_url', False):
+                    return HttpResponseForbidden('Not authenticated')
+                messages.error(request, _('Please log in to access this page.'))
+                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
+            
+            # this is why almost every BaseTaggableObject's View has a .group attribute:
             setattr(self, group_attr, group)
             
             requested_object = None
@@ -248,6 +257,14 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             if not group:
                 return HttpResponseNotFound(_("No group found with this name"))
             user = request.user
+            
+            # catch anyonymous users trying to naviagte to private groups (else self.get_object() throws a Http404!)
+            if not group.public and not user.is_authenticated():
+                # support for the ajaxable view mixin
+                if getattr(self, 'is_ajax_request_url', False):
+                    return HttpResponseForbidden('Not authenticated')
+                messages.error(request, _('Please log in to access this page.'))
+                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
             
             # set the group attr    
             setattr(self, group_attr, group)
