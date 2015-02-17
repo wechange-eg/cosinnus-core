@@ -772,7 +772,9 @@
     				}
 				}
 				// add the absolute date as tooltip
-				$(this).attr('title', mom.format('LLLL'));
+				if ($(this).attr('data-date-notooltip') != 'true') {
+				    $(this).attr('title', mom.format('LLLL'));
+				}
 			});
 
 			$('.moment-data-date').each(function() {
