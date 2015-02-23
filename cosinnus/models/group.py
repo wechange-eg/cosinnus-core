@@ -173,7 +173,8 @@ class CosinnusGroupManager(models.Manager):
                 slug = slugs
                 group = cache.get(self._GROUP_CACHE_KEY % (self.__class__.__name__, slug))
                 if group is None:
-                    group = super(CosinnusGroupManager, self).get(slug=slug)
+                    # we can only find groups via this function that are in the same portal we run in
+                    group = super(CosinnusGroupManager, self).filter(portal=CosinnusPortal.objects.get_current_portal()).get(slug=slug)
                     cache.set(self._GROUP_CACHE_KEY % (self.__class__.__name__, group.slug), group,
                         settings.COSINNUS_GROUP_CACHE_TIMEOUT)
                 return group
@@ -183,7 +184,8 @@ class CosinnusGroupManager(models.Manager):
                 groups = cache.get_many(keys)
                 missing = [key.split('/')[-1] for key in keys if key not in groups]
                 if missing:
-                    query = self.get_queryset().filter(slug__in=missing)
+                    # we can only find groups via this function that are in the same portal we run in
+                    query = self.get_queryset().filter(portal=CosinnusPortal.objects.get_current_portal(), slug__in=missing)
                     if select_related_media_tag:
                         query = query.select_related('media_tag')
                     
@@ -317,6 +319,11 @@ class CosinnusGroupMembershipManager(models.Manager):
             return self._get_users_for_multiple_groups(gids, _MEMBERSHIP_PENDINGS_KEY, MEMBERSHIP_PENDING)
 
 
+class CosinnusPortalManager(models.Manager):
+    
+    def get_current_portal(self):
+        return CosinnusPortal.objects.get(site=settings.SITE_ID)
+
 
 @python_2_unicode_compatible
 class CosinnusPortal(models.Model):
@@ -338,6 +345,7 @@ class CosinnusPortal(models.Model):
     
     site = models.ForeignKey(Site, unique=True, verbose_name=_('Associated Site'))
     
+    objects = CosinnusPortalManager()
     
     def save(self, *args, **kwargs):
         super(CosinnusPortal, self).save(*args, **kwargs)
