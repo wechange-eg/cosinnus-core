@@ -8,6 +8,18 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+        # Adding model 'CosinnusPortal'
+        db.create_table(u'cosinnus_cosinnusportal', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=50, blank=True)),
+            ('description', self.gf('tinymce.models.HTMLField')(blank=True)),
+            ('website', self.gf('django.db.models.fields.URLField')(max_length=100, null=True, blank=True)),
+            ('public', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('site', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['sites.Site'], unique=True)),
+        ))
+        db.send_create_signal(u'cosinnus', ['CosinnusPortal'])
+
         # Adding model 'CosinnusPortalMembership'
         db.create_table(u'cosinnus_cosinnusportalmembership', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -21,28 +33,16 @@ class Migration(SchemaMigration):
         # Adding unique constraint on 'CosinnusPortalMembership', fields ['user', 'group']
         db.create_unique(u'cosinnus_cosinnusportalmembership', ['user_id', 'group_id'])
 
-        # Adding model 'CosinnusPortal'
-        db.create_table(u'cosinnus_cosinnusportal', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=50, blank=True)),
-            ('description', self.gf('tinymce.models.HTMLField')(blank=True)),
-            ('website', self.gf('django.db.models.fields.URLField')(max_length=100, null=True, blank=True)),
-            ('public', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('site', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['sites.Site'])),
-        ))
-        db.send_create_signal(u'cosinnus', ['CosinnusPortal'])
-
 
     def backwards(self, orm):
         # Removing unique constraint on 'CosinnusPortalMembership', fields ['user', 'group']
         db.delete_unique(u'cosinnus_cosinnusportalmembership', ['user_id', 'group_id'])
 
-        # Deleting model 'CosinnusPortalMembership'
-        db.delete_table(u'cosinnus_cosinnusportalmembership')
-
         # Deleting model 'CosinnusPortal'
         db.delete_table(u'cosinnus_cosinnusportal')
+
+        # Deleting model 'CosinnusPortalMembership'
+        db.delete_table(u'cosinnus_cosinnusportalmembership')
 
 
     models = {
@@ -125,7 +125,7 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'public': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'site': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sites.Site']"}),
+            'site': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['sites.Site']", 'unique': 'True'}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '50', 'blank': 'True'}),
             'users': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'cosinnus_portals'", 'blank': 'True', 'through': u"orm['cosinnus.CosinnusPortalMembership']", 'to': u"orm['auth.User']"}),
             'website': ('django.db.models.fields.URLField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'})

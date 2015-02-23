@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
-    CosinnusSociety, CosinnusProject
+    CosinnusSociety, CosinnusProject, CosinnusPortal
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import AttachedObject
 from cosinnus.models.cms import CosinnusMicropage
@@ -51,6 +51,13 @@ class CosinnusSocietyAdmin(admin.ModelAdmin):
         return super(CosinnusSocietyAdmin, self).get_form(request, obj, **kwargs)
 
 admin.site.register(CosinnusSociety, CosinnusSocietyAdmin)
+
+
+class CosinnusPortalAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug', 'site', 'public')
+    prepopulated_fields = {'slug': ('name', )}
+
+admin.site.register(CosinnusPortal, CosinnusPortalAdmin)
 
 
 

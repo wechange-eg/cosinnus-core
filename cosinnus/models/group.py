@@ -537,7 +537,7 @@ class CosinnusPortal(models.Model):
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
         related_name='cosinnus_portals', through='CosinnusPortalMembership')
     
-    site = models.ForeignKey(Site, verbose_name=_('Associated Site'))
+    site = models.ForeignKey(Site, unique=True, verbose_name=_('Associated Site'))
     
     
     def save(self, *args, **kwargs):
