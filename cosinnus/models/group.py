@@ -316,6 +316,35 @@ class CosinnusGroupMembershipManager(models.Manager):
             return self._get_users_for_multiple_groups(gids, _MEMBERSHIP_PENDINGS_KEY, MEMBERSHIP_PENDING)
 
 
+
+@python_2_unicode_compatible
+class CosinnusPortal(models.Model):
+    
+    class Meta:
+        app_label = 'cosinnus'
+        verbose_name = _('Portal')
+        verbose_name_plural = _('Portals')
+    
+    name = models.CharField(_('Name'), max_length=100,
+        validators=[group_name_validator])
+    slug = models.SlugField(_('Slug'), max_length=50, unique=True, blank=True)
+    
+    description = HTMLField(verbose_name=_('Description'), blank=True)
+    website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
+    public = models.BooleanField(_('Public'), default=False)
+    users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
+        related_name='cosinnus_portals', through='CosinnusPortalMembership')
+    
+    site = models.ForeignKey(Site, unique=True, verbose_name=_('Associated Site'))
+    
+    
+    def save(self, *args, **kwargs):
+        super(CosinnusPortal, self).save(*args, **kwargs)
+        
+    def __str__(self):
+        return self.name
+
+
 @python_2_unicode_compatible
 class CosinnusGroup(models.Model):
     TYPE_PROJECT = 0
@@ -328,6 +357,12 @@ class CosinnusGroup(models.Model):
     )
     
     GROUP_MODEL_TYPE = TYPE_PROJECT
+    
+    # don't worry, the default Portal with id 1 is created in a datamigration
+    # there was no other way to generate completely runnable migrations 
+    # (with a get_default function, or any other way)
+    portal = models.ForeignKey(CosinnusPortal, verbose_name=_('Portal'), related_name='groups', 
+        null=False, blank=False, default=1) # port_id 1 is created in a datamigration!
     
     name = models.CharField(_('Name'), max_length=100,
         validators=[group_name_validator])
@@ -355,6 +390,7 @@ class CosinnusGroup(models.Model):
         ordering = ('name',)
         verbose_name = _('Cosinnus group')
         verbose_name_plural = _('Cosinnus groups')
+        unique_together = ('slug', 'portal', )
 
     def __init__(self, *args, **kwargs):
         super(CosinnusGroup, self).__init__(*args, **kwargs)
@@ -470,6 +506,7 @@ class CosinnusProjectManager(CosinnusGroupManager):
 class CosinnusProject(CosinnusGroup):
     
     class Meta:
+        """ For some reason, the Meta isn't inherited automatically from CosinnusGroup here """
         proxy = True
         app_label = 'cosinnus'
         ordering = ('name',)
@@ -499,7 +536,8 @@ class CosinnusSocietyManager(CosinnusGroupManager):
 class CosinnusSociety(CosinnusGroup):
     
     class Meta:
-        proxy = True
+        """ For some reason, the Meta isn't inherited automatically from CosinnusGroup here """
+        proxy = True        
         app_label = 'cosinnus'
         ordering = ('name',)
         verbose_name = _('Cosinnus society')
@@ -515,37 +553,6 @@ class CosinnusSociety(CosinnusGroup):
         
     def __str__(self):
         return self.name
-    
-
-
-
-@python_2_unicode_compatible
-class CosinnusPortal(models.Model):
-    
-    class Meta:
-        app_label = 'cosinnus'
-        verbose_name = _('Portal')
-        verbose_name_plural = _('Portals')
-    
-    name = models.CharField(_('Name'), max_length=100,
-        validators=[group_name_validator])
-    slug = models.SlugField(_('Slug'), max_length=50, unique=True, blank=True)
-    
-    description = HTMLField(verbose_name=_('Description'), blank=True)
-    website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
-    public = models.BooleanField(_('Public'), default=False)
-    users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
-        related_name='cosinnus_portals', through='CosinnusPortalMembership')
-    
-    site = models.ForeignKey(Site, unique=True, verbose_name=_('Associated Site'))
-    
-    
-    def save(self, *args, **kwargs):
-        super(CosinnusPortal, self).save(*args, **kwargs)
-        
-    def __str__(self):
-        return self.name
-
     
     
 
