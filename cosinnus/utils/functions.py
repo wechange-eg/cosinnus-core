@@ -60,6 +60,13 @@ def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
     # the following gets all existing slug values
     if slug_field not in kwargs:
         kwargs['%s__startswith' % slug_field] = slug
+    # be unique_together aware:
+    for unique_list in model._meta.unique_together:
+        if slug_field in unique_list:
+            for unique_field in unique_list:
+                if not unique_field == slug_field:
+                    kwargs[unique_field] = getattr(item, unique_field, None)
+            
     all_slugs = list(model.objects.filter(**kwargs).values_list(slug_field, flat=True))
     if slug in all_slugs:
         finder = re.compile(r'-\d+$')
@@ -68,8 +75,8 @@ def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
         while slug in all_slugs:
             slug = re.sub(finder, '-%d' % counter, slug)
             counter += 1
+    # set the slug
     setattr(item, slug_field, slug)
-    
 
 
 def select_related_chain(qs, *args):
