@@ -31,6 +31,7 @@ from django.dispatch.dispatcher import receiver
 # this reads the environment and inits the right locale
 import locale
 from django.contrib.sites.models import Site
+from django.db.utils import IntegrityError
 try:
     locale.setlocale(locale.LC_ALL, ("de_DE", "utf8"))
 except:
@@ -366,7 +367,7 @@ class CosinnusGroup(models.Model):
     
     name = models.CharField(_('Name'), max_length=100,
         validators=[group_name_validator])
-    slug = models.SlugField(_('Slug'), max_length=50, unique=True, blank=True)
+    slug = models.SlugField(_('Slug'), max_length=50)
     type = models.PositiveSmallIntegerField(_('Group Type'), blank=False,
         default=TYPE_PROJECT, choices=TYPE_CHOICES, editable=False)
     
