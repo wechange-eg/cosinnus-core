@@ -6,7 +6,7 @@ import re
 import six
 
 from django.core.cache import cache
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.core.validators import RegexValidator
 from django.db import models
 from django.db.models import Q
@@ -30,6 +30,7 @@ from django.dispatch.dispatcher import receiver
 
 # this reads the environment and inits the right locale
 import locale
+from django.contrib.sites.models import Site
 try:
     locale.setlocale(locale.LC_ALL, ("de_DE", "utf8"))
 except:
@@ -53,9 +54,9 @@ MEMBERSHIP_STATUSES = (
 #: A user is a member of a group if either is an explicit member or admin
 MEMBER_STATUS = (MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN,)
 
-_MEMBERSHIP_ADMINS_KEY = 'cosinnus/core/membership/admins/%d'
-_MEMBERSHIP_MEMBERS_KEY = 'cosinnus/core/membership/members/%d'
-_MEMBERSHIP_PENDINGS_KEY = 'cosinnus/core/membership/pendings/%d'
+_MEMBERSHIP_ADMINS_KEY = 'cosinnus/core/membership/%s/admins/%d'
+_MEMBERSHIP_MEMBERS_KEY = 'cosinnus/core/membership/%s/members/%d'
+_MEMBERSHIP_PENDINGS_KEY = 'cosinnus/core/membership/%s/pendings/%d'
 
 
 def group_name_validator(value):
@@ -242,6 +243,8 @@ class CosinnusGroupManager(models.Manager):
 
 
 class CosinnusGroupMembershipManager(models.Manager):
+    
+    """ Note: Thismanager is used for all Groups, and also Portals! """
 
     use_for_related_fields = True
 
@@ -254,22 +257,22 @@ class CosinnusGroupMembershipManager(models.Manager):
         return self.get_queryset().filter_membership_status(status)
 
     def _get_users_for_single_group(self, group_id, cache_key, status):
-        uids = cache.get(cache_key % group_id)
+        uids = cache.get(cache_key % (self.model.CACHE_KEY_MODEL, group_id))
         if uids is None:
             query = self.filter(group_id=group_id).filter_membership_status(status)
             uids = list(query.values_list('user_id', flat=True).all())
-            cache.set(cache_key % group_id, uids)
+            cache.set(cache_key % (self.model.CACHE_KEY_MODEL, group_id), uids)
         return uids
 
     def _get_users_for_multiple_groups(self, group_ids, cache_key, status):
-        keys = [cache_key % g for g in group_ids]
+        keys = [cache_key % (self.model.CACHE_KEY_MODEL, g) for g in group_ids]
         users = cache.get_many(keys)
         missing = list(map(int, (key.split('/')[-1] for key in keys if key not in users)))
         if missing:
             _q = self.filter_membership_status(status).values_list('user_id', flat=True)
             for group in missing:
                 uids = list(_q._clone().filter(group_id=group).all())
-                users[cache_key % group] = uids
+                users[cache_key % (self.model.CACHE_KEY_MODEL, group)] = uids
             cache.set_many(users)
         return {int(k.split('/')[-1]): v for k, v in six.iteritems(users)}
 
@@ -514,26 +517,62 @@ class CosinnusSociety(CosinnusGroup):
         return self.name
     
 
+
+
 @python_2_unicode_compatible
-class CosinnusGroupMembership(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-        related_name='cosinnus_memberships', on_delete=models.CASCADE)
-    group = models.ForeignKey(CosinnusGroup, related_name='memberships',
-        on_delete=models.CASCADE)
+class CosinnusPortal(models.Model):
+    
+    class Meta:
+        app_label = 'cosinnus'
+        verbose_name = _('Portal')
+        verbose_name_plural = _('Portals')
+    
+    name = models.CharField(_('Name'), max_length=100,
+        validators=[group_name_validator])
+    slug = models.SlugField(_('Slug'), max_length=50, unique=True, blank=True)
+    
+    description = HTMLField(verbose_name=_('Description'), blank=True)
+    website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
+    public = models.BooleanField(_('Public'), default=False)
+    users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
+        related_name='cosinnus_portals', through='CosinnusPortalMembership')
+    
+    site = models.ForeignKey(Site, verbose_name=_('Associated Site'))
+    
+    
+    def save(self, *args, **kwargs):
+        super(CosinnusPortal, self).save(*args, **kwargs)
+        
+    def __str__(self):
+        return self.name
+
+    
+    
+
+@python_2_unicode_compatible
+class BaseGroupMembership(models.Model):
+    # group = must be defined in overriding class!
+    # user = must be defined in overriding class!
     status = models.PositiveSmallIntegerField(choices=MEMBERSHIP_STATUSES,
         db_index=True, default=MEMBERSHIP_PENDING)
     date = models.DateTimeField(auto_now_add=True, editable=False)
 
     objects = CosinnusGroupMembershipManager()
+    
+    CACHE_KEY_MODEL = None
 
     class Meta:
+        abstract = True
         app_label = 'cosinnus'
-        unique_together = (('user', 'group'),)
-        verbose_name = _('Group membership')
-        verbose_name_plural = _('Group memberships')
+        unique_together = (('user', 'group'),)  
+        verbose_name = _('Base membership')
+        verbose_name_plural = _('Base memberships')  
 
     def __init__(self, *args, **kwargs):
-        super(CosinnusGroupMembership, self).__init__(*args, **kwargs)
+        if not self.CACHE_KEY_MODEL:
+            raise ImproperlyConfigured('You must define a cache key specific to ' + 
+                '                        the model of this membership type!')
+        super(BaseGroupMembership, self).__init__(*args, **kwargs)
         self._old_current_status = self.status
 
     def __str__(self):
@@ -544,7 +583,7 @@ class CosinnusGroupMembership(models.Model):
         }
 
     def delete(self, *args, **kwargs):
-        super(CosinnusGroupMembership, self).delete(*args, **kwargs)
+        super(BaseGroupMembership, self).delete(*args, **kwargs)
         self._clear_cache()
 
     def save(self, *args, **kwargs):
@@ -553,14 +592,14 @@ class CosinnusGroupMembership(models.Model):
         if self._old_current_status == MEMBERSHIP_PENDING and \
                 self.status != self._old_current_status:
             self.date = now()
-        super(CosinnusGroupMembership, self).save(*args, **kwargs)
+        super(BaseGroupMembership, self).save(*args, **kwargs)
         self._clear_cache()
 
     def _clear_cache(self):
         cache.delete_many([
-            _MEMBERSHIP_ADMINS_KEY % self.group.pk,
-            _MEMBERSHIP_MEMBERS_KEY % self.group.pk,
-            _MEMBERSHIP_PENDINGS_KEY % self.group.pk,
+            _MEMBERSHIP_ADMINS_KEY % (self.CACHE_KEY_MODEL, self.group.pk),
+            _MEMBERSHIP_MEMBERS_KEY % (self.CACHE_KEY_MODEL, self.group.pk), 
+            _MEMBERSHIP_PENDINGS_KEY % (self.CACHE_KEY_MODEL, self.group.pk),
         ])
         self.group._clear_local_cache()
         
@@ -568,6 +607,31 @@ class CosinnusGroupMembership(models.Model):
         return self.user.email
     
     
+class CosinnusGroupMembership(BaseGroupMembership):
+    group = models.ForeignKey(CosinnusGroup, related_name='memberships',
+        on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+        related_name='cosinnus_memberships', on_delete=models.CASCADE)
+    
+    CACHE_KEY_MODEL = 'CosinnusGroup'
+    
+    class Meta(BaseGroupMembership.Meta):
+        verbose_name = _('Group membership')
+        verbose_name_plural = _('Group memberships')  
+    
+
+class CosinnusPortalMembership(BaseGroupMembership):
+    group = models.ForeignKey(CosinnusPortal, related_name='memberships',
+        on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+        related_name='cosinnus_portal_memberships', on_delete=models.CASCADE)
+    
+    CACHE_KEY_MODEL = 'CosinnusPortal'
+    
+    class Meta(BaseGroupMembership.Meta):
+        verbose_name = _('Portal membership')
+        verbose_name_plural = _('Portal memberships')
+        
     
 @receiver(post_delete)
 def clear_cache_on_group_delete(sender, instance, **kwargs):
