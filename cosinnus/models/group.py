@@ -477,6 +477,9 @@ class CosinnusGroup(models.Model):
             from cosinnus.models.tagged import get_tag_object_model
             media_tag = get_tag_object_model()._default_manager.create()
             self.media_tag = media_tag
+        # set portal to current
+        self.portal = CosinnusPortal.get_current()
+        
         super(CosinnusGroup, self).save(*args, **kwargs)
         slugs.append(self.slug)
         self._clear_cache(slug=self.slug)

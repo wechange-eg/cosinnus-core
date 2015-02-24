@@ -8,6 +8,7 @@ from django.contrib.auth.forms import UserCreationForm as DjUserCreationForm,\
 from django.utils.translation import ugettext_lazy as _
 
 from captcha.fields import ReCaptchaField
+from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
 
 
 class UserKwargModelFormMixin(object):
@@ -59,6 +60,12 @@ class UserCreationForm(DjUserCreationForm):
         user = super(UserCreationForm, self).save(commit=True)
         user.username = str(user.id)
         user.save()
+        
+        # create a portal membership for the new user for the current portal
+        CosinnusPortalMembership.objects.get_or_create(group=CosinnusPortal.get_current(), user=user, defaults={
+            'status': 1,
+        })
+        
         return user
 
 
