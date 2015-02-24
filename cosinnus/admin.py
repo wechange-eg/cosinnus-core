@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
-    CosinnusSociety, CosinnusProject, CosinnusPortal
+    CosinnusSociety, CosinnusProject, CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import AttachedObject
 from cosinnus.models.cms import CosinnusMicropage
@@ -21,6 +21,16 @@ class MembershipAdmin(admin.ModelAdmin):
 admin.site.register(CosinnusGroupMembership, MembershipAdmin)
 
 
+
+class PortalMembershipAdmin(admin.ModelAdmin):
+    list_display = ('group', 'user_email', 'status', 'date',)
+    list_filter = ('group', 'user', 'status',)
+
+admin.site.register(CosinnusPortalMembership, PortalMembershipAdmin)
+
+
+
+""" Unused, because very inefficient with 2000+ users """
 class MembershipInline(admin.StackedInline):
     model = CosinnusGroupMembership
     extra = 0

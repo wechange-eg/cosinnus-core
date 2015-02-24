@@ -420,7 +420,8 @@ class CosinnusGroup(models.Model):
         self._pendings = None
 
     def __str__(self):
-        return self.name
+        # FIXME: better caching for .portal.name
+        return '%s (%s)' % (self.name, self.portal.name)
 
     def save(self, *args, **kwargs):
         created = bool(self.pk is None)
@@ -542,9 +543,6 @@ class CosinnusProject(CosinnusGroup):
         self.type = CosinnusGroup.TYPE_PROJECT
         super(CosinnusProject, self).save(*args, **kwargs)
         
-    def __str__(self):
-        return self.name
-    
     
 class CosinnusSocietyManager(CosinnusGroupManager):
     def get_queryset(self):
@@ -572,9 +570,6 @@ class CosinnusSociety(CosinnusGroup):
         self.type = CosinnusGroup.TYPE_SOCIETY
         super(CosinnusSociety, self).save(*args, **kwargs)
         
-    def __str__(self):
-        return self.name
-    
     
 
 @python_2_unicode_compatible
@@ -650,7 +645,7 @@ class CosinnusGroupMembership(BaseGroupMembership):
 
 class CosinnusPortalMembership(BaseGroupMembership):
     group = models.ForeignKey(CosinnusPortal, related_name='memberships',
-        on_delete=models.CASCADE)
+        on_delete=models.CASCADE, verbose_name=_('Portal'))
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
         related_name='cosinnus_portal_memberships', on_delete=models.CASCADE)
     
