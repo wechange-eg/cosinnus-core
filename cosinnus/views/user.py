@@ -18,6 +18,7 @@ from cosinnus.utils.http import JSONResponse
 from django.contrib import messages
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import BaseTagObject
+from cosinnus.models.group import CosinnusPortal
 
 
 USER_MODEL = get_user_model()
@@ -29,7 +30,10 @@ class UserListView(ListView):
     template_name = 'cosinnus/user/user_list.html'
     
     def get_queryset(self):
-        all_users = super(UserListView, self).get_queryset().exclude(is_active=False)
+        
+        # get all users from this portal only        
+        all_users = super(UserListView, self).get_queryset().exclude(is_active=False).\
+                        filter(id__in=CosinnusPortal.get_current().members)
         
         # save hidden users qs
         self.hidden_users = all_users.exclude(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)

@@ -20,7 +20,7 @@ from cosinnus.core.registries import app_registry
 from cosinnus.forms.group import MembershipForm
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, CosinnusProject,
-    CosinnusSociety)
+    CosinnusSociety, CosinnusPortal)
 from cosinnus.models.serializers.group import GroupSimpleSerializer
 from cosinnus.models.serializers.profile import UserSimpleSerializer
 from cosinnus.utils.compat import atomic
@@ -160,7 +160,10 @@ class GroupDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
         admin_ids = CosinnusGroupMembership.objects.get_admins(group=self.group)
         member_ids = CosinnusGroupMembership.objects.get_members(group=self.group)
         pending_ids = CosinnusGroupMembership.objects.get_pendings(group=self.group)
-        _q = get_user_model()._default_manager.exclude(is_active=False).order_by('first_name', 'last_name') \
+        # get all users from this portal only  
+        _q = get_user_model()._default_manager.exclude(is_active=False) \
+                             .filter(id__in=CosinnusPortal.get_current().members) \
+                             .order_by('first_name', 'last_name') \
                              .select_related('cosinnus_profile')
         admins = _q._clone().filter(id__in=admin_ids)
         members = _q._clone().filter(id__in=member_ids)

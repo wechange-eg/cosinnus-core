@@ -335,6 +335,12 @@ class CosinnusPortal(models.Model):
         app_label = 'cosinnus'
         verbose_name = _('Portal')
         verbose_name_plural = _('Portals')
+        
+    def __init__(self, *args, **kwargs):
+        super(CosinnusPortal, self).__init__(*args, **kwargs)
+        self._admins = None
+        self._members = None
+        self._pendings = None
     
     name = models.CharField(_('Name'), max_length=100,
         validators=[group_name_validator])
@@ -349,19 +355,52 @@ class CosinnusPortal(models.Model):
     site = models.ForeignKey(Site, unique=True, verbose_name=_('Associated Site'))
     
     @classmethod
-    def get_current(self):
+    def get_current(cls):
         """ Cached, returns the current Portal (always the same since dependent on configured Site) """
-        portal = cache.get(self._CURRENT_PORTAL_CACHE_KEY)
+        portal = cache.get(CosinnusPortal._CURRENT_PORTAL_CACHE_KEY)
         if portal is None:
             portal = CosinnusPortal.objects.get(site=settings.SITE_ID)
             # cache indefinetly unless portal changes
-            cache.set(self._CURRENT_PORTAL_CACHE_KEY, portal, 60 * 60 * 24 * 365) 
+            cache.set(CosinnusPortal._CURRENT_PORTAL_CACHE_KEY, portal, 60 * 60 * 24 * 365) 
         return portal
     
     def save(self, *args, **kwargs):
         super(CosinnusPortal, self).save(*args, **kwargs)
         cache.delete(self._CURRENT_PORTAL_CACHE_KEY)
-        
+    
+    @property
+    def admins(self):
+        if self._admins is None:
+            self._admins = CosinnusPortalMembership.objects.get_admins(self.pk)
+        return self._admins
+
+    def is_admin(self, user):
+        """Checks whether the given user is an admin of this group"""
+        uid = isinstance(user, int) and user or user.pk
+        return uid in self.admins
+
+    @property
+    def members(self):
+        if self._members is None:
+            self._members = CosinnusPortalMembership.objects.get_members(self.pk)
+        return self._members
+
+    def is_member(self, user):
+        """Checks whether the given user is a member of this group"""
+        uid = isinstance(user, int) and user or user.pk
+        return uid in self.members
+
+    @property
+    def pendings(self):
+        if self._pendings is None:
+            self._pendings = CosinnusPortalMembership.objects.get_pendings(self.pk)
+        return self._pendings
+
+    def is_pending(self, user):
+        """Checks whether the given user has a pending status on this group"""
+        uid = isinstance(user, int) and user or user.pk
+        return uid in self.pendings
+    
     def _clear_local_cache(self):
         """ Stub, called when memberships change """
         pass
