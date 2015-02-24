@@ -38,7 +38,7 @@ class _CosinnusProjectForm(forms.ModelForm):
     
     def __init__(self, instance, *args, **kwargs):    
         super(_CosinnusProjectForm, self).__init__(instance=instance, *args, **kwargs)
-        self.fields['parent'].queryset = CosinnusSociety.objects.all()
+        self.fields['parent'].queryset = CosinnusSociety.objects.all_in_portal()
 
 class _CosinnusSocietyForm(forms.ModelForm):
     

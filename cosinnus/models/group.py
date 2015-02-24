@@ -216,6 +216,10 @@ class CosinnusGroupManager(models.Manager):
                     return self.get_cached(slugs=slugs)
                 return []  # We rely on the slug and id maps being up to date
         return []
+    
+    def all_in_portal(self):
+        """ Returns all groups within the current portal only """
+        return super(CosinnusGroupManager, self).all().filter(portal=CosinnusPortal.get_current())
 
     def get(self, slug=None):
         return self.get_cached(slugs=slug)
