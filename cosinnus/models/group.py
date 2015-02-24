@@ -124,7 +124,7 @@ class CosinnusGroupManager(models.Manager):
         slugs = cache.get(self._GROUPS_SLUG_CACHE_KEY % self.__class__.__name__)
         if slugs is None:
             # we can only find groups via this function that are in the same portal we run in
-            slugs = OrderedDict(self.filter(portal=CosinnusPortal.objects.get_current_portal()).values_list('slug', 'id').all())
+            slugs = OrderedDict(self.filter(portal=CosinnusPortal.get_current()).values_list('slug', 'id').all())
             pks = OrderedDict((v, k) for k, v in six.iteritems(slugs))
             cache.set(self._GROUPS_SLUG_CACHE_KEY % self.__class__.__name__, slugs,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
@@ -143,7 +143,7 @@ class CosinnusGroupManager(models.Manager):
         pks = cache.get(self._GROUPS_PK_CACHE_KEY % self.__class__.__name__)
         if pks is None:
             # we can only find groups via this function that are in the same portal we run in
-            pks = OrderedDict(self.filter(portal=CosinnusPortal.objects.get_current_portal()).values_list('id', 'slug').all())
+            pks = OrderedDict(self.filter(portal=CosinnusPortal.get_current()).values_list('id', 'slug').all())
             slugs = OrderedDict((v, k) for k, v in six.iteritems(pks))
             cache.set(self._GROUPS_PK_CACHE_KEY % self.__class__.__name__, pks,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
@@ -176,7 +176,7 @@ class CosinnusGroupManager(models.Manager):
                 group = cache.get(self._GROUP_CACHE_KEY % (self.__class__.__name__, slug))
                 if group is None:
                     # we can only find groups via this function that are in the same portal we run in
-                    group = super(CosinnusGroupManager, self).filter(portal=CosinnusPortal.objects.get_current_portal()).get(slug=slug)
+                    group = super(CosinnusGroupManager, self).filter(portal=CosinnusPortal.get_current()).get(slug=slug)
                     cache.set(self._GROUP_CACHE_KEY % (self.__class__.__name__, group.slug), group,
                         settings.COSINNUS_GROUP_CACHE_TIMEOUT)
                 return group
@@ -187,7 +187,7 @@ class CosinnusGroupManager(models.Manager):
                 missing = [key.split('/')[-1] for key in keys if key not in groups]
                 if missing:
                     # we can only find groups via this function that are in the same portal we run in
-                    query = self.get_queryset().filter(portal=CosinnusPortal.objects.get_current_portal(), slug__in=missing)
+                    query = self.get_queryset().filter(portal=CosinnusPortal.get_current(), slug__in=missing)
                     if select_related_media_tag:
                         query = query.select_related('media_tag')
                     
@@ -321,14 +321,11 @@ class CosinnusGroupMembershipManager(models.Manager):
             return self._get_users_for_multiple_groups(gids, _MEMBERSHIP_PENDINGS_KEY, MEMBERSHIP_PENDING)
 
 
-class CosinnusPortalManager(models.Manager):
-    
-    def get_current_portal(self):
-        return CosinnusPortal.objects.get(site=settings.SITE_ID)
-
 
 @python_2_unicode_compatible
 class CosinnusPortal(models.Model):
+    
+    _CURRENT_PORTAL_CACHE_KEY = 'cosinnus/core/portal/current'
     
     class Meta:
         app_label = 'cosinnus'
@@ -347,10 +344,23 @@ class CosinnusPortal(models.Model):
     
     site = models.ForeignKey(Site, unique=True, verbose_name=_('Associated Site'))
     
-    objects = CosinnusPortalManager()
+    @classmethod
+    def get_current(self):
+        """ Cached, returns the current Portal (always the same since dependent on configured Site) """
+        portal = cache.get(self._CURRENT_PORTAL_CACHE_KEY)
+        if portal is None:
+            portal = CosinnusPortal.objects.get(site=settings.SITE_ID)
+            # cache indefinetly unless portal changes
+            cache.set(self._CURRENT_PORTAL_CACHE_KEY, portal, 60 * 60 * 24 * 365) 
+        return portal
     
     def save(self, *args, **kwargs):
         super(CosinnusPortal, self).save(*args, **kwargs)
+        cache.delete(self._CURRENT_PORTAL_CACHE_KEY)
+        
+    def _clear_local_cache(self):
+        """ Stub, called when memberships change """
+        pass
         
     def __str__(self):
         return self.name
