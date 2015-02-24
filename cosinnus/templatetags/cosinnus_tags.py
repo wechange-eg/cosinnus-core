@@ -409,7 +409,7 @@ def cosinnus_user_token(context, token_name, request=None):
     return 'user=%s&token=%s' % (request.user.id, token)
 
 
-def group_aware_url_name(view_name, group_slug):
+def group_aware_url_name(view_name, group_slug, portal_id=None):
     """ Modifies a URL name that points to a URL within a CosinnusGroup so that the URL
         points to the correct sub-url of the type of the CosinnusGroup Model for the given
         group slug.
@@ -419,7 +419,7 @@ def group_aware_url_name(view_name, group_slug):
     # retrieve group type cached
     group_type = cache.get(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, group_slug))
     if group_type is None:
-        group_type = CosinnusGroup.objects.get(slug=group_slug).type
+        group_type = CosinnusGroup.objects.get(slug=group_slug, portal_id=portal_id).type
         cache.set(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, group_slug), group_type,
                   31536000) # 1 year cache
         
@@ -456,10 +456,15 @@ class GroupURLNode(URLNode):
         
         if not isinstance(group_slug, six.string_types):
             raise TemplateSyntaxError("'group_url' tag requires a group kwarg that is a slug! Have you passed one? (You passed: 'group=%s')" % group_slug)
+        try:
+            portal_id = self.kwargs["portal_id"].resolve(context)
+            del self.kwargs["portal_id"]
+        except KeyError:
+            portal_id = None
         
         ignoreErrors = 'ignoreErrors' in self.kwargs and self.kwargs.pop('ignoreErrors').resolve(context) or False
         try:
-            view_name = group_aware_url_name(view_name, group_slug)
+            view_name = group_aware_url_name(view_name, group_slug, portal_id)
             
             self.view_name.var = view_name
             self.view_name.token = "'%s'" % view_name
