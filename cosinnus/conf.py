@@ -135,9 +135,6 @@ class CosinnusConf(AppConf):
     # should empty apps list be displayed at all, or omitted?
     MICROSITE_RENDER_EMPTY_APPS = True
     
-    #: How long an organisation should at most stay in cache until it will be removed
-    ORGANISATION_CACHE_TIMEOUT = 60 * 60 * 24
-
     #: A list of app_names (``'cosinnus_note'`` rather than ``note``) that will
     #: e.g. not be displayed in the cosinnus menu
     HIDE_APPS = set(['cosinnus_message', 'cosinnus_notifications', 'cosinnus_stream'])

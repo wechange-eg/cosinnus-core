@@ -4,12 +4,35 @@ from __future__ import unicode_literals
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
+from django.utils.translation import ugettext_lazy as _
 
-from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
+from cosinnus.models.group import CosinnusGroupMembership,\
     CosinnusSociety, CosinnusProject, CosinnusPortal, CosinnusPortalMembership
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import AttachedObject
 from cosinnus.models.cms import CosinnusMicropage
+
+
+class SingleDeleteActionMixin(object):
+    actions=['really_delete_selected']
+    
+    def get_actions(self, request):
+        actions = super(SingleDeleteActionMixin, self).get_actions(request)
+        del actions['delete_selected']
+        return actions
+    
+    def really_delete_selected(self, request, queryset):
+        for obj in queryset:
+            obj.delete()
+        if queryset.count() == 1:
+            message = _("1 %(object)s was deleted successfully") % \
+                {'object': queryset.model._meta.verbose_name}
+        else:
+            message = _("%(number)d %(objects)s were deleted successfully") %  \
+                {'number': queryset.count(), 'objects': queryset.model._meta.verbose_name_plural}
+        self.message_user(request, message)
+    really_delete_selected.short_description = _("Delete selected entries")
+
 
 
 # group related admin
@@ -44,7 +67,7 @@ class CosinnusGroupAdmin(admin.ModelAdmin):
 admin.site.register(CosinnusGroup, CosinnusGroupAdmin)
 """
 
-class CosinnusProjectAdmin(admin.ModelAdmin):
+class CosinnusProjectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
     list_display = ('name', 'slug', 'portal', 'public',)
     list_filter = ('portal', 'public',)
     prepopulated_fields = {'slug': ('name', )}

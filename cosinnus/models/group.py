@@ -441,7 +441,11 @@ class CosinnusGroup(models.Model):
         if created:
             # send creation signal
             signals.group_object_ceated.send(sender=self, group=self)
-        
+    
+    
+    def delete(self, *args, **kwargs):
+        self._clear_cache(slug=self.slug)
+        super(CosinnusGroup, self).delete(*args, **kwargs)
 
     @property
     def admins(self):
@@ -588,8 +592,6 @@ class BaseGroupMembership(models.Model):
         abstract = True
         app_label = 'cosinnus'
         unique_together = (('user', 'group'),)  
-        verbose_name = _('Base membership')
-        verbose_name_plural = _('Base memberships')  
 
     def __init__(self, *args, **kwargs):
         if not self.CACHE_KEY_MODEL:
