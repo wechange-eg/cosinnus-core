@@ -565,7 +565,12 @@ class CosinnusGroup(models.Model):
         return getattr(self, key)
     
     def get_absolute_url(self):
-        return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.slug})
+        domain = ''
+        if not self.portal_id == CosinnusPortal.get_current().id:
+            # TODO FIXME: cache this!
+            # FIXME: SSL (https://) secure support!
+            domain = '%s%s' % ('http://' or 'https://', self.portal.site.domain)
+        return domain + group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.slug})
     
     @cached_property
     def get_parent_typed(self):
