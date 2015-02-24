@@ -123,7 +123,8 @@ class CosinnusGroupManager(models.Manager):
         """
         slugs = cache.get(self._GROUPS_SLUG_CACHE_KEY % self.__class__.__name__)
         if slugs is None:
-            slugs = OrderedDict(self.values_list('slug', 'id').all())
+            # we can only find groups via this function that are in the same portal we run in
+            slugs = OrderedDict(self.filter(portal=CosinnusPortal.objects.get_current_portal()).values_list('slug', 'id').all())
             pks = OrderedDict((v, k) for k, v in six.iteritems(slugs))
             cache.set(self._GROUPS_SLUG_CACHE_KEY % self.__class__.__name__, slugs,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
@@ -141,7 +142,8 @@ class CosinnusGroupManager(models.Manager):
         """
         pks = cache.get(self._GROUPS_PK_CACHE_KEY % self.__class__.__name__)
         if pks is None:
-            pks = OrderedDict(self.values_list('id', 'slug').all())
+            # we can only find groups via this function that are in the same portal we run in
+            pks = OrderedDict(self.filter(portal=CosinnusPortal.objects.get_current_portal()).values_list('id', 'slug').all())
             slugs = OrderedDict((v, k) for k, v in six.iteritems(pks))
             cache.set(self._GROUPS_PK_CACHE_KEY % self.__class__.__name__, pks,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
