@@ -35,16 +35,13 @@ admin.site.register(CosinnusGroup, CosinnusGroupAdmin)
 """
 
 class CosinnusProjectAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug', 'public',)
-    list_filter = ('public',)
+    list_display = ('name', 'slug', 'portal', 'public',)
+    list_filter = ('portal', 'public',)
     prepopulated_fields = {'slug': ('name', )}
 
 admin.site.register(CosinnusProject, CosinnusProjectAdmin)
 
-class CosinnusSocietyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug', 'public',)
-    list_filter = ('public',)
-    prepopulated_fields = {'slug': ('name', )}
+class CosinnusSocietyAdmin(CosinnusProjectAdmin):
     
     def get_form(self, request, obj=None, **kwargs):
         self.exclude = ("parent", )
