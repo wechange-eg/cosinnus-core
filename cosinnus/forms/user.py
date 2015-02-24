@@ -7,6 +7,8 @@ from django.contrib.auth.forms import UserCreationForm as DjUserCreationForm,\
     AuthenticationForm
 from django.utils.translation import ugettext_lazy as _
 
+from cosinnus.conf import settings
+
 from captcha.fields import ReCaptchaField
 from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
 
@@ -38,8 +40,10 @@ class UserCreationForm(DjUserCreationForm):
         )
     
     email = forms.EmailField(_('email address'), required=True) 
-    first_name = forms.CharField(_('first name'), required=True)   
-    captcha = ReCaptchaField(attrs={'theme': 'clean'})
+    first_name = forms.CharField(_('first name'), required=True)  
+    
+    if not settings.DEBUG: 
+        captcha = ReCaptchaField(attrs={'theme': 'clean'}, required=settings.DEBUG == False)
 
     
     def is_valid(self):
