@@ -551,6 +551,11 @@ class CosinnusProject(CosinnusGroup):
         self.type = CosinnusGroup.TYPE_PROJECT
         super(CosinnusProject, self).save(*args, **kwargs)
         
+    def __str__(self):
+        # FIXME: better caching for .portal.name
+        return '%s (%s)' % (self.name, self.portal.name)
+
+        
     
 class CosinnusSocietyManager(CosinnusGroupManager):
     def get_queryset(self):
@@ -577,7 +582,11 @@ class CosinnusSociety(CosinnusGroup):
     def save(self, *args, **kwargs):
         self.type = CosinnusGroup.TYPE_SOCIETY
         super(CosinnusSociety, self).save(*args, **kwargs)
-        
+    
+    def __str__(self):
+        # FIXME: better caching for .portal.name
+        return '%s (%s)' % (self.name, self.portal.name)
+
     
 
 @python_2_unicode_compatible
