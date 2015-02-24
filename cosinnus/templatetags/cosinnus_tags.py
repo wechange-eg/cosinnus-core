@@ -18,7 +18,7 @@ from django.utils.translation import ugettext_lazy as _
 from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry, attached_object_registry
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupManager,\
-    CosinnusSociety, CosinnusProject
+    CosinnusSociety, CosinnusProject, CosinnusPortal
 from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
     check_group_create_objects_access, check_object_read_access, get_user_token)
@@ -417,10 +417,10 @@ def group_aware_url_name(view_name, group_slug):
         @return: A modified URL view name
     """
     # retrieve group type cached
-    group_type = cache.get(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % group_slug)
+    group_type = cache.get(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, group_slug))
     if group_type is None:
         group_type = CosinnusGroup.objects.get(slug=group_slug).type
-        cache.set(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % group_slug, group_type,
+        cache.set(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, group_slug), group_type,
                   31536000) # 1 year cache
         
     # retrieve that type's prefix and add to URL viewname
