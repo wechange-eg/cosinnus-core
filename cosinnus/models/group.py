@@ -558,6 +558,9 @@ class CosinnusGroup(models.Model):
     def avatar_url(self):
         return self.avatar.url if self.avatar else None
     
+    def is_foreign_portal(self):
+        return CosinnusPortal.get_current().id != self.portal_id
+    
     def media_tag_object(self):
         key = '_media_tag_cache'
         if not hasattr(self, key):

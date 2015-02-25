@@ -10,8 +10,8 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="{% if user.is_authenticated %}{% url 'cosinnus:user-dashboard' %}{% else %}/{% endif %}">
-                <!-- TODO: Logo -->
-                <i class="fa fa-home"></i>
+                <!-- Logo -->
+                {% include 'cosinnus/brand.html' %}
             </a>
         </div><!-- navbar-header -->
         <div class="navbar-collapse collapse">
