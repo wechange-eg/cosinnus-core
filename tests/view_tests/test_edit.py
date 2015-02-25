@@ -26,7 +26,7 @@ class EditGroupTest(TestCase):
             username=self.credential, email=None, password=self.credential)
         self.client.login(username=self.credential, password=self.credential)
         self.url = group_aware_reverse('cosinnus:group-edit',
-                           kwargs={'group': self.group.slug})
+                           kwargs={'group': self.group})
 
     def test_get_not_logged_in(self):
         """

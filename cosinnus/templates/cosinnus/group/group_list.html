@@ -63,12 +63,12 @@
     
 	    {% for group, members, pendings, admins in rows %}
 	        
-	        {% group_url 'cosinnus:group-dashboard' group=group.slug as group_url %}
+	        {% group_url 'cosinnus:group-dashboard' group=group as group_url %}
 	        {% comment %}  Microsite is not being linked to for now
 	        {% if user.pk in members or user.pk in admins or group.public %}
-	            {% group_url 'cosinnus:group-dashboard' group=group.slug as group_url %}
+	            {% group_url 'cosinnus:group-dashboard' group=group as group_url %}
 	        {% else %}
-	            {% group_url 'cosinnus:group-microsite' group=group.slug as group_url %}
+	            {% group_url 'cosinnus:group-microsite' group=group as group_url %}
 	        {% endif %}
 	        {% endcomment %}
 	        <div class="fadedown {% if not forloop.last %}regular-space{% endif %}">
@@ -139,7 +139,7 @@
 		            {% endif %}
 	                
 	                {% if user.is_authenticated and user.pk in admins %}
-		                <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:group-edit' group=group.slug %}">
+		                <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:group-edit' group=group %}">
 		                    <ul class="media-list">
 		                        <li class="media">
 		                            <a class="pull-left" href="#">
@@ -153,7 +153,7 @@
 		                </button>
 	                {% endif %}
 	                
-	                <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:group-detail' group=group.slug %}">
+	                <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:group-detail' group=group %}">
 	                    <ul class="media-list">
 	                        <li class="media">
 	                            <a class="pull-left" href="#">
@@ -173,15 +173,15 @@
                 {% if user.pk in members %}
                     {% captureas label %}{% blocktrans with title=group.name %}Do you really want to leave group „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
                     {% captureas title %}{% trans "Leave" %}{% endcaptureas %}
-                    {% captureas action %}{% group_url 'cosinnus:group-user-leave' group=group.slug %}{% endcaptureas %}
+                    {% captureas action %}{% group_url 'cosinnus:group-user-leave' group=group %}{% endcaptureas %}
                 {% elif user.pk in pendings %}
                     {% captureas label %}{% blocktrans with title=group.name %}Do you really want to withdraw your join request to group „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
                     {% captureas title %}{% trans "Withdraw Join Request" %}{% endcaptureas %}
-                    {% captureas action %}{% group_url 'cosinnus:group-user-withdraw' group=group.slug %}{% endcaptureas %}
+                    {% captureas action %}{% group_url 'cosinnus:group-user-withdraw' group=group %}{% endcaptureas %}
                 {% else %}
                     {% captureas label %}{% blocktrans with title=group.name %}Do you wish to request to join group „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
                     {% captureas title %}{% trans "Join" %}{% endcaptureas %}
-                    {% captureas action %}{% group_url 'cosinnus:group-user-join' group=group.slug %}{% endcaptureas %}
+                    {% captureas action %}{% group_url 'cosinnus:group-user-join' group=group %}{% endcaptureas %}
                 {% endif %}
                 
                 {% include "cosinnus/modal_box.html" with id=modal_id label=label title=title form_action=action %}

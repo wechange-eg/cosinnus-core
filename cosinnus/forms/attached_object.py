@@ -53,7 +53,7 @@ class FormAttachable(BaseTaggableObjectForm):
             self.fields['attached_objects'] = AttachableObjectSelect2MultipleChoiceField(
                 label=_("Attachments"), 
                 help_text=_("Type the title and/or type of attachment"), 
-                data_url=group_aware_reverse('cosinnus:attached_object_select2_view', kwargs={'group': self.group.slug, 'model':source_model_id}),
+                data_url=group_aware_reverse('cosinnus:attached_object_select2_view', kwargs={'group': self.group, 'model':source_model_id}),
                 required=False
             )
             # we need to cheat our way around select2's annoying way of clearing initial data fields

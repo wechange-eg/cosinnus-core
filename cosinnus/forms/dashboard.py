@@ -65,7 +65,7 @@ class InfoWidgetForm(DashboardWidgetForm):
         self.fields['images'] = AttachableWidgetSelect2Field(
             label=_("Attachments"), 
             help_text=_("Type the title and/or type of attachment"), 
-            data_url=group_aware_reverse('cosinnus:attached_object_select2_view', kwargs={'group': group.slug, 'model':'cosinnus_file.FileEntry'}) + '?model_as_target=1',
+            data_url=group_aware_reverse('cosinnus:attached_object_select2_view', kwargs={'group': group, 'model':'cosinnus_file.FileEntry'}) + '?model_as_target=1',
             required=False,
             initial = kwargs.get('initial', {}).pop('images', '')
         )

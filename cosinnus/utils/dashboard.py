@@ -144,7 +144,7 @@ class DashboardWidget(object):
         
         if self.config.group:
             return group_aware_reverse('cosinnus:%s:index' % self.app_name,
-                           kwargs={'group': self.config.group.slug})
+                           kwargs={'group': self.config.group})
         # return '#' as default url to prevent firefox dropping the <a> tag content
         return '#'
     

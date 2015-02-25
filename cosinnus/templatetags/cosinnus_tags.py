@@ -186,7 +186,7 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
         for app, name, label in app_registry.items():
             if app in settings.COSINNUS_HIDE_APPS:
                 continue
-            url = group_aware_reverse('cosinnus:%s:index' % name, kwargs={'group': group.slug})
+            url = group_aware_reverse('cosinnus:%s:index' % name, kwargs={'group': group})
             if app == current_app:
                 active_app = app
                 active_app_name = name
@@ -471,7 +471,7 @@ class GroupURLNode(URLNode):
             self.kwargs['group'].var.var += '.slug'
             self.kwargs['group'].var.lookups = list(self.kwargs['group'].var.lookups) + ['slug']
         elif not isinstance(group_arg, six.string_types):
-            raise TemplateSyntaxError("'group_url' tag requires a group kwarg that is a slug! Have you passed one? (You passed: 'group=%s')" % group_arg)
+            raise TemplateSyntaxError("'group_url' tag requires a group kwarg that is a group or a slug! Have you passed one? (You passed: 'group=%s')" % group_arg)
         else:
             group_slug = group_arg
             

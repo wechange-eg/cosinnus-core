@@ -28,7 +28,7 @@ class AddContainerView(RequireWriteMixin, FilterGroupMixin,
 
     def get_success_url(self):
         return group_aware_reverse('cosinnus:%s:list' % self.appname,
-                       kwargs={'group': self.group.slug})
+                       kwargs={'group': self.group})
 
     def get_form(self, form_class):
         """Override get_form to use model-specific form"""
@@ -59,5 +59,5 @@ class AddContainerView(RequireWriteMixin, FilterGroupMixin,
     def get_context_data(self, *args, **kwargs):
         context = super(AddContainerView, self).get_context_data(*args, **kwargs)
         context['cancel_url'] = group_aware_reverse('cosinnus:%s:list' % self.appname,
-            kwargs={'group': self.group.slug})
+            kwargs={'group': self.group})
         return context

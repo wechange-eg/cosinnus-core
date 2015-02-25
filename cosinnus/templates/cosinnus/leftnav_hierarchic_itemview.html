@@ -3,10 +3,10 @@
 {% captureas cosinnus_app_list_url %}cosinnus:{{ COSINNUS_CURRENT_APP }}:list{% endcaptureas %}
 
 {% if object.path == '/' %}
-    {% captureas href %}{% group_url cosinnus_app_list_url group=group.slug %}{% endcaptureas %}
+    {% captureas href %}{% group_url cosinnus_app_list_url group=group %}{% endcaptureas %}
     {% captureas label %}{% trans "Back" %}{% endcaptureas %}
 {% else %}
-    {% captureas href %}{% group_url cosinnus_app_list_url group=group.slug slug=object.container.slug %}{% endcaptureas %}
+    {% captureas href %}{% group_url cosinnus_app_list_url group=group slug=object.container.slug %}{% endcaptureas %}
     {% captureas label %}{% trans "Back to" %} „{{ object.container.title }}“ {% endcaptureas %}
 {% endif %}
 {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-reply" label=label href=href  %}

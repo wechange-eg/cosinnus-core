@@ -36,7 +36,7 @@
     
     <div class="dashboard-header">
         <div class="dashboard-header-image">
-            <a href="{% group_url 'cosinnus:group-detail' group=group.slug %}">
+            <a href="{% group_url 'cosinnus:group-detail' group=group %}">
                 {% include "cosinnus/group/group_avatar_image.html" with group=group %}
             </a>
         </div>
@@ -48,7 +48,7 @@
                     
                         {% if "etherpad" in object_counts %}
                             <div class="dashboard-header-link app-etherpad">
-                                <a href="{% group_url 'cosinnus:etherpad:list' group=group.slug %}">
+                                <a href="{% group_url 'cosinnus:etherpad:list' group=group %}">
                                     <i class="fa fa-file-text-o"></i>
                                     <span>{{ object_counts.etherpad }}</span>
                                     {% if object_counts.etherpad == 1 %}{% trans "Etherpad" %}{% else %}{% trans "Etherpads" %}{% endif %}
@@ -57,7 +57,7 @@
                         {% endif %}
                         {% if "file" in object_counts %}
                             <div class="dashboard-header-link app-files">
-                                <a href="{% group_url 'cosinnus:file:list' group=group.slug %}">
+                                <a href="{% group_url 'cosinnus:file:list' group=group %}">
                                     <i class="fa fa-file"></i>
                                     <span>{{ object_counts.file }}</span>
                                     {% if object_counts.file == 1 %}{% trans "File" %}{% else %}{% trans "Files" %}{% endif %}
@@ -66,7 +66,7 @@
                         {% endif %}
                         {% if "event" in object_counts %}
                             <div class="dashboard-header-link app-calendar">
-                                <a href="{% group_url 'cosinnus:event:list' group=group.slug %}">
+                                <a href="{% group_url 'cosinnus:event:list' group=group %}">
                                     <i class="fa fa-calendar"></i>
                                     <span>{{ object_counts.event }}</span>
                                     {% if object_counts.event == 1 %}{% trans "Event" context "Calendar" %}{% else %}{% trans "Events" context "Calendar" %}{% endif %}
@@ -75,7 +75,7 @@
                         {% endif %}
                         {% if "todo" in object_counts %}
                             <div class="dashboard-header-link app-todos">
-                                <a href="{% group_url 'cosinnus:todo:list' group=group.slug %}">
+                                <a href="{% group_url 'cosinnus:todo:list' group=group %}">
                                     <i class="fa fa-tasks"></i>
                                     <span>{{ object_counts.todo }}</span>
                                     {% if object_counts.todo == 1 %}{% trans "Todo" %}{% else %}{% trans "Todos" %}{% endif %}
@@ -84,7 +84,7 @@
                         {% endif %}
                         {% if "note" in object_counts %}
                             <div class="dashboard-header-link app-main">
-                                <a href="{% group_url 'cosinnus:note:list' group=group.slug %}">
+                                <a href="{% group_url 'cosinnus:note:list' group=group %}">
                                     <i class="fa fa-book"></i>
                                     <span>{{ object_counts.note }}</span>
                                     {% if object_counts.todo == 1 %}{% trans "News" %}{% else %}{% trans "News" %}{% endif %}
@@ -107,7 +107,7 @@
                         </div>
                         {% captureas label %}{% blocktrans with title=group.name %}Do you really want to withdraw your join request to group „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
                         {% captureas title %}{% trans "Withdraw Join Request" %}{% endcaptureas %}
-                        {% captureas action %}{% group_url 'cosinnus:group-user-withdraw' group=group.slug %}{% endcaptureas %}
+                        {% captureas action %}{% group_url 'cosinnus:group-user-withdraw' group=group %}{% endcaptureas %}
                         {% include "cosinnus/modal_box.html" with id="join_withdraw_modal" label=label title=title form_action=action %}
                     {% else %}
                         <div class="dashboard-header-link app-main" data-toggle="modal" data-target="#join_withdraw_modal">
@@ -119,7 +119,7 @@
                         </div>
                         {% captureas label %}{% blocktrans with title=group.name %}Do you wish to request to join „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
                         {% captureas title %}{% trans "Join" %}{% endcaptureas %}
-                        {% captureas action %}{% group_url 'cosinnus:group-user-join' group=group.slug %}{% endcaptureas %}
+                        {% captureas action %}{% group_url 'cosinnus:group-user-join' group=group %}{% endcaptureas %}
                         
                         {% include "cosinnus/modal_box.html" with id="join_withdraw_modal" label=label title=title form_action=action %}
                     {% endif %}

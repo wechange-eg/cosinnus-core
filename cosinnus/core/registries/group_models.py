@@ -38,7 +38,7 @@ class GroupModelRegistry(DictBaseRegistry):
             - (will lead to http://localhost:8000/projects/)
         
         To point to a page within any CosinnusGroup, no matter its type, use the cosinnus_tag 'group_url':
-            - {% group_url 'cosinnus:group-dashboard' group=group.slug as group_url %}
+            - {% group_url 'cosinnus:group-dashboard' group=group as group_url %}
             - will lead to either http://localhost:8000/group/<group_slug>/microsite/ or
                 http://localhost:8000/project/<group_slug>/microsite/, depending on which type of group
                 the group with the passed slug is.

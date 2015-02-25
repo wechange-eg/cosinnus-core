@@ -12,7 +12,9 @@ def group_aware_reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=N
     """ CosinnusGroup.type aware, and Portal aware function that returns reverse URLs pointing
         to the correct Portal domain and the correct group type URL (society, project).
         
-        To use its Portal-awareness, you MUST pass a group-object to kwargs['group'], not a slug!
+        WARNING:
+        You MUST pass a group-object to kwargs['group'], not a slug, 
+            if you want to use the function's Portal-awareness!
      """
     domain = ''
     if 'group' in kwargs:

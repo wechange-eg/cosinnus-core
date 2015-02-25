@@ -4,18 +4,18 @@
 
 {% if current_folder and current_folder.path != '/' %}
     {% if current_folder.container and current_folder.container.path != '/' %}
-        {% captureas href %}{% group_url cosinnus_app_list_url group=group.slug slug=current_folder.container.slug %}{% add_current_params %}{% endcaptureas %}
+        {% captureas href %}{% group_url cosinnus_app_list_url group=group slug=current_folder.container.slug %}{% add_current_params %}{% endcaptureas %}
         {% captureas label %}{% trans "Back to" %} {{ current_folder.container.title }}{% endcaptureas %}
         {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-reply" label=label href=href  %}
     {% else %}
-	    {% captureas href %}{% group_url cosinnus_app_list_url group=group.slug %}{% add_current_params %}{% endcaptureas %}
+	    {% captureas href %}{% group_url cosinnus_app_list_url group=group %}{% add_current_params %}{% endcaptureas %}
 	    {% captureas label %}{% trans "Back to" %} {% trans COSINNUS_CURRENT_APP context "the_app" %}{% endcaptureas %}
 	    {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-reply" label=label href=href  %}
     {% endif %}
 {% endif %}
 
 {% for folder in folders %}
-    {% captureas href %}{% group_url cosinnus_app_list_url group=group.slug slug=folder.container_object.slug %}{% add_current_params %}{% endcaptureas %}
+    {% captureas href %}{% group_url cosinnus_app_list_url group=group slug=folder.container_object.slug %}{% add_current_params %}{% endcaptureas %}
     {% captureas label %}{{ folder.container_object.title }}{% endcaptureas %}
     {% captureas button_class %}{% if forloop.last %}regular-space{% else %}fine-space{% endif %}{% endcaptureas %}
     {% if not is_deep_hierarchy or is_deep_hierarchy == False %}
