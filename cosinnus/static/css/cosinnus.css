@@ -515,6 +515,10 @@ label {
   cursor: pointer;
 }
 
+div[href] {
+  cursor: pointer; 
+}
+
 /* put a class like .app-documents, .app-todos on areas that contain content in app colors.
 	On usual pages it has to be set only once in a global element.
 
@@ -1533,6 +1537,10 @@ ul.errorlist li:before {
 
 .indented {
   padding-left: 40px;
+}
+
+.extra-indented {
+  padding-left: 50px;
 }
 
 .underlined {
@@ -2827,5 +2835,9 @@ div.dashboard-appwidget:last-child {
     text-decoration: none;
 }
 
-
-
+.portal-inlink {
+    margin-left: 0px !important;
+}
+a.portal-inlink:hover img {
+    background-color: rgba(255, 255, 255, 0.5);
+}

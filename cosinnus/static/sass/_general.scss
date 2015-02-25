@@ -279,6 +279,9 @@ ul.errorlist {
 .indented {
 	padding-left: 40px;
 }
+.extra-indented {
+  padding-left: 50px;
+}
 .underlined {
 	text-decoration: underline !important;
 }
@@ -320,4 +323,11 @@ textarea, input.form-control {
 }
 .well-document a:hover {
     text-decoration: none;
+}
+
+.portal-inlink {
+    margin-left: 0px !important;
+}
+a.portal-inlink:hover img {
+    background-color: rgba(255, 255, 255, 0.5);
 }

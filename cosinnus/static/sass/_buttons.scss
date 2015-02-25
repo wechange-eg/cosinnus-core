@@ -154,6 +154,9 @@
 .pull-left:not([href="#"]) {
 	cursor: pointer;
 }
+div[href] {
+  cursor: pointer; 
+}
 
 /* put a class like .app-documents, .app-todos on areas that contain content in app colors.
 	On usual pages it has to be set only once in a global element.

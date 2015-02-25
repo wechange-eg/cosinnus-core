@@ -1,2 +1,7 @@
-<i class="fa fa-users"></i>
-{{ group.name }}{% if group.is_foreign_portal %} <i title="{{ group.portal.name }}">{% include 'cosinnus/brand.html' with extra_style="width:18px;" %}</i>{% endif %}
+<a href="{{ group.get_absolute_url }}">
+	<i class="fa fa-users"></i>
+	{{ group.name }}
+</a>
+{% if group.is_foreign_portal %} 
+    <a class="portal-inlink" href="http://{% if request.is_secure %}s{% endif %}{{ group.portal.site.domain }}" target="_blank" title="{{ group.portal.name }}">{% include 'cosinnus/brand.html' with extra_style="width:20px;" %}</a>
+{% endif %}
