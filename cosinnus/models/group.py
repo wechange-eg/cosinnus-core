@@ -23,7 +23,7 @@ from cosinnus.utils.functions import unique_aware_slugify
 from cosinnus.utils.files import get_group_avatar_filename
 from django.core.urlresolvers import reverse
 from django.utils.functional import cached_property
-from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
 from cosinnus.core import signals
 from django.db.models.signals import post_delete
 from django.dispatch.dispatcher import receiver
@@ -568,12 +568,7 @@ class CosinnusGroup(models.Model):
         return getattr(self, key)
     
     def get_absolute_url(self):
-        domain = ''
-        if not self.portal_id == CosinnusPortal.get_current().id:
-            # TODO FIXME: cache this!
-            # FIXME: SSL (https://) secure support!
-            domain = '%s%s' % ('http://' or 'https://', self.portal.site.domain)
-        return domain + group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.slug})
+        return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self})
     
     @cached_property
     def get_parent_typed(self):
