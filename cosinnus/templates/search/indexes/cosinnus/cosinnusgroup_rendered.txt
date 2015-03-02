@@ -1,4 +1,5 @@
+% load static cosinnus_tags %}
 <div class="group">
-  <h2><a href="{% url 'cosinnus:group-dashboard' group=object.slug %}">{{ object.name }}</a></h2>
+  <h2><a href="{% group_url 'cosinnus:group-dashboard' group=object %}">{{ object.name }}</a></h2>
   {% include "search/indexes/cosinnus/_media_tag_rendered.txt" %}
 </div>
