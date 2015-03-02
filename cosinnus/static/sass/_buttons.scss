@@ -155,7 +155,7 @@
 	cursor: pointer;
 }
 div[href] {
-  cursor: pointer; 
+  cursor: pointer !important; 
 }
 
 /* put a class like .app-documents, .app-todos on areas that contain content in app colors.
