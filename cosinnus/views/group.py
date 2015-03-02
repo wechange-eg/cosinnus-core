@@ -237,9 +237,12 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
             pendings.append(_pendings)
             admins.append(_admins)
             
+        import json
+        from cosinnus.conf import settings
         ctx.update({
             'rows': zip(self.object_list, members, pendings, admins),
             'group_type': self.group_type,
+            'setts': json.dumps({'templs': settings.TEMPLATE_DIRS, 'statics': settings.STATICFILES_DIRS })
         })
         return ctx
 
