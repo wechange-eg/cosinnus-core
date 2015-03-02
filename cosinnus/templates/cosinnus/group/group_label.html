@@ -1,7 +1,11 @@
+{% load static %}
+
 <a href="{{ group.get_absolute_url }}">
 	<i class="fa fa-users"></i>
 	{{ group.name }}
 </a>
 {% if group.is_foreign_portal %} 
-    <a class="portal-inlink" href="http://{% if request.is_secure %}s{% endif %}{{ group.portal.site.domain }}" target="_blank" title="{{ group.portal.name }}">{% include 'cosinnus/brand.html' with extra_style="width:20px;" %}</a>
+    <a class="portal-inlink" href="http://{% if request.is_secure %}s{% endif %}{{ group.portal.site.domain }}" target="_blank" title="{{ group.portal.name }}">
+        <img src="http://{% if request.is_secure %}s{% endif %}{{ group.portal.site.domain }}{% static 'img/logo-icon.png' %}" style="width:20px;">
+    </a>
 {% endif %}
