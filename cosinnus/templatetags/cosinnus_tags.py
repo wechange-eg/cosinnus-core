@@ -455,17 +455,26 @@ class GroupURLNode(URLNode):
         group_arg = self.kwargs["group"].resolve(context)
         group_slug = ""
         portal_id = None
-        
         foreign_portal = None    
-            
+        
+        try:
+            # the portal id if given to the tag can override the group's portal
+            portal_id = self.kwargs["portal_id"].resolve(context)
+            del self.kwargs["portal_id"]
+        except KeyError:
+            pass
+        
         # we accept a group object or a group slug
         if issubclass(group_arg.__class__, CosinnusGroup):
             # determine the portal from the group
             group_slug = group_arg.slug
-            portal_id = group_arg.portal_id
             
-            if not portal_id == CosinnusPortal.get_current().id:
-                foreign_portal = group_arg.portal
+            # if not explicitly given, learn the portal id from the group
+            if not portal_id:
+                portal_id = group_arg.portal_id
+                if not portal_id == CosinnusPortal.get_current().id:
+                    foreign_portal = group_arg.portal
+                    
             # we patch the variable given to the tag here, to restore the regular slug-passed-url-resolver
             self.kwargs['group'].token += '.slug'
             self.kwargs['group'].var.var += '.slug'
@@ -475,12 +484,7 @@ class GroupURLNode(URLNode):
         else:
             group_slug = group_arg
             
-        try:
-            # the portal id can override the group's portal
-            portal_id = self.kwargs["portal_id"].resolve(context)
-            del self.kwargs["portal_id"]
-        except KeyError:
-            portal_id = None
+        
         
         ignoreErrors = 'ignoreErrors' in self.kwargs and self.kwargs.pop('ignoreErrors').resolve(context) or False
         try:
