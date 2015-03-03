@@ -39,6 +39,13 @@ from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.models.tagged import BaseTagObject
 
 
+class SamePortalGroupMixin(object):
+
+    def get_queryset(self):
+        """
+        Filter the queryset for this portal only!
+        """
+        return super(SamePortalGroupMixin, self).get_queryset().filter(portal=CosinnusPortal.get_current())
 
 class CosinnusGroupFormMixin(object):
     
@@ -126,7 +133,7 @@ group_create = GroupCreateView.as_view()
 group_create_api = GroupCreateView.as_view(is_ajax_request_url=True)
 
 
-class GroupDeleteView(AjaxableFormMixin, RequireAdminMixin, DeleteView):
+class GroupDeleteView(SamePortalGroupMixin, AjaxableFormMixin, RequireAdminMixin, DeleteView):
 
     model = CosinnusGroup
     slug_url_kwarg = 'group'
@@ -146,7 +153,7 @@ group_delete = GroupDeleteView.as_view()
 group_delete_api = GroupDeleteView.as_view(is_ajax_request_url=True)
 
 
-class GroupDetailView(DetailAjaxableResponseMixin, RequireReadMixin,
+class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, RequireReadMixin,
                       DetailView):
 
     template_name = 'cosinnus/group/group_detail.html'
@@ -264,7 +271,7 @@ class GroupMapListView(GroupListView):
 
 group_list_map = GroupMapListView.as_view()
 
-class GroupUpdateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
+class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
                       RequireAdminMixin, UpdateView):
 
     #form_class = 
@@ -314,6 +321,8 @@ group_user_list = GroupUserListView.as_view()
 group_user_list_api = GroupUserListView.as_view(is_ajax_request_url=True)
 
 
+
+
 class GroupConfirmMixin(object):
 
     model = CosinnusGroup
@@ -360,7 +369,7 @@ class GroupConfirmMixin(object):
         return self.confirm_title % {'group_name': self.object.name, 'group_type':self.object._meta.verbose_name}
 
 
-class GroupUserJoinView(GroupConfirmMixin, DetailView):
+class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
 
     confirm_label = _('Join')
     confirm_question = _('Do you want to join the %(group_type)s “%(group_name)s”?')
@@ -394,7 +403,7 @@ class GroupUserJoinView(GroupConfirmMixin, DetailView):
 group_user_join = GroupUserJoinView.as_view()
 
 
-class GroupUserLeaveView(GroupConfirmMixin, DetailView):
+class GroupUserLeaveView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
 
     confirm_label = _('Leave')
     confirm_question = _('Do you want to leave the %(group_type)s “%(group_name)s”?')
@@ -438,7 +447,7 @@ class GroupUserLeaveView(GroupConfirmMixin, DetailView):
 group_user_leave = GroupUserLeaveView.as_view()
 
 
-class GroupUserWithdrawView(GroupConfirmMixin, DetailView):
+class GroupUserWithdrawView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
 
     confirm_label = _('Withdraw')
     confirm_question = _('Do you want to withdraw your join request to the %(group_type)s “%(group_name)s”?')
@@ -529,6 +538,7 @@ class GroupUserAddView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
         return context
 
     def get_user_qs(self):
+        print ">>> slegroup", self.group.id
         uids = self.model.objects.get_members(group=self.group)
         return get_user_model()._default_manager.exclude(id__in=uids)
 
@@ -615,7 +625,7 @@ group_user_delete = GroupUserDeleteView.as_view()
 group_user_delete_api = GroupUserDeleteView.as_view(is_ajax_request_url=True)
 
 
-class GroupExportView(RequireAdminMixin, TemplateView):
+class GroupExportView(SamePortalGroupMixin, RequireAdminMixin, TemplateView):
 
     template_name = 'cosinnus/group/group_export.html'
 
