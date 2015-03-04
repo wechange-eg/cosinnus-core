@@ -370,7 +370,7 @@ class CosinnusPortal(models.Model):
         """ Cached, returns the current Portal (always the same since dependent on configured Site) """
         portal = cache.get(CosinnusPortal._CURRENT_PORTAL_CACHE_KEY)
         if portal is None:
-            portal = CosinnusPortal.objects.get(site=settings.SITE_ID)
+            portal = CosinnusPortal.objects.select_related('site').get(site=settings.SITE_ID)
             # cache indefinetly unless portal changes
             cache.set(CosinnusPortal._CURRENT_PORTAL_CACHE_KEY, portal, 60 * 60 * 24 * 365) 
         return portal

@@ -8,9 +8,14 @@ from django.db.models.loading import get_model
         
 _group_aware_url_name = object() # late import because we cannot reference CosinnusGroup models here yet
 _CosinnusGroup = None
+_CosinnusPortal = None
 def group_aware_reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=None, current_app=None):
     """ CosinnusGroup.type aware, and Portal aware function that returns reverse URLs pointing
         to the correct Portal domain and the correct group type URL (society, project).
+        
+        NOTE:
+        This will return a full URL, including protocol:
+            ex.: http://wachstumswende.de/group/Blog/note/list/
         
         WARNING:
         You MUST pass a group-object to kwargs['group'], not a slug, 
@@ -33,6 +38,10 @@ def group_aware_reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=N
             kwargs['group'] = group.slug
         
         viewname = _group_aware_url_name(viewname, kwargs['group'], portal_id=portal_id)
+    else:
+        if _CosinnusPortal is None: 
+            _CosinnusPortal = get_model('cosinnus', 'CosinnusPortal')
+        domain = get_domain_for_portal(_CosinnusPortal.get_current())
     
     return domain + reverse(viewname, urlconf, args, kwargs, prefix, current_app)
         
