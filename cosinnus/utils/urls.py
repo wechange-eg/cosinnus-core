@@ -39,6 +39,7 @@ def group_aware_reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=N
         
         viewname = _group_aware_url_name(viewname, kwargs['group'], portal_id=portal_id)
     else:
+        global _CosinnusPortal
         if _CosinnusPortal is None: 
             _CosinnusPortal = get_model('cosinnus', 'CosinnusPortal')
         domain = get_domain_for_portal(_CosinnusPortal.get_current())
