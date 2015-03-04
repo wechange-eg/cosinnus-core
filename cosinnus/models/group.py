@@ -605,8 +605,9 @@ class CosinnusProject(CosinnusGroup):
     
     objects = CosinnusProjectManager()
     
-    def save(self, *args, **kwargs):
-        self.type = CosinnusGroup.TYPE_PROJECT
+    def save(self, allow_type_change=False, *args, **kwargs):
+        if not allow_type_change:
+            self.type = CosinnusGroup.TYPE_PROJECT
         super(CosinnusProject, self).save(*args, **kwargs)
         
     def __str__(self):
@@ -637,8 +638,9 @@ class CosinnusSociety(CosinnusGroup):
     
     objects = CosinnusSocietyManager()
     
-    def save(self, *args, **kwargs):
-        self.type = CosinnusGroup.TYPE_SOCIETY
+    def save(self, allow_type_change=False, *args, **kwargs):
+        if not allow_type_change:
+            self.type = CosinnusGroup.TYPE_SOCIETY
         super(CosinnusSociety, self).save(*args, **kwargs)
     
     def __str__(self):
