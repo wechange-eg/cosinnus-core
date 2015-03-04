@@ -40,6 +40,7 @@ class SingleDeleteActionMixin(object):
 class MembershipAdmin(admin.ModelAdmin):
     list_display = ('group', 'user_email', 'status', 'date',)
     list_filter = ('group', 'user', 'status',)
+    search_fields = ('user__first_name', 'user__last_name', 'user__email', 'group__name')
 
 admin.site.register(CosinnusGroupMembership, MembershipAdmin)
 
@@ -48,6 +49,7 @@ admin.site.register(CosinnusGroupMembership, MembershipAdmin)
 class PortalMembershipAdmin(admin.ModelAdmin):
     list_display = ('group', 'user_email', 'status', 'date',)
     list_filter = ('group', 'user', 'status',)
+    search_fields = ('user__first_name', 'user__last_name', 'user__email', 'group__name')
 
 admin.site.register(CosinnusPortalMembership, PortalMembershipAdmin)
 
@@ -70,6 +72,7 @@ admin.site.register(CosinnusGroup, CosinnusGroupAdmin)
 class CosinnusProjectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
     list_display = ('name', 'slug', 'portal', 'public',)
     list_filter = ('portal', 'public',)
+    search_fields = ('name', )
     prepopulated_fields = {'slug': ('name', )}
 
 admin.site.register(CosinnusProject, CosinnusProjectAdmin)
