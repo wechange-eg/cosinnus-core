@@ -550,8 +550,12 @@ class CosinnusGroup(models.Model):
         if slugs:
             keys.extend([self.objects._GROUP_CACHE_KEY % (CosinnusPortal.get_current().id, self.objects.__class__.__name__, s) for s in slugs])
         cache.delete_many(keys)
+        
         if isinstance(self, CosinnusGroup) or issubclass(self.__class__, CosinnusGroup):
             self._clear_local_cache()
+            
+    def clear_member_cache(self):
+        CosinnusGroupMembership.clear_member_cache_for_group(self)
 
     def _clear_local_cache(self):
         self._admins = self._members = self._pendings = None
@@ -694,12 +698,16 @@ class BaseGroupMembership(models.Model):
         self._clear_cache()
 
     def _clear_cache(self):
+        self.clear_member_cache_for_group(self.group)
+        
+    @classmethod
+    def clear_member_cache_for_group(cls, group):
         cache.delete_many([
-            _MEMBERSHIP_ADMINS_KEY % (self.CACHE_KEY_MODEL, self.group.pk),
-            _MEMBERSHIP_MEMBERS_KEY % (self.CACHE_KEY_MODEL, self.group.pk), 
-            _MEMBERSHIP_PENDINGS_KEY % (self.CACHE_KEY_MODEL, self.group.pk),
+            _MEMBERSHIP_ADMINS_KEY % (cls.CACHE_KEY_MODEL, group.pk),
+            _MEMBERSHIP_MEMBERS_KEY % (cls.CACHE_KEY_MODEL, group.pk), 
+            _MEMBERSHIP_PENDINGS_KEY % (cls.CACHE_KEY_MODEL, group.pk),
         ])
-        self.group._clear_local_cache()
+        group._clear_local_cache()
         
     def user_email(self):
         return self.user.email

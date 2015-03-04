@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-04 16:30+0100\n"
+"POT-Creation-Date: 2015-03-04 17:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,11 +38,29 @@ msgstr "The following Projects were converted to Groups:"
 msgid "Convert selected Projects to Societies"
 msgstr "Convert selected Projects to Groups"
 
-#: .\admin.py:110
+#: .\admin.py:113
+#, fuzzy
+msgid "The following Users were added to this portal:"
+msgstr "The following Projects were converted to Groups:"
+
+#: .\admin.py:115
+#, fuzzy
+msgid "Add all members to this Portal"
+msgstr "Add a user to this project"
+
+#: .\admin.py:121
+msgid "In addition, the members were removed from all other Portals."
+msgstr ""
+
+#: .\admin.py:123
+msgid "Move all members to this Portal (removes all other memberships!)"
+msgstr ""
+
+#: .\admin.py:148
 msgid "The following Societies were converted to Projects:"
 msgstr "The following Groups were converted to Projects:"
 
-#: .\admin.py:112
+#: .\admin.py:150
 msgid "Convert selected Societies to Projects"
 msgstr "Convert selected Groups to Projects"
 
@@ -234,7 +252,7 @@ msgstr ""
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 
-#: .\models\group.py:347 .\models\group.py:439 .\models\group.py:723
+#: .\models\group.py:347 .\models\group.py:439 .\models\group.py:731
 msgid "Portal"
 msgstr ""
 
@@ -303,35 +321,35 @@ msgstr "Projects"
 msgid "Slug must not be empty."
 msgstr ""
 
-#: .\models\group.py:601
+#: .\models\group.py:605
 msgid "Cosinnus project"
 msgstr "Project"
 
-#: .\models\group.py:602
+#: .\models\group.py:606
 msgid "Cosinnus projects"
 msgstr "Projects"
 
-#: .\models\group.py:634
+#: .\models\group.py:638
 msgid "Cosinnus society"
 msgstr "Group"
 
-#: .\models\group.py:635
+#: .\models\group.py:639
 msgid "Cosinnus societies"
 msgstr "Groups"
 
-#: .\models\group.py:717
+#: .\models\group.py:725
 msgid "Group membership"
 msgstr ""
 
-#: .\models\group.py:718
+#: .\models\group.py:726
 msgid "Group memberships"
 msgstr ""
 
-#: .\models\group.py:730
+#: .\models\group.py:738
 msgid "Portal membership"
 msgstr ""
 
-#: .\models\group.py:731
+#: .\models\group.py:739
 msgid "Portal memberships"
 msgstr ""
 
@@ -1856,9 +1874,6 @@ msgstr ""
 
 #~ msgid "Join Group"
 #~ msgstr "Join Project"
-
-#~ msgid "Add a user to this group"
-#~ msgstr "Add a user to this project"
 
 #~ msgid "About the group"
 #~ msgstr "About the project"

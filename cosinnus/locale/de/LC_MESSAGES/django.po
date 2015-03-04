@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-04 16:30+0100\n"
+"POT-Creation-Date: 2015-03-04 17:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -39,11 +39,27 @@ msgstr "Die folgenden Projekte wurden in Gruppen umgewandelt:"
 msgid "Convert selected Projects to Societies"
 msgstr "Ausgewählte Projekte in Gruppen umwandeln"
 
-#: .\admin.py:110
+#: .\admin.py:113
+msgid "The following Users were added to this portal:"
+msgstr "Die folgenden Mitarbeiter_innen wurden in dieses Portal mit-aufgenommen:"
+
+#: .\admin.py:115
+msgid "Add all members to this Portal"
+msgstr "Alle enthaltenen Mitarbeiter_innen in dieses Portal mit-aufnehmen"
+
+#: .\admin.py:121
+msgid "In addition, the members were removed from all other Portals."
+msgstr "Zusätzlich wurden die Mitarbeiter_innen aus allen anderen Portalen entfernt."
+
+#: .\admin.py:123
+msgid "Move all members to this Portal (removes all other memberships!)"
+msgstr "Alle enthaltenen Mitarbeiter_innen in dieses Portal verschieben (entfernt sie aus allen anderen Portalen!)"
+
+#: .\admin.py:148
 msgid "The following Societies were converted to Projects:"
 msgstr "Die folgenden Gruppen wurden in Projekte umgewandelt:"
 
-#: .\admin.py:112
+#: .\admin.py:150
 msgid "Convert selected Societies to Projects"
 msgstr "Ausgewählte Gruppen in Projekte umwandeln"
 
@@ -244,7 +260,7 @@ msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 "Bitt einen gültigen Namen angeben. Ein Vorwärtsslash ist nicht erlaubt."
 
-#: .\models\group.py:347 .\models\group.py:439 .\models\group.py:723
+#: .\models\group.py:347 .\models\group.py:439 .\models\group.py:731
 msgid "Portal"
 msgstr ""
 
@@ -314,35 +330,35 @@ msgstr "Projekte"
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
 
-#: .\models\group.py:601
+#: .\models\group.py:605
 msgid "Cosinnus project"
 msgstr "Projekt"
 
-#: .\models\group.py:602
+#: .\models\group.py:606
 msgid "Cosinnus projects"
 msgstr "Projekte"
 
-#: .\models\group.py:634
+#: .\models\group.py:638
 msgid "Cosinnus society"
 msgstr "Gruppe"
 
-#: .\models\group.py:635
+#: .\models\group.py:639
 msgid "Cosinnus societies"
 msgstr "Gruppen"
 
-#: .\models\group.py:717
+#: .\models\group.py:725
 msgid "Group membership"
 msgstr "Gruppen/Projekt-Mitgliedschaft"
 
-#: .\models\group.py:718
+#: .\models\group.py:726
 msgid "Group memberships"
 msgstr "Gruppen/Projekt-Mitgliedschaften"
 
-#: .\models\group.py:730
+#: .\models\group.py:738
 msgid "Portal membership"
 msgstr "Portal-Mitgliedschaft"
 
-#: .\models\group.py:731
+#: .\models\group.py:739
 msgid "Portal memberships"
 msgstr "Portal-Mitgliedschaften"
 
@@ -2032,9 +2048,6 @@ msgstr "%(numobjects)d andere Objekte wurden gelöscht."
 
 #~ msgid "Join Group"
 #~ msgstr "Projekt beitreten"
-
-#~ msgid "Add a user to this group"
-#~ msgstr "Benutzer_in als neue(n) Mitarbeiter_in aufnehmen"
 
 #~ msgid "Group avatar"
 #~ msgstr "Projektbild"

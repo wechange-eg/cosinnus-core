@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.models.group import CosinnusGroupMembership,\
     CosinnusSociety, CosinnusProject, CosinnusPortal, CosinnusPortalMembership,\
-    CosinnusGroup
+    CosinnusGroup, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import AttachedObject
 from cosinnus.models.cms import CosinnusMicropage
@@ -63,7 +63,7 @@ class MembershipInline(admin.StackedInline):
 
 
 class CosinnusProjectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
-    actions = ['convert_to_society']
+    actions = ['convert_to_society', 'add_members_to_current_portal', 'move_members_to_current_portal']
     list_display = ('name', 'slug', 'portal', 'public',)
     list_filter = ('portal', 'public',)
     search_fields = ('name', )
@@ -83,6 +83,44 @@ class CosinnusProjectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
         message = _('The following Projects were converted to Societies:') + '\n' + ", ".join(converted_names)
         self.message_user(request, message)
     convert_to_society.short_description = _("Convert selected Projects to Societies")
+    
+    
+    def add_members_to_current_portal(self, request, queryset, remove_all_other_memberships=False):
+        """ Converts this CosinnusGroup's type """
+        member_names = []
+        members = []
+        
+        for group in queryset:
+            group.clear_member_cache()
+            members.extend(group.members)
+        
+        members = list(set(members))
+        users = get_user_model().objects.filter(id__in=members)
+        
+        
+        if remove_all_other_memberships:
+            # delete all other portal memberships because users were supposed to be moved
+            CosinnusPortalMembership.objects.filter(user__in=users).delete()
+        else:
+            # just add them, that means that pending statuses will be removed to be replaced by members statuses in a second
+            CosinnusPortalMembership.objects.filter(status=MEMBERSHIP_PENDING, 
+                    group=CosinnusPortal.get_current(), user__in=users).delete()
+        for user in users:
+            CosinnusPortalMembership.objects.get_or_create(group=CosinnusPortal.get_current(), user=user, 
+                    defaults={'status': MEMBERSHIP_MEMBER})
+            member_names = ['%s %s (%s)' % (user.first_name, user.last_name, user.email)]
+        
+        message = _('The following Users were added to this portal:') + '\n' + ", ".join(member_names)
+        self.message_user(request, message)
+    add_members_to_current_portal.short_description = _("Add all members to this Portal")
+    
+    
+    def move_members_to_current_portal(self, request, queryset):
+        """ Converts this CosinnusGroup's type """
+        self.add_members_to_current_portal(request, queryset, remove_all_other_memberships=True)
+        message = _('In addition, the members were removed from all other Portals.')
+        self.message_user(request, message)
+    move_members_to_current_portal.short_description = _("Move all members to this Portal (removes all other memberships!)")
     
 admin.site.register(CosinnusProject, CosinnusProjectAdmin)
 
