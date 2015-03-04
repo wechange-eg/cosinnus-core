@@ -108,7 +108,7 @@ class CosinnusProjectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
         for user in users:
             CosinnusPortalMembership.objects.get_or_create(group=CosinnusPortal.get_current(), user=user, 
                     defaults={'status': MEMBERSHIP_MEMBER})
-            member_names = ['%s %s (%s)' % (user.first_name, user.last_name, user.email)]
+            member_names.append('%s %s (%s)' % (user.first_name, user.last_name, user.email))
         
         message = _('The following Users were added to this portal:') + '\n' + ", ".join(member_names)
         self.message_user(request, message)
