@@ -167,15 +167,18 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         admin_ids = CosinnusGroupMembership.objects.get_admins(group=self.group)
         member_ids = CosinnusGroupMembership.objects.get_members(group=self.group)
         pending_ids = CosinnusGroupMembership.objects.get_pendings(group=self.group)
-        # get all users from this portal only  
+        
+        # we DON'T filter for current portal here, as pending join requests can come from
+        # users in other portals
         _q = get_user_model()._default_manager.exclude(is_active=False) \
-                             .filter(id__in=CosinnusPortal.get_current().members) \
                              .order_by('first_name', 'last_name') \
                              .select_related('cosinnus_profile')
         admins = _q._clone().filter(id__in=admin_ids)
         members = _q._clone().filter(id__in=member_ids)
         pendings = _q._clone().filter(id__in=pending_ids)
-        non_members =  _q._clone().exclude(id__in=member_ids)
+        # for adding members, get all users from this portal only  
+        non_members =  _q._clone().exclude(id__in=member_ids). \
+            filter(id__in=CosinnusPortal.get_current().members)
         
         hidden_members = 0
         # for public groups if user not a member of the group, show only public users in widget
