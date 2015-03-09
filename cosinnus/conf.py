@@ -148,6 +148,9 @@ class CosinnusConf(AppConf):
     #: The default search index for the :attr:`TAG_OBJECT_MODEL`
     TAG_OBJECT_SEARCH_INDEX = 'cosinnus.utils.search.DefaultTagObjectIndex'
 
+    # can be overriden to let cosinnus know that the server uses HTTPS. this is important to set!
+    SITE_PROTOCOL = 'http'
+
     #: A pointer to the swappable cosinnus user profile model
     USER_PROFILE_MODEL = 'cosinnus.UserProfile'
 

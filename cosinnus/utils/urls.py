@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.utils.importlib import import_module
 from django.db.models.loading import get_model
 
+from cosinnus.conf import settings
         
 _group_aware_url_name = object() # late import because we cannot reference CosinnusGroup models here yet
 _CosinnusGroup = None
@@ -50,4 +51,4 @@ def group_aware_reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=N
 def get_domain_for_portal(portal):
     # TODO FIXME: cache this!
     # FIXME: SSL (https://) secure support!
-    return '%s%s' % ('http://' or 'https://', portal.site.domain)
+    return '%s://%s' % (getattr(settings, 'COSINNUS_SITE_PROTOCOL', 'htx'), portal.site.domain)
