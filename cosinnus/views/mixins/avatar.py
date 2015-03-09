@@ -22,5 +22,7 @@ class AvatarFormMixin(object):
                 avatar_field.save_form_data(form.instance, form.cleaned_data['obj'][self.avatar_field_name])
             except SystemError:
                 messages.error(self.request, _('There was an error while processing your avatar. Please make sure you selected a large enough part of the image!'))
+            except IOError:
+                messages.error(self.request, _('There was an error while processing your avatar. The image file might be broken or the file transfer was interrupted.'))
         ret = super(AvatarFormMixin, self).form_valid(form)
         return ret

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-04 17:43+0100\n"
+"POT-Creation-Date: 2015-03-09 15:57+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -605,7 +605,7 @@ msgstr ""
 #: .\templates\cosinnus\group\group_list.html.py:134
 #: .\templates\cosinnus\group\group_list.html.py:184
 #: .\templates\cosinnus\group\leftnav_group.html.py:43
-#: .\templates\cosinnus\group\leftnav_group.html.py:48 .\views\group.py:374
+#: .\templates\cosinnus\group\leftnav_group.html.py:48 .\views\group.py:377
 msgid "Join"
 msgstr ""
 
@@ -632,8 +632,8 @@ msgstr ""
 #: .\templates\cosinnus\leftnav_button_editable_folder.html.py:39
 #: .\templates\cosinnus\group\group_form.html.py:221
 #: .\templates\cosinnus\user\userprofile_form.html.py:225
-#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:291
-#: .\views\group.py:573 .\views\user.py:129
+#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:294
+#: .\views\group.py:576 .\views\user.py:129
 msgid "Save"
 msgstr ""
 
@@ -646,7 +646,7 @@ msgstr ""
 #: .\templates\cosinnus\group\group_form.html.py:109
 #: .\templates\cosinnus\user\userprofile_form.html.py:159
 #: .\templates\cosinnus\widgets\base_widget.html.py:39 .\views\group.py:149
-#: .\views\group.py:610
+#: .\views\group.py:613
 msgid "Delete"
 msgstr ""
 
@@ -1083,11 +1083,11 @@ msgstr ""
 #: .\templates\cosinnus\group\group_list.html.py:130
 #: .\templates\cosinnus\group\group_list.html.py:176
 #: .\templates\cosinnus\group\leftnav_group.html.py:23
-#: .\templates\cosinnus\group\leftnav_group.html.py:28 .\views\group.py:408
+#: .\templates\cosinnus\group\leftnav_group.html.py:28 .\views\group.py:411
 msgid "Leave"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_list.html.py:132 .\views\group.py:452
+#: .\templates\cosinnus\group\group_list.html.py:132 .\views\group.py:455
 msgid "Withdraw"
 msgstr ""
 
@@ -1161,7 +1161,7 @@ msgid "Add container"
 msgstr ""
 
 #: .\templates\cosinnus\hierarchy\add_container.html.py:27
-#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:536
+#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:539
 msgid "Add"
 msgstr ""
 
@@ -1681,91 +1681,91 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: .\views\group.py:283
+#: .\views\group.py:286
 #, python-format
 msgid "The %(group_type)s was changed successfully."
 msgstr ""
 
-#: .\views\group.py:375
+#: .\views\group.py:378
 #, python-format
 msgid "Do you want to join the %(group_type)s “%(group_name)s”?"
 msgstr ""
 
-#: .\views\group.py:376
+#: .\views\group.py:379
 #, python-format
 msgid "Join %(group_type)s “%(group_name)s”?"
 msgstr ""
 
-#: .\views\group.py:377
+#: .\views\group.py:380
 #, python-format
 msgid ""
 "You have requested to join the %(group_type)s “%(group_name)s”. You will "
 "receive an email as soon as a group administrator responds to your request."
 msgstr ""
 
-#: .\views\group.py:409
+#: .\views\group.py:412
 #, python-format
 msgid "Do you want to leave the %(group_type)s “%(group_name)s”?"
 msgstr ""
 
-#: .\views\group.py:410
+#: .\views\group.py:413
 #, python-format
 msgid "Leaving %(group_type)s “%(group_name)s”?"
 msgstr ""
 
-#: .\views\group.py:412
+#: .\views\group.py:415
 #, python-format
 msgid "You are no longer a member of the %(group_type)s “%(group_name)s”."
 msgstr ""
 
-#: .\views\group.py:444
+#: .\views\group.py:447
 #, python-format
 msgid ""
 "You cannot leave this %(group_type)s. You are the only administrator left."
 msgstr ""
 
-#: .\views\group.py:453
+#: .\views\group.py:456
 #, python-format
 msgid ""
 "Do you want to withdraw your join request to the %(group_type)s “%"
 "(group_name)s”?"
 msgstr ""
 
-#: .\views\group.py:454
+#: .\views\group.py:457
 #, python-format
 msgid "Withdraw join request to %(group_type)s “%(group_name)s”?"
 msgstr ""
 
-#: .\views\group.py:456
+#: .\views\group.py:459
 #, python-format
 msgid ""
 "Your join request was withdrawn from %(group_type)s “%(group_name)s” "
 "successfully."
 msgstr ""
 
-#: .\views\group.py:564
+#: .\views\group.py:567
 msgid "You cannot change your own admin status."
 msgstr ""
 
-#: .\views\group.py:566 .\views\group.py:600
+#: .\views\group.py:569 .\views\group.py:603
 #, python-format
 msgid "You cannot remove “%(username)s” form this group. Only one admin left."
 msgstr ""
 "You cannot remove “%(username)s” form this project. Only one admin left."
 
-#: .\views\group.py:598
+#: .\views\group.py:601
 #, python-format
 msgid "You cannot remove yourself from a %(group_type)s."
 msgstr ""
 
-#: .\views\group.py:611
+#: .\views\group.py:614
 #, python-format
 msgid ""
 "Do you want to remove the user “%(username)s”  from the %(group_type)s “%"
 "(group_name)s”?"
 msgstr ""
 
-#: .\views\group.py:616
+#: .\views\group.py:619
 #, python-format
 msgid "Remove user from %(group_type)s “%(group_name)s”?"
 msgstr ""
@@ -1816,6 +1816,12 @@ msgstr ""
 msgid ""
 "There was an error while processing your avatar. Please make sure you "
 "selected a large enough part of the image!"
+msgstr ""
+
+#: .\views\mixins\avatar.py:26
+msgid ""
+"There was an error while processing your avatar. The image file might be "
+"broken or the file transfer was interrupted."
 msgstr ""
 
 #: .\views\mixins\filters.py:90 .\views\mixins\filters.py:99
