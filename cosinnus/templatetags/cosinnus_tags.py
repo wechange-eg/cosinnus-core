@@ -28,6 +28,9 @@ from cosinnus.core.registries.group_models import group_model_registry
 from django.core.cache import cache
 from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
 
+import logging
+logger = logging.getLogger('cosinnus')
+
 register = template.Library()
 
 
@@ -488,7 +491,11 @@ class GroupURLNode(URLNode):
         
         ignoreErrors = 'ignoreErrors' in self.kwargs and self.kwargs.pop('ignoreErrors').resolve(context) or False
         try:
-            view_name = group_aware_url_name(view_name, group_slug, portal_id)
+            try:
+                view_name = group_aware_url_name(view_name, group_slug, portal_id)
+            except CosinnusGroup.DoesNotExist:
+                logger.error('Cosinnus__group_url_tag: Could not find group for: group_arg: %s, view_name: %s, group_slug: %s, portal_id: %s' % (str(group_arg), view_name, group_slug, portal_id))
+                raise
             
             self.view_name.var = view_name
             self.view_name.token = "'%s'" % view_name
