@@ -24,10 +24,6 @@ def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
 
     where the value of field `slug_source` will be used to prepopulate the
     value of `slug_field`.
-    
-    If the attribute `AUTO_RENAME_SLUG_ON_SAVE` is not set, or is True on the
-    item, then when this is called, the slug will be updated if the originating
-    field has changed to keep it up to date.
 
     Any additional arguments passed to this function are used during lookup
     existing slugs and can be used to filter them.
@@ -43,18 +39,14 @@ def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
     """
     import re
     from django.template.defaultfilters import slugify
-    self_slug = getattr(item, slug_field)
-    if self_slug and not getattr(item, 'AUTO_RENAME_SLUG_ON_SAVE', True):
-        # if slug is set and we shouldn't rename it once it is set, return
+    s = getattr(item, slug_field)
+    if s:
+        # if a slug is already set, do nothing but return
         return
 
     max_length = item._meta.get_field_by_name(slug_field)[0].max_length
     slug_len = max_length - 10  # 1 for '-'and 4 (+5 for etherpad-id compatibility) for the counter
     slug = slugify(getattr(item, slug_source)[:slug_len])
-    
-    if slug == self_slug:
-        # if a slug is already set and the item would be sluggified to the same again, do nothing
-        return
     
     # sanity check, we can never ever have an empty slug!
     if not slug:
@@ -74,12 +66,8 @@ def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
             for unique_field in unique_list:
                 if not unique_field == slug_field:
                     kwargs[unique_field] = getattr(item, unique_field, None)
-    
-    qs = model.objects.all()
-    if item.id:
-        qs = qs.exclude(id=item.id)
-    # check all known objects except the item itself for a slug collision
-    all_slugs = list(qs.filter(**kwargs).values_list(slug_field, flat=True))
+            
+    all_slugs = list(model.objects.filter(**kwargs).values_list(slug_field, flat=True))
     if slug in all_slugs:
         finder = re.compile(r'-\d+$')
         counter = 2
