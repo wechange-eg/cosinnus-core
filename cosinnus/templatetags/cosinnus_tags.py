@@ -4,7 +4,7 @@ from collections import defaultdict
 
 import six
 from six.moves.urllib.parse import parse_qsl
-from copy import copy
+from copy import copy, deepcopy
 
 from django import template
 from django.core.exceptions import ImproperlyConfigured
@@ -489,6 +489,7 @@ class GroupURLNode(URLNode):
             # store the portal id so we don't lose it (because the group arg stays patched in the node)
             self.stored_portal_id = portal_id
             # we patch the variable given to the tag here, to restore the regular slug-passed-url-resolver
+            self.kwargs['group'] = deepcopy(self.kwargs['group'])
             self.kwargs['group'].token += '.slug'
             self.kwargs['group'].var.var += '.slug'
             self.kwargs['group'].var.lookups = list(self.kwargs['group'].var.lookups) + ['slug']
