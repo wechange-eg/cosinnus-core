@@ -6,6 +6,9 @@ from django.utils.importlib import import_module
 from django.db.models.loading import get_model
 
 from cosinnus.conf import settings
+from django.core.cache import cache
+        
+_PORTAL_PROTOCOL_CACHE_KEY = 'cosinnus/core/portal/%d/protocol'
         
 _group_aware_url_name = object() # late import because we cannot reference CosinnusGroup models here yet
 _CosinnusGroup = None
@@ -49,6 +52,13 @@ def group_aware_reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=N
         
 
 def get_domain_for_portal(portal):
-    # TODO FIXME: cache this!
-    # FIXME: SSL (https://) secure support!
-    return '%s://%s' % (getattr(settings, 'COSINNUS_SITE_PROTOCOL', 'htx'), portal.site.domain)
+    """ We obtain the protocol from either the DB Portal entry, or, if not set there,
+        from the setting `COSINNUS_SITE_PROTOCOL` or default to 'http' 
+        The domain comes from the Portal's Site. """
+    
+    domain = cache.get(_PORTAL_PROTOCOL_CACHE_KEY % portal.id)
+    if not domain:
+        protocol = portal.protocol or getattr(settings, 'COSINNUS_SITE_PROTOCOL', 'http')
+        domain = '%s://%s' % (protocol, portal.site.domain)
+        cache.set(_PORTAL_PROTOCOL_CACHE_KEY % portal.id, domain) # 5 minutes is okay here
+    return domain

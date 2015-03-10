@@ -365,6 +365,9 @@ class CosinnusPortal(models.Model):
     
     site = models.ForeignKey(Site, unique=True, verbose_name=_('Associated Site'))
     
+    protocol = models.CharField(_('Http/Https Protocol (overrides settings)'), max_length=8,
+                        blank=True, null=True)
+    
     @classmethod
     def get_current(cls):
         """ Cached, returns the current Portal (always the same since dependent on configured Site) """
