@@ -29,6 +29,7 @@ from django.core.cache import cache
 from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
 
 import logging
+from django.utils.encoding import force_text
 logger = logging.getLogger('cosinnus')
 
 register = template.Library()
@@ -460,10 +461,11 @@ class GroupURLNode(URLNode):
         portal_id = None
         foreign_portal = None    
         
+        
         try:
-            debug_string = str(self.kwargs) + ' |||| ' + str(context)
-        except:
-            debug_string = '<err>' 
+            debug_string = force_text(self.kwargs) + ' |||| ' + force_text(context)
+        except Exception, e:
+            debug_string = '<err: %s>' % repr(e)
         
         try:
             # the portal id if given to the tag can override the group's portal
