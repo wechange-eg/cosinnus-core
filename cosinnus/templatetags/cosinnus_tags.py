@@ -29,6 +29,7 @@ from django.core.cache import cache
 from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
 
 import logging
+from django.utils.encoding import force_text
 logger = logging.getLogger('cosinnus')
 
 register = template.Library()
@@ -447,11 +448,6 @@ class GroupURLNode(URLNode):
         :ignoreErrors: (optional) if set to True, this tag will return silently '' instead of throwing a 
             DoesNotExist exception when the targeted group is not found
     """
-    
-    # used to store the portal id we converted away from using the group arg as a group instead of slug
-    stored_portal_id = None
-    # if we have a group from a foreign portal, cache that portal here
-    foreign_portal = None    
 
     def render(self, context):
         
@@ -463,6 +459,18 @@ class GroupURLNode(URLNode):
         group_arg = self.kwargs["group"].resolve(context)
         group_slug = ""
         portal_id = None
+        foreign_portal = None    
+        
+        try:
+            debug_string = force_text(self.kwargs, errors='ignore') 
+        except Exception, e:
+            debug_string = '<err: %s>' % repr(e)
+        
+        try:
+            debug_string2 = force_text(context, errors='ignore')
+        except Exception, e:
+            debug_string2 = '<err: %s>' % repr(e)
+        
         
         try:
             # the portal id if given to the tag can override the group's portal
@@ -470,10 +478,6 @@ class GroupURLNode(URLNode):
             del self.kwargs["portal_id"]
         except KeyError:
             pass
-        
-        if not portal_id and self.stored_portal_id:
-            # if the portal id wasn't set explicitly, check if we stored from an earlier run through this node
-            portal_id = self.stored_portal_id
         
         # we accept a group object or a group slug
         if issubclass(group_arg.__class__, CosinnusGroup):
@@ -484,10 +488,8 @@ class GroupURLNode(URLNode):
             if not portal_id:
                 portal_id = group_arg.portal_id
                 if not portal_id == CosinnusPortal.get_current().id:
-                    self.foreign_portal = group_arg.portal
+                    foreign_portal = group_arg.portal
                     
-            # store the portal id so we don't lose it (because the group arg stays patched in the node)
-            self.stored_portal_id = portal_id
             # we patch the variable given to the tag here, to restore the regular slug-passed-url-resolver
             self.kwargs['group'] = deepcopy(self.kwargs['group'])
             self.kwargs['group'].token += '.slug'
@@ -498,16 +500,14 @@ class GroupURLNode(URLNode):
         else:
             group_slug = group_arg
             
-        # make sure we have the foreign portal. we might not have yet retrieved it if we had a portal id explicitly set
-        if portal_id and not portal_id == CosinnusPortal.get_current().id and not self.foreign_portal:
-            self.foreign_poral = CosinnusPortal.objects.get(id=portal_id)
+        
         
         ignoreErrors = 'ignoreErrors' in self.kwargs and self.kwargs.pop('ignoreErrors').resolve(context) or False
         try:
             try:
                 view_name = group_aware_url_name(view_name, group_slug, portal_id)
             except CosinnusGroup.DoesNotExist:
-                logger.error(u'Cosinnus__group_url_tag: Could not find group for: group_arg: %s, view_name: %s, group_slug: %s, portal_id: %s' % (str(group_arg), view_name, group_slug, portal_id))
+                logger.error(u'Cosinnus__group_url_tag: Could not find group for: group_arg: %s, view_name: %s, group_slug: %s, portal_id: %s, debug_string: %s' % (str(group_arg), view_name, group_slug, portal_id, debug_string))
                 raise
             
             self.view_name.var = view_name
@@ -515,8 +515,8 @@ class GroupURLNode(URLNode):
             
             ret_url = super(GroupURLNode, self).render(context)
             
-            if self.foreign_portal:
-                domain = get_domain_for_portal(self.foreign_portal)
+            if foreign_portal:
+                domain = get_domain_for_portal(foreign_portal)
                 # attach to either output or given "as" variable
                 if self.asvar:
                     context[self.asvar] = domain + context[self.asvar]
