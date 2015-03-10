@@ -462,17 +462,6 @@ class GroupURLNode(URLNode):
         foreign_portal = None    
         
         try:
-            debug_string = force_text(self.kwargs, errors='ignore') 
-        except Exception, e:
-            debug_string = '<err: %s>' % repr(e)
-        
-        try:
-            debug_string2 = force_text(context, errors='ignore')
-        except Exception, e:
-            debug_string2 = '<err: %s>' % repr(e)
-        
-        
-        try:
             # the portal id if given to the tag can override the group's portal
             portal_id = self.kwargs["portal_id"].resolve(context)
             del self.kwargs["portal_id"]
@@ -501,13 +490,17 @@ class GroupURLNode(URLNode):
             group_slug = group_arg
             
         
+        # make sure we have the foreign portal. we might not have yet retrieved it if we had a portal id explicitly set
+        if portal_id and not portal_id == CosinnusPortal.get_current().id and not foreign_portal:
+            foreign_portal = CosinnusPortal.objects.get(id=portal_id)
+
         
         ignoreErrors = 'ignoreErrors' in self.kwargs and self.kwargs.pop('ignoreErrors').resolve(context) or False
         try:
             try:
                 view_name = group_aware_url_name(view_name, group_slug, portal_id)
             except CosinnusGroup.DoesNotExist:
-                logger.error(u'Cosinnus__group_url_tag: Could not find group for: group_arg: %s, view_name: %s, group_slug: %s, portal_id: %s, debug_string: %s' % (str(group_arg), view_name, group_slug, portal_id, debug_string))
+                logger.error(u'Cosinnus__group_url_tag: Could not find group for: group_arg: %s, view_name: %s, group_slug: %s, portal_id: %s' % (str(group_arg), view_name, group_slug, portal_id))
                 raise
             
             self.view_name.var = view_name
