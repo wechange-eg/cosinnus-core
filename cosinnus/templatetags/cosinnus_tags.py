@@ -468,6 +468,8 @@ class GroupURLNode(URLNode):
         except KeyError:
             pass
         
+        patched_group_slug_arg = None
+        
         # we accept a group object or a group slug
         if issubclass(group_arg.__class__, CosinnusGroup):
             # determine the portal from the group
@@ -479,17 +481,17 @@ class GroupURLNode(URLNode):
                 if not portal_id == CosinnusPortal.get_current().id:
                     foreign_portal = group_arg.portal
                     
-            # we patch the variable given to the tag here, to restore the regular slug-passed-url-resolver
-            self.kwargs['group'] = deepcopy(self.kwargs['group'])
-            self.kwargs['group'].token += '.slug'
-            self.kwargs['group'].var.var += '.slug'
-            self.kwargs['group'].var.lookups = list(self.kwargs['group'].var.lookups) + ['slug']
+            # we patch the variable given to the tag here, to restore the regular slug-passed-url-resolver functionality
+            patched_group_slug_arg = deepcopy(self.kwargs['group'])
+            patched_group_slug_arg.token += '.slug'
+            patched_group_slug_arg.var.var += '.slug'
+            patched_group_slug_arg.var.lookups = list(self.kwargs['group'].var.lookups) + ['slug']
         elif not isinstance(group_arg, six.string_types):
             raise TemplateSyntaxError("'group_url' tag requires a group kwarg that is a group or a slug! Have you passed one? (You passed: 'group=%s')" % group_arg)
         else:
             group_slug = group_arg
-            
         
+            
         # make sure we have the foreign portal. we might not have yet retrieved it if we had a portal id explicitly set
         if portal_id and not portal_id == CosinnusPortal.get_current().id and not foreign_portal:
             foreign_portal = CosinnusPortal.objects.get(id=portal_id)
@@ -506,7 +508,19 @@ class GroupURLNode(URLNode):
             self.view_name.var = view_name
             self.view_name.token = "'%s'" % view_name
             
+            # to retain django core code for rendering, we patch this node to look like a proper url node, 
+            # with a slug argument.
+            # and then restore it later, so that the node object can be reused for other group arguments 
+            # if we didn't do that, this group node's group argument would have been replaced already, and
+            # lost to other elements that use the group_url tag in a for-loop, for example
+            # (we cannot store anything on the object itself, down that road madness lies)
+            if patched_group_slug_arg:
+                self.kwargs['group'], patched_group_slug_arg = patched_group_slug_arg, self.kwargs['group']
+                
             ret_url = super(GroupURLNode, self).render(context)
+            # swap back the patched arg for the original
+            if patched_group_slug_arg:
+                self.kwargs['group'] = patched_group_slug_arg
             
             if foreign_portal:
                 domain = get_domain_for_portal(foreign_portal)
