@@ -8,6 +8,8 @@ from django.utils.encoding import force_text
 
 from cosinnus.conf import settings
 
+import logging
+logger = logging.getLogger('cosinnus')
 
 __all__ = ['CELERY_AVAILABLE', 'send_mail']
 
@@ -57,10 +59,12 @@ def _mail_print(to, subject, template, data, from_email=None, bcc=None):
 def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None):
     try:
         send_mail(to, subject, template, data, from_email, bcc)
-    except:
-        # FIXME: fail silently. better than erroring on the user. should be logged though!
+    except Exception, e:
+        # fail silently. log this, though
         if settings.DEBUG:
             _mail_print(to, subject, template, data, from_email, bcc)
+        logger.error('Cosinnus.core.mail: Failed to send mail! The exception was: "%s"' % str(e), 
+                     extra={'to_user': to, 'subject': subject})
     
 
 def get_common_mail_context(request, group=None, user=None):
