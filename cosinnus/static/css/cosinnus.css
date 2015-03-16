@@ -2846,3 +2846,7 @@ a.portal-inlink:hover img {
     font-size: 20px;
     padding: 15px 15px 15px 10px;
 }
+
+.form-control-focus-emphasized:focus {
+    background-color:white; color:rgb(51,51,51);
+}
