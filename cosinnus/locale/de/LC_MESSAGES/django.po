@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-09 15:57+0100\n"
+"POT-Creation-Date: 2015-03-16 15:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -67,11 +67,15 @@ msgstr "Die folgenden Gruppen wurden in Projekte umgewandelt:"
 msgid "Convert selected Societies to Projects"
 msgstr "Ausgewählte Gruppen in Projekte umwandeln"
 
-#: .\cosinnus_notifications.py:38
+#: .\cosinnus_notifications.py:45
 msgid "A user requested to become a member of this group (admins only)"
 msgstr ""
 "Jemand hat beantragt Mitarbeiter_in in dieser Gruppe zu werden (betrifft nur "
 "Gruppenadministratoren)"
+
+#: .\cosinnus_notifications.py:52
+msgid "You were tagged in a post, document or other item"
+msgstr "Du wurdest in einem Beitrag, Dokument oder anderem Element markiert"
 
 #: .\core\receivers.py:25
 #, python-format
@@ -161,7 +165,7 @@ msgstr "Text"
 msgid "Enter a description"
 msgstr "Geben sie eine Beschreibung ein"
 
-#: .\forms\filters.py:86 .\forms\search.py:51 .\models\tagged.py:58
+#: .\forms\filters.py:86 .\forms\search.py:51 .\models\tagged.py:59
 #: .\templates\cosinnus\search.html.py:29
 #: .\templates\cosinnus\search.html.py:156
 msgid "All"
@@ -191,7 +195,7 @@ msgstr "Nächste Woche"
 msgid "Next month"
 msgstr "Nächsten Monat"
 
-#: .\forms\hierarchy.py:14 .\models\group.py:356 .\models\group.py:442
+#: .\forms\hierarchy.py:14 .\models\group.py:356 .\models\group.py:445
 msgid "Name"
 msgstr "Name"
 
@@ -239,7 +243,7 @@ msgstr ""
 msgid "This account is inactive."
 msgstr "Dieses Benutzerkonto ist deaktiviert worden."
 
-#: .\models\cms.py:19 .\models\tagged.py:137
+#: .\models\cms.py:19 .\models\tagged.py:138
 msgid "Title"
 msgstr "Titel"
 
@@ -264,7 +268,7 @@ msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 "Bitt einen gültigen Namen angeben. Ein Vorwärtsslash ist nicht erlaubt."
 
-#: .\models\group.py:347 .\models\group.py:439 .\models\group.py:731
+#: .\models\group.py:347 .\models\group.py:442 .\models\group.py:734
 msgid "Portal"
 msgstr ""
 
@@ -272,24 +276,24 @@ msgstr ""
 msgid "Portals"
 msgstr ""
 
-#: .\models\group.py:358 .\models\group.py:444
+#: .\models\group.py:358 .\models\group.py:447
 msgid "Slug"
 msgstr "Slug"
 
-#: .\models\group.py:360 .\models\group.py:448 .\models\profile.py:148
+#: .\models\group.py:360 .\models\group.py:451 .\models\profile.py:148
 #: .\templates\cosinnus\microsite.html.py:198
 #: .\templates\cosinnus\group\group_form.html.py:206
 msgid "Description"
 msgstr "Beschreibung"
 
-#: .\models\group.py:361 .\models\group.py:451 .\models\profile.py:151
+#: .\models\group.py:361 .\models\group.py:454 .\models\profile.py:151
 #: .\templates\cosinnus\group\group_form.html.py:148
 #: .\templates\cosinnus\group\group_form.html.py:157
 #: .\templates\cosinnus\user\userprofile_form.html.py:97
 msgid "Website"
 msgstr "Webseite"
 
-#: .\models\group.py:362 .\models\group.py:452 .\models\tagged.py:39
+#: .\models\group.py:362 .\models\group.py:455 .\models\tagged.py:40
 #: .\templates\cosinnus\group\group_form.html.py:194
 #: .\templates\cosinnus\group\group_list.html.py:98
 msgid "Public"
@@ -299,106 +303,110 @@ msgstr "Öffentlich"
 msgid "Associated Site"
 msgstr ""
 
-#: .\models\group.py:430 .\models\tagged.py:57 .\models\tagged.py:61
-#: .\models\tagged.py:134
+#: .\models\group.py:368
+msgid "Http/Https Protocol (overrides settings)"
+msgstr ""
+
+#: .\models\group.py:433 .\models\tagged.py:58 .\models\tagged.py:62
+#: .\models\tagged.py:135
 msgid "Group"
 msgstr "Projekt"
 
-#: .\models\group.py:431
+#: .\models\group.py:434
 msgid "Society"
 msgstr "Gruppe"
 
-#: .\models\group.py:445
+#: .\models\group.py:448
 msgid "Group Type"
 msgstr "Gruppentyp"
 
-#: .\models\group.py:449 .\models\profile.py:146
+#: .\models\group.py:452 .\models\profile.py:146
 #: .\templates\cosinnus\group\group_form.html.py:65
 msgid "Avatar"
 msgstr "Avatar"
 
 #
-#: .\models\group.py:458
+#: .\models\group.py:461
 msgid "Parent Group"
 msgstr "Übergeordnete Gruppe"
 
-#: .\models\group.py:466
+#: .\models\group.py:469
 msgid "Cosinnus group"
 msgstr "Projekt"
 
-#: .\models\group.py:467
+#: .\models\group.py:470
 msgid "Cosinnus groups"
 msgstr "Projekte"
 
-#: .\models\group.py:485
+#: .\models\group.py:488
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
 
-#: .\models\group.py:605
+#: .\models\group.py:608
 msgid "Cosinnus project"
 msgstr "Projekt"
 
-#: .\models\group.py:606
+#: .\models\group.py:609
 msgid "Cosinnus projects"
 msgstr "Projekte"
 
-#: .\models\group.py:638
+#: .\models\group.py:641
 msgid "Cosinnus society"
 msgstr "Gruppe"
 
-#: .\models\group.py:639
+#: .\models\group.py:642
 msgid "Cosinnus societies"
 msgstr "Gruppen"
 
-#: .\models\group.py:725
+#: .\models\group.py:728
 msgid "Group membership"
 msgstr "Gruppen/Projekt-Mitgliedschaft"
 
-#: .\models\group.py:726
+#: .\models\group.py:729
 msgid "Group memberships"
 msgstr "Gruppen/Projekt-Mitgliedschaften"
 
-#: .\models\group.py:738
+#: .\models\group.py:741
 msgid "Portal membership"
 msgstr "Portal-Mitgliedschaft"
 
-#: .\models\group.py:739
+#: .\models\group.py:742
 msgid "Portal memberships"
 msgstr "Portal-Mitgliedschaften"
 
-#: .\models\tagged.py:56 .\templates\cosinnus\group\group_user_list.html.py:13
+#: .\models\tagged.py:57 .\templates\cosinnus\group\group_user_list.html.py:13
 msgid "User"
 msgstr "Benutzer_in"
 
-#: .\models\tagged.py:65
+#: .\models\tagged.py:66
 msgid "Persons"
 msgstr "Personen"
 
-#: .\models\tagged.py:67
+#: .\models\tagged.py:68
 msgid "Tags"
 msgstr "Schlagworte"
 
-#: .\models\tagged.py:69
+#: .\models\tagged.py:70
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: .\models\tagged.py:102
+#: .\models\tagged.py:103
 msgid "Attached object"
 msgstr "Verknüpftes Objekt"
 
-#: .\models\tagged.py:103
+#: .\models\tagged.py:104
 msgid "Attached objects"
 msgstr "Verknüpftes Objekt"
 
-#: .\models\tagged.py:141
+#: .\models\tagged.py:142
 msgid "Creator"
 msgstr "Ersteller"
 
-#: .\models\tagged.py:146
+#: .\models\tagged.py:147
 msgid "Created"
 msgstr "Erstellt"
 
-#: .\models\tagged.py:228
+#: .\models\tagged.py:242
 msgid "Path"
 msgstr "Pfad"
 
@@ -775,26 +783,26 @@ msgid "Toggle navigation"
 msgstr "Navigation ab-/abschalten"
 
 #: .\templates\cosinnus\navbar.html.py:24
-#: .\templates\cosinnus\navbar.html.py:58
-#: .\templates\cosinnus\group\group_list.html.py:4 .\utils\dashboard.py:263
-msgid "Projects"
-msgstr "Projekte"
-
-#: .\templates\cosinnus\navbar.html.py:32
-#: .\templates\cosinnus\navbar.html.py:36
-msgid "All Projects"
-msgstr "Alle Projekte"
-
-#: .\templates\cosinnus\navbar.html.py:42
 #: .\templates\cosinnus\navbar.html.py:59
 #: .\templates\cosinnus\group\group_list.html.py:4
 msgid "Societies"
 msgstr "Gruppen"
 
-#: .\templates\cosinnus\navbar.html.py:50
-#: .\templates\cosinnus\navbar.html.py:54
+#: .\templates\cosinnus\navbar.html.py:32
+#: .\templates\cosinnus\navbar.html.py:36
 msgid "All Societies"
 msgstr "Alle Gruppen"
+
+#: .\templates\cosinnus\navbar.html.py:42
+#: .\templates\cosinnus\navbar.html.py:58
+#: .\templates\cosinnus\group\group_list.html.py:4 .\utils\dashboard.py:263
+msgid "Projects"
+msgstr "Projekte"
+
+#: .\templates\cosinnus\navbar.html.py:50
+#: .\templates\cosinnus\navbar.html.py:54
+msgid "All Projects"
+msgstr "Alle Projekte"
 
 #: .\templates\cosinnus\navbar.html.py:72
 #: .\templates\cosinnus\navbar.html.py:77
@@ -835,7 +843,7 @@ msgstr ""
 "Sie können keine Termine anlegen oder bearbeiten bis sie sich einloggen."
 
 #: .\templates\cosinnus\search.html.py:5 .\templates\cosinnus\search.html.py:6
-#: .\templates\cosinnus\search.html.py:278
+#: .\templates\cosinnus\search.html.py:279
 msgid "Search"
 msgstr "Suche"
 
@@ -860,11 +868,11 @@ msgstr "Meine Projekte"
 msgid "Other Groups"
 msgstr "Andere Projekte"
 
-#: .\templates\cosinnus\search.html.py:291
+#: .\templates\cosinnus\search.html.py:292
 msgid "previous"
 msgstr "Zurück"
 
-#: .\templates\cosinnus\search.html.py:297
+#: .\templates\cosinnus\search.html.py:298
 msgid "next"
 msgstr "Weiter"
 
@@ -1274,6 +1282,42 @@ msgstr ""
 #, python-format
 msgid "%(sender_name)s wants to join %(group_name)s on %(site_name)s!"
 msgstr "%(sender_name)s möchte %(group_name)s beitreten bei %(site_name)s!"
+
+#: .\templates\cosinnus\mail\user_tagged_in_object.txt.py:1
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"you were tagged in \"%(object_name)s\" in %(group_name)s by %(sender_name)"
+"s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: %"
+"(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"du wurdest markiert in \"%(object_name)s\", in %(group_name)s von %"
+"(sender_name)s. \n"
+"\n"
+"Du kannst es finden indem du folgenden Link aufrufst: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Folge diesem Link um deine Benachrichtigungseinstellungen zu ändern: %"
+"(notification_settings_url)s )\n"
+"\n"
+"Dein %(site_name)s Team"
+
+#: .\templates\cosinnus\mail\user_tagged_in_object_subj.txt.py:1
+#, python-format
+msgid "You were tagged in: \"%(object_name)s\", in %(group_name)s."
+msgstr ""
 
 #: .\templates\cosinnus\registration\leftnav.html.py:15
 #: .\templates\cosinnus\registration\login.html.py:4
@@ -1717,11 +1761,11 @@ msgstr ""
 "De/dier Benutzer_in %(user_name)s möchte dem Projekt %(group_name)s "
 "beitreten."
 
-#: .\templatetags\cosinnus_tags.py:112
+#: .\templatetags\cosinnus_tags.py:116
 msgid "(Deleted User)"
 msgstr "(Gelöschter Nutzer)"
 
-#: .\templatetags\cosinnus_tags.py:257 .\templatetags\cosinnus_tags.py:283
+#: .\templatetags\cosinnus_tags.py:261 .\templatetags\cosinnus_tags.py:287
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>%(model_name)s konnte nicht gerendert werden!</i>"
@@ -1924,8 +1968,8 @@ msgid ""
 "There was an error while processing your avatar. The image file might be "
 "broken or the file transfer was interrupted."
 msgstr ""
-"Es gab einen Fehler beim Verarbeiten der Avatar-Auswahl. Die Bilddatei "
-"ist möglicherweise beschädigt oder der Übertragungsvorgang wurde unterbrochen. "
+"Es gab einen Fehler beim Verarbeiten der Avatar-Auswahl. Die Bilddatei ist "
+"möglicherweise beschädigt oder der Übertragungsvorgang wurde unterbrochen. "
 
 #: .\views\mixins\filters.py:90 .\views\mixins\filters.py:99
 #, python-format
