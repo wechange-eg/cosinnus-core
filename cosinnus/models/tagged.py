@@ -19,6 +19,7 @@ from cosinnus.models.widget import WidgetConfig
 from cosinnus.core.registries.widgets import widget_registry
 from django.utils.functional import cached_property
 from django.core.exceptions import ImproperlyConfigured
+from cosinnus import cosinnus_notifications
 
 
 class LocationModelMixin(models.Model):
@@ -160,10 +161,23 @@ class BaseTaggableObjectModel(models.Model):
             self.__class__.__name__, self.title, self.pk)
 
     def save(self, *args, **kwargs):
+        created = bool(self.pk) == False
         unique_aware_slugify(self, 'title', 'slug', group=self.group)
         if hasattr(self, '_media_tag_cache'):
             del self._media_tag_cache
         super(BaseTaggableObjectModel, self).save(*args, **kwargs)
+        if created:
+            pass
+    
+    def on_save_added_tagged_persons(self, set_users):
+        """ Called by the taggable form whenever this object is saved and -new- persons
+            have been added as tagged! 
+            This can be overridden in specific TaggableObjects for a more specific notification email message.
+            Just add extra={'mail_template':'<your_template>', 'subject_template':'<your_template>'} """
+        # exclude creator from audience always
+        set_users -= set([self.creator])
+        cosinnus_notifications.user_tagged_in_object.send(sender=self, user=self.creator, obj=self, audience=list(set_users))
+            
 
     def media_tag_object(self):
         key = '_media_tag_cache'
