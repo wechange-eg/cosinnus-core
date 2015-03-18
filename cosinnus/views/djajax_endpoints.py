@@ -8,8 +8,8 @@ from djajax.views import DjajaxEndpoint
 
 class DjajaxCosinnusEndpoint(DjajaxEndpoint):
     
-    def check_write_permissions(self, obj, user):
+    def check_write_permissions(self, obj, user, **kwargs):
         """ Permissions check if ``user`` may modify ``obj``.
             It is highly recommended to override this method!
         """
-        return check_object_write_access(obj, user)
+        return check_object_write_access(obj, user, **kwargs)

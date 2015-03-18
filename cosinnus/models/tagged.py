@@ -220,7 +220,7 @@ class BaseTaggableObjectModel(models.Model):
             @param user: The user to check for extra permissions for """
         return False
     
-    def grant_extra_write_permissions(self, user):
+    def grant_extra_write_permissions(self, user, **kwargs):
         """ An overridable check for whether this object grants certain users write permissions
             even though by general rules that user couldn't write the object.
             

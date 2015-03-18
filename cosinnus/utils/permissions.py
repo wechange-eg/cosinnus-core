@@ -81,7 +81,7 @@ def check_object_read_access(obj, user):
             "type was: %s" % (str(obj.__class__) if obj else "None"))
     
 
-def check_object_write_access(obj, user):
+def check_object_write_access(obj, user, fields=None):
     """ Checks write permissions for either a CosinnusGroup and BaseTaggableObject or any object with a creator attribute.
         For CosinnusGroups, check if the user can edit/update/delete the group iself:
             returns ``True`` if the user is either admin, staff member or group admin
@@ -89,6 +89,10 @@ def check_object_write_access(obj, user):
             returns ``True`` if the user is either admin, staff member, object owner or group admin 
                 of the group the item belongs to
         For Objects with a creator attribute, check if the user is the creator of that object or he is staff or admin.
+        
+        :param fields: Optional list of fields that are requested to be changed. This will be passed on to `
+            ``obj.grant_extra_write_permissions()`` so that objects can make fine-grained decisions whether to allow
+            write access to only select fields.
         
     """
     # check what kind of object was supplied (CosinnusGroup or BaseTaggableObject)
@@ -108,13 +112,13 @@ def check_object_write_access(obj, user):
                 obj.is_container and not obj.path == '/' and check_ug_membership(user, obj.group)
             
         return user.is_superuser or user.is_staff or obj.creator == user or (is_admin and not is_private) \
-            or obj.grant_extra_write_permissions(user) or folder_for_group_member
+            or obj.grant_extra_write_permissions(user, fields=fields) or folder_for_group_member
     elif issubclass(obj.__class__, BaseUserProfile):
         return obj.user == user or user.is_superuser or user.is_staff
     elif hasattr(obj, 'creator'):
         return obj.creator == user or user.is_superuser or user.is_staff
     elif hasattr(obj, 'grant_extra_write_permissions'):
-        return obj.grant_extra_write_permissions(user)
+        return obj.grant_extra_write_permissions(user, fields=fields)
     
     raise Exception("cosinnus.core.permissions: You must either supply a CosinnusGroup " +\
             "or a BaseTaggableObject or an object with a ``creator`` property  " +\
