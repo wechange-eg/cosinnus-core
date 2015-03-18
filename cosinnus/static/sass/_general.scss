@@ -331,3 +331,7 @@ textarea, input.form-control {
 a.portal-inlink:hover img {
     background-color: rgba(255, 255, 255, 0.5);
 }
+
+.form-control-focus-emphasized:focus {
+    background-color:white; color:rgb(51,51,51);
+}

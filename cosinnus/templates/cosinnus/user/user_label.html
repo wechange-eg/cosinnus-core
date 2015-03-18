@@ -1,0 +1,8 @@
+{% load static cosinnus_tags %}
+
+<span>
+	<a href="{{ user|profile_url }}">
+		{% include "cosinnus/user/user_avatar_image.html" with user=user extra_style="width: 16px;" %}
+		{{ user|full_name }}
+	</a>
+</span>

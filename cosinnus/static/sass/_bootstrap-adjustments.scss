@@ -124,7 +124,7 @@ body {
 .content-box .form-control:-ms-input-placeholder { text-align: left; }
 
 // Simple text
-p {
+p, .white-content {
 	margin-bottom: 0;
 	padding: 8px;
 	background-color: $app-neutral-color-white;
@@ -141,7 +141,7 @@ p {
 		}
 	}
 }
-p.transparent {
+p.transparent, .white-content.transparent {
 	background-color: transparent;
 	padding: 0;
 	margin: -4px 0 8px 0;

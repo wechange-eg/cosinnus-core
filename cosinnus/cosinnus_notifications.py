@@ -1,16 +1,23 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import django.dispatch as dispatch
 from django.utils.translation import ugettext_lazy as _
 
-from cosinnus.core.signals import user_group_join_requested
+
+
 
 """ Cosinnus:Notifications configuration file. 
     See http://git.sinnwerkstatt.com/cosinnus/cosinnus-core/wikis/cosinnus-notifications-guidelines.
 """
 
 """ Signal definitions """
-# see cosinnus.core.signals
+# also see cosinnus.core.signals
+from cosinnus.core.signals import user_group_join_requested
+
+user_tagged_in_object = dispatch.Signal(providing_args=["user", "obj", "audience"])
+
+
 
 """ Notification definitions.
     These will be picked up by cosinnus_notfications automatically, as long as the 
@@ -39,6 +46,13 @@ notifications = {
         'mail_template': 'cosinnus/mail/user_group_join_requested.html',
         'subject_template': 'cosinnus/mail/user_group_join_requested_subj.txt',
         'signals': [user_group_join_requested],
+        'default': True,
+    },    
+    'user_tagged_in_object': {
+        'label': _('You were tagged in a post, document or other item'), 
+        'mail_template': 'cosinnus/mail/user_tagged_in_object.txt',   # this template will be overwritten by specific items in other cosinnus apps
+        'subject_template': 'cosinnus/mail/user_tagged_in_object_subj.txt',   # this template will be overwritten by specific items in other cosinnus apps
+        'signals': [user_tagged_in_object],
         'default': True,
     },    
 }

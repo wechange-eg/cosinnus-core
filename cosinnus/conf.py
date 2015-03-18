@@ -33,6 +33,12 @@ class CosinnusConf(AppConf):
             'cosinnus_todo.TodoEntry',
             'cosinnus_etherpad.Etherpad'
         ],
+        'cosinnus_todo.TodoEntry': [
+            'cosinnus_file.FileEntry',
+            'cosinnus_event.Event',
+            'cosinnus_note.Note',
+            'cosinnus_etherpad.Etherpad'
+        ],
     }
     
     # Configures by which search terms each Attachable Model can be match-restricted in the select 2 box

@@ -186,28 +186,28 @@ body {
   text-align: left;
 }
 
-p {
+p,.white-content {
   margin-bottom: 0;
   padding: 8px;
   background-color: white;
   color: #333333;
 }
-p a {
+p a, .white-content a {
   color: #104a59;
   font-weight: bold;
 }
-p a:focus, p a:active, p a:hover {
+p a:focus, p a:active, p a:hover, .white-content a:focus, .white-content a:active, .white-content a:hover {
   color: #104a59;
   font-weight: bold;
   text-decoration: underline;
 }
 
-p.transparent {
+p.transparent, .white-content.transparent {
   background-color: transparent;
   padding: 0;
   margin: -4px 0 8px 0;
 }
-p.transparent a {
+p.transparent a, .white-content.transparent a {
   color: #333333;
   text-decoration: underline;
 }
@@ -2840,4 +2840,13 @@ div.dashboard-appwidget:last-child {
 }
 a.portal-inlink:hover img {
     background-color: rgba(255, 255, 255, 0.5);
+}
+
+.item-header {
+    font-size: 20px;
+    padding: 15px 15px 15px 10px;
+}
+
+.form-control-focus-emphasized:focus {
+    background-color:white; color:rgb(51,51,51);
 }

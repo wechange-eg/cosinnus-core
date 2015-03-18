@@ -1,0 +1,117 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags static %}
+
+{% block page_title %}{% trans "Users" %}{% endblock %}
+
+
+{% block leftnav %}
+    {% include "cosinnus/group/leftnav_all_groups.html"  with current_page="portaladminlist" %}
+{% endblock leftnav %}
+
+
+{% block breadcrumb %}
+    <li><a href="{% url 'cosinnus:user-list' %}">{% trans "User overview" %}</a></li>
+    <li class="active">{% trans "Portal Administrators" %}</li>
+{% endblock %}
+
+{% block content %}
+    
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+        
+        <!-- hidden as long as create link is in the leftnav
+        {% if user.is_superuser %}
+	        <div type="button" class="btn btn-default w100 large-space">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left" href="#">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                        <div class="media-body media-body-form-control">
+                            <input class="form-control next-button-is-for-sending"
+                                placeholder="Gib den Titel für eine neue Gruppe ein."
+                                value="" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <button type="button" class="btn btn-emphasized large-space" style="display: none;">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left" href="#">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                        <div class="media-body">
+                            Erstellen
+                        </div>
+                    </li>
+                </ul>
+            </button>
+        {% endif %}
+        -->
+	    {% for user in object_list %}
+	        <div class="fadedown {% if not forloop.last or hidden_user_count > 0 %}regular-space{% endif %}">
+	            <div class="btn btn-emphasized w100">
+	                <ul class="media-list">
+	                    <li class="media">
+	                        <a class="pull-left" href="{% url 'cosinnus:profile-detail' username=user.username %}">
+	                            {% include "cosinnus/user/user_avatar_image.html" with user=user %}
+	                        </a>
+	                        {% comment %}   fadedown disabled
+	                        <a class="pull-right fadedown-clickarea" href="#">
+	                            <i class="fa fa-chevron-down"></i>
+	                        </a>
+	                        {% endcomment %}
+	                        <a class="pull-right" href="{% url 'postman_write' recipients=user.username %}" title="{% trans "Send Message" %}">
+	                            <i class="fa fa-envelope"></i>
+	                        </a>
+	                        <div class="media-body">
+	                            {% comment %}  
+	                            {% if user.is_authenticated %}
+                                    <span class="annotation">
+		                                {% if user.pk in admins %}
+                                            {% trans "Group Admin" %}
+                                        {% elif user.pk in members %}
+                                            {% trans "Group Member" %}
+                                        {% elif user.pk in pendings %}
+                                            {% trans "Membership requested" %}
+                                        {% elif group.public %}
+                                            {% trans "Public group" %}
+                                        {% else %}
+		                                    {% trans "Not a member" %}
+		                                {% endif %}
+		                            </span>
+                                {% endif %}
+                                {% endcomment %}
+	                            <a href="{% url 'cosinnus:profile-detail' username=user.username %}">
+	                                {{ user|full_name }}
+	                            </a>
+	                        </div>
+	                    </li>
+	                </ul>
+	            </div>
+	        </div>
+		{% empty %}
+		   <!-- {% trans "There are no visible users." %} -->
+		   {% include 'cosinnus/common/empty_button.html' with message="There are no visible users." %}
+		{% endfor %}
+        
+		{% if hidden_user_count > 0 %}
+            <div class="btn btn-default w100">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left" href="#">
+                            <img src="{% static 'images/jane-doe.png' %}" />
+                        </a>
+                        <div class="media-body">
+                            {% blocktrans with hidden_count=hidden_user_count %}And {{ hidden_count }} private users...{% endblocktrans %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+		{% endif %}
+
+    </div>
+    
+{% endblock %}
+

@@ -154,6 +154,12 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
             obj.media_tag = media_tag
             # Assign the taggable object's group to the media tag
             if commit:
+                # we keep a record of the tagged persons before and after, to see which ones
+                # got tagged freshly, for notification purposes
+                # sadly queryset subtraction is not implemented optimally in django,
+                # so since we hit the db anyways, we might as well subtract the lists 
+                persons_before = set(media_tag.persons.all())
+                
                 # We first save the media tag so that we can use it's id and
                 # assign it to the taggable object, since Django can't handle
                 # modifications to a field `fkfield` and update the
@@ -165,11 +171,18 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
                 # save extra forms
                 for extra_form_name in self.base_extra_forms.keys():
                     instances[extra_form_name].save()
-                    
                 # Some forms might contain m2m data. We need to save them
                 # explicitly since we called save() with commit=False before.
+                
                 self.save_m2m()
-
+                
+                # compare tagged persons, and if there are new ones, trigger notifications
+                persons_after = set(media_tag.persons.all())
+                added_persons = persons_after - persons_before
+                if len(added_persons) > 0:
+                    obj.on_save_added_tagged_persons(added_persons)
+                
+                
             # We do not really care about the media tag as a return value.
             # We can access it through the object.
             return obj

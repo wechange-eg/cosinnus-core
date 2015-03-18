@@ -9,7 +9,7 @@ from django.http import Http404
 from django_select2 import Select2View, NO_ERR_RESP
 from taggit.models import Tag
 
-from cosinnus.models.group import CosinnusGroup
+from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus.utils.choices import get_user_choices
 from cosinnus.utils.permissions import check_ug_membership
@@ -27,7 +27,7 @@ class GroupMembersView(RequireGroupMember, Select2View):
 
         uids = self.group.members
         q = Q(id__in=uids)
-        q &= Q(first_name__icontains=term) | Q(last_name__icontains=term) | Q(username__icontains=term)
+        q &= Q(first_name__icontains=term) | Q(last_name__icontains=term) | Q(username__icontains=term) | Q(email__icontains=term)
 
         count = User.objects.exclude(is_active=False).filter(q).count()
         if count < start:
@@ -52,14 +52,15 @@ class AllMembersView(RequireLoggedIn, Select2View):
 
         User = get_user_model()
 
-        q = Q(first_name__icontains=term) | Q(last_name__icontains=term) | Q(username__icontains=term)
-
-        count = User.objects.exclude(is_active=False).filter(q).count()
+        q = Q(first_name__icontains=term) | Q(last_name__icontains=term) | Q(username__icontains=term) | Q(email__icontains=term)
+        user_qs = User.objects.exclude(is_active=False).filter(id__in=CosinnusPortal.get_current().members).filter(q)
+        
+        count = user_qs.count()
         if count < start:
             raise Http404
         has_more = count > end
 
-        users = User.objects.exclude(is_active=False).filter(q).all()[start:end]
+        users = user_qs.all()[start:end]
         results = get_user_choices(users)
 
         return (NO_ERR_RESP, has_more, results)
