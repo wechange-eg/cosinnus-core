@@ -140,7 +140,7 @@ class BaseTaggableObjectModel(models.Model):
 
     creator = models.ForeignKey(settings.AUTH_USER_MODEL,
         verbose_name=_('Creator'),
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         null=True,
         related_name='%(app_label)s_%(class)s_set')
     created = models.DateTimeField(
