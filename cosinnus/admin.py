@@ -193,6 +193,19 @@ class UserProfileInline(admin.StackedInline):
 
 class UserAdmin(DjangoUserAdmin):
     inlines = (UserProfileInline,)
+    actions = ['deactivate_users']
+    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'is_active')
+    
+    def deactivate_users(self, request, queryset):
+        count = 0
+        for user in queryset:
+            user.is_active = False
+            user.save()
+            count += 1
+        message = _('%d Users were deactivated successfully.') % count
+        self.message_user(request, message)
+    deactivate_users.short_description = _('Deactivate users (will keep all all items they created on the site)')
+    
 
 admin.site.unregister(USER_MODEL)
 admin.site.register(USER_MODEL, UserAdmin)
