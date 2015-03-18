@@ -12,6 +12,7 @@ urlpatterns = patterns('cosinnus.views',
 
     url(r'^signup/$', 'user.user_create', name='user-add'),
     url(r'^users/$', 'user.user_list', name='user-list'),
+    url(r'^portal/admins/$', 'user.portal_admin_list', name='portal-admin-list'),
     url(r'^users/map/$', 'user.user_list_map', name='user-list-map'),
     url(r'^user/(?P<username>[^/]+)/$', 'profile.detail_view', name='profile-detail'),
     #url(r'^user/(?P<username>[^/]+)/edit/$', 'user.user_update', name='user-edit'),

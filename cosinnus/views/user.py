@@ -61,6 +61,25 @@ class UserListMapView(UserListView):
 user_list_map = UserListMapView.as_view()
 
 
+class PortalAdminListView(UserListView):
+
+    template_name = 'cosinnus/user/portal_admin_list.html'
+    
+    def get_queryset(self):
+        # get all admins from this portal only        
+        qs = super(UserListView, self).get_queryset()
+        qs = qs.exclude(is_active=False).\
+                        filter(id__in=CosinnusPortal.get_current().admins)
+        qs = qs.order_by('first_name', 'last_name')
+        qs = qs.select_related('cosinnus_profile')
+        
+        self.hidden_users = get_user_model().objects.none()
+        
+        return qs
+    
+portal_admin_list = PortalAdminListView.as_view()
+
+
 class UserCreateView(CreateView):
 
     form_class = UserCreationForm

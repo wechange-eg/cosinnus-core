@@ -37,6 +37,7 @@ from multiform.forms import InvalidArgument
 from cosinnus.forms.tagged import get_form  # circular import
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.models.tagged import BaseTagObject
+from django.shortcuts import redirect
 
 
 class SamePortalGroupMixin(object):
@@ -49,8 +50,8 @@ class SamePortalGroupMixin(object):
 
 class CosinnusGroupFormMixin(object):
     
-    def get_form_class(self):
-        
+    def dispatch(self, *args, **kwargs):
+        """ Find out which type of CosinnusGroup (project/society), we're dealing with here. """
         group_url_key = self.request.path.split('/')[1]
         form_class = group_model_registry.get_form(group_url_key, None)
         model_class = group_model_registry.get(group_url_key, None)
@@ -58,8 +59,19 @@ class CosinnusGroupFormMixin(object):
             form_class = group_model_registry.get_form_by_plural_key(group_url_key, None)
             model_class = group_model_registry.get_by_plural_key(group_url_key, None)
         self.group_model_class = model_class
+        self.group_form_class = form_class
         
-        class CosinnusGroupForm(get_form(form_class, attachable=False)):
+        # special check: only portal admins can create groups
+        if model_class == CosinnusSociety:
+            if not self.request.user.id in CosinnusPortal.get_current().admins:
+                messages.warning(self.request, _('Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators.'))
+                return redirect(reverse('cosinnus:portal-admin-list'))
+        
+        return super(CosinnusGroupFormMixin, self).dispatch(*args, **kwargs)
+    
+    def get_form_class(self):
+        
+        class CosinnusGroupForm(get_form(self.group_form_class, attachable=False)):
             def dispatch_init_group(self, name, group):
                 if name == 'media_tag':
                     return group

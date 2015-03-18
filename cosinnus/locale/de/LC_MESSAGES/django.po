@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-18 13:15+0100\n"
+"POT-Creation-Date: 2015-03-18 16:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -74,7 +74,9 @@ msgstr "%d Benutzer wurden erfolgreich deaktiviert."
 
 #: .\admin.py:207
 msgid "Deactivate users (will keep all all items they created on the site)"
-msgstr "Ausgewählte Benutzer deaktivieren (deren erstellte Items bleiben auf der Seite erhalten)"
+msgstr ""
+"Ausgewählte Benutzer deaktivieren (deren erstellte Items bleiben auf der "
+"Seite erhalten)"
 
 #: .\cosinnus_notifications.py:45
 msgid "A user requested to become a member of this group (admins only)"
@@ -638,7 +640,7 @@ msgstr "Möchten sie %(title)s beitreten?"
 #: .\templates\cosinnus\group\group_list.html.py:144
 #: .\templates\cosinnus\group\group_list.html.py:196
 #: .\templates\cosinnus\group\leftnav_group.html.py:43
-#: .\templates\cosinnus\group\leftnav_group.html.py:48 .\views\group.py:377
+#: .\templates\cosinnus\group\leftnav_group.html.py:48 .\views\group.py:389
 msgid "Join"
 msgstr "Beitreten"
 
@@ -665,8 +667,8 @@ msgstr "Ordnername"
 #: .\templates\cosinnus\leftnav_button_editable_folder.html.py:39
 #: .\templates\cosinnus\group\group_form.html.py:221
 #: .\templates\cosinnus\user\userprofile_form.html.py:225
-#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:294
-#: .\views\group.py:576 .\views\user.py:129
+#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:306
+#: .\views\group.py:588 .\views\user.py:148
 msgid "Save"
 msgstr "Speichern"
 
@@ -678,8 +680,8 @@ msgstr "Ordner löschen"
 #: .\templates\cosinnus\leftnav_button_editable_folder.html.py:51
 #: .\templates\cosinnus\group\group_form.html.py:109
 #: .\templates\cosinnus\user\userprofile_form.html.py:159
-#: .\templates\cosinnus\widgets\base_widget.html.py:39 .\views\group.py:149
-#: .\views\group.py:613
+#: .\templates\cosinnus\widgets\base_widget.html.py:39 .\views\group.py:161
+#: .\views\group.py:625
 msgid "Delete"
 msgstr "Löschen"
 
@@ -977,6 +979,7 @@ msgid "Remove Member"
 msgstr "Mitarbeiter_in entfernen"
 
 #: .\templates\cosinnus\group\group_detail.html.py:162
+#: .\templates\cosinnus\user\portal_admin_list.html.py:109
 #: .\templates\cosinnus\user\user_list.html.py:112
 #, python-format
 msgid "And %(hidden_count)s private users..."
@@ -1044,14 +1047,14 @@ msgstr "Projekt “%(group_name)s” bearbeiten"
 
 #: .\templates\cosinnus\group\group_form.html.py:8
 #: .\templates\cosinnus\group\group_form.html.py:29
-#: .\templates\cosinnus\group\leftnav_all_groups.html.py:37
+#: .\templates\cosinnus\group\leftnav_all_groups.html.py:39
 msgid "Create Society"
 msgstr "Gruppe erstellen"
 
 #
 #: .\templates\cosinnus\group\group_form.html.py:8
 #: .\templates\cosinnus\group\group_form.html.py:29
-#: .\templates\cosinnus\group\leftnav_all_groups.html.py:25
+#: .\templates\cosinnus\group\leftnav_all_groups.html.py:27
 msgid "Create Group"
 msgstr "Projekt erstellen"
 
@@ -1132,11 +1135,11 @@ msgstr "Nicht Mitarbeiter_in"
 #: .\templates\cosinnus\group\group_list.html.py:140
 #: .\templates\cosinnus\group\group_list.html.py:188
 #: .\templates\cosinnus\group\leftnav_group.html.py:23
-#: .\templates\cosinnus\group\leftnav_group.html.py:28 .\views\group.py:411
+#: .\templates\cosinnus\group\leftnav_group.html.py:28 .\views\group.py:423
 msgid "Leave"
 msgstr "Verlassen"
 
-#: .\templates\cosinnus\group\group_list.html.py:142 .\views\group.py:455
+#: .\templates\cosinnus\group\group_list.html.py:142 .\views\group.py:467
 msgid "Withdraw"
 msgstr "Zurückziehen"
 
@@ -1179,21 +1182,27 @@ msgid "Users in group %(group)s"
 msgstr "Benutzer_in in Projekt %(group)s"
 
 #: .\templates\cosinnus\group\group_user_list.html.py:23
+#: .\templates\cosinnus\user\portal_admin_list.html.py:97
 #: .\templates\cosinnus\user\user_list.html.py:100
 msgid "There are no visible users."
 msgstr "Es gibt keine sichtbaren Benutzer_innen."
 
-#: .\templates\cosinnus\group\leftnav_all_groups.html.py:20
+#: .\templates\cosinnus\group\leftnav_all_groups.html.py:22
 msgid "All groups"
 msgstr "Alle Projekte"
 
-#: .\templates\cosinnus\group\leftnav_all_groups.html.py:32
+#: .\templates\cosinnus\group\leftnav_all_groups.html.py:34
 msgid "All societies"
 msgstr "Alle Gruppen"
 
-#: .\templates\cosinnus\group\leftnav_all_groups.html.py:44
+#: .\templates\cosinnus\group\leftnav_all_groups.html.py:46
 msgid "All users"
 msgstr "Alle Menschen"
+
+#: .\templates\cosinnus\group\leftnav_all_groups.html.py:50
+#: .\templates\cosinnus\user\portal_admin_list.html.py:14
+msgid "Portal Administrators"
+msgstr "Portal-Administrator_innen"
 
 #: .\templates\cosinnus\group\leftnav_group.html.py:27
 #, python-format
@@ -1210,7 +1219,7 @@ msgid "Add container"
 msgstr "Zusammenstellung hinzufügen"
 
 #: .\templates\cosinnus\hierarchy\add_container.html.py:27
-#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:539
+#: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:551
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -1547,15 +1556,22 @@ msgstr "Über mich"
 msgid "Delete profile"
 msgstr "Profil löschen"
 
+#: .\templates\cosinnus\user\portal_admin_list.html.py:4
 #: .\templates\cosinnus\user\user_list.html.py:4
 #: .\templates\cosinnus\user\user_list_map.html.py:4
 msgid "Users"
 msgstr "Benutzer_innen"
 
+#: .\templates\cosinnus\user\portal_admin_list.html.py:13
 #: .\templates\cosinnus\user\user_list.html.py:13
 #: .\templates\cosinnus\user\user_list_map.html.py:13
 msgid "User overview"
 msgstr "Benutzer_innen-Übersicht"
+
+#: .\templates\cosinnus\user\portal_admin_list.html.py:66
+#: .\templates\cosinnus\user\userprofile_detail.html.py:80
+msgid "Send Message"
+msgstr "Nachricht schicken"
 
 #: .\templates\cosinnus\user\userprofile_delete.html.py:5
 #: .\templates\cosinnus\user\userprofile_delete.html.py:31
@@ -1638,10 +1654,6 @@ msgstr ""
 #: .\templates\cosinnus\user\userprofile_form.html.py:11
 msgid "Edit Profile"
 msgstr "Profil bearbeiten"
-
-#: .\templates\cosinnus\user\userprofile_detail.html.py:80
-msgid "Send Message"
-msgstr "Nachricht schicken"
 
 #: .\templates\cosinnus\user\userprofile_detail.html.py:118
 msgid "My Website"
@@ -1800,31 +1812,42 @@ msgstr "Die Sprache \"%s\" wird nicht unterstützt."
 msgid "No model given to export data from."
 msgstr "Kein Modell zum Exportieren der Daten angegeben."
 
-#: .\views\group.py:90
+#: .\views\group.py:67
+msgid ""
+"Sorry, only portal administrators can create Groups! You can either create a "
+"Project, or write a message to one of the administrators to create a Group "
+"for you. Below you can find a listing of all administrators."
+msgstr ""
+"Entschuldige, nur Portal-Administrator_innen können Gruppen erstellen! Du kannst "
+"entweder ein Projekt erstellen oder den Administrator_innen eine Nachricht "
+"schreiben damit sie für dich eine Gruppe erstellen. Unten findest du eine Liste "
+"aller Administrator_innen."
+
+#: .\views\group.py:102
 #, python-format
 msgid "%(group_type)s \"%(group)s\" was created successfully."
 msgstr "%(group_type)s \"%(group)s\" wurde erfolgreich erstellt."
 
-#: .\views\group.py:116 .\views\user.py:86
+#: .\views\group.py:128 .\views\user.py:105
 msgid "Create"
 msgstr "Erstellen"
 
-#: .\views\group.py:286
+#: .\views\group.py:298
 #, python-format
 msgid "The %(group_type)s was changed successfully."
 msgstr "%(group_type)s wurde erfolgreich geändert."
 
-#: .\views\group.py:378
+#: .\views\group.py:390
 #, python-format
 msgid "Do you want to join the %(group_type)s “%(group_name)s”?"
 msgstr "Möchten sie %(group_type)s %(group_name)s beitreten?"
 
-#: .\views\group.py:379
+#: .\views\group.py:391
 #, python-format
 msgid "Join %(group_type)s “%(group_name)s”?"
 msgstr "%(group_type)s %(group_name)s beitreten?"
 
-#: .\views\group.py:380
+#: .\views\group.py:392
 #, python-format
 msgid ""
 "You have requested to join the %(group_type)s “%(group_name)s”. You will "
@@ -1834,23 +1857,23 @@ msgstr ""
 "gestellt. Du erhältst eine E-Mail sobald ein Projektadministrator den Antrag "
 "bearbeitet."
 
-#: .\views\group.py:412
+#: .\views\group.py:424
 #, python-format
 msgid "Do you want to leave the %(group_type)s “%(group_name)s”?"
 msgstr "Möchten sie %(group_type)s “%(group_name)s” verlassen?"
 
-#: .\views\group.py:413
+#: .\views\group.py:425
 #, python-format
 msgid "Leaving %(group_type)s “%(group_name)s”?"
 msgstr "%(group_type)s “%(group_name)s” verlassen?"
 
-#: .\views\group.py:415
+#: .\views\group.py:427
 #, python-format
 msgid "You are no longer a member of the %(group_type)s “%(group_name)s”."
 msgstr ""
 "Du bist jetzt nicht mehr Mitarbeiter_in von %(group_type)s “%(group_name)s”."
 
-#: .\views\group.py:447
+#: .\views\group.py:459
 #, python-format
 msgid ""
 "You cannot leave this %(group_type)s. You are the only administrator left."
@@ -1858,7 +1881,7 @@ msgstr ""
 "Sie können diese(s) %(group_type)s nicht verlassen, da sie der einzig übrige "
 "Administrator sind."
 
-#: .\views\group.py:456
+#: .\views\group.py:468
 #, python-format
 msgid ""
 "Do you want to withdraw your join request to the %(group_type)s “%"
@@ -1867,12 +1890,12 @@ msgstr ""
 "Möchten sie ihre Beitrittsanfrage für %(group_type)s “%(group_name)s” "
 "zurückziehen?"
 
-#: .\views\group.py:457
+#: .\views\group.py:469
 #, python-format
 msgid "Withdraw join request to %(group_type)s “%(group_name)s”?"
 msgstr "Beitrittsanfrage für %(group_type)s “%(group_name)s” zurückziehen?"
 
-#: .\views\group.py:459
+#: .\views\group.py:471
 #, python-format
 msgid ""
 "Your join request was withdrawn from %(group_type)s “%(group_name)s” "
@@ -1881,23 +1904,23 @@ msgstr ""
 "Deine Beitrittsanfrage für %(group_type)s “%(group_name)s” wurde "
 "zurückgezogen."
 
-#: .\views\group.py:567
+#: .\views\group.py:579
 msgid "You cannot change your own admin status."
 msgstr "Sie können ihren eigenen Administratorstatus nicht ändern."
 
-#: .\views\group.py:569 .\views\group.py:603
+#: .\views\group.py:581 .\views\group.py:615
 #, python-format
 msgid "You cannot remove “%(username)s” form this group. Only one admin left."
 msgstr ""
 "Sie können “%(username)s” nicht von diesem Projekt entfernen. Er/sie ist der "
 "einzig übrige Administrator."
 
-#: .\views\group.py:601
+#: .\views\group.py:613
 #, python-format
 msgid "You cannot remove yourself from a %(group_type)s."
 msgstr "Sie können sich nicht selbst von eine(r/m) %(group_type)s entfernen."
 
-#: .\views\group.py:614
+#: .\views\group.py:626
 #, python-format
 msgid ""
 "Do you want to remove the user “%(username)s”  from the %(group_type)s “%"
@@ -1906,7 +1929,7 @@ msgstr ""
 "Möchten sie Benutzer_in “%(username)s” aus %(group_type)s “%(group_name)s” "
 "entfernen?"
 
-#: .\views\group.py:619
+#: .\views\group.py:631
 #, python-format
 msgid "Remove user from %(group_type)s “%(group_name)s”?"
 msgstr "Benutzer_in aus %(group_type)s “%(group_name)s” entfernen?"
@@ -1954,7 +1977,7 @@ msgstr ""
 "dem Löschen deines Profils einen anderen Administrator aus oder lösche das "
 "Projekt zuerst."
 
-#: .\views\user.py:71
+#: .\views\user.py:90
 #, python-format
 msgid ""
 "User \"%(user)s\" was registered successfully. You can now log in using this "
@@ -2022,6 +2045,9 @@ msgstr "Objekt \"%(title)s\" wurde erfolgreich gelöscht."
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d andere Objekte wurden gelöscht."
+
+#~ msgid "Portal administrators"
+#~ msgstr "Portal-Administrator_innen"
 
 #~ msgid "Add a member."
 #~ msgstr "Mitarbeiter_in hinzuügen"

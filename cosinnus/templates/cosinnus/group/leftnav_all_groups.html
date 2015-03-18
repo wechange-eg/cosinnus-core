@@ -8,6 +8,8 @@
     {% captureas is_grouplist__society %}True{% endcaptureas %}
 {% elif current_page == "userlist" %}
     {% captureas is_userlist %}True{% endcaptureas %}
+{% elif current_page == "portaladminlist" %}
+    {% captureas is_portaladminlist %}True{% endcaptureas %}
 {% elif current_page == "addgroup" %}
     {% captureas is_addgroup %}True{% endcaptureas %}
 {% elif current_page == "addsociety" %}
@@ -38,8 +40,12 @@
 	{% endif %}
 {% endif %}
 
-{% if current_page == "userlist" %}
-	{% captureas href %}{% url 'cosinnus:user-list' %}{% endcaptureas %}
-	{% captureas label %}{% trans "All users" %}{% endcaptureas %}
-	{% include "cosinnus/leftnav_button.html" with active=is_userlist extra_classes="regular-space" icon="fa-user" label=label href=href  %}
+{% if current_page == "portaladminlist" or current_page == "userlist" %}
+    {% captureas href %}{% url 'cosinnus:user-list' %}{% endcaptureas %}
+    {% captureas label %}{% trans "All users" %}{% endcaptureas %}
+    {% include "cosinnus/leftnav_button.html" with active=is_userlist extra_classes="fine-space" icon="fa-user" label=label href=href  %}
+    
+    {% captureas href %}{% url 'cosinnus:portal-admin-list' %}{% endcaptureas %}
+    {% captureas label %}{% trans "Portal Administrators" %}{% endcaptureas %}
+    {% include "cosinnus/leftnav_button.html" with active=is_portaladminlist extra_classes="regular-space" icon="fa-user" label=label href=href  %}
 {% endif %}
