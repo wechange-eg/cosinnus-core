@@ -16,7 +16,9 @@
 
 
 {% block content %}
-  
+    <div class="clearfix regular-space">
+        <a href="{% group_url 'cosinnus:group-members-map' group=object %}" class="pull-right light-color underlined">{% trans "show on map" %}</a>
+    </div>
 
     <!-- a box with semi transparent background -->
     <div class="content-box">

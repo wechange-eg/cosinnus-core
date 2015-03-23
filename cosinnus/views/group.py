@@ -218,6 +218,13 @@ group_detail = GroupDetailView.as_view()
 group_detail_api = GroupDetailView.as_view(is_ajax_request_url=True)
 
 
+class GroupMembersMapListView(GroupDetailView):
+
+    template_name = 'cosinnus/group/group_members_map.html'
+
+group_members_map = GroupMembersMapListView.as_view()
+
+
 class GroupListView(ListAjaxableResponseMixin, ListView):
 
     model = CosinnusGroup
