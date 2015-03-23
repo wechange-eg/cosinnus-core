@@ -1,9 +1,11 @@
 {% load i18n cosinnus_tags %}
 
 {% group_url 'cosinnus:group-detail' group=group as group_detail_page %}
+{% group_url 'cosinnus:group-members-map' group=group as group_members_map_page %}
 {% group_url 'cosinnus:group-edit' group=group as group_edit_page %}
 {% group_url 'cosinnus:group-dashboard' group=group as group_dashboard_page %}
 {% group_url 'cosinnus:group-microsite' group=group as group_microsite_page %}
+
 
 <div class="btn-group w100 large-space">
     <button type="button" class="btn btn-appnavi dropdown-toggle w100" data-toggle="dropdown">
@@ -24,8 +26,10 @@
                           {{ app.label }}
                         {% endif %}
                       {% endfor %}
-                    {% elif request.path == group_detail_page or request.path == group_edit_page %}  
+                    {% elif request.path == group_edit_page %}  
                         {% trans "Settings" %}
+                    {% elif request.path == group_detail_page or request.path == group_members_map_page %}
+                        {% trans "Members" %}
                     {% elif request.path == group_microsite_page %}  
                         {% trans "Microsite" %}
                     {% elif request.path == group_dashboard_page %}
@@ -63,11 +67,19 @@
 	            </a>
 	        </li>
         {% endfor %}
-        <li class="app-main appnavi-listelement">
+        <li class="app-main appnavi-listelement {% if user|has_write_access:group %}fine-space{% endif %}">
             <a href="{{ group_detail_page }}">
+                <i class="fa fa-group"></i>
+                {% trans "Members" %}
+            </a>
+        </li>
+        {% if user|has_write_access:group %}
+        <li class="app-main appnavi-listelement">
+            <a href="{{ group_edit_page }}">
                 <i class="fa fa-cogs"></i>
                 {% trans "Settings" %}
             </a>
         </li>
+        {% endif %}
     </ul>
 </div><!-- btn-group -->
