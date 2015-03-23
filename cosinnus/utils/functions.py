@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.utils.importlib import import_module
 from uuid import uuid1
 from django.core.exceptions import ImproperlyConfigured
+from django.utils.text import normalize_newlines
 
 
 def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
@@ -126,3 +127,10 @@ def ensure_dict_keys(mydict, keys=[], message=""):
         if not "%s" in message:
             message += ': %s'
         raise ImproperlyConfigured(message % ", ".join(missing_keys))
+
+
+def clean_single_line_text(text):
+    """ Removes linebreaks, tabs and leading/traling spaces.
+        Used for all object titles and group names. """
+    text = normalize_newlines(text).replace('\n', '').replace('\t', '').strip()
+    return text

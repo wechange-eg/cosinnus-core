@@ -14,7 +14,8 @@ from taggit.managers import TaggableManager
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusGroup
-from cosinnus.utils.functions import unique_aware_slugify
+from cosinnus.utils.functions import unique_aware_slugify,\
+    clean_single_line_text
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.core.registries.widgets import widget_registry
 from django.utils.functional import cached_property
@@ -163,6 +164,7 @@ class BaseTaggableObjectModel(models.Model):
     def save(self, *args, **kwargs):
         created = bool(self.pk) == False
         unique_aware_slugify(self, 'title', 'slug', group=self.group)
+        self.title = clean_single_line_text(self.title)
         if hasattr(self, '_media_tag_cache'):
             del self._media_tag_cache
         super(BaseTaggableObjectModel, self).save(*args, **kwargs)

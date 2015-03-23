@@ -19,7 +19,8 @@ from tinymce.models import HTMLField
 
 from cosinnus.conf import settings
 from cosinnus.models.cms import CosinnusMicropage
-from cosinnus.utils.functions import unique_aware_slugify
+from cosinnus.utils.functions import unique_aware_slugify,\
+    clean_single_line_text
 from cosinnus.utils.files import get_group_avatar_filename
 from django.core.urlresolvers import reverse
 from django.utils.functional import cached_property
@@ -484,6 +485,7 @@ class CosinnusGroup(models.Model):
         created = bool(self.pk is None)
         slugs = [self.slug] if self.slug else []
         unique_aware_slugify(self, 'name', 'slug')
+        self.name = clean_single_line_text(self.name)
         if not self.slug:
             raise ValidationError(_('Slug must not be empty.'))
         # sanity check for missing media_tag:
