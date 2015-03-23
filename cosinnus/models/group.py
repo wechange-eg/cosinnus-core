@@ -253,7 +253,16 @@ class CosinnusGroupManager(models.Manager):
             .values_list('id', flat=True).distinct()
         return self.filter(Q(memberships__user_id=user.pk) & Q(memberships__status__in=MEMBER_STATUS)) \
             .values_list('id', flat=True).distinct()
-        
+    
+    def with_deactivated_app(self, app_name):
+        """
+        :returns: An iterator over all groups that have a specific cosinnus app deactivated.
+        """
+        """ also: filter(headline__contains='Lennon')"""
+        for group in self.get_cached():
+            if group.is_app_deactived(app_name):
+                yield group
+    
     def public(self):
         """
         :returns: An iterator over all public groups.
@@ -459,6 +468,11 @@ class CosinnusGroup(models.Model):
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
         blank=True, null=True, editable=False, on_delete=models.SET_NULL)
     
+    # a comma-seperated list of all cosinnus apps that should not be shown in the frontend, 
+    # be editable, or be indexed by search indices for this group
+    deactivated_apps = models.CharField(_('Deactivated Apps'), max_length=255, 
+        blank=True, null=True, editable=True)
+    
     parent = models.ForeignKey("self", verbose_name=_('Parent Group'),
         related_name='groups', null=True, blank=True, on_delete=models.SET_NULL)
     
@@ -571,6 +585,14 @@ class CosinnusGroup(models.Model):
     
     def is_foreign_portal(self):
         return CosinnusPortal.get_current().id != self.portal_id
+    
+    def get_deactivated_apps(self):
+        """ Returns a list of all cosinnus apps that have been deactivated for this group """
+        return self.deactivated_apps.split(',')
+    
+    def is_app_deactived(self, app_name):
+        """ Returns True if the cosinnus app with the given app_name has been deactivated for this group """
+        return app_name in self.deactivated_apps
     
     def media_tag_object(self):
         key = '_media_tag_cache'

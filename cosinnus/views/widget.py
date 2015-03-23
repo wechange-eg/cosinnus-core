@@ -21,6 +21,7 @@ from cosinnus.views.mixins.group import RequireReadMixin
 from uuid import uuid1
 from cosinnus.core.registries.apps import app_registry
 from cosinnus.utils.functions import resolve_class
+from cosinnus.models.group import CosinnusGroup
 
 
 def widget_list(request):
@@ -247,9 +248,18 @@ class DashboardWidgetMixin(object):
         widget_filter = self.get_filter()
         widgets_configs = WidgetConfig.objects.filter(**widget_filter).order_by('sort_field')
         
+        deactivated_apps = []
+        if 'group_id' in widget_filter:
+            group_id = widget_filter['group_id']
+            group = CosinnusGroup.objects.get_cached(pks=group_id)
+            deactivated_apps = group.get_deactivated_apps()
+        
         widgets = []
         """ We also sort each unique widget into the context to be accessed hard-coded"""
         for wc in widgets_configs:
+            # check deactivated apps to see if widget can't be shown:
+            if 'cosinnus_%s' % wc.app_name in deactivated_apps:
+                continue
             # check block list for disallowed widgets (from overriding views)
             if "%s.%s" % (wc.app_name, wc.widget_name.replace(" ", "_")) in self.disallowed_widgets:
                 continue
@@ -289,6 +299,9 @@ class GroupDashboard(RequireReadMixin, DashboardWidgetMixin, TemplateView):
         object_counts = {}
         for app in app_registry:
             app_name, _ = app_registry.get(app) 
+            print ">>", "TODO: filter for self.group.id for deactivated apps"
+            if self.group.is_app_deactived(app_name):
+                continue
             if app in self.app_object_count_mappings:
                 model = resolve_class(self.app_object_count_mappings[app]) 
                 object_counts[app_name] = model.get_current(self.group, self.request.user).count()

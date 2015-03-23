@@ -7,6 +7,7 @@ from haystack import indexes
 from haystack.exceptions import SearchFieldError
 
 from cosinnus.utils.import_utils import import_from_settings
+from cosinnus.models.group import CosinnusGroup
 
 
 def prepare_user(obj):
@@ -96,7 +97,11 @@ class BaseTaggableObjectIndex(TagObjectSearchIndex):
     group_members = indexes.MultiValueField(model_attr='group__members')
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.select_related('media_tag').all()
+        model_cls = self.get_model()
+        app_name = model_cls.__module__.split('.')[0] # eg 'cosinnus_etherpad'
+        excluded_groups_for_app = [group.id for group in CosinnusGroup.objects.with_deactivated_app(app_name)]
+        # TODO: check if this works properly
+        return model_cls.objects.exclude(group__id__in=excluded_groups_for_app).select_related('media_tag').all()
 
     def prepare_creator(self, obj):
         return prepare_user(obj.creator)

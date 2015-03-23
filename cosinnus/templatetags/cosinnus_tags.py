@@ -190,6 +190,10 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
         for app, name, label in app_registry.items():
             if app in settings.COSINNUS_HIDE_APPS:
                 continue
+            print ">>", "TODO: filter for self.group.id for deactivated apps"
+            if group.is_app_deactived(app):
+                continue
+            
             url = group_aware_reverse('cosinnus:%s:index' % name, kwargs={'group': group})
             if app == current_app:
                 active_app = app
