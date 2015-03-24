@@ -23,6 +23,15 @@ def redirect_to_403(request):
     raise PermissionDenied
 
 
+def redirect_to_not_logged_in(view, request):
+    """ Returns a redirect to the login page with a next-URL parameter and an error message """
+    # support for the ajaxable view mixin
+    if getattr(view, 'is_ajax_request_url', False):
+        return HttpResponseForbidden('Not authenticated')
+    messages.error(request, _('Please log in to access this page.'))
+    return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
+    
+
 def get_group_for_request(group_name, request):
     """ Retrieve the proxy group object depending on the URL path regarding 
         the registered group models.
@@ -91,11 +100,7 @@ def require_admin_access_decorator(group_url_arg='group'):
             user = request.user
 
             if not user.is_authenticated():
-                # support for the ajaxable view mixin
-                if getattr(self, 'is_ajax_request_url', False):
-                    return HttpResponseForbidden('Not authenticated')
-                messages.error(request, _('Please log in to access this page.'))
-                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
+                return redirect_to_not_logged_in(self, request)
 
             if check_object_write_access(group, user):
                 kwargs['group'] = group
@@ -118,11 +123,7 @@ def require_logged_in():
             user = request.user
             
             if not user.is_authenticated():
-                # support for the ajaxable view mixin
-                if getattr(self, 'is_ajax_request_url', False):
-                    return HttpResponseForbidden('Not authenticated')
-                messages.error(request, _('Please log in to access this page.'))
-                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
+                return redirect_to_not_logged_in(self, request)
             
             return function(self, request, *args, **kwargs)
             
@@ -162,11 +163,7 @@ def require_admin_access(group_url_kwarg='group', group_attr='group'):
                 return deactivated_app_error
             
             if not user.is_authenticated():
-                # support for the ajaxable view mixin
-                if getattr(self, 'is_ajax_request_url', False):
-                    return HttpResponseForbidden('Not authenticated')
-                messages.error(request, _('Please log in to access this page.'))
-                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
+                return redirect_to_not_logged_in(self, request)
 
             if check_object_write_access(group, user):
                 setattr(self, group_attr, group)
@@ -208,11 +205,7 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
             
             # catch anyonymous users trying to naviagte to private groups (else self.get_object() throws a Http404!)
             if not group.public and not user.is_authenticated():
-                # support for the ajaxable view mixin
-                if getattr(self, 'is_ajax_request_url', False):
-                    return HttpResponseForbidden('Not authenticated')
-                messages.error(request, _('Please log in to access this page.'))
-                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
+                return redirect_to_not_logged_in(self, request)
             
             deactivated_app_error = _check_deactivated_app_access(self, group, request)
             if deactivated_app_error:
@@ -229,11 +222,7 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
             
             obj_public = requested_object and requested_object.media_tag and requested_object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
             if not (obj_public or group.public or user.is_authenticated()):
-                # support for the ajaxable view mixin
-                if getattr(self, 'is_ajax_request_url', False):
-                    return HttpResponseForbidden('Not authenticated')
-                messages.error(request, _('Please log in to access this page.'))
-                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
+                return redirect_to_not_logged_in(self, request)
             
             if requested_object:
                 if check_object_read_access(requested_object, user):
@@ -278,11 +267,7 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             
             # catch anyonymous users trying to naviagte to private groups (else self.get_object() throws a Http404!)
             if not group.public and not user.is_authenticated():
-                # support for the ajaxable view mixin
-                if getattr(self, 'is_ajax_request_url', False):
-                    return HttpResponseForbidden('Not authenticated')
-                messages.error(request, _('Please log in to access this page.'))
-                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
+                return redirect_to_not_logged_in(self, request)
             
             deactivated_app_error = _check_deactivated_app_access(self, group, request)
             if deactivated_app_error:
@@ -299,11 +284,7 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             
             obj_public = requested_object and getattr(requested_object, 'media_tag', None) and requested_object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
             if not (obj_public or user.is_authenticated()):
-                # support for the ajaxable view mixin
-                if getattr(self, 'is_ajax_request_url', False):
-                    return HttpResponseForbidden('Not authenticated')
-                messages.error(request, _('Please log in to access this page.'))
-                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
+                return redirect_to_not_logged_in(self, request)
             
             if requested_object:
                 # editing/deleting an object, check if we are owner or staff member or group admin or site admin
@@ -423,11 +404,7 @@ def require_create_objects_in_access(group_url_kwarg='group', group_attr='group'
             user = request.user
             
             if not group.public and not user.is_authenticated():
-                # support for the ajaxable view mixin
-                if getattr(self, 'is_ajax_request_url', False):
-                    return HttpResponseForbidden('Not authenticated')
-                messages.error(request, _('Please log in to access this page.'))
-                return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
+                return redirect_to_not_logged_in(self, request)
             
             deactivated_app_error = _check_deactivated_app_access(self, group, request)
             if deactivated_app_error:
