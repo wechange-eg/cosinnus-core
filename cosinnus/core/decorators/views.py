@@ -104,7 +104,7 @@ def require_admin_access_decorator(group_url_arg='group'):
             user = request.user
 
             if not user.is_authenticated():
-                return redirect_to_not_logged_in(self, request)
+                return redirect_to_not_logged_in(request, view=self)
 
             if check_object_write_access(group, user):
                 kwargs['group'] = group
@@ -127,7 +127,7 @@ def require_logged_in():
             user = request.user
             
             if not user.is_authenticated():
-                return redirect_to_not_logged_in(self, request)
+                return redirect_to_not_logged_in(request, view=self)
             
             return function(self, request, *args, **kwargs)
             
@@ -167,7 +167,7 @@ def require_admin_access(group_url_kwarg='group', group_attr='group'):
                 return deactivated_app_error
             
             if not user.is_authenticated():
-                return redirect_to_not_logged_in(self, request)
+                return redirect_to_not_logged_in(request, view=self)
 
             if check_object_write_access(group, user):
                 setattr(self, group_attr, group)
@@ -209,7 +209,7 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
             
             # catch anyonymous users trying to naviagte to private groups (else self.get_object() throws a Http404!)
             if not group.public and not user.is_authenticated():
-                return redirect_to_not_logged_in(self, request)
+                return redirect_to_not_logged_in(request, view=self)
             
             # if the user isn't allowed to read the group, he will never be allowed to read the object, 
             # so check this before get_object returns a 404:
@@ -231,7 +231,7 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
             
             obj_public = requested_object and requested_object.media_tag and requested_object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
             if not (obj_public or group.public or user.is_authenticated()):
-                return redirect_to_not_logged_in(self, request)
+                return redirect_to_not_logged_in(request, view=self)
             
             if requested_object:
                 if check_object_read_access(requested_object, user):
@@ -276,7 +276,7 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             
             # catch anyonymous users trying to naviagte to private groups (else self.get_object() throws a Http404!)
             if not group.public and not user.is_authenticated():
-                return redirect_to_not_logged_in(self, request)
+                return redirect_to_not_logged_in(request, view=self)
             
             deactivated_app_error = _check_deactivated_app_access(self, group, request)
             if deactivated_app_error:
@@ -293,7 +293,7 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             
             obj_public = requested_object and getattr(requested_object, 'media_tag', None) and requested_object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
             if not (obj_public or user.is_authenticated()):
-                return redirect_to_not_logged_in(self, request)
+                return redirect_to_not_logged_in(request, view=self)
             
             if requested_object:
                 # editing/deleting an object, check if we are owner or staff member or group admin or site admin
@@ -413,7 +413,7 @@ def require_create_objects_in_access(group_url_kwarg='group', group_attr='group'
             user = request.user
             
             if not group.public and not user.is_authenticated():
-                return redirect_to_not_logged_in(self, request)
+                return redirect_to_not_logged_in(request, view=self)
             
             deactivated_app_error = _check_deactivated_app_access(self, group, request)
             if deactivated_app_error:
