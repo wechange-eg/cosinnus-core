@@ -97,9 +97,12 @@ class CosinnusGroupMembershipQS(models.query.QuerySet):
 
 class CosinnusGroupManager(models.Manager):
     
-    _GROUPS_SLUG_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/slugs'
-    _GROUPS_PK_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/pks'
-    _GROUP_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/%s'
+    # cache from [ group_slug --> group_pk ]   % (portal_id, group_type)
+    _GROUPS_SLUGS_TO_PK_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/slugs'
+    # cache for all group pks. this is untyped, so this will contain pks for groups as well as projects
+    _GROUPS_ALL_PKS_CACHE_KEY = 'cosinnus/core/portal/%d/group/pks'
+    # cache from [ group_pk --> group ] % (portal_id, pk)
+    _GROUP_CACHE_KEY = 'cosinnus/core/portal/%d/group/%d'
     
     _GROUP_SLUG_TYPE_CACHE_KEY = 'cosinnus/core/portal/%d/group_slug_type/%s'
 
@@ -113,50 +116,46 @@ class CosinnusGroupManager(models.Manager):
 
     def filter_membership_status(self, status):
         return self.get_queryset().filter_membership_status(status)
-
-    def get_slugs(self, portal_id=None):
+    
+    def get_pks(self, portal_id=None):
         """
-        Gets all group slugs from the cache or, if the can has not been filled,
+        Gets all group pks from the cache or, if the cache has not been filled,
         gets the slugs and pks from the database and fills the cache.
 
-        :returns: A :class:`OrderedDict` with a `slug => pk` mapping of all
-            groups
+        :returns: A list with a `pk` of all groups of all types.
         """
         if portal_id is None:
             portal_id = CosinnusPortal.get_current().id
         
-        slugs = cache.get(self._GROUPS_SLUG_CACHE_KEY % (portal_id, self.__class__.__name__))
-        if slugs is None:
+        pk_list = cache.get(self._GROUPS_ALL_PKS_CACHE_KEY % portal_id)
+        if pk_list is None:
             # we can only find groups via this function that are in the same portal we run in
-            slugs = OrderedDict(self.filter(portal=portal_id).values_list('slug', 'id').all())
-            pks = OrderedDict((v, k) for k, v in six.iteritems(slugs))
-            cache.set(self._GROUPS_SLUG_CACHE_KEY % (portal_id, self.__class__.__name__), slugs,
+            pk_list = self.filter(portal__id=portal_id).values_list('id', flat=True)
+            cache.set(self._GROUPS_ALL_PKS_CACHE_KEY % portal_id, pk_list,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
-            cache.set(self._GROUPS_PK_CACHE_KEY % (portal_id, self.__class__.__name__), pks,
-                settings.COSINNUS_GROUP_CACHE_TIMEOUT)
-        return slugs
-
-    def get_pks(self, portal_id=None):
+        return pk_list
+    
+    def get_slug_dict(self, portal_id=None):
         """
-        Gets all group pks from the cache or, if the can has not been filled,
-        gets the pks and slugs from the database and fills the cache.
+        Gets all group slugs --> pk associations from the cache or, if the cache has not been filled,
+        gets the slugs and pks from the database and fills the cache.
+        
+        Note that this is *typed* by Group type, taking into account the class of the GroupManager 
+        to determine which type of group (project / society) should be returned.
 
-        :returns: A :class:`OrderedDict` with a `pk => slug` mapping of all
-            groups
+        :returns: A :class:`OrderedDict` with a `slug => pk` mapping of all groups for the group type
+            of the class of the manager.
         """
         if portal_id is None:
             portal_id = CosinnusPortal.get_current().id
-            
-        pks = cache.get(self._GROUPS_PK_CACHE_KEY % (portal_id, self.__class__.__name__))
-        if pks is None:
+        
+        slug_dict = cache.get(self._GROUPS_SLUGS_TO_PK_CACHE_KEY % (portal_id, self.__class__.__name__))
+        if slug_dict is None:
             # we can only find groups via this function that are in the same portal we run in
-            pks = OrderedDict(self.filter(portal__id=portal_id).values_list('id', 'slug').all())
-            slugs = OrderedDict((v, k) for k, v in six.iteritems(pks))
-            cache.set(self._GROUPS_PK_CACHE_KEY % (portal_id, self.__class__.__name__), pks,
+            slug_dict = OrderedDict(self.filter(portal__id=portal_id).values_list('slug', 'id').all())
+            cache.set(self._GROUPS_SLUGS_TO_PK_CACHE_KEY % (portal_id, self.__class__.__name__), slug_dict,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
-            cache.set(self._GROUPS_SLUG_CACHE_KEY % (portal_id, self.__class__.__name__), slugs,
-                settings.COSINNUS_GROUP_CACHE_TIMEOUT)
-        return pks
+        return slug_dict
 
     def get_cached(self, slugs=None, pks=None, select_related_media_tag=True, portal_id=None):
         """
@@ -177,54 +176,58 @@ class CosinnusGroupManager(models.Manager):
         # Check that at most one of slugs and pks is set
         assert not (slugs and pks)
         if (slugs is None) and (pks is None):
-            slugs = list(self.get_slugs().keys())
+            if self.__class__.__name__ == 'CosinnusGroup':
+                pks = self.get_pks(portal_id)
+            else:
+                pks = self.get_slug_dict(portal_id).values()
             
         if slugs is not None:
             if isinstance(slugs, six.string_types):
                 # We request a single group
                 slug = slugs
-                group = cache.get(self._GROUP_CACHE_KEY % (portal_id, self.__class__.__name__, slug))
+                slug_dict = self.get_slug_dict(portal_id=portal_id)
+                pk = slug_dict.get(slug, -1)
+                if pk >= 0:
+                    return self.get_cached(pks=pk, portal_id=portal_id)
+                return None  # We rely on the slug and id maps being up to date
+            else:
+                # We request multiple groups
+                slug_dict = self.get_slug_dict(portal_id=portal_id)
+                pks = filter(None, (slug_dict.get(slug, []) for slug in slugs))
+                if pks:
+                    return self.get_cached(pks=pks, portal_id=portal_id)
+                return []  # We rely on the slug and id maps being up to date
+            
+        elif pks is not None:
+            if isinstance(pks, int):
+                pk = pks
+                group = cache.get(self._GROUP_CACHE_KEY % (portal_id, pk))
                 if group is None:
                     # we can only find groups via this function that are in the same portal we run in
-                    group = super(CosinnusGroupManager, self).filter(portal__id=portal_id).get(slug=slug)
-                    cache.set(self._GROUP_CACHE_KEY % (portal_id, self.__class__.__name__, group.slug), group,
+                    group = super(CosinnusGroupManager, self).filter(portal__id=portal_id).get(id=pk)
+                    cache.set(self._GROUP_CACHE_KEY % (portal_id, group.id), group,
                         settings.COSINNUS_GROUP_CACHE_TIMEOUT)
                 return group
+            
             else:
-                # We request multiple groups by slugs
-                keys = [self._GROUP_CACHE_KEY % (portal_id, self.__class__.__name__, s) for s in slugs]
+                # We request multiple groups by pks
+                keys = [self._GROUP_CACHE_KEY % (portal_id, pk) for pk in pks]
                 groups = cache.get_many(keys)
                 missing = [key.split('/')[-1] for key in keys if key not in groups]
                 if missing:
                     # we can only find groups via this function that are in the same portal we run in
-                    query = self.get_queryset().filter(portal__id=portal_id, slug__in=missing)
+                    query = self.get_queryset().filter(portal__id=portal_id, id__in=missing)
                     if select_related_media_tag:
                         query = query.select_related('media_tag')
                     
                     for group in query:
-                        groups[self._GROUP_CACHE_KEY % (portal_id, self.__class__.__name__, group.slug)] = group
+                        groups[self._GROUP_CACHE_KEY % (portal_id, group.id)] = group
                     cache.set_many(groups, settings.COSINNUS_GROUP_CACHE_TIMEOUT)
                 
                 # sort by a good sorting function that acknowldges umlauts, etc
                 group_list = groups.values()
                 group_list.sort(cmp=locale.strcoll, key=lambda x: x.name)
                 return group_list
-            
-        elif pks is not None:
-            if isinstance(pks, int):
-                # We request a single group
-                cached_pks = self.get_pks(portal_id=portal_id)
-                slug = cached_pks.get(pks, None)
-                if slug:
-                    return self.get_cached(slugs=slug)
-                return None  # We rely on the slug and id maps being up to date
-            else:
-                # We request multiple groups
-                cached_pks = self.get_pks(portal_id=portal_id)
-                slugs = filter(None, (cached_pks.get(id, []) for id in pks))
-                if slugs:
-                    return self.get_cached(slugs=slugs)
-                return []  # We rely on the slug and id maps being up to date
         return []
     
     def all_in_portal(self):
@@ -514,7 +517,7 @@ class CosinnusGroup(models.Model):
         
         super(CosinnusGroup, self).save(*args, **kwargs)
         slugs.append(self.slug)
-        self._clear_cache(slug=self.slug)
+        self._clear_cache(pk=self.id)
         
         if created:
             # send creation signal
@@ -522,7 +525,7 @@ class CosinnusGroup(models.Model):
     
     
     def delete(self, *args, **kwargs):
-        self._clear_cache(slug=self.slug)
+        self._clear_cache(pk=self.id)
         super(CosinnusGroup, self).delete(*args, **kwargs)
 
     @property
@@ -559,15 +562,15 @@ class CosinnusGroup(models.Model):
         return uid in self.pendings
 
     @classmethod
-    def _clear_cache(self, slug=None, slugs=None):
+    def _clear_cache(self, pk=None, pks=None):
         keys = [
-            self.objects._GROUPS_SLUG_CACHE_KEY % (CosinnusPortal.get_current().id, self.objects.__class__.__name__),
-            self.objects._GROUPS_PK_CACHE_KEY % (CosinnusPortal.get_current().id, self.objects.__class__.__name__),
+            self.objects._GROUPS_SLUGS_TO_PK_CACHE_KEY % (CosinnusPortal.get_current().id, self.objects.__class__.__name__),
+            self.objects._GROUPS_ALL_PKS_CACHE_KEY % CosinnusPortal.get_current().id,
         ]
-        if slug:
-            keys.append(self.objects._GROUP_CACHE_KEY % (CosinnusPortal.get_current().id, self.objects.__class__.__name__, slug))
-        if slugs:
-            keys.extend([self.objects._GROUP_CACHE_KEY % (CosinnusPortal.get_current().id, self.objects.__class__.__name__, s) for s in slugs])
+        if pk:
+            keys.append(self.objects._GROUP_CACHE_KEY % (CosinnusPortal.get_current().id, pk))
+        if pks:
+            keys.extend([self.objects._GROUP_CACHE_KEY % (CosinnusPortal.get_current().id, pk) for pk in pks])
         cache.delete_many(keys)
         
         if isinstance(self, CosinnusGroup) or issubclass(self.__class__, CosinnusGroup):
@@ -774,4 +777,4 @@ class CosinnusPortalMembership(BaseGroupMembership):
 def clear_cache_on_group_delete(sender, instance, **kwargs):
     """ Clears the cache on CosinnusGroups after deleting one of them. """
     if sender == CosinnusGroup or issubclass(sender, CosinnusGroup):
-        instance._clear_cache(slug=instance.slug)    
+        instance._clear_cache(pk=instance.id)    

@@ -72,14 +72,14 @@ class CosinnusProjectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
     def convert_to_society(self, request, queryset):
         """ Converts this CosinnusGroup's type """
         converted_names = []
-        slugs = []
+        pks = []
         for group in queryset:
             group.type = CosinnusGroup.TYPE_SOCIETY
             group.save(allow_type_change=True)
             if group.type == CosinnusGroup.TYPE_SOCIETY:
                 converted_names.append(group.name)
-                slugs.append(group.slug)
-        CosinnusGroup._clear_cache(slugs=slugs)
+                pks.append(group.id)
+        CosinnusGroup._clear_cache(pks=pks)
         message = _('The following Projects were converted to Societies:') + '\n' + ", ".join(converted_names)
         self.message_user(request, message)
     convert_to_society.short_description = _("Convert selected Projects to Societies")
@@ -137,14 +137,14 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
     def convert_to_project(self, request, queryset):
         """ Converts this CosinnusGroup's type """
         converted_names = []
-        slugs = []
+        pks = []
         for group in queryset:
             group.type = CosinnusGroup.TYPE_PROJECT
             group.save(allow_type_change=True)
             if group.type == CosinnusGroup.TYPE_PROJECT:
                 converted_names.append(group.name)
-                slugs.append(group.slug)
-        CosinnusGroup._clear_cache(slugs=slugs)
+                pks.append(group.id)
+        CosinnusGroup._clear_cache(pks=pks)
         message = _('The following Societies were converted to Projects:') + '\n' + ", ".join(converted_names)
         self.message_user(request, message)
     convert_to_project.short_description = _("Convert selected Societies to Projects")
