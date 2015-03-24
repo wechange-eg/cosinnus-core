@@ -260,7 +260,7 @@ class CosinnusGroupManager(models.Manager):
         """
         """ also: filter(headline__contains='Lennon')"""
         for group in self.get_cached():
-            if group.is_app_deactived(app_name):
+            if group.is_app_deactivated(app_name):
                 yield group
     
     def public(self):
@@ -590,7 +590,7 @@ class CosinnusGroup(models.Model):
         """ Returns a list of all cosinnus apps that have been deactivated for this group """
         return self.deactivated_apps.split(',')
     
-    def is_app_deactived(self, app_name):
+    def is_app_deactivated(self, app_name):
         """ Returns True if the cosinnus app with the given app_name has been deactivated for this group """
         return app_name in self.deactivated_apps
     

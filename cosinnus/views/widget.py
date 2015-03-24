@@ -299,8 +299,8 @@ class GroupDashboard(RequireReadMixin, DashboardWidgetMixin, TemplateView):
         object_counts = {}
         for app in app_registry:
             app_name, _ = app_registry.get(app) 
-            print ">>", "TODO: filter for self.group.id for deactivated apps"
-            if self.group.is_app_deactived(app_name):
+            #print ">>", "TODO: widget: filter for self.group.id for deactivated apps"
+            if self.group.is_app_deactivated(app_name):
                 continue
             if app in self.app_object_count_mappings:
                 model = resolve_class(self.app_object_count_mappings[app]) 
