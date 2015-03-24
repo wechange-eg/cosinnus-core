@@ -19,14 +19,18 @@ from django.contrib.auth.models import User
 from cosinnus.models.tagged import BaseTagObject
 
 
-def redirect_to_403(request):
+def redirect_to_403(request, view=None):
+    """ Returns a redirect to the login page with a next-URL parameter and an error message """
+    # support for the ajaxable view mixin
+    if view and getattr(view, 'is_ajax_request_url', False):
+        return HttpResponseForbidden('Not authenticated')
     raise PermissionDenied
 
 
-def redirect_to_not_logged_in(view, request):
+def redirect_to_not_logged_in(request, view=None):
     """ Returns a redirect to the login page with a next-URL parameter and an error message """
     # support for the ajaxable view mixin
-    if getattr(view, 'is_ajax_request_url', False):
+    if view and getattr(view, 'is_ajax_request_url', False):
         return HttpResponseForbidden('Not authenticated')
     messages.error(request, _('Please log in to access this page.'))
     return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
@@ -107,7 +111,7 @@ def require_admin_access_decorator(group_url_arg='group'):
                 return function(request, *args, **kwargs)
 
             # Access denied, redirect to 403 page and and display an error message
-            return redirect_to_403(request)
+            return redirect_to_403(request, self)
             
         return wrapper
     return decorator
@@ -170,7 +174,7 @@ def require_admin_access(group_url_kwarg='group', group_attr='group'):
                 return function(self, request, *args, **kwargs)
 
             # Access denied, redirect to 403 page and and display an error message
-            return redirect_to_403(request)
+            return redirect_to_403(request, self)
             
         return wrapper
     return decorator
@@ -207,6 +211,11 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
             if not group.public and not user.is_authenticated():
                 return redirect_to_not_logged_in(self, request)
             
+            # if the user isn't allowed to read the group, he will never be allowed to read the object, 
+            # so check this before get_object returns a 404:
+            if not check_object_read_access(group, user):
+                return redirect_to_403(request, self)
+            
             deactivated_app_error = _check_deactivated_app_access(self, group, request)
             if deactivated_app_error:
                 return deactivated_app_error
@@ -232,7 +241,7 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
                     return function(self, request, *args, **kwargs)
 
             # Access denied, redirect to 403 page and and display an error message
-            return redirect_to_403(request)
+            return redirect_to_403(request, self)
             
         return wrapper
     return decorator
@@ -296,7 +305,7 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
                     return function(self, request, *args, **kwargs)
             
             # Access denied, redirect to 403 page and and display an error message
-            return redirect_to_403(request)
+            return redirect_to_403(request, self)
             
         return wrapper
     return decorator
@@ -370,7 +379,7 @@ def require_user_token_access(token_name, group_url_kwarg='group', group_attr='g
                     return function(self, request, *args, **kwargs)
 
             # Access denied, redirect to 403 page and and display an error message
-            return redirect_to_403(request)
+            return redirect_to_403(request, self)
             
         return wrapper
     return decorator
@@ -417,7 +426,7 @@ def require_create_objects_in_access(group_url_kwarg='group', group_attr='group'
                 return function(self, request, *args, **kwargs)
 
             # Access denied, redirect to 403 page and and display an error message
-            return redirect_to_403(request)
+            return redirect_to_403(request, self)
             
         return wrapper
     return decorator
