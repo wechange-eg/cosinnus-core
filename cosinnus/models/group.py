@@ -595,7 +595,7 @@ class CosinnusGroup(models.Model):
     def is_app_deactivated(self, app_name):
         """ Returns True if the cosinnus app with the given app_name has been deactivated for this group """
         if self.deactivated_apps:
-            return app_name in self.deactivated_apps
+            return app_name in self.deactivated_apps.split(',')
         return False
     
     def media_tag_object(self):
