@@ -588,11 +588,15 @@ class CosinnusGroup(models.Model):
     
     def get_deactivated_apps(self):
         """ Returns a list of all cosinnus apps that have been deactivated for this group """
-        return self.deactivated_apps.split(',')
+        if self.deactivated_apps:
+            return self.deactivated_apps.split(',')
+        return []
     
     def is_app_deactivated(self, app_name):
         """ Returns True if the cosinnus app with the given app_name has been deactivated for this group """
-        return app_name in self.deactivated_apps
+        if self.deactivated_apps:
+            return app_name in self.deactivated_apps
+        return False
     
     def media_tag_object(self):
         key = '_media_tag_cache'
