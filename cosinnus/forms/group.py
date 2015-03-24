@@ -4,12 +4,10 @@ from __future__ import unicode_literals
 from django import forms
 
 from awesome_avatar import forms as avatar_forms
-from multiform import InvalidArgument
 
-from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
+from cosinnus.models.group import (CosinnusGroupMembership,
     MEMBERSHIP_MEMBER, CosinnusProject, CosinnusSociety)
-from django.forms.util import ErrorList
-from cosinnus.core.registries.group_models import group_model_registry
+from cosinnus.core.registries.apps import app_registry
 
 
 class GroupKwargModelFormMixin(object):
@@ -28,27 +26,37 @@ class GroupKwargModelFormMixin(object):
             self.instance.group_id = self.group.id
 
 
-class _CosinnusProjectForm(forms.ModelForm):
+class CleanDeactivatedAppsMixin(object):
+    
+    def clean_deactivated_apps(self):
+        deactivatable_apps = app_registry.get_deactivatable_apps()
+        # the form field is actually inverse, and active apps are checked
+        active_apps = self.data.getlist('deactivated_apps')
+        deactivated_apps = [option_app for option_app in deactivatable_apps if not option_app in active_apps]
+        return ','.join(deactivated_apps)
+
+
+class _CosinnusProjectForm(CleanDeactivatedAppsMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
     
     class Meta:
-        fields = ('name', 'public', 'description', 'avatar', 'parent', 'website')
+        fields = ('name', 'public', 'description', 'avatar', 'parent', 'website', 'deactivated_apps')
         model = CosinnusProject
     
     def __init__(self, instance, *args, **kwargs):    
         super(_CosinnusProjectForm, self).__init__(instance=instance, *args, **kwargs)
         self.fields['parent'].queryset = CosinnusSociety.objects.all_in_portal()
+        
 
-class _CosinnusSocietyForm(forms.ModelForm):
+class _CosinnusSocietyForm(CleanDeactivatedAppsMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
     
     class Meta:
-        fields = ('name', 'public', 'description', 'avatar', 'website')
+        fields = ('name', 'public', 'description', 'avatar', 'website', 'deactivated_apps')
         model = CosinnusSociety
     
-
 
 class MembershipForm(GroupKwargModelFormMixin, forms.ModelForm):
 

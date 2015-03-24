@@ -11,7 +11,7 @@ from django.core.urlresolvers import reverse, reverse_lazy, NoReverseMatch
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_text
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView,
     ListView, UpdateView, TemplateView)
 
@@ -86,7 +86,25 @@ class CosinnusGroupFormMixin(object):
     
     def get_context_data(self, **kwargs):
         context = super(CosinnusGroupFormMixin, self).get_context_data(**kwargs)
-        context['group_model'] = self.group_model_class.__name__
+        deactivated_apps = self.object.get_deactivated_apps()
+        
+        deactivated_app_selection = []
+        for app_name in app_registry: # eg 'cosinnus_todo'
+            # label for the checkbox is the app identifier translation
+            app = app_name.split('_')[-1] # eg 'todo'
+            # filter for cosinnus app being deactivatable
+            if app_registry.is_deactivatable(app_name):
+                deactivated_app_selection.append({
+                    'app_name': app_name,
+                    'app': app,
+                    'label': pgettext_lazy('the_app', app),
+                    'checked': True if (not self.object or not self.object.deactivated_apps) else app_name not in deactivated_apps,
+                })
+            
+        context.update({
+            'group_model': self.group_model_class.__name__,
+            'deactivated_app_selection': deactivated_app_selection,
+        })
         return context
     
 
