@@ -85,7 +85,7 @@ def _check_deactivated_app_access(view, group, request):
     has been deactivated for this group. """
     app_name = view.__module__.split('.')[0]
     if group.is_app_deactivated(app_name):
-        messages.error(request, _("The page you tried to access belongs to an app that has been deactivated for this %(group_type)s. If you feel this is in error, ask the %(group_type)s's administrator to reactivate the app." % {'group_type': group._meta.verbose_name}))
+        messages.error(request, _("The page you tried to access belongs to an app that has been deactivated for this %(group_type)s. If you feel this is in error, ask the %(group_type)s's administrator to reactivate the app.") % {'group_type': group._meta.verbose_name})
         return HttpResponseRedirect(group.get_absolute_url())
     return None
 
