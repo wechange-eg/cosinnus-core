@@ -67,6 +67,16 @@ def membership_required(function):
     return actual_decorator(function)
 
 
+def _check_deactivated_app_access(view, group, request):
+    """ Will check if a view is being accessed within a cosinnus app that 
+    has been deactivated for this group. """
+    app_name = view.__module__.split('.')[0]
+    if group.is_app_deactivated(app_name):
+        messages.error(request, _("The page you tried to access belongs to an app that has been deactivated for this %(group_type)s. If you feel this is in error, ask the %(group_type)s's administrator to reactivate the app." % {'group_type': group._meta.verbose_name}))
+        return HttpResponseRedirect(group.get_absolute_url())
+    return None
+
+
 def require_admin_access_decorator(group_url_arg='group'):
     def decorator(function):
         @functools.wraps(function, assigned=available_attrs(function))
@@ -147,6 +157,10 @@ def require_admin_access(group_url_kwarg='group', group_attr='group'):
                 return HttpResponseNotFound(_("No group found with this name"))
             user = request.user
             
+            deactivated_app_error = _check_deactivated_app_access(self, group, request)
+            if deactivated_app_error:
+                return deactivated_app_error
+            
             if not user.is_authenticated():
                 # support for the ajaxable view mixin
                 if getattr(self, 'is_ajax_request_url', False):
@@ -199,6 +213,10 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
                     return HttpResponseForbidden('Not authenticated')
                 messages.error(request, _('Please log in to access this page.'))
                 return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
+            
+            deactivated_app_error = _check_deactivated_app_access(self, group, request)
+            if deactivated_app_error:
+                return deactivated_app_error
             
             # this is why almost every BaseTaggableObject's View has a .group attribute:
             setattr(self, group_attr, group)
@@ -265,6 +283,10 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
                     return HttpResponseForbidden('Not authenticated')
                 messages.error(request, _('Please log in to access this page.'))
                 return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
+            
+            deactivated_app_error = _check_deactivated_app_access(self, group, request)
+            if deactivated_app_error:
+                return deactivated_app_error
             
             # set the group attr    
             setattr(self, group_attr, group)
@@ -346,7 +368,11 @@ def require_user_token_access(token_name, group_url_kwarg='group', group_attr='g
             if not group:
                 return HttpResponseNotFound(_("No group found with this name"))
             
+            deactivated_app_error = _check_deactivated_app_access(self, group, request)
+            if deactivated_app_error:
+                return deactivated_app_error
             
+            # set the group attribute
             setattr(self, group_attr, group)
             
             requested_object = None
@@ -403,6 +429,11 @@ def require_create_objects_in_access(group_url_kwarg='group', group_attr='group'
                 messages.error(request, _('Please log in to access this page.'))
                 return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
             
+            deactivated_app_error = _check_deactivated_app_access(self, group, request)
+            if deactivated_app_error:
+                return deactivated_app_error
+            
+            # set the group attribute
             setattr(self, group_attr, group)
             
             if check_group_create_objects_access(group, user):
