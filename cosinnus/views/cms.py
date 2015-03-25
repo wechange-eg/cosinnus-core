@@ -30,8 +30,6 @@ class GroupMicrosite(DashboardWidgetMixin, TemplateView):
     def dispatch(self, request, *args, **kwargs):
         group_name = kwargs.get(self.group_url_kwarg, None)
         group = get_group_for_request(group_name, request)
-        if not group:
-            return HttpResponseNotFound(_("No group found with this name"))
         self.group = group
         return super(GroupMicrosite, self).dispatch(request, *args, **kwargs)
 
@@ -75,8 +73,6 @@ class GroupMicrositeEdit(GroupMicrosite, RequireWriteMixin):
         """ Assure write access to group """
         group_name = kwargs.get(self.group_url_kwarg, None)
         group = get_group_for_request(group_name, request)
-        if not group:
-            return HttpResponseNotFound(_("No group found with this name"))
         self.group = group
         if (check_object_write_access(self.group, request.user)):
             return super(GroupMicrosite, self).dispatch(request, *args, **kwargs)

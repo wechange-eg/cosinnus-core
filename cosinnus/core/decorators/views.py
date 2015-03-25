@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 from cosinnus.utils.permissions import check_object_write_access,\
     check_group_create_objects_access, check_object_read_access, get_user_token
 from django.contrib import messages
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse_lazy
 from django.core.exceptions import PermissionDenied
 from cosinnus.core.registries.group_models import group_model_registry
@@ -53,15 +53,16 @@ def get_group_for_request(group_name, request):
             if type(group) is group_class:
                 return group
             else:
-                logger.error('Cosinnus.core.decorators: Failed to retrieve group because its classes didnt match!', 
+                logger.warn('Cosinnus.core.decorators: Failed to retrieve group because its classes didnt match!', 
                      extra={'group_name': group_name, 'url': request.path, 'group_type': type(group), 'group_class': group_class, 'group_slug': group.slug, 'group_pk': group.id})
         except group_class.DoesNotExist, e:
-            logger.error('Cosinnus.core.decorators: Failed to retrieve group! The exception was: "%s"' % str(e), 
+            logger.warn('Cosinnus.core.decorators: Failed to retrieve group! The exception was: "%s"' % str(e), 
                      extra={'group_name': group_name, 'url': request.path, 'group_class': group_class})
     else:
-        logger.error('Cosinnus.core.decorators: Failed to retrieve group because no group class was found! The exception was: "%s"' % str(e), 
+        logger.warn('Cosinnus.core.decorators: Failed to retrieve group because no group class was found! The exception was: "%s"' % str(e), 
                      extra={'group_name': group_name, 'url': request.path})
-    return None
+    
+    raise Http404
 
     
 
@@ -109,8 +110,6 @@ def require_admin_access_decorator(group_url_arg='group'):
                 return HttpResponseNotFound(_("No group provided"))
 
             group = get_group_for_request(group_name, request)
-            if not group:
-                return HttpResponseNotFound(_("No group found with this name"))
             user = request.user
 
             if not user.is_authenticated():
@@ -168,8 +167,6 @@ def require_admin_access(group_url_kwarg='group', group_attr='group'):
                 return HttpResponseNotFound(_("No group provided"))
 
             group = get_group_for_request(group_name, request)
-            if not group:
-                return HttpResponseNotFound(_("No group found with this name"))
             user = request.user
             
             deactivated_app_error = _check_deactivated_app_access(self, group, request)
@@ -213,8 +210,6 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
                 return HttpResponseNotFound(_("No group provided"))
 
             group = get_group_for_request(group_name, request)
-            if not group:
-                return HttpResponseNotFound(_("No group found with this name"))
             user = request.user
             
             # catch anyonymous users trying to naviagte to private groups (else self.get_object() throws a Http404!)
@@ -280,8 +275,6 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
                 return HttpResponseNotFound(_("No group provided"))
             
             group = get_group_for_request(group_name, request)
-            if not group:
-                return HttpResponseNotFound(_("No group found with this name"))
             user = request.user
             
             # catch anyonymous users trying to naviagte to private groups (else self.get_object() throws a Http404!)
@@ -365,8 +358,6 @@ def require_user_token_access(token_name, group_url_kwarg='group', group_attr='g
                 return HttpResponseNotFound(_("No group provided"))
 
             group = get_group_for_request(group_name, request)
-            if not group:
-                return HttpResponseNotFound(_("No group found with this name"))
             
             deactivated_app_error = _check_deactivated_app_access(self, group, request)
             if deactivated_app_error:
@@ -418,8 +409,6 @@ def require_create_objects_in_access(group_url_kwarg='group', group_attr='group'
                 return HttpResponseNotFound(_("No group provided"))
 
             group = get_group_for_request(group_name, request)
-            if not group:
-                return HttpResponseNotFound(_("No group found with this name"))
             user = request.user
             
             if not group.public and not user.is_authenticated():
