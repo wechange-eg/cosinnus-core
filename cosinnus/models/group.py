@@ -26,17 +26,20 @@ from django.core.urlresolvers import reverse
 from django.utils.functional import cached_property
 from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
 from cosinnus.core import signals
-from django.db.models.signals import post_delete
+from django.db.models.signals import post_delete, post_save
 from django.dispatch.dispatcher import receiver
+
+import logging
+logger = logging.getLogger('cosinnus')
 
 # this reads the environment and inits the right locale
 import locale
 from django.contrib.sites.models import Site
-from django.db.utils import IntegrityError
 try:
     locale.setlocale(locale.LC_ALL, ("de_DE", "utf8"))
 except:
     locale.setlocale(locale.LC_ALL, "")
+    
 
 #: Role defining a user has requested to be added to a group
 MEMBERSHIP_PENDING = 0
@@ -775,3 +778,18 @@ def clear_cache_on_group_delete(sender, instance, **kwargs):
     """ Clears the cache on CosinnusGroups after deleting one of them. """
     if sender == CosinnusGroup or issubclass(sender, CosinnusGroup):
         instance._clear_cache(slug=instance.slug)    
+
+
+def ensure_user_in_group_portal(sender, created, **kwargs):
+    """ Whenever a group membership is created, make sure the user is in the Portal for this group """
+    if created:
+        try:
+            membership = kwargs.get('instance')
+            CosinnusPortalMembership.objects.get_or_create(user=membership.user, group=membership.group.portal, defaults={'status': MEMBERSHIP_MEMBER})
+        except:
+            # We fail silently, because we never want to 500 here unexpectedly
+            logger.error("Error while trying to add User Portal Membership for user that has just joined a group.")
+
+
+# makes sure that users gain membership in a Portal when they are added into a group in that portal
+post_save.connect(ensure_user_in_group_portal, sender=CosinnusGroupMembership)
