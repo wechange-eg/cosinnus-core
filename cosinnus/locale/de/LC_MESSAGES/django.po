@@ -529,7 +529,7 @@ msgid ""
 "error has been recorded, and we will try to fix it as soon as possible!"
 msgstr ""
 "Sieht so als aus ob ein internes Problem aufgetreten ist. Der Fehlerwurde "
-"aufgezeichnet und wir werden so schnell wie möglich versuchen das Problemzu "
+"aufgezeichnet und wir werden so schnell wie möglich versuchen das Problem zu "
 "beheben!"
 
 #: .\templates\cosinnus\appsmenu.html.py:30
