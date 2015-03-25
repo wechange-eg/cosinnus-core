@@ -86,7 +86,7 @@ class CosinnusGroupFormMixin(object):
     
     def get_context_data(self, **kwargs):
         context = super(CosinnusGroupFormMixin, self).get_context_data(**kwargs)
-        deactivated_apps = self.object.get_deactivated_apps()
+        deactivated_apps = self.object.get_deactivated_apps() if self.object else []
         
         deactivated_app_selection = []
         for app_name in app_registry: # eg 'cosinnus_todo'
