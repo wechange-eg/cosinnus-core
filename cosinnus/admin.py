@@ -223,3 +223,21 @@ class UserAdmin(DjangoUserAdmin):
 
 admin.site.unregister(USER_MODEL)
 admin.site.register(USER_MODEL, UserAdmin)
+
+
+
+class SpamUserModel(USER_MODEL):
+    class Meta:
+        proxy = True
+
+class SpamUserAdmin(UserAdmin):
+
+    def queryset(self, request):
+        """ For non-admins, only show the routepoints from their caravan """
+        qs = super(SpamUserAdmin, self).queryset(request)
+        qs = qs.filter(cosinnus_profile__website__contains='.pl', is_active=True)
+        return qs
+
+admin.site.register(SpamUserModel, SpamUserAdmin)
+
+
