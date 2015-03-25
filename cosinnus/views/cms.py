@@ -74,9 +74,8 @@ class GroupMicrositeEdit(GroupMicrosite, RequireWriteMixin):
     def dispatch(self, request, *args, **kwargs):
         """ Assure write access to group """
         group_name = kwargs.get(self.group_url_kwarg, None)
-        try:
-            group = CosinnusGroup.objects.get(slug=group_name)
-        except CosinnusGroup.DoesNotExist:
+        group = get_group_for_request(group_name, request)
+        if not group:
             return HttpResponseNotFound(_("No group found with this name"))
         self.group = group
         if (check_object_write_access(self.group, request.user)):
