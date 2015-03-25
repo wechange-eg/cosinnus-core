@@ -225,8 +225,12 @@ class GroupMembersWidget(DashboardWidget):
         admin_ids = CosinnusGroupMembership.objects.get_admins(group=group)
         member_ids = CosinnusGroupMembership.objects.get_members(group=group)
         all_ids = set(admin_ids + member_ids)
-        qs = get_user_model()._default_manager.order_by('first_name', 'last_name') \
-                             .select_related('cosinnus_profile')
+        qs = get_user_model()._default_manager.filter(is_active=True) \
+            .select_related('cosinnus_profile') \
+            .extra(select={
+                'has_avatar': 'LENGTH(%s.avatar) > 0' % settings.COSINNUS_USER_PROFILE_MODEL.lower().replace('.', '_')
+            }) \
+            .order_by('-has_avatar', 'first_name', 'last_name') 
         qs = qs.filter(id__in=all_ids)
         
         hidden_member_count = 0
