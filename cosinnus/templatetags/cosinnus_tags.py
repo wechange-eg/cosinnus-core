@@ -8,7 +8,7 @@ from copy import copy, deepcopy
 
 from django import template
 from django.core.exceptions import ImproperlyConfigured
-from django.core.urlresolvers import resolve, reverse
+from django.core.urlresolvers import resolve, reverse, Resolver404
 from django.http import HttpRequest
 from django.template.defaulttags import URLNode, url as url_tag, url
 from django.template.loader import render_to_string
@@ -180,8 +180,11 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
     if user.is_authenticated():
         context['groups'] = CosinnusProject.objects.get_for_user(request.user)
         context['societies'] = CosinnusSociety.objects.get_for_user(request.user)
-
-    current_app = resolve(request.path).app_name
+    
+    try:
+        current_app = resolve(request.path).app_name
+    except Resolver404:
+        pass
     active_app = None
     active_app_name = None
     if 'group' in context:
