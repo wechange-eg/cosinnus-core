@@ -259,7 +259,6 @@ class DashboardWidgetMixin(object):
         for wc in widgets_configs:
             # check deactivated apps to see if widget can't be shown:
             if 'cosinnus_%s' % wc.app_name in deactivated_apps:
-                print ">> skipping because", 'cosinnus_%s' % wc.app_name , "in", deactivated_apps
                 continue
             # check block list for disallowed widgets (from overriding views)
             if "%s.%s" % (wc.app_name, wc.widget_name.replace(" ", "_")) in self.disallowed_widgets:
