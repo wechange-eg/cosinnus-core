@@ -18,6 +18,9 @@ from cosinnus.core.registries.group_models import group_model_registry
 from django.contrib.auth.models import User
 from cosinnus.models.tagged import BaseTagObject
 
+import logging
+logger = logging.getLogger('cosinnus')
+
 
 def redirect_to_403(request, view=None):
     """ Returns a redirect to the login page with a next-URL parameter and an error message """
@@ -49,8 +52,15 @@ def get_group_for_request(group_name, request):
             group = group_class.objects.get(slug=group_name)
             if type(group) is group_class:
                 return group
-        except group_class.DoesNotExist:
-            pass
+            else:
+                logger.error('Cosinnus.core.decorators: Failed to retrieve group because its classes didnt match!', 
+                     extra={'group_name': group_name, 'url': request.path, 'group_type': type(group), 'group_class': group_class})
+        except group_class.DoesNotExist, e:
+            logger.error('Cosinnus.core.decorators: Failed to retrieve group! The exception was: "%s"' % str(e), 
+                     extra={'group_name': group_name, 'url': request.path, 'group_class': group_class})
+    else:
+        logger.error('Cosinnus.core.decorators: Failed to retrieve group because no group class was found! The exception was: "%s"' % str(e), 
+                     extra={'group_name': group_name, 'url': request.path})
     return None
 
     
