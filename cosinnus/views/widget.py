@@ -250,9 +250,8 @@ class DashboardWidgetMixin(object):
         
         deactivated_apps = []
         if 'group_id' in widget_filter:
-            group_id = widget_filter['group_id']
-            group = CosinnusGroup.objects.get_cached(pks=group_id)
-            deactivated_apps = group.get_deactivated_apps()
+            # if we are dealing with group dashboard widgets, use the group's deactivated apps
+            deactivated_apps = self.group.get_deactivated_apps()
         
         widgets = []
         """ We also sort each unique widget into the context to be accessed hard-coded"""
