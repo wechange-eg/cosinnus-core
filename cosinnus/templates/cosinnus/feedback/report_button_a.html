@@ -1,6 +1,6 @@
 {% load i18n cosinnus_tags %}
 
-<a href="#" {% cosinnus_report_object_action object %}>
+<a {% if request.user.is_authenticated %}href="#" {% cosinnus_report_object_action object %}{% else %}href="{% url 'login' %}{% if request.path != "/" %}?next={{ request.path }}{% endif %}"{% endif %}>
     <i class="fa fa-warning"></i>
 </a>
                                     

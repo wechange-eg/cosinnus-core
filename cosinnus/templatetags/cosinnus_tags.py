@@ -563,8 +563,11 @@ def group_url(parser, token):
     return GroupURLNode(urlnode.view_name, urlnode.args, urlnode.kwargs, urlnode.asvar)
 
 
-@register.simple_tag(takes_context=False)
-def cosinnus_report_object_action(obj=None):
+@register.simple_tag(takes_context=True)
+def cosinnus_report_object_action(context, obj=None):
+    if not context['request'].user.is_authenticated():
+        return ''
+    
     app_label = obj.__class__.__module__.split('.')[0]
     model_name = obj.__class__.__name__
     model_str = '%s.%s' % (app_label, model_name)
