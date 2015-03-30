@@ -54,13 +54,13 @@ def get_group_for_request(group_name, request):
                 return group
             else:
                 logger.warn('Cosinnus.core.decorators: Failed to retrieve group because its classes didnt match!', 
-                     extra={'group_name': group_name, 'url': request.path, 'group_type': type(group), 'group_class': group_class, 'group_slug': group.slug, 'group_pk': group.id})
+                     extra={'group_name': group_name, 'url': request.path, 'group_type': type(group), 'group_class': group_class, 'group_slug': group.slug, 'group_pk': group.id, 'referer': request.META.get('HTTP_REFERER', 'None')})
         except group_class.DoesNotExist, e:
             logger.warn('Cosinnus.core.decorators: Failed to retrieve group! The exception was: "%s"' % str(e), 
-                     extra={'group_name': group_name, 'url': request.path, 'group_class': group_class})
+                     extra={'group_name': group_name, 'url': request.path, 'group_class': group_class, 'referer': request.META.get('HTTP_REFERER', 'None')})
     else:
         logger.warn('Cosinnus.core.decorators: Failed to retrieve group because no group class was found! The exception was: "%s"' % str(e), 
-                     extra={'group_name': group_name, 'url': request.path})
+                     extra={'group_name': group_name, 'url': request.path, 'referer': request.META.get('HTTP_REFERER', 'None')})
     
     raise Http404
 
