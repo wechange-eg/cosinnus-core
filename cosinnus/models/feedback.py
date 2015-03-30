@@ -52,6 +52,12 @@ class CosinnusReportedObject(models.Model):
             ct = self.content_type
             self._model_name = '%s.%s' % (ct.app_label, ct.model_class().__name__)
         return self._model_name
-
+    
+    
+    def get_absolute_url(self):
+        """ Point at URL of referenced ContentType object """
+        if self.target_object and hasattr(self.target_object, 'get_absolute_url'):
+            return self.target_object.get_absolute_url()
+        return None
 
 
