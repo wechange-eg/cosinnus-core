@@ -2,7 +2,7 @@
 $.cosinnus.Feedback = {
 
      cosinnus_report_object: function(cls, id, title) {
-        $('#cosinnus_report_title').val(title);
+        $('#cosinnus_report_title').text(title);
         $('#cosinnus_report_cls').val(cls);
         $('#cosinnus_report_id').val(id);
         $('#cosinnus_report_text').val('');
