@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-24 18:12+0100\n"
+"POT-Creation-Date: 2015-03-30 17:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,58 +16,61 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\admin.py:29
+#: .\admin.py:30
 #, python-format
 msgid "1 %(object)s was deleted successfully"
 msgstr ""
 
-#: .\admin.py:32
+#: .\admin.py:33
 #, python-format
 msgid "%(number)d %(objects)s were deleted successfully"
 msgstr ""
 
-#: .\admin.py:35
+#: .\admin.py:36
 msgid "Delete selected entries"
 msgstr ""
 
-#: .\admin.py:83
+#: .\admin.py:84
 msgid "The following Projects were converted to Societies:"
 msgstr "The following Projects were converted to Groups:"
 
-#: .\admin.py:85
+#: .\admin.py:86
 msgid "Convert selected Projects to Societies"
 msgstr "Convert selected Projects to Groups"
 
-#: .\admin.py:113
+#: .\admin.py:117
 msgid "The following Users were added to this portal:"
 msgstr ""
 
-#: .\admin.py:115
-msgid "Add all members to this Portal"
+#: .\admin.py:119
+#, python-format
+msgid "Add all members to current Portal (%s)"
 msgstr ""
 
-#: .\admin.py:121
+#: .\admin.py:125
 msgid "In addition, the members were removed from all other Portals."
 msgstr ""
 
-#: .\admin.py:123
-msgid "Move all members to this Portal (removes all other memberships!)"
+#: .\admin.py:127
+#, python-format
+msgid ""
+"Move all members to current Portal (%s) (removes all other memberships!)"
 msgstr ""
 
-#: .\admin.py:148
+#: .\admin.py:152
 msgid "The following Societies were converted to Projects:"
 msgstr "The following Groups were converted to Projects:"
 
-#: .\admin.py:150
+#: .\admin.py:154
 msgid "Convert selected Societies to Projects"
 msgstr "Convert selected Groups to Projects"
 
-#: .\admin.py:212
+#: .\admin.py:216
 #, python-format
 msgid "%d Users were deactivated successfully."
 msgstr ""
 
-#: .\admin.py:214
+#: .\admin.py:218
 msgid "Deactivate users (will keep all all items they created on the site)"
 msgstr ""
 
@@ -93,31 +96,23 @@ msgid ""
 "s."
 msgstr ""
 
-#: .\core\decorators\views.py:35
+#: .\core\decorators\views.py:38
 msgid "Please log in to access this page."
 msgstr ""
 
-#: .\core\decorators\views.py:88
+#: .\core\decorators\views.py:99
 #, python-format
 msgid ""
 "The page you tried to access belongs to an app that has been deactivated for "
 "this %(group_type)s. If you feel this is in error, ask the %(group_type)s's "
 "administrator to reactivate the app."
 msgstr ""
-""
 
-#: .\core\decorators\views.py:99 .\core\decorators\views.py:158
-#: .\core\decorators\views.py:203 .\core\decorators\views.py:270
-#: .\core\decorators\views.py:355 .\core\decorators\views.py:408
+#: .\core\decorators\views.py:110 .\core\decorators\views.py:167
+#: .\core\decorators\views.py:210 .\core\decorators\views.py:275
+#: .\core\decorators\views.py:358 .\core\decorators\views.py:409
 msgid "No group provided"
 msgstr "No project provided"
-
-#: .\core\decorators\views.py:103 .\core\decorators\views.py:162
-#: .\core\decorators\views.py:207 .\core\decorators\views.py:274
-#: .\core\decorators\views.py:359 .\core\decorators\views.py:412
-#: .\views\cms.py:34 .\views\cms.py:80
-msgid "No group found with this name"
-msgstr "No project found with this name"
 
 #: .\forms\attached_object.py:54 .\forms\dashboard.py:66
 msgid "Attachments"
@@ -265,7 +260,7 @@ msgstr ""
 msgid "Cosinnus Micropages"
 msgstr ""
 
-#: .\models\group.py:67
+#: .\models\group.py:70
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 
@@ -471,44 +466,6 @@ msgstr ""
 
 #: .\models\widget.py:102
 msgid "Widget configuration items"
-msgstr ""
-
-#: .\templates\403.html.py:5
-msgid "Access denied"
-msgstr ""
-
-#: .\templates\403.html.py:13
-msgid "Access denied!"
-msgstr ""
-
-#: .\templates\403.html.py:14
-msgid "You don't have permission to access this site."
-msgstr ""
-
-#: .\templates\404.html.py:5
-msgid "Not found"
-msgstr ""
-
-#: .\templates\404.html.py:13
-msgid "Page not found!"
-msgstr ""
-
-#: .\templates\404.html.py:14
-msgid "The page you requested was not found on the server."
-msgstr ""
-
-#: .\templates\500.html.py:6
-msgid "Server Error"
-msgstr ""
-
-#: .\templates\500.html.py:10
-msgid "Sorry! Something went wrong..."
-msgstr ""
-
-#: .\templates\500.html.py:11
-msgid ""
-"Looks like we had an internal problem while processing your request. The "
-"error has been recorded, and we will try to fix it as soon as possible!"
 msgstr ""
 
 #: .\templates\cosinnus\appsmenu.html.py:30
@@ -755,7 +712,7 @@ msgstr "Do you wish to request to join project „%(title)s“?"
 msgid "Add widget"
 msgstr ""
 
-#: .\templates\cosinnus\microsite.html.py:161 .\utils\dashboard.py:366
+#: .\templates\cosinnus\microsite.html.py:161 .\utils\dashboard.py:370
 msgid "Informations"
 msgstr ""
 
@@ -788,7 +745,7 @@ msgid "Toggle navigation"
 msgstr ""
 
 #: .\templates\cosinnus\navbar.html.py:24
-#: .\templates\cosinnus\navbar.html.py:59
+#: .\templates\cosinnus\navbar.html.py:58
 #: .\templates\cosinnus\group\group_list.html.py:4
 msgid "Societies"
 msgstr "Groups"
@@ -799,8 +756,8 @@ msgid "All Societies"
 msgstr "All Groups"
 
 #: .\templates\cosinnus\navbar.html.py:42
-#: .\templates\cosinnus\navbar.html.py:58
-#: .\templates\cosinnus\group\group_list.html.py:4 .\utils\dashboard.py:263
+#: .\templates\cosinnus\navbar.html.py:59
+#: .\templates\cosinnus\group\group_list.html.py:4 .\utils\dashboard.py:267
 msgid "Projects"
 msgstr ""
 
@@ -882,6 +839,38 @@ msgstr ""
 
 #: .\templates\cosinnus\user_dashboard.html.py:5
 msgid "User Dashboard"
+msgstr ""
+
+#: .\templates\cosinnus\common\403.html.py:5
+#: .\templates\cosinnus\common\403.html.py:13
+msgid "Access denied!"
+msgstr ""
+
+#: .\templates\cosinnus\common\403.html.py:14
+msgid "You don't have permission to access this site."
+msgstr ""
+
+#: .\templates\cosinnus\common\404.html.py:5
+#: .\templates\cosinnus\common\404.html.py:13
+msgid "Page not found!"
+msgstr ""
+
+#: .\templates\cosinnus\common\404.html.py:14
+msgid "The page you requested was not found on the server."
+msgstr ""
+
+#: .\templates\cosinnus\common\500.html.py:6
+msgid "Server Error"
+msgstr ""
+
+#: .\templates\cosinnus\common\500.html.py:10
+msgid "Sorry! Something went wrong..."
+msgstr ""
+
+#: .\templates\cosinnus\common\500.html.py:11
+msgid ""
+"Looks like we had an internal problem while processing your request. The "
+"error has been recorded, and we will try to fix it as soon as possible!"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_delete.html.py:5
@@ -1715,7 +1704,7 @@ msgstr ""
 msgid "(Deleted User)"
 msgstr ""
 
-#: .\templatetags\cosinnus_tags.py:265 .\templatetags\cosinnus_tags.py:291
+#: .\templatetags\cosinnus_tags.py:268 .\templatetags\cosinnus_tags.py:294
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr ""
@@ -1728,11 +1717,11 @@ msgstr ""
 msgid "Network"
 msgstr ""
 
-#: .\utils\dashboard.py:315
+#: .\utils\dashboard.py:319
 msgid "About Us"
 msgstr ""
 
-#: .\views\common.py:22
+#: .\views\common.py:56
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr ""
@@ -1940,6 +1929,9 @@ msgstr ""
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr ""
+
+#~ msgid "No group found with this name"
+#~ msgstr "No project found with this name"
 
 #~ msgid "List all groups"
 #~ msgstr "List all projects"
