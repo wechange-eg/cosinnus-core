@@ -6,6 +6,7 @@ from django.http.response import HttpResponse, HttpResponseForbidden
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from cosinnus.views.profile import delete_userprofile
+from cosinnus.utils.group import move_group_content as move_group_content_utils
 
 
 def housekeeping(request):
@@ -64,7 +65,16 @@ def delete_spam_users(request):
     
     ret += '<br/><br/><br/>Deleted %d Users<br/><br/>' % deleted_user_count + user_csv
     return HttpResponse(ret)
-        
-        
+
+def move_group_content(request, fromgroup, togroup):
+    """ access to function for moving group content from one group to another """
+    if not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    
+    fromgroup = CosinnusGroup.objects.get_cached(slugs=fromgroup)
+    togroup = CosinnusGroup.objects.get_cached(slugs=togroup)
+    
+    logs = move_group_content_utils(fromgroup, togroup)
+    return HttpResponse("<br/>".join(logs))
         
         

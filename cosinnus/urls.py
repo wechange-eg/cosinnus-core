@@ -36,6 +36,7 @@ urlpatterns = patterns('cosinnus.views',
     
     url(r'^housekeeping/$', 'housekeeping.housekeeping', name='housekeeping'),
     url(r'^housekeeping/deletespamusers/$', 'housekeeping.delete_spam_users', name='housekeeping_delete_spam_users'),
+    url(r'^housekeeping/movegroupcontent/(?P<fromgroup>[^/]+)/(?P<togroup>[^/]+)/$', 'housekeeping.move_group_content', name='housekeeping_move_group_content'),
     
 
     url(r'^select2/', include('cosinnus.urls_select2', namespace='select2')),
