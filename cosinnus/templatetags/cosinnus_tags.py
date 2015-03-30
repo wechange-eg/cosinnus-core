@@ -569,4 +569,4 @@ def cosinnus_report_object_action(obj=None):
     model_name = obj.__class__.__name__
     model_str = '%s.%s' % (app_label, model_name)
     title = getattr(obj, 'title', getattr(obj, 'name', force_text(obj)))
-    return ' onclick=\'cosinnus_report_object("%s", %d, "%s");\' ' % (model_str, obj.id, title)
+    return ' onclick=\'$.cosinnus.Feedback.cosinnus_report_object("%s", %d, "%s");\' ' % (model_str, obj.id, title)
