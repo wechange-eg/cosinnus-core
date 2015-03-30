@@ -19,14 +19,8 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'cosinnus', ['CosinnusReportedObject'])
 
-        # Adding unique constraint on 'CosinnusReportedObject', fields ['content_type', 'object_id']
-        db.create_unique(u'cosinnus_cosinnusreportedobject', ['content_type_id', 'object_id'])
-
 
     def backwards(self, orm):
-        # Removing unique constraint on 'CosinnusReportedObject', fields ['content_type', 'object_id']
-        db.delete_unique(u'cosinnus_cosinnusreportedobject', ['content_type_id', 'object_id'])
-
         # Deleting model 'CosinnusReportedObject'
         db.delete_table(u'cosinnus_cosinnusreportedobject')
 
