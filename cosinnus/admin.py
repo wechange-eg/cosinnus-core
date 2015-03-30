@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
+from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.models.group import CosinnusGroupMembership,\
@@ -106,9 +107,12 @@ class CosinnusProjectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
             CosinnusPortalMembership.objects.filter(status=MEMBERSHIP_PENDING, 
                     group=CosinnusPortal.get_current(), user__in=users).delete()
         for user in users:
-            CosinnusPortalMembership.objects.get_or_create(group=CosinnusPortal.get_current(), user=user, 
+            membership, created = CosinnusPortalMembership.objects.get_or_create(group=CosinnusPortal.get_current(), user=user, 
                     defaults={'status': MEMBERSHIP_MEMBER})
+            # this ensures that join-signals for all members really arrive (for putting new portal members into the Blog, etc)
+            post_save.send(sender=CosinnusPortalMembership, instance=membership, created=True)
             member_names.append('%s %s (%s)' % (user.first_name, user.last_name, user.email))
+        
         
         message = _('The following Users were added to this portal:') + '\n' + ", ".join(member_names)
         self.message_user(request, message)
