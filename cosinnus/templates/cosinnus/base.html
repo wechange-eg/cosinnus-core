@@ -48,6 +48,7 @@
         {% comment %} Statics for Select2, always loaded, but only once {% endcomment %}
         {% import_django_select2_js %}
         <script src="{% static 'js/cosinnus.js' %}"></script>
+        <script src="{% static 'js/cosinnus.feedback.js' %}"></script>
         
         {% captureas cosinnus_css_class %}{% if COSINNUS_CURRENT_APP == 'todo' %}app-todos{% elif COSINNUS_CURRENT_APP == 'note' %}app-main{% elif COSINNUS_CURRENT_APP == 'file' %}app-files{% elif COSINNUS_CURRENT_APP == 'event' %}app-calendar{% elif COSINNUS_CURRENT_APP %}app-{{ COSINNUS_CURRENT_APP }}{% else %}app-main{% endif %} {% if request.path == '/' %}landing{% endif %}{% endcaptureas %}
         
@@ -104,7 +105,10 @@
                 </div><!-- row -->
             {% endblock main_page %}
                 
+            {% include 'cosinnus/feedback/report_modal.html' %}
         </div><!-- main container -->
+        
+        
         
     {% include 'cosinnus/extrafooter.html' %}
     {% block extrafooter %}

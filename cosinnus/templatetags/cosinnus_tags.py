@@ -563,3 +563,10 @@ def group_url(parser, token):
     return GroupURLNode(urlnode.view_name, urlnode.args, urlnode.kwargs, urlnode.asvar)
 
 
+@register.simple_tag(takes_context=False)
+def cosinnus_report_object_action(obj=None):
+    app_label = obj.__class__.__module__.split('.')[0]
+    model_name = obj.__class__.__name__
+    model_str = '%s.%s' % (app_label, model_name)
+    title = getattr(obj, 'title', getattr(obj, 'name', force_text(obj)))
+    return ' onclick=\'cosinnus_report_object("%s", %d, "%s");\' ' % (model_str, obj.id, title)

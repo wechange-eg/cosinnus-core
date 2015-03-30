@@ -1,0 +1,180 @@
+{% load i18n cosinnus_tags %}
+
+<script type="text/javascript">
+
+
+    function cosinnus_report_object(cls, id, title) {
+        $('#cosinnus_report_title').val(title);
+        $('#cosinnus_report_cls').val(cls);
+        $('#cosinnus_report_id').val(id);
+        $('#cosinnus_report_text').val('');
+        $('#report_modal_error').hide();
+        _report_modal_activate();
+        $('#cosinnus_report_submit_btn').unbind().click(cosinnus_report_submit);
+        $('#cosinnus_report_modal').modal('show');
+    }
+    
+    function _report_modal_activate() {
+        $('._elem-action-disabled').attr('disabled', false);
+        $('._elem-action-hidden').show();
+        $('._elem-action-shown').hide();
+        $('._elem-start-shown').show();
+        $('._elem-start-hidden').hide();
+        $('._elem-success-shown').hide();
+    }
+    function _report_modal_deactivate() {
+        $('._elem-action-disabled').attr('disabled', true);
+        $('._elem-action-hidden').hide();
+        $('._elem-action-shown').show();
+        $('._elem-success-shown').hide();
+    }
+    
+    function cosinnus_report_submit() {
+        if (!$('#cosinnus_report_text').val()) {
+            $('#cosinnus_report_empty_text_error_msg').show();
+            return;
+        };
+    
+        post_data = {
+            'cls': $('#cosinnus_report_cls').val(),
+            'id': $('#cosinnus_report_id').val(),
+            'text': $('#cosinnus_report_text').val(),
+        };
+        
+        function display_report_error() {
+            console.log('error submitting');
+            $('#report_modal_error').show();
+            _report_modal_activate();
+        };
+        function display_report_success() {
+            console.log('success submitting');
+            $('#report_modal_error').hide();
+            _report_modal_activate();
+            $('._elem-success-shown').show();
+            $('._elem-success-hidden').hide();
+        };
+        
+        _report_modal_deactivate();
+	    $.ajax({
+	         type:"POST",
+	         url: '{% url 'cosinnus:report-object' %}',
+	         data: post_data,
+	         success: function(data){
+	             if (data['status'] == 'success') {
+	                 display_report_success();
+	             } else {
+	                 display_report_error();
+	             }
+	             
+	         },
+	         error: function(data){
+	             display_report_error();
+	         }
+	    });
+	}
+	
+    
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="cosinnus_report_modal" tabindex="1" role="dialog" aria-labelledby="cosinnus_report_modal_Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="fa fa-times"></i>
+                </button>
+                <h4 class="modal-title" id="{{ id }}Label">
+                    <i class="fa fa-warning"></i>
+                    {% trans "Report offensive object" %}
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div type="button" class="btn btn-default w100 regular-space _elem-success-hidden _elem-start-shown">
+                    <ul class="media-list">
+                        <li class="media">
+                            <div class="media-body">
+                                <span>{% trans "Report stuffs:" %}</span>
+                            </div>
+                            <div class="media-body media-body-form-control">
+                                <input id="cosinnus_report_title" class="form-control" readonly="readonly" value="">
+                                <input type="hidden" id="cosinnus_report_cls" value="" >
+                                <input type="hidden" id="cosinnus_report_id" value="" >
+                            </div>
+                            <div class="media-body">
+                                <span>{% trans "Write why:" %}</span>
+                            </div>
+                            <div class="media-body media-body-form-control">
+                                <ul id="cosinnus_report_empty_text_error_msg" style="display:none;" class="errorlist _elem-start-hidden _elem-action-hidden" ><li>{% trans "Please enter a description of why you are reporting this object!" %}</li></ul>
+                                <textarea id="cosinnus_report_text" class="form-control _elem-action-disabled" value="" placeholder="{% trans "(required)" %}"></textarea>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="w100 regular-space _elem-success-shown">
+                    <div class="alert alert-success">
+                        <i class="fa fa-check fa-3x"></i>
+                        <p>{% trans "Thank you! Your report has been received and we will review the items in question as soon as possible." %}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div id="report_modal_error" style="display:none;" class="regular-space">
+                    <ul  class="errorlist" ><li>{% trans "There was an error while trying to submit your report. Please try again in a moment." %}</li></ul>
+                </div>
+                
+                <button id="cosinnus_report_submit_btn" type="button" class="btn btn-emphasized _elem-action-hidden _elem-success-hidden _elem-start-shown">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-check"></i>
+                            </a>
+                            <div class="media-body">
+                                {% trans "Send" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+                <button type="button" class="btn btn-emphasized _elem-action-hidden _elem-success-hidden _elem-start-shown" data-dismiss="modal">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-times"></i>
+                            </a>
+                            <div class="media-body">
+                                {% trans "Cancel" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+                <button type="button" disabled="true" class="btn btn-emphasized _elem-action-shown _elem-success-hidden">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </a>
+                            <div class="media-body">
+                                {% trans "Submitting..." %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+                <button type="button" class="btn btn-emphasized _elem-success-shown" data-dismiss="modal">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-check"></i>
+                            </a>
+                            <div class="media-body">
+                                {% trans "Close" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+                
+            </div>
+        </div>
+    </div>
+</div><!-- modal -->
+
