@@ -431,7 +431,11 @@ class CosinnusPortal(models.Model):
     def _clear_local_cache(self):
         """ Stub, called when memberships change """
         pass
-        
+    
+    def get_domain(self):
+        """ Gets the http/https protocol aware domain for this portal """
+        return get_domain_for_portal(self)
+    
     def __str__(self):
         return self.name
 

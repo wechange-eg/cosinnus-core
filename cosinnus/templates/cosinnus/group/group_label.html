@@ -5,7 +5,7 @@
 	{{ group.name }}
 </a>
 {% if group.is_foreign_portal %} 
-    <a class="portal-inlink" href="http://{% if request.is_secure %}s{% endif %}{{ group.portal.site.domain }}" target="_blank" title="{{ group.portal.name }}">
-        <img src="http://{% if request.is_secure %}s{% endif %}{{ group.portal.site.domain }}{% static 'img/logo-icon.png' %}" style="width:20px;">
+    <a class="portal-inlink" href="{{ group.portal.get_domain }}" target="_blank" title="{{ group.portal.name }}">
+        <img src="{{ group.portal.get_domain }}{% static 'img/logo-icon.png' %}" style="width:20px;">
     </a>
 {% endif %}
