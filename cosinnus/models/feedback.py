@@ -9,6 +9,8 @@ from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
+from django.core.urlresolvers import reverse
+from cosinnus.core.registries.group_models import group_model_registry
 
 
 @python_2_unicode_compatible
@@ -59,5 +61,19 @@ class CosinnusReportedObject(models.Model):
         if self.target_object and hasattr(self.target_object, 'get_absolute_url'):
             return self.target_object.get_absolute_url()
         return None
-
+    
+    def get_target_model_name(self):
+        """ This will return the correct specific cosinnus group model (instead of base group) if we are targeting a group """
+        if self.content_type.model == 'cosinnusgroup':
+            group_cls = group_model_registry.get_by_type(self.target_object.type)
+            return group_cls.__name__.lower() # lower()?
+        else:
+            return self.content_type.model
+    
+    def get_target_edit_url(self):
+        return reverse('admin:%s_%s_change' % (self.content_type.app_label, self.get_target_model_name()), args=(self.target_object.id,))
+    
+    def get_target_delete_url(self):
+        return reverse('admin:%s_%s_delete' % (self.content_type.app_label, self.get_target_model_name()), args=(self.target_object.id,))
+    
 

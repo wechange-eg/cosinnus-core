@@ -177,6 +177,7 @@ admin.site.register(CosinnusMicropage, CosinnusMicropageAdmin)
 
 class CosinnusReportedObjectAdmin(admin.ModelAdmin):
     list_display = ('text', 'target_object', 'creator', 'created')
+    change_form_template = 'admin/cosinnusreportedobject/change_form.html'
 
 admin.site.register(CosinnusReportedObject, CosinnusReportedObjectAdmin)
 
