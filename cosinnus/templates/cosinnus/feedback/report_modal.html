@@ -11,7 +11,7 @@
                 </button>
                 <h4 class="modal-title" id="{{ id }}Label">
                     <i class="fa fa-warning"></i>
-                    {% trans "Report offensive object" %}: <span id="cosinnus_report_title"></span>
+                    {% trans "Report offensive content" %}: <span id="cosinnus_report_title"></span>
                 </h4>
             </div>
             <div class="modal-body">
@@ -19,8 +19,8 @@
                     <ul class="media-list">
                         <li class="media">
                             <div class="media-body media-body-form-control">
-                                <ul id="cosinnus_report_empty_text_error_msg" style="display:none;" class="errorlist _elem-start-hidden _elem-action-hidden" ><li>{% trans "Please enter a description of why you are reporting this object!" %}</li></ul>
-                                <textarea id="cosinnus_report_text" class="form-control _elem-action-disabled" value="" placeholder="{% trans "Please describe why you are reporting this object (required)" %}"></textarea>
+                                <ul id="cosinnus_report_empty_text_error_msg" style="display:none;" class="errorlist _elem-start-hidden _elem-action-hidden" ><li>{% trans "Please enter a description of why you are reporting this content!" %}</li></ul>
+                                <textarea id="cosinnus_report_text" class="form-control _elem-action-disabled" value="" placeholder="{% trans "Please enter a description of why you are reporting this content!" %} {% trans "(required)" %}"></textarea>
                                 <input type="hidden" id="cosinnus_report_cls" value="" >
                                 <input type="hidden" id="cosinnus_report_id" value="" >
                             </div>

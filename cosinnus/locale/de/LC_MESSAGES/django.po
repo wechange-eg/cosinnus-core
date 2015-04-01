@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-30 17:20+0200\n"
+"POT-Creation-Date: 2015-04-01 15:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -17,65 +17,66 @@ msgstr ""
 "Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\admin.py:30
+#: .\admin.py:31
 #, python-format
 msgid "1 %(object)s was deleted successfully"
 msgstr "1 %(object)s wurde erfolgreich gelöscht."
 
-#: .\admin.py:33
+#: .\admin.py:34
 #, python-format
 msgid "%(number)d %(objects)s were deleted successfully"
 msgstr "%(number)d %(objects)s wurden erfolgreich gelöscht."
 
-#: .\admin.py:36
+#: .\admin.py:37
 msgid "Delete selected entries"
 msgstr "Ausgewählte Objekte löschen"
 
-#: .\admin.py:84
+#: .\admin.py:85
 msgid "The following Projects were converted to Societies:"
 msgstr "Die folgenden Projekte wurden in Gruppen umgewandelt:"
 
-#: .\admin.py:86
+#: .\admin.py:87
 msgid "Convert selected Projects to Societies"
 msgstr "Ausgewählte Projekte in Gruppen umwandeln"
 
-#: .\admin.py:117
+#: .\admin.py:118
 msgid "The following Users were added to this portal:"
 msgstr ""
 "Die folgenden Mitarbeiter_innen wurden in dieses Portal mit-aufgenommen:"
 
-#: .\admin.py:119
+#: .\admin.py:120
 #, python-format
 msgid "Add all members to current Portal (%s)"
-msgstr "Alle enthaltenen Mitarbeiter_innen ins aktuelle Portal (%s) mit-aufnehmen"
+msgstr ""
+"Alle enthaltenen Mitarbeiter_innen ins aktuelle Portal (%s) mit-aufnehmen"
 
-#: .\admin.py:125
+#: .\admin.py:126
 msgid "In addition, the members were removed from all other Portals."
 msgstr ""
 "Zusätzlich wurden die Mitarbeiter_innen aus allen anderen Portalen entfernt."
 
-#: .\admin.py:127
+#: .\admin.py:128
 #, python-format
 msgid ""
 "Move all members to current Portal (%s) (removes all other memberships!)"
 msgstr ""
-"Alle enthaltenen Mitarbeiter_innen ins aktuelle Portal (%s) verschieben (entfernt "
-"sie aus allen anderen Portalen!)"
+"Alle enthaltenen Mitarbeiter_innen ins aktuelle Portal (%s) verschieben "
+"(entfernt sie aus allen anderen Portalen!)"
 
-#: .\admin.py:152
+#: .\admin.py:153
 msgid "The following Societies were converted to Projects:"
 msgstr "Die folgenden Gruppen wurden in Projekte umgewandelt:"
 
-#: .\admin.py:154
+#: .\admin.py:155
 msgid "Convert selected Societies to Projects"
 msgstr "Ausgewählte Gruppen in Projekte umwandeln"
 
-#: .\admin.py:216
+#: .\admin.py:224
 #, python-format
 msgid "%d Users were deactivated successfully."
 msgstr "%d Benutzer wurden erfolgreich deaktiviert."
 
-#: .\admin.py:218
+#: .\admin.py:226
 msgid "Deactivate users (will keep all all items they created on the site)"
 msgstr ""
 "Ausgewählte Benutzer deaktivieren (deren erstellte Items bleiben auf der "
@@ -278,6 +279,26 @@ msgstr "Cosinnus Micropage"
 msgid "Cosinnus Micropages"
 msgstr "Cosinnus Micropages"
 
+#: .\models\feedback.py:26
+msgid "Complaint Text"
+msgstr ""
+
+#: .\models\feedback.py:28 .\models\tagged.py:143
+msgid "Creator"
+msgstr "Ersteller"
+
+#: .\models\feedback.py:33 .\models\tagged.py:148
+msgid "Created"
+msgstr "Erstellt"
+
+#: .\models\feedback.py:42
+msgid "Reported object"
+msgstr "Gemeledetes Objekt"
+
+#: .\models\feedback.py:43
+msgid "Reported objects"
+msgstr "Gemeledete Objekte"
+
 #: .\models\group.py:70
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
@@ -310,7 +331,7 @@ msgstr "Webseite"
 
 #: .\models\group.py:375 .\models\group.py:468 .\models\tagged.py:41
 #: .\templates\cosinnus\group\group_form.html.py:194
-#: .\templates\cosinnus\group\group_list.html.py:104
+#: .\templates\cosinnus\group\group_list.html.py:106
 msgid "Public"
 msgstr "Öffentlich"
 
@@ -416,14 +437,6 @@ msgstr "Verknüpftes Objekt"
 msgid "Attached objects"
 msgstr "Verknüpftes Objekt"
 
-#: .\models\tagged.py:143
-msgid "Creator"
-msgstr "Ersteller"
-
-#: .\models\tagged.py:148
-msgid "Created"
-msgstr "Erstellt"
-
 #: .\models\tagged.py:244
 msgid "Path"
 msgstr "Pfad"
@@ -486,6 +499,22 @@ msgstr "Konfigurationseinstellung"
 #: .\models\widget.py:102
 msgid "Widget configuration items"
 msgstr "Konfigurationseinstellungen"
+
+#: .\templates\admin\cosinnusreportedobject\change_form.html.py:8
+msgid "View reported item..."
+msgstr "Gemeldetes Objekt ansehen..."
+
+#: .\templates\admin\cosinnusreportedobject\change_form.html.py:11
+msgid "Edit reported item..."
+msgstr "Gemeldetes Objekt bearbeiten..."
+
+#: .\templates\admin\cosinnusreportedobject\change_form.html.py:14
+msgid "Delete reported item..."
+msgstr "Gemeldetes Objekt löschen..."
+
+#: .\templates\admin\cosinnusreportedobject\change_form.html.py:18
+msgid "(The reported item has been deleted.)"
+msgstr "(Der gemeldete Inhalt wurde gelöscht.)"
 
 #: .\templates\cosinnus\appsmenu.html.py:30
 #: .\templates\cosinnus\appsmenu.html.py:81
@@ -581,7 +610,7 @@ msgstr "gestellt"
 
 #: .\templates\cosinnus\dashboard.html.py:108
 #: .\templates\cosinnus\microsite.html.py:102
-#: .\templates\cosinnus\group\group_list.html.py:191
+#: .\templates\cosinnus\group\group_list.html.py:193
 #: .\templates\cosinnus\group\leftnav_group.html.py:37
 #, python-format
 msgid "Do you really want to withdraw your join request to group „%(title)s“?"
@@ -590,7 +619,7 @@ msgstr ""
 
 #: .\templates\cosinnus\dashboard.html.py:109
 #: .\templates\cosinnus\microsite.html.py:103
-#: .\templates\cosinnus\group\group_list.html.py:192
+#: .\templates\cosinnus\group\group_list.html.py:194
 #: .\templates\cosinnus\group\leftnav_group.html.py:38
 msgid "Withdraw Join Request"
 msgstr "Beitrittsanfrage zurückziehen"
@@ -614,8 +643,8 @@ msgstr "Möchten sie %(title)s beitreten?"
 #: .\templates\cosinnus\dashboard.html.py:121
 #: .\templates\cosinnus\microsite.html.py:89
 #: .\templates\cosinnus\microsite.html.py:108
-#: .\templates\cosinnus\group\group_list.html.py:144
-#: .\templates\cosinnus\group\group_list.html.py:196
+#: .\templates\cosinnus\group\group_list.html.py:146
+#: .\templates\cosinnus\group\group_list.html.py:198
 #: .\templates\cosinnus\group\leftnav_group.html.py:43
 #: .\templates\cosinnus\group\leftnav_group.html.py:48 .\views\group.py:416
 msgid "Join"
@@ -729,7 +758,7 @@ msgid "Withdraw request"
 msgstr "Anfrage zurückziehen"
 
 #: .\templates\cosinnus\microsite.html.py:107
-#: .\templates\cosinnus\group\group_list.html.py:195
+#: .\templates\cosinnus\group\group_list.html.py:197
 #, python-format
 msgid "Do you wish to request to join group „%(title)s“?"
 msgstr "Möchten sie dem Projekt %(title)s beitreten?"
@@ -753,6 +782,7 @@ msgid "Back to Project Overview"
 msgstr "Zurück zur Übersicht"
 
 #: .\templates\cosinnus\modal_box.html.py:28
+#: .\templates\cosinnus\feedback\report_modal.html.py:62
 #: .\templates\cosinnus\group\group_confirm.html.py:14
 #: .\templates\cosinnus\group\group_delete.html.py:16
 #: .\templates\cosinnus\group\group_user_form.html.py:16
@@ -903,6 +933,48 @@ msgstr ""
 "aufgezeichnet und wir werden so schnell wie möglich versuchen das Problem zu "
 "beheben!"
 
+#: .\templates\cosinnus\feedback\report_button_a.html.py:3
+#: .\templates\cosinnus\feedback\report_modal.html.py:14
+msgid "Report offensive content"
+msgstr "Offensiven Inhalt melden"
+
+#: .\templates\cosinnus\feedback\report_modal.html.py:22
+#: .\templates\cosinnus\feedback\report_modal.html.py:23
+msgid "Please enter a description of why you are reporting this content!"
+msgstr "Bitte beschreibe warum du diesen Inhalt meldest!"
+
+#: .\templates\cosinnus\feedback\report_modal.html.py:23
+msgid "(required)"
+msgstr "(erforderlich)"
+
+#: .\templates\cosinnus\feedback\report_modal.html.py:34
+msgid ""
+"Thank you! Your report has been received and we will review the items in "
+"question as soon as possible."
+msgstr ""
+"Vielen Dank! Deine Meldung wurde aufgenommen und wir werden die gemeldeten "
+"Inhalte so schnell wie möglich überprüfen."
+
+#: .\templates\cosinnus\feedback\report_modal.html.py:40
+msgid ""
+"There was an error while trying to submit your report. Please try again in a "
+"moment."
+msgstr ""
+"Es gab einen Fehler bei der Übertragung deiner Meldung. Bitte versuch es in "
+"einem Moment noch einmal."
+
+#: .\templates\cosinnus\feedback\report_modal.html.py:50
+msgid "Send"
+msgstr "Abschicken"
+
+#: .\templates\cosinnus\feedback\report_modal.html.py:74
+msgid "Submitting..."
+msgstr "Übertrage..."
+
+#: .\templates\cosinnus\feedback\report_modal.html.py:86
+msgid "Close"
+msgstr "Schließen"
+
 #: .\templates\cosinnus\group\group_delete.html.py:5
 #, python-format
 msgid "Delete group “%(group_name)s”"
@@ -934,13 +1006,13 @@ msgid "Add user"
 msgstr "Benutzer_in hinzufügen"
 
 #: .\templates\cosinnus\group\group_detail.html.py:81
-#: .\templates\cosinnus\group\group_list.html.py:98
+#: .\templates\cosinnus\group\group_list.html.py:100
 msgid "Admin"
 msgstr "Administratot"
 
 #
 #: .\templates\cosinnus\group\group_detail.html.py:83
-#: .\templates\cosinnus\group\group_list.html.py:100
+#: .\templates\cosinnus\group\group_list.html.py:102
 #: .\templates\cosinnus\widgets\group_projects.html.py:15
 msgid "Member"
 msgstr "Mitarbeiter_in"
@@ -1000,7 +1072,7 @@ msgid "Membership requests"
 msgstr "Mitarbeiter_innen-Anträge"
 
 #: .\templates\cosinnus\group\group_detail.html.py:195
-#: .\templates\cosinnus\group\group_list.html.py:102
+#: .\templates\cosinnus\group\group_list.html.py:104
 msgid "Membership requested"
 msgstr "Mitarbeiter_innenschaft wurde beantragt"
 
@@ -1136,42 +1208,42 @@ msgstr "Beschreibe die Aktivitäten und Ziele"
 msgid "Overview"
 msgstr "Übersicht"
 
-#: .\templates\cosinnus\group\group_list.html.py:106
+#: .\templates\cosinnus\group\group_list.html.py:108
 msgid "Not a member"
 msgstr "Nicht Mitarbeiter_in"
 
 #
-#: .\templates\cosinnus\group\group_list.html.py:140
-#: .\templates\cosinnus\group\group_list.html.py:188
+#: .\templates\cosinnus\group\group_list.html.py:142
+#: .\templates\cosinnus\group\group_list.html.py:190
 #: .\templates\cosinnus\group\leftnav_group.html.py:23
 #: .\templates\cosinnus\group\leftnav_group.html.py:28 .\views\group.py:450
 msgid "Leave"
 msgstr "Verlassen"
 
-#: .\templates\cosinnus\group\group_list.html.py:142 .\views\group.py:494
+#: .\templates\cosinnus\group\group_list.html.py:144 .\views\group.py:494
 msgid "Withdraw"
 msgstr "Zurückziehen"
 
-#: .\templates\cosinnus\group\group_list.html.py:160
+#: .\templates\cosinnus\group\group_list.html.py:162
 #: .\templates\cosinnus\widgets\base_widget.html.py:42
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: .\templates\cosinnus\group\group_list.html.py:175
+#: .\templates\cosinnus\group\group_list.html.py:177
 msgid "Group details"
 msgstr "Projektdetails"
 
-#: .\templates\cosinnus\group\group_list.html.py:187
+#: .\templates\cosinnus\group\group_list.html.py:189
 #: .\templates\cosinnus\group\leftnav_group.html.py:27
 #, python-format
 msgid "Do you really want to leave group „%(title)s“?"
 msgstr "Möchten sie das Projekt “%(title)s” verlassen?"
 
-#: .\templates\cosinnus\group\group_list.html.py:205
+#: .\templates\cosinnus\group\group_list.html.py:207
 msgid "There are no societies."
 msgstr "Es gibt keine sichtbaren Gruppen."
 
-#: .\templates\cosinnus\group\group_list.html.py:207
+#: .\templates\cosinnus\group\group_list.html.py:209
 msgid "There are no projects."
 msgstr "Es gibt keine sichtbaren Projekte."
 
@@ -1240,6 +1312,55 @@ msgstr "Zusammenstellung hinzufügen"
 #: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:578
 msgid "Add"
 msgstr "Hinzufügen"
+
+#: .\templates\cosinnus\mail\reported_object_submitted.html.py:1
+#, python-format
+msgid ""
+"User \"%(sender_name)s\" has reported the item \"%(object_name)s\" to be "
+"offensive.\n"
+"\n"
+"The reason, as written by the reporter:\n"
+"\"%(report_text)s\"\n"
+"\n"
+"\n"
+"You can view the item in question here:\n"
+"%(object_url)s\n"
+"\n"
+"Please go to the following page to respond to the report:\n"
+"%(domain_url)s%(report_admin_url)s\n"
+"\n"
+"\n"
+"(You're receiving this email because you are an administrator of this "
+"portal.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"Benutzer_in \"%(sender_name)s\" hat gemeldet, dass \"%(object_name)s\" "
+"offensive Inhalte enthält.\n"
+"\n"
+"Die Gründe für die Meldung, laut Reporter_in:\n"
+"\"%(report_text)s\"\n"
+"\n"
+"\n"
+"Du kannst den gemeldeten Inhalt hier anschauen:\n"
+"%(object_url)s\n"
+"\n"
+"Bitte besuche die folgende Seite um weitere Schritte zur Meldung zu "
+"ergreifen:\n"
+"%(domain_url)s%(report_admin_url)s\n"
+"\n"
+"\n"
+"(Du hast diese Email bekommen, weil du Portal-Administrator_in auf diesem "
+"Portal bist.)\n"
+"\n"
+"\n"
+"Dein %(site_name)s Team"
+
+#: .\templates\cosinnus\mail\reported_object_submitted_subj.txt.py:1
+#, python-format
+msgid "Offensive item reported: \"%(object_name)s\" on %(site_name)s!"
+msgstr "Offensive Inhalte gemeldet in: \"%(object_name)s\", auf %(site_name)s"
 
 #: .\templates\cosinnus\mail\user_group_join_accepted.html.py:3
 #, python-format

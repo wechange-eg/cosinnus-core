@@ -8,10 +8,14 @@
                 <a href="{{ target_object.get_absolute_url }}" target="_blank" class="viewsitelink"><i class="icon-eye-open icon-alpha75"></i>{% trans "View reported item..." %}</a>
             </li>
             <li>
-                <a href="{{ original.get_target_edit_url }}" target="_blank" class="viewsitelink"><i class="icon-edit icon-alpha75"></i>{% trans "Edit reported item..." %}</a>
+                <a href="{{ original.get_target_edit_url }}" style="color:darkred" target="_blank" class="viewsitelink"><i class="icon-edit icon-alpha75"></i>{% trans "Edit reported item..." %}</a>
             </li>
             <li>
-                <a href="{{ original.get_target_delete_url }}" target="_blank" class="viewsitelink"><i class="icon-ban-circle icon-alpha75"></i>{% trans "Delete reported item..." %}</a>
+                <a href="{{ original.get_target_delete_url }}" style="color:darkred" target="_blank" class="viewsitelink"><i class="icon-ban-circle icon-alpha75"></i>{% trans "Delete reported item..." %}</a>
+            </li>
+        {% else %}
+            <li>
+                <a href="#" style="color:green"><i class="icon-info-sign icon-alpha75"></i>{% trans "(The reported item has been deleted.)" %}</a>
             </li>
         {% endif %}
     {% endwith %}

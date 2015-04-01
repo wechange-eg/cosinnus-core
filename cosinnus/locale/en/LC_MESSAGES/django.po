@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-30 17:20+0200\n"
+"POT-Creation-Date: 2015-04-01 15:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,61 +16,61 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\admin.py:30
+#: .\admin.py:31
 #, python-format
 msgid "1 %(object)s was deleted successfully"
 msgstr ""
 
-#: .\admin.py:33
+#: .\admin.py:34
 #, python-format
 msgid "%(number)d %(objects)s were deleted successfully"
 msgstr ""
 
-#: .\admin.py:36
+#: .\admin.py:37
 msgid "Delete selected entries"
 msgstr ""
 
-#: .\admin.py:84
+#: .\admin.py:85
 msgid "The following Projects were converted to Societies:"
 msgstr "The following Projects were converted to Groups:"
 
-#: .\admin.py:86
+#: .\admin.py:87
 msgid "Convert selected Projects to Societies"
 msgstr "Convert selected Projects to Groups"
 
-#: .\admin.py:117
+#: .\admin.py:118
 msgid "The following Users were added to this portal:"
 msgstr ""
 
-#: .\admin.py:119
+#: .\admin.py:120
 #, python-format
 msgid "Add all members to current Portal (%s)"
 msgstr ""
 
-#: .\admin.py:125
+#: .\admin.py:126
 msgid "In addition, the members were removed from all other Portals."
 msgstr ""
 
-#: .\admin.py:127
+#: .\admin.py:128
 #, python-format
 msgid ""
 "Move all members to current Portal (%s) (removes all other memberships!)"
 msgstr ""
 
-#: .\admin.py:152
+#: .\admin.py:153
 msgid "The following Societies were converted to Projects:"
 msgstr "The following Groups were converted to Projects:"
 
-#: .\admin.py:154
+#: .\admin.py:155
 msgid "Convert selected Societies to Projects"
 msgstr "Convert selected Groups to Projects"
 
-#: .\admin.py:216
+#: .\admin.py:224
 #, python-format
 msgid "%d Users were deactivated successfully."
 msgstr ""
 
-#: .\admin.py:218
+#: .\admin.py:226
 msgid "Deactivate users (will keep all all items they created on the site)"
 msgstr ""
 
@@ -260,6 +260,26 @@ msgstr ""
 msgid "Cosinnus Micropages"
 msgstr ""
 
+#: .\models\feedback.py:26
+msgid "Complaint Text"
+msgstr ""
+
+#: .\models\feedback.py:28 .\models\tagged.py:143
+msgid "Creator"
+msgstr ""
+
+#: .\models\feedback.py:33 .\models\tagged.py:148
+msgid "Created"
+msgstr ""
+
+#: .\models\feedback.py:42
+msgid "Reported object"
+msgstr ""
+
+#: .\models\feedback.py:43
+msgid "Reported objects"
+msgstr ""
+
 #: .\models\group.py:70
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
@@ -291,7 +311,7 @@ msgstr ""
 
 #: .\models\group.py:375 .\models\group.py:468 .\models\tagged.py:41
 #: .\templates\cosinnus\group\group_form.html.py:194
-#: .\templates\cosinnus\group\group_list.html.py:104
+#: .\templates\cosinnus\group\group_list.html.py:106
 msgid "Public"
 msgstr ""
 
@@ -397,14 +417,6 @@ msgstr ""
 msgid "Attached objects"
 msgstr ""
 
-#: .\models\tagged.py:143
-msgid "Creator"
-msgstr ""
-
-#: .\models\tagged.py:148
-msgid "Created"
-msgstr ""
-
 #: .\models\tagged.py:244
 msgid "Path"
 msgstr ""
@@ -466,6 +478,22 @@ msgstr ""
 
 #: .\models\widget.py:102
 msgid "Widget configuration items"
+msgstr ""
+
+#: .\templates\admin\cosinnusreportedobject\change_form.html.py:8
+msgid "View reported item..."
+msgstr ""
+
+#: .\templates\admin\cosinnusreportedobject\change_form.html.py:11
+msgid "Edit reported item..."
+msgstr ""
+
+#: .\templates\admin\cosinnusreportedobject\change_form.html.py:14
+msgid "Delete reported item..."
+msgstr ""
+
+#: .\templates\admin\cosinnusreportedobject\change_form.html.py:18
+msgid "(The reported item has been deleted.)"
 msgstr ""
 
 #: .\templates\cosinnus\appsmenu.html.py:30
@@ -561,7 +589,7 @@ msgstr ""
 
 #: .\templates\cosinnus\dashboard.html.py:108
 #: .\templates\cosinnus\microsite.html.py:102
-#: .\templates\cosinnus\group\group_list.html.py:191
+#: .\templates\cosinnus\group\group_list.html.py:193
 #: .\templates\cosinnus\group\leftnav_group.html.py:37
 #, python-format
 msgid "Do you really want to withdraw your join request to group „%(title)s“?"
@@ -570,7 +598,7 @@ msgstr ""
 
 #: .\templates\cosinnus\dashboard.html.py:109
 #: .\templates\cosinnus\microsite.html.py:103
-#: .\templates\cosinnus\group\group_list.html.py:192
+#: .\templates\cosinnus\group\group_list.html.py:194
 #: .\templates\cosinnus\group\leftnav_group.html.py:38
 msgid "Withdraw Join Request"
 msgstr ""
@@ -594,8 +622,8 @@ msgstr ""
 #: .\templates\cosinnus\dashboard.html.py:121
 #: .\templates\cosinnus\microsite.html.py:89
 #: .\templates\cosinnus\microsite.html.py:108
-#: .\templates\cosinnus\group\group_list.html.py:144
-#: .\templates\cosinnus\group\group_list.html.py:196
+#: .\templates\cosinnus\group\group_list.html.py:146
+#: .\templates\cosinnus\group\group_list.html.py:198
 #: .\templates\cosinnus\group\leftnav_group.html.py:43
 #: .\templates\cosinnus\group\leftnav_group.html.py:48 .\views\group.py:416
 msgid "Join"
@@ -703,7 +731,7 @@ msgid "Withdraw request"
 msgstr ""
 
 #: .\templates\cosinnus\microsite.html.py:107
-#: .\templates\cosinnus\group\group_list.html.py:195
+#: .\templates\cosinnus\group\group_list.html.py:197
 #, python-format
 msgid "Do you wish to request to join group „%(title)s“?"
 msgstr "Do you wish to request to join project „%(title)s“?"
@@ -727,6 +755,7 @@ msgid "Back to Project Overview"
 msgstr ""
 
 #: .\templates\cosinnus\modal_box.html.py:28
+#: .\templates\cosinnus\feedback\report_modal.html.py:62
 #: .\templates\cosinnus\group\group_confirm.html.py:14
 #: .\templates\cosinnus\group\group_delete.html.py:16
 #: .\templates\cosinnus\group\group_user_form.html.py:16
@@ -873,6 +902,44 @@ msgid ""
 "error has been recorded, and we will try to fix it as soon as possible!"
 msgstr ""
 
+#: .\templates\cosinnus\feedback\report_button_a.html.py:3
+#: .\templates\cosinnus\feedback\report_modal.html.py:14
+msgid "Report offensive content"
+msgstr ""
+
+#: .\templates\cosinnus\feedback\report_modal.html.py:22
+#: .\templates\cosinnus\feedback\report_modal.html.py:23
+msgid "Please enter a description of why you are reporting this content!"
+msgstr ""
+
+#: .\templates\cosinnus\feedback\report_modal.html.py:23
+msgid "(required)"
+msgstr ""
+
+#: .\templates\cosinnus\feedback\report_modal.html.py:34
+msgid ""
+"Thank you! Your report has been received and we will review the items in "
+"question as soon as possible."
+msgstr ""
+
+#: .\templates\cosinnus\feedback\report_modal.html.py:40
+msgid ""
+"There was an error while trying to submit your report. Please try again in a "
+"moment."
+msgstr ""
+
+#: .\templates\cosinnus\feedback\report_modal.html.py:50
+msgid "Send"
+msgstr ""
+
+#: .\templates\cosinnus\feedback\report_modal.html.py:74
+msgid "Submitting..."
+msgstr ""
+
+#: .\templates\cosinnus\feedback\report_modal.html.py:86
+msgid "Close"
+msgstr ""
+
 #: .\templates\cosinnus\group\group_delete.html.py:5
 #, python-format
 msgid "Delete group “%(group_name)s”"
@@ -904,12 +971,12 @@ msgid "Add user"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_detail.html.py:81
-#: .\templates\cosinnus\group\group_list.html.py:98
+#: .\templates\cosinnus\group\group_list.html.py:100
 msgid "Admin"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_detail.html.py:83
-#: .\templates\cosinnus\group\group_list.html.py:100
+#: .\templates\cosinnus\group\group_list.html.py:102
 #: .\templates\cosinnus\widgets\group_projects.html.py:15
 msgid "Member"
 msgstr ""
@@ -965,7 +1032,7 @@ msgid "Membership requests"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_detail.html.py:195
-#: .\templates\cosinnus\group\group_list.html.py:102
+#: .\templates\cosinnus\group\group_list.html.py:104
 msgid "Membership requested"
 msgstr ""
 
@@ -1099,41 +1166,41 @@ msgstr ""
 msgid "Overview"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_list.html.py:106
+#: .\templates\cosinnus\group\group_list.html.py:108
 msgid "Not a member"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_list.html.py:140
-#: .\templates\cosinnus\group\group_list.html.py:188
+#: .\templates\cosinnus\group\group_list.html.py:142
+#: .\templates\cosinnus\group\group_list.html.py:190
 #: .\templates\cosinnus\group\leftnav_group.html.py:23
 #: .\templates\cosinnus\group\leftnav_group.html.py:28 .\views\group.py:450
 msgid "Leave"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_list.html.py:142 .\views\group.py:494
+#: .\templates\cosinnus\group\group_list.html.py:144 .\views\group.py:494
 msgid "Withdraw"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_list.html.py:160
+#: .\templates\cosinnus\group\group_list.html.py:162
 #: .\templates\cosinnus\widgets\base_widget.html.py:42
 msgid "Edit"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_list.html.py:175
+#: .\templates\cosinnus\group\group_list.html.py:177
 msgid "Group details"
 msgstr "Project details"
 
-#: .\templates\cosinnus\group\group_list.html.py:187
+#: .\templates\cosinnus\group\group_list.html.py:189
 #: .\templates\cosinnus\group\leftnav_group.html.py:27
 #, python-format
 msgid "Do you really want to leave group „%(title)s“?"
 msgstr "Do you really want to leave project „%(title)s“?"
 
-#: .\templates\cosinnus\group\group_list.html.py:205
+#: .\templates\cosinnus\group\group_list.html.py:207
 msgid "There are no societies."
 msgstr "There are no groups."
 
-#: .\templates\cosinnus\group\group_list.html.py:207
+#: .\templates\cosinnus\group\group_list.html.py:209
 msgid "There are no projects."
 msgstr ""
 
@@ -1201,6 +1268,35 @@ msgstr ""
 #: .\templates\cosinnus\hierarchy\add_container.html.py:27
 #: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:578
 msgid "Add"
+msgstr ""
+
+#: .\templates\cosinnus\mail\reported_object_submitted.html.py:1
+#, python-format
+msgid ""
+"User \"%(sender_name)s\" has reported the item \"%(object_name)s\" to be "
+"offensive.\n"
+"\n"
+"The reason, as written by the reporter:\n"
+"\"%(report_text)s\"\n"
+"\n"
+"\n"
+"You can view the item in question here:\n"
+"%(object_url)s\n"
+"\n"
+"Please go to the following page to respond to the report:\n"
+"%(domain_url)s%(report_admin_url)s\n"
+"\n"
+"\n"
+"(You're receiving this email because you are an administrator of this "
+"portal.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+
+#: .\templates\cosinnus\mail\reported_object_submitted_subj.txt.py:1
+#, python-format
+msgid "Offensive item reported: \"%(object_name)s\" on %(site_name)s!"
 msgstr ""
 
 #: .\templates\cosinnus\mail\user_group_join_accepted.html.py:3
