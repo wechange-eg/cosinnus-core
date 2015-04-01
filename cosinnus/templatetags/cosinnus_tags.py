@@ -22,7 +22,6 @@ from cosinnus.models.group import CosinnusGroup, CosinnusGroupManager,\
 from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
     check_group_create_objects_access, check_object_read_access, get_user_token)
-from django.utils.safestring import mark_safe
 from django.template.base import TemplateSyntaxError
 from cosinnus.core.registries.group_models import group_model_registry
 from django.core.cache import cache
@@ -30,6 +29,8 @@ from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
 
 import logging
 from django.utils.encoding import force_text
+from django.utils.html import escape
+from django.utils.safestring import mark_safe
 logger = logging.getLogger('cosinnus')
 
 register = template.Library()
@@ -576,5 +577,7 @@ def cosinnus_report_object_action(context, obj=None):
     title = getattr(obj, 'title', getattr(obj, 'name', None))
     if not title:
         title = force_text(obj)
-        
-    return ' onclick=\'$.cosinnus.Feedback.cosinnus_report_object("%s", %d, "%s");\' ' % (model_str, obj.id, title)
+    
+    # mark_safe doesn't really seem to work here
+    title = escape(title.replace('"', "'"))
+    return mark_safe(' onclick=\'$.cosinnus.Feedback.cosinnus_report_object("%s", %d, "%s");\' ' % (model_str, obj.id, title))
