@@ -574,7 +574,10 @@ def cosinnus_report_object_action(context, obj=None):
     app_label = obj.__class__.__module__.split('.')[0]
     model_name = obj.__class__.__name__
     model_str = '%s.%s' % (app_label, model_name)
-    title = getattr(obj, 'title', getattr(obj, 'name', None))
+    if model_name.lower() == 'user':
+        title = full_name(obj)
+    else:
+        title = getattr(obj, 'title', getattr(obj, 'name', None))
     if not title:
         title = force_text(obj)
     
