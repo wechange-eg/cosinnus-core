@@ -1,0 +1,96 @@
+{% load i18n cosinnus_tags %}
+
+
+<!-- Modal -->
+<div class="modal fade" id="cosinnus_report_modal" tabindex="1" role="dialog" aria-labelledby="cosinnus_report_modal_Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="fa fa-times"></i>
+                </button>
+                <h4 class="modal-title" id="{{ id }}Label">
+                    <i class="fa fa-warning"></i>
+                    {% trans "Report offensive content" %}: <span id="cosinnus_report_title"></span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div type="button" class="btn btn-default w100 regular-space _elem-success-hidden _elem-start-shown">
+                    <ul class="media-list">
+                        <li class="media">
+                            <div class="media-body media-body-form-control">
+                                <ul id="cosinnus_report_empty_text_error_msg" style="display:none;" class="errorlist _elem-start-hidden _elem-action-hidden" ><li>{% trans "Please enter a description of why you are reporting this content!" %}</li></ul>
+                                <textarea id="cosinnus_report_text" class="form-control _elem-action-disabled" value="" placeholder="{% trans "Please enter a description of why you are reporting this content!" %} {% trans "(required)" %}"></textarea>
+                                <input type="hidden" id="cosinnus_report_cls" value="" >
+                                <input type="hidden" id="cosinnus_report_id" value="" >
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="w100 regular-space _elem-success-shown">
+                    <div class="alert alert-success">
+                        <i class="fa fa-check fa-3x"></i>
+                        <p>{% trans "Thank you! Your report has been received and we will review the items in question as soon as possible." %}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div id="report_modal_error" style="display:none;" class="regular-space">
+                    <ul  class="errorlist" ><li>{% trans "There was an error while trying to submit your report. Please try again in a moment." %}</li></ul>
+                </div>
+                
+                <button id="cosinnus_report_submit_btn" type="button" class="btn btn-emphasized _elem-action-hidden _elem-success-hidden _elem-start-shown">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-check"></i>
+                            </a>
+                            <div class="media-body">
+                                {% trans "Send" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+                <button type="button" class="btn btn-emphasized _elem-action-hidden _elem-success-hidden _elem-start-shown" data-dismiss="modal">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-times"></i>
+                            </a>
+                            <div class="media-body">
+                                {% trans "Cancel" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+                <button type="button" disabled="true" class="btn btn-emphasized _elem-action-shown _elem-success-hidden">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </a>
+                            <div class="media-body">
+                                {% trans "Submitting..." %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+                <button type="button" class="btn btn-emphasized _elem-success-shown" data-dismiss="modal">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-check"></i>
+                            </a>
+                            <div class="media-body">
+                                {% trans "Close" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+                
+            </div>
+        </div>
+    </div>
+</div><!-- modal -->
+

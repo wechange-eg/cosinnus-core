@@ -13,6 +13,7 @@ from cosinnus.models.group import CosinnusGroupMembership,\
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import AttachedObject
 from cosinnus.models.cms import CosinnusMicropage
+from cosinnus.models.feedback import CosinnusReportedObject
 
 
 class SingleDeleteActionMixin(object):
@@ -172,6 +173,13 @@ class CosinnusMicropageAdmin(admin.ModelAdmin):
     list_display = ('title', 'group', 'last_edited_by', 'last_edited')
 
 admin.site.register(CosinnusMicropage, CosinnusMicropageAdmin)
+
+
+class CosinnusReportedObjectAdmin(admin.ModelAdmin):
+    list_display = ('text', 'target_object', 'creator', 'created')
+    change_form_template = 'admin/cosinnusreportedobject/change_form.html'
+
+admin.site.register(CosinnusReportedObject, CosinnusReportedObjectAdmin)
 
 
 

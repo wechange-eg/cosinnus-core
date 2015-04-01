@@ -20,8 +20,8 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^profile/dashboard/$', 'widget.user_dashboard', name='user-dashboard'),
     url(r'^profile/edit/$', 'profile.update_view', name='profile-edit'),
     url(r'^profile/delete/$', 'profile.delete_view', name='profile-delete'),
-    url(r'^language/(?P<language>[^/]+)/$', 'common.switch_language', name='switch-language'),
     
+    url(r'^language/(?P<language>[^/]+)/$', 'common.switch_language', name='switch-language'),
     
     url(r'^widgets/list/$', 'widget.widget_list', name='widget-list'),
     url(r'^widgets/add/user/$', 'widget.widget_add_user', name='widget-add-user-empty'),
@@ -33,6 +33,8 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^widget/(?P<id>\d+)/edit/(?P<app_name>[^/]+)/(?P<widget_name>[^/]+)/$', 'widget.widget_edit', name='widget-edit-swap'),
 
     url(r'^search/$', 'search.search', name='search'),
+    
+    url(r'^account/report/$', 'feedback.report_object', name='report-object'),
     
     url(r'^housekeeping/$', 'housekeeping.housekeeping', name='housekeeping'),
     url(r'^housekeeping/deletespamusers/$', 'housekeeping.delete_spam_users', name='housekeeping_delete_spam_users'),

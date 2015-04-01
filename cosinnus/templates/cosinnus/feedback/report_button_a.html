@@ -1,0 +1,6 @@
+{% load i18n cosinnus_tags %}
+
+<a title="{% trans "Report offensive content" %}" {% if request.user.is_authenticated %}href="#" {% cosinnus_report_object_action object %}{% else %}href="{% url 'login' %}{% if request.path != "/" %}?next={{ request.path }}{% endif %}"{% endif %}>
+    <i class="fa fa-warning"></i>
+</a>
+                                    
