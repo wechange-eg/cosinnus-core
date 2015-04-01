@@ -57,6 +57,8 @@ def _mail_print(to, subject, template, data, from_email=None, bcc=None):
         print render_to_string(template, data)
     
 def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None):
+    # remove newlines from header
+    subject = subject.replace('\n', ' ').replace('\r', ' ')
     try:
         send_mail(to, subject, template, data, from_email, bcc)
     except Exception, e:
