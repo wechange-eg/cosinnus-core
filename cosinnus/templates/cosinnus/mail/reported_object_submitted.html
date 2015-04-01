@@ -1,0 +1,17 @@
+{% load i18n cosinnus_tags %}{% blocktrans %}User "{{ sender_name }}" has reported the item "{{ object_name }}" to be offensive.
+
+The reason, as written by the reporter:
+"{{ report_text }}"
+
+
+You can view the item in question here:
+{{ object_url }}
+
+Please go to the following page to respond to the report:
+{{ domain_url }}{{ report_admin_url }}
+
+
+(You're receiving this email because you are an administrator of this portal.)
+
+
+Your {{ site_name }} Team{% endblocktrans %}

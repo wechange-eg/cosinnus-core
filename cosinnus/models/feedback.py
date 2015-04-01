@@ -41,7 +41,7 @@ class CosinnusReportedObject(models.Model):
         verbose_name_plural = _('Reported objects')
 
     def __str__(self):
-        return '<attach: %s::%s>' % (self.content_type, self.object_id)
+        return '<Report: %s::%s>' % (self.content_type, self.object_id)
 
     @property
     def model_name(self):
