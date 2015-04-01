@@ -11,6 +11,8 @@ from django.utils.translation import ugettext_lazy as _
 from cosinnus.conf import settings
 from django.core.urlresolvers import reverse
 from cosinnus.core.registries.group_models import group_model_registry
+from cosinnus.models.group import CosinnusPortal
+from cosinnus.utils.urls import get_domain_for_portal
 
 
 @python_2_unicode_compatible
@@ -58,6 +60,9 @@ class CosinnusReportedObject(models.Model):
     
     def get_absolute_url(self):
         """ Point at URL of referenced ContentType object """
+        if self.content_type.model == 'user':
+            # patch for user model get_absolute_url pointing to nowhere
+            return get_domain_for_portal(CosinnusPortal.get_current()) + reverse('cosinnus:profile-detail', kwargs={'username': self.target_object.username})
         if self.target_object and hasattr(self.target_object, 'get_absolute_url'):
             return self.target_object.get_absolute_url()
         return None

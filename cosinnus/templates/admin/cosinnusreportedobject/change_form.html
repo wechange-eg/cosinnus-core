@@ -5,7 +5,7 @@
     {% with target_object=original.target_object %}
         {% if target_object %}
             <li>
-                <a href="{{ target_object.get_absolute_url }}" target="_blank" class="viewsitelink"><i class="icon-eye-open icon-alpha75"></i>{% trans "View reported item..." %}</a>
+                <a href="{{ original.get_absolute_url }}" target="_blank" class="viewsitelink"><i class="icon-eye-open icon-alpha75"></i>{% trans "View reported item..." %}</a>
             </li>
             <li>
                 <a href="{{ original.get_target_edit_url }}" style="color:darkred" target="_blank" class="viewsitelink"><i class="icon-edit icon-alpha75"></i>{% trans "Edit reported item..." %}</a>

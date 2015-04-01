@@ -72,7 +72,12 @@ def report_object(request):
     
     app_label, model = cls.split('.')
     
-    content_type = ContentType.objects.get_for_model(get_model(app_label, model))
+    if model.lower() == 'user':
+        model_cls = get_user_model()
+    else:
+        model_cls = get_model(app_label, model)
+    
+    content_type = ContentType.objects.get_for_model(model_cls)
     report_obj = CosinnusReportedObject.objects.create(content_type=content_type, object_id=obj_id, text=text, creator=request.user)
     
     # TODO: notification to portal admins
