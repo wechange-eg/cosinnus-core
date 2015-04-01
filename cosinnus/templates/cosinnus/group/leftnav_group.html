@@ -18,6 +18,8 @@
 {% captureas label %}{% trans "Members" %}{% endcaptureas %}
 {% include "cosinnus/leftnav_button.html" with active=is_groupdetails extra_classes="large-space" icon="fa-users" label=label href=href  %}
 
+{% include 'cosinnus/feedback/report_button_leftnav_btn.html' with object=group %}
+
 {% if user.pk in object.members or user.pk in object.admins %}
     {% captureas label %}{% trans "Leave" %}{% endcaptureas %}
     {% captureas extra_atts %}data-toggle="modal" data-target="#leave_join_group_modal"{% endcaptureas %}

@@ -69,6 +69,9 @@
 	                            <i class="fa fa-chain"></i>
 	                        </a>
 	                        <div class="media-body">
+	                            <span class="annotation">
+	                                {% include 'cosinnus/feedback/report_button_a.html' with object=user %}
+	                            </span>
 	                            {% comment %}  
 	                            {% if user.is_authenticated %}
                                     <span class="annotation">

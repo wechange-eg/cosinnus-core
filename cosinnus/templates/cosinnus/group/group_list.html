@@ -91,8 +91,10 @@
 	                            <i class="fa fa-chain"></i>
 	                        </a>
 	                        <div class="media-body">
-	                            {% if user.is_authenticated %}
-                                    <span class="annotation">
+                                <span class="annotation">
+                                   {% include 'cosinnus/feedback/report_button_a.html' with object=group %}&nbsp;
+                                   
+	                               {% if user.is_authenticated %}
 		                                {% if user.pk in admins %}
                                             {% trans "Admin" %}
                                         {% elif user.pk in members %}
@@ -104,8 +106,8 @@
                                         {% else %}
 		                                    {% trans "Not a member" %}
 		                                {% endif %}
-		                            </span>
-                                {% endif %}
+                                    {% endif %}
+	                            </span>
                                 {% if group.public or user.pk in members or user.is_superuser %}
 		                            <a href="{{ group_url }}">
 		                                {{ group.name }}
@@ -177,6 +179,7 @@
 		                    </ul>
 		                </button>
 	                {% endif %}
+	                
 	            </div>
 	            
 	        </div><!-- fadedown -->
