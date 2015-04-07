@@ -5,7 +5,8 @@ import six
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseForbidden
-from django.shortcuts import get_object_or_404, render_to_response, render
+from django.shortcuts import get_object_or_404, render_to_response, render,\
+    redirect
 from django.template import RequestContext
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_text
@@ -17,11 +18,13 @@ from cosinnus.core.registries import widget_registry
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.http import JSONResponse
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
-from cosinnus.views.mixins.group import RequireReadMixin
+from cosinnus.views.mixins.group import RequireReadMixin,\
+    RequireReadOrRedirectMixin
 from uuid import uuid1
 from cosinnus.core.registries.apps import app_registry
 from cosinnus.utils.functions import resolve_class
 from cosinnus.models.group import CosinnusGroup
+from django.core.urlresolvers import reverse
 
 
 def widget_list(request):
@@ -275,7 +278,7 @@ class DashboardWidgetMixin(object):
         return super(DashboardWidgetMixin, self).get_context_data(**kwargs)
 
 
-class GroupDashboard(RequireReadMixin, DashboardWidgetMixin, TemplateView):
+class GroupDashboard(RequireReadOrRedirectMixin, DashboardWidgetMixin, TemplateView):
     
     template_name = 'cosinnus/dashboard.html'
     
@@ -307,6 +310,10 @@ class GroupDashboard(RequireReadMixin, DashboardWidgetMixin, TemplateView):
             'object_counts': object_counts,
         })
         return context
+    
+    def on_error(self, request, *args, **kwargs):
+        # TODO: do it group_aware, the reverse! then add ?GET param to unroll the flowdown and add an error message
+        return redirect(reverse('group-list-filtered', kwargs={'group': kwargs.get('group')}))
     
 
 group_dashboard = GroupDashboard.as_view()
