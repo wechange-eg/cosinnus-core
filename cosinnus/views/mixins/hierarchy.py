@@ -1,9 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from cosinnus.views.mixins.tagged import HierarchyTreeMixin
-from django.shortcuts import get_object_or_404
-from cosinnus.models.tagged import BaseHierarchicalTaggableObjectModel
+
+import json
+
 from django.http.response import Http404
+from django.utils.html import escape
+from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext_lazy as _
+
+from cosinnus.views.mixins.tagged import HierarchyTreeMixin
+from django.utils.encoding import force_text
+
 
 class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
     """ Hybrid view for hierarchic items.
@@ -48,12 +55,28 @@ class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
             # insert logic for "this folder doesn't exist" here
             pass
         
+        
+        """ Collect a JSON list of all folders for this group
+            Format: [{ "id" : "slug1", "parent" : "#", "text" : "Simple root node" }, 
+                    { "id" : "slug2", "parent" : "slug1", "text" : "Child 1" },] """
+        # TODO: this needs optimization (caching, or fold the DB call into the main folder-get call)
+        all_folders = self.model.objects.filter(group=self.group, is_container=True)
+        folders_only = self.get_tree(all_folders, '/', include_containers=True, include_leaves=False, recursive=True)
+        all_folder_json = []
+        def collect_folders(from_folder, folder_id='#'):
+            cur_id = from_folder['container_object'].slug
+            all_folder_json.append( {'id': cur_id, 'parent': folder_id, 'pa_th':from_folder['path'], 'text': escape(from_folder['name'] or force_text(_('<Root folder>')))} )
+            for lower_folder in from_folder['containers']:
+                collect_folders(lower_folder, cur_id)
+        collect_folders(folders_only)
+        
         context.update({
             'current_folder': current_folder, 
             'object_list': objects, 
             'objects': objects, 
             'folders': folders,
             'is_deep_hierarchy': self.allow_deep_hierarchy,
+            'all_folder_json': mark_safe(json.dumps(all_folder_json)),
         })
         return context
     
