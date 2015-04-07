@@ -580,7 +580,6 @@ class GroupUserAddView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
         return context
 
     def get_user_qs(self):
-        print ">>> slegroup", self.group.id
         uids = self.model.objects.get_members(group=self.group)
         return get_user_model()._default_manager.exclude(id__in=uids)
 
