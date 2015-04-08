@@ -67,7 +67,7 @@ class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
             print folders_only
             def collect_folders(from_folder, folder_id='#'):
                 cur_id = from_folder['container_object'].slug
-                all_folder_json.append( {'id': cur_id, 'parent': folder_id, 'a_attr': {'target_folder':from_folder['container_object'].id}, 'text': escape(from_folder['name'] or force_text(_('<Root folder>')))} )
+                all_folder_json.append( {'id': cur_id, 'parent': folder_id, 'a_attr': {'target_folder':from_folder['container_object'].id}, 'text': escape(from_folder['container_object'].title or force_text(_('<Root folder>')))} )
                 for lower_folder in from_folder['containers']:
                     collect_folders(lower_folder, cur_id)
             collect_folders(folders_only)

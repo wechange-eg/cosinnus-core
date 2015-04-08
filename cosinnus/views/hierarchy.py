@@ -88,11 +88,20 @@ class MoveElementView(RequireCreateObjectsInMixin, View):
         target_folder_id = request.POST.get('target_folder_id', None)
         
         if not (element_id or target_folder_id or self.group):
+            print element_id, ', ', target_folder_id, ', ', self.group
             return HttpResponseBadRequest('Missing POST fields for this requests.')
+        if element_id == target_folder_id:
+            return HttpResponseBadRequest('Source and target are the same.')
         
         element = get_object_or_404(self.model, id=element_id, group=self.group)
         target_folder = get_object_or_404(self.model, id=target_folder_id, group=self.group)
         
-        return HttpResponse('We got it! %s, %s' % (element.title, target_folder.path))
+        if element.is_container:
+            raise HttpResponseBadRequest('Container moving is bad!')
+        else:
+            element.path = target_folder.path
+            element.save()
+            return HttpResponse('ok_element')
+        
         
         
