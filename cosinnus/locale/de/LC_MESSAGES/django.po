@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-08 14:27+0200\n"
+"POT-Creation-Date: 2015-04-08 18:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -787,6 +787,7 @@ msgstr "Zurück zur Übersicht"
 #: .\templates\cosinnus\group\group_delete.html.py:16
 #: .\templates\cosinnus\group\group_user_form.html.py:16
 #: .\templates\cosinnus\hierarchy\add_container.html.py:28
+#: .\templates\cosinnus\hierarchy\move_element_modal.html.py:48
 #: .\templates\cosinnus\widgets\add_widget.html.py:32
 #: .\templates\cosinnus\widgets\delete.html.py:5
 msgid "Cancel"
@@ -959,6 +960,7 @@ msgstr ""
 "Inhalte so schnell wie möglich überprüfen."
 
 #: .\templates\cosinnus\feedback\report_modal.html.py:40
+#: .\templates\cosinnus\hierarchy\move_element_modal.html.py:26
 msgid ""
 "There was an error while trying to submit your report. Please try again in a "
 "moment."
@@ -971,6 +973,7 @@ msgid "Send"
 msgstr "Abschicken"
 
 #: .\templates\cosinnus\feedback\report_modal.html.py:74
+#: .\templates\cosinnus\hierarchy\move_element_modal.html.py:60
 msgid "Submitting..."
 msgstr "Übertrage..."
 
@@ -1319,6 +1322,14 @@ msgstr "Zusammenstellung hinzufügen"
 #: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:603
 msgid "Add"
 msgstr "Hinzufügen"
+
+#: .\templates\cosinnus\hierarchy\move_element_modal.html.py:14
+msgid "Move to another Folder"
+msgstr "In einen anderen Ordner verschieben"
+
+#: .\templates\cosinnus\hierarchy\move_element_modal.html.py:36
+msgid "Move"
+msgstr "Verschieben"
 
 #: .\templates\cosinnus\mail\reported_object_submitted.html.py:1
 #, python-format
@@ -2074,7 +2085,7 @@ msgstr ""
 msgid "Remove user from %(group_type)s “%(group_name)s”?"
 msgstr "Benutzer_in aus %(group_type)s “%(group_name)s” entfernen?"
 
-#: .\views\hierarchy.py:26
+#: .\views\hierarchy.py:30
 msgid "No appname given for adding containers."
 msgstr "Kein Appname zum Hinzufügen von Zusammenstellungen angegeben."
 
@@ -2160,6 +2171,16 @@ msgstr "%s (absteigend)"
 #: .\views\mixins\filters.py:101
 msgid "Ordering"
 msgstr "Sortierung"
+
+#: .\views\mixins\hierarchy.py:71
+#, fuzzy
+msgid "Root Folder"
+msgstr "Ordner bearbeiten"
+
+#: .\views\mixins\hierarchy.py:73
+#, fuzzy
+msgid "<Root folder>"
+msgstr "Ordner bearbeiten"
 
 #: .\views\mixins\tagged.py:293
 #, python-format

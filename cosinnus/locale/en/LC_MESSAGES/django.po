@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-08 14:27+0200\n"
+"POT-Creation-Date: 2015-04-08 18:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -760,6 +760,7 @@ msgstr ""
 #: .\templates\cosinnus\group\group_delete.html.py:16
 #: .\templates\cosinnus\group\group_user_form.html.py:16
 #: .\templates\cosinnus\hierarchy\add_container.html.py:28
+#: .\templates\cosinnus\hierarchy\move_element_modal.html.py:48
 #: .\templates\cosinnus\widgets\add_widget.html.py:32
 #: .\templates\cosinnus\widgets\delete.html.py:5
 msgid "Cancel"
@@ -926,6 +927,7 @@ msgid ""
 msgstr ""
 
 #: .\templates\cosinnus\feedback\report_modal.html.py:40
+#: .\templates\cosinnus\hierarchy\move_element_modal.html.py:26
 msgid ""
 "There was an error while trying to submit your report. Please try again in a "
 "moment."
@@ -936,6 +938,7 @@ msgid "Send"
 msgstr ""
 
 #: .\templates\cosinnus\feedback\report_modal.html.py:74
+#: .\templates\cosinnus\hierarchy\move_element_modal.html.py:60
 msgid "Submitting..."
 msgstr ""
 
@@ -1275,6 +1278,14 @@ msgstr ""
 #: .\templates\cosinnus\hierarchy\add_container.html.py:27
 #: .\templates\cosinnus\widgets\add_widget.html.py:20 .\views\group.py:603
 msgid "Add"
+msgstr ""
+
+#: .\templates\cosinnus\hierarchy\move_element_modal.html.py:14
+msgid "Move to another Folder"
+msgstr ""
+
+#: .\templates\cosinnus\hierarchy\move_element_modal.html.py:36
+msgid "Move"
 msgstr ""
 
 #: .\templates\cosinnus\mail\reported_object_submitted.html.py:1
@@ -1938,7 +1949,7 @@ msgstr ""
 msgid "Remove user from %(group_type)s “%(group_name)s”?"
 msgstr ""
 
-#: .\views\hierarchy.py:26
+#: .\views\hierarchy.py:30
 msgid "No appname given for adding containers."
 msgstr ""
 
@@ -2006,6 +2017,14 @@ msgstr ""
 
 #: .\views\mixins\filters.py:101
 msgid "Ordering"
+msgstr ""
+
+#: .\views\mixins\hierarchy.py:71
+msgid "Root Folder"
+msgstr ""
+
+#: .\views\mixins\hierarchy.py:73
+msgid "<Root folder>"
 msgstr ""
 
 #: .\views\mixins\tagged.py:293

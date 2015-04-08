@@ -11,7 +11,7 @@
                 </button>
                 <h4 class="modal-title" id="cosinnus_move_element_modal_Label">
                     <i class="fa fa-warning"></i>
-                    {% trans "Move element to another folder" %}: <span id="cosinnus_move_element_title"></span>
+                    {% trans "Move to another Folder" %}: <span id="cosinnus_move_element_title"></span>
                 </h4>
             </div>
             <div class="modal-body">
@@ -68,3 +68,39 @@
     </div>
 </div><!-- modal -->
 
+<script type="text/javascript">
+    var cosinnus_move_element_object_url = "{% group_url 'cosinnus:etherpad:move-element' group=group %}";
+    
+    $('#cosinnus_move_element_modal').on('shown.bs.modal', function () {
+        if ($('#jstree_move_div').is(':empty')){
+            console.log('showing jstree');
+            $('#jstree_move_div')
+                .on('loaded.jstree', function () {
+                    $('#jstree_move_div').jstree(true).open_all();
+                    $('#jstree_move_div').jstree(true).select_node("{{ current_folder.slug }}");
+                })
+                .on('changed.jstree', function (e, data) {
+                    var i, j = [];
+                    var folder_id = -1;
+                    for(i = 0, j = data.selected.length; i < j; i++) {
+                        var id = data.instance.get_node(data.selected[i]).id;
+                        folder_id = data.instance.get_node(data.selected[i]).a_attr.target_folder;
+                    }
+                    $('#cosinnus_move_element_selected_folder').val(folder_id);
+                });
+            var data = {{ all_folder_json|safe }};
+            // use this to customise the folder icons
+            //for(i = 0; i < data.length; i++) {
+            //    data[i]['icon'] = 'fa fa-folder-open';
+            //}    
+            $('#jstree_move_div').jstree({
+              "core" : {
+                "multiple" : false,
+                'data' : data,
+              },
+            });
+        }
+       
+        
+    });
+</script>
