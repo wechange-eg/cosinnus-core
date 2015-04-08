@@ -52,9 +52,10 @@ class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
         objects = current_folder_node['objects']
         current_folder = current_folder_node['container_object']
         if current_folder is None:
-            # insert logic for "this folder doesn't exist" here
-            pass
-        
+            # sanity check: there might be no current folder because no root folder has been created
+            # make sure to create one (backwards compatibility, should never happen on newer cosinnus systems)
+            obj, created = self.model.objects.get_or_create(group=self.group, slug='_root_', title='_root_', path='/', is_container=True)
+            current_folder = obj
         
         """ Collect a JSON list of all folders for this group
             Format: [{ "id" : "slug1", "parent" : "#", "text" : "Simple root node" }, 
