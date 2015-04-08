@@ -1020,6 +1020,34 @@
             });
         },
         
+        modal_activate: function() {
+            $('._elem-action-disabled').attr('disabled', false);
+            $('._elem-action-hidden').show();
+            $('._elem-action-shown').hide();
+            $('._elem-start-shown').show();
+            $('._elem-start-hidden').hide();
+            $('._elem-success-shown').hide();
+        },
+        
+        modal_deactivate: function() {
+            $('._elem-action-disabled').attr('disabled', true);
+            $('._elem-action-hidden').hide();
+            $('._elem-action-shown').show();
+            $('._elem-success-shown').hide();
+        },
+        
+        display_report_error: function(jq_id) {
+            $(jq_id).show();
+            $.cosinnus.modal_activate();
+        },
+        
+        display_report_success: function(jq_id) {
+            $(jq_id).hide();
+            $.cosinnus.modal_activate();
+            $('._elem-success-shown').show();
+            $('._elem-success-hidden').hide();
+        },
+        
         
         decodeEntities : (function() {
             // this prevents any overhead from creating the object each time

@@ -17,11 +17,16 @@
             <div class="modal-body">
 
                 <div id="jstree_move_div"></div>
-
+                <input type="hidden" id="cosinnus_move_element_obj_id" value="" >
+                <input type="hidden" id="cosinnus_move_element_selected_folder" value="" >
                 
             </div>
             <div class="modal-footer">
-                <button id="cosinnus_report_submit_btn" type="button" class="btn btn-emphasized _elem-action-hidden _elem-success-hidden _elem-start-shown">
+                <div id="move_element_modal_error" style="display:none;" class="regular-space">
+                    <ul  class="errorlist" ><li>{% trans "There was an error while trying to submit your report. Please try again in a moment." %}</li></ul>
+                </div>
+            
+                <button id="cosinnus_move_element_submit_btn" type="button" class="btn btn-emphasized _elem-action-hidden _elem-success-hidden _elem-start-shown">
                     <ul class="media-list">
                         <li class="media">
                             <a class="pull-left" href="#">
@@ -41,6 +46,18 @@
                             </a>
                             <div class="media-body">
                                 {% trans "Cancel" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+                <button type="button" disabled="true" class="btn btn-emphasized _elem-action-shown _elem-success-hidden">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </a>
+                            <div class="media-body">
+                                {% trans "Submitting..." %}
                             </div>
                         </li>
                     </ul>

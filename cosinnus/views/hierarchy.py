@@ -7,9 +7,13 @@ from django.views.generic import CreateView
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.forms.hierarchy import AddContainerForm
-from cosinnus.views.mixins.group import (RequireWriteMixin, FilterGroupMixin)
+from cosinnus.views.mixins.group import (RequireWriteMixin, FilterGroupMixin,
+    RequireCreateObjectsInMixin)
 from cosinnus.views.mixins.tagged import HierarchyPathMixin
 from cosinnus.utils.urls import group_aware_reverse
+from django.views.generic.base import View
+from django.http.response import HttpResponseBadRequest, HttpResponse
+from django.shortcuts import get_object_or_404
 
 
 class AddContainerView(RequireWriteMixin, FilterGroupMixin,
@@ -61,3 +65,34 @@ class AddContainerView(RequireWriteMixin, FilterGroupMixin,
         context['cancel_url'] = group_aware_reverse('cosinnus:%s:list' % self.appname,
             kwargs={'group': self.group})
         return context
+
+
+class MoveElementView(RequireCreateObjectsInMixin, View):
+    """ Moves a superclass element of HierarchicalBaseTaggableObject to a different folder.
+        
+        This is a pseudo-abstract class, superclass this with your own view for each cosinnus app.
+        Requires `model` to be set to a non-abstract HierarchicalBaseTaggableObject model.
+        Expects to find a `group` kwarg.
+        Excpects `element_id` and `target_folder_id` as POST arguments.
+     """
+    
+    http_method_names = ['post', ]
+    
+    model = None
+    
+    def post(self, request, *args, **kwargs):
+        if not self.model:
+            raise ImproperlyConfigured('No model class is set for the pseudo-abstract view MoveElementView.')
+        
+        element_id = request.POST.get('element_id', None)
+        target_folder_id = request.POST.get('target_folder_id', None)
+        
+        if not (element_id or target_folder_id or self.group):
+            return HttpResponseBadRequest('Missing POST fields for this requests.')
+        
+        element = get_object_or_404(self.model, id=element_id, group=self.group)
+        target_folder = get_object_or_404(self.model, id=target_folder_id, group=self.group)
+        
+        return HttpResponse('We got it! %s, %s' % (element.title, target_folder.path))
+        
+        

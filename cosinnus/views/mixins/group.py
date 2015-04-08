@@ -2,7 +2,8 @@
 from __future__ import unicode_literals
 
 from cosinnus.core.decorators.views import (require_read_access,
-    require_write_access, require_admin_access)
+    require_write_access, require_admin_access,
+    require_create_objects_in_access)
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from cosinnus.models.tagged import BaseTaggableObjectModel
 from django.core.exceptions import PermissionDenied, ImproperlyConfigured
@@ -13,7 +14,7 @@ class RequireAdminMixin(object):
     """
     Mixing to ease the use of :meth:`require_admin_access`.
 
-    .. seealso:: :class:`RequireReadMixin`, :class:`RequireWriteMixin`
+    .. seealso:: :class:`RequireReadMixin`, :class:`RequireWriteMixin`, :class:`RequireCreateObjectsInMixin`
     """
 
     @require_admin_access()
@@ -30,7 +31,7 @@ class RequireReadMixin(object):
     """
     Mixing to ease the use of :meth:`require_read_access`.
 
-    .. seealso:: :class:`RequireAdminMixin`, :class:`RequireWriteMixin`
+    .. seealso:: :class:`RequireAdminMixin`, :class:`RequireWriteMixin`, :class:`RequireCreateObjectsInMixin`
     """
 
     @require_read_access()
@@ -58,6 +59,12 @@ class RequireReadMixin(object):
     
     
 class RequireReadOrRedirectMixin(RequireReadMixin):
+    """ Works exactly as :class:`RequireReadMixin`, but offers additional actions when
+        the permission requirements are not met.
+        
+        Set `on_eror_redirect_url` to an URL to redirect to on unmet permissions,
+        or override :meth:`on_error` to handle custom behaviour.
+         """ 
     
     on_error_redirect_url = None
     
@@ -85,7 +92,7 @@ class RequireWriteMixin(object):
     """
     Mixing to ease the use of :meth:`require_write_access`.
 
-    .. seealso:: :class:`RequireAdminMixin`, :class:`RequireReadMixin`
+    .. seealso:: :class:`RequireAdminMixin`, :class:`RequireReadMixin`, :class:`RequireCreateObjectsInMixin`
     """
 
     @require_write_access()
@@ -94,6 +101,23 @@ class RequireWriteMixin(object):
 
     def get_context_data(self, **kwargs):
         context = super(RequireWriteMixin, self).get_context_data(**kwargs)
+        context.update({'group': self.group})
+        return context
+    
+    
+class RequireCreateObjectsInMixin(object):
+    """
+    Mixing to ease the use of :meth:`require_create_objects_in_access`.
+
+    .. seealso:: :class:`RequireAdminMixin`, :class:`RequireReadMixin`, :class:`RequireWriteMixin`
+    """
+
+    @require_create_objects_in_access()
+    def dispatch(self, request, *args, **kwargs):
+        return super(RequireCreateObjectsInMixin, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(RequireCreateObjectsInMixin, self).get_context_data(**kwargs)
         context.update({'group': self.group})
         return context
 

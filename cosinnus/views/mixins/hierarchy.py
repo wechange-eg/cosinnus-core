@@ -63,12 +63,14 @@ class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
         all_folders = self.model.objects.filter(group=self.group, is_container=True)
         folders_only = self.get_tree(all_folders, '/', include_containers=True, include_leaves=False, recursive=True)
         all_folder_json = []
-        def collect_folders(from_folder, folder_id='#'):
-            cur_id = from_folder['container_object'].slug
-            all_folder_json.append( {'id': cur_id, 'parent': folder_id, 'pa_th':from_folder['path'], 'text': escape(from_folder['name'] or force_text(_('<Root folder>')))} )
-            for lower_folder in from_folder['containers']:
-                collect_folders(lower_folder, cur_id)
-        collect_folders(folders_only)
+        if folders_only and folders_only.get('container_object', None):
+            print folders_only
+            def collect_folders(from_folder, folder_id='#'):
+                cur_id = from_folder['container_object'].slug
+                all_folder_json.append( {'id': cur_id, 'parent': folder_id, 'a_attr': {'target_folder':from_folder['container_object'].id}, 'text': escape(from_folder['name'] or force_text(_('<Root folder>')))} )
+                for lower_folder in from_folder['containers']:
+                    collect_folders(lower_folder, cur_id)
+            collect_folders(folders_only)
         
         context.update({
             'current_folder': current_folder, 
