@@ -307,17 +307,27 @@ society_list = SocietyListView.as_view()
 
 
 class FilteredGroupListView(GroupListView):
+    """ This will show 'related' groups and projects.
+        For a given group slug, will only show the group itself.
+        For a given project slug, will show all projects in the same group as that project,
+            or just itself if it isn't in a group. """
     
     def get(self, request, *args, **kwargs):
         self.group_slug = kwargs.pop('group')
+        self.filter_group = CosinnusGroup.objects.get_cached(slugs=self.group_slug)
         return super(FilteredGroupListView, self).get(request, *args, **kwargs)
     
     def get_queryset(self):
-        filter_group = CosinnusGroup.objects.get_cached(slugs=self.group_slug)
         qs_list = super(FilteredGroupListView, self).get_queryset()
-        return [group for group in qs_list if group.parent_id==filter_group.id]
-        
-
+        if not self.filter_group.parent_id:
+            return [self.filter_group]
+        return [group for group in qs_list if group.parent_id==self.filter_group.parent_id]
+    
+    def get_context_data(self, **kwargs):
+        ctx = super(FilteredGroupListView, self).get_context_data(**kwargs)
+        ctx.update({'filter_group': self.filter_group})
+        return ctx
+    
 group_list_filtered = FilteredGroupListView.as_view()
 
 

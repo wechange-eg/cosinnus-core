@@ -13,19 +13,19 @@ from django.utils.encoding import force_text
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import TemplateView
 
-from cosinnus.core.decorators.views import require_admin_access_decorator
+from cosinnus.core.decorators.views import require_admin_access_decorator,\
+    redirect_to_not_logged_in
 from cosinnus.core.registries import widget_registry
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.http import JSONResponse
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
-from cosinnus.views.mixins.group import RequireReadMixin,\
-    RequireReadOrRedirectMixin
+from cosinnus.views.mixins.group import RequireReadOrRedirectMixin
 from uuid import uuid1
 from cosinnus.core.registries.apps import app_registry
 from cosinnus.utils.functions import resolve_class
-from cosinnus.models.group import CosinnusGroup
-from django.core.urlresolvers import reverse
-
+from cosinnus.utils.urls import group_aware_reverse
+from django.contrib import messages
+from django.utils.translation import ugettext_lazy as _
 
 def widget_list(request):
     data = {}
@@ -312,8 +312,11 @@ class GroupDashboard(RequireReadOrRedirectMixin, DashboardWidgetMixin, TemplateV
         return context
     
     def on_error(self, request, *args, **kwargs):
-        # TODO: do it group_aware, the reverse! then add ?GET param to unroll the flowdown and add an error message
-        return redirect(reverse('group-list-filtered', kwargs={'group': kwargs.get('group')}))
+        """ Called when the require-read permission is not met """
+        if not request.user.is_authenticated():
+            redirect_to_not_logged_in(request, view=self)
+        messages.warning(request, _('You are not currently a member of %s! If you wish you can request to become a member below.') % self.group.name)
+        return redirect(group_aware_reverse('cosinnus:group-list-filtered', kwargs={'group': kwargs.get('group')}))
     
 
 group_dashboard = GroupDashboard.as_view()
