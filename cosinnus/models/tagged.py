@@ -21,6 +21,7 @@ from cosinnus.core.registries.widgets import widget_registry
 from django.utils.functional import cached_property
 from django.core.exceptions import ImproperlyConfigured
 from cosinnus import cosinnus_notifications
+from cosinnus.core.registries.group_models import group_model_registry
 
 
 class LocationModelMixin(models.Model):
@@ -280,8 +281,12 @@ def ensure_container(sender, **kwargs):
         for model_class in BaseHierarchicalTaggableObjectModel.__subclasses__():
             if not model_class._meta.abstract:
                 model_class.objects.create(group=kwargs.get('instance'), slug='_root_', title='_root_', path='/', is_container=True)
-                
+
 post_save.connect(ensure_container, sender=CosinnusGroup)
+for url_key in group_model_registry:
+    group_model = group_model_registry.get(url_key)
+    post_save.connect(ensure_container, sender=group_model)
+    
 
 def get_tag_object_model():
     """
