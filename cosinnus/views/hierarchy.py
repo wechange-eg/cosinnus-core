@@ -79,6 +79,8 @@ class MoveElementView(RequireCreateObjectsInMixin, View):
     http_method_names = ['post', ]
     
     model = None
+    # if folder_model==None, model will be used
+    folder_model = None
     
     def post(self, request, *args, **kwargs):
         if not self.model:
@@ -88,14 +90,17 @@ class MoveElementView(RequireCreateObjectsInMixin, View):
         target_folder_id = request.POST.get('target_folder_id', None)
         
         if not (element_id or target_folder_id or self.group):
-            print element_id, ', ', target_folder_id, ', ', self.group
             return HttpResponseBadRequest('Missing POST fields for this requests.')
         if element_id == target_folder_id:
             return HttpResponseBadRequest('Source and target are the same.')
         
         element = get_object_or_404(self.model, id=element_id, group=self.group)
-        target_folder = get_object_or_404(self.model, id=target_folder_id, group=self.group)
+        target_folder = get_object_or_404(self.folder_model or self.model, id=target_folder_id, group=self.group)
         
+        return self.move_element(element, target_folder)
+        
+        
+    def move_element(self, element, target_folder):
         if element.is_container:
             raise HttpResponseBadRequest('Container moving is bad!')
         else:

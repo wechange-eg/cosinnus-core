@@ -64,7 +64,6 @@ class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
         folders_only = self.get_tree(all_folders, '/', include_containers=True, include_leaves=False, recursive=True)
         all_folder_json = []
         if folders_only and folders_only.get('container_object', None):
-            print folders_only
             def collect_folders(from_folder, folder_id='#'):
                 cur_id = from_folder['container_object'].slug
                 if from_folder['container_object'].is_container and from_folder['container_object'].path == '/':

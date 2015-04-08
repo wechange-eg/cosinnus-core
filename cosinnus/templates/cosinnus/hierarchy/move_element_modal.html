@@ -69,8 +69,6 @@
 </div><!-- modal -->
 
 <script type="text/javascript">
-    var cosinnus_move_element_object_url = "{% group_url 'cosinnus:etherpad:move-element' group=group %}";
-    
     $('#cosinnus_move_element_modal').on('shown.bs.modal', function () {
         if ($('#jstree_move_div').is(':empty')){
             console.log('showing jstree');
