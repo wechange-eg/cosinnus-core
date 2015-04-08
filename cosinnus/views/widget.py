@@ -5,24 +5,27 @@ import six
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseForbidden
-from django.shortcuts import get_object_or_404, render_to_response, render
+from django.shortcuts import get_object_or_404, render_to_response, render,\
+    redirect
 from django.template import RequestContext
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_text
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import TemplateView
 
-from cosinnus.core.decorators.views import require_admin_access_decorator
+from cosinnus.core.decorators.views import require_admin_access_decorator,\
+    redirect_to_not_logged_in
 from cosinnus.core.registries import widget_registry
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.http import JSONResponse
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
-from cosinnus.views.mixins.group import RequireReadMixin
+from cosinnus.views.mixins.group import RequireReadOrRedirectMixin
 from uuid import uuid1
 from cosinnus.core.registries.apps import app_registry
 from cosinnus.utils.functions import resolve_class
-from cosinnus.models.group import CosinnusGroup
-
+from cosinnus.utils.urls import group_aware_reverse
+from django.contrib import messages
+from django.utils.translation import ugettext_lazy as _
 
 def widget_list(request):
     data = {}
@@ -275,7 +278,7 @@ class DashboardWidgetMixin(object):
         return super(DashboardWidgetMixin, self).get_context_data(**kwargs)
 
 
-class GroupDashboard(RequireReadMixin, DashboardWidgetMixin, TemplateView):
+class GroupDashboard(RequireReadOrRedirectMixin, DashboardWidgetMixin, TemplateView):
     
     template_name = 'cosinnus/dashboard.html'
     
@@ -307,6 +310,13 @@ class GroupDashboard(RequireReadMixin, DashboardWidgetMixin, TemplateView):
             'object_counts': object_counts,
         })
         return context
+    
+    def on_error(self, request, *args, **kwargs):
+        """ Called when the require-read permission is not met """
+        if not request.user.is_authenticated():
+            redirect_to_not_logged_in(request, view=self)
+        messages.warning(request, _('You are not currently a member of %s! If you wish you can request to become a member below.') % self.group.name)
+        return redirect(group_aware_reverse('cosinnus:group-list-filtered', kwargs={'group': kwargs.get('group')}))
     
 
 group_dashboard = GroupDashboard.as_view()

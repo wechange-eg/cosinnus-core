@@ -505,7 +505,7 @@ class CosinnusGroup(models.Model):
     def save(self, *args, **kwargs):
         created = bool(self.pk is None)
         slugs = [self.slug] if self.slug else []
-        unique_aware_slugify(self, 'name', 'slug')
+        unique_aware_slugify(self, 'name', 'slug', portal_id=CosinnusPortal.get_current())
         self.name = clean_single_line_text(self.name)
         if not self.slug:
             raise ValidationError(_('Slug must not be empty.'))

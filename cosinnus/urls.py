@@ -50,6 +50,7 @@ for url_key in group_model_registry:
     prefix = group_model_registry.get_url_name_prefix(url_key, '')
     
     urlpatterns += patterns('cosinnus.views',
+        url(r'^%s/in-group-with/(?P<group>[^/]+)/$' % plural_url_key, 'group.group_list_filtered', name=prefix+'group-list-filtered'),
         url(r'^%s/$' % plural_url_key, 'group.group_list', name=prefix+'group-list'),
         url(r'^%s/map/$' % plural_url_key, 'group.group_list_map', name=prefix+'group-list-map'),
         url(r'^%s/add/$' % plural_url_key, 'group.group_create', name=prefix+'group-add'),

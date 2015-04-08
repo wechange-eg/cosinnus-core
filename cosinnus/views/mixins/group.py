@@ -5,6 +5,8 @@ from cosinnus.core.decorators.views import (require_read_access,
     require_write_access, require_admin_access)
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from cosinnus.models.tagged import BaseTaggableObjectModel
+from django.core.exceptions import PermissionDenied, ImproperlyConfigured
+from django.shortcuts import redirect
 
 
 class RequireAdminMixin(object):
@@ -53,6 +55,31 @@ class RequireReadMixin(object):
             qs = filter_tagged_object_queryset_for_user(qs, self.request.user)
             
         return qs
+    
+    
+class RequireReadOrRedirectMixin(RequireReadMixin):
+    
+    on_error_redirect_url = None
+    
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            forbidden_error = self.check_read(request, *args, **kwargs)
+        except PermissionDenied:
+            return self.on_error(request, *args, **kwargs)
+        if forbidden_error:
+            return self.on_error(request, *args, **kwargs)
+        return super(RequireReadMixin, self).dispatch(request, *args, **kwargs)
+    
+    @require_read_access()
+    def check_read(self, request, *args, **kwargs):
+        return None
+    
+    def on_error(self, request, *args, **kwargs):
+        redirect_url = self.on_error_redirect_url
+        if not redirect_url:
+            raise ImproperlyConfigured('RequireReadOrRedirectMixin requires "on_error_redirect_url" to be set in the class.')
+        return redirect(redirect_url)
+
 
 class RequireWriteMixin(object):
     """

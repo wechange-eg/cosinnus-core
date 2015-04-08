@@ -212,6 +212,9 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
             group = get_group_for_request(group_name, request)
             user = request.user
             
+            # this is why almost every BaseTaggableObject's View has a .group attribute:
+            setattr(self, group_attr, group)
+            
             # catch anyonymous users trying to naviagte to private groups (else self.get_object() throws a Http404!)
             if not group.public and not user.is_authenticated():
                 return redirect_to_not_logged_in(request, view=self)
@@ -224,9 +227,6 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
             deactivated_app_error = _check_deactivated_app_access(self, group, request)
             if deactivated_app_error:
                 return deactivated_app_error
-            
-            # this is why almost every BaseTaggableObject's View has a .group attribute:
-            setattr(self, group_attr, group)
             
             requested_object = None
             try:
@@ -277,6 +277,9 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             group = get_group_for_request(group_name, request)
             user = request.user
             
+            # set the group attr    
+            setattr(self, group_attr, group)
+            
             # catch anyonymous users trying to naviagte to private groups (else self.get_object() throws a Http404!)
             if not group.public and not user.is_authenticated():
                 return redirect_to_not_logged_in(request, view=self)
@@ -284,9 +287,6 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             deactivated_app_error = _check_deactivated_app_access(self, group, request)
             if deactivated_app_error:
                 return deactivated_app_error
-            
-            # set the group attr    
-            setattr(self, group_attr, group)
             
             requested_object = None
             try:
@@ -359,12 +359,12 @@ def require_user_token_access(token_name, group_url_kwarg='group', group_attr='g
 
             group = get_group_for_request(group_name, request)
             
+            # set the group attribute
+            setattr(self, group_attr, group)
+            
             deactivated_app_error = _check_deactivated_app_access(self, group, request)
             if deactivated_app_error:
                 return deactivated_app_error
-            
-            # set the group attribute
-            setattr(self, group_attr, group)
             
             requested_object = None
             try:
@@ -411,15 +411,15 @@ def require_create_objects_in_access(group_url_kwarg='group', group_attr='group'
             group = get_group_for_request(group_name, request)
             user = request.user
             
+            # set the group attribute
+            setattr(self, group_attr, group)
+            
             if not group.public and not user.is_authenticated():
                 return redirect_to_not_logged_in(request, view=self)
             
             deactivated_app_error = _check_deactivated_app_access(self, group, request)
             if deactivated_app_error:
                 return deactivated_app_error
-            
-            # set the group attribute
-            setattr(self, group_attr, group)
             
             if check_group_create_objects_access(group, user):
                 return function(self, request, *args, **kwargs)
