@@ -12,6 +12,13 @@ from cosinnus.views.mixins.tagged import HierarchyTreeMixin
 from django.utils.encoding import force_text
 from cosinnus.models.group import CosinnusGroup
 
+# this reads the environment and inits the right locale
+import locale
+try:
+    locale.setlocale(locale.LC_ALL, ("de_DE", "utf8"))
+except:
+    locale.setlocale(locale.LC_ALL, "")
+
 
 class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
     """ Hybrid view for hierarchic items.
@@ -34,9 +41,14 @@ class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
             except self.model.DoesNotExist:
                 raise Http404()
         root = path or '/'
+        
+        # convert qs to list, and sort case insensitive by title, ignoring umlauts
+        sorted_object_list = list(self.object_list)
+        sorted_object_list.sort(cmp=locale.strcoll, key=lambda x: x.title)
+        
         # assemble container and current hierarchy objects.
         # recursive must be =True, or we don't know how the size of a folder
-        root_folder_node = self.get_tree(self.object_list, '/', include_containers=True, include_leaves=True, recursive=True)
+        root_folder_node = self.get_tree(sorted_object_list, '/', include_containers=True, include_leaves=True, recursive=True)
         """ traverse tree and find the folder node which points to the given root """
         current_folder_node = root_folder_node
         for subfolder_name in root.split('/')[1:-1]:
@@ -54,8 +66,8 @@ class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
         current_folder = current_folder_node['container_object']
         
         group = getattr(self, 'group', None)
-        if not group and self.object_list:
-            group = getattr(self.object_list[0], 'group', None)
+        if not group and sorted_object_list:
+            group = getattr(sorted_object_list[0], 'group', None)
         if not group and 'group__slug' in kwargs:
             # this is a bit dodgy, but sometimes we get passed the group__slug kwarg when 
             # abusing this mixin from a cosinnus app's Renderer directly (that's also when self.group is None)

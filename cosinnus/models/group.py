@@ -5,6 +5,7 @@ from collections import OrderedDict
 import re
 import six
 
+from django.contrib.sites.models import Site
 from django.core.cache import cache
 from django.core.exceptions import ValidationError, ImproperlyConfigured
 from django.core.validators import RegexValidator
@@ -34,7 +35,6 @@ logger = logging.getLogger('cosinnus')
 
 # this reads the environment and inits the right locale
 import locale
-from django.contrib.sites.models import Site
 try:
     locale.setlocale(locale.LC_ALL, ("de_DE", "utf8"))
 except:
@@ -208,7 +208,7 @@ class CosinnusGroupManager(models.Manager):
                         groups[self._GROUP_CACHE_KEY % (portal_id, self.__class__.__name__, group.slug)] = group
                     cache.set_many(groups, settings.COSINNUS_GROUP_CACHE_TIMEOUT)
                 
-                # sort by a good sorting function that acknowldges umlauts, etc
+                # sort by a good sorting function that acknowldges umlauts, etc, case insensitive
                 group_list = groups.values()
                 group_list.sort(cmp=locale.strcoll, key=lambda x: x.name)
                 return group_list
