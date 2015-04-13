@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.views.mixins.tagged import HierarchyTreeMixin
 from django.utils.encoding import force_text
+from cosinnus.models.group import CosinnusGroup
 
 
 class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
@@ -51,30 +52,45 @@ class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
             
         objects = current_folder_node['objects']
         current_folder = current_folder_node['container_object']
-        if current_folder is None:
-            # sanity check: there might be no current folder because no root folder has been created
-            # make sure to create one (backwards compatibility, should never happen on newer cosinnus systems)
-            obj, created = self.model.objects.get_or_create(group=self.group, slug='_root_', title='_root_', path='/', is_container=True)
-            current_folder = obj
         
-        """ Collect a JSON list of all folders for this group
-            Format: [{ "id" : "slug1", "parent" : "#", "text" : "Simple root node" }, 
-                    { "id" : "slug2", "parent" : "slug1", "text" : "Child 1" },] """
-        # TODO: this needs optimization (caching, or fold the DB call into the main folder-get call)
-        all_folders = self.model.objects.filter(group=self.group, is_container=True)
-        folders_only = self.get_tree(all_folders, '/', include_containers=True, include_leaves=False, recursive=True)
-        all_folder_json = []
-        if folders_only and folders_only.get('container_object', None):
-            def collect_folders(from_folder, folder_id='#'):
-                cur_id = from_folder['container_object'].slug
-                if from_folder['container_object'].is_container and from_folder['container_object'].path == '/':
-                    folder_title = force_text(_('Root Folder'))
-                else:
-                    folder_title = escape(from_folder['container_object'].title or force_text(_('<Root folder>')))
-                all_folder_json.append( {'id': cur_id, 'parent': folder_id, 'a_attr': {'target_folder':from_folder['container_object'].id}, 'text': folder_title} )
-                for lower_folder in from_folder['containers']:
-                    collect_folders(lower_folder, cur_id)
-            collect_folders(folders_only)
+        group = getattr(self, 'group', None)
+        if not group and self.object_list:
+            group = getattr(self.object_list[0], 'group', None)
+        if not group and 'group__slug' in kwargs:
+            # this is a bit dodgy, but sometimes we get passed the group__slug kwarg when 
+            # abusing this mixin from a cosinnus app's Renderer directly (that's also when self.group is None)
+            try:
+                group = CosinnusGroup.objects.get_cached(slugs=kwargs.get('group__slug'))
+            except CosinnusGroup.DoesNotExist:
+                pass
+        
+        # we can only collect folder information for the whole group if we know which one it is
+        if group:
+            if current_folder is None:
+                # sanity check: there might be no current folder because no root folder has been created
+                # make sure to create one (backwards compatibility, should never happen on newer cosinnus systems)
+                obj, created = self.model.objects.get_or_create(group=group, slug='_root_', title='_root_', path='/', is_container=True)
+                current_folder = obj
+            
+            """ Collect a JSON list of all folders for this group
+                Format: [{ "id" : "slug1", "parent" : "#", "text" : "Simple root node" }, 
+                        { "id" : "slug2", "parent" : "slug1", "text" : "Child 1" },] """
+                        
+            # TODO: this needs optimization (caching, or fold the DB call into the main folder-get call)
+            all_folders = self.model.objects.filter(group=group, is_container=True)
+            folders_only = self.get_tree(all_folders, '/', include_containers=True, include_leaves=False, recursive=True)
+            all_folder_json = []
+            if folders_only and folders_only.get('container_object', None):
+                def collect_folders(from_folder, folder_id='#'):
+                    cur_id = from_folder['container_object'].slug
+                    if from_folder['container_object'].is_container and from_folder['container_object'].path == '/':
+                        folder_title = force_text(_('Root Folder'))
+                    else:
+                        folder_title = escape(from_folder['container_object'].title or force_text(_('<Root folder>')))
+                    all_folder_json.append( {'id': cur_id, 'parent': folder_id, 'a_attr': {'target_folder':from_folder['container_object'].id}, 'text': folder_title} )
+                    for lower_folder in from_folder['containers']:
+                        collect_folders(lower_folder, cur_id)
+                collect_folders(folders_only)
         
         context.update({
             'current_folder': current_folder, 
