@@ -28,8 +28,14 @@
 
 
 {% block content %}
+    {% if group_type == 1 %}
+        {% url 'cosinnus:group__group-list-map' as group_list_map %}
+    {% else %}
+        {% url 'cosinnus:group-list-map' as group_list_map %}
+    {% endif %}
+
     <div class="clearfix regular-space">
-        <a href="{% url 'cosinnus:group-list-map' %}" class="pull-right light-color underlined">{% trans "show on map" %}</a>
+        <a href="{{ group_list_map }}" class="pull-right light-color underlined">{% trans "show on map" %}</a>
     </div>
     <!-- a box with semi transparent background -->
     <div class="content-box">
