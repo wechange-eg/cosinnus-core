@@ -277,8 +277,13 @@ class GroupProjectsWidget(DashboardWidget):
             if has_more == False, the receiving widget will assume no further data can be loaded.
          """
         group = self.config.group
-        if group is None or group.type != CosinnusGroup.TYPE_SOCIETY:
-            return ''
+        if group is None:
+            return ('', 0, False)
+        if group.type != CosinnusGroup.TYPE_SOCIETY:
+            # sanity check: after a group has been converted to a group, these widget configs still exist,
+            # but are not valid anymore since we now have a project. therefore, delete it.
+            self.config.delete()
+            return ('', 0, False)
         
         #count = int(self.config.get('amount', 24))
         # FIXME: hardcoded widget item count for now
@@ -404,6 +409,9 @@ def create_initial_group_widgets(sender, group, **kwargs):
         ``settings.COSINNUS_TYPE_DEPENDENT_GROUP_WIDGETS`` and
         ``settings.COSINNUS_INITIAL_GROUP_MICROSITE_WIDGETS``
     """
+    # TODO: this should also delete all superfluous widgets for this group 
+    # that exist, but are not listed in any of their settings
+    
     for app_name, widget_name, options in settings.COSINNUS_INITIAL_GROUP_WIDGETS:
         ensure_group_widget(group, app_name, widget_name, WidgetConfig.TYPE_DASHBOARD, options)
     

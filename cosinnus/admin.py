@@ -14,6 +14,8 @@ from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import AttachedObject
 from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.models.feedback import CosinnusReportedObject
+from cosinnus.utils.dashboard import create_initial_group_widgets
+from cosinnus.models.widget import WidgetConfig
 
 
 class SingleDeleteActionMixin(object):
@@ -82,6 +84,11 @@ class CosinnusProjectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
                 converted_names.append(group.name)
                 slugs.append(group.slug)
         CosinnusGroup._clear_cache(slugs=slugs)
+                
+        # delete and recreate all group widgets (there might be different ones for group than for porject)
+        WidgetConfig.objects.filter(group_id=group.pk).delete()
+        create_initial_group_widgets(group, group)
+        
         message = _('The following Projects were converted to Societies:') + '\n' + ", ".join(converted_names)
         self.message_user(request, message)
     convert_to_society.short_description = _("Convert selected Projects to Societies")
@@ -150,6 +157,11 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
                 converted_names.append(group.name)
                 slugs.append(group.slug)
         CosinnusGroup._clear_cache(slugs=slugs)
+        
+        # delete and recreate all group widgets (there might be different ones for group than for porject)
+        WidgetConfig.objects.filter(group_id=group.pk).delete()
+        create_initial_group_widgets(group, group)
+        
         message = _('The following Societies were converted to Projects:') + '\n' + ", ".join(converted_names)
         self.message_user(request, message)
     convert_to_project.short_description = _("Convert selected Societies to Projects")
