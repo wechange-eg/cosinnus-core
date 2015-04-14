@@ -11,6 +11,7 @@ from cosinnus.conf import settings
 
 from captcha.fields import ReCaptchaField
 from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
+from cosinnus.models.tagged import BaseTagObject
 
 
 class UserKwargModelFormMixin(object):
@@ -69,6 +70,11 @@ class UserCreationForm(DjUserCreationForm):
         CosinnusPortalMembership.objects.get_or_create(group=CosinnusPortal.get_current(), user=user, defaults={
             'status': 1,
         })
+        # set the user's visibility to public if the setting says so
+        if settings.COSINNUS_USER_DEFAULT_VISIBLE_WHEN_CREATED:
+            media_tag = user.cosinnus_profile.media_tag
+            media_tag.visibility = BaseTagObject.VISIBILITY_ALL
+            media_tag.save()
         
         return user
 

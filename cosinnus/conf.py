@@ -170,6 +170,9 @@ class CosinnusConf(AppConf):
     #: The serializer used for the user profile
     USER_PROFILE_SERIALIZER = 'cosinnus.models.serializers.profile.UserProfileSerializer'
     
+    # when users newly register, are their profiles marked as visible rather than private on the site?
+    USER_DEFAULT_VISIBLE_WHEN_CREATED = True
+    
     
 
 class CosinnusDefaultSettings(AppConf):
