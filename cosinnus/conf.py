@@ -82,7 +82,7 @@ class CosinnusConf(AppConf):
     DATETIMEPICKER_TIME_FORMAT = 'HH:mm'
     
     # the default send_mail sender email
-    DEFAULT_FROM_EMAIL = 'do-not-reply@example.com'
+    DEFAULT_FROM_EMAIL = 'noreply@example.com'
     
     #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = 60 * 60 * 24
