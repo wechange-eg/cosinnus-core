@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
+from django.db.models import Q
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 
@@ -252,7 +253,13 @@ class SpamUserAdmin(UserAdmin):
     def queryset(self, request):
         """ For non-admins, only show the routepoints from their caravan """
         qs = super(SpamUserAdmin, self).queryset(request)
-        qs = qs.filter(cosinnus_profile__website__contains='.pl', is_active=True)
+        qs = qs.filter(is_active=True).filter(
+            Q(cosinnus_profile__website__contains='.pl') | \
+            Q(email__contains='bawimy24.net.pl') | \
+            Q(email__contains='oprogressi.com') | \
+            Q(email__contains='zoho.com') | \
+            Q(email__contains='co.pl') \
+        )
         return qs
 
 admin.site.register(SpamUserModel, SpamUserAdmin)
