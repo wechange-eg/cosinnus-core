@@ -15,9 +15,9 @@ def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
     exists, a counter is appended to the slug, and the counter incremented
     upward until the value is unique. The maximum counter is therefor 9999.
 
-    For instance, if you save an object titled “Daily Roundup”, and the slug
-    “daily-roundup” is already taken, this function will try “daily-roundup-2”,
-    “daily-roundup-3”, “daily-roundup-4”, etc, until a unique value is found.
+    For instance, if you save an object titled "Daily Roundup", and the slug
+    "daily-roundup" is already taken, this function will try "daily-roundup-2",
+    "daily-roundup-3", "daily-roundup-4", etc, until a unique value is found.
 
     Call from within a model's custom save() method like::
 
