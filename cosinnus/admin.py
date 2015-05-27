@@ -257,6 +257,7 @@ class SpamUserAdmin(UserAdmin):
             Q(cosinnus_profile__website__contains='.pl') | \
             Q(email__contains='bawimy24.net.pl') | \
             Q(email__contains='oprogressi.com') | \
+            Q(email__contains='email4everyone.com') | \
             Q(email__contains='zoho.com') | \
             Q(email__contains='co.pl') \
         )
