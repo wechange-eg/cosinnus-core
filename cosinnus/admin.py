@@ -259,6 +259,10 @@ class SpamUserAdmin(UserAdmin):
             Q(email__contains='oprogressi.com') | \
             Q(email__contains='email4everyone.com') | \
             Q(email__contains='zoho.com') | \
+            Q(email__contains='sedam.gq') | \
+            Q(email__contains='o2.pl') | \
+            Q(email__contains='maetzresumeconsulting.com') | \
+            Q(email__contains='verbrechena.eu') | \
             Q(email__contains='co.pl') \
         )
         return qs
