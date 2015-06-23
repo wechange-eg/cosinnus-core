@@ -4,11 +4,12 @@ from __future__ import unicode_literals
 from haystack import indexes
 
 from cosinnus.models.group import CosinnusGroup
-from cosinnus.utils.search import TagObjectSearchIndex, TemplateResolveCharField
+from cosinnus.utils.search import TagObjectSearchIndex, TemplateResolveCharField,\
+    TemplateResolveEdgeNgramField
 
 
 class GroupIndex(TagObjectSearchIndex, indexes.Indexable):
-    text = TemplateResolveCharField(document=True, use_template=True)
+    text = TemplateResolveEdgeNgramField(document=True, use_template=True)
     rendered = TemplateResolveCharField(use_template=True, indexed=False)
 
     name = indexes.CharField(model_attr='name')
