@@ -65,16 +65,23 @@ body.cosinnus-cms {
 }
 
 
-.white-overlay-box {
-	background-color: rgba(255, 255, 255, 0.65);
+.overlay-box {
 	color: $app-neutral-color-dark;	
 	padding: 20px 0;
+	
+	h1, h2, h3 {
+		a {
+			color: $app-neutral-color-dark;
+		}
+	}
 }
 
-.gray-overlay-box {
+.overlay-box-white {
+	background-color: rgba(255, 255, 255, 0.65);
+}
+
+.overlay-box-gray {
 	background-color: rgba(212, 212, 212, 0.65);
-	color: $app-neutral-color-dark;	
-	padding: 20px 0;
 }
 
 .overlay-box-side-padding {

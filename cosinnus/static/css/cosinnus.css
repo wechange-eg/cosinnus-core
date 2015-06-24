@@ -1308,16 +1308,20 @@ body.cosinnus-cms .big-headers h2 {
   padding: 0;
 }
 
-.white-overlay-box {
-  background-color: rgba(255, 255, 255, 0.65);
+.overlay-box {
   color: #333333;
   padding: 20px 0;
 }
-
-.gray-overlay-box {
-  background-color: rgba(212, 212, 212, 0.65);
+.overlay-box h1 a, .overlay-box h2 a, .overlay-box h3 a {
   color: #333333;
-  padding: 20px 0;
+}
+
+.overlay-box-white {
+  background-color: rgba(255, 255, 255, 0.65);
+}
+
+.overlay-box-gray {
+  background-color: rgba(212, 212, 212, 0.65);
 }
 
 .overlay-box-side-padding {
