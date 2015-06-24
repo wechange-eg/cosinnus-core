@@ -1,3 +1,6 @@
+@charset "UTF-8";
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:700);
 
 body.cosinnus-cms {
 	padding-bottom: 0;
@@ -16,7 +19,7 @@ body.cosinnus-cms {
 		
 		// md
 		@media(min-width:992px){
-			font-size: 40px;
+			font-size: 45px;
 		}
 	}
 
@@ -51,9 +54,13 @@ body.cosinnus-cms {
 
 .cms-content {
 	color: $app-neutral-color-white;
+	font-size: 15px;
 	
 	p {
 		background-color: transparent;
+		color: inherit;
+		font-size: inherit;
+		padding: 0;
 	}
 }
 
@@ -75,11 +82,24 @@ body.cosinnus-cms {
 	padding-right: 20px;
 }
 
+.cms-footer {
+	font-size: 10px;
+
+	p {
+		text-align: justify;
+		color: black;
+		font-size: inherit;
+	}
+
+	a {
+		color: black;
+		font-weight: bold;
+	}
+}
 
 
 .jumbo-box {
 	
-    
 	h3 {
 		color: #000;
 	}

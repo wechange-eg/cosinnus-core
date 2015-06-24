@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:700);
 body {
   font-family: Verdana, Geneva, sans-serif;
   background: #43757e;
@@ -1267,7 +1268,7 @@ body.cosinnus-cms h1 {
 }
 @media (min-width: 992px) {
   body.cosinnus-cms h1 {
-    font-size: 40px;
+    font-size: 45px;
   }
 }
 body.cosinnus-cms h2 {
@@ -1298,9 +1299,13 @@ body.cosinnus-cms .big-headers h2 {
 
 .cms-content {
   color: white;
+  font-size: 15px;
 }
 .cms-content p {
   background-color: transparent;
+  color: inherit;
+  font-size: inherit;
+  padding: 0;
 }
 
 .white-overlay-box {
@@ -1318,6 +1323,19 @@ body.cosinnus-cms .big-headers h2 {
 .overlay-box-side-padding {
   padding-left: 20px;
   padding-right: 20px;
+}
+
+.cms-footer {
+  font-size: 10px;
+}
+.cms-footer p {
+  text-align: justify;
+  color: black;
+  font-size: inherit;
+}
+.cms-footer a {
+  color: black;
+  font-weight: bold;
 }
 
 .jumbo-box h3 {
