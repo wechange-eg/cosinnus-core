@@ -83,7 +83,7 @@ class TemplateResolveMixin(object):
 class TemplateResolveCharField(TemplateResolveMixin, indexes.CharField):
     pass
 
-class TemplateResolveEdgeNgramField(TemplateResolveMixin, indexes.NgramField):
+class TemplateResolveEdgeNgramField(TemplateResolveMixin, indexes.EdgeNgramField):
     pass
 
 
@@ -91,9 +91,9 @@ class BaseTaggableObjectIndex(TagObjectSearchIndex):
     text = TemplateResolveEdgeNgramField(document=True, use_template=True)
     rendered = TemplateResolveCharField(use_template=True, indexed=False)
 
-    title = indexes.NgramField(model_attr='title')
+    title = indexes.EdgeNgramField(model_attr='title')
     slug = indexes.CharField(model_attr='slug', indexed=False)
-    creator = indexes.NgramField(model_attr='creator', null=True)
+    creator = indexes.EdgeNgramField(model_attr='creator', null=True)
     created = indexes.DateTimeField(model_attr='created')
 
     get_absolute_url = indexes.CharField(model_attr='get_absolute_url', indexed=False)
