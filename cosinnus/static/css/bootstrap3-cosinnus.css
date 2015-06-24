@@ -15,7 +15,7 @@ body {
   /* IE10+ */
   background: linear-gradient(to bottom, #43757e 0%, #a6bab7 100%) fixed;
   /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#43757e', endColorstr='#a6bab7',GradientType=0 ) fixed;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#43757e', endColorstr='#a6bab7',GradientType=0 ) fixed;
   /* IE6-9 */
 }
 

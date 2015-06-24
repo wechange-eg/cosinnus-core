@@ -14,7 +14,7 @@ body {
   /* IE10+ */
   background: linear-gradient(to bottom, #43757e 0%, #a6bab7 100%) fixed;
   /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#43757e', endColorstr='#a6bab7',GradientType=0 ) fixed;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#43757e', endColorstr='#a6bab7',GradientType=0 ) fixed;
   /* IE6-9 */
 }
 
@@ -186,7 +186,7 @@ body {
   text-align: left;
 }
 
-p,.white-content {
+p, .white-content {
   margin-bottom: 0;
   padding: 8px;
   background-color: white;
@@ -516,7 +516,7 @@ label {
 }
 
 div[href] {
-  cursor: pointer !important; 
+  cursor: pointer !important;
 }
 
 /* put a class like .app-documents, .app-todos on areas that contain content in app colors.
@@ -1113,7 +1113,7 @@ a.pull-left {
   /* IE10+ */
   background: linear-gradient(to bottom, transparent 0%, transparent 57%, rgba(0, 0, 0, 0.34) 100%);
   /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#57000000',GradientType=0 );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#57000000',GradientType=0 );
   /* IE6-9 */
   width: 100%;
   height: 100%;
@@ -1195,13 +1195,14 @@ a.pull-left {
 .btn-headline .media-body a {
   font-weight: bold;
 }
-
-.btn-headline .media-body a.light-link {
+.btn-headline .media-body a .light-link {
   font-weight: normal;
 }
+
 a.light-link i {
   display: none;
 }
+
 a.light-link:hover i {
   display: inherit;
 }
