@@ -69,6 +69,11 @@ body.cosinnus-cms {
 	color: $app-neutral-color-dark;	
 	padding: 20px 0;
 	
+	a {
+		color: black;
+		font-weight: bold;
+	}
+	
 	h1, h2, h3 {
 		a {
 			color: $app-neutral-color-dark;

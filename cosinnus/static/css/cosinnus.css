@@ -1312,6 +1312,10 @@ body.cosinnus-cms .big-headers h2 {
   color: #333333;
   padding: 20px 0;
 }
+.overlay-box a {
+  color: black;
+  font-weight: bold;
+}
 .overlay-box h1 a, .overlay-box h2 a, .overlay-box h3 a {
   color: #333333;
 }
