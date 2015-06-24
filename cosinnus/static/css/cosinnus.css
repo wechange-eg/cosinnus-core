@@ -1235,6 +1235,67 @@ a.light-link:hover i {
   margin-left: 0;
 }
 
+body.cosinnus-cms {
+  padding-bottom: 0;
+  background-image: url("../img/headerback.jpg");
+  background-size: cover;
+}
+body.cosinnus-cms h1 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: normal;
+  margin: 30px 0 10px 0;
+  padding: 0;
+  color: inherit;
+  text-transform: uppercase;
+  font-size: 40px;
+}
+@media (min-width: 992px) {
+  body.cosinnus-cms h1 {
+    font-size: 110px;
+  }
+}
+body.cosinnus-cms h2 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: normal;
+  font-size: 22px;
+  margin: 20px 0 10px 0;
+  color: inherit;
+  text-transform: uppercase;
+}
+@media (min-width: 992px) {
+  body.cosinnus-cms h2 {
+    font-size: 45px;
+  }
+}
+
+.cms-content {
+  color: white;
+}
+.cms-content p {
+  background-color: transparent;
+}
+
+.white-overlay-box {
+  background-color: rgba(255, 255, 255, 0.65);
+  color: #333333;
+  padding: 20px 0;
+}
+
+.gray-overlay-box {
+  background-color: rgba(212, 212, 212, 0.65);
+  color: #333333;
+  padding: 20px 0;
+}
+
+.overlay-box-side-padding {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.jumbo-box h3 {
+  color: #000;
+}
+
 /* Classes that can be found in many pages and are not part of Twitter Bootstrap */
 .w100 {
   width: 100% !important;
@@ -1257,6 +1318,10 @@ body .regular-space {
 
 body .large-space {
   margin-bottom: 12px;
+}
+
+body .ultra-space {
+  margin-bottom: 30px;
 }
 
 .navbar-fixed-top {

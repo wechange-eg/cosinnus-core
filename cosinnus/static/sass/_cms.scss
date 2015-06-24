@@ -12,6 +12,12 @@ body.cosinnus-cms {
 		padding: 0;
 		color: inherit;
 		text-transform: uppercase;
+		font-size: 40px;
+		
+		// md
+		@media(min-width:992px){
+			font-size: 110px;
+		}
 	}
 
 	h2 {
@@ -21,6 +27,11 @@ body.cosinnus-cms {
 		margin: 20px 0 10px 0;
 		color: inherit;
 		text-transform: uppercase;
+		
+		// md
+		@media(min-width:992px){
+			font-size: 45px;
+		}
 	}
 }
 
