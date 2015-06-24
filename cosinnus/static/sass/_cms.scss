@@ -12,11 +12,11 @@ body.cosinnus-cms {
 		padding: 0;
 		color: inherit;
 		text-transform: uppercase;
-		font-size: 40px;
+		font-size: 25px;
 		
 		// md
 		@media(min-width:992px){
-			font-size: 110px;
+			font-size: 40px;
 		}
 	}
 
@@ -26,11 +26,25 @@ body.cosinnus-cms {
 		font-size: 22px;
 		margin: 20px 0 10px 0;
 		color: inherit;
-		text-transform: uppercase;
-		
-		// md
-		@media(min-width:992px){
-			font-size: 45px;
+	}
+	
+	.big-headers {
+		h1 {
+			font-weight: bold;
+			font-size: 40px;
+			// md
+			@media(min-width:992px){
+				font-size: 110px;
+			}
+		}
+	
+		h2 {
+			font-weight: bold;
+			text-transform: uppercase;
+			// md
+			@media(min-width:992px){
+				font-size: 45px;
+			}
 		}
 	}
 }
