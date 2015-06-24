@@ -360,6 +360,23 @@ ul.appnavi-dropdown-menu {
 	color: $app-neutral-color-white;
 }
 
+.btn-emphasized-strong {
+  width: 100%;
+  background-color: #097891;
+  border-radius: 0;
+  color: white;
+  padding: 0;
+  border-width: 0;
+  
+  	.media-body {
+	  padding-top: 8px;
+	  padding-right: 5px;
+	  text-transform: uppercase;
+	  font-weight: bold;
+	  line-height: 23px;
+	}
+}
+
 // ### magic for mouse cursor
 
 // There are no clickable icons on left side.
