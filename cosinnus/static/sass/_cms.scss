@@ -1,0 +1,62 @@
+
+body.cosinnus-cms {
+	padding-bottom: 0;
+	background-image: url("../img/headerback.jpg");
+	background-size: cover;
+	
+	
+	h1 {
+		font-family: 'Open Sans', sans-serif;
+		font-weight: normal;
+		margin: 30px 0 10px 0;
+		padding: 0;
+		color: inherit;
+		text-transform: uppercase;
+	}
+
+	h2 {
+		font-family: 'Open Sans', sans-serif;
+		font-weight: normal;
+		font-size: 22px;
+		margin: 20px 0 10px 0;
+		color: inherit;
+		text-transform: uppercase;
+	}
+}
+
+.cms-content {
+	color: $app-neutral-color-white;
+	
+	p {
+		background-color: transparent;
+	}
+}
+
+
+.white-overlay-box {
+	background-color: rgba(255, 255, 255, 0.65);
+	color: $app-neutral-color-dark;	
+	padding: 20px 0;
+}
+
+.gray-overlay-box {
+	background-color: rgba(212, 212, 212, 0.65);
+	color: $app-neutral-color-dark;	
+	padding: 20px 0;
+}
+
+.overlay-box-side-padding {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+
+
+.jumbo-box {
+	
+    
+	h3 {
+		color: #000;
+	}
+		
+}

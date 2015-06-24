@@ -4,3 +4,5 @@
 {% block page_title %}{% page_attribute "page_title" %}{{ block.super }}{% endblock %}
 
 {% block body_attributes %}class="cosinnus-cms"{% endblock body_attributes %}
+
+{% block container_classes %}{{ cosinnus_css_class }}{% endblock container_classes %}
