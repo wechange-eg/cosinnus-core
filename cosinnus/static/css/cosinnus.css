@@ -1781,6 +1781,10 @@ body div .select2-dropdown-open.select2-drop-above .select2-choices {
   border-width: 0;
 }
 
+.select2-input {
+  font-family: Verdana, Geneva, sans-serif !important;
+}
+
 .app-main {
   /* ##### Small calendar ####### */
 }
@@ -2881,11 +2885,6 @@ div.dashboard-appwidget:last-child {
     width: 130px;
   }
 }
-
-.select2-input {
-      font-family: Verdana, Geneva, sans-serif !important;
-}
-
 
 .well-document {
     color: #333333;
