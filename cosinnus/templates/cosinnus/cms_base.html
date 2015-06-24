@@ -1,3 +1,6 @@
 {% extends "cosinnus/base.html" %}
+{% load cms_tags %}
+
+{% block page_title %}{% page_attribute "page_title" %}{{ block.super }}{% endblock %}
 
 {% block body_attributes %}class="cosinnus-cms"{% endblock body_attributes %}
