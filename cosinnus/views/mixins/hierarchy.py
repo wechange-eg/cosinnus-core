@@ -42,9 +42,11 @@ class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
                 raise Http404()
         root = path or '/'
         
-        # convert qs to list, and sort case insensitive by title, ignoring umlauts
+        # convert qs to list
         sorted_object_list = list(self.object_list)
-        sorted_object_list.sort(cmp=locale.strcoll, key=lambda x: x.title)
+        # sort case insensitive by title, ignoring umlauts unless we already have a filter in place
+        if not self.request.GET.get('o', ''):
+            sorted_object_list.sort(cmp=locale.strcoll, key=lambda x: x.title)
         
         # assemble container and current hierarchy objects.
         # recursive must be =True, or we don't know how the size of a folder
