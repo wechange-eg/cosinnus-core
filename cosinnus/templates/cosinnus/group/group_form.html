@@ -190,8 +190,8 @@
 		                            </a>
 		                            <div class="media-body media-body-form-control">
 		                                <select name="public" class="form-control">
-		                                    <option default value="false">{% trans "Members only" %}</option>
-		                                    <option {% if object and object.public %}selected{% endif %} value="true">{% trans "Public" %}</option>
+		                                    <option default value="false">{% trans "Group/Project members only" %}</option>
+		                                    <option {% if object and object.public %}selected{% endif %} value="true">{% trans "Public (visible without login)" %}</option>
 		                                </select>
 		                            </div>
 		                        </li>

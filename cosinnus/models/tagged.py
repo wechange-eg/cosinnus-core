@@ -56,9 +56,9 @@ class BaseTagObject(models.Model):
     # Empty first choice must be included for select2 placeholder compatibility!
     VISIBILITY_CHOICES = (
         ('', ''),
-        (VISIBILITY_USER, _('User')),
-        (VISIBILITY_GROUP, _('Group')),
-        (VISIBILITY_ALL, _('All')),
+        (VISIBILITY_USER, _('Only me')),
+        (VISIBILITY_GROUP, _('Group/Project members only')),
+        (VISIBILITY_ALL, _('Public (visible without login)')),
     )
 
     group = models.ForeignKey(CosinnusGroup, verbose_name=_('Group'),
