@@ -28,7 +28,44 @@
 </button>
 
 
-<button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'password_change' %}">
+<button type="button" class="btn w100 btn-{% if view == "edit_profile" %}extra-{% endif %}emphasized fine-space" href="{% url 'cosinnus:profile-edit' %}">
+    <ul class="media-list">
+        <li class="media">
+           <a class="pull-left">
+                <i class="fa fa-pencil"></i>
+            </a>
+            {% if view == "edit_profile" %}
+                <a class="pull-right" href="#">
+                    <i class="fa fa-caret-right"></i>
+                </a>
+            {% endif %}
+            <div class="media-body">
+                {% trans "Edit Profile" %}
+            </div>
+        </li>
+    </ul>
+</button>
+
+<button type="button" class="btn w100 btn-{% if view == "edit_notifications" %}extra-{% endif %}emphasized fine-space" href="{% url 'cosinnus:notifications' %}">
+    <ul class="media-list">
+        <li class="media">
+           <a class="pull-left">
+                <i class="fa fa-globe"></i>
+            </a>
+            {% if view == "edit_notifications" %}
+                <a class="pull-right" href="#">
+                    <i class="fa fa-caret-right"></i>
+                </a>
+            {% endif %}
+            <div class="media-body">
+                {% trans "Notification Preferences" %}
+            </div>
+        </li>
+    </ul>
+</button>
+
+
+<button type="button" class="btn w100 btn-{% if view == "change_password" %}extra-{% endif %}emphasized regular-space" href="{% url 'password_change' %}">
     <ul class="media-list">
         <li class="media">
            <a class="pull-left">
@@ -46,7 +83,8 @@
     </ul>
 </button>
 
-<button type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:profile-delete' %}">
+{% if view == "edit_profile" or view == "delete_profile" %}
+<button type="button" class="btn w100 btn-{% if view == "delete_profile" %}extra-{% endif %}emphasized regular-space" href="{% url 'cosinnus:profile-delete' %}">
     <ul class="media-list">
         <li class="media">
            <a class="pull-left">
@@ -63,3 +101,4 @@
         </li>
     </ul>
 </button>
+{% endif %}
