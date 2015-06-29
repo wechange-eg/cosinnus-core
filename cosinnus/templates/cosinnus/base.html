@@ -59,7 +59,8 @@
         {% block extrahead %}{% endblock extrahead %}
         
     </head>
-    <body {% block body_attributes %}{% endblock body_attributes %}>
+    {% comment %} 'lang=' attribute is required for OSM-Field language definition {% endcomment %}
+    <body {% block body_attributes %}{% endblock body_attributes %} lang="{{ COSINNUS_CURRENT_LANGUAGE }}">
     <!-- class="{{ COSINNUS_CURRENT_APP }}" -->
         
         {% include 'cosinnus/extra_body_header.html' %}

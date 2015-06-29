@@ -1,14 +1,15 @@
 div.osmfield-wrapper {
-	position: relative;
+    position: relative;
     display: inline;
 }
 
 div.osmfield-map {
-	height: 250px;
-	border: 1px solid black;
-	z-index: 1000;
+    height: 250px;
+    border: 1px solid black;
+    z-index: 1000;
 }
 input.osmfield.osmfield-input {
-	border-width: 0;
-	width: 100%;
+    border-width: 0;
+    width: auto;
+    margin-bottom: 5px;
 }
