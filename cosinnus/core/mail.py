@@ -65,8 +65,8 @@ def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None):
         # fail silently. log this, though
         if settings.DEBUG:
             _mail_print(to, subject, template, data, from_email, bcc)
-        logger.error('Cosinnus.core.mail: Failed to send mail! The exception was: "%s"' % str(e), 
-                     extra={'to_user': to, 'subject': subject})
+        logger.error('Cosinnus.core.mail: Failed to send mail!', 
+                     extra={'to_user': to, 'subject': subject, 'exception': str(e)})
     
 
 def get_common_mail_context(request, group=None, user=None):
