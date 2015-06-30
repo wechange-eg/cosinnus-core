@@ -32,6 +32,8 @@ from django.dispatch.dispatcher import receiver
 
 import logging
 from cosinnus.core.registries.group_models import group_model_registry
+from django.db import IntegrityError, transaction
+
 logger = logging.getLogger('cosinnus')
 
 # this reads the environment and inits the right locale
@@ -490,7 +492,9 @@ class CosinnusGroup(models.Model):
         related_name='groups', null=True, blank=True, on_delete=models.SET_NULL)
     
     objects = CosinnusGroupManager()
-
+    
+    _portal_id = None
+    
     class Meta:
         app_label = 'cosinnus'
         ordering = ('name',)
@@ -503,6 +507,9 @@ class CosinnusGroup(models.Model):
         self._admins = None
         self._members = None
         self._pendings = None
+        self._portal = self.portal
+        self._type = self.type
+        self._slug = self.slug
 
     def __str__(self):
         # FIXME: better caching for .portal.name
@@ -521,13 +528,40 @@ class CosinnusGroup(models.Model):
             media_tag = get_tag_object_model()._default_manager.create()
             self.media_tag = media_tag
             
+        if not created and (\
+            self.portal != self._portal or \
+            self.type != self._type or \
+            self.slug != self._slug):
+            # group is changing in a ways that would change its URI! 
+            # create permanent redirect from old portal to this group
+            group_type = group_model_registry.get_url_key_by_type(self._type)
+            
+            try:
+                with transaction.commit_on_success():
+                    red = CosinnusPermanentRedirect.objects.create(from_portal=self._portal, from_type=group_type, from_slug=self._slug, to_group=self)
+            except IntegrityError:
+                # if any existing redirects cause integrity error, delete them, because they would cause infite redirects
+                # because they conflict however, they are stale by default and can be deleted
+                # delete all unique_together constraining perm redirects
+                stale_redirects = CosinnusPermanentRedirect.objects.filter(
+                    Q(from_portal=self._portal, from_type=group_type, from_slug=self._slug) | \
+                    Q(from_portal=self._portal, from_slug=self._slug, to_group=self))
+                stale_redirects.delete()
+                # retry creating the redirect
+                CosinnusPermanentRedirect.objects.create(from_portal=self._portal, from_type=group_type, from_slug=self._slug, to_group=self)
+            slugs.append(self._slug)
+            
         if created:
             # set portal to current
             self.portal = CosinnusPortal.get_current()
         
         super(CosinnusGroup, self).save(*args, **kwargs)
         slugs.append(self.slug)
-        self._clear_cache(slug=self.slug)
+        self._clear_cache(slugs=slugs)
+        
+        self._portal = self.portal
+        self._type = self.type
+        self._slug = self.slug
         
         if created:
             # send creation signal
@@ -806,7 +840,7 @@ class CosinnusPermanentRedirect(models.Model):
     class Meta(BaseGroupMembership.Meta):
         verbose_name = _('Permanent Group Redirect')
         verbose_name_plural = _('Permanent Group Redirects')
-        unique_together = (('from_portal', 'from_type', 'from_slug'),)
+        unique_together = (('from_portal', 'from_type', 'from_slug'), ('from_portal', 'to_group', 'from_slug'),)
     
     def __init__(self, *args, **kwargs):
         super(CosinnusPermanentRedirect, self).__init__(*args, **kwargs)
