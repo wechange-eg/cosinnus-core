@@ -613,8 +613,10 @@ class CosinnusGroup(models.Model):
         ]
         if slug:
             keys.append(self.objects._GROUP_CACHE_KEY % (CosinnusPortal.get_current().id, self.objects.__class__.__name__, slug))
+            keys.append(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, slug))
         if slugs:
             keys.extend([self.objects._GROUP_CACHE_KEY % (CosinnusPortal.get_current().id, self.objects.__class__.__name__, s) for s in slugs])
+            keys.extend([CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, s) for s in slugs])
         cache.delete_many(keys)
         
         if isinstance(self, CosinnusGroup) or issubclass(self.__class__, CosinnusGroup):
