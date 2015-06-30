@@ -31,6 +31,7 @@ from django.db.models.signals import post_delete, post_save
 from django.dispatch.dispatcher import receiver
 
 import logging
+from cosinnus.core.registries.group_models import group_model_registry
 logger = logging.getLogger('cosinnus')
 
 # this reads the environment and inits the right locale
@@ -238,7 +239,12 @@ class CosinnusGroupManager(models.Manager):
         if portal_id is None:
             portal_id = CosinnusPortal.get_current().id
         return self.get_cached(slugs=slug, portal_id=portal_id)
-
+    
+    def get_by_id(self, id=None, portal_id=None):
+        if portal_id is None:
+            portal_id = CosinnusPortal.get_current().id
+        return self.get_cached(pks=id, portal_id=portal_id)
+    
     def get_for_user(self, user):
         """
         :returns: a list of :class:`CosinnusGroup` the given user is a member
@@ -775,7 +781,102 @@ class CosinnusPortalMembership(BaseGroupMembership):
     class Meta(BaseGroupMembership.Meta):
         verbose_name = _('Portal membership')
         verbose_name_plural = _('Portal memberships')
+
+
+
+class CosinnusPermanentRedirect(models.Model):
+    """ Sets up a redirect for all URLs that match the pattern of
+        http://<from-portal-url>/<from-type>/<from-slug/ where <from-type> is one of
+        cosinnus.core.registries.group_model_registry's group slug fragments. 
+        If a URL requested matches this, a Middleware will redirect to <to_group> """
         
+    from_portal = models.ForeignKey(CosinnusPortal, related_name='redirects',
+        on_delete=models.CASCADE, verbose_name=_('From Portal'))
+    from_type = models.CharField(_('From Group Type'), max_length=50)
+    from_slug = models.CharField(_('From Slug'), max_length=50)
+    
+    to_group = models.ForeignKey(CosinnusGroup, related_name='redirects',
+        on_delete=models.CASCADE, verbose_name=_('Permanent Group Redirects'))
+    
+    _cache_string = None
+    
+    CACHE_KEY = 'cosinnus/core/permanent_redirect/dict'
+
+    
+    class Meta(BaseGroupMembership.Meta):
+        verbose_name = _('Permanent Group Redirect')
+        verbose_name_plural = _('Permanent Group Redirects')
+        unique_together = (('from_portal', 'from_type', 'from_slug'),)
+    
+    def __init__(self, *args, **kwargs):
+        super(CosinnusPermanentRedirect, self).__init__(*args, **kwargs)
+        self._cache_string = self.cache_string
+    
+    @classmethod
+    def make_cache_string(cls, portal_id, group_type, group_slug):
+        return '%d_%s_%s' % (portal_id, group_type, group_slug)
+    
+    @property
+    def cache_string(self):
+        if not (self.from_portal_id and self.from_type and self.from_slug):
+            return None
+        return CosinnusPermanentRedirect.make_cache_string(self.from_portal_id, self.from_type, self.from_slug)
+    
+    @classmethod
+    def _get_cache_dict(cls):
+        cached_dict = cache.get(cls.CACHE_KEY)
+        if not cached_dict:
+            cached_dict = {}
+            # add all Groups to cache
+            current_portal = CosinnusPortal.get_current()
+            for perm_redirect in CosinnusPermanentRedirect.objects.filter(from_portal=current_portal):
+                cached_dict[perm_redirect.cache_string] = perm_redirect.to_group_id
+            cls._set_cache_dict(cached_dict)
+        return cached_dict
+    
+    @classmethod
+    def _set_cache_dict(cls, cached_dict):
+        cache.set(cls.CACHE_KEY, cached_dict, settings.COSINNUS_PERMANENT_REDIRECT_CACHE_TIMEOUT)
+    
+    @classmethod
+    def get_group_for_pattern(cls, portal, group_type, group_slug):
+        """ For a URL pattern, finds if there is a permanent redirect installed, and if so,
+            returns the group it should redirect to """
+        redirects_dict = cls._get_cache_dict()
+        cache_string = cls.make_cache_string(portal.id, group_type, group_slug)
+        group_id = redirects_dict.get(cache_string, None)
+        
+        if group_id:
+            group_cls = group_model_registry.get(group_type)
+            try:
+                group = CosinnusGroup.objects.get_by_id(id=group_id)
+                return group
+            except group_cls.DoesNotExist:
+                pass
+        return None
+    
+    def save(self, *args, **kwargs):
+        created = bool(self.pk is None)
+        if not created:
+            # delete old group pattern from cache
+            cached_dict = CosinnusPermanentRedirect._get_cache_dict()
+            del cached_dict[self._cache_string]
+            CosinnusPermanentRedirect._set_cache_dict(cached_dict)
+        super(CosinnusPermanentRedirect, self).save(*args, **kwargs)
+        
+        # add group pattern to cache
+        self._cache_string = self.cache_string
+        cached_dict = CosinnusPermanentRedirect._get_cache_dict()
+        cached_dict[self.cache_string] = self.to_group_id
+        CosinnusPermanentRedirect._set_cache_dict(cached_dict)
+    
+    def delete(self, *args, **kwargs):
+        # delete group pattern from cache
+        cached_dict = CosinnusPermanentRedirect._get_cache_dict()
+        del cached_dict[self.cache_string]
+        CosinnusPermanentRedirect._set_cache_dict(cached_dict)
+        super(CosinnusPermanentRedirect, self).delete(*args, **kwargs)
+
     
 @receiver(post_delete)
 def clear_cache_on_group_delete(sender, instance, **kwargs):
