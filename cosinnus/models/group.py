@@ -874,8 +874,10 @@ class CosinnusPermanentRedirect(models.Model):
             cached_dict = {}
             # add all Groups to cache
             current_portal = CosinnusPortal.get_current()
-            for perm_redirect in CosinnusPermanentRedirect.objects.filter(from_portal=current_portal):
-                cached_dict[perm_redirect.cache_string] = perm_redirect.to_group_id
+            for perm_redirect in CosinnusPermanentRedirect.objects. \
+                        filter(from_portal=current_portal).prefetch_related('to_group'):
+                to_group = perm_redirect.to_group
+                cached_dict[perm_redirect.cache_string] = (to_group.id, to_group.portal_id)
             cls._set_cache_dict(cached_dict)
         return cached_dict
     
@@ -886,7 +888,7 @@ class CosinnusPermanentRedirect(models.Model):
     @classmethod
     def get_group_id_for_pattern(cls, portal, group_type, group_slug):
         """ For a URL pattern, finds if there is a permanent redirect installed, and if so,
-            returns the group id of the group it should redirect to """
+            returns the (group id, portal id) tuple of the group it should redirect to """
         redirects_dict = cls._get_cache_dict()
         cache_string = cls.make_cache_string(portal.id, group_type, group_slug)
         return redirects_dict.get(cache_string, None)
@@ -895,11 +897,12 @@ class CosinnusPermanentRedirect(models.Model):
     def get_group_for_pattern(cls, portal, group_type, group_slug):
         """ For a URL pattern, finds if there is a permanent redirect installed, and if so,
             returns the group it should redirect to """
-        group_id = cls.get_group_id_for_pattern(portal, group_type, group_slug)
-        if group_id:
+        group_id_portal = cls.get_group_id_for_pattern(portal, group_type, group_slug) 
+        if group_id_portal:
+            group_id, portal_id = group_id_portal
             group_cls = group_model_registry.get(group_type)
             try:
-                group = CosinnusGroup.objects.get_by_id(id=group_id)
+                group = CosinnusGroup.objects.get_by_id(id=group_id, portal_id=portal_id)
                 return group
             except group_cls.DoesNotExist:
                 pass
