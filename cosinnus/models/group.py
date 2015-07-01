@@ -223,14 +223,14 @@ class CosinnusGroupManager(models.Manager):
                 cached_pks = self.get_pks(portal_id=portal_id)
                 slug = cached_pks.get(pks, None)
                 if slug:
-                    return self.get_cached(slugs=slug)
+                    return self.get_cached(slugs=slug, portal_id=portal_id)
                 return None  # We rely on the slug and id maps being up to date
             else:
                 # We request multiple groups
                 cached_pks = self.get_pks(portal_id=portal_id)
                 slugs = filter(None, (cached_pks.get(id, []) for id in pks))
                 if slugs:
-                    return self.get_cached(slugs=slugs)
+                    return self.get_cached(slugs=slugs, portal_id=portal_id)
                 return []  # We rely on the slug and id maps being up to date
         return []
     
