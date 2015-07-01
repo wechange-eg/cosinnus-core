@@ -534,21 +534,7 @@ class CosinnusGroup(models.Model):
             self.slug != self._slug):
             # group is changing in a ways that would change its URI! 
             # create permanent redirect from old portal to this group
-            group_type = group_model_registry.get_url_key_by_type(self._type)
-            
-            try:
-                with transaction.commit_on_success():
-                    red = CosinnusPermanentRedirect.objects.create(from_portal=self._portal, from_type=group_type, from_slug=self._slug, to_group=self)
-            except IntegrityError:
-                # if any existing redirects cause integrity error, delete them, because they would cause infite redirects
-                # because they conflict however, they are stale by default and can be deleted
-                # delete all unique_together constraining perm redirects
-                stale_redirects = CosinnusPermanentRedirect.objects.filter(
-                    Q(from_portal=self._portal, from_type=group_type, from_slug=self._slug) | \
-                    Q(from_portal=self._portal, from_slug=self._slug, to_group=self))
-                stale_redirects.delete()
-                # retry creating the redirect
-                CosinnusPermanentRedirect.objects.create(from_portal=self._portal, from_type=group_type, from_slug=self._slug, to_group=self)
+            CosinnusPermanentRedirect.create_for_pattern(self._portal, self._type, self._slug, self)
             slugs.append(self._slug)
             
         if created:
@@ -890,6 +876,25 @@ class CosinnusPermanentRedirect(models.Model):
             except group_cls.DoesNotExist:
                 pass
         return None
+    
+    @classmethod
+    def create_for_pattern(cls, _portal, _type, _slug, to_group):
+        group_type = group_model_registry.get_url_key_by_type(_type)
+        try:
+            with transaction.commit_on_success():
+                CosinnusPermanentRedirect.objects.create(from_portal=_portal, from_type=group_type, from_slug=_slug, to_group=to_group)
+        except IntegrityError:
+            # if any existing redirects cause integrity error, delete them, because they would cause infite redirects
+            # because they conflict however, they are stale by default and can be deleted
+            # delete all unique_together constraining perm redirects
+            stale_redirects = CosinnusPermanentRedirect.objects.filter(
+                Q(from_portal=_portal, from_type=group_type, from_slug=_slug) | \
+                Q(from_portal=_portal, from_slug=_slug, to_group=to_group))
+            stale_redirects.delete()
+            # retry creating the redirect
+            CosinnusPermanentRedirect.objects.create(from_portal=_portal, from_type=group_type, from_slug=_slug, to_group=to_group)
+            # completely delete cache, checking which keys to delete would be more costly than redoing it all once
+            cache.delete(CosinnusPermanentRedirect.CACHE_KEY)
     
     def save(self, *args, **kwargs):
         created = bool(self.pk is None)
