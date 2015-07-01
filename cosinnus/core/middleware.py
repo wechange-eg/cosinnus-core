@@ -11,6 +11,8 @@ from cosinnus.models.group import CosinnusPortal, CosinnusPermanentRedirect
 from django.http.response import HttpResponseRedirect
 from django.utils.encoding import force_text
 from cosinnus.conf import settings
+from django.contrib import messages
+from django.utils.translation import ugettext_lazy as _
 
 logger = logging.getLogger('cosinnus')
 
@@ -71,6 +73,7 @@ class GroupPermanentRedirectMiddleware(object):
                     if to_group:
                         # redirect to the redirect with HttpResponsePermanentRedirect
                         redirect_url = ''.join((to_group.get_absolute_url(), '/'.join(request_tokens[5:])))
+                        messages.success(request, _('This group/project no longer resides under the URL you entered. You have been redirected automatically to the current location.'))
                         return HttpResponseRedirect(redirect_url)
         except Exception, e:
             if settings.DEBUG:

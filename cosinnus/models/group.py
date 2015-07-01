@@ -33,6 +33,7 @@ from django.dispatch.dispatcher import receiver
 import logging
 from cosinnus.core.registries.group_models import group_model_registry
 from django.db import IntegrityError, transaction
+from django.contrib import messages
 
 logger = logging.getLogger('cosinnus')
 
@@ -527,7 +528,8 @@ class CosinnusGroup(models.Model):
             from cosinnus.models.tagged import get_tag_object_model
             media_tag = get_tag_object_model()._default_manager.create()
             self.media_tag = media_tag
-            
+        
+        display_redirect_created_message = False
         if not created and (\
             self.portal != self._portal or \
             self.type != self._type or \
@@ -535,6 +537,7 @@ class CosinnusGroup(models.Model):
             # group is changing in a ways that would change its URI! 
             # create permanent redirect from old portal to this group
             CosinnusPermanentRedirect.create_for_pattern(self._portal, self._type, self._slug, self)
+            display_redirect_created_message = True
             slugs.append(self._slug)
             
         if created:
@@ -548,6 +551,10 @@ class CosinnusGroup(models.Model):
         self._portal = self.portal
         self._type = self.type
         self._slug = self.slug
+        
+        if display_redirect_created_message:
+            # possible because of AddRequestToModelSaveMiddleware
+            messages.info(self.request, _('The URL for this group has changed. A redirect from all existing URLs has automatically been created!'))
         
         if created:
             # send creation signal

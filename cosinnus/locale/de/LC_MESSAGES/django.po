@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-29 16:36+0200\n"
+"POT-Creation-Date: 2015-07-01 14:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -17,45 +17,45 @@ msgstr ""
 "Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\admin.py:34
+#: .\admin.py:35
 #, python-format
 msgid "1 %(object)s was deleted successfully"
 msgstr "1 %(object)s wurde erfolgreich gelöscht."
 
-#: .\admin.py:37
+#: .\admin.py:38
 #, python-format
 msgid "%(number)d %(objects)s were deleted successfully"
 msgstr "%(number)d %(objects)s wurden erfolgreich gelöscht."
 
-#: .\admin.py:40
+#: .\admin.py:41
 msgid "Delete selected entries"
 msgstr "Ausgewählte Objekte löschen"
 
-#: .\admin.py:93
+#: .\admin.py:106
 msgid "The following Projects were converted to Societies:"
 msgstr "Die folgenden Projekte wurden in Gruppen umgewandelt:"
 
-#: .\admin.py:95
+#: .\admin.py:108
 msgid "Convert selected Projects to Societies"
 msgstr "Ausgewählte Projekte in Gruppen umwandeln"
 
-#: .\admin.py:126
+#: .\admin.py:139
 msgid "The following Users were added to this portal:"
 msgstr ""
 "Die folgenden Mitarbeiter_innen wurden in dieses Portal mit-aufgenommen:"
 
-#: .\admin.py:128
+#: .\admin.py:141
 #, python-format
 msgid "Add all members to current Portal (%s)"
 msgstr ""
 "Alle enthaltenen Mitarbeiter_innen ins aktuelle Portal (%s) mit-aufnehmen"
 
-#: .\admin.py:134
+#: .\admin.py:147
 msgid "In addition, the members were removed from all other Portals."
 msgstr ""
 "Zusätzlich wurden die Mitarbeiter_innen aus allen anderen Portalen entfernt."
 
-#: .\admin.py:136
+#: .\admin.py:149
 #, python-format
 msgid ""
 "Move all members to current Portal (%s) (removes all other memberships!)"
@@ -63,20 +63,20 @@ msgstr ""
 "Alle enthaltenen Mitarbeiter_innen ins aktuelle Portal (%s) verschieben "
 "(entfernt sie aus allen anderen Portalen!)"
 
-#: .\admin.py:166
+#: .\admin.py:179
 msgid "The following Societies were converted to Projects:"
 msgstr "Die folgenden Gruppen wurden in Projekte umgewandelt:"
 
-#: .\admin.py:168
+#: .\admin.py:181
 msgid "Convert selected Societies to Projects"
 msgstr "Ausgewählte Gruppen in Projekte umwandeln"
 
-#: .\admin.py:237
+#: .\admin.py:250
 #, python-format
 msgid "%d Users were deactivated successfully."
 msgstr "%d Benutzer wurden erfolgreich deaktiviert."
 
-#: .\admin.py:239
+#: .\admin.py:252
 msgid "Deactivate users (will keep all all items they created on the site)"
 msgstr ""
 "Ausgewählte Benutzer deaktivieren (deren erstellte Items bleiben auf der "
@@ -91,6 +91,14 @@ msgstr ""
 #: .\cosinnus_notifications.py:52
 msgid "You were tagged in a post, document or other item"
 msgstr "Du wurdest in einem Beitrag, Dokument oder anderem Element markiert"
+
+#: .\core\middleware.py:78
+msgid ""
+"This group/project no longer resides under the URL you entered. You have "
+"been redirected automatically to the current location."
+msgstr ""
+"Die Gruppe oder das Projekt liegt nicht länger unter der URL die du eingegeben "
+"hast. Du wurdest automatisch auf die aktuelle Adresse umgeleitet."
 
 #: .\core\receivers.py:25
 #, python-format
@@ -211,7 +219,7 @@ msgstr "Nächste Woche"
 msgid "Next month"
 msgstr "Nächsten Monat"
 
-#: .\forms\hierarchy.py:14 .\models\group.py:369 .\models\group.py:462
+#: .\forms\hierarchy.py:14 .\models\group.py:380 .\models\group.py:473
 msgid "Name"
 msgstr "Name"
 
@@ -299,117 +307,145 @@ msgstr "Gemeledetes Objekt"
 msgid "Reported objects"
 msgstr "Gemeledete Objekte"
 
-#: .\models\group.py:70
+#: .\models\group.py:74
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 "Bitt einen gültigen Namen angeben. Ein Vorwärtsslash ist nicht erlaubt."
 
-#: .\models\group.py:360 .\models\group.py:459 .\models\group.py:769
+#: .\models\group.py:371 .\models\group.py:470 .\models\group.py:806
 msgid "Portal"
 msgstr ""
 
-#: .\models\group.py:361
+#: .\models\group.py:372
 msgid "Portals"
 msgstr ""
 
-#: .\models\group.py:371 .\models\group.py:464
+#: .\models\group.py:382 .\models\group.py:475
 msgid "Slug"
 msgstr "Slug"
 
-#: .\models\group.py:373 .\models\group.py:468 .\models\profile.py:148
+#: .\models\group.py:384 .\models\group.py:479 .\models\profile.py:148
 #: .\templates\cosinnus\microsite.html.py:198
 #: .\templates\cosinnus\group\group_form.html.py:221
 msgid "Description"
 msgstr "Beschreibung"
 
-#: .\models\group.py:374 .\models\group.py:471 .\models\profile.py:151
+#: .\models\group.py:385 .\models\group.py:482 .\models\profile.py:151
 #: .\templates\cosinnus\group\group_form.html.py:148
 #: .\templates\cosinnus\group\group_form.html.py:157
 #: .\templates\cosinnus\user\userprofile_form.html.py:97
 msgid "Website"
 msgstr "Webseite"
 
-#: .\models\group.py:375 .\models\group.py:472 .\models\tagged.py:42
+#: .\models\group.py:386 .\models\group.py:483 .\models\tagged.py:42
 #: .\templates\cosinnus\group\group_list.html.py:116
 msgid "Public"
 msgstr "Öffentlich"
 
-#: .\models\group.py:379
+#: .\models\group.py:390
 msgid "Associated Site"
 msgstr ""
 
-#: .\models\group.py:381
+#: .\models\group.py:392
 msgid "Http/Https Protocol (overrides settings)"
 msgstr ""
 
-#: .\models\group.py:450 .\models\tagged.py:64 .\models\tagged.py:137
+#: .\models\group.py:461 .\models\tagged.py:64 .\models\tagged.py:137
 msgid "Group"
 msgstr "Projekt"
 
-#: .\models\group.py:451
+#: .\models\group.py:462
 msgid "Society"
 msgstr "Gruppe"
 
-#: .\models\group.py:465
+#: .\models\group.py:476
 msgid "Group Type"
 msgstr "Gruppentyp"
 
-#: .\models\group.py:469 .\models\profile.py:146
+#: .\models\group.py:480 .\models\profile.py:146
 #: .\templates\cosinnus\group\group_form.html.py:65
 msgid "Avatar"
 msgstr "Avatar"
 
-#: .\models\group.py:480
+#: .\models\group.py:491
 msgid "Deactivated Apps"
 msgstr "Deaktivierte Apps"
 
-#: .\models\group.py:483
+#: .\models\group.py:494
 msgid "Parent Group"
 msgstr "Übergeordnete Gruppe"
 
-#: .\models\group.py:491
+#: .\models\group.py:504
 msgid "Cosinnus group"
 msgstr "Projekt"
 
-#: .\models\group.py:492
+#: .\models\group.py:505
 msgid "Cosinnus groups"
 msgstr "Projekte"
 
-#: .\models\group.py:511
+#: .\models\group.py:527
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
 
-#: .\models\group.py:643
+#: .\models\group.py:559
+msgid ""
+"The URL for this group has changed. A redirect from all existing URLs has "
+"automatically been created!"
+msgstr ""
+"Durch die Änderung hat sich die URL der Gruppe geändert. Eine dauerhafte "
+"Weiterleitung von der alten auf die neue Adresse wurde automatisch eingerichtet!"
+
+#: .\models\group.py:680
 msgid "Cosinnus project"
 msgstr "Projekt"
 
-#: .\models\group.py:644
+#: .\models\group.py:681
 msgid "Cosinnus projects"
 msgstr "Projekte"
 
-#: .\models\group.py:676
+#: .\models\group.py:713
 msgid "Cosinnus society"
 msgstr "Gruppe"
 
-#: .\models\group.py:677
+#: .\models\group.py:714
 msgid "Cosinnus societies"
 msgstr "Gruppen"
 
-#: .\models\group.py:763
+#: .\models\group.py:800
 msgid "Group membership"
 msgstr "Gruppen/Projekt-Mitgliedschaft"
 
-#: .\models\group.py:764
+#: .\models\group.py:801
 msgid "Group memberships"
 msgstr "Gruppen/Projekt-Mitgliedschaften"
 
-#: .\models\group.py:776
+#: .\models\group.py:813
 msgid "Portal membership"
 msgstr "Portal-Mitgliedschaft"
 
-#: .\models\group.py:777
+#: .\models\group.py:814
 msgid "Portal memberships"
 msgstr "Portal-Mitgliedschaften"
+
+#: .\models\group.py:825
+msgid "From Portal"
+msgstr "Von Portal"
+
+#: .\models\group.py:826
+msgid "From Group Type"
+msgstr "Von Gruppentyp"
+
+#: .\models\group.py:827
+msgid "From Slug"
+msgstr "Von Slug"
+
+#: .\models\group.py:830 .\models\group.py:839
+msgid "Permanent Group Redirects"
+msgstr "Dauerhaufte Gruppenweiterleitungen"
+
+#: .\models\group.py:838
+msgid "Permanent Group Redirect"
+msgstr "Dauerhaufte Gruppenweiterleitung"
 
 #: .\models\tagged.py:59
 msgid "Only me"
