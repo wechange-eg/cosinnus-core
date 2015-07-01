@@ -470,7 +470,9 @@ class CosinnusGroup(models.Model):
     
     name = models.CharField(_('Name'), max_length=100,
         validators=[group_name_validator])
-    slug = models.SlugField(_('Slug'), max_length=50)
+    slug = models.SlugField(_('Slug'), 
+        help_text=_('Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!'), 
+        max_length=50)
     type = models.PositiveSmallIntegerField(_('Group Type'), blank=False,
         default=TYPE_PROJECT, choices=TYPE_CHOICES, editable=False)
     
@@ -519,8 +521,15 @@ class CosinnusGroup(models.Model):
     def save(self, *args, **kwargs):
         created = bool(self.pk is None)
         slugs = [self.slug] if self.slug else []
-        unique_aware_slugify(self, 'name', 'slug', portal_id=CosinnusPortal.get_current())
         self.name = clean_single_line_text(self.name)
+        
+        # make sure unique_aware_slugify won't come up with a slug that is already used by a 
+        # PermanentRedirect pattern for an old group
+        current_portal = CosinnusPortal.get_current()
+        group_type = group_model_registry.get_url_key_by_type(self.type)
+        extra_check = lambda slug: bool(CosinnusPermanentRedirect.get_group_id_for_pattern(current_portal, group_type, slug))
+        unique_aware_slugify(self, 'name', 'slug', extra_conflict_check=extra_check, force_redo=True, portal_id=CosinnusPortal.get_current())
+        
         if not self.slug:
             raise ValidationError(_('Slug must not be empty.'))
         # sanity check for missing media_tag:
@@ -843,7 +852,14 @@ class CosinnusPermanentRedirect(models.Model):
     
     @classmethod
     def make_cache_string(cls, portal_id, group_type, group_slug):
-        return '%d_%s_%s' % (portal_id, group_type, group_slug)
+        # if ever CosinnusGroups of different types can have the same slug,
+        # we need to make the cache string group type dependant using the following:
+        #return '%d_%s_%s' % (portal_id, group_type, group_slug)
+        
+        # until then, it is enough (eg unique_aware_slugify would only work for
+        # specific group types, but would cross-ignore slugs from other types)
+        # to just use this group_type-independent thing:
+        return '%d_%s' % (portal_id, group_slug)
     
     @property
     def cache_string(self):
@@ -868,13 +884,18 @@ class CosinnusPermanentRedirect(models.Model):
         cache.set(cls.CACHE_KEY, cached_dict, settings.COSINNUS_PERMANENT_REDIRECT_CACHE_TIMEOUT)
     
     @classmethod
+    def get_group_id_for_pattern(cls, portal, group_type, group_slug):
+        """ For a URL pattern, finds if there is a permanent redirect installed, and if so,
+            returns the group id of the group it should redirect to """
+        redirects_dict = cls._get_cache_dict()
+        cache_string = cls.make_cache_string(portal.id, group_type, group_slug)
+        return redirects_dict.get(cache_string, None)
+    
+    @classmethod
     def get_group_for_pattern(cls, portal, group_type, group_slug):
         """ For a URL pattern, finds if there is a permanent redirect installed, and if so,
             returns the group it should redirect to """
-        redirects_dict = cls._get_cache_dict()
-        cache_string = cls.make_cache_string(portal.id, group_type, group_slug)
-        group_id = redirects_dict.get(cache_string, None)
-        
+        group_id = cls.get_group_id_for_pattern(portal, group_type, group_slug)
         if group_id:
             group_cls = group_model_registry.get(group_type)
             try:

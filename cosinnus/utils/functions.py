@@ -6,7 +6,8 @@ from django.core.exceptions import ImproperlyConfigured
 from django.utils.text import normalize_newlines
 
 
-def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
+def unique_aware_slugify(item, slug_source, slug_field, 
+        extra_conflict_check=lambda slug: False, force_redo=False, **kwargs):
     """Ensures a unique slug field by appending an integer counter to duplicate
     slugs.
 
@@ -36,15 +37,28 @@ def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
     :param Model item: A Django model instance
     :param str slug_source: The name of the field to construct a slug from
     :param str slug_field: The name of the field to write the slug to
+    :param lambda/func extra_conflict_check: A function that takes
+        a candidate slug as argument, and returns True if a clash exists
+        for that slug. Used as an additional constraining check on whether a 
+        slug should not be used.
+        Default: lambda slug: False
+    :param bool force_redo: If False, will do nothing if a slug is already set
+        on the item. If True, will redo the slugification, but exclude the 
+        currently set slug from the list, meaning that if all other constraints
+        are clean, an item will keep its slug, but if the current slug clashes,
+        it will be redone.
     :param kwargs: Additional filter attributes on applied to the model
     """
     import re
     from django.template.defaultfilters import slugify
-    s = getattr(item, slug_field)
-    if s:
+    
+    # We always re-do slugific if the force_switch is on, but then exclude the current slug
+    # from the clash list
+    own_slug = getattr(item, slug_field)
+    if own_slug and not force_redo:
         # if a slug is already set, do nothing but return
         return
-
+    
     max_length = item._meta.get_field_by_name(slug_field)[0].max_length
     slug_len = max_length - 10  # 1 for '-'and 4 (+5 for etherpad-id compatibility) for the counter
     slug = slugify(getattr(item, slug_source)[:slug_len])
@@ -67,13 +81,17 @@ def unique_aware_slugify(item, slug_source, slug_field, **kwargs):
             for unique_field in unique_list:
                 if not unique_field == slug_field:
                     kwargs[unique_field] = getattr(item, unique_field, None)
-            
+    
     all_slugs = list(model.objects.filter(**kwargs).values_list(slug_field, flat=True))
-    if slug in all_slugs:
+    if force_redo:
+        # remove own slug from clash list
+        all_slugs = (clash_slug for clash_slug in all_slugs if clash_slug != own_slug)
+    
+    if slug in all_slugs or extra_conflict_check(slug):
         finder = re.compile(r'-\d+$')
         counter = 2
         slug = '%s-%d' % (slug, counter)
-        while slug in all_slugs:
+        while slug in all_slugs or extra_conflict_check(slug):
             slug = re.sub(finder, '-%d' % counter, slug)
             counter += 1
     # set the slug
