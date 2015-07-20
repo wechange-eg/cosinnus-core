@@ -6,7 +6,6 @@ from django.core.exceptions import MiddlewareNotUsed
 from cosinnus.core import signals as cosinnus_signals
 from django.db.models import signals
 from django.utils.functional import curry
-from cosinnus.core.registries.group_models import group_model_registry
 from django.http.response import HttpResponseRedirect
 from django.utils.encoding import force_text
 from cosinnus.conf import settings
@@ -68,7 +67,7 @@ class AddRequestToModelSaveMiddleware(object):
         instance.request = request
 
 
-GROUP_TYPES = [url_key for url_key in group_model_registry]
+GROUP_TYPES = None
 
 class GroupPermanentRedirectMiddleware(object):
     """ This middleware checks if the group that is being accessed has an entry in the PermaRedirect
@@ -81,6 +80,11 @@ class GroupPermanentRedirectMiddleware(object):
     def process_request(self, request):
         # pokemon exception handling
         try:
+            global GROUP_TYPES
+            if GROUP_TYPES is None:
+                from cosinnus.core.registries.group_models import group_model_registry
+                GROUP_TYPES = [url_key for url_key in group_model_registry]
+            
             request_tokens = request.build_absolute_uri().split('/')
             # if URL might be a link to a group
             if len(request_tokens) >= 5: 
