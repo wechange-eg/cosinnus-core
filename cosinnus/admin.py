@@ -10,7 +10,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.models.group import CosinnusGroupMembership,\
     CosinnusSociety, CosinnusProject, CosinnusPortal, CosinnusPortalMembership,\
-    CosinnusGroup, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING
+    CosinnusGroup, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING,\
+    CosinnusPermanentRedirect
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import AttachedObject
 from cosinnus.models.cms import CosinnusMicropage
@@ -51,6 +52,18 @@ class MembershipAdmin(admin.ModelAdmin):
 admin.site.register(CosinnusGroupMembership, MembershipAdmin)
 
 
+class PermanentRedirectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
+    list_display = ('to_group', 'from_slug', 'from_type', 'from_portal',)
+    search_fields = ('to_group__name', )
+    
+    def queryset(self, request):
+        """ For non-admins, only show the routepoints from their caravan """
+        qs = super(PermanentRedirectAdmin, self).queryset(request)
+        qs = qs.filter(from_portal=CosinnusPortal.get_current())
+        return qs
+    
+admin.site.register(CosinnusPermanentRedirect, PermanentRedirectAdmin)
+
 
 class PortalMembershipAdmin(admin.ModelAdmin):
     list_display = ('group', 'user_email', 'status', 'date',)
@@ -80,6 +93,8 @@ class CosinnusProjectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
         slugs = []
         for group in queryset:
             group.type = CosinnusGroup.TYPE_SOCIETY
+            # clear parent group if the project had one (societies cannot have parents!)
+            group.parent = None
             group.save(allow_type_change=True)
             if group.type == CosinnusGroup.TYPE_SOCIETY:
                 converted_names.append(group.name)

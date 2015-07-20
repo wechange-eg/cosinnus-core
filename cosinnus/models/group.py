@@ -30,7 +30,11 @@ from cosinnus.core import signals
 from django.db.models.signals import post_delete, post_save
 from django.dispatch.dispatcher import receiver
 
+from django.db import IntegrityError, transaction
+from django.contrib import messages
+
 import logging
+
 logger = logging.getLogger('cosinnus')
 
 # this reads the environment and inits the right locale
@@ -219,14 +223,14 @@ class CosinnusGroupManager(models.Manager):
                 cached_pks = self.get_pks(portal_id=portal_id)
                 slug = cached_pks.get(pks, None)
                 if slug:
-                    return self.get_cached(slugs=slug)
+                    return self.get_cached(slugs=slug, portal_id=portal_id)
                 return None  # We rely on the slug and id maps being up to date
             else:
                 # We request multiple groups
                 cached_pks = self.get_pks(portal_id=portal_id)
                 slugs = filter(None, (cached_pks.get(id, []) for id in pks))
                 if slugs:
-                    return self.get_cached(slugs=slugs)
+                    return self.get_cached(slugs=slugs, portal_id=portal_id)
                 return []  # We rely on the slug and id maps being up to date
         return []
     
@@ -238,7 +242,12 @@ class CosinnusGroupManager(models.Manager):
         if portal_id is None:
             portal_id = CosinnusPortal.get_current().id
         return self.get_cached(slugs=slug, portal_id=portal_id)
-
+    
+    def get_by_id(self, id=None, portal_id=None):
+        if portal_id is None:
+            portal_id = CosinnusPortal.get_current().id
+        return self.get_cached(pks=id, portal_id=portal_id)
+    
     def get_for_user(self, user):
         """
         :returns: a list of :class:`CosinnusGroup` the given user is a member
@@ -461,7 +470,9 @@ class CosinnusGroup(models.Model):
     
     name = models.CharField(_('Name'), max_length=100,
         validators=[group_name_validator])
-    slug = models.SlugField(_('Slug'), max_length=50)
+    slug = models.SlugField(_('Slug'), 
+        help_text=_('Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!'), 
+        max_length=50)
     type = models.PositiveSmallIntegerField(_('Group Type'), blank=False,
         default=TYPE_PROJECT, choices=TYPE_CHOICES, editable=False)
     
@@ -484,7 +495,9 @@ class CosinnusGroup(models.Model):
         related_name='groups', null=True, blank=True, on_delete=models.SET_NULL)
     
     objects = CosinnusGroupManager()
-
+    
+    _portal_id = None
+    
     class Meta:
         app_label = 'cosinnus'
         ordering = ('name',)
@@ -497,6 +510,9 @@ class CosinnusGroup(models.Model):
         self._admins = None
         self._members = None
         self._pendings = None
+        self._portal = self.portal
+        self._type = self.type
+        self._slug = self.slug
 
     def __str__(self):
         # FIXME: better caching for .portal.name
@@ -505,8 +521,23 @@ class CosinnusGroup(models.Model):
     def save(self, *args, **kwargs):
         created = bool(self.pk is None)
         slugs = [self.slug] if self.slug else []
-        unique_aware_slugify(self, 'name', 'slug', portal_id=CosinnusPortal.get_current())
         self.name = clean_single_line_text(self.name)
+        
+        # make sure unique_aware_slugify won't come up with a slug that is already used by a 
+        # PermanentRedirect pattern for an old group
+        current_portal = CosinnusPortal.get_current()
+        from cosinnus.core.registries.group_models import group_model_registry
+        group_type = group_model_registry.get_url_key_by_type(self.type)
+        # we check if there exists a group redirect that occupies this slug (and which is not pointed to this group)
+        def extra_check(slug):
+            group_id_portal_id = CosinnusPermanentRedirect.get_group_id_for_pattern(current_portal, group_type, slug)
+            if group_id_portal_id:
+                group_id, portal_id = group_id_portal_id
+                if group_id != self.id or portal_id != self.portal_id:
+                    return True
+            return False
+        unique_aware_slugify(self, 'name', 'slug', extra_conflict_check=extra_check, force_redo=True, portal_id=CosinnusPortal.get_current())
+        
         if not self.slug:
             raise ValidationError(_('Slug must not be empty.'))
         # sanity check for missing media_tag:
@@ -514,6 +545,17 @@ class CosinnusGroup(models.Model):
             from cosinnus.models.tagged import get_tag_object_model
             media_tag = get_tag_object_model()._default_manager.create()
             self.media_tag = media_tag
+        
+        display_redirect_created_message = False
+        if not created and (\
+            self.portal != self._portal or \
+            self.type != self._type or \
+            self.slug != self._slug):
+            # group is changing in a ways that would change its URI! 
+            # create permanent redirect from old portal to this group
+            CosinnusPermanentRedirect.create_for_pattern(self._portal, self._type, self._slug, self)
+            display_redirect_created_message = True
+            slugs.append(self._slug)
             
         if created:
             # set portal to current
@@ -521,7 +563,15 @@ class CosinnusGroup(models.Model):
         
         super(CosinnusGroup, self).save(*args, **kwargs)
         slugs.append(self.slug)
-        self._clear_cache(slug=self.slug)
+        self._clear_cache(slugs=slugs)
+        
+        self._portal = self.portal
+        self._type = self.type
+        self._slug = self.slug
+        
+        if display_redirect_created_message:
+            # possible because of AddRequestToModelSaveMiddleware
+            messages.info(self.request, _('The URL for this group has changed. A redirect from all existing URLs has automatically been created!'))
         
         if created:
             # send creation signal
@@ -573,8 +623,10 @@ class CosinnusGroup(models.Model):
         ]
         if slug:
             keys.append(self.objects._GROUP_CACHE_KEY % (CosinnusPortal.get_current().id, self.objects.__class__.__name__, slug))
+            keys.append(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, slug))
         if slugs:
             keys.extend([self.objects._GROUP_CACHE_KEY % (CosinnusPortal.get_current().id, self.objects.__class__.__name__, s) for s in slugs])
+            keys.extend([CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, s) for s in slugs])
         cache.delete_many(keys)
         
         if isinstance(self, CosinnusGroup) or issubclass(self.__class__, CosinnusGroup):
@@ -775,7 +827,131 @@ class CosinnusPortalMembership(BaseGroupMembership):
     class Meta(BaseGroupMembership.Meta):
         verbose_name = _('Portal membership')
         verbose_name_plural = _('Portal memberships')
+
+
+
+class CosinnusPermanentRedirect(models.Model):
+    """ Sets up a redirect for all URLs that match the pattern of
+        http://<from-portal-url>/<from-type>/<from-slug/ where <from-type> is one of
+        cosinnus.core.registries.group_model_registry's group slug fragments. 
+        If a URL requested matches this, a Middleware will redirect to <to_group> """
         
+    from_portal = models.ForeignKey(CosinnusPortal, related_name='redirects',
+        on_delete=models.CASCADE, verbose_name=_('From Portal'))
+    from_type = models.CharField(_('From Group Type'), max_length=50)
+    from_slug = models.CharField(_('From Slug'), max_length=50)
+    
+    to_group = models.ForeignKey(CosinnusGroup, related_name='redirects',
+        on_delete=models.CASCADE, verbose_name=_('Permanent Group Redirects'))
+    
+    _cache_string = None
+    
+    CACHE_KEY = 'cosinnus/core/permanent_redirect/dict'
+
+    
+    class Meta(BaseGroupMembership.Meta):
+        verbose_name = _('Permanent Group Redirect')
+        verbose_name_plural = _('Permanent Group Redirects')
+        unique_together = (('from_portal', 'from_type', 'from_slug'), ('from_portal', 'to_group', 'from_slug'),)
+    
+    def __init__(self, *args, **kwargs):
+        super(CosinnusPermanentRedirect, self).__init__(*args, **kwargs)
+        self._cache_string = self.cache_string
+    
+    @classmethod
+    def make_cache_string(cls, portal_id, group_type, group_slug):
+        return '%d_%s_%s' % (portal_id, group_type, group_slug)
+    
+    @property
+    def cache_string(self):
+        if not (self.from_portal_id and self.from_type and self.from_slug):
+            return None
+        return CosinnusPermanentRedirect.make_cache_string(self.from_portal_id, self.from_type, self.from_slug)
+    
+    @classmethod
+    def _get_cache_dict(cls):
+        cached_dict = cache.get(cls.CACHE_KEY)
+        if not cached_dict:
+            cached_dict = {}
+            # add all Groups to cache
+            current_portal = CosinnusPortal.get_current()
+            for perm_redirect in CosinnusPermanentRedirect.objects. \
+                        filter(from_portal=current_portal).prefetch_related('to_group'):
+                to_group = perm_redirect.to_group
+                cached_dict[perm_redirect.cache_string] = (to_group.id, to_group.portal_id)
+            cls._set_cache_dict(cached_dict)
+        return cached_dict
+    
+    @classmethod
+    def _set_cache_dict(cls, cached_dict):
+        cache.set(cls.CACHE_KEY, cached_dict, settings.COSINNUS_PERMANENT_REDIRECT_CACHE_TIMEOUT)
+    
+    @classmethod
+    def get_group_id_for_pattern(cls, portal, group_type, group_slug):
+        """ For a URL pattern, finds if there is a permanent redirect installed, and if so,
+            returns the (group id, portal id) tuple of the group it should redirect to """
+        redirects_dict = cls._get_cache_dict()
+        cache_string = cls.make_cache_string(portal.id, group_type, group_slug)
+        return redirects_dict.get(cache_string, None)
+    
+    @classmethod
+    def get_group_for_pattern(cls, portal, group_type, group_slug):
+        """ For a URL pattern, finds if there is a permanent redirect installed, and if so,
+            returns the group it should redirect to """
+        group_id_portal = cls.get_group_id_for_pattern(portal, group_type, group_slug) 
+        if group_id_portal:
+            group_id, portal_id = group_id_portal
+            from cosinnus.core.registries.group_models import group_model_registry # must be lazy!
+            group_cls = group_model_registry.get(group_type)
+            try:
+                group = CosinnusGroup.objects.get_by_id(id=group_id, portal_id=portal_id)
+                return group
+            except group_cls.DoesNotExist:
+                pass
+        return None
+    
+    @classmethod
+    def create_for_pattern(cls, _portal, _type, _slug, to_group):
+        from cosinnus.core.registries.group_models import group_model_registry # must be lazy!
+        group_type = group_model_registry.get_url_key_by_type(_type)
+        try:
+            with transaction.commit_on_success():
+                CosinnusPermanentRedirect.objects.create(from_portal=_portal, from_type=group_type, from_slug=_slug, to_group=to_group)
+        except IntegrityError:
+            # if any existing redirects cause integrity error, delete them, because they would cause infite redirects
+            # because they conflict however, they are stale by default and can be deleted
+            # delete all unique_together constraining perm redirects
+            stale_redirects = CosinnusPermanentRedirect.objects.filter(
+                Q(from_portal=_portal, from_type=group_type, from_slug=_slug) | \
+                Q(from_portal=_portal, from_slug=_slug, to_group=to_group))
+            stale_redirects.delete()
+            # retry creating the redirect
+            CosinnusPermanentRedirect.objects.create(from_portal=_portal, from_type=group_type, from_slug=_slug, to_group=to_group)
+            # completely delete cache, checking which keys to delete would be more costly than redoing it all once
+            cache.delete(CosinnusPermanentRedirect.CACHE_KEY)
+    
+    def save(self, *args, **kwargs):
+        created = bool(self.pk is None)
+        if not created:
+            # delete old group pattern from cache
+            cached_dict = CosinnusPermanentRedirect._get_cache_dict()
+            del cached_dict[self._cache_string]
+            CosinnusPermanentRedirect._set_cache_dict(cached_dict)
+        super(CosinnusPermanentRedirect, self).save(*args, **kwargs)
+        
+        # add group pattern to cache
+        self._cache_string = self.cache_string
+        cached_dict = CosinnusPermanentRedirect._get_cache_dict()
+        cached_dict[self.cache_string] = (self.to_group_id, self.to_group.portal_id)
+        CosinnusPermanentRedirect._set_cache_dict(cached_dict)
+    
+    def delete(self, *args, **kwargs):
+        # delete group pattern from cache
+        cached_dict = CosinnusPermanentRedirect._get_cache_dict()
+        del cached_dict[self.cache_string]
+        CosinnusPermanentRedirect._set_cache_dict(cached_dict)
+        super(CosinnusPermanentRedirect, self).delete(*args, **kwargs)
+
     
 @receiver(post_delete)
 def clear_cache_on_group_delete(sender, instance, **kwargs):

@@ -66,6 +66,9 @@ class GroupModelRegistry(DictBaseRegistry):
         self.group_type_index[type_index] = url_key
         self._register(url_key, plural_url_key, url_name_prefix, model, form_model)
     
+    def get_url_key_by_type(self, type_index):
+        return self.group_type_index[type_index]
+    
     def get_by_type(self, type_index):
         return self.get(self.group_type_index[type_index], None)
     

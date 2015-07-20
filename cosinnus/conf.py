@@ -144,7 +144,10 @@ class CosinnusConf(AppConf):
     #: A list of app_names (``'cosinnus_note'`` rather than ``note``) that will
     #: e.g. not be displayed in the cosinnus menu
     HIDE_APPS = set(['cosinnus_message', 'cosinnus_notifications', 'cosinnus_stream'])
-
+    
+    #: How long the perm redirect cache should last (1 week, because it organizes itself)
+    PERMANENT_REDIRECT_CACHE_TIMEOUT = 60 * 60 * 24 * 7
+    
     #: The ModelForm that will be used to modify the :attr:`TAG_OBJECT_MODEL`
     TAG_OBJECT_FORM = 'cosinnus.forms.tagged.TagObjectForm'
 
