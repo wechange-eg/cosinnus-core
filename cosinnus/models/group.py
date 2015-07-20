@@ -528,7 +528,14 @@ class CosinnusGroup(models.Model):
         current_portal = CosinnusPortal.get_current()
         from cosinnus.core.registries.group_models import group_model_registry
         group_type = group_model_registry.get_url_key_by_type(self.type)
-        extra_check = lambda slug: bool(CosinnusPermanentRedirect.get_group_id_for_pattern(current_portal, group_type, slug))
+        # we check if there exists a group redirect that occupies this slug (and which is not pointed to this group)
+        def extra_check(slug):
+            group_id_portal_id = CosinnusPermanentRedirect.get_group_id_for_pattern(current_portal, group_type, slug)
+            if group_id_portal_id:
+                group_id, portal_id = group_id_portal_id
+                if group_id != self.id or portal_id != self.portal_id:
+                    return True
+            return False
         unique_aware_slugify(self, 'name', 'slug', extra_conflict_check=extra_check, force_redo=True, portal_id=CosinnusPortal.get_current())
         
         if not self.slug:
@@ -853,14 +860,7 @@ class CosinnusPermanentRedirect(models.Model):
     
     @classmethod
     def make_cache_string(cls, portal_id, group_type, group_slug):
-        # if ever CosinnusGroups of different types can have the same slug,
-        # we need to make the cache string group type dependant using the following:
-        #return '%d_%s_%s' % (portal_id, group_type, group_slug)
-        
-        # until then, it is enough (eg unique_aware_slugify would only work for
-        # specific group types, but would cross-ignore slugs from other types)
-        # to just use this group_type-independent thing:
-        return '%d_%s' % (portal_id, group_slug)
+        return '%d_%s_%s' % (portal_id, group_type, group_slug)
     
     @property
     def cache_string(self):
@@ -942,7 +942,7 @@ class CosinnusPermanentRedirect(models.Model):
         # add group pattern to cache
         self._cache_string = self.cache_string
         cached_dict = CosinnusPermanentRedirect._get_cache_dict()
-        cached_dict[self.cache_string] = self.to_group_id
+        cached_dict[self.cache_string] = (self.to_group_id, self.to_group.portal_id)
         CosinnusPermanentRedirect._set_cache_dict(cached_dict)
     
     def delete(self, *args, **kwargs):
