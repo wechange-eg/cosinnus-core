@@ -93,6 +93,8 @@ class CosinnusProjectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
         slugs = []
         for group in queryset:
             group.type = CosinnusGroup.TYPE_SOCIETY
+            # clear parent group if the project had one (societies cannot have parents!)
+            group.parent = None
             group.save(allow_type_change=True)
             if group.type == CosinnusGroup.TYPE_SOCIETY:
                 converted_names.append(group.name)
