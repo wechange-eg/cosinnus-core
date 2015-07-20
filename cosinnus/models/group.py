@@ -30,10 +30,10 @@ from cosinnus.core import signals
 from django.db.models.signals import post_delete, post_save
 from django.dispatch.dispatcher import receiver
 
-import logging
-from cosinnus.core.registries.group_models import group_model_registry
 from django.db import IntegrityError, transaction
 from django.contrib import messages
+
+import logging
 
 logger = logging.getLogger('cosinnus')
 
@@ -526,6 +526,7 @@ class CosinnusGroup(models.Model):
         # make sure unique_aware_slugify won't come up with a slug that is already used by a 
         # PermanentRedirect pattern for an old group
         current_portal = CosinnusPortal.get_current()
+        from cosinnus.core.registries.group_models import group_model_registry
         group_type = group_model_registry.get_url_key_by_type(self.type)
         extra_check = lambda slug: bool(CosinnusPermanentRedirect.get_group_id_for_pattern(current_portal, group_type, slug))
         unique_aware_slugify(self, 'name', 'slug', extra_conflict_check=extra_check, force_redo=True, portal_id=CosinnusPortal.get_current())
@@ -900,6 +901,7 @@ class CosinnusPermanentRedirect(models.Model):
         group_id_portal = cls.get_group_id_for_pattern(portal, group_type, group_slug) 
         if group_id_portal:
             group_id, portal_id = group_id_portal
+            from cosinnus.core.registries.group_models import group_model_registry # must be lazy!
             group_cls = group_model_registry.get(group_type)
             try:
                 group = CosinnusGroup.objects.get_by_id(id=group_id, portal_id=portal_id)
@@ -910,6 +912,7 @@ class CosinnusPermanentRedirect(models.Model):
     
     @classmethod
     def create_for_pattern(cls, _portal, _type, _slug, to_group):
+        from cosinnus.core.registries.group_models import group_model_registry # must be lazy!
         group_type = group_model_registry.get_url_key_by_type(_type)
         try:
             with transaction.commit_on_success():
