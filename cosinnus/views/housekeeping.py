@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q
 from cosinnus.views.profile import delete_userprofile
 from cosinnus.utils.group import move_group_content as move_group_content_utils
+from cosinnus.models.widget import WidgetConfig
 
 
 def housekeeping(request):
@@ -66,6 +67,7 @@ def delete_spam_users(request):
     ret += '<br/><br/><br/>Deleted %d Users<br/><br/>' % deleted_user_count + user_csv
     return HttpResponse(ret)
 
+
 def move_group_content(request, fromgroup, togroup):
     """ access to function for moving group content from one group to another """
     if not request.user.is_superuser:
@@ -78,3 +80,22 @@ def move_group_content(request, fromgroup, togroup):
     return HttpResponse("<br/>".join(logs))
         
         
+def recreate_all_group_widgets(request):
+    """ Resets all CosinnusGroup Dashboard Widget Configurations to their default
+        by deleting and recreating them. """
+    if not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    
+    # delete all widget configs
+    WidgetConfig.objects.all().delete()
+    
+    # create all default widgets for all groups
+    groups_ids = []
+    all_groups = CosinnusGroup.objects.all()
+    for group in all_groups:
+        create_initial_group_widgets(None, group)
+        groups_ids.append(str(group.id))
+    
+    return HttpResponse("The following groups were updated:<br/><br/>" + "<br/>".join(groups_ids))
+        
+
