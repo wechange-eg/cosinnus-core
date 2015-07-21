@@ -54,12 +54,14 @@ admin.site.register(CosinnusGroupMembership, MembershipAdmin)
 
 class PermanentRedirectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
     list_display = ('to_group', 'from_slug', 'from_type', 'from_portal',)
+    list_filter = ('from_portal', 'from_slug', 'to_group')
     search_fields = ('to_group__name', )
     
     def queryset(self, request):
         """ For non-admins, only show the routepoints from their caravan """
         qs = super(PermanentRedirectAdmin, self).queryset(request)
-        qs = qs.filter(from_portal=CosinnusPortal.get_current())
+        # filter for current portal only, or not
+        # qs = qs.filter(from_portal=CosinnusPortal.get_current())
         return qs
     
 admin.site.register(CosinnusPermanentRedirect, PermanentRedirectAdmin)
