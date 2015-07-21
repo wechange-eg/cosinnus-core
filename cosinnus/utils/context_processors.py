@@ -11,6 +11,7 @@ from cosinnus.models.serializers.profile import UserSimpleSerializer
 from postman.models import Message
 import json
 from cosinnus.core.registries.group_models import group_model_registry
+from cosinnus.models.group import CosinnusPortal
 
 
 def settings(request):
@@ -87,4 +88,5 @@ def cosinnus(request):
         'COSINNUS_UNREAD_MESSAGE_COUNT': unread_count,
         'COSINNUS_STREAM_UNSEEN_COUNT': stream_unseen_count,
         'COSINNUS_CURRENT_LANGUAGE': get_language(),
+        'COSINNUS_CURRENT_PORTAL': CosinnusPortal.get_current().id,
     }
