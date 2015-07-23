@@ -525,7 +525,7 @@ class CosinnusGroup(models.Model):
         
         # make sure unique_aware_slugify won't come up with a slug that is already used by a 
         # PermanentRedirect pattern for an old group
-        current_portal = CosinnusPortal.get_current()
+        current_portal = self.portal or CosinnusPortal.get_current()
         from cosinnus.core.registries.group_models import group_model_registry
         group_type = group_model_registry.get_url_key_by_type(self.type)
         # we check if there exists a group redirect that occupies this slug (and which is not pointed to this group)
@@ -536,7 +536,7 @@ class CosinnusGroup(models.Model):
                 if group_id != self.id or portal_id != self.portal_id:
                     return True
             return False
-        unique_aware_slugify(self, 'name', 'slug', extra_conflict_check=extra_check, force_redo=True, portal_id=CosinnusPortal.get_current())
+        unique_aware_slugify(self, 'name', 'slug', extra_conflict_check=extra_check, force_redo=True, portal_id=current_portal)
         
         if not self.slug:
             raise ValidationError(_('Slug must not be empty.'))
@@ -557,7 +557,7 @@ class CosinnusGroup(models.Model):
             display_redirect_created_message = True
             slugs.append(self._slug)
             
-        if created:
+        if created and not self.portal:
             # set portal to current
             self.portal = CosinnusPortal.get_current()
         
