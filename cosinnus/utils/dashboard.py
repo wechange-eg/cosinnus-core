@@ -256,8 +256,11 @@ class GroupMembersWidget(DashboardWidget):
 
     @property
     def title_url(self):
+        if self.config.type == WidgetConfig.TYPE_MICROSITE:
+            return '#'
+        if self.config.group:
+            return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.config.group})
         return '#'
-    
 
 
 class GroupProjectsWidget(DashboardWidget):

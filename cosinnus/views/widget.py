@@ -113,8 +113,9 @@ def widget_detail(request, id, offset=0):
     else:
         resp = JSONResponse(data)
     resp['X-Cosinnus-Widget-Title'] = force_text(widget.title)
-    if widget.title_url is not None:
-        resp['X-Cosinnus-Widget-Title-URL'] = force_text(widget.title_url)
+    title_url = widget.title_url
+    if title_url is not None:
+        resp['X-Cosinnus-Widget-Title-URL'] = force_text(title_url)
     resp['X-Cosinnus-Widget-App-Name'] = force_text(wc.app_name)
     resp['X-Cosinnus-Widget-Widget-Name'] = force_text(wc.widget_name)
     resp['X-Cosinnus-Widget-Num-Rows-Returned'] = rows_returned
