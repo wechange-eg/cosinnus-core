@@ -80,10 +80,10 @@ def move_group_content(request, fromgroup, togroup):
     return HttpResponse("<br/>".join(logs))
         
         
-def recreate_all_group_widgets(request):
+def recreate_all_group_widgets(request=None):
     """ Resets all CosinnusGroup Dashboard Widget Configurations to their default
         by deleting and recreating them. """
-    if not request.user.is_superuser:
+    if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     
     # delete all widget configs
