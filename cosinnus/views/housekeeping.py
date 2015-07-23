@@ -80,7 +80,7 @@ def move_group_content(request, fromgroup, togroup):
     return HttpResponse("<br/>".join(logs))
         
         
-def recreate_all_group_widgets(request=None):
+def recreate_all_group_widgets(request=None, verbose=False):
     """ Resets all CosinnusGroup Dashboard Widget Configurations to their default
         by deleting and recreating them. """
     if request and not request.user.is_superuser:
@@ -95,6 +95,8 @@ def recreate_all_group_widgets(request=None):
     for group in all_groups:
         create_initial_group_widgets(None, group)
         groups_ids.append(str(group.id))
+        if verbose:
+            print ">>> recreated widget config for group id", group.id
     
     return HttpResponse("The following groups were updated:<br/><br/>" + "<br/>".join(groups_ids))
         
