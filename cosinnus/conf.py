@@ -95,7 +95,7 @@ class CosinnusConf(AppConf):
     # invalid entries do not produce errors
     INITIAL_GROUP_WIDGETS = [
         #(app_name, widget_name, options),
-        ("note", "detailed_news_list", {'amount':'10', 'sort_field':'1'}),
+        ("note", "detailed_news_list", {'amount':'3', 'sort_field':'1'}),
         ("event", "upcoming", {'amount':'5', 'sort_field':'2'}),
         ("todo", "mine", {'amount':'5', 'amount_subtask':'2', 'sort_field':'3'}),
         ("etherpad", "latest", {'amount':'5', 'sort_field':'4'}),
