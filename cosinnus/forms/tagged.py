@@ -158,7 +158,7 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
                 # got tagged freshly, for notification purposes
                 # sadly queryset subtraction is not implemented optimally in django,
                 # so since we hit the db anyways, we might as well subtract the lists 
-                persons_before = set(media_tag.persons.all())
+                persons_before = set(media_tag.persons.all()) if media_tag.id else set()
                 
                 # We first save the media tag so that we can use it's id and
                 # assign it to the taggable object, since Django can't handle
