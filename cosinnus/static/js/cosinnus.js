@@ -984,46 +984,46 @@
 	            singleFileUploads: false,
 	            add: function (e, data) {
 	                if (!data.files || data.files.length != 1) {
-	                    alert('Upload is only supported for one image file at once!');
+	                    alert('Es kann nur eine Datei auf einmal hochgeladen werden!');
 	                    return;
 	                }
-	                var file = data.files[0];
-	                /*
-	                if (file.size == 0 || file.size > HIVESETTING_MAX_IMAGE_UPLOAD_SIZE) {
-	                    alert('Upload of images is only supported up to '+HIVESETTING_MAX_IMAGE_UPLOAD_SIZE/1048576+' MB! (Yours was '+Math.round(parseInt(file.size)/10000) / 100 +' MB)');
-	                    return;
-	                }
+	                /* var file = data.files[0];
+	                 * if (file.size == 0 || file.size > SETTING_MAX_IMAGE_UPLOAD_SIZE) {
+	                 *     alert('Upload of images is only supported up to '+SETTING_MAX_IMAGE_UPLOAD_SIZE/1048576+' MB! (Yours was '+Math.round(parseInt(file.size)/10000) / 100 +' MB)');
+	                 *     return;
+	                 * } 
 	                */
 	                
-	                //data.context = $('#'+progressbar_id);
-	                console.log('Uploading file...');
-	                console.log(e);
-	                console.log(data.context);
+	                // clone and show progress bar
+	                var proto_bar = $('#' + $(this).data('cosinnus-upload-select2-target-field') + '_progressbar');
+	                data.context = proto_bar.clone().removeAttr('id').insertAfter(proto_bar).show();
+	                
 	                data.submit();
 	            },
-	            ____progress: function (e, data) {
+	            progress: function (e, data) {
 	                var progress = parseInt(data.loaded / data.total * 100, 10);
-	                /*$('#progress .bar').css(
-	                    'width',
-	                    progress + '%'
-	                );*/
-	                //console.log('Progress: ' + progress);
-	                //console.log(data.context);
 	                data.context.find('span').css('width', progress+'%');
-	                //console.log(e);
 	            },
 	            done: function (e, data) {
-	                console.log('OMG SUCCESS');
-	                console.log(data.result);
 	                if (data.result.status == 'ok') {
-	                    //console.log('rendering');
-	                } else if (data.result.status == 'error') {
-	                    alert('The image you uploaded was too large or invalid!');
-	                } else {
-	                    alert('There was an unexpected error when uploading your image. Sorry!');
+	                    // we act like we had just typed the uploaded file's name in the select2 field
+	                    // and had clicked the result in the select2 result dropdown 
+	                    // by directly interfacing with the select2 object on that field
+	                    var select2_obj = $('#s2id_' + $(this).data('cosinnus-upload-select2-target-field')).data('select2');
+	                    if (!select2_obj) {
+	                        alert('Upload complete but the file could not be added to the field. Type in the filename to attach it!')
+	                    }
+	                    select2_obj.onSelect(data.result.select2_data);
+	                    
+	                } else if (data.result.status == 'denied') {
+                        alert('Die Datei die hochgeladen wurde war zu groß oder nicht für den Upload zugelassen!');
+	                } else if (data.result.status == 'invalid') {
+                        alert('Die Datei die hochgeladen wurde war zu groß oder nicht für den Upload zugelassen!');
+                    } else {
+	                    alert('Es gab einen unbekannten Fehler beim hochladen. Wir werden das Problem umgehend beheben!');
 	                }
 
-	                data.context.remove();
+	                data.context.remove(); // remove progress bar
 	            }
 	        });
 	    },

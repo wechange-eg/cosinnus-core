@@ -338,3 +338,56 @@ a.portal-inlink:hover img {
 .form-control-focus-emphasized:focus {
     background-color:white; color:rgb(51,51,51);
 }
+
+
+.progressbar {
+    height: 14px; 
+    width: 160px;
+    position: relative;
+    background: #FFF;
+    border: 1px solid #333;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    
+    span {
+        display: block;
+        height: 12px;
+           -webkit-border-top-right-radius: 2px;
+        -webkit-border-bottom-right-radius: 2px;
+               -moz-border-radius-topright: 2px;
+            -moz-border-radius-bottomright: 2px;
+                   border-top-right-radius: 2px;
+                border-bottom-right-radius: 2px;
+            -webkit-border-top-left-radius: 4px;
+         -webkit-border-bottom-left-radius: 4px;
+                -moz-border-radius-topleft: 4px;
+             -moz-border-radius-bottomleft: 4px;
+                    border-top-left-radius: 4px;
+                 border-bottom-left-radius: 4px;
+        background-color: $app-files-color;
+        position: relative;
+        overflow: hidden;
+    }
+}
+
+.file-upload-overlay {
+    position: relative;
+    overflow: hidden;
+    float: right;
+    clear: right;
+    display: inline;
+    padding-top: 2px;
+    
+    input[type="file"] {
+        display: inline;
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: 0;
+        font-size: 100px;
+        filter: alpha(opacity=0);
+        cursor: pointer;" 
+    }
+}
+
