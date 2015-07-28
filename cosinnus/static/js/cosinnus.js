@@ -976,6 +976,58 @@
 
 		},
 		
+
+	    initFileUpload: function() {
+
+	        $('#fileupload').fileupload({
+	            dataType: 'json',
+	            singleFileUploads: false,
+	            add: function (e, data) {
+	                if (!data.files || data.files.length != 1) {
+	                    alert('Upload is only supported for one image file at once!');
+	                    return;
+	                }
+	                var file = data.files[0];
+	                /*
+	                if (file.size == 0 || file.size > HIVESETTING_MAX_IMAGE_UPLOAD_SIZE) {
+	                    alert('Upload of images is only supported up to '+HIVESETTING_MAX_IMAGE_UPLOAD_SIZE/1048576+' MB! (Yours was '+Math.round(parseInt(file.size)/10000) / 100 +' MB)');
+	                    return;
+	                }
+	                */
+	                
+	                //data.context = $('#'+progressbar_id);
+	                console.log('Uploading file...');
+	                console.log(e);
+	                console.log(data.context);
+	                data.submit();
+	            },
+	            ____progress: function (e, data) {
+	                var progress = parseInt(data.loaded / data.total * 100, 10);
+	                /*$('#progress .bar').css(
+	                    'width',
+	                    progress + '%'
+	                );*/
+	                //console.log('Progress: ' + progress);
+	                //console.log(data.context);
+	                data.context.find('span').css('width', progress+'%');
+	                //console.log(e);
+	            },
+	            done: function (e, data) {
+	                console.log('OMG SUCCESS');
+	                console.log(data.result);
+	                if (data.result.status == 'ok') {
+	                    //console.log('rendering');
+	                } else if (data.result.status == 'error') {
+	                    alert('The image you uploaded was too large or invalid!');
+	                } else {
+	                    alert('There was an unexpected error when uploading your image. Sorry!');
+	                }
+
+	                data.context.remove();
+	            }
+	        });
+	    },
+		
 		/** Enables toggling content by clicking a button.
          *    Set this up by giving your button elements: 
          *    - a data-id="<num>", different for each
@@ -1154,5 +1206,6 @@ $(function() {
 	$.cosinnus.multilineEllipsis();
 	$.cosinnus.autogrow();
 	$.cosinnus.map();
+	$.cosinnus.initFileUpload();
 });
 
