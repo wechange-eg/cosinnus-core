@@ -242,6 +242,9 @@ class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
     """
     is_container = models.BooleanField(
         blank=False, null=False, default=False, editable=True)
+    special_type = models.CharField(
+        help_text='A special folder appears differently on the site and cannot be deleted by users',
+        blank=True, null=True, default=None, editable=False, max_length=8)
     path = models.CharField(_('Path'),
         blank=False, null=False, default='/', max_length=100)
 
