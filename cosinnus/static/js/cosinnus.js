@@ -882,10 +882,17 @@
 
 		buttonHref : function() {
 			// allow href attribute for buttons
-			$('body').on('click','button,div',function() {
-				if ($(this).attr('href')) {
-					$(location).attr("href", $(this).attr('href'));
+			$('body').on('click','button,div',function() { // for href divs
+			    var $this = $(this);
+				if ($this.attr('href') && !($this.attr('data-lightbox'))) {
+					$(location).attr("href", $this.attr('href'));
 				}
+			});
+			// don't use the div's href link if an inner <a> element was clicked!
+			$('body').on('click', 'button[href] a[href],div[href] a[href]', function(e) {
+		        $(location).attr("href", $(this).attr('href'));
+		        e.preventDefault();
+		        return false;
 			});
 
 			// Disable all nonsense links <a href="#">
