@@ -885,12 +885,21 @@
 			$('body').on('click','button,div',function() { // for href divs
 			    var $this = $(this);
 				if ($this.attr('href') && !($this.attr('data-lightbox'))) {
-					$(location).attr("href", $this.attr('href'));
+				    if ($this.attr('target') == '_blank') {
+	                    window.open($(this).attr('href'), '_blank');
+	                } else {
+	                    $(location).attr("href", $(this).attr('href'));
+	                }
 				}
 			});
 			// don't use the div's href link if an inner <a> element was clicked!
 			$('body').on('click', 'button[href] a[href],div[href] a[href]', function(e) {
-		        $(location).attr("href", $(this).attr('href'));
+			    var $this = $(this);
+			    if ($this.attr('target') == '_blank') {
+			        window.open($(this).attr('href'), '_blank');
+			    } else {
+			        $(location).attr("href", $(this).attr('href'));
+			    }
 		        e.preventDefault();
 		        return false;
 			});

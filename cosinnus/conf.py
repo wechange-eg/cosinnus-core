@@ -84,6 +84,9 @@ class CosinnusConf(AppConf):
     # the default send_mail sender email
     DEFAULT_FROM_EMAIL = 'noreply@example.com'
     
+    # files of these mime types will always open within the browser when download is clicked
+    FILE_NON_DOWNLOAD_MIMETYPES = ['application/pdf',]
+    
     #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = 60 * 60 * 24
     
