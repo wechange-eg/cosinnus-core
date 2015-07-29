@@ -609,12 +609,12 @@ msgstr "Dateien"
 #: .\templates\cosinnus\dashboard.html.py:72
 msgctxt "Calendar"
 msgid "Event"
-msgstr "Termin"
+msgstr "Veranstaltung"
 
 #: .\templates\cosinnus\dashboard.html.py:72
 msgctxt "Calendar"
 msgid "Events"
-msgstr "Termine"
+msgstr "Veranstaltungen"
 
 #: .\templates\cosinnus\dashboard.html.py:81
 msgid "Todo"
@@ -902,7 +902,7 @@ msgstr "Nicht eingeloggt"
 #: .\templates\cosinnus\not_logged_in_alert.html.py:6
 msgid "You cannot create or edit events until you are logged in!"
 msgstr ""
-"Sie können keine Termine anlegen oder bearbeiten bis sie sich einloggen."
+"Sie können keine Veranstaltungen anlegen oder bearbeiten bis sie sich einloggen."
 
 #: .\templates\cosinnus\search.html.py:5 .\templates\cosinnus\search.html.py:6
 #: .\templates\cosinnus\search.html.py:279
