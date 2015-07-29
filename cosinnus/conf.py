@@ -122,6 +122,14 @@ class CosinnusConf(AppConf):
         
     ]
     
+    # all uploaded cosinnus images are scaled down on the website  (except direct downloads)
+    # this is the maximum scale (at least one dimension fits) for any image
+    IMAGE_MAXIMUM_SIZE_SCALE = (800, 800) 
+    
+    # this is the thumbnail size for small image previews
+    IMAGE_THUMBNAIL_SIZE_SCALE = (80, 80)
+    
+    
     # widgets listed here will be created for the user dashboard upon user creation.
     # this will check if the cosinnus app is installed and if the widget is registered, so
     # invalid entries do not produce errors
