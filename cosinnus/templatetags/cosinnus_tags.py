@@ -169,6 +169,13 @@ def cosinnus_group_url_path(context, group=None):
     else:
         return group_model_registry.get_default_group_key()
 
+
+def _appsmenu_apps_sort_key(app_name):
+    try:
+        return settings.COSINNUS_APPS_MENU_ORDER.index(app_name)
+    except Exception, e:
+        return 999
+
 @register.simple_tag(takes_context=True)
 def cosinnus_menu(context, template="cosinnus/navbar.html"):
     if 'request' not in context:
@@ -208,6 +215,8 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
                 'url': url,
                 'app': app,
             })
+            
+        apps = sorted(apps, key=lambda x: _appsmenu_apps_sort_key(x['app']))
         context.update({
             'apps': apps,
             'app_nav': True,

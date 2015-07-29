@@ -68,6 +68,15 @@ class CosinnusConf(AppConf):
     # The default title for all pages unless the title block is overwritten. 
     # This is translated through a {% trans %} tag.
     BASE_PAGE_TITLE_TRANS = 'Cosinnus'
+    
+    # the order the apps will be displayed in the cosinnus_menu tag appsmenu.html
+    APPS_MENU_ORDER = [
+        'cosinnus_note',
+        'cosinnus_event',
+        'cosinnus_todo',
+        'cosinnus_etherpad',
+        'cosinnus_file',
+    ]
 
     # These are the default values for the bootstrap3-datetime-picker and
     # are translated in `cosinnus/formats/LOCALE/formats.py`

@@ -45,16 +45,7 @@
                 <div class="multiline-ellipsis-prop"></div>
                 <div class="multiline-ellipsis-main">
                     {% if user.pk in group.members or user in group.admins or not user.is_authenticated %}
-                    
-                        {% if "etherpad" in object_counts %}
-                            <div class="dashboard-header-link app-etherpad">
-                                <a href="{% group_url 'cosinnus:etherpad:list' group=group %}">
-                                    <i class="fa fa-file-text-o"></i>
-                                    <span>{{ object_counts.etherpad }}</span>
-                                    {% if object_counts.etherpad == 1 %}{% trans "Etherpad" %}{% else %}{% trans "Etherpads" %}{% endif %}
-                                </a>
-                            </div>
-                        {% endif %}
+                    	
                         {% if "file" in object_counts %}
                             <div class="dashboard-header-link app-files">
                                 <a href="{% group_url 'cosinnus:file:list' group=group %}">
@@ -64,12 +55,12 @@
                                 </a>
                             </div>
                         {% endif %}
-                        {% if "event" in object_counts %}
-                            <div class="dashboard-header-link app-calendar">
-                                <a href="{% group_url 'cosinnus:event:list' group=group %}">
-                                    <i class="fa fa-calendar"></i>
-                                    <span>{{ object_counts.event }}</span>
-                                    {% if object_counts.event == 1 %}{% trans "Event" context "Calendar" %}{% else %}{% trans "Events" context "Calendar" %}{% endif %}
+                        {% if "etherpad" in object_counts %}
+                            <div class="dashboard-header-link app-etherpad">
+                                <a href="{% group_url 'cosinnus:etherpad:list' group=group %}">
+                                    <i class="fa fa-file-text-o"></i>
+                                    <span>{{ object_counts.etherpad }}</span>
+                                    {% if object_counts.etherpad == 1 %}{% trans "Etherpad" %}{% else %}{% trans "Etherpads" %}{% endif %}
                                 </a>
                             </div>
                         {% endif %}
@@ -79,6 +70,15 @@
                                     <i class="fa fa-tasks"></i>
                                     <span>{{ object_counts.todo }}</span>
                                     {% if object_counts.todo == 1 %}{% trans "Todo" %}{% else %}{% trans "Todos" %}{% endif %}
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if "event" in object_counts %}
+                            <div class="dashboard-header-link app-calendar">
+                                <a href="{% group_url 'cosinnus:event:list' group=group %}">
+                                    <i class="fa fa-calendar"></i>
+                                    <span>{{ object_counts.event }}</span>
+                                    {% if object_counts.event == 1 %}{% trans "Event" context "Calendar" %}{% else %}{% trans "Events" context "Calendar" %}{% endif %}
                                 </a>
                             </div>
                         {% endif %}
