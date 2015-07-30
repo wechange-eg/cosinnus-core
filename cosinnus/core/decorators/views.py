@@ -215,8 +215,17 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
             # this is why almost every BaseTaggableObject's View has a .group attribute:
             setattr(self, group_attr, group)
             
+            
+            requested_object = None
+            try:
+                requested_object = self.get_object()
+            except (AttributeError, TypeError):
+                pass
+            
+            obj_public = requested_object and hasattr(requested_object, 'media_tag') \
+                    and requested_object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
             # catch anyonymous users trying to naviagte to private groups (else self.get_object() throws a Http404!)
-            if not group.public and not user.is_authenticated():
+            if not (obj_public or group.public or user.is_authenticated()):
                 return redirect_to_not_logged_in(request, view=self)
             
             # if the user isn't allowed to read the group, he will never be allowed to read the object, 
@@ -227,16 +236,6 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
             deactivated_app_error = _check_deactivated_app_access(self, group, request)
             if deactivated_app_error:
                 return deactivated_app_error
-            
-            requested_object = None
-            try:
-                requested_object = self.get_object()
-            except (AttributeError, TypeError):
-                pass
-            
-            obj_public = requested_object and requested_object.media_tag and requested_object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
-            if not (obj_public or group.public or user.is_authenticated()):
-                return redirect_to_not_logged_in(request, view=self)
             
             if requested_object:
                 if check_object_read_access(requested_object, user):

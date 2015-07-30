@@ -32,6 +32,11 @@ class RequireReadMixin(object):
     Mixing to ease the use of :meth:`require_read_access`.
 
     .. seealso:: :class:`RequireAdminMixin`, :class:`RequireWriteMixin`, :class:`RequireCreateObjectsInMixin`
+    
+    Note: Accessing an object directly without permissions will ALWAYS result in a Http404 from get_object().
+          This is because get_queryset() has already filtered the queryset for permissions as well as for 
+          mismatching slug objects, so we have no way of knowing why the queryset was empty inside of 
+          get_object().
     """
 
     @require_read_access()
