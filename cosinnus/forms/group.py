@@ -6,7 +6,7 @@ from django import forms
 from awesome_avatar import forms as avatar_forms
 
 from cosinnus.models.group import (CosinnusGroupMembership,
-    MEMBERSHIP_MEMBER, CosinnusProject, CosinnusSociety)
+    MEMBERSHIP_MEMBER, CosinnusProject, CosinnusSociety, CosinnusPortal)
 from cosinnus.core.registries.apps import app_registry
 
 
@@ -35,8 +35,16 @@ class CleanDeactivatedAppsMixin(object):
         deactivated_apps = [option_app for option_app in deactivatable_apps if not option_app in active_apps]
         return ','.join(deactivated_apps)
 
+class AsssignPortalMixin(object):
+    """ Assign current portal on save when created """
+    
+    def save(self, **kwargs):
+        if self.instance.pk is None:  
+            self.instance.portal = CosinnusPortal.get_current()
+        return super(AsssignPortalMixin, self).save(**kwargs)
 
-class _CosinnusProjectForm(CleanDeactivatedAppsMixin, forms.ModelForm):
+
+class _CosinnusProjectForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
     
@@ -49,14 +57,14 @@ class _CosinnusProjectForm(CleanDeactivatedAppsMixin, forms.ModelForm):
         self.fields['parent'].queryset = CosinnusSociety.objects.all_in_portal()
         
 
-class _CosinnusSocietyForm(CleanDeactivatedAppsMixin, forms.ModelForm):
+class _CosinnusSocietyForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
     
     class Meta:
         fields = ('name', 'public', 'description', 'avatar', 'website', 'deactivated_apps')
         model = CosinnusSociety
-    
+        
 
 class MembershipForm(GroupKwargModelFormMixin, forms.ModelForm):
 
