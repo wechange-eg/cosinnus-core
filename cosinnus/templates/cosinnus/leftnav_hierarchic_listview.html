@@ -27,33 +27,36 @@
     {% include button_template with active=active extra_classes=button_class icon="fa-folder" icon_content=folder_size label=label href=href folder=folder.container_object %}
 {% endfor %}
 
-<form action="" name="container_form" method="post"class="form-horizontal">{% csrf_token %}
-    <div type="button" class="btn btn-default w100">
-        <ul class="media-list">
-            <li class="media">
-                <a class="pull-left" href="#">
-                    <i class="fa fa-plus"></i>
-                </a>
-                <div class="media-body media-body-form-control">
-                    {{ container_form.title.errors }}
-                    <!-- use spaces for centering. CSS padding does not work here. -->
-                    {% captureas placeholder %}{% trans "New folder name" %}{% endcaptureas %}
-                    {% render_field container_form.title class+="form-control next-button-is-for-sending" placeholder=placeholder %}
-                    <!-- next-button-is-for-sending -->
-                </div>
-            </li>
-        </ul>
-    </div>
-    <button type="submit"  name="create_container" class="btn btn-emphasized large-space" style="display: none;">
-        <ul class="media-list">
-            <li class="media">
-                <a class="pull-left" href="#">
-                    <i class="fa fa-pencil"></i>
-                </a>
-                <div class="media-body">
-                    {% trans "Create folder" %}
-                </div>
-            </li>
-        </ul>
-    </button>
-</form>
+{% if user|can_create_objects_in:group %}
+	<form action="" name="container_form" method="post"class="form-horizontal">{% csrf_token %}
+	    <div type="button" class="btn btn-default w100">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-left" href="#">
+	                    <i class="fa fa-plus"></i>
+	                </a>
+	                <div class="media-body media-body-form-control">
+	                    {{ container_form.title.errors }}
+	                    <!-- use spaces for centering. CSS padding does not work here. -->
+	                    {% captureas placeholder %}{% trans "New folder name" %}{% endcaptureas %}
+	                    {% render_field container_form.title class+="form-control next-button-is-for-sending" placeholder=placeholder %}
+	                    <!-- next-button-is-for-sending -->
+	                </div>
+	            </li>
+	        </ul>
+	    </div>
+	    <button type="submit"  name="create_container" class="btn btn-emphasized large-space" style="display: none;">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-left" href="#">
+	                    <i class="fa fa-pencil"></i>
+	                </a>
+	                <div class="media-body">
+	                    {% trans "Create folder" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+	</form>
+{% endif %}
+	
