@@ -106,6 +106,23 @@ class RequireWriteMixin(object):
         context.update({'group': self.group})
         return context
     
+
+class RequireReadWriteHybridMixin(RequireWriteMixin, RequireReadMixin):
+    """
+    Combines the functionality of 
+        :class:`RequireReadMixin` for GET requests and
+        :class:`RequireWriteMixin` for POST requests
+
+    .. seealso:: :class:`RequireAdminMixin`, :class:`RequireReadMixin`, :class:`RequireCreateObjectsInMixin`
+    """
+    
+    def dispatch(self, request, *args, **kwargs):
+        if request.method == 'GET':
+            return RequireReadMixin.dispatch(self, request, *args, **kwargs)
+        else:
+            return RequireWriteMixin.dispatch(self, request, *args, **kwargs)
+
+    
     
 class RequireCreateObjectsInMixin(object):
     """
