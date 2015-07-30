@@ -300,7 +300,7 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             
             if requested_object:
                 # editing/deleting an object, check if we are owner or staff member or group admin or site admin
-                if (obj_public and request.method == 'GET') or (check_object_write_access(requested_object, user)):
+                if check_object_write_access(requested_object, user):
                     return function(self, request, *args, **kwargs)
             else:
                 # creating a new object, check if we can create objects in the group
