@@ -54,7 +54,9 @@ class RequireReadMixin(object):
         # or BaseUserProfileModel subclass, but this is more elegant:
         if hasattr(qs.model, 'media_tag'):
             qs = filter_tagged_object_queryset_for_user(qs, self.request.user)
-            
+        
+        # very important to set self.queryset to avoid redundant re-filters
+        self.queryset = qs
         return qs
     
     
