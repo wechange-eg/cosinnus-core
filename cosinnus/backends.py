@@ -15,7 +15,7 @@ class EmailAuthBackend(ModelBackend):
     def authenticate(self, username=None, password=None):
         """ Authenticate a user based on email address as the user name. """
         try:
-            user = User.objects.get(email=username)
+            user = User.objects.get(email__iexact=username)
             if user.check_password(password):
                 return user
         except User.DoesNotExist:
