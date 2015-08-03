@@ -391,3 +391,7 @@ a.portal-inlink:hover img {
     }
 }
 
+// hides cms file icon and filesize because template can't be overwritten
+.cms-content span.file img, .cms-content span.file span.filesize {
+    display: none;
+} 
