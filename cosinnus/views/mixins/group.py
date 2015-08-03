@@ -3,11 +3,13 @@ from __future__ import unicode_literals
 
 from cosinnus.core.decorators.views import (require_read_access,
     require_write_access, require_admin_access,
-    require_create_objects_in_access)
+    require_create_objects_in_access, redirect_to_not_logged_in)
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from cosinnus.models.tagged import BaseTaggableObjectModel
 from django.core.exceptions import PermissionDenied, ImproperlyConfigured
 from django.shortcuts import redirect
+from django.http.response import Http404
+from cosinnus.utils.exceptions import CosinnusPermissionDeniedException
 
 
 class RequireAdminMixin(object):
@@ -27,16 +29,27 @@ class RequireAdminMixin(object):
         return context
 
 
+
 class RequireReadMixin(object):
     """
     Mixing to ease the use of :meth:`require_read_access`.
 
     .. seealso:: :class:`RequireAdminMixin`, :class:`RequireWriteMixin`, :class:`RequireCreateObjectsInMixin`
+    
+    Note: Accessing an object with a slug or pk that is not found will always result in two seperate DB hits,
+          because we first do a complete filter for the object, including permissions, pk, group memberships.
+          Then, if the object wasn't found, we re-do the filter without permissions to check if that was the 
+          cause, then redirect to a login page or a permission denied page. If the second query also fails to
+          match anything, we let the Http404 bubble up.
     """
 
     @require_read_access()
     def dispatch(self, request, *args, **kwargs):
-        return super(RequireReadMixin, self).dispatch(request, *args, **kwargs)
+        try:
+            ret = super(RequireReadMixin, self).dispatch(request, *args, **kwargs)
+        except CosinnusPermissionDeniedException:
+            return redirect_to_not_logged_in(request, view=self)
+        return ret 
 
     def get_context_data(self, **kwargs):
         context = super(RequireReadMixin, self).get_context_data(**kwargs)
@@ -53,9 +66,34 @@ class RequireReadMixin(object):
         # alternatively, we could check if qs.model is CosinnusGroup or BaseTaggableObjectModel subclass, 
         # or BaseUserProfileModel subclass, but this is more elegant:
         if hasattr(qs.model, 'media_tag'):
+            self.unfiltered_qs = qs
             qs = filter_tagged_object_queryset_for_user(qs, self.request.user)
             
+        # very important to set self.queryset to avoid redundant re-filters
+        self.queryset = qs
         return qs
+    
+    def get_object(self, *args, **kwargs):
+        # cache object getter because the permission mixins call this method as well as the django view
+        if hasattr(self, 'object'):
+            return self.object
+        
+        try:
+            obj = super(RequireReadMixin, self).get_object(*args, **kwargs)
+        except Http404:
+            # we failed to retrieve the object. 
+            # if we did permission filtering, try to determine if it was because of a permission error
+            unfiltered_qs = getattr(self, 'unfiltered_qs', None)
+            if unfiltered_qs:
+                kwargs.update({'queryset': unfiltered_qs})
+                # if no permission filtering was the cause, this will just bubble as a Http404 (as it should)
+                super(RequireReadMixin, self).get_object(*args, **kwargs)
+                # otherwise, there is an object, but the user may not access it. redirect to login
+                raise CosinnusPermissionDeniedException()
+        
+        self.object = obj
+        return obj
+        
     
     
 class RequireReadOrRedirectMixin(RequireReadMixin):
@@ -103,6 +141,23 @@ class RequireWriteMixin(object):
         context = super(RequireWriteMixin, self).get_context_data(**kwargs)
         context.update({'group': self.group})
         return context
+    
+
+class RequireReadWriteHybridMixin(RequireWriteMixin, RequireReadMixin):
+    """
+    Combines the functionality of 
+        :class:`RequireReadMixin` for GET requests and
+        :class:`RequireWriteMixin` for POST requests
+
+    .. seealso:: :class:`RequireAdminMixin`, :class:`RequireReadMixin`, :class:`RequireCreateObjectsInMixin`
+    """
+    
+    def dispatch(self, request, *args, **kwargs):
+        if request.method == 'GET':
+            return RequireReadMixin.dispatch(self, request, *args, **kwargs)
+        else:
+            return RequireWriteMixin.dispatch(self, request, *args, **kwargs)
+
     
     
 class RequireCreateObjectsInMixin(object):

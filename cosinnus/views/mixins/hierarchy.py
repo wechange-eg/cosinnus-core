@@ -29,21 +29,20 @@ class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
     
     def get_context_data(self, *args, **kwargs):
         # on form invalids, we need to retrieve the objects
-        if not hasattr(self, 'object_list'):
-            self.object_list = super(HierarchicalListCreateViewMixin, self).get_queryset()
-        
+        self.queryset = getattr(self, 'queryset', None) or self.get_queryset()
+            
         context = super(HierarchicalListCreateViewMixin, self).get_context_data(**kwargs)
         path = None
         slug = self.kwargs.pop('slug', None)
         if slug:
             try:
-                path = self.object_list.get(slug=slug).path
+                path = self.queryset.get(slug=slug).path
             except self.model.DoesNotExist:
                 raise Http404()
         root = path or '/'
         
         # convert qs to list
-        sorted_object_list = list(self.object_list)
+        sorted_object_list = list(self.queryset)
         # sort case insensitive by title, ignoring umlauts unless we already have a filter in place
         if not self.request.GET.get('o', ''):
             sorted_object_list.sort(cmp=locale.strcoll, key=lambda x: x.title)

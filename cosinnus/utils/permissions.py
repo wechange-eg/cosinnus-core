@@ -65,6 +65,9 @@ def check_object_read_access(obj, user):
             obj_is_visible = obj.creator == user or \
                     obj.media_tag.visibility == BaseTagObject.VISIBILITY_ALL or \
                     (obj.media_tag.visibility == BaseTagObject.VISIBILITY_GROUP and (is_member or is_admin))
+        elif issubclass(obj.__class__, BaseHierarchicalTaggableObjectModel) and obj.is_container:
+            # folders do not have a media tag and inherit visibility from the group
+            obj_is_visible = group.public or is_member or is_admin
         else:
             # catch error cases where no media_tag was created. that case should break, but not here.
             obj_is_visible = is_member or is_admin

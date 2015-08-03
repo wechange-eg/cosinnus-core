@@ -17,6 +17,7 @@ from django.core.exceptions import PermissionDenied
 from cosinnus.core.registries.group_models import group_model_registry
 from django.contrib.auth.models import User
 from cosinnus.models.tagged import BaseTagObject
+from cosinnus.utils.exceptions import CosinnusPermissionDeniedException
 
 import logging
 logger = logging.getLogger('cosinnus')
@@ -215,28 +216,27 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
             # this is why almost every BaseTaggableObject's View has a .group attribute:
             setattr(self, group_attr, group)
             
-            # catch anyonymous users trying to naviagte to private groups (else self.get_object() throws a Http404!)
-            if not group.public and not user.is_authenticated():
-                return redirect_to_not_logged_in(request, view=self)
-            
-            # if the user isn't allowed to read the group, he will never be allowed to read the object, 
-            # so check this before get_object returns a 404:
-            if not check_object_read_access(group, user):
-                return redirect_to_403(request, self)
-            
-            deactivated_app_error = _check_deactivated_app_access(self, group, request)
-            if deactivated_app_error:
-                return deactivated_app_error
             
             requested_object = None
             try:
                 requested_object = self.get_object()
             except (AttributeError, TypeError):
                 pass
+            except CosinnusPermissionDeniedException:
+                if not user.is_authenticated():
+                    return redirect_to_not_logged_in(request, view=self)
+                else:
+                    return redirect_to_403(request, self)
             
-            obj_public = requested_object and requested_object.media_tag and requested_object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
+            obj_public = requested_object and getattr(requested_object, 'media_tag', None) \
+                    and requested_object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
+            # catch anyonymous users trying to naviagte to private groups (else self.get_object() throws a Http404!)
             if not (obj_public or group.public or user.is_authenticated()):
                 return redirect_to_not_logged_in(request, view=self)
+            
+            deactivated_app_error = _check_deactivated_app_access(self, group, request)
+            if deactivated_app_error:
+                return deactivated_app_error
             
             if requested_object:
                 if check_object_read_access(requested_object, user):
@@ -294,13 +294,13 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             except (AttributeError, TypeError):
                 pass
             
-            obj_public = requested_object and getattr(requested_object, 'media_tag', None) and requested_object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
-            if not (obj_public or user.is_authenticated()):
+            # objects can never be written by non-logged in members
+            if not user.is_authenticated():
                 return redirect_to_not_logged_in(request, view=self)
             
             if requested_object:
                 # editing/deleting an object, check if we are owner or staff member or group admin or site admin
-                if (obj_public and request.method == 'GET') or (check_object_write_access(requested_object, user)):
+                if check_object_write_access(requested_object, user):
                     return function(self, request, *args, **kwargs)
             else:
                 # creating a new object, check if we can create objects in the group
