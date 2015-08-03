@@ -20,6 +20,7 @@ from cosinnus.models.tagged import BaseTagObject
 from cosinnus.utils.exceptions import CosinnusPermissionDeniedException
 
 import logging
+from cosinnus.models.group import CosinnusPortal
 logger = logging.getLogger('cosinnus')
 
 
@@ -50,7 +51,9 @@ def get_group_for_request(group_name, request):
     
     if group_class:
         try:
-            group = group_class.objects.get(slug=group_name)
+            # support cross portal tokens on POSTs
+            portal_id = int(request.POST.get('cosinnus_cross_portal', CosinnusPortal.get_current().id))
+            group = group_class.objects.get(slug=group_name, portal_id=portal_id)
             if type(group) is group_class:
                 return group
             else:

@@ -430,6 +430,22 @@ def cosinnus_user_token(context, token_name, request=None):
     return 'user=%s&token=%s' % (request.user.id, token)
 
 
+@register.simple_tag(takes_context=True)
+def cosinnus_cross_portal_token(context, portal):
+    """
+    Returns a token that will force the URL group resolution 
+    (``cosinnus.core.decorators.views.get_group_for_request()``) into another portal on POST requests,
+    while still being able to post to the domain of the current portal.
+    This is very useful to avoid CSRF failures when posting i.e. comments on Notes from another
+    CosinnusPortal's group that appeared in a user's stream in another portal.
+    """
+    if type(portal) is CosinnusPortal:
+        portal_id = portal.id
+    else:
+        portal_id = int(portal)
+    return '<input type="hidden" name="cosinnus_cross_portal" value="%s">' % portal_id
+
+
 def group_aware_url_name(view_name, group_slug, portal_id=None):
     """ Modifies a URL name that points to a URL within a CosinnusGroup so that the URL
         points to the correct sub-url of the type of the CosinnusGroup Model for the given
@@ -462,6 +478,7 @@ class GroupURLNode(URLNode):
         ~Should~ be thread-safe.
         
         :param group: The group slug for the group's url you are targeting
+        :param portal_id: (optional) can override the portal used.
         :ignoreErrors: (optional) if set to True, this tag will return silently '' instead of throwing a 
             DoesNotExist exception when the targeted group is not found
     """
@@ -473,15 +490,26 @@ class GroupURLNode(URLNode):
         else:
             self.view_name = copy(self.base_view_name)
         view_name = self.view_name.resolve(context)
+        
         group_arg = self.kwargs["group"].resolve(context)
         group_slug = ""
-        portal_id = None
-        foreign_portal = None    
+        foreign_portal = None
+        portal_id = getattr(self, '_portal_id', None)
+        force_local_domain = getattr(self, '_force_local_domain', False)
         
         try:
             # the portal id if given to the tag can override the group's portal
-            portal_id = self.kwargs["portal_id"].resolve(context)
+            self._portal_id = self.kwargs["portal_id"].resolve(context)
+            portal_id = self._portal_id
             del self.kwargs["portal_id"]
+        except KeyError:
+            pass
+        
+        try:
+            # this will retain the local domain. useful for avoiding POSTs to cross-portal domains and CSRF-failing
+            self._force_local_domain = bool(self.kwargs["force_local_domain"].resolve(context))
+            force_local_domain = self._force_local_domain
+            del self.kwargs["force_local_domain"]
         except KeyError:
             pass
         
@@ -539,7 +567,7 @@ class GroupURLNode(URLNode):
             if patched_group_slug_arg:
                 self.kwargs['group'] = patched_group_slug_arg
             
-            if foreign_portal:
+            if foreign_portal and not force_local_domain:
                 domain = get_domain_for_portal(foreign_portal)
                 # attach to either output or given "as" variable
                 if self.asvar:
