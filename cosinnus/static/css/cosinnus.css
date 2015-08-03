@@ -3023,3 +3023,6 @@ a.portal-inlink:hover img {
     cursor: pointer;" 
 }
 
+.cms-content span.file img, .cms-content span.file span.filesize {
+    display: none;
+} 
