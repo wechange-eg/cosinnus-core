@@ -17,6 +17,7 @@ from django.core.exceptions import PermissionDenied
 from cosinnus.core.registries.group_models import group_model_registry
 from django.contrib.auth.models import User
 from cosinnus.models.tagged import BaseTagObject
+from cosinnus.utils.exceptions import CosinnusPermissionDeniedException
 
 import logging
 logger = logging.getLogger('cosinnus')
@@ -221,17 +222,17 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
                 requested_object = self.get_object()
             except (AttributeError, TypeError):
                 pass
+            except CosinnusPermissionDeniedException:
+                if not user.is_authenticated():
+                    return redirect_to_not_logged_in(request, view=self)
+                else:
+                    return redirect_to_403(request, self)
             
             obj_public = requested_object and getattr(requested_object, 'media_tag', None) \
                     and requested_object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
             # catch anyonymous users trying to naviagte to private groups (else self.get_object() throws a Http404!)
             if not (obj_public or group.public or user.is_authenticated()):
                 return redirect_to_not_logged_in(request, view=self)
-            
-            # if the user isn't allowed to read the group, he will never be allowed to read the object, 
-            # so check this before get_object returns a 404:
-            if not check_object_read_access(group, user):
-                return redirect_to_403(request, self)
             
             deactivated_app_error = _check_deactivated_app_access(self, group, request)
             if deactivated_app_error:
