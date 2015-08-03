@@ -8,7 +8,7 @@
 
 
 <div class="btn-group w100 large-space">
-    <button type="button" class="btn btn-appnavi dropdown-toggle w100" data-toggle="dropdown">
+    <button type="button" class="btn btn-appnavi w100{% if user|has_read_access:group %} dropdown-toggle{% endif %}" {% if user|has_read_access:group %}data-toggle="dropdown"{% endif %}>
         <ul class="media-list">
             <li class="media">
                 <a class="pull-left" href="#">
@@ -16,9 +16,11 @@
                 <a class="pull-left" href="#">
                     <i class="fa fa-book"></i>
                 </a>
+                {% if user|has_read_access:group %}
                 <a class="pull-right" href="#">
                     <i class="fa fa-caret-down"></i>
                 </a>
+                {% endif %}
                 <div class="media-body">
                     {% if active_app %}
                       {% for app in apps %}
@@ -41,6 +43,8 @@
             </li>
         </ul>
     </button>
+    
+    {% if user|has_read_access:group %}
     <ul class="dropdown-menu appnavi-dropdown-menu w100" role="menu">
         <li class="app-main appnavi-listelement fine-space">
             <a href="{% group_url 'cosinnus:group-dashboard' group=group %}">
@@ -82,4 +86,5 @@
         </li>
         {% endif %}
     </ul>
+    {% endif %} 
 </div><!-- btn-group -->
