@@ -222,7 +222,7 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
             except (AttributeError, TypeError):
                 pass
             
-            obj_public = requested_object and hasattr(requested_object, 'media_tag') \
+            obj_public = requested_object and getattr(requested_object, 'media_tag', None) \
                     and requested_object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
             # catch anyonymous users trying to naviagte to private groups (else self.get_object() throws a Http404!)
             if not (obj_public or group.public or user.is_authenticated()):
@@ -293,7 +293,8 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             except (AttributeError, TypeError):
                 pass
             
-            obj_public = requested_object and getattr(requested_object, 'media_tag', None) and requested_object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
+            obj_public = requested_object and getattr(requested_object, 'media_tag', None) \
+                and requested_object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
             if not (obj_public or user.is_authenticated()):
                 return redirect_to_not_logged_in(request, view=self)
             
