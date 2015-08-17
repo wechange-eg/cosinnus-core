@@ -8,7 +8,7 @@ import six
 from django.contrib.sites.models import Site
 from django.core.cache import cache
 from django.core.exceptions import ValidationError, ImproperlyConfigured
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, MaxLengthValidator
 from django.db import models
 from django.db.models import Q
 from django.utils.encoding import python_2_unicode_compatible
@@ -22,7 +22,8 @@ from cosinnus.conf import settings
 from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.utils.functions import unique_aware_slugify,\
     clean_single_line_text
-from cosinnus.utils.files import get_group_avatar_filename
+from cosinnus.utils.files import get_group_avatar_filename,\
+    get_portal_background_image_filename
 from django.core.urlresolvers import reverse
 from django.utils.functional import cached_property
 from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
@@ -389,6 +390,20 @@ class CosinnusPortal(models.Model):
     
     protocol = models.CharField(_('Http/Https Protocol (overrides settings)'), max_length=8,
                         blank=True, null=True)
+    
+    # css fields for custom portal styles
+    background_image = models.ImageField(_('Background Image'),
+        upload_to=get_portal_background_image_filename,
+        blank=True, null=True)
+    top_color = models.CharField(_('Main color'), help_text=_('Main background color (css hex value, with or without "#")'),
+        max_length=10, validators=[MaxLengthValidator(7)],
+        blank=True, null=True)
+    bottom_color = models.CharField(_('Gradient color'), help_text=_('Bottom color for the gradient (css hex value, with or without "#")'),
+        max_length=10, validators=[MaxLengthValidator(7)],
+        blank=True, null=True)
+    extra_css = models.TextField(_('Extra CSS'), help_text=_('Extra CSS for this portal, will be applied after all other styles.'),
+        blank=True, null=True)
+    
     
     @classmethod
     def get_current(cls):
