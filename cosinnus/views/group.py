@@ -38,6 +38,7 @@ from cosinnus.forms.tagged import get_form  # circular import
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.models.tagged import BaseTagObject
 from django.shortcuts import redirect
+from django.http.response import Http404
 
 
 class SamePortalGroupMixin(object):
@@ -314,7 +315,10 @@ class FilteredGroupListView(GroupListView):
     
     def get(self, request, *args, **kwargs):
         self.group_slug = kwargs.pop('group')
-        self.filter_group = CosinnusGroup.objects.get_cached(slugs=self.group_slug)
+        try:
+            self.filter_group = CosinnusGroup.objects.get_cached(slugs=self.group_slug)
+        except CosinnusGroup.DoesNotExist:
+            raise Http404
         return super(FilteredGroupListView, self).get(request, *args, **kwargs)
     
     def get_queryset(self):
