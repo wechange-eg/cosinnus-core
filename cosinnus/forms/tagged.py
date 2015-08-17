@@ -123,7 +123,9 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
             # simply letting the validation re-fill the form with them causes an error
             # because their strings are being filled into the field that requires an id
             # because the tag string has not actually been made a tag, and so has no id            
-            if isinstance(self.data, QueryDict) and not self.is_valid() and any([(datatag not in self.forms['media_tag'].initial['tags']) for datatag in self.data.getlist('media_tag-tags')]):
+            if isinstance(self.data, QueryDict) and not self.is_valid() and \
+                 any([(datatag not in self.forms['media_tag'].initial.get('tags', [])) \
+                               for datatag in self.data.getlist('media_tag-tags')]):
                 self.data._mutable = True
                 del self.data['media_tag-tags']
                 self.data.setlist('media_tag-tags', copy(self.forms['media_tag'].initial['tags']))
