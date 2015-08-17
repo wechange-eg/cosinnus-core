@@ -1,0 +1,35 @@
+/* This file is rendered once, whenever a CosinnusPortal object changes its CSS attributes,
+ * and is then saved under ??? to be loaded as a static file in addition to the regular cosinnus CSS, and even
+ * over the cosinnus_portal_style.css file.
+ * The rendering is being done from within the CosinnusPortal model object
+*/
+
+{% if portal.top_color and portal.bottom_color %}
+body {
+  font-family: Verdana, Geneva, sans-serif;
+  background: #{{ portal.top_color }};
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #{{ portal.top_color }} 0%, #{{ portal.bottom_color }} 100%) fixed;
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #{{ portal.top_color }}), color-stop(100%, #{{ portal.bottom_color }})) fixed;
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #{{ portal.top_color }} 0%, #{{ portal.bottom_color }} 100%) fixed;
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #{{ portal.top_color }} 0%, #{{ portal.bottom_color }} 100%) fixed;
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #{{ portal.top_color }} 0%, #{{ portal.bottom_color }} 100%) fixed;
+  /* IE10+ */
+  background: linear-gradient(to bottom, #{{ portal.top_color }} 0%, #{{ portal.bottom_color }} 100%) fixed;
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{{ portal.top_color }}', endColorstr='#{{ portal.bottom_color }}',GradientType=0 ) fixed;
+  /* IE6-9 */
+}
+{% endif %}
+
+{% if portal.background_image %}
+body.cosinnus-cms {
+  background-image: url("{{ portal.background_image.url }}");
+}
+{% endif %}
+
+{{ portal.extra_css }}

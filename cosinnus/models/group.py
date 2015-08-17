@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from collections import OrderedDict
+import os
 import re
 import six
 
@@ -30,6 +31,7 @@ from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
 from cosinnus.core import signals
 from django.db.models.signals import post_delete, post_save
 from django.dispatch.dispatcher import receiver
+from django.template.loader import render_to_string
 
 from django.db import IntegrityError, transaction
 from django.contrib import messages
@@ -364,6 +366,7 @@ class CosinnusGroupMembershipManager(models.Manager):
 class CosinnusPortal(models.Model):
     
     _CURRENT_PORTAL_CACHE_KEY = 'cosinnus/core/portal/current'
+    _CUSTOM_CSS_FILENAME = 'cosinnus_custom_portal_%s_styles.css'
     
     class Meta:
         app_label = 'cosinnus'
@@ -416,7 +419,12 @@ class CosinnusPortal(models.Model):
         return portal
     
     def save(self, *args, **kwargs):
+        # clean color fields
+        self.top_color = self.top_color.replace('#', '')
+        self.bottom_color = self.bottom_color.replace('#', '')
+        
         super(CosinnusPortal, self).save(*args, **kwargs)
+        self.compile_custom_stylesheet()
         cache.delete(self._CURRENT_PORTAL_CACHE_KEY)
     
     @property
@@ -462,7 +470,29 @@ class CosinnusPortal(models.Model):
     
     def __str__(self):
         return self.name
-
+    
+    def _get_static_folder(self):
+        return os.path.join(settings.BASE_PATH, 'static') if settings.DEBUG else settings.STATIC_ROOT
+    
+    def compile_custom_stylesheet(self):
+        """ Compiles the CSS file based on this portal's style fields and saves them 
+            in the media folder """
+        if settings.DEBUG:
+            try:
+                os.makedirs(os.path.join(settings.STATIC_ROOT, 'css'))
+            except:
+                pass
+        custom_css = render_to_string('cosinnus/css/portal_custom_styles.css', dictionary={'portal': self})
+        css_file = open(os.path.join(self._get_static_folder(), 'css', self._CUSTOM_CSS_FILENAME % self.slug), 'w')
+        css_file.write(custom_css)
+        css_file.close()
+    
+    @cached_property
+    def custom_stylesheet_url(self):
+        if not os.path.isfile(os.path.join(self._get_static_folder(), 'css', self._CUSTOM_CSS_FILENAME % self.slug)):
+            self.compile_custom_stylesheet()
+        return 'css/' + self._CUSTOM_CSS_FILENAME % self.slug
+        
 
 @python_2_unicode_compatible
 class CosinnusGroup(models.Model):

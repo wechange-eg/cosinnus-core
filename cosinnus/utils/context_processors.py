@@ -91,5 +91,5 @@ def cosinnus(request):
         'COSINNUS_UNREAD_MESSAGE_COUNT': unread_count,
         'COSINNUS_STREAM_UNSEEN_COUNT': stream_unseen_count,
         'COSINNUS_CURRENT_LANGUAGE': get_language(),
-        'COSINNUS_CURRENT_PORTAL': CosinnusPortal.get_current().id,
+        'COSINNUS_CURRENT_PORTAL': CosinnusPortal.get_current(),
     }
