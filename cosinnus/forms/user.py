@@ -56,7 +56,7 @@ class UserCreationForm(DjUserCreationForm):
     def clean_email(self):
         email = self.cleaned_data.get('email')
         username = self.cleaned_data.get('username')
-        if email and UserCreationForm.Meta.model.objects.filter(email=email).exclude(username=username).count():
+        if email and UserCreationForm.Meta.model.objects.filter(email__iexact=email).exclude(username=username).count():
             raise forms.ValidationError(_('This email address already has a registered user!'))
         return email
     
@@ -88,7 +88,7 @@ class UserChangeForm(forms.ModelForm):
         
     def clean_email(self):
         email = self.cleaned_data.get('email')
-        if email and UserCreationForm.Meta.model.objects.filter(email=email).exclude(username=self.instance.username).count():
+        if email and UserCreationForm.Meta.model.objects.filter(email__iexact=email).exclude(username=self.instance.username).count():
             raise forms.ValidationError(_('This email address already has a registered user!'))
         return email
 
