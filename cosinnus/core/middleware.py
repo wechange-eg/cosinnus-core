@@ -12,6 +12,8 @@ from cosinnus.conf import settings
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 from django.db.models.loading import get_model
+from django.contrib.auth.views import logout
+from django.core.urlresolvers import reverse
 
 logger = logging.getLogger('cosinnus')
 
@@ -101,4 +103,13 @@ class GroupPermanentRedirectMiddleware(object):
             if settings.DEBUG:
                 raise
             logger.error('cosinnus.GroupPermanentRedirectMiddleware: Error while processing possible group redirect!', extra={'exception', force_text(e)})
-                    
+
+
+
+class ForceInactiveUserLogoutMiddleware(object):
+    """ This middleware will force-logout a user if his account has been disabled. """
+    
+    def process_request(self, request):
+        if request.user.is_authenticated() and not request.user.is_active:
+            messages.error(request, _('This account is no longer active. You have been logged out.'))
+            return logout(request, next_page=reverse('login'))

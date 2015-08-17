@@ -53,11 +53,8 @@ def cosinnus(request):
         :class:`~cosinnus.models.serializers.profile.UserSimpleSerializer`. If
         not authenticated it is ``False``. Both serialized to JSON.
     """
-    base_url = '{scheme}{domain}{path}'.format(
-        scheme=request.is_secure() and 'https://' or 'http://',
-        domain=request.get_host(),
-        path='/'
-    )
+    base_url = CosinnusPortal.get_current().get_domain() 
+    base_url += '' if base_url[-1] == '/' else '/'
 
     user = request.user
     if user.is_authenticated():

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-01 14:07+0200\n"
+"POT-Creation-Date: 2015-08-12 13:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -31,31 +31,31 @@ msgstr "%(number)d %(objects)s wurden erfolgreich gelöscht."
 msgid "Delete selected entries"
 msgstr "Ausgewählte Objekte löschen"
 
-#: .\admin.py:106
+#: .\admin.py:112
 msgid "The following Projects were converted to Societies:"
 msgstr "Die folgenden Projekte wurden in Gruppen umgewandelt:"
 
-#: .\admin.py:108
+#: .\admin.py:114
 msgid "Convert selected Projects to Societies"
 msgstr "Ausgewählte Projekte in Gruppen umwandeln"
 
-#: .\admin.py:139
+#: .\admin.py:145
 msgid "The following Users were added to this portal:"
 msgstr ""
 "Die folgenden Mitarbeiter_innen wurden in dieses Portal mit-aufgenommen:"
 
-#: .\admin.py:141
+#: .\admin.py:147
 #, python-format
 msgid "Add all members to current Portal (%s)"
 msgstr ""
 "Alle enthaltenen Mitarbeiter_innen ins aktuelle Portal (%s) mit-aufnehmen"
 
-#: .\admin.py:147
+#: .\admin.py:153
 msgid "In addition, the members were removed from all other Portals."
 msgstr ""
 "Zusätzlich wurden die Mitarbeiter_innen aus allen anderen Portalen entfernt."
 
-#: .\admin.py:149
+#: .\admin.py:155
 #, python-format
 msgid ""
 "Move all members to current Portal (%s) (removes all other memberships!)"
@@ -63,20 +63,20 @@ msgstr ""
 "Alle enthaltenen Mitarbeiter_innen ins aktuelle Portal (%s) verschieben "
 "(entfernt sie aus allen anderen Portalen!)"
 
-#: .\admin.py:179
+#: .\admin.py:185
 msgid "The following Societies were converted to Projects:"
 msgstr "Die folgenden Gruppen wurden in Projekte umgewandelt:"
 
-#: .\admin.py:181
+#: .\admin.py:187
 msgid "Convert selected Societies to Projects"
 msgstr "Ausgewählte Gruppen in Projekte umwandeln"
 
-#: .\admin.py:250
+#: .\admin.py:256
 #, python-format
 msgid "%d Users were deactivated successfully."
 msgstr "%d Benutzer wurden erfolgreich deaktiviert."
 
-#: .\admin.py:252
+#: .\admin.py:258
 msgid "Deactivate users (will keep all all items they created on the site)"
 msgstr ""
 "Ausgewählte Benutzer deaktivieren (deren erstellte Items bleiben auf der "
@@ -92,13 +92,17 @@ msgstr ""
 msgid "You were tagged in a post, document or other item"
 msgstr "Du wurdest in einem Beitrag, Dokument oder anderem Element markiert"
 
-#: .\core\middleware.py:78
+#: .\core\middleware.py:100
 msgid ""
 "This group/project no longer resides under the URL you entered. You have "
 "been redirected automatically to the current location."
 msgstr ""
-"Die Gruppe oder das Projekt liegt nicht länger unter der URL die du eingegeben "
-"hast. Du wurdest automatisch auf die aktuelle Adresse umgeleitet."
+"Die Gruppe oder das Projekt liegt nicht länger unter der URL die du "
+"eingegeben hast. Du wurdest automatisch auf die aktuelle Adresse umgeleitet."
+
+#: .\core\middleware.py:119
+msgid "This account is no longer active. You have been logged out."
+msgstr "Sie wurden ausgeloggt, weil dieses Benutzerkonto nicht mehr aktiv ist."
 
 #: .\core\receivers.py:25
 #, python-format
@@ -116,11 +120,11 @@ msgid ""
 msgstr ""
 "Dein Mitgliedsantrag für %(group_name)s wurde abgelehnt auf %(site_name)s."
 
-#: .\core\decorators\views.py:38
+#: .\core\decorators\views.py:39
 msgid "Please log in to access this page."
 msgstr "Bitte melde dich an um auf diese Seite zugreifen zu können."
 
-#: .\core\decorators\views.py:99
+#: .\core\decorators\views.py:100
 #, python-format
 msgid ""
 "The page you tried to access belongs to an app that has been deactivated for "
@@ -131,8 +135,8 @@ msgstr ""
 "dieser %(group_type)s deaktiviert wurde. Um sie wieder zu aktivieren kannst "
 "du dich an die/den %(group_type)s-Administrator_in wenden. "
 
-#: .\core\decorators\views.py:110 .\core\decorators\views.py:167
-#: .\core\decorators\views.py:210 .\core\decorators\views.py:275
+#: .\core\decorators\views.py:111 .\core\decorators\views.py:168
+#: .\core\decorators\views.py:211 .\core\decorators\views.py:275
 #: .\core\decorators\views.py:358 .\core\decorators\views.py:409
 msgid "No group provided"
 msgstr "Kein Projekt angegeben"
@@ -219,7 +223,7 @@ msgstr "Nächste Woche"
 msgid "Next month"
 msgstr "Nächsten Monat"
 
-#: .\forms\hierarchy.py:14 .\models\group.py:380 .\models\group.py:473
+#: .\forms\hierarchy.py:14 .\models\group.py:378 .\models\group.py:471
 msgid "Name"
 msgstr "Name"
 
@@ -312,51 +316,57 @@ msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 "Bitt einen gültigen Namen angeben. Ein Vorwärtsslash ist nicht erlaubt."
 
-#: .\models\group.py:371 .\models\group.py:470 .\models\group.py:806
+#: .\models\group.py:369 .\models\group.py:468 .\models\group.py:821
 msgid "Portal"
 msgstr ""
 
-#: .\models\group.py:372
+#: .\models\group.py:370
 msgid "Portals"
 msgstr ""
 
-#: .\models\group.py:382 .\models\group.py:475
+#: .\models\group.py:380 .\models\group.py:473
 msgid "Slug"
 msgstr "Slug"
 
-#: .\models\group.py:384 .\models\group.py:479 .\models\profile.py:148
+#: .\models\group.py:382 .\models\group.py:479 .\models\profile.py:148
 #: .\templates\cosinnus\microsite.html.py:198
 #: .\templates\cosinnus\group\group_form.html.py:221
 msgid "Description"
 msgstr "Beschreibung"
 
-#: .\models\group.py:385 .\models\group.py:482 .\models\profile.py:151
+#: .\models\group.py:383 .\models\group.py:482 .\models\profile.py:151
 #: .\templates\cosinnus\group\group_form.html.py:148
 #: .\templates\cosinnus\group\group_form.html.py:157
 #: .\templates\cosinnus\user\userprofile_form.html.py:97
 msgid "Website"
 msgstr "Webseite"
 
-#: .\models\group.py:386 .\models\group.py:483 .\models\tagged.py:42
+#: .\models\group.py:384 .\models\group.py:483 .\models\tagged.py:42
 #: .\templates\cosinnus\group\group_list.html.py:116
 msgid "Public"
 msgstr "Öffentlich"
 
-#: .\models\group.py:390
+#: .\models\group.py:388
 msgid "Associated Site"
 msgstr ""
 
-#: .\models\group.py:392
+#: .\models\group.py:390
 msgid "Http/Https Protocol (overrides settings)"
 msgstr ""
 
-#: .\models\group.py:461 .\models\tagged.py:64 .\models\tagged.py:137
+#: .\models\group.py:459 .\models\tagged.py:64 .\models\tagged.py:137
 msgid "Group"
 msgstr "Projekt"
 
-#: .\models\group.py:462
+#: .\models\group.py:460
 msgid "Society"
 msgstr "Gruppe"
+
+#: .\models\group.py:474
+msgid ""
+"Be extremely careful when changing this slug manually! There can be many "
+"side-effects (redirects breaking e.g.)!"
+msgstr ""
 
 #: .\models\group.py:476
 msgid "Group Type"
@@ -383,67 +393,68 @@ msgstr "Projekt"
 msgid "Cosinnus groups"
 msgstr "Projekte"
 
-#: .\models\group.py:527
+#: .\models\group.py:542
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
 
-#: .\models\group.py:559
+#: .\models\group.py:574
 msgid ""
 "The URL for this group has changed. A redirect from all existing URLs has "
 "automatically been created!"
 msgstr ""
 "Durch die Änderung hat sich die URL der Gruppe geändert. Eine dauerhafte "
-"Weiterleitung von der alten auf die neue Adresse wurde automatisch eingerichtet!"
+"Weiterleitung von der alten auf die neue Adresse wurde automatisch "
+"eingerichtet!"
 
-#: .\models\group.py:680
+#: .\models\group.py:695
 msgid "Cosinnus project"
 msgstr "Projekt"
 
-#: .\models\group.py:681
+#: .\models\group.py:696
 msgid "Cosinnus projects"
 msgstr "Projekte"
 
-#: .\models\group.py:713
+#: .\models\group.py:728
 msgid "Cosinnus society"
 msgstr "Gruppe"
 
-#: .\models\group.py:714
+#: .\models\group.py:729
 msgid "Cosinnus societies"
 msgstr "Gruppen"
 
-#: .\models\group.py:800
+#: .\models\group.py:815
 msgid "Group membership"
 msgstr "Gruppen/Projekt-Mitgliedschaft"
 
-#: .\models\group.py:801
+#: .\models\group.py:816
 msgid "Group memberships"
 msgstr "Gruppen/Projekt-Mitgliedschaften"
 
-#: .\models\group.py:813
+#: .\models\group.py:828
 msgid "Portal membership"
 msgstr "Portal-Mitgliedschaft"
 
-#: .\models\group.py:814
+#: .\models\group.py:829
 msgid "Portal memberships"
 msgstr "Portal-Mitgliedschaften"
 
-#: .\models\group.py:825
+#: .\models\group.py:840
 msgid "From Portal"
 msgstr "Von Portal"
 
-#: .\models\group.py:826
+#: .\models\group.py:841
 msgid "From Group Type"
 msgstr "Von Gruppentyp"
 
-#: .\models\group.py:827
+#: .\models\group.py:842
 msgid "From Slug"
 msgstr "Von Slug"
 
-#: .\models\group.py:830 .\models\group.py:839
+#: .\models\group.py:845 .\models\group.py:854
 msgid "Permanent Group Redirects"
 msgstr "Dauerhaufte Gruppenweiterleitungen"
 
-#: .\models\group.py:838
+#: .\models\group.py:853
 msgid "Permanent Group Redirect"
 msgstr "Dauerhaufte Gruppenweiterleitung"
 
@@ -479,17 +490,17 @@ msgstr "Verknüpftes Objekt"
 msgid "Attached objects"
 msgstr "Verknüpftes Objekt"
 
-#: .\models\tagged.py:245
+#: .\models\tagged.py:248
 msgid "Path"
 msgstr "Pfad"
 
-#: .\models\widget.py:19 .\templates\cosinnus\appsmenu.html.py:36
-#: .\templates\cosinnus\appsmenu.html.py:48
+#: .\models\widget.py:19 .\templates\cosinnus\appsmenu.html.py:38
+#: .\templates\cosinnus\appsmenu.html.py:52
 #: .\templates\cosinnus\dashboard.html.py:27
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: .\models\widget.py:20 .\templates\cosinnus\appsmenu.html.py:34
+#: .\models\widget.py:20 .\templates\cosinnus\appsmenu.html.py:36
 #: .\templates\cosinnus\microsite.html.py:34
 msgid "Microsite"
 msgstr "Microsite"
@@ -558,14 +569,14 @@ msgstr "Gemeldetes Objekt löschen..."
 msgid "(The reported item has been deleted.)"
 msgstr "(Der gemeldete Inhalt wurde gelöscht.)"
 
-#: .\templates\cosinnus\appsmenu.html.py:30
-#: .\templates\cosinnus\appsmenu.html.py:81
+#: .\templates\cosinnus\appsmenu.html.py:32
+#: .\templates\cosinnus\appsmenu.html.py:85
 msgid "Settings"
 msgstr "Einstellungen"
 
 #
-#: .\templates\cosinnus\appsmenu.html.py:32
-#: .\templates\cosinnus\appsmenu.html.py:74
+#: .\templates\cosinnus\appsmenu.html.py:34
+#: .\templates\cosinnus\appsmenu.html.py:78
 #: .\templates\cosinnus\group\group_detail.html.py:14
 #: .\templates\cosinnus\group\group_detail.html.py:63
 #: .\templates\cosinnus\group\group_members_map.html.py:14
@@ -574,7 +585,7 @@ msgstr "Einstellungen"
 msgid "Members"
 msgstr "Mitarbeiter_innen"
 
-#: .\templates\cosinnus\appsmenu.html.py:38
+#: .\templates\cosinnus\appsmenu.html.py:40
 msgid "Choose App"
 msgstr "App auswählen"
 
@@ -589,41 +600,41 @@ msgid "Group overview"
 msgstr "Projektübersicht"
 
 #: .\templates\cosinnus\dashboard.html.py:54
-msgid "Etherpad"
-msgstr "Dokument"
-
-#: .\templates\cosinnus\dashboard.html.py:54
-#: .\templates\cosinnus\search.html.py:92
-msgid "Etherpads"
-msgstr "Dokumente"
-
-#: .\templates\cosinnus\dashboard.html.py:63
 msgid "File"
 msgstr "Datei"
 
-#: .\templates\cosinnus\dashboard.html.py:63
+#: .\templates\cosinnus\dashboard.html.py:54
 #: .\templates\cosinnus\search.html.py:71
 msgid "Files"
 msgstr "Dateien"
 
+#: .\templates\cosinnus\dashboard.html.py:63
+msgid "Etherpad"
+msgstr "Dokument"
+
+#: .\templates\cosinnus\dashboard.html.py:63
+#: .\templates\cosinnus\search.html.py:92
+msgid "Etherpads"
+msgstr "Dokumente"
+
 #: .\templates\cosinnus\dashboard.html.py:72
+msgid "Todo"
+msgstr "Aufgabe"
+
+#: .\templates\cosinnus\dashboard.html.py:72
+#: .\templates\cosinnus\search.html.py:50
+msgid "Todos"
+msgstr "Aufgaben"
+
+#: .\templates\cosinnus\dashboard.html.py:81
 msgctxt "Calendar"
 msgid "Event"
 msgstr "Veranstaltung"
 
-#: .\templates\cosinnus\dashboard.html.py:72
+#: .\templates\cosinnus\dashboard.html.py:81
 msgctxt "Calendar"
 msgid "Events"
 msgstr "Veranstaltungen"
-
-#: .\templates\cosinnus\dashboard.html.py:81
-msgid "Todo"
-msgstr "Aufgabe"
-
-#: .\templates\cosinnus\dashboard.html.py:81
-#: .\templates\cosinnus\search.html.py:50
-msgid "Todos"
-msgstr "Aufgaben"
 
 #: .\templates\cosinnus\dashboard.html.py:90
 #: .\templates\cosinnus\search.html.py:113
@@ -757,11 +768,11 @@ msgstr ""
 msgid "Verfassen"
 msgstr ""
 
-#: .\templates\cosinnus\leftnav_hierarchic_itemview.html.py:7
+#: .\templates\cosinnus\leftnav_hierarchic_itemview.html.py:8
 msgid "Back"
 msgstr "Zurück"
 
-#: .\templates\cosinnus\leftnav_hierarchic_itemview.html.py:10
+#: .\templates\cosinnus\leftnav_hierarchic_itemview.html.py:11
 #: .\templates\cosinnus\leftnav_hierarchic_listview.html.py:8
 #: .\templates\cosinnus\leftnav_hierarchic_listview.html.py:12
 #: .\templates\cosinnus\leftnav_hierarchic_listview_standalone.html.py:17
@@ -769,11 +780,11 @@ msgstr "Zurück"
 msgid "Back to"
 msgstr "Zurück zu"
 
-#: .\templates\cosinnus\leftnav_hierarchic_listview.html.py:40
+#: .\templates\cosinnus\leftnav_hierarchic_listview.html.py:41
 msgid "New folder name"
 msgstr "Neuer Ordnername"
 
-#: .\templates\cosinnus\leftnav_hierarchic_listview.html.py:54
+#: .\templates\cosinnus\leftnav_hierarchic_listview.html.py:55
 msgid "Create folder"
 msgstr "Ordner erstellen"
 
@@ -809,7 +820,7 @@ msgstr "Möchten sie dem Projekt %(title)s beitreten?"
 msgid "Add widget"
 msgstr "Widget hinzufügen"
 
-#: .\templates\cosinnus\microsite.html.py:161 .\utils\dashboard.py:375
+#: .\templates\cosinnus\microsite.html.py:161 .\utils\dashboard.py:378
 msgid "Informations"
 msgstr "Informationen"
 
@@ -856,7 +867,7 @@ msgstr "Alle Gruppen"
 
 #: .\templates\cosinnus\navbar.html.py:42
 #: .\templates\cosinnus\navbar.html.py:59
-#: .\templates\cosinnus\group\group_list.html.py:4 .\utils\dashboard.py:267
+#: .\templates\cosinnus\group\group_list.html.py:4 .\utils\dashboard.py:270
 msgid "Projects"
 msgstr "Projekte"
 
@@ -902,7 +913,8 @@ msgstr "Nicht eingeloggt"
 #: .\templates\cosinnus\not_logged_in_alert.html.py:6
 msgid "You cannot create or edit events until you are logged in!"
 msgstr ""
-"Sie können keine Veranstaltungen anlegen oder bearbeiten bis sie sich einloggen."
+"Sie können keine Veranstaltungen anlegen oder bearbeiten bis sie sich "
+"einloggen."
 
 #: .\templates\cosinnus\search.html.py:5 .\templates\cosinnus\search.html.py:6
 #: .\templates\cosinnus\search.html.py:279
@@ -1980,7 +1992,7 @@ msgstr ""
 msgid "(Deleted User)"
 msgstr "(Gelöschter Nutzer)"
 
-#: .\templatetags\cosinnus_tags.py:269 .\templatetags\cosinnus_tags.py:295
+#: .\templatetags\cosinnus_tags.py:278 .\templatetags\cosinnus_tags.py:304
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>%(model_name)s konnte nicht gerendert werden!</i>"
@@ -1993,7 +2005,7 @@ msgstr "Projektbeschreibung"
 msgid "Network"
 msgstr "Netzwerk"
 
-#: .\utils\dashboard.py:324
+#: .\utils\dashboard.py:327
 msgid "About Us"
 msgstr "Über uns"
 
@@ -2180,7 +2192,7 @@ msgstr ""
 "Benutzer_in \"%(user)s\" wurde erfolgreich registriert. Sie können sich "
 "jetzt mit diesen Benutzer_innen-Namen einloggen."
 
-#: .\views\widget.py:318
+#: .\views\widget.py:319
 #, python-format
 msgid ""
 "You are not currently a member of %s! If you wish you can request to become "
@@ -2215,11 +2227,11 @@ msgstr "%s (absteigend)"
 msgid "Ordering"
 msgstr "Sortierung"
 
-#: .\views\mixins\hierarchy.py:101
+#: .\views\mixins\hierarchy.py:102
 msgid "Root Folder"
 msgstr "Oberster Ordner"
 
-#: .\views\mixins\hierarchy.py:103
+#: .\views\mixins\hierarchy.py:104
 msgid "<Root folder>"
 msgstr "<Oberster Ordner>"
 
