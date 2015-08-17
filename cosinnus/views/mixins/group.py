@@ -90,6 +90,7 @@ class RequireReadMixin(object):
                 super(RequireReadMixin, self).get_object(*args, **kwargs)
                 # otherwise, there is an object, but the user may not access it. redirect to login
                 raise CosinnusPermissionDeniedException()
+            raise
         
         self.object = obj
         return obj
