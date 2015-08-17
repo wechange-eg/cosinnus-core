@@ -45,7 +45,11 @@ class UserCreationForm(DjUserCreationForm):
     
     if not settings.DEBUG: 
         captcha = ReCaptchaField(attrs={'theme': 'clean'}, required=settings.DEBUG == False)
-
+    
+    
+    def __init__(self, *args, **kwargs):
+        super(UserCreationForm, self).__init__(*args, **kwargs)
+        self.fields['first_name'].required = True
     
     def is_valid(self):
         """ Get the email from the form and set it as username. 
@@ -85,6 +89,10 @@ class UserChangeForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
         fields = ('email', 'first_name', 'last_name', )
+        
+    def __init__(self, *args, **kwargs):
+        super(UserChangeForm, self).__init__(*args, **kwargs)
+        self.fields['first_name'].required = True
         
     def clean_email(self):
         email = self.cleaned_data.get('email')
