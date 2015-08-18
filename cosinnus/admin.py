@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 from cosinnus.models.group import CosinnusGroupMembership,\
     CosinnusSociety, CosinnusProject, CosinnusPortal, CosinnusPortalMembership,\
     CosinnusGroup, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING,\
-    CosinnusPermanentRedirect
+    CosinnusPermanentRedirect, MEMBERSHIP_ADMIN
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import AttachedObject
 from cosinnus.models.cms import CosinnusMicropage
@@ -196,6 +196,13 @@ admin.site.register(CosinnusSociety, CosinnusSocietyAdmin)
 class CosinnusPortalAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'site', 'public')
     prepopulated_fields = {'slug': ('name', )}
+    
+    def queryset(self, request):
+        """ Allow portals to be accessed only by superusers and Portal-Admins """
+        qs = super(CosinnusPortalAdmin, self).queryset(request)
+        if not request.user.is_superuser:
+            qs = qs.filter(Q(memberships__user__id=request.user.id) & Q(memberships__status=MEMBERSHIP_ADMIN))
+        return qs
 
 admin.site.register(CosinnusPortal, CosinnusPortalAdmin)
 
