@@ -1,8 +1,9 @@
-/* This file is rendered once, whenever a CosinnusPortal object changes its CSS attributes,
- * and is then saved under ??? to be loaded as a static file in addition to the regular cosinnus CSS, and even
- * over the cosinnus_portal_style.css file.
- * The rendering is being done from within the CosinnusPortal model object
-*/
+{% comment %}
+This file is rendered once, whenever a CosinnusPortal object changes its CSS attributes,
+and is then saved under ??? to be loaded as a static file in addition to the regular cosinnus CSS, and even
+over the cosinnus_portal_style.css file.
+The rendering is being done from within the CosinnusPortal model object
+{% endcomment %}
 
 {% if portal.top_color and portal.bottom_color %}
 body {
@@ -32,4 +33,6 @@ body.cosinnus-cms {
 }
 {% endif %}
 
+{% if portal.extra_css %}
 {{ portal.extra_css }}
+{% endif %}
