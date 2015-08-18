@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-18 17:52+0200\n"
+"POT-Creation-Date: 2015-08-18 18:45+0200\n"
 "PO-Revision-Date: 2015-08-16 20:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -222,7 +222,7 @@ msgstr "Следующая неделя"
 msgid "Next month"
 msgstr "Следующий месяц"
 
-#: .\forms\hierarchy.py:14 .\models\group.py:385 .\models\group.py:519
+#: .\forms\hierarchy.py:14 .\models\group.py:385 .\models\group.py:524
 msgid "Name"
 msgstr "Название"
 
@@ -314,7 +314,7 @@ msgstr "Сообщённые объекты"
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr "Введите допустимое имя. Косую черту не допускается."
 
-#: .\models\group.py:376 .\models\group.py:516 .\models\group.py:869
+#: .\models\group.py:376 .\models\group.py:521 .\models\group.py:874
 msgid "Portal"
 msgstr "Портал"
 
@@ -323,24 +323,24 @@ msgid "Portals"
 msgstr "Порталы"
 
 # ???
-#: .\models\group.py:387 .\models\group.py:521
+#: .\models\group.py:387 .\models\group.py:526
 msgid "Slug"
 msgstr "ЧПУ"
 
-#: .\models\group.py:389 .\models\group.py:527 .\models\profile.py:148
+#: .\models\group.py:389 .\models\group.py:532 .\models\profile.py:148
 #: .\templates\cosinnus\microsite.html.py:198
 #: .\templates\cosinnus\group\group_form.html.py:221
 msgid "Description"
 msgstr "Описание"
 
-#: .\models\group.py:390 .\models\group.py:530 .\models\profile.py:151
+#: .\models\group.py:390 .\models\group.py:535 .\models\profile.py:151
 #: .\templates\cosinnus\group\group_form.html.py:148
 #: .\templates\cosinnus\group\group_form.html.py:157
 #: .\templates\cosinnus\user\userprofile_form.html.py:97
 msgid "Website"
 msgstr "Сайт"
 
-#: .\models\group.py:391 .\models\group.py:531 .\models\tagged.py:42
+#: .\models\group.py:391 .\models\group.py:536 .\models\tagged.py:42
 #: .\templates\cosinnus\group\group_list.html.py:116
 msgid "Public"
 msgstr "Публично"
@@ -357,40 +357,54 @@ msgstr "Http/Https Protocol (переопределяет настройки)"
 msgid "Background Image"
 msgstr ""
 
-#: .\models\group.py:404
+#: .\models\group.py:402
+msgid "Used for the background of the landing and CMS-pages"
+msgstr ""
+
+#: .\models\group.py:405
+msgid "Logo Image"
+msgstr ""
+
+#: .\models\group.py:406
+msgid ""
+"Used as a small logo in the navigation bar and for external links to this "
+"portal"
+msgstr ""
+
+#: .\models\group.py:409
 msgid "Main color"
 msgstr ""
 
-#: .\models\group.py:404
+#: .\models\group.py:409
 msgid "Main background color (css hex value, with or without \"#\")"
 msgstr ""
 
-#: .\models\group.py:407
+#: .\models\group.py:412
 msgid "Gradient color"
 msgstr ""
 
-#: .\models\group.py:407
+#: .\models\group.py:412
 msgid "Bottom color for the gradient (css hex value, with or without \"#\")"
 msgstr ""
 
-#: .\models\group.py:410
+#: .\models\group.py:415
 msgid "Extra CSS"
 msgstr ""
 
-#: .\models\group.py:410
+#: .\models\group.py:415
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr ""
 
-#: .\models\group.py:507 .\models\tagged.py:64 .\models\tagged.py:137
+#: .\models\group.py:512 .\models\tagged.py:64 .\models\tagged.py:137
 msgid "Group"
 msgstr "Группа"
 
-#: .\models\group.py:508
+#: .\models\group.py:513
 msgid "Society"
 msgstr "Группа"
 
 # ???
-#: .\models\group.py:522
+#: .\models\group.py:527
 msgid ""
 "Be extremely careful when changing this slug manually! There can be many "
 "side-effects (redirects breaking e.g.)!"
@@ -398,36 +412,36 @@ msgstr ""
 "Будьте предельно внимательны при изменении этого ЧПУ вручную! Там может быть "
 "много побочных эффектов (перенаправляет взлом например)!"
 
-#: .\models\group.py:524
+#: .\models\group.py:529
 msgid "Group Type"
 msgstr "Тип Группы"
 
-#: .\models\group.py:528 .\models\profile.py:146
+#: .\models\group.py:533 .\models\profile.py:146
 #: .\templates\cosinnus\group\group_form.html.py:65
 msgid "Avatar"
 msgstr "Аватар"
 
-#: .\models\group.py:539
+#: .\models\group.py:544
 msgid "Deactivated Apps"
 msgstr "Деактивированые Приложения"
 
-#: .\models\group.py:542
+#: .\models\group.py:547
 msgid "Parent Group"
 msgstr "Родительская Группа"
 
-#: .\models\group.py:552
+#: .\models\group.py:557
 msgid "Cosinnus group"
 msgstr "Cosinnus группа"
 
-#: .\models\group.py:553
+#: .\models\group.py:558
 msgid "Cosinnus groups"
 msgstr "Cosinnus группы"
 
-#: .\models\group.py:590
+#: .\models\group.py:595
 msgid "Slug must not be empty."
 msgstr "ЧПУ не должен быть пустым."
 
-#: .\models\group.py:622
+#: .\models\group.py:627
 msgid ""
 "The URL for this group has changed. A redirect from all existing URLs has "
 "automatically been created!"
@@ -435,56 +449,56 @@ msgstr ""
 "URL-Адрес для этой группы изменился. Редирект от всех существующих URL-"
 "адресов автоматически создан!"
 
-#: .\models\group.py:743
+#: .\models\group.py:748
 msgid "Cosinnus project"
 msgstr "Cosinnus проект"
 
-#: .\models\group.py:744
+#: .\models\group.py:749
 msgid "Cosinnus projects"
 msgstr "Cosinnus проекты"
 
-#: .\models\group.py:776
+#: .\models\group.py:781
 msgid "Cosinnus society"
 msgstr "Cosinnus группа"
 
-#: .\models\group.py:777
+#: .\models\group.py:782
 msgid "Cosinnus societies"
 msgstr "Cosinnus группы"
 
-#: .\models\group.py:863
+#: .\models\group.py:868
 msgid "Group membership"
 msgstr "Членство в группе"
 
-#: .\models\group.py:864
+#: .\models\group.py:869
 msgid "Group memberships"
 msgstr "Членство в группах"
 
-#: .\models\group.py:876
+#: .\models\group.py:881
 msgid "Portal membership"
 msgstr "Портал членства"
 
-#: .\models\group.py:877
+#: .\models\group.py:882
 msgid "Portal memberships"
 msgstr "Портал членств"
 
-#: .\models\group.py:888
+#: .\models\group.py:893
 msgid "From Portal"
 msgstr "Из Портала"
 
-#: .\models\group.py:889
+#: .\models\group.py:894
 msgid "From Group Type"
 msgstr "От Типа Группы"
 
 # ???
-#: .\models\group.py:890
+#: .\models\group.py:895
 msgid "From Slug"
 msgstr "От ЧПУ "
 
-#: .\models\group.py:893 .\models\group.py:902
+#: .\models\group.py:898 .\models\group.py:907
 msgid "Permanent Group Redirects"
 msgstr "Постоянные перенаправления Группы"
 
-#: .\models\group.py:901
+#: .\models\group.py:906
 msgid "Permanent Group Redirect"
 msgstr "Постоянные перенаправление Группы"
 

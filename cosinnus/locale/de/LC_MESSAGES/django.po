@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-18 17:52+0200\n"
+"POT-Creation-Date: 2015-08-18 18:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -223,7 +223,7 @@ msgstr "Nächste Woche"
 msgid "Next month"
 msgstr "Nächsten Monat"
 
-#: .\forms\hierarchy.py:14 .\models\group.py:385 .\models\group.py:519
+#: .\forms\hierarchy.py:14 .\models\group.py:385 .\models\group.py:524
 msgid "Name"
 msgstr "Name"
 
@@ -316,7 +316,7 @@ msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 "Bitt einen gültigen Namen angeben. Ein Vorwärtsslash ist nicht erlaubt."
 
-#: .\models\group.py:376 .\models\group.py:516 .\models\group.py:869
+#: .\models\group.py:376 .\models\group.py:521 .\models\group.py:874
 msgid "Portal"
 msgstr ""
 
@@ -324,31 +324,31 @@ msgstr ""
 msgid "Portals"
 msgstr ""
 
-#: .\models\group.py:387 .\models\group.py:521
+#: .\models\group.py:387 .\models\group.py:526
 msgid "Slug"
 msgstr "Slug"
 
-#: .\models\group.py:389 .\models\group.py:527 .\models\profile.py:148
+#: .\models\group.py:389 .\models\group.py:532 .\models\profile.py:148
 #: .\templates\cosinnus\microsite.html.py:198
 #: .\templates\cosinnus\group\group_form.html.py:221
 msgid "Description"
 msgstr "Beschreibung"
 
-#: .\models\group.py:390 .\models\group.py:530 .\models\profile.py:151
+#: .\models\group.py:390 .\models\group.py:535 .\models\profile.py:151
 #: .\templates\cosinnus\group\group_form.html.py:148
 #: .\templates\cosinnus\group\group_form.html.py:157
 #: .\templates\cosinnus\user\userprofile_form.html.py:97
 msgid "Website"
 msgstr "Webseite"
 
-#: .\models\group.py:391 .\models\group.py:531 .\models\tagged.py:42
+#: .\models\group.py:391 .\models\group.py:536 .\models\tagged.py:42
 #: .\templates\cosinnus\group\group_list.html.py:116
 msgid "Public"
 msgstr "Öffentlich"
 
 #: .\models\group.py:395
 msgid "Associated Site"
-msgstr ""
+msgstr "Zugehörige Site"
 
 #: .\models\group.py:397
 msgid "Http/Https Protocol (overrides settings)"
@@ -356,76 +356,90 @@ msgstr ""
 
 #: .\models\group.py:401
 msgid "Background Image"
-msgstr ""
+msgstr "Hintergrundbild"
 
-#: .\models\group.py:404
+#: .\models\group.py:402
+msgid "Used for the background of the landing and CMS-pages"
+msgstr "Wird als Hintergrund für die Landing-Page und die CMS-Seiten benutzt"
+
+#: .\models\group.py:405
+msgid "Logo Image"
+msgstr "Logo-Bild"
+
+#: .\models\group.py:406
+msgid ""
+"Used as a small logo in the navigation bar and for external links to this "
+"portal"
+msgstr "Als Logo für die Navigationsleiste benutzt und für externe Links die in dieses Portal zeigen"
+
+#: .\models\group.py:409
 msgid "Main color"
-msgstr ""
+msgstr "Hauptfarbe"
 
-#: .\models\group.py:404
+#: .\models\group.py:409
 msgid "Main background color (css hex value, with or without \"#\")"
-msgstr ""
+msgstr "Hauptfarbe des Seitenhintergrunds (Hex-Wert, optional mit \"#\")"
 
-#: .\models\group.py:407
+#: .\models\group.py:412
 msgid "Gradient color"
-msgstr ""
+msgstr "Verlaufsfarbe"
 
-#: .\models\group.py:407
+#: .\models\group.py:412
 msgid "Bottom color for the gradient (css hex value, with or without \"#\")"
-msgstr ""
+msgstr "Untere Farbe des Farbverlaufs für den Seitenhintergrunds (Hex-Wert, optional mit \"#\")"
 
-#: .\models\group.py:410
+#: .\models\group.py:415
 msgid "Extra CSS"
-msgstr ""
+msgstr "Zusätzliches CSS"
 
-#: .\models\group.py:410
+#: .\models\group.py:415
 msgid "Extra CSS for this portal, will be applied after all other styles."
-msgstr ""
+msgstr "Wird vorgezogen gegenüber sämtlichem anderen CSS"
 
-#: .\models\group.py:507 .\models\tagged.py:64 .\models\tagged.py:137
+#: .\models\group.py:512 .\models\tagged.py:64 .\models\tagged.py:137
 msgid "Group"
 msgstr "Projekt"
 
-#: .\models\group.py:508
+#: .\models\group.py:513
 msgid "Society"
 msgstr "Gruppe"
 
-#: .\models\group.py:522
+#: .\models\group.py:527
 msgid ""
 "Be extremely careful when changing this slug manually! There can be many "
 "side-effects (redirects breaking e.g.)!"
 msgstr ""
 
-#: .\models\group.py:524
+#: .\models\group.py:529
 msgid "Group Type"
 msgstr "Gruppentyp"
 
-#: .\models\group.py:528 .\models\profile.py:146
+#: .\models\group.py:533 .\models\profile.py:146
 #: .\templates\cosinnus\group\group_form.html.py:65
 msgid "Avatar"
 msgstr "Avatar"
 
-#: .\models\group.py:539
+#: .\models\group.py:544
 msgid "Deactivated Apps"
 msgstr "Deaktivierte Apps"
 
-#: .\models\group.py:542
+#: .\models\group.py:547
 msgid "Parent Group"
 msgstr "Übergeordnete Gruppe"
 
-#: .\models\group.py:552
+#: .\models\group.py:557
 msgid "Cosinnus group"
 msgstr "Projekt"
 
-#: .\models\group.py:553
+#: .\models\group.py:558
 msgid "Cosinnus groups"
 msgstr "Projekte"
 
-#: .\models\group.py:590
+#: .\models\group.py:595
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
 
-#: .\models\group.py:622
+#: .\models\group.py:627
 msgid ""
 "The URL for this group has changed. A redirect from all existing URLs has "
 "automatically been created!"
@@ -434,55 +448,55 @@ msgstr ""
 "Weiterleitung von der alten auf die neue Adresse wurde automatisch "
 "eingerichtet!"
 
-#: .\models\group.py:743
+#: .\models\group.py:748
 msgid "Cosinnus project"
 msgstr "Projekt"
 
-#: .\models\group.py:744
+#: .\models\group.py:749
 msgid "Cosinnus projects"
 msgstr "Projekte"
 
-#: .\models\group.py:776
+#: .\models\group.py:781
 msgid "Cosinnus society"
 msgstr "Gruppe"
 
-#: .\models\group.py:777
+#: .\models\group.py:782
 msgid "Cosinnus societies"
 msgstr "Gruppen"
 
-#: .\models\group.py:863
+#: .\models\group.py:868
 msgid "Group membership"
 msgstr "Gruppen/Projekt-Mitgliedschaft"
 
-#: .\models\group.py:864
+#: .\models\group.py:869
 msgid "Group memberships"
 msgstr "Gruppen/Projekt-Mitgliedschaften"
 
-#: .\models\group.py:876
+#: .\models\group.py:881
 msgid "Portal membership"
 msgstr "Portal-Mitgliedschaft"
 
-#: .\models\group.py:877
+#: .\models\group.py:882
 msgid "Portal memberships"
 msgstr "Portal-Mitgliedschaften"
 
-#: .\models\group.py:888
+#: .\models\group.py:893
 msgid "From Portal"
 msgstr "Von Portal"
 
-#: .\models\group.py:889
+#: .\models\group.py:894
 msgid "From Group Type"
 msgstr "Von Gruppentyp"
 
-#: .\models\group.py:890
+#: .\models\group.py:895
 msgid "From Slug"
 msgstr "Von Slug"
 
-#: .\models\group.py:893 .\models\group.py:902
+#: .\models\group.py:898 .\models\group.py:907
 msgid "Permanent Group Redirects"
 msgstr "Dauerhaufte Gruppenweiterleitungen"
 
-#: .\models\group.py:901
+#: .\models\group.py:906
 msgid "Permanent Group Redirect"
 msgstr "Dauerhaufte Gruppenweiterleitung"
 
