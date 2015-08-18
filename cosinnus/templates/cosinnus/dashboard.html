@@ -171,7 +171,7 @@
 {% block extrafooter %}
   {{ block.super }}
 
-  <script src="{% static "js/cosinnus.dashboard.js" %}"></script>
+  <script src="{% static "js/cosinnus.dashboard.js" %}?v0.1"></script>
   <script type="text/javascript">
     $(document).ready(function(){
       var dashboard = window.Cosinnus.dashboard.init("#dashboard", {% if group.slug %}"{{ group.slug }}"{% else %}null{% endif %});
