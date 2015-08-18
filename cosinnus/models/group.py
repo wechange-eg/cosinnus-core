@@ -399,6 +399,11 @@ class CosinnusPortal(models.Model):
     
     # css fields for custom portal styles
     background_image = models.ImageField(_('Background Image'),
+        help_text=_('Used for the background of the landing and CMS-pages'),
+        upload_to=get_portal_background_image_filename,
+        blank=True, null=True)
+    logo_image = models.ImageField(_('Logo Image'),
+        help_text=_('Used as a small logo in the navigation bar and for external links to this portal'),
         upload_to=get_portal_background_image_filename,
         blank=True, null=True)
     top_color = models.CharField(_('Main color'), help_text=_('Main background color (css hex value, with or without "#")'),
