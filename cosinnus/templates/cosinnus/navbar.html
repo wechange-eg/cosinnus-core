@@ -63,7 +63,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li id="searchbar">
                     <form id="cosinnus_search_form" action="{% url "cosinnus:search" %}" method="GET">
-                        <input class="form-control" placeholder="Suchbegriff" value="" name="q" />
+                        <input class="form-control" placeholder="{% trans "Search..." %}" value="" name="q" />
                         <i class="fa fa-search" onclick="$('#cosinnus_search_form').submit();"></i>
                     </form>
                 </li>
