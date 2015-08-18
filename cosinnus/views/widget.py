@@ -106,21 +106,21 @@ def widget_detail(request, id, offset=0):
     if widget_class is None:
         return render_to_response('cosinnus/widgets/not_found.html')
     widget = widget_class(request, wc)
-    data, rows_returned, has_more = widget.get_data(int(offset))
+    widget_content, rows_returned, has_more = widget.get_data(int(offset))
     
-    if isinstance(data, six.string_types):
-        resp = HttpResponse(data)
-    else:
-        resp = JSONResponse(data)
-    resp['X-Cosinnus-Widget-Title'] = force_text(widget.title)
+    data = {
+        'X-Cosinnus-Widget-Content': widget_content,
+        'X-Cosinnus-Widget-Title': force_text(widget.title),
+        'X-Cosinnus-Widget-App-Name': force_text(wc.app_name),
+        'X-Cosinnus-Widget-Widget-Name': force_text(wc.widget_name),
+        'X-Cosinnus-Widget-Num-Rows-Returned': rows_returned,
+        'X-Cosinnus-Widget-Has-More-Data': 'true' if has_more else 'false',
+    }
     title_url = widget.title_url
     if title_url is not None:
-        resp['X-Cosinnus-Widget-Title-URL'] = force_text(title_url)
-    resp['X-Cosinnus-Widget-App-Name'] = force_text(wc.app_name)
-    resp['X-Cosinnus-Widget-Widget-Name'] = force_text(wc.widget_name)
-    resp['X-Cosinnus-Widget-Num-Rows-Returned'] = rows_returned
-    resp['X-Cosinnus-Widget-Has-More-Data'] = 'true' if has_more else 'false'
-    return resp
+        data['X-Cosinnus-Widget-Title-URL'] = force_text(title_url)
+    
+    return JSONResponse(data)
 
 
 @ensure_csrf_cookie

@@ -203,13 +203,13 @@ $('.js-todo-link').on('click', function(e) {
             
             if (typeof id !== "undefined") {
                 $.ajax(Cosinnus.base_url + "widget/" + id + "/" + offset + "/").done(function(data, textStatus, jqXHR) {
-                    var rows_returned = parseInt(jqXHR.getResponseHeader('X-Cosinnus-Widget-Num-Rows-Returned') || 0);
-                    var has_more_data = 'true' === (jqXHR.getResponseHeader('X-Cosinnus-Widget-Has-More-Data') || 'false');
+                    var rows_returned = parseInt(data['X-Cosinnus-Widget-Num-Rows-Returned'] || 0);
+                    var has_more_data = 'true' === (data['X-Cosinnus-Widget-Has-More-Data'] || 'false');
                     
                     // display the fetched data if we have actually gotten something back, or if
                     // this is the initial query (we expect a rendered "no content" message)
                     if (rows_returned > 0 || offset == 0) {
-                        $('[data-target=widget-content]', holder).append(data);
+                        $('[data-target=widget-content]', holder).append(data['X-Cosinnus-Widget-Content']);
                     }
                     if (has_more_data > 0) {
                         // attach the function to load the next set of data from the backend to the "More" button
@@ -222,13 +222,17 @@ $('.js-todo-link').on('click', function(e) {
                         $('[data-target=widget-reload-button]', holder).hide();
                     }
                         
-                    $('[data-target=widget-title]', holder).html(jqXHR.getResponseHeader('X-Cosinnus-Widget-Title'));
-                    var title_url = jqXHR.getResponseHeader('X-Cosinnus-Widget-Title-URL');
+                    var s = data['X-Cosinnus-Widget-Title'];
+                    console.log(jqXHR);
+                    console.log(s);
+                    
+                    $('[data-target=widget-title]', holder).html(s);
+                    var title_url = data['X-Cosinnus-Widget-Title-URL'];
                     if (title_url !== null) {
                         $('[data-target=widget-title-url]', holder).attr("href", title_url);
                     } 
-                    holder.attr("data-app-name", jqXHR.getResponseHeader('X-Cosinnus-Widget-App-Name'));
-                    holder.attr("data-widget-name", jqXHR.getResponseHeader('X-Cosinnus-Widget-Widget-Name'));
+                    holder.attr("data-app-name", data['X-Cosinnus-Widget-App-Name']);
+                    holder.attr("data-widget-name", data['X-Cosinnus-Widget-Widget-Name']);
                     
                     $.cosinnus.renderMomentDataDate();
                     $.cosinnus.autogrow();
