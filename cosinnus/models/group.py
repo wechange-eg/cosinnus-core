@@ -366,7 +366,10 @@ class CosinnusGroupMembershipManager(models.Manager):
 class CosinnusPortal(models.Model):
     
     _CURRENT_PORTAL_CACHE_KEY = 'cosinnus/core/portal/current'
-    _CUSTOM_CSS_FILENAME = 'cosinnus_custom_portal_%s_styles.css'
+    if settings.DEBUG:
+        _CUSTOM_CSS_FILENAME = '_ignoreme_cosinnus_custom_portal_%s_styles.css'
+    else:
+        _CUSTOM_CSS_FILENAME = 'cosinnus_custom_portal_%s_styles.css'
     
     class Meta:
         app_label = 'cosinnus'
