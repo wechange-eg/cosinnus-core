@@ -108,7 +108,9 @@
 	                        <i class="fa fa-caret-down"></i>
 	                    </a>
 	                    <ul class="dropdown-menu">
+                            {% comment %}  
 							<li><a href="{% url 'cosinnus:user-dashboard' %}">{% trans "My Dashboard" %}</a></li>
+                            {% endcomment %}  
 							<li><a href="{% url 'cosinnus:profile-detail' %}">{% trans "My Profile" %}</a></li>
 							<li><a href="{% url 'cosinnus:notifications' %}">{% trans "Notification Preferences" %}</a></li>
                             <li class="divider"></li>

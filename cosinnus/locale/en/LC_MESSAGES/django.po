@@ -899,7 +899,7 @@ msgstr ""
 #: .\templates\cosinnus\navbar.html.py:81
 #: .\templates\cosinnus\navbar.html.py:86
 msgid "My Stream"
-msgstr ""
+msgstr "Activities"
 
 #: .\templates\cosinnus\navbar.html.py:111
 msgid "My Dashboard"

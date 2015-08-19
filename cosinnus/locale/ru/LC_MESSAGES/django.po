@@ -932,7 +932,7 @@ msgstr "Сообщения"
 #: .\templates\cosinnus\navbar.html.py:81
 #: .\templates\cosinnus\navbar.html.py:86
 msgid "My Stream"
-msgstr "Моя лента"
+msgstr "деятельность"
 
 #: .\templates\cosinnus\navbar.html.py:111
 msgid "My Dashboard"
