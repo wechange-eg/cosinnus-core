@@ -75,6 +75,11 @@
                                 <i class="fa fa-chevron-down"></i>
                             </a>
                             {% endif %}
+                            {% if not member == user %}
+                            <a class="pull-right" href="{% url 'postman_write' recipients=member.username %}" title="{% trans "Send Message" %}">
+	                            <i class="fa fa-envelope"></i>
+	                        </a>
+	                        {% endif %}
                             <div class="media-body">
                                     <span class="annotation">
                                         {% if member in admins %}

@@ -62,9 +62,11 @@
 	                            <i class="fa fa-chevron-down"></i>
 	                        </a>
 	                        {% endcomment %}
+	                        {% if not member == user %}
 	                        <a class="pull-right" href="{% url 'postman_write' recipients=user.username %}" title="{% trans "Send Message" %}">
 	                            <i class="fa fa-envelope"></i>
 	                        </a>
+	                        {% endif %}
 	                        <div class="media-body">
 	                            {% comment %}  
 	                            {% if user.is_authenticated %}

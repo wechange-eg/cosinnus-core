@@ -68,6 +68,11 @@
 	                        <a class="pull-right" href="{% url 'cosinnus:profile-detail' username=user.username %}">
 	                            <i class="fa fa-chain"></i>
 	                        </a>
+	                        {% if not user == request.user %}
+	                        <a class="pull-right" href="{% url 'postman_write' recipients=user.username %}" title="{% trans "Send Message" %}">
+	                            <i class="fa fa-envelope"></i>
+	                        </a>
+	                        {% endif %}
 	                        <div class="media-body">
 	                            <span class="annotation">
 	                                {% include 'cosinnus/feedback/report_button_a.html' with object=user %}
