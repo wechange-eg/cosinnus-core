@@ -248,38 +248,7 @@
 			// Users can add events here.
 			// The .small-calendar is for tooltips or small static date chooser.
 			// both are based on jQuery fullcalendar. http://arshaw.com/fullcalendar/
-			var german = {
-				firstDay: 1, // Monday
-				buttonText: {
-					today: "Heute",
-					month: "Monat",
-					week: "Woche",
-					day: "Tag"
-				},
-				monthNames: ['Januar','Februar','März','April',
-					'Mai','Juni','Juli','August',
-					'September','Oktober','November','Dezember'],
-				monthNamesShort: ['Jan','Feb','Mär','Apr','Mai',
-					'Jun','Jul','Aug','Sept','Okt','Nov','Dez'],
-				dayNames: ['Sonntag','Montag','Dienstag',
-					'Mittwoch','Donnerstag','Freitag','Samstag'],
-				dayNamesShort: ['So','Mo','Di','Mi','Do','Fr','Sa'],
-				titleFormat: {
-					month: 'MMMM yyyy',
-					week: "d.[ MMMM][ yyyy]{ - d. MMMM yyyy}",
-					day: 'dddd d. MMMM yyyy'
-				},
-				columnFormat: {
-					month: 'ddd',
-					week: 'ddd d',
-					day: ''
-				},
-				axisFormat: 'H:mm', 
-				timeFormat: {
-					'': 'H:mm', 
-					agenda: 'H:mm{ - H:mm}'
-				}
-			};
+		    console.log('my lang is: ' + cosinnus_current_language)
 
 			if ($('.big-calendar').length) {
 			    $('.big-calendar').empty();
@@ -305,7 +274,7 @@
     				},
     				selectable: true,
     				selectHelper: true
-    			}, german));
+    			}, $.cosinnus.fullcalendar_format));
 			}
 			
 			$('.small-calendar').empty();
@@ -324,7 +293,7 @@
 					$(cell).closest('.small-calendar').trigger('fullCalendarViewRender',[cell]);
 				}
 
-			}, german));
+			}, $.cosinnus.fullcalendar_format));
 
 		},
 
@@ -362,7 +331,7 @@
 						$('#calendarConfirmEventOneday').show();
 						$('#calendarConfirmEventMultiday').hide();
 
-						moment.lang(moment.lang(),$.cosinnus.momentShort[moment.lang()]);
+						moment.lang(moment.lang(),$.cosinnus.momentShort);
 						eventDate = moment(startDateDataAttr);
 						var eventDate = moment(eventDate).calendar();
 						$('#calendarConfirmEventDate').text(eventDate);
@@ -374,7 +343,7 @@
 						$('#calendarConfirmEventMultiday').show();
 
 						// There is no time, so use momentShort.
-						moment.lang(moment.lang(),$.cosinnus.momentShort[moment.lang()]);
+						moment.lang(moment.lang(),$.cosinnus.momentShort);
 						startDate = moment(startDateDataAttr);
 						var startDate = moment(startDate).calendar();
 						$('#calendarConfirmEventStart').text(startDate);
@@ -569,7 +538,7 @@
 						.val(dateDataAttr);
 
 					// Update INPUT with human readable date
-					moment.lang(moment.lang(),$.cosinnus.momentShort[moment.lang()]);
+					moment.lang(moment.lang(),$.cosinnus.momentShort);
 					var humanDateString = moment(dateDataAttr).calendar();
 						$(this)
 							.closest('.calendar-date-time-chooser')
@@ -584,7 +553,7 @@
 					.val();
 
 				if (dateDataAttr) {
-					moment.lang(moment.lang(),$.cosinnus.momentShort[moment.lang()]);
+					moment.lang(moment.lang(),$.cosinnus.momentShort);
 					var humanDateString = moment(dateDataAttr).calendar();
 						$(this)
 							.find('.calendar-date-time-chooser-date')
@@ -793,9 +762,9 @@
 				/** No moment custom time format for now **/
 				/*
 				if (with_time) {
-					moment.lang(moment.lang());//,$.cosinnus.momentFull[moment.lang()]);
+					moment.lang(moment.lang());//,$.cosinnus.momentFull);
 				} else {
-					moment.lang(moment.lang());//,$.cosinnus.momentShort[moment.lang()]);
+					moment.lang(moment.lang());//,$.cosinnus.momentShort);
 				} 
 				*/
 				
@@ -804,7 +773,7 @@
 				
 				if ($(this).attr('data-date-style') == 'short') {
 				    // render the date without time
-				    moment.lang(moment.lang(),$.cosinnus.momentShort[moment.lang()]);
+				    moment.lang(moment.lang(),$.cosinnus.momentShort);
 				    $(this).text(mom.calendar());
 				} else {
     				if ((diff_days > -1 && diff_days < 1) || diff_days < -4 ) {
@@ -1141,61 +1110,8 @@
 })( jQuery );
 
 // Set global language here
-$.cosinnus.lang = "de";
+$.cosinnus.lang = cosinnus_current_language;
 moment.lang($.cosinnus.lang);
-
-// We need some new flavours of moment().calendar()
-// based on http://momentjs.com/downloads/moment-with-langs.js
-
-// internationalisation objects for momentJs calendar view WITHOUT time:
-$.cosinnus.momentShort = {
-	'de': {
-		calendar : {
-			sameDay: "[heute]",
-			sameElse: "L",
-			nextDay: '[morgen]',
-			nextWeek: 'dddd',
-			lastDay: '[gestern]',
-			lastWeek: '[letzten] dddd'
-		}
-	},
-	'en' : {
-		calendar : {
-			sameDay : '[today]',
-			nextDay : '[tomorrow]',
-			nextWeek : 'dddd',
-			lastDay : '[yesterday]',
-			lastWeek : '[last] dddd',
-			sameElse : 'L'
-		}
-	}
-};
-
-// internationalisation objects for momentJs calendar view WITH time:
-$.cosinnus.momentFull = {
-	'de': {
-		calendar : {
-			sameDay: "[heute um] LT",
-			sameElse: "L [um] LT",
-			nextDay: '[morgen um] LT',
-			nextWeek: 'dddd [um] LT',
-			lastDay: '[gestern um] LT',
-			lastWeek: '[letzten] dddd [um] LT'
-		},
-	},
-	'en' : {
-		calendar : {
-			sameDay : '[today at] LT',
-			nextDay : '[tomorrow at] LT',
-			nextWeek : 'dddd [at] LT',
-			lastDay : '[yesterday at] LT',
-			lastWeek : '[last] dddd [at] LT',
-			sameElse : 'L [at] LT'
-		}
-	}
-};
-
-
 
 
 

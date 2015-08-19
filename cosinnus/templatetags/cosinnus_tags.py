@@ -13,7 +13,7 @@ from django.http import HttpRequest
 from django.template.defaulttags import URLNode, url as url_tag, url
 from django.template.loader import render_to_string
 from django.utils.http import urlencode
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, get_language
 
 from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry, attached_object_registry
@@ -31,6 +31,7 @@ import logging
 from django.utils.encoding import force_text
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
+from django.contrib.staticfiles.templatetags.staticfiles import static
 logger = logging.getLogger('cosinnus')
 
 register = template.Library()
@@ -621,3 +622,12 @@ def cosinnus_report_object_action(context, obj=None):
     # mark_safe doesn't really seem to work here
     title = escape(title.replace('"', "'"))
     return mark_safe(' onclick=\'$.cosinnus.Feedback.cosinnus_report_object("%s", %d, "%s");\' ' % (model_str, obj.id, title))
+
+
+@register.simple_tag()
+def localized_js(path):
+    """ Acts like the {% static ... %} tag, but returns a javascript file
+        from the localized folder for the current language. 
+        We add a parameter so the client caches each language seperately """
+    lang = get_language()
+    return static('js/locale/%s/%s' % (lang, path)) + '?lang=%s' % lang
