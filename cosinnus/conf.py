@@ -102,6 +102,7 @@ class CosinnusConf(AppConf):
     # the url pattern for group overview URLs
     GROUP_PLURAL_URL_PATH = 'projects'
     
+    
     # widgets listed here will be created for the group dashboard upon CosinnusGroup creation.
     # this. will check if the cosinnus app is installed and if the widget is registered, so
     # invalid entries do not produce errors
@@ -180,6 +181,9 @@ class CosinnusConf(AppConf):
 
     # can be overriden to let cosinnus know that the server uses HTTPS. this is important to set!
     SITE_PROTOCOL = 'http'
+    
+    # the duration of the user stream (must be very short, otherwise notifications will not appear)
+    STREAM_SHORT_CACHE_TIMEOUT = 10
 
     #: A pointer to the swappable cosinnus user profile model
     USER_PROFILE_MODEL = 'cosinnus.UserProfile'
