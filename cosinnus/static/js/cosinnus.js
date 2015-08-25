@@ -964,10 +964,12 @@
 	            dataType: 'json',
 	            singleFileUploads: false,
 	            add: function (e, data) {
-	                if (!data.files || data.files.length != 1) {
+	                
+	                /*if (!data.files || data.files.length != 1) {
 	                    alert('Es kann nur eine Datei auf einmal hochgeladen werden!');
 	                    return;
 	                }
+	                */
 	                /* var file = data.files[0];
 	                 * if (file.size == 0 || file.size > SETTING_MAX_IMAGE_UPLOAD_SIZE) {
 	                 *     alert('Upload of images is only supported up to '+SETTING_MAX_IMAGE_UPLOAD_SIZE/1048576+' MB! (Yours was '+Math.round(parseInt(file.size)/10000) / 100 +' MB)');
@@ -994,7 +996,9 @@
 	                    if (!select2_obj) {
 	                        alert('Upload complete but the file could not be added to the field. Type in the filename to attach it!')
 	                    }
-	                    select2_obj.onSelect(data.result.select2_data);
+	                    $.each(data.result.select2_data_list, function(index, select2_data) {
+	                        select2_obj.onSelect(select2_data);
+	                    });
 	                    
 	                } else if (data.result.status == 'denied') {
                         alert('Die Datei die hochgeladen wurde war zu groß oder nicht für den Upload zugelassen!');
