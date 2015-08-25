@@ -248,7 +248,6 @@
 			// Users can add events here.
 			// The .small-calendar is for tooltips or small static date chooser.
 			// both are based on jQuery fullcalendar. http://arshaw.com/fullcalendar/
-		    console.log('my lang is: ' + cosinnus_current_language)
 
 			if ($('.big-calendar').length) {
 			    $('.big-calendar').empty();
@@ -464,9 +463,6 @@
 				});
 				// remove last hidden line
 				doodleData.dates.pop();
-
-				// drop the entered data to console
-				console.log(doodleData);
 			});
 		},
 
@@ -1050,7 +1046,6 @@
         hidden_text : function() {
             $('.hidden_text_button').off('click').click(function () {
                 var hide_id = $(this).data('hidden-text-id');
-                console.log('showing '+ hide_id)
                 $('.hidden_text_hidden[data-hidden-text-id='+hide_id+']').show();
                 $('.hidden_text_shown[data-hidden-text-id='+hide_id+']').hide();
                 $(this).hide();

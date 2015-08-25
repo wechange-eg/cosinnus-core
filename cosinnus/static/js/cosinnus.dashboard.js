@@ -223,8 +223,6 @@ $('.js-todo-link').on('click', function(e) {
                     }
                         
                     var s = data['X-Cosinnus-Widget-Title'];
-                    console.log(jqXHR);
-                    console.log(s);
                     
                     $('[data-target=widget-title]', holder).html(s);
                     var title_url = data['X-Cosinnus-Widget-Title-URL'];
