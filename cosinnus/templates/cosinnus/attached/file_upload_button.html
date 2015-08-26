@@ -1,6 +1,16 @@
 {% load i18n cosinnus_tags %}
 
-<div class="well dropzone">
+{% if style and style == "large" %}
+<div type="button" class="btn btn-default w100 large-space">
+	<ul class="media-list">
+		<li class="media">
+		    <a class="pull-left" href="#">
+		        <i class="fa fa-plus"></i>
+		    </a>
+		    <div class="media-body media-body-form-control">
+{% endif %}
+
+<div class="dropzone">
 	<label class="label-soft">
 		<div style="display: inline-block;">
 			<div id="{{ form.forms.obj.attached_objects.id_for_label }}_progressbar" class="progressbar" style="display: none;">
@@ -14,4 +24,11 @@
 		{% trans "Browse..." %}
 		<input id="fileupload" type="file" name="file" {% if form_data %}data-form-data='{{ form_data }}'{% endif %} data-cosinnus-upload-select2-target-field="{{ form.forms.obj.attached_objects.id_for_label }}" data-url="{% group_url 'cosinnus:file:upload-inline' group=group.slug %}" multiple>
 	</label>
+</div> 
+
+{% if style and style == "large" %}
+            </div>
+        </li>
+    </ul>
 </div>
+{% endif %}
