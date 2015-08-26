@@ -631,3 +631,11 @@ def localized_js(path):
         We add a parameter so the client caches each language seperately """
     lang = get_language()
     return static('js/locale/%s/%s' % (lang, path)) + '?lang=%s' % lang
+
+
+@register.filter
+def addstr(arg1, arg2):
+    """concatenate arg1 & arg2"""
+    ret = mark_safe(str(arg1) + str(arg2))
+    return ret
+

@@ -992,13 +992,17 @@
 	                    // we act like we had just typed the uploaded file's name in the select2 field
 	                    // and had clicked the result in the select2 result dropdown 
 	                    // by directly interfacing with the select2 object on that field
-	                    var select2_obj = $('#s2id_' + $(this).data('cosinnus-upload-select2-target-field')).data('select2');
-	                    if (!select2_obj) {
-	                        alert('Upload complete but the file could not be added to the field. Type in the filename to attach it!')
+	                    if (data.result.on_success == 'add_to_select2') {
+	                        var select2_obj = $('#s2id_' + $(this).data('cosinnus-upload-select2-target-field')).data('select2');
+	                        if (!select2_obj) {
+	                            alert('Upload complete but the file could not be added to the field. Type in the filename to attach it!')
+	                        }
+	                        $.each(data.result.select2_data_list, function(index, select2_data) {
+	                            select2_obj.onSelect(select2_data);
+	                        });
+	                    } else if (data.result.on_success == 'refresh_page') {
+	                        location.reload();
 	                    }
-	                    $.each(data.result.select2_data_list, function(index, select2_data) {
-	                        select2_obj.onSelect(select2_data);
-	                    });
 	                    
 	                } else if (data.result.status == 'denied') {
                         alert('Die Datei die hochgeladen wurde war zu groß oder nicht für den Upload zugelassen!');
