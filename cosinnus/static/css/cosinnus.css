@@ -3006,7 +3006,6 @@ a.portal-inlink:hover img {
 .file-upload-overlay {
     position: relative;
     overflow: hidden;
-    float: right;
     clear: right;
     display: inline;
     padding-top: 2px;
@@ -3018,6 +3017,8 @@ a.portal-inlink:hover img {
     top: 0;
     right: 0;
     opacity: 0;
+    width: 100%;
+    height: 100%;
     font-size: 100px;
     filter: alpha(opacity=0);
     cursor: pointer;" 
