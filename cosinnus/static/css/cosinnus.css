@@ -337,6 +337,10 @@ label {
   margin-bottom: 4px;
 }
 
+label.label-soft {
+    color: #999999;
+}
+
 .content-box .dropdown {
   margin-bottom: 13px;
 }
@@ -3008,19 +3012,39 @@ a.portal-inlink:hover img {
     clear: right;
     display: inline;
     padding-top: 2px;
-    cursor: pointer;" 
+    cursor: pointer;
 }
 
 .file-upload-overlay input[type="file"] {
     display: inline;
     position: absolute;
     opacity: 0;
-    width: 100%;
-    height: 100%;
-    font-size: 100px;
+    float:left;
+    cursor: pointer;
+    top: 0;
+    right: 0;
     filter: alpha(opacity=0);
 }
 
 .cms-content span.file img, .cms-content span.file span.filesize {
     display: none;
 } 
+
+.dropzone {
+    height: 38px;
+    line-height: 22px;
+    padding: 5px 15px;
+    overflow: hidden;
+}
+.dropzone.in {
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    font-size: 22px;
+}
+.dropzone.in .file-upload-overlay {
+    display: none !important;
+}
+.dropzone.hover {
+    background-color: #DDDDDD;
+}

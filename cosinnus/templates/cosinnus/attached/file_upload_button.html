@@ -1,10 +1,17 @@
 {% load i18n cosinnus_tags %}
 
-<div id="{{ form.forms.obj.attached_objects.id_for_label }}_progressbar" class="progressbar" style="display: none;">
-	<span style="width: 0%;" class="app-files"></span>
+<div class="well dropzone">
+	<label class="label-soft">
+		<div style="display: inline-block;">
+			<div id="{{ form.forms.obj.attached_objects.id_for_label }}_progressbar" class="progressbar" style="display: none;">
+				<span style="width: 0%;" class="app-files"></span>
+			</div>
+		</div>
+		{% trans "Drag and Drop files here..." %}
+	</label>
+	<label class="file-upload-overlay pull-right" title="{% trans "Click to upload a new file/image. You can also drag & drop a file from your computer." %}">
+		<i class="fa fa-upload"></i>
+		{% trans "Browse..." %}
+		<input id="fileupload" type="file" name="file" {% if form_data %}data-form-data='{{ form_data }}'{% endif %} data-cosinnus-upload-select2-target-field="{{ form.forms.obj.attached_objects.id_for_label }}" data-url="{% group_url 'cosinnus:file:upload-inline' group=group.slug %}" multiple>
+	</label>
 </div>
-<label class="file-upload-overlay {% if not style or not style == "large" %}pull-right{% endif %}" title="{% trans "Click to upload a new file/image. You can also drag & drop a file from your computer." %}">
-	<i class="fa fa-upload"></i>
-	{% trans "or upload new..." %}
-	<input id="fileupload" type="file" name="file" {% if form_data %}data-form-data='{{ form_data }}'{% endif %} data-cosinnus-upload-select2-target-field="{{ form.forms.obj.attached_objects.id_for_label }}" data-url="{% group_url 'cosinnus:file:upload-inline' group=group.slug %}" multiple>
-</label>

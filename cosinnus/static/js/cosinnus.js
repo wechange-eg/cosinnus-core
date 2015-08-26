@@ -962,6 +962,7 @@
 
 	        $('#fileupload').fileupload({
 	            dataType: 'json',
+	            dropZone: $('.dropzone'),
 	            singleFileUploads: false,
 	            add: function (e, data) {
 	                
@@ -1014,6 +1015,43 @@
 
 	                data.context.remove(); // remove progress bar
 	            }
+	        });
+	        // hover effect for file dropzones, from https://github.com/blueimp/jQuery-File-Upload/wiki/Drop-zone-effects
+	        $(document).bind('dragover', function (e) {
+                var dropZone = $('.dropzone');
+                var foundDropzone;
+                var timeout = window.dropZoneTimeout;
+                var found = false;
+                var node = e.target;
+                
+                if (!timeout) {
+                    dropZone.addClass('in');
+                } else {
+                    clearTimeout(timeout);
+                }
+
+                do {
+                    if ($(node).hasClass('dropzone')) {
+                        found = true;
+                        foundDropzone = $(node);
+                        break;
+                    }
+                    node = node.parentNode;
+                } while (node != null);
+                
+                if (found) {
+                    foundDropzone.addClass('hover');
+                } else {
+                    dropZone.removeClass('hover');
+                }
+
+                window.dropZoneTimeout = setTimeout(function () {
+                    window.dropZoneTimeout = null;
+                    dropZone.removeClass('in hover');
+                }, 100);
+            });
+	        $(document).bind('drop dragover', function (e) {
+	            e.preventDefault();
 	        });
 	    },
 		
