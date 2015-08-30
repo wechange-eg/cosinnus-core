@@ -1006,7 +1006,7 @@
 	                    } else if (data.result.on_success == 'render_object') {
 	                        $.each(data.result.data, function(index, object_html) {
                                 // append rendered object to object list
-	                            $('#object_list_anchor').after(object_html);
+	                            $(object_html).hide().insertAfter('#object_list_anchor').fadeIn(800);
                             });
 	                    }
 	                    
