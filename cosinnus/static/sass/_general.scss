@@ -396,3 +396,22 @@ a.portal-inlink:hover img {
 .cms-content span.file img, .cms-content span.file span.filesize {
     display: none;
 } 
+
+.dropzone {
+    height: auto;
+    line-height: 22px;
+    padding: 5px 15px;
+    overflow: hidden;
+}
+.dropzone.in {
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    font-size: 22px;
+}
+.dropzone.in .file-upload-overlay {
+    display: none !important;
+}
+.dropzone.hover {
+    background-color: #DDDDDD;
+}

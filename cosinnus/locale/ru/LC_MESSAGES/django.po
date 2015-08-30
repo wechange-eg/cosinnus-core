@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-18 18:45+0200\n"
+"POT-Creation-Date: 2015-08-30 13:11+0200\n"
 "PO-Revision-Date: 2015-08-16 20:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -69,12 +69,12 @@ msgstr "Следующие Группы были преобразованы в �
 msgid "Convert selected Societies to Projects"
 msgstr "Преобразовать выбранныe Группы в Проекты"
 
-#: .\admin.py:256
+#: .\admin.py:263
 #, python-format
 msgid "%d Users were deactivated successfully."
 msgstr "%d Пользователей были успешно дезактивированы."
 
-#: .\admin.py:258
+#: .\admin.py:265
 msgid "Deactivate users (will keep all all items they created on the site)"
 msgstr ""
 "Отключение пользователей (будет держать все элементы, которые они создали, "
@@ -934,23 +934,19 @@ msgstr "Сообщения"
 msgid "My Stream"
 msgstr "деятельность"
 
-#: .\templates\cosinnus\navbar.html.py:111
-msgid "My Dashboard"
-msgstr "Мой Dashboard"
-
-#: .\templates\cosinnus\navbar.html.py:112
+#: .\templates\cosinnus\navbar.html.py:115
 #: .\templates\cosinnus\registration\password_change_done.html.py:31
 msgid "My Profile"
 msgstr "Мой Профиль"
 
-#: .\templates\cosinnus\navbar.html.py:113
+#: .\templates\cosinnus\navbar.html.py:116
 #: .\templates\cosinnus\user\leftnav.html.py:61
 #: .\templates\cosinnus\user\userprofile_detail.html.py:43
 #: .\templates\cosinnus\user\userprofile_detail.html.py:50
 msgid "Notification Preferences"
 msgstr "Настройки Уведомлений"
 
-#: .\templates\cosinnus\navbar.html.py:115
+#: .\templates\cosinnus\navbar.html.py:118
 msgid "Logout"
 msgstr "Выход из системы"
 
@@ -1000,6 +996,20 @@ msgstr "следующий"
 #: .\templates\cosinnus\user_dashboard.html.py:5
 msgid "User Dashboard"
 msgstr "Пользовательский Dashboard"
+
+#: .\templates\cosinnus\attached\file_upload_button.html.py:20
+msgid "Drag and Drop files here..."
+msgstr ""
+
+#: .\templates\cosinnus\attached\file_upload_button.html.py:22
+msgid ""
+"Click to upload a new file/image. You can also drag & drop a file from your "
+"computer."
+msgstr ""
+
+#: .\templates\cosinnus\attached\file_upload_button.html.py:24
+msgid "Browse..."
+msgstr ""
 
 #: .\templates\cosinnus\common\403.html.py:5
 #: .\templates\cosinnus\common\403.html.py:13
@@ -1113,103 +1123,110 @@ msgstr "Добавить члена"
 msgid "Add user"
 msgstr "Добавить пользователя"
 
-#: .\templates\cosinnus\group\group_detail.html.py:81
+#: .\templates\cosinnus\group\group_detail.html.py:79
+#: .\templates\cosinnus\user\portal_admin_list.html.py:67
+#: .\templates\cosinnus\user\user_list.html.py:73
+#: .\templates\cosinnus\user\userprofile_detail.html.py:80
+msgid "Send Message"
+msgstr "Отправить Сообщение"
+
+#: .\templates\cosinnus\group\group_detail.html.py:86
 #: .\templates\cosinnus\group\group_list.html.py:110
 msgid "Admin"
 msgstr "Админ"
 
-#: .\templates\cosinnus\group\group_detail.html.py:83
+#: .\templates\cosinnus\group\group_detail.html.py:88
 #: .\templates\cosinnus\group\group_list.html.py:112
 #: .\templates\cosinnus\widgets\group_projects.html.py:15
 msgid "Member"
 msgstr "Член"
 
 # ???
-#: .\templates\cosinnus\group\group_detail.html.py:105
+#: .\templates\cosinnus\group\group_detail.html.py:110
 msgid "Kick"
 msgstr "Кайф"
 
-#: .\templates\cosinnus\group\group_detail.html.py:119
+#: .\templates\cosinnus\group\group_detail.html.py:124
 msgid "Make Member"
 msgstr "Сделать Член"
 
-#: .\templates\cosinnus\group\group_detail.html.py:121
+#: .\templates\cosinnus\group\group_detail.html.py:126
 msgid "Make Admin"
 msgstr "Сделать Админ"
 
-#: .\templates\cosinnus\group\group_detail.html.py:136
+#: .\templates\cosinnus\group\group_detail.html.py:141
 #, python-format
 msgid "Do you really want to demote administrator „%(name)s“ to member?"
 msgstr ""
 "Вы действительно хотите понизить в должности администратор  „%(name)s“ в "
 "члена?"
 
-#: .\templates\cosinnus\group\group_detail.html.py:137
+#: .\templates\cosinnus\group\group_detail.html.py:142
 msgid "Demote Admin"
 msgstr "Понизить в Должности Администратора"
 
-#: .\templates\cosinnus\group\group_detail.html.py:141
+#: .\templates\cosinnus\group\group_detail.html.py:146
 #, python-format
 msgid "Do you really want to promote member „%(name)s“ to administrator?"
 msgstr "Вы действительно хотите продвигать члена „%(name)s“ в администратора?"
 
-#: .\templates\cosinnus\group\group_detail.html.py:142
+#: .\templates\cosinnus\group\group_detail.html.py:147
 msgid "Promote Member"
 msgstr "Продвинуть Члена"
 
-#: .\templates\cosinnus\group\group_detail.html.py:148
+#: .\templates\cosinnus\group\group_detail.html.py:153
 #, python-format
 msgid "Do you really want to remove member „%(name)s“ from the Group?"
 msgstr "Вы действительно хотите удалить „%(name)s“ из группы?"
 
-#: .\templates\cosinnus\group\group_detail.html.py:149
+#: .\templates\cosinnus\group\group_detail.html.py:154
 msgid "Remove Member"
 msgstr "Удалить Члена"
 
-#: .\templates\cosinnus\group\group_detail.html.py:165
-#: .\templates\cosinnus\user\portal_admin_list.html.py:109
-#: .\templates\cosinnus\user\user_list.html.py:115
+#: .\templates\cosinnus\group\group_detail.html.py:170
+#: .\templates\cosinnus\user\portal_admin_list.html.py:111
+#: .\templates\cosinnus\user\user_list.html.py:120
 #, python-format
 msgid "And %(hidden_count)s private users..."
 msgstr "И %(hidden_count)s частных пользователей..."
 
-#: .\templates\cosinnus\group\group_detail.html.py:175
+#: .\templates\cosinnus\group\group_detail.html.py:180
 msgid "Membership requests"
 msgstr "Заявки на вступление в группу"
 
-#: .\templates\cosinnus\group\group_detail.html.py:196
+#: .\templates\cosinnus\group\group_detail.html.py:201
 #: .\templates\cosinnus\group\group_list.html.py:114
 msgid "Membership requested"
 msgstr "Членство просил(а)"
 
-#: .\templates\cosinnus\group\group_detail.html.py:217
+#: .\templates\cosinnus\group\group_detail.html.py:222
 msgid "Decline User"
 msgstr "Отклонить Пользователь "
 
-#: .\templates\cosinnus\group\group_detail.html.py:230
+#: .\templates\cosinnus\group\group_detail.html.py:235
 msgid "Accept User"
 msgstr "Принять Пользователь "
 
-#: .\templates\cosinnus\group\group_detail.html.py:242
+#: .\templates\cosinnus\group\group_detail.html.py:247
 #, python-format
 msgid "Do you really want to accept user „%(name)s“ as a member?"
 msgstr ""
 "Вы действительно хотите принять пользователя „%(name)s“ в качестве члена?"
 
-#: .\templates\cosinnus\group\group_detail.html.py:243
+#: .\templates\cosinnus\group\group_detail.html.py:248
 msgid "Accept Member"
 msgstr "Принять Члена"
 
-#: .\templates\cosinnus\group\group_detail.html.py:248
+#: .\templates\cosinnus\group\group_detail.html.py:253
 #, python-format
 msgid "Do you really want to decline member „%(name)s“?"
 msgstr "Вы действительно хотите отклонить члена „%(name)s“?"
 
-#: .\templates\cosinnus\group\group_detail.html.py:249
+#: .\templates\cosinnus\group\group_detail.html.py:254
 msgid "Decline Member"
 msgstr "Отклонить Члена"
 
-#: .\templates\cosinnus\group\group_detail.html.py:258
+#: .\templates\cosinnus\group\group_detail.html.py:263
 msgid "There are no new membership requests."
 msgstr "Новых заявок на вступление в группу нет."
 
@@ -1380,8 +1397,8 @@ msgid "User"
 msgstr "Пользователь"
 
 #: .\templates\cosinnus\group\group_user_list.html.py:23
-#: .\templates\cosinnus\user\portal_admin_list.html.py:97
-#: .\templates\cosinnus\user\user_list.html.py:103
+#: .\templates\cosinnus\user\portal_admin_list.html.py:99
+#: .\templates\cosinnus\user\user_list.html.py:108
 msgid "There are no visible users."
 msgstr "Нет видимых пользователей."
 
@@ -1830,11 +1847,6 @@ msgstr "Удалить профиль"
 msgid "User overview"
 msgstr "Обзор пользователей "
 
-#: .\templates\cosinnus\user\portal_admin_list.html.py:66
-#: .\templates\cosinnus\user\userprofile_detail.html.py:80
-msgid "Send Message"
-msgstr "Отправить Сообщение"
-
 #: .\templates\cosinnus\user\userprofile_delete.html.py:5
 #: .\templates\cosinnus\user\userprofile_delete.html.py:31
 msgid "Delete user profile"
@@ -2032,11 +2044,11 @@ msgstr ""
 "\n"
 "Пользователь %(user_name)s хочет вступить в группу %(group_name)s."
 
-#: .\templatetags\cosinnus_tags.py:117
+#: .\templatetags\cosinnus_tags.py:118
 msgid "(Deleted User)"
 msgstr "(Пользователь Удален)"
 
-#: .\templatetags\cosinnus_tags.py:278 .\templatetags\cosinnus_tags.py:304
+#: .\templatetags\cosinnus_tags.py:279 .\templatetags\cosinnus_tags.py:305
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>Рендерер для %(model_name)s не найден!</i>"
@@ -2304,3 +2316,6 @@ msgstr "Объект \"%(title)s\" успешно удален."
 #, python-format
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d объект(а/ов) был(и) удален(ы)."
+
+#~ msgid "My Dashboard"
+#~ msgstr "Мой Dashboard"

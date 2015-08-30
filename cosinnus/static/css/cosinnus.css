@@ -3032,7 +3032,7 @@ a.portal-inlink:hover img {
 } 
 
 .dropzone {
-    height: 38px;
+    height: auto;
     line-height: 22px;
     padding: 5px 15px;
     overflow: hidden;
