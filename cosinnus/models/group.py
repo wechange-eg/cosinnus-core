@@ -543,6 +543,9 @@ class CosinnusGroup(models.Model):
     # be editable, or be indexed by search indices for this group
     deactivated_apps = models.CharField(_('Deactivated Apps'), max_length=255, 
         blank=True, null=True, editable=True)
+    is_active = models.BooleanField(_('Is active'),
+        help_text=_('If a group is not active, it counts as non-existent for all purposes and views on the website.'),
+        default=True)
     
     parent = models.ForeignKey("self", verbose_name=_('Parent Group'),
         related_name='groups', null=True, blank=True, on_delete=models.SET_NULL)

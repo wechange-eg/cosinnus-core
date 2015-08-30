@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-30 13:11+0200\n"
+"POT-Creation-Date: 2015-08-30 15:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -316,7 +316,7 @@ msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 "Bitt einen gültigen Namen angeben. Ein Vorwärtsslash ist nicht erlaubt."
 
-#: .\models\group.py:376 .\models\group.py:521 .\models\group.py:874
+#: .\models\group.py:376 .\models\group.py:521 .\models\group.py:877
 msgid "Portal"
 msgstr ""
 
@@ -427,23 +427,35 @@ msgstr "Avatar"
 msgid "Deactivated Apps"
 msgstr "Deaktivierte Apps"
 
+#: .\models\group.py:546
+msgid "Is active"
+msgstr "Ist aktiv"
+
 #: .\models\group.py:547
+msgid ""
+"If a group is not active, it counts as non-existent for all purposes and "
+"views on the website."
+msgstr ""
+"Wenn ein Projekt/Gruppe inaktiv ist, zählt es als nichtexistent und ist "
+"auf der gesamten Webseite unsichtbar."
+
+#: .\models\group.py:550
 msgid "Parent Group"
 msgstr "Übergeordnete Gruppe"
 
-#: .\models\group.py:557
+#: .\models\group.py:560
 msgid "Cosinnus group"
 msgstr "Projekt"
 
-#: .\models\group.py:558
+#: .\models\group.py:561
 msgid "Cosinnus groups"
 msgstr "Projekte"
 
-#: .\models\group.py:595
+#: .\models\group.py:598
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
 
-#: .\models\group.py:627
+#: .\models\group.py:630
 msgid ""
 "The URL for this group has changed. A redirect from all existing URLs has "
 "automatically been created!"
@@ -452,55 +464,55 @@ msgstr ""
 "Weiterleitung von der alten auf die neue Adresse wurde automatisch "
 "eingerichtet!"
 
-#: .\models\group.py:748
+#: .\models\group.py:751
 msgid "Cosinnus project"
 msgstr "Projekt"
 
-#: .\models\group.py:749
+#: .\models\group.py:752
 msgid "Cosinnus projects"
 msgstr "Projekte"
 
-#: .\models\group.py:781
+#: .\models\group.py:784
 msgid "Cosinnus society"
 msgstr "Gruppe"
 
-#: .\models\group.py:782
+#: .\models\group.py:785
 msgid "Cosinnus societies"
 msgstr "Gruppen"
 
-#: .\models\group.py:868
+#: .\models\group.py:871
 msgid "Group membership"
 msgstr "Gruppen/Projekt-Mitgliedschaft"
 
-#: .\models\group.py:869
+#: .\models\group.py:872
 msgid "Group memberships"
 msgstr "Gruppen/Projekt-Mitgliedschaften"
 
-#: .\models\group.py:881
+#: .\models\group.py:884
 msgid "Portal membership"
 msgstr "Portal-Mitgliedschaft"
 
-#: .\models\group.py:882
+#: .\models\group.py:885
 msgid "Portal memberships"
 msgstr "Portal-Mitgliedschaften"
 
-#: .\models\group.py:893
+#: .\models\group.py:896
 msgid "From Portal"
 msgstr "Von Portal"
 
-#: .\models\group.py:894
+#: .\models\group.py:897
 msgid "From Group Type"
 msgstr "Von Gruppentyp"
 
-#: .\models\group.py:895
+#: .\models\group.py:898
 msgid "From Slug"
 msgstr "Von Slug"
 
-#: .\models\group.py:898 .\models\group.py:907
+#: .\models\group.py:901 .\models\group.py:910
 msgid "Permanent Group Redirects"
 msgstr "Dauerhaufte Gruppenweiterleitungen"
 
-#: .\models\group.py:906
+#: .\models\group.py:909
 msgid "Permanent Group Redirect"
 msgstr "Dauerhaufte Gruppenweiterleitung"
 
@@ -815,6 +827,7 @@ msgid "Verfassen"
 msgstr ""
 
 #: .\templates\cosinnus\leftnav_hierarchic_itemview.html.py:8
+#: .\templates\cosinnus\utils\pagination.html.py:7
 msgid "Back"
 msgstr "Zurück"
 
@@ -1972,6 +1985,11 @@ msgstr "Detaillierte Beschreibung"
 #: .\templates\cosinnus\user\userprofile_form.html.py:210
 msgid "Describe yourself, your activities and your interests."
 msgstr "Beschreibe dich, deine Aktivitäten und Interessen"
+
+#: .\templates\cosinnus\utils\pagination.html.py:28
+#, fuzzy
+msgid "Next"
+msgstr "Text"
 
 #: .\templates\cosinnus\widgets\add_widget.html.py:5
 msgid "Add Widget"
