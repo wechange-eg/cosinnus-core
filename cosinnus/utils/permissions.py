@@ -148,6 +148,9 @@ def filter_tagged_object_queryset_for_user(qs, user):
         
         @return: the filtered queryset
          """
+    # always exclude all items from inactive groups
+    qs = qs.filter(group__is_active=True)
+    
     # admins may see everything
     if user.is_superuser:
         return qs

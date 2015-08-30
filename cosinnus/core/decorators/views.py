@@ -55,7 +55,11 @@ def get_group_for_request(group_name, request):
             portal_id = int(request.POST.get('cosinnus_cross_portal', CosinnusPortal.get_current().id))
             group = group_class.objects.get(slug=group_name, portal_id=portal_id)
             if type(group) is group_class:
-                return group
+                if group.is_active:
+                    return group
+                else:
+                    logger.warn('Cosinnus.core.decorators: Failed to retrieve group because it is inactive!', 
+                     extra={'group_name': group_name, 'url': request.path, 'group_type': type(group), 'group_class': group_class, 'group_slug': group.slug, 'group_pk': group.id, 'refered': request.META.get('HTTP_REFERER', 'N/A')})
             else:
                 logger.warn('Cosinnus.core.decorators: Failed to retrieve group because its classes didnt match!', 
                      extra={'group_name': group_name, 'url': request.path, 'group_type': type(group), 'group_class': group_class, 'group_slug': group.slug, 'group_pk': group.id, 'refered': request.META.get('HTTP_REFERER', 'N/A')})

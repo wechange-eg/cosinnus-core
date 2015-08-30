@@ -196,7 +196,7 @@ class CosinnusGroupManager(models.Manager):
                 group = cache.get(self._GROUP_CACHE_KEY % (portal_id, self.__class__.__name__, slug))
                 if group is None:
                     # we can only find groups via this function that are in the same portal we run in
-                    group = super(CosinnusGroupManager, self).filter(portal__id=portal_id).get(slug=slug)
+                    group = self.get_queryset().filter(portal__id=portal_id, is_active=True).get(slug=slug)
                     cache.set(self._GROUP_CACHE_KEY % (portal_id, self.__class__.__name__, group.slug), group,
                         settings.COSINNUS_GROUP_CACHE_TIMEOUT)
                 return group
@@ -207,7 +207,7 @@ class CosinnusGroupManager(models.Manager):
                 missing = [key.split('/')[-1] for key in keys if key not in groups]
                 if missing:
                     # we can only find groups via this function that are in the same portal we run in
-                    query = self.get_queryset().filter(portal__id=portal_id, slug__in=missing)
+                    query = self.get_queryset().filter(portal__id=portal_id, is_active=True, slug__in=missing)
                     if select_related_media_tag:
                         query = query.select_related('media_tag')
                     
@@ -239,7 +239,7 @@ class CosinnusGroupManager(models.Manager):
     
     def all_in_portal(self):
         """ Returns all groups within the current portal only """
-        return super(CosinnusGroupManager, self).all().filter(portal=CosinnusPortal.get_current())
+        return self.get_queryset().filter(portal=CosinnusPortal.get_current(), is_active=True)
 
     def get(self, slug=None, portal_id=None):
         if portal_id is None:
@@ -735,7 +735,7 @@ class CosinnusGroup(models.Model):
 
 class CosinnusProjectManager(CosinnusGroupManager):
     def get_queryset(self):
-        return CosinnusGroupQS(self.model, using=self._db).filter(type=CosinnusGroup.TYPE_PROJECT)
+        return super(CosinnusProjectManager, self).get_queryset().filter(type=CosinnusGroup.TYPE_PROJECT)
 
     get_query_set = get_queryset
 
@@ -768,7 +768,7 @@ class CosinnusProject(CosinnusGroup):
     
 class CosinnusSocietyManager(CosinnusGroupManager):
     def get_queryset(self):
-        return CosinnusGroupQS(self.model, using=self._db).filter(type=CosinnusGroup.TYPE_SOCIETY)
+        return super(CosinnusSocietyManager, self).get_queryset().filter(type=CosinnusGroup.TYPE_SOCIETY)
 
     get_query_set = get_queryset
 
@@ -946,9 +946,12 @@ class CosinnusPermanentRedirect(models.Model):
     def get_group_id_for_pattern(cls, portal, group_type, group_slug):
         """ For a URL pattern, finds if there is a permanent redirect installed, and if so,
             returns the (group id, portal id) tuple of the group it should redirect to """
-        redirects_dict = cls._get_cache_dict()
-        cache_string = cls.make_cache_string(portal.id, group_type, group_slug)
-        return redirects_dict.get(cache_string, None)
+        try:
+            redirects_dict = cls._get_cache_dict()
+            cache_string = cls.make_cache_string(portal.id, group_type, group_slug)
+            return redirects_dict.get(cache_string, None)
+        except CosinnusGroup.DoesNotExist:
+            return None
     
     @classmethod
     def get_group_for_pattern(cls, portal, group_type, group_slug):
