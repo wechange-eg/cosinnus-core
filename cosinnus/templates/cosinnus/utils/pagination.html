@@ -1,0 +1,33 @@
+{% load trans from i18n %}
+{% if widget.has_previous or widget.has_next %}
+	{% with num_pages=widget.num_pages current_page_number=widget.number %}
+		<nav class="widget-pagination v-offset-l">
+			<ul class="pagination center-block text-center">
+			{% if widget.has_previous %}
+				<li><a href="?{% if widget.query %}{{ widget.query }}&amp;{% endif %}page={{ widget.previous_page_number }}"><span aria-hidden="true">&laquo;</span><span class="sr-only">{% trans "Back" %}</span></a></li>
+			{% endif %}
+
+			<li{% if widget.number == 1 %} class="active"{% endif %}><a href="?{% if widget.query %}{{ widget.query }}&amp;{% endif %}page=1">1</a></li>
+			
+			{% if 3 < current_page_number %}
+				<li><a>...</a></li>
+			{% endif %}
+			
+			{% for page_number in widget.page_numbers %}
+				{% if page_number > 1 and page_number > current_page_number|add:-3 and page_number < current_page_number|add:3 %}
+					<li{% if page_number == current_page_number %} class="active"{% endif %}><a href="?{% if widget.query %}{{ widget.query }}&amp;{% endif %}page={{ page_number }}">{{ page_number }}</a></li>
+				{% endif %}
+			{% endfor %}
+
+			{% if current_page_number|add:3 <= num_pages %}
+				<li><a>...</a></li>
+				<li{% if current_page_number == num_pages %} class="active"{% endif %}><a href="?{% if widget.query %}{{ widget.query }}&amp;{% endif %}page={{ num_pages }}">{{ num_pages }}</a></li>
+			{% endif %}
+
+			{% if widget.has_next %}
+				<li><a href="?{% if widget.query %}{{ widget.query }}&amp;{% endif %}page={{ widget.next_page_number }}"><span aria-hidden="true">&raquo;</span><span class="sr-only">{% trans "Next" %}</span></a></li>
+			{% endif %}
+			</ul>
+		</nav>
+	{% endwith %}
+{% endif %}

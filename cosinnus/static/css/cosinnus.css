@@ -3049,3 +3049,10 @@ a.portal-inlink:hover img {
 .dropzone.hover {
     background-color: #DDDDDD;
 }
+
+.v-offset-m {
+    margin-top: 15px;
+}
+.v-offset-l {
+    margin-top: 30px;
+}
