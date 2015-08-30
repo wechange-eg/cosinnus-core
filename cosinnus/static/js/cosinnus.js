@@ -998,11 +998,16 @@
 	                        if (!select2_obj) {
 	                            alert('Upload complete but the file could not be added to the field. Type in the filename to attach it!')
 	                        }
-	                        $.each(data.result.select2_data_list, function(index, select2_data) {
+	                        $.each(data.result.data, function(index, select2_data) {
 	                            select2_obj.onSelect(select2_data);
 	                        });
 	                    } else if (data.result.on_success == 'refresh_page') {
 	                        location.reload();
+	                    } else if (data.result.on_success == 'render_object') {
+	                        $.each(data.result.data, function(index, object_html) {
+                                // append rendered object to object list
+	                            $('#object_list_anchor').after(object_html);
+                            });
 	                    }
 	                    
 	                } else if (data.result.status == 'denied') {
