@@ -963,7 +963,7 @@ class CosinnusPermanentRedirect(models.Model):
             from cosinnus.core.registries.group_models import group_model_registry # must be lazy!
             group_cls = group_model_registry.get(group_type)
             try:
-                group = CosinnusGroup.objects.get_by_id(id=group_id, portal_id=portal_id)
+                group = group_cls.objects.get_by_id(id=group_id, portal_id=portal_id)
                 return group
             except group_cls.DoesNotExist:
                 pass
