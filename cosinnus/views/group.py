@@ -39,6 +39,7 @@ from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.models.tagged import BaseTagObject
 from django.shortcuts import redirect
 from django.http.response import Http404
+from django.db.models import Q
 
 
 class SamePortalGroupMixin(object):
@@ -258,7 +259,14 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
         
         model = group_class or self.model
         if self.request.user.is_authenticated():
-            return model.objects.get_cached()
+            # special case for the group-list: we can see inactive groups here that we are an admin of
+            regular_groups = model.objects.get_cached()
+            my_inactive_groups = model.objects.filter(is_active=False)
+            if not self.request.user.is_superuser:
+                # filter for groups user is admin of if he isnt a superuser
+                my_inactive_groups = my_inactive_groups.filter(id__in=model.objects.get_for_user_group_admin_pks(self.request.user))
+            my_inactive_groups = list(my_inactive_groups)
+            return regular_groups + my_inactive_groups
         else:
             return list(model.objects.public())
 

@@ -258,16 +258,23 @@ class CosinnusGroupManager(models.Manager):
         """
         return self.get_cached(pks=self.get_for_user_pks(user))
 
-    def get_for_user_pks(self, user, include_public=False):
+    def get_for_user_pks(self, user, include_public=False, member_status_in=MEMBER_STATUS):
         """
         :returns: a list of primary keys to :class:`CosinnusGroup` the given
             user is a member or admin of, and not a pending member!.
         """
         if include_public:
-            return self.filter(Q(public__exact=True) | Q(memberships__user_id=user.pk) & Q(memberships__status__in=MEMBER_STATUS)) \
+            return self.filter(Q(public__exact=True) | Q(memberships__user_id=user.pk) & Q(memberships__status__in=member_status_in)) \
             .values_list('id', flat=True).distinct()
-        return self.filter(Q(memberships__user_id=user.pk) & Q(memberships__status__in=MEMBER_STATUS)) \
+        return self.filter(Q(memberships__user_id=user.pk) & Q(memberships__status__in=member_status_in)) \
             .values_list('id', flat=True).distinct()
+    
+    def get_for_user_group_admin_pks(self, user, include_public=False, member_status_in=MEMBER_STATUS):
+        """
+        :returns: a list of primary keys to :class:`CosinnusGroup` the given
+            user is an admin of, and not a pending member!.
+        """
+        return self.get_for_user_pks(user, include_public, member_status_in=[MEMBERSHIP_ADMIN,])
     
     def with_deactivated_app(self, app_name):
         """

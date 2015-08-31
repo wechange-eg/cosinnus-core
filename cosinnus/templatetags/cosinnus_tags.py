@@ -492,6 +492,8 @@ class GroupURLNode(URLNode):
             self.view_name = copy(self.base_view_name)
         view_name = self.view_name.resolve(context)
         
+        ignoreErrors = 'ignoreErrors' in self.kwargs and self.kwargs.get('ignoreErrors').resolve(context) or False
+        
         group_arg = self.kwargs["group"].resolve(context)
         group_slug = ""
         foreign_portal = None
@@ -542,12 +544,14 @@ class GroupURLNode(URLNode):
         if portal_id and not portal_id == CosinnusPortal.get_current().id and not foreign_portal:
             foreign_portal = CosinnusPortal.objects.get(id=portal_id)
 
-        
-        ignoreErrors = 'ignoreErrors' in self.kwargs and self.kwargs.pop('ignoreErrors').resolve(context) or False
         try:
             try:
                 view_name = group_aware_url_name(view_name, group_slug, portal_id)
             except CosinnusGroup.DoesNotExist:
+                # ignore errors if the group doesn't exist if it is inactive (return empty link)
+                if ignoreErrors or not group_arg.is_active:
+                    return ''
+                
                 logger.error(u'Cosinnus__group_url_tag: Could not find group for: group_arg: %s, view_name: %s, group_slug: %s, portal_id: %s' % (str(group_arg), view_name, group_slug, portal_id))
                 raise
             
