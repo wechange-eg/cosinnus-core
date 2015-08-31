@@ -109,7 +109,10 @@ class BaseTaggableObjectIndex(TagObjectSearchIndex):
         app_name = model_cls.__module__.split('.')[0] # eg 'cosinnus_etherpad'
         excluded_groups_for_app = [group.id for group in CosinnusGroup.objects.with_deactivated_app(app_name)]
         # TODO: check if this works properly
-        return model_cls.objects.exclude(group__id__in=excluded_groups_for_app).select_related('media_tag').all()
+        qs = model_cls.objects.exclude(group__id__in=excluded_groups_for_app)
+        # don't index inactive group's items
+        qs = qs.filter(group__is_active=True)
+        return qs.select_related('media_tag').all()
 
     def prepare_creator(self, obj):
         return prepare_user(obj.creator)
