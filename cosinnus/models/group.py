@@ -694,7 +694,10 @@ class CosinnusGroup(models.Model):
         
         if isinstance(self, CosinnusGroup) or issubclass(self.__class__, CosinnusGroup):
             self._clear_local_cache()
-            
+    
+    def clear_cache(self):
+        self._clear_cache(slug=self.slug)
+    
     def clear_member_cache(self):
         CosinnusGroupMembership.clear_member_cache_for_group(self)
 

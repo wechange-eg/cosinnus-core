@@ -1,0 +1,70 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks %}
+
+{% block page_title %}
+	   {% if activate %}{% trans "Re-Activate Project/Group" %}{% else %}{% trans "Deactivate Project/Group" %}{% endif %}
+{% endblock %}
+
+{% block breadcrumb %}
+        {{ block.super }}
+        <li class="active">{% if activate %}{% trans "Re-Activate Project/Group" %}{% else %}{% trans "Deactivate Project/Group" %}{% endif %}</li>
+{% endblock %}
+
+{% block leftnav %}
+    {% include 'cosinnus/user/leftnav.html' with view="delete_profile" %}
+{% endblock leftnav %}
+
+
+{% block content %}
+    
+    {% if not activate %}
+	    <div class="alert alert-danger alert-dismissable">
+		    <i class="fa fa-exclamation-triangle fa-3x"></i>
+		    <p>{% trans 'Warning!' %}</p>
+		    <p>{% trans "You are about to deactivate this project/group!" %}</p>
+		</div>
+	{% endif %}
+
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+	    
+        <fieldset>
+            <legend>{% if activate %}{% trans "Re-Activate Project/Group" %}{% else %}{% trans "Deactivate Project/Group" %}{% endif %}: {{ target_group.name }}</legend>
+
+            <!-- On large screens the long explanation texts are on the right side next to the input elements -->
+            <div class="row">
+                <!-- explanation text -->
+                <div class="col-md-12">
+                		<p class="transparent"></p>
+                	{% if activate %}
+						<p class="transparent">{% trans "You are about to re-activate this project/group. It and all of its content will be visible on the website again." %}</p><!-- Text here if neccessary -->
+					{% else %}
+	                    <p class="transparent">{% trans "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you." %}</p><!-- Text here if neccessary -->
+	                    <p class="transparent">{% trans "This process is reversible. You can reactivate the project/group from the project/group list page at any time." %}</p><!-- Text here if neccessary -->
+					{% endif %}
+                </div>
+            </div><!-- row -->
+        </fieldset>
+    </div>
+    
+    <form method="POST" action=".">{% csrf_token %}
+	    <div class="{% if activate %}app-calendar{% else %}app-etherpad{% endif %}">
+		    <button type="submit" class="btn btn-emphasized">
+		        <ul class="media-list">
+		            <li class="media">
+		                <a class="pull-left" href="#">
+		                    <i class="fa {% if activate %}fa-check{% else %}fa-times{% endif %}"></i>
+		                </a>
+		                <div class="media-body">
+	                        {% if activate %}{% trans "Re-Activate" %}{% else %}{% trans "Deactivate" %}{% endif %}
+		                </div>
+		            </li>
+		        </ul>
+		    </button>
+	    </div>
+    </form>
+
+{% endblock %}
+
+
+

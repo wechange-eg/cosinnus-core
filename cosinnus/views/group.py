@@ -15,7 +15,7 @@ from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView,
     ListView, UpdateView, TemplateView)
 
-from cosinnus.core.decorators.views import membership_required
+from cosinnus.core.decorators.views import membership_required, redirect_to_403
 from cosinnus.core.registries import app_registry
 from cosinnus.forms.group import MembershipForm
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
@@ -37,9 +37,11 @@ from multiform.forms import InvalidArgument
 from cosinnus.forms.tagged import get_form  # circular import
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.models.tagged import BaseTagObject
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.http.response import Http404
 from django.db.models import Q
+from cosinnus.templatetags.cosinnus_tags import is_group_admin
+from cosinnus.utils.permissions import check_ug_admin
 
 
 class SamePortalGroupMixin(object):
@@ -724,3 +726,42 @@ class GroupExportView(SamePortalGroupMixin, RequireAdminMixin, TemplateView):
         return context
 
 group_export = GroupExportView.as_view()
+
+
+class ActivateOrDeactivateGroupView(TemplateView):
+    
+    template_name = 'cosinnus/group/group_activate_or_deactivate.html'
+    
+    message_success_activate = _('%(group_name)s was re-activated successfully!')
+    message_success_deactivate = _('%(group_name)s was deactivated successfully!')
+    
+    
+    def dispatch(self, request, *args, **kwargs):
+        group_id = int(kwargs.pop('group_id'))
+        group = get_object_or_404(CosinnusGroup, id=group_id)
+        if not (request.user.is_superuser or check_ug_admin(request.user, group)):
+            redirect_to_403(request, self)
+        self.group = group
+        self.activate = kwargs.pop('activate')
+        return super(ActivateOrDeactivateGroupView, self).dispatch(request, *args, **kwargs)
+    
+    def post(self, request, *args, **kwargs):
+        self.group.is_active = self.activate
+        self.group.save()
+        self.group.clear_cache()
+        if self.activate:
+            messages.success(request, self.message_success_activate % {'group_name': self.group.name})
+            return redirect(self.group.get_absolute_url())
+        else:
+            messages.success(request, self.message_success_deactivate % {'group_name': self.group.name})
+            return redirect(reverse('cosinnus:user-dashboard'))
+    
+    def get_context_data(self, **kwargs):
+        context = super(ActivateOrDeactivateGroupView, self).get_context_data(**kwargs)
+        context.update({
+            'target_group': self.group,
+            'activate': self.activate,
+        })
+        return context
+    
+activate_or_deactivate = ActivateOrDeactivateGroupView.as_view()

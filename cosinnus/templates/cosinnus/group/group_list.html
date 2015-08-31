@@ -199,11 +199,11 @@
 	                {% else %} {% comment %} --- Group inactive --- {% endcomment %}
 	                	
 	                	{% if user.is_superuser or user.pk in admins %}
-			                <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:group-edit' group=group %}">
+			                <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:group-activate' group_id=group.id %}">
 			                    <ul class="media-list">
 			                        <li class="media">
 			                            <a class="pull-left" href="#">
-			                                <i class="fa fa-pencil"></i>
+			                                <i class="fa fa-flash"></i>
 			                            </a>
 			                            <div class="media-body">
 			                                {% trans "Re-Activate" %}
