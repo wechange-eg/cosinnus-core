@@ -107,10 +107,19 @@ class CosinnusGroupMembershipQS(models.query.QuerySet):
 
 class CosinnusGroupManager(models.Manager):
     
-    _GROUPS_SLUG_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/slugs' # portal_id, self.__class__.__name__  --> ( slug (str), pk (int) )
-    _GROUPS_PK_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/pks' # portal_id, self.__class__.__name__   --> ( pk (int), slug (str) )
-    _GROUP_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/%s' # portal_id, self.__class__.__name__, slug   --> group (obj)
+    """ These caches are the directories of which groups are active and displayed in each portal. 
+        They are typed by the Groups' Manager (!) so that one can be sure to always receive the correct Model instantiation.
+        This also means that when called on the base CosinnusGroupManager, one will receive cached CosinnusGroups and not
+        either CosinnusProject or CosinnusSociety. This works as intended, as often functions wish to explicitly get a set of
+        both of these (membership queries, BaseTaggableObject displays in Stream, etc) """
     
+    # list of all group slugs and the pk mapped to each slug
+    _GROUPS_SLUG_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/slugs' # portal_id, self.__class__.__name__  --> ( slug (str), pk (int) )
+    # list of all group pks and the slug mapped to each pk
+    _GROUPS_PK_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/pks' # portal_id, self.__class__.__name__   --> ( pk (int), slug (str) )
+    # actual slug to group object cache
+    _GROUP_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/%s' # portal_id, self.__class__.__name__, slug   --> group (obj)
+    # group slug to Model type cache, for when only a group slug is known but not the specific CosinnusGroup sub model type
     _GROUP_SLUG_TYPE_CACHE_KEY = 'cosinnus/core/portal/%d/group_slug_type/%s' # portal_id, group_slug  --> type (int)
 
 
