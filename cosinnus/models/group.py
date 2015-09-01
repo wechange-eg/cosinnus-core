@@ -147,7 +147,7 @@ class CosinnusGroupManager(models.Manager):
         slugs = cache.get(self._GROUPS_SLUG_CACHE_KEY % (portal_id, self.__class__.__name__))
         if slugs is None:
             # we can only find groups via this function that are in the same portal we run in
-            slugs = OrderedDict(self.filter(portal=portal_id).values_list('slug', 'id').all())
+            slugs = OrderedDict(self.get_queryset().filter(portal_id=portal_id, is_active=True).values_list('slug', 'id').all())
             pks = OrderedDict((v, k) for k, v in six.iteritems(slugs))
             cache.set(self._GROUPS_SLUG_CACHE_KEY % (portal_id, self.__class__.__name__), slugs,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
@@ -169,7 +169,7 @@ class CosinnusGroupManager(models.Manager):
         pks = cache.get(self._GROUPS_PK_CACHE_KEY % (portal_id, self.__class__.__name__))
         if pks is None:
             # we can only find groups via this function that are in the same portal we run in
-            pks = OrderedDict(self.filter(portal__id=portal_id).values_list('id', 'slug').all())
+            pks = OrderedDict(self.filter(portal__id=portal_id, is_active=True).values_list('id', 'slug').all())
             slugs = OrderedDict((v, k) for k, v in six.iteritems(pks))
             cache.set(self._GROUPS_PK_CACHE_KEY % (portal_id, self.__class__.__name__), pks,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
@@ -260,32 +260,33 @@ class CosinnusGroupManager(models.Manager):
             portal_id = CosinnusPortal.get_current().id
         return self.get_cached(pks=id, portal_id=portal_id)
     
-    def get_for_user(self, user):
+    def get_for_user(self, user, includeInactive=False):
         """
         :returns: a list of :class:`CosinnusGroup` the given user is a member
             or admin of.
         """
-        return self.get_cached(pks=self.get_for_user_pks(user))
+        return self.get_cached(pks=self.get_for_user_pks(user, includeInactive=includeInactive))
 
-    def get_for_user_pks(self, user, include_public=False, member_status_in=MEMBER_STATUS):
+    def get_for_user_pks(self, user, include_public=False, member_status_in=MEMBER_STATUS, includeInactive=False):
         """
         :returns: a list of primary keys to :class:`CosinnusGroup` the given
             user is a member or admin of, and not a pending member!.
         """
+        qs = self.get_queryset()
+        if not includeInactive:
+            qs = qs.filter(is_active=True) 
         if include_public:
-            return self.get_queryset().filter(is_active=True) \
-                .filter(Q(public__exact=True) | Q(memberships__user_id=user.pk) & Q(memberships__status__in=member_status_in)) \
+            return qs.filter(Q(public__exact=True) | Q(memberships__user_id=user.pk) & Q(memberships__status__in=member_status_in)) \
                 .values_list('id', flat=True).distinct()
-        return self.get_queryset().filter(is_active=True) \
-            .filter(Q(memberships__user_id=user.pk) & Q(memberships__status__in=member_status_in)) \
+        return qs.filter(Q(memberships__user_id=user.pk) & Q(memberships__status__in=member_status_in)) \
             .values_list('id', flat=True).distinct()
     
-    def get_for_user_group_admin_pks(self, user, include_public=False, member_status_in=MEMBER_STATUS):
+    def get_for_user_group_admin_pks(self, user, include_public=False, member_status_in=MEMBER_STATUS, includeInactive=False):
         """
         :returns: a list of primary keys to :class:`CosinnusGroup` the given
             user is an admin of, and not a pending member!.
         """
-        return self.get_for_user_pks(user, include_public, member_status_in=[MEMBERSHIP_ADMIN,])
+        return self.get_for_user_pks(user, include_public, member_status_in=[MEMBERSHIP_ADMIN,], includeInactive=includeInactive)
     
     def with_deactivated_app(self, app_name):
         """

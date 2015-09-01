@@ -266,7 +266,7 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
             my_inactive_groups = model.objects.filter(is_active=False)
             if not self.request.user.is_superuser:
                 # filter for groups user is admin of if he isnt a superuser
-                my_inactive_groups = my_inactive_groups.filter(id__in=model.objects.get_for_user_group_admin_pks(self.request.user))
+                my_inactive_groups = my_inactive_groups.filter(id__in=model.objects.get_for_user_group_admin_pks(self.request.user, includeInactive=True))
             my_inactive_groups = list(my_inactive_groups)
             return regular_groups + my_inactive_groups
         else:
