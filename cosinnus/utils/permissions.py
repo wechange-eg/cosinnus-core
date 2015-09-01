@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.db.models import Q
 
-from cosinnus.models.group import CosinnusGroup
+from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject,\
     BaseHierarchicalTaggableObjectModel
 from cosinnus.models.profile import BaseUserProfile
@@ -139,6 +139,14 @@ def check_group_create_objects_access(group, user):
     return is_member or is_admin or user.is_superuser or user.is_staff
 
 
+def check_user_portal_admin(user, portal=None):
+    """ Checks permissions of a user to create objects in a CosinnusGroup.
+            returns ``True`` if the user is either admin, staff member or group member
+    """
+    portal = portal or CosinnusPortal.get_current()
+    return user.id in portal.admins
+
+
 def filter_tagged_object_queryset_for_user(qs, user):
     """ A queryset filter to filter for TaggableObjects that respects the visibility tag of the object,
         checking group membership of the user and creator information of the object.
@@ -148,6 +156,9 @@ def filter_tagged_object_queryset_for_user(qs, user):
         
         @return: the filtered queryset
          """
+    # always exclude all items from inactive groups
+    qs = qs.filter(group__is_active=True)
+    
     # admins may see everything
     if user.is_superuser:
         return qs

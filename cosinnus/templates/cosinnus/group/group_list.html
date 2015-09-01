@@ -82,17 +82,17 @@
 	        {% endif %}
 	        {% endcomment %}
 	        <div class="fadedown {% if filter_group and filter_group.id == group.id %}open {% endif %}{% if not forloop.last %}regular-space{% endif %}">
-	            <div class="btn btn-{% if user.is_authenticated and user.pk in members or group.public %}emphasized{% else %}default{% endif %} w100">
+	            <div class="btn btn-{% if group.is_active and user.is_authenticated and user.pk in members or group.public and group.is_active %}emphasized{% else %}default{% endif %} w100">
 	                <ul class="media-list">
 	                    <li class="media">
-	                        {% if group.public or user.pk in members or user.is_superuser %}
-		                        <a class="pull-left" href="{{ group_url }}">
-		                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
-		                        </a>
-	                        {% else %}
+	                        {% if not group.public and not user.pk in members and not user.is_superuser or not group.is_active %}
 	                            <span class="pull-left">
 	                               {% include "cosinnus/group/group_avatar_image.html" with group=group %}
 	                            </span>
+	                        {% else %}
+		                        <a class="pull-left" href="{{ group_url }}">
+		                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
+		                        </a>
 	                        {% endif %}
 	                        <a class="pull-right fadedown-clickarea" href="#">
 	                            <i class="fa fa-chevron-down"></i>
@@ -118,7 +118,9 @@
 		                                {% endif %}
                                     {% endif %}
 	                            </span>
-                                {% if group.public or user.pk in members or user.is_superuser %}
+	                            {% if not group.is_active %}
+	                            	{% trans "(Inactive)" %} {{ group.name }}
+                                {% elif group.public or user.pk in members or user.is_superuser %}
 		                            <a href="{{ group_url }}">
 		                                {{ group.name }}
 		                            </a>
@@ -137,61 +139,81 @@
 			            </div>
 		            {% endif %}
 		            
-		            {% if user.is_authenticated %}
-				        {% captureas modal_id %}groupModal_{{group.slug}}{% endcaptureas %}
-			            <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_id}}">
-			                   
-			                <ul class="media-list">
-			                    <li class="media">
-			                        <a class="pull-left" href="#">
-			                            <i class="fa fa-group"></i>
-			                        </a>
-			                        <div class="media-body">
-			                            {% if user.pk in members %}
-			                                {% trans "Leave" %}
-			                            {% elif user.pk in pendings %}
-			                                {% trans "Withdraw" %}
-			                            {% else %}
-			                                {% trans "Join" %}
-			                            {% endif %}
-			                        </div>
-			                    </li>
-			                </ul>
-			            </button>
-		            {% endif %}
-	                
-	                {% if user.is_authenticated and user.pk in admins %}
-		                <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:group-edit' group=group %}">
-		                    <ul class="media-list">
-		                        <li class="media">
-		                            <a class="pull-left" href="#">
-		                                <i class="fa fa-pencil"></i>
-		                            </a>
-		                            <div class="media-body">
-		                                {% trans "Edit" %}
-		                            </div>
-		                        </li>
-		                    </ul>
-		                </button>
+		            {% if group.is_active %}
+		            
+			            {% if user.is_authenticated %}
+					        {% captureas modal_id %}groupModal_{{group.slug}}{% endcaptureas %}
+				            <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_id}}">
+				                   
+				                <ul class="media-list">
+				                    <li class="media">
+				                        <a class="pull-left" href="#">
+				                            <i class="fa fa-group"></i>
+				                        </a>
+				                        <div class="media-body">
+				                            {% if user.pk in members %}
+				                                {% trans "Leave" %}
+				                            {% elif user.pk in pendings %}
+				                                {% trans "Withdraw" %}
+				                            {% else %}
+				                                {% trans "Join" %}
+				                            {% endif %}
+				                        </div>
+				                    </li>
+				                </ul>
+				            </button>
+			            {% endif %}
+		                
+		                {% if user.is_authenticated and user.pk in admins %}
+			                <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:group-edit' group=group %}">
+			                    <ul class="media-list">
+			                        <li class="media">
+			                            <a class="pull-left" href="#">
+			                                <i class="fa fa-pencil"></i>
+			                            </a>
+			                            <div class="media-body">
+			                                {% trans "Edit" %}
+			                            </div>
+			                        </li>
+			                    </ul>
+			                </button>
+		                {% endif %}
+		                
+		                {% if group.public or user.pk in members or user.is_superuser %}
+			                <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:group-detail' group=group %}">
+			                    <ul class="media-list">
+			                        <li class="media">
+			                            <a class="pull-left" href="#">
+			                                <i class="fa fa-group"></i>
+			                            </a>
+			                            <div class="media-body">
+			                                {% trans "Group details" %}
+			                            </div>
+			                        </li>
+			                    </ul>
+			                </button>
+		                {% endif %}
+		                
+	                    {% include 'cosinnus/feedback/report_button_btn.html' with object=group %}
+		                
+	                {% else %} {% comment %} --- Group inactive --- {% endcomment %}
+	                	
+	                	{% if user.is_superuser or user.pk in admins or user|is_portal_admin %}
+			                <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:group-activate' group_id=group.id %}">
+			                    <ul class="media-list">
+			                        <li class="media">
+			                            <a class="pull-left" href="#">
+			                                <i class="fa fa-flash"></i>
+			                            </a>
+			                            <div class="media-body">
+			                                {% trans "Re-Activate" %}
+			                            </div>
+			                        </li>
+			                    </ul>
+			                </button>
+		                {% endif %}
+	                	
 	                {% endif %}
-	                
-	                {% if group.public or user.pk in members or user.is_superuser %}
-		                <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:group-detail' group=group %}">
-		                    <ul class="media-list">
-		                        <li class="media">
-		                            <a class="pull-left" href="#">
-		                                <i class="fa fa-group"></i>
-		                            </a>
-		                            <div class="media-body">
-		                                {% trans "Group details" %}
-		                            </div>
-		                        </li>
-		                    </ul>
-		                </button>
-	                {% endif %}
-	                
-                    {% include 'cosinnus/feedback/report_button_btn.html' with object=group %}
-	                
 	            </div>
 	            
 	        </div><!-- fadedown -->

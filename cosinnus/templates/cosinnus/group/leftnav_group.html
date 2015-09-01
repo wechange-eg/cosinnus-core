@@ -6,6 +6,8 @@
     {% captureas is_editgroup %}True{% endcaptureas %}
 {% elif current_page == "groupdetails" %}
     {% captureas is_groupdetails %}True{% endcaptureas %}
+{% elif current_page == "groupdeactivate" %}
+    {% captureas is_deactivategroup %}True{% endcaptureas %}
 {% endif %}
 
 {% if user|has_write_access:object %}
@@ -19,6 +21,13 @@
 {% include "cosinnus/leftnav_button.html" with active=is_groupdetails extra_classes="large-space" icon="fa-users" label=label href=href  %}
 
 {% include 'cosinnus/feedback/report_button_leftnav_btn.html' with object=group %}
+
+{% if user|is_group_admin:group or user.is_superuser or user|is_portal_admin %}
+	{% captureas href %}{% if activate %}{% url 'cosinnus:group-activate' group_id=group.id %}{% else %}{% url 'cosinnus:group-deactivate' group_id=group.id %}{% endif %}{% endcaptureas %}
+	{% captureas label %}{% if group and group.type == 1 or group_model == "CosinnusSociety" %}{% if activate %}{% trans "Re-activate Society" %}{% else %}{% trans "Deactivate Society" %}{% endif %}{% else %}{% if activate %}{% trans "Activate Project" %}{% else %}{% trans "Deactivate Project" %}{% endif %}{% endif %}{% endcaptureas %}
+	{% captureas icon %}{% if activate %}fa-flash{% else %}fa-times{% endif %}{% endcaptureas %}
+	{% include "cosinnus/leftnav_button.html" with active=is_deactivategroup extra_classes="large-space" icon=icon label=label href=href  %}
+{% endif %}
 
 {% if user.pk in object.members or user.pk in object.admins %}
     {% captureas label %}{% trans "Leave" %}{% endcaptureas %}
@@ -40,7 +49,7 @@
     {% captureas action %}{% group_url 'cosinnus:group-user-withdraw' group=group %}{% endcaptureas %}
     
     {% include "cosinnus/modal_box.html" with id="leave_join_group_modal" label=label title=title form_action=action %}
-{% else %}
+{% elif object.members %}
     {% captureas label %}{% trans "Join" %}{% endcaptureas %}
     {% captureas extra_atts %}data-toggle="modal" data-target="#leave_join_group_modal"{% endcaptureas %}
     {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-sign-in" label=label href="#"  %}

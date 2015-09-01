@@ -183,7 +183,7 @@ class CosinnusConf(AppConf):
     SITE_PROTOCOL = 'http'
     
     # the duration of the user stream (must be very short, otherwise notifications will not appear)
-    STREAM_SHORT_CACHE_TIMEOUT = 10
+    STREAM_SHORT_CACHE_TIMEOUT = 30
 
     #: A pointer to the swappable cosinnus user profile model
     USER_PROFILE_MODEL = 'cosinnus.UserProfile'

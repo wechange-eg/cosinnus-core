@@ -29,6 +29,7 @@ from django.core.urlresolvers import reverse
 from django.utils.functional import cached_property
 from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
 from cosinnus.core import signals
+from cosinnus.core.registries.group_models import group_model_registry
 from django.db.models.signals import post_delete, post_save
 from django.dispatch.dispatcher import receiver
 from django.template.loader import render_to_string
@@ -107,11 +108,20 @@ class CosinnusGroupMembershipQS(models.query.QuerySet):
 
 class CosinnusGroupManager(models.Manager):
     
-    _GROUPS_SLUG_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/slugs'
-    _GROUPS_PK_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/pks'
-    _GROUP_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/%s'
+    """ These caches are the directories of which groups are active and displayed in each portal. 
+        They are typed by the Groups' Manager (!) so that one can be sure to always receive the correct Model instantiation.
+        This also means that when called on the base CosinnusGroupManager, one will receive cached CosinnusGroups and not
+        either CosinnusProject or CosinnusSociety. This works as intended, as often functions wish to explicitly get a set of
+        both of these (membership queries, BaseTaggableObject displays in Stream, etc) """
     
-    _GROUP_SLUG_TYPE_CACHE_KEY = 'cosinnus/core/portal/%d/group_slug_type/%s'
+    # list of all group slugs and the pk mapped to each slug
+    _GROUPS_SLUG_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/slugs' # portal_id, self.__class__.__name__  --> ( slug (str), pk (int) )
+    # list of all group pks and the slug mapped to each pk
+    _GROUPS_PK_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/pks' # portal_id, self.__class__.__name__   --> ( pk (int), slug (str) )
+    # actual slug to group object cache
+    _GROUP_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/%s' # portal_id, self.__class__.__name__, slug   --> group (obj)
+    # group slug to Model type cache, for when only a group slug is known but not the specific CosinnusGroup sub model type
+    _GROUP_SLUG_TYPE_CACHE_KEY = 'cosinnus/core/portal/%d/group_slug_type/%s' # portal_id, group_slug  --> type (int)
 
 
     use_for_related_fields = True
@@ -138,7 +148,7 @@ class CosinnusGroupManager(models.Manager):
         slugs = cache.get(self._GROUPS_SLUG_CACHE_KEY % (portal_id, self.__class__.__name__))
         if slugs is None:
             # we can only find groups via this function that are in the same portal we run in
-            slugs = OrderedDict(self.filter(portal=portal_id).values_list('slug', 'id').all())
+            slugs = OrderedDict(self.get_queryset().filter(portal_id=portal_id, is_active=True).values_list('slug', 'id').all())
             pks = OrderedDict((v, k) for k, v in six.iteritems(slugs))
             cache.set(self._GROUPS_SLUG_CACHE_KEY % (portal_id, self.__class__.__name__), slugs,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
@@ -160,7 +170,7 @@ class CosinnusGroupManager(models.Manager):
         pks = cache.get(self._GROUPS_PK_CACHE_KEY % (portal_id, self.__class__.__name__))
         if pks is None:
             # we can only find groups via this function that are in the same portal we run in
-            pks = OrderedDict(self.filter(portal__id=portal_id).values_list('id', 'slug').all())
+            pks = OrderedDict(self.filter(portal__id=portal_id, is_active=True).values_list('id', 'slug').all())
             slugs = OrderedDict((v, k) for k, v in six.iteritems(pks))
             cache.set(self._GROUPS_PK_CACHE_KEY % (portal_id, self.__class__.__name__), pks,
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
@@ -196,7 +206,7 @@ class CosinnusGroupManager(models.Manager):
                 group = cache.get(self._GROUP_CACHE_KEY % (portal_id, self.__class__.__name__, slug))
                 if group is None:
                     # we can only find groups via this function that are in the same portal we run in
-                    group = super(CosinnusGroupManager, self).filter(portal__id=portal_id).get(slug=slug)
+                    group = self.get_queryset().filter(portal__id=portal_id, is_active=True).get(slug=slug)
                     cache.set(self._GROUP_CACHE_KEY % (portal_id, self.__class__.__name__, group.slug), group,
                         settings.COSINNUS_GROUP_CACHE_TIMEOUT)
                 return group
@@ -207,7 +217,7 @@ class CosinnusGroupManager(models.Manager):
                 missing = [key.split('/')[-1] for key in keys if key not in groups]
                 if missing:
                     # we can only find groups via this function that are in the same portal we run in
-                    query = self.get_queryset().filter(portal__id=portal_id, slug__in=missing)
+                    query = self.get_queryset().filter(portal__id=portal_id, is_active=True, slug__in=missing)
                     if select_related_media_tag:
                         query = query.select_related('media_tag')
                     
@@ -239,7 +249,7 @@ class CosinnusGroupManager(models.Manager):
     
     def all_in_portal(self):
         """ Returns all groups within the current portal only """
-        return super(CosinnusGroupManager, self).all().filter(portal=CosinnusPortal.get_current())
+        return self.get_queryset().filter(portal=CosinnusPortal.get_current(), is_active=True)
 
     def get(self, slug=None, portal_id=None):
         if portal_id is None:
@@ -251,23 +261,33 @@ class CosinnusGroupManager(models.Manager):
             portal_id = CosinnusPortal.get_current().id
         return self.get_cached(pks=id, portal_id=portal_id)
     
-    def get_for_user(self, user):
+    def get_for_user(self, user, includeInactive=False):
         """
         :returns: a list of :class:`CosinnusGroup` the given user is a member
             or admin of.
         """
-        return self.get_cached(pks=self.get_for_user_pks(user))
+        return self.get_cached(pks=self.get_for_user_pks(user, includeInactive=includeInactive))
 
-    def get_for_user_pks(self, user, include_public=False):
+    def get_for_user_pks(self, user, include_public=False, member_status_in=MEMBER_STATUS, includeInactive=False):
         """
         :returns: a list of primary keys to :class:`CosinnusGroup` the given
             user is a member or admin of, and not a pending member!.
         """
+        qs = self.get_queryset()
+        if not includeInactive:
+            qs = qs.filter(is_active=True) 
         if include_public:
-            return self.filter(Q(public__exact=True) | Q(memberships__user_id=user.pk) & Q(memberships__status__in=MEMBER_STATUS)) \
+            return qs.filter(Q(public__exact=True) | Q(memberships__user_id=user.pk) & Q(memberships__status__in=member_status_in)) \
+                .values_list('id', flat=True).distinct()
+        return qs.filter(Q(memberships__user_id=user.pk) & Q(memberships__status__in=member_status_in)) \
             .values_list('id', flat=True).distinct()
-        return self.filter(Q(memberships__user_id=user.pk) & Q(memberships__status__in=MEMBER_STATUS)) \
-            .values_list('id', flat=True).distinct()
+    
+    def get_for_user_group_admin_pks(self, user, include_public=False, member_status_in=MEMBER_STATUS, includeInactive=False):
+        """
+        :returns: a list of primary keys to :class:`CosinnusGroup` the given
+            user is an admin of, and not a pending member!.
+        """
+        return self.get_for_user_pks(user, include_public, member_status_in=[MEMBERSHIP_ADMIN,], includeInactive=includeInactive)
     
     def with_deactivated_app(self, app_name):
         """
@@ -543,6 +563,9 @@ class CosinnusGroup(models.Model):
     # be editable, or be indexed by search indices for this group
     deactivated_apps = models.CharField(_('Deactivated Apps'), max_length=255, 
         blank=True, null=True, editable=True)
+    is_active = models.BooleanField(_('Is active'),
+        help_text=_('If a group is not active, it counts as non-existent for all purposes and views on the website.'),
+        default=True)
     
     parent = models.ForeignKey("self", verbose_name=_('Parent Group'),
         related_name='groups', null=True, blank=True, on_delete=models.SET_NULL)
@@ -684,7 +707,16 @@ class CosinnusGroup(models.Model):
         
         if isinstance(self, CosinnusGroup) or issubclass(self.__class__, CosinnusGroup):
             self._clear_local_cache()
-            
+        
+        # if this has been called on the model-ignorant CosinnusGroupManager, as a precaution, also run this for the sub-models
+        if self.objects.__class__.__name__ == CosinnusGroupManager.__name__:
+            for url_key in group_model_registry:
+                group_class = group_model_registry.get(url_key)
+                group_class._clear_cache(slug, slugs)
+    
+    def clear_cache(self):
+        self._clear_cache(slug=self.slug)
+    
     def clear_member_cache(self):
         CosinnusGroupMembership.clear_member_cache_for_group(self)
 
@@ -732,7 +764,7 @@ class CosinnusGroup(models.Model):
 
 class CosinnusProjectManager(CosinnusGroupManager):
     def get_queryset(self):
-        return CosinnusGroupQS(self.model, using=self._db).filter(type=CosinnusGroup.TYPE_PROJECT)
+        return super(CosinnusProjectManager, self).get_queryset().filter(type=CosinnusGroup.TYPE_PROJECT)
 
     get_query_set = get_queryset
 
@@ -765,7 +797,7 @@ class CosinnusProject(CosinnusGroup):
     
 class CosinnusSocietyManager(CosinnusGroupManager):
     def get_queryset(self):
-        return CosinnusGroupQS(self.model, using=self._db).filter(type=CosinnusGroup.TYPE_SOCIETY)
+        return super(CosinnusSocietyManager, self).get_queryset().filter(type=CosinnusGroup.TYPE_SOCIETY)
 
     get_query_set = get_queryset
 
@@ -943,9 +975,12 @@ class CosinnusPermanentRedirect(models.Model):
     def get_group_id_for_pattern(cls, portal, group_type, group_slug):
         """ For a URL pattern, finds if there is a permanent redirect installed, and if so,
             returns the (group id, portal id) tuple of the group it should redirect to """
-        redirects_dict = cls._get_cache_dict()
-        cache_string = cls.make_cache_string(portal.id, group_type, group_slug)
-        return redirects_dict.get(cache_string, None)
+        try:
+            redirects_dict = cls._get_cache_dict()
+            cache_string = cls.make_cache_string(portal.id, group_type, group_slug)
+            return redirects_dict.get(cache_string, None)
+        except CosinnusGroup.DoesNotExist:
+            return None
     
     @classmethod
     def get_group_for_pattern(cls, portal, group_type, group_slug):
@@ -957,7 +992,7 @@ class CosinnusPermanentRedirect(models.Model):
             from cosinnus.core.registries.group_models import group_model_registry # must be lazy!
             group_cls = group_model_registry.get(group_type)
             try:
-                group = CosinnusGroup.objects.get_by_id(id=group_id, portal_id=portal_id)
+                group = group_cls.objects.get_by_id(id=group_id, portal_id=portal_id)
                 return group
             except group_cls.DoesNotExist:
                 pass

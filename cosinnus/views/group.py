@@ -15,7 +15,7 @@ from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView,
     ListView, UpdateView, TemplateView)
 
-from cosinnus.core.decorators.views import membership_required
+from cosinnus.core.decorators.views import membership_required, redirect_to_403
 from cosinnus.core.registries import app_registry
 from cosinnus.forms.group import MembershipForm
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
@@ -37,8 +37,11 @@ from multiform.forms import InvalidArgument
 from cosinnus.forms.tagged import get_form  # circular import
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.models.tagged import BaseTagObject
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.http.response import Http404
+from django.db.models import Q
+from cosinnus.templatetags.cosinnus_tags import is_group_admin
+from cosinnus.utils.permissions import check_ug_admin, check_user_portal_admin
 
 
 class SamePortalGroupMixin(object):
@@ -258,7 +261,14 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
         
         model = group_class or self.model
         if self.request.user.is_authenticated():
-            return model.objects.get_cached()
+            # special case for the group-list: we can see inactive groups here that we are an admin of
+            regular_groups = model.objects.get_cached()
+            my_inactive_groups = model.objects.filter(portal_id=CosinnusPortal.get_current().id, is_active=False)
+            if not self.request.user.is_superuser:
+                # filter for groups user is admin of if he isnt a superuser
+                my_inactive_groups = my_inactive_groups.filter(id__in=model.objects.get_for_user_group_admin_pks(self.request.user, includeInactive=True))
+            my_inactive_groups = list(my_inactive_groups)
+            return regular_groups + my_inactive_groups
         else:
             return list(model.objects.public())
 
@@ -716,3 +726,57 @@ class GroupExportView(SamePortalGroupMixin, RequireAdminMixin, TemplateView):
         return context
 
 group_export = GroupExportView.as_view()
+
+
+class ActivateOrDeactivateGroupView(TemplateView):
+    
+    template_name = 'cosinnus/group/group_activate_or_deactivate.html'
+    
+    message_success_activate = _('%(group_name)s was re-activated successfully!')
+    message_success_deactivate = _('%(group_name)s was deactivated successfully!')
+    
+    def dispatch(self, request, *args, **kwargs):
+        group_id = int(kwargs.pop('group_id'))
+        self.activate = kwargs.pop('activate')
+        group = get_object_or_404(CosinnusGroup, id=group_id)
+        is_portal_admin = check_user_portal_admin(self.request.user)
+        
+        # only admins and group admins may deactivate groups/projects
+        if not (request.user.is_superuser or check_ug_admin(request.user, group) or is_portal_admin):
+            redirect_to_403(request, self)
+        # only admins and portal admins may deactivate CosinnusSocieties
+        if group.type == CosinnusGroup.TYPE_SOCIETY:
+            if not is_portal_admin:
+                messages.warning(self.request, _('Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.'))
+                return redirect(reverse('cosinnus:portal-admin-list'))
+        
+        if group.is_active and self.activate or (not group.is_active and not self.activate):
+            if self.activate:
+                messages.warning(self.request, _('This project/group is already active!'))
+            else:
+                messages.warning(self.request, _('This project/group is already inactive!'))
+            return redirect(reverse('cosinnus:user-dashboard'))
+            
+        self.group = group
+        return super(ActivateOrDeactivateGroupView, self).dispatch(request, *args, **kwargs)
+    
+    def post(self, request, *args, **kwargs):
+        self.group.is_active = self.activate
+        self.group.save() 
+        # no clearing cache necessary as save() handles it
+        if self.activate:
+            messages.success(request, self.message_success_activate % {'group_name': self.group.name})
+            return redirect(self.group.get_absolute_url())
+        else:
+            messages.success(request, self.message_success_deactivate % {'group_name': self.group.name})
+            return redirect(reverse('cosinnus:user-dashboard'))
+    
+    def get_context_data(self, **kwargs):
+        context = super(ActivateOrDeactivateGroupView, self).get_context_data(**kwargs)
+        context.update({
+            'target_group': self.group,
+            'activate': self.activate,
+        })
+        return context
+    
+activate_or_deactivate = ActivateOrDeactivateGroupView.as_view()
