@@ -29,6 +29,7 @@ from django.core.urlresolvers import reverse
 from django.utils.functional import cached_property
 from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
 from cosinnus.core import signals
+from cosinnus.core.registries.group_models import group_model_registry
 from django.db.models.signals import post_delete, post_save
 from django.dispatch.dispatcher import receiver
 from django.template.loader import render_to_string
@@ -706,6 +707,12 @@ class CosinnusGroup(models.Model):
         
         if isinstance(self, CosinnusGroup) or issubclass(self.__class__, CosinnusGroup):
             self._clear_local_cache()
+        
+        # if this has been called on the model-ignorant CosinnusGroupManager, as a precaution, also run this for the sub-models
+        if self.objects.__class__.__name__ == CosinnusGroupManager.__name__:
+            for url_key in group_model_registry:
+                group_class = group_model_registry.get(url_key)
+                group_class._clear_cache(slug, slugs)
     
     def clear_cache(self):
         self._clear_cache(slug=self.slug)

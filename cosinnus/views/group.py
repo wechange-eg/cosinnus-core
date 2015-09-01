@@ -747,8 +747,8 @@ class ActivateOrDeactivateGroupView(TemplateView):
     
     def post(self, request, *args, **kwargs):
         self.group.is_active = self.activate
-        self.group.save()
-        self.group.clear_cache()
+        self.group.save() 
+        # no clearing cache necessary as save() handles it
         if self.activate:
             messages.success(request, self.message_success_activate % {'group_name': self.group.name})
             return redirect(self.group.get_absolute_url())
