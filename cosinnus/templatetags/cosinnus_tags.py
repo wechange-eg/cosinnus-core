@@ -21,7 +21,8 @@ from cosinnus.models.group import CosinnusGroup, CosinnusGroupManager,\
     CosinnusSociety, CosinnusProject, CosinnusPortal
 from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
-    check_group_create_objects_access, check_object_read_access, get_user_token)
+    check_group_create_objects_access, check_object_read_access, get_user_token,
+    check_user_portal_admin)
 from django.template.base import TemplateSyntaxError
 from cosinnus.core.registries.group_models import group_model_registry
 from django.core.cache import cache
@@ -100,6 +101,12 @@ def can_create_groups(user):
     """
     return user.is_authenticated()
 
+@register.filter
+def is_portal_admin(user):
+    """
+    Template filter to check if a user is a portal admin.
+    """
+    return check_user_portal_admin(user)
 
 @register.filter
 def full_name(value):
@@ -549,7 +556,7 @@ class GroupURLNode(URLNode):
                 view_name = group_aware_url_name(view_name, group_slug, portal_id)
             except CosinnusGroup.DoesNotExist:
                 # ignore errors if the group doesn't exist if it is inactive (return empty link)
-                if ignoreErrors or not group_arg.is_active:
+                if ignoreErrors or (not group_arg.is_active):
                     return ''
                 
                 logger.error(u'Cosinnus__group_url_tag: Could not find group for: group_arg: %s, view_name: %s, group_slug: %s, portal_id: %s' % (str(group_arg), view_name, group_slug, portal_id))

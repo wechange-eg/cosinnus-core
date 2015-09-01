@@ -41,7 +41,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.http.response import Http404
 from django.db.models import Q
 from cosinnus.templatetags.cosinnus_tags import is_group_admin
-from cosinnus.utils.permissions import check_ug_admin
+from cosinnus.utils.permissions import check_ug_admin, check_user_portal_admin
 
 
 class SamePortalGroupMixin(object):
@@ -263,7 +263,7 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
         if self.request.user.is_authenticated():
             # special case for the group-list: we can see inactive groups here that we are an admin of
             regular_groups = model.objects.get_cached()
-            my_inactive_groups = model.objects.filter(is_active=False)
+            my_inactive_groups = model.objects.filter(portal_id=CosinnusPortal.get_current().id, is_active=False)
             if not self.request.user.is_superuser:
                 # filter for groups user is admin of if he isnt a superuser
                 my_inactive_groups = my_inactive_groups.filter(id__in=model.objects.get_for_user_group_admin_pks(self.request.user, includeInactive=True))
@@ -735,14 +735,29 @@ class ActivateOrDeactivateGroupView(TemplateView):
     message_success_activate = _('%(group_name)s was re-activated successfully!')
     message_success_deactivate = _('%(group_name)s was deactivated successfully!')
     
-    
     def dispatch(self, request, *args, **kwargs):
         group_id = int(kwargs.pop('group_id'))
-        group = get_object_or_404(CosinnusGroup, id=group_id)
-        if not (request.user.is_superuser or check_ug_admin(request.user, group)):
-            redirect_to_403(request, self)
-        self.group = group
         self.activate = kwargs.pop('activate')
+        group = get_object_or_404(CosinnusGroup, id=group_id)
+        is_portal_admin = check_user_portal_admin(self.request.user)
+        
+        # only admins and group admins may deactivate groups/projects
+        if not (request.user.is_superuser or check_ug_admin(request.user, group) or is_portal_admin):
+            redirect_to_403(request, self)
+        # only admins and portal admins may deactivate CosinnusSocieties
+        if group.type == CosinnusGroup.TYPE_SOCIETY:
+            if not is_portal_admin:
+                messages.warning(self.request, _('Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.'))
+                return redirect(reverse('cosinnus:portal-admin-list'))
+        
+        if group.is_active and self.activate or (not group.is_active and not self.activate):
+            if self.activate:
+                messages.warning(self.request, _('This project/group is already active!'))
+            else:
+                messages.warning(self.request, _('This project/group is already inactive!'))
+            return redirect(reverse('cosinnus:user-dashboard'))
+            
+        self.group = group
         return super(ActivateOrDeactivateGroupView, self).dispatch(request, *args, **kwargs)
     
     def post(self, request, *args, **kwargs):

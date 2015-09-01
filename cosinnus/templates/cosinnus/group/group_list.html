@@ -198,7 +198,7 @@
 		                
 	                {% else %} {% comment %} --- Group inactive --- {% endcomment %}
 	                	
-	                	{% if user.is_superuser or user.pk in admins %}
+	                	{% if user.is_superuser or user.pk in admins or user|is_portal_admin %}
 			                <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:group-activate' group_id=group.id %}">
 			                    <ul class="media-list">
 			                        <li class="media">

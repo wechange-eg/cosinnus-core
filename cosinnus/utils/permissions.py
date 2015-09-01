@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.db.models import Q
 
-from cosinnus.models.group import CosinnusGroup
+from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject,\
     BaseHierarchicalTaggableObjectModel
 from cosinnus.models.profile import BaseUserProfile
@@ -137,6 +137,14 @@ def check_group_create_objects_access(group, user):
     is_member = check_ug_membership(user, group)
     is_admin = check_ug_admin(user, group)
     return is_member or is_admin or user.is_superuser or user.is_staff
+
+
+def check_user_portal_admin(user, portal=None):
+    """ Checks permissions of a user to create objects in a CosinnusGroup.
+            returns ``True`` if the user is either admin, staff member or group member
+    """
+    portal = portal or CosinnusPortal.get_current()
+    return user.id in portal.admins
 
 
 def filter_tagged_object_queryset_for_user(qs, user):
