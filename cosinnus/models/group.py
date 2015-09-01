@@ -107,11 +107,11 @@ class CosinnusGroupMembershipQS(models.query.QuerySet):
 
 class CosinnusGroupManager(models.Manager):
     
-    _GROUPS_SLUG_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/slugs'
-    _GROUPS_PK_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/pks'
-    _GROUP_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/%s'
+    _GROUPS_SLUG_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/slugs' # portal_id, self.__class__.__name__  --> ( slug (str), pk (int) )
+    _GROUPS_PK_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/pks' # portal_id, self.__class__.__name__   --> ( pk (int), slug (str) )
+    _GROUP_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/%s' # portal_id, self.__class__.__name__, slug   --> group (obj)
     
-    _GROUP_SLUG_TYPE_CACHE_KEY = 'cosinnus/core/portal/%d/group_slug_type/%s'
+    _GROUP_SLUG_TYPE_CACHE_KEY = 'cosinnus/core/portal/%d/group_slug_type/%s' # portal_id, group_slug  --> type (int)
 
 
     use_for_related_fields = True
