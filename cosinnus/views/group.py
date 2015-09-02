@@ -264,7 +264,7 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
             # special case for the group-list: we can see inactive groups here that we are an admin of
             regular_groups = model.objects.get_cached()
             my_inactive_groups = model.objects.filter(portal_id=CosinnusPortal.get_current().id, is_active=False)
-            if not self.request.user.is_superuser:
+            if not (self.request.user.is_superuser or check_user_portal_admin(self.request.user)):
                 # filter for groups user is admin of if he isnt a superuser
                 my_inactive_groups = my_inactive_groups.filter(id__in=model.objects.get_for_user_group_admin_pks(self.request.user, includeInactive=True))
             my_inactive_groups = list(my_inactive_groups)

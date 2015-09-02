@@ -194,6 +194,21 @@
 			                </button>
 		                {% endif %}
 		                
+		                {% if user.is_superuser or user.pk in admins or user|is_portal_admin %}
+			                <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:group-deactivate' group_id=group.id %}">
+			                    <ul class="media-list">
+			                        <li class="media">
+			                            <a class="pull-left" href="#">
+			                                <i class="fa fa-times"></i>
+			                            </a>
+			                            <div class="media-body">
+			                                {% trans "Deactivate" %}
+			                            </div>
+			                        </li>
+			                    </ul>
+			                </button>
+		                {% endif %}
+		                
 	                    {% include 'cosinnus/feedback/report_button_btn.html' with object=group %}
 		                
 	                {% else %} {% comment %} --- Group inactive --- {% endcomment %}
