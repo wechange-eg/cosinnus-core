@@ -499,7 +499,7 @@ class GroupURLNode(URLNode):
             self.view_name = copy(self.base_view_name)
         view_name = self.view_name.resolve(context)
         
-        ignoreErrors = 'ignoreErrors' in self.kwargs and self.kwargs.get('ignoreErrors').resolve(context) or False
+        ignoreErrors = 'ignoreErrors' in self.kwargs and self.kwargs.pop('ignoreErrors').resolve(context) or False
         
         group_arg = self.kwargs["group"].resolve(context)
         group_slug = ""
