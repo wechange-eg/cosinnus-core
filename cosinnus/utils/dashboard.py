@@ -202,13 +202,19 @@ class GroupMembersWidget(DashboardWidget):
 
     app_name = 'cosinnus'
     model = CosinnusGroup
-    title = _('Network')
     user_model_attr = None
     widget_name = 'group_members'
     allow_on_user = False
     widget_template_name = 'cosinnus/widgets/group_members_widget.html'
     # disabled so it doesn't show up in the widget chooser yet
     #template_name = 'cosinnus/widgets/group_members.html' 
+    
+    @property
+    def title(self):
+        member_count = getattr(self, 'member_count', None)
+        if member_count is not None:
+            return (_('Network') + ' (%d)' % self.member_count) 
+        return _('Network')
 
     def get_data(self, offset=0):
         """ Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.
@@ -233,12 +239,12 @@ class GroupMembersWidget(DashboardWidget):
             .order_by('-has_avatar', 'first_name', 'last_name') 
         qs = qs.filter(id__in=all_ids)
         
+        self.member_count = qs.count()
         hidden_member_count = 0
         # for public groups if user not a member of the group, show only public users in widget
         if not self.request.user.is_authenticated() or not self.request.user.pk in all_ids:
-            all_member_count = qs.count()
             qs = qs.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
-            hidden_member_count = all_member_count - len(qs)
+            hidden_member_count = self.member_count - len(qs)
         
         has_more = len(qs) > offset+count or hidden_member_count > 0
         more_count = max(0, len(qs) - (offset+count)) + hidden_member_count

@@ -60,7 +60,7 @@
         {% endif %}
 
 
-        <legend>{% trans "Members" %}</legend>
+        <legend>{% trans "Members" %}{% if member_count %} ({{ member_count }}){% endif %}</legend>
     
         {% for member in members %}
             <div class="fadedown {% if not forloop.last or hidden_user_count > 0 %}regular-space{% endif %}">
