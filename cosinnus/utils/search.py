@@ -116,3 +116,10 @@ class BaseTaggableObjectIndex(TagObjectSearchIndex):
 
     def prepare_creator(self, obj):
         return prepare_user(obj.creator)
+    
+    
+class BaseHierarchicalTaggableObjectIndex(BaseTaggableObjectIndex):
+    
+    def index_queryset(self, using=None):
+        qs = super(BaseTaggableObjectIndex, self).index_queryset(using=using)
+        return qs.filter(is_container=False)
