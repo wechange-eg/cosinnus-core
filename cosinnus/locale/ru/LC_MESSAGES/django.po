@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-09 15:18+0200\n"
+"POT-Creation-Date: 2015-09-09 16:12+0200\n"
 "PO-Revision-Date: 2015-08-16 20:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1709,7 +1709,7 @@ msgstr ""
 
 #: .\templates\cosinnus\mail\user_register_notification_subj.txt.py:1
 #, fuzzy, python-format
-msgid "%(user_name)s wants to join %(site_name)s!"
+msgid "New user request: %(user_name)s wants to join %(site_name)s!"
 msgstr ""
 "%(sender_name)s  хочет присоединиться к %(group_name)s на %(site_name)s!"
 

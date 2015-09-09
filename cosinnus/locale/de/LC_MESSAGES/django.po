@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-09 15:17+0200\n"
-"PO-Revision-Date: 2015-09-09 15:19+0200\n"
+"POT-Creation-Date: 2015-09-09 16:12+0200\n"
+"PO-Revision-Date: 2015-09-09 16:14+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -1723,8 +1723,9 @@ msgstr ""
 
 #: .\templates\cosinnus\mail\user_register_notification_subj.txt.py:1
 #, python-format
-msgid "%(user_name)s wants to join %(site_name)s!"
-msgstr "%(user_name)s möchte Mitglied bei %(site_name)s werden!"
+msgid "New user request: %(user_name)s wants to join %(site_name)s!"
+msgstr ""
+"Neue Registrierung: %(user_name)s möchte Mitglied bei %(site_name)s werden!"
 
 #: .\templates\cosinnus\mail\user_registration_approved.html.py:1
 #, python-format

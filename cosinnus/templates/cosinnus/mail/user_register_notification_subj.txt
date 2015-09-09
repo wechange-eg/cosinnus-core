@@ -1,1 +1,1 @@
-{% load i18n cosinnus_tags %}{% blocktrans with user_name=user|full_name_force %}{{ user_name }} wants to join {{ site_name }}!{% endblocktrans %}
+{% load i18n cosinnus_tags %}{% blocktrans with user_name=user|full_name_force %}New user request: {{ user_name }} wants to join {{ site_name }}!{% endblocktrans %}
