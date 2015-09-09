@@ -117,12 +117,21 @@ def full_name(value):
         {{ user|full_name }}
 
     :param AbstractBaseUser value: the user object
-    :return: either the full user name or the login user name.
+    :return: either the full user name or the login user name, or (Deleted User) if the user is inactive.
     """
     from django.contrib.auth.models import AbstractBaseUser
     if isinstance(value, AbstractBaseUser):
         if not value.is_active:
             return _("(Deleted User)")
+        return value.get_full_name() or value.get_username()
+    return ""
+
+@register.filter
+def full_name_force(value):
+    """ Like ``full_name()``, this tag will always print the user name, even if the user is inactive
+    """
+    from django.contrib.auth.models import AbstractBaseUser
+    if isinstance(value, AbstractBaseUser):
         return value.get_full_name() or value.get_username()
     return ""
 
