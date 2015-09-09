@@ -9,6 +9,7 @@ from django.utils.encoding import force_text
 from cosinnus.conf import settings
 
 import logging
+from threading import Thread
 logger = logging.getLogger('cosinnus')
 
 __all__ = ['CELERY_AVAILABLE', 'send_mail']
@@ -67,7 +68,13 @@ def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None):
             _mail_print(to, subject, template, data, from_email, bcc)
         logger.error('Cosinnus.core.mail: Failed to send mail!', 
                      extra={'to_user': to, 'subject': subject, 'exception': str(e)})
-    
+
+
+def send_mail_or_fail_threaded(to, subject, template, data, from_email=None, bcc=None):
+    mail_thread = MailThread()
+    mail_thread.add_mail(to, subject, template, data, from_email, bcc)
+    mail_thread.start()
+
 
 def get_common_mail_context(request, group=None, user=None):
     """ Collects common context variables for Email templates """
@@ -91,3 +98,29 @@ def get_common_mail_context(request, group=None, user=None):
             'user': user,
         })
     return context
+
+
+
+class MailThread(Thread):
+    
+    def __init__(self, *args, **kwargs):
+        self.to = []
+        self.subject = []
+        self.template = []
+        self.data = []
+        self.from_email = []
+        self.bcc = []
+        super(MailThread, self).__init__(*args, **kwargs)
+        
+    
+    def add_mail(self, to, subject, template, data, from_email=None, bcc=None):
+        self.to.append(to)
+        self.subject.append(subject)
+        self.template.append(template)
+        self.data.append(data)
+        self.from_email.append(from_email)
+        self.bcc.append(bcc)
+        
+    def run(self):
+        for i, to in enumerate(self.to):
+            send_mail_or_fail(to, self.subject[i], self.template[i], self.data[i], self.from_email[i], self.bcc[i])
