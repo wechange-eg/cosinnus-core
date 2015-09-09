@@ -1,0 +1,1 @@
+{% load i18n cosinnus_tags %}{% blocktrans %}Your request to join {{ site_name }} was approved!{% endblocktrans %}

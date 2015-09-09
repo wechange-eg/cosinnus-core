@@ -1,0 +1,1 @@
+{% load i18n cosinnus_tags %}{% blocktrans with user_name=user|full_name_force %}You have requested to become a member of {{ site_name }}!{% endblocktrans %}

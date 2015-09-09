@@ -1,0 +1,15 @@
+{% load i18n cosinnus_tags %}{% url 'cosinnus:user-approve' user_id=user.id as user_approve_url %}{% url 'cosinnus:user-deny' user_id=user.id as user_deny_url %}{% autoescape off %}{% blocktrans with user_name=user|full_name_force user_mail=user.email %}User "{{ user_name }}" ({{ user_mail }}) has requested to join {{ site_name }}.
+
+The user won't be able to log in until you (or another Portal-Admin) approves of his request.
+
+If you wish to approve the user's join request click the following link:
+{{ domain_url }}{{ user_approve_url }}
+
+
+Click here to deny the request: {{ domain_url }}{{ user_deny_url }}
+
+
+You're receiving this email because you are a portal-administrator.
+
+
+Your {{ site_name }} Team{% endblocktrans %}{% endautoescape %}

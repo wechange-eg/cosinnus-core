@@ -36,6 +36,8 @@ urlpatterns = patterns('cosinnus.views',
     
     url(r'^account/report/$', 'feedback.report_object', name='report-object'),
     
+    url(r'^administration/approve_user/(?P<user_id>\d+)/$', 'user.approve_user', name='user-approve'),
+    url(r'^administration/deny_user/(?P<user_id>\d+)/$', 'user.deny_user', name='user-deny'),
     url(r'^administration/activate/(?P<group_id>\d+)/$', 'group.activate_or_deactivate', name='group-activate', kwargs={'activate': True}),
     url(r'^administration/deactivate/(?P<group_id>\d+)/$', 'group.activate_or_deactivate', name='group-deactivate', kwargs={'activate': False}),
     

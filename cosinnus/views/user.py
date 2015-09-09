@@ -11,7 +11,8 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
-from cosinnus.core.decorators.views import staff_required, superuser_required
+from cosinnus.core.decorators.views import staff_required, superuser_required,\
+    redirect_to_not_logged_in, redirect_to_403
 from cosinnus.forms.user import UserCreationForm, UserChangeForm
 from cosinnus.views.mixins.ajax import patch_body_json_data
 from cosinnus.utils.http import JSONResponse
@@ -19,9 +20,24 @@ from django.contrib import messages
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.models.group import CosinnusPortal
+from cosinnus.core.mail import MailThread, get_common_mail_context,\
+    send_mail_or_fail_threaded
+from django.template.loader import render_to_string
+from django.http.response import HttpResponseNotAllowed
+from django.shortcuts import redirect
+from cosinnus.templatetags.cosinnus_tags import full_name_force
 
 
 USER_MODEL = get_user_model()
+
+
+def email_portal_admins(subject, template, data):
+    mail_thread = MailThread()
+    admins = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().admins)
+    
+    for user in admins:
+        mail_thread.add_mail(user.email, subject, template, data)
+    mail_thread.start()
 
 
 class UserListView(ListView):
@@ -88,13 +104,32 @@ class UserCreateView(CreateView):
     template_name = 'cosinnus/registration/signup.html'
 
     message_success = _('User "%(user)s" was registered successfully. You can now log in using this username.')
+    message_success_inactive = _('User "%(user)s" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address "%(email)s" when this happens.')
+    
     
     def form_valid(self, form):
         ret = super(UserCreateView, self).form_valid(form)
         # sanity check, retrieve the user's profile
         get_user_profile_model()._default_manager.get_for_user(self.object)
-        messages.success(self.request,
-            self.message_success % {'user': self.object.email})
+        
+        # set user inactive if this portal needs user approval and send an email to portal admins
+        if CosinnusPortal.get_current().users_need_activation:
+            self.object.is_active = False
+            self.object.save()
+            data = get_common_mail_context(self.request)
+            data.update({
+                'user': self.object,
+            })
+            # message portal admins of request
+            subject = render_to_string('cosinnus/mail/user_register_notification_subj.txt', data)
+            email_portal_admins(subject, 'cosinnus/mail/user_register_notification.html', data)
+            # message user for pending request
+            subj_user = render_to_string('cosinnus/mail/user_registration_pending_subj.txt', data)
+            send_mail_or_fail_threaded(self.object.email, subj_user, 'cosinnus/mail/user_registration_pending.html', data)
+            
+            messages.success(self.request, self.message_success_inactive % {'user': self.object.email, 'email': self.object.email})
+        else:
+            messages.success(self.request, self.message_success % {'user': self.object.email})
         return ret
     
     def dispatch(self, *args, **kwargs):
@@ -107,6 +142,88 @@ class UserCreateView(CreateView):
 
 user_create = UserCreateView.as_view()
 
+
+def _check_user_approval_permissions(request, user_id):
+    """ Permission checks for user approval/denial views """
+    if not request.method=='GET':
+        return HttpResponseNotAllowed(['GET'])
+    
+    if not request.user.is_authenticated():
+        return redirect_to_not_logged_in(request)
+    elif not request.user.id in CosinnusPortal.get_current().admins:
+        return redirect_to_403(request)
+    return None
+
+
+def approve_user(request, user_id):
+    """ Approves an inactive, registration pending user and sends out an email to let them know """
+    error = _check_user_approval_permissions(request, user_id)
+    if error:
+        return error
+    
+    try:
+        user = USER_MODEL.objects.get(id=user_id)
+    except USER_MODEL.DoesNotExist:
+        messages.error(request, _('The user account you were looking for does not exist! Their registration was probably already denied.'))
+        return redirect(reverse('cosinnus:user-list'))
+    
+    if user.is_active:
+        messages.success(request, _('The user account was already approved, but thank you anyway!'))
+        return redirect(reverse('cosinnus:user-list'))
+    
+    user.is_active = True
+    user.save()
+    
+    # message user for accepeted request
+    data = get_common_mail_context(request)
+    data.update({
+        'user': user,
+    })
+    subj_user = render_to_string('cosinnus/mail/user_registration_approved_subj.txt', data)
+    send_mail_or_fail_threaded(user.email, subj_user, 'cosinnus/mail/user_registration_approved.html', data)
+    
+    
+    messages.success(request, _('Thank you for approving user %(username)s (%(email)s)! An introduction-email was sent out to them and they can now log in to the site.') \
+                     % {'username':full_name_force(user), 'email': user.email})
+    return redirect(reverse('cosinnus:user-list'))
+
+
+
+def deny_user(request, user_id):
+    """ Deny a registration pending user. Sends out an email letting them know, then deletes the pending user account.
+        Cannot be done for users that are active. """
+    error = _check_user_approval_permissions(request, user_id)
+    if error:
+        return error
+    
+    try:
+        user = USER_MODEL.objects.get(id=user_id)
+    except USER_MODEL.DoesNotExist:
+        messages.error(request, _('The user account you were looking for does not exist! Their registration was probably already denied.'))
+        return redirect(reverse('cosinnus:user-list'))
+    
+    if user.is_active:
+        messages.warning(request, _('The user account %(username)s (%(email)s) was already approved, so you cannot deny the registration! If this is a problem, you may want to deactivate the user manually from the admin interface.') \
+                         % {'username':full_name_force(user), 'email': user.email})
+        return redirect(reverse('cosinnus:user-list'))
+    
+    
+    # message user for denied request
+    admins = get_user_model().objects.filter(id__in=CosinnusPortal.get_current().admins)
+    data = get_common_mail_context(request)
+    data.update({
+        'user': user,
+        'admins': admins,
+    })
+    subj_user = render_to_string('cosinnus/mail/user_registration_denied_subj.txt', data)
+    send_mail_or_fail_threaded(user.email, subj_user, 'cosinnus/mail/user_registration_denied.html', data)
+    
+    
+    messages.success(request, _('You have denied the join request of %(username)s (%(email)s)! An email was sent to let them know.') \
+                     % {'username':full_name_force(user), 'email': user.email})
+    user.delete()
+    return redirect(reverse('cosinnus:user-list'))
+    
 
 class UserDetailView(DetailView):
 

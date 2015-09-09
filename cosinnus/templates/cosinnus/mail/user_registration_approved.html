@@ -1,0 +1,16 @@
+{% load i18n cosinnus_tags %}{% url 'cosinnus:portal-admin-list' as portal_admin_url %}{% autoescape off %}{% blocktrans with user_name=user|full_name_force user_mail=user.email %}Hallo, {{ user_name }}! Herzlich willkommen bei {{ site_name }}! 
+
+Du kannst dich ab sofort unter {{ domain_url }} einloggen.
+
+Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.
+
+
+Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe "Blog", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, ist die Standardeinstellung bei der Option "Benachrichtigungseinstellungen" in dieser Gruppe auf "alle Benachrichtigungen" gesetzt. Das kannst du einfach entsprechend deines Informationsbedürfnisses individuell einstellen (Klick rechts oben auf deinen Namen), damit du nicht zu viele ungewünschte Emails bekommst.
+
+Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert ist, werden dir unter der Rubrik "Aktivitäten" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.
+
+Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern bei den Portaladministrator_innen: {{ domain_url }}{{ portal_admin_url }} 
+
+
+Viele Grüße und viel Spaß hier,
+dein {{ site_name }} Team{% endblocktrans %}{% endautoescape %}
