@@ -417,6 +417,10 @@ class CosinnusPortal(models.Model):
     protocol = models.CharField(_('Http/Https Protocol (overrides settings)'), max_length=8,
                         blank=True, null=True)
     
+    users_need_activation = models.BooleanField(_('Users Need Activation'),
+        help_text=_('If activated, newly registered users need to be approved by a portal admin before being able to log in.'),
+        default=False)
+    
     # css fields for custom portal styles
     background_image = models.ImageField(_('Background Image'),
         help_text=_('Used for the background of the landing and CMS-pages'),
