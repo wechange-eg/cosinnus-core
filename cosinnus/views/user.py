@@ -133,6 +133,9 @@ class UserCreateView(CreateView):
         return ret
     
     def dispatch(self, *args, **kwargs):
+        if self.request.user.is_authenticated():
+            messages.info(self.request, _('You are already logged in!'))
+            return redirect('/')
         return super(UserCreateView, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
