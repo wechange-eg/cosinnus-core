@@ -220,7 +220,8 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         user_count = members.count()
         # for public groups if user not a member of the group, show only public users in widget
         if not self.request.user.is_authenticated() or not \
-                (self.request.user.pk in admin_ids or self.request.user.pk in member_ids):
+                (self.request.user.pk in admin_ids or self.request.user.pk in member_ids or \
+                 check_user_superuser(self.request.user)):
             # admins are always visible in this view, because a they should be contactable
             members = members.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
             pendings = pendings.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
