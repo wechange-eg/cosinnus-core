@@ -67,7 +67,7 @@ class CosinnusGroupFormMixin(object):
         
         # special check: only portal admins can create groups
         if self.form_view == 'add' and model_class == CosinnusSociety:
-            if not self.request.user.id in CosinnusPortal.get_current().admins:
+            if not (self.request.user.id in CosinnusPortal.get_current().admins or self.request.user.is_superuser):
                 messages.warning(self.request, _('Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators.'))
                 return redirect(reverse('cosinnus:portal-admin-list'))
         
