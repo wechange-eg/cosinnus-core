@@ -213,8 +213,8 @@ class GroupMembersWidget(DashboardWidget):
     def title(self):
         member_count = getattr(self, 'member_count', None)
         if member_count is not None:
-            return (_('Network') + ' (%d)' % self.member_count) 
-        return _('Network')
+            return (_('Members') + ' (%d)' % self.member_count) 
+        return _('Members')
 
     def get_data(self, offset=0):
         """ Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.

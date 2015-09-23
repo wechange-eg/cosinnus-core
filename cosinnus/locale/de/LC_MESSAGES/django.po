@@ -43,25 +43,25 @@ msgstr "Ausgewählte Projekte in Gruppen umwandeln"
 #: .\admin.py:145
 msgid "The following Users were added to this portal:"
 msgstr ""
-"Die folgenden Mitarbeiter_innen wurden in dieses Portal mit-aufgenommen:"
+"Die folgenden Mitglieder wurden in dieses Portal mit-aufgenommen:"
 
 #: .\admin.py:147
 #, python-format
 msgid "Add all members to current Portal (%s)"
 msgstr ""
-"Alle enthaltenen Mitarbeiter_innen ins aktuelle Portal (%s) mit-aufnehmen"
+"Alle enthaltenen Mitglieder ins aktuelle Portal (%s) mit-aufnehmen"
 
 #: .\admin.py:153
 msgid "In addition, the members were removed from all other Portals."
 msgstr ""
-"Zusätzlich wurden die Mitarbeiter_innen aus allen anderen Portalen entfernt."
+"Zusätzlich wurden die Mitglieder aus allen anderen Portalen entfernt."
 
 #: .\admin.py:155
 #, python-format
 msgid ""
 "Move all members to current Portal (%s) (removes all other memberships!)"
 msgstr ""
-"Alle enthaltenen Mitarbeiter_innen ins aktuelle Portal (%s) verschieben "
+"Alle enthaltenen Mitglieder ins aktuelle Portal (%s) verschieben "
 "(entfernt sie aus allen anderen Portalen!)"
 
 #: .\admin.py:185
@@ -86,7 +86,7 @@ msgstr ""
 #: .\cosinnus_notifications.py:45
 msgid "A user requested to become a member of this group (admins only)"
 msgstr ""
-"Jemand hat beantragt Mitarbeiter_in in dieser Gruppe zu werden (betrifft nur "
+"Jemand hat beantragt Mitglied in dieser Gruppe zu werden (betrifft nur "
 "Gruppenadministratoren)"
 
 #: .\cosinnus_notifications.py:52
@@ -535,7 +535,7 @@ msgstr "Nur ich"
 
 #: .\models\tagged.py:60 .\templates\cosinnus\group\group_form.html.py:193
 msgid "Group/Project members only"
-msgstr "Nur Gruppen/Projekt-Mitarbeiter_innen"
+msgstr "Nur Gruppen/Projekt-Mitglieder"
 
 #: .\models\tagged.py:61 .\templates\cosinnus\group\group_form.html.py:194
 msgid "Public (visible without login)"
@@ -654,7 +654,7 @@ msgstr "Einstellungen"
 #: .\templates\cosinnus\group\leftnav_group.html.py:21
 #: .\templates\cosinnus\widgets\group_projects.html.py:15
 msgid "Members"
-msgstr "Mitarbeiter_innen"
+msgstr "Mitglieder"
 
 #: .\templates\cosinnus\appsmenu.html.py:40
 msgid "Choose App"
@@ -1191,7 +1191,7 @@ msgstr "Sind sie sicher dass sie dieses Projekt löschen wollen?"
 #: .\templates\cosinnus\group\group_detail.html.py:5
 #, python-format
 msgid "%(group_name)s - Members"
-msgstr "%(group_name)s - Mitarbeiter_innen"
+msgstr "%(group_name)s - Mitglieder"
 
 #: .\templates\cosinnus\group\group_detail.html.py:20
 #: .\templates\cosinnus\group\group_list.html.py:38
@@ -1202,7 +1202,7 @@ msgstr "auf Karte anzeigen"
 #: .\templates\cosinnus\group\group_detail.html.py:35
 #: .\templates\cosinnus\group\group_detail.html.py:37
 msgid "Add a member"
-msgstr "Mitarbeiter_in hinzufügen"
+msgstr "Mitglied hinzufügen"
 
 #: .\templates\cosinnus\group\group_detail.html.py:54
 #: .\templates\cosinnus\group\group_user_list.html.py:7
@@ -1226,7 +1226,7 @@ msgstr "Administratot"
 #: .\templates\cosinnus\group\group_list.html.py:112
 #: .\templates\cosinnus\widgets\group_projects.html.py:15
 msgid "Member"
-msgstr "Mitarbeiter_in"
+msgstr "Mitglied"
 
 #: .\templates\cosinnus\group\group_detail.html.py:110
 msgid "Kick"
@@ -1234,7 +1234,7 @@ msgstr "Entfernen"
 
 #: .\templates\cosinnus\group\group_detail.html.py:124
 msgid "Make Member"
-msgstr "Als Mitarbeiter_in"
+msgstr "Als Mitglied"
 
 #: .\templates\cosinnus\group\group_detail.html.py:126
 msgid "Make Admin"
@@ -1244,7 +1244,7 @@ msgstr "Als Admin"
 #, python-format
 msgid "Do you really want to demote administrator „%(name)s“ to member?"
 msgstr ""
-"Möchten sie Administrator „%(name)s“ wirklich zur/zum Mitarbeiter_in "
+"Möchten sie Administrator „%(name)s“ wirklich zur/zum Mitglied "
 "herabstufen?"
 
 #: .\templates\cosinnus\group\group_detail.html.py:142
@@ -1255,12 +1255,12 @@ msgstr "Projektadministrator herabstufen"
 #, python-format
 msgid "Do you really want to promote member „%(name)s“ to administrator?"
 msgstr ""
-"Möchten sie Mitarbeiter_in „%(name)s“ wirklich zur/zum Administrator_in "
+"Möchten sie Mitglied „%(name)s“ wirklich zur/zum Administrator_in "
 "befördern?"
 
 #: .\templates\cosinnus\group\group_detail.html.py:147
 msgid "Promote Member"
-msgstr "Mitarbeiter_in befördern"
+msgstr "Mitglied befördern"
 
 #: .\templates\cosinnus\group\group_detail.html.py:153
 #, python-format
@@ -1269,7 +1269,7 @@ msgstr "Möchten sie wirklich „%(name)s“ aus dem Projekt entfernen?"
 
 #: .\templates\cosinnus\group\group_detail.html.py:154
 msgid "Remove Member"
-msgstr "Mitarbeiter_in entfernen"
+msgstr "Mitglied entfernen"
 
 #: .\templates\cosinnus\group\group_detail.html.py:170
 #: .\templates\cosinnus\user\portal_admin_list.html.py:111
@@ -1280,12 +1280,12 @@ msgstr "Und %(hidden_count)s weitere versteckte Benutzer_innen..."
 
 #: .\templates\cosinnus\group\group_detail.html.py:180
 msgid "Membership requests"
-msgstr "Mitarbeiter_innen-Anträge"
+msgstr "Mitglieder-Anträge"
 
 #: .\templates\cosinnus\group\group_detail.html.py:201
 #: .\templates\cosinnus\group\group_list.html.py:114
 msgid "Membership requested"
-msgstr "Mitarbeiter_innenschaft wurde beantragt"
+msgstr "Mitgliederschaft wurde beantragt"
 
 #: .\templates\cosinnus\group\group_detail.html.py:222
 msgid "Decline User"
@@ -1302,20 +1302,20 @@ msgstr "Möchten sie „%(name)s“ in das Projekt aufnehmen?"
 
 #: .\templates\cosinnus\group\group_detail.html.py:248
 msgid "Accept Member"
-msgstr "Mitarbeiter_in aufnehmen"
+msgstr "Mitglied aufnehmen"
 
 #: .\templates\cosinnus\group\group_detail.html.py:253
 #, python-format
 msgid "Do you really want to decline member „%(name)s“?"
-msgstr "Möchten sie „%(name)s“'s Mitarbeiter_innen-Antrag wirklich ablehnen?"
+msgstr "Möchten sie „%(name)s“'s Mitglieder-Antrag wirklich ablehnen?"
 
 #: .\templates\cosinnus\group\group_detail.html.py:254
 msgid "Decline Member"
-msgstr "Mitarbeiter_in ablehen"
+msgstr "Mitglied ablehen"
 
 #: .\templates\cosinnus\group\group_detail.html.py:263
 msgid "There are no new membership requests."
-msgstr "Es gibt aktuell keine neuen Mitarbeiter_innen-Anträge."
+msgstr "Es gibt aktuell keine neuen Mitglieder-Anträge."
 
 #: .\templates\cosinnus\group\group_export.html.py:5
 #: .\templates\cosinnus\group\group_export.html.py:9
@@ -1420,7 +1420,7 @@ msgstr "Übersicht"
 
 #: .\templates\cosinnus\group\group_list.html.py:118
 msgid "Not a member"
-msgstr "Nicht Mitarbeiter_in"
+msgstr "Nicht Mitglied"
 
 #: .\templates\cosinnus\group\group_list.html.py:123
 msgid "(Inactive)"
@@ -2378,7 +2378,7 @@ msgstr "%(group_type)s “%(group_name)s” verlassen?"
 #, python-format
 msgid "You are no longer a member of the %(group_type)s “%(group_name)s”."
 msgstr ""
-"Du bist jetzt nicht mehr Mitarbeiter_in von %(group_type)s “%(group_name)s”."
+"Du bist jetzt nicht mehr Mitglied von %(group_type)s “%(group_name)s”."
 
 #: .\views\group.py:526
 #, python-format
@@ -2581,8 +2581,8 @@ msgid ""
 "You are not currently a member of %s! If you wish you can request to become "
 "a member below."
 msgstr ""
-"Du bist aktuell nicht Mitarbeiter_in in %s! Wenn du möchtest kannst du unten "
-"die Mitarbeiterschaft beantragen."
+"Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten "
+"die Mitgliedschaft beantragen."
 
 #: .\views\mixins\avatar.py:24
 msgid ""
@@ -2657,7 +2657,7 @@ msgstr "%(numobjects)d andere Objekte wurden gelöscht."
 
 #
 #~ msgid "Members only"
-#~ msgstr "Nur sichtbar für Mitarbeiter_innen"
+#~ msgstr "Nur sichtbar für Mitglieder"
 
 #~ msgid "No group found with this name"
 #~ msgstr "Kein Projekt mit diesem Namen gefunden"
@@ -2672,17 +2672,17 @@ msgstr "%(numobjects)d andere Objekte wurden gelöscht."
 #~ msgstr "Portal-Administrator_innen"
 
 #~ msgid "Add a member."
-#~ msgstr "Mitarbeiter_in hinzuügen"
+#~ msgstr "Mitglied hinzuügen"
 
 #~ msgid "Gib den Namen für ein neues Mitglied ein."
-#~ msgstr "Gib den Namen für eine(n) neue(n) Mitarbeiter_in ein."
+#~ msgstr "Gib den Namen für eine(n) neue(n) Mitglied ein."
 
 #~ msgid "List all groups"
 #~ msgstr "Alle Projekte auflisten"
 
 #
 #~ msgid "No Groups. Join!"
-#~ msgstr "Mitarbeiter_in keiner Projekte. Beitreten!"
+#~ msgstr "Mitglied keiner Projekte. Beitreten!"
 
 #~ msgid ""
 #~ "User \"%(user_name)s\" has requested to join the group %(group_name)s."
@@ -2698,10 +2698,10 @@ msgstr "%(numobjects)d andere Objekte wurden gelöscht."
 #~ "You're receiving this email because you are an administrator of this "
 #~ "group."
 #~ msgstr ""
-#~ "Du erhältst diese E-Mail weil du ein(e) Projektadministrator(in) bist."
+#~ "Du erhältst diese E-Mail weil du ein Projektadministrator bist."
 
 #~ msgid "User Profiles"
-#~ msgstr "Mitarbeiter_innen-Profile"
+#~ msgstr "Mitglieder-Profile"
 
 #~ msgid "Abbrechen"
 #~ msgstr "Abbrechen"
@@ -2713,13 +2713,13 @@ msgstr "%(numobjects)d andere Objekte wurden gelöscht."
 #~ msgstr "Neu laden"
 
 #~ msgid "Group Members"
-#~ msgstr "Mitarbeiter_innen"
+#~ msgstr "Mitglieder"
 
 #~ msgid "Group Admin"
 #~ msgstr "Projektadministrator_in"
 
 #~ msgid "Group Member"
-#~ msgstr "Mitarbeiter_in"
+#~ msgstr "Mitglied"
 
 #~ msgid "Joined"
 #~ msgstr "Beigetreten"
