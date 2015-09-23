@@ -22,7 +22,7 @@ from cosinnus.models.group import CosinnusGroup, CosinnusGroupManager,\
 from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
     check_group_create_objects_access, check_object_read_access, get_user_token,
-    check_user_portal_admin)
+    check_user_portal_admin, check_user_superuser)
 from django.template.base import TemplateSyntaxError
 from cosinnus.core.registries.group_models import group_model_registry
 from django.core.cache import cache
@@ -102,11 +102,19 @@ def can_create_groups(user):
     return user.is_authenticated()
 
 @register.filter
+def is_superuser(user):
+    """
+    Template filter to check if a user has admin priviledges or is a portal admin.
+    """
+    return check_user_superuser(user)
+
+@register.filter
 def is_portal_admin(user):
     """
     Template filter to check if a user is a portal admin.
     """
     return check_user_portal_admin(user)
+
 
 @register.filter
 def full_name(value):

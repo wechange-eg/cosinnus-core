@@ -41,7 +41,8 @@ from django.shortcuts import redirect, get_object_or_404
 from django.http.response import Http404
 from django.db.models import Q
 from cosinnus.templatetags.cosinnus_tags import is_group_admin
-from cosinnus.utils.permissions import check_ug_admin, check_user_portal_admin
+from cosinnus.utils.permissions import check_ug_admin, check_user_portal_admin,\
+    check_user_superuser
 
 
 class SamePortalGroupMixin(object):
@@ -67,7 +68,7 @@ class CosinnusGroupFormMixin(object):
         
         # special check: only portal admins can create groups
         if self.form_view == 'add' and model_class == CosinnusSociety:
-            if not (self.request.user.id in CosinnusPortal.get_current().admins or self.request.user.is_superuser):
+            if not (self.request.user.id in CosinnusPortal.get_current().admins or check_user_superuser(self.request.user)):
                 messages.warning(self.request, _('Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators.'))
                 return redirect(reverse('cosinnus:portal-admin-list'))
         
@@ -265,7 +266,7 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
             # special case for the group-list: we can see inactive groups here that we are an admin of
             regular_groups = model.objects.get_cached()
             my_inactive_groups = model.objects.filter(portal_id=CosinnusPortal.get_current().id, is_active=False)
-            if not (self.request.user.is_superuser or check_user_portal_admin(self.request.user)):
+            if not check_user_superuser(self.request.user):
                 # filter for groups user is admin of if he isnt a superuser
                 my_inactive_groups = my_inactive_groups.filter(id__in=model.objects.get_for_user_group_admin_pks(self.request.user, includeInactive=True))
             my_inactive_groups = list(my_inactive_groups)
@@ -637,7 +638,7 @@ class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
         new_status = form.cleaned_data.get('status')
         
         if (len(self.group.admins) > 1 or not self.group.is_admin(user)):
-            if user != self.request.user or self.request.user.is_superuser:
+            if user != self.request.user or check_user_superuser(self.request.user):
                 if current_status == MEMBERSHIP_PENDING and new_status == MEMBERSHIP_MEMBER:
                     signals.user_group_join_accepted.send(sender=self, group=self.object.group, user=user)
                 return super(GroupUserUpdateView, self).form_valid(form)
@@ -673,7 +674,7 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
         user = self.object.user
         current_status = self.object.status
         if (len(group.admins) > 1 or not group.is_admin(user)):
-            if user != self.request.user or self.request.user.is_superuser:
+            if user != self.request.user or check_user_superuser(self.requestuser):
                 self.object.delete()
             else:
                 messages.error(self.request, _('You cannot remove yourself from a %(group_type)s.') % {'group_type':self.object._meta.verbose_name})
@@ -740,14 +741,14 @@ class ActivateOrDeactivateGroupView(TemplateView):
         group_id = int(kwargs.pop('group_id'))
         self.activate = kwargs.pop('activate')
         group = get_object_or_404(CosinnusGroup, id=group_id)
-        is_portal_admin = check_user_portal_admin(self.request.user)
+        is_admin = check_user_superuser(request.user)
         
         # only admins and group admins may deactivate groups/projects
-        if not (request.user.is_superuser or check_ug_admin(request.user, group) or is_portal_admin):
+        if not (is_admin or check_ug_admin(request.user, group)):
             redirect_to_403(request, self)
         # only admins and portal admins may deactivate CosinnusSocieties
         if group.type == CosinnusGroup.TYPE_SOCIETY:
-            if not is_portal_admin:
+            if not is_admin:
                 messages.warning(self.request, _('Sorry, only portal administrators can deactivate Groups! You can write a message to one of the administrators to deactivate it for you. Below you can find a listing of all administrators.'))
                 return redirect(reverse('cosinnus:portal-admin-list'))
         

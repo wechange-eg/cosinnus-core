@@ -52,8 +52,8 @@ def check_object_read_access(obj, user):
     if type(obj) is CosinnusGroup or issubclass(obj.__class__, CosinnusGroup):
         group = obj
         is_member = check_ug_membership(user, group)
-        is_admin = check_ug_admin(user, group)
-        return group.public or user.is_superuser or user.is_staff or is_member or is_admin
+        is_admin = check_ug_admin(user, group) 
+        return group.public or check_user_superuser(user) or is_member or is_admin
     
     elif issubclass(obj.__class__, BaseTaggableObjectModel):
         group = obj.group
@@ -71,9 +71,9 @@ def check_object_read_access(obj, user):
         else:
             # catch error cases where no media_tag was created. that case should break, but not here.
             obj_is_visible = is_member or is_admin
-        return user.is_superuser or user.is_staff or obj_is_visible or obj.grant_extra_read_permissions(user)
+        return check_user_superuser(user) or obj_is_visible or obj.grant_extra_read_permissions(user)
     elif hasattr(obj, 'creator'):
-        return obj.creator == user or user.is_superuser or user.is_staff
+        return obj.creator == user or check_user_superuser(user)
     elif hasattr(obj, 'grant_extra_read_permissions'):
         return obj.grant_extra_read_permissions(user)
     
@@ -101,7 +101,7 @@ def check_object_write_access(obj, user, fields=None):
     # check what kind of object was supplied (CosinnusGroup or BaseTaggableObject)
     if type(obj) is CosinnusGroup or issubclass(obj.__class__, CosinnusGroup):
         is_admin = check_ug_admin(user, obj)
-        return is_admin or user.is_superuser or user.is_staff
+        return is_admin or check_user_superuser(user)
     elif issubclass(obj.__class__, BaseTaggableObjectModel):
         # editing/deleting an object, check if we are owner or staff member or group admin or site admin
         is_admin = check_ug_admin(user, obj.group) if obj.group else False
@@ -114,12 +114,12 @@ def check_object_write_access(obj, user, fields=None):
         folder_for_group_member = issubclass(obj.__class__, BaseHierarchicalTaggableObjectModel) and \
                 obj.is_container and not obj.path == '/' and check_ug_membership(user, obj.group)
             
-        return user.is_superuser or user.is_staff or obj.creator == user or (is_admin and not is_private) \
+        return check_user_superuser(user) or obj.creator == user or (is_admin and not is_private) \
             or obj.grant_extra_write_permissions(user, fields=fields) or folder_for_group_member
     elif issubclass(obj.__class__, BaseUserProfile):
-        return obj.user == user or user.is_superuser or user.is_staff
+        return obj.user == user or check_user_superuser(user)
     elif hasattr(obj, 'creator'):
-        return obj.creator == user or user.is_superuser or user.is_staff
+        return obj.creator == user or check_user_superuser(user)
     elif hasattr(obj, 'grant_extra_write_permissions'):
         return obj.grant_extra_write_permissions(user, fields=fields)
     
@@ -136,12 +136,21 @@ def check_group_create_objects_access(group, user):
     #  check if we can create objects in the group
     is_member = check_ug_membership(user, group)
     is_admin = check_ug_admin(user, group)
-    return is_member or is_admin or user.is_superuser or user.is_staff
+    return is_member or is_admin or check_user_superuser(user)
+
+
+def check_user_superuser(user, portal=None):
+    """ Main function to determine whether a user has superuser rights to access and change almost
+            any view and object on the site.
+        For this it checks permissions if a user is a portal admin or a superuser
+            returns ``True`` if the user is a superuser or portal admin
+    """
+    return user.is_superuser or user.is_staff or check_user_portal_admin(user, portal)
 
 
 def check_user_portal_admin(user, portal=None):
-    """ Checks permissions of a user to create objects in a CosinnusGroup.
-            returns ``True`` if the user is either admin, staff member or group member
+    """ Checks permissions if a user is a portal admin in the given or current portal.
+            returns ``True`` if the user is a portal admin
     """
     portal = portal or CosinnusPortal.get_current()
     return user.id in portal.admins
@@ -160,7 +169,7 @@ def filter_tagged_object_queryset_for_user(qs, user):
     qs = qs.filter(group__is_active=True)
     
     # admins may see everything
-    if user.is_superuser:
+    if check_user_superuser(user):
         return qs
     
     q = Q(media_tag__isnull=True) # get all objects that don't have a media_tag (folders for example)

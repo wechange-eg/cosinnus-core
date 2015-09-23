@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.core.exceptions import PermissionDenied
 
 from cosinnus.models.group import CosinnusGroup
-from cosinnus.utils.permissions import check_ug_membership
+from cosinnus.utils.permissions import check_ug_membership, check_user_superuser
 
 
 class RequireLoggedIn(object):
@@ -30,6 +30,6 @@ class RequireGroupMember(RequireLoggedIn):
 
         user = request.user
 
-        if not (user.is_superuser or
+        if not (check_user_superuser(user) or
                 check_ug_membership(user, self.group)):
             raise PermissionDenied

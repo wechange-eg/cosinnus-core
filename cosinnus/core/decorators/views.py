@@ -9,7 +9,8 @@ from django.utils.decorators import available_attrs
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.utils.permissions import check_object_write_access,\
-    check_group_create_objects_access, check_object_read_access, get_user_token
+    check_group_create_objects_access, check_object_read_access, get_user_token,\
+    check_user_superuser
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse_lazy
@@ -86,7 +87,7 @@ def superuser_required(function):
     """A function decorator to assure a requesting user has the superuser flag
     """
     actual_decorator = user_passes_test(
-        lambda u: u.is_superuser
+        lambda u: check_user_superuser(u)
     )
     return actual_decorator(function)
 

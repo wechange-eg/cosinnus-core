@@ -22,7 +22,7 @@
 
 {% include 'cosinnus/feedback/report_button_leftnav_btn.html' with object=group %}
 
-{% if user|is_group_admin:group or user.is_superuser or user|is_portal_admin %}
+{% if user|is_group_admin:group or user|is_superuser %}
 	{% captureas href %}{% if activate %}{% url 'cosinnus:group-activate' group_id=group.id %}{% else %}{% url 'cosinnus:group-deactivate' group_id=group.id %}{% endif %}{% endcaptureas %}
 	{% captureas label %}{% if group and group.type == 1 or group_model == "CosinnusSociety" %}{% if activate %}{% trans "Re-activate Society" %}{% else %}{% trans "Deactivate Society" %}{% endif %}{% else %}{% if activate %}{% trans "Activate Project" %}{% else %}{% trans "Deactivate Project" %}{% endif %}{% endif %}{% endcaptureas %}
 	{% captureas icon %}{% if activate %}fa-flash{% else %}fa-times{% endif %}{% endcaptureas %}

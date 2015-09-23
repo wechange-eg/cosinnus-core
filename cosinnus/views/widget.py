@@ -18,7 +18,8 @@ from cosinnus.core.decorators.views import require_admin_access_decorator,\
 from cosinnus.core.registries import widget_registry
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.http import JSONResponse
-from cosinnus.utils.permissions import check_ug_admin, check_ug_membership
+from cosinnus.utils.permissions import check_ug_admin, check_ug_membership,\
+    check_user_superuser
 from cosinnus.views.mixins.group import RequireReadOrRedirectMixin
 from uuid import uuid1
 from cosinnus.core.registries.apps import app_registry
@@ -97,7 +98,7 @@ def widget_add_group(request, group, app_name=None, widget_name=None):
 @ensure_csrf_cookie
 def widget_detail(request, id, offset=0):
     wc = get_object_or_404(WidgetConfig, id=int(id))
-    if not (request.user.is_superuser or request.user.is_staff) and \
+    if not check_user_superuser(request.user) and \
              wc.group and not (check_ug_membership(request.user, wc.group) or \
              wc.group.public or wc.type == WidgetConfig.TYPE_MICROSITE) or \
              wc.user and wc.user_id != request.user.pk:

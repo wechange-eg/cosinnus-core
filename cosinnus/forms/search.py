@@ -13,6 +13,7 @@ from haystack.constants import DEFAULT_ALIAS
 from haystack.forms import SearchForm, model_choices
 
 from cosinnus.models.tagged import BaseTaggableObjectModel
+from cosinnus.utils.permissions import check_user_superuser
 
 
 def taggable_model_choices(using=DEFAULT_ALIAS):
@@ -92,7 +93,7 @@ class TaggableModelSearchForm(SearchForm):
 
         user = self.request.user
         if user.is_authenticated():
-            if user.is_superuser:
+            if check_user_superuser(user):
                 pass
             else:
                 sqs = sqs.filter_and(
