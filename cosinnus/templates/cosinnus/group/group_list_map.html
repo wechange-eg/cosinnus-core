@@ -5,7 +5,11 @@
 
 
 {% block leftnav %}
-    {% include "cosinnus/group/leftnav_all_groups.html"  with current_page="grouplist" %}
+	{% if group_type == 1 %}
+        {% include "cosinnus/group/leftnav_all_groups.html"  with current_page="grouplist__society" %}
+    {% else %}
+        {% include "cosinnus/group/leftnav_all_groups.html"  with current_page="grouplist" %}
+    {% endif %}
 {% endblock leftnav %}
 
 
