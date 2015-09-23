@@ -26,6 +26,10 @@ class GroupMembersView(RequireGroupMember, Select2View):
         User = get_user_model()
 
         uids = self.group.members
+        # if this is a Project, add all users of its parent Group as well
+        if self.group.parent:
+            uids = list(set(uids + self.group.parent.members))
+            
         q = Q(id__in=uids)
         q &= Q(first_name__icontains=term) | Q(last_name__icontains=term) | Q(username__icontains=term) | Q(email__icontains=term)
 
