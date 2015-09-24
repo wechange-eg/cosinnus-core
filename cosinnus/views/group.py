@@ -43,6 +43,9 @@ from django.db.models import Q
 from cosinnus.templatetags.cosinnus_tags import is_group_admin
 from cosinnus.utils.permissions import check_ug_admin, check_user_portal_admin,\
     check_user_superuser
+from cosinnus.views.widget import GroupDashboard
+from cosinnus.views.microsite import GroupMicrositeView
+from django.views.generic.base import View
 
 
 class SamePortalGroupMixin(object):
@@ -783,3 +786,24 @@ class ActivateOrDeactivateGroupView(TemplateView):
         return context
     
 activate_or_deactivate = ActivateOrDeactivateGroupView.as_view()
+
+
+class GroupStartpage(View):
+    """ This view is in place as first starting point for the initial group frontpage.
+        It decides whether the actual group dashboard or the group microsite should be shown. """
+    
+    dashboard_view = staticmethod(GroupDashboard.as_view())
+    microsite_view = staticmethod(GroupMicrositeView.as_view())
+    
+    def do_show_microsite(self, request):
+        if self.request.GET.get('microsite', None):
+            return True
+        return not request.user.is_authenticated()
+    
+    def dispatch(self, request, *args, **kwargs):
+        if self.do_show_microsite(request):
+            return self.microsite_view(request, *args, **kwargs)
+        else:
+            return self.dashboard_view(request, *args, **kwargs)
+
+group_startpage = GroupStartpage.as_view()

@@ -153,6 +153,42 @@ def require_logged_in():
     return decorator
 
 
+
+def dispatch_group_access(group_url_kwarg='group', group_attr='group'):
+    """A method decorator that takes the group name from the kwargs of a
+    dispatch function in CBVs and performs no priviledge checks
+
+    Additionally this function populates the group instance to the view
+    instance as attribute `group_attr`
+
+    :param str group_url_kwarg: The name of the key containing the group name.
+        Defaults to `'group'`.
+    :param str group_attr: The attribute name which can later be used to access
+        the group from within an view instance (e.g. `self.group`). Defaults to
+        `'group'`.
+    """
+
+    def decorator(function):
+        @functools.wraps(function, assigned=available_attrs(function))
+        def wrapper(self, request, *args, **kwargs):
+            group_name = kwargs.get(group_url_kwarg, None)
+            if not group_name:
+                return HttpResponseNotFound(_("No group provided"))
+
+            group = get_group_for_request(group_name, request)
+            
+            deactivated_app_error = _check_deactivated_app_access(self, group, request)
+            if deactivated_app_error:
+                return deactivated_app_error
+
+            setattr(self, group_attr, group)
+            return function(self, request, *args, **kwargs)
+
+            
+        return wrapper
+    return decorator
+
+
 def require_admin_access(group_url_kwarg='group', group_attr='group'):
     """A method decorator that takes the group name from the kwargs of a
     dispatch function in CBVs and checks that the requesting user is allowed to

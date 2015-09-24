@@ -79,6 +79,10 @@ body {
   background-size: cover;
 }
 
+body.body-no-nav {
+    padding-top: 17px !important;
+}
+
 /* Navbar at top of page */
 .navbar-fixed-top {
   background-color: rgba(255, 255, 255, 0.65);

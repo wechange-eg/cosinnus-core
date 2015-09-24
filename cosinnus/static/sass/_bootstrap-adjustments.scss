@@ -10,6 +10,10 @@ body {
 	background-size: cover;
 }
 
+body.body-no-nav {
+    padding-top: 17px !important;
+}
+
 /* Navbar at top of page */
 
 .navbar-fixed-top {

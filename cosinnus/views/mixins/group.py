@@ -3,7 +3,8 @@ from __future__ import unicode_literals
 
 from cosinnus.core.decorators.views import (require_read_access,
     require_write_access, require_admin_access,
-    require_create_objects_in_access, redirect_to_not_logged_in)
+    require_create_objects_in_access, redirect_to_not_logged_in,
+    dispatch_group_access)
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from cosinnus.models.tagged import BaseTaggableObjectModel
 from django.core.exceptions import PermissionDenied, ImproperlyConfigured
@@ -28,6 +29,28 @@ class RequireAdminMixin(object):
         context.update({'group': self.group})
         return context
 
+
+class DipatchGroupURLMixin(object):
+    """
+    Mixin to resolve a group object from its URL without requiring any access priviledges.
+
+    .. seealso:: :class:`RequireAdminMixin`, :class:`RequireWriteMixin`, :class:`RequireCreateObjectsInMixin`
+    
+    Note: Accessing an object with a slug or pk that is not found will always result in two seperate DB hits,
+          because we first do a complete filter for the object, including permissions, pk, group memberships.
+          Then, if the object wasn't found, we re-do the filter without permissions to check if that was the 
+          cause, then redirect to a login page or a permission denied page. If the second query also fails to
+          match anything, we let the Http404 bubble up.
+    """
+
+    @dispatch_group_access()
+    def dispatch(self, request, *args, **kwargs):
+        return super(DipatchGroupURLMixin, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(DipatchGroupURLMixin, self).get_context_data(**kwargs)
+        context.update({'group': self.group})
+        return context
 
 
 class RequireReadMixin(object):

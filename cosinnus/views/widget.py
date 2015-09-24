@@ -218,7 +218,9 @@ class DashboardWidgetMixin(object):
     # any 'app_name.widget_name' entries in here will be filtered out of the context_data
     disallowed_widgets = []
     # fallback ordering of 'app_name.widget_name' for when some widgets have the same sort_field value
-    default_widget_order = []
+    default_widget_order = ['note.detailed_news_list', 'event.upcoming', 
+                            'todo.mine', 'etherpad.latest', 'cosinnus.group_members', 'cosinnus.group_projects']
+    
     
     def reorder_equal_widgets(self, widgets):
         """ Sorts all widgets with equal sort_key by their default_widget_order """
