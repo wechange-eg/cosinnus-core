@@ -121,5 +121,5 @@ class BaseTaggableObjectIndex(TagObjectSearchIndex):
 class BaseHierarchicalTaggableObjectIndex(BaseTaggableObjectIndex):
     
     def index_queryset(self, using=None):
-        qs = super(BaseTaggableObjectIndex, self).index_queryset(using=using)
+        qs = super(BaseHierarchicalTaggableObjectIndex, self).index_queryset(using=using)
         return qs.filter(is_container=False)
