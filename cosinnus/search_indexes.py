@@ -24,6 +24,6 @@ class GroupIndex(TagObjectSearchIndex, indexes.Indexable):
 
     def index_queryset(self, using=None):
         qs = self.get_model().objects.all()
-        qs = qs.filter(group__is_active=True)
+        qs = qs.filter(is_active=True)
         qs = qs.select_related('media_tag').all()
         return qs
