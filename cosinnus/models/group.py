@@ -24,7 +24,7 @@ from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.utils.functions import unique_aware_slugify,\
     clean_single_line_text
 from cosinnus.utils.files import get_group_avatar_filename,\
-    get_portal_background_image_filename
+    get_portal_background_image_filename, get_group_wallpaper_filename
 from django.core.urlresolvers import reverse
 from django.utils.functional import cached_property
 from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
@@ -553,9 +553,20 @@ class CosinnusGroup(models.Model):
     type = models.PositiveSmallIntegerField(_('Group Type'), blank=False,
         default=TYPE_PROJECT, choices=TYPE_CHOICES, editable=False)
     
-    description = HTMLField(verbose_name=_('Description'), blank=True)
+    description = HTMLField(verbose_name=_('Short Description'),
+         help_text=_('Short Description. Internal, will not be shown publicly.'), blank=True)
+    description_long = HTMLField(verbose_name=_('Detailed Description'),
+         help_text=_('Detailed, public description.'), blank=True)
+    contact_info = HTMLField(verbose_name=_('Contact Information'),
+         help_text=_('How you can be contacted - addresses, social media, etc.'), blank=True)
+    
+    
     avatar = models.ImageField(_("Avatar"), null=True, blank=True,
         upload_to=get_group_avatar_filename)
+    wallpaper = models.ImageField(_("Wallpaper image"), 
+        help_text=_('Shown as large banner image on the Microsite'),
+        null=True, blank=True,
+        upload_to=get_group_wallpaper_filename)
     website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
     public = models.BooleanField(_('Public'), default=False)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,

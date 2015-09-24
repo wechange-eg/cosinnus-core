@@ -49,7 +49,8 @@ class _CosinnusProjectForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, forms.
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
     
     class Meta:
-        fields = ('name', 'public', 'description', 'avatar', 'parent', 'website', 'deactivated_apps')
+        fields = ('name', 'public', 'description', 'description_long', 'contact_info', 
+                    'avatar', 'wallpaper', 'parent', 'website', 'deactivated_apps')
         model = CosinnusProject
     
     def __init__(self, instance, *args, **kwargs):    
@@ -62,7 +63,8 @@ class _CosinnusSocietyForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, forms.
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
     
     class Meta:
-        fields = ('name', 'public', 'description', 'avatar', 'website', 'deactivated_apps')
+        fields = ('name', 'public', 'description', 'description_long', 'contact_info', 
+                    'avatar', 'wallpaper', 'website', 'deactivated_apps')
         model = CosinnusSociety
         
 

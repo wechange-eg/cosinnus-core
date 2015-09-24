@@ -130,7 +130,10 @@
 		        <div class="row">
 		            <div class="col-md-8 regular-space">
 		                
-                        <label>{% if group_model == "CosinnusSociety" %}{% trans "Describe the society in a few sentences." %}{% else %}{% trans "Describe the group in a few sentences." %}{% endif %}</label>
+                        <label>
+                        	{% if group_model == "CosinnusSociety" %}{% trans "Describe the society in a few sentences." %}{% else %}{% trans "Describe the group in a few sentences." %}{% endif %}
+                        	{% trans "This is an internal description for the members." %}
+                        </label>
                         {{ form.forms.obj.description.errors }}
                         <div type="button" class="btn btn-default w100 regular-space">
                             <ul class="media-list">
@@ -140,6 +143,42 @@
                                     </a>
                                     <div class="media-body">
                                         {% render_field form.forms.obj.description  %}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <label>
+                        	{% if group_model == "CosinnusSociety" %}{% trans "Describe the society in a few sentences." %}{% else %}{% trans "Describe the group in a few sentences." %}{% endif %}
+                        	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+                        </label>
+                        {{ form.forms.obj.description_long.errors }}
+                        <div type="button" class="btn btn-default w100 regular-space">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <a class="pull-left" href="#">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        {% render_field form.forms.obj.description_long  %}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <label>
+                        	{% trans "Contact info. How you can be reached, addresses, social media, etc..." %}
+                        	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+                        </label>
+                        {{ form.forms.obj.contact_info.errors }}
+                        <div type="button" class="btn btn-default w100 regular-space">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <a class="pull-left" href="#">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        {% render_field form.forms.obj.contact_info  %}
                                     </div>
                                 </li>
                             </ul>
