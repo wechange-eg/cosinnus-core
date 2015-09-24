@@ -24,7 +24,8 @@ from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.utils.functions import unique_aware_slugify,\
     clean_single_line_text
 from cosinnus.utils.files import get_group_avatar_filename,\
-    get_portal_background_image_filename, get_group_wallpaper_filename
+    get_portal_background_image_filename, get_group_wallpaper_filename,\
+    get_cosinnus_media_file_folder
 from django.core.urlresolvers import reverse
 from django.utils.functional import cached_property
 from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
@@ -38,6 +39,9 @@ from django.db import IntegrityError, transaction
 from django.contrib import messages
 
 import logging
+import shutil
+from easy_thumbnails.files import get_thumbnailer
+from easy_thumbnails.exceptions import InvalidImageFormatError
 
 logger = logging.getLogger('cosinnus')
 
@@ -743,6 +747,56 @@ class CosinnusGroup(models.Model):
     @property
     def avatar_url(self):
         return self.avatar.url if self.avatar else None
+    
+    def _get_media_image_path(self, file_field, filename_modifier=None):
+        """Gets the unique path for each image file in the media directory"""
+        mediapath = os.path.join(get_cosinnus_media_file_folder(), 'avatars', 'group_wallpapers')
+        mediapath_local = os.path.join(settings.MEDIA_ROOT, mediapath)
+        if not os.path.exists(mediapath_local):
+            os.makedirs(mediapath_local)
+        filename_modifier = '_' + filename_modifier if filename_modifier else ''
+        image_filename = file_field.path.split(os.sep)[-1] + filename_modifier + '.' + file_field.path.split('.')[-1]
+        return os.path.join(mediapath, image_filename)
+    
+    def static_wallpaper_url(self, size=None, filename_modifier=None):
+        """
+        This function copies the image to its new path (if necessary) and
+        returns the URL for the image to be displayed on the page. (Ex:
+        '/media/cosinnus_files/images/dca2b30b1e07ed135c24d7dbd928e37523b474bb.jpg')
+
+        It is a helper function to display cosinnus image files on the webpage.
+
+        The image file is copied to a general image folder in cosinnus_files,
+        so the true image path is not shown to the client.
+
+        """
+        if not self.wallpaper:
+            return ''
+        if not size:
+            size = settings.COSINNUS_GROUP_WALLPAPER_MAXIMUM_SIZE_SCALE
+            
+        # the modifier can be used to save images of different sizes
+        media_image_path = self._get_media_image_path(self.wallpaper, filename_modifier=filename_modifier)
+
+        # if image is not in media dir yet, resize and copy it
+        imagepath_local = os.path.join(settings.MEDIA_ROOT, media_image_path)
+        if not os.path.exists(imagepath_local):
+            thumbnailer = get_thumbnailer(self.wallpaper)
+            try:
+                thumbnail = thumbnailer.get_thumbnail({
+                    'crop': 'smart',
+                    'size': size,
+                })
+            except InvalidImageFormatError:
+                raise
+            
+            if not thumbnail:
+                return ''
+            shutil.copy(thumbnail.path, imagepath_local)
+        
+        media_image_path = media_image_path.replace('\\', '/')  # fix for local windows systems
+        return os.path.join(settings.MEDIA_URL, media_image_path)
+    
     
     def is_foreign_portal(self):
         return CosinnusPortal.get_current().id != self.portal_id

@@ -120,6 +120,19 @@
 		                <p class="transparent">{% trans "A picture for better recognition." %}</p>
 		            </div>
 		        </div><!-- row -->
+				
+				{{ form.forms.obj.wallpaper.errors }}
+				<div class="row">
+                 	<div class="col-md-8 regular-space">
+						{% if object.wallpaper %}
+						{% trans "Currently" %}: <a href="{{ object.wallpaper.url }}">{{ object.wallpaper }}</a> 
+						{% endif %}
+						<input id="wallpaper-clear_id" name="file-clear" type="checkbox"> 
+						<label for="wallpaper-clear_id">{% trans "Reset" %}</label><br>
+						{% trans "Change" %}: 
+						<input class="form-control" id="fileToUpload" name="wallpaper" placeholder="{% trans "Upload an image." %}" type="file">
+					</div>
+             	</div>
 		    </fieldset>
 		
 		

@@ -45,6 +45,12 @@
 
 {% block main_page %}
     
+    {% if group.wallpaper %}
+		<div>
+			<img class="img-responsive" src="{{ group.static_wallpaper_url }}"></img>
+		</div>
+	{% endif %}
+	
 	
     <div class="dashboard-header">
         <div class="dashboard-header-image">
@@ -53,22 +59,12 @@
             </a>
         </div>
         <div class="dashboard-header-text">
-            <div class="multiline-ellipsis">
-                <div class="multiline-ellipsis-prop"></div>
-                <div class="multiline-ellipsis-main">
-                    
-                    
-                    
-                    <h2>{{ group.name }}</h2>
-                    
-                    {% with society=group.get_parent_typed %}
-                        {% if society %}
-                            <p><i>{% trans "Society:" %} <a href="{{ society.get_absolute_url }}">{{ society.name }}</a></i></p>
-                        {% endif %}
-                    {% endwith %}
-                    
-            	</div>
-            </div>
+            <h2>{{ group.name }}</h2>
+            {% with society=group.get_parent_typed %}
+                {% if society %}
+                    <p><i>{% trans "Society:" %} <a href="{{ society.get_absolute_url }}">{{ society.name }}</a></i></p>
+                {% endif %}
+            {% endwith %}
         </div>
     </div>
     
