@@ -12,7 +12,7 @@ class GroupIndex(TagObjectSearchIndex, indexes.Indexable):
     text = TemplateResolveEdgeNgramField(document=True, use_template=True)
     rendered = TemplateResolveCharField(use_template=True, indexed=False)
 
-    name = indexes.CharField(model_attr='name')
+    name = indexes.CharField(model_attr='name', boost=1.25)
     slug = indexes.CharField(model_attr='slug', indexed=False)
     public = indexes.BooleanField(model_attr='public')
     admins = indexes.MultiValueField(model_attr='admins', indexed=False)

@@ -90,8 +90,8 @@ class TemplateResolveEdgeNgramField(TemplateResolveMixin, indexes.EdgeNgramField
 class BaseTaggableObjectIndex(TagObjectSearchIndex):
     text = TemplateResolveEdgeNgramField(document=True, use_template=True)
     rendered = TemplateResolveCharField(use_template=True, indexed=False)
-
-    title = indexes.EdgeNgramField(model_attr='title')
+    
+    title = indexes.EdgeNgramField(model_attr='title', boost=1.25)
     slug = indexes.CharField(model_attr='slug', indexed=False)
     creator = indexes.EdgeNgramField(model_attr='creator', null=True)
     created = indexes.DateTimeField(model_attr='created')
