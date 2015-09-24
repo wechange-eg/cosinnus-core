@@ -562,11 +562,13 @@ class CosinnusGroup(models.Model):
     
     
     avatar = models.ImageField(_("Avatar"), null=True, blank=True,
-        upload_to=get_group_avatar_filename)
+        upload_to=get_group_avatar_filename,
+        max_length=250)
     wallpaper = models.ImageField(_("Wallpaper image"), 
         help_text=_('Shown as large banner image on the Microsite'),
         null=True, blank=True,
-        upload_to=get_group_wallpaper_filename)
+        upload_to=get_group_wallpaper_filename,
+        max_length=250)
     website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
     public = models.BooleanField(_('Public'), default=False)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
