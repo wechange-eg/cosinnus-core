@@ -60,9 +60,37 @@
         </div>
         <div class="dashboard-header-text">
             <h2>{{ group.name }}</h2>
-            {% with society=group.get_parent_typed %}
-                {% if society %}
-                    <p><i>{% trans "Society:" %} <a href="{{ society.get_absolute_url }}">{{ society.name }}</a></i></p>
+            <p>
+            	<i>{% if group.type == 0 %}{% trans "Project in Portal" %}{% else %}{% trans "Society in Portal" %}{% endif %}: </i> 
+            	{% include 'cosinnus/portal/portal_link_icon.html' with portal=group.portal %}
+            	<a href="{{ group.portal.get_domain }}">{{ group.portal.name }}</a>
+            </p>
+            
+            {% with parent=group.get_parent_typed %}
+                {% if parent %}
+                    <p>
+                    	{% trans "Society" %}: <a href="{{ parent.get_absolute_url }}">{{ parent.name }}</a>
+                    	{% with siblings=group.get_siblings %}
+                    		{% if siblings %}
+                    			| {% trans "Other Projects" %}: 
+                    			{% for sibling in siblings %}
+                    				<a href="{{ sibling.get_absolute_url }}">{{ sibling.name }}</a>
+                    				{% if not forloop.last %}, {% endif %}
+                    			{% endfor %}
+                    		{% endif %}
+                    	{% endwith %}
+                    </p>
+                {% else %}
+		            {% with children=group.get_children %}
+		        		{% if children %}
+		        			<p>
+			        			{% trans "Projects" %}: 
+			        			{% for child in children %}
+			        				<a href="{{ child.get_absolute_url }}">{{ child.name }}</a>{% if not forloop.last %}, {% endif %}
+			        			{% endfor %}
+		        			</p>
+		        		{% endif %}
+		        	{% endwith %}
                 {% endif %}
             {% endwith %}
         </div>

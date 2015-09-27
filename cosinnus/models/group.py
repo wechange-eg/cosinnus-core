@@ -119,14 +119,15 @@ class CosinnusGroupManager(models.Manager):
         both of these (membership queries, BaseTaggableObject displays in Stream, etc) """
     
     # list of all group slugs and the pk mapped to each slug
-    _GROUPS_SLUG_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/slugs' # portal_id, self.__class__.__name__  --> ( slug (str), pk (int) )
+    _GROUPS_SLUG_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/slugs' # portal_id, self.__class__.__name__  --> list ( slug (str), pk (int) )
     # list of all group pks and the slug mapped to each pk
-    _GROUPS_PK_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/pks' # portal_id, self.__class__.__name__   --> ( pk (int), slug (str) )
+    _GROUPS_PK_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/pks' # portal_id, self.__class__.__name__   --> list ( pk (int), slug (str) )
     # actual slug to group object cache
     _GROUP_CACHE_KEY = 'cosinnus/core/portal/%d/group/%s/%s' # portal_id, self.__class__.__name__, slug   --> group (obj)
     # group slug to Model type cache, for when only a group slug is known but not the specific CosinnusGroup sub model type
     _GROUP_SLUG_TYPE_CACHE_KEY = 'cosinnus/core/portal/%d/group_slug_type/%s' # portal_id, group_slug  --> type (int)
-
+    # cache for the children ids of a cosinnus group
+    _GROUP_CHILDREN_PK_CACHE_KEY = 'cosinnus/core/portal/%d/group_children_pks/%d' # portal_id, pk (int) --> list ( pk (int) )
 
     use_for_related_fields = True
 
@@ -728,6 +729,8 @@ class CosinnusGroup(models.Model):
             keys.extend([CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, s) for s in slugs])
         if group:
             group._clear_local_cache()
+            if group.parent_id:
+                keys.append(CosinnusGroupManager._GROUP_CHILDREN_PK_CACHE_KEY % (CosinnusPortal.get_current().id, group.parent_id))
         cache.delete_many(keys)
         
         # if this has been called on the model-ignorant CosinnusGroupManager, as a precaution, also run this for the sub-models
@@ -833,6 +836,26 @@ class CosinnusGroup(models.Model):
             cls = group_model_registry.get_by_type(parent.type)
             return cls.objects.all().get(id=parent.id)
         return None
+    
+    def get_children(self, for_parent_id=None):
+        """ Returns all CosinnusGroups that have this group as parent.
+            @param for_parent_id: If supplied, will get the children for another CosinnusGroup id instead of for this group """
+        for_parent_id = for_parent_id or self.id
+        children_cache_key = CosinnusGroupManager._GROUP_CHILDREN_PK_CACHE_KEY % (CosinnusPortal.get_current().id, for_parent_id)
+        children_ids = cache.get(children_cache_key)
+        if children_ids is None:
+            children_ids = CosinnusGroup.objects.filter(parent_id=for_parent_id).values_list('id', flat=True)
+            cache.set(children_cache_key, children_ids, settings.COSINNUS_GROUP_CHILDREN_CACHE_TIMEOUT)
+        return CosinnusProject.objects.get_cached(pks=children_ids)
+    
+    def get_siblings(self):
+        """ If this has a parent group, returns all CosinnusGroups that also have that group
+            as a parent (excluding self) """
+        if not self.parent_id:
+            return []
+        parents_children = self.get_children(for_parent_id=self.parent_id)
+        return [child for child in parents_children if not child.id == self.id]
+
 
 class CosinnusProjectManager(CosinnusGroupManager):
     def get_queryset(self):
