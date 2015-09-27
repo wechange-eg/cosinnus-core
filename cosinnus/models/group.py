@@ -659,8 +659,7 @@ class CosinnusGroup(models.Model):
             self.portal = CosinnusPortal.get_current()
         
         super(CosinnusGroup, self).save(*args, **kwargs)
-        slugs.append(self.slug)
-        self._clear_cache(slugs=slugs)
+        self._clear_cache(slugs=slugs, group=self)
         
         self._portal = self.portal
         self._type = self.type
@@ -713,7 +712,10 @@ class CosinnusGroup(models.Model):
         return uid in self.pendings
 
     @classmethod
-    def _clear_cache(self, slug=None, slugs=None):
+    def _clear_cache(self, slug=None, slugs=None, group=None):
+        slugs = set([s for s in slugs])
+        if slug: slugs.add(slug)
+        if group: slugs.add(group.slug)
         keys = [
             self.objects._GROUPS_SLUG_CACHE_KEY % (CosinnusPortal.get_current().id, self.objects.__class__.__name__),
             self.objects._GROUPS_PK_CACHE_KEY % (CosinnusPortal.get_current().id, self.objects.__class__.__name__),
@@ -724,10 +726,9 @@ class CosinnusGroup(models.Model):
         if slugs:
             keys.extend([self.objects._GROUP_CACHE_KEY % (CosinnusPortal.get_current().id, self.objects.__class__.__name__, s) for s in slugs])
             keys.extend([CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, s) for s in slugs])
+        if group:
+            group._clear_local_cache()
         cache.delete_many(keys)
-        
-        if isinstance(self, CosinnusGroup) or issubclass(self.__class__, CosinnusGroup):
-            self._clear_local_cache()
         
         # if this has been called on the model-ignorant CosinnusGroupManager, as a precaution, also run this for the sub-models
         if self.objects.__class__.__name__ == CosinnusGroupManager.__name__:
@@ -736,7 +737,7 @@ class CosinnusGroup(models.Model):
                 group_class._clear_cache(slug, slugs)
     
     def clear_cache(self):
-        self._clear_cache(slug=self.slug)
+        self._clear_cache(group=self)
     
     def clear_member_cache(self):
         CosinnusGroupMembership.clear_member_cache_for_group(self)
