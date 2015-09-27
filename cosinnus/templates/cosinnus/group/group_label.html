@@ -5,7 +5,5 @@
 	{{ group.name }}
 </a>
 {% if group.is_foreign_portal %} 
-    <a class="portal-inlink" href="{{ group.portal.get_domain }}" target="_blank" title="{{ group.portal.name }}">
-        <img src="{{ group.portal.get_domain }}{% static 'img/logo-icon.png' %}" style="width:20px;">
-    </a>
+    {% include 'cosinnus/portal/portal_link_icon.html' with portal=group.portal %}
 {% endif %}
