@@ -794,6 +794,8 @@ class GroupStartpage(View):
     microsite_view = staticmethod(GroupMicrositeView.as_view())
     
     def do_show_microsite(self, request):
+        if self.request.GET.get('browse', False):
+            return False
         if self.request.GET.get('microsite', None):
             return True
         if not request.user.is_authenticated() or not request.user.pk in self.group.members:

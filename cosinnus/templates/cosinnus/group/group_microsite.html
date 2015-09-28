@@ -65,7 +65,11 @@
         <div class="dashboard-header-text">
             <h2>{{ group.name }}</h2>
             <p>
-            	<i>{% if group.type == 0 %}{% trans "Project in Portal" %}{% else %}{% trans "Society in Portal" %}{% endif %}: </i> 
+            	{% if group.public %}
+            		<i>{% if group.type == 0 %}{% trans "Public Project in Portal" %}{% else %}{% trans "Public Society in Portal" %}{% endif %}: </i>
+            	{% else %}
+            		<i>{% if group.type == 0 %}{% trans "Project in Portal" %}{% else %}{% trans "Society in Portal" %}{% endif %}: </i> 
+            	{% endif %}
             	{% include 'cosinnus/portal/portal_link_icon.html' with portal=group.portal %}
             	<a href="{{ group.portal.get_domain }}">{{ group.portal.name }}</a>
             </p>
@@ -120,6 +124,10 @@
     </div>
 	<br/>
 	
+	<div>
+		{% include "cosinnus/media_tags_group_readonly.html" with object=group %}
+	</div><br/>
+	
     {% if group.website %}
 		<div>
 			<p><b>{% trans "Website" %}</b></p>
@@ -127,6 +135,14 @@
 	    </div>
 		<br/>
     {% endif %}
+    
+    {% if group.media_tag_object.location %}
+    	<div>
+			<p><b>{% trans "Location" %}</b></p>
+        	<p><i class="fa fa-fw fa-map-marker"></i> <a href="{{ group.media_tag_object.location_url }}" target="_blank">{{ group.media_tag_object.location }}</a></p>
+	    </div>
+		<br/>
+	{% endif %}
     
     <div>
     	<p><b>{% trans "Collaborate?" %}</b></p>
@@ -144,7 +160,7 @@
                         </li>
                     </ul>
                 </button>
-	    	{% elif user.pk in group.members or user in group.admins %}
+	    	{% elif user.pk in group.members %}
 	            {% trans "You are a member!" %}
 	            <button style="float: none;" href="{{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
                     <ul class="media-list">
@@ -197,6 +213,27 @@
 	            
 	            {% include "cosinnus/modal_box.html" with id="join_withdraw_modal" label=label title=title form_action=action %}
 	        {% endif %}
+	    </p>
+	    <p>
+	    	{% if group.public %}
+	    		{% if not user.is_authenticated or not user.pk in group.members %}
+	    		
+	    			{% trans "This is a public group:" %}
+		    		<button style="float: none;" href="{{ group.get_absolute_url }}?browse=true" type="button" class="btn btn-emphasized">
+	                    <ul class="media-list">
+	                        <li class="media">
+	                            <a class="pull-left" href="#">
+	                                <i class="fa fa-sign-in"></i>
+	                            </a>
+	                            <div class="media-body">
+	                                {% trans "Browse group" %}
+	                            </div>
+	                        </li>
+	                    </ul>
+	                </button>
+	    		
+	    		{% endif %}
+	    	{% endif %}
 	    </p>
     </div>
 
