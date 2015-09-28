@@ -40,10 +40,7 @@ from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.models.tagged import BaseTagObject
 from django.shortcuts import redirect, get_object_or_404
 from django.http.response import Http404
-from django.db.models import Q
-from cosinnus.templatetags.cosinnus_tags import is_group_admin
-from cosinnus.utils.permissions import check_ug_admin, check_user_portal_admin,\
-    check_user_superuser
+from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
 from cosinnus.views.widget import GroupDashboard
 from cosinnus.views.microsite import GroupMicrositeView
 from django.views.generic.base import View
