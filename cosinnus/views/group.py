@@ -15,7 +15,8 @@ from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView,
     ListView, UpdateView, TemplateView)
 
-from cosinnus.core.decorators.views import membership_required, redirect_to_403
+from cosinnus.core.decorators.views import membership_required, redirect_to_403,\
+    dispatch_group_access
 from cosinnus.core.registries import app_registry
 from cosinnus.forms.group import MembershipForm
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
@@ -798,8 +799,11 @@ class GroupStartpage(View):
     def do_show_microsite(self, request):
         if self.request.GET.get('microsite', None):
             return True
-        return not request.user.is_authenticated()
+        if not request.user.is_authenticated() or not request.user.pk in self.group.members:
+            return True
+        return False
     
+    @dispatch_group_access()
     def dispatch(self, request, *args, **kwargs):
         if self.do_show_microsite(request):
             return self.microsite_view(request, *args, **kwargs)
