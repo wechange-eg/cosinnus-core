@@ -2543,7 +2543,7 @@ msgstr ""
 #: .\views\user.py:171
 msgid "The user account was already approved, but thank you anyway!"
 msgstr ""
-"Das Banutzerkonto wurde bereits freigeschaltet, aber trotzdem vielen Dank!"
+"Das Benutzerkonto wurde bereits freigeschaltet, aber trotzdem vielen Dank!"
 
 #: .\views\user.py:186
 #, python-format
