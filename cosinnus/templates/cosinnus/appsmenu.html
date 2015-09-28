@@ -52,14 +52,12 @@
                 {% trans "Dashboard" %}
             </a>
         </li>
-        {% comment %} Microsite link taken out for now
         <li class="app-main appnavi-listelement fine-space">
             <a href="{{ group_microsite_page }}">
                 <i class="fa fa-lightbulb-o"></i>
                 {% trans "Microsite" %}
             </a>
         </li>
-        {% endcomment %}
         {% for app in apps %}
             {% captureas app_css_class %}{% if app.app == 'cosinnus_todo' %}app-todos{% elif app.app == 'cosinnus_note' %}app-main{% elif app.app == 'cosinnus_file' %}app-files{% elif app.app == 'cosinnus_etherpad' %}app-etherpad{% elif app.app == 'cosinnus_event' %}app-calendar{% elif app.app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}{% endcaptureas %}
             {% captureas app_icon %}{% if app.app == 'cosinnus_todo' %}fa-tasks{% elif app.app == 'cosinnus_note' %}fa-book{% elif app.app == 'cosinnus_file' %}fa-file{% elif app.app == 'cosinnus_etherpad' %}fa-file-text{% elif app.app == 'cosinnus_event' %}fa-calendar{% elif app.app %}app-{{ COSINNUS_CURRENT_APP }}{% endif %}{% endcaptureas %}

@@ -61,6 +61,7 @@ for url_key in group_model_registry:
         url(r'^%s/map/$' % plural_url_key, 'group.group_list_map', name=prefix+'group-list-map'),
         url(r'^%s/add/$' % plural_url_key, 'group.group_create', name=prefix+'group-add'),
         url(r'^%s/(?P<group>[^/]+)/$' % url_key, 'group.group_startpage', name=prefix+'group-dashboard'),
+        url(r'^%s/(?P<group>[^/]+)/microsite/$' % url_key, 'microsite.group_microsite_view', name=prefix+'group-microsite'),
         #url(r'^%s/(?P<group>[^/]+)/_microsite__old_/$' % url_key, 'cms.group_microsite', name=prefix+'group-microsite'),
         #url(r'^%s/(?P<group>[^/]+)/_microsite__old_/edit/$' % url_key, 'cms.group_microsite_edit', name=prefix+'group-microsite-edit'),
         url(r'^%s/(?P<group>[^/]+)/members/$' % url_key, 'group.group_detail', name=prefix+'group-detail'),

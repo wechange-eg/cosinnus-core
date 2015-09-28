@@ -22,6 +22,6 @@ from cosinnus.views.widget import DashboardWidgetMixin
 class GroupMicrositeView(DipatchGroupURLMixin, TemplateView):
     template_name = 'cosinnus/group/group_microsite.html'
     
-    
+group_microsite_view = GroupMicrositeView.as_view()
     
 # this view is only called from within the group-startpage redirect view
