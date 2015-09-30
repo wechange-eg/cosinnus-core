@@ -44,6 +44,7 @@ from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
 from cosinnus.views.widget import GroupDashboard
 from cosinnus.views.microsite import GroupMicrositeView
 from django.views.generic.base import View
+import six
 
 
 class SamePortalGroupMixin(object):
@@ -793,9 +794,23 @@ class GroupStartpage(View):
     dashboard_view = staticmethod(GroupDashboard.as_view())
     microsite_view = staticmethod(GroupMicrositeView.as_view())
     
-    def do_show_microsite(self, request):
+    def check_redirect_to_microsite(self, request):
+        """ Checks whether the user should be shown the Group Dashboard, the Group Micropage,
+            or be redirected to a completely different page 
+            @return: ``True`` if the group micropage should be shown
+            @return: ``False`` if the group dashboard should be shown
+            @return: ``<string>`` the URL that should be redirected to
+        """
+        # check if this session user has clicked on "browse" for this group before
+        # and if so, never let him see that groups microsite again
+        group_session_browse_key = 'group__browse__%s' % self.group.slug
         if self.request.GET.get('browse', False):
+            request.session[group_session_browse_key] = True
+            request.session.save()
+            return request.path # redirect to URL without GET param
+        if request.session.get(group_session_browse_key, False):
             return False
+        
         if self.request.GET.get('microsite', None):
             return True
         if not request.user.is_authenticated() or not request.user.pk in self.group.members:
@@ -804,7 +819,10 @@ class GroupStartpage(View):
     
     @dispatch_group_access()
     def dispatch(self, request, *args, **kwargs):
-        if self.do_show_microsite(request):
+        redirect_result = self.check_redirect_to_microsite(request)
+        if isinstance(redirect_result, six.string_types):
+            return redirect(redirect_result)
+        elif redirect_result:
             return self.microsite_view(request, *args, **kwargs)
         else:
             return self.dashboard_view(request, *args, **kwargs)
