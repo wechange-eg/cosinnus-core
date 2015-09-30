@@ -1398,7 +1398,7 @@ body .ultra-space {
 
 .content-box {
   padding: 15px;
-  background-color: rgba(219, 219, 219, 0.3);
+  background-color: rgba(219, 219, 219, 0.5);
 }
 .content-box:before, .content-box:after {
   content: " ";
@@ -3179,4 +3179,17 @@ a.portal-inlink:hover img {
     font-weight: bold;
     padding: 0 8px 3px 8px;
 }
+
+
+
+.nav-tabs > li > a {
+    background-color: rgba(255,255,255,0.7);
+    color: #333;
+}
+.nav-tabs > li.active > a {
+    background-color: white;
+}
+
+
+
 

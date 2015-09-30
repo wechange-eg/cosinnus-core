@@ -36,19 +36,29 @@
     <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
     {% csrf_token %}
     {{ form.forms.obj.media }}
-    
+    	
+        <ul class="nav nav-tabs" role="tablist">
+			<li {% if not request.GET.tab %}class="active"{% endif %}>
+				<a href="#general" class="_group-form-tab _group-form-tab-awesome-avatar" role="tab" data-toggle="tab">
+					<i class="fa fa-cogs"></i>
+					{% trans "General" %}
+				</a>
+			</li>
+			<li {% if request.GET.tab == 'microsite' %}class="active"{% endif %}>
+				<a href="#microsite" class="_group-form-tab" role="tab" data-toggle="tab">
+					<i class="fa fa-lightbulb-o"></i>
+					{% trans "Microsite" %}
+				</a>
+			</li>
+		</ul>
+		
         <!-- a box with semi transparent background -->
         <div class="content-box">
 	        {{ form.forms.obj.non_field_errors }}
 	        {{ form.forms.media_tag.non_field_errors }}
-	        
-	        <ul class="nav nav-tabs" role="tablist">
-				<li {% if not request.GET.tab %}class="active"{% endif %}><a href="#general" class="_group-form-tab _group-form-tab-awesome-avatar" role="tab" data-toggle="tab">{% trans "General" %}</a></li>
-				<li {% if request.GET.tab == 'microsite' %}class="active"{% endif %}><a href="#microsite" class="_group-form-tab" role="tab" data-toggle="tab">{% trans "Microsite" %}</a></li>
-			</ul>
 			
 			<!-- Tab panes -->
-			<div class="tab-content v-offset-m">
+			<div class="tab-content">
 				<div class="tab-pane {% if not request.GET.tab %}active{% endif %}" id="general">
 					
 					
