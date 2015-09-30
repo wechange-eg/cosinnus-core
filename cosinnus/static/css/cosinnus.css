@@ -3072,3 +3072,111 @@ a.portal-inlink:hover img {
 .v-spacer-l {
     margin-bottom: 30px;
 }
+
+
+
+.image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.group-microsite-header {
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+.group-microsite-avatar {
+    width: 130px;
+    top: -30px;
+    position: relative;
+    float: left;
+    margin-right: 15px;
+    margin-bottom: -30px;
+}
+
+.group-microsite-box {
+    background-color: rgba(255, 255, 255, 0.7);
+    min-height: 100px;
+}
+
+.group-microsite-box h2 {
+    margin-top: 0px;
+    padding-top: 15px;
+    color: #333;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.group-microsite-details {
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+@media (max-width: 767px) {
+    .group-microsite-avatar {
+        width: 130px;
+        top: -30px;
+    }
+    .group-microsite-box {
+        min-height: 100px;
+    }
+}
+
+@media (min-width: 992px) {
+    .group-microsite-avatar {
+        width: 160px;
+        top: -30px;
+        margin-bottom: -30px;
+    }
+    .group-microsite-box {
+        height: 130px;
+    }
+    .group-microsite-box h2 {
+        font-size: 24px;
+    }
+    .group-microsite-details {
+        font-size: 14px;
+    }
+    .group-microsite-subheader {
+        font-size: 14px;
+    }
+}
+
+
+.group-microsite-subheader {
+    background-color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
+
+.group-microsite-subheader-container::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.group-microsite-subheader-container {
+    display: inline-block;
+}
+
+.group-microsite-subheader-item {
+    color: #333;
+    float: right;
+    text-align: center;
+    line-height: 1em;
+}
+
+.group-microsite-subheader-item + .group-microsite-subheader-item {
+    padding-left: 2px;
+}
+
+
+.group-microsite-subheader-item header {
+    padding: 8px 8px 3px 8px;
+}
+
+.group-microsite-subheader-item-value {
+    font-weight: bold;
+    padding: 0 8px 3px 8px;
+}
+

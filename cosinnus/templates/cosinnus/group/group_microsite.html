@@ -45,65 +45,90 @@
 
 {% block main_page %}
     
-    {% if group.wallpaper %}
-		<div>
-			<img class="img-responsive" src="{{ group.static_wallpaper_url }}"></img>
-		</div>
-	{% else %}
-		<div>
-			<img class="img-responsive" src="https://placehold.it/1400x400"></img>
-		</div>
-	{% endif %}
-	
-	
-    <div class="dashboard-header">
-        <div class="dashboard-header-image">
-            <a href="{% group_url 'cosinnus:group-detail' group=group %}">
-                {% include "cosinnus/group/group_avatar_image.html" with group=group %}
-            </a>
-        </div>
-        <div class="dashboard-header-text">
-            <h2>{{ group.name }}</h2>
-            <p>
-            	{% if group.public %}
-            		<i>{% if group.type == 0 %}{% trans "Public Project in Portal" %}{% else %}{% trans "Public Society in Portal" %}{% endif %}: </i>
-            	{% else %}
-            		<i>{% if group.type == 0 %}{% trans "Project in Portal" %}{% else %}{% trans "Society in Portal" %}{% endif %}: </i> 
-            	{% endif %}
-            	{% include 'cosinnus/portal/portal_link_icon.html' with portal=group.portal %}
-            	<a href="{{ group.portal.get_domain }}">{{ group.portal.name }}</a>
-            </p>
-            
-            {% with parent=group.get_parent_typed %}
-                {% if parent %}
-                    <p>
-                    	{% trans "Society" %}: <a href="{{ parent.get_absolute_url }}">{{ parent.name }}</a>
-                    	{% with siblings=group.get_siblings %}
-                    		{% if siblings %}
-                    			| {% trans "Other Projects" %}: 
-                    			{% for sibling in siblings %}
-                    				<a href="{{ sibling.get_absolute_url }}">{{ sibling.name }}</a>
-                    				{% if not forloop.last %}, {% endif %}
-                    			{% endfor %}
-                    		{% endif %}
-                    	{% endwith %}
-                    </p>
-                {% else %}
-		            {% with children=group.get_children %}
-		        		{% if children %}
-		        			<p>
-			        			{% trans "Projects" %}: 
-			        			{% for child in children %}
-			        				<a href="{{ child.get_absolute_url }}">{{ child.name }}</a>{% if not forloop.last %}, {% endif %}
-			        			{% endfor %}
-		        			</p>
-		        		{% endif %}
-		        	{% endwith %}
-                {% endif %}
-            {% endwith %}
-        </div>
-    </div>
     
+	<div class="group-microsite-header">
+		<img class="image" src="{% if group.wallpaper %}{{ group.static_wallpaper_url }}{% else %}https://placehold.it/1400x400{% endif %}"></img>
+		<div class="group-microsite-box">
+			<div class="group-microsite-avatar">
+				{% include "cosinnus/group/group_avatar_image.html" with group=group extra_classes="image" %}
+			</div>
+			
+			<h2>{{ group.name }}</h2>
+			
+			
+			<div class="group-microsite-details">
+				
+				<p class="transparent">
+	            	{% if group.public %}
+	            		<i>{% if group.type == 0 %}{% trans "Public Project in Portal" %}{% else %}{% trans "Public Society in Portal" %}{% endif %}: </i>
+	            	{% else %}
+	            		<i>{% if group.type == 0 %}{% trans "Project in Portal" %}{% else %}{% trans "Society in Portal" %}{% endif %}: </i> 
+	            	{% endif %}
+	            	{% include 'cosinnus/portal/portal_link_icon.html' with portal=group.portal %}
+	            	<a href="{{ group.portal.get_domain }}">{{ group.portal.name }}</a>
+	            </p>
+	            
+	            {% with parent=group.get_parent_typed %}
+	                {% if parent %}
+	                    <p class="transparent">
+	                    	{% trans "Society" %}: <a href="{{ parent.get_absolute_url }}">{{ parent.name }}</a>
+	                    	{% with siblings=group.get_siblings %}
+	                    		{% if siblings %}
+	                    			| {% trans "Other Projects" %}: 
+	                    			{% for sibling in siblings %}
+	                    				<a href="{{ sibling.get_absolute_url }}">{{ sibling.name }}</a>
+	                    				{% if not forloop.last %}, {% endif %}
+	                    			{% endfor %}
+	                    		{% endif %}
+	                    	{% endwith %}
+	                    </p>
+	                {% else %}
+			            {% with children=group.get_children %}
+			        		{% if children %}
+			        			<p class="transparent">
+				        			{% trans "Projects" %}: 
+				        			{% for child in children %}
+				        				<a href="{{ child.get_absolute_url }}">{{ child.name }}</a>{% if not forloop.last %}, {% endif %}
+				        			{% endfor %}
+			        			</p>
+			        		{% endif %}
+			        	{% endwith %}
+	                {% endif %}
+	            {% endwith %}
+			</div>
+			
+			
+		</div>
+	</div>
+	
+	<div class="group-microsite-subheader">
+	<div class="group-microsite-subheader-container">
+	{% for i in "x"|rjust:"3" %}
+			<div class="group-microsite-subheader-item">
+				<header>Members lorem</header>
+				<div class="group-microsite-subheader-item-value">17K</div>
+			</div>
+	{% endfor %}
+	</div>
+	</div>
+	
+	
+	
+	
+	
+	
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	
+	
+	
+	
     <div>
     	<p><b>{% trans "Description" %}</b></p>
         {% if group.description_long and group.description_long|length > 0 %}
