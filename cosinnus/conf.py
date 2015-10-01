@@ -143,7 +143,7 @@ class CosinnusConf(AppConf):
     IMAGE_MAXIMUM_SIZE_SCALE = (800, 800) 
     
     # group wallpaper max size
-    GROUP_WALLPAPER_MAXIMUM_SIZE_SCALE = (1900, 400) 
+    GROUP_WALLPAPER_MAXIMUM_SIZE_SCALE = (1140, 240) 
     
     # this is the thumbnail size for small image previews
     IMAGE_THUMBNAIL_SIZE_SCALE = (80, 80)

@@ -47,7 +47,7 @@
     
     
 	<div class="group-microsite-header">
-		<img class="image" src="{% if group.wallpaper %}{{ group.static_wallpaper_url }}{% else %}https://placehold.it/1400x400{% endif %}"></img>
+		<img class="image" src="{% if group.wallpaper %}{{ group.static_wallpaper_url }}{% else %}https://placehold.it/1140x240{% endif %}"></img>
 		<div class="group-microsite-box">
 			<div class="group-microsite-avatar">
 				{% include "cosinnus/group/group_avatar_image.html" with group=group extra_classes="image" %}
@@ -197,18 +197,32 @@
 		<div class="col-sm-4 col-md-6">
 			<div class="row">
 				<div class="col-md-4 col-md-push-8">
-					<h2>Mappy</h2>
 					
-					
-					
-					
+			        <div type="button" class="btn btn-emphasized btn-headline v-offset-l">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+			                    {% comment %}  
+			                    <a class="pull-left" href="#">
+			                        <i class="fa fa-user"></i>
+			                    </a>
+			                    {% endcomment %}
+			                    <div class="media-body">
+			                        {% trans "Location" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </div><!-- btn -->
+			        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
+			            
 				    {% if group.media_tag_object.location %}
-				    	<div>
-							<p><b>{% trans "Location" %}</b></p>
-				        	<p><i class="fa fa-fw fa-map-marker"></i> <a href="{{ group.media_tag_object.location_url }}" target="_blank">{{ group.media_tag_object.location }}</a></p>
-					    </div>
-						<br/>
+			        	<p><i class="fa fa-fw fa-map-marker"></i> <a href="{{ group.media_tag_object.location_url }}" target="_blank">{{ group.media_tag_object.location }}</a></p>
+					{% else %}
+						<p>No Location set</p>
 					{% endif %}
+			        </div><!-- content-box -->
+					
+					
 					
 					
 				</div>
