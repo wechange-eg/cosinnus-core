@@ -112,12 +112,19 @@
 	
 	<div class="group-microsite-subheader">
 		<div class="group-microsite-subheader-container">
-		{% for i in "x"|rjust:"3" %}
-				<div class="group-microsite-subheader-item">
-					<header>Members lorem</header>
-					<div class="group-microsite-subheader-item-value">17K</div>
-				</div>
-		{% endfor %}
+			<div class="group-microsite-subheader-item">
+				<header>{% trans "Members" %}</header>
+				<div class="group-microsite-subheader-item-value">{{ group.members|length }}</div>
+			</div>
+			<div class="group-microsite-subheader-item">
+				<header>{% trans "News posts" %}</header>
+				<div class="group-microsite-subheader-item-value">{{ object_counts.note }}</div>
+			</div>
+			
+			<div class="group-microsite-subheader-item">
+				<header>{% trans "Events" %}</header>
+				<div class="group-microsite-subheader-item-value">{{ object_counts.event }}</div>
+			</div>
 		</div>
 	</div>
 	

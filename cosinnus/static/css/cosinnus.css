@@ -3161,23 +3161,25 @@ a.portal-inlink:hover img {
 
 .group-microsite-subheader-item {
     color: #333;
-    float: right;
+    float: left;
     text-align: center;
     line-height: 1em;
+    cursor: default;
 }
 
 .group-microsite-subheader-item + .group-microsite-subheader-item {
-    padding-left: 2px;
 }
 
 
 .group-microsite-subheader-item header {
+    text-transform: uppercase;
     padding: 8px 8px 3px 8px;
+    font-size: 11px;
 }
 
 .group-microsite-subheader-item-value {
-    font-weight: bold;
     padding: 0 8px 3px 8px;
+    font-size: 18px;
 }
 
 

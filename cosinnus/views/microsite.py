@@ -4,7 +4,8 @@ from __future__ import unicode_literals
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import TemplateView
 
-from cosinnus.views.mixins.group import RequireWriteMixin, DipatchGroupURLMixin
+from cosinnus.views.mixins.group import RequireWriteMixin, DipatchGroupURLMixin,\
+    GroupObjectCountMixin
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusGroup
@@ -19,7 +20,7 @@ from cosinnus.utils.functions import get_cosinnus_app_from_class
 from cosinnus.views.widget import DashboardWidgetMixin
 
 
-class GroupMicrositeView(DipatchGroupURLMixin, TemplateView):
+class GroupMicrositeView(DipatchGroupURLMixin, GroupObjectCountMixin, TemplateView):
     template_name = 'cosinnus/group/group_microsite.html'
     
 group_microsite_view = GroupMicrositeView.as_view()
