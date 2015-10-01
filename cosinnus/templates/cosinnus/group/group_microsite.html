@@ -114,31 +114,170 @@
 	
 	<div class="row">
 		<div class="col-sm-8 col-md-6">
-			<h2>Beschreibung</h2>
-			{% if group.description_long and group.description_long|length > 0 %}
-	            {{ group.description_long|safe }}
-	        {% else %}
-	            <p>({% trans "No Description set" %})</p>
-	        {% endif %}
+			
+	        <div type="button" class="btn btn-emphasized btn-headline v-offset-l">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+	                    {% comment %}  
+	                    <a class="pull-left" href="#">
+	                        <i class="fa fa-user"></i>
+	                    </a>
+	                    {% endcomment %}
+	                    <div class="media-body">
+	                        {% trans "Description" %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </div><!-- btn -->
+	        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
+	            {% if group.description_long and group.description_long|length > 0 %}
+		            {{ group.description_long|safe }}
+		        {% else %}
+		            <p>({% trans "No Description set" %})</p>
+		        {% endif %}
+	        </div><!-- content-box -->
+	        
+	        
+	        {% if group.media_tag_object.topics %}
+		        <div type="button" class="btn btn-emphasized btn-headline v-offset-l">
+		            <ul class="media-list">
+		                <li class="media">
+		                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+		                    {% comment %}  
+		                    <a class="pull-left" href="#">
+		                        <i class="fa fa-lightbulb-o"></i>
+		                    </a>
+		                    {% endcomment %}
+		                    <div class="media-body">
+		                        {% trans "Topics we are involved with" %}
+		                    </div>
+		                </li>
+		            </ul>
+		        </div><!-- btn -->
+		        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
+		            <p>
+			            {% for topic in group.media_tag_object.get_topics %}
+				            <a href="#">{{ topic }}</a>
+				        {% endfor %}
+			        </p>
+		        </div><!-- content-box -->
+			{% endif %}
+	        
+	        
+	        {% with tags=group.media_tag_object.tags.all %}
+		        {% if tags %}
+			        <div type="button" class="btn btn-emphasized btn-headline v-offset-l">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+			                    {% comment %}  
+			                    <a class="pull-left" href="#">
+			                        <i class="fa fa-bolt"></i>
+			                    </a>
+			                    {% endcomment %}
+			                    <div class="media-body">
+			                        {% trans "Activities and interests" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </div><!-- btn -->
+			        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
+					    <p class="">
+				        	{% for tag in tags %}
+							    {% if not forloop.first %}, {% endif %}
+							    {{ tag }}
+						    {% endfor %}
+				    	</p>
+			        </div><!-- content-box -->
+				{% endif %}
+			{% endwith %}
+			
 		</div>
 		<div class="col-sm-4 col-md-6">
 			<div class="row">
 				<div class="col-md-4 col-md-push-8">
 					<h2>Mappy</h2>
+					
+					
+					
+					
+				    {% if group.media_tag_object.location %}
+				    	<div>
+							<p><b>{% trans "Location" %}</b></p>
+				        	<p><i class="fa fa-fw fa-map-marker"></i> <a href="{{ group.media_tag_object.location_url }}" target="_blank">{{ group.media_tag_object.location }}</a></p>
+					    </div>
+						<br/>
+					{% endif %}
+					
+					
 				</div>
 				<div class="col-md-8 col-md-pull-4">
-					<h2>Kontakt</h2>
-					{% if group.contact_info and group.contact_info|length > 0 %}
-			            {{ group.contact_info|safe }}
-			        {% else %}
-			            <p>({% trans "No Contact info set" %})</p>
-			        {% endif %}
-					<h2>Website</h2>
-					<p>jo</p>
 					
-					<h2>Kontaktieren</h2>
-					<p>
+			        <div type="button" class="btn btn-emphasized btn-headline v-offset-l">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+			                    {% comment %}  
+			                    <a class="pull-left" href="#">
+			                        <i class="fa fa-user"></i>
+			                    </a>
+			                    {% endcomment %}
+			                    <div class="media-body">
+			                        {% trans "Contact" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </div><!-- btn -->
+			        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
+			            {% if group.contact_info and group.contact_info|length > 0 %}
+				            {{ group.contact_info|safe }}
+				        {% else %}
+				            <p>({% trans "No Contact info set" %})</p>
+				        {% endif %}
+			        </div><!-- content-box -->
+					
+					
+			        {% if group.website %}
+				        <div type="button" class="btn btn-emphasized btn-headline v-offset-l">
+				            <ul class="media-list">
+				                <li class="media">
+				                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+				                    {% comment %}  
+				                    <a class="pull-left" href="#">
+				                        <i class="fa fa-user"></i>
+				                    </a>
+				                    {% endcomment %}
+				                    <div class="media-body">
+				                        {% trans "Website" %}
+				                    </div>
+				                </li>
+				            </ul>
+				        </div><!-- btn -->
+				        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
+				        	<p><a href="{{ group.website }}" target="_blank">{{ group.website }}</a></p>
+				        </div><!-- content-box -->
+			        {% endif %}
+			        
+			        <div type="button" class="btn btn-emphasized btn-headline v-offset-l">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+			                    {% comment %}  
+			                    <a class="pull-left" href="#">
+			                        <i class="fa fa-user"></i>
+			                    </a>
+			                    {% endcomment %}
+			                    <div class="media-body">
+			                        {% trans "Collaborate!" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </div><!-- btn -->
+			        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
+			        	
 				    	{% if not user.is_authenticated %}
+				        	<p>
 				    		<button style="float: none;" href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}" type="button" class="btn btn-emphasized w100">
 			                    <ul class="media-list">
 			                        <li class="media">
@@ -151,136 +290,100 @@
 			                        </li>
 			                    </ul>
 			                </button>
+				    		</p>
 				    	{% elif user.pk in group.members %}
-				            {% trans "You are a member!" %}
-				            <button style="float: none;" href="{{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
+				        	<p>
+				            <button style="float: none;" href="{{ group.get_absolute_url }}" type="button" class="btn btn-emphasized w100">
 			                    <ul class="media-list">
 			                        <li class="media">
 			                            <a class="pull-left" href="#">
 			                                <i class="fa fa-sign-in"></i>
 			                            </a>
 			                            <div class="media-body">
-			                                {% trans "Go to group" %}
+			                                {% trans "You are a member. View Group!" %}
 			                            </div>
 			                        </li>
 			                    </ul>
 			                </button>
+				    		</p>
 				        {% elif user.pk in group.pendings %}
+				        	<p>
 				        	{% trans "Your membership request is still pending..." %}
-				            <button style="float: none;" type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#join_withdraw_modal">
+				        	</p>
+				        	<p>
+				            <button style="float: none;" type="button" class="btn btn-emphasized w100" data-toggle="modal" data-target="#join_withdraw_modal">
 			                    <ul class="media-list">
 			                        <li class="media">
 			                            <a class="pull-left" href="#">
 			                                <i class="fa fa-sign-out"></i>
 			                            </a>
 			                            <div class="media-body">
-			                                <span>{% trans "Withdraw" context "withdraw join group button first item" %}</span>
-				                    {% trans "Request" context "withdraw join group button second item" %}
+			                                {% trans "Withdraw request" %}</span>
 			                            </div>
 			                        </li>
 			                    </ul>
 			                </button>
+				    		</p>
 				            {% captureas label %}{% blocktrans with title=group.name %}Do you really want to withdraw your join request to group „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
 				            {% captureas title %}{% trans "Withdraw Join Request" %}{% endcaptureas %}
 				            {% captureas action %}{% group_url 'cosinnus:group-user-withdraw' group=group %}{% endcaptureas %}
 				            {% include "cosinnus/modal_box.html" with id="join_withdraw_modal" label=label title=title form_action=action %}
 				        {% else %}
-				            <button style="float: none;" type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#join_withdraw_modal">
+				        	<p>
+				            <button style="float: none;" type="button" class="btn btn-emphasized w100" data-toggle="modal" data-target="#join_withdraw_modal">
 			                    <ul class="media-list">
 			                        <li class="media">
 			                            <a class="pull-left" href="#">
 			                                <i class="fa fa-sign-in"></i>
 			                            </a>
 			                            <div class="media-body">
-			                                <span>{% trans "Join" context "join group button first item" %}</span>
-				                    		{% trans "Now" context "join group button second item" %}
+				                    		{% trans "Join now!" %}
 			                            </div>
 			                        </li>
 			                    </ul>
 			                </button>
+				    		</p>
 				            {% captureas label %}{% blocktrans with title=group.name %}Do you wish to request to join „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
 				            {% captureas title %}{% trans "Join" %}{% endcaptureas %}
 				            {% captureas action %}{% group_url 'cosinnus:group-user-join' group=group %}{% endcaptureas %}
 				            
 				            {% include "cosinnus/modal_box.html" with id="join_withdraw_modal" label=label title=title form_action=action %}
 				        {% endif %}
-				    </p>
-				    <p>
+				        
+				        
 				    	{% if group.public %}
 				    		{% if not user.is_authenticated or not user.pk in group.members %}
-				    		
-				    			{% trans "This is a public group:" %}
-					    		<button style="float: none;" href="{{ group.get_absolute_url }}?browse=true" type="button" class="btn btn-emphasized">
-				                    <ul class="media-list">
-				                        <li class="media">
-				                            <a class="pull-left" href="#">
-				                                <i class="fa fa-sign-in"></i>
-				                            </a>
-				                            <div class="media-body">
-				                                {% trans "Browse group" %}
-				                            </div>
-				                        </li>
-				                    </ul>
-				                </button>
+				    			<p>
+				    				{% trans "or you can:" %}
+				    			</p>
+				    			<p>
+						    		<button style="float: none;" href="{{ group.get_absolute_url }}?browse=true" type="button" class="btn btn-emphasized w100">
+					                    <ul class="media-list">
+					                        <li class="media">
+					                            <a class="pull-left" href="#">
+					                                <i class="fa fa-sign-in"></i>
+					                            </a>
+					                            <div class="media-body">
+					                                {% trans "Browse this public group" %}
+					                            </div>
+					                        </li>
+					                    </ul>
+					                </button>
+							    </p>
 				    		
 				    		{% endif %}
 				    	{% endif %}
-				    </p>
+			        	
+			        </div><!-- content-box -->
+			        
+					
 				</div>
 			</div>
 		</div>
 	</div>
 	
 	
-	
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	
-	
-	
-	
-    <div>
-    	<p><b>{% trans "Description" %}</b></p>
-        
-    </div>
-	<br/>
-	
-	<div>
-    	<p><b>{% trans "Contact" %}</b></p>
-        
-    </div>
-	<br/>
-	
-	<div>
-		{% include "cosinnus/media_tags_group_readonly.html" with object=group %}
-	</div><br/>
-	
-    {% if group.website %}
-		<div>
-			<p><b>{% trans "Website" %}</b></p>
-        	<p><a href="{{ group.website }}" target="_blank">{{ group.website }}</a></p>
-	    </div>
-		<br/>
-    {% endif %}
     
-    {% if group.media_tag_object.location %}
-    	<div>
-			<p><b>{% trans "Location" %}</b></p>
-        	<p><i class="fa fa-fw fa-map-marker"></i> <a href="{{ group.media_tag_object.location_url }}" target="_blank">{{ group.media_tag_object.location }}</a></p>
-	    </div>
-		<br/>
-	{% endif %}
-    
-    <div>
-    	<p><b>{% trans "Collaborate?" %}</b></p>
-    	
-    </div>
 
 {% endblock main_page %}
 
