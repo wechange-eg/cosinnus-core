@@ -45,6 +45,15 @@
 
 {% block main_page %}
     
+    {% if user.is_authenticated and user.pk in group.admins %}
+	    <div class="alert alert-warning alert-dismissable">
+            <i class="fa fa-info-circle fa-3x"></i>
+	        <p>
+	        	{% trans "Not happy with how your Microsite looks?" %}
+	        	<a href="{% group_url 'cosinnus:group-edit' group=group %}?tab=microsite">{% trans "Change it here..." %}</a>
+	        </p>
+	    </div>
+    {% endif %}
     
 	<div class="group-microsite-header">
 		<img class="image" src="{% if group.wallpaper %}{{ group.static_wallpaper_url }}{% else %}https://placehold.it/1140x240{% endif %}"></img>
