@@ -207,12 +207,12 @@ p a:focus, p a:active, p a:hover, .white-content a:focus, .white-content a:activ
   text-decoration: underline;
 }
 
-p.transparent, .white-content.transparent {
+p.transparent, .white-content.transparent, .transparent-p p {
   background-color: transparent;
   padding: 0;
   margin: -4px 0 8px 0;
 }
-p.transparent a, .white-content.transparent a {
+p.transparent a, .white-content.transparent a, .transparent-p p a {
   color: #333333;
   text-decoration: underline;
 }
@@ -3203,5 +3203,11 @@ a.portal-inlink:hover img {
 }
 
 
+.btn-no-interact {
+    cursor: default;
+}
 
+.app-main .btn-no-interact:hover .media, .app-main .btn-no-interact:hover .media > .media-body {
+    background-color: #16778d;
+}
 
