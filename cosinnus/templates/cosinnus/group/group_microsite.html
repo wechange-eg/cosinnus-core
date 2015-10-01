@@ -331,7 +331,11 @@
 			                                <i class="fa fa-sign-in"></i>
 			                            </a>
 			                            <div class="media-body">
-			                                {% trans "You are a member. View Group!" %}
+			                                {% if group.type == 0 %}
+			                                	{% trans "You are a member. View Project!" %}
+			                                {% else %}
+			                                	{% trans "You are a member. View Group!" %}
+			                                {% endif %}
 			                            </div>
 			                        </li>
 			                    </ul>
