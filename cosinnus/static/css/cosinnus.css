@@ -3181,13 +3181,25 @@ a.portal-inlink:hover img {
 }
 
 
+.nav-tabs, .nav-tabs > li, .nav-tabs > li.active, 
+.nav-tabs > li > a, .nav-tabs > li.active > a,
+.nav-tabs > li > a:focus, .nav-tabs > li.active > a:focus,
+.nav-tabs > li > a:hover, .nav-tabs > li.active > a:hover {
+    border-color: #104a59;
+}
 
 .nav-tabs > li > a {
-    background-color: rgba(255,255,255,0.7);
-    color: #333;
+    background-color: #16778d;
+    color: white;
 }
-.nav-tabs > li.active > a {
-    background-color: white;
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus {
+    background-color: #104a59;
+    color: white;
+}
+
+.nav-tabs > li > a:hover, .nav-tabs > li.active > a:hover {
+    background-color: #104a59;
+    color: white;
 }
 
 
