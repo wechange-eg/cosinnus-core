@@ -789,6 +789,7 @@ class CosinnusGroup(models.Model):
             try:
                 thumbnail = thumbnailer.get_thumbnail({
                     'crop': 'smart',
+                    'upscale': 'smart',
                     'size': size,
                 })
             except InvalidImageFormatError:
