@@ -677,7 +677,7 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
         user = self.object.user
         current_status = self.object.status
         if (len(group.admins) > 1 or not group.is_admin(user)):
-            if user != self.request.user or check_user_superuser(self.requestuser):
+            if user != self.request.user or check_user_superuser(self.request.user):
                 self.object.delete()
             else:
                 messages.error(self.request, _('You cannot remove yourself from a %(group_type)s.') % {'group_type':self.object._meta.verbose_name})
