@@ -9,7 +9,7 @@ from cosinnus.views.mixins.group import RequireWriteMixin, DipatchGroupURLMixin,
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusGroup
-from django.http.response import HttpResponseNotFound
+from django.http.response import Http404
 from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.core.registries import widget_registry
 from cosinnus.core.decorators.views import redirect_to_403,\
@@ -22,6 +22,11 @@ from cosinnus.views.widget import DashboardWidgetMixin
 
 class GroupMicrositeView(DipatchGroupURLMixin, GroupObjectCountMixin, TemplateView):
     template_name = 'cosinnus/group/group_microsite.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        if not getattr(settings, 'COSINNUS_MICROSITES_ENABLED', False):
+            raise Http404
+        return super(GroupMicrositeView, self).dispatch(request, *args, **kwargs)
     
 group_microsite_view = GroupMicrositeView.as_view()
     

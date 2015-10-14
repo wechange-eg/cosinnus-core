@@ -275,6 +275,5 @@ class GroupObjectCountMixin(object):
         context.update({
             'object_counts': object_counts,
         })
-        print ">>> obj counts", object_counts
         return context
     

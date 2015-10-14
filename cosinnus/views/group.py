@@ -45,6 +45,7 @@ from cosinnus.views.widget import GroupDashboard
 from cosinnus.views.microsite import GroupMicrositeView
 from django.views.generic.base import View
 import six
+from django.conf import settings
 
 
 class SamePortalGroupMixin(object):
@@ -801,6 +802,10 @@ class GroupStartpage(View):
             @return: ``False`` if the group dashboard should be shown
             @return: ``<string>`` the URL that should be redirected to
         """
+        # settings switch
+        if not getattr(settings, 'COSINNUS_MICROSITES_ENABLED', False):
+            return False
+        
         # check if this session user has clicked on "browse" for this group before
         # and if so, never let him see that groups microsite again
         group_session_browse_key = 'group__browse__%s' % self.group.slug

@@ -159,6 +159,11 @@ class CosinnusConf(AppConf):
         ('todo', 'mine', {'amount':'5', 'amount_subtask':'2', 'sort_field':'3'}),
     ]
     
+    # switch to set if Microsites should be enabled.
+    # this can be override for each portal to either activate or deactivate them
+    MICROSITES_ENABLED = False
+    
+    # --- for the old microsites ---
     # which apps objects as object lists will be listed on the microsite? 
     # must be model names of BaseTaggableObjects that can be resolved via a 
     # render_list_for_user() function in the app's registered Renderer.
@@ -166,6 +171,7 @@ class CosinnusConf(AppConf):
     MICROSITE_DISPLAYED_APP_OBJECTS = ['cosinnus_note.Note', 'cosinnus_etherpad.Etherpad',
         'cosinnus_file.FileEntry', 'cosinnus_event.Event']
     
+    # --- for the old microsites ---
     # should empty apps list be displayed at all, or omitted?
     MICROSITE_RENDER_EMPTY_APPS = True
     

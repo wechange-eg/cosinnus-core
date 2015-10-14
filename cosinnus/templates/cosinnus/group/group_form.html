@@ -44,12 +44,14 @@
 					{% trans "General" %}
 				</a>
 			</li>
+			{% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}
 			<li {% if request.GET.tab == 'microsite' %}class="active"{% endif %}>
 				<a href="#microsite" class="_group-form-tab" role="tab" data-toggle="tab">
 					<i class="fa fa-lightbulb-o"></i>
 					{% trans "Microsite" %}
 				</a>
 			</li>
+			{% endif %}
 		</ul>
 		
         <!-- a box with semi transparent background -->
@@ -59,7 +61,7 @@
 			
 			<!-- Tab panes -->
 			<div class="tab-content">
-				<div class="tab-pane {% if not request.GET.tab %}active{% endif %}" id="general">
+				<div class="tab-pane {% if not SETTINGS.COSINNUS_MICROSITES_ENABLED or not request.GET.tab %}active{% endif %}" id="general">
 					
 					
 				    <div type="button" class="btn btn-default w100 large-space">
@@ -252,62 +254,64 @@
 					
 					
 				</div>
-				<div class="tab-pane {% if request.GET.tab == 'microsite' %}active{% endif %}" id="microsite">
+				
+				
+				<div class="tab-pane {% if SETTINGS.COSINNUS_MICROSITES_ENABLED and request.GET.tab == 'microsite' %}active{% endif %}" id="microsite" >
+				
+					<label>
+                    	{% trans "Microsite Wallpaper" %}
+                    </label>
+					{{ form.forms.obj.wallpaper.errors }}
+					<div class="row">
+	                 	<div class="col-md-8 regular-space">
+							{% if object.wallpaper %}
+							{% trans "Currently" %}: <a href="{{ object.wallpaper.url }}">{{ object.wallpaper }}</a> 
+							{% endif %}
+							<input id="wallpaper-clear_id" name="file-clear" type="checkbox"> 
+							<label for="wallpaper-clear_id">{% trans "Reset" %}</label><br>
+							{% trans "Change" %}: 
+							<input class="form-control" id="fileToUpload" name="wallpaper" placeholder="{% trans "Upload an image." %}" type="file">
+						</div>
+	             	</div>
 					
-						<label>
-                        	{% trans "Microsite Wallpaper" %}
-                        </label>
-						{{ form.forms.obj.wallpaper.errors }}
-						<div class="row">
-		                 	<div class="col-md-8 regular-space">
-								{% if object.wallpaper %}
-								{% trans "Currently" %}: <a href="{{ object.wallpaper.url }}">{{ object.wallpaper }}</a> 
-								{% endif %}
-								<input id="wallpaper-clear_id" name="file-clear" type="checkbox"> 
-								<label for="wallpaper-clear_id">{% trans "Reset" %}</label><br>
-								{% trans "Change" %}: 
-								<input class="form-control" id="fileToUpload" name="wallpaper" placeholder="{% trans "Upload an image." %}" type="file">
-							</div>
-		             	</div>
-						
-						
-                        <label>
-                        	{% if group_model == "CosinnusSociety" %}{% trans "Describe the society in a few sentences." %}{% else %}{% trans "Describe the group in a few sentences." %}{% endif %}
-                        	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
-                        </label>
-                        {{ form.forms.obj.description_long.errors }}
-                        <div type="button" class="btn btn-default w100 regular-space">
-                            <ul class="media-list">
-                                <li class="media">
-                                    <a class="pull-left" href="#">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                    <div class="media-body">
-                                        {% render_field form.forms.obj.description_long  %}
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <label>
-                        	{% trans "Contact info. How you can be reached, addresses, social media, etc..." %}
-                        	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
-                        </label>
-                        {{ form.forms.obj.contact_info.errors }}
-                        <div type="button" class="btn btn-default w100 regular-space">
-                            <ul class="media-list">
-                                <li class="media">
-                                    <a class="pull-left" href="#">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                    <div class="media-body">
-                                        {% render_field form.forms.obj.contact_info  %}
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
 					
+                    <label>
+                    	{% if group_model == "CosinnusSociety" %}{% trans "Describe the society in a few sentences." %}{% else %}{% trans "Describe the group in a few sentences." %}{% endif %}
+                    	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+                    </label>
+                    {{ form.forms.obj.description_long.errors }}
+                    <div type="button" class="btn btn-default w100 regular-space">
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <div class="media-body">
+                                    {% render_field form.forms.obj.description_long  %}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <label>
+                    	{% trans "Contact info. How you can be reached, addresses, social media, etc..." %}
+                    	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+                    </label>
+                    {{ form.forms.obj.contact_info.errors }}
+                    <div type="button" class="btn btn-default w100 regular-space">
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <div class="media-body">
+                                    {% render_field form.forms.obj.contact_info  %}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
 				</div>
+				
 			</div>
 	        
 	    </div>

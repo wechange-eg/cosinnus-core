@@ -34,24 +34,26 @@
     
     {% include 'cosinnus/messages.html' %}
     
-    {% comment %} -------    Microsite edit-me message ------------ {% endcomment %}
-    {% if user.is_authenticated and user.pk in group.admins and not group.description_long %}
-	    <div class="alert alert-warning alert-dismissable">
-            <i class="fa fa-heart fa-3x"></i>
-            <h4>{% trans "Your Microsite needs some love!" %}</h4>
-            <div class="v-offset-s">
-	        <p>
-	        	{% if group.type == 0 %}
-	        		{% trans "The Microsite is your projects's welcome page for everyone checking it out. Make it awesome so they want to join you!" %}
-	        	{% else %}
-		        	{% trans "The Microsite is your group's welcome page for everyone checking it out. Make it awesome so they want to join you!" %}
-	        	{% endif %}
-	        </p>
-	        <p>
-				{% trans "Access it from the top menu or" %} <a href="{% group_url 'cosinnus:group-microsite' group=group %}">{% trans "get started here..." %}</a>
-			</p>
-			</div>
-	    </div>
+    {% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}
+	    {% comment %} -------    Microsite edit-me message ------------ {% endcomment %}
+	    {% if user.is_authenticated and user.pk in group.admins and not group.description_long %}
+		    <div class="alert alert-warning alert-dismissable">
+	            <i class="fa fa-heart fa-3x"></i>
+	            <h4>{% trans "Your Microsite needs some love!" %}</h4>
+	            <div class="v-offset-s">
+		        <p>
+		        	{% if group.type == 0 %}
+		        		{% trans "The Microsite is your projects's welcome page for everyone checking it out. Make it awesome so they want to join you!" %}
+		        	{% else %}
+			        	{% trans "The Microsite is your group's welcome page for everyone checking it out. Make it awesome so they want to join you!" %}
+		        	{% endif %}
+		        </p>
+		        <p>
+					{% trans "Access it from the top menu or" %} <a href="{% group_url 'cosinnus:group-microsite' group=group %}">{% trans "get started here..." %}</a>
+				</p>
+				</div>
+		    </div>
+	    {% endif %}
     {% endif %}
     
     <div class="dashboard-header">
