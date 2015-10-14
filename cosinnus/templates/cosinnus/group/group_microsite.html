@@ -1,0 +1,428 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags %}
+{% load static from staticfiles %}
+
+{% block page_title %}{{ group.name }} {{ block.super }}{% endblock page_title %}
+
+{% block extrahead %}
+  <link href="{% static "css/cosinnus.dashboard.css" %}" rel="stylesheet">
+{% endblock extrahead %}
+
+{% block body_attributes %}{% if not user.is_authenticated %}class="body-no-nav"{% endif %}{% endblock body_attributes %}
+
+{% block cosinnus_navbar %}
+	{% if user.is_authenticated %}
+		{{ block.super }}
+	{% endif %}
+{% endblock cosinnus_navbar %}
+
+
+{% block main_page_header %}
+    <a name="microsite"></a>
+    
+	{% if user.is_authenticated %}
+		{% comment %} Combobox dropdown and breadcrumb {% endcomment %}
+	    <div class="row">
+	        <!-- start with left navigation -->
+	        <div class="col-lg-3 col-md-3"><!-- left column -->
+	            {% if group %}
+	                {% cosinnus_menu "cosinnus/appsmenu.html" %}
+	            {% endif %}
+	        </div><!-- left column -->
+	        <!-- now the content -->
+	        <div class="col-lg-9 col-md-9"><!-- right column -->
+	            <ol class="breadcrumb">
+	                {% include 'cosinnus/breadcrumb.html' %}
+	                <li class="active">{% trans "Microsite" %}</li>
+	            </ol>
+	        </div><!-- right column -->
+	    </div><!-- row -->
+    {% endif %}
+    
+    {% include 'cosinnus/messages.html' %}
+{% endblock main_page_header %}
+            
+
+{% block main_page %}
+    
+    {% if user.is_authenticated and user.pk in group.admins %}
+	    <div class="alert alert-warning alert-dismissable">
+            <i class="fa fa-heart fa-3x"></i>
+	        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#215;</button>
+	        <p>
+	        	{% trans "Not happy with how your Microsite looks?" %}
+	        	<a href="{% group_url 'cosinnus:group-edit' group=group %}?tab=microsite">{% trans "Change it here..." %}</a>
+	        </p>
+	    </div>
+    {% endif %}
+    
+	<div class="group-microsite-header">
+		<img class="image" src="{% if group.wallpaper %}{{ group.static_wallpaper_url }}{% else %}https://placehold.it/1140x240{% endif %}"></img>
+		<div class="group-microsite-box">
+			<div class="group-microsite-avatar">
+				{% include "cosinnus/group/group_avatar_image.html" with group=group extra_classes="image" %}
+			</div>
+			
+			<h2>{{ group.name }}</h2>
+			
+			
+			<div class="group-microsite-details">
+				
+				<p class="transparent">
+	            	{% if group.public %}
+	            		<i>{% if group.type == 0 %}{% trans "Public Project in Portal" %}{% else %}{% trans "Public Society in Portal" %}{% endif %}: </i>
+	            	{% else %}
+	            		<i>{% if group.type == 0 %}{% trans "Project in Portal" %}{% else %}{% trans "Society in Portal" %}{% endif %}: </i> 
+	            	{% endif %}
+	            	{% include 'cosinnus/portal/portal_link_icon.html' with portal=group.portal %}
+	            	<a href="{{ group.portal.get_domain }}">{{ group.portal.name }}</a>
+	            </p>
+	            
+	            {% with parent=group.get_parent_typed %}
+	                {% if parent %}
+	                    <p class="transparent">
+	                    	{% trans "Society" %}: <a href="{{ parent.get_absolute_url }}">{{ parent.name }}</a>
+	                    	{% with siblings=group.get_siblings %}
+	                    		{% if siblings %}
+	                    			| {% trans "Other Projects" %}: 
+	                    			{% for sibling in siblings %}
+	                    				<a href="{{ sibling.get_absolute_url }}">{{ sibling.name }}</a>
+	                    				{% if not forloop.last %}, {% endif %}
+	                    			{% endfor %}
+	                    		{% endif %}
+	                    	{% endwith %}
+	                    </p>
+	                {% else %}
+			            {% with children=group.get_children %}
+			        		{% if children %}
+			        			<p class="transparent">
+				        			{% trans "Projects" %}: 
+				        			{% for child in children %}
+				        				<a href="{{ child.get_absolute_url }}">{{ child.name }}</a>{% if not forloop.last %}, {% endif %}
+				        			{% endfor %}
+			        			</p>
+			        		{% endif %}
+			        	{% endwith %}
+	                {% endif %}
+	            {% endwith %}
+			</div>
+			
+			
+		</div>
+	</div>
+	
+	<div class="group-microsite-subheader">
+		<div class="group-microsite-subheader-container">
+			<div class="group-microsite-subheader-item">
+				<header>{% trans "Members" %}</header>
+				<div class="group-microsite-subheader-item-value">{{ group.members|length }}</div>
+			</div>
+			<div class="group-microsite-subheader-item">
+				<header>{% trans "News posts" %}</header>
+				<div class="group-microsite-subheader-item-value">{{ object_counts.note }}</div>
+			</div>
+			
+			<div class="group-microsite-subheader-item">
+				<header>{% trans "Events" %}</header>
+				<div class="group-microsite-subheader-item-value">{{ object_counts.event }}</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-sm-8 col-md-6">
+			
+	        <div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+	                    {% comment %}  
+	                    <a class="pull-left" href="#">
+	                        <i class="fa fa-user"></i>
+	                    </a>
+	                    {% endcomment %}
+	                    <div class="media-body">
+	                        {% trans "Description" %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </div><!-- btn -->
+	        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
+	            {% if group.description_long and group.description_long|length > 0 %}
+		            {{ group.description_long|safe }}
+		        {% else %}
+		            <p>({% trans "No Description set" %})</p>
+		        {% endif %}
+	        </div><!-- content-box -->
+	        
+	        
+	        {% if group.media_tag_object.topics %}
+		        <div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+		            <ul class="media-list">
+		                <li class="media">
+		                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+		                    {% comment %}  
+		                    <a class="pull-left" href="#">
+		                        <i class="fa fa-lightbulb-o"></i>
+		                    </a>
+		                    {% endcomment %}
+		                    <div class="media-body">
+		                        {% trans "Topics we are involved with" %}
+		                    </div>
+		                </li>
+		            </ul>
+		        </div><!-- btn -->
+		        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
+		            <p>
+			            {% for topic in group.media_tag_object.get_topics %}
+				            <a href="#">{{ topic }}</a>
+				        {% endfor %}
+			        </p>
+		        </div><!-- content-box -->
+			{% endif %}
+	        
+	        
+	        {% with tags=group.media_tag_object.tags.all %}
+		        {% if tags %}
+			        <div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+			                    {% comment %}  
+			                    <a class="pull-left" href="#">
+			                        <i class="fa fa-bolt"></i>
+			                    </a>
+			                    {% endcomment %}
+			                    <div class="media-body">
+			                        {% trans "Activities and interests" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </div><!-- btn -->
+			        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
+					    <p class="">
+				        	{% for tag in tags %}
+							    {% if not forloop.first %}, {% endif %}
+							    {{ tag }}
+						    {% endfor %}
+				    	</p>
+			        </div><!-- content-box -->
+				{% endif %}
+			{% endwith %}
+			
+		</div>
+		<div class="col-sm-4 col-md-6">
+			<div class="row">
+				<div class="col-md-4 col-md-push-8">
+					
+			        <div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+			                    {% comment %}  
+			                    <a class="pull-left" href="#">
+			                        <i class="fa fa-user"></i>
+			                    </a>
+			                    {% endcomment %}
+			                    <div class="media-body">
+			                        {% trans "Location" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </div><!-- btn -->
+			        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
+			            
+				    {% if group.media_tag_object.location %}
+			        	<p><i class="fa fa-fw fa-map-marker"></i> <a href="{{ group.media_tag_object.location_url }}" target="_blank">{{ group.media_tag_object.location }}</a></p>
+					{% else %}
+						<p>No Location set</p>
+					{% endif %}
+			        </div><!-- content-box -->
+					
+					
+					
+					
+				</div>
+				<div class="col-md-8 col-md-pull-4">
+					
+			        <div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+			                    {% comment %}  
+			                    <a class="pull-left" href="#">
+			                        <i class="fa fa-user"></i>
+			                    </a>
+			                    {% endcomment %}
+			                    <div class="media-body">
+			                        {% trans "Contact" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </div><!-- btn -->
+			        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
+			            {% if group.contact_info and group.contact_info|length > 0 %}
+				            {{ group.contact_info|safe }}
+				        {% else %}
+				            <p>({% trans "No Contact info set" %})</p>
+				        {% endif %}
+			        </div><!-- content-box -->
+					
+					
+			        {% if group.website %}
+				        <div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+				            <ul class="media-list">
+				                <li class="media">
+				                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+				                    {% comment %}  
+				                    <a class="pull-left" href="#">
+				                        <i class="fa fa-user"></i>
+				                    </a>
+				                    {% endcomment %}
+				                    <div class="media-body">
+				                        {% trans "Website" %}
+				                    </div>
+				                </li>
+				            </ul>
+				        </div><!-- btn -->
+				        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
+				        	<p><a href="{{ group.website }}" target="_blank">{{ group.website }}</a></p>
+				        </div><!-- content-box -->
+			        {% endif %}
+			        
+			        <div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+			                    {% comment %}  
+			                    <a class="pull-left" href="#">
+			                        <i class="fa fa-user"></i>
+			                    </a>
+			                    {% endcomment %}
+			                    <div class="media-body">
+			                        {% trans "Collaborate!" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </div><!-- btn -->
+			        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
+			        	
+				    	{% if not user.is_authenticated %}
+				        	<p>
+				    		<button style="float: none;" href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}" type="button" class="btn btn-emphasized w100">
+			                    <ul class="media-list">
+			                        <li class="media">
+			                            <a class="pull-left" href="#">
+			                                <i class="fa fa-sign-in"></i>
+			                            </a>
+			                            <div class="media-body">
+			                                {% trans "Register now!" %}
+			                            </div>
+			                        </li>
+			                    </ul>
+			                </button>
+				    		</p>
+				    	{% elif user.pk in group.members %}
+				        	<p>
+				            <button style="float: none;" href="{{ group.get_absolute_url }}" type="button" class="btn btn-emphasized w100">
+			                    <ul class="media-list">
+			                        <li class="media">
+			                            <a class="pull-left" href="#">
+			                                <i class="fa fa-sign-in"></i>
+			                            </a>
+			                            <div class="media-body">
+			                                {% if group.type == 0 %}
+			                                	{% trans "You are a member. View Project!" %}
+			                                {% else %}
+			                                	{% trans "You are a member. View Group!" %}
+			                                {% endif %}
+			                            </div>
+			                        </li>
+			                    </ul>
+			                </button>
+				    		</p>
+				        {% elif user.pk in group.pendings %}
+				        	<p>
+				        	{% trans "Your membership request is still pending..." %}
+				        	</p>
+				        	<p>
+				            <button style="float: none;" type="button" class="btn btn-emphasized w100" data-toggle="modal" data-target="#join_withdraw_modal">
+			                    <ul class="media-list">
+			                        <li class="media">
+			                            <a class="pull-left" href="#">
+			                                <i class="fa fa-sign-out"></i>
+			                            </a>
+			                            <div class="media-body">
+			                                {% trans "Withdraw request" %}</span>
+			                            </div>
+			                        </li>
+			                    </ul>
+			                </button>
+				    		</p>
+				            {% captureas label %}{% blocktrans with title=group.name %}Do you really want to withdraw your join request to group „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+				            {% captureas title %}{% trans "Withdraw Join Request" %}{% endcaptureas %}
+				            {% captureas action %}{% group_url 'cosinnus:group-user-withdraw' group=group %}{% endcaptureas %}
+				            {% include "cosinnus/modal_box.html" with id="join_withdraw_modal" label=label title=title form_action=action %}
+				        {% else %}
+				        	<p>
+				            <button style="float: none;" type="button" class="btn btn-emphasized w100" data-toggle="modal" data-target="#join_withdraw_modal">
+			                    <ul class="media-list">
+			                        <li class="media">
+			                            <a class="pull-left" href="#">
+			                                <i class="fa fa-sign-in"></i>
+			                            </a>
+			                            <div class="media-body">
+				                    		{% trans "Join now!" %}
+			                            </div>
+			                        </li>
+			                    </ul>
+			                </button>
+				    		</p>
+				            {% captureas label %}{% blocktrans with title=group.name %}Do you wish to request to join „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+				            {% captureas title %}{% trans "Join" %}{% endcaptureas %}
+				            {% captureas action %}{% group_url 'cosinnus:group-user-join' group=group %}{% endcaptureas %}
+				            
+				            {% include "cosinnus/modal_box.html" with id="join_withdraw_modal" label=label title=title form_action=action %}
+				        {% endif %}
+				        
+				        
+				    	{% if group.public %}
+				    		{% if not user.is_authenticated or not user.pk in group.members %}
+				    			<p>
+				    				{% trans "or you can:" %}
+				    			</p>
+				    			<p>
+						    		<button style="float: none;" href="{{ group.get_absolute_url }}?browse=true" type="button" class="btn btn-emphasized w100">
+					                    <ul class="media-list">
+					                        <li class="media">
+					                            <a class="pull-left" href="#">
+					                                <i class="fa fa-sign-in"></i>
+					                            </a>
+					                            <div class="media-body">
+					                                {% trans "Browse this public group" %}
+					                            </div>
+					                        </li>
+					                    </ul>
+					                </button>
+							    </p>
+				    		
+				    		{% endif %}
+				    	{% endif %}
+			        	
+			        </div><!-- content-box -->
+			        
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+    
+
+{% endblock main_page %}
+
+
+{% block extrafooter %}
+  {{ block.super }}
+{% endblock %}

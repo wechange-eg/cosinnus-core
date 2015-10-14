@@ -41,7 +41,7 @@ body .ultra-space {
 // the nice semi transparent box containing the content
 .content-box {
 	padding: 15px;
-	background-color:transparentize($app-neutral-color-light, 0.7);
+	background-color:transparentize($app-neutral-color-light, 0.5);
 	@include clearfix();
 }
 .content-box .btn.w100 {

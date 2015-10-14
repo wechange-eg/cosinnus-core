@@ -1,0 +1,7 @@
+{% comment %} 
+	Expeded params: 
+		- portal: CosinnusPortal
+{% endcomment %}
+{% load static %}
+<a class="portal-inlink" href="{{ portal.get_domain }}" target="_blank" title="{{ portal.name }}"><img
+ src="{{ portal.get_domain }}{% static 'img/logo-icon.png' %}" style="width:20px;"></a>

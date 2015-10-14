@@ -15,7 +15,8 @@ from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView,
     ListView, UpdateView, TemplateView)
 
-from cosinnus.core.decorators.views import membership_required, redirect_to_403
+from cosinnus.core.decorators.views import membership_required, redirect_to_403,\
+    dispatch_group_access
 from cosinnus.core.registries import app_registry
 from cosinnus.forms.group import MembershipForm
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
@@ -39,10 +40,12 @@ from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.models.tagged import BaseTagObject
 from django.shortcuts import redirect, get_object_or_404
 from django.http.response import Http404
-from django.db.models import Q
-from cosinnus.templatetags.cosinnus_tags import is_group_admin
-from cosinnus.utils.permissions import check_ug_admin, check_user_portal_admin,\
-    check_user_superuser
+from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
+from cosinnus.views.widget import GroupDashboard
+from cosinnus.views.microsite import GroupMicrositeView
+from django.views.generic.base import View
+import six
+from django.conf import settings
 
 
 class SamePortalGroupMixin(object):
@@ -783,3 +786,50 @@ class ActivateOrDeactivateGroupView(TemplateView):
         return context
     
 activate_or_deactivate = ActivateOrDeactivateGroupView.as_view()
+
+
+class GroupStartpage(View):
+    """ This view is in place as first starting point for the initial group frontpage.
+        It decides whether the actual group dashboard or the group microsite should be shown. """
+    
+    dashboard_view = staticmethod(GroupDashboard.as_view())
+    microsite_view = staticmethod(GroupMicrositeView.as_view())
+    
+    def check_redirect_to_microsite(self, request):
+        """ Checks whether the user should be shown the Group Dashboard, the Group Micropage,
+            or be redirected to a completely different page 
+            @return: ``True`` if the group micropage should be shown
+            @return: ``False`` if the group dashboard should be shown
+            @return: ``<string>`` the URL that should be redirected to
+        """
+        # settings switch
+        if not getattr(settings, 'COSINNUS_MICROSITES_ENABLED', False):
+            return False
+        
+        # check if this session user has clicked on "browse" for this group before
+        # and if so, never let him see that groups microsite again
+        group_session_browse_key = 'group__browse__%s' % self.group.slug
+        if self.request.GET.get('browse', False):
+            request.session[group_session_browse_key] = True
+            request.session.save()
+            return request.path # redirect to URL without GET param
+        if request.session.get(group_session_browse_key, False):
+            return False
+        
+        if self.request.GET.get('microsite', None):
+            return True
+        if not request.user.is_authenticated() or not request.user.pk in self.group.members:
+            return True
+        return False
+    
+    @dispatch_group_access()
+    def dispatch(self, request, *args, **kwargs):
+        redirect_result = self.check_redirect_to_microsite(request)
+        if isinstance(redirect_result, six.string_types):
+            return redirect(redirect_result)
+        elif redirect_result:
+            return self.microsite_view(request, *args, **kwargs)
+        else:
+            return self.dashboard_view(request, *args, **kwargs)
+
+group_startpage = GroupStartpage.as_view()

@@ -71,7 +71,10 @@
         {% include 'cosinnus/extra_body_header.html' %}
         {% block body_header %}{% endblock body_header %}
         
-        {% cosinnus_menu "cosinnus/navbar.html" %}
+        {% block cosinnus_navbar %}
+        	{% cosinnus_menu "cosinnus/navbar.html" %}
+        {% endblock cosinnus_navbar %}
+        
         
         <div class="{% block container_classes %}container {{ cosinnus_css_class }}{% endblock container_classes %}">
             

@@ -99,6 +99,9 @@ class CosinnusConf(AppConf):
     #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = 60 * 60 * 24
     
+    # How long a groups list of children should be cached
+    GROUP_CHILDREN_CACHE_TIMEOUT = GROUP_CACHE_TIMEOUT
+    
     # the url pattern for group overview URLs
     GROUP_PLURAL_URL_PATH = 'projects'
     
@@ -139,6 +142,9 @@ class CosinnusConf(AppConf):
     # this is the maximum scale (at least one dimension fits) for any image
     IMAGE_MAXIMUM_SIZE_SCALE = (800, 800) 
     
+    # group wallpaper max size
+    GROUP_WALLPAPER_MAXIMUM_SIZE_SCALE = (1140, 240) 
+    
     # this is the thumbnail size for small image previews
     IMAGE_THUMBNAIL_SIZE_SCALE = (80, 80)
     
@@ -153,6 +159,11 @@ class CosinnusConf(AppConf):
         ('todo', 'mine', {'amount':'5', 'amount_subtask':'2', 'sort_field':'3'}),
     ]
     
+    # switch to set if Microsites should be enabled.
+    # this can be override for each portal to either activate or deactivate them
+    MICROSITES_ENABLED = False
+    
+    # --- for the old microsites ---
     # which apps objects as object lists will be listed on the microsite? 
     # must be model names of BaseTaggableObjects that can be resolved via a 
     # render_list_for_user() function in the app's registered Renderer.
@@ -160,6 +171,7 @@ class CosinnusConf(AppConf):
     MICROSITE_DISPLAYED_APP_OBJECTS = ['cosinnus_note.Note', 'cosinnus_etherpad.Etherpad',
         'cosinnus_file.FileEntry', 'cosinnus_event.Event']
     
+    # --- for the old microsites ---
     # should empty apps list be displayed at all, or omitted?
     MICROSITE_RENDER_EMPTY_APPS = True
     

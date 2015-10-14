@@ -3,13 +3,16 @@ from __future__ import unicode_literals
 
 from cosinnus.core.decorators.views import (require_read_access,
     require_write_access, require_admin_access,
-    require_create_objects_in_access, redirect_to_not_logged_in)
+    require_create_objects_in_access, redirect_to_not_logged_in,
+    dispatch_group_access)
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from cosinnus.models.tagged import BaseTaggableObjectModel
 from django.core.exceptions import PermissionDenied, ImproperlyConfigured
 from django.shortcuts import redirect
 from django.http.response import Http404
 from cosinnus.utils.exceptions import CosinnusPermissionDeniedException
+from cosinnus.core.registries.apps import app_registry
+from cosinnus.utils.functions import resolve_class
 
 
 class RequireAdminMixin(object):
@@ -28,6 +31,28 @@ class RequireAdminMixin(object):
         context.update({'group': self.group})
         return context
 
+
+class DipatchGroupURLMixin(object):
+    """
+    Mixin to resolve a group object from its URL without requiring any access priviledges.
+
+    .. seealso:: :class:`RequireAdminMixin`, :class:`RequireWriteMixin`, :class:`RequireCreateObjectsInMixin`
+    
+    Note: Accessing an object with a slug or pk that is not found will always result in two seperate DB hits,
+          because we first do a complete filter for the object, including permissions, pk, group memberships.
+          Then, if the object wasn't found, we re-do the filter without permissions to check if that was the 
+          cause, then redirect to a login page or a permission denied page. If the second query also fails to
+          match anything, we let the Http404 bubble up.
+    """
+
+    @dispatch_group_access()
+    def dispatch(self, request, *args, **kwargs):
+        return super(DipatchGroupURLMixin, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(DipatchGroupURLMixin, self).get_context_data(**kwargs)
+        context.update({'group': self.group})
+        return context
 
 
 class RequireReadMixin(object):
@@ -219,3 +244,36 @@ class GroupFormKwargsMixin(object):
         kwargs = super(GroupFormKwargsMixin, self).get_form_kwargs()
         kwargs['group'] = self.group
         return kwargs
+
+
+class GroupObjectCountMixin(object):
+    """ Adds an ``object_counts`` dict to the context containing the counts of all 
+        BaseTaggableObjects in this view's group. 
+        Requires ``self.group`` to be set. """
+    
+    # Object counts as unresolved references to avoid forward dependencies
+    # this will check if the cosinnus app is actually present before including it
+    app_object_count_mappings = {
+        'cosinnus_event': 'cosinnus_event.models.Event',
+        'cosinnus_todo': 'cosinnus_todo.models.TodoEntry',
+        'cosinnus_file': 'cosinnus_file.models.FileEntry',
+        'cosinnus_etherpad': 'cosinnus_etherpad.models.Etherpad',
+        'cosinnus_note': 'cosinnus_note.models.Note',
+    }
+    
+    def get_context_data(self, **kwargs):
+        context = super(GroupObjectCountMixin, self).get_context_data(**kwargs)
+        
+        object_counts = {}
+        for app in app_registry:
+            app_name = app_registry.get_name(app) 
+            if self.group.is_app_deactivated(app):
+                continue
+            if app in self.app_object_count_mappings:
+                model = resolve_class(self.app_object_count_mappings[app]) 
+                object_counts[app_name] = model.get_current(self.group, self.request.user).count()
+        context.update({
+            'object_counts': object_counts,
+        })
+        return context
+    
