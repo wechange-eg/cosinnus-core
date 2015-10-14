@@ -85,7 +85,7 @@ def unique_aware_slugify(item, slug_source, slug_field,
     all_slugs = list(model.objects.filter(**kwargs).values_list(slug_field, flat=True))
     if force_redo:
         # remove own slug from clash list
-        all_slugs = (clash_slug for clash_slug in all_slugs if clash_slug != own_slug)
+        all_slugs = [clash_slug for clash_slug in all_slugs if clash_slug != own_slug]
     
     if slug in all_slugs or extra_conflict_check(slug):
         finder = re.compile(r'-\d+$')
