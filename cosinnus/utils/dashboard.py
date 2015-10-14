@@ -298,21 +298,21 @@ class GroupProjectsWidget(DashboardWidget):
         # FIXME: hardcoded widget item count for now
         count = 99
         
-        groups_qs = group.groups.order_by('name').select_related('media_tag')
+        children = group.get_children()
         
-        has_more = len(groups_qs) > offset+count
-        more_count = max(0, len(groups_qs) - (offset+count))
+        has_more = len(children) > offset+count
+        more_count = max(0, len(children) - (offset+count))
         
         if count != 0:
-            groups_qs = groups_qs[offset:offset+count]      
+            children = children[offset:offset+count]      
         
         data = {
             'group': group,
-            'groups': groups_qs,
+            'groups': children,
             'has_more': has_more,
             'more_count': more_count,
         }
-        return (render_to_string('cosinnus/widgets/group_projects.html', data), len(groups_qs), True) # more (create) button always shown
+        return (render_to_string('cosinnus/widgets/group_projects.html', data), len(children), True) # more (create) button always shown
 
     @property
     def title_url(self):
