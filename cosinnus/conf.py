@@ -159,6 +159,13 @@ class CosinnusConf(AppConf):
         ('todo', 'mine', {'amount':'5', 'amount_subtask':'2', 'sort_field':'3'}),
     ]
     
+    # setting to be overriden by each portal
+    # if True, Integrated mode is active:
+    #     * manual login/logout/register is disabled
+    #     * user accounts cannot be disabled
+    #     * special views are active on /integrated/ URLs, enabling cross-site login/logout/user-creation
+    IS_INTEGRATED_PORTAL = False
+    
     # switch to set if Microsites should be enabled.
     # this can be override for each portal to either activate or deactivate them
     MICROSITES_ENABLED = False

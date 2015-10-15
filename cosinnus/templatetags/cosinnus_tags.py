@@ -667,3 +667,9 @@ def addstr(arg1, arg2):
     ret = mark_safe(str(arg1) + str(arg2))
     return ret
 
+
+@register.simple_tag()
+def is_integrated_portal():
+    """ Returns True if this portal is running in integrated mode for user auth """
+    return getattr(settings, 'COSINNUS_IS_INTEGRATED_PORTAL', False)
+
