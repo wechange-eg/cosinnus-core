@@ -159,6 +159,9 @@ class CosinnusConf(AppConf):
         ('todo', 'mine', {'amount':'5', 'amount_subtask':'2', 'sort_field':'3'}),
     ]
     
+    # every how often max can you create a new user in your session in an integrated Portal
+    INTEGRATED_CREATE_USER_CACHE_TIMEOUT = 60 * 5
+    
     # setting to be overriden by each portal
     # if True, Integrated mode is active:
     #     * manual login/logout/register is disabled

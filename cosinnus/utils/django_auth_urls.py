@@ -89,5 +89,6 @@ else:
     urlpatterns = patterns('',
         url(r'^integrated/login/$', 'cosinnus.views.integrated.login_integrated', name='login-integrated'),
         url(r'^integrated/logout/$', 'cosinnus.views.integrated.logout_integrated', name='logout-integrated'),
+        url(r'^integrated/create_user/$', 'cosinnus.views.integrated.create_user_integrated', name='create-user-integrated'),
     )
     
