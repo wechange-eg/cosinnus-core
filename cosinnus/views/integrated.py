@@ -26,12 +26,10 @@ from django.template.loader import render_to_string
 from django.http.response import HttpResponseNotAllowed, Http404,\
     HttpResponseBadRequest
 from django.shortcuts import redirect
-from cosinnus.templatetags.cosinnus_tags import full_name_force
 from django.utils.encoding import force_text
 from django.contrib.auth.hashers import SHA1PasswordHasher
 from django.core.cache import cache
 from django.conf import settings
-from uuid import uuid1
 
 USER_MODEL = get_user_model()
 
@@ -39,10 +37,6 @@ IntegratedHasher = SHA1PasswordHasher()
 salt = 'cos01'
 
 CREATE_INTEGRATED_USER_SESSION_CACHE_KEY = 'cosinnus/integrated/created_session_keys/%s'
-
-
-def _get_user_pseudo_password(user):
-    return IntegratedHasher.encode(user.password, salt)
 
 
 @sensitive_post_parameters()
@@ -61,7 +55,8 @@ def login_integrated(request, authentication_form=AuthenticationForm):
             user = USER_MODEL.objects.get(username=request.POST.get('username'))
             # pseudo password check, removed for now
             #if _get_user_pseudo_password(user) == request.POST.get('password'):
-            if user.password == request.POST.get('password'): #md5 check, no pseudo check
+            #if user.password == request.POST.get('password'): #md5 check, no pseudo check
+            if IntegratedHasher.verify(user.password, request.POST.get('password')):
                 user.backend = 'cosinnus.backends.IntegratedPortalAuthBackend'
             else:
                 user = None
@@ -96,6 +91,7 @@ def create_user_integrated(request):
             return HttpResponseBadRequest('You have been doing this too often. Slow down!')
         
         user_email = request.POST.get('user_email', None)
+        # this is actually the hashed password of the remote user
         user_password = request.POST.get('user_password', None)
         if not user_email or not user_password:
             return HttpResponseBadRequest('Missing POST parameters!')
@@ -126,14 +122,20 @@ def create_user_integrated(request):
             return JSONResponse(data={'status': 'fail', 'reason': force_text(form.errors)})
         get_user_profile_model()._default_manager.get_for_user(user)
         
-        # replace new user's password with the md5 one
+        # set the new user's password's hash to that of the connected user.
         user.password = user_password
         user.save()
+        
+        # retransmit a hashed version of the hashed password.
+        # yes, we double hash the original password. because then the first password hash 
+        # is only exposed once, during user creation, and never again after that.
+        # all that is exposed to the client afterwards is a double hash, making this a bit cleaner.
+        remote_password = IntegratedHasher.encode(user_password, salt)
         
         # set session key into cache
         cache.set(CREATE_INTEGRATED_USER_SESSION_CACHE_KEY % session_key, 'True', settings.COSINNUS_INTEGRATED_CREATE_USER_CACHE_TIMEOUT)
         
-        return JSONResponse(data={'status': 'ok', 'remote_username': user.username, 'remote_password': user.password})
+        return JSONResponse(data={'status': 'ok', 'remote_username': user.username, 'remote_password': remote_password})
         
     else:
         raise Http404
