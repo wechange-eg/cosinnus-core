@@ -27,13 +27,13 @@ from django.http.response import HttpResponseNotAllowed, Http404,\
     HttpResponseBadRequest
 from django.shortcuts import redirect
 from django.utils.encoding import force_text
-from django.contrib.auth.hashers import SHA1PasswordHasher
+from django.contrib.auth.hashers import PBKDF2PasswordHasher
 from django.core.cache import cache
 from django.conf import settings
 
 USER_MODEL = get_user_model()
 
-IntegratedHasher = SHA1PasswordHasher()
+IntegratedHasher = PBKDF2PasswordHasher()
 salt = 'cos01'
 
 CREATE_INTEGRATED_USER_SESSION_CACHE_KEY = 'cosinnus/integrated/created_session_keys/%s'
