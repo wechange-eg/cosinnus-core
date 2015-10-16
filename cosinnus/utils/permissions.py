@@ -8,6 +8,7 @@ from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject,\
     BaseHierarchicalTaggableObjectModel
 from cosinnus.models.profile import BaseUserProfile
 from uuid import uuid1
+from django.conf import settings
 
 
 def check_ug_admin(user, group):
@@ -154,6 +155,12 @@ def check_user_portal_admin(user, portal=None):
     """
     portal = portal or CosinnusPortal.get_current()
     return user.id in portal.admins
+
+
+def check_user_integrated_portal_member(user):
+    """ Returns ``True`` if the user is a member, admin, or pending in an integrated Portal """
+    portal_memberships = user.cosinnus_portal_memberships.all().values_list('group__id', flat=True)
+    return any([portal_id in settings.COSINNUS_INTEGRATED_PORTAL_IDS for portal_id in portal_memberships])
 
 
 def filter_tagged_object_queryset_for_user(qs, user):

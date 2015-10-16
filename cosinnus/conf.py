@@ -162,6 +162,10 @@ class CosinnusConf(AppConf):
     # every how often max can you create a new user in your session in an integrated Portal
     INTEGRATED_CREATE_USER_CACHE_TIMEOUT = 60 * 5
     
+    # yes, it's dumb, but we need the ids of all integrated Portals in this list, and this needs to
+    # be set in the default_settings.py so that ALL portals know that
+    INTEGRATED_PORTAL_IDS = []
+    
     # has to be supplied if this portal is an integrated portal, used for handshake
     # format without trailing slash: 'http://mydomain.com'
     INTEGRATED_PORTAL_HANDSHAKE_URL = None
