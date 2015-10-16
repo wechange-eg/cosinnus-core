@@ -24,7 +24,7 @@ if not is_integrated_portal():
             {'template_name': 'cosinnus/registration/logged_out.html'},
             name='logout'),
         url(r'^password_change/$',
-            'django.contrib.auth.views.password_change',
+            'cosinnus.views.user.password_change_proxy',
             {'template_name': 'cosinnus/registration/password_change_form.html'},
             name='password_change'),
         url(r'^password_change/done/$',
@@ -36,7 +36,7 @@ if not is_integrated_portal():
     if django.VERSION[:2] >= (1, 6):
         urlpatterns += patterns('',
             url(r'^password_reset/$',
-                'django.contrib.auth.views.password_reset',
+                'cosinnus.views.user.password_reset_proxy',
                 {
                     'template_name': 'cosinnus/registration/password_reset_form.html',
                     'email_template_name': 'cosinnus/registration/password_reset_email_16.html',
@@ -46,7 +46,7 @@ if not is_integrated_portal():
     else:
         urlpatterns += patterns('',
             url(r'^password_reset/$',
-                'django.contrib.auth.views.password_reset',
+                'cosinnus.views.user.password_reset_proxy',
                 {
                     'template_name': 'cosinnus/registration/password_reset_form.html',
                     'email_template_name': 'cosinnus/registration/password_reset_email_15.html',
