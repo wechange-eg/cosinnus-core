@@ -52,7 +52,7 @@ def login_integrated(request, authentication_form=AuthenticationForm):
             return HttpResponseBadRequest('Missing POST parameters!')
         
         try:
-            user = USER_MODEL.objects.get(username=request.POST.get('username'))
+            user = USER_MODEL.objects.get(username=request.POST.get('username'), is_active=True)
             # pseudo password check, removed for now
             #if _get_user_pseudo_password(user) == request.POST.get('password'):
             #if user.password == request.POST.get('password'): #md5 check, no pseudo check
@@ -61,13 +61,13 @@ def login_integrated(request, authentication_form=AuthenticationForm):
             else:
                 user = None
         except USER_MODEL.DoesNotExist:
-            pass
+            user=None
         
         if user:
             auth_login(request, user)
             return redirect(request.POST.get('next', '/'))
         else:
-            return HttpResponseNotAllowed('POST', content='User authentication failed! Please contact an administrator!')
+            return HttpResponseNotAllowed('POST', content='Sorry, your user account could not be connected to! Please contact an administrator!')
     else:
         raise Http404
 
