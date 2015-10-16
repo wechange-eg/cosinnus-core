@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 import logging
 
-from django.core.exceptions import MiddlewareNotUsed
+from django.core.exceptions import MiddlewareNotUsed, PermissionDenied
 from cosinnus.core import signals as cosinnus_signals
 from django.db.models import signals
 from django.utils.functional import curry
@@ -14,6 +14,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.db.models.loading import get_model
 from django.contrib.auth.views import logout
 from django.core.urlresolvers import reverse, NoReverseMatch
+from django.template.response import TemplateResponse
+from cosinnus.core.decorators.views import redirect_to_403
 
 logger = logging.getLogger('cosinnus')
 
@@ -34,6 +36,16 @@ def CosinnusPermanentRedirect():
     if _CosinnusPermanentRedirect is None: 
         _CosinnusPermanentRedirect = get_model('cosinnus', 'CosinnusPermanentRedirect')
     return _CosinnusPermanentRedirect
+
+
+# these URLs are allowed to be accessed for anonymous accounts, even when everything else
+# is locked down. all integrated-API related URLs and all login/logout URLs should be in here!
+LOGIN_URLS = [
+    '/login/',
+    '/integrated/login/',
+    '/integrated/logout/',
+    '/integrated/create_user/',
+]
 
 
 startup_middleware_inited = False
@@ -121,7 +133,7 @@ class ForceInactiveUserLogoutMiddleware(object):
             if request.user.cosinnus_profile.settings.get('force_logout_next_request', False):
                 del request.user.cosinnus_profile.settings['force_logout_next_request']
                 request.user.cosinnus_profile.save()
-                if request.path not in ['/login/', '/integrated/login/']:
+                if request.path not in LOGIN_URLS:
                     do_logout = True
                 
             if do_logout:
@@ -130,3 +142,15 @@ class ForceInactiveUserLogoutMiddleware(object):
                 except NoReverseMatch:
                     next_page = '/'
                 return logout(request, next_page=next_page)
+
+
+class DenyAnonymousAccessMiddleware(object):
+    """ This middleware will show an error page on any anonymous request,
+        unless the request is directed at a login URL. """
+    
+    def process_request(self, request):
+        if not request.user.is_authenticated():
+            if request.path not in LOGIN_URLS:
+                return TemplateResponse(request, 'cosinnus/portal/no_anonymous_access_page.html')
+                
+            

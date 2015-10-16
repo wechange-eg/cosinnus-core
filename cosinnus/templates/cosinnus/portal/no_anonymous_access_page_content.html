@@ -1,0 +1,11 @@
+{% load i18n %}
+<div class="alert alert-danger  alert-dismissable">
+    <i class="fa fa-exclamation-triangle fa-3x"></i>
+    <h4>{% trans "No anonymous access!" %}</h4>
+    <div class="v-offset-s">
+    <p>
+    	{% trans "This website allows no anonymous access." %}
+    	{% url 'login' as login_url %}
+    	<a href="{{ login_url }}">{% trans "Log in..." %}</a>
+    </p>
+</div>

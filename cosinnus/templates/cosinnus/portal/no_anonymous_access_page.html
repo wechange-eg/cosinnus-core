@@ -1,0 +1,25 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n cosinnus_tags %}
+{% load static from staticfiles %}
+
+
+{% block body_attributes %}class="body-no-nav"{% endblock body_attributes %}
+
+{% block cosinnus_navbar %}
+{% endblock cosinnus_navbar %}
+
+
+{% block main_page_header %}
+    {% include 'cosinnus/messages.html' %}
+{% endblock main_page_header %}
+            
+{% block main_page %}
+    
+    {% include 'cosinnus/portal/no_anonymous_access_page_content.html' %}
+
+{% endblock main_page %}
+
+
+{% block extrafooter %}
+  {{ block.super }}
+{% endblock %}
