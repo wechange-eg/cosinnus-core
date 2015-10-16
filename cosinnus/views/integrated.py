@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import requests
+import logging
+logger = logging.getLogger('cosinnus')
+
 from django.contrib.auth import get_user_model, login as auth_login, logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.urlresolvers import reverse, reverse_lazy
@@ -30,6 +34,7 @@ from django.utils.encoding import force_text
 from django.contrib.auth.hashers import PBKDF2PasswordHasher
 from django.core.cache import cache
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 
 USER_MODEL = get_user_model()
 
@@ -67,7 +72,7 @@ def login_integrated(request, authentication_form=AuthenticationForm):
             auth_login(request, user)
             return redirect(request.POST.get('next', '/'))
         else:
-            return HttpResponseNotAllowed('POST', content='Sorry, your user account could not be connected to! Please contact an administrator!')
+            return HttpResponseNotAllowed('POST', content='Sorry, we could not connect your user account! Please contact an administrator!')
     else:
         raise Http404
 
@@ -98,39 +103,60 @@ def create_user_integrated(request):
         first_name = request.POST.get('first_name', '')
         last_name = request.POST.get('last_name', '')
         
-        try:
-            USER_MODEL.objects.get(email=user_email)
-            return JSONResponse(data={'status': 'fail', 'reason': 'Email already taken!'})
-        except USER_MODEL.DoesNotExist:
-            pass
+        # handshake on the integrating server, url from settings, NEVER FROM REQUEST!
+        handshake_url = getattr(settings, 'COSINNUS_INTEGRATED_PORTAL_HANDSHAKE_URL', None)
+        if not handshake_url:
+            raise ImproperlyConfigured('Cannot create integrated user: COSINNUS_INTEGRATED_PORTAL_HANDSHAKE_URL is not configured in settings!')
         
-        user = None
-        password = 'will_be_replaced'
         data = {
-            'username': user_email,
-            'email': user_email,
-            'password1': password,
-            'password2': password,
-            'first_name': first_name,
-            'last_name': last_name,
+            'user_email': user_email,
         }
-        # use Cosinnus' UserCreationForm to apply all usual user-creation-related effects
-        form = UserCreationForm(data)
-        if form.is_valid():
-            user = form.save()
-        else:
-            return JSONResponse(data={'status': 'fail', 'reason': force_text(form.errors)})
-        get_user_profile_model()._default_manager.get_for_user(user)
+        req = requests.post(handshake_url, data=data)
+        if not req.status_code == 200:
+            logger.error('Failed to send handshake! Have you configured the correct COSINNUS_INTEGRATED_PORTAL_HANDSHAKE_URL?',
+                         extra={'returned_request': req, 'handshake_url': handshake_url})
+            return HttpResponseBadRequest('Could not create integrated user: Handshake could not be established! Code: %d' % req.status_code)
+        response = req.json()
+        if not response['status'] == 'ok':
+            return HttpResponseBadRequest('Could not create integrated user: Handshake failed!')
         
-        # set the new user's password's hash to that of the connected user.
-        user.password = user_password
-        user.save()
+        # handshake succeeded, either create new user or connect to existing one
+        
+        try:
+            user = USER_MODEL.objects.get(email=user_email)
+            # user already exists for this email
+            # since we trust both servers, we connect the existing user account
+        except USER_MODEL.DoesNotExist:
+            user = None
+        
+        # create new user if not existed
+        if user is None:
+            password = 'will_be_replaced'
+            data = {
+                'username': user_email,
+                'email': user_email,
+                'password1': password,
+                'password2': password,
+                'first_name': first_name,
+                'last_name': last_name,
+            }
+            # use Cosinnus' UserCreationForm to apply all usual user-creation-related effects
+            form = UserCreationForm(data)
+            if form.is_valid():
+                user = form.save()
+            else:
+                return JSONResponse(data={'status': 'fail', 'reason': force_text(form.errors)})
+            get_user_profile_model()._default_manager.get_for_user(user)
+            
+            # set the new user's password's hash to that of the connected user.
+            user.password = user_password
+            user.save()
         
         # retransmit a hashed version of the hashed password.
         # yes, we double hash the original password. because then the first password hash 
         # is only exposed once, during user creation, and never again after that.
         # all that is exposed to the client afterwards is a double hash, making this a bit cleaner.
-        remote_password = IntegratedHasher.encode(user_password, salt)
+        remote_password = IntegratedHasher.encode(user.password, salt)
         
         # set session key into cache
         cache.set(CREATE_INTEGRATED_USER_SESSION_CACHE_KEY % session_key, 'True', settings.COSINNUS_INTEGRATED_CREATE_USER_CACHE_TIMEOUT)

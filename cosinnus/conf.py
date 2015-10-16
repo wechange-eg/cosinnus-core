@@ -162,6 +162,10 @@ class CosinnusConf(AppConf):
     # every how often max can you create a new user in your session in an integrated Portal
     INTEGRATED_CREATE_USER_CACHE_TIMEOUT = 60 * 5
     
+    # has to be supplied if this portal is an integrated portal, used for handshake
+    # format without trailing slash: 'http://mydomain.com'
+    INTEGRATED_PORTAL_HANDSHAKE_URL = None
+    
     # setting to be overriden by each portal
     # if True, Integrated mode is active:
     #     * manual login/logout/register is disabled
