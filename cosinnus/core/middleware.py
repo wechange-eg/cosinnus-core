@@ -13,7 +13,7 @@ from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 from django.db.models.loading import get_model
 from django.contrib.auth.views import logout
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, NoReverseMatch
 
 logger = logging.getLogger('cosinnus')
 
@@ -107,9 +107,26 @@ class GroupPermanentRedirectMiddleware(object):
 
 
 class ForceInactiveUserLogoutMiddleware(object):
-    """ This middleware will force-logout a user if his account has been disabled. """
+    """ This middleware will force-logout a user if his account has been disabled, or a force-logout flag is set. """
     
     def process_request(self, request):
-        if request.user.is_authenticated() and not request.user.is_active:
-            messages.error(request, _('This account is no longer active. You have been logged out.'))
-            return logout(request, next_page=reverse('login'))
+        # TODO: FIXME: optimize this, this might be an extra query during EVERY (!) logged in request!
+        if request.user.is_authenticated():
+            do_logout = False
+            if not request.user.is_active:
+                messages.error(request, _('This account is no longer active. You have been logged out.'))
+                do_logout = True
+            # if the user has a force-logout flag set, remove the flag and log him out,
+            # unless he is currently trying to log in
+            if request.user.cosinnus_profile.settings.get('force_logout_next_request', False):
+                del request.user.cosinnus_profile.settings['force_logout_next_request']
+                request.user.cosinnus_profile.save()
+                if request.path not in ['/login/', '/integrated/login/']:
+                    do_logout = True
+                
+            if do_logout:
+                try:
+                    next_page = reverse('login')
+                except NoReverseMatch:
+                    next_page = '/'
+                return logout(request, next_page=next_page)

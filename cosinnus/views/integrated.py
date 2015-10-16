@@ -44,6 +44,22 @@ salt = 'cos01'
 CREATE_INTEGRATED_USER_SESSION_CACHE_KEY = 'cosinnus/integrated/created_session_keys/%s'
 
 
+def _get_integrated_user_validated(username, password):
+    """ Does a 'login' for an integrated user based on a username and a double hashed passowrd """
+    try:
+        user = USER_MODEL.objects.get(username=username, is_active=True)
+        # pseudo password check, removed for now
+        #if _get_user_pseudo_password(user) == request.POST.get('password'):
+        #if user.password == request.POST.get('password'): #md5 check, no pseudo check
+        if IntegratedHasher.verify(user.password, password):
+            user.backend = 'cosinnus.backends.IntegratedPortalAuthBackend'
+        else:
+            user = None
+    except USER_MODEL.DoesNotExist:
+        user=None
+    return user
+
+
 @sensitive_post_parameters()
 @csrf_exempt
 @never_cache
@@ -53,20 +69,12 @@ def login_integrated(request, authentication_form=AuthenticationForm):
         when we allow subdomain-cross-site requests!
     """
     if request.method == "POST":
-        if not request.POST.get('username', None) or not request.POST.get('password', None):
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
+        if not username or not password:
             return HttpResponseBadRequest('Missing POST parameters!')
         
-        try:
-            user = USER_MODEL.objects.get(username=request.POST.get('username'), is_active=True)
-            # pseudo password check, removed for now
-            #if _get_user_pseudo_password(user) == request.POST.get('password'):
-            #if user.password == request.POST.get('password'): #md5 check, no pseudo check
-            if IntegratedHasher.verify(user.password, request.POST.get('password')):
-                user.backend = 'cosinnus.backends.IntegratedPortalAuthBackend'
-            else:
-                user = None
-        except USER_MODEL.DoesNotExist:
-            user=None
+        user = _get_integrated_user_validated(username, password)
         
         if user:
             auth_login(request, user)
@@ -77,12 +85,29 @@ def login_integrated(request, authentication_form=AuthenticationForm):
         raise Http404
 
 
+@csrf_exempt
 def logout_integrated(request):
     """
-    Logs the user out.
+    Logs an integrated user out by setting a force-logout flag on him.
     """
-    auth_logout(request)
-    return JSONResponse({})
+    if request.method == "POST":
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
+        if not username or not password:
+            return HttpResponseBadRequest('Missing POST parameters!')
+        
+        user = _get_integrated_user_validated(username, password)
+        request.user = user
+        
+        # set the user to be logged out on next request
+        user.cosinnus_profile.settings['force_logout_next_request'] = True
+        user.cosinnus_profile.save()
+        
+        return JSONResponse({})
+        
+    else:
+        raise Http404
+    
 
 
 @csrf_exempt
