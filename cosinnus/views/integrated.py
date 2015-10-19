@@ -176,6 +176,11 @@ def create_user_integrated(request):
             # set the new user's password's hash to that of the connected user.
             user.password = user_password
             user.save()
+            
+            # if we got an avatar send with the request, save it to the new user's profile
+            if request.FILES and 'avatar' in request.FILES:
+                user.cosinnus_profile.avatar = request.FILES.get('avatar')
+                user.cosinnus_profile.save()
         
         # retransmit a hashed version of the hashed password.
         # yes, we double hash the original password. because then the first password hash 
