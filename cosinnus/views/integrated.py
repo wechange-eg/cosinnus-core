@@ -5,36 +5,24 @@ import requests
 import logging
 logger = logging.getLogger('cosinnus')
 
-from django.contrib.auth import get_user_model, login as auth_login, logout as auth_logout
+from django.conf import settings
+from django.contrib.auth import get_user_model, login as auth_login
 from django.contrib.auth.forms import AuthenticationForm
-from django.core.urlresolvers import reverse, reverse_lazy
-from django.utils.decorators import method_decorator
-from django.utils.translation import ugettext_lazy as _
-from django.views.decorators.debug import sensitive_post_parameters
-from django.views.decorators.cache import never_cache
-from django.views.decorators.csrf import csrf_protect, csrf_exempt
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
-
-from cosinnus.core.decorators.views import staff_required, superuser_required,\
-    redirect_to_not_logged_in, redirect_to_403
-from cosinnus.forms.user import UserCreationForm, UserChangeForm
-from cosinnus.views.mixins.ajax import patch_body_json_data
-from cosinnus.utils.http import JSONResponse
-from django.contrib import messages
-from cosinnus.models.profile import get_user_profile_model
-from cosinnus.models.tagged import BaseTagObject
-from cosinnus.models.group import CosinnusPortal
-from cosinnus.core.mail import MailThread, get_common_mail_context,\
-    send_mail_or_fail_threaded
-from django.template.loader import render_to_string
+from django.contrib.auth.hashers import PBKDF2PasswordHasher
+from django.core.cache import cache
+from django.core.exceptions import ImproperlyConfigured
 from django.http.response import HttpResponseNotAllowed, Http404,\
     HttpResponseBadRequest
 from django.shortcuts import redirect
 from django.utils.encoding import force_text
-from django.contrib.auth.hashers import PBKDF2PasswordHasher
-from django.core.cache import cache
-from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured
+from django.views.decorators.debug import sensitive_post_parameters
+from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_exempt
+
+from cosinnus.forms.user import UserCreationForm
+from cosinnus.models.profile import get_user_profile_model
+from cosinnus.utils.http import JSONResponse
+
 
 USER_MODEL = get_user_model()
 
