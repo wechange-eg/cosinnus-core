@@ -6,11 +6,11 @@ from django.conf.urls import include, patterns, url
 from cosinnus.core.registries import url_registry
 from cosinnus.conf import settings
 from cosinnus.core.registries.group_models import group_model_registry
+from cosinnus.templatetags.cosinnus_tags import is_integrated_portal
 
 urlpatterns = patterns('cosinnus.views',
     # we do not define an index anymore and let CMS handle that.
 
-    url(r'^signup/$', 'user.user_create', name='user-add'),
     url(r'^users/$', 'user.user_list', name='user-list'),
     url(r'^portal/admins/$', 'user.portal_admin_list', name='portal-admin-list'),
     url(r'^users/map/$', 'user.user_list_map', name='user-list-map'),
@@ -19,7 +19,6 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^profile/$', 'profile.detail_view', name='profile-detail'),
     url(r'^profile/dashboard/$', 'widget.user_dashboard', name='user-dashboard'),
     url(r'^profile/edit/$', 'profile.update_view', name='profile-edit'),
-    url(r'^profile/delete/$', 'profile.delete_view', name='profile-delete'),
     
     url(r'^language/(?P<language>[^/]+)/$', 'common.switch_language', name='switch-language'),
     
@@ -50,6 +49,14 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^select2/', include('cosinnus.urls_select2', namespace='select2')),
 )
 
+# user management not allowed in integrated mode
+if not is_integrated_portal():
+    urlpatterns += patterns('cosinnus.views',
+                            
+        url(r'^signup/$', 'user.user_create', name='user-add'),
+        url(r'^profile/delete/$', 'profile.delete_view', name='profile-delete'),
+        
+    )
 
 for url_key in group_model_registry:
     plural_url_key = group_model_registry.get_plural_url_key(url_key, url_key + '_s')

@@ -46,7 +46,7 @@
     </ul>
 </button>
 
-<button type="button" class="btn w100 btn-{% if view == "edit_notifications" %}extra-{% endif %}emphasized fine-space" href="{% url 'cosinnus:notifications' %}">
+<button type="button" class="btn w100 btn-{% if view == "edit_notifications" %}extra-{% endif %}emphasized {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}fine-space{% endif %}" href="{% url 'cosinnus:notifications' %}">
     <ul class="media-list">
         <li class="media">
            <a class="pull-left">
@@ -64,7 +64,7 @@
     </ul>
 </button>
 
-
+{% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
 <button type="button" class="btn w100 btn-{% if view == "change_password" %}extra-{% endif %}emphasized regular-space" href="{% url 'password_change' %}">
     <ul class="media-list">
         <li class="media">
@@ -82,7 +82,9 @@
         </li>
     </ul>
 </button>
+{% endif %}
 
+{% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
 {% if view == "edit_profile" or view == "delete_profile" %}
 <button type="button" class="btn w100 btn-{% if view == "delete_profile" %}extra-{% endif %}emphasized regular-space" href="{% url 'cosinnus:profile-delete' %}">
     <ul class="media-list">
@@ -101,4 +103,5 @@
         </li>
     </ul>
 </button>
+{% endif %}
 {% endif %}

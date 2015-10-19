@@ -26,6 +26,10 @@ from django.template.loader import render_to_string
 from django.http.response import HttpResponseNotAllowed
 from django.shortcuts import redirect
 from cosinnus.templatetags.cosinnus_tags import full_name_force
+from django.contrib.auth.views import password_reset, password_change
+from cosinnus.utils.permissions import check_user_integrated_portal_member
+from django.template.context import RequestContext
+from django.template.response import TemplateResponse
 
 
 USER_MODEL = get_user_model()
@@ -304,3 +308,27 @@ def logout_api(request):
     """
     auth_logout(request)
     return JSONResponse({})
+
+
+def password_change_proxy(request, *args, **kwargs):
+    """ Proxies the django.contrib.auth view. Only lets a user see the form or POST to it
+        if the user is not a member of an integrated portal. """
+    user = request.user
+    if user.is_authenticated() and check_user_integrated_portal_member(user):
+        return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_changed_page.html')
+    return password_change(request, *args, **kwargs)
+
+
+def password_reset_proxy(request, *args, **kwargs):
+    """ Proxies the django.contrib.auth view. Only send a password reset mail
+        if the email doesn't belong to a user that is a member of an integrated portal. """
+    if request.method == 'POST':
+        email = request.POST.get('email', None)
+        if email:
+            try:
+                user = USER_MODEL.objects.get(email=email, is_active=True)
+            except USER_MODEL.DoesNotExist:
+                user = None
+        if user and check_user_integrated_portal_member(user):
+            return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_reset_page.html')
+    return password_reset(request, *args, **kwargs)
