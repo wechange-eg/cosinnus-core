@@ -1,21 +1,23 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 import logging
 
-from django.core.exceptions import MiddlewareNotUsed, PermissionDenied
-from cosinnus.core import signals as cosinnus_signals
-from django.db.models import signals
-from django.utils.functional import curry
-from django.http.response import HttpResponseRedirect
-from django.utils.encoding import force_text
-from cosinnus.conf import settings
 from django.contrib import messages
-from django.utils.translation import ugettext_lazy as _
-from django.db.models.loading import get_model
 from django.contrib.auth.views import logout
+from django.core.exceptions import MiddlewareNotUsed
 from django.core.urlresolvers import reverse, NoReverseMatch
+from django.db.models import signals
+from django.db.models.loading import get_model
+from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
-from cosinnus.core.decorators.views import redirect_to_403
+from django.utils.encoding import force_text
+from django.utils.functional import curry
+from django.utils.translation import ugettext_lazy as _
+
+from cosinnus.conf import settings
+from cosinnus.core import signals as cosinnus_signals
+
 
 logger = logging.getLogger('cosinnus')
 
