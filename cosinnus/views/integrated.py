@@ -127,7 +127,7 @@ def create_user_integrated(request):
         req = requests.post(handshake_url, data=data)
         if not req.status_code == 200:
             logger.error('Failed to send handshake! Have you configured the correct COSINNUS_INTEGRATED_PORTAL_HANDSHAKE_URL?',
-                         extra={'returned_request': req, 'handshake_url': handshake_url})
+                         extra={'returned_request': req, 'handshake_url': handshake_url, 'content': req._content})
             return HttpResponseBadRequest('Could not create integrated user: Handshake could not be established! Code: %d' % req.status_code)
         response = req.json()
         if not response['status'] == 'ok':
