@@ -124,11 +124,16 @@ def create_user_integrated(request):
         data = {
             'user_email': user_email,
         }
+        logger.warn('Sending handshake request.', extra={'data':data, 'url': handshake_url})
+        
         req = requests.post(handshake_url, data=data)
+        logger.warn('Handshake request returned.', extra={'status':req.status_code, 'content': req._content})
+        
         if not req.status_code == 200:
             logger.error('Failed to send handshake! Have you configured the correct COSINNUS_INTEGRATED_PORTAL_HANDSHAKE_URL?',
                          extra={'returned_request': req, 'handshake_url': handshake_url, 'content': req._content})
             return HttpResponseBadRequest('Could not create integrated user: Handshake could not be established! Code: %d' % req.status_code)
+        
         response = req.json()
         if not response['status'] == 'ok':
             return HttpResponseBadRequest('Could not create integrated user: Handshake failed!')
@@ -141,6 +146,9 @@ def create_user_integrated(request):
             # since we trust both servers, we connect the existing user account
         except USER_MODEL.DoesNotExist:
             user = None
+            
+        logger.warn('Finding existing user.', extra={'user':user})
+        
         
         # create new user if not existed
         if user is None:
@@ -158,17 +166,21 @@ def create_user_integrated(request):
             if form.is_valid():
                 user = form.save()
             else:
+                logger.warn('User form invalid.', extra={'errors': force_text(form.errors)})
                 return JSONResponse(data={'status': 'fail', 'reason': force_text(form.errors)})
             get_user_profile_model()._default_manager.get_for_user(user)
             
             # set the new user's password's hash to that of the connected user.
             user.password = user_password
             user.save()
+            logger.warn('User saved.', extra={'user': user})
+        
             
             # if we got an avatar send with the request, save it to the new user's profile
             if request.FILES and 'avatar' in request.FILES:
                 user.cosinnus_profile.avatar = request.FILES.get('avatar')
                 user.cosinnus_profile.save()
+                logger.warn('Avatar saved.', extra={'user': user})
         
         # retransmit a hashed version of the hashed password.
         # yes, we double hash the original password. because then the first password hash 
@@ -178,6 +190,8 @@ def create_user_integrated(request):
         
         # set session key into cache
         cache.set(CREATE_INTEGRATED_USER_SESSION_CACHE_KEY % session_key, 'True', settings.COSINNUS_INTEGRATED_CREATE_USER_CACHE_TIMEOUT)
+        
+        logger.warn('User creation success, returning ok', extra={'username': user.username})
         
         return JSONResponse(data={'status': 'ok', 'remote_username': user.username, 'remote_password': remote_password})
         
