@@ -1096,7 +1096,7 @@ class CosinnusPermanentRedirect(models.Model):
     
     @classmethod
     def create_for_pattern(cls, _portal, _type, _slug, to_group):
-        from cosinnus.core.registries.group_models import group_model_registry # must be lazy!
+        from cosinnus.core.registries.group_models import group_model_registry # must be lazy re-import!
         group_type = group_model_registry.get_url_key_by_type(_type)
         try:
             with transaction.commit_on_success():
@@ -1113,7 +1113,16 @@ class CosinnusPermanentRedirect(models.Model):
             CosinnusPermanentRedirect.objects.create(from_portal=_portal, from_type=group_type, from_slug=_slug, to_group=to_group)
             # completely delete cache, checking which keys to delete would be more costly than redoing it all once
             cache.delete(CosinnusPermanentRedirect.CACHE_KEY)
-    
+        # also check if a group has a redirect pointing in on itself (and delete them)
+        # (may happen when renaming a group back to its old name again)
+        try:
+            to_group_type = group_model_registry.get_url_key_by_type(to_group.type)
+            self_redir = CosinnusPermanentRedirect.objects.get(from_portal=to_group.portal, from_slug=to_group.slug,
+                                                               to_group=to_group, from_type=to_group_type)
+            self_redir.delete()
+        except CosinnusPermanentRedirect.DoesNotExist:
+            pass
+        
     def save(self, *args, **kwargs):
         created = bool(self.pk is None)
         if not created:
