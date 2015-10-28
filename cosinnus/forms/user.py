@@ -43,7 +43,7 @@ class UserCreationForm(DjUserCreationForm):
     email = forms.EmailField(_('email address'), required=True) 
     first_name = forms.CharField(_('first name'), required=True)  
     
-    if not settings.DEBUG: 
+    if not settings.DEBUG and not settings.TESTING: 
         captcha = ReCaptchaField(attrs={'theme': 'clean'}, required=settings.DEBUG == False)
     
     
