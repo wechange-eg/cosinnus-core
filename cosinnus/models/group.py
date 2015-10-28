@@ -1132,7 +1132,8 @@ class CosinnusPermanentRedirect(models.Model):
     def delete(self, *args, **kwargs):
         # delete group pattern from cache
         cached_dict = CosinnusPermanentRedirect._get_cache_dict()
-        del cached_dict[self.cache_string]
+        if self.cache_string in cached_dict: 
+            del cached_dict[self.cache_string]
         CosinnusPermanentRedirect._set_cache_dict(cached_dict)
         super(CosinnusPermanentRedirect, self).delete(*args, **kwargs)
 
