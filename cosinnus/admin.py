@@ -144,7 +144,7 @@ class CosinnusProjectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
         
         message = _('The following Users were added to this portal:') + '\n' + ", ".join(member_names)
         self.message_user(request, message)
-    add_members_to_current_portal.short_description = _("Add all members to current Portal (%s)") % CosinnusPortal.get_current().name
+    add_members_to_current_portal.short_description = _("Add all members to current Portal")
     
     
     def move_members_to_current_portal(self, request, queryset):
@@ -152,7 +152,7 @@ class CosinnusProjectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
         self.add_members_to_current_portal(request, queryset, remove_all_other_memberships=True)
         message = _('In addition, the members were removed from all other Portals.')
         self.message_user(request, message)
-    move_members_to_current_portal.short_description = _("Move all members to current Portal (%s) (removes all other memberships!)") % CosinnusPortal.get_current().name
+    move_members_to_current_portal.short_description = _("Move all members to current Portal (removes all other memberships!)")
     
 admin.site.register(CosinnusProject, CosinnusProjectAdmin)
 
