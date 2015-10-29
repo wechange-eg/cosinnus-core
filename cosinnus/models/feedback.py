@@ -34,7 +34,6 @@ class CosinnusReportedObject(models.Model):
     created = models.DateTimeField(
         verbose_name=_('Created'),
         editable=False,
-        default=now,
         auto_now_add=True)
     
 
