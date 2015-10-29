@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 
 VERSION = (0, 5, 0, 'alpha', 0)
 
+default_app_config = 'cosinnus.apps.CosinnusAppConfig'
+
 
 def get_version(full=True):
     """Derives a PEP386-compliant version number from VERSION.
