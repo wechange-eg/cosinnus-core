@@ -87,4 +87,3 @@ class SplitHiddenDateWidget(CosinnusSplitDateTimeWidget):
     def __init__(self, attrs=None, date_format=None, time_format=None):
         super(SplitHiddenDateWidget, self).__init__(attrs, date_format, time_format)
         self.widgets[0].input_type = 'hidden'
-        self.widgets[0].is_hidden = True
