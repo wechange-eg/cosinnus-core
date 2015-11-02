@@ -5,7 +5,7 @@ from django.apps import AppConfig
 class CosinnusAppConfig(AppConfig):
 
     name = 'cosinnus'
-    verbose_name = 'My App'
+    verbose_name = 'Cosinnus Core'
 
     def ready(self):
-        print ">>>>>>>>>>>>>> cosinnus app received ready()"
+        pass
