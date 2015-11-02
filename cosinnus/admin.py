@@ -269,30 +269,29 @@ admin.site.unregister(USER_MODEL)
 admin.site.register(USER_MODEL, UserAdmin)
 
 
-
-class SpamUserModel(USER_MODEL):
-    class Meta:
-        proxy = True
-
-class SpamUserAdmin(UserAdmin):
-
-    def queryset(self, request):
-        """ For non-admins, only show the routepoints from their caravan """
-        qs = super(SpamUserAdmin, self).queryset(request)
-        qs = qs.filter(is_active=True).filter(
-            Q(cosinnus_profile__website__contains='.pl') | \
-            Q(email__contains='bawimy24.net.pl') | \
-            Q(email__contains='oprogressi.com') | \
-            Q(email__contains='email4everyone.com') | \
-            Q(email__contains='zoho.com') | \
-            Q(email__contains='sedam.gq') | \
-            Q(email__contains='o2.pl') | \
-            Q(email__contains='maetzresumeconsulting.com') | \
-            Q(email__contains='verbrechena.eu') | \
-            Q(email__contains='co.pl') \
-        )
-        return qs
-
-admin.site.register(SpamUserModel, SpamUserAdmin)
-
+## TODO: FIXME: re-enable after 1.8 migration
+#class SpamUserModel(USER_MODEL):
+#    class Meta:
+#        proxy = True
+#
+#class SpamUserAdmin(UserAdmin):
+#
+#    def queryset(self, request):
+#        """ For non-admins, only show the routepoints from their caravan """
+#        qs = super(SpamUserAdmin, self).queryset(request)
+#        qs = qs.filter(is_active=True).filter(
+#            Q(cosinnus_profile__website__contains='.pl') | \
+#            Q(email__contains='bawimy24.net.pl') | \
+#            Q(email__contains='oprogressi.com') | \
+#            Q(email__contains='email4everyone.com') | \
+#            Q(email__contains='zoho.com') | \
+#            Q(email__contains='sedam.gq') | \
+#            Q(email__contains='o2.pl') | \
+#            Q(email__contains='maetzresumeconsulting.com') | \
+#            Q(email__contains='verbrechena.eu') | \
+#            Q(email__contains='co.pl') \
+#        )
+#        return qs
+#
+#admin.site.register(SpamUserModel, SpamUserAdmin)
 
