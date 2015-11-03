@@ -1,0 +1,4 @@
+<a class="navbar-brand" href="{% if user.is_authenticated %}{% url 'cosinnus:user-dashboard' %}{% else %}/{% endif %}">
+    <!-- Logo -->
+    {% include 'cosinnus/brand.html' %}
+</a>
