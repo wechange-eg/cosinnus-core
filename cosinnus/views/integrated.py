@@ -179,9 +179,11 @@ def create_user_integrated(request):
             # if we got an avatar send with the request, save it to the new user's profile
             if request.FILES and 'avatar' in request.FILES:
                 user.cosinnus_profile.avatar = request.FILES.get('avatar')
-                user.cosinnus_profile.save()
                 logger.warn('Avatar saved.', extra={'user': user})
-        
+                
+            # always accept terms of service automatically in integrated portals
+            user.cosinnus_profile.settings['tos_accepted'] = True    
+            user.cosinnus_profile.save()
         # retransmit a hashed version of the hashed password.
         # yes, we double hash the original password. because then the first password hash 
         # is only exposed once, during user creation, and never again after that.
