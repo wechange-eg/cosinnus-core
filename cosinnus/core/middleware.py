@@ -146,6 +146,18 @@ class ForceInactiveUserLogoutMiddleware(object):
                 return logout(request, next_page=next_page)
 
 
+class LanguageChangeMiddleware(object):
+    """ This middleware will watch for a ?lang=xx parameter in each URL and switch the language if one is given """
+    
+    def process_request(self, request):
+        lang_param = request.GET.get('lang', None)
+        if lang_param:
+            request.session['django_language'] = lang_param
+            request.session.save()
+            get_dict = request.GET.copy()
+            request.GET = get_dict 
+            
+
 class DenyAnonymousAccessMiddleware(object):
     """ This middleware will show an error page on any anonymous request,
         unless the request is directed at a login URL. """
