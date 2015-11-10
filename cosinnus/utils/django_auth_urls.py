@@ -7,6 +7,7 @@ import django
 
 from django.conf.urls import patterns, url
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal
+from cosinnus.forms.user import UserEmailLoginForm
 
 
 # regular auth URLs for non-integrated portals
@@ -16,7 +17,7 @@ if not is_integrated_portal():
         url(r'^login/$',
             'django.contrib.auth.views.login',
             {'template_name': 'cosinnus/registration/login.html',
-             'authentication_form': 'cosinnus.forms.user.UserEmailLoginForm'},
+             'authentication_form': UserEmailLoginForm},
             name='login'),
         url(r'^logout/$',
             'django.contrib.auth.views.logout',
