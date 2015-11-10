@@ -29,13 +29,14 @@ from cosinnus.utils.files import get_group_avatar_filename,\
 from django.core.urlresolvers import reverse
 from django.utils.functional import cached_property
 from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
+from cosinnus.utils.compat import atomic
 from cosinnus.core import signals
 from cosinnus.core.registries.group_models import group_model_registry
 from django.db.models.signals import post_delete, post_save
 from django.dispatch.dispatcher import receiver
 from django.template.loader import render_to_string
 
-from django.db import IntegrityError, transaction
+from django.db import IntegrityError
 from django.contrib import messages
 
 import logging
@@ -1099,7 +1100,7 @@ class CosinnusPermanentRedirect(models.Model):
         from cosinnus.core.registries.group_models import group_model_registry # must be lazy re-import!
         group_type = group_model_registry.get_url_key_by_type(_type)
         try:
-            with transaction.commit_on_success():
+            with atomic():
                 CosinnusPermanentRedirect.objects.create(from_portal=_portal, from_type=group_type, from_slug=_slug, to_group=to_group)
         except IntegrityError:
             # if any existing redirects cause integrity error, delete them, because they would cause infite redirects
