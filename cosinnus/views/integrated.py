@@ -65,7 +65,14 @@ def login_integrated(request, authentication_form=AuthenticationForm):
         user = _get_integrated_user_validated(username, password)
         
         if user:
+            # login
             auth_login(request, user)
+            # apply language if sent
+            lang = request.POST.get('lang', None)
+            if lang:
+                request.session['django_language'] = lang
+                request.session.save()
+            
             return redirect(request.POST.get('next', '/'))
         else:
             return HttpResponseNotAllowed('POST', content='Sorry, we could not connect your user account! Please contact an administrator!')
