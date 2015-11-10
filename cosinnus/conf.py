@@ -224,4 +224,9 @@ class CosinnusDefaultSettings(AppConf):
         prefix = ''
         
     DJAJAX_VIEW_CLASS = 'cosinnus.views.djajax_endpoints.DjajaxCosinnusEndpoint'
+    
+    DJAJAX_ALLOWED_ACCESSES = {
+        'cosinnus.UserProfile': ('settings', ),
+        'cosinnus_todo.TodoEntry': ('priority', 'assigned_to', 'is_completed', 'title', )
+    }
 
