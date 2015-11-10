@@ -18,6 +18,7 @@ from cosinnus.models.tagged import BaseTagObject
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.models.widget import WidgetConfig
 from django.contrib.auth import logout
+from cosinnus.utils.permissions import check_user_integrated_portal_member
 
 
 def delete_userprofile(user):
@@ -129,6 +130,17 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
 
     def get_success_url(self):
         return reverse('cosinnus:profile-detail')
+    
+    def post(self, request, *args, **kwargs):
+        """ if user changed his email, check if user is member of an integrated portal, 
+            and if so ignore that change """
+        self.object = self.get_object()
+        user = self.object.user
+        if request.POST.get('user-email', user.email) != user.email and check_user_integrated_portal_member(user):
+            messages.warning(request, _('Your user account is associated with an integrated Portal. This account\'s email address is fixed and therefore was left unchanged.'))
+            request.POST._mutable = True
+            request.POST['user-email'] = user.email
+        return super(UserProfileUpdateView, self).post(request, *args, **kwargs)
     
     def form_valid(self, form):
         # security catch to disallow "nobody" privacy values of users

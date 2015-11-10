@@ -1,52 +1,52 @@
 {% load i18n static cosinnus_tags %}
 
+{% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+	<button type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:profile-detail' %}">
+	    <ul class="media-list">
+	        <li class="media">
+	            {% if view == "my_profile" %}
+	                <a class="pull-left">
+	                    <i class="fa fa-user"></i>
+	                </a>
+	                <a class="pull-right" href="#">
+	                    <i class="fa fa-caret-right"></i>
+	                </a>
+	            {% elif view == "edit_profile" %}
+	               <a class="pull-left">
+	                    <i class="fa fa-reply"></i>
+	                </a>
+	            {% else %}
+	                <a class="pull-left">
+	                    <i class="fa fa-user"></i>
+	                </a>
+	            {% endif %}
+	            <div class="media-body">
+	                {% trans "About me" %}
+	            </div>
+	        </li>
+	    </ul>
+	</button>
+	
+	<button type="button" class="btn w100 btn-{% if view == "edit_profile" %}extra-{% endif %}emphasized fine-space" href="{% url 'cosinnus:profile-edit' %}">
+	    <ul class="media-list">
+	        <li class="media">
+	           <a class="pull-left">
+	                <i class="fa fa-pencil"></i>
+	            </a>
+	            {% if view == "edit_profile" %}
+	                <a class="pull-right" href="#">
+	                    <i class="fa fa-caret-right"></i>
+	                </a>
+	            {% endif %}
+	            <div class="media-body">
+	                {% trans "Edit Profile" %}
+	            </div>
+	        </li>
+	    </ul>
+	</button>
+{% endif %}
 
-<button type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:profile-detail' %}">
-    <ul class="media-list">
-        <li class="media">
-            {% if view == "my_profile" %}
-                <a class="pull-left">
-                    <i class="fa fa-user"></i>
-                </a>
-                <a class="pull-right" href="#">
-                    <i class="fa fa-caret-right"></i>
-                </a>
-            {% elif view == "edit_profile" %}
-               <a class="pull-left">
-                    <i class="fa fa-reply"></i>
-                </a>
-            {% else %}
-                <a class="pull-left">
-                    <i class="fa fa-user"></i>
-                </a>
-            {% endif %}
-            <div class="media-body">
-                {% trans "About me" %}
-            </div>
-        </li>
-    </ul>
-</button>
-
-
-<button type="button" class="btn w100 btn-{% if view == "edit_profile" %}extra-{% endif %}emphasized fine-space" href="{% url 'cosinnus:profile-edit' %}">
-    <ul class="media-list">
-        <li class="media">
-           <a class="pull-left">
-                <i class="fa fa-pencil"></i>
-            </a>
-            {% if view == "edit_profile" %}
-                <a class="pull-right" href="#">
-                    <i class="fa fa-caret-right"></i>
-                </a>
-            {% endif %}
-            <div class="media-body">
-                {% trans "Edit Profile" %}
-            </div>
-        </li>
-    </ul>
-</button>
-
-<button type="button" class="btn w100 btn-{% if view == "edit_notifications" %}extra-{% endif %}emphasized fine-space" href="{% url 'cosinnus:notifications' %}">
+<button type="button" class="btn w100 btn-{% if view == "edit_notifications" %}extra-{% endif %}emphasized {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}fine-space{% endif %}" href="{% url 'cosinnus:notifications' %}">
     <ul class="media-list">
         <li class="media">
            <a class="pull-left">
@@ -64,41 +64,42 @@
     </ul>
 </button>
 
-
-<button type="button" class="btn w100 btn-{% if view == "change_password" %}extra-{% endif %}emphasized regular-space" href="{% url 'password_change' %}">
-    <ul class="media-list">
-        <li class="media">
-           <a class="pull-left">
-                <i class="fa fa-lock"></i>
-            </a>
-            {% if view == "change_password" %}
-                <a class="pull-right" href="#">
-                    <i class="fa fa-caret-right"></i>
-                </a>
-            {% endif %}
-            <div class="media-body">
-                {% trans "Change password" %}
-            </div>
-        </li>
-    </ul>
-</button>
-
-{% if view == "edit_profile" or view == "delete_profile" %}
-<button type="button" class="btn w100 btn-{% if view == "delete_profile" %}extra-{% endif %}emphasized regular-space" href="{% url 'cosinnus:profile-delete' %}">
-    <ul class="media-list">
-        <li class="media">
-           <a class="pull-left">
-                <i class="fa fa-times"></i>
-            </a>
-            {% if view == "delete_profile" %}
-                <a class="pull-right" href="#">
-                    <i class="fa fa-caret-right"></i>
-                </a>
-            {% endif %}
-            <div class="media-body">
-                {% trans "Delete profile" %}
-            </div>
-        </li>
-    </ul>
-</button>
+{% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+	<button type="button" class="btn w100 btn-{% if view == "change_password" %}extra-{% endif %}emphasized regular-space" href="{% url 'password_change' %}">
+	    <ul class="media-list">
+	        <li class="media">
+	           <a class="pull-left">
+	                <i class="fa fa-lock"></i>
+	            </a>
+	            {% if view == "change_password" %}
+	                <a class="pull-right" href="#">
+	                    <i class="fa fa-caret-right"></i>
+	                </a>
+	            {% endif %}
+	            <div class="media-body">
+	                {% trans "Change password" %}
+	            </div>
+	        </li>
+	    </ul>
+	</button>
+	
+	{% if view == "edit_profile" or view == "delete_profile" %}
+	<button type="button" class="btn w100 btn-{% if view == "delete_profile" %}extra-{% endif %}emphasized regular-space" href="{% url 'cosinnus:profile-delete' %}">
+	    <ul class="media-list">
+	        <li class="media">
+	           <a class="pull-left">
+	                <i class="fa fa-times"></i>
+	            </a>
+	            {% if view == "delete_profile" %}
+	                <a class="pull-right" href="#">
+	                    <i class="fa fa-caret-right"></i>
+	                </a>
+	            {% endif %}
+	            <div class="media-body">
+	                {% trans "Delete profile" %}
+	            </div>
+	        </li>
+	    </ul>
+	</button>
+	{% endif %}
 {% endif %}
