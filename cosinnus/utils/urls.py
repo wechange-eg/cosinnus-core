@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, NoReverseMatch
 from django.utils.importlib import import_module
 from django.db.models.loading import get_model
 
@@ -62,3 +62,13 @@ def get_domain_for_portal(portal):
         domain = '%s://%s' % (protocol, portal.site.domain)
         cache.set(_PORTAL_PROTOCOL_CACHE_KEY % portal.id, domain) # 5 minutes is okay here
     return domain
+
+
+def get_non_cms_root_url():
+    """ Tries to get a safe non-cms root URL to redirect to.
+        Will attempt the stream activity page first. If cosinnus_stream is not installed,
+        will redirect to the projects page. """
+    try:
+        return reverse('cosinnus:my_stream')
+    except NoReverseMatch:
+        return reverse('cosinnus:group-list')
