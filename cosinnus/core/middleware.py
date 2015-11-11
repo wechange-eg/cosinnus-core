@@ -43,6 +43,9 @@ def CosinnusPermanentRedirect():
 # these URLs are allowed to be accessed for anonymous accounts, even when everything else
 # is locked down. all integrated-API related URLs and all login/logout URLs should be in here!
 LOGIN_URLS = [
+    '/admin/',
+    '/admin/login/',
+    '/admin/logout/',
     '/login/',
     '/integrated/login/',
     '/integrated/logout/',
