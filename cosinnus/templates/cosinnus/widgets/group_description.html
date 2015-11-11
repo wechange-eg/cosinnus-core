@@ -1,6 +1,6 @@
-{% load i18n %}
+{% load i18n cosinnus_tags %}
 {% if group %}
-  <div class="well">{{ group.description|safe }}</div>
+  <div class="well">{{ group.description|textfield }}</div>
 {% else %}
   {{ no_data }}
 {% endif %}

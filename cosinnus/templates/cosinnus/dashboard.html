@@ -164,7 +164,8 @@
                     {% endwith %}
                     
                     {% if group.description and group.description|length > 0 %}
-                        {{ group.description|safe }}
+                        <p></p>
+                        <p>{{ group.description|textfield }}</p>
                     {% else %}
                         ({% trans "No Description set" %})
                     {% endif %}

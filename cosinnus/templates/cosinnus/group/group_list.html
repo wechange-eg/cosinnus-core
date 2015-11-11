@@ -135,7 +135,7 @@
 	            <div>
 		            {% if group.description and group.description|length > 0 %}
 			            <div class="media-body well">
-		                    {{ group.description|safe }}
+		                    <p>{{ group.description|textfield }}</p>
 			            </div>
 		            {% endif %}
 		            

@@ -33,6 +33,7 @@ from django.utils.encoding import force_text
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.template.defaultfilters import linebreaksbr, urlizetrunc
 logger = logging.getLogger('cosinnus')
 
 register = template.Library()
@@ -672,4 +673,11 @@ def addstr(arg1, arg2):
 def is_integrated_portal():
     """ Returns True if this portal is running in integrated mode for user auth """
     return getattr(settings, 'COSINNUS_IS_INTEGRATED_PORTAL', False)
+
+
+@register.filter
+def textfield(field):
+    """ Renders a textfield's text safely with escaping, but retains linebreaks 
+        and formats URLs as target="_blank" links. """
+    return url_target_blank(urlizetrunc(linebreaksbr(field), 25))
 
