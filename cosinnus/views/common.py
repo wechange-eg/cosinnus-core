@@ -10,6 +10,7 @@ from cosinnus.conf import settings
 from django.shortcuts import render_to_response
 
 from cosinnus.utils.context_processors import cosinnus as cosinnus_context
+from cosinnus.utils.urls import safe_redirect
 
 class IndexView(RedirectView):
     url = reverse_lazy('cosinnus:group-list')
@@ -62,7 +63,7 @@ class SwitchLanguageView(RedirectView):
         return super(SwitchLanguageView, self).get(request, *args, **kwargs)
         
     def get_redirect_url(self, **kwargs):
-        return self.request.GET.get('next', self.request.META.get('HTTP_REFERER', '/'))
+        return safe_redirect(self.request.GET.get('next', self.request.META.get('HTTP_REFERER', '/')), self.request)
         
 
 switch_language = SwitchLanguageView.as_view()
