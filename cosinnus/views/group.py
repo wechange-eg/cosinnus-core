@@ -36,7 +36,7 @@ from cosinnus.core.registries.group_models import group_model_registry
 from multiform.forms import InvalidArgument
 
 from cosinnus.forms.tagged import get_form  # circular import
-from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.utils.urls import group_aware_reverse, get_non_cms_root_url
 from cosinnus.models.tagged import BaseTagObject
 from django.shortcuts import redirect, get_object_or_404
 from django.http.response import Http404
@@ -761,7 +761,7 @@ class ActivateOrDeactivateGroupView(TemplateView):
                 messages.warning(self.request, _('This project/group is already active!'))
             else:
                 messages.warning(self.request, _('This project/group is already inactive!'))
-            return redirect(reverse('cosinnus:user-dashboard'))
+            return redirect(get_non_cms_root_url())
             
         self.group = group
         return super(ActivateOrDeactivateGroupView, self).dispatch(request, *args, **kwargs)
@@ -775,7 +775,7 @@ class ActivateOrDeactivateGroupView(TemplateView):
             return redirect(self.group.get_absolute_url())
         else:
             messages.success(request, self.message_success_deactivate % {'group_name': self.group.name})
-            return redirect(reverse('cosinnus:user-dashboard'))
+            return redirect(get_non_cms_root_url())
     
     def get_context_data(self, **kwargs):
         context = super(ActivateOrDeactivateGroupView, self).get_context_data(**kwargs)
