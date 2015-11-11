@@ -62,7 +62,7 @@
 	                            <i class="fa fa-chevron-down"></i>
 	                        </a>
 	                        {% endcomment %}
-	                        {% if not member == user %}
+	                        {% if not member == user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
 	                        <a class="pull-right" href="{% url 'postman_write' recipients=user.username %}" title="{% trans "Send Message" %}">
 	                            <i class="fa fa-envelope"></i>
 	                        </a>

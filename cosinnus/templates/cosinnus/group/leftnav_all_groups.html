@@ -41,9 +41,11 @@
 {% endif %}
 
 {% if current_page == "portaladminlist" or current_page == "userlist" %}
-    {% captureas href %}{% url 'cosinnus:user-list' %}{% endcaptureas %}
-    {% captureas label %}{% trans "All users" %}{% endcaptureas %}
-    {% include "cosinnus/leftnav_button.html" with active=is_userlist extra_classes="fine-space" icon="fa-user" label=label href=href  %}
+	{% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+	    {% captureas href %}{% url 'cosinnus:user-list' %}{% endcaptureas %}
+	    {% captureas label %}{% trans "All users" %}{% endcaptureas %}
+	    {% include "cosinnus/leftnav_button.html" with active=is_userlist extra_classes="fine-space" icon="fa-user" label=label href=href  %}
+    {% endif %}
     
     {% captureas href %}{% url 'cosinnus:portal-admin-list' %}{% endcaptureas %}
     {% captureas label %}{% trans "Portal Administrators" %}{% endcaptureas %}
