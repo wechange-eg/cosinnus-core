@@ -387,7 +387,7 @@
 				        
 				        
 				    	{% if group.public %}
-				    		{% if not user.is_authenticated or not user.pk in group.members %}
+				    		{% if user.is_authenticated and not user.pk in group.members %}
 				    			<p>
 				    				{% trans "or you can:" %}
 				    			</p>
