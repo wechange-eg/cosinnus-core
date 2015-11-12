@@ -267,7 +267,7 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
         self.group_type = group_class.GROUP_MODEL_TYPE
         
         model = group_class or self.model
-        if self.request.user.is_authenticated():
+        if settings.COSINNUS_SHOW_PRIVATE_GROUPS_FOR_ANONYMOUS_USERS or self.request.user.is_authenticated():
             # special case for the group-list: we can see inactive groups here that we are an admin of
             regular_groups = model.objects.get_cached()
             my_inactive_groups = model.objects.filter(portal_id=CosinnusPortal.get_current().id, is_active=False)
