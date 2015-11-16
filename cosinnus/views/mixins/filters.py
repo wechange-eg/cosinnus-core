@@ -23,7 +23,8 @@ class CosinnusFilterMixin(FilterMixin):
         filterset_class = self.get_filterset_class()
         kwargs = {
             'data': self.request.GET or None,
-            'queryset': base_qs
+            'queryset': base_qs,
+            'group': getattr(self, 'group', None)
         }
         self.filter = filterset_class(**kwargs)
         qs = self.filter.qs
@@ -67,9 +68,12 @@ class CosinnusFilterMixin(FilterMixin):
 
 class CosinnusFilterSet(FilterSet):
     
-    def __init__(self, data=None, queryset=None, prefix=None, strict=None):
+    def __init__(self, data=None, queryset=None, prefix=None, strict=None, group=None):
         """ Add a reference to the form to the form's widgets """
+        self.group = group
         super(CosinnusFilterSet, self).__init__(data, queryset, prefix, strict)
+        for name, filter_obj in self.filters.items():
+            filter_obj.group = group
         for field in self.form.fields.values():
             field.widget.form_instance = self.form
     

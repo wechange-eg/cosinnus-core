@@ -127,13 +127,22 @@ class SelectCreatorWidget(SelectUserWidget):
     skip_empty_options = True
     
 class AllObjectsFilter(ChoiceFilter):
+    
     @property
     def field(self):
-        qs = self.model._default_manager.distinct()
-        qs = qs.order_by(self.name).values_list(self.name, flat=True)
-        object_qs = getattr(self.model, self.name).field.rel.to._default_manager.filter(id__in=qs)
+        """ Choices for this filter field are all related objects in this group that are actually
+            assigned to any objects in this group. 
+            Example: All users that have created a TodoEntry in the displayed group. """
+        
+        filter_field_objects_qs = self.model._default_manager.distinct()
+        group = getattr(self, 'group', None)
+        if group:
+            filter_field_objects_qs = filter_field_objects_qs.filter(group=self.group)
+        
+        group_object_ids = filter_field_objects_qs.order_by(self.name).values_list(self.name, flat=True)
+        object_qs = getattr(self.model, self.name).field.rel.to._default_manager.filter(id__in=group_object_ids)
         self.extra['choices'] = [(o.id, o) for o in object_qs]
-        if None in qs:
+        if None in group_object_ids:
             self.extra['choices'].insert(0, (None, _("Not assigned")))
         return super(AllObjectsFilter, self).field
     
