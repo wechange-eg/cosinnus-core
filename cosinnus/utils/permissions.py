@@ -54,7 +54,7 @@ def check_object_read_access(obj, user):
         group = obj
         is_member = check_ug_membership(user, group)
         is_admin = check_ug_admin(user, group) 
-        return group.public or check_user_superuser(user) or is_member or is_admin
+        return (group.public and user.is_authenticated()) or check_user_superuser(user) or is_member or is_admin
     
     elif issubclass(obj.__class__, BaseTaggableObjectModel):
         group = obj.group

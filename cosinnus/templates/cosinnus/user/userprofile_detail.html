@@ -27,7 +27,7 @@
 			    <div class="col-sm-9 bottom-align large-space">
 			        <legend class="large-space">{{ this_user|full_name }}</legend>
 			
-			        {% if request.user.is_authenticated and request.user == this_user %}
+			        {% if request.user.is_authenticated and request.user == this_user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
 			            <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:profile-edit' %}">
                             <ul class="media-list">
                                 <li class="media">
@@ -69,6 +69,7 @@
 			                </ul>
 			            </button>
 			             {% endcomment %}
+			            {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
 			            <button type="button" class="btn btn-emphasized" href="{% url 'postman_write' recipients=this_user.username %}">
 			                <ul class="media-list">
 			                    <li class="media">
@@ -81,6 +82,7 @@
 			                    </li>
 			                </ul>
 			            </button>
+			            {% endif %}
 			            
 			            {% include 'cosinnus/feedback/report_button_btn.html' with object=this_user %}
 			            

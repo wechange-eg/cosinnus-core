@@ -40,7 +40,8 @@ from cosinnus.utils.urls import group_aware_reverse, get_non_cms_root_url
 from cosinnus.models.tagged import BaseTagObject
 from django.shortcuts import redirect, get_object_or_404
 from django.http.response import Http404
-from cosinnus.utils.permissions import check_ug_admin, check_user_superuser
+from cosinnus.utils.permissions import check_ug_admin, check_user_superuser,\
+    check_object_read_access
 from cosinnus.views.widget import GroupDashboard
 from cosinnus.views.microsite import GroupMicrositeView
 from django.views.generic.base import View
@@ -266,7 +267,7 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
         self.group_type = group_class.GROUP_MODEL_TYPE
         
         model = group_class or self.model
-        if self.request.user.is_authenticated():
+        if settings.COSINNUS_SHOW_PRIVATE_GROUPS_FOR_ANONYMOUS_USERS or self.request.user.is_authenticated():
             # special case for the group-list: we can see inactive groups here that we are an admin of
             regular_groups = model.objects.get_cached()
             my_inactive_groups = model.objects.filter(portal_id=CosinnusPortal.get_current().id, is_active=False)
@@ -806,6 +807,11 @@ class GroupStartpage(View):
         if not getattr(settings, 'COSINNUS_MICROSITES_ENABLED', False):
             return False
         
+        if not request.user.is_authenticated():
+            return True
+        if not check_object_read_access(self.group, request.user):
+            return True
+        
         # check if this session user has clicked on "browse" for this group before
         # and if so, never let him see that groups microsite again
         group_session_browse_key = 'group__browse__%s' % self.group.slug
@@ -818,7 +824,7 @@ class GroupStartpage(View):
         
         if self.request.GET.get('microsite', None):
             return True
-        if not request.user.is_authenticated() or not request.user.pk in self.group.members:
+        if not request.user.pk in self.group.members:
             return True
         return False
     

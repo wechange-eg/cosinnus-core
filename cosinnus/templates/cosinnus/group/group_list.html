@@ -85,7 +85,7 @@
 	            <div class="btn btn-{% if group.is_active and user.is_authenticated and user.pk in members or group.public and group.is_active %}emphasized{% else %}default{% endif %} w100">
 	                <ul class="media-list">
 	                    <li class="media">
-	                        {% if not group.public and not user.pk in members and not user|is_superuser or not group.is_active %}
+	                        {% if not group.public and not user.pk in members and not user|is_superuser or not group.is_active or SETTINGS.COSINNUS_MICROSITES_ENABLED %}
 	                            <span class="pull-left">
 	                               {% include "cosinnus/group/group_avatar_image.html" with group=group %}
 	                            </span>
@@ -120,7 +120,7 @@
 	                            </span>
 	                            {% if not group.is_active %}
 	                            	{% trans "(Inactive)" %} {{ group.name }}
-                                {% elif group.public or user.pk in members or user|is_superuser %}
+                                {% elif group.public or user.pk in members or user|is_superuser or SETTINGS.COSINNUS_MICROSITES_ENABLED %}
 		                            <a href="{{ group_url }}">
 		                                {{ group.name }}
 		                            </a>

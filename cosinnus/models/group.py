@@ -715,7 +715,7 @@ class CosinnusGroup(models.Model):
 
     @classmethod
     def _clear_cache(self, slug=None, slugs=None, group=None):
-        slugs = set([s for s in slugs])
+        slugs = set([s for s in slugs]) if slugs else set()
         if slug: slugs.add(slug)
         if group: slugs.add(group.slug)
         keys = [

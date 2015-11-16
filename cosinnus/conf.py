@@ -200,6 +200,9 @@ class CosinnusConf(AppConf):
     #: How long the perm redirect cache should last (1 week, because it organizes itself)
     PERMANENT_REDIRECT_CACHE_TIMEOUT = 60 * 60 * 24 * 7
     
+    # if set to True, private groups will be shown in group lists, even for non-logged in users
+    SHOW_PRIVATE_GROUPS_FOR_ANONYMOUS_USERS = True
+    
     #: The ModelForm that will be used to modify the :attr:`TAG_OBJECT_MODEL`
     TAG_OBJECT_FORM = 'cosinnus.forms.tagged.TagObjectForm'
 
