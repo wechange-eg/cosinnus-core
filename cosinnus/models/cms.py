@@ -19,7 +19,7 @@ class CosinnusMicropage(models.Model):
     title = models.CharField(_('Title'), max_length=100)
     text = HTMLField(verbose_name=_('Text'), blank=True)
     last_edited = models.DateTimeField(verbose_name=_('Last edited'), editable=False,
-        default=now, auto_now_add=True)
+        auto_now=True)
     last_edited_by = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Last edited by'),
         editable=False, on_delete=models.PROTECT, null=True, related_name='%(app_label)s_%(class)s_set')
     

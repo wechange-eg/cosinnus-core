@@ -7,6 +7,7 @@ from django.db.models.loading import get_model
 
 from cosinnus.conf import settings
 from django.core.cache import cache
+from django.utils.http import is_safe_url
         
 _PORTAL_PROTOCOL_CACHE_KEY = 'cosinnus/core/portal/%d/protocol'
         
@@ -72,3 +73,11 @@ def get_non_cms_root_url():
         return reverse('cosinnus:my_stream')
     except NoReverseMatch:
         return reverse('cosinnus:group-list')
+
+
+def safe_redirect(url, request):
+    """ Will return the supplied URL if it is safe or a safe wechange root URL """
+    # Ensure the user-originating redirection url is safe.
+    if not is_safe_url(url=url, host=request.get_host()):
+        url = get_non_cms_root_url()
+    return url

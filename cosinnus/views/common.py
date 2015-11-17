@@ -4,13 +4,13 @@ from __future__ import unicode_literals
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import RedirectView
 from django.contrib import messages
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, LANGUAGE_SESSION_KEY
 
 from cosinnus.conf import settings
-from django.views.generic.base import TemplateView
 from django.shortcuts import render_to_response
 
 from cosinnus.utils.context_processors import cosinnus as cosinnus_context
+from cosinnus.utils.urls import safe_redirect
 
 class IndexView(RedirectView):
     url = reverse_lazy('cosinnus:group-list')
@@ -55,13 +55,15 @@ class SwitchLanguageView(RedirectView):
         if not language or language not in dict(settings.LANGUAGES).keys():
             messages.error(request, _('The language "%s" is not supported' % language))
             
+        request.session[LANGUAGE_SESSION_KEY] = language
         request.session['django_language'] = language
+        request.LANGUAGE_CODE = language
         #messages.success(request, _('Language was switched successfully.'))
         
         return super(SwitchLanguageView, self).get(request, *args, **kwargs)
         
     def get_redirect_url(self, **kwargs):
-        return self.request.GET.get('next', self.request.META.get('HTTP_REFERER', '/'))
+        return safe_redirect(self.request.GET.get('next', self.request.META.get('HTTP_REFERER', '/')), self.request)
         
 
 switch_language = SwitchLanguageView.as_view()

@@ -15,10 +15,12 @@ class WidgetRegistry(DictBaseRegistry):
     _unresolved = defaultdict(set)
 
     def register(self, app_name, widget):
-        from cosinnus.utils.dashboard import DashboardWidget
         if isinstance(widget, six.string_types):
             self._unresolved[app_name].add(widget)
-        elif issubclass(widget, DashboardWidget):
+            return
+        
+        from cosinnus.utils.dashboard import DashboardWidget
+        if issubclass(widget, DashboardWidget):
             widget_name = widget.get_widget_name()
             if app_name in self:
                 self[app_name][widget_name] = widget

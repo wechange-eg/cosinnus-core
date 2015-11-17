@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 import requests
 import logging
+from cosinnus.utils.urls import safe_redirect
 logger = logging.getLogger('cosinnus')
 
 from django.conf import settings
@@ -73,7 +74,7 @@ def login_integrated(request, authentication_form=AuthenticationForm):
                 request.session['django_language'] = lang
                 request.session.save()
             
-            return redirect(request.POST.get('next', '/'))
+            return redirect(safe_redirect(request.POST.get('next', '/'), request))
         else:
             return HttpResponseNotAllowed('POST', content='Sorry, we could not connect your user account! Please contact an administrator!')
     else:

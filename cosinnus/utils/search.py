@@ -71,7 +71,7 @@ class TemplateResolveMixin(object):
 
         resolve_data = {
             'app_label': obj._meta.app_label,
-            'model_name': obj._meta.module_name,
+            'model_name': obj._meta.model_name,
             'field_name': self.instance_name,
         }
         resolved_template_names = [tn.format(**resolve_data) for tn in template_names]

@@ -6,8 +6,8 @@
 import django
 
 from django.conf.urls import patterns, url
-from cosinnus.forms.user import UserEmailLoginForm
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal
+from cosinnus.forms.user import UserEmailLoginForm
 
 
 # regular auth URLs for non-integrated portals

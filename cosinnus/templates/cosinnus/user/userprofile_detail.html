@@ -112,7 +112,7 @@
 			        <div class="content-box large-space">
 			            {% if profile.description %} 
 			            <p class="transparent">
-			                {{ profile.description|striptags|safe }}
+			                {{ profile.description|textfield }}
 			            </p>
 			            {% endif %}
 			            

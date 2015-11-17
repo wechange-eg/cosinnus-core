@@ -40,8 +40,8 @@ class UserCreationForm(DjUserCreationForm):
             'last_name',
         )
     
-    email = forms.EmailField(_('email address'), required=True) 
-    first_name = forms.CharField(_('first name'), required=True)  
+    email = forms.EmailField(label=_('email address'), required=True) 
+    first_name = forms.CharField(label=_('first name'), required=True)  
     
     if not settings.DEBUG and not settings.TESTING and not settings.COSINNUS_IS_INTEGRATED_PORTAL: 
         captcha = ReCaptchaField(attrs={'theme': 'clean'}, required=settings.DEBUG == False)

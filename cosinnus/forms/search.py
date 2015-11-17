@@ -31,7 +31,7 @@ def taggable_model_choices(using=DEFAULT_ALIAS):
     """
     choices = [
         (
-            "%s.%s" % (m._meta.app_label, m._meta.module_name),
+            "%s.%s" % (m._meta.app_label, m._meta.model_name),
             capfirst(smart_text(m._meta.verbose_name_plural))
         ) for m in filter(
             lambda m: not m._meta.abstract and issubclass(m, BaseTaggableObjectModel),

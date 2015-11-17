@@ -186,7 +186,7 @@
                    <div class="content-box transparent_p">
                        <legend>{{ micropage.title }}</legend>
                        {% if micropage.text and micropage.text|length > 0 %}
-                            {{ micropage.text|safe }}
+                            {{ micropage.text|textfield }}
                        {% else %}
                            ({% trans "No informations set" %})
                        {% endif %}
@@ -197,7 +197,7 @@
                    <div class="content-box transparent_p">
                        <legend>{% trans "Description" %}</legend>
                        {% if group.description %}
-                           <p>{{ group.description|safe }}</p>
+                           <p>{{ group.description|textfield }}</p>
                        {% else %}
                            <p>({% trans "No informations set" %})</p>
                        {% endif %}
@@ -224,7 +224,9 @@
     {% for item_inline in item_inlines %}
         <a name="micro_{{ item_inline.app_name}}"></a>
         <div class="{% if item_inline.app_name == 'todo' %}app-todos{% elif item_inline.app_name == 'note' %}app-main{% elif item_inline.app_name == 'file' %}app-files{% elif item_inline.app_name == 'event' %}app-calendar{% elif item_inline.app_name %}app-{{ item_inline.app_name }}{% else %}app-main{% endif %}">
-            {{ item_inline.content|safe }}
+            {# This used to be {{ item_inline.content|safe }}, but the |safe was removed, because the content is NOT safe! #}
+            {# If this isn't rendered correctly, you now know why! #}
+            {{ item_inline.content }} 
         </div>
         
         <div class="row large-space">

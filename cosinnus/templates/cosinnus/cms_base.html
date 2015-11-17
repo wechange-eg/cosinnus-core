@@ -1,8 +1,11 @@
 {% extends "cosinnus/base.html" %}
-{% load cms_tags %}
+{% load wagtailuserbar %}
 
-{% block page_title %}{% page_attribute "page_title" %}{{ block.super }}{% endblock %}
+{% block page_title %}{{ page.title }}{{ block.super }}{% endblock %}
 
 {% block body_attributes %}class="cosinnus-cms"{% endblock body_attributes %}
 
 {% block container_classes %}{{ cosinnus_css_class }}{% endblock container_classes %}
+
+{# Be sure to call {{ block.super }} in extending templates! #}
+{% block main_page %}{% wagtailuserbar %}{% endblock main_page %}
