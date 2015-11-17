@@ -1,0 +1,174 @@
+// Only this file and maybe the logo image should be needed to customize for different installations.
+
+
+.neww-standard-scheme() {
+	// The colors are from Tobi's 01b_NEWW_Color-Scheme.pdf
+	// Farbklima Netzwerk Wachstumswende
+	// no other colors should be used in the whole project
+
+	// main color and news
+	@app-main-color: #16778D;
+	@app-main-color-dark: #104A59;
+	@app-main-color-light: #CBE7ED;
+
+	@app-main-color-yes: #779B48;
+	@app-main-color-maybe: #EFA02D;
+	@app-main-color-no: #E55C55;
+
+	// Calendar
+	@app-calendar-color: #779B48;
+	@app-calendar-color-dark: #4C622F;
+	@app-calendar-color-light: #E1EDD2;
+
+	// Files
+	@app-files-color: #14A085;
+	@app-files-color-dark: #0A5D4E;
+	@app-files-color-light: #B0E0D7;
+
+	// Documents
+	@app-documents-color: #009EE3;
+	@app-documents-color-dark: #007999;
+	@app-documents-color-light: #D5F3FF;
+
+	// Todos
+	@app-todos-color: #EFA02D;
+	@app-todos-color-dark: #AD7E2C;
+	@app-todos-color-light: #FAEBCD;
+
+	// Etherpad
+	@app-etherpad-color: #E55C55;
+	@app-etherpad-color-dark: #933D39;
+	@app-etherpad-color-light: #EDE2E1;
+
+	// Neutral
+	@app-neutral-color: #949494;
+	@app-neutral-color-dark: #333333;
+	@app-neutral-color-light: #DBDBDB;
+	@app-neutral-color-white: #FFFFFF;
+
+
+	body {
+		font-family: Verdana, Geneva, sans-serif;
+
+
+		background: #43757e; /* Old browsers */
+		background: -moz-linear-gradient(top, #43757e 0%, #a6bab7 100%) fixed; /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#43757e), color-stop(100%,#a6bab7)) fixed; /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top, #43757e 0%,#a6bab7 100%) fixed; /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top, #43757e 0%,#a6bab7 100%) fixed; /* Opera 11.10+ */
+		background: -ms-linear-gradient(top, #43757e 0%,#a6bab7 100%) fixed; /* IE10+ */
+		background: linear-gradient(to bottom, #43757e 0%,#a6bab7 100%) fixed; /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#43757e', endColorstr='#a6bab7',GradientType=0 ) fixed; /* IE6-9 */
+
+//		background-image: url("../images/background.jpg");
+	}
+
+}
+
+
+.pink-color-scheme() {
+	// eight years old riding a unicorn
+
+	// main color and news
+	@app-main-color: #FFBAFA;
+	@app-main-color-dark: #00D7C6;
+	@app-main-color-light: #FFFFFF;
+
+	@app-main-color-yes: #00FF00;
+	@app-main-color-maybe: #FFFF00;
+	@app-main-color-no: #fd0000;
+
+	// Calendar
+	@app-calendar-color: @app-main-color;
+	@app-calendar-color-dark: @app-main-color-dark;
+	@app-calendar-color-light: @app-main-color-light;
+
+	// Files
+	@app-files-color: @app-calendar-color;
+	@app-files-color-dark: @app-calendar-color-dark;
+	@app-files-color-light: @app-calendar-color-light;
+
+	// Documents
+	@app-documents-color: @app-calendar-color;
+	@app-documents-color-dark: @app-calendar-color-dark;
+	@app-documents-color-light: @app-calendar-color-light;
+
+	// Todos
+	@app-todos-color: @app-calendar-color;
+	@app-todos-color-dark: @app-calendar-color-dark;
+	@app-todos-color-light: @app-calendar-color-light;
+
+	// Etherpad
+	@app-etherpad-color: @app-calendar-color;
+	@app-etherpad-color-dark: @app-calendar-color-dark;
+	@app-etherpad-color-light: @app-calendar-color-light;
+
+	// Neutral
+	@app-neutral-color: #FFA5D3;
+	@app-neutral-color-dark: #FF86C5;
+	@app-neutral-color-light: #A2D5E3;
+	@app-neutral-color-white: #E5F6F8;
+
+	body {
+		font-family: "Comic Sans MS";
+
+		background-image: url("../images/magic-pony-django-wallpaper.png");
+	//	background-color: #FF56F2;
+
+	}
+	* {
+		border-radius: 2px !important;
+	}
+}
+
+
+.nerd-color-scheme() {
+	// Black and evil
+
+	// main color and news
+	@app-main-color: #16778D;
+	@app-main-color-dark: #104A59;
+	@app-main-color-light: #CBE7ED;
+
+	// Calendar
+	@app-calendar-color: #6F5D17;
+	@app-calendar-color-dark: #B79719;
+	@app-calendar-color-light: #9F841A;
+
+	// Files
+	@app-files-color: #14A085;
+	@app-files-color-dark: #0A5D4E;
+	@app-files-color-light: #9F841A;
+
+	// Documents
+	@app-documents-color: #009EE3;
+	@app-documents-color-dark: #007999;
+	@app-documents-color-light: #D5F3FF;
+
+	// Todos
+	@app-todos-color: #EFA02D;
+	@app-todos-color-dark: #AD7E2C;
+	@app-todos-color-light: #FAEBCD;
+
+	// Etherpad
+	@app-etherpad-color: #E55C55;
+	@app-etherpad-color-dark: #933D39;
+	@app-etherpad-color-light: #EDE2E1;
+
+	// Neutral
+	@app-neutral-color: #949494;
+	@app-neutral-color-dark: #FFF;
+	@app-neutral-color-light: #555;
+	@app-neutral-color-white: #000;
+
+	body {
+		font-family: Verdana, Geneva, sans-serif;
+
+		background-image: url("../images/tie-fighter.jpg");
+	}
+}
+
+
+.neww-standard-scheme();
+// .pink-color-scheme();
+

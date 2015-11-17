@@ -8,7 +8,7 @@
 //    that are clearfixed.
 // 2. The use of `table` rather than `block` is only necessary if using
 //    `:before` to contain the top-margins of child elements.
-@mixin clearfix() {
+.clearfix() {
   &:before,
   &:after {
     content: " "; /* 1 */
@@ -51,9 +51,9 @@
 		}
 
 		.multiline-ellipsis-realend {
-			color: $app-neutral-color-dark;
+			color: @app-neutral-color-dark;
 			a {
-				color: $app-neutral-color-dark;
+				color: @app-neutral-color-dark;
 				display: block;
 				padding-right: 7px;
 
@@ -62,7 +62,7 @@
 				background: -moz-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);			
 				background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
 				background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
-				background: linear-gradient(to right, rgba(255, 255, 255, 0), $app-neutral-color-light 50%, $app-neutral-color-light);
+				background: linear-gradient(to right, rgba(255, 255, 255, 0), @app-neutral-color-light 50%, @app-neutral-color-light);
 
 			}
 

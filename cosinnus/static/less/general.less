@@ -16,7 +16,7 @@ html {
 // spaces below full width elements
 body .fine-space,
 body .fine-space.form-control {
-	border-bottom: 1px solid $app-neutral-color-light;
+	border-bottom: 1px solid @app-neutral-color-light;
 }
 body .regular-space {
 	margin-bottom: 7px;
@@ -41,8 +41,8 @@ body .ultra-space {
 // the nice semi transparent box containing the content
 .content-box {
 	padding: 15px;
-	background-color:transparentize($app-neutral-color-light, 0.5);
-	@include clearfix();
+	background-color:fadeout(@app-neutral-color-light, 50);
+	.clearfix();
 }
 .content-box .btn.w100 {
 	text-align:left;
@@ -54,14 +54,14 @@ body .ultra-space {
 */
 .input-area {
 	margin: 0 0 0 0;
-	background-color: $app-neutral-color-white;
-	color: $app-neutral-color-dark;
+	background-color: @app-neutral-color-white;
+	color: @app-neutral-color-dark;
   list-style: none;
 	padding: 0;
-	@include clearfix();
+	.clearfix();
 
 	+ .input-area {
-		border-top: 1px solid $app-neutral-color-light;
+		border-top: 1px solid @app-neutral-color-light;
 	}
 
 	// single input fields
@@ -73,10 +73,10 @@ body .ultra-space {
 		float: left;
 		white-space: nowrap; // Keep icons next to select boxes
 
-		color: $app-neutral-color-dark;
+		color: @app-neutral-color-dark;
 
 		+ li {
-			border-left: 1px solid $app-neutral-color-light;
+			border-left: 1px solid @app-neutral-color-light;
 		}
 
 		&.w100 {
@@ -100,7 +100,7 @@ body .ultra-space {
 			text-decoration: underline;
 
 			> i {
-				color: $app-neutral-color-dark;
+				color: @app-neutral-color-dark;
 				font-size: 1.5em;
 				line-height: 25px;
 			}
@@ -109,7 +109,7 @@ body .ultra-space {
 		&.input-area-privacy-selector {
 			float: right;
 			a {
-				color: $app-neutral-color-dark;
+				color: @app-neutral-color-dark;
 
 				&:hover, &:active, &:focus {
 					text-decoration: none;
@@ -118,10 +118,10 @@ body .ultra-space {
 		}
 
 		&.input-area-lighter a i {
-			color: $app-neutral-color;
+			color: @app-neutral-color;
 
 			&:hover, &:active, &:focus {
-				color: $app-neutral-color-dark;
+				color: @app-neutral-color-dark;
 			}
 		}
 	}
@@ -143,11 +143,11 @@ body .ultra-space {
 #searchbar {
 	padding: 15px 15px 6px 10px;
 	white-space: nowrap;
-	color: $app-neutral-color-dark;
+	color: @app-neutral-color-dark;
 	font-size: 1.1em;
 }
 #searchbar.expanded {
-	background-color: $app-neutral-color-white;
+	background-color: @app-neutral-color-white;
 }
 #searchbar input {
 	width: 0px;
@@ -159,7 +159,7 @@ body .ultra-space {
 #searchbar.expanded input {
 	width: 125px;
 	transition: all 500ms linear;
-	color: $app-neutral-color-dark;
+	color: @app-neutral-color-dark;
 	box-shadow: none;
 }
 #searchbar i.fa-search {
@@ -169,12 +169,12 @@ body .ultra-space {
 
 // .fadedown
 .fadedown {
-	@include clearfix();
+	.clearfix();
 }
 
 p.navi-explanation {
 	background-color: transparent;
-	color: $app-neutral-color-white;
+	color: @app-neutral-color-white;
 	margin: 0;
 	padding: 0 0 8px 0;
 }
@@ -191,13 +191,13 @@ ul.errorlist {
 	padding: 0;
 	margin: 0;
 	clear: both;
-	background-color: $app-main-color-no;
+	background-color: @app-main-color-no;
 
 	li {
 		padding: 7px 10px 7px 10px;
 		margin: 0 0 0 18px;
 
-		color: $app-neutral-color-white;
+		color: @app-neutral-color-white;
 		line-height: 22px;
 		font-size: 14px;
 
@@ -216,36 +216,36 @@ ul.errorlist {
 
 
 
-@mixin generic-background-colors($light,$normal,$dark) {
+.generic-background-colors(@light,@normal,@dark) {
 	.app-background {
-		background-color: $normal;
+		background-color: @normal;
 	}
 	.app-background-light {
-		background-color: $light;
+		background-color: @light;
 	}
 	.app-background-dark {
-		background-color: $dark;
+		background-color: @dark;
 	}
 }
 
 
 .app-main {
-	@include generic-background-colors($app-main-color-light,$app-main-color,$app-main-color-dark);
+	.generic-background-colors(@app-main-color-light,@app-main-color,@app-main-color-dark);
 }
 .app-calendar {
-	@include generic-background-colors($app-calendar-color-light,$app-calendar-color,$app-calendar-color-dark);
+	.generic-background-colors(@app-calendar-color-light,@app-calendar-color,@app-calendar-color-dark);
 }
 .app-files {
-	@include generic-background-colors($app-files-color-light,$app-files-color,$app-files-color-dark);
+	.generic-background-colors(@app-files-color-light,@app-files-color,@app-files-color-dark);
 }
 .app-documents {
-	@include generic-background-colors($app-documents-color-light,$app-documents-color,$app-documents-color-dark);
+	.generic-background-colors(@app-documents-color-light,@app-documents-color,@app-documents-color-dark);
 }
 .app-todos {
-	@include generic-background-colors($app-todos-color-light,$app-todos-color,$app-todos-color-dark);
+	.generic-background-colors(@app-todos-color-light,@app-todos-color,@app-todos-color-dark);
 }
 .app-etherpad {
-	@include generic-background-colors($app-etherpad-color-light,$app-etherpad-color,$app-etherpad-color-dark);
+	.generic-background-colors(@app-etherpad-color-light,@app-etherpad-color,@app-etherpad-color-dark);
 }
 
 
@@ -277,7 +277,7 @@ ul.errorlist {
 }
 
 .comment-background {
-	background-color: $app-main-color-light !important;
+	background-color: @app-main-color-light !important;
 }
 .indented {
 	padding-left: 40px;
@@ -289,10 +289,10 @@ ul.errorlist {
 	text-decoration: underline !important;
 }
 .light-color {
-	color: $app-neutral-color-light !important;
+	color: @app-neutral-color-light !important;
 }
 .dark-color {
-	color: $app-neutral-color-dark !important;
+	color: @app-neutral-color-dark !important;
 }
 .small-padding {
 	padding: 3px 5px 3px 5px;
@@ -365,7 +365,7 @@ a.portal-inlink:hover img {
              -moz-border-radius-bottomleft: 4px;
                     border-top-left-radius: 4px;
                  border-bottom-left-radius: 4px;
-        background-color: $app-files-color;
+        background-color: @app-files-color;
         position: relative;
         overflow: hidden;
     }
@@ -388,7 +388,7 @@ a.portal-inlink:hover img {
 	    height: 100%;
         font-size: 100px;
         filter: alpha(opacity=0);
-        cursor: pointer;" 
+        cursor: pointer;
     }
 }
 

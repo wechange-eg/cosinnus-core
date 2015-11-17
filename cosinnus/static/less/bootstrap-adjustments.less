@@ -17,7 +17,7 @@ body.body-no-nav {
 /* Navbar at top of page */
 
 .navbar-fixed-top {
-	background-color:transparentize($app-neutral-color-white, 0.35);
+	background-color:fadeout(@app-neutral-color-white, 35);
 	border-bottom-width:2px;
 
 	.fa {
@@ -43,7 +43,7 @@ body.body-no-nav {
 		position: absolute;
 		right: 5px;
 		top: 10px;
-		background-color: $app-neutral-color-white;
+		background-color: @app-neutral-color-white;
 		border-radius: 1em;
 		padding: 0 0.5em;
 		font-size: 0.8em;
@@ -51,7 +51,7 @@ body.body-no-nav {
 
 	.navbar-collapse {
 		@media(max-width:767px){
-			background-color: $app-neutral-color-white;
+			background-color: @app-neutral-color-white;
 				ul {
 					margin-top: 0;
 					margin-bottom: 0;
@@ -60,9 +60,9 @@ body.body-no-nav {
 
 					li {
 						a:hover {
-							background-color: $app-neutral-color-light !important;
+							background-color: @app-neutral-color-light !important;
 						}
-						border-bottom: 1px solid $app-neutral-color;
+						border-bottom: 1px solid @app-neutral-color;
 						&.divider {
 							margin-top: 0;
 						}
@@ -72,12 +72,12 @@ body.body-no-nav {
 							input {
 								margin-top: 0;
 								width: 100%;
-								color: $app-neutral-color-dark;
+								color: @app-neutral-color-dark;
 								box-shadow: none;
 							}
 
 							&:hover {
-								background-color: $app-neutral-color-light !important;
+								background-color: @app-neutral-color-light !important;
 							}
 						}
 					}
@@ -94,10 +94,10 @@ body.body-no-nav {
 
 .breadcrumb a {
 	text-decoration: underline;
-	color: $app-neutral-color-light;
+	color: @app-neutral-color-light;
 }
 .breadcrumb a:hover {
-	color: $app-neutral-color-white;
+	color: @app-neutral-color-white;
 }
 
 // .form-control is a Bootstrap class for INPUT elements.
@@ -109,7 +109,7 @@ body.body-no-nav {
 	line-height: inherit;
 	min-height: 40px;
 	background-color: inherit;
-	color: $app-neutral-color-dark;
+	color: @app-neutral-color-dark;
 }
 .form-control:focus {
 	box-shadow: none;
@@ -131,15 +131,15 @@ body.body-no-nav {
 p, .white-content {
 	margin-bottom: 0;
 	padding: 8px;
-	background-color: $app-neutral-color-white;
-	color: $app-neutral-color-dark;
+	background-color: @app-neutral-color-white;
+	color: @app-neutral-color-dark;
 
 	a {
-		color: $app-main-color-dark;
+		color: @app-main-color-dark;
 		font-weight: bold;
 
 		&:focus, &:active, &:hover {
-			color: $app-main-color-dark;
+			color: @app-main-color-dark;
 			font-weight: bold;
 			text-decoration: underline;
 		}
@@ -151,7 +151,7 @@ p.transparent, .white-content.transparent {
 	margin: -4px 0 8px 0;
 
 	a {
-		color: $app-neutral-color-dark;
+		color: @app-neutral-color-dark;
 		text-decoration: underline;
 	}
 }
@@ -160,8 +160,8 @@ textarea {
 	width: 100%;
 	border-width: 0;
 	margin: 0;
-	background-color: $app-neutral-color-white;
-	color: $app-neutral-color-dark;
+	background-color: @app-neutral-color-white;
+	color: @app-neutral-color-dark;
 	resize: vertical;
 	height: 10em;
 	line-height: 1.5em;
@@ -185,20 +185,20 @@ textarea {
 	min-height: 62px;
 
 	&.alert-success {
-		color: $app-neutral-color-white;
-		background-color: $app-main-color-yes;
+		color: @app-neutral-color-white;
+		background-color: @app-main-color-yes;
 	}
 	&.alert-info {
-		color: $app-neutral-color-dark;
-		background-color:transparentize($app-neutral-color-light, 0.7);
+		color: @app-neutral-color-dark;
+		background-color:fadeout(@app-neutral-color-light, 70);
 	}
 	&.alert-warning {
-		color: $app-neutral-color-white;
-		background-color: $app-main-color-maybe;
+		color: @app-neutral-color-white;
+		background-color: @app-main-color-maybe;
 	}
 	&.alert-danger {
-		color: $app-neutral-color-white;
-		background-color: $app-main-color-no;
+		color: @app-neutral-color-white;
+		background-color: @app-main-color-no;
 	}
 
 	h4 {
@@ -237,30 +237,30 @@ ul.pagination {
 	margin-bottom: 0;
 
 	li {
-		background-color: $app-neutral-color-white;
+		background-color: @app-neutral-color-white;
 		border-width: 0;
 		margin-right: 5px;
 		display: inline-block;
 
 		a {
-			color: $app-neutral-color-dark;
+			color: @app-neutral-color-dark;
 			border-width: 0;
 		}
 		a:hover {
-			color: $app-neutral-color-white;
-			background-color: $app-neutral-color-dark;
+			color: @app-neutral-color-white;
+			background-color: @app-neutral-color-dark;
 		}
 	}
 	li.active {
 		> a {
-			background-color: $app-neutral-color-white;
-			color: $app-neutral-color-dark;
+			background-color: @app-neutral-color-white;
+			color: @app-neutral-color-dark;
 			font-weight: bold;
 			border-width: 0;
 		}
 		> a:hover {
-			color: $app-neutral-color-white;
-			background-color: $app-neutral-color-dark;
+			color: @app-neutral-color-white;
+			background-color: @app-neutral-color-dark;
 		}
 
 	}
@@ -270,7 +270,7 @@ ul.pagination {
 // Box with content from WYSIWYG-Editor
 .well {
 	border-width: 0;
-	background-color: $app-neutral-color-white;
+	background-color: @app-neutral-color-white;
 	margin: 8px 0 8px 0;
 	font-size: 14px;
 	padding: 0;
@@ -284,14 +284,14 @@ legend {
 	border-bottom-width: 0;
 	font-size: 15px;
 	font-weight: bold;
-	color: $app-neutral-color-white;
+	color: @app-neutral-color-white;
 }
 .content-box legend {
-	color: $app-neutral-color-dark;
+	color: @app-neutral-color-dark;
 }
 
 label {
-	color: $app-neutral-color-dark;
+	color: @app-neutral-color-dark;
 	font-weight: normal;
 	margin-top: 4px;
 	margin-bottom: 4px;
@@ -302,11 +302,11 @@ label {
 
 	button {
 		text-align: right;
-		color: $app-neutral-color-dark;
+		color: @app-neutral-color-dark;
 
 		&:hover, &:active, &:focus {
-			color: $app-neutral-color-dark;
-			background-color: $app-neutral-color-light;
+			color: @app-neutral-color-dark;
+			background-color: @app-neutral-color-light;
 		}
 
 		width: 10em;
@@ -314,8 +314,8 @@ label {
 
 	&.open {
 		button.btn-default.dropdown-toggle {
-			color: $app-neutral-color-dark;
-			background-color: $app-neutral-color-light;
+			color: @app-neutral-color-dark;
+			background-color: @app-neutral-color-light;
 		}
 	}
 
@@ -323,12 +323,12 @@ label {
 		padding: 0;
 
 		li {
-			border-bottom: 1px solid $app-neutral-color-light;
+			border-bottom: 1px solid @app-neutral-color-light;
 
 			a {
 				padding: 10px 0 10px 7px;
 				font-size: 14px;
-				color: $app-neutral-color-dark;
+				color: @app-neutral-color-dark;
 			}
 
 			&:last-child {
