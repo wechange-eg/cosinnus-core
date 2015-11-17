@@ -57,7 +57,6 @@ setup(
         'Django>=1.5, <1.7',
         'Django-Select2',
         'Pillow>=2.1.0',
-        'South>=0.7',
         'django-appconf>=0.6',
         'django-awesome-avatar',
         'django-bootstrap3',
