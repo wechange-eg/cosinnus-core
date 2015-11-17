@@ -170,7 +170,6 @@ body.body-no-nav {
 .form-control:focus {
   box-shadow: none;
 }
-
 .content-box .form-control {
   text-align: left;
 }
@@ -337,13 +336,11 @@ label {
   font-weight: normal;
   margin-top: 4px;
   margin-bottom: 4px;
-  font-size: 14px
+  font-size: 14px;
 }
-
 label.label-soft {
-    color: #999999;
+  color: #949494;
 }
-
 .content-box .dropdown {
   margin-bottom: 13px;
 }
@@ -1675,12 +1672,6 @@ input.form-control {
 a.portal-inlink:hover img {
   background-color: rgba(255, 255, 255, 0.5);
 }
-
-.item-header {
-    font-size: 20px;
-    padding: 15px 15px 15px 10px;
-}
-
 .form-control-focus-emphasized:focus {
   background-color: white;
   color: #333333;
@@ -1695,7 +1686,6 @@ a.portal-inlink:hover img {
   -webkit-border-radius: 15px;
   border-radius: 15px;
 }
-
 .progressbar > span {
   display: block;
   height: 12px;
@@ -1728,7 +1718,7 @@ a.portal-inlink:hover img {
   top: 0;
   right: 0;
   opacity: 0;
-  float:left;
+  float: left;
   filter: alpha(opacity=0);
   cursor: pointer;
 }
@@ -1787,6 +1777,9 @@ body div .select2-container .select2-choice .select2-arrow {
 body div .select2-container .select2-choice .select2-arrow b {
   background-position: 0 -2px;
 }
+body div .select2-container .select2-choice:hover {
+  background-color: #dbdbdb;
+}
 body div .select2-container.select2-dropdown-open {
   background-color: #dbdbdb;
 }
@@ -1801,9 +1794,6 @@ body div .select2-container .select2-choice .select2-chosen {
 }
 body div .select2-container .select2-choice .select2-arrow {
   color: #333333;
-}
-body div .select2-container .select2-choice:hover {
-  background-color: #dbdbdb;
 }
 body div .media-body .select2-container {
   margin-top: -2px;
@@ -3005,6 +2995,9 @@ div.dashboard-appwidget:last-child {
     margin: 15px;
   }
 }
+@media (min-width: 768px) {
+  
+}
 @media (min-width: 992px) {
   .dashboard-header .dashboard-header-text {
     height: 100px;
@@ -3037,141 +3030,126 @@ div.dashboard-appwidget:last-child {
     width: 130px;
   }
 }
+.item-header {
+  font-size: 20px;
+  padding: 15px 15px 15px 10px;
+}
 .image {
-    display: block;
-    width: 100%;
-    height: auto;
+  display: block;
+  width: 100%;
+  height: auto;
 }
-
 .group-microsite-header {
-    font-family: Verdana, Geneva, sans-serif;
+  font-family: Verdana, Geneva, sans-serif;
 }
-
 .group-microsite-avatar {
+  width: 130px;
+  top: -30px;
+  position: relative;
+  float: left;
+  margin-right: 15px;
+  margin-bottom: -30px;
+}
+.group-microsite-box {
+  background-color: rgba(255, 255, 255, 0.7);
+  min-height: 100px;
+}
+.group-microsite-box h2 {
+  margin-top: 0px;
+  padding-top: 15px;
+  color: #333;
+  font-weight: 700;
+  font-size: 18px;
+}
+.group-microsite-details {
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+@media (max-width: 767px) {
+  .group-microsite-avatar {
     width: 130px;
     top: -30px;
-    position: relative;
-    float: left;
-    margin-right: 15px;
-    margin-bottom: -30px;
-}
-
-.group-microsite-box {
-    background-color: rgba(255, 255, 255, 0.7);
+  }
+  .group-microsite-box {
     min-height: 100px;
+  }
 }
-
-.group-microsite-box h2 {
-    margin-top: 0px;
-    padding-top: 15px;
-    color: #333;
-    font-weight: 700;
-    font-size: 18px;
-}
-
-.group-microsite-details {
-    margin-top: 10px;
-    padding-bottom: 10px;
-}
-
-
-@media (max-width: 767px) {
-    .group-microsite-avatar {
-        width: 130px;
-        top: -30px;
-    }
-    .group-microsite-box {
-        min-height: 100px;
-    }
-}
-
 @media (min-width: 992px) {
-    .group-microsite-avatar {
-        width: 160px;
-        top: -30px;
-        margin-bottom: -30px;
-    }
-    .group-microsite-box {
-        height: 130px;
-    }
-    .group-microsite-box h2 {
-        font-size: 24px;
-    }
-    .group-microsite-details {
-        font-size: 14px;
-    }
-    .group-microsite-subheader {
-        font-size: 14px;
-    }
+  .group-microsite-avatar {
+    width: 160px;
+    top: -30px;
+    margin-bottom: -30px;
+  }
+  .group-microsite-box {
+    height: 130px;
+  }
+  .group-microsite-box h2 {
+    font-size: 24px;
+  }
+  .group-microsite-details {
+    font-size: 14px;
+  }
+  .group-microsite-subheader {
+    font-size: 14px;
+  }
 }
-
-
 .group-microsite-subheader {
-    background-color: rgba(255, 255, 255, 0.5);
-    text-align: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  text-align: center;
 }
-
 .group-microsite-subheader-container::after {
   content: "";
   display: table;
   clear: both;
 }
-
 .group-microsite-subheader-container {
-    display: inline-block;
+  display: inline-block;
 }
-
 .group-microsite-subheader-item {
-    color: #333;
-    float: left;
-    text-align: center;
-    line-height: 1em;
-    cursor: default;
+  color: #333;
+  float: left;
+  text-align: center;
+  line-height: 1em;
+  cursor: default;
 }
-
-.group-microsite-subheader-item + .group-microsite-subheader-item {
-}
-
-
 .group-microsite-subheader-item header {
-    text-transform: uppercase;
-    padding: 8px 8px 3px 8px;
-    font-size: 11px;
+  text-transform: uppercase;
+  padding: 8px 8px 3px 8px;
+  font-size: 11px;
 }
-
 .group-microsite-subheader-item-value {
-    padding: 0 8px 3px 8px;
-    font-size: 18px;
+  padding: 0 8px 3px 8px;
+  font-size: 18px;
 }
-
-
-.nav-tabs, .nav-tabs > li, .nav-tabs > li.active, 
-.nav-tabs > li > a, .nav-tabs > li.active > a,
-.nav-tabs > li > a:focus, .nav-tabs > li.active > a:focus,
-.nav-tabs > li > a:hover, .nav-tabs > li.active > a:hover {
-    border-color: #104a59;
+.nav-tabs,
+.nav-tabs > li,
+.nav-tabs > li.active,
+.nav-tabs > li > a,
+.nav-tabs > li.active > a,
+.nav-tabs > li > a:focus,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li > a:hover,
+.nav-tabs > li.active > a:hover {
+  border-color: #104a59;
 }
-
 .nav-tabs > li > a {
-    background-color: #16778d;
-    color: white;
+  background-color: #16778d;
+  color: white;
 }
-.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus {
-    background-color: #104a59;
-    color: white;
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus {
+  background-color: #104a59;
+  color: white;
 }
-
-.nav-tabs > li > a:hover, .nav-tabs > li.active > a:hover {
-    background-color: #104a59;
-    color: white;
+.nav-tabs > li > a:hover,
+.nav-tabs > li.active > a:hover {
+  background-color: #104a59;
+  color: white;
 }
-
-
 .btn-no-interact {
-    cursor: default;
+  cursor: default;
 }
-
-.app-main .btn-no-interact:hover .media, .app-main .btn-no-interact:hover .media > .media-body {
-    background-color: #16778d;
+.app-main .btn-no-interact:hover .media,
+.app-main .btn-no-interact:hover .media > .media-body {
+  background-color: #16778d;
 }
-

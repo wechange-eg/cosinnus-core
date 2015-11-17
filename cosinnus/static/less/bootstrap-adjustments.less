@@ -114,10 +114,7 @@ body.body-no-nav {
 .form-control:focus {
 	box-shadow: none;
 }
-.form-control::-webkit-input-placeholder { text-align: center; }
-.form-control:-moz-placeholder { text-align: center; }
-.form-control::-moz-placeholder { text-align: center; }
-.form-control:-ms-input-placeholder { text-align: center; }
+
 
 .content-box .form-control {
 	text-align: left;
@@ -145,7 +142,7 @@ p, .white-content {
 		}
 	}
 }
-p.transparent, .white-content.transparent {
+p.transparent, .white-content.transparent, .transparent-p p {
 	background-color: transparent;
 	padding: 0;
 	margin: -4px 0 8px 0;
@@ -295,8 +292,12 @@ label {
 	font-weight: normal;
 	margin-top: 4px;
 	margin-bottom: 4px;
-}
+	font-size: 14px;
 
+	&.label-soft {
+		color: @app-neutral-color;
+	}
+}
 .content-box .dropdown {
 	margin-bottom: 13px;
 
