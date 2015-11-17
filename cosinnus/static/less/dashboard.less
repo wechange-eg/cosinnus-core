@@ -1,8 +1,8 @@
 div.dashboard-appwidget {
 	margin-bottom: 40px;
 	background-color: red;
-	@include clearfix();
-	background-color:transparentize($app-neutral-color-light, 0.3);
+	.clearfix();
+	background-color:fadeout(@app-neutral-color-light, 30);
 }
 div.dashboard-appwidget:last-child {
 	margin-bottom: 0;
@@ -30,7 +30,7 @@ div.dashboard-appwidget:last-child {
 			text-decoration: underline;
 			white-space: normal;
 			&:hover, &:active, &:focus {
-				background-color: $app-neutral-color-light;
+				background-color: @app-neutral-color-light;
 			}
 		}
 		strong a {
@@ -43,7 +43,7 @@ div.dashboard-appwidget:last-child {
 		}
 
 		&.dashboard-appwidget-networkicons {
-			@include clearfix();
+			.clearfix();
 			padding: 0;
 			a {
 				float: left;
@@ -70,7 +70,7 @@ div.dashboard-appwidget:last-child {
 	.media-body {
 		.group-annotation {
 			font-size: 12px;
-			color: $app-neutral-color-white;
+			color: @app-neutral-color-white;
 			font-weight: normal;
 		}
 	}
@@ -96,9 +96,9 @@ div.dashboard-appwidget:last-child {
 
 
 .dashboard-header {
-	@include clearfix();
+	.clearfix();
 	margin-bottom: 30px;
-	background-color:transparentize($app-neutral-color-light, 0.3);
+	background-color:fadeout(@app-neutral-color-light, 30);
 
 	.dashboard-header-image {
 		float: left;
@@ -122,22 +122,22 @@ div.dashboard-appwidget:last-child {
 		}
 
 		&.app-main {
-			background-color: $app-main-color;
+			background-color: @app-main-color;
 		}
 		&.app-calendar {
-			background-color: $app-calendar-color;
+			background-color: @app-calendar-color;
 		}
 		&.app-files {
-			background-color: $app-files-color;
+			background-color: @app-files-color;
 		}
 		&.app-documents {
-			background-color: $app-documents-color;
+			background-color: @app-documents-color;
 		}
 		&.app-todos {
-			background-color: $app-todos-color;
+			background-color: @app-todos-color;
 		}
 		&.app-etherpad {
-			background-color: $app-etherpad-color;
+			background-color: @app-etherpad-color;
 		}
 
 		i {
@@ -167,20 +167,20 @@ div.dashboard-appwidget:last-child {
 
 
 		h2 {
-			color: $app-neutral-color-dark;
+			color: @app-neutral-color-dark;
 			font-size: 17px;
 			font-weight: bold;
 			padding: 0;
 			margin: 10px 0 1px 0;
 		}
 		h3 {
-			color: $app-neutral-color-dark;
+			color: @app-neutral-color-dark;
 			font-size: 11px;
 			padding: 0;
 			margin: 0 0 3px 0;
 		}
 		p {
-			color: $app-neutral-color-dark;
+			color: @app-neutral-color-dark;
 			font-size: 12px;
 			background-color: transparent;
 			padding: 0 0.5em 0.5em 0;
@@ -188,7 +188,7 @@ div.dashboard-appwidget:last-child {
 			line-height: 1.4em;
 
 			a {
-				color: $app-neutral-color-dark;
+				color: @app-neutral-color-dark;
 				font-weight: bold;
 				text-decoration: underline;
 			}

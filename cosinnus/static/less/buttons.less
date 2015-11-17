@@ -49,11 +49,11 @@
 	background-color: transparent;
 }
 .btn-default .media > .media-body {
-	background-color: $app-neutral-color-white;
-	color: $app-neutral-color-dark;
+	background-color: @app-neutral-color-white;
+	color: @app-neutral-color-dark;
 }
 .btn-default .media > .media-body a {
-	color: $app-neutral-color-dark;
+	color: @app-neutral-color-dark;
 }
 
 .media-body {
@@ -62,7 +62,7 @@
 	min-height: 40px;
 	text-overflow: ellipsis;
 
-	@include clearfix();
+	.clearfix();
 
 	input {
 		background-color: transparent;
@@ -104,12 +104,12 @@
 		margin-right: 0px;
 		width: 40px;
 		text-align: center;
-		color: $app-neutral-color-white;
+		color: @app-neutral-color-white;
 	}
 
 	&.select2-container-active {
 		.select2-chosen {
-			color: $app-neutral-color-dark;
+			color: @app-neutral-color-dark;
 		}
 	}
 }
@@ -131,8 +131,8 @@
 }
 .btn-default .media > .pull-left,
 .btn-default .media > .pull-right {
-	background-color: $app-neutral-color;
-	color: $app-neutral-color-white;
+	background-color: @app-neutral-color;
+	color: @app-neutral-color-white;
 }
 
 .btn-default .media > .pull-left:empty,
@@ -174,7 +174,7 @@ ul.appnavi-dropdown-menu {
 	margin-top: 5px;
 }
 
-@mixin btn-app-colors($light,$normal,$dark) {
+.btn-app-colors(@light,@normal,@dark) {
 	.btn-emphasized .media,
 	.btn-appnavi .media,
 	.btn-emphasized .media > .media-body,
@@ -182,8 +182,8 @@ ul.appnavi-dropdown-menu {
 	.btn-emphasized .media > .pull-right,
 	.btn-appnavi .media > .pull-left,
 	.btn-appnavi .media > .pull-right {
-		color: $app-neutral-color-white;
-		background-color: $normal;
+		color: @app-neutral-color-white;
+		background-color: @normal;
 	}
 
 	.btn-extra-emphasized .media,
@@ -209,22 +209,22 @@ ul.appnavi-dropdown-menu {
 	.fadedown.open .btn-emphasized.w100 .media > .pull-right,
 	.fadedown .btn-emphasized:hover .media > .pull-right,
 	.btn-appnavi:hover .media > .pull-right {
-		color: $app-neutral-color-white;
-		background-color: $dark;
+		color: @app-neutral-color-white;
+		background-color: @dark;
 	}
 
 	.fadedown.open .btn-emphasized.w100.keep-emphasized .media,
 	.fadedown.open .btn-emphasized.w100.keep-emphasized .media  > .media-body,
 	.fadedown.open .btn-extra-emphasized.w100.keep-emphasized .media > .pull-right,
 	.fadedown.open .btn-emphasized.w100.keep-emphasized .media > .pull-right {
-		background-color: $normal;
+		background-color: @normal;
 	}
 
 	.fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media,
 	.fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media  > .media-body,
 	.fadedown.open .btn-extra-emphasized.w100.keep-emphasized:hover .media > .pull-right,
 	.fadedown.open .btn-emphasized.w100.keep-emphasized:hover .media > .pull-right {
-		background-color: $dark;
+		background-color: @dark;
 	}
 
 	.fadedown:not(.open) .only-open {
@@ -240,16 +240,16 @@ ul.appnavi-dropdown-menu {
 	}
 	.btn-emphasized .media > .pull-left.btn-default:empty,
 	.btn-emphasized .media > .pull-right.btn-default:empty {
-		background-color: $app-neutral-color-light;
+		background-color: @app-neutral-color-light;
 	}
 
 	// App changer (documents, news, todos, etherpad...)
 	&.appnavi-listelement {
 		a {
-			background-color: $normal;
+			background-color: @normal;
 			padding-top: 10px;
 			padding-bottom: 10px;
-			color: $app-neutral-color-white;
+			color: @app-neutral-color-white;
 
 			i {
 				font-size: 17px;
@@ -257,34 +257,34 @@ ul.appnavi-dropdown-menu {
 			}
 		}
 		&:hover a, &.active a {
-				background-color: $dark;
+				background-color: @dark;
 		}
 	}
 
 	/* spaces below element */
 	.fine-space {
 	// do this simply in neutral gray.
-	// border-bottom: 1px solid $light;
+	// border-bottom: 1px solid @light;
 	}
 }
 
 .app-main {
-	@include btn-app-colors($app-main-color-light,$app-main-color,$app-main-color-dark);
+	.btn-app-colors(@app-main-color-light,@app-main-color,@app-main-color-dark);
 }
 .app-calendar {
-	@include btn-app-colors($app-calendar-color-light,$app-calendar-color,$app-calendar-color-dark);
+	.btn-app-colors(@app-calendar-color-light,@app-calendar-color,@app-calendar-color-dark);
 }
 .app-files {
-	@include btn-app-colors($app-files-color-light,$app-files-color,$app-files-color-dark);
+	.btn-app-colors(@app-files-color-light,@app-files-color,@app-files-color-dark);
 }
 .app-documents {
-	@include btn-app-colors($app-documents-color-light,$app-documents-color,$app-documents-color-dark);
+	.btn-app-colors(@app-documents-color-light,@app-documents-color,@app-documents-color-dark);
 }
 .app-todos {
-	@include btn-app-colors($app-todos-color-light,$app-todos-color,$app-todos-color-dark);
+	.btn-app-colors(@app-todos-color-light,@app-todos-color,@app-todos-color-dark);
 }
 .app-etherpad {
-	@include btn-app-colors($app-etherpad-color-light,$app-etherpad-color,$app-etherpad-color-dark);
+	.btn-app-colors(@app-etherpad-color-light,@app-etherpad-color,@app-etherpad-color-dark);
 }
 
 
@@ -300,7 +300,7 @@ ul.appnavi-dropdown-menu {
 		margin-bottom: -15px;
 	}
 	div.annotation {
-		color: $app-neutral-color;
+		color: @app-neutral-color;
 		text-align: right;
 		font-size: 11px;
 	}
@@ -357,7 +357,7 @@ ul.appnavi-dropdown-menu {
 // .form-control is a Bootstrap class for INPUT elements.
 // Center some placeholders but align the content left.
 .btn-emphasized .form-control, .btn-extra-emphasized .form-control {
-	color: $app-neutral-color-white;
+	color: @app-neutral-color-white;
 }
 
 .btn-emphasized-strong {
@@ -463,11 +463,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	.media > .pull-right,
 	.media > .pull-left {
 		background-color: white;
-		color: $app-neutral-color-dark;
+		color: @app-neutral-color-dark;
 	}
 
 	a {
-		color: $app-neutral-color-dark;
+		color: @app-neutral-color-dark;
 	}
 }
 
@@ -540,12 +540,12 @@ a.light-link i { display: none; }
 a.light-link:hover i { display: inherit; }
 
 
-.app-main .btn-headline .media-body .group-annotation { color: $app-main-color-light; }
-.app-calendar .btn-headline .media-body .group-annotation { color: $app-calendar-color-light; }
-.app-files .btn-headline .media-body .group-annotation { color: $app-files-color-light; }
-.app-documents .btn-headline .media-body .group-annotation { color: $app-documents-color-light; }
-.app-todos .btn-headline .media-body .group-annotation { color: $app-todos-color-light; }
-.app-etherpad .btn-headline .media-body .group-annotation { color: $app-etherpad-color-light; }
+.app-main .btn-headline .media-body .group-annotation { color: @app-main-color-light; }
+.app-calendar .btn-headline .media-body .group-annotation { color: @app-calendar-color-light; }
+.app-files .btn-headline .media-body .group-annotation { color: @app-files-color-light; }
+.app-documents .btn-headline .media-body .group-annotation { color: @app-documents-color-light; }
+.app-todos .btn-headline .media-body .group-annotation { color: @app-todos-color-light; }
+.app-etherpad .btn-headline .media-body .group-annotation { color: @app-etherpad-color-light; }
 
 
 

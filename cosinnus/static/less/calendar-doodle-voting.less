@@ -2,7 +2,7 @@
 	white-space: nowrap;
 	overflow-x: auto;
 	padding: 0 0 20px 0;
-	color: $app-neutral-color-dark;
+	color: @app-neutral-color-dark;
 
 	> div, > form > div {
 		// Horizontal lines
@@ -28,8 +28,8 @@
 
 		.doodle-vote-date {
 			text-align: left;
-			color: $app-neutral-color-white;
-			background-color: $app-calendar-color;
+			color: @app-neutral-color-white;
+			background-color: @app-calendar-color;
 			line-height: 1em;
 			padding: 3px 0;
 			margin-bottom: 3px;
@@ -44,7 +44,7 @@
 		}
 
 
-		@mixin doodle-vote-yesmaybeno() {
+		.doodle-vote-yesmaybeno() {
 			min-height: 50px;
 			line-height: 1.3em;
 			font-size: 1.2em;
@@ -53,31 +53,31 @@
 		}
 
 		.doodle-vote-yes {
-			background-color:transparentize($app-main-color-yes, 0.35);
-			@include doodle-vote-yesmaybeno();
+			background-color:fadeout(@app-main-color-yes, 35);
+			.doodle-vote-yesmaybeno();
 		}
 
 		.doodle-vote-maybe {
-			background-color:transparentize($app-main-color-maybe, 0.35);
-			@include doodle-vote-yesmaybeno();
+			background-color:fadeout(@app-main-color-maybe, 35);
+			.doodle-vote-yesmaybeno();
 		}
 
 		.doodle-vote-no {
-			background-color:transparentize($app-main-color-no, 0.35);
-			@include doodle-vote-yesmaybeno();
+			background-color:fadeout(@app-main-color-no, 35);
+			.doodle-vote-yesmaybeno();
 			// color: transparent;
 		}
 
 		button.doodle-vote-eventbutton {
 			border-width: 0;
 			width: 50px;
-			color: $app-neutral-color-dark;
-			background-color: $app-neutral-color-white;
-			@include doodle-vote-yesmaybeno();
+			color: @app-neutral-color-dark;
+			background-color: @app-neutral-color-white;
+			.doodle-vote-yesmaybeno();
 			cursor: pointer;
 
 			&:hover, &:focus, &:active {
-				background-color: $app-neutral-color-light;
+				background-color: @app-neutral-color-light;
 			}
 		}
 

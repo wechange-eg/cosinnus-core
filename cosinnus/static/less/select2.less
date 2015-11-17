@@ -18,9 +18,14 @@ body div {
 		background-position:0 -2px;
 	}
 
+
+    .select2-container .select2-choice:hover {
+      background-color: #dbdbdb;
+    }
+
 	.select2-container {
 		&.select2-dropdown-open {
-			background-color: $app-neutral-color-light;
+			background-color: @app-neutral-color-light;
 		}
 
 		.select2-choice {
@@ -28,12 +33,12 @@ body div {
 			border-radius: 0;
 
 			.select2-chosen {
-				color: $app-neutral-color-dark;
+				color: @app-neutral-color-dark;
 				font-size: 12px;
 				text-align: left;
 			}
 			.select2-arrow {
-				color: $app-neutral-color-dark;
+				color: @app-neutral-color-dark;
 			}
 		}
 	}
@@ -53,39 +58,20 @@ body div {
 	.select2-container-active .select2-choices,
 	.select2-drop-active {
 		border-width:0;
-		background-color: $app-neutral-color-white;
+		background-color: @app-neutral-color-white;
 	}
 
 
 	.select2-results .select2-highlighted {
-		background-color: $app-neutral-color;
-		color: $app-neutral-color-white;
+		background-color: @app-neutral-color;
+		color: @app-neutral-color-white;
 	}
 
 	.select2-container-multi .select2-choices .select2-search-choice {
 		border-width: 0;
 		background-image: none;
-		background-color: $app-neutral-color-light;
-		color: $app-neutral-color-dark;
-	}
-
-	&.app-main .select2-container .select2-choice:hover {
-		background-color: $app-main-color-light;
-	}
-	&.app-calendar .select2-container .select2-choice:hover {
-		background-color: $app-calendar-color-light;
-	}
-	&.app-files .select2-container .select2-choice:hover {
-		background-color: $app-files-color-light;
-	}
-	&.app-documents .select2-container .select2-choice:hover {
-		background-color: $app-documents-color-light;
-	}
-	&.app-todos .select2-container .select2-choice:hover {
-		background-color: $app-todos-color-light;
-	}
-	&.app-etherpad .select2-container .select2-choice:hover {
-		background-color: $app-etherpad-color-light;
+		background-color: @app-neutral-color-light;
+		color: @app-neutral-color-dark;
 	}
 
 
@@ -105,9 +91,9 @@ body div {
 		min-width: 15em;
 	}
 
-	@mixin select2attachment($light,$normal,$dark) {
-		background-color: $normal;
-		color: $app-neutral-color-white;
+	.select2attachment(@light,@normal,@dark) {
+		background-color: @normal;
+		color: @app-neutral-color-white;
 		padding: 0 4px 0 4px;
 		font-weight: normal;
 		margin: 0;
@@ -116,22 +102,22 @@ body div {
 	&, .btn-default .media > .media-body {
 
 	.app-main-attachment {
-		@include select2attachment($app-main-color-light,$app-main-color,$app-main-color-dark);
+		.select2attachment(@app-main-color-light,@app-main-color,@app-main-color-dark);
 	}
 	.app-calendar-attachment {
-		@include select2attachment($app-calendar-color-light,$app-calendar-color,$app-calendar-color-dark);
+		.select2attachment(@app-calendar-color-light,@app-calendar-color,@app-calendar-color-dark);
 	}
 	.app-files-attachment {
-		@include select2attachment($app-files-color-light,$app-files-color,$app-files-color-dark);
+		.select2attachment(@app-files-color-light,@app-files-color,@app-files-color-dark);
 	}
 	.app-documents-attachment {
-		@include select2attachment($app-documents-color-light,$app-documents-color,$app-documents-color-dark);
+		.select2attachment(@app-documents-color-light,@app-documents-color,@app-documents-color-dark);
 	}
 	.app-todos-attachment {
-		@include select2attachment($app-todos-color-light,$app-todos-color,$app-todos-color-dark);
+		.select2attachment(@app-todos-color-light,@app-todos-color,@app-todos-color-dark);
 	}
 	.app-etherpad-attachment {
-		@include select2attachment($app-etherpad-color-light,$app-etherpad-color,$app-etherpad-color-dark);
+		.select2attachment(@app-etherpad-color-light,@app-etherpad-color,@app-etherpad-color-dark);
 	}
 
 	}
@@ -161,8 +147,8 @@ body div {
 		li.select2-result {
 			line-height: 30px;
 			font-size: 14px;
-			color: $app-neutral-color-dark;
-			border-bottom: 1px solid $app-neutral-color-light;
+			color: @app-neutral-color-dark;
+			border-bottom: 1px solid @app-neutral-color-light;
 
 			&:last-child {
 				border-width: 0;
