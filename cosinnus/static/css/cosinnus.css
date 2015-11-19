@@ -3159,5 +3159,6 @@ div.dashboard-appwidget:last-child {
 	display: block;
 	max-width: 100%;
 	height: auto;
+	display: inline-block;
 }
 
