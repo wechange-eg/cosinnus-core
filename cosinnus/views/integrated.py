@@ -134,7 +134,7 @@ def create_user_integrated(request):
         }
         logger.warn('Sending handshake request.', extra={'data':data, 'url': handshake_url})
         
-        req = requests.post(handshake_url, data=data)
+        req = requests.post(handshake_url, data=data, verify=False)
         logger.warn('Handshake request returned.', extra={'status':req.status_code, 'content': req._content})
         
         if not req.status_code == 200:
