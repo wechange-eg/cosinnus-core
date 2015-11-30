@@ -8,6 +8,8 @@ from django.db.models import Q
 from cosinnus.views.profile import delete_userprofile
 from cosinnus.utils.group import move_group_content as move_group_content_utils
 from cosinnus.models.widget import WidgetConfig
+from django.core.cache import cache
+from django.utils.encoding import force_text
 
 
 def housekeeping(request):
@@ -99,5 +101,25 @@ def recreate_all_group_widgets(request=None, verbose=False):
             print ">>> recreated widget config for group id", group.id
     
     return HttpResponse("The following groups were updated:<br/><br/>" + "<br/>".join(groups_ids))
-        
 
+
+HOUSEKEEPING_CACHE_KEY = 'cosinnus/core/housekeeping/setcache_debug'
+
+def setcache(request, content):
+    """ access to function for moving group content from one group to another """
+    if not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    
+    content = force_text(content)
+    cache.set(HOUSEKEEPING_CACHE_KEY, content)
+    return HttpResponse("Set '%s' as debug cache entry." % content)
+        
+        
+def getcache(request):
+    """ access to function for moving group content from one group to another """
+    if not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    
+    content = cache.get(HOUSEKEEPING_CACHE_KEY)
+    return HttpResponse("The debug cache entry contains: '%s'." % content)
+        
