@@ -570,7 +570,7 @@ class CosinnusGroup(models.Model):
         upload_to=get_group_avatar_filename,
         max_length=250)
     wallpaper = models.ImageField(_("Wallpaper image"), 
-        help_text=_('Shown as large banner image on the Microsite'),
+        help_text=_('Shown as large banner image on the Microsite (1140 x 240 px)'),
         null=True, blank=True,
         upload_to=get_group_wallpaper_filename,
         max_length=250)

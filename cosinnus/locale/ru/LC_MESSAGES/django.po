@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-30 13:12+0100\n"
+"POT-Creation-Date: 2015-11-30 17:48+0100\n"
 "PO-Revision-Date: 2015-11-14 17:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -491,8 +491,9 @@ msgid "Wallpaper image"
 msgstr "Фоновое изображение"
 
 #: .\models\group.py:573
-msgid "Shown as large banner image on the Microsite"
-msgstr "Отображается на микросайте как большой баннер"
+#, fuzzy
+msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
+msgstr "Отображается на микросайте как большой баннер (1140 x 240 px)"
 
 #: .\models\group.py:586
 msgid "Deactivated Apps"

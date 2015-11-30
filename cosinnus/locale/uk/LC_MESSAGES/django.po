@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-30 13:12+0100\n"
+"POT-Creation-Date: 2015-11-30 17:48+0100\n"
 "PO-Revision-Date: 2015-11-11 10:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -482,8 +482,8 @@ msgid "Wallpaper image"
 msgstr "Фонове зображення"
 
 #: .\models\group.py:573
-msgid "Shown as large banner image on the Microsite"
-msgstr "Відображається як великий банер на мікросайті"
+msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
+msgstr "Відображається як великий банер на мікросайті (1140 x 240 px)"
 
 #: .\models\group.py:586
 msgid "Deactivated Apps"

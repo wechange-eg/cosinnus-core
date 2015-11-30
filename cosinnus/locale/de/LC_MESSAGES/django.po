@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-30 13:11+0100\n"
+"POT-Creation-Date: 2015-11-30 17:48+0100\n"
 "PO-Revision-Date: 2015-10-19 11:46+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -484,8 +484,8 @@ msgid "Wallpaper image"
 msgstr "Hintergrundbild"
 
 #: .\models\group.py:573
-msgid "Shown as large banner image on the Microsite"
-msgstr "Wird als großes Banner auf der Microsite angezeigt"
+msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
+msgstr "Wird als großes Banner auf der Microsite angezeigt (1140 x 240 px)"
 
 #: .\models\group.py:586
 msgid "Deactivated Apps"
@@ -962,8 +962,9 @@ msgstr ""
 "endgültig löschen? Dies kann nicht rückgängig gemacht werden!"
 
 #: .\templates\cosinnus\leftnav_example.txt.py:5
+#, fuzzy
 msgid "Gesendet"
-msgstr ""
+msgstr "Zurücksetzen"
 
 #: .\templates\cosinnus\leftnav_example.txt.py:9
 msgid "Archiv"
