@@ -1159,7 +1159,10 @@
 $.cosinnus.lang = cosinnus_current_language;
 moment.lang($.cosinnus.lang);
 
-
+// select2 localizations
+$.fn.select2.defaults=$.extend($.fn.select2.defaults, { 
+    formatNoMatches: function () { return $.cosinnus.no_matches_found; }, 
+}); 
 
 $(function() {
 	$.cosinnus.checkBox();

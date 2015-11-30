@@ -5,7 +5,7 @@
 // internationalisation objects for momentJs calendar view WITHOUT time:
 $.cosinnus.momentShort = {
     calendar : {
-        sameDay: "[сего́дня]",
+        sameDay: "[сегодня]",
         sameElse: "L",
         nextDay: '[за́втра]',
         nextWeek: 'dddd',
@@ -17,7 +17,7 @@ $.cosinnus.momentShort = {
 // internationalisation objects for momentJs calendar view WITH time:
 $.cosinnus.momentFull = {
     calendar : {
-        sameDay: "[сего́дня umв] LT",
+        sameDay: "[сегодня umв] LT",
         sameElse: "L [в] LT",
         nextDay: '[за́втра в] LT',
         nextWeek: 'dddd [в] LT',
@@ -30,8 +30,8 @@ $.cosinnus.momentFull = {
 $.cosinnus.fullcalendar_format = {
     firstDay: 1, // Monday
     buttonText: {
-        today: "сего́дня",
-        month: "ме́сяц",
+        today: "сегодня",
+        month: "месяц",
         week: "неделя",
         day: "день"
     },
@@ -60,3 +60,5 @@ $.cosinnus.fullcalendar_format = {
         agenda: 'H:mm{ - H:mm}'
     }
 };
+
+$.cosinnus.no_matches_found = 'Ничего не найдено';

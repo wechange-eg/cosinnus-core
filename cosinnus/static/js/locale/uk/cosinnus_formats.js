@@ -59,3 +59,5 @@ $.cosinnus.fullcalendar_format = {
         agenda: 'H:mm{ - H:mm}'
     }
 };
+
+$.cosinnus.no_matches_found = 'Співпадінь не знайдено';
