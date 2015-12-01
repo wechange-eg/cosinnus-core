@@ -76,7 +76,7 @@
                             </a>
                             {% endif %}
                             {% if not member == user %}
-                            <a class="pull-right" href="{% url 'postman_write' recipients=member.username %}" title="{% trans "Send Message" %}">
+                            <a class="pull-right" href="{% url 'postman:write' recipients=member.username %}" title="{% trans "Send Message" %}">
 	                            <i class="fa fa-envelope"></i>
 	                        </a>
 	                        {% endif %}

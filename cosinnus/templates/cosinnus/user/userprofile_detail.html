@@ -70,7 +70,7 @@
 			            </button>
 			             {% endcomment %}
 			            {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
-			            <button type="button" class="btn btn-emphasized" href="{% url 'postman_write' recipients=this_user.username %}">
+			            <button type="button" class="btn btn-emphasized" href="{% url 'postman:write' recipients=this_user.username %}">
 			                <ul class="media-list">
 			                    <li class="media">
 			                        <a class="pull-left" href="#">

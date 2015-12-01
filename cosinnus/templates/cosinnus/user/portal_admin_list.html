@@ -63,7 +63,7 @@
 	                        </a>
 	                        {% endcomment %}
 	                        {% if not member == user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
-	                        <a class="pull-right" href="{% url 'postman_write' recipients=user.username %}" title="{% trans "Send Message" %}">
+	                        <a class="pull-right" href="{% url 'postman:write' recipients=user.username %}" title="{% trans "Send Message" %}">
 	                            <i class="fa fa-envelope"></i>
 	                        </a>
 	                        {% endif %}

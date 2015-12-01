@@ -8,7 +8,7 @@
 </li>
 {% if request.user.is_authenticated %}
     <li>
-        <a href="{% url 'postman_inbox' %}" title="{% trans "Messages" %}">
+        <a href="{% url 'postman:inbox' %}" title="{% trans "Messages" %}">
             <i class="fa fa-envelope"></i>
             {% if COSINNUS_UNREAD_MESSAGE_COUNT and COSINNUS_UNREAD_MESSAGE_COUNT > 0 %}
                <span id="messageCounter">{{ COSINNUS_UNREAD_MESSAGE_COUNT }}</span>
