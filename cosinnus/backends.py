@@ -28,8 +28,3 @@ class EmailAuthBackend(ModelBackend):
         except User.DoesNotExist:
             return None
 
-
-class IntegratedPortalAuthBackend(ModelBackend):
-    """ This is just here so the user can be given an originating backend during 
-        integrated portal logins. """
-    pass

@@ -41,7 +41,7 @@ def _get_integrated_user_validated(username, password):
         #if _get_user_pseudo_password(user) == request.POST.get('password'):
         #if user.password == request.POST.get('password'): #md5 check, no pseudo check
         if IntegratedHasher.verify(user.password, password):
-            user.backend = 'cosinnus.backends.IntegratedPortalAuthBackend'
+            user.backend = 'cosinnus.backends.EmailAuthBackend'
         else:
             user = None
     except USER_MODEL.DoesNotExist:
