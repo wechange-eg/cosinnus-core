@@ -194,7 +194,8 @@ class BaseTaggableObjectModel(models.Model):
     def attached_image(self):
         """ Return the first image file attached to the event as the event's image """
         for attached_file in self.attached_objects.all():
-            if attached_file.model_name == "cosinnus_file.FileEntry" and attached_file.target_object.is_image:
+            if attached_file.model_name == "cosinnus_file.FileEntry" and attached_file.target_object is not None and \
+                        attached_file.target_object.is_image:
                 return attached_file.target_object
         return None
     
