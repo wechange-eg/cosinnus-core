@@ -3,7 +3,9 @@ from __future__ import unicode_literals
 from django.utils.importlib import import_module
 from uuid import uuid1
 from django.core.exceptions import ImproperlyConfigured
-from django.utils.text import normalize_newlines
+from django.utils.text import normalize_newlines, unescape_entities
+from django.utils.html import strip_tags
+from django.utils.encoding import force_text
 
 
 def unique_aware_slugify(item, slug_source, slug_field, 
@@ -152,3 +154,9 @@ def clean_single_line_text(text):
         Used for all object titles and group names. """
     text = normalize_newlines(text).replace('\n', '').replace('\t', '').strip()
     return text
+
+
+def convert_html_to_string(text):
+    """ Returns text containing html tags as text without its tags """
+    return unescape_entities(strip_tags(force_text(text)))
+

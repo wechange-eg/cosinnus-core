@@ -149,7 +149,7 @@
 	        </div><!-- btn -->
 	        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
 	            {% if group.description_long and group.description_long|length > 0 %}
-		            {{ group.description_long|textfield }}
+		            <p>{{ group.description_long|textfield }}</p>
 		        {% else %}
 		            <p>({% trans "No Description set" %})</p>
 		        {% endif %}
@@ -262,7 +262,7 @@
 			        </div><!-- btn -->
 			        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
 			            {% if group.contact_info and group.contact_info|length > 0 %}
-				            {{ group.contact_info|textfield }}
+				            <p>{{ group.contact_info|textfield }}</p>
 				        {% else %}
 				            <p>({% trans "No Contact info set" %})</p>
 				        {% endif %}

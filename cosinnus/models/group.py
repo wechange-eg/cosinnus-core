@@ -17,7 +17,6 @@ from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy as p_
 
 from taggit.managers import TaggableManager
-from tinymce.models import HTMLField
 
 from cosinnus.conf import settings
 from cosinnus.models.cms import CosinnusMicropage
@@ -412,7 +411,7 @@ class CosinnusPortal(models.Model):
         validators=[group_name_validator])
     slug = models.SlugField(_('Slug'), max_length=50, unique=True, blank=True)
     
-    description = HTMLField(verbose_name=_('Description'), blank=True)
+    description = models.TextField(verbose_name=_('Description'), blank=True)
     website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
     public = models.BooleanField(_('Public'), default=False)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
@@ -559,11 +558,11 @@ class CosinnusGroup(models.Model):
     type = models.PositiveSmallIntegerField(_('Group Type'), blank=False,
         default=TYPE_PROJECT, choices=TYPE_CHOICES, editable=False)
     
-    description = HTMLField(verbose_name=_('Short Description'),
+    description = models.TextField(verbose_name=_('Short Description'),
          help_text=_('Short Description. Internal, will not be shown publicly.'), blank=True)
-    description_long = HTMLField(verbose_name=_('Detailed Description'),
+    description_long = models.TextField(verbose_name=_('Detailed Description'),
          help_text=_('Detailed, public description.'), blank=True)
-    contact_info = HTMLField(verbose_name=_('Contact Information'),
+    contact_info = models.TextField(verbose_name=_('Contact Information'),
          help_text=_('How you can be contacted - addresses, social media, etc.'), blank=True)
     
     

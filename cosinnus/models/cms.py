@@ -8,8 +8,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
 
-from tinymce.models import HTMLField
-
 
 @python_2_unicode_compatible
 class CosinnusMicropage(models.Model):
@@ -17,7 +15,7 @@ class CosinnusMicropage(models.Model):
     group = models.ForeignKey('cosinnus.CosinnusGroup', related_name='micropages',
                 null=True, blank=True, on_delete=models.CASCADE)
     title = models.CharField(_('Title'), max_length=100)
-    text = HTMLField(verbose_name=_('Text'), blank=True)
+    text = models.TextField(verbose_name=_('Text'), blank=True)
     last_edited = models.DateTimeField(verbose_name=_('Last edited'), editable=False,
         auto_now=True)
     last_edited_by = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Last edited by'),
