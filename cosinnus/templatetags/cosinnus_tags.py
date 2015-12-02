@@ -116,6 +116,13 @@ def is_portal_admin(user):
     """
     return check_user_portal_admin(user)
 
+@register.filter
+def is_portal_admin_of(user, portal):
+    """
+    Template filter to check if a user is a portal admin.
+    """
+    return check_user_portal_admin(user, portal=portal)
+
 
 @register.filter
 def full_name(value):
