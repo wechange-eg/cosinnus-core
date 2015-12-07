@@ -31,8 +31,20 @@
                 resize:      'none',
     			'word-wrap': 'break-word'
             }).appendTo(document.body);
-
-            var update = function(event)
+            
+            var timeout = false;
+            var update = function(event) {
+                if (timeout) {
+                    window.clearInterval(timeout);
+                    timeout = false;
+                }
+                timeout = window.setTimeout( function() {
+                    timeout = false;
+                    real_update(event);
+                }, 250);
+            };
+            
+            var real_update = function(event)
             {
                 var times = function(string, number)
                 {
