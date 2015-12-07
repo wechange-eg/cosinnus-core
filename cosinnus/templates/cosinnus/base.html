@@ -126,6 +126,21 @@
             {% include 'cosinnus/feedback/report_modal.html' %}
         </div><!-- main container -->
         
+        {% with portal_cms_roots=COSINNUS_CURRENT_PORTAL.wagtail_root_pages.all %}
+        	{% if portal_cms_roots and portal_cms_roots.0.footer %}
+		        <div class="widget-footer overlay-box overlay-box-gray">
+		            <div class="container">
+		                <div class="row">
+		                    <div class="col-xs-12">
+	                    		{{ portal_cms_roots.0.footer|safe }}
+		                    </div>
+		                </div><!-- row -->
+		            </div><!-- container -->
+		        </div><!-- footer -->
+		    {% else %}
+		    	<div style="padding-bottom: 30px;"></div> <!-- replacement space for missing footer -->
+        	{% endif %}
+        {% endwith %}
         
         
     {% include 'cosinnus/extrafooter.html' %}
