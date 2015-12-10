@@ -232,15 +232,12 @@
 			        </div><!-- btn -->
 			        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
 			            
-				    {% if group.media_tag_object.location %}
-			        	<p><i class="fa fa-fw fa-map-marker"></i> <a href="{{ group.media_tag_object.location_url }}" target="_blank">{{ group.media_tag_object.location }}</a></p>
-					{% else %}
+				    {% for group_location in group.locations.all %}
+			        	<p><i class="fa fa-fw fa-map-marker"></i> <a href="{{ group_location.location_url }}" target="_blank">{{ group_location.location }}</a></p>
+					{% empty %}
 						<p>({% trans "No Location set" %})</p>
-					{% endif %}
+					{% endfor %}
 			        </div><!-- content-box -->
-					
-					
-					
 					
 				</div>
 				<div class="col-md-8 col-md-pull-4">

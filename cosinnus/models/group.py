@@ -1166,6 +1166,13 @@ class CosinnusLocation(models.Model):
     class Meta:
         verbose_name = _('CosinnusLocation')
         verbose_name_plural = _('CosinnusLocations')
+        
+    @property
+    def location_url(self):
+        if not self.location_lat or not self.location_lon:
+            return None
+        return 'http://www.openstreetmap.org/?mlat=%s&mlon=%s&zoom=15&layers=M' % (self.location_lat, self.location_lon)
+
     
     
 @receiver(post_delete)
