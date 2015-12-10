@@ -61,7 +61,8 @@ class SamePortalGroupMixin(object):
 
 
 class CosinnusLocationInlineFormset(InlineFormSet):
-    extra = 1
+    extra = 5
+    max_num = 5
     form_class = CosinnusLocationForm
     model = CosinnusLocation
 
