@@ -218,7 +218,7 @@
 															</div>
 															{% if forloop.counter >= locations_formset.management_form.initial.INITIAL_FORMS and forloop.counter < locations_formset.management_form.initial.MAX_NUM_FORMS %}
 																<div id="locations-more-{{ forloop.counter0 }}">
-																	<button onclick="$('#locations-more-{{ forloop.counter0 }}').hide(); $('#locations-wrapper-{{ forloop.counter }}').show(); return false;">+ {% trans "more" %}...</button>
+																	<button class="btn btn-emphasized pull-right" onclick="$('#locations-more-{{ forloop.counter0 }}').hide(); $('#locations-wrapper-{{ forloop.counter }}').show(); return false;">+ {% trans "more" %}...</button>
 																</div>
 															{% endif %}
 											            </div>
