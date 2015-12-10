@@ -32,9 +32,11 @@
         <script type="application/javascript">
             var mapData = [
                 {% for group, members, pendings, admins in rows %}
-                    {% if group.media_tag and group.media_tag.location and group.media_tag.location_lat and group.media_tag.location_lon %}
-                        {lat: {{ group.media_tag.location_lat|stringformat:"f" }}, lon: {{ group.media_tag.location_lon|stringformat:"f" }}, title: '<a href="{{ group.get_absolute_url }}">{{ group.name }}</a>'},
-                    {% endif %}
+                	{% for group_location in group.locations.all %}
+	                    {% if group_location.location and group_location.location_lat and group_location.location_lon %}
+	                        {lat: {{ group_location.location_lat|stringformat:"f" }}, lon: {{ group_location.location_lon|stringformat:"f" }}, title: '<a href="{{ group.get_absolute_url }}">{{ group.name }}</a>'},
+	                    {% endif %}
+	                {% endfor %}
 		        {% endfor %}
             ];
         </script>
