@@ -5,6 +5,12 @@
   {% blocktrans with group_name=object.name %}{{ group_name }} - Members{% endblocktrans %}
 {% endblock %}
 
+{% block extrahead %}
+    {{ block.super }}
+    <link href="{% static 'css/vendor/leaflet.css' %}" rel="stylesheet">
+    <script src="{% static 'js/vendor/leaflet.js' %}"></script>
+{% endblock extrahead %}
+
 {% block leftnav %}
     {% include "cosinnus/group/leftnav_group.html"  with current_page="groupdetails" %}
 {% endblock leftnav %}
@@ -16,8 +22,24 @@
 
 
 {% block content %}
-    <div class="clearfix regular-space">
-        <a href="{% group_url 'cosinnus:group-members-map' group=object %}" class="pull-right light-color underlined">{% trans "show on map" %}</a>
+
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+        
+        <div id="map"></div>
+        <script type="application/javascript">
+            var mapData = [
+                {% for user in members %}
+	                {% with mt=user.cosinnus_profile.media_tag %}
+	                    {% if mt and mt.location and mt.location_lat and mt.location_lon %}
+	                        {lat: {{ mt.location_lat|stringformat:"f" }}, lon: {{ mt.location_lon|stringformat:"f" }}, title: '<a href="{% url 'cosinnus:profile-detail' username=user.username %}">{{ user|full_name }}</a><br/><span>{{ mt.location }}</span>'},
+	                    {% endif %}
+	                {% endwith %}
+		        {% endfor %}
+            ];
+        </script>
+        {% include 'cosinnus/common/map_expand_button.html' %}
+        <div class="clearfix"></div>
     </div>
 
     <!-- a box with semi transparent background -->

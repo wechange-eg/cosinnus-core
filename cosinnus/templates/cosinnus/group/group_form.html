@@ -188,7 +188,49 @@
 		                            </ul>
 		                        </div>
 				                
-		                        {% include "cosinnus/media_tags_group.html" %} 
+		                        {% include "cosinnus/media_tags_group.html"%} 
+
+		                        
+								<label>{% trans "Where are you active?" %}</label>
+							    {% with locations_formset=inlines.0 %}
+									{{ locations_formset.management_form }}
+									{% for inlineform in locations_formset %}
+										{# if inlineform.data // pre-existing? #}
+										{# locations_formset.management_form.initial.MIN_NUM_FORMS': 0, u'MAX_NUM_FORMS': 5, u'TOTAL_FORMS': 5, u'INITIAL_FORMS': 0 #}
+										<div id="locations-wrapper-{{ forloop.counter0 }}" {% if not forloop.counter == 1 and not forloop.counter <= locations_formset.management_form.initial.INITIAL_FORMS %}style="display: none;"{% endif %}>
+										
+											<div type="button" class="btn btn-default w100 ">
+											    <ul class="media-list">
+											        <li class="media">
+											            <a class="pull-left" href="#">
+											                <i class="fa fa-map-marker"></i>
+											            </a>
+											            <div class="media-body {% if forloop.last %}regular-space{% else %}fine-space{% endif %}">
+											                {% captureas placeholder %}{% trans "Enter a place or address." %}{% endcaptureas %}
+											                {% render_field inlineform.location placeholder=placeholder %}
+													        {{ inlineform.location_lat }}
+													        {{ inlineform.location_lon }}
+															{{ inlineform.group }}
+															{{ inlineform.id }}
+															<div>
+																<label for="{{ inlineform.DELETE.id_for_label }}">{% trans "Delete" %}:</label>
+																{{ inlineform.DELETE }}
+															</div>
+															{% if forloop.counter >= locations_formset.management_form.initial.INITIAL_FORMS and forloop.counter < locations_formset.management_form.initial.MAX_NUM_FORMS %}
+																<div id="locations-more-{{ forloop.counter0 }}">
+																	<button onclick="$('#locations-more-{{ forloop.counter0 }}').hide(); $('#locations-wrapper-{{ forloop.counter }}').show(); return false;">+ {% trans "more" %}...</button>
+																</div>
+															{% endif %}
+											            </div>
+											        </li>
+											    </ul>
+											</div>
+											<div id="id_locations-{{ forloop.counter0 }}-location-map"></div>
+											
+										</div>
+									{% endfor %}
+								{% endwith %}
+		                        
 		                        
 		                        {% if form.forms.obj.parent %}
 		                        <label>{% trans "Which Society does the group belong to?" %}</label>

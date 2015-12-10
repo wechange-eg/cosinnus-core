@@ -1,8 +1,13 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n cosinnus_tags %}
+{% load i18n cosinnus_tags static %}
 
 {% block page_title %}{% if group_type == 1 %}{% trans "Societies" %}{% else %}{% trans "Projects" %}{% endif %}{% endblock %}
 
+{% block extrahead %}
+    {{ block.super }}
+    <link href="{% static 'css/vendor/leaflet.css' %}" rel="stylesheet">
+    <script src="{% static 'js/vendor/leaflet.js' %}"></script>
+{% endblock extrahead %}
 
 {% block leftnav %}
     {% if group_type == 1 %}
@@ -28,15 +33,25 @@
 
 
 {% block content %}
-    {% if group_type == 1 %}
-        {% url 'cosinnus:group__group-list-map' as group_list_map %}
-    {% else %}
-        {% url 'cosinnus:group-list-map' as group_list_map %}
-    {% endif %}
-
-    <div class="clearfix regular-space">
-        <a href="{{ group_list_map }}" class="pull-right light-color underlined">{% trans "show on map" %}</a>
+    
+    <!-- a box with semi transparent background -->
+    <div class="content-box">
+        <div id="map"></div>
+        <script type="application/javascript">
+            var mapData = [
+                {% for group, members, pendings, admins in rows %}
+                	{% for group_location in group.locations.all %}
+	                    {% if group_location.location and group_location.location_lat and group_location.location_lon %}
+	                        {lat: {{ group_location.location_lat|stringformat:"f" }}, lon: {{ group_location.location_lon|stringformat:"f" }}, title: '<a href="{{ group.get_absolute_url }}">{{ group.name }}</a><br/><span>{{ group_location.location }}</span>'},
+	                    {% endif %}
+	                {% endfor %}
+		        {% endfor %}
+            ];
+        </script>
+        {% include 'cosinnus/common/map_expand_button.html' %}
+        <div class="clearfix"></div>
     </div>
+    
     <!-- a box with semi transparent background -->
     <div class="content-box">
         

@@ -954,7 +954,23 @@
 
 			var markerGroup = new L.featureGroup(markers);
 			map.fitBounds(markerGroup.getBounds());
-
+			
+			$('#map').data('map', map);
+			$('#mapgrow').click(function() {
+				$('#map').addClass('large');
+				//$('#map').data('map').setZoom( 6 );
+				$('#map').data('map')._onResize();
+				$(this).hide();
+				$('#mapshrink').show();
+			})
+			$('#mapshrink').click(function() {
+				$('#map').removeClass('large');
+				//$('#map').data('map').setZoom( 3 );
+				$('#map').data('map')._onResize();
+				$(this).hide();
+				$('#mapgrow').show();
+			})
+			
 		},
 		
 

@@ -1,0 +1,25 @@
+{% load i18n %}
+<button id="mapgrow" type="button" class="btn btn-emphasized pull-right">
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#">
+                <i class="fa fa-caret-down"></i>
+            </a>
+            <div class="media-body">
+            	{% trans "Expand Map" %}
+            </div>
+        </li>
+    </ul>
+</button>
+<button id="mapshrink" type="button" class="btn btn-emphasized pull-right" style="display:none;">
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#">
+                <i class="fa fa-caret-up"></i>
+            </a>
+            <div class="media-body">
+            	{% trans "Minimize Map" %}
+            </div>
+        </li>
+    </ul>
+</button>

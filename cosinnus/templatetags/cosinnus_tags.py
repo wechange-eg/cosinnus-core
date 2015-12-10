@@ -688,3 +688,13 @@ def textfield(field):
         and formats URLs as target="_blank" links. """
     return url_target_blank(urlizetrunc(linebreaksbr(field), 25))
 
+
+@register.filter
+def debugthis(obj):
+    """ Debug-inspects a template element """
+    if not settings.DEBUG:
+        return ''
+    else:
+        obj = obj
+        import ipdb; ipdb.set_trace(); from pprint import pprint as pp;
+

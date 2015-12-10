@@ -68,6 +68,7 @@
 			
 			<div class="group-microsite-details">
 				
+				{% comment %} No more 'in portal' 
 				<p class="transparent">
 	            	{% if group.public %}
 	            		<i>{% if group.type == 0 %}{% trans "Public Project in Portal" %}{% else %}{% trans "Public Society in Portal" %}{% endif %}: </i>
@@ -76,6 +77,14 @@
 	            	{% endif %}
 	            	{% include 'cosinnus/portal/portal_link_icon.html' with portal=group.portal %}
 	            	<a href="{{ group.portal.get_domain }}">{{ group.portal.name }}</a>
+	            </p>
+				{% endcomment %}
+				<p class="transparent">
+	            	{% if group.public %}
+	            		<i>{% if group.type == 0 %}{% trans "Public Project" %}{% else %}{% trans "Public Society" %}{% endif %}</i>
+	            	{% else %}
+	            		<i>{% if group.type == 0 %}{% trans "Project" %}{% else %}{% trans "Society" %}{% endif %}</i> 
+	            	{% endif %}
 	            </p>
 	            
 	            {% with parent=group.get_parent_typed %}
@@ -232,15 +241,12 @@
 			        </div><!-- btn -->
 			        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
 			            
-				    {% if group.media_tag_object.location %}
-			        	<p><i class="fa fa-fw fa-map-marker"></i> <a href="{{ group.media_tag_object.location_url }}" target="_blank">{{ group.media_tag_object.location }}</a></p>
-					{% else %}
+				    {% for group_location in group.locations.all %}
+			        	<p><i class="fa fa-fw fa-map-marker"></i> <a href="{{ group_location.location_url }}" target="_blank">{{ group_location.location }}</a></p>
+					{% empty %}
 						<p>({% trans "No Location set" %})</p>
-					{% endif %}
+					{% endfor %}
 			        </div><!-- content-box -->
-					
-					
-					
 					
 				</div>
 				<div class="col-md-8 col-md-pull-4">
