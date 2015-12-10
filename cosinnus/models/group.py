@@ -1147,6 +1147,27 @@ class CosinnusPermanentRedirect(models.Model):
         super(CosinnusPermanentRedirect, self).delete(*args, **kwargs)
 
     
+
+from osm_field.fields import OSMField, LatitudeField, LongitudeField
+
+class CosinnusLocation(models.Model):
+    
+    location = OSMField(_('Location'), blank=True, null=True)
+    location_lat = LatitudeField(_('Latitude'), blank=True, null=True)
+    location_lon = LongitudeField(_('Longitude'), blank=True, null=True)
+
+    group = models.ForeignKey(
+        CosinnusGroup,
+        verbose_name=_('Group'),
+        on_delete=models.CASCADE,
+        related_name='locations',
+    )
+    
+    class Meta:
+        verbose_name = _('CosinnusLocation')
+        verbose_name_plural = _('CosinnusLocations')
+    
+    
 @receiver(post_delete)
 def clear_cache_on_group_delete(sender, instance, **kwargs):
     """ Clears the cache on CosinnusGroups after deleting one of them. """

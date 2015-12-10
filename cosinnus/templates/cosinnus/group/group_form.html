@@ -36,6 +36,9 @@
     <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
     {% csrf_token %}
     {{ form.forms.obj.media }}
+    {% for formset in inlines %}
+		{{ formset.management_form }}
+	{% endfor %}
     	
         <ul class="nav nav-tabs" role="tablist">
 			<li {% if not request.GET.tab %}class="active"{% endif %}>

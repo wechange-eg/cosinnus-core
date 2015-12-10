@@ -6,7 +6,8 @@ from django import forms
 from awesome_avatar import forms as avatar_forms
 
 from cosinnus.models.group import (CosinnusGroupMembership,
-    MEMBERSHIP_MEMBER, CosinnusProject, CosinnusSociety, CosinnusPortal)
+    MEMBERSHIP_MEMBER, CosinnusProject, CosinnusSociety, CosinnusPortal,
+    CosinnusLocation)
 from cosinnus.core.registries.apps import app_registry
 
 
@@ -85,3 +86,17 @@ class MembershipForm(GroupKwargModelFormMixin, forms.ModelForm):
         obj.group = self.group
         obj.save()
         return obj
+    
+
+class CosinnusLocationForm(forms.ModelForm):
+
+    class Meta:
+        model = CosinnusLocation
+        fields = ('group', 'location', 'location_lat', 'location_lon', )
+        widgets = {
+            'location_lat': forms.HiddenInput(),
+            'location_lon': forms.HiddenInput(),
+        }
+        
+
+

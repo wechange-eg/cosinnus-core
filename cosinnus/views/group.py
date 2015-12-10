@@ -18,10 +18,10 @@ from django.views.generic import (CreateView, DeleteView, DetailView,
 from cosinnus.core.decorators.views import membership_required, redirect_to_403,\
     dispatch_group_access
 from cosinnus.core.registries import app_registry
-from cosinnus.forms.group import MembershipForm
+from cosinnus.forms.group import MembershipForm, CosinnusLocationForm
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, CosinnusProject,
-    CosinnusSociety, CosinnusPortal)
+    CosinnusSociety, CosinnusPortal, CosinnusLocation)
 from cosinnus.models.serializers.group import GroupSimpleSerializer
 from cosinnus.models.serializers.profile import UserSimpleSerializer
 from cosinnus.utils.compat import atomic
@@ -34,6 +34,8 @@ from cosinnus.views.mixins.avatar import AvatarFormMixin
 from cosinnus.core import signals
 from cosinnus.core.registries.group_models import group_model_registry
 from multiform.forms import InvalidArgument
+from extra_views import (CreateWithInlinesView, FormSetView, InlineFormSet,
+    UpdateWithInlinesView)
 
 from cosinnus.forms.tagged import get_form  # circular import
 from cosinnus.utils.urls import group_aware_reverse, get_non_cms_root_url
@@ -57,7 +59,18 @@ class SamePortalGroupMixin(object):
         """
         return super(SamePortalGroupMixin, self).get_queryset().filter(portal=CosinnusPortal.get_current())
 
+
+class CosinnusLocationInlineFormset(InlineFormSet):
+    extra = 1
+    form_class = CosinnusLocationForm
+    model = CosinnusLocation
+
+
 class CosinnusGroupFormMixin(object):
+    
+    model = CosinnusGroup
+    inlines = [CosinnusLocationInlineFormset]
+    template_name = 'cosinnus/group/group_form.html'
     
     def dispatch(self, *args, **kwargs):
         """ Find out which type of CosinnusGroup (project/society), we're dealing with here. """
@@ -115,16 +128,14 @@ class CosinnusGroupFormMixin(object):
             'deactivated_app_selection': deactivated_app_selection,
         })
         return context
-    
+
 
 class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin, 
-                      CreateView):
+                      CreateWithInlinesView):
 
     #form_class = 
     # Note: Form_class is set dynamically in CosinnusGroupFormMixin.get_form(), depending on what group model we have!
 
-    model = CosinnusGroup
-    template_name = 'cosinnus/group/group_form.html'
     form_view = 'add'
     
     message_success = _('%(group_type)s "%(group)s" was created successfully.')
@@ -134,14 +145,14 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
     def dispatch(self, *args, **kwargs):
         return super(GroupCreateView, self).dispatch(*args, **kwargs)
 
-    def form_valid(self, form):
-        ret = super(GroupCreateView, self).form_valid(form)
+    def forms_valid(self, form, inlines):
+        ret = super(GroupCreateView, self).forms_valid(form, inlines)
         CosinnusGroupMembership.objects.create(user=self.request.user,
             group=self.object, status=MEMBERSHIP_ADMIN)
         messages.success(self.request, self.message_success % {'group':self.object.name, 'group_type':self.object._meta.verbose_name})
         return ret
     
-    def form_invalid(self, form):
+    def forms_invalid(self, form, inlines):
         # workaround: on validation errors delete the entered tags
         # because taggit tags that don't exist yet cannot be rendered back properly
         # (during rendering, the then only string is attempted to be rendered as a tag-id and then not found)
@@ -149,7 +160,7 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
             del form.forms['media_tag'].data['media_tag-tags']
         except KeyError:
             pass
-        return super(GroupCreateView, self).form_invalid(form)
+        return super(GroupCreateView, self).forms_invalid(form, inlines)
 
     def get_context_data(self, **kwargs):
         context = super(GroupCreateView, self).get_context_data(**kwargs)
@@ -359,13 +370,11 @@ class GroupMapListView(GroupListView):
 group_list_map = GroupMapListView.as_view()
 
 class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin,
-                      RequireAdminMixin, UpdateView):
+                      RequireAdminMixin, UpdateWithInlinesView):
 
     #form_class = 
     # Note: Form_class is set dynamically in CosinnusGroupFormMixin.get_form(), depending on what group model we have!
-
-    model = CosinnusGroup
-    template_name = 'cosinnus/group/group_form.html'
+    
     form_view = 'edit'
     
     message_success = _('The %(group_type)s was changed successfully.')
@@ -386,9 +395,9 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin, AvatarFormMi
         kwargs['group'] = self.group
         return kwargs
     
-    def form_valid(self, form):
+    def forms_valid(self, form, inlines):
         messages.success(self.request, self.message_success % {'group_type':self.object._meta.verbose_name})
-        return super(GroupUpdateView, self).form_valid(form)
+        return super(GroupUpdateView, self).forms_valid(form, inlines)
 
     def get_success_url(self):
         return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.group})
