@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-10 17:18+0100\n"
+"POT-Creation-Date: 2015-12-14 12:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -331,7 +331,6 @@ msgid "Website"
 msgstr ""
 
 #: .\models\group.py:416 .\models\group.py:578 .\models\tagged.py:42
-#: .\templates\cosinnus\group\group_list.html:131
 msgid "Public"
 msgstr ""
 
@@ -1363,6 +1362,13 @@ msgstr ""
 #: .\templates\cosinnus\user\user_list.html:19
 msgid "Overview"
 msgstr ""
+
+#: .\templates\cosinnus\group\group_list.html:131
+#, fuzzy
+#| msgid "All Projects"
+msgctxt "Group"
+msgid "Public"
+msgstr "All Projects"
 
 #: .\templates\cosinnus\group\group_list.html:133
 msgid "Not a member"

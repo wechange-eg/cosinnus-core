@@ -127,7 +127,7 @@
                                         {% elif user.pk in pendings %}
                                             {% trans "Membership requested" %}
                                         {% elif group.public %}
-                                            {% trans "Public" %}
+                                            {% trans "Public" context "Group" %}
                                         {% else %}
 		                                    {% trans "Not a member" %}
 		                                {% endif %}

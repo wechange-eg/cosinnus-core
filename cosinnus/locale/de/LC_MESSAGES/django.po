@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-10 17:18+0100\n"
+"POT-Creation-Date: 2015-12-14 12:22+0100\n"
 "PO-Revision-Date: 2015-10-19 11:46+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -360,7 +360,6 @@ msgid "Website"
 msgstr "Webseite"
 
 #: .\models\group.py:416 .\models\group.py:578 .\models\tagged.py:42
-#: .\templates\cosinnus\group\group_list.html:131
 msgid "Public"
 msgstr "Öffentlich"
 
@@ -1441,6 +1440,12 @@ msgstr "Verwandt mit"
 #: .\templates\cosinnus\user\user_list.html:19
 msgid "Overview"
 msgstr "Übersicht"
+
+#: .\templates\cosinnus\group\group_list.html:131
+#| msgid "Public"
+msgctxt "Group"
+msgid "Public"
+msgstr "Öffentlich"
 
 #: .\templates\cosinnus\group\group_list.html:133
 msgid "Not a member"

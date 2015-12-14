@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-10 17:18+0100\n"
+"POT-Creation-Date: 2015-12-14 12:22+0100\n"
 "PO-Revision-Date: 2015-11-14 17:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -367,7 +367,6 @@ msgid "Website"
 msgstr "Сайт"
 
 #: .\models\group.py:416 .\models\group.py:578 .\models\tagged.py:42
-#: .\templates\cosinnus\group\group_list.html:131
 msgid "Public"
 msgstr "В открытом доступе"
 
@@ -1440,6 +1439,12 @@ msgstr "Имеются связи с "
 #: .\templates\cosinnus\user\user_list.html:19
 msgid "Overview"
 msgstr "Обзор"
+
+#: .\templates\cosinnus\group\group_list.html:131
+#| msgid "Public"
+msgctxt "Group"
+msgid "Public"
+msgstr "В открытом доступе"
 
 # ???
 #: .\templates\cosinnus\group\group_list.html:133
