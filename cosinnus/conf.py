@@ -177,6 +177,10 @@ class CosinnusConf(AppConf):
     #     * special views are active on /integrated/ URLs, enabling cross-site login/logout/user-creation
     IS_INTEGRATED_PORTAL = False
     
+    # can a staff user import CosinnusGroups via a CSV upload in the wagtail admin?
+    # and is the button shown?
+    IMPORT_PROJECTS_PERMITTED = False
+    
     # switch to set if Microsites should be enabled.
     # this can be override for each portal to either activate or deactivate them
     MICROSITES_ENABLED = False
