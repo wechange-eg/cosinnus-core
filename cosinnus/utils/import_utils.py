@@ -55,9 +55,9 @@ def unicode_csv_reader(utf8_data, dialect=csv.excel, **kwargs):
 
 
 def csv_unireader(f, encoding="utf-8"):
-    for row in csv.reader(codecs.iterencode(codecs.iterdecode(f, encoding), "utf-8")):
+    for row in csv.reader(codecs.iterencode(codecs.iterdecode(f, encoding), "utf-8"), dialect=csv.excel):
         yield [e.decode("utf-8") for e in row]
-        
+
 
 def csv_import_projects(csv_file, delimiter=b';'):
     """ Imports CosinnusGroups (projects and societies) from a CSV file (InMemory or opened).
@@ -72,13 +72,17 @@ def csv_import_projects(csv_file, delimiter=b';'):
     # example of what's left after printing it in the template:
     # [u'Projekt-ID;Referat;Programmlinie;Titel;Login Organisation;Passwort Organisation;Login Projekt-Blog;Passwort Projekt;Tr\xe4ger 
     
-    rows = csv_unireader(csv_file, 'ISO-8859-1')
+    
+    rows = csv_unireader(open('c://tempp/map_good_notepad.csv', 'r'))
+    
+    #rows = csv_unireader(csv_file)
+    #rows = csv_unireader(csv_file, 'cp1252')
     #rows = UnicodeReader(csv_file)
     #rows = unicode_csv_reader(csv_file, delimiter=delimiter, quotechar=b'"')
     #rows = csv.reader(csv_file, dialect=csv.excel, delimiter=delimiter, quotechar=b'"')
     debu = []
     for row in rows:
-        #print ">>> row:", row
+        print ">> row", row
         debu += [force_text(row)]
         
     return ([], [], [], [], debu)
