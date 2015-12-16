@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 import csv
 import codecs
+from django.db import transaction
 
 class UTF8Recoder:
     """
@@ -43,11 +44,15 @@ def csv_import_projects(csv_file, delimiter=b';'):
         @raise UnicodeDecodeError: if the supplied csv_file is not encoded in 'utf-8' """
     
     rows = UnicodeReader(csv_file)
-    
     debug = ''
-    for row in rows:
-        # TODO: import projects from rows
-        debug += ' | '.join(row) + ' ---- '
+    
+    # rollback DB on error
+    with transaction.atomic():
+        
+        for row in rows:
+            # TODO: import projects from rows
+            debug += ' | '.join(row) + ' ---- '
+            
         
     return ([], [], [], [], debug)
 
