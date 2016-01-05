@@ -1150,7 +1150,16 @@ class CosinnusPermanentRedirect(models.Model):
             del cached_dict[self.cache_string]
         CosinnusPermanentRedirect._set_cache_dict(cached_dict)
         super(CosinnusPermanentRedirect, self).delete(*args, **kwargs)
-
+    
+    def check_integrity(self):
+        """ Checks if this redirect is valid (doesn't point at itself for an infinite loop) 
+            @return: True if the redirect looks stable, False if it would cause a loop """
+        to_type = group_model_registry.get_url_key_by_type(self.to_group._type)
+        
+        if to_type == self.from_type and self.to_group.slug == self.from_slug and \
+                 self.to_group.portal_id == self.from_portal_id:
+            return False
+        return True
     
 
 from osm_field.fields import OSMField, LatitudeField, LongitudeField
