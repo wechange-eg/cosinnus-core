@@ -134,7 +134,7 @@ def check_and_delete_loop_redirects(request):
     bad_redirects = [redirect for redirect in CosinnusPermanentRedirect.objects.all() if not redirect.check_integrity()]
     response_string = 'Bad redirects:<br>' +  \
             '<br>'.join([ \
-                'portal: %d, slug: %s, url: %s' % (redirect.from_portal_id, redirect.from_slug, redirect.to_group.get_absolute_url()) \
+                'portal: %d, from_slug: %s, from_type: %s' % (redirect.from_portal_id, redirect.from_slug, redirect.from_type) \
              for redirect in bad_redirects])
     if delete:
         for redirect in bad_redirects:
