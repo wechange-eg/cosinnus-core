@@ -91,6 +91,7 @@
 	                {% if parent %}
 	                    <p class="transparent">
 	                    	{% trans "Society" %}: <a href="{{ parent.get_absolute_url }}">{{ parent.name }}</a>
+	                    	{% comment %} Other Projects (siblings) link out for now.
 	                    	{% with siblings=group.get_siblings %}
 	                    		{% if siblings %}
 	                    			| {% trans "Other Projects" %}: 
@@ -100,6 +101,7 @@
 	                    			{% endfor %}
 	                    		{% endif %}
 	                    	{% endwith %}
+	                    	{% endcomment %}
 	                    </p>
 	                {% else %}
 			            {% with children=group.get_children %}
