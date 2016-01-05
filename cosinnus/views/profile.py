@@ -19,6 +19,7 @@ from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.models.widget import WidgetConfig
 from django.contrib.auth import logout
 from cosinnus.utils.permissions import check_user_integrated_portal_member
+from django.views.generic.edit import DeleteView
 
 
 def delete_userprofile(user):
@@ -162,7 +163,7 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
 update_view = UserProfileUpdateView.as_view()
 
 
-class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, UpdateView):
+class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, DeleteView):
     #form_class = UserProfileForm
     template_name = 'cosinnus/user/userprofile_delete.html'
     message_success = _('Your profile was deleted successfully. We\'re sorry you are no longer with us.')
@@ -188,7 +189,7 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
     
     def get(self, request, *args, **kwargs):
         self._validate_user_delete_safe(self.request.user)
-        return super(UserProfileDeleteView, self).post(request, *args, **kwargs)
+        return super(UserProfileDeleteView, self).get(request, *args, **kwargs)
     
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
