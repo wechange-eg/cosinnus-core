@@ -256,9 +256,11 @@ class CosinnusGroupManager(models.Manager):
         """ Returns all groups within the current portal only """
         return self.get_queryset().filter(portal=CosinnusPortal.get_current(), is_active=True)
 
-    def get(self, slug=None, portal_id=None):
+    def get(self, slug=None, portal_id=None, id=None):
         if portal_id is None:
             portal_id = CosinnusPortal.get_current().id
+        if id is not None:
+            return self.get_by_id(id, portal_id)
         return self.get_cached(slugs=slug, portal_id=portal_id)
     
     def get_by_id(self, id=None, portal_id=None):
