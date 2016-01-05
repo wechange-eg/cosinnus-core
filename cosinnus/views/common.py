@@ -10,6 +10,7 @@ from cosinnus.conf import settings
 from django.shortcuts import render_to_response
 
 from cosinnus.utils.context_processors import cosinnus as cosinnus_context
+from cosinnus.utils.context_processors import settings as cosinnus_context_settings
 from cosinnus.utils.urls import safe_redirect
 
 class IndexView(RedirectView):
@@ -35,6 +36,7 @@ def _get_bare_cosinnus_context(request):
         'user': request.user,
     }
     context.update(cosinnus_context(request))
+    context.update(cosinnus_context_settings(request))
     return context
 
 
