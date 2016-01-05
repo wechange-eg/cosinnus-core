@@ -644,22 +644,25 @@ class CosinnusGroup(models.Model):
             media_tag = get_tag_object_model()._default_manager.create()
             self.media_tag = media_tag
         
-        display_redirect_created_message = False
-        if not created and (\
-            self.portal != self._portal or \
-            self.type != self._type or \
-            self.slug != self._slug):
-            # group is changing in a ways that would change its URI! 
-            # create permanent redirect from old portal to this group
-            CosinnusPermanentRedirect.create_for_pattern(self._portal, self._type, self._slug, self)
-            display_redirect_created_message = True
-            slugs.append(self._slug)
-            
         if created and not self.portal:
             # set portal to current
             self.portal = CosinnusPortal.get_current()
         
         super(CosinnusGroup, self).save(*args, **kwargs)
+        
+        # check if a redirect should be created AFTER SAVING!
+        display_redirect_created_message = False
+        if not created and (\
+                self.portal != self._portal or \
+                self.type != self._type or \
+                self.slug != self._slug):
+            # create permanent redirect from old portal to this group
+            # group is changing in a ways that would change its URI! 
+            CosinnusPermanentRedirect.create_for_pattern(self._portal, self._type, self._slug, self)
+            display_redirect_created_message = True
+            slugs.append(self._slug)
+            
+            
         self._clear_cache(slugs=slugs, group=self)
         
         self._portal = self.portal
