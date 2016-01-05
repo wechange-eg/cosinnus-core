@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
+from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
+    CosinnusPermanentRedirect
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from django.http.response import HttpResponse, HttpResponseForbidden
 from django.contrib.auth import get_user_model
@@ -122,4 +123,22 @@ def getcache(request):
     
     content = cache.get(HOUSEKEEPING_CACHE_KEY)
     return HttpResponse("The debug cache entry contains: '%s'." % content)
-        
+
+
+def check_and_delete_loop_redirects(request):
+    if not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    
+    delete = bool(request.GET.get('delete', False))
+    
+    bad_redirects = [redirect for redirect in CosinnusPermanentRedirect.objects.all() if not redirect.check_integrity()]
+    response_string = 'Bad redirects:<br>' +  \
+            '<br>'.join([ \
+                'portal: %d, slug: %s, url: %s' % (redirect.from_portal_id, redirect.from_slug, redirect.to_group.get_absolute_url()) \
+             for redirect in bad_redirects])
+    if delete:
+        for redirect in bad_redirects:
+            redirect.delete()
+    response_string += '<br><br>' + ('These redirects were deleted.' if delete else 'Delete them by using ?delete=1 as GET!')
+    return HttpResponse(response_string)
+    
