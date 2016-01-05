@@ -25,10 +25,24 @@ class AvatarFormMixin(object):
             except IOError:
                 messages.error(self.request, _('There was an error while processing your avatar. The image file might be broken or the file transfer was interrupted.'))
     
+    def _reset_awesome_avatar(self, form):
+        initial_obj = self.object.__class__.objects.get(id=self.object.id)
+        setattr(self.object, self.avatar_field_name, getattr(initial_obj, self.avatar_field_name)) 
+    
     def form_valid(self, form):
         self._save_awesome_avatar(form)
         return super(AvatarFormMixin, self).form_valid(form)
-    
+        
     def forms_valid(self, form, inlines):
         self._save_awesome_avatar(form)
         return super(AvatarFormMixin, self).forms_valid(form, inlines)
+
+    def form_invalid(self, form):
+        # reset avatar. can't find another way to carry it over right now.
+        self._reset_awesome_avatar(form)
+        return super(AvatarFormMixin, self).form_invalid(form)
+        
+    def forms_invalid(self, form, inlines):
+        # reset avatar. can't find another way to carry it over right now.
+        self._reset_awesome_avatar(form)
+        return super(AvatarFormMixin, self).forms_invalid(form, inlines)
