@@ -222,14 +222,14 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         
         # we DON'T filter for current portal here, as pending join requests can come from
         # users in other portals
-        _q = get_user_model()._default_manager.exclude(is_active=False) \
+        _q = get_user_model().objects.exclude(is_active=False) \
                              .order_by('first_name', 'last_name') \
                              .select_related('cosinnus_profile')
-        admins = _q._clone().filter(id__in=admin_ids)
-        members = _q._clone().filter(id__in=member_ids)
-        pendings = _q._clone().filter(id__in=pending_ids)
+        admins = _q.filter(id__in=admin_ids)
+        members = _q.filter(id__in=member_ids)
+        pendings = _q.filter(id__in=pending_ids)
         # for adding members, get all users from this portal only  
-        non_members =  _q._clone().exclude(id__in=member_ids). \
+        non_members =  _q.exclude(id__in=member_ids). \
             filter(id__in=CosinnusPortal.get_current().members)
         
         hidden_members = 0
