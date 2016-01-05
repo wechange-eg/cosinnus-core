@@ -522,10 +522,13 @@ class GroupUserLeaveView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
     
     def get_success_url(self):
         # self.referer is set in post() method
-        messages.success(self.request, self.message_success % {'group_name': self.object.name, 'group_type':self.object._meta.verbose_name})
+        if not getattr(self, '_had_error', False):
+            messages.success(self.request, self.message_success % {'group_name': self.object.name, 'group_type':self.object._meta.verbose_name})
         return self.referer
     
     def confirm_action(self):
+        self._had_error = False
+        
         admins = CosinnusGroupMembership.objects.get_admins(group=self.object)
         if len(admins) > 1 or self.request.user.pk not in admins:
             try:
@@ -537,7 +540,9 @@ class GroupUserLeaveView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
                 membership.delete()
             except CosinnusGroupMembership.DoesNotExist:
                 print ">>> error!"
+                self._had_error = True
         else:
+            self._had_error = True
             messages.error(self.request,
                 _('You cannot leave this %(group_type)s. You are the only administrator left.') % { 'group_type':self.object._meta.verbose_name}
             )
