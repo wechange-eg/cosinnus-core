@@ -161,11 +161,12 @@ class CosinnusGroupManager(models.Manager):
                 settings.COSINNUS_GROUP_CACHE_TIMEOUT)
         return slugs
 
-    def get_pks(self, portal_id=None):
+    def get_pks(self, portal_id=None, force=True):
         """
         Gets all group pks from the cache or, if the can has not been filled,
         gets the pks and slugs from the database and fills the cache.
-
+        
+        @param force: if True, forces a rebuild of the pk and slug cache for this group type
         :returns: A :class:`OrderedDict` with a `pk => slug` mapping of all
             groups
         """
@@ -173,7 +174,7 @@ class CosinnusGroupManager(models.Manager):
             portal_id = CosinnusPortal.get_current().id
             
         pks = cache.get(self._GROUPS_PK_CACHE_KEY % (portal_id, self.__class__.__name__))
-        if pks is None:
+        if force or pks is None:
             # we can only find groups via this function that are in the same portal we run in
             pks = OrderedDict(self.filter(portal__id=portal_id, is_active=True).values_list('id', 'slug').all())
             slugs = OrderedDict((v, k) for k, v in six.iteritems(pks))
@@ -666,6 +667,8 @@ class CosinnusGroup(models.Model):
             
             
         self._clear_cache(slugs=slugs, group=self)
+        # force rebuild the pk --> slug cache. otherwise when we query that, this group might not be in it
+        self.__class__.objects.get_pks(force=True)
         
         self._portal = self.portal
         self._type = self.type
