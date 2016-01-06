@@ -210,6 +210,9 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
 
     template_name = 'cosinnus/group/group_detail.html'
     serializer_class = GroupSimpleSerializer
+    
+    # how many regular users are shown on the page. the rest are omitted unless ?show=all is sent
+    default_num_members_shown = 25
 
     def get_object(self, queryset=None):
         return self.group
@@ -217,8 +220,10 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
     def get_context_data(self, **kwargs):
         context = super(GroupDetailView, self).get_context_data(**kwargs)
         admin_ids = CosinnusGroupMembership.objects.get_admins(group=self.group)
-        member_ids = CosinnusGroupMembership.objects.get_members(group=self.group)
+        all_member_ids = CosinnusGroupMembership.objects.get_members(group=self.group)
         pending_ids = CosinnusGroupMembership.objects.get_pendings(group=self.group)
+        
+        member_ids = [id for id in all_member_ids if not id in admin_ids]
         
         # we DON'T filter for current portal here, as pending join requests can come from
         # users in other portals
@@ -228,12 +233,13 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         admins = _q.filter(id__in=admin_ids)
         members = _q.filter(id__in=member_ids)
         pendings = _q.filter(id__in=pending_ids)
+        
         # for adding members, get all users from this portal only  
-        non_members =  _q.exclude(id__in=member_ids). \
+        non_members =  _q.exclude(id__in=all_member_ids). \
             filter(id__in=CosinnusPortal.get_current().members)
         
         hidden_members = 0
-        user_count = members.count()
+        user_count = members.count() + admins.count()
         # for public groups if user not a member of the group, show only public users in widget
         if not self.request.user.is_authenticated() or not \
                 (self.request.user.pk in admin_ids or self.request.user.pk in member_ids or \
@@ -243,9 +249,20 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             pendings = pendings.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
             # concatenate admins into members, because we might have sorted out a private admin, 
             # and the template iterates only over members to display people
-            members = list(set(chain(members, admins)))
-            hidden_members = user_count - len(members)
+            # members = list(set(chain(members, admins)))
             
+            hidden_members = user_count - members.count()
+        
+        # cut off members list to not let the page explode for groups with tons of members
+        if not self.request.GET.get('show', '') == 'all':
+            more_user_count = members.count()
+            members = members[:self.default_num_members_shown]
+            more_user_count -= len(members)
+        else:
+            more_user_count = 0
+        # set admins at the top of the list member
+        members = list(admins) + list(members)
+        
         context.update({
             'admins': admins,
             'members': members,
@@ -253,6 +270,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             'non_members': non_members,
             'member_count': user_count,
             'hidden_user_count': hidden_members,
+            'more_user_count': more_user_count,
         })
         return context
 
