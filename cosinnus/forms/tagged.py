@@ -2,19 +2,29 @@
 from __future__ import unicode_literals
 
 from collections import OrderedDict
+from copy import copy
 
 from django import forms
 from multiform import MultiModelForm, InvalidArgument
 
 from cosinnus.forms.group import GroupKwargModelFormMixin
 from cosinnus.forms.user import UserKwargModelFormMixin
-from cosinnus.models.tagged import get_tag_object_model, BaseTagObject,\
-    BaseTaggableObjectModel
+from cosinnus.models.tagged import get_tag_object_model, BaseTagObject
 from cosinnus.utils.import_utils import import_from_settings
 from cosinnus.forms.select2 import TagSelect2Field
 from django.core.urlresolvers import reverse_lazy
 from django.http.request import QueryDict
-from copy import copy
+
+from django.contrib.auth import get_user_model
+from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext_lazy as _
+
+from django_select2.fields import HeavySelect2MultipleChoiceField, Select2ChoiceField
+
+from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField
+from cosinnus.utils.choices import get_user_choices
+
+from cosinnus.utils.urls import group_aware_reverse
 
 
 TagObject = get_tag_object_model()
@@ -22,10 +32,20 @@ TagObject = get_tag_object_model()
 
 class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
                         forms.ModelForm):
+    
+    like = forms.BooleanField(label=_('Like'), required=False)
+    approach = Select2ChoiceField(choices=TagObject.APPROACH_CHOICES, required=False)
+    topics = CommaSeparatedSelect2MultipleChoiceField(choices=TagObject.TOPIC_CHOICES, required=False)
+    visibility = Select2ChoiceField(choices=TagObject.VISIBILITY_CHOICES, required=False)
 
+    
     class Meta:
-        exclude = ('group',)
         model = TagObject
+        exclude = ('group', 'likes', 'likers', )
+        widgets = {
+            'location_lat': forms.HiddenInput(),
+            'location_lon': forms.HiddenInput(),
+        }
         
     def __init__(self, *args, **kwargs):
         """ Initialize and populate the select2 tags field
@@ -54,10 +74,56 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
             else:
                 self.fields['visibility'].initial = BaseTagObject.VISIBILITY_GROUP
         
+        if self.group:
+            data_url = group_aware_reverse('cosinnus:select2:group-members',
+                                 kwargs={'group': self.group})
+            members = get_user_model().objects.filter(id__in=self.group.members)
+        else:
+            data_url = reverse('cosinnus:select2:all-members')
+            members = get_user_model().objects.all()
+        
+        # override the default persons field with select2
+        self.fields['persons'] = HeavySelect2MultipleChoiceField(
+                label=_("Persons"), help_text='', required=False,
+                data_url=data_url)
+                
+        self.fields['persons'].choices = get_user_choices(members)
+        if self.instance.pk:
+            self.fields['persons'].initial = get_user_choices(self.instance.persons.all())
+
+        if self.group and self.group.media_tag_id:
+            group_media_tag = self.group.media_tag
+            if group_media_tag and group_media_tag is not self.instance:
+                # We must only take data from the group's media tag iff we are
+                # working on a TaggableObjectModel, not on a group
+                opts = self._meta
+
+                # 1. Use all the data from the group's media tag
+                # 2. Use the explicitly defined initial data (self.initial) and
+                #    override the data from the group media tag
+                # 3. Set the combined data as new initial data
+                group_data = forms.model_to_dict(group_media_tag, opts.fields,
+                                                 opts.exclude)
+                group_data.update(self.initial)
+                
+                old_initial = self.initial
+                self.initial = group_data
+                
+                # the default visibility corresponds to group's public setting
+                if 'visibility' in old_initial:
+                    self.initial['visibility'] = old_initial['visibility']
+                elif self.group.public:
+                    self.initial['visibility'] = BaseTagObject.VISIBILITY_ALL
+                else:
+                    self.initial['visibility'] = BaseTagObject.VISIBILITY_GROUP
+            
+        if (self.user and self.instance.pk and
+                self.instance.likers.filter(id=self.user.id).exists()):
+            self.fields['like'].initial = True
             
         
     def save(self, commit=True):
-        instance = super(BaseTagObjectForm, self).save(commit=False)
+        self.instance = super(BaseTagObjectForm, self).save(commit=False)
         
         # set default visibility tag to correspond to group visibility
         # GOTCHA: since BaseTagObject.VISIBILITY_USER == 0, we cannot simply check for ``if not <property``
@@ -68,7 +134,21 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
             else:
                 self.instance.visibility = BaseTagObject.VISIBILITY_GROUP
         
-        return instance
+        if self.user:
+            if not self.instance.pk:
+                # We need to save the tag here to allow add/remove of the user
+                self.instance.save()
+
+            if self.cleaned_data.get('like', False):
+                self.instance.likers.add(self.user)
+            else:
+                self.instance.likers.remove(self.user)
+            # like count is updated in model.save()
+
+        if commit:
+            self.instance.save()
+            self.save_m2m()
+        return self.instance
 
 
 class TagObjectForm(BaseTagObjectForm):
