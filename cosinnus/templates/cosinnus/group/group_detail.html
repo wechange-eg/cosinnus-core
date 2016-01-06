@@ -80,7 +80,99 @@
 	            </button>
             </form>
         {% endif %}
-
+		
+		
+        {% if user|has_write_access:object or user in pendings %}
+            
+            <legend>{% trans "Membership requests" %}</legend>
+            
+	        {% for member in pendings %}
+	           
+	           {% comment %} In public groups, we enable the logged in user to see himself as pending user {% endcomment %}
+	           {% if not user in pendings or user == member %}
+		            <div class="fadedown {% if not forloop.last %}regular-space{% endif %}">
+		                <div class="btn btn-default w100">
+		                    <ul class="media-list">
+		                        <li class="media">
+		                            <a class="pull-left" href="{{ member|profile_url }}">
+		                                {% include "cosinnus/user/user_avatar_image.html" with user=member %}
+		                            </a>
+		                            {% if user|has_write_access:object %}
+		                            <a class="pull-right fadedown-clickarea" href="#">
+		                                <i class="fa fa-chevron-down"></i>
+		                            </a>
+		                            {% endif %}
+		                            <div class="media-body">
+		                                    <span class="annotation">
+	                                            {% trans "Membership requested" %}
+		                                    </span>
+		                                <a href="{% url 'cosinnus:profile-detail' username=member.username %}">
+		                                    {{ member|full_name }}
+		                                </a>
+		                            </div>
+		                        </li>
+		                    </ul>
+		                </div>
+		                
+		                {% if user|has_write_access:object %}
+		                    <div>
+		                        {% captureas modal_kick_id %}userModal_kick_{{member.pk}}{% endcaptureas %}
+		                        {% captureas modal_promote_id %}userModal_promote_{{member.pk}}{% endcaptureas %}
+		                        <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_kick_id}}">
+		                            <ul class="media-list">
+		                                <li class="media">
+		                                    <a class="pull-left" href="#">
+		                                        <i class="fa fa-eraser"></i>
+		                                    </a>
+		                                    <div class="media-body">
+		                                        {% trans "Decline User" %}
+		                                    </div>
+		                                </li>
+		                            </ul>
+		                        </button>
+		                        
+		                        <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_promote_id}}">
+		                            <ul class="media-list">
+		                                <li class="media">
+		                                    <a class="pull-left" href="#">
+		                                        <i class="fa fa-group"></i>
+		                                    </a>
+		                                    <div class="media-body">
+	                                            {% trans "Accept User" %}
+		                                    </div>
+		                                </li>
+		                            </ul>
+		                        </button>
+		                    </div>
+		                    
+		                {% endif %}
+		                
+		            </div><!-- fadedown -->
+		            
+		            {% if user|has_write_access:object %}    
+	                    {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to accept user „{{ name }}“ as a member?{% endblocktrans %}{% endcaptureas %}
+	                    {% captureas title %}{% trans "Accept Member" %}{% endcaptureas %}
+	                    {% captureas action %}{% group_url 'cosinnus:group-user-edit' group=object username=member.username %}{% endcaptureas %}
+	                    {% captureas extra_fields %}<input type="hidden" name="user" value="{{member.pk}}" /><input type="hidden" name="status" value="1" />{% endcaptureas %}
+		                {% include "cosinnus/modal_box.html" with id=modal_promote_id label=label title=title form_action=action form_extra_fields=extra_fields %}
+		                
+		                {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to decline member „{{ name }}“?{% endblocktrans %}{% endcaptureas %}
+		                {% captureas title %}{% trans "Decline Member" %}{% endcaptureas %}
+		                {% captureas action %}{% group_url 'cosinnus:group-user-delete' group=object username=member.username %}{% endcaptureas %}
+		                {% include "cosinnus/modal_box.html" with id=modal_kick_id label=label title=title form_action=action %}
+		                
+		            {% endif %}
+	            
+	            {% endif %}
+	            
+	        {% empty %}
+	            <!-- {% trans "There are no new membership requests." %} -->
+	            {% include 'cosinnus/common/empty_button.html' with message="There are no new membership requests." %}
+	        {% endfor %}
+            
+        {% endif %}
+		
+		
 
         <legend>{% trans "Members" %}{% if member_count %} ({{ member_count }}){% endif %}</legend>
     
@@ -196,97 +288,23 @@
             </div>
         {% endif %}
         
-        
-        {% if user|has_write_access:object or user in pendings %}
-            
-            <legend>{% trans "Membership requests" %}</legend>
-            
-	        {% for member in pendings %}
-	           
-	           {% comment %} In public groups, we enable the logged in user to see himself as pending user {% endcomment %}
-	           {% if not user in pendings or user == member %}
-		            <div class="fadedown {% if not forloop.last %}regular-space{% endif %}">
-		                <div class="btn btn-default w100">
-		                    <ul class="media-list">
-		                        <li class="media">
-		                            <a class="pull-left" href="{{ member|profile_url }}">
-		                                {% include "cosinnus/user/user_avatar_image.html" with user=member %}
-		                            </a>
-		                            {% if user|has_write_access:object %}
-		                            <a class="pull-right fadedown-clickarea" href="#">
-		                                <i class="fa fa-chevron-down"></i>
-		                            </a>
-		                            {% endif %}
-		                            <div class="media-body">
-		                                    <span class="annotation">
-	                                            {% trans "Membership requested" %}
-		                                    </span>
-		                                <a href="{% url 'cosinnus:profile-detail' username=member.username %}">
-		                                    {{ member|full_name }}
-		                                </a>
-		                            </div>
-		                        </li>
-		                    </ul>
-		                </div>
-		                
-		                {% if user|has_write_access:object %}
-		                    <div>
-		                        {% captureas modal_kick_id %}userModal_kick_{{member.pk}}{% endcaptureas %}
-		                        {% captureas modal_promote_id %}userModal_promote_{{member.pk}}{% endcaptureas %}
-		                        <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_kick_id}}">
-		                            <ul class="media-list">
-		                                <li class="media">
-		                                    <a class="pull-left" href="#">
-		                                        <i class="fa fa-eraser"></i>
-		                                    </a>
-		                                    <div class="media-body">
-		                                        {% trans "Decline User" %}
-		                                    </div>
-		                                </li>
-		                            </ul>
-		                        </button>
-		                        
-		                        <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_promote_id}}">
-		                            <ul class="media-list">
-		                                <li class="media">
-		                                    <a class="pull-left" href="#">
-		                                        <i class="fa fa-group"></i>
-		                                    </a>
-		                                    <div class="media-body">
-	                                            {% trans "Accept User" %}
-		                                    </div>
-		                                </li>
-		                            </ul>
-		                        </button>
-		                    </div>
-		                    
-		                {% endif %}
-		                
-		            </div><!-- fadedown -->
-		            
-		            {% if user|has_write_access:object %}    
-	                    {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to accept user „{{ name }}“ as a member?{% endblocktrans %}{% endcaptureas %}
-	                    {% captureas title %}{% trans "Accept Member" %}{% endcaptureas %}
-	                    {% captureas action %}{% group_url 'cosinnus:group-user-edit' group=object username=member.username %}{% endcaptureas %}
-	                    {% captureas extra_fields %}<input type="hidden" name="user" value="{{member.pk}}" /><input type="hidden" name="status" value="1" />{% endcaptureas %}
-		                {% include "cosinnus/modal_box.html" with id=modal_promote_id label=label title=title form_action=action form_extra_fields=extra_fields %}
-		                
-		                {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to decline member „{{ name }}“?{% endblocktrans %}{% endcaptureas %}
-		                {% captureas title %}{% trans "Decline Member" %}{% endcaptureas %}
-		                {% captureas action %}{% group_url 'cosinnus:group-user-delete' group=object username=member.username %}{% endcaptureas %}
-		                {% include "cosinnus/modal_box.html" with id=modal_kick_id label=label title=title form_action=action %}
-		                
-		            {% endif %}
-	            
-	            {% endif %}
-	            
-	        {% empty %}
-	            <!-- {% trans "There are no new membership requests." %} -->
-	            {% include 'cosinnus/common/empty_button.html' with message="There are no new membership requests." %}
-	        {% endfor %}
-            
-        
+        {% if more_user_count > 0 %}
+        	<br/>
+            <div class="btn btn-default w100" href="?show=all">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left" >
+                            <i class="fa fa-chevron-down"></i>
+                        </a>
+                        <div class="media-body">
+                            {% blocktrans with more_count=more_user_count %}Show all of the other {{ more_count }} users...{% endblocktrans %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
         {% endif %}
+        
+        
         
     </div>
 
