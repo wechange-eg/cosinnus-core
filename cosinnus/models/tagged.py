@@ -24,11 +24,9 @@ from cosinnus import cosinnus_notifications
 from cosinnus.core.registries.group_models import group_model_registry
 
 
-class LocationModelMixin(models.Model):
-    location_place = models.CharField(max_length=255, default='', blank=True)
+from osm_field.fields import OSMField, LatitudeField, LongitudeField
 
-    class Meta:
-        abstract = True
+
 
 
 class PeopleModelMixin(models.Model):
@@ -72,6 +70,81 @@ class BaseTagObject(models.Model):
     visibility = models.PositiveSmallIntegerField(_('Permissions'), blank=True,
         default=VISIBILITY_GROUP, choices=VISIBILITY_CHOICES)
     
+    
+    #: Choices for :attr:`approach`: ``(str, str)``
+    # Empty first choice must be included for select2 placeholder compatibility!
+    APPROACH_CHOICES = (
+        ('',''),
+        ('zivilgesellschaft', 'Zivilgesellschaft'),
+        ('politik', 'Politik'),
+        ('forschung', 'Forschung'),
+        ('unternehmen', 'Unternehmen'),
+    )
+
+    #: Choices for :attr:`topics`: ``(int, str)``
+    # Empty first choice must be included for select2 placeholder compatibility!
+    TOPIC_CHOICES = (
+        ('', ''),
+        (0, _('Mobilität')),
+        (1, _('Energie')),
+        (2, _('Umwelt')),
+        (3, _('Bildung')),
+        (4, _('Gesundheit')),
+        (5, _('Ernährung und Konsum')),
+        (6, _('Kunst und Kultur')),
+        (7, _('Geld und Finanzen')),
+        (8, _('Arbeit und Recht')),
+        (9, _('Bauen und Wohnen')),
+    )
+
+    location = OSMField(_('Location'), blank=True, null=True)
+    location_lat = LatitudeField(_('Latitude'), blank=True, null=True)
+    location_lon = LongitudeField(_('Longitude'), blank=True, null=True)
+    
+    place = models.CharField(_('Place'), max_length=100, default='',
+        blank=True)
+
+    valid_start = models.DateTimeField(_('Valid from'), blank=True, null=True)
+    valid_end = models.DateTimeField(_('Valid to'), blank=True, null=True)
+
+    approach = models.CharField(_('Approach'), blank=True, null=True,
+        choices=APPROACH_CHOICES, max_length=255)
+
+    topics = models.CommaSeparatedIntegerField(_('Topics'), blank=True,
+        null=True, max_length=255)  # We cannot at choices here as this would 
+                                    # fail validation
+
+    likes = models.PositiveSmallIntegerField(_('Likes'), blank=True, default=0)
+    likers = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
+        null=True, related_name='likes+')  # no reverse relation on model
+    
+    def save(self, *args, **kwargs):
+        # update like count
+        if self.pk:
+            self.likes = self.likers.count()
+        super(BaseTagObject, self).save(*args, **kwargs)
+    
+    @property
+    def get_topics_display(self):
+        return ', '.join(self.get_topics())
+    
+    @property
+    def get_topics(self):
+        ret = []
+        if self.topics:
+            m = dict(BaseTagObject.TOPIC_CHOICES)
+            for i in map(lambda x: int(x.strip()), [topic for topic in self.topics.split(',') if topic]):
+                t = m.get(i, None)
+                if t:
+                    ret.append(t)
+        return ret
+    
+    @property
+    def location_url(self):
+        if not self.location_lat or not self.location_lon:
+            return None
+        return 'http://www.openstreetmap.org/?mlat=%s&mlon=%s&zoom=15&layers=M' % (self.location_lat, self.location_lon)
+    
     class Meta:
         abstract = True
 
@@ -79,8 +152,7 @@ class BaseTagObject(models.Model):
         return "Tag object {0}".format(self.pk)
 
 
-class TagObject(LocationModelMixin, PeopleModelMixin, PublicModelMixin,
-                BaseTagObject):
+class TagObject(BaseTagObject):
 
     class Meta:
         app_label = 'cosinnus'
