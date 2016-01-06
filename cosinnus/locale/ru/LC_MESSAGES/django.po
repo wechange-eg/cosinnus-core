@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-14 12:22+0100\n"
+"POT-Creation-Date: 2016-01-06 14:45+0100\n"
 "PO-Revision-Date: 2015-11-14 17:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -244,7 +244,7 @@ msgstr "Следующая неделя"
 msgid "Next month"
 msgstr "Следующий месяц"
 
-#: .\forms\hierarchy.py:14 .\models\group.py:410 .\models\group.py:553
+#: .\forms\hierarchy.py:14 .\models\group.py:413 .\models\group.py:556
 msgid "Name"
 msgstr "Название"
 
@@ -338,52 +338,52 @@ msgstr "Объекты жалобы"
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr "Введите допустимое имя. Косую черту не допускается."
 
-#: .\models\group.py:401 .\models\group.py:550 .\models\group.py:1002
+#: .\models\group.py:404 .\models\group.py:553 .\models\group.py:1010
 msgid "Portal"
 msgstr "Портал"
 
-#: .\models\group.py:402
+#: .\models\group.py:405
 msgid "Portals"
 msgstr "Порталы"
 
 # ???
-#: .\models\group.py:412 .\models\group.py:555
+#: .\models\group.py:415 .\models\group.py:558
 msgid "Slug"
 msgstr "Slug"
 
-#: .\models\group.py:414 .\models\profile.py:147
+#: .\models\group.py:417 .\models\profile.py:147
 #: .\templates\cosinnus\_microsite__old_.html:198
 #: .\templates\cosinnus\group\group_form.html:290
-#: .\templates\cosinnus\group\group_microsite.html:157
+#: .\templates\cosinnus\group\group_microsite.html:192
 msgid "Description"
 msgstr "Описание"
 
-#: .\models\group.py:415 .\models\group.py:577 .\models\profile.py:150
+#: .\models\group.py:418 .\models\group.py:580 .\models\profile.py:150
 #: .\templates\cosinnus\group\group_form.html:175
 #: .\templates\cosinnus\group\group_form.html:184
-#: .\templates\cosinnus\group\group_microsite.html:302
+#: .\templates\cosinnus\group\group_microsite.html:337
 #: .\templates\cosinnus\user\userprofile_form.html:97
 msgid "Website"
 msgstr "Сайт"
 
-#: .\models\group.py:416 .\models\group.py:578 .\models\tagged.py:42
+#: .\models\group.py:419 .\models\group.py:581 .\models\tagged.py:42
 msgid "Public"
 msgstr "В открытом доступе"
 
-#: .\models\group.py:420
+#: .\models\group.py:423
 msgid "Associated Site"
 msgstr "Привязанный сайт"
 
 # ???
-#: .\models\group.py:422
+#: .\models\group.py:425
 msgid "Http/Https Protocol (overrides settings)"
 msgstr "Протокол Http/Https (переопределяет настройки)"
 
-#: .\models\group.py:425
+#: .\models\group.py:428
 msgid "Users Need Activation"
 msgstr "Необходимо активировать новых пользователей"
 
-#: .\models\group.py:426
+#: .\models\group.py:429
 msgid ""
 "If activated, newly registered users need to be approved by a portal admin "
 "before being able to log in."
@@ -391,61 +391,61 @@ msgstr ""
 "Чтобы новые зарегистрированные пользователи могли войти на портал, "
 "администратор портала должен подтвердить их активизацию"
 
-#: .\models\group.py:430
+#: .\models\group.py:433
 msgid "Background Image"
 msgstr "Фоновое изображение"
 
-#: .\models\group.py:431
+#: .\models\group.py:434
 msgid "Used for the background of the landing and CMS-pages"
 msgstr "Используется в качестве фона для целевой страницы и CMS"
 
-#: .\models\group.py:434
+#: .\models\group.py:437
 msgid "Logo Image"
 msgstr "Логотип"
 
-#: .\models\group.py:435
+#: .\models\group.py:438
 msgid ""
 "Used as a small logo in the navigation bar and for external links to this "
 "portal"
 msgstr "Используется в панели навигации и для внешних ссылок на этот портал"
 
-#: .\models\group.py:438
+#: .\models\group.py:441
 msgid "Main color"
 msgstr "Основной цвет"
 
-#: .\models\group.py:438
+#: .\models\group.py:441
 msgid "Main background color (css hex value, with or without \"#\")"
 msgstr "Основной цвет фона (цвета hex, по необходимости с „#“)"
 
-#: .\models\group.py:441
+#: .\models\group.py:444
 msgid "Gradient color"
 msgstr "Градиент"
 
-#: .\models\group.py:441
+#: .\models\group.py:444
 msgid "Bottom color for the gradient (css hex value, with or without \"#\")"
 msgstr "Нижний цвет градиента (цвета hex, по необходимости с „#“)"
 
-#: .\models\group.py:444
+#: .\models\group.py:447
 msgid "Extra CSS"
 msgstr "Дополнительный CSS"
 
-#: .\models\group.py:444
+#: .\models\group.py:447
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr ""
 "Дополнительный CSS для этого портала, будет использоваться предпочтительно"
 
-#: .\models\group.py:541 .\models\group.py:1161 .\models\tagged.py:64
+#: .\models\group.py:544 .\models\group.py:1178 .\models\tagged.py:64
 #: .\models\tagged.py:137
 msgid "Group"
 msgstr "Проект"
 
-#: .\models\group.py:542 .\templates\cosinnus\group\group_microsite.html:88
-#: .\templates\cosinnus\group\group_microsite.html:95
+#: .\models\group.py:545 .\templates\cosinnus\group\group_microsite.html:120
+#: .\templates\cosinnus\group\group_microsite.html:127
 msgid "Society"
 msgstr "Группа"
 
 # ???
-#: .\models\group.py:556
+#: .\models\group.py:559
 msgid ""
 "Be extremely careful when changing this slug manually! There can be many "
 "side-effects (redirects breaking e.g.)!"
@@ -453,82 +453,82 @@ msgstr ""
 "Будьте предельно внимательны при ручном изменении этого slug! Это может "
 "привести к побочным эффектам (к примеру, ошибки при перенаправление)!"
 
-#: .\models\group.py:558
+#: .\models\group.py:561
 msgid "Group Type"
 msgstr "Тип группы"
 
-#: .\models\group.py:561
+#: .\models\group.py:564
 msgid "Short Description"
 msgstr "Краткое описание"
 
-#: .\models\group.py:562
+#: .\models\group.py:565
 msgid "Short Description. Internal, will not be shown publicly."
 msgstr ""
 "Краткое описание для внутреннего использования, не отображается публично"
 
-#: .\models\group.py:563
+#: .\models\group.py:566
 #, fuzzy
 msgid "Detailed Description"
 msgstr "Подробное описание"
 
-#: .\models\group.py:564
+#: .\models\group.py:567
 msgid "Detailed, public description."
 msgstr "Подробное описание для публичного доступа"
 
-#: .\models\group.py:565
+#: .\models\group.py:568
 msgid "Contact Information"
 msgstr "Контактная информация"
 
-#: .\models\group.py:566
+#: .\models\group.py:569
 msgid "How you can be contacted - addresses, social media, etc."
 msgstr "Как вас можно найти - адреса, социальные медиа и пр."
 
-#: .\models\group.py:569 .\models\profile.py:145
+#: .\models\group.py:572 .\models\profile.py:145
 #: .\templates\cosinnus\group\group_form.html:87
 msgid "Avatar"
 msgstr "Аватар"
 
-#: .\models\group.py:572
+#: .\models\group.py:575
 msgid "Wallpaper image"
 msgstr "Фоновое изображение"
 
-#: .\models\group.py:573
+#: .\models\group.py:576
 #, fuzzy
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "Отображается на микросайте как большой баннер (1140 x 240 px)"
 
-#: .\models\group.py:586
+#: .\models\group.py:589
 msgid "Deactivated Apps"
 msgstr "Деактивированые приложения"
 
-#: .\models\group.py:588
+#: .\models\group.py:591
 msgid "Is active"
 msgstr "Активно"
 
-#: .\models\group.py:589
+#: .\models\group.py:592
 msgid ""
 "If a group is not active, it counts as non-existent for all purposes and "
 "views on the website."
 msgstr ""
 "Если группа неактивна, она считается несуществующей и не видна на веб-сайте"
 
-#: .\models\group.py:592
+#: .\models\group.py:595
 msgid "Parent Group"
 msgstr "Материнская группа"
 
-#: .\models\group.py:602
+#: .\models\group.py:605
 msgid "Cosinnus group"
 msgstr "Проект"
 
-#: .\models\group.py:603
+#: .\models\group.py:606
 msgid "Cosinnus groups"
 msgstr "Проекты"
 
-#: .\models\group.py:640
+#: .\models\group.py:643
 msgid "Slug must not be empty."
 msgstr "Slug не может быть пустым"
 
-#: .\models\group.py:671
+#: .\models\group.py:679
 msgid ""
 "The URL for this group has changed. A redirect from all existing URLs has "
 "automatically been created!"
@@ -536,80 +536,80 @@ msgstr ""
 "URL этой группы изменен. Создано автоматическое перенаправление со всех "
 "существующих URL"
 
-#: .\models\group.py:876
+#: .\models\group.py:884
 msgid "Cosinnus project"
 msgstr "Проект"
 
-#: .\models\group.py:877
+#: .\models\group.py:885
 msgid "Cosinnus projects"
 msgstr "Проекты"
 
-#: .\models\group.py:909
+#: .\models\group.py:917
 msgid "Cosinnus society"
 msgstr "Группа"
 
-#: .\models\group.py:910
+#: .\models\group.py:918
 msgid "Cosinnus societies"
 msgstr "Группы"
 
-#: .\models\group.py:996
+#: .\models\group.py:1004
 msgid "Group membership"
 msgstr "Членство в группе"
 
-#: .\models\group.py:997
+#: .\models\group.py:1005
 msgid "Group memberships"
 msgstr "Членство в группах"
 
-#: .\models\group.py:1009
+#: .\models\group.py:1017
 msgid "Portal membership"
 msgstr "Членство на портале"
 
-#: .\models\group.py:1010
+#: .\models\group.py:1018
 msgid "Portal memberships"
 msgstr "Членства на портале"
 
-#: .\models\group.py:1021
+#: .\models\group.py:1029
 msgid "From Portal"
 msgstr "Из портала"
 
-#: .\models\group.py:1022
+#: .\models\group.py:1030
 msgid "From Group Type"
 msgstr "От типа группы"
 
 # ???
-#: .\models\group.py:1023
+#: .\models\group.py:1031
 msgid "From Slug"
 msgstr "От slug"
 
-#: .\models\group.py:1026 .\models\group.py:1035
+#: .\models\group.py:1034 .\models\group.py:1043
 msgid "Permanent Group Redirects"
 msgstr "Постоянные перенаправления группы"
 
-#: .\models\group.py:1034
+#: .\models\group.py:1042
 msgid "Permanent Group Redirect"
 msgstr "Постоянное перенаправление группы"
 
-#: .\models\group.py:1155 .\templates\cosinnus\group\group_microsite.html:246
+#: .\models\group.py:1172 .\templates\cosinnus\group\group_microsite.html:281
 msgid "Location"
 msgstr "Место"
 
-#: .\models\group.py:1156
+#: .\models\group.py:1173
 #, fuzzy
 #| msgid "Last edited"
 msgid "Latitude"
 msgstr "В последний раз отредактировано"
 
-#: .\models\group.py:1157
+#: .\models\group.py:1174
 msgid "Longitude"
 msgstr ""
 
-#: .\models\group.py:1167
+#: .\models\group.py:1184
 #, fuzzy
 #| msgid "Cosinnus societies"
 msgid "CosinnusLocation"
 msgstr "Группы"
 
-#: .\models\group.py:1168
+#: .\models\group.py:1185
 #, fuzzy
 #| msgid "Cosinnus societies"
 msgid "CosinnusLocations"
@@ -746,7 +746,7 @@ msgid "Configure"
 msgstr "Настроить"
 
 #: .\templates\cosinnus\_microsite__old_.html:76
-#: .\templates\cosinnus\group\group_microsite.html:378
+#: .\templates\cosinnus\group\group_microsite.html:398
 msgid "Withdraw request"
 msgstr "Отозвать запрос"
 
@@ -755,16 +755,16 @@ msgstr "Отозвать запрос"
 #: .\templates\cosinnus\dashboard.html:144
 #: .\templates\cosinnus\group\group_list.html:175
 #: .\templates\cosinnus\group\group_list.html:264
-#: .\templates\cosinnus\group\group_microsite.html:404
+#: .\templates\cosinnus\group\group_microsite.html:424
 #: .\templates\cosinnus\group\leftnav_group.html:54
-#: .\templates\cosinnus\group\leftnav_group.html:59 .\views\group.py:472
+#: .\templates\cosinnus\group\leftnav_group.html:59 .\views\group.py:490
 msgid "Join"
 msgstr "Присоединиться"
 
 #: .\templates\cosinnus\_microsite__old_.html:102
 #: .\templates\cosinnus\dashboard.html:131
 #: .\templates\cosinnus\group\group_list.html:259
-#: .\templates\cosinnus\group\group_microsite.html:384
+#: .\templates\cosinnus\group\group_microsite.html:404
 #: .\templates\cosinnus\group\leftnav_group.html:48
 #, python-format
 msgid "Do you really want to withdraw your join request to group „%(title)s“?"
@@ -775,7 +775,7 @@ msgstr ""
 #: .\templates\cosinnus\_microsite__old_.html:103
 #: .\templates\cosinnus\dashboard.html:132
 #: .\templates\cosinnus\group\group_list.html:260
-#: .\templates\cosinnus\group\group_microsite.html:385
+#: .\templates\cosinnus\group\group_microsite.html:405
 #: .\templates\cosinnus\group\leftnav_group.html:49
 msgid "Withdraw Join Request"
 msgstr "Отозвать мой запрос на присоединение"
@@ -810,9 +810,9 @@ msgstr "Настройки"
 
 #: .\templates\cosinnus\appsmenu.html:33 .\templates\cosinnus\appsmenu.html:76
 #: .\templates\cosinnus\group\group_detail.html:20
-#: .\templates\cosinnus\group\group_detail.html:85
+#: .\templates\cosinnus\group\group_detail.html:178
 #: .\templates\cosinnus\group\group_members_map.html:14
-#: .\templates\cosinnus\group\group_microsite.html:128
+#: .\templates\cosinnus\group\group_microsite.html:163
 #: .\templates\cosinnus\group\leftnav_group.html:21
 #: .\templates\cosinnus\widgets\group_projects.html:15
 #: .\utils\dashboard.py:216 .\utils\dashboard.py:217
@@ -991,7 +991,7 @@ msgid "Now"
 msgstr "Сейчас"
 
 #: .\templates\cosinnus\dashboard.html:143
-#: .\templates\cosinnus\group\group_microsite.html:403
+#: .\templates\cosinnus\group\group_microsite.html:423
 #: .\templates\cosinnus\group\leftnav_group.html:58
 #, python-format
 msgid "Do you wish to request to join „%(title)s“?"
@@ -1002,7 +1002,7 @@ msgid "Society:"
 msgstr "Группа:"
 
 #: .\templates\cosinnus\dashboard.html:172
-#: .\templates\cosinnus\group\group_microsite.html:167
+#: .\templates\cosinnus\group\group_microsite.html:202
 msgid "No Description set"
 msgstr "Нет описания"
 
@@ -1147,110 +1147,115 @@ msgstr "Добавить члена"
 msgid "Add user"
 msgstr "Добавить пользователя"
 
-#: .\templates\cosinnus\group\group_detail.html:101
+#: .\templates\cosinnus\group\group_detail.html:87
+msgid "Membership requests"
+msgstr "Заявки на вступление"
+
+#: .\templates\cosinnus\group\group_detail.html:108
+#: .\templates\cosinnus\group\group_list.html:129
+msgid "Membership requested"
+msgstr "Подана заявка на членство"
+
+#: .\templates\cosinnus\group\group_detail.html:129
+msgid "Decline User"
+msgstr "Отклонить заявку пользователя"
+
+#: .\templates\cosinnus\group\group_detail.html:142
+msgid "Accept User"
+msgstr "Принять заявку пользователя"
+
+#: .\templates\cosinnus\group\group_detail.html:154
+#, python-format
+msgid "Do you really want to accept user „%(name)s“ as a member?"
+msgstr "Вы действительно хотите дать членство пользователю „%(name)s“?"
+
+#: .\templates\cosinnus\group\group_detail.html:155
+msgid "Accept Member"
+msgstr "Принять в проект"
+
+#: .\templates\cosinnus\group\group_detail.html:160
+#, python-format
+msgid "Do you really want to decline member „%(name)s“?"
+msgstr "Вы действительно хотите отклонить членство пользователя „%(name)s“?"
+
+#: .\templates\cosinnus\group\group_detail.html:161
+msgid "Decline Member"
+msgstr "Отклонить заявку"
+
+#: .\templates\cosinnus\group\group_detail.html:170
+msgid "There are no new membership requests."
+msgstr "Новых заявок на вступление нет"
+
+#: .\templates\cosinnus\group\group_detail.html:194
 #: .\templates\cosinnus\user\portal_admin_list.html:67
 #: .\templates\cosinnus\user\user_list.html:94
 #: .\templates\cosinnus\user\userprofile_detail.html:81
 msgid "Send Message"
 msgstr "Отправить сообщение"
 
-#: .\templates\cosinnus\group\group_detail.html:108
+#: .\templates\cosinnus\group\group_detail.html:201
 #: .\templates\cosinnus\group\group_list.html:125
 msgid "Admin"
 msgstr "Администратор"
 
-#: .\templates\cosinnus\group\group_detail.html:110
+#: .\templates\cosinnus\group\group_detail.html:203
 #: .\templates\cosinnus\group\group_list.html:127
 #: .\templates\cosinnus\widgets\group_projects.html:15
 msgid "Member"
 msgstr "Вы являетесь членом"
 
-#: .\templates\cosinnus\group\group_detail.html:132
+#: .\templates\cosinnus\group\group_detail.html:225
 msgid "Kick"
 msgstr "Удалить"
 
-#: .\templates\cosinnus\group\group_detail.html:146
+#: .\templates\cosinnus\group\group_detail.html:239
 msgid "Make Member"
 msgstr "Включить в члены"
 
-#: .\templates\cosinnus\group\group_detail.html:148
+#: .\templates\cosinnus\group\group_detail.html:241
 msgid "Make Admin"
 msgstr "Сделать администратором"
 
-#: .\templates\cosinnus\group\group_detail.html:163
+#: .\templates\cosinnus\group\group_detail.html:256
 #, python-format
 msgid "Do you really want to demote administrator „%(name)s“ to member?"
 msgstr ""
 "Вы действительно хотите сделать администратора „%(name)s“ простым членом?"
 
-#: .\templates\cosinnus\group\group_detail.html:164
+#: .\templates\cosinnus\group\group_detail.html:257
 msgid "Demote Admin"
 msgstr "Лишить позиции администратора"
 
-#: .\templates\cosinnus\group\group_detail.html:168
+#: .\templates\cosinnus\group\group_detail.html:261
 #, python-format
 msgid "Do you really want to promote member „%(name)s“ to administrator?"
 msgstr ""
 "Вы действительно хотите сделать пользователя „%(name)s“ администратором?"
 
-#: .\templates\cosinnus\group\group_detail.html:169
+#: .\templates\cosinnus\group\group_detail.html:262
 msgid "Promote Member"
 msgstr "Сделать администратором"
 
-#: .\templates\cosinnus\group\group_detail.html:175
+#: .\templates\cosinnus\group\group_detail.html:268
 #, python-format
 msgid "Do you really want to remove member „%(name)s“ from the Group?"
 msgstr "Вы действительно хотите удалить „%(name)s“ из проекта?"
 
-#: .\templates\cosinnus\group\group_detail.html:176
+#: .\templates\cosinnus\group\group_detail.html:269
 msgid "Remove Member"
 msgstr "Удалить пользователя из проекта"
 
-#: .\templates\cosinnus\group\group_detail.html:192
+#: .\templates\cosinnus\group\group_detail.html:285
 #: .\templates\cosinnus\user\portal_admin_list.html:111
 #: .\templates\cosinnus\user\user_list.html:141
 #, python-format
 msgid "And %(hidden_count)s private users..."
 msgstr "И %(hidden_count)s скрытых пользователей..."
 
-#: .\templates\cosinnus\group\group_detail.html:202
-msgid "Membership requests"
-msgstr "Заявки на вступление"
-
-#: .\templates\cosinnus\group\group_detail.html:223
-#: .\templates\cosinnus\group\group_list.html:129
-msgid "Membership requested"
-msgstr "Подана заявка на членство"
-
-#: .\templates\cosinnus\group\group_detail.html:244
-msgid "Decline User"
-msgstr "Отклонить заявку пользователя"
-
-#: .\templates\cosinnus\group\group_detail.html:257
-msgid "Accept User"
-msgstr "Принять заявку пользователя"
-
-#: .\templates\cosinnus\group\group_detail.html:269
+#: .\templates\cosinnus\group\group_detail.html:301
 #, python-format
-msgid "Do you really want to accept user „%(name)s“ as a member?"
-msgstr "Вы действительно хотите дать членство пользователю „%(name)s“?"
-
-#: .\templates\cosinnus\group\group_detail.html:270
-msgid "Accept Member"
-msgstr "Принять в проект"
-
-#: .\templates\cosinnus\group\group_detail.html:275
-#, python-format
-msgid "Do you really want to decline member „%(name)s“?"
-msgstr "Вы действительно хотите отклонить членство пользователя „%(name)s“?"
-
-#: .\templates\cosinnus\group\group_detail.html:276
-msgid "Decline Member"
-msgstr "Отклонить заявку"
-
-#: .\templates\cosinnus\group\group_detail.html:285
-msgid "There are no new membership requests."
-msgstr "Новых заявок на вступление нет"
+msgid "Show all of the other %(more_count)s users..."
+msgstr ""
 
 #: .\templates\cosinnus\group\group_export.html:5
 #: .\templates\cosinnus\group\group_export.html:9
@@ -1316,7 +1321,7 @@ msgstr "Аватар будет удален после сохранения."
 #: .\templates\cosinnus\leftnav_button_editable_folder.html:51
 #: .\templates\cosinnus\user\userprofile_form.html:159
 #: .\templates\cosinnus\widgets\base_widget.html:39 .\views\group.py:201
-#: .\views\group.py:707
+#: .\views\group.py:730
 msgid "Delete"
 msgstr "Удалить"
 
@@ -1412,8 +1417,8 @@ msgstr "Контактная информация. Как вас найти, а�
 #: .\templates\cosinnus\group\group_form.html:368
 #: .\templates\cosinnus\leftnav_button_editable_folder.html:39
 #: .\templates\cosinnus\user\userprofile_form.html:225
-#: .\templates\cosinnus\widgets\add_widget.html:20 .\views\group.py:389
-#: .\views\group.py:670 .\views\user.py:272
+#: .\templates\cosinnus\widgets\add_widget.html:20 .\views\group.py:407
+#: .\views\group.py:693 .\views\user.py:272
 msgid "Save"
 msgstr "Сохранить"
 
@@ -1425,7 +1430,7 @@ msgstr "Группы"
 
 #: .\templates\cosinnus\group\group_list.html:4
 #: .\templates\cosinnus\group\group_list_map.html:4
-#: .\templates\cosinnus\group\group_microsite.html:110
+#: .\templates\cosinnus\group\group_microsite.html:145
 #: .\templates\cosinnus\navbar.html:39 .\templates\cosinnus\navbar.html:56
 #: .\utils\dashboard.py:276
 msgid "Projects"
@@ -1441,7 +1446,6 @@ msgid "Overview"
 msgstr "Обзор"
 
 #: .\templates\cosinnus\group\group_list.html:131
-#| msgid "Public"
 msgctxt "Group"
 msgid "Public"
 msgstr "В открытом доступе"
@@ -1458,11 +1462,11 @@ msgstr "(неактивно)"
 #: .\templates\cosinnus\group\group_list.html:171
 #: .\templates\cosinnus\group\group_list.html:256
 #: .\templates\cosinnus\group\leftnav_group.html:34
-#: .\templates\cosinnus\group\leftnav_group.html:39 .\views\group.py:506
+#: .\templates\cosinnus\group\leftnav_group.html:39 .\views\group.py:524
 msgid "Leave"
 msgstr "Покинуть"
 
-#: .\templates\cosinnus\group\group_list.html:173 .\views\group.py:550
+#: .\templates\cosinnus\group\group_list.html:173 .\views\group.py:573
 msgid "Withdraw"
 msgstr "Отозвать"
 
@@ -1512,80 +1516,91 @@ msgstr "Вам не нравится, как выглядит ваш микро�
 msgid "Change it here..."
 msgstr "Измените его здесь…"
 
-#: .\templates\cosinnus\group\group_microsite.html:86
+#: .\templates\cosinnus\group\group_microsite.html:63
+msgid "Jetzt anmelden und mitgestalten"
+msgstr ""
+
+#: .\templates\cosinnus\group\group_microsite.html:72
+#: .\templates\cosinnus\registration\leftnav.html:19
+#: .\templates\cosinnus\registration\signup.html:124
+msgid "Register"
+msgstr "Регистрация"
+
+#: .\templates\cosinnus\group\group_microsite.html:85
+#: .\templates\cosinnus\registration\leftnav.html:15
+#: .\templates\cosinnus\registration\login.html:4
+#: .\templates\cosinnus\registration\login.html:61
+#: .\templates\cosinnus\registration\password_reset_complete.html:30
+#: .\templates\cosinnus\registration\signup.html:7
+msgid "Login"
+msgstr "Логин"
+
+#: .\templates\cosinnus\group\group_microsite.html:118
 msgid "Public Project"
 msgstr "Проект в публичном доступе"
 
-#: .\templates\cosinnus\group\group_microsite.html:86
+#: .\templates\cosinnus\group\group_microsite.html:118
 msgid "Public Society"
 msgstr "Группа в публичном доступе"
 
-#: .\templates\cosinnus\group\group_microsite.html:88
+#: .\templates\cosinnus\group\group_microsite.html:120
 msgid "Project"
 msgstr "Проект"
 
-#: .\templates\cosinnus\group\group_microsite.html:98
-msgid "Other Projects"
-msgstr "Другие проекты"
-
-#: .\templates\cosinnus\group\group_microsite.html:132
+#: .\templates\cosinnus\group\group_microsite.html:167
 msgid "News posts"
 msgstr "Новости"
 
-#: .\templates\cosinnus\group\group_microsite.html:137
+#: .\templates\cosinnus\group\group_microsite.html:172
 #: .\templates\cosinnus\search.html:134
 msgid "Events"
 msgstr "События"
 
-#: .\templates\cosinnus\group\group_microsite.html:184
+#: .\templates\cosinnus\group\group_microsite.html:219
 msgid "Topics we are involved with"
 msgstr "Темы, которыми мы занимаемся"
 
-#: .\templates\cosinnus\group\group_microsite.html:213
+#: .\templates\cosinnus\group\group_microsite.html:248
 msgid "Activities and interests"
 msgstr "Сфера деятельности и интересы"
 
-#: .\templates\cosinnus\group\group_microsite.html:257
+#: .\templates\cosinnus\group\group_microsite.html:292
 msgid "No Location set"
 msgstr "Место не указано"
 
-#: .\templates\cosinnus\group\group_microsite.html:275
+#: .\templates\cosinnus\group\group_microsite.html:310
 msgid "Contact"
 msgstr "Контакт"
 
-#: .\templates\cosinnus\group\group_microsite.html:285
+#: .\templates\cosinnus\group\group_microsite.html:320
 msgid "No Contact info set"
 msgstr "Не указана контактная информация"
 
-#: .\templates\cosinnus\group\group_microsite.html:324
+#: .\templates\cosinnus\group\group_microsite.html:359
 msgid "Collaborate!"
 msgstr "Давайте сотрудничать!"
 
-#: .\templates\cosinnus\group\group_microsite.html:341
-msgid "Register now!"
-msgstr "Зарегистрируйтесь сейчас!"
-
-#: .\templates\cosinnus\group\group_microsite.html:357
+#: .\templates\cosinnus\group\group_microsite.html:377
 msgid "You are a member. View Project!"
 msgstr "Вы являетесь членом проекта. Посмотреть проект! "
 
-#: .\templates\cosinnus\group\group_microsite.html:359
+#: .\templates\cosinnus\group\group_microsite.html:379
 msgid "You are a member. View Group!"
 msgstr "Вы являетесь членом группы. Посмотреть группу!"
 
-#: .\templates\cosinnus\group\group_microsite.html:368
+#: .\templates\cosinnus\group\group_microsite.html:388
 msgid "Your membership request is still pending..."
 msgstr "Ваша заявка на членство ждет подтверждения…"
 
-#: .\templates\cosinnus\group\group_microsite.html:397
+#: .\templates\cosinnus\group\group_microsite.html:417
 msgid "Join now!"
 msgstr "Присоединяйтесь сейчас!"
 
-#: .\templates\cosinnus\group\group_microsite.html:414
+#: .\templates\cosinnus\group\group_microsite.html:434
 msgid "or you can:"
 msgstr "или:"
 
-#: .\templates\cosinnus\group\group_microsite.html:424
+#: .\templates\cosinnus\group\group_microsite.html:444
 msgid "Browse this public group"
 msgstr "Ознакомьтесь с этим открытым проектом"
 
@@ -1653,7 +1668,7 @@ msgid "Add container"
 msgstr "Добавить „контейнер“"
 
 #: .\templates\cosinnus\hierarchy\add_container.html:27
-#: .\templates\cosinnus\widgets\add_widget.html:20 .\views\group.py:634
+#: .\templates\cosinnus\widgets\add_widget.html:20 .\views\group.py:657
 msgid "Add"
 msgstr "Добавить"
 
@@ -2130,19 +2145,6 @@ msgstr ""
 #, fuzzy
 msgid "Log in..."
 msgstr "Логин"
-
-#: .\templates\cosinnus\registration\leftnav.html:15
-#: .\templates\cosinnus\registration\login.html:4
-#: .\templates\cosinnus\registration\login.html:61
-#: .\templates\cosinnus\registration\password_reset_complete.html:30
-#: .\templates\cosinnus\registration\signup.html:7
-msgid "Login"
-msgstr "Логин"
-
-#: .\templates\cosinnus\registration\leftnav.html:19
-#: .\templates\cosinnus\registration\signup.html:124
-msgid "Register"
-msgstr "Регистрация"
 
 #: .\templates\cosinnus\registration\leftnav.html:23
 msgid "Forgot password?"
@@ -2626,7 +2628,7 @@ msgstr "Описание проекта"
 msgid "About Us"
 msgstr "О нас"
 
-#: .\views\common.py:56
+#: .\views\common.py:58
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Наша платформа не поддерживает язык \"%s\""
@@ -2655,22 +2657,22 @@ msgstr "%(group_type)s \"%(group)s\" был(а) успешно создан(а).
 msgid "Create"
 msgstr "Создать"
 
-#: .\views\group.py:381
+#: .\views\group.py:399
 #, python-format
 msgid "The %(group_type)s was changed successfully."
 msgstr "Изменения в %(group_type)s приняты"
 
-#: .\views\group.py:473
+#: .\views\group.py:491
 #, python-format
 msgid "Do you want to join the %(group_type)s “%(group_name)s”?"
 msgstr "Вы хотите присоединиться к %(group_type)s “%(group_name)s”?"
 
-#: .\views\group.py:474
+#: .\views\group.py:492
 #, python-format
 msgid "Join %(group_type)s “%(group_name)s”?"
 msgstr "Присоединиться к %(group_type)s “%(group_name)s”?"
 
-#: .\views\group.py:475
+#: .\views\group.py:493
 #, python-format
 msgid ""
 "You have requested to join the %(group_type)s “%(group_name)s”. You will "
@@ -2679,29 +2681,29 @@ msgstr ""
 "Вы просили присоединиться к %(group_type)s “%(group_name)s”. Вы получите "
 "письмо, как только администратор группы ответит на ваш запрос."
 
-#: .\views\group.py:507
+#: .\views\group.py:525
 #, python-format
 msgid "Do you want to leave the %(group_type)s “%(group_name)s”?"
 msgstr "Вы хотите покинуть %(group_type)s “%(group_name)s”?"
 
-#: .\views\group.py:508
+#: .\views\group.py:526
 #, python-format
 msgid "Leaving %(group_type)s “%(group_name)s”?"
 msgstr "Покинуть %(group_type)s “%(group_name)s”?"
 
-#: .\views\group.py:510
+#: .\views\group.py:528
 #, python-format
 msgid "You are no longer a member of the %(group_type)s “%(group_name)s”."
 msgstr "Вы больше не являетесь членом %(group_type)s “%(group_name)s”."
 
-#: .\views\group.py:542
+#: .\views\group.py:565
 #, python-format
 msgid ""
 "You cannot leave this %(group_type)s. You are the only administrator left."
 msgstr ""
 "Вы не можете покинуть %(group_type)s. Вы последний оставшийся администратор"
 
-#: .\views\group.py:551
+#: .\views\group.py:574
 #, python-format
 msgid ""
 "Do you want to withdraw your join request to the %(group_type)s “%"
@@ -2710,35 +2712,35 @@ msgstr ""
 "Вы хотите отозвать свой запрос на вступление в %(group_type)s “%(group_name)"
 "s”?"
 
-#: .\views\group.py:552
+#: .\views\group.py:575
 #, python-format
 msgid "Withdraw join request to %(group_type)s “%(group_name)s”?"
 msgstr "Отозвать запрос на вступление в %(group_type)s “%(group_name)s”?"
 
-#: .\views\group.py:554
+#: .\views\group.py:577
 #, python-format
 msgid ""
 "Your join request was withdrawn from %(group_type)s “%(group_name)s” "
 "successfully."
 msgstr "Ваш запрос на вступление в %(group_type)s “%(group_name)s” отозван"
 
-#: .\views\group.py:661
+#: .\views\group.py:684
 msgid "You cannot change your own admin status."
 msgstr "Вы не можете изменить свой собственный статус администратора"
 
-#: .\views\group.py:663 .\views\group.py:697
+#: .\views\group.py:686 .\views\group.py:720
 #, python-format
 msgid "You cannot remove “%(username)s” form this group. Only one admin left."
 msgstr ""
 "Вы не можете удалить “%(username)s” из этого проекта. Остался только один "
 "администратор"
 
-#: .\views\group.py:695
+#: .\views\group.py:718
 #, python-format
 msgid "You cannot remove yourself from a %(group_type)s."
 msgstr "Вы не можете удалить себя из %(group_type)s."
 
-#: .\views\group.py:708
+#: .\views\group.py:731
 #, python-format
 msgid ""
 "Do you want to remove the user “%(username)s”  from the %(group_type)s “%"
@@ -2747,22 +2749,22 @@ msgstr ""
 "Вы действительно хотите удалить пользователя “%(username)s” из %(group_type)"
 "s “%(group_name)s”?"
 
-#: .\views\group.py:713
+#: .\views\group.py:736
 #, python-format
 msgid "Remove user from %(group_type)s “%(group_name)s”?"
 msgstr "Удалить пользователя из %(group_type)s “%(group_name)s”?"
 
-#: .\views\group.py:752
+#: .\views\group.py:775
 #, python-format
 msgid "%(group_name)s was re-activated successfully!"
 msgstr "Активизация %(group_name)s прошла успешно"
 
-#: .\views\group.py:753
+#: .\views\group.py:776
 #, python-format
 msgid "%(group_name)s was deactivated successfully!"
 msgstr "Деактивация %(group_name)s прошла успешно"
 
-#: .\views\group.py:767
+#: .\views\group.py:790
 msgid ""
 "Sorry, only portal administrators can deactivate Groups! You can write a "
 "message to one of the administrators to deactivate it for you. Below you can "
@@ -2772,11 +2774,11 @@ msgstr ""
 "можете написать одному из администраторов с просьбой деактивировать группу. "
 "Ниже вы найдете список администраторов"
 
-#: .\views\group.py:772
+#: .\views\group.py:795
 msgid "This project/group is already active!"
 msgstr "Проект/группа уже активированы!"
 
-#: .\views\group.py:774
+#: .\views\group.py:797
 msgid "This project/group is already inactive!"
 msgstr "Проект/группа уже неактивны!"
 
@@ -2854,22 +2856,22 @@ msgstr "Объект \"%(title)s\" успешно удален"
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d объект(а/ов) был(о) удален(о)"
 
-#: .\views\profile.py:89
+#: .\views\profile.py:90
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "По запросу не найдено %(verbose_name)s "
 
-#: .\views\profile.py:124
+#: .\views\profile.py:125
 msgid "Your profile was edited successfully."
 msgstr "Ваш профиль отредактирован"
 
-#: .\views\profile.py:140
+#: .\views\profile.py:141
 msgid ""
 "Your user account is associated with an integrated Portal. This account's "
 "email address is fixed and therefore was left unchanged."
 msgstr ""
 
-#: .\views\profile.py:156
+#: .\views\profile.py:157
 msgid ""
 "Sorry, your profile could not be saved because there was an error while "
 "processing the avatar!"
@@ -2877,16 +2879,16 @@ msgstr ""
 "К сожалению, ваш профиль не был сохранен, так как произошла ошибка при "
 "обработке аватара"
 
-#: .\views\profile.py:158
+#: .\views\profile.py:159
 msgid "Sorry, something went wrong while saving your profile!"
 msgstr "К сожалению, при сохранении вашего профиля что-то пошло не так"
 
-#: .\views\profile.py:168
+#: .\views\profile.py:169
 msgid ""
 "Your profile was deleted successfully. We're sorry you are no longer with us."
 msgstr "Ваш профиль удален. Жаль, что вы больше не с нами"
 
-#: .\views\profile.py:184
+#: .\views\profile.py:185
 #, python-format
 msgid ""
 "You are the only administrator left for group \"%s\". Please appoint a "
@@ -2970,6 +2972,12 @@ msgid ""
 msgstr ""
 "Вы не являетесь членом %s! Если вы хотите, ниже вы можете отправить запрос "
 "на вступление"
+
+#~ msgid "Other Projects"
+#~ msgstr "Другие проекты"
+
+#~ msgid "Register now!"
+#~ msgstr "Зарегистрируйтесь сейчас!"
 
 #~ msgid "show on map"
 #~ msgstr "Показать на карте"
