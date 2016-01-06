@@ -26,8 +26,9 @@ class AvatarFormMixin(object):
                 messages.error(self.request, _('There was an error while processing your avatar. The image file might be broken or the file transfer was interrupted.'))
     
     def _reset_awesome_avatar(self, form):
-        initial_obj = self.object.__class__.objects.get(id=self.object.id)
-        setattr(self.object, self.avatar_field_name, getattr(initial_obj, self.avatar_field_name)) 
+        if self.object:
+            initial_obj = self.object.__class__.objects.get(id=self.object.id)
+            setattr(self.object, self.avatar_field_name, getattr(initial_obj, self.avatar_field_name)) 
     
     def form_valid(self, form):
         self._save_awesome_avatar(form)
