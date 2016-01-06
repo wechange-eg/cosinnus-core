@@ -14,7 +14,7 @@ class AvatarFormMixin(object):
     
     def _save_awesome_avatar(self, form):
         if form.data.get(self.avatar_field_name+'_clear', 'false') != "false":
-            setattr(form.instance, 'avatar', None)
+            setattr(form.instance, self.avatar_field_name, None)
         elif self.avatar_field_name+'-ratio' in form.data and form.data[self.avatar_field_name+'-ratio']:
             avatar_field = AvatarField()
             avatar_field.name = self.avatar_field_name
