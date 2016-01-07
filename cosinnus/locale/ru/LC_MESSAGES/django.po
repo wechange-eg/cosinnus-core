@@ -3010,3 +3010,472 @@ msgstr ""
 
 #~ msgid "My Dashboard"
 #~ msgstr "Мой Dashboard"
+
+
+#: .\cms_app.py:6
+msgid "NEWWApphook"
+msgstr "NEWWApphook"
+
+#: .\cms_plugins.py:5
+msgid "HTML"
+msgstr "HTML"
+
+#: .\default_settings.py:155
+msgid "Dashboard Welcome-Page (1 Column)"
+msgstr "Стартовая страница панели управления (1 колонка)"
+
+#: .\default_settings.py:156
+msgid "Dashboard Welcome-Page (2 Columns)"
+msgstr "Стартовая страница панели управления (2 колонки)"
+
+#: .\default_settings.py:157
+msgid "Dashboard Welcome-Page (3 Columns)"
+msgstr "Стартовая страница панели управления (3 колонки)"
+
+#: .\default_settings.py:158
+msgid "Regular Dashboard page (1 Column)"
+msgstr "Стандартная страница панели управления (1 колонка)"
+
+#: .\default_settings.py:159
+msgid "Regular Dashboard page (2 Columns)"
+msgstr "Стандартная страница панели управления (2 колонки)"
+
+#: .\default_settings.py:160
+msgid "Regular Dashboard page (3 Columns)"
+msgstr "Стандартная страница панели управления (3 колонки)"
+
+#: .\default_settings.py:233
+msgid "Deutsch"
+msgstr "Deutsch"
+
+#: .\default_settings.py:234
+msgid "English"
+msgstr "English"
+
+#: .\default_settings.py:235
+msgid "Russian"
+msgstr "Русский"
+
+#: .\default_settings.py:237
+msgid "Ukrainian"
+msgstr "Українська"
+
+#: .\forms.py:22
+msgid "Like"
+msgstr "Нравится "
+
+#: .\forms.py:47
+msgid "Persons"
+msgstr "Люди"
+
+#: .\models.py:35
+msgid "Mobilität"
+msgstr "Мобильность"
+
+#: .\models.py:36
+msgid "Energie"
+msgstr "Энергия"
+
+#: .\models.py:37
+msgid "Umwelt"
+msgstr "Окружающая среда"
+
+#: .\models.py:38
+msgid "Bildung"
+msgstr "Образование"
+
+#: .\models.py:39
+msgid "Gesundheit"
+msgstr "Здравоохранение"
+
+#: .\models.py:40
+msgid "Ernährung und Konsum"
+msgstr "Питание и потребление"
+
+#: .\models.py:41
+msgid "Kunst und Kultur"
+msgstr "Искусство и культура"
+
+#: .\models.py:42
+msgid "Geld und Finanzen"
+msgstr "Деньги и финансы"
+
+#: .\models.py:43
+msgid "Arbeit und Recht"
+msgstr "Труд и право"
+
+#: .\models.py:44
+msgid "Bauen und Wohnen"
+msgstr "Строительство и жилье"
+
+#: .\models.py:47
+#: .\templates\cosinnus\media_tags_group_profile_readonly.html.py:4
+msgid "Location"
+msgstr "Место"
+
+#: .\models.py:48
+msgid "Latitude"
+msgstr "Широта"
+
+#: .\models.py:49
+msgid "Longitude"
+msgstr "Долгота"
+
+#: .\models.py:51
+msgid "Place"
+msgstr "Место"
+
+#: .\models.py:54
+msgid "Valid from"
+msgstr "Действителен с"
+
+#: .\models.py:55
+msgid "Valid to"
+msgstr "Действителен до"
+
+#: .\models.py:57
+msgid "Approach"
+msgstr "Подход"
+
+#: .\models.py:60
+#: .\templates\cosinnus\media_tags_group_profile_readonly.html.py:11
+msgid "Topics"
+msgstr "Темы"
+
+#: .\models.py:64
+msgid "Likes"
+msgstr "Нравится"
+
+#: .\models.py:100
+msgid "Text"
+msgstr "Текст"
+
+#: .\cms_plugins\iframe_text\cms_plugins.py:14
+msgid "iFrameText"
+msgstr "Текст iFrame"
+
+#: .\templates\modal_box_nutzungsbedingungen.html.py:10
+msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
+msgstr "Пожалуйста, примите условия нашего пользовательского соглашения"
+
+#: .\templates\modal_box_nutzungsbedingungen.html.py:18
+msgid "Ich erkläre mich mit den Nutzungsbedingungen einverstanden"
+msgstr ""
+"Я соглашаюсь с правилами и условиями, описанными в пользовательском "
+"соглашении"
+
+#: .\templates\modal_box_nutzungsbedingungen.html.py:29
+#: .\templates\modal_box_nutzungsbedingungen.html.py:43
+msgid "OK"
+msgstr "ОК"
+
+#: .\templates\nutzungsbedingungen.html.py:6
+msgid "Nutzungsbedingungen"
+msgstr "Пользовательское соглашение"
+
+#: .\templates\admin\cms\page\menu_item.html.py:5
+msgid "select this page"
+msgstr "Выбрать эту страницу"
+
+#: .\templates\admin\cms\page\menu_item.html.py:5
+#: .\templates\admin\cms\page\menu_item.html.py:6
+msgid "edit this page"
+msgstr "Редактировать эту страницу"
+
+#: .\templates\admin\cms\page\menu_item.html.py:6
+msgid "edit"
+msgstr "Редактировать"
+
+#: .\templates\admin\cms\page\menu_item.html.py:16
+msgid "insert above"
+msgstr "Вставить выше"
+
+#: .\templates\admin\cms\page\menu_item.html.py:17
+msgid "insert below"
+msgstr "Вставить ниже"
+
+#: .\templates\admin\cms\page\menu_item.html.py:19
+msgid "insert inside"
+msgstr "Вставить в середине"
+
+#: .\templates\admin\cms\page\menu_item.html.py:23
+msgid "softroot"
+msgstr "softroot"
+
+#: .\templates\admin\cms\page\menu_item.html.py:23
+msgid "home"
+msgstr "Главная"
+
+#: .\templates\admin\cms\page\menu_item.html.py:26
+#, python-format
+msgid "Edit this page in %(language)s "
+msgstr "Редактировать эту страницу на %(language)s "
+
+#: .\templates\admin\cms\page\menu_item.html.py:33
+msgid "Cut"
+msgstr "Вырезать"
+
+#: .\templates\admin\cms\page\menu_item.html.py:33
+msgid "cut"
+msgstr "Вырезать"
+
+#: .\templates\admin\cms\page\menu_item.html.py:34
+msgid "Copy"
+msgstr "Копировать"
+
+#: .\templates\admin\cms\page\menu_item.html.py:34
+msgid "copy"
+msgstr "Копировать"
+
+#: .\templates\admin\cms\page\menu_item.html.py:37
+#: .\templates\admin\cms\page\menu_item.html.py:41
+msgid "Add Child"
+msgstr "Добавить ребенка"
+
+#: .\templates\admin\cms\page\menu_item.html.py:37
+#: .\templates\admin\cms\page\menu_item.html.py:41
+msgid "add"
+msgstr "Добавить"
+
+#: .\templates\admin\cms\page\menu_item.html.py:44
+msgid "Delete"
+msgstr "Удалить"
+
+#: .\templates\admin\cms\page\menu_item.html.py:44
+msgid "delete"
+msgstr "Удалить"
+
+#: .\templates\admin\cms\page\menu_item.html.py:57
+msgid "Unpublish"
+msgstr "Убрать"
+
+#: .\templates\admin\cms\page\menu_item.html.py:58
+#: .\templates\admin\cms\page\menu_item.html.py:71
+msgid "Publish"
+msgstr "Опубликовать"
+
+#: .\templates\admin\cms\page\menu_item.html.py:62
+msgid "View on page"
+msgstr "Просмотреть на странице"
+
+#: .\templates\admin\cms\page\menu_item.html.py:62
+msgid "view"
+msgstr "Просмотреть"
+
+#: .\templates\cms\dashboard_base.html.py:39
+msgid "Jetzt anmelden und mitgestalten"
+msgstr "Зарегистрироваться и участвовать в создании платформы"
+
+#: .\templates\cosinnus\media_tags.html.py:8
+msgid "Tag persons"
+msgstr "Пометить людей"
+
+#: .\templates\cosinnus\media_tags.html.py:16
+#: .\templates\cosinnus\media_tags.html.py:111
+msgid "Select tags"
+msgstr "Выбрать теги"
+
+#: .\templates\cosinnus\media_tags.html.py:24
+msgid "Place or adress"
+msgstr "Место или адрес"
+
+#: .\templates\cosinnus\media_tags.html.py:36
+msgid "Attach existing Files..."
+msgstr "Приложить имеющиеся файлы…"
+
+#: .\templates\cosinnus\media_tags.html.py:55
+#: .\templates\cosinnus\media_tags.html.py:116
+msgid "Select topic"
+msgstr "Выбрать тему"
+
+#: .\templates\cosinnus\media_tags.html.py:74
+#: .\templates\cosinnus\media_tags_userprofile.html.py:83
+msgid "Privacy"
+msgstr "Конфиденциальность"
+
+#: .\templates\cosinnus\media_tags.html.py:86
+msgid "Add attachment"
+msgstr "Добавить вложение"
+
+#: .\templates\cosinnus\media_tags.html.py:93
+msgid "Tag users"
+msgstr "Пометить пользователей"
+
+#: .\templates\cosinnus\media_tags.html.py:99
+msgid "Tag location"
+msgstr "Отметить место"
+
+#: .\templates\cosinnus\media_tags.html.py:129
+msgid "Change privacy"
+msgstr "Изменить настройки конфиденциальности"
+
+#: .\templates\cosinnus\media_tags_group.html.py:5
+msgid "Where are you active?"
+msgstr "Чем вы занимаетесь?"
+
+#: .\templates\cosinnus\media_tags_group.html.py:13
+#: .\templates\cosinnus\media_tags_userprofile.html.py:13
+msgid "Enter a place or address."
+msgstr "Укажите место/адрес"
+
+#: .\templates\cosinnus\media_tags_group.html.py:23
+msgid "Which topics are you involved with?"
+msgstr "С какими темами вы работаете?"
+
+#: .\templates\cosinnus\media_tags_group.html.py:32
+#: .\templates\cosinnus\media_tags_userprofile.html.py:32
+msgid "Select topics"
+msgstr "Выбрать темы"
+
+#: .\templates\cosinnus\media_tags_group.html.py:57
+msgid "Which tags further describe your activities?"
+msgstr "Какие теги позволяют дополнительно описать вашу деятельность?"
+
+#: .\templates\cosinnus\media_tags_group.html.py:66
+#: .\templates\cosinnus\media_tags_userprofile.html.py:67
+msgid "Select or create tags"
+msgstr "Выбрать или создать теги"
+
+#: .\templates\cosinnus\media_tags_group_profile_readonly.html.py:30
+msgid "Tags"
+msgstr "Теги"
+
+#: .\templates\cosinnus\media_tags_group_profile_readonly.html.py:42
+msgid "Website"
+msgstr "Сайт"
+
+#: .\templates\cosinnus\media_tags_group_readonly.html.py:5
+msgid "Topics we are involved with"
+msgstr "Темы, с которыми вы работаете"
+
+#: .\templates\cosinnus\media_tags_group_readonly.html.py:16
+msgid "Activities and interests"
+msgstr "Деятельность и сфера интересов"
+
+#: .\templates\cosinnus\media_tags_userprofile.html.py:5
+msgid "Where do you live?"
+msgstr "Где вы живете?"
+
+#: .\templates\cosinnus\media_tags_userprofile.html.py:23
+msgid "Which topics are you interested in?"
+msgstr "Какие темы вас интересуют?"
+
+#: .\templates\cosinnus\media_tags_userprofile.html.py:58
+msgid "What would you like to learn?"
+msgstr "Что бы вы хотели узнать?"
+
+#: .\templates\cosinnus\media_tags_userprofile.html.py:74
+msgid "Who is allowed to see you on the platform?"
+msgstr "Кто может видеть вас на платформе?"
+
+#: .\templates\cosinnus\media_tags_userprofile.html.py:84
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:47
+msgid "Group Members only"
+msgstr "Только для членов группы"
+
+#: .\templates\cosinnus\media_tags_userprofile.html.py:85
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:50
+msgid "Everybody"
+msgstr "Все"
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:4
+msgid "My location"
+msgstr "Моё местоположение"
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:11
+msgid "Topics I am interested in"
+msgstr "Темы, которые меня интересуют"
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:30
+msgid "What I wish to learn"
+msgstr "Что я хочу узнать"
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:43
+msgid "Visibility"
+msgstr "Кто может видеть мой профиль"
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:52
+msgid "Hidden"
+msgstr "Скрыто"
+
+#: .\templates\cosinnus\navbar.html.py:7
+msgid "Toggle navigation"
+msgstr "Переключить навигацию"
+
+#: .\templates\cosinnus\navbar.html.py:18
+msgid "Stream"
+msgstr "Лента"
+
+#: .\templates\cosinnus\navbar.html.py:24
+#: .\templates\cosinnus\navbar.html.py:58
+msgid "Societies"
+msgstr "Группы"
+
+#: .\templates\cosinnus\navbar.html.py:32
+#: .\templates\cosinnus\navbar.html.py:36
+msgid "All Societies"
+msgstr "Все группы"
+
+#: .\templates\cosinnus\navbar.html.py:42
+#: .\templates\cosinnus\navbar.html.py:59
+msgid "Projects"
+msgstr "Проекты"
+
+#: .\templates\cosinnus\navbar.html.py:50
+#: .\templates\cosinnus\navbar.html.py:54
+msgid "All Projects"
+msgstr "Все проекты"
+
+#: .\templates\cosinnus\navbar.html.py:66
+msgid "Forum"
+msgstr "Форум"
+
+#: .\templates\cosinnus\navbar.html.py:68
+msgid "People"
+msgstr "Люди"
+
+#: .\templates\cosinnus\navbar.html.py:69
+msgid "Map"
+msgstr "Карта"
+
+#: .\templates\cosinnus\navbar.html.py:75
+msgid "Search..."
+msgstr "Поиск…"
+
+#: .\templates\cosinnus\navbar.html.py:81
+#: .\templates\cosinnus\navbar.html.py:86
+msgid "Messages"
+msgstr "Сообщения"
+
+#: .\templates\cosinnus\navbar.html.py:90
+#: .\templates\cosinnus\navbar.html.py:95
+msgid "My Stream"
+msgstr "Моя лента"
+
+#: .\templates\cosinnus\navbar.html.py:124
+msgid "My Profile"
+msgstr "Мой профиль"
+
+#: .\templates\cosinnus\navbar.html.py:125
+msgid "Notification Preferences"
+msgstr "Уведомления"
+
+#: .\templates\cosinnus\navbar.html.py:127
+msgid "Logout"
+msgstr "Выйти"
+
+#~ msgid "Blog"
+#~ msgstr "Блог"
+
+#~ msgid "Attach File/Image"
+#~ msgstr "Приложить Файл/Изображение"
+
+#~ msgid ""
+#~ "Click to upload a new file/image. You can also drag & drop a file from "
+#~ "your computer."
+#~ msgstr ""
+#~ "Нажмите, чтобы загрузить новый файл / изображение. Вы также можете drag-"
+#~ "and-drop файл с вашего компьютера."
+
+#~ msgid "or upload new..."
+#~ msgstr "или загрузить новый ..."

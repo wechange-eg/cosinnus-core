@@ -2747,3 +2747,470 @@ msgstr ""
 
 #~ msgid "About the group"
 #~ msgstr "About the project"
+
+
+#: .\cms_app.py:6
+msgid "NEWWApphook"
+msgstr ""
+
+#: .\cms_plugins.py:5
+msgid "HTML"
+msgstr ""
+
+#: .\default_settings.py:156
+msgid "Dashboard Welcome-Page (1 Column)"
+msgstr ""
+
+#: .\default_settings.py:157
+msgid "Dashboard Welcome-Page (2 Columns)"
+msgstr ""
+
+#: .\default_settings.py:158
+msgid "Dashboard Welcome-Page (3 Columns)"
+msgstr ""
+
+#: .\default_settings.py:159
+msgid "Regular Dashboard page (1 Column)"
+msgstr ""
+
+#: .\default_settings.py:160
+msgid "Regular Dashboard page (2 Columns)"
+msgstr ""
+
+#: .\default_settings.py:161
+msgid "Regular Dashboard page (3 Columns)"
+msgstr ""
+
+#: .\default_settings.py:234
+msgid "Deutsch"
+msgstr "Deutsch"
+
+#: .\default_settings.py:235
+msgid "English"
+msgstr "English"
+
+#: .\default_settings.py:236
+msgid "Russian"
+msgstr "Русский"
+
+#: .\default_settings.py:237
+msgid "Ukrainian"
+msgstr "Українська"
+
+#: .\forms.py:22
+msgid "Like"
+msgstr ""
+
+#: .\forms.py:47
+msgid "Persons"
+msgstr ""
+
+#: .\models.py:35
+msgid "Mobilität"
+msgstr "Mobility"
+
+#: .\models.py:36
+msgid "Energie"
+msgstr "Energy"
+
+#: .\models.py:37
+msgid "Umwelt"
+msgstr "Environment"
+
+#: .\models.py:38
+msgid "Bildung"
+msgstr "Education"
+
+#: .\models.py:39
+msgid "Gesundheit"
+msgstr "Health"
+
+#: .\models.py:40
+msgid "Ernährung und Konsum"
+msgstr "Nutrition and Consumption"
+
+#: .\models.py:41
+msgid "Kunst und Kultur"
+msgstr "Art and Culture"
+
+#: .\models.py:42
+msgid "Geld und Finanzen"
+msgstr "Money and Finance"
+
+#: .\models.py:43
+msgid "Arbeit und Recht"
+msgstr "Business and Law"
+
+#: .\models.py:44
+msgid "Bauen und Wohnen"
+msgstr "Construction and Living"
+
+#: .\models.py:47
+#: .\templates\cosinnus\media_tags_group_profile_readonly.html.py:4
+msgid "Location"
+msgstr ""
+
+#: .\models.py:48
+msgid "Latitude"
+msgstr ""
+
+#: .\models.py:49
+msgid "Longitude"
+msgstr ""
+
+#: .\models.py:51
+msgid "Place"
+msgstr ""
+
+#: .\models.py:54
+msgid "Valid from"
+msgstr ""
+
+#: .\models.py:55
+msgid "Valid to"
+msgstr ""
+
+#: .\models.py:57
+msgid "Approach"
+msgstr ""
+
+#: .\models.py:60
+#: .\templates\cosinnus\media_tags_group_profile_readonly.html.py:11
+msgid "Topics"
+msgstr ""
+
+#: .\models.py:64
+msgid "Likes"
+msgstr ""
+
+#: .\models.py:100
+msgid "Text"
+msgstr ""
+
+#: .\cms_plugins\iframe_text\cms_plugins.py:14
+msgid "iFrameText"
+msgstr ""
+
+#: .\templates\modal_box_nutzungsbedingungen.html.py:10
+msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
+msgstr ""
+
+#: .\templates\modal_box_nutzungsbedingungen.html.py:18
+msgid "Ich erkläre mich mit den Nutzungsbedingungen einverstanden"
+msgstr ""
+
+#: .\templates\modal_box_nutzungsbedingungen.html.py:29
+#: .\templates\modal_box_nutzungsbedingungen.html.py:43
+msgid "OK"
+msgstr ""
+
+#: .\templates\nutzungsbedingungen.html.py:6
+msgid "Nutzungsbedingungen"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:5
+msgid "select this page"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:5
+#: .\templates\admin\cms\page\menu_item.html.py:6
+msgid "edit this page"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:6
+msgid "edit"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:16
+msgid "insert above"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:17
+msgid "insert below"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:19
+msgid "insert inside"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:23
+msgid "softroot"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:23
+msgid "home"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:26
+#, python-format
+msgid "Edit this page in %(language)s "
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:33
+msgid "Cut"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:33
+msgid "cut"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:34
+msgid "Copy"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:34
+msgid "copy"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:37
+#: .\templates\admin\cms\page\menu_item.html.py:41
+msgid "Add Child"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:37
+#: .\templates\admin\cms\page\menu_item.html.py:41
+msgid "add"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:44
+msgid "Delete"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:44
+msgid "delete"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:57
+msgid "Unpublish"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:58
+#: .\templates\admin\cms\page\menu_item.html.py:71
+msgid "Publish"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:62
+msgid "View on page"
+msgstr ""
+
+#: .\templates\admin\cms\page\menu_item.html.py:62
+msgid "view"
+msgstr ""
+
+#: .\templates\cms\dashboard_base.html.py:39
+msgid "Jetzt anmelden und mitgestalten"
+msgstr "Join now and collaborate"
+
+#: .\templates\cosinnus\media_tags.html.py:8
+msgid "Tag persons"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags.html.py:16
+#: .\templates\cosinnus\media_tags.html.py:111
+msgid "Select tags"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags.html.py:24
+msgid "Place or adress"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags.html.py:36
+msgid "Attach existing Files..."
+msgstr ""
+
+#: .\templates\cosinnus\media_tags.html.py:55
+#: .\templates\cosinnus\media_tags.html.py:116
+msgid "Select topic"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags.html.py:74
+#: .\templates\cosinnus\media_tags_userprofile.html.py:83
+msgid "Privacy"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags.html.py:86
+msgid "Add attachment"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags.html.py:93
+msgid "Tag users"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags.html.py:99
+msgid "Tag location"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags.html.py:129
+msgid "Change privacy"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_group.html.py:5
+msgid "Where are you active?"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_group.html.py:13
+#: .\templates\cosinnus\media_tags_userprofile.html.py:13
+msgid "Enter a place or address."
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_group.html.py:23
+msgid "Which topics are you involved with?"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_group.html.py:32
+#: .\templates\cosinnus\media_tags_userprofile.html.py:32
+msgid "Select topics"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_group.html.py:57
+msgid "Which tags further describe your activities?"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_group.html.py:66
+#: .\templates\cosinnus\media_tags_userprofile.html.py:67
+msgid "Select or create tags"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_group_profile_readonly.html.py:30
+msgid "Tags"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_group_profile_readonly.html.py:42
+msgid "Website"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_group_readonly.html.py:5
+msgid "Topics we are involved with"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_group_readonly.html.py:16
+msgid "Activities and interests"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_userprofile.html.py:5
+msgid "Where do you live?"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_userprofile.html.py:23
+msgid "Which topics are you interested in?"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_userprofile.html.py:58
+msgid "What would you like to learn?"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_userprofile.html.py:74
+msgid "Who is allowed to see you on the platform?"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_userprofile.html.py:84
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:47
+msgid "Group Members only"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_userprofile.html.py:85
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:50
+msgid "Everybody"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:4
+msgid "My location"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:11
+msgid "Topics I am interested in"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:30
+msgid "What I wish to learn"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:43
+msgid "Visibility"
+msgstr ""
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:52
+msgid "Hidden"
+msgstr ""
+
+#: .\templates\cosinnus\navbar.html.py:7
+msgid "Toggle navigation"
+msgstr ""
+
+#: .\templates\cosinnus\navbar.html.py:35
+msgid "My Profile"
+msgstr ""
+
+#: .\templates\cosinnus\navbar.html.py:37
+msgid "Notification Preferences"
+msgstr ""
+
+#: .\templates\cosinnus\navbar.html.py:40
+msgid "Logout"
+msgstr ""
+
+#: .\templates\cosinnus\navbar_buttons.html.py:3
+msgid "Stream"
+msgstr ""
+
+#: .\templates\cosinnus\navbar_buttons.html.py:11
+msgid "Forum"
+msgstr ""
+
+#: .\templates\cosinnus\navbar_buttons.html.py:13
+msgid "People"
+msgstr ""
+
+#: .\templates\cosinnus\navbar_buttons.html.py:14
+msgid "Map"
+msgstr ""
+
+#: .\templates\cosinnus\navbar_buttons_group_menus.html.py:7
+#: .\templates\cosinnus\navbar_buttons_group_menus.html.py:41
+msgid "Societies"
+msgstr "Groups"
+
+#: .\templates\cosinnus\navbar_buttons_group_menus.html.py:15
+#: .\templates\cosinnus\navbar_buttons_group_menus.html.py:19
+msgid "All Societies"
+msgstr "All Groups"
+
+#: .\templates\cosinnus\navbar_buttons_group_menus.html.py:25
+#: .\templates\cosinnus\navbar_buttons_group_menus.html.py:42
+msgid "Projects"
+msgstr ""
+
+#: .\templates\cosinnus\navbar_buttons_group_menus.html.py:33
+#: .\templates\cosinnus\navbar_buttons_group_menus.html.py:37
+msgid "All Projects"
+msgstr ""
+
+#: .\templates\cosinnus\navbar_icon_buttons.html.py:5
+msgid "Search..."
+msgstr ""
+
+#: .\templates\cosinnus\navbar_icon_buttons.html.py:11
+#: .\templates\cosinnus\navbar_icon_buttons.html.py:16
+msgid "Messages"
+msgstr ""
+
+#: .\templates\cosinnus\navbar_icon_buttons.html.py:20
+#: .\templates\cosinnus\navbar_icon_buttons.html.py:25
+msgid "My Stream"
+msgstr "Activities"
+
+#: .\templates_subdomain\zukunftsmacher\cosinnus\navbar_buttons.html.py:5
+msgid "Back to the Zukunftsmacher-Plattform..."
+msgstr ""
+
+#: .\templates_subdomain\zukunftsmacher\cosinnus\portal\no_anonymous_access_page_content.html.py:4
+msgid "No anonymous access!"
+msgstr ""
+
+#: .\templates_subdomain\zukunftsmacher\cosinnus\portal\no_anonymous_access_page_content.html.py:7
+msgid "You are not logged in any more."
+msgstr ""
+
+#: .\templates_subdomain\zukunftsmacher\cosinnus\portal\no_anonymous_access_page_content.html.py:7
+msgid "Please access this site by logging in through"
+msgstr ""

@@ -3185,3 +3185,683 @@ msgstr ""
 
 #~ msgid "You have not uploaded an avatar yet"
 #~ msgstr "Sie haben noch kein Bild hochgeladen"
+
+
+#: .\neww\default_settings.py:235
+msgid "Deutsch"
+msgstr "Deutsch"
+
+#: .\neww\default_settings.py:236
+msgid "English"
+msgstr "English"
+
+#: .\neww\default_settings.py:237
+msgid "Russian"
+msgstr "Русский"
+
+#: .\neww\default_settings.py:238
+msgid "Ukrainian"
+msgstr "Українська"
+
+#: .\neww\forms.py:22
+msgid "Like"
+msgstr ""
+
+#: .\neww\forms.py:47
+msgid "Persons"
+msgstr "Personen"
+
+#: .\neww\image_formats.py:7
+msgid "Tiny (50 x *)"
+msgstr ""
+
+#: .\neww\image_formats.py:8
+msgid "Very Small (100 x *)"
+msgstr ""
+
+#: .\neww\image_formats.py:9
+msgid "Smaller (150 x *)"
+msgstr ""
+
+#: .\neww\image_formats.py:10
+msgid "Small (200 x *)"
+msgstr ""
+
+#: .\neww\image_formats.py:11
+msgid "Medium-small (250 x *)"
+msgstr ""
+
+#: .\neww\image_formats.py:12
+msgid "Medium (300 x *)"
+msgstr ""
+
+#: .\neww\image_formats.py:13
+msgid "Large (400 x *)"
+msgstr ""
+
+#: .\neww\image_formats.py:14
+msgid "Larger (500 x *)"
+msgstr ""
+
+#: .\neww\image_formats.py:15
+msgid "Very large (650 x *)"
+msgstr ""
+
+#: .\neww\image_formats.py:16
+msgid "Extra large (800 x *)"
+msgstr ""
+
+#: .\neww\image_formats.py:17
+msgid "XXL (1200 x *)"
+msgstr ""
+
+#: .\neww\models.py:46
+msgid "Mobilität"
+msgstr ""
+
+#: .\neww\models.py:47
+msgid "Energie"
+msgstr ""
+
+#: .\neww\models.py:48
+msgid "Umwelt"
+msgstr ""
+
+#: .\neww\models.py:49
+msgid "Bildung"
+msgstr ""
+
+#: .\neww\models.py:50
+msgid "Gesundheit"
+msgstr ""
+
+#: .\neww\models.py:51
+msgid "Ernährung und Konsum"
+msgstr ""
+
+#: .\neww\models.py:52
+msgid "Kunst und Kultur"
+msgstr ""
+
+#: .\neww\models.py:53
+msgid "Geld und Finanzen"
+msgstr ""
+
+#: .\neww\models.py:54
+msgid "Arbeit und Recht"
+msgstr ""
+
+#: .\neww\models.py:55
+msgid "Bauen und Wohnen"
+msgstr ""
+
+#: .\neww\models.py:58
+#: .\neww\templates\cosinnus\media_tags_group_profile_readonly.html:4
+msgid "Location"
+msgstr "Ort"
+
+#: .\neww\models.py:59
+msgid "Latitude"
+msgstr ""
+
+#: .\neww\models.py:60
+msgid "Longitude"
+msgstr ""
+
+#: .\neww\models.py:62
+msgid "Place"
+msgstr "Ort"
+
+#: .\neww\models.py:65
+msgid "Valid from"
+msgstr "Gültig von"
+
+#: .\neww\models.py:66
+msgid "Valid to"
+msgstr "Gültig bis"
+
+#: .\neww\models.py:68
+msgid "Approach"
+msgstr "Ansatz"
+
+#: .\neww\models.py:71
+#: .\neww\templates\cosinnus\media_tags_group_profile_readonly.html:11
+msgid "Topics"
+msgstr "Themen"
+
+#: .\neww\models.py:75
+msgid "Likes"
+msgstr ""
+
+#: .\neww\models.py:126 .\neww\models.py:211 .\neww\models.py:298
+#| msgid "Contact"
+msgid "Content"
+msgstr "Inhalt"
+
+#: .\neww\models.py:141
+msgid "Portal Root Page"
+msgstr "Portal-Root Seite"
+
+#: .\neww\models.py:152
+msgid "Show Register Button"
+msgstr "Registrieren Button anzeigen"
+
+#: .\neww\models.py:153
+msgid "Redirect Logged in Users"
+msgstr "Eingeloggte Benutzer weiterleiten"
+
+#: .\neww\models.py:154
+msgid ""
+"If active, this page will only be visible to non-logged-in users. All others "
+"will be redirected to the activities page."
+msgstr ""
+"Wenn aktiv, sehen diese Seite nur Benutzer die nicht eingeloggt sind. Alle "
+"eingeloggten Benutzer werden direkt auf die Aktivitäten-Seite weitergeleitet."
+
+#: .\neww\models.py:158
+msgid "Left banner (top)"
+msgstr "Linkes banner (oben)"
+
+#: .\neww\models.py:159
+msgid "Right banner (top)"
+msgstr "Rechtes banner (oben)"
+
+#: .\neww\models.py:161
+msgid "Header"
+msgstr "Kopfzeile (nach Banner)"
+
+#: .\neww\models.py:163
+msgid "Left footer"
+msgstr "Fußzeile links"
+
+#: .\neww\models.py:164
+msgid "Right footer"
+msgstr "Fußzeile rechts"
+
+#: .\neww\models.py:209
+msgid "1-Column Dashboard Page"
+msgstr "1-spaltige Dashboard Seite"
+
+#: .\neww\models.py:234
+msgid "2-Column Dashboard Page"
+msgstr "2-spaltige Dashboard Seite"
+
+#: .\neww\models.py:236 .\neww\models.py:264
+msgid "Content (left column)"
+msgstr "Inhalt (linke Spalte)"
+
+#: .\neww\models.py:237 .\neww\models.py:266
+msgid "Content (right column)"
+msgstr "Inhalt (rechte Spalte)"
+
+#: .\neww\models.py:262
+msgid "3-Column Dashboard Page"
+msgstr "3-spaltige Dashboard Seite"
+
+#: .\neww\models.py:265
+msgid "Content (center column)"
+msgstr "Inhalt (mittlere Spalte)"
+
+#: .\neww\models.py:295
+msgid "Simple One-Column Page"
+msgstr "Simple einspaltige Seite"
+
+#: .\neww\templates\admin\cms\page\menu_item.html:5
+msgid "select this page"
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:5
+#: .\neww\templates\admin\cms\page\menu_item.html:6
+msgid "edit this page"
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:6
+msgid "edit"
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:16
+msgid "insert above"
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:17
+msgid "insert below"
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:19
+msgid "insert inside"
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:23
+msgid "softroot"
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:23
+msgid "home"
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:26
+#, python-format
+msgid "Edit this page in %(language)s "
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:33
+msgid "Cut"
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:33
+msgid "cut"
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:34
+msgid "Copy"
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:34
+msgid "copy"
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:37
+#: .\neww\templates\admin\cms\page\menu_item.html:41
+msgid "Add Child"
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:37
+#: .\neww\templates\admin\cms\page\menu_item.html:41
+msgid "add"
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:44
+msgid "Delete"
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:44
+msgid "delete"
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:57
+msgid "Unpublish"
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:58
+#: .\neww\templates\admin\cms\page\menu_item.html:71
+msgid "Publish"
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:62
+msgid "View on page"
+msgstr ""
+
+#: .\neww\templates\admin\cms\page\menu_item.html:62
+msgid "view"
+msgstr ""
+
+#: .\neww\templates\cosinnus\media_tags.html:8
+msgid "Tag persons"
+msgstr "Personen markieren"
+
+#: .\neww\templates\cosinnus\media_tags.html:16
+#: .\neww\templates\cosinnus\media_tags.html:111
+msgid "Select tags"
+msgstr "Tags markieren"
+
+#: .\neww\templates\cosinnus\media_tags.html:24
+msgid "Place or adress"
+msgstr "Ort oder Adresse"
+
+#: .\neww\templates\cosinnus\media_tags.html:36
+msgid "Attach existing Files..."
+msgstr "Vorhandene Datei wählen..."
+
+#: .\neww\templates\cosinnus\media_tags.html:55
+#: .\neww\templates\cosinnus\media_tags.html:116
+msgid "Select topic"
+msgstr "Thema markieren"
+
+#: .\neww\templates\cosinnus\media_tags.html:74
+#: .\neww\templates\cosinnus\media_tags_userprofile.html:83
+msgid "Privacy"
+msgstr "Sichtbarkeit einstellen"
+
+#: .\neww\templates\cosinnus\media_tags.html:86
+msgid "Add attachment"
+msgstr "Anhang hinzufügen"
+
+#: .\neww\templates\cosinnus\media_tags.html:93
+msgid "Tag users"
+msgstr "Personen markieren"
+
+#: .\neww\templates\cosinnus\media_tags.html:99
+msgid "Tag location"
+msgstr "Ort markieren"
+
+#: .\neww\templates\cosinnus\media_tags.html:129
+msgid "Change privacy"
+msgstr "Sichtbarkeit einstellen"
+
+#: .\neww\templates\cosinnus\media_tags_group.html:5
+msgid "Where are you active?"
+msgstr "Wo bist du aktiv?"
+
+#: .\neww\templates\cosinnus\media_tags_group.html:13
+#: .\neww\templates\cosinnus\media_tags_userprofile.html:13
+msgid "Enter a place or address."
+msgstr "Gib einen Ort oder Adresse ein."
+
+#: .\neww\templates\cosinnus\media_tags_group.html:23
+msgid "Which topics are you involved with?"
+msgstr "Um welche Themen geht es?"
+
+#: .\neww\templates\cosinnus\media_tags_group.html:32
+#: .\neww\templates\cosinnus\media_tags_userprofile.html:32
+msgid "Select topics"
+msgstr "Themen markieren"
+
+#: .\neww\templates\cosinnus\media_tags_group.html:57
+msgid "Which tags further describe your activities?"
+msgstr "Welche Stichworte sind relevant?"
+
+#: .\neww\templates\cosinnus\media_tags_group.html:66
+#: .\neww\templates\cosinnus\media_tags_userprofile.html:67
+msgid "Select or create tags"
+msgstr "Tags auswählen oder erstellen"
+
+#: .\neww\templates\cosinnus\media_tags_group_profile_readonly.html:30
+msgid "Tags"
+msgstr ""
+
+#: .\neww\templates\cosinnus\media_tags_group_profile_readonly.html:42
+msgid "Website"
+msgstr "Webseite"
+
+#: .\neww\templates\cosinnus\media_tags_group_readonly.html:5
+msgid "Topics we are involved with"
+msgstr "Um welche Themen geht es?"
+
+#: .\neww\templates\cosinnus\media_tags_group_readonly.html:16
+msgid "Activities and interests"
+msgstr ""
+
+#: .\neww\templates\cosinnus\media_tags_userprofile.html:5
+msgid "Where do you live?"
+msgstr "Wo lebst du?"
+
+#: .\neww\templates\cosinnus\media_tags_userprofile.html:23
+msgid "Which topics are you interested in?"
+msgstr "An welchen Themen bist du interessiert?"
+
+#: .\neww\templates\cosinnus\media_tags_userprofile.html:58
+msgid "What would you like to learn?"
+msgstr "Was möchtest du lernen?"
+
+#: .\neww\templates\cosinnus\media_tags_userprofile.html:74
+msgid "Who is allowed to see you on the platform?"
+msgstr "Wer darf dich auf der Plattform sehen?"
+
+#: .\neww\templates\cosinnus\media_tags_userprofile.html:84
+#: .\neww\templates\cosinnus\media_tags_userprofile_readonly.html:47
+msgid "Group Members only"
+msgstr "Nur Projektmitglieder"
+
+#: .\neww\templates\cosinnus\media_tags_userprofile.html:85
+#: .\neww\templates\cosinnus\media_tags_userprofile_readonly.html:50
+msgid "Everybody"
+msgstr "Jeder"
+
+#: .\neww\templates\cosinnus\media_tags_userprofile_readonly.html:4
+msgid "My location"
+msgstr "Wo lebst du?"
+
+#: .\neww\templates\cosinnus\media_tags_userprofile_readonly.html:11
+msgid "Topics I am interested in"
+msgstr "Themen die mich interessieren"
+
+#: .\neww\templates\cosinnus\media_tags_userprofile_readonly.html:30
+msgid "What I wish to learn"
+msgstr "Was ich lernen möchte"
+
+#: .\neww\templates\cosinnus\media_tags_userprofile_readonly.html:43
+msgid "Visibility"
+msgstr "Sichtbarkeit"
+
+#: .\neww\templates\cosinnus\media_tags_userprofile_readonly.html:52
+msgid "Hidden"
+msgstr "Versteckt"
+
+#: .\neww\templates\cosinnus\navbar.html:7
+msgid "Toggle navigation"
+msgstr "Navigation ein/ausblenden"
+
+#: .\neww\templates\cosinnus\navbar.html:35
+msgid "My Profile"
+msgstr "Mein Profil"
+
+#: .\neww\templates\cosinnus\navbar.html:37
+msgid "Notification Preferences"
+msgstr ""
+
+#: .\neww\templates\cosinnus\navbar.html:40
+msgid "Logout"
+msgstr "Logout"
+
+#: .\neww\templates\cosinnus\navbar.html:49
+#, fuzzy
+#| msgid "Logo"
+msgid "Login"
+msgstr "Logo"
+
+#: .\neww\templates\cosinnus\navbar_buttons.html:3
+msgid "Stream"
+msgstr "Aktivitäten"
+
+#: .\neww\templates\cosinnus\navbar_buttons.html:11
+msgid "Forum"
+msgstr "Forum"
+
+#: .\neww\templates\cosinnus\navbar_buttons.html:13
+msgid "People"
+msgstr "Menschen"
+
+#: .\neww\templates\cosinnus\navbar_buttons.html:14
+msgid "Map"
+msgstr "Karte"
+
+#: .\neww\templates\cosinnus\navbar_buttons_group_menus.html:7
+#: .\neww\templates\cosinnus\navbar_buttons_group_menus.html:41
+msgid "Societies"
+msgstr "Gruppen"
+
+#: .\neww\templates\cosinnus\navbar_buttons_group_menus.html:15
+#: .\neww\templates\cosinnus\navbar_buttons_group_menus.html:19
+msgid "All Societies"
+msgstr "Alle Gruppen"
+
+#: .\neww\templates\cosinnus\navbar_buttons_group_menus.html:25
+#: .\neww\templates\cosinnus\navbar_buttons_group_menus.html:42
+msgid "Projects"
+msgstr "Projekte"
+
+#: .\neww\templates\cosinnus\navbar_buttons_group_menus.html:33
+#: .\neww\templates\cosinnus\navbar_buttons_group_menus.html:37
+msgid "All Projects"
+msgstr "Alle Projekte"
+
+#: .\neww\templates\cosinnus\navbar_icon_buttons.html:5
+msgid "Search..."
+msgstr ""
+
+#: .\neww\templates\cosinnus\navbar_icon_buttons.html:11
+#: .\neww\templates\cosinnus\navbar_icon_buttons.html:16
+msgid "Messages"
+msgstr "Nachrichten"
+
+#: .\neww\templates\cosinnus\navbar_icon_buttons.html:20
+#: .\neww\templates\cosinnus\navbar_icon_buttons.html:25
+msgid "My Stream"
+msgstr "Aktivitäten"
+
+#: .\neww\templates\cosinnus\wagtail\dashboard_base.html:34
+msgid "Jetzt anmelden und mitgestalten"
+msgstr ""
+
+#: .\neww\templates\modal_box_nutzungsbedingungen.html:10
+msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
+msgstr ""
+
+#: .\neww\templates\modal_box_nutzungsbedingungen.html:18
+msgid "Ich erkläre mich mit den Nutzungsbedingungen einverstanden"
+msgstr ""
+
+#: .\neww\templates\modal_box_nutzungsbedingungen.html:29
+#: .\neww\templates\modal_box_nutzungsbedingungen.html:43
+msgid "OK"
+msgstr ""
+
+#: .\neww\templates\nutzungsbedingungen.html:6
+msgid "Nutzungsbedingungen"
+msgstr ""
+
+#: .\neww\templates_subdomain\zukunftsmacher\cosinnus\navbar_buttons.html:5
+msgid "Back to the Zukunftsmacher-Plattform..."
+msgstr "Zurück in die Zukunftsmacher-Plattform..."
+
+#: .\neww\templates_subdomain\zukunftsmacher\cosinnus\portal\no_anonymous_access_page_content.html:4
+msgid "No anonymous access!"
+msgstr "Kein anonymer Zugriff!"
+
+#: .\neww\templates_subdomain\zukunftsmacher\cosinnus\portal\no_anonymous_access_page_content.html:7
+msgid "You are not logged in any more."
+msgstr "Du bist nicht mehr eingeloggt."
+
+#: .\neww\templates_subdomain\zukunftsmacher\cosinnus\portal\no_anonymous_access_page_content.html:7
+msgid "Please access this site by logging in through"
+msgstr "Bitte logge dich ein über"
+
+#~ msgid "Dashboard Welcome-Page (1 Column)"
+#~ msgstr "Dashboard Startseite (1 Spalte)"
+
+#~ msgid "Dashboard Welcome-Page (2 Columns)"
+#~ msgstr "Dashboard Startseite (2 Spalten)"
+
+#~ msgid "Dashboard Welcome-Page (3 Columns)"
+#~ msgstr "Dashboard Startseite (3 Spalten)"
+
+#~ msgid "Regular Dashboard page (1 Column)"
+#~ msgstr "Normale Dashboard-Seite (1 Spalte)"
+
+#~ msgid "Regular Dashboard page (2 Columns)"
+#~ msgstr "Normale Dashboard-Seite (2 Spalten)"
+
+#~ msgid "Regular Dashboard page (3 Columns)"
+#~ msgstr "Normale Dashboard-Seite (3 Spalten)"
+
+#~ msgid "Courses"
+#~ msgstr "Kurse"
+
+#~ msgid "Attach File/Image"
+#~ msgstr "Bild/Datei anhängen"
+
+#~ msgid ""
+#~ "Click to upload a new file/image. You can also drag & drop a file from "
+#~ "your computer."
+#~ msgstr ""
+#~ "Klicken um ein Bild/Datei hochzuladen. Dateien können auch per Drag & "
+#~ "Drop hinzugefügt werden."
+
+#~ msgid "or upload new..."
+#~ msgstr "neu Hochladen..."
+
+#~ msgid "1 Column"
+#~ msgstr "1 Spalte"
+
+#~ msgid "2 Columns"
+#~ msgstr "2 Spalten"
+
+#~ msgid "3 Columns"
+#~ msgstr "3 Spalten"
+
+#~ msgid "Dashboard"
+#~ msgstr "Dashboard"
+
+#~ msgid "My Dashboard"
+#~ msgstr "Mein Dashboard"
+
+#~ msgid "Organisations"
+#~ msgstr "Organisationen"
+
+#~ msgid "File"
+#~ msgstr "Datei"
+
+#~ msgid "Files"
+#~ msgstr "Dateien"
+
+#~ msgctxt "Calendar"
+#~ msgid "Event"
+#~ msgstr "Termin"
+
+#~ msgctxt "Calendar"
+#~ msgid "Events"
+#~ msgstr "Termine"
+
+#~ msgid "Todo"
+#~ msgstr "Aufgabe"
+
+#~ msgid "Todos"
+#~ msgstr "Aufgaben"
+
+#~ msgid "News"
+#~ msgstr "Neuigkeiten"
+
+#~ msgctxt "withdraw join group button first item"
+#~ msgid "Withdraw"
+#~ msgstr "Antrag"
+
+#~ msgctxt "withdraw join group button second item"
+#~ msgid "Request"
+#~ msgstr "rückziehen"
+
+#~ msgctxt "join request pending group button first item"
+#~ msgid "Join"
+#~ msgstr "Antrag"
+
+#~ msgctxt "join request pending group button second item"
+#~ msgid "Requested"
+#~ msgstr "gestellt"
+
+#~ msgctxt "join group button first item"
+#~ msgid "Join"
+#~ msgstr "Beitritt"
+
+#~ msgctxt "join group button second item"
+#~ msgid "Now"
+#~ msgstr "beantragen"
+
+#~ msgid "Join"
+#~ msgstr "Beitreten"
+
+#~ msgid "No Description set"
+#~ msgstr "Keine Beschreibung erstellt"
+
+#~ msgid "more"
+#~ msgstr "mehr"
+
+#~ msgid "User Dashboard"
+#~ msgstr "Mein Dashboard"
+
+#~ msgctxt "join group button second item"
+#~ msgid "Group"
+#~ msgstr "beitreten"
+
+#~ msgid "Where is the group active?"
+#~ msgstr "Wo ist das Projekt aktiv?"
+
+#~ msgid "Benutzer taggen"
+#~ msgstr "Benutzer_in taggen"
+
+#~ msgid "Mit welchen Themen beschäftigt sich die Gruppe?"
+#~ msgstr "Mit welchen Themen beschäftigt sich das Projekt?"
+
+#~ msgid "Mein Dashboard"
+#~ msgstr "Mein Dashboard"
+
+#~ msgid "Was ist das Haupthandlungsfeld der Gruppe?"
+#~ msgstr "Was ist das Haupthandlungsfeld des Projekts?"

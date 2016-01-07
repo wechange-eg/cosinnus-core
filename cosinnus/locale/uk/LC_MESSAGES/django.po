@@ -2980,3 +2980,466 @@ msgstr ""
 
 #~ msgid "Society in Portal"
 #~ msgstr "Спільнота на порталі"
+
+
+#: .\cms_app.py:6
+msgid "NEWWApphook"
+msgstr "NEWWApphook"
+
+#: .\cms_plugins.py:5
+msgid "HTML"
+msgstr "HTML"
+
+#: .\default_settings.py:155
+msgid "Dashboard Welcome-Page (1 Column)"
+msgstr "Привітальна сторінка інформаційної панелі (1 стовпець)"
+
+#: .\default_settings.py:156
+msgid "Dashboard Welcome-Page (2 Columns)"
+msgstr "Привітальна сторінка інформаційної панелі (2 стовпці)"
+
+#: .\default_settings.py:157
+msgid "Dashboard Welcome-Page (3 Columns)"
+msgstr "Привітальна сторінка інформаційної панелі (3 стовпці)"
+
+#: .\default_settings.py:158
+msgid "Regular Dashboard page (1 Column)"
+msgstr "Звичайна сторінка інформаційної панелі (1 стовпець)"
+
+#: .\default_settings.py:159
+msgid "Regular Dashboard page (2 Columns)"
+msgstr "Звичайна сторінка інформаційної панелі (2 стовпці)"
+
+#: .\default_settings.py:160
+msgid "Regular Dashboard page (3 Columns)"
+msgstr "Звичайна сторінка інформаційної панелі (3 стовпці)"
+
+#: .\default_settings.py:233
+msgid "Deutsch"
+msgstr "Deutsch"
+
+#: .\default_settings.py:234
+msgid "English"
+msgstr "English"
+
+#: .\default_settings.py:235
+msgid "Russian"
+msgstr "Русский"
+
+#: .\default_settings.py:237
+msgid "Ukrainian"
+msgstr "Українська"
+
+#: .\forms.py:22
+msgid "Like"
+msgstr "Вподобання"
+
+#: .\forms.py:47
+msgid "Persons"
+msgstr "Люди"
+
+#: .\models.py:35
+msgid "Mobilität"
+msgstr "Мобільність"
+
+#: .\models.py:36
+msgid "Energie"
+msgstr "Енергія"
+
+#: .\models.py:37
+msgid "Umwelt"
+msgstr "Навколишнє середовище"
+
+#: .\models.py:38
+msgid "Bildung"
+msgstr "Будівництво"
+
+#: .\models.py:39
+msgid "Gesundheit"
+msgstr "Здоров'я"
+
+#: .\models.py:40
+msgid "Ernährung und Konsum"
+msgstr "Харчування та споживання"
+
+#: .\models.py:41
+msgid "Kunst und Kultur"
+msgstr "Мистецтво і культура"
+
+#: .\models.py:42
+msgid "Geld und Finanzen"
+msgstr "Гроші та фінанси"
+
+#: .\models.py:43
+msgid "Arbeit und Recht"
+msgstr "Робота та право"
+
+#: .\models.py:44
+msgid "Bauen und Wohnen"
+msgstr "Будівництво та житло"
+
+#: .\models.py:47
+#: .\templates\cosinnus\media_tags_group_profile_readonly.html.py:4
+msgid "Location"
+msgstr "Місцезнаходження"
+
+#: .\models.py:48
+msgid "Latitude"
+msgstr "Довгота"
+
+#: .\models.py:49
+msgid "Longitude"
+msgstr "Широта"
+
+#: .\models.py:51
+msgid "Place"
+msgstr "Місце"
+
+#: .\models.py:54
+msgid "Valid from"
+msgstr "Дійсний з"
+
+#: .\models.py:55
+msgid "Valid to"
+msgstr "Дійсний до"
+
+#: .\models.py:57
+msgid "Approach"
+msgstr "Підхід"
+
+#: .\models.py:60
+#: .\templates\cosinnus\media_tags_group_profile_readonly.html.py:11
+msgid "Topics"
+msgstr "Теми"
+
+#: .\models.py:64
+msgid "Likes"
+msgstr "Вподобання"
+
+#: .\models.py:100
+msgid "Text"
+msgstr "Текст"
+
+#: .\cms_plugins\iframe_text\cms_plugins.py:14
+msgid "iFrameText"
+msgstr "Текст iFrame"
+
+#: .\templates\modal_box_nutzungsbedingungen.html.py:10
+msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
+msgstr "Будь ласка, прочитайте та погодьтеся з умовами користування"
+
+#: .\templates\modal_box_nutzungsbedingungen.html.py:18
+msgid "Ich erkläre mich mit den Nutzungsbedingungen einverstanden"
+msgstr "Я погоджуюся з умовами користування"
+
+#: .\templates\modal_box_nutzungsbedingungen.html.py:29
+#: .\templates\modal_box_nutzungsbedingungen.html.py:43
+msgid "OK"
+msgstr "Так"
+
+#: .\templates\nutzungsbedingungen.html.py:6
+msgid "Nutzungsbedingungen"
+msgstr "Умови користування"
+
+#: .\templates\admin\cms\page\menu_item.html.py:5
+msgid "select this page"
+msgstr "Вибрати цю сторінку"
+
+#: .\templates\admin\cms\page\menu_item.html.py:5
+#: .\templates\admin\cms\page\menu_item.html.py:6
+msgid "edit this page"
+msgstr "Редагувати цю сторінку"
+
+#: .\templates\admin\cms\page\menu_item.html.py:6
+msgid "edit"
+msgstr "Редагувати"
+
+#: .\templates\admin\cms\page\menu_item.html.py:16
+msgid "insert above"
+msgstr "Вставити вище"
+
+#: .\templates\admin\cms\page\menu_item.html.py:17
+msgid "insert below"
+msgstr "Вставити нижче"
+
+#: .\templates\admin\cms\page\menu_item.html.py:19
+msgid "insert inside"
+msgstr "Вставити всередину"
+
+#: .\templates\admin\cms\page\menu_item.html.py:23
+msgid "softroot"
+msgstr "softroot"
+
+#: .\templates\admin\cms\page\menu_item.html.py:23
+msgid "home"
+msgstr "Головна сторінка"
+
+#: .\templates\admin\cms\page\menu_item.html.py:26
+#, python-format
+msgid "Edit this page in %(language)s "
+msgstr "Редагувати цю сторінку наступною мовою: %(language)s"
+
+#: .\templates\admin\cms\page\menu_item.html.py:33
+msgid "Cut"
+msgstr "Вирізати"
+
+#: .\templates\admin\cms\page\menu_item.html.py:33
+msgid "cut"
+msgstr "Вирізати"
+
+#: .\templates\admin\cms\page\menu_item.html.py:34
+msgid "Copy"
+msgstr "Копіювати"
+
+#: .\templates\admin\cms\page\menu_item.html.py:34
+msgid "copy"
+msgstr "Копіювати"
+
+#: .\templates\admin\cms\page\menu_item.html.py:37
+#: .\templates\admin\cms\page\menu_item.html.py:41
+msgid "Add Child"
+msgstr "Додати дочірній елемент"
+
+#: .\templates\admin\cms\page\menu_item.html.py:37
+#: .\templates\admin\cms\page\menu_item.html.py:41
+msgid "add"
+msgstr "Додати"
+
+#: .\templates\admin\cms\page\menu_item.html.py:44
+msgid "Delete"
+msgstr "Видалити"
+
+#: .\templates\admin\cms\page\menu_item.html.py:44
+msgid "delete"
+msgstr "Видалити"
+
+#: .\templates\admin\cms\page\menu_item.html.py:57
+msgid "Unpublish"
+msgstr "Не публікувати"
+
+#: .\templates\admin\cms\page\menu_item.html.py:58
+#: .\templates\admin\cms\page\menu_item.html.py:71
+msgid "Publish"
+msgstr "Публікувати"
+
+#: .\templates\admin\cms\page\menu_item.html.py:62
+msgid "View on page"
+msgstr "Переглянути на сторінці"
+
+#: .\templates\admin\cms\page\menu_item.html.py:62
+msgid "view"
+msgstr "Переглянути"
+
+#: .\templates\cms\dashboard_base.html.py:39
+msgid "Jetzt anmelden und mitgestalten"
+msgstr "Зареєструватися та долучитися"
+
+#: .\templates\cosinnus\media_tags.html.py:8
+msgid "Tag persons"
+msgstr "Вказати людей"
+
+#: .\templates\cosinnus\media_tags.html.py:16
+#: .\templates\cosinnus\media_tags.html.py:111
+msgid "Select tags"
+msgstr "Вказати ключові слова"
+
+#: .\templates\cosinnus\media_tags.html.py:24
+msgid "Place or adress"
+msgstr "Місце або адреса"
+
+#: .\templates\cosinnus\media_tags.html.py:36
+msgid "Attach existing Files..."
+msgstr "Додати існуючі файли..."
+
+#: .\templates\cosinnus\media_tags.html.py:55
+#: .\templates\cosinnus\media_tags.html.py:116
+msgid "Select topic"
+msgstr "Вказати тему"
+
+#: .\templates\cosinnus\media_tags.html.py:74
+#: .\templates\cosinnus\media_tags_userprofile.html.py:83
+msgid "Privacy"
+msgstr "Хто може бачити?"
+
+#: .\templates\cosinnus\media_tags.html.py:86
+msgid "Add attachment"
+msgstr "Додати додаток"
+
+#: .\templates\cosinnus\media_tags.html.py:93
+msgid "Tag users"
+msgstr "Вказати людей"
+
+#: .\templates\cosinnus\media_tags.html.py:99
+msgid "Tag location"
+msgstr "Вказати місце"
+
+#: .\templates\cosinnus\media_tags.html.py:129
+msgid "Change privacy"
+msgstr "Налаштувати приватність"
+
+#: .\templates\cosinnus\media_tags_group.html.py:5
+msgid "Where are you active?"
+msgstr "У якій сфері ви активно працюєте?"
+
+#: .\templates\cosinnus\media_tags_group.html.py:13
+#: .\templates\cosinnus\media_tags_userprofile.html.py:13
+msgid "Enter a place or address."
+msgstr "Уведіть місце або адресу."
+
+#: .\templates\cosinnus\media_tags_group.html.py:23
+msgid "Which topics are you involved with?"
+msgstr "З якими темами ви працюєте?"
+
+#: .\templates\cosinnus\media_tags_group.html.py:32
+#: .\templates\cosinnus\media_tags_userprofile.html.py:32
+msgid "Select topics"
+msgstr "Вказати тему"
+
+#: .\templates\cosinnus\media_tags_group.html.py:57
+msgid "Which tags further describe your activities?"
+msgstr "Які ключові слова описують вашу діяльність?"
+
+#: .\templates\cosinnus\media_tags_group.html.py:66
+#: .\templates\cosinnus\media_tags_userprofile.html.py:67
+msgid "Select or create tags"
+msgstr "Виберіть або створіть ключові слова"
+
+#: .\templates\cosinnus\media_tags_group_profile_readonly.html.py:30
+msgid "Tags"
+msgstr "Ключові слова"
+
+#: .\templates\cosinnus\media_tags_group_profile_readonly.html.py:42
+msgid "Website"
+msgstr "Веб-сайт"
+
+#: .\templates\cosinnus\media_tags_group_readonly.html.py:5
+msgid "Topics we are involved with"
+msgstr "Теми з якими ми працюємо"
+
+#: .\templates\cosinnus\media_tags_group_readonly.html.py:16
+msgid "Activities and interests"
+msgstr "Діяльність та інтереси"
+
+#: .\templates\cosinnus\media_tags_userprofile.html.py:5
+msgid "Where do you live?"
+msgstr "Де ви мешкаєте?"
+
+#: .\templates\cosinnus\media_tags_userprofile.html.py:23
+msgid "Which topics are you interested in?"
+msgstr "Яким темами цікавитеся?"
+
+#: .\templates\cosinnus\media_tags_userprofile.html.py:58
+msgid "What would you like to learn?"
+msgstr "Чого би ви хотіли навчитися?"
+
+#: .\templates\cosinnus\media_tags_userprofile.html.py:74
+msgid "Who is allowed to see you on the platform?"
+msgstr "Хто може бачити вас на платформі?"
+
+#: .\templates\cosinnus\media_tags_userprofile.html.py:84
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:47
+msgid "Group Members only"
+msgstr "Тільки члени проекту"
+
+#: .\templates\cosinnus\media_tags_userprofile.html.py:85
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:50
+msgid "Everybody"
+msgstr "Усі"
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:4
+msgid "My location"
+msgstr "Моє місцезнаходження"
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:11
+msgid "Topics I am interested in"
+msgstr "Теми, якими я цікавлюся"
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:30
+msgid "What I wish to learn"
+msgstr "Чого я хочу навчитися"
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:43
+msgid "Visibility"
+msgstr "Видимість для інших"
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html.py:52
+msgid "Hidden"
+msgstr "Приховано"
+
+#: .\templates\cosinnus\navbar.html.py:7
+msgid "Toggle navigation"
+msgstr "Переключення навігації"
+
+#: .\templates\cosinnus\navbar.html.py:18
+msgid "Stream"
+msgstr "Діяльність"
+
+#: .\templates\cosinnus\navbar.html.py:24
+#: .\templates\cosinnus\navbar.html.py:58
+msgid "Societies"
+msgstr "Спільноти"
+
+#: .\templates\cosinnus\navbar.html.py:32
+#: .\templates\cosinnus\navbar.html.py:36
+msgid "All Societies"
+msgstr "Усі спільноти"
+
+#: .\templates\cosinnus\navbar.html.py:42
+#: .\templates\cosinnus\navbar.html.py:59
+msgid "Projects"
+msgstr "Проекти"
+
+#: .\templates\cosinnus\navbar.html.py:50
+#: .\templates\cosinnus\navbar.html.py:54
+msgid "All Projects"
+msgstr "Усі проекти"
+
+#: .\templates\cosinnus\navbar.html.py:66
+msgid "Forum"
+msgstr "Форум"
+
+#: .\templates\cosinnus\navbar.html.py:68
+msgid "People"
+msgstr "Люди"
+
+#: .\templates\cosinnus\navbar.html.py:69
+msgid "Map"
+msgstr "Мапа"
+
+#: .\templates\cosinnus\navbar.html.py:75
+msgid "Search..."
+msgstr "Пошук..."
+
+#: .\templates\cosinnus\navbar.html.py:81
+#: .\templates\cosinnus\navbar.html.py:86
+msgid "Messages"
+msgstr "Повідомлення"
+
+#: .\templates\cosinnus\navbar.html.py:90
+#: .\templates\cosinnus\navbar.html.py:95
+msgid "My Stream"
+msgstr "Діяльність"
+
+#: .\templates\cosinnus\navbar.html.py:124
+msgid "My Profile"
+msgstr "Мій профіль"
+
+#: .\templates\cosinnus\navbar.html.py:125
+msgid "Notification Preferences"
+msgstr "Налаштування сповіщення"
+
+#: .\templates\cosinnus\navbar.html.py:128
+msgid "Logout"
+msgstr "Вихід"
+
+#: .\templates_subdomain\zukunftsmacher\cosinnus\portal\no_anonymous_access_page_content.html.py:4
+msgid "No anonymous access!"
+msgstr "Анонімний доступ не дозволено!"
+
+#: .\templates_subdomain\zukunftsmacher\cosinnus\portal\no_anonymous_access_page_content.html.py:7
+msgid "You are not logged in any more."
+msgstr "Ви уже вийшли із системи."
+
+#: .\templates_subdomain\zukunftsmacher\cosinnus\portal\no_anonymous_access_page_content.html.py:7
+msgid "Please access this site by logging in through"
+msgstr "Будь ласка, увійдіть в систему, щоб отримати доступ до цього веб-сайту."
