@@ -395,6 +395,6 @@ COSINNUS_MICROSITES_ENABLED = True
 NEWW_DEFAULT_USER_AUTH_GROUPS = ['Users']
 
 # new user that register will automatically become members of these groups/projects (supply group slugs!)
-NEWW_DEFAULT_USER_GROUPS = ['blog']
+NEWW_DEFAULT_USER_GROUPS = ['forum']
 
 NEWW_FORUM_GROUP_SLUG = 'forum'
