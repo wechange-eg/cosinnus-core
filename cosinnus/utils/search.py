@@ -28,6 +28,24 @@ class DefaultTagObjectIndex(indexes.SearchIndex):
     mt_public = indexes.BooleanField(model_attr='media_tag__public', null=True)
 
 
+class TagObjectIndex(indexes.SearchIndex):
+    mt_location = indexes.CharField(model_attr='media_tag__location', null=True)
+    mt_location_lat = indexes.FloatField(model_attr='media_tag__location_lat', null=True)
+    mt_location_lon = indexes.FloatField(model_attr='media_tag__location_lon', null=True)
+    mt_place = indexes.CharField(model_attr='media_tag__place', null=True)
+    mt_valid_start = indexes.DateTimeField(model_attr='media_tag__valid_start', null=True)
+    mt_valid_end = indexes.DateTimeField(model_attr='media_tag__valid_end', null=True)
+    mt_approach = indexes.CharField(model_attr='media_tag__approach', null=True)
+    mt_topics = indexes.MultiValueField(model_attr='media_tag__topics', null=True)
+    mt_persons = indexes.MultiValueField(null=True)
+    mt_likes = indexes.IntegerField(model_attr='media_tag__likes', null=True)
+    mt_visibility = indexes.BooleanField(model_attr='media_tag__visibility', null=True)
+
+    def prepare_mt_persons(self, obj):
+        if obj.media_tag:
+            return prepare_users(obj.media_tag.persons.all())
+
+
 def get_tag_object_index():
     """
     Return the cosinnus tag object search index that is defined in
@@ -35,8 +53,15 @@ def get_tag_object_index():
     """
     from django.core.exceptions import ImproperlyConfigured
     from cosinnus.conf import settings
-
-    index_class = import_from_settings('COSINNUS_TAG_OBJECT_SEARCH_INDEX')
+    
+    # if the setting points at the TagObjectIndex defined here, link it directly,
+    # otherwise we will get circular import problems
+    if getattr(settings, 'COSINNUS_TAG_OBJECT_SEARCH_INDEX', None) == '%s.TagObjectIndex' % __name__:
+        index_class = TagObjectIndex
+    else:
+        index_class = import_from_settings('COSINNUS_TAG_OBJECT_SEARCH_INDEX')
+    
+    
     if not issubclass(index_class, indexes.SearchIndex):
         raise ImproperlyConfigured("COSINNUS_TAG_OBJECT_SEARCH_INDEX refers to "
                                    "index '%s' that does not exist or is not a "

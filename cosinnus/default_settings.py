@@ -348,7 +348,7 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 # Tag objects
 COSINNUS_TAG_OBJECT_FORM = 'cosinnus.forms.tagged.TagObjectForm'
 COSINNUS_TAG_OBJECT_MODEL = 'cosinnus.TagObject'
-COSINNUS_TAG_OBJECT_SEARCH_INDEX = 'cosinnus.search_indexes.TagObjectIndex'
+COSINNUS_TAG_OBJECT_SEARCH_INDEX = 'cosinnus.utils.search.TagObjectIndex'
 
 # Microsite
 COSINNUS_MICROSITE_RENDER_EMPTY_APPS = False
