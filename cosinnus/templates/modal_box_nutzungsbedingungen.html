@@ -1,0 +1,53 @@
+{% load i18n djajax_tags %}
+
+<!-- Modal -->
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="nutzungsbedingungen" tabindex="1" role="dialog" aria-labelledby="nutzungsbedingungen_Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="nutzungsbedingungen_Label">
+                    <i class="fa fa-eraser"></i>
+                    {% trans "Bitte akzeptieren Sie unsere  Nutzungsbedingungen" %}
+                </h4>
+            </div>
+            <div class="modal-body">
+                {% include 'nutzungsbedingungen_content.html' %}
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <input type="checkbox" autocomplete="off" onchange="if (this.checked) {$('#nutzungsbedingungen_ok_button_frame').show();$('#nutzungsbedingungen_disabled_button_frame').hide();} else {$('#nutzungsbedingungen_ok_button_frame').hide();$('#nutzungsbedingungen_disabled_button_frame').show();};"> <label>{% trans "Ich erkläre mich mit den Nutzungsbedingungen einverstanden" %}</label>
+                </div>
+                
+                <div id="nutzungsbedingungen_disabled_button_frame" class="" >
+                    <button type="submit" class="btn btn-emphasized" >
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-check"></i>
+                                </a>
+                                <div class="media-body">
+                                    {% trans "OK" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                </div>
+                <div id="nutzungsbedingungen_ok_button_frame" class="app-main" style="display:none;">
+	                <button type="submit" class="btn btn-emphasized" data-dismiss="modal" {% djajax_connect user.cosinnus_profile.settings trigger_on="click" fixed_value="tos_accepted:true" %}>
+	                    <ul class="media-list">
+	                        <li class="media">
+	                            <a class="pull-left" href="#">
+	                                <i class="fa fa-check"></i>
+	                            </a>
+	                            <div class="media-body">
+	                                {% trans "OK" %}
+	                            </div>
+	                        </li>
+	                    </ul>
+	                </button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div><!-- modal -->

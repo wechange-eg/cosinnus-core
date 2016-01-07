@@ -1,1 +1,24 @@
-<!-- Overwrite this in your main app! -->
+{% load i18n cosinnus_tags %}
+
+{% if object.media_tag_object.topics %}
+	<p class="">
+	<b>{% trans "Topics we are involved with" %}</b>
+	    <i class="fa fa-fw fa-lightbulb-o"></i> 
+	    {% for topic in object.media_tag_object.get_topics %}
+            <a href="#">{{ topic }}</a>
+        {% endfor %}
+	</p>
+{% endif %}
+
+{% for tag in object.media_tag_object.tags.all %}
+    {% if forloop.first %} 
+    <p class="">
+    <b>{% trans "Activities and interests" %}</b>
+        <i class="fa fa-fw fa-bolt"></i> 
+    {% endif %}
+    {% if not forloop.first %}, {% endif %}
+    {{ tag }}
+    {% if forloop.last %}
+    </p>
+    {% endif %}
+{% endfor %}

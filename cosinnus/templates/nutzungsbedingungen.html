@@ -1,0 +1,18 @@
+{% extends "cosinnus/wagtail/dashboard_base.html" %}
+{% load i18n cosinnus_tags static %}
+
+{% block page_title %}{% trans "Nutzungsbedingungen" %}{% endblock %}
+
+{% block main_page %}
+	<div class="cms-content">
+    	<div class="container">
+	        {% include 'cosinnus/messages.html' %}
+	        
+    		<div class="overlay-box overlay-box-white overlay-box-side-padding ultra-space">
+    			{% include 'nutzungsbedingungen_content.html' %}						
+	        </div>
+	    </div><!-- container -->
+    </div><!-- cms-content -->
+{% endblock main_page %}
+
+

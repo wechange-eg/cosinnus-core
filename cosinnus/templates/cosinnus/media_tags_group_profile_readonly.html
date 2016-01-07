@@ -1,1 +1,47 @@
-<!-- Overwrite this in your main app! -->
+{% load i18n cosinnus_tags %}
+
+{% if object.locations.all %}
+	<legend>{% trans "Location" %}</legend>
+	{% for group_location in object.locations.all %}
+		<p class="transparent">
+		    <i class="fa fa-fw fa-map-marker"></i> <a href="{{ group_location.location_url }}" target="_blank">{{ group_location.location }}</a>
+		</p>
+	{% endfor %}
+{% endif %}
+
+{% if object.media_tag_object.topics %}
+	<legend>{% trans "Topics" %}</legend>
+    {% comment %} Approach disabled for now 
+	{% if object.media_tag_object.approach %}
+		<p class="transparent">
+		    <i class="fa fa-fw fa-bolt"></i> {{ object.media_tag_object.get_approach_display }}
+		</p>
+	{% endif %}
+	{% endcomment %}
+	<p class="transparent">
+	    <i class="fa fa-fw fa-lightbulb-o"></i> 
+	    {% for topic in object.media_tag_object.get_topics %}
+            <a href="#">{{ topic }}</a>
+        {% endfor %}
+	</p>
+{% endif %}
+
+{% for tag in object.media_tag_object.tags.all %}
+    {% if forloop.first %} 
+    <legend>{% trans "Tags" %}</legend>
+    <p class="transparent">
+        <i class="fa fa-fw fa-bolt"></i> 
+    {% endif %}
+    {% if not forloop.first %}, {% endif %}
+    {{ tag }}
+    {% if forloop.last %}
+    </p>
+    {% endif %}
+{% endfor %}
+
+{% if object.website %}
+    <legend>{% trans "Website" %}</legend>
+    <p class="transparent">
+        <i class="fa fa-globe"></i> <a href="{{ object.website }}" target="_blank">{{ object.website }}</a>
+    </p>
+{% endif %}

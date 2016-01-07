@@ -1,1 +1,134 @@
-<!-- Overwrite this in your main app! -->
+{% load i18n cosinnus_tags widget_tweaks %}
+
+{{ form.forms.media_tag.media }}
+
+<ol class="input-area" {% if not show_persons == True and not show_all == True %}style="display: none;"{% endif %} id="user-selector">
+    <li class="w100">
+        <i class="fa fa-fw fa-user"></i>
+        {% captureas placeholder %}{% trans "Tag persons" %}{% endcaptureas %}
+        {% render_field form.forms.media_tag.persons placeholder=placeholder %}
+    </li>
+</ol>
+
+<ol class="input-area" {% if not show_all == True %}style="display: none;"{% endif %} id="tags-selector">
+    <li class="w100">
+        <i class="fa fa-fw fa-tags"></i>
+        {% captureas placeholder %}{% trans "Select tags" %}{% endcaptureas %}
+        {% render_field form.forms.media_tag.tags placeholder=placeholder %}
+    </li>
+</ol>
+    
+<ol class="input-area" {% if not show_all == True %}style="display: none;"{% endif %} id="location-selector">
+    <li class="w100">
+        <i class="fa fa-fw fa-map-marker"></i>
+        {% captureas placeholder %}{% trans "Place or adress" %}{% endcaptureas %}
+        {% render_field form.forms.media_tag.location placeholder=placeholder class+="font14px" %}
+        {{ form.forms.media_tag.location_lat }}
+        {{ form.forms.media_tag.location_lon }}
+    </li>
+</ol>
+<div id="id_media_tag-location-map"></div>
+{% if form.forms.obj.attached_objects %}
+<ol class="input-area" {% if not show_all == True %}style="display: none;"{% endif %} id="attachments-selector">
+    <li class="w100">
+    	<div>
+        <i class="fa fa-fw fa-paperclip"></i>
+        {% captureas placeholder %}{% trans "Attach existing Files..." %}{% endcaptureas %}
+        {% render_field form.forms.obj.attached_objects placeholder=placeholder %}
+	    <div class="">
+		    {% include 'cosinnus/attached/file_upload_button.html' %}
+	    </div>
+        </div>
+    </li>
+</ol>
+{% endif %}
+{% comment %}  The clock tag doesn't currently make sense overall, so taken out till further 
+    <li>
+        <i class="fa fa-fw fa-clock-o"></i>
+        {{ form.forms.media_tag.valid_start }}
+        {{ form.forms.media_tag.valid_end }}
+    </li>
+{% endcomment %}
+<ol class="input-area" {% if not show_all == True %}style="display: none;"{% endif %} id="topics-selector">
+    <li class="w100">
+        <i class="fa fa-fw fa-lightbulb-o"></i>
+        {% captureas placeholder %}{% trans "Select topic" %}{% endcaptureas %}
+        {% render_field form.forms.media_tag.topics placeholder=placeholder %}
+    </li>
+</ol>
+
+{% comment %} Approach hidden for now
+<ol class="input-area" style="display: none;" id="approach-selector">
+    <li class="w100">
+        <i class="fa fa-fw fa-bolt"></i>
+        {% captureas placeholder %}{% trans "Ansatz markieren" %}{% endcaptureas %}
+        {% render_field form.forms.media_tag.approach placeholder=placeholder %}
+    </li>
+</ol>
+ {% endcomment %}
+
+<ol class="input-area" {% if not show_all == True %}style="display: none;"{% endif %} id="visibility-selector">
+    <li class="w100">
+        <i class="fa fa-fw fa-globe"></i>
+        {% captureas placeholder %}{% trans "Privacy" %}{% endcaptureas %}
+        {% render_field form.forms.media_tag.visibility placeholder=placeholder %}
+    </li>
+</ol><!-- input-area -->
+
+{% if not show_all == True %}
+<!-- Hidden field display buttons -->
+<ol class="input-area">
+    <!-- When things are to be hidden by default,
+        simply invent an ID and add a link like these: -->
+    {% if form.forms.obj.attached_objects %}
+    <li class="input-area-lighter">
+        <a href="#" onclick="$('#s2id_{{ form.forms.obj.attached_objects.id_for_label }} input').css('width', ''); return false;" data-show-id="attachments-selector" title="{% trans 'Add attachment' %}">
+            <i class="fa fa-fw fa-paperclip"></i>
+        </a>
+    </li>
+    {% endif %}
+    {% if not show_persons == True %}
+    <li class="input-area-lighter">
+        <a href="#" onclick="return false;" data-show-id="user-selector" title="{% trans 'Tag users' %}">
+            <i class="fa fa-fw fa-user"></i>
+        </a>
+    </li>
+    {% endif %}
+    <li class="input-area-lighter">
+        <a href="#" onclick="return false;" data-show-id="location-selector" title="{% trans 'Tag location' %}">
+            <i class="fa fa-fw fa-map-marker"></i>
+        </a>
+    </li>
+{% comment %}  The clock tag doesn't currently make sense overall, so taken out till further  
+    <li>
+        <a href="#" onclick="return false;" data-show-id="tags-selector">
+            <i class="fa fa-fw fa-tags"></i>
+        </a>
+    </li>
+{% endcomment %}
+    <li class="input-area-lighter">
+        <a href="#" onclick="return false;" data-show-id="tags-selector" title="{% trans 'Select tags' %}">
+            <i class="fa fa-fw fa-tags"></i>
+        </a>
+    </li>
+    <li class="input-area-lighter">
+        <a href="#" onclick="return false;" data-show-id="topics-selector" title="{% trans 'Select topic' %}">
+            <i class="fa fa-fw fa-lightbulb-o"></i>
+        </a>
+    </li>
+    {% comment %} Approach hidden for now 
+    <li class="input-area-lighter">
+        <a href="#" onclick="return false;" data-show-id="approach-selector" title="{% trans 'Ansatz taggen' %}">
+            <i class="fa fa-fw fa-bolt"></i>
+        </a>
+    </li>
+    {% endcomment %}
+    <li class="input-area-lighter">
+        <a href="#" onclick="return false;" data-show-id="visibility-selector" title="{% trans 'Change privacy' %}">
+            <i class="fa fa-fw fa-globe"></i>
+        </a>
+    </li>
+    
+    
+</ol><!-- input-area -->
+{% endif %}
