@@ -23,7 +23,7 @@ def create_default_portal_and_site(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cosinnus', '0002_auto_20151104_1711'),
+        ('cosinnus', '0001_initial'),
     ]
     
     operations = [
