@@ -83,6 +83,9 @@ class PortalRootPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
     class Meta:
         verbose_name = _('Portal Root Page')
         
+    # this template should never be visible, but if it is, the user will see an explanation
+    template = 'cosinnus/wagtail/portal_root_page.html'
+        
     parent_page_types = ['wagtailcore.Page', ]
     
     portal = models.ForeignKey(CosinnusPortal, verbose_name=_('Assigned Portal'), 
