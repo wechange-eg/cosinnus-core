@@ -3,9 +3,9 @@ from __future__ import unicode_literals
 
 from haystack import indexes
 
+from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveEdgeNgramField,\
+    TagObjectSearchIndex
 from cosinnus.models.group import CosinnusGroup
-from cosinnus.utils.search import TagObjectSearchIndex, TemplateResolveCharField,\
-    TemplateResolveEdgeNgramField
 
 
 class GroupIndex(TagObjectSearchIndex, indexes.Indexable):
@@ -27,3 +27,4 @@ class GroupIndex(TagObjectSearchIndex, indexes.Indexable):
         qs = qs.filter(is_active=True)
         qs = qs.select_related('media_tag').all()
         return qs
+

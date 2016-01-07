@@ -1,1 +1,52 @@
-<!-- Overwrite this in your main app! -->
+{% load i18n cosinnus_tags %}
+
+{% if object.media_tag_object.location %}
+	<legend>{% trans "My location" %}</legend>
+	<p class="transparent">
+	    <i class="fa fa-fw fa-map-marker"></i> <a href="{{ object.media_tag_object.location_url }}" target="_blank">{{ object.media_tag_object.location }}</a>
+	</p>
+{% endif %}
+
+{% if object.media_tag_object.topics %}
+	<legend>{% trans "Topics I am interested in" %}</legend>
+    {% comment %} Approach disabled for now 
+	{% if object.media_tag_object.approach %}
+		<p class="transparent">
+		    <i class="fa fa-fw fa-bolt"></i> {{ object.media_tag_object.get_approach_display }}
+		</p>
+	{% endif %}
+	{% endcomment %}
+	<p class="transparent">
+	    <i class="fa fa-fw fa-lightbulb-o"></i> 
+	    {% for topic in object.media_tag_object.get_topics %}
+            <a href="#">{{ topic }}</a>
+        {% endfor %}
+	</p>
+{% endif %}
+
+{% for tag in object.media_tag_object.tags.all %}
+    {% if forloop.first %} 
+    <legend>{% trans "What I wish to learn" %}</legend>
+    <p class="transparent">
+        <i class="fa fa-fw fa-bolt"></i> 
+    {% endif %}
+    {% if not forloop.first %}, {% endif %}
+    {{ tag }}
+    {% if forloop.last %}
+    </p>
+    {% endif %}
+{% endfor %}
+
+{% comment %} Faked to 'all' {% endcomment %}
+<legend>{% trans "Visibility" %}</legend>
+<p class="transparent">
+    {% if object.media_tag_object.visibility == 1 %}
+        <i class="fa fa-fw fa-user"></i> 
+        {% trans "Group Members only" %}
+    {% elif object.media_tag_object.visibility == 2 %}
+        <i class="fa fa-fw fa-users"></i> 
+        {% trans "Everybody" %}
+    {% else %}
+        {% trans "Hidden" %}
+    {% endif %}
+</p>

@@ -1,1 +1,105 @@
-<!-- Overwrite this in your main app! -->
+{% load i18n cosinnus_tags widget_tweaks %}
+
+{{ form.forms.media_tag.media }}
+
+<label>{% trans "Where do you live?" %}</label>
+<div type="button" class="btn btn-default w100 regular-space">
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#">
+                <i class="fa fa-map-marker"></i>
+            </a>
+            <div class="media-body">
+                {% captureas placeholder %}{% trans "Enter a place or address." %}{% endcaptureas %}
+                {% render_field form.forms.media_tag.location placeholder=placeholder %}
+                {{ form.forms.media_tag.location_lat }}
+                {{ form.forms.media_tag.location_lon }}
+            </div>
+        </li>
+    </ul>
+</div>
+<div id="id_media_tag-location-map"></div>
+
+<label>{% trans "Which topics are you interested in?" %}</label>
+<div type="button" class="btn btn-default w100 regular-space">
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#">
+                <i class="fa fa-lightbulb-o"></i>
+            </a>
+            <div class="media-body">
+                {{ form.forms.media_tag.topics.errors }}
+                {% captureas placeholder %}{% trans "Select topics" %}{% endcaptureas %}
+                {% render_field form.forms.media_tag.topics class+="w100" placeholder=placeholder %}
+            </div>
+            
+        </li>
+    </ul>
+</div>
+
+{% comment %} Approach disabled for now
+<label>{% trans "In welchem Ansatz bist du haupstächlich aktiv?" %}</label>
+<div type="button" class="btn btn-default w100 regular-space">
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#">
+                <i class="fa fa-bolt"></i>
+            </a>
+            <div class="media-body media-body-form-control">
+                {{ form.forms.media_tag.approach.errors }}
+                {% captureas placeholder %}{% trans "Ansatz markieren" %}{% endcaptureas %}
+                {% render_field form.forms.media_tag.approach class+="form-control w100" placeholder=placeholder %}
+            </div>
+        </li>
+    </ul>
+</div>
+{% endcomment %}
+
+<label>{% trans "What would you like to learn?" %}</label>
+<div type="button" class="btn btn-default w100 regular-space">
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#">
+                <i class="fa fa-tags"></i>
+            </a>
+            <div class="media-body">
+                {{ form.forms.media_tag.tags.errors }}
+                {% captureas placeholder %}{% trans "Select or create tags" %}{% endcaptureas %}
+                {% render_field form.forms.media_tag.tags class+="w100" placeholder=placeholder %}
+            </div>
+        </li>
+    </ul>
+</div>
+
+<label>{% trans "Who is allowed to see you on the platform?" %}</label>
+<div type="button" class="btn btn-default w100 regular-space">
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#">
+                <i class="fa fa-user"></i>
+            </a>
+            <div class="media-body media-body-form-control">
+                {{ form.forms.media_tag.visibility.errors }}
+                <select id="id_media_tag-visibility" name="media_tag-visibility" class="form-control" placeholder="{% trans "Privacy" %}">
+                    <option default value="1">{% trans "Group Members only" %}</option>
+                    <option value="2" {% if object and object.media_tag and object.media_tag.visibility == 2 %}selected{% endif %}>{% trans "Everybody" %}</option>
+                </select>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+
+<!-- input-area -->
+
+
+    {% comment %}  Tags are disabled until they are fixed
+    <ol class="input-area" style="display: none;" id="tags-selector">
+    <li>
+        <i class="fa fa-fw fa-tags"></i>
+        {{ form.forms.obj.tags }}
+    </li>
+    </ol>
+    {% endcomment %}
+

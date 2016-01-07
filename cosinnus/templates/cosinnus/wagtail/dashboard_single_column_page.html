@@ -1,0 +1,6 @@
+{% extends "cosinnus/wagtail/dashboard_base.html" %}
+{% load i18n static wagtailcore_tags  %}
+
+{% block second_row %}
+    {{ page.content1|richtext }}
+{% endblock %}

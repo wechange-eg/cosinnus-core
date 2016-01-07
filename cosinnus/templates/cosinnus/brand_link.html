@@ -1,4 +1,5 @@
-<a class="navbar-brand" href="{% if user.is_authenticated %}{% url 'cosinnus:user-dashboard' %}{% else %}/{% endif %}">
-    <!-- Logo -->
+{% load i18n %}
+
+<a class="navbar-brand" title="{% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}" href="/">
     {% include 'cosinnus/brand.html' %}
 </a>

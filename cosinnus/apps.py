@@ -8,4 +8,4 @@ class CosinnusAppConfig(AppConfig):
     verbose_name = 'Cosinnus Core'
 
     def ready(self):
-        pass
+        from cosinnus.models.hooks import *  # noqa
