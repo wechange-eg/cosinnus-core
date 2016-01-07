@@ -28,6 +28,8 @@ from cosinnus.utils.functions import resolve_class
 from cosinnus.utils.urls import group_aware_reverse
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
+from django.core.urlresolvers import reverse_lazy
+from cosinnus.utils.user import ensure_user_widget
 
 def widget_list(request):
     data = {}
