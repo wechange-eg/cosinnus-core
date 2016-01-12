@@ -686,7 +686,7 @@ def is_integrated_portal():
 def textfield(field):
     """ Renders a textfield's text safely with escaping, but retains linebreaks 
         and formats URLs as target="_blank" links. """
-    return linebreaksbr(url_target_blank(urlizetrunc(field, 25)))
+    return linebreaksbr(url_target_blank(urlizetrunc(field, 35)))
 
 
 @register.filter
