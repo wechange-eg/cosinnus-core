@@ -31,8 +31,6 @@ from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
 from cosinnus.utils.compat import atomic
 from cosinnus.core import signals
 from cosinnus.core.registries.group_models import group_model_registry
-from django.db.models.signals import post_delete, post_save
-from django.dispatch.dispatcher import receiver
 from django.template.loader import render_to_string
 
 from django.db import IntegrityError
@@ -42,6 +40,7 @@ import logging
 import shutil
 from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.exceptions import InvalidImageFormatError
+from django.contrib.auth import get_user_model
 
 logger = logging.getLogger('cosinnus')
 
@@ -1192,23 +1191,3 @@ class CosinnusLocation(models.Model):
 
     
     
-@receiver(post_delete)
-def clear_cache_on_group_delete(sender, instance, **kwargs):
-    """ Clears the cache on CosinnusGroups after deleting one of them. """
-    if sender == CosinnusGroup or issubclass(sender, CosinnusGroup):
-        instance._clear_cache(slug=instance.slug)    
-
-
-def ensure_user_in_group_portal(sender, created, **kwargs):
-    """ Whenever a group membership is created, make sure the user is in the Portal for this group """
-    if created:
-        try:
-            membership = kwargs.get('instance')
-            CosinnusPortalMembership.objects.get_or_create(user=membership.user, group=membership.group.portal, defaults={'status': MEMBERSHIP_MEMBER})
-        except:
-            # We fail silently, because we never want to 500 here unexpectedly
-            logger.error("Error while trying to add User Portal Membership for user that has just joined a group.")
-
-
-# makes sure that users gain membership in a Portal when they are added into a group in that portal
-post_save.connect(ensure_user_in_group_portal, sender=CosinnusGroupMembership)

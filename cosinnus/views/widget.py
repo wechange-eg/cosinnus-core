@@ -28,6 +28,8 @@ from cosinnus.utils.functions import resolve_class
 from cosinnus.utils.urls import group_aware_reverse
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
+from django.core.urlresolvers import reverse_lazy
+from cosinnus.utils.user import ensure_user_widget
 
 def widget_list(request):
     data = {}
@@ -304,6 +306,13 @@ group_dashboard = GroupDashboard.as_view()
 
 class UserDashboard(DashboardWidgetMixin, TemplateView):
     template_name = 'cosinnus/user_dashboard.html'
+    # any 'app_name.widget_name' entries in here will be filtered out of the context_data
+    disallowed_widgets = ['note.detailed_news_list', 'etherpad.latest', 'cosinnus.group_members']
+    default_widget_order = ['stream.my_streams', 'event.upcoming', 'todo.mine']
+    
+    def get(self, request, *args, **kwargs):
+        """ NOTE! Permanent redirect! """
+        return redirect(reverse_lazy('cosinnus:my_stream'), *args, **kwargs)
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
@@ -312,5 +321,16 @@ class UserDashboard(DashboardWidgetMixin, TemplateView):
     def get_filter(self):
         """ Submit the user id so queryset elements can be filtered for that user. """
         return {'user_id': self.request.user.pk}
+    
+    def get_context_data(self, **kwargs):
+        # check if the user has gotten auto-configured widget configs for his user widgets
+        # yet, and if not, add them
+        """ FIXME: this exists to support the legacy NEWW system where it is possible 
+        that old users haven't had widgets created for them  """
+        
+        for app_name, widget_name, options in settings.COSINNUS_INITIAL_USER_WIDGETS:
+            ensure_user_widget(self.request.user, app_name, widget_name, options)
+        
+        return super(UserDashboard, self).get_context_data(**kwargs)
 
 user_dashboard = UserDashboard.as_view()

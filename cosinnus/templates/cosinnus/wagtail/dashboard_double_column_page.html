@@ -1,0 +1,13 @@
+{% extends "cosinnus/wagtail/dashboard_base.html" %}
+{% load i18n static wagtailcore_tags  %}
+
+{% block second_row %}
+    <div class="row">
+        <div class="col-sm-4">
+            {{ page.content1|richtext }}
+        </div>
+        <div class="col-sm-8">
+            {{ page.content2|richtext }}
+        </div>
+    </div><!-- row -->
+{% endblock %}

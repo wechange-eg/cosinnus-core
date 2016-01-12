@@ -13,48 +13,7 @@
         </div><!-- navbar-header -->
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-                {% if request.user.is_authenticated %}
-                    
-                    {% if societies %}
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                {% trans "Societies" %}
-                                <i class="fa fa-caret-down"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                {% for g in societies %}
-                                    <li{% if g == appsmenu_society %} class="active"{% endif %}><a href="{% group_url 'cosinnus:group-dashboard' group=g %}">{{ g.name }}{% if g.type == 1 %}<i class="fa fa-fw fa-globe"></i>{% endif %}</a></li>
-                                {% endfor %}
-                                <li class="divider"></li>
-                                <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "All Societies" %}</a></li>
-                            </ul>
-                        </li>
-                    {% else %}
-                        <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "All Societies" %}</a></li>
-                    {% endif %}
-                
-                    {% if groups %}
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                {% trans "Projects" %}
-                                <i class="fa fa-caret-down"></i>
-                            </a>
-                            <ul class="dropdown-menu">
-                                {% for g in groups %}
-                                    <li{% if g == appsmenu_group %} class="active"{% endif %}><a href="{% group_url 'cosinnus:group-dashboard' group=g %}">{{ g.name }}{% if g.type == 1 %}<i class="fa fa-fw fa-globe"></i>{% endif %}</a></li>
-                                {% endfor %}
-                                <li class="divider"></li>
-                                <li><a href="{% url 'cosinnus:group-list' %}">{% trans "All Projects" %}</a></li>
-                            </ul>
-                        </li>
-                    {% else %}
-                        <li><a href="{% url 'cosinnus:group-list' %}">{% trans "All Projects" %}</a></li>
-                    {% endif %}
-                
-		        {% else %}
-                    <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "Societies" %}</a></li>
-                    <li><a href="{% url 'cosinnus:group-list' %}">{% trans "Projects" %}</a></li>
-	            {% endif %}
+            	{% include 'cosinnus/navbar_buttons.html' %}
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -62,27 +21,33 @@
                 
                 {% if request.user.is_authenticated %}
 	                <li class="dropdown">
-	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="{{ request.user|full_name }}">
 	                        {% include "cosinnus/user/user_avatar_image.html" with user=request.user %}
-	                        {{ request.user|full_name }}
 	                        <i class="fa fa-caret-down"></i>
 	                    </a>
 	                    <ul class="dropdown-menu">
                             {% comment %}  
-							<li><a href="{% url 'cosinnus:user-dashboard' %}">{% trans "My Dashboard" %}</a></li>
-                            {% endcomment %}  
-							<li><a href="{% url 'cosinnus:profile-detail' %}">{% trans "My Profile" %}</a></li>
-							<li><a href="{% url 'cosinnus:notifications' %}">{% trans "Notification Preferences" %}</a></li>
-                            <li class="divider"></li>
-							<li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
+                            <li><a href="{% url 'cosinnus:my_stream' %}">{% trans "My Stream" %}</a></li>
+                            {% endcomment %}
+                            {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+                            	<li><a href="{% url 'cosinnus:profile-detail' %}">{% trans "My Profile" %}</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'cosinnus:notifications' %}">{% trans "Notification Preferences" %}</a></li>
+                            {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+		                        <li class="divider"></li>
+								<li><a href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
+							{% endif %}
 	                    </ul>
 	                </li>
                 {% else %}
-                    <li>
-						<a href="{% url 'login' %}{% if request.path != "/" %}?next={{ request.path }}{% endif %}">
-						    Login
-						</a>
-                    </li>
+                	{% url 'login' as login_url %}
+                	{% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL and login_url %}
+	                    <li>
+	                        <a href="{{ login_url }}{% if request.path != "/" %}?next={{ request.path }}{% endif %}">
+	                            {% trans "Login" %}
+	                        </a>
+	                    </li>
+                    {% endif %}
 		        {% endif %}
             </ul>
         </div>

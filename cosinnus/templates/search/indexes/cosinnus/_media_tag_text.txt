@@ -1,4 +1,8 @@
 {% if object.media_tag %}
-{{ object.media_tag.location_place }}
-{{ object.media_tag.people_name }}
+{{ object.media_tag.location }}
+{{ object.media_tag.location_lat }},{{ object.media_tag.location_lon }}
+{{ object.media_tag.place }}
+{{ object.media_tag.approach }}
+{{ object.media_tag.topics }}
+{{ object.media_tag.persons }}
 {% endif %}

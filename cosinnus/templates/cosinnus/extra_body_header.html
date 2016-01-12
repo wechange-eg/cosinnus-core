@@ -1,1 +1,9 @@
-{% comment %} Override this in your project if you want extra content at the top of your body! {% endcomment %}
+{% load cosinnus_tags %}
+{% comment %} Overriden! {% endcomment %}
+
+{% if user.is_authenticated and not user|cosinnus_setting:"tos_accepted" %}
+    {% include "modal_box_nutzungsbedingungen.html" %}
+    <script type="text/javascript">
+        $('#nutzungsbedingungen').modal('show');
+    </script>
+{% endif %}
