@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
-    CosinnusPermanentRedirect
+    CosinnusPermanentRedirect, CosinnusPortal, MEMBERSHIP_MEMBER,\
+    MEMBERSHIP_PENDING
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from django.http.response import HttpResponse, HttpResponseForbidden
 from django.contrib.auth import get_user_model
@@ -11,6 +12,7 @@ from cosinnus.utils.group import move_group_content as move_group_content_utils
 from cosinnus.models.widget import WidgetConfig
 from django.core.cache import cache
 from django.utils.encoding import force_text
+from django.conf import settings
 
 
 def housekeeping(request):
@@ -141,4 +143,33 @@ def check_and_delete_loop_redirects(request):
             redirect.delete()
     response_string += '<br><br>' + ('These redirects were deleted.' if delete else 'Delete them by using ?delete=1 as GET!')
     return HttpResponse(response_string)
+
+
+def add_members_to_forum(request):
+    if not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    
+    str = 'Added these users:<br/><br/>\n'
+    
+    for portal in CosinnusPortal.objects.all():
+        users = get_user_model().objects.filter(id__in=portal.members)
+        for group_slug in getattr(settings, 'NEWW_DEFAULT_USER_GROUPS', []):
+            try:
+                group = CosinnusGroup.objects.get(slug=group_slug, portal_id=portal.id)
+                for user in users:
+                    memb, created = CosinnusGroupMembership.objects.get_or_create(user=user, group=group, defaults={'status': MEMBERSHIP_MEMBER})
+                    if not created:
+                        if memb.status == MEMBERSHIP_PENDING:
+                            memb.status = MEMBERSHIP_MEMBER
+                            memb.save()
+                            str += 'Set user %d to not pending anymore in portal %d <br/>\n' % (user.id, portal.id)
+                    else:
+                        str += 'Added user %d to forum in portal %d<br/>\n' % (user.id, portal.id)
+                            
+            except CosinnusGroup.DoesNotExist:
+                str += 'Could not find forum in portal %d <br/>\n' % portal.id
+    
+    return HttpResponse(str)
+    
+    
     

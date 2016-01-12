@@ -39,10 +39,10 @@ def ensure_user_to_default_portal_groups(sender, created, **kwargs):
         for group_slug in getattr(settings, 'NEWW_DEFAULT_USER_GROUPS', []):
             try:
                 group = CosinnusGroup.objects.get(slug=group_slug, portal_id=membership.group.id)
+                CosinnusGroupMembership.objects.get_or_create(user=membership.user, group=group, defaults={'status': MEMBERSHIP_MEMBER})
             except CosinnusGroup.DoesNotExist:
                 continue
             
-            CosinnusGroupMembership.objects.get_or_create(user=membership.user, group=group, defaults={'status': MEMBERSHIP_MEMBER})
     except:
         # We fail silently, because we never want to 500 here unexpectedly
         logger.error("Error while trying to add User Membership for newly created user.")
