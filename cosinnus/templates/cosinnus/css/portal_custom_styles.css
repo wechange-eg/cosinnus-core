@@ -34,5 +34,5 @@ body.cosinnus-cms {
 {% endif %}
 
 {% if portal.extra_css %}
-{{ portal.extra_css }}
+{{ portal.extra_css|safe }}
 {% endif %}
