@@ -13,6 +13,8 @@ from cosinnus.models.widget import WidgetConfig
 from django.core.cache import cache
 from django.utils.encoding import force_text
 from django.conf import settings
+import json
+import urllib2
 
 
 def housekeeping(request):
@@ -170,6 +172,35 @@ def add_members_to_forum(request=None):
                 str += 'Could not find forum in portal %d <br/>\n' % portal.id
     
     return HttpResponse(str)
+
+easter_european_country_codes = ['BY', 'BG', 'CZ', 'HU', 'MD', 'PL', 'RO', 'RU', 'SK', 'UA']
+
+def user_statistics(request=None):
+    if request and not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
     
+    user_locs = get_user_model().objects.filter(cosinnus_profile__media_tag__location_lat__isnull=False)\
+        .values_list('id', 'cosinnus_profile__media_tag__location_lat', 'cosinnus_profile__media_tag__location_lon')
     
+    results = []
     
+    class Found(Exception): pass
+    for id, lat, lon in user_locs:
+        location_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f" % (lat, lon)
+        location_data = json.load(urllib2.urlopen(location_url))
+        try:
+            for r in location_data['results']:
+                for c in r['address_components']:
+                    if 'country' in c['types']:
+                        short_name = c['short_name']
+                        if short_name in easter_european_country_codes:
+                            results.append('%d,%f,%f,%s' % (id, lat, lon, short_name))
+                            raise Found
+        except Found:
+            pass
+    #group_locs = CosinnusGroup.objects.filter(locations__gt=0).values_list('id', 'media_tag__location_lat', 'media_tag__location_lon')
+    
+    #user_locs_str = [str(x) for x in results]
+    #group_locs_str = [str(y) for y in group_locs]
+    
+    return HttpResponse('<br/>'.join(results))# + ' (group)<br/>'.join(group_locs_str))
