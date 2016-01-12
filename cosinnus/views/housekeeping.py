@@ -145,8 +145,8 @@ def check_and_delete_loop_redirects(request):
     return HttpResponse(response_string)
 
 
-def add_members_to_forum(request):
-    if not request.user.is_superuser:
+def add_members_to_forum(request=None):
+    if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     
     str = 'Added these users:<br/><br/>\n'
