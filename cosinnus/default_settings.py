@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Django settings for neww project.
+Django settings for cosinnus projects.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/dev/topics/settings/
@@ -132,81 +132,81 @@ TEMPLATES = [
 ]
 
 
-#SOUTH_MIGRATION_MODULES = {
-#    'taggit': 'taggit.south_migrations',
-#}
 
-ROOT_URLCONF = 'neww.urls'
-
-# Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'neww.wsgi.application'
-
-
-INSTALLED_APPS = [
-    # Django Apps
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.humanize',
-    'django.contrib.messages',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.staticfiles',
-    'django.contrib.webdesign',
-    'suit',
-    'django.contrib.admin',
+def compile_installed_apps(internal_apps=[]):
+    """ Supports gathering INSTALLED_APPS with external-project options.
+        Must be called after importing these settings!
+    """
     
-    # wagtail
-    'overextends',
-    'wagtail_overextends',
-    'compressor',
-    'modelcluster',
-    'wagtail.wagtailcore',
-    'wagtail.wagtailadmin',
-    'wagtail.wagtaildocs',
-    'wagtail.wagtailsnippets',
-    'wagtail.wagtailusers',
-    'wagtail.wagtailimages',
-    'wagtail.wagtailembeds',
-    'wagtail.wagtailsearch',
-    'wagtail.wagtailsites',
-    'wagtail.wagtailredirects',
-    'wagtail.wagtailforms',
+    _INSTALLED_APPS = [
+        # Django Apps
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.humanize',
+        'django.contrib.messages',
+        'django.contrib.sessions',
+        'django.contrib.sites',
+        'django.contrib.staticfiles',
+        'django.contrib.webdesign',
+        'suit',
+        'django.contrib.admin',
+        
+        # wagtail
+        'overextends',
+        'wagtail_overextends',
+        'compressor',
+        'modelcluster',
+        'wagtail.wagtailcore',
+        'wagtail.wagtailadmin',
+        'wagtail.wagtaildocs',
+        'wagtail.wagtailsnippets',
+        'wagtail.wagtailusers',
+        'wagtail.wagtailimages',
+        'wagtail.wagtailembeds',
+        'wagtail.wagtailsearch',
+        'wagtail.wagtailsites',
+        'wagtail.wagtailredirects',
+        'wagtail.wagtailforms',
+        
+        'wagtail_modeltranslation',
+    ]
     
-    'wagtail_modeltranslation',
+    # Internal Apps (as defined in external project)
+    _INSTALLED_APPS += internal_apps
     
-    # Internal Apps
-    'neww',
-    'cosinnus',
-    'cosinnus_etherpad',
-    'cosinnus_event',
-    'cosinnus_file',
-    'cosinnus_message',
-    'cosinnus_note',
-    'cosinnus_notifications',
-    'cosinnus_stream',
-    'cosinnus_todo',
-    
-    # 'django_extensions',
-    'django_filters',
-    'django_select2',
-    'widget_tweaks',
-    
-    # External Apps
-    'awesome_avatar',
-    'bootstrap3',
-    'bootstrap3_datetime',
-    'captcha',
-    'djajax',
-    'haystack',
-    'easy_thumbnails',
-    'embed_video',
-    'geoposition',
-    'rest_framework',
-    'taggit',
-    'postman',
-    'osm_field',
-    'raven.contrib.django.raven_compat',
-]
+    _INSTALLED_APPS += [
+        'cosinnus',
+        'cosinnus_etherpad',
+        'cosinnus_event',
+        'cosinnus_file',
+        'cosinnus_message',
+        'cosinnus_note',
+        'cosinnus_notifications',
+        'cosinnus_stream',
+        'cosinnus_todo',
+        
+        # 'django_extensions',
+        'django_filters',
+        'django_select2',
+        'widget_tweaks',
+        
+        # External Apps
+        'awesome_avatar',
+        'bootstrap3',
+        'bootstrap3_datetime',
+        'captcha',
+        'djajax',
+        'haystack',
+        'easy_thumbnails',
+        'embed_video',
+        'geoposition',
+        'rest_framework',
+        'taggit',
+        'postman',
+        'osm_field',
+        'raven.contrib.django.raven_compat',
+    ]
+    return _INSTALLED_APPS
 
 LANGUAGES = [
     ('de', _('Deutsch')),
@@ -323,17 +323,6 @@ AWESOME_AVATAR = {
 
 FORMAT_MODULE_PATH = 'cosinnus.formats'
 
-
-# If you run into trouble, update your HAYSTACK_CONNECTIONS on your local settings as
-# explained on
-# http://django-haystack.readthedocs.org/en/latest/tutorial.html#modify-your-settings-py 
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://127.0.0.1:9200/',
-        'INDEX_NAME': 'neww',
-    },
-}
 
 # this processor is tied to any save/delete signals of models,
 # If the model has an associated SearchIndex, the RealtimeSignalProcessor 
