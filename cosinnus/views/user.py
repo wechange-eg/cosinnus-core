@@ -324,11 +324,12 @@ def password_reset_proxy(request, *args, **kwargs):
         if the email doesn't belong to a user that is a member of an integrated portal. """
     if request.method == 'POST':
         email = request.POST.get('email', None)
+        user = None
         if email:
             try:
                 user = USER_MODEL.objects.get(email=email, is_active=True)
             except USER_MODEL.DoesNotExist:
-                user = None
+                pass
         if user and check_user_integrated_portal_member(user):
             return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_reset_page.html')
     return password_reset(request, *args, **kwargs)
