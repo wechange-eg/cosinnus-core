@@ -70,6 +70,7 @@ setup(
         'djangorestframework>=2.3.0',
         'easy-thumbnails>=1.4',
         'jsonfield>=1.0.0',
+        '-e git+git://github.com/sinnwerkstatt/django-multiform.git@master#egg=django-multiform',
     ],
     dependency_links=[
         'git+git://github.com/Markush2010/django-bootstrap3.git@develop#egg=django-bootstrap3',
