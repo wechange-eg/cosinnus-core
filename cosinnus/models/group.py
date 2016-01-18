@@ -522,8 +522,10 @@ class CosinnusPortal(models.Model):
             except:
                 pass
         custom_css = render_to_string('cosinnus/css/portal_custom_styles.css', dictionary={'portal': self})
-        css_file = open(os.path.join(self._get_static_folder(), 'css', self._CUSTOM_CSS_FILENAME % self.slug), 'w')
+        css_path = os.path.join(self._get_static_folder(), 'css', self._CUSTOM_CSS_FILENAME % self.slug)
+        css_file = open(css_path, 'w')
         css_file.write(custom_css)
+        logger.warn('Wrote Custom Portal CSS file to:', extra={'Portal': CosinnusPortal.get_current().id, 'css_path': css_path})
         css_file.close()
     
     @cached_property
