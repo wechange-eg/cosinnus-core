@@ -94,7 +94,11 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
                 messages.error(request, _('You did not upload a CSV file or something went wrong during the upload!'))
             else:
                 try:
-                    (imported_groups, imported_projects, updated_groups, updated_projects, debug) = csv_import_projects(csv_file)
+                    # DRJA encodes their CSV in UCS-2 LE (utf-16-le) with a ';' delimiter
+                    encoding = "utf-16-le"
+                    delimiter = b';'
+                    
+                    (imported_groups, imported_projects, updated_groups, updated_projects, debug) = csv_import_projects(csv_file, encoding=encoding, delimiter=delimiter)
                     messages.success(request, _('%(num_projects)d Projects and %(num_groups)d Groups were imported successfully!') % \
                          {'num_projects': len(imported_groups), 'num_groups': len(imported_projects)})
                 except UnicodeDecodeError:
