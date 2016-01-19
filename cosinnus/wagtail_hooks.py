@@ -1,12 +1,23 @@
 # -*- coding: utf-8 -*-
 
+from django.conf.urls import url
+from django.core.urlresolvers import reverse
 from django.utils.html import format_html
 
-from wagtail.wagtailcore import hooks, fields
+from wagtail.wagtailcore import hooks
 from wagtail.wagtailcore.whitelist import attribute_rule
 from django.conf import settings
 from django.contrib.staticfiles.templatetags.staticfiles import static
-fields
+
+
+from wagtail.wagtailadmin.menu import MenuItem
+
+from django.utils.translation import ugettext_lazy as _
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_protect
+from django.contrib import messages
+from cosinnus.utils.import_utils import csv_import_projects
+
 
 @hooks.register('insert_editor_js')
 def enable_source():
@@ -68,4 +79,46 @@ def whitelister_element_rules():
         'sup': allow_all_attributes,
         'ul': allow_all_attributes,
     }
+
+
+if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
     
+    @csrf_protect
+    def import_project_view( request ):
+        debug = '-'
+        
+        if request.method == 'POST':
+            csv_file = request.FILES.get('csv_upload', None)
+            
+            if not csv_file:
+                messages.error(request, _('You did not upload a CSV file or something went wrong during the upload!'))
+            else:
+                try:
+                    (imported_groups, imported_projects, updated_groups, updated_projects, debug) = csv_import_projects(csv_file)
+                    messages.success(request, _('%(num_projects)d Projects and %(num_groups)d Groups were imported successfully!') % \
+                         {'num_projects': len(imported_groups), 'num_groups': len(imported_projects)})
+                except UnicodeDecodeError:
+                    messages.error(request, _('The CSV file you supplied is not formatted in UTF-8 encoding! Only files in proper UTF-8 format can be imported!'))
+                    
+            
+        return render(request, "cosinnus/wagtail/wagtailadmin/import_projects.html", {
+            'site_name': settings.WAGTAIL_SITE_NAME,
+            'panels': [],
+            'user': request.user,
+            'debug': debug,
+        })
+    
+    @hooks.register('register_admin_urls')
+    def urlconf_time():
+        return [
+            url(r'^import_projects/$', import_project_view, name='import-projects' ),
+        ]
+    
+    class ImportProjectsMenutItem(MenuItem): 
+        def is_shown(self, request):
+            return settings.COSINNUS_IMPORT_PROJECTS_PERMITTED
+        
+    @hooks.register('register_admin_menu_item')
+    def register_import_menu_item():
+        return ImportProjectsMenutItem(_('Import'), reverse('import-projects'), classnames='icon icon-plus', order=1005)
+

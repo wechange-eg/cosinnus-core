@@ -1,0 +1,26 @@
+{% extends "cosinnus/wagtail/wagtailadmin/custom_admin_base.html" %}
+{% load gravatar static compress i18n %}
+
+{% block titletag %}{% trans "Import Projects and Groups" %}{% endblock %}
+
+{% block branding_welcome %}{% trans "Import Projects and Groups" %}{% endblock %}
+
+{% block sections %}
+	<section>
+	    <h2>{% trans "Import from a CSV File" %}</h2>
+	    <p>{% trans "(Explanation...)" %}</p>
+	    
+	    <form action="." method="post" enctype="multipart/form-data">
+    	{% csrf_token %}
+    		<p>
+    			<label for="csv_upload"></label><input id="csv_upload" name="csv_upload" type="file" accept=".csv" />
+    		</p>
+    		<button type="submit" class="button-longrunning">{% trans "Upload and Import..." %}</button>
+    		
+    		<hr/>
+    			<p>{{ debug }}</p>
+    		<hr/>
+    	</form>
+	    
+	</section>
+{% endblock %}
