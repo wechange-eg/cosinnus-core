@@ -16,34 +16,40 @@ class UTF8Recoder:
         return self
 
     def next(self):
+        # always use utf-8 to encode, no matter which encoding we decoded while reading
         return self.reader.next().encode("utf-8")
+    
 
 class UnicodeReader:
     """
     A CSV reader which will iterate over lines in the CSV file "f",
     which is encoded in the given encoding.
     """
+    
+    _encoding = None
 
-    def __init__(self, f, dialect=csv.excel, encoding="utf-8", **kwds):
+    def __init__(self, f, dialect=csv.excel, encoding="utf-8", delimiter=b',', **kwds):
         f = UTF8Recoder(f, encoding)
-        self.reader = csv.reader(f, dialect=dialect, delimiter=b',', quotechar=b'"', **kwds)
+        self._encoding = encoding
+        self.reader = csv.reader(f, dialect=dialect, delimiter=delimiter, quotechar=b'"', **kwds)
 
     def next(self):
         row = self.reader.next()
+        # utf-8 must be used here because we use a UTF8Reader
         return [unicode(s, "utf-8") for s in row]
 
     def __iter__(self):
         return self
 
 
-def csv_import_projects(csv_file, delimiter=b';'):
+def csv_import_projects(csv_file, encoding="utf-8", delimiter=b','):
     """ Imports CosinnusGroups (projects and societies) from a CSV file (InMemory or opened).
         
         @return: (imported_groups, imported_projects, updated_groups, updated_projects): 
              a 4-tuple of groups and projects imported and groups and projects updated 
         @raise UnicodeDecodeError: if the supplied csv_file is not encoded in 'utf-8' """
     
-    rows = UnicodeReader(csv_file)
+    rows = UnicodeReader(csv_file, encoding=encoding, delimiter=delimiter)
     debug = ''
     
     # rollback DB on error
@@ -51,7 +57,7 @@ def csv_import_projects(csv_file, delimiter=b';'):
         
         for row in rows:
             # TODO: import projects from rows
-            debug += ' | '.join(row) + ' ---- '
+            debug += ' | '.join(row) + ' --<br/><br/>-- '
             
         
     return ([], [], [], [], debug)
