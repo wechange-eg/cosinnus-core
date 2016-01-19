@@ -130,6 +130,7 @@ class DashboardWidget(object):
             'widget_title': self.config.get('widget_title', None),
             'widget_icon': self.config.get('widget_icon', None),
             'link_label':self.config.get('link_label', None),
+            'sort_field': self.config.sort_field,
         })
         return render_to_string(self.widget_template_name, context)
     
