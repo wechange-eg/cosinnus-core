@@ -1,0 +1,12 @@
+{% load i18n static cosinnus_tags thumbnail %}
+
+<li><a href="{% url 'cosinnus:my_stream' %}">{% trans "Stream" %}</a></li>
+
+{% include 'cosinnus/navbar_buttons_group_menus.html' %}
+
+{% comment %} Display a link to the blog Group if it exists {% endcomment %}
+{% group_url 'cosinnus:note:list' group=SETTINGS.NEWW_FORUM_GROUP_SLUG ignoreErrors=True as blog_url %}
+{% if blog_url %}
+    <li><a href="{{ blog_url }}">{% trans "Forum" %}</a></li>
+{% endif %}
+<li><a href="{% url 'cosinnus:user-list' %}">{% trans "People" %}</a></li>

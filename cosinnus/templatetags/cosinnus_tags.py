@@ -686,8 +686,32 @@ def is_integrated_portal():
 def textfield(field):
     """ Renders a textfield's text safely with escaping, but retains linebreaks 
         and formats URLs as target="_blank" links. """
-    return url_target_blank(urlizetrunc(linebreaksbr(field), 25))
+    return linebreaksbr(url_target_blank(urlizetrunc(field, 35)))
 
+
+@register.filter
+def tag_group_filtered(tag_object, group="None"):
+    """
+    Filters a media_tag for its group to not show attributes that are inherited from the group.
+    Does no filtering if no group is supplied.
+    """
+    if tag_object and group and group != "None":
+        group_tag = group.media_tag
+        tag_object = copy(tag_object)
+        # filter tags
+        ids = group_tag.tags.values_list('id', flat=True)
+        tag_object.tags = tag_object.tags.exclude(id__in=ids)
+        # filter location
+        if tag_object.location == group_tag.location:
+            tag_object.location = None
+        # filter topics
+        if tag_object.topics:
+            tag_object.topics = copy(tag_object.topics)
+            group_topics = group_tag.topics and group_tag.topics.split(',') or []
+            tag_object.topics = ','.join([top for top in tag_object.topics.split(',') if top not in group_topics])
+        
+    return tag_object
+    
 
 @register.filter
 def debugthis(obj):

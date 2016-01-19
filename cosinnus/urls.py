@@ -44,7 +44,8 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^housekeeping/setcache/(?P<content>[^/]+)/$', 'housekeeping.setcache', name='housekeeping-setcache'),
     url(r'^housekeeping/getcache$', 'housekeeping.getcache', name='housekeeping-getcache'),
     url(r'^housekeeping/validate_redirects', 'housekeeping.check_and_delete_loop_redirects', name='housekeeping-validate-redirects'),
-    
+    url(r'^housekeeping/add_members_to_forum', 'housekeeping.add_members_to_forum', name='housekeeping-add-members-to-forum'),
+    url(r'^housekeeping/user_statistics', 'housekeeping.user_statistics', name='housekeeping-user-statistics'),
     
     url(r'^select2/', include('cosinnus.urls_select2', namespace='select2')),
 )

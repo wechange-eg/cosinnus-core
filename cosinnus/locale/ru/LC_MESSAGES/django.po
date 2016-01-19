@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-06 14:45+0100\n"
+"POT-Creation-Date: 2016-01-07 16:49+0100\n"
 "PO-Revision-Date: 2015-11-14 17:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -161,6 +161,22 @@ msgstr ""
 msgid "You were tagged in a post, document or other item"
 msgstr "Вас отметили в посте, документе или другом элементе"
 
+#: .\default_settings.py:212
+msgid "Deutsch"
+msgstr "Deutsch"
+
+#: .\default_settings.py:213
+msgid "English"
+msgstr "English"
+
+#: .\default_settings.py:214
+msgid "Russian"
+msgstr "Русский"
+
+#: .\default_settings.py:215
+msgid "Ukrainian"
+msgstr "Українська"
+
 #: .\forms\attached_object.py:54 .\forms\dashboard.py:66
 msgid "Attachments"
 msgstr "Приложения"
@@ -244,7 +260,7 @@ msgstr "Следующая неделя"
 msgid "Next month"
 msgstr "Следующий месяц"
 
-#: .\forms\hierarchy.py:14 .\models\group.py:413 .\models\group.py:556
+#: .\forms\hierarchy.py:14 .\models\group.py:412 .\models\group.py:555
 msgid "Name"
 msgstr "Название"
 
@@ -259,6 +275,14 @@ msgstr "Мои группы"
 #: .\forms\search.py:52
 msgid "Other groups"
 msgstr "Другие группы"
+
+#: .\forms\tagged.py:36
+msgid "Like"
+msgstr "Нравится "
+
+#: .\forms\tagged.py:87 .\models\tagged.py:66
+msgid "Persons"
+msgstr "Люди"
 
 #: .\forms\user.py:43
 msgid "email address"
@@ -294,7 +318,51 @@ msgstr ""
 msgid "This account is inactive."
 msgstr "Неактивный аккаунт"
 
-#: .\models\cms.py:17 .\models\tagged.py:140
+#: .\image_formats.py:7
+msgid "Tiny (50 x *)"
+msgstr ""
+
+#: .\image_formats.py:8
+msgid "Very Small (100 x *)"
+msgstr ""
+
+#: .\image_formats.py:9
+msgid "Smaller (150 x *)"
+msgstr ""
+
+#: .\image_formats.py:10
+msgid "Small (200 x *)"
+msgstr ""
+
+#: .\image_formats.py:11
+msgid "Medium-small (250 x *)"
+msgstr ""
+
+#: .\image_formats.py:12
+msgid "Medium (300 x *)"
+msgstr ""
+
+#: .\image_formats.py:13
+msgid "Large (400 x *)"
+msgstr ""
+
+#: .\image_formats.py:14
+msgid "Larger (500 x *)"
+msgstr ""
+
+#: .\image_formats.py:15
+msgid "Very large (650 x *)"
+msgstr ""
+
+#: .\image_formats.py:16
+msgid "Extra large (800 x *)"
+msgstr ""
+
+#: .\image_formats.py:17
+msgid "XXL (1200 x *)"
+msgstr ""
+
+#: .\models\cms.py:17 .\models\tagged.py:212
 msgid "Title"
 msgstr "Название"
 
@@ -318,11 +386,11 @@ msgstr "микросайты Cosinnu"
 msgid "Complaint Text"
 msgstr "Текст жалобы"
 
-#: .\models\feedback.py:30 .\models\tagged.py:144
+#: .\models\feedback.py:30 .\models\tagged.py:216
 msgid "Creator"
 msgstr "Создано пользователем"
 
-#: .\models\feedback.py:35 .\models\tagged.py:149
+#: .\models\feedback.py:35 .\models\tagged.py:221
 msgid "Created"
 msgstr "Создано"
 
@@ -334,56 +402,57 @@ msgstr "Объект жалобы"
 msgid "Reported objects"
 msgstr "Объекты жалобы"
 
-#: .\models\group.py:82
+#: .\models\group.py:81
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr "Введите допустимое имя. Косую черту не допускается."
 
-#: .\models\group.py:404 .\models\group.py:553 .\models\group.py:1010
+#: .\models\group.py:403 .\models\group.py:552 .\models\group.py:1009
 msgid "Portal"
 msgstr "Портал"
 
-#: .\models\group.py:405
+#: .\models\group.py:404
 msgid "Portals"
 msgstr "Порталы"
 
 # ???
-#: .\models\group.py:415 .\models\group.py:558
+#: .\models\group.py:414 .\models\group.py:557
 msgid "Slug"
 msgstr "Slug"
 
-#: .\models\group.py:417 .\models\profile.py:147
+#: .\models\group.py:416 .\models\profile.py:147
 #: .\templates\cosinnus\_microsite__old_.html:198
 #: .\templates\cosinnus\group\group_form.html:290
 #: .\templates\cosinnus\group\group_microsite.html:192
 msgid "Description"
 msgstr "Описание"
 
-#: .\models\group.py:418 .\models\group.py:580 .\models\profile.py:150
+#: .\models\group.py:417 .\models\group.py:579 .\models\profile.py:150
 #: .\templates\cosinnus\group\group_form.html:175
 #: .\templates\cosinnus\group\group_form.html:184
 #: .\templates\cosinnus\group\group_microsite.html:337
+#: .\templates\cosinnus\media_tags_group_profile_readonly.html:44
 #: .\templates\cosinnus\user\userprofile_form.html:97
 msgid "Website"
 msgstr "Сайт"
 
-#: .\models\group.py:419 .\models\group.py:581 .\models\tagged.py:42
+#: .\models\group.py:418 .\models\group.py:580 .\models\tagged.py:40
 msgid "Public"
 msgstr "В открытом доступе"
 
-#: .\models\group.py:423
+#: .\models\group.py:422
 msgid "Associated Site"
 msgstr "Привязанный сайт"
 
 # ???
-#: .\models\group.py:425
+#: .\models\group.py:424
 msgid "Http/Https Protocol (overrides settings)"
 msgstr "Протокол Http/Https (переопределяет настройки)"
 
-#: .\models\group.py:428
+#: .\models\group.py:427
 msgid "Users Need Activation"
 msgstr "Необходимо активировать новых пользователей"
 
-#: .\models\group.py:429
+#: .\models\group.py:428
 msgid ""
 "If activated, newly registered users need to be approved by a portal admin "
 "before being able to log in."
@@ -391,61 +460,61 @@ msgstr ""
 "Чтобы новые зарегистрированные пользователи могли войти на портал, "
 "администратор портала должен подтвердить их активизацию"
 
-#: .\models\group.py:433
+#: .\models\group.py:432
 msgid "Background Image"
 msgstr "Фоновое изображение"
 
-#: .\models\group.py:434
+#: .\models\group.py:433
 msgid "Used for the background of the landing and CMS-pages"
 msgstr "Используется в качестве фона для целевой страницы и CMS"
 
-#: .\models\group.py:437
+#: .\models\group.py:436
 msgid "Logo Image"
 msgstr "Логотип"
 
-#: .\models\group.py:438
+#: .\models\group.py:437
 msgid ""
 "Used as a small logo in the navigation bar and for external links to this "
 "portal"
 msgstr "Используется в панели навигации и для внешних ссылок на этот портал"
 
-#: .\models\group.py:441
+#: .\models\group.py:440
 msgid "Main color"
 msgstr "Основной цвет"
 
-#: .\models\group.py:441
+#: .\models\group.py:440
 msgid "Main background color (css hex value, with or without \"#\")"
 msgstr "Основной цвет фона (цвета hex, по необходимости с „#“)"
 
-#: .\models\group.py:444
+#: .\models\group.py:443
 msgid "Gradient color"
 msgstr "Градиент"
 
-#: .\models\group.py:444
+#: .\models\group.py:443
 msgid "Bottom color for the gradient (css hex value, with or without \"#\")"
 msgstr "Нижний цвет градиента (цвета hex, по необходимости с „#“)"
 
-#: .\models\group.py:447
+#: .\models\group.py:446
 msgid "Extra CSS"
 msgstr "Дополнительный CSS"
 
-#: .\models\group.py:447
+#: .\models\group.py:446
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr ""
 "Дополнительный CSS для этого портала, будет использоваться предпочтительно"
 
-#: .\models\group.py:544 .\models\group.py:1178 .\models\tagged.py:64
-#: .\models\tagged.py:137
+#: .\models\group.py:543 .\models\group.py:1177 .\models\tagged.py:62
+#: .\models\tagged.py:209
 msgid "Group"
 msgstr "Проект"
 
-#: .\models\group.py:545 .\templates\cosinnus\group\group_microsite.html:120
+#: .\models\group.py:544 .\templates\cosinnus\group\group_microsite.html:120
 #: .\templates\cosinnus\group\group_microsite.html:127
 msgid "Society"
 msgstr "Группа"
 
 # ???
-#: .\models\group.py:559
+#: .\models\group.py:558
 msgid ""
 "Be extremely careful when changing this slug manually! There can be many "
 "side-effects (redirects breaking e.g.)!"
@@ -453,82 +522,82 @@ msgstr ""
 "Будьте предельно внимательны при ручном изменении этого slug! Это может "
 "привести к побочным эффектам (к примеру, ошибки при перенаправление)!"
 
-#: .\models\group.py:561
+#: .\models\group.py:560
 msgid "Group Type"
 msgstr "Тип группы"
 
-#: .\models\group.py:564
+#: .\models\group.py:563
 msgid "Short Description"
 msgstr "Краткое описание"
 
-#: .\models\group.py:565
+#: .\models\group.py:564
 msgid "Short Description. Internal, will not be shown publicly."
 msgstr ""
 "Краткое описание для внутреннего использования, не отображается публично"
 
-#: .\models\group.py:566
+#: .\models\group.py:565
 #, fuzzy
 msgid "Detailed Description"
 msgstr "Подробное описание"
 
-#: .\models\group.py:567
+#: .\models\group.py:566
 msgid "Detailed, public description."
 msgstr "Подробное описание для публичного доступа"
 
-#: .\models\group.py:568
+#: .\models\group.py:567
 msgid "Contact Information"
 msgstr "Контактная информация"
 
-#: .\models\group.py:569
+#: .\models\group.py:568
 msgid "How you can be contacted - addresses, social media, etc."
 msgstr "Как вас можно найти - адреса, социальные медиа и пр."
 
-#: .\models\group.py:572 .\models\profile.py:145
+#: .\models\group.py:571 .\models\profile.py:145
 #: .\templates\cosinnus\group\group_form.html:87
 msgid "Avatar"
 msgstr "Аватар"
 
-#: .\models\group.py:575
+#: .\models\group.py:574
 msgid "Wallpaper image"
 msgstr "Фоновое изображение"
 
-#: .\models\group.py:576
+#: .\models\group.py:575
 #, fuzzy
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "Отображается на микросайте как большой баннер (1140 x 240 px)"
 
-#: .\models\group.py:589
+#: .\models\group.py:588
 msgid "Deactivated Apps"
 msgstr "Деактивированые приложения"
 
-#: .\models\group.py:591
+#: .\models\group.py:590
 msgid "Is active"
 msgstr "Активно"
 
-#: .\models\group.py:592
+#: .\models\group.py:591
 msgid ""
 "If a group is not active, it counts as non-existent for all purposes and "
 "views on the website."
 msgstr ""
 "Если группа неактивна, она считается несуществующей и не видна на веб-сайте"
 
-#: .\models\group.py:595
+#: .\models\group.py:594
 msgid "Parent Group"
 msgstr "Материнская группа"
 
-#: .\models\group.py:605
+#: .\models\group.py:604
 msgid "Cosinnus group"
 msgstr "Проект"
 
-#: .\models\group.py:606
+#: .\models\group.py:605
 msgid "Cosinnus groups"
 msgstr "Проекты"
 
-#: .\models\group.py:643
+#: .\models\group.py:642
 msgid "Slug must not be empty."
 msgstr "Slug не может быть пустым"
 
-#: .\models\group.py:679
+#: .\models\group.py:678
 msgid ""
 "The URL for this group has changed. A redirect from all existing URLs has "
 "automatically been created!"
@@ -536,120 +605,281 @@ msgstr ""
 "URL этой группы изменен. Создано автоматическое перенаправление со всех "
 "существующих URL"
 
-#: .\models\group.py:884
+#: .\models\group.py:883
 msgid "Cosinnus project"
 msgstr "Проект"
 
-#: .\models\group.py:885
+#: .\models\group.py:884
 msgid "Cosinnus projects"
 msgstr "Проекты"
 
-#: .\models\group.py:917
+#: .\models\group.py:916
 msgid "Cosinnus society"
 msgstr "Группа"
 
-#: .\models\group.py:918
+#: .\models\group.py:917
 msgid "Cosinnus societies"
 msgstr "Группы"
 
-#: .\models\group.py:1004
+#: .\models\group.py:1003
 msgid "Group membership"
 msgstr "Членство в группе"
 
-#: .\models\group.py:1005
+#: .\models\group.py:1004
 msgid "Group memberships"
 msgstr "Членство в группах"
 
-#: .\models\group.py:1017
+#: .\models\group.py:1016
 msgid "Portal membership"
 msgstr "Членство на портале"
 
-#: .\models\group.py:1018
+#: .\models\group.py:1017
 msgid "Portal memberships"
 msgstr "Членства на портале"
 
-#: .\models\group.py:1029
+#: .\models\group.py:1028
 msgid "From Portal"
 msgstr "Из портала"
 
-#: .\models\group.py:1030
+#: .\models\group.py:1029
 msgid "From Group Type"
 msgstr "От типа группы"
 
 # ???
-#: .\models\group.py:1031
+#: .\models\group.py:1030
 msgid "From Slug"
 msgstr "От slug"
 
-#: .\models\group.py:1034 .\models\group.py:1043
+#: .\models\group.py:1033 .\models\group.py:1042
 msgid "Permanent Group Redirects"
 msgstr "Постоянные перенаправления группы"
 
-#: .\models\group.py:1042
+#: .\models\group.py:1041
 msgid "Permanent Group Redirect"
 msgstr "Постоянное перенаправление группы"
 
-#: .\models\group.py:1172 .\templates\cosinnus\group\group_microsite.html:281
+#: .\models\group.py:1171 .\models\tagged.py:100
+#: .\templates\cosinnus\group\group_microsite.html:281
+#: .\templates\cosinnus\media_tags_group_profile_readonly.html:4
 msgid "Location"
 msgstr "Место"
 
-#: .\models\group.py:1173
-#, fuzzy
-#| msgid "Last edited"
+#: .\models\group.py:1172 .\models\tagged.py:101
 msgid "Latitude"
-msgstr "В последний раз отредактировано"
+msgstr "Широта"
 
-#: .\models\group.py:1174
+#: .\models\group.py:1173 .\models\tagged.py:102
 msgid "Longitude"
-msgstr ""
+msgstr "Долгота"
 
-#: .\models\group.py:1184
+#: .\models\group.py:1183
 #, fuzzy
 #| msgid "Cosinnus societies"
 msgid "CosinnusLocation"
 msgstr "Группы"
 
-#: .\models\group.py:1185
+#: .\models\group.py:1184
 #, fuzzy
 #| msgid "Cosinnus societies"
 msgid "CosinnusLocations"
 msgstr "Группы"
 
-#: .\models\tagged.py:59
+#: .\models\tagged.py:57
 msgid "Only me"
 msgstr "Только я"
 
-#: .\models\tagged.py:60 .\templates\cosinnus\group\group_form.html:262
+#: .\models\tagged.py:58 .\templates\cosinnus\group\group_form.html:262
 msgid "Group/Project members only"
 msgstr "Только для членов проекта или группы"
 
-#: .\models\tagged.py:61 .\templates\cosinnus\group\group_form.html:263
+#: .\models\tagged.py:59 .\templates\cosinnus\group\group_form.html:263
 msgid "Public (visible without login)"
 msgstr "Публично (доступно без логина)"
 
 #: .\models\tagged.py:68
-msgid "Persons"
-msgstr "Люди"
+#: .\templates\cosinnus\media_tags_group_profile_readonly.html:32
+msgid "Tags"
+msgstr "Теги"
 
 #: .\models\tagged.py:70
-msgid "Tags"
-msgstr "Тэги"
-
-#: .\models\tagged.py:72
 msgid "Permissions"
 msgstr "Полномочия"
 
-#: .\models\tagged.py:105
+#: .\models\tagged.py:88
+msgid "Mobilität"
+msgstr "Мобильность"
+
+#: .\models\tagged.py:89
+msgid "Energie"
+msgstr "Энергия"
+
+#: .\models\tagged.py:90
+msgid "Umwelt"
+msgstr "Окружающая среда"
+
+#: .\models\tagged.py:91
+msgid "Bildung"
+msgstr "Образование"
+
+#: .\models\tagged.py:92
+msgid "Gesundheit"
+msgstr "Здравоохранение"
+
+#: .\models\tagged.py:93
+msgid "Ernährung und Konsum"
+msgstr "Питание и потребление"
+
+#: .\models\tagged.py:94
+msgid "Kunst und Kultur"
+msgstr "Искусство и культура"
+
+#: .\models\tagged.py:95
+msgid "Geld und Finanzen"
+msgstr "Деньги и финансы"
+
+#: .\models\tagged.py:96
+msgid "Arbeit und Recht"
+msgstr "Труд и право"
+
+#: .\models\tagged.py:97
+msgid "Bauen und Wohnen"
+msgstr "Строительство и жилье"
+
+#: .\models\tagged.py:104
+msgid "Place"
+msgstr "Место"
+
+#: .\models\tagged.py:107
+msgid "Valid from"
+msgstr "Действителен с"
+
+#: .\models\tagged.py:108
+msgid "Valid to"
+msgstr "Действителен до"
+
+#: .\models\tagged.py:110
+msgid "Approach"
+msgstr "Подход"
+
+#: .\models\tagged.py:113
+#: .\templates\cosinnus\media_tags_group_profile_readonly.html:13
+msgid "Topics"
+msgstr "Темы"
+
+#: .\models\tagged.py:117
+msgid "Likes"
+msgstr "Нравится"
+
+#: .\models\tagged.py:177
 msgid "Attached object"
 msgstr "Прикрепленный объект"
 
-#: .\models\tagged.py:106
+#: .\models\tagged.py:178
 msgid "Attached objects"
 msgstr "Прикрепленные объекты"
 
-#: .\models\tagged.py:249
+#: .\models\tagged.py:321
 msgid "Path"
 msgstr "Путь"
+
+#: .\models\wagtail_models.py:69 .\models\wagtail_models.py:180
+#: .\models\wagtail_models.py:266
+#, fuzzy
+#| msgid "Contact"
+msgid "Content"
+msgstr "Контакт"
+
+#: .\models\wagtail_models.py:84
+msgid "Portal Root Page"
+msgstr ""
+
+#: .\models\wagtail_models.py:91
+msgid "Assigned Portal"
+msgstr ""
+
+#: .\models\wagtail_models.py:96
+msgid "Footer"
+msgstr ""
+
+#: .\models\wagtail_models.py:97
+msgid ""
+"Will be displayed as a footer on EVERY page on this website (not only "
+"dashboard pages!)"
+msgstr ""
+
+#: .\models\wagtail_models.py:121
+#, fuzzy
+#| msgid "Register now!"
+msgid "Show Register Button"
+msgstr "Зарегистрируйтесь сейчас!"
+
+#: .\models\wagtail_models.py:122
+msgid "Redirect Logged in Users"
+msgstr ""
+
+#: .\models\wagtail_models.py:123
+msgid ""
+"If active, this page will only be visible to non-logged-in users. All others "
+"will be redirected to the activities page."
+msgstr ""
+
+#: .\models\wagtail_models.py:127
+msgid "Left banner (top)"
+msgstr ""
+
+#: .\models\wagtail_models.py:128
+msgid "Right banner (top)"
+msgstr ""
+
+#: .\models\wagtail_models.py:130
+msgid "Header"
+msgstr ""
+
+#: .\models\wagtail_models.py:132
+msgid "Left footer"
+msgstr ""
+
+#: .\models\wagtail_models.py:133
+#, fuzzy
+#| msgid "Edit folder"
+msgid "Right footer"
+msgstr "Редактировать папку"
+
+#: .\models\wagtail_models.py:178
+msgid "1-Column Dashboard Page"
+msgstr ""
+
+#: .\models\wagtail_models.py:203
+msgid "2-Column Dashboard Page"
+msgstr ""
+
+#: .\models\wagtail_models.py:205 .\models\wagtail_models.py:233
+msgid "Content (left column)"
+msgstr ""
+
+#: .\models\wagtail_models.py:206 .\models\wagtail_models.py:235
+msgid "Content (right column)"
+msgstr ""
+
+#: .\models\wagtail_models.py:231
+msgid "3-Column Dashboard Page"
+msgstr ""
+
+#: .\models\wagtail_models.py:234
+msgid "Content (center column)"
+msgstr ""
+
+#: .\models\wagtail_models.py:287
+msgid "Simple One-Column Page"
+msgstr ""
+
+#: .\models\wagtail_models.py:295
+msgid "Simple Page with Left Navigation"
+msgstr ""
+
+#: .\models\wagtail_models.py:298
+msgid "Left Sidebar"
+msgstr ""
 
 #: .\models\widget.py:19 .\templates\cosinnus\appsmenu.html:37
 #: .\templates\cosinnus\appsmenu.html:51
@@ -711,6 +941,101 @@ msgstr "Настройка конфигурации виджета"
 #: .\models\widget.py:102
 msgid "Widget configuration items"
 msgstr "Настройки конфигурации виджета"
+
+#: .\templates\admin\cms\page\menu_item.html:5
+msgid "select this page"
+msgstr "Выбрать эту страницу"
+
+#: .\templates\admin\cms\page\menu_item.html:5
+#: .\templates\admin\cms\page\menu_item.html:6
+msgid "edit this page"
+msgstr "Редактировать эту страницу"
+
+#: .\templates\admin\cms\page\menu_item.html:6
+msgid "edit"
+msgstr "Редактировать"
+
+#: .\templates\admin\cms\page\menu_item.html:16
+msgid "insert above"
+msgstr "Вставить выше"
+
+#: .\templates\admin\cms\page\menu_item.html:17
+msgid "insert below"
+msgstr "Вставить ниже"
+
+#: .\templates\admin\cms\page\menu_item.html:19
+msgid "insert inside"
+msgstr "Вставить в середине"
+
+#: .\templates\admin\cms\page\menu_item.html:23
+msgid "softroot"
+msgstr "softroot"
+
+#: .\templates\admin\cms\page\menu_item.html:23
+msgid "home"
+msgstr "Главная"
+
+#: .\templates\admin\cms\page\menu_item.html:26
+#, python-format
+msgid "Edit this page in %(language)s "
+msgstr "Редактировать эту страницу на %(language)s "
+
+#: .\templates\admin\cms\page\menu_item.html:33
+msgid "Cut"
+msgstr "Вырезать"
+
+#: .\templates\admin\cms\page\menu_item.html:33
+msgid "cut"
+msgstr "Вырезать"
+
+#: .\templates\admin\cms\page\menu_item.html:34
+msgid "Copy"
+msgstr "Копировать"
+
+#: .\templates\admin\cms\page\menu_item.html:34
+msgid "copy"
+msgstr "Копировать"
+
+#: .\templates\admin\cms\page\menu_item.html:37
+#: .\templates\admin\cms\page\menu_item.html:41
+msgid "Add Child"
+msgstr "Добавить ребенка"
+
+#: .\templates\admin\cms\page\menu_item.html:37
+#: .\templates\admin\cms\page\menu_item.html:41
+msgid "add"
+msgstr "Добавить"
+
+#: .\templates\admin\cms\page\menu_item.html:44
+#: .\templates\cosinnus\group\group_form.html:131
+#: .\templates\cosinnus\group\group_form.html:216
+#: .\templates\cosinnus\leftnav_button_editable_folder.html:51
+#: .\templates\cosinnus\user\userprofile_form.html:159
+#: .\templates\cosinnus\widgets\base_widget.html:39 .\views\group.py:201
+#: .\views\group.py:730
+msgid "Delete"
+msgstr "Удалить"
+
+#: .\templates\admin\cms\page\menu_item.html:44
+msgid "delete"
+msgstr "Удалить"
+
+#: .\templates\admin\cms\page\menu_item.html:57
+msgid "Unpublish"
+msgstr "Убрать"
+
+#: .\templates\admin\cms\page\menu_item.html:58
+#: .\templates\admin\cms\page\menu_item.html:71
+msgid "Publish"
+msgstr "Опубликовать"
+
+#: .\templates\admin\cms\page\menu_item.html:62
+msgid "View on page"
+msgstr "Просмотреть на странице"
+
+#: .\templates\admin\cms\page\menu_item.html:62
+msgid "view"
+msgstr "Просмотреть"
 
 #: .\templates\admin\cosinnusreportedobject\change_form.html:8
 msgid "View reported item..."
@@ -1316,15 +1641,6 @@ msgstr "Введите название проекта."
 msgid "Avatar will be deleted once you save."
 msgstr "Аватар будет удален после сохранения."
 
-#: .\templates\cosinnus\group\group_form.html:131
-#: .\templates\cosinnus\group\group_form.html:216
-#: .\templates\cosinnus\leftnav_button_editable_folder.html:51
-#: .\templates\cosinnus\user\userprofile_form.html:159
-#: .\templates\cosinnus\widgets\base_widget.html:39 .\views\group.py:201
-#: .\views\group.py:730
-msgid "Delete"
-msgstr "Удалить"
-
 #: .\templates\cosinnus\group\group_form.html:142
 msgid "A picture for better recognition."
 msgstr "Изображение поможет быстрее распознать вас"
@@ -1348,16 +1664,13 @@ msgid "This is an internal description for the members."
 msgstr "Это описание для внутреннего пользования членов "
 
 #: .\templates\cosinnus\group\group_form.html:194
-#, fuzzy
-#| msgid "There are no societies."
 msgid "Where are you active?"
-msgstr "Групп нет"
+msgstr "Чем вы занимаетесь?"
 
 #: .\templates\cosinnus\group\group_form.html:209
-#, fuzzy
-#| msgid "Enter a name for the society."
+#: .\templates\cosinnus\media_tags_userprofile.html:13
 msgid "Enter a place or address."
-msgstr "Введите название группы."
+msgstr "Укажите место/адрес"
 
 #: .\templates\cosinnus\group\group_form.html:236
 msgid "Which Society does the group belong to?"
@@ -1368,8 +1681,10 @@ msgid "Select Society"
 msgstr "Выберите группу"
 
 #: .\templates\cosinnus\group\group_form.html:253
+#: .\templates\cosinnus\media_tags.html:74
+#: .\templates\cosinnus\media_tags_userprofile.html:83
 msgid "Privacy"
-msgstr "Настройки конфиденциальности"
+msgstr "Конфиденциальность"
 
 #: .\templates\cosinnus\group\group_form.html:270
 msgid "Which apps should be activated?"
@@ -1424,14 +1739,18 @@ msgstr "Сохранить"
 
 #: .\templates\cosinnus\group\group_list.html:4
 #: .\templates\cosinnus\group\group_list_map.html:4
-#: .\templates\cosinnus\navbar.html:21 .\templates\cosinnus\navbar.html:55
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:7
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:19
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:41
 msgid "Societies"
 msgstr "Группы"
 
 #: .\templates\cosinnus\group\group_list.html:4
 #: .\templates\cosinnus\group\group_list_map.html:4
 #: .\templates\cosinnus\group\group_microsite.html:145
-#: .\templates\cosinnus\navbar.html:39 .\templates\cosinnus\navbar.html:56
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:25
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:37
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:42
 #: .\utils\dashboard.py:276
 msgid "Projects"
 msgstr "Проекты"
@@ -1517,8 +1836,9 @@ msgid "Change it here..."
 msgstr "Измените его здесь…"
 
 #: .\templates\cosinnus\group\group_microsite.html:63
+#: .\templates\cosinnus\wagtail\dashboard_base.html:34
 msgid "Jetzt anmelden und mitgestalten"
-msgstr ""
+msgstr "Зарегистрироваться и участвовать в создании платформы"
 
 #: .\templates\cosinnus\group\group_microsite.html:72
 #: .\templates\cosinnus\registration\leftnav.html:19
@@ -1527,6 +1847,7 @@ msgid "Register"
 msgstr "Регистрация"
 
 #: .\templates\cosinnus\group\group_microsite.html:85
+#: .\templates\cosinnus\navbar.html:48
 #: .\templates\cosinnus\registration\leftnav.html:15
 #: .\templates\cosinnus\registration\login.html:4
 #: .\templates\cosinnus\registration\login.html:61
@@ -1557,12 +1878,14 @@ msgid "Events"
 msgstr "События"
 
 #: .\templates\cosinnus\group\group_microsite.html:219
+#: .\templates\cosinnus\media_tags_group_readonly.html:5
 msgid "Topics we are involved with"
 msgstr "Темы, которыми мы занимаемся"
 
 #: .\templates\cosinnus\group\group_microsite.html:248
+#: .\templates\cosinnus\media_tags_group_readonly.html:16
 msgid "Activities and interests"
-msgstr "Сфера деятельности и интересы"
+msgstr "Деятельность и сфера интересов"
 
 #: .\templates\cosinnus\group\group_microsite.html:292
 msgid "No Location set"
@@ -2078,7 +2401,111 @@ msgstr ""
 msgid "You were tagged in: \"%(object_name)s\", in %(group_name)s"
 msgstr "Вы были помечены в: \"%(object_name)s\" в %(group_name)s"
 
+#: .\templates\cosinnus\media_tags.html:8
+msgid "Tag persons"
+msgstr "Пометить людей"
+
+#: .\templates\cosinnus\media_tags.html:16
+#: .\templates\cosinnus\media_tags.html:111
+msgid "Select tags"
+msgstr "Выбрать теги"
+
+#: .\templates\cosinnus\media_tags.html:24
+msgid "Place or adress"
+msgstr "Место или адрес"
+
+#: .\templates\cosinnus\media_tags.html:36
+msgid "Attach existing Files..."
+msgstr "Приложить имеющиеся файлы…"
+
+#: .\templates\cosinnus\media_tags.html:55
+#: .\templates\cosinnus\media_tags.html:116
+msgid "Select topic"
+msgstr "Выбрать тему"
+
+#: .\templates\cosinnus\media_tags.html:86
+msgid "Add attachment"
+msgstr "Добавить вложение"
+
+#: .\templates\cosinnus\media_tags.html:93
+msgid "Tag users"
+msgstr "Пометить пользователей"
+
+#: .\templates\cosinnus\media_tags.html:99
+msgid "Tag location"
+msgstr "Отметить место"
+
+#: .\templates\cosinnus\media_tags.html:129
+msgid "Change privacy"
+msgstr "Изменить настройки конфиденциальности"
+
+#: .\templates\cosinnus\media_tags_group.html:28
+msgid "Which topics are you involved with?"
+msgstr "С какими темами вы работаете?"
+
+#: .\templates\cosinnus\media_tags_group.html:37
+#: .\templates\cosinnus\media_tags_userprofile.html:32
+msgid "Select topics"
+msgstr "Выбрать темы"
+
+#: .\templates\cosinnus\media_tags_group.html:62
+msgid "Which tags further describe your activities?"
+msgstr "Какие теги позволяют дополнительно описать вашу деятельность?"
+
+#: .\templates\cosinnus\media_tags_group.html:71
+#: .\templates\cosinnus\media_tags_userprofile.html:67
+msgid "Select or create tags"
+msgstr "Выбрать или создать теги"
+
+#: .\templates\cosinnus\media_tags_userprofile.html:5
+msgid "Where do you live?"
+msgstr "Где вы живете?"
+
+#: .\templates\cosinnus\media_tags_userprofile.html:23
+msgid "Which topics are you interested in?"
+msgstr "Какие темы вас интересуют?"
+
+#: .\templates\cosinnus\media_tags_userprofile.html:58
+msgid "What would you like to learn?"
+msgstr "Что бы вы хотели узнать?"
+
+#: .\templates\cosinnus\media_tags_userprofile.html:74
+msgid "Who is allowed to see you on the platform?"
+msgstr "Кто может видеть вас на платформе?"
+
+#: .\templates\cosinnus\media_tags_userprofile.html:84
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html:47
+msgid "Group Members only"
+msgstr "Только для членов группы"
+
+#: .\templates\cosinnus\media_tags_userprofile.html:85
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html:50
+msgid "Everybody"
+msgstr "Все"
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html:4
+msgid "My location"
+msgstr "Моё местоположение"
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html:11
+msgid "Topics I am interested in"
+msgstr "Темы, которые меня интересуют"
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html:30
+msgid "What I wish to learn"
+msgstr "Что я хочу узнать"
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html:43
+msgid "Visibility"
+msgstr "Кто может видеть мой профиль"
+
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html:52
+msgid "Hidden"
+msgstr "Скрыто"
+
 #: .\templates\cosinnus\modal_box.html:45
+#: .\templates\modal_box_nutzungsbedingungen.html:29
+#: .\templates\modal_box_nutzungsbedingungen.html:43
 msgid "OK"
 msgstr "OK"
 
@@ -2086,29 +2513,41 @@ msgstr "OK"
 msgid "Toggle navigation"
 msgstr "Включить/выключить навигацию"
 
-#: .\templates\cosinnus\navbar.html:29 .\templates\cosinnus\navbar.html:33
-msgid "All Societies"
-msgstr "Все группы"
-
-#: .\templates\cosinnus\navbar.html:47 .\templates\cosinnus\navbar.html:51
-msgid "All Projects"
-msgstr "Все проекты"
-
-#: .\templates\cosinnus\navbar.html:75
+#: .\templates\cosinnus\navbar.html:34
 #: .\templates\cosinnus\registration\password_change_done.html:31
 msgid "My Profile"
 msgstr "Мой профиль"
 
-#: .\templates\cosinnus\navbar.html:76
+#: .\templates\cosinnus\navbar.html:36
 #: .\templates\cosinnus\user\leftnav.html:61
 #: .\templates\cosinnus\user\userprofile_detail.html:43
 #: .\templates\cosinnus\user\userprofile_detail.html:50
 msgid "Notification Preferences"
 msgstr "Уведомления"
 
-#: .\templates\cosinnus\navbar.html:78
+#: .\templates\cosinnus\navbar.html:39
 msgid "Logout"
 msgstr "Выход из системы"
+
+#: .\templates\cosinnus\navbar_buttons.html:3
+msgid "Stream"
+msgstr "Лента"
+
+#: .\templates\cosinnus\navbar_buttons.html:11
+msgid "Forum"
+msgstr "Форум"
+
+#: .\templates\cosinnus\navbar_buttons.html:13
+msgid "People"
+msgstr "Люди"
+
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:15
+msgid "All Societies"
+msgstr "Все группы"
+
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:33
+msgid "All Projects"
+msgstr "Все проекты"
 
 #: .\templates\cosinnus\navbar_icon_buttons.html:5
 msgid "Search..."
@@ -2599,6 +3038,16 @@ msgstr "Вы не можете поместить этот виджет на п�
 msgid "Widget not found."
 msgstr "Виджет не найден"
 
+#: .\templates\modal_box_nutzungsbedingungen.html:10
+msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
+msgstr "Пожалуйста, примите условия нашего пользовательского соглашения"
+
+#: .\templates\modal_box_nutzungsbedingungen.html:18
+msgid "Ich erkläre mich mit den Nutzungsbedingungen einverstanden"
+msgstr ""
+"Я соглашаюсь с правилами и условиями, описанными в пользовательском "
+"соглашении"
+
 #: .\templates\notify\mail\group_join_request.txt:1
 #, python-format
 msgid ""
@@ -2609,6 +3058,10 @@ msgstr ""
 "Здравствуйте, %(admin_name)s,\n"
 "\n"
 "пользователь %(user_name)s хочет вступить в проект %(group_name)s."
+
+#: .\templates\nutzungsbedingungen.html:4
+msgid "Nutzungsbedingungen"
+msgstr "Пользовательское соглашение"
 
 #: .\templatetags\cosinnus_tags.py:141
 msgid "(Deleted User)"
@@ -2976,9 +3429,6 @@ msgstr ""
 #~ msgid "Other Projects"
 #~ msgstr "Другие проекты"
 
-#~ msgid "Register now!"
-#~ msgstr "Зарегистрируйтесь сейчас!"
-
 #~ msgid "show on map"
 #~ msgstr "Показать на карте"
 
@@ -3010,3 +3460,30 @@ msgstr ""
 
 #~ msgid "My Dashboard"
 #~ msgstr "Мой Dashboard"
+
+#~ msgid "NEWWApphook"
+#~ msgstr "NEWWApphook"
+
+#~ msgid "HTML"
+#~ msgstr "HTML"
+
+#~ msgid "Dashboard Welcome-Page (1 Column)"
+#~ msgstr "Стартовая страница панели управления (1 колонка)"
+
+#~ msgid "Dashboard Welcome-Page (2 Columns)"
+#~ msgstr "Стартовая страница панели управления (2 колонки)"
+
+#~ msgid "Dashboard Welcome-Page (3 Columns)"
+#~ msgstr "Стартовая страница панели управления (3 колонки)"
+
+#~ msgid "Regular Dashboard page (1 Column)"
+#~ msgstr "Стандартная страница панели управления (1 колонка)"
+
+#~ msgid "Regular Dashboard page (2 Columns)"
+#~ msgstr "Стандартная страница панели управления (2 колонки)"
+
+#~ msgid "Regular Dashboard page (3 Columns)"
+#~ msgstr "Стандартная страница панели управления (3 колонки)"
+
+#~ msgid "iFrameText"
+#~ msgstr "Текст iFrame"
