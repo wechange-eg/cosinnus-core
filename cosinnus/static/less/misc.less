@@ -25,14 +25,17 @@
 }
 
 .group-microsite-login-box {
-	position: absolute; 
-	top: 30px; 
-	right: 30px; 
-	min-width: 260px; 
-	max-width: 420px;
-	padding:10px;
+    padding: 10px;
 }
-
+@media(min-width:768px) {
+    .group-microsite-login-box {
+        min-width: 260px;
+        max-width: 420px;
+        position: absolute;
+        top: 30px;
+        right: 30px;
+    }
+}
 .group-microsite-login-box h2 {
 	color: #333;
 	margin-top: 0px;
