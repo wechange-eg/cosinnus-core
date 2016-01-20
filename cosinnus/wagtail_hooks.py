@@ -16,7 +16,11 @@ from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
-from cosinnus.utils.import_utils import csv_import_projects
+from cosinnus.utils.import_utils import csv_import_projects,\
+    EmptyOrUnreadableCSVContent
+    
+import logging
+logger = logging.getLogger('cosinnus')
 
 
 @hooks.register('insert_editor_js')
@@ -89,21 +93,27 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
         
         if request.method == 'POST':
             csv_file = request.FILES.get('csv_upload', None)
-            
             if not csv_file:
                 messages.error(request, _('You did not upload a CSV file or something went wrong during the upload!'))
             else:
+                encoding = request.POST.get('encoding', "utf-8")
+                delimiter = request.POST.get('delimiter', b',')
+                
+                # DRJA encodes their CSV in UCS-2 LE (utf-16-le) with a ';' delimiter
+                encoding = "utf-16-le"
+                delimiter = b';'
+                
                 try:
-                    # DRJA encodes their CSV in UCS-2 LE (utf-16-le) with a ';' delimiter
-                    encoding = "utf-16-le"
-                    delimiter = b';'
-                    
                     (imported_groups, imported_projects, updated_groups, updated_projects, debug) = csv_import_projects(csv_file, encoding=encoding, delimiter=delimiter)
                     messages.success(request, _('%(num_projects)d Projects and %(num_groups)d Groups were imported successfully!') % \
                          {'num_projects': len(imported_groups), 'num_groups': len(imported_projects)})
                 except UnicodeDecodeError:
-                    messages.error(request, _('The CSV file you supplied is not formatted in UTF-8 encoding! Only files in proper UTF-8 format can be imported!'))
-                    
+                    messages.error(request, _('The CSV file you supplied is not formatted in the proper encoding! Only files in proper UTF-8 format can be imported!'))
+                except EmptyOrUnreadableCSVContent:
+                    messages.error(request, _('The CSV file you supplied was empty or not formatted in the proper encoding! Only files in proper UTF-8 format can be imported!'))
+                except Exception, e:
+                    messages.error(request, _('There was an unexpected error when reading the CSV file! Please make sure the file is properly formatted. If the problem persists, please contact an administrator!'))
+                    logger.warn('A CSV file uploaded for import encountered an unexpected error! The exception was: "%s"' % str(e), extra={'encoding_used': encoding, 'delimiter_used': delimiter})
             
         return render(request, "cosinnus/wagtail/wagtailadmin/import_projects.html", {
             'site_name': settings.WAGTAIL_SITE_NAME,

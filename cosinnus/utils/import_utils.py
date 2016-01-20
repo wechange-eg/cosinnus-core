@@ -42,6 +42,8 @@ class UnicodeReader:
         return self
 
 
+class EmptyOrUnreadableCSVContent(Exception): pass 
+
 def csv_import_projects(csv_file, encoding="utf-8", delimiter=b','):
     """ Imports CosinnusGroups (projects and societies) from a CSV file (InMemory or opened).
         
@@ -50,6 +52,17 @@ def csv_import_projects(csv_file, encoding="utf-8", delimiter=b','):
         @raise UnicodeDecodeError: if the supplied csv_file is not encoded in 'utf-8' """
     
     rows = UnicodeReader(csv_file, encoding=encoding, delimiter=delimiter)
+    try:
+        # de-iterate to throw encoding errors if there are any
+        rows = [row for row in rows]
+    except UnicodeDecodeError:
+        raise
+    
+    import ipdb; ipdb.set_trace(); from pprint import pprint as pp;
+    
+    if len(rows) <= 0 or len(rows[0] <= 1):
+        raise EmptyOrUnreadableCSVContent()
+    
     debug = ''
     
     # rollback DB on error
