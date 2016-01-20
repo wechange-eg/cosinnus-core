@@ -6,9 +6,10 @@ from django import forms
 from awesome_avatar import forms as avatar_forms
 
 from cosinnus.models.group import (CosinnusGroupMembership,
-    MEMBERSHIP_MEMBER, CosinnusProject, CosinnusSociety, CosinnusPortal,
+    MEMBERSHIP_MEMBER, CosinnusPortal,
     CosinnusLocation)
 from cosinnus.core.registries.apps import app_registry
+from cosinnus.models.extra_models import CosinnusProject, CosinnusSociety
 
 
 class GroupKwargModelFormMixin(object):

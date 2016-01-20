@@ -18,7 +18,7 @@ from django.utils.translation import ugettext_lazy as _, get_language
 from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry, attached_object_registry
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupManager,\
-    CosinnusSociety, CosinnusProject, CosinnusPortal
+    CosinnusPortal
 from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
     check_group_create_objects_access, check_object_read_access, get_user_token,
@@ -34,6 +34,7 @@ from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.template.defaultfilters import linebreaksbr, urlizetrunc
+from cosinnus.models.extra_models import CosinnusProject, CosinnusSociety
 logger = logging.getLogger('cosinnus')
 
 register = template.Library()

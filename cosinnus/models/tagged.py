@@ -59,7 +59,7 @@ class BaseTagObject(models.Model):
         (VISIBILITY_ALL, _('Public (visible without login)')),
     )
 
-    group = models.ForeignKey(CosinnusGroup, verbose_name=_('Group'),
+    group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, verbose_name=_('Group'),
         related_name='+', null=True, on_delete=models.CASCADE)
 
     persons = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
@@ -206,7 +206,7 @@ class BaseTaggableObjectModel(models.Model):
 
     attached_objects = models.ManyToManyField(AttachedObject, blank=True, null=True)
 
-    group = models.ForeignKey(CosinnusGroup, verbose_name=_('Group'),
+    group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, verbose_name=_('Group'),
         related_name='%(app_label)s_%(class)s_set', on_delete=models.CASCADE)
 
     title = models.CharField(_('Title'), max_length=255)
@@ -358,10 +358,6 @@ def ensure_container(sender, **kwargs):
             if not model_class._meta.abstract:
                 model_class.objects.create(group=kwargs.get('instance'), slug='_root_', title='_root_', path='/', is_container=True)
 
-post_save.connect(ensure_container, sender=CosinnusGroup)
-for url_key in group_model_registry:
-    group_model = group_model_registry.get(url_key)
-    post_save.connect(ensure_container, sender=group_model)
     
 
 def get_tag_object_model():

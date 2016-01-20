@@ -9,7 +9,7 @@ from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.models.group import CosinnusGroupMembership,\
-    CosinnusSociety, CosinnusProject, CosinnusPortal, CosinnusPortalMembership,\
+    CosinnusPortal, CosinnusPortalMembership,\
     CosinnusGroup, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING,\
     CosinnusPermanentRedirect, MEMBERSHIP_ADMIN
 from cosinnus.models.profile import get_user_profile_model
@@ -18,6 +18,7 @@ from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.models.feedback import CosinnusReportedObject
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.models.widget import WidgetConfig
+from cosinnus.models.extra_models import CosinnusSociety, CosinnusProject
 
 
 class SingleDeleteActionMixin(object):

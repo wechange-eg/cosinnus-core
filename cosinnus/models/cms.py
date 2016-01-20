@@ -12,7 +12,7 @@ from cosinnus.conf import settings
 @python_2_unicode_compatible
 class CosinnusMicropage(models.Model):
     
-    group = models.ForeignKey('cosinnus.CosinnusGroup', related_name='micropages',
+    group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, related_name='micropages',
                 null=True, blank=True, on_delete=models.CASCADE)
     title = models.CharField(_('Title'), max_length=100)
     text = models.TextField(verbose_name=_('Text'), blank=True)
