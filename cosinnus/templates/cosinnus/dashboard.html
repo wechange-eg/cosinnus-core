@@ -179,14 +179,18 @@
             
 
 {% block main_page %}
-    <div class="row">
-        
-        <div id="dashboard"> <!-- An extra wrapper div, not in the mockups, but required for the cosinnus dashboard data extension -->
-            {% for widget in widgets %}
-                {% cosinnus_render_widget widget %}
-            {% endfor %}
+    <div class="row" id="dashboard">
+        <div class="col-xs-12 hidden" id="dashboard-unsorted">
+        {% for widget in widgets %}
+            {% cosinnus_render_widget widget %}
+        {% endfor %}          
         </div>
-          
+        <div class="col-sm-6 col-md-4" id="dashboard-col1">
+        </div>
+        <div class="col-sm-6 col-md-4 hidden-xs" id="dashboard-col2">
+        </div>
+        <div class="col-md-4 hidden-xs hidden-sm" id="dashboard-col3">
+        </div>
     </div><!-- row -->
 {% endblock main_page %}
 
