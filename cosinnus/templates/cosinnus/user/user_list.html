@@ -89,7 +89,7 @@
 	                        <a class="pull-right" href="{% url 'cosinnus:profile-detail' username=user.username %}">
 	                            <i class="fa fa-chain"></i>
 	                        </a>
-	                        {% if not user == request.user %}
+	                        {% if not user == request.user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL  %}
 	                        <a class="pull-right" href="{% url 'postman:write' recipients=user.username %}" title="{% trans "Send Message" %}">
 	                            <i class="fa fa-envelope"></i>
 	                        </a>
