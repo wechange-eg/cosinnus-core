@@ -29,7 +29,7 @@
 		<link rel="stylesheet/less" href="{% static "less/cosinnus.less" %}">
 		<script src="{% static "js/vendor/less.min.js" %}"></script>
 		{% else %}
-	    <link href="{% static 'css/cosinnus.css' %}?v=0.18" rel="stylesheet">
+	    <link href="{% static 'css/cosinnus.css' %}?v=0.19" rel="stylesheet">
 		{% endif %}
         <link href="{% static 'css/cosinnus_portal_style.css' %}" rel="stylesheet">
         <link href="{% static COSINNUS_CURRENT_PORTAL.custom_stylesheet_url %}" rel="stylesheet">
@@ -60,7 +60,7 @@
         <script src="{% static 'js/lightbox.js' %}"></script>
         {% comment %} Statics for Select2, always loaded, but only once {% endcomment %}
         {% import_django_select2_js %}
-        <script src="{% static 'js/cosinnus.js' %}?v0.16"></script>
+        <script src="{% static 'js/cosinnus.js' %}?v0.17"></script>
         <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
         <script src="{% static 'js/cosinnus.feedback.js' %}"></script>
         
