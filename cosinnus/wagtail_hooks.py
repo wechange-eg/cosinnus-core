@@ -88,7 +88,7 @@ def whitelister_element_rules():
 if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
     
     @csrf_protect
-    def import_project_view( request ):
+    def import_project_view(request):
         debug = '-'
         
         if request.method == 'POST':
@@ -103,9 +103,8 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
                 expected_columns = settings.COSINNUS_CSV_IMPORT_DEFAULT_EXPECTED_COLUMNS
                 
                 try:
-                    (imported_groups, imported_projects, updated_groups, updated_projects, debug) = csv_import_projects(csv_file, encoding=encoding, delimiter=delimiter, expected_columns=expected_columns)
-                    messages.success(request, _('%(num_projects)d Projects and %(num_groups)d Groups were imported successfully!') % \
-                         {'num_projects': len(imported_groups), 'num_groups': len(imported_projects)})
+                    debug = csv_import_projects(csv_file, request=request, encoding=encoding, delimiter=delimiter, expected_columns=expected_columns)
+                    messages.success(request, _('Geklappt.'))
                 except UnicodeDecodeError:
                     messages.error(request, _('The CSV file you supplied is not formatted in the proper encoding (%s)!' % encoding))
                 except EmptyOrUnreadableCSVContent:

@@ -3,7 +3,30 @@ from __future__ import unicode_literals
 
 import csv
 import codecs
+from django.core.exceptions import ImproperlyConfigured
 from django.db import transaction
+from django.template.loader import render_to_string
+from threading import Thread
+
+
+
+def import_from_settings(name):
+    from django.core.exceptions import ImproperlyConfigured
+    from django.utils.importlib import import_module
+    from cosinnus.conf import settings
+
+    try:
+        value = getattr(settings, name, None)
+        module_name, _, klass_name = value.rpartition('.')
+    except ValueError:
+        raise ImproperlyConfigured("%s must be of the form 'path.to.MyClass'" %
+                                   name)
+    module = import_module(module_name)
+    klass = getattr(module, klass_name, None)
+    if klass is None:
+        raise ImproperlyConfigured("%s does not exist." % klass_name)
+    return klass
+
 
 class UTF8Recoder:
     """
@@ -42,10 +65,59 @@ class UnicodeReader:
         return self
 
 
+
+class GroupCSVImporter(Thread):
+    """ Extend this class to implement the specific import function `do_group_import``! 
+        Assign your new class to the setting ``COSINNUS_CSV_IMPORT_GROUP_IMPORTER`` to have it be used for the import. 
+        @param group_rows: The rows of CSV imported groups. 
+        @param request: Supply a request if a report summary of the import should be mailed to the user """
+    
+    def __init__(self, group_rows, request=None, *args, **kwargs):
+        self.group_rows = group_rows
+        self.request = request
+        
+        if self.__class__.__name__ == 'GroupCSVImporter':
+            raise ImproperlyConfigured('The GroupCSVImporter needs to be extended and requires a ``do_group_import`` function to be implemented!')
+        super(GroupCSVImporter, self).__init__(*args, **kwargs)
+    
+    def do_group_import_threaded(self):
+        self.start()
+    
+    def run(self):
+        self.do_group_import()
+    
+    def do_group_import(self):
+        pass
+    
+    def _send_summary_mail(self, template, subj_template, data):
+        from cosinnus.core.mail import get_common_mail_context, send_mail_or_fail
+        from cosinnus.utils.context_processors import cosinnus as cosinnus_context
+        
+        receiver = self.request.user
+        if self.request:
+            context = get_common_mail_context(self.request, user=receiver)
+            context.update(cosinnus_context(self.request))
+        else:
+            context = {} 
+        context.update(data)
+        subject = render_to_string(subj_template, context)
+        send_mail_or_fail(receiver.email, subject, template, context)
+    
+    def import_finished(self, data):
+        if not self.request:
+            return
+        self._send_summary_mail('cosinnus/mail/csv_import_summary.txt', 'cosinnus/mail/csv_import_summary_subj.txt', data)
+    
+    def import_failed(self, data):
+        if not self.request:
+            return
+        self._send_summary_mail('cosinnus/mail/csv_import_failed.txt', 'cosinnus/mail/csv_import_failed_subj.txt', data)
+    
+
 class EmptyOrUnreadableCSVContent(Exception): pass
 class UnexpectedNumberOfColumns(Exception): pass 
 
-def csv_import_projects(csv_file, encoding="utf-8", delimiter=b',', expected_columns=None):
+def csv_import_projects(csv_file, request=None, encoding="utf-8", delimiter=b',', expected_columns=None):
     """ Imports CosinnusGroups (projects and societies) from a CSV file (InMemory or opened).
         
         @param expected_columns: if set to an integer, each row must have this number of columns,
@@ -67,37 +139,21 @@ def csv_import_projects(csv_file, encoding="utf-8", delimiter=b',', expected_col
     if len(rows) <= 0 or len(rows[0]) <= 1:
         raise EmptyOrUnreadableCSVContent()
     
+    # sanity check for expected number of columns, in EACH row
     if expected_columns:
         expected_columns = int(expected_columns)
         if any([len(row) != expected_columns for row in rows]):
             raise UnexpectedNumberOfColumns()
     
-    debug = ''
+    GroupImporter = import_from_settings('COSINNUS_CSV_IMPORT_GROUP_IMPORTER')
+    importer = GroupImporter(rows, request)
+    importer.do_group_import_threaded()
     
-    # rollback DB on error
-    with transaction.atomic():
+    debug = ''
+    for row in rows:
+        # TODO: import projects from rows
+        debug += ' | '.join(row) + ' --<br/><br/>-- '
         
-        for row in rows:
-            # TODO: import projects from rows
-            debug += ' | '.join(row) + ' --<br/><br/>-- '
-            
-        
-    return ([], [], [], [], debug)
+    return debug
 
 
-def import_from_settings(name):
-    from django.core.exceptions import ImproperlyConfigured
-    from django.utils.importlib import import_module
-    from cosinnus.conf import settings
-
-    try:
-        value = getattr(settings, name, None)
-        module_name, _, klass_name = value.rpartition('.')
-    except ValueError:
-        raise ImproperlyConfigured("%s must be of the form 'path.to.MyClass'" %
-                                   name)
-    module = import_module(module_name)
-    klass = getattr(module, klass_name, None)
-    if klass is None:
-        raise ImproperlyConfigured("%s does not exist." % klass_name)
-    return klass
