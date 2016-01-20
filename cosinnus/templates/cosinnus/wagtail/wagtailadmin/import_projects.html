@@ -13,14 +13,29 @@
 	    <form action="." method="post" enctype="multipart/form-data">
     	{% csrf_token %}
     		<p>
-    			<label for="csv_upload"></label><input id="csv_upload" name="csv_upload" type="file" accept=".csv" />
+    			<input id="csv_upload" name="csv_upload" type="file" accept=".csv" />
     		</p>
-    		<button type="submit" class="button-longrunning">{% trans "Upload and Import..." %}</button>
     		
-    		<hr/>
-    			<p>{{ debug|safe }}</p>
-    		<hr/>
+    		<fieldset onclick="$('#csv_options').slideDown(500);" style="cursor:pointer; border-top: 1px solid #aaa; border-bottom: none; border-left: none; border-right: none; display: block; text-align: right;">
+			    <legend style="padding: 5px 10px;  clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto;">
+			    	{% trans "Options" %}
+			    	<i class="icon icon-arrow-down"></i>
+		    	</legend>
+			    
+			    <div id="csv_options" style="display: none; cursor: auto;">
+				    <label for="csv_encoding">{% trans "Encoding of the CSV file" %}</label>
+		    		<input id="csv_encoding" type="text" name="encoding" value="{{ SETTINGS.COSINNUS_CSV_IMPORT_DEFAULT_ENCODING }}"/>
+		    		<label for="csv_delimiter">{% trans "Delimiter of the CSV file" %}</label>
+		    		<input id="csv_delimiter" type="text" name="delimiter" value="{{ SETTINGS.COSINNUS_CSV_IMPORT_DEFAULT_DELIMITER }}"/>
+	    		</div>
+			</fieldset>
+			
+    		<button type="submit" class="button-longrunning">{% trans "Upload and Import..." %}</button>
     	</form>
+		
+		<hr/>
+			<p>{{ debug|safe }}</p>
+		<hr/>
 	    
 	</section>
 {% endblock %}

@@ -77,6 +77,11 @@ class CosinnusConf(AppConf):
         'cosinnus_etherpad',
         'cosinnus_file',
     ]
+    
+    # CSV Import settings
+    CSV_IMPORT_DEFAULT_ENCODING = 'utf-8'
+    CSV_IMPORT_DEFAULT_DELIMITER = b','
+    CSV_IMPORT_DEFAULT_EXPECTED_COLUMNS = None
 
     # These are the default values for the bootstrap3-datetime-picker and
     # are translated in `cosinnus/formats/LOCALE/formats.py`

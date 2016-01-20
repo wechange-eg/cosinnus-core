@@ -42,10 +42,14 @@ class UnicodeReader:
         return self
 
 
-class EmptyOrUnreadableCSVContent(Exception): pass 
+class EmptyOrUnreadableCSVContent(Exception): pass
+class UnexpectedNumberOfColumns(Exception): pass 
 
-def csv_import_projects(csv_file, encoding="utf-8", delimiter=b','):
+def csv_import_projects(csv_file, encoding="utf-8", delimiter=b',', expected_columns=None):
     """ Imports CosinnusGroups (projects and societies) from a CSV file (InMemory or opened).
+        
+        @param expected_columns: if set to an integer, each row must have this number of columns,
+                                or the import is rejected
         
         @return: (imported_groups, imported_projects, updated_groups, updated_projects): 
              a 4-tuple of groups and projects imported and groups and projects updated 
@@ -58,10 +62,15 @@ def csv_import_projects(csv_file, encoding="utf-8", delimiter=b','):
     except UnicodeDecodeError:
         raise
     
-    import ipdb; ipdb.set_trace(); from pprint import pprint as pp;
-    
-    if len(rows) <= 0 or len(rows[0] <= 1):
+    # sanity check, we require more than 0 rows and more than 1 column 
+    # (otherwise we likely decoded with the wrong codec, or delimiter)
+    if len(rows) <= 0 or len(rows[0]) <= 1:
         raise EmptyOrUnreadableCSVContent()
+    
+    if expected_columns:
+        expected_columns = int(expected_columns)
+        if any([len(row) != expected_columns for row in rows]):
+            raise UnexpectedNumberOfColumns()
     
     debug = ''
     

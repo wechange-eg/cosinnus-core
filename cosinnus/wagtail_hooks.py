@@ -17,7 +17,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from cosinnus.utils.import_utils import csv_import_projects,\
-    EmptyOrUnreadableCSVContent
+    EmptyOrUnreadableCSVContent, UnexpectedNumberOfColumns
     
 import logging
 logger = logging.getLogger('cosinnus')
@@ -96,21 +96,22 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
             if not csv_file:
                 messages.error(request, _('You did not upload a CSV file or something went wrong during the upload!'))
             else:
+                
                 encoding = request.POST.get('encoding', "utf-8")
                 delimiter = request.POST.get('delimiter', b',')
-                
-                # DRJA encodes their CSV in UCS-2 LE (utf-16-le) with a ';' delimiter
-                encoding = "utf-16-le"
-                delimiter = b';'
+                delimiter = str(delimiter)[0]
+                expected_columns = settings.COSINNUS_CSV_IMPORT_DEFAULT_EXPECTED_COLUMNS
                 
                 try:
-                    (imported_groups, imported_projects, updated_groups, updated_projects, debug) = csv_import_projects(csv_file, encoding=encoding, delimiter=delimiter)
+                    (imported_groups, imported_projects, updated_groups, updated_projects, debug) = csv_import_projects(csv_file, encoding=encoding, delimiter=delimiter, expected_columns=expected_columns)
                     messages.success(request, _('%(num_projects)d Projects and %(num_groups)d Groups were imported successfully!') % \
                          {'num_projects': len(imported_groups), 'num_groups': len(imported_projects)})
                 except UnicodeDecodeError:
-                    messages.error(request, _('The CSV file you supplied is not formatted in the proper encoding! Only files in proper UTF-8 format can be imported!'))
+                    messages.error(request, _('The CSV file you supplied is not formatted in the proper encoding (%s)!' % encoding))
                 except EmptyOrUnreadableCSVContent:
-                    messages.error(request, _('The CSV file you supplied was empty or not formatted in the proper encoding! Only files in proper UTF-8 format can be imported!'))
+                    messages.error(request, _('The CSV file you supplied was empty or not formatted in the proper encoding (%s) or with a wrong delimiter (%s)!' % (encoding, delimiter)))
+                except UnexpectedNumberOfColumns:
+                    messages.error(request, _('The CSV file you supplied contained a different number columns than expected (%s)! Either the file was read in a wrong encoding, or the file was using a different format than the server expected.' % str(expected_columns)))
                 except Exception, e:
                     messages.error(request, _('There was an unexpected error when reading the CSV file! Please make sure the file is properly formatted. If the problem persists, please contact an administrator!'))
                     logger.warn('A CSV file uploaded for import encountered an unexpected error! The exception was: "%s"' % str(e), extra={'encoding_used': encoding, 'delimiter_used': delimiter})
