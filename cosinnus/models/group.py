@@ -872,9 +872,6 @@ class CosinnusBaseGroup(models.Model):
         parents_children = self.get_children(for_parent_id=self.parent_id)
         return [child for child in parents_children if not child.id == self.id]
     
-    def testme(self):
-        return 'cos-base'
-
 
 class CosinnusGroup(CosinnusBaseGroup):
 

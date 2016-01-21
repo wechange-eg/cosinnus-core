@@ -165,7 +165,6 @@
                     
                     {% if group.description and group.description|length > 0 %}
                         <p></p>
-                        <p>--- {{ group.testme }}</p>
                         <p>{{ group.description|textfield }}</p>
                     {% else %}
                         ({% trans "No Description set" %})
