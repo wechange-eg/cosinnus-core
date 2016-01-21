@@ -1183,7 +1183,10 @@
                 return a.priority - b.priority;
             });
 
-            $( window ).on('resize orientationchange ready', function() {
+            $( window ).on('resize orientationchange ready dashboardchange', function() {
+                // Dashboard-Höhe blockieren
+                $('#dashboard').css('min-height', $('#dashboard').height());
+
                 // Anzahl angezeigter Spalten herausfinden
                 var cols = 1;
                 if ($('#dashboard #dashboard-col2').is(":visible")) {
@@ -1215,7 +1218,9 @@
                     }
                 });
 
-                console.log("cols", cols);
+                // Dashboard-Höhe freigeben
+                $('#dashboard').css('min-height', 0);
+
             });
         },
     };

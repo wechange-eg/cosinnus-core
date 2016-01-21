@@ -234,6 +234,7 @@ $('.js-todo-link').on('click', function(e) {
                     
                     $.cosinnus.renderMomentDataDate();
                     $.cosinnus.autogrow();
+                    $( window ).trigger( 'dashboardchange' );
     
                 }).fail(function(jqXHR, textStatus, errorThrown) {
                     var error = $('<div class="alert alert-danger">An error occurred while loading the widget. </div>');
