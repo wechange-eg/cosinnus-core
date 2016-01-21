@@ -9,7 +9,7 @@ from cosinnus.models.group import (CosinnusGroupMembership,
     MEMBERSHIP_MEMBER, CosinnusPortal,
     CosinnusLocation)
 from cosinnus.core.registries.apps import app_registry
-from cosinnus.models.extra_models import CosinnusProject, CosinnusSociety
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 
 
 class GroupKwargModelFormMixin(object):

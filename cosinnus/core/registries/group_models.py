@@ -162,5 +162,5 @@ __all__ = ('group_model_registry', )
 
 # schema for registering a new group model and its URL paths:
 #group_model_registry.register(<group-url-fragment>, '<plural-url-fragment>', '<django url-name-prefix>', '<str group model name>', '<str group form>', <int group type>)
-group_model_registry.register('project', 'projects', '', 'cosinnus.models.extra_models.CosinnusProject', 'cosinnus.forms.group._CosinnusProjectForm', 0) # CosinnusGroup.TYPE_PROJECT
-group_model_registry.register('group', 'groups', 'group__', 'cosinnus.models.extra_models.CosinnusSociety', 'cosinnus.forms.group._CosinnusSocietyForm', 1) # CosinnusGroup.TYPE_SOCIETY
+group_model_registry.register('project', 'projects', '', 'cosinnus.models.group_extra.CosinnusProject', 'cosinnus.forms.group._CosinnusProjectForm', 0) # CosinnusGroup.TYPE_PROJECT
+group_model_registry.register('group', 'groups', 'group__', 'cosinnus.models.group_extra.CosinnusSociety', 'cosinnus.forms.group._CosinnusSocietyForm', 1) # CosinnusGroup.TYPE_SOCIETY

@@ -41,7 +41,8 @@ import shutil
 from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from django.contrib.auth import get_user_model
-from cosinnus.models.group import CosinnusGroupManager, CosinnusGroup
+from cosinnus.models.group import CosinnusGroupManager, CosinnusGroup,\
+    get_cosinnus_group_model
 
 logger = logging.getLogger('cosinnus')
 
@@ -53,29 +54,9 @@ class CosinnusProjectManager(CosinnusGroupManager):
 
 
 
-def get_group_object_model():
-    """
-    Return the cosinnus tag object model that is defined in
-    :data:`settings.COSINNUS_TAG_OBJECT_MODEL`
-    """
-    from django.core.exceptions import ImproperlyConfigured
-    #from django.db.models import get_model
-    from django.apps import apps
-    from cosinnus.conf import settings
-
-    try:
-        app_label, model_name = settings.COSINNUS_GROUP_OBJECT_MODEL.split('.')
-    except ValueError:
-        raise ImproperlyConfigured("COSINNUS_GROUP_OBJECT_MODEL must be of the form 'app_label.model_name'")
-    #tag_model = get_model(app_label, model_name)
-    tag_model = apps.get_model(app_label=app_label, model_name=model_name)
-    if tag_model is None:
-        raise ImproperlyConfigured("COSINNUS_GROUP_OBJECT_MODEL refers to model '%s' that has not been installed" %
-            settings.COSINNUS_TAG_OBJECT_MODEL)
-    return tag_model    
 
 @python_2_unicode_compatible
-class CosinnusProject(get_group_object_model()):
+class CosinnusProject(get_cosinnus_group_model()):
     
     class Meta:
         """ For some reason, the Meta isn't inherited automatically from CosinnusGroup here """
@@ -108,7 +89,7 @@ class CosinnusSocietyManager(CosinnusGroupManager):
 
 
 @python_2_unicode_compatible
-class CosinnusSociety(get_group_object_model()):
+class CosinnusSociety(get_cosinnus_group_model()):
     
     class Meta:
         """ For some reason, the Meta isn't inherited automatically from CosinnusGroup here """
@@ -132,4 +113,4 @@ class CosinnusSociety(get_group_object_model()):
         return '%s (%s)' % (self.name, self.portal.name)
 
     
-
+CosinnusGroup = get_cosinnus_group_model()

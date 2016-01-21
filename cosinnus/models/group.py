@@ -41,6 +41,7 @@ import shutil
 from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from django.contrib.auth import get_user_model
+from cosinnus.utils.group import get_cosinnus_group_model
 
 logger = logging.getLogger('cosinnus')
 
@@ -852,7 +853,7 @@ class CosinnusBaseGroup(models.Model):
         return None
     
     def get_children(self, for_parent_id=None):
-        from cosinnus.models.extra_models import CosinnusProject
+        from cosinnus.models.group_extra import CosinnusProject
         """ Returns all CosinnusGroups that have this group as parent.
             @param for_parent_id: If supplied, will get the children for another CosinnusGroup id instead of for this group """
         for_parent_id = for_parent_id or self.id
@@ -1141,3 +1142,12 @@ class CosinnusLocation(models.Model):
         return 'http://www.openstreetmap.org/?mlat=%s&mlon=%s&zoom=15&layers=M' % (self.location_lat, self.location_lon)
 
 
+
+def replace_swapped_group_model():
+    """ Permanently replace cosinnus.models.CosinnusGroup with the final Swapped-in Model
+        
+        We replace the final swapped object into the class objects here, so
+        late imports of CosinnusGroup always get the correct model, even if they are ignorant of get_cosinnus_group_model()
+    """
+    global CosinnusGroup
+    CosinnusGroup = get_cosinnus_group_model()

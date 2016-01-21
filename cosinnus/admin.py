@@ -18,7 +18,7 @@ from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.models.feedback import CosinnusReportedObject
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.models.widget import WidgetConfig
-from cosinnus.models.extra_models import CosinnusSociety, CosinnusProject
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 
 
 class SingleDeleteActionMixin(object):

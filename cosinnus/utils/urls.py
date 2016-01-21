@@ -8,11 +8,12 @@ from django.db.models.loading import get_model
 from cosinnus.conf import settings
 from django.core.cache import cache
 from django.utils.http import is_safe_url
+from cosinnus.utils.group import get_cosinnus_group_model
+
         
 _PORTAL_PROTOCOL_CACHE_KEY = 'cosinnus/core/portal/%d/protocol'
         
 _group_aware_url_name = object() # late import because we cannot reference CosinnusGroup models here yet
-_CosinnusGroup = None
 _CosinnusPortal = None
 def group_aware_reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=None, current_app=None):
     """ CosinnusGroup.type aware, and Portal aware function that returns reverse URLs pointing
@@ -26,16 +27,15 @@ def group_aware_reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=N
         You MUST pass a group-object to kwargs['group'], not a slug, 
             if you want to use the function's Portal-awareness!
      """
+    
     domain = ''
     if 'group' in kwargs:
-        global _group_aware_url_name, _CosinnusGroup
+        global _group_aware_url_name
         if not hasattr(_group_aware_url_name, '__call__'):
             _group_aware_url_name = import_module('cosinnus.templatetags.cosinnus_tags').group_aware_url_name
-        if _CosinnusGroup is None: 
-            _CosinnusGroup = get_model('cosinnus', 'CosinnusGroup')
         
         portal_id = None
-        if issubclass(kwargs['group'].__class__, _CosinnusGroup):
+        if issubclass(kwargs['group'].__class__, get_cosinnus_group_model()):
             """ We accept a group object and swap it for its slug """
             group = kwargs['group']
             portal_id = group.portal_id

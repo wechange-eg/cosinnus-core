@@ -16,3 +16,6 @@ class CosinnusAppConfig(AppConfig):
         for url_key in group_model_registry:
             group_model = group_model_registry.get(url_key)
             post_save.connect(ensure_container, sender=group_model)
+            
+        from cosinnus.models.group import replace_swapped_group_model
+        replace_swapped_group_model()
