@@ -27,20 +27,28 @@
 .group-microsite-login-box {
     padding: 10px;
 }
-@media(min-width:768px) {
-    .group-microsite-login-box {
+.group-microsite-login-box {
+    @media(min-width:768px) {
         min-width: 260px;
         max-width: 420px;
         position: absolute;
         top: 30px;
         right: 30px;
     }
-}
-.group-microsite-login-box h2 {
-	color: #333;
-	margin-top: 0px;
-	margin-bottom: 15px;
-	font-size: 20px;
+
+    h2 {
+        color: #333;
+        margin-top: 0px;
+        margin-bottom: 15px;
+        font-size: 20px;
+    }
+
+    @media(max-width:767px) {
+        .btn {
+            width: 100%;
+            margin: 0 0 15px 0 !important;
+        }
+    }
 }
 
 .group-microsite-box {
@@ -164,14 +172,14 @@
 
 
 .richtext-image {
-	display: block;
-	max-width: 100%;
-	height: auto;
-	display: inline-block;
+    display: block;
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
 }
 
 .richtext-image.right {
-	float: right;
+    float: right;
 }
 
 .icon-align-left:before           { content: "\f036"; font-family: "FontAwesome" !important; }
