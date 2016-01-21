@@ -1183,7 +1183,7 @@
                 return a.priority - b.priority;
             });
 
-            $( window ).on('resize orientationchange ready', function() {
+            $( window ).on('resize orientationchange ready dashboardchange', function() {
                 // Anzahl angezeigter Spalten herausfinden
                 var cols = 1;
                 if ($('#dashboard #dashboard-col2').is(":visible")) {

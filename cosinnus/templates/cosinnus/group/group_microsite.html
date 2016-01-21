@@ -61,7 +61,7 @@
 			<div class="group-microsite-login-box overlay-box-gray">
 				<h2>{% trans "Jetzt anmelden und mitgestalten" %}!</h2>
                 <span class="app-calendar"> {# Hacky green color #}
-	                <button style="float: none; margin: 0px;" href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
+	                <button href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
 	                    <ul class="media-list">
 	                        <li class="media">
 	                            <a class="pull-left" href="#">
@@ -74,7 +74,7 @@
 	                    </ul>
 	                </button>
                 </span>
-	    		<button style="float: none;" href="{% url 'login' %}?next={{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
+	    		<button href="{% url 'login' %}?next={{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
                     <ul class="media-list">
                         <li class="media">
                             <a class="pull-left" href="#">
