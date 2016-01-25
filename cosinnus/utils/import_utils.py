@@ -72,13 +72,36 @@ class GroupCSVImporter(Thread):
         @param group_rows: The rows of CSV imported groups. 
         @param request: Supply a request if a report summary of the import should be mailed to the user """
     
-    def __init__(self, group_rows, request=None, *args, **kwargs):
-        self.group_rows = group_rows
+    # mapping from (internal_column_alias --> column-id). only ever access the CSV rows through this map
+    # or the self.get() function!
+    # this makes it easier to re-configure the import when the CSV changes
+    ALIAS_MAP = {}
+    
+    def __init__(self, rows, request=None, *args, **kwargs):
+        self.rows = rows
         self.request = request
+        self.item_index = 0
         
         if self.__class__.__name__ == 'GroupCSVImporter':
             raise ImproperlyConfigured('The GroupCSVImporter needs to be extended and requires a ``do_group_import`` function to be implemented!')
+        if len(self.ALIAS_MAP) <= 0:
+            raise ImproperlyConfigured('No column alias map has been configured. Please define ALIAS_MAP in your class!')
         super(GroupCSVImporter, self).__init__(*args, **kwargs)
+    
+    def get(self, internal_column_alias):
+        """ Returns the value of the column ``internal_column_alias`` from the current row.
+            ``internal_column_alias`` must be defined in ALIAS_MAP. """
+        if not internal_column_alias in self.ALIAS_MAP:
+            raise ImproperlyConfigured('CSVGroupImporter tried to access a column through unknown column-alias "%s"' % internal_column_alias)
+        return self.rows[self.item_index][self.ALIAS_MAP[internal_column_alias]]
+    
+    def next(self):
+        """ Advances to the next CSV item.
+            @return: True if there was at least another row in the CSV rows, False if none are left after advancing. """
+        self.item_index += 1
+        if self.item_index >= len(self.rows):
+            return False
+        return True
     
     def do_group_import_threaded(self):
         self.start()
