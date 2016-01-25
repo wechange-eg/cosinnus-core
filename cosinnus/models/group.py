@@ -875,8 +875,7 @@ class CosinnusBaseGroup(models.Model):
 
 class CosinnusGroup(CosinnusBaseGroup):
 
-    class Meta:
-        app_label = 'cosinnus'
+    class Meta(CosinnusBaseGroup.Meta):
         swappable = 'COSINNUS_GROUP_OBJECT_MODEL'
 
 
