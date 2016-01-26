@@ -68,7 +68,7 @@ class CosinnusReportedObject(models.Model):
     
     def get_target_model_name(self):
         """ This will return the correct specific cosinnus group model (instead of base group) if we are targeting a group """
-        if self.content_type.model == 'cosinnusgroup':
+        if self.content_type.model == 'cosinnusgroup' or self.content_type.model == settings.COSINNUS_GROUP_OBJECT_MODEL.lower().split('.')[-1]:
             group_cls = group_model_registry.get_by_type(self.target_object.type)
             return group_cls.__name__.lower() # lower()?
         else:
