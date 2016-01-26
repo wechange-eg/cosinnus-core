@@ -7,6 +7,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.db import transaction
 from django.template.loader import render_to_string
 from threading import Thread
+import six
 
 
 
@@ -93,7 +94,13 @@ class GroupCSVImporter(Thread):
             ``internal_column_alias`` must be defined in ALIAS_MAP. """
         if not internal_column_alias in self.ALIAS_MAP:
             raise ImproperlyConfigured('CSVGroupImporter tried to access a column through unknown column-alias "%s"' % internal_column_alias)
-        return self.rows[self.item_index][self.ALIAS_MAP[internal_column_alias]]
+        val = self.rows[self.item_index][self.ALIAS_MAP[internal_column_alias]]
+        # set empty values to None unless they are integer zeros
+        val = val if val or val == 0 else None
+        # trim whitespace
+        if isinstance(val, six.string_types):
+            val = val.strip()
+        return val
     
     def next(self):
         """ Advances to the next CSV item.

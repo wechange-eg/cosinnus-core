@@ -23,7 +23,6 @@ def ensure_user_widget(user, app_name, widget_name, config={}):
 
     
 def assign_user_to_default_auth_group(sender, **kwargs):
-    print ">> user save received"
     user = kwargs.get('instance')
     for group_name in getattr(settings, 'NEWW_DEFAULT_USER_AUTH_GROUPS', []):
         try:
