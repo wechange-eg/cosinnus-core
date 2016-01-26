@@ -21,11 +21,53 @@
         
         <!-- now the content -->
         <div class="col-lg-9 col-md-9"><!-- right column -->
+
+    {% if user.is_authenticated and user.pk in group.admins or user.is_superuser %}
+    <button type="button" class="btn btn-emphasized" id="dashboardArrangeInputShow">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa {% if edit_mode %}fa-reply{% else %}fa-cogs{% endif %}"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "Rearrange" %}
+                </div>
+            </li>
+        </ul>
+    </button><!-- btn -->
+    <button type="button" class="btn btn-emphasized" id="dashboardArrangeInputSave" style="display: none;">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa {% if edit_mode %}fa-reply{% else %}fa-cogs{% endif %}"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "Save" %}
+                </div>
+            </li>
+        </ul>
+    </button><!-- btn -->
+    <button type="button" class="btn btn-emphasized" id="dashboardArrangeInputWait" style="display: none;">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa {% if edit_mode %}fa-reply{% else %}fa-cogs{% endif %}"></i>
+                </a>
+                <div class="media-body">
+                    {% trans "Wait..." %}
+                </div>
+            </li>
+        </ul>
+    </button><!-- btn -->
+    {% endif %}
+
+
             
             <ol class="breadcrumb">
                 {% include 'cosinnus/breadcrumb.html' %}
                 <li class="active">{% trans "Dashboard" %}</li>
             </ol>
+    <div class="clearfix"></div>
             
         </div><!-- right column -->
         
@@ -55,7 +97,8 @@
 		    </div>
 	    {% endif %}
     {% endif %}
-    
+
+
     <div class="dashboard-header">
         <div class="dashboard-header-image">
             <a href="{% group_url 'cosinnus:group-detail' group=group %}">
