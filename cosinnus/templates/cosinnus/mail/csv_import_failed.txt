@@ -1,1 +1,3 @@
-{% load i18n %}{% blocktrans %}{{ site_name }} CSV group import failed!{% endblocktrans %}
+{% load i18n %}{% blocktrans %}{{ site_name }} CSV group import failed!
+
+Here is a summary: {{ msg }}{% endblocktrans %}
