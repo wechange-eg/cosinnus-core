@@ -10,6 +10,7 @@ from threading import Thread
 import six
 
 import logging
+from django.conf import settings
 logger = logging.getLogger('cosinnus')
 
 
@@ -209,7 +210,10 @@ def csv_import_projects(csv_file, request=None, encoding="utf-8", delimiter=b','
     
     GroupImporter = import_from_settings('COSINNUS_CSV_IMPORT_GROUP_IMPORTER')
     importer = GroupImporter(rows, request=request)
-    importer.do_group_import_threaded()
+    if getattr(settings, 'OVERRIDE_CSV_IMPORT_NO_THREADING', False):
+        importer.do_group_import()
+    else:
+        importer.do_group_import_threaded()
     
     debug = ''
     for row in rows:

@@ -116,6 +116,9 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
                 except Exception, e:
                     messages.error(request, _('There was an unexpected error when reading the CSV file! Please make sure the file is properly formatted. If the problem persists, please contact an administrator!'))
                     logger.warn('A CSV file uploaded for import encountered an unexpected error! The exception was: "%s"' % str(e), extra={'encoding_used': encoding, 'delimiter_used': delimiter})
+                    if getattr(settings, 'DEBUG_LOCAL', False):
+                        raise
+                        
             
         return render(request, "cosinnus/wagtail/wagtailadmin/import_projects.html", {
             'site_name': settings.WAGTAIL_SITE_NAME,
