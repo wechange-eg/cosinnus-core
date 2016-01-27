@@ -172,6 +172,7 @@ class GroupCSVImporter(Thread):
     def import_failed(self, data):
         if not self.request:
             return
+        logger.error('CSV import failed and a failure report was sent! Data in extra.', extra={'data': data})
         self._send_summary_mail('cosinnus/mail/csv_import_failed.txt', 'cosinnus/mail/csv_import_failed_subj.txt', data)
     
 
