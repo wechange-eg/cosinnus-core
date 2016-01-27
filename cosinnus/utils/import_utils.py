@@ -78,10 +78,14 @@ class GroupCSVImporter(Thread):
     # this makes it easier to re-configure the import when the CSV changes
     ALIAS_MAP = {}
     
+    has_header = False
+    
     def __init__(self, rows, request=None, *args, **kwargs):
         self.rows = rows
         self.request = request
-        self.item_index = 0
+        self.item_index = 1 if self.has_header else 0
+        # a map of { column-header-id: column-index), ... }
+        self.column_map = [] if not self.has_header else self._index_and_remove_header_row()
         
         if self.__class__.__name__ == 'GroupCSVImporter':
             raise ImproperlyConfigured('The GroupCSVImporter needs to be extended and requires a ``do_group_import`` function to be implemented!')
@@ -89,12 +93,31 @@ class GroupCSVImporter(Thread):
             raise ImproperlyConfigured('No column alias map has been configured. Please define ALIAS_MAP in your class!')
         super(GroupCSVImporter, self).__init__(*args, **kwargs)
     
+    def _index_and_remove_header_row(self):
+        if len(self.rows) <= 0:
+            raise ImproperlyConfigured('The GroupCSVImporter was configured to have a header row, but none could be found!')
+        header = self.rows[0]
+        self.rows = self.rows[1:]
+        column_map = dict([(value.strip(), index) for index, value in enumerate(header)])
+        # sanity check if all mapped aliases appear in CSV header
+        missing_aliases = [alias for alias in self.ALIAS_MAP.values() if alias not in column_map.keys()]
+        if missing_aliases:
+            raise ImproperlyConfigured('The GroupCSVImporter was configured to access CSV columns [%s], but they were not found in the CSV header row!' % ', '.join(iterable))
+        return column_map
+    
     def get(self, internal_column_alias):
         """ Returns the value of the column ``internal_column_alias`` from the current row.
             ``internal_column_alias`` must be defined in ALIAS_MAP. """
         if not internal_column_alias in self.ALIAS_MAP:
             raise ImproperlyConfigured('CSVGroupImporter tried to access a column through unknown column-alias "%s"' % internal_column_alias)
-        val = self.rows[self.item_index][self.ALIAS_MAP[internal_column_alias]]
+        # retrieve the item via its alias. if there was a header row, retrieve by column-id, else by column-index
+        alias_target = self.ALIAS_MAP[internal_column_alias]
+        if self.has_header:
+            if not alias_target in self.column_map:
+                raise ImproperlyConfigured('CSVGroupImporter could not find configured column with header "%s"' % alias_target)
+            val = self.rows[self.item_index][self.column_map[alias_target]]
+        else:
+            val = self.rows[self.item_index][alias_target]
         # set empty values to None unless they are integer zeros
         val = val if val or val == 0 else None
         # trim whitespace
