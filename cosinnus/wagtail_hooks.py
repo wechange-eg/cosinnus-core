@@ -90,6 +90,7 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
     @csrf_protect
     def import_project_view(request):
         debug = '-'
+        import_running = False
         
         if request.method == 'POST':
             csv_file = request.FILES.get('csv_upload', None)
@@ -104,7 +105,8 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
                 
                 try:
                     debug = csv_import_projects(csv_file, request=request, encoding=encoding, delimiter=delimiter, expected_columns=expected_columns)
-                    messages.success(request, _('Geklappt.'))
+                    messages.success(request, _('The CSV file was read successfully! You will be notified by email when it completes.'))
+                    import_running = True
                 except UnicodeDecodeError:
                     messages.error(request, _('The CSV file you supplied is not formatted in the proper encoding (%s)!' % encoding))
                 except EmptyOrUnreadableCSVContent:
@@ -120,6 +122,7 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
             'panels': [],
             'user': request.user,
             'debug': debug,
+            'import_running': import_running,
         })
     
     @hooks.register('register_admin_urls')
