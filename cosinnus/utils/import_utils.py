@@ -176,7 +176,7 @@ def csv_import_projects(csv_file, request=None, encoding="utf-8", delimiter=b','
             raise UnexpectedNumberOfColumns()
     
     GroupImporter = import_from_settings('COSINNUS_CSV_IMPORT_GROUP_IMPORTER')
-    importer = GroupImporter(rows, request)
+    importer = GroupImporter(rows, request=request)
     importer.do_group_import_threaded()
     
     debug = ''
