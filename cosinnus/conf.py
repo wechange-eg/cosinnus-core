@@ -77,6 +77,14 @@ class CosinnusConf(AppConf):
         'cosinnus_etherpad',
         'cosinnus_file',
     ]
+    
+    # CSV Import settings
+    CSV_IMPORT_DEFAULT_ENCODING = 'utf-8'
+    CSV_IMPORT_DEFAULT_DELIMITER = b','
+    CSV_IMPORT_DEFAULT_EXPECTED_COLUMNS = None
+    
+    # the class with the implementation for importing CosinnusGroups used for the CSV import
+    CSV_IMPORT_GROUP_IMPORTER = 'cosinnus.utils.import_utils.GroupCSVImporter'
 
     # These are the default values for the bootstrap3-datetime-picker and
     # are translated in `cosinnus/formats/LOCALE/formats.py`
@@ -176,6 +184,10 @@ class CosinnusConf(AppConf):
     #     * user accounts cannot be disabled
     #     * special views are active on /integrated/ URLs, enabling cross-site login/logout/user-creation
     IS_INTEGRATED_PORTAL = False
+    
+    # can a staff user import CosinnusGroups via a CSV upload in the wagtail admin?
+    # and is the button shown?
+    IMPORT_PROJECTS_PERMITTED = False
     
     # switch to set if Microsites should be enabled.
     # this can be override for each portal to either activate or deactivate them

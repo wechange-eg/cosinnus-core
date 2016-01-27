@@ -3,12 +3,13 @@ from __future__ import unicode_literals
 
 from django.db.models import Q
 
-from cosinnus.models.group import CosinnusGroup, CosinnusPortal
+from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject,\
     BaseHierarchicalTaggableObjectModel
 from cosinnus.models.profile import BaseUserProfile
 from uuid import uuid1
 from django.conf import settings
+from cosinnus.utils.group import get_cosinnus_group_model
 
 
 def check_ug_admin(user, group):
@@ -50,7 +51,7 @@ def check_object_read_access(obj, user):
             or the group is public.
     """
     # check what kind of object was supplied (CosinnusGroup or BaseTaggableObject)
-    if type(obj) is CosinnusGroup or issubclass(obj.__class__, CosinnusGroup):
+    if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
         group = obj
         is_member = check_ug_membership(user, group)
         is_admin = check_ug_admin(user, group) 
@@ -100,7 +101,7 @@ def check_object_write_access(obj, user, fields=None):
         
     """
     # check what kind of object was supplied (CosinnusGroup or BaseTaggableObject)
-    if type(obj) is CosinnusGroup or issubclass(obj.__class__, CosinnusGroup):
+    if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
         is_admin = check_ug_admin(user, obj)
         return is_admin or check_user_superuser(user)
     elif issubclass(obj.__class__, BaseTaggableObjectModel):
@@ -182,7 +183,7 @@ def filter_tagged_object_queryset_for_user(qs, user):
     q = Q(media_tag__isnull=True) # get all objects that don't have a media_tag (folders for example)
     q |= Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)  # All public tagged objects
     if user.is_authenticated():
-        gids = CosinnusGroup.objects.get_for_user_pks(user)
+        gids = get_cosinnus_group_model().objects.get_for_user_pks(user)
         q |= Q(  # all tagged objects in groups the user is a member of
             media_tag__visibility=BaseTagObject.VISIBILITY_GROUP,
             group_id__in=gids

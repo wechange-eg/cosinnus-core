@@ -18,7 +18,7 @@ from django.utils.translation import ugettext_lazy as _, get_language
 from cosinnus.conf import settings
 from cosinnus.core.registries import app_registry, attached_object_registry
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupManager,\
-    CosinnusSociety, CosinnusProject, CosinnusPortal
+    CosinnusPortal, get_cosinnus_group_model
 from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
     check_group_create_objects_access, check_object_read_access, get_user_token,
@@ -34,6 +34,7 @@ from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.template.defaultfilters import linebreaksbr, urlizetrunc
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 logger = logging.getLogger('cosinnus')
 
 register = template.Library()
@@ -489,7 +490,7 @@ def group_aware_url_name(view_name, group_slug, portal_id=None):
     # retrieve group type cached
     group_type = cache.get(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, group_slug))
     if group_type is None:
-        group_type = CosinnusGroup.objects.get(slug=group_slug, portal_id=portal_id).type
+        group_type = get_cosinnus_group_model().objects.get(slug=group_slug, portal_id=portal_id).type
         cache.set(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, group_slug), group_type,
                   31536000) # 1 year cache
         
