@@ -83,7 +83,7 @@ class GroupCSVImporter(Thread):
     def __init__(self, rows, request=None, *args, **kwargs):
         self.rows = rows
         self.request = request
-        self.item_index = 1 if self.has_header else 0
+        self.item_index = 0
         # a map of { column-header-id: column-index), ... }
         self.column_map = [] if not self.has_header else self._index_and_remove_header_row()
         
