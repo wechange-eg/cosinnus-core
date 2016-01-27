@@ -9,6 +9,8 @@ from django.template.loader import render_to_string
 from threading import Thread
 import six
 
+import logging
+logger = logging.getLogger('cosinnus')
 
 
 def import_from_settings(name):
@@ -137,7 +139,13 @@ class GroupCSVImporter(Thread):
         self.start()
     
     def run(self):
-        self.do_group_import()
+        # do not just let the thread die on an exception with no notice
+        try:
+            self.do_group_import()
+        except Exception, e:
+            logger.error('An unexpected error in outer import happened! Exception was: %s' % str(e), extra={'exception': e})
+            self.import_failed(data={'msg': 'An unexpected error in outer import happened! Exception was: %s' % str(e)})
+            
     
     def do_group_import(self):
         pass
