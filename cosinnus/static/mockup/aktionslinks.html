@@ -1,0 +1,698 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- TODO: override main title that can be extended from (in main app!) -->
+	<title>Notes: Schnaaaaps!  - Netzwerk Wachstumswende</title>
+	<link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon" />
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/images/apple-touch-icon-114x114-precomposed.png" />
+
+
+
+	<link href="/static/css/select2.css" type="text/css" media="screen" rel="stylesheet" />
+	<link href="/static/css/extra.css" type="text/css" media="screen" rel="stylesheet" />
+
+	<link href="/static/css/bootstrap3-cosinnus.css" rel="stylesheet">
+	<link href="/static/css/vendor/font-awesome.min.css" rel="stylesheet">
+	<link href="/static/css/vendor/select2.css" rel="stylesheet">
+	<link href="/static/css/vendor/fullcalendar.css" rel="stylesheet">
+	<link href="/static/css/vendor/lightbox.css" rel="stylesheet">
+
+	<link rel="stylesheet/less" href="/static/less/cosinnus.less">
+	<script src="/static/js/vendor/less.min.js"></script>
+
+	<link href="/static/css/cosinnus_portal_style.css" rel="stylesheet">
+	<link href="/static/css/_ignoreme_cosinnus_custom_portal_default_styles.css" rel="stylesheet">
+
+
+
+	<script type="text/javascript">
+		var cosinnus_base_url = "http://localhost:8000/";
+		var cosinnus_active_group = "schnaaaaps";
+		var cosinnus_active_user = JSON.parse("{\u0022id\u0022: 1, \u0022username\u0022: \u0022tomi\u0022, \u0022first_name\u0022: \u0022\u0022, \u0022last_name\u0022: \u0022\u0022, \u0022profile\u0022: {\u0022id\u0022: 1, \u0022avatar\u0022: null, \u0022avatar_80x80\u0022: null, \u0022avatar_50x50\u0022: null, \u0022avatar_40x40\u0022: null}}");
+		var cosinnus_date_format = "YYYY-MM-DD";
+		var cosinnus_datetime_format = "YYYY-MM-DD HH:mm";
+		var cosinnus_time_format = "HH:mm";
+		var cosinnus_group_url_path = "group";
+		var cosinnus_current_language = "en";
+		var cosinnus_report_object_url = "/account/report/";
+	</script>
+
+	<script src="/static/js/vendor/jquery-2.1.0.min.js"></script>
+	<script src="/static/js/vendor/bootstrap.min.js"></script>
+	<script src="/static/js/vendor/select2.min.js"></script>
+	<script src="/static/js/vendor/fullcalendar.min.js"></script>
+	<script src="/static/js/vendor/jquery.sortElements.js"></script>
+	<script src="/static/js/vendor/moment-with-langs.min.js"></script>
+	<script src="/static/js/vendor/jquery.autogrow-textarea.js"></script>
+	<script src="/static/js/vendor/jquery.ui.widget.js"></script>
+	<script src="/static/js/vendor/jquery.fileupload.js"></script>
+	<script src="/static/js/vendor/html.sortable.min.js"></script>
+	<script src="/static/js/lightbox.js"></script>
+
+	<script type="text/javascript" src="/static/js/select2.js"></script>
+	<script type="text/javascript" src="/static/js/heavy_data.js"></script>
+	<script src="/static/js/cosinnus.js?v=0.18"></script>
+	<script src="/static/js/locale/en/cosinnus_formats.js?lang=en"></script>
+	<script src="/static/js/cosinnus.feedback.js"></script>
+
+
+
+
+
+
+	<link rel="stylesheet" href="/static/css/note.css">
+
+
+</head>
+
+<body  lang="en">
+	<!-- class="note" -->
+
+
+
+
+
+
+
+
+
+
+
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+
+				<a class="navbar-brand" title="Netzwerk Wachstumswende" href="/">
+
+					<img src="/static/img/logo-icon.png">
+				</a>
+			</div><!-- navbar-header -->
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-left">
+
+
+					<li><a href="/activities/">Activities</a></li>
+
+
+
+
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							Groups
+							<i class="fa fa-caret-down"></i>
+						</a>
+						<ul class="dropdown-menu">
+
+							<li class="active"><a href="/group/schnaaaaps/">Schnaaaaps!</a></li>
+
+							<li><a href="/group/swag/">Swag</a></li>
+
+							<li><a href="/group/yolo/">Yolo</a></li>
+
+							<li class="divider"></li>
+							<li><a href="/groups/">All Groups</a></li>
+						</ul>
+					</li>
+
+
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							Projects
+							<i class="fa fa-caret-down"></i>
+						</a>
+						<ul class="dropdown-menu">
+
+							<li><a href="/project/muttis-kuschelecke/">Muttis Kuschelecke</a></li>
+
+							<li><a href="/project/tommis-donerbude/">Tommis Dönerbude</a></li>
+
+							<li class="divider"></li>
+							<li><a href="/projects/">All Projects</a></li>
+						</ul>
+					</li>
+
+
+
+
+
+
+
+
+					<li><a href="/users/">People</a></li>
+
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+
+
+					<li id="searchbar">
+						<form id="cosinnus_search_form" action="/search/" method="GET">
+							<input class="form-control" placeholder="Search..." value="" name="q" />
+							<i class="fa fa-search" onclick="$('#cosinnus_search_form').submit();"></i>
+						</form>
+					</li>
+
+					<li>
+						<a href="/nachrichten/posteingang/" title="Messages">
+							<i class="fa fa-envelope"></i>
+
+							<span class="visible-xs-inline">&nbsp;Messages</span>
+						</a>
+					</li>
+					<li>
+						<a href="/activities/" title="Activities">
+							<i class="fa fa-globe"></i>
+
+							<span class="visible-xs-inline">&nbsp;Activities</span>
+						</a>
+					</li>
+
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							EN
+							<i class="fa fa-caret-down"></i>
+						</a>
+						<ul class="dropdown-menu">
+
+							<li><a href="/language/de/?next=/group/schnaaaaps/note/list/" >Deutsch</a></li>
+
+							<li><a href="/language/en/?next=/group/schnaaaaps/note/list/" style="font-weight:bold;">English</a></li>
+
+							<li><a href="/language/ru/?next=/group/schnaaaaps/note/list/" >Русский</a></li>
+
+							<li><a href="/language/uk/?next=/group/schnaaaaps/note/list/" >Українська</a></li>
+
+						</ul>
+					</li>
+
+
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="tomi">
+
+
+
+
+							<img src="/static/images/jane-doe.png" title="tomi"   ></img>
+
+
+
+							<i class="fa fa-caret-down"></i>
+						</a>
+						<ul class="dropdown-menu">
+
+
+							<li><a href="/profile/">My Profile</a></li>
+
+							<li><a href="/profile/notifications/">Notification Preferences</a></li>
+
+							<li class="divider"></li>
+							<li><a href="/logout/">Logout</a></li>
+							
+						</ul>
+					</li>
+
+				</ul>
+			</div>
+
+		</div>
+	</nav>
+
+
+
+
+
+
+
+
+	<div class="container app-main ">
+
+
+
+
+		<div class="row">
+			<!-- start with left navigation -->
+
+			<!-- now the content -->
+			<div class="col-lg-9 col-md-9 pull-right"><!-- right column -->
+
+				<ol class="breadcrumb">
+
+
+
+
+
+					<li><a href="/groups/">Group overview</a></li>
+
+
+					<li><a href="/group/schnaaaaps/">Schnaaaaps!</a></li>
+
+
+
+
+
+
+
+					<li><a class="active" href="/group/schnaaaaps/note/">News</a></li>
+
+
+				</ol>
+
+			</div>
+
+
+			<div class="col-lg-3 col-md-3"><!-- left column -->
+
+
+
+
+
+
+
+
+
+				<div class="btn-group w100 large-space">
+					<button type="button" class="btn btn-appnavi w100 dropdown-toggle" data-toggle="dropdown">
+						<ul class="media-list">
+							<li class="media">
+								<a class="pull-left" href="#">
+								</a>
+								<a class="pull-left" href="#">
+									<i class="fa fa-book"></i>
+								</a>
+
+								<a class="pull-right" href="#">
+									<i class="fa fa-caret-down"></i>
+								</a>
+
+								<div class="media-body">
+
+
+
+									Notes
+
+
+
+
+
+
+
+
+
+
+
+								</div>
+							</li>
+						</ul>
+					</button>
+
+
+					<ul class="dropdown-menu appnavi-dropdown-menu w100" role="menu">
+						<li class="app-main appnavi-listelement fine-space">
+							<a href="/group/schnaaaaps/">
+								<i class="fa fa-th-large"></i>
+								Dashboard
+							</a>
+						</li>
+
+						<li class="app-main appnavi-listelement fine-space">
+							<a href="/group/schnaaaaps/microsite/">
+								<i class="fa fa-lightbulb-o"></i>
+								Microsite
+							</a>
+						</li>
+
+
+
+
+
+						<li class="app-main appnavi-listelement active">
+							<a href="http://localhost:8000/group/schnaaaaps/note/">
+								<i class="fa fa-book"></i>
+								Notes
+							</a>
+						</li>
+
+
+
+
+						<li class="app-calendar appnavi-listelement ">
+							<a href="http://localhost:8000/group/schnaaaaps/event/">
+								<i class="fa fa-calendar"></i>
+								Events
+							</a>
+						</li>
+
+
+
+
+						<li class="app-todos appnavi-listelement ">
+							<a href="http://localhost:8000/group/schnaaaaps/todo/">
+								<i class="fa fa-tasks"></i>
+								Todos
+							</a>
+						</li>
+
+
+
+
+						<li class="app-etherpad appnavi-listelement ">
+							<a href="http://localhost:8000/group/schnaaaaps/document/">
+								<i class="fa fa-file-text"></i>
+								Documents
+							</a>
+						</li>
+
+
+
+
+						<li class="app-files appnavi-listelement ">
+							<a href="http://localhost:8000/group/schnaaaaps/file/">
+								<i class="fa fa-file"></i>
+								Files
+							</a>
+						</li>
+
+						<li class="app-main appnavi-listelement fine-space">
+							<a href="/group/schnaaaaps/members/">
+								<i class="fa fa-group"></i>
+								Members
+							</a>
+						</li>
+
+						<li class="app-main appnavi-listelement">
+							<a href="/group/schnaaaaps/edit/">
+								<i class="fa fa-cogs"></i>
+								Settings
+							</a>
+						</li>
+
+					</ul>
+
+				</div><!-- btn-group -->
+
+
+
+				<div class="clearfix regular-space"></div>
+			</div><!-- left column -->
+
+
+			<div class="col-lg-9 col-md-9"><!-- right column -->
+				<div class="row">
+					<div class="col-xs-12">
+
+
+
+
+						<!-- a box with semi transparent background -->
+						<div class="content-box">
+
+
+
+							<label>Dashboard</label>
+							<div data-target="widget-content">
+								<div type="button" class="btn btn-emphasized btn-headline">
+									<ul class="media-list">
+										<li class="media">
+											<a class="pull-left" href="/user/tomi/">
+
+
+
+
+												<img src="/static/images/jane-doe.png" title="tomi">
+
+
+
+											</a>
+											<div class="media-body">
+												<span class="annotation">
+													<span class="popover-button" data-toggle="popover" data-content="<p><i class='fa fa-pencil'></i> <a href='/group/schnaaaaps/note/saschas-mudda/update/'>Edit</a></p><p><i class='fa fa-times'></i> <a data-toggle='modal' data-target='#deleteNote_6' href='#' title='Delete note'>Delete</a></p>" data-html="true" data-container="body" data-placement="left">
+													<i class="fa fa-pencil"></i>
+													</span>
+												</span>
+
+												<a href="/user/tomi/">tomi</a>
+												<a class="light-link" target="_blank" href="http://localhost:8000/group/schnaaaaps/note/saschas-mudda/"><span class="moment-data-date" data-date="2016-01-26T12:29:08.012502+01:00" title="Tuesday, January 26 2016 12:29 PM">Last Tuesday at 12:29 PM</span> <i class="fa fa-external-link"></i></a>
+
+												<!-- <div class="group-annotation">
+
+
+													<a href="http://localhost:8000/group/schnaaaaps/">
+														<i class="fa fa-users"></i>
+														Schnaaaaps!
+													</a>
+
+
+												</div> -->
+											</div>
+										</li>
+									</ul>
+								</div><!-- btn -->
+
+
+
+								<div type="button" class="btn btn-default dashboard-appwidget-contentline-extra-indented">
+									<ul class="media-list fine-space">
+										<li class="media">
+											<div class="media-body">
+												<div class="well">
+
+
+													<p class="regular-space"><strong>sASCHAS mUDDA</strong></p>
+
+
+													<div class="hidden_text_shown" data-hidden-text-id="note_6">
+														<p><br><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. D... <a class="hidden_text_button" data-hidden-text-id="note_6">Read more...</a></p>
+													</div>
+													<div class="hidden_text_hidden" data-hidden-text-id="note_6" style="display:none;">
+														<p><br><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec... Read more...<br></p>
+													</div>
+													<script type="text/javascript">
+														$.cosinnus.hidden_text();
+													</script>
+
+
+												</div>
+
+
+											</div>
+										</li>
+									</ul>
+								</div><!-- btn -->
+
+
+
+
+
+								<div class="fadedown large-space">
+
+									<div type="button" class="btn btn-default dashboard-appwidget-contentline-extra-indented">
+										<ul class="media-list fine-space">
+											<li class="media">
+												<div class="media-body comment-background  no-vertical-padding">
+
+													<ol class="input-area comment-background">
+														<li class="w100 font11px no-vertical-padding no-horizontal-padding fadedown-clickarea">
+
+															<a href="#" class="pull-right nounderline">
+																<i class="fa fa-comments"></i>
+
+																<b>0</b>
+
+															</a>
+
+
+															<a href="#">Comment</a>
+
+
+														</li>
+													</ol>
+
+												</div>
+											</li>
+										</ul>
+									</div><!-- btn -->
+
+									<div style="display:none;">
+										<form action="/group/schnaaaaps/note/saschas-mudda/comment/" method="post" class="form-horizontal">
+											<div type="button" class="btn btn-default dashboard-appwidget-contentline-extra-indented">
+												<ul class="media-list">
+													<li class="media">
+														<a class="pull-left" href="/user/tomi/">
+
+
+
+
+															<img src="/static/images/jane-doe.png" title="tomi">
+
+
+
+														</a>
+														<div class="media-body media-body-form-control">
+
+															<textarea style="height: 40px;" id="id_text" name="text" class="form-control next-button-is-for-sending autogrow oneline" placeholder="Write comment..."></textarea>
+														</div>
+													</li>
+												</ul>
+											</div><!-- btn -->
+
+											<button type="submit" class="btn btn-emphasized ">
+												<ul class="media-list">
+													<li class="media">
+														<a class="pull-left" href="#">
+															<i class="fa fa-save"></i>
+														</a>
+														<div class="media-body">
+															Post
+														</div>
+													</li>
+												</ul>
+											</button><!-- btn -->
+
+										</form>
+
+									</div>
+
+								</div><!-- fadedown -->
+
+							</div>
+
+							<label>Dashboard außerhalb der Gruppe</label>
+							<div type="button" class="btn btn-emphasized btn-headline large-space">
+								<ul class="media-list">
+									<li class="media">
+										<a class="pull-left" href="/user/tomi/">
+
+
+
+
+											<img src="/static/images/jane-doe.png" title="tomi">
+
+
+
+										</a>
+										<div class="media-body">
+											<span class="annotation">
+												<span class="popover-button" data-toggle="popover" data-content="<p><i class='fa fa-pencil'></i> <a href='/group/schnaaaaps/note/saschas-mudda/update/'>Edit</a></p><p><i class='fa fa-times'></i> <a data-toggle='modal' data-target='#deleteNote_6' href='#' title='Delete note'>Delete</a></p>" data-html="true" data-container="body" data-placement="left">
+												<i class="fa fa-pencil"></i>
+												</span>
+											</span>
+
+											<a href="/user/tomi/">tomi</a>
+											<a class="light-link" target="_blank" href="http://localhost:8000/group/schnaaaaps/note/saschas-mudda/"><span class="moment-data-date" data-date="2016-01-26T12:29:08.012502+01:00" title="Tuesday, January 26 2016 12:29 PM">Last Tuesday at 12:29 PM</span> <i class="fa fa-external-link"></i></a>
+
+											<div class="group-annotation">
+
+
+												<a href="http://localhost:8000/group/schnaaaaps/">
+													<i class="fa fa-users"></i>
+													Die externe Gruppe
+												</a>
+
+
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div><!-- btn -->
+
+
+
+
+
+							<label>Notes Listenansicht und Einzelansicht</label>
+
+							<div type="button" class="btn btn-emphasized w100">
+								<ul class="media-list">
+									<li class="media">
+										<a class="pull-left" href="/user/tomi/">
+
+
+
+
+											<img src="/static/images/jane-doe.png" title="tomi">
+
+
+
+										</a>
+										<div class="media-body media-body-normalwrap">
+											<span class="annotation">
+												<i class="fa fa-users"></i>
+												<a href="http://localhost:8000/group/schnaaaaps/">Schnapsgruppe</a>
+												&nbsp;&nbsp;
+
+												<span class="popover-button" data-toggle="popover" data-content="<p><i class='fa fa-pencil'></i> <a href='/group/schnaaaaps/note/saschas-mudda/update/'>Edit</a></p><p><i class='fa fa-times'></i> <a data-toggle='modal' data-target='#deleteNote_6' href='#' title='Delete note'>Delete</a></p><p><i class='fa fa-warning'></i> <a data-toggle='modal' data-target='#deleteNote_6' href='#' title='Delete note'>Melden</a></p>" data-html="true" data-container="body" data-placement="left">
+												<i class="fa fa-pencil"></i>
+												</span>
+											</span>
+
+
+											<strong><a href="/user/tomi/">tomi</a></strong> 
+											<a class="light-link" target="_blank" href="http://localhost:8000/group/schnaaaaps/note/saschas-mudda/"><span class="moment-data-date" data-date="2016-01-26T12:29:08.012502+01:00" title="Tuesday, January 26 2016 12:29 PM">Last Tuesday at 12:29 PM</span> <i class="fa fa-external-link"></i>
+											</a>
+
+										</div>
+									</li>
+								</ul>
+							</div>
+
+							<div class="indented regular-space">
+
+								<p><b>sASCHAS mUDDA</b></p>
+
+								<p><br><br>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec... Read more...<br></p>
+
+							</div>
+
+
+						</div><!-- widget-content -->
+
+
+
+
+					</div><!-- content-box -->
+
+				</div><!-- col -->
+			</div><!-- row -->
+		</div><!-- right column -->
+
+	</div><!-- row -->
+
+
+
+
+
+</div><!-- main container -->
+
+
+
+<br/><br/><br/> <!-- replacement space for missing footer -->
+
+
+
+
+
+
+
+</body>
+</html>

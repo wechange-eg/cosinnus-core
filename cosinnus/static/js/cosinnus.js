@@ -1264,6 +1264,9 @@
             $('#dashboardArrangeInputSave').click(function() { $(window).trigger('dashboardArrangeInputSave'); });
 
         },
+        popover: function() {
+            $('.popover-button').popover();
+        },
 
     };
 })( jQuery );
@@ -1303,5 +1306,6 @@ $(function() {
     $.cosinnus.initFileUpload();
     $.cosinnus.dashboardArrange();
     $.cosinnus.dashboardArrangeInput();
+    $.cosinnus.popover();
 });
 
