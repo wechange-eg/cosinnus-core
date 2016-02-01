@@ -1,7 +1,7 @@
 {% extends "cosinnus/wagtail/wagtailadmin/custom_admin_base.html" %}
 {% load gravatar static compress i18n cosinnus_tags %}
 
-{% block titletag %}{% trans "Import Projects and Groups" %}{% endblock %}
+{% block titletag %}{% trans "Import Projects and Groups or Users" %}{% endblock %}
 
 {% block branding_welcome %}{% trans "Import Projects and Groups" %}{% endblock %}
 
@@ -22,7 +22,7 @@
 	    
 	    <div style="width:100%; max-height: 500px; white-space: nowrap; overflow-x: auto; overflow-y: auto;">
 		    {% if import_results.successes %}
-		    	<h3>{% trans "Saved groups:" %} {{ import_results.saved_groups }} / {{ import_results.total_groups }}</h3>
+		    	<h3>{% trans "Saved items:" %} {{ import_results.saved_groups }} / {{ import_results.total_groups }}</h3>
 		    	<p>
 		    		{% for msg in import_results.successes %}
 		    			{{ msg|safe|urlize|url_target_blank }}<br/>

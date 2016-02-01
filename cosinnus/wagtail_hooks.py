@@ -109,25 +109,31 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
             elif import_results:
                 messages.success(request, _('An import has just finished. Please click the "Start a new import" button to start a new one!'))
             else:
-                csv_file = request.FILES.get('csv_upload', None)
-                if not csv_file:
+                csv_file_groups = request.FILES.get('csv_upload_groups', None)
+                csv_file_users = request.FILES.get('csv_upload_users', None)
+                
+                if csv_file_groups and csv_file_users:
+                    messages.error(request, _('You uploaded a CSV file for both projects/groups AND users! Please only upload one file to import at a time!'))
+                elif not (csv_file_groups or csv_file_users):
                     messages.error(request, _('You did not upload a CSV file or something went wrong during the upload!'))
                 else:
+                    csv_file = csv_file_groups or csv_file_users
+                    import_type = 'groups' if csv_file_groups else 'users'
+                    
                     encoding = request.POST.get('encoding', "utf-8")
                     delimiter = request.POST.get('delimiter', b',')
                     delimiter = str(delimiter)[0]
-                    expected_columns = settings.COSINNUS_CSV_IMPORT_DEFAULT_EXPECTED_COLUMNS
                     
                     try:
-                        debug = csv_import_projects(csv_file, request=request, encoding=encoding, delimiter=delimiter, expected_columns=expected_columns)
+                        debug = csv_import_projects(csv_file, request=request, encoding=encoding, delimiter=delimiter, import_type=import_type)
                         messages.success(request, _('The CSV file was read successfully! You will be notified by email when it completes.'))
                         import_running = True
                     except UnicodeDecodeError:
                         messages.error(request, _('The CSV file you supplied is not formatted in the proper encoding (%s)!' % encoding))
                     except EmptyOrUnreadableCSVContent:
                         messages.error(request, _('The CSV file you supplied was empty or not formatted in the proper encoding (%s) or with a wrong delimiter (%s)!' % (encoding, delimiter)))
-                    except UnexpectedNumberOfColumns:
-                        messages.error(request, _('The CSV file you supplied contained a different number columns than expected (%s)! Either the file was read in a wrong encoding, or the file was using a different format than the server expected.' % str(expected_columns)))
+                    except UnexpectedNumberOfColumns, e:
+                        messages.error(request, _('The CSV file you supplied contained a different number columns than expected (%s)! Either the file was read in a wrong encoding, or the file was using a different format than the server expected.' % str(e)))
                     except ImportAlreadyRunning:
                         messages.error(request, _('Another import is currently running! Please wait till that one is finished.'))
                     except Exception, e:

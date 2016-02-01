@@ -20,13 +20,16 @@ GROUP_IMPORT_PROGRESS_CACHE_KEY = 'cosinnus/core/import/groups/progress'
 GROUP_IMPORT_RESULTS_CACHE_KEY = 'cosinnus/core/import/groups/results'
 
 
-def import_from_settings(name):
+def import_from_settings(name=None, path_to_class=None):
     from django.core.exceptions import ImproperlyConfigured
     from django.utils.importlib import import_module
     from cosinnus.conf import settings
 
     try:
-        value = getattr(settings, name, None)
+        if name is not None:
+            value = getattr(settings, name, None)
+        else:
+            value = path_to_class
         module_name, _, klass_name = value.rpartition('.')
     except ValueError:
         raise ImproperlyConfigured("%s must be of the form 'path.to.MyClass'" %
@@ -77,8 +80,8 @@ class UnicodeReader:
 
 
 class GroupCSVImporter(Thread):
-    """ Extend this class to implement the specific import function `_do_group_import``! 
-        Assign your new class to the setting ``COSINNUS_CSV_IMPORT_GROUP_IMPORTER`` to have it be used for the import. 
+    """ Extend this class to implement the specific import function `_do_import``! 
+        Assign your new class to the setting ``COSINNUS_CSV_IMPORT_TYPE_SETTINGS[import_type]['IMPORT_CLASS']`` to have it be used for the import. 
         @param group_rows: The rows of CSV imported groups. 
         @param request: Supply a request if a report summary of the import should be mailed to the user """
     
@@ -97,7 +100,7 @@ class GroupCSVImporter(Thread):
         self.column_map = [] if not self.has_header else self._index_and_remove_header_row()
         
         if self.__class__.__name__ == 'GroupCSVImporter':
-            raise ImproperlyConfigured('The GroupCSVImporter needs to be extended and requires a ``_do_group_import`` function to be implemented!')
+            raise ImproperlyConfigured('The GroupCSVImporter needs to be extended and requires a ``_do_import`` function to be implemented!')
         if len(self.ALIAS_MAP) <= 0:
             raise ImproperlyConfigured('No column alias map has been configured. Please define ALIAS_MAP in your class!')
         super(GroupCSVImporter, self).__init__(*args, **kwargs)
@@ -114,15 +117,19 @@ class GroupCSVImporter(Thread):
             raise ImproperlyConfigured('The GroupCSVImporter was configured to access CSV columns [%s], but they were not found in the CSV header row!' % ', '.join(iterable))
         return column_map
     
-    def get(self, internal_column_alias):
+    def get(self, internal_column_alias, ignore_errors=False):
         """ Returns the value of the column ``internal_column_alias`` from the current row.
             ``internal_column_alias`` must be defined in ALIAS_MAP. """
         if not internal_column_alias in self.ALIAS_MAP:
+            if ignore_errors:
+                    return None
             raise ImproperlyConfigured('CSVGroupImporter tried to access a column through unknown column-alias "%s"' % internal_column_alias)
         # retrieve the item via its alias. if there was a header row, retrieve by column-id, else by column-index
         alias_target = self.ALIAS_MAP[internal_column_alias]
         if self.has_header:
             if not alias_target in self.column_map:
+                if ignore_errors:
+                    return None
                 raise ImproperlyConfigured('CSVGroupImporter could not find configured column with header "%s"' % alias_target)
             val = self.rows[self.item_index][self.column_map[alias_target]]
         else:
@@ -186,14 +193,14 @@ class GroupCSVImporter(Thread):
         """ Check the cache if an import is currently running """
         return bool(cache.get(GROUP_IMPORT_RUNNING_CACHE_KEY))
     
-    def do_group_import(self):
+    def do_import(self):
         self.start()
     
     def run(self):
         # do not just let the thread die on an exception with no notice
         try:
             self.set_is_running(True)
-            self._do_group_import()
+            self._do_import()
         except Exception, e:
             if getattr(settings, 'DEBUG_LOCAL', False):
                 raise
@@ -202,7 +209,7 @@ class GroupCSVImporter(Thread):
         finally:
             self.set_is_running(False)
     
-    def _do_group_import(self):
+    def _do_import(self):
         """ Never call this group from outside of this or the extending class! """
         pass
     
@@ -237,7 +244,7 @@ class EmptyOrUnreadableCSVContent(Exception): pass
 class UnexpectedNumberOfColumns(Exception): pass 
 class ImportAlreadyRunning(Exception): pass
 
-def csv_import_projects(csv_file, request=None, encoding="utf-8", delimiter=b',', expected_columns=None):
+def csv_import_projects(csv_file, request=None, encoding="utf-8", delimiter=b',', import_type=None):
     """ Imports CosinnusGroups (projects and societies) from a CSV file (InMemory or opened).
         
         @param expected_columns: if set to an integer, each row must have this number of columns,
@@ -259,18 +266,21 @@ def csv_import_projects(csv_file, request=None, encoding="utf-8", delimiter=b','
     if len(rows) <= 0 or len(rows[0]) <= 1:
         raise EmptyOrUnreadableCSVContent()
     
+    import_type = import_type or 'groups'
+    expected_columns = settings.COSINNUS_CSV_IMPORT_TYPE_SETTINGS[import_type]['DEFAULT_EXPECTED_COLUMNS']
+    Importer = import_from_settings(path_to_class=settings.COSINNUS_CSV_IMPORT_TYPE_SETTINGS[import_type]['IMPORT_CLASS'])
+    
     # sanity check for expected number of columns, in EACH row
     if expected_columns:
         expected_columns = int(expected_columns)
         if any([len(row) != expected_columns for row in rows]):
-            raise UnexpectedNumberOfColumns()
+            raise UnexpectedNumberOfColumns(str(expected_columns))
     
-    GroupImporter = import_from_settings('COSINNUS_CSV_IMPORT_GROUP_IMPORTER')
-    importer = GroupImporter(rows, request=request)
+    importer = Importer(rows, request=request)
     if importer.is_running():
         raise ImportAlreadyRunning()
     
-    importer.do_group_import()
+    importer.do_import()
     
     debug = ''
     for row in rows:

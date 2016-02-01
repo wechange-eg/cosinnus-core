@@ -1,1 +1,1 @@
-{% load i18n %}{% blocktrans %}{{ site_name }} CSV group import was successful{% endblocktrans %}
+{% load i18n %}{% blocktrans %}{{ site_name }} CSV import was successful{% endblocktrans %}
