@@ -3,7 +3,7 @@
 
 {% block css %}
 	{{ block.super }}
-	<meta http-equiv="refresh" content="10" />
+	<meta http-equiv="refresh" content="6" />
 {% endblock %}
 
 {% block titletag %}{% trans "Import Projects and Groups" %}{% endblock %}
@@ -21,7 +21,7 @@
 				Depending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>"{{ email }}"</b> as soon as the import finishes!
 			{% endblocktrans %}
 		</p>
-		<h3>{% trans "Progress:" %} {{ import_progress }}%</h3>
+		<h3>{% trans "Progress:" %} {{ import_progress }}% <span class="icon icon-spinner"></span></h3>
 		
 	    
 	</section>
