@@ -11,7 +11,13 @@ import six
 
 import logging
 from django.conf import settings
+from django.core.cache import cache
 logger = logging.getLogger('cosinnus')
+
+
+GROUP_IMPORT_RUNNING_CACHE_KEY = 'cosinnus/core/import/groups/is_running'
+GROUP_IMPORT_PROGRESS_CACHE_KEY = 'cosinnus/core/import/groups/progress'
+GROUP_IMPORT_RESULTS_CACHE_KEY = 'cosinnus/core/import/groups/results'
 
 
 def import_from_settings(name):
@@ -71,7 +77,7 @@ class UnicodeReader:
 
 
 class GroupCSVImporter(Thread):
-    """ Extend this class to implement the specific import function `do_group_import``! 
+    """ Extend this class to implement the specific import function `_do_group_import``! 
         Assign your new class to the setting ``COSINNUS_CSV_IMPORT_GROUP_IMPORTER`` to have it be used for the import. 
         @param group_rows: The rows of CSV imported groups. 
         @param request: Supply a request if a report summary of the import should be mailed to the user """
@@ -91,7 +97,7 @@ class GroupCSVImporter(Thread):
         self.column_map = [] if not self.has_header else self._index_and_remove_header_row()
         
         if self.__class__.__name__ == 'GroupCSVImporter':
-            raise ImproperlyConfigured('The GroupCSVImporter needs to be extended and requires a ``do_group_import`` function to be implemented!')
+            raise ImproperlyConfigured('The GroupCSVImporter needs to be extended and requires a ``_do_group_import`` function to be implemented!')
         if len(self.ALIAS_MAP) <= 0:
             raise ImproperlyConfigured('No column alias map has been configured. Please define ALIAS_MAP in your class!')
         super(GroupCSVImporter, self).__init__(*args, **kwargs)
@@ -136,19 +142,68 @@ class GroupCSVImporter(Thread):
             return False
         return True
     
-    def do_group_import_threaded(self):
+    def count(self):
+        return len(self.rows)
+    
+    def set_import_results(self, successes=[], errors=[], infos=[], attentions=[], saved_groups=[]):
+        results_obj = {
+           'successes': successes,
+           'errors': errors,
+           'infos': infos,
+           'attentions': attentions,
+           'saved_groups': len(saved_groups),
+           'total_groups': len(self.rows)
+        }
+        cache.set(GROUP_IMPORT_RESULTS_CACHE_KEY, results_obj, 60 * 60 * 24) # 1 day kept
+    
+    def set_progress(self, progress=None, current_item=None, total_items=None):
+        """ Sets the current progress of import in the cache as a float between 0.0 - 100.0. 
+            This method will take care of rounding.
+            Provide either the progress, or the current item and total items.
+            @param progress: (float) progress in percent between 0.0-100.0
+            @param current_item: (int) current item
+            @param total_items: (int) number of total items to progress through"""
+        if progress is None and (current_item is not None and total_items is not None):
+            progress = (float(current_item) / float(total_items)) * 100.0
+            if progress > 100.0:
+                progress = 100.0
+            progress = round(progress, 1)
+        elif progress is None:
+            progress = 0.0
+        cache.set(GROUP_IMPORT_PROGRESS_CACHE_KEY, progress, 60 * 60 * 2) # 2 hours running keep
+    
+    def set_is_running(self, is_running):
+        """ Sets a cache variable if an import is running. Only one import may run at a time! """
+        if is_running:
+            cache.delete(GROUP_IMPORT_RESULTS_CACHE_KEY)
+            cache.set(GROUP_IMPORT_RUNNING_CACHE_KEY, True, 60 * 60 * 2) # 2 hours running keep
+            cache.set(GROUP_IMPORT_PROGRESS_CACHE_KEY, 0.0, 60 * 60 * 2) # 2 hours running keep
+        else:
+            cache.delete(GROUP_IMPORT_RUNNING_CACHE_KEY)
+            cache.set(GROUP_IMPORT_PROGRESS_CACHE_KEY, 100.0, 60 * 60 * 2) # 2 hours running keep
+    
+    def is_running(self):
+        """ Check the cache if an import is currently running """
+        return bool(cache.get(GROUP_IMPORT_RUNNING_CACHE_KEY))
+    
+    def do_group_import(self):
         self.start()
     
     def run(self):
         # do not just let the thread die on an exception with no notice
         try:
-            self.do_group_import()
+            self.set_is_running(True)
+            self._do_group_import()
         except Exception, e:
+            if getattr(settings, 'DEBUG_LOCAL', False):
+                raise
             logger.error('An unexpected error in outer import happened! Exception was: %s' % str(e), extra={'exception': e})
             self.import_failed(data={'msg': 'An unexpected error in outer import happened! Exception was: %s' % str(e)})
-            
+        finally:
+            self.set_is_running(False)
     
-    def do_group_import(self):
+    def _do_group_import(self):
+        """ Never call this group from outside of this or the extending class! """
         pass
     
     def _send_summary_mail(self, template, subj_template, data):
@@ -171,6 +226,7 @@ class GroupCSVImporter(Thread):
         self._send_summary_mail('cosinnus/mail/csv_import_summary.txt', 'cosinnus/mail/csv_import_summary_subj.txt', data)
     
     def import_failed(self, data):
+        self.set_import_results(errors=[data['msg']])
         if not self.request:
             return
         logger.error('CSV import failed and a failure report was sent! Data in extra.', extra={'data': data})
@@ -179,6 +235,7 @@ class GroupCSVImporter(Thread):
 
 class EmptyOrUnreadableCSVContent(Exception): pass
 class UnexpectedNumberOfColumns(Exception): pass 
+class ImportAlreadyRunning(Exception): pass
 
 def csv_import_projects(csv_file, request=None, encoding="utf-8", delimiter=b',', expected_columns=None):
     """ Imports CosinnusGroups (projects and societies) from a CSV file (InMemory or opened).
@@ -210,10 +267,10 @@ def csv_import_projects(csv_file, request=None, encoding="utf-8", delimiter=b','
     
     GroupImporter = import_from_settings('COSINNUS_CSV_IMPORT_GROUP_IMPORTER')
     importer = GroupImporter(rows, request=request)
-    if getattr(settings, 'OVERRIDE_CSV_IMPORT_NO_THREADING', False):
-        importer.do_group_import()
-    else:
-        importer.do_group_import_threaded()
+    if importer.is_running():
+        raise ImportAlreadyRunning()
+    
+    importer.do_group_import()
     
     debug = ''
     for row in rows:

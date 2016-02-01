@@ -9,48 +9,32 @@
 	<section>
 	    <h2>{% trans "Import from a CSV File" %}</h2>
 	    
-	    {% if not import_running %}
-	    	<p>{% trans "Upload a CSV-file to import projects/groups. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!" %}</p>
-	    	
-		    <form action="." method="post" enctype="multipart/form-data">
-	    	{% csrf_token %}
-	    		<p>
-	    			<input id="csv_upload" name="csv_upload" type="file" accept=".csv" />
-	    		</p>
-	    		
-	    		<fieldset style="border-top: 1px solid #aaa; border-bottom: none; border-left: none; border-right: none; display: block; text-align: right;">
-				    <legend onclick="$('#csv_options').slideDown(500);" style="cursor:pointer; padding: 5px 10px;  clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto;">
-				    	{% trans "Options" %}
-				    	<i class="icon icon-arrow-down"></i>
-			    	</legend>
-				    
-				    <div id="csv_options" style="display: none; cursor: auto;">
-				    	<p style="text-align: left;">{% trans "The default settings for the CSV file. Only change these if you absolutely know what you are doing!" %}</p>
-					    <label for="csv_encoding">{% trans "Encoding of the CSV file" %}</label>
-			    		<input id="csv_encoding" type="text" name="encoding" value="{{ SETTINGS.COSINNUS_CSV_IMPORT_DEFAULT_ENCODING }}"/>
-			    		<label for="csv_delimiter">{% trans "Delimiter of the CSV file" %}</label>
-			    		<input id="csv_delimiter" type="text" name="delimiter" value="{{ SETTINGS.COSINNUS_CSV_IMPORT_DEFAULT_DELIMITER }}"/>
-		    		</div>
-				</fieldset>
-				
-	    		<button type="submit" class="button-longrunning">{% trans "Upload and Import..." %}</button>
-	    	</form>
-    	{% else %}
-    		<p>{% trans "The CSV file was read successfully! You will be notified by email when it completes." %}</p>
+    	<p>{% trans "Upload a CSV-file to import projects/groups. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!" %}</p>
+    	
+	    <form action="." method="post" enctype="multipart/form-data">
+    	{% csrf_token %}
     		<p>
-    			{% blocktrans with email=request.user.email %}The import is now running on the server. 
-    		
-    				Depending on the number of imported items, this process might take from a few seconds to a few minutes. We will send you an email to your address <b>"{{ email }}"</b> as soon as the import finishes!
-    			{% endblocktrans %}
+    			<input id="csv_upload" name="csv_upload" type="file" accept=".csv" />
     		</p>
-    		<p>{% trans "Please do not start another import until this one is finished!" %}</p>
-    	{% endif %}
-		
-		{% if settings.DEBUG_LOCAL %}
-		<hr/>
-			<p>{{ debug|safe }}</p>
-		<hr/>
-		{% endif %}
+    		
+    		<fieldset style="border-top: 1px solid #aaa; border-bottom: none; border-left: none; border-right: none; display: block; text-align: right;">
+			    <legend onclick="$('#csv_options').slideDown(500);" style="cursor:pointer; padding: 5px 10px;  clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto;">
+			    	{% trans "Options" %}
+			    	<i class="icon icon-arrow-down"></i>
+		    	</legend>
+			    
+			    <div id="csv_options" style="display: none; cursor: auto;">
+			    	<p style="text-align: left;">{% trans "The default settings for the CSV file. Only change these if you absolutely know what you are doing!" %}</p>
+				    <label for="csv_encoding">{% trans "Encoding of the CSV file" %}</label>
+		    		<input id="csv_encoding" type="text" name="encoding" value="{{ SETTINGS.COSINNUS_CSV_IMPORT_DEFAULT_ENCODING }}"/>
+		    		<label for="csv_delimiter">{% trans "Delimiter of the CSV file" %}</label>
+		    		<input id="csv_delimiter" type="text" name="delimiter" value="{{ SETTINGS.COSINNUS_CSV_IMPORT_DEFAULT_DELIMITER }}"/>
+	    		</div>
+			</fieldset>
+			
+    		<button type="submit" class="button-longrunning">{% trans "Upload and Import..." %}</button>
+    	</form>
+	
 	    
 	</section>
 {% endblock %}
