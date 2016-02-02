@@ -16,8 +16,10 @@
     		<p>
     			<label for="csv_upload_groups">{% trans "Project/group CSV File" %}</label>
     			<input id="csv_upload_groups" name="csv_upload_groups" type="file" accept=".csv" />
-    			<label for="csv_upload_users">{% trans "User CSV File" %}</label>
-    			<input id="csv_upload_users" name="csv_upload_users" type="file" accept=".csv" />
+    			<div style="display: none;">
+	    			<label for="csv_upload_users">{% trans "User CSV File" %}</label>
+	    			<input id="csv_upload_users" name="csv_upload_users" type="file" accept=".csv" />
+	    		</div>
     		</p>
     		
     		<fieldset style="border-top: 1px solid #aaa; border-bottom: none; border-left: none; border-right: none; display: block; text-align: right;">
