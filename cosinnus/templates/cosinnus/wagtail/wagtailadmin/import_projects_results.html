@@ -33,7 +33,7 @@
 		    	<h3>{% trans "Important messages:" %}</h3>
 		    	<p>
 		    		{% for msg in import_results.attentions %}
-		    			{{ msg|safe }}<br/>
+		    			{{ msg|safe|urlize|url_target_blank }}<br/>
 		    		{% endfor %}
 		    	</p>
 		    {% endif %}
@@ -41,7 +41,7 @@
 		    	<h3>{% trans "Errors:" %}</h3>
 		    	<p>
 		    		{% for msg in import_results.errors %}
-		    			{{ msg|safe }}<br/>
+		    			{{ msg|safe|urlize|url_target_blank }}<br/>
 		    		{% endfor %}
 		    	</p>
 		    {% endif %}
@@ -49,7 +49,7 @@
 		    	<h3>{% trans "Info messages:" %}</h3>
 		    	<p>
 		    		{% for msg in import_results.infos %}
-		    			{{ msg|safe }}<br/>
+		    			{{ msg|safe|urlize|url_target_blank }}<br/>
 		    		{% endfor %}
 		    	</p>
 		    {% endif %}
