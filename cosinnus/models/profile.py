@@ -20,6 +20,7 @@ from cosinnus.utils.files import get_avatar_filename
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.core import signals
+from cosinnus.utils.group import get_cosinnus_group_model
 
 
 class BaseUserProfileManager(models.Manager):
@@ -153,7 +154,7 @@ class BaseUserProfile(models.Model):
     @property
     def cosinnus_groups(self):
         """ Returns all groups this user is a member or admin of """
-        return CosinnusGroup.objects.get_for_user(self.user)
+        return get_cosinnus_group_model().objects.get_for_user(self.user)
     
     @property
     def avatar_url(self):
