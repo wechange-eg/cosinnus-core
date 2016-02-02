@@ -199,6 +199,8 @@
 		        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
 		            {% if group.description_long and group.description_long|length > 0 %}
 			            <p>{{ group.description_long|textfield }}</p>
+			        {% elif group.description and group.description|length > 0 %}
+			            <p>{{ group.description|textfield }}</p>
 			        {% else %}
 			            <p>({% trans "No Description set" %})</p>
 			        {% endif %}
