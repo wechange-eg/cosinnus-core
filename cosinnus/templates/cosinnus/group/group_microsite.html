@@ -56,6 +56,7 @@
 	    </div>
     {% endif %}
     
+    {% block microsite_header %}
 	<div class="group-microsite-header">
 		{% if not user.is_authenticated %}
 			<div class="group-microsite-login-box overlay-box-gray">
@@ -153,7 +154,9 @@
 			
 		</div>
 	</div>
+	{% endblock microsite_header %}
 	
+	{% block microsite_subheader %}
 	<div class="group-microsite-subheader">
 		<div class="group-microsite-subheader-container">
 			<div class="group-microsite-subheader-item">
@@ -171,120 +174,128 @@
 			</div>
 		</div>
 	</div>
+	{% endblock microsite_subheader %}
 	
+	{% block microsite_content %}
 	<div class="row">
 		<div class="col-sm-8 col-md-6">
 			
-	        <div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
-	            <ul class="media-list">
-	                <li class="media">
-	                    <a class="pull-left btn-extra-emphasized" href="#"></a>
-	                    {% comment %}  
-	                    <a class="pull-left" href="#">
-	                        <i class="fa fa-user"></i>
-	                    </a>
-	                    {% endcomment %}
-	                    <div class="media-body">
-	                        {% trans "Description" %}
-	                    </div>
-	                </li>
-	            </ul>
-	        </div><!-- btn -->
-	        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
-	            {% if group.description_long and group.description_long|length > 0 %}
-		            <p>{{ group.description_long|textfield }}</p>
-		        {% else %}
-		            <p>({% trans "No Description set" %})</p>
-		        {% endif %}
-	        </div><!-- content-box -->
-	        
-	        
-	        {% if group.media_tag_object.topics %}
+			{% block microsite_left_column %}
 		        <div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
 		            <ul class="media-list">
 		                <li class="media">
 		                    <a class="pull-left btn-extra-emphasized" href="#"></a>
 		                    {% comment %}  
 		                    <a class="pull-left" href="#">
-		                        <i class="fa fa-lightbulb-o"></i>
+		                        <i class="fa fa-user"></i>
 		                    </a>
 		                    {% endcomment %}
 		                    <div class="media-body">
-		                        {% trans "Topics we are involved with" %}
+		                        {% trans "Description" %}
 		                    </div>
 		                </li>
 		            </ul>
 		        </div><!-- btn -->
 		        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
-		            <p>
-			            {% for topic in group.media_tag_object.get_topics %}
-				            <a href="#">{{ topic }}</a>
-				        {% endfor %}
-			        </p>
+		            {% if group.description_long and group.description_long|length > 0 %}
+			            <p>{{ group.description_long|textfield }}</p>
+			        {% else %}
+			            <p>({% trans "No Description set" %})</p>
+			        {% endif %}
 		        </div><!-- content-box -->
-			{% endif %}
-	        
-	        
-	        {% with tags=group.media_tag_object.tags.all %}
-		        {% if tags %}
+		        
+		        
+		        {% if group.media_tag_object.topics %}
 			        <div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
 			            <ul class="media-list">
 			                <li class="media">
 			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
 			                    {% comment %}  
 			                    <a class="pull-left" href="#">
-			                        <i class="fa fa-bolt"></i>
+			                        <i class="fa fa-lightbulb-o"></i>
 			                    </a>
 			                    {% endcomment %}
 			                    <div class="media-body">
-			                        {% trans "Activities and interests" %}
+			                        {% trans "Topics we are involved with" %}
 			                    </div>
 			                </li>
 			            </ul>
 			        </div><!-- btn -->
 			        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
-					    <p class="">
-				        	{% for tag in tags %}
-							    {% if not forloop.first %}, {% endif %}
-							    {{ tag }}
-						    {% endfor %}
-				    	</p>
+			            <p>
+				            {% for topic in group.media_tag_object.get_topics %}
+					            <a href="#">{{ topic }}</a>
+					        {% endfor %}
+				        </p>
 			        </div><!-- content-box -->
 				{% endif %}
-			{% endwith %}
-			
+		        
+		        
+		        {% with tags=group.media_tag_object.tags.all %}
+			        {% if tags %}
+				        <div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+				            <ul class="media-list">
+				                <li class="media">
+				                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+				                    {% comment %}  
+				                    <a class="pull-left" href="#">
+				                        <i class="fa fa-bolt"></i>
+				                    </a>
+				                    {% endcomment %}
+				                    <div class="media-body">
+				                        {% trans "Activities and interests" %}
+				                    </div>
+				                </li>
+				            </ul>
+				        </div><!-- btn -->
+				        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
+						    <p class="">
+					        	{% for tag in tags %}
+								    {% if not forloop.first %}, {% endif %}
+								    {{ tag }}
+							    {% endfor %}
+					    	</p>
+				        </div><!-- content-box -->
+					{% endif %}
+				{% endwith %}
+				
+			{% endblock microsite_left_column %}
 		</div>
+		
+		
 		<div class="col-sm-4 col-md-6">
 			<div class="row">
 				<div class="col-md-4 col-md-push-8">
 					
-			        <div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
-			            <ul class="media-list">
-			                <li class="media">
-			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
-			                    {% comment %}  
-			                    <a class="pull-left" href="#">
-			                        <i class="fa fa-user"></i>
-			                    </a>
-			                    {% endcomment %}
-			                    <div class="media-body">
-			                        {% trans "Location" %}
-			                    </div>
-			                </li>
-			            </ul>
-			        </div><!-- btn -->
-			        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
-			            
-				    {% for group_location in group.locations.all %}
-			        	<p><i class="fa fa-fw fa-map-marker"></i> <a href="{{ group_location.location_url }}" target="_blank">{{ group_location.location }}</a></p>
-					{% empty %}
-						<p>({% trans "No Location set" %})</p>
-					{% endfor %}
-			        </div><!-- content-box -->
+					{% block microsite_right_column %}
+				        <div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+				            <ul class="media-list">
+				                <li class="media">
+				                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+				                    {% comment %}  
+				                    <a class="pull-left" href="#">
+				                        <i class="fa fa-user"></i>
+				                    </a>
+				                    {% endcomment %}
+				                    <div class="media-body">
+				                        {% trans "Location" %}
+				                    </div>
+				                </li>
+				            </ul>
+				        </div><!-- btn -->
+				        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
+						    {% for group_location in group.locations.all %}
+					        	<p><i class="fa fa-fw fa-map-marker"></i> <a href="{{ group_location.location_url }}" target="_blank">{{ group_location.location }}</a></p>
+							{% empty %}
+								<p>({% trans "No Location set" %})</p>
+							{% endfor %}
+				        </div><!-- content-box -->
+					{% endblock microsite_right_column %}
 					
 				</div>
 				<div class="col-md-8 col-md-pull-4">
 					
+					{% block microsite_middle_column %}
 			        <div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
 			            <ul class="media-list">
 			                <li class="media">
@@ -435,13 +446,13 @@
 				    	{% endif %}
 			        	
 			        </div><!-- content-box -->
-			        
+			        {% endblock microsite_middle_column %}
 					
 				</div>
 			</div>
 		</div>
 	</div>
-	
+	{% endblock microsite_content %}
 	
     
 
