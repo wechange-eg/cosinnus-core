@@ -110,20 +110,22 @@
 			            </ul>
 			        </div><!-- btn -->
 			        <div class="content-box large-space">
-			            {% if profile.description %} 
-			            <p class="transparent">
-			                {{ profile.description|textfield }}
-			            </p>
-			            {% endif %}
-			            
-			            {% include "cosinnus/media_tags_userprofile_readonly.html" with object=profile %}
-			            
-			            {% if profile.website %}
-			            <legend>{% trans "My Website" %}</legend>
-			            <p class="transparent">
-			                <i class="fa fa-globe"></i> <a href="{{ profile.website }}" target="_blank">{{ profile.website }}</a>
-			            </p>
-			            {% endif %}
+			        	{% block userprofile_content %}
+				            {% if profile.description %} 
+				            <p class="transparent">
+				                {{ profile.description|textfield }}
+				            </p>
+				            {% endif %}
+				            
+				            {% if profile.website %}
+				            <legend>{% trans "My Website" %}</legend>
+				            <p class="transparent">
+				                <i class="fa fa-globe"></i> <a href="{{ profile.website }}" target="_blank">{{ profile.website }}</a>
+				            </p>
+				            {% endif %}
+				            
+				            {% include "cosinnus/media_tags_userprofile_readonly.html" with object=profile %}
+			            {% endblock userprofile_content %}
 			        </div><!-- content-box -->
 			    </div><!-- column -->
 			
