@@ -8,8 +8,8 @@ from django.conf import settings
 
 from cosinnus.core.registries.widgets import widget_registry
 from cosinnus.models.widget import WidgetConfig
-from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
-    MEMBERSHIP_MEMBER
+from cosinnus.models.group import CosinnusGroupMembership, MEMBERSHIP_MEMBER
+from cosinnus.utils.group import get_cosinnus_group_model
 
 logger = logging.getLogger('cosinnus')
 
@@ -35,6 +35,7 @@ def ensure_user_to_default_portal_groups(sender, created, **kwargs):
     """ Whenever a portal membership changes, make sure the user is in the default groups for this Portal """
     try:
         membership = kwargs.get('instance')
+        CosinnusGroup = get_cosinnus_group_model()
         for group_slug in getattr(settings, 'NEWW_DEFAULT_USER_GROUPS', []):
             try:
                 group = CosinnusGroup.objects.get(slug=group_slug, portal_id=membership.group.id)
