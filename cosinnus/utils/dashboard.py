@@ -23,6 +23,7 @@ from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.core.signals import group_object_ceated, userprofile_ceated
 from django.dispatch.dispatcher import receiver
 from cosinnus.core.registries.widgets import widget_registry
+from cosinnus.models.profile import get_user_profile_model
 
 
 
@@ -232,10 +233,12 @@ class GroupMembersWidget(DashboardWidget):
         admin_ids = CosinnusGroupMembership.objects.get_admins(group=group)
         member_ids = CosinnusGroupMembership.objects.get_members(group=group)
         all_ids = set(admin_ids + member_ids)
+        
+        userprofile_table = get_user_profile_model()._meta.db_table
         qs = get_user_model()._default_manager.filter(is_active=True) \
             .select_related('cosinnus_profile') \
             .extra(select={
-                'has_avatar': 'LENGTH(%s.avatar) > 0' % settings.COSINNUS_USER_PROFILE_MODEL.lower().replace('.', '_')
+                'has_avatar': 'LENGTH(%s.avatar) > 0' % userprofile_table
             }) \
             .order_by('-has_avatar', 'first_name', 'last_name') 
         qs = qs.filter(id__in=all_ids)
