@@ -945,8 +945,19 @@
             var markers = [];
             // mapdata is a global var set directly in HTML
             $(mapData).each(function(id,marker) {
+                var markerOptions = {};
+                if (marker.avatar) {
+                    var markerIcon = L.icon({
+                        iconUrl: marker.avatar,
+                        iconSize:     [40, 40], // size of the icon
+                        iconAnchor:   [20, 40], // point of the icon which will correspond to marker's location
+                        popupAnchor:  [0, -40] // point from which the popup should open relative to the iconAnchor
+                    });
+
+                    markerOptions.icon = markerIcon;
+                }
                 var marker = L
-                    .marker([marker.lat, marker.lon])
+                    .marker([marker.lat, marker.lon], markerOptions)
                     .bindPopup(marker.title)
                     .addTo(map);
                 markers.push(marker);

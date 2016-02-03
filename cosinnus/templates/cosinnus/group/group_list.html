@@ -1,5 +1,5 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n cosinnus_tags static %}
+{% load i18n thumbnail cosinnus_tags static %}
 
 {% block page_title %}{% if group_type == 1 %}{% trans "Societies" %}{% else %}{% trans "Projects" %}{% endif %}{% endblock %}
 
@@ -42,7 +42,7 @@
                 {% for group, members, pendings, admins in rows %}
                 	{% for group_location in group.locations.all %}
 	                    {% if group_location.location and group_location.location_lat and group_location.location_lon %}
-	                        {lat: {{ group_location.location_lat|stringformat:"f" }}, lon: {{ group_location.location_lon|stringformat:"f" }}, title: '<a href="{{ group.get_absolute_url }}">{{ group.name }}</a><br/><span>{{ group_location.location }}</span>'},
+	                        {lat: {{ group_location.location_lat|stringformat:"f" }}, lon: {{ group_location.location_lon|stringformat:"f" }}, title: '<a href="{{ group.get_absolute_url }}">{{ group.name }}</a><br/><span>{{ group_location.location }}</span>'{% if group.avatar %}, avatar: "{% thumbnail group.avatar 40x40 crop=1 upscale=1 %}"{% endif %}},
 	                    {% endif %}
 	                {% endfor %}
 		        {% endfor %}
