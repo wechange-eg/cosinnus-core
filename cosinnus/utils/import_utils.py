@@ -114,7 +114,7 @@ class GroupCSVImporter(Thread):
         # sanity check if all mapped aliases appear in CSV header
         missing_aliases = [alias for alias in self.ALIAS_MAP.values() if alias not in column_map.keys()]
         if missing_aliases:
-            raise ImproperlyConfigured('The GroupCSVImporter was configured to access CSV columns [%s], but they were not found in the CSV header row!' % ', '.join(iterable))
+            raise ImproperlyConfigured('The GroupCSVImporter was configured to access CSV columns [%s], but they were not found in the CSV header row!' % ', '.join(missing_aliases))
         return column_map
     
     def get(self, internal_column_alias, ignore_errors=False):

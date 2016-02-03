@@ -25,6 +25,7 @@ import logging
 from django.core.cache import cache
 from cosinnus.utils.permissions import check_user_portal_admin
 from django.http.response import HttpResponseForbidden
+from django.core.exceptions import ImproperlyConfigured
 logger = logging.getLogger('cosinnus')
 
 
@@ -136,6 +137,8 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
                         messages.error(request, _('The CSV file you supplied contained a different number columns than expected (%s)! Either the file was read in a wrong encoding, or the file was using a different format than the server expected.' % str(e)))
                     except ImportAlreadyRunning:
                         messages.error(request, _('Another import is currently running! Please wait till that one is finished.'))
+                    except ImproperlyConfigured, e:
+                        messages.error(request, _('A CSV configuration error occured, has the CSV format changed?. Message was: %s') % str(e))
                     except Exception, e:
                         messages.error(request, _('There was an unexpected error when reading the CSV file! Please make sure the file is properly formatted. If the problem persists, please contact an administrator!'))
                         logger.warn('A CSV file uploaded for import encountered an unexpected error! The exception was: "%s"' % str(e), extra={'encoding_used': encoding, 'delimiter_used': delimiter})
