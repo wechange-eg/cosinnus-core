@@ -9,6 +9,7 @@ from cosinnus.models.group import (CosinnusGroupMembership,
     MEMBERSHIP_MEMBER, CosinnusPortal,
     CosinnusLocation)
 from cosinnus.core.registries.apps import app_registry
+from cosinnus.conf import settings
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 
 
@@ -51,8 +52,9 @@ class _CosinnusProjectForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, forms.
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
     
     class Meta:
-        fields = ('name', 'public', 'description', 'description_long', 'contact_info', 
-                    'avatar', 'wallpaper', 'parent', 'website', 'deactivated_apps')
+        fields = ['name', 'public', 'description', 'description_long', 'contact_info', 
+                          'avatar', 'wallpaper', 'parent', 'website', 'deactivated_apps'] \
+                          + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) 
         model = CosinnusProject
     
     def __init__(self, instance, *args, **kwargs):    
@@ -65,8 +67,9 @@ class _CosinnusSocietyForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, forms.
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
     
     class Meta:
-        fields = ('name', 'public', 'description', 'description_long', 'contact_info', 
-                    'avatar', 'wallpaper', 'website', 'deactivated_apps')
+        fields = ['name', 'public', 'description', 'description_long', 'contact_info', 
+                        'avatar', 'wallpaper', 'website', 'deactivated_apps'] \
+                        + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) 
         model = CosinnusSociety
         
 
