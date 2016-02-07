@@ -153,6 +153,9 @@ class CosinnusConf(AppConf):
     # group wallpaper max size
     GROUP_WALLPAPER_MAXIMUM_SIZE_SCALE = (1140, 240) 
     
+    # additional fields for a possibly extended group form
+    GROUP_ADDITIONAL_FORM_FIELDS = []
+    
     # this is the thumbnail size for small image previews
     IMAGE_THUMBNAIL_SIZE_SCALE = (80, 80)
     
@@ -229,7 +232,10 @@ class CosinnusConf(AppConf):
     
     # the duration of the user stream (must be very short, otherwise notifications will not appear)
     STREAM_SHORT_CACHE_TIMEOUT = 30
-
+    
+    # additional skip fields for a possibly extended cosinnus user profile
+    USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS = []
+    
     #: A pointer to the swappable cosinnus user profile model
     USER_PROFILE_MODEL = 'cosinnus.UserProfile'
 

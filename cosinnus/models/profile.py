@@ -16,6 +16,7 @@ from easy_thumbnails.exceptions import InvalidImageFormatError
 from jsonfield import JSONField
 
 from cosinnus.conf import settings
+from cosinnus.conf import settings as cosinnus_settings
 from cosinnus.utils.files import get_avatar_filename
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.urls import group_aware_reverse
@@ -89,7 +90,8 @@ class BaseUserProfile(models.Model):
 
     objects = BaseUserProfileManager()
 
-    SKIP_FIELDS = ('id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings')
+    SKIP_FIELDS = ['id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings']\
+                    + getattr(cosinnus_settings, 'COSINNUS_USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS', [])
 
     class Meta:
         abstract = True
