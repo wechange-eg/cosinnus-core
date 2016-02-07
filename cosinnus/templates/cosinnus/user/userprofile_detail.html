@@ -25,7 +25,7 @@
 			        {% include "cosinnus/user/user_avatar_image.html" with user=this_user extra_classes="w100" %}
 			    </div>
 			    <div class="col-sm-9 bottom-align large-space">
-			        <legend class="large-space">{{ this_user|full_name }}</legend>
+			        <legend class="large-space">{{ this_user.cosinnus_profile.get_extended_full_name }}</legend>
 			
 			        {% if request.user.is_authenticated and request.user == this_user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
 			            <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:profile-edit' %}">

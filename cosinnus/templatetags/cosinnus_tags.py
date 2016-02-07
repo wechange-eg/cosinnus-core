@@ -140,7 +140,12 @@ def full_name(value):
     if isinstance(value, AbstractBaseUser):
         if not value.is_active:
             return _("(Deleted User)")
-        return value.get_full_name() or value.get_username()
+        # adding support for overriden cosinnus profile models
+        if hasattr(value, 'cosinnus_profile'):
+            profile_full_name = value.cosinnus_profile.get_full_name()
+        else:
+            profile_full_name = None
+        return profile_full_name or value.get_full_name() or value.get_username()
     return ""
 
 @register.filter

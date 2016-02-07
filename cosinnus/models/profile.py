@@ -98,7 +98,14 @@ class BaseUserProfile(models.Model):
 
     def __str__(self):
         return six.text_type(self.user)
-
+    
+    def get_full_name(self):
+        return self.user.get_full_name()
+    
+    def get_extended_full_name(self):
+        """ Stub extended username, including possible titles, middle names, etc """
+        return self.get_full_name()
+    
     def save(self, *args, **kwargs):
         created = bool(self.pk is None)
         # sanity check for missing media_tag:
