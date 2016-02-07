@@ -69,6 +69,9 @@
                                 </div>
                             </div>
                         </div><!-- row -->
+                        
+                        {% block additional_user_info %}
+                        {% endblock additional_user_info %}
 
 
                         <div type="button" class="btn btn-default w100 regular-space">
@@ -179,30 +182,31 @@
 		        <!-- On large screens the long explanation texts are on the right side next to the input elements -->
 		        <div class="row">
 		            <div class="col-md-8 regular-space">
-		                
-		                
-                        {% include "cosinnus/media_tags_userprofile.html" %} 
-		
-		                
-                        <label>{% trans "Who are you and what motivates you?" %}</label>
-                        {{ form.forms.obj.description.errors }}
-                        <div type="button" class="btn btn-default w100 regular-space">
-                            <ul class="media-list">
-                                <li class="media">
-                                    <a class="pull-left" href="#">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                    <div class="media-body media-body-form-control">
-                                        {% comment %}  {% render_field form.forms.obj.description  %}{% endcomment %}
-                                        {{ form.forms.obj.description.errors }}
-                                        {% captureas placeholder %}{% trans "Tell others something about you!" %}{% endcaptureas %}
-                                        {% render_field form.forms.obj.description class+="form-control" placeholder=placeholder %}
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-		            
-		            
+                        
+                        {% block userprofile_about_fields %}
+            
+                            {% include "cosinnus/media_tags_userprofile.html" %} 
+                            
+                            <label>{% trans "Who are you and what motivates you?" %}</label>
+                            {{ form.forms.obj.description.errors }}
+                            <div type="button" class="btn btn-default w100 regular-space">
+                                <ul class="media-list">
+                                    <li class="media">
+                                        <a class="pull-left" href="#">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <div class="media-body media-body-form-control">
+                                            {% comment %}  {% render_field form.forms.obj.description  %}{% endcomment %}
+                                            {{ form.forms.obj.description.errors }}
+                                            {% captureas placeholder %}{% trans "Tell others something about you!" %}{% endcaptureas %}
+                                            {% render_field form.forms.obj.description class+="form-control" placeholder=placeholder %}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                       {% endblock userprofile_about_fields %}
+                    
 		            </div><!-- col -->
 		            <div class="col-md-4">
 		                <p class="transparent"><strong>{% trans "Detailed description" %}</strong></p>
