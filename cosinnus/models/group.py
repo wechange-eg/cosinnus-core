@@ -216,6 +216,13 @@ class CosinnusGroupManager(models.Manager):
                 if group is None:
                     # we can only find groups via this function that are in the same portal we run in
                     group = self.get_queryset().filter(portal__id=portal_id, is_active=True).get(slug=slug)
+                    
+                    # attempt to cache the portal along with the group
+                    if portal_id == CosinnusPortal.get_current().id:
+                        group.portal = CosinnusPortal.get_current()
+                    else:
+                        group.portal = group.portal
+                    
                     cache.set(self._GROUP_CACHE_KEY % (portal_id, self.__class__.__name__, group.slug), group,
                         settings.COSINNUS_GROUP_CACHE_TIMEOUT)
                 return group

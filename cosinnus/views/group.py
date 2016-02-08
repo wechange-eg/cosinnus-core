@@ -320,12 +320,11 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
             if self.request.user.is_authenticated():
                 user_pk = self.request.user.pk
                 try:
-                    membership = CosinnusGroupMembership.objects.get(group=group, user__id=user_pk)
-                    if membership.status == MEMBERSHIP_ADMIN:
+                    if user_pk in CosinnusGroupMembership.objects.get_admins(group=group):
                         _admins.append(user_pk)
-                    if membership.status == MEMBERSHIP_MEMBER or membership.status == MEMBERSHIP_ADMIN:
+                    if user_pk in CosinnusGroupMembership.objects.get_members(group=group):
                         _members.append(user_pk)
-                    if membership.status == MEMBERSHIP_PENDING:
+                    if user_pk in CosinnusGroupMembership.objects.get_pendings(group=group):
                         _pendings.append(user_pk)
                 except CosinnusGroupMembership.DoesNotExist:
                     pass
