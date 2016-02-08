@@ -267,8 +267,8 @@ def csv_import_projects(csv_file, request=None, encoding="utf-8", delimiter=b','
         raise EmptyOrUnreadableCSVContent()
     
     import_type = import_type or 'groups'
-    expected_columns = settings.COSINNUS_CSV_IMPORT_TYPE_SETTINGS[import_type]['DEFAULT_EXPECTED_COLUMNS']
     Importer = import_from_settings(path_to_class=settings.COSINNUS_CSV_IMPORT_TYPE_SETTINGS[import_type]['IMPORT_CLASS'])
+    expected_columns = len(Importer.ALIAS_MAP)
     
     # sanity check for expected number of columns, in EACH row
     if expected_columns:
