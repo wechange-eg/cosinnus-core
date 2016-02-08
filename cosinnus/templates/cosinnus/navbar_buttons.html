@@ -5,7 +5,7 @@
 {% include 'cosinnus/navbar_buttons_group_menus.html' %}
 
 {% comment %} Display a link to the blog Group if it exists {% endcomment %}
-{% group_url 'cosinnus:note:list' group=SETTINGS.NEWW_FORUM_GROUP_SLUG ignoreErrors=True as blog_url %}
+{% group_url 'cosinnus:group-dashboard' group=SETTINGS.NEWW_FORUM_GROUP_SLUG ignoreErrors=True as blog_url %}
 {% if blog_url %}
     <li><a href="{{ blog_url }}">{% trans "Forum" %}</a></li>
 {% endif %}
