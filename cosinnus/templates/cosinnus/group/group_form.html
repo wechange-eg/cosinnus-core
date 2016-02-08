@@ -66,25 +66,26 @@
 				{% block group_form_tab_panes %}
 					<div class="tab-pane {% if not SETTINGS.COSINNUS_MICROSITES_ENABLED or not request.GET.tab %}active{% endif %}" id="general">
 						
-						
-					    <div type="button" class="btn btn-default w100 large-space">
-					        <ul class="media-list">
-					            <li class="media">
-					                <a class="pull-left btn-emphasized" href="#">
-					                    {% if object %}
-					                       <i class="fa fa-users"></i>
-					                    {% else %}
-					                       <i class="fa fa-plus"></i>
-					                    {% endif %}
-					                </a>
-					                <div class="media-body media-body-form-control">
-					                    {{ form.forms.obj.name.errors }}
-				                        {% captureas placeholder %}{% if group_model == "CosinnusSociety" %}{% trans "Enter a name for the society." %}{% else %}{% trans "Enter a name for the group." %}{% endif %}{% endcaptureas %}
-				                        {% render_field form.forms.obj.name class+="form-control" placeholder=placeholder %}
-					                </div>
-					            </li>
-					        </ul>
-					    </div>
+						{% block group_form_name_field %}
+						    <div type="button" class="btn btn-default w100 large-space">
+						        <ul class="media-list">
+						            <li class="media">
+						                <a class="pull-left btn-emphasized" href="#">
+						                    {% if object %}
+						                       <i class="fa fa-users"></i>
+						                    {% else %}
+						                       <i class="fa fa-plus"></i>
+						                    {% endif %}
+						                </a>
+						                <div class="media-body media-body-form-control">
+						                    {{ form.forms.obj.name.errors }}
+					                        {% captureas placeholder %}{% if group_model == "CosinnusSociety" %}{% trans "Enter a name for the society." %}{% else %}{% trans "Enter a name for the group." %}{% endif %}{% endcaptureas %}
+					                        {% render_field form.forms.obj.name class+="form-control" placeholder=placeholder %}
+						                </div>
+						            </li>
+						        </ul>
+						    </div>
+					    {% endblock group_form_name_field %}
 					
 					    <fieldset>
 					        <legend>{% trans "Avatar" %}</legend>
@@ -156,23 +157,24 @@
 					        <div class="row">
 					            <div class="col-md-8 regular-space">
 					                
-			                        <label>
-			                        	{% if group_model == "CosinnusSociety" %}{% trans "Describe the society in a few sentences." %}{% else %}{% trans "Describe the group in a few sentences." %}{% endif %}
-			                        </label>
-			                        {{ form.forms.obj.description.errors }}
-			                        <div type="button" class="btn btn-default w100 regular-space">
-			                            <ul class="media-list">
-			                                <li class="media">
-			                                    <a class="pull-left" href="#">
-			                                        <i class="fa fa-pencil"></i>
-			                                    </a>
-			                                    <div class="media-body">
-			                                        {% render_field form.forms.obj.description  %}
-			                                    </div>
-			                                </li>
-			                            </ul>
-			                        </div>
-			                        
+					                {% block group_form_description_field %}
+				                        <label>
+				                        	{% if group_model == "CosinnusSociety" %}{% trans "Describe the society in a few sentences." %}{% else %}{% trans "Describe the group in a few sentences." %}{% endif %}
+				                        </label>
+				                        {{ form.forms.obj.description.errors }}
+				                        <div type="button" class="btn btn-default w100 regular-space">
+				                            <ul class="media-list">
+				                                <li class="media">
+				                                    <a class="pull-left" href="#">
+				                                        <i class="fa fa-pencil"></i>
+				                                    </a>
+				                                    <div class="media-body">
+				                                        {% render_field form.forms.obj.description  %}
+				                                    </div>
+				                                </li>
+				                            </ul>
+				                        </div>
+			                        {% endblock group_form_description_field %}
 			                        
 			                        <label>{% trans "Website" %}</label>
 			                        {{ form.forms.obj.website.errors }}
@@ -318,24 +320,25 @@
 							</div>
 		             	</div>
 						
-						
-	                    <label>
-	                    	{% if group_model == "CosinnusSociety" %}{% trans "Describe the society in a few sentences." %}{% else %}{% trans "Describe the group in a few sentences." %}{% endif %}
-	                    	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
-	                    </label>
-	                    {{ form.forms.obj.description_long.errors }}
-	                    <div type="button" class="btn btn-default w100 regular-space">
-	                        <ul class="media-list">
-	                            <li class="media">
-	                                <a class="pull-left" href="#">
-	                                    <i class="fa fa-pencil"></i>
-	                                </a>
-	                                <div class="media-body">
-	                                    {% render_field form.forms.obj.description_long  %}
-	                                </div>
-	                            </li>
-	                        </ul>
-	                    </div>
+						{% block group_form_microsite_description_field %}
+		                    <label>
+		                    	{% if group_model == "CosinnusSociety" %}{% trans "Describe the society in a few sentences." %}{% else %}{% trans "Describe the group in a few sentences." %}{% endif %}
+		                    	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+		                    </label>
+		                    {{ form.forms.obj.description_long.errors }}
+		                    <div type="button" class="btn btn-default w100 regular-space">
+		                        <ul class="media-list">
+		                            <li class="media">
+		                                <a class="pull-left" href="#">
+		                                    <i class="fa fa-pencil"></i>
+		                                </a>
+		                                <div class="media-body">
+		                                    {% render_field form.forms.obj.description_long  %}
+		                                </div>
+		                            </li>
+		                        </ul>
+		                    </div>
+	                    {% endblock group_form_microsite_description_field %}
 	                    
 	                    <label>
 	                    	{% trans "Contact info. How you can be reached, addresses, social media, etc..." %}
