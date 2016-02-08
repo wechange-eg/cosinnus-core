@@ -624,7 +624,7 @@ class CosinnusBaseGroup(models.Model):
         self._admins = None
         self._members = None
         self._pendings = None
-        self._portal = self.portal
+        self._portal_id = self.portal_id
         self._type = self.type
         self._slug = self.slug
 
@@ -669,12 +669,13 @@ class CosinnusBaseGroup(models.Model):
         # check if a redirect should be created AFTER SAVING!
         display_redirect_created_message = False
         if not created and (\
-                self.portal != self._portal or \
+                self.portal_id != self._portal_id or \
                 self.type != self._type or \
                 self.slug != self._slug):
             # create permanent redirect from old portal to this group
             # group is changing in a ways that would change its URI! 
-            CosinnusPermanentRedirect.create_for_pattern(self._portal, self._type, self._slug, self)
+            old_portal = CosinnusPortal.objects.get(id=self._portal_id)
+            CosinnusPermanentRedirect.create_for_pattern(old_portal, self._type, self._slug, self)
             display_redirect_created_message = True
             slugs.append(self._slug)
             
@@ -683,7 +684,7 @@ class CosinnusBaseGroup(models.Model):
         # force rebuild the pk --> slug cache. otherwise when we query that, this group might not be in it
         self.__class__.objects.get_pks(force=True)
         
-        self._portal = self.portal
+        self._portal_id = self.portal_id
         self._type = self.type
         self._slug = self.slug
         
