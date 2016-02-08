@@ -106,6 +106,9 @@ class CosinnusConf(AppConf):
     
     #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = 60 * 60 * 24
+
+    #: How long a group membership should at most stay in cache until it will be removed
+    GROUP_MEMBERSHIP_CACHE_TIMEOUT = 60 * 60 * 24
     
     # How long a groups list of children should be cached
     GROUP_CHILDREN_CACHE_TIMEOUT = GROUP_CACHE_TIMEOUT

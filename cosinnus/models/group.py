@@ -351,7 +351,7 @@ class CosinnusGroupMembershipManager(models.Manager):
         if uids is None:
             query = self.filter(group_id=group_id).filter_membership_status(status)
             uids = list(query.values_list('user_id', flat=True).all())
-            cache.set(cache_key % (self.model.CACHE_KEY_MODEL, group_id), uids)
+            cache.set(cache_key % (self.model.CACHE_KEY_MODEL, group_id), uids, settings.COSINNUS_GROUP_MEMBERSHIP_CACHE_TIMEOUT)
         return uids
 
     def _get_users_for_multiple_groups(self, group_ids, cache_key, status):
@@ -363,7 +363,7 @@ class CosinnusGroupMembershipManager(models.Manager):
             for group in missing:
                 uids = list(_q._clone().filter(group_id=group).all())
                 users[cache_key % (self.model.CACHE_KEY_MODEL, group)] = uids
-            cache.set_many(users)
+            cache.set_many(users, settings.COSINNUS_GROUP_MEMBERSHIP_CACHE_TIMEOUT)
         return {int(k.split('/')[-1]): v for k, v in six.iteritems(users)}
 
     def get_admins(self, group=None, groups=None):
