@@ -117,6 +117,7 @@ def create_user_integrated(request):
             return HttpResponseBadRequest('You have been doing this too often. Slow down!')
         
         user_email = request.POST.get('user_email', None)
+        existing_username = request.POST.get('existing_username', None)
         # this is actually the hashed password of the remote user
         user_password = request.POST.get('user_password', None)
         if not user_email or not user_password:
@@ -147,13 +148,24 @@ def create_user_integrated(request):
             return HttpResponseBadRequest('Could not create integrated user: Handshake failed!')
         
         # handshake succeeded, either create new user or connect to existing one
-        
-        try:
-            user = USER_MODEL.objects.get(email=user_email)
-            # user already exists for this email
-            # since we trust both servers, we connect the existing user account
-        except USER_MODEL.DoesNotExist:
-            user = None
+        user = None
+        if existing_username:
+            try:
+                user = USER_MODEL.objects.get(username=existing_username)
+                # we had already connected to a useraccount, so take this one 
+                # (the external mail might be different, so do not try to match over that,
+                # as it would switch the user on the cosinnus side!)
+            except USER_MODEL.DoesNotExist:
+                logger.error('Cosinnus integration tried to retrieve a previously connected user, but user with username "%s" could not be found! Aborting user integration!' % existing_username)
+                return HttpResponseBadRequest('Cosinnus integration tried to retrieve a previously connected user, but user with username "%s" could not be found! Aborting user integration!' % existing_username)
+            
+        if not user:
+            try:
+                user = USER_MODEL.objects.get(email=user_email)
+                # user already exists for this email, but wasn't connected
+                # since we trust both servers, we connect the existing user account
+            except USER_MODEL.DoesNotExist:
+                user = None
             
         logger.warn('Finding existing user.', extra={'user':user})
         
@@ -181,17 +193,25 @@ def create_user_integrated(request):
             # set the new user's password's hash to that of the connected user.
             user.password = user_password
             user.save()
-            logger.warn('User saved.', extra={'user': user})
-        
+            logger.warn('Cosinnus integration: User saved.', extra={'user': user})
+        else:
+            # user existed before, update first_name, last_name. 
+            # NEVER update the password to prevent account hijacking through a faked email!
             
-            # if we got an avatar send with the request, save it to the new user's profile
-            if request.FILES and 'avatar' in request.FILES:
-                user.cosinnus_profile.avatar = request.FILES.get('avatar')
-                logger.warn('Avatar saved.', extra={'user': user})
-                
-            # always accept terms of service automatically in integrated portals
-            user.cosinnus_profile.settings['tos_accepted'] = True    
-            user.cosinnus_profile.save()
+            user.first_name = first_name
+            user.last_name = last_name
+            user.save()
+            logger.warn('Cosinnus integration: User names updated.', extra={'user': user})
+            
+        # if we got an avatar sent with the request, always update/save it to the new user's profile
+        if request.FILES and 'avatar' in request.FILES:
+            user.cosinnus_profile.avatar = request.FILES.get('avatar')
+            logger.warn('Cosinnus integration: Avatar saved/updated.', extra={'user': user})
+            
+        # always accept terms of service automatically in integrated portals
+        user.cosinnus_profile.settings['tos_accepted'] = 'true'    
+        user.cosinnus_profile.save()
+        
         # retransmit a hashed version of the hashed password.
         # yes, we double hash the original password. because then the first password hash 
         # is only exposed once, during user creation, and never again after that.
