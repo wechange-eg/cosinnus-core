@@ -25,6 +25,7 @@ from cosinnus.core.registries.group_models import group_model_registry
 
 
 from osm_field.fields import OSMField, LatitudeField, LongitudeField
+from cosinnus.utils.lanugages import MultiLanguageFieldMagicMixin
 
 
 
@@ -41,6 +42,29 @@ class PublicModelMixin(models.Model):
 
     class Meta:
         abstract = True
+
+
+@python_2_unicode_compatible
+class CosinnusBaseCategory(models.Model):
+    
+    class Meta:
+        abstract = True
+    
+    name = models.CharField(_('Name'), max_length=250)
+    name_en = models.CharField(_('Name (EN)'), max_length=250, blank=True, null=True)
+    name_ru = models.CharField(_('Name (RU)'), max_length=250, blank=True, null=True)
+    name_uk = models.CharField(_('Name (UK)'), max_length=250, blank=True, null=True)
+    
+    @property
+    def display_name(self):
+        return self['name']
+    
+    def __str__(self):
+        return '[%s]: %s'  % (self.__class__.__name__, self.display_name)
+
+
+#class CosinnusTopicCategory(MultiLanguageFieldMagicMixin, CosinnusBaseCategory):
+#    pass
 
 
 @python_2_unicode_compatible
@@ -113,7 +137,11 @@ class BaseTagObject(models.Model):
     topics = models.CommaSeparatedIntegerField(_('Topics'), blank=True,
         null=True, max_length=255)  # We cannot at choices here as this would 
                                     # fail validation
-
+    
+#    text_topics = models.ManyToManyField(CosinnusTopicCategory, verbose_name=_('Text Topics'), 
+#        related_name='tagged_objects', blank=True, null=True)
+    
+                                    
     likes = models.PositiveSmallIntegerField(_('Likes'), blank=True, default=0)
     likers = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
         null=True, related_name='likes+')  # no reverse relation on model
@@ -307,7 +335,7 @@ class BaseTaggableObjectModel(models.Model):
         """ Similar to get_absolute_url, this returns the URL for this object's implemented delete view.
             Needs to be set by a specific implementation of BaseTaggableObjectModel """
         raise ImproperlyConfigured("The get_delete_url function must be implemented for model '%s'" % self.__class__)
-    
+
 
 class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
     """
