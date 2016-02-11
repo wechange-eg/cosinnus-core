@@ -1094,12 +1094,10 @@ class CosinnusPermanentRedirect(models.Model):
         group_id_portal = cls.get_group_id_for_pattern(portal, group_type, group_slug) 
         if group_id_portal:
             group_id, portal_id = group_id_portal
-            from cosinnus.core.registries.group_models import group_model_registry # must be lazy!
-            group_cls = group_model_registry.get(group_type)
             try:
-                group = group_cls.objects.get_by_id(id=group_id, portal_id=portal_id)
+                group = CosinnusGroup.objects.get_by_id(id=group_id, portal_id=portal_id)
                 return group
-            except group_cls.DoesNotExist:
+            except CosinnusGroup.DoesNotExist:
                 pass
         return None
     
