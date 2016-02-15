@@ -63,8 +63,8 @@ class CosinnusBaseCategory(models.Model):
         return '%s' % self.display_name
 
 
-#class CosinnusTopicCategory(MultiLanguageFieldMagicMixin, CosinnusBaseCategory):
-#    pass
+class CosinnusTopicCategory(MultiLanguageFieldMagicMixin, CosinnusBaseCategory):
+    pass
 
 
 @python_2_unicode_compatible
@@ -137,9 +137,8 @@ class BaseTagObject(models.Model):
     topics = models.CommaSeparatedIntegerField(_('Topics'), blank=True,
         null=True, max_length=255)  # We cannot at choices here as this would 
                                     # fail validation
-    
-#    text_topics = models.ManyToManyField(CosinnusTopicCategory, verbose_name=_('Text Topics'), 
-#        related_name='tagged_objects', blank=True, null=True)
+    text_topics = models.ManyToManyField(CosinnusTopicCategory, verbose_name=_('Text Topics'), 
+        related_name='tagged_objects', blank=True, null=True)
     
                                     
     likes = models.PositiveSmallIntegerField(_('Likes'), blank=True, default=0)
