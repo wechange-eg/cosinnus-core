@@ -274,8 +274,8 @@ def csv_import_projects(csv_file, request=None, encoding="utf-8", delimiter=b','
     # sanity check for expected number of columns, in EACH row
     if expected_columns:
         expected_columns = int(expected_columns)
-        if any([len(row) != expected_columns for row in rows]):
-            raise UnexpectedNumberOfColumns(str(expected_columns))
+        if any([len(row) < expected_columns for row in rows]):
+            raise UnexpectedNumberOfColumns('%d / %d' % (len(row), expected_columns))
     
     importer = Importer(rows, request=request)
     if importer.is_running():
