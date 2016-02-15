@@ -7,7 +7,7 @@
             <div class="media-body dashboard-appwidget-networkicons">
                 
                 {% for member in members %}
-                    <a href="{{ member|profile_url }}" title="{{member|full_name}}">{% include "cosinnus/user/user_avatar_image.html" with user=member %}</a>
+                    <a href="{{ member|profile_url }}" title="{{member|full_name}}">{% include "cosinnus/user/user_avatar_image.html" with user=member image_size="medium" %}</a>
                 {% endfor %}
                 
                 {% if has_more %}
