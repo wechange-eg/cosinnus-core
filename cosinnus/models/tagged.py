@@ -60,7 +60,7 @@ class CosinnusBaseCategory(models.Model):
         return self['name']
     
     def __str__(self):
-        return '[%s]: %s'  % (self.__class__.__name__, self.display_name)
+        return '%s' % self.display_name
 
 
 #class CosinnusTopicCategory(MultiLanguageFieldMagicMixin, CosinnusBaseCategory):

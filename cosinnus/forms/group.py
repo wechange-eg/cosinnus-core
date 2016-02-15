@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 from django import forms
+from django.forms.widgets import SelectMultiple
+from django_select2.widgets import Select2MultipleWidget
 
 from awesome_avatar import forms as avatar_forms
 
@@ -60,7 +62,11 @@ class _CosinnusProjectForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, forms.
     def __init__(self, instance, *args, **kwargs):    
         super(_CosinnusProjectForm, self).__init__(instance=instance, *args, **kwargs)
         self.fields['parent'].queryset = CosinnusSociety.objects.all_in_portal()
-        
+        # use select2 widgets for m2m fields
+        for field in self.fields.values():
+            if type(field.widget) is SelectMultiple:
+                field.widget = Select2MultipleWidget(choices=field.choices)
+
 
 class _CosinnusSocietyForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, forms.ModelForm):
     
@@ -71,6 +77,13 @@ class _CosinnusSocietyForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, forms.
                         'avatar', 'wallpaper', 'website', 'deactivated_apps'] \
                         + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) 
         model = CosinnusSociety
+    
+    def __init__(self, instance, *args, **kwargs):    
+        super(_CosinnusSocietyForm, self).__init__(instance=instance, *args, **kwargs)
+        # use select2 widgets for m2m fields
+        for field in self.fields.values():
+            if type(field.widget) is SelectMultiple:
+                field.widget = Select2MultipleWidget(choices=field.choices)
         
 
 class MembershipForm(GroupKwargModelFormMixin, forms.ModelForm):
