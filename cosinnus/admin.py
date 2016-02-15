@@ -13,7 +13,7 @@ from cosinnus.models.group import CosinnusGroupMembership,\
     CosinnusGroup, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING,\
     CosinnusPermanentRedirect, MEMBERSHIP_ADMIN
 from cosinnus.models.profile import get_user_profile_model
-from cosinnus.models.tagged import AttachedObject
+from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory
 from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.models.feedback import CosinnusReportedObject
 from cosinnus.utils.dashboard import create_initial_group_widgets
@@ -269,6 +269,12 @@ class UserAdmin(DjangoUserAdmin):
 
 admin.site.unregister(USER_MODEL)
 admin.site.register(USER_MODEL, UserAdmin)
+
+
+class CosinnusTopicCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'name_en', 'name_ru', 'name_uk',)
+
+admin.site.register(CosinnusTopicCategory, CosinnusTopicCategoryAdmin)
 
 
 ## TODO: FIXME: re-enable after 1.8 migration

@@ -25,6 +25,8 @@ from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField
 from cosinnus.utils.choices import get_user_choices
 
 from cosinnus.utils.urls import group_aware_reverse
+from django.forms.widgets import SelectMultiple
+from django_select2.widgets import Select2MultipleWidget
 
 
 TagObject = get_tag_object_model()
@@ -120,6 +122,11 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
         if (self.user and self.instance.pk and
                 self.instance.likers.filter(id=self.user.id).exists()):
             self.fields['like'].initial = True
+        
+        # use select2 widgets for m2m fields
+        for field in [self.fields['text_topics'], ]:
+            if type(field.widget) is SelectMultiple:
+                field.widget = Select2MultipleWidget(choices=field.choices)
             
         
     def save(self, commit=True):
