@@ -37,7 +37,11 @@ def get_user_by_email_safe(email):
         return user
     except MultipleObjectsReturned:
         users = USER_MODEL.objects.filter(email__iexact=email)
-        newest = users.order_by('-last_login', '-date_joined')[0]
+        # if none of the users has logged in, take the newest registered
+        if users.filter(last_login__isnull=False).count() == 1:
+            newest = users.latest('date_joined')
+        else:
+            newest = users.filter(last_login__isnull=False).latest('last_login')
         others = users.exclude(id=newest.id)
         
         newest.email = newest.email.lower()
