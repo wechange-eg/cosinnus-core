@@ -17,6 +17,9 @@ def attach_swappable_dependencies(regular_dependencies):
         This needs to be done to ALL new cosinnus core migrations to enable the swappable
         models to exist in an app that is not cosinnus at a later point.
         
+        This gets rid of the following error when trying to run ``./manage.py migrate``:
+        "ValueError: Lookup failed for model referenced by field <...>"
+        
         To use, wrap your migration's dependency list in this function, as such: 
         
         ``
