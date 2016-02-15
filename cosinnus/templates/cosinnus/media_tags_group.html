@@ -24,7 +24,7 @@ CosinnusGroups now use the group.locations.all foreign key location objects, not
 <div id="id_media_tag-location-map"></div>
 {% endcomment %}
 
-
+{% block media_tag_topics_field %}
 <label>{% trans "Which topics are you involved with?" %}</label>
 <div type="button" class="btn btn-default w100 regular-space">
     <ul class="media-list">
@@ -41,6 +41,8 @@ CosinnusGroups now use the group.locations.all foreign key location objects, not
         </li>
     </ul>
 </div>
+{% endblock media_tag_topics_field %}
+
 {% comment %} Approach hidden for now
 <label>{% trans "Was ist das Haupthandlungsfeld der Gruppe?" %}</label>
 <div type="button" class="btn btn-default w100 regular-space">
