@@ -1639,7 +1639,7 @@ msgstr "Bild wird beim speichern gelöscht."
 
 #: .\templates\cosinnus\group\group_form.html:142
 msgid "A picture for better recognition."
-msgstr "Ein Bild für die schneller Wiedererkennung."
+msgstr "Ein Bild für die schnellere Wiedererkennung."
 
 #: .\templates\cosinnus\group\group_form.html:150
 msgid "Description and Infos"
