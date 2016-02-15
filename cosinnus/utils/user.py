@@ -10,9 +10,51 @@ from cosinnus.core.registries.widgets import widget_registry
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.models.group import CosinnusGroupMembership, MEMBERSHIP_MEMBER
 from cosinnus.utils.group import get_cosinnus_group_model
+from django.contrib.auth import get_user_model
+from django.core.exceptions import MultipleObjectsReturned
 
 logger = logging.getLogger('cosinnus')
 
+USER_MODEL = get_user_model()
+
+
+def get_user_by_email_safe(email):
+    """ Gets a user by email from the DB. Works around the fact that we're using a non-unique email
+        field, but assume it should be unique.
+        
+        This method DOES NOT throw USER_MODEL.DoesNotExist! If no user was found, it returns None instead!
+        
+        If a user with the same 2 (case-insensitive) email addresses is found, we:
+            - keep the user with the most recent login date and lowercase his email-address
+            - set the older users inactive and change their email to '__deduplicate__<old-email>'
+            
+        @return: None if no user was found. A user object if found, even if it had a duplicated email.
+    """
+    if not email:
+        return None
+    try:
+        user = USER_MODEL.objects.get(email__iexact=email)
+        return user
+    except MultipleObjectsReturned:
+        users = USER_MODEL.objects.filter(email__iexact=email)
+        newest = users.order_by('-last_login', '-date_joined')[0]
+        others = users.exclude(id=newest.id)
+        
+        newest.email = newest.email.lower()
+        newest.save()
+        
+        for user in others:
+            user.is_active = False
+            user.email = '__deduplicate__%s' % user.email
+            user.save()
+            
+        # we re-retrieve the newest user here so we can fail early here if something went really wrong
+        return USER_MODEL.objects.get(email__iexact=email)
+    
+    except USER_MODEL.DoesNotExist:
+        return None
+        
+        
 def ensure_user_widget(user, app_name, widget_name, config={}):
     """ Makes sure if a widget exists for the given user, and if not, creates it """
     wqs = WidgetConfig.objects.filter(user_id=user.pk, app_name=app_name, widget_name=widget_name)
