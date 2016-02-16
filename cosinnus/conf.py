@@ -93,6 +93,9 @@ class CosinnusConf(AppConf):
     # the default send_mail sender email
     DEFAULT_FROM_EMAIL = 'noreply@example.com'
     
+    # when etherpad objects are deleted, should the etherpads on the server be deleted as well?
+    DELETE_ETHERPADS_ON_SERVER_ON_DELETE = True
+    
     # files of these mime types will always open within the browser when download is clicked
     FILE_NON_DOWNLOAD_MIMETYPES = ['application/pdf',]
     
