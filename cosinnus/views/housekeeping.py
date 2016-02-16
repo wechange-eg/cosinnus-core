@@ -11,8 +11,8 @@ from cosinnus.views.profile import delete_userprofile
 from cosinnus.utils.group import move_group_content as move_group_content_utils
 from cosinnus.models.widget import WidgetConfig
 from django.core.cache import cache
-from django.utils.encoding import force_text
 from django.conf import settings
+from cosinnus.conf import settings as cosinnus_settings
 import json
 import urllib2
 
@@ -204,3 +204,13 @@ def user_statistics(request=None):
     #group_locs_str = [str(y) for y in group_locs]
     
     return HttpResponse('<br/>'.join(results))# + ' (group)<br/>'.join(group_locs_str))
+
+
+def delete_portal(portal_slug):
+    """ Completely deletes a portal object and all of its groups and all objects assigned to the groups.
+        THen deletes (!) any users who are both no member of any group AND no member of any portal. """
+    # do NOT delete etherpads on the server!
+    settings.COSINNUS_DELETE_ETHERPADS_ON_SERVER_ON_DELETE = False
+    CosinnusPortal.objects.get(slug=portal_slug).delete()
+    get_user_model().objects.filter(cosinnus_memberships__isnull=True).filter(cosinnus_portal_memberships__isnull=True).delete()
+
