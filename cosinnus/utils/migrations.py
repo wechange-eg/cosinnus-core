@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.conf import settings
+from cosinnus.conf import settings
 
 
 def module_exists(module_name):
@@ -37,7 +37,11 @@ def attach_swappable_dependencies(regular_dependencies):
     """
     app_name, __ = settings.COSINNUS_GROUP_OBJECT_MODEL.split('.')
     extra_dependencies = []
-    if module_exists('%s.migrations.0001_initial' % app_name):
+    
+    dependency_target_from_settings = getattr(settings, 'COSINNUS_SWAPPABLE_MIGRATION_DEPENDENCY_TARGET', None)
+    if dependency_target_from_settings:
+        extra_dependencies = [(app_name, dependency_target_from_settings), ]
+    elif module_exists('%s.migrations.0001_initial' % app_name):
         extra_dependencies = [(app_name, '0001_initial'), ]
     
     return extra_dependencies + regular_dependencies

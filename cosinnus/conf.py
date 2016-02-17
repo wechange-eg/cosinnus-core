@@ -224,6 +224,12 @@ class CosinnusConf(AppConf):
     # if set to True, private groups will be shown in group lists, even for non-logged in users
     SHOW_PRIVATE_GROUPS_FOR_ANONYMOUS_USERS = True
     
+    # if the app that includes has swappable models, it needs to either have all swappable definitions
+    # in its initial migration or define a migration from within its app where all swappable models
+    # are loaded
+    # ex.: ``COSINNUS_SWAPPABLE_MIGRATION_DEPENDENCY_TARGET = '0007_auto_add_userprofile_fields'``
+    SWAPPABLE_MIGRATION_DEPENDENCY_TARGET = None
+    
     #: The ModelForm that will be used to modify the :attr:`TAG_OBJECT_MODEL`
     TAG_OBJECT_FORM = 'cosinnus.forms.tagged.TagObjectForm'
 
