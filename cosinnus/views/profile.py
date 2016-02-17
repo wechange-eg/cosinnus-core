@@ -144,10 +144,6 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
         return super(UserProfileUpdateView, self).post(request, *args, **kwargs)
     
     def form_valid(self, form):
-        # security catch to disallow "nobody" privacy values of users
-        if not self.object.media_tag.visibility in [BaseTagObject.VISIBILITY_ALL, BaseTagObject.VISIBILITY_GROUP]:
-            self.object.media_tag.visibility = BaseTagObject.VISIBILITY_ALL
-        
         try:
             ret = super(UserProfileUpdateView, self).form_valid(form)
             messages.success(self.request, self.message_success)

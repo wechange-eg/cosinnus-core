@@ -245,9 +245,19 @@ class GroupMembersWidget(DashboardWidget):
         
         self.member_count = qs.count()
         hidden_member_count = 0
-        # for public groups if user not a member of the group, show only public users in widget
-        if not self.request.user.is_authenticated() or not self.request.user.pk in all_ids:
-            qs = qs.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
+        
+        is_member_of_this_group = self.request.user.pk in all_ids
+        if not self.request.user.is_authenticated():
+            visibility_level = BaseTagObject.VISIBILITY_ALL
+        elif not is_member_of_this_group:
+            visibility_level = BaseTagObject.VISIBILITY_GROUP
+        else:
+            visibility_level = -1
+        
+        # show VISIBILITY_ALL users to anonymous users, VISIBILITY_GROUP to logged in users, 
+        # and all members to group-members
+        if visibility_level != -1:
+            qs = qs.filter(cosinnus_profile__media_tag__visibility__gte=visibility_level)
             hidden_member_count = self.member_count - len(qs)
         
         has_more = len(qs) > offset+count or hidden_member_count > 0

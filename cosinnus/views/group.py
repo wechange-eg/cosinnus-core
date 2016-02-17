@@ -239,19 +239,29 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             filter(id__in=CosinnusPortal.get_current().members)
         
         hidden_members = 0
-        user_count = members.count() + admins.count()
+        user_count = members.count()
+        is_member_of_this_group = self.request.user.pk in admin_ids or self.request.user.pk in member_ids or \
+                 check_user_superuser(self.request.user)
+                 
         # for public groups if user not a member of the group, show only public users in widget
-        if not self.request.user.is_authenticated() or not \
-                (self.request.user.pk in admin_ids or self.request.user.pk in member_ids or \
-                 check_user_superuser(self.request.user)):
+        if not self.request.user.is_authenticated():
+            visibility_level = BaseTagObject.VISIBILITY_ALL
+        elif not is_member_of_this_group:
+            visibility_level = BaseTagObject.VISIBILITY_GROUP
+        else:
+            visibility_level = -1
+        
+        if visibility_level != -1:
             # admins are always visible in this view, because a they should be contactable
-            members = members.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
-            pendings = pendings.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
+            members = members.filter(cosinnus_profile__media_tag__visibility__gte=visibility_level)
+            pendings = pendings.filter(cosinnus_profile__media_tag__visibility__gte=visibility_level)
             # concatenate admins into members, because we might have sorted out a private admin, 
             # and the template iterates only over members to display people
             # members = list(set(chain(members, admins)))
-            
             hidden_members = user_count - members.count()
+        
+        # add admins to user count now, because they are shown even if hidden visibility
+        user_count += admins.count()
         
         # cut off members list to not let the page explode for groups with tons of members
         if not self.request.GET.get('show', '') == 'all':

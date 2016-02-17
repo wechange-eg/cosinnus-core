@@ -81,7 +81,8 @@
             <div class="media-body media-body-form-control">
                 {{ form.forms.media_tag.visibility.errors }}
                 <select id="id_media_tag-visibility" name="media_tag-visibility" class="form-control" placeholder="{% trans "Privacy" %}">
-                    <option default value="1">{% trans "Group Members only" %}</option>
+                    <option value="0" {% if object and object.media_tag and object.media_tag.visibility == 0 %}selected{% endif %}>{% trans "Group Members only" %}</option>
+                    <option default value="1" {% if object and object.media_tag and object.media_tag.visibility == 1 %}selected{% endif %}>{% trans "Logged in Users only" %}</option>
                     <option value="2" {% if object and object.media_tag and object.media_tag.visibility == 2 %}selected{% endif %}>{% trans "Everybody" %}</option>
                 </select>
             </div>
