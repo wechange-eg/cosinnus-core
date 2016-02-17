@@ -41,11 +41,12 @@
 <p class="transparent">
     {% if object.media_tag_object.visibility == 1 %}
         <i class="fa fa-fw fa-user"></i> 
-        {% trans "Group Members only" %}
+        {% trans "Logged in Members only" %}
     {% elif object.media_tag_object.visibility == 2 %}
         <i class="fa fa-fw fa-users"></i> 
         {% trans "Everybody" %}
     {% else %}
-        {% trans "Hidden" %}
+        <i class="fa fa-fw fa-user"></i> 
+        {% trans "Group Members only" %}
     {% endif %}
 </p>
