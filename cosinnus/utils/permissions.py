@@ -140,6 +140,23 @@ def check_group_create_objects_access(group, user):
     is_admin = check_ug_admin(user, group)
     return is_member or is_admin or check_user_superuser(user)
 
+def check_user_can_see_user(user, target_user):
+    """ Checks if ``user`` is in any relation with ``target_user`` so that he can see them and 
+        their profile, and can send him messages, etc. 
+        This depends on the privacy settings of ``target_user`` and on whether they are members 
+        of a same group/project. """
+    visibility = target_user.cosinnus_profile.media_tag.visibility
+    
+    if visibility == BaseTagObject.VISIBILITY_ALL:
+        return True
+    if visibility == BaseTagObject.VISIBILITY_GROUP and user.is_authenticated():
+        return True
+    # in any case, group members of the same project/group can always see each other
+    user_groups = get_cosinnus_group_model().objects.get_for_user_pks(user)
+    target_user_groups = get_cosinnus_group_model().objects.get_for_user_pks(target_user)
+    if any([(user_group_pk in target_user_groups) for user_group_pk in user_groups]):
+        return True
+    return False
 
 def check_user_superuser(user, portal=None):
     """ Main function to determine whether a user has superuser rights to access and change almost
