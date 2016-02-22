@@ -1283,7 +1283,7 @@
                 });
 
             });
-        }
+        },
 
 
         dashboardArrangeInput: function() {
