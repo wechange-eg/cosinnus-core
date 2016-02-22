@@ -123,7 +123,7 @@ def check_object_write_access(obj, user, fields=None):
     elif hasattr(obj, 'creator'):
         return obj.creator == user or check_user_superuser(user)
     elif hasattr(obj, 'grant_extra_write_permissions'):
-        return obj.grant_extra_write_permissions(user, fields=fields)
+        return obj.grant_extra_write_permissions(user, fields=fields) or check_user_superuser(user)
     
     raise Exception("cosinnus.core.permissions: You must either supply a CosinnusGroup " +\
             "or a BaseTaggableObject or an object with a ``creator`` property  " +\
