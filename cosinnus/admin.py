@@ -254,7 +254,7 @@ class GroupMembershipInline(admin.TabularInline):
 class UserAdmin(DjangoUserAdmin):
     inlines = (UserProfileInline, PortalMembershipInline)#, GroupMembershipInline)
     actions = ['deactivate_users']
-    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'is_active')
+    list_display = ('is_active', 'username', 'email', 'first_name', 'last_name', 'is_staff', )
     
     def deactivate_users(self, request, queryset):
         count = 0
@@ -276,6 +276,16 @@ class CosinnusTopicCategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(CosinnusTopicCategory, CosinnusTopicCategoryAdmin)
 
+
+class BaseTaggableAdminMixin(object):
+    """ Base mixin for the common properties for a BaseTaggableObject admin  """
+    list_display = ('title', 'group', 'creator', 'created')
+    list_filter = ('group', 'group__portal', 'title')
+    search_fields = ('title', 'group__title', 'creator__username', 
+         'creator__first_name', 'creator__last_name', 'creator__email')
+
+class BaseHierarchicalTaggableAdminMixin(BaseTaggableAdminMixin):
+    list_display = list(BaseTaggableAdminMixin.list_display) + ['path',]
 
 ## TODO: FIXME: re-enable after 1.8 migration
 #class SpamUserModel(USER_MODEL):
