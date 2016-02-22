@@ -264,6 +264,9 @@ class CosinnusConf(AppConf):
     # when users newly register, are their profiles marked as visible rather than private on the site?
     USER_DEFAULT_VISIBLE_WHEN_CREATED = True
     
+    # should regular, non-admin users be allowed to create Groups as well?
+    # if False, users can only create Projects 
+    USERS_CAN_CREATE_GROUPS = False
     
 
 class CosinnusDefaultSettings(AppConf):
