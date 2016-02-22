@@ -282,6 +282,7 @@ class CosinnusDefaultSettings(AppConf):
     DJAJAX_ALLOWED_ACCESSES = {
         'cosinnus.UserProfile': ('settings', ),
         'cosinnus_todo.TodoEntry': ('priority', 'assigned_to', 'is_completed', 'title', ),
+        'cosinnus_todo.TodoList': ('title', ),
         'cosinnus_etherpad.Etherpad': ('title', ),
         'cosinnus_file.FileEntry': ('title', ),
     }
