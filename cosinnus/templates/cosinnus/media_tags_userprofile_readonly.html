@@ -24,29 +24,29 @@
 	</p>
 {% endif %}
 
-{% for tag in object.media_tag_object.tags.all %}
-    {% if forloop.first %} 
-    <legend>{% trans "What I wish to learn" %}</legend>
-    <p class="transparent">
-        <i class="fa fa-fw fa-bolt"></i> 
+{% with tags=object.media_tag_object.tags.all %}
+    {% if tags %}
+        <legend>{% trans "What I wish to learn" %}</legend>
+        <p class="transparent">
+            <i class="fa fa-fw fa-bolt"></i> 
+            {% for tag in tags %}
+                {{ tag }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
     {% endif %}
-    {% if not forloop.first %}, {% endif %}
-    {{ tag }}
-    {% if forloop.last %}
-    </p>
-    {% endif %}
-{% endfor %}
+{% endwith %}
 
 {% comment %} Faked to 'all' {% endcomment %}
 <legend>{% trans "Visibility" %}</legend>
 <p class="transparent">
     {% if object.media_tag_object.visibility == 1 %}
         <i class="fa fa-fw fa-user"></i> 
-        {% trans "Group Members only" %}
+        {% trans "Logged in Members only" %}
     {% elif object.media_tag_object.visibility == 2 %}
         <i class="fa fa-fw fa-users"></i> 
         {% trans "Everybody" %}
     {% else %}
-        {% trans "Hidden" %}
+        <i class="fa fa-fw fa-user"></i> 
+        {% trans "Group Members only" %}
     {% endif %}
 </p>

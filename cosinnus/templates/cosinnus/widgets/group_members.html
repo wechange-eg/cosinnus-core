@@ -7,11 +7,11 @@
             <div class="media-body dashboard-appwidget-networkicons">
                 
                 {% for member in members %}
-                    <a href="{{ member|profile_url }}" title="{{member|full_name}}">{% include "cosinnus/user/user_avatar_image.html" with user=member %}</a>
+                    <a href="{{ member|profile_url }}" title="{{member|full_name}}">{% include "cosinnus/user/user_avatar_image.html" with user=member image_size="medium" %}</a>
                 {% endfor %}
                 
                 {% if has_more %}
-                    <a href="{% group_url 'cosinnus:group-detail' group=group %}" style="position: relative;">
+                    <a href="{% group_url 'cosinnus:group-detail' group=group %}?show=all" style="position: relative;">
 	                    <img src="{% static 'images/jane-doe.png' %}" />
 	                    <h3 style="position: absolute; top:22px; left:0;" class="w100 text-center">+{{ more_count }}</h3>
                     </a>

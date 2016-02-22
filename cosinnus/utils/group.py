@@ -29,3 +29,33 @@ def move_group_content(from_group, to_group, models=None, verbose=False):
                 print s
             actions_done.append(s)
     return actions_done
+
+
+_CosinnusGroup = None
+
+def get_cosinnus_group_model():
+    """
+    Return the cosinnus tag object model that is defined in
+    :data:`settings.COSINNUS_TAG_OBJECT_MODEL`
+    
+    Also we cache the CosinnusGroupModel to save calling django internals forever.
+    """
+    global _CosinnusGroup
+    if _CosinnusGroup is None:
+        from django.core.exceptions import ImproperlyConfigured
+        #from django.db.models import get_model
+        from django.apps import apps
+        from cosinnus.conf import settings
+    
+        try:
+            app_label, model_name = settings.COSINNUS_GROUP_OBJECT_MODEL.split('.')
+        except ValueError:
+            raise ImproperlyConfigured("COSINNUS_GROUP_OBJECT_MODEL must be of the form 'app_label.model_name'")
+        #tag_model = get_model(app_label, model_name)
+        group_model = apps.get_model(app_label=app_label, model_name=model_name)
+        if group_model is None:
+            raise ImproperlyConfigured("COSINNUS_GROUP_OBJECT_MODEL refers to model '%s' that has not been installed" %
+                settings.COSINNUS_TAG_OBJECT_MODEL)
+        _CosinnusGroup = group_model
+        
+    return _CosinnusGroup   

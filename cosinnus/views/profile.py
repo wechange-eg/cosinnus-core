@@ -12,14 +12,17 @@ from cosinnus.forms.profile import UserProfileForm
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.views.mixins.avatar import AvatarFormMixin
 from django.contrib import messages
-from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.core.exceptions import ObjectDoesNotExist, ValidationError,\
+    PermissionDenied
 from django.http.response import Http404, HttpResponseRedirect
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
 from cosinnus.models.widget import WidgetConfig
 from django.contrib.auth import logout
-from cosinnus.utils.permissions import check_user_integrated_portal_member
+from cosinnus.utils.permissions import check_user_integrated_portal_member,\
+    check_user_can_see_user
 from django.views.generic.edit import DeleteView
+from cosinnus.core.decorators.views import redirect_to_not_logged_in
 
 
 def delete_userprofile(user):
@@ -96,15 +99,28 @@ class UserProfileObjectMixin(SingleObjectMixin):
 class UserProfileDetailView(UserProfileObjectMixin, DetailView):
     template_name = 'cosinnus/user/userprofile_detail.html'
     
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
+        """ Check if the user can access the targeted user profile. """
+        target_user_profile =  self.get_object(self.get_queryset())
+        target_user_visibility = target_user_profile.media_tag.visibility
+        user = request.user
+        # VISIBILITY_ALL users can always be seen, so skip the check
+        if not target_user_visibility == BaseTagObject.VISIBILITY_ALL:
+            # all other views require at least to be logged in
+            if not user.is_authenticated():
+                return redirect_to_not_logged_in(request)
+            if not check_user_can_see_user(user, target_user_profile.user):
+                raise PermissionDenied
+            
         return super(UserProfileDetailView, self).dispatch(
             request, *args, **kwargs)
     
     def get_queryset(self):
-        qs = super(UserProfileDetailView, self).get_queryset()
-        qs = qs.exclude(user__is_active=False)
-        return qs
+        if not getattr(self, 'qs', None):
+            qs = super(UserProfileDetailView, self).get_queryset()
+            qs = qs.exclude(user__is_active=False)
+            self.qs = qs
+        return self.qs
     
     def get_context_data(self, **kwargs):
         context = super(UserProfileDetailView, self).get_context_data(**kwargs)
@@ -144,10 +160,6 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
         return super(UserProfileUpdateView, self).post(request, *args, **kwargs)
     
     def form_valid(self, form):
-        # security catch to disallow "nobody" privacy values of users
-        if not self.object.media_tag.visibility in [BaseTagObject.VISIBILITY_ALL, BaseTagObject.VISIBILITY_GROUP]:
-            self.object.media_tag.visibility = BaseTagObject.VISIBILITY_ALL
-        
         try:
             ret = super(UserProfileUpdateView, self).form_valid(form)
             messages.success(self.request, self.message_success)

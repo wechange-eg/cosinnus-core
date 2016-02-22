@@ -77,6 +77,14 @@ class CosinnusConf(AppConf):
         'cosinnus_etherpad',
         'cosinnus_file',
     ]
+    
+    # CSV Import settings
+    CSV_IMPORT_DEFAULT_ENCODING = 'utf-8'
+    CSV_IMPORT_DEFAULT_DELIMITER = b','
+    CSV_IMPORT_DEFAULT_EXPECTED_COLUMNS = None
+    
+    # the class with the implementation for importing CosinnusGroups used for the CSV import
+    CSV_IMPORT_GROUP_IMPORTER = 'cosinnus.utils.import_utils.GroupCSVImporter'
 
     # These are the default values for the bootstrap3-datetime-picker and
     # are translated in `cosinnus/formats/LOCALE/formats.py`
@@ -93,11 +101,17 @@ class CosinnusConf(AppConf):
     # the default send_mail sender email
     DEFAULT_FROM_EMAIL = 'noreply@example.com'
     
+    # when etherpad objects are deleted, should the etherpads on the server be deleted as well?
+    DELETE_ETHERPADS_ON_SERVER_ON_DELETE = True
+    
     # files of these mime types will always open within the browser when download is clicked
     FILE_NON_DOWNLOAD_MIMETYPES = ['application/pdf',]
     
     #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = 60 * 60 * 24
+
+    #: How long a group membership should at most stay in cache until it will be removed
+    GROUP_MEMBERSHIP_CACHE_TIMEOUT = 60 * 60 * 24
     
     # How long a groups list of children should be cached
     GROUP_CHILDREN_CACHE_TIMEOUT = GROUP_CACHE_TIMEOUT
@@ -145,6 +159,9 @@ class CosinnusConf(AppConf):
     # group wallpaper max size
     GROUP_WALLPAPER_MAXIMUM_SIZE_SCALE = (1140, 240) 
     
+    # additional fields for a possibly extended group form
+    GROUP_ADDITIONAL_FORM_FIELDS = []
+    
     # this is the thumbnail size for small image previews
     IMAGE_THUMBNAIL_SIZE_SCALE = (80, 80)
     
@@ -177,6 +194,10 @@ class CosinnusConf(AppConf):
     #     * special views are active on /integrated/ URLs, enabling cross-site login/logout/user-creation
     IS_INTEGRATED_PORTAL = False
     
+    # can a staff user import CosinnusGroups via a CSV upload in the wagtail admin?
+    # and is the button shown?
+    IMPORT_PROJECTS_PERMITTED = False
+    
     # switch to set if Microsites should be enabled.
     # this can be override for each portal to either activate or deactivate them
     MICROSITES_ENABLED = False
@@ -203,6 +224,12 @@ class CosinnusConf(AppConf):
     # if set to True, private groups will be shown in group lists, even for non-logged in users
     SHOW_PRIVATE_GROUPS_FOR_ANONYMOUS_USERS = True
     
+    # if the app that includes has swappable models, it needs to either have all swappable definitions
+    # in its initial migration or define a migration from within its app where all swappable models
+    # are loaded
+    # ex.: ``COSINNUS_SWAPPABLE_MIGRATION_DEPENDENCY_TARGET = '0007_auto_add_userprofile_fields'``
+    SWAPPABLE_MIGRATION_DEPENDENCY_TARGET = None
+    
     #: The ModelForm that will be used to modify the :attr:`TAG_OBJECT_MODEL`
     TAG_OBJECT_FORM = 'cosinnus.forms.tagged.TagObjectForm'
 
@@ -217,7 +244,10 @@ class CosinnusConf(AppConf):
     
     # the duration of the user stream (must be very short, otherwise notifications will not appear)
     STREAM_SHORT_CACHE_TIMEOUT = 30
-
+    
+    # additional skip fields for a possibly extended cosinnus user profile
+    USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS = []
+    
     #: A pointer to the swappable cosinnus user profile model
     USER_PROFILE_MODEL = 'cosinnus.UserProfile'
 
@@ -234,6 +264,9 @@ class CosinnusConf(AppConf):
     # when users newly register, are their profiles marked as visible rather than private on the site?
     USER_DEFAULT_VISIBLE_WHEN_CREATED = True
     
+    # should regular, non-admin users be allowed to create Groups as well?
+    # if False, users can only create Projects 
+    USERS_CAN_CREATE_GROUPS = False
     
 
 class CosinnusDefaultSettings(AppConf):
@@ -249,6 +282,7 @@ class CosinnusDefaultSettings(AppConf):
     DJAJAX_ALLOWED_ACCESSES = {
         'cosinnus.UserProfile': ('settings', ),
         'cosinnus_todo.TodoEntry': ('priority', 'assigned_to', 'is_completed', 'title', ),
+        'cosinnus_todo.TodoList': ('title', ),
         'cosinnus_etherpad.Etherpad': ('title', ),
         'cosinnus_file.FileEntry': ('title', ),
     }

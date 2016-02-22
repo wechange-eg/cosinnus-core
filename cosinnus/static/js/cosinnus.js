@@ -1234,6 +1234,58 @@
 
             });
         },
+
+        toggleGroup: function() {
+            // Immer genau ein Element aus der Gruppe .togglegroup wird angezeigt. Innerhalb der Elemente gibt es einen Umschalt-Knopf .togglegroup-button
+
+            $('.togglegroup').each(function() {
+                var togglegroup = $(this);
+                var hasactive = false; // is there an active item?
+                togglegroup.find('> *').each(function() {
+                    $(this).addClass('togglegroup-item');
+
+                    if( $(this).hasClass('togglegroup-active')) {
+                        if (hasactive == true) {
+                            // Es gibt schon ein aktives Item, also dieses deaktivieren
+                            $(this).removeClass('togglegroup-active');
+                            return;
+                        }
+                        hasactive = true;
+                    }
+                });
+                if (!hasactive) {
+                    // Add active status to first item
+                    togglegroup.find('> *').first().addClass('togglegroup-active');
+                }
+
+
+                togglegroup.find('> *:not(.togglegroup-active)').each(function() {
+                    // Hide the items that are not active
+                    $(this).hide();
+                });
+
+                togglegroup.find('.togglegroup-button').click(function(e) {
+                    var item = false;
+                    if ($(this).hasClass('togglegroup-item')) {
+                        item = $(this);
+                    } else {
+                        item = $(this).closest('.togglegroup-item');
+                    }
+
+                    item.hide();
+                    if (item.next().length) {
+                        item.next().show();
+                    } else {
+                        item.parent().find('> *').first().show();
+                    }
+
+                    e.preventDefault();
+                });
+
+            });
+        }
+
+
         dashboardArrangeInput: function() {
             $(window).on('dashboardArrangeInputShow', function() {
                 // Alle Widgets mit unsichtbaren Elementen abdecken

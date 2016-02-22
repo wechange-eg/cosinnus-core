@@ -16,10 +16,12 @@ from easy_thumbnails.exceptions import InvalidImageFormatError
 from jsonfield import JSONField
 
 from cosinnus.conf import settings
+from cosinnus.conf import settings as cosinnus_settings
 from cosinnus.utils.files import get_avatar_filename
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.core import signals
+from cosinnus.utils.group import get_cosinnus_group_model
 
 
 class BaseUserProfileManager(models.Manager):
@@ -77,18 +79,41 @@ class BaseUserProfile(models.Model):
     """
     user = models.OneToOneField(settings.AUTH_USER_MODEL, editable=False,
         related_name='cosinnus_profile')
+    
+    avatar = models.ImageField(_("Avatar"), null=True, blank=True,
+        upload_to=get_avatar_filename)
+    description = models.TextField(verbose_name=_('Description'), blank=True, null=True)
+    media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
+        blank=True, null=True, editable=False, on_delete=models.SET_NULL)
+    website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
+    settings = JSONField(default={})
 
     objects = BaseUserProfileManager()
 
-    SKIP_FIELDS = ('id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings')
+    SKIP_FIELDS = ['id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings']\
+                    + getattr(cosinnus_settings, 'COSINNUS_USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS', [])
 
     class Meta:
         abstract = True
 
     def __str__(self):
         return six.text_type(self.user)
-
+    
+    def get_full_name(self):
+        return self.user.get_full_name()
+    
+    def get_extended_full_name(self):
+        """ Stub extended username, including possible titles, middle names, etc """
+        return self.get_full_name()
+    
     def save(self, *args, **kwargs):
+        created = bool(self.pk is None)
+        # sanity check for missing media_tag:
+        if not self.media_tag:
+            from cosinnus.models.tagged import get_tag_object_model
+            media_tag = get_tag_object_model()._default_manager.create()
+            self.media_tag = media_tag
+            
         try:
             existing = self._default_manager.get(user=self.user)
             # workaround for http://goo.gl/4I8Ok
@@ -96,6 +121,10 @@ class BaseUserProfile(models.Model):
         except ObjectDoesNotExist:
             pass
         super(BaseUserProfile, self).save(*args, **kwargs)
+        
+        if created:
+            # send creation signal
+            signals.userprofile_ceated.send(sender=self, profile=self)
 
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:profile-detail', kwargs={'username': self.user.username})
@@ -134,22 +163,8 @@ class BaseUserProfile(models.Model):
     @property
     def cosinnus_groups(self):
         """ Returns all groups this user is a member or admin of """
-        return CosinnusGroup.objects.get_for_user(self.user)
-
-class UserProfile(BaseUserProfile):
+        return get_cosinnus_group_model().objects.get_for_user(self.user)
     
-    class Meta:
-        app_label = 'cosinnus'
-        swappable = 'COSINNUS_USER_PROFILE_MODEL'
-    
-    avatar = models.ImageField(_("Avatar"), null=True, blank=True,
-        upload_to=get_avatar_filename)
-    description = models.TextField(verbose_name=_('Description'), blank=True, null=True)
-    media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
-        blank=True, null=True, editable=False, on_delete=models.SET_NULL)
-    website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
-    settings = JSONField(default={})
-
     @property
     def avatar_url(self):
         return self.avatar.url if self.avatar else None
@@ -181,21 +196,14 @@ class UserProfile(BaseUserProfile):
         if not hasattr(self, key):
             setattr(self, key, self.media_tag)
         return getattr(self, key)
-    
-    def save(self, *args, **kwargs):
-        created = bool(self.pk is None)
-        # sanity check for missing media_tag:
-        if not self.media_tag:
-            from cosinnus.models.tagged import get_tag_object_model
-            media_tag = get_tag_object_model()._default_manager.create()
-            self.media_tag = media_tag
-        super(UserProfile, self).save(*args, **kwargs)
-        
-        if created:
-            # send creation signal
-            signals.userprofile_ceated.send(sender=self, profile=self)
-        
 
+
+class UserProfile(BaseUserProfile):
+    
+    class Meta:
+        app_label = 'cosinnus'
+        swappable = 'COSINNUS_USER_PROFILE_MODEL'
+    
 
 def get_user_profile_model():
     "Return the cosinnus user profile model that is active in this project"

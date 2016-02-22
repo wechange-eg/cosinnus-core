@@ -1,0 +1,43 @@
+{% extends "cosinnus/wagtail/wagtailadmin/custom_admin_base.html" %}
+{% load gravatar static compress i18n %}
+
+{% block titletag %}{% trans "Import Projects and Groups or Users" %}{% endblock %}
+
+{% block branding_welcome %}{% trans "Import Projects and Groups or Users" %}{% endblock %}
+
+{% block sections %}
+	<section>
+	    <h2>{% trans "Import from a CSV File" %}</h2>
+	    
+    	<p>{% trans "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!" %}</p>
+    	
+	    <form action="." method="post" enctype="multipart/form-data">
+    	{% csrf_token %}
+    		<p>
+    			<label for="csv_upload_groups">{% trans "Project/group CSV File" %}</label>
+    			<input id="csv_upload_groups" name="csv_upload_groups" type="file" accept=".csv" />
+    			<label for="csv_upload_users">{% trans "User CSV File" %}</label>
+    			<input id="csv_upload_users" name="csv_upload_users" type="file" accept=".csv" />
+    		</p>
+    		
+    		<fieldset style="border-top: 1px solid #aaa; border-bottom: none; border-left: none; border-right: none; display: block; text-align: right;">
+			    <legend onclick="$('#csv_options').slideDown(500);" style="cursor:pointer; padding: 5px 10px;  clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto;">
+			    	{% trans "Options" %}
+			    	<i class="icon icon-arrow-down"></i>
+		    	</legend>
+			    
+			    <div id="csv_options" style="display: none; cursor: auto;">
+			    	<p style="text-align: left;">{% trans "The default settings for the CSV file. Only change these if you absolutely know what you are doing!" %}</p>
+				    <label for="csv_encoding">{% trans "Encoding of the CSV file" %}</label>
+		    		<input id="csv_encoding" type="text" name="encoding" value="{{ SETTINGS.COSINNUS_CSV_IMPORT_DEFAULT_ENCODING }}"/>
+		    		<label for="csv_delimiter">{% trans "Delimiter of the CSV file" %}</label>
+		    		<input id="csv_delimiter" type="text" name="delimiter" value="{{ SETTINGS.COSINNUS_CSV_IMPORT_DEFAULT_DELIMITER }}"/>
+	    		</div>
+			</fieldset>
+			
+    		<button type="submit" class="button-longrunning">{% trans "Upload and Import..." %}</button>
+    	</form>
+	
+	    
+	</section>
+{% endblock %}

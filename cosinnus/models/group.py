@@ -41,6 +41,7 @@ import shutil
 from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from django.contrib.auth import get_user_model
+from cosinnus.utils.group import get_cosinnus_group_model
 
 logger = logging.getLogger('cosinnus')
 
@@ -81,6 +82,9 @@ def group_name_validator(value):
         _('Enter a valid name. Forward slash is not allowed.'),
         'invalid'
     )(value)
+    
+    
+
 
 
 class CosinnusGroupQS(models.query.QuerySet):
@@ -212,6 +216,13 @@ class CosinnusGroupManager(models.Manager):
                 if group is None:
                     # we can only find groups via this function that are in the same portal we run in
                     group = self.get_queryset().filter(portal__id=portal_id, is_active=True).get(slug=slug)
+                    
+                    # attempt to cache the portal along with the group
+                    if portal_id == CosinnusPortal.get_current().id:
+                        group.portal = CosinnusPortal.get_current()
+                    else:
+                        group.portal = group.portal
+                    
                     cache.set(self._GROUP_CACHE_KEY % (portal_id, self.__class__.__name__, group.slug), group,
                         settings.COSINNUS_GROUP_CACHE_TIMEOUT)
                 return group
@@ -256,7 +267,14 @@ class CosinnusGroupManager(models.Manager):
         """ Returns all groups within the current portal only """
         return self.get_queryset().filter(portal=CosinnusPortal.get_current(), is_active=True)
 
-    def get(self, slug=None, portal_id=None, id=None):
+    def get(self, slug=None, portal_id=None, id=None, *args, **kwargs):
+        # defer original objects.get() to manager
+        if len(kwargs) > 0:
+            if slug: kwargs['slug'] = slug
+            if portal_id: kwargs['portal__id'] = portal_id
+            if id: kwargs['id'] = id
+            return super(CosinnusGroupManager, self).get(*args, **kwargs)
+        # all specific queries are using the cache
         if portal_id is None:
             portal_id = CosinnusPortal.get_current().id
         if id is not None:
@@ -333,7 +351,7 @@ class CosinnusGroupMembershipManager(models.Manager):
         if uids is None:
             query = self.filter(group_id=group_id).filter_membership_status(status)
             uids = list(query.values_list('user_id', flat=True).all())
-            cache.set(cache_key % (self.model.CACHE_KEY_MODEL, group_id), uids)
+            cache.set(cache_key % (self.model.CACHE_KEY_MODEL, group_id), uids, settings.COSINNUS_GROUP_MEMBERSHIP_CACHE_TIMEOUT)
         return uids
 
     def _get_users_for_multiple_groups(self, group_ids, cache_key, status):
@@ -345,7 +363,7 @@ class CosinnusGroupMembershipManager(models.Manager):
             for group in missing:
                 uids = list(_q._clone().filter(group_id=group).all())
                 users[cache_key % (self.model.CACHE_KEY_MODEL, group)] = uids
-            cache.set_many(users)
+            cache.set_many(users, settings.COSINNUS_GROUP_MEMBERSHIP_CACHE_TIMEOUT)
         return {int(k.split('/')[-1]): v for k, v in six.iteritems(users)}
 
     def get_admins(self, group=None, groups=None):
@@ -536,7 +554,7 @@ class CosinnusPortal(models.Model):
         
 
 @python_2_unicode_compatible
-class CosinnusGroup(models.Model):
+class CosinnusBaseGroup(models.Model):
     TYPE_PROJECT = 0
     TYPE_SOCIETY = 1
     
@@ -601,6 +619,7 @@ class CosinnusGroup(models.Model):
     _portal_id = None
     
     class Meta:
+        abstract = True
         app_label = 'cosinnus'
         ordering = ('name',)
         verbose_name = _('Cosinnus group')
@@ -608,11 +627,11 @@ class CosinnusGroup(models.Model):
         unique_together = ('slug', 'portal', )
 
     def __init__(self, *args, **kwargs):
-        super(CosinnusGroup, self).__init__(*args, **kwargs)
+        super(CosinnusBaseGroup, self).__init__(*args, **kwargs)
         self._admins = None
         self._members = None
         self._pendings = None
-        self._portal = self.portal
+        self._portal_id = self.portal_id
         self._type = self.type
         self._slug = self.slug
 
@@ -652,17 +671,18 @@ class CosinnusGroup(models.Model):
             # set portal to current
             self.portal = CosinnusPortal.get_current()
         
-        super(CosinnusGroup, self).save(*args, **kwargs)
+        super(CosinnusBaseGroup, self).save(*args, **kwargs)
         
         # check if a redirect should be created AFTER SAVING!
         display_redirect_created_message = False
         if not created and (\
-                self.portal != self._portal or \
+                self.portal_id != self._portal_id or \
                 self.type != self._type or \
                 self.slug != self._slug):
             # create permanent redirect from old portal to this group
             # group is changing in a ways that would change its URI! 
-            CosinnusPermanentRedirect.create_for_pattern(self._portal, self._type, self._slug, self)
+            old_portal = CosinnusPortal.objects.get(id=self._portal_id)
+            CosinnusPermanentRedirect.create_for_pattern(old_portal, self._type, self._slug, self)
             display_redirect_created_message = True
             slugs.append(self._slug)
             
@@ -671,7 +691,7 @@ class CosinnusGroup(models.Model):
         # force rebuild the pk --> slug cache. otherwise when we query that, this group might not be in it
         self.__class__.objects.get_pks(force=True)
         
-        self._portal = self.portal
+        self._portal_id = self.portal_id
         self._type = self.type
         self._slug = self.slug
         
@@ -686,7 +706,7 @@ class CosinnusGroup(models.Model):
     
     def delete(self, *args, **kwargs):
         self._clear_cache(slug=self.slug)
-        super(CosinnusGroup, self).delete(*args, **kwargs)
+        super(CosinnusBaseGroup, self).delete(*args, **kwargs)
 
     @property
     def admins(self):
@@ -848,6 +868,7 @@ class CosinnusGroup(models.Model):
         return None
     
     def get_children(self, for_parent_id=None):
+        from cosinnus.models.group_extra import CosinnusProject
         """ Returns all CosinnusGroups that have this group as parent.
             @param for_parent_id: If supplied, will get the children for another CosinnusGroup id instead of for this group """
         for_parent_id = for_parent_id or self.id
@@ -865,73 +886,13 @@ class CosinnusGroup(models.Model):
             return []
         parents_children = self.get_children(for_parent_id=self.parent_id)
         return [child for child in parents_children if not child.id == self.id]
+    
 
+class CosinnusGroup(CosinnusBaseGroup):
 
-class CosinnusProjectManager(CosinnusGroupManager):
-    def get_queryset(self):
-        return super(CosinnusProjectManager, self).get_queryset().filter(type=CosinnusGroup.TYPE_PROJECT)
+    class Meta(CosinnusBaseGroup.Meta):
+        swappable = 'COSINNUS_GROUP_OBJECT_MODEL'
 
-    get_query_set = get_queryset
-
-
-@python_2_unicode_compatible
-class CosinnusProject(CosinnusGroup):
-    
-    class Meta:
-        """ For some reason, the Meta isn't inherited automatically from CosinnusGroup here """
-        proxy = True
-        app_label = 'cosinnus'
-        ordering = ('name',)
-        verbose_name = _('Cosinnus project')
-        verbose_name_plural = _('Cosinnus projects')
-    
-    GROUP_MODEL_TYPE = CosinnusGroup.TYPE_PROJECT
-    
-    objects = CosinnusProjectManager()
-    
-    def save(self, allow_type_change=False, *args, **kwargs):
-        if not allow_type_change:
-            self.type = CosinnusGroup.TYPE_PROJECT
-        super(CosinnusProject, self).save(*args, **kwargs)
-        
-    def __str__(self):
-        # FIXME: better caching for .portal.name
-        return '%s (%s)' % (self.name, self.portal.name)
-
-        
-    
-class CosinnusSocietyManager(CosinnusGroupManager):
-    def get_queryset(self):
-        return super(CosinnusSocietyManager, self).get_queryset().filter(type=CosinnusGroup.TYPE_SOCIETY)
-
-    get_query_set = get_queryset
-
-
-@python_2_unicode_compatible
-class CosinnusSociety(CosinnusGroup):
-    
-    class Meta:
-        """ For some reason, the Meta isn't inherited automatically from CosinnusGroup here """
-        proxy = True        
-        app_label = 'cosinnus'
-        ordering = ('name',)
-        verbose_name = _('Cosinnus society')
-        verbose_name_plural = _('Cosinnus societies')
-    
-    GROUP_MODEL_TYPE = CosinnusGroup.TYPE_SOCIETY
-    
-    objects = CosinnusSocietyManager()
-    
-    def save(self, allow_type_change=False, *args, **kwargs):
-        if not allow_type_change:
-            self.type = CosinnusGroup.TYPE_SOCIETY
-        super(CosinnusSociety, self).save(*args, **kwargs)
-    
-    def __str__(self):
-        # FIXME: better caching for .portal.name
-        return '%s (%s)' % (self.name, self.portal.name)
-
-    
 
 @python_2_unicode_compatible
 class BaseGroupMembership(models.Model):
@@ -994,7 +955,7 @@ class BaseGroupMembership(models.Model):
     
     
 class CosinnusGroupMembership(BaseGroupMembership):
-    group = models.ForeignKey(CosinnusGroup, related_name='memberships',
+    group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, related_name='memberships',
         on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
         related_name='cosinnus_memberships', on_delete=models.CASCADE)
@@ -1031,7 +992,7 @@ class CosinnusPermanentRedirect(models.Model):
     from_type = models.CharField(_('From Group Type'), max_length=50)
     from_slug = models.CharField(_('From Slug'), max_length=50)
     
-    to_group = models.ForeignKey(CosinnusGroup, related_name='redirects',
+    to_group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, related_name='redirects',
         on_delete=models.CASCADE, verbose_name=_('Permanent Group Redirects'))
     
     _cache_string = None
@@ -1094,12 +1055,10 @@ class CosinnusPermanentRedirect(models.Model):
         group_id_portal = cls.get_group_id_for_pattern(portal, group_type, group_slug) 
         if group_id_portal:
             group_id, portal_id = group_id_portal
-            from cosinnus.core.registries.group_models import group_model_registry # must be lazy!
-            group_cls = group_model_registry.get(group_type)
             try:
-                group = group_cls.objects.get_by_id(id=group_id, portal_id=portal_id)
+                group = CosinnusGroup.objects.get_by_id(id=group_id, portal_id=portal_id)
                 return group
-            except group_cls.DoesNotExist:
+            except CosinnusGroup.DoesNotExist:
                 pass
         return None
     
@@ -1175,7 +1134,7 @@ class CosinnusLocation(models.Model):
     location_lon = LongitudeField(_('Longitude'), blank=True, null=True)
 
     group = models.ForeignKey(
-        CosinnusGroup,
+        settings.COSINNUS_GROUP_OBJECT_MODEL,
         verbose_name=_('Group'),
         on_delete=models.CASCADE,
         related_name='locations',
@@ -1191,5 +1150,13 @@ class CosinnusLocation(models.Model):
             return None
         return 'http://www.openstreetmap.org/?mlat=%s&mlon=%s&zoom=15&layers=M' % (self.location_lat, self.location_lon)
 
-    
-    
+
+
+def replace_swapped_group_model():
+    """ Permanently replace cosinnus.models.CosinnusGroup with the final Swapped-in Model
+        
+        We replace the final swapped object into the class objects here, so
+        late imports of CosinnusGroup always get the correct model, even if they are ignorant of get_cosinnus_group_model()
+    """
+    global CosinnusGroup
+    CosinnusGroup = get_cosinnus_group_model()

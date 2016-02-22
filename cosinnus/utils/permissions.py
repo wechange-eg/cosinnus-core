@@ -3,12 +3,13 @@ from __future__ import unicode_literals
 
 from django.db.models import Q
 
-from cosinnus.models.group import CosinnusGroup, CosinnusPortal
+from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject,\
     BaseHierarchicalTaggableObjectModel
 from cosinnus.models.profile import BaseUserProfile
 from uuid import uuid1
 from django.conf import settings
+from cosinnus.utils.group import get_cosinnus_group_model
 
 
 def check_ug_admin(user, group):
@@ -50,7 +51,7 @@ def check_object_read_access(obj, user):
             or the group is public.
     """
     # check what kind of object was supplied (CosinnusGroup or BaseTaggableObject)
-    if type(obj) is CosinnusGroup or issubclass(obj.__class__, CosinnusGroup):
+    if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
         group = obj
         is_member = check_ug_membership(user, group)
         is_admin = check_ug_admin(user, group) 
@@ -100,7 +101,7 @@ def check_object_write_access(obj, user, fields=None):
         
     """
     # check what kind of object was supplied (CosinnusGroup or BaseTaggableObject)
-    if type(obj) is CosinnusGroup or issubclass(obj.__class__, CosinnusGroup):
+    if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
         is_admin = check_ug_admin(user, obj)
         return is_admin or check_user_superuser(user)
     elif issubclass(obj.__class__, BaseTaggableObjectModel):
@@ -122,7 +123,7 @@ def check_object_write_access(obj, user, fields=None):
     elif hasattr(obj, 'creator'):
         return obj.creator == user or check_user_superuser(user)
     elif hasattr(obj, 'grant_extra_write_permissions'):
-        return obj.grant_extra_write_permissions(user, fields=fields)
+        return obj.grant_extra_write_permissions(user, fields=fields) or check_user_superuser(user)
     
     raise Exception("cosinnus.core.permissions: You must either supply a CosinnusGroup " +\
             "or a BaseTaggableObject or an object with a ``creator`` property  " +\
@@ -139,6 +140,23 @@ def check_group_create_objects_access(group, user):
     is_admin = check_ug_admin(user, group)
     return is_member or is_admin or check_user_superuser(user)
 
+def check_user_can_see_user(user, target_user):
+    """ Checks if ``user`` is in any relation with ``target_user`` so that he can see them and 
+        their profile, and can send him messages, etc. 
+        This depends on the privacy settings of ``target_user`` and on whether they are members 
+        of a same group/project. """
+    visibility = target_user.cosinnus_profile.media_tag.visibility
+    
+    if visibility == BaseTagObject.VISIBILITY_ALL:
+        return True
+    if visibility == BaseTagObject.VISIBILITY_GROUP and user.is_authenticated():
+        return True
+    # in any case, group members of the same project/group can always see each other
+    user_groups = get_cosinnus_group_model().objects.get_for_user_pks(user)
+    target_user_groups = get_cosinnus_group_model().objects.get_for_user_pks(target_user)
+    if any([(user_group_pk in target_user_groups) for user_group_pk in user_groups]):
+        return True
+    return False
 
 def check_user_superuser(user, portal=None):
     """ Main function to determine whether a user has superuser rights to access and change almost
@@ -182,7 +200,7 @@ def filter_tagged_object_queryset_for_user(qs, user):
     q = Q(media_tag__isnull=True) # get all objects that don't have a media_tag (folders for example)
     q |= Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)  # All public tagged objects
     if user.is_authenticated():
-        gids = CosinnusGroup.objects.get_for_user_pks(user)
+        gids = get_cosinnus_group_model().objects.get_for_user_pks(user)
         q |= Q(  # all tagged objects in groups the user is a member of
             media_tag__visibility=BaseTagObject.VISIBILITY_GROUP,
             group_id__in=gids

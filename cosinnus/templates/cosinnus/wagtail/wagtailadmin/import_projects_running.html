@@ -1,0 +1,28 @@
+{% extends "cosinnus/wagtail/wagtailadmin/custom_admin_base.html" %}
+{% load gravatar static compress i18n %}
+
+{% block css %}
+	{{ block.super }}
+	<meta http-equiv="refresh" content="6" />
+{% endblock %}
+
+{% block titletag %}{% trans "Import Projects and Groups or Users" %}{% endblock %}
+
+{% block branding_welcome %}{% trans "Import Projects and Groups or Users" %}{% endblock %}
+
+{% block sections %}
+	<section>
+	    <h2>{% trans "Import from a CSV File" %}</h2>
+	    
+		<p>{% trans "The CSV file was read successfully and the import is currently running on the server!" %}</p>
+		<p>
+			{% blocktrans with email=request.user.email %}This page will show the results when the import is finished.
+		
+				Depending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>"{{ email }}"</b> as soon as the import finishes!
+			{% endblocktrans %}
+		</p>
+		<h3>{% trans "Progress:" %} {{ import_progress }}% <span class="icon icon-spinner"></span></h3>
+		
+	    
+	</section>
+{% endblock %}

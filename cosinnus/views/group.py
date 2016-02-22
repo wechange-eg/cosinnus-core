@@ -20,8 +20,8 @@ from cosinnus.core.decorators.views import membership_required, redirect_to_403,
 from cosinnus.core.registries import app_registry
 from cosinnus.forms.group import MembershipForm, CosinnusLocationForm
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
-    MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, CosinnusProject,
-    CosinnusSociety, CosinnusPortal, CosinnusLocation)
+    MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, CosinnusPortal, CosinnusLocation)
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.serializers.group import GroupSimpleSerializer
 from cosinnus.models.serializers.profile import UserSimpleSerializer
 from cosinnus.utils.compat import atomic
@@ -85,7 +85,7 @@ class CosinnusGroupFormMixin(object):
         self.group_form_class = form_class
         
         # special check: only portal admins can create groups
-        if self.form_view == 'add' and model_class == CosinnusSociety:
+        if not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False) and self.form_view == 'add' and model_class == CosinnusSociety:
             if not (self.request.user.id in CosinnusPortal.get_current().admins or check_user_superuser(self.request.user)):
                 messages.warning(self.request, _('Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators.'))
                 return redirect(reverse('cosinnus:portal-admin-list'))
@@ -239,19 +239,29 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             filter(id__in=CosinnusPortal.get_current().members)
         
         hidden_members = 0
-        user_count = members.count() + admins.count()
+        user_count = members.count()
+        is_member_of_this_group = self.request.user.pk in admin_ids or self.request.user.pk in member_ids or \
+                 check_user_superuser(self.request.user)
+                 
         # for public groups if user not a member of the group, show only public users in widget
-        if not self.request.user.is_authenticated() or not \
-                (self.request.user.pk in admin_ids or self.request.user.pk in member_ids or \
-                 check_user_superuser(self.request.user)):
+        if not self.request.user.is_authenticated():
+            visibility_level = BaseTagObject.VISIBILITY_ALL
+        elif not is_member_of_this_group:
+            visibility_level = BaseTagObject.VISIBILITY_GROUP
+        else:
+            visibility_level = -1
+        
+        if visibility_level != -1:
             # admins are always visible in this view, because a they should be contactable
-            members = members.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
-            pendings = pendings.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
+            members = members.filter(cosinnus_profile__media_tag__visibility__gte=visibility_level)
+            pendings = pendings.filter(cosinnus_profile__media_tag__visibility__gte=visibility_level)
             # concatenate admins into members, because we might have sorted out a private admin, 
             # and the template iterates only over members to display people
             # members = list(set(chain(members, admins)))
-            
             hidden_members = user_count - members.count()
+        
+        # add admins to user count now, because they are shown even if hidden visibility
+        user_count += admins.count()
         
         # cut off members list to not let the page explode for groups with tons of members
         if not self.request.GET.get('show', '') == 'all':
@@ -320,12 +330,11 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
             if self.request.user.is_authenticated():
                 user_pk = self.request.user.pk
                 try:
-                    membership = CosinnusGroupMembership.objects.get(group=group, user__id=user_pk)
-                    if membership.status == MEMBERSHIP_ADMIN:
+                    if user_pk in CosinnusGroupMembership.objects.get_admins(group=group):
                         _admins.append(user_pk)
-                    if membership.status == MEMBERSHIP_MEMBER or membership.status == MEMBERSHIP_ADMIN:
+                    if user_pk in CosinnusGroupMembership.objects.get_members(group=group):
                         _members.append(user_pk)
-                    if membership.status == MEMBERSHIP_PENDING:
+                    if user_pk in CosinnusGroupMembership.objects.get_pendings(group=group):
                         _pendings.append(user_pk)
                 except CosinnusGroupMembership.DoesNotExist:
                     pass

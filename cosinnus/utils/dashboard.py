@@ -23,6 +23,7 @@ from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.core.signals import group_object_ceated, userprofile_ceated
 from django.dispatch.dispatcher import receiver
 from cosinnus.core.registries.widgets import widget_registry
+from cosinnus.models.profile import get_user_profile_model
 
 
 
@@ -232,19 +233,31 @@ class GroupMembersWidget(DashboardWidget):
         admin_ids = CosinnusGroupMembership.objects.get_admins(group=group)
         member_ids = CosinnusGroupMembership.objects.get_members(group=group)
         all_ids = set(admin_ids + member_ids)
+        
+        userprofile_table = get_user_profile_model()._meta.db_table
         qs = get_user_model()._default_manager.filter(is_active=True) \
             .select_related('cosinnus_profile') \
             .extra(select={
-                'has_avatar': 'LENGTH(%s.avatar) > 0' % settings.COSINNUS_USER_PROFILE_MODEL.lower().replace('.', '_')
+                'has_avatar': 'LENGTH(%s.avatar) > 0' % userprofile_table
             }) \
             .order_by('-has_avatar', 'first_name', 'last_name') 
         qs = qs.filter(id__in=all_ids)
         
         self.member_count = qs.count()
         hidden_member_count = 0
-        # for public groups if user not a member of the group, show only public users in widget
-        if not self.request.user.is_authenticated() or not self.request.user.pk in all_ids:
-            qs = qs.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
+        
+        is_member_of_this_group = self.request.user.pk in all_ids
+        if not self.request.user.is_authenticated():
+            visibility_level = BaseTagObject.VISIBILITY_ALL
+        elif not is_member_of_this_group:
+            visibility_level = BaseTagObject.VISIBILITY_GROUP
+        else:
+            visibility_level = -1
+        
+        # show VISIBILITY_ALL users to anonymous users, VISIBILITY_GROUP to logged in users, 
+        # and all members to group-members
+        if visibility_level != -1:
+            qs = qs.filter(cosinnus_profile__media_tag__visibility__gte=visibility_level)
             hidden_member_count = self.member_count - len(qs)
         
         has_more = len(qs) > offset+count or hidden_member_count > 0

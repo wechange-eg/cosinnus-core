@@ -339,6 +339,8 @@ COSINNUS_TAG_OBJECT_FORM = 'cosinnus.forms.tagged.TagObjectForm'
 COSINNUS_TAG_OBJECT_MODEL = 'cosinnus.TagObject'
 COSINNUS_TAG_OBJECT_SEARCH_INDEX = 'cosinnus.utils.search.TagObjectIndex'
 
+COSINNUS_GROUP_OBJECT_MODEL = 'cosinnus.CosinnusGroup'
+
 # Microsite
 COSINNUS_MICROSITE_RENDER_EMPTY_APPS = False
 

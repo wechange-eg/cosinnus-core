@@ -1,12 +1,33 @@
 # -*- coding: utf-8 -*-
 
+from django.conf.urls import url
+from django.core.urlresolvers import reverse
 from django.utils.html import format_html
 
-from wagtail.wagtailcore import hooks, fields
+from wagtail.wagtailcore import hooks
 from wagtail.wagtailcore.whitelist import attribute_rule
 from django.conf import settings
 from django.contrib.staticfiles.templatetags.staticfiles import static
-fields
+
+
+from wagtail.wagtailadmin.menu import MenuItem
+
+from django.utils.translation import ugettext_lazy as _
+from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_protect
+from django.contrib import messages
+from cosinnus.utils.import_utils import csv_import_projects,\
+    EmptyOrUnreadableCSVContent, UnexpectedNumberOfColumns,\
+    GROUP_IMPORT_RESULTS_CACHE_KEY, GROUP_IMPORT_RUNNING_CACHE_KEY,\
+    GROUP_IMPORT_PROGRESS_CACHE_KEY, ImportAlreadyRunning
+    
+import logging
+from django.core.cache import cache
+from cosinnus.utils.permissions import check_user_portal_admin
+from django.http.response import HttpResponseForbidden
+from django.core.exceptions import ImproperlyConfigured
+logger = logging.getLogger('cosinnus')
+
 
 @hooks.register('insert_editor_js')
 def enable_source():
@@ -68,4 +89,90 @@ def whitelister_element_rules():
         'sup': allow_all_attributes,
         'ul': allow_all_attributes,
     }
+
+
+if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
     
+    @csrf_protect
+    def import_project_view(request):
+        if not (request.user.is_superuser or check_user_portal_admin(request.user)):
+            return HttpResponseForbidden()
+        
+        debug = '-'
+        import_running = cache.get(GROUP_IMPORT_RUNNING_CACHE_KEY)
+        import_results = cache.get(GROUP_IMPORT_RESULTS_CACHE_KEY)
+            
+        
+        if not import_running and request.method == 'POST':
+            if request.POST.get('trigger_new_import', False):
+                cache.delete(GROUP_IMPORT_RESULTS_CACHE_KEY)
+                return redirect(reverse('import-projects'))
+            elif import_results:
+                messages.success(request, _('An import has just finished. Please click the "Start a new import" button to start a new one!'))
+            else:
+                csv_file_groups = request.FILES.get('csv_upload_groups', None)
+                csv_file_users = request.FILES.get('csv_upload_users', None)
+                
+                if csv_file_groups and csv_file_users:
+                    messages.error(request, _('You uploaded a CSV file for both projects/groups AND users! Please only upload one file to import at a time!'))
+                elif not (csv_file_groups or csv_file_users):
+                    messages.error(request, _('You did not upload a CSV file or something went wrong during the upload!'))
+                else:
+                    csv_file = csv_file_groups or csv_file_users
+                    import_type = 'groups' if csv_file_groups else 'users'
+                    
+                    encoding = request.POST.get('encoding', "utf-8")
+                    delimiter = request.POST.get('delimiter', b',')
+                    delimiter = str(delimiter)[0]
+                    
+                    try:
+                        debug = csv_import_projects(csv_file, request=request, encoding=encoding, delimiter=delimiter, import_type=import_type)
+                        messages.success(request, _('The CSV file was read successfully! You will be notified by email when it completes.'))
+                        import_running = True
+                    except UnicodeDecodeError:
+                        messages.error(request, _('The CSV file you supplied is not formatted in the proper encoding (%s)!' % encoding))
+                    except EmptyOrUnreadableCSVContent:
+                        messages.error(request, _('The CSV file you supplied was empty or not formatted in the proper encoding (%s) or with a wrong delimiter (%s)!' % (encoding, delimiter)))
+                    except UnexpectedNumberOfColumns, e:
+                        messages.error(request, _('One or more rows in the CSV file you supplied contained less columns than expected (%s)! Either the file was read in a wrong encoding, or the file was using a different format than the server expected.' % str(e)))
+                    except ImportAlreadyRunning:
+                        messages.error(request, _('Another import is currently running! Please wait till that one is finished.'))
+                    except ImproperlyConfigured, e:
+                        messages.error(request, _('A CSV configuration error occured, has the CSV format changed?. Message was: %s') % str(e))
+                    except Exception, e:
+                        messages.error(request, _('There was an unexpected error when reading the CSV file! Please make sure the file is properly formatted. If the problem persists, please contact an administrator!'))
+                        logger.warn('A CSV file uploaded for import encountered an unexpected error! The exception was: "%s"' % str(e), extra={'encoding_used': encoding, 'delimiter_used': delimiter})
+                        if getattr(settings, 'DEBUG_LOCAL', False):
+                            raise
+        
+        context = {
+            'site_name': settings.WAGTAIL_SITE_NAME,
+            'panels': [],
+            'user': request.user,
+        }
+        if import_running:
+            import_progress = cache.get(GROUP_IMPORT_PROGRESS_CACHE_KEY, 0)
+            context.update({'import_progress': import_progress})
+            template = "cosinnus/wagtail/wagtailadmin/import_projects_running.html"
+        elif import_results:
+            context.update({'import_results': import_results})
+            template = "cosinnus/wagtail/wagtailadmin/import_projects_results.html"
+        else:
+            template = "cosinnus/wagtail/wagtailadmin/import_projects.html"
+            
+        return render(request, template, context)
+    
+    @hooks.register('register_admin_urls')
+    def urlconf_time():
+        return [
+            url(r'^import_projects/$', import_project_view, name='import-projects' ),
+        ]
+    
+    class ImportProjectsMenutItem(MenuItem): 
+        def is_shown(self, request):
+            return settings.COSINNUS_IMPORT_PROJECTS_PERMITTED
+        
+    @hooks.register('register_admin_menu_item')
+    def register_import_menu_item():
+        return ImportProjectsMenutItem(_('Import'), reverse('import-projects'), classnames='icon icon-plus', order=1005)
+

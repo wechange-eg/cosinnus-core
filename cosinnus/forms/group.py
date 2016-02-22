@@ -2,13 +2,17 @@
 from __future__ import unicode_literals
 
 from django import forms
+from django.forms.widgets import SelectMultiple
+from django_select2.widgets import Select2MultipleWidget
 
 from awesome_avatar import forms as avatar_forms
 
 from cosinnus.models.group import (CosinnusGroupMembership,
-    MEMBERSHIP_MEMBER, CosinnusProject, CosinnusSociety, CosinnusPortal,
+    MEMBERSHIP_MEMBER, CosinnusPortal,
     CosinnusLocation)
 from cosinnus.core.registries.apps import app_registry
+from cosinnus.conf import settings
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 
 
 class GroupKwargModelFormMixin(object):
@@ -50,23 +54,36 @@ class _CosinnusProjectForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, forms.
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
     
     class Meta:
-        fields = ('name', 'public', 'description', 'description_long', 'contact_info', 
-                    'avatar', 'wallpaper', 'parent', 'website', 'deactivated_apps')
+        fields = ['name', 'public', 'description', 'description_long', 'contact_info', 
+                          'avatar', 'wallpaper', 'parent', 'website', 'deactivated_apps'] \
+                          + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) 
         model = CosinnusProject
     
     def __init__(self, instance, *args, **kwargs):    
         super(_CosinnusProjectForm, self).__init__(instance=instance, *args, **kwargs)
         self.fields['parent'].queryset = CosinnusSociety.objects.all_in_portal()
-        
+        # use select2 widgets for m2m fields
+        for field in self.fields.values():
+            if type(field.widget) is SelectMultiple:
+                field.widget = Select2MultipleWidget(choices=field.choices)
+
 
 class _CosinnusSocietyForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
     
     class Meta:
-        fields = ('name', 'public', 'description', 'description_long', 'contact_info', 
-                    'avatar', 'wallpaper', 'website', 'deactivated_apps')
+        fields = ['name', 'public', 'description', 'description_long', 'contact_info', 
+                        'avatar', 'wallpaper', 'website', 'deactivated_apps'] \
+                        + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) 
         model = CosinnusSociety
+    
+    def __init__(self, instance, *args, **kwargs):    
+        super(_CosinnusSocietyForm, self).__init__(instance=instance, *args, **kwargs)
+        # use select2 widgets for m2m fields
+        for field in self.fields.values():
+            if type(field.widget) is SelectMultiple:
+                field.widget = Select2MultipleWidget(choices=field.choices)
         
 
 class MembershipForm(GroupKwargModelFormMixin, forms.ModelForm):

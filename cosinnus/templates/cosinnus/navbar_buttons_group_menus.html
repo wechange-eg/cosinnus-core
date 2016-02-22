@@ -8,9 +8,12 @@
                 <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu">
-                {% for g in societies %}
+                {% for g in societies|slice:":30" %}
                     <li{% if g == appsmenu_society %} class="active"{% endif %}><a href="{% group_url 'cosinnus:group-dashboard' group=g %}">{{ g.name }}</a></li>
                 {% endfor %}
+                {% if societies|length > 30 %}
+                	<li><a href="{% url 'cosinnus:group__group-list' %}...</a></li>
+                {% endif %}
                 <li class="divider"></li>
                 <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "All Societies" %}</a></li>
             </ul>
@@ -26,9 +29,12 @@
                 <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu">
-                {% for g in groups %}
+                {% for g in groups|slice:":30" %}
                     <li{% if g == appsmenu_group %} class="active"{% endif %}><a href="{% group_url 'cosinnus:group-dashboard' group=g %}">{{ g.name }}</a></li>
                 {% endfor %}
+                {% if groups|length > 30 %}
+                	<li><a href="{% url 'cosinnus:group-list' %}">...</a></li>
+                {% endif %}
                 <li class="divider"></li>
                 <li><a href="{% url 'cosinnus:group-list' %}">{% trans "All Projects" %}</a></li>
             </ul>

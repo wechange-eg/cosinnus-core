@@ -9,6 +9,9 @@ from django.contrib.auth import get_user_model
 from django.db.models.signals import post_delete, post_save
 from django.dispatch.dispatcher import receiver
 
+from cosinnus.models.tagged import ensure_container
+from cosinnus.core.registries.group_models import group_model_registry
+
 import logging
 logger = logging.getLogger('cosinnus')
 
@@ -38,3 +41,8 @@ post_save.connect(ensure_user_in_group_portal, sender=CosinnusGroupMembership)
 
 post_save.connect(assign_user_to_default_auth_group, sender=User)
 post_save.connect(ensure_user_to_default_portal_groups, sender=CosinnusPortalMembership)
+
+post_save.connect(ensure_container, sender=CosinnusGroup)
+for url_key in group_model_registry:
+    group_model = group_model_registry.get(url_key)
+    post_save.connect(ensure_container, sender=group_model)

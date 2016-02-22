@@ -25,6 +25,7 @@ from cosinnus.core.registries.group_models import group_model_registry
 
 
 from osm_field.fields import OSMField, LatitudeField, LongitudeField
+from cosinnus.utils.lanugages import MultiLanguageFieldMagicMixin
 
 
 
@@ -44,22 +45,45 @@ class PublicModelMixin(models.Model):
 
 
 @python_2_unicode_compatible
+class CosinnusBaseCategory(models.Model):
+    
+    class Meta:
+        abstract = True
+    
+    name = models.CharField(_('Name'), max_length=250)
+    name_en = models.CharField(_('Name (EN)'), max_length=250, blank=True, null=True)
+    name_ru = models.CharField(_('Name (RU)'), max_length=250, blank=True, null=True)
+    name_uk = models.CharField(_('Name (UK)'), max_length=250, blank=True, null=True)
+    
+    @property
+    def display_name(self):
+        return self['name']
+    
+    def __str__(self):
+        return '%s' % self.display_name
+
+
+class CosinnusTopicCategory(MultiLanguageFieldMagicMixin, CosinnusBaseCategory):
+    pass
+
+
+@python_2_unicode_compatible
 class BaseTagObject(models.Model):
 
-    VISIBILITY_USER = 0
-    VISIBILITY_GROUP = 1
-    VISIBILITY_ALL = 2
+    VISIBILITY_USER = 0 # for Users, this setting means: "Only Group Members can see me"
+    VISIBILITY_GROUP = 1 # for Users, this setting means: "Only Logged in Users can see me"
+    VISIBILITY_ALL = 2 # for Users, this setting means: "Everyone can see me"
 
     #: Choices for :attr:`visibility`: ``(int, str)``
     # Empty first choice must be included for select2 placeholder compatibility!
     VISIBILITY_CHOICES = (
         ('', ''),
-        (VISIBILITY_USER, _('Only me')),
-        (VISIBILITY_GROUP, _('Group/Project members only')),
-        (VISIBILITY_ALL, _('Public (visible without login)')),
+        (VISIBILITY_USER, _('Only me')),  
+        (VISIBILITY_GROUP, _('Group/Project members only')), 
+        (VISIBILITY_ALL, _('Public (visible without login)')), 
     )
 
-    group = models.ForeignKey(CosinnusGroup, verbose_name=_('Group'),
+    group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, verbose_name=_('Group'),
         related_name='+', null=True, on_delete=models.CASCADE)
 
     persons = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
@@ -113,7 +137,10 @@ class BaseTagObject(models.Model):
     topics = models.CommaSeparatedIntegerField(_('Topics'), blank=True,
         null=True, max_length=255)  # We cannot at choices here as this would 
                                     # fail validation
-
+    text_topics = models.ManyToManyField(CosinnusTopicCategory, verbose_name=_('Text Topics'), 
+        related_name='tagged_objects', blank=True, null=True)
+    
+                                    
     likes = models.PositiveSmallIntegerField(_('Likes'), blank=True, default=0)
     likers = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
         null=True, related_name='likes+')  # no reverse relation on model
@@ -206,7 +233,7 @@ class BaseTaggableObjectModel(models.Model):
 
     attached_objects = models.ManyToManyField(AttachedObject, blank=True, null=True)
 
-    group = models.ForeignKey(CosinnusGroup, verbose_name=_('Group'),
+    group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, verbose_name=_('Group'),
         related_name='%(app_label)s_%(class)s_set', on_delete=models.CASCADE)
 
     title = models.CharField(_('Title'), max_length=255)
@@ -307,7 +334,7 @@ class BaseTaggableObjectModel(models.Model):
         """ Similar to get_absolute_url, this returns the URL for this object's implemented delete view.
             Needs to be set by a specific implementation of BaseTaggableObjectModel """
         raise ImproperlyConfigured("The get_delete_url function must be implemented for model '%s'" % self.__class__)
-    
+
 
 class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
     """
@@ -358,10 +385,6 @@ def ensure_container(sender, **kwargs):
             if not model_class._meta.abstract:
                 model_class.objects.create(group=kwargs.get('instance'), slug='_root_', title='_root_', path='/', is_container=True)
 
-post_save.connect(ensure_container, sender=CosinnusGroup)
-for url_key in group_model_registry:
-    group_model = group_model_registry.get(url_key)
-    post_save.connect(ensure_container, sender=group_model)
     
 
 def get_tag_object_model():

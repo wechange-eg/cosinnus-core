@@ -9,15 +9,17 @@ from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.models.group import CosinnusGroupMembership,\
-    CosinnusSociety, CosinnusProject, CosinnusPortal, CosinnusPortalMembership,\
+    CosinnusPortal, CosinnusPortalMembership,\
     CosinnusGroup, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING,\
     CosinnusPermanentRedirect, MEMBERSHIP_ADMIN
 from cosinnus.models.profile import get_user_profile_model
-from cosinnus.models.tagged import AttachedObject
+from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory
 from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.models.feedback import CosinnusReportedObject
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.models.widget import WidgetConfig
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from cosinnus.utils.group import get_cosinnus_group_model
 
 
 class SingleDeleteActionMixin(object):
@@ -103,7 +105,7 @@ class CosinnusProjectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
             if group.type == CosinnusGroup.TYPE_SOCIETY:
                 converted_names.append(group.name)
                 slugs.append(group.slug)
-        CosinnusGroup._clear_cache(slugs=slugs)
+        get_cosinnus_group_model()._clear_cache(slugs=slugs)
                 
         # delete and recreate all group widgets (there might be different ones for group than for porject)
         WidgetConfig.objects.filter(group_id=group.pk).delete()
@@ -176,7 +178,7 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
             if group.type == CosinnusGroup.TYPE_PROJECT:
                 converted_names.append(group.name)
                 slugs.append(group.slug)
-        CosinnusGroup._clear_cache(slugs=slugs)
+        get_cosinnus_group_model()._clear_cache(slugs=slugs)
         
         # delete and recreate all group widgets (there might be different ones for group than for porject)
         WidgetConfig.objects.filter(group_id=group.pk).delete()
@@ -252,7 +254,7 @@ class GroupMembershipInline(admin.TabularInline):
 class UserAdmin(DjangoUserAdmin):
     inlines = (UserProfileInline, PortalMembershipInline)#, GroupMembershipInline)
     actions = ['deactivate_users']
-    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff', 'is_active')
+    list_display = ('is_active', 'username', 'email', 'first_name', 'last_name', 'is_staff', )
     
     def deactivate_users(self, request, queryset):
         count = 0
@@ -268,6 +270,22 @@ class UserAdmin(DjangoUserAdmin):
 admin.site.unregister(USER_MODEL)
 admin.site.register(USER_MODEL, UserAdmin)
 
+
+class CosinnusTopicCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'name_en', 'name_ru', 'name_uk',)
+
+admin.site.register(CosinnusTopicCategory, CosinnusTopicCategoryAdmin)
+
+
+class BaseTaggableAdminMixin(object):
+    """ Base mixin for the common properties for a BaseTaggableObject admin  """
+    list_display = ('title', 'group', 'creator', 'created')
+    list_filter = ('group', 'group__portal', 'title')
+    search_fields = ('title', 'group__title', 'creator__username', 
+         'creator__first_name', 'creator__last_name', 'creator__email')
+
+class BaseHierarchicalTaggableAdminMixin(BaseTaggableAdminMixin):
+    list_display = list(BaseTaggableAdminMixin.list_display) + ['path',]
 
 ## TODO: FIXME: re-enable after 1.8 migration
 #class SpamUserModel(USER_MODEL):

@@ -55,11 +55,15 @@ class UserListView(ListView):
         all_users = super(UserListView, self).get_queryset().exclude(is_active=False).\
                         filter(id__in=CosinnusPortal.get_current().members)
         
-        # save hidden users qs
-        self.hidden_users = all_users.exclude(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
+        if self.request.user.is_authenticated():
+            visibility_level = BaseTagObject.VISIBILITY_GROUP
+        else:
+            visibility_level = BaseTagObject.VISIBILITY_ALL
         
-        # only show users with visbility "public"
-        qs = all_users.filter(cosinnus_profile__media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
+        # only show users with the visibility level
+        qs = all_users.filter(cosinnus_profile__media_tag__visibility__gte=visibility_level)
+        self.hidden_users = all_users.exclude(cosinnus_profile__media_tag__visibility__gte=visibility_level)
+        
         qs = qs.order_by('first_name', 'last_name')
         qs = qs.select_related('cosinnus_profile')
         return qs

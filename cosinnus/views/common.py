@@ -52,14 +52,17 @@ def view_500(request):
 
 class SwitchLanguageView(RedirectView):
     
+    permanent = False
+    
     def get(self, request, *args, **kwargs):
         language = kwargs.pop('language', None)
+        
         if not language or language not in dict(settings.LANGUAGES).keys():
             messages.error(request, _('The language "%s" is not supported' % language))
-            
-        request.session[LANGUAGE_SESSION_KEY] = language
-        request.session['django_language'] = language
-        request.LANGUAGE_CODE = language
+        else:
+            request.session[LANGUAGE_SESSION_KEY] = language
+            request.session['django_language'] = language
+            request.LANGUAGE_CODE = language
         #messages.success(request, _('Language was switched successfully.'))
         
         return super(SwitchLanguageView, self).get(request, *args, **kwargs)

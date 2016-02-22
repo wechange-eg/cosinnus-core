@@ -1,0 +1,3 @@
+{% load i18n %}{% blocktrans %}The CSV import on {{ site_name }} failed.
+
+Here is why: {{ msg }}{% endblocktrans %}
