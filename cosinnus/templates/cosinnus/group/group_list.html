@@ -40,13 +40,20 @@
         <script type="application/javascript">
             var mapData = [
                 {% for group, members, pendings, admins in rows %}
-                	{% comment %} TODO: OPTIMIZE: ``group.locations.all`` causes an SQL hit each! {% endcomment %}
-                	{% for group_location in group.locations.all %}
-	                    {% if group_location.location and group_location.location_lat and group_location.location_lon %}
-	                        {lat: {{ group_location.location_lat|stringformat:"f" }}, lon: {{ group_location.location_lon|stringformat:"f" }}, title: '<a href="{{ group.get_absolute_url }}">{{ group.name }}</a><br/><span>{{ group_location.location }}</span>'{% if group.avatar %}, avatar: "{% thumbnail group.avatar 40x40 crop=1 upscale=1 %}"{% endif %}},
-	                    {% endif %}
-	                {% endfor %}
-		        {% endfor %}
+                    {% comment %} TODO: OPTIMIZE: ``group.locations.all`` causes an SQL hit each! {% endcomment %}
+                    {% for group_location in group.locations.all %}
+                        {% if group_location.location and group_location.location_lat and group_location.location_lon %}
+                            {
+                                lat: {{ group_location.location_lat|stringformat:"f" }}, 
+                                lon: {{ group_location.location_lon|stringformat:"f" }}, 
+                                title: '<a href="{{ group.get_absolute_url }}">{{ group.name }}</a><br/><span>{{ group_location.location }}</span>',
+                                {% if group.get_map_marker_image_url %}
+                                    avatar: "{{ group.get_map_marker_image_url }}",
+                                {% endif %}
+                            },
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
             ];
         </script>
         {% include 'cosinnus/common/map_expand_button.html' %}
@@ -56,7 +63,7 @@
     <!-- a box with semi transparent background -->
     <div class="content-box">
         
-        <!-- hidden as long as create link is in the leftnav
+        {% comment %}    hidden as long as create link is in the leftnav
         {% if user|is_superuser %}
 	        <div type="button" class="btn btn-default w100 large-space">
                 <ul class="media-list">
@@ -85,7 +92,7 @@
                 </ul>
             </button>
         {% endif %}
-        -->
+        {% endcomment %}
     
 	    {% for group, members, pendings, admins in rows %}
 	        

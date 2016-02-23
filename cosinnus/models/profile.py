@@ -22,6 +22,7 @@ from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.core import signals
 from cosinnus.utils.group import get_cosinnus_group_model
+from django.contrib.staticfiles.templatetags.staticfiles import static
 
 
 class BaseUserProfileManager(models.Manager):
@@ -179,6 +180,7 @@ class BaseUserProfile(models.Model):
             try:
                 thumbnails[size] = thumbnailer.get_thumbnail({
                     'crop': True,
+                    'upscale': True,
                     'size': size,
                 })
             except InvalidImageFormatError:
@@ -190,6 +192,11 @@ class BaseUserProfile(models.Model):
     def get_avatar_thumbnail_url(self, size=(80, 80)):
         tn = self.get_avatar_thumbnail(size)
         return tn.url if tn else None
+    
+    def get_map_marker_image_url(self):
+        """ Returns a static image URL to use as a map marker image, or '' if none available """
+        small_avatar = self.get_avatar_thumbnail(size=(40, 40))
+        return small_avatar.url if small_avatar else static('images/jane-doe.png')
     
     def media_tag_object(self):
         key = '_media_tag_cache'

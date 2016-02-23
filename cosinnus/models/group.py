@@ -781,6 +781,21 @@ class CosinnusBaseGroup(models.Model):
     def avatar_url(self):
         return self.avatar.url if self.avatar else None
     
+    def get_map_marker_image_url(self):
+        if self.avatar:
+            thumbnailer = get_thumbnailer(self.avatar)
+            try:
+                small_avatar = thumbnailer.get_thumbnail({
+                    'crop': True,
+                    'upscale': True,
+                    'size': (40, 40),
+                })
+                return small_avatar.url if small_avatar else ''
+            except InvalidImageFormatError:
+                if settings.DEBUG:
+                    raise
+        return ''
+        
     def _get_media_image_path(self, file_field, filename_modifier=None):
         """Gets the unique path for each image file in the media directory"""
         mediapath = os.path.join(get_cosinnus_media_file_folder(), 'avatars', 'group_wallpapers')
@@ -822,7 +837,8 @@ class CosinnusBaseGroup(models.Model):
                     'size': size,
                 })
             except InvalidImageFormatError:
-                raise
+                if settings.DEBUG:
+                    raise
             
             if not thumbnail:
                 return ''
