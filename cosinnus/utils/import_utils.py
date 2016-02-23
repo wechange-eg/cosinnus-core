@@ -94,6 +94,13 @@ class GroupCSVImporter(Thread):
     has_header = False
     
     def __init__(self, rows, request=None, *args, **kwargs):
+        # try to detect and remove BOM if a signed file was used with an unsigned encoding 
+        try:
+            if rows[0][0][0] == u'\ufeff':
+                rows[0][0] = rows[0][0][1:]
+        except:
+            pass
+        
         self.rows = rows
         self.request = request
         self.item_index = 0
