@@ -1,1 +1,139 @@
-// nothing to override on the main portal
+/* nothing to override on the main portal */
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto);
+
+body {
+	background: white;
+	font-family: 'Roboto', sans-serif;
+}
+
+a, a:hover, a:focus {
+	color: inherit;
+}
+
+.breadcrumb > .active {
+	color: #333;
+}
+.breadcrumb a {
+	color: #555;
+}
+.breadcrumb a:hover, .breadcrumb a:focus {
+	color: #333;
+}
+.breadcrumb > li + li::before {
+	color: #555;
+}
+
+
+.app-main .btn-headline .media-body .group-annotation {
+	color: inherit;
+}
+
+
+/* ehemals blaue Apps */
+.app-main .btn-emphasized .media, .app-main .btn-appnavi .media, .app-main .btn-emphasized .media > .media-body, .app-main .btn-appnavi .media > .media-body, .app-main .btn-emphasized .media > .pull-right, .app-main .btn-appnavi .media > .pull-left, .app-main .btn-appnavi .media > .pull-right {
+	background-color: #E6E6E6;
+	color: #333;
+	font-family: 'Roboto Slab', serif;
+	font-weight: 700;
+}
+.app-main .btn-extra-emphasized .media, .app-main .btn-emphasized:hover .media, .app-main .fadedown.open .btn-emphasized.w100 .media, .app-main .btn-appnavi:hover .media, .app-main .btn-emphasized:hover .media > .media-body, .app-main .fadedown.open .btn-emphasized.w100 .media > .media-body, .app-main .btn-appnavi:hover .media > .media-body, .app-main .btn-extra-emphasized .media > .media-body, .app-main .btn-emphasized .media > .pull-left, .app-main .media > .pull-left.btn-emphasized, .app-main .btn-appnavi .media > .pull-left:first-child, .app-main .btn-appnavi:hover .media > .pull-left, .app-main .btn-extra-emphasized .media > .pull-left, .app-main .media-list > .media > .pull-left.btn-extra-emphasized, .app-main .media-list > .media > .pull-left.btn-extra-emphasized:empty, .app-main .btn-extra-emphasized .media > .pull-right, .app-main .media-list > .media > .btn-extra-emphasized.pull-right, .app-main .fadedown.open .btn-extra-emphasized.w100 .media > .pull-right, .app-main .fadedown .btn-extra-emphasized .media > .pull-right, .app-main .btn-emphasized:hover .media > .pull-right, .app-main .fadedown.open .btn-emphasized.w100 .media > .pull-right, .app-main .fadedown .btn-emphasized:hover .media > .pull-right, .app-main .btn-appnavi:hover .media > .pull-right {
+	background-color: #ccc;
+	color: #333;
+	font-family: 'Roboto Slab', serif;
+	font-weight: 700;	
+}
+
+
+/* Für Activity-Stream, Suchfunktion und andere die Farben wieder bunt machen */
+.app-etherpad .btn-emphasized .media, .app-etherpad .btn-appnavi .media, .app-etherpad .btn-emphasized .media > .media-body, .app-etherpad .btn-appnavi .media > .media-body, .app-etherpad .btn-emphasized .media > .pull-right, .app-etherpad .btn-appnavi .media > .pull-left, .app-etherpad .btn-appnavi .media > .pull-right {
+	background-color: #e55c55;
+	color: white;
+}
+.app-etherpad .btn-extra-emphasized .media, .app-etherpad .btn-emphasized:hover .media, .app-etherpad .fadedown.open .btn-emphasized.w100 .media, .app-etherpad .btn-appnavi:hover .media, .app-etherpad .btn-emphasized:hover .media > .media-body, .app-etherpad .fadedown.open .btn-emphasized.w100 .media > .media-body, .app-etherpad .btn-appnavi:hover .media > .media-body, .app-etherpad .btn-extra-emphasized .media > .media-body, .app-etherpad .btn-emphasized .media > .pull-left, .app-etherpad .media > .pull-left.btn-emphasized, .app-etherpad .btn-appnavi .media > .pull-left:first-child, .app-etherpad .btn-appnavi:hover .media > .pull-left, .app-etherpad .btn-extra-emphasized .media > .pull-left, .app-etherpad .media-list > .media > .pull-left.btn-extra-emphasized, .app-etherpad .media-list > .media > .pull-left.btn-extra-emphasized:empty, .app-etherpad .btn-extra-emphasized .media > .pull-right, .app-etherpad .media-list > .media > .btn-extra-emphasized.pull-right, .app-etherpad .fadedown.open .btn-extra-emphasized.w100 .media > .pull-right, .app-etherpad .fadedown .btn-extra-emphasized .media > .pull-right, .app-etherpad .btn-emphasized:hover .media > .pull-right, .app-etherpad .fadedown.open .btn-emphasized.w100 .media > .pull-right, .app-etherpad .fadedown .btn-emphasized:hover .media > .pull-right, .app-etherpad .btn-appnavi:hover .media > .pull-right {
+	background-color: #933d39;
+	color: white;
+}
+.app-calendar .btn-emphasized .media, .app-calendar .btn-appnavi .media, .app-calendar .btn-emphasized .media > .media-body, .app-calendar .btn-appnavi .media > .media-body, .app-calendar .btn-emphasized .media > .pull-right, .app-calendar .btn-appnavi .media > .pull-left, .app-calendar .btn-appnavi .media > .pull-right {
+	background-color: #779b48;
+	color: white;
+}
+.app-calendar .btn-extra-emphasized .media, .app-calendar .btn-emphasized:hover .media, .app-calendar .fadedown.open .btn-emphasized.w100 .media, .app-calendar .btn-appnavi:hover .media, .app-calendar .btn-emphasized:hover .media > .media-body, .app-calendar .fadedown.open .btn-emphasized.w100 .media > .media-body, .app-calendar .btn-appnavi:hover .media > .media-body, .app-calendar .btn-extra-emphasized .media > .media-body, .app-calendar .btn-emphasized .media > .pull-left, .app-calendar .media > .pull-left.btn-emphasized, .app-calendar .btn-appnavi .media > .pull-left:first-child, .app-calendar .btn-appnavi:hover .media > .pull-left, .app-calendar .btn-extra-emphasized .media > .pull-left, .app-calendar .media-list > .media > .pull-left.btn-extra-emphasized, .app-calendar .media-list > .media > .pull-left.btn-extra-emphasized:empty, .app-calendar .btn-extra-emphasized .media > .pull-right, .app-calendar .media-list > .media > .btn-extra-emphasized.pull-right, .app-calendar .fadedown.open .btn-extra-emphasized.w100 .media > .pull-right, .app-calendar .fadedown .btn-extra-emphasized .media > .pull-right, .app-calendar .btn-emphasized:hover .media > .pull-right, .app-calendar .fadedown.open .btn-emphasized.w100 .media > .pull-right, .app-calendar .fadedown .btn-emphasized:hover .media > .pull-right, .app-calendar .btn-appnavi:hover .media > .pull-right {
+	background-color: #4c622f;
+	color: white;
+}
+.app-files .btn-emphasized .media, .app-files .btn-appnavi .media, .app-files .btn-emphasized .media > .media-body, .app-files .btn-appnavi .media > .media-body, .app-files .btn-emphasized .media > .pull-right, .app-files .btn-appnavi .media > .pull-left, .app-files .btn-appnavi .media > .pull-right {
+	background-color: #14a085;
+	color: white;
+}
+.app-files .btn-extra-emphasized .media, .app-files .btn-emphasized:hover .media, .app-files .fadedown.open .btn-emphasized.w100 .media, .app-files .btn-appnavi:hover .media, .app-files .btn-emphasized:hover .media > .media-body, .app-files .fadedown.open .btn-emphasized.w100 .media > .media-body, .app-files .btn-appnavi:hover .media > .media-body, .app-files .btn-extra-emphasized .media > .media-body, .app-files .btn-emphasized .media > .pull-left, .app-files .media > .pull-left.btn-emphasized, .app-files .btn-appnavi .media > .pull-left:first-child, .app-files .btn-appnavi:hover .media > .pull-left, .app-files .btn-extra-emphasized .media > .pull-left, .app-files .media-list > .media > .pull-left.btn-extra-emphasized, .app-files .media-list > .media > .pull-left.btn-extra-emphasized:empty, .app-files .btn-extra-emphasized .media > .pull-right, .app-files .media-list > .media > .btn-extra-emphasized.pull-right, .app-files .fadedown.open .btn-extra-emphasized.w100 .media > .pull-right, .app-files .fadedown .btn-extra-emphasized .media > .pull-right, .app-files .btn-emphasized:hover .media > .pull-right, .app-files .fadedown.open .btn-emphasized.w100 .media > .pull-right, .app-files .fadedown .btn-emphasized:hover .media > .pull-right, .app-files .btn-appnavi:hover .media > .pull-right {
+	background-color: #0a5d4e;
+	color: white;
+}
+.app-todos .btn-emphasized .media, .app-todos .btn-appnavi .media, .app-todos .btn-emphasized .media > .media-body, .app-todos .btn-appnavi .media > .media-body, .app-todos .btn-emphasized .media > .pull-right, .app-todos .btn-appnavi .media > .pull-left, .app-todos .btn-appnavi .media > .pull-right {
+	background-color: #efa02d;
+	color: white;
+}
+.app-todos .btn-extra-emphasized .media, .app-todos .btn-emphasized:hover .media, .app-todos .fadedown.open .btn-emphasized.w100 .media, .app-todos .btn-appnavi:hover .media, .app-todos .btn-emphasized:hover .media > .media-body, .app-todos .fadedown.open .btn-emphasized.w100 .media > .media-body, .app-todos .btn-appnavi:hover .media > .media-body, .app-todos .btn-extra-emphasized .media > .media-body, .app-todos .btn-emphasized .media > .pull-left, .app-todos .media > .pull-left.btn-emphasized, .app-todos .btn-appnavi .media > .pull-left:first-child, .app-todos .btn-appnavi:hover .media > .pull-left, .app-todos .btn-extra-emphasized .media > .pull-left, .app-todos .media-list > .media > .pull-left.btn-extra-emphasized, .app-todos .media-list > .media > .pull-left.btn-extra-emphasized:empty, .app-todos .btn-extra-emphasized .media > .pull-right, .app-todos .media-list > .media > .btn-extra-emphasized.pull-right, .app-todos .fadedown.open .btn-extra-emphasized.w100 .media > .pull-right, .app-todos .fadedown .btn-extra-emphasized .media > .pull-right, .app-todos .btn-emphasized:hover .media > .pull-right, .app-todos .fadedown.open .btn-emphasized.w100 .media > .pull-right, .app-todos .fadedown .btn-emphasized:hover .media > .pull-right, .app-todos .btn-appnavi:hover .media > .pull-right {
+	background-color: #ad7e2c;
+	color: white;
+}
+
+
+
+/* TAB-Nav */
+.nav-tabs, .nav-tabs > li, .nav-tabs > li.active, .nav-tabs > li > a, .nav-tabs > li.active > a, .nav-tabs > li > a:focus, .nav-tabs > li.active > a:focus, .nav-tabs > li > a:hover, .nav-tabs > li.active > a:hover {
+	border-color: #ccc;
+}
+.nav-tabs > li > a {
+	background-color: #E6E6E6;
+	color: #333;
+	font-family: 'Roboto Slab', serif;
+	font-weight: 700;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus {
+	background-color: #ccc;
+	color: #333;
+	font-family: 'Roboto Slab', serif;
+	font-weight: 700;
+}
+
+
+
+/* Dashboard */
+.dashboard-header .dashboard-header-link.app-main {
+	background-color: #fff;
+}
+.dashboard-header .dashboard-header-link a {
+	color: #333;
+}
+
+#dashboard .btn-extra-emphasized .media, #dashboard .btn-emphasized:hover .media, #dashboard .fadedown.open .btn-emphasized.w100 .media, #dashboard .btn-appnavi:hover .media, #dashboard .btn-emphasized:hover .media > .media-body, #dashboard .fadedown.open .btn-emphasized.w100 .media > .media-body, #dashboard .btn-appnavi:hover .media > .media-body, #dashboard .btn-extra-emphasized .media > .media-body, #dashboard .btn-emphasized .media > .pull-left, #dashboard .media > .pull-left.btn-emphasized, #dashboard .btn-appnavi .media > .pull-left:first-child, #dashboard .btn-appnavi:hover .media > .pull-left, #dashboard .btn-extra-emphasized .media > .pull-left, #dashboard .media-list > .media > .pull-left.btn-extra-emphasized, #dashboard .media-list > .media > .pull-left.btn-extra-emphasized:empty, #dashboard .btn-extra-emphasized .media > .pull-right, #dashboard .media-list > .media > .btn-extra-emphasized.pull-right, #dashboard .fadedown.open .btn-extra-emphasized.w100 .media > .pull-right, #dashboard .fadedown .btn-extra-emphasized .media > .pull-right, #dashboard .btn-emphasized:hover .media > .pull-right, #dashboard .fadedown.open .btn-emphasized.w100 .media > .pull-right, #dashboard .fadedown .btn-emphasized:hover .media > .pull-right, #dashboard .btn-appnavi:hover .media > .pull-right {
+	background-color: #ccc;
+	color: #333;
+	font-family: 'Roboto Slab', serif;
+	font-weight: 700;
+}
+
+#dashboard .btn-emphasized .media, #dashboard .btn-appnavi .media, #dashboard .btn-emphasized .media > .media-body, #dashboard .btn-appnavi .media > .media-body, #dashboard .btn-emphasized .media > .pull-right, #dashboard .btn-appnavi .media > .pull-left, #dashboard .btn-appnavi .media > .pull-right {
+	background-color: #E6E6E6;
+	color: #333;
+	font-family: 'Roboto Slab', serif;
+	font-weight: 700;
+}
+.app-main.appnavi-listelement a {
+	background-color: #E6E6E6;
+	color: #333;
+}
+
+.moment-data-date, .btn-headline .media-body .group-annotation a {
+	font-weight: 400;
+}
+
+.btn.dashboard-appwidget-contentline .media-body .group-annotation, .btn.dashboard-appwidget-contentline-indented .media-body .group-annotation, .btn.dashboard-appwidget-contentline-extra-indented .media-body .group-annotation, .btn.dashboard-appwidget-headline .media-body .group-annotation {
+	color: inherit;
+}
+
+#dashboard .dashboard-header-link a {
+	color: white;
+}
