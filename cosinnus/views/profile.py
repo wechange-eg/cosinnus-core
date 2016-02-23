@@ -23,6 +23,7 @@ from cosinnus.utils.permissions import check_user_integrated_portal_member,\
     check_user_can_see_user
 from django.views.generic.edit import DeleteView
 from cosinnus.core.decorators.views import redirect_to_not_logged_in
+from cosinnus.utils.urls import safe_redirect
 
 
 def delete_userprofile(user):
@@ -71,6 +72,8 @@ class UserProfileObjectMixin(SingleObjectMixin):
         
         # return the current user's userprofile if no slug is given
         if not pk and not slug:
+            if not self.request.user.is_authenticated():
+                return None
             return self.model._default_manager.get_for_user(self.request.user)
         
         if queryset is None:
@@ -100,8 +103,12 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
     template_name = 'cosinnus/user/userprofile_detail.html'
     
     def dispatch(self, request, *args, **kwargs):
+        self.request = request
+        
         """ Check if the user can access the targeted user profile. """
-        target_user_profile =  self.get_object(self.get_queryset())
+        target_user_profile = self.get_object(self.get_queryset())
+        if not target_user_profile:
+            return redirect_to_not_logged_in(request)
         target_user_visibility = target_user_profile.media_tag.visibility
         user = request.user
         # VISIBILITY_ALL users can always be seen, so skip the check
