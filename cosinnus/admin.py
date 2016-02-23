@@ -254,7 +254,7 @@ class GroupMembershipInline(admin.TabularInline):
 class UserAdmin(DjangoUserAdmin):
     inlines = (UserProfileInline, PortalMembershipInline)#, GroupMembershipInline)
     actions = ['deactivate_users']
-    list_display = ('is_active', 'username', 'email', 'first_name', 'last_name', 'is_staff', )
+    list_display = ('email', 'is_active', 'username', 'first_name', 'last_name', 'is_staff', )
     
     def deactivate_users(self, request, queryset):
         count = 0
