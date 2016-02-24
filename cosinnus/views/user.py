@@ -52,7 +52,9 @@ class UserListView(ListView):
     def get_queryset(self):
         
         # get all users from this portal only        
+        # we also exclude users who have never logged in
         all_users = super(UserListView, self).get_queryset().exclude(is_active=False).\
+                        exclude(last_login__exact=None).\
                         filter(id__in=CosinnusPortal.get_current().members)
         
         if self.request.user.is_authenticated():
