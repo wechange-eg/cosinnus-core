@@ -1,0 +1,1 @@
+{% load static thumbnail %}{% if group and group.avatar %}{% thumbnail group.avatar 200x200 crop=1 upscale=1 %}{% else %}{% static 'images/group-avatar-placeholder.png' %}{% endif %}

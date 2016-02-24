@@ -11,6 +11,11 @@
     <script src="{% static 'js/vendor/leaflet.js' %}"></script>
 {% endblock extrahead %}
 
+{% block og_meta_attributes %}
+	{% include 'cosinnus/group/group_og_meta_attributes.html' with group=group %}
+{% endblock og_meta_attributes %}
+
+
 {% block leftnav %}
     {% include "cosinnus/group/leftnav_group.html"  with current_page="groupdetails" %}
 {% endblock leftnav %}
