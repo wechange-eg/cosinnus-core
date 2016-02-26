@@ -1,6 +1,6 @@
 /* nothing to override on the main portal */
 
-@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
 
 body {
 	background: white;
@@ -34,13 +34,13 @@ a, a:hover, a:focus {
 .app-main .btn-emphasized .media, .app-main .btn-appnavi .media, .app-main .btn-emphasized .media > .media-body, .app-main .btn-appnavi .media > .media-body, .app-main .btn-emphasized .media > .pull-right, .app-main .btn-appnavi .media > .pull-left, .app-main .btn-appnavi .media > .pull-right {
 	background-color: #E6E6E6;
 	color: #333;
-	font-family: 'Roboto Slab', serif;
+	/* font-family: 'Roboto Slab', serif; */
 	font-weight: 700;
 }
 .app-main .btn-extra-emphasized .media, .app-main .btn-emphasized:hover .media, .app-main .fadedown.open .btn-emphasized.w100 .media, .app-main .btn-appnavi:hover .media, .app-main .btn-emphasized:hover .media > .media-body, .app-main .fadedown.open .btn-emphasized.w100 .media > .media-body, .app-main .btn-appnavi:hover .media > .media-body, .app-main .btn-extra-emphasized .media > .media-body, .app-main .btn-emphasized .media > .pull-left, .app-main .media > .pull-left.btn-emphasized, .app-main .btn-appnavi .media > .pull-left:first-child, .app-main .btn-appnavi:hover .media > .pull-left, .app-main .btn-extra-emphasized .media > .pull-left, .app-main .media-list > .media > .pull-left.btn-extra-emphasized, .app-main .media-list > .media > .pull-left.btn-extra-emphasized:empty, .app-main .btn-extra-emphasized .media > .pull-right, .app-main .media-list > .media > .btn-extra-emphasized.pull-right, .app-main .fadedown.open .btn-extra-emphasized.w100 .media > .pull-right, .app-main .fadedown .btn-extra-emphasized .media > .pull-right, .app-main .btn-emphasized:hover .media > .pull-right, .app-main .fadedown.open .btn-emphasized.w100 .media > .pull-right, .app-main .fadedown .btn-emphasized:hover .media > .pull-right, .app-main .btn-appnavi:hover .media > .pull-right {
 	background-color: #ccc;
 	color: #333;
-	font-family: 'Roboto Slab', serif;
+	/* font-family: 'Roboto Slab', serif; */
 	font-weight: 700;	
 }
 
@@ -88,13 +88,13 @@ a, a:hover, a:focus {
 .nav-tabs > li > a {
 	background-color: #E6E6E6;
 	color: #333;
-	font-family: 'Roboto Slab', serif;
+	/* font-family: 'Roboto Slab', serif; */
 	font-weight: 700;
 }
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus {
 	background-color: #ccc;
 	color: #333;
-	font-family: 'Roboto Slab', serif;
+	/* font-family: 'Roboto Slab', serif; */
 	font-weight: 700;
 }
 
@@ -111,14 +111,14 @@ a, a:hover, a:focus {
 #dashboard .btn-extra-emphasized .media, #dashboard .btn-emphasized:hover .media, #dashboard .fadedown.open .btn-emphasized.w100 .media, #dashboard .btn-appnavi:hover .media, #dashboard .btn-emphasized:hover .media > .media-body, #dashboard .fadedown.open .btn-emphasized.w100 .media > .media-body, #dashboard .btn-appnavi:hover .media > .media-body, #dashboard .btn-extra-emphasized .media > .media-body, #dashboard .btn-emphasized .media > .pull-left, #dashboard .media > .pull-left.btn-emphasized, #dashboard .btn-appnavi .media > .pull-left:first-child, #dashboard .btn-appnavi:hover .media > .pull-left, #dashboard .btn-extra-emphasized .media > .pull-left, #dashboard .media-list > .media > .pull-left.btn-extra-emphasized, #dashboard .media-list > .media > .pull-left.btn-extra-emphasized:empty, #dashboard .btn-extra-emphasized .media > .pull-right, #dashboard .media-list > .media > .btn-extra-emphasized.pull-right, #dashboard .fadedown.open .btn-extra-emphasized.w100 .media > .pull-right, #dashboard .fadedown .btn-extra-emphasized .media > .pull-right, #dashboard .btn-emphasized:hover .media > .pull-right, #dashboard .fadedown.open .btn-emphasized.w100 .media > .pull-right, #dashboard .fadedown .btn-emphasized:hover .media > .pull-right, #dashboard .btn-appnavi:hover .media > .pull-right {
 	background-color: #ccc;
 	color: #333;
-	font-family: 'Roboto Slab', serif;
+	/* font-family: 'Roboto Slab', serif; */
 	font-weight: 700;
 }
 
 #dashboard .btn-emphasized .media, #dashboard .btn-appnavi .media, #dashboard .btn-emphasized .media > .media-body, #dashboard .btn-appnavi .media > .media-body, #dashboard .btn-emphasized .media > .pull-right, #dashboard .btn-appnavi .media > .pull-left, #dashboard .btn-appnavi .media > .pull-right {
 	background-color: #E6E6E6;
 	color: #333;
-	font-family: 'Roboto Slab', serif;
+	/* font-family: 'Roboto Slab', serif; */
 	font-weight: 700;
 }
 .app-main.appnavi-listelement a {
