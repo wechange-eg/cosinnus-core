@@ -102,8 +102,9 @@
 			                        
 			                            <div class="col-sm-4 regular-space">
 			                                {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.width}}px;height:{{SETTINGS.AWESOME_AVATAR.height}}px{% endcaptureas %}
+			                                {% captureas group_avatar_type %}{% if group_model == "CosinnusSociety" %}group{% else %}project{% endif %}{% endcaptureas %}
 			                                <div id="id_avatar-preview" class="awesome-avatar-preview" style="{{ preview_style }}">
-			                                    {% include "cosinnus/group/group_avatar_image.html" with group=object extra_style=preview_style %}
+			                                    {% include "cosinnus/group/group_avatar_image.html" with group=object extra_style=preview_style type=group_avatar_type %}
 			                                </div>
 			                                <div id="avatar_deletion_notice" class="hidden"><p>{% trans "Avatar will be deleted once you save." %}</p></div>
 			                            </div>
@@ -305,7 +306,7 @@
 					<div class="tab-pane {% if SETTINGS.COSINNUS_MICROSITES_ENABLED and request.GET.tab == 'microsite' %}active{% endif %}" id="microsite" >
 					
 						<label>
-	                    	{% trans "Microsite Wallpaper" %}
+	                    	{% trans "Microsite Wallpaper" %} (1140px x 240px)
 	                    </label>
 						{{ form.forms.obj.wallpaper.errors }}
 						<div class="row">

@@ -71,7 +71,15 @@ class UnicodeReader:
         self.reader = csv.reader(f, dialect=dialect, delimiter=delimiter, quotechar=b'"', **kwds)
 
     def next(self):
-        row = self.reader.next()
+        error = True
+        while error:
+            try:
+                row = self.reader.next()
+                error = False
+            except Exception, e:
+                if not 'line contains NULL byte' in force_text(e):
+                    raise
+            
         # utf-8 must be used here because we use a UTF8Reader
         return [unicode(s, "utf-8") for s in row]
 
@@ -93,7 +101,7 @@ class GroupCSVImporter(Thread):
     
     has_header = False
     
-    def __init__(self, rows, request=None, *args, **kwargs):
+    def __init__(self, rows, request=None, read_errors=0, *args, **kwargs):
         # try to detect and remove BOM if a signed file was used with an unsigned encoding 
         try:
             if rows[0][0][0] == u'\ufeff':
@@ -104,6 +112,7 @@ class GroupCSVImporter(Thread):
         self.rows = rows
         self.request = request
         self.item_index = 0
+        self.read_errors=read_errors # to make a report how many rows could not be read due to formatting
         # a map of { column-header-id: column-index), ... }
         self.column_map = [] if not self.has_header else self._index_and_remove_header_row()
         
@@ -167,7 +176,8 @@ class GroupCSVImporter(Thread):
            'infos': infos,
            'attentions': attentions,
            'saved_groups': len(saved_groups),
-           'total_groups': len(self.rows)
+           'total_groups': len(self.rows),
+           'read_errors': self.read_errors,
         }
         cache.set(GROUP_IMPORT_RESULTS_CACHE_KEY, results_obj, 60 * 60 * 24) # 1 day kept
     
@@ -265,7 +275,7 @@ def csv_import_projects(csv_file, request=None, encoding="utf-8", delimiter=b','
     rows = UnicodeReader(csv_file, encoding=encoding, delimiter=delimiter)
     try:
         # de-iterate to throw encoding errors if there are any
-        rows = [row for row in rows]
+        rows = [row for row in rows if row]
     except UnicodeDecodeError:
         raise
     
@@ -279,12 +289,20 @@ def csv_import_projects(csv_file, request=None, encoding="utf-8", delimiter=b','
     expected_columns = len(Importer.ALIAS_MAP)
     
     # sanity check for expected number of columns, in EACH row
+    read_errors = 0
     if expected_columns:
         expected_columns = int(expected_columns)
         if any([len(row) < expected_columns for row in rows]):
-            raise UnexpectedNumberOfColumns('%d / %d' % (len(row), expected_columns))
+            # if only a few rows had an unexpected number of columns, there may have been read errors.
+            # we ignore them but add a report
+            num_bad_rows = sum([len(row) < expected_columns for row in rows])
+            if num_bad_rows < len(rows) - 1:
+                rows = [row for row in rows if len(row) == expected_columns]
+                read_errors = num_bad_rows
+            else:
+                raise UnexpectedNumberOfColumns('%d / %d' % (len(row), expected_columns))
     
-    importer = Importer(rows, request=request)
+    importer = Importer(rows, request=request, read_errors=read_errors)
     if importer.is_running():
         raise ImportAlreadyRunning()
     

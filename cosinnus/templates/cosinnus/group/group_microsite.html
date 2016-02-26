@@ -8,6 +8,10 @@
   <link href="{% static "css/cosinnus.dashboard.css" %}" rel="stylesheet">
 {% endblock extrahead %}
 
+{% block og_meta_attributes %}
+	{% include 'cosinnus/group/group_og_meta_attributes.html' with group=group %}
+{% endblock og_meta_attributes %}
+
 {% block body_attributes %}{% if not user.is_authenticated %}class="body-no-nav"{% endif %}{% endblock body_attributes %}
 
 {% block cosinnus_navbar %}
@@ -90,7 +94,8 @@
 			</div>
 		{% endif %}
 		
-		<img class="image" src="{% if group.wallpaper %}{{ group.static_wallpaper_url }}{% else %}{% if COSINNUS_CURRENT_PORTAL.protocol %}{{ COSINNUS_CURRENT_PORTAL.protocol }}{% else %}{% if SETTINGS.COSINNUS_SITE_PROTOCOL %}{{ SETTINGS.COSINNUS_SITE_PROTOCOL }}{% else %}http{% endif %}{% endif %}://placehold.it/1140x240/ffffff/000000?text=+{% endif %}"></img>
+		{% include "cosinnus/group/group_microsite_header_image.html" %}
+		
 		<div class="group-microsite-box">
 			<div class="group-microsite-avatar">
 				{% include "cosinnus/group/group_avatar_image.html" with group=group extra_classes="image" %}

@@ -227,7 +227,9 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         
         # we DON'T filter for current portal here, as pending join requests can come from
         # users in other portals
+        # we also exclude users who have never logged in
         _q = get_user_model().objects.exclude(is_active=False) \
+                             .exclude(last_login__exact=None) \
                              .order_by('first_name', 'last_name') \
                              .select_related('cosinnus_profile')
         admins = _q.filter(id__in=admin_ids)
