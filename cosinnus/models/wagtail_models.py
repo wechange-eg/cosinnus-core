@@ -108,6 +108,7 @@ class PortalRootPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
     ]
     
     translation_fields = (
+        'title',
         'footer',
     )
 
