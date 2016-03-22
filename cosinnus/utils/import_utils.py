@@ -13,6 +13,7 @@ import logging
 from django.conf import settings
 from django.core.cache import cache
 from django.utils.encoding import force_text
+import traceback
 logger = logging.getLogger('cosinnus')
 
 
@@ -222,7 +223,7 @@ class GroupCSVImporter(Thread):
         except Exception, e:
             if getattr(settings, 'DEBUG_LOCAL', False):
                 raise
-            logger.error('An unexpected error in outer import happened! Exception was: %s' % force_text(e), extra={'exception': e})
+            logger.error('An unexpected error in outer import happened! Exception was: %s' % force_text(e), extra={'exception': e, 'trace': traceback.format_exc()})
             self.import_failed(data={'msg': 'An unexpected error in outer import happened! Exception was: %s' % force_text(e)})
         finally:
             self.set_is_running(False)
