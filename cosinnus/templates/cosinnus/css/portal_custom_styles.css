@@ -7,7 +7,6 @@ The rendering is being done from within the CosinnusPortal model object
 
 {% if portal.top_color and portal.bottom_color %}
 body {
-  font-family: Verdana, Geneva, sans-serif;
   background: #{{ portal.top_color }};
   /* Old browsers */
   background: -moz-linear-gradient(top, #{{ portal.top_color }} 0%, #{{ portal.bottom_color }} 100%) fixed;
