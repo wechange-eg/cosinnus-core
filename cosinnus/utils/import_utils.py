@@ -156,7 +156,7 @@ class GroupCSVImporter(Thread):
         val = val if val or val == 0 else None
         # trim whitespace
         if isinstance(val, six.string_types):
-            val = val.strip()
+            val = val.strip().replace('\t', '').replace('\n', '').replace('\r', '')
         return val
     
     def next(self):
