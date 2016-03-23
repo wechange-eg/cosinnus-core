@@ -15,11 +15,11 @@
             </div>
             <div class="modal-footer">
                 <div>
-                    <input type="checkbox" autocomplete="off" onchange="if (this.checked) {$('#nutzungsbedingungen_ok_button_frame').show();$('#nutzungsbedingungen_disabled_button_frame').hide();} else {$('#nutzungsbedingungen_ok_button_frame').hide();$('#nutzungsbedingungen_disabled_button_frame').show();};"> <label>{% trans "Ich erkläre mich mit den Nutzungsbedingungen einverstanden" %}</label>
+                    <input id="modal-terms-checkbox" type="checkbox" autocomplete="off" onchange="if (this.checked) {$('#nutzungsbedingungen_ok_button_frame').show();$('#nutzungsbedingungen_disabled_button_frame').hide();} else {$('#nutzungsbedingungen_ok_button_frame').hide();$('#nutzungsbedingungen_disabled_button_frame').show();};"> <label for="modal-terms-checkbox">{% trans "Ich erkläre mich mit den Nutzungsbedingungen einverstanden" %}</label>
                 </div>
                 
                 <div id="nutzungsbedingungen_disabled_button_frame" class="" >
-                    <button type="submit" class="btn btn-emphasized" >
+                    <button type="submit" class="btn btn-emphasized" disabled="true">
                         <ul class="media-list">
                             <li class="media">
                                 <a class="pull-left" href="#">
@@ -32,6 +32,7 @@
                         </ul>
                     </button>
                 </div>
+                
                 <div id="nutzungsbedingungen_ok_button_frame" class="app-main" style="display:none;">
 	                <button type="submit" class="btn btn-emphasized" data-dismiss="modal" {% djajax_connect user.cosinnus_profile.settings trigger_on="click" fixed_value="tos_accepted:true" %}>
 	                    <ul class="media-list">
@@ -46,6 +47,22 @@
 	                    </ul>
 	                </button>
                 </div>
+                
+                <div class="app-main">
+	                <button type="button" href="{% url 'logout' %}" class="btn btn-emphasized" >
+	                    <ul class="media-list">
+	                        <li class="media">
+	                            <a class="pull-left" href="#">
+	                                <i class="fa fa-times"></i>
+	                            </a>
+	                            <div class="media-body">
+	                                {% trans "Logout" %}
+	                            </div>
+	                        </li>
+	                    </ul>
+	                </button>
+                </div>
+                
                 
             </div>
         </div>
