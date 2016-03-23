@@ -351,7 +351,7 @@ COSINNUS_BASE_PAGE_TITLE_TRANS = 'Netzwerk Wachstumswende'
 # Etherpad config.
 # Warning: Etherpad URL and KEY are usually overwritten in settings.py on the server! """
 COSINNUS_ETHERPAD_BASE_URL = 'https://pad.sinnwerkstatt.com/api'
-COSINNUS_ETHERPAD_API_KEY = 'ksudJAWqzcglHCt9IZ6NDjiVaDCKinLH'
+COSINNUS_ETHERPAD_API_KEY = '11456b253e74523f62059a5e341dd877fa4c01dbade5ba5309e1df7dfbc45e14'
 
 # unsure what this is or where it is being used...?
 GEOPOSITION_MAP_WIDGET_HEIGHT = 180
