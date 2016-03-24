@@ -14,7 +14,7 @@
 <noscript><p><img src="http://wachstumswende.de/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
 <!-- End Piwik Code -->
 
-{% if not COSINNUS_CURRENT_PORTAL.id == 7 %} {# not drja! #}
+{% if COSINNUS_CURRENT_PORTAL.id != 7 or request.LANGUAGE_CODE == 'de' %} {# for drja only for language DE! #}
 <!-- Start Userreport Code -->
 <script type="text/javascript">
 var _urq = _urq || [];
