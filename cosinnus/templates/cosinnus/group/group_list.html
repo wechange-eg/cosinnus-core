@@ -46,7 +46,7 @@
                             {
                                 lat: {{ group_location.location_lat|stringformat:"f" }}, 
                                 lon: {{ group_location.location_lon|stringformat:"f" }}, 
-                                title: '<img src="{% include 'cosinnus/group/group_avatar_image_url.html' %}" width="40px" class="pull-left"><div style="margin-left: 50px; min-height: 40px;"><a href="{{ group.get_absolute_url }}"><div>{{ group.name }}</a><br/><span>{{ group_location.location }}</span></div>',
+                                title: '<img src="{% include 'cosinnus/group/group_avatar_image_url.html' %}" width="40px" class="pull-left"><div style="margin-left: 50px; min-height: 40px;"><a href="{{ group.get_absolute_url }}"><div>{{ group.name }}</a><br/><span>{% block group_map_popup_details %}{{ group_location.location }}{% endblock %}</span></div>',
                                 {% if group.get_map_marker_image_url %}
                                     avatar: "{{ group.get_map_marker_image_url }}",
                                 {% endif %}

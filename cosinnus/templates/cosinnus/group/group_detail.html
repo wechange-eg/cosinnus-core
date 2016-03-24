@@ -40,7 +40,7 @@
 	                        {
 	                        	lat: {{ mt.location_lat|stringformat:"f" }}, 
 	                        	lon: {{ mt.location_lon|stringformat:"f" }}, 
-	                        	title: '<img src="{{ user.cosinnus_profile.get_map_marker_image_url }}" width="40px" class="pull-left"><div style="margin-left: 50px; min-height: 40px;"><a href="{% url 'cosinnus:profile-detail' username=user.username %}">{{ user|full_name }}</a><br/><span>{{ mt.location }}</span></div>',
+	                        	title: '<img src="{{ user.cosinnus_profile.get_map_marker_image_url }}" width="40px" class="pull-left"><div style="margin-left: 50px; min-height: 40px;"><a href="{% url 'cosinnus:profile-detail' username=user.username %}">{{ user|full_name }}</a><br/><span>{% block user_map_popup_details %}{{ mt.location }}{% endblock %}</span></div>',
 	                        	{% if user.cosinnus_profile.get_map_marker_image_url %}
 	                         		avatar: "{{ user.cosinnus_profile.get_map_marker_image_url }}",
 	                         	{% endif %}
