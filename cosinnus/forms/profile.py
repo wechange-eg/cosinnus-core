@@ -14,6 +14,7 @@ from cosinnus.forms.user import UserChangeForm
 class _UserProfileForm(forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
+    website = forms.URLField(widget=forms.TextInput, required=False)
     
     class Meta:
         model = get_user_profile_model()

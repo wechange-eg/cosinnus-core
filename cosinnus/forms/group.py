@@ -52,6 +52,7 @@ class AsssignPortalMixin(object):
 class _CosinnusProjectForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
+    website = forms.URLField(widget=forms.TextInput, required=False)
     
     class Meta:
         fields = ['name', 'public', 'description', 'description_long', 'contact_info', 
@@ -71,6 +72,7 @@ class _CosinnusProjectForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, forms.
 class _CosinnusSocietyForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
+    website = forms.URLField(widget=forms.TextInput, required=False)
     
     class Meta:
         fields = ['name', 'public', 'description', 'description_long', 'contact_info', 
