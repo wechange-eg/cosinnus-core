@@ -399,7 +399,7 @@ msgstr "Gemeledete Objekte"
 #: .\models\group.py:82
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
-"Bitt einen gültigen Namen angeben. Ein Vorwärtsslash ist nicht erlaubt."
+"Bitte einen gültigen Namen angeben. Ein Vorwärtsslash ist nicht erlaubt."
 
 #: .\models\group.py:421 .\models\group.py:572 .\models\group.py:972
 msgid "Portal"
@@ -1935,7 +1935,7 @@ msgstr "Deine Mitgliedschaft wurde noch nicht bestätigt..."
 
 #: .\templates\cosinnus\group\group_microsite.html:433
 msgid "Join now!"
-msgstr "Projekt beitreten!"
+msgstr "Jetzt beitreten!"
 
 #: .\templates\cosinnus\group\group_microsite.html:450
 msgid "or you can:"
