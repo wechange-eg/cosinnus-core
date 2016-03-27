@@ -6,7 +6,7 @@ import json
 from django.http.response import Http404
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 
 from cosinnus.views.mixins.tagged import HierarchyTreeMixin
 from django.utils.encoding import force_text
@@ -102,6 +102,8 @@ class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
                         folder_title = force_text(_('Root Folder'))
                     else:
                         folder_title = escape(from_folder['container_object'].title or force_text(_('<Root folder>')))
+                        if from_folder['container_object'].special_type:
+                            folder_title = force_text(pgettext_lazy('special_folder_type', folder_title))
                     all_folder_json.append( {'id': cur_id, 'parent': folder_id, 'a_attr': {'target_folder':from_folder['container_object'].id}, 'text': folder_title} )
                     for lower_folder in from_folder['containers']:
                         collect_folders(lower_folder, cur_id)
