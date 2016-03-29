@@ -1329,6 +1329,51 @@
             refresh_snap();
         },
 
+        
+        dashboardArrangeInput: function() {
+            $(window).on('dashboardArrangeInputShow', function() {
+                // Alle Widgets mit unsichtbaren Elementen abdecken
+                $('#dashboard > * > .dashboard-widget')
+                    .css('position', 'relative')
+                    .append('<div class="sortable-widget-overlay"></div>');
+
+                // Make widgets sortable
+                $('#dashboard > *').sortable({ 'connectWith': 'dashboardwidgets' });
+
+                $('#dashboardArrangeInputShow').hide();
+                $('#dashboardArrangeInputSave').show();
+            });
+            $('#dashboardArrangeInputShow').click(function() { $(window).trigger('dashboardArrangeInputShow'); });
+
+            $(window).on('dashboardArrangeInputSave', function() {
+                var widgets = {};
+
+                // Iterate all widgets and find the intended priority
+                $('#dashboard > * > .dashboard-widget').each(function() {
+                    widgets[$(this).data('widget-id')] = {
+                        'priority': Math.round($(this).position().top + ($(this).parent('#dashboard-col2').length ? 1 : 0) + ($(this).parent('#dashboard-col3').length ? 2 : 0)),
+                        'widget-id': $(this).data('widget-id'),
+                        'app-name': $(this).data('app-name'),
+                        'widget-name': $(this).data('widget-name'),
+                    };
+                });
+
+                $('#dashboardArrangeInputSave').hide();
+                $('#dashboardArrangeInputWait').show();
+
+                // TODO: Hier das Objekt an den Server senden und auf Refresh vom Dashboard warten
+                $.getJSON( "TODOajaxRECEIVER", widgets, function( data ) {
+                    $('#dashboardArrangeInputWait').hide();
+                    $('#dashboardArrangeInputShow').show();
+                    $('#dashboard .dashboard-widget .sortable-widget-overlay').remove();
+                });
+            });
+            $('#dashboardArrangeInputSave').click(function() { $(window).trigger('dashboardArrangeInputSave'); });
+
+        },
+        popover: function() {
+            $('.popover-button').popover();
+        },
 
     };
 })( jQuery );
@@ -1367,6 +1412,8 @@ $(function() {
     $.cosinnus.map();
     $.cosinnus.initFileUpload();
     $.cosinnus.dashboardArrange();
+    $.cosinnus.dashboardArrangeInput();
+    $.cosinnus.popover();
     $.cosinnus.toggleGroup();
     $.cosinnus.snapToBottom();
 });
