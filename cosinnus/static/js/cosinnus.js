@@ -1317,12 +1317,15 @@
                     } 
                 }
             }
-            $(window).on('resize orientationchange', function() {
-                $('.snap-to-bottom-placeholder').remove();
-                $('.snap-to-bottom').data('snapped', false).css({'position':'', 'bottom': '', 'width': ''});
-                refresh_snap();
-            });
-            $(window).on('scroll', refresh_snap);
+            if (typeof this.snapToBottomRegistered === "undefined") {
+                $(window).on('resize orientationchange', function() {
+                    $('.snap-to-bottom-placeholder').remove();
+                    $('.snap-to-bottom').data('snapped', false).css({'position':'', 'bottom': '', 'width': ''});
+                    refresh_snap();
+                });
+                $(window).on('scroll', refresh_snap);
+                this.snapToBottomRegistered = true;
+            }
             refresh_snap();
         },
 
