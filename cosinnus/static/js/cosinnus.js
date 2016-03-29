@@ -1342,6 +1342,7 @@
 
                 $('#dashboardArrangeInputShow').hide();
                 $('#dashboardArrangeInputSave').show();
+                $('#dashboardArrangeMessage').show();
             });
             $('#dashboardArrangeInputShow').click(function() { $(window).trigger('dashboardArrangeInputShow'); });
 

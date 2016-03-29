@@ -361,5 +361,7 @@ def save_widget_config(request):
             except WidgetConfig.DoesNotExist:
                 pass
     
+    messages.info(request, _('Your changes have been saved.'))
+    
     return JsonResponse({'status': 'ok'}, safe=False)
 

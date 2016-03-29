@@ -59,7 +59,7 @@
                     <i class="fa {% if edit_mode %}fa-reply{% else %}fa-cogs{% endif %}"></i>
                 </a>
                 <div class="media-body">
-                    {% trans "Wait..." %}
+                    {% trans "Saving..." %}
                 </div>
             </li>
         </ul>
@@ -81,6 +81,21 @@
     
     
     {% include 'cosinnus/messages.html' %}
+    
+    {% if SETTINGS.COSINNUS_ALLOW_DASHBOARD_WIDGET_REARRANGE %}
+    	<div id="dashboardArrangeMessage" class="alert alert-success alert-dismissable" style="display: none;">
+            <i class="fa fa-exclamation fa-3x"></i>
+            <h4>{% trans "You are now editing the dashboard's layout" %}</h4>
+            <div class="v-offset-s">
+	        <p>
+	        	{% blocktrans with group.name as group_name %}The layout you choose will be the layout for all members of {{ group_name }}! Click save to apply your changes.{% endblocktrans %}
+	        </p>
+	        <p>
+				{% trans "Drag and drop individual widgets to rearrange their order. Please note that the order you give is only an approximate prioritization for the widgets. After saving, the actual order on the page might differ depending on the widgets' current size and the overall page layout." %}</a>
+			</p>
+			</div>
+	    </div>
+    {% endif %}
     
     {% if SETTINGS.COSINNUS_MICROSITES_ENABLED %}
 	    {% comment %} -------    Microsite edit-me message ------------ {% endcomment %}
