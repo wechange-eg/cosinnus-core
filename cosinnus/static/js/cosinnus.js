@@ -1283,7 +1283,48 @@
                 });
 
             });
-        }
+        },
+        
+        snapToBottom: function() {
+            /* Snap class="snap-to-bottom" elements to the bottom of the page when they are scrolled out of view.
+             * This code assumes there is only one (!) of such elements on any page! */
+            
+            function refresh_snap() {
+                var placeholder = $('.snap-to-bottom-placeholder');
+                var elem = $('.snap-to-bottom');
+                
+                if (placeholder.length > 0) {
+                    // should we place the snapped element back inside the page?
+                    if (( placeholder.offset()['top'] + placeholder.outerHeight() ) <= ( $(window).height() + $(window).scrollTop() )) {
+                        // remove placeholder
+                        placeholder.remove();
+                        elem.data('snapped', false);
+                        elem.css({'position':'', 'bottom': '', 'width': ''});
+                    } 
+                } 
+                else {
+                    // should we make the page element snap to the screen?
+                    var elem_height = elem.outerHeight();
+                    var elem_width = elem.outerWidth();
+                    elem.css({'position':'', 'bottom': '', 'width': ''});
+                    if (( elem.offset()['top'] + elem_height ) > ( $(window).height() + $(window).scrollTop() )) {
+                        if (!elem.data('snapped')) {
+                            // leave a placeholder with the same height and width
+                            elem.after('<div class="snap-to-bottom-placeholder" style="width: '+ elem_width +'px; height: '+ elem_height +'px;"></div>')
+                            elem.css({'position':'fixed', 'bottom': '0', 'width': elem_width + 'px'});
+                            elem.data('snapped', true);
+                        }
+                    } 
+                }
+            }
+            $(window).on('resize orientationchange', function() {
+                $('.snap-to-bottom-placeholder').remove();
+                $('.snap-to-bottom').data('snapped', false).css({'position':'', 'bottom': '', 'width': ''});
+                refresh_snap();
+            });
+            $(window).on('scroll', refresh_snap);
+            refresh_snap();
+        },
 
 
     };
@@ -1324,5 +1365,6 @@ $(function() {
     $.cosinnus.initFileUpload();
     $.cosinnus.dashboardArrange();
     $.cosinnus.toggleGroup();
+    $.cosinnus.snapToBottom();
 });
 
