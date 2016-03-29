@@ -1302,7 +1302,7 @@
                         elem.css({'position':'', 'bottom': '', 'width': ''});
                     } 
                 } 
-                else {
+                else if (elem.length > 0) {
                     // should we make the page element snap to the screen?
                     var elem_height = elem.outerHeight();
                     var elem_width = elem.outerWidth();
