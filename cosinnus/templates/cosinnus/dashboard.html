@@ -26,46 +26,60 @@
         <!-- now the content -->
         <div class="col-lg-9 col-md-9"><!-- right column -->
 	
-	{% if SETTINGS.COSINNUS_ALLOW_DASHBOARD_WIDGET_REARRANGE %}
-    {% if user.is_authenticated and user.pk in group.admins or user.is_superuser %}
-    <button type="button" class="btn btn-emphasized" id="dashboardArrangeInputShow">
-        <ul class="media-list">
-            <li class="media">
-                <a class="pull-left" href="#">
-                    <i class="fa {% if edit_mode %}fa-reply{% else %}fa-cogs{% endif %}"></i>
-                </a>
-                <div class="media-body">
-                    {% trans "Rearrange" %}
-                </div>
-            </li>
-        </ul>
-    </button><!-- btn -->
-    <button type="button" class="btn btn-emphasized" id="dashboardArrangeInputSave" style="display: none;">
-        <ul class="media-list">
-            <li class="media">
-                <a class="pull-left" href="#">
-                    <i class="fa {% if edit_mode %}fa-reply{% else %}fa-cogs{% endif %}"></i>
-                </a>
-                <div class="media-body">
-                    {% trans "Save" %}
-                </div>
-            </li>
-        </ul>
-    </button><!-- btn -->
-    <button type="button" class="btn btn-emphasized" id="dashboardArrangeInputWait" style="display: none;">
-        <ul class="media-list">
-            <li class="media">
-                <a class="pull-left" href="#">
-                    <i class="fa {% if edit_mode %}fa-reply{% else %}fa-cogs{% endif %}"></i>
-                </a>
-                <div class="media-body">
-                    {% trans "Saving..." %}
-                </div>
-            </li>
-        </ul>
-    </button><!-- btn -->
-    {% endif %}
-    {% endif %}
+			{% if SETTINGS.COSINNUS_ALLOW_DASHBOARD_WIDGET_REARRANGE %}
+		    {% if user.is_authenticated and user.pk in group.admins or user.is_superuser %}
+		    <button type="button" class="btn btn-emphasized" id="dashboardArrangeInputShow">
+		        <ul class="media-list">
+		            <li class="media">
+		                <a class="pull-left" href="#">
+		                    <i class="fa {% if edit_mode %}fa-reply{% else %}fa-cogs{% endif %}"></i>
+		                </a>
+		                <div class="media-body">
+		                    {% trans "Rearrange" %}
+		                </div>
+		            </li>
+		        </ul>
+		    </button><!-- btn -->
+		    
+		    <button type="button" class="btn btn-emphasized" id="dashboardArrangeInputSave" style="display: none;">
+		        <ul class="media-list">
+		            <li class="media">
+		                <a class="pull-left" href="#">
+		                    <i class="fa {% if edit_mode %}fa-reply{% else %}fa-cogs{% endif %}"></i>
+		                </a>
+		                <div class="media-body">
+		                    {% trans "Save" %}
+		                </div>
+		            </li>
+		        </ul>
+		    </button><!-- btn -->
+		    <button type="button" class="btn btn-default" id="dashboardArrangeInputCancel" style="display: none;">
+		        <ul class="media-list">
+		            <li class="media">
+		                <a class="pull-left" href="#">
+		                    <i class="fa {% if edit_mode %}fa-reply{% else %}fa-cogs{% endif %}"></i>
+		                </a>
+		                <div class="media-body">
+		                    {% trans "Cancel" %}
+		                </div>
+		            </li>
+		        </ul>
+		    </button><!-- btn -->
+		    
+		    <button type="button" class="btn btn-emphasized" id="dashboardArrangeInputWait" style="display: none;" disabled=1>
+		        <ul class="media-list">
+		            <li class="media">
+		                <a class="pull-left" href="#">
+		                    <i class="fa fa-cogs"></i>
+		                </a>
+		                <div class="media-body">
+		                    {% trans "Saving..." %}
+		                </div>
+		            </li>
+		        </ul>
+		    </button><!-- btn -->
+		    {% endif %}
+		    {% endif %}
 
 
             
@@ -73,7 +87,8 @@
                 {% include 'cosinnus/breadcrumb.html' %}
                 <li class="active">{% trans "Dashboard" %}</li>
             </ol>
-    <div class="clearfix"></div>
+            
+    		<div class="clearfix"></div>
             
         </div><!-- right column -->
         

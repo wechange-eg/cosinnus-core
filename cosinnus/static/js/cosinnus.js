@@ -1342,10 +1342,17 @@
 
                 $('#dashboardArrangeInputShow').hide();
                 $('#dashboardArrangeInputSave').show();
+                $('#dashboardArrangeInputCancel').show();
                 $('#dashboardArrangeMessage').show();
             });
+            
             $('#dashboardArrangeInputShow').click(function() { $(window).trigger('dashboardArrangeInputShow'); });
-
+            $('#dashboardArrangeInputCancel').click(function() { 
+                $('#dashboardArrangeInputSave').attr('disabled', 1);
+                $('#dashboardArrangeInputCancel').attr('disabled', 1);
+                location.reload();
+            });
+            
             $(window).on('dashboardArrangeInputSave', function() {
                 var widgets = {};
 
@@ -1360,6 +1367,7 @@
                 });
 
                 $('#dashboardArrangeInputSave').hide();
+                $('#dashboardArrangeInputCancel').hide();
                 $('#dashboardArrangeInputWait').show();
                 
                 // save widget configs to server
