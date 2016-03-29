@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-29 17:51+0200\n"
-"PO-Revision-Date: 2016-03-29 18:05+0200\n"
+"PO-Revision-Date: 2016-03-29 18:14+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -3625,7 +3625,7 @@ msgstr ""
 
 #: .\views\widget.py:364
 msgid "Your changes have been saved."
-msgstr ""
+msgstr "Deine Änderungen wurden übernommen."
 
 #: .\wagtail_hooks.py:111
 msgid ""
