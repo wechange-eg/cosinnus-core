@@ -25,7 +25,8 @@
         
         <!-- now the content -->
         <div class="col-lg-9 col-md-9"><!-- right column -->
-
+	
+	{% if SETTINGS.COSINNUS_ALLOW_DASHBOARD_WIDGET_REARRANGE %}
     {% if user.is_authenticated and user.pk in group.admins or user.is_superuser %}
     <button type="button" class="btn btn-emphasized" id="dashboardArrangeInputShow">
         <ul class="media-list">
@@ -63,6 +64,7 @@
             </li>
         </ul>
     </button><!-- btn -->
+    {% endif %}
     {% endif %}
 
 

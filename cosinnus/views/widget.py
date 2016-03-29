@@ -19,7 +19,7 @@ from cosinnus.core.registries import widget_registry
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.utils.http import JSONResponse
 from cosinnus.utils.permissions import check_ug_admin, check_ug_membership,\
-    check_user_superuser
+    check_user_superuser, check_object_write_access
 from cosinnus.views.mixins.group import RequireReadOrRedirectMixin,\
     GroupObjectCountMixin
 from uuid import uuid1
@@ -30,6 +30,7 @@ from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse_lazy
 from cosinnus.utils.user import ensure_user_widget
+from django.http.response import HttpResponseNotAllowed, JsonResponse
 
 def widget_list(request):
     data = {}
@@ -334,3 +335,31 @@ class UserDashboard(DashboardWidgetMixin, TemplateView):
         return super(UserDashboard, self).get_context_data(**kwargs)
 
 user_dashboard = UserDashboard.as_view()
+
+
+def save_widget_config(request):
+    """ Save-endpoint WidgetConfig priorities for dashboard widget rearranging """
+    
+    user = request.user
+    if not user.is_authenticated():
+        return HttpResponseForbidden()
+    
+    if not request.is_ajax() or not request.method=='POST':
+        return HttpResponseNotAllowed(['POST'])
+    
+    import json
+    widgets = json.loads(request.POST.get('widget_data'))
+    for widget_id, props in widgets.items():
+        if 'priority' in props:
+            try:
+                wc = WidgetConfig.objects.get(id=int(widget_id))
+                
+                if (wc.group and check_object_write_access(wc.group, user)) or \
+                    (wc.user and wc.user.id == user.id):
+                    wc.sort_field = props.get('priority')
+                    wc.save()
+            except WidgetConfig.DoesNotExist:
+                pass
+    
+    return JsonResponse({'status': 'ok'}, safe=False)
+

@@ -1360,13 +1360,23 @@
 
                 $('#dashboardArrangeInputSave').hide();
                 $('#dashboardArrangeInputWait').show();
-
-                // TODO: Hier das Objekt an den Server senden und auf Refresh vom Dashboard warten
-                $.getJSON( "TODOajaxRECEIVER", widgets, function( data ) {
+                
+                // save widget configs to server
+                $.post( "/widgets/save/", { widget_data: JSON.stringify(widgets) }, "json")
+                .done(function( data ) {
+                    //$('#dashboardArrangeInputWait').hide();
+                    //$('#dashboardArrangeInputShow').show();
+                    //$('#dashboard .dashboard-widget .sortable-widget-overlay').remove();
+                    location.reload();
+                })
+                .fail(function() {
                     $('#dashboardArrangeInputWait').hide();
-                    $('#dashboardArrangeInputShow').show();
-                    $('#dashboard .dashboard-widget .sortable-widget-overlay').remove();
+                    $('#dashboardArrangeInputSave').show();
+                    alert('There was an error when saving the layout! Your changes have not been saved.')
+                })
+                .always(function() {
                 });
+                
             });
             $('#dashboardArrangeInputSave').click(function() { $(window).trigger('dashboardArrangeInputSave'); });
 
