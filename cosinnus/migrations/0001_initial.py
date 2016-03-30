@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
             name='TagObject',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('visibility', models.PositiveSmallIntegerField(default=1, blank=True, verbose_name='Permissions', choices=[('', ''), (0, 'Only me'), (1, 'Group/Project members only'), (2, 'Public (visible without login)')])),
+                ('visibility', models.PositiveSmallIntegerField(default=1, blank=True, verbose_name='Permissions', choices=[('', ''), (0, 'Only me'), (1, 'Team members only'), (2, 'Public (visible without login)')])),
                 ('location', osm_field.fields.OSMField(lat_field='location_lat', null=True, verbose_name='Location', lon_field='location_lon', blank=True)),
                 ('location_lat', osm_field.fields.LatitudeField(blank=True, null=True, verbose_name='Latitude', validators=[osm_field.validators.validate_latitude])),
                 ('location_lon', osm_field.fields.LongitudeField(blank=True, null=True, verbose_name='Longitude', validators=[osm_field.validators.validate_longitude])),
@@ -94,8 +94,8 @@ class Migration(migrations.Migration):
             ],
             options={
                 'ordering': ('name',),
-                'verbose_name': 'Cosinnus group',
-                'verbose_name_plural': 'Cosinnus groups',
+                'verbose_name': 'Cosinnus project',
+                'verbose_name_plural': 'Cosinnus projects',
             },
         ),
         migrations.CreateModel(
@@ -146,13 +146,13 @@ class Migration(migrations.Migration):
             name='CosinnusPermanentRedirect',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('from_type', models.CharField(max_length=50, verbose_name='From Group Type')),
+                ('from_type', models.CharField(max_length=50, verbose_name='From Team Type')),
                 ('from_slug', models.CharField(max_length=50, verbose_name='From Slug')),
             ],
             options={
                 'abstract': False,
-                'verbose_name': 'Permanent Group Redirect',
-                'verbose_name_plural': 'Permanent Group Redirects',
+                'verbose_name': 'Permanent Team Redirect',
+                'verbose_name_plural': 'Permanent Team Redirects',
             },
         ),
         migrations.CreateModel(
@@ -463,7 +463,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='cosinnuspermanentredirect',
             name='to_group',
-            field=models.ForeignKey(related_name='redirects', verbose_name='Permanent Group Redirects', to='cosinnus.CosinnusGroup'),
+            field=models.ForeignKey(related_name='redirects', verbose_name='Permanent Team Redirects', to='cosinnus.CosinnusGroup'),
         ),
         migrations.AddField(
             model_name='cosinnusgroup',

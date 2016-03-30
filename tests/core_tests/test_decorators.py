@@ -226,32 +226,32 @@ class TestRequireAdminAccessDecorator(TestCase):
         request = self.rf.get('/')
         request.user = self.anon
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(force_text(response.content), 'No team provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.user
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(force_text(response.content), 'No team provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.pending
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(force_text(response.content), 'No team provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.member
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(force_text(response.content), 'No team provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.admin
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(force_text(response.content), 'No team provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.superuser
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(force_text(response.content), 'No team provided')
         self.assertEqual(response.status_code, 404)
 
 
@@ -380,32 +380,32 @@ class TestRequireReadAccessDecorator(TestCase):
         request = self.rf.get('/')
         request.user = self.anon
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(force_text(response.content), 'No team provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.user
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(force_text(response.content), 'No team provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.pending
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(force_text(response.content), 'No team provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.member
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(force_text(response.content), 'No team provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.admin
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(force_text(response.content), 'No team provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.superuser
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(force_text(response.content), 'No team provided')
         self.assertEqual(response.status_code, 404)
 
 
@@ -534,30 +534,30 @@ class TestRequireWriteAccessDecorator(TestCase):
         request = self.rf.get('/')
         request.user = self.anon
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(force_text(response.content), 'No team provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.user
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(force_text(response.content), 'No team provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.pending
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(force_text(response.content), 'No team provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.member
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(force_text(response.content), 'No team provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.admin
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(force_text(response.content), 'No team provided')
         self.assertEqual(response.status_code, 404)
 
         request.user = self.superuser
         response = self.view.as_view()(request)
-        self.assertEqual(force_text(response.content), 'No group provided')
+        self.assertEqual(force_text(response.content), 'No team provided')
         self.assertEqual(response.status_code, 404)

@@ -47,7 +47,7 @@ class WidgetConfig(models.Model):
         if (self.group is None) ^ (self.user is None):
             super(WidgetConfig, self).save(*args, **kwargs)
             return
-        raise ValidationError(_('Either group or user must be defined.'))
+        raise ValidationError(_('Either team or user must be defined.'))
 
     def __getitem__(self, key):
         try:

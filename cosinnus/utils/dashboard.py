@@ -178,7 +178,7 @@ class GroupDescriptionWidget(DashboardWidget):
 
     app_name = 'cosinnus'
     model = CosinnusGroup
-    title = _('Group Description')
+    title = _('Team Description')
     user_model_attr = None
     widget_name = 'group_description'
     allow_on_user = False

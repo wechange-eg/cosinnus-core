@@ -37,7 +37,7 @@ def redirect_to_403(request, view=None, group=None):
     if group is not None:
         # only redirect to micropage if user isn't a member of the group
         if not request.user.is_authenticated() or not request.user.id in group.members:
-            messages.warning(request, _('Only group members can see the content you requested. Apply to become a member now!'))
+            messages.warning(request, _('Only team members can see the content you requested. Apply to become a member now!'))
             return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': group}))
     raise PermissionDenied
 
@@ -130,7 +130,7 @@ def require_admin_access_decorator(group_url_arg='group'):
         def wrapper(request, *args, **kwargs):
             group_name = kwargs.get(group_url_arg, None)
             if not group_name:
-                return HttpResponseNotFound(_("No group provided"))
+                return HttpResponseNotFound(_("No team provided"))
 
             group = get_group_for_request(group_name, request)
             user = request.user
@@ -187,7 +187,7 @@ def dispatch_group_access(group_url_kwarg='group', group_attr='group'):
         def wrapper(self, request, *args, **kwargs):
             group_name = kwargs.get(group_url_kwarg, None)
             if not group_name:
-                return HttpResponseNotFound(_("No group provided"))
+                return HttpResponseNotFound(_("No team provided"))
 
             group = get_group_for_request(group_name, request)
             
@@ -223,7 +223,7 @@ def require_admin_access(group_url_kwarg='group', group_attr='group'):
         def wrapper(self, request, *args, **kwargs):
             group_name = kwargs.get(group_url_kwarg, None)
             if not group_name:
-                return HttpResponseNotFound(_("No group provided"))
+                return HttpResponseNotFound(_("No team provided"))
 
             group = get_group_for_request(group_name, request)
             user = request.user
@@ -266,7 +266,7 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
         def wrapper(self, request, *args, **kwargs):
             group_name = kwargs.get(group_url_kwarg, None)
             if not group_name:
-                return HttpResponseNotFound(_("No group provided"))
+                return HttpResponseNotFound(_("No team provided"))
 
             group = get_group_for_request(group_name, request)
             user = request.user
@@ -330,7 +330,7 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
         def wrapper(self, request, *args, **kwargs):
             group_name = kwargs.get(group_url_kwarg, None)
             if not group_name:
-                return HttpResponseNotFound(_("No group provided"))
+                return HttpResponseNotFound(_("No team provided"))
             
             group = get_group_for_request(group_name, request)
             user = request.user
@@ -413,7 +413,7 @@ def require_user_token_access(token_name, group_url_kwarg='group', group_attr='g
             
             group_name = kwargs.get(group_url_kwarg, None)
             if not group_name:
-                return HttpResponseNotFound(_("No group provided"))
+                return HttpResponseNotFound(_("No team provided"))
 
             group = get_group_for_request(group_name, request)
             
@@ -464,7 +464,7 @@ def require_create_objects_in_access(group_url_kwarg='group', group_attr='group'
         def wrapper(self, request, *args, **kwargs):
             group_name = kwargs.get(group_url_kwarg, None)
             if not group_name:
-                return HttpResponseNotFound(_("No group provided"))
+                return HttpResponseNotFound(_("No team provided"))
 
             group = get_group_for_request(group_name, request)
             user = request.user

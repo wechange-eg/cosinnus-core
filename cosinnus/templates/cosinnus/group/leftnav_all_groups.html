@@ -18,12 +18,12 @@
 
 {% if current_page == "grouplist" or current_page == "addgroup" %}
 	{% captureas href %}{% url 'cosinnus:group-list' %}{% endcaptureas %}
-	{% captureas label %}{% trans "All groups" %}{% endcaptureas %}
+	{% captureas label %}{% trans "All projects" %}{% endcaptureas %}
 	{% include "cosinnus/leftnav_button.html" with active=is_grouplist extra_classes="regular-space" icon="fa-group" label=label href=href  %}
 	
 	{% if user|can_create_groups %}
 	    {% captureas href %}{% url 'cosinnus:group-add' %}{% endcaptureas %}
-	    {% captureas label %}{% trans "Create Group" %}{% endcaptureas %}
+	    {% captureas label %}{% trans "Create Project" %}{% endcaptureas %}
 	    {% include "cosinnus/leftnav_button.html" with active=is_addgroup icon="fa-plus" extra_classes="regular-space" label=label href=href  %}
 	{% endif %}
 {% endif %}

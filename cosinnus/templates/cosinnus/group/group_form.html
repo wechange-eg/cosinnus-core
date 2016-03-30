@@ -3,9 +3,9 @@
 
 {% block page_title %}
 	{% if object %}
-	   {% blocktrans with team_name=object.name %}Edit group “{{ team_name }}”{% endblocktrans %}
+	   {% blocktrans with team_name=object.name %}Edit “{{ team_name }}”{% endblocktrans %}
 	{% else %}
-	   {% if group_model == "CosinnusSociety" %}{% trans "Create Society" %}{% else %}{% trans "Create Group" %}{% endif %}
+	   {% if group_model == "CosinnusSociety" %}{% trans "Create Society" %}{% else %}{% trans "Create Project" %}{% endif %}
     {% endif %}
 {% endblock %}
 
@@ -24,9 +24,9 @@
 {% block breadcrumb %}
         {{ block.super }}
         {% if object %}
-            <li class="active">{% if group_model == "CosinnusSociety" %}{% trans "Edit Society" %}{% else %}{% trans "Edit Group" %}{% endif %}</li>
+            <li class="active">{% if group_model == "CosinnusSociety" %}{% trans "Edit Society" %}{% else %}{% trans "Edit Project" %}{% endif %}</li>
         {% else %}
-            <li class="active">{% if group_model == "CosinnusSociety" %}{% trans "Create Society" %}{% else %}{% trans "Create Group" %}{% endif %}</li>
+            <li class="active">{% if group_model == "CosinnusSociety" %}{% trans "Create Society" %}{% else %}{% trans "Create Project" %}{% endif %}</li>
         {% endif %}
 {% endblock %}
 
@@ -79,7 +79,7 @@
 						                </a>
 						                <div class="media-body media-body-form-control">
 						                    {{ form.forms.obj.name.errors }}
-					                        {% captureas placeholder %}{% if group_model == "CosinnusSociety" %}{% trans "Enter a name for the society." %}{% else %}{% trans "Enter a name for the group." %}{% endif %}{% endcaptureas %}
+					                        {% captureas placeholder %}{% if group_model == "CosinnusSociety" %}{% trans "Enter a name for the society." %}{% else %}{% trans "Enter a name for the project." %}{% endif %}{% endcaptureas %}
 					                        {% render_field form.forms.obj.name class+="form-control" placeholder=placeholder %}
 						                </div>
 						            </li>
@@ -160,7 +160,7 @@
 					                
 					                {% block group_form_description_field %}
 				                        <label>
-				                        	{% if group_model == "CosinnusSociety" %}{% trans "Describe the society in a few sentences." %}{% else %}{% trans "Describe the group in a few sentences." %}{% endif %}
+				                        	{% if group_model == "CosinnusSociety" %}{% trans "Describe the society in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
 				                        </label>
 				                        {{ form.forms.obj.description.errors }}
 				                        <div type="button" class="btn btn-default w100 regular-space">
@@ -264,7 +264,7 @@
 					                            </a>
 					                            <div class="media-body media-body-form-control">
 					                                <select name="public" class="form-control">
-					                                    <option default value="false">{% trans "Group/Project members only" %}</option>
+					                                    <option default value="false">{% trans "Team members only" %}</option>
 					                                    <option {% if object and object.public %}selected{% endif %} value="true">{% trans "Public (visible without login)" %}</option>
 					                                </select>
 					                            </div>
@@ -323,7 +323,7 @@
 						
 						{% block group_form_microsite_description_field %}
 		                    <label>
-		                    	{% if group_model == "CosinnusSociety" %}{% trans "Describe the society in a few sentences." %}{% else %}{% trans "Describe the group in a few sentences." %}{% endif %}
+		                    	{% if group_model == "CosinnusSociety" %}{% trans "Describe the society in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
 		                    	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
 		                    </label>
 		                    {{ form.forms.obj.description_long.errors }}

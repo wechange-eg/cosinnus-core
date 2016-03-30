@@ -12,7 +12,7 @@
 
 {% if user|has_write_access:object %}
 	{% captureas href %}{% group_url 'cosinnus:group-edit' group=group %}{% endcaptureas %}
-	{% captureas label %}{% if group and group.type == 1 or group_model == "CosinnusSociety" %}{% trans "Edit Society" %}{% else %}{% trans "Edit Group" %}{% endif %}{% endcaptureas %}
+	{% captureas label %}{% if group and group.type == 1 or group_model == "CosinnusSociety" %}{% trans "Edit Society" %}{% else %}{% trans "Edit Project" %}{% endif %}{% endcaptureas %}
 	{% include "cosinnus/leftnav_button.html" with active=is_editgroup extra_classes="fine-space" icon="fa-info-circle" label=label href=href  %}
 {% endif %}
 
@@ -34,7 +34,7 @@
     {% captureas extra_atts %}data-toggle="modal" data-target="#leave_join_group_modal"{% endcaptureas %}
     {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-sign-out" label=label href="#"  %}
     
-    {% captureas label %}{% if group and group.type == 1 or group_model == "CosinnusSociety" %}{% blocktrans with title=object.name %}Do you really want to leave society „{{ title }}“?{% endblocktrans %}{% else %}{% blocktrans with title=object.name %}Do you really want to leave group „{{ title }}“?{% endblocktrans %}{% endif %}{% endcaptureas %}
+    {% captureas label %}{% blocktrans with title=object.name %}Do you really want to leave „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
     {% captureas title %}{% trans "Leave" %}{% endcaptureas %}
     {% captureas action %}{% group_url 'cosinnus:group-user-leave' group=group %}{% endcaptureas %}
     
@@ -44,7 +44,7 @@
     {% captureas extra_atts %}data-toggle="modal" data-target="#leave_join_group_modal"{% endcaptureas %}
     {% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-sign-out" label=label href="#"  %}
     
-    {% captureas label %}{% blocktrans with title=group.name %}Do you really want to withdraw your join request to group „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+    {% captureas label %}{% blocktrans with title=group.name %}Do you really want to withdraw your join request to „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
     {% captureas title %}{% trans "Withdraw Join Request" %}{% endcaptureas %}
     {% captureas action %}{% group_url 'cosinnus:group-user-withdraw' group=group %}{% endcaptureas %}
     

@@ -79,11 +79,11 @@ class BaseTagObject(models.Model):
     VISIBILITY_CHOICES = (
         ('', ''),
         (VISIBILITY_USER, _('Only me')),  
-        (VISIBILITY_GROUP, _('Group/Project members only')), 
+        (VISIBILITY_GROUP, _('Team members only')), 
         (VISIBILITY_ALL, _('Public (visible without login)')), 
     )
 
-    group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, verbose_name=_('Group'),
+    group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, verbose_name=_('Team'),
         related_name='+', null=True, on_delete=models.CASCADE)
 
     persons = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
@@ -233,7 +233,7 @@ class BaseTaggableObjectModel(models.Model):
 
     attached_objects = models.ManyToManyField(AttachedObject, blank=True, null=True)
 
-    group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, verbose_name=_('Group'),
+    group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, verbose_name=_('Team'),
         related_name='%(app_label)s_%(class)s_set', on_delete=models.CASCADE)
 
     title = models.CharField(_('Title'), max_length=255)

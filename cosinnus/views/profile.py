@@ -204,7 +204,7 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, DeleteView)
         for group in CosinnusGroup.objects.get_for_user(user):
             admins = CosinnusGroupMembership.objects.get_admins(group=group)
             if user.pk in admins:
-                messages.error(self.request, _('You are the only administrator left for group "%s". Please appoint a different administrator or delete the group first.' % group.name))
+                messages.error(self.request, _('You are the only administrator left for "%s". Please appoint a different administrator or delete it first.' % group.name))
                 is_safe = False
         
         return is_safe

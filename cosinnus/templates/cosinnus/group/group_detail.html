@@ -276,7 +276,7 @@
                 {% endif %}
                 {% include "cosinnus/modal_box.html" with id=modal_promote_id label=label title=title form_action=action form_extra_fields=extra_fields %}
                 
-                {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to remove member „{{ name }}“ from the Group?{% endblocktrans %}{% endcaptureas %}
+                {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to remove member „{{ name }}“ from the team?{% endblocktrans %}{% endcaptureas %}
                 {% captureas title %}{% trans "Remove Member" %}{% endcaptureas %}
                 {% captureas action %}{% group_url 'cosinnus:group-user-delete' group=object username=member.username %}{% endcaptureas %}
                 {% include "cosinnus/modal_box.html" with id=modal_kick_id label=label title=title form_action=action %}

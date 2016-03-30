@@ -48,8 +48,8 @@ class TaggableModelSearchForm(SearchForm):
     :class:`~cosinnus.models.BaseTaggableObjectModel`.
     """
 
-    groups = forms.ChoiceField(label=_('Limit to groups'), required=False, initial='all',
-        choices=(('all', _('All')), ('mine', _('My groups')), ('others', _('Other groups'))),
+    groups = forms.ChoiceField(label=_('Limit to teams'), required=False, initial='all',
+        choices=(('all', _('All')), ('mine', _('My teams')), ('others', _('Other teams'))),
         widget=forms.RadioSelect)
     models = forms.MultipleChoiceField(required=False)
 

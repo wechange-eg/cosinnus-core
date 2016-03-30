@@ -42,7 +42,7 @@ user_tagged_in_object = dispatch.Signal(providing_args=["user", "obj", "audience
 """ 
 notifications = {
     'user_group_join_requested': {
-        'label': _('A user requested to become a member of this group (admins only)'), 
+        'label': _('A user requested to become a member of this team (admins only)'), 
         'mail_template': 'cosinnus/mail/user_group_join_requested.html',
         'subject_template': 'cosinnus/mail/user_group_join_requested_subj.txt',
         'signals': [user_group_join_requested],

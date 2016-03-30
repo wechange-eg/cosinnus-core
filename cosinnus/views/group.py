@@ -501,7 +501,7 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
     confirm_label = _('Join')
     confirm_question = _('Do you want to join the %(team_type)s “%(team_name)s”?')
     confirm_title = _('Join %(team_type)s “%(team_name)s”?')
-    message_success = _('You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a group administrator responds to your request.')
+    message_success = _('You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request.')
     
     template_name = 'cosinnus/group/group_confirm.html'
 
@@ -695,7 +695,7 @@ class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
                 messages.error(self.request, _('You cannot change your own admin status.'))
         elif current_status == MEMBERSHIP_ADMIN and new_status != MEMBERSHIP_ADMIN:
             messages.error(self.request, _('You cannot remove “%(username)s” form '
-                'this group. Only one admin left.') % {'username': user.username})
+                'this team. Only one admin left.') % {'username': user.username})
         return HttpResponseRedirect(self.get_success_url())
 
     def get_context_data(self, **kwargs):
@@ -729,7 +729,7 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
                 messages.error(self.request, _('You cannot remove yourself from a %(team_type)s.') % {'team_type':self.object._meta.verbose_name})
         else:
             messages.error(self.request, _('You cannot remove “%(username)s” form '
-                'this group. Only one admin left.') % {'username': user.username})
+                'this team. Only one admin left.') % {'username': user.username})
         if current_status == MEMBERSHIP_PENDING:
             signals.user_group_join_declined.send(sender=self, group=group, user=user)
         return HttpResponseRedirect(self.get_success_url())

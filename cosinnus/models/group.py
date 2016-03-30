@@ -560,7 +560,7 @@ class CosinnusBaseGroup(models.Model):
     
     #: Choices for :attr:`visibility`: ``(int, str)``
     TYPE_CHOICES = (
-        (TYPE_PROJECT, _('Group')),
+        (TYPE_PROJECT, _('Project')),
         (TYPE_SOCIETY, _('Society')),
     )
     
@@ -577,7 +577,7 @@ class CosinnusBaseGroup(models.Model):
     slug = models.SlugField(_('Slug'), 
         help_text=_('Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!'), 
         max_length=50)
-    type = models.PositiveSmallIntegerField(_('Group Type'), blank=False,
+    type = models.PositiveSmallIntegerField(_('Project Type'), blank=False,
         default=TYPE_PROJECT, choices=TYPE_CHOICES, editable=False)
     
     description = models.TextField(verbose_name=_('Short Description'),
@@ -608,7 +608,7 @@ class CosinnusBaseGroup(models.Model):
     deactivated_apps = models.CharField(_('Deactivated Apps'), max_length=255, 
         blank=True, null=True, editable=True)
     is_active = models.BooleanField(_('Is active'),
-        help_text=_('If a group is not active, it counts as non-existent for all purposes and views on the website.'),
+        help_text=_('If a team is not active, it counts as non-existent for all purposes and views on the website.'),
         default=True)
     
     parent = models.ForeignKey("self", verbose_name=_('Parent Group'),
@@ -622,8 +622,8 @@ class CosinnusBaseGroup(models.Model):
         abstract = True
         app_label = 'cosinnus'
         ordering = ('name',)
-        verbose_name = _('Cosinnus group')
-        verbose_name_plural = _('Cosinnus groups')
+        verbose_name = _('Cosinnus project')
+        verbose_name_plural = _('Cosinnus projects')
         unique_together = ('slug', 'portal', )
 
     def __init__(self, *args, **kwargs):
@@ -697,7 +697,7 @@ class CosinnusBaseGroup(models.Model):
         
         if display_redirect_created_message:
             # possible because of AddRequestToModelSaveMiddleware
-            messages.info(self.request, _('The URL for this group has changed. A redirect from all existing URLs has automatically been created!'))
+            messages.info(self.request, _('The URL for this team has changed. A redirect from all existing URLs has automatically been created!'))
         
         if created:
             # send creation signal
@@ -979,8 +979,8 @@ class CosinnusGroupMembership(BaseGroupMembership):
     CACHE_KEY_MODEL = 'CosinnusGroup'
     
     class Meta(BaseGroupMembership.Meta):
-        verbose_name = _('Group membership')
-        verbose_name_plural = _('Group memberships')  
+        verbose_name = _('Team membership')
+        verbose_name_plural = _('Team memberships')  
     
 
 class CosinnusPortalMembership(BaseGroupMembership):
@@ -1005,11 +1005,11 @@ class CosinnusPermanentRedirect(models.Model):
         
     from_portal = models.ForeignKey(CosinnusPortal, related_name='redirects',
         on_delete=models.CASCADE, verbose_name=_('From Portal'))
-    from_type = models.CharField(_('From Group Type'), max_length=50)
+    from_type = models.CharField(_('From Team Type'), max_length=50)
     from_slug = models.CharField(_('From Slug'), max_length=50)
     
     to_group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, related_name='redirects',
-        on_delete=models.CASCADE, verbose_name=_('Permanent Group Redirects'))
+        on_delete=models.CASCADE, verbose_name=_('Permanent Team Redirects'))
     
     _cache_string = None
     
@@ -1017,8 +1017,8 @@ class CosinnusPermanentRedirect(models.Model):
 
     
     class Meta(BaseGroupMembership.Meta):
-        verbose_name = _('Permanent Group Redirect')
-        verbose_name_plural = _('Permanent Group Redirects')
+        verbose_name = _('Permanent Team Redirect')
+        verbose_name_plural = _('Permanent Team Redirects')
         unique_together = (('from_portal', 'from_type', 'from_slug'), ('from_portal', 'to_group', 'from_slug'),)
     
     def __init__(self, *args, **kwargs):
@@ -1151,7 +1151,7 @@ class CosinnusLocation(models.Model):
 
     group = models.ForeignKey(
         settings.COSINNUS_GROUP_OBJECT_MODEL,
-        verbose_name=_('Group'),
+        verbose_name=_('Team'),
         on_delete=models.CASCADE,
         related_name='locations',
     )

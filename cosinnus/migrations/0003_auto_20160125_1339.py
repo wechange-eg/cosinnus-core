@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='cosinnuspermanentredirect',
             name='to_group',
-            field=models.ForeignKey(related_name='redirects', verbose_name='Permanent Group Redirects', to=settings.COSINNUS_GROUP_OBJECT_MODEL),
+            field=models.ForeignKey(related_name='redirects', verbose_name='Permanent Team Redirects', to=settings.COSINNUS_GROUP_OBJECT_MODEL),
         ),
         migrations.AlterField(
             model_name='tagobject',

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-30 15:52+0200\n"
+"POT-Creation-Date: 2016-03-30 18:43+0200\n"
 "PO-Revision-Date: 2016-03-29 18:14+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -84,7 +84,7 @@ msgstr ""
 
 #: .\core\decorators\views.py:40
 msgid ""
-"Only group members can see the content you requested. Apply to become a "
+"Only team members can see the content you requested. Apply to become a "
 "member now!"
 msgstr ""
 "Nur Mitglieder dieser Gruppe/Projekts können diesen Inhalt sehen. Stelle "
@@ -117,13 +117,13 @@ msgstr ""
 #: .\core\decorators\views.py:226 .\core\decorators\views.py:269
 #: .\core\decorators\views.py:333 .\core\decorators\views.py:416
 #: .\core\decorators\views.py:467
-msgid "No group provided"
+msgid "No team provided"
 msgstr "Kein Projekt angegeben"
 
 #: .\core\middleware.py:117
 msgid ""
-"This group/project no longer resides under the URL you entered. You have "
-"been redirected automatically to the current location."
+"This team no longer resides under the URL you entered. You have been "
+"redirected automatically to the current location."
 msgstr ""
 "Die Gruppe oder das Projekt liegt nicht länger unter der URL die du "
 "eingegeben hast. Du wurdest automatisch auf die aktuelle Adresse umgeleitet."
@@ -147,7 +147,7 @@ msgstr ""
 "Dein Mitgliedsantrag für %(team_name)s wurde abgelehnt auf %(site_name)s."
 
 #: .\cosinnus_notifications.py:45
-msgid "A user requested to become a member of this group (admins only)"
+msgid "A user requested to become a member of this team (admins only)"
 msgstr ""
 "Jemand hat beantragt Mitglied in dieser Gruppe zu werden (betrifft nur "
 "Gruppenadministratoren)"
@@ -259,15 +259,15 @@ msgid "Name"
 msgstr "Name"
 
 #: .\forms\search.py:51
-msgid "Limit to groups"
+msgid "Limit to teams"
 msgstr "Auf Projekte beschränken"
 
 #: .\forms\search.py:52
-msgid "My groups"
+msgid "My teams"
 msgstr "Meine Projekte"
 
 #: .\forms\search.py:52
-msgid "Other groups"
+msgid "Other teams"
 msgstr "Andere Projekte"
 
 #: .\forms\tagged.py:38
@@ -497,9 +497,8 @@ msgstr "Zusätzliches CSS"
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr "Wird vorgezogen gegenüber sämtlichem anderen CSS"
 
-#: .\models\group.py:563 .\models\group.py:1154 .\models\tagged.py:86
-#: .\models\tagged.py:236
-msgid "Group"
+#: .\models\group.py:563 .\templates\cosinnus\group\group_microsite.html:127
+msgid "Project"
 msgstr "Projekt"
 
 #: .\models\group.py:564 .\templates\cosinnus\group\group_microsite.html:127
@@ -516,7 +515,7 @@ msgstr ""
 "side-effects (redirects breaking e.g.)!"
 
 #: .\models\group.py:580
-msgid "Group Type"
+msgid "Project Type"
 msgstr "Gruppentyp"
 
 #: .\models\group.py:583
@@ -567,7 +566,7 @@ msgstr "Ist aktiv"
 
 #: .\models\group.py:611
 msgid ""
-"If a group is not active, it counts as non-existent for all purposes and "
+"If a team is not active, it counts as non-existent for all purposes and "
 "views on the website."
 msgstr ""
 "Wenn ein Projekt/Gruppe inaktiv ist, zählt es als nichtexistent und ist auf "
@@ -577,12 +576,12 @@ msgstr ""
 msgid "Parent Group"
 msgstr "Übergeordnete Gruppe"
 
-#: .\models\group.py:625
-msgid "Cosinnus group"
+#: .\models\group.py:625 .\models\group_extra.py:66
+msgid "Cosinnus project"
 msgstr "Projekt"
 
-#: .\models\group.py:626
-msgid "Cosinnus groups"
+#: .\models\group.py:626 .\models\group_extra.py:67
+msgid "Cosinnus projects"
 msgstr "Projekte"
 
 #: .\models\group.py:663
@@ -591,7 +590,7 @@ msgstr "Slug darf nicht leer sein."
 
 #: .\models\group.py:700
 msgid ""
-"The URL for this group has changed. A redirect from all existing URLs has "
+"The URL for this team has changed. A redirect from all existing URLs has "
 "automatically been created!"
 msgstr ""
 "Durch die Änderung hat sich die URL der Gruppe geändert. Eine dauerhafte "
@@ -599,11 +598,11 @@ msgstr ""
 "eingerichtet!"
 
 #: .\models\group.py:982
-msgid "Group membership"
+msgid "Team membership"
 msgstr "Gruppen/Projekt-Mitgliedschaft"
 
 #: .\models\group.py:983
-msgid "Group memberships"
+msgid "Team memberships"
 msgstr "Gruppen/Projekt-Mitgliedschaften"
 
 #: .\models\group.py:995
@@ -619,7 +618,7 @@ msgid "From Portal"
 msgstr "Von Portal"
 
 #: .\models\group.py:1008
-msgid "From Group Type"
+msgid "From Team Type"
 msgstr "Von Gruppentyp"
 
 #: .\models\group.py:1009
@@ -627,11 +626,11 @@ msgid "From Slug"
 msgstr "Von Slug"
 
 #: .\models\group.py:1012 .\models\group.py:1021
-msgid "Permanent Group Redirects"
+msgid "Permanent Team Redirects"
 msgstr "Dauerhaufte Gruppenweiterleitungen"
 
 #: .\models\group.py:1020
-msgid "Permanent Group Redirect"
+msgid "Permanent Team Redirect"
 msgstr "Dauerhaufte Gruppenweiterleitung"
 
 #: .\models\group.py:1148 .\models\tagged.py:124
@@ -648,6 +647,12 @@ msgstr ""
 msgid "Longitude"
 msgstr ""
 
+#: .\models\group.py:1154 .\models\tagged.py:86 .\models\tagged.py:236
+#, fuzzy
+#| msgid "Stream"
+msgid "Team"
+msgstr "Aktivitäten"
+
 #: .\models\group.py:1160
 #, fuzzy
 #| msgid "Cosinnus societies"
@@ -659,14 +664,6 @@ msgstr "Gruppen"
 #| msgid "Cosinnus societies"
 msgid "CosinnusLocations"
 msgstr "Gruppen"
-
-#: .\models\group_extra.py:66
-msgid "Cosinnus project"
-msgstr "Projekt"
-
-#: .\models\group_extra.py:67
-msgid "Cosinnus projects"
-msgstr "Projekte"
 
 #: .\models\group_extra.py:99
 msgid "Cosinnus society"
@@ -699,7 +696,9 @@ msgid "Only me"
 msgstr "Nur ich"
 
 #: .\models\tagged.py:82 .\templates\cosinnus\group\group_form.html:267
-msgid "Group/Project members only"
+#: .\templates\cosinnus\media_tags_userprofile.html:84
+#: .\templates\cosinnus\media_tags_userprofile_readonly.html:52
+msgid "Team members only"
 msgstr "Nur Gruppen/Projekt-Mitglieder"
 
 #: .\models\tagged.py:83 .\templates\cosinnus\group\group_form.html:268
@@ -936,7 +935,7 @@ msgid "Widget configurations"
 msgstr "Widget Konfigurationen"
 
 #: .\models\widget.py:50
-msgid "Either group or user must be defined."
+msgid "Either team or user must be defined."
 msgstr "Es muss entweder ein Projekt oder ein/eine Benutzer_in ausgewählt sein"
 
 #: .\models\widget.py:95
@@ -1106,7 +1105,7 @@ msgstr "Beitreten"
 #: .\templates\cosinnus\group\group_microsite.html:425
 #: .\templates\cosinnus\group\leftnav_group.html:48
 #, python-format
-msgid "Do you really want to withdraw your join request to group „%(title)s“?"
+msgid "Do you really want to withdraw your join request to „%(title)s“?"
 msgstr ""
 "Möchten sie ihre Beitrittsanfrage für das Projekt “%(title)s” zurückziehen?"
 
@@ -1182,13 +1181,11 @@ msgid "Browse..."
 msgstr "Durchsuchen..."
 
 #: .\templates\cosinnus\breadcrumb.html:3
-msgctxt "society"
 msgid "Group overview"
 msgstr "Gruppenübersicht"
 
 #: .\templates\cosinnus\breadcrumb.html:5
-msgctxt "group"
-msgid "Group overview"
+msgid "Project overview"
 msgstr "Projektübersicht"
 
 #: .\templates\cosinnus\common\403.html:5
@@ -1369,12 +1366,12 @@ msgid "Request"
 msgstr "rückziehen"
 
 #: .\templates\cosinnus\dashboard.html:207
-msgctxt "join request pending group button first item"
+msgctxt "join request pending team button first item"
 msgid "Join"
 msgstr "Antrag"
 
 #: .\templates\cosinnus\dashboard.html:208
-msgctxt "join request pending group button second item"
+msgctxt "join request pending team button second item"
 msgid "Requested"
 msgstr "gestellt"
 
@@ -1507,11 +1504,11 @@ msgstr "Deaktivieren"
 
 #: .\templates\cosinnus\group\group_delete.html:5
 #, python-format
-msgid "Delete group “%(team_name)s”"
+msgid "Delete team “%(team_name)s”"
 msgstr "Projekt “%(team_name)s” löschen"
 
 #: .\templates\cosinnus\group\group_delete.html:13
-msgid "Are you sure you want to delete this group?"
+msgid "Are you sure you want to delete this team?"
 msgstr "Sind sie sicher dass sie dieses Projekt löschen wollen?"
 
 #: .\templates\cosinnus\group\group_detail.html:5
@@ -1621,7 +1618,7 @@ msgstr "Mitglied befördern"
 
 #: .\templates\cosinnus\group\group_detail.html:280
 #, python-format
-msgid "Do you really want to remove member „%(name)s“ from the Group?"
+msgid "Do you really want to remove member „%(name)s“ from the team?"
 msgstr "Möchten sie wirklich „%(name)s“ aus dem Projekt entfernen?"
 
 #: .\templates\cosinnus\group\group_detail.html:281
@@ -1643,7 +1640,7 @@ msgstr "Zeige die restlichen %(more_count)s Benutzer..."
 #: .\templates\cosinnus\group\group_export.html:5
 #: .\templates\cosinnus\group\group_export.html:9
 #, python-format
-msgid "Export Group “%(team_name)s”"
+msgid "Export Team “%(team_name)s”"
 msgstr "Exportiere Projekt “%(team_name)s”"
 
 #: .\templates\cosinnus\group\group_export.html:16
@@ -1658,7 +1655,7 @@ msgstr "Exportieren"
 
 #: .\templates\cosinnus\group\group_form.html:6
 #, python-format
-msgid "Edit group “%(team_name)s”"
+msgid "Edit “%(team_name)s”"
 msgstr "Projekt “%(team_name)s” bearbeiten"
 
 #: .\templates\cosinnus\group\group_form.html:8
@@ -1671,7 +1668,7 @@ msgstr "Gruppe erstellen"
 #: .\templates\cosinnus\group\group_form.html:8
 #: .\templates\cosinnus\group\group_form.html:29
 #: .\templates\cosinnus\group\leftnav_all_groups.html:27
-msgid "Create Group"
+msgid "Create Project"
 msgstr "Projekt erstellen"
 
 #: .\templates\cosinnus\group\group_form.html:27
@@ -1681,7 +1678,7 @@ msgstr "Gruppe bearbeiten"
 
 #: .\templates\cosinnus\group\group_form.html:27
 #: .\templates\cosinnus\group\leftnav_group.html:16
-msgid "Edit Group"
+msgid "Edit Project"
 msgstr "Projekt bearbeiten"
 
 #: .\templates\cosinnus\group\group_form.html:45
@@ -1693,7 +1690,7 @@ msgid "Enter a name for the society."
 msgstr "Gib einen Namen für die Gruppe ein"
 
 #: .\templates\cosinnus\group\group_form.html:82
-msgid "Enter a name for the group."
+msgid "Enter a name for the project."
 msgstr "Gib einen Namen für das Projekt ein"
 
 #: .\templates\cosinnus\group\group_form.html:109
@@ -1715,7 +1712,7 @@ msgstr "Beschreibe die Gruppe in ein paar Sätzen."
 
 #: .\templates\cosinnus\group\group_form.html:163
 #: .\templates\cosinnus\group\group_form.html:326
-msgid "Describe the group in a few sentences."
+msgid "Describe the project in a few sentences."
 msgstr "Beschreibe das Projekt in ein paar Sätzen."
 
 #: .\templates\cosinnus\group\group_form.html:199
@@ -1845,13 +1842,13 @@ msgid "Edit"
 msgstr "Bearbeiten"
 
 #: .\templates\cosinnus\group\group_list.html:216
-msgid "Group details"
+msgid "Details"
 msgstr "Projektdetails"
 
 #: .\templates\cosinnus\group\group_list.html:265
 #: .\templates\cosinnus\group\leftnav_group.html:38
 #, python-format
-msgid "Do you really want to leave group „%(title)s“?"
+msgid "Do you really want to leave „%(title)s“?"
 msgstr "Möchten sie das Projekt “%(title)s” verlassen?"
 
 #: .\templates\cosinnus\group\group_list.html:283
@@ -1914,10 +1911,6 @@ msgstr "Öffentliches Projekt"
 msgid "Public Society"
 msgstr "Öffentliche Gruppe"
 
-#: .\templates\cosinnus\group\group_microsite.html:127
-msgid "Project"
-msgstr "Projekt"
-
 #: .\templates\cosinnus\group\group_microsite.html:178
 msgid "News posts"
 msgstr "Neuigkeiten-Posts"
@@ -1974,7 +1967,7 @@ msgid "or you can:"
 msgstr "oder:"
 
 #: .\templates\cosinnus\group\group_microsite.html:465
-msgid "Browse this public group"
+msgid "Browse this public team"
 msgstr "Schau in dieses öffentliche Projekt"
 
 #: .\templates\cosinnus\group\group_user_list.html:4
@@ -1993,7 +1986,7 @@ msgid "There are no visible users."
 msgstr "Es gibt keine sichtbaren Benutzer_innen."
 
 #: .\templates\cosinnus\group\leftnav_all_groups.html:22
-msgid "All groups"
+msgid "All projects"
 msgstr "Alle Projekte"
 
 #: .\templates\cosinnus\group\leftnav_all_groups.html:34
@@ -2024,11 +2017,6 @@ msgstr "Projekt reaktivieren"
 #: .\templates\cosinnus\group\leftnav_group.html:28
 msgid "Deactivate Project"
 msgstr "Projekt deaktivieren"
-
-#: .\templates\cosinnus\group\leftnav_group.html:38
-#, python-format
-msgid "Do you really want to leave society „%(title)s“?"
-msgstr "Möchten sie die Gruppe “%(title)s” verlassen?"
 
 #: .\templates\cosinnus\group\leftnav_group.html:44
 msgid "Withdraw Request"
@@ -2201,7 +2189,7 @@ msgstr ""
 "Dein Mitgliedsantrag für %(team_name)s wurde angenommen!"
 
 #: .\templates\cosinnus\mail\user_group_join_accepted.html:7
-msgid "Follow this link to get active in the group:"
+msgid "Follow this link to get active:"
 msgstr "Folge diesem Link um im Projekt aktiv zu werden:"
 
 #: .\templates\cosinnus\mail\user_group_join_accepted.html:12
@@ -2224,7 +2212,7 @@ msgstr ""
 
 #: .\templates\cosinnus\mail\user_group_join_declined.html:7
 msgid ""
-"If you feel this is unfair, we suggest you contact one of the group's "
+"If you feel this is unfair, we suggest you contact one of the team's "
 "administrators for further information:"
 msgstr ""
 "Wenn das Gefühl hast, dass diese Entscheidung ungerechtfertig ist,"
@@ -2238,7 +2226,7 @@ msgid ""
 "Please go to the following page to accept or decline the request:\n"
 "%(domain_url)s%(group_page_url)s\n"
 "\n"
-"You're receiving this email because you are an administrator of this group.\n"
+"You're receiving this email because you are an administrator of this team.\n"
 "\n"
 "(Follow this link to edit your notification preferences: %"
 "(notification_settings_url)s )\n"
@@ -2511,12 +2499,6 @@ msgstr "Was möchtest du lernen?"
 msgid "Who is allowed to see you on the platform?"
 msgstr "Wer darf dich auf der Plattform sehen?"
 
-#: .\templates\cosinnus\media_tags_userprofile.html:84
-#: .\templates\cosinnus\media_tags_userprofile_readonly.html:52
-msgid "Group Members only"
-msgstr "Nur Projektmitglieder"
-
-#
 #: .\templates\cosinnus\media_tags_userprofile.html:85
 #: .\templates\cosinnus\media_tags_userprofile_readonly.html:46
 msgid "Logged in Members only"
@@ -2860,11 +2842,11 @@ msgstr "In Projekten suchen"
 
 #: .\templates\cosinnus\search.html:169
 #: .\templates\cosinnus\user\userprofile_detail.html:143
-msgid "My Groups"
+msgid "My Projects"
 msgstr "Meine Projekte"
 
 #: .\templates\cosinnus\search.html:182
-msgid "Other Groups"
+msgid "Other Projects"
 msgstr "Andere Projekte"
 
 #: .\templates\cosinnus\search.html:292
@@ -3212,7 +3194,7 @@ msgid "Attach image/file"
 msgstr "Bild/Datei anhängen"
 
 #: .\templates\cosinnus\widgets\not_allowed_group.html:2
-msgid "You cannot put this widget on a group dashboard."
+msgid "You cannot put this widget on a team dashboard."
 msgstr "Sie können dieses Widget nicht auf das Projektdashboard platzieren"
 
 #: .\templates\cosinnus\widgets\not_allowed_user.html:2
@@ -3256,7 +3238,7 @@ msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr "<i>%(model_name)s konnte nicht gerendert werden!</i>"
 
 #: .\utils\dashboard.py:181
-msgid "Group Description"
+msgid "Team Description"
 msgstr "Projektbeschreibung"
 
 #: .\utils\dashboard.py:348
@@ -3311,7 +3293,7 @@ msgstr "%(team_type)s %(team_name)s beitreten?"
 #, python-format
 msgid ""
 "You have requested to join the %(team_type)s “%(team_name)s”. You will "
-"receive an email as soon as a group administrator responds to your request."
+"receive an email as soon as a team administrator responds to your request."
 msgstr ""
 "Dein Antrag auf Mitgliedschaft für %(team_type)s “%(team_name)s” wurde "
 "gestellt. Du erhältst eine E-Mail sobald ein Projektadministrator den Antrag "
@@ -3368,7 +3350,7 @@ msgstr "Sie können ihren eigenen Administratorstatus nicht ändern."
 
 #: .\views\group.py:697 .\views\group.py:731
 #, python-format
-msgid "You cannot remove “%(username)s” form this group. Only one admin left."
+msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgstr ""
 "Sie können “%(username)s” nicht von diesem Projekt entfernen. Er/sie ist der "
 "einzig übrige Administrator."
@@ -3533,8 +3515,8 @@ msgstr ""
 #: .\views\profile.py:207
 #, python-format
 msgid ""
-"You are the only administrator left for group \"%s\". Please appoint a "
-"different administrator or delete the group first."
+"You are the only administrator left for \"%s\". Please appoint a different "
+"administrator or delete it first."
 msgstr ""
 "Du bist der/die letzte Administrator(in) übrig in \"%s\". Bitte wähle vor "
 "dem Löschen deines Profils einen anderen Administrator aus oder lösche das "
@@ -3689,6 +3671,9 @@ msgstr ""
 msgid "Import"
 msgstr "Exportieren"
 
+#~ msgid "Do you really want to leave society „%(title)s“?"
+#~ msgstr "Möchten sie die Gruppe “%(title)s” verlassen?"
+
 #~ msgid "Wait..."
 #~ msgstr "Warte..."
 
@@ -3702,9 +3687,6 @@ msgstr "Exportieren"
 
 #~ msgid "Hidden"
 #~ msgstr "Versteckt"
-
-#~ msgid "Other Projects"
-#~ msgstr "Weitere Projekte"
 
 #~ msgid "Register now!"
 #~ msgstr "Jetzt registrieren!"
@@ -3780,9 +3762,6 @@ msgstr "Exportieren"
 
 #~ msgid "Refresh"
 #~ msgstr "Neu laden"
-
-#~ msgid "Group Members"
-#~ msgstr "Mitglieder"
 
 #~ msgid "Group Admin"
 #~ msgstr "Projektadministrator_in"
@@ -3916,9 +3895,6 @@ msgstr "Exportieren"
 
 #~ msgid "Pending users"
 #~ msgstr "Zu bestätigende Benutzer_innen"
-
-#~ msgid "Edit group"
-#~ msgstr "Projekt bearbeiten"
 
 #~ msgid "Group “%(team_name)s”"
 #~ msgstr "Projekt “%(team_name)s”"

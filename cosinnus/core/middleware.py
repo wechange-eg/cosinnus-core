@@ -114,7 +114,7 @@ class GroupPermanentRedirectMiddleware(object):
                     if to_group:
                         # redirect to the redirect with HttpResponsePermanentRedirect
                         redirect_url = ''.join((to_group.get_absolute_url(), '/'.join(request_tokens[5:])))
-                        messages.success(request, _('This group/project no longer resides under the URL you entered. You have been redirected automatically to the current location.'))
+                        messages.success(request, _('This team no longer resides under the URL you entered. You have been redirected automatically to the current location.'))
                         return HttpResponseRedirect(redirect_url)
         except Exception, e:
             if settings.DEBUG:
