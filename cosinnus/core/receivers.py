@@ -15,20 +15,20 @@ from django.contrib.auth import get_user_model
 def send_group_join_request_mail(sender, group, user, **kwargs):
     for admin in get_user_model()._default_manager.filter(id__in=group.admins):
         context = get_common_mail_context(sender.request, group=group, user=user)
-        subject = _('%(user_name)s wants to join %(group_name)s on %(site_name)s!')
+        subject = _('%(user_name)s wants to join %(team_name)s on %(site_name)s!')
         send_mail_or_fail(admin.email, subject % context, 'cosinnus/mail/user_group_join_requested.html', context)
 """
                 
 @receiver(user_group_join_accepted)
 def send_group_join_accepted_mail(sender, group, user, **kwargs):
     context = get_common_mail_context(sender.request, group=group, user=user)
-    subject = _('Your membership request for %(group_name)s has been accepted on %(site_name)s!')
+    subject = _('Your membership request for %(team_name)s has been accepted on %(site_name)s!')
     send_mail_or_fail(user.email, subject % context, 'cosinnus/mail/user_group_join_accepted.html', context)
 
                 
 @receiver(user_group_join_declined)
 def send_group_join_declined_mail(sender, group, user, **kwargs):
     context = get_common_mail_context(sender.request, group=group, user=user)
-    subject = _('Your membership request for %(group_name)s has been declined on %(site_name)s.')
+    subject = _('Your membership request for %(team_name)s has been declined on %(site_name)s.')
     send_mail_or_fail(user.email, subject % context, 'cosinnus/mail/user_group_join_declined.html', context)
 

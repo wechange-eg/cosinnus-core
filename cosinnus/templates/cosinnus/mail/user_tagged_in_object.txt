@@ -1,6 +1,6 @@
 {% load i18n cosinnus_tags %}{% blocktrans %}Hi {{ receiver_name }},
 
-you were tagged in "{{ object_name }}" in {{ group_name }} by {{ sender_name }}. 
+you were tagged in "{{ object_name }}" in {{ team_name }} by {{ sender_name }}. 
 
 You can find it by following this link: {{ object_url }}
 

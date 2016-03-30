@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-30 11:52+0200\n"
+"POT-Creation-Date: 2016-03-30 14:25+0200\n"
 "PO-Revision-Date: 2015-11-11 10:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -105,12 +105,12 @@ msgstr "Будь ласка, увійдіть у систему, щоб отри
 #, python-format
 msgid ""
 "The page you tried to access belongs to an app that has been deactivated for "
-"this %(group_type)s. If you feel this is in error, ask the %(group_type)s's "
+"this %(team_type)s. If you feel this is in error, ask the %(team_type)s's "
 "administrator to reactivate the app."
 msgstr ""
 "Сторінка, на яку ви намагаєтеся зайти, належить до застосунку, який було "
-"деактивовано у цьому/цій %(group_type)s. Щоб активувати його зверніться до "
-"адміністратора/-ки %(group_type)s."
+"деактивовано у цьому/цій %(team_type)s. Щоб активувати його зверніться до "
+"адміністратора/-ки %(team_type)s."
 
 #: .\core\decorators\views.py:133 .\core\decorators\views.py:190
 #: .\core\decorators\views.py:226 .\core\decorators\views.py:269
@@ -135,17 +135,14 @@ msgstr ""
 #: .\core\receivers.py:25
 #, python-format
 msgid ""
-"Your membership request for %(group_name)s has been accepted on %(site_name)"
-"s!"
-msgstr ""
-"Ваш запит членства у %(group_name)s було задовільнено на %(site_name)s!"
+"Your membership request for %(team_name)s has been accepted on %(site_name)s!"
+msgstr "Ваш запит членства у %(team_name)s було задовільнено на %(site_name)s!"
 
 #: .\core\receivers.py:32
 #, python-format
 msgid ""
-"Your membership request for %(group_name)s has been declined on %(site_name)"
-"s."
-msgstr "Ваш запит членства у %(group_name)s було відхилено на %(site_name)s."
+"Your membership request for %(team_name)s has been declined on %(site_name)s."
+msgstr "Ваш запит членства у %(team_name)s було відхилено на %(site_name)s."
 
 #: .\cosinnus_notifications.py:45
 msgid "A user requested to become a member of this group (admins only)"
@@ -1268,7 +1265,7 @@ msgstr ""
 #: .\templates\cosinnus\dashboard.html:106
 #, python-format
 msgid ""
-"The layout you choose will be the layout for all members of %(group_name)s! "
+"The layout you choose will be the layout for all members of %(team_name)s! "
 "Click save to apply your changes."
 msgstr ""
 
@@ -1504,8 +1501,8 @@ msgstr "Деактивувати"
 
 #: .\templates\cosinnus\group\group_delete.html:5
 #, python-format
-msgid "Delete group “%(group_name)s”"
-msgstr "Видалити проект «%(group_name)s»"
+msgid "Delete group “%(team_name)s”"
+msgstr "Видалити проект «%(team_name)s»"
 
 #: .\templates\cosinnus\group\group_delete.html:13
 msgid "Are you sure you want to delete this group?"
@@ -1513,8 +1510,8 @@ msgstr "Ви дійсно бажаєте видалити цей проект?"
 
 #: .\templates\cosinnus\group\group_detail.html:5
 #, python-format
-msgid "%(group_name)s - Members"
-msgstr "Члени %(group_name)s"
+msgid "%(team_name)s - Members"
+msgstr "Члени %(team_name)s"
 
 #: .\templates\cosinnus\group\group_detail.html:69
 #: .\templates\cosinnus\group\group_detail.html:71
@@ -1637,8 +1634,8 @@ msgstr ""
 #: .\templates\cosinnus\group\group_export.html:5
 #: .\templates\cosinnus\group\group_export.html:9
 #, python-format
-msgid "Export Group “%(group_name)s”"
-msgstr "Експортування проекту «%(group_name)s»"
+msgid "Export Group “%(team_name)s”"
+msgstr "Експортування проекту «%(team_name)s»"
 
 #: .\templates\cosinnus\group\group_export.html:16
 #, python-format
@@ -1652,8 +1649,8 @@ msgstr "Експортувати"
 
 #: .\templates\cosinnus\group\group_form.html:6
 #, python-format
-msgid "Edit group “%(group_name)s”"
-msgstr "Редагувати проект «%(group_name)s»"
+msgid "Edit group “%(team_name)s”"
+msgstr "Редагувати проект «%(team_name)s»"
 
 #: .\templates\cosinnus\group\group_form.html:8
 #: .\templates\cosinnus\group\group_form.html:29
@@ -2183,11 +2180,11 @@ msgstr ""
 msgid ""
 "Hi, %(user_name)s!\n"
 "\n"
-"Your membership request for group %(group_name)s has been accepted!"
+"Your membership request for group %(team_name)s has been accepted!"
 msgstr ""
 "Вітаємо, %(user_name)s!\n"
 "\n"
-"Ваше прохання про членство у проекті %(group_name)s було задовільнено!"
+"Ваше прохання про членство у проекті %(team_name)s було задовільнено!"
 
 #: .\templates\cosinnus\mail\user_group_join_accepted.html:7
 msgid "Follow this link to get active in the group:"
@@ -2205,12 +2202,12 @@ msgstr "Команда %(site_name)s"
 msgid ""
 "Hi, %(user_name)s!\n"
 "\n"
-"We're sorry, but your membership request for group %(group_name)s has been "
+"We're sorry, but your membership request for group %(team_name)s has been "
 "declined."
 msgstr ""
 "Вітаємо, %(user_name)s!\n"
 "\n"
-"Вибачте, вам відмовлено у проханні про членство у проекті %(group_name)s."
+"Вибачте, вам відмовлено у проханні про членство у проекті %(team_name)s."
 
 #: .\templates\cosinnus\mail\user_group_join_declined.html:7
 msgid ""
@@ -2223,7 +2220,7 @@ msgstr ""
 #: .\templates\cosinnus\mail\user_group_join_requested.html:1
 #, python-format
 msgid ""
-"User \"%(sender_name)s\" has requested to join the group %(group_name)s.\n"
+"User \"%(sender_name)s\" has requested to join the group %(team_name)s.\n"
 "\n"
 "Please go to the following page to accept or decline the request:\n"
 "%(domain_url)s%(group_page_url)s\n"
@@ -2236,8 +2233,7 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
-"Користувач/-ка «%(sender_name)s» хоче долучитися до спільноти %(group_name)"
-"s.\n"
+"Користувач/-ка «%(sender_name)s» хоче долучитися до спільноти %(team_name)s.\n"
 "\n"
 "Будь ласка, перейдіть на наступну сторінку, щоб підтвердити запит або "
 "відмовити:\n"
@@ -2254,8 +2250,8 @@ msgstr ""
 
 #: .\templates\cosinnus\mail\user_group_join_requested_subj.txt:1
 #, python-format
-msgid "%(sender_name)s wants to join %(group_name)s on %(site_name)s!"
-msgstr "%(sender_name)s хоче долучитися до %(group_name)s на %(site_name)s!"
+msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
 
 #: .\templates\cosinnus\mail\user_register_notification.html:1
 #, python-format
@@ -2471,7 +2467,7 @@ msgstr "Ваш запит членства на %(site_name)s!"
 msgid ""
 "Hi %(receiver_name)s,\n"
 "\n"
-"you were tagged in \"%(object_name)s\" in %(group_name)s by %(sender_name)"
+"you were tagged in \"%(object_name)s\" in %(team_name)s by %(sender_name)"
 "s. \n"
 "\n"
 "You can find it by following this link: %(object_url)s\n"
@@ -2485,7 +2481,7 @@ msgid ""
 msgstr ""
 "Вітаємо, %(receiver_name)s!\n"
 "\n"
-"%(sender_name)s позначив/-ла вас у «%(object_name)s» у %(group_name)s.\n"
+"%(sender_name)s позначив/-ла вас у «%(object_name)s» у %(team_name)s.\n"
 "\n"
 "Ви можете переглянути це за наступним посиланням:\n"
 "%(object_url)s\n"
@@ -2499,8 +2495,8 @@ msgstr ""
 
 #: .\templates\cosinnus\mail\user_tagged_in_object_subj.txt:1
 #, python-format
-msgid "You were tagged in: \"%(object_name)s\", in %(group_name)s"
-msgstr "Вас позначено: «%(object_name)s» у %(group_name)s"
+msgid "You were tagged in: \"%(object_name)s\", in %(team_name)s"
+msgstr "Вас позначено: «%(object_name)s» у %(team_name)s"
 
 #: .\templates\cosinnus\media_tags.html:8
 msgid "Tag persons"
@@ -3291,11 +3287,11 @@ msgstr "Я погоджуюся з умовами користування"
 msgid ""
 "Hi %(admin_name)s,\n"
 "\n"
-"The user %(user_name)s wants to join the group %(group_name)s."
+"The user %(user_name)s wants to join the group %(team_name)s."
 msgstr ""
 "Вітаємо, %(admin_name)s!\n"
 "\n"
-"Користувач/-ка %(user_name)s хоче долучитися до проекту %(group_name)s."
+"Користувач/-ка %(user_name)s хоче долучитися до проекту %(team_name)s."
 
 #: .\templates\nutzungsbedingungen.html:4
 msgid "Nutzungsbedingungen"
@@ -3339,8 +3335,8 @@ msgstr ""
 
 #: .\views\group.py:142
 #, python-format
-msgid "%(group_type)s \"%(group)s\" was created successfully."
-msgstr "%(group_type)s «%(group)s» було успішно створено."
+msgid "%(team_type)s \"%(group)s\" was created successfully."
+msgstr "%(team_type)s «%(group)s» було успішно створено."
 
 #: .\views\group.py:168 .\views\user.py:153
 msgid "Create"
@@ -3348,71 +3344,70 @@ msgstr "Створити"
 
 #: .\views\group.py:410
 #, python-format
-msgid "The %(group_type)s was changed successfully."
-msgstr "%(group_type)s було успішно змінено."
+msgid "The %(team_type)s was changed successfully."
+msgstr "%(team_type)s було успішно змінено."
 
 #: .\views\group.py:502
 #, python-format
-msgid "Do you want to join the %(group_type)s “%(group_name)s”?"
-msgstr "Бажаєте долучитися до %(group_type)s «%(group_name)s»?"
+msgid "Do you want to join the %(team_type)s “%(team_name)s”?"
+msgstr "Бажаєте долучитися до %(team_type)s «%(team_name)s»?"
 
 #: .\views\group.py:503
 #, python-format
-msgid "Join %(group_type)s “%(group_name)s”?"
-msgstr "Долучитися до %(group_type)s «%(group_name)s»?"
+msgid "Join %(team_type)s “%(team_name)s”?"
+msgstr "Долучитися до %(team_type)s «%(team_name)s»?"
 
 #: .\views\group.py:504
 #, python-format
 msgid ""
-"You have requested to join the %(group_type)s “%(group_name)s”. You will "
+"You have requested to join the %(team_type)s “%(team_name)s”. You will "
 "receive an email as soon as a group administrator responds to your request."
 msgstr ""
-"Ваш запит членства у %(group_type)s «%(group_name)s» було надіслано. Ви "
+"Ваш запит членства у %(team_type)s «%(team_name)s» було надіслано. Ви "
 "отримаєте електронного листа, як тільки адміністратор/-ка проекту опрацює "
 "ваш запит."
 
 #: .\views\group.py:536
 #, python-format
-msgid "Do you want to leave the %(group_type)s “%(group_name)s”?"
-msgstr "Бажаєте залишити %(group_type)s «%(group_name)s»?"
+msgid "Do you want to leave the %(team_type)s “%(team_name)s”?"
+msgstr "Бажаєте залишити %(team_type)s «%(team_name)s»?"
 
 #: .\views\group.py:537
 #, python-format
-msgid "Leaving %(group_type)s “%(group_name)s”?"
-msgstr "Залишити %(group_type)s «%(group_name)s»?"
+msgid "Leaving %(team_type)s “%(team_name)s”?"
+msgstr "Залишити %(team_type)s «%(team_name)s»?"
 
 #: .\views\group.py:539
 #, python-format
-msgid "You are no longer a member of the %(group_type)s “%(group_name)s”."
-msgstr "Ви більше не член %(group_type)s «%(group_name)s»."
+msgid "You are no longer a member of the %(team_type)s “%(team_name)s”."
+msgstr "Ви більше не член %(team_type)s «%(team_name)s»."
 
 #: .\views\group.py:576
 #, python-format
 msgid ""
-"You cannot leave this %(group_type)s. You are the only administrator left."
+"You cannot leave this %(team_type)s. You are the only administrator left."
 msgstr ""
-"Ви не можете залишити цю/цей %(group_type)s. Ви єдиний/-а адміністратор/-ка, "
+"Ви не можете залишити цю/цей %(team_type)s. Ви єдиний/-а адміністратор/-ка, "
 "що залишився/-лася."
 
 #: .\views\group.py:585
 #, python-format
 msgid ""
-"Do you want to withdraw your join request to the %(group_type)s “%"
-"(group_name)s”?"
-msgstr "Бажаєте відкликати запит членства у %(group_type)s «%(group_name)s»?"
+"Do you want to withdraw your join request to the %(team_type)s “%(team_name)"
+"s”?"
+msgstr "Бажаєте відкликати запит членства у %(team_type)s «%(team_name)s»?"
 
 #: .\views\group.py:586
 #, python-format
-msgid "Withdraw join request to %(group_type)s “%(group_name)s”?"
-msgstr "Відкликати запит членства у %(group_type)s «%(group_name)s»?"
+msgid "Withdraw join request to %(team_type)s “%(team_name)s”?"
+msgstr "Відкликати запит членства у %(team_type)s «%(team_name)s»?"
 
 #: .\views\group.py:588
 #, python-format
 msgid ""
-"Your join request was withdrawn from %(group_type)s “%(group_name)s” "
+"Your join request was withdrawn from %(team_type)s “%(team_name)s” "
 "successfully."
-msgstr ""
-"Ваш запит членства у %(group_type)s «%(group_name)s» успішно відкликано."
+msgstr "Ваш запит членства у %(team_type)s «%(team_name)s» успішно відкликано."
 
 #: .\views\group.py:695
 msgid "You cannot change your own admin status."
@@ -3427,32 +3422,31 @@ msgstr ""
 
 #: .\views\group.py:729
 #, python-format
-msgid "You cannot remove yourself from a %(group_type)s."
-msgstr "Ви не можете видалити себе з %(group_type)s."
+msgid "You cannot remove yourself from a %(team_type)s."
+msgstr "Ви не можете видалити себе з %(team_type)s."
 
 #: .\views\group.py:742
 #, python-format
 msgid ""
-"Do you want to remove the user “%(username)s”  from the %(group_type)s “%"
-"(group_name)s”?"
+"Do you want to remove the user “%(username)s”  from the %(team_type)s “%"
+"(team_name)s”?"
 msgstr ""
-"Бажаєте видалити користувача/-ку %(username)s з %(group_type)s «%(group_name)"
-"s»?"
+"Бажаєте видалити користувача/-ку %(username)s з %(team_type)s «%(team_name)s»?"
 
 #: .\views\group.py:747
 #, python-format
-msgid "Remove user from %(group_type)s “%(group_name)s”?"
-msgstr "Видалити користувача/-ку з %(group_type)s «%(group_name)s»?"
+msgid "Remove user from %(team_type)s “%(team_name)s”?"
+msgstr "Видалити користувача/-ку з %(team_type)s «%(team_name)s»?"
 
 #: .\views\group.py:786
 #, python-format
-msgid "%(group_name)s was re-activated successfully!"
-msgstr "%(group_name)s було успішно повторно активовано!"
+msgid "%(team_name)s was re-activated successfully!"
+msgstr "%(team_name)s було успішно повторно активовано!"
 
 #: .\views\group.py:787
 #, python-format
-msgid "%(group_name)s was deactivated successfully!"
-msgstr "%(group_name)s було успішно деактивовано!"
+msgid "%(team_name)s was deactivated successfully!"
+msgstr "%(team_name)s було успішно деактивовано!"
 
 #: .\views\group.py:801
 msgid ""
@@ -3543,16 +3537,16 @@ msgstr "Об'єкт «%(title)s» було успішно видалено."
 msgid "%(numobjects)d other objects were deleted."
 msgstr "%(numobjects)d інших об'єктів було видалено."
 
-#: .\views\profile.py:96
+#: .\views\profile.py:97
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Не знайдено жодного підходящого для запиту %(verbose_name)s"
 
-#: .\views\profile.py:148
+#: .\views\profile.py:151
 msgid "Your profile was edited successfully."
 msgstr "Ваш профіль успішно відредаговано."
 
-#: .\views\profile.py:164
+#: .\views\profile.py:167
 msgid ""
 "Your user account is associated with an integrated Portal. This account's "
 "email address is fixed and therefore was left unchanged."
@@ -3561,7 +3555,7 @@ msgstr ""
 "змінити адресу електронної скриньки цього облікового запису, тому ваші зміни "
 "не були збережені."
 
-#: .\views\profile.py:176
+#: .\views\profile.py:179
 msgid ""
 "Sorry, your profile could not be saved because there was an error while "
 "processing the avatar!"
@@ -3569,16 +3563,16 @@ msgstr ""
 "Вибачте, не вдалося зберегти ваш профіль. Під час обробки основного фото "
 "виникла помилка!"
 
-#: .\views\profile.py:178
+#: .\views\profile.py:181
 msgid "Sorry, something went wrong while saving your profile!"
 msgstr "Вибачте, щось пішло не так під час збереження вашого профілю!"
 
-#: .\views\profile.py:188
+#: .\views\profile.py:191
 msgid ""
 "Your profile was deleted successfully. We're sorry you are no longer with us."
 msgstr "Ваш профіль успішно видалено. Нам шкода, що ви більше не з нами."
 
-#: .\views\profile.py:204
+#: .\views\profile.py:207
 #, python-format
 msgid ""
 "You are the only administrator left for group \"%s\". Please appoint a "

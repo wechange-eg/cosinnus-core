@@ -2,7 +2,7 @@
 
 {% blocktrans %}Hi, {{ user_name }}!
 
-Your membership request for group {{ group_name }} has been accepted!{% endblocktrans %}
+Your membership request for group {{ team_name }} has been accepted!{% endblocktrans %}
 
 {% trans "Follow this link to get active in the group:" %}
 {{ protocol }}://{{ site.domain }}{% group_url 'cosinnus:group-dashboard' group=group %}

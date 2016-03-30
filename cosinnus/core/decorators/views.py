@@ -74,16 +74,16 @@ def get_group_for_request(group_name, request):
                     return group
                 else:
                     logger.warn('Cosinnus.core.decorators: Failed to retrieve group because it is inactive!', 
-                     extra={'group_name': group_name, 'url': request.path, 'group_type': type(group), 'group_class': group_class, 'group_slug': group.slug, 'group_pk': group.id, 'refered': request.META.get('HTTP_REFERER', 'N/A')})
+                     extra={'team_name': group_name, 'url': request.path, 'team_type': type(group), 'group_class': group_class, 'group_slug': group.slug, 'group_pk': group.id, 'refered': request.META.get('HTTP_REFERER', 'N/A')})
             else:
                 logger.warn('Cosinnus.core.decorators: Failed to retrieve group because its classes didnt match!', 
-                     extra={'group_name': group_name, 'url': request.path, 'group_type': type(group), 'group_class': group_class, 'group_slug': group.slug, 'group_pk': group.id, 'refered': request.META.get('HTTP_REFERER', 'N/A')})
+                     extra={'team_name': group_name, 'url': request.path, 'team_type': type(group), 'group_class': group_class, 'group_slug': group.slug, 'group_pk': group.id, 'refered': request.META.get('HTTP_REFERER', 'N/A')})
         except group_class.DoesNotExist, e:
             logger.warn('Cosinnus.core.decorators: Failed to retrieve group! The exception was: "%s"' % str(e), 
-                     extra={'group_name': group_name, 'url': request.path, 'group_class': group_class, 'refered': request.META.get('HTTP_REFERER', 'N/A')})
+                     extra={'team_name': group_name, 'url': request.path, 'group_class': group_class, 'refered': request.META.get('HTTP_REFERER', 'N/A')})
     else:
         logger.warn('Cosinnus.core.decorators: Failed to retrieve group because no group class was found! The exception was: "%s"' % str(e), 
-                     extra={'group_name': group_name, 'url': request.path, 'refered': request.META.get('HTTP_REFERER', 'N/A')})
+                     extra={'team_name': group_name, 'url': request.path, 'refered': request.META.get('HTTP_REFERER', 'N/A')})
     
     raise Http404
 
@@ -119,7 +119,7 @@ def _check_deactivated_app_access(view, group, request):
     has been deactivated for this group. """
     app_name = view.__module__.split('.')[0]
     if group.is_app_deactivated(app_name):
-        messages.error(request, _("The page you tried to access belongs to an app that has been deactivated for this %(group_type)s. If you feel this is in error, ask the %(group_type)s's administrator to reactivate the app.") % {'group_type': group._meta.verbose_name})
+        messages.error(request, _("The page you tried to access belongs to an app that has been deactivated for this %(team_type)s. If you feel this is in error, ask the %(team_type)s's administrator to reactivate the app.") % {'team_type': group._meta.verbose_name})
         return HttpResponseRedirect(group.get_absolute_url())
     return None
 

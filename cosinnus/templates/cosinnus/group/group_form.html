@@ -3,7 +3,7 @@
 
 {% block page_title %}
 	{% if object %}
-	   {% blocktrans with group_name=object.name %}Edit group “{{ group_name }}”{% endblocktrans %}
+	   {% blocktrans with team_name=object.name %}Edit group “{{ team_name }}”{% endblocktrans %}
 	{% else %}
 	   {% if group_model == "CosinnusSociety" %}{% trans "Create Society" %}{% else %}{% trans "Create Group" %}{% endif %}
     {% endif %}

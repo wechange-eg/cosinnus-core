@@ -139,7 +139,7 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
 
     form_view = 'add'
     
-    message_success = _('%(group_type)s "%(group)s" was created successfully.')
+    message_success = _('%(team_type)s "%(group)s" was created successfully.')
 
     @method_decorator(membership_required)
     @atomic
@@ -150,7 +150,7 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
         ret = super(GroupCreateView, self).forms_valid(form, inlines)
         CosinnusGroupMembership.objects.create(user=self.request.user,
             group=self.object, status=MEMBERSHIP_ADMIN)
-        messages.success(self.request, self.message_success % {'group':self.object.name, 'group_type':self.object._meta.verbose_name})
+        messages.success(self.request, self.message_success % {'group':self.object.name, 'team_type':self.object._meta.verbose_name})
         return ret
     
     def forms_invalid(self, form, inlines):
@@ -346,7 +346,7 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
             
         ctx.update({
             'rows': zip(self.object_list, members, pendings, admins),
-            'group_type': self.group_type,
+            'team_type': self.group_type,
         })
         return ctx
     
@@ -407,7 +407,7 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin, AvatarFormMi
     
     form_view = 'edit'
     
-    message_success = _('The %(group_type)s was changed successfully.')
+    message_success = _('The %(team_type)s was changed successfully.')
     
     def get_object(self, queryset=None):
         return self.group
@@ -426,7 +426,7 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin, AvatarFormMi
         return kwargs
     
     def forms_valid(self, form, inlines):
-        messages.success(self.request, self.message_success % {'group_type':self.object._meta.verbose_name})
+        messages.success(self.request, self.message_success % {'team_type':self.object._meta.verbose_name})
         return super(GroupUpdateView, self).forms_valid(form, inlines)
 
     def get_success_url(self):
@@ -490,18 +490,18 @@ class GroupConfirmMixin(object):
         return self.confirm_label
 
     def get_confirm_question(self):
-        return self.confirm_question % {'group_name': self.object.name, 'group_type':self.object._meta.verbose_name}
+        return self.confirm_question % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name}
 
     def get_confirm_title(self):
-        return self.confirm_title % {'group_name': self.object.name, 'group_type':self.object._meta.verbose_name}
+        return self.confirm_title % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name}
 
 
 class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
 
     confirm_label = _('Join')
-    confirm_question = _('Do you want to join the %(group_type)s “%(group_name)s”?')
-    confirm_title = _('Join %(group_type)s “%(group_name)s”?')
-    message_success = _('You have requested to join the %(group_type)s “%(group_name)s”. You will receive an email as soon as a group administrator responds to your request.')
+    confirm_question = _('Do you want to join the %(team_type)s “%(team_name)s”?')
+    confirm_title = _('Join %(team_type)s “%(team_name)s”?')
+    message_success = _('You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a group administrator responds to your request.')
     
     template_name = 'cosinnus/group/group_confirm.html'
 
@@ -516,7 +516,7 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
     def get_success_url(self):
         # self.referer is set in post() method
         signals.user_group_join_requested.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
-        messages.success(self.request, self.message_success % {'group_name': self.object.name, 'group_type':self.object._meta.verbose_name})
+        messages.success(self.request, self.message_success % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name})
         return self.referer
     
     def confirm_action(self):
@@ -533,10 +533,10 @@ group_user_join = GroupUserJoinView.as_view()
 class GroupUserLeaveView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
 
     confirm_label = _('Leave')
-    confirm_question = _('Do you want to leave the %(group_type)s “%(group_name)s”?')
-    confirm_title = _('Leaving %(group_type)s “%(group_name)s”?')
+    confirm_question = _('Do you want to leave the %(team_type)s “%(team_name)s”?')
+    confirm_title = _('Leaving %(team_type)s “%(team_name)s”?')
     submit_css_classes = 'btn-danger'
-    message_success = _('You are no longer a member of the %(group_type)s “%(group_name)s”.')
+    message_success = _('You are no longer a member of the %(team_type)s “%(team_name)s”.')
     
     template_name = 'cosinnus/group/group_confirm.html'
 
@@ -552,7 +552,7 @@ class GroupUserLeaveView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
     def get_success_url(self):
         # self.referer is set in post() method
         if not getattr(self, '_had_error', False):
-            messages.success(self.request, self.message_success % {'group_name': self.object.name, 'group_type':self.object._meta.verbose_name})
+            messages.success(self.request, self.message_success % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name})
         return self.referer
     
     def confirm_action(self):
@@ -573,7 +573,7 @@ class GroupUserLeaveView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
         else:
             self._had_error = True
             messages.error(self.request,
-                _('You cannot leave this %(group_type)s. You are the only administrator left.') % { 'group_type':self.object._meta.verbose_name}
+                _('You cannot leave this %(team_type)s. You are the only administrator left.') % { 'team_type':self.object._meta.verbose_name}
             )
 
 group_user_leave = GroupUserLeaveView.as_view()
@@ -582,10 +582,10 @@ group_user_leave = GroupUserLeaveView.as_view()
 class GroupUserWithdrawView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
 
     confirm_label = _('Withdraw')
-    confirm_question = _('Do you want to withdraw your join request to the %(group_type)s “%(group_name)s”?')
-    confirm_title = _('Withdraw join request to %(group_type)s “%(group_name)s”?')
+    confirm_question = _('Do you want to withdraw your join request to the %(team_type)s “%(team_name)s”?')
+    confirm_title = _('Withdraw join request to %(team_type)s “%(team_name)s”?')
     submit_css_classes = 'btn-danger'
-    message_success = _('Your join request was withdrawn from %(group_type)s “%(group_name)s” successfully.')
+    message_success = _('Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully.')
     
     template_name = 'cosinnus/group/group_confirm.html'
 
@@ -600,7 +600,7 @@ class GroupUserWithdrawView(SamePortalGroupMixin, GroupConfirmMixin, DetailView)
     
     def get_success_url(self):
         # self.referer is set in post() method
-        messages.success(self.request, self.message_success % {'group_name': self.object.name, 'group_type':self.object._meta.verbose_name})
+        messages.success(self.request, self.message_success % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name})
         return self.referer
     
     def confirm_action(self):
@@ -726,7 +726,7 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
             if user != self.request.user or check_user_superuser(self.request.user):
                 self.object.delete()
             else:
-                messages.error(self.request, _('You cannot remove yourself from a %(group_type)s.') % {'group_type':self.object._meta.verbose_name})
+                messages.error(self.request, _('You cannot remove yourself from a %(team_type)s.') % {'team_type':self.object._meta.verbose_name})
         else:
             messages.error(self.request, _('You cannot remove “%(username)s” form '
                 'this group. Only one admin left.') % {'username': user.username})
@@ -739,14 +739,14 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
         group_name = self.object.group.name
         context.update({
             'confirm_label': _('Delete'),
-            'confirm_question': _('Do you want to remove the user “%(username)s”  from the %(group_type)s “%(group_name)s”?') % {
+            'confirm_question': _('Do you want to remove the user “%(username)s”  from the %(team_type)s “%(team_name)s”?') % {
                 'username': self.object.user.get_username(),
-                'group_name': group_name,
-                'group_type':self.object._meta.verbose_name,
+                'team_name': group_name,
+                'team_type':self.object._meta.verbose_name,
             },
-            'confirm_title': _('Remove user from %(group_type)s “%(group_name)s”?') % {
-                'group_name': group_name,
-                'group_type':self.object._meta.verbose_name,
+            'confirm_title': _('Remove user from %(team_type)s “%(team_name)s”?') % {
+                'team_name': group_name,
+                'team_type':self.object._meta.verbose_name,
             },
             'submit_css_classes': 'btn-danger',
         })
@@ -783,8 +783,8 @@ class ActivateOrDeactivateGroupView(TemplateView):
     
     template_name = 'cosinnus/group/group_activate_or_deactivate.html'
     
-    message_success_activate = _('%(group_name)s was re-activated successfully!')
-    message_success_deactivate = _('%(group_name)s was deactivated successfully!')
+    message_success_activate = _('%(team_name)s was re-activated successfully!')
+    message_success_deactivate = _('%(team_name)s was deactivated successfully!')
     
     def dispatch(self, request, *args, **kwargs):
         group_id = int(kwargs.pop('group_id'))
@@ -816,10 +816,10 @@ class ActivateOrDeactivateGroupView(TemplateView):
         self.group.save() 
         # no clearing cache necessary as save() handles it
         if self.activate:
-            messages.success(request, self.message_success_activate % {'group_name': self.group.name})
+            messages.success(request, self.message_success_activate % {'team_name': self.group.name})
             return redirect(self.group.get_absolute_url())
         else:
-            messages.success(request, self.message_success_deactivate % {'group_name': self.group.name})
+            messages.success(request, self.message_success_deactivate % {'team_name': self.group.name})
             return redirect(get_non_cms_root_url())
     
     def get_context_data(self, **kwargs):

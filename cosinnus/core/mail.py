@@ -89,7 +89,7 @@ def get_common_mail_context(request, group=None, user=None):
     }
     if group:
         context.update({
-            'group_name': group.name,
+            'team_name': group.name,
             'group': group,
         })
     if user:

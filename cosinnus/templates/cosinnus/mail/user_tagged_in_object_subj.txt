@@ -1,1 +1,1 @@
-{% load i18n cosinnus_tags %}{% blocktrans %}You were tagged in: "{{ object_name }}", in {{ group_name }}{% endblocktrans %}
+{% load i18n cosinnus_tags %}{% blocktrans %}You were tagged in: "{{ object_name }}", in {{ team_name }}{% endblocktrans %}
