@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-29 17:51+0200\n"
+"POT-Creation-Date: 2016-03-30 11:52+0200\n"
 "PO-Revision-Date: 2015-11-11 10:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -898,7 +898,7 @@ msgstr ""
 
 #: .\models\widget.py:19 .\templates\cosinnus\appsmenu.html:37
 #: .\templates\cosinnus\appsmenu.html:51
-#: .\templates\cosinnus\dashboard.html:74
+#: .\templates\cosinnus\dashboard.html:88
 msgid "Dashboard"
 msgstr "Інформаційна панель"
 
@@ -1091,7 +1091,7 @@ msgstr "Відкликати запит"
 
 #: .\templates\cosinnus\_microsite__old_.html:89
 #: .\templates\cosinnus\_microsite__old_.html:108
-#: .\templates\cosinnus\dashboard.html:208
+#: .\templates\cosinnus\dashboard.html:223
 #: .\templates\cosinnus\group\group_list.html:185
 #: .\templates\cosinnus\group\group_list.html:274
 #: .\templates\cosinnus\group\group_microsite.html:445
@@ -1101,7 +1101,7 @@ msgid "Join"
 msgstr "Запит членства"
 
 #: .\templates\cosinnus\_microsite__old_.html:102
-#: .\templates\cosinnus\dashboard.html:195
+#: .\templates\cosinnus\dashboard.html:210
 #: .\templates\cosinnus\group\group_list.html:269
 #: .\templates\cosinnus\group\group_microsite.html:425
 #: .\templates\cosinnus\group\leftnav_group.html:48
@@ -1110,7 +1110,7 @@ msgid "Do you really want to withdraw your join request to group „%(title)s“
 msgstr "Ви дійсно бажаєте відкликати ваш запит членства у проекті «%(title)s»?"
 
 #: .\templates\cosinnus\_microsite__old_.html:103
-#: .\templates\cosinnus\dashboard.html:196
+#: .\templates\cosinnus\dashboard.html:211
 #: .\templates\cosinnus\group\group_list.html:270
 #: .\templates\cosinnus\group\group_microsite.html:426
 #: .\templates\cosinnus\group\leftnav_group.html:49
@@ -1233,7 +1233,7 @@ msgstr "скоротити"
 msgid "Rearrange"
 msgstr ""
 
-#: .\templates\cosinnus\dashboard.html:50
+#: .\templates\cosinnus\dashboard.html:51
 #: .\templates\cosinnus\group\group_form.html:376
 #: .\templates\cosinnus\leftnav_button_editable_folder.html:39
 #: .\templates\cosinnus\user\userprofile_form.html:228
@@ -1242,24 +1242,37 @@ msgstr ""
 msgid "Save"
 msgstr "Зберегти"
 
-#: .\templates\cosinnus\dashboard.html:62
+#: .\templates\cosinnus\dashboard.html:63
+#: .\templates\cosinnus\feedback\report_modal.html:62
+#: .\templates\cosinnus\group\group_confirm.html:14
+#: .\templates\cosinnus\group\group_delete.html:16
+#: .\templates\cosinnus\group\group_user_form.html:16
+#: .\templates\cosinnus\hierarchy\add_container.html:28
+#: .\templates\cosinnus\hierarchy\move_element_modal.html:48
+#: .\templates\cosinnus\modal_box.html:28
+#: .\templates\cosinnus\widgets\add_widget.html:32
+#: .\templates\cosinnus\widgets\delete.html:5
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: .\templates\cosinnus\dashboard.html:76
 #, fuzzy
 #| msgid "Submitting..."
 msgid "Saving..."
 msgstr "Надсилання..."
 
-#: .\templates\cosinnus\dashboard.html:88
+#: .\templates\cosinnus\dashboard.html:103
 msgid "You are now editing the dashboard's layout"
 msgstr ""
 
-#: .\templates\cosinnus\dashboard.html:91
+#: .\templates\cosinnus\dashboard.html:106
 #, python-format
 msgid ""
 "The layout you choose will be the layout for all members of %(group_name)s! "
 "Click save to apply your changes."
 msgstr ""
 
-#: .\templates\cosinnus\dashboard.html:94
+#: .\templates\cosinnus\dashboard.html:109
 msgid ""
 "Drag and drop individual widgets to rearrange their order. Please note that "
 "the order you give is only an approximate prioritization for the widgets. "
@@ -1267,11 +1280,11 @@ msgid ""
 "widgets' current size and the overall page layout."
 msgstr ""
 
-#: .\templates\cosinnus\dashboard.html:106
+#: .\templates\cosinnus\dashboard.html:121
 msgid "Your Microsite needs some love!"
 msgstr "Ваш мікросайт потребує трохи уваги!"
 
-#: .\templates\cosinnus\dashboard.html:110
+#: .\templates\cosinnus\dashboard.html:125
 msgid ""
 "The Microsite is your projects's welcome page for everyone checking it out. "
 "Make it awesome so they want to join you!"
@@ -1280,7 +1293,7 @@ msgstr ""
 "хто не є членом. Зробіть його класним, щоб люди захотіли долучитися до "
 "вашого проекту!"
 
-#: .\templates\cosinnus\dashboard.html:112
+#: .\templates\cosinnus\dashboard.html:127
 msgid ""
 "The Microsite is your group's welcome page for everyone checking it out. "
 "Make it awesome so they want to join you!"
@@ -1288,101 +1301,101 @@ msgstr ""
 "Мікросайт — це привітальна сторінка вашої спільноти, що відображається усім, "
 "хто не є членом. Зробіть його класним, щоб люди захотіли долучитися до вас!"
 
-#: .\templates\cosinnus\dashboard.html:116
+#: .\templates\cosinnus\dashboard.html:131
 msgid "Access it from the top menu or"
 msgstr "Перейдіть за допомогою меню зверху або"
 
-#: .\templates\cosinnus\dashboard.html:116
+#: .\templates\cosinnus\dashboard.html:131
 msgid "get started here..."
 msgstr "розпочніть прямо тут..."
 
-#: .\templates\cosinnus\dashboard.html:141
+#: .\templates\cosinnus\dashboard.html:156
 msgid "File"
 msgstr "Файл"
 
-#: .\templates\cosinnus\dashboard.html:141 .\templates\cosinnus\search.html:71
+#: .\templates\cosinnus\dashboard.html:156 .\templates\cosinnus\search.html:71
 msgid "Files"
 msgstr "Файли"
 
-#: .\templates\cosinnus\dashboard.html:150
+#: .\templates\cosinnus\dashboard.html:165
 msgid "Etherpad"
 msgstr "Документ"
 
-#: .\templates\cosinnus\dashboard.html:150 .\templates\cosinnus\search.html:92
+#: .\templates\cosinnus\dashboard.html:165 .\templates\cosinnus\search.html:92
 msgid "Etherpads"
 msgstr "Документи"
 
-#: .\templates\cosinnus\dashboard.html:159
+#: .\templates\cosinnus\dashboard.html:174
 msgid "Todo"
 msgstr "Завдання"
 
-#: .\templates\cosinnus\dashboard.html:159 .\templates\cosinnus\search.html:50
+#: .\templates\cosinnus\dashboard.html:174 .\templates\cosinnus\search.html:50
 msgid "Todos"
 msgstr "Завдання"
 
-#: .\templates\cosinnus\dashboard.html:168
+#: .\templates\cosinnus\dashboard.html:183
 msgctxt "Calendar"
 msgid "Event"
 msgstr "Захід"
 
-#: .\templates\cosinnus\dashboard.html:168
+#: .\templates\cosinnus\dashboard.html:183
 msgctxt "Calendar"
 msgid "Events"
 msgstr "Заходи"
 
-#: .\templates\cosinnus\dashboard.html:177
+#: .\templates\cosinnus\dashboard.html:192
 #: .\templates\cosinnus\search.html:113
 msgid "News"
 msgstr "Новини"
 
-#: .\templates\cosinnus\dashboard.html:186
+#: .\templates\cosinnus\dashboard.html:201
 msgctxt "withdraw join group button first item"
 msgid "Withdraw"
 msgstr "Відкликати"
 
-#: .\templates\cosinnus\dashboard.html:187
+#: .\templates\cosinnus\dashboard.html:202
 msgctxt "withdraw join group button second item"
 msgid "Request"
 msgstr "запит"
 
-#: .\templates\cosinnus\dashboard.html:192
+#: .\templates\cosinnus\dashboard.html:207
 msgctxt "join request pending group button first item"
 msgid "Join"
 msgstr "Запит членства"
 
-#: .\templates\cosinnus\dashboard.html:193
+#: .\templates\cosinnus\dashboard.html:208
 msgctxt "join request pending group button second item"
 msgid "Requested"
 msgstr "надіслано"
 
-#: .\templates\cosinnus\dashboard.html:203
+#: .\templates\cosinnus\dashboard.html:218
 msgctxt "join group button first item"
 msgid "Join"
 msgstr "Долучитися"
 
-#: .\templates\cosinnus\dashboard.html:204
+#: .\templates\cosinnus\dashboard.html:219
 msgctxt "join group button second item"
 msgid "Now"
 msgstr "зараз"
 
-#: .\templates\cosinnus\dashboard.html:207
+#: .\templates\cosinnus\dashboard.html:222
 #: .\templates\cosinnus\group\group_microsite.html:444
 #: .\templates\cosinnus\group\leftnav_group.html:58
 #, python-format
 msgid "Do you wish to request to join „%(title)s“?"
 msgstr "Бажаєте долучитися до «%(title)s»?"
 
-#: .\templates\cosinnus\dashboard.html:228
+#: .\templates\cosinnus\dashboard.html:243
 msgid "Society:"
 msgstr "Спільнота:"
 
-#: .\templates\cosinnus\dashboard.html:236
+#: .\templates\cosinnus\dashboard.html:251
 #: .\templates\cosinnus\group\group_microsite.html:218
 #: .\templates\cosinnus\group\group_og_meta_attributes.html:8
 msgid "No Description set"
 msgstr "Опис не створено"
 
-#: .\templates\cosinnus\dashboard.html:240
+#: .\templates\cosinnus\dashboard.html:255
 #: .\templates\cosinnus\group\group_form.html:226
 msgid "more"
 msgstr "Більше"
@@ -1424,18 +1437,6 @@ msgstr ""
 #: .\templates\cosinnus\feedback\report_modal.html:50
 msgid "Send"
 msgstr "Надіслати"
-
-#: .\templates\cosinnus\feedback\report_modal.html:62
-#: .\templates\cosinnus\group\group_confirm.html:14
-#: .\templates\cosinnus\group\group_delete.html:16
-#: .\templates\cosinnus\group\group_user_form.html:16
-#: .\templates\cosinnus\hierarchy\add_container.html:28
-#: .\templates\cosinnus\hierarchy\move_element_modal.html:48
-#: .\templates\cosinnus\modal_box.html:28
-#: .\templates\cosinnus\widgets\add_widget.html:32
-#: .\templates\cosinnus\widgets\delete.html:5
-msgid "Cancel"
-msgstr "Скасувати"
 
 #: .\templates\cosinnus\feedback\report_modal.html:74
 #: .\templates\cosinnus\hierarchy\move_element_modal.html:60
