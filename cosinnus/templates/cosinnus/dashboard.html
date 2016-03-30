@@ -197,8 +197,8 @@
                         <div class="dashboard-header-link app-etherpad" data-toggle="modal" data-target="#join_withdraw_modal">
                             <a href="#">
                                 <i class="fa fa-sign-out"></i>
-                                <span>{% trans "Withdraw" context "withdraw join group button first item" %}</span>
-                                {% trans "Request" context "withdraw join group button second item" %}
+                                <span>{% trans "Withdraw" context "withdraw join team button first item" %}</span>
+                                {% trans "Request" context "withdraw join team button second item" %}
                             </a>
                         </div>
                         <div class="dashboard-header-link app-main">
@@ -214,8 +214,8 @@
                         <div class="dashboard-header-link app-main" data-toggle="modal" data-target="#join_withdraw_modal">
                             <a href="#">
                                 <i class="fa fa-sign-in"></i>
-                                <span>{% trans "Join" context "join group button first item" %}</span>
-                                {% trans "Now" context "join group button second item" %}
+                                <span>{% trans "Join" context "join team button first item" %}</span>
+                                {% trans "Now" context "join team button second item" %}
                             </a>
                         </div>
                         {% captureas label %}{% blocktrans with title=group.name %}Do you wish to request to join „{{ title }}“?{% endblocktrans %}{% endcaptureas %}

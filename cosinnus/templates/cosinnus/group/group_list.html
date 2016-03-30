@@ -266,7 +266,7 @@
                     {% captureas title %}{% trans "Withdraw Join Request" %}{% endcaptureas %}
                     {% captureas action %}{% group_url 'cosinnus:group-user-withdraw' group=group %}{% endcaptureas %}
                 {% else %}
-                    {% captureas label %}{% blocktrans with title=group.name %}Do you wish to request to join group „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+                    {% captureas label %}{% blocktrans with title=group.name %}Do you wish to request to join „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
                     {% captureas title %}{% trans "Join" %}{% endcaptureas %}
                     {% captureas action %}{% group_url 'cosinnus:group-user-join' group=group %}{% endcaptureas %}
                 {% endif %}

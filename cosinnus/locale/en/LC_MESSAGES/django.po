@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-30 14:25+0200\n"
+"POT-Creation-Date: 2016-03-30 15:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1061,10 +1061,13 @@ msgid "Withdraw Join Request"
 msgstr ""
 
 #: .\templates\cosinnus\_microsite__old_.html:107
+#: .\templates\cosinnus\dashboard.html:222
 #: .\templates\cosinnus\group\group_list.html:273
+#: .\templates\cosinnus\group\group_microsite.html:444
+#: .\templates\cosinnus\group\leftnav_group.html:58
 #, python-format
-msgid "Do you wish to request to join group „%(title)s“?"
-msgstr "Do you wish to request to join project „%(title)s“?"
+msgid "Do you wish to request to join „%(title)s“?"
+msgstr ""
 
 #: .\templates\cosinnus\_microsite__old_.html:137
 msgid "Add widget"
@@ -1280,12 +1283,12 @@ msgid "News"
 msgstr ""
 
 #: .\templates\cosinnus\dashboard.html:201
-msgctxt "withdraw join group button first item"
+msgctxt "withdraw join team button first item"
 msgid "Withdraw"
 msgstr ""
 
 #: .\templates\cosinnus\dashboard.html:202
-msgctxt "withdraw join group button second item"
+msgctxt "withdraw join team button second item"
 msgid "Request"
 msgstr ""
 
@@ -1300,20 +1303,13 @@ msgid "Requested"
 msgstr ""
 
 #: .\templates\cosinnus\dashboard.html:218
-msgctxt "join group button first item"
+msgctxt "join team button first item"
 msgid "Join"
 msgstr ""
 
 #: .\templates\cosinnus\dashboard.html:219
-msgctxt "join group button second item"
+msgctxt "join team button second item"
 msgid "Now"
-msgstr ""
-
-#: .\templates\cosinnus\dashboard.html:222
-#: .\templates\cosinnus\group\group_microsite.html:444
-#: .\templates\cosinnus\group\leftnav_group.html:58
-#, python-format
-msgid "Do you wish to request to join „%(title)s“?"
 msgstr ""
 
 #: .\templates\cosinnus\dashboard.html:243
@@ -1896,7 +1892,7 @@ msgstr "Public project"
 
 #: .\templates\cosinnus\group\group_user_list.html:4
 #, python-format
-msgid "Users in group %(group)s"
+msgid "Users in team %(group)s"
 msgstr "Users in project %(group)s"
 
 #: .\templates\cosinnus\group\group_user_list.html:13
@@ -2092,11 +2088,8 @@ msgstr ""
 msgid ""
 "Hi, %(user_name)s!\n"
 "\n"
-"Your membership request for group %(team_name)s has been accepted!"
+"Your membership request for %(team_name)s has been accepted!"
 msgstr ""
-"Hi, %(user_name)s!\n"
-"\n"
-"Your membership request for project %(team_name)s has been accepted!"
 
 #: .\templates\cosinnus\mail\user_group_join_accepted.html:7
 msgid "Follow this link to get active in the group:"
@@ -2114,13 +2107,8 @@ msgstr ""
 msgid ""
 "Hi, %(user_name)s!\n"
 "\n"
-"We're sorry, but your membership request for group %(team_name)s has been "
-"declined."
+"We're sorry, but your membership request for %(team_name)s has been declined."
 msgstr ""
-"Hi, %(user_name)s!\n"
-"\n"
-"We're sorry, but your membership request for project %(team_name)s has been "
-"declined."
 
 #: .\templates\cosinnus\mail\user_group_join_declined.html:7
 msgid ""
@@ -2133,7 +2121,7 @@ msgstr ""
 #: .\templates\cosinnus\mail\user_group_join_requested.html:1
 #, python-format
 msgid ""
-"User \"%(sender_name)s\" has requested to join the group %(team_name)s.\n"
+"User \"%(sender_name)s\" has requested to join %(team_name)s.\n"
 "\n"
 "Please go to the following page to accept or decline the request:\n"
 "%(domain_url)s%(group_page_url)s\n"
@@ -2179,7 +2167,7 @@ msgid "New user request: %(user_name)s wants to join %(site_name)s!"
 msgstr ""
 "Hi %(admin_name)s,\n"
 "\n"
-"The user %(user_name)s wants to join the project %(team_name)s."
+"The user %(user_name)s wants to join project %(team_name)s."
 
 #: .\templates\cosinnus\mail\user_registration_approved.html:1
 #, python-format
@@ -2681,7 +2669,7 @@ msgid "Search in Apps"
 msgstr ""
 
 #: .\templates\cosinnus\search.html:142
-msgid "Search in groups"
+msgid "Search in teams"
 msgstr ""
 
 #: .\templates\cosinnus\search.html:169
@@ -3037,11 +3025,11 @@ msgstr ""
 msgid ""
 "Hi %(admin_name)s,\n"
 "\n"
-"The user %(user_name)s wants to join the group %(team_name)s."
+"The user %(user_name)s wants to join %(team_name)s."
 msgstr ""
 "Hi %(admin_name)s,\n"
 "\n"
-"The user %(user_name)s wants to join the project %(team_name)s."
+"The user %(user_name)s wants to join project %(team_name)s."
 
 #: .\templates\nutzungsbedingungen.html:4
 msgid "Nutzungsbedingungen"
@@ -3454,7 +3442,7 @@ msgstr ""
 #~ "You're receiving this email because you are an administrator of this "
 #~ "project."
 
-#~ msgid "Join Group"
+#~ msgid "join team"
 #~ msgstr "Join Project"
 
 #~ msgid "About the group"

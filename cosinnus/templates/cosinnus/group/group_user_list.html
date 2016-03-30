@@ -1,7 +1,7 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n %}
 
-{% block page_title %}{% blocktrans %}Users in group {{ group }}{% endblocktrans %}{% endblock %}
+{% block page_title %}{% blocktrans %}Users in team {{ group }}{% endblocktrans %}{% endblock %}
 
 {% block content %}
     <a href="{% url 'cosinnus:user-add' %}">{% trans "Add user" %}</a>
