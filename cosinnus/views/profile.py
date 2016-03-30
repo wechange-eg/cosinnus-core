@@ -24,6 +24,7 @@ from cosinnus.utils.permissions import check_user_integrated_portal_member,\
 from django.views.generic.edit import DeleteView
 from cosinnus.core.decorators.views import redirect_to_not_logged_in
 from cosinnus.utils.urls import safe_redirect
+from cosinnus.templatetags.cosinnus_tags import cosinnus_setting
 
 
 def delete_userprofile(user):
@@ -109,6 +110,8 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
         target_user_profile = self.get_object(self.get_queryset())
         if not target_user_profile:
             return redirect_to_not_logged_in(request)
+        if not target_user_profile.settings.get('tos_accepted', None):
+            raise Http404
         target_user_visibility = target_user_profile.media_tag.visibility
         user = request.user
         # VISIBILITY_ALL users can always be seen, so skip the check
