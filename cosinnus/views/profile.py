@@ -125,7 +125,7 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
     def get_queryset(self):
         if not getattr(self, 'qs', None):
             qs = super(UserProfileDetailView, self).get_queryset()
-            qs = qs.exclude(user__is_active=False)
+            qs = qs.exclude(user__is_active=False).exclude(user__last_login__exact=None)
             self.qs = qs
         return self.qs
     
