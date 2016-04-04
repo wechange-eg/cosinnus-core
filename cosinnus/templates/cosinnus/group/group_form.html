@@ -5,7 +5,7 @@
 	{% if object %}
 	   {% blocktrans with team_name=object.name %}Edit “{{ team_name }}”{% endblocktrans %}
 	{% else %}
-	   {% if group_model == "CosinnusSociety" %}{% trans "Create Society" %}{% else %}{% trans "Create Project" %}{% endif %}
+	   {% if group_model == "CosinnusSociety" %}{% trans "Create Group" %}{% else %}{% trans "Create Project" %}{% endif %}
     {% endif %}
 {% endblock %}
 
@@ -24,9 +24,9 @@
 {% block breadcrumb %}
         {{ block.super }}
         {% if object %}
-            <li class="active">{% if group_model == "CosinnusSociety" %}{% trans "Edit Society" %}{% else %}{% trans "Edit Project" %}{% endif %}</li>
+            <li class="active">{% if group_model == "CosinnusSociety" %}{% trans "Edit Group" %}{% else %}{% trans "Edit Project" %}{% endif %}</li>
         {% else %}
-            <li class="active">{% if group_model == "CosinnusSociety" %}{% trans "Create Society" %}{% else %}{% trans "Create Project" %}{% endif %}</li>
+            <li class="active">{% if group_model == "CosinnusSociety" %}{% trans "Create Group" %}{% else %}{% trans "Create Project" %}{% endif %}</li>
         {% endif %}
 {% endblock %}
 
@@ -79,7 +79,7 @@
 						                </a>
 						                <div class="media-body media-body-form-control">
 						                    {{ form.forms.obj.name.errors }}
-					                        {% captureas placeholder %}{% if group_model == "CosinnusSociety" %}{% trans "Enter a name for the society." %}{% else %}{% trans "Enter a name for the project." %}{% endif %}{% endcaptureas %}
+					                        {% captureas placeholder %}{% if group_model == "CosinnusSociety" %}{% trans "Enter a name for the group." %}{% else %}{% trans "Enter a name for the project." %}{% endif %}{% endcaptureas %}
 					                        {% render_field form.forms.obj.name class+="form-control" placeholder=placeholder %}
 						                </div>
 						            </li>
@@ -160,7 +160,7 @@
 					                
 					                {% block group_form_description_field %}
 				                        <label>
-				                        	{% if group_model == "CosinnusSociety" %}{% trans "Describe the society in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
+				                        	{% if group_model == "CosinnusSociety" %}{% trans "Describe the group in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
 				                        </label>
 				                        {{ form.forms.obj.description.errors }}
 				                        <div type="button" class="btn btn-default w100 regular-space">
@@ -238,7 +238,7 @@
 			                        
 			                        
 			                        {% if form.forms.obj.parent %}
-			                        <label>{% trans "Which Society does the group belong to?" %}</label>
+			                        <label>{% trans "Which Group does the group belong to?" %}</label>
 			                        <div type="button" class="btn btn-default w100">
 			                            <ul class="media-list">
 			                                <li class="media">
@@ -247,7 +247,7 @@
 			                                    </a>
 			                                    <div class="media-body media-body-form-control">
 			                                        {{ form.forms.obj.parent.errors }}
-									                {% captureas placeholder %}{% trans "Select Society" %}{% endcaptureas %}
+									                {% captureas placeholder %}{% trans "Select Group" %}{% endcaptureas %}
 									                {% render_field form.forms.obj.parent class+="form-control w100" placeholder=placeholder %}
 			                                    </div>
 			                                </li>
@@ -323,7 +323,7 @@
 						
 						{% block group_form_microsite_description_field %}
 		                    <label>
-		                    	{% if group_model == "CosinnusSociety" %}{% trans "Describe the society in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
+		                    	{% if group_model == "CosinnusSociety" %}{% trans "Describe the group in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
 		                    	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
 		                    </label>
 		                    {{ form.forms.obj.description_long.errors }}

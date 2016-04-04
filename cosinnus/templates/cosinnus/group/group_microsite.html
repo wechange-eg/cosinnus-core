@@ -110,9 +110,9 @@
 					{% comment %} No more 'in portal' 
 					<p class="transparent">
 		            	{% if group.public %}
-		            		<i>{% if group.type == 0 %}{% trans "Public Project in Portal" %}{% else %}{% trans "Public Society in Portal" %}{% endif %}: </i>
+		            		<i>{% if group.type == 0 %}{% trans "Public Project in Portal" %}{% else %}{% trans "Public Group in Portal" %}{% endif %}: </i>
 		            	{% else %}
-		            		<i>{% if group.type == 0 %}{% trans "Project in Portal" %}{% else %}{% trans "Society in Portal" %}{% endif %}: </i> 
+		            		<i>{% if group.type == 0 %}{% trans "Project in Portal" %}{% else %}{% trans "Group in Portal" %}{% endif %}: </i> 
 		            	{% endif %}
 		            	{% include 'cosinnus/portal/portal_link_icon.html' with portal=group.portal %}
 		            	<a href="{{ group.portal.get_domain }}">{{ group.portal.name }}</a>
@@ -120,16 +120,16 @@
 					{% endcomment %}
 					<p class="transparent">
 		            	{% if group.public %}
-		            		<i>{% if group.type == 0 %}{% trans "Public Project" %}{% else %}{% trans "Public Society" %}{% endif %}</i>
+		            		<i>{% if group.type == 0 %}{% trans "Public Project" %}{% else %}{% trans "Public Group" %}{% endif %}</i>
 		            	{% else %}
-		            		<i>{% if group.type == 0 %}{% trans "Project" %}{% else %}{% trans "Society" %}{% endif %}</i> 
+		            		<i>{% if group.type == 0 %}{% trans "Project" %}{% else %}{% trans "Group" %}{% endif %}</i> 
 		            	{% endif %}
 		            </p>
 		            
 		            {% with parent=group.get_parent_typed %}
 		                {% if parent %}
 		                    <p class="transparent">
-		                    	{% trans "Society" %}: <a href="{{ parent.get_absolute_url }}">{{ parent.name }}</a>
+		                    	{% trans "Group" %}: <a href="{{ parent.get_absolute_url }}">{{ parent.name }}</a>
 		                    	{% comment %} Other Projects (siblings) link out for now.
 		                    	{% with siblings=group.get_siblings %}
 		                    		{% if siblings %}

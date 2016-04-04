@@ -513,9 +513,9 @@ class Migration(migrations.Migration):
             ],
             options={
                 'ordering': ('name',),
-                'verbose_name': 'Cosinnus society',
+                'verbose_name': 'Cosinnus group',
                 'proxy': True,
-                'verbose_name_plural': 'Cosinnus societies',
+                'verbose_name_plural': 'Cosinnus groups',
             },
             bases=('cosinnus.cosinnusgroup',),
         ),

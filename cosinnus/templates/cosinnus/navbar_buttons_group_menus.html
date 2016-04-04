@@ -4,7 +4,7 @@
     {% if societies %}
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                {% trans "Societies" %}
+                {% trans "Groups" %}
                 <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu">
@@ -15,11 +15,11 @@
                 	<li><a href="{% url 'cosinnus:group__group-list' %}...</a></li>
                 {% endif %}
                 <li class="divider"></li>
-                <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "All Societies" %}</a></li>
+                <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "All Groups" %}</a></li>
             </ul>
         </li>
     {% else %}
-        <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "Societies" %}</a></li>
+        <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "Groups" %}</a></li>
     {% endif %}
 
     {% if groups %}
@@ -44,6 +44,6 @@
     {% endif %}
     
 {% else %}
-    <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "Societies" %}</a></li>
+    <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "Groups" %}</a></li>
     <li><a href="{% url 'cosinnus:group-list' %}">{% trans "Projects" %}</a></li>
 {% endif %}

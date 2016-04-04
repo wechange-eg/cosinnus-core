@@ -111,9 +111,9 @@ class CosinnusProjectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
         WidgetConfig.objects.filter(group_id=group.pk).delete()
         create_initial_group_widgets(group, group)
         
-        message = _('The following Projects were converted to Societies:') + '\n' + ", ".join(converted_names)
+        message = _('The following Projects were converted to Groups:') + '\n' + ", ".join(converted_names)
         self.message_user(request, message)
-    convert_to_society.short_description = _("Convert selected Projects to Societies")
+    convert_to_society.short_description = _("Convert selected Projects to Groups")
     
     
     def add_members_to_current_portal(self, request, queryset, remove_all_other_memberships=False):
@@ -184,9 +184,9 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
         WidgetConfig.objects.filter(group_id=group.pk).delete()
         create_initial_group_widgets(group, group)
         
-        message = _('The following Societies were converted to Projects:') + '\n' + ", ".join(converted_names)
+        message = _('The following Groups were converted to Projects:') + '\n' + ", ".join(converted_names)
         self.message_user(request, message)
-    convert_to_project.short_description = _("Convert selected Societies to Projects")
+    convert_to_project.short_description = _("Convert selected Groups to Projects")
     
     def get_form(self, request, obj=None, **kwargs):
         self.exclude = ("parent", )

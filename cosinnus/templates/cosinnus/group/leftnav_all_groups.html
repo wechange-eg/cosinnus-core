@@ -30,12 +30,12 @@
 
 {% if current_page == "grouplist__society" or current_page == "addsociety" %}
 	{% captureas href %}{% url 'cosinnus:group__group-list' %}{% endcaptureas %}
-	{% captureas label %}{% trans "All societies" %}{% endcaptureas %}
+	{% captureas label %}{% trans "All groups" %}{% endcaptureas %}
 	{% include "cosinnus/leftnav_button.html" with active=is_grouplist__society extra_classes="regular-space" icon="fa-globe" label=label href=href  %}
 	
 	{% if user|can_create_groups %}
 	    {% captureas href %}{% url 'cosinnus:group__group-add' %}{% endcaptureas %}
-	    {% captureas label %}{% trans "Create Society" %}{% endcaptureas %}
+	    {% captureas label %}{% trans "Create Group" %}{% endcaptureas %}
 	    {% include "cosinnus/leftnav_button.html" with active=is_addsociety icon="fa-plus" label=label href=href  %}
 	{% endif %}
 {% endif %}

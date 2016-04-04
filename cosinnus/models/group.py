@@ -561,7 +561,7 @@ class CosinnusBaseGroup(models.Model):
     #: Choices for :attr:`visibility`: ``(int, str)``
     TYPE_CHOICES = (
         (TYPE_PROJECT, _('Project')),
-        (TYPE_SOCIETY, _('Society')),
+        (TYPE_SOCIETY, _('Group')),
     )
     
     GROUP_MODEL_TYPE = TYPE_PROJECT

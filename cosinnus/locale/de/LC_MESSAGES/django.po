@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-30 18:43+0200\n"
+"POT-Creation-Date: 2016-04-04 11:26+0200\n"
 "PO-Revision-Date: 2016-03-29 18:14+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -33,11 +33,11 @@ msgid "Delete selected entries"
 msgstr "Ausgewählte Objekte löschen"
 
 #: .\admin.py:114
-msgid "The following Projects were converted to Societies:"
+msgid "The following Projects were converted to Groups:"
 msgstr "Die folgenden Projekte wurden in Gruppen umgewandelt:"
 
 #: .\admin.py:116
-msgid "Convert selected Projects to Societies"
+msgid "Convert selected Projects to Groups"
 msgstr "Ausgewählte Projekte in Gruppen umwandeln"
 
 #: .\admin.py:147
@@ -64,11 +64,11 @@ msgstr ""
 "sie aus allen anderen Portalen!)"
 
 #: .\admin.py:187
-msgid "The following Societies were converted to Projects:"
+msgid "The following Groups were converted to Projects:"
 msgstr "Die folgenden Gruppen wurden in Projekte umgewandelt:"
 
 #: .\admin.py:189
-msgid "Convert selected Societies to Projects"
+msgid "Convert selected Groups to Projects"
 msgstr "Ausgewählte Gruppen in Projekte umwandeln"
 
 #: .\admin.py:265
@@ -503,7 +503,7 @@ msgstr "Projekt"
 
 #: .\models\group.py:564 .\templates\cosinnus\group\group_microsite.html:127
 #: .\templates\cosinnus\group\group_microsite.html:134
-msgid "Society"
+msgid "Group"
 msgstr "Gruppe"
 
 #: .\models\group.py:578
@@ -655,22 +655,22 @@ msgstr "Aktivitäten"
 
 #: .\models\group.py:1160
 #, fuzzy
-#| msgid "Cosinnus societies"
+#| msgid "Cosinnus groups"
 msgid "CosinnusLocation"
 msgstr "Gruppen"
 
 #: .\models\group.py:1161
 #, fuzzy
-#| msgid "Cosinnus societies"
+#| msgid "Cosinnus groups"
 msgid "CosinnusLocations"
 msgstr "Gruppen"
 
 #: .\models\group_extra.py:99
-msgid "Cosinnus society"
+msgid "Cosinnus group"
 msgstr "Gruppe"
 
 #: .\models\group_extra.py:100
-msgid "Cosinnus societies"
+msgid "Cosinnus groups"
 msgstr "Gruppen"
 
 #: .\models\tagged.py:54
@@ -1386,7 +1386,7 @@ msgid "Now"
 msgstr "beantragen"
 
 #: .\templates\cosinnus\dashboard.html:243
-msgid "Society:"
+msgid "Group:"
 msgstr "Gruppe:"
 
 #: .\templates\cosinnus\dashboard.html:251
@@ -1661,7 +1661,7 @@ msgstr "Projekt “%(team_name)s” bearbeiten"
 #: .\templates\cosinnus\group\group_form.html:8
 #: .\templates\cosinnus\group\group_form.html:29
 #: .\templates\cosinnus\group\leftnav_all_groups.html:39
-msgid "Create Society"
+msgid "Create Group"
 msgstr "Gruppe erstellen"
 
 #
@@ -1673,7 +1673,7 @@ msgstr "Projekt erstellen"
 
 #: .\templates\cosinnus\group\group_form.html:27
 #: .\templates\cosinnus\group\leftnav_group.html:16
-msgid "Edit Society"
+msgid "Edit Group"
 msgstr "Gruppe bearbeiten"
 
 #: .\templates\cosinnus\group\group_form.html:27
@@ -1686,7 +1686,7 @@ msgid "General"
 msgstr "Allgemein"
 
 #: .\templates\cosinnus\group\group_form.html:82
-msgid "Enter a name for the society."
+msgid "Enter a name for the group."
 msgstr "Gib einen Namen für die Gruppe ein"
 
 #: .\templates\cosinnus\group\group_form.html:82
@@ -1707,7 +1707,7 @@ msgstr "Beschreibung und Infos"
 
 #: .\templates\cosinnus\group\group_form.html:163
 #: .\templates\cosinnus\group\group_form.html:326
-msgid "Describe the society in a few sentences."
+msgid "Describe the group in a few sentences."
 msgstr "Beschreibe die Gruppe in ein paar Sätzen."
 
 #: .\templates\cosinnus\group\group_form.html:163
@@ -1725,11 +1725,11 @@ msgid "Enter a place or address."
 msgstr "Gib einen Ort oder Adresse ein."
 
 #: .\templates\cosinnus\group\group_form.html:241
-msgid "Which Society does the group belong to?"
+msgid "Which Group does the group belong to?"
 msgstr "Welcher Gruppe gehört das Projekt an?"
 
 #: .\templates\cosinnus\group\group_form.html:250
-msgid "Select Society"
+msgid "Select Group"
 msgstr "Gruppe auswählen"
 
 #: .\templates\cosinnus\group\group_form.html:258
@@ -1789,7 +1789,7 @@ msgstr ""
 #: .\templates\cosinnus\navbar_buttons_group_menus.html:7
 #: .\templates\cosinnus\navbar_buttons_group_menus.html:22
 #: .\templates\cosinnus\navbar_buttons_group_menus.html:47
-msgid "Societies"
+msgid "Groups"
 msgstr "Gruppen"
 
 #: .\templates\cosinnus\group\group_list.html:4
@@ -1852,7 +1852,7 @@ msgid "Do you really want to leave „%(title)s“?"
 msgstr "Möchten sie das Projekt “%(title)s” verlassen?"
 
 #: .\templates\cosinnus\group\group_list.html:283
-msgid "There are no societies."
+msgid "There are no groups."
 msgstr "Es gibt keine sichtbaren Gruppen."
 
 #: .\templates\cosinnus\group\group_list.html:285
@@ -1908,7 +1908,7 @@ msgid "Public Project"
 msgstr "Öffentliches Projekt"
 
 #: .\templates\cosinnus\group\group_microsite.html:125
-msgid "Public Society"
+msgid "Public Group"
 msgstr "Öffentliche Gruppe"
 
 #: .\templates\cosinnus\group\group_microsite.html:178
@@ -1990,7 +1990,7 @@ msgid "All projects"
 msgstr "Alle Projekte"
 
 #: .\templates\cosinnus\group\leftnav_all_groups.html:34
-msgid "All societies"
+msgid "All groups"
 msgstr "Alle Gruppen"
 
 #: .\templates\cosinnus\group\leftnav_all_groups.html:47
@@ -2003,11 +2003,11 @@ msgid "Portal Administrators"
 msgstr "Portal-Administrator_innen"
 
 #: .\templates\cosinnus\group\leftnav_group.html:28
-msgid "Re-activate Society"
+msgid "Re-activate Group"
 msgstr "Gruppe reaktivieren"
 
 #: .\templates\cosinnus\group\leftnav_group.html:28
-msgid "Deactivate Society"
+msgid "Deactivate Group"
 msgstr "Gruppe deaktivieren"
 
 #: .\templates\cosinnus\group\leftnav_group.html:28
@@ -2565,7 +2565,7 @@ msgid "People"
 msgstr "Menschen"
 
 #: .\templates\cosinnus\navbar_buttons_group_menus.html:18
-msgid "All Societies"
+msgid "All Groups"
 msgstr "Alle Gruppen"
 
 #: .\templates\cosinnus\navbar_buttons_group_menus.html:39
@@ -3671,7 +3671,7 @@ msgstr ""
 msgid "Import"
 msgstr "Exportieren"
 
-#~ msgid "Do you really want to leave society „%(title)s“?"
+#~ msgid "Do you really want to leave group „%(title)s“?"
 #~ msgstr "Möchten sie die Gruppe “%(title)s” verlassen?"
 
 #~ msgid "Wait..."
@@ -3694,19 +3694,16 @@ msgstr "Exportieren"
 #~ msgid "show on map"
 #~ msgstr "auf Karte anzeigen"
 
-#~ msgid "Groups"
-#~ msgstr "Projekte"
-
 #~ msgid "Public Project in Portal"
 #~ msgstr "Öffentliches Projekt in Portal"
 
-#~ msgid "Public Society in Portal"
+#~ msgid "Public Group in Portal"
 #~ msgstr "Öffentliche Gruppe in Portal"
 
 #~ msgid "Project in Portal"
 #~ msgstr "Projekt in Portal"
 
-#~ msgid "Society in Portal"
+#~ msgid "Group in Portal"
 #~ msgstr "Gruppe in Portal"
 
 #~ msgid "Network"

@@ -1,7 +1,7 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n thumbnail cosinnus_tags static %}
 
-{% block page_title %}{% if group_type == 1 %}{% trans "Societies" %}{% else %}{% trans "Projects" %}{% endif %}{% endblock %}
+{% block page_title %}{% if group_type == 1 %}{% trans "Groups" %}{% else %}{% trans "Projects" %}{% endif %}{% endblock %}
 
 {% block extrahead %}
     {{ block.super }}
@@ -276,7 +276,7 @@
             
 		{% empty %}
 		   {% if group_type == 1 %}
-		       {% trans "There are no societies." as no_group_message %}
+		       {% trans "There are no groups." as no_group_message %}
 		   {% else %}
 		       {% trans "There are no projects." as no_group_message %}
 		   {% endif %}

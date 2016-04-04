@@ -96,8 +96,8 @@ class CosinnusSociety(get_cosinnus_group_model()):
         proxy = True        
         app_label = 'cosinnus'
         ordering = ('name',)
-        verbose_name = _('Cosinnus society')
-        verbose_name_plural = _('Cosinnus societies')
+        verbose_name = _('Cosinnus group')
+        verbose_name_plural = _('Cosinnus groups')
     
     GROUP_MODEL_TYPE = CosinnusGroup.TYPE_SOCIETY
     
