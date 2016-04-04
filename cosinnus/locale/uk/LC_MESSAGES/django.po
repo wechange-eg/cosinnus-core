@@ -1825,7 +1825,7 @@ msgstr "Редагувати"
 
 #: .\templates\cosinnus\group\group_list.html:216
 msgid "Details"
-msgstr "Подробиці проекту"
+msgstr "Подробиці"
 
 #: .\templates\cosinnus\group\group_list.html:265
 #: .\templates\cosinnus\group\leftnav_group.html:38

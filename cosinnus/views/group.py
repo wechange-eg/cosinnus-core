@@ -346,7 +346,7 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
             
         ctx.update({
             'rows': zip(self.object_list, members, pendings, admins),
-            'team_type': self.group_type,
+            'group_type': self.group_type,
         })
         return ctx
     

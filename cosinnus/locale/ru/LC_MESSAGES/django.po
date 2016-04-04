@@ -1840,7 +1840,7 @@ msgstr "Редактировать"
 
 #: .\templates\cosinnus\group\group_list.html:216
 msgid "Details"
-msgstr "Детали проекта"
+msgstr "Детали"
 
 #: .\templates\cosinnus\group\group_list.html:265
 #: .\templates\cosinnus\group\leftnav_group.html:38
