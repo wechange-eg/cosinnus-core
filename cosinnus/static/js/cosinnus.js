@@ -1406,6 +1406,24 @@ $.fn.select2.defaults=$.extend($.fn.select2.defaults, {
     formatNoMatches: function () { return $.cosinnus.no_matches_found; }, 
 }); 
 
+/* string sprintf format for JS
+ * from http://stackoverflow.com/a/4673436
+ * 
+ * "{0} is dead, but {1} is alive! {0} {2}".format("ASP", "ASP.NET");
+ *    -->   "ASP is dead, but ASP.NET is alive! ASP {2}"
+*/
+if (!String.prototype.format) {
+    String.prototype.format = function() {
+      var args = arguments;
+      return this.replace(/{(\d+)}/g, function(match, number) { 
+        return typeof args[number] != 'undefined'
+          ? args[number]
+          : match
+        ;
+      });
+    };
+  }
+
 $(function() {
     $.cosinnus.checkBox();
     $.cosinnus.fadedown();
