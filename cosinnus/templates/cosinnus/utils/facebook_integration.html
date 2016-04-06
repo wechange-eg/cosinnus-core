@@ -1,0 +1,20 @@
+{% load i18n static cosinnus_tags %}
+
+<script src="{% static 'js/facebook-integration.js' %}"></script>
+
+
+<ol class="input-area" id="facebook-integration">
+    <li class="w100">
+        <i class="fa fa-fw fa-user"></i>
+        
+        {% with fb_userID=request.user.cosinnus_profile.get_facebook_user_id %}
+        	{% if fb_userID %}
+        		<script type="text/javascript">var cosinnus_fb_userID = "{{ fb_userID }}";</script>
+        	{% endif %}
+        {% endwith %}
+        
+		<button type="button" id="loadFacebookIntegrationButton">Load-FB</button>
+		<button type="button" id="loginFacebookIntegrationButton" style="display: none;">FB-Login</button>
+		
+    </li>
+</ol>

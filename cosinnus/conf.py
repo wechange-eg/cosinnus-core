@@ -104,6 +104,13 @@ class CosinnusConf(AppConf):
     # when etherpad objects are deleted, should the etherpads on the server be deleted as well?
     DELETE_ETHERPADS_ON_SERVER_ON_DELETE = True
     
+    # should the facebook integration scripts and templates be loaded?
+    FACEBOOK_INTEGRATION_ENABLED = False
+    # Facebook app id to use
+    FACEBOOK_INTEGRATION_APP_ID = None
+    # facebook app secret
+    FACEBOOK_INTEGRATION_APP_SECRET = None
+    
     # files of these mime types will always open within the browser when download is clicked
     FILE_NON_DOWNLOAD_MIMETYPES = ['application/pdf',]
     

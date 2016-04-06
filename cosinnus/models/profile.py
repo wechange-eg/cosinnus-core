@@ -23,6 +23,7 @@ from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.core import signals
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
 
 
 class BaseUserProfileManager(models.Manager):
@@ -50,7 +51,7 @@ class BaseUserProfileManager(models.Manager):
 
 
 @python_2_unicode_compatible
-class BaseUserProfile(models.Model):
+class BaseUserProfile(FacebookIntegrationUserProfileMixin, models.Model):
     """
     This is a base user profile used within cosinnus. To use it, create your
     own model inheriting from this model.

@@ -62,6 +62,12 @@ if not is_integrated_portal():
         url(r'^profile/delete/$', 'profile.delete_view', name='profile-delete'),
         
     )
+    
+
+if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED:
+    urlpatterns += patterns('cosinnus.views', 
+        url(r'^fb-integration/save-auth-tokens/$', 'facebook_integration.save_auth_tokens',  name='facebook-save-auth-tokens'),
+    )
 
 for url_key in group_model_registry:
     plural_url_key = group_model_registry.get_plural_url_key(url_key, url_key + '_s')
