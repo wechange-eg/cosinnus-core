@@ -169,11 +169,15 @@ $(function() {
     $('#loginFacebookIntegrationButton').click(function(){
         $.cosinnus.facebookIntegration.doLogin(function(){
             $('#loginFacebookIntegrationButton').hide();
-            $('#loginFacebookIntegrationButton').after('<span>userid:</span>');
-            
+            $('#facebookIntegrationPanel').show();
         });
     });
     
-    console.log(' inited cosinnus fb. initial user id is: ' + $.cosinnus.facebookIntegration.userID)
+    if ($.cosinnus.facebookIntegration.userID) {
+        $('#loadFacebookIntegrationButton').hide()
+        $('#loginFacebookIntegrationButton').hide();
+        $('#facebookIntegrationPanel').show();
+    }
+    
 });
 

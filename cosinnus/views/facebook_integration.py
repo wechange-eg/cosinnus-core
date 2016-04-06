@@ -17,6 +17,10 @@ from django.core.exceptions import ImproperlyConfigured
 from httplib2.socks import HTTPError
 from django.utils.encoding import force_text
 import urlparse
+import requests
+import re
+import urllib
+from cosinnus.utils.urls import iriToUri
 
 logger = logging.getLogger('cosinnus')
 
@@ -26,7 +30,7 @@ def _is_number(s):
         return True
     except ValueError:
         return False
-    
+
     
 def datetime_in_seconds(datetime):
     """ Returns a datetime in (local) time since 1900 GMT """
@@ -47,7 +51,53 @@ class FacebookIntegrationUserProfileMixin(object):
             if (now_in_seconds + 60*60) < expiry:
                 return user_id
         return None
+    
+    
+class FacebookIntegrationViewMixin(object):
 
+    def post_to_facebook(self, userprofile, fb_post_text, urls=[]):
+        """ Posts content to the timeline of a given userprofile's user synchronously.
+            This method will never throw an exception.
+            @param return: a string if posted successfully (either the post's id or '' if unknown), None if the post failed for any reason """
+        try:
+            # get user id and check for valid token
+            user_id = userprofile.get_facebook_user_id()
+            if not user_id:
+                logger.warning('Could not post to facebook timeline even though it was requested because of missing fb_userID!', extra={
+                           'user-email': userprofile.user.email})
+                return False
+            access_token = userprofile.settings['fb_accessToken']
+            if not access_token:
+                logger.warning('Could not post to facebook timeline even though it was requested because of missing fb_accessToken!', extra={
+                           'user-email': userprofile.user.email, 'user_fbID': user_id})
+                return False
+            
+            post_url = 'https://graph.facebook.com/v2.5/%(user_id)s/feed' % ({'user_id': user_id})
+            data = {
+                'message': fb_post_text.encode('utf-8'),
+                'access_token': access_token,
+            }
+            if urls:
+                data.update({
+                    'link': urls[0],
+                })
+                
+            post_url = post_url + '?' + urllib.urlencode(data)
+            post_url = iriToUri(post_url)
+            
+            req = requests.post(post_url, data=data, verify=False)
+            if not req.status_code == 200:
+                logger.warn('Facebook posting to timeline failed, request did not return status=200.', extra={'status':req.status_code, 'content': req._content})
+                return HttpResponseServerError('There was an error! Response code: %d' % req.status_code)
+            
+            response = req.json()
+            return response.get('id', '')
+            
+        except Exception, e:
+            logger.warning('Unexpected exception when posting to facebook timeline!', extra={
+                           'user-email': userprofile.user.email, 'user_fbID': user_id, 'exception': force_text(e)})
+        return None
+    
 
 def save_auth_tokens(request):
     """ Saves the given facebook auth tokens for the current user """

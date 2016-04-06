@@ -9,6 +9,8 @@ from cosinnus.conf import settings
 from django.core.cache import cache
 from django.utils.http import is_safe_url
 from cosinnus.utils.group import get_cosinnus_group_model
+import re
+import urlparse
 
         
 _PORTAL_PROTOCOL_CACHE_KEY = 'cosinnus/core/portal/%d/protocol'
@@ -81,3 +83,15 @@ def safe_redirect(url, request):
     if not is_safe_url(url=url, host=request.get_host()):
         url = get_non_cms_root_url()
     return url
+
+
+def urlEncodeNonAscii(b):
+    return re.sub('[\x80-\xFF]', lambda c: '%%%02x' % ord(c.group(0)), b)
+
+def iriToUri(iri):
+    """ Properly encodes any url string to a safe URL """
+    parts= urlparse.urlparse(iri)
+    return urlparse.urlunparse(
+        part.encode('idna') if parti==1 else urlEncodeNonAscii(part.encode('utf-8'))
+        for parti, part in enumerate(parts)
+    )

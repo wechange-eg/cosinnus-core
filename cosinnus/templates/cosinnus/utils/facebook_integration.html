@@ -5,16 +5,24 @@
 
 <ol class="input-area" id="facebook-integration">
     <li class="w100">
-        <i class="fa fa-fw fa-user"></i>
+        <i class="fa fa-fw fa-user pull-left"></i>
         
         {% with fb_userID=request.user.cosinnus_profile.get_facebook_user_id %}
         	{% if fb_userID %}
         		<script type="text/javascript">var cosinnus_fb_userID = "{{ fb_userID }}";</script>
         	{% endif %}
-        {% endwith %}
         
-		<button type="button" id="loadFacebookIntegrationButton">Load-FB</button>
-		<button type="button" id="loginFacebookIntegrationButton" style="display: none;">FB-Login</button>
-		
+			<button type="button" id="loadFacebookIntegrationButton">Load-FB</button>
+			<button type="button" id="loginFacebookIntegrationButton" style="display: none; border: 0; background: transparent;">
+    			<img src="{% static 'images/facebook-login-button.png' %}" height="30" alt="{% trans "Log in with Facebook" %}" />
+			</button>
+			
+			<div id="facebookIntegrationPanel" style="display: inline-block; display: none;">
+				<span>Logged in as: {{ fb_userID }}</span>
+				<br/>
+				<input type="checkbox" name="facebook_integration_post_to_timeline" id="facebookIntegrationPostCheckbox">
+				<label for="facebookIntegrationPostCheckbox">Post this to my timeline!</label>
+			</div>
+        {% endwith %}
     </li>
 </ol>
