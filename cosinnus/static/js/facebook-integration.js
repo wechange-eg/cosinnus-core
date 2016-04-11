@@ -197,5 +197,7 @@ $(function() {
         $('#facebookIntegrationPanel').show();
     }
     
+    // force disabling the post-to-facebook checkbox, that firefox will sometimes "remember"
+    $('#facebookIntegrationPostCheckbox').attr('checked', false);
 });
 

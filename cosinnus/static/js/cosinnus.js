@@ -1285,6 +1285,28 @@
             });
         },
         
+
+        toggleSwitch: function() {
+            /** All elements with class .toggle-switch will toggle (show/hide)
+             * (or for checkboxed, read the checked state, then show if checked)
+             *  the element with id equal to the value in their 'data-toggle-target' attribute. */
+            $('.toggle-switch').on('change', function() {
+                var target_id = $(this).attr('data-toggle-target');
+                if (target_id) {
+                    var target = $('#' + target_id);
+                    if ($(this).is(':checkbox')) {
+                        if ($(this).is(':checked')) {
+                            target.show();
+                        } else {
+                            target.hide();
+                        }
+                    } else {
+                        target.toggle();
+                    }
+                }
+            });
+        },
+        
         snapToBottom: function() {
             /* Snap class="snap-to-bottom" elements to the bottom of the page when they are scrolled out of view.
              * This code assumes there is only one (!) of such elements on any page! */
@@ -1452,6 +1474,7 @@ $(function() {
     $.cosinnus.dashboardArrangeInput();
     $.cosinnus.popover();
     $.cosinnus.toggleGroup();
+    $.cosinnus.toggleSwitch();
     $.cosinnus.snapToBottom();
 });
 

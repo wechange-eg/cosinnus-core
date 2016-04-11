@@ -5,7 +5,7 @@
 
 <ol class="input-area" id="facebook-integration">
     <li class="w100">
-        <i class="fa fa-facebook-official pull-left"></i>
+    	<div style="white-space: normal; line-height: 1.3em;">
         
         {% with fb_userID=request.user.cosinnus_profile.get_facebook_user_id %}
         	{% if fb_userID %}
@@ -29,6 +29,17 @@
 				            <div class="modal-body">
 				                
 				                <p>{% blocktrans %}(Description of why login and what data){% endblocktrans %}</p>
+				                - was passiert:
+				                	Du kannst dich mit Facebook verbinden um in Zukunft ganz einfach deine Posts auf Facebook veröffentlichen.
+				                	
+				                	Dazu brauchen wir einmalig deine Erlaubnis um unter deinen Namen Posts zu veröffentlichen.
+				                	
+				                	Wir garantieren:
+				                		- wir posten nur exakt das, was du auch geschrieben hast
+				                		- wir posten nie automatisch, sondern nur mit deiner Zustimmung für jeden Post
+				                		- deine daten behandeln wir vertraulich
+				                		- du kannst die Erlaubnis in deinem Benutzerprofil jederzeit wieder zurückziehen
+				                
 				                
 				                <hr>
 				                
@@ -55,17 +66,24 @@
 				    </div>
 				</div><!-- modal -->
 		
-				<button type="button" id="loadFacebookIntegrationButton">Load-FB</button>
+				<a class id="loadFacebookIntegrationButton">{% trans "Also post on Facebook" %}</a>
 				<span class="facebook-loading-spinner" style="display: none;"><i class="fa fa-spinner fa-spin"></i></span>
         	
         	{% endif %}
         
-			
-			<div id="facebookIntegrationPanel" style="display: inline-block; display: none;">
-				<img class="title-fb-username src-fb-avatar" src="{{ request.user.cosinnus_profile.get_facebook_avatar_url }}" title="{{ request.user.cosinnus_profile.get_facebook_username }}"></img>
-				<input type="checkbox" name="facebook_integration_post_to_timeline" id="facebookIntegrationPostCheckbox">
-				<label for="facebookIntegrationPostCheckbox">Post this to my timeline!</label>
+			<div id="facebookIntegrationPanel" style="display: none;">
+				
+				<label for="facebookIntegrationPostCheckbox" class="noselect" style="cursor: pointer;">
+					<img class="title-fb-username src-fb-avatar pull-left" src="{{ request.user.cosinnus_profile.get_facebook_avatar_url }}" 
+						title="{{ request.user.cosinnus_profile.get_facebook_username }}" style="margin-right: 10px;" height=40></img>
+					<input type="checkbox" checked="false" autocomplete="off" name="facebook_integration_post_to_timeline" id="facebookIntegrationPostCheckbox" class="toggle-switch" data-toggle-target="fb-post-explanation">
+					{% trans "Also post this to my Facebook timeline" %}
+				</label>
+				
+				<span id="fb-post-explanation" style="display: none;" class="small noselect">{% trans "When you submit this post, it will be posted on your Facebook timeline exactly as seen." %}</span>
 			</div>
         {% endwith %}
+        
+        </div>
     </li>
 </ol>
