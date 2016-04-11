@@ -5,17 +5,61 @@
 
 <ol class="input-area" id="facebook-integration">
     <li class="w100">
-        <i class="fa fa-fw fa-user pull-left"></i>
+        <i class="fa fa-facebook-official pull-left"></i>
         
         {% with fb_userID=request.user.cosinnus_profile.get_facebook_user_id %}
         	{% if fb_userID %}
         		<script type="text/javascript">var cosinnus_fb_userID = "{{ fb_userID }}";</script>
+        	{% else %}	
+        		
+
+				<!-- Modal -->
+				<div class="modal fade" id="facebook-login-modal" tabindex="1" role="dialog" aria-labelledby="facebook-login-modal-Label" aria-hidden="true">
+				    <div class="modal-dialog">
+				        <div class="modal-content">
+				            <div class="modal-header">
+				                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+				                    <i class="fa fa-times"></i>
+				                </button>
+				                <h4 class="modal-title" id="facebook-login-modal-Label">
+				                    <i class="fa fa-facebook-official"></i>
+				                    {% trans "Connect Facebook Account" %}
+				                </h4>
+				            </div>
+				            <div class="modal-body">
+				                
+				                <p>{% blocktrans %}(Description of why login and what data){% endblocktrans %}</p>
+				                
+				                <hr>
+				                
+				                <button type="button" id="loginFacebookIntegrationButton" style="border: 0; background: transparent;">
+					    			<img src="{% static 'images/facebook-login-button.png' %}" height="30" alt="{% trans "Log in with Facebook" %}" />
+								</button>
+				                
+				            </div>
+				            <div class="modal-footer">
+				                <button type="button" class="btn btn-emphasized" data-dismiss="modal">
+				                    <ul class="media-list">
+				                        <li class="media">
+				                            <a class="pull-left" href="#">
+				                                <i class="fa fa-times"></i>
+				                            </a>
+				                            <div class="media-body">
+				                                {% trans "Cancel" %}
+				                            </div>
+				                        </li>
+				                    </ul>
+				                </button>
+				            </div>
+				        </div>
+				    </div>
+				</div><!-- modal -->
+		
+				<button type="button" id="loadFacebookIntegrationButton">Load-FB</button>
+				<span class="facebook-loading-spinner" style="display: none;"><i class="fa fa-spinner fa-spin"></i></span>
+        	
         	{% endif %}
         
-			<button type="button" id="loadFacebookIntegrationButton">Load-FB</button>
-			<button type="button" id="loginFacebookIntegrationButton" style="display: none; border: 0; background: transparent;">
-    			<img src="{% static 'images/facebook-login-button.png' %}" height="30" alt="{% trans "Log in with Facebook" %}" />
-			</button>
 			
 			<div id="facebookIntegrationPanel" style="display: inline-block; display: none;">
 				<span>Logged in as: </span><span class="data-fb-username">{% if request.user.cosinnus_profile.get_facebook_username %}{{ request.user.cosinnus_profile.get_facebook_username }}{% endif %}</span>

@@ -69,7 +69,15 @@ $(function() {
             } 
         },
         
-        loadFacebookIntegration: function() {
+        loadFacebookIntegration: function(doneCallback) {
+            // if already loaded, do not load twice, just call the callback and return
+            if ($.cosinnus.facebookIntegration.isLoaded) {
+                if (typeof doneCallback !== 'undefined') {
+                    doneCallback();
+                }
+                return;
+            }
+            
             window.fbAsyncInit = function() {
                 FB.init({
                   appId      : $.cosinnus.facebookIntegration.APP_ID,
@@ -90,8 +98,11 @@ $(function() {
                 //    your app or not.
                 //
                 // These three cases are handled in the callback function.
-    
-                $.cosinnus.facebookIntegration.checkLoginState(function(){console.log('loggedin')}, function(){console.log('notloggedin')});
+                
+                if (typeof doneCallback !== 'undefined') {
+                    doneCallback();
+                }
+                //$.cosinnus.facebookIntegration.checkLoginState(function(){console.log('loggedin')}, function(){console.log('notloggedin')});
     
             };
             
@@ -161,14 +172,19 @@ $(function() {
     
     
     $('#loadFacebookIntegrationButton').click(function(){
-        $.cosinnus.facebookIntegration.loadFacebookIntegration();
-        $(this).hide();
-        $('#loginFacebookIntegrationButton').show();
+        $('#loadFacebookIntegrationButton').hide();
+        $('.facebook-loading-spinner').show();
+        $.cosinnus.facebookIntegration.loadFacebookIntegration(function (){
+            $('#facebook-login-modal').modal('show');
+            $('#loadFacebookIntegrationButton').show();
+            $('.facebook-loading-spinner').hide();
+        });
     });
     
     $('#loginFacebookIntegrationButton').click(function(){
         $.cosinnus.facebookIntegration.doLogin(function(data){
-            $('#loginFacebookIntegrationButton').hide();
+            // on success:
+            $('#facebook-login-modal').modal('hide');
             $('#facebookIntegrationPanel').show();
             $('.data-fb-username').text(data.username);
         });
@@ -176,7 +192,6 @@ $(function() {
     
     if ($.cosinnus.facebookIntegration.userID) {
         $('#loadFacebookIntegrationButton').hide()
-        $('#loginFacebookIntegrationButton').hide();
         $('#facebookIntegrationPanel').show();
     }
     
