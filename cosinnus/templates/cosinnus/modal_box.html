@@ -35,7 +35,7 @@
                         {{ form_extra_fields }}
                     {% endif %}
                 {% endif %} 
-                <button type="submit" class="btn btn-emphasized" {% if not form_action %}data-dismiss="modal"{% endif %}>
+                <button type="submit" class="submit-btn-x btn btn-emphasized" {% if not form_action %}data-dismiss="modal"{% endif %} {% if disable_on_submit %}onclick="$(this).attr('disabled', true);"{% endif %}>
                     <ul class="media-list">
                         <li class="media">
                             <a class="pull-left" href="#">
