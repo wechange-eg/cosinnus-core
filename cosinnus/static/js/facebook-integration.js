@@ -91,7 +91,7 @@ $(function() {
                 //
                 // These three cases are handled in the callback function.
     
-                $.cosinnus.facebookIntegration.checkLoginState(function(){console.log('good')}, function(){console.log('bad')});
+                $.cosinnus.facebookIntegration.checkLoginState(function(){console.log('loggedin')}, function(){console.log('notloggedin')});
     
             };
             
@@ -136,7 +136,7 @@ $(function() {
                         $.post( "/fb-integration/save-auth-tokens/", { authResponse: JSON.stringify(response.authResponse) }, "json")
                         .done(function( data ) {
                             if (typeof successCallback !== 'undefined') {
-                                successCallback();
+                                successCallback(data);
                             }
                         })
                         .fail(function(error) {
@@ -167,9 +167,10 @@ $(function() {
     });
     
     $('#loginFacebookIntegrationButton').click(function(){
-        $.cosinnus.facebookIntegration.doLogin(function(){
+        $.cosinnus.facebookIntegration.doLogin(function(data){
             $('#loginFacebookIntegrationButton').hide();
             $('#facebookIntegrationPanel').show();
+            $('.data-fb-username').text(data.username);
         });
     });
     

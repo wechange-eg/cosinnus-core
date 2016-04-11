@@ -67,6 +67,8 @@ if not is_integrated_portal():
 if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED:
     urlpatterns += patterns('cosinnus.views', 
         url(r'^fb-integration/save-auth-tokens/$', 'facebook_integration.save_auth_tokens',  name='facebook-save-auth-tokens'),
+        url(r'^fb-integration/remove-facebook/$', 'facebook_integration.remove_facebook_association',  name='facebook-remove-association'),
+        
     )
 
 for url_key in group_model_registry:

@@ -84,6 +84,29 @@
 	</button>
 	
 	{% if view == "edit_profile" or view == "delete_profile" %}
+	{% if request.user.cosinnus_profile.get_facebook_user_id %}
+	{% captureas label %}{% blocktrans with name=request.user.cosinnus_profile.get_facebook_username %}Your account is currently connected with the Facebook account "{{ name }}". Do you really want to disconnect your Facebook account?{% endblocktrans %}{% endcaptureas %}
+    {% captureas title %}{% trans "Remove Facebook Association" %}{% endcaptureas %}
+    {% captureas action %}{% url 'cosinnus:facebook-remove-association' %}{% endcaptureas %}
+    {% include "cosinnus/modal_box.html" with id="remove-facebook-modal" label=label title=title form_action=action %}
+    
+	
+	<button type="button" class="btn w100 btn-emphasized regular-space" data-toggle="modal" data-target="#remove-facebook-modal">
+	    <ul class="media-list">
+	        <li class="media">
+	           <a class="pull-left">
+	                <i class="fa fa-facebook-official"></i>
+	            </a>
+	            <div class="media-body">
+	                {% trans "Disconnect Facebook" %}
+	            </div>
+	        </li>
+	    </ul>
+	</button>
+	{% endif %}
+	{% endif %}
+	
+	{% if view == "edit_profile" or view == "delete_profile" %}
 	<button type="button" class="btn w100 btn-{% if view == "delete_profile" %}extra-{% endif %}emphasized regular-space" href="{% url 'cosinnus:profile-delete' %}">
 	    <ul class="media-list">
 	        <li class="media">
