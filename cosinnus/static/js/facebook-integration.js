@@ -184,9 +184,11 @@ $(function() {
     $('#loginFacebookIntegrationButton').click(function(){
         $.cosinnus.facebookIntegration.doLogin(function(data){
             // on success:
+            $('#loadFacebookIntegrationButton').hide();
             $('#facebook-login-modal').modal('hide');
             $('#facebookIntegrationPanel').show();
-            $('.data-fb-username').text(data.username);
+            $('.title-fb-username').attr('title', data.username);
+            $('.src-fb-avatar').attr('src', data.avatar);
         });
     });
     

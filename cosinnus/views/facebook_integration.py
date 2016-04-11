@@ -58,6 +58,13 @@ class FacebookIntegrationUserProfileMixin(object):
     def get_facebook_username(self):
         if self.get_facebook_user_id():
             return self.settings.get('fb_username', None)
+        return ''
+    
+    def get_facebook_avatar_url(self):
+        user_id = self.get_facebook_user_id()
+        if user_id:
+            return 'https://graph.facebook.com/%s/picture?type=square' % user_id
+        return ''
     
     def delete_facebook_association(self):
         """ Removes all facebook token/user info from this profile and saves it. """
@@ -194,7 +201,7 @@ def save_auth_tokens(request):
     profile.settings['fb_expiresAfterUTCSeconds'] = datetime_in_seconds(then)
     profile.save()
     
-    return JsonResponse({'status': 'ok', 'username': fb_username})
+    return JsonResponse({'status': 'ok', 'username': fb_username, 'user_id': user_id, 'avatar': profile.get_facebook_avatar_url()})
 
 
 def remove_facebook_association(request):

@@ -62,8 +62,7 @@
         
 			
 			<div id="facebookIntegrationPanel" style="display: inline-block; display: none;">
-				<span>Logged in as: </span><span class="data-fb-username">{% if request.user.cosinnus_profile.get_facebook_username %}{{ request.user.cosinnus_profile.get_facebook_username }}{% endif %}</span>
-				<br/>
+				<img class="title-fb-username src-fb-avatar" src="{{ request.user.cosinnus_profile.get_facebook_avatar_url }}" title="{{ request.user.cosinnus_profile.get_facebook_username }}"></img>
 				<input type="checkbox" name="facebook_integration_post_to_timeline" id="facebookIntegrationPostCheckbox">
 				<label for="facebookIntegrationPostCheckbox">Post this to my timeline!</label>
 			</div>
