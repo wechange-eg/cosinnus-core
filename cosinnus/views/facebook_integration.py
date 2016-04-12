@@ -241,7 +241,7 @@ def remove_facebook_association(request):
             messages.success(request, _('Your Facebook account was successfully disconnected from this account.'))
         else:
             logger.error('Facebook deleting association failed, response did not return success=True.', extra={'response': response})
-            messages.warning(request, _('An error occured when trying to disconnect your facebook account! Please contact an administrator.'))
+            messages.warning(request, _('An error occured when trying to disconnect your facebook account! Please contact an administrator!'))
     
     return redirect(reverse('cosinnus:profile-edit'))
         
