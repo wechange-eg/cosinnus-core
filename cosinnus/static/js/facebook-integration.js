@@ -11,32 +11,17 @@ $(function() {
         userHasPermissions: false,
         
         userID: ((typeof cosinnus_fb_userID !== 'undefined') ? cosinnus_fb_userID : null),
-        //accessToken: null,
-        
-        
-        // This function is called when someone finishes with the Login
-        // Button.  See the onlogin handler attached to it in the sample
-        // code below.
-        checkLoginState: function(callbackSuccess, callbackFail) {
-          FB.getLoginStatus(function(response) {
-              if (response['status'] == 'connected') {
-                  callbackSuccess();
-              } else {
-                  if (typeof callbackFail !== 'undefined') {
-                      callbackFail();
-                  }
-              }
-          });
-        },
         
         checkPermissions: function(callbackSuccess, callbackFail) {
+            /** Asynchronously check through the Facebook API if the user still has granted all permissions
+             *  we require of them.
+             *  Calls param callbackSuccess if yes, otherwise calls callbackFail */
+            
             if ($.cosinnus.facebookIntegration.userID) {
                 FB.api( "/{0}/permissions".format($.cosinnus.facebookIntegration.userID),
                         function (response) {
                     
                     var failed = true;
-                    console.log('result of check perms')
-                    console.log(response)
                     if (response && !response.error) {
                         /* handle the result */
                         failed = false;
@@ -50,16 +35,15 @@ $(function() {
                             }
                             if (!perm_found) {
                                 failed = true;
-                                console.log('breaking')
-                                console.log(given)
                                 break;
                             }
                         }
                     } 
                     if (!failed) {
-                        console.log('Got all perms!');
+                        if (typeof callbackSuccess !== 'undefined') {
+                            callbackSuccess();
+                        }
                     } else {
-                        console.log('failed')
                         if (typeof callbackFail !== 'undefined') {
                             callbackFail({status: 'not-logged-in'});
                         }
@@ -78,6 +62,7 @@ $(function() {
                 return;
             }
             
+            /** Facebook internal loading scripts begin ****************************** */
             window.fbAsyncInit = function() {
                 FB.init({
                   appId      : $.cosinnus.facebookIntegration.APP_ID,
@@ -86,26 +71,10 @@ $(function() {
                   xfbml      : false,  // parse social plugins on this page
                   version    : 'v2.5' // use graph api version 2.5
                 });
-    
-                // Now that we've initialized the JavaScript SDK, we call 
-                // FB.getLoginStatus().  This function gets the state of the
-                // person visiting this page and can return one of three states to
-                // the callback you provide.  They can be:
-                //
-                // 1. Logged into your app ('connected')
-                // 2. Logged into Facebook, but not your app ('not_authorized')
-                // 3. Not logged into Facebook and can't tell if they are logged into
-                //    your app or not.
-                //
-                // These three cases are handled in the callback function.
-                
                 if (typeof doneCallback !== 'undefined') {
                     doneCallback();
                 }
-                //$.cosinnus.facebookIntegration.checkLoginState(function(){console.log('loggedin')}, function(){console.log('notloggedin')});
-    
             };
-            
             (function(d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) return;
@@ -113,6 +82,7 @@ $(function() {
                 js.src = "//connect.facebook.net/en_US/sdk.js";
                 fjs.parentNode.insertBefore(js, fjs);
               }(document, 'script', 'facebook-jssdk'));
+            /** Facebook internal loading scripts end ****************************** */
             
             $.cosinnus.facebookIntegration.isLoaded = true;
         },
@@ -139,9 +109,7 @@ $(function() {
                      */
                     if (response.status == 'connected') {
                         $.cosinnus.facebookIntegration.userID = response.authResponse.userID;
-                        //$.cosinnus.facebookIntegration.accessToken = response.authResponse.accessToken;
                         $.cosinnus.facebookIntegration.userLoggedIn = true;
-                        
 
                         // save widget configs to server
                         $.post( "/fb-integration/save-auth-tokens/", { authResponse: JSON.stringify(response.authResponse) }, "json")
@@ -151,20 +119,15 @@ $(function() {
                             }
                         })
                         .fail(function(error) {
-                            console.log('error saving credentials')
-                            console.log(error)
-                            alert('There was an error connecting your facebook account on our side! Please try to login again!')
+                            // error saving credentials
+                            alert('There was an error connecting your facebook account on our side! Please try to login again or contact an administrator!')
                         });
-                        
-                        
-                        
                     } else {
-                        console.log('Login not successful');
-                        console.log(response)
+                        // fail silently when response came back but account wasn't connected
+                        // the user probably didn't accept some permission, so they know what's up
                     }
                     
-                    
-                }, {scope: $.cosinnus.facebookIntegration.PERMISSIONS});
+                }, {scope: $.cosinnus.facebookIntegration.PERMISSIONS}); // require these Facebook permissions from the user
             }
         },
         
@@ -175,6 +138,7 @@ $(function() {
         $('#loadFacebookIntegrationButton').hide();
         $('.facebook-loading-spinner').show();
         $.cosinnus.facebookIntegration.loadFacebookIntegration(function (){
+            // on completely loaded:
             $('#facebook-login-modal').modal('show');
             $('#loginFacebookIntegrationButton').removeAttr('disabled').css('opacity', '1.0');
             
@@ -186,7 +150,7 @@ $(function() {
     $('#loginFacebookIntegrationButton').click(function(){
         $('#loginFacebookIntegrationButton').attr('disabled', 'true').css('opacity', '0.6');
         $.cosinnus.facebookIntegration.doLogin(function(data){
-            // on success:
+            // on successful login:
             $('#loadFacebookIntegrationButton').hide();
             $('#facebook-login-modal').modal('hide');
             $('#facebookIntegrationPanel').show();
@@ -200,7 +164,7 @@ $(function() {
         $('#facebookIntegrationPanel').show();
     }
     
-    // force disabling the post-to-facebook checkbox, that firefox will sometimes "remember"
+    // force disabling the post-to-facebook checkbox, that firefox will sometimes "remember" as checked
     $('#facebookIntegrationPostCheckbox').attr('checked', false);
 });
 
