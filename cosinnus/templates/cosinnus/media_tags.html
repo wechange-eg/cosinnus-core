@@ -129,6 +129,14 @@
         </a>
     </li>
     
+    {% if SETTINGS.COSINNUS_FACEBOOK_INTEGRATION_ENABLED and do_include_facebook_button and not request.user.cosinnus_profile.get_facebook_user_id %}
+    <li class="input-area-lighter">
+        <a href="#" onclick="return false;" data-show-id="facebook-integration" title="{% trans "Connect Facebook Account" %}">
+            <i class="fa fa-fw fa-facebook-square"></i>
+        </a>
+    </li>
+    {% endif %}
+    
     
 </ol><!-- input-area -->
 {% endif %}

@@ -176,12 +176,15 @@ $(function() {
         $('.facebook-loading-spinner').show();
         $.cosinnus.facebookIntegration.loadFacebookIntegration(function (){
             $('#facebook-login-modal').modal('show');
+            $('#loginFacebookIntegrationButton').removeAttr('disabled').css('opacity', '1.0');
+            
             $('#loadFacebookIntegrationButton').show();
             $('.facebook-loading-spinner').hide();
         });
     });
     
     $('#loginFacebookIntegrationButton').click(function(){
+        $('#loginFacebookIntegrationButton').attr('disabled', 'true').css('opacity', '0.6');
         $.cosinnus.facebookIntegration.doLogin(function(data){
             // on success:
             $('#loadFacebookIntegrationButton').hide();

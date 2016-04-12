@@ -1,18 +1,24 @@
 {% load i18n static cosinnus_tags %}
 
-<script src="{% static 'js/facebook-integration.js' %}"></script>
-
-
-<ol class="input-area" id="facebook-integration">
+{% with fb_userID=request.user.cosinnus_profile.get_facebook_user_id %}
+<ol class="input-area" id="facebook-integration" {% if not fb_userID %}style="display:none;"{% endif %}>
+	
     <li class="w100">
     	<div style="white-space: normal; line-height: 1.3em;">
+    	
+	    	{% comment %} The <script> block must be inside because otherwise it messes up css item selectors {% endcomment %}
+			<script src="{% static 'js/facebook-integration.js' %}"></script>
         
-        {% with fb_userID=request.user.cosinnus_profile.get_facebook_user_id %}
         	{% if fb_userID %}
         		<script type="text/javascript">var cosinnus_fb_userID = "{{ fb_userID }}";</script>
         	{% else %}	
         		
-
+				<a class id="loadFacebookIntegrationButton" style="height: 40px; display: block; padding: 10px 0px; cursor: pointer;">
+					<i class="fa fa-fw fa-facebook-square"></i>
+					{% trans "Enable posting to Facebook" %}
+				</a>
+				<span class="facebook-loading-spinner" style="display: none; padding: 10px 0px;"><i class="fa fa-spinner fa-2x fa-spin"></i></span>
+        		
 				<!-- Modal -->
 				<div class="modal fade" id="facebook-login-modal" tabindex="1" role="dialog" aria-labelledby="facebook-login-modal-Label" aria-hidden="true">
 				    <div class="modal-dialog">
@@ -28,8 +34,20 @@
 				            </div>
 				            <div class="modal-body">
 				                
-				                <p>{% blocktrans %}(Description of why login and what data){% endblocktrans %}</p>
-				                - was passiert:
+				                <h4>{% trans "Why connect?" context "Facebook connect explanation box" %}</h4>
+				                <p>{% trans "When you connect your Facebook account you can easily publish your news posts on your Facebook timeline." context "Facebook connect explanation box" %}</p>
+				                
+				                <p>{% trans "For that, we need your permission to publish on Facebook in your name." context "Facebook connect explanation box" %}</p>
+				                
+				                <h4>{% trans "We guarantee:" context "Facebook connect explanation box list header" %}</h4>
+				                <ul>
+				                	<li>{% trans "We will only post exactly what you have written" context "Facebook connect explanation box list items" %}</li>
+				                	<li>{% trans "We will only post with your explicit consent for every news post, and never automatically" context "Facebook connect explanation box list items" %}</li>
+				                	<li>{% trans "Except for your name and profile picture, we will obtain absolutely no other data from your Facebook account" context "Facebook connect explanation box list items" %}</li>
+				                	<li>{% blocktrans with site_name=COSINNUS_CURRENT_PORTAL.site.name context "Facebook connect explanation box list items" %}You can revoke your permission at any time from your {{ site_name }} profile settings{% endblocktrans %}</li>
+				                </ul>
+				                
+								{% comment %}  
 				                	Du kannst dich mit Facebook verbinden um in Zukunft ganz einfach deine Posts auf Facebook veröffentlichen.
 				                	
 				                	Dazu brauchen wir einmalig deine Erlaubnis um unter deinen Namen Posts zu veröffentlichen.
@@ -37,18 +55,17 @@
 				                	Wir garantieren:
 				                		- wir posten nur exakt das, was du auch geschrieben hast
 				                		- wir posten nie automatisch, sondern nur mit deiner Zustimmung für jeden Post
-				                		- deine daten behandeln wir vertraulich
+				                		- außer deinem Namen und Profilbild beziehen wir absolut keine Daten aus deinem Facebook-Account!
 				                		- du kannst die Erlaubnis in deinem Benutzerprofil jederzeit wieder zurückziehen
-				                
-				                
-				                <hr>
-				                
-				                <button type="button" id="loginFacebookIntegrationButton" style="border: 0; background: transparent;">
-					    			<img src="{% static 'images/facebook-login-button.png' %}" height="30" alt="{% trans "Log in with Facebook" %}" />
-								</button>
-				                
+								{% endcomment %}
+				                		
 				            </div>
 				            <div class="modal-footer">
+				            	
+				                <button type="button" id="loginFacebookIntegrationButton" class="btn" style="border: 0; background: transparent; width: auto;">
+					    			<img src="{% static 'images/facebook-login-button.png' %}" height="40" alt="{% trans "Log in with Facebook" %}" />
+								</button>
+				            
 				                <button type="button" class="btn btn-emphasized" data-dismiss="modal">
 				                    <ul class="media-list">
 				                        <li class="media">
@@ -61,17 +78,16 @@
 				                        </li>
 				                    </ul>
 				                </button>
+				                
 				            </div>
 				        </div>
 				    </div>
 				</div><!-- modal -->
 		
-				<a class id="loadFacebookIntegrationButton">{% trans "Also post on Facebook" %}</a>
-				<span class="facebook-loading-spinner" style="display: none;"><i class="fa fa-spinner fa-spin"></i></span>
         	
         	{% endif %}
         
-			<div id="facebookIntegrationPanel" style="display: none;">
+			<div id="facebookIntegrationPanel" {% if not fb_userID %}style="display: none;"{% endif %}>
 				
 				<label for="facebookIntegrationPostCheckbox" class="noselect" style="cursor: pointer;">
 					<img class="title-fb-username src-fb-avatar pull-left" src="{{ request.user.cosinnus_profile.get_facebook_avatar_url }}" 
@@ -79,11 +95,13 @@
 					<input type="checkbox" checked="false" autocomplete="off" name="facebook_integration_post_to_timeline" id="facebookIntegrationPostCheckbox" class="toggle-switch" data-toggle-target="fb-post-explanation">
 					{% trans "Also post this to my Facebook timeline" %}
 				</label>
-				
+				<br/>
 				<span id="fb-post-explanation" style="display: none;" class="small noselect">{% trans "When you submit this post, it will be posted on your Facebook timeline exactly as seen." %}</span>
 			</div>
-        {% endwith %}
         
         </div>
     </li>
 </ol>
+
+{% endwith %}
+
