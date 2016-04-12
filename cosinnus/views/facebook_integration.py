@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.utils.translation import ugettext_lazy as _
-from django.http.response import HttpResponseNotAllowed, HttpResponse,\
+from django.http.response import HttpResponseNotAllowed, \
     HttpResponseForbidden, HttpResponseBadRequest, JsonResponse,\
     HttpResponseServerError
 
@@ -14,11 +14,9 @@ import time
 
 from cosinnus.conf import settings
 from django.core.exceptions import ImproperlyConfigured
-from httplib2.socks import HTTPError
 from django.utils.encoding import force_text
 import urlparse
 import requests
-import re
 import urllib
 from cosinnus.utils.urls import iriToUri
 from django.shortcuts import redirect
