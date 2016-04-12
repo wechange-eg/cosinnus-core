@@ -90,12 +90,12 @@ class FacebookIntegrationViewMixin(object):
             if not user_id:
                 logger.warning('Could not post to facebook timeline even though it was requested because of missing fb_userID!', extra={
                            'user-email': userprofile.user.email})
-                return False
+                return None
             access_token = userprofile.settings['fb_accessToken']
             if not access_token:
                 logger.warning('Could not post to facebook timeline even though it was requested because of missing fb_accessToken!', extra={
                            'user-email': userprofile.user.email, 'user_fbID': user_id})
-                return False
+                return None
             
             post_url = 'https://graph.facebook.com/v2.5/%(user_id)s/feed' % ({'user_id': user_id})
             data = {
@@ -113,7 +113,7 @@ class FacebookIntegrationViewMixin(object):
             req = requests.post(post_url, data=data, verify=False)
             if not req.status_code == 200:
                 logger.warn('Facebook posting to timeline failed, request did not return status=200.', extra={'status':req.status_code, 'content': req._content})
-                return HttpResponseServerError('There was an error! Response code: %d' % req.status_code)
+                return None
             
             response = req.json()
             return response.get('id', '')
