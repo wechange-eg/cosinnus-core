@@ -14,6 +14,7 @@ from cosinnus.templatetags.cosinnus_tags import full_name
 from cosinnus.utils.choices import get_user_choices
 from cosinnus.utils.permissions import check_ug_membership
 from cosinnus.views.mixins.select2 import RequireGroupMember, RequireLoggedIn
+from cosinnus.utils.group import get_cosinnus_group_model
 
 
 class GroupMembersView(RequireGroupMember, Select2View):
@@ -90,3 +91,29 @@ class TagsView(Select2View):
         return (NO_ERR_RESP, has_more, tags)
 
 tags_view = TagsView.as_view()
+
+
+
+class GroupsView(Select2View):
+    
+    def get_results(self, request, term, page, context):
+        term = term.lower()
+        start = (page - 1) * 10
+        end = page * 10
+
+        q = Q(name__icontains=term, portal_id=CosinnusPortal.get_current().id)
+        qs = get_cosinnus_group_model().objects.filter(q)
+        # TODO: also search russian/other extension fields of name, make a good interface to generically grab those
+        
+        count = qs.count()
+        if count < start:
+            raise Http404
+        has_more = count > end
+
+        groups = list(qs.values_list('id', 'name').all()[start:end])
+        
+        return (NO_ERR_RESP, has_more, groups)
+
+groups_view = GroupsView.as_view()
+
+

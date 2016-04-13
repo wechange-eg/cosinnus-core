@@ -254,6 +254,24 @@
 			                            </ul>
 			                        </div>
 			                        {% endif %}
+			                        
+			                        {% if form.forms.obj.related_groups %}
+									<label>{% trans "Are there any projects/groups related to this one?" %}</label>
+			                        <div type="button" class="btn btn-default w100">
+			                            <ul class="media-list">
+			                                <li class="media">
+			                                    <a class="pull-left" href="#">
+			                                        <i class="fa fa-users"></i>
+			                                    </a>
+			                                    <div class="media-body media-body-form-control">
+			                                        {{ form.forms.obj.related_groups.errors }}
+									                {% captureas placeholder %}{% trans "Select related Projects/Groups" %}{% endcaptureas %}
+									                {% render_field form.forms.obj.related_groups class+="form-control w100" placeholder=placeholder %}
+			                                    </div>
+			                                </li>
+			                            </ul>
+			                        </div>
+			                        {% endif %}
 					
 					                <label>{% trans "Privacy" %}</label>
 					                <div type="button" class="btn btn-default w100">

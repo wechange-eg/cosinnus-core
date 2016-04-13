@@ -612,6 +612,12 @@ class CosinnusBaseGroup(models.Model):
     
     parent = models.ForeignKey("self", verbose_name=_('Parent Group'),
         related_name='groups', null=True, blank=True, on_delete=models.SET_NULL)
+    related_groups = models.ManyToManyField("self", 
+        through='RelatedGroups',
+        through_fields=('to_group', 'from_group'),
+        verbose_name=_('Related Teams'),
+        symmetrical=False,
+        blank=True, null=True, related_name='+')
     
     objects = CosinnusGroupManager()
     
@@ -907,6 +913,17 @@ class CosinnusGroup(CosinnusBaseGroup):
 
     class Meta(CosinnusBaseGroup.Meta):
         swappable = 'COSINNUS_GROUP_OBJECT_MODEL'
+
+
+class RelatedGroups(models.Model):
+    """ Need to have this through model for CosinnusGroup.related_groups so django doesn't mix up model names
+        in apps that have swapped out the CosinnusGroup model """
+        
+    class Meta:
+        unique_together = (('from_group', 'to_group'),)  
+        
+    from_group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, on_delete=models.CASCADE, related_name='+')
+    to_group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, on_delete=models.CASCADE, related_name='+')
 
 
 @python_2_unicode_compatible

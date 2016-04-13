@@ -18,4 +18,5 @@ for url_key in group_model_registry:
 urlpatterns += patterns('cosinnus.views.select2',
     url(r'members/$', 'all_members', name='all-members'),
     url(r'tags/$', 'tags_view', name='tags'),
+    url(r'groups/$', 'groups_view', name='groups'),
 )

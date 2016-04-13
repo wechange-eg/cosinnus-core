@@ -9,10 +9,13 @@ from awesome_avatar import forms as avatar_forms
 
 from cosinnus.models.group import (CosinnusGroupMembership,
     MEMBERSHIP_MEMBER, CosinnusPortal,
-    CosinnusLocation)
+    CosinnusLocation, RelatedGroups)
 from cosinnus.core.registries.apps import app_registry
 from cosinnus.conf import settings
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from django_select2.fields import HeavyModelSelect2MultipleChoiceField
+from cosinnus.utils.group import get_cosinnus_group_model
+from django.core.urlresolvers import reverse_lazy
 
 
 class GroupKwargModelFormMixin(object):
@@ -49,43 +52,71 @@ class AsssignPortalMixin(object):
         return super(AsssignPortalMixin, self).save(**kwargs)
 
 
-class _CosinnusProjectForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, forms.ModelForm):
+class CosinnusBaseGroupForm(forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
     website = forms.URLField(widget=forms.TextInput, required=False)
     
-    class Meta:
-        fields = ['name', 'public', 'description', 'description_long', 'contact_info', 
-                          'avatar', 'wallpaper', 'parent', 'website', 'deactivated_apps'] \
-                          + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) 
-        model = CosinnusProject
+    related_groups = forms.ModelMultipleChoiceField(queryset=get_cosinnus_group_model().objects.filter(portal_id=CosinnusPortal.get_current().id))
     
-    def __init__(self, instance, *args, **kwargs):    
-        super(_CosinnusProjectForm, self).__init__(instance=instance, *args, **kwargs)
-        self.fields['parent'].queryset = CosinnusSociety.objects.all_in_portal()
-        # use select2 widgets for m2m fields
-        for field in self.fields.values():
-            if type(field.widget) is SelectMultiple:
-                field.widget = Select2MultipleWidget(choices=field.choices)
-
-
-class _CosinnusSocietyForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, forms.ModelForm):
-    
-    avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
-    website = forms.URLField(widget=forms.TextInput, required=False)
     
     class Meta:
         fields = ['name', 'public', 'description', 'description_long', 'contact_info', 
                         'avatar', 'wallpaper', 'website', 'deactivated_apps'] \
                         + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) 
-        model = CosinnusSociety
-    
+
     def __init__(self, instance, *args, **kwargs):    
-        super(_CosinnusSocietyForm, self).__init__(instance=instance, *args, **kwargs)
+        super(CosinnusBaseGroupForm, self).__init__(instance=instance, *args, **kwargs)
+        
+        self.fields['related_groups'] = HeavyModelSelect2MultipleChoiceField(
+                 required=False, 
+                 data_url=reverse_lazy('cosinnus:select2:groups'),
+                 queryset=get_cosinnus_group_model().objects.filter(portal_id=CosinnusPortal.get_current().id),
+                 initial=[] if not instance else [rel_group.pk for rel_group in instance.related_groups.all()],
+             )
+        
         # use select2 widgets for m2m fields
         for field in self.fields.values():
             if type(field.widget) is SelectMultiple:
                 field.widget = Select2MultipleWidget(choices=field.choices)
+                
+    def save(self, commit=True):
+        """ Support for m2m-MultipleModelChoiceFields. Saves all selected relations.
+            from http://stackoverflow.com/questions/2216974/django-modelform-for-many-to-many-fields """
+        self.instance = super(CosinnusBaseGroupForm, self).save(commit=False)
+        # Prepare a 'save_m2m' method for the form,
+        old_save_m2m = self.save_m2m
+        def save_m2m():
+            old_save_m2m()
+            self.instance.related_groups.clear()
+            for related_group in self.cleaned_data['related_groups']:
+                #self.instance.related_groups.add(related_group)
+                # add() is disabled for a self-referential models, so we create an instance of the through-model
+                RelatedGroups.objects.create(to_group=self.instance, from_group=related_group) 
+                
+        self.save_m2m = save_m2m
+        if commit:
+            self.instance.save()
+            self.save_m2m()
+        return self.instance
+                
+                
+class _CosinnusProjectForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
+    
+    class Meta:
+        fields = CosinnusBaseGroupForm.Meta.fields + ['parent',]
+        model = CosinnusProject
+    
+    def __init__(self, instance, *args, **kwargs):    
+        super(_CosinnusProjectForm, self).__init__(instance=instance, *args, **kwargs)
+        self.fields['parent'].queryset = CosinnusSociety.objects.all_in_portal()
+        
+
+class _CosinnusSocietyForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
+    
+    class Meta:
+        fields = CosinnusBaseGroupForm.Meta.fields
+        model = CosinnusSociety
         
 
 class MembershipForm(GroupKwargModelFormMixin, forms.ModelForm):
