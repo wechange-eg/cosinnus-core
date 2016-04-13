@@ -572,8 +572,7 @@ class CosinnusBaseGroup(models.Model):
     portal = models.ForeignKey(CosinnusPortal, verbose_name=_('Portal'), related_name='groups', 
         null=False, blank=False, default=1) # port_id 1 is created in a datamigration!
     
-    name = models.CharField(_('Name'), max_length=250,
-        validators=[group_name_validator])
+    name = models.CharField(_('Name'), max_length=250) # removed validators=[group_name_validator])
     slug = models.SlugField(_('Slug'), 
         help_text=_('Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!'), 
         max_length=50)
