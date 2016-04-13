@@ -18,7 +18,11 @@
 					<i class="fa fa-fw fa-facebook-square"></i>
 					{% trans "Enable posting to Facebook" %}
 				</a>
-				<span class="facebook-loading-spinner" style="display: none; padding: 10px 0px;"><i class="fa fa-spinner fa-2x fa-spin"></i></span>
+				<span class="facebook-loading-spinner" style="display: none; padding: 10px 0px;">
+					<i class="fa fa-spinner fa-2x fa-spin"></i>
+					{% trans "Loading Facebook-Scripts..." %}
+					<p>{% trans "If nothing happens please disable any addons like Ghostery or NoScript..." %}</p>
+				</span>
         		
 				<!-- Modal -->
 				<div class="modal fade" id="facebook-login-modal" tabindex="1" role="dialog" aria-labelledby="facebook-login-modal-Label" aria-hidden="true">

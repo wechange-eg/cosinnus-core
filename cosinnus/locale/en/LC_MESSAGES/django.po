@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-12 16:22+0200\n"
+"POT-Creation-Date: 2016-04-13 11:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -370,7 +370,7 @@ msgstr ""
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 
-#: .\models\group.py:421 .\models\group.py:572 .\models\group.py:988
+#: .\models\group.py:421 .\models\group.py:572 .\models\group.py:987
 msgid "Portal"
 msgstr ""
 
@@ -378,7 +378,7 @@ msgstr ""
 msgid "Portals"
 msgstr ""
 
-#: .\models\group.py:432 .\models\group.py:577
+#: .\models\group.py:432 .\models\group.py:576
 msgid "Slug"
 msgstr ""
 
@@ -389,7 +389,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: .\models\group.py:435 .\models\group.py:599 .\models\profile.py:90
+#: .\models\group.py:435 .\models\group.py:598 .\models\profile.py:90
 #: .\templates\cosinnus\group\group_form.html:180
 #: .\templates\cosinnus\group\group_form.html:189
 #: .\templates\cosinnus\group\group_microsite.html:358
@@ -398,7 +398,7 @@ msgstr ""
 msgid "Website"
 msgstr ""
 
-#: .\models\group.py:436 .\models\group.py:600 .\models\tagged.py:41
+#: .\models\group.py:436 .\models\group.py:599 .\models\tagged.py:41
 msgid "Public"
 msgstr ""
 
@@ -471,151 +471,151 @@ msgstr ""
 msgid "Group"
 msgstr "Group"
 
-#: .\models\group.py:578
+#: .\models\group.py:577
 msgid ""
 "Be extremely careful when changing this slug manually! There can be many "
 "side-effects (redirects breaking e.g.)!"
 msgstr ""
 
-#: .\models\group.py:580
+#: .\models\group.py:579
 msgid "Project Type"
 msgstr "Project Type"
 
-#: .\models\group.py:583
+#: .\models\group.py:582
 msgid "Short Description"
 msgstr ""
 
-#: .\models\group.py:584
+#: .\models\group.py:583
 msgid "Short Description. Internal, will not be shown publicly."
 msgstr ""
 
-#: .\models\group.py:585
+#: .\models\group.py:584
 msgid "Detailed Description"
 msgstr ""
 
-#: .\models\group.py:586
+#: .\models\group.py:585
 msgid "Detailed, public description."
 msgstr ""
 
-#: .\models\group.py:587
+#: .\models\group.py:586
 msgid "Contact Information"
 msgstr ""
 
-#: .\models\group.py:588
+#: .\models\group.py:587
 msgid "How you can be contacted - addresses, social media, etc."
 msgstr ""
 
-#: .\models\group.py:591 .\models\profile.py:85
+#: .\models\group.py:590 .\models\profile.py:85
 #: .\templates\cosinnus\group\group_form.html:91
 msgid "Avatar"
 msgstr ""
 
-#: .\models\group.py:594
+#: .\models\group.py:593
 msgid "Wallpaper image"
 msgstr ""
 
-#: .\models\group.py:595
+#: .\models\group.py:594
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr ""
 
-#: .\models\group.py:608
+#: .\models\group.py:607
 msgid "Deactivated Apps"
 msgstr ""
 
-#: .\models\group.py:610
+#: .\models\group.py:609
 msgid "Is active"
 msgstr ""
 
-#: .\models\group.py:611
+#: .\models\group.py:610
 msgid ""
 "If a team is not active, it counts as non-existent for all purposes and "
 "views on the website."
 msgstr ""
 
-#: .\models\group.py:614
+#: .\models\group.py:613
 msgid "Parent Group"
 msgstr ""
 
-#: .\models\group.py:625 .\models\group_extra.py:66
+#: .\models\group.py:624 .\models\group_extra.py:66
 msgid "Cosinnus project"
 msgstr "Project"
 
-#: .\models\group.py:626 .\models\group_extra.py:67
+#: .\models\group.py:625 .\models\group_extra.py:67
 msgid "Cosinnus projects"
 msgstr "Projects"
 
-#: .\models\group.py:663
+#: .\models\group.py:662
 msgid "Slug must not be empty."
 msgstr ""
 
-#: .\models\group.py:700
+#: .\models\group.py:699
 msgid ""
 "The URL for this team has changed. A redirect from all existing URLs has "
 "automatically been created!"
 msgstr ""
 
-#: .\models\group.py:982
+#: .\models\group.py:981
 msgid "Team membership"
 msgstr ""
 
-#: .\models\group.py:983
+#: .\models\group.py:982
 msgid "Team memberships"
 msgstr ""
 
-#: .\models\group.py:995
+#: .\models\group.py:994
 msgid "Portal membership"
 msgstr ""
 
-#: .\models\group.py:996
+#: .\models\group.py:995
 msgid "Portal memberships"
 msgstr ""
 
-#: .\models\group.py:1007
+#: .\models\group.py:1006
 msgid "From Portal"
 msgstr ""
 
-#: .\models\group.py:1008
+#: .\models\group.py:1007
 #, fuzzy
 msgid "From Team Type"
 msgstr "Project Type"
 
-#: .\models\group.py:1009
+#: .\models\group.py:1008
 msgid "From Slug"
 msgstr ""
 
-#: .\models\group.py:1012 .\models\group.py:1021
+#: .\models\group.py:1011 .\models\group.py:1020
 msgid "Permanent Team Redirects"
 msgstr ""
 
-#: .\models\group.py:1020
+#: .\models\group.py:1019
 msgid "Permanent Team Redirect"
 msgstr ""
 
-#: .\models\group.py:1148 .\models\tagged.py:124
+#: .\models\group.py:1147 .\models\tagged.py:124
 #: .\templates\cosinnus\group\group_microsite.html:301
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:4
 msgid "Location"
 msgstr ""
 
-#: .\models\group.py:1149 .\models\tagged.py:125
+#: .\models\group.py:1148 .\models\tagged.py:125
 msgid "Latitude"
 msgstr ""
 
-#: .\models\group.py:1150 .\models\tagged.py:126
+#: .\models\group.py:1149 .\models\tagged.py:126
 msgid "Longitude"
 msgstr ""
 
-#: .\models\group.py:1154 .\models\tagged.py:86 .\models\tagged.py:236
+#: .\models\group.py:1153 .\models\tagged.py:86 .\models\tagged.py:236
 msgid "Team"
 msgstr ""
 
-#: .\models\group.py:1160
+#: .\models\group.py:1159
 #, fuzzy
 #| msgid "Cosinnus groups"
 msgid "CosinnusLocation"
 msgstr "Groups"
 
-#: .\models\group.py:1161
+#: .\models\group.py:1160
 #, fuzzy
 #| msgid "Cosinnus groups"
 msgid "CosinnusLocations"
@@ -1186,7 +1186,7 @@ msgstr ""
 #: .\templates\cosinnus\hierarchy\add_container.html:28
 #: .\templates\cosinnus\hierarchy\move_element_modal.html:48
 #: .\templates\cosinnus\modal_box.html:28
-#: .\templates\cosinnus\utils\facebook_integration.html:78
+#: .\templates\cosinnus\utils\facebook_integration.html:83
 #: .\templates\cosinnus\widgets\add_widget.html:32
 #: .\templates\cosinnus\widgets\delete.html:5
 msgid "Cancel"
@@ -2297,7 +2297,7 @@ msgid "Change privacy"
 msgstr ""
 
 #: .\templates\cosinnus\media_tags.html:136
-#: .\templates\cosinnus\utils\facebook_integration.html:33
+#: .\templates\cosinnus\utils\facebook_integration.html:38
 msgid "Connect Facebook Account"
 msgstr ""
 
@@ -2819,52 +2819,61 @@ msgstr ""
 msgid "User Dashboard"
 msgstr ""
 
-#: .\templates\cosinnus\utils\facebook_integration.html:19
+#: .\templates\cosinnus\utils\facebook_integration.html:20
 msgid "Enable posting to Facebook"
 msgstr ""
 
-#: .\templates\cosinnus\utils\facebook_integration.html:38
+#: .\templates\cosinnus\utils\facebook_integration.html:24
+msgid "Loading Facebook-Scripts..."
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration.html:25
+msgid ""
+"If nothing happens please disable any addons like Ghostery or NoScript..."
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration.html:43
 msgctxt "Facebook connect explanation box"
 msgid "Why connect?"
 msgstr ""
 
-#: .\templates\cosinnus\utils\facebook_integration.html:39
+#: .\templates\cosinnus\utils\facebook_integration.html:44
 msgctxt "Facebook connect explanation box"
 msgid ""
 "When you connect your Facebook account you can easily publish your news "
 "posts on your Facebook timeline."
 msgstr ""
 
-#: .\templates\cosinnus\utils\facebook_integration.html:41
+#: .\templates\cosinnus\utils\facebook_integration.html:46
 msgctxt "Facebook connect explanation box"
 msgid "For that, we need your permission to publish on Facebook in your name."
 msgstr ""
 
-#: .\templates\cosinnus\utils\facebook_integration.html:43
+#: .\templates\cosinnus\utils\facebook_integration.html:48
 msgctxt "Facebook connect explanation box list header"
 msgid "We guarantee:"
 msgstr ""
 
-#: .\templates\cosinnus\utils\facebook_integration.html:45
+#: .\templates\cosinnus\utils\facebook_integration.html:50
 msgctxt "Facebook connect explanation box list items"
 msgid "We will only post exactly what you have written"
 msgstr ""
 
-#: .\templates\cosinnus\utils\facebook_integration.html:46
+#: .\templates\cosinnus\utils\facebook_integration.html:51
 msgctxt "Facebook connect explanation box list items"
 msgid ""
 "We will only post with your explicit consent for every news post, and never "
 "automatically"
 msgstr ""
 
-#: .\templates\cosinnus\utils\facebook_integration.html:47
+#: .\templates\cosinnus\utils\facebook_integration.html:52
 msgctxt "Facebook connect explanation box list items"
 msgid ""
 "Except for your name and profile picture, we will obtain absolutely no other "
 "data from your Facebook account"
 msgstr ""
 
-#: .\templates\cosinnus\utils\facebook_integration.html:48
+#: .\templates\cosinnus\utils\facebook_integration.html:53
 #, python-format
 msgctxt "Facebook connect explanation box list items"
 msgid ""
@@ -2872,15 +2881,15 @@ msgid ""
 "settings"
 msgstr ""
 
-#: .\templates\cosinnus\utils\facebook_integration.html:68
+#: .\templates\cosinnus\utils\facebook_integration.html:73
 msgid "Log in with Facebook"
 msgstr ""
 
-#: .\templates\cosinnus\utils\facebook_integration.html:98
+#: .\templates\cosinnus\utils\facebook_integration.html:103
 msgid "Also post this to my Facebook timeline"
 msgstr ""
 
-#: .\templates\cosinnus\utils\facebook_integration.html:101
+#: .\templates\cosinnus\utils\facebook_integration.html:106
 msgid ""
 "When you submit this post, it will be posted on your Facebook timeline "
 "exactly as seen."
@@ -3129,14 +3138,14 @@ msgstr ""
 msgid "No model given to export data from."
 msgstr ""
 
-#: .\views\facebook_integration.py:221 .\views\facebook_integration.py:234
-#: .\views\facebook_integration.py:244
+#: .\views\facebook_integration.py:219 .\views\facebook_integration.py:232
+#: .\views\facebook_integration.py:242
 msgid ""
 "An error occured when trying to disconnect your facebook account! Please "
 "contact an administrator!"
 msgstr ""
 
-#: .\views\facebook_integration.py:241
+#: .\views\facebook_integration.py:239
 msgid "Your Facebook account was successfully disconnected from this account."
 msgstr ""
 
