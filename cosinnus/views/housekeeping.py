@@ -17,13 +17,13 @@ import json
 import urllib2
 
 
-def housekeeping(request):
+def housekeeping(request=None):
     """ Do some integrity checks and corrections. 
         Currently doing:
             - Checking all groups and projects for missing widgets versus the default widget
                 settings and adding missing widgets
     """
-    if not request.user.is_superuser:
+    if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     
     groups = CosinnusGroup.objects.all()
@@ -31,7 +31,10 @@ def housekeeping(request):
     for group in groups:
         ret += "Checked group %s\n<br/>" % group.slug
         create_initial_group_widgets(None, group)
-    return HttpResponse(ret)
+    if request:
+        return HttpResponse(ret)
+    else:
+        return ret
 
 
 def delete_spam_users(request):
