@@ -646,6 +646,15 @@ class CosinnusBaseGroup(models.Model):
     def __str__(self):
         # FIXME: better caching for .portal.name
         return '%s (%s)' % (self.name, self.portal.name)
+    
+    def __getitem__(self, key):
+        """ Enable accessing fields and attributed of CosinnusGroup through dict lookup. 
+            This facilitates accessing group fields in the way django templates does it 
+            during render time and should not have any drawbacks. 
+            We use this for some multi-language swapped models of CosinnusGroup 
+            in projects like DRJA where group['name'] returns group.name or 
+            group.name_ru depending on the language. """
+        return getattr(self, key)
 
     def save(self, *args, **kwargs):
         created = bool(self.pk is None)
