@@ -101,8 +101,12 @@ class GroupsView(Select2View):
         start = (page - 1) * 10
         end = page * 10
 
-        q = Q(name__icontains=term, portal_id=CosinnusPortal.get_current().id)
-        qs = get_cosinnus_group_model().objects.filter(q)
+        q = Q(name__icontains=term)
+        # add all extra lookup fields defined by swapped out group models
+        for lookup_field in get_cosinnus_group_model().NAME_LOOKUP_FIELDS:
+            if lookup_field != 'name':
+                q = q | Q(**{lookup_field+'__icontains':term})
+        qs = get_cosinnus_group_model().objects.filter(q).filter(portal_id=CosinnusPortal.get_current().id)
         if request.GET.get('except', None):
             qs = qs.exclude(id=int(request.GET.get('except')))
         # TODO: also search russian/other extension fields of name, make a good interface to generically grab those
@@ -111,9 +115,12 @@ class GroupsView(Select2View):
         if count < start:
             raise Http404
         has_more = count > end
-
-        groups = list(qs.values_list('id', 'name').all()[start:end])
         
+        groups = []
+        for group in qs[start:end]:
+            # access group.name by its dict lookup to support translation magic
+            groups.append((group.id, group['name']))
+            
         return (NO_ERR_RESP, has_more, groups)
 
 groups_view = GroupsView.as_view()

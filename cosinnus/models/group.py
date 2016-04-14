@@ -566,6 +566,9 @@ class CosinnusBaseGroup(models.Model):
     
     GROUP_MODEL_TYPE = TYPE_PROJECT
     
+    # a list of all database-fields that should be searched when looking up a group by its name
+    NAME_LOOKUP_FIELDS = ['name', ]
+    
     # don't worry, the default Portal with id 1 is created in a datamigration
     # there was no other way to generate completely runnable migrations 
     # (with a get_default function, or any other way)
