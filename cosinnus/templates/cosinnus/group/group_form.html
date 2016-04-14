@@ -266,7 +266,7 @@
 			                                    <div class="media-body media-body-form-control">
 			                                        {{ form.forms.obj.related_groups.errors }}
 									                {% captureas placeholder %}{% trans "Select related Projects/Groups" %}{% endcaptureas %}
-									                {% render_field form.forms.obj.related_groups class+="form-control w100" placeholder=placeholder %}
+									                {% render_field form.forms.obj.related_groups class+="w100" placeholder=placeholder %} {# no 'form-control' class so the content isn't height-enforced! #}
 			                                    </div>
 			                                </li>
 			                            </ul>
