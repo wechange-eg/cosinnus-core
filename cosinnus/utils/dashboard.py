@@ -356,7 +356,6 @@ class RelatedGroupsWidget(GroupProjectsWidget):
     
     def get_groups(self, group):
         # overriding the base function
-        print ">> yay"
         return group.related_groups.all()
     
     def sanity_check(self, group):
