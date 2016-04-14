@@ -103,6 +103,8 @@ class GroupsView(Select2View):
 
         q = Q(name__icontains=term, portal_id=CosinnusPortal.get_current().id)
         qs = get_cosinnus_group_model().objects.filter(q)
+        if request.GET.get('except', None):
+            qs = qs.exclude(id=int(request.GET.get('except')))
         # TODO: also search russian/other extension fields of name, make a good interface to generically grab those
         
         count = qs.count()

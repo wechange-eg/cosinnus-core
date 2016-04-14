@@ -15,7 +15,7 @@ from cosinnus.conf import settings
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from django_select2.fields import HeavyModelSelect2MultipleChoiceField
 from cosinnus.utils.group import get_cosinnus_group_model
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse
 
 
 class GroupKwargModelFormMixin(object):
@@ -70,7 +70,7 @@ class CosinnusBaseGroupForm(forms.ModelForm):
         
         self.fields['related_groups'] = HeavyModelSelect2MultipleChoiceField(
                  required=False, 
-                 data_url=reverse_lazy('cosinnus:select2:groups'),
+                 data_url=reverse('cosinnus:select2:groups') + ('?except='+str(instance.pk) if instance else ''),
                  queryset=get_cosinnus_group_model().objects.filter(portal_id=CosinnusPortal.get_current().id),
                  initial=[] if not instance else [rel_group.pk for rel_group in instance.related_groups.all()],
              )
