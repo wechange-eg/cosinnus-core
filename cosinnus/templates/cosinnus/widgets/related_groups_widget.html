@@ -1,0 +1,19 @@
+{% extends "cosinnus/widgets/base_widget.html" %}
+{% load i18n cosinnus_tags %}
+
+{% block widget_button %}
+	{% if request.user|has_write_access:group %}
+	    <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:group-edit' group=group %}#select-related">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-right btn-extra-emphasized" href="#">
+	                    <i class="fa fa-cogs"></i>
+	                </a>
+	                <div class="media-body">
+	                    {% trans "Assign related" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button><!-- btn -->
+    {% endif %}
+{% endblock widget_button %}

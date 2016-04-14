@@ -293,9 +293,25 @@ class GroupProjectsWidget(DashboardWidget):
     widget_name = 'group_projects'
     allow_on_user = False
     widget_template_name = 'cosinnus/widgets/group_projects_widget.html'
+    
+    widget_content_template_name = 'cosinnus/widgets/group_projects.html'
+    
     # disabled so it doesn't show up in the widget chooser yet
     #template_name = 'cosinnus/widgets/group_members.html' 
-
+    
+    def get_groups(self, group):
+        """ Can be overridden to show specific groups in this widget """
+        return group.get_children()
+    
+    def sanity_check(self, group):
+        """ Check if this widget should exist. If not, deletes itself and returns False """
+        if group.type != CosinnusGroup.TYPE_SOCIETY:
+            # sanity check: after a group has been converted to a group, these widget configs still exist,
+            # but are not valid anymore since we now have a project. therefore, delete it.
+            self.config.delete()
+            return False
+        return True
+    
     def get_data(self, offset=0):
         """ Returns a tuple (data, rows_returned, has_more) of the rendered data and how many items were returned.
             if has_more == False, the receiving widget will assume no further data can be loaded.
@@ -303,37 +319,49 @@ class GroupProjectsWidget(DashboardWidget):
         group = self.config.group
         if group is None:
             return ('', 0, False)
-        if group.type != CosinnusGroup.TYPE_SOCIETY:
-            # sanity check: after a group has been converted to a group, these widget configs still exist,
-            # but are not valid anymore since we now have a project. therefore, delete it.
-            self.config.delete()
+        if not self.sanity_check(group):
             return ('', 0, False)
         
         #count = int(self.config.get('amount', 24))
         # FIXME: hardcoded widget item count for now
         count = 99
+        groups = self.get_groups(group)
         
-        children = group.get_children()
-        
-        has_more = len(children) > offset+count
-        more_count = max(0, len(children) - (offset+count))
+        has_more = len(groups) > offset+count
+        more_count = max(0, len(groups) - (offset+count))
         
         if count != 0:
-            children = children[offset:offset+count]      
+            groups = groups[offset:offset+count]      
         
         data = {
             'group': group,
-            'groups': children,
+            'groups': groups,
             'has_more': has_more,
             'more_count': more_count,
         }
-        return (render_to_string('cosinnus/widgets/group_projects.html', data), len(children), True) # more (create) button always shown
+        return (render_to_string(self.widget_content_template_name, data), len(groups), True) # more (create) button always shown
 
     @property
     def title_url(self):
         return '#'
     
+
+class RelatedGroupsWidget(GroupProjectsWidget):
     
+    model = CosinnusGroup
+    title = _('Related Projects/Groups')
+    widget_name = 'related_groups'
+    widget_template_name = 'cosinnus/widgets/related_groups_widget.html'
+    widget_content_template_name = 'cosinnus/widgets/related_groups.html'
+    
+    def get_groups(self, group):
+        # overriding the base function
+        print ">> yay"
+        return group.related_groups.all()
+    
+    def sanity_check(self, group):
+        # overriding the base function
+        return True
     
 
 class InfoWidget(DashboardWidget):

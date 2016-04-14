@@ -138,6 +138,7 @@ class CosinnusConf(AppConf):
         ("etherpad", "latest", {'amount':'5', 'sort_field':'4'}),
         ("file", "latest", {'sort_field':'5', 'amount':'5'}),
         ("cosinnus", "group_members", {'amount':'5', 'sort_field':'6'}),
+        ("cosinnus", "related_groups", {'amount':'5', 'sort_field':'7'}),
     ]
     
     # widgets listed under a TYPE ID here will only be added to a group if it is of the type listed in
