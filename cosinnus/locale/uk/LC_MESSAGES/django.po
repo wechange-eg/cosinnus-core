@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-13 11:43+0200\n"
+"POT-Creation-Date: 2016-04-14 16:43+0200\n"
 "PO-Revision-Date: 2015-11-11 10:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -251,7 +251,7 @@ msgstr "Наступного тижня"
 msgid "Next month"
 msgstr "Наступного місяця"
 
-#: .\forms\hierarchy.py:14 .\models\group.py:430 .\models\group.py:575
+#: .\forms\hierarchy.py:14 .\models\group.py:430 .\models\group.py:578
 #: .\models\tagged.py:53
 msgid "Name"
 msgstr "Ім'я"
@@ -396,7 +396,7 @@ msgstr "Об'єкти, про які повідомлено"
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr "Введіть дійсне ім'я. Скісна риска не дозволена."
 
-#: .\models\group.py:421 .\models\group.py:572 .\models\group.py:987
+#: .\models\group.py:421 .\models\group.py:575 .\models\group.py:1016
 msgid "Portal"
 msgstr "Портал"
 
@@ -404,18 +404,18 @@ msgstr "Портал"
 msgid "Portals"
 msgstr "Портали"
 
-#: .\models\group.py:432 .\models\group.py:576
+#: .\models\group.py:432 .\models\group.py:579
 msgid "Slug"
 msgstr "Коротке ім'я"
 
 #: .\models\group.py:434 .\models\profile.py:87
 #: .\templates\cosinnus\_microsite__old_.html:198
-#: .\templates\cosinnus\group\group_form.html:295
+#: .\templates\cosinnus\group\group_form.html:313
 #: .\templates\cosinnus\group\group_microsite.html:206
 msgid "Description"
 msgstr "Опис"
 
-#: .\models\group.py:435 .\models\group.py:598 .\models\profile.py:90
+#: .\models\group.py:435 .\models\group.py:601 .\models\profile.py:90
 #: .\templates\cosinnus\group\group_form.html:180
 #: .\templates\cosinnus\group\group_form.html:189
 #: .\templates\cosinnus\group\group_microsite.html:358
@@ -424,7 +424,7 @@ msgstr "Опис"
 msgid "Website"
 msgstr "Веб-сайт"
 
-#: .\models\group.py:436 .\models\group.py:599 .\models\tagged.py:41
+#: .\models\group.py:436 .\models\group.py:602 .\models\tagged.py:41
 msgid "Public"
 msgstr "Публічний"
 
@@ -504,7 +504,7 @@ msgstr "Проект"
 msgid "Group"
 msgstr "Спільнота"
 
-#: .\models\group.py:577
+#: .\models\group.py:580
 msgid ""
 "Be extremely careful when changing this slug manually! There can be many "
 "side-effects (redirects breaking e.g.)!"
@@ -512,56 +512,56 @@ msgstr ""
 "Будьте особливо обережні, змінюючи коротке ім'я вручну! Це може спричинити "
 "багато побічних ефектів (переривання перенаправлення і т. д.)!"
 
-#: .\models\group.py:579
+#: .\models\group.py:582
 msgid "Project Type"
 msgstr "Тип спільноти"
 
-#: .\models\group.py:582
+#: .\models\group.py:585
 msgid "Short Description"
 msgstr "Короткий опис"
 
-#: .\models\group.py:583
+#: .\models\group.py:586
 msgid "Short Description. Internal, will not be shown publicly."
 msgstr "Короткий опис. Внутрішній, не доступний для широкого кола."
 
-#: .\models\group.py:584
+#: .\models\group.py:587
 msgid "Detailed Description"
 msgstr "Детальний опис"
 
-#: .\models\group.py:585
+#: .\models\group.py:588
 msgid "Detailed, public description."
 msgstr "Детальний, публічний опис."
 
-#: .\models\group.py:586
+#: .\models\group.py:589
 msgid "Contact Information"
 msgstr "Контактна інформація"
 
-#: .\models\group.py:587
+#: .\models\group.py:590
 msgid "How you can be contacted - addresses, social media, etc."
 msgstr "Як можна з вами зв'язатися: адреси, соціальні медіа і т. п."
 
-#: .\models\group.py:590 .\models\profile.py:85
+#: .\models\group.py:593 .\models\profile.py:85
 #: .\templates\cosinnus\group\group_form.html:91
 msgid "Avatar"
 msgstr "Основне фото"
 
-#: .\models\group.py:593
+#: .\models\group.py:596
 msgid "Wallpaper image"
 msgstr "Фонове зображення"
 
-#: .\models\group.py:594
+#: .\models\group.py:597
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "Відображається як великий банер на мікросайті (1140 x 240 px)"
 
-#: .\models\group.py:607
+#: .\models\group.py:610
 msgid "Deactivated Apps"
 msgstr "Деактивовані застосунки"
 
-#: .\models\group.py:609
+#: .\models\group.py:612
 msgid "Is active"
 msgstr "Активний"
 
-#: .\models\group.py:610
+#: .\models\group.py:613
 msgid ""
 "If a team is not active, it counts as non-existent for all purposes and "
 "views on the website."
@@ -569,23 +569,29 @@ msgstr ""
 "Якщо проект/спільнота неактивний/-а, вважається що він/вона не існує, і не "
 "відображається на веб-сайті."
 
-#: .\models\group.py:613
+#: .\models\group.py:616
 msgid "Parent Group"
 msgstr "Основна спільнота"
 
-#: .\models\group.py:624 .\models\group_extra.py:66
+#: .\models\group.py:621
+#, fuzzy
+#| msgid "Related to"
+msgid "Related Teams"
+msgstr "Відноситься до"
+
+#: .\models\group.py:633 .\models\group_extra.py:66
 msgid "Cosinnus project"
 msgstr "Проект"
 
-#: .\models\group.py:625 .\models\group_extra.py:67
+#: .\models\group.py:634 .\models\group_extra.py:67
 msgid "Cosinnus projects"
 msgstr "Проекти"
 
-#: .\models\group.py:662
+#: .\models\group.py:680
 msgid "Slug must not be empty."
 msgstr "Коротке ім'я не повинно бути порожнім."
 
-#: .\models\group.py:699
+#: .\models\group.py:717
 msgid ""
 "The URL for this team has changed. A redirect from all existing URLs has "
 "automatically been created!"
@@ -593,69 +599,69 @@ msgstr ""
 "У зв'язку зі змінами змінилася URL-адреса цієї спільноти. Автоматично було "
 "налаштовано постійне перенаправлення зі старої адреси на нову!"
 
-#: .\models\group.py:981
+#: .\models\group.py:1010
 msgid "Team membership"
 msgstr "Членство у спільноті/проекті"
 
-#: .\models\group.py:982
+#: .\models\group.py:1011
 msgid "Team memberships"
 msgstr "Членства у спільноті/проекті"
 
-#: .\models\group.py:994
+#: .\models\group.py:1023
 msgid "Portal membership"
 msgstr "Членство на порталі"
 
-#: .\models\group.py:995
+#: .\models\group.py:1024
 msgid "Portal memberships"
 msgstr "Членства на порталі"
 
-#: .\models\group.py:1006
+#: .\models\group.py:1035
 msgid "From Portal"
 msgstr "Від порталу"
 
-#: .\models\group.py:1007
+#: .\models\group.py:1036
 msgid "From Team Type"
 msgstr "Від типу спільноти"
 
-#: .\models\group.py:1008
+#: .\models\group.py:1037
 msgid "From Slug"
 msgstr "Від короткого імені"
 
-#: .\models\group.py:1011 .\models\group.py:1020
+#: .\models\group.py:1040 .\models\group.py:1049
 msgid "Permanent Team Redirects"
 msgstr "Постійні перенаправлення спільноти"
 
-#: .\models\group.py:1019
+#: .\models\group.py:1048
 msgid "Permanent Team Redirect"
 msgstr "Постійне перенаправлення спільноти"
 
-#: .\models\group.py:1147 .\models\tagged.py:124
+#: .\models\group.py:1176 .\models\tagged.py:124
 #: .\templates\cosinnus\group\group_microsite.html:301
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:4
 msgid "Location"
 msgstr "Місцезнаходження"
 
-#: .\models\group.py:1148 .\models\tagged.py:125
+#: .\models\group.py:1177 .\models\tagged.py:125
 msgid "Latitude"
 msgstr "Довгота"
 
-#: .\models\group.py:1149 .\models\tagged.py:126
+#: .\models\group.py:1178 .\models\tagged.py:126
 msgid "Longitude"
 msgstr "Широта"
 
-#: .\models\group.py:1153 .\models\tagged.py:86 .\models\tagged.py:236
+#: .\models\group.py:1182 .\models\tagged.py:86 .\models\tagged.py:236
 #, fuzzy
 #| msgid "Stream"
 msgid "Team"
 msgstr "Діяльність"
 
-#: .\models\group.py:1159
+#: .\models\group.py:1188
 #, fuzzy
 #| msgid "Cosinnus groups"
 msgid "CosinnusLocation"
 msgstr "Спільноти"
 
-#: .\models\group.py:1160
+#: .\models\group.py:1189
 #, fuzzy
 #| msgid "Cosinnus groups"
 msgid "CosinnusLocations"
@@ -691,13 +697,13 @@ msgstr "Ім'я"
 msgid "Only me"
 msgstr "Тільки я"
 
-#: .\models\tagged.py:82 .\templates\cosinnus\group\group_form.html:267
+#: .\models\tagged.py:82 .\templates\cosinnus\group\group_form.html:285
 #: .\templates\cosinnus\media_tags_userprofile.html:84
 #: .\templates\cosinnus\media_tags_userprofile_readonly.html:52
 msgid "Team members only"
 msgstr "Тільки члени спільноти/проекту"
 
-#: .\models\tagged.py:83 .\templates\cosinnus\group\group_form.html:268
+#: .\models\tagged.py:83 .\templates\cosinnus\group\group_form.html:286
 msgid "Public (visible without login)"
 msgstr "Публічно (доступно без входу в систему)"
 
@@ -1126,7 +1132,7 @@ msgstr "Бажаєте долучитися до «%(title)s»?"
 msgid "Add widget"
 msgstr "Додати веб-віджет"
 
-#: .\templates\cosinnus\_microsite__old_.html:161 .\utils\dashboard.py:399
+#: .\templates\cosinnus\_microsite__old_.html:161 .\utils\dashboard.py:426
 msgid "Informations"
 msgstr "Інформація"
 
@@ -1231,7 +1237,7 @@ msgid "Rearrange"
 msgstr ""
 
 #: .\templates\cosinnus\dashboard.html:51
-#: .\templates\cosinnus\group\group_form.html:376
+#: .\templates\cosinnus\group\group_form.html:394
 #: .\templates\cosinnus\leftnav_button_editable_folder.html:39
 #: .\templates\cosinnus\user\userprofile_form.html:228
 #: .\templates\cosinnus\widgets\add_widget.html:20 .\views\group.py:418
@@ -1383,6 +1389,7 @@ msgstr "Спільнота:"
 #: .\templates\cosinnus\dashboard.html:251
 #: .\templates\cosinnus\group\group_microsite.html:218
 #: .\templates\cosinnus\group\group_og_meta_attributes.html:8
+#: .\templates\cosinnus\widgets\related_groups.html:20
 msgid "No Description set"
 msgstr "Опис не створено"
 
@@ -1693,12 +1700,12 @@ msgid "Description and Infos"
 msgstr "Опис та інформація"
 
 #: .\templates\cosinnus\group\group_form.html:163
-#: .\templates\cosinnus\group\group_form.html:326
+#: .\templates\cosinnus\group\group_form.html:344
 msgid "Describe the group in a few sentences."
 msgstr "Опишіть спільноту кількома реченнями."
 
 #: .\templates\cosinnus\group\group_form.html:163
-#: .\templates\cosinnus\group\group_form.html:326
+#: .\templates\cosinnus\group\group_form.html:344
 msgid "Describe the project in a few sentences."
 msgstr "Опишіть проект кількома реченнями."
 
@@ -1719,44 +1726,54 @@ msgstr "До якої спільноти належить проект?"
 msgid "Select Group"
 msgstr "Вибрати спільноту"
 
-#: .\templates\cosinnus\group\group_form.html:258
+#: .\templates\cosinnus\group\group_form.html:259
+msgid "Are there any projects/groups related to this one?"
+msgstr ""
+
+#: .\templates\cosinnus\group\group_form.html:268
+#, fuzzy
+#| msgid "Deactivate Project/Group"
+msgid "Select related Projects/Groups"
+msgstr "Деактивувати проект/спільноту"
+
+#: .\templates\cosinnus\group\group_form.html:276
 #: .\templates\cosinnus\media_tags.html:74
 #: .\templates\cosinnus\media_tags_userprofile.html:83
 msgid "Privacy"
 msgstr "Хто може бачити?"
 
-#: .\templates\cosinnus\group\group_form.html:275
+#: .\templates\cosinnus\group\group_form.html:293
 msgid "Which apps should be activated?"
 msgstr "Які застосунки потрібно використовувати?"
 
-#: .\templates\cosinnus\group\group_form.html:296
+#: .\templates\cosinnus\group\group_form.html:314
 msgid "Describe your activities and goals"
 msgstr "Опишіть вашу діяльність та цілі"
 
-#: .\templates\cosinnus\group\group_form.html:309
+#: .\templates\cosinnus\group\group_form.html:327
 msgid "Microsite Wallpaper"
 msgstr "Фон мікросайту"
 
-#: .\templates\cosinnus\group\group_form.html:315
+#: .\templates\cosinnus\group\group_form.html:333
 msgid "Currently"
 msgstr "Поточний"
 
-#: .\templates\cosinnus\group\group_form.html:318
+#: .\templates\cosinnus\group\group_form.html:336
 #: .\templates\cosinnus\registration\password_reset_confirm.html:69
 #: .\templates\cosinnus\registration\password_reset_form.html:52
 msgid "Reset"
 msgstr "Скинути"
 
-#: .\templates\cosinnus\group\group_form.html:319
+#: .\templates\cosinnus\group\group_form.html:337
 msgid "Change"
 msgstr "Змінити"
 
-#: .\templates\cosinnus\group\group_form.html:320
+#: .\templates\cosinnus\group\group_form.html:338
 msgid "Upload an image."
 msgstr "Завантажити зображення."
 
-#: .\templates\cosinnus\group\group_form.html:327
-#: .\templates\cosinnus\group\group_form.html:346
+#: .\templates\cosinnus\group\group_form.html:345
+#: .\templates\cosinnus\group\group_form.html:364
 msgid ""
 "This is a public description that can be seen by anyone and will be shown on "
 "the microsite."
@@ -1764,7 +1781,7 @@ msgstr ""
 "Це публічний опис, який буде знаходитися на мікросайті, та який кожен зможе "
 "побачити."
 
-#: .\templates\cosinnus\group\group_form.html:345
+#: .\templates\cosinnus\group\group_form.html:363
 msgid "Contact info. How you can be reached, addresses, social media, etc..."
 msgstr "Як можна з вами зв'язатися: адреси, соціальні медіа і т. п."
 
@@ -3348,6 +3365,18 @@ msgstr ""
 msgid "Widget not found."
 msgstr "Веб-віджет не знайдено."
 
+#: .\templates\cosinnus\widgets\related_groups.html:35
+#, fuzzy
+#| msgid "Convert selected Projects to Groups"
+msgid "No related projects/groups"
+msgstr "Перетворити вибрані проекти у спільноти"
+
+#: .\templates\cosinnus\widgets\related_groups_widget.html:13
+#, fuzzy
+#| msgid "Russian"
+msgid "Assign"
+msgstr "Русский"
+
 #: .\templates\modal_box_nutzungsbedingungen.html:10
 msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
 msgstr "Будь ласка, прочитайте та погодьтеся з умовами користування"
@@ -3384,7 +3413,13 @@ msgstr "<i>Не вдалося відобразити %(model_name)s!</i>"
 msgid "Team Description"
 msgstr "Опис проекту"
 
-#: .\utils\dashboard.py:348
+#: .\utils\dashboard.py:352
+#, fuzzy
+#| msgid "Re-Activate Project/Group"
+msgid "Related Projects/Groups"
+msgstr "Повторно активувати проект/спільноту"
+
+#: .\utils\dashboard.py:375
 msgid "About Us"
 msgstr "Про нас"
 
