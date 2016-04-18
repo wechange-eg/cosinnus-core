@@ -347,11 +347,15 @@ class CosinnusGroupMembershipManager(models.Manager):
         return self.get_queryset().filter_membership_status(status)
 
     def _get_users_for_single_group(self, group_id, cache_key, status):
-        uids = cache.get(cache_key % (self.model.CACHE_KEY_MODEL, group_id))
+        key = cache_key % (self.model.CACHE_KEY_MODEL, group_id)
+        uids = cache.get(key)
         if uids is None:
             query = self.filter(group_id=group_id).filter_membership_status(status)
             uids = list(query.values_list('user_id', flat=True).all())
-            cache.set(cache_key % (self.model.CACHE_KEY_MODEL, group_id), uids, settings.COSINNUS_GROUP_MEMBERSHIP_CACHE_TIMEOUT)
+            cache.set(key, uids, settings.COSINNUS_GROUP_MEMBERSHIP_CACHE_TIMEOUT)
+            """ TODO: FIXME: bc of some bug, this cache key is often reset/cleared and read in again on each query!! 
+                            The cache on this key seems not to get cleared from code, so no clue what's going on here. """
+            #print ">>   bad           X", uids, key
         return uids
 
     def _get_users_for_multiple_groups(self, group_ids, cache_key, status):
