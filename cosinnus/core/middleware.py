@@ -67,6 +67,9 @@ class StartupMiddleware(object):
         if not startup_middleware_inited:
             startup_middleware_inited = True
             cosinnus_signals.all_cosinnus_apps_loaded.send(sender=self)
+            # connect all signal listeners
+            from cosinnus.models.hooks import *  # noqa
+           
         raise MiddlewareNotUsed
 
 
