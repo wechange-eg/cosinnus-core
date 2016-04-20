@@ -302,7 +302,15 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
 
     model = CosinnusGroup
     template_name = 'cosinnus/group/group_list.html'
+    items_template = 'cosinnus/group/group_list_items.html'
     serializer_class = GroupSimpleSerializer
+    paginate_by = 30
+    
+    def dispatch(self, request, *args, **kwargs):
+        # enable endless-pagination items-only rendering
+        if request.is_ajax():
+            self.template_name = self.items_template
+        return super(GroupListView, self).dispatch( request, *args, **kwargs)
     
     def get_queryset(self):
         group_plural_url_key = self.request.path.split('/')[1]
@@ -311,7 +319,6 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
         
         model = group_class or self.model
         if settings.COSINNUS_SHOW_PRIVATE_GROUPS_FOR_ANONYMOUS_USERS or self.request.user.is_authenticated():
-            # special case for the group-list: we can see inactive groups here that we are an admin of
             regular_groups = model.objects.get_cached()
             return regular_groups
         else:
@@ -342,6 +349,8 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
             
         ctx.update({
             'rows': zip(ctx['object_list'], members, pendings, admins),
+            'unpaginated_rows': self.object_list,
+            'map_groups': self.object_list, # unpaginated groups
             'group_type': self.group_type,
         })
         return ctx
@@ -362,6 +371,7 @@ class GroupListMineView(RequireLoggedInMixin, GroupListView):
         my_groups = model.objects.get_for_user(self.request.user)
         my_inactive_groups = model.objects.filter(portal_id=CosinnusPortal.get_current().id, is_active=False)
         if not check_user_superuser(self.request.user):
+            # special case for the group-list: we can see inactive groups here that we are an admin of
             # filter for groups user is admin of if he isnt a superuser
             my_inactive_groups = my_inactive_groups.filter(id__in=model.objects.get_for_user_group_admin_pks(self.request.user, includeInactive=True))
             

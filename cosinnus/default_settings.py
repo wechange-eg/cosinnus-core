@@ -199,6 +199,7 @@ def compile_installed_apps(internal_apps=[]):
         'haystack',
         'easy_thumbnails',
         'embed_video',
+        'endless_pagination',
         'geoposition',
         'rest_framework',
         'taggit',
