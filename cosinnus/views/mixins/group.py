@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from cosinnus.core.decorators.views import (require_read_access,
     require_write_access, require_admin_access,
     require_create_objects_in_access, redirect_to_not_logged_in,
-    dispatch_group_access)
+    dispatch_group_access, require_logged_in)
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from cosinnus.models.tagged import BaseTaggableObjectModel
 from django.core.exceptions import PermissionDenied, ImproperlyConfigured
@@ -30,6 +30,19 @@ class RequireAdminMixin(object):
         context = super(RequireAdminMixin, self).get_context_data(**kwargs)
         context.update({'group': self.group})
         return context
+
+
+class RequireLoggedInMixin(object):
+    """
+    Mixing to ease the use of :meth:`require_admin_access`.
+
+    .. seealso:: :class:`RequireReadMixin`, :class:`RequireWriteMixin`, :class:`RequireCreateObjectsInMixin`
+    """
+
+    @require_logged_in()
+    def dispatch(self, request, *args, **kwargs):
+        return super(RequireLoggedInMixin, self).dispatch(request, *args, **kwargs)
+
 
 
 class DipatchGroupURLMixin(object):

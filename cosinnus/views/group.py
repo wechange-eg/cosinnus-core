@@ -27,7 +27,8 @@ from cosinnus.models.serializers.profile import UserSimpleSerializer
 from cosinnus.utils.compat import atomic
 from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
     AjaxableFormMixin, ListAjaxableResponseMixin)
-from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin
+from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin,\
+    RequireLoggedInMixin
 from cosinnus.views.mixins.user import UserFormKwargsMixin
 
 from cosinnus.views.mixins.avatar import AvatarFormMixin
@@ -312,12 +313,7 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
         if settings.COSINNUS_SHOW_PRIVATE_GROUPS_FOR_ANONYMOUS_USERS or self.request.user.is_authenticated():
             # special case for the group-list: we can see inactive groups here that we are an admin of
             regular_groups = model.objects.get_cached()
-            my_inactive_groups = model.objects.filter(portal_id=CosinnusPortal.get_current().id, is_active=False)
-            if not check_user_superuser(self.request.user):
-                # filter for groups user is admin of if he isnt a superuser
-                my_inactive_groups = my_inactive_groups.filter(id__in=model.objects.get_for_user_group_admin_pks(self.request.user, includeInactive=True))
-            my_inactive_groups = list(my_inactive_groups)
-            return regular_groups + my_inactive_groups
+            return regular_groups
         else:
             return list(model.objects.public())
 
@@ -354,15 +350,25 @@ group_list = GroupListView.as_view()
 group_list_api = GroupListView.as_view(is_ajax_request_url=True)
 
 
-class ProjectListView(GroupListView):
-    model = CosinnusProject
+class GroupListMineView(RequireLoggedInMixin, GroupListView):
+    paginate_by = None
+    
+    def get_queryset(self):
+        group_plural_url_key = self.request.path.split('/')[1]
+        group_class = group_model_registry.get_by_plural_key(group_plural_url_key, None)
+        self.group_type = group_class.GROUP_MODEL_TYPE
+        model = group_class or self.model
+        
+        my_groups = model.objects.get_for_user(self.request.user)
+        my_inactive_groups = model.objects.filter(portal_id=CosinnusPortal.get_current().id, is_active=False)
+        if not check_user_superuser(self.request.user):
+            # filter for groups user is admin of if he isnt a superuser
+            my_inactive_groups = my_inactive_groups.filter(id__in=model.objects.get_for_user_group_admin_pks(self.request.user, includeInactive=True))
+            
+        my_groups += list(my_inactive_groups)
+        return my_groups
 
-project_list = ProjectListView.as_view()
-
-class SocietyListView(GroupListView):
-    model = CosinnusSociety
-
-society_list = SocietyListView.as_view()
+group_list_mine = GroupListMineView.as_view()
 
 
 class FilteredGroupListView(GroupListView):

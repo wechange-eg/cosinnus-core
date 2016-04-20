@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-14 16:43+0200\n"
+"POT-Creation-Date: 2016-04-20 15:44+0200\n"
 "PO-Revision-Date: 2016-04-14 16:43+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -120,7 +120,7 @@ msgstr ""
 msgid "No team provided"
 msgstr "Kein Projekt angegeben"
 
-#: .\core\middleware.py:117
+#: .\core\middleware.py:120
 msgid ""
 "This team no longer resides under the URL you entered. You have been "
 "redirected automatically to the current location."
@@ -128,7 +128,7 @@ msgstr ""
 "Die Gruppe oder das Projekt liegt nicht länger unter der URL die du "
 "eingegeben hast. Du wurdest automatisch auf die aktuelle Adresse umgeleitet."
 
-#: .\core\middleware.py:134
+#: .\core\middleware.py:137
 msgid "This account is no longer active. You have been logged out."
 msgstr "Sie wurden ausgeloggt, weil dieses Benutzerkonto nicht mehr aktiv ist."
 
@@ -253,7 +253,7 @@ msgstr "Nächste Woche"
 msgid "Next month"
 msgstr "Nächsten Monat"
 
-#: .\forms\hierarchy.py:14 .\models\group.py:430 .\models\group.py:578
+#: .\forms\hierarchy.py:14 .\models\group.py:434 .\models\group.py:582
 #: .\models\tagged.py:53
 msgid "Name"
 msgstr "Name"
@@ -399,26 +399,26 @@ msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 "Bitte einen gültigen Namen angeben. Ein Vorwärtsslash ist nicht erlaubt."
 
-#: .\models\group.py:421 .\models\group.py:575 .\models\group.py:1016
+#: .\models\group.py:425 .\models\group.py:579 .\models\group.py:1020
 msgid "Portal"
 msgstr "Portal"
 
-#: .\models\group.py:422
+#: .\models\group.py:426
 msgid "Portals"
 msgstr "Portale"
 
-#: .\models\group.py:432 .\models\group.py:579
+#: .\models\group.py:436 .\models\group.py:583
 msgid "Slug"
 msgstr "Slug"
 
-#: .\models\group.py:434 .\models\profile.py:87
+#: .\models\group.py:438 .\models\profile.py:87
 #: .\templates\cosinnus\_microsite__old_.html:198
 #: .\templates\cosinnus\group\group_form.html:313
 #: .\templates\cosinnus\group\group_microsite.html:206
 msgid "Description"
 msgstr "Beschreibung"
 
-#: .\models\group.py:435 .\models\group.py:601 .\models\profile.py:90
+#: .\models\group.py:439 .\models\group.py:605 .\models\profile.py:90
 #: .\templates\cosinnus\group\group_form.html:180
 #: .\templates\cosinnus\group\group_form.html:189
 #: .\templates\cosinnus\group\group_microsite.html:358
@@ -427,23 +427,23 @@ msgstr "Beschreibung"
 msgid "Website"
 msgstr "Webseite"
 
-#: .\models\group.py:436 .\models\group.py:602 .\models\tagged.py:41
+#: .\models\group.py:440 .\models\group.py:606 .\models\tagged.py:41
 msgid "Public"
 msgstr "Öffentlich"
 
-#: .\models\group.py:440
+#: .\models\group.py:444
 msgid "Associated Site"
 msgstr "Zugehörige Site"
 
-#: .\models\group.py:442
+#: .\models\group.py:446
 msgid "Http/Https Protocol (overrides settings)"
 msgstr "Http/Https Protokoll (overrides settings)"
 
-#: .\models\group.py:445
+#: .\models\group.py:449
 msgid "Users Need Activation"
 msgstr "Bestätigung für neue Benutzer"
 
-#: .\models\group.py:446
+#: .\models\group.py:450
 msgid ""
 "If activated, newly registered users need to be approved by a portal admin "
 "before being able to log in."
@@ -451,19 +451,19 @@ msgstr ""
 "Wenn gewählt müssen neue Benutzerkonten nach dem Regisitrieren durch einen "
 "Portaladminstrator bestätigt werden bevor sich der Benutzer einloggen kann."
 
-#: .\models\group.py:450
+#: .\models\group.py:454
 msgid "Background Image"
 msgstr "Hintergrundbild"
 
-#: .\models\group.py:451
+#: .\models\group.py:455
 msgid "Used for the background of the landing and CMS-pages"
 msgstr "Wird als Hintergrund für die Landing-Page und die CMS-Seiten benutzt"
 
-#: .\models\group.py:454
+#: .\models\group.py:458
 msgid "Logo Image"
 msgstr "Logo-Bild"
 
-#: .\models\group.py:455
+#: .\models\group.py:459
 msgid ""
 "Used as a small logo in the navigation bar and for external links to this "
 "portal"
@@ -471,42 +471,42 @@ msgstr ""
 "Als Logo für die Navigationsleiste benutzt und für externe Links die in "
 "dieses Portal zeigen"
 
-#: .\models\group.py:458
+#: .\models\group.py:462
 msgid "Main color"
 msgstr "Hauptfarbe"
 
-#: .\models\group.py:458
+#: .\models\group.py:462
 msgid "Main background color (css hex value, with or without \"#\")"
 msgstr "Hauptfarbe des Seitenhintergrunds (Hex-Wert, optional mit \"#\")"
 
-#: .\models\group.py:461
+#: .\models\group.py:465
 msgid "Gradient color"
 msgstr "Verlaufsfarbe"
 
-#: .\models\group.py:461
+#: .\models\group.py:465
 msgid "Bottom color for the gradient (css hex value, with or without \"#\")"
 msgstr ""
 "Untere Farbe des Farbverlaufs für den Seitenhintergrunds (Hex-Wert, optional "
 "mit \"#\")"
 
-#: .\models\group.py:464
+#: .\models\group.py:468
 msgid "Extra CSS"
 msgstr "Zusätzliches CSS"
 
-#: .\models\group.py:464
+#: .\models\group.py:468
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr "Wird vorgezogen gegenüber sämtlichem anderen CSS"
 
-#: .\models\group.py:563 .\templates\cosinnus\group\group_microsite.html:127
+#: .\models\group.py:567 .\templates\cosinnus\group\group_microsite.html:127
 msgid "Project"
 msgstr "Projekt"
 
-#: .\models\group.py:564 .\templates\cosinnus\group\group_microsite.html:127
+#: .\models\group.py:568 .\templates\cosinnus\group\group_microsite.html:127
 #: .\templates\cosinnus\group\group_microsite.html:134
 msgid "Group"
 msgstr "Gruppe"
 
-#: .\models\group.py:580
+#: .\models\group.py:584
 msgid ""
 "Be extremely careful when changing this slug manually! There can be many "
 "side-effects (redirects breaking e.g.)!"
@@ -514,57 +514,57 @@ msgstr ""
 "Be extremely careful when changing this slug manually! There can be many "
 "side-effects (redirects breaking e.g.)!"
 
-#: .\models\group.py:582
+#: .\models\group.py:586
 msgid "Project Type"
 msgstr "Gruppentyp"
 
-#: .\models\group.py:585
+#: .\models\group.py:589
 msgid "Short Description"
 msgstr "Kurze Beschreibung"
 
-#: .\models\group.py:586
+#: .\models\group.py:590
 msgid "Short Description. Internal, will not be shown publicly."
 msgstr ""
 "Kurze Beschreibung. Intern - wird nur Gruppen/projektmitgliedern angezeigt."
 
-#: .\models\group.py:587
+#: .\models\group.py:591
 msgid "Detailed Description"
 msgstr "Detaillierte Beschreibung"
 
-#: .\models\group.py:588
+#: .\models\group.py:592
 msgid "Detailed, public description."
 msgstr "Detaillierte, öffentliche Beschreibung"
 
-#: .\models\group.py:589
+#: .\models\group.py:593
 msgid "Contact Information"
 msgstr "Kontaktinfos"
 
-#: .\models\group.py:590
+#: .\models\group.py:594
 msgid "How you can be contacted - addresses, social media, etc."
 msgstr "Wie man euch erreichen kann - Adressen, Social Media Links, etc."
 
-#: .\models\group.py:593 .\models\profile.py:85
+#: .\models\group.py:597 .\models\profile.py:85
 #: .\templates\cosinnus\group\group_form.html:91
 msgid "Avatar"
 msgstr "Avatar"
 
-#: .\models\group.py:596
+#: .\models\group.py:600
 msgid "Wallpaper image"
 msgstr "Hintergrundbild"
 
-#: .\models\group.py:597
+#: .\models\group.py:601
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "Wird als großes Banner auf der Microsite angezeigt (1140 x 240 px)"
 
-#: .\models\group.py:610
+#: .\models\group.py:614
 msgid "Deactivated Apps"
 msgstr "Deaktivierte Apps"
 
-#: .\models\group.py:612
+#: .\models\group.py:616
 msgid "Is active"
 msgstr "Ist aktiv"
 
-#: .\models\group.py:613
+#: .\models\group.py:617
 msgid ""
 "If a team is not active, it counts as non-existent for all purposes and "
 "views on the website."
@@ -572,27 +572,27 @@ msgstr ""
 "Wenn ein Projekt/Gruppe inaktiv ist, zählt es als nichtexistent und ist auf "
 "der gesamten Webseite unsichtbar."
 
-#: .\models\group.py:616
+#: .\models\group.py:620
 msgid "Parent Group"
 msgstr "Übergeordnete Gruppe"
 
-#: .\models\group.py:621
+#: .\models\group.py:625
 msgid "Related Teams"
 msgstr "Verwandte Projekte/Gruppen"
 
-#: .\models\group.py:633 .\models\group_extra.py:66
+#: .\models\group.py:637 .\models\group_extra.py:66
 msgid "Cosinnus project"
 msgstr "Projekt"
 
-#: .\models\group.py:634 .\models\group_extra.py:67
+#: .\models\group.py:638 .\models\group_extra.py:67
 msgid "Cosinnus projects"
 msgstr "Projekte"
 
-#: .\models\group.py:680
+#: .\models\group.py:684
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
 
-#: .\models\group.py:717
+#: .\models\group.py:721
 msgid ""
 "The URL for this team has changed. A redirect from all existing URLs has "
 "automatically been created!"
@@ -601,69 +601,69 @@ msgstr ""
 "Weiterleitung von der alten auf die neue Adresse wurde automatisch "
 "eingerichtet!"
 
-#: .\models\group.py:1010
+#: .\models\group.py:1014
 msgid "Team membership"
 msgstr "Gruppen/Projekt-Mitgliedschaft"
 
-#: .\models\group.py:1011
+#: .\models\group.py:1015
 msgid "Team memberships"
 msgstr "Gruppen/Projekt-Mitgliedschaften"
 
-#: .\models\group.py:1023
+#: .\models\group.py:1027
 msgid "Portal membership"
 msgstr "Portal-Mitgliedschaft"
 
-#: .\models\group.py:1024
+#: .\models\group.py:1028
 msgid "Portal memberships"
 msgstr "Portal-Mitgliedschaften"
 
-#: .\models\group.py:1035
+#: .\models\group.py:1039
 msgid "From Portal"
 msgstr "Von Portal"
 
-#: .\models\group.py:1036
+#: .\models\group.py:1040
 msgid "From Team Type"
 msgstr "Von Gruppentyp"
 
-#: .\models\group.py:1037
+#: .\models\group.py:1041
 msgid "From Slug"
 msgstr "Von Slug"
 
-#: .\models\group.py:1040 .\models\group.py:1049
+#: .\models\group.py:1044 .\models\group.py:1053
 msgid "Permanent Team Redirects"
 msgstr "Dauerhaufte Gruppenweiterleitungen"
 
-#: .\models\group.py:1048
+#: .\models\group.py:1052
 msgid "Permanent Team Redirect"
 msgstr "Dauerhaufte Gruppenweiterleitung"
 
-#: .\models\group.py:1176 .\models\tagged.py:124
+#: .\models\group.py:1180 .\models\tagged.py:124
 #: .\templates\cosinnus\group\group_microsite.html:301
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:4
 msgid "Location"
 msgstr "Standort"
 
-#: .\models\group.py:1177 .\models\tagged.py:125
+#: .\models\group.py:1181 .\models\tagged.py:125
 msgid "Latitude"
 msgstr ""
 
-#: .\models\group.py:1178 .\models\tagged.py:126
+#: .\models\group.py:1182 .\models\tagged.py:126
 msgid "Longitude"
 msgstr ""
 
-#: .\models\group.py:1182 .\models\tagged.py:86 .\models\tagged.py:236
+#: .\models\group.py:1186 .\models\tagged.py:86 .\models\tagged.py:236
 #, fuzzy
 #| msgid "Stream"
 msgid "Team"
 msgstr "Aktivitäten"
 
-#: .\models\group.py:1188
+#: .\models\group.py:1192
 #, fuzzy
 #| msgid "Cosinnus groups"
 msgid "CosinnusLocation"
 msgstr "Gruppen"
 
-#: .\models\group.py:1189
+#: .\models\group.py:1193
 #, fuzzy
 #| msgid "Cosinnus groups"
 msgid "CosinnusLocations"
@@ -899,7 +899,8 @@ msgid "Left Sidebar"
 msgstr "Fußzeile links"
 
 #: .\models\widget.py:19 .\templates\cosinnus\appsmenu.html:37
-#: .\templates\cosinnus\appsmenu.html:51 .\templates\cosinnus\dashboard.html:88
+#: .\templates\cosinnus\appsmenu.html:51
+#: .\templates\cosinnus\dashboard.html:88
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -1026,8 +1027,8 @@ msgstr ""
 #: .\templates\cosinnus\group\group_form.html:221
 #: .\templates\cosinnus\leftnav_button_editable_folder.html:51
 #: .\templates\cosinnus\user\userprofile_form.html:162
-#: .\templates\cosinnus\widgets\base_widget.html:39 .\views\group.py:201
-#: .\views\group.py:741
+#: .\templates\cosinnus\widgets\base_widget.html:39 .\views\group.py:202
+#: .\views\group.py:748
 msgid "Delete"
 msgstr "Löschen"
 
@@ -1098,7 +1099,7 @@ msgstr "Anfrage zurückziehen"
 #: .\templates\cosinnus\group\group_list.html:274
 #: .\templates\cosinnus\group\group_microsite.html:445
 #: .\templates\cosinnus\group\leftnav_group.html:54
-#: .\templates\cosinnus\group\leftnav_group.html:59 .\views\group.py:501
+#: .\templates\cosinnus\group\leftnav_group.html:59 .\views\group.py:508
 msgid "Join"
 msgstr "Beitreten"
 
@@ -1158,8 +1159,8 @@ msgstr "Einstellungen"
 #: .\templates\cosinnus\group\group_members_map.html:14
 #: .\templates\cosinnus\group\group_microsite.html:174
 #: .\templates\cosinnus\group\leftnav_group.html:21
-#: .\templates\cosinnus\widgets\group_projects.html:15 .\utils\dashboard.py:218
-#: .\utils\dashboard.py:219
+#: .\templates\cosinnus\widgets\group_projects.html:15
+#: .\utils\dashboard.py:218 .\utils\dashboard.py:219
 msgid "Members"
 msgstr "Mitglieder"
 
@@ -1242,8 +1243,8 @@ msgstr "Umordnen"
 #: .\templates\cosinnus\group\group_form.html:394
 #: .\templates\cosinnus\leftnav_button_editable_folder.html:39
 #: .\templates\cosinnus\user\userprofile_form.html:228
-#: .\templates\cosinnus\widgets\add_widget.html:20 .\views\group.py:418
-#: .\views\group.py:704 .\views\user.py:278
+#: .\templates\cosinnus\widgets\add_widget.html:20 .\views\group.py:425
+#: .\views\group.py:711 .\views\user.py:278
 msgid "Save"
 msgstr "Speichern"
 
@@ -1275,8 +1276,8 @@ msgid ""
 "The layout you choose will be the layout for all members of %(team_name)s! "
 "Click save to apply your changes."
 msgstr ""
-"Das Layout das du speicherst bestimmt die Ansicht für alle Mitglieder von "
-"%(team_name)s! Klicke auf Sichern um deine Änderungen zu speichern."
+"Das Layout das du speicherst bestimmt die Ansicht für alle Mitglieder von %"
+"(team_name)s! Klicke auf Sichern um deine Änderungen zu speichern."
 
 #: .\templates\cosinnus\dashboard.html:109
 msgid ""
@@ -1354,7 +1355,8 @@ msgctxt "Calendar"
 msgid "Events"
 msgstr "Veranstaltungen"
 
-#: .\templates\cosinnus\dashboard.html:192 .\templates\cosinnus\search.html:113
+#: .\templates\cosinnus\dashboard.html:192
+#: .\templates\cosinnus\search.html:113
 msgid "News"
 msgstr "Neuigkeiten"
 
@@ -1799,17 +1801,17 @@ msgstr ""
 #: .\templates\cosinnus\group\group_list.html:4
 #: .\templates\cosinnus\group\group_list_map.html:4
 #: .\templates\cosinnus\navbar_buttons_group_menus.html:7
-#: .\templates\cosinnus\navbar_buttons_group_menus.html:22
-#: .\templates\cosinnus\navbar_buttons_group_menus.html:47
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:23
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:49
 msgid "Groups"
 msgstr "Gruppen"
 
 #: .\templates\cosinnus\group\group_list.html:4
 #: .\templates\cosinnus\group\group_list_map.html:4
 #: .\templates\cosinnus\group\group_microsite.html:152
-#: .\templates\cosinnus\navbar_buttons_group_menus.html:28
-#: .\templates\cosinnus\navbar_buttons_group_menus.html:43
-#: .\templates\cosinnus\navbar_buttons_group_menus.html:48
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:29
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:45
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:50
 #: .\utils\dashboard.py:291
 msgid "Projects"
 msgstr "Projekte"
@@ -1840,11 +1842,11 @@ msgstr "(Inaktiv)"
 #: .\templates\cosinnus\group\group_list.html:181
 #: .\templates\cosinnus\group\group_list.html:266
 #: .\templates\cosinnus\group\leftnav_group.html:34
-#: .\templates\cosinnus\group\leftnav_group.html:39 .\views\group.py:535
+#: .\templates\cosinnus\group\leftnav_group.html:39 .\views\group.py:542
 msgid "Leave"
 msgstr "Verlassen"
 
-#: .\templates\cosinnus\group\group_list.html:183 .\views\group.py:584
+#: .\templates\cosinnus\group\group_list.html:183 .\views\group.py:591
 msgid "Withdraw"
 msgstr "Zurückziehen"
 
@@ -2040,7 +2042,7 @@ msgid "Add container"
 msgstr "Zusammenstellung hinzufügen"
 
 #: .\templates\cosinnus\hierarchy\add_container.html:27
-#: .\templates\cosinnus\widgets\add_widget.html:20 .\views\group.py:668
+#: .\templates\cosinnus\widgets\add_widget.html:20 .\views\group.py:675
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -2240,8 +2242,8 @@ msgid ""
 "\n"
 "You're receiving this email because you are an administrator of this team.\n"
 "\n"
-"(Follow this link to edit your notification preferences: "
-"%(notification_settings_url)s )\n"
+"(Follow this link to edit your notification preferences: %"
+"(notification_settings_url)s )\n"
 "\n"
 "\n"
 "Your %(site_name)s Team"
@@ -2254,8 +2256,8 @@ msgstr ""
 "Du hast diese Email bekommen, weil du ein Gruppen-/Projektadministrator "
 "bist.\n"
 "\n"
-"(Folge diesem Link um deine Benachrichtigungseinstellungen zu ändern: "
-"%(notification_settings_url)s )\n"
+"(Folge diesem Link um deine Benachrichtigungseinstellungen zu ändern: %"
+"(notification_settings_url)s )\n"
 "\n"
 "\n"
 "Dein %(site_name)s Team"
@@ -2295,8 +2297,8 @@ msgstr ""
 "%(domain_url)s%(user_approve_url)s\n"
 "\n"
 "\n"
-"Klicke hier um die Registrierung abzulehnen: %(domain_url)s"
-"%(user_deny_url)s\n"
+"Klicke hier um die Registrierung abzulehnen: %(domain_url)s%(user_deny_url)"
+"s\n"
 "\n"
 "\n"
 "Du hast diese Email bekommen, weil du ein Portal-Administrator bist. \n"
@@ -2408,29 +2410,29 @@ msgstr "Deine Mitgliedsschaftsanfrage bei %(site_name)s."
 msgid ""
 "Hi %(receiver_name)s,\n"
 "\n"
-"you were tagged in \"%(object_name)s\" in %(team_name)s by "
-"%(sender_name)s. \n"
+"you were tagged in \"%(object_name)s\" in %(team_name)s by %(sender_name)"
+"s. \n"
 "\n"
 "You can find it by following this link: %(object_url)s\n"
 "\n"
 "\n"
 "\n"
-"(Follow this link to edit your notification preferences: "
-"%(notification_settings_url)s )\n"
+"(Follow this link to edit your notification preferences: %"
+"(notification_settings_url)s )\n"
 "\n"
 "Your %(site_name)s Team."
 msgstr ""
 "Hi %(receiver_name)s,\n"
 "\n"
-"du wurdest markiert in \"%(object_name)s\", in %(team_name)s von "
-"%(sender_name)s. \n"
+"du wurdest markiert in \"%(object_name)s\", in %(team_name)s von %"
+"(sender_name)s. \n"
 "\n"
 "Du kannst es finden indem du folgenden Link aufrufst: %(object_url)s\n"
 "\n"
 "\n"
 "\n"
-"(Folge diesem Link um deine Benachrichtigungseinstellungen zu ändern: "
-"%(notification_settings_url)s )\n"
+"(Folge diesem Link um deine Benachrichtigungseinstellungen zu ändern: %"
+"(notification_settings_url)s )\n"
 "\n"
 "Dein %(site_name)s Team"
 
@@ -2582,10 +2584,20 @@ msgid "People"
 msgstr "Menschen"
 
 #: .\templates\cosinnus\navbar_buttons_group_menus.html:18
+msgid "My Groups"
+msgstr "Meine Gruppen"
+
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:19
 msgid "All Groups"
 msgstr "Alle Gruppen"
 
-#: .\templates\cosinnus\navbar_buttons_group_menus.html:39
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:40
+#: .\templates\cosinnus\search.html:169
+#: .\templates\cosinnus\user\userprofile_detail.html:143
+msgid "My Projects"
+msgstr "Meine Projekte"
+
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:41
 msgid "All Projects"
 msgstr "Alle Projekte"
 
@@ -2856,11 +2868,6 @@ msgstr "Suche in Anwendungen"
 #: .\templates\cosinnus\search.html:142
 msgid "Search in teams"
 msgstr "In Projekten suchen"
-
-#: .\templates\cosinnus\search.html:169
-#: .\templates\cosinnus\user\userprofile_detail.html:143
-msgid "My Projects"
-msgstr "Meine Projekte"
 
 #: .\templates\cosinnus\search.html:182
 msgid "Other Projects"
@@ -3406,7 +3413,7 @@ msgid "Your Facebook account was successfully disconnected from this account."
 msgstr ""
 "Dein Facebook-Konto wurde erfolgreich von deinem Benutzerprofil getrennt."
 
-#: .\views\group.py:90
+#: .\views\group.py:91
 msgid ""
 "Sorry, only portal administrators can create Groups! You can either create a "
 "Project, or write a message to one of the administrators to create a Group "
@@ -3417,31 +3424,31 @@ msgstr ""
 "Nachricht schreiben damit sie für dich eine Gruppe erstellen. Unten findest "
 "du eine Liste aller Administrator_innen."
 
-#: .\views\group.py:142
+#: .\views\group.py:143
 #, python-format
 msgid "%(team_type)s \"%(group)s\" was created successfully."
 msgstr "%(team_type)s \"%(group)s\" wurde erfolgreich erstellt."
 
-#: .\views\group.py:168 .\views\user.py:153
+#: .\views\group.py:169 .\views\user.py:153
 msgid "Create"
 msgstr "Erstellen"
 
-#: .\views\group.py:410
+#: .\views\group.py:417
 #, python-format
 msgid "The %(team_type)s was changed successfully."
 msgstr "%(team_type)s wurde erfolgreich geändert."
 
-#: .\views\group.py:502
+#: .\views\group.py:509
 #, python-format
 msgid "Do you want to join the %(team_type)s “%(team_name)s”?"
 msgstr "Möchten sie %(team_type)s %(team_name)s beitreten?"
 
-#: .\views\group.py:503
+#: .\views\group.py:510
 #, python-format
 msgid "Join %(team_type)s “%(team_name)s”?"
 msgstr "%(team_type)s %(team_name)s beitreten?"
 
-#: .\views\group.py:504
+#: .\views\group.py:511
 #, python-format
 msgid ""
 "You have requested to join the %(team_type)s “%(team_name)s”. You will "
@@ -3451,22 +3458,22 @@ msgstr ""
 "gestellt. Du erhältst eine E-Mail sobald ein Projektadministrator den Antrag "
 "bearbeitet."
 
-#: .\views\group.py:536
+#: .\views\group.py:543
 #, python-format
 msgid "Do you want to leave the %(team_type)s “%(team_name)s”?"
 msgstr "Möchten sie %(team_type)s “%(team_name)s” verlassen?"
 
-#: .\views\group.py:537
+#: .\views\group.py:544
 #, python-format
 msgid "Leaving %(team_type)s “%(team_name)s”?"
 msgstr "%(team_type)s “%(team_name)s” verlassen?"
 
-#: .\views\group.py:539
+#: .\views\group.py:546
 #, python-format
 msgid "You are no longer a member of the %(team_type)s “%(team_name)s”."
 msgstr "Du bist jetzt nicht mehr Mitglied von %(team_type)s “%(team_name)s”."
 
-#: .\views\group.py:576
+#: .\views\group.py:583
 #, python-format
 msgid ""
 "You cannot leave this %(team_type)s. You are the only administrator left."
@@ -3474,21 +3481,21 @@ msgstr ""
 "Sie können diese(s) %(team_type)s nicht verlassen, da sie der einzig übrige "
 "Administrator sind."
 
-#: .\views\group.py:585
+#: .\views\group.py:592
 #, python-format
 msgid ""
-"Do you want to withdraw your join request to the %(team_type)s "
-"“%(team_name)s”?"
+"Do you want to withdraw your join request to the %(team_type)s “%(team_name)"
+"s”?"
 msgstr ""
 "Möchten sie ihre Beitrittsanfrage für %(team_type)s “%(team_name)s” "
 "zurückziehen?"
 
-#: .\views\group.py:586
+#: .\views\group.py:593
 #, python-format
 msgid "Withdraw join request to %(team_type)s “%(team_name)s”?"
 msgstr "Beitrittsanfrage für %(team_type)s “%(team_name)s” zurückziehen?"
 
-#: .\views\group.py:588
+#: .\views\group.py:595
 #, python-format
 msgid ""
 "Your join request was withdrawn from %(team_type)s “%(team_name)s” "
@@ -3496,47 +3503,47 @@ msgid ""
 msgstr ""
 "Deine Beitrittsanfrage für %(team_type)s “%(team_name)s” wurde zurückgezogen."
 
-#: .\views\group.py:695
+#: .\views\group.py:702
 msgid "You cannot change your own admin status."
 msgstr "Sie können ihren eigenen Administratorstatus nicht ändern."
 
-#: .\views\group.py:697 .\views\group.py:731
+#: .\views\group.py:704 .\views\group.py:738
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgstr ""
 "Sie können “%(username)s” nicht von diesem Projekt entfernen. Er/sie ist der "
 "einzig übrige Administrator."
 
-#: .\views\group.py:729
+#: .\views\group.py:736
 #, python-format
 msgid "You cannot remove yourself from a %(team_type)s."
 msgstr "Sie können sich nicht selbst von eine(r/m) %(team_type)s entfernen."
 
-#: .\views\group.py:742
+#: .\views\group.py:749
 #, python-format
 msgid ""
-"Do you want to remove the user “%(username)s”  from the %(team_type)s "
-"“%(team_name)s”?"
+"Do you want to remove the user “%(username)s”  from the %(team_type)s “%"
+"(team_name)s”?"
 msgstr ""
 "Möchten sie Benutzer_in “%(username)s” aus %(team_type)s “%(team_name)s” "
 "entfernen?"
 
-#: .\views\group.py:747
+#: .\views\group.py:754
 #, python-format
 msgid "Remove user from %(team_type)s “%(team_name)s”?"
 msgstr "Benutzer_in aus %(team_type)s “%(team_name)s” entfernen?"
 
-#: .\views\group.py:786
+#: .\views\group.py:793
 #, python-format
 msgid "%(team_name)s was re-activated successfully!"
 msgstr "%(team_name)s wurde erfolgreich reaktiviert!"
 
-#: .\views\group.py:787
+#: .\views\group.py:794
 #, python-format
 msgid "%(team_name)s was deactivated successfully!"
 msgstr "%(team_name)s wurde erfolgreich deaktiviert!"
 
-#: .\views\group.py:801
+#: .\views\group.py:808
 msgid ""
 "Sorry, only portal administrators can deactivate Groups! You can write a "
 "message to one of the administrators to deactivate it for you. Below you can "
@@ -3546,11 +3553,11 @@ msgstr ""
 "kannst den Administrator_innen eine Nachricht schreiben damit sie die Gruppe "
 "für dich deaktiveren. Unten findest du eine Liste aller Administrator_innen."
 
-#: .\views\group.py:806
+#: .\views\group.py:813
 msgid "This project/group is already active!"
 msgstr "Dieses Projekt/Gruppe ist bereits aktiv!"
 
-#: .\views\group.py:808
+#: .\views\group.py:815
 msgid "This project/group is already inactive!"
 msgstr "Dieses Projekt/Gruppe ist bereits inaktiv!"
 
@@ -3687,8 +3694,8 @@ msgstr ""
 #, python-format
 msgid ""
 "User \"%(user)s\" was registered successfully. The account will need to be "
-"approved before you can log in. We will send an email to your address "
-"\"%(email)s\" when this happens."
+"approved before you can log in. We will send an email to your address \"%"
+"(email)s\" when this happens."
 msgstr ""
 "Benutzer \"%(user)s\" wurde erfolgreich registriert. Das Benutzerkonto muss "
 "noch überprüft und freigeschaltet werden bevor du dich einloggen kannst. Wir "
@@ -3894,8 +3901,8 @@ msgstr "Exportieren"
 
 #~ msgid "User \"%(user_name)s\" has requested to join %(team_name)s."
 #~ msgstr ""
-#~ "Benutzer \"%(user_name)s\" hat beantragt Mitglied im Projekt "
-#~ "%(team_name)s zu werden."
+#~ "Benutzer \"%(user_name)s\" hat beantragt Mitglied im Projekt %(team_name)"
+#~ "s zu werden."
 
 #~ msgid "Please go to the following page to accept or decline the request:"
 #~ msgstr ""

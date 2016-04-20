@@ -15,6 +15,7 @@
                 	<li><a href="{% url 'cosinnus:group__group-list' %}...</a></li>
                 {% endif %}
                 <li class="divider"></li>
+                <li><a href="{% url 'cosinnus:group__group-list-mine' %}">{% trans "My Groups" %}</a></li>
                 <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "All Groups" %}</a></li>
             </ul>
         </li>
@@ -36,6 +37,7 @@
                 	<li><a href="{% url 'cosinnus:group-list' %}">...</a></li>
                 {% endif %}
                 <li class="divider"></li>
+                <li><a href="{% url 'cosinnus:group-list-mine' %}">{% trans "My Projects" %}</a></li>
                 <li><a href="{% url 'cosinnus:group-list' %}">{% trans "All Projects" %}</a></li>
             </ul>
         </li>

@@ -77,6 +77,7 @@ for url_key in group_model_registry:
     
     urlpatterns += patterns('cosinnus.views',
         url(r'^%s/in-group-with/(?P<group>[^/]+)/$' % plural_url_key, 'group.group_list_filtered', name=prefix+'group-list-filtered'),
+        url(r'^%s/mine/$' % plural_url_key, 'group.group_list_mine', name=prefix+'group-list-mine'),
         url(r'^%s/$' % plural_url_key, 'group.group_list', name=prefix+'group-list'),
         #url(r'^%s/map/$' % plural_url_key, 'group.group_list_map', name=prefix+'group-list-map'),
         url(r'^%s/add/$' % plural_url_key, 'group.group_create', name=prefix+'group-add'),
