@@ -304,7 +304,7 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
     template_name = 'cosinnus/group/group_list.html'
     items_template = 'cosinnus/group/group_list_items.html'
     serializer_class = GroupSimpleSerializer
-    paginate_by = 30
+    paginate_by = 20
     
     def dispatch(self, request, *args, **kwargs):
         # enable endless-pagination items-only rendering
