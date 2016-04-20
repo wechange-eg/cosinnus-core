@@ -13,7 +13,7 @@
         {% group_url 'cosinnus:group-microsite' group=group as group_url %}
     {% endif %}
     {% endcomment %}
-    <div class="fadedown {% if filter_group and filter_group.id == group.id %}open {% endif %}{% if not forloop.last %}regular-space{% endif %}">
+    <div class="fadedown regular-space {% if filter_group and filter_group.id == group.id %}open {% endif %}">
         <div class="btn btn-{% if group.is_active and user.is_authenticated and user.pk in members or group.public and group.is_active %}emphasized{% else %}default{% endif %} w100">
             <ul class="media-list">
                 <li class="media">
