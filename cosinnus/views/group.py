@@ -341,7 +341,7 @@ class GroupListView(ListAjaxableResponseMixin, ListView):
             admins.append(_admins)
             
         ctx.update({
-            'rows': zip(self.object_list, members, pendings, admins),
+            'rows': zip(ctx['object_list'], members, pendings, admins),
             'group_type': self.group_type,
         })
         return ctx
