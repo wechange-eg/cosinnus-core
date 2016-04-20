@@ -1,7 +1,7 @@
 {% load i18n thumbnail cosinnus_tags static %}
 {% load endless %}
 
-{% lazy_paginate 20 unpaginated_rows %} {# needs to be called on the unpaginated rows, yeah, it's stupid #}
+{% lazy_paginate 20 rows %}
 
 {% for group, members, pendings, admins in rows %}
     
