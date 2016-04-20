@@ -30,6 +30,8 @@ from django.contrib.auth.views import password_reset, password_change
 from cosinnus.utils.permissions import check_user_integrated_portal_member
 from django.template.context import RequestContext
 from django.template.response import TemplateResponse
+from django.core.paginator import Paginator
+from cosinnus.views.mixins.group import EndlessPaginationMixin
 
 
 USER_MODEL = get_user_model()
@@ -44,10 +46,12 @@ def email_portal_admins(subject, template, data):
     mail_thread.start()
 
 
-class UserListView(ListView):
+class UserListView(EndlessPaginationMixin, ListView):
 
     model = USER_MODEL
     template_name = 'cosinnus/user/user_list.html'
+    items_template = 'cosinnus/user/user_list_items.html'
+    paginator_class = Paginator
     
     def get_queryset(self):
         

@@ -1,0 +1,61 @@
+{% load i18n thumbnail cosinnus_tags static %}
+{% load endless %}
+
+{% lazy_paginate 20 object_list %}
+
+{% for user in object_list %}
+    <div class="fadedown regular-space">
+        <div class="btn btn-emphasized w100">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="{% url 'cosinnus:profile-detail' username=user.username %}">
+                        {% include "cosinnus/user/user_avatar_image.html" with user=user %}
+                    </a>
+                    {% comment %}   fadedown disabled
+                    <a class="pull-right fadedown-clickarea" href="#">
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                    {% endcomment %}
+                    <a class="pull-right" href="{% url 'cosinnus:profile-detail' username=user.username %}">
+                        <i class="fa fa-chain"></i>
+                    </a>
+                    {% if not user == request.user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL  %}
+                    <a class="pull-right" href="{% url 'postman:write' recipients=user.username %}" title="{% trans "Send Message" %}">
+                        <i class="fa fa-envelope"></i>
+                    </a>
+                    {% endif %}
+                    <div class="media-body">
+                        <span class="annotation">
+                            {% include 'cosinnus/feedback/report_button_a.html' with object=user %}
+                        </span>
+                        {% comment %}  
+                        {% if user.is_authenticated %}
+                            <span class="annotation">
+                                {% if user.pk in admins %}
+                                    {% trans "Group Admin" %}
+                                {% elif user.pk in members %}
+                                    {% trans "Group Member" %}
+                                {% elif user.pk in pendings %}
+                                    {% trans "Membership requested" %}
+                                {% elif group.public %}
+                                    {% trans "Public group" %}
+                                {% else %}
+                                    {% trans "Not a member" %}
+                                {% endif %}
+                            </span>
+                        {% endif %}
+                        {% endcomment %}
+                        <a href="{% url 'cosinnus:profile-detail' username=user.username %}">
+                            {{ user|full_name }}
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% empty %}
+   <!-- {% trans "There are no visible users." %} -->
+   {% include 'cosinnus/common/empty_button.html' with message="There are no visible users." %}
+{% endfor %}
+
+{% show_more %}
