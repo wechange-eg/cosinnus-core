@@ -130,7 +130,9 @@ class CosinnusGroupManager(models.Manager):
     # group slug to Model type cache, for when only a group slug is known but not the specific CosinnusGroup sub model type
     _GROUP_SLUG_TYPE_CACHE_KEY = 'cosinnus/core/portal/%d/group_slug_type/%s' # portal_id, group_slug  --> type (int)
     # cache for the children ids of a cosinnus group
-    _GROUP_CHILDREN_PK_CACHE_KEY = 'cosinnus/core/portal/%d/group_children_pks/%d' # portal_id, pk (int) --> list ( pk (int) )
+    _GROUP_CHILDREN_PK_CACHE_KEY = 'cosinnus/core/portal/%d/group_children_pks/%d' # portal_id, group-pk (int) --> list ( pk (int) )
+    # list of all group pks and the slug mapped to each pk
+    _GROUP_LOCATIONS_CACHE_KEY = 'cosinnus/core/portal/%d/group_locations/%s/pks' # portal_id,  group-pk (int)   --> list ( CosinnusLocation )
 
     use_for_related_fields = True
 
@@ -781,6 +783,7 @@ class CosinnusBaseGroup(models.Model):
             group._clear_local_cache()
             if group.parent_id:
                 keys.append(CosinnusGroupManager._GROUP_CHILDREN_PK_CACHE_KEY % (CosinnusPortal.get_current().id, group.parent_id))
+            keys.append(CosinnusGroupManager._GROUP_LOCATIONS_CACHE_KEY % (CosinnusPortal.get_current().id, group.id))
         cache.delete_many(keys)
         
         # if this has been called on the model-ignorant CosinnusGroupManager, as a precaution, also run this for the sub-models
@@ -816,6 +819,17 @@ class CosinnusBaseGroup(models.Model):
                 if settings.DEBUG:
                     raise
         return ''
+    
+    def get_locations(self):
+        """ Returns a list of this group locations, similar to calling ``group.locations.all()``, but 
+            attempts to fetch the locations from cache """
+        locations = cache.get(CosinnusGroupManager._GROUP_LOCATIONS_CACHE_KEY % (CosinnusPortal.get_current().id, self.id))
+        if locations is None:
+            locations = list(self.locations.all())
+            cache.set(CosinnusGroupManager._GROUP_LOCATIONS_CACHE_KEY % (CosinnusPortal.get_current().id, self.id),
+                  locations, settings.COSINNUS_GROUP_LOCATIONS_CACHE_TIMEOUT)
+        return locations
+        
         
     def _get_media_image_path(self, file_field, filename_modifier=None):
         """Gets the unique path for each image file in the media directory"""
@@ -1197,7 +1211,12 @@ class CosinnusLocation(models.Model):
         if not self.location_lat or not self.location_lon:
             return None
         return 'http://www.openstreetmap.org/?mlat=%s&mlon=%s&zoom=15&layers=M' % (self.location_lat, self.location_lon)
-
+    
+    def save(self, *args, **kwargs):
+        super(CosinnusLocation, self).save(*args, **kwargs)
+        if getattr(self, 'group_id'):
+            cache.delete(CosinnusGroupManager._GROUP_LOCATIONS_CACHE_KEY % (CosinnusPortal.get_current().id, self.group_id))
+    
 
 
 def replace_swapped_group_model():

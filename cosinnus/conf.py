@@ -123,6 +123,9 @@ class CosinnusConf(AppConf):
     # How long a groups list of children should be cached
     GROUP_CHILDREN_CACHE_TIMEOUT = GROUP_CACHE_TIMEOUT
     
+    # How long a groups list of locations should be cached
+    GROUP_LOCATIONS_CACHE_TIMEOUT = GROUP_CACHE_TIMEOUT
+    
     # the url pattern for group overview URLs
     GROUP_PLURAL_URL_PATH = 'projects'
     

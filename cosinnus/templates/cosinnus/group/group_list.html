@@ -49,7 +49,7 @@
             var mapData = [
                 {% for group in map_groups %}
                     {% comment %} TODO: OPTIMIZE: ``group.locations.all`` causes an SQL hit each! {% endcomment %}
-                    {% for group_location in group.locations.all %}
+                    {% for group_location in group.get_locations %}
                         {% if group_location.location and group_location.location_lat and group_location.location_lon %}
                             {
                                 lat: {{ group_location.location_lat|stringformat:"f" }}, 
