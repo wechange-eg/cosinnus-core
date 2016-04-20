@@ -290,3 +290,19 @@ class GroupObjectCountMixin(object):
         })
         return context
     
+
+class EndlessPaginationMixin(object):
+    """ Support for views using endless-pagination.
+        Required class properties:
+            ``items_template`` path to template for items that is split from the main view template.
+                    See http://django-endless-pagination.readthedocs.org/en/latest/twitter_pagination.html#split-the-template """
+    
+    items_template = None
+    
+    def dispatch(self, request, *args, **kwargs):
+        if not self.items_template:
+            raise ImproperlyConfigured('You must supply an ``items_template`` template path for the items that are loaded in pagination.')
+        # enable endless-pagination items-only rendering
+        if request.is_ajax():
+            self.template_name = self.items_template
+        return super(EndlessPaginationMixin, self).dispatch( request, *args, **kwargs)

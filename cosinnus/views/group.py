@@ -28,7 +28,7 @@ from cosinnus.utils.compat import atomic
 from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
     AjaxableFormMixin, ListAjaxableResponseMixin)
 from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin,\
-    RequireLoggedInMixin
+    RequireLoggedInMixin, EndlessPaginationMixin
 from cosinnus.views.mixins.user import UserFormKwargsMixin
 
 from cosinnus.views.mixins.avatar import AvatarFormMixin
@@ -299,19 +299,13 @@ class GroupMembersMapListView(GroupDetailView):
 group_members_map = GroupMembersMapListView.as_view()
 
 
-class GroupListView(ListAjaxableResponseMixin, ListView):
+class GroupListView(EndlessPaginationMixin, ListAjaxableResponseMixin, ListView):
 
     model = CosinnusGroup
     template_name = 'cosinnus/group/group_list.html'
     items_template = 'cosinnus/group/group_list_items.html'
     serializer_class = GroupSimpleSerializer
     paginator_class = Paginator
-    
-    def dispatch(self, request, *args, **kwargs):
-        # enable endless-pagination items-only rendering
-        if request.is_ajax():
-            self.template_name = self.items_template
-        return super(GroupListView, self).dispatch( request, *args, **kwargs)
     
     def get_queryset(self):
         group_plural_url_key = self.request.path.split('/')[1]
