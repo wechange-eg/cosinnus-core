@@ -1350,6 +1350,22 @@
             }
             refresh_snap();
         },
+        
+
+        embeddifyURLs: function() {
+            /* Adds the current site domain to each href-URL that doesn't start with 'http', 
+             * and sets the ``target`` attr of each element with a href to "_blank". */
+            var domain = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+            $('*[href]').each(function(idx, elem){
+                var $this = $(this);
+                if ($this.attr('href').substring(0,4) != 'http') {
+                    $this.attr('href', domain + $this.attr('href'));
+                }
+                if (!$this.attr('target')) {
+                    $this.attr('target', '_blank');
+                }
+            });
+        },
 
         
         dashboardArrangeInput: function() {

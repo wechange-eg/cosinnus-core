@@ -694,6 +694,11 @@ def textfield(field):
         and formats URLs as target="_blank" links. """
     return linebreaksbr(url_target_blank(urlizetrunc(field, 35)))
 
+@register.filter
+def add_domain(url):
+    """ Adds the current domain to a given URL, unless it already starts with http """
+    return url if url.startswith('http') else CosinnusPortal.get_current().get_domain() + url
+
 
 @register.filter
 def tag_group_filtered(tag_object, group="None"):

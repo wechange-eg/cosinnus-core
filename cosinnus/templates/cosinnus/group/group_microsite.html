@@ -269,6 +269,20 @@
 					{% endif %}
 				{% endwith %}
 				
+				<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+		            <ul class="media-list">
+		                <li class="media">
+		                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+		                    <div class="media-body">
+		                        {% trans "News" %}
+		                    </div>
+		                </li>
+		            </ul>
+		        </div><!-- btn -->
+		        <div class="">
+				    <iframe src="{% group_url 'cosinnus:note:embed' group=group %}" style="width: 100%; height: 250px;" frameborder=0></iframe>
+		        </div><!-- content-box -->
+				
 			{% endblock microsite_left_column %}
 		</div>
 		
