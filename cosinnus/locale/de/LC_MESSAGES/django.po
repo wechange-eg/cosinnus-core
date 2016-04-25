@@ -3052,7 +3052,7 @@ msgstr "Posten auf Facebook aktivieren"
 
 #: .\templates\cosinnus\utils\facebook_integration.html:24
 msgid "Loading Facebook-Scripts..."
-msgstr ""
+msgstr "Lade Facebook-Skripte..."
 
 #: .\templates\cosinnus\utils\facebook_integration.html:25
 msgid ""
