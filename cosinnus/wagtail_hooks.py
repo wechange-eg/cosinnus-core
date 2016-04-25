@@ -129,7 +129,7 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
                         debug = csv_import_projects(csv_file, request=request, encoding=encoding, delimiter=delimiter, import_type=import_type)
                         messages.success(request, _('The CSV file was read successfully! You will be notified by email when it completes.'))
                         import_running = True
-                    except UnicodeDecodeError:
+                    except (UnicodeDecodeError, UnicodeError):
                         messages.error(request, _('The CSV file you supplied is not formatted in the proper encoding (%s)!' % encoding))
                     except EmptyOrUnreadableCSVContent:
                         messages.error(request, _('The CSV file you supplied was empty or not formatted in the proper encoding (%s) or with a wrong delimiter (%s)!' % (encoding, delimiter)))
