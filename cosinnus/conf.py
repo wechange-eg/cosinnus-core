@@ -256,6 +256,9 @@ class CosinnusConf(AppConf):
     # the duration of the user stream (must be very short, otherwise notifications will not appear)
     STREAM_SHORT_CACHE_TIMEOUT = 30
     
+    # special streams which are created for each user and can be pointed at hardcoded groups
+    STREAM_SPECIAL_STREAMS = []
+    
     # additional skip fields for a possibly extended cosinnus user profile
     USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS = []
     
