@@ -10,7 +10,7 @@
 {% with group_carry=group %}
 	{% with mt=object.media_tag_object|tag_group_filtered:group_carry %}
 		{% with persons=mt.persons.all tags=mt.tags.all location=mt.location topics=mt.get_topics approach=mt.approach visibility=mt.visibility %}
-		    {% if persons or tags or location or topics or approach or visibility != 1 %}
+		    {% if persons or tags or location or topics or approach or visibility != 1 and not hide_visibility_tag %}
 		
 				<div class="{% if list_view %}btn btn-default w100 indented{% else %}btn btn-default dashboard-appwidget-contentline-extra-indented{% endif %}">
 				    <ul class="media-list fine-space">
@@ -83,7 +83,7 @@
 				                {% endcomment %}
 				  
 								{% comment %} Group visibiity is not shown per default {% endcomment %}
-								{% if visibility != 1  %}
+								{% if visibility != 1 and not hide_visibility_tag %}
 									<ol class="input-area">
 				                        <li class="w100 font11px no-vertical-padding no-horizontal-padding">
 					                        <i class="fa fa-fw fa-globe"></i>
