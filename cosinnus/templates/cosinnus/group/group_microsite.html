@@ -269,25 +269,27 @@
 					{% endif %}
 				{% endwith %}
 				
-				<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
-		            <ul class="media-list">
-		                <li class="media">
-		                    <a class="pull-left btn-extra-emphasized" href="#"></a>
-		                    <div class="media-body">
-		                        {% trans "News" %}
-		                    </div>
-		                </li>
-		            </ul>
-		        </div><!-- btn -->
-		        <div class="">
-				    <iframe src="{% group_url 'cosinnus:note:embed' group=group %}" style="width: 100%; height: 250px;" frameborder=0></iframe>
-				    {% comment %}  
-				    	Do this for a global, not group-dependant not embed:
-				    	<iframe src="{% url 'cosinnus:embed-global' %}" style="width: 100%; height: 250px;" frameborder=0></iframe>
-				    {% endcomment %}
-		        </div><!-- content-box -->
-				
 			{% endblock microsite_left_column %}
+			
+			{% comment %} The embedded note iframe shall always be the last box on the left column {% endcomment %}
+			<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+	                    <div class="media-body">
+	                        {% trans "News" %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </div><!-- btn -->
+	        <div class="">
+			    <iframe src="{% group_url 'cosinnus:note:embed' group=group %}" style="width: 100%; height: 250px;" frameborder=0></iframe>
+			    {% comment %}  
+			    	Do this for a global, not group-dependant not embed:
+			    	<iframe src="{% url 'cosinnus:embed-global' %}" style="width: 100%; height: 250px;" frameborder=0></iframe>
+			    {% endcomment %}
+	        </div><!-- content-box -->
+				
 		</div>
 		
 		
