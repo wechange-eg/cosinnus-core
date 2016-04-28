@@ -7,6 +7,9 @@ from wagtail_modeltranslation.translator import TranslationOptions
 from wagtail_modeltranslation.decorators import register
 from models.wagtail_models import DashboardTripleColumnPage, DashboardSingleColumnPage,\
     DashboardDoubleColumnPage, SimpleOnePage, SimpleTwoPage, PortalRootPage
+from cosinnus.models.wagtail_models import StreamDashboardSingleColumnPage,\
+    StreamDashboardDoubleColumnPage, StreamDashboardTripleColumnPage,\
+    StreamSimpleOnePage, StreamSimpleTwoPage
 
 
 @register(PortalRootPage)
@@ -33,4 +36,26 @@ class SimpleOnePageTR(TranslationOptions):
 class SimpleTwoPageTR(TranslationOptions):
     fields = SimpleTwoPage.translation_fields
 
+
+
+@register(StreamDashboardSingleColumnPage)
+class StreamDashboardSingleColumnPageTR(TranslationOptions):
+    fields = StreamDashboardSingleColumnPage.translation_fields
     
+@register(StreamDashboardDoubleColumnPage)
+class StreamDashboardDoubleColumnPageTR(TranslationOptions):
+    fields = StreamDashboardDoubleColumnPage.translation_fields
+
+@register(StreamDashboardTripleColumnPage)
+class StreamDashboardTripleColumnPageTR(TranslationOptions):
+    fields = StreamDashboardTripleColumnPage.translation_fields
+    
+@register(StreamSimpleOnePage)
+class StreamSimpleOnePageTR(TranslationOptions):
+    fields = StreamSimpleOnePage.translation_fields
+    
+@register(StreamSimpleTwoPage)
+class StreamSimpleTwoPageTR(TranslationOptions):
+    fields = StreamSimpleTwoPage.translation_fields
+
+

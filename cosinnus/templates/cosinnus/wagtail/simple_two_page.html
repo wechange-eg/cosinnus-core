@@ -1,5 +1,5 @@
 {% extends "cosinnus/wagtail/dashboard_base.html" %}
-{% load i18n static wagtailcore_tags %}
+{% load i18n static wagtailcore_tags cosinnus_tags %}
 
 {% block main_page %}
 	<div class="cms-content">
@@ -9,10 +9,10 @@
     		<div class="overlay-box overlay-box-white overlay-box-side-padding ultra-space">
 	            <div class="row">
 	            	<div class="col-sm-3">
-	            		{{ page.leftnav|richtext }}
+	            		{{ page.leftnav|richtext_or_stream }}
 	            	</div>
 	            	<div class="col-sm-8">
-	            		{{ page.content|richtext }}
+	            		{{ page.content|richtext_or_stream }}
 	            	</div>
 	            </div>
 	        </div>

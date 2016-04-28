@@ -35,6 +35,7 @@ from django.utils.safestring import mark_safe
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.template.defaultfilters import linebreaksbr, urlizetrunc
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from wagtail.wagtailcore.templatetags.wagtailcore_tags import richtext
 logger = logging.getLogger('cosinnus')
 
 register = template.Library()
@@ -722,7 +723,16 @@ def tag_group_filtered(tag_object, group="None"):
             tag_object.topics = ','.join([top for top in tag_object.topics.split(',') if top not in group_topics])
         
     return tag_object
-    
+
+
+
+@register.filter
+def richtext_or_stream(value):
+    """ A safer alternative to the wagtail filter |richtext, which will render a richtext if it got passed one,
+        or just render a streamfield with its innate function if it is one such. """
+    if value and isinstance(value, six.string_types):
+        return richtext(value)
+    return value
 
 @register.filter
 def debugthis(obj):

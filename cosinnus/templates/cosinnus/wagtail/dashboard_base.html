@@ -1,5 +1,5 @@
 {% extends "cosinnus/cms_base.html" %}
-{% load i18n static wagtailcore_tags  %}
+{% load i18n static wagtailcore_tags cosinnus_tags %}
 
 {% block csshead %}
 {{ block.super }}
@@ -14,10 +14,10 @@
         <div class="container ultra-space big-headers">
             <div class="row">
             	<div class="col-md-4">
-			        {{ page.banner_left|richtext }}
+			        {{ page.banner_left|richtext_or_stream }}
 			    </div>
 			    <div class="col-md-8">
-			        {{ page.banner_right|richtext }}
+			        {{ page.banner_right|richtext_or_stream }}
 			    </div>
             </div>
             {% if page.show_register_button and not request.user.is_authenticated %}
@@ -45,7 +45,7 @@
         <div class="overlay-box overlay-box-white">
             <div class="container">
             	<div>
-                	{{ page.header|richtext }}
+                	{{ page.header|richtext_or_stream }}
                 </div>
             	{% block second_row %}{% endblock %}
             </div><!-- container -->
@@ -56,10 +56,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-10 col-md-10 col-lg-10">
-                        {{ page.footer_left|richtext }}
+                        {{ page.footer_left|richtext_or_stream }}
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2">
-                        {{ page.footer_right|richtext }}
+                        {{ page.footer_right|richtext_or_stream }}
                     </div>
                 </div><!-- row -->
             </div><!-- container -->

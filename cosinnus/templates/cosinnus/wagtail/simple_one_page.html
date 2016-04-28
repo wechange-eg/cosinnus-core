@@ -1,5 +1,5 @@
 {% extends "cosinnus/wagtail/dashboard_base.html" %}
-{% load i18n static wagtailcore_tags %}
+{% load i18n static wagtailcore_tags cosinnus_tags %}
 
 {% block main_page %}
 	<div class="cms-content">
@@ -7,7 +7,7 @@
 	        {% include 'cosinnus/messages.html' %}
 	        
     		<div class="overlay-box overlay-box-white overlay-box-side-padding ultra-space">
-	            {{ page.content|richtext }}
+	            {{ page.content|richtext_or_stream }}
 	        </div>
 	    </div><!-- container -->
     </div><!-- cms-content -->

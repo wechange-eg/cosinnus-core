@@ -6,6 +6,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.models.group import  CosinnusPortal
+from django import forms
 
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField, RichTextArea
@@ -19,6 +20,14 @@ from wagtail_modeltranslation.models import TranslationMixin
 from django.shortcuts import redirect
 from cosinnus.utils.urls import get_non_cms_root_url
 from wagtail.wagtailcore.rich_text import DbWhitelister
+
+from wagtail.wagtailcore import blocks
+from django.utils.functional import cached_property
+from wagtail.wagtailcore.blocks.field_block import RichTextBlock
+from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore import blocks
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.wagtailimages.blocks import ImageChooserBlock
 
 
 
@@ -52,6 +61,15 @@ class BetterRichTextField(RichTextField):
         return super(RichTextField, self).formfield(**defaults) # super on RichTextField, not self.__class__!
 
 
+class BetterRichTextBlock(RichTextBlock):
+    """ Enables using a custom DbWhitelister """
+    
+    @cached_property
+    def field(self):
+        return forms.CharField(widget=BetterRichTextArea, **self.field_options)
+
+
+
 class SplitMultiLangTabsMixin(object):
     """ This mixin detects multi-language fields and splits them into seperate tabs per language """
     
@@ -64,7 +82,8 @@ class SplitMultiLangTabsMixin(object):
             i18n_content_panels = []
             for field_panel in content_panels:
                 if field_panel.field_name.endswith(lang):
-                    mod = type(field_panel)(field_panel.field_name, classname=field_panel.classname)
+                    panel_kwargs = {'classname': field_panel.classname} if hasattr(field_panel, 'classname') else {}
+                    mod = type(field_panel)(field_panel.field_name, **panel_kwargs)
                     i18n_content_panels.append( mod )
             object_lists.append(ObjectList(i18n_content_panels, heading=_('Content') + ' (%(language)s)' % {'language': lang}))
         return object_lists 
@@ -117,7 +136,7 @@ class BaseDashboardPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
     
     class Meta:
         abstract = True
-    
+        
     # settings fields
     show_register_button = models.BooleanField(_('Show Register Button'), default=True)
     redirect_if_logged_in = models.BooleanField(_('Redirect Logged in Users'),
@@ -313,3 +332,225 @@ class SimpleTwoPage(BaseSimplePage):
     translation_fields = SimpleOnePage.translation_fields + (
         'leftnav',
     )
+    
+    
+    
+
+"""   Below are basically the same wagtail models, only using StreamFields instead of RichTextFields  """
+    
+    
+    
+    
+
+def get_default_streamfield_blocks():
+    """ Returns a default configuration of available blocks for out StreamField, because DRY """
+    return [
+        ('paragraph', BetterRichTextBlock()),
+        ('image', ImageChooserBlock()),
+    ]
+
+
+class BaseStreamDashboardPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
+    """ Same as the deprecated ``BaseDashboardPage``, only using mostly StreamFields """
+    
+    class Meta:
+        abstract = True
+    
+    # settings fields
+    show_register_button = models.BooleanField(_('Show Register Button'), default=True)
+    redirect_if_logged_in = models.BooleanField(_('Redirect Logged in Users'),
+        help_text=_('If active, this page will only be visible to non-logged-in users. All others will be redirected to the activities page.'),
+        default=False)
+    
+    # Database fields
+    banner_left = StreamField(get_default_streamfield_blocks(), verbose_name=_('Left banner (top)'), blank=True)
+    banner_right = StreamField(get_default_streamfield_blocks(), verbose_name=_('Right banner (top)'), blank=True)
+    
+    header = StreamField(get_default_streamfield_blocks(), verbose_name=_('Header'), blank=True)
+    
+    footer_left = StreamField(get_default_streamfield_blocks(), verbose_name=_('Left footer'), blank=True)
+    footer_right = StreamField(get_default_streamfield_blocks(), verbose_name=_('Right footer'), blank=True)
+    
+    translation_fields = (
+        'title',
+        'banner_left',
+        'banner_right',
+        'header',
+        'footer_left',
+        'footer_right',
+    )
+    
+    # Search index configuraiton
+    search_fields = Page.search_fields + (
+        index.SearchField('banner_left'),
+        index.SearchField('banner_right'),
+        index.SearchField('header'),
+        index.SearchField('footer_left'),
+        index.SearchField('footer_right'),
+    )
+
+    # Editor panels configuration
+    content_panels = Page.content_panels + [
+        StreamFieldPanel('banner_left'),
+        StreamFieldPanel('banner_right'),
+        StreamFieldPanel('header'),
+        StreamFieldPanel('footer_left'),
+        StreamFieldPanel('footer_right'),
+    ]
+    
+    # Editor panels configuration
+    settings_panels = Page.settings_panels + [
+        FieldPanel('show_register_button'),
+        FieldPanel('redirect_if_logged_in'),
+    ]
+    
+    def serve(self, request):
+        """ If the redirect flag is set, and the user is logged in, redirect to streams, otherwise, show CMS page """
+        if request.user.is_authenticated() and self.redirect_if_logged_in and not request.GET.get('preview', False):
+            return redirect(get_non_cms_root_url())
+        return super(BaseStreamDashboardPage, self).serve(request)
+
+
+class StreamDashboardSingleColumnPage(BaseStreamDashboardPage):
+    
+    class Meta:
+        verbose_name = _('1-Column Dashboard Page (Modular)')
+    
+    content1 = StreamField(get_default_streamfield_blocks(), verbose_name=_('Content'), blank=True)
+
+    # Search index configuraiton
+    search_fields = BaseStreamDashboardPage.search_fields + (
+        index.SearchField('content1'),
+    )
+
+    # Editor panels configuration
+    content_panels = BaseStreamDashboardPage.content_panels + [
+        StreamFieldPanel('content1'),
+    ]
+    
+    template = 'cosinnus/wagtail/dashboard_single_column_page.html'
+    
+    translation_fields = BaseStreamDashboardPage.translation_fields + (
+        'content1',
+    )
+    
+
+
+class StreamDashboardDoubleColumnPage(BaseStreamDashboardPage):
+    
+    class Meta:
+        verbose_name = _('2-Column Dashboard Page (Modular)')
+    
+    content1 = StreamField(get_default_streamfield_blocks(), verbose_name=_('Content (left column)'), blank=True)
+    content2 = StreamField(get_default_streamfield_blocks(), verbose_name=_('Content (right column)'), blank=True)
+
+    # Search index configuraiton
+    search_fields = BaseStreamDashboardPage.search_fields + (
+        index.SearchField('content1'),
+        index.SearchField('content2'),
+    )
+
+    # Editor panels configuration
+    content_panels = BaseStreamDashboardPage.content_panels + [
+        StreamFieldPanel('content1'),
+        StreamFieldPanel('content2'),
+    ]
+    
+    template = 'cosinnus/wagtail/dashboard_double_column_page.html'
+    
+    translation_fields = BaseStreamDashboardPage.translation_fields + (
+        'content1',
+        'content2',
+    )
+    
+    
+class StreamDashboardTripleColumnPage(BaseStreamDashboardPage):
+    
+    class Meta:
+        verbose_name = _('3-Column Dashboard Page (Modular)')
+    
+    content1 = StreamField(get_default_streamfield_blocks(), verbose_name=_('Content (left column)'), blank=True)
+    content2 = StreamField(get_default_streamfield_blocks(), verbose_name=_('Content (center column)'), blank=True)
+    content3 = StreamField(get_default_streamfield_blocks(), verbose_name=_('Content (right column)'), blank=True)
+    
+    # Search index configuraiton
+    search_fields = BaseStreamDashboardPage.search_fields + (
+        index.SearchField('content1'),
+        index.SearchField('content2'),
+        index.SearchField('content3'),
+    )
+
+    # Editor panels configuration
+    content_panels = BaseStreamDashboardPage.content_panels + [
+        StreamFieldPanel('content1'),
+        StreamFieldPanel('content2'),
+        StreamFieldPanel('content3'),
+    ]
+
+    template = 'cosinnus/wagtail/dashboard_triple_column_page.html'
+    
+    translation_fields = BaseStreamDashboardPage.translation_fields + (
+        'content1',
+        'content2',
+        'content3',
+    )
+    
+    
+   
+class BaseStreamSimplePage(SplitMultiLangTabsMixin, TranslationMixin, Page):
+    
+    class Meta:
+        abstract = True
+    
+    # Database fields
+    content = StreamField(get_default_streamfield_blocks(), verbose_name=_('Content'), blank=True)
+    
+    # Search index configuraiton
+    search_fields = Page.search_fields + (
+        index.SearchField('content'),
+    )
+
+    # Editor panels configuration
+    content_panels = Page.content_panels + [
+        StreamFieldPanel('content'),
+    ]
+    
+    translation_fields = (
+        'content',
+        'title',
+    )
+    
+        
+class StreamSimpleOnePage(BaseStreamSimplePage):
+    
+    class Meta:
+        verbose_name = _('Simple One-Column Page (Modular)')
+    
+    template = 'cosinnus/wagtail/simple_one_page.html'
+    
+
+class StreamSimpleTwoPage(BaseStreamSimplePage):
+    
+    class Meta:
+        verbose_name = _('Simple Page with Left Navigation (Modular)')
+    
+    # Database fields
+    leftnav = StreamField(get_default_streamfield_blocks(), verbose_name=_('Left Sidebar'), blank=True)
+    
+    # Search index configuraiton
+    search_fields = BaseStreamSimplePage.search_fields + (
+        index.SearchField('leftnav'),
+    )
+
+    # Editor panels configuration
+    content_panels = BaseStreamSimplePage.content_panels + [
+        StreamFieldPanel('leftnav'),
+    ]
+
+    template = 'cosinnus/wagtail/simple_two_page.html'
+    
+    translation_fields = SimpleOnePage.translation_fields + (
+        'leftnav',
+    )
+    
+    

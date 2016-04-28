@@ -37,7 +37,7 @@ sqlparse==0.1.10
 wsgiref==0.1.2
 python-dateutil==2.4.1
 
-wagtail==1.2
+wagtail==1.2 # can't upgrade wagtail to >1.4 before wagtail-modeltranslations>0.5 is out of alpha to support it
 wagtail-modeltranslation==0.3.2
 django-overextends==0.4.0
 django-compressor==1.5
