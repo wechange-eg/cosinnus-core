@@ -628,6 +628,10 @@ class CosinnusBaseGroup(models.Model):
         symmetrical=False,
         blank=True, null=True, related_name='+')
     
+    facebook_group_id = models.CharField(_('Facebook Group/Page ID'), max_length=200, 
+        blank=True, null=True, validators=[MaxLengthValidator(200)])
+    
+    
     objects = CosinnusGroupManager()
     
     _portal_id = None

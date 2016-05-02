@@ -94,14 +94,29 @@
         
 			<div id="facebookIntegrationPanel" {% if not fb_userID %}style="display: none;"{% endif %}>
 				
-				<label for="facebookIntegrationPostCheckbox" class="noselect" style="cursor: pointer;">
-					<img class="title-fb-username src-fb-avatar pull-left" src="{{ request.user.cosinnus_profile.get_facebook_avatar_url }}" 
-						title="{{ request.user.cosinnus_profile.get_facebook_username }}" style="margin-right: 10px;" height=40></img>
-					<input type="checkbox" checked="false" autocomplete="off" name="facebook_integration_post_to_timeline" id="facebookIntegrationPostCheckbox" class="toggle-switch" data-toggle-target="fb-post-explanation">
-					{% trans "Also post this to my Facebook timeline" %}
-				</label>
-				<br/>
-				<span id="fb-post-explanation" style="display: none;" class="small noselect">{% trans "When you submit this post, it will be posted on your Facebook timeline exactly as seen." %}</span>
+				<div>
+					<label for="facebookIntegrationPostCheckbox" class="noselect" style="cursor: pointer;">
+						<img class="title-fb-username src-fb-avatar pull-left" src="{{ request.user.cosinnus_profile.get_facebook_avatar_url }}" 
+							title="{{ request.user.cosinnus_profile.get_facebook_username }}" style="margin-right: 10px;" height=40></img>
+						<input type="checkbox" checked="false" autocomplete="off" name="facebook_integration_post_to_timeline" id="facebookIntegrationPostCheckbox" class="toggle-switch" data-toggle-target="fb-post-explanation">
+						{% trans "Also post this to my Facebook timeline" %}
+					</label>
+					<br/>
+					<span id="fb-post-explanation" style="display: none;" class="small noselect">{% trans "When you submit this post, it will be posted on your Facebook timeline exactly as seen." %}</span>
+				</div>
+				
+			    {% if group and group.facebook_group_id %}
+			    	<div>
+						<label for="facebookIntegrationPostGroupCheckbox" class="noselect" style="cursor: pointer;">
+							<img class="title-fb-username src-fb-avatar pull-left" src="{{ request.user.cosinnus_profile.get_facebook_avatar_url }}" 
+								title="{{ request.user.cosinnus_profile.get_facebook_username }}" style="margin-right: 10px;" height=40></img>
+							<input type="checkbox" checked="false" autocomplete="off" name="facebook_integration_post_to_group_page" id="facebookIntegrationPostGroupCheckbox" class="toggle-switch" data-toggle-target="fb-post-explanation-group">
+							{% trans "Also post this to this project/groups Facebook page" %}
+						</label>
+						<br/>
+						<span id="fb-post-explanation-group" style="display: none;" class="small noselect">{% trans "When you submit this post, it will be posted from your Facebook Account, exactly as seen, on the Facebook Group/Fan-Page of this project/group." %}</span>
+					</div>
+			    {% endif %}
 			</div>
         
         </div>

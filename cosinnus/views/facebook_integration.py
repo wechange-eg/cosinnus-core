@@ -22,6 +22,7 @@ from cosinnus.utils.urls import iriToUri
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.contrib import messages
+from django import forms
 
 logger = logging.getLogger('cosinnus')
 
@@ -78,24 +79,31 @@ class FacebookIntegrationUserProfileMixin(object):
     
 class FacebookIntegrationViewMixin(object):
 
-    def post_to_facebook(self, userprofile, fb_post_text, urls=[]):
+    def post_to_facebook(self, userprofile, fb_post_text, urls=[], fb_post_target_id=None):
         """ Posts content to the timeline of a given userprofile's user synchronously.
             This method will never throw an exception.
-            @param return: a string if posted successfully (either the post's id or '' if unknown), None if the post failed for any reason """
+            @param userprofile: a userprofile model instance that contains the user's fb info
+            @param fb_post_text: Body text of the Facebook post
+            @param urls: Any URLs contained in the post that shall be attached to the post explicitly (for a preview box, etc)
+            @param fb_post_target_id: If None, post to the user's timeline. If given, post to this alternate id of the facebook graph API egdes:
+                /{user-id}/feed, /{page-id}/feed, /{event-id}/feed, or /{group-id}/feed (No need to specify which one; they are unique)
+            @return: a string if posted successfully (either the post's id or '' if unknown), None if the post failed for any reason
+            """
         try:
             # get user id and check for valid token
             user_id = userprofile.get_facebook_user_id()
             if not user_id:
                 logger.warning('Could not post to facebook timeline even though it was requested because of missing fb_userID!', extra={
-                           'user-email': userprofile.user.email})
+                           'user-email': userprofile.user.email, 'alternate-post-target': fb_post_target_id})
                 return None
             access_token = userprofile.settings['fb_accessToken']
             if not access_token:
                 logger.warning('Could not post to facebook timeline even though it was requested because of missing fb_accessToken!', extra={
-                           'user-email': userprofile.user.email, 'user_fbID': user_id})
+                           'user-email': userprofile.user.email, 'user_fbID': user_id, 'alternate-post-target': fb_post_target_id})
                 return None
             
-            post_url = 'https://graph.facebook.com/v2.5/%(user_id)s/feed' % ({'user_id': user_id})
+            post_target = fb_post_target_id or user_id
+            post_url = 'https://graph.facebook.com/v2.5/%(post_target)s/feed' % ({'post_target': post_target})
             data = {
                 'message': fb_post_text.encode('utf-8'),
                 'access_token': access_token,
@@ -118,8 +126,29 @@ class FacebookIntegrationViewMixin(object):
             
         except Exception, e:
             logger.warning('Unexpected exception when posting to facebook timeline!', extra={
-                           'user-email': userprofile.user.email, 'user_fbID': user_id, 'exception': force_text(e)})
+                           'user-email': userprofile.user.email, 'user_fbID': user_id, 'exception': force_text(e), 'alternate-post-target': fb_post_target_id})
         return None
+
+    
+class FacebookIntegrationGroupFormMixin(object):
+    
+    facebook_group_id_field = 'facebook_group_id'
+    
+    def clean(self):
+        cleaned_data = super(FacebookIntegrationGroupFormMixin, self).clean()
+        if not getattr(settings, 'COSINNUS_FACEBOOK_INTEGRATION_ENABLED', False):
+            return cleaned_data
+        if not self.facebook_group_id_field:
+            raise ImproperlyConfigured('The ``facebook_group_id_field`` attribute was not supplied!')
+        
+        facebook_id = cleaned_data.get(self.facebook_group_id_field)
+        if facebook_id and facebook_id != getattr(self.instance, self.facebook_group_id_field):
+            # TODO: check if entered facebook-id matches a group or fan-page
+            
+            # TODO: if not, throw validation eorr
+            if True:
+                raise forms.ValidationError("The Facebook Fan-Page ID or Group ID could not be found on Facebook!")
+
     
 
 def save_auth_tokens(request):

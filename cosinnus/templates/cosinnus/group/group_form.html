@@ -53,6 +53,14 @@
 					</a>
 				</li>
 				{% endif %}
+				{% if SETTINGS.COSINNUS_FACEBOOK_INTEGRATION_ENABLED %}
+				<li {% if request.GET.tab == 'facebook' %}class="active"{% endif %}>
+					<a href="#facebook" class="_group-form-tab" role="tab" data-toggle="tab">
+						<i class="fa fa-facebook"></i>
+						{% trans "Facebook-Integration" %}
+					</a>
+				</li>
+				{% endif %}
 			{% endblock group_form_navtabs %}
 		</ul>
 		
@@ -376,6 +384,27 @@
 	                            </li>
 	                        </ul>
 	                    </div>
+					</div>
+					
+					
+					<div class="tab-pane {% if SETTINGS.COSINNUS_FACEBOOK_INTEGRATION_ENABLED and request.GET.tab == 'facebook' %}active{% endif %}" id="facebook" >
+						
+                        <label>{% trans "Facebook Fan-Page Id or Group-Id to link this to" %}</label>
+                        {{ form.forms.obj.facebook_group_id.errors }}
+                        <div type="button" class="btn btn-default w100 regular-space">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <a class="pull-left" href="#">
+                                        <i class="fa fa-facebook"></i>
+                                    </a>
+                                    <div class="media-body media-body-form-control">
+                                        {% captureas placeholder %}{% trans "Facebook Group Id or Fan-Page Id" %}{% endcaptureas %}
+                                        {% render_field form.forms.obj.facebook_group_id class+="form-control" placeholder=placeholder %}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+						
 					</div>
 				
 				{% endblock group_form_tab_panes %}

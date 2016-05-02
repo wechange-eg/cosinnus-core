@@ -16,6 +16,7 @@ from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from django_select2.fields import HeavyModelSelect2MultipleChoiceField
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.core.urlresolvers import reverse
+from cosinnus.views.facebook_integration import FacebookIntegrationGroupFormMixin
 
 
 class GroupKwargModelFormMixin(object):
@@ -52,18 +53,18 @@ class AsssignPortalMixin(object):
         return super(AsssignPortalMixin, self).save(**kwargs)
 
 
-class CosinnusBaseGroupForm(forms.ModelForm):
+class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
     website = forms.URLField(widget=forms.TextInput, required=False)
     
     related_groups = forms.ModelMultipleChoiceField(queryset=get_cosinnus_group_model().objects.filter(portal_id=CosinnusPortal.get_current().id))
     
-    
     class Meta:
         fields = ['name', 'public', 'description', 'description_long', 'contact_info', 
                         'avatar', 'wallpaper', 'website', 'deactivated_apps'] \
-                        + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) 
+                        + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) \
+                        + (['facebook_group_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else [])
 
     def __init__(self, instance, *args, **kwargs):    
         super(CosinnusBaseGroupForm, self).__init__(instance=instance, *args, **kwargs)
