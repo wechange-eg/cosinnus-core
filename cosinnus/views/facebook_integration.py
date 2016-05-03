@@ -143,11 +143,36 @@ class FacebookIntegrationGroupFormMixin(object):
         
         facebook_id = cleaned_data.get(self.facebook_group_id_field)
         if facebook_id and facebook_id != getattr(self.instance, self.facebook_group_id_field):
-            # TODO: check if entered facebook-id matches a group or fan-page
+            if not getattr(self, 'request', None):
+                raise ImproperlyConfigured('FacebookIntegrationGroupFormMixin needs a request to be set! Provide your form with one by overriding its __init__ function and passing a request as form kwarg!')
+            # check if user has connected to facebook, we need the access token
+            if not self.request.user.cosinnus_profile.get_facebook_user_id():
+                raise ImproperlyConfigured('You need to be connected to Facebook to link a Group or Fan-Page!')
             
-            # TODO: if not, throw validation eorr
-            if True:
-                raise forms.ValidationError("The Facebook Fan-Page ID or Group ID could not be found on Facebook!")
+            # get group info
+            access_token = self.request.user.cosinnus_profile.settings['fb_accessToken']
+            had_error = False
+            try:
+                location_url = "https://graph.facebook.com/%(group_id)s?access_token=%(access_token)s" \
+                       % {
+                          'group_id': facebook_id,
+                          'access_token': access_token,
+                       }
+                response_info = urllib2.urlopen(location_url)
+            except Exception, e:
+                logger.warn('Error when trying to retrieve FB group info from Facebook:', extra={'exception': force_text(e), 'url': location_url})
+                had_error = True
+            if not had_error and not response_info.code == 200:
+                logger.warn('Error when trying to retrieve FB group info from Facebook (non-200 response):', extra={'response_info': force_text(response_info.__dict__)})
+                had_error = True
+            if not had_error:
+                content_info = json.loads(response_info.read()) # this graph returns a JSON string, not a query response
+                if not 'name' in content_info:
+                    had_error = True
+            
+            #  if group could not be accessed in any way throw validation eorr
+            if had_error:
+                raise forms.ValidationError("The Facebook Fan-Page ID or Group ID could not be found on Facebook! Make sure you have entered the correct ID for your Group/Fan-Page!")
 
     
 

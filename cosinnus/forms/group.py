@@ -67,8 +67,10 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, forms.ModelForm):
                         + (['facebook_group_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else [])
 
     def __init__(self, instance, *args, **kwargs):    
+        if 'request' in kwargs:
+            self.request = kwargs.pop('request')
         super(CosinnusBaseGroupForm, self).__init__(instance=instance, *args, **kwargs)
-        
+            
         self.fields['related_groups'] = HeavyModelSelect2MultipleChoiceField(
                  required=False, 
                  data_url=reverse('cosinnus:select2:groups') + ('?except='+str(instance.pk) if instance else ''),

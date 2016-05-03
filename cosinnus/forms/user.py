@@ -25,6 +25,8 @@ class UserKwargModelFormMixin(object):
     """
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
+        if 'request' in kwargs:
+            self.request = kwargs.pop('request')
         super(UserKwargModelFormMixin, self).__init__(*args, **kwargs)
         if self.user and hasattr(self.instance, 'user_id'):
             self.instance.user_id = self.user.id

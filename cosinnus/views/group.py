@@ -75,6 +75,11 @@ class CosinnusGroupFormMixin(object):
     inlines = [CosinnusLocationInlineFormset]
     template_name = 'cosinnus/group/group_form.html'
     
+    def get_form_kwargs(self):
+        kwargs = super(CosinnusGroupFormMixin, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+    
     def dispatch(self, *args, **kwargs):
         """ Find out which type of CosinnusGroup (project/society), we're dealing with here. """
         group_url_key = self.request.path.split('/')[1]
