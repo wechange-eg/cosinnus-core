@@ -372,6 +372,10 @@ class Migration(migrations.Migration):
                 ('footer_ru', cosinnus.models.wagtail_models.BetterRichTextField(help_text='Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)', null=True, verbose_name='Footer', blank=True)),
                 ('footer_uk', cosinnus.models.wagtail_models.BetterRichTextField(help_text='Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)', null=True, verbose_name='Footer', blank=True)),
                 ('portal', models.ForeignKey(related_name='wagtail_root_pages', on_delete=django.db.models.deletion.SET_NULL, blank=True, to='cosinnus.CosinnusPortal', help_text='Only portal admins of the assigned portal can see wagtail pages below this one.', null=True, verbose_name='Assigned Portal')),
+                ('title_de', models.CharField(help_text="The page title as you'd like it to be seen by the public", max_length=255, null=True, verbose_name='Title')),
+                ('title_en', models.CharField(help_text="The page title as you'd like it to be seen by the public", max_length=255, null=True, verbose_name='Title')),
+                ('title_ru', models.CharField(help_text="The page title as you'd like it to be seen by the public", max_length=255, null=True, verbose_name='Title')),
+                ('title_uk', models.CharField(help_text="The page title as you'd like it to be seen by the public", max_length=255, null=True, verbose_name='Title')),
             ],
             options={
                 'verbose_name': 'Portal Root Page',
