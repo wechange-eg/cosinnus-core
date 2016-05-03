@@ -8,13 +8,13 @@ import wagtail.wagtailcore.blocks
 import cosinnus.models.wagtail_models
 from django.conf import settings
 import django.core.validators
-
+from cosinnus.utils.migrations import attach_swappable_dependencies
 
 class Migration(migrations.Migration):
 
-    dependencies = [
+    dependencies = attach_swappable_dependencies([
         ('cosinnus', '0008_auto_20160428_1708'),
-    ]
+    ])
 
     operations = [
         migrations.AddField(
