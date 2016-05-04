@@ -40,7 +40,7 @@
 				            <div class="modal-body">
 				                
 				                <h4>{% trans "Why connect?" context "Facebook connect explanation box" %}</h4>
-				                <p>{% trans "When you connect your Facebook account you can easily publish your news posts on your Facebook timeline." context "Facebook connect explanation box" %}</p>
+				                <p>{% trans "When you connect your Facebook account you can easily publish your news posts on your Facebook timeline. You can also connect your projects/groups to a Facebook Group or Fan-Site to enable members to publish their news posts there, too." context "Facebook connect explanation box" %}</p>
 				                
 				                <p>{% trans "For that, we need your permission to publish on Facebook in your name." context "Facebook connect explanation box" %}</p>
 				                
@@ -116,6 +116,13 @@
 						<br/>
 						<span id="fb-post-explanation-group" style="display: none;" class="small noselect">{% trans "When you submit this post, it will be posted from your Facebook Account, exactly as seen, on the Facebook Group/Fan-Page of this project/group." %}</span>
 					</div>
+				{% elif group and user.is_superuser or group and user.pk in group.admins %}
+					<p>
+						<small>
+				        	{% trans "Connect a Facebook Group or Fan-Page to enable members to publish their news posts there, too!" %}
+				        	<a href="{% group_url 'cosinnus:group-edit' group=group %}?tab=facebook" target="_blank"><b>{% trans "You can do this here" context "a link to click on"%} <span class="fa fa-external-link"></span></b></a>
+			        	</small>
+			        </p>
 			    {% endif %}
 			</div>
         

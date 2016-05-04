@@ -234,7 +234,12 @@
                     </div>
                      {% endcomment %}
                     
-                    <h2>{{ group.name }}</h2>
+                    <h2>
+                    	{{ group.name }}
+	                    {% if group.facebook_group_id %}
+	                    		&nbsp;<a href="https://facebook.com/{{ group.facebook_group_id}}/" target="_blank" title="{% trans "View on Facebook" %}"><i class="fa fa-facebook-square"></i></a>
+	                    {% endif %}
+                    </h2>
                     
                     {% with society=group.get_parent_typed %}
                         {% if society %}

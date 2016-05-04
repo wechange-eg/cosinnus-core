@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-04 13:07+0200\n"
+"POT-Creation-Date: 2016-05-04 15:26+0200\n"
 "PO-Revision-Date: 2015-11-11 10:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -396,7 +396,7 @@ msgstr "Об'єкти, про які повідомлено"
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr "Введіть дійсне ім'я. Скісна риска не дозволена."
 
-#: .\models\group.py:427 .\models\group.py:581 .\models\group.py:1038
+#: .\models\group.py:427 .\models\group.py:581 .\models\group.py:1043
 msgid "Portal"
 msgstr "Портал"
 
@@ -603,69 +603,69 @@ msgstr ""
 "У зв'язку зі змінами змінилася URL-адреса цієї спільноти. Автоматично було "
 "налаштовано постійне перенаправлення зі старої адреси на нову!"
 
-#: .\models\group.py:1032
+#: .\models\group.py:1037
 msgid "Team membership"
 msgstr "Членство у спільноті/проекті"
 
-#: .\models\group.py:1033
+#: .\models\group.py:1038
 msgid "Team memberships"
 msgstr "Членства у спільноті/проекті"
 
-#: .\models\group.py:1045
+#: .\models\group.py:1050
 msgid "Portal membership"
 msgstr "Членство на порталі"
 
-#: .\models\group.py:1046
+#: .\models\group.py:1051
 msgid "Portal memberships"
 msgstr "Членства на порталі"
 
-#: .\models\group.py:1057
+#: .\models\group.py:1062
 msgid "From Portal"
 msgstr "Від порталу"
 
-#: .\models\group.py:1058
+#: .\models\group.py:1063
 msgid "From Team Type"
 msgstr "Від типу спільноти"
 
-#: .\models\group.py:1059
+#: .\models\group.py:1064
 msgid "From Slug"
 msgstr "Від короткого імені"
 
-#: .\models\group.py:1062 .\models\group.py:1071
+#: .\models\group.py:1067 .\models\group.py:1076
 msgid "Permanent Team Redirects"
 msgstr "Постійні перенаправлення спільноти"
 
-#: .\models\group.py:1070
+#: .\models\group.py:1075
 msgid "Permanent Team Redirect"
 msgstr "Постійне перенаправлення спільноти"
 
-#: .\models\group.py:1198 .\models\tagged.py:124
+#: .\models\group.py:1203 .\models\tagged.py:124
 #: .\templates\cosinnus\group\group_microsite.html:323
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:4
 msgid "Location"
 msgstr "Місцезнаходження"
 
-#: .\models\group.py:1199 .\models\tagged.py:125
+#: .\models\group.py:1204 .\models\tagged.py:125
 msgid "Latitude"
 msgstr "Довгота"
 
-#: .\models\group.py:1200 .\models\tagged.py:126
+#: .\models\group.py:1205 .\models\tagged.py:126
 msgid "Longitude"
 msgstr "Широта"
 
-#: .\models\group.py:1204 .\models\tagged.py:86 .\models\tagged.py:236
+#: .\models\group.py:1209 .\models\tagged.py:86 .\models\tagged.py:236
 #, fuzzy
 #| msgid "Stream"
 msgid "Team"
 msgstr "Діяльність"
 
-#: .\models\group.py:1210
+#: .\models\group.py:1215
 #, fuzzy
 #| msgid "Cosinnus groups"
 msgid "CosinnusLocation"
 msgstr "Спільноти"
 
-#: .\models\group.py:1211
+#: .\models\group.py:1216
 #, fuzzy
 #| msgid "Cosinnus groups"
 msgid "CosinnusLocations"
@@ -1416,18 +1416,24 @@ msgctxt "join team button second item"
 msgid "Now"
 msgstr "зараз"
 
-#: .\templates\cosinnus\dashboard.html:243
+#: .\templates\cosinnus\dashboard.html:242
+#, fuzzy
+#| msgid "View on page"
+msgid "View on Facebook"
+msgstr "Переглянути на сторінці"
+
+#: .\templates\cosinnus\dashboard.html:248
 msgid "Group:"
 msgstr "Спільнота:"
 
-#: .\templates\cosinnus\dashboard.html:251
+#: .\templates\cosinnus\dashboard.html:256
 #: .\templates\cosinnus\group\group_microsite.html:218
 #: .\templates\cosinnus\group\group_og_meta_attributes.html:8
 #: .\templates\cosinnus\widgets\related_groups.html:20
 msgid "No Description set"
 msgstr "Опис не створено"
 
-#: .\templates\cosinnus\dashboard.html:255
+#: .\templates\cosinnus\dashboard.html:260
 #: .\templates\cosinnus\group\group_form.html:234
 #: .\templates\endless\show_more.html:5
 msgid "more"
@@ -3156,7 +3162,9 @@ msgstr ""
 msgctxt "Facebook connect explanation box"
 msgid ""
 "When you connect your Facebook account you can easily publish your news "
-"posts on your Facebook timeline."
+"posts on your Facebook timeline. You can also connect your projects/groups "
+"to a Facebook Group or Fan-Site to enable members to publish their news "
+"posts there, too."
 msgstr ""
 
 #: .\templates\cosinnus\utils\facebook_integration.html:46
@@ -3220,6 +3228,18 @@ msgid ""
 "exactly as seen, on the Facebook Group/Fan-Page of this project/group."
 msgstr ""
 
+#: .\templates\cosinnus\utils\facebook_integration.html:124
+msgid ""
+"Connect a Facebook Group or Fan-Page to enable members to publish their news "
+"posts there, too!"
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration.html:125
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:27
+msgctxt "a link to click on"
+msgid "You can do this here"
+msgstr ""
+
 #: .\templates\cosinnus\utils\facebook_integration_group_form.html:7
 #, python-format
 msgid ""
@@ -3251,11 +3271,6 @@ msgstr ""
 msgid ""
 "You need to connect your user account to Facebook before you can link this "
 "group/project!"
-msgstr ""
-
-#: .\templates\cosinnus\utils\facebook_integration_group_form.html:27
-msgctxt "a link to click on"
-msgid "You can do this here"
 msgstr ""
 
 #: .\templates\cosinnus\utils\facebook_integration_group_form.html:32

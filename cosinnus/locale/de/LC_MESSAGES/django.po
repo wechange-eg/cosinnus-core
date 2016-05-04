@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-04 13:07+0200\n"
-"PO-Revision-Date: 2016-05-04 13:08+0200\n"
+"POT-Creation-Date: 2016-05-04 15:26+0200\n"
+"PO-Revision-Date: 2016-05-04 15:27+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -394,7 +394,7 @@ msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 "Bitte einen gültigen Namen angeben. Ein Vorwärtsslash ist nicht erlaubt."
 
-#: .\models\group.py:427 .\models\group.py:581 .\models\group.py:1038
+#: .\models\group.py:427 .\models\group.py:581 .\models\group.py:1043
 msgid "Portal"
 msgstr "Portal"
 
@@ -600,67 +600,67 @@ msgstr ""
 "Weiterleitung von der alten auf die neue Adresse wurde automatisch "
 "eingerichtet!"
 
-#: .\models\group.py:1032
+#: .\models\group.py:1037
 msgid "Team membership"
 msgstr "Gruppen/Projekt-Mitgliedschaft"
 
-#: .\models\group.py:1033
+#: .\models\group.py:1038
 msgid "Team memberships"
 msgstr "Gruppen/Projekt-Mitgliedschaften"
 
-#: .\models\group.py:1045
+#: .\models\group.py:1050
 msgid "Portal membership"
 msgstr "Portal-Mitgliedschaft"
 
-#: .\models\group.py:1046
+#: .\models\group.py:1051
 msgid "Portal memberships"
 msgstr "Portal-Mitgliedschaften"
 
-#: .\models\group.py:1057
+#: .\models\group.py:1062
 msgid "From Portal"
 msgstr "Von Portal"
 
-#: .\models\group.py:1058
+#: .\models\group.py:1063
 msgid "From Team Type"
 msgstr "Von Gruppentyp"
 
-#: .\models\group.py:1059
+#: .\models\group.py:1064
 msgid "From Slug"
 msgstr "Von Slug"
 
-#: .\models\group.py:1062 .\models\group.py:1071
+#: .\models\group.py:1067 .\models\group.py:1076
 msgid "Permanent Team Redirects"
 msgstr "Dauerhaufte Gruppenweiterleitungen"
 
-#: .\models\group.py:1070
+#: .\models\group.py:1075
 msgid "Permanent Team Redirect"
 msgstr "Dauerhaufte Gruppenweiterleitung"
 
-#: .\models\group.py:1198 .\models\tagged.py:124
+#: .\models\group.py:1203 .\models\tagged.py:124
 #: .\templates\cosinnus\group\group_microsite.html:323
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:4
 msgid "Location"
 msgstr "Standort"
 
-#: .\models\group.py:1199 .\models\tagged.py:125
+#: .\models\group.py:1204 .\models\tagged.py:125
 msgid "Latitude"
 msgstr ""
 
-#: .\models\group.py:1200 .\models\tagged.py:126
+#: .\models\group.py:1205 .\models\tagged.py:126
 msgid "Longitude"
 msgstr ""
 
-#: .\models\group.py:1204 .\models\tagged.py:86 .\models\tagged.py:236
+#: .\models\group.py:1209 .\models\tagged.py:86 .\models\tagged.py:236
 msgid "Team"
 msgstr "Team"
 
-#: .\models\group.py:1210
+#: .\models\group.py:1215
 #, fuzzy
 #| msgid "Cosinnus groups"
 msgid "CosinnusLocation"
 msgstr "Gruppen"
 
-#: .\models\group.py:1211
+#: .\models\group.py:1216
 #, fuzzy
 #| msgid "Cosinnus groups"
 msgid "CosinnusLocations"
@@ -1406,18 +1406,24 @@ msgctxt "join team button second item"
 msgid "Now"
 msgstr "beantragen"
 
-#: .\templates\cosinnus\dashboard.html:243
+#: .\templates\cosinnus\dashboard.html:242
+#, fuzzy
+#| msgid "Disconnect Facebook"
+msgid "View on Facebook"
+msgstr "Facebook trennen"
+
+#: .\templates\cosinnus\dashboard.html:248
 msgid "Group:"
 msgstr "Gruppe:"
 
-#: .\templates\cosinnus\dashboard.html:251
+#: .\templates\cosinnus\dashboard.html:256
 #: .\templates\cosinnus\group\group_microsite.html:218
 #: .\templates\cosinnus\group\group_og_meta_attributes.html:8
 #: .\templates\cosinnus\widgets\related_groups.html:20
 msgid "No Description set"
 msgstr "Keine Beschreibung erstellt"
 
-#: .\templates\cosinnus\dashboard.html:255
+#: .\templates\cosinnus\dashboard.html:260
 #: .\templates\cosinnus\group\group_form.html:234
 #: .\templates\endless\show_more.html:5
 msgid "more"
@@ -3093,10 +3099,14 @@ msgstr "Warum verbinden?"
 msgctxt "Facebook connect explanation box"
 msgid ""
 "When you connect your Facebook account you can easily publish your news "
-"posts on your Facebook timeline."
+"posts on your Facebook timeline. You can also connect your projects/groups "
+"to a Facebook Group or Fan-Site to enable members to publish their news "
+"posts there, too."
 msgstr ""
 "Du kannst dich mit Facebook verbinden um in Zukunft ganz einfach deine Posts "
-"auf Facebook zu veröffentlichen."
+"auf Facebook zu veröffentlichen. Du kannst auch deine Projekte/Gruppen mit "
+"einer Facebook Gruppe oder Fan-Seite verbinden, um Mitglieder ihre "
+"Neuigkeiten dort gleich mit-veröffentlichen zu lassen!"
 
 #: .\templates\cosinnus\utils\facebook_integration.html:46
 msgctxt "Facebook connect explanation box"
@@ -3172,6 +3182,20 @@ msgstr ""
 "Facebook-Konto auf der verbundenen Facebook Gruppe/Fan-Seite dieses Projekts/"
 "Gruppe gepostet."
 
+#: .\templates\cosinnus\utils\facebook_integration.html:124
+msgid ""
+"Connect a Facebook Group or Fan-Page to enable members to publish their news "
+"posts there, too!"
+msgstr ""
+"Verbinde eine Facebook Gruppe oder Fan-Seite um Mitglieder ihre Neuigkeiten "
+"dort gleich mit-veröffentlichen zu lassen!"
+
+#: .\templates\cosinnus\utils\facebook_integration.html:125
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:27
+msgctxt "a link to click on"
+msgid "You can do this here"
+msgstr "Das kannst du hier tun"
+
 #: .\templates\cosinnus\utils\facebook_integration_group_form.html:7
 #, python-format
 msgid ""
@@ -3217,11 +3241,6 @@ msgid ""
 msgstr ""
 "Du musst dein Benutzerkonto mit Facebook verbinden bevor du diese Gruppe/"
 "Projekt verbinden kannst!"
-
-#: .\templates\cosinnus\utils\facebook_integration_group_form.html:27
-msgctxt "a link to click on"
-msgid "You can do this here"
-msgstr "Das kannst du hier tun"
 
 #: .\templates\cosinnus\utils\facebook_integration_group_form.html:32
 msgid "Facebook Fan-Page or Group to link to"
