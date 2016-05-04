@@ -824,6 +824,11 @@ class CosinnusBaseGroup(models.Model):
                     raise
         return ''
     
+    def get_facebook_avatar_url(self):
+        if self.facebook_group_id:
+            return 'https://graph.facebook.com/%s/picture?type=square' % self.facebook_group_id
+        return ''
+    
     def get_locations(self):
         """ Returns a list of this group locations, similar to calling ``group.locations.all()``, but 
             attempts to fetch the locations from cache """

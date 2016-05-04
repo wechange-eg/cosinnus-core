@@ -6,10 +6,11 @@
         <p>
         	{% blocktrans with site_name=COSINNUS_CURRENT_PORTAL.site.name %}You can connect your projects and groups to a Facebook Group or Fan-Page. Once connected, their members can choose to share the news posts they write on {{ site_name }} to the Facebook Group or Fan-Page. (They need to connect their accounts to Facebook, as well!){% endblocktrans%}
         </p>
+        <p>{% trans "Please be aware that users can only post to your Group/Fan-Page if they would also be permitted post in it on Facebook!" %}<p/>
         <p>	
         	<ul>
 	        	<li>
-	        		{% trans "You can find the ID of your Facebook Group on the Page Info in the About tab of the Group on Facebook." %}
+	        		{% trans "You can find the ID of your Facebook Group on the Info-page in the About tab of the Group on Facebook." %}
 	        	</li>
 	        	<li>
 	        		{% trans "The unique name of your Fan-Page is the name of the Fan-Page in the URL on Facebook (example: https://www.facebook.com/myfanpage/)" %}
@@ -22,7 +23,7 @@
 		<div class="alert alert-warning alert-dismissable">
             <i class="fa fa-exclamation fa-3x"></i>
 	        <p>
-	        	{% trans "You need to connect your user account to Facebook before you can link this group!" %}
+	        	{% trans "You need to connect your user account to Facebook before you can link this group/project!" %}
 	        	<a href="{% group_url 'cosinnus:note:add' group=group %}" target="_blank"><b>{% trans "You can do this here" context "a link to click on"%} <span class="fa fa-external-link"></span></b></a>
 	        </p>
 	    </div>
