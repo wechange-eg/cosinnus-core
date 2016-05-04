@@ -341,14 +341,17 @@ class SimpleTwoPage(BaseSimplePage):
     
     
 class CreateProjectButtonBlock(StructBlock):
+    
+    class Meta:
+        label = _('Create-Project or Group Button')
+        icon = 'group'
+        template = 'cosinnus/wagtail/widgets/create_project_button.html'
+        
     type = blocks.ChoiceBlock(choices=[
         ('project', 'Project'),
         ('group', 'Group'),
     ], required=True, label='Type', default='project')
 
-    class Meta:
-        icon = 'group'
-        template = 'cosinnus/wagtail/widgets/create_project_button.html'
 
     def get_context(self, value):
         context = super(CreateProjectButtonBlock, self).get_context(value)

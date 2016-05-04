@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-04 15:26+0200\n"
+"POT-Creation-Date: 2016-05-04 17:38+0200\n"
 "PO-Revision-Date: 2015-11-14 17:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -815,8 +815,8 @@ msgid "Path"
 msgstr "Путь"
 
 #: .\models\wagtail_models.py:89 .\models\wagtail_models.py:201
-#: .\models\wagtail_models.py:287 .\models\wagtail_models.py:433
-#: .\models\wagtail_models.py:520
+#: .\models\wagtail_models.py:287 .\models\wagtail_models.py:436
+#: .\models\wagtail_models.py:523
 #, fuzzy
 #| msgid "Contact"
 msgid "Content"
@@ -840,39 +840,39 @@ msgid ""
 "dashboard pages!)"
 msgstr ""
 
-#: .\models\wagtail_models.py:142 .\models\wagtail_models.py:374
+#: .\models\wagtail_models.py:142 .\models\wagtail_models.py:377
 #, fuzzy
 #| msgid "Register now!"
 msgid "Show Register Button"
 msgstr "Зарегистрируйтесь сейчас!"
 
-#: .\models\wagtail_models.py:143 .\models\wagtail_models.py:375
+#: .\models\wagtail_models.py:143 .\models\wagtail_models.py:378
 msgid "Redirect Logged in Users"
 msgstr ""
 
-#: .\models\wagtail_models.py:144 .\models\wagtail_models.py:376
+#: .\models\wagtail_models.py:144 .\models\wagtail_models.py:379
 msgid ""
 "If active, this page will only be visible to non-logged-in users. All others "
 "will be redirected to the activities page."
 msgstr ""
 
-#: .\models\wagtail_models.py:148 .\models\wagtail_models.py:380
+#: .\models\wagtail_models.py:148 .\models\wagtail_models.py:383
 msgid "Left banner (top)"
 msgstr ""
 
-#: .\models\wagtail_models.py:149 .\models\wagtail_models.py:381
+#: .\models\wagtail_models.py:149 .\models\wagtail_models.py:384
 msgid "Right banner (top)"
 msgstr ""
 
-#: .\models\wagtail_models.py:151 .\models\wagtail_models.py:383
+#: .\models\wagtail_models.py:151 .\models\wagtail_models.py:386
 msgid "Header"
 msgstr ""
 
-#: .\models\wagtail_models.py:153 .\models\wagtail_models.py:385
+#: .\models\wagtail_models.py:153 .\models\wagtail_models.py:388
 msgid "Left footer"
 msgstr ""
 
-#: .\models\wagtail_models.py:154 .\models\wagtail_models.py:386
+#: .\models\wagtail_models.py:154 .\models\wagtail_models.py:389
 #, fuzzy
 #| msgid "Edit folder"
 msgid "Right footer"
@@ -887,12 +887,12 @@ msgid "2-Column Dashboard Page"
 msgstr ""
 
 #: .\models\wagtail_models.py:226 .\models\wagtail_models.py:254
-#: .\models\wagtail_models.py:458 .\models\wagtail_models.py:486
+#: .\models\wagtail_models.py:461 .\models\wagtail_models.py:489
 msgid "Content (left column)"
 msgstr ""
 
 #: .\models\wagtail_models.py:227 .\models\wagtail_models.py:256
-#: .\models\wagtail_models.py:459 .\models\wagtail_models.py:488
+#: .\models\wagtail_models.py:462 .\models\wagtail_models.py:491
 msgid "Content (right column)"
 msgstr ""
 
@@ -900,7 +900,7 @@ msgstr ""
 msgid "3-Column Dashboard Page"
 msgstr ""
 
-#: .\models\wagtail_models.py:255 .\models\wagtail_models.py:487
+#: .\models\wagtail_models.py:255 .\models\wagtail_models.py:490
 msgid "Content (center column)"
 msgstr ""
 
@@ -912,33 +912,39 @@ msgstr ""
 msgid "Simple Page with Left Navigation"
 msgstr ""
 
-#: .\models\wagtail_models.py:319 .\models\wagtail_models.py:552
+#: .\models\wagtail_models.py:319 .\models\wagtail_models.py:555
 msgid "Left Sidebar"
 msgstr ""
 
-#: .\models\wagtail_models.py:431
+#: .\models\wagtail_models.py:346
+#, fuzzy
+#| msgid "Convert selected Projects to Groups"
+msgid "Create-Project or Group Button"
+msgstr "Преобразовать выделенные проекты в группы"
+
+#: .\models\wagtail_models.py:434
 #, fuzzy
 #| msgid "Regular Dashboard page (1 Column)"
 msgid "1-Column Dashboard Page (Modular)"
 msgstr "Стандартная страница панели управления (1 колонка)"
 
-#: .\models\wagtail_models.py:456
+#: .\models\wagtail_models.py:459
 #, fuzzy
 #| msgid "Regular Dashboard page (1 Column)"
 msgid "2-Column Dashboard Page (Modular)"
 msgstr "Стандартная страница панели управления (1 колонка)"
 
-#: .\models\wagtail_models.py:484
+#: .\models\wagtail_models.py:487
 #, fuzzy
 #| msgid "Regular Dashboard page (1 Column)"
 msgid "3-Column Dashboard Page (Modular)"
 msgstr "Стандартная страница панели управления (1 колонка)"
 
-#: .\models\wagtail_models.py:541
+#: .\models\wagtail_models.py:544
 msgid "Simple One-Column Page (Modular)"
 msgstr ""
 
-#: .\models\wagtail_models.py:549
+#: .\models\wagtail_models.py:552
 msgid "Simple Page with Left Navigation (Modular)"
 msgstr ""
 
