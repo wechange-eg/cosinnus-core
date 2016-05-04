@@ -628,8 +628,12 @@ class CosinnusBaseGroup(models.Model):
         symmetrical=False,
         blank=True, null=True, related_name='+')
     
-    facebook_group_id = models.CharField(_('Facebook Group/Page ID'), max_length=200, 
-        blank=True, null=True, validators=[MaxLengthValidator(200)])
+    """ TODO: FIXME: Remove this check once production runs like production again, with the
+            CosinnusProject versus DRJACosinnusProject inheritance!
+            This *WILL* mess up migrations otherwise! """
+    if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED:
+        facebook_group_id = models.CharField(_('Facebook Group/Page ID'), max_length=200, 
+            blank=True, null=True, validators=[MaxLengthValidator(200)])
     
     
     objects = CosinnusGroupManager()
