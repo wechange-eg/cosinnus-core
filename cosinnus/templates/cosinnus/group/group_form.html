@@ -386,52 +386,12 @@
 	                    </div>
 					</div>
 					
+					{% if SETTINGS.COSINNUS_FACEBOOK_INTEGRATION_ENABLED %}
+						<div class="tab-pane {% if request.GET.tab == 'facebook' %}active{% endif %}" id="facebook" >
+							{% include 'cosinnus/utils/facebook_integration_group_form.html' %}							
+						</div>
+					{% endif %}
 					
-					<div class="tab-pane {% if SETTINGS.COSINNUS_FACEBOOK_INTEGRATION_ENABLED and request.GET.tab == 'facebook' %}active{% endif %}" id="facebook" >
-						
-						{% with is_fb_connected=request.user.cosinnus_profile.get_facebook_user_id %}
-							<div class="alert alert-info alert-dismissable">
-					            <i class="fa fa-facebook fa-3x"></i>
-						        <p>
-						        	{% blocktrans with site_name=COSINNUS_CURRENT_PORTAL.site.name %}You can connect your projects and groups to a Facebook Group or Fan-Page. Once connected, its members can choose to share the news posts they write on {{ site_name }} to the Group or Fan-Page. (They need to connect their accounts to Facebook, as well!){% endblocktrans%}
-						        </p>
-						        <p>
-						        	{% trans "You can find the ID of your Facebook Group or Fan-Page on the Page Info in the About tab of the Group/Fan-Page on Facebook." %}
-						        </p>
-						    </div>
-							
-							{% if not is_fb_connected %}
-								<div class="alert alert-warning alert-dismissable">
-						            <i class="fa fa-exclamation fa-3x"></i>
-							        <p>
-							        	{% trans "You need to connect your user account to Facebook before you can link this group!" %}
-							        </p>
-							    </div>
-							{% endif %} 
-						
-	                        <label>{% trans "Facebook Fan-Page or Group to link to" %}</label>
-	                        {{ form.forms.obj.facebook_group_id.errors }}
-	                        <div type="button" class="btn btn-default w100 regular-space">
-	                            <ul class="media-list">
-	                                <li class="media">
-	                                    <a class="pull-left" href="#">
-	                                        <i class="fa fa-facebook"></i>
-	                                    </a>
-	                                    <div class="media-body media-body-form-control">
-	                                        {% captureas placeholder %}{% trans "Group Id or Fan-Page Id (example: 1172392116092353)" %}{% endcaptureas %}
-	                                        {% if is_fb_connected %}
-		                                        {% render_field form.forms.obj.facebook_group_id class+="form-control" placeholder=placeholder %}
-	                                        {% else %}
-	                                        	{% render_field form.forms.obj.facebook_group_id class+="form-control" disabled="true" placeholder=placeholder %}
-	                                        {% endif %}
-	                                    </div>
-	                                </li>
-	                            </ul>
-	                        </div>
-						
-						{% endwith %}
-					</div>
-				
 				{% endblock group_form_tab_panes %}
 				
 			</div>
