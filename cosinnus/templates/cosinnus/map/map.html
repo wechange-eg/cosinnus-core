@@ -1,0 +1,15 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n thumbnail cosinnus_tags static %}
+
+{% block page_title %}{% trans "Map" %}{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% comment %} Load script files here {% endcomment %}
+{% endblock extrahead %}
+
+{% block main_page %}
+    <div class="row">
+    	Hi ho!
+    </div>
+{% endblock main_page %}
