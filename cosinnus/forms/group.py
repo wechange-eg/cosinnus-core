@@ -95,7 +95,7 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, forms.ModelForm):
             for related_group in self.cleaned_data['related_groups']:
                 #self.instance.related_groups.add(related_group)
                 # add() is disabled for a self-referential models, so we create an instance of the through-model
-                RelatedGroups.objects.create(to_group=self.instance, from_group=related_group) 
+                RelatedGroups.objects.get_or_create(to_group=self.instance, from_group=related_group) 
                 
         self.save_m2m = save_m2m
         if commit:
