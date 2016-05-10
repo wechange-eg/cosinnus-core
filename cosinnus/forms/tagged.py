@@ -79,19 +79,18 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
         if self.group:
             data_url = group_aware_reverse('cosinnus:select2:group-members',
                                  kwargs={'group': self.group})
-            members = get_user_model().objects.filter(id__in=self.group.members)
         else:
             data_url = reverse('cosinnus:select2:all-members')
-            members = get_user_model().objects.all()
         
         # override the default persons field with select2
         self.fields['persons'] = HeavySelect2MultipleChoiceField(
                 label=_("Persons"), help_text='', required=False,
                 data_url=data_url)
-                
-        self.fields['persons'].choices = get_user_choices(members)
+          
         if self.instance.pk:
+            # choices and initial must be set so pre-existing form fields can be prepopulated
             self.fields['persons'].initial = get_user_choices(self.instance.persons.all())
+            self.fields['persons'].choices = self.fields['persons'].initial
 
         if self.group and self.group.media_tag_id:
             group_media_tag = self.group.media_tag
