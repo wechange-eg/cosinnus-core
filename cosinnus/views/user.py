@@ -59,7 +59,8 @@ class UserListView(EndlessPaginationMixin, ListView):
         # we also exclude users who have never logged in
         all_users = super(UserListView, self).get_queryset().exclude(is_active=False).\
                         exclude(last_login__exact=None).\
-                        filter(id__in=CosinnusPortal.get_current().members)
+                        filter(id__in=CosinnusPortal.get_current().members).\
+                        filter(cosinnus_profile__settings__contains='tos_accepted')
         
         if self.request.user.is_authenticated():
             visibility_level = BaseTagObject.VISIBILITY_GROUP

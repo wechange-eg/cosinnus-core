@@ -110,8 +110,6 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
         target_user_profile = self.get_object(self.get_queryset())
         if not target_user_profile:
             return redirect_to_not_logged_in(request)
-        if not target_user_profile.settings.get('tos_accepted', None):
-            raise Http404
         target_user_visibility = target_user_profile.media_tag.visibility
         user = request.user
         # VISIBILITY_ALL users can always be seen, so skip the check
@@ -128,7 +126,9 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
     def get_queryset(self):
         if not getattr(self, 'qs', None):
             qs = super(UserProfileDetailView, self).get_queryset()
-            qs = qs.exclude(user__is_active=False).exclude(user__last_login__exact=None)
+            qs = qs.exclude(user__is_active=False).\
+                    exclude(user__last_login__exact=None).\
+                    filter(settings__contains='tos_accepted')
             self.qs = qs
         return self.qs
     

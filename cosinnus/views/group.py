@@ -237,6 +237,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         # we also exclude users who have never logged in
         _q = get_user_model().objects.exclude(is_active=False) \
                              .exclude(last_login__exact=None) \
+                             .filter(cosinnus_profile__settings__contains='tos_accepted') \
                              .order_by('first_name', 'last_name') \
                              .select_related('cosinnus_profile')
         admins = _q.filter(id__in=admin_ids)
