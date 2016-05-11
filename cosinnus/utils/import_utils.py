@@ -219,6 +219,7 @@ class GroupCSVImporter(Thread):
         # do not just let the thread die on an exception with no notice
         try:
             self.set_is_running(True)
+            logger.info('Import Utils: Import has started.')
             self._do_import()
         except Exception, e:
             if getattr(settings, 'DEBUG_LOCAL', False):
@@ -227,6 +228,7 @@ class GroupCSVImporter(Thread):
             self.import_failed(data={'msg': 'An unexpected error in outer import happened! Exception was: %s' % force_text(e)})
         finally:
             self.set_is_running(False)
+            logger.info('Import Utils: Import has stopped.')
     
     def _do_import(self):
         """ Never call this group from outside of this or the extending class! """
