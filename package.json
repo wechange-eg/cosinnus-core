@@ -1,0 +1,26 @@
+{
+  "name": "cosinnus-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.sinnwerkstatt.com:cosinnus/cosinnus-core.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "exports-loader": "^0.6.3",
+    "nunjucks": "^2.4.2",
+    "nunjucks-loader": "^2.4.2",
+    "script-loader": "^0.7.0",
+    "webpack": "^1.13.0"
+  }
+}
