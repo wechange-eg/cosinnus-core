@@ -40,7 +40,7 @@ USER_MODEL = get_user_model()
 class MapView(ListView):
 
     model = USER_MODEL
-    template_name = 'cosinnus/map/map.html'
-    
+    template_name = 'cosinnus/map/map-page.html'
+
 
 map_view = MapView.as_view()

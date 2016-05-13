@@ -1,16 +1,16 @@
-var webpack = require('webpack')
+var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-    entry: './cosinnus/static/js/index.js',
+    entry: path.join(__dirname, 'cosinnus/client/index.js'),
     output: {
-        path: './cosinnus/static/js/',
-        filename: 'app.js'
+        path: path.join(__dirname, 'cosinnus/static/js/'),
+        filename: 'client.js'
     },
     module: {
         loaders: [
             {
-                test: /\.njk\.html$/,
+                test: /\.njk$/,
                 loader: 'nunjucks-loader'
             }
         ],
@@ -18,12 +18,12 @@ module.exports = {
     resolve: {
         root: [
             path.join(__dirname, 'cosinnus/templates/cosinnus'),
-            path.join(__dirname, 'cosinnus/static/js/app')
+            path.join(__dirname, 'cosinnus/client')
         ],
         extensions: [
             '.js',
-            '.njk.html',
+            '.njk',
             ''
         ]
     }
-}
+};

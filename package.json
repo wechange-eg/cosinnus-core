@@ -16,7 +16,7 @@
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "exports-loader": "^0.6.3",
     "nunjucks": "^2.4.2",
     "nunjucks-loader": "^2.4.2",

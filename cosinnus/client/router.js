@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 var MapView = require('views/map-view');
 

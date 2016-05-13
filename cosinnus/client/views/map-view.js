@@ -1,6 +1,6 @@
 'use strict';
 
-var template = require('map/map');
+var template = require('map/map-full');
 
 module.exports = Backbone.View.extend({
     render: function () {

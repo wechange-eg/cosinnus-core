@@ -1,4 +1,4 @@
-// Main JavaScript file.  Will be built to app.js by webpack.
+// Main JavaScript file — main entry for webpack
 
 'use strict';
 
@@ -7,8 +7,8 @@ var Router = require('router');
 // Register routes.
 window.router = new Router();
 
+// Start routing after the DOM is loaded.
 $(function () {
-    // Start routing after the DOM is loaded.
     Backbone.history.start({
         pushState: true
     });
