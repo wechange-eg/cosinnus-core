@@ -9,7 +9,7 @@ module.exports = Backbone.Router.extend({
 
     map: function () {
         var view = new MapView({
-            el: '#map-full'
+            el: '#map-fullscreen'
         });
         view.render();
     }
