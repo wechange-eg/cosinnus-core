@@ -354,6 +354,10 @@ COSINNUS_BASE_PAGE_TITLE_TRANS = 'Netzwerk Wachstumswende'
 COSINNUS_ETHERPAD_BASE_URL = 'https://pad.sinnwerkstatt.com/api'
 COSINNUS_ETHERPAD_API_KEY = '11456b253e74523f62059a5e341dd877fa4c01dbade5ba5309e1df7dfbc45e14'
 
+# Ethercalc config
+# TODO: set up https server!
+COSINNUS_ETHERCALC_BASE_URL = 'http://calc.wechange.de'
+
 # unsure what this is or where it is being used...?
 GEOPOSITION_MAP_WIDGET_HEIGHT = 180
 
