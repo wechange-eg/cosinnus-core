@@ -251,10 +251,38 @@ class GroupMembershipInline(admin.TabularInline):
     model = CosinnusGroupMembership
     extra = 0
 
+
+class UserHasLoggedInFilter(admin.SimpleListFilter):
+    """ Will show users that have ever logged in (or not) """
+    
+    title = _('User Logged In')
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'userloggedin'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('yes', _('Logged in before')),
+            ('no', _('Never logged in')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'yes':
+            return queryset.filter(cosinnus_profile__settings__contains='tos_accepted')
+        if self.value() == 'no':
+            return queryset.exclude(cosinnus_profile__settings__contains='tos_accepted')
+
+
 class UserAdmin(DjangoUserAdmin):
     inlines = (UserProfileInline, PortalMembershipInline)#, GroupMembershipInline)
     actions = ['deactivate_users']
-    list_display = ('email', 'is_active', 'username', 'first_name', 'last_name', 'is_staff', )
+    list_display = ('email', 'is_active', 'has_logged_in', 'username', 'first_name', 'last_name', 'is_staff', )
+    list_filter = list(DjangoUserAdmin.list_filter) + [UserHasLoggedInFilter,]
+    
+    def has_logged_in(self, obj):
+        return bool(obj.cosinnus_profile.settings.get('tos_accepted', False))
+    has_logged_in.short_description = _('Has Logged In')
+    has_logged_in.boolean = True
     
     def deactivate_users(self, request, queryset):
         count = 0
