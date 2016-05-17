@@ -62,7 +62,10 @@ class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
             folders = current_folder_node['containers']
         else:
             folders = root_folder_node['containers']
-        # sort folders so that special folders are always on top
+        
+        # sort folders alphabetically
+        folders.sort(cmp=locale.strcoll, key=lambda container: (container['container_object'].title))
+        # and then sort folders so that special folders are always on top
         folders.sort(cmp=locale.strcoll, key=lambda container: (container['container_object'].special_type or 'zzzzz'))
         
         objects = current_folder_node['objects']
