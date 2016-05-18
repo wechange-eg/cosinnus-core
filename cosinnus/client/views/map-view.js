@@ -6,6 +6,7 @@ var template = require('map/map');
 module.exports = View.extend({
     initialize: function () {
         this.template = template;
+        this.markers = [];
     },
 
     getTemplateData: function () {
@@ -30,13 +31,21 @@ module.exports = View.extend({
             maxZoom: 15,
             minZoom:3
         }).addTo(this.map);
+
+        this.map.on('zoomstart', this.handleZoomStart, this);
+        this.map.on('zoomend', this.handleZoomEnd, this);
+        this.map.on('dragend', this.handleDragEnd, this);
     },
 
     search: function () {
         var self = this;
 
-        // Generate some mock results and create markers for them.
+        // Remove previous markers from map.
+        _(this.markers).each(function (marker) {
+            self.map.removeLayer(marker);
+        });
 
+        // Generate some mock results and create markers for them.
         var resultTypes = [
             {
                 name: 'people',
@@ -57,11 +66,11 @@ module.exports = View.extend({
         ];
 
         _(resultTypes).each(function (type) {
-            _(6).times(function () {
+            _(15).times(function () {
                 var bounds = self.map.getBounds();
                 var markerLat = bounds.getSouth() + Math.random() * (bounds.getNorth() - bounds.getSouth());
                 var markerLon = bounds.getWest() + Math.random() * (bounds.getEast() - bounds.getWest());
-                var marker = L
+                self.markers.push(L
                     .marker([markerLat, markerLon], {
                         icon: L.icon({
                             iconUrl: '/static/js/vendor/images/marker-icon-2x-' + type.markerColour + '.png',
@@ -71,8 +80,27 @@ module.exports = View.extend({
                             shadowSize: [41, 41]
                         })
                     })
-                    .addTo(self.map);
+                    .addTo(self.map));
             });
         });
+    },
+
+    // Event Handlers
+    // --------------
+
+    handleZoomStart: function () {
+        this.previousZoomLevel = this.map._zoom;
+    },
+
+    handleZoomEnd: function () {
+        // Perform a new search only when zooming out.
+        if (this.map._zoom < this.previousZoomLevel) {
+            this.search();
+        }
+    },
+
+    handleDragEnd: function (event) {
+        this.search();
     }
+
 });
