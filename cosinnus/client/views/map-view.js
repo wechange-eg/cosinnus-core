@@ -1,12 +1,18 @@
 'use strict';
 
 var View = require('views/base/view');
+var MapControlsView = require('views/map-controls-view');
 var template = require('map/map');
 
 module.exports = View.extend({
     initialize: function () {
         this.template = template;
         this.markers = [];
+        this.controlsView = new MapControlsView({
+            el: $('#map-controls'),
+            model: this.model
+        });
+        this.model.on('change', this.handleControlsChange, this);
     },
 
     getTemplateData: function () {
@@ -17,90 +23,79 @@ module.exports = View.extend({
 
     afterRender: function () {
         this.renderMap();
-        this.search();
+        this.updateMarkers();
     },
 
     renderMap: function () {
         console.log('MapView#renderMap');
         var startPos = [52.52,13.405];
 
-        this.map = L.map('map-fullscreen-surface').setView(startPos, 13);
+        this.leaflet = L.map('map-fullscreen-surface').setView(startPos, 13);
 
         L.tileLayer('https://otile1-s.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
             attribution: 'Open Streetmap',
             maxZoom: 15,
             minZoom:3
-        }).addTo(this.map);
+        }).addTo(this.leaflet);
 
-        this.map.on('zoomstart', this.handleZoomStart, this);
-        this.map.on('zoomend', this.handleZoomEnd, this);
-        this.map.on('dragend', this.handleDragEnd, this);
+        this.leaflet.on('zoomend', this.handleViewportChange, this);
+        this.leaflet.on('dragend', this.handleViewportChange, this);
+        this.updateBounds();
     },
 
-    search: function () {
-        var self = this;
+    updateMarkers: function () {
+        var self = this,
+            controls = this.controlsView.model;
 
         // Remove previous markers from map.
         _(this.markers).each(function (marker) {
-            self.map.removeLayer(marker);
+            self.leaflet.removeLayer(marker);
         });
 
-        // Generate some mock results and create markers for them.
-        var resultTypes = [
-            {
-                name: 'people',
-                markerColour: 'blue'
-            },
-            {
-                name: 'events',
-                markerColour: 'red'
-            },
-            {
-                name: 'projects',
-                markerColour: 'green'
-            },
-            {
-                name: 'groups',
-                markerColour: 'orange'
-            }
-        ];
+        var resultColours = {
+            people: 'blue',
+            events: 'red',
+            projects: 'green',
+            groups: 'orange'
+        };
 
-        _(resultTypes).each(function (type) {
-            _(15).times(function () {
-                var bounds = self.map.getBounds();
-                var markerLat = bounds.getSouth() + Math.random() * (bounds.getNorth() - bounds.getSouth());
-                var markerLon = bounds.getWest() + Math.random() * (bounds.getEast() - bounds.getWest());
+        // Do search and add markers for the results.
+        this.model.search(function (results) {
+            _(results).each(function (result) {
                 self.markers.push(L
-                    .marker([markerLat, markerLon], {
+                    .marker([result.lat, result.lon], {
                         icon: L.icon({
-                            iconUrl: '/static/js/vendor/images/marker-icon-2x-' + type.markerColour + '.png',
+                            iconUrl: '/static/js/vendor/images/marker-icon-2x-' + resultColours[result.type] + '.png',
                             iconSize: [25, 41],
                             iconAnchor: [12, 41],
                             popupAnchor: [1, -34],
                             shadowSize: [41, 41]
                         })
                     })
-                    .addTo(self.map));
+                    .addTo(self.leaflet));
             });
+        });
+    },
+
+    updateBounds: function () {
+        var bounds = this.leaflet.getBounds();
+        this.model.set({
+            south: bounds.getSouth(),
+            west: bounds.getWest(),
+            north: bounds.getNorth(),
+            east: bounds.getEast()
         });
     },
 
     // Event Handlers
     // --------------
 
-    handleZoomStart: function () {
-        this.previousZoomLevel = this.map._zoom;
+    handleViewportChange: function () {
+        this.updateBounds();
+        this.updateMarkers();
     },
 
-    handleZoomEnd: function () {
-        // Perform a new search only when zooming out.
-        if (this.map._zoom < this.previousZoomLevel) {
-            this.search();
-        }
-    },
-
-    handleDragEnd: function (event) {
-        this.search();
+    handleControlsChange: function (event) {
+        this.updateMarkers();
     }
-
 });

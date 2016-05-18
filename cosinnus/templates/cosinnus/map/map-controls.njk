@@ -1,0 +1,31 @@
+<div class="row">
+    <input type="text" placeholder="Suche" />
+</div>
+
+<div class="row">
+    <input type="checkbox" class="result-filter" name="people" id="people"
+        {% if people %} checked="true" {% endif %} />
+    <label for="people">Menschen</label>
+</div>
+
+<div class="row">
+    <input type="checkbox" class="result-filter" name="events" id="events"
+        {% if events %} checked="true" {% endif %} />
+    <label for="events">Veranstaltungen</label>
+</div>
+
+<div class="row">
+    <input type="checkbox" class="result-filter" name="projects" id="projects"
+        {% if projects %} checked="true" {% endif %} />
+    <label for="projects">Projekte</label>
+</div>
+
+<div class="row">
+    <input type="checkbox" class="result-filter" name="groups" id="groups"
+        {% if groups %} checked="true" {% endif %} />
+    <label for="groups">Gruppen</label>
+</div>
+
+<div class="row">
+    <a href="#" class="reset-filters">Filter zurücksetzen</a>
+</div>
