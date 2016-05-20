@@ -5,6 +5,36 @@ var MapControlsView = require('views/map-controls-view');
 var template = require('map/map');
 
 module.exports = View.extend({
+    layers: {
+        street: {
+            url: 'https://otile1-s.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
+            options: {
+                attribution: 'Open Streetmap'
+            }
+        },
+        satellite: {
+            url: 'http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
+            options: {
+                attribution: 'Google Maps',
+                subdomains:['mt0','mt1','mt2','mt3']
+            }
+        },
+        terrain: {
+            url: 'http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}',
+            options: {
+                attribution: 'Google Maps',
+                subdomains:['mt0','mt1','mt2','mt3']
+            }
+        }
+    },
+
+    resultColours: {
+        people: 'blue',
+        events: 'red',
+        projects: 'green',
+        groups: 'orange'
+    },
+
     initialize: function () {
         this.template = template;
         this.markers = [];
@@ -12,6 +42,7 @@ module.exports = View.extend({
             el: $('#map-controls'),
             model: this.model
         });
+        this.controlsView.on('change:layer', this.handleSwitchLayer, this);
         this.model.on('change', this.handleControlsChange, this);
     },
 
@@ -32,15 +63,21 @@ module.exports = View.extend({
 
         this.leaflet = L.map('map-fullscreen-surface').setView(startPos, 13);
 
-        L.tileLayer('https://otile1-s.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
-            attribution: 'Open Streetmap',
-            maxZoom: 15,
-            minZoom:3
-        }).addTo(this.leaflet);
+        this.setLayer(this.model.get('layer'));
 
         this.leaflet.on('zoomend', this.handleViewportChange, this);
         this.leaflet.on('dragend', this.handleViewportChange, this);
         this.updateBounds();
+    },
+
+    setLayer: function (layer) {
+        this.currentLayer && this.leaflet.removeLayer(this.currentLayer);
+        var options = _(this.layers[layer].options).extend({
+            maxZoom: 15,
+            minZoom:3
+        });
+        this.currentLayer = L.tileLayer(this.layers[layer].url, options)
+            .addTo(this.leaflet);
     },
 
     updateMarkers: function () {
@@ -52,20 +89,14 @@ module.exports = View.extend({
             self.leaflet.removeLayer(marker);
         });
 
-        var resultColours = {
-            people: 'blue',
-            events: 'red',
-            projects: 'green',
-            groups: 'orange'
-        };
-
         // Do search and add markers for the results.
         this.model.search(function (results) {
             _(results).each(function (result) {
                 self.markers.push(L
                     .marker([result.lat, result.lon], {
                         icon: L.icon({
-                            iconUrl: '/static/js/vendor/images/marker-icon-2x-' + resultColours[result.type] + '.png',
+                            iconUrl: '/static/js/vendor/images/marker-icon-2x-' +
+                                self.resultColours[result.type] + '.png',
                             iconSize: [25, 41],
                             iconAnchor: [12, 41],
                             popupAnchor: [1, -34],
@@ -95,7 +126,15 @@ module.exports = View.extend({
         this.updateMarkers();
     },
 
+    // Update the result markers if search controls where changed
     handleControlsChange: function (event) {
-        this.updateMarkers();
+        if (!event.changed.layer) {
+            this.updateMarkers();
+        }
+    },
+
+    // Change between layers.
+    handleSwitchLayer: function (layer) {
+        this.setLayer(layer);
     }
 });

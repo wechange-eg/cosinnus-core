@@ -42,12 +42,15 @@ class MapView(ListView):
     model = USER_MODEL
 
     def get_context_data(self, **kwargs):
-        # Instantiate filter state.
+        # Instantiate controls state.
         return {
-            'people': True,
-            'events': True,
-            'projects': True,
-            'groups': True,
+            'filters': {
+                'people': True,
+                'events': True,
+                'projects': True,
+                'groups': True
+            },
+            'layer': 'street'
         }
 
     template_name = 'cosinnus/map/map-page.html'

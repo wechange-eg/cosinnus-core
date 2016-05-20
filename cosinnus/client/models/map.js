@@ -1,19 +1,31 @@
 'use strict';
 
 module.exports = Backbone.Model.extend({
+    default: {
+        filters: {
+            people: true,
+            events: true,
+            projects: true,
+            groups: true
+        },
+        layer: 'street'
+    },
+
     initialize: function () {
-        this.set(this.defaultFilters);
+        this.set('filters', _(this.default.filters).clone());
+        this.set('layer', this.default.layer);
     },
 
     search: function (callback) {
         var self = this;
 
-        // Generate some mock data.
-
-        var activeTypes = _(_(this.defaultFilters).keys()).select(function (filter) {
-            return self.get(filter);
+        // Retrieve active filters.
+        var activeTypes = _(_(this.default.filters).keys()).select(function (filter) {
+            return self.get('filters')[filter];
         });
 
+        // Generate some random markers for each of the active filter types
+        // in the current map viewport.
         var results = [];
         _(activeTypes).each(function (type) {
             _(15).times(function () {
@@ -31,14 +43,15 @@ module.exports = Backbone.Model.extend({
         callback(results);
     },
 
-    defaultFilters: {
-        people: true,
-        events: true,
-        projects: true,
-        groups: true
+    toggleFilter (resultType) {
+        var filters = this.get('filters');
+        filters[resultType] = !filters[resultType];
+        this.set('filters', filters);
+        this.trigger('change', { changed: { filters: filters }});
     },
 
     resetFilters: function () {
-        this.set(this.defaultFilters);
+        this.set('filters', _(this.default.filters).clone());
+        this.trigger('change', { changed: { filters: this.default.filters }});
     }
 });

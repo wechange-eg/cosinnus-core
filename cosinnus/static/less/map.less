@@ -9,5 +9,43 @@
 #map-controls {
     position: absolute;
     right: 20px;
-    top: 20px; 
+    top: 20px;
+    background-color: rgba(255,255,255,0.95);
+    padding: 15px;
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    a {
+        color: black;
+    }
+
+    .line {
+        margin-bottom: 3px;
+
+        &.link,
+        &.button {
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        .layer-button {
+            float: none;
+            margin-left: 0;
+            display: inline-block;
+            background-color: @app-main-color-light;
+            padding: 5px;
+            color: black;
+
+            &.active {
+                background-color: @app-main-color;
+                color: white;
+            }
+        }
+
+        .reset-filters {
+            color: #999;
+        }
+    }
 }
