@@ -6,7 +6,6 @@ var template = require('map/map-controls');
 module.exports = View.extend({
     initialize: function () {
         this.template = template;
-        this.searchDelay = 1000;
         View.prototype.initialize.call(this);
     },
 
@@ -50,12 +49,9 @@ module.exports = View.extend({
     },
 
     handleTyping: function (event) {
-        var self = this;
-        clearTimeout(self.wantsToSearch);
-        this.wantsToSearch = setTimeout(function () {
-            self.model.set({
-                q: $(event.currentTarget).val()
-            });
-        }, self.searchDelay);
+        this.model.set({
+            q: $(event.currentTarget).val()
+        });
+        this.model.wantsToSearch();
     }
 });

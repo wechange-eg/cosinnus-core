@@ -43,22 +43,16 @@ module.exports = View.extend({
             model: this.model
         });
         this.controlsView.on('change:layer', this.handleSwitchLayer, this);
-        this.model.on('change', this.handleControlsChange, this);
-    },
-
-    getTemplateData: function () {
-        return {
-            msg: 'messageable!!!!!'
-        };
+        this.model.on('change:results', this.updateMarkers, this);
+        View.prototype.initialize.call(this);
     },
 
     afterRender: function () {
         this.renderMap();
-        this.updateMarkers();
+        this.model.search();
     },
 
     renderMap: function () {
-        console.log('MapView#renderMap');
         var startPos = [52.52,13.405];
 
         this.leaflet = L.map('map-fullscreen-surface').setView(startPos, 13);
@@ -81,6 +75,7 @@ module.exports = View.extend({
     },
 
     updateMarkers: function () {
+        console.log('MapView#updateMarkers');
         var self = this,
             controls = this.controlsView.model;
 
@@ -89,22 +84,20 @@ module.exports = View.extend({
             self.leaflet.removeLayer(marker);
         });
 
-        // Do search and add markers for the results.
-        this.model.search(function (results) {
-            _(results).each(function (result) {
-                self.markers.push(L
-                    .marker([result.lat, result.lon], {
-                        icon: L.icon({
-                            iconUrl: '/static/js/vendor/images/marker-icon-2x-' +
-                                self.resultColours[result.type] + '.png',
-                            iconSize: [25, 41],
-                            iconAnchor: [12, 41],
-                            popupAnchor: [1, -34],
-                            shadowSize: [41, 41]
-                        })
+        // Add markers for the new results.
+        _(this.model.get('results')).each(function (result) {
+            self.markers.push(L
+                .marker([result.lat, result.lon], {
+                    icon: L.icon({
+                        iconUrl: '/static/js/vendor/images/marker-icon-2x-' +
+                            self.resultColours[result.type] + '.png',
+                        iconSize: [25, 41],
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34],
+                        shadowSize: [41, 41]
                     })
-                    .addTo(self.leaflet));
-            });
+                })
+                .addTo(self.leaflet));
         });
     },
 
@@ -123,14 +116,7 @@ module.exports = View.extend({
 
     handleViewportChange: function () {
         this.updateBounds();
-        this.updateMarkers();
-    },
-
-    // Update the result markers if search controls where changed
-    handleControlsChange: function (event) {
-        if (!event.changed.layer) {
-            this.updateMarkers();
-        }
+        this.model.wantsToSearch();
     },
 
     // Change between layers.

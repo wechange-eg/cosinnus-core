@@ -14,6 +14,7 @@ module.exports = Backbone.Model.extend({
     initialize: function () {
         this.set('filters', _(this.default.filters).clone());
         this.set('layer', this.default.layer);
+        this.searchDelay = 0;
     },
 
     search: function (callback) {
@@ -40,18 +41,27 @@ module.exports = Backbone.Model.extend({
             });
         });
 
-        callback(results);
+        self.set('results', results);
+        self.trigger('change:results');
     },
 
     toggleFilter (resultType) {
         var filters = this.get('filters');
         filters[resultType] = !filters[resultType];
         this.set('filters', filters);
-        this.trigger('change', { changed: { filters: filters }});
+        this.wantsToSearch();
     },
 
     resetFilters: function () {
         this.set('filters', _(this.default.filters).clone());
-        this.trigger('change', { changed: { filters: this.default.filters }});
+        this.wantsToSearch();
+    },
+
+    wantsToSearch: function () {
+        var self = this;
+        clearTimeout(this.searchTimeout);
+        self.searchTimeout = setTimeout(function () {
+            self.search();
+        }, self.searchDelay);
     }
 });
