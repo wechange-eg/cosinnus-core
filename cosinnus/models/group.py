@@ -42,6 +42,7 @@ from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from django.contrib.auth import get_user_model
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.user import filter_active_users
 
 logger = logging.getLogger('cosinnus')
 
@@ -749,9 +750,22 @@ class CosinnusBaseGroup(models.Model):
 
     @property
     def members(self):
+        """ Returns a list of user ids that are members of this group, no matter if active or not """
         if self._members is None:
             self._members = CosinnusGroupMembership.objects.get_members(self.pk)
         return self._members
+    
+    @property
+    def actual_members(self):
+        """ Returns a QS of users that are members of this group and actually active and visible on the site """
+        members_qs = get_user_model().objects.filter(id__in=self.members)
+        members_qs = filter_active_users(members_qs)
+        return members_qs
+    
+    @property
+    def member_count(self):
+        """ Returns a count of this group's active members (users that are active and have logged in) """
+        return self.actual_members.count()
 
     def is_member(self, user):
         """Checks whether the given user is a member of this group"""

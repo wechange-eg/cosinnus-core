@@ -51,6 +51,7 @@ from django.views.generic.base import View
 import six
 from django.conf import settings
 from django.core.paginator import Paginator
+from cosinnus.utils.user import filter_active_users
 
 
 class SamePortalGroupMixin(object):
@@ -235,11 +236,10 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         # we DON'T filter for current portal here, as pending join requests can come from
         # users in other portals
         # we also exclude users who have never logged in
-        _q = get_user_model().objects.exclude(is_active=False) \
-                             .exclude(last_login__exact=None) \
-                             .filter(cosinnus_profile__settings__contains='tos_accepted') \
-                             .order_by('first_name', 'last_name') \
-                             .select_related('cosinnus_profile')
+        _q = get_user_model().objects.all()
+        _q = filter_active_users(_q)
+        _q = _q.order_by('first_name', 'last_name').select_related('cosinnus_profile')
+        
         admins = _q.filter(id__in=admin_ids)
         members = _q.filter(id__in=member_ids)
         pendings = _q.filter(id__in=pending_ids)

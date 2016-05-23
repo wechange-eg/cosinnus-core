@@ -15,6 +15,7 @@ from cosinnus.utils.choices import get_user_choices
 from cosinnus.utils.permissions import check_ug_membership
 from cosinnus.views.mixins.select2 import RequireGroupMember, RequireLoggedIn
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.user import filter_active_users
 
 
 class GroupMembersView(RequireGroupMember, Select2View):
@@ -34,10 +35,7 @@ class GroupMembersView(RequireGroupMember, Select2View):
         q = Q(id__in=uids)
         q &= Q(first_name__icontains=term) | Q(last_name__icontains=term) | Q(username__icontains=term) | Q(email__icontains=term)
         
-        user_qs = User.objects.exclude(is_active=False).\
-                                exclude(last_login__exact=None).\
-                                filter(cosinnus_profile__settings__contains='tos_accepted').\
-                                filter(q)
+        user_qs = filter_active_users(User.objects.filter(q))
         
         count = user_qs.count()
         if count < start:
@@ -63,11 +61,7 @@ class AllMembersView(RequireLoggedIn, Select2View):
         User = get_user_model()
 
         q = Q(first_name__icontains=term) | Q(last_name__icontains=term) | Q(username__icontains=term) | Q(email__icontains=term)
-        user_qs = User.objects.exclude(is_active=False).\
-                                exclude(last_login__exact=None).\
-                                filter(cosinnus_profile__settings__contains='tos_accepted').\
-                                filter(id__in=CosinnusPortal.get_current().members).\
-                                filter(q)
+        user_qs = filter_active_users(User.objects.filter(id__in=CosinnusPortal.get_current().members).filter(q))
         
         count = user_qs.count()
         if count < start:
