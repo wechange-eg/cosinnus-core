@@ -102,7 +102,7 @@ class GroupCSVImporter(Thread):
     
     has_header = False
     
-    def __init__(self, rows, request=None, read_errors=0, *args, **kwargs):
+    def __init__(self, rows, request=None, read_errors=0, bad_rows=[], *args, **kwargs):
         # try to detect and remove BOM if a signed file was used with an unsigned encoding 
         try:
             if rows[0][0][0] == u'\ufeff':
@@ -113,7 +113,8 @@ class GroupCSVImporter(Thread):
         self.rows = rows
         self.request = request
         self.item_index = 0
-        self.read_errors=read_errors # to make a report how many rows could not be read due to formatting
+        self.read_errors = read_errors # to make a report how many rows could not be read due to formatting
+        self.bad_rows = bad_rows
         # a map of { column-header-id: column-index), ... }
         self.column_map = [] if not self.has_header else self._index_and_remove_header_row()
         
@@ -179,6 +180,7 @@ class GroupCSVImporter(Thread):
            'saved_groups': len(saved_groups),
            'total_groups': len(self.rows),
            'read_errors': self.read_errors,
+           'bad_rows': self.bad_rows,
         }
         cache.set(GROUP_IMPORT_RESULTS_CACHE_KEY, results_obj, 60 * 60 * 24) # 1 day kept
     
@@ -293,19 +295,21 @@ def csv_import_projects(csv_file, request=None, encoding="utf-8", delimiter=b','
     
     # sanity check for expected number of columns, in EACH row
     read_errors = 0
+    bad_rows = []
     if expected_columns:
         expected_columns = int(expected_columns)
         if any([len(row) < expected_columns for row in rows]):
             # if only a few rows had an unexpected number of columns, there may have been read errors.
             # we ignore them but add a report
-            num_bad_rows = sum([len(row) < expected_columns for row in rows])
+            bad_rows = [row for row in rows if len(row) != expected_columns]
+            num_bad_rows = len(bad_rows)
             if num_bad_rows < len(rows) - 1:
                 rows = [row for row in rows if len(row) == expected_columns]
                 read_errors = num_bad_rows
             else:
                 raise UnexpectedNumberOfColumns('%d / %d' % (len(row), expected_columns))
     
-    importer = Importer(rows, request=request, read_errors=read_errors)
+    importer = Importer(rows, request=request, read_errors=read_errors, bad_rows=bad_rows)
     if importer.is_running():
         raise ImportAlreadyRunning()
     
