@@ -86,7 +86,11 @@ module.exports = Backbone.Model.extend({
                 results.push({
                     type: type,
                     lat: lat,
-                    lon: lon
+                    lon: lon,
+                    title: 'Title',
+                    url: 'http://example.com',
+                    imageUrl: '/static/images/group-avatar-placeholder.png',
+                    address: '2 High St.'
                 });
             });
         });

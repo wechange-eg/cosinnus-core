@@ -3,6 +3,7 @@
 var View = require('views/base/view');
 var MapControlsView = require('views/map-controls-view');
 var template = require('map/map');
+var popupTemplate = require('map/popup');
 
 module.exports = View.extend({
     layers: {
@@ -109,6 +110,12 @@ module.exports = View.extend({
                         shadowSize: [41, 41]
                     })
                 })
+                .bindPopup(popupTemplate.render({
+                    imageURL: result.imageUrl,
+                    title: result.title,
+                    url: result.url,
+                    address: result.address
+                }))
                 .addTo(self.leaflet));
         });
     },
