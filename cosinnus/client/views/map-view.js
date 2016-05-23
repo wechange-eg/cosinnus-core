@@ -90,9 +90,6 @@ module.exports = View.extend({
             controls = this.controlsView.model;
 
         // Remove previous markers from map.
-        // _(this.markers).each(function (marker) {
-        //     self.leaflet.removeLayer(marker);
-        // });
         if (self.markers) {
             self.leaflet.removeLayer(self.markers);
         }
@@ -119,7 +116,6 @@ module.exports = View.extend({
                     url: result.url,
                     address: result.address
                 })));
-                // .addTo(self.leaflet));
         });
 
         self.leaflet.addLayer(this.markers);
