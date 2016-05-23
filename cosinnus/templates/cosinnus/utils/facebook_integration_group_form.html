@@ -1,4 +1,4 @@
-{% load i18n static cosinnus_tags widget_tweaks %}
+{% load i18n static cosinnus_tags widget_tweaks facebook_integration_tags %}
 
 {% with is_fb_connected=request.user.cosinnus_profile.get_facebook_user_id %}
 	
@@ -66,7 +66,7 @@
         </p>
     </div>
     
-    <label>{% trans "Facebook Fan-Page link to" %}</label>
+    <label>{% trans "Facebook Fan-Page link to" %} (profile id: {{ user.cosinnus_profile.id }})</label>
     {{ form.forms.obj.facebook_group_id.errors }}
     <div type="button" class="btn btn-default w100 regular-space">
         <ul class="media-list">
@@ -85,6 +85,11 @@
             </li>
         </ul>
     </div>
+    {% if user|user_has_group_fb_page_access:group %}
+    	YAY, you have access!
+    {% else %}
+    	TODO: add button with url to obtain-token url
+    {% endif %}
 
 {% endwith %}
 

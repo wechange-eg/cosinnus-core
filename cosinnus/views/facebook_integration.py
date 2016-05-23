@@ -141,9 +141,27 @@ class FacebookIntegrationGroupFormMixin(object):
             return cleaned_data
         if not self.facebook_group_id_field:
             raise ImproperlyConfigured('The ``facebook_group_id_field`` attribute was not supplied!')
+        if not self.facebook_page_id_field:
+            raise ImproperlyConfigured('The ``facebook_page_id_field`` attribute was not supplied!')
         
-        facebook_id = cleaned_data.get(self.facebook_group_id_field)
-        if facebook_id and facebook_id != getattr(self.instance, self.facebook_group_id_field):
+        facebook_group_id = cleaned_data.get(self.facebook_group_id_field)
+        facebook_page_id = cleaned_data.get(self.facebook_page_id_field)
+        
+        if facebook_group_id and facebook_page_id:
+            raise forms.ValidationError(_('You can only connect to either a Facebook Group or a Fan-Page, but not both!'))
+        
+        facebook_id = None
+        
+        if facebook_group_id and facebook_group_id != getattr(self.instance, self.facebook_group_id_field):
+            if not _is_number(facebook_group_id):
+                raise forms.ValidationError(_('Please enter a numeric Facebook Group-ID only!'))
+            facebook_id = facebook_group_id
+        elif facebook_page_id and facebook_page_id != getattr(self.instance, self.facebook_page_id_field):
+            if _is_number(facebook_page_id):
+                raise forms.ValidationError(_('Please enter a string Fan-Page unique name only (example: myfanpage)!'))
+            facebook_id = facebook_page_id
+        
+        if facebook_id:
             if not getattr(self, 'request', None):
                 raise ImproperlyConfigured('FacebookIntegrationGroupFormMixin needs a request to be set! Provide your form with one by overriding its __init__ function and passing a request as form kwarg!')
             # check if user has connected to facebook, we need the access token
@@ -156,7 +174,7 @@ class FacebookIntegrationGroupFormMixin(object):
             try:
                 location_url = "https://graph.facebook.com/%(group_id)s?access_token=%(access_token)s" \
                        % {
-                          'group_id': facebook_group_id,
+                          'group_id': facebook_id,
                           'access_token': access_token,
                        }
                 response_info = urllib2.urlopen(location_url)
@@ -174,8 +192,62 @@ class FacebookIntegrationGroupFormMixin(object):
             #  if group could not be accessed in any way throw validation eorr
             if had_error:
                 raise forms.ValidationError(_('The Facebook Fan-Page ID or Group ID could not be found on Facebook! Make sure you have entered the correct ID for your Group/Fan-Page!'))
-
+            
+            # for Facebook Fan-Pages, we immediately try to get an access token to the fan-page, and deny connecting it
+            # if we cannot obtain it (user may not be an admin of the group)
+            if facebook_page_id:
+                obtain_token_result = obtain_facebook_page_access_token_for_user(request=None, group=self.instance, page_id=facebook_page_id, user=self.request.user)
+                if not obtain_token_result:
+                    raise forms.ValidationError(_('We could not obtain access to the Fan-Page for your connected Facebook Account. Please check that you entered the correct Fan-Page name, and that you are an admin of that Fan-Page!'))
+                
+                
+def obtain_facebook_page_access_token_for_user(request=None, group=None, page_id=None, user=None):
+    """ Tries to obtain a Facebook-Page access token for a user and for a group, and its connected page-id.
+        Then saves this page-access token in the userprofile.settings as {'fb_page_%(group_id)d_%(page_id)s': <access-token>} 
+        @return: True if the fan-page access token was obtained and saved in the user profile.
+                 False if anything went wrong.
+        """
+        
+    if request is not None:
+        # TODO: obtain the variables from the request
+        group = None
+        page_id = None
+        user = request.user
     
+    if not group or not page_id or not user:
+        print ">> returning from obtain token early"
+        return False
+    
+    # using a facebook fan-page access token, using the user access token of an admin of that page (see https://developers.facebook.com/docs/pages/getting-started)
+    access_token = user.cosinnus_profile.settings['fb_accessToken']
+    had_error = False
+    try:
+        location_url = "https://graph.facebook.com/%(page_id)s?fields=access_token&access_token=%(access_token)s" \
+            % {
+               'page_id': page_id,
+               'access_token': access_token,
+            }
+        response_info = urllib2.urlopen(location_url)
+    except Exception, e:
+        logger.warn('Error when trying to retrieve FB page access-token from Facebook:', extra={'exception': force_text(e), 'url': location_url})
+        had_error = True
+    if not had_error and not response_info.code == 200:
+        logger.warn('Error when trying to retrieve FB page access-token from Facebook (non-200 response):', extra={'response_info': force_text(response_info.__dict__)})
+        had_error = True
+    if not had_error:
+        token_info = json.loads(response_info.read()) # this graph returns a JSON string, not a query response
+        if not 'access_token' in token_info:
+            had_error = True
+            
+    if had_error:
+        return False
+    page_settings_key = 'fb_page_%(group_id)d_%(page_id)s' % {'group_id': group.id, 'page_id': page_id}
+    
+    user.cosinnus_profile.settings[page_settings_key] = token_info['access_token']
+    user.cosinnus_profile.save()
+    
+    return True
+
 
 def save_auth_tokens(request):
     """ Saves the given facebook auth tokens for the current user """

@@ -1,4 +1,4 @@
-{% load i18n static cosinnus_tags %}
+{% load i18n static cosinnus_tags facebook_integration_tags %}
 
 {% with fb_userID=request.user.cosinnus_profile.get_facebook_user_id %}
 <ol class="input-area" id="facebook-integration" {% if not fb_userID %}style="display:none;"{% endif %}>
