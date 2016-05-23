@@ -17,37 +17,16 @@ module.exports = Backbone.Model.extend({
         this.searchDelay = 0;
     },
 
-    search: function (callback) {
+    search: function () {
         var self = this;
-
-        var query = this.buildQueryString();
-
-        // Retrieve active filters.
-        var activeTypes = _(_(this.default.filters).keys()).select(function (filter) {
-            return self.get('filters')[filter];
+        var url = this.buildURL();
+        this.mockSearchService(url, function (res) {
+            self.set('results', res);
+            self.trigger('change:results');
         });
-
-        // Generate some random markers for each of the active filter types
-        // in the current map viewport.
-        var results = [];
-        _(activeTypes).each(function (type) {
-            _(15).times(function () {
-                var lat = self.get('south') + Math.random() * (self.get('north') - self.get('south'));
-                var lon = self.get('west') + Math.random() * (self.get('east') - self.get('west'));
-
-                results.push({
-                    type: type,
-                    lat: lat,
-                    lon: lon
-                });
-            });
-        });
-
-        self.set('results', results);
-        self.trigger('change:results');
     },
 
-    buildQueryString: function () {
+    buildURL: function () {
         var searchParams = {
             q: this.get('q'),
             north: this.get('north'),
@@ -81,5 +60,34 @@ module.exports = Backbone.Model.extend({
         self.searchTimeout = setTimeout(function () {
             self.search();
         }, self.searchDelay);
+    },
+
+    mockSearchService: function (url, cb) {
+        var json = JSON.parse('{"' + decodeURI(url.replace('/map/search?', '').replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
+        _(_(json).keys()).each(function (key) {
+            if (json[key] !== '') {
+                json[key] = JSON.parse(json[key]);
+            }
+        })
+        // Retrieve active filters.
+        var activeTypes = _(_(this.default.filters).keys()).select(function (filter) {
+            return json[filter];
+        });
+        // Generate some random markers for each of the active filter types
+        // in the current map viewport.
+        var results = [];
+        _(activeTypes).each(function (type) {
+            _(15).times(function () {
+                var lat = json['south'] + Math.random() * (json['north'] - json['south']);
+                var lon = json['west'] + Math.random() * (json['east'] - json['west']);
+
+                results.push({
+                    type: type,
+                    lat: lat,
+                    lon: lon
+                });
+            });
+        });
+        cb(results);
     }
 });
