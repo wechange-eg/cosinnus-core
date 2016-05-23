@@ -10,19 +10,22 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.njk$/,
-                loader: 'nunjucks-loader'
+                test: /\.html$/,
+                loader: 'nunjucks-loader',
+                include: [
+                    path.join(__dirname, 'cosinnus/templates/cosinnus/universal')
+                ]
             }
         ],
     },
     resolve: {
         root: [
-            path.join(__dirname, 'cosinnus/templates/cosinnus'),
+            path.join(__dirname, 'cosinnus/templates/cosinnus/universal'),
             path.join(__dirname, 'cosinnus/client')
         ],
         extensions: [
             '.js',
-            '.njk',
+            '.html',
             ''
         ]
     }
