@@ -6,6 +6,8 @@ var template = require('map/map-controls');
 module.exports = View.extend({
     initialize: function () {
         this.template = template;
+        this.model.on('start:search', this.startSearch, this);
+        this.model.on('end:search', this.endSearch, this);
         View.prototype.initialize.call(this);
     },
 
@@ -56,5 +58,17 @@ module.exports = View.extend({
             });
             this.model.wantsToSearch();
         }
+    },
+
+    startSearch: function (event) {
+        this.$el.find('.icon-search').hide();
+        this.$el.find('.icon-loading').show();
+    },
+
+    endSearch: function (event) {
+        if (!this.state.typing) {
+            this.$el.find('.icon-search').show();
+        }
+        this.$el.find('.icon-loading').hide();
     }
 });

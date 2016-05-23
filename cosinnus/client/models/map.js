@@ -20,9 +20,11 @@ module.exports = Backbone.Model.extend({
     search: function () {
         var self = this;
         var url = this.buildURL();
-        this.mockSearchService(url, function (res) {
+        self.trigger('start:search');
+        self.mockSearchService(url, function (res) {
             self.set('results', res);
             self.trigger('change:results');
+            self.trigger('end:search');
         });
     },
 

@@ -2,6 +2,7 @@
     <div class="line text-field">
         <input type="text" class="q" name="q" placeholder="Suche" />
         <i class="fa fa-search icon-search"></i>
+        <i class="fa fa-spinner icon-loading"></i>
     </div>
 
     <div class="line">
@@ -35,7 +36,7 @@
     <div class="line link">
         {% if not filters.people or not filters.events or not filters.projects or not filters.groups %}
             <a href="#" class="reset-filters">
-                alle anzeigen
+                Alle anzeigen
             </a>
         {% else %}
             &nbsp;
