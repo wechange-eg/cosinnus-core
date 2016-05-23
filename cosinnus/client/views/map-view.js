@@ -2,7 +2,6 @@
 
 var View = require('views/base/view');
 var MapControlsView = require('views/map-controls-view');
-var template = require('map/map');
 var popupTemplate = require('map/popup');
 
 module.exports = View.extend({
@@ -37,7 +36,6 @@ module.exports = View.extend({
     },
 
     initialize: function () {
-        this.template = template;
         this.markers = [];
         this.controlsView = new MapControlsView({
             el: $('#map-controls'),
@@ -48,7 +46,7 @@ module.exports = View.extend({
         View.prototype.initialize.call(this);
     },
 
-    afterRender: function () {
+    render: function () {
         this.renderMap();
         this.model.search();
     },
