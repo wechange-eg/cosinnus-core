@@ -49,9 +49,13 @@ module.exports = View.extend({
     },
 
     handleTyping: function (event) {
-        this.model.set({
-            q: $(event.currentTarget).val()
-        });
-        this.model.wantsToSearch();
+        var query = $(event.currentTarget).val();
+        if (query.length > 2) {
+            this.model.set({
+                q: query
+            });
+            this.model.wantsToSearch();
+            
+        }
     }
 });
