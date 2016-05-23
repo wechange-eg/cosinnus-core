@@ -1,23 +1,6 @@
 {% load i18n static cosinnus_tags widget_tweaks %}
 
 {% with is_fb_connected=request.user.cosinnus_profile.get_facebook_user_id %}
-	<div class="alert alert-info alert-dismissable">
-        <i class="fa fa-facebook fa-3x"></i>
-        <p>
-        	{% blocktrans with site_name=COSINNUS_CURRENT_PORTAL.site.name %}You can connect your projects and groups to a Facebook Group or Fan-Page. Once connected, their members can choose to share the news posts they write on {{ site_name }} to the Facebook Group or Fan-Page. (They need to connect their accounts to Facebook, as well!){% endblocktrans%}
-        </p>
-        <p>{% trans "Please be aware that users can only post to your Group/Fan-Page if they would also be permitted post in it on Facebook!" %}<p/>
-        <p>	
-        	<ul>
-	        	<li>
-	        		{% trans "You can find the ID of your Facebook Group on the Info-page in the About tab of the Group on Facebook." %}
-	        	</li>
-	        	<li>
-	        		{% trans "The unique name of your Fan-Page is the name of the Fan-Page in the URL on Facebook (example: https://www.facebook.com/myfanpage/)" %}
-	        	</li>
-        	</ul>
-        </p>
-    </div>
 	
 	{% if not is_fb_connected %}
 		<div class="alert alert-warning alert-dismissable">
@@ -29,7 +12,23 @@
 	    </div>
 	{% endif %} 
 
-    <label>{% trans "Facebook Fan-Page or Group to link to" %}</label>
+
+	<div class="alert alert-info alert-dismissable">
+        <i class="fa fa-facebook fa-3x"></i>
+        <p>
+        	{% blocktrans with site_name=COSINNUS_CURRENT_PORTAL.site.name %}You can connect your projects and groups to a Facebook Group. [TODO: adjust explanation to group only!] Once connected, their members can choose to share the news posts they write on {{ site_name }} to the Facebook Group or Fan-Page. (They need to connect their accounts to Facebook, as well!){% endblocktrans%}
+        </p>
+        <p>{% trans "Please be aware that users can only post to your Group if they would also be permitted post in it on Facebook!" %}<p/>
+        <p>	
+        	<ul>
+	        	<li>
+	        		{% trans "You can find the ID of your Facebook Group on the Info-page in the About tab of the Group on Facebook." %}
+	        	</li>
+        	</ul>
+        </p>
+    </div>
+
+    <label>{% trans "Facebook Group to link to" %}</label>
     {{ form.forms.obj.facebook_group_id.errors }}
     <div type="button" class="btn btn-default w100 regular-space">
         <ul class="media-list">
@@ -38,11 +37,49 @@
                     <i class="fa fa-facebook"></i>
                 </a>
                 <div class="media-body media-body-form-control">
-                    {% captureas placeholder %}{% trans "Group Id or Fan-Page unique name (examples: 1172392116092353, myfanpage)" %}{% endcaptureas %}
+                    {% captureas placeholder %}{% trans "Group Id or name (example: 1172392116092353)" %}{% endcaptureas %}
                     {% if is_fb_connected %}
                         {% render_field form.forms.obj.facebook_group_id class+="form-control" placeholder=placeholder %}
                     {% else %}
                     	{% render_field form.forms.obj.facebook_group_id class+="form-control" disabled="true" placeholder=placeholder %}
+                    {% endif %}
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+    <hr/>
+    <br/>
+    
+    <div class="alert alert-info alert-dismissable">
+        <i class="fa fa-facebook fa-3x"></i>
+        <p>
+        	{% blocktrans with site_name=COSINNUS_CURRENT_PORTAL.site.name %}You can connect your projects and groups to a Facebook Fan-Page. [TODO: Explanation!] (They need to connect their accounts to Facebook, as well!){% endblocktrans%}
+        </p>
+        <p>{% trans "Please be aware that [TODO: explanation]!" %}<p/>
+        <p>	
+        	<ul>
+	        	<li>
+	        		{% trans "The unique name of your Fan-Page is the name of the Fan-Page in the URL on Facebook (example: https://www.facebook.com/myfanpage/)" %}
+	        	</li>
+        	</ul>
+        </p>
+    </div>
+    
+    <label>{% trans "Facebook Fan-Page link to" %}</label>
+    {{ form.forms.obj.facebook_group_id.errors }}
+    <div type="button" class="btn btn-default w100 regular-space">
+        <ul class="media-list">
+            <li class="media">
+                <a class="pull-left" href="#">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <div class="media-body media-body-form-control">
+                    {% captureas placeholder %}{% trans "Fan-Page unique name (example: myfanpage)" %}{% endcaptureas %}
+                    {% if is_fb_connected %}
+                        {% render_field form.forms.obj.facebook_page_id class+="form-control" placeholder=placeholder %}
+                    {% else %}
+                    	{% render_field form.forms.obj.facebook_page_id class+="form-control" disabled="true" placeholder=placeholder %}
                     {% endif %}
                 </div>
             </li>

@@ -133,6 +133,7 @@ class FacebookIntegrationViewMixin(object):
 class FacebookIntegrationGroupFormMixin(object):
     
     facebook_group_id_field = 'facebook_group_id'
+    facebook_page_id_field = 'facebook_page_id'
     
     def clean(self):
         cleaned_data = super(FacebookIntegrationGroupFormMixin, self).clean()
@@ -155,7 +156,7 @@ class FacebookIntegrationGroupFormMixin(object):
             try:
                 location_url = "https://graph.facebook.com/%(group_id)s?access_token=%(access_token)s" \
                        % {
-                          'group_id': facebook_id,
+                          'group_id': facebook_group_id,
                           'access_token': access_token,
                        }
                 response_info = urllib2.urlopen(location_url)
@@ -172,7 +173,7 @@ class FacebookIntegrationGroupFormMixin(object):
             
             #  if group could not be accessed in any way throw validation eorr
             if had_error:
-                raise forms.ValidationError("The Facebook Fan-Page ID or Group ID could not be found on Facebook! Make sure you have entered the correct ID for your Group/Fan-Page!")
+                raise forms.ValidationError(_('The Facebook Fan-Page ID or Group ID could not be found on Facebook! Make sure you have entered the correct ID for your Group/Fan-Page!'))
 
     
 

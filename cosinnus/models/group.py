@@ -620,7 +620,9 @@ class CosinnusBaseGroup(models.Model):
         help_text=_('If a team is not active, it counts as non-existent for all purposes and views on the website.'),
         default=True)
     
-    facebook_group_id = models.CharField(_('Facebook Group/Page ID'), max_length=200, 
+    facebook_group_id = models.CharField(_('Facebook Group ID'), max_length=200, 
+        blank=True, null=True, validators=[MaxLengthValidator(200)])
+    facebook_page_id = models.CharField(_('Facebook Page ID'), max_length=200, 
         blank=True, null=True, validators=[MaxLengthValidator(200)])
     
     parent = models.ForeignKey("self", verbose_name=_('Parent Group'),
@@ -840,8 +842,9 @@ class CosinnusBaseGroup(models.Model):
         return ''
     
     def get_facebook_avatar_url(self):
-        if self.facebook_group_id:
-            return 'https://graph.facebook.com/%s/picture?type=square' % self.facebook_group_id
+        page_or_group_id = self.facebook_page_id or self.facebook_group_id or None
+        if page_or_group_id:
+            return 'https://graph.facebook.com/%s/picture?type=square' % page_or_group_id
         return ''
     
     def get_locations(self):
