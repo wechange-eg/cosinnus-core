@@ -66,7 +66,9 @@ module.exports = Backbone.Model.extend({
         var json = JSON.parse('{"' + decodeURI(url.replace('/map/search?', '').replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
         _(_(json).keys()).each(function (key) {
             if (json[key] !== '') {
-                json[key] = JSON.parse(json[key]);
+                try {
+                    json[key] = JSON.parse(json[key]);
+                } catch (err) {}
             }
         })
         // Retrieve active filters.
