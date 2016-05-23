@@ -1,6 +1,10 @@
 'use strict';
 
 module.exports = Backbone.View.extend({
+    initialize: function (options) {
+        this.state = options && options.state || {}
+    },
+
     render: function () {
         var self = this;
         // Collect the data to be rendered; can be overridden in child view.
@@ -20,7 +24,7 @@ module.exports = Backbone.View.extend({
 
     // Default implementation to retrieve data to be rendered.
     // If a model is set, return its attributes as JSON, otherwise
-    // an empty object.
+    // an empty object with any state attributes on the view mixed in.
     getTemplateData: function () {
         var modelData = this.model && this.model.toJSON() || {};
         var data = _(modelData).extend(this.state);

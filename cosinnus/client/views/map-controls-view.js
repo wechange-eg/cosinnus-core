@@ -6,12 +6,17 @@ var template = require('map/map-controls');
 module.exports = View.extend({
     initialize: function () {
         this.template = template;
+        this.searchDelay = 1000;
+        View.prototype.initialize.call(this);
     },
 
     events: {
         'click .result-filter': 'toggleFilter',
         'click .reset-filters': 'resetFilters',
-        'click .layer-button': 'switchLayer'
+        'click .layer-button': 'switchLayer',
+        'focusin .q': 'toggleTyping',
+        'focusout .q': 'toggleTyping',
+        'keyup .q': 'handleTyping'
     },
 
     // Event Handlers
@@ -37,5 +42,20 @@ module.exports = View.extend({
             this.render();
             this.trigger('change:layer', layer);
         }
+    },
+
+    toggleTyping: function (event) {
+        this.state.typing = !this.state.typing;
+        this.$el.find('.icon-search').toggle();
+    },
+
+    handleTyping: function (event) {
+        var self = this;
+        clearTimeout(self.wantsToSearch);
+        this.wantsToSearch = setTimeout(function () {
+            self.model.set({
+                q: $(event.currentTarget).val()
+            });
+        }, self.searchDelay);
     }
 });

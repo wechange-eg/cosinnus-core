@@ -1,32 +1,33 @@
 <form id="map-search">
-    <div class="line">
-        <input type="text" placeholder="Suche" />
+    <div class="line text-field">
+        <input type="text" class="q" name="q" placeholder="Suche" />
+        <i class="fa fa-search icon-search"></i>
     </div>
 
     <div class="line">
         <input type="checkbox" class="result-filter" data-result-type="people"
-            name="people" id="people"
+            name="people" class="people"
             {% if filters.people %} checked="true" {% endif %} />
         <label for="people">Menschen</label>
     </div>
 
     <div class="line">
         <input type="checkbox" class="result-filter" data-result-type="events"
-            name="events" id="events"
+            name="events" class="events"
             {% if filters.events %} checked="true" {% endif %} />
         <label for="events">Veranstaltungen</label>
     </div>
 
     <div class="line">
         <input type="checkbox" class="result-filter" data-result-type="projects"
-            name="projects" id="projects"
+            name="projects" class="projects"
             {% if filters.projects %} checked="true" {% endif %} />
         <label for="projects">Projekte</label>
     </div>
 
     <div class="line">
         <input type="checkbox" class="result-filter" data-result-type="groups"
-            name="groups" id="groups"
+            name="groups" class="groups"
             {% if filters.groups %} checked="true" {% endif %} />
         <label for="groups">Gruppen</label>
     </div>
