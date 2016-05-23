@@ -74,8 +74,20 @@ module.exports = View.extend({
             .addTo(this.leaflet);
     },
 
+    updateBounds: function () {
+        var bounds = this.leaflet.getBounds();
+        this.model.set({
+            south: bounds.getSouth(),
+            west: bounds.getWest(),
+            north: bounds.getNorth(),
+            east: bounds.getEast()
+        });
+    },
+
+    // Event Handlers
+    // --------------
+
     updateMarkers: function () {
-        console.log('MapView#updateMarkers');
         var self = this,
             controls = this.controlsView.model;
 
@@ -100,19 +112,6 @@ module.exports = View.extend({
                 .addTo(self.leaflet));
         });
     },
-
-    updateBounds: function () {
-        var bounds = this.leaflet.getBounds();
-        this.model.set({
-            south: bounds.getSouth(),
-            west: bounds.getWest(),
-            north: bounds.getNorth(),
-            east: bounds.getEast()
-        });
-    },
-
-    // Event Handlers
-    // --------------
 
     handleViewportChange: function () {
         this.updateBounds();
