@@ -20,6 +20,8 @@ module.exports = Backbone.Model.extend({
     search: function (callback) {
         var self = this;
 
+        var query = this.buildQueryString();
+
         // Retrieve active filters.
         var activeTypes = _(_(this.default.filters).keys()).select(function (filter) {
             return self.get('filters')[filter];
@@ -43,6 +45,22 @@ module.exports = Backbone.Model.extend({
 
         self.set('results', results);
         self.trigger('change:results');
+    },
+
+    buildQueryString: function () {
+        var searchParams = {
+            q: this.get('q'),
+            north: this.get('north'),
+            south: this.get('south'),
+            east: this.get('east'),
+            west: this.get('west'),
+            people: this.get('filters').people,
+            events: this.get('filters').events,
+            projects: this.get('filters').projects,
+            groups: this.get('filters').groups
+        };
+        var query = $.param(searchParams);
+        return '/map/search?' + query;
     },
 
     toggleFilter (resultType) {
