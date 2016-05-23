@@ -79,7 +79,7 @@ module.exports = Backbone.Model.extend({
         // in the current map viewport.
         var results = [];
         _(activeTypes).each(function (type) {
-            _(15).times(function () {
+            _(60).times(function () {
                 var lat = json['south'] + Math.random() * (json['north'] - json['south']);
                 var lon = json['west'] + Math.random() * (json['east'] - json['west']);
 

@@ -55,7 +55,6 @@ module.exports = View.extend({
                 q: query
             });
             this.model.wantsToSearch();
-            
         }
     }
 });

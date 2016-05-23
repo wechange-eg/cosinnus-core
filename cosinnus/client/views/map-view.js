@@ -36,7 +36,6 @@ module.exports = View.extend({
     },
 
     initialize: function () {
-        this.markers = [];
         this.controlsView = new MapControlsView({
             el: $('#map-controls'),
             model: this.model
@@ -91,13 +90,19 @@ module.exports = View.extend({
             controls = this.controlsView.model;
 
         // Remove previous markers from map.
-        _(this.markers).each(function (marker) {
-            self.leaflet.removeLayer(marker);
+        // _(this.markers).each(function (marker) {
+        //     self.leaflet.removeLayer(marker);
+        // });
+        if (self.markers) {
+            self.leaflet.removeLayer(self.markers);
+        }
+        self.markers = L.markerClusterGroup({
+            maxClusterRadius: 30
         });
 
         // Add markers for the new results.
-        _(this.model.get('results')).each(function (result) {
-            self.markers.push(L
+        _(self.model.get('results')).each(function (result) {
+            self.markers.addLayer(L
                 .marker([result.lat, result.lon], {
                     icon: L.icon({
                         iconUrl: '/static/js/vendor/images/marker-icon-2x-' +
@@ -113,9 +118,11 @@ module.exports = View.extend({
                     title: result.title,
                     url: result.url,
                     address: result.address
-                }))
-                .addTo(self.leaflet));
+                })));
+                // .addTo(self.leaflet));
         });
+
+        self.leaflet.addLayer(this.markers);
     },
 
     handleViewportChange: function () {
