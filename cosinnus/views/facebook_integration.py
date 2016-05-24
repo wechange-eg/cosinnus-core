@@ -13,16 +13,17 @@ from datetime import datetime, timedelta
 import time
 
 from cosinnus.conf import settings
-from django.core.exceptions import ImproperlyConfigured
+from django.core.exceptions import ImproperlyConfigured, PermissionDenied
 from django.utils.encoding import force_text
 import urlparse
 import requests
 import urllib
-from cosinnus.utils.urls import iriToUri
-from django.shortcuts import redirect
+from cosinnus.utils.urls import iriToUri, group_aware_reverse
+from django.shortcuts import redirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django import forms
+from cosinnus.utils.group import get_cosinnus_group_model
 
 logger = logging.getLogger('cosinnus')
 
@@ -196,28 +197,36 @@ class FacebookIntegrationGroupFormMixin(object):
             # for Facebook Fan-Pages, we immediately try to get an access token to the fan-page, and deny connecting it
             # if we cannot obtain it (user may not be an admin of the group)
             if facebook_page_id:
-                obtain_token_result = obtain_facebook_page_access_token_for_user(request=None, group=self.instance, page_id=facebook_page_id, user=self.request.user)
+                obtain_token_result = obtain_facebook_page_access_token_for_user(self.instance, facebook_page_id, self.request.user)
                 if not obtain_token_result:
                     raise forms.ValidationError(_('We could not obtain access to the Fan-Page for your connected Facebook Account. Please check that you entered the correct Fan-Page name, and that you are an admin of that Fan-Page!'))
                 
-                
-def obtain_facebook_page_access_token_for_user(request=None, group=None, page_id=None, user=None):
+
+def confirm_page_admin(request, group_id):
+    """ GET to this view to try to obtain a user access token for a facebook fan-page 
+        linked to the group_id supplied. Will always redirect to the group form's facebook tab. """
+    if not request.user.is_authenticated():
+        raise PermissionDenied
+    
+    group = get_object_or_404(get_cosinnus_group_model(), id=group_id)
+    
+    if not group.facebook_page_id:
+        messages.error(request, _('This group does not have a Facebook Fan-Page associated with it!'))
+        
+    if obtain_facebook_page_access_token_for_user(group, group.facebook_page_id, request.user):
+        messages.success(request, _('Your admin access for the linked Facebook Fan-Page was confirmed!'))
+    else:
+        messages.warning(request, _('We could not obtain access to the Fan-Page for your connected Facebook Account. Please check that you entered the correct Fan-Page name, and that you are an admin of that Fan-Page!'))
+    
+    return redirect(group_aware_reverse('cosinnus:group-edit', kwargs={'group': group}) + '?tab=facebook', permanent=False)
+    
+
+def obtain_facebook_page_access_token_for_user(group, page_id, user):
     """ Tries to obtain a Facebook-Page access token for a user and for a group, and its connected page-id.
         Then saves this page-access token in the userprofile.settings as {'fb_page_%(group_id)d_%(page_id)s': <access-token>} 
         @return: True if the fan-page access token was obtained and saved in the user profile.
                  False if anything went wrong.
         """
-        
-    if request is not None:
-        # TODO: obtain the variables from the request
-        group = None
-        page_id = None
-        user = request.user
-    
-    if not group or not page_id or not user:
-        print ">> returning from obtain token early"
-        return False
-    
     # using a facebook fan-page access token, using the user access token of an admin of that page (see https://developers.facebook.com/docs/pages/getting-started)
     access_token = user.cosinnus_profile.settings['fb_accessToken']
     had_error = False

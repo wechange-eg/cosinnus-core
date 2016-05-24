@@ -66,7 +66,7 @@
         </p>
     </div>
     
-    <label>{% trans "Facebook Fan-Page link to" %} (profile id: {{ user.cosinnus_profile.id }})</label>
+    <label>{% trans "Facebook Fan-Page link to" %}</label>
     {{ form.forms.obj.facebook_group_id.errors }}
     <div type="button" class="btn btn-default w100 regular-space">
         <ul class="media-list">
@@ -85,10 +85,36 @@
             </li>
         </ul>
     </div>
-    {% if user|user_has_group_fb_page_access:group %}
-    	YAY, you have access!
-    {% else %}
-    	TODO: add button with url to obtain-token url
+    
+    {% if group.facebook_page_id and is_fb_connected %}
+	    {% if user|user_has_group_fb_page_access:group %}
+		    <div class="alert alert-success">
+		        <i class="fa fa-check fa-3x"></i>
+		        <p>{% trans "You have administrator access to this Fan-Page and can publish your posts to it." %}</p>
+		    </div>
+	    {% else %}
+	    	<div class="alert alert-warning" style="margin-bottom: 0;">
+	            <i class="fa fa-question fa-3x"></i>
+		        <p>
+		        	{% trans "Admin access of your Facebook-account for this Fan-Page has not been confirmed. This is required before you can publish your posts in the voice of the Fan-Page!" %}
+		        </p>
+		    </div>
+	        <button href="{% url 'cosinnus:facebook-confirm-page-admin' group_id=group.id %}" type="button" class="btn btn-emphasized">
+		        <ul class="media-list">
+		            <li class="media">
+		                <a class="pull-left" href="#">
+		                    <i class="fa fa-sign-in"></i>
+		                </a>
+		                <div class="media-body">
+	                        {% trans "Confirm now!" %}
+		                </div>
+		            </li>
+		        </ul>
+		    </button>
+		    <div class="clearfix"></div>
+	    {% endif %}
+	    <br/>
+	    <br/>
     {% endif %}
 
 {% endwith %}
