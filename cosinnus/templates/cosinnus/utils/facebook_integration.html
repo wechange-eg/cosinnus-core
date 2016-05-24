@@ -105,16 +105,40 @@
 					<span id="fb-post-explanation" style="display: none;" class="small noselect">{% trans "When you submit this post, it will be posted on your Facebook timeline exactly as seen." %}</span>
 				</div>
 				
-			    {% if group and group.facebook_group_id %}
+			    {% if group and group.facebook_group_id or group and group.facebook_page_id %}
 			    	<div>
 						<label for="facebookIntegrationPostGroupCheckbox" class="noselect" style="cursor: pointer;">
 							<img class="title-fb-username src-fb-avatar pull-left" src="{{ group.get_facebook_avatar_url }}" 
 								style="margin-right: 10px;" height=40></img>
 							<input type="checkbox" checked="false" autocomplete="off" name="facebook_integration_post_to_group_page" id="facebookIntegrationPostGroupCheckbox" class="toggle-switch" data-toggle-target="fb-post-explanation-group">
-							{% trans "Also post this to this project/groups Facebook Group/Fan-Page" %}
+							{% if group.facebook_page_id %}
+								{% if user|user_has_group_fb_page_access:group %}
+									{% trans "Also post this to this project/group's Facebook Fan-Page" %}
+								{% else %}
+									{% trans "Also post this as a visitor's post to this project/group's Facebook Fan-Page" %}									
+									{% if user.pk in group.admins %}
+										<p class="small"><i>
+											{% trans "If you are an admin of the Fan-Page on Facebook, confirm your admin access to post in the voice of that Fan-Page!" %} <a href="">{% trans "" %}</a>
+											<a href="{% url 'cosinnus:facebook-confirm-page-admin' group_id=group.id %}" target="_blank"><b>{% trans "You can do this here" context "a link to click on"%} <span class="fa fa-external-link"></span></b></a>
+										</i></p>
+									{% endif %}
+								{% endif %}
+							{% else %}
+								{% trans "Also post this to this project/group's Facebook Group" %}
+							{% endif %}
 						</label>
 						<br/>
-						<span id="fb-post-explanation-group" style="display: none;" class="small noselect">{% trans "When you submit this post, it will be posted from your Facebook Account, exactly as seen, on the Facebook Group/Fan-Page of this project/group." %}</span>
+						<span id="fb-post-explanation-group" style="display: none;" class="small noselect">
+							{% if group.facebook_page_id %}
+								{% if user|user_has_group_fb_page_access:group %}
+									{% trans "When you submit this post, it will be posted to the Facebook Fan-Page of this project/group, in the voice of that Fan-Page." %}
+								{% else %}
+									{% trans "When you submit this post, it will be posted from your Facebook Account as a visitor's post to the Facebook Fan-Page of this project/group." %}
+								{% endif %}
+							{% else %}
+								{% trans "When you submit this post, it will be posted from your Facebook Account, exactly as seen, on the Facebook Group of this project/group." %}
+							{% endif %}
+						</span>
 					</div>
 				{% elif group and user.is_superuser or group and user.pk in group.admins %}
 					<p>

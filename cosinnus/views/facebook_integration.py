@@ -80,7 +80,7 @@ class FacebookIntegrationUserProfileMixin(object):
     
 class FacebookIntegrationViewMixin(object):
 
-    def post_to_facebook(self, userprofile, fb_post_text, urls=[], fb_post_target_id=None):
+    def post_to_facebook(self, userprofile, fb_post_text, urls=[], fb_post_target_id=None, access_token=None):
         """ Posts content to the timeline of a given userprofile's user synchronously.
             This method will never throw an exception.
             @param userprofile: a userprofile model instance that contains the user's fb info
@@ -88,6 +88,9 @@ class FacebookIntegrationViewMixin(object):
             @param urls: Any URLs contained in the post that shall be attached to the post explicitly (for a preview box, etc)
             @param fb_post_target_id: If None, post to the user's timeline. If given, post to this alternate id of the facebook graph API egdes:
                 /{user-id}/feed, /{page-id}/feed, /{event-id}/feed, or /{group-id}/feed (No need to specify which one; they are unique)
+            @param access_token: Give an alternate access_token. If None, the user's access token is used and the post will be made in the
+                user's voice. If you supply eg. an access_token to a Facebook fan-page and that page as a target, then the post will be made 
+                to that page, in the voice *of that page*.
             @return: a string if posted successfully (either the post's id or '' if unknown), None if the post failed for any reason
             """
         try:
@@ -97,7 +100,7 @@ class FacebookIntegrationViewMixin(object):
                 logger.warning('Could not post to facebook timeline even though it was requested because of missing fb_userID!', extra={
                            'user-email': userprofile.user.email, 'alternate-post-target': fb_post_target_id})
                 return None
-            access_token = userprofile.settings['fb_accessToken']
+            access_token = access_token or userprofile.settings['fb_accessToken']
             if not access_token:
                 logger.warning('Could not post to facebook timeline even though it was requested because of missing fb_accessToken!', extra={
                            'user-email': userprofile.user.email, 'user_fbID': user_id, 'alternate-post-target': fb_post_target_id})
@@ -129,7 +132,59 @@ class FacebookIntegrationViewMixin(object):
             logger.warning('Unexpected exception when posting to facebook timeline!', extra={
                            'user-email': userprofile.user.email, 'user_fbID': user_id, 'exception': force_text(e), 'alternate-post-target': fb_post_target_id})
         return None
-
+    
+    
+    def form_valid(self, form):
+        ret = super(FacebookIntegrationViewMixin, self).form_valid(form)
+        
+        message_success_addition = ''
+        # check if the user wants to post this note to facebook
+        if form.data.get('facebook_integration_post_to_timeline', None):
+            facebook_success = self.post_to_facebook(self.request.user.cosinnus_profile, self.object.text, urls=self.object.urls)
+            if facebook_success is not None:
+                if facebook_success:
+                    # save facebook id if not empty to mark this note as shared to facebook
+                    self.object.facebook_post_id = facebook_success
+                    self.object.save()
+                message_success_addition += ' ' + force_text(_('Your news post was also posted on your Facebook timeline.'))
+            else:
+                messages.warning(self.request, _('We could not post this news post on your Facebook timeline. If this problem persists, please make sure you have granted us all required Facebook permissions, or try disconnecting and re-connecting your Facebook account!'))
+        
+        # check if the user wants to post this note to the group's facebook fan-page/group
+        group = self.group
+        if form.data.get('facebook_integration_post_to_group_page', None) and \
+                        (group.facebook_group_id or group.facebook_page_id):
+            
+            if group.facebook_page_id:
+                # When posting to pages, the user may have an admin access token to post in the voice of the page.
+                # if not, the user's own token is used and the post will be a visitor's post
+                facebook_id = group.facebook_page_id
+                access_token = get_user_group_fb_page_access_token(self.request.user, self.group)
+            else:
+                facebook_id = group.facebook_group_id
+                access_token = None
+            
+            facebook_success = self.post_to_facebook(self.request.user.cosinnus_profile, 
+                                    self.object.text, urls=self.object.urls, fb_post_target_id=facebook_id,
+                                    access_token=access_token)
+            if facebook_success is not None:
+                if facebook_success:
+                    # don't mark anything. we don't care if this was posted to the group later on
+                    pass
+                    #self.object.facebook_post_id = facebook_success
+                    #self.object.save()
+                if group.facebook_page_id and access_token:
+                    message_success_addition += ' ' + force_text(_('Your news post was also posted to the Facebook Fan-Page.'))
+                elif group.facebook_page_id:
+                    message_success_addition += ' ' + force_text(_('Your news post was also posted on the Facebook Fan-Page as a visitor\'s post.'))
+                else:
+                    message_success_addition += ' ' + force_text(_('Your news post was also posted in the Facebook Group.'))
+            else:
+                messages.warning(self.request, _('We could not post this news post on the Facebook Group/Fan-Page. If this problem persists, please try disconnecting and re-connecting your Facebook account and make sure you allow us to post with a visibility of at least "Friends". If you are trying to post as a Fan-Page, make sure you accept the necessary permissions for us to post there, and make sure you are an admin of the Fan-Page! If this doesn\'t work, contact this project/group\'s administrator!'))
+        
+        messages.success(self.request, force_text(self.message_success) + message_success_addition)
+        return ret
+    
     
 class FacebookIntegrationGroupFormMixin(object):
     
@@ -379,4 +434,13 @@ def remove_facebook_association(request):
     
     return redirect(reverse('cosinnus:profile-edit'))
         
-
+        
+def get_user_group_fb_page_access_token(user, group):
+    """
+    Check for a user and a group linked to a facebook page, if in that user's profile settings a Facebook page access token
+    for the linked page is saved.
+    """
+    if not group.facebook_page_id:
+        return None
+    page_settings_key = 'fb_page_%(group_id)d_%(page_id)s' % {'group_id': group.id, 'page_id': group.facebook_page_id}
+    return user.cosinnus_profile.settings.get(page_settings_key, None)
