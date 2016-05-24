@@ -180,7 +180,7 @@ class FacebookIntegrationViewMixin(object):
                 else:
                     message_success_addition += ' ' + force_text(_('Your news post was also posted in the Facebook Group.'))
             else:
-                messages.warning(self.request, _('We could not post this news post on the Facebook Group/Fan-Page. If this problem persists, please try disconnecting and re-connecting your Facebook account and make sure you allow us to post with a visibility of at least "Friends". If you are trying to post as a Fan-Page, make sure you accept the necessary permissions for us to post there, and make sure you are an admin of the Fan-Page! If this doesn\'t work, contact this project/group\'s administrator!'))
+                messages.warning(self.request, _('We could not post this news post on the Facebook Group/Fan-Page. If this problem persists, please try disconnecting and re-connecting your Facebook account and make sure you allow us to post with a visibility of at least "Friends". If you are trying to post as a Fan-Page, make sure you accept the necessary permissions for us to post there, and make sure you are an Editor of the Fan-Page! If this doesn\'t work, contact this project/group\'s administrator!'))
         
         messages.success(self.request, force_text(self.message_success) + message_success_addition)
         return ret
@@ -254,7 +254,7 @@ class FacebookIntegrationGroupFormMixin(object):
             if facebook_page_id:
                 obtain_token_result = obtain_facebook_page_access_token_for_user(self.instance, facebook_page_id, self.request.user)
                 if not obtain_token_result:
-                    raise forms.ValidationError(_('We could not obtain access to the Fan-Page for your connected Facebook Account. Please check that you entered the correct Fan-Page name, and that you are an admin of that Fan-Page!'))
+                    raise forms.ValidationError(_('We could not obtain access to the Fan-Page for your connected Facebook Account. Please check that you entered the correct Fan-Page name, and that you are an Editor of that Fan-Page!'))
                 
 
 def confirm_page_admin(request, group_id):
@@ -269,9 +269,9 @@ def confirm_page_admin(request, group_id):
         messages.error(request, _('This group does not have a Facebook Fan-Page associated with it!'))
         
     if obtain_facebook_page_access_token_for_user(group, group.facebook_page_id, request.user):
-        messages.success(request, _('Your admin access for the linked Facebook Fan-Page was confirmed!'))
+        messages.success(request, _('Your Editor access for the linked Facebook Fan-Page was confirmed!'))
     else:
-        messages.warning(request, _('We could not obtain access to the Fan-Page for your connected Facebook Account. Please check that you entered the correct Fan-Page name, and that you are an admin of that Fan-Page!'))
+        messages.warning(request, _('We could not obtain access to the Fan-Page for your connected Facebook Account. Please check that you entered the correct Fan-Page name, and that you are an Editor of that Fan-Page!'))
     
     return redirect(group_aware_reverse('cosinnus:group-edit', kwargs={'group': group}) + '?tab=facebook', permanent=False)
     

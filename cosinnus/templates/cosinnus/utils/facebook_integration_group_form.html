@@ -15,8 +15,9 @@
 
 	<div class="alert alert-info alert-dismissable">
         <i class="fa fa-facebook fa-3x"></i>
+        <h4>{% trans "Connect a Facebook Group" %}</h4>
         <p>
-        	{% blocktrans with site_name=COSINNUS_CURRENT_PORTAL.site.name %}You can connect your projects and groups to a Facebook Group. [TODO: adjust explanation to group only!] Once connected, their members can choose to share the news posts they write on {{ site_name }} to the Facebook Group or Fan-Page. (They need to connect their accounts to Facebook, as well!){% endblocktrans%}
+        	{% blocktrans with site_name=COSINNUS_CURRENT_PORTAL.site.name %}You can connect your projects and groups to a Facebook Group. Once connected, your members can choose to share the news posts they write on {{ site_name }} to the Facebook Group. (They need to connect their accounts to Facebook, as well!){% endblocktrans%}
         </p>
         <p>{% trans "Please be aware that users can only post to your Group if they would also be permitted post in it on Facebook!" %}<p/>
         <p>	
@@ -53,10 +54,15 @@
     
     <div class="alert alert-info alert-dismissable">
         <i class="fa fa-facebook fa-3x"></i>
+        <h4>{% trans "Connect a Facebook Fan-Page" %}</h4>
         <p>
-        	{% blocktrans with site_name=COSINNUS_CURRENT_PORTAL.site.name %}You can connect your projects and groups to a Facebook Fan-Page. [TODO: Explanation!] (They need to connect their accounts to Facebook, as well!){% endblocktrans%}
+        	{% blocktrans with site_name=COSINNUS_CURRENT_PORTAL.site.name %}You can connect your projects and groups to a Facebook Fan-Page. Once connected, you can publish the posts you write on {{ site_name }} directly on that Fan-Page, if you are one of its administrators on Facebook.{% endblocktrans%}
         </p>
-        <p>{% trans "Please be aware that [TODO: explanation]!" %}<p/>
+        <p>
+        	{% trans "All other members of your project/group can publish their posts as visitor's posts on the Fan-Page. (They need to connect their accounts to Facebook, as well!)" %}<p/>
+        <p>
+        <p>
+        	{% trans "If you wish for other members to be able to post directly to the Fan-Page, you can make them co-administrators of your project/group (and you must make them Editors of the Fan-Page on Facebook!). They will be asked to confirm their Editor access of the Fan-Page, and then will be able to publish to it." %}<p/>
         <p>	
         	<ul>
 	        	<li>
@@ -90,13 +96,13 @@
 	    {% if user|user_has_group_fb_page_access:group %}
 		    <div class="alert alert-success">
 		        <i class="fa fa-check fa-3x"></i>
-		        <p>{% trans "You have administrator access to this Fan-Page and can publish your posts to it." %}</p>
+		        <p>{% trans "You have Editor access to this Fan-Page and can publish your posts directly to it." %}</p>
 		    </div>
 	    {% else %}
 	    	<div class="alert alert-warning" style="margin-bottom: 0;">
 	            <i class="fa fa-question fa-3x"></i>
 		        <p>
-		        	{% trans "Admin access of your Facebook-account for this Fan-Page has not been confirmed. This is required before you can publish your posts in the voice of the Fan-Page!" %}
+		        	{% trans "Editor access of your Facebook-account for this Fan-Page has not been confirmed. This is required before you can publish your posts in the voice of the Fan-Page!" %}
 		        </p>
 		    </div>
 	        <button href="{% url 'cosinnus:facebook-confirm-page-admin' group_id=group.id %}" type="button" class="btn btn-emphasized">

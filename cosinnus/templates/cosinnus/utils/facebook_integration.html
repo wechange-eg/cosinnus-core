@@ -118,7 +118,7 @@
 									{% trans "Also post this as a visitor's post to this project/group's Facebook Fan-Page" %}									
 									{% if user.pk in group.admins %}
 										<p class="small"><i>
-											{% trans "If you are an admin of the Fan-Page on Facebook, confirm your admin access to post in the voice of that Fan-Page!" %} <a href="">{% trans "" %}</a>
+											{% trans "If you are an Editor of the Fan-Page on Facebook, confirm your Editor access to post in the voice of that Fan-Page!" %}
 											<a href="{% url 'cosinnus:facebook-confirm-page-admin' group_id=group.id %}" target="_blank"><b>{% trans "You can do this here" context "a link to click on"%} <span class="fa fa-external-link"></span></b></a>
 										</i></p>
 									{% endif %}
