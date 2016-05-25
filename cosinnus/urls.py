@@ -12,7 +12,11 @@ urlpatterns = patterns('cosinnus.views',
     # we do not define an index anymore and let CMS handle that.
 
     url(r'^users/$', 'user.user_list', name='user-list'),
+    
     url(r'^map/$', 'maps.map_view', name='map'),
+    url(r'^maps/search/$', 'maps.map_search_endpoint', name='map-search-endpoint'),
+    
+    
     url(r'^portal/admins/$', 'user.portal_admin_list', name='portal-admin-list'),
     #url(r'^users/map/$', 'user.user_list_map', name='user-list-map'),
     url(r'^user/(?P<username>[^/]+)/$', 'profile.detail_view', name='profile-detail'),
