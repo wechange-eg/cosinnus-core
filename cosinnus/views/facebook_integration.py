@@ -213,8 +213,9 @@ class FacebookIntegrationGroupFormMixin(object):
                 raise forms.ValidationError(_('Please enter a numeric Facebook Group-ID only!'))
             facebook_id = facebook_group_id
         elif facebook_page_id and facebook_page_id != getattr(self.instance, self.facebook_page_id_field):
-            if _is_number(facebook_page_id):
-                raise forms.ValidationError(_('Please enter a string Fan-Page unique name only (example: myfanpage)!'))
+            # can be a number!
+            #if _is_number(facebook_page_id):
+            #    raise forms.ValidationError(_('Please enter a string Fan-Page unique name only (example: myfanpage)!'))
             facebook_id = facebook_page_id
         
         if facebook_id:
@@ -246,7 +247,7 @@ class FacebookIntegrationGroupFormMixin(object):
                     had_error = True
             
             #  if group could not be accessed in any way throw validation eorr
-            if had_error and not settings.DEBUG:
+            if had_error:
                 raise forms.ValidationError(_('The Facebook Fan-Page ID or Group ID could not be found on Facebook! Make sure you have entered the correct ID for your Group/Fan-Page!'))
             
             # for Facebook Fan-Pages, we immediately try to get an access token to the fan-page, and deny connecting it
