@@ -1,36 +1,46 @@
 <form id="map-search">
-    <div class="line text-field">
-        <input type="text" class="q" name="q" placeholder="Suche" />
-        <i class="fa fa-search icon-search"></i>
-        <i class="fa fa-spinner icon-loading"></i>
+    <div class="line">
+        <div class="result-filter check people" data-result-type="people">
+            <div class="box">
+                {% if filters.people %}
+                    <i class="fa fa-check"></i>
+                {% endif %}
+            </div>
+            <div class="check__label">Menschen</div>
+        </div>
     </div>
 
     <div class="line">
-        <input type="checkbox" class="result-filter" data-result-type="people"
-            name="people" id="people-filter"
-            {% if filters.people %} checked="true" {% endif %} />
-        <label for="people-filter">Menschen</label>
+        <div class="result-filter check events" data-result-type="events">
+            <div class="box">
+                {% if filters.events %}
+                    <i class="fa fa-check"></i>
+                {% endif %}
+            </div>
+            <div class="check__label">Veranstaltungen</div>
+        </div>
     </div>
 
     <div class="line">
-        <input type="checkbox" class="result-filter" data-result-type="events"
-            name="events" id="events-filter"
-            {% if filters.events %} checked="true" {% endif %} />
-        <label for="events-filter">Veranstaltungen</label>
+        <div class="result-filter check projects" data-result-type="projects">
+            <div class="box">
+                {% if filters.projects %}
+                    <i class="fa fa-check"></i>
+                {% endif %}
+            </div>
+            <div class="check__label">Veranstaltungen</div>
+        </div>
     </div>
 
     <div class="line">
-        <input type="checkbox" class="result-filter" data-result-type="projects"
-            name="projects" id="projects-filter"
-            {% if filters.projects %} checked="true" {% endif %} />
-        <label for="projects-filter">Projekte</label>
-    </div>
-
-    <div class="line">
-        <input type="checkbox" class="result-filter" data-result-type="groups"
-            name="groups" id="groups-filter"
-            {% if filters.groups %} checked="true" {% endif %} />
-        <label for="groups-filter">Gruppen</label>
+        <div class="result-filter check groups" data-result-type="groups">
+            <div class="box">
+                {% if filters.groups %}
+                    <i class="fa fa-check"></i>
+                {% endif %}
+            </div>
+            <div class="check__label">Veranstaltungen</div>
+        </div>
     </div>
 
     <div class="line link">
@@ -42,6 +52,12 @@
             &nbsp;
         {% endif %}
     </div>
+
+    <div class="line text-field">
+        <input type="text" class="q" name="q" placeholder="Suche" />
+        <i class="fa fa-search icon-search"></i>
+        <i class="fa fa-spinner icon-loading"></i>
+    </div>
 </form>
 
 <div class="line button">
@@ -49,16 +65,12 @@
         class="btn layer-button {% if layer == 'street' %} active {% endif %}">
         Street
     </div>
-</div>
 
-<div class="line button">
     <div data-layer="satellite"
         class="btn layer-button {% if layer == 'satellite' %} active {% endif %}">
         Satellite
     </div>
-</div>
 
-<div class="line button">
     <div data-layer="terrain"
         class="btn layer-button {% if layer == 'terrain' %} active {% endif %}">
         Terrain
