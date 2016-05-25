@@ -87,7 +87,8 @@ module.exports = View.extend({
 
     updateMarkers: function () {
         var self = this,
-            controls = this.controlsView.model;
+            controls = this.controlsView.model,
+            results = self.model.get('results');
 
         // Remove previous markers from map.
         if (self.markers) {
@@ -97,25 +98,26 @@ module.exports = View.extend({
             maxClusterRadius: 30
         });
 
-        // Add markers for the new results.
-        _(self.model.get('results')).each(function (result) {
-            self.markers.addLayer(L
-                .marker([result.lat, result.lon], {
-                    icon: L.icon({
-                        iconUrl: '/static/js/vendor/images/marker-icon-2x-' +
-                            self.resultColours[result.type] + '.png',
-                        iconSize: [25, 41],
-                        iconAnchor: [12, 41],
-                        popupAnchor: [1, -34],
-                        shadowSize: [41, 41]
+        _(self.model.activeFilters()).each(function (filter) {
+            _(results[filter]).each(function (result) {
+                self.markers.addLayer(L
+                    .marker([result.lat, result.lon], {
+                        icon: L.icon({
+                            iconUrl: '/static/js/vendor/images/marker-icon-2x-' +
+                                self.resultColours.people + '.png',
+                            iconSize: [25, 41],
+                            iconAnchor: [12, 41],
+                            popupAnchor: [1, -34],
+                            shadowSize: [41, 41]
+                        })
                     })
-                })
-                .bindPopup(popupTemplate.render({
-                    imageURL: result.imageUrl,
-                    title: result.title,
-                    url: result.url,
-                    address: result.address
-                })));
+                    .bindPopup(popupTemplate.render({
+                        imageURL: result.imageUrl,
+                        title: result.title,
+                        url: result.url,
+                        address: result.address
+                    })));
+            });
         });
 
         self.leaflet.addLayer(this.markers);

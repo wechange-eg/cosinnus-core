@@ -21,11 +21,16 @@ module.exports = Backbone.Model.extend({
         var self = this;
         var url = this.buildURL();
         self.trigger('start:search');
-        self.mockSearchService(url, function (res) {
+        $.get(url, function (res) {
             self.set('results', res);
             self.trigger('change:results');
             self.trigger('end:search');
         });
+        // self.mockSearchService(url, function (res) {
+        //     self.set('results', res);
+        //     self.trigger('change:results');
+        //     self.trigger('end:search');
+        // });
     },
 
     buildURL: function () {
@@ -41,7 +46,7 @@ module.exports = Backbone.Model.extend({
             groups: this.get('filters').groups
         };
         var query = $.param(searchParams);
-        return '/map/search?' + query;
+        return '/maps/search?' + query;
     },
 
     toggleFilter (resultType) {
@@ -97,5 +102,11 @@ module.exports = Backbone.Model.extend({
             });
         });
         cb(results);
+    },
+
+    activeFilters: function () {
+        return _(_(this.get('filters')).keys()).select(function (filter) {
+            return !!filter;
+        });
     }
 });
