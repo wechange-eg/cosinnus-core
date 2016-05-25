@@ -37,7 +37,7 @@ def _notify_users_for_reported_objects(report_obj, request=None):
         portal = target_obj.portal
     else:
         portal = CosinnusPortal.get_current()
-    portal_admins = get_user_model().objects.all().exclude(is_active=False).filter(id__in=portal.admins)
+    portal_admins = get_user_model().objects.all().exclude(is_active=False).exclude(last_login__exact=None).filter(id__in=portal.admins)
     
     for receiver in portal_admins:
         context.update({

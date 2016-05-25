@@ -42,6 +42,7 @@ from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.exceptions import InvalidImageFormatError
 from django.contrib.auth import get_user_model
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.user import filter_active_users
 
 logger = logging.getLogger('cosinnus')
 
@@ -619,7 +620,9 @@ class CosinnusBaseGroup(models.Model):
         help_text=_('If a team is not active, it counts as non-existent for all purposes and views on the website.'),
         default=True)
     
-    facebook_group_id = models.CharField(_('Facebook Group/Page ID'), max_length=200, 
+    facebook_group_id = models.CharField(_('Facebook Group ID'), max_length=200, 
+        blank=True, null=True, validators=[MaxLengthValidator(200)])
+    facebook_page_id = models.CharField(_('Facebook Page ID'), max_length=200, 
         blank=True, null=True, validators=[MaxLengthValidator(200)])
     
     parent = models.ForeignKey("self", verbose_name=_('Parent Group'),
@@ -749,9 +752,22 @@ class CosinnusBaseGroup(models.Model):
 
     @property
     def members(self):
+        """ Returns a list of user ids that are members of this group, no matter if active or not """
         if self._members is None:
             self._members = CosinnusGroupMembership.objects.get_members(self.pk)
         return self._members
+    
+    @property
+    def actual_members(self):
+        """ Returns a QS of users that are members of this group and actually active and visible on the site """
+        members_qs = get_user_model().objects.filter(id__in=self.members)
+        members_qs = filter_active_users(members_qs)
+        return members_qs
+    
+    @property
+    def member_count(self):
+        """ Returns a count of this group's active members (users that are active and have logged in) """
+        return self.actual_members.count()
 
     def is_member(self, user):
         """Checks whether the given user is a member of this group"""
@@ -826,8 +842,9 @@ class CosinnusBaseGroup(models.Model):
         return ''
     
     def get_facebook_avatar_url(self):
-        if self.facebook_group_id:
-            return 'https://graph.facebook.com/%s/picture?type=square' % self.facebook_group_id
+        page_or_group_id = self.facebook_page_id or self.facebook_group_id or None
+        if page_or_group_id:
+            return 'https://graph.facebook.com/%s/picture?type=square' % page_or_group_id
         return ''
     
     def get_locations(self):

@@ -15,6 +15,9 @@ from django.conf import settings
 from cosinnus.conf import settings as cosinnus_settings
 import json
 import urllib2
+from django.utils.encoding import force_text
+from uuid import uuid4
+import pickle
 
 
 def housekeeping(request=None):
@@ -114,13 +117,27 @@ def recreate_all_group_widgets(request=None, verbose=False):
 HOUSEKEEPING_CACHE_KEY = 'cosinnus/core/housekeeping/setcache_debug'
 
 def setcache(request, content):
-    """ access to function for moving group content from one group to another """
+    """ set the cache with <content> /housekeeping/setcache/<content>/ """
     if not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     
     content = force_text(content)
     cache.set(HOUSEKEEPING_CACHE_KEY, content)
     return HttpResponse("Set '%s' as debug cache entry." % content)
+        
+def fillcache(request, number):
+    """ fills the cache with a list of random string uids """
+    if not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    
+    try:
+        number = int(number)
+    except:
+        return HttpResponse("Argument given in URL must be a number!")
+    
+    content = ['XXXxXXXxXXXxXXXxXXXxXXXxXXXxXXXxXXXxXXXxXXXxXXXxXXXxXXXxXXXxXXXx' for num in range(number)]
+    cache.set(HOUSEKEEPING_CACHE_KEY, content)
+    return HttpResponse("Set %d bytes as debug cache entry." % len(pickle.dumps(content, -1)))
         
         
 def getcache(request):

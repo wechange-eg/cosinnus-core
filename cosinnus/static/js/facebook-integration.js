@@ -2,7 +2,7 @@ $(function() {
     
     $.cosinnus.facebookIntegration = {
             
-        PERMISSIONS: 'publish_actions',
+        PERMISSIONS: 'publish_actions,publish_pages,manage_pages',
         APP_ID: COSINNUS_FACEBOOK_INTEGRATION_APP_ID,
         
         isLoaded: false,
