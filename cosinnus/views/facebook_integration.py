@@ -246,7 +246,7 @@ class FacebookIntegrationGroupFormMixin(object):
                     had_error = True
             
             #  if group could not be accessed in any way throw validation eorr
-            if had_error:
+            if had_error and not settings.DEBUG:
                 raise forms.ValidationError(_('The Facebook Fan-Page ID or Group ID could not be found on Facebook! Make sure you have entered the correct ID for your Group/Fan-Page!'))
             
             # for Facebook Fan-Pages, we immediately try to get an access token to the fan-page, and deny connecting it
