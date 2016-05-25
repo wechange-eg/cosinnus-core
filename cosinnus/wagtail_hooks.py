@@ -150,6 +150,11 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
             'panels': [],
             'user': request.user,
         }
+        if import_running and request.GET.get('force_stop', None):
+            # enables clearing the cache if the thread has stopped, like after a server reboot during import
+            import_running = False
+            cache.delete(GROUP_IMPORT_RUNNING_CACHE_KEY)
+            template = "cosinnus/wagtail/wagtailadmin/import_projects.html"
         if import_running:
             import_progress = cache.get(GROUP_IMPORT_PROGRESS_CACHE_KEY, 0)
             context.update({'import_progress': import_progress})

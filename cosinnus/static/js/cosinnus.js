@@ -798,20 +798,20 @@
 
             $('.next-button-is-for-sending').each(function() {
                     // save the original margin bottom
-                    $(this).closest('.btn')
-                        .data('margin-bottom',parseInt($(this).closest('.btn').css('margin-bottom')))
+                    $(this).closest('.btn, .sendbutton')
+                        .data('margin-bottom',parseInt($(this).closest('.btn, .sendbutton').css('margin-bottom')))
                         .after('<div></div>'); // Fixes Chrome floating bug that hides send button
                 })
                     .on('propertychange input paste change', function() {
-                    var sendbutton = $(this).closest('.btn').nextAll('.btn').first();
+                    var sendbutton = $(this).closest('.btn, .sendbutton').nextAll('.btn, .sendbutton').first();
                     if ($(this).val()) {
                         sendbutton.show();
-                        $(this).closest('.btn').css('margin-bottom',0);
+                        $(this).closest('.btn, .sendbutton').css('margin-bottom',0);
                     } else {
                         sendbutton.hide();
                         $(this)
-                            .closest('.btn')
-                            .css('margin-bottom',$(this).closest('.btn').data('margin-bottom'));
+                            .closest('.btn, .sendbutton')
+                            .css('margin-bottom',$(this).closest('.btn, .sendbutton').data('margin-bottom'));
                     }
                 });
 

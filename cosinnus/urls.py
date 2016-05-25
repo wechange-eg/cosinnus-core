@@ -44,6 +44,7 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^housekeeping/movegroupcontent/(?P<fromgroup>[^/]+)/(?P<togroup>[^/]+)/$', 'housekeeping.move_group_content', name='housekeeping_move_group_content'),
     url(r'^housekeeping/recreategroupwidgets/$', 'housekeeping.recreate_all_group_widgets', name='housekeeping_recreate_all_group_widgets'),
     url(r'^housekeeping/setcache/(?P<content>[^/]+)/$', 'housekeeping.setcache', name='housekeeping-setcache'),
+    url(r'^housekeeping/fillcache/(?P<number>[^/]+)/$', 'housekeeping.fillcache', name='housekeeping-fillcache'),
     url(r'^housekeeping/getcache$', 'housekeeping.getcache', name='housekeeping-getcache'),
     url(r'^housekeeping/validate_redirects', 'housekeeping.check_and_delete_loop_redirects', name='housekeeping-validate-redirects'),
     url(r'^housekeeping/add_members_to_forum', 'housekeeping.add_members_to_forum', name='housekeeping-add-members-to-forum'),
@@ -69,7 +70,7 @@ if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED:
     urlpatterns += patterns('cosinnus.views', 
         url(r'^fb-integration/save-auth-tokens/$', 'facebook_integration.save_auth_tokens',  name='facebook-save-auth-tokens'),
         url(r'^fb-integration/remove-facebook/$', 'facebook_integration.remove_facebook_association',  name='facebook-remove-association'),
-        
+        url(r'^fb-integration/confirm-page-admin/(?P<group_id>\d+)/$', 'facebook_integration.confirm_page_admin',  name='facebook-confirm-page-admin'),
     )
 
 for url_key in group_model_registry:

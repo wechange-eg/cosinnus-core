@@ -23,7 +23,14 @@
 	    <div style="width:100%; max-height: 500px; white-space: nowrap; overflow-x: auto; overflow-y: auto;">
 	    	{% if import_results.read_errors %}
 		    	<h3>{% trans "Read errors:" %} {{ import_results.read_errors }} </h3>
-		    	<p>{% trans "There were errors in your CSV file and a number of lines could not be read and were IGNORED:" %} {{ import_results.read_errors }}</p>
+		    	<p>{% trans "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:" %} {{ import_results.read_errors }}</p>
+		    	{% if import_results.bad_rows %}
+		    	<p>
+		    		{% for bad_row in import_results.bad_rows %}
+		    			{{ bad_row }} <br/>
+		    		{% endfor %}
+		    	</p>
+		    	{% endif %}
 		    {% endif %}
 	    
 		    {% if import_results.successes %}

@@ -3,19 +3,14 @@ from __future__ import unicode_literals
 
 import logging
 
-from django.contrib.auth.models import Group
 from django.conf import settings
 
 from cosinnus.core.registries.widgets import widget_registry
-from cosinnus.models.widget import WidgetConfig
-from cosinnus.models.group import CosinnusGroupMembership, MEMBERSHIP_MEMBER
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.contrib.auth import get_user_model
 from django.core.exceptions import MultipleObjectsReturned
 
 logger = logging.getLogger('cosinnus')
-
-USER_MODEL = get_user_model()
 
 
 def get_user_by_email_safe(email):
@@ -30,6 +25,7 @@ def get_user_by_email_safe(email):
             
         @return: None if no user was found. A user object if found, even if it had a duplicated email.
     """
+    USER_MODEL = get_user_model()
     if not email:
         return None
     try:
@@ -61,6 +57,7 @@ def get_user_by_email_safe(email):
         
 def ensure_user_widget(user, app_name, widget_name, config={}):
     """ Makes sure if a widget exists for the given user, and if not, creates it """
+    from cosinnus.models.widget import WidgetConfig
     wqs = WidgetConfig.objects.filter(user_id=user.pk, app_name=app_name, widget_name=widget_name)
     if wqs.count() <= 0:
         widget_class = widget_registry.get(app_name, widget_name)
@@ -69,6 +66,7 @@ def ensure_user_widget(user, app_name, widget_name, config={}):
 
     
 def assign_user_to_default_auth_group(sender, **kwargs):
+    from django.contrib.auth.models import Group
     user = kwargs.get('instance')
     for group_name in getattr(settings, 'NEWW_DEFAULT_USER_AUTH_GROUPS', []):
         try:
@@ -80,6 +78,7 @@ def assign_user_to_default_auth_group(sender, **kwargs):
 def ensure_user_to_default_portal_groups(sender, created, **kwargs):
     """ Whenever a portal membership changes, make sure the user is in the default groups for this Portal """
     try:
+        from cosinnus.models.group import CosinnusGroupMembership, MEMBERSHIP_MEMBER
         membership = kwargs.get('instance')
         CosinnusGroup = get_cosinnus_group_model()
         for group_slug in getattr(settings, 'NEWW_DEFAULT_USER_GROUPS', []):
@@ -93,3 +92,11 @@ def ensure_user_to_default_portal_groups(sender, created, **kwargs):
         # We fail silently, because we never want to 500 here unexpectedly
         logger.error("Error while trying to add User Membership for newly created user.")
 
+def filter_active_users(user_model_qs):
+    """ Filters a QS of ``get_user_model()`` so that all users are removed that are either of
+            - inactive
+            - have never logged in
+            - have not accepted the ToS """
+    return user_model_qs.exclude(is_active=False).\
+        exclude(last_login__exact=None).\
+        filter(cosinnus_profile__settings__contains='tos_accepted')

@@ -64,7 +64,7 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, forms.ModelForm):
         fields = ['name', 'public', 'description', 'description_long', 'contact_info', 
                         'avatar', 'wallpaper', 'website', 'deactivated_apps'] \
                         + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) \
-                        + (['facebook_group_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else [])
+                        + (['facebook_group_id', 'facebook_page_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else [])
 
     def __init__(self, instance, *args, **kwargs):    
         if 'request' in kwargs:

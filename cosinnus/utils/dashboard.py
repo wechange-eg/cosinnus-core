@@ -237,6 +237,7 @@ class GroupMembersWidget(DashboardWidget):
         userprofile_table = get_user_profile_model()._meta.db_table
         qs = get_user_model()._default_manager.filter(is_active=True) \
             .exclude(last_login__exact=None) \
+            .filter(cosinnus_profile__settings__contains='tos_accepted') \
             .select_related('cosinnus_profile') \
             .extra(select={
                 'has_avatar': 'LENGTH(%s.avatar) > 0' % userprofile_table

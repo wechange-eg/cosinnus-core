@@ -32,6 +32,7 @@ from django.template.context import RequestContext
 from django.template.response import TemplateResponse
 from django.core.paginator import Paginator
 from cosinnus.views.mixins.group import EndlessPaginationMixin
+from cosinnus.utils.user import filter_active_users
 
 
 USER_MODEL = get_user_model()
@@ -57,9 +58,7 @@ class UserListView(EndlessPaginationMixin, ListView):
         
         # get all users from this portal only        
         # we also exclude users who have never logged in
-        all_users = super(UserListView, self).get_queryset().exclude(is_active=False).\
-                        exclude(last_login__exact=None).\
-                        filter(id__in=CosinnusPortal.get_current().members)
+        all_users = filter_active_users(super(UserListView, self).get_queryset().filter(id__in=CosinnusPortal.get_current().members))
         
         if self.request.user.is_authenticated():
             visibility_level = BaseTagObject.VISIBILITY_GROUP
