@@ -168,6 +168,10 @@ def map_search_endpoint(request):
         people = []
         user_qs = _get_user_base_queryset(request)
         user_qs = user_qs.exclude(cosinnus_profile__media_tag__location_lat=None)
+        user_qs = user_qs.filter(cosinnus_profile__media_tag__location_lat__gte=params['sw_lat'],
+                                 cosinnus_profile__media_tag__location_lon__lte=params['sw_lon'],
+                                 cosinnus_profile__media_tag__location_lat__lte=params['ne_lat'],
+                                 cosinnus_profile__media_tag__location_lon__gte=params['ne_lon'])
         for user in user_qs:
             # TODO: FIXME: refactor in UserMapResult!
             people.append(MapResult(
