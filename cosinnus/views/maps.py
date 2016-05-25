@@ -130,6 +130,20 @@ class MapResult(dict):
         self['imageUrl'] = imageUrl
         return super(MapResult, self).__init__(*args, **kwargs)
 
+class UserMapResult(MapResult):
+    """ Takes a ``get_user_model()`` object and funnels its properties into a proper MapResult """
+    
+    def __init__(self, user, *args, **kwargs):
+        return super(UserMapResult, self).__init__(
+            user.cosinnus_profile.media_tag.location_lat, 
+            user.cosinnus_profile.media_tag.location_lon,
+            user.cosinnus_profile.media_tag.location, 
+            user.get_full_name(), 
+            user.cosinnus_profile.get_absolute_url(),
+            user.cosinnus_profile.get_avatar_thumbnail_url() or static('images/jane-doe.png') # FIXME: TOOD: compatibility with custom DRJA avatars!
+        )
+    
+
 class MapSearchResults(dict):
     """ The return of a map search, containing lists of ``MapResult``, enforcing required sets of results """
     
@@ -155,8 +169,20 @@ MAP_PARAMETERS = {
     'limit': None, # result count limit, integer or None
 }
 
-
-  
+def _filter_qs_location_bounds(qs, params, media_tag_prefix=''):
+    """ Filters a Queryset for latitude, longitude inside a given bounding box.
+        @return: the filtered Queryset """
+    filter_kwargs = {
+        media_tag_prefix + 'media_tag__location_lat__gte': params['sw_lat'],
+        media_tag_prefix + 'media_tag__location_lon__lte':params['sw_lon'],
+        media_tag_prefix + 'media_tag__location_lat__lte':params['ne_lat'],
+        media_tag_prefix + 'media_tag__location_lon__gte':params['ne_lon'],
+    }
+    qs = qs.exclude(**{media_tag_prefix + 'media_tag__location_lat': None})
+    qs = qs.filter(**filter_kwargs)
+    return qs
+    
+    
 def map_search_endpoint(request):
     """ Maps API search endpoints. For parameters see ``MAP_PARAMETERS`` 
         returns JSON with the contents of type ``MapSearchResults``"""
@@ -167,21 +193,10 @@ def map_search_endpoint(request):
     if params['people']:
         people = []
         user_qs = _get_user_base_queryset(request)
-        user_qs = user_qs.exclude(cosinnus_profile__media_tag__location_lat=None)
-        user_qs = user_qs.filter(cosinnus_profile__media_tag__location_lat__gte=params['sw_lat'],
-                                 cosinnus_profile__media_tag__location_lon__lte=params['sw_lon'],
-                                 cosinnus_profile__media_tag__location_lat__lte=params['ne_lat'],
-                                 cosinnus_profile__media_tag__location_lon__gte=params['ne_lon'])
+        user_qs = _filter_qs_location_bounds(user_qs, params, 'cosinnus_profile__')
         for user in user_qs:
-            # TODO: FIXME: refactor in UserMapResult!
-            people.append(MapResult(
-                user.cosinnus_profile.media_tag.location_lat, 
-                user.cosinnus_profile.media_tag.location_lon,
-                user.cosinnus_profile.media_tag.location, 
-                user.get_full_name(), 
-                user.cosinnus_profile.get_absolute_url(),
-                user.cosinnus_profile.get_avatar_thumbnail_url() or static('images/jane-doe.png') # FIXME: TOOD: compatibility with custom DRJA avatars!
-            ))
+            people.append(UserMapResult(user))
+            
         results['people'] = people
     
     data = MapSearchResults(**results)
