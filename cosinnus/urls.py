@@ -53,6 +53,7 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^housekeeping/validate_redirects', 'housekeeping.check_and_delete_loop_redirects', name='housekeeping-validate-redirects'),
     url(r'^housekeeping/add_members_to_forum', 'housekeeping.add_members_to_forum', name='housekeeping-add-members-to-forum'),
     url(r'^housekeeping/user_statistics', 'housekeeping.user_statistics', name='housekeeping-user-statistics'),
+    url(r'^housekeeping/create_map_test_entities/(?P<count>\d+)/', 'housekeeping.create_map_test_entities', name='housekeeping-create-map-test-entities'),
     
     url(r'^select2/', include('cosinnus.urls_select2', namespace='select2')),
 )
