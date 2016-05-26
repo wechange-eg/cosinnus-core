@@ -106,7 +106,7 @@ def _get_projects_base_queryset(request):
     
 def _get_events_base_queryset(request, show_past_events=False):
     try:
-        from cosinnus_events.models import Event, upcoming_event_filter
+        from cosinnus_event.models import Event, upcoming_event_filter
     except:
         return []
     qs = Event.objects.all()
@@ -121,13 +121,14 @@ def _get_events_base_queryset(request, show_past_events=False):
 class MapResult(dict):
     """ A single result for the search of the map, enforcing required fields """
     
-    def __init__(self, lat, lon, address, title, url=None, imageUrl=None, *args, **kwargs):
+    def __init__(self, lat, lon, address, title, url=None, imageUrl=None, description=None, *args, **kwargs):
         self['lat'] = lat
         self['lon'] = lon
         self['address'] = address
         self['title'] = title
         self['url'] = url
         self['imageUrl'] = imageUrl
+        self['description'] = description
         return super(MapResult, self).__init__(*args, **kwargs)
 
 class UserMapResult(MapResult):
@@ -140,7 +141,42 @@ class UserMapResult(MapResult):
             user.cosinnus_profile.media_tag.location, 
             user.get_full_name(), 
             user.cosinnus_profile.get_absolute_url(),
-            user.cosinnus_profile.get_avatar_thumbnail_url() or static('images/jane-doe.png') # FIXME: TOOD: compatibility with custom DRJA avatars!
+            user.cosinnus_profile.get_map_marker_image_url(),
+            user.cosinnus_profile.description,
+        )
+        
+class GroupMapResult(MapResult):
+    """ Takes a ``get_user_model()`` object and funnels its properties into a proper MapResult 
+        
+        Note: Only returns 1 Map Result for each group, even if the group has multiple Locations set.
+              Returns the first location set on the group.
+    """
+    
+    def __init__(self, group, *args, **kwargs):
+        # only return one resu
+        loc = group.locations.all()[0]
+        return super(GroupMapResult, self).__init__(
+            loc.location_lat, 
+            loc.location_lon,
+            loc.location, 
+            group['name'], 
+            group.get_absolute_url(),
+            group.get_map_marker_image_url() or static('images/group-avatar-placeholder.png'),
+            group['description_long'] or group['description'],
+        )
+        
+class EventMapResult(MapResult):
+    """ Takes a ``get_user_model()`` object and funnels its properties into a proper MapResult """
+    
+    def __init__(self, event, *args, **kwargs):
+        return super(EventMapResult, self).__init__(
+            event.media_tag.location_lat, 
+            event.media_tag.location_lon,
+            event.media_tag.location, 
+            event.title, 
+            event.get_absolute_url(),
+            (event.attached_image and event.attached_image.static_image_url) or static('images/event-image-placeholder.png'),
+            event.note,
         )
     
 
@@ -169,16 +205,16 @@ MAP_PARAMETERS = {
     'limit': None, # result count limit, integer or None
 }
 
-def _filter_qs_location_bounds(qs, params, media_tag_prefix=''):
+def _filter_qs_location_bounds(qs, params, location_object_prefix='media_tag__'):
     """ Filters a Queryset for latitude, longitude inside a given bounding box.
         @return: the filtered Queryset """
     filter_kwargs = {
-        media_tag_prefix + 'media_tag__location_lat__gte': params['sw_lat'],
-        media_tag_prefix + 'media_tag__location_lon__lte':params['sw_lon'],
-        media_tag_prefix + 'media_tag__location_lat__lte':params['ne_lat'],
-        media_tag_prefix + 'media_tag__location_lon__gte':params['ne_lon'],
+        location_object_prefix + 'location_lat__gte': params['sw_lat'],
+        location_object_prefix + 'location_lon__lte':params['sw_lon'],
+        location_object_prefix + 'location_lat__lte':params['ne_lat'],
+        location_object_prefix + 'location_lon__gte':params['ne_lon'],
     }
-    qs = qs.exclude(**{media_tag_prefix + 'media_tag__location_lat': None})
+    qs = qs.exclude(**{location_object_prefix + 'location_lat': None})
     qs = qs.filter(**filter_kwargs)
     return qs
     
@@ -193,12 +229,36 @@ def map_search_endpoint(request):
     if params['people']:
         people = []
         user_qs = _get_user_base_queryset(request)
-        user_qs = _filter_qs_location_bounds(user_qs, params, 'cosinnus_profile__')
+        user_qs = _filter_qs_location_bounds(user_qs, params, 'cosinnus_profile__media_tag__')
         for user in user_qs:
             people.append(UserMapResult(user))
-            
         results['people'] = people
-    
+
+    if params['projects']:
+        projects = []
+        projects_qs = _get_projects_base_queryset(request)
+        projects_qs = _filter_qs_location_bounds(projects_qs, params, 'locations__')
+        for project in projects_qs:
+            projects.append(GroupMapResult(project))
+        results['projects'] = projects
+        
+    if params['groups']:
+        groups = []
+        groups_qs = _get_societies_base_queryset(request)
+        groups_qs = _filter_qs_location_bounds(groups_qs, params, 'locations__')
+        for group in groups_qs:
+            groups.append(GroupMapResult(group))
+        results['groups'] = groups
+        
+    if params['events']:
+        events = []
+        events_qs = _get_events_base_queryset(request)
+        if events_qs:
+            events_qs = _filter_qs_location_bounds(events_qs, params, 'media_tag__')
+        for event in events_qs:
+            events.append(EventMapResult(event))
+        results['events'] = events
+        
     data = MapSearchResults(**results)
     return JsonResponse(data)
 
