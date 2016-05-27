@@ -21,16 +21,16 @@ module.exports = Backbone.Model.extend({
         var self = this;
         var url = this.buildURL();
         self.trigger('start:search');
-        $.get(url, function (res) {
-            self.set('results', res);
-            self.trigger('change:results');
-            self.trigger('end:search');
-        });
-        // self.mockSearchService(url, function (res) {
+        // $.get(url, function (res) {
         //     self.set('results', res);
         //     self.trigger('change:results');
         //     self.trigger('end:search');
         // });
+        self.mockSearchService(url, function (res) {
+            self.set('results', res);
+            self.trigger('change:results');
+            self.trigger('end:search');
+        });
     },
 
     buildURL: function () {

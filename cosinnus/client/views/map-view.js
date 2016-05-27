@@ -29,10 +29,10 @@ module.exports = View.extend({
     },
 
     resultColours: {
-        people: 'blue',
-        events: 'red',
+        people: 'red',
+        events: 'yellow',
         projects: 'green',
-        groups: 'orange'
+        groups: 'blue'
     },
 
     initialize: function () {
@@ -98,26 +98,24 @@ module.exports = View.extend({
             maxClusterRadius: 30
         });
 
-        _(self.model.activeFilters()).each(function (filter) {
-            _(results[filter]).each(function (result) {
-                self.markers.addLayer(L
-                    .marker([result.lat, result.lon], {
-                        icon: L.icon({
-                            iconUrl: '/static/js/vendor/images/marker-icon-2x-' +
-                                self.resultColours.people + '.png',
-                            iconSize: [25, 41],
-                            iconAnchor: [12, 41],
-                            popupAnchor: [1, -34],
-                            shadowSize: [41, 41]
-                        })
+        _(results).each(function (result) {
+            self.markers.addLayer(L
+                .marker([result.lat, result.lon], {
+                    icon: L.icon({
+                        iconUrl: '/static/js/vendor/images/marker-icon-2x-' +
+                            self.resultColours[result.type] + '.png',
+                        iconSize: [17, 28],
+                        iconAnchor: [8, 28],
+                        popupAnchor: [1, -27],
+                        shadowSize: [28, 28]
                     })
-                    .bindPopup(popupTemplate.render({
-                        imageURL: result.imageUrl,
-                        title: result.title,
-                        url: result.url,
-                        address: result.address
-                    })));
-            });
+                })
+                .bindPopup(popupTemplate.render({
+                    imageURL: result.imageUrl,
+                    title: result.title,
+                    url: result.url,
+                    address: result.address
+                })));
         });
 
         self.leaflet.addLayer(this.markers);
