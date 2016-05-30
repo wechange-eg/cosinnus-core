@@ -254,7 +254,7 @@ def create_map_test_entities(request=None, count=1):
         usernum += 1
         eventnum += 1
         proj = CosinnusProject.objects.create(name='MapProject #%d' % projnum, public=True, description='Test description')
-        group = CosinnusGroup.objects.create(name='MapGroup #%d' % groupnum, public=True, description='Test description')
+        group = CosinnusSociety.objects.create(name='MapGroup #%d' % groupnum, public=True, description='Test description')
         user = get_user_model().objects.create(username='mapuser%d' % usernum, first_name='MapUser #%d' % usernum,
             email='testuser%d@nowhere.com' % usernum, is_active=True, last_login=now())
         CosinnusPortalMembership.objects.create(group=CosinnusPortal.get_current(), user=user, status=1)
