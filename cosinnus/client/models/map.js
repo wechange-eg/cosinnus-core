@@ -31,10 +31,10 @@ module.exports = Backbone.Model.extend({
     buildURL: function () {
         var searchParams = {
             q: this.get('q'),
-            north: this.get('north'),
-            south: this.get('south'),
-            east: this.get('east'),
-            west: this.get('west'),
+            ne_lat: this.get('north'),
+            ne_lon: this.get('east'),
+            sw_lat: this.get('south'),
+            sw_lon: this.get('west'),
             people: this.get('filters').people,
             events: this.get('filters').events,
             projects: this.get('filters').projects,
