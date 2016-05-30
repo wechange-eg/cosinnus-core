@@ -7,7 +7,7 @@ var popupTemplate = require('map/popup');
 module.exports = View.extend({
     layers: {
         street: {
-            url: 'https://otile1-s.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
+            url: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png',
             options: {
                 attribution: 'Open Streetmap'
             }
