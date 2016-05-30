@@ -41,6 +41,8 @@ from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from cosinnus.utils.functions import is_number
 import six
+from django.db.models import Q
+from operator import __or__ as OR, __and__ as AND
 
 
 USER_MODEL = get_user_model()
@@ -73,7 +75,7 @@ def _better_json_loads(s):
         return None
     try:
         return json.loads(s)
-    except ValueError:
+    except ValueError, e:
         if isinstance(s, six.string_types):
             return s
         else:
@@ -233,15 +235,31 @@ def _filter_qs_location_bounds(qs, params, location_object_prefix='media_tag__')
     return qs
     
     
+def _filter_qs_text(qs, text, attributes=['title',]):
+    """ Filters a Queryset for a text string. 
+        The text string will be whitespace-tokenized and QS will be filtered for __icontains,
+        ANDed by-token, and ORed by object attribute, so that each token must appear in at least on of the attributes
+        @return: the filtered Queryset """
+    and_tokens = []
+    for token in text.split():
+        or_attrs = []
+        for attr in attributes:
+            or_attrs.append(Q(**{attr + '__icontains': token}))
+        and_tokens.append(reduce(OR, or_attrs))
+    qs = qs.filter(reduce(AND, and_tokens))
+    return qs
+    
+    
 def map_search_endpoint(request):
     """ Maps API search endpoints. For parameters see ``MAP_PARAMETERS`` 
         returns JSON with the contents of type ``MapSearchResults``"""
     
     params = _collect_parameters(request.GET, MAP_PARAMETERS)
-    datasets = [setname for setname in ['people', 'projects', 'groups', 'events'] if params[setname]]
-    limit_per_set = 100000
+    query = params['q']
     
     # return equal count parts of the data limit for each dataset
+    datasets = [setname for setname in ['people', 'projects', 'groups', 'events'] if params[setname]]
+    limit_per_set = 100000
     limit = params['limit']
     if limit:
         if not is_number(limit) or limit < 0:
@@ -249,13 +267,14 @@ def map_search_endpoint(request):
         limit_per_set = int(float(limit) / float(len(datasets))) if limit != 0 else limit_per_set
         if limit > 0 and limit_per_set < 1:
             limit_per_set = 1
-        
     
     results = {}
     if params['people']:
         people = []
         user_qs = _get_user_base_queryset(request)
         user_qs = _filter_qs_location_bounds(user_qs, params, 'cosinnus_profile__media_tag__')
+        if query:
+            user_qs = _filter_qs_text(user_qs, query, ['first_name', 'last_name'])
         for user in user_qs[:limit_per_set]:
             people.append(UserMapResult(user))
         results['people'] = people
@@ -264,6 +283,8 @@ def map_search_endpoint(request):
         projects = []
         projects_qs = _get_projects_base_queryset(request)
         projects_qs = _filter_qs_location_bounds(projects_qs, params, 'locations__')
+        if query:
+            projects_qs = _filter_qs_text(projects_qs, query, CosinnusProject.NAME_LOOKUP_FIELDS)
         for project in projects_qs[:limit_per_set]:
             projects.append(GroupMapResult(project))
         results['projects'] = projects
@@ -272,6 +293,8 @@ def map_search_endpoint(request):
         groups = []
         groups_qs = _get_societies_base_queryset(request)
         groups_qs = _filter_qs_location_bounds(groups_qs, params, 'locations__')
+        if query:
+            groups_qs = _filter_qs_text(groups_qs, query, CosinnusSociety.NAME_LOOKUP_FIELDS)
         for group in groups_qs[:limit_per_set]:
             groups.append(GroupMapResult(group))
         results['groups'] = groups
@@ -281,6 +304,8 @@ def map_search_endpoint(request):
         events_qs = _get_events_base_queryset(request)
         if events_qs:
             events_qs = _filter_qs_location_bounds(events_qs, params, 'media_tag__')
+            if query:
+                events_qs = _filter_qs_text(events_qs, query, ['title'])
         for event in events_qs[:limit_per_set]:
             events.append(EventMapResult(event))
         results['events'] = events
