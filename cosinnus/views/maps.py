@@ -224,9 +224,9 @@ def _filter_qs_location_bounds(qs, params, location_object_prefix='media_tag__')
         @return: the filtered Queryset """
     filter_kwargs = {
         location_object_prefix + 'location_lat__gte': params['sw_lat'],
-        location_object_prefix + 'location_lon__lte':params['sw_lon'],
+        location_object_prefix + 'location_lon__gte':params['sw_lon'],
         location_object_prefix + 'location_lat__lte':params['ne_lat'],
-        location_object_prefix + 'location_lon__gte':params['ne_lon'],
+        location_object_prefix + 'location_lon__lte':params['ne_lon'],
     }
     qs = qs.exclude(**{location_object_prefix + 'location_lat': None})
     qs = qs.filter(**filter_kwargs)
