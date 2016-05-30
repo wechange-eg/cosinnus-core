@@ -209,9 +209,9 @@ class MapSearchResults(dict):
 MAP_PARAMETERS = {
     'q': '', # search query, wildcard if empty
     'sw_lat': -90, # SW latitude, max southwest
-    'sw_lon': 180, # SW longitude, max southwest
+    'sw_lon': -180, # SW longitude, max southwest
     'ne_lat': 90, # NE latitude, max northeast
-    'ne_lon': -180, # NE latitude, max northeast
+    'ne_lon': 180, # NE latitude, max northeast
     'people': True,
     'events': True,
     'projects': True,
