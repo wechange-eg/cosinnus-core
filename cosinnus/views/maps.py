@@ -23,7 +23,8 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.core.mail import MailThread, get_common_mail_context,\
     send_mail_or_fail_threaded
 from django.template.loader import render_to_string
-from django.http.response import HttpResponseNotAllowed, JsonResponse
+from django.http.response import HttpResponseNotAllowed, JsonResponse,\
+    HttpResponseBadRequest
 from django.shortcuts import redirect
 from cosinnus.templatetags.cosinnus_tags import full_name_force
 from django.contrib.auth.views import password_reset, password_change
@@ -38,6 +39,8 @@ from cosinnus.utils.user import filter_active_users
 from django.conf import settings
 from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from cosinnus.utils.functions import is_number
+import six
 
 
 USER_MODEL = get_user_model()
@@ -64,7 +67,18 @@ class MapView(ListView):
 
 map_view = MapView.as_view()
 
-
+def _better_json_loads(s):
+    """ Can pass pure string values and None through without exception """
+    if s is None:
+        return None
+    try:
+        return json.loads(s)
+    except ValueError:
+        if isinstance(s, six.string_types):
+            return s
+        else:
+            raise
+        
 
 def _collect_parameters(param_dict, parameter_list):
     """ For a GET/POST dict, collects all attributes listes as keys in ``parameter_list``. 
@@ -72,7 +86,7 @@ def _collect_parameters(param_dict, parameter_list):
     results = {}
     for key, value in parameter_list.items():
         if key in param_dict:
-            results[key] = json.loads(param_dict.get(key)) if param_dict.get(key) else None
+            results[key] = _better_json_loads(param_dict.get(key, None))
         else:
             results[key] = value
     return results
@@ -224,13 +238,25 @@ def map_search_endpoint(request):
         returns JSON with the contents of type ``MapSearchResults``"""
     
     params = _collect_parameters(request.GET, MAP_PARAMETERS)
+    datasets = [setname for setname in ['people', 'projects', 'groups', 'events'] if params[setname]]
+    limit_per_set = 100000
+    
+    # return equal count parts of the data limit for each dataset
+    limit = params['limit']
+    if limit:
+        if not is_number(limit) or limit < 0:
+            return HttpResponseBadRequest('``limit`` param must be a positive number or 0!')
+        limit_per_set = int(float(limit) / float(len(datasets))) if limit != 0 else limit_per_set
+        if limit > 0 and limit_per_set < 1:
+            limit_per_set = 1
+        
     
     results = {}
     if params['people']:
         people = []
         user_qs = _get_user_base_queryset(request)
         user_qs = _filter_qs_location_bounds(user_qs, params, 'cosinnus_profile__media_tag__')
-        for user in user_qs:
+        for user in user_qs[:limit_per_set]:
             people.append(UserMapResult(user))
         results['people'] = people
 
@@ -238,7 +264,7 @@ def map_search_endpoint(request):
         projects = []
         projects_qs = _get_projects_base_queryset(request)
         projects_qs = _filter_qs_location_bounds(projects_qs, params, 'locations__')
-        for project in projects_qs:
+        for project in projects_qs[:limit_per_set]:
             projects.append(GroupMapResult(project))
         results['projects'] = projects
         
@@ -246,7 +272,7 @@ def map_search_endpoint(request):
         groups = []
         groups_qs = _get_societies_base_queryset(request)
         groups_qs = _filter_qs_location_bounds(groups_qs, params, 'locations__')
-        for group in groups_qs:
+        for group in groups_qs[:limit_per_set]:
             groups.append(GroupMapResult(group))
         results['groups'] = groups
         
@@ -255,7 +281,7 @@ def map_search_endpoint(request):
         events_qs = _get_events_base_queryset(request)
         if events_qs:
             events_qs = _filter_qs_location_bounds(events_qs, params, 'media_tag__')
-        for event in events_qs:
+        for event in events_qs[:limit_per_set]:
             events.append(EventMapResult(event))
         results['events'] = events
         
