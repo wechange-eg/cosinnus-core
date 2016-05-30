@@ -356,6 +356,7 @@ COSINNUS_ETHERPAD_API_KEY = '11456b253e74523f62059a5e341dd877fa4c01dbade5ba5309e
 
 # Ethercalc config
 # TODO: set up https server!
+# COSINNUS_ETHERPAD_ENABLE_ETHERCALC = False
 COSINNUS_ETHERCALC_BASE_URL = 'http://calc.wechange.de'
 
 # unsure what this is or where it is being used...?
