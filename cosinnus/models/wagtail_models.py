@@ -31,7 +31,8 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailcore.blocks.struct_block import StructBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
 from cosinnus.models.wagtail_blocks import BetterRichTextField,\
-    STREAMFIELD_BLOCKS
+    STREAMFIELD_BLOCKS, STREAMFIELD_BLOCKS_WIDGETS
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 
 class SplitMultiLangTabsMixin(object):
@@ -508,4 +509,73 @@ class StreamSimpleTwoPage(BaseStreamSimplePage):
         'leftnav',
     )
     
+
+class StreamStartPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
+    """ A simple well-structured StartPage using StreamFields """
     
+    # settings fields
+    show_register_button = models.BooleanField(_('Show Register Button'), default=True)
+    redirect_if_logged_in = models.BooleanField(_('Redirect Logged in Users'),
+        help_text=_('If active, this page will only be visible to non-logged-in users. All others will be redirected to the activities page.'),
+        default=False)
+    
+    # Database fields
+    header_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name=_('Header image'),
+    )
+    header_title = BetterRichTextField(verbose_name=_('Header Title'), blank=True)
+    header_text = BetterRichTextField(verbose_name=_('Header Text'), blank=True)
+    
+    header_content = StreamField(STREAMFIELD_BLOCKS, verbose_name=_('Additional Header content'), blank=True)
+    site_widgets = StreamField(STREAMFIELD_BLOCKS_WIDGETS, verbose_name=_('Site Widgets'), blank=True)
+    bottom_content = StreamField(STREAMFIELD_BLOCKS, verbose_name=_('Bottom content (gray background)'), blank=True)
+    
+    translation_fields = (
+        'title',
+        'header_image',
+        'header_title',
+        'header_text',
+        'header_content',
+        'bottom_content',
+    )
+    
+    # Search index configuraiton
+    search_fields = Page.search_fields + (
+        index.SearchField('header_title'),
+        index.SearchField('header_text'),
+        index.SearchField('header_content'),
+        index.SearchField('bottom_content'),
+    )
+
+    # Editor panels configuration
+    content_panels = Page.content_panels + [
+        ImageChooserPanel('header_image'),
+        FieldPanel('header_title'),
+        FieldPanel('header_text'),
+        
+        StreamFieldPanel('header_content'),
+        StreamFieldPanel('bottom_content'),
+    ]
+    
+    # Editor panels configuration
+    settings_panels = Page.settings_panels + [
+        FieldPanel('show_register_button'),
+        FieldPanel('redirect_if_logged_in'),
+        StreamFieldPanel('site_widgets'),
+    ]
+    
+    template = 'cosinnus/wagtail/stream_start_page.html'
+    
+    def serve(self, request):
+        """ If the redirect flag is set, and the user is logged in, redirect to streams, otherwise, show CMS page """
+        if request.user.is_authenticated() and self.redirect_if_logged_in and not request.GET.get('preview', False):
+            return redirect(get_non_cms_root_url())
+        return super(StreamStartPage, self).serve(request)
+
+
+

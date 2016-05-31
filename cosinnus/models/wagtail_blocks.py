@@ -105,27 +105,41 @@ STREAMFIELD_BLOCKS_NOFRAMES = [
 
 class DoubleFrameBlock(StructBlock):
     
+    columns = blocks.ChoiceBlock(label=_('Proportions'), choices=[
+        ('6-6', _('1/2 + 1/2')),
+        ('8-4', _('2/3 + 1/3')),
+        ('4-8', _('1/3 + 2/3')),
+    ], required=True, default='6-6', icon='fa fa-columns')
+    
     left = blocks.StreamBlock(STREAMFIELD_BLOCKS_NOFRAMES, icon='cogs')
     right = blocks.StreamBlock(STREAMFIELD_BLOCKS_NOFRAMES, icon='cogs')
-
+    
     class Meta:
-        icon = 'fa fa-text'
+        icon = 'fa fa-columns'
         template = 'cosinnus/wagtail/widgets/double_frame.html'
     
     def get_context(self, value):
         context = super(DoubleFrameBlock, self).get_context(value)
         context['left'] = value.get('left')
         context['right'] = value.get('right')
+        context['columns'] = value.get('columns')
         return context
 
 class TripleFrameBlock(StructBlock):
     
+    columns = blocks.ChoiceBlock(label=_('Proportions'), choices=[
+        ('4-4-4', _('1/3 + 1/3 + 1/3')),
+        ('6-3-3', _('1/2 + 1/4 + 1/4')),
+        ('3-6-3', _('1/4 + 1/2 + 1/4')),
+        ('3-3-6', _('1/4 + 1/4 + 1/2')),
+    ], required=True, default='4-4-4', icon='fa fa-columns')
+    
     left = blocks.StreamBlock(STREAMFIELD_BLOCKS_NOFRAMES, icon='cogs')
     middle = blocks.StreamBlock(STREAMFIELD_BLOCKS_NOFRAMES, icon='cogs')
     right = blocks.StreamBlock(STREAMFIELD_BLOCKS_NOFRAMES, icon='cogs')
-
+    
     class Meta:
-        icon = 'fa fa-text'
+        icon = 'fa fa-columns'
         template = 'cosinnus/wagtail/widgets/triple_frame.html'
     
     def get_context(self, value):
@@ -133,6 +147,7 @@ class TripleFrameBlock(StructBlock):
         context['left'] = value.get('left')
         context['middle'] = value.get('middle')
         context['right'] = value.get('right')
+        context['columns'] = value.get('columns')
         return context
     
 class QuadFrameBlock(StructBlock):
@@ -143,7 +158,7 @@ class QuadFrameBlock(StructBlock):
     right = blocks.StreamBlock(STREAMFIELD_BLOCKS_NOFRAMES, icon='cogs')
 
     class Meta:
-        icon = 'fa fa-text'
+        icon = 'fa fa-columns'
         template = 'cosinnus/wagtail/widgets/quad_frame.html'
     
     def get_context(self, value):
@@ -160,5 +175,7 @@ STREAMFIELD_BLOCKS = STREAMFIELD_BLOCKS_NOFRAMES + [
     ('frame_3x1', TripleFrameBlock(icon="form")),
     ('frame_4x1', QuadFrameBlock(icon="form")),
 ]
+
+STREAMFIELD_BLOCKS_WIDGETS = STREAMFIELD_BLOCKS_NOFRAMES
 
     
