@@ -1,0 +1,8 @@
+<div class="row">
+	{% for project in projects %}
+	    <div class="col-sm-3">
+	    	{% include 'cosinnus/group/group_gallery_item.html' with group=project %}
+	    </div>
+    {% endfor %}
+</div><!-- row -->
+	

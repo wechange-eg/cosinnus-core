@@ -15,6 +15,8 @@ from wagtail.wagtailcore import blocks
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailcore.blocks.struct_block import StructBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
+from cosinnus.models.group_extra import CosinnusProject
+from random import shuffle
 
     
 
@@ -176,6 +178,54 @@ STREAMFIELD_BLOCKS = STREAMFIELD_BLOCKS_NOFRAMES + [
     ('frame_4x1', QuadFrameBlock(icon="form")),
 ]
 
-STREAMFIELD_BLOCKS_WIDGETS = STREAMFIELD_BLOCKS_NOFRAMES
+
+
+class GlobalNotesWidgetBlock(blocks.ChoiceBlock):
+    
+    choices=[
+        ('250', _('Medium News Widget')),
+        ('500', _('Large News Widget')),
+    ]
+    default = '250'
+    
+    class Meta:
+        icon = 'form'
+        template = 'cosinnus/wagtail/widgets/global_notes.html'
+    
+    def get_context(self, value):
+        context = super(GlobalNotesWidgetBlock, self).get_context(value)
+        context['height'] = value
+        return context
+
+
+class RandomProjectsWidgetBlock(blocks.ChoiceBlock):
+    
+    choices=[
+        ('4', _('4 Random Projects Widget')),
+        ('8', _('8 Random Projects Widget')),
+    ]
+    default = '4'
+    
+    class Meta:
+        icon = 'group'
+        template = 'cosinnus/wagtail/widgets/random_projects.html'
+    
+    def get_random_projects(self, count=4):
+        all_pks = CosinnusProject.objects.get_pks().keys()
+        shuffle(all_pks)
+        pks = all_pks[:count]
+        projects = CosinnusProject.objects.get_cached(pks=pks)
+        return projects
+    
+    def get_context(self, value):
+        context = super(RandomProjectsWidgetBlock, self).get_context(value)
+        context['projects'] = self.get_random_projects(int(value))
+        return context
+
+
+STREAMFIELD_BLOCKS_WIDGETS = [
+    ('news', GlobalNotesWidgetBlock()),  
+    ('random_projects', RandomProjectsWidgetBlock()),  
+]
 
     
