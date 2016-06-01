@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-24 17:53+0200\n"
+"POT-Creation-Date: 2016-06-01 16:04+0200\n"
 "PO-Revision-Date: 2015-11-14 17:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1332,6 +1332,7 @@ msgstr "Сохранить"
 #: .\templates\cosinnus\hierarchy\move_element_modal.html:48
 #: .\templates\cosinnus\modal_box.html:28
 #: .\templates\cosinnus\utils\facebook_integration.html:83
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:152
 #: .\templates\cosinnus\widgets\add_widget.html:32
 #: .\templates\cosinnus\widgets\delete.html:5
 msgid "Cancel"
@@ -3388,28 +3389,46 @@ msgstr ""
 msgid "Facebook Fan-Page link to"
 msgstr ""
 
-#: .\templates\cosinnus\utils\facebook_integration_group_form.html:84
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:82
+msgid "Choose from your Pages..."
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:89
 msgid "Fan-Page unique name (example: myfanpage)"
 msgstr ""
 
-#: .\templates\cosinnus\utils\facebook_integration_group_form.html:99
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:104
 msgid ""
 "You have Editor access to this Fan-Page and can publish your posts directly "
 "to it."
 msgstr ""
 
-#: .\templates\cosinnus\utils\facebook_integration_group_form.html:105
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:110
 msgid ""
 "Editor access of your Facebook-account for this Fan-Page has not been "
 "confirmed. This is required before you can publish your posts in the voice "
 "of the Fan-Page!"
 msgstr ""
 
-#: .\templates\cosinnus\utils\facebook_integration_group_form.html:115
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:120
 #, fuzzy
 #| msgid "Join now!"
 msgid "Confirm now!"
 msgstr "Присоединяйтесь сейчас!"
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:137
+msgid "Select one of your Facebook pages to connect to"
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:185
+msgid "You do not seem to be Editor or Admin of any pages."
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:190
+msgid ""
+"We could not retrieve your groups from Facebook because of an error. Please "
+"contact an administrator!"
+msgstr ""
 
 #: .\templates\cosinnus\utils\pagination.html:28
 msgid "Next"
@@ -3725,39 +3744,35 @@ msgstr ""
 msgid "Please enter a numeric Facebook Group-ID only!"
 msgstr ""
 
-#: .\views\facebook_integration.py:217
-msgid "Please enter a string Fan-Page unique name only (example: myfanpage)!"
-msgstr ""
-
-#: .\views\facebook_integration.py:250
+#: .\views\facebook_integration.py:251
 msgid ""
 "The Facebook Fan-Page ID or Group ID could not be found on Facebook! Make "
 "sure you have entered the correct ID for your Group/Fan-Page!"
 msgstr ""
 
-#: .\views\facebook_integration.py:257 .\views\facebook_integration.py:274
+#: .\views\facebook_integration.py:258 .\views\facebook_integration.py:275
 msgid ""
 "We could not obtain access to the Fan-Page for your connected Facebook "
 "Account. Please check that you entered the correct Fan-Page name, and that "
 "you are an Editor of that Fan-Page!"
 msgstr ""
 
-#: .\views\facebook_integration.py:269
+#: .\views\facebook_integration.py:270
 msgid "This group does not have a Facebook Fan-Page associated with it!"
 msgstr ""
 
-#: .\views\facebook_integration.py:272
+#: .\views\facebook_integration.py:273
 msgid "Your Editor access for the linked Facebook Fan-Page was confirmed!"
 msgstr ""
 
-#: .\views\facebook_integration.py:410 .\views\facebook_integration.py:423
-#: .\views\facebook_integration.py:433
+#: .\views\facebook_integration.py:411 .\views\facebook_integration.py:424
+#: .\views\facebook_integration.py:434
 msgid ""
 "An error occured when trying to disconnect your facebook account! Please "
 "contact an administrator!"
 msgstr ""
 
-#: .\views\facebook_integration.py:430
+#: .\views\facebook_integration.py:431
 msgid "Your Facebook account was successfully disconnected from this account."
 msgstr ""
 

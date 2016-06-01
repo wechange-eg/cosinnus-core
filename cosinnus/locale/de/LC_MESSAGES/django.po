@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-24 17:53+0200\n"
-"PO-Revision-Date: 2016-05-24 18:09+0200\n"
+"POT-Creation-Date: 2016-06-01 16:04+0200\n"
+"PO-Revision-Date: 2016-06-01 16:06+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -1296,6 +1296,7 @@ msgstr "Speichern"
 #: .\templates\cosinnus\hierarchy\move_element_modal.html:48
 #: .\templates\cosinnus\modal_box.html:28
 #: .\templates\cosinnus\utils\facebook_integration.html:83
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:152
 #: .\templates\cosinnus\widgets\add_widget.html:32
 #: .\templates\cosinnus\widgets\delete.html:5
 msgid "Cancel"
@@ -3354,11 +3355,15 @@ msgstr ""
 msgid "Facebook Fan-Page link to"
 msgstr "Facebook Fan-Seite zum Verbinden"
 
-#: .\templates\cosinnus\utils\facebook_integration_group_form.html:84
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:82
+msgid "Choose from your Pages..."
+msgstr "Eine deiner Seiten auswählen..."
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:89
 msgid "Fan-Page unique name (example: myfanpage)"
 msgstr "Fan-Seiten-Kennungsname (Beispiel: meinefanseite)"
 
-#: .\templates\cosinnus\utils\facebook_integration_group_form.html:99
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:104
 msgid ""
 "You have Editor access to this Fan-Page and can publish your posts directly "
 "to it."
@@ -3366,7 +3371,7 @@ msgstr ""
 "Du hast Bearbeiter-Zugriffsrechte auf diese Fan-Seite und kannst Posts "
 "direkt darauf veröffentlichen."
 
-#: .\templates\cosinnus\utils\facebook_integration_group_form.html:105
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:110
 msgid ""
 "Editor access of your Facebook-account for this Fan-Page has not been "
 "confirmed. This is required before you can publish your posts in the voice "
@@ -3376,9 +3381,31 @@ msgstr ""
 "noch nicht bestätigt. Dies wird benötigt bevor du Posts direkt darauf "
 "veröffentlichen kannst!"
 
-#: .\templates\cosinnus\utils\facebook_integration_group_form.html:115
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:120
 msgid "Confirm now!"
 msgstr "Jetzt bestätigen!"
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:137
+msgid "Select one of your Facebook pages to connect to"
+msgstr "Wähle eine deiner Facebook Seiten zum Verbinden"
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:185
+msgid "You do not seem to be Editor or Admin of any pages."
+msgstr ""
+"Es scheint als wärst du kein Administrator oder Bearbeiter von einer "
+"Facebook Seite."
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:190
+#, fuzzy
+#| msgid ""
+#| "An error occured when trying to disconnect your facebook account! Please "
+#| "contact an administrator!"
+msgid ""
+"We could not retrieve your groups from Facebook because of an error. Please "
+"contact an administrator!"
+msgstr ""
+"Beim Versuch dein Facebook-Konto zu trennen ist ein Fehler aufgetreten. "
+"Bitte kontaktiere einen Administrator!"
 
 #: .\templates\cosinnus\utils\pagination.html:28
 msgid "Next"
@@ -3701,12 +3728,7 @@ msgstr ""
 msgid "Please enter a numeric Facebook Group-ID only!"
 msgstr "Bitte gib nur die Facebook Gruppen-ID in Form einer Zahl ein!"
 
-#: .\views\facebook_integration.py:217
-msgid "Please enter a string Fan-Page unique name only (example: myfanpage)!"
-msgstr ""
-"Bitte gib nur einen Fan-Seiten Kennungsnamen ein (Beispiele: myfanpage)!"
-
-#: .\views\facebook_integration.py:250
+#: .\views\facebook_integration.py:251
 msgid ""
 "The Facebook Fan-Page ID or Group ID could not be found on Facebook! Make "
 "sure you have entered the correct ID for your Group/Fan-Page!"
@@ -3715,7 +3737,7 @@ msgstr ""
 "gefunden werden! Bitte stell sicher, dass du die richtige ID für deine  "
 "Gruppe/Fan-Seite eingegeben hast!"
 
-#: .\views\facebook_integration.py:257 .\views\facebook_integration.py:274
+#: .\views\facebook_integration.py:258 .\views\facebook_integration.py:275
 msgid ""
 "We could not obtain access to the Fan-Page for your connected Facebook "
 "Account. Please check that you entered the correct Fan-Page name, and that "
@@ -3726,18 +3748,18 @@ msgstr ""
 "eingegeben hast und dass du ein Bearbeiter oder Administrator der Fan-Seite "
 "bist!"
 
-#: .\views\facebook_integration.py:269
+#: .\views\facebook_integration.py:270
 msgid "This group does not have a Facebook Fan-Page associated with it!"
 msgstr "Diese Gruppe hat keine Facebook Fan-Seite zugewiesen!"
 
-#: .\views\facebook_integration.py:272
+#: .\views\facebook_integration.py:273
 msgid "Your Editor access for the linked Facebook Fan-Page was confirmed!"
 msgstr ""
 "Deine Bearbeiter-Zugriffsrechte für die verbundene Facebook Fan-Seite wurden "
 "bestätigt!"
 
-#: .\views\facebook_integration.py:410 .\views\facebook_integration.py:423
-#: .\views\facebook_integration.py:433
+#: .\views\facebook_integration.py:411 .\views\facebook_integration.py:424
+#: .\views\facebook_integration.py:434
 msgid ""
 "An error occured when trying to disconnect your facebook account! Please "
 "contact an administrator!"
@@ -3745,7 +3767,7 @@ msgstr ""
 "Beim Versuch dein Facebook-Konto zu trennen ist ein Fehler aufgetreten. "
 "Bitte kontaktiere einen Administrator!"
 
-#: .\views\facebook_integration.py:430
+#: .\views\facebook_integration.py:431
 msgid "Your Facebook account was successfully disconnected from this account."
 msgstr ""
 "Dein Facebook-Konto wurde erfolgreich von deinem Benutzerprofil getrennt."
@@ -4166,6 +4188,11 @@ msgstr ""
 #| msgid "Export"
 msgid "Import"
 msgstr "Exportieren"
+
+#~ msgid ""
+#~ "Please enter a string Fan-Page unique name only (example: myfanpage)!"
+#~ msgstr ""
+#~ "Bitte gib nur einen Fan-Seiten Kennungsnamen ein (Beispiele: myfanpage)!"
 
 #~ msgid "Assign related"
 #~ msgstr "Verwandte zuweisen"
