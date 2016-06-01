@@ -14,7 +14,10 @@ module.exports = {
                 loader: 'nunjucks-loader',
                 include: [
                     path.join(__dirname, 'cosinnus/templates/cosinnus/universal')
-                ]
+                ],
+                query: {
+                    config: path.join(__dirname, 'nunjucks.config.js')
+                }
             }
         ],
     },

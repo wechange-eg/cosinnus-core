@@ -1,3 +1,4 @@
+{% load i18n %}
 <form id="map-search">
     <div class="line">
         <div class="result-filter check people" data-result-type="people">
@@ -6,7 +7,7 @@
                     <i class="fa fa-check"></i>
                 {% endif %}
             </div>
-            <div class="check__label">Menschen</div>
+            <div class="check__label">{% trans "People" %}</div>
         </div>
     </div>
 
@@ -17,7 +18,7 @@
                     <i class="fa fa-check"></i>
                 {% endif %}
             </div>
-            <div class="check__label">Veranstaltungen</div>
+            <div class="check__label">{% trans 'Events' %}</div>
         </div>
     </div>
 
@@ -28,7 +29,7 @@
                     <i class="fa fa-check"></i>
                 {% endif %}
             </div>
-            <div class="check__label">Projekte</div>
+            <div class="check__label">{% trans 'Projects' %}</div>
         </div>
     </div>
 
@@ -39,7 +40,7 @@
                     <i class="fa fa-check"></i>
                 {% endif %}
             </div>
-            <div class="check__label">Gruppen</div>
+            <div class="check__label">{% trans 'Groups' %}</div>
         </div>
     </div>
 
