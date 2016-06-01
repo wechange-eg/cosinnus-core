@@ -77,6 +77,11 @@
     <div type="button" class="btn btn-default w100 regular-space">
         <ul class="media-list">
             <li class="media">
+            	{% if is_fb_connected %}
+	                <div class="pull-right disabled" style="display: inline-block; width: auto; padding: 0px 10px; cursor: pointer;" onclick="loadFacebookPageChooser();">
+	                	<a>{% trans "Choose from your Pages..." %}</a>
+	            	</div>
+            	{% endif %}
                 <a class="pull-left" href="#">
                     <i class="fa fa-facebook"></i>
                 </a>
@@ -121,6 +126,75 @@
 	    {% endif %}
 	    <br/>
 	    <br/>
+    {% endif %}
+    
+    {% if is_fb_connected %}
+		<div class="modal fade" id="modalChoosePage" tabindex="-1" role="dialog" aria-labelledby="modalChoosePage" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+			            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			            <h4 class="modal-title">{% trans "Select one of your Facebook pages to connect to" %}</h4>
+		            </div>
+		            <div class="modal-body">
+		            	<ul style="overflow-y: scroll;" id="pageChooserList">
+							<!-- Facebook groups to choose go here -->
+						</ul>
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-emphasized" data-dismiss="modal">
+		                    <ul class="media-list">
+		                        <li class="media">
+		                            <a class="pull-left" href="#">
+		                                <i class="fa fa-times"></i>
+		                            </a>
+		                            <div class="media-body">
+		                                {% trans "Cancel" %}
+		                            </div>
+		                        </li>
+		                    </ul>
+		                </button>
+		        	</div>
+		    	</div>
+		  	</div>
+		</div>
+		<script type="text/javascript">
+			var pageChooserEnabled = true;
+			var loadFacebookPageChooser = function() {
+				if (pageChooserEnabled) {
+					pageChooserEnabled = false;
+					var user_id = "{{ user.cosinnus_profile.get_facebook_user_id }}";
+					var access_token = "{{ user.cosinnus_profile.settings.fb_accessToken }}";
+					var jqxhr = $.get( "https://graph.facebook.com/v2.5/{0}/accounts?access_token={1}".format(user_id, access_token))
+						.done(function( result ) {
+						    var list = $('#pageChooserList');
+							list.empty();
+							if (result['data'] && result['data'].length > 0) {
+								// add pages to select list
+							    $.each(result['data'], function(i, page) {
+							    	// check that user can create content in page
+							    	if (page.perms.indexOf('CREATE_CONTENT') > -1) {
+									    var link = $('<li><a style="cursor: pointer;" data-dismiss="modal">{0}</a></li>'.format(page.name));
+										link.click(function() {
+											$('#id_facebook_page_id').val(page.id);
+										});
+										link.appendTo(list); 
+									}
+							    });
+							} else {
+								list.html('<span>{% trans "You do not seem to be Editor or Admin of any pages." %}</span>');
+							}					    
+							$('#modalChoosePage').modal().show();
+						})
+						.fail(function() {
+						    alert("{% trans "We could not retrieve your groups from Facebook because of an error. Please contact an administrator!" %}");
+						})
+						.always(function() {
+							pageChooserEnabled = true;
+						});
+				}
+			}
+		</script>
     {% endif %}
 
 {% endwith %}
