@@ -28,11 +28,34 @@ module.exports = Backbone.Model.extend({
             self.trigger('change:results');
             self.trigger('end:search');
             self.set('searching', false);
+            // Save the search state in the url.
+            window.router.navigate(url.replace('/maps/search', '/map/'));
             // If there is a queued search, requeue it.
             if (self.get('wantsToSearch')) {
                 self.attemptSearch();
             }
         });
+    },
+
+    initialSearch: function () {
+        var json = this.parseUrl(window.location.href.replace(window.location.origin, ''));
+        if (_(json).keys().length) {
+            this.set({
+                filters: {
+                    people: json.people,
+                    events: json.events,
+                    projects: json.projects,
+                    groups: json.groups
+                },
+                q: json.q,
+                north: json.ne_lat,
+                east: json.ne_lon,
+                south: json.sw_lat,
+                west: json.sw_lon
+            });
+            this.trigger('change:bounds');
+        }
+        this.search();
     },
 
     buildURL: function () {
@@ -79,14 +102,7 @@ module.exports = Backbone.Model.extend({
     },
 
     mockSearchService: function (url, cb) {
-        var json = JSON.parse('{"' + decodeURI(url.replace('/map/search?', '').replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
-        _(_(json).keys()).each(function (key) {
-            if (json[key] !== '') {
-                try {
-                    json[key] = JSON.parse(json[key]);
-                } catch (err) {}
-            }
-        })
+        var json = this.parseUrl(url);
         // Retrieve active filters.
         var activeTypes = _(_(this.default.filters).keys()).select(function (filter) {
             return json[filter];
@@ -111,6 +127,18 @@ module.exports = Backbone.Model.extend({
             });
         });
         cb(results);
+    },
+
+    parseUrl: function (url) {
+        var json = JSON.parse('{"' + decodeURI(url.replace(/[^?]*\?/, '').replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
+        _(_(json).keys()).each(function (key) {
+            if (json[key] !== '') {
+                try {
+                    json[key] = JSON.parse(json[key]);
+                } catch (err) {}
+            }
+        });
+        return json;
     },
 
     activeFilters: function () {

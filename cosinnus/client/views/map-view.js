@@ -42,16 +42,17 @@ module.exports = View.extend({
         });
         this.controlsView.on('change:layer', this.handleSwitchLayer, this);
         this.model.on('change:results', this.updateMarkers, this);
+        this.model.on('change:bounds', this.fitBounds, this);
         View.prototype.initialize.call(this);
     },
 
     render: function () {
         this.renderMap();
-        this.model.search();
+        this.model.initialSearch();
     },
 
     renderMap: function () {
-        var startPos = [52.52,13.405];
+        var startPos = [52.52,13.405]; // Berlin
 
         this.leaflet = L.map('map-fullscreen-surface').setView(startPos, 13);
 
@@ -130,5 +131,13 @@ module.exports = View.extend({
     // Change between layers.
     handleSwitchLayer: function (layer) {
         this.setLayer(layer);
+    },
+
+    // Handle change bounds (from URL).
+    fitBounds: function () {
+        this.leaflet.fitBounds(L.latLngBounds(
+            L.latLng(this.model.get('south'), this.model.get('west')),
+            L.latLng(this.model.get('north'), this.model.get('east'))
+        ));
     }
 });
