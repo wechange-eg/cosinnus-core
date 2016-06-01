@@ -47,14 +47,30 @@ module.exports = View.extend({
     },
 
     render: function () {
-        this.renderMap();
-        this.model.initialSearch();
+        var self = this;
+
+        self.setStartPos(function () {
+            self.renderMap();
+            self.model.initialSearch();
+        });
+    },
+
+    setStartPos: function (cb) {
+        var self = this;
+
+        if (Backbone.mediator.settings.mapStartPos) {
+            self.mapStartPos = Backbone.mediator.settings.mapStartPos;
+            cb();
+        } else {
+            $.get('http://ip-api.com/json', function (res) {
+                self.mapStartPos = [res.lat, res.lon];
+                cb();
+            });
+        }
     },
 
     renderMap: function () {
-        var startPos = [52.52,13.405]; // Berlin
-
-        this.leaflet = L.map('map-fullscreen-surface').setView(startPos, 13);
+        this.leaflet = L.map('map-fullscreen-surface').setView(this.mapStartPos, 13);
 
         this.setLayer(this.model.get('layer'));
 
