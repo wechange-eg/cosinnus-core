@@ -29,7 +29,7 @@ module.exports = Backbone.Model.extend({
             self.trigger('end:search');
             self.set('searching', false);
             // Save the search state in the url.
-            window.router.navigate(url.replace('/maps/search', '/map/'));
+            Backbone.mediator.publish('navigate:router', url.replace('/maps/search', '/map/'))
             // If there is a queued search, requeue it.
             if (self.get('wantsToSearch')) {
                 self.attemptSearch();
@@ -102,7 +102,11 @@ module.exports = Backbone.Model.extend({
     },
 
     parseUrl: function (url) {
-        var json = JSON.parse('{"' + decodeURI(url.replace(/[^?]*\?/, '').replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
+        if (url.indexOf('?') >= 0) {
+            var json = JSON.parse('{"' + decodeURI(url.replace(/[^?]*\?/, '').replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
+        } else {
+            var json = {};
+        }
         _(_(json).keys()).each(function (key) {
             if (json[key] !== '') {
                 try {

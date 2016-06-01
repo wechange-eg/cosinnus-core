@@ -2,14 +2,8 @@
 
 'use strict';
 
-var Router = require('router');
+var Application = require('application');
 
-// Register routes.
-window.router = new Router();
-
-// Start routing after the DOM is loaded.
 $(function () {
-    Backbone.history.start({
-        pushState: true
-    });
+    new Application().start();
 });
