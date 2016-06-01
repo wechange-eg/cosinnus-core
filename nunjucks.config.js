@@ -1,7 +1,7 @@
 module.exports = function(env){
     function parse (parser, nodes, lexer) {
         var tok = parser.nextToken();
-        args = parser.parseSignature(null, true);
+        key = parser.parseSignature(null, true);
         parser.advanceAfterBlockEnd(tok.value);
         return new nodes.CallExtension(this, 'run', key);
     }
