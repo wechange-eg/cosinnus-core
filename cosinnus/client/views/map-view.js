@@ -124,7 +124,7 @@ module.exports = View.extend({
 
     handleViewportChange: function () {
         this.updateBounds();
-        this.model.wantsToSearch();
+        this.model.attemptSearch();
     },
 
     // Change between layers.

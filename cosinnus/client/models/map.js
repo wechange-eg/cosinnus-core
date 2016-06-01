@@ -14,17 +14,24 @@ module.exports = Backbone.Model.extend({
     initialize: function () {
         this.set('filters', _(this.default.filters).clone());
         this.set('layer', this.default.layer);
-        this.searchDelay = 0;
+        this.searchDelay = 1000,
+        this.whileSearchingDelay = 5000;
     },
 
     search: function () {
         var self = this;
         var url = this.buildURL();
         self.trigger('start:search');
+        self.set('searching', true);
         $.get(url, function (res) {
             self.set('results', res);
             self.trigger('change:results');
             self.trigger('end:search');
+            self.set('searching', false);
+            // If there is a queued search, requeue it.
+            if (self.get('wantsToSearch')) {
+                self.attemptSearch();
+            }
         });
     },
 
@@ -48,20 +55,26 @@ module.exports = Backbone.Model.extend({
         var filters = this.get('filters');
         filters[resultType] = !filters[resultType];
         this.set('filters', filters);
-        this.wantsToSearch();
+        this.attemptSearch();
     },
 
     resetFilters: function () {
         this.set('filters', _(this.default.filters).clone());
-        this.wantsToSearch();
+        this.attemptSearch();
     },
 
-    wantsToSearch: function () {
-        var self = this;
+    // Register a change in the controls or the map UI which should queue
+    // a search attempt.
+    attemptSearch: function () {
+        var self = this,
+            delay = self.get('searching') ?
+                self.whileSearchingDelay : self.searchDelay;
         clearTimeout(this.searchTimeout);
+        self.set('wantsToSearch', true);
         self.searchTimeout = setTimeout(function () {
             self.search();
-        }, self.searchDelay);
+            self.set('wantsToSearch', false);
+        }, delay);
     },
 
     mockSearchService: function (url, cb) {

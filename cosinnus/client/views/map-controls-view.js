@@ -6,8 +6,8 @@ var template = require('map/map-controls');
 module.exports = View.extend({
     initialize: function () {
         this.template = template;
-        this.model.on('start:search', this.startSearch, this);
-        this.model.on('end:search', this.endSearch, this);
+        this.model.on('start:search', this.handleStartSearch, this);
+        this.model.on('end:search', this.handleEndSearch, this);
         View.prototype.initialize.call(this);
     },
 
@@ -56,16 +56,16 @@ module.exports = View.extend({
             this.model.set({
                 q: query
             });
-            this.model.wantsToSearch();
+            this.model.attemptSearch();
         }
     },
 
-    startSearch: function (event) {
+    handleStartSearch: function (event) {
         this.$el.find('.icon-search').hide();
         this.$el.find('.icon-loading').show();
     },
 
-    endSearch: function (event) {
+    handleEndSearch: function (event) {
         if (!this.state.typing) {
             this.$el.find('.icon-search').show();
         }
