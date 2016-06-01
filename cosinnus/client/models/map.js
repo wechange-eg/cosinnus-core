@@ -67,6 +67,7 @@ module.exports = Backbone.Model.extend({
     // a search attempt.
     attemptSearch: function () {
         var self = this,
+            // Increase the search delay when a search is in progress.
             delay = self.get('searching') ?
                 self.whileSearchingDelay : self.searchDelay;
         clearTimeout(this.searchTimeout);
