@@ -101,34 +101,6 @@ module.exports = Backbone.Model.extend({
         }, delay);
     },
 
-    mockSearchService: function (url, cb) {
-        var json = this.parseUrl(url);
-        // Retrieve active filters.
-        var activeTypes = _(_(this.default.filters).keys()).select(function (filter) {
-            return json[filter];
-        });
-        // Generate some random markers for each of the active filter types
-        // in the current map viewport.
-        var results = [];
-        _(activeTypes).each(function (type) {
-            _(60).times(function () {
-                var lat = json['south'] + Math.random() * (json['north'] - json['south']);
-                var lon = json['west'] + Math.random() * (json['east'] - json['west']);
-
-                results.push({
-                    type: type,
-                    lat: lat,
-                    lon: lon,
-                    title: 'Title',
-                    url: 'http://example.com',
-                    imageUrl: '/static/images/group-avatar-placeholder.png',
-                    address: '2 High St.'
-                });
-            });
-        });
-        cb(results);
-    },
-
     parseUrl: function (url) {
         var json = JSON.parse('{"' + decodeURI(url.replace(/[^?]*\?/, '').replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
         _(_(json).keys()).each(function (key) {
