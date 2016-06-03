@@ -1,6 +1,6 @@
 #map-fullscreen-surface {
     position: fixed;
-    top: 55px;
+    top: 0;
     left: 0;
     height: 100%;
     width: 100%;
@@ -19,6 +19,16 @@
             min-height: 50px;
         }
     }
+
+    // Leaflet overrides
+    // -----------------
+
+    .leaflet-top {
+        .leaflet-control {
+            top: 65px;
+        }
+    }
+
 }
 
 #map-controls {
