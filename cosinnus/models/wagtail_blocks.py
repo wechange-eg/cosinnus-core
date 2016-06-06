@@ -228,4 +228,11 @@ STREAMFIELD_BLOCKS_WIDGETS = [
     ('random_projects', RandomProjectsWidgetBlock()),  
 ]
 
+
+""" FIXME: old wagtail block set. Simply remove these lines once the feature is cleared and paid for. """
+STREAMFIELD_BLOCKS = [
+    ('paragraph', BetterRichTextBlock(icon='form')),
+    ('image', ImageChooserBlock(icon='image')),
+    ('create_project_button', CreateProjectButtonBlock())
+]
     
