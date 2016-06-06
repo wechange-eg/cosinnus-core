@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-01 16:04+0200\n"
-"PO-Revision-Date: 2016-06-01 16:06+0200\n"
+"POT-Creation-Date: 2016-06-01 18:37+0200\n"
+"PO-Revision-Date: 2016-06-01 18:39+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -816,39 +816,98 @@ msgstr "Verknüpftes Objekt"
 msgid "Path"
 msgstr "Pfad"
 
-#: .\models\wagtail_models.py:89 .\models\wagtail_models.py:201
-#: .\models\wagtail_models.py:287 .\models\wagtail_models.py:436
-#: .\models\wagtail_models.py:523
+#: .\models\wagtail_blocks.py:65
+msgid "Create-Project or Group Button"
+msgstr "Projekt oder Gruppe-erstellen Button"
+
+#: .\models\wagtail_blocks.py:110 .\models\wagtail_blocks.py:132
+#, fuzzy
+#| msgid "Informations"
+msgid "Proportions"
+msgstr "Informationen"
+
+#: .\models\wagtail_blocks.py:111
+msgid "1/2 + 1/2"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:112
+msgid "2/3 + 1/3"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:113
+msgid "1/3 + 2/3"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:133
+msgid "1/3 + 1/3 + 1/3"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:134
+msgid "1/2 + 1/4 + 1/4"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:135
+msgid "1/4 + 1/2 + 1/4"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:136
+msgid "1/4 + 1/4 + 1/2"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:186
+#, fuzzy
+#| msgid "Edit Widget"
+msgid "Medium News Widget"
+msgstr "Widget bearbeiten"
+
+#: .\models\wagtail_blocks.py:187
+msgid "Large News Widget"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:204
+msgid "4 Random Projects Widget"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:205
+msgid "8 Random Projects Widget"
+msgstr ""
+
+#: .\models\wagtail_models.py:53 .\models\wagtail_models.py:165
+#: .\models\wagtail_models.py:251 .\models\wagtail_models.py:375
+#: .\models\wagtail_models.py:462
 msgid "Content"
 msgstr "Inhalt"
 
-#: .\models\wagtail_models.py:104
+#: .\models\wagtail_models.py:68
 msgid "Portal Root Page"
 msgstr "Portal-Root Seite"
 
-#: .\models\wagtail_models.py:111
+#: .\models\wagtail_models.py:75
 msgid "Assigned Portal"
 msgstr ""
 
-#: .\models\wagtail_models.py:116
+#: .\models\wagtail_models.py:80
 msgid "Footer"
 msgstr ""
 
-#: .\models\wagtail_models.py:117
+#: .\models\wagtail_models.py:81
 msgid ""
 "Will be displayed as a footer on EVERY page on this website (not only "
 "dashboard pages!)"
 msgstr ""
 
-#: .\models\wagtail_models.py:142 .\models\wagtail_models.py:377
+#: .\models\wagtail_models.py:106 .\models\wagtail_models.py:316
+#: .\models\wagtail_models.py:517
 msgid "Show Register Button"
 msgstr "Registrieren Button anzeigen"
 
-#: .\models\wagtail_models.py:143 .\models\wagtail_models.py:378
+#: .\models\wagtail_models.py:107 .\models\wagtail_models.py:317
+#: .\models\wagtail_models.py:518
 msgid "Redirect Logged in Users"
 msgstr "Eingeloggte Benutzer weiterleiten"
 
-#: .\models\wagtail_models.py:144 .\models\wagtail_models.py:379
+#: .\models\wagtail_models.py:108 .\models\wagtail_models.py:318
+#: .\models\wagtail_models.py:519
 msgid ""
 "If active, this page will only be visible to non-logged-in users. All others "
 "will be redirected to the activities page."
@@ -856,87 +915,115 @@ msgstr ""
 "Wenn aktiv, sehen diese Seite nur Benutzer die nicht eingeloggt sind. Alle "
 "eingeloggten Benutzer werden direkt auf die Aktivitäten-Seite weitergeleitet."
 
-#: .\models\wagtail_models.py:148 .\models\wagtail_models.py:383
+#: .\models\wagtail_models.py:112 .\models\wagtail_models.py:322
 msgid "Left banner (top)"
 msgstr "Linkes banner (oben)"
 
-#: .\models\wagtail_models.py:149 .\models\wagtail_models.py:384
+#: .\models\wagtail_models.py:113 .\models\wagtail_models.py:323
 msgid "Right banner (top)"
 msgstr "Rechtes banner (oben)"
 
-#: .\models\wagtail_models.py:151 .\models\wagtail_models.py:386
+#: .\models\wagtail_models.py:115 .\models\wagtail_models.py:325
 msgid "Header"
 msgstr "Kopfzeile (nach Banner)"
 
-#: .\models\wagtail_models.py:153 .\models\wagtail_models.py:388
+#: .\models\wagtail_models.py:117 .\models\wagtail_models.py:327
 msgid "Left footer"
 msgstr "Fußzeile links"
 
-#: .\models\wagtail_models.py:154 .\models\wagtail_models.py:389
+#: .\models\wagtail_models.py:118 .\models\wagtail_models.py:328
 msgid "Right footer"
 msgstr "Fußzeile rechts"
 
-#: .\models\wagtail_models.py:199
+#: .\models\wagtail_models.py:163
 msgid "1-Column Dashboard Page"
 msgstr "1-spaltige Dashboard Seite"
 
-#: .\models\wagtail_models.py:224
+#: .\models\wagtail_models.py:188
 msgid "2-Column Dashboard Page"
 msgstr "2-spaltige Dashboard Seite"
 
-#: .\models\wagtail_models.py:226 .\models\wagtail_models.py:254
-#: .\models\wagtail_models.py:461 .\models\wagtail_models.py:489
+#: .\models\wagtail_models.py:190 .\models\wagtail_models.py:218
+#: .\models\wagtail_models.py:400 .\models\wagtail_models.py:428
 msgid "Content (left column)"
 msgstr "Inhalt (linke Spalte)"
 
-#: .\models\wagtail_models.py:227 .\models\wagtail_models.py:256
-#: .\models\wagtail_models.py:462 .\models\wagtail_models.py:491
+#: .\models\wagtail_models.py:191 .\models\wagtail_models.py:220
+#: .\models\wagtail_models.py:401 .\models\wagtail_models.py:430
 msgid "Content (right column)"
 msgstr "Inhalt (rechte Spalte)"
 
-#: .\models\wagtail_models.py:252
+#: .\models\wagtail_models.py:216
 msgid "3-Column Dashboard Page"
 msgstr "3-spaltige Dashboard Seite"
 
-#: .\models\wagtail_models.py:255 .\models\wagtail_models.py:490
+#: .\models\wagtail_models.py:219 .\models\wagtail_models.py:429
 msgid "Content (center column)"
 msgstr "Inhalt (mittlere Spalte)"
 
-#: .\models\wagtail_models.py:308
+#: .\models\wagtail_models.py:272
 msgid "Simple One-Column Page"
 msgstr "Simple einspaltige Seite"
 
-#: .\models\wagtail_models.py:316
+#: .\models\wagtail_models.py:280
 msgid "Simple Page with Left Navigation"
 msgstr "Simple Seite mit Navigationsspalte links"
 
-#: .\models\wagtail_models.py:319 .\models\wagtail_models.py:555
+#: .\models\wagtail_models.py:283 .\models\wagtail_models.py:494
 msgid "Left Sidebar"
 msgstr "Fußzeile links"
 
-#: .\models\wagtail_models.py:346
-msgid "Create-Project or Group Button"
-msgstr "Projekt oder Gruppe-erstellen Button"
-
-#: .\models\wagtail_models.py:434
+#: .\models\wagtail_models.py:373
 msgid "1-Column Dashboard Page (Modular)"
 msgstr "1-spaltige Dashboard Seite (Modular)"
 
-#: .\models\wagtail_models.py:459
+#: .\models\wagtail_models.py:398
 msgid "2-Column Dashboard Page (Modular)"
 msgstr "2-spaltige Dashboard Seite (Modular)"
 
-#: .\models\wagtail_models.py:487
+#: .\models\wagtail_models.py:426
 msgid "3-Column Dashboard Page (Modular)"
 msgstr "3-spaltige Dashboard Seite (Modular)"
 
-#: .\models\wagtail_models.py:544
+#: .\models\wagtail_models.py:483
 msgid "Simple One-Column Page (Modular)"
 msgstr "Simple einspaltige Seite (Modular)"
 
-#: .\models\wagtail_models.py:552
+#: .\models\wagtail_models.py:491
 msgid "Simple Page with Left Navigation (Modular)"
 msgstr "Simple Seite mit Navigationsspalte links (Modular)"
+
+#: .\models\wagtail_models.py:529
+#, fuzzy
+#| msgid "Wallpaper image"
+msgid "Header image"
+msgstr "Hintergrundbild"
+
+#: .\models\wagtail_models.py:531
+#, fuzzy
+#| msgid "Header"
+msgid "Header Title"
+msgstr "Kopfzeile (nach Banner)"
+
+#: .\models\wagtail_models.py:532
+#, fuzzy
+#| msgid "Header"
+msgid "Header Text"
+msgstr "Kopfzeile (nach Banner)"
+
+#: .\models\wagtail_models.py:534
+msgid "Additional Header content"
+msgstr ""
+
+#: .\models\wagtail_models.py:535
+#, fuzzy
+#| msgid "Edit Widget"
+msgid "Site Widgets"
+msgstr "Widget bearbeiten"
+
+#: .\models\wagtail_models.py:536
+msgid "Bottom content (gray background)"
+msgstr ""
 
 #: .\models\widget.py:19 .\templates\cosinnus\appsmenu.html:37
 #: .\templates\cosinnus\appsmenu.html:51 .\templates\cosinnus\dashboard.html:88
@@ -1398,6 +1485,7 @@ msgstr "Veranstaltungen"
 #: .\templates\cosinnus\dashboard.html:192
 #: .\templates\cosinnus\group\group_microsite.html:290
 #: .\templates\cosinnus\search.html:113
+#: .\templates\cosinnus\wagtail\widgets\global_notes.html:2
 msgid "News"
 msgstr "Neuigkeiten"
 
@@ -1864,6 +1952,7 @@ msgstr "Gruppen"
 #: .\templates\cosinnus\navbar_buttons_group_menus.html:29
 #: .\templates\cosinnus\navbar_buttons_group_menus.html:45
 #: .\templates\cosinnus\navbar_buttons_group_menus.html:50
+#: .\templates\cosinnus\wagtail\widgets\random_projects.html:2
 #: .\utils\dashboard.py:292
 msgid "Projects"
 msgstr "Projekte"
@@ -1950,6 +2039,7 @@ msgstr "Ändere sie hier..."
 
 #: .\templates\cosinnus\group\group_microsite.html:68
 #: .\templates\cosinnus\wagtail\dashboard_base.html:34
+#: .\templates\cosinnus\wagtail\stream_start_page.html:46
 msgid "Jetzt anmelden und mitgestalten"
 msgstr ""
 
@@ -3539,6 +3629,10 @@ msgstr ""
 #: .\templates\cosinnus\wagtail\wagtailadmin\import_projects_running.html:24
 msgid "Progress:"
 msgstr ""
+
+#: .\templates\cosinnus\wagtail\widgets\random_projects.html:12
+msgid "Show more Projects"
+msgstr "Weitere Projekte anzeigen"
 
 #: .\templates\cosinnus\widgets\add_widget.html:5
 msgid "Add Widget"

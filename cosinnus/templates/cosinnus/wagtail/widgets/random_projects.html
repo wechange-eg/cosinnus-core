@@ -1,10 +1,13 @@
 {% load i18n %}
 <h3>{% trans "Projects" %}</h3>
-<div class="row">
+<div class="row large-space">
 	{% for project in projects %}
 	    <div class="col-sm-3">
 	    	{% include 'cosinnus/group/group_gallery_item.html' with group=project %}
 	    </div>
     {% endfor %}
+    
 </div><!-- row -->
+
+<p class="text-right"><a href="{% url 'cosinnus:group-list' %}">{% trans "Show more Projects" %}</a></p>
 	

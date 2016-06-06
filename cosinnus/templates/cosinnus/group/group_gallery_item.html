@@ -1,4 +1,8 @@
-<div class="todo-tommies-classes-go-here" style="border: 1px solid black;">
-	{% include 'cosinnus/group/group_avatar_image.html' with group=group %}
-	{{ group.name }}
+<div class="group-gallery-item">
+	<a href="{{ group.get_absolute_url }}">
+		{% include 'cosinnus/group/group_avatar_image.html' with group=group extra_classes="group-gallery-item-image" %}
+		<p>
+			{{ group.name }}
+		</p>
+	</a>
 </div>

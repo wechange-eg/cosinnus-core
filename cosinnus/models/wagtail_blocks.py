@@ -173,9 +173,9 @@ class QuadFrameBlock(StructBlock):
 
  
 STREAMFIELD_BLOCKS = STREAMFIELD_BLOCKS_NOFRAMES + [   
-    ('frame_2x1', DoubleFrameBlock(icon="form")),
-    ('frame_3x1', TripleFrameBlock(icon="form")),
-    ('frame_4x1', QuadFrameBlock(icon="form")),
+    ('layout_2x1', DoubleFrameBlock(icon="form")),
+    ('layout_3x1', TripleFrameBlock(icon="form")),
+    ('layout_4x1', QuadFrameBlock(icon="form")),
 ]
 
 
