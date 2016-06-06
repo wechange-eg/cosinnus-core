@@ -24,7 +24,7 @@ from cosinnus.utils.functions import unique_aware_slugify,\
     clean_single_line_text
 from cosinnus.utils.files import get_group_avatar_filename,\
     get_portal_background_image_filename, get_group_wallpaper_filename,\
-    get_cosinnus_media_file_folder
+    get_cosinnus_media_file_folder, get_group_gallery_image_filename
 from django.core.urlresolvers import reverse
 from django.utils.functional import cached_property
 from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
@@ -1243,6 +1243,32 @@ class CosinnusLocation(models.Model):
         super(CosinnusLocation, self).save(*args, **kwargs)
         if getattr(self, 'group_id'):
             cache.delete(CosinnusGroupManager._GROUP_LOCATIONS_CACHE_KEY % (CosinnusPortal.get_current().id, self.group_id))
+    
+
+class CosinnusGroupGalleryImage(models.Model):
+    
+    title = models.CharField(_('Title'), max_length=250, null=True, blank=True) 
+    description = models.TextField(verbose_name=_('Description'),
+         null=True, blank=True)
+    
+    image = models.ImageField(_("Group Image"),
+        upload_to=get_group_gallery_image_filename,
+        max_length=250)
+
+    group = models.ForeignKey(
+        settings.COSINNUS_GROUP_OBJECT_MODEL,
+        verbose_name=_('Team'),
+        on_delete=models.CASCADE,
+        related_name='gallery_images',
+    )
+    
+    class Meta:
+        verbose_name = _('CosinnusGroup GalleryImage')
+        verbose_name_plural = _('CosinnusGroup GalleryImages')
+        
+    @property
+    def image_url(self):
+        return self.image.url if self.image else None
     
 
 
