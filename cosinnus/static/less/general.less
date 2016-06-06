@@ -440,4 +440,16 @@ a.portal-inlink:hover img {
 	background-color: #FFF;
 }
 
+/* A bootstrap .row with added .vertical-align class 
+	will display its .col classes vertically aligned */
+.vertical-align {
+  display: flex;
+  flex-direction: row;
+}
+
+.vertical-align > [class^="col-"],
+.vertical-align > [class*=" col-"] {
+  display: flex;
+  align-items: center;
+}
 
