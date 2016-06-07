@@ -165,7 +165,7 @@
 					pageChooserEnabled = false;
 					var user_id = "{{ user.cosinnus_profile.get_facebook_user_id }}";
 					var access_token = "{{ user.cosinnus_profile.settings.fb_accessToken }}";
-					var jqxhr = $.get( "https://graph.facebook.com/v2.5/{0}/accounts?access_token={1}".format(user_id, access_token))
+					var jqxhr = $.getJSON( "https://graph.facebook.com/v2.5/{0}/accounts?access_token={1}&callback=?".format(user_id, access_token))
 						.done(function( result ) {
 						    var list = $('#pageChooserList');
 							list.empty();
