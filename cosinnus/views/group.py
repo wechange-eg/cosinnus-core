@@ -54,6 +54,7 @@ import six
 from django.conf import settings
 from django.core.paginator import Paginator
 from cosinnus.utils.user import filter_active_users
+from cosinnus.utils.functions import resolve_class
 
 
 class SamePortalGroupMixin(object):
@@ -81,7 +82,10 @@ class CosinnusGroupGalleryImageInlineFormset(InlineFormSet):
 class CosinnusGroupFormMixin(object):
     
     model = CosinnusGroup
-    inlines = [CosinnusLocationInlineFormset, CosinnusGroupGalleryImageInlineFormset]
+    # we can define additional inline formsets in settings.COSINNUS_GROUP_ADDITIONAL_INLINE_FORMSETS
+    inlines = [CosinnusLocationInlineFormset, CosinnusGroupGalleryImageInlineFormset] \
+                + [resolve_class(class_path) for class_path in settings.COSINNUS_GROUP_ADDITIONAL_INLINE_FORMSETS] \
+                    if getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_INLINE_FORMSETS', []) else []
     template_name = 'cosinnus/group/group_form.html'
     
     def get_form_kwargs(self):
