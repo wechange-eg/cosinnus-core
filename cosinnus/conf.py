@@ -102,7 +102,7 @@ class CosinnusConf(AppConf):
     DEFAULT_FROM_EMAIL = 'noreply@example.com'
     
     # when etherpad objects are deleted, should the etherpads on the server be deleted as well?
-    DELETE_ETHERPADS_ON_SERVER_ON_DELETE = True
+    DELETE_ETHERPADS_ON_SERVER_ON_DELETE = False
     
     # should the facebook integration scripts and templates be loaded?
     FACEBOOK_INTEGRATION_ENABLED = False

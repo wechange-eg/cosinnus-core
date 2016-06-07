@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-17 12:25+0200\n"
+"POT-Creation-Date: 2016-06-01 16:04+0200\n"
 "PO-Revision-Date: 2016-04-28 18:13+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -246,7 +246,7 @@ msgstr ""
 msgid "Next month"
 msgstr ""
 
-#: .\forms\hierarchy.py:14 .\models\group.py:436 .\models\group.py:584
+#: .\forms\hierarchy.py:14 .\models\group.py:437 .\models\group.py:585
 #: .\models\tagged.py:53
 msgid "Name"
 msgstr ""
@@ -383,30 +383,30 @@ msgstr ""
 msgid "Reported objects"
 msgstr ""
 
-#: .\models\group.py:82
+#: .\models\group.py:83
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 
-#: .\models\group.py:427 .\models\group.py:581 .\models\group.py:1044
+#: .\models\group.py:428 .\models\group.py:582 .\models\group.py:1061
 msgid "Portal"
 msgstr ""
 
-#: .\models\group.py:428
+#: .\models\group.py:429
 msgid "Portals"
 msgstr ""
 
-#: .\models\group.py:438 .\models\group.py:585
+#: .\models\group.py:439 .\models\group.py:586
 msgid "Slug"
 msgstr ""
 
-#: .\models\group.py:440 .\models\profile.py:87
+#: .\models\group.py:441 .\models\profile.py:87
 #: .\templates\cosinnus\_microsite__old_.html:198
 #: .\templates\cosinnus\group\group_form.html:321
 #: .\templates\cosinnus\group\group_microsite.html:206
 msgid "Description"
 msgstr ""
 
-#: .\models\group.py:441 .\models\group.py:607 .\models\profile.py:90
+#: .\models\group.py:442 .\models\group.py:608 .\models\profile.py:90
 #: .\templates\cosinnus\group\group_form.html:188
 #: .\templates\cosinnus\group\group_form.html:197
 #: .\templates\cosinnus\group\group_microsite.html:380
@@ -415,232 +415,236 @@ msgstr ""
 msgid "Website"
 msgstr ""
 
-#: .\models\group.py:442 .\models\group.py:608 .\models\tagged.py:41
+#: .\models\group.py:443 .\models\group.py:609 .\models\tagged.py:41
 msgid "Public"
 msgstr ""
 
-#: .\models\group.py:446
+#: .\models\group.py:447
 msgid "Associated Site"
 msgstr ""
 
-#: .\models\group.py:448
+#: .\models\group.py:449
 msgid "Http/Https Protocol (overrides settings)"
 msgstr ""
 
-#: .\models\group.py:451
+#: .\models\group.py:452
 msgid "Users Need Activation"
 msgstr ""
 
-#: .\models\group.py:452
+#: .\models\group.py:453
 msgid ""
 "If activated, newly registered users need to be approved by a portal admin "
 "before being able to log in."
 msgstr ""
 
-#: .\models\group.py:456
+#: .\models\group.py:457
 msgid "Background Image"
 msgstr ""
 
-#: .\models\group.py:457
+#: .\models\group.py:458
 msgid "Used for the background of the landing and CMS-pages"
 msgstr ""
 
-#: .\models\group.py:460
+#: .\models\group.py:461
 msgid "Logo Image"
 msgstr ""
 
-#: .\models\group.py:461
+#: .\models\group.py:462
 msgid ""
 "Used as a small logo in the navigation bar and for external links to this "
 "portal"
 msgstr ""
 
-#: .\models\group.py:464
+#: .\models\group.py:465
 msgid "Main color"
 msgstr ""
 
-#: .\models\group.py:464
+#: .\models\group.py:465
 msgid "Main background color (css hex value, with or without \"#\")"
 msgstr ""
 
-#: .\models\group.py:467
+#: .\models\group.py:468
 msgid "Gradient color"
 msgstr ""
 
-#: .\models\group.py:467
+#: .\models\group.py:468
 msgid "Bottom color for the gradient (css hex value, with or without \"#\")"
 msgstr ""
 
-#: .\models\group.py:470
+#: .\models\group.py:471
 msgid "Extra CSS"
 msgstr ""
 
-#: .\models\group.py:470
+#: .\models\group.py:471
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr ""
 
-#: .\models\group.py:569 .\templates\cosinnus\group\group_microsite.html:127
+#: .\models\group.py:570 .\templates\cosinnus\group\group_microsite.html:127
 msgid "Project"
 msgstr ""
 
-#: .\models\group.py:570 .\templates\cosinnus\group\group_microsite.html:127
+#: .\models\group.py:571 .\templates\cosinnus\group\group_microsite.html:127
 #: .\templates\cosinnus\group\group_microsite.html:134
 msgid "Group"
 msgstr "Group"
 
-#: .\models\group.py:586
+#: .\models\group.py:587
 msgid ""
 "Be extremely careful when changing this slug manually! There can be many "
 "side-effects (redirects breaking e.g.)!"
 msgstr ""
 
-#: .\models\group.py:588
+#: .\models\group.py:589
 msgid "Project Type"
 msgstr "Project Type"
 
-#: .\models\group.py:591
+#: .\models\group.py:592
 msgid "Short Description"
 msgstr ""
 
-#: .\models\group.py:592
+#: .\models\group.py:593
 msgid "Short Description. Internal, will not be shown publicly."
 msgstr ""
 
-#: .\models\group.py:593
+#: .\models\group.py:594
 msgid "Detailed Description"
 msgstr ""
 
-#: .\models\group.py:594
+#: .\models\group.py:595
 msgid "Detailed, public description."
 msgstr ""
 
-#: .\models\group.py:595
+#: .\models\group.py:596
 msgid "Contact Information"
 msgstr ""
 
-#: .\models\group.py:596
+#: .\models\group.py:597
 msgid "How you can be contacted - addresses, social media, etc."
 msgstr ""
 
-#: .\models\group.py:599 .\models\profile.py:85
+#: .\models\group.py:600 .\models\profile.py:85
 #: .\templates\cosinnus\group\group_form.html:99
 msgid "Avatar"
 msgstr ""
 
-#: .\models\group.py:602
+#: .\models\group.py:603
 msgid "Wallpaper image"
 msgstr ""
 
-#: .\models\group.py:603
+#: .\models\group.py:604
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr ""
 
-#: .\models\group.py:616
+#: .\models\group.py:617
 msgid "Deactivated Apps"
 msgstr ""
 
-#: .\models\group.py:618
+#: .\models\group.py:619
 msgid "Is active"
 msgstr ""
 
-#: .\models\group.py:619
+#: .\models\group.py:620
 msgid ""
 "If a team is not active, it counts as non-existent for all purposes and "
 "views on the website."
 msgstr ""
 
-#: .\models\group.py:622
-msgid "Facebook Group/Page ID"
+#: .\models\group.py:623
+msgid "Facebook Group ID"
 msgstr ""
 
 #: .\models\group.py:625
+msgid "Facebook Page ID"
+msgstr ""
+
+#: .\models\group.py:628
 msgid "Parent Group"
 msgstr ""
 
-#: .\models\group.py:630
+#: .\models\group.py:633
 msgid "Related Teams"
 msgstr ""
 
-#: .\models\group.py:644 .\models\group_extra.py:66
+#: .\models\group.py:647 .\models\group_extra.py:66
 msgid "Cosinnus project"
 msgstr "Project"
 
-#: .\models\group.py:645 .\models\group_extra.py:67
+#: .\models\group.py:648 .\models\group_extra.py:67
 msgid "Cosinnus projects"
 msgstr "Projects"
 
-#: .\models\group.py:691
+#: .\models\group.py:694
 msgid "Slug must not be empty."
 msgstr ""
 
-#: .\models\group.py:728
+#: .\models\group.py:731
 msgid ""
 "The URL for this team has changed. A redirect from all existing URLs has "
 "automatically been created!"
 msgstr ""
 
-#: .\models\group.py:1038
+#: .\models\group.py:1055
 msgid "Team membership"
 msgstr ""
 
-#: .\models\group.py:1039
+#: .\models\group.py:1056
 msgid "Team memberships"
 msgstr ""
 
-#: .\models\group.py:1051
+#: .\models\group.py:1068
 msgid "Portal membership"
 msgstr ""
 
-#: .\models\group.py:1052
+#: .\models\group.py:1069
 msgid "Portal memberships"
 msgstr ""
 
-#: .\models\group.py:1063
+#: .\models\group.py:1080
 msgid "From Portal"
 msgstr ""
 
-#: .\models\group.py:1064
+#: .\models\group.py:1081
 #, fuzzy
 msgid "From Team Type"
 msgstr "Project Type"
 
-#: .\models\group.py:1065
+#: .\models\group.py:1082
 msgid "From Slug"
 msgstr ""
 
-#: .\models\group.py:1068 .\models\group.py:1077
+#: .\models\group.py:1085 .\models\group.py:1094
 msgid "Permanent Team Redirects"
 msgstr ""
 
-#: .\models\group.py:1076
+#: .\models\group.py:1093
 msgid "Permanent Team Redirect"
 msgstr ""
 
-#: .\models\group.py:1204 .\models\tagged.py:124
+#: .\models\group.py:1221 .\models\tagged.py:124
 #: .\templates\cosinnus\group\group_microsite.html:323
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:4
 msgid "Location"
 msgstr ""
 
-#: .\models\group.py:1205 .\models\tagged.py:125
+#: .\models\group.py:1222 .\models\tagged.py:125
 msgid "Latitude"
 msgstr ""
 
-#: .\models\group.py:1206 .\models\tagged.py:126
+#: .\models\group.py:1223 .\models\tagged.py:126
 msgid "Longitude"
 msgstr ""
 
-#: .\models\group.py:1210 .\models\tagged.py:86 .\models\tagged.py:236
+#: .\models\group.py:1227 .\models\tagged.py:86 .\models\tagged.py:236
 msgid "Team"
 msgstr ""
 
-#: .\models\group.py:1216
+#: .\models\group.py:1233
 #, fuzzy
 #| msgid "Cosinnus groups"
 msgid "CosinnusLocation"
 msgstr "Groups"
 
-#: .\models\group.py:1217
+#: .\models\group.py:1234
 #, fuzzy
 #| msgid "Cosinnus groups"
 msgid "CosinnusLocations"
@@ -1021,7 +1025,7 @@ msgstr ""
 #: .\templates\cosinnus\group\group_form.html:229
 #: .\templates\cosinnus\leftnav_button_editable_folder.html:51
 #: .\templates\cosinnus\user\userprofile_form.html:162
-#: .\templates\cosinnus\widgets\base_widget.html:39 .\views\group.py:208
+#: .\templates\cosinnus\widgets\base_widget.html:39 .\views\group.py:209
 #: .\views\group.py:758
 msgid "Delete"
 msgstr ""
@@ -1228,7 +1232,7 @@ msgstr ""
 #: .\templates\cosinnus\leftnav_button_editable_folder.html:39
 #: .\templates\cosinnus\user\userprofile_form.html:228
 #: .\templates\cosinnus\widgets\add_widget.html:20 .\views\group.py:435
-#: .\views\group.py:721 .\views\user.py:283
+#: .\views\group.py:721 .\views\user.py:281
 msgid "Save"
 msgstr ""
 
@@ -1241,6 +1245,7 @@ msgstr ""
 #: .\templates\cosinnus\hierarchy\move_element_modal.html:48
 #: .\templates\cosinnus\modal_box.html:28
 #: .\templates\cosinnus\utils\facebook_integration.html:83
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:152
 #: .\templates\cosinnus\widgets\add_widget.html:32
 #: .\templates\cosinnus\widgets\delete.html:5
 msgid "Cancel"
@@ -2979,68 +2984,170 @@ msgid ""
 "exactly as seen."
 msgstr ""
 
-#: .\templates\cosinnus\utils\facebook_integration.html:116
-msgid "Also post this to this project/groups Facebook Group/Fan-Page"
+#: .\templates\cosinnus\utils\facebook_integration.html:118
+msgid "Also post this to this project/group's Facebook Fan-Page"
 msgstr ""
 
-#: .\templates\cosinnus\utils\facebook_integration.html:119
+#: .\templates\cosinnus\utils\facebook_integration.html:120
 msgid ""
-"When you submit this post, it will be posted from your Facebook Account, "
-"exactly as seen, on the Facebook Group/Fan-Page of this project/group."
+"Also post this as a visitor's post to this project/group's Facebook Fan-Page"
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration.html:123
+msgid ""
+"If you are an Editor of the Fan-Page on Facebook, confirm your Editor access "
+"to post in the voice of that Fan-Page!"
 msgstr ""
 
 #: .\templates\cosinnus\utils\facebook_integration.html:124
+#: .\templates\cosinnus\utils\facebook_integration.html:149
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:10
+msgctxt "a link to click on"
+msgid "You can do this here"
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration.html:129
+msgid "Also post this to this project/group's Facebook Group"
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration.html:136
+msgid ""
+"When you submit this post, it will be posted to the Facebook Fan-Page of "
+"this project/group, in the voice of that Fan-Page."
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration.html:138
+msgid ""
+"When you submit this post, it will be posted from your Facebook Account as a "
+"visitor's post to the Facebook Fan-Page of this project/group."
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration.html:141
+msgid ""
+"When you submit this post, it will be posted from your Facebook Account, "
+"exactly as seen, on the Facebook Group of this project/group."
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration.html:148
 msgid ""
 "Connect a Facebook Group or Fan-Page to enable members to publish their news "
 "posts there, too!"
 msgstr ""
 
-#: .\templates\cosinnus\utils\facebook_integration.html:125
-#: .\templates\cosinnus\utils\facebook_integration_group_form.html:27
-msgctxt "a link to click on"
-msgid "You can do this here"
-msgstr ""
-
-#: .\templates\cosinnus\utils\facebook_integration_group_form.html:7
-#, python-format
-msgid ""
-"You can connect your projects and groups to a Facebook Group or Fan-Page. "
-"Once connected, their members can choose to share the news posts they write "
-"on %(site_name)s to the Facebook Group or Fan-Page. (They need to connect "
-"their accounts to Facebook, as well!)"
-msgstr ""
-
 #: .\templates\cosinnus\utils\facebook_integration_group_form.html:9
-msgid ""
-"Please be aware that users can only post to your Group/Fan-Page if they "
-"would also be permitted post in it on Facebook!"
-msgstr ""
-
-#: .\templates\cosinnus\utils\facebook_integration_group_form.html:13
-msgid ""
-"You can find the ID of your Facebook Group on the Info-page in the About tab "
-"of the Group on Facebook."
-msgstr ""
-
-#: .\templates\cosinnus\utils\facebook_integration_group_form.html:16
-msgid ""
-"The unique name of your Fan-Page is the name of the Fan-Page in the URL on "
-"Facebook (example: https://www.facebook.com/myfanpage/)"
-msgstr ""
-
-#: .\templates\cosinnus\utils\facebook_integration_group_form.html:26
 msgid ""
 "You need to connect your user account to Facebook before you can link this "
 "group/project!"
 msgstr ""
 
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:18
+msgid "Connect a Facebook Group"
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:20
+#, python-format
+msgid ""
+"You can connect your projects and groups to a Facebook Group. Once "
+"connected, your members can choose to share the news posts they write on %"
+"(site_name)s to the Facebook Group. (They need to connect their accounts to "
+"Facebook, as well!)"
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:22
+msgid ""
+"Please be aware that users can only post to your Group if they would also be "
+"permitted post in it on Facebook!"
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:26
+msgid ""
+"You can find the ID of your Facebook Group on the Info-page in the About tab "
+"of the Group on Facebook."
+msgstr ""
+
 #: .\templates\cosinnus\utils\facebook_integration_group_form.html:32
-msgid "Facebook Fan-Page or Group to link to"
+msgid "Facebook Group to link to"
 msgstr ""
 
 #: .\templates\cosinnus\utils\facebook_integration_group_form.html:41
+msgid "Group Id or name (example: 1172392116092353)"
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:57
+msgid "Connect a Facebook Fan-Page"
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:59
+#, python-format
 msgid ""
-"Group Id or Fan-Page unique name (examples: 1172392116092353, myfanpage)"
+"You can connect your projects and groups to a Facebook Fan-Page. Once "
+"connected, you can publish the posts you write on %(site_name)s directly on "
+"that Fan-Page, if you are one of its administrators on Facebook."
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:62
+msgid ""
+"All other members of your project/group can publish their posts as visitor's "
+"posts on the Fan-Page. (They need to connect their accounts to Facebook, as "
+"well!)"
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:65
+msgid ""
+"If you wish for other members to be able to post directly to the Fan-Page, "
+"you can make them co-administrators of your project/group (and you must make "
+"them Editors of the Fan-Page on Facebook!). They will be asked to confirm "
+"their Editor access of the Fan-Page, and then will be able to publish to it."
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:69
+msgid ""
+"The unique name of your Fan-Page is the name of the Fan-Page in the URL on "
+"Facebook (example: https://www.facebook.com/myfanpage/)"
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:75
+msgid "Facebook Fan-Page link to"
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:82
+msgid "Choose from your Pages..."
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:89
+msgid "Fan-Page unique name (example: myfanpage)"
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:104
+msgid ""
+"You have Editor access to this Fan-Page and can publish your posts directly "
+"to it."
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:110
+msgid ""
+"Editor access of your Facebook-account for this Fan-Page has not been "
+"confirmed. This is required before you can publish your posts in the voice "
+"of the Fan-Page!"
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:120
+#, fuzzy
+msgid "Confirm now!"
+msgstr "Join Project"
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:137
+msgid "Select one of your Facebook pages to connect to"
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:185
+msgid "You do not seem to be Editor or Admin of any pages."
+msgstr ""
+
+#: .\templates\cosinnus\utils\facebook_integration_group_form.html:190
+msgid ""
+"We could not retrieve your groups from Facebook because of an error. Please "
+"contact an administrator!"
 msgstr ""
 
 #: .\templates\cosinnus\utils\pagination.html:28
@@ -3128,23 +3235,23 @@ msgstr ""
 
 #: .\templates\cosinnus\wagtail\wagtailadmin\import_projects_results.html:26
 msgid ""
-"There were errors in your CSV file and a number of lines could not be read "
-"and were IGNORED:"
+"These rows in your CSV file had errors or an incorrect number of columns and "
+"were IGNORED:"
 msgstr ""
 
-#: .\templates\cosinnus\wagtail\wagtailadmin\import_projects_results.html:30
+#: .\templates\cosinnus\wagtail\wagtailadmin\import_projects_results.html:37
 msgid "Saved items:"
 msgstr ""
 
-#: .\templates\cosinnus\wagtail\wagtailadmin\import_projects_results.html:38
+#: .\templates\cosinnus\wagtail\wagtailadmin\import_projects_results.html:45
 msgid "Important messages:"
 msgstr ""
 
-#: .\templates\cosinnus\wagtail\wagtailadmin\import_projects_results.html:46
+#: .\templates\cosinnus\wagtail\wagtailadmin\import_projects_results.html:53
 msgid "Errors:"
 msgstr ""
 
-#: .\templates\cosinnus\wagtail\wagtailadmin\import_projects_results.html:54
+#: .\templates\cosinnus\wagtail\wagtailadmin\import_projects_results.html:61
 msgid "Info messages:"
 msgstr ""
 
@@ -3304,30 +3411,95 @@ msgstr ""
 msgid "No model given to export data from."
 msgstr ""
 
-#: .\views\facebook_integration.py:273 .\views\facebook_integration.py:286
-#: .\views\facebook_integration.py:296
+#: .\views\facebook_integration.py:149
+msgid "Your news post was also posted on your Facebook timeline."
+msgstr ""
+
+#: .\views\facebook_integration.py:151
+msgid ""
+"We could not post this news post on your Facebook timeline. If this problem "
+"persists, please make sure you have granted us all required Facebook "
+"permissions, or try disconnecting and re-connecting your Facebook account!"
+msgstr ""
+
+#: .\views\facebook_integration.py:177
+msgid "Your news post was also posted to the Facebook Fan-Page."
+msgstr ""
+
+#: .\views\facebook_integration.py:179
+msgid ""
+"Your news post was also posted on the Facebook Fan-Page as a visitor's post."
+msgstr ""
+
+#: .\views\facebook_integration.py:181
+msgid "Your news post was also posted in the Facebook Group."
+msgstr ""
+
+#: .\views\facebook_integration.py:183
+msgid ""
+"We could not post this news post on the Facebook Group/Fan-Page. If this "
+"problem persists, please try disconnecting and re-connecting your Facebook "
+"account and make sure you allow us to post with a visibility of at least "
+"\"Friends\". If you are trying to post as a Fan-Page, make sure you accept "
+"the necessary permissions for us to post there, and make sure you are an "
+"Editor of the Fan-Page! If this doesn't work, contact this project/group's "
+"administrator!"
+msgstr ""
+
+#: .\views\facebook_integration.py:207
+msgid ""
+"You can only connect to either a Facebook Group or a Fan-Page, but not both!"
+msgstr ""
+
+#: .\views\facebook_integration.py:213
+msgid "Please enter a numeric Facebook Group-ID only!"
+msgstr ""
+
+#: .\views\facebook_integration.py:251
+msgid ""
+"The Facebook Fan-Page ID or Group ID could not be found on Facebook! Make "
+"sure you have entered the correct ID for your Group/Fan-Page!"
+msgstr ""
+
+#: .\views\facebook_integration.py:258 .\views\facebook_integration.py:275
+msgid ""
+"We could not obtain access to the Fan-Page for your connected Facebook "
+"Account. Please check that you entered the correct Fan-Page name, and that "
+"you are an Editor of that Fan-Page!"
+msgstr ""
+
+#: .\views\facebook_integration.py:270
+msgid "This group does not have a Facebook Fan-Page associated with it!"
+msgstr ""
+
+#: .\views\facebook_integration.py:273
+msgid "Your Editor access for the linked Facebook Fan-Page was confirmed!"
+msgstr ""
+
+#: .\views\facebook_integration.py:411 .\views\facebook_integration.py:424
+#: .\views\facebook_integration.py:434
 msgid ""
 "An error occured when trying to disconnect your facebook account! Please "
 "contact an administrator!"
 msgstr ""
 
-#: .\views\facebook_integration.py:293
+#: .\views\facebook_integration.py:431
 msgid "Your Facebook account was successfully disconnected from this account."
 msgstr ""
 
-#: .\views\group.py:97
+#: .\views\group.py:98
 msgid ""
 "Sorry, only portal administrators can create Groups! You can either create a "
 "Project, or write a message to one of the administrators to create a Group "
 "for you. Below you can find a listing of all administrators."
 msgstr ""
 
-#: .\views\group.py:149
+#: .\views\group.py:150
 #, python-format
 msgid "%(team_type)s \"%(group)s\" was created successfully."
 msgstr ""
 
-#: .\views\group.py:175 .\views\user.py:158
+#: .\views\group.py:176 .\views\user.py:156
 msgid "Create"
 msgstr ""
 
@@ -3470,11 +3642,11 @@ msgstr ""
 msgid "Ordering"
 msgstr ""
 
-#: .\views\mixins\hierarchy.py:102
+#: .\views\mixins\hierarchy.py:105
 msgid "Root Folder"
 msgstr ""
 
-#: .\views\mixins\hierarchy.py:104
+#: .\views\mixins\hierarchy.py:107
 msgid "<Root folder>"
 msgstr ""
 
@@ -3547,14 +3719,14 @@ msgid ""
 "administrator or delete it first."
 msgstr ""
 
-#: .\views\user.py:121
+#: .\views\user.py:119
 #, python-format
 msgid ""
 "User \"%(user)s\" was registered successfully. You can now log in using this "
 "username."
 msgstr ""
 
-#: .\views\user.py:122
+#: .\views\user.py:120
 #, python-format
 msgid ""
 "User \"%(user)s\" was registered successfully. The account will need to be "
@@ -3562,28 +3734,28 @@ msgid ""
 "(email)s\" when this happens."
 msgstr ""
 
-#: .\views\user.py:152
+#: .\views\user.py:150
 msgid "You are already logged in!"
 msgstr ""
 
-#: .\views\user.py:185 .\views\user.py:220
+#: .\views\user.py:183 .\views\user.py:218
 msgid ""
 "The user account you were looking for does not exist! Their registration was "
 "probably already denied."
 msgstr ""
 
-#: .\views\user.py:189
+#: .\views\user.py:187
 msgid "The user account was already approved, but thank you anyway!"
 msgstr ""
 
-#: .\views\user.py:204
+#: .\views\user.py:202
 #, python-format
 msgid ""
 "Thank you for approving user %(username)s (%(email)s)! An introduction-email "
 "was sent out to them and they can now log in to the site."
 msgstr ""
 
-#: .\views\user.py:224
+#: .\views\user.py:222
 #, python-format
 msgid ""
 "The user account %(username)s (%(email)s) was already approved, so you "
@@ -3591,7 +3763,7 @@ msgid ""
 "deactivate the user manually from the admin interface."
 msgstr ""
 
-#: .\views\user.py:240
+#: .\views\user.py:238
 #, python-format
 msgid ""
 "You have denied the join request of %(username)s (%(email)s)! An email was "

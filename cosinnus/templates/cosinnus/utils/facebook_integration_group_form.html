@@ -1,23 +1,6 @@
-{% load i18n static cosinnus_tags widget_tweaks %}
+{% load i18n static cosinnus_tags widget_tweaks facebook_integration_tags %}
 
 {% with is_fb_connected=request.user.cosinnus_profile.get_facebook_user_id %}
-	<div class="alert alert-info alert-dismissable">
-        <i class="fa fa-facebook fa-3x"></i>
-        <p>
-        	{% blocktrans with site_name=COSINNUS_CURRENT_PORTAL.site.name %}You can connect your projects and groups to a Facebook Group or Fan-Page. Once connected, their members can choose to share the news posts they write on {{ site_name }} to the Facebook Group or Fan-Page. (They need to connect their accounts to Facebook, as well!){% endblocktrans%}
-        </p>
-        <p>{% trans "Please be aware that users can only post to your Group/Fan-Page if they would also be permitted post in it on Facebook!" %}<p/>
-        <p>	
-        	<ul>
-	        	<li>
-	        		{% trans "You can find the ID of your Facebook Group on the Info-page in the About tab of the Group on Facebook." %}
-	        	</li>
-	        	<li>
-	        		{% trans "The unique name of your Fan-Page is the name of the Fan-Page in the URL on Facebook (example: https://www.facebook.com/myfanpage/)" %}
-	        	</li>
-        	</ul>
-        </p>
-    </div>
 	
 	{% if not is_fb_connected %}
 		<div class="alert alert-warning alert-dismissable">
@@ -29,7 +12,24 @@
 	    </div>
 	{% endif %} 
 
-    <label>{% trans "Facebook Fan-Page or Group to link to" %}</label>
+
+	<div class="alert alert-info alert-dismissable">
+        <i class="fa fa-facebook fa-3x"></i>
+        <h4>{% trans "Connect a Facebook Group" %}</h4>
+        <p>
+        	{% blocktrans with site_name=COSINNUS_CURRENT_PORTAL.site.name %}You can connect your projects and groups to a Facebook Group. Once connected, your members can choose to share the news posts they write on {{ site_name }} to the Facebook Group. (They need to connect their accounts to Facebook, as well!){% endblocktrans%}
+        </p>
+        <p>{% trans "Please be aware that users can only post to your Group if they would also be permitted post in it on Facebook!" %}<p/>
+        <p>	
+        	<ul>
+	        	<li>
+	        		{% trans "You can find the ID of your Facebook Group on the Info-page in the About tab of the Group on Facebook." %}
+	        	</li>
+        	</ul>
+        </p>
+    </div>
+
+    <label>{% trans "Facebook Group to link to" %}</label>
     {{ form.forms.obj.facebook_group_id.errors }}
     <div type="button" class="btn btn-default w100 regular-space">
         <ul class="media-list">
@@ -38,7 +38,7 @@
                     <i class="fa fa-facebook"></i>
                 </a>
                 <div class="media-body media-body-form-control">
-                    {% captureas placeholder %}{% trans "Group Id or Fan-Page unique name (examples: 1172392116092353, myfanpage)" %}{% endcaptureas %}
+                    {% captureas placeholder %}{% trans "Group Id or name (example: 1172392116092353)" %}{% endcaptureas %}
                     {% if is_fb_connected %}
                         {% render_field form.forms.obj.facebook_group_id class+="form-control" placeholder=placeholder %}
                     {% else %}
@@ -48,6 +48,154 @@
             </li>
         </ul>
     </div>
+    
+    <hr/>
+    <br/>
+    
+    <div class="alert alert-info alert-dismissable">
+        <i class="fa fa-facebook fa-3x"></i>
+        <h4>{% trans "Connect a Facebook Fan-Page" %}</h4>
+        <p>
+        	{% blocktrans with site_name=COSINNUS_CURRENT_PORTAL.site.name %}You can connect your projects and groups to a Facebook Fan-Page. Once connected, you can publish the posts you write on {{ site_name }} directly on that Fan-Page, if you are one of its administrators on Facebook.{% endblocktrans%}
+        </p>
+        <p>
+        	{% trans "All other members of your project/group can publish their posts as visitor's posts on the Fan-Page. (They need to connect their accounts to Facebook, as well!)" %}<p/>
+        <p>
+        <p>
+        	{% trans "If you wish for other members to be able to post directly to the Fan-Page, you can make them co-administrators of your project/group (and you must make them Editors of the Fan-Page on Facebook!). They will be asked to confirm their Editor access of the Fan-Page, and then will be able to publish to it." %}<p/>
+        <p>	
+        	<ul>
+	        	<li>
+	        		{% trans "The unique name of your Fan-Page is the name of the Fan-Page in the URL on Facebook (example: https://www.facebook.com/myfanpage/)" %}
+	        	</li>
+        	</ul>
+        </p>
+    </div>
+    
+    <label>{% trans "Facebook Fan-Page link to" %}</label>
+    {{ form.forms.obj.facebook_group_id.errors }}
+    <div type="button" class="btn btn-default w100 regular-space">
+        <ul class="media-list">
+            <li class="media">
+            	{% if is_fb_connected %}
+	                <div class="pull-right disabled" style="display: inline-block; width: auto; padding: 0px 10px; cursor: pointer;" onclick="loadFacebookPageChooser();">
+	                	<a>{% trans "Choose from your Pages..." %}</a>
+	            	</div>
+            	{% endif %}
+                <a class="pull-left" href="#">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <div class="media-body media-body-form-control">
+                    {% captureas placeholder %}{% trans "Fan-Page unique name (example: myfanpage)" %}{% endcaptureas %}
+                    {% if is_fb_connected %}
+                        {% render_field form.forms.obj.facebook_page_id class+="form-control" placeholder=placeholder %}
+                    {% else %}
+                    	{% render_field form.forms.obj.facebook_page_id class+="form-control" disabled="true" placeholder=placeholder %}
+                    {% endif %}
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+    {% if group.facebook_page_id and is_fb_connected %}
+	    {% if user|user_has_group_fb_page_access:group %}
+		    <div class="alert alert-success">
+		        <i class="fa fa-check fa-3x"></i>
+		        <p>{% trans "You have Editor access to this Fan-Page and can publish your posts directly to it." %}</p>
+		    </div>
+	    {% else %}
+	    	<div class="alert alert-warning" style="margin-bottom: 0;">
+	            <i class="fa fa-question fa-3x"></i>
+		        <p>
+		        	{% trans "Editor access of your Facebook-account for this Fan-Page has not been confirmed. This is required before you can publish your posts in the voice of the Fan-Page!" %}
+		        </p>
+		    </div>
+	        <button href="{% url 'cosinnus:facebook-confirm-page-admin' group_id=group.id %}" type="button" class="btn btn-emphasized">
+		        <ul class="media-list">
+		            <li class="media">
+		                <a class="pull-left" href="#">
+		                    <i class="fa fa-sign-in"></i>
+		                </a>
+		                <div class="media-body">
+	                        {% trans "Confirm now!" %}
+		                </div>
+		            </li>
+		        </ul>
+		    </button>
+		    <div class="clearfix"></div>
+	    {% endif %}
+	    <br/>
+	    <br/>
+    {% endif %}
+    
+    {% if is_fb_connected %}
+		<div class="modal fade" id="modalChoosePage" tabindex="-1" role="dialog" aria-labelledby="modalChoosePage" aria-hidden="true">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+			            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			            <h4 class="modal-title">{% trans "Select one of your Facebook pages to connect to" %}</h4>
+		            </div>
+		            <div class="modal-body">
+		            	<ul style="overflow-y: scroll;" id="pageChooserList">
+							<!-- Facebook groups to choose go here -->
+						</ul>
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-emphasized" data-dismiss="modal">
+		                    <ul class="media-list">
+		                        <li class="media">
+		                            <a class="pull-left" href="#">
+		                                <i class="fa fa-times"></i>
+		                            </a>
+		                            <div class="media-body">
+		                                {% trans "Cancel" %}
+		                            </div>
+		                        </li>
+		                    </ul>
+		                </button>
+		        	</div>
+		    	</div>
+		  	</div>
+		</div>
+		<script type="text/javascript">
+			var pageChooserEnabled = true;
+			var loadFacebookPageChooser = function() {
+				if (pageChooserEnabled) {
+					pageChooserEnabled = false;
+					var user_id = "{{ user.cosinnus_profile.get_facebook_user_id }}";
+					var access_token = "{{ user.cosinnus_profile.settings.fb_accessToken }}";
+					var jqxhr = $.get( "https://graph.facebook.com/v2.5/{0}/accounts?access_token={1}".format(user_id, access_token))
+						.done(function( result ) {
+						    var list = $('#pageChooserList');
+							list.empty();
+							if (result['data'] && result['data'].length > 0) {
+								// add pages to select list
+							    $.each(result['data'], function(i, page) {
+							    	// check that user can create content in page
+							    	if (page.perms.indexOf('CREATE_CONTENT') > -1) {
+									    var link = $('<li><a style="cursor: pointer;" data-dismiss="modal">{0}</a></li>'.format(page.name));
+										link.click(function() {
+											$('#id_facebook_page_id').val(page.id);
+										});
+										link.appendTo(list); 
+									}
+							    });
+							} else {
+								list.html('<span>{% trans "You do not seem to be Editor or Admin of any pages." %}</span>');
+							}					    
+							$('#modalChoosePage').modal().show();
+						})
+						.fail(function() {
+						    alert("{% trans "We could not retrieve your groups from Facebook because of an error. Please contact an administrator!" %}");
+						})
+						.always(function() {
+							pageChooserEnabled = true;
+						});
+				}
+			}
+		</script>
+    {% endif %}
 
 {% endwith %}
 
