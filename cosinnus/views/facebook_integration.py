@@ -420,8 +420,12 @@ def remove_facebook_association(request):
         
         req = requests.delete(post_url, data=data, verify=False)
         if not req.status_code == 200:
-            logger.error('Facebook deleting association failed, request did not return status=200.', extra={'status':req.status_code, 'content': req._content})
-            messages.error(request, _('An error occured when trying to disconnect your facebook account! Please contact an administrator!'))
+            #logger.error('Facebook deleting association failed, request did not return status=200.', extra={'status':req.status_code, 'content': req._content})
+            #messages.error(request, _('An error occured when trying to disconnect your facebook account! Please contact an administrator!'))
+            
+            # if this fails, we probably don't have an access token to the app anymore anyways, so just delete the association on our end!
+            userprofile.delete_facebook_association()
+            messages.success(request, _('Your Facebook account was successfully disconnected from this account.'))
             return redirect(reverse('cosinnus:profile-edit'))
         
         response = req.json()
