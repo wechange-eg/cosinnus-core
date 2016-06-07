@@ -11,6 +11,7 @@
                     if (!Cosinnus.csrfSafeMethod(settings.type)) {
                         xhr.setRequestHeader("X-CSRFToken", Cosinnus.getCookie('csrftoken'));
                     }
+                    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
                 }
             });
             return this;

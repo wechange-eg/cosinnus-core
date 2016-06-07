@@ -238,6 +238,8 @@
                     	{{ group.name }}
 	                    {% if group.facebook_group_id %}
 	                    		&nbsp;<a href="https://facebook.com/{{ group.facebook_group_id}}/" target="_blank" title="{% trans "View on Facebook" %}"><i class="fa fa-facebook-square"></i></a>
+	                    {% elif group.facebook_page_id %}
+	                    		&nbsp;<a href="https://facebook.com/{{ group.facebook_page_id}}/" target="_blank" title="{% trans "View on Facebook" %}"><i class="fa fa-facebook-square"></i></a>
 	                    {% endif %}
                     </h2>
                     
