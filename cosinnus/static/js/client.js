@@ -318,6 +318,9 @@
 	            $.get('http://ip-api.com/json', function (res) {
 	                self.mapStartPos = [res.lat, res.lon];
 	                cb();
+	            }).fail(function() {
+	                self.mapStartPos = [0, 0];
+	                cb();
 	            });
 	        }
 	    },
