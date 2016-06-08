@@ -371,7 +371,12 @@ class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
         else:
             path = self.path
         
-        qs = self.__class__.objects.all().filter(Q(group=self.group) & Q(is_container=True) & Q(path=path))
+        # the folder class is always only one sub-model below BaseHierarchicalTaggableObjectModel.
+        folder_class = self.__class__
+        while not BaseHierarchicalTaggableObjectModel in folder_class.__bases__:
+            folder_class = folder_class.__bases__[0]
+        
+        qs = folder_class.objects.all().filter(Q(group=self.group) & Q(is_container=True) & Q(path=path))
         first_list = list(qs[:1])
         if first_list:
             return first_list[0]
