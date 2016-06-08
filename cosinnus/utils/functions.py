@@ -160,3 +160,11 @@ def convert_html_to_string(text):
     """ Returns text containing html tags as text without its tags """
     return unescape_entities(strip_tags(force_text(text)))
 
+
+def is_number(s):
+    """ Check if value is a number """
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False

@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
     CosinnusPermanentRedirect, CosinnusPortal, MEMBERSHIP_MEMBER,\
-    MEMBERSHIP_PENDING
+    MEMBERSHIP_PENDING, CosinnusPortalMembership, CosinnusLocation
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from django.http.response import HttpResponse, HttpResponseForbidden
 from django.contrib.auth import get_user_model
@@ -18,6 +18,11 @@ import urllib2
 from django.utils.encoding import force_text
 from uuid import uuid4
 import pickle
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+import datetime
+from cosinnus.models.tagged import BaseTagObject
+import random
+from django.utils.timezone import now
 
 
 def housekeeping(request=None):
@@ -225,6 +230,57 @@ def user_statistics(request=None):
     
     return HttpResponse('<br/>'.join(results))# + ' (group)<br/>'.join(group_locs_str))
 
+
+def create_map_test_entities(request=None, count=1):
+    """ Creates <count> CosinnusProjects, CosinnusSocieties, Users and Events (in the created group), all with random coordinates """
+    if not settings.DEBUG or (request and not request.user.is_superuser):
+        return HttpResponseForbidden('Not allowed. System needs to be in DEBUG mode and you need to be admin!')
+    
+    from cosinnus_event.models import Event
+    locs = ['Dr. Evil\'s hidden lair', 'Bermuda Triangle', 'Wardrobe to Narnia', 'Platform 9 3/4', 
+            'Illuminati HQ', 'Where I put my damn car keys', 'Carmen and Waldo\'s cuddle cave']
+    
+    count = int(count)
+    
+    projnum = CosinnusProject.objects.all().count()
+    groupnum = CosinnusSociety.objects.all().count()
+    usernum = get_user_model().objects.all().count()
+    eventnum = Event.objects.all().count()
+    
+    print ">>> creating", count, "Projects, Groups, Events and Users"
+    for i in range(count):
+        projnum += 1
+        groupnum += 1
+        usernum += 1
+        eventnum += 1
+        proj = CosinnusProject.objects.create(name='MapProject #%d' % projnum, public=True, description='Test description')
+        group = CosinnusSociety.objects.create(name='MapGroup #%d' % groupnum, public=True, description='Test description')
+        user = get_user_model().objects.create(username='mapuser%d' % usernum, first_name='MapUser #%d' % usernum,
+            email='testuser%d@nowhere.com' % usernum, is_active=True, last_login=now())
+        CosinnusPortalMembership.objects.create(group=CosinnusPortal.get_current(), user=user, status=1)
+        user.cosinnus_profile.settings['tos_accepted'] = 'true'
+        user.cosinnus_profile.save()
+        event = Event.objects.create(group=proj, creator=user, title='MapEvent #%d' % eventnum, note='Test description', 
+            state=1, from_date=datetime.datetime(2099, 1, 1), to_date=datetime.datetime(2099, 1, 3))
+        
+        locproj = CosinnusLocation.objects.create(group=proj)
+        locgroup = CosinnusLocation.objects.create(group=group)
+        
+        mts = [locproj, locgroup, user.cosinnus_profile.media_tag, event.media_tag]
+        for mt in mts:
+            if hasattr(mt, 'visibility'):
+                # set all media_tags to public
+                mt.visibility = BaseTagObject.VISIBILITY_ALL
+            # set random coord
+            random.shuffle(locs)
+            mt.location = locs[0]
+            mt.location_lat = random.uniform(-60, 60)
+            mt.location_lon = random.uniform(-160, 160)
+            mt.save() 
+            
+        print "> Created", i+1, "/", count, "Projects, Groups, Events and Users"
+        
+    return HttpResponse("Done. Created %d Projects, Groups, Events and Users" % count)
 
 def delete_portal(portal_slug):
     """ Completely deletes a portal object and all of its groups and all objects assigned to the groups.
