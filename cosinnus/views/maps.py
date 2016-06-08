@@ -24,7 +24,7 @@ from cosinnus.core.mail import MailThread, get_common_mail_context,\
     send_mail_or_fail_threaded
 from django.template.loader import render_to_string
 from django.http.response import HttpResponseNotAllowed, JsonResponse,\
-    HttpResponseBadRequest
+    HttpResponseBadRequest, HttpResponse
 from django.shortcuts import redirect
 from cosinnus.templatetags.cosinnus_tags import full_name_force
 from django.contrib.auth.views import password_reset, password_change
@@ -51,6 +51,12 @@ USER_MODEL = get_user_model()
 class MapView(ListView):
 
     model = USER_MODEL
+    
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            return HttpResponse('Must be logged in as admin')
+        return super(MapView, self).dispatch(request, *args, **kwargs)
+
 
     def get_context_data(self, **kwargs):
         # Instantiate controls state.
