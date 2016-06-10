@@ -52,7 +52,7 @@ module.exports = View.extend({
 
     handleTyping: function (event) {
         var query = $(event.currentTarget).val();
-        if (query.length > 2) {
+        if (query.length > 2 || query.length === 0) {
             this.model.set({
                 q: query
             });

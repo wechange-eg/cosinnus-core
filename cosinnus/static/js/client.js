@@ -145,14 +145,18 @@
 	        var url = this.buildURL();
 	        self.set('searching', true);
 	        $.get(url, function (res) {
-	            self.set('results', res);
-	            self.trigger('change:results');
 	            self.set('searching', false);
-	            // Save the search state in the url.
-	            Backbone.mediator.publish('navigate:router', url.replace('/maps/search', '/map/'))
+	            self.trigger('end:search');
+	            // (The search endpoint is single-thread).
 	            // If there is a queued search, requeue it.
 	            if (self.get('wantsToSearch')) {
 	                self.attemptSearch();
+	            // Update the results if there isn't a queued search.
+	            } else {
+	                self.set('results', res);
+	                self.trigger('change:results');
+	                // Save the search state in the url.
+	                Backbone.mediator.publish('navigate:router', url.replace('/maps/search', '/map/'))
 	            }
 	        });
 	    },
@@ -219,7 +223,6 @@
 	        self.searchTimeout = setTimeout(function () {
 	            self.search();
 	            self.set('wantsToSearch', false);
-	            self.trigger('end:search');
 	        }, delay);
 	    },
 
@@ -515,7 +518,7 @@
 
 	    handleTyping: function (event) {
 	        var query = $(event.currentTarget).val();
-	        if (query.length > 2) {
+	        if (query.length > 2 || query.length === 0) {
 	            this.model.set({
 	                q: query
 	            });
