@@ -88,7 +88,9 @@
 	        self.mediator.settings = window.settings || {};
 	        self.mediator.subscribe('navigate:router', function (event, url) {
 	            if (url) {
-	                self.router.navigate(url);
+	                self.router.navigate(url, {
+	                    trigger: false
+	                });
 	            }
 	        });
 	    };
@@ -110,12 +112,18 @@
 	    },
 
 	    map: function () {
-	        var map = new Map();
-	        var view = new MapView({
-	            el: '#map-fullscreen',
-	            model: map
-	        });
-	        view.render();
+	        // If the map view hasn't been instantiated, create and render it.
+	        if (!this.mapFullscreen) {
+	            this.mapFullscreen = new Map();
+	            var view = new MapView({
+	                el: '#map-fullscreen',
+	                model: this.mapFullscreen
+	            });
+	            view.render();
+	        // Otherwise navigation has occurred between map states.
+	        } else {
+	            Backbone.mediator.publish('navigate:map');
+	        }
 	    }
 	});
 
@@ -138,10 +146,14 @@
 	    },
 
 	    initialize: function () {
-	        this.set('filters', _(this.default.filters).clone());
-	        this.set('layer', this.default.layer);
-	        this.searchDelay = 1000,
-	        this.whileSearchingDelay = 5000;
+	        var self = this;
+	        self.set('filters', _(self.default.filters).clone());
+	        self.set('layer', self.default.layer);
+	        self.searchDelay = 1000,
+	        self.whileSearchingDelay = 5000;
+	        Backbone.mediator.subscribe('navigate:map', function () {
+	            self.initialSearch();
+	        });
 	    },
 
 	    search: function () {
@@ -426,7 +438,7 @@
 	            L.latLng(this.model.get('south'), this.model.get('west')),
 	            L.latLng(this.model.get('north'), this.model.get('east'))
 	        ));
-	    }
+	    },
 	});
 
 

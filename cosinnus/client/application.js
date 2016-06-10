@@ -27,7 +27,9 @@ module.exports = function Application () {
         self.mediator.settings = window.settings || {};
         self.mediator.subscribe('navigate:router', function (event, url) {
             if (url) {
-                self.router.navigate(url);
+                self.router.navigate(url, {
+                    trigger: false
+                });
             }
         });
     };

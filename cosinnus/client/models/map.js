@@ -12,10 +12,14 @@ module.exports = Backbone.Model.extend({
     },
 
     initialize: function () {
-        this.set('filters', _(this.default.filters).clone());
-        this.set('layer', this.default.layer);
-        this.searchDelay = 1000,
-        this.whileSearchingDelay = 5000;
+        var self = this;
+        self.set('filters', _(self.default.filters).clone());
+        self.set('layer', self.default.layer);
+        self.searchDelay = 1000,
+        self.whileSearchingDelay = 5000;
+        Backbone.mediator.subscribe('navigate:map', function () {
+            self.initialSearch();
+        });
     },
 
     search: function () {

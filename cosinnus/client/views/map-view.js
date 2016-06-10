@@ -166,5 +166,5 @@ module.exports = View.extend({
             L.latLng(this.model.get('south'), this.model.get('west')),
             L.latLng(this.model.get('north'), this.model.get('east'))
         ));
-    }
+    },
 });
