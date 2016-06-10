@@ -194,6 +194,7 @@
 	                west: json.sw_lon
 	            });
 	            this.trigger('change:bounds');
+	            this.trigger('change:controls');
 	        }
 	        this.search();
 	    },
@@ -495,6 +496,7 @@
 	        this.template = template;
 	        this.model.on('want:search', this.handleStartSearch, this);
 	        this.model.on('end:search', this.handleEndSearch, this);
+	        this.model.on('change:controls', this.render, this);
 	        View.prototype.initialize.call(this);
 	    },
 
@@ -626,7 +628,9 @@
 	output += "\n            &nbsp;\n        ";
 	;
 	}
-	output += "\n    </div>\n\n    <div class=\"line text-field\">\n        <input type=\"text\" class=\"q\" name=\"q\" placeholder=\"Suche\" />\n        <i class=\"fa fa-search icon-search\"></i>\n        <div class=\"icon-loading sk-double-bounce\">\n            <div class=\"sk-child sk-double-bounce1\"></div>\n            <div class=\"sk-child sk-double-bounce2\"></div>\n        </div>\n    </div>\n</form>\n\n<div class=\"line button\">\n    <div data-layer=\"street\"\n        class=\"btn layer-button ";
+	output += "\n    </div>\n\n    <div class=\"line text-field\">\n        <input type=\"text\" class=\"q\" name=\"q\" placeholder=\"Suche\" value=\"";
+	output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "q"), env.opts.autoescape);
+	output += "\" />\n        <i class=\"fa fa-search icon-search\"></i>\n        <div class=\"icon-loading sk-double-bounce\">\n            <div class=\"sk-child sk-double-bounce1\"></div>\n            <div class=\"sk-child sk-double-bounce2\"></div>\n        </div>\n    </div>\n</form>\n\n<div class=\"line button\">\n    <div data-layer=\"street\"\n        class=\"btn layer-button ";
 	if(runtime.contextOrFrameLookup(context, frame, "layer") == "street") {
 	output += " active ";
 	;

@@ -60,6 +60,7 @@ module.exports = Backbone.Model.extend({
                 west: json.sw_lon
             });
             this.trigger('change:bounds');
+            this.trigger('change:controls');
         }
         this.search();
     },

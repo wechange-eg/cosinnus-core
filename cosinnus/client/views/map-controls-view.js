@@ -8,6 +8,7 @@ module.exports = View.extend({
         this.template = template;
         this.model.on('want:search', this.handleStartSearch, this);
         this.model.on('end:search', this.handleEndSearch, this);
+        this.model.on('change:controls', this.render, this);
         View.prototype.initialize.call(this);
     },
 
