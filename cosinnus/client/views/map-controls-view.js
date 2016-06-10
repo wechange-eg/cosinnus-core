@@ -6,7 +6,7 @@ var template = require('map/map-controls');
 module.exports = View.extend({
     initialize: function () {
         this.template = template;
-        this.model.on('start:search', this.handleStartSearch, this);
+        this.model.on('want:search', this.handleStartSearch, this);
         this.model.on('end:search', this.handleEndSearch, this);
         View.prototype.initialize.call(this);
     },

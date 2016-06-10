@@ -143,12 +143,10 @@
 	    search: function () {
 	        var self = this;
 	        var url = this.buildURL();
-	        self.trigger('start:search');
 	        self.set('searching', true);
 	        $.get(url, function (res) {
 	            self.set('results', res);
 	            self.trigger('change:results');
-	            self.trigger('end:search');
 	            self.set('searching', false);
 	            // Save the search state in the url.
 	            Backbone.mediator.publish('navigate:router', url.replace('/maps/search', '/map/'))
@@ -217,9 +215,11 @@
 	                self.whileSearchingDelay : self.searchDelay;
 	        clearTimeout(this.searchTimeout);
 	        self.set('wantsToSearch', true);
+	        self.trigger('want:search');
 	        self.searchTimeout = setTimeout(function () {
 	            self.search();
 	            self.set('wantsToSearch', false);
+	            self.trigger('end:search');
 	        }, delay);
 	    },
 
@@ -469,7 +469,7 @@
 	module.exports = View.extend({
 	    initialize: function () {
 	        this.template = template;
-	        this.model.on('start:search', this.handleStartSearch, this);
+	        this.model.on('want:search', this.handleStartSearch, this);
 	        this.model.on('end:search', this.handleEndSearch, this);
 	        View.prototype.initialize.call(this);
 	    },
