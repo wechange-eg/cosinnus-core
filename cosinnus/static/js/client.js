@@ -64,7 +64,7 @@
 	// Main application class
 
 	var Router = __webpack_require__(2);
-	var Mediator = __webpack_require__(12);
+	var Mediator = __webpack_require__(13);
 
 	module.exports = function Application () {
 	    self = this;
@@ -256,7 +256,7 @@
 	var View = __webpack_require__(5);
 	var MapControlsView = __webpack_require__(6);
 	var popupTemplate = __webpack_require__(11);
-	var util = __webpack_require__(13);
+	var util = __webpack_require__(12);
 
 	module.exports = View.extend({
 	    layers: {
@@ -265,7 +265,7 @@
 	                'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png' :
 	                'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'),
 	            options: {
-	                attribution: 'Open Streetmap'
+	                attribution: 'CartoDB | Open Streetmap'
 	            }
 	        },
 	        satellite: {
@@ -3472,15 +3472,10 @@
 
 	'use strict';
 
-	// Pub-sub event mediator and  data store.
-	module.exports = function Router () {
-	    this.publish = function (eventName, data) {
-	        $('html').trigger(eventName, data);
-	    };
-
-	    this.subscribe = function (events, data, handler) {
-	        $('html').on(events, data, handler);
-	    };
+	module.exports = {
+	    protocol: function () {
+	        return window.location.protocol;
+	    }
 	};
 
 
@@ -3490,10 +3485,15 @@
 
 	'use strict';
 
-	module.exports = {
-	    protocol: function () {
-	        return window.location.protocol;
-	    }
+	// Pub-sub event mediator and  data store.
+	module.exports = function Router () {
+	    this.publish = function (eventName, data) {
+	        $('html').trigger(eventName, data);
+	    };
+
+	    this.subscribe = function (events, data, handler) {
+	        $('html').on(events, data, handler);
+	    };
 	};
 
 

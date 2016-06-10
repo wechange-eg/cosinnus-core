@@ -12,7 +12,7 @@ module.exports = View.extend({
                 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png' :
                 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'),
             options: {
-                attribution: 'Open Streetmap'
+                attribution: 'CartoDB | Open Streetmap'
             }
         },
         satellite: {
