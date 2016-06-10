@@ -64,7 +64,7 @@
 	// Main application class
 
 	var Router = __webpack_require__(2);
-	var Mediator = __webpack_require__(13);
+	var mediator = __webpack_require__(13);
 
 	module.exports = function Application () {
 	    self = this;
@@ -80,7 +80,7 @@
 	    };
 
 	    self.initMediator = function () {
-	        self.mediator = Backbone.mediator = new Mediator();
+	        self.mediator = Backbone.mediator = mediator;
 	        self.mediator.settings = window.settings || {};
 	        self.mediator.subscribe('navigate:router', function (event, url) {
 	            if (url) {
@@ -3486,14 +3486,14 @@
 	'use strict';
 
 	// Pub-sub event mediator and  data store.
-	module.exports = function Router () {
-	    this.publish = function (eventName, data) {
+	module.exports = {
+	    publish: function (eventName, data) {
 	        $('html').trigger(eventName, data);
-	    };
+	    },
 
-	    this.subscribe = function (events, data, handler) {
+	    subscribe: function (events, data, handler) {
 	        $('html').on(events, data, handler);
-	    };
+	    }
 	};
 
 
