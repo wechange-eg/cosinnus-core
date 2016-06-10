@@ -2,7 +2,7 @@
 
 module.exports = Backbone.View.extend({
     initialize: function (options) {
-        this.state = options && options.state || {}
+        this.state = options && options.state || {};
     },
 
     render: function () {

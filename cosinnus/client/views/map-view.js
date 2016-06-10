@@ -39,13 +39,18 @@ module.exports = View.extend({
     },
 
     initialize: function () {
-        this.controlsView = new MapControlsView({
+        var self = this;
+        self.controlsView = new MapControlsView({
             el: $('#map-controls'),
-            model: this.model
+            model: self.model
         });
-        this.controlsView.on('change:layer', this.handleSwitchLayer, this);
-        this.model.on('change:results', this.updateMarkers, this);
-        this.model.on('change:bounds', this.fitBounds, this);
+        self.controlsView.on('change:layer', self.handleSwitchLayer, self);
+        self.model.on('change:results', self.updateMarkers, self);
+        self.model.on('change:bounds', self.fitBounds, self);
+        Backbone.mediator.subscribe('resize:window', function () {
+            self.leaflet.invalidateSize();
+            self.handleViewportChange();
+        });
         View.prototype.initialize.call(this);
     },
 

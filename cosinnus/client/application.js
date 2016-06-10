@@ -16,6 +16,10 @@ module.exports = function Application () {
         Backbone.history.start({
             pushState: true
         });
+        // A global resize event
+        $(window).on('resize', function () {
+            Backbone.mediator.publish('resize:window');
+        });
     };
 
     self.initMediator = function () {

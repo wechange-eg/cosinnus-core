@@ -77,6 +77,10 @@
 	        Backbone.history.start({
 	            pushState: true
 	        });
+	        // A global resize event
+	        $(window).on('resize', function () {
+	            Backbone.mediator.publish('resize:window');
+	        });
 	    };
 
 	    self.initMediator = function () {
@@ -295,13 +299,18 @@
 	    },
 
 	    initialize: function () {
-	        this.controlsView = new MapControlsView({
+	        var self = this;
+	        self.controlsView = new MapControlsView({
 	            el: $('#map-controls'),
-	            model: this.model
+	            model: self.model
 	        });
-	        this.controlsView.on('change:layer', this.handleSwitchLayer, this);
-	        this.model.on('change:results', this.updateMarkers, this);
-	        this.model.on('change:bounds', this.fitBounds, this);
+	        self.controlsView.on('change:layer', self.handleSwitchLayer, self);
+	        self.model.on('change:results', self.updateMarkers, self);
+	        self.model.on('change:bounds', self.fitBounds, self);
+	        Backbone.mediator.subscribe('resize:window', function () {
+	            self.leaflet.invalidateSize();
+	            self.handleViewportChange();
+	        });
 	        View.prototype.initialize.call(this);
 	    },
 
@@ -429,7 +438,7 @@
 
 	module.exports = Backbone.View.extend({
 	    initialize: function (options) {
-	        this.state = options && options.state || {}
+	        this.state = options && options.state || {};
 	    },
 
 	    render: function () {
