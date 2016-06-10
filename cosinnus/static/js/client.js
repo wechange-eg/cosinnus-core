@@ -256,24 +256,27 @@
 	var View = __webpack_require__(5);
 	var MapControlsView = __webpack_require__(6);
 	var popupTemplate = __webpack_require__(11);
+	var util = __webpack_require__(13);
 
 	module.exports = View.extend({
 	    layers: {
 	        street: {
-	            url: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png',
+	            url: (util.protocol() === 'http:' ?
+	                'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png' :
+	                'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'),
 	            options: {
 	                attribution: 'Open Streetmap'
 	            }
 	        },
 	        satellite: {
-	            url: 'http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
+	            url: util.protocol() + '//{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
 	            options: {
 	                attribution: 'Google Maps',
 	                subdomains:['mt0','mt1','mt2','mt3']
 	            }
 	        },
 	        terrain: {
-	            url: 'http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}',
+	            url: util.protocol() + '//{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}',
 	            options: {
 	                attribution: 'Google Maps',
 	                subdomains:['mt0','mt1','mt2','mt3']
@@ -3478,6 +3481,19 @@
 	    this.subscribe = function (events, data, handler) {
 	        $('html').on(events, data, handler);
 	    };
+	};
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	module.exports = {
+	    protocol: function () {
+	        return window.location.protocol;
+	    }
 	};
 
 
