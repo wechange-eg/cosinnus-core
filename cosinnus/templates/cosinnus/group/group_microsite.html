@@ -62,9 +62,10 @@
     
     {% block microsite_header %}
 	<div class="group-microsite-header">
-		{% if not user.is_authenticated %}
-			<div class="group-microsite-login-box overlay-box-gray">
-				<h2>{% trans "Jetzt anmelden und mitgestalten" %}!</h2>
+		<div class="group-microsite-login-box overlay-box-gray">
+		
+			{% if not user.is_authenticated %}
+				<h2>{% trans "Join now and collaborate!" %}</h2> {#  Jetzt anmelden und mitgestalten #}
                 <span class="app-calendar"> {# Hacky green color #}
 	                <button href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
 	                    <ul class="media-list">
@@ -91,8 +92,94 @@
                         </li>
                     </ul>
                 </button>
-			</div>
-		{% endif %}
+                
+                
+                
+                
+            
+	    	{% elif user.pk in group.members %}
+	    		<h2>{% trans "Collaborate!" %}</h2>
+	    	
+	            <button href="{{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-sign-in"></i>
+                            </a>
+                            <div class="media-body">
+                                {% if group.type == 0 %}
+                                	{% trans "You are a member. View Project!" %}
+                                {% else %}
+                                	{% trans "You are a member. View Group!" %}
+                                {% endif %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+	        {% elif user.pk in group.pendings %}
+	        	<h2>{% trans "Membership request pending..." %}</h2>
+	        	
+	        	<span class="app-etherpad">
+		            <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#join_withdraw_modal">
+	                    <ul class="media-list">
+	                        <li class="media">
+	                            <a class="pull-left" href="#">
+	                                <i class="fa fa-sign-out"></i>
+	                            </a>
+	                            <div class="media-body">
+	                                {% trans "Withdraw" %}</span>
+	                            </div>
+	                        </li>
+	                    </ul>
+	                </button>
+                </span>
+	            {% captureas label %}{% blocktrans with title=group.name %}Do you really want to withdraw your join request to „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+	            {% captureas title %}{% trans "Withdraw Join Request" %}{% endcaptureas %}
+	            {% captureas action %}{% group_url 'cosinnus:group-user-withdraw' group=group %}{% endcaptureas %}
+	            {% include "cosinnus/modal_box.html" with id="join_withdraw_modal" label=label title=title form_action=action title_icon="fa-group" %}
+	        
+	        
+	        {% else %} {# User authenticated but not a members #}
+	        	<h2>{% trans "Collaborate!" %}</h2>
+	        	
+	        	<span class="app-calendar"> {# Hacky green color #}
+		            <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#join_withdraw_modal">
+		                <ul class="media-list">
+		                    <li class="media">
+		                        <a class="pull-left" href="#">
+		                            <i class="fa fa-sign-in"></i>
+		                        </a>
+		                        <div class="media-body">
+		                    		{% trans "Join now!" %}
+		                        </div>
+		                    </li>
+		                </ul>
+		            </button>
+                </span>
+	            {% captureas label %}{% blocktrans with title=group.name %}Do you wish to request to join „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+	            {% captureas title %}{% trans "Join" %}{% endcaptureas %}
+	            {% captureas action %}{% group_url 'cosinnus:group-user-join' group=group %}{% endcaptureas %}
+	            
+	            {% include "cosinnus/modal_box.html" with id="join_withdraw_modal" label=label title=title form_action=action title_icon="fa-group" %}
+	        
+			{% endif %}
+			
+			{% if user.is_authenticated and group.public %}
+	    		<button href="{{ group.get_absolute_url }}?browse=true" type="button" class="btn btn-emphasized">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-sign-in"></i>
+                            </a>
+                            <div class="media-body">
+                                {% trans "Browse" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+	    	{% endif %}
+			
+		</div>
 		
 		{% include "cosinnus/group/group_microsite_header_image.html" %}
 		
@@ -387,93 +474,7 @@
 			            </ul>
 			        </div><!-- btn -->
 			        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
-			        	
-				    	{% if user.pk in group.members %}
-				        	<p>
-				            <button style="float: none;" href="{{ group.get_absolute_url }}" type="button" class="btn btn-emphasized w100">
-			                    <ul class="media-list">
-			                        <li class="media">
-			                            <a class="pull-left" href="#">
-			                                <i class="fa fa-sign-in"></i>
-			                            </a>
-			                            <div class="media-body">
-			                                {% if group.type == 0 %}
-			                                	{% trans "You are a member. View Project!" %}
-			                                {% else %}
-			                                	{% trans "You are a member. View Group!" %}
-			                                {% endif %}
-			                            </div>
-			                        </li>
-			                    </ul>
-			                </button>
-				    		</p>
-				        {% elif user.pk in group.pendings %}
-				        	<p>
-				        	{% trans "Your membership request is still pending..." %}
-				        	</p>
-				        	<p>
-				            <button style="float: none;" type="button" class="btn btn-emphasized w100" data-toggle="modal" data-target="#join_withdraw_modal">
-			                    <ul class="media-list">
-			                        <li class="media">
-			                            <a class="pull-left" href="#">
-			                                <i class="fa fa-sign-out"></i>
-			                            </a>
-			                            <div class="media-body">
-			                                {% trans "Withdraw request" %}</span>
-			                            </div>
-			                        </li>
-			                    </ul>
-			                </button>
-				    		</p>
-				            {% captureas label %}{% blocktrans with title=group.name %}Do you really want to withdraw your join request to „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
-				            {% captureas title %}{% trans "Withdraw Join Request" %}{% endcaptureas %}
-				            {% captureas action %}{% group_url 'cosinnus:group-user-withdraw' group=group %}{% endcaptureas %}
-				            {% include "cosinnus/modal_box.html" with id="join_withdraw_modal" label=label title=title form_action=action %}
-				        {% else %}
-				        	<p>
-				            <button style="float: none;" type="button" class="btn btn-emphasized w100" data-toggle="modal" data-target="#join_withdraw_modal">
-			                    <ul class="media-list">
-			                        <li class="media">
-			                            <a class="pull-left" href="#">
-			                                <i class="fa fa-sign-in"></i>
-			                            </a>
-			                            <div class="media-body">
-				                    		{% trans "Join now!" %}
-			                            </div>
-			                        </li>
-			                    </ul>
-			                </button>
-				    		</p>
-				            {% captureas label %}{% blocktrans with title=group.name %}Do you wish to request to join „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
-				            {% captureas title %}{% trans "Join" %}{% endcaptureas %}
-				            {% captureas action %}{% group_url 'cosinnus:group-user-join' group=group %}{% endcaptureas %}
-				            
-				            {% include "cosinnus/modal_box.html" with id="join_withdraw_modal" label=label title=title form_action=action %}
-				        {% endif %}
-				        
-				        
-				    	{% if group.public %}
-				    		{% if user.is_authenticated and not user.pk in group.members %}
-				    			<p>
-				    				{% trans "or you can:" %}
-				    			</p>
-				    			<p>
-						    		<button style="float: none;" href="{{ group.get_absolute_url }}?browse=true" type="button" class="btn btn-emphasized w100">
-					                    <ul class="media-list">
-					                        <li class="media">
-					                            <a class="pull-left" href="#">
-					                                <i class="fa fa-sign-in"></i>
-					                            </a>
-					                            <div class="media-body">
-					                                {% trans "Browse this public team" %}
-					                            </div>
-					                        </li>
-					                    </ul>
-					                </button>
-							    </p>
-				    		
-				    		{% endif %}
-				    	{% endif %}
+			        	alte collab box
 			        	
 			        </div><!-- content-box -->
 			        {% endblock microsite_middle_column %}

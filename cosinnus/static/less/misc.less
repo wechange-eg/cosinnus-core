@@ -60,7 +60,6 @@
 }
 .group-microsite-login-box {
     @media(min-width:768px) {
-        min-width: 260px;
         max-width: 420px;
         position: absolute;
         top: 30px;
@@ -73,9 +72,9 @@
         margin-bottom: 15px;
         font-size: 20px;
     }
-
-    .btn {
-        float: none;
+    
+    > .btn, > span > .btn {
+    	float: none;
         margin: 0;
     }
     span + .btn {
