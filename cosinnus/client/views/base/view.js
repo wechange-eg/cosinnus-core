@@ -28,6 +28,6 @@ module.exports = Backbone.View.extend({
     getTemplateData: function () {
         var modelData = this.model && this.model.toJSON() || {};
         var data = _(modelData).extend(this.state);
-        return data
+        return data;
     }
 });

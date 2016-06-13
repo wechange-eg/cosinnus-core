@@ -7,6 +7,7 @@ module.exports = {
         path: path.join(__dirname, 'cosinnus/static/js/'),
         filename: 'client.js'
     },
+    devtool: 'inline-source-map',
     module: {
         loaders: [
             {

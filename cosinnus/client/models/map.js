@@ -40,6 +40,10 @@ module.exports = Backbone.Model.extend({
                 // Save the search state in the url.
                 Backbone.mediator.publish('navigate:router', url.replace('/maps/search', '/map/'))
             }
+        }).fail(function () {
+            self.set('searching', false);
+            self.trigger('end:search');
+            self.trigger('error:search');
         });
     },
 

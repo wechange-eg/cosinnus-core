@@ -1,6 +1,7 @@
 'use strict';
 
 var View = require('views/base/view');
+var ErrorView = require('views/error-view');
 var template = require('map/map-controls');
 
 module.exports = View.extend({
@@ -9,6 +10,7 @@ module.exports = View.extend({
         this.model.on('want:search', this.handleStartSearch, this);
         this.model.on('end:search', this.handleEndSearch, this);
         this.model.on('change:controls', this.render, this);
+        this.model.on('error:search', this.handleXhrError, this);
         View.prototype.initialize.call(this);
     },
 
@@ -71,5 +73,14 @@ module.exports = View.extend({
             this.$el.find('.icon-search').show();
         }
         this.$el.find('.icon-loading').hide();
+    },
+
+    handleXhrError: function (event) {
+        console.log('#handleXhrError');
+        var $message = this.$el.find('form .message');
+        var errorView = new ErrorView({
+            message: 'Ein Fehler ist bei der Suche aufgetreten.',
+            el: $message
+        }).render();
     }
 });
