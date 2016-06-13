@@ -1,0 +1,160 @@
+#map-fullscreen-surface {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+    .popup {
+        width: 180px;
+
+        img {
+            float: left;
+            width: 50px;
+        }
+
+        .details {
+            margin-left: 60px;
+            width: 120px;
+            min-height: 50px;
+        }
+    }
+
+    // Leaflet overrides
+    // -----------------
+
+    .leaflet-top {
+        .leaflet-control {
+            top: 65px;
+        }
+    }
+
+}
+
+#map-controls {
+    position: fixed;
+    right: 20px;
+    top: 80px;
+    background-color: rgba(255,255,255,0.95);
+    padding: 15px;
+
+    form {
+        margin-bottom: 15px;
+
+        .q {
+            width: 100%;
+            padding: 5px;
+        }
+
+        .icon-search,
+        .icon-loading {
+            position: absolute;
+            font-size: 15px;
+            top: 7px;
+            right: 7px;
+        }
+
+        .icon-loading {
+            width: 15px;
+            height: 15px;
+            margin: 0;
+        }
+    }
+
+    .line {
+        margin-bottom: 5px;
+
+        &.link,
+        &.button {
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        &.text-field {
+            position: relative;
+            margin-top: 10px;
+
+            .icon-loading {
+                display: none;
+            }
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .check {
+            @check-height: 30px;
+            cursor: pointer;
+            height: @check-height;
+
+            &.people .box  {
+                background-color: @app-people-color;
+            }
+
+            &.events .box  {
+                background-color: @app-events-color;
+            }
+
+            &.projects .box  {
+                background-color: @app-projects-color;
+            }
+
+            &.groups .box  {
+                background-color: @app-groups-color;
+            }
+
+            .box {
+                float: left;
+                width: @check-height;
+                height: @check-height;
+
+                i {
+                    color: white;
+                    font-size: 18px;
+                    margin-top: 6px;
+                    margin-left: 6px;
+                }
+            }
+
+            .check__label {
+                margin-left: 30px;
+                padding-left: 10px;
+                display: block;
+                color: #333;
+                letter-spacing: 0.04em;
+                height: @check-height;
+                line-height: @check-height;
+            }
+        }
+
+        .layer-button {
+            float: none;
+            width: 50px;
+            margin-left: 0;
+            display: inline-block;
+            background-color: @app-main-color-light;
+            padding: 5px;
+            color: black;
+            font-size: 9.5px;
+            letter-spacing: 0.02em;
+
+            &.active {
+                background-color: @app-main-color;
+                color: white;
+            }
+        }
+
+        .reset-filters {
+            color: #999;
+        }
+
+        a {
+            color: black;
+        }
+
+        label {
+            font-size: 12px;
+        }
+    }
+}

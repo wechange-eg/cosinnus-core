@@ -267,6 +267,9 @@ class BaseTaggableObjectModel(models.Model):
         if hasattr(self, '_media_tag_cache'):
             del self._media_tag_cache
         super(BaseTaggableObjectModel, self).save(*args, **kwargs)
+        if not getattr(self, 'media_tag', None):
+            self.media_tag = get_tag_object_model().objects.create()
+            self.save()
         if created:
             pass
     
