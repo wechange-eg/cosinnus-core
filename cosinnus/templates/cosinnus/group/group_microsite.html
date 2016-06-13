@@ -321,16 +321,14 @@
 						        {% if tags %}
 						        	<b>{% trans "Tags" %}:</b>
 									{% for tag in tags %}
-									    {% if not forloop.first %}, {% endif %}
-									    {{ tag }}
+									    {{ tag }}{% if not forloop.last %}, {% endif %}
 								    {% endfor %}
 									<br/>
 								{% endif %}
 								{% if topics %}
 									<b>{% trans "Topics" %}:</b>
 									{% for topic in group.media_tag_object.get_topics %}
-										{% if not forloop.first %}, {% endif %}
-							            <a href="#">{{ topic }}</a>
+							            <a href="#">{{ topic }}{% if not forloop.last %}, {% endif %}</a>
 							        {% endfor %}
 									<br/>
 								{% endif %}
@@ -389,8 +387,7 @@
 			        			{% if group_locations %}
 			        				<b>{% trans "Location" %}:</b>
 						        	{% for group_location in group.locations.all %}
-						        		{% if not forloop.first %}, {% endif %}
-							        	<a href="{{ group_location.location_url }}" target="_blank">{{ group_location.location }}</a>
+							        	<a href="{{ group_location.location_url }}" target="_blank">{{ group_location.location }}</a>{% if not forloop.last %}, {% endif %}
 									{% endfor %}
 									<br/>
 								{% endif %}
