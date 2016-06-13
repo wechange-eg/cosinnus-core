@@ -43,6 +43,7 @@ from easy_thumbnails.exceptions import InvalidImageFormatError
 from django.contrib.auth import get_user_model
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.user import filter_active_users
+from cosinnus.models.mixins.images import ThumbnailableImageMixin
 
 logger = logging.getLogger('cosinnus')
 
@@ -1245,7 +1246,7 @@ class CosinnusLocation(models.Model):
             cache.delete(CosinnusGroupManager._GROUP_LOCATIONS_CACHE_KEY % (CosinnusPortal.get_current().id, self.group_id))
     
 
-class CosinnusGroupGalleryImage(models.Model):
+class CosinnusGroupGalleryImage(ThumbnailableImageMixin, models.Model):
     
     title = models.CharField(_('Title'), max_length=250, null=True, blank=True) 
     description = models.TextField(verbose_name=_('Description'),
@@ -1261,6 +1262,8 @@ class CosinnusGroupGalleryImage(models.Model):
         on_delete=models.CASCADE,
         related_name='gallery_images',
     )
+    
+    image_attr_name = 'image'
     
     class Meta:
         verbose_name = _('CosinnusGroup GalleryImage')

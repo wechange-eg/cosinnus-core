@@ -272,35 +272,74 @@
 	{% endblock microsite_subheader %}
 	
 	{% block microsite_content %}
+	
+	
+	<div class="row">
+		<div class="col-xs-12">
+			
+			{# About Project box #}
+			<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+	                    <div class="media-body">
+	                        {% if group.type == 0 %}{% trans "About the Project" %}{% else %}{% trans "About the Group" %}{% endif %}</i>
+	                    </div>
+	                </li>
+	            </ul>
+	        </div><!-- btn -->
+	        
+	        <div class="white-content">
+	        	{% if group.description_long and group.description_long|length > 0 %}
+		            <p>{{ group.description_long|textfield }}</p>
+		        {% elif group.description and group.description|length > 0 %}
+		            <p>{{ group.description|textfield }}</p>
+		        {% else %}
+		            {# <p><i>{% trans "No Description set" %}</i></p> #}
+		        {% endif %}
+		        
+		        {% with gallery_images=group.gallery_images.all %}
+		        	{% if False or gallery_images %} {# todo: check for video #}
+				        <div class="row">
+					        
+					        {# TODO: group video comes here #}
+					        <div class="col-lg-6">
+					        	
+					        </div>
+					        {% comment %}  
+					        {% endcomment %}
+					        
+					        {# check for existing group video, if exists, make the gallery a full row, otherwise a lg-6  #}
+						    <div class="{% if False %}col-md-6{% else %}col-xs-12{% endif %}">
+						    	<div class="row">
+						    		{% for gallery_image in gallery_images %}
+						    			{# up to 3 images side by side in video view, or 6 in non-video. xs always gets 2 images next to each other #}
+						    			<div class="{% if False %}col-xs-6 col-md-4{% else %}col-xs-6 col-sm-4 col-md-2{% endif %}">
+							                <a href="{{ gallery_image.static_image_url }}" data-lightbox="microsite-image-gallery" data-title="{{ gallery_image.title }}" class="thumbnail">
+							                    <img src="{{ gallery_image.static_image_url_thumbnail }}" title='{{ gallery_image.title }}'/>
+							                </a>
+						    			</div>
+						    		{% endfor %}
+						    	</div>
+						    </div>     
+				        </div>
+				    {% endif %}
+				{% endwith %}
+				
+	        </div>
+	        
+	        
+		</div>
+	</div>
+	
+	
+	
+	
+	
 	<div class="row">
 		<div class="col-sm-8 col-md-6">
 			
 			{% block microsite_left_column %}
-		        <div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
-		            <ul class="media-list">
-		                <li class="media">
-		                    <a class="pull-left btn-extra-emphasized" href="#"></a>
-		                    {% comment %}  
-		                    <a class="pull-left" href="#">
-		                        <i class="fa fa-user"></i>
-		                    </a>
-		                    {% endcomment %}
-		                    <div class="media-body">
-		                        {% trans "Description" %}
-		                    </div>
-		                </li>
-		            </ul>
-		        </div><!-- btn -->
-		        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
-		            {% if group.description_long and group.description_long|length > 0 %}
-			            <p>{{ group.description_long|textfield }}</p>
-			        {% elif group.description and group.description|length > 0 %}
-			            <p>{{ group.description|textfield }}</p>
-			        {% else %}
-			            <p><i>{% trans "No Description set" %}</i></p>
-			        {% endif %}
-		        </div><!-- content-box -->
-		        
 		        
 		        {% if group.media_tag_object.topics %}
 			        <div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
@@ -458,25 +497,6 @@
 				        </div><!-- content-box -->
 			        {% endif %}
 			        
-			        <div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
-			            <ul class="media-list">
-			                <li class="media">
-			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
-			                    {% comment %}  
-			                    <a class="pull-left" href="#">
-			                        <i class="fa fa-user"></i>
-			                    </a>
-			                    {% endcomment %}
-			                    <div class="media-body">
-			                        {% trans "Collaborate!" %}
-			                    </div>
-			                </li>
-			            </ul>
-			        </div><!-- btn -->
-			        <div class="">{% comment %}  oder: <div class="content-box large-space transparent-p">{% endcomment %}
-			        	alte collab box
-			        	
-			        </div><!-- content-box -->
 			        {% endblock microsite_middle_column %}
 					
 				</div>

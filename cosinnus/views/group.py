@@ -73,8 +73,8 @@ class CosinnusLocationInlineFormset(InlineFormSet):
     model = CosinnusLocation
     
 class CosinnusGroupGalleryImageInlineFormset(InlineFormSet):
-    extra = 3
-    max_num = 3
+    extra = 6
+    max_num = 6
     form_class = CosinnusGroupGalleryImageForm
     model = CosinnusGroupGalleryImage
 
