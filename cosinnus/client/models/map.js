@@ -8,7 +8,8 @@ module.exports = Backbone.Model.extend({
             projects: true,
             groups: true
         },
-        layer: 'street'
+        layer: 'street',
+        limitWithoutClustering: 3
     },
 
     initialize: function () {
@@ -81,6 +82,11 @@ module.exports = Backbone.Model.extend({
             projects: this.get('filters').projects,
             groups: this.get('filters').groups
         };
+        if (!this.get('clustering')) {
+            _(searchParams).extend({
+                limit: this.limitWithoutClustering
+            });
+        }
         var query = $.param(searchParams);
         return '/maps/search?' + query;
     },

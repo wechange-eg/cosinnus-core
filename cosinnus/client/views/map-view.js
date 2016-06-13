@@ -38,6 +38,8 @@ module.exports = View.extend({
         groups: 'blue'
     },
 
+    clusterZoomThreshold: 5,
+
     initialize: function () {
         var self = this;
         self.controlsView = new MapControlsView({
@@ -62,6 +64,9 @@ module.exports = View.extend({
             self.model.initialSearch();
         });
     },
+
+    // Private
+    // -------
 
     setStartPos: function (cb) {
         var self = this;
@@ -110,47 +115,83 @@ module.exports = View.extend({
         });
     },
 
+    addMarker: function (result, resultType) {
+        var marker = L.marker([result.lat, result.lon], {
+            icon: L.icon({
+                iconUrl: '/static/js/vendor/images/marker-icon-2x-' +
+                    this.resultColours[resultType] + '.png',
+                iconSize: [17, 28],
+                iconAnchor: [8, 28],
+                popupAnchor: [1, -27],
+                shadowSize: [28, 28]
+            })
+        }).bindPopup(popupTemplate.render({
+            imageURL: result.imageUrl,
+            title: result.title,
+            url: result.url,
+            address: result.address
+        }));
+
+        if (this.state.clustering) {
+            this.markers.addLayer(marker);
+        } else {
+            marker.addTo(this.leaflet);
+            this.markers.push(marker);
+        }
+    },
+
     // Event Handlers
     // --------------
 
+    // Render the search results as markers on the map.
     updateMarkers: function () {
         var self = this,
             controls = this.controlsView.model,
             results = self.model.get('results');
 
-        // Remove previous markers from map.
+        // Remove previous markers from map based on current clustering state.
         if (self.markers) {
-            self.leaflet.removeLayer(self.markers);
+            if (self.state.clustering) {
+                self.leaflet.removeLayer(self.markers);
+            } else {
+                _(self.markers).each(function (marker) {
+                    self.leaflet.removeLayer(marker);
+                });
+            }
         }
-        self.markers = L.markerClusterGroup({
-            maxClusterRadius: 30
-        });
 
+        // Set clustering state: cluster only when zoomed in enough.
+        var zoom = self.leaflet.getZoom();
+        self.state.clustering = zoom > self.clusterZoomThreshold;
+
+        // Set a new marker collection.
+        if (self.state.clustering) {
+            self.markers = L.markerClusterGroup({
+                maxClusterRadius: 30
+            });
+        } else {
+            self.markers = [];
+        }
+
+        // Add the individual markers.
         _(this.model.activeFilters()).each(function (resultType) {
             _(results[resultType]).each(function (result) {
-                self.markers.addLayer(L
-                    .marker([result.lat, result.lon], {
-                        icon: L.icon({
-                            iconUrl: '/static/js/vendor/images/marker-icon-2x-' +
-                                self.resultColours[resultType] + '.png',
-                            iconSize: [17, 28],
-                            iconAnchor: [8, 28],
-                            popupAnchor: [1, -27],
-                            shadowSize: [28, 28]
-                        })
-                    })
-                    .bindPopup(popupTemplate.render({
-                        imageURL: result.imageUrl,
-                        title: result.title,
-                        url: result.url,
-                        address: result.address
-                    })));
+                self.addMarker(result, resultType);
             });
         });
-        self.leaflet.addLayer(this.markers);
+
+        // If clustering, add the cluster object to the map.
+        if (self.state.clustering) {
+            self.leaflet.addLayer(this.markers);
+        }
     },
 
+
     handleViewportChange: function () {
+        var zoom = this.leaflet.getZoom();
+        this.model.set({
+            clustering: zoom > self.clusterZoomThreshold
+        });
         this.updateBounds();
         this.model.attemptSearch();
     },
@@ -166,5 +207,5 @@ module.exports = View.extend({
             L.latLng(this.model.get('south'), this.model.get('west')),
             L.latLng(this.model.get('north'), this.model.get('east'))
         ));
-    },
+    }
 });
