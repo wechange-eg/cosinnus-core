@@ -84,8 +84,8 @@ class CosinnusGroupFormMixin(object):
     model = CosinnusGroup
     # we can define additional inline formsets in settings.COSINNUS_GROUP_ADDITIONAL_INLINE_FORMSETS
     inlines = [CosinnusLocationInlineFormset, CosinnusGroupGalleryImageInlineFormset] \
-                + [resolve_class(class_path) for class_path in settings.COSINNUS_GROUP_ADDITIONAL_INLINE_FORMSETS] \
-                    if getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_INLINE_FORMSETS', []) else []
+                + ([resolve_class(class_path) for class_path in settings.COSINNUS_GROUP_ADDITIONAL_INLINE_FORMSETS] \
+                    if getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_INLINE_FORMSETS', []) else [])
     template_name = 'cosinnus/group/group_form.html'
     
     def get_form_kwargs(self):
