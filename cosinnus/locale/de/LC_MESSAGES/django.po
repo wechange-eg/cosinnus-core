@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-13 16:22+0200\n"
-"PO-Revision-Date: 2016-06-13 17:01+0200\n"
+"POT-Creation-Date: 2016-06-14 18:31+0200\n"
+"PO-Revision-Date: 2016-06-14 18:35+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -431,7 +431,7 @@ msgstr "Beschreibung"
 #: .\models\group.py:443 .\models\group.py:609 .\models\profile.py:90
 #: .\templates\cosinnus\group\group_form.html:188
 #: .\templates\cosinnus\group\group_form.html:197
-#: .\templates\cosinnus\group\group_microsite.html:387
+#: .\templates\cosinnus\group\group_microsite.html:407
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:44
 #: .\templates\cosinnus\user\userprofile_form.html:100
 msgid "Website"
@@ -656,7 +656,7 @@ msgid "Permanent Team Redirect"
 msgstr "Dauerhaufte Gruppenweiterleitung"
 
 #: .\models\group.py:1222 .\models\tagged.py:124
-#: .\templates\cosinnus\group\group_microsite.html:393
+#: .\templates\cosinnus\group\group_microsite.html:413
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:4
 msgid "Location"
 msgstr "Standort"
@@ -742,7 +742,7 @@ msgstr "Nur Gruppen/Projekt-Mitglieder"
 msgid "Public (visible without login)"
 msgstr "Öffentlich (sichtbar ohne Anmeldung)"
 
-#: .\models\tagged.py:92 .\templates\cosinnus\group\group_microsite.html:325
+#: .\models\tagged.py:92 .\templates\cosinnus\group\group_microsite.html:335
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:32
 msgid "Tags"
 msgstr "Schlagworte"
@@ -807,7 +807,7 @@ msgstr "Gültig bis"
 msgid "Approach"
 msgstr "Ansatz"
 
-#: .\models\tagged.py:137 .\templates\cosinnus\group\group_microsite.html:333
+#: .\models\tagged.py:137 .\templates\cosinnus\group\group_microsite.html:342
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:13
 msgid "Topics"
 msgstr "Themen"
@@ -1499,7 +1499,7 @@ msgid "Events"
 msgstr "Veranstaltungen"
 
 #: .\templates\cosinnus\dashboard.html:192
-#: .\templates\cosinnus\group\group_microsite.html:417
+#: .\templates\cosinnus\group\group_microsite.html:436
 #: .\templates\cosinnus\search.html:113
 #: .\templates\cosinnus\wagtail\widgets\global_notes.html:2
 msgid "News"
@@ -2140,22 +2140,25 @@ msgstr "Über das Projekt"
 msgid "About the Group"
 msgstr "Über die Gruppe"
 
-#: .\templates\cosinnus\group\group_microsite.html:346
-#: .\templates\cosinnus\group\group_microsite.html:347
+#: .\templates\cosinnus\group\group_microsite.html:292
+msgid "There is no description for this project yet."
+msgstr "Es wurde noch keine Beschreibung für das Projekt eingetragen."
+
+#: .\templates\cosinnus\group\group_microsite.html:294
+msgid "There is no description for this group yet."
+msgstr "Es wurde noch keine Beschreibung für die Gruppe eingetragen."
+
+#: .\templates\cosinnus\group\group_microsite.html:355
 msgid "Share on Facebook"
 msgstr "Auf Facebook teilen"
 
-#: .\templates\cosinnus\group\group_microsite.html:350
-msgid "Share on Twitter"
-msgstr "Auf Twitter teilen"
-
-#: .\templates\cosinnus\group\group_microsite.html:353
-msgid "Share on Google+"
-msgstr "Auf Google+ teilen"
-
-#: .\templates\cosinnus\group\group_microsite.html:372
+#: .\templates\cosinnus\group\group_microsite.html:381
 msgid "Contact"
 msgstr "Kontakt"
+
+#: .\templates\cosinnus\group\group_microsite.html:392
+msgid "No contact data has been added yet."
+msgstr "Es wurden noch keine Kontaktdaten eingetragen."
 
 #: .\templates\cosinnus\group\group_user_list.html:4
 #, python-format
@@ -4322,6 +4325,12 @@ msgstr ""
 #| msgid "Export"
 msgid "Import"
 msgstr "Exportieren"
+
+#~ msgid "Share on Twitter"
+#~ msgstr "Auf Twitter teilen"
+
+#~ msgid "Share on Google+"
+#~ msgstr "Auf Google+ teilen"
 
 #~ msgid "No Location set"
 #~ msgstr "Kein Ort angegeben."

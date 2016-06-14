@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-13 16:22+0200\n"
+"POT-Creation-Date: 2016-06-14 18:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -408,7 +408,7 @@ msgstr ""
 #: .\models\group.py:443 .\models\group.py:609 .\models\profile.py:90
 #: .\templates\cosinnus\group\group_form.html:188
 #: .\templates\cosinnus\group\group_form.html:197
-#: .\templates\cosinnus\group\group_microsite.html:387
+#: .\templates\cosinnus\group\group_microsite.html:407
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:44
 #: .\templates\cosinnus\user\userprofile_form.html:100
 msgid "Website"
@@ -619,7 +619,7 @@ msgid "Permanent Team Redirect"
 msgstr ""
 
 #: .\models\group.py:1222 .\models\tagged.py:124
-#: .\templates\cosinnus\group\group_microsite.html:393
+#: .\templates\cosinnus\group\group_microsite.html:413
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:4
 msgid "Location"
 msgstr ""
@@ -691,7 +691,7 @@ msgstr ""
 msgid "Public (visible without login)"
 msgstr ""
 
-#: .\models\tagged.py:92 .\templates\cosinnus\group\group_microsite.html:325
+#: .\models\tagged.py:92 .\templates\cosinnus\group\group_microsite.html:335
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:32
 msgid "Tags"
 msgstr ""
@@ -756,7 +756,7 @@ msgstr ""
 msgid "Approach"
 msgstr ""
 
-#: .\models\tagged.py:137 .\templates\cosinnus\group\group_microsite.html:333
+#: .\models\tagged.py:137 .\templates\cosinnus\group\group_microsite.html:342
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:13
 msgid "Topics"
 msgstr ""
@@ -1412,7 +1412,7 @@ msgid "Events"
 msgstr ""
 
 #: .\templates\cosinnus\dashboard.html:192
-#: .\templates\cosinnus\group\group_microsite.html:417
+#: .\templates\cosinnus\group\group_microsite.html:436
 #: .\templates\cosinnus\search.html:113
 #: .\templates\cosinnus\wagtail\widgets\global_notes.html:2
 msgid "News"
@@ -2033,21 +2033,24 @@ msgstr ""
 msgid "About the Group"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_microsite.html:346
-#: .\templates\cosinnus\group\group_microsite.html:347
+#: .\templates\cosinnus\group\group_microsite.html:292
+msgid "There is no description for this project yet."
+msgstr ""
+
+#: .\templates\cosinnus\group\group_microsite.html:294
+msgid "There is no description for this group yet."
+msgstr ""
+
+#: .\templates\cosinnus\group\group_microsite.html:355
 msgid "Share on Facebook"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_microsite.html:350
-msgid "Share on Twitter"
-msgstr ""
-
-#: .\templates\cosinnus\group\group_microsite.html:353
-msgid "Share on Google+"
-msgstr ""
-
-#: .\templates\cosinnus\group\group_microsite.html:372
+#: .\templates\cosinnus\group\group_microsite.html:381
 msgid "Contact"
+msgstr ""
+
+#: .\templates\cosinnus\group\group_microsite.html:392
+msgid "No contact data has been added yet."
 msgstr ""
 
 #: .\templates\cosinnus\group\group_user_list.html:4

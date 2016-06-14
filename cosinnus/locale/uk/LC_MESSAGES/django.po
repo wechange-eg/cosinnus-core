@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-13 16:22+0200\n"
+"POT-Creation-Date: 2016-06-14 18:31+0200\n"
 "PO-Revision-Date: 2015-11-11 10:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -439,7 +439,7 @@ msgstr "Опис"
 #: .\models\group.py:443 .\models\group.py:609 .\models\profile.py:90
 #: .\templates\cosinnus\group\group_form.html:188
 #: .\templates\cosinnus\group\group_form.html:197
-#: .\templates\cosinnus\group\group_microsite.html:387
+#: .\templates\cosinnus\group\group_microsite.html:407
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:44
 #: .\templates\cosinnus\user\userprofile_form.html:100
 msgid "Website"
@@ -665,7 +665,7 @@ msgid "Permanent Team Redirect"
 msgstr "Постійне перенаправлення спільноти"
 
 #: .\models\group.py:1222 .\models\tagged.py:124
-#: .\templates\cosinnus\group\group_microsite.html:393
+#: .\templates\cosinnus\group\group_microsite.html:413
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:4
 msgid "Location"
 msgstr "Місцезнаходження"
@@ -755,7 +755,7 @@ msgstr "Тільки члени спільноти/проекту"
 msgid "Public (visible without login)"
 msgstr "Публічно (доступно без входу в систему)"
 
-#: .\models\tagged.py:92 .\templates\cosinnus\group\group_microsite.html:325
+#: .\models\tagged.py:92 .\templates\cosinnus\group\group_microsite.html:335
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:32
 msgid "Tags"
 msgstr "Ключові слова"
@@ -820,7 +820,7 @@ msgstr "Дійсний до"
 msgid "Approach"
 msgstr "Підхід"
 
-#: .\models\tagged.py:137 .\templates\cosinnus\group\group_microsite.html:333
+#: .\models\tagged.py:137 .\templates\cosinnus\group\group_microsite.html:342
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:13
 msgid "Topics"
 msgstr "Теми"
@@ -1515,7 +1515,7 @@ msgid "Events"
 msgstr "Заходи"
 
 #: .\templates\cosinnus\dashboard.html:192
-#: .\templates\cosinnus\group\group_microsite.html:417
+#: .\templates\cosinnus\group\group_microsite.html:436
 #: .\templates\cosinnus\search.html:113
 #: .\templates\cosinnus\wagtail\widgets\global_notes.html:2
 msgid "News"
@@ -2168,24 +2168,31 @@ msgstr "Активувати проект"
 msgid "About the Group"
 msgstr "Про мене"
 
-#: .\templates\cosinnus\group\group_microsite.html:346
-#: .\templates\cosinnus\group\group_microsite.html:347
+#: .\templates\cosinnus\group\group_microsite.html:292
+#, fuzzy
+#| msgid "There are no projects in this group yet."
+msgid "There is no description for this project yet."
+msgstr "У цій спільноті немає жодного проекту."
+
+#: .\templates\cosinnus\group\group_microsite.html:294
+#, fuzzy
+#| msgid "There are no projects in this group yet."
+msgid "There is no description for this group yet."
+msgstr "У цій спільноті немає жодного проекту."
+
+#: .\templates\cosinnus\group\group_microsite.html:355
 #, fuzzy
 #| msgid "View on page"
 msgid "Share on Facebook"
 msgstr "Переглянути на сторінці"
 
-#: .\templates\cosinnus\group\group_microsite.html:350
-msgid "Share on Twitter"
-msgstr ""
-
-#: .\templates\cosinnus\group\group_microsite.html:353
-msgid "Share on Google+"
-msgstr ""
-
-#: .\templates\cosinnus\group\group_microsite.html:372
+#: .\templates\cosinnus\group\group_microsite.html:381
 msgid "Contact"
 msgstr "Контакти"
+
+#: .\templates\cosinnus\group\group_microsite.html:392
+msgid "No contact data has been added yet."
+msgstr ""
 
 #: .\templates\cosinnus\group\group_user_list.html:4
 #, python-format
