@@ -278,12 +278,22 @@
 	        
 	        <div class="white-content">
 	        	{% block microsite_group_description %}
-	        	
+	        		
+	        		<p>
 		        	{% if group.description_long and group.description_long|length > 0 %}
-			            <p>{{ group.description_long|textfield }}</p>
+			            {{ group.description_long|textfield }}
 			        {% elif group.description and group.description|length > 0 %}
-			            <p>{{ group.description|textfield }}</p>
+			            {{ group.description|textfield }}
+			        {% else %}
+			        	<i>
+			        		{% if group.type == 0 %}
+			        			{% trans "There is no description for this project yet." %}
+			        		{% else %}
+			        			{% trans "There is no description for this group yet." %}
+			        		{% endif %}
+		        		</i>
 			        {% endif %}
+			        </p>
 			        
 			        {% with gallery_images=group.gallery_images.all %}
 			        	{% if False or gallery_images %} {# todo: check for video #}
@@ -370,7 +380,18 @@
 		                </li>
 		            </ul>
 		        </div><!-- btn -->
-		        <div class="white-content">
+		        
+	        	{# Little hack to show an empty message, because a render-time empty check is complex due to extendable blocks #}
+	        	<script type="text/javascript"> 
+	        		$(function() {
+	        			var box = $('#microsite_contact_content');
+		        		if (box.text().replace(/\s/g, '').length == 0) {
+		        			box.html("<p><i>{% trans "No contact data has been added yet." %}</i></p>");
+		        		}
+	        		});
+	        	</script>
+		        <div id="microsite_contact_content" class="white-content">
+					
 		        	{% if group.contact_info and group.contact_info|length > 0 %}
 			            <p>
 			            	{{ group.contact_info|textfield }}
