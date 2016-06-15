@@ -23,52 +23,16 @@ from wagtail.wagtailcore.rich_text import DbWhitelister
 
 from wagtail.wagtailcore import blocks
 from django.utils.functional import cached_property
-from wagtail.wagtailcore.blocks.field_block import RichTextBlock
+from wagtail.wagtailcore.blocks.field_block import RichTextBlock, RawHTMLBlock
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailcore.blocks.struct_block import StructBlock
-
-
-
-class BetterDbWhitelister(DbWhitelister):
-    """ Prevents <div> tags from being replaced by <p> """
-    
-    @classmethod
-    def clean_tag_node(cls, doc, tag):
-        if not 'data-embedtype' in tag.attrs and tag.name == 'div':
-            super(DbWhitelister, cls).clean_tag_node(doc, tag) # this gets around having the 'div' tag replaced
-        else:
-            super(BetterDbWhitelister, cls).clean_tag_node(doc, tag)
-            
-
-class BetterRichTextArea(RichTextArea):
-    """ Enables using a custom DbWhitelister """
-    
-    def value_from_datadict(self, data, files, name):
-        original_value = super(RichTextArea, self).value_from_datadict(data, files, name)
-        if original_value is None:
-            return None
-        return BetterDbWhitelister.clean(original_value)
-
-
-class BetterRichTextField(RichTextField):
-    """ Enables using a custom DbWhitelister """
-    
-    def formfield(self, **kwargs):
-        defaults = {'widget': BetterRichTextArea}
-        defaults.update(kwargs)
-        return super(RichTextField, self).formfield(**defaults) # super on RichTextField, not self.__class__!
-
-
-class BetterRichTextBlock(RichTextBlock):
-    """ Enables using a custom DbWhitelister """
-    
-    @cached_property
-    def field(self):
-        return forms.CharField(widget=BetterRichTextArea, **self.field_options)
-
+from wagtail.wagtailembeds.blocks import EmbedBlock
+from cosinnus.models.wagtail_blocks import BetterRichTextField,\
+    STREAMFIELD_BLOCKS, STREAMFIELD_BLOCKS_WIDGETS
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 
 class SplitMultiLangTabsMixin(object):
@@ -340,31 +304,6 @@ class SimpleTwoPage(BaseSimplePage):
 """   Below are basically the same wagtail models, only using StreamFields instead of RichTextFields  """
     
     
-class CreateProjectButtonBlock(StructBlock):
-    
-    class Meta:
-        label = _('Create-Project or Group Button')
-        icon = 'group'
-        template = 'cosinnus/wagtail/widgets/create_project_button.html'
-        
-    type = blocks.ChoiceBlock(choices=[
-        ('project', 'Project'),
-        ('group', 'Group'),
-    ], required=True, label='Type', default='project')
-
-
-    def get_context(self, value):
-        context = super(CreateProjectButtonBlock, self).get_context(value)
-        context['type'] = value.get('type')
-        return context
-    
-
-""" Default configuration of available blocks for out StreamField, because DRY """
-STREAMFIELD_BLOCKS = [
-    ('paragraph', BetterRichTextBlock(icon='form')),
-    ('image', ImageChooserBlock(icon='image')),
-    ('create_project_button', CreateProjectButtonBlock())
-]
 
 
 class BaseStreamDashboardPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
@@ -570,4 +509,73 @@ class StreamSimpleTwoPage(BaseStreamSimplePage):
         'leftnav',
     )
     
+
+class StreamStartPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
+    """ A simple well-structured StartPage using StreamFields """
     
+    # settings fields
+    show_register_button = models.BooleanField(_('Show Register Button'), default=True)
+    redirect_if_logged_in = models.BooleanField(_('Redirect Logged in Users'),
+        help_text=_('If active, this page will only be visible to non-logged-in users. All others will be redirected to the activities page.'),
+        default=False)
+    
+    # Database fields
+    header_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name=_('Header image'),
+    )
+    header_title = BetterRichTextField(verbose_name=_('Header Title'), blank=True)
+    header_text = BetterRichTextField(verbose_name=_('Header Text'), blank=True)
+    
+    header_content = StreamField(STREAMFIELD_BLOCKS, verbose_name=_('Additional Header content'), blank=True)
+    site_widgets = StreamField(STREAMFIELD_BLOCKS_WIDGETS, verbose_name=_('Site Widgets'), blank=True)
+    bottom_content = StreamField(STREAMFIELD_BLOCKS, verbose_name=_('Bottom content (gray background)'), blank=True)
+    
+    translation_fields = (
+        'title',
+        'header_image',
+        'header_title',
+        'header_text',
+        'header_content',
+        'bottom_content',
+    )
+    
+    # Search index configuraiton
+    search_fields = Page.search_fields + (
+        index.SearchField('header_title'),
+        index.SearchField('header_text'),
+        index.SearchField('header_content'),
+        index.SearchField('bottom_content'),
+    )
+
+    # Editor panels configuration
+    content_panels = Page.content_panels + [
+        ImageChooserPanel('header_image'),
+        FieldPanel('header_title'),
+        FieldPanel('header_text'),
+        
+        StreamFieldPanel('header_content'),
+        StreamFieldPanel('bottom_content'),
+    ]
+    
+    # Editor panels configuration
+    settings_panels = Page.settings_panels + [
+        FieldPanel('show_register_button'),
+        FieldPanel('redirect_if_logged_in'),
+        StreamFieldPanel('site_widgets'),
+    ]
+    
+    template = 'cosinnus/wagtail/stream_start_page.html'
+    
+    def serve(self, request):
+        """ If the redirect flag is set, and the user is logged in, redirect to streams, otherwise, show CMS page """
+        if request.user.is_authenticated() and self.redirect_if_logged_in and not request.GET.get('preview', False):
+            return redirect(get_non_cms_root_url())
+        return super(StreamStartPage, self).serve(request)
+
+
+

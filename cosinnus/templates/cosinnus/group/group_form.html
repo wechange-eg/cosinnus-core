@@ -330,29 +330,49 @@
 					
 					
 					<div class="tab-pane {% if SETTINGS.COSINNUS_MICROSITES_ENABLED and request.GET.tab == 'microsite' %}active{% endif %}" id="microsite" >
-					
-						<label>
-	                    	{% trans "Microsite Wallpaper" %} (1140px x 240px)
-	                    </label>
-						{{ form.forms.obj.wallpaper.errors }}
-						<div class="row">
-		                 	<div class="col-md-8 regular-space">
-								{% if object.wallpaper %}
-								{% trans "Currently" %}: <a href="{{ object.wallpaper.url }}">{{ object.wallpaper }}</a> 
-								{% endif %}
-								<input id="wallpaper-clear_id" name="wallpaper-clear" type="checkbox"> 
-								<label for="wallpaper-clear_id">{% trans "Reset" %}</label><br>
-								{% trans "Change" %}: 
-								<input class="form-control" id="fileToUpload" name="wallpaper" placeholder="{% trans "Upload an image." %}" type="file">
-							</div>
-		             	</div>
 						
-						{% block group_form_microsite_description_field %}
+						{% block group_form_microsite_tab %}
+							<label>
+		                    	{% trans "Microsite Wallpaper" %} (1140px x 240px)
+		                    </label>
+							{{ form.forms.obj.wallpaper.errors }}
+							<div class="row">
+			                 	<div class="col-md-8 regular-space">
+									{% if object.wallpaper %}
+									{% trans "Currently" %}: <a href="{{ object.wallpaper.url }}">{{ object.wallpaper }}</a> 
+									{% endif %}
+									<input id="wallpaper-clear_id" name="wallpaper-clear" type="checkbox"> 
+									<label for="wallpaper-clear_id">{% trans "Reset" %}</label><br>
+									{% trans "Change" %}: 
+									<input class="form-control" id="fileToUpload" name="wallpaper" placeholder="{% trans "Upload an image." %}" type="file">
+								</div>
+			             	</div>
+							
+							{% block group_form_microsite_description_field %}
+			                    <label>
+			                    	{% if group_model == "CosinnusSociety" %}{% trans "Describe the group in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
+			                    	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+			                    </label>
+			                    {{ form.forms.obj.description_long.errors }}
+			                    <div type="button" class="btn btn-default w100 regular-space">
+			                        <ul class="media-list">
+			                            <li class="media">
+			                                <a class="pull-left" href="#">
+			                                    <i class="fa fa-pencil"></i>
+			                                </a>
+			                                <div class="media-body">
+			                                    {% render_field form.forms.obj.description_long  %}
+			                                </div>
+			                            </li>
+			                        </ul>
+			                    </div>
+		                    {% endblock group_form_microsite_description_field %}
+		                    
 		                    <label>
-		                    	{% if group_model == "CosinnusSociety" %}{% trans "Describe the group in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
+		                    	{% trans "Contact info. How you can be reached, addresses, social media, etc..." %}
 		                    	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
 		                    </label>
-		                    {{ form.forms.obj.description_long.errors }}
+		                    {{ form.forms.obj.contact_info.errors }}
 		                    <div type="button" class="btn btn-default w100 regular-space">
 		                        <ul class="media-list">
 		                            <li class="media">
@@ -360,31 +380,63 @@
 		                                    <i class="fa fa-pencil"></i>
 		                                </a>
 		                                <div class="media-body">
-		                                    {% render_field form.forms.obj.description_long  %}
+		                                	{% captureas placeholder %}{% trans "Contact Information" %}{% endcaptureas %}
+		                                    {% render_field form.forms.obj.contact_info placeholder=placeholder %}
 		                                </div>
 		                            </li>
 		                        </ul>
 		                    </div>
-	                    {% endblock group_form_microsite_description_field %}
+		                    
+		                    
+		                    
+							<label>{% trans "Microsite Gallery Images" %}</label>
+						    {% with gallery_image_formset=inlines.1 %}
+								{{ gallery_image_formset.management_form }}
+								{% for inlineform in gallery_image_formset %}
+									<div id="gallery-images-wrapper-{{ forloop.counter0 }}" {% if not forloop.counter == 1 and not forloop.counter <= gallery_image_formset.management_form.initial.INITIAL_FORMS %}style="display: none;"{% endif %}>
+									
+										<div type="button" class="btn btn-default w100 ">
+										    <ul class="media-list">
+										        <li class="media">
+										            <a class="pull-left" href="#">
+										                <i class="fa fa-image"></i>
+										            </a>
+										            <div class="media-body {% if forloop.last %}regular-space{% else %}fine-space{% endif %}">
+										            	
+										            	<div class="media">
+															<a class="pull-left">
+											 					<i class="fa fa-image"></i>
+															</a>
+															<div style="padding: 0px 10px; display: inline-block;">
+												                {% captureas placeholder %}{% trans "Choose and upload a gallery image" %}{% endcaptureas %}
+												                {{ inlineform.image.errors }}
+												                {% render_field inlineform.image class+="form-control" placeholder=placeholder %}
+												            </div>
+												        </div>
+														{{ inlineform.group }}
+														{{ inlineform.id }}
+														<div>
+															<label for="{{ inlineform.DELETE.id_for_label }}">{% trans "Delete" %}:</label>
+															{{ inlineform.DELETE }}
+														</div>
+														{% if forloop.counter >= gallery_image_formset.management_form.initial.INITIAL_FORMS and forloop.counter < gallery_image_formset.management_form.initial.MAX_NUM_FORMS %}
+															<div id="gallery-images-more-{{ forloop.counter0 }}">
+																<button class="btn btn-emphasized pull-right" onclick="$('#gallery-images-more-{{ forloop.counter0 }}').hide(); $('#gallery-images-wrapper-{{ forloop.counter }}').show(); return false;">+ {% trans "more" %}...</button>
+															</div>
+														{% endif %}
+										            </div>
+										        </li>
+										    </ul>
+										</div>
+										
+									</div>
+								{% endfor %}
+							{% endwith %}
 	                    
-	                    <label>
-	                    	{% trans "Contact info. How you can be reached, addresses, social media, etc..." %}
-	                    	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
-	                    </label>
-	                    {{ form.forms.obj.contact_info.errors }}
-	                    <div type="button" class="btn btn-default w100 regular-space">
-	                        <ul class="media-list">
-	                            <li class="media">
-	                                <a class="pull-left" href="#">
-	                                    <i class="fa fa-pencil"></i>
-	                                </a>
-	                                <div class="media-body">
-	                                    {% render_field form.forms.obj.contact_info  %}
-	                                </div>
-	                            </li>
-	                        </ul>
-	                    </div>
-					</div>
+	                    {% endblock group_form_microsite_tab %}
+	                    
+	                    
+					</div> {# end microsite tab #}
 					
 					{% if SETTINGS.COSINNUS_FACEBOOK_INTEGRATION_ENABLED %}
 						<div class="tab-pane {% if request.GET.tab == 'facebook' %}active{% endif %}" id="facebook" >

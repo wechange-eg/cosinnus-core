@@ -9,7 +9,7 @@ from awesome_avatar import forms as avatar_forms
 
 from cosinnus.models.group import (CosinnusGroupMembership,
     MEMBERSHIP_MEMBER, CosinnusPortal,
-    CosinnusLocation, RelatedGroups)
+    CosinnusLocation, RelatedGroups, CosinnusGroupGalleryImage)
 from cosinnus.core.registries.apps import app_registry
 from cosinnus.conf import settings
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
@@ -150,6 +150,13 @@ class CosinnusLocationForm(forms.ModelForm):
             'location_lat': forms.HiddenInput(),
             'location_lon': forms.HiddenInput(),
         }
+        
+        
+class CosinnusGroupGalleryImageForm(forms.ModelForm):
+
+    class Meta:
+        model = CosinnusGroupGalleryImage
+        fields = ('group', 'image', )
         
 
 

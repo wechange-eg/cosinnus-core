@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-01 16:04+0200\n"
-"PO-Revision-Date: 2016-06-01 16:06+0200\n"
+"POT-Creation-Date: 2016-06-14 18:31+0200\n"
+"PO-Revision-Date: 2016-06-14 18:35+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -264,7 +264,7 @@ msgstr "Nächste Woche"
 msgid "Next month"
 msgstr "Nächsten Monat"
 
-#: .\forms\hierarchy.py:14 .\models\group.py:437 .\models\group.py:585
+#: .\forms\hierarchy.py:14 .\models\group.py:438 .\models\group.py:586
 #: .\models\tagged.py:53
 msgid "Name"
 msgstr "Name"
@@ -365,7 +365,7 @@ msgstr ""
 msgid "XXL (1200 x *)"
 msgstr ""
 
-#: .\models\cms.py:17 .\models\tagged.py:239
+#: .\models\cms.py:17 .\models\group.py:1251 .\models\tagged.py:239
 msgid "Title"
 msgstr "Titel"
 
@@ -405,56 +405,55 @@ msgstr "Gemeledetes Objekt"
 msgid "Reported objects"
 msgstr "Gemeledete Objekte"
 
-#: .\models\group.py:83
+#: .\models\group.py:84
 msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 "Bitte einen gültigen Namen angeben. Ein Vorwärtsslash ist nicht erlaubt."
 
-#: .\models\group.py:428 .\models\group.py:582 .\models\group.py:1061
+#: .\models\group.py:429 .\models\group.py:583 .\models\group.py:1062
 msgid "Portal"
 msgstr "Portal"
 
-#: .\models\group.py:429
+#: .\models\group.py:430
 msgid "Portals"
 msgstr "Portale"
 
-#: .\models\group.py:439 .\models\group.py:586
+#: .\models\group.py:440 .\models\group.py:587
 msgid "Slug"
 msgstr "Slug"
 
-#: .\models\group.py:441 .\models\profile.py:87
+#: .\models\group.py:442 .\models\group.py:1252 .\models\profile.py:87
 #: .\templates\cosinnus\_microsite__old_.html:198
 #: .\templates\cosinnus\group\group_form.html:321
-#: .\templates\cosinnus\group\group_microsite.html:206
 msgid "Description"
 msgstr "Beschreibung"
 
-#: .\models\group.py:442 .\models\group.py:608 .\models\profile.py:90
+#: .\models\group.py:443 .\models\group.py:609 .\models\profile.py:90
 #: .\templates\cosinnus\group\group_form.html:188
 #: .\templates\cosinnus\group\group_form.html:197
-#: .\templates\cosinnus\group\group_microsite.html:380
+#: .\templates\cosinnus\group\group_microsite.html:407
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:44
 #: .\templates\cosinnus\user\userprofile_form.html:100
 msgid "Website"
 msgstr "Webseite"
 
-#: .\models\group.py:443 .\models\group.py:609 .\models\tagged.py:41
+#: .\models\group.py:444 .\models\group.py:610 .\models\tagged.py:41
 msgid "Public"
 msgstr "Öffentlich"
 
-#: .\models\group.py:447
+#: .\models\group.py:448
 msgid "Associated Site"
 msgstr "Zugehörige Site"
 
-#: .\models\group.py:449
+#: .\models\group.py:450
 msgid "Http/Https Protocol (overrides settings)"
 msgstr "Http/Https Protokoll (overrides settings)"
 
-#: .\models\group.py:452
+#: .\models\group.py:453
 msgid "Users Need Activation"
 msgstr "Bestätigung für neue Benutzer"
 
-#: .\models\group.py:453
+#: .\models\group.py:454
 msgid ""
 "If activated, newly registered users need to be approved by a portal admin "
 "before being able to log in."
@@ -462,19 +461,19 @@ msgstr ""
 "Wenn gewählt müssen neue Benutzerkonten nach dem Regisitrieren durch einen "
 "Portaladminstrator bestätigt werden bevor sich der Benutzer einloggen kann."
 
-#: .\models\group.py:457
+#: .\models\group.py:458
 msgid "Background Image"
 msgstr "Hintergrundbild"
 
-#: .\models\group.py:458
+#: .\models\group.py:459
 msgid "Used for the background of the landing and CMS-pages"
 msgstr "Wird als Hintergrund für die Landing-Page und die CMS-Seiten benutzt"
 
-#: .\models\group.py:461
+#: .\models\group.py:462
 msgid "Logo Image"
 msgstr "Logo-Bild"
 
-#: .\models\group.py:462
+#: .\models\group.py:463
 msgid ""
 "Used as a small logo in the navigation bar and for external links to this "
 "portal"
@@ -482,42 +481,42 @@ msgstr ""
 "Als Logo für die Navigationsleiste benutzt und für externe Links die in "
 "dieses Portal zeigen"
 
-#: .\models\group.py:465
+#: .\models\group.py:466
 msgid "Main color"
 msgstr "Hauptfarbe"
 
-#: .\models\group.py:465
+#: .\models\group.py:466
 msgid "Main background color (css hex value, with or without \"#\")"
 msgstr "Hauptfarbe des Seitenhintergrunds (Hex-Wert, optional mit \"#\")"
 
-#: .\models\group.py:468
+#: .\models\group.py:469
 msgid "Gradient color"
 msgstr "Verlaufsfarbe"
 
-#: .\models\group.py:468
+#: .\models\group.py:469
 msgid "Bottom color for the gradient (css hex value, with or without \"#\")"
 msgstr ""
 "Untere Farbe des Farbverlaufs für den Seitenhintergrunds (Hex-Wert, optional "
 "mit \"#\")"
 
-#: .\models\group.py:471
+#: .\models\group.py:472
 msgid "Extra CSS"
 msgstr "Zusätzliches CSS"
 
-#: .\models\group.py:471
+#: .\models\group.py:472
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr "Wird vorgezogen gegenüber sämtlichem anderen CSS"
 
-#: .\models\group.py:570 .\templates\cosinnus\group\group_microsite.html:127
+#: .\models\group.py:571 .\templates\cosinnus\group\group_microsite.html:198
 msgid "Project"
 msgstr "Projekt"
 
-#: .\models\group.py:571 .\templates\cosinnus\group\group_microsite.html:127
-#: .\templates\cosinnus\group\group_microsite.html:134
+#: .\models\group.py:572 .\templates\cosinnus\group\group_microsite.html:198
+#: .\templates\cosinnus\group\group_microsite.html:205
 msgid "Group"
 msgstr "Gruppe"
 
-#: .\models\group.py:587
+#: .\models\group.py:588
 msgid ""
 "Be extremely careful when changing this slug manually! There can be many "
 "side-effects (redirects breaking e.g.)!"
@@ -525,57 +524,57 @@ msgstr ""
 "Be extremely careful when changing this slug manually! There can be many "
 "side-effects (redirects breaking e.g.)!"
 
-#: .\models\group.py:589
+#: .\models\group.py:590
 msgid "Project Type"
 msgstr "Gruppentyp"
 
-#: .\models\group.py:592
+#: .\models\group.py:593
 msgid "Short Description"
 msgstr "Kurze Beschreibung"
 
-#: .\models\group.py:593
+#: .\models\group.py:594
 msgid "Short Description. Internal, will not be shown publicly."
 msgstr ""
 "Kurze Beschreibung. Intern - wird nur Gruppen/projektmitgliedern angezeigt."
 
-#: .\models\group.py:594
+#: .\models\group.py:595
 msgid "Detailed Description"
 msgstr "Detaillierte Beschreibung"
 
-#: .\models\group.py:595
+#: .\models\group.py:596
 msgid "Detailed, public description."
 msgstr "Detaillierte, öffentliche Beschreibung"
 
-#: .\models\group.py:596
+#: .\models\group.py:597 .\templates\cosinnus\group\group_form.html:383
 msgid "Contact Information"
 msgstr "Kontaktinfos"
 
-#: .\models\group.py:597
+#: .\models\group.py:598
 msgid "How you can be contacted - addresses, social media, etc."
 msgstr "Wie man euch erreichen kann - Adressen, Social Media Links, etc."
 
-#: .\models\group.py:600 .\models\profile.py:85
+#: .\models\group.py:601 .\models\profile.py:85
 #: .\templates\cosinnus\group\group_form.html:99
 msgid "Avatar"
 msgstr "Avatar"
 
-#: .\models\group.py:603
+#: .\models\group.py:604
 msgid "Wallpaper image"
 msgstr "Hintergrundbild"
 
-#: .\models\group.py:604
+#: .\models\group.py:605
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "Wird als großes Banner auf der Microsite angezeigt (1140 x 240 px)"
 
-#: .\models\group.py:617
+#: .\models\group.py:618
 msgid "Deactivated Apps"
 msgstr "Deaktivierte Apps"
 
-#: .\models\group.py:619
+#: .\models\group.py:620
 msgid "Is active"
 msgstr "Ist aktiv"
 
-#: .\models\group.py:620
+#: .\models\group.py:621
 msgid ""
 "If a team is not active, it counts as non-existent for all purposes and "
 "views on the website."
@@ -583,35 +582,35 @@ msgstr ""
 "Wenn ein Projekt/Gruppe inaktiv ist, zählt es als nichtexistent und ist auf "
 "der gesamten Webseite unsichtbar."
 
-#: .\models\group.py:623
+#: .\models\group.py:624
 msgid "Facebook Group ID"
 msgstr ""
 
-#: .\models\group.py:625
+#: .\models\group.py:626
 msgid "Facebook Page ID"
 msgstr ""
 
-#: .\models\group.py:628
+#: .\models\group.py:629
 msgid "Parent Group"
 msgstr "Übergeordnete Gruppe"
 
-#: .\models\group.py:633
+#: .\models\group.py:634
 msgid "Related Teams"
 msgstr "Verwandte Projekte/Gruppen"
 
-#: .\models\group.py:647 .\models\group_extra.py:66
+#: .\models\group.py:648 .\models\group_extra.py:66
 msgid "Cosinnus project"
 msgstr "Projekt"
 
-#: .\models\group.py:648 .\models\group_extra.py:67
+#: .\models\group.py:649 .\models\group_extra.py:67
 msgid "Cosinnus projects"
 msgstr "Projekte"
 
-#: .\models\group.py:694
+#: .\models\group.py:695
 msgid "Slug must not be empty."
 msgstr "Slug darf nicht leer sein."
 
-#: .\models\group.py:731
+#: .\models\group.py:732
 msgid ""
 "The URL for this team has changed. A redirect from all existing URLs has "
 "automatically been created!"
@@ -620,71 +619,88 @@ msgstr ""
 "Weiterleitung von der alten auf die neue Adresse wurde automatisch "
 "eingerichtet!"
 
-#: .\models\group.py:1055
+#: .\models\group.py:1056
 msgid "Team membership"
 msgstr "Gruppen/Projekt-Mitgliedschaft"
 
-#: .\models\group.py:1056
+#: .\models\group.py:1057
 msgid "Team memberships"
 msgstr "Gruppen/Projekt-Mitgliedschaften"
 
-#: .\models\group.py:1068
+#: .\models\group.py:1069
 msgid "Portal membership"
 msgstr "Portal-Mitgliedschaft"
 
-#: .\models\group.py:1069
+#: .\models\group.py:1070
 msgid "Portal memberships"
 msgstr "Portal-Mitgliedschaften"
 
-#: .\models\group.py:1080
+#: .\models\group.py:1081
 msgid "From Portal"
 msgstr "Von Portal"
 
-#: .\models\group.py:1081
+#: .\models\group.py:1082
 msgid "From Team Type"
 msgstr "Von Gruppentyp"
 
-#: .\models\group.py:1082
+#: .\models\group.py:1083
 msgid "From Slug"
 msgstr "Von Slug"
 
-#: .\models\group.py:1085 .\models\group.py:1094
+#: .\models\group.py:1086 .\models\group.py:1095
 msgid "Permanent Team Redirects"
 msgstr "Dauerhaufte Gruppenweiterleitungen"
 
-#: .\models\group.py:1093
+#: .\models\group.py:1094
 msgid "Permanent Team Redirect"
 msgstr "Dauerhaufte Gruppenweiterleitung"
 
-#: .\models\group.py:1221 .\models\tagged.py:124
-#: .\templates\cosinnus\group\group_microsite.html:323
+#: .\models\group.py:1222 .\models\tagged.py:124
+#: .\templates\cosinnus\group\group_microsite.html:413
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:4
 msgid "Location"
 msgstr "Standort"
 
-#: .\models\group.py:1222 .\models\tagged.py:125
+#: .\models\group.py:1223 .\models\tagged.py:125
 msgid "Latitude"
 msgstr ""
 
-#: .\models\group.py:1223 .\models\tagged.py:126
+#: .\models\group.py:1224 .\models\tagged.py:126
 msgid "Longitude"
 msgstr ""
 
-#: .\models\group.py:1227 .\models\tagged.py:86 .\models\tagged.py:236
+#: .\models\group.py:1228 .\models\group.py:1261 .\models\tagged.py:86
+#: .\models\tagged.py:236
 msgid "Team"
 msgstr "Team"
 
-#: .\models\group.py:1233
+#: .\models\group.py:1234
 #, fuzzy
 #| msgid "Cosinnus groups"
 msgid "CosinnusLocation"
 msgstr "Gruppen"
 
-#: .\models\group.py:1234
+#: .\models\group.py:1235
 #, fuzzy
 #| msgid "Cosinnus groups"
 msgid "CosinnusLocations"
 msgstr "Gruppen"
+
+#: .\models\group.py:1255
+msgid "Group Image"
+msgstr "Gruppenbild"
+
+#: .\models\group.py:1269
+#, fuzzy
+#| msgid "Cosinnus Micropages"
+msgid "CosinnusGroup GalleryImage"
+msgstr "Cosinnus Micropages"
+
+#: .\models\group.py:1270
+#, fuzzy
+#| msgid "Cosinnus Micropages"
+msgid "CosinnusGroup GalleryImages"
+msgstr "Cosinnus Micropages"
 
 #: .\models\group_extra.py:99
 msgid "Cosinnus group"
@@ -726,7 +742,7 @@ msgstr "Nur Gruppen/Projekt-Mitglieder"
 msgid "Public (visible without login)"
 msgstr "Öffentlich (sichtbar ohne Anmeldung)"
 
-#: .\models\tagged.py:92
+#: .\models\tagged.py:92 .\templates\cosinnus\group\group_microsite.html:335
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:32
 msgid "Tags"
 msgstr "Schlagworte"
@@ -791,7 +807,7 @@ msgstr "Gültig bis"
 msgid "Approach"
 msgstr "Ansatz"
 
-#: .\models\tagged.py:137
+#: .\models\tagged.py:137 .\templates\cosinnus\group\group_microsite.html:342
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:13
 msgid "Topics"
 msgstr "Themen"
@@ -812,43 +828,102 @@ msgstr "Verknüpftes Objekt"
 msgid "Attached objects"
 msgstr "Verknüpftes Objekt"
 
-#: .\models\tagged.py:348
+#: .\models\tagged.py:351
 msgid "Path"
 msgstr "Pfad"
 
-#: .\models\wagtail_models.py:89 .\models\wagtail_models.py:201
-#: .\models\wagtail_models.py:287 .\models\wagtail_models.py:436
-#: .\models\wagtail_models.py:523
+#: .\models\wagtail_blocks.py:65
+msgid "Create-Project or Group Button"
+msgstr "Projekt oder Gruppe-erstellen Button"
+
+#: .\models\wagtail_blocks.py:110 .\models\wagtail_blocks.py:132
+#, fuzzy
+#| msgid "Informations"
+msgid "Proportions"
+msgstr "Informationen"
+
+#: .\models\wagtail_blocks.py:111
+msgid "1/2 + 1/2"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:112
+msgid "2/3 + 1/3"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:113
+msgid "1/3 + 2/3"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:133
+msgid "1/3 + 1/3 + 1/3"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:134
+msgid "1/2 + 1/4 + 1/4"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:135
+msgid "1/4 + 1/2 + 1/4"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:136
+msgid "1/4 + 1/4 + 1/2"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:186
+#, fuzzy
+#| msgid "Edit Widget"
+msgid "Medium News Widget"
+msgstr "Widget bearbeiten"
+
+#: .\models\wagtail_blocks.py:187
+msgid "Large News Widget"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:204
+msgid "4 Random Projects Widget"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:205
+msgid "8 Random Projects Widget"
+msgstr ""
+
+#: .\models\wagtail_models.py:53 .\models\wagtail_models.py:165
+#: .\models\wagtail_models.py:251 .\models\wagtail_models.py:375
+#: .\models\wagtail_models.py:462
 msgid "Content"
 msgstr "Inhalt"
 
-#: .\models\wagtail_models.py:104
+#: .\models\wagtail_models.py:68
 msgid "Portal Root Page"
 msgstr "Portal-Root Seite"
 
-#: .\models\wagtail_models.py:111
+#: .\models\wagtail_models.py:75
 msgid "Assigned Portal"
 msgstr ""
 
-#: .\models\wagtail_models.py:116
+#: .\models\wagtail_models.py:80
 msgid "Footer"
 msgstr ""
 
-#: .\models\wagtail_models.py:117
+#: .\models\wagtail_models.py:81
 msgid ""
 "Will be displayed as a footer on EVERY page on this website (not only "
 "dashboard pages!)"
 msgstr ""
 
-#: .\models\wagtail_models.py:142 .\models\wagtail_models.py:377
+#: .\models\wagtail_models.py:106 .\models\wagtail_models.py:316
+#: .\models\wagtail_models.py:517
 msgid "Show Register Button"
 msgstr "Registrieren Button anzeigen"
 
-#: .\models\wagtail_models.py:143 .\models\wagtail_models.py:378
+#: .\models\wagtail_models.py:107 .\models\wagtail_models.py:317
+#: .\models\wagtail_models.py:518
 msgid "Redirect Logged in Users"
 msgstr "Eingeloggte Benutzer weiterleiten"
 
-#: .\models\wagtail_models.py:144 .\models\wagtail_models.py:379
+#: .\models\wagtail_models.py:108 .\models\wagtail_models.py:318
+#: .\models\wagtail_models.py:519
 msgid ""
 "If active, this page will only be visible to non-logged-in users. All others "
 "will be redirected to the activities page."
@@ -856,87 +931,115 @@ msgstr ""
 "Wenn aktiv, sehen diese Seite nur Benutzer die nicht eingeloggt sind. Alle "
 "eingeloggten Benutzer werden direkt auf die Aktivitäten-Seite weitergeleitet."
 
-#: .\models\wagtail_models.py:148 .\models\wagtail_models.py:383
+#: .\models\wagtail_models.py:112 .\models\wagtail_models.py:322
 msgid "Left banner (top)"
 msgstr "Linkes banner (oben)"
 
-#: .\models\wagtail_models.py:149 .\models\wagtail_models.py:384
+#: .\models\wagtail_models.py:113 .\models\wagtail_models.py:323
 msgid "Right banner (top)"
 msgstr "Rechtes banner (oben)"
 
-#: .\models\wagtail_models.py:151 .\models\wagtail_models.py:386
+#: .\models\wagtail_models.py:115 .\models\wagtail_models.py:325
 msgid "Header"
 msgstr "Kopfzeile (nach Banner)"
 
-#: .\models\wagtail_models.py:153 .\models\wagtail_models.py:388
+#: .\models\wagtail_models.py:117 .\models\wagtail_models.py:327
 msgid "Left footer"
 msgstr "Fußzeile links"
 
-#: .\models\wagtail_models.py:154 .\models\wagtail_models.py:389
+#: .\models\wagtail_models.py:118 .\models\wagtail_models.py:328
 msgid "Right footer"
 msgstr "Fußzeile rechts"
 
-#: .\models\wagtail_models.py:199
+#: .\models\wagtail_models.py:163
 msgid "1-Column Dashboard Page"
 msgstr "1-spaltige Dashboard Seite"
 
-#: .\models\wagtail_models.py:224
+#: .\models\wagtail_models.py:188
 msgid "2-Column Dashboard Page"
 msgstr "2-spaltige Dashboard Seite"
 
-#: .\models\wagtail_models.py:226 .\models\wagtail_models.py:254
-#: .\models\wagtail_models.py:461 .\models\wagtail_models.py:489
+#: .\models\wagtail_models.py:190 .\models\wagtail_models.py:218
+#: .\models\wagtail_models.py:400 .\models\wagtail_models.py:428
 msgid "Content (left column)"
 msgstr "Inhalt (linke Spalte)"
 
-#: .\models\wagtail_models.py:227 .\models\wagtail_models.py:256
-#: .\models\wagtail_models.py:462 .\models\wagtail_models.py:491
+#: .\models\wagtail_models.py:191 .\models\wagtail_models.py:220
+#: .\models\wagtail_models.py:401 .\models\wagtail_models.py:430
 msgid "Content (right column)"
 msgstr "Inhalt (rechte Spalte)"
 
-#: .\models\wagtail_models.py:252
+#: .\models\wagtail_models.py:216
 msgid "3-Column Dashboard Page"
 msgstr "3-spaltige Dashboard Seite"
 
-#: .\models\wagtail_models.py:255 .\models\wagtail_models.py:490
+#: .\models\wagtail_models.py:219 .\models\wagtail_models.py:429
 msgid "Content (center column)"
 msgstr "Inhalt (mittlere Spalte)"
 
-#: .\models\wagtail_models.py:308
+#: .\models\wagtail_models.py:272
 msgid "Simple One-Column Page"
 msgstr "Simple einspaltige Seite"
 
-#: .\models\wagtail_models.py:316
+#: .\models\wagtail_models.py:280
 msgid "Simple Page with Left Navigation"
 msgstr "Simple Seite mit Navigationsspalte links"
 
-#: .\models\wagtail_models.py:319 .\models\wagtail_models.py:555
+#: .\models\wagtail_models.py:283 .\models\wagtail_models.py:494
 msgid "Left Sidebar"
 msgstr "Fußzeile links"
 
-#: .\models\wagtail_models.py:346
-msgid "Create-Project or Group Button"
-msgstr "Projekt oder Gruppe-erstellen Button"
-
-#: .\models\wagtail_models.py:434
+#: .\models\wagtail_models.py:373
 msgid "1-Column Dashboard Page (Modular)"
 msgstr "1-spaltige Dashboard Seite (Modular)"
 
-#: .\models\wagtail_models.py:459
+#: .\models\wagtail_models.py:398
 msgid "2-Column Dashboard Page (Modular)"
 msgstr "2-spaltige Dashboard Seite (Modular)"
 
-#: .\models\wagtail_models.py:487
+#: .\models\wagtail_models.py:426
 msgid "3-Column Dashboard Page (Modular)"
 msgstr "3-spaltige Dashboard Seite (Modular)"
 
-#: .\models\wagtail_models.py:544
+#: .\models\wagtail_models.py:483
 msgid "Simple One-Column Page (Modular)"
 msgstr "Simple einspaltige Seite (Modular)"
 
-#: .\models\wagtail_models.py:552
+#: .\models\wagtail_models.py:491
 msgid "Simple Page with Left Navigation (Modular)"
 msgstr "Simple Seite mit Navigationsspalte links (Modular)"
+
+#: .\models\wagtail_models.py:529
+#, fuzzy
+#| msgid "Wallpaper image"
+msgid "Header image"
+msgstr "Hintergrundbild"
+
+#: .\models\wagtail_models.py:531
+#, fuzzy
+#| msgid "Header"
+msgid "Header Title"
+msgstr "Kopfzeile (nach Banner)"
+
+#: .\models\wagtail_models.py:532
+#, fuzzy
+#| msgid "Header"
+msgid "Header Text"
+msgstr "Kopfzeile (nach Banner)"
+
+#: .\models\wagtail_models.py:534
+msgid "Additional Header content"
+msgstr ""
+
+#: .\models\wagtail_models.py:535
+#, fuzzy
+#| msgid "Edit Widget"
+msgid "Site Widgets"
+msgstr "Widget bearbeiten"
+
+#: .\models\wagtail_models.py:536
+msgid "Bottom content (gray background)"
+msgstr ""
 
 #: .\models\widget.py:19 .\templates\cosinnus\appsmenu.html:37
 #: .\templates\cosinnus\appsmenu.html:51 .\templates\cosinnus\dashboard.html:88
@@ -1064,10 +1167,11 @@ msgstr ""
 #: .\templates\admin\cms\page\menu_item.html:44
 #: .\templates\cosinnus\group\group_form.html:144
 #: .\templates\cosinnus\group\group_form.html:229
+#: .\templates\cosinnus\group\group_form.html:419
 #: .\templates\cosinnus\leftnav_button_editable_folder.html:51
 #: .\templates\cosinnus\user\userprofile_form.html:162
-#: .\templates\cosinnus\widgets\base_widget.html:39 .\views\group.py:209
-#: .\views\group.py:758
+#: .\templates\cosinnus\widgets\base_widget.html:39 .\views\group.py:221
+#: .\views\group.py:770
 msgid "Delete"
 msgstr "Löschen"
 
@@ -1127,7 +1231,6 @@ msgid "Configure"
 msgstr "Konfigurieren"
 
 #: .\templates\cosinnus\_microsite__old_.html:76
-#: .\templates\cosinnus\group\group_microsite.html:441
 msgid "Withdraw request"
 msgstr "Anfrage zurückziehen"
 
@@ -1136,16 +1239,16 @@ msgstr "Anfrage zurückziehen"
 #: .\templates\cosinnus\dashboard.html:223
 #: .\templates\cosinnus\group\group_list_items.html:92
 #: .\templates\cosinnus\group\group_list_items.html:181
-#: .\templates\cosinnus\group\group_microsite.html:467
+#: .\templates\cosinnus\group\group_microsite.html:157
 #: .\templates\cosinnus\group\leftnav_group.html:54
-#: .\templates\cosinnus\group\leftnav_group.html:59 .\views\group.py:518
+#: .\templates\cosinnus\group\leftnav_group.html:59 .\views\group.py:530
 msgid "Join"
 msgstr "Beitreten"
 
 #: .\templates\cosinnus\_microsite__old_.html:102
 #: .\templates\cosinnus\dashboard.html:210
 #: .\templates\cosinnus\group\group_list_items.html:176
-#: .\templates\cosinnus\group\group_microsite.html:447
+#: .\templates\cosinnus\group\group_microsite.html:133
 #: .\templates\cosinnus\group\leftnav_group.html:48
 #, python-format
 msgid "Do you really want to withdraw your join request to „%(title)s“?"
@@ -1155,7 +1258,7 @@ msgstr ""
 #: .\templates\cosinnus\_microsite__old_.html:103
 #: .\templates\cosinnus\dashboard.html:211
 #: .\templates\cosinnus\group\group_list_items.html:177
-#: .\templates\cosinnus\group\group_microsite.html:448
+#: .\templates\cosinnus\group\group_microsite.html:134
 #: .\templates\cosinnus\group\leftnav_group.html:49
 msgid "Withdraw Join Request"
 msgstr "Beitrittsanfrage zurückziehen"
@@ -1163,7 +1266,7 @@ msgstr "Beitrittsanfrage zurückziehen"
 #: .\templates\cosinnus\_microsite__old_.html:107
 #: .\templates\cosinnus\dashboard.html:222
 #: .\templates\cosinnus\group\group_list_items.html:180
-#: .\templates\cosinnus\group\group_microsite.html:466
+#: .\templates\cosinnus\group\group_microsite.html:156
 #: .\templates\cosinnus\group\leftnav_group.html:58
 #, python-format
 msgid "Do you wish to request to join „%(title)s“?"
@@ -1196,7 +1299,7 @@ msgstr "Einstellungen"
 #: .\templates\cosinnus\group\group_detail.html:25
 #: .\templates\cosinnus\group\group_detail.html:190
 #: .\templates\cosinnus\group\group_members_map.html:14
-#: .\templates\cosinnus\group\group_microsite.html:174
+#: .\templates\cosinnus\group\group_microsite.html:245
 #: .\templates\cosinnus\group\leftnav_group.html:21
 #: .\templates\cosinnus\widgets\group_projects.html:15 .\utils\dashboard.py:218
 #: .\utils\dashboard.py:219
@@ -1279,11 +1382,11 @@ msgid "Rearrange"
 msgstr "Umordnen"
 
 #: .\templates\cosinnus\dashboard.html:51
-#: .\templates\cosinnus\group\group_form.html:408
+#: .\templates\cosinnus\group\group_form.html:460
 #: .\templates\cosinnus\leftnav_button_editable_folder.html:39
 #: .\templates\cosinnus\user\userprofile_form.html:228
-#: .\templates\cosinnus\widgets\add_widget.html:20 .\views\group.py:435
-#: .\views\group.py:721 .\views\user.py:281
+#: .\templates\cosinnus\widgets\add_widget.html:20 .\views\group.py:447
+#: .\views\group.py:733 .\views\user.py:281
 msgid "Save"
 msgstr "Speichern"
 
@@ -1396,8 +1499,9 @@ msgid "Events"
 msgstr "Veranstaltungen"
 
 #: .\templates\cosinnus\dashboard.html:192
-#: .\templates\cosinnus\group\group_microsite.html:290
+#: .\templates\cosinnus\group\group_microsite.html:436
 #: .\templates\cosinnus\search.html:113
+#: .\templates\cosinnus\wagtail\widgets\global_notes.html:2
 msgid "News"
 msgstr "Neuigkeiten"
 
@@ -1432,22 +1536,23 @@ msgid "Now"
 msgstr "beantragen"
 
 #: .\templates\cosinnus\dashboard.html:242
+#: .\templates\cosinnus\dashboard.html:244
 msgid "View on Facebook"
 msgstr "Auf Facebook ansehen"
 
-#: .\templates\cosinnus\dashboard.html:248
+#: .\templates\cosinnus\dashboard.html:250
 msgid "Group:"
 msgstr "Gruppe:"
 
-#: .\templates\cosinnus\dashboard.html:256
-#: .\templates\cosinnus\group\group_microsite.html:218
+#: .\templates\cosinnus\dashboard.html:258
 #: .\templates\cosinnus\group\group_og_meta_attributes.html:8
 #: .\templates\cosinnus\widgets\related_groups.html:20
 msgid "No Description set"
 msgstr "Keine Beschreibung erstellt"
 
-#: .\templates\cosinnus\dashboard.html:260
+#: .\templates\cosinnus\dashboard.html:262
 #: .\templates\cosinnus\group\group_form.html:234
+#: .\templates\cosinnus\group\group_form.html:424
 #: .\templates\endless\show_more.html:5
 msgid "more"
 msgstr "mehr"
@@ -1764,12 +1869,12 @@ msgid "Description and Infos"
 msgstr "Beschreibung und Infos"
 
 #: .\templates\cosinnus\group\group_form.html:171
-#: .\templates\cosinnus\group\group_form.html:352
+#: .\templates\cosinnus\group\group_form.html:353
 msgid "Describe the group in a few sentences."
 msgstr "Beschreibe die Gruppe in ein paar Sätzen."
 
 #: .\templates\cosinnus\group\group_form.html:171
-#: .\templates\cosinnus\group\group_form.html:352
+#: .\templates\cosinnus\group\group_form.html:353
 msgid "Describe the project in a few sentences."
 msgstr "Beschreibe das Projekt in ein paar Sätzen."
 
@@ -1812,31 +1917,31 @@ msgstr "Welche Apps sollen aktiviert sein?"
 msgid "Describe your activities and goals"
 msgstr "Beschreibe die Aktivitäten und Ziele"
 
-#: .\templates\cosinnus\group\group_form.html:335
+#: .\templates\cosinnus\group\group_form.html:336
 msgid "Microsite Wallpaper"
 msgstr "Microsite Hintergrundbild"
 
-#: .\templates\cosinnus\group\group_form.html:341
+#: .\templates\cosinnus\group\group_form.html:342
 msgid "Currently"
 msgstr "Aktuell"
 
-#: .\templates\cosinnus\group\group_form.html:344
+#: .\templates\cosinnus\group\group_form.html:345
 #: .\templates\cosinnus\registration\password_reset_confirm.html:69
 #: .\templates\cosinnus\registration\password_reset_form.html:52
 msgid "Reset"
 msgstr "Zurücksetzen"
 
 #
-#: .\templates\cosinnus\group\group_form.html:345
+#: .\templates\cosinnus\group\group_form.html:346
 msgid "Change"
 msgstr "Ändern"
 
-#: .\templates\cosinnus\group\group_form.html:346
+#: .\templates\cosinnus\group\group_form.html:347
 msgid "Upload an image."
 msgstr "Lade ein Bild hoch."
 
-#: .\templates\cosinnus\group\group_form.html:353
-#: .\templates\cosinnus\group\group_form.html:372
+#: .\templates\cosinnus\group\group_form.html:354
+#: .\templates\cosinnus\group\group_form.html:373
 msgid ""
 "This is a public description that can be seen by anyone and will be shown on "
 "the microsite."
@@ -1844,26 +1949,37 @@ msgstr ""
 "Dies ist eine öffentliche Beschreibung die auf der Microseite angezeigt wird "
 "und von jedem im Internet gesehen werden kann."
 
-#: .\templates\cosinnus\group\group_form.html:371
+#: .\templates\cosinnus\group\group_form.html:372
 msgid "Contact info. How you can be reached, addresses, social media, etc..."
 msgstr ""
 "Kontaktinfos. Wie man euch erreichen kann - Adressen, Social Media Links, "
 "etc..."
+
+#: .\templates\cosinnus\group\group_form.html:392
+msgid "Microsite Gallery Images"
+msgstr "Microsite Galleriebilder"
+
+#: .\templates\cosinnus\group\group_form.html:411
+msgid "Choose and upload a gallery image"
+msgstr "Wähle ein Galleriebild zum Hochladen aus"
 
 #: .\templates\cosinnus\group\group_list.html:4
 #: .\templates\cosinnus\group\group_list_map.html:4
 #: .\templates\cosinnus\navbar_buttons_group_menus.html:7
 #: .\templates\cosinnus\navbar_buttons_group_menus.html:23
 #: .\templates\cosinnus\navbar_buttons_group_menus.html:49
+#: .\templates\cosinnus\universal\map\map-controls.html:43
 msgid "Groups"
 msgstr "Gruppen"
 
 #: .\templates\cosinnus\group\group_list.html:4
 #: .\templates\cosinnus\group\group_list_map.html:4
-#: .\templates\cosinnus\group\group_microsite.html:152
+#: .\templates\cosinnus\group\group_microsite.html:223
 #: .\templates\cosinnus\navbar_buttons_group_menus.html:29
 #: .\templates\cosinnus\navbar_buttons_group_menus.html:45
 #: .\templates\cosinnus\navbar_buttons_group_menus.html:50
+#: .\templates\cosinnus\universal\map\map-controls.html:32
+#: .\templates\cosinnus\wagtail\widgets\random_projects.html:2
 #: .\utils\dashboard.py:292
 msgid "Projects"
 msgstr "Projekte"
@@ -1894,11 +2010,12 @@ msgstr "(Inaktiv)"
 #: .\templates\cosinnus\group\group_list_items.html:88
 #: .\templates\cosinnus\group\group_list_items.html:173
 #: .\templates\cosinnus\group\leftnav_group.html:34
-#: .\templates\cosinnus\group\leftnav_group.html:39 .\views\group.py:552
+#: .\templates\cosinnus\group\leftnav_group.html:39 .\views\group.py:564
 msgid "Leave"
 msgstr "Verlassen"
 
-#: .\templates\cosinnus\group\group_list_items.html:90 .\views\group.py:601
+#: .\templates\cosinnus\group\group_list_items.html:90
+#: .\templates\cosinnus\group\group_microsite.html:127 .\views\group.py:613
 msgid "Withdraw"
 msgstr "Zurückziehen"
 
@@ -1928,6 +2045,7 @@ msgstr "Es gibt keine sichtbaren Projekte."
 #: .\templates\cosinnus\group\group_list_map.html:18
 #: .\templates\cosinnus\group\group_members_map.html:4
 #: .\templates\cosinnus\group\group_members_map.html:15
+#: .\templates\cosinnus\map\map-page.html:4
 #: .\templates\cosinnus\user\user_list_map.html:4
 #: .\templates\cosinnus\user\user_list_map.html:14
 msgid "Map"
@@ -1948,18 +2066,17 @@ msgstr "Nicht zufrieden mit eurer Microsite?"
 msgid "Change it here..."
 msgstr "Ändere sie hier..."
 
-#: .\templates\cosinnus\group\group_microsite.html:68
-#: .\templates\cosinnus\wagtail\dashboard_base.html:34
-msgid "Jetzt anmelden und mitgestalten"
-msgstr ""
+#: .\templates\cosinnus\group\group_microsite.html:69
+msgid "Join now and collaborate!"
+msgstr "Jetzt anmelden und mitgestalten!"
 
-#: .\templates\cosinnus\group\group_microsite.html:77
+#: .\templates\cosinnus\group\group_microsite.html:78
 #: .\templates\cosinnus\registration\leftnav.html:19
 #: .\templates\cosinnus\registration\signup.html:124
 msgid "Register"
 msgstr "Registrieren"
 
-#: .\templates\cosinnus\group\group_microsite.html:90
+#: .\templates\cosinnus\group\group_microsite.html:91
 #: .\templates\cosinnus\navbar.html:48
 #: .\templates\cosinnus\registration\leftnav.html:15
 #: .\templates\cosinnus\registration\login.html:4
@@ -1969,72 +2086,79 @@ msgstr "Registrieren"
 msgid "Login"
 msgstr "Login"
 
-#: .\templates\cosinnus\group\group_microsite.html:125
-msgid "Public Project"
-msgstr "Öffentliches Projekt"
+#: .\templates\cosinnus\group\group_microsite.html:98
+msgid "You are a member!"
+msgstr "Du bist Mitglied!"
 
-#: .\templates\cosinnus\group\group_microsite.html:125
-msgid "Public Group"
-msgstr "Öffentliche Gruppe"
+#: .\templates\cosinnus\group\group_microsite.html:108
+msgid "View Project"
+msgstr "Projekt ansehen"
 
-#: .\templates\cosinnus\group\group_microsite.html:178
-msgid "News posts"
-msgstr "Neuigkeiten-Posts"
+#: .\templates\cosinnus\group\group_microsite.html:110
+msgid "View Group"
+msgstr "Gruppe ansehen"
 
-#: .\templates\cosinnus\group\group_microsite.html:183
-#: .\templates\cosinnus\search.html:134
-msgid "Events"
-msgstr "Veranstaltungen"
+#: .\templates\cosinnus\group\group_microsite.html:117
+msgid "Membership request pending..."
+msgstr "Mitgliedschaft wurde beantragt..."
 
-#: .\templates\cosinnus\group\group_microsite.html:235
-#: .\templates\cosinnus\media_tags_group_readonly.html:5
-msgid "Topics we are involved with"
-msgstr "Um welche Themen geht es?"
-
-#: .\templates\cosinnus\group\group_microsite.html:264
-#: .\templates\cosinnus\media_tags_group_readonly.html:16
-msgid "Activities and interests"
-msgstr "Interessen und Aktivitäten"
-
-#: .\templates\cosinnus\group\group_microsite.html:333
-msgid "No Location set"
-msgstr "Kein Ort angegeben."
-
-#: .\templates\cosinnus\group\group_microsite.html:353
-msgid "Contact"
-msgstr "Kontakt"
-
-#: .\templates\cosinnus\group\group_microsite.html:363
-msgid "No Contact info set"
-msgstr "Keine Kontaktinfos eingetragen."
-
-#: .\templates\cosinnus\group\group_microsite.html:402
+#: .\templates\cosinnus\group\group_microsite.html:140
 msgid "Collaborate!"
 msgstr "Mitmachen!"
 
-#: .\templates\cosinnus\group\group_microsite.html:420
-msgid "You are a member. View Project!"
-msgstr "Du bist Mitglied. Projekt ansehen!"
-
-#: .\templates\cosinnus\group\group_microsite.html:422
-msgid "You are a member. View Group!"
-msgstr "Du bist Mitglied. Gruppe ansehen!"
-
-#: .\templates\cosinnus\group\group_microsite.html:431
-msgid "Your membership request is still pending..."
-msgstr "Deine Mitgliedschaft wurde noch nicht bestätigt..."
-
-#: .\templates\cosinnus\group\group_microsite.html:460
+#: .\templates\cosinnus\group\group_microsite.html:150
 msgid "Join now!"
 msgstr "Jetzt beitreten!"
 
-#: .\templates\cosinnus\group\group_microsite.html:477
-msgid "or you can:"
-msgstr "oder:"
+#: .\templates\cosinnus\group\group_microsite.html:172
+msgid "Browse"
+msgstr "Ansehen"
 
-#: .\templates\cosinnus\group\group_microsite.html:487
-msgid "Browse this public team"
-msgstr "Schau in dieses öffentliche Projekt"
+#: .\templates\cosinnus\group\group_microsite.html:196
+msgid "Public Project"
+msgstr "Öffentliches Projekt"
+
+#: .\templates\cosinnus\group\group_microsite.html:196
+msgid "Public Group"
+msgstr "Öffentliche Gruppe"
+
+#: .\templates\cosinnus\group\group_microsite.html:249
+msgid "News posts"
+msgstr "Neuigkeiten-Posts"
+
+#: .\templates\cosinnus\group\group_microsite.html:254
+#: .\templates\cosinnus\search.html:134
+#: .\templates\cosinnus\universal\map\map-controls.html:21
+msgid "Events"
+msgstr "Veranstaltungen"
+
+#: .\templates\cosinnus\group\group_microsite.html:275
+msgid "About the Project"
+msgstr "Über das Projekt"
+
+#: .\templates\cosinnus\group\group_microsite.html:275
+msgid "About the Group"
+msgstr "Über die Gruppe"
+
+#: .\templates\cosinnus\group\group_microsite.html:292
+msgid "There is no description for this project yet."
+msgstr "Es wurde noch keine Beschreibung für das Projekt eingetragen."
+
+#: .\templates\cosinnus\group\group_microsite.html:294
+msgid "There is no description for this group yet."
+msgstr "Es wurde noch keine Beschreibung für die Gruppe eingetragen."
+
+#: .\templates\cosinnus\group\group_microsite.html:355
+msgid "Share on Facebook"
+msgstr "Auf Facebook teilen"
+
+#: .\templates\cosinnus\group\group_microsite.html:381
+msgid "Contact"
+msgstr "Kontakt"
+
+#: .\templates\cosinnus\group\group_microsite.html:392
+msgid "No contact data has been added yet."
+msgstr "Es wurden noch keine Kontaktdaten eingetragen."
 
 #: .\templates\cosinnus\group\group_user_list.html:4
 #, python-format
@@ -2094,7 +2218,7 @@ msgid "Add container"
 msgstr "Zusammenstellung hinzufügen"
 
 #: .\templates\cosinnus\hierarchy\add_container.html:27
-#: .\templates\cosinnus\widgets\add_widget.html:20 .\views\group.py:685
+#: .\templates\cosinnus\widgets\add_widget.html:20 .\views\group.py:697
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -2554,6 +2678,14 @@ msgstr "Welche Stichworte sind relevant?"
 msgid "Select or create tags"
 msgstr "Tags auswählen oder erstellen"
 
+#: .\templates\cosinnus\media_tags_group_readonly.html:5
+msgid "Topics we are involved with"
+msgstr "Um welche Themen geht es?"
+
+#: .\templates\cosinnus\media_tags_group_readonly.html:16
+msgid "Activities and interests"
+msgstr "Interessen und Aktivitäten"
+
 #: .\templates\cosinnus\media_tags_userprofile.html:5
 msgid "Where do you live?"
 msgstr "Wo lebst du?"
@@ -2632,6 +2764,7 @@ msgid "Forum"
 msgstr "Forum"
 
 #: .\templates\cosinnus\navbar_buttons.html:13
+#: .\templates\cosinnus\universal\map\map-controls.html:10
 msgid "People"
 msgstr "Menschen"
 
@@ -3396,20 +3529,21 @@ msgstr ""
 "Facebook Seite."
 
 #: .\templates\cosinnus\utils\facebook_integration_group_form.html:190
-#, fuzzy
-#| msgid ""
-#| "An error occured when trying to disconnect your facebook account! Please "
-#| "contact an administrator!"
 msgid ""
 "We could not retrieve your groups from Facebook because of an error. Please "
 "contact an administrator!"
 msgstr ""
-"Beim Versuch dein Facebook-Konto zu trennen ist ein Fehler aufgetreten. "
+"Wir konnten aufgrund eines Fehlers deine Gruppen nicht von Facebook lesen. "
 "Bitte kontaktiere einen Administrator!"
 
 #: .\templates\cosinnus\utils\pagination.html:28
 msgid "Next"
 msgstr "Nächste"
+
+#: .\templates\cosinnus\wagtail\dashboard_base.html:34
+#: .\templates\cosinnus\wagtail\stream_start_page.html:46
+msgid "Jetzt anmelden und mitgestalten"
+msgstr ""
 
 #: .\templates\cosinnus\wagtail\wagtailadmin\custom_admin_base.html:3
 msgid "Custom Wagtail Page"
@@ -3539,6 +3673,10 @@ msgstr ""
 #: .\templates\cosinnus\wagtail\wagtailadmin\import_projects_running.html:24
 msgid "Progress:"
 msgstr ""
+
+#: .\templates\cosinnus\wagtail\widgets\random_projects.html:12
+msgid "Show more Projects"
+msgstr "Weitere Projekte anzeigen"
 
 #: .\templates\cosinnus\widgets\add_widget.html:5
 msgid "Add Widget"
@@ -3758,8 +3896,7 @@ msgstr ""
 "Deine Bearbeiter-Zugriffsrechte für die verbundene Facebook Fan-Seite wurden "
 "bestätigt!"
 
-#: .\views\facebook_integration.py:411 .\views\facebook_integration.py:424
-#: .\views\facebook_integration.py:434
+#: .\views\facebook_integration.py:411 .\views\facebook_integration.py:438
 msgid ""
 "An error occured when trying to disconnect your facebook account! Please "
 "contact an administrator!"
@@ -3767,12 +3904,12 @@ msgstr ""
 "Beim Versuch dein Facebook-Konto zu trennen ist ein Fehler aufgetreten. "
 "Bitte kontaktiere einen Administrator!"
 
-#: .\views\facebook_integration.py:431
+#: .\views\facebook_integration.py:428 .\views\facebook_integration.py:435
 msgid "Your Facebook account was successfully disconnected from this account."
 msgstr ""
 "Dein Facebook-Konto wurde erfolgreich von deinem Benutzerprofil getrennt."
 
-#: .\views\group.py:98
+#: .\views\group.py:110
 msgid ""
 "Sorry, only portal administrators can create Groups! You can either create a "
 "Project, or write a message to one of the administrators to create a Group "
@@ -3783,31 +3920,31 @@ msgstr ""
 "Nachricht schreiben damit sie für dich eine Gruppe erstellen. Unten findest "
 "du eine Liste aller Administrator_innen."
 
-#: .\views\group.py:150
+#: .\views\group.py:162
 #, python-format
 msgid "%(team_type)s \"%(group)s\" was created successfully."
 msgstr "%(team_type)s \"%(group)s\" wurde erfolgreich erstellt."
 
-#: .\views\group.py:176 .\views\user.py:156
+#: .\views\group.py:188 .\views\user.py:156
 msgid "Create"
 msgstr "Erstellen"
 
-#: .\views\group.py:427
+#: .\views\group.py:439
 #, python-format
 msgid "The %(team_type)s was changed successfully."
 msgstr "%(team_type)s wurde erfolgreich geändert."
 
-#: .\views\group.py:519
+#: .\views\group.py:531
 #, python-format
 msgid "Do you want to join the %(team_type)s “%(team_name)s”?"
 msgstr "Möchten sie %(team_type)s %(team_name)s beitreten?"
 
-#: .\views\group.py:520
+#: .\views\group.py:532
 #, python-format
 msgid "Join %(team_type)s “%(team_name)s”?"
 msgstr "%(team_type)s %(team_name)s beitreten?"
 
-#: .\views\group.py:521
+#: .\views\group.py:533
 #, python-format
 msgid ""
 "You have requested to join the %(team_type)s “%(team_name)s”. You will "
@@ -3817,22 +3954,22 @@ msgstr ""
 "gestellt. Du erhältst eine E-Mail sobald ein Projektadministrator den Antrag "
 "bearbeitet."
 
-#: .\views\group.py:553
+#: .\views\group.py:565
 #, python-format
 msgid "Do you want to leave the %(team_type)s “%(team_name)s”?"
 msgstr "Möchten sie %(team_type)s “%(team_name)s” verlassen?"
 
-#: .\views\group.py:554
+#: .\views\group.py:566
 #, python-format
 msgid "Leaving %(team_type)s “%(team_name)s”?"
 msgstr "%(team_type)s “%(team_name)s” verlassen?"
 
-#: .\views\group.py:556
+#: .\views\group.py:568
 #, python-format
 msgid "You are no longer a member of the %(team_type)s “%(team_name)s”."
 msgstr "Du bist jetzt nicht mehr Mitglied von %(team_type)s “%(team_name)s”."
 
-#: .\views\group.py:593
+#: .\views\group.py:605
 #, python-format
 msgid ""
 "You cannot leave this %(team_type)s. You are the only administrator left."
@@ -3840,7 +3977,7 @@ msgstr ""
 "Sie können diese(s) %(team_type)s nicht verlassen, da sie der einzig übrige "
 "Administrator sind."
 
-#: .\views\group.py:602
+#: .\views\group.py:614
 #, python-format
 msgid ""
 "Do you want to withdraw your join request to the %(team_type)s "
@@ -3849,12 +3986,12 @@ msgstr ""
 "Möchten sie ihre Beitrittsanfrage für %(team_type)s “%(team_name)s” "
 "zurückziehen?"
 
-#: .\views\group.py:603
+#: .\views\group.py:615
 #, python-format
 msgid "Withdraw join request to %(team_type)s “%(team_name)s”?"
 msgstr "Beitrittsanfrage für %(team_type)s “%(team_name)s” zurückziehen?"
 
-#: .\views\group.py:605
+#: .\views\group.py:617
 #, python-format
 msgid ""
 "Your join request was withdrawn from %(team_type)s “%(team_name)s” "
@@ -3862,23 +3999,23 @@ msgid ""
 msgstr ""
 "Deine Beitrittsanfrage für %(team_type)s “%(team_name)s” wurde zurückgezogen."
 
-#: .\views\group.py:712
+#: .\views\group.py:724
 msgid "You cannot change your own admin status."
 msgstr "Sie können ihren eigenen Administratorstatus nicht ändern."
 
-#: .\views\group.py:714 .\views\group.py:748
+#: .\views\group.py:726 .\views\group.py:760
 #, python-format
 msgid "You cannot remove “%(username)s” form this team. Only one admin left."
 msgstr ""
 "Sie können “%(username)s” nicht von diesem Projekt entfernen. Er/sie ist der "
 "einzig übrige Administrator."
 
-#: .\views\group.py:746
+#: .\views\group.py:758
 #, python-format
 msgid "You cannot remove yourself from a %(team_type)s."
 msgstr "Sie können sich nicht selbst von eine(r/m) %(team_type)s entfernen."
 
-#: .\views\group.py:759
+#: .\views\group.py:771
 #, python-format
 msgid ""
 "Do you want to remove the user “%(username)s”  from the %(team_type)s "
@@ -3887,22 +4024,22 @@ msgstr ""
 "Möchten sie Benutzer_in “%(username)s” aus %(team_type)s “%(team_name)s” "
 "entfernen?"
 
-#: .\views\group.py:764
+#: .\views\group.py:776
 #, python-format
 msgid "Remove user from %(team_type)s “%(team_name)s”?"
 msgstr "Benutzer_in aus %(team_type)s “%(team_name)s” entfernen?"
 
-#: .\views\group.py:803
+#: .\views\group.py:815
 #, python-format
 msgid "%(team_name)s was re-activated successfully!"
 msgstr "%(team_name)s wurde erfolgreich reaktiviert!"
 
-#: .\views\group.py:804
+#: .\views\group.py:816
 #, python-format
 msgid "%(team_name)s was deactivated successfully!"
 msgstr "%(team_name)s wurde erfolgreich deaktiviert!"
 
-#: .\views\group.py:818
+#: .\views\group.py:830
 msgid ""
 "Sorry, only portal administrators can deactivate Groups! You can write a "
 "message to one of the administrators to deactivate it for you. Below you can "
@@ -3912,11 +4049,11 @@ msgstr ""
 "kannst den Administrator_innen eine Nachricht schreiben damit sie die Gruppe "
 "für dich deaktiveren. Unten findest du eine Liste aller Administrator_innen."
 
-#: .\views\group.py:823
+#: .\views\group.py:835
 msgid "This project/group is already active!"
 msgstr "Dieses Projekt/Gruppe ist bereits aktiv!"
 
-#: .\views\group.py:825
+#: .\views\group.py:837
 msgid "This project/group is already inactive!"
 msgstr "Dieses Projekt/Gruppe ist bereits inaktiv!"
 
@@ -4189,6 +4326,30 @@ msgstr ""
 msgid "Import"
 msgstr "Exportieren"
 
+#~ msgid "Share on Twitter"
+#~ msgstr "Auf Twitter teilen"
+
+#~ msgid "Share on Google+"
+#~ msgstr "Auf Google+ teilen"
+
+#~ msgid "No Location set"
+#~ msgstr "Kein Ort angegeben."
+
+#~ msgid "No Contact info set"
+#~ msgstr "Keine Kontaktinfos eingetragen."
+
+#~ msgid "You are a member. View Project!"
+#~ msgstr "Du bist Mitglied. Projekt ansehen!"
+
+#~ msgid "Your membership request is still pending..."
+#~ msgstr "Deine Mitgliedschaft wurde noch nicht bestätigt..."
+
+#~ msgid "or you can:"
+#~ msgstr "oder:"
+
+#~ msgid "Browse this public team"
+#~ msgstr "Schau in dieses öffentliche Projekt"
+
 #~ msgid ""
 #~ "Please enter a string Fan-Page unique name only (example: myfanpage)!"
 #~ msgstr ""
@@ -4289,9 +4450,6 @@ msgstr "Exportieren"
 #~ msgid "Group Admin"
 #~ msgstr "Projektadministrator_in"
 
-#~ msgid "Group Member"
-#~ msgstr "Mitglied"
-
 #~ msgid "Joined"
 #~ msgstr "Beigetreten"
 
@@ -4323,9 +4481,6 @@ msgstr "Exportieren"
 
 #~ msgid "Group avatar"
 #~ msgstr "Projektbild"
-
-#~ msgid "About the group"
-#~ msgstr "Über das Projekte"
 
 #~ msgid "Select Organisation"
 #~ msgstr "Organisation auswählen"

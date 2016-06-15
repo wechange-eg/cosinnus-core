@@ -9,7 +9,7 @@ from models.wagtail_models import DashboardTripleColumnPage, DashboardSingleColu
     DashboardDoubleColumnPage, SimpleOnePage, SimpleTwoPage, PortalRootPage
 from cosinnus.models.wagtail_models import StreamDashboardSingleColumnPage,\
     StreamDashboardDoubleColumnPage, StreamDashboardTripleColumnPage,\
-    StreamSimpleOnePage, StreamSimpleTwoPage
+    StreamSimpleOnePage, StreamSimpleTwoPage, StreamStartPage
 
 
 @register(PortalRootPage)
@@ -57,5 +57,10 @@ class StreamSimpleOnePageTR(TranslationOptions):
 @register(StreamSimpleTwoPage)
 class StreamSimpleTwoPageTR(TranslationOptions):
     fields = StreamSimpleTwoPage.translation_fields
+
+
+@register(StreamStartPage)
+class StreamStartPageTR(TranslationOptions):
+    fields = StreamStartPage.translation_fields
 
 
