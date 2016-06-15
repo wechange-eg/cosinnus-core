@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-15 16:44+0200\n"
+"POT-Creation-Date: 2016-06-15 16:59+0200\n"
 "PO-Revision-Date: 2015-11-14 17:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -943,19 +943,19 @@ msgid ""
 msgstr ""
 
 #: .\models\wagtail_models.py:106 .\models\wagtail_models.py:316
-#: .\models\wagtail_models.py:517
+#: .\models\wagtail_models.py:520
 #, fuzzy
 #| msgid "Register now!"
 msgid "Show Register Button"
 msgstr "Зарегистрируйтесь сейчас!"
 
 #: .\models\wagtail_models.py:107 .\models\wagtail_models.py:317
-#: .\models\wagtail_models.py:518
+#: .\models\wagtail_models.py:521
 msgid "Redirect Logged in Users"
 msgstr ""
 
 #: .\models\wagtail_models.py:108 .\models\wagtail_models.py:318
-#: .\models\wagtail_models.py:519
+#: .\models\wagtail_models.py:522
 msgid ""
 "If active, this page will only be visible to non-logged-in users. All others "
 "will be redirected to the activities page."
@@ -1024,19 +1024,19 @@ msgstr ""
 #: .\models\wagtail_models.py:373
 #, fuzzy
 #| msgid "Regular Dashboard page (1 Column)"
-msgid "1-Column Dashboard Page (Modular)"
+msgid "1-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
 msgstr "Стандартная страница панели управления (1 колонка)"
 
 #: .\models\wagtail_models.py:398
 #, fuzzy
 #| msgid "Regular Dashboard page (1 Column)"
-msgid "2-Column Dashboard Page (Modular)"
+msgid "2-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
 msgstr "Стандартная страница панели управления (1 колонка)"
 
 #: .\models\wagtail_models.py:426
 #, fuzzy
 #| msgid "Regular Dashboard page (1 Column)"
-msgid "3-Column Dashboard Page (Modular)"
+msgid "3-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
 msgstr "Стандартная страница панели управления (1 колонка)"
 
 #: .\models\wagtail_models.py:483
@@ -1047,31 +1047,37 @@ msgstr ""
 msgid "Simple Page with Left Navigation (Modular)"
 msgstr ""
 
-#: .\models\wagtail_models.py:529
+#: .\models\wagtail_models.py:517
+#, fuzzy
+#| msgid "Regular Dashboard page (1 Column)"
+msgid "Start Page (Modular)"
+msgstr "Стандартная страница панели управления (1 колонка)"
+
+#: .\models\wagtail_models.py:532
 #, fuzzy
 #| msgid "Wallpaper image"
 msgid "Header image"
 msgstr "Фоновое изображение"
 
-#: .\models\wagtail_models.py:531
+#: .\models\wagtail_models.py:534
 msgid "Header Title"
 msgstr ""
 
-#: .\models\wagtail_models.py:532
+#: .\models\wagtail_models.py:535
 msgid "Header Text"
 msgstr ""
 
-#: .\models\wagtail_models.py:534
+#: .\models\wagtail_models.py:537
 msgid "Additional Header content"
 msgstr ""
 
-#: .\models\wagtail_models.py:535
+#: .\models\wagtail_models.py:538
 #, fuzzy
 #| msgid "Edit Widget"
 msgid "Site Widgets"
 msgstr "Редактировать виджет"
 
-#: .\models\wagtail_models.py:536
+#: .\models\wagtail_models.py:539
 msgid "Bottom content (gray background)"
 msgstr ""
 
@@ -4363,6 +4369,11 @@ msgstr ""
 #| msgid "Export"
 msgid "Import"
 msgstr "Экспортировать"
+
+#, fuzzy
+#~| msgid "Regular Dashboard page (1 Column)"
+#~ msgid "3-Column Dashboard Page (Modular)"
+#~ msgstr "Стандартная страница панели управления (1 колонка)"
 
 #~ msgid "No Location set"
 #~ msgstr "Место не указано"

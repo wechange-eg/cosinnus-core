@@ -229,8 +229,8 @@ STREAMFIELD_BLOCKS_WIDGETS = [
 ]
 
 
-""" FIXME: old wagtail block set. Simply remove these lines once the feature is cleared and paid for. """
-STREAMFIELD_BLOCKS = [
+# old wagtail block set. for page types we want to phase out
+STREAMFIELD_OLD_BLOCKS = [
     ('paragraph', BetterRichTextBlock(icon='form')),
     ('image', ImageChooserBlock(icon='image')),
     ('create_project_button', CreateProjectButtonBlock())

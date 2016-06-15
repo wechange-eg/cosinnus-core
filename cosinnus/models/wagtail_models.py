@@ -31,7 +31,7 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailcore.blocks.struct_block import StructBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
 from cosinnus.models.wagtail_blocks import BetterRichTextField,\
-    STREAMFIELD_BLOCKS, STREAMFIELD_BLOCKS_WIDGETS
+    STREAMFIELD_BLOCKS, STREAMFIELD_BLOCKS_WIDGETS, STREAMFIELD_OLD_BLOCKS
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 
@@ -319,13 +319,13 @@ class BaseStreamDashboardPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
         default=False)
     
     # Database fields
-    banner_left = StreamField(STREAMFIELD_BLOCKS, verbose_name=_('Left banner (top)'), blank=True)
-    banner_right = StreamField(STREAMFIELD_BLOCKS, verbose_name=_('Right banner (top)'), blank=True)
+    banner_left = StreamField(STREAMFIELD_OLD_BLOCKS, verbose_name=_('Left banner (top)'), blank=True)
+    banner_right = StreamField(STREAMFIELD_OLD_BLOCKS, verbose_name=_('Right banner (top)'), blank=True)
     
-    header = StreamField(STREAMFIELD_BLOCKS, verbose_name=_('Header'), blank=True)
+    header = StreamField(STREAMFIELD_OLD_BLOCKS, verbose_name=_('Header'), blank=True)
     
-    footer_left = StreamField(STREAMFIELD_BLOCKS, verbose_name=_('Left footer'), blank=True)
-    footer_right = StreamField(STREAMFIELD_BLOCKS, verbose_name=_('Right footer'), blank=True)
+    footer_left = StreamField(STREAMFIELD_OLD_BLOCKS, verbose_name=_('Left footer'), blank=True)
+    footer_right = StreamField(STREAMFIELD_OLD_BLOCKS, verbose_name=_('Right footer'), blank=True)
     
     translation_fields = (
         'title',
@@ -370,9 +370,9 @@ class BaseStreamDashboardPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
 class StreamDashboardSingleColumnPage(BaseStreamDashboardPage):
     
     class Meta:
-        verbose_name = _('1-Column Dashboard Page (Modular)')
+        verbose_name = _('1-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)')
     
-    content1 = StreamField(STREAMFIELD_BLOCKS, verbose_name=_('Content'), blank=True)
+    content1 = StreamField(STREAMFIELD_OLD_BLOCKS, verbose_name=_('Content'), blank=True)
 
     # Search index configuraiton
     search_fields = BaseStreamDashboardPage.search_fields + (
@@ -395,10 +395,10 @@ class StreamDashboardSingleColumnPage(BaseStreamDashboardPage):
 class StreamDashboardDoubleColumnPage(BaseStreamDashboardPage):
     
     class Meta:
-        verbose_name = _('2-Column Dashboard Page (Modular)')
+        verbose_name = _('2-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)')
     
-    content1 = StreamField(STREAMFIELD_BLOCKS, verbose_name=_('Content (left column)'), blank=True)
-    content2 = StreamField(STREAMFIELD_BLOCKS, verbose_name=_('Content (right column)'), blank=True)
+    content1 = StreamField(STREAMFIELD_OLD_BLOCKS, verbose_name=_('Content (left column)'), blank=True)
+    content2 = StreamField(STREAMFIELD_OLD_BLOCKS, verbose_name=_('Content (right column)'), blank=True)
 
     # Search index configuraiton
     search_fields = BaseStreamDashboardPage.search_fields + (
@@ -423,11 +423,11 @@ class StreamDashboardDoubleColumnPage(BaseStreamDashboardPage):
 class StreamDashboardTripleColumnPage(BaseStreamDashboardPage):
     
     class Meta:
-        verbose_name = _('3-Column Dashboard Page (Modular)')
+        verbose_name = _('3-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)')
     
-    content1 = StreamField(STREAMFIELD_BLOCKS, verbose_name=_('Content (left column)'), blank=True)
-    content2 = StreamField(STREAMFIELD_BLOCKS, verbose_name=_('Content (center column)'), blank=True)
-    content3 = StreamField(STREAMFIELD_BLOCKS, verbose_name=_('Content (right column)'), blank=True)
+    content1 = StreamField(STREAMFIELD_OLD_BLOCKS, verbose_name=_('Content (left column)'), blank=True)
+    content2 = StreamField(STREAMFIELD_OLD_BLOCKS, verbose_name=_('Content (center column)'), blank=True)
+    content3 = StreamField(STREAMFIELD_OLD_BLOCKS, verbose_name=_('Content (right column)'), blank=True)
     
     # Search index configuraiton
     search_fields = BaseStreamDashboardPage.search_fields + (
@@ -512,6 +512,9 @@ class StreamSimpleTwoPage(BaseStreamSimplePage):
 
 class StreamStartPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
     """ A simple well-structured StartPage using StreamFields """
+    
+    class Meta:
+        verbose_name = _('Start Page (Modular)')
     
     # settings fields
     show_register_button = models.BooleanField(_('Show Register Button'), default=True)

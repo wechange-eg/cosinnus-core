@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-15 16:44+0200\n"
-"PO-Revision-Date: 2016-06-15 16:13+0200\n"
+"POT-Creation-Date: 2016-06-15 16:59+0200\n"
+"PO-Revision-Date: 2016-06-15 17:00+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -913,17 +913,17 @@ msgid ""
 msgstr ""
 
 #: .\models\wagtail_models.py:106 .\models\wagtail_models.py:316
-#: .\models\wagtail_models.py:517
+#: .\models\wagtail_models.py:520
 msgid "Show Register Button"
 msgstr "Registrieren Button anzeigen"
 
 #: .\models\wagtail_models.py:107 .\models\wagtail_models.py:317
-#: .\models\wagtail_models.py:518
+#: .\models\wagtail_models.py:521
 msgid "Redirect Logged in Users"
 msgstr "Eingeloggte Benutzer weiterleiten"
 
 #: .\models\wagtail_models.py:108 .\models\wagtail_models.py:318
-#: .\models\wagtail_models.py:519
+#: .\models\wagtail_models.py:522
 msgid ""
 "If active, this page will only be visible to non-logged-in users. All others "
 "will be redirected to the activities page."
@@ -990,16 +990,16 @@ msgid "Left Sidebar"
 msgstr "Fußzeile links"
 
 #: .\models\wagtail_models.py:373
-msgid "1-Column Dashboard Page (Modular)"
-msgstr "1-spaltige Dashboard Seite (Modular)"
+msgid "1-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
+msgstr "1-spaltige Dashboard Seite (Modular, NICHT MEHR BENUTZEN!)"
 
 #: .\models\wagtail_models.py:398
-msgid "2-Column Dashboard Page (Modular)"
-msgstr "2-spaltige Dashboard Seite (Modular)"
+msgid "2-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
+msgstr "2-spaltige Dashboard Seite (Modular, NICHT MEHR BENUTZEN!)"
 
 #: .\models\wagtail_models.py:426
-msgid "3-Column Dashboard Page (Modular)"
-msgstr "3-spaltige Dashboard Seite (Modular)"
+msgid "3-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
+msgstr "3-spaltige Dashboard Seite (Modular, NICHT MEHR BENUTZEN!)"
 
 #: .\models\wagtail_models.py:483
 msgid "Simple One-Column Page (Modular)"
@@ -1009,41 +1009,44 @@ msgstr "Simple einspaltige Seite (Modular)"
 msgid "Simple Page with Left Navigation (Modular)"
 msgstr "Simple Seite mit Navigationsspalte links (Modular)"
 
-#: .\models\wagtail_models.py:529
+#: .\models\wagtail_models.py:517
+msgid "Start Page (Modular)"
+msgstr "Startseite (Modular)"
+
+#: .\models\wagtail_models.py:532
 #, fuzzy
 #| msgid "Wallpaper image"
 msgid "Header image"
 msgstr "Hintergrundbild"
 
-#: .\models\wagtail_models.py:531
+#: .\models\wagtail_models.py:534
 #, fuzzy
 #| msgid "Header"
 msgid "Header Title"
 msgstr "Kopfzeile (nach Banner)"
 
-#: .\models\wagtail_models.py:532
+#: .\models\wagtail_models.py:535
 #, fuzzy
 #| msgid "Header"
 msgid "Header Text"
 msgstr "Kopfzeile (nach Banner)"
 
-#: .\models\wagtail_models.py:534
+#: .\models\wagtail_models.py:537
 msgid "Additional Header content"
 msgstr ""
 
-#: .\models\wagtail_models.py:535
+#: .\models\wagtail_models.py:538
 #, fuzzy
 #| msgid "Edit Widget"
 msgid "Site Widgets"
 msgstr "Widget bearbeiten"
 
-#: .\models\wagtail_models.py:536
+#: .\models\wagtail_models.py:539
 msgid "Bottom content (gray background)"
 msgstr ""
 
 #: .\models\widget.py:19 .\templates\cosinnus\appsmenu.html:37
-#: .\templates\cosinnus\appsmenu.html:51
-#: .\templates\cosinnus\dashboard.html:88
+#: .\templates\cosinnus\appsmenu.html:51 .\templates\cosinnus\dashboard.html:88
 msgid "Dashboard"
 msgstr "Dashboard"
 
@@ -1302,8 +1305,8 @@ msgstr "Einstellungen"
 #: .\templates\cosinnus\group\group_members_map.html:14
 #: .\templates\cosinnus\group\group_microsite.html:245
 #: .\templates\cosinnus\group\leftnav_group.html:21
-#: .\templates\cosinnus\widgets\group_projects.html:15
-#: .\utils\dashboard.py:218 .\utils\dashboard.py:219
+#: .\templates\cosinnus\widgets\group_projects.html:15 .\utils\dashboard.py:218
+#: .\utils\dashboard.py:219
 msgid "Members"
 msgstr "Mitglieder"
 
@@ -1420,8 +1423,8 @@ msgid ""
 "The layout you choose will be the layout for all members of %(team_name)s! "
 "Click save to apply your changes."
 msgstr ""
-"Das Layout das du speicherst bestimmt die Ansicht für alle Mitglieder von %"
-"(team_name)s! Klicke auf Sichern um deine Änderungen zu speichern."
+"Das Layout das du speicherst bestimmt die Ansicht für alle Mitglieder von "
+"%(team_name)s! Klicke auf Sichern um deine Änderungen zu speichern."
 
 #: .\templates\cosinnus\dashboard.html:109
 msgid ""
@@ -2423,8 +2426,8 @@ msgid ""
 "\n"
 "You're receiving this email because you are an administrator of this team.\n"
 "\n"
-"(Follow this link to edit your notification preferences: %"
-"(notification_settings_url)s )\n"
+"(Follow this link to edit your notification preferences: "
+"%(notification_settings_url)s )\n"
 "\n"
 "\n"
 "Your %(site_name)s Team"
@@ -2437,8 +2440,8 @@ msgstr ""
 "Du hast diese Email bekommen, weil du ein Gruppen-/Projektadministrator "
 "bist.\n"
 "\n"
-"(Folge diesem Link um deine Benachrichtigungseinstellungen zu ändern: %"
-"(notification_settings_url)s )\n"
+"(Folge diesem Link um deine Benachrichtigungseinstellungen zu ändern: "
+"%(notification_settings_url)s )\n"
 "\n"
 "\n"
 "Dein %(site_name)s Team"
@@ -2478,8 +2481,8 @@ msgstr ""
 "%(domain_url)s%(user_approve_url)s\n"
 "\n"
 "\n"
-"Klicke hier um die Registrierung abzulehnen: %(domain_url)s%(user_deny_url)"
-"s\n"
+"Klicke hier um die Registrierung abzulehnen: %(domain_url)s"
+"%(user_deny_url)s\n"
 "\n"
 "\n"
 "Du hast diese Email bekommen, weil du ein Portal-Administrator bist. \n"
@@ -2591,29 +2594,29 @@ msgstr "Deine Mitgliedsschaftsanfrage bei %(site_name)s."
 msgid ""
 "Hi %(receiver_name)s,\n"
 "\n"
-"you were tagged in \"%(object_name)s\" in %(team_name)s by %(sender_name)"
-"s. \n"
+"you were tagged in \"%(object_name)s\" in %(team_name)s by "
+"%(sender_name)s. \n"
 "\n"
 "You can find it by following this link: %(object_url)s\n"
 "\n"
 "\n"
 "\n"
-"(Follow this link to edit your notification preferences: %"
-"(notification_settings_url)s )\n"
+"(Follow this link to edit your notification preferences: "
+"%(notification_settings_url)s )\n"
 "\n"
 "Your %(site_name)s Team."
 msgstr ""
 "Hi %(receiver_name)s,\n"
 "\n"
-"du wurdest markiert in \"%(object_name)s\", in %(team_name)s von %"
-"(sender_name)s. \n"
+"du wurdest markiert in \"%(object_name)s\", in %(team_name)s von "
+"%(sender_name)s. \n"
 "\n"
 "Du kannst es finden indem du folgenden Link aufrufst: %(object_url)s\n"
 "\n"
 "\n"
 "\n"
-"(Folge diesem Link um deine Benachrichtigungseinstellungen zu ändern: %"
-"(notification_settings_url)s )\n"
+"(Folge diesem Link um deine Benachrichtigungseinstellungen zu ändern: "
+"%(notification_settings_url)s )\n"
 "\n"
 "Dein %(site_name)s Team"
 
@@ -3425,8 +3428,8 @@ msgstr "Facebook-Gruppe verbinden"
 #, python-format
 msgid ""
 "You can connect your projects and groups to a Facebook Group. Once "
-"connected, your members can choose to share the news posts they write on %"
-"(site_name)s to the Facebook Group. (They need to connect their accounts to "
+"connected, your members can choose to share the news posts they write on "
+"%(site_name)s to the Facebook Group. (They need to connect their accounts to "
 "Facebook, as well!)"
 msgstr ""
 "Du kannst deine Projekte und Gruppen mit einer Facebook-Gruppe verbinden. "
@@ -4002,8 +4005,8 @@ msgstr ""
 #: .\views\group.py:614
 #, python-format
 msgid ""
-"Do you want to withdraw your join request to the %(team_type)s “%(team_name)"
-"s”?"
+"Do you want to withdraw your join request to the %(team_type)s "
+"“%(team_name)s”?"
 msgstr ""
 "Möchten sie ihre Beitrittsanfrage für %(team_type)s “%(team_name)s” "
 "zurückziehen?"
@@ -4040,8 +4043,8 @@ msgstr "Sie können sich nicht selbst von eine(r/m) %(team_type)s entfernen."
 #: .\views\group.py:771
 #, python-format
 msgid ""
-"Do you want to remove the user “%(username)s”  from the %(team_type)s “%"
-"(team_name)s”?"
+"Do you want to remove the user “%(username)s”  from the %(team_type)s "
+"“%(team_name)s”?"
 msgstr ""
 "Möchten sie Benutzer_in “%(username)s” aus %(team_type)s “%(team_name)s” "
 "entfernen?"
@@ -4212,8 +4215,8 @@ msgstr ""
 #, python-format
 msgid ""
 "User \"%(user)s\" was registered successfully. The account will need to be "
-"approved before you can log in. We will send an email to your address \"%"
-"(email)s\" when this happens."
+"approved before you can log in. We will send an email to your address "
+"\"%(email)s\" when this happens."
 msgstr ""
 "Benutzer \"%(user)s\" wurde erfolgreich registriert. Das Benutzerkonto muss "
 "noch überprüft und freigeschaltet werden bevor du dich einloggen kannst. Wir "
@@ -4348,6 +4351,9 @@ msgstr ""
 msgid "Import"
 msgstr "Exportieren"
 
+#~ msgid "3-Column Dashboard Page (Modular)"
+#~ msgstr "3-spaltige Dashboard Seite (Modular)"
+
 #~ msgid "Share on Twitter"
 #~ msgstr "Auf Twitter teilen"
 
@@ -4448,8 +4454,8 @@ msgstr "Exportieren"
 
 #~ msgid "User \"%(user_name)s\" has requested to join %(team_name)s."
 #~ msgstr ""
-#~ "Benutzer \"%(user_name)s\" hat beantragt Mitglied im Projekt %(team_name)"
-#~ "s zu werden."
+#~ "Benutzer \"%(user_name)s\" hat beantragt Mitglied im Projekt "
+#~ "%(team_name)s zu werden."
 
 #~ msgid "Please go to the following page to accept or decline the request:"
 #~ msgstr ""

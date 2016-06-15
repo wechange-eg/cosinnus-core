@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-15 16:44+0200\n"
+"POT-Creation-Date: 2016-06-15 16:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -858,17 +858,17 @@ msgid ""
 msgstr ""
 
 #: .\models\wagtail_models.py:106 .\models\wagtail_models.py:316
-#: .\models\wagtail_models.py:517
+#: .\models\wagtail_models.py:520
 msgid "Show Register Button"
 msgstr ""
 
 #: .\models\wagtail_models.py:107 .\models\wagtail_models.py:317
-#: .\models\wagtail_models.py:518
+#: .\models\wagtail_models.py:521
 msgid "Redirect Logged in Users"
 msgstr ""
 
 #: .\models\wagtail_models.py:108 .\models\wagtail_models.py:318
-#: .\models\wagtail_models.py:519
+#: .\models\wagtail_models.py:522
 msgid ""
 "If active, this page will only be visible to non-logged-in users. All others "
 "will be redirected to the activities page."
@@ -933,15 +933,15 @@ msgid "Left Sidebar"
 msgstr ""
 
 #: .\models\wagtail_models.py:373
-msgid "1-Column Dashboard Page (Modular)"
+msgid "1-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
 msgstr ""
 
 #: .\models\wagtail_models.py:398
-msgid "2-Column Dashboard Page (Modular)"
+msgid "2-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
 msgstr ""
 
 #: .\models\wagtail_models.py:426
-msgid "3-Column Dashboard Page (Modular)"
+msgid "3-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
 msgstr ""
 
 #: .\models\wagtail_models.py:483
@@ -952,27 +952,31 @@ msgstr ""
 msgid "Simple Page with Left Navigation (Modular)"
 msgstr ""
 
-#: .\models\wagtail_models.py:529
-msgid "Header image"
-msgstr ""
-
-#: .\models\wagtail_models.py:531
-msgid "Header Title"
+#: .\models\wagtail_models.py:517
+msgid "Start Page (Modular)"
 msgstr ""
 
 #: .\models\wagtail_models.py:532
-msgid "Header Text"
+msgid "Header image"
 msgstr ""
 
 #: .\models\wagtail_models.py:534
-msgid "Additional Header content"
+msgid "Header Title"
 msgstr ""
 
 #: .\models\wagtail_models.py:535
+msgid "Header Text"
+msgstr ""
+
+#: .\models\wagtail_models.py:537
+msgid "Additional Header content"
+msgstr ""
+
+#: .\models\wagtail_models.py:538
 msgid "Site Widgets"
 msgstr ""
 
-#: .\models\wagtail_models.py:536
+#: .\models\wagtail_models.py:539
 msgid "Bottom content (gray background)"
 msgstr ""
 
