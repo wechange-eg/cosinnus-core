@@ -8,7 +8,8 @@ module.exports = Backbone.Model.extend({
             projects: true,
             groups: true
         },
-        layer: 'street'
+        layer: 'street',
+        pushState: true
     },
 
     limitWithoutClustering: 100,
@@ -39,7 +40,9 @@ module.exports = Backbone.Model.extend({
                 self.set('results', res);
                 self.trigger('change:results');
                 // Save the search state in the url.
-                Backbone.mediator.publish('navigate:router', self.buildURL(false).replace('/maps/search', '/map/'))
+                if (self.get('pushState')) {
+                    Backbone.mediator.publish('navigate:router', self.buildURL(false).replace('/maps/search', '/map/'))
+                }
             }
         }).fail(function () {
             self.set('searching', false);

@@ -44,7 +44,6 @@ module.exports = View.extend({
 
     default: {
         zoom: 7,
-        pushState: true
     },
 
     initialize: function (options) {
