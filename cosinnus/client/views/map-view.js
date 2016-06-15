@@ -44,6 +44,10 @@ module.exports = View.extend({
 
     default: {
         zoom: 7,
+        location: [
+            52.5233,
+            13.4138
+        ]
     },
 
     initialize: function (options) {
@@ -78,17 +82,17 @@ module.exports = View.extend({
     setStartPos: function (cb) {
         var self = this;
 
-        if (Backbone.mediator.settings.mapStartPos) {
-            self.mapStartPos = Backbone.mediator.settings.mapStartPos;
-            cb();
-        } else {
+        if (util.protocol() === 'http:') {
             $.get('http://ip-api.com/json', function (res) {
                 self.mapStartPos = [res.lat, res.lon];
                 cb();
             }).fail(function() {
-                self.mapStartPos = [0, 0];
+                self.mapStartPos = self.options.location;
                 cb();
             });
+        } else {
+            self.mapStartPos = self.options.location;
+            cb();
         }
     },
 
