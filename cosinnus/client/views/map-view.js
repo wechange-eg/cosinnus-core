@@ -40,12 +40,16 @@ module.exports = View.extend({
 
     clusterZoomThreshold: 5,
 
+    latLngBuffer: 0.1,
+
     default: {
-        zoom: 7
+        zoom: 7,
+        pushState: true
     },
 
-    initialize: function () {
+    initialize: function (options) {
         var self = this;
+        this.options = _(self.default).extend(options);
         self.controlsView = new MapControlsView({
             el: $('#map-controls'),
             model: self.model
@@ -91,7 +95,7 @@ module.exports = View.extend({
 
     renderMap: function () {
         this.markers = [];
-        this.leaflet = L.map('map-fullscreen-surface').setView(this.mapStartPos, this.default.zoom);
+        this.leaflet = L.map('map-fullscreen-surface').setView(this.mapStartPos, this.options.zoom);
         this.setLayer(this.model.get('layer'));
 
         // Setup the cluster layer
@@ -120,7 +124,7 @@ module.exports = View.extend({
 
     updateBounds: function () {
         var bounds = this.leaflet.getBounds()
-        var paddedBounds = bounds.pad(0.1);
+        var paddedBounds = bounds.pad(this.latLngBuffer);
         this.model.set({
             south: bounds.getSouth(),
             paddedSouth: paddedBounds.getSouth(),
@@ -240,7 +244,7 @@ module.exports = View.extend({
             var popLatLng = this.state.popup.getLatLng();
             var marker = event.popup._source;
             // Remove the popup's marker if it's now off screen.
-            if (!this.leaflet.getBounds().pad(0.1).contains(popLatLng)) {
+            if (!this.leaflet.getBounds().pad(this.latLngBuffer).contains(popLatLng)) {
                 this.removeMarker(marker);
             }
             this.state.popup = null;

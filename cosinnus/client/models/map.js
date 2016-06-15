@@ -8,14 +8,14 @@ module.exports = Backbone.Model.extend({
             projects: true,
             groups: true
         },
-        layer: 'street',
-        limitWithoutClustering: 3
+        layer: 'street'
     },
 
-    initialize: function () {
+    limitWithoutClustering: 100,
+
+    initialize: function (options) {
         var self = this;
-        self.set('filters', _(self.default.filters).clone());
-        self.set('layer', self.default.layer);
+        self.set(_(self.default).extend(options));
         self.searchDelay = 1000,
         self.whileSearchingDelay = 5000;
         Backbone.mediator.subscribe('navigate:map', function () {
