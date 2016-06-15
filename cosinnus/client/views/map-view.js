@@ -87,8 +87,14 @@ module.exports = View.extend({
 
     renderMap: function () {
         this.leaflet = L.map('map-fullscreen-surface').setView(this.mapStartPos, 13);
-
         this.setLayer(this.model.get('layer'));
+
+        // Setup the cluster layer
+        this.clusteredMarkers = L.markerClusterGroup({
+            maxClusterRadius: 30
+        });
+        this.leaflet.addLayer(this.clusteredMarkers);
+        this.setClusterState();
 
         this.leaflet.on('zoomend', this.handleViewportChange, this);
         this.leaflet.on('dragend', this.handleViewportChange, this);
@@ -138,11 +144,17 @@ module.exports = View.extend({
         }));
 
         if (this.state.clustering) {
-            this.markers.addLayer(marker);
+            this.clusteredMarkers.addLayer(marker);
         } else {
             marker.addTo(this.leaflet);
-            this.markers.push(marker);
         }
+        this.markers.push(marker);
+    },
+
+    setClusterState: function () {
+        // Set clustering state: cluster only when zoomed in enough.
+        var zoom = this.leaflet.getZoom();
+        this.state.clustering = zoom > this.clusterZoomThreshold;
     },
 
     // Event Handlers
@@ -156,27 +168,17 @@ module.exports = View.extend({
 
         // Remove previous markers from map based on current clustering state.
         if (self.markers) {
-            if (self.state.clustering) {
-                self.leaflet.removeLayer(self.markers);
-            } else {
-                _(self.markers).each(function (marker) {
+            _(self.markers).each(function (marker) {
+                if (self.state.clustering) {
+                    self.clusteredMarkers.removeLayer(marker);
+                } else {
                     self.leaflet.removeLayer(marker);
-                });
-            }
-        }
-
-        // Set clustering state: cluster only when zoomed in enough.
-        var zoom = self.leaflet.getZoom();
-        self.state.clustering = zoom > self.clusterZoomThreshold;
-
-        // Set a new marker collection.
-        if (self.state.clustering) {
-            self.markers = L.markerClusterGroup({
-                maxClusterRadius: 30
+                }
             });
-        } else {
-            self.markers = [];
         }
+
+        self.setClusterState();
+        self.markers = [];
 
         // Add the individual markers.
         _(this.model.activeFilters()).each(function (resultType) {
@@ -184,13 +186,7 @@ module.exports = View.extend({
                 self.addMarker(result, resultType);
             });
         });
-
-        // If clustering, add the cluster object to the map.
-        if (self.state.clustering) {
-            self.leaflet.addLayer(this.markers);
-        }
     },
-
 
     handleViewportChange: function () {
         var zoom = this.leaflet.getZoom();
