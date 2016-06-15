@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-14 18:31+0200\n"
+"POT-Creation-Date: 2016-06-15 16:10+0200\n"
 "PO-Revision-Date: 2016-04-28 18:13+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1820,7 +1820,7 @@ msgid "Select related Projects/Groups"
 msgstr "Convert selected Projects to Groups"
 
 #: .\templates\cosinnus\group\group_form.html:284
-#: .\templates\cosinnus\media_tags.html:74
+#: .\templates\cosinnus\media_tags.html:83
 #: .\templates\cosinnus\media_tags_userprofile.html:83
 msgid "Privacy"
 msgstr ""
@@ -2466,7 +2466,7 @@ msgid "Tag persons"
 msgstr ""
 
 #: .\templates\cosinnus\media_tags.html:16
-#: .\templates\cosinnus\media_tags.html:111
+#: .\templates\cosinnus\media_tags.html:132
 msgid "Select tags"
 msgstr ""
 
@@ -2479,27 +2479,39 @@ msgid "Attach existing Files..."
 msgstr ""
 
 #: .\templates\cosinnus\media_tags.html:55
-#: .\templates\cosinnus\media_tags.html:116
+#: .\templates\cosinnus\media_tags.html:137
 msgid "Select topic"
 msgstr ""
 
-#: .\templates\cosinnus\media_tags.html:86
+#: .\templates\cosinnus\media_tags.html:75
+msgid ""
+"This item will be posted as publicly visible! This means that anyone on the "
+"internet can access and see it, and it may potentially be included in search "
+"engine results."
+msgstr ""
+
+#: .\templates\cosinnus\media_tags.html:76
+msgid ""
+"If you do not wish this, you can change this item's visibility setting below."
+msgstr ""
+
+#: .\templates\cosinnus\media_tags.html:107
 msgid "Add attachment"
 msgstr ""
 
-#: .\templates\cosinnus\media_tags.html:93
+#: .\templates\cosinnus\media_tags.html:114
 msgid "Tag users"
 msgstr ""
 
-#: .\templates\cosinnus\media_tags.html:99
+#: .\templates\cosinnus\media_tags.html:120
 msgid "Tag location"
 msgstr ""
 
-#: .\templates\cosinnus\media_tags.html:129
+#: .\templates\cosinnus\media_tags.html:150
 msgid "Change privacy"
 msgstr ""
 
-#: .\templates\cosinnus\media_tags.html:136
+#: .\templates\cosinnus\media_tags.html:157
 #: .\templates\cosinnus\utils\facebook_integration.html:38
 msgid "Connect Facebook Account"
 msgstr ""
