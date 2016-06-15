@@ -1,0 +1,12 @@
+{% load cosinnus_tags %}
+<div class="row">
+    <div class="col-sm-{{ columns|select_column_class:0 }}">
+    	{{ left|richtext_or_stream }}
+    </div>
+    <div class="col-sm-{{ columns|select_column_class:1 }}">
+    	{{ middle|richtext_or_stream }}
+    </div>
+    <div class="col-sm-{{ columns|select_column_class:2 }}">
+    	{{ right|richtext_or_stream }}
+    </div>
+</div><!-- row -->

@@ -40,8 +40,11 @@ def get_avatar_filename(instance, filename):
 def get_group_avatar_filename(instance, filename):
     return _get_avatar_filename(instance, filename, 'group')
 
+def get_group_gallery_image_filename(instance, filename):
+    return _get_avatar_filename(instance, filename, 'gallery_images', base_folder='group_images')
+
 def get_group_wallpaper_filename(instance, filename):
-    return _get_avatar_filename(instance, filename, 'group_wallpapers')
+    return _get_avatar_filename(instance, filename, 'group_wallpapers', base_folder='group_images')
 
 def _get_avatar_filename(instance, filename, folder_type, base_folder='avatars'):
     _, ext = path.splitext(filename)
