@@ -40,6 +40,10 @@ module.exports = View.extend({
 
     clusterZoomThreshold: 5,
 
+    default: {
+        zoom: 7
+    },
+
     initialize: function () {
         var self = this;
         self.controlsView = new MapControlsView({
@@ -87,7 +91,7 @@ module.exports = View.extend({
 
     renderMap: function () {
         this.markers = [];
-        this.leaflet = L.map('map-fullscreen-surface').setView(this.mapStartPos, 13);
+        this.leaflet = L.map('map-fullscreen-surface').setView(this.mapStartPos, this.default.zoom);
         this.setLayer(this.model.get('layer'));
 
         // Setup the cluster layer
