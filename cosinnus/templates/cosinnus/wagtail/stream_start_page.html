@@ -32,6 +32,15 @@
 			    </div>
             </div>
             
+            <div class="row ultra-space">
+			    <div class="col-md-12">
+			    	<div>
+				        {{ page.header_content|richtext_or_stream }}
+			    	</div>
+			    </div>
+            </div>
+            
+            
             {% if page.show_register_button and not request.user.is_authenticated %}
 	            <div class="row ultra-space">
 	                <div class="col-md-offset-4 col-md-4">
@@ -53,15 +62,6 @@
 	            </div><!-- row -->
             {% endif %}
             
-            
-            <div class="row ultra-space">
-			    <div class="col-md-12">
-			    	<div>
-				        {{ page.header_content|richtext_or_stream }}
-			    	</div>
-			    </div>
-            </div>
-            
             {% if page.site_widgets %}
             	<div class="row ultra-space">
 				    <div class="col-md-12">
@@ -71,6 +71,7 @@
 				    </div>
 	            </div>
             {% endif %}
+            
         </div><!-- container -->
         
         {% if page.bottom_content %}
