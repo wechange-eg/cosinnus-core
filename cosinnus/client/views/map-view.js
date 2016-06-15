@@ -86,6 +86,7 @@ module.exports = View.extend({
     },
 
     renderMap: function () {
+        this.markers = [];
         this.leaflet = L.map('map-fullscreen-surface').setView(this.mapStartPos, 13);
         this.setLayer(this.model.get('layer'));
 
@@ -98,6 +99,8 @@ module.exports = View.extend({
 
         this.leaflet.on('zoomend', this.handleViewportChange, this);
         this.leaflet.on('dragend', this.handleViewportChange, this);
+        this.leaflet.on('popupopen', this.handlePopup, this);
+        this.leaflet.on('popupclose', this.handlePopup, this);
         this.updateBounds();
     },
 
@@ -143,18 +146,33 @@ module.exports = View.extend({
             address: result.address
         }));
 
-        if (this.state.clustering) {
-            this.clusteredMarkers.addLayer(marker);
-        } else {
-            marker.addTo(this.leaflet);
+        if (this.markerNotPopup(marker)) {
+            if (this.state.clustering) {
+                this.clusteredMarkers.addLayer(marker);
+            } else {
+                marker.addTo(this.leaflet);
+            }
+            this.markers.push(marker);
         }
-        this.markers.push(marker);
     },
 
     setClusterState: function () {
         // Set clustering state: cluster only when zoomed in enough.
         var zoom = this.leaflet.getZoom();
         this.state.clustering = zoom > this.clusterZoomThreshold;
+    },
+
+    markerNotPopup: function (marker) {
+        var p = this.state.popup;
+        return !p || !_(p.getLatLng()).isEqual(marker.getLatLng());
+    },
+
+    removeMarker: function (marker) {
+        if (this.state.clustering) {
+            this.clusteredMarkers.removeLayer(marker);
+        } else {
+            this.leaflet.removeLayer(marker);
+        }
     },
 
     // Event Handlers
@@ -169,16 +187,17 @@ module.exports = View.extend({
         // Remove previous markers from map based on current clustering state.
         if (self.markers) {
             _(self.markers).each(function (marker) {
-                if (self.state.clustering) {
-                    self.clusteredMarkers.removeLayer(marker);
-                } else {
-                    self.leaflet.removeLayer(marker);
+                if (self.markerNotPopup(marker)) {
+                    self.removeMarker(marker);
                 }
             });
         }
 
         self.setClusterState();
         self.markers = [];
+        if (self.state.popup) {
+            self.markers.push(self.state.popup._source);
+        }
 
         // Add the individual markers.
         _(this.model.activeFilters()).each(function (resultType) {
@@ -208,5 +227,19 @@ module.exports = View.extend({
             L.latLng(this.model.get('south'), this.model.get('west')),
             L.latLng(this.model.get('north'), this.model.get('east'))
         ));
+    },
+
+    handlePopup: function (event) {
+        if (event.type === 'popupopen') {
+            this.state.popup = event.popup;
+        } else {
+            var popLatLng = this.state.popup.getLatLng();
+            var marker = event.popup._source;
+            // Remove the popup's marker if it's now off screen.
+            if (!this.leaflet.getBounds().pad(0.1).contains(popLatLng)) {
+                this.removeMarker(marker);
+            }
+            this.state.popup = null;
+        }
     }
 });
