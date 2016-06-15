@@ -25,7 +25,7 @@ module.exports = Backbone.Model.extend({
 
     search: function () {
         var self = this;
-        var url = this.buildURL();
+        var url = self.buildURL(true);
         self.set('searching', true);
         $.get(url, function (res) {
             self.set('searching', false);
@@ -39,7 +39,7 @@ module.exports = Backbone.Model.extend({
                 self.set('results', res);
                 self.trigger('change:results');
                 // Save the search state in the url.
-                Backbone.mediator.publish('navigate:router', url.replace('/maps/search', '/map/'))
+                Backbone.mediator.publish('navigate:router', self.buildURL(false).replace('/maps/search', '/map/'))
             }
         }).fail(function () {
             self.set('searching', false);
@@ -70,13 +70,17 @@ module.exports = Backbone.Model.extend({
         this.search();
     },
 
-    buildURL: function () {
+    buildURL: function (padded) {
+        var north = padded ? this.get('paddedNorth') : this.get('north');
+        var east = padded ? this.get('paddedEast') : this.get('east');
+        var south = padded ? this.get('paddedSouth') : this.get('south');
+        var west = padded ? this.get('paddedWest') : this.get('west');
         var searchParams = {
             q: this.get('q'),
-            ne_lat: this.get('north'),
-            ne_lon: this.get('east'),
-            sw_lat: this.get('south'),
-            sw_lon: this.get('west'),
+            ne_lat: north,
+            ne_lon: east,
+            sw_lat: south,
+            sw_lon: west,
             people: this.get('filters').people,
             events: this.get('filters').events,
             projects: this.get('filters').projects,

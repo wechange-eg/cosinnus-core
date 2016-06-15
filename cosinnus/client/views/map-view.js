@@ -106,12 +106,17 @@ module.exports = View.extend({
     },
 
     updateBounds: function () {
-        var bounds = this.leaflet.getBounds();
+        var bounds = this.leaflet.getBounds()
+        var paddedBounds = bounds.pad(0.1);
         this.model.set({
             south: bounds.getSouth(),
+            paddedSouth: paddedBounds.getSouth(),
             west: bounds.getWest(),
+            paddedWest: paddedBounds.getWest(),
             north: bounds.getNorth(),
-            east: bounds.getEast()
+            paddedNorth: paddedBounds.getNorth(),
+            east: bounds.getEast(),
+            paddedEast: paddedBounds.getEast()
         });
     },
 
