@@ -66,7 +66,7 @@ class MapView(ListView):
                  'events': True,
                  'projects': True,
                  'groups': True
-             },
+            },
             'activeFilters': {
                 'people': True,
                 'events': True,
