@@ -4,6 +4,7 @@
 
 var Router = require('router');
 var mediator = require('mediator');
+var auto = require('auto');
 
 module.exports = function Application () {
     self = this;
@@ -20,6 +21,9 @@ module.exports = function Application () {
         $(window).on('resize', function () {
             Backbone.mediator.publish('resize:window');
         });
+        // Autoinitialize inline views and models.
+        auto.initialize();
+
     };
 
     self.initMediator = function () {

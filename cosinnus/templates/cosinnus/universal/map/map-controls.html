@@ -1,51 +1,59 @@
 {% load i18n %}
 <form id="map-search">
-    <div class="line">
-        <div class="result-filter check people" data-result-type="people">
-            <div class="box">
-                {% if filters.people %}
-                    <i class="fa fa-check"></i>
-                {% endif %}
+    {% if availableFilters.people %}
+        <div class="line">
+            <div class="result-filter check people" data-result-type="people">
+                <div class="box">
+                    {% if activeFilters.people %}
+                        <i class="fa fa-check"></i>
+                    {% endif %}
+                </div>
+                <div class="check__label">{% trans "People" %}</div>
             </div>
-            <div class="check__label">{% trans "People" %}</div>
         </div>
-    </div>
+    {% endif %}
 
-    <div class="line">
-        <div class="result-filter check events" data-result-type="events">
-            <div class="box">
-                {% if filters.events %}
-                    <i class="fa fa-check"></i>
-                {% endif %}
+    {% if availableFilters.events %}
+        <div class="line">
+            <div class="result-filter check events" data-result-type="events">
+                <div class="box">
+                    {% if activeFilters.events %}
+                        <i class="fa fa-check"></i>
+                    {% endif %}
+                </div>
+                <div class="check__label">{% trans 'Events' %}</div>
             </div>
-            <div class="check__label">{% trans 'Events' %}</div>
         </div>
-    </div>
+    {% endif %}
 
-    <div class="line">
-        <div class="result-filter check projects" data-result-type="projects">
-            <div class="box">
-                {% if filters.projects %}
-                    <i class="fa fa-check"></i>
-                {% endif %}
+    {% if availableFilters.projects %}
+        <div class="line">
+            <div class="result-filter check projects" data-result-type="projects">
+                <div class="box">
+                    {% if activeFilters.projects %}
+                        <i class="fa fa-check"></i>
+                    {% endif %}
+                </div>
+                <div class="check__label">{% trans 'Projects' %}</div>
             </div>
-            <div class="check__label">{% trans 'Projects' %}</div>
         </div>
-    </div>
+    {% endif %}
 
-    <div class="line">
-        <div class="result-filter check groups" data-result-type="groups">
-            <div class="box">
-                {% if filters.groups %}
-                    <i class="fa fa-check"></i>
-                {% endif %}
+    {% if availableFilters.groups %}
+        <div class="line">
+            <div class="result-filter check groups" data-result-type="groups">
+                <div class="box">
+                    {% if activeFilters.groups %}
+                        <i class="fa fa-check"></i>
+                    {% endif %}
+                </div>
+                <div class="check__label">{% trans 'Groups' %}</div>
             </div>
-            <div class="check__label">{% trans 'Groups' %}</div>
         </div>
-    </div>
+    {% endif %}
 
     <div class="line link">
-        {% if not filters.people or not filters.events or not filters.projects or not filters.groups %}
+        {% if not activeFilters.people or not activeFilters.events or not activeFilters.projects or not activeFilters.groups %}
             <a href="#" class="reset-filters">
                 Alle anzeigen
             </a>
@@ -56,8 +64,8 @@
 
     <div class="line text-field">
         <input type="text" class="q" name="q" placeholder="Suche" value="{{ q }}" />
-        <i class="fa fa-search icon-search"></i>
-        <div class="icon-loading sk-double-bounce">
+        <i class="fa fa-search icon-search{% if wantsToSearch %} hidden{% endif %}"></i>
+        <div class="icon-loading sk-double-bounce{% if not wantsToSearch %} hidden{% endif %}">
             <div class="sk-child sk-double-bounce1"></div>
             <div class="sk-child sk-double-bounce2"></div>
         </div>

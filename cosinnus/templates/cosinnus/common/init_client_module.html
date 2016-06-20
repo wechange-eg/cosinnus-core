@@ -1,0 +1,11 @@
+
+    <div id="{{module}}-{{id}}" style="width: {{width}}px; height: {{height}}px;" class="{{module}}-root"></div>
+
+    <script>
+        $('html').on('init:client', function () {
+            Backbone.mediator.publish('init:{{module}}', {
+                el: '#{{module}}-{{id}}',
+                settings: '{{settings|safe}}'
+            });
+        });
+    </script>

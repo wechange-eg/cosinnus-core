@@ -2,7 +2,13 @@
 
 module.exports = Backbone.Model.extend({
     default: {
-        filters: {
+        availableFilters: {
+            people: true,
+            events: true,
+            projects: true,
+            groups: true
+        },
+        activeFilters: {
             people: true,
             events: true,
             projects: true,
@@ -14,14 +20,18 @@ module.exports = Backbone.Model.extend({
 
     limitWithoutClustering: 100,
 
-    initialize: function (options) {
+    searchDelay: 1000,
+
+    whileSearchingDelay: 5000,
+
+    initialize: function (attributes, options) {
         var self = this;
-        self.set(_(self.default).extend(options));
-        self.searchDelay = 1000,
-        self.whileSearchingDelay = 5000;
+        var attrs = $.extend(true, {}, self.default, options);
+        self.set(attrs);
         Backbone.mediator.subscribe('navigate:map', function () {
             self.initialSearch();
         });
+        Backbone.Model.prototype.initialize.call(this);
     },
 
     search: function () {
@@ -84,10 +94,10 @@ module.exports = Backbone.Model.extend({
             ne_lon: east,
             sw_lat: south,
             sw_lon: west,
-            people: this.get('filters').people,
-            events: this.get('filters').events,
-            projects: this.get('filters').projects,
-            groups: this.get('filters').groups
+            people: this.get('activeFilters').people,
+            events: this.get('activeFilters').events,
+            projects: this.get('activeFilters').projects,
+            groups: this.get('activeFilters').groups
         };
         if (!this.get('clustering')) {
             _(searchParams).extend({
@@ -99,14 +109,14 @@ module.exports = Backbone.Model.extend({
     },
 
     toggleFilter (resultType) {
-        var filters = this.get('filters');
-        filters[resultType] = !filters[resultType];
-        this.set('filters', filters);
+        var activeFilters = this.get('activeFilters');
+        activeFilters[resultType] = !activeFilters[resultType];
+        this.set('activeFilters', activeFilters);
         this.attemptSearch();
     },
 
     resetFilters: function () {
-        this.set('filters', _(this.default.filters).clone());
+        this.set('activeFilters', _(this.availableFilters).clone());
         this.attemptSearch();
     },
 
@@ -142,8 +152,8 @@ module.exports = Backbone.Model.extend({
         return json;
     },
 
-    activeFilters: function () {
-        return _(_(this.get('filters')).keys()).select(function (filter) {
+    activeFilterList: function () {
+        return _(_(this.get('activeFilters')).keys()).select(function (filter) {
             return !!filter;
         });
     }

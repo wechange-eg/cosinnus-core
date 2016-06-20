@@ -3,6 +3,7 @@
 var View = require('views/base/view');
 var MapControlsView = require('views/map-controls-view');
 var popupTemplate = require('map/popup');
+var template = require('map/map');
 var util = require('lib/util');
 
 module.exports = View.extend({
@@ -52,12 +53,8 @@ module.exports = View.extend({
 
     initialize: function (options) {
         var self = this;
-        this.options = _(self.default).extend(options);
-        self.controlsView = new MapControlsView({
-            el: $('#map-controls'),
-            model: self.model
-        });
-        self.controlsView.on('change:layer', self.handleSwitchLayer, self);
+        self.template = template;
+        self.options = $.extend(true, {}, self.default, options);
         self.model.on('change:results', self.updateMarkers, self);
         self.model.on('change:bounds', self.fitBounds, self);
         Backbone.mediator.subscribe('resize:window', function () {
@@ -67,8 +64,15 @@ module.exports = View.extend({
         View.prototype.initialize.call(this);
     },
 
-    render: function () {
+    afterRender: function () {
         var self = this;
+
+        self.controlsView = new MapControlsView({
+            el: self.$el.find('.map-controls'),
+            model: self.model,
+            options: self.options
+        }).render();
+        self.controlsView.on('change:layer', self.handleSwitchLayer, self);
 
         self.setStartPos(function () {
             self.renderMap();
@@ -98,7 +102,8 @@ module.exports = View.extend({
 
     renderMap: function () {
         this.markers = [];
-        this.leaflet = L.map('map-fullscreen-surface').setView(this.mapStartPos, this.options.zoom);
+        this.leaflet = L.map(this.options.el.replace('#', ''))
+            .setView(this.mapStartPos, this.options.zoom);
         this.setLayer(this.model.get('layer'));
 
         // Setup the cluster layer
@@ -211,7 +216,7 @@ module.exports = View.extend({
         }
 
         // Add the individual markers.
-        _(this.model.activeFilters()).each(function (resultType) {
+        _(this.model.activeFilterList()).each(function (resultType) {
             _(results[resultType]).each(function (result) {
                 self.addMarker(result, resultType);
             });

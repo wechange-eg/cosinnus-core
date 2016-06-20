@@ -64,15 +64,15 @@ module.exports = View.extend({
     },
 
     handleStartSearch: function (event) {
-        this.$el.find('.icon-search').hide();
-        this.$el.find('.icon-loading').show();
+        this.$el.find('.icon-search').addClass('hidden');
+        this.$el.find('.icon-loading').removeClass('hidden');
     },
 
     handleEndSearch: function (event) {
         if (!this.state.typing) {
-            this.$el.find('.icon-search').show();
+            this.$el.find('.icon-search').removeClass('hidden');
         }
-        this.$el.find('.icon-loading').hide();
+        this.$el.find('.icon-loading').addClass('hidden');
     },
 
     handleXhrError: function (event) {
