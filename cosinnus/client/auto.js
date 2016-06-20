@@ -24,7 +24,8 @@ module.exports = {
 
         var view = new MapView({
             el: params.el,
-            model: map
+            model: map,
+            location: settings.location
         }).render();
     }
 };

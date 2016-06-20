@@ -76,36 +76,17 @@ module.exports = View.extend({
             self.controlsView.on('change:layer', self.handleSwitchLayer, self);
         }
 
-        self.setStartPos(function () {
-            self.renderMap();
-            self.model.initialSearch();
-        });
+        self.renderMap();
+        self.model.initialSearch();
     },
 
     // Private
     // -------
 
-    setStartPos: function (cb) {
-        var self = this;
-
-        if (util.protocol() === 'http:') {
-            $.get('http://ip-api.com/json', function (res) {
-                self.mapStartPos = [res.lat, res.lon];
-                cb();
-            }).fail(function() {
-                self.mapStartPos = self.options.location;
-                cb();
-            });
-        } else {
-            self.mapStartPos = self.options.location;
-            cb();
-        }
-    },
-
     renderMap: function () {
         this.markers = [];
         this.leaflet = L.map(this.options.el.replace('#', ''))
-            .setView(this.mapStartPos, this.options.zoom);
+            .setView(this.options.location, this.options.zoom);
         this.setLayer(this.model.get('layer'));
 
         // Setup the cluster layer
