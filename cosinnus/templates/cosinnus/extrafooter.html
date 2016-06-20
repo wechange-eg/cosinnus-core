@@ -1,4 +1,5 @@
 <!-- Piwik -->
+{% if not request.GET.disableextrascripts %}
 <script type="text/javascript">
   var _paq = _paq || [];
   _paq.push(['trackPageView']);
@@ -26,4 +27,5 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ur
 })();
 </script>
 <!-- End Userreport Code -->
+{% endif %}
 {% endif %}
