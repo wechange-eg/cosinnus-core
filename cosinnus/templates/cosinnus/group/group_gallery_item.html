@@ -1,7 +1,7 @@
 <div class="group-gallery-item">
 	<a href="{{ group.get_absolute_url }}">
 		{% include 'cosinnus/group/group_avatar_image.html' with group=group extra_classes="group-gallery-item-image" %}
-		<p>
+		<p title="{{ group.name }}" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">
 			{{ group.name }}
 		</p>
 	</a>
