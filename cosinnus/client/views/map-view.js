@@ -67,12 +67,14 @@ module.exports = View.extend({
     afterRender: function () {
         var self = this;
 
-        self.controlsView = new MapControlsView({
-            el: self.$el.find('.map-controls'),
-            model: self.model,
-            options: self.options
-        }).render();
-        self.controlsView.on('change:layer', self.handleSwitchLayer, self);
+        if (self.model.get('controlsEnabled')) {
+            self.controlsView = new MapControlsView({
+                el: self.$el.find('.map-controls'),
+                model: self.model,
+                options: self.options
+            }).render();
+            self.controlsView.on('change:layer', self.handleSwitchLayer, self);
+        }
 
         self.setStartPos(function () {
             self.renderMap();
@@ -197,7 +199,6 @@ module.exports = View.extend({
     // Render the search results as markers on the map.
     updateMarkers: function () {
         var self = this,
-            controls = this.controlsView.model,
             results = self.model.get('results');
 
         // Remove previous markers from map based on current clustering state.

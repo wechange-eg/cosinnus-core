@@ -15,7 +15,8 @@ module.exports = Backbone.Model.extend({
             groups: true
         },
         layer: 'street',
-        pushState: true
+        pushState: true,
+        controlsEnabled: true
     },
 
     limitWithoutClustering: 100,
