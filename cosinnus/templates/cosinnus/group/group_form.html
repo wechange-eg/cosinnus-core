@@ -36,6 +36,16 @@
     <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
     {% csrf_token %}
     {{ form.forms.obj.media }}
+    {{ form.forms.obj.non_field_errors }}
+    {{ form.forms.media_tag.non_field_errors }}
+    
+    {% if form.forms.obj.errors or form.forms.media_tag.errors %}
+	    <div class="alert alert-danger alert-dismissable">
+	            <i class="fa fa-exclamation-triangle fa-3x"></i>
+	        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#215;</button>
+	        <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+	    </div>
+    {% endif %}
     	
         <ul class="nav nav-tabs" role="tablist">
         	{% block group_form_navtabs %}
