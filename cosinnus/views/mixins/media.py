@@ -6,6 +6,7 @@ import re
 from django.core.exceptions import ImproperlyConfigured
 from django.conf import settings
 from django.template.loader import render_to_string
+from django.utils.safestring import mark_safe
 
 
 class VideoEmbedFieldMixin(object):
@@ -50,5 +51,5 @@ class VideoEmbedFieldMixin(object):
         return {}
     
     def render_video_embed(self):
-        return render_to_string(self.video_embed_template, dictionary=self.get_video_properties())
+        return mark_safe(render_to_string(self.video_embed_template, dictionary={'data': self.get_video_properties()}))
     
