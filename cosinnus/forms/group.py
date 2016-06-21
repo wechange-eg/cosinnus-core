@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import re
+
 from django import forms
 from django.forms.widgets import SelectMultiple
 from django_select2.widgets import Select2MultipleWidget
+from django.utils.translation import ugettext_lazy as _
 
 from awesome_avatar import forms as avatar_forms
 
@@ -18,6 +21,18 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from django.core.urlresolvers import reverse
 from cosinnus.views.facebook_integration import FacebookIntegrationGroupFormMixin
 
+# matches a twitter username
+TWITTER_USERNAME_VALID_RE = re.compile(r'^@?[A-Za-z0-9_]+$')
+# matches (group 0) a twitter widget id from its embed HTML code
+TWITTER_WIDGET_EMBED_ID_RE = re.compile(r'data-widget-id="(\d+)"')
+
+
+def _is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
 
 class GroupKwargModelFormMixin(object):
     """
@@ -57,12 +72,16 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
     website = forms.URLField(widget=forms.TextInput, required=False)
+    # we want a textarea without character limit here so HTML can be pasted (will be cleaned)
+    twitter_widget_id = forms.CharField(widget=forms.Textarea, required=False)
+
     
     related_groups = forms.ModelMultipleChoiceField(queryset=get_cosinnus_group_model().objects.filter(portal_id=CosinnusPortal.get_current().id))
     
     class Meta:
         fields = ['name', 'public', 'description', 'description_long', 'contact_info', 
-                        'avatar', 'wallpaper', 'website', 'deactivated_apps'] \
+                        'avatar', 'wallpaper', 'website', 'video', 'twitter_username',
+                         'twitter_widget_id', 'deactivated_apps'] \
                         + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) \
                         + (['facebook_group_id', 'facebook_page_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else [])
 
@@ -82,7 +101,39 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, forms.ModelForm):
         for field in self.fields.values():
             if type(field.widget) is SelectMultiple:
                 field.widget = Select2MultipleWidget(choices=field.choices)
-                
+    
+    def clean_video(self):
+        data = self.cleaned_data['video']
+        if data:
+            parsed_video = self.instance.get_video_properties(video=data)
+            if not parsed_video or 'error' in parsed_video:
+                raise forms.ValidationError(_('This doesn\'t seem to be a valid Youtube or Vimeo link!'))
+        return data
+    
+    def clean_twitter_username(self):
+        """ check username and enforce '@' """
+        data = self.cleaned_data['twitter_username']
+        if data:
+            data = data.strip()
+            if not TWITTER_USERNAME_VALID_RE.match(data):
+                raise forms.ValidationError(_('This doesn\'t seem to be a Twitter username!'))
+            data = '@' + data.replace('@', '')
+        return data
+    
+    def clean_twitter_widget_id(self):
+        """ Accept Widget-id (example: 744907261810618721) or embed-code (HTML)
+            always returns empty or a numeral like 744907261810618721 """
+        data = self.cleaned_data['twitter_widget_id']
+        if data:
+            data = data.strip()
+            if _is_number(data):
+                return data
+            match = TWITTER_WIDGET_EMBED_ID_RE.search(data)
+            if match and _is_number(match.group(1)):
+                return match.group(1)
+            raise forms.ValidationError(_('This doesn\'t seem to be a valid widget ID or embed HTML code from Twitter!'))
+        return data
+    
     def save(self, commit=True):
         """ Support for m2m-MultipleModelChoiceFields. Saves all selected relations.
             from http://stackoverflow.com/questions/2216974/django-modelform-for-many-to-many-fields """

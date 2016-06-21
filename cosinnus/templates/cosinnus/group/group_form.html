@@ -432,7 +432,64 @@
 									</div>
 								{% endfor %}
 							{% endwith %}
-	                    
+							
+							
+	                        <label>{% trans "Video" %}</label>
+	                        {{ form.forms.obj.video.errors }}
+	                        <div type="button" class="btn btn-default w100 regular-space">
+	                            <ul class="media-list">
+	                                <li class="media">
+	                                    <a class="pull-left" href="#">
+	                                        <i class="fa fa-play"></i>
+	                                    </a>
+	                                    <div class="media-body media-body-form-control">
+	                                        {% captureas placeholder %}{% trans "Youtube or Vimeo URL" %}{% endcaptureas %}
+	                                        {% render_field form.forms.obj.video class+="form-control" placeholder=placeholder %}
+	                                    </div>
+	                                </li>
+	                            </ul>
+	                        </div>
+	                        
+	                        <label>{% trans "Twitter: Embedded User Timeline" %}</label>
+	                        {{ form.forms.obj.twitter_username.errors }}
+	                        <div type="button" class="btn btn-default w100 regular-space">
+	                            <ul class="media-list">
+	                                <li class="media">
+	                                    <a class="pull-left" href="#">
+	                                        <i class="fa fa-twitter"></i>
+	                                    </a>
+	                                    <div class="media-body media-body-form-control">
+	                                        {% captureas placeholder %}{% trans "Twitter Username (example: @username)" %}{% endcaptureas %}
+	                                        {% render_field form.forms.obj.twitter_username class+="form-control" placeholder=placeholder %}
+	                                    </div>
+	                                </li>
+	                            </ul>
+	                        </div>
+	                        
+	                        <label>
+	                        	{% trans "Twitter: Embedded Hashtag or Custom Timeline" %}
+		                        <br/>
+		                        <i>
+	                        		{% trans "You can create a custom twitter timeline here:" %}
+	                        		<a href="https://twitter.com/settings/widgets" target="_blank">https://twitter.com/settings/widgets</a>
+	                        		<i class="fa fa-external-link"></i>
+	                    		</i>
+	                        </label>
+	                        {{ form.forms.obj.twitter_widget_id.errors }}
+	                        <div type="button" class="btn btn-default w100 regular-space">
+	                            <ul class="media-list">
+	                                <li class="media">
+	                                    <a class="pull-left" href="#">
+	                                        <i class="fa fa-twitter"></i>
+	                                    </a>
+	                                    <div class="media-body media-body-form-control">
+	                                        {% captureas placeholder %}{% trans "Widget-id (example: 744907261810618721) or embed-code (HTML)" %}{% endcaptureas %}
+	                                        {% render_field form.forms.obj.twitter_widget_id class+="form-control" placeholder=placeholder %}
+	                                    </div>
+	                                </li>
+	                            </ul>
+	                        </div>
+	                    	
 	                    {% endblock group_form_microsite_tab %}
 	                    
 	                    

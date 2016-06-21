@@ -1,0 +1,14 @@
+{% load i18n %}
+{% if data.youtubeid %}
+	<div class="embed-responsive embed-responsive-16by9">
+		<iframe class="embed-responsive-item" src="//www.youtube.com/embed/{{ data.youtubeid }}?rel=0" allowfullscreen></iframe>
+	</div>
+{% endif %}
+{% if data.vimeoid %}
+	<div class="embed-responsive embed-responsive-16by9">
+		<iframe class="embed-responsive-item" src="//player.vimeo.com/video/{{ data.vimeoid }}?color=BDFF00" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+	</div>
+{% endif %}
+{% if data.error %}
+	<p><em>{% trans "Error embedding a video" %}: {{ data.error }}</em></p>
+{% endif %}

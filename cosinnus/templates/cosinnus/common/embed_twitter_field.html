@@ -1,0 +1,16 @@
+{% load i18n %}
+{% if data.username %}
+	<div class="embed-responsive embed-responsive-16by9">
+		<a class="twitter-timeline"  href="https://twitter.com/{{ data.username }}">Tweets about {{ data.username }}</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	</div>
+{% endif %}
+{% if data.widgetid %}
+	<div class="embed-responsive embed-responsive-16by9">
+		<a class="twitter-timeline"  data-widget-id="{{ data.widgetid }}">Timeline Tweets</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	</div>
+{% endif %}
+{% if data.error %}
+	<p><em>{% trans "Error embedding a twitter timeline" %}: {{ data.error }}</em></p>
+{% endif %}
