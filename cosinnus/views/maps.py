@@ -79,7 +79,7 @@ class MapView(ListView):
             'settings': json.dumps(settings)
         }
 
-    template_name = 'cosinnus/map/map-page.html'
+    template_name = 'cosinnus/map/map_page.html'
 
 
 map_view = MapView.as_view()

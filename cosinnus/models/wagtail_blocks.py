@@ -17,6 +17,9 @@ from wagtail.wagtailcore.blocks.struct_block import StructBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
 from cosinnus.models.group_extra import CosinnusProject
 from random import shuffle
+import json
+from django.core.exceptions import ValidationError
+from django.forms.utils import ErrorList
 
     
 
@@ -95,21 +98,38 @@ class LinkBlock(StructBlock):
     
 
 class MapBlock(StructBlock):
-    people = blocks.BooleanBlock(label=_('Users'), required=False)
-    events = blocks.BooleanBlock(label=_('Events'), required=False)
-    projects = blocks.BooleanBlock(label=_('Projects'), required=False)
-    groups = blocks.BooleanBlock(label=_('Groups'), required=False)
+    people = blocks.BooleanBlock(label=_('Users'), required=False, default=True)
+    events = blocks.BooleanBlock(label=_('Events'), required=False, default=True)
+    projects = blocks.BooleanBlock(label=_('Projects'), required=False, default=True)
+    groups = blocks.BooleanBlock(label=_('Groups'), required=False, default=True)
 
     class Meta:
         icon = 'site'
         template = 'cosinnus/wagtail/widgets/map.html'
-
+    
+    def clean(self, value):
+        ret = super(MapBlock, self).clean(value)
+        if not any([bool(value.get(val)) for val in ('people', 'events', 'projects', 'groups')]):
+            errors = dict([(val, ErrorList([_('At least one type of Map object must be chosen!')])) for val in ('people', 'events', 'projects', 'groups')])
+            raise ValidationError(_('At least one type of Map object must be chosen!'), params=errors)
+        return ret
+    
     def get_context(self, value):
         context = super(MapBlock, self).get_context(value)
-        context['people'] = value.get('people')
-        context['events'] = value.get('events')
-        context['projects'] = value.get('projects')
-        context['groups'] = value.get('groups')
+        
+        """
+        Map settings look like this:
+        map_settings = {
+            'availableFilters': {'people': True, 'events': True, 'projects': True, 'groups': True},
+            'activeFilters': {'people': True, 'events': True, 'projects': True, 'groups': True}
+        }
+        """
+        map_switches = dict([(kind, bool(value.get(kind))) for kind in ('people', 'events', 'projects', 'groups')])
+        map_settings = {
+            'availableFilters': map_switches,
+            'activeFilters': map_switches,
+        }
+        context['map_settings'] = json.dumps(map_settings)
         return context
     
 

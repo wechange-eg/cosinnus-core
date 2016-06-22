@@ -117,6 +117,7 @@ TEMPLATES = [
                 'django.template.context_processors.csrf',
                 'django.template.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
+                'sekizai.context_processors.sekizai',
                 'postman.context_processors.inbox',
                 'cosinnus.utils.context_processors.settings',
                 'cosinnus.utils.context_processors.cosinnus',
@@ -150,6 +151,7 @@ def compile_installed_apps(internal_apps=[]):
         'django.contrib.webdesign',
         'suit',
         'django.contrib.admin',
+        'sekizai',
         
         # wagtail
         'overextends',

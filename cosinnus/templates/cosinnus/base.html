@@ -3,6 +3,7 @@
 {% load cosinnus_tags %}
 {% load djajax_tags %}
 {% load django_select2_tags %}
+{% load sekizai_tags %}
 {% load wagtailcore_tags %}
 
 <!DOCTYPE html>
@@ -82,6 +83,8 @@
         {% include 'cosinnus/extrahead.html' %}
         {% block extrahead %}{% endblock extrahead %}
         
+        {% render_block "css" %} {# sekizai use for extra scripts/styles #}
+        {% render_block "js" %} {# sekizai use for extra scripts/styles #}
     </head>
     {% comment %} 'lang=' attribute is required for OSM-Field language definition {% endcomment %}
     <body {% block body_attributes %}{% endblock body_attributes %} lang="{{ COSINNUS_CURRENT_LANGUAGE }}">

@@ -1,15 +1,7 @@
-{% load cosinnus_tags static %}
+{% load cosinnus_tags static sekizai_tags %}
+
+{% comment %} JS/CSS dependencies are in "cosinnus/cms_base.html"! {% endcomment %}
 
 <div id="map-fullscreen" class="map-root"></div>
-{% include 'cosinnus/common/init_client_module.html' with module='map' id=""|add_uuid height=400 settings=settings %}
+{% include 'cosinnus/common/init_client_module.html' with module='map' id=""|add_uuid height=400 settings=map_settings %}
 
-{% comment %} TODO: only load this once!!! {% endcomment %}
-<script src="{% static 'js/vendor/underscore-1.8.3.js' %}"></script>
-<script src="{% static 'js/vendor/backbone-1.3.3.js' %}"></script>
-<script src="{% static 'js/vendor/leaflet.js' %}"></script>
-<script src="{% static 'js/vendor/leaflet.markercluster-0.7.js' %}"></script>
-<link href="{% static 'css/vendor/leaflet.css' %}" rel="stylesheet">
-<link href="{% static 'css/vendor/leaflet.markercluster-0.7.css' %}" rel="stylesheet">
-<link href="{% static 'css/vendor/leaflet.markercluster.default-0.7.css' %}" rel="stylesheet">
-<link href="{% static 'css/vendor/spinkit-double-bounce.css' %}" rel="stylesheet">
-<script src="{% static 'js/client.js' %}"></script>
