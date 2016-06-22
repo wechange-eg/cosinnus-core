@@ -80,9 +80,8 @@ module.exports = Backbone.Model.extend({
             });
             this.trigger('change:bounds');
             this.trigger('change:controls');
-        } else {
-            this.search();
         }
+        this.search();
     },
 
     buildURL: function (padded) {
