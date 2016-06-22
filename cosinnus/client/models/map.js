@@ -19,7 +19,7 @@ module.exports = Backbone.Model.extend({
         controlsEnabled: true
     },
 
-    limitWithoutClustering: 100,
+    limitWithoutClustering: 400,
 
     searchDelay: 1000,
 
@@ -76,7 +76,8 @@ module.exports = Backbone.Model.extend({
                 north: json.ne_lat,
                 east: json.ne_lon,
                 south: json.sw_lat,
-                west: json.sw_lon
+                west: json.sw_lon,
+                limit: json.limit
             });
             this.trigger('change:bounds');
             this.trigger('change:controls');
@@ -102,7 +103,7 @@ module.exports = Backbone.Model.extend({
         };
         if (!this.get('clustering')) {
             _(searchParams).extend({
-                limit: this.limitWithoutClustering
+                limit: this.get('limit') || this.limitWithoutClustering
             });
         }
         var query = $.param(searchParams);
