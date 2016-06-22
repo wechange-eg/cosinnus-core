@@ -23,6 +23,7 @@
     "nunjucks": "^2.4.2",
     "nunjucks-loader": "^2.4.2",
     "script-loader": "^0.7.0",
+    "underscore": "^1.8.3",
     "webpack": "^1.13.0"
   }
 }
