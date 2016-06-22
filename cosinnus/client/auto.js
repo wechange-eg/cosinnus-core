@@ -22,7 +22,7 @@ module.exports = {
             pushState: settings.pushState
         });
 
-        var view = new MapView({
+        new MapView({
             el: params.el,
             model: map,
             location: settings.location

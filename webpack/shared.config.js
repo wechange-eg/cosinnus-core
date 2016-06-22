@@ -1,31 +1,31 @@
 var webpack = require('webpack');
 var path = require('path');
+var base = path.resolve('.');
 
 module.exports = {
-    entry: path.join(__dirname, 'cosinnus/client/index.js'),
+    entry: path.join(base, 'cosinnus/client/index.js'),
     output: {
-        path: path.join(__dirname, 'cosinnus/static/js/'),
+        path: path.join(base, 'cosinnus/static/js/'),
         filename: 'client.js'
     },
-    devtool: 'inline-source-map',
     module: {
         loaders: [
             {
                 test: /\.html$/,
                 loader: 'nunjucks-loader',
                 include: [
-                    path.join(__dirname, 'cosinnus/templates/cosinnus/universal')
+                    path.join(base, 'cosinnus/templates/cosinnus/universal')
                 ],
                 query: {
-                    config: path.join(__dirname, 'nunjucks.config.js')
+                    config: path.join(base, 'nunjucks.config.js')
                 }
             }
         ],
     },
     resolve: {
         root: [
-            path.join(__dirname, 'cosinnus/templates/cosinnus/universal'),
-            path.join(__dirname, 'cosinnus/client')
+            path.join(base, 'cosinnus/templates/cosinnus/universal'),
+            path.join(base, 'cosinnus/client')
         ],
         extensions: [
             '.js',
@@ -33,4 +33,4 @@ module.exports = {
             ''
         ]
     }
-};
+}

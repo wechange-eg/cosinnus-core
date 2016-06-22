@@ -8,7 +8,9 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "production": "webpack --config webpack/production.config.js",
+    "dev": "webpack --progress --watch --config webpack/development.config.js"
   },
   "repository": {
     "type": "git",
