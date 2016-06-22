@@ -43,6 +43,8 @@ module.exports = View.extend({
 
     latLngBuffer: 0.1,
 
+    maxClusterRadius: 15,
+
     default: {
         zoom: 7,
         location: [
@@ -91,7 +93,7 @@ module.exports = View.extend({
 
         // Setup the cluster layer
         this.clusteredMarkers = L.markerClusterGroup({
-            maxClusterRadius: 30
+            maxClusterRadius: this.maxClusterRadius
         });
         this.leaflet.addLayer(this.clusteredMarkers);
         this.setClusterState();
