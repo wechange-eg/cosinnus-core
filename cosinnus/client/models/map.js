@@ -66,7 +66,7 @@ module.exports = Backbone.Model.extend({
         var json = this.parseUrl(window.location.href.replace(window.location.origin, ''));
         if (_(json).keys().length) {
             this.set({
-                filters: {
+                activeFilters: {
                     people: json.people,
                     events: json.events,
                     projects: json.projects,
@@ -80,8 +80,9 @@ module.exports = Backbone.Model.extend({
             });
             this.trigger('change:bounds');
             this.trigger('change:controls');
+        } else {
+            this.search();
         }
-        this.search();
     },
 
     buildURL: function (padded) {
