@@ -110,7 +110,7 @@ module.exports = Backbone.Model.extend({
         return '/maps/search?' + query;
     },
 
-    toggleFilter (resultType) {
+    toggleFilter: function (resultType) {
         var activeFilters = this.get('activeFilters');
         activeFilters[resultType] = !activeFilters[resultType];
         this.set('activeFilters', activeFilters);
