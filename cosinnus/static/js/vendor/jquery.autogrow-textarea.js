@@ -1,7 +1,7 @@
 (function($)
 {
     /**
-     * Auto-growing textareas; technique ripped from Facebook
+     * Auto-growing textareas
      * 
      * 
      * http://github.com/jaz303/jquery-grab-bag/tree/master/javascripts/jquery.autogrow-textarea.js
@@ -12,6 +12,10 @@
         {
             var self         = this;
             var $self        = $(self);
+            if ($self.data('autogrow-inited')) {
+                // don't attach listeners twice if called multiple times
+                return; 
+            }
             var minHeight    = $self.height();
             var noFlickerPad = $self.hasClass('autogrow-short') ? 0 : parseInt($self.css('lineHeight')) || 0;
             var settings = $.extend({
@@ -79,9 +83,9 @@
                 }
             }
 
-            $self.change(update).keyup(update).keydown({event:'keydown'},update);
+            $self.change(update).keyup(update).keydown({event:'keydown'},update).data('autogrow-inited', true);
             $(window).resize(update);
-
+            
             update();
         });
     };

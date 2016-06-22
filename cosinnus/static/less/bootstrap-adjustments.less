@@ -140,6 +140,11 @@ p, .white-content {
 			text-decoration: underline;
 		}
 	}
+	
+	// no further left/right padding on nested boxes
+	p, .white-content {
+		padding: 8px 0;
+	}
 }
 p.transparent, .white-content.transparent, .transparent-p p {
 	background-color: transparent;

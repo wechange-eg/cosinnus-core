@@ -9,6 +9,37 @@
     width: 100%;
     height: auto;
 }
+/* Wagtail images responsive */
+
+.block-image img {
+	display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.richtext-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+}
+
+.richtext-image.right {
+    float: right;
+}
+
+/* Better text alignments for Wagtail */
+.rich-text *:first-child {
+	margin-top: 0;
+}
+.rich-text *:last-child {
+	margin-bottom: 0;
+}
+
+.block-paragraph {
+	margin-bottom: 15px;
+}
 
 .group-microsite-header {
     font-family: Verdana, Geneva, sans-serif;
@@ -29,7 +60,6 @@
 }
 .group-microsite-login-box {
     @media(min-width:768px) {
-        min-width: 260px;
         max-width: 420px;
         position: absolute;
         top: 30px;
@@ -42,9 +72,9 @@
         margin-bottom: 15px;
         font-size: 20px;
     }
-
-    .btn {
-        float: none;
+    
+    > .btn, > span > .btn {
+    	float: none;
         margin: 0;
     }
     span + .btn {
@@ -181,20 +211,94 @@
     background-color: #16778d;
 }
 
-
-.richtext-image {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    display: inline-block;
-}
-
-.richtext-image.right {
-    float: right;
-}
-
 .icon-align-left:before           { content: "\f036"; font-family: "FontAwesome" !important; }
 .icon-align-center:before         { content: "\f037"; font-family: "FontAwesome" !important; }
 .icon-align-right:before          { content: "\f038"; font-family: "FontAwesome" !important; }
 .icon-align-justify:before        { content: "\f039"; font-family: "FontAwesome" !important; }
 
+
+
+.v-offset-s {
+    margin-top: 10px;
+}
+.v-offset-m {
+    margin-top: 15px;
+}
+.v-offset-l {
+    margin-top: 30px;
+}
+.v-spacer-s {
+    margin-bottom: 10px;
+}
+.v-spacer-m {
+    margin-bottom: 15px;
+}
+.v-spacer-l {
+    margin-bottom: 30px;
+}
+
+.widget-footer {
+	margin-top: 60px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	position: absolute;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+	
+	p {
+		background-color: inherit;
+		color: #000000;
+	}
+}
+
+.footer-spacer {
+	height: 250px;
+}
+
+#wagtail-userbar {
+	margin-top: 55px;
+	opacity: 1 !important;
+}
+
+.popover-button {
+	cursor: pointer;
+}
+.popover {
+	color: @app-neutral-color-dark;
+
+	a {
+		color: @app-neutral-color-dark;
+		text-decoration: underline;
+	}
+}
+
+.no-margin {
+	margin: 0;
+}
+
+.no-padding {
+	padding: 0;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+  cursor: default;
+}
+
+.media-tag-warning-area {
+	background: @warning-color;
+	
+	> li {
+		color: #FFF !important;
+		white-space: normal;
+    	line-height: inherit;
+    	font-size: 1em;
+	}
+}

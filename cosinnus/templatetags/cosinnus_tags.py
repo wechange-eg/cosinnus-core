@@ -735,6 +735,11 @@ def richtext_or_stream(value):
     return value
 
 @register.filter
+def select_column_class(column_string, which_column):
+    """ Returns the ``which_column``'th item of a bootstrap-column string like '6-4-4' """
+    return column_string.split('-')[int(which_column)]
+
+@register.filter
 def debugthis(obj):
     """ Debug-inspects a template element """
     if not settings.DEBUG:

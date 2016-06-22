@@ -18,9 +18,11 @@ from django.views.generic import (CreateView, DeleteView, DetailView,
 from cosinnus.core.decorators.views import membership_required, redirect_to_403,\
     dispatch_group_access
 from cosinnus.core.registries import app_registry
-from cosinnus.forms.group import MembershipForm, CosinnusLocationForm
+from cosinnus.forms.group import MembershipForm, CosinnusLocationForm,\
+    CosinnusGroupGalleryImageForm
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
-    MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, CosinnusPortal, CosinnusLocation)
+    MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, CosinnusPortal, CosinnusLocation,
+    CosinnusGroupGalleryImage)
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.serializers.group import GroupSimpleSerializer
 from cosinnus.models.serializers.profile import UserSimpleSerializer
@@ -52,6 +54,7 @@ import six
 from django.conf import settings
 from django.core.paginator import Paginator
 from cosinnus.utils.user import filter_active_users
+from cosinnus.utils.functions import resolve_class
 
 
 class SamePortalGroupMixin(object):
@@ -68,12 +71,21 @@ class CosinnusLocationInlineFormset(InlineFormSet):
     max_num = 5
     form_class = CosinnusLocationForm
     model = CosinnusLocation
+    
+class CosinnusGroupGalleryImageInlineFormset(InlineFormSet):
+    extra = 6
+    max_num = 6
+    form_class = CosinnusGroupGalleryImageForm
+    model = CosinnusGroupGalleryImage
 
 
 class CosinnusGroupFormMixin(object):
     
     model = CosinnusGroup
-    inlines = [CosinnusLocationInlineFormset]
+    # we can define additional inline formsets in settings.COSINNUS_GROUP_ADDITIONAL_INLINE_FORMSETS
+    inlines = [CosinnusLocationInlineFormset, CosinnusGroupGalleryImageInlineFormset] \
+                + ([resolve_class(class_path) for class_path in settings.COSINNUS_GROUP_ADDITIONAL_INLINE_FORMSETS] \
+                    if getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_INLINE_FORMSETS', []) else [])
     template_name = 'cosinnus/group/group_form.html'
     
     def get_form_kwargs(self):

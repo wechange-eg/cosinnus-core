@@ -173,6 +173,9 @@ class CosinnusConf(AppConf):
     # additional fields for a possibly extended group form
     GROUP_ADDITIONAL_FORM_FIELDS = []
     
+    # additional inline formsets (as string python path to Class) for the CosinnusGroupForm
+    GROUP_ADDITIONAL_INLINE_FORMSETS = []
+    
     # this is the thumbnail size for small image previews
     IMAGE_THUMBNAIL_SIZE_SCALE = (80, 80)
     

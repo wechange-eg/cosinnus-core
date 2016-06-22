@@ -67,6 +67,15 @@
 </ol>
  {% endcomment %}
 
+
+<ol class="input-area media-tag-warning-area small" {% if form.forms.media_tag.initial.visibility != 2 %}style="display: none;"{% endif %} id="visibility-warning">
+    <li class="w100">
+        <i class="fa fa-fw fa-globe"></i>
+        {% trans "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results." %}
+        {% trans "If you do not wish this, you can change this item's visibility setting below." %}
+    </li>
+</ol><!-- input-area -->
+
 <ol class="input-area" {% if not show_all == True %}style="display: none;"{% endif %} id="visibility-selector">
     <li class="w100">
         <i class="fa fa-fw fa-globe"></i>
@@ -74,6 +83,18 @@
         {% render_field form.forms.media_tag.visibility placeholder=placeholder %}
     </li>
 </ol><!-- input-area -->
+<script type="text/javascript">
+	{# show or hide a visibility warning #}
+	$('#{{ form.forms.media_tag.visibility.auto_id }}').on('change', function(){
+		console.log($(this).val());
+		if ($(this).val() == "2") {
+			$('#visibility-warning').show();
+		} else {
+			$('#visibility-warning').hide();
+		} 
+	});
+</script>
+
 
 {% if not show_all == True %}
 <!-- Hidden field display buttons -->
