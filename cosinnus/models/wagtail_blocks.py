@@ -94,6 +94,25 @@ class LinkBlock(StructBlock):
         return context
     
 
+class MapBlock(StructBlock):
+    people = blocks.BooleanBlock(label=_('Users'), required=False)
+    events = blocks.BooleanBlock(label=_('Events'), required=False)
+    projects = blocks.BooleanBlock(label=_('Projects'), required=False)
+    groups = blocks.BooleanBlock(label=_('Groups'), required=False)
+
+    class Meta:
+        icon = 'site'
+        template = 'cosinnus/wagtail/widgets/map.html'
+
+    def get_context(self, value):
+        context = super(MapBlock, self).get_context(value)
+        context['people'] = value.get('people')
+        context['events'] = value.get('events')
+        context['projects'] = value.get('projects')
+        context['groups'] = value.get('groups')
+        return context
+    
+
 """ Default configuration of available blocks for out StreamField, because DRY """
 STREAMFIELD_BLOCKS_NOFRAMES = [
     ('paragraph', BetterRichTextBlock(icon='form')),
@@ -102,6 +121,7 @@ STREAMFIELD_BLOCKS_NOFRAMES = [
     ('media', EmbedBlock(icon="media")),
     ('html', RawHTMLBlock(icon="code")),
     ('link', LinkBlock(icon="link")),
+    ('map', MapBlock(icon="site")),
 ]
     
 
