@@ -44,7 +44,8 @@ from django.contrib.auth import get_user_model
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.user import filter_active_users
 from cosinnus.models.mixins.images import ThumbnailableImageMixin
-from cosinnus.views.mixins.media import VideoEmbedFieldMixin
+from cosinnus.views.mixins.media import VideoEmbedFieldMixin,\
+    FlickrEmbedFieldMixin
 
 logger = logging.getLogger('cosinnus')
 
@@ -563,7 +564,7 @@ class CosinnusPortal(models.Model):
         
 
 @python_2_unicode_compatible
-class CosinnusBaseGroup(VideoEmbedFieldMixin, models.Model):
+class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Model):
     TYPE_PROJECT = 0
     TYPE_SOCIETY = 1
     
@@ -619,6 +620,8 @@ class CosinnusBaseGroup(VideoEmbedFieldMixin, models.Model):
     # always contains the '@username' @ symbol!
     twitter_username = models.CharField(_('Microsite Twitter Timeline Username'), max_length=100, blank=True, null=True, validators=[MaxLengthValidator(100)])
     twitter_widget_id = models.CharField(_('Microsite Twitter Timeline Custom Widget ID'), max_length=100, blank=True, null=True)
+    # Flickr gallery field, requires a flickr URL to a gallery
+    flickr_url = models.URLField(_('Flickr Gallery URL'), max_length=200, blank=True, null=True, validators=[MaxLengthValidator(200)])
     
     # a comma-seperated list of all cosinnus apps that should not be shown in the frontend, 
     # be editable, or be indexed by search indices for this group

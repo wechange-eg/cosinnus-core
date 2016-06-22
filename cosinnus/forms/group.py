@@ -81,7 +81,7 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, forms.ModelForm):
     class Meta:
         fields = ['name', 'public', 'description', 'description_long', 'contact_info', 
                         'avatar', 'wallpaper', 'website', 'video', 'twitter_username',
-                         'twitter_widget_id', 'deactivated_apps'] \
+                         'twitter_widget_id', 'flickr_url', 'deactivated_apps'] \
                         + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) \
                         + (['facebook_group_id', 'facebook_page_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else [])
 
@@ -132,6 +132,14 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, forms.ModelForm):
             if match and _is_number(match.group(1)):
                 return match.group(1)
             raise forms.ValidationError(_('This doesn\'t seem to be a valid widget ID or embed HTML code from Twitter!'))
+        return data
+    
+    def clean_flickr_url(self):
+        data = self.cleaned_data['flickr_url']
+        if data:
+            parsed_flickr = self.instance.get_flickr_properties(flickr=data)
+            if not parsed_flickr or 'error' in parsed_flickr:
+                raise forms.ValidationError(_('This doesn\'t seem to be a valid Flickr Gallery link! It should be in the form of "https://www.flickr.com/photos/username/sets/1234567890"!'))
         return data
     
     def save(self, commit=True):

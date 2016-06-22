@@ -295,6 +295,23 @@
 			        {% endif %}
 			        </p>
 			        
+			        		{% comment %}  
+			        <div class="row">
+			        	<div class="col-xs-12">
+			        			https://www.flickr.com/photos/moopus/sets/72157601996566901
+			        			flashvars="offsite=true&amp;lang=de-de&amp;page_show_url=photos%2Fmoopus%2Fsets%2F72157601996566901%2Fshow%2F&amp;page_show_back_url=photos%2Fmoopus%2Fsets%2F72157601996566901%2Fshow%2F&amp;set_id=72157601996566901&amp"
+		        			<embed type="application/x-shockwave-flash" src="http://www.flickr.com/apps/slideshow/show.swf?v=124984" 
+		        				allowfullscreen="true" 
+		        				flashvars="offsite=true&amp;lang=de-de&amp;page_show_url=photos%2F{{ flickruser }}%2Fsets%2F{{ setid }}%2Fshow%2F&amp;page_show_back_url=photos%2F{{ flickruser }}%2Fsets%2F{{ setid }}%2Fshow%2F&amp;set_id={{ setid }};" 
+		        				height="250px" width="100%">
+		        		</div>
+		        		{# flashvars="offsite=true&amp;lang=de-de&amp;page_show_url=%2Fphotos%2Fmitosthh%2Fsets%2F72157627537987744%2Fshow%2Fwith%2F6088857705%2F&amp;page_show_back_url=%2Fphotos%2Fmitosthh%2Fsets%2F72157627537987744%2Fwith%2F6088857705%2F&amp;set_id=72157627537987744&amp;jump_to=6088857705" #}
+			        	<div class="col-xs-3">
+							smal
+			        	</div>
+			        </div>
+			        		{% endcomment %}
+			        
 			        {% with gallery_images=group.gallery_images.all  %}
 			        	{% if group.video or gallery_images %} {# todo: check for video #}
 					        <div class="row" style="padding: 0 15px;">
@@ -469,6 +486,24 @@
 			        </div><!-- btn -->
 			        <div class="white-content no-padding">
 			        	{% include 'cosinnus/common/embed_twitter_field.html' with twitter_widget_id=group.twitter_widget_id %}
+					</div>
+				{% endif %}
+				
+				
+				{% if group.flickr_url %}
+					{# Flickr custom feed box #}
+					<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+			            <ul class="media-list">
+			                <li class="media">
+			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+			                    <div class="media-body">
+			                        {% trans "Flickr Gallery" %}
+			                    </div>
+			                </li>
+			            </ul>
+			        </div><!-- btn -->
+			        <div class="white-content no-padding">
+			        	{% include 'cosinnus/common/embed_flickr_field.html' with data=group.get_flickr_properties %}
 					</div>
 				{% endif %}
 				

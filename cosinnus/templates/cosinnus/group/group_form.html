@@ -499,6 +499,23 @@
 	                                </li>
 	                            </ul>
 	                        </div>
+	                        
+	                        <label>{% trans "Embed Flickr Gallery" %}</label>
+	                        {{ form.forms.obj.flickr_url.errors }}
+	                        <div type="button" class="btn btn-default w100 regular-space">
+	                            <ul class="media-list">
+	                                <li class="media">
+	                                    <a class="pull-left" href="#">
+	                                        <i class="fa fa-play"></i>
+	                                    </a>
+	                                    <div class="media-body media-body-form-control">
+	                                        {% captureas placeholder %}{% trans 'Flickr Gallery URL (example: "https://www.flickr.com/photos/username/sets/1234567890")' %}{% endcaptureas %}
+	                                        {% render_field form.forms.obj.flickr_url class+="form-control" placeholder=placeholder %}
+	                                    </div>
+	                                </li>
+	                            </ul>
+	                        </div>
+	                        
 	                    	
 	                    {% endblock group_form_microsite_tab %}
 	                    
