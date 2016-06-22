@@ -118,7 +118,7 @@ module.exports = Backbone.Model.extend({
     },
 
     resetFilters: function () {
-        this.set('activeFilters', _(this.availableFilters).clone());
+        this.set('activeFilters', _(this.get('availableFilters')).clone());
         this.attemptSearch();
     },
 
