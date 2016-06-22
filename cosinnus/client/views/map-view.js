@@ -3,24 +3,28 @@
 var View = require('views/base/view');
 var MapControlsView = require('views/map-controls-view');
 var popupTemplate = require('map/popup');
+var template = require('map/map');
+var util = require('lib/util');
 
 module.exports = View.extend({
     layers: {
         street: {
-            url: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png',
+            url: (util.protocol() === 'http:' ?
+                'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png' :
+                'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'),
             options: {
-                attribution: 'Open Streetmap'
+                attribution: 'CartoDB | Open Streetmap'
             }
         },
         satellite: {
-            url: 'http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
+            url: util.protocol() + '//{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
             options: {
                 attribution: 'Google Maps',
                 subdomains:['mt0','mt1','mt2','mt3']
             }
         },
         terrain: {
-            url: 'http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}',
+            url: util.protocol() + '//{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}',
             options: {
                 attribution: 'Google Maps',
                 subdomains:['mt0','mt1','mt2','mt3']
@@ -35,50 +39,67 @@ module.exports = View.extend({
         groups: 'blue'
     },
 
-    initialize: function () {
-        this.controlsView = new MapControlsView({
-            el: $('#map-controls'),
-            model: this.model
+    clusterZoomThreshold: 5,
+
+    latLngBuffer: 0.1,
+
+    default: {
+        zoom: 7,
+        location: [
+            52.5233,
+            13.4138
+        ]
+    },
+
+    initialize: function (options) {
+        var self = this;
+        self.template = template;
+        self.options = $.extend(true, {}, self.default, options);
+        self.model.on('change:results', self.updateMarkers, self);
+        self.model.on('change:bounds', self.fitBounds, self);
+        Backbone.mediator.subscribe('resize:window', function () {
+            self.leaflet.invalidateSize();
+            self.handleViewportChange();
         });
-        this.controlsView.on('change:layer', this.handleSwitchLayer, this);
-        this.model.on('change:results', this.updateMarkers, this);
-        this.model.on('change:bounds', this.fitBounds, this);
         View.prototype.initialize.call(this);
     },
 
-    render: function () {
+    afterRender: function () {
         var self = this;
 
-        self.setStartPos(function () {
-            self.renderMap();
-            self.model.initialSearch();
-        });
-    },
-
-    setStartPos: function (cb) {
-        var self = this;
-
-        if (Backbone.mediator.settings.mapStartPos) {
-            self.mapStartPos = Backbone.mediator.settings.mapStartPos;
-            cb();
-        } else {
-            $.get('http://ip-api.com/json', function (res) {
-                self.mapStartPos = [res.lat, res.lon];
-                cb();
-            }).fail(function() {
-                self.mapStartPos = [0, 0];
-                cb();
-            });
+        if (self.model.get('controlsEnabled')) {
+            self.controlsView = new MapControlsView({
+                el: self.$el.find('.map-controls'),
+                model: self.model,
+                options: self.options
+            }).render();
+            self.controlsView.on('change:layer', self.handleSwitchLayer, self);
         }
+
+        self.renderMap();
+        self.model.initialSearch();
     },
+
+    // Private
+    // -------
 
     renderMap: function () {
-        this.leaflet = L.map('map-fullscreen-surface').setView(this.mapStartPos, 13);
-
+        this.markers = [];
+        this.leaflet = L.map(this.options.el.replace('#', ''))
+            .setView(this.options.location, this.options.zoom);
         this.setLayer(this.model.get('layer'));
+
+        // Setup the cluster layer
+        this.clusteredMarkers = L.markerClusterGroup({
+            maxClusterRadius: 30
+        });
+        this.leaflet.addLayer(this.clusteredMarkers);
+        this.setClusterState();
 
         this.leaflet.on('zoomend', this.handleViewportChange, this);
         this.leaflet.on('dragend', this.handleViewportChange, this);
+        this.leaflet.on('popupopen', this.handlePopup, this);
+        this.leaflet.on('popupclose', this.handlePopup, this);
         this.updateBounds();
     },
 
@@ -93,56 +114,102 @@ module.exports = View.extend({
     },
 
     updateBounds: function () {
-        var bounds = this.leaflet.getBounds();
+        var bounds = this.leaflet.getBounds()
+        var paddedBounds = bounds.pad(this.latLngBuffer);
         this.model.set({
             south: bounds.getSouth(),
+            paddedSouth: paddedBounds.getSouth(),
             west: bounds.getWest(),
+            paddedWest: paddedBounds.getWest(),
             north: bounds.getNorth(),
-            east: bounds.getEast()
+            paddedNorth: paddedBounds.getNorth(),
+            east: bounds.getEast(),
+            paddedEast: paddedBounds.getEast()
         });
+    },
+
+    addMarker: function (result, resultType) {
+        var marker = L.marker([result.lat, result.lon], {
+            icon: L.icon({
+                iconUrl: '/static/js/vendor/images/marker-icon-2x-' +
+                    this.resultColours[resultType] + '.png',
+                iconSize: [17, 28],
+                iconAnchor: [8, 28],
+                popupAnchor: [1, -27],
+                shadowSize: [28, 28]
+            })
+        }).bindPopup(popupTemplate.render({
+            imageURL: result.imageUrl,
+            title: result.title,
+            url: result.url,
+            address: result.address
+        }));
+
+        if (this.markerNotPopup(marker)) {
+            if (this.state.clustering) {
+                this.clusteredMarkers.addLayer(marker);
+            } else {
+                marker.addTo(this.leaflet);
+            }
+            this.markers.push(marker);
+        }
+    },
+
+    setClusterState: function () {
+        // Set clustering state: cluster only when zoomed in enough.
+        var zoom = this.leaflet.getZoom();
+        this.state.clustering = zoom > this.clusterZoomThreshold;
+    },
+
+    markerNotPopup: function (marker) {
+        var p = this.state.popup;
+        return !p || !_(p.getLatLng()).isEqual(marker.getLatLng());
+    },
+
+    removeMarker: function (marker) {
+        if (this.state.clustering) {
+            this.clusteredMarkers.removeLayer(marker);
+        } else {
+            this.leaflet.removeLayer(marker);
+        }
     },
 
     // Event Handlers
     // --------------
 
+    // Render the search results as markers on the map.
     updateMarkers: function () {
         var self = this,
-            controls = this.controlsView.model,
             results = self.model.get('results');
 
-        // Remove previous markers from map.
+        // Remove previous markers from map based on current clustering state.
         if (self.markers) {
-            self.leaflet.removeLayer(self.markers);
+            _(self.markers).each(function (marker) {
+                if (self.markerNotPopup(marker)) {
+                    self.removeMarker(marker);
+                }
+            });
         }
-        self.markers = L.markerClusterGroup({
-            maxClusterRadius: 30
-        });
 
-        _(this.model.activeFilters()).each(function (resultType) {
+        self.setClusterState();
+        self.markers = [];
+        if (self.state.popup) {
+            self.markers.push(self.state.popup._source);
+        }
+
+        // Add the individual markers.
+        _(this.model.activeFilterList()).each(function (resultType) {
             _(results[resultType]).each(function (result) {
-                self.markers.addLayer(L
-                    .marker([result.lat, result.lon], {
-                        icon: L.icon({
-                            iconUrl: '/static/js/vendor/images/marker-icon-2x-' +
-                                self.resultColours[resultType] + '.png',
-                            iconSize: [17, 28],
-                            iconAnchor: [8, 28],
-                            popupAnchor: [1, -27],
-                            shadowSize: [28, 28]
-                        })
-                    })
-                    .bindPopup(popupTemplate.render({
-                        imageURL: result.imageUrl,
-                        title: result.title,
-                        url: result.url,
-                        address: result.address
-                    })));
+                self.addMarker(result, resultType);
             });
         });
-        self.leaflet.addLayer(this.markers);
     },
 
     handleViewportChange: function () {
+        var zoom = this.leaflet.getZoom();
+        this.model.set({
+            clustering: zoom > self.clusterZoomThreshold
+        });
         this.updateBounds();
         this.model.attemptSearch();
     },
@@ -158,5 +225,19 @@ module.exports = View.extend({
             L.latLng(this.model.get('south'), this.model.get('west')),
             L.latLng(this.model.get('north'), this.model.get('east'))
         ));
+    },
+
+    handlePopup: function (event) {
+        if (event.type === 'popupopen') {
+            this.state.popup = event.popup;
+        } else {
+            var popLatLng = this.state.popup.getLatLng();
+            var marker = event.popup._source;
+            // Remove the popup's marker if it's now off screen.
+            if (!this.leaflet.getBounds().pad(this.latLngBuffer).contains(popLatLng)) {
+                this.removeMarker(marker);
+            }
+            this.state.popup = null;
+        }
     }
 });

@@ -1,10 +1,33 @@
-#map-fullscreen-surface {
+#map-fullscreen {
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
 
+    .leaflet-top {
+        .leaflet-control {
+            top: 65px;
+        }
+    }
+
+    .leaflet-bottom {
+        position: static;
+
+        .leaflet-control-attribution {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+    }
+
+    .map-controls {
+        position: fixed;
+        top: 80px;
+    }
+}
+
+.map-root {
     .popup {
         width: 180px;
 
@@ -20,21 +43,21 @@
         }
     }
 
-    // Leaflet overrides
-    // -----------------
-
-    .leaflet-top {
-        .leaflet-control {
-            top: 65px;
+    .leaflet-bottom {
+        .leaflet-control-attribution {
+            a {
+                color: #333;
+            }
         }
     }
-
 }
 
-#map-controls {
-    position: fixed;
+.map-controls {
+    position: absolute;
     right: 20px;
-    top: 80px;
+    top: 20px;
+    z-index: 1;
+    width: 190px;
     background-color: rgba(255,255,255,0.95);
     padding: 15px;
 
@@ -74,7 +97,7 @@
             position: relative;
             margin-top: 10px;
 
-            .icon-loading {
+            .hidden {
                 display: none;
             }
         }

@@ -17,12 +17,13 @@
 
 {% block main_page %}
     <div class="row">
-        <div id="map-fullscreen">
-            <div id="map-fullscreen-surface"></div>
-        </div>
-        <aside id="map-controls">
-            {% include 'cosinnus/universal/map/map-controls.html' %}
-        </aside>
+        <div id="map-fullscreen" class="map-root"></div>
+
+        {% comment %}
+            {% include 'cosinnus/common/init_client_module.html' with module='map' id=1 height=400 settings=settings %}
+            {% include 'cosinnus/common/init_client_module.html' with module='map' id=2 height=800 settings=settings %}
+        {% endcomment %}
     </div>
+
     <script src="{% static 'js/client.js' %}"></script>
 {% endblock main_page %}

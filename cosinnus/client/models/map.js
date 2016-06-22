@@ -2,38 +2,63 @@
 
 module.exports = Backbone.Model.extend({
     default: {
-        filters: {
+        availableFilters: {
             people: true,
             events: true,
             projects: true,
             groups: true
         },
-        layer: 'street'
+        activeFilters: {
+            people: true,
+            events: true,
+            projects: true,
+            groups: true
+        },
+        layer: 'street',
+        pushState: true,
+        controlsEnabled: true
     },
 
-    initialize: function () {
-        this.set('filters', _(this.default.filters).clone());
-        this.set('layer', this.default.layer);
-        this.searchDelay = 1000,
-        this.whileSearchingDelay = 5000;
+    limitWithoutClustering: 100,
+
+    searchDelay: 1000,
+
+    whileSearchingDelay: 5000,
+
+    initialize: function (attributes, options) {
+        var self = this;
+        var attrs = $.extend(true, {}, self.default, options);
+        self.set(attrs);
+        Backbone.mediator.subscribe('navigate:map', function () {
+            self.initialSearch();
+        });
+        Backbone.Model.prototype.initialize.call(this);
     },
 
     search: function () {
         var self = this;
-        var url = this.buildURL();
-        self.trigger('start:search');
+        var url = self.buildURL(true);
         self.set('searching', true);
         $.get(url, function (res) {
-            self.set('results', res);
-            self.trigger('change:results');
-            self.trigger('end:search');
             self.set('searching', false);
-            // Save the search state in the url.
-            Backbone.mediator.publish('navigate:router', url.replace('/maps/search', '/map/'))
+            self.trigger('end:search');
+            // (The search endpoint is single-thread).
             // If there is a queued search, requeue it.
             if (self.get('wantsToSearch')) {
                 self.attemptSearch();
+            // Update the results if there isn't a queued search.
+            } else {
+                self.set('results', res);
+                self.trigger('change:results');
+                // Save the search state in the url.
+                if (self.get('pushState')) {
+                    Backbone.mediator.publish('navigate:router', self.buildURL(false).replace('/maps/search', '/map/'))
+                }
             }
+        }).fail(function () {
+            self.set('searching', false);
+            self.trigger('end:search');
+            self.trigger('error:search');
         });
     },
 
@@ -41,7 +66,7 @@ module.exports = Backbone.Model.extend({
         var json = this.parseUrl(window.location.href.replace(window.location.origin, ''));
         if (_(json).keys().length) {
             this.set({
-                filters: {
+                activeFilters: {
                     people: json.people,
                     events: json.events,
                     projects: json.projects,
@@ -54,35 +79,46 @@ module.exports = Backbone.Model.extend({
                 west: json.sw_lon
             });
             this.trigger('change:bounds');
+            this.trigger('change:controls');
+        } else {
+            this.search();
         }
-        this.search();
     },
 
-    buildURL: function () {
+    buildURL: function (padded) {
+        var north = padded ? this.get('paddedNorth') : this.get('north');
+        var east = padded ? this.get('paddedEast') : this.get('east');
+        var south = padded ? this.get('paddedSouth') : this.get('south');
+        var west = padded ? this.get('paddedWest') : this.get('west');
         var searchParams = {
             q: this.get('q'),
-            ne_lat: this.get('north'),
-            ne_lon: this.get('east'),
-            sw_lat: this.get('south'),
-            sw_lon: this.get('west'),
-            people: this.get('filters').people,
-            events: this.get('filters').events,
-            projects: this.get('filters').projects,
-            groups: this.get('filters').groups
+            ne_lat: north,
+            ne_lon: east,
+            sw_lat: south,
+            sw_lon: west,
+            people: this.get('activeFilters').people,
+            events: this.get('activeFilters').events,
+            projects: this.get('activeFilters').projects,
+            groups: this.get('activeFilters').groups
         };
+        if (!this.get('clustering')) {
+            _(searchParams).extend({
+                limit: this.limitWithoutClustering
+            });
+        }
         var query = $.param(searchParams);
         return '/maps/search?' + query;
     },
 
     toggleFilter (resultType) {
-        var filters = this.get('filters');
-        filters[resultType] = !filters[resultType];
-        this.set('filters', filters);
+        var activeFilters = this.get('activeFilters');
+        activeFilters[resultType] = !activeFilters[resultType];
+        this.set('activeFilters', activeFilters);
         this.attemptSearch();
     },
 
     resetFilters: function () {
-        this.set('filters', _(this.default.filters).clone());
+        this.set('activeFilters', _(this.availableFilters).clone());
         this.attemptSearch();
     },
 
@@ -95,6 +131,7 @@ module.exports = Backbone.Model.extend({
                 self.whileSearchingDelay : self.searchDelay;
         clearTimeout(this.searchTimeout);
         self.set('wantsToSearch', true);
+        self.trigger('want:search');
         self.searchTimeout = setTimeout(function () {
             self.search();
             self.set('wantsToSearch', false);
@@ -117,8 +154,8 @@ module.exports = Backbone.Model.extend({
         return json;
     },
 
-    activeFilters: function () {
-        return _(_(this.get('filters')).keys()).select(function (filter) {
+    activeFilterList: function () {
+        return _(_(this.get('activeFilters')).keys()).select(function (filter) {
             return !!filter;
         });
     }

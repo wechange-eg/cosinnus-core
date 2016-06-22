@@ -51,7 +51,7 @@ USER_MODEL = get_user_model()
 class MapView(ListView):
 
     model = USER_MODEL
-    
+
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_superuser:
             return HttpResponse('Must be logged in as admin')
@@ -59,15 +59,24 @@ class MapView(ListView):
 
 
     def get_context_data(self, **kwargs):
-        # Instantiate controls state.
-        return {
-            'filters': {
+        # Instantiate map state
+        settings = {
+            'availableFilters': {
+                 'people': True,
+                 'events': True,
+                 'projects': True,
+                 'groups': True
+            },
+            'activeFilters': {
                 'people': True,
                 'events': True,
                 'projects': True,
                 'groups': True
-            },
-            'layer': 'street'
+            }
+        }
+
+        return {
+            'settings': json.dumps(settings)
         }
 
     template_name = 'cosinnus/map/map-page.html'
@@ -86,10 +95,10 @@ def _better_json_loads(s):
             return s
         else:
             raise
-        
+
 
 def _collect_parameters(param_dict, parameter_list):
-    """ For a GET/POST dict, collects all attributes listes as keys in ``parameter_list``. 
+    """ For a GET/POST dict, collects all attributes listes as keys in ``parameter_list``.
         If not present in the GET/POST dict, the value of the key in ``parameter_list`` will be used. """
     results = {}
     for key, value in parameter_list.items():
@@ -102,12 +111,12 @@ def _collect_parameters(param_dict, parameter_list):
 
 def _get_user_base_queryset(request):
     all_users = filter_active_users(get_user_model().objects.filter(id__in=CosinnusPortal.get_current().members))
-    
+
     if request.user.is_authenticated():
         visibility_level = BaseTagObject.VISIBILITY_GROUP
     else:
         visibility_level = BaseTagObject.VISIBILITY_ALL
-    
+
     # only show users with the visibility level
     qs = all_users.filter(cosinnus_profile__media_tag__visibility__gte=visibility_level)
     return qs
@@ -118,14 +127,14 @@ def _get_societies_base_queryset(request):
     if not (settings.COSINNUS_SHOW_PRIVATE_GROUPS_FOR_ANONYMOUS_USERS or request.user.is_authenticated()):
         qs = qs.filter(public=True)
     return qs
-    
+
 def _get_projects_base_queryset(request):
     """ FIXME: Circumventing group caching here so we can get a QS """
     qs = CosinnusProject.objects.all_in_portal()
     if not (settings.COSINNUS_SHOW_PRIVATE_GROUPS_FOR_ANONYMOUS_USERS or request.user.is_authenticated()):
         qs = qs.filter(public=True)
     return qs
-    
+
 def _get_events_base_queryset(request, show_past_events=False):
     try:
         from cosinnus_event.models import Event, upcoming_event_filter
@@ -142,7 +151,7 @@ def _get_events_base_queryset(request, show_past_events=False):
 
 class MapResult(dict):
     """ A single result for the search of the map, enforcing required fields """
-    
+
     def __init__(self, lat, lon, address, title, url=None, imageUrl=None, description=None, *args, **kwargs):
         self['lat'] = lat
         self['lon'] = lon
@@ -155,56 +164,56 @@ class MapResult(dict):
 
 class UserMapResult(MapResult):
     """ Takes a ``get_user_model()`` object and funnels its properties into a proper MapResult """
-    
+
     def __init__(self, user, *args, **kwargs):
         return super(UserMapResult, self).__init__(
-            user.cosinnus_profile.media_tag.location_lat, 
+            user.cosinnus_profile.media_tag.location_lat,
             user.cosinnus_profile.media_tag.location_lon,
-            user.cosinnus_profile.media_tag.location, 
-            user.get_full_name(), 
+            user.cosinnus_profile.media_tag.location,
+            user.get_full_name(),
             user.cosinnus_profile.get_absolute_url(),
             user.cosinnus_profile.get_map_marker_image_url(),
             user.cosinnus_profile.description,
         )
-        
+
 class GroupMapResult(MapResult):
-    """ Takes a ``get_user_model()`` object and funnels its properties into a proper MapResult 
-        
+    """ Takes a ``get_user_model()`` object and funnels its properties into a proper MapResult
+
         Note: Only returns 1 Map Result for each group, even if the group has multiple Locations set.
               Returns the first location set on the group.
     """
-    
+
     def __init__(self, group, *args, **kwargs):
         # only return one resu
         loc = group.locations.all()[0]
         return super(GroupMapResult, self).__init__(
-            loc.location_lat, 
+            loc.location_lat,
             loc.location_lon,
-            loc.location, 
-            group['name'], 
+            loc.location,
+            group['name'],
             group.get_absolute_url(),
             group.get_map_marker_image_url() or static('images/group-avatar-placeholder.png'),
             group['description_long'] or group['description'],
         )
-        
+
 class EventMapResult(MapResult):
     """ Takes a ``get_user_model()`` object and funnels its properties into a proper MapResult """
-    
+
     def __init__(self, event, *args, **kwargs):
         return super(EventMapResult, self).__init__(
-            event.media_tag.location_lat, 
+            event.media_tag.location_lat,
             event.media_tag.location_lon,
-            event.media_tag.location, 
-            event.title, 
+            event.media_tag.location,
+            event.title,
             event.get_absolute_url(),
             (event.attached_image and event.attached_image.static_image_url) or static('images/event-image-placeholder.png'),
             event.note,
         )
-    
+
 
 class MapSearchResults(dict):
     """ The return of a map search, containing lists of ``MapResult``, enforcing required sets of results """
-    
+
     def __init__(self, people=[], events=[], projects=[], groups=[], *args, **kwargs):
         self['people'] = people
         self['events'] = events
@@ -239,10 +248,10 @@ def _filter_qs_location_bounds(qs, params, location_object_prefix='media_tag__')
     qs = qs.exclude(**{location_object_prefix + 'location_lat': None})
     qs = qs.filter(**filter_kwargs)
     return qs
-    
-    
+
+
 def _filter_qs_text(qs, text, attributes=['title',]):
-    """ Filters a Queryset for a text string. 
+    """ Filters a Queryset for a text string.
         The text string will be whitespace-tokenized and QS will be filtered for __icontains,
         ANDed by-token, and ORed by object attribute, so that each token must appear in at least on of the attributes
         @return: the filtered Queryset """
@@ -254,15 +263,15 @@ def _filter_qs_text(qs, text, attributes=['title',]):
         and_tokens.append(reduce(OR, or_attrs))
     qs = qs.filter(reduce(AND, and_tokens))
     return qs
-    
-    
+
+
 def map_search_endpoint(request):
-    """ Maps API search endpoints. For parameters see ``MAP_PARAMETERS`` 
+    """ Maps API search endpoints. For parameters see ``MAP_PARAMETERS``
         returns JSON with the contents of type ``MapSearchResults``"""
-    
+
     params = _collect_parameters(request.GET, MAP_PARAMETERS)
     query = params['q']
-    
+
     # return equal count parts of the data limit for each dataset
     datasets = [setname for setname in ['people', 'projects', 'groups', 'events'] if params[setname]]
     limit_per_set = 100000
@@ -273,7 +282,7 @@ def map_search_endpoint(request):
         limit_per_set = int(float(limit) / float(len(datasets))) if limit != 0 else limit_per_set
         if limit > 0 and limit_per_set < 1:
             limit_per_set = 1
-    
+
     results = {}
     if params['people']:
         people = []
@@ -294,7 +303,7 @@ def map_search_endpoint(request):
         for project in projects_qs[:limit_per_set]:
             projects.append(GroupMapResult(project))
         results['projects'] = projects
-        
+
     if params['groups']:
         groups = []
         groups_qs = _get_societies_base_queryset(request)
@@ -304,7 +313,7 @@ def map_search_endpoint(request):
         for group in groups_qs[:limit_per_set]:
             groups.append(GroupMapResult(group))
         results['groups'] = groups
-        
+
     if params['events']:
         events = []
         events_qs = _get_events_base_queryset(request)
@@ -315,10 +324,6 @@ def map_search_endpoint(request):
         for event in events_qs[:limit_per_set]:
             events.append(EventMapResult(event))
         results['events'] = events
-        
+
     data = MapSearchResults(**results)
     return JsonResponse(data)
-
-    
-
-

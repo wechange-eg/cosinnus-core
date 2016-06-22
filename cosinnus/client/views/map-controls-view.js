@@ -1,13 +1,16 @@
 'use strict';
 
 var View = require('views/base/view');
+var ErrorView = require('views/error-view');
 var template = require('map/map-controls');
 
 module.exports = View.extend({
     initialize: function () {
         this.template = template;
-        this.model.on('start:search', this.handleStartSearch, this);
+        this.model.on('want:search', this.handleStartSearch, this);
         this.model.on('end:search', this.handleEndSearch, this);
+        this.model.on('change:controls', this.render, this);
+        this.model.on('error:search', this.handleXhrError, this);
         View.prototype.initialize.call(this);
     },
 
@@ -52,7 +55,7 @@ module.exports = View.extend({
 
     handleTyping: function (event) {
         var query = $(event.currentTarget).val();
-        if (query.length > 2) {
+        if (query.length > 2 || query.length === 0) {
             this.model.set({
                 q: query
             });
@@ -61,14 +64,23 @@ module.exports = View.extend({
     },
 
     handleStartSearch: function (event) {
-        this.$el.find('.icon-search').hide();
-        this.$el.find('.icon-loading').show();
+        this.$el.find('.icon-search').addClass('hidden');
+        this.$el.find('.icon-loading').removeClass('hidden');
     },
 
     handleEndSearch: function (event) {
         if (!this.state.typing) {
-            this.$el.find('.icon-search').show();
+            this.$el.find('.icon-search').removeClass('hidden');
         }
-        this.$el.find('.icon-loading').hide();
+        this.$el.find('.icon-loading').addClass('hidden');
+    },
+
+    handleXhrError: function (event) {
+        console.log('#handleXhrError');
+        var $message = this.$el.find('form .message');
+        var errorView = new ErrorView({
+            message: 'Ein Fehler ist bei der Suche aufgetreten.',
+            el: $message
+        }).render();
     }
 });
