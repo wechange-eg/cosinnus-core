@@ -76,11 +76,11 @@ class FlickrEmbedFieldMixin(object):
         try:
             match = re.search(r'^(http(s)?://)?(www\.)?(flickr\.com/)?photos/([a-zA-Z0-9-_]+)/sets/(\d+)', flickr)
             if match:
-                print ">> groups", match.groups()
-                return {
-                    'flickruser': match.group(4),
-                    'flickrsetid': match.group(4),
+                data = {
+                    'flickruser': match.group(5),
+                    'flickrsetid': match.group(6),
                 }
+                return data
             return {'error': flickr}
         except:
             """ Pokemon exception handling """
