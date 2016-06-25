@@ -1,8 +1,5 @@
-{% load cosinnus_tags static sekizai_tags %}
-
+{% load cosinnus_tags %}
 {% comment %} JS/CSS dependencies are in "cosinnus/cms_base.html"! {% endcomment %}
 
-{% with map_id=""|add_uuid %}
-	<div class="map-root"></div>
-	{% include 'cosinnus/common/init_client_module.html' with module='map' id=map_id height=400 settings=map_settings %}
-{% endwith %}
+<div class="map-root"></div>
+{% include 'cosinnus/common/init_client_module.html' with module='map' id=""|add_uuid height=400 settings=map_settings %}

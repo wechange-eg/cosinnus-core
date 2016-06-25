@@ -52,12 +52,6 @@ class MapView(ListView):
 
     model = USER_MODEL
 
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_superuser:
-            return HttpResponse('Must be logged in as admin')
-        return super(MapView, self).dispatch(request, *args, **kwargs)
-
-
     def get_context_data(self, **kwargs):
         # Instantiate map state
         settings = {
