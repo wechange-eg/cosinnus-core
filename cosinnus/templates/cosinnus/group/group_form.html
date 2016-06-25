@@ -1,5 +1,5 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n static cosinnus_tags widget_tweaks %}
+{% load i18n static cosinnus_tags widget_tweaks thumbnail %}
 
 {% block page_title %}
 	{% if object %}
@@ -162,7 +162,7 @@
 					        
 					            <!-- explanation text -->
 					            <div class="col-md-4">
-					                <p class="transparent">{% trans "A picture for better recognition." %}</p>
+					                <p class="transparent">{% trans "A picture for better recognition." %} {% trans "File Size" %}: {% trans "max. 10 MB" %}</p>
 					            </div>
 					        </div><!-- row -->
 							
@@ -343,7 +343,7 @@
 						
 						{% block group_form_microsite_tab %}
 							<label>
-		                    	{% trans "Microsite Wallpaper" %} (1140px x 240px)
+		                    	{% trans "Microsite Wallpaper" %} (1140px x 240px, {% trans "max. 10 MB" %})
 		                    </label>
 							{{ form.forms.obj.wallpaper.errors }}
 							<div class="row">
@@ -415,20 +415,28 @@
 										            	
 										            	<div class="media">
 															<a class="pull-left">
-											 					<i class="fa fa-image"></i>
+																{% if inlineform.image.value %}
+																	<img class="image" src="{% thumbnail inlineform.image.value 40x40 crop=1 upscale=1 %}"></img>
+																{% else %}
+												 					<i class="fa fa-image"></i>
+																{% endif %}
 															</a>
 															<div style="padding: 0px 10px; display: inline-block;">
 												                {% captureas placeholder %}{% trans "Choose and upload a gallery image" %}{% endcaptureas %}
 												                {{ inlineform.image.errors }}
 												                {% render_field inlineform.image class+="form-control" placeholder=placeholder %}
+												                
+																<div>
+																	<i>{% trans "File Size" %}: {% trans "max. 10 MB" %}</i>
+																	&nbsp;&nbsp;&nbsp;&nbsp;
+																	
+																	<label for="{{ inlineform.DELETE.id_for_label }}">{% trans "Delete" %}:</label>
+																	{{ inlineform.DELETE }}
+																</div>
 												            </div>
 												        </div>
 														{{ inlineform.group }}
 														{{ inlineform.id }}
-														<div>
-															<label for="{{ inlineform.DELETE.id_for_label }}">{% trans "Delete" %}:</label>
-															{{ inlineform.DELETE }}
-														</div>
 														{% if forloop.counter >= gallery_image_formset.management_form.initial.INITIAL_FORMS and forloop.counter < gallery_image_formset.management_form.initial.MAX_NUM_FORMS %}
 															<div id="gallery-images-more-{{ forloop.counter0 }}">
 																<button class="btn btn-emphasized pull-right" onclick="$('#gallery-images-more-{{ forloop.counter0 }}').hide(); $('#gallery-images-wrapper-{{ forloop.counter }}').show(); return false;">+ {% trans "more" %}...</button>

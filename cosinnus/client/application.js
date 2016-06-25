@@ -3,7 +3,8 @@
 // Main application class
 
 var Router = require('router');
-var Mediator = require('mediator');
+var mediator = require('mediator');
+var auto = require('auto');
 
 module.exports = function Application () {
     self = this;
@@ -16,14 +17,23 @@ module.exports = function Application () {
         Backbone.history.start({
             pushState: true
         });
+        // A global resize event
+        $(window).on('resize', function () {
+            Backbone.mediator.publish('resize:window');
+        });
+        // Autoinitialize inline views and models.
+        auto.initialize();
+
     };
 
     self.initMediator = function () {
-        self.mediator = Backbone.mediator = new Mediator();
+        self.mediator = Backbone.mediator = mediator;
         self.mediator.settings = window.settings || {};
         self.mediator.subscribe('navigate:router', function (event, url) {
             if (url) {
-                self.router.navigate(url);
+                self.router.navigate(url, {
+                    trigger: false
+                });
             }
         });
     };

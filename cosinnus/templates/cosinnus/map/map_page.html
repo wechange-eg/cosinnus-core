@@ -1,0 +1,21 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n thumbnail cosinnus_tags %}
+
+{% block page_title %}{% trans "Map" %}{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+	{% include 'cosinnus/map/static_dependencies.html' %}
+{% endblock extrahead %}
+
+{% block main_page %}
+    <div class="row">
+        <div id="map-fullscreen" class="map-root"></div>
+
+        {% comment %}
+            {% include 'cosinnus/common/init_client_module.html' with module='map' id=1 height=400 settings=settings %}
+            {% include 'cosinnus/common/init_client_module.html' with module='map' id=2 height=800 settings=settings %}
+        {% endcomment %}
+    </div>
+
+{% endblock main_page %}

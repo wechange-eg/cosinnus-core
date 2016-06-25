@@ -36,6 +36,7 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.template.defaultfilters import linebreaksbr, urlizetrunc
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from wagtail.wagtailcore.templatetags.wagtailcore_tags import richtext
+from uuid import uuid1
 logger = logging.getLogger('cosinnus')
 
 register = template.Library()
@@ -738,6 +739,11 @@ def richtext_or_stream(value):
 def select_column_class(column_string, which_column):
     """ Returns the ``which_column``'th item of a bootstrap-column string like '6-4-4' """
     return column_string.split('-')[int(which_column)]
+
+@register.filter
+def add_uuid(value):
+    """ Returns a the given value with an appended uuid. """
+    return '%s%d' % (value, uuid1())
 
 @register.filter
 def debugthis(obj):
