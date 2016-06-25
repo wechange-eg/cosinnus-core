@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-15 16:59+0200\n"
+"POT-Creation-Date: 2016-06-25 20:45+0200\n"
 "PO-Revision-Date: 2016-04-28 18:13+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -149,19 +149,19 @@ msgstr ""
 msgid "You were tagged in a post, document or other item"
 msgstr ""
 
-#: .\default_settings.py:213
+#: .\default_settings.py:215
 msgid "Deutsch"
 msgstr "Deutsch"
 
-#: .\default_settings.py:214
+#: .\default_settings.py:216
 msgid "English"
 msgstr "English"
 
-#: .\default_settings.py:215
+#: .\default_settings.py:217
 msgid "Russian"
 msgstr "Русский"
 
-#: .\default_settings.py:216
+#: .\default_settings.py:218
 msgid "Ukrainian"
 msgstr "Українська"
 
@@ -792,57 +792,97 @@ msgstr ""
 msgid "Path"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:65
+#: .\models\wagtail_blocks.py:68
 #, fuzzy
 #| msgid "Convert selected Projects to Groups"
 msgid "Create-Project or Group Button"
 msgstr "Convert selected Projects to Groups"
 
-#: .\models\wagtail_blocks.py:110 .\models\wagtail_blocks.py:132
+#: .\models\wagtail_blocks.py:101
+#: .\templates\cosinnus\group\group_members_map.html:4
+#: .\templates\cosinnus\user\portal_admin_list.html:4
+#: .\templates\cosinnus\user\user_list.html:4
+#: .\templates\cosinnus\user\user_list_map.html:4
+msgid "Users"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:102
+#: .\templates\cosinnus\group\group_microsite.html:254
+#: .\templates\cosinnus\search.html:134
+#: .\templates\cosinnus\universal\map\map-controls.html:24
+msgid "Events"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:103 .\templates\cosinnus\group\group_list.html:4
+#: .\templates\cosinnus\group\group_list_map.html:4
+#: .\templates\cosinnus\group\group_microsite.html:223
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:29
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:45
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:50
+#: .\templates\cosinnus\universal\map\map-controls.html:37
+#: .\templates\cosinnus\wagtail\widgets\random_projects.html:2
+#: .\utils\dashboard.py:292
+msgid "Projects"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:104 .\templates\cosinnus\group\group_list.html:4
+#: .\templates\cosinnus\group\group_list_map.html:4
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:7
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:23
+#: .\templates\cosinnus\navbar_buttons_group_menus.html:49
+#: .\templates\cosinnus\universal\map\map-controls.html:50
+msgid "Groups"
+msgstr "Groups"
+
+#: .\models\wagtail_blocks.py:113 .\models\wagtail_blocks.py:114
+msgid "At least one type of Map object must be chosen!"
+msgstr ""
+
+#: .\models\wagtail_blocks.py:150 .\models\wagtail_blocks.py:172
 msgid "Proportions"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:111
+#: .\models\wagtail_blocks.py:151
 msgid "1/2 + 1/2"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:112
+#: .\models\wagtail_blocks.py:152
 msgid "2/3 + 1/3"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:113
+#: .\models\wagtail_blocks.py:153
 msgid "1/3 + 2/3"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:133
+#: .\models\wagtail_blocks.py:173
 msgid "1/3 + 1/3 + 1/3"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:134
+#: .\models\wagtail_blocks.py:174
 msgid "1/2 + 1/4 + 1/4"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:135
+#: .\models\wagtail_blocks.py:175
 msgid "1/4 + 1/2 + 1/4"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:136
+#: .\models\wagtail_blocks.py:176
 msgid "1/4 + 1/4 + 1/2"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:186
+#: .\models\wagtail_blocks.py:226
 msgid "Medium News Widget"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:187
+#: .\models\wagtail_blocks.py:227
 msgid "Large News Widget"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:204
+#: .\models\wagtail_blocks.py:244
 msgid "4 Random Projects Widget"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:205
+#: .\models\wagtail_blocks.py:245
 msgid "8 Random Projects Widget"
 msgstr ""
 
@@ -1120,7 +1160,7 @@ msgstr ""
 #: .\templates\admin\cms\page\menu_item.html:44
 #: .\templates\cosinnus\group\group_form.html:144
 #: .\templates\cosinnus\group\group_form.html:229
-#: .\templates\cosinnus\group\group_form.html:419
+#: .\templates\cosinnus\group\group_form.html:423
 #: .\templates\cosinnus\leftnav_button_editable_folder.html:51
 #: .\templates\cosinnus\user\userprofile_form.html:162
 #: .\templates\cosinnus\widgets\base_widget.html:39 .\views\group.py:221
@@ -1325,7 +1365,7 @@ msgid "Rearrange"
 msgstr ""
 
 #: .\templates\cosinnus\dashboard.html:51
-#: .\templates\cosinnus\group\group_form.html:460
+#: .\templates\cosinnus\group\group_form.html:468
 #: .\templates\cosinnus\leftnav_button_editable_folder.html:39
 #: .\templates\cosinnus\user\userprofile_form.html:228
 #: .\templates\cosinnus\widgets\add_widget.html:20 .\views\group.py:447
@@ -1483,7 +1523,7 @@ msgstr ""
 
 #: .\templates\cosinnus\dashboard.html:262
 #: .\templates\cosinnus\group\group_form.html:234
-#: .\templates\cosinnus\group\group_form.html:424
+#: .\templates\cosinnus\group\group_form.html:432
 #: .\templates\endless\show_more.html:5
 msgid "more"
 msgstr ""
@@ -1703,7 +1743,7 @@ msgstr ""
 
 #: .\templates\cosinnus\group\group_detail.html:297
 #: .\templates\cosinnus\user\portal_admin_list.html:111
-#: .\templates\cosinnus\user\user_list.html:101
+#: .\templates\cosinnus\user\user_list.html:82
 #, python-format
 msgid "And %(hidden_count)s private users..."
 msgstr ""
@@ -1780,6 +1820,19 @@ msgstr ""
 
 #: .\templates\cosinnus\group\group_form.html:155
 msgid "A picture for better recognition."
+msgstr ""
+
+#: .\templates\cosinnus\group\group_form.html:155
+#: .\templates\cosinnus\group\group_form.html:420
+#: .\templates\cosinnus\user\userprofile_form.html:173
+msgid "File Size"
+msgstr ""
+
+#: .\templates\cosinnus\group\group_form.html:155
+#: .\templates\cosinnus\group\group_form.html:336
+#: .\templates\cosinnus\group\group_form.html:420
+#: .\templates\cosinnus\user\userprofile_form.html:173
+msgid "max. 10 MB"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_form.html:163
@@ -1874,37 +1927,16 @@ msgstr ""
 msgid "Microsite Gallery Images"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:411
+#: .\templates\cosinnus\group\group_form.html:415
 msgid "Choose and upload a gallery image"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_list.html:4
-#: .\templates\cosinnus\group\group_list_map.html:4
-#: .\templates\cosinnus\navbar_buttons_group_menus.html:7
-#: .\templates\cosinnus\navbar_buttons_group_menus.html:23
-#: .\templates\cosinnus\navbar_buttons_group_menus.html:49
-#: .\templates\cosinnus\universal\map\map-controls.html:43
-msgid "Groups"
-msgstr "Groups"
-
-#: .\templates\cosinnus\group\group_list.html:4
-#: .\templates\cosinnus\group\group_list_map.html:4
-#: .\templates\cosinnus\group\group_microsite.html:223
-#: .\templates\cosinnus\navbar_buttons_group_menus.html:29
-#: .\templates\cosinnus\navbar_buttons_group_menus.html:45
-#: .\templates\cosinnus\navbar_buttons_group_menus.html:50
-#: .\templates\cosinnus\universal\map\map-controls.html:32
-#: .\templates\cosinnus\wagtail\widgets\random_projects.html:2
-#: .\utils\dashboard.py:292
-msgid "Projects"
-msgstr ""
-
-#: .\templates\cosinnus\group\group_list.html:32
+#: .\templates\cosinnus\group\group_list.html:31
 msgid "Related to"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_list.html:34
-#: .\templates\cosinnus\user\user_list.html:27
+#: .\templates\cosinnus\group\group_list.html:33
+#: .\templates\cosinnus\user\user_list.html:26
 msgid "Overview"
 msgstr ""
 
@@ -1959,17 +1991,11 @@ msgstr ""
 #: .\templates\cosinnus\group\group_list_map.html:18
 #: .\templates\cosinnus\group\group_members_map.html:4
 #: .\templates\cosinnus\group\group_members_map.html:15
-#: .\templates\cosinnus\map\map-page.html:4
+#: .\templates\cosinnus\map\map_page.html:4
+#: .\templates\cosinnus\navbar_buttons.html:14
 #: .\templates\cosinnus\user\user_list_map.html:4
 #: .\templates\cosinnus\user\user_list_map.html:14
 msgid "Map"
-msgstr ""
-
-#: .\templates\cosinnus\group\group_members_map.html:4
-#: .\templates\cosinnus\user\portal_admin_list.html:4
-#: .\templates\cosinnus\user\user_list.html:4
-#: .\templates\cosinnus\user\user_list_map.html:4
-msgid "Users"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_microsite.html:58
@@ -2047,12 +2073,6 @@ msgstr "Select Group"
 
 #: .\templates\cosinnus\group\group_microsite.html:249
 msgid "News posts"
-msgstr ""
-
-#: .\templates\cosinnus\group\group_microsite.html:254
-#: .\templates\cosinnus\search.html:134
-#: .\templates\cosinnus\universal\map\map-controls.html:21
-msgid "Events"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_microsite.html:275
@@ -2628,7 +2648,7 @@ msgid "Forum"
 msgstr ""
 
 #: .\templates\cosinnus\navbar_buttons.html:13
-#: .\templates\cosinnus\universal\map\map-controls.html:10
+#: .\templates\cosinnus\universal\map\map-controls.html:11
 msgid "People"
 msgstr ""
 
@@ -2943,7 +2963,7 @@ msgid "Delete profile"
 msgstr ""
 
 #: .\templates\cosinnus\user\portal_admin_list.html:13
-#: .\templates\cosinnus\user\user_list.html:26
+#: .\templates\cosinnus\user\user_list.html:25
 #: .\templates\cosinnus\user\user_list_map.html:13
 msgid "User overview"
 msgstr ""
@@ -3305,7 +3325,7 @@ msgid "Next"
 msgstr ""
 
 #: .\templates\cosinnus\wagtail\dashboard_base.html:34
-#: .\templates\cosinnus\wagtail\stream_start_page.html:46
+#: .\templates\cosinnus\wagtail\stream_start_page.html:55
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Join now and collaborate"
 
@@ -3432,7 +3452,7 @@ msgstr ""
 msgid "Progress:"
 msgstr ""
 
-#: .\templates\cosinnus\wagtail\widgets\random_projects.html:12
+#: .\templates\cosinnus\wagtail\widgets\random_projects.html:18
 #, fuzzy
 #| msgid "Other Projects"
 msgid "Show more Projects"
@@ -3540,11 +3560,11 @@ msgstr ""
 msgid "Nutzungsbedingungen"
 msgstr ""
 
-#: .\templatetags\cosinnus_tags.py:143
+#: .\templatetags\cosinnus_tags.py:144
 msgid "(Deleted User)"
 msgstr ""
 
-#: .\templatetags\cosinnus_tags.py:318 .\templatetags\cosinnus_tags.py:344
+#: .\templatetags\cosinnus_tags.py:319 .\templatetags\cosinnus_tags.py:345
 #, python-format
 msgid "<i>Renderer for %(model_name)s not found!</i>"
 msgstr ""
