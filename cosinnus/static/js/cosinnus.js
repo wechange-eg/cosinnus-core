@@ -1196,6 +1196,10 @@
             });
 
             $( window ).on('resize orientationchange ready dashboardchange', function() {
+                if ($('textarea:focus, input:focus').length > 0) {
+                    return;
+                }
+                
                 // Dashboard-Höhe blockieren
                 $('#dashboard').css('min-height', $('#dashboard').height());
 

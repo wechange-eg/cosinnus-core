@@ -20,6 +20,8 @@ $('.js-todo-link').on('click', function(e) {
                 holder = $(this);
                 that.initWidget(holder);
             });
+            this.refreshUI();
+            
             var add_widget = $('[data-type=widget-add]', this.holder);
             $('[data-target=widget-add-button]', add_widget).bind("click", {
                 holder: $(add_widget)
@@ -31,7 +33,7 @@ $('.js-todo-link').on('click', function(e) {
         },
         initWidget: function(widget_node) {
             this.bind_menu(widget_node);
-            this.load(widget_node);
+            this.load(widget_node, 0, true);
         },
         add: function(holder, args) {
             var that = this;
@@ -196,10 +198,11 @@ $('.js-todo-link').on('click', function(e) {
             holder.next().fadeIn("slow");
             holder.remove();
         },
-        load: function(holder, offset) {
+        load: function(holder, offset, delayRefresh) {
             var that = this;
             var id = holder.attr('data-widget-id');
             offset = parseInt(offset || 0);
+            delayRefresh = (typeof delayRefresh === "undefined") ? false : delayRefresh;
             
             if (typeof id !== "undefined") {
                 $.ajax("/" + "widget/" + id + "/" + offset + "/").done(function(data, textStatus, jqXHR) {
@@ -232,10 +235,11 @@ $('.js-todo-link').on('click', function(e) {
                     holder.attr("data-app-name", data['X-Cosinnus-Widget-App-Name']);
                     holder.attr("data-widget-name", data['X-Cosinnus-Widget-Widget-Name']);
                     
-                    $.cosinnus.renderMomentDataDate();
-                    $.cosinnus.autogrow();
-                    $( window ).trigger( 'dashboardchange' );
-    
+                    if (delayRefresh) {
+                        Cosinnus.dashboard.delayedRefreshUI(); 
+                    } else {
+                        Cosinnus.dashboard.refreshUI();
+                    }
                 }).fail(function(jqXHR, textStatus, errorThrown) {
                     var error = $('<div class="alert alert-danger">An error occurred while loading the widget. </div>');
                     var reload = $('<a href="#" class="alert-link">Reload</a>').bind("click", {
@@ -260,6 +264,16 @@ $('.js-todo-link').on('click', function(e) {
                 submit_callback(holder, submit_data);
             });
             $('[data-target=widget-content]', holder).html(content);
+        },
+        refreshUI: function() {
+            $.cosinnus.renderMomentDataDate();
+            $.cosinnus.autogrow();
+            $( window ).trigger( 'dashboardchange' );
+        },
+        _delayedRefreshTimer: 0,
+        delayedRefreshUI: function(){
+            clearTimeout(this._delayedRefreshTimer);
+            this._delayedRefreshTimer = setTimeout(Cosinnus.dashboard.refreshUI, 250);
         },
     };
 }(jQuery, window.Cosinnus));
