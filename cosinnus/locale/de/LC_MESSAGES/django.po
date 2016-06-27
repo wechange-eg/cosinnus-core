@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-25 20:57+0200\n"
-"PO-Revision-Date: 2016-06-25 21:02+0200\n"
+"POT-Creation-Date: 2016-06-27 14:36+0200\n"
+"PO-Revision-Date: 2016-06-27 14:46+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -1471,7 +1471,7 @@ msgid "Rearrange"
 msgstr "Umordnen"
 
 #: .\templates\cosinnus\dashboard.html:51
-#: .\templates\cosinnus\group\group_form.html:552
+#: .\templates\cosinnus\group\group_form.html:562
 #: .\templates\cosinnus\leftnav_button_editable_folder.html:39
 #: .\templates\cosinnus\user\userprofile_form.html:228
 #: .\templates\cosinnus\widgets\add_widget.html:20 .\views\group.py:447
@@ -2112,6 +2112,16 @@ msgid ""
 msgstr ""
 "Flickr Gallerie URL (Beispiel: \"https://www.flickr.com/photos/username/"
 "sets/1234567890\")"
+
+#: .\templates\cosinnus\group\group_form.html:540
+msgid "Facebook integration is available after you created the group!"
+msgstr ""
+"Die Facebook-Integration wird verfügbar sobald du die Gruppe erstellt hast!"
+
+#: .\templates\cosinnus\group\group_form.html:542
+msgid "Facebook integration is available after you created the project!"
+msgstr ""
+"Die Facebook-Integration wird verfügbar sobald du das Projekt erstellt hast!"
 
 #: .\templates\cosinnus\group\group_list.html:31
 msgid "Related to"

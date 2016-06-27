@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-25 20:57+0200\n"
+"POT-Creation-Date: 2016-06-27 14:36+0200\n"
 "PO-Revision-Date: 2015-11-11 10:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1498,7 +1498,7 @@ msgid "Rearrange"
 msgstr ""
 
 #: .\templates\cosinnus\dashboard.html:51
-#: .\templates\cosinnus\group\group_form.html:552
+#: .\templates\cosinnus\group\group_form.html:562
 #: .\templates\cosinnus\leftnav_button_editable_folder.html:39
 #: .\templates\cosinnus\user\userprofile_form.html:228
 #: .\templates\cosinnus\widgets\add_widget.html:20 .\views\group.py:447
@@ -2134,6 +2134,14 @@ msgstr ""
 msgid ""
 "Flickr Gallery URL (example: \"https://www.flickr.com/photos/username/"
 "sets/1234567890\")"
+msgstr ""
+
+#: .\templates\cosinnus\group\group_form.html:540
+msgid "Facebook integration is available after you created the group!"
+msgstr ""
+
+#: .\templates\cosinnus\group\group_form.html:542
+msgid "Facebook integration is available after you created the project!"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_list.html:31
