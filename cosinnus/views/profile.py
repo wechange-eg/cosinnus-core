@@ -25,6 +25,7 @@ from django.views.generic.edit import DeleteView
 from cosinnus.core.decorators.views import redirect_to_not_logged_in
 from cosinnus.utils.urls import safe_redirect
 from cosinnus.templatetags.cosinnus_tags import cosinnus_setting
+from uuid import uuid1
 
 
 def delete_userprofile(user):
@@ -50,11 +51,17 @@ def delete_userprofile(user):
         profile.avatar.delete(False)
     profile.delete()
     
-    # set user to inactive and anonymize all data
+    # set user to inactive and anonymize all data. retain a padded version of his email
     user.first_name = "deleted"
     user.last_name = "user"
     user.username = user.id
-    user.email = user.id
+    
+    # retain email with prefix, cut prefix so field length doesn't break constraints
+    scrambled_email_prefix = '__deleted_user__%s' % str(uuid1())[:8]
+    scramble_cutoff = user._meta.get_field('email').max_length - len(scrambled_email_prefix) - 2
+    scrambled_email_prefix = scrambled_email_prefix[:scramble_cutoff]
+    user.email = '%s__%s' % (scrambled_email_prefix, user.email)
+    
     user.is_active = False
     user.save()
 
