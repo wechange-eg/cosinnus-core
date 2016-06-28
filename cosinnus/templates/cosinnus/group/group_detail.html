@@ -5,12 +5,6 @@
   {% blocktrans with team_name=object.name %}{{ team_name }} - Members{% endblocktrans %}
 {% endblock %}
 
-{% block extrahead %}
-    {{ block.super }}
-    <link href="{% static 'css/vendor/leaflet.css' %}" rel="stylesheet">
-    <script src="{% static 'js/vendor/leaflet.js' %}"></script>
-{% endblock extrahead %}
-
 {% block og_meta_attributes %}
 	{% include 'cosinnus/group/group_og_meta_attributes.html' with group=group %}
 {% endblock og_meta_attributes %}
@@ -27,32 +21,6 @@
 
 
 {% block content %}
-
-    <!-- a box with semi transparent background -->
-    <div class="content-box">
-        
-        <div id="map"></div>
-        <script type="application/javascript">
-            var mapData = [
-                {% for user in members %}
-	                {% with mt=user.cosinnus_profile.media_tag %}
-	                    {% if mt and mt.location and mt.location_lat and mt.location_lon %}
-	                        {
-	                        	lat: {{ mt.location_lat|stringformat:"f" }}, 
-	                        	lon: {{ mt.location_lon|stringformat:"f" }}, 
-	                        	title: '<img src="{{ user.cosinnus_profile.get_map_marker_image_url }}" width="40px" class="pull-left"><div style="margin-left: 50px; min-height: 40px;"><a href="{% url 'cosinnus:profile-detail' username=user.username %}">{{ user|full_name }}</a><br/><span>{% block user_map_popup_details %}{{ mt.location }}{% endblock %}</span></div>',
-	                        	{% if user.cosinnus_profile.get_map_marker_image_url %}
-	                         		avatar: "{{ user.cosinnus_profile.get_map_marker_image_url }}",
-	                         	{% endif %}
-                        	},
-	                    {% endif %}
-	                {% endwith %}
-		        {% endfor %}
-            ];
-        </script>
-        {% include 'cosinnus/common/map_expand_button.html' %}
-        <div class="clearfix"></div>
-    </div>
 
     <!-- a box with semi transparent background -->
     <div class="content-box">
