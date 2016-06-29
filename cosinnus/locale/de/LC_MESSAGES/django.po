@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-27 14:36+0200\n"
-"PO-Revision-Date: 2016-06-27 14:46+0200\n"
+"PO-Revision-Date: 2016-06-29 15:48+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -1547,7 +1547,7 @@ msgstr ""
 
 #: .\templates\cosinnus\dashboard.html:131
 msgid "Access it from the top menu or"
-msgstr "Schau sie dir an über den Link im Menü oben oder"
+msgstr "Schaut sie euch an über den Link im Menü oben oder"
 
 #: .\templates\cosinnus\dashboard.html:131
 msgid "get started here..."
