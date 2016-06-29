@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-27 14:36+0200\n"
-"PO-Revision-Date: 2016-06-29 15:48+0200\n"
+"PO-Revision-Date: 2016-06-29 17:11+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -1329,8 +1329,7 @@ msgstr "Beitreten"
 #: .\templates\cosinnus\group\leftnav_group.html:48
 #, python-format
 msgid "Do you really want to withdraw your join request to „%(title)s“?"
-msgstr ""
-"Möchten sie ihre Beitrittsanfrage für das Projekt “%(title)s” zurückziehen?"
+msgstr "Möchten sie ihre Beitrittsanfrage für “%(title)s” zurückziehen?"
 
 #: .\templates\cosinnus\_microsite__old_.html:103
 #: .\templates\cosinnus\dashboard.html:211
@@ -1792,7 +1791,7 @@ msgstr "Annehmen"
 #: .\templates\cosinnus\group\group_detail.html:166
 #, python-format
 msgid "Do you really want to accept user „%(name)s“ as a member?"
-msgstr "Möchten sie „%(name)s“ in das Projekt aufnehmen?"
+msgstr "Möchten sie „%(name)s“ als Mitglied aufnehmen?"
 
 #: .\templates\cosinnus\group\group_detail.html:167
 msgid "Accept Member"
@@ -1865,7 +1864,7 @@ msgstr "Mitglied befördern"
 #: .\templates\cosinnus\group\group_detail.html:280
 #, python-format
 msgid "Do you really want to remove member „%(name)s“ from the team?"
-msgstr "Möchten sie wirklich „%(name)s“ aus dem Projekt entfernen?"
+msgstr "Möchten sie wirklich Mitglied „%(name)s“ entfernen?"
 
 #: .\templates\cosinnus\group\group_detail.html:281
 msgid "Remove Member"
