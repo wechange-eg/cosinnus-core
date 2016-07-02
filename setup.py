@@ -68,7 +68,6 @@ setup(
         'django-extra-views==0.6.3',
         'django-filer==0.9.12',
         'django-filter==0.11.0',
-        'django-geoposition==0.1.5',
         'django-haystack==2.3.1',
         'django-model-utils==1.5.0',
         'django-recaptcha==1.0.2',
