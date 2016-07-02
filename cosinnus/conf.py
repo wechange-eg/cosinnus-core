@@ -26,19 +26,32 @@ class CosinnusConf(AppConf):
             'cosinnus_file.FileEntry',
             'cosinnus_event.Event',
             'cosinnus_todo.TodoEntry',
-            'cosinnus_etherpad.Etherpad'
+            'cosinnus_etherpad.Etherpad',
+            'cosinnus_etherpad.Ethercalc',
+            'cosinnus_poll.Poll',
         ],
         'cosinnus_event.Event': [
             'cosinnus_file.FileEntry',
             'cosinnus_todo.TodoEntry',
-            'cosinnus_etherpad.Etherpad'
+            'cosinnus_etherpad.Etherpad',
+            'cosinnus_etherpad.Ethercalc',
+            'cosinnus_poll.Poll',
         ],
         'cosinnus_todo.TodoEntry': [
             'cosinnus_file.FileEntry',
             'cosinnus_event.Event',
             'cosinnus_note.Note',
-            'cosinnus_etherpad.Etherpad'
+            'cosinnus_etherpad.Etherpad',
+            'cosinnus_etherpad.Ethercalc',
+            'cosinnus_poll.Poll',
         ],
+        'cosinnus_poll.Poll': [
+            'cosinnus_file.FileEntry',
+            'cosinnus_todo.TodoEntry',
+            'cosinnus_etherpad.Etherpad',
+            'cosinnus_etherpad.Ethercalc',
+            'cosinnus_poll.Poll',
+        ]
     }
     
     # Configures by which search terms each Attachable Model can be match-restricted in the select 2 box
@@ -58,6 +71,14 @@ class CosinnusConf(AppConf):
             'etherpad',
             'diskussion'
         ],
+        'cosinnus_event.Poll': [
+            'umfrage',
+            'poll',
+            'meinung',
+            'diskussion',
+            'discussion',
+            'opinion',
+        ],
         'cosinnus_todo.TodoEntry': [
             'todo',
             'aufgabe',
@@ -73,6 +94,7 @@ class CosinnusConf(AppConf):
     APPS_MENU_ORDER = [
         'cosinnus_note',
         'cosinnus_event',
+        'cosinnus_poll',
         'cosinnus_todo',
         'cosinnus_etherpad',
         'cosinnus_file',

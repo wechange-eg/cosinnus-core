@@ -272,6 +272,7 @@ class GroupObjectCountMixin(object):
         'cosinnus_file': 'cosinnus_file.models.FileEntry',
         'cosinnus_etherpad': 'cosinnus_etherpad.models.Etherpad',
         'cosinnus_note': 'cosinnus_note.models.Note',
+        'cosinnus_poll': 'cosinnus_poll.models.Poll',
     }
     
     def get_context_data(self, **kwargs):

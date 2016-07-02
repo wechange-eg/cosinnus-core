@@ -184,6 +184,7 @@ def compile_installed_apps(internal_apps=[]):
         'cosinnus_message',
         'cosinnus_note',
         'cosinnus_notifications',
+        'cosinnus_poll',
         'cosinnus_stream',
         'cosinnus_todo',
         
