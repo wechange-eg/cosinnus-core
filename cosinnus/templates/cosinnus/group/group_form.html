@@ -220,7 +220,7 @@
 										{% for inlineform in locations_formset %}
 											{# if inlineform.data // pre-existing? #}
 											{# locations_formset.management_form.initial.MIN_NUM_FORMS': 0, u'MAX_NUM_FORMS': 5, u'TOTAL_FORMS': 5, u'INITIAL_FORMS': 0 #}
-											<div id="locations-wrapper-{{ forloop.counter0 }}" {% if not forloop.counter == 1 and not forloop.counter <= locations_formset.management_form.initial.INITIAL_FORMS %}style="display: none;"{% endif %}>
+											<div id="locations-wrapper-{{ forloop.counter0 }}" {% if not forloop.counter == 1 and not forloop.counter <= locations_formset.management_form.INITIAL_FORMS.value %}style="display: none;"{% endif %}>
 											
 												<div type="button" class="btn btn-default w100 ">
 												    <ul class="media-list">
@@ -239,7 +239,7 @@
 																	<label for="{{ inlineform.DELETE.id_for_label }}">{% trans "Delete" %}:</label>
 																	{{ inlineform.DELETE }}
 																</div>
-																{% if forloop.counter >= locations_formset.management_form.initial.INITIAL_FORMS and forloop.counter < locations_formset.management_form.initial.MAX_NUM_FORMS %}
+																{% if forloop.counter >= locations_formset.management_form.INITIAL_FORMS.value and forloop.counter < locations_formset.management_form.MAX_NUM_FORMS.value %}
 																	<div id="locations-more-{{ forloop.counter0 }}">
 																		<button class="btn btn-emphasized pull-right" onclick="$('#locations-more-{{ forloop.counter0 }}').hide(); $('#locations-wrapper-{{ forloop.counter }}').show(); return false;">+ {% trans "more" %}...</button>
 																	</div>
@@ -403,7 +403,7 @@
 						    {% with gallery_image_formset=inlines.1 %}
 								{{ gallery_image_formset.management_form }}
 								{% for inlineform in gallery_image_formset %}
-									<div id="gallery-images-wrapper-{{ forloop.counter0 }}" {% if not forloop.counter == 1 and not forloop.counter <= gallery_image_formset.management_form.initial.INITIAL_FORMS %}style="display: none;"{% endif %}>
+									<div id="gallery-images-wrapper-{{ forloop.counter0 }}" {% if not forloop.counter == 1 and not forloop.counter <= gallery_image_formset.management_form.INITIAL_FORMS.value %}style="display: none;"{% endif %}>
 									
 										<div type="button" class="btn btn-default w100 ">
 										    <ul class="media-list">
@@ -437,7 +437,7 @@
 												        </div>
 														{{ inlineform.group }}
 														{{ inlineform.id }}
-														{% if forloop.counter >= gallery_image_formset.management_form.initial.INITIAL_FORMS and forloop.counter < gallery_image_formset.management_form.initial.MAX_NUM_FORMS %}
+														{% if forloop.counter >= gallery_image_formset.management_form.INITIAL_FORMS.value and forloop.counter < gallery_image_formset.management_form.MAX_NUM_FORMS.value %}
 															<div id="gallery-images-more-{{ forloop.counter0 }}">
 																<button class="btn btn-emphasized pull-right" onclick="$('#gallery-images-more-{{ forloop.counter0 }}').hide(); $('#gallery-images-wrapper-{{ forloop.counter }}').show(); return false;">+ {% trans "more" %}...</button>
 															</div>
