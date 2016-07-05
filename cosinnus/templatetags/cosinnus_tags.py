@@ -746,6 +746,14 @@ def add_uuid(value):
     return '%s%d' % (value, uuid1())
 
 @register.filter
+def dict_lookup(dictionary, key):
+    """ Returns the value for a given key from a given dictionary.
+        If not found, returns '' """
+    if not isinstance(dictionary, dict):
+        return ''
+    return dictionary.get(key, '')
+
+@register.filter
 def debugthis(obj):
     """ Debug-inspects a template element """
     if not settings.DEBUG:
