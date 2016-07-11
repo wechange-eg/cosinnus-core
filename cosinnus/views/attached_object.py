@@ -19,7 +19,9 @@ from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 
 def build_attachment_field_result(obj_type, obj):
     """ Builds a result that can be fed into a django select2 field """
-    pill_html = render_to_string('cosinnus/attached/attached_object_select_pill.html', {'type':obj_type,'text':escape(obj.title)})
+    # we're looking for the template 'attached_object_select_pill.html' in the cosinnus app's template folder
+    pill_template = '%s/attached_object_select_pill.html' % obj_type.split('.')[0]
+    pill_html = render_to_string(pill_template, {'type':obj_type,'text':escape(obj.title)})
     ret =(obj_type+":"+str(obj.id), pill_html,) 
     return ret
         
