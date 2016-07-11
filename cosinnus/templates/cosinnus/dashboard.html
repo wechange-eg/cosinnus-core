@@ -147,6 +147,15 @@
                 <div class="multiline-ellipsis-main">
                     {% if user.pk in group.members or user in group.admins or not user.is_authenticated %}
                     	
+                    	{% if "poll" in object_counts %}
+                            <div class="dashboard-header-link app-poll">
+                                <a href="{% group_url 'cosinnus:poll:list' group=group %}">
+                                    <i class="fa fa-bar-chart"></i>
+                                    <span>{{ object_counts.poll }}</span>
+                                    {% if object_counts.poll == 1 %}{% trans "Poll" %}{% else %}{% trans "Polls" %}{% endif %}
+                                </a>
+                            </div>
+                        {% endif %}
                         {% if "file" in object_counts %}
                             <div class="dashboard-header-link app-files">
                                 <a href="{% group_url 'cosinnus:file:list' group=group %}">
