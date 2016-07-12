@@ -31,6 +31,7 @@ module.exports = function Application () {
         self.mediator.settings = window.settings || {};
         self.mediator.subscribe('navigate:router', function (event, url) {
             if (url) {
+                console.log('navigating url ap1' + url)
                 self.router.navigate(url, {
                     trigger: false
                 });
