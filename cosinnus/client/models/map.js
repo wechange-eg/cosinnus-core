@@ -53,7 +53,7 @@ module.exports = Backbone.Model.extend({
                 self.trigger('change:results');
                 // Save the search state in the url.
                 if (self.get('pushState')) {
-                    Backbone.mediator.publish('navigate:router', self.buildURL(false).replace('/maps/search', '/map/'))
+                    Backbone.mediator.publish('navigate:router', self.buildURL(false).replace('/maps/search/', '/map/'))
                 }
             }
         }).fail(function () {
@@ -108,7 +108,7 @@ module.exports = Backbone.Model.extend({
             });
         }
         var query = $.param(searchParams);
-        return '/maps/search?' + query;
+        return '/maps/search/?' + query;
     },
 
     toggleFilter: function (resultType) {
