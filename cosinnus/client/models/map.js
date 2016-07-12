@@ -39,7 +39,6 @@ module.exports = Backbone.Model.extend({
         var self = this;
         var url = self.buildURL(true);
         self.set('searching', true);
-        console.log('getting url map1' + url)
         $.get(url, function (res) {
             self.set('searching', false);
             self.trigger('end:search');
