@@ -41,7 +41,7 @@ $('.js-todo-link').on('click', function(e) {
             var app = args.app;
             var widget = args.widget;
             var data = args.data;
-            var url = Cosinnus.base_url;
+            var url = "/";
             if (Cosinnus.dashboard.group === false) {
                 url = url + "widgets/add/user/";
             } else {
@@ -75,7 +75,7 @@ $('.js-todo-link').on('click', function(e) {
         },
         add_empty: function(holder) {
             var that = this;
-            var url = Cosinnus.base_url;
+            var url = "/";
             if (Cosinnus.dashboard.group === false) {
                 url = url + "widgets/add/user/";
             } else {
@@ -131,7 +131,7 @@ $('.js-todo-link').on('click', function(e) {
         delete: function(holder) {
             var that = this;
             var id = holder.attr('data-widget-id');
-            $.post(Cosinnus.base_url + "widget/" + id + "/delete/", function(data) {
+            $.post("/" + "widget/" + id + "/delete/", function(data) {
                 holder.fadeOut("slow", function() {
                     holder.remove();
                 });
@@ -155,7 +155,7 @@ $('.js-todo-link').on('click', function(e) {
                 args['type'] = "POST";
             }
             // either POSTing or GETing here, what we do after depends on that
-            $.ajax(Cosinnus.base_url + "widget/" + id + "/edit/" + extra_url, args).done(function(data, textStatus, jqXHR) {
+            $.ajax("/" + "widget/" + id + "/edit/" + extra_url, args).done(function(data, textStatus, jqXHR) {
                 
                 if (args['type'] == "POST") {
                     // if (jqXHR.getResponseHeader('Content-Type') === "application/json") {
@@ -205,7 +205,7 @@ $('.js-todo-link').on('click', function(e) {
             delayRefresh = (typeof delayRefresh === "undefined") ? false : delayRefresh;
             
             if (typeof id !== "undefined") {
-                $.ajax(Cosinnus.base_url + "widget/" + id + "/" + offset + "/").done(function(data, textStatus, jqXHR) {
+                $.ajax("/" + "widget/" + id + "/" + offset + "/").done(function(data, textStatus, jqXHR) {
                     var rows_returned = parseInt(data['X-Cosinnus-Widget-Num-Rows-Returned'] || 0);
                     var has_more_data = 'true' === (data['X-Cosinnus-Widget-Has-More-Data'] || 'false');
                     

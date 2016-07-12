@@ -1,5 +1,5 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n static cosinnus_tags widget_tweaks %}
+{% load i18n static cosinnus_tags widget_tweaks thumbnail %}
 
 {% block page_title %}
 	{% if object %}
@@ -36,6 +36,16 @@
     <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
     {% csrf_token %}
     {{ form.forms.obj.media }}
+    {{ form.forms.obj.non_field_errors }}
+    {{ form.forms.media_tag.non_field_errors }}
+    
+    {% if form.forms.obj.errors or form.forms.media_tag.errors %}
+	    <div class="alert alert-danger alert-dismissable">
+	            <i class="fa fa-exclamation-triangle fa-3x"></i>
+	        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#215;</button>
+	        <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+	    </div>
+    {% endif %}
     	
         <ul class="nav nav-tabs" role="tablist">
         	{% block group_form_navtabs %}
@@ -152,7 +162,7 @@
 					        
 					            <!-- explanation text -->
 					            <div class="col-md-4">
-					                <p class="transparent">{% trans "A picture for better recognition." %}</p>
+					                <p class="transparent">{% trans "A picture for better recognition." %} {% trans "File Size" %}: {% trans "max. 10 MB" %}</p>
 					            </div>
 					        </div><!-- row -->
 							
@@ -333,7 +343,7 @@
 						
 						{% block group_form_microsite_tab %}
 							<label>
-		                    	{% trans "Microsite Wallpaper" %} (1140px x 240px)
+		                    	{% trans "Microsite Wallpaper" %} (1140px x 240px, {% trans "max. 10 MB" %})
 		                    </label>
 							{{ form.forms.obj.wallpaper.errors }}
 							<div class="row">
@@ -405,20 +415,28 @@
 										            	
 										            	<div class="media">
 															<a class="pull-left">
-											 					<i class="fa fa-image"></i>
+																{% if inlineform.image.value %}
+																	<img class="image" src="{% thumbnail inlineform.image.value 40x40 crop=1 upscale=1 %}"></img>
+																{% else %}
+												 					<i class="fa fa-image"></i>
+																{% endif %}
 															</a>
 															<div style="padding: 0px 10px; display: inline-block;">
 												                {% captureas placeholder %}{% trans "Choose and upload a gallery image" %}{% endcaptureas %}
 												                {{ inlineform.image.errors }}
 												                {% render_field inlineform.image class+="form-control" placeholder=placeholder %}
+												                
+																<div>
+																	<i>{% trans "File Size" %}: {% trans "max. 10 MB" %}</i>
+																	&nbsp;&nbsp;&nbsp;&nbsp;
+																	
+																	<label for="{{ inlineform.DELETE.id_for_label }}">{% trans "Delete" %}:</label>
+																	{{ inlineform.DELETE }}
+																</div>
 												            </div>
 												        </div>
 														{{ inlineform.group }}
 														{{ inlineform.id }}
-														<div>
-															<label for="{{ inlineform.DELETE.id_for_label }}">{% trans "Delete" %}:</label>
-															{{ inlineform.DELETE }}
-														</div>
 														{% if forloop.counter >= gallery_image_formset.management_form.initial.INITIAL_FORMS and forloop.counter < gallery_image_formset.management_form.initial.MAX_NUM_FORMS %}
 															<div id="gallery-images-more-{{ forloop.counter0 }}">
 																<button class="btn btn-emphasized pull-right" onclick="$('#gallery-images-more-{{ forloop.counter0 }}').hide(); $('#gallery-images-wrapper-{{ forloop.counter }}').show(); return false;">+ {% trans "more" %}...</button>
@@ -432,7 +450,81 @@
 									</div>
 								{% endfor %}
 							{% endwith %}
-	                    
+							
+							
+	                        <label>{% trans "Video" %}</label>
+	                        {{ form.forms.obj.video.errors }}
+	                        <div type="button" class="btn btn-default w100 regular-space">
+	                            <ul class="media-list">
+	                                <li class="media">
+	                                    <a class="pull-left" href="#">
+	                                        <i class="fa fa-play"></i>
+	                                    </a>
+	                                    <div class="media-body media-body-form-control">
+	                                        {% captureas placeholder %}{% trans "Youtube or Vimeo URL" %}{% endcaptureas %}
+	                                        {% render_field form.forms.obj.video class+="form-control" placeholder=placeholder %}
+	                                    </div>
+	                                </li>
+	                            </ul>
+	                        </div>
+	                        
+	                        <label>{% trans "Twitter: Embedded User Timeline" %}</label>
+	                        {{ form.forms.obj.twitter_username.errors }}
+	                        <div type="button" class="btn btn-default w100 regular-space">
+	                            <ul class="media-list">
+	                                <li class="media">
+	                                    <a class="pull-left" href="#">
+	                                        <i class="fa fa-twitter"></i>
+	                                    </a>
+	                                    <div class="media-body media-body-form-control">
+	                                        {% captureas placeholder %}{% trans "Twitter Username (example: @username)" %}{% endcaptureas %}
+	                                        {% render_field form.forms.obj.twitter_username class+="form-control" placeholder=placeholder %}
+	                                    </div>
+	                                </li>
+	                            </ul>
+	                        </div>
+	                        
+	                        <label>
+	                        	{% trans "Twitter: Embedded Hashtag or Custom Timeline" %}
+		                        <br/>
+		                        <i>
+	                        		{% trans "You can create a custom twitter timeline here:" %}
+	                        		<a href="https://twitter.com/settings/widgets" target="_blank">https://twitter.com/settings/widgets</a>
+	                        		<i class="fa fa-external-link"></i>
+	                    		</i>
+	                        </label>
+	                        {{ form.forms.obj.twitter_widget_id.errors }}
+	                        <div type="button" class="btn btn-default w100 regular-space">
+	                            <ul class="media-list">
+	                                <li class="media">
+	                                    <a class="pull-left" href="#">
+	                                        <i class="fa fa-twitter"></i>
+	                                    </a>
+	                                    <div class="media-body media-body-form-control">
+	                                        {% captureas placeholder %}{% trans "Widget-id (example: 744907261810618721) or embed-code (HTML)" %}{% endcaptureas %}
+	                                        {% render_field form.forms.obj.twitter_widget_id class+="form-control" placeholder=placeholder %}
+	                                    </div>
+	                                </li>
+	                            </ul>
+	                        </div>
+	                        
+	                        <label>{% trans "Embed Flickr Gallery" %}</label>
+	                        {{ form.forms.obj.flickr_url.errors }}
+	                        <div type="button" class="btn btn-default w100 regular-space">
+	                            <ul class="media-list">
+	                                <li class="media">
+	                                    <a class="pull-left" href="#">
+	                                        <i class="fa fa-play"></i>
+	                                    </a>
+	                                    <div class="media-body media-body-form-control">
+	                                        {% captureas placeholder %}{% trans 'Flickr Gallery URL (example: "https://www.flickr.com/photos/username/sets/1234567890")' %}{% endcaptureas %}
+	                                        {% render_field form.forms.obj.flickr_url class+="form-control" placeholder=placeholder %}
+	                                    </div>
+	                                </li>
+	                            </ul>
+	                        </div>
+	                        
+	                    	
 	                    {% endblock group_form_microsite_tab %}
 	                    
 	                    
@@ -440,7 +532,17 @@
 					
 					{% if SETTINGS.COSINNUS_FACEBOOK_INTEGRATION_ENABLED %}
 						<div class="tab-pane {% if request.GET.tab == 'facebook' %}active{% endif %}" id="facebook" >
-							{% include 'cosinnus/utils/facebook_integration_group_form.html' %}							
+							{% if group %}
+								{% include 'cosinnus/utils/facebook_integration_group_form.html' %}							
+							{% else %}
+								<span class="noselect">
+									{% if group_type == 1 %}
+										{% trans "Facebook integration is available after you created the group!" %}
+									{% else %}
+										{% trans "Facebook integration is available after you created the project!" %}
+									{% endif %}
+								</span>
+							{% endif %}
 						</div>
 					{% endif %}
 					

@@ -8,7 +8,9 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "production": "webpack --config webpack/production.config.js",
+    "dev": "webpack --progress --watch --config webpack/development.config.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
     "nunjucks": "^2.4.2",
     "nunjucks-loader": "^2.4.2",
     "script-loader": "^0.7.0",
+    "underscore": "^1.8.3",
     "webpack": "^1.13.0"
   }
 }

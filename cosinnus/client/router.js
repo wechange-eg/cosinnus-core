@@ -9,11 +9,17 @@ module.exports = Backbone.Router.extend({
     },
 
     map: function () {
-        var map = new Map();
-        var view = new MapView({
-            el: '#map-fullscreen',
-            model: map
-        });
-        view.render();
+        // If the map view hasn't been instantiated, create and render it.
+        if (!this.mapFullscreen) {
+            this.mapFullscreen = new Map();
+            var view = new MapView({
+                el: '#map-fullscreen',
+                model: this.mapFullscreen
+            });
+            view.render();
+        // Otherwise navigation has occurred between map states.
+        } else {
+            Backbone.mediator.publish('navigate:map');
+        }
     }
 });

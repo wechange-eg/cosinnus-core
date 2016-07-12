@@ -1,0 +1,12 @@
+{% load i18n %}
+{% if data.flickruser and data.flickrsetid %}
+	<div>
+		<embed type="application/x-shockwave-flash" src="http://www.flickr.com/apps/slideshow/show.swf?v=124984" 
+			allowfullscreen="true" 
+			flashvars="offsite=true&amp;lang=de-de&amp;page_show_url=%2Fphotos%2F{{ data.flickruser }}%2Fsets%2F{{ data.flickrsetid }}%2Fshow%2F&amp;page_show_back_url=%2Fphotos%2F{{ data.flickruser }}%2Fsets%2F{{ data.flickrsetid }}%2Fshow%2F&amp;set_id={{ data.flickrsetid }}" 
+			height="350px" width="100%">
+	</div>
+{% endif %}
+{% if data.error %}
+	<p><em>{% trans "Error embedding a Flickr gallery" %}: {{ data.error }}</em></p>
+{% endif %}

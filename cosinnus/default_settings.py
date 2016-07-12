@@ -117,6 +117,7 @@ TEMPLATES = [
                 'django.template.context_processors.csrf',
                 'django.template.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
+                'sekizai.context_processors.sekizai',
                 'postman.context_processors.inbox',
                 'cosinnus.utils.context_processors.settings',
                 'cosinnus.utils.context_processors.cosinnus',
@@ -150,6 +151,7 @@ def compile_installed_apps(internal_apps=[]):
         'django.contrib.webdesign',
         'suit',
         'django.contrib.admin',
+        'sekizai',
         
         # wagtail
         'overextends',
@@ -200,7 +202,6 @@ def compile_installed_apps(internal_apps=[]):
         'easy_thumbnails',
         'embed_video',
         'endless_pagination',
-        'geoposition',
         'rest_framework',
         'taggit',
         'postman',
@@ -357,9 +358,6 @@ COSINNUS_ETHERPAD_API_KEY = '11456b253e74523f62059a5e341dd877fa4c01dbade5ba5309e
 # Ethercalc config
 COSINNUS_ETHERPAD_ENABLE_ETHERCALC = True
 COSINNUS_ETHERPAD_ETHERCALC_BASE_URL = 'https://calc.wechange.de'
-
-# unsure what this is or where it is being used...?
-GEOPOSITION_MAP_WIDGET_HEIGHT = 180
 
 # default from-email:
 COSINNUS_DEFAULT_FROM_EMAIL = 'noreply@wachstumswende.de'
