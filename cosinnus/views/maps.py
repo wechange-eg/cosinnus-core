@@ -270,7 +270,7 @@ def map_search_endpoint(request):
     datasets = [setname for setname in ['people', 'projects', 'groups', 'events'] if params[setname]]
     limit_per_set = 100000
     limit = params['limit']
-    if limit:
+    if limit and datasets:
         if not is_number(limit) or limit < 0:
             return HttpResponseBadRequest('``limit`` param must be a positive number or 0!')
         limit_per_set = int(float(limit) / float(len(datasets))) if limit != 0 else limit_per_set
