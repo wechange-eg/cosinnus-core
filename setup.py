@@ -60,6 +60,7 @@ setup(
         'MarkupSafe==0.18',
         'Pillow==2.3.0',
         
+        'django-annoying==0.7.6',
         'django-appconf==0.6',
         'django-bootstrap3-datetimepicker==2.2.0',
         'django-classy-tags==0.4',
