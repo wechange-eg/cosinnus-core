@@ -737,7 +737,7 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
         self._type = self.type
         self._slug = self.slug
         
-        if display_redirect_created_message:
+        if display_redirect_created_message and hasattr(self, 'request'):
             # possible because of AddRequestToModelSaveMiddleware
             messages.info(self.request, _('The URL for this team has changed. A redirect from all existing URLs has automatically been created!'))
         
