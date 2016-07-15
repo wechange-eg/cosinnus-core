@@ -131,10 +131,16 @@ module.exports = View.extend({
     },
 
     addMarker: function (result, resultType) {
+        var iconUrl = null;
+        if (this.options.markerIcons && this.options.markerIcons[resultType]) {
+            iconUrl = this.options.markerIcons[resultType];
+        } else {
+            iconUrl = '/static/js/vendor/images/marker-icon-2x-' +
+                this.resultColours[resultType] + '.png';
+        }
         var marker = L.marker([result.lat, result.lon], {
             icon: L.icon({
-                iconUrl: '/static/js/vendor/images/marker-icon-2x-' +
-                    this.resultColours[resultType] + '.png',
+                iconUrl: iconUrl,
                 iconSize: [17, 28],
                 iconAnchor: [8, 28],
                 popupAnchor: [1, -27],

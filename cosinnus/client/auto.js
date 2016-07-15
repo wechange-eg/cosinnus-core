@@ -25,7 +25,8 @@ module.exports = {
         new MapView({
             el: params.el,
             model: map,
-            location: settings.location
+            location: settings.location,
+            markerIcons: settings.markerIcons
         }).render();
     }
 };
