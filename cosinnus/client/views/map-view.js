@@ -131,18 +131,23 @@ module.exports = View.extend({
     },
 
     addMarker: function (result, resultType) {
-        var iconUrl = null;
+        var iconUrl, iconWidth, iconHeight = null;
         if (this.options.markerIcons && this.options.markerIcons[resultType]) {
-            iconUrl = this.options.markerIcons[resultType];
+            var iconSettings = this.options.markerIcons[resultType];
+            iconUrl = iconSettings.url;
+            iconWidth = iconSettings.width;
+            iconHeight = iconSettings.height;
         } else {
             iconUrl = '/static/js/vendor/images/marker-icon-2x-' +
                 this.resultColours[resultType] + '.png';
+            iconWidth = 17;
+            iconHeight = 28;
         }
         var marker = L.marker([result.lat, result.lon], {
             icon: L.icon({
                 iconUrl: iconUrl,
-                iconSize: [17, 28],
-                iconAnchor: [8, 28],
+                iconSize: [iconWidth, iconHeight],
+                iconAnchor: [iconWidth / 2, iconHeight],
                 popupAnchor: [1, -27],
                 shadowSize: [28, 28]
             })
