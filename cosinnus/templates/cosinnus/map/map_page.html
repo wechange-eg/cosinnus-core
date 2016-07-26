@@ -5,6 +5,7 @@
 
 {% block extrahead %}
     {{ block.super }}
+	<script type="text/javascript">var COSINNUS_MAP_MARKER_ICONS = JSON.parse('{{ markers|safe }}');</script>
 	{% include 'cosinnus/map/static_dependencies.html' %}
 {% endblock extrahead %}
 

@@ -44,6 +44,8 @@ import six
 from django.db.models import Q
 from operator import __or__ as OR, __and__ as AND
 from django.utils.encoding import force_text
+from cosinnus.templatetags.cosinnus_map_tags import get_map_marker_icon_settings,\
+    get_map_marker_icon_settings_json
 
 
 USER_MODEL = get_user_model()
@@ -55,6 +57,7 @@ class MapView(ListView):
 
     def get_context_data(self, **kwargs):
         # Instantiate map state
+        # TODO: sadly, these are ignored, as the JS takes the client's default settings on router /map/ auto init
         settings = {
             'availableFilters': {
                  'people': True,
@@ -67,11 +70,14 @@ class MapView(ListView):
                 'events': True,
                 'projects': True,
                 'groups': True
-            }
+            },
+            'markerIcons': get_map_marker_icon_settings(),
+                    
         }
 
         return {
-            'settings': json.dumps(settings)
+            'settings': json.dumps(settings),
+            'markers': get_map_marker_icon_settings_json(),
         }
 
     template_name = 'cosinnus/map/map_page.html'
