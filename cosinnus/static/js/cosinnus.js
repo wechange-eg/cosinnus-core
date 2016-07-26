@@ -1371,8 +1371,21 @@
                 }
             });
         },
-
         
+        addBtnTitles: function() {
+            /* For all <button> with class="btn", if they have a media-body that is only text, add this text
+             * as a title="..." attribute to the button. Useful for buttons with outflowing text. */
+            $('button.btn').each(function(idx, button){
+                button = $(button);
+                if (!button.attr('title')) {
+                    var media_body = button.find('.media-body');
+                    if (media_body.children().length == 0) {
+                        button.attr('title', media_body.text());
+                    }
+                }
+            });
+        },
+
         dashboardArrangeInput: function() {
             $(window).on('dashboardArrangeInputShow', function() {
                 // Alle Widgets mit unsichtbaren Elementen abdecken
@@ -1497,5 +1510,6 @@ $(function() {
     $.cosinnus.toggleGroup();
     $.cosinnus.toggleSwitch();
     $.cosinnus.snapToBottom();
+    $.cosinnus.addBtnTitles();
 });
 
