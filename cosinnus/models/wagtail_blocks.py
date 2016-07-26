@@ -20,6 +20,7 @@ from random import shuffle
 import json
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
+from cosinnus.templatetags.cosinnus_map_tags import get_map_marker_icon_settings
 
     
 
@@ -128,6 +129,7 @@ class MapBlock(StructBlock):
         map_settings = {
             'availableFilters': map_switches,
             'activeFilters': map_switches,
+            'markerIcons': get_map_marker_icon_settings(),
         }
         context['map_settings'] = json.dumps(map_settings)
         return context

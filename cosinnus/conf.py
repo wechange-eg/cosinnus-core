@@ -235,6 +235,22 @@ class CosinnusConf(AppConf):
     # and is the button shown?
     IMPORT_PROJECTS_PERMITTED = False
     
+    # 
+    """
+        Can overwrite the default cosinnus map marker icons. needs to be in a format like
+        'people': {
+            'url': '/static/js/vendor/images/marker-icon-2x-yellow.png',
+            'width': 50,
+            'height': 50
+        },
+        'events': {...},
+        'projects': {...},
+        'groups': {...},
+        
+        Omitted values or an empty dict default to the default marker icon for that type.
+    """
+    MAP_MARKER_ICONS = {}
+    
     # switch to set if Microsites should be enabled.
     # this can be override for each portal to either activate or deactivate them
     MICROSITES_ENABLED = False

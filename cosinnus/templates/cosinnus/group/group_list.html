@@ -1,5 +1,5 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n thumbnail cosinnus_tags static %}
+{% load i18n thumbnail cosinnus_tags cosinnus_map_tags static %}
 
 {% block page_title %}{% if group_type == 1 %}{% trans "Groups" %}{% else %}{% trans "Projects" %}{% endif %}{% endblock %}
 
@@ -44,7 +44,7 @@
     <!-- a box with semi transparent background -->
     <div class="content-box">
 		<div class="map-root"></div>
-		{% captureas map_settings %}{"activeFilters": {"groups": {% if group_type == 1 %}true{% else %}false{% endif %}, "events": false, "projects": {% if group_type == 1 %}false{% else %}true{% endif %}, "people": false}, "availableFilters": {"groups": true, "events": true, "projects": true, "people": true}}{% endcaptureas %}
+		{% captureas map_settings %}{"activeFilters": {"groups": {% if group_type == 1 %}true{% else %}false{% endif %}, "events": false, "projects": {% if group_type == 1 %}false{% else %}true{% endif %}, "people": false}, "availableFilters": {"groups": true, "events": true, "projects": true, "people": true}, "markerIcons": {% render_map_marker_icon_json %}}{% endcaptureas %}
 		{% include 'cosinnus/common/init_client_module.html' with module='map' id=""|add_uuid height=400 settings=map_settings %}
         <div class="clearfix"></div>
     </div>
