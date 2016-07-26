@@ -43,6 +43,7 @@ from cosinnus.utils.functions import is_number
 import six
 from django.db.models import Q
 from operator import __or__ as OR, __and__ as AND
+from django.utils.encoding import force_text
 
 
 USER_MODEL = get_user_model()
@@ -264,7 +265,7 @@ def map_search_endpoint(request):
         returns JSON with the contents of type ``MapSearchResults``"""
 
     params = _collect_parameters(request.GET, MAP_PARAMETERS)
-    query = params['q']
+    query = force_text(params['q'])
 
     # return equal count parts of the data limit for each dataset
     datasets = [setname for setname in ['people', 'projects', 'groups', 'events'] if params[setname]]
