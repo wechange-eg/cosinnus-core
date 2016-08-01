@@ -86,7 +86,6 @@
 <script type="text/javascript">
 	{# show or hide a visibility warning #}
 	$('#{{ form.forms.media_tag.visibility.auto_id }}').on('change', function(){
-		console.log($(this).val());
 		if ($(this).val() == "2") {
 			$('#visibility-warning').show();
 		} else {
