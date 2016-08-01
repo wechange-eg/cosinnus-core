@@ -5,6 +5,11 @@
 
 {% block extrahead %}
     {{ block.super }}
+    
+    {% comment %}  
+    	TODO FIXME: clean up COSINNUS_MAP_MARKER_ICONS so they are not in global context anymore, but instead get
+    	put into a proper global cosinnus Object (once this object has been created)
+    {% endcomment %}
 	<script type="text/javascript">var COSINNUS_MAP_MARKER_ICONS = JSON.parse('{{ markers|safe }}');</script>
 	{% include 'cosinnus/map/static_dependencies.html' %}
 {% endblock extrahead %}
