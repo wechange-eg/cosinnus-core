@@ -66,10 +66,14 @@ MEMBERSHIP_MEMBER = 1
 #: Role defining a user is an admin of a group
 MEMBERSHIP_ADMIN = 2
 
+#: Role defining a user was added to a group and must confirm this before becoming a member
+MEMBERSHIP_INVITED_PENDING = 3
+
 MEMBERSHIP_STATUSES = (
     (MEMBERSHIP_PENDING, p_('cosinnus membership status', 'pending')),
     (MEMBERSHIP_MEMBER, p_('cosinnus membership status', 'member')),
     (MEMBERSHIP_ADMIN, p_('cosinnus membership status', 'admin')),
+    (MEMBERSHIP_ADMIN, p_('cosinnus membership status', 'pending-invited')),
 )
 
 #: A user is a member of a group if either is an explicit member or admin
@@ -78,6 +82,7 @@ MEMBER_STATUS = (MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN,)
 _MEMBERSHIP_ADMINS_KEY = 'cosinnus/core/membership/%s/admins/%d'
 _MEMBERSHIP_MEMBERS_KEY = 'cosinnus/core/membership/%s/members/%d'
 _MEMBERSHIP_PENDINGS_KEY = 'cosinnus/core/membership/%s/pendings/%d'
+_MEMBERSHIP_INVITED_PENDINGS_KEY = 'cosinnus/core/membership/%s/invited_pendings/%d'
 
 
 def group_name_validator(value):
@@ -414,6 +419,19 @@ class CosinnusGroupMembershipManager(models.Manager):
         else:
             gids = [isinstance(g, int) and g or g.pk for g in groups]
             return self._get_users_for_multiple_groups(gids, _MEMBERSHIP_PENDINGS_KEY, MEMBERSHIP_PENDING)
+
+    def get_invited_pendings(self, group=None, groups=None):
+        """
+        Given either a group or a list of groups, this function returns all
+        members with the :data:`MEMBERSHIP_INVITED_PENDING` role.
+        """
+        assert (group is None) ^ (groups is None)
+        if group:
+            gid = isinstance(group, int) and group or group.pk
+            return self._get_users_for_single_group(gid, _MEMBERSHIP_INVITED_PENDINGS_KEY, MEMBERSHIP_INVITED_PENDING)
+        else:
+            gids = [isinstance(g, int) and g or g.pk for g in groups]
+            return self._get_users_for_multiple_groups(gids, _MEMBERSHIP_INVITED_PENDINGS_KEY, MEMBERSHIP_INVITED_PENDING)
 
 
 
@@ -1032,8 +1050,8 @@ class BaseGroupMembership(models.Model):
     def save(self, *args, **kwargs):
         # Only update the date if the the state changes from pending to member
         # or admin
-        if self._old_current_status == MEMBERSHIP_PENDING and \
-                self.status != self._old_current_status:
+        if (self._old_current_status == MEMBERSHIP_PENDING or self._old_current_status == MEMBERSHIP_INVITED_PENDING) and \
+                (self.status == MEMBERSHIP_ADMIN or self.status == MEMBERSHIP_MEMBER):
             self.date = now()
         super(BaseGroupMembership, self).save(*args, **kwargs)
         self._clear_cache()
@@ -1047,6 +1065,7 @@ class BaseGroupMembership(models.Model):
             _MEMBERSHIP_ADMINS_KEY % (cls.CACHE_KEY_MODEL, group.pk),
             _MEMBERSHIP_MEMBERS_KEY % (cls.CACHE_KEY_MODEL, group.pk), 
             _MEMBERSHIP_PENDINGS_KEY % (cls.CACHE_KEY_MODEL, group.pk),
+            _MEMBERSHIP_INVITED_PENDINGS_KEY % (cls.CACHE_KEY_MODEL, group.pk),
         ])
         group._clear_local_cache()
         
