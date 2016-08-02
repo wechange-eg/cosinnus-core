@@ -477,23 +477,15 @@ group_user_list = GroupUserListView.as_view()
 group_user_list_api = GroupUserListView.as_view(is_ajax_request_url=True)
 
 
-
-
 class GroupConfirmMixin(object):
 
     model = CosinnusGroup
     slug_url_kwarg = 'group'
     success_url = reverse_lazy('cosinnus:group-list')
-
-    def get_context_data(self, **kwargs):
-        context = super(GroupConfirmMixin, self).get_context_data(**kwargs)
-        context.update({
-            'confirm_label': self.get_confirm_label(),
-            'confirm_question': self.get_confirm_question(),
-            'confirm_title': self.get_confirm_title(),
-            'submit_css_classes': getattr(self, 'submit_css_classes', None)
-        })
-        return context
+    
+    def get(self, *args, **kwargs):
+        messages.error(self.request, _('This action is not available directly!'))
+        return redirect(group_aware_reverse('cosinnus:group-detail', kwargs=kwargs))
 
     def post(self, *args, **kwargs):
         self.object = self.get_object()
@@ -515,25 +507,11 @@ class GroupConfirmMixin(object):
     def confirm_action(self):
         raise NotImplementedError()
 
-    def get_confirm_label(self):
-        return self.confirm_label
-
-    def get_confirm_question(self):
-        return self.confirm_question % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name}
-
-    def get_confirm_title(self):
-        return self.confirm_title % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name}
-
 
 class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
 
-    confirm_label = _('Join')
-    confirm_question = _('Do you want to join the %(team_type)s “%(team_name)s”?')
-    confirm_title = _('Join %(team_type)s “%(team_name)s”?')
     message_success = _('You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request.')
     
-    template_name = 'cosinnus/group/group_confirm.html'
-
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(GroupUserJoinView, self).dispatch(request, *args, **kwargs)
@@ -561,14 +539,8 @@ group_user_join = GroupUserJoinView.as_view()
 
 class GroupUserLeaveView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
 
-    confirm_label = _('Leave')
-    confirm_question = _('Do you want to leave the %(team_type)s “%(team_name)s”?')
-    confirm_title = _('Leaving %(team_type)s “%(team_name)s”?')
-    submit_css_classes = 'btn-danger'
     message_success = _('You are no longer a member of the %(team_type)s “%(team_name)s”.')
     
-    template_name = 'cosinnus/group/group_confirm.html'
-
     @method_decorator(login_required)
     @atomic
     def dispatch(self, request, *args, **kwargs):
@@ -610,14 +582,8 @@ group_user_leave = GroupUserLeaveView.as_view()
 
 class GroupUserWithdrawView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
 
-    confirm_label = _('Withdraw')
-    confirm_question = _('Do you want to withdraw your join request to the %(team_type)s “%(team_name)s”?')
-    confirm_title = _('Withdraw join request to %(team_type)s “%(team_name)s”?')
-    submit_css_classes = 'btn-danger'
     message_success = _('Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully.')
     
-    template_name = 'cosinnus/group/group_confirm.html'
-
     @method_decorator(login_required)
     @atomic
     def dispatch(self, request, *args, **kwargs):
@@ -652,11 +618,14 @@ class UserSelectMixin(object):
     model = CosinnusGroupMembership
     slug_field = 'user__username'
     slug_url_kwarg = 'username'
-    template_name = 'cosinnus/group/group_user_form.html'
 
     @atomic
     def dispatch(self, request, *args, **kwargs):
         return super(UserSelectMixin, self).dispatch(request, *args, **kwargs)
+    
+    def get(self, *args, **kwargs):
+        messages.error(self.request, _('This action is not available directly!'))
+        return redirect(group_aware_reverse('cosinnus:group-detail', kwargs=kwargs))
 
     def get_form_kwargs(self):
         kwargs = super(UserSelectMixin, self).get_form_kwargs()
@@ -744,8 +713,6 @@ group_user_update_api = GroupUserUpdateView.as_view(is_ajax_request_url=True)
 class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
                           UserSelectMixin, DeleteView):
 
-    template_name = 'cosinnus/group/group_confirm.html'
-
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         group = self.object.group
@@ -762,24 +729,6 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
         if current_status == MEMBERSHIP_PENDING:
             signals.user_group_join_declined.send(sender=self, group=group, user=user)
         return HttpResponseRedirect(self.get_success_url())
-
-    def get_context_data(self, **kwargs):
-        context = super(GroupUserDeleteView, self).get_context_data(**kwargs)
-        group_name = self.object.group.name
-        context.update({
-            'confirm_label': _('Delete'),
-            'confirm_question': _('Do you want to remove the user “%(username)s”  from the %(team_type)s “%(team_name)s”?') % {
-                'username': self.object.user.get_username(),
-                'team_name': group_name,
-                'team_type':self.object._meta.verbose_name,
-            },
-            'confirm_title': _('Remove user from %(team_type)s “%(team_name)s”?') % {
-                'team_name': group_name,
-                'team_type':self.object._meta.verbose_name,
-            },
-            'submit_css_classes': 'btn-danger',
-        })
-        return context
 
 group_user_delete = GroupUserDeleteView.as_view()
 group_user_delete_api = GroupUserDeleteView.as_view(is_ajax_request_url=True)
