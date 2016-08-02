@@ -29,7 +29,7 @@
 </ol>
 <div id="id_media_tag-location-map"></div>
 {% if form.forms.obj.attached_objects %}
-<ol class="input-area" {% if not show_all == True %}style="display: none;"{% endif %} id="attachments-selector">
+<ol class="input-area" {% if not show_files == True and not show_all == True %}style="display: none;"{% endif %} id="attachments-selector">
     <li class="w100">
     	<div>
         <i class="fa fa-fw fa-paperclip"></i>
@@ -100,7 +100,7 @@
 <ol class="input-area">
     <!-- When things are to be hidden by default,
         simply invent an ID and add a link like these: -->
-    {% if form.forms.obj.attached_objects %}
+    {% if form.forms.obj.attached_objects and not show_files %}
     <li class="input-area-lighter">
         <a href="#" onclick="$('#s2id_{{ form.forms.obj.attached_objects.id_for_label }} input').css('width', ''); return false;" data-show-id="attachments-selector" title="{% trans 'Add attachment' %}">
             <i class="fa fa-fw fa-paperclip"></i>
