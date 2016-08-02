@@ -1380,7 +1380,7 @@
                 if (!button.attr('title')) {
                     var media_body = button.find('.media-body');
                     if (media_body.children().length == 0) {
-                        button.attr('title', media_body.text());
+                        button.attr('title', media_body.text().trim());
                     }
                 }
             });
