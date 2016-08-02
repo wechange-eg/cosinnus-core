@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-27 14:36+0200\n"
+"POT-Creation-Date: 2016-08-02 15:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -420,14 +420,14 @@ msgstr ""
 
 #: .\models\group.py:444 .\models\group.py:1262 .\models\profile.py:87
 #: .\templates\cosinnus\_microsite__old_.html:198
-#: .\templates\cosinnus\group\group_form.html:331
+#: .\templates\cosinnus\group\group_form.html:355
 msgid "Description"
 msgstr ""
 
 #: .\models\group.py:445 .\models\group.py:611 .\models\profile.py:90
 #: .\templates\cosinnus\group\group_form.html:198
 #: .\templates\cosinnus\group\group_form.html:207
-#: .\templates\cosinnus\group\group_microsite.html:423
+#: .\templates\cosinnus\group\group_microsite.html:434
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:44
 #: .\templates\cosinnus\user\userprofile_form.html:100
 msgid "Website"
@@ -532,7 +532,7 @@ msgstr ""
 msgid "Detailed, public description."
 msgstr ""
 
-#: .\models\group.py:599 .\templates\cosinnus\group\group_form.html:393
+#: .\models\group.py:599 .\templates\cosinnus\group\group_form.html:417
 msgid "Contact Information"
 msgstr ""
 
@@ -654,7 +654,7 @@ msgid "Permanent Team Redirect"
 msgstr ""
 
 #: .\models\group.py:1232 .\models\tagged.py:124
-#: .\templates\cosinnus\group\group_microsite.html:429
+#: .\templates\cosinnus\group\group_microsite.html:440
 #: .\templates\cosinnus\media_tags_group_profile_readonly.html:4
 msgid "Location"
 msgstr ""
@@ -816,11 +816,11 @@ msgstr ""
 msgid "Path"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:68
+#: .\models\wagtail_blocks.py:69
 msgid "Create-Project or Group Button"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:101
+#: .\models\wagtail_blocks.py:102
 #: .\templates\cosinnus\group\group_members_map.html:4
 #: .\templates\cosinnus\user\portal_admin_list.html:4
 #: .\templates\cosinnus\user\user_list.html:4
@@ -828,14 +828,14 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:102
+#: .\models\wagtail_blocks.py:103
 #: .\templates\cosinnus\group\group_microsite.html:254
 #: .\templates\cosinnus\search.html:134
 #: .\templates\cosinnus\universal\map\map-controls.html:24
 msgid "Events"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:103 .\templates\cosinnus\group\group_list.html:4
+#: .\models\wagtail_blocks.py:104 .\templates\cosinnus\group\group_list.html:4
 #: .\templates\cosinnus\group\group_list_map.html:4
 #: .\templates\cosinnus\group\group_microsite.html:223
 #: .\templates\cosinnus\navbar_buttons_group_menus.html:29
@@ -847,7 +847,7 @@ msgstr ""
 msgid "Projects"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:104 .\templates\cosinnus\group\group_list.html:4
+#: .\models\wagtail_blocks.py:105 .\templates\cosinnus\group\group_list.html:4
 #: .\templates\cosinnus\group\group_list_map.html:4
 #: .\templates\cosinnus\navbar_buttons_group_menus.html:7
 #: .\templates\cosinnus\navbar_buttons_group_menus.html:23
@@ -856,55 +856,55 @@ msgstr ""
 msgid "Groups"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:113 .\models\wagtail_blocks.py:114
+#: .\models\wagtail_blocks.py:114 .\models\wagtail_blocks.py:115
 msgid "At least one type of Map object must be chosen!"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:150 .\models\wagtail_blocks.py:172
+#: .\models\wagtail_blocks.py:152 .\models\wagtail_blocks.py:174
 msgid "Proportions"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:151
+#: .\models\wagtail_blocks.py:153
 msgid "1/2 + 1/2"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:152
+#: .\models\wagtail_blocks.py:154
 msgid "2/3 + 1/3"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:153
+#: .\models\wagtail_blocks.py:155
 msgid "1/3 + 2/3"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:173
+#: .\models\wagtail_blocks.py:175
 msgid "1/3 + 1/3 + 1/3"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:174
+#: .\models\wagtail_blocks.py:176
 msgid "1/2 + 1/4 + 1/4"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:175
+#: .\models\wagtail_blocks.py:177
 msgid "1/4 + 1/2 + 1/4"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:176
+#: .\models\wagtail_blocks.py:178
 msgid "1/4 + 1/4 + 1/2"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:226
+#: .\models\wagtail_blocks.py:228
 msgid "Medium News Widget"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:227
+#: .\models\wagtail_blocks.py:229
 msgid "Large News Widget"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:244
+#: .\models\wagtail_blocks.py:246
 msgid "4 Random Projects Widget"
 msgstr ""
 
-#: .\models\wagtail_blocks.py:245
+#: .\models\wagtail_blocks.py:247
 msgid "8 Random Projects Widget"
 msgstr ""
 
@@ -1182,7 +1182,7 @@ msgstr ""
 #: .\templates\admin\cms\page\menu_item.html:44
 #: .\templates\cosinnus\group\group_form.html:154
 #: .\templates\cosinnus\group\group_form.html:239
-#: .\templates\cosinnus\group\group_form.html:433
+#: .\templates\cosinnus\group\group_form.html:457
 #: .\templates\cosinnus\leftnav_button_editable_folder.html:51
 #: .\templates\cosinnus\user\userprofile_form.html:162
 #: .\templates\cosinnus\widgets\base_widget.html:39 .\views\group.py:221
@@ -1247,7 +1247,7 @@ msgstr ""
 
 #: .\templates\cosinnus\_microsite__old_.html:89
 #: .\templates\cosinnus\_microsite__old_.html:108
-#: .\templates\cosinnus\dashboard.html:223
+#: .\templates\cosinnus\dashboard.html:232
 #: .\templates\cosinnus\group\group_list_items.html:92
 #: .\templates\cosinnus\group\group_list_items.html:181
 #: .\templates\cosinnus\group\group_microsite.html:157
@@ -1257,7 +1257,7 @@ msgid "Join"
 msgstr ""
 
 #: .\templates\cosinnus\_microsite__old_.html:102
-#: .\templates\cosinnus\dashboard.html:210
+#: .\templates\cosinnus\dashboard.html:219
 #: .\templates\cosinnus\group\group_list_items.html:176
 #: .\templates\cosinnus\group\group_microsite.html:133
 #: .\templates\cosinnus\group\leftnav_group.html:48
@@ -1266,7 +1266,7 @@ msgid "Do you really want to withdraw your join request to „%(title)s“?"
 msgstr ""
 
 #: .\templates\cosinnus\_microsite__old_.html:103
-#: .\templates\cosinnus\dashboard.html:211
+#: .\templates\cosinnus\dashboard.html:220
 #: .\templates\cosinnus\group\group_list_items.html:177
 #: .\templates\cosinnus\group\group_microsite.html:134
 #: .\templates\cosinnus\group\leftnav_group.html:49
@@ -1274,7 +1274,7 @@ msgid "Withdraw Join Request"
 msgstr ""
 
 #: .\templates\cosinnus\_microsite__old_.html:107
-#: .\templates\cosinnus\dashboard.html:222
+#: .\templates\cosinnus\dashboard.html:231
 #: .\templates\cosinnus\group\group_list_items.html:180
 #: .\templates\cosinnus\group\group_microsite.html:156
 #: .\templates\cosinnus\group\leftnav_group.html:58
@@ -1305,8 +1305,8 @@ msgid "Settings"
 msgstr ""
 
 #: .\templates\cosinnus\appsmenu.html:33 .\templates\cosinnus\appsmenu.html:76
-#: .\templates\cosinnus\group\group_detail.html:25
-#: .\templates\cosinnus\group\group_detail.html:190
+#: .\templates\cosinnus\group\group_detail.html:19
+#: .\templates\cosinnus\group\group_detail.html:158
 #: .\templates\cosinnus\group\group_members_map.html:14
 #: .\templates\cosinnus\group\group_microsite.html:245
 #: .\templates\cosinnus\group\leftnav_group.html:21
@@ -1398,7 +1398,7 @@ msgid "Rearrange"
 msgstr ""
 
 #: .\templates\cosinnus\dashboard.html:51
-#: .\templates\cosinnus\group\group_form.html:562
+#: .\templates\cosinnus\group\group_form.html:586
 #: .\templates\cosinnus\leftnav_button_editable_folder.html:39
 #: .\templates\cosinnus\user\userprofile_form.html:228
 #: .\templates\cosinnus\widgets\add_widget.html:20 .\views\group.py:447
@@ -1469,94 +1469,102 @@ msgid "get started here..."
 msgstr ""
 
 #: .\templates\cosinnus\dashboard.html:156
-msgid "File"
+msgid "Poll"
 msgstr ""
 
-#: .\templates\cosinnus\dashboard.html:156 .\templates\cosinnus\search.html:71
-msgid "Files"
+#: .\templates\cosinnus\dashboard.html:156
+msgid "Polls"
 msgstr ""
 
 #: .\templates\cosinnus\dashboard.html:165
-msgid "Etherpad"
+msgid "File"
 msgstr ""
 
-#: .\templates\cosinnus\dashboard.html:165 .\templates\cosinnus\search.html:92
-msgid "Etherpads"
+#: .\templates\cosinnus\dashboard.html:165 .\templates\cosinnus\search.html:71
+msgid "Files"
 msgstr ""
 
 #: .\templates\cosinnus\dashboard.html:174
-msgid "Todo"
+msgid "Etherpad"
 msgstr ""
 
-#: .\templates\cosinnus\dashboard.html:174 .\templates\cosinnus\search.html:50
-msgid "Todos"
+#: .\templates\cosinnus\dashboard.html:174 .\templates\cosinnus\search.html:92
+msgid "Etherpads"
 msgstr ""
 
 #: .\templates\cosinnus\dashboard.html:183
+msgid "Todo"
+msgstr ""
+
+#: .\templates\cosinnus\dashboard.html:183 .\templates\cosinnus\search.html:50
+msgid "Todos"
+msgstr ""
+
+#: .\templates\cosinnus\dashboard.html:192
 msgctxt "Calendar"
 msgid "Event"
 msgstr ""
 
-#: .\templates\cosinnus\dashboard.html:183
+#: .\templates\cosinnus\dashboard.html:192
 msgctxt "Calendar"
 msgid "Events"
 msgstr ""
 
-#: .\templates\cosinnus\dashboard.html:192
-#: .\templates\cosinnus\group\group_microsite.html:452
+#: .\templates\cosinnus\dashboard.html:201
+#: .\templates\cosinnus\group\group_microsite.html:463
 #: .\templates\cosinnus\search.html:113
 #: .\templates\cosinnus\wagtail\widgets\global_notes.html:2
 msgid "News"
 msgstr ""
 
-#: .\templates\cosinnus\dashboard.html:201
+#: .\templates\cosinnus\dashboard.html:210
 msgctxt "withdraw join team button first item"
 msgid "Withdraw"
 msgstr ""
 
-#: .\templates\cosinnus\dashboard.html:202
+#: .\templates\cosinnus\dashboard.html:211
 msgctxt "withdraw join team button second item"
 msgid "Request"
 msgstr ""
 
-#: .\templates\cosinnus\dashboard.html:207
+#: .\templates\cosinnus\dashboard.html:216
 msgctxt "join request pending team button first item"
 msgid "Join"
 msgstr ""
 
-#: .\templates\cosinnus\dashboard.html:208
+#: .\templates\cosinnus\dashboard.html:217
 msgctxt "join request pending team button second item"
 msgid "Requested"
 msgstr ""
 
-#: .\templates\cosinnus\dashboard.html:218
+#: .\templates\cosinnus\dashboard.html:227
 msgctxt "join team button first item"
 msgid "Join"
 msgstr ""
 
-#: .\templates\cosinnus\dashboard.html:219
+#: .\templates\cosinnus\dashboard.html:228
 msgctxt "join team button second item"
 msgid "Now"
 msgstr ""
 
-#: .\templates\cosinnus\dashboard.html:242
-#: .\templates\cosinnus\dashboard.html:244
+#: .\templates\cosinnus\dashboard.html:251
+#: .\templates\cosinnus\dashboard.html:253
 msgid "View on Facebook"
 msgstr ""
 
-#: .\templates\cosinnus\dashboard.html:250
+#: .\templates\cosinnus\dashboard.html:259
 msgid "Group:"
 msgstr ""
 
-#: .\templates\cosinnus\dashboard.html:258
+#: .\templates\cosinnus\dashboard.html:267
 #: .\templates\cosinnus\group\group_og_meta_attributes.html:8
 #: .\templates\cosinnus\widgets\related_groups.html:20
 msgid "No Description set"
 msgstr ""
 
-#: .\templates\cosinnus\dashboard.html:262
+#: .\templates\cosinnus\dashboard.html:271
 #: .\templates\cosinnus\group\group_form.html:244
-#: .\templates\cosinnus\group\group_form.html:442
+#: .\templates\cosinnus\group\group_form.html:466
 #: .\templates\endless\show_more.html:5
 msgid "more"
 msgstr ""
@@ -1667,120 +1675,120 @@ msgstr ""
 msgid "%(team_name)s - Members"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:69
-#: .\templates\cosinnus\group\group_detail.html:71
+#: .\templates\cosinnus\group\group_detail.html:37
+#: .\templates\cosinnus\group\group_detail.html:39
 msgid "Add a member"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:88
+#: .\templates\cosinnus\group\group_detail.html:56
 #: .\templates\cosinnus\group\group_user_list.html:7
 msgid "Add user"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:99
+#: .\templates\cosinnus\group\group_detail.html:67
 msgid "Membership requests"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:120
+#: .\templates\cosinnus\group\group_detail.html:88
 #: .\templates\cosinnus\group\group_list_items.html:46
 msgid "Membership requested"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:141
+#: .\templates\cosinnus\group\group_detail.html:109
 msgid "Decline User"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:154
+#: .\templates\cosinnus\group\group_detail.html:122
 msgid "Accept User"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:166
+#: .\templates\cosinnus\group\group_detail.html:134
 #, python-format
 msgid "Do you really want to accept user „%(name)s“ as a member?"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:167
+#: .\templates\cosinnus\group\group_detail.html:135
 msgid "Accept Member"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:172
+#: .\templates\cosinnus\group\group_detail.html:140
 #, python-format
 msgid "Do you really want to decline member „%(name)s“?"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:173
+#: .\templates\cosinnus\group\group_detail.html:141
 msgid "Decline Member"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:182
+#: .\templates\cosinnus\group\group_detail.html:150
 msgid "There are no new membership requests."
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:206
+#: .\templates\cosinnus\group\group_detail.html:174
 #: .\templates\cosinnus\user\portal_admin_list.html:67
 #: .\templates\cosinnus\user\user_list_items.html:24
 #: .\templates\cosinnus\user\userprofile_detail.html:81
 msgid "Send Message"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:213
+#: .\templates\cosinnus\group\group_detail.html:181
 #: .\templates\cosinnus\group\group_list_items.html:42
 msgid "Admin"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:215
+#: .\templates\cosinnus\group\group_detail.html:183
 #: .\templates\cosinnus\group\group_list_items.html:44
 #: .\templates\cosinnus\widgets\group_projects.html:15
 msgid "Member"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:237
+#: .\templates\cosinnus\group\group_detail.html:205
 msgid "Kick"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:251
+#: .\templates\cosinnus\group\group_detail.html:219
 msgid "Make Member"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:253
+#: .\templates\cosinnus\group\group_detail.html:221
 msgid "Make Admin"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:268
+#: .\templates\cosinnus\group\group_detail.html:236
 #, python-format
 msgid "Do you really want to demote administrator „%(name)s“ to member?"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:269
+#: .\templates\cosinnus\group\group_detail.html:237
 msgid "Demote Admin"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:273
+#: .\templates\cosinnus\group\group_detail.html:241
 #, python-format
 msgid "Do you really want to promote member „%(name)s“ to administrator?"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:274
+#: .\templates\cosinnus\group\group_detail.html:242
 msgid "Promote Member"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:280
+#: .\templates\cosinnus\group\group_detail.html:248
 #, python-format
 msgid "Do you really want to remove member „%(name)s“ from the team?"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:281
+#: .\templates\cosinnus\group\group_detail.html:249
 msgid "Remove Member"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:297
+#: .\templates\cosinnus\group\group_detail.html:265
 #: .\templates\cosinnus\user\portal_admin_list.html:111
 #: .\templates\cosinnus\user\user_list.html:82
 #, python-format
 msgid "And %(hidden_count)s private users..."
 msgstr ""
 
-#: .\templates\cosinnus\group\group_detail.html:313
+#: .\templates\cosinnus\group\group_detail.html:281
 #, python-format
 msgid "Show all of the other %(more_count)s users..."
 msgstr ""
@@ -1861,14 +1869,14 @@ msgid "A picture for better recognition."
 msgstr ""
 
 #: .\templates\cosinnus\group\group_form.html:165
-#: .\templates\cosinnus\group\group_form.html:430
+#: .\templates\cosinnus\group\group_form.html:454
 #: .\templates\cosinnus\user\userprofile_form.html:173
 msgid "File Size"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_form.html:165
-#: .\templates\cosinnus\group\group_form.html:346
-#: .\templates\cosinnus\group\group_form.html:430
+#: .\templates\cosinnus\group\group_form.html:370
+#: .\templates\cosinnus\group\group_form.html:454
 #: .\templates\cosinnus\user\userprofile_form.html:173
 msgid "max. 10 MB"
 msgstr ""
@@ -1878,12 +1886,12 @@ msgid "Description and Infos"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_form.html:181
-#: .\templates\cosinnus\group\group_form.html:363
+#: .\templates\cosinnus\group\group_form.html:387
 msgid "Describe the group in a few sentences."
 msgstr ""
 
 #: .\templates\cosinnus\group\group_form.html:181
-#: .\templates\cosinnus\group\group_form.html:363
+#: .\templates\cosinnus\group\group_form.html:387
 msgid "Describe the project in a few sentences."
 msgstr ""
 
@@ -1919,97 +1927,126 @@ msgid "Privacy"
 msgstr ""
 
 #: .\templates\cosinnus\group\group_form.html:311
+msgid "This group will be set to be publicly visible!"
+msgstr ""
+
+#: .\templates\cosinnus\group\group_form.html:313
+msgid "This project will be set to be publicly visible!"
+msgstr ""
+
+#: .\templates\cosinnus\group\group_form.html:316
+msgid ""
+"This means that any registered user can access and see it, although only "
+"members can create content. In addition, all content will be set to be "
+"publicly visible by default (this can be changed for each item on creation). "
+"Publicly visible content can be seen by ANYONE on the internet and it may "
+"potentially be included in search engine results!"
+msgstr ""
+
+#: .\templates\cosinnus\group\group_form.html:318
+msgid ""
+"As administrator of a group or project, it is your responsibility to ensure "
+"that the content posted by its members does not infringe any copyright or "
+"other laws. Please keep this in mind, especially when enabling the public "
+"visibility setting!"
+msgstr ""
+
+#: .\templates\cosinnus\group\group_form.html:320
+msgid "If you do not wish this, you can change the visibility setting above."
+msgstr ""
+
+#: .\templates\cosinnus\group\group_form.html:335
 msgid "Which apps should be activated?"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:332
+#: .\templates\cosinnus\group\group_form.html:356
 msgid "Describe your activities and goals"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:346
+#: .\templates\cosinnus\group\group_form.html:370
 msgid "Microsite Wallpaper"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:352
+#: .\templates\cosinnus\group\group_form.html:376
 msgid "Currently"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:355
+#: .\templates\cosinnus\group\group_form.html:379
 #: .\templates\cosinnus\registration\password_reset_confirm.html:69
 #: .\templates\cosinnus\registration\password_reset_form.html:52
 msgid "Reset"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:356
+#: .\templates\cosinnus\group\group_form.html:380
 msgid "Change"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:357
+#: .\templates\cosinnus\group\group_form.html:381
 msgid "Upload an image."
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:364
-#: .\templates\cosinnus\group\group_form.html:383
+#: .\templates\cosinnus\group\group_form.html:388
+#: .\templates\cosinnus\group\group_form.html:407
 msgid ""
 "This is a public description that can be seen by anyone and will be shown on "
 "the microsite."
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:382
+#: .\templates\cosinnus\group\group_form.html:406
 msgid "Contact info. How you can be reached, addresses, social media, etc..."
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:402
+#: .\templates\cosinnus\group\group_form.html:426
 msgid "Microsite Gallery Images"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:425
+#: .\templates\cosinnus\group\group_form.html:449
 msgid "Choose and upload a gallery image"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:455
+#: .\templates\cosinnus\group\group_form.html:479
 msgid "Video"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:464
+#: .\templates\cosinnus\group\group_form.html:488
 msgid "Youtube or Vimeo URL"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:471
+#: .\templates\cosinnus\group\group_form.html:495
 msgid "Twitter: Embedded User Timeline"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:480
+#: .\templates\cosinnus\group\group_form.html:504
 msgid "Twitter Username (example: @username)"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:488
+#: .\templates\cosinnus\group\group_form.html:512
 msgid "Twitter: Embedded Hashtag or Custom Timeline"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:491
+#: .\templates\cosinnus\group\group_form.html:515
 msgid "You can create a custom twitter timeline here:"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:504
+#: .\templates\cosinnus\group\group_form.html:528
 msgid "Widget-id (example: 744907261810618721) or embed-code (HTML)"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:511
+#: .\templates\cosinnus\group\group_form.html:535
 msgid "Embed Flickr Gallery"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:520
+#: .\templates\cosinnus\group\group_form.html:544
 msgid ""
 "Flickr Gallery URL (example: \"https://www.flickr.com/photos/username/"
 "sets/1234567890\")"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:540
+#: .\templates\cosinnus\group\group_form.html:564
 msgid "Facebook integration is available after you created the group!"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_form.html:542
+#: .\templates\cosinnus\group\group_form.html:566
 msgid "Facebook integration is available after you created the project!"
 msgstr ""
 
@@ -2164,28 +2201,33 @@ msgstr ""
 msgid "There is no description for this group yet."
 msgstr ""
 
-#: .\templates\cosinnus\group\group_microsite.html:370
+#: .\templates\cosinnus\group\group_microsite.html:372
+#: .\utils\dashboard.py:353
+msgid "Related Projects/Groups"
+msgstr ""
+
+#: .\templates\cosinnus\group\group_microsite.html:381
 msgid "Share"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_microsite.html:371
+#: .\templates\cosinnus\group\group_microsite.html:382
 msgid "Share on Facebook"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_microsite.html:397
+#: .\templates\cosinnus\group\group_microsite.html:408
 msgid "Contact"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_microsite.html:408
+#: .\templates\cosinnus\group\group_microsite.html:419
 msgid "No contact data has been added yet."
 msgstr ""
 
-#: .\templates\cosinnus\group\group_microsite.html:468
-#: .\templates\cosinnus\group\group_microsite.html:485
+#: .\templates\cosinnus\group\group_microsite.html:479
+#: .\templates\cosinnus\group\group_microsite.html:496
 msgid "Tweets"
 msgstr ""
 
-#: .\templates\cosinnus\group\group_microsite.html:503
+#: .\templates\cosinnus\group\group_microsite.html:514
 msgid "Flickr Gallery"
 msgstr ""
 
@@ -2563,7 +2605,7 @@ msgid "Tag persons"
 msgstr ""
 
 #: .\templates\cosinnus\media_tags.html:16
-#: .\templates\cosinnus\media_tags.html:132
+#: .\templates\cosinnus\media_tags.html:131
 msgid "Select tags"
 msgstr ""
 
@@ -2576,7 +2618,7 @@ msgid "Attach existing Files..."
 msgstr ""
 
 #: .\templates\cosinnus\media_tags.html:55
-#: .\templates\cosinnus\media_tags.html:137
+#: .\templates\cosinnus\media_tags.html:136
 msgid "Select topic"
 msgstr ""
 
@@ -2592,23 +2634,23 @@ msgid ""
 "If you do not wish this, you can change this item's visibility setting below."
 msgstr ""
 
-#: .\templates\cosinnus\media_tags.html:107
+#: .\templates\cosinnus\media_tags.html:106
 msgid "Add attachment"
 msgstr ""
 
-#: .\templates\cosinnus\media_tags.html:114
+#: .\templates\cosinnus\media_tags.html:113
 msgid "Tag users"
 msgstr ""
 
-#: .\templates\cosinnus\media_tags.html:120
+#: .\templates\cosinnus\media_tags.html:119
 msgid "Tag location"
 msgstr ""
 
-#: .\templates\cosinnus\media_tags.html:150
+#: .\templates\cosinnus\media_tags.html:149
 msgid "Change privacy"
 msgstr ""
 
-#: .\templates\cosinnus\media_tags.html:157
+#: .\templates\cosinnus\media_tags.html:156
 #: .\templates\cosinnus\utils\facebook_integration.html:38
 msgid "Connect Facebook Account"
 msgstr ""
@@ -3632,10 +3674,6 @@ msgstr ""
 msgid "Team Description"
 msgstr ""
 
-#: .\utils\dashboard.py:353
-msgid "Related Projects/Groups"
-msgstr ""
-
 #: .\utils\dashboard.py:376
 msgid "About Us"
 msgstr ""
@@ -3918,37 +3956,37 @@ msgstr ""
 msgid "%(numobjects)d other objects were deleted."
 msgstr ""
 
-#: .\views\profile.py:97
+#: .\views\profile.py:104
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
 
-#: .\views\profile.py:151
+#: .\views\profile.py:158
 msgid "Your profile was edited successfully."
 msgstr ""
 
-#: .\views\profile.py:167
+#: .\views\profile.py:174
 msgid ""
 "Your user account is associated with an integrated Portal. This account's "
 "email address is fixed and therefore was left unchanged."
 msgstr ""
 
-#: .\views\profile.py:179
+#: .\views\profile.py:186
 msgid ""
 "Sorry, your profile could not be saved because there was an error while "
 "processing the avatar!"
 msgstr ""
 
-#: .\views\profile.py:181
+#: .\views\profile.py:188
 msgid "Sorry, something went wrong while saving your profile!"
 msgstr ""
 
-#: .\views\profile.py:191
+#: .\views\profile.py:198
 msgid ""
 "Your profile was deleted successfully. We're sorry you are no longer with us."
 msgstr ""
 
-#: .\views\profile.py:207
+#: .\views\profile.py:214
 #, python-format
 msgid ""
 "You are the only administrator left for \"%s\". Please appoint a different "

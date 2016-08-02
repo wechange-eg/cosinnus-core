@@ -305,6 +305,7 @@
 					                                </select>
 					                            </div>
 					                        </li>
+					                        {% comment %}  
 					                        <li class="group-public-warning-area" {% if not object or not object.public %}style="display: none;"{% endif %} id="group-visibility-warning">
 					                        	<i class="fa fa-fw fa-globe"></i>
 					                        	{% if group_model == "CosinnusSociety" %}
@@ -319,8 +320,10 @@
 										        <br/><br/>
 										        {% trans "If you do not wish this, you can change the visibility setting above." %}
 					                        </li>
+					                        {% endcomment %}
 					                    </ul>
 					                </div>
+					                {% comment %}  
 					                <script type="text/javascript">
 										{# show or hide a visibility warning #}
 										$('#group-public-field').on('change', function(){
@@ -331,6 +334,7 @@
 											} 
 										});
 									</script>
+					                {% endcomment %}
 					            
 					                <label>{% trans "Which apps should be activated?" %}</label>
 					                <div class="regular-space">
