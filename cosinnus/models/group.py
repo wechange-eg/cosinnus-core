@@ -73,7 +73,7 @@ MEMBERSHIP_STATUSES = (
     (MEMBERSHIP_PENDING, p_('cosinnus membership status', 'pending')),
     (MEMBERSHIP_MEMBER, p_('cosinnus membership status', 'member')),
     (MEMBERSHIP_ADMIN, p_('cosinnus membership status', 'admin')),
-    (MEMBERSHIP_ADMIN, p_('cosinnus membership status', 'pending-invited')),
+    (MEMBERSHIP_INVITED_PENDING, p_('cosinnus membership status', 'pending-invited')),
 )
 
 #: A user is a member of a group if either is an explicit member or admin

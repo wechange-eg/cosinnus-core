@@ -12,7 +12,8 @@ from awesome_avatar import forms as avatar_forms
 
 from cosinnus.models.group import (CosinnusGroupMembership,
     MEMBERSHIP_MEMBER, CosinnusPortal,
-    CosinnusLocation, RelatedGroups, CosinnusGroupGalleryImage)
+    CosinnusLocation, RelatedGroups, CosinnusGroupGalleryImage,
+    MEMBERSHIP_INVITED_PENDING)
 from cosinnus.core.registries.apps import app_registry
 from cosinnus.conf import settings
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety

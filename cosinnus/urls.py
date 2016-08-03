@@ -99,6 +99,9 @@ for url_key in group_model_registry:
         url(r'^%s/(?P<group>[^/]+)/join/$' % url_key, 'group.group_user_join', name=prefix+'group-user-join'),
         url(r'^%s/(?P<group>[^/]+)/leave/$' % url_key, 'group.group_user_leave', name=prefix+'group-user-leave'),
         url(r'^%s/(?P<group>[^/]+)/withdraw/$' % url_key, 'group.group_user_withdraw', name=prefix+'group-user-withdraw'),
+        url(r'^%s/(?P<group>[^/]+)/decline/$' % url_key, 'group.group_user_invitation_decline', name=prefix+'group-user-decline'),
+        url(r'^%s/(?P<group>[^/]+)/accept/$' % url_key, 'group.group_user_invitation_accept', name=prefix+'group-user-accept'),
+                
         url(r'^%s/(?P<group>[^/]+)/users/$' % url_key, 'group.group_user_list', name=prefix+'group-user-list'),
         url(r'^%s/(?P<group>[^/]+)/users/add/$' % url_key, 'group.group_user_add', name=prefix+'group-user-add-generic'),
         url(r'^%s/(?P<group>[^/]+)/users/add/(?P<username>[^/]+)/$' % url_key, 'group.group_user_add', name=prefix+'group-user-add'),
