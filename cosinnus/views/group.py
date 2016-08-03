@@ -527,17 +527,32 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
     
     def get_success_url(self):
         # self.referer is set in post() method
-        signals.user_group_join_requested.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
-        messages.success(self.request, self.message_success % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name})
         return self.referer
     
     def confirm_action(self):
         # default membership status is pending, so if we are already pending or a member, nothing happens,
         # and if we have no relation to the group, a new pending membership is created.
-        CosinnusGroupMembership.objects.get_or_create(
-            user=self.request.user,
-            group=self.object
-        )
+        try:
+            m = CosinnusGroupMembership.objects.get(
+                user=self.request.user,
+                group=self.object,
+            )
+            # if member was already invited when asking to join, make him a member immediately
+            if m.status == MEMBERSHIP_INVITED_PENDING:
+                m.status = MEMBERSHIP_MEMBER
+                m.save()
+                messages.success(self.request, _('You had already been invited to "%(team_name)s" now been made a member immediately!') % {'team_name': self.object.name})
+                signals.user_group_invitation_accepted.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
+                self.referer = self.object.get_absolute_url()
+        except CosinnusGroupMembership.DoesNotExist:
+            CosinnusGroupMembership.objects.create(
+                user=self.request.user,
+                group=self.object,
+                status=MEMBERSHIP_PENDING
+            )
+            signals.user_group_join_requested.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
+            messages.success(self.request, self.message_success % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name})
+        
 
 group_user_join = GroupUserJoinView.as_view()
 
@@ -705,20 +720,21 @@ class GroupUserInviteView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
     
     def form_valid(self, form):
         user = form.cleaned_data.get('user')
-        membership = None
         try:
             m = self.model.objects.get(user=user, group=self.group)
-            m.status = MEMBERSHIP_INVITED_PENDING
-            m.save(update_fields=['status'])
-            ret = HttpResponseRedirect(self.get_success_url())
-            membership = m
+            # if the user has already requested a join when we try to invite him, accept him immediately
+            if m.status == MEMBERSHIP_PENDING:
+                m.status = MEMBERSHIP_MEMBER
+                m.save()
+                signals.user_group_join_accepted.send(sender=self, group=self.group, user=user)
+                messages.success(self.request, _('User %(username)s had already requested membership and has now been made a member immediately!') % {'username': user.get_full_name()})
+                # trigger signal for accepting that user's join request
+            return HttpResponseRedirect(self.get_success_url())
         except self.model.DoesNotExist:
             ret = super(GroupUserInviteView, self).form_valid(form)
-            membership = self.object
-            signals.user_group_invited.send(sender=self, group=membership.group, user=user)
-            
-        messages.success(self.request, _('User %(username)s was successfully invited!') % {'username': user.get_full_name()})
-        return ret
+            signals.user_group_invited.send(sender=self, group=self.object.group, user=user)
+            messages.success(self.request, _('User %(username)s was successfully invited!') % {'username': user.get_full_name()})
+            return ret
 
     def get_user_qs(self):
         uids = self.model.objects.get_members(group=self.group)
