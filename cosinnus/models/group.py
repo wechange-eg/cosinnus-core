@@ -454,6 +454,7 @@ class CosinnusPortal(models.Model):
         self._admins = None
         self._members = None
         self._pendings = None
+        self._invited_pendings = None
     
     name = models.CharField(_('Name'), max_length=100,
         validators=[group_name_validator])
@@ -544,6 +545,17 @@ class CosinnusPortal(models.Model):
         """Checks whether the given user has a pending status on this group"""
         uid = isinstance(user, int) and user or user.pk
         return uid in self.pendings
+    
+    @property
+    def invited_pendings(self):
+        if self._invited_pendings is None:
+            self._invited_pendings = CosinnusPortalMembership.objects.get_invited_pendings(self.pk)
+        return self._invited_pendings
+
+    def is_invited_pending(self, user):
+        """Checks whether the given user has a pending invitation status on this group"""
+        uid = isinstance(user, int) and user or user.pk
+        return uid in self.invited_pendings
     
     def _clear_local_cache(self):
         """ Stub, called when memberships change """
@@ -682,6 +694,7 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
         self._admins = None
         self._members = None
         self._pendings = None
+        self._invited_pendings = None
         self._portal_id = self.portal_id
         self._type = self.type
         self._slug = self.slug
@@ -813,7 +826,18 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
         """Checks whether the given user has a pending status on this group"""
         uid = isinstance(user, int) and user or user.pk
         return uid in self.pendings
+    
+    @property
+    def invited_pendings(self):
+        if self._invited_pendings is None:
+            self._invited_pendings = CosinnusGroupMembership.objects.get_invited_pendings(self.pk)
+        return self._invited_pendings
 
+    def is_invited_pending(self, user):
+        """Checks whether the given user has a pending invitation status on this group"""
+        uid = isinstance(user, int) and user or user.pk
+        return uid in self.invited_pendings
+    
     @classmethod
     def _clear_cache(self, slug=None, slugs=None, group=None):
         slugs = set([s for s in slugs]) if slugs else set()
@@ -849,7 +873,7 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
         CosinnusGroupMembership.clear_member_cache_for_group(self)
 
     def _clear_local_cache(self):
-        self._admins = self._members = self._pendings = None
+        self._admins = self._members = self._pendings = self._invited_pendings = None
         
     @property
     def avatar_url(self):
