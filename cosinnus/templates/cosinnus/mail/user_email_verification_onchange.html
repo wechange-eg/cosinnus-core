@@ -1,0 +1,13 @@
+{% load i18n cosinnus_tags %}{% url 'cosinnus:user-verifiy-email' email_verification_param=verification_url_param as user_verification_url %}{% autoescape off %}{% blocktrans with user_name=user|full_name_force %}Hi {{ user_name }},
+
+you have just changed your email address at {{ site_name }}.
+
+You will need to verify your email {{ user_email }} before the changes take effect. 
+
+
+Please click on the following link to verify your email address (or copy and paste the link it in your browser):
+{{ domain_url }}{{ user_verification_url }}
+
+
+
+Your {{ site_name }} Team{% endblocktrans %}{% endautoescape %}

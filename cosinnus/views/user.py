@@ -112,6 +112,7 @@ class PortalAdminListView(UserListView):
 portal_admin_list = PortalAdminListView.as_view()
 
 
+
 class UserCreateView(CreateView):
 
     form_class = UserCreationForm
@@ -150,28 +151,14 @@ class UserCreateView(CreateView):
         # scramble this users email so he cannot log in until he verifies his email, if the portal has this enabled
         if CosinnusPortal.get_current().email_needs_verification:
             
-            user_email = user.email  # don't show the scrambled emai later on
-            # the verification param for the URL consists of <user-id>-<uuid>, where the uuid is saved to the user's profile
-            a_uuid = uuid1()
-            verification_url_param = '%d-%s' % (user.id, a_uuid)
-            user.cosinnus_profile.settings[PROFILE_SETTING_EMAIL_TO_VERIFY] = user_email
-            user.cosinnus_profile.settings[PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN] = a_uuid
-            user.cosinnus_profile.save()
-            # scramble actual email so the user cant log in but can be found in the admin
-            user.email = '__unverified__%s__%s' % (str(uuid1())[:8], user_email)
-            user.save()
+            with transaction.atomic():
+                # scramble actual email so the user cant log in but can be found in the admin
+                original_user_email = user.email  # don't show the scrambled emai later on
+                user.email = '__unverified__%s__%s' % (str(uuid1())[:8], original_user_email)
+                user.save()
+                set_user_email_to_verify(user, original_user_email, self.request)
             
-            data = get_common_mail_context(self.request)
-            data.update({
-                'user': user,
-                'user_email': user_email,
-                'verification_url_param': verification_url_param,
-            })
-            # message user for email verification
-            subj_user = render_to_string('cosinnus/mail/user_email_verification_subj.txt', data)
-            send_mail_or_fail_threaded(user_email, subj_user, 'cosinnus/mail/user_email_verification.html', data)
-            
-            messages.success(self.request, self.message_success_email_verification % {'user': user_email, 'email': user_email})
+            messages.success(self.request, self.message_success_email_verification % {'user': original_user_email, 'email': original_user_email})
 
         if not CosinnusPortal.get_current().users_need_activation and not CosinnusPortal.get_current().email_needs_verification:
             messages.success(self.request, self.message_success % {'user': user.email})
@@ -419,3 +406,25 @@ def password_reset_proxy(request, *args, **kwargs):
         if user and check_user_integrated_portal_member(user):
             return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_reset_page.html')
     return password_reset(request, *args, **kwargs)
+
+
+def set_user_email_to_verify(user, new_email, request=None, user_has_just_registered=True):
+    """ Sets the profile variables for a user to confirm a pending email, 
+        and sends out an email with a verification URL to the user. 
+        @param user_has_just_registered: If this True, a welcome email will be sent. 
+            If False, an email change email will be sent. """
+    
+    # the verification param for the URL consists of <user-id>-<uuid>, where the uuid is saved to the user's profile
+    a_uuid = uuid1()
+    verification_url_param = '%d-%s' % (user.id, a_uuid)
+    user.cosinnus_profile.settings[PROFILE_SETTING_EMAIL_TO_VERIFY] = new_email
+    user.cosinnus_profile.settings[PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN] = a_uuid
+    user.cosinnus_profile.save()
+    
+    # message user for email verification
+    if request:
+        data = get_common_mail_context(request)
+        data.update({'user':user, 'original_user_email':new_email, 'verification_url_param':verification_url_param})
+        subj_user = render_to_string('cosinnus/mail/user_email_verification%s_subj.txt' % ('_onchange' if not user_has_just_registered else ''), data)
+        send_mail_or_fail_threaded(new_email, subj_user, 'cosinnus/mail/user_email_verification%s.html' \
+                    % ('_onchange' if not user_has_just_registered else ''), data)

@@ -16,7 +16,8 @@ from django.core.exceptions import ObjectDoesNotExist, ValidationError,\
     PermissionDenied
 from django.http.response import Http404, HttpResponseRedirect
 from cosinnus.models.tagged import BaseTagObject
-from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership
+from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
+    CosinnusPortal
 from cosinnus.models.widget import WidgetConfig
 from django.contrib.auth import logout
 from cosinnus.utils.permissions import check_user_integrated_portal_member,\
@@ -26,6 +27,7 @@ from cosinnus.core.decorators.views import redirect_to_not_logged_in
 from cosinnus.utils.urls import safe_redirect
 from cosinnus.templatetags.cosinnus_tags import cosinnus_setting
 from uuid import uuid1
+from cosinnus.views.user import set_user_email_to_verify
 
 
 def delete_userprofile(user):
@@ -167,11 +169,18 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
     
     def post(self, request, *args, **kwargs):
         """ if user changed his email, check if user is member of an integrated portal, 
-            and if so ignore that change """
+            and if so ignore that change. Also, ignore the change if email verification is active, and instead
+            set a new email-to-be-verified and send user a confirmation email. """
         self.object = self.get_object()
         user = self.object.user
         if request.POST.get('user-email', user.email) != user.email and check_user_integrated_portal_member(user):
             messages.warning(request, _('Your user account is associated with an integrated Portal. This account\'s email address is fixed and therefore was left unchanged.'))
+            request.POST._mutable = True
+            request.POST['user-email'] = user.email
+        elif request.POST.get('user-email', user.email) != user.email and CosinnusPortal.get_current().email_needs_verification:
+            # set flags to be changed if form submit is successful
+            self.target_email_to_confirm = request.POST['user-email']
+            self.user = user
             request.POST._mutable = True
             request.POST['user-email'] = user.email
         return super(UserProfileUpdateView, self).post(request, *args, **kwargs)
@@ -180,6 +189,12 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
         try:
             ret = super(UserProfileUpdateView, self).form_valid(form)
             messages.success(self.request, self.message_success)
+            
+            # send out email confirmation email
+            if getattr(self, 'target_email_to_confirm', None):
+                set_user_email_to_verify(self.user, self.target_email_to_confirm, self.request, user_has_just_registered=False)
+                messages.warning(self.request, _('You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!'))
+            
         except AttributeError, e:
             if str(e) == "'dict' object has no attribute '_committed'":
                 # here we couldn't save the avatar
