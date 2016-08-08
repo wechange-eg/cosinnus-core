@@ -1,0 +1,1 @@
+{% load i18n cosinnus_tags %}{% blocktrans with user_name=user|full_name_force %}Please verify your email address for {{ site_name }}!{% endblocktrans %}

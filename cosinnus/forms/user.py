@@ -12,6 +12,7 @@ from cosinnus.conf import settings
 from captcha.fields import ReCaptchaField
 from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
 from cosinnus.models.tagged import BaseTagObject
+from django.core.validators import MaxLengthValidator
 
 
 class UserKwargModelFormMixin(object):
@@ -42,7 +43,8 @@ class UserCreationForm(DjUserCreationForm):
             'last_name', 'tos_check',
         )
     
-    email = forms.EmailField(label=_('email address'), required=True) 
+    # email maxlength 220 instead of 254, to accomodate hashes to scramble them 
+    email = forms.EmailField(label=_('email address'), required=True, validators=[MaxLengthValidator(220)]) 
     first_name = forms.CharField(label=_('first name'), required=True)  
     
     tos_check = forms.BooleanField(label='tos_check', required=True)

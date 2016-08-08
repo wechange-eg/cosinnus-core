@@ -474,6 +474,9 @@ class CosinnusPortal(models.Model):
     users_need_activation = models.BooleanField(_('Users Need Activation'),
         help_text=_('If activated, newly registered users need to be approved by a portal admin before being able to log in.'),
         default=False)
+    email_needs_verification = models.BooleanField(_('Emails Need Verification'),
+        help_text=_('If activated, newly registered users and users who change their email address will need to confirm their email by clicking a link in a mail sent to them.'),
+        default=False)
     
     # css fields for custom portal styles
     background_image = models.ImageField(_('Background Image'),
