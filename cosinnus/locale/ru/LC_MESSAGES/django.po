@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-02 15:05+0200\n"
-"PO-Revision-Date: 2015-11-14 17:17+0100\n"
+"PO-Revision-Date: 2016-08-08 12:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Language: ru\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.8.4\n"
 
 #: .\admin.py:37
 #, python-format
@@ -168,8 +168,8 @@ msgstr ""
 msgid ""
 "Your membership request for %(team_name)s has been declined on %(site_name)s."
 msgstr ""
-"Ваш запрос на вступление в группу %(team_name)s был отклонен сайтом %"
-"(site_name)s"
+"Ваш запрос на вступление в группу %(team_name)s был отклонен сайтом "
+"%(site_name)s"
 
 #: .\cosinnus_notifications.py:45
 msgid "A user requested to become a member of this team (admins only)"
@@ -1159,8 +1159,7 @@ msgid "Bottom content (gray background)"
 msgstr ""
 
 #: .\models\widget.py:19 .\templates\cosinnus\appsmenu.html:37
-#: .\templates\cosinnus\appsmenu.html:51
-#: .\templates\cosinnus\dashboard.html:88
+#: .\templates\cosinnus\appsmenu.html:51 .\templates\cosinnus\dashboard.html:88
 msgid "Dashboard"
 msgstr "Панель управления"
 
@@ -1371,8 +1370,8 @@ msgstr "Присоединиться"
 #, python-format
 msgid "Do you really want to withdraw your join request to „%(title)s“?"
 msgstr ""
-"Вы действительно хотите отозвать свой запрос на присоединение к проекту „%"
-"(title)s“?"
+"Вы действительно хотите отозвать свой запрос на присоединение к проекту "
+"„%(title)s“?"
 
 #: .\templates\cosinnus\_microsite__old_.html:103
 #: .\templates\cosinnus\dashboard.html:220
@@ -1419,8 +1418,8 @@ msgstr "Настройки"
 #: .\templates\cosinnus\group\group_members_map.html:14
 #: .\templates\cosinnus\group\group_microsite.html:245
 #: .\templates\cosinnus\group\leftnav_group.html:21
-#: .\templates\cosinnus\widgets\group_projects.html:15
-#: .\utils\dashboard.py:218 .\utils\dashboard.py:219
+#: .\templates\cosinnus\widgets\group_projects.html:15 .\utils\dashboard.py:218
+#: .\utils\dashboard.py:219
 msgid "Members"
 msgstr "Члены"
 
@@ -2069,11 +2068,11 @@ msgstr "Конфиденциальность"
 
 #: .\templates\cosinnus\group\group_form.html:311
 msgid "This group will be set to be publicly visible!"
-msgstr ""
+msgstr "Эта группа становится общедоступной!"
 
 #: .\templates\cosinnus\group\group_form.html:313
 msgid "This project will be set to be publicly visible!"
-msgstr ""
+msgstr "Этот проект становится общедоступным!"
 
 #: .\templates\cosinnus\group\group_form.html:316
 msgid ""
@@ -2083,6 +2082,13 @@ msgid ""
 "Publicly visible content can be seen by ANYONE on the internet and it may "
 "potentially be included in search engine results!"
 msgstr ""
+"Это означает, что любой зарегистрированный пользователь может получить "
+"доступ в проект или группу, даже если только участники проекта или группы "
+"могут создавать его контент. В дополнение к этому, по умолчанию, весь "
+"контент проекта/группы становится общедоступным (этот параметр возможно "
+"изменить в процессе создания любого контента). Общедоступные документы могут "
+"быть увидены ЛЮБЫМ пользователем в сети интернет и потенциально могут быть "
+"найдены и показаны поисковыми машинами!"
 
 #: .\templates\cosinnus\group\group_form.html:318
 msgid ""
@@ -2091,10 +2097,15 @@ msgid ""
 "other laws. Please keep this in mind, especially when enabling the public "
 "visibility setting!"
 msgstr ""
+"Как администратор группы или проекта вы несете ответственность за то, что "
+"контент, размещаемый участниками группы/проекта, не нарушал авторского права "
+"и не нарушал закон. Пожалуйста, будьте предельно внимательны, если вы "
+"изменяете настройки доступности проекта/группы на общедоступные!"
 
 #: .\templates\cosinnus\group\group_form.html:320
 msgid "If you do not wish this, you can change the visibility setting above."
 msgstr ""
+"Если вы этого не желаете, то вы можете отрегулировать настройки видимости."
 
 #: .\templates\cosinnus\group\group_form.html:335
 msgid "Which apps should be activated?"
@@ -2368,8 +2379,7 @@ msgstr "В этой группе пока нет проектов"
 msgid "There is no description for this group yet."
 msgstr "В этой группе пока нет проектов"
 
-#: .\templates\cosinnus\group\group_microsite.html:372
-#: .\utils\dashboard.py:353
+#: .\templates\cosinnus\group\group_microsite.html:372 .\utils\dashboard.py:353
 #, fuzzy
 #| msgid "Re-Activate Project/Group"
 msgid "Related Projects/Groups"
@@ -2611,8 +2621,8 @@ msgstr ""
 #, python-format
 msgid "Offensive item reported: \"%(object_name)s\" on %(site_name)s!"
 msgstr ""
-"Поступила жалоба на оскорбительный контент: %(object_name)s\" на %(site_name)"
-"s!"
+"Поступила жалоба на оскорбительный контент: %(object_name)s\" на "
+"%(site_name)s!"
 
 #: .\templates\cosinnus\mail\user_group_join_accepted.html:3
 #, python-format
@@ -2665,14 +2675,14 @@ msgid ""
 "\n"
 "You're receiving this email because you are an administrator of this team.\n"
 "\n"
-"(Follow this link to edit your notification preferences: %"
-"(notification_settings_url)s )\n"
+"(Follow this link to edit your notification preferences: "
+"%(notification_settings_url)s )\n"
 "\n"
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
-"Пользователь «%(sender_name)s» попросил присоединиться к проекту %(team_name)"
-"s.\n"
+"Пользователь «%(sender_name)s» попросил присоединиться к проекту "
+"%(team_name)s.\n"
 "\n"
 "Пожалуйста, перейдите на следующую страницу, чтобы принять или отклонить "
 "заявку:\n"
@@ -2681,8 +2691,8 @@ msgstr ""
 "Вы получили это сообщение, потому что являетесь администратором этой "
 "группы.\n"
 "\n"
-"(Перейдите по этой ссылке, чтобы изменить настройки уведомлений: %"
-"(notification_settings_url)s) \n"
+"(Перейдите по этой ссылке, чтобы изменить настройки уведомлений: "
+"%(notification_settings_url)s) \n"
 "\n"
 "\n"
 "Ваша команда %(site_name)s"
@@ -2713,8 +2723,8 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
-"Пользователь \"%(user_name)s\" (%(user_mail)s) попросил присоединиться к %"
-"(site_name)s.\n"
+"Пользователь \"%(user_name)s\" (%(user_mail)s) попросил присоединиться к "
+"%(site_name)s.\n"
 "\n"
 "Этот пользователь не сможет войти, пока вы (или другой администратор "
 "портала) не примете его заявку.\n"
@@ -2770,8 +2780,8 @@ msgstr ""
 #| "willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
 #| "\n"
 #| "Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, "
-#| "melde dich gern bei den Portaladministrator_innen: %(domain_url)s%"
-#| "(portal_admin_url)s \n"
+#| "melde dich gern bei den Portaladministrator_innen: %(domain_url)s"
+#| "%(portal_admin_url)s \n"
 #| "\n"
 #| "\n"
 #| "Viele Grüße und viel Spaß hier,\n"
@@ -2907,15 +2917,15 @@ msgstr "Вы отправили запрос на членство в %(site_nam
 msgid ""
 "Hi %(receiver_name)s,\n"
 "\n"
-"you were tagged in \"%(object_name)s\" in %(team_name)s by %(sender_name)"
-"s. \n"
+"you were tagged in \"%(object_name)s\" in %(team_name)s by "
+"%(sender_name)s. \n"
 "\n"
 "You can find it by following this link: %(object_url)s\n"
 "\n"
 "\n"
 "\n"
-"(Follow this link to edit your notification preferences: %"
-"(notification_settings_url)s )\n"
+"(Follow this link to edit your notification preferences: "
+"%(notification_settings_url)s )\n"
 "\n"
 "Your %(site_name)s Team."
 msgstr ""
@@ -2927,8 +2937,8 @@ msgstr ""
 "\n"
 "\n"
 "\n"
-"(Перейдите по этой ссылке, чтобы изменить настройки уведомлений: %"
-"(notification_settings_url)s )\n"
+"(Перейдите по этой ссылке, чтобы изменить настройки уведомлений: "
+"%(notification_settings_url)s )\n"
 "\n"
 "Ваша команда %(site_name)s"
 
@@ -3689,8 +3699,8 @@ msgstr ""
 #, python-format
 msgid ""
 "You can connect your projects and groups to a Facebook Group. Once "
-"connected, your members can choose to share the news posts they write on %"
-"(site_name)s to the Facebook Group. (They need to connect their accounts to "
+"connected, your members can choose to share the news posts they write on "
+"%(site_name)s to the Facebook Group. (They need to connect their accounts to "
 "Facebook, as well!)"
 msgstr ""
 
@@ -4211,8 +4221,8 @@ msgstr ""
 #: .\views\group.py:614
 #, python-format
 msgid ""
-"Do you want to withdraw your join request to the %(team_type)s “%(team_name)"
-"s”?"
+"Do you want to withdraw your join request to the %(team_type)s "
+"“%(team_name)s”?"
 msgstr ""
 "Вы хотите отозвать свой запрос на вступление в %(team_type)s “%(team_name)s”?"
 
@@ -4247,8 +4257,8 @@ msgstr "Вы не можете удалить себя из %(team_type)s."
 #: .\views\group.py:771
 #, python-format
 msgid ""
-"Do you want to remove the user “%(username)s”  from the %(team_type)s “%"
-"(team_name)s”?"
+"Do you want to remove the user “%(username)s”  from the %(team_type)s "
+"“%(team_name)s”?"
 msgstr ""
 "Вы действительно хотите удалить пользователя “%(username)s” из %(team_type)s "
 "“%(team_name)s”?"
@@ -4415,8 +4425,8 @@ msgstr ""
 #, python-format
 msgid ""
 "User \"%(user)s\" was registered successfully. The account will need to be "
-"approved before you can log in. We will send an email to your address \"%"
-"(email)s\" when this happens."
+"approved before you can log in. We will send an email to your address "
+"\"%(email)s\" when this happens."
 msgstr ""
 "Пользователь \"%(user)s“ зарегистрирован. Перед тем, как вы сможете войти в "
 "систему, этот аккаунт требует подтверждения. Мы оповестим вас по электронной "
