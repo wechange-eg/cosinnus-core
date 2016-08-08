@@ -25,7 +25,7 @@
     <!-- a box with semi transparent background -->
     <div class="content-box">
         
-        {% if user|has_write_access:object %}
+        {% if user|is_group_member:object %}
             <form action="{% group_url 'cosinnus:group-user-add-generic' group=object %}" method="post">{% csrf_token %}
 	            <div type="button" class="btn btn-default w100 large-space">
 	                <ul class="media-list">
@@ -34,7 +34,7 @@
 	                            <i class="fa fa-user"></i>
 	                        </a>
 	                        <div class="media-body">
-	                            <select name="user" class="w100 user-selector next-button-is-for-sending" data-placeholder="{% trans 'Invite a member' %}">
+	                            <select name="user" class="w100 user-selector next-button-is-for-sending" data-placeholder="{% trans 'Invite a member...' %}">
 	                                <option></option>
 	                                <option value="" default disabled selected>{% trans 'Invite a member' %}</option>
 	                                {% for candidate in non_members %}
@@ -153,24 +153,13 @@
         {% endif %}
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
         {% if user|has_write_access:object or user in invited %}
             
             <legend>{% trans "Invited Members" %}</legend>
             
 	        {% for member in invited %}
-	           
 	           {% comment %} In public groups, we enable the logged in user to see himself as pending user {% endcomment %}
-	           {% if not user in invited or user == member %}
+	           {% if user|has_write_access:object or user == member %}
 		            <div class="fadedown {% if not forloop.last %}regular-space{% endif %}">
 		                <div class="btn btn-default w100">
 		                    <ul class="media-list">
@@ -271,19 +260,6 @@
             
         {% endif %}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
         <legend>{% trans "Members" %}{% if member_count %} ({{ member_count }}){% endif %}</legend>
     
         {% for member in members %}

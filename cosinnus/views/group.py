@@ -30,7 +30,7 @@ from cosinnus.utils.compat import atomic
 from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
     AjaxableFormMixin, ListAjaxableResponseMixin)
 from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin,\
-    RequireLoggedInMixin, EndlessPaginationMixin
+    RequireLoggedInMixin, EndlessPaginationMixin, RequireCreateObjectsInMixin
 from cosinnus.views.mixins.user import UserFormKwargsMixin
 
 from cosinnus.views.mixins.avatar import AvatarFormMixin
@@ -713,7 +713,7 @@ class UserSelectMixin(object):
         return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.group})
 
 
-class GroupUserInviteView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
+class GroupUserInviteView(AjaxableFormMixin, RequireCreateObjectsInMixin, UserSelectMixin,
                        CreateView):
     
     template_name = 'cosinnus/group/group_detail.html'
@@ -786,13 +786,15 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
             else:
                 messages.error(self.request, _('You cannot remove yourself from a %(team_type)s.') % {'team_type':self.object._meta.verbose_name})
         else:
-            messages.error(self.request, _('You cannot remove “%(username)s” form '
+            messages.error(self.request, _('You cannot remove "%(username)s" form '
                 'this team. Only one admin left.') % {'username': user.get_full_name()})
         if current_status == MEMBERSHIP_PENDING:
             signals.user_group_join_declined.send(sender=self, group=group, user=user)
-            messages.success(self.request, _('Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully.') % {'team_type':self.object._meta.verbose_name, 'team_name': group.name})
+            messages.success(self.request, _('Your join request was withdrawn from %(team_type)s "%(team_name)s" successfully.') % {'team_type':self.object._meta.verbose_name, 'team_name': group.name})
         if current_status == MEMBERSHIP_INVITED_PENDING:
-            messages.success(self.request, _('Your invitation to user %(username)s was withdrawn successfully.') % {'username': user.get_full_name()})
+            messages.success(self.request, _('Your invitation to user "%(username)s" was withdrawn successfully.') % {'username': user.get_full_name()})
+        if current_status == MEMBERSHIP_MEMBER:
+            messages.success(self.request, _('User "%(username)s" is no longer a member.') % {'username': user.get_full_name()})
         return HttpResponseRedirect(self.get_success_url())
 
 group_user_delete = GroupUserDeleteView.as_view()
