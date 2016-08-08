@@ -541,7 +541,7 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
             if m.status == MEMBERSHIP_INVITED_PENDING:
                 m.status = MEMBERSHIP_MEMBER
                 m.save()
-                messages.success(self.request, _('You had already been invited to "%(team_name)s" now been made a member immediately!') % {'team_name': self.object.name})
+                messages.success(self.request, _('You had already been invited to "%(team_name)s" and have now been made a member immediately!') % {'team_name': self.object.name})
                 signals.user_group_invitation_accepted.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
                 self.referer = self.object.get_absolute_url()
         except CosinnusGroupMembership.DoesNotExist:
