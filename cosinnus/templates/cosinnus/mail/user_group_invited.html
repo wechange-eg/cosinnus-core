@@ -1,0 +1,14 @@
+{% load i18n cosinnus_tags %}{% autoescape off %}
+
+{% blocktrans %}Hi, {{ user_name }}!
+
+
+You have been invited to join "{{ team_name }}"! Follow the link below to join and get active!{% endblocktrans %}
+
+{{ group.get_absolute_url }}
+
+
+
+{% blocktrans %}The {{ site_name }} team{% endblocktrans %}
+
+{% endautoescape %}

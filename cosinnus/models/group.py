@@ -66,10 +66,14 @@ MEMBERSHIP_MEMBER = 1
 #: Role defining a user is an admin of a group
 MEMBERSHIP_ADMIN = 2
 
+#: Role defining a user was added to a group and must confirm this before becoming a member
+MEMBERSHIP_INVITED_PENDING = 3
+
 MEMBERSHIP_STATUSES = (
     (MEMBERSHIP_PENDING, p_('cosinnus membership status', 'pending')),
     (MEMBERSHIP_MEMBER, p_('cosinnus membership status', 'member')),
     (MEMBERSHIP_ADMIN, p_('cosinnus membership status', 'admin')),
+    (MEMBERSHIP_INVITED_PENDING, p_('cosinnus membership status', 'pending-invited')),
 )
 
 #: A user is a member of a group if either is an explicit member or admin
@@ -78,6 +82,7 @@ MEMBER_STATUS = (MEMBERSHIP_MEMBER, MEMBERSHIP_ADMIN,)
 _MEMBERSHIP_ADMINS_KEY = 'cosinnus/core/membership/%s/admins/%d'
 _MEMBERSHIP_MEMBERS_KEY = 'cosinnus/core/membership/%s/members/%d'
 _MEMBERSHIP_PENDINGS_KEY = 'cosinnus/core/membership/%s/pendings/%d'
+_MEMBERSHIP_INVITED_PENDINGS_KEY = 'cosinnus/core/membership/%s/invited_pendings/%d'
 
 
 def group_name_validator(value):
@@ -415,6 +420,19 @@ class CosinnusGroupMembershipManager(models.Manager):
             gids = [isinstance(g, int) and g or g.pk for g in groups]
             return self._get_users_for_multiple_groups(gids, _MEMBERSHIP_PENDINGS_KEY, MEMBERSHIP_PENDING)
 
+    def get_invited_pendings(self, group=None, groups=None):
+        """
+        Given either a group or a list of groups, this function returns all
+        members with the :data:`MEMBERSHIP_INVITED_PENDING` role.
+        """
+        assert (group is None) ^ (groups is None)
+        if group:
+            gid = isinstance(group, int) and group or group.pk
+            return self._get_users_for_single_group(gid, _MEMBERSHIP_INVITED_PENDINGS_KEY, MEMBERSHIP_INVITED_PENDING)
+        else:
+            gids = [isinstance(g, int) and g or g.pk for g in groups]
+            return self._get_users_for_multiple_groups(gids, _MEMBERSHIP_INVITED_PENDINGS_KEY, MEMBERSHIP_INVITED_PENDING)
+
 
 
 @python_2_unicode_compatible
@@ -436,6 +454,7 @@ class CosinnusPortal(models.Model):
         self._admins = None
         self._members = None
         self._pendings = None
+        self._invited_pendings = None
     
     name = models.CharField(_('Name'), max_length=100,
         validators=[group_name_validator])
@@ -454,6 +473,9 @@ class CosinnusPortal(models.Model):
     
     users_need_activation = models.BooleanField(_('Users Need Activation'),
         help_text=_('If activated, newly registered users need to be approved by a portal admin before being able to log in.'),
+        default=False)
+    email_needs_verification = models.BooleanField(_('Emails Need Verification'),
+        help_text=_('If activated, newly registered users and users who change their email address will need to confirm their email by clicking a link in a mail sent to them.'),
         default=False)
     
     # css fields for custom portal styles
@@ -526,6 +548,17 @@ class CosinnusPortal(models.Model):
         """Checks whether the given user has a pending status on this group"""
         uid = isinstance(user, int) and user or user.pk
         return uid in self.pendings
+    
+    @property
+    def invited_pendings(self):
+        if self._invited_pendings is None:
+            self._invited_pendings = CosinnusPortalMembership.objects.get_invited_pendings(self.pk)
+        return self._invited_pendings
+
+    def is_invited_pending(self, user):
+        """Checks whether the given user has a pending invitation status on this group"""
+        uid = isinstance(user, int) and user or user.pk
+        return uid in self.invited_pendings
     
     def _clear_local_cache(self):
         """ Stub, called when memberships change """
@@ -664,6 +697,7 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
         self._admins = None
         self._members = None
         self._pendings = None
+        self._invited_pendings = None
         self._portal_id = self.portal_id
         self._type = self.type
         self._slug = self.slug
@@ -795,7 +829,18 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
         """Checks whether the given user has a pending status on this group"""
         uid = isinstance(user, int) and user or user.pk
         return uid in self.pendings
+    
+    @property
+    def invited_pendings(self):
+        if self._invited_pendings is None:
+            self._invited_pendings = CosinnusGroupMembership.objects.get_invited_pendings(self.pk)
+        return self._invited_pendings
 
+    def is_invited_pending(self, user):
+        """Checks whether the given user has a pending invitation status on this group"""
+        uid = isinstance(user, int) and user or user.pk
+        return uid in self.invited_pendings
+    
     @classmethod
     def _clear_cache(self, slug=None, slugs=None, group=None):
         slugs = set([s for s in slugs]) if slugs else set()
@@ -831,7 +876,7 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
         CosinnusGroupMembership.clear_member_cache_for_group(self)
 
     def _clear_local_cache(self):
-        self._admins = self._members = self._pendings = None
+        self._admins = self._members = self._pendings = self._invited_pendings = None
         
     @property
     def avatar_url(self):
@@ -1032,8 +1077,8 @@ class BaseGroupMembership(models.Model):
     def save(self, *args, **kwargs):
         # Only update the date if the the state changes from pending to member
         # or admin
-        if self._old_current_status == MEMBERSHIP_PENDING and \
-                self.status != self._old_current_status:
+        if (self._old_current_status == MEMBERSHIP_PENDING or self._old_current_status == MEMBERSHIP_INVITED_PENDING) and \
+                (self.status == MEMBERSHIP_ADMIN or self.status == MEMBERSHIP_MEMBER):
             self.date = now()
         super(BaseGroupMembership, self).save(*args, **kwargs)
         self._clear_cache()
@@ -1047,6 +1092,7 @@ class BaseGroupMembership(models.Model):
             _MEMBERSHIP_ADMINS_KEY % (cls.CACHE_KEY_MODEL, group.pk),
             _MEMBERSHIP_MEMBERS_KEY % (cls.CACHE_KEY_MODEL, group.pk), 
             _MEMBERSHIP_PENDINGS_KEY % (cls.CACHE_KEY_MODEL, group.pk),
+            _MEMBERSHIP_INVITED_PENDINGS_KEY % (cls.CACHE_KEY_MODEL, group.pk),
         ])
         group._clear_local_cache()
         

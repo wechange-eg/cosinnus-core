@@ -40,8 +40,11 @@ urlpatterns = patterns('cosinnus.views',
     
     url(r'^administration/approve_user/(?P<user_id>\d+)/$', 'user.approve_user', name='user-approve'),
     url(r'^administration/deny_user/(?P<user_id>\d+)/$', 'user.deny_user', name='user-deny'),
+    url(r'^administration/verify_email/(?P<email_verification_param>[^/]+)/$', 'user.verifiy_user_email', name='user-verifiy-email'),
     url(r'^administration/activate/(?P<group_id>\d+)/$', 'group.activate_or_deactivate', name='group-activate', kwargs={'activate': True}),
     url(r'^administration/deactivate/(?P<group_id>\d+)/$', 'group.activate_or_deactivate', name='group-deactivate', kwargs={'activate': False}),
+    
+    
     
     url(r'^housekeeping/$', 'housekeeping.housekeeping', name='housekeeping'),
     url(r'^housekeeping/deletespamusers/$', 'housekeeping.delete_spam_users', name='housekeeping_delete_spam_users'),
@@ -99,6 +102,9 @@ for url_key in group_model_registry:
         url(r'^%s/(?P<group>[^/]+)/join/$' % url_key, 'group.group_user_join', name=prefix+'group-user-join'),
         url(r'^%s/(?P<group>[^/]+)/leave/$' % url_key, 'group.group_user_leave', name=prefix+'group-user-leave'),
         url(r'^%s/(?P<group>[^/]+)/withdraw/$' % url_key, 'group.group_user_withdraw', name=prefix+'group-user-withdraw'),
+        url(r'^%s/(?P<group>[^/]+)/decline/$' % url_key, 'group.group_user_invitation_decline', name=prefix+'group-user-decline'),
+        url(r'^%s/(?P<group>[^/]+)/accept/$' % url_key, 'group.group_user_invitation_accept', name=prefix+'group-user-accept'),
+                
         url(r'^%s/(?P<group>[^/]+)/users/$' % url_key, 'group.group_user_list', name=prefix+'group-user-list'),
         url(r'^%s/(?P<group>[^/]+)/users/add/$' % url_key, 'group.group_user_add', name=prefix+'group-user-add-generic'),
         url(r'^%s/(?P<group>[^/]+)/users/add/(?P<username>[^/]+)/$' % url_key, 'group.group_user_add', name=prefix+'group-user-add'),

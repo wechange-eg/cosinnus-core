@@ -22,5 +22,16 @@ user_group_join_accepted = dispatch.Signal(providing_args=["group", "user"])
 user_group_join_declined = dispatch.Signal(providing_args=["group", "user"])
 
 
+""" Called when a user was invited to a group """
+user_group_invited = dispatch.Signal(providing_args=["group", "user"])
+
+""" Called when an user accepts a group invitation """
+user_group_invitation_accepted = dispatch.Signal(providing_args=["user", "obj", "audience"])
+
+""" Called when an admin declines a group invitation """
+user_group_invitation_declined = dispatch.Signal(providing_args=["user", "obj", "audience"])
+
+
+
 # we need to load the receivers for them to be active
 import receivers

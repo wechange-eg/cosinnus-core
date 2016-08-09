@@ -25,6 +25,11 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
 
+# if a user profile has this settings, its user has not yet confirmed a new email
+# address and this long is bound to his old email (or to a scrambled, unusable one if they just registered)
+PROFILE_SETTING_EMAIL_TO_VERIFY = 'email_to_verify'
+PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN = 'email_verification_pwd'
+
 
 class BaseUserProfileManager(models.Manager):
     use_for_related_fields = True

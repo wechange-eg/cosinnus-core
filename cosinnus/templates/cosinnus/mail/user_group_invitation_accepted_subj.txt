@@ -1,0 +1,1 @@
+{% load i18n cosinnus_tags %}{% blocktrans with team_name=object.name %}{{ sender_name }} has accepted the invitation to {{ team_name }} on {{ site_name }}!{% endblocktrans %}

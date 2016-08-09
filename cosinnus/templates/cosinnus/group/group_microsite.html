@@ -133,7 +133,49 @@
 	            {% captureas title %}{% trans "Withdraw Join Request" %}{% endcaptureas %}
 	            {% captureas action %}{% group_url 'cosinnus:group-user-withdraw' group=group %}{% endcaptureas %}
 	            {% include "cosinnus/modal_box.html" with id="join_withdraw_modal" label=label title=title form_action=action title_icon="fa-group" %}
-	        
+	            
+	        {% elif user.pk in group.invited_pendings %}
+	        	<h2>{% trans "You are invited!" %}</h2>
+	        	
+                <span class="app-calendar"> {# Hacky green color #}
+		            <button type="button" class="btn btn-emphasized" onclick="$('#accept-group-invitation-form').submit();">
+		                <ul class="media-list">
+		                    <li class="media">
+		                        <a class="pull-left" href="#">
+		                            <i class="fa fa-sign-in"></i>
+		                        </a>
+		                        <div class="media-body">
+		                    		{% trans "Accept Invitation" %}
+		                        </div>
+		                    </li>
+		                </ul>
+		            </button>
+                </span>
+                
+                {% captureas modal_decline_invitation_id %}userModal_decline_invitation_{{member.pk}}{% endcaptureas %}
+                <span class="app-etherpad">
+		            <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_decline_invitation_id}}">
+	                    <ul class="media-list">
+	                        <li class="media">
+	                            <a class="pull-left" href="#">
+	                                <i class="fa fa-close"></i>
+	                            </a>
+	                            <div class="media-body">
+	                                {% trans "Decline Invitation" %}</span>
+	                            </div>
+	                        </li>
+	                    </ul>
+	                </button>
+                </span>
+                
+                {# hidden form, triggered by accept-button JS #}
+        		<form id="accept-group-invitation-form" action="{% group_url 'cosinnus:group-user-accept' group=group %}" method="post" style="display: none;" >{% csrf_token %}
+                </form>
+                
+                {% captureas label %}{% blocktrans %}Do you really want to decline the invitation?{% endblocktrans %}{% endcaptureas %}
+                {% captureas title %}{% trans "Decline Invitation" %}{% endcaptureas %}
+                {% captureas action %}{% group_url 'cosinnus:group-user-decline' group=group %}{% endcaptureas %}
+                {% include "cosinnus/modal_box.html" with id=modal_decline_invitation_id label=label title=title form_action=action %}
 	        
 	        {% else %} {# User authenticated but not a members #}
 	        	<h2>{% trans "Collaborate!" %}</h2>
@@ -160,7 +202,7 @@
 	        
 			{% endif %}
 			
-			{% if group.public and user.is_authenticated and not user.pk in group.members %}
+			{% if group.public and user.is_authenticated and not user.pk in group.members and not user.pk in group.invited_pendings %}
 	    		<button href="{{ group.get_absolute_url }}?browse=true" type="button" class="btn btn-emphasized">
                     <ul class="media-list">
                         <li class="media">

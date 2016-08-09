@@ -25,7 +25,7 @@
     <!-- a box with semi transparent background -->
     <div class="content-box">
         
-        {% if user|has_write_access:object %}
+        {% if user|is_group_member:object %}
             <form action="{% group_url 'cosinnus:group-user-add-generic' group=object %}" method="post">{% csrf_token %}
 	            <div type="button" class="btn btn-default w100 large-space">
 	                <ul class="media-list">
@@ -34,14 +34,14 @@
 	                            <i class="fa fa-user"></i>
 	                        </a>
 	                        <div class="media-body">
-	                            <select name="user" class="w100 user-selector next-button-is-for-sending" data-placeholder="{% trans 'Add a member' %}">
+	                            <select name="user" class="w100 user-selector next-button-is-for-sending" data-placeholder="{% trans 'Invite a member' %}...">
 	                                <option></option>
-	                                <option value="" default disabled selected>{% trans 'Add a member' %}</option>
+	                                <option value="" default disabled selected>{% trans 'Invite a member' %}</option>
 	                                {% for candidate in non_members %}
 	                                   <option value="{{ candidate.pk }}">{{ candidate|full_name }}</option>
 	                                {% endfor %}
 	                            </select>
-	                            <input type="hidden" name="status" value="1" />
+	                            <input type="hidden" name="status" value="3" />
 	                        </div>
 	                    </li>
 	                </ul>
@@ -53,7 +53,7 @@
 	                            <i class="fa fa-pencil"></i>
 	                        </a>
 	                        <div class="media-body">
-	                            {% trans "Add user" %}
+	                            {% trans "Invite user" %}
 	                        </div>
 	                    </li>
 	                </ul>
@@ -153,7 +153,113 @@
         {% endif %}
 		
 		
-
+        {% if user|has_write_access:object or user in invited %}
+            
+            <legend>{% trans "Invited Members" %}</legend>
+            
+	        {% for member in invited %}
+	           {% comment %} In public groups, we enable the logged in user to see himself as pending user {% endcomment %}
+	           {% if user|has_write_access:object or user == member %}
+		            <div class="fadedown {% if not forloop.last %}regular-space{% endif %}">
+		                <div class="btn btn-default w100">
+		                    <ul class="media-list">
+		                        <li class="media">
+		                            <a class="pull-left" href="{{ member|profile_url }}">
+		                                {% include "cosinnus/user/user_avatar_image.html" with user=member %}
+		                            </a>
+		                            {% if user|has_write_access:object or user == member %}
+		                            <a class="pull-right fadedown-clickarea" href="#">
+		                                <i class="fa fa-chevron-down"></i>
+		                            </a>
+		                            {% endif %}
+		                            <div class="media-body">
+		                                    <span class="annotation">
+	                                            {% trans "Invited to be a member" %}
+		                                    </span>
+		                                <a href="{% url 'cosinnus:profile-detail' username=member.username %}">
+		                                    {{ member|full_name }}
+		                                </a>
+		                            </div>
+		                        </li>
+		                    </ul>
+		                </div>
+		                
+		                {% if user|has_write_access:object %}
+		                    <div>
+		                        {% captureas modal_revoke_id %}userModal_revoke_{{member.pk}}{% endcaptureas %}
+		                        
+		                        <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_revoke_id}}">
+		                            <ul class="media-list">
+		                                <li class="media">
+		                                    <a class="pull-left" href="#">
+		                                        <i class="fa fa-close"></i>
+		                                    </a>
+		                                    <div class="media-body">
+	                                            {% trans "Revoke Invitation" %}
+		                                    </div>
+		                                </li>
+		                            </ul>
+		                        </button>
+		                    </div>
+		                {% endif %}
+		                
+		                {% if user == member %}
+		                    <div>
+		                        {% captureas modal_decline_invitation_id %}userModal_decline_invitation_{{member.pk}}{% endcaptureas %}
+		                        <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_decline_invitation_id}}">
+		                            <ul class="media-list">
+		                                <li class="media">
+		                                    <a class="pull-left" href="#">
+		                                        <i class="fa fa-close"></i>
+		                                    </a>
+		                                    <div class="media-body">
+		                                        {% trans "Decline Invitation" %}
+		                                    </div>
+		                                </li>
+		                            </ul>
+		                        </button>
+		                        
+		                		<form action="{% group_url 'cosinnus:group-user-accept' group=object %}" method="post">{% csrf_token %}
+			                        <button type="submit" class="btn btn-emphasized">
+			                            <ul class="media-list">
+			                                <li class="media">
+			                                    <a class="pull-left" href="#">
+			                                        <i class="fa fa-sign-in"></i>
+			                                    </a>
+			                                    <div class="media-body">
+		                                            {% trans "Accept Invitation" %}
+			                                    </div>
+			                                </li>
+			                            </ul>
+			                        </button>
+			                    </form>
+		                    </div>
+		                {% endif %}
+		                
+		            </div><!-- fadedown -->
+		            
+		            {% if user|has_write_access:object %}    
+		                {% captureas label %}{% blocktrans with name=member|full_name %}Do you really want to revoke the invitation for member „{{ name }}“?{% endblocktrans %}{% endcaptureas %}
+		                {% captureas title %}{% trans "Revoke Invitation for Member" %}{% endcaptureas %}
+		                {% captureas action %}{% group_url 'cosinnus:group-user-delete' group=object username=member.username %}{% endcaptureas %}
+		                {% include "cosinnus/modal_box.html" with id=modal_revoke_id label=label title=title form_action=action %}
+		            {% endif %}
+		            {% if user == member %}    
+		                {% captureas label %}{% blocktrans %}Do you really want to decline the invitation?{% endblocktrans %}{% endcaptureas %}
+		                {% captureas title %}{% trans "Decline Invitation" %}{% endcaptureas %}
+		                {% captureas action %}{% group_url 'cosinnus:group-user-decline' group=object %}{% endcaptureas %}
+		                {% include "cosinnus/modal_box.html" with id=modal_decline_invitation_id label=label title=title form_action=action %}
+		            {% endif %}
+	            
+	            {% endif %}
+	            
+	        {% empty %}
+	            <!-- {% trans "There are no new membership requests." %} -->
+	            {% include 'cosinnus/common/empty_button.html' with message="There are no pending invitations." %}
+	        {% endfor %}
+            
+        {% endif %}
+		
         <legend>{% trans "Members" %}{% if member_count %} ({{ member_count }}){% endif %}</legend>
     
         {% for member in members %}

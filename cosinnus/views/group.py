@@ -22,7 +22,7 @@ from cosinnus.forms.group import MembershipForm, CosinnusLocationForm,\
     CosinnusGroupGalleryImageForm
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, CosinnusPortal, CosinnusLocation,
-    CosinnusGroupGalleryImage)
+    CosinnusGroupGalleryImage, MEMBERSHIP_INVITED_PENDING)
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.serializers.group import GroupSimpleSerializer
 from cosinnus.models.serializers.profile import UserSimpleSerializer
@@ -30,7 +30,7 @@ from cosinnus.utils.compat import atomic
 from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
     AjaxableFormMixin, ListAjaxableResponseMixin)
 from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin,\
-    RequireLoggedInMixin, EndlessPaginationMixin
+    RequireLoggedInMixin, EndlessPaginationMixin, RequireCreateObjectsInMixin
 from cosinnus.views.mixins.user import UserFormKwargsMixin
 
 from cosinnus.views.mixins.avatar import AvatarFormMixin
@@ -242,6 +242,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         admin_ids = CosinnusGroupMembership.objects.get_admins(group=self.group)
         all_member_ids = CosinnusGroupMembership.objects.get_members(group=self.group)
         pending_ids = CosinnusGroupMembership.objects.get_pendings(group=self.group)
+        invited_pending_ids = CosinnusGroupMembership.objects.get_invited_pendings(group=self.group)
         
         member_ids = [id for id in all_member_ids if not id in admin_ids]
         
@@ -255,9 +256,11 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         admins = _q.filter(id__in=admin_ids)
         members = _q.filter(id__in=member_ids)
         pendings = _q.filter(id__in=pending_ids)
+        invited = _q.filter(id__in=invited_pending_ids)
         
         # for adding members, get all users from this portal only  
         non_members =  _q.exclude(id__in=all_member_ids). \
+            exclude(id__in=invited_pending_ids). \
             filter(id__in=CosinnusPortal.get_current().members)
         
         hidden_members = 0
@@ -277,6 +280,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             # admins are always visible in this view, because a they should be contactable
             members = members.filter(cosinnus_profile__media_tag__visibility__gte=visibility_level)
             pendings = pendings.filter(cosinnus_profile__media_tag__visibility__gte=visibility_level)
+            invited = invited.filter(cosinnus_profile__media_tag__visibility__gte=visibility_level)
             # concatenate admins into members, because we might have sorted out a private admin, 
             # and the template iterates only over members to display people
             # members = list(set(chain(members, admins)))
@@ -299,6 +303,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             'admins': admins,
             'members': members,
             'pendings': pendings,
+            'invited': invited,
             'non_members': non_members,
             'member_count': user_count,
             'hidden_user_count': hidden_members,
@@ -478,22 +483,14 @@ group_user_list_api = GroupUserListView.as_view(is_ajax_request_url=True)
 
 
 
-
 class GroupConfirmMixin(object):
-
     model = CosinnusGroup
     slug_url_kwarg = 'group'
     success_url = reverse_lazy('cosinnus:group-list')
-
-    def get_context_data(self, **kwargs):
-        context = super(GroupConfirmMixin, self).get_context_data(**kwargs)
-        context.update({
-            'confirm_label': self.get_confirm_label(),
-            'confirm_question': self.get_confirm_question(),
-            'confirm_title': self.get_confirm_title(),
-            'submit_css_classes': getattr(self, 'submit_css_classes', None)
-        })
-        return context
+    
+    def get(self, *args, **kwargs):
+        messages.error(self.request, _('This action is not available directly!'))
+        return redirect(group_aware_reverse('cosinnus:group-detail', kwargs=kwargs))
 
     def post(self, *args, **kwargs):
         self.object = self.get_object()
@@ -515,25 +512,11 @@ class GroupConfirmMixin(object):
     def confirm_action(self):
         raise NotImplementedError()
 
-    def get_confirm_label(self):
-        return self.confirm_label
-
-    def get_confirm_question(self):
-        return self.confirm_question % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name}
-
-    def get_confirm_title(self):
-        return self.confirm_title % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name}
-
 
 class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
 
-    confirm_label = _('Join')
-    confirm_question = _('Do you want to join the %(team_type)s “%(team_name)s”?')
-    confirm_title = _('Join %(team_type)s “%(team_name)s”?')
     message_success = _('You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request.')
     
-    template_name = 'cosinnus/group/group_confirm.html'
-
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super(GroupUserJoinView, self).dispatch(request, *args, **kwargs)
@@ -544,31 +527,40 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
     
     def get_success_url(self):
         # self.referer is set in post() method
-        signals.user_group_join_requested.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
-        messages.success(self.request, self.message_success % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name})
         return self.referer
     
     def confirm_action(self):
         # default membership status is pending, so if we are already pending or a member, nothing happens,
         # and if we have no relation to the group, a new pending membership is created.
-        CosinnusGroupMembership.objects.get_or_create(
-            user=self.request.user,
-            group=self.object
-        )
+        try:
+            m = CosinnusGroupMembership.objects.get(
+                user=self.request.user,
+                group=self.object,
+            )
+            # if member was already invited when asking to join, make him a member immediately
+            if m.status == MEMBERSHIP_INVITED_PENDING:
+                m.status = MEMBERSHIP_MEMBER
+                m.save()
+                messages.success(self.request, _('You had already been invited to "%(team_name)s" and have now been made a member immediately!') % {'team_name': self.object.name})
+                signals.user_group_invitation_accepted.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
+                self.referer = self.object.get_absolute_url()
+        except CosinnusGroupMembership.DoesNotExist:
+            CosinnusGroupMembership.objects.create(
+                user=self.request.user,
+                group=self.object,
+                status=MEMBERSHIP_PENDING
+            )
+            signals.user_group_join_requested.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
+            messages.success(self.request, self.message_success % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name})
+        
 
 group_user_join = GroupUserJoinView.as_view()
 
 
 class GroupUserLeaveView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
 
-    confirm_label = _('Leave')
-    confirm_question = _('Do you want to leave the %(team_type)s “%(team_name)s”?')
-    confirm_title = _('Leaving %(team_type)s “%(team_name)s”?')
-    submit_css_classes = 'btn-danger'
     message_success = _('You are no longer a member of the %(team_type)s “%(team_name)s”.')
     
-    template_name = 'cosinnus/group/group_confirm.html'
-
     @method_decorator(login_required)
     @atomic
     def dispatch(self, request, *args, **kwargs):
@@ -597,7 +589,6 @@ class GroupUserLeaveView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
                 )
                 membership.delete()
             except CosinnusGroupMembership.DoesNotExist:
-                print ">>> error!"
                 self._had_error = True
         else:
             self._had_error = True
@@ -610,14 +601,8 @@ group_user_leave = GroupUserLeaveView.as_view()
 
 class GroupUserWithdrawView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
 
-    confirm_label = _('Withdraw')
-    confirm_question = _('Do you want to withdraw your join request to the %(team_type)s “%(team_name)s”?')
-    confirm_title = _('Withdraw join request to %(team_type)s “%(team_name)s”?')
-    submit_css_classes = 'btn-danger'
     message_success = _('Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully.')
     
-    template_name = 'cosinnus/group/group_confirm.html'
-
     @method_decorator(login_required)
     @atomic
     def dispatch(self, request, *args, **kwargs):
@@ -629,7 +614,8 @@ class GroupUserWithdrawView(SamePortalGroupMixin, GroupConfirmMixin, DetailView)
     
     def get_success_url(self):
         # self.referer is set in post() method
-        messages.success(self.request, self.message_success % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name})
+        if not getattr(self, '_had_error', False):
+            messages.success(self.request, self.message_success % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name})
         return self.referer
     
     def confirm_action(self):
@@ -637,13 +623,60 @@ class GroupUserWithdrawView(SamePortalGroupMixin, GroupConfirmMixin, DetailView)
             membership = CosinnusGroupMembership.objects.get(
                 user=self.request.user,
                 group=self.object,
-                status=MEMBERSHIP_PENDING
+                status=self.MEMBERSHIP_PENDING
             )
             membership.delete()
         except CosinnusGroupMembership.DoesNotExist:
-            pass
+            self._had_error = True
 
 group_user_withdraw = GroupUserWithdrawView.as_view()
+
+
+class GroupUserInvitationDeclineView(GroupUserWithdrawView):
+
+    message_success = _('Your invitation to %(team_type)s “%(team_name)s” was declined successfully.')
+    
+    def confirm_action(self):
+        try:
+            membership = CosinnusGroupMembership.objects.get(
+                user=self.request.user,
+                group=self.object,
+                status=MEMBERSHIP_INVITED_PENDING
+            )
+            membership.delete()
+            signals.user_group_invitation_declined.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
+        except CosinnusGroupMembership.DoesNotExist:
+            self._had_error = True
+
+group_user_invitation_decline = GroupUserInvitationDeclineView.as_view()
+
+
+class GroupUserInvitationAcceptView(GroupUserWithdrawView):
+
+    message_success = _('You are now a member of %(team_type)s “%(team_name)s”. Welcome!')
+    
+    def get_success_url(self):
+        if not getattr(self, '_had_error', False):
+            # redirect to group dashboard on successful invitation accept
+            messages.success(self.request, self.message_success % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name})
+            return self.object.get_absolute_url()
+        # self.referer is set in post() method
+        return self.referer
+    
+    def confirm_action(self):
+        try:
+            membership = CosinnusGroupMembership.objects.get(
+                user=self.request.user,
+                group=self.object,
+                status=MEMBERSHIP_INVITED_PENDING
+            )
+            membership.status = MEMBERSHIP_MEMBER
+            membership.save()
+            signals.user_group_invitation_accepted.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
+        except CosinnusGroupMembership.DoesNotExist:
+            self._had_error = True
+
+group_user_invitation_accept = GroupUserInvitationAcceptView.as_view()
 
 
 class UserSelectMixin(object):
@@ -652,11 +685,14 @@ class UserSelectMixin(object):
     model = CosinnusGroupMembership
     slug_field = 'user__username'
     slug_url_kwarg = 'username'
-    template_name = 'cosinnus/group/group_user_form.html'
 
     @atomic
     def dispatch(self, request, *args, **kwargs):
         return super(UserSelectMixin, self).dispatch(request, *args, **kwargs)
+    
+    def get(self, *args, **kwargs):
+        messages.error(self.request, _('This action is not available directly!'))
+        return redirect(group_aware_reverse('cosinnus:group-detail', kwargs=kwargs))
 
     def get_form_kwargs(self):
         kwargs = super(UserSelectMixin, self).get_form_kwargs()
@@ -677,33 +713,35 @@ class UserSelectMixin(object):
         return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.group})
 
 
-class GroupUserAddView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
+class GroupUserInviteView(AjaxableFormMixin, RequireCreateObjectsInMixin, UserSelectMixin,
                        CreateView):
-
+    
+    template_name = 'cosinnus/group/group_detail.html'
+    
     def form_valid(self, form):
         user = form.cleaned_data.get('user')
-        status = form.cleaned_data.get('status')
         try:
             m = self.model.objects.get(user=user, group=self.group)
-            m.status = status
-            m.save(update_fields=['status'])
+            # if the user has already requested a join when we try to invite him, accept him immediately
+            if m.status == MEMBERSHIP_PENDING:
+                m.status = MEMBERSHIP_MEMBER
+                m.save()
+                signals.user_group_join_accepted.send(sender=self, group=self.group, user=user)
+                messages.success(self.request, _('User %(username)s had already requested membership and has now been made a member immediately!') % {'username': user.get_full_name()})
+                # trigger signal for accepting that user's join request
             return HttpResponseRedirect(self.get_success_url())
         except self.model.DoesNotExist:
-            return super(GroupUserAddView, self).form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super(GroupUserAddView, self).get_context_data(**kwargs)
-        context.update({
-            'submit_label': _('Add'),
-        })
-        return context
+            ret = super(GroupUserInviteView, self).form_valid(form)
+            signals.user_group_invited.send(sender=self, group=self.object.group, user=user)
+            messages.success(self.request, _('User %(username)s was successfully invited!') % {'username': user.get_full_name()})
+            return ret
 
     def get_user_qs(self):
         uids = self.model.objects.get_members(group=self.group)
         return get_user_model()._default_manager.exclude(id__in=uids)
 
-group_user_add = GroupUserAddView.as_view()
-group_user_add_api = GroupUserAddView.as_view(is_ajax_request_url=True)
+group_user_add = GroupUserInviteView.as_view()
+group_user_add_api = GroupUserInviteView.as_view(is_ajax_request_url=True)
 
 
 class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
@@ -727,13 +765,6 @@ class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
                 'this team. Only one admin left.') % {'username': user.username})
         return HttpResponseRedirect(self.get_success_url())
 
-    def get_context_data(self, **kwargs):
-        context = super(GroupUserUpdateView, self).get_context_data(**kwargs)
-        context.update({
-            'submit_label': _('Save'),
-        })
-        return context
-
     def get_user_qs(self):
         return self.group.users
 
@@ -743,8 +774,6 @@ group_user_update_api = GroupUserUpdateView.as_view(is_ajax_request_url=True)
 
 class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
                           UserSelectMixin, DeleteView):
-
-    template_name = 'cosinnus/group/group_confirm.html'
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -757,29 +786,16 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
             else:
                 messages.error(self.request, _('You cannot remove yourself from a %(team_type)s.') % {'team_type':self.object._meta.verbose_name})
         else:
-            messages.error(self.request, _('You cannot remove “%(username)s” form '
-                'this team. Only one admin left.') % {'username': user.username})
+            messages.error(self.request, _('You cannot remove "%(username)s" form '
+                'this team. Only one admin left.') % {'username': user.get_full_name()})
         if current_status == MEMBERSHIP_PENDING:
             signals.user_group_join_declined.send(sender=self, group=group, user=user)
+            messages.success(self.request, _('Your join request was withdrawn from %(team_type)s "%(team_name)s" successfully.') % {'team_type':self.object._meta.verbose_name, 'team_name': group.name})
+        if current_status == MEMBERSHIP_INVITED_PENDING:
+            messages.success(self.request, _('Your invitation to user "%(username)s" was withdrawn successfully.') % {'username': user.get_full_name()})
+        if current_status == MEMBERSHIP_MEMBER:
+            messages.success(self.request, _('User "%(username)s" is no longer a member.') % {'username': user.get_full_name()})
         return HttpResponseRedirect(self.get_success_url())
-
-    def get_context_data(self, **kwargs):
-        context = super(GroupUserDeleteView, self).get_context_data(**kwargs)
-        group_name = self.object.group.name
-        context.update({
-            'confirm_label': _('Delete'),
-            'confirm_question': _('Do you want to remove the user “%(username)s”  from the %(team_type)s “%(team_name)s”?') % {
-                'username': self.object.user.get_username(),
-                'team_name': group_name,
-                'team_type':self.object._meta.verbose_name,
-            },
-            'confirm_title': _('Remove user from %(team_type)s “%(team_name)s”?') % {
-                'team_name': group_name,
-                'team_type':self.object._meta.verbose_name,
-            },
-            'submit_css_classes': 'btn-danger',
-        })
-        return context
 
 group_user_delete = GroupUserDeleteView.as_view()
 group_user_delete_api = GroupUserDeleteView.as_view(is_ajax_request_url=True)

@@ -1,0 +1,15 @@
+{% load i18n cosinnus_tags %}{% url 'cosinnus:user-verifiy-email' email_verification_param=verification_url_param as user_verification_url %}{% autoescape off %}{% blocktrans with user_name=user|full_name_force %}Hi {{ user_name }},
+
+you have just registered an account at {{ site_name }}. We're happy to see you!
+
+You will need to verify your email {{ user_email }} before you can log in. 
+
+
+Please click on the following link to verify your email address (or copy and paste the link it in your browser):
+{{ domain_url }}{{ user_verification_url }}
+
+
+
+Thank you and see you soon!
+
+Your {{ site_name }} Team{% endblocktrans %}{% endautoescape %}

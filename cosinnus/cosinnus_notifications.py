@@ -13,7 +13,8 @@ from django.utils.translation import ugettext_lazy as _
 
 """ Signal definitions """
 # also see cosinnus.core.signals
-from cosinnus.core.signals import user_group_join_requested
+from cosinnus.core.signals import user_group_join_requested,\
+    user_group_invitation_accepted, user_group_invitation_declined
 
 user_tagged_in_object = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
@@ -46,6 +47,20 @@ notifications = {
         'mail_template': 'cosinnus/mail/user_group_join_requested.html',
         'subject_template': 'cosinnus/mail/user_group_join_requested_subj.txt',
         'signals': [user_group_join_requested],
+        'default': True,
+    },
+    'user_group_invitation_accepted': {
+        'label': _('A user has accepted the invitation to this team (admins only)'), 
+        'mail_template': 'cosinnus/mail/user_group_invitation_accepted.html',
+        'subject_template': 'cosinnus/mail/user_group_invitation_accepted_subj.txt',
+        'signals': [user_group_invitation_accepted],
+        'default': True,
+    },
+    'user_group_invitation_declined': {
+        'label': _('A user has declined the invitation to this team (admins only)'), 
+        'mail_template': 'cosinnus/mail/user_group_invitation_declined.html',
+        'subject_template': 'cosinnus/mail/user_group_invitation_declined_subj.txt',
+        'signals': [user_group_invitation_declined],
         'default': True,
     },    
     'user_tagged_in_object': {
