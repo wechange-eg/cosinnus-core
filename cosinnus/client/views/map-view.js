@@ -95,6 +95,7 @@ module.exports = View.extend({
         this.clusteredMarkers = L.markerClusterGroup({
             maxClusterRadius: this.maxClusterRadius
         });
+        this.clusteredMarkers.on('spiderfied', this.handleSpiderfied, this);
         this.leaflet.addLayer(this.clusteredMarkers);
         this.setClusterState();
 
@@ -158,7 +159,7 @@ module.exports = View.extend({
             address: result.address
         }));
 
-        if (this.markerNotPopup(marker)) {
+        if (this.markerNotPopup(marker) && this.markerNotSpiderfied(marker)) {
             if (this.state.clustering) {
                 this.clusteredMarkers.addLayer(marker);
             } else {
@@ -177,6 +178,15 @@ module.exports = View.extend({
     markerNotPopup: function (marker) {
         var p = this.state.popup;
         return !p || !_(p.getLatLng()).isEqual(marker.getLatLng());
+    },
+
+    markerNotSpiderfied: function (marker) {
+        var s = this.state.spiderfied;
+        var ret = !s || !_(s.getAllChildMarkers()).find(function (m) {
+            return _(m.getLatLng()).isEqual(marker.getLatLng());
+        });
+        console.log('returning: ' + ret);
+        return ret;
     },
 
     removeMarker: function (marker) {
@@ -198,7 +208,7 @@ module.exports = View.extend({
         // Remove previous markers from map based on current clustering state.
         if (self.markers) {
             _(self.markers).each(function (marker) {
-                if (self.markerNotPopup(marker)) {
+                if (self.markerNotPopup(marker) && self.markerNotSpiderfied(marker)) {
                     self.removeMarker(marker);
                 }
             });
@@ -206,8 +216,15 @@ module.exports = View.extend({
 
         self.setClusterState();
         self.markers = [];
+
+        // Ensure popup and spiderfied markers are in the markers array;
+        // even when they aren't included in the latest results.
         if (self.state.popup) {
             self.markers.push(self.state.popup._source);
+        } else if (self.state.spiderfied) {
+            _(self.state.spiderfied.getAllChildMarkers()).each(function (m) {
+                self.markers.push(m);
+            });
         }
 
         // Add the individual markers.
@@ -252,5 +269,9 @@ module.exports = View.extend({
             }
             this.state.popup = null;
         }
+    },
+
+    handleSpiderfied: function (event) {
+        this.state.spiderfied = event.cluster;
     }
 });
