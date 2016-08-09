@@ -12,7 +12,8 @@ from awesome_avatar import forms as avatar_forms
 
 from cosinnus.models.group import (CosinnusGroupMembership,
     MEMBERSHIP_MEMBER, CosinnusPortal,
-    CosinnusLocation, RelatedGroups, CosinnusGroupGalleryImage)
+    CosinnusLocation, RelatedGroups, CosinnusGroupGalleryImage,
+    MEMBERSHIP_INVITED_PENDING)
 from cosinnus.core.registries.apps import app_registry
 from cosinnus.conf import settings
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
@@ -20,6 +21,7 @@ from django_select2.fields import HeavyModelSelect2MultipleChoiceField
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.core.urlresolvers import reverse
 from cosinnus.views.facebook_integration import FacebookIntegrationGroupFormMixin
+from cosinnus.utils.lanugages import MultiLanguageFieldValidationFormMixin
 
 # matches a twitter username
 TWITTER_USERNAME_VALID_RE = re.compile(r'^@?[A-Za-z0-9_]+$')
@@ -68,7 +70,7 @@ class AsssignPortalMixin(object):
         return super(AsssignPortalMixin, self).save(**kwargs)
 
 
-class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, forms.ModelForm):
+class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin, forms.ModelForm):
     
     avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
     website = forms.URLField(widget=forms.TextInput, required=False)
@@ -102,6 +104,16 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, forms.ModelForm):
             if type(field.widget) is SelectMultiple:
                 field.widget = Select2MultipleWidget(choices=field.choices)
     
+    def clean(self):
+        if not self.cleaned_data.get('name', None):
+            name = self.get_cleaned_name_from_other_languages()
+            if name:
+                self.cleaned_data['name'] = name
+                self.data['name'] = name
+                if 'name' in self.errors:
+                    del self.errors['name'] 
+        return super(CosinnusBaseGroupForm, self).clean()
+        
     def clean_video(self):
         data = self.cleaned_data['video']
         if data:

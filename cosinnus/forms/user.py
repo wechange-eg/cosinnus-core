@@ -12,6 +12,7 @@ from cosinnus.conf import settings
 from captcha.fields import ReCaptchaField
 from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
 from cosinnus.models.tagged import BaseTagObject
+from django.core.validators import MaxLengthValidator
 
 
 class UserKwargModelFormMixin(object):
@@ -39,15 +40,18 @@ class UserCreationForm(DjUserCreationForm):
         model = get_user_model()
         fields = (
             'username', 'email', 'password1', 'password2', 'first_name',
-            'last_name',
+            'last_name', 'tos_check',
         )
     
-    email = forms.EmailField(label=_('email address'), required=True) 
+    # email maxlength 220 instead of 254, to accomodate hashes to scramble them 
+    email = forms.EmailField(label=_('email address'), required=True, validators=[MaxLengthValidator(220)]) 
     first_name = forms.CharField(label=_('first name'), required=True)  
+    
+    tos_check = forms.BooleanField(label='tos_check', required=True)
+    
     
     if not settings.DEBUG and not settings.TESTING and not settings.COSINNUS_IS_INTEGRATED_PORTAL: 
         captcha = ReCaptchaField(attrs={'theme': 'clean'}, required=settings.DEBUG == False)
-    
     
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
@@ -81,6 +85,10 @@ class UserCreationForm(DjUserCreationForm):
             media_tag = user.cosinnus_profile.media_tag
             media_tag.visibility = BaseTagObject.VISIBILITY_ALL
             media_tag.save()
+        
+        # set the user's tos_accepted flag to true
+        user.cosinnus_profile.settings['tos_accepted'] = True
+        user.cosinnus_profile.save()
         
         return user
 

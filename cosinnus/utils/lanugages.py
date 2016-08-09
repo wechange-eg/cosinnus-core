@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 from django.utils.translation import ugettext_lazy as _, get_language
 from django.core.exceptions import FieldDoesNotExist
 
+from cosinnus.conf import settings
+
 
 class MultiLanguageFieldMagicMixin(object):
     
@@ -33,3 +35,16 @@ class MultiLanguageFieldMagicMixin(object):
             value = getattr(self, key)
         return value
 
+
+class MultiLanguageFieldValidationFormMixin(object):
+    
+    def get_cleaned_name_from_other_languages(self):
+        """ Fills the name field with the content of other language fields if no name in default language was entered """
+        name = None
+        for lang, _ in settings.LANGUAGES:
+            other_name_field = 'name_%s' % lang
+            if lang and self.cleaned_data.get(other_name_field, None):
+                name = self.cleaned_data.get(other_name_field)
+                break
+        return name
+    

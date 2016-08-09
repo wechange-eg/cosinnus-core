@@ -1,0 +1,8 @@
+{% load i18n cosinnus_tags %}{% group_url 'cosinnus:group-detail' group=object as group_page_url %}{% autoescape off %}{% blocktrans with team_name=object.name %}User "{{ sender_name }}" has declined the invitation to join "{{ team_name }}".
+
+You're receiving this email because you are an administrator of this team.
+
+(Follow this link to edit your notification preferences: {{ notification_settings_url }} )
+
+
+Your {{ site_name }} Team{% endblocktrans %}{% endautoescape %}
