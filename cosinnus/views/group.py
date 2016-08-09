@@ -30,7 +30,7 @@ from cosinnus.utils.compat import atomic
 from cosinnus.views.mixins.ajax import (DetailAjaxableResponseMixin,
     AjaxableFormMixin, ListAjaxableResponseMixin)
 from cosinnus.views.mixins.group import RequireAdminMixin, RequireReadMixin,\
-    RequireLoggedInMixin, EndlessPaginationMixin, RequireCreateObjectsInMixin
+    RequireLoggedInMixin, EndlessPaginationMixin
 from cosinnus.views.mixins.user import UserFormKwargsMixin
 
 from cosinnus.views.mixins.avatar import AvatarFormMixin
@@ -713,7 +713,7 @@ class UserSelectMixin(object):
         return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.group})
 
 
-class GroupUserInviteView(AjaxableFormMixin, RequireCreateObjectsInMixin, UserSelectMixin,
+class GroupUserInviteView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
                        CreateView):
     
     template_name = 'cosinnus/group/group_detail.html'
