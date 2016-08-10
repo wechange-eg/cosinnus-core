@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-08 17:47+0200\n"
-"PO-Revision-Date: 2016-08-08 18:12+0200\n"
+"PO-Revision-Date: 2016-08-10 15:24+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -1359,7 +1359,7 @@ msgstr "Beitreten"
 #: .\templates\cosinnus\group\leftnav_group.html:48
 #, python-format
 msgid "Do you really want to withdraw your join request to „%(title)s“?"
-msgstr "Möchten sie ihre Beitrittsanfrage für “%(title)s” zurückziehen?"
+msgstr "Möchtest du deine Beitrittsanfrage für “%(title)s” zurückziehen?"
 
 #: .\templates\cosinnus\_microsite__old_.html:103
 #: .\templates\cosinnus\dashboard.html:220
@@ -1376,7 +1376,7 @@ msgstr "Beitrittsanfrage zurückziehen"
 #: .\templates\cosinnus\group\leftnav_group.html:58
 #, python-format
 msgid "Do you wish to request to join „%(title)s“?"
-msgstr "Möchten sie %(title)s beitreten?"
+msgstr "Möchtest du %(title)s beitreten?"
 
 #: .\templates\cosinnus\_microsite__old_.html:137
 msgid "Add widget"
@@ -1826,7 +1826,7 @@ msgstr "Annehmen"
 #: .\templates\cosinnus\group\group_detail.html:134
 #, python-format
 msgid "Do you really want to accept user „%(name)s“ as a member?"
-msgstr "Möchten sie „%(name)s“ als Mitglied aufnehmen?"
+msgstr "Möchtest du „%(name)s“ als Mitglied aufnehmen?"
 
 #: .\templates\cosinnus\group\group_detail.html:135
 msgid "Accept Member"
@@ -1835,7 +1835,7 @@ msgstr "Mitglied aufnehmen"
 #: .\templates\cosinnus\group\group_detail.html:140
 #, python-format
 msgid "Do you really want to decline member „%(name)s“?"
-msgstr "Möchten sie „%(name)s“'s Mitglieder-Antrag wirklich ablehnen?"
+msgstr "Möchtest du „%(name)s“'s Mitglieder-Antrag wirklich ablehnen?"
 
 #: .\templates\cosinnus\group\group_detail.html:141
 msgid "Decline Member"
@@ -1873,7 +1873,7 @@ msgstr "Einladung annehmen"
 #: .\templates\cosinnus\group\group_detail.html:244
 #, python-format
 msgid "Do you really want to revoke the invitation for member „%(name)s“?"
-msgstr "Möchten sie „%(name)s“'s Einladung wirklich zurückziehen?"
+msgstr "Möchtest du „%(name)s“'s Einladung wirklich zurückziehen?"
 
 #: .\templates\cosinnus\group\group_detail.html:245
 msgid "Revoke Invitation for Member"
@@ -1882,7 +1882,7 @@ msgstr "Einladung für Benutzer zurückziehen"
 #: .\templates\cosinnus\group\group_detail.html:250
 #: .\templates\cosinnus\group\group_microsite.html:176
 msgid "Do you really want to decline the invitation?"
-msgstr "Möchten sie die Einladung wirklich ablehnen?"
+msgstr "Möchtest du die Einladung wirklich ablehnen?"
 
 #: .\templates\cosinnus\group\group_detail.html:281
 #: .\templates\cosinnus\user\portal_admin_list.html:67
@@ -1919,7 +1919,7 @@ msgstr "Als Admin"
 #, python-format
 msgid "Do you really want to demote administrator „%(name)s“ to member?"
 msgstr ""
-"Möchten sie Administrator „%(name)s“ wirklich zur/zum Mitglied herabstufen?"
+"Möchtest du Administrator „%(name)s“ wirklich zur/zum Mitglied herabstufen?"
 
 #: .\templates\cosinnus\group\group_detail.html:344
 msgid "Demote Admin"
@@ -1929,7 +1929,7 @@ msgstr "Projektadministrator herabstufen"
 #, python-format
 msgid "Do you really want to promote member „%(name)s“ to administrator?"
 msgstr ""
-"Möchten sie Mitglied „%(name)s“ wirklich zur/zum Administrator_in befördern?"
+"Möchtest du Mitglied „%(name)s“ wirklich zur/zum Administrator_in befördern?"
 
 #: .\templates\cosinnus\group\group_detail.html:349
 msgid "Promote Member"
@@ -1938,7 +1938,7 @@ msgstr "Mitglied befördern"
 #: .\templates\cosinnus\group\group_detail.html:355
 #, python-format
 msgid "Do you really want to remove member „%(name)s“ from the team?"
-msgstr "Möchten sie wirklich Mitglied „%(name)s“ entfernen?"
+msgstr "Möchtest du wirklich Mitglied „%(name)s“ entfernen?"
 
 #: .\templates\cosinnus\group\group_detail.html:356
 msgid "Remove Member"
@@ -2286,7 +2286,7 @@ msgstr "Details"
 #: .\templates\cosinnus\group\leftnav_group.html:38
 #, python-format
 msgid "Do you really want to leave „%(title)s“?"
-msgstr "Möchten sie das Projekt “%(title)s” verlassen?"
+msgstr "Möchtest du das Projekt “%(title)s” verlassen?"
 
 #: .\templates\cosinnus\group\group_list_items.html:190
 msgid "There are no groups."
@@ -4409,8 +4409,8 @@ msgid ""
 "You had already been invited to \"%(team_name)s\" and have now been made a "
 "member immediately!"
 msgstr ""
-"Du wurdest bereits zu \"%(team_name)s\" eingeladen und wurdest deswegen "
-"direkt Mitglied geworden!"
+"Du wurdest bereits zu \"%(team_name)s\" eingeladen und bist deswegen direkt "
+"Mitglied geworden!"
 
 #: .\views\group.py:562
 #, python-format
