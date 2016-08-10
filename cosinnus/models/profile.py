@@ -93,6 +93,9 @@ class BaseUserProfile(FacebookIntegrationUserProfileMixin, models.Model):
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
         blank=True, null=True, editable=False, on_delete=models.SET_NULL)
     website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
+    language = models.CharField(_('Language'), max_length=2,
+        choices=settings.LANGUAGES, default='de')
+    
     settings = JSONField(default={})
 
     objects = BaseUserProfileManager()
