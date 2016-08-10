@@ -783,11 +783,15 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
         if (len(group.admins) > 1 or not group.is_admin(user)):
             if user != self.request.user or check_user_superuser(self.request.user):
                 self.object.delete()
+                
             else:
                 messages.error(self.request, _('You cannot remove yourself from a %(team_type)s.') % {'team_type':self.object._meta.verbose_name})
+                return HttpResponseRedirect(self.get_success_url())
         else:
             messages.error(self.request, _('You cannot remove "%(username)s" form '
                 'this team. Only one admin left.') % {'username': user.get_full_name()})
+            return HttpResponseRedirect(self.get_success_url())
+        
         if current_status == MEMBERSHIP_PENDING:
             signals.user_group_join_declined.send(sender=self, group=group, user=user)
             messages.success(self.request, _('Your join request was withdrawn from %(team_type)s "%(team_name)s" successfully.') % {'team_type':self.object._meta.verbose_name, 'team_name': group.name})
