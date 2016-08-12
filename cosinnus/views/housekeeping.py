@@ -150,8 +150,19 @@ def getcache(request):
     if not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     
-    content = cache.get(HOUSEKEEPING_CACHE_KEY)
-    return HttpResponse("The debug cache entry contains: '%s'." % content)
+    cache_key = request.GET.get('key', HOUSEKEEPING_CACHE_KEY)
+    content = cache.get(cache_key)
+    return HttpResponse("The cache entry '%s' contains: '%s'." % (cache_key, content))
+
+        
+def deletecache(request):
+    """ access to function for moving group content from one group to another """
+    if not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    
+    cache_key = request.GET.get('key', HOUSEKEEPING_CACHE_KEY)
+    cache.delete(cache_key)
+    return HttpResponse("The cache entry '%s' was deleted." % cache_key)
 
 
 def check_and_delete_loop_redirects(request):
