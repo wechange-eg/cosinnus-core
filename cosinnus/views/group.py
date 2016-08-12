@@ -662,17 +662,8 @@ class GroupUserInvitationAcceptView(GroupUserWithdrawView):
                 group=self.object,
                 status=MEMBERSHIP_INVITED_PENDING
             )
-            membership.delete()
-            """ FIXME: this is a workaround for the group-members ('cosinnus/core/membership/CosinnusGroup/members/<pk>')
-                cache either not getting deleted, or not getting re-filled properly with a newly added member pk,
-                when they became a member by their CosinnusGroupMembership' object's status being changed and saved.
-                This might be a race condition with the cache being refilled during the object save, but I couldn't find out.
-                We actually now delete the object and create a new one. """
-            membership = CosinnusGroupMembership.objects.create(
-                user=self.request.user,
-                group=self.object,
-                status=MEMBERSHIP_MEMBER
-            )
+            membership.status = MEMBERSHIP_MEMBER
+            membership.save()
             signals.user_group_invitation_accepted.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
         except CosinnusGroupMembership.DoesNotExist:
             self._had_error = True
