@@ -604,7 +604,6 @@ class GroupUserWithdrawView(SamePortalGroupMixin, GroupConfirmMixin, DetailView)
     message_success = _('Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully.')
     
     @method_decorator(login_required)
-    @atomic
     def dispatch(self, request, *args, **kwargs):
         return super(GroupUserWithdrawView, self).dispatch(request, *args, **kwargs)
     
