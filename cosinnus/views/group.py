@@ -622,7 +622,7 @@ class GroupUserWithdrawView(SamePortalGroupMixin, GroupConfirmMixin, DetailView)
             membership = CosinnusGroupMembership.objects.get(
                 user=self.request.user,
                 group=self.object,
-                status=self.MEMBERSHIP_PENDING
+                status=MEMBERSHIP_PENDING
             )
             membership.delete()
         except CosinnusGroupMembership.DoesNotExist:
