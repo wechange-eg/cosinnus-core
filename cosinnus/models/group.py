@@ -451,10 +451,6 @@ class CosinnusPortal(models.Model):
         
     def __init__(self, *args, **kwargs):
         super(CosinnusPortal, self).__init__(*args, **kwargs)
-        self._admins = None
-        self._members = None
-        self._pendings = None
-        self._invited_pendings = None
     
     name = models.CharField(_('Name'), max_length=100,
         validators=[group_name_validator])
@@ -518,9 +514,7 @@ class CosinnusPortal(models.Model):
     
     @property
     def admins(self):
-        if self._admins is None:
-            self._admins = CosinnusPortalMembership.objects.get_admins(self.pk)
-        return self._admins
+        return CosinnusPortalMembership.objects.get_admins(self.pk)
 
     def is_admin(self, user):
         """Checks whether the given user is an admin of this group"""
@@ -529,9 +523,7 @@ class CosinnusPortal(models.Model):
 
     @property
     def members(self):
-        if self._members is None:
-            self._members = CosinnusPortalMembership.objects.get_members(self.pk)
-        return self._members
+        return CosinnusPortalMembership.objects.get_members(self.pk)
 
     def is_member(self, user):
         """Checks whether the given user is a member of this group"""
@@ -540,9 +532,7 @@ class CosinnusPortal(models.Model):
 
     @property
     def pendings(self):
-        if self._pendings is None:
-            self._pendings = CosinnusPortalMembership.objects.get_pendings(self.pk)
-        return self._pendings
+        return CosinnusPortalMembership.objects.get_pendings(self.pk)
 
     def is_pending(self, user):
         """Checks whether the given user has a pending status on this group"""
@@ -551,9 +541,7 @@ class CosinnusPortal(models.Model):
     
     @property
     def invited_pendings(self):
-        if self._invited_pendings is None:
-            self._invited_pendings = CosinnusPortalMembership.objects.get_invited_pendings(self.pk)
-        return self._invited_pendings
+        return CosinnusPortalMembership.objects.get_invited_pendings(self.pk)
 
     def is_invited_pending(self, user):
         """Checks whether the given user has a pending invitation status on this group"""
@@ -694,10 +682,6 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
 
     def __init__(self, *args, **kwargs):
         super(CosinnusBaseGroup, self).__init__(*args, **kwargs)
-        self._admins = None
-        self._members = None
-        self._pendings = None
-        self._invited_pendings = None
         self._portal_id = self.portal_id
         self._type = self.type
         self._slug = self.slug
@@ -786,9 +770,7 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
 
     @property
     def admins(self):
-        if self._admins is None:
-            self._admins = CosinnusGroupMembership.objects.get_admins(self.pk)
-        return self._admins
+        return CosinnusGroupMembership.objects.get_admins(self.pk)
 
     def is_admin(self, user):
         """Checks whether the given user is an admin of this group"""
@@ -798,9 +780,7 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
     @property
     def members(self):
         """ Returns a list of user ids that are members of this group, no matter if active or not """
-        if self._members is None:
-            self._members = CosinnusGroupMembership.objects.get_members(self.pk)
-        return self._members
+        return CosinnusGroupMembership.objects.get_members(self.pk)
     
     @property
     def actual_members(self):
@@ -821,9 +801,7 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
 
     @property
     def pendings(self):
-        if self._pendings is None:
-            self._pendings = CosinnusGroupMembership.objects.get_pendings(self.pk)
-        return self._pendings
+        return CosinnusGroupMembership.objects.get_pendings(self.pk)
 
     def is_pending(self, user):
         """Checks whether the given user has a pending status on this group"""
@@ -832,9 +810,7 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
     
     @property
     def invited_pendings(self):
-        if self._invited_pendings is None:
-            self._invited_pendings = CosinnusGroupMembership.objects.get_invited_pendings(self.pk)
-        return self._invited_pendings
+        return CosinnusGroupMembership.objects.get_invited_pendings(self.pk)
 
     def is_invited_pending(self, user):
         """Checks whether the given user has a pending invitation status on this group"""
@@ -876,7 +852,7 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
         CosinnusGroupMembership.clear_member_cache_for_group(self)
 
     def _clear_local_cache(self):
-        self._admins = self._members = self._pendings = self._invited_pendings = None
+        pass
         
     @property
     def avatar_url(self):

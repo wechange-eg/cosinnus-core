@@ -604,7 +604,6 @@ class GroupUserWithdrawView(SamePortalGroupMixin, GroupConfirmMixin, DetailView)
     message_success = _('Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully.')
     
     @method_decorator(login_required)
-    @atomic
     def dispatch(self, request, *args, **kwargs):
         return super(GroupUserWithdrawView, self).dispatch(request, *args, **kwargs)
     
@@ -623,7 +622,7 @@ class GroupUserWithdrawView(SamePortalGroupMixin, GroupConfirmMixin, DetailView)
             membership = CosinnusGroupMembership.objects.get(
                 user=self.request.user,
                 group=self.object,
-                status=self.MEMBERSHIP_PENDING
+                status=MEMBERSHIP_PENDING
             )
             membership.delete()
         except CosinnusGroupMembership.DoesNotExist:
@@ -654,14 +653,6 @@ group_user_invitation_decline = GroupUserInvitationDeclineView.as_view()
 class GroupUserInvitationAcceptView(GroupUserWithdrawView):
 
     message_success = _('You are now a member of %(team_type)s “%(team_name)s”. Welcome!')
-    
-    def get_success_url(self):
-        if not getattr(self, '_had_error', False):
-            # redirect to group dashboard on successful invitation accept
-            messages.success(self.request, self.message_success % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name})
-            return self.object.get_absolute_url()
-        # self.referer is set in post() method
-        return self.referer
     
     def confirm_action(self):
         try:
@@ -783,11 +774,15 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
         if (len(group.admins) > 1 or not group.is_admin(user)):
             if user != self.request.user or check_user_superuser(self.request.user):
                 self.object.delete()
+                
             else:
                 messages.error(self.request, _('You cannot remove yourself from a %(team_type)s.') % {'team_type':self.object._meta.verbose_name})
+                return HttpResponseRedirect(self.get_success_url())
         else:
             messages.error(self.request, _('You cannot remove "%(username)s" form '
                 'this team. Only one admin left.') % {'username': user.get_full_name()})
+            return HttpResponseRedirect(self.get_success_url())
+        
         if current_status == MEMBERSHIP_PENDING:
             signals.user_group_join_declined.send(sender=self, group=group, user=user)
             messages.success(self.request, _('Your join request was withdrawn from %(team_type)s "%(team_name)s" successfully.') % {'team_type':self.object._meta.verbose_name, 'team_name': group.name})
