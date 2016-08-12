@@ -655,14 +655,6 @@ class GroupUserInvitationAcceptView(GroupUserWithdrawView):
 
     message_success = _('You are now a member of %(team_type)s “%(team_name)s”. Welcome!')
     
-    def get_success_url(self):
-        if not getattr(self, '_had_error', False):
-            # redirect to group dashboard on successful invitation accept
-            messages.success(self.request, self.message_success % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name})
-            return self.object.get_absolute_url()
-        # self.referer is set in post() method
-        return self.referer
-    
     def confirm_action(self):
         try:
             membership = CosinnusGroupMembership.objects.get(
