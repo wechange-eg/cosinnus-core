@@ -55,7 +55,7 @@ setup(
     data_files=data_files,
     install_requires=[
         # please mirror all changes in the requirements.txt for local installs!
-        'Django==1.8.5',
+        'Django==1.8.14',
         'Pillow==2.3.0',
         'MarkupSafe==0.18',
         'Pillow==2.3.0',
