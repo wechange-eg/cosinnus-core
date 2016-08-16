@@ -2827,6 +2827,10 @@ tbody.collapse.in {
   cursor: not-allowed;
 }
 
+.dropdown-menu > .inactive > a, .dropdown-menu > .inactive > a:hover, .dropdown-menu > .inactive > a:focus {
+  color: #999999;
+}
+
 .open > .dropdown-menu {
   display: block;
 }

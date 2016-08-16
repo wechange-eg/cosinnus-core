@@ -3,7 +3,7 @@
 
 {% lazy_paginate 20 rows %}
 
-{% for group, members, pendings, admins in rows %}
+{% for group, members, pendings, admins, invited in rows %}
     
     {% group_url 'cosinnus:group-dashboard' group=group as group_url %}
     {% comment %}  Microsite is not being linked to for now
@@ -14,7 +14,7 @@
     {% endif %}
     {% endcomment %}
     <div class="fadedown regular-space {% if filter_group and filter_group.id == group.id %}open {% endif %}">
-        <div class="btn btn-{% if group.is_active and user.is_authenticated and user.pk in members or group.public and group.is_active %}emphasized{% else %}default{% endif %} w100">
+        <div class="btn btn-{% if group.is_active and user.is_authenticated and user.pk in members or group.is_active and user.is_authenticated and user.pk in invited or group.public and group.is_active %}emphasized{% else %}default{% endif %} w100">
             <ul class="media-list">
                 <li class="media">
                     {% if not group.public and not user.pk in members and not user|is_superuser or not group.is_active or SETTINGS.COSINNUS_MICROSITES_ENABLED %}
@@ -43,6 +43,8 @@
                                     {% trans "Member" %}
                                 {% elif user.pk in pendings %}
                                     {% trans "Membership requested" %}
+                                {% elif user.pk in invited %}
+                                    {% trans "Invited to be a member" %}
                                 {% elif group.public %}
                                     {% trans "Public" context "Group" %}
                                 {% else %}
@@ -52,7 +54,7 @@
                         </span>
                         {% if not group.is_active %}
                         	{% trans "(Inactive)" %} {{ group.name }}
-                        {% elif group.public or user.pk in members or user|is_superuser or SETTINGS.COSINNUS_MICROSITES_ENABLED %}
+                        {% elif group.public or user.pk in members or user.pk in invited or user|is_superuser or SETTINGS.COSINNUS_MICROSITES_ENABLED %}
                             <a href="{{ group_url }}">
                                 {{ group.name }}
                             </a>
@@ -73,7 +75,7 @@
             
             {% if group.is_active %}
             
-	            {% if user.is_authenticated %}
+	            {% if user.is_authenticated and not user.pk in invited %}
 			        {% captureas modal_id %}groupModal_{{group.slug}}{% endcaptureas %}
 		            <button type="button" class="btn btn-emphasized" data-toggle="modal" data-target="#{{modal_id}}">
 		                   
@@ -111,7 +113,7 @@
 	                </button>
                 {% endif %}
                 
-                {% if group.public or user.pk in members or user|is_superuser %}
+                {% if group.public or user.pk in members or user|is_superuser or user.pk in invited %}
 	                <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:group-detail' group=group %}">
 	                    <ul class="media-list">
 	                        <li class="media">
