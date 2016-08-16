@@ -344,12 +344,12 @@ class GroupListView(EndlessPaginationMixin, ListAjaxableResponseMixin, ListView)
 
     def get_context_data(self, **kwargs):
         ctx = super(GroupListView, self).get_context_data(**kwargs)
-        members, pendings, admins = [], [], []
+        members, pendings, admins, invited = [], [], [], []
         
         # for each group, put the user pk in the appropriate status list if the user is in the group
         # for this view, we do not care about other users, thus the reduced query
         for group in ctx['object_list']:
-            _members, _pendings, _admins = [], [], []
+            _members, _pendings, _admins, _invited = [], [], [], []
             if self.request.user.is_authenticated():
                 user_pk = self.request.user.pk
                 try:
@@ -359,14 +359,17 @@ class GroupListView(EndlessPaginationMixin, ListAjaxableResponseMixin, ListView)
                         _members.append(user_pk)
                     if user_pk in CosinnusGroupMembership.objects.get_pendings(group=group):
                         _pendings.append(user_pk)
+                    if user_pk in CosinnusGroupMembership.objects.get_invited_pendings(group=group):
+                        _invited.append(user_pk)
                 except CosinnusGroupMembership.DoesNotExist:
                     pass
             members.append(_members)
             pendings.append(_pendings)
             admins.append(_admins)
+            invited.append(_invited)
             
         ctx.update({
-            'rows': zip(ctx['object_list'], members, pendings, admins),
+            'rows': zip(ctx['object_list'], members, pendings, admins, invited),
             'unpaginated_rows': self.object_list,
             'map_groups': self.object_list, # unpaginated groups
             'group_type': self.group_type,

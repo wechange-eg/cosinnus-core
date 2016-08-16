@@ -303,6 +303,12 @@ class CosinnusGroupManager(models.Manager):
             or admin of.
         """
         return self.get_cached(pks=self.get_for_user_pks(user, includeInactive=includeInactive))
+    
+    def get_for_user_invited(self, user, includeInactive=False):
+        """
+        :returns: a list of :class:`CosinnusGroup` the given user is invited to.
+        """
+        return self.get_cached(pks=self.get_for_user_pks(user, member_status_in=[MEMBERSHIP_INVITED_PENDING], includeInactive=includeInactive))
 
     def get_for_user_pks(self, user, include_public=False, member_status_in=MEMBER_STATUS, includeInactive=False):
         """

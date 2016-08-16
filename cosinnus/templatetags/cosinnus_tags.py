@@ -229,6 +229,8 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
     if user.is_authenticated():
         context['groups'] = CosinnusProject.objects.get_for_user(request.user)
         context['societies'] = CosinnusSociety.objects.get_for_user(request.user)
+        context['groups_invited'] = CosinnusProject.objects.get_for_user_invited(request.user)
+        context['societies_invited'] = CosinnusSociety.objects.get_for_user_invited(request.user)
     
     try:
         current_app = resolve(request.path).app_name
