@@ -1,0 +1,22 @@
+@import 'mixins';
+
+table.container.header {
+    background-color: $back;
+    margin-top: $global-margin * 1.5;
+    margin-top: $global-margin * 2;
+
+    .row {
+        height: $global-margin * 4;
+
+        .columns {
+            padding-bottom: 0;
+
+            span {
+                font-weight: 700;
+
+                @include lettering(2);
+            }
+        }
+    }
+
+}

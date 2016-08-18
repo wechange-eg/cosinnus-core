@@ -2,34 +2,14 @@
 @import 'foundation-emails';
 @import 'mixins';
 
-table.container {
-    &.header,
-    &.footer {
-        background-color: $back;
-        margin-top: $global-margin * 1.5;
-    }
+// Components
+// ----------
 
-    &.header {
-        margin-top: $global-margin * 2;
-    }
-}
+@import 'header';
+@import 'footer';
 
-
-.header {
-    .row {
-        height: $global-margin * 4;
-    }
-
-    .columns {
-        padding-bottom: 0;
-    }
-
-    span {
-        font-weight: 700;
-
-        @include lettering(2);
-    }
-}
+// Global Styles
+// -------------
 
 .body {
     border-radius: 6px;
@@ -48,19 +28,5 @@ table.container {
         @extend h5;
         padding-left: $global-margin;
         margin-bottom: 0;
-    }
-}
-
-.opt-out {
-    $hue: hue($primary-color);
-    $opt-out-color: hsl($hue, 5, 60);
-
-    p {
-        font-size: $global-font-size / 1.15;
-        color: $opt-out-color;
-
-        a {
-            color: $opt-out-color;
-        }
     }
 }
