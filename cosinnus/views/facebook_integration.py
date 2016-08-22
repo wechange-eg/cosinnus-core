@@ -351,7 +351,10 @@ def save_auth_tokens(request):
     # for some reason, the oauth graph node returns a QSL string, and not JSON
     content_auth = dict(urlparse.parse_qsl(response.read()))
     # content should contain 'access_token' (string) and 'expires' (string, in seconds)
-    if not 'access_token' in content_auth or not 'expires' in content_auth or not _is_number(content_auth['expires']):
+    seconds_expired = 60 * 60 * 24 * 60
+    # this used to be the old style API
+    # seconds = int(content_auth['expires'])
+    if not 'access_token' in content_auth: #or not 'expires' in content_auth or not _is_number(content_auth['expires']):
         logger.error('Error when trying to retrieve long-lived-access-token from Facebook (missing data):', extra={'content_auth': content_auth})
         return HttpResponseServerError('Facebook request could not be completed (3).')
     
@@ -387,7 +390,7 @@ def save_auth_tokens(request):
     profile.settings['fb_accessToken'] = access_token
     profile.settings['fb_username'] = fb_username
     # we save the time-point in UTC seconds after which this token must be renewed    
-    then = datetime.now() + timedelta(seconds=int(content_auth['expires']))
+    then = datetime.now() + timedelta(seconds=seconds_expired)
     profile.settings['fb_expiresAfterUTCSeconds'] = datetime_in_seconds(then)
     profile.save()
     
