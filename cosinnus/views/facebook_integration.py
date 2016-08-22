@@ -352,7 +352,7 @@ def save_auth_tokens(request):
     content_auth = dict(urlparse.parse_qsl(response.read()))
     # content should contain 'access_token' (string) and 'expires' (string, in seconds)
     if not 'access_token' in content_auth or not 'expires' in content_auth or not _is_number(content_auth['expires']):
-        logger.error('Error when trying to retrieve long-lived-access-token from Facebook (missing data):', extra={'content_auth': content_auth})
+        logger.error('Error when trying to retrieve long-lived-access-token from Facebook (missing data):', extra={'content_auth': content_auth, 'location_url': location_url})
         return HttpResponseServerError('Facebook request could not be completed (3).')
     
     access_token = content_auth['access_token']
