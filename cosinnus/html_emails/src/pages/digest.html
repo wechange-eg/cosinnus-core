@@ -1,0 +1,60 @@
+---
+page: digest
+portal_name: Wachstumswende
+portal_image_url: /assets/img/logo.png
+groups:
+    - groupName: Interested Civilians
+      items:
+          - type: doc
+            eventText: new document
+            objectName: A radically condensed history of economism
+          - type: event
+            eventText: new event
+            objectName: How to deal with status anxiety
+          - type: event
+            eventText: upcoming event
+            objectName: Wine & cheese & more wine
+    - groupName: Friends of Tehran
+      items:
+          - type: doc
+            eventText: new document
+            objectName: A million books
+          - type: news
+            eventText: news
+            objectName: Call for fundraising
+          - type: poll
+            eventText: poll
+            objectName: How well do you know your Hafiz?
+---
+
+<row class="subject">
+    <columns>
+        <h2>Look what happened in the last week!</h2>
+    </columns>
+</row>
+
+{{#each groups}}
+    <row class="summary-group{{#if @last}} last{{/if}}">
+        <columns>
+            <row class="origin">
+
+                <columns small="10" large="10" valign="top">
+                    <h3>
+                        <a href="/group">{{groupName}}</a>
+                    </h3>
+
+                    {{#each items}}
+                        {{> summary_item}}
+                    {{/each}}
+                </columns>
+
+                <columns small="2" large="2" valign="top">
+                    <a href="/group">
+                        <img src="/assets/img/group_logo.jpg" />
+                    </a>
+                </columns>
+            </row>
+
+        </columns>
+    </row>
+{{/each}}
