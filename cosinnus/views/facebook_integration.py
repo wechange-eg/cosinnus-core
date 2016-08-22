@@ -63,7 +63,7 @@ class FacebookIntegrationUserProfileMixin(object):
     def get_facebook_avatar_url(self):
         user_id = self.get_facebook_user_id()
         if user_id:
-            return 'https://graph.facebook.com/%s/picture?type=square' % user_id
+            return 'https://graph.facebook.com/v2.5/%s/picture?type=square' % user_id
         return ''
     
     def delete_facebook_association(self):
@@ -229,7 +229,7 @@ class FacebookIntegrationGroupFormMixin(object):
             access_token = self.request.user.cosinnus_profile.settings['fb_accessToken']
             had_error = False
             try:
-                location_url = "https://graph.facebook.com/%(group_id)s?access_token=%(access_token)s" \
+                location_url = "https://graph.facebook.com/v2.5/%(group_id)s?access_token=%(access_token)s" \
                        % {
                           'group_id': facebook_id,
                           'access_token': access_token,
@@ -287,7 +287,7 @@ def obtain_facebook_page_access_token_for_user(group, page_id, user):
     access_token = user.cosinnus_profile.settings['fb_accessToken']
     had_error = False
     try:
-        location_url = "https://graph.facebook.com/%(page_id)s?fields=access_token&access_token=%(access_token)s" \
+        location_url = "https://graph.facebook.com/v2.5/%(page_id)s?fields=access_token&access_token=%(access_token)s" \
             % {
                'page_id': page_id,
                'access_token': access_token,
@@ -333,7 +333,7 @@ def save_auth_tokens(request):
     
     try:
         # The client only gets a short ~2hr access token. We will now exchange that for a long-lived  ~60day token.
-        location_url = "https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id=%(app-id)s&client_secret=%(app-secret)s&fb_exchange_token=%(short-lived-token)s" \
+        location_url = "https://graph.facebook.com/v2.5/oauth/access_token?grant_type=fb_exchange_token&client_id=%(app-id)s&client_secret=%(app-secret)s&fb_exchange_token=%(short-lived-token)s" \
                % {
                   'app-id': settings.COSINNUS_FACEBOOK_INTEGRATION_APP_ID,
                   'app-secret': settings.COSINNUS_FACEBOOK_INTEGRATION_APP_SECRET,
@@ -360,7 +360,7 @@ def save_auth_tokens(request):
     # get username!
     fb_username = None
     try:
-        location_url = "https://graph.facebook.com/%(user_id)s?access_token=%(access_token)s" \
+        location_url = "https://graph.facebook.com/v2.5/%(user_id)s?access_token=%(access_token)s" \
                % {
                   'user_id': user_id,
                   'access_token': access_token,

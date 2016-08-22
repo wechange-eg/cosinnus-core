@@ -882,7 +882,7 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
     def get_facebook_avatar_url(self):
         page_or_group_id = self.facebook_page_id or self.facebook_group_id or None
         if page_or_group_id:
-            return 'https://graph.facebook.com/%s/picture?type=square' % page_or_group_id
+            return 'https://graph.facebook.com/v2.5/%s/picture?type=square' % page_or_group_id
         return ''
     
     def get_locations(self):
