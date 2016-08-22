@@ -333,7 +333,7 @@ def save_auth_tokens(request):
     
     try:
         # The client only gets a short ~2hr access token. We will now exchange that for a long-lived  ~60day token.
-        location_url = "https://graph.facebook.com/v2.3/oauth/access_token?grant_type=fb_exchange_token&client_id=%(app-id)s&client_secret=%(app-secret)s&fb_exchange_token=%(short-lived-token)s" \
+        location_url = "https://graph.facebook.com/v2.5/oauth/access_token?grant_type=fb_exchange_token&client_id=%(app-id)s&client_secret=%(app-secret)s&fb_exchange_token=%(short-lived-token)s" \
                % {
                   'app-id': settings.COSINNUS_FACEBOOK_INTEGRATION_APP_ID,
                   'app-secret': settings.COSINNUS_FACEBOOK_INTEGRATION_APP_SECRET,
