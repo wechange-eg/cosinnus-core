@@ -1,17 +1,28 @@
 <row class="summary-group{{#if @last}} last{{/if}}">
     <columns class="items" small="10" large="10" valign="top">
         <h3>
-            <a href="/group">{{group_name}}</a>
+            <a href="/group">
+                {{#rw this}}group_name{{/rw}}
+            </a>
         </h3>
 
-        {{#each items}}
-            {{> summary_item}}
-        {{/each}}
+        {{#if raw}}
+            {{{{raw}}}}
+                {% for item in items %}
+                    {% include 'path/to/summary_item.html' %}
+                {% endfor %}
+            {{{{/raw}}}}
+        {{else}}
+            {{#each items}}
+                {{> summary_item}}
+            {{/each}}
+        {{/if}}
+
     </columns>
 
     <columns small="2" large="2" valign="top">
         <a href="/group">
-            <img src="{{image_url}}" />
+            <img src="{{#rw this}}image_url{{/rw}}" />
         </a>
     </columns>
 </row>

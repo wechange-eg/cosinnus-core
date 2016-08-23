@@ -1,0 +1,23 @@
+<row class="address">
+    <columns>
+        <h2>Hi Vincent,</h2>
+    </columns>
+</row>
+
+<row class="intro">
+    <columns>
+        <h2>Look what happened in the last week!</h2>
+    </columns>
+</row>
+
+{{#if raw}}
+    {{{{raw}}}}
+        {% for group in groups %}
+            {% include 'path/to/summary_group.html' %}
+        {% endfor %}
+    {{{{/raw}}}}
+{{else}}
+    {{#each groups}}
+        {{> summary_group}}
+    {{/each}}
+{{/if}}

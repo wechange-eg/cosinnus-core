@@ -1,7 +1,7 @@
 <row class="summary-item">
     <columns large="1" valign="middle">
         <a href="/doc">
-            <img class="level-2" src="{{image_url}}" />
+            <img class="level-2" src="{{#rw this}}image_url{{/rw}}" />
         </a>
     </columns>
 
@@ -9,15 +9,15 @@
         <row>
             <columns>
                 <span>
-                    {{event_text}}
+                    {{#rw this}}event_text{{/rw}}
                 </span>
             </columns>
         </row>
 
-        <row class="object-name {{type}}">
+        <row class="object-name {{#rw this}}type{{/rw}}">
             <columns>
                 <h3>
-                    {{object_name}}
+                    {{#rw this}}object_name{{/rw}}
                 </h3>
             </columns>
         </row>
