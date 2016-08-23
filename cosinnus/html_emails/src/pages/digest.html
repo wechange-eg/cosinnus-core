@@ -3,28 +3,36 @@ page: digest
 portal_name: Wachstumswende
 portal_image_url: /assets/img/logo.png
 groups:
-    - groupName: Interested Civilians
+    - group_name: Interested Civilians
+      image_url: /assets/img/group_logo.jpg
       items:
           - type: doc
-            eventText: new document
-            objectName: A radically condensed history of economism
+            event_text: new document
+            object_name: A radically condensed history of economism
+            image_url: /assets/img/avatar_sample_1.jpg
           - type: event
-            eventText: new event
-            objectName: How to deal with status anxiety
+            event_text: new event
+            object_name: How to deal with status anxiety
+            image_url: /assets/img/avatar_sample_2.jpg
           - type: event
-            eventText: upcoming event
-            objectName: Wine & cheese & more wine
-    - groupName: Friends of Tehran
+            event_text: upcoming event
+            object_name: Wine & cheese & more wine
+            image_url: /assets/img/avatar_sample_2.jpg
+    - group_name: Friends of Tehran
+      image_url: /assets/img/sinn_logo.png
       items:
           - type: doc
-            eventText: new document
-            objectName: A million books
+            event_text: new document
+            object_name: A million books
+            image_url: /assets/img/avatar_sample_3.jpg
           - type: news
-            eventText: news
-            objectName: Call for fundraising
+            event_text: news
+            object_name: Call for fundraising
+            image_url: /assets/img/avatar_sample_3.jpg
           - type: poll
-            eventText: poll
-            objectName: How well do you know your Hafiz?
+            event_text: poll
+            object_name: How well do you know your Hafiz?
+            image_url: /assets/img/avatar_sample_4.jpg
 ---
 
 <row class="subject">
@@ -40,7 +48,7 @@ groups:
 
                 <columns small="10" large="10" valign="top">
                     <h3>
-                        <a href="/group">{{groupName}}</a>
+                        <a href="/group">{{group_name}}</a>
                     </h3>
 
                     {{#each items}}
@@ -50,7 +58,7 @@ groups:
 
                 <columns small="2" large="2" valign="top">
                     <a href="/group">
-                        <img src="/assets/img/group_logo.jpg" />
+                        <img src="{{image_url}}" />
                     </a>
                 </columns>
             </row>
