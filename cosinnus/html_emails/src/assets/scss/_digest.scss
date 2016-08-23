@@ -1,35 +1,55 @@
-@import 'wechange-variables';
+@import 'wechange_variables';
 
 .digest {
+    .address {
+        margin-top: $global-margin * 3;
+
+        h2 {
+            @extend h5;
+            font-weight: 500;
+        }
+
+        .columns {
+            padding-bottom: 0;
+        }
+    }
+
+    .intro {
+        margin-bottom: $global-margin * 2;
+        border-bottom: 2px solid #f6f5f2;
+
+        h2 {
+            font-size: $global-font-size;
+        }
+
+        .columns {
+            padding-bottom: $global-margin * 2;
+        }
+    }
+
     .summary-group {
-        margin-bottom: 15px;
+        margin-bottom: $global-margin * 2;
+        border-bottom: 2px solid #f6f5f2;
 
-        .origin {
-            margin-bottom: 10px;
-            border-bottom: 2px solid #f6f5f2;
-
-            .columns {
-                padding-bottom: 20px;
-            }
+        .items {
+            padding-bottom: $global-margin * 2;
+        }
 
 
-            h3 {
-                @extend h5;
-                margin-bottom: $global-margin;
+        h3 {
+            @extend h5;
+            margin-bottom: $global-margin;
 
-                a {
-                    text-decoration: none;
-                    font-weight: bold;
-                    $hue: hue($primary-color);
-                    color: hsl($hue, 40, 40);
-                }
+            a {
+                text-decoration: none;
+                font-weight: bold;
+                $hue: hue($primary-color);
+                color: hsl($hue, 40, 40);
             }
         }
 
         &.last {
-            .origin {
-                border: none;
-            }
+            border: none;
         }
 
 
