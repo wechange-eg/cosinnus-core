@@ -207,7 +207,7 @@ class EventMapResult(MapResult):
             event.media_tag.location,
             event.title,
             event.get_absolute_url(),
-            (event.attached_image and event.attached_image.static_image_url) or static('images/event-image-placeholder.png'),
+            (event.attached_image and event.attached_image.static_image_url()) or static('images/event-image-placeholder.png'),
             event.note,
         )
 
