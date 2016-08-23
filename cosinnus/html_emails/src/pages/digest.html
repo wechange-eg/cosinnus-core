@@ -48,21 +48,5 @@ groups:
 </row>
 
 {{#each groups}}
-    <row class="summary-group{{#if @last}} last{{/if}}">
-        <columns class="items" small="10" large="10" valign="top">
-            <h3>
-                <a href="/group">{{group_name}}</a>
-            </h3>
-
-            {{#each items}}
-                {{> summary_item}}
-            {{/each}}
-        </columns>
-
-        <columns small="2" large="2" valign="top">
-            <a href="/group">
-                <img src="{{image_url}}" />
-            </a>
-        </columns>
-    </row>
+    {{> summary_group}}
 {{/each}}
