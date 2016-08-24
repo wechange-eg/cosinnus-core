@@ -456,3 +456,63 @@ a.portal-inlink:hover img {
   align-items: center;
 }
 
+.condensed-radio-input {
+	display: inline-block;
+
+	label {
+		margin: 0;
+		padding: 0;
+		display: inline-block;
+
+		input {
+			display:none;
+
+			+ span {
+				border: 1px solid @app-main-color;
+				border-width: 1px 1px 1px 0;
+				display:inline-block;
+				margin: 0;
+				padding: 4px 12px;
+				background-color: white;
+				color: @app-main-color;
+				//border-radius: 3px;
+				cursor: pointer;
+
+				&:hover, &:focus, &:active {
+					color: @app-main-color-dark;
+					border-color: @app-main-color-dark;
+					background-color: @app-main-color-light;
+				}
+			}
+			&:checked + span {
+				background-image: none;
+				background-color: @app-main-color;
+				color: white;
+				cursor: default;
+
+				&:hover, &:focus, &:active {
+					border-color: @app-main-color-dark;
+				}
+			}
+		}
+
+		&:first-child {
+			input {
+				+ span {
+					border-left-width: 1px;
+					border-top-left-radius: 3px;
+					border-bottom-left-radius: 3px;
+				}
+			}
+		}
+		&:last-child {
+			input {
+				+ span {
+					border-top-right-radius: 3px;
+					border-bottom-right-radius: 3px;
+				}
+			}
+		}
+
+	}
+}
