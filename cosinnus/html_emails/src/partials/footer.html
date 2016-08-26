@@ -6,9 +6,8 @@
             <row class="opt-out">
                 <columns>
                     <p>
-                        You're receiving this email because you are an administrator of
-                        this team. You can edit your notification preferences
-                        <a href="/prefs">here</a>
+                    	{{#rw this}}notification_reason{{/rw}}
+                        <a href="{{#rw this}}prefs_url{{/rw}}">{{{{raw}}}}{% trans "Notification Preferences" %}{{{{/raw}}}}</a>
                     </p>
                 </columns>
             </row>

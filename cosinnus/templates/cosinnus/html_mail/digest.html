@@ -1,0 +1,162 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title></title>
+  </head>
+  <body>
+    <!-- <style> -->
+    <span class="preheader"></span>
+    <table class="body">
+      <tr>
+        <td class="center" align="center" valign="top">
+          <center data-parsed="">
+            <table align="center" class="container header float-center"><tbody><tr><td>
+                <table class="row"><tbody><tr>
+                        <th class="small-12 large-7 columns first" valign="middle">
+      <table>
+        <tr>
+          <th></th>
+        </tr>
+      </table>
+    </th>
+            
+                        <th class="logo small-2 large-1 columns" valign="middle">
+      <table>
+        <tr>
+          <th>
+                        <img src="">
+                    </th>
+        </tr>
+      </table>
+    </th>
+            
+                        <th class="small-10 large-4 columns last" valign="middle">
+      <table>
+        <tr>
+          <th>
+                        <span></span>
+                    </th>
+        </tr>
+      </table>
+    </th>
+                </tr></tbody></table>
+            </td></tr></tbody></table>
+            
+
+            <table align="center" class="container content  float-center"><tbody><tr><td>
+                <table class="row"><tbody><tr>
+                        <th class="small-12 large-1 columns first">
+      <table>
+        <tr>
+          <th></th>
+        </tr>
+      </table>
+    </th>
+
+                        <th class="small-12 large-10 columns">
+      <table>
+        <tr>
+          <th>
+                        
+                        <table class="row address"><tbody><tr>
+                                <th class="small-12 large-12 columns first last">
+      <table>
+        <tr>
+          <th>
+                                <h2>{% trans "Hi," %} {{addressee}},</h2>
+                            </th>
+<th class="expander"></th>
+        </tr>
+      </table>
+    </th>
+                        </tr></tbody></table>
+                        
+                        <table class="row intro"><tbody><tr>
+                                <th class="small-12 large-12 columns first last">
+      <table>
+        <tr>
+          <th>
+                                <h2>{{topic}}</h2>
+                            </th>
+<th class="expander"></th>
+        </tr>
+      </table>
+    </th>
+                        </tr></tbody></table>
+                        
+                                {{ digest_body_html }}
+                        
+                        
+                    </th>
+        </tr>
+      </table>
+    </th>
+
+                        <th class="small-12 large-1 columns last">
+      <table>
+        <tr>
+          <th></th>
+        </tr>
+      </table>
+    </th>
+                </tr></tbody></table>
+            </td></tr></tbody></table>
+
+            <table align="center" class="container footer float-center"><tbody><tr><td>
+                <table class="row"><tbody><tr>
+                        <th class="small-12 large-1 columns first">
+      <table>
+        <tr>
+          <th></th>
+        </tr>
+      </table>
+    </th>
+            
+                        <th class="small-12 large-10 columns">
+      <table>
+        <tr>
+          <th>
+                        <table class="row opt-out"><tbody><tr>
+                                <th class="small-12 large-12 columns first last">
+      <table>
+        <tr>
+          <th>
+                                <p>
+                                	{{notification_reason}}
+                                    <a href="{{prefs_url}}">{% trans "Notification Preferences" %}</a>
+                                </p>
+                            </th>
+<th class="expander"></th>
+        </tr>
+      </table>
+    </th>
+                        </tr></tbody></table>
+                    </th>
+        </tr>
+      </table>
+    </th>
+            
+                        <th class="small-12 large-1 columns last">
+      <table>
+        <tr>
+          <th></th>
+        </tr>
+      </table>
+    </th>
+                </tr></tbody></table>
+            </td></tr></tbody></table>
+            
+          </center>
+        </td>
+      </tr>
+    </table>
+    <!-- prevent Gmail on iOS font size manipulation -->
+   <div style="display:none; white-space:nowrap; font:15px courier; line-height:0;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </div>
+  </body>
+</html>
