@@ -1,0 +1,9 @@
+@mixin lettering ($multiplier: 1) {
+    letter-spacing: 0.01em * $multiplier;
+}
+
+@mixin respond() {
+    @media (max-width: 596px) {
+        @content;
+    }
+}

@@ -1,0 +1,9 @@
+.notification {
+    .origin {
+        h3 {
+            padding-left: $global-margin;
+            @extend h5;
+            margin-bottom: 0;
+        }
+    }
+}

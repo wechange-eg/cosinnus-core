@@ -1,0 +1,26 @@
+<row class="summary-group{{#if @last}} last{{/if}}">
+    <columns class="items" small="10" large="10" valign="top">
+        <h3>
+            <a href="{{#rw this}}group_url{{/rw}}">
+                {{#rw this}}group_name{{/rw}}
+            </a>
+        </h3>
+
+        {{#if raw}}
+            {{{{raw}}}}
+                {{ group_body_html }}
+            {{{{/raw}}}}
+        {{else}}
+            {{#each items}}
+                {{> summary_item}}
+            {{/each}}
+        {{/if}}
+
+    </columns>
+
+    <columns small="2" large="2" valign="top">
+        <a href="/group">
+            <img src="{{#rw this}}image_url{{/rw}}" />
+        </a>
+    </columns>
+</row>

@@ -1,0 +1,30 @@
+@import 'wechange_variables';
+
+.digest {
+    .address {
+        margin-top: $global-margin * 3;
+
+        h2 {
+            @extend h5;
+            font-weight: 500;
+        }
+
+        .columns {
+            padding-bottom: 0;
+        }
+    }
+
+    .intro {
+        margin-bottom: $global-margin * 2;
+        border-bottom: 2px solid #f6f5f2;
+
+        h2 {
+            font-size: $global-font-size;
+        }
+
+        .columns {
+            padding-bottom: $global-margin * 2;
+        }
+    }
+
+}

@@ -1,0 +1,18 @@
+<container class="footer">
+    <row>
+        <columns large="1"></columns>
+
+        <columns large="10">
+            <row class="opt-out">
+                <columns>
+                    <p>
+                    	{{#rw this}}notification_reason{{/rw}}
+                        <a href="{{#rw this}}prefs_url{{/rw}}">{{{{raw}}}}{% trans "Notification Preferences" %}{{{{/raw}}}}</a>
+                    </p>
+                </columns>
+            </row>
+        </columns>
+
+        <columns large="1"></columns>
+    </row>
+</container>
