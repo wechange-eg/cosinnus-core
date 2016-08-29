@@ -6,7 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db import transaction
 from django.utils.decorators import method_decorator
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, get_language
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
@@ -129,7 +129,13 @@ class UserCreateView(CreateView):
         user = self.object
         
         # sanity check, retrieve the user's profile (will create it if it doesnt exist)
-        get_user_profile_model()._default_manager.get_for_user(user)
+        profile = get_user_profile_model()._default_manager.get_for_user(user)
+        
+        # set current django language during signup as user's profile language
+        lang = get_language()
+        if not profile.language == lang:
+            profile.language = lang
+            profile.save(update_fields=['language']) 
         
         # set user inactive if this portal needs user approval and send an email to portal admins
         if CosinnusPortal.get_current().users_need_activation:
