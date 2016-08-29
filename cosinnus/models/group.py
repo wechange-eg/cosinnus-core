@@ -870,6 +870,29 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
     def avatar_url(self):
         return self.avatar.url if self.avatar else None
     
+    def get_avatar_thumbnail(self, size=(80, 80)):
+        if not self.avatar:
+            return None
+
+        thumbnails = getattr(self, '_avatar_thumbnails', {})
+        if size not in thumbnails:
+            thumbnailer = get_thumbnailer(self.avatar)
+            try:
+                thumbnails[size] = thumbnailer.get_thumbnail({
+                    'crop': True,
+                    'upscale': True,
+                    'size': size,
+                })
+            except InvalidImageFormatError:
+                if settings.DEBUG:
+                    raise
+            setattr(self, '_avatar_thumbnails', thumbnails)
+        return thumbnails.get(size, None)
+
+    def get_avatar_thumbnail_url(self, size=(80, 80)):
+        tn = self.get_avatar_thumbnail(size)
+        return tn.url if tn else None
+    
     def get_map_marker_image_url(self):
         if self.avatar:
             thumbnailer = get_thumbnailer(self.avatar)
