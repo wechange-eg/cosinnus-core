@@ -7,7 +7,14 @@
                 <columns>
                     <p>
                     	{{#rw this}}notification_reason{{/rw}}
-                        <a href="{{#rw this}}prefs_url{{/rw}}">{{{{raw}}}}{% trans "Notification Preferences" %}{{{{/raw}}}}</a>
+                        
+                        <a href="{{#rw this}}prefs_url{{/rw}}">
+                            {{#if raw}}
+                                {{{{raw}}}}{% trans "Notification Preferences" %}{{{{/raw}}}}
+                            {{else}}
+                                Notification Preferences
+                            {{/if}}
+                        </a>
                     </p>
                 </columns>
             </row>
