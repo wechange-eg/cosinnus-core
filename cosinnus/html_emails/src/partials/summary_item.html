@@ -1,5 +1,5 @@
 <row class="summary-item">
-    <columns large="1" valign="middle">
+    <columns large="1" valign="top">
         <a href="{{#rw this}}object_url{{/rw}}">
             <img class="level-2" src="{{#rw this}}image_url{{/rw}}" />
         </a>
@@ -24,6 +24,11 @@
             </columns>
         </row>
 
-        <!-- Hey dan! please name the item text preview excerpt variable {{#rw this}}object_text{{/rw}}! Thanks, Sascha -->
+        <row class="object-text {{#rw this}}type{{/rw}}">
+            <columns>
+                <p>{{#rw this}}object_text{{/rw}}</p>
+            </columns>
+        </row>
+
     </columns>
 </row>

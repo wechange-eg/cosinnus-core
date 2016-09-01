@@ -54,6 +54,13 @@
                     border-bottom-color: $poll-color;
                 }
             }
+
+            &.object-text {
+                p {
+                    margin-top: 6px;
+                    font-size: $global-font-size - 2;
+                }
+            }
         }
     }
 }
