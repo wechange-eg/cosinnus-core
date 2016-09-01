@@ -2,16 +2,16 @@
 @import 'wechange_variables';
 
 .page-header {
+    .columns {
+        padding-bottom: 0;
+    }
+
     .address {
-        margin-top: $global-margin * 3;
+        margin-top: $global-margin * 3.5;
 
         h2 {
             @extend h5;
             font-weight: 500;
-        }
-
-        .columns {
-            padding-bottom: 0;
         }
     }
 
