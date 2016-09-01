@@ -10,6 +10,10 @@
             <columns>
                 <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
                     {{#rw this}}event_text{{/rw}}
+
+                    {{#if event_meta }}
+                        - {{#rw this}}event_meta{{/rw}}
+                    {{/if}}
                 </a>
             </columns>
         </row>
