@@ -6,10 +6,10 @@
 // Components
 // ----------
 
-@import 'header';
 @import 'footer';
+@import 'header';
 @import 'notification';
-@import 'digest';
+@import 'page_header';
 @import 'summary_group';
 @import 'summary_item';
 
@@ -19,12 +19,4 @@
 .content {
     border-radius: 6px;
     box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.02);
-}
-
-.subject {
-    margin-top: $global-margin * 3;
-
-    h2 {
-        font-size: $global-font-size;
-    }
 }

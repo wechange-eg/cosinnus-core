@@ -1,6 +1,7 @@
+@import 'settings';
 @import 'wechange_variables';
 
-.digest {
+.page-header {
     .address {
         margin-top: $global-margin * 3;
 
@@ -16,7 +17,7 @@
 
     .intro {
         margin-bottom: $global-margin * 2;
-        border-bottom: 2px solid #f6f5f2;
+        border-bottom: 2px solid $body-background;
 
         h2 {
             font-size: $global-font-size;
