@@ -1,4 +1,4 @@
-@import 'settings';
+@import 'wechange_variables';
 
 .summary-group {
     margin-bottom: $global-margin * 2;
@@ -16,8 +16,7 @@
         a {
             text-decoration: none;
             font-weight: bold;
-            $hue: hue($primary-color);
-            color: hsl($hue, 40, 40);
+            color: $link-emphasis-color;
         }
     }
 

@@ -6,22 +6,24 @@
     </columns>
 
     <columns class="text" large="10" valign="middle">
-        <row>
+        <row class="event-text">
             <columns>
-                <span>
+                <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
                     {{#rw this}}event_text{{/rw}}
-                </span>
+                </a>
             </columns>
         </row>
 
         <row class="object-name {{#rw this}}type{{/rw}}">
             <columns>
                 <h3>
-                    {{#rw this}}object_name{{/rw}}
+                    <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
+                        {{#rw this}}object_name{{/rw}}
+                    </a>
                 </h3>
             </columns>
         </row>
-        
+
         <!-- Hey dan! please name the item text preview excerpt variable {{#rw this}}object_text{{/rw}}! Thanks, Sascha -->
     </columns>
 </row>

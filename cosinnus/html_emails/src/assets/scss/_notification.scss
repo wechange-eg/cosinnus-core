@@ -1,3 +1,5 @@
+@import 'wechange_variables';
+
 .notification {
     .origin {
         h3 {
@@ -8,6 +10,7 @@
             a {
                 font-weight: 700;
                 text-decoration: none;
+                color: $link-emphasis-color;
             }
         }
     }
