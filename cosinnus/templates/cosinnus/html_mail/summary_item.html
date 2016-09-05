@@ -25,7 +25,7 @@
                 <a href="{{object_url}}" target="_blank">
                     {{event_text}}
 
-{% if undefined%}                        - {{event_meta}}
+{% if event_meta %}                        - {{event_meta}}
 {% endif %}                </a>
             </th>
 <th class="expander"></th>
@@ -51,7 +51,7 @@
     </th>
         </tr></tbody></table>
 
-{% if undefined%}            <table class="row object-text {{type}}"><tbody><tr>
+{% if object_text %}            <table class="row object-text {{type}}"><tbody><tr>
                     <th class="small-12 large-12 columns first last">
       <table>
         <tr>

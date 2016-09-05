@@ -11,7 +11,7 @@
                 <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
                     {{#rw this}}event_text{{/rw}}
 
-                    {{#rwif event_meta}}
+                    {{#rwif event_meta raw_if="event_meta"}}
                         - {{#rw this}}event_meta{{/rw}}
                     {{/rwif}}
                 </a>
@@ -28,7 +28,7 @@
             </columns>
         </row>
 
-        {{#rwif object_text}}
+        {{#rwif object_text raw_if="object_text" }}
             <row class="object-text {{#rw this}}type{{/rw}}">
                 <columns>
                     <p>{{#rw this}}object_text{{/rw}}</p>
