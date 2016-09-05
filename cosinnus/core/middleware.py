@@ -53,6 +53,12 @@ LOGIN_URLS = [
 ]
 
 
+def initialize_cosinnus_after_startup():
+    cosinnus_signals.all_cosinnus_apps_loaded.send(sender=None)
+    # connect all signal listeners
+    from cosinnus.models.hooks import *  # noqa
+
+
 startup_middleware_inited = False
 
 class StartupMiddleware(object):
@@ -66,9 +72,7 @@ class StartupMiddleware(object):
         logger.info('Cosinnus.middleware.StartupMiddleware inited. (inited_before=%s)' % startup_middleware_inited)
         if not startup_middleware_inited:
             startup_middleware_inited = True
-            cosinnus_signals.all_cosinnus_apps_loaded.send(sender=self)
-            # connect all signal listeners
-            from cosinnus.models.hooks import *  # noqa
+            initialize_cosinnus_after_startup()
            
         raise MiddlewareNotUsed
 

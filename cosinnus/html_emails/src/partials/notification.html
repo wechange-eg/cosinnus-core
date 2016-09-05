@@ -22,4 +22,13 @@
     </columns>
 </row>
 
-{{> summary_item notification_object}}
+
+{{#if raw}}
+    {{{{raw}}}}
+        {% if notification_item_html %}
+        	{{ notification_item_html }}
+        {% endif %}
+    {{{{/raw}}}}
+{{else}}
+	{{> summary_item notification_object}}
+{{/if}}

@@ -180,6 +180,7 @@ def create_user_integrated(request):
                 'password2': password,
                 'first_name': first_name,
                 'last_name': last_name,
+                'tos_check': True,
             }
             # use Cosinnus' UserCreationForm to apply all usual user-creation-related effects
             form = UserCreationForm(data)

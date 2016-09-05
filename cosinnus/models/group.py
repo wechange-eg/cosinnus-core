@@ -46,6 +46,7 @@ from cosinnus.utils.user import filter_active_users
 from cosinnus.models.mixins.images import ThumbnailableImageMixin
 from cosinnus.views.mixins.media import VideoEmbedFieldMixin,\
     FlickrEmbedFieldMixin
+from jsonfield.fields import JSONField
 
 logger = logging.getLogger('cosinnus')
 
@@ -480,6 +481,9 @@ class CosinnusPortal(models.Model):
         help_text=_('If activated, newly registered users and users who change their email address will need to confirm their email by clicking a link in a mail sent to them.'),
         default=False)
     
+    # The different keys used for this are static variables in CosinnusPortal!
+    saved_infos = JSONField(default={})
+    
     # css fields for custom portal styles
     background_image = models.ImageField(_('Background Image'),
         help_text=_('Used for the background of the landing and CMS-pages'),
@@ -498,7 +502,9 @@ class CosinnusPortal(models.Model):
     extra_css = models.TextField(_('Extra CSS'), help_text=_('Extra CSS for this portal, will be applied after all other styles.'),
         blank=True, null=True)
     
-    
+    # exact time when last digest was sent out for each of the period settings
+    SAVED_INFO_LAST_DIGEST_SENT = 'last_digest_sent_for_period_%d'
+        
     @classmethod
     def get_current(cls):
         """ Cached, returns the current Portal (always the same since dependent on configured Site) """
@@ -863,6 +869,29 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
     @property
     def avatar_url(self):
         return self.avatar.url if self.avatar else None
+    
+    def get_avatar_thumbnail(self, size=(80, 80)):
+        if not self.avatar:
+            return None
+
+        thumbnails = getattr(self, '_avatar_thumbnails', {})
+        if size not in thumbnails:
+            thumbnailer = get_thumbnailer(self.avatar)
+            try:
+                thumbnails[size] = thumbnailer.get_thumbnail({
+                    'crop': True,
+                    'upscale': True,
+                    'size': size,
+                })
+            except InvalidImageFormatError:
+                if settings.DEBUG:
+                    raise
+            setattr(self, '_avatar_thumbnails', thumbnails)
+        return thumbnails.get(size, None)
+
+    def get_avatar_thumbnail_url(self, size=(80, 80)):
+        tn = self.get_avatar_thumbnail(size)
+        return tn.url if tn else None
     
     def get_map_marker_image_url(self):
         if self.avatar:

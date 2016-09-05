@@ -686,7 +686,7 @@ class UserSelectMixin(object):
     
     def get(self, *args, **kwargs):
         messages.error(self.request, _('This action is not available directly!'))
-        return redirect(group_aware_reverse('cosinnus:group-detail', kwargs=kwargs))
+        return redirect(group_aware_reverse('cosinnus:group-detail', kwargs={'group': kwargs.get('group', '<NOGROUPKWARG>')}))
 
     def get_form_kwargs(self):
         kwargs = super(UserSelectMixin, self).get_form_kwargs()

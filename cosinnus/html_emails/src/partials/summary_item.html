@@ -11,7 +11,7 @@
                 <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
                     {{#rw this}}event_text{{/rw}}
 
-                    {{#rwif event_meta}}
+                    {{#rwif event_meta raw_if="event_meta"}}
                         - {{#rw this}}event_meta{{/rw}}
                     {{/rwif}}
                 </a>
@@ -28,7 +28,7 @@
             </columns>
         </row>
 
-        {{#rwif object_text}}
+        {{#rwif object_text raw_if="object_text" }}
             <row class="object-text {{#rw this}}type{{/rw}}">
                 <columns>
                     <p>{{#rw this}}object_text{{/rw}}</p>
@@ -38,7 +38,10 @@
 
         {{#if raw}}
             {{{{raw}}}}
-                {% comment %}render the comment if there is one{% endcomment %}
+                {% comment %} render the comment if there is one, using this same template {% endcomment %}
+                {% if sub_object_text and sub_image_url %}
+                	{% include snippet_template with object_text=sub_object_text image_url=sub_image_url event_meta=sub_event_meta event_text=sub_event_text %}
+                {% endif %}
             {{{{/raw}}}}
         {{else}}
             {{#if comment}}

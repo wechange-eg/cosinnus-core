@@ -16,6 +16,8 @@
       <tr>
         <td class="center" align="center" valign="top">
           <center data-parsed="">
+            {% load i18n %}
+            
             <table align="center" class="container header float-center"><tbody><tr><td>
                 <table class="row"><tbody><tr>
                         <th class="small-12 large-7 columns first" valign="middle">
@@ -30,7 +32,9 @@
       <table>
         <tr>
           <th>
-                        <img src="">
+                        <a href="{{portal_url}}" target="_blank">
+                            <img src="{{portal_image_url}}">
+                        </a>
                     </th>
         </tr>
       </table>
@@ -40,7 +44,9 @@
       <table>
         <tr>
           <th>
-                        <span></span>
+                        <a href="{{portal_url}}" target="_blank">
+                            {{portal_name}}
+                        </a>
                     </th>
         </tr>
       </table>
@@ -64,26 +70,54 @@
         <tr>
           <th>
                         
-                        <table class="row subject"><tbody><tr>
+                        <table class="row page-header"><tbody><tr>
                                 <th class="small-12 large-12 columns first last">
       <table>
         <tr>
           <th>
-                                <h2>Tom Tomson has accepted the invitation to join your team</h2>
-                            </th>
+                                <table class="row address"><tbody><tr>
+                                        <th class="small-12 large-12 columns first last">
+      <table>
+        <tr>
+          <th>
+                                        <h2>
+                                                {% trans "Hi," %}
+                        
+                                            {{addressee}},
+                                        </h2>
+                                    </th>
 <th class="expander"></th>
         </tr>
       </table>
     </th>
+                                </tr></tbody></table>
+                        
+                                <table class="row intro"><tbody><tr>
+                                        <th class="small-12 large-12 columns first last">
+      <table>
+        <tr>
+          <th>
+                                        <h2>{{topic}}</h2>
+                                    </th>
+<th class="expander"></th>
+        </tr>
+      </table>
+    </th>
+                                </tr></tbody></table>
+                            </th>
+        </tr>
+      </table>
+    </th>
                         </tr></tbody></table>
+                        
                         
                         <table class="row origin"><tbody><tr>
                                 <th class="small-2 large-1 columns first" valign="middle">
       <table>
         <tr>
           <th>
-                                <a href="/group">
-                                    <img src="/assets/img/group_logo.jpg">
+                                <a href="{{origin_url}}" target="_blank">
+                                    <img src="{{origin_image_url}}">
                                 </a>
                             </th>
         </tr>
@@ -95,7 +129,9 @@
         <tr>
           <th>
                                 <h3>
-                                    <a href="/group">Interested civilians</a>
+                                    <a href="{{origin_url}}" target="_blank">
+                                        {{origin_name}}
+                                    </a>
                                 </h3>
                             </th>
         </tr>
@@ -103,26 +139,23 @@
     </th>
                         </tr></tbody></table>
                         
-                        <table class="row"><tbody><tr>
+                        <table class="row notification-body"><tbody><tr>
                                 <th class="small-12 large-12 columns first last">
       <table>
         <tr>
           <th>
-                                <p>
-                                    Tom Tomson received your invitation and was initially extremely
-                                    hesistant about the whole thing.  The thing is, Tom had already
-                                    heard about Interested civilians and it gave rose to all sorts
-                                    of envious internal gnashings, because it just sounded way too
-                                    close to his budding 'awfully upright citizens 2.0' group. But
-                                    late last night he came around after 2.5 minutes in the sensory
-                                    depravation tank, and now he's on board.
-                                </p>
+                                <p>{{notification_body}}</p>
                             </th>
 <th class="expander"></th>
         </tr>
       </table>
     </th>
                         </tr></tbody></table>
+                        
+                        
+                                {% if notification_item_html %}
+                                	{{ notification_item_html }}
+                                {% endif %}
                         
                         
                     </th>
@@ -161,7 +194,12 @@
           <th>
                                 <p>
                                 	{{notification_reason}}
-                                    <a href="{{prefs_url}}">{% trans "Notification Preferences" %}</a>
+                                	
+                                        {% trans "Click the following link to change which emails you receive:" %}
+            						
+                                    <a href="{{prefs_url}}" target="_blank">
+                                            {% trans "Notification Preferences" %}
+                                    </a>
                                 </p>
                             </th>
 <th class="expander"></th>
