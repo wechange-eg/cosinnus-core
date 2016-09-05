@@ -1,9 +1,18 @@
+@import 'settings';
+@import 'wechange_variables';
+
 .notification {
     .origin {
         h3 {
             padding-left: $global-margin;
             @extend h5;
             margin-bottom: 0;
+
+            a {
+                font-weight: 700;
+                text-decoration: none;
+                color: $link-emphasis-color;
+            }
         }
     }
 }

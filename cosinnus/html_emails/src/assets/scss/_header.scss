@@ -11,8 +11,9 @@ table.container.header {
         .columns {
             padding-bottom: 0;
 
-            span {
+            a {
                 font-weight: 700;
+                text-decoration: none;
 
                 @include lettering(2);
             }

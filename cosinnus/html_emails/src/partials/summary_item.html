@@ -1,27 +1,49 @@
 <row class="summary-item">
-    <columns large="1" valign="middle">
+    <columns class="image" large="1" valign="top">
         <a href="{{#rw this}}object_url{{/rw}}">
             <img class="level-2" src="{{#rw this}}image_url{{/rw}}" />
         </a>
     </columns>
 
     <columns class="text" large="10" valign="middle">
-        <row>
+        <row class="event-text">
             <columns>
-                <span>
+                <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
                     {{#rw this}}event_text{{/rw}}
-                </span>
+
+                    {{#rwif event_meta}}
+                        - {{#rw this}}event_meta{{/rw}}
+                    {{/rwif}}
+                </a>
             </columns>
         </row>
 
         <row class="object-name {{#rw this}}type{{/rw}}">
             <columns>
                 <h3>
-                    {{#rw this}}object_name{{/rw}}
+                    <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
+                        {{#rw this}}object_name{{/rw}}
+                    </a>
                 </h3>
             </columns>
         </row>
-        
-        <!-- Hey dan! please name the item text preview excerpt variable {{#rw this}}object_text{{/rw}}! Thanks, Sascha -->
+
+        {{#rwif object_text}}
+            <row class="object-text {{#rw this}}type{{/rw}}">
+                <columns>
+                    <p>{{#rw this}}object_text{{/rw}}</p>
+                </columns>
+            </row>
+        {{/rwif}}
+
+        {{#if raw}}
+            {{{{raw}}}}
+                {% comment %}render the comment if there is one{% endcomment %}
+            {{{{/raw}}}}
+        {{else}}
+            {{#if comment}}
+                {{> summary_item comment}}
+            {{/if}}
+        {{/if}}
     </columns>
 </row>

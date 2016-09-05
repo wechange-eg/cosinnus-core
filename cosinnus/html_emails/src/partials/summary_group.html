@@ -1,7 +1,7 @@
 <row class="summary-group{{#if @last}} last{{/if}}">
     <columns class="items" small="10" large="10" valign="top">
         <h3>
-            <a href="{{#rw this}}group_url{{/rw}}">
+            <a href="{{#rw this}}group_url{{/rw}}" target="_blank">
                 {{#rw this}}group_name{{/rw}}
             </a>
         </h3>
@@ -15,11 +15,10 @@
                 {{> summary_item}}
             {{/each}}
         {{/if}}
-
     </columns>
 
     <columns small="2" large="2" valign="top">
-        <a href="/group">
+        <a href="{{#rw this}}group_url{{/rw}}" target="_blank">
             <img src="{{#rw this}}image_url{{/rw}}" />
         </a>
     </columns>

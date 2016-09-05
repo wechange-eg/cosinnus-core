@@ -1,33 +1,25 @@
-<row class="subject">
-    <columns>
-        <h2>Tom Tomson has accepted the invitation to join your team</h2>
-    </columns>
-</row>
+{{> page_header}}
 
 <row class="origin">
     <columns small="2" large="1" valign="middle">
-        <a href="/group">
-            <img src="/assets/img/group_logo.jpg" />
+        <a href="{{#rw this}}origin_url{{/rw}}" target="_blank">
+            <img src="{{#rw this}}origin_image_url{{/rw}}" />
         </a>
     </columns>
 
     <columns small="10" large="11" valign="middle">
         <h3>
-            <a href="/group">Interested civilians</a>
+            <a href="{{#rw this}}origin_url{{/rw}}" target="_blank">
+                {{#rw this}}origin_name{{/rw}}
+            </a>
         </h3>
     </columns>
 </row>
 
-<row>
+<row class="notification-body">
     <columns>
-        <p>
-            Tom Tomson received your invitation and was initially extremely
-            hesistant about the whole thing.  The thing is, Tom had already
-            heard about Interested civilians and it gave rose to all sorts
-            of envious internal gnashings, because it just sounded way too
-            close to his budding 'awfully upright citizens 2.0' group. But
-            late last night he came around after 2.5 minutes in the sensory
-            depravation tank, and now he's on board.
-        </p>
+        <p>{{#rw this}}notification_body{{/rw}}</p>
     </columns>
 </row>
+
+{{> summary_item notification_object}}

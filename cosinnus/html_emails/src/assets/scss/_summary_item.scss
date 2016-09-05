@@ -1,14 +1,52 @@
 @import 'settings';
 @import 'wechange_variables';
+@import 'mixins';
 
 .summary-item {
+    @include respond() {
+        margin-bottom: $global-margin * 2;
+    }
+
+    // Nested summary items
+    .summary-item & {
+        margin-top: $global-margin;
+
+        @include respond() {
+            margin-left: $global-margin * 2 !important;
+        }
+    }
+
     .text {
+        h3 {
+            @extend h5;
+            font-size: $global-font-size - 2;
+            margin-bottom: 0;
+            font-weight: 500;
+
+            a {
+                text-decoration: none;
+                font-weight: 700;
+            }
+        }
+
         .columns {
             padding-bottom: 0;
         }
 
         .row {
             margin-left: $global-margin;
+
+            @include respond() {
+                margin-left: 0;
+            }
+
+            &.event-text {
+                a {
+                    font-size: 12px;
+                    color: #999;
+                    text-decoration: none;
+                }
+            }
 
             &.object-name {
                 width: auto;
@@ -39,18 +77,27 @@
                     border-bottom-color: $poll-color;
                 }
             }
-        }
 
-        h3 {
-            @extend h5;
-            font-size: $global-font-size - 2;
-            margin-bottom: 0;
-            font-weight: 500;
-        }
+            &.object-text {
+                p {
+                    margin-top: 6px;
+                    font-size: $global-font-size - 2;
+                }
+            }
 
-        span {
-            font-size: 12px;
-            color: #999;
+            // Nested summary items
+            .summary-item &.object-text {
+                p {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+
+    .image,
+    .summary-item .text .columns & .image {
+        @include respond() {
+            padding-bottom: 6px !important;
         }
     }
 }
