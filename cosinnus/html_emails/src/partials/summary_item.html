@@ -38,7 +38,10 @@
 
         {{#if raw}}
             {{{{raw}}}}
-                {% comment %}render the comment if there is one{% endcomment %}
+                {% comment %} render the comment if there is one, using this same template {% endcomment %}
+                {% if sub_object_text and sub_image_url %}
+                	{% include snippet_template with object_text=sub_object_text image_url=sub_image_url event_meta=sub_event_meta event_text=sub_event_text %}
+                {% endif %}
             {{{{/raw}}}}
         {{else}}
             {{#if comment}}

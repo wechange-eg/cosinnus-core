@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="css/app.css">
 
 <table class="row summary-item"><tbody><tr>
-        <th class="small-12 large-1 columns first" valign="middle">
+        <th class="image small-12 large-1 columns first" valign="top">
       <table>
         <tr>
           <th>
@@ -17,14 +17,16 @@
       <table>
         <tr>
           <th>
-        <table class="row"><tbody><tr>
+        <table class="row event-text"><tbody><tr>
                 <th class="small-12 large-12 columns first last">
       <table>
         <tr>
           <th>
-                <span>
+                <a href="{{object_url}}" target="_blank">
                     {{event_text}}
-                </span>
+
+{% if undefined%}                        - {{event_meta}}
+{% endif %}                </a>
             </th>
 <th class="expander"></th>
         </tr>
@@ -38,7 +40,9 @@
         <tr>
           <th>
                 <h3>
-                    {{object_name}}
+                    <a href="{{object_url}}" target="_blank">
+                        {{object_name}}
+                    </a>
                 </h3>
             </th>
 <th class="expander"></th>
@@ -46,8 +50,24 @@
       </table>
     </th>
         </tr></tbody></table>
-        
-        <!-- Hey dan! please name the item text preview excerpt variable {{object_text}}! Thanks, Sascha -->
+
+{% if undefined%}            <table class="row object-text {{type}}"><tbody><tr>
+                    <th class="small-12 large-12 columns first last">
+      <table>
+        <tr>
+          <th>
+                    <p>{{object_text}}</p>
+                </th>
+<th class="expander"></th>
+        </tr>
+      </table>
+    </th>
+            </tr></tbody></table>
+{% endif %}
+                {% comment %} render the comment if there is one, using this same template {% endcomment %}
+                {% if sub_object_text and sub_image_url %}
+                	{% include snippet_template with object_text=sub_object_text image_url=sub_image_url event_meta=sub_event_meta event_text=sub_event_text %}
+                {% endif %}
     </th>
         </tr>
       </table>

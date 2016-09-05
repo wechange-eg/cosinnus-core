@@ -16,6 +16,8 @@
       <tr>
         <td class="center" align="center" valign="top">
           <center data-parsed="">
+            {% load i18n %}
+            
             <table align="center" class="container header float-center"><tbody><tr><td>
                 <table class="row"><tbody><tr>
                         <th class="small-12 large-7 columns first" valign="middle">
@@ -30,7 +32,9 @@
       <table>
         <tr>
           <th>
-                        <img src="">
+                        <a href="{{portal_url}}" target="_blank">
+                            <img src="{{portal_image_url}}">
+                        </a>
                     </th>
         </tr>
       </table>
@@ -40,7 +44,9 @@
       <table>
         <tr>
           <th>
-                        <span></span>
+                        <a href="{{portal_url}}" target="_blank">
+                            {{portal_name}}
+                        </a>
                     </th>
         </tr>
       </table>
@@ -64,31 +70,46 @@
         <tr>
           <th>
                         
-                        <table class="row address"><tbody><tr>
+                        <table class="row page-header"><tbody><tr>
                                 <th class="small-12 large-12 columns first last">
       <table>
         <tr>
           <th>
-                                <h2>{% trans "Hi," %} {{addressee}},</h2>
-                            </th>
+                                <table class="row address"><tbody><tr>
+                                        <th class="small-12 large-12 columns first last">
+      <table>
+        <tr>
+          <th>
+                                        <h2>
+                                                {% trans "Hi," %}
+                        
+                                            {{addressee}},
+                                        </h2>
+                                    </th>
 <th class="expander"></th>
+        </tr>
+      </table>
+    </th>
+                                </tr></tbody></table>
+                        
+                                <table class="row intro"><tbody><tr>
+                                        <th class="small-12 large-12 columns first last">
+      <table>
+        <tr>
+          <th>
+                                        <h2>{{topic}}</h2>
+                                    </th>
+<th class="expander"></th>
+        </tr>
+      </table>
+    </th>
+                                </tr></tbody></table>
+                            </th>
         </tr>
       </table>
     </th>
                         </tr></tbody></table>
                         
-                        <table class="row intro"><tbody><tr>
-                                <th class="small-12 large-12 columns first last">
-      <table>
-        <tr>
-          <th>
-                                <h2>{{topic}}</h2>
-                            </th>
-<th class="expander"></th>
-        </tr>
-      </table>
-    </th>
-                        </tr></tbody></table>
                         
                                 {{ digest_body_html }}
                         
@@ -129,7 +150,12 @@
           <th>
                                 <p>
                                 	{{notification_reason}}
-                                    <a href="{{prefs_url}}">{% trans "Notification Preferences" %}</a>
+                                	
+                                        {% trans "Click the following link to change which emails you receive:" %}
+            						
+                                    <a href="{{prefs_url}}" target="_blank">
+                                            {% trans "Notification Preferences" %}
+                                    </a>
                                 </p>
                             </th>
 <th class="expander"></th>
