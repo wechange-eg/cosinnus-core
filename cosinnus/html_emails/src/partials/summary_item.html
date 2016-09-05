@@ -11,9 +11,9 @@
                 <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
                     {{#rw this}}event_text{{/rw}}
 
-                    {{#if event_meta }}
+                    {{#rwif event_meta}}
                         - {{#rw this}}event_meta{{/rw}}
-                    {{/if}}
+                    {{/rwif}}
                 </a>
             </columns>
         </row>
@@ -28,11 +28,22 @@
             </columns>
         </row>
 
-        <row class="object-text {{#rw this}}type{{/rw}}">
-            <columns>
-                <p>{{#rw this}}object_text{{/rw}}</p>
-            </columns>
-        </row>
+        {{#rwif object_text}}
+            <row class="object-text {{#rw this}}type{{/rw}}">
+                <columns>
+                    <p>{{#rw this}}object_text{{/rw}}</p>
+                </columns>
+            </row>
+        {{/rwif}}
 
+        {{#if raw}}
+            {{{{raw}}}}
+                {% comment %}render the comment if there is one{% endcomment %}
+            {{{{/raw}}}}
+        {{else}}
+            {{#if comment}}
+                {{> summary_item comment}}
+            {{/if}}
+        {{/if}}
     </columns>
 </row>
