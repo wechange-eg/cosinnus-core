@@ -1,4 +1,5 @@
 @import 'wechange_variables';
+@import 'mixins';
 
 .summary-group {
     margin-bottom: $global-margin * 2;
@@ -6,6 +7,10 @@
 
     .items {
         padding-bottom: $global-margin * 2;
+
+        @include respond() {
+            padding-bottom: 0;
+        }
     }
 
 

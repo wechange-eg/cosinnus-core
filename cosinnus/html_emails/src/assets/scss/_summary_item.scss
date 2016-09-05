@@ -1,10 +1,19 @@
 @import 'settings';
 @import 'wechange_variables';
+@import 'mixins';
 
 .summary-item {
+    @include respond() {
+        margin-bottom: $global-margin * 2;
+    }
+
     // Nested summary items
     .summary-item & {
         margin-top: $global-margin;
+
+        @include respond() {
+            margin-left: $global-margin * 2 !important;
+        }
     }
 
     .text {
@@ -26,6 +35,10 @@
 
         .row {
             margin-left: $global-margin;
+
+            @include respond() {
+                margin-left: 0;
+            }
 
             &.event-text {
                 a {
@@ -78,6 +91,13 @@
                     margin-top: 0;
                 }
             }
+        }
+    }
+
+    .image,
+    .summary-item .text .columns & .image {
+        @include respond() {
+            padding-bottom: 6px !important;
         }
     }
 }
