@@ -18,15 +18,17 @@
             </columns>
         </row>
 
-        <row class="object-name {{#rw this}}type{{/rw}}">
-            <columns>
-                <h3>
-                    <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
-                        {{#rw this}}object_name{{/rw}}
-                    </a>
-                </h3>
-            </columns>
-        </row>
+        {{#rwif object_name raw_if="object_name" }}
+            <row class="object-name {{#rw this}}type{{/rw}}">
+                <columns>
+                    <h3>
+                        <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
+                            {{#rw this}}object_name{{/rw}}
+                        </a>
+                    </h3>
+                </columns>
+            </row>
+        {{/rwif}}
 
         {{#rwif object_text raw_if="object_text" }}
             <row class="object-text {{#rw this}}type{{/rw}}">
@@ -38,14 +40,22 @@
 
         {{#if raw}}
             {{{{raw}}}}
-                {% comment %} render the comment if there is one, using this same template {% endcomment %}
-                {% if sub_object_text and sub_image_url %}
-                	{% include snippet_template with object_text=sub_object_text image_url=sub_image_url event_meta=sub_event_meta event_text=sub_event_text %}
-                {% endif %}
+                <row class="nested-summary-item">
+                    <columns>
+                        {% comment %} render the comment if there is one, using this same template {% endcomment %}
+                        {% if sub_object_text and sub_image_url %}
+                        	{% include snippet_template with object_text=sub_object_text image_url=sub_image_url event_meta=sub_event_meta event_text=sub_event_text %}
+                        {% endif %}
+                    </columns>
+                </row>
             {{{{/raw}}}}
         {{else}}
             {{#if comment}}
-                {{> summary_item comment}}
+                <row class="nested-summary-item">
+                    <columns>
+                        {{> summary_item comment}}
+                    </columns>
+                </row>
             {{/if}}
         {{/if}}
     </columns>

@@ -7,13 +7,8 @@
         margin-bottom: $global-margin * 2;
     }
 
-    // Nested summary items
-    .summary-item & {
-        margin-top: $global-margin;
-
-        @include respond() {
-            margin-left: $global-margin * 2 !important;
-        }
+    .columns {
+        padding-bottom: $global-margin / 2;
     }
 
     .text {
@@ -52,6 +47,7 @@
                 width: auto;
                 border-bottom-style: solid;
                 border-bottom-width: 1px;
+                margin-bottom: 6px;
 
                 &.news {
                     border-bottom-color: $news-color;
@@ -80,22 +76,14 @@
 
             &.object-text {
                 p {
-                    margin-top: 6px;
                     font-size: $global-font-size - 2;
                 }
             }
 
-            // Nested summary items
-            .summary-item &.object-text {
-                p {
-                    margin-top: 0;
-                }
-            }
         }
     }
 
-    .image,
-    .summary-item .text .columns & .image {
+    .image {
         @include respond() {
             padding-bottom: 6px !important;
         }
