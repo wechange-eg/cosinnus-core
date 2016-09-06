@@ -168,3 +168,34 @@ def is_number(s):
         return True
     except ValueError:
         return False
+
+
+def resolve_attributes(obj, attr_or_function, default=None):    
+    """ Returns the given string attribute of an object, or its return value if it's a function.
+        If None given, or the object had no such attribute or function, try to find
+        the given default attribute. If no default given, return None. 
+        This function takes stacked attributes, much like a django template would.
+        
+        ``resolve_attributes(user, 'cosinnus_profile.language.get_absolute_url')``
+             would return the value of ``user.cosinnus_profile.get_absolute_url()`` """
+        
+    attribute = None
+    if attr_or_function:
+        # pick and resolve first attribute in string
+        attributes = attr_or_function.split('.', 1)
+        attribute = attributes[0]
+        rest_attributes = attributes[1] if len(attributes) > 1 else None
+    
+    # if no attribute was given or the given object does not contain that attribute, try to resolve
+    # the default attribute on the object, or return the default
+    if not attribute or not getattr(obj, attribute, None):
+        return resolve_attributes(obj, default) if (default and default != attr_or_function) else None
+    
+    resolved_attr = getattr(obj, attribute, None)
+    value = resolved_attr() if hasattr(resolved_attr, '__call__') else resolved_attr
+    
+    # recurse as long as there are stacked attributed in the string
+    if rest_attributes:
+        return resolve_attributes(value, rest_attributes, default)
+    else:
+        return value

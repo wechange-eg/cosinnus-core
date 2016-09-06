@@ -74,17 +74,24 @@ def check_object_read_access(obj, user):
             # catch error cases where no media_tag was created. that case should break, but not here.
             obj_is_visible = is_member or is_admin
         return check_user_superuser(user) or obj_is_visible or obj.grant_extra_read_permissions(user)
-    elif hasattr(obj, 'creator'):
-        return obj.creator == user or check_user_superuser(user)
-    elif hasattr(obj, 'grant_extra_read_permissions'):
-        return obj.grant_extra_read_permissions(user)
-    
-    raise Exception("cosinnus.core.permissions: You must either supply a CosinnusGroup " +\
+    else:
+        met_proper_object_conditions = False
+        extra_conditions = False
+        if hasattr(obj, 'grant_extra_read_permissions'):
+            extra_conditions = extra_conditions or obj.grant_extra_read_permissions(user)
+            met_proper_object_conditions = True
+        if hasattr(obj, 'creator'):
+            extra_conditions = extra_conditions or (obj.creator == user or check_user_superuser(user))
+            met_proper_object_conditions = True
+        
+        if not met_proper_object_conditions:
+            raise Exception("cosinnus.core.permissions: You must either supply a CosinnusGroup " +\
             "or a BaseTaggableObject or an object with a ``creator`` property " +\
             "or an object with a ``grant_extra_read_permissions(self, user)`` function " +\
             "to check_object_read_access(). The supplied object " +\
             "type was: %s" % (str(obj.__class__) if obj else "None"))
-    
+        else:
+            return extra_conditions
 
 def check_object_write_access(obj, user, fields=None):
     """ Checks write permissions for either a CosinnusGroup and BaseTaggableObject or any object with a creator attribute.
