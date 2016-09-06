@@ -113,9 +113,9 @@ function inliner(css) {
     .pipe($.inlineCss, {
       applyStyleTags: false,
       removeStyleTags: false,
-      removeLinkTags: false
+      removeLinkTags: true
     })
-    .pipe($.replace, '<!-- <style> -->', `<style>${mqCss}</style>`)
+    .pipe($.replace, '<!-- <style> -->', `<style>${css}</style>`)
     .pipe($.htmlmin, {
       collapseWhitespace: true,
       minifyCSS: true
@@ -205,5 +205,3 @@ function zip() {
 
   return merge(moveTasks);
 }
-
-
