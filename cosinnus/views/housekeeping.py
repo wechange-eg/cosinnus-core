@@ -23,6 +23,8 @@ import datetime
 from cosinnus.models.tagged import BaseTagObject
 import random
 from django.utils.timezone import now
+from cosinnus.utils.user import filter_active_users
+from cosinnus.models.profile import get_user_profile_model
 
 
 def housekeeping(request=None):
@@ -301,3 +303,22 @@ def delete_portal(portal_slug):
     CosinnusPortal.objects.get(slug=portal_slug).delete()
     get_user_model().objects.filter(cosinnus_memberships__isnull=True).filter(cosinnus_portal_memberships__isnull=True).delete()
 
+
+
+def reset_user_tos_flags(request=None):
+    if request and not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+
+    if not request.GET.get('confirm', False) == '1':
+        active_users = filter_active_users(get_user_model().objects.all())
+        ret = '********** This will reset all %d active users\' ToS accepted flag! Use param ?confirm=1 to delete the flags! ***********' % active_users.count()
+    else:
+        count = 0
+        active_users = filter_active_users(get_user_model().objects.all())
+        for profile in get_user_profile_model().objects.all().filter(user__in=active_users):
+            del profile.settings['tos_accepted']
+            profile.save(update_fields=['settings'])
+            count += 1
+        ret = 'Successfully reset the ToS flag for %d users.' % count
+        
+    return HttpResponse(ret)

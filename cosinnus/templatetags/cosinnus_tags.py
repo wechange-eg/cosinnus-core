@@ -756,6 +756,12 @@ def dict_lookup(dictionary, key):
     return dictionary.get(key, '')
 
 @register.filter
+def insert_current_language(input_string, following_string):
+    """ Appends to the given string the language code of the current locale """
+    lang = get_language()
+    return (input_string or '') + lang + following_string
+
+@register.filter
 def debugthis(obj):
     """ Debug-inspects a template element """
     if not settings.DEBUG:

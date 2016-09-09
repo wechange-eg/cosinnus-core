@@ -1,0 +1,11 @@
+{% load i18n cosinnus_tags %}{% autoescape off %}{% blocktrans with user_name=user|full_name_force %}Hi {{ user_name }},
+
+you have just accepted the Terms of Services at {{ site_name }}. Here is a copy for your records.
+
+
+{{ tos_content }}
+
+
+Your {{ site_name }} Team 
+
+{{ domain_url }}{% endblocktrans %}{% endautoescape %}
