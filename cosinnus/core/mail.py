@@ -31,7 +31,7 @@ def _django_send_mail(to, subject, template, data, from_email=None, bcc=None, is
     message = render_to_string(template, data)
 
     connection = get_connection()
-    mail = EmailMessage(subject, message, from_email, [to], bcc, connection=connection).send()
+    mail = EmailMessage(subject, message, from_email, [to], bcc, connection=connection)
     if is_html:
         mail.content_subtype = 'html'
     return mail.send()
