@@ -252,6 +252,27 @@ class GroupMembershipInline(admin.TabularInline):
     extra = 0
 
 
+class UserToSAcceptedFilter(admin.SimpleListFilter):
+    """ Will show users that have ever logged in (or not) """
+    
+    title = _('ToS Accepted')
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'tosaccepted'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('yes', _('ToS Accepted')),
+            ('no', _('ToS not Accepted')),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'yes':
+            return queryset.filter(cosinnus_profile__settings__contains='tos_accepted')
+        if self.value() == 'no':
+            return queryset.exclude(cosinnus_profile__settings__contains='tos_accepted')
+
+
 class UserHasLoggedInFilter(admin.SimpleListFilter):
     """ Will show users that have ever logged in (or not) """
     
@@ -268,21 +289,26 @@ class UserHasLoggedInFilter(admin.SimpleListFilter):
 
     def queryset(self, request, queryset):
         if self.value() == 'yes':
-            return queryset.filter(cosinnus_profile__settings__contains='tos_accepted')
+            return queryset.exclude(last_login__exact=None)
         if self.value() == 'no':
-            return queryset.exclude(cosinnus_profile__settings__contains='tos_accepted')
+            return queryset.filter(last_login__exact=None)
 
 
 class UserAdmin(DjangoUserAdmin):
     inlines = (UserProfileInline, PortalMembershipInline)#, GroupMembershipInline)
-    actions = ['deactivate_users']
-    list_display = ('email', 'is_active', 'has_logged_in', 'username', 'first_name', 'last_name', 'is_staff', )
-    list_filter = list(DjangoUserAdmin.list_filter) + [UserHasLoggedInFilter,]
+    actions = ['deactivate_users', 'export_as_csv']
+    list_display = ('email', 'is_active', 'has_logged_in', 'tos_accepted', 'username', 'first_name', 'last_name', 'is_staff', )
+    list_filter = list(DjangoUserAdmin.list_filter) + [UserHasLoggedInFilter, UserToSAcceptedFilter,]
     
     def has_logged_in(self, obj):
-        return bool(obj.cosinnus_profile.settings.get('tos_accepted', False))
+        return bool(obj.last_login is not None)
     has_logged_in.short_description = _('Has Logged In')
     has_logged_in.boolean = True
+    
+    def tos_accepted(self, obj):
+        return bool(obj.cosinnus_profile.settings.get('tos_accepted', False))
+    tos_accepted.short_description = _('ToS accepted?')
+    tos_accepted.boolean = True
     
     def deactivate_users(self, request, queryset):
         count = 0
