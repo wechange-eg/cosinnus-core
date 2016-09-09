@@ -8,7 +8,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import post_save, class_prepared
-from django.utils.encoding import python_2_unicode_compatible
+from django.utils.encoding import python_2_unicode_compatible, force_text
 from django.utils.translation import ugettext_lazy as _
 
 from easy_thumbnails.files import get_thumbnailer
@@ -18,12 +18,17 @@ from jsonfield import JSONField
 from cosinnus.conf import settings
 from cosinnus.conf import settings as cosinnus_settings
 from cosinnus.utils.files import get_avatar_filename
-from cosinnus.models.group import CosinnusGroup
+from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.core import signals
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from cosinnus.views.facebook_integration import FacebookIntegrationUserProfileMixin
+import copy
+from cosinnus.core.mail import send_mail_or_fail_threaded
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.utils.safestring import mark_safe
 
 # if a user profile has this settings, its user has not yet confirmed a new email
 # address and this long is bound to his old email (or to a scrambled, unusable one if they just registered)
@@ -102,10 +107,16 @@ class BaseUserProfile(FacebookIntegrationUserProfileMixin, models.Model):
 
     SKIP_FIELDS = ['id', 'user', 'user_id', 'media_tag', 'media_tag_id', 'settings']\
                     + getattr(cosinnus_settings, 'COSINNUS_USER_PROFILE_ADDITIONAL_FORM_SKIP_FIELDS', [])
-
+                    
+    _settings = None                
+    
     class Meta:
         abstract = True
-
+        
+    def __init__(self, *args, **kwargs):
+        super(BaseUserProfile, self).__init__(*args, **kwargs)
+        self._settings = copy.deepcopy(self.settings)
+        
     def __str__(self):
         return six.text_type(self.user)
     
@@ -135,6 +146,19 @@ class BaseUserProfile(FacebookIntegrationUserProfileMixin, models.Model):
         if created:
             # send creation signal
             signals.userprofile_ceated.send(sender=self, profile=self)
+        
+        # send a copy of the ToS to the User via email?
+        if settings.COSINNUS_SEND_TOS_AFTER_USER_REGISTRATION and self.user and self.user.email:
+            if self.settings.get('tos_accepted', False) and not self._settings.get('tos_accepted', False):
+                tos_content = mark_safe(strip_tags(render_to_string('nutzungsbedingungen_content.html')))
+                data = {
+                    'user': self.user,
+                    'site_name': _(settings.COSINNUS_BASE_PAGE_TITLE_TRANS),
+                    'domain_url': CosinnusPortal.get_current().get_domain(),
+                    'tos_content': tos_content,
+                }
+                subj_user = '%s - %s' % (_('Terms of Service'), data['site_name'])
+                send_mail_or_fail_threaded(self.user.email, subj_user, 'cosinnus/mail/user_terms_of_services.html', data)
 
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:profile-detail', kwargs={'username': self.user.username})

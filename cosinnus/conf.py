@@ -292,6 +292,10 @@ class CosinnusConf(AppConf):
     #: The default search index for the :attr:`TAG_OBJECT_MODEL`
     TAG_OBJECT_SEARCH_INDEX = 'cosinnus.utils.search.DefaultTagObjectIndex'
 
+    # should the nutzungsbedingungen_content.html be sent to the user as an email
+    # after successful registration?
+    SEND_TOS_AFTER_USER_REGISTRATION = False
+    
     # can be overriden to let cosinnus know that the server uses HTTPS. this is important to set!
     SITE_PROTOCOL = 'http'
     
