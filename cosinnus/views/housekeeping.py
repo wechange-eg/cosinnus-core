@@ -310,7 +310,8 @@ def reset_user_tos_flags(request=None):
         return HttpResponseForbidden('Not authenticated')
 
     if not request.GET.get('confirm', False) == '1':
-        ret = '********** This will reset all active user\'s! ToS accepted flag! Use param ?confirm=1 to delete the flags! ***********'
+        active_users = filter_active_users(get_user_model().objects.all())
+        ret = '********** This will reset all %d active users\' ToS accepted flag! Use param ?confirm=1 to delete the flags! ***********' % active_users.count()
     else:
         count = 0
         active_users = filter_active_users(get_user_model().objects.all())
