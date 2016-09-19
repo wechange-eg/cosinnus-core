@@ -31,3 +31,9 @@ img {
         background-color: transparent;
     }
 }
+
+.columns {
+    &.tight {
+        padding-bottom: 0;
+    }
+}
