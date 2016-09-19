@@ -40,14 +40,14 @@
 
         {{#if raw}}
             {{{{raw}}}}
-                <row class="nested-summary-item">
-                    <columns>
-                        {% comment %} render the comment if there is one, using this same template {% endcomment %}
-                        {% if sub_object_text and sub_image_url and not this_is_a_sub_snippet %}
+                {% comment %} render the comment if there is one, using this same template {% endcomment %}
+                {% if sub_object_text and sub_image_url and not this_is_a_sub_snippet %}
+                    <row class="nested-summary-item">
+                        <columns>
                         	{% include snippet_template with object_text=sub_object_text image_url=sub_image_url event_meta=sub_event_meta event_text=sub_event_text object_name="" this_is_a_sub_snippet=True %}
-                        {% endif %}
-                    </columns>
-                </row>
+                        </columns>
+                    </row>
+                {% endif %}
             {{{{/raw}}}}
         {{else}}
             {{#if comment}}
