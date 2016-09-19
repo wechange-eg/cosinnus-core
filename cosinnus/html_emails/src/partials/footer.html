@@ -7,13 +7,13 @@
                 <columns>
                     <p>
                     	{{#rw this}}notification_reason{{/rw}}
-                    	
+
 						{{#if raw}}
                             {{{{raw}}}}{% trans "Click the following link to change which emails you receive:" %}{{{{/raw}}}}
                         {{else}}
                             Click the following link to change which emails you receive:
                         {{/if}}
-						
+
                         <a href="{{#rw this}}prefs_url{{/rw}}" target="_blank">
                             {{#if raw}}
                                 {{{{raw}}}}{% trans "Notification Preferences" %}{{{{/raw}}}}

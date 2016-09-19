@@ -72,6 +72,10 @@
                 &.poll {
                     border-bottom-color: $poll-color;
                 }
+
+                h3 {
+                    display: inline-block;
+                }
             }
 
             &.object-text {

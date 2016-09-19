@@ -25,3 +25,9 @@
 img {
     width: 100%;
 }
+
+.body {
+    &.body-inner {
+        background-color: transparent;
+    }
+}
