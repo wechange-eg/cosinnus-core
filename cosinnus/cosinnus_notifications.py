@@ -48,6 +48,16 @@ notifications = {
         'subject_template': 'cosinnus/mail/user_group_join_requested_subj.txt',
         'signals': [user_group_join_requested],
         'default': True,
+        
+        'is_html': True,
+        'snippet_type': 'news',
+        'event_text': _('New membership request'),
+        'subject_text': _('"%(sender_name)s" requested to become a member of %(team_name)s.'),
+        'data_attributes': {
+            'object_name': '_sender_name',
+            'object_url': 'get_member_page_url', # the group members page
+            'object_text': '_sender.cosinnus_profile.description', 
+        },
     },
     'user_group_invitation_accepted': {
         'label': _('A user has accepted the invitation to this team (admins only)'), 
@@ -55,6 +65,16 @@ notifications = {
         'subject_template': 'cosinnus/mail/user_group_invitation_accepted_subj.txt',
         'signals': [user_group_invitation_accepted],
         'default': True,
+        
+        'is_html': True,
+        'snippet_type': 'news',
+        'event_text': _('%(sender_name)s accepted the invitation'),
+        'subject_text': _('"%(sender_name)s" has accepted the invitation to %(team_name)s.'),
+        'data_attributes': {
+            'object_name': '_sender_name',
+            'object_url': 'get_member_page_url', # the group members page
+            'object_text': '_sender.cosinnus_profile.description', 
+        },
     },
     'user_group_invitation_declined': {
         'label': _('A user has declined the invitation to this team (admins only)'), 
@@ -62,6 +82,16 @@ notifications = {
         'subject_template': 'cosinnus/mail/user_group_invitation_declined_subj.txt',
         'signals': [user_group_invitation_declined],
         'default': True,
+        
+        'is_html': True,
+        'snippet_type': 'news',
+        'event_text': _('%(sender_name)s declined the invitation'),
+        'subject_text': _('"%(sender_name)s" has declined the invitation to %(team_name)s.'),
+        'data_attributes': {
+            'object_name': '_sender_name',
+            'object_url': 'get_member_page_url', # the group members page
+            'object_text': '_sender.cosinnus_profile.description', 
+        },
     },    
     'user_tagged_in_object': {
         'label': _('You were tagged in a post, document or other item'), 
@@ -69,5 +99,14 @@ notifications = {
         'subject_template': 'cosinnus/mail/user_tagged_in_object_subj.txt',   # this template will be overwritten by specific items in other cosinnus apps
         'signals': [user_tagged_in_object],
         'default': True,
+        
+        'is_html': True,
+        'snippet_type': 'event',
+        'event_text': _('%(sender_name)s tagged you in'),
+        'subject_text': _('You were tagged in "%(object_name)s" in %(team_name)s.'),
+        'data_attributes': {
+            'object_name': 'title', 
+            'object_url': 'get_absolute_url', 
+        },
     },    
 }

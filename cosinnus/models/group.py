@@ -1001,6 +1001,9 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self})
     
+    def get_member_page_url(self):
+        return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self})
+    
     @cached_property
     def get_parent_typed(self):
         """ This is the only way to make sure to get the real object of a group's parent
