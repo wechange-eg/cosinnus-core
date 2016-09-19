@@ -214,7 +214,7 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
                                for datatag in self.data.getlist('media_tag-tags')]):
                 self.data._mutable = True
                 del self.data['media_tag-tags']
-                self.data.setlist('media_tag-tags', copy(self.forms['media_tag'].initial['tags']))
+                self.data.setlist('media_tag-tags', copy(self.forms['media_tag'].initial.get('tags', [])))
             
             # we need to do this here ~again~ on top of in the media tag form, to prevent
             # the select2 field's values from being overwritten 
