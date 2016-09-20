@@ -132,7 +132,7 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
                     except (UnicodeDecodeError, UnicodeError):
                         messages.error(request, _('The CSV file you supplied is not formatted in the proper encoding (%s)!' % encoding))
                     except EmptyOrUnreadableCSVContent:
-                        messages.error(request, _('The CSV file you supplied was empty or not formatted in the proper encoding (%s) or with a wrong delimiter (%s)!' % (encoding, delimiter)))
+                        messages.error(request, _('The CSV file you supplied was empty or not formatted in the proper encoding (%(encoding)s) or with a wrong delimiter (%(delimiter)s)!' % {'encoding':encoding, 'delimiter':delimiter}))
                     except UnexpectedNumberOfColumns, e:
                         messages.error(request, _('One or more rows in the CSV file you supplied contained less columns than expected (%s)! Either the file was read in a wrong encoding, or the file was using a different format than the server expected.' % str(e)))
                     except ImportAlreadyRunning:

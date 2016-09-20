@@ -1,0 +1,66 @@
+<row class="body body-inner">
+    <columns class="tight">
+        <row class="summary-item">
+            <columns class="image" large="1" valign="top">
+                <a href="{{#rw this}}object_url{{/rw}}">
+                    <img class="level-2" src="{{#rw this}}image_url{{/rw}}" />
+                </a>
+            </columns>
+
+            <columns class="text" large="10" valign="middle">
+                <row class="event-text">
+                    <columns>
+                        <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
+                            {{#rw this}}event_text{{/rw}}
+
+                            {{#rwif event_meta raw_if="event_meta"}}
+                                - {{#rw this}}event_meta{{/rw}}
+                            {{/rwif}}
+                        </a>
+                    </columns>
+                </row>
+
+                {{#rwif object_name raw_if="object_name" }}
+                    <row class="object-name {{#rw this}}type{{/rw}}">
+                        <columns>
+                            <h3>
+                                <a href="{{#rw this}}object_url{{/rw}}" target="_blank">
+                                    {{#rw this}}object_name{{/rw}}
+                                </a>
+                            </h3>
+                        </columns>
+                    </row>
+                {{/rwif}}
+
+                {{#rwif object_text raw_if="object_text" }}
+                    <row class="object-text {{#rw this}}type{{/rw}}">
+                        <columns>
+                            <p>{{#rw this}}object_text{{/rw}}</p>
+                        </columns>
+                    </row>
+                {{/rwif}}
+
+                {{#if raw}}
+                    {{{{raw}}}}
+                        {% comment %} render the comment if there is one, using this same template {% endcomment %}
+                        {% if sub_object_text and sub_image_url and not this_is_a_sub_snippet %}
+                            <row class="nested-summary-item">
+                                <columns>
+                                	{% include snippet_template with object_text=sub_object_text image_url=sub_image_url event_meta=sub_event_meta event_text=sub_event_text object_name="" this_is_a_sub_snippet=True %}
+                                </columns>
+                            </row>
+                        {% endif %}
+                    {{{{/raw}}}}
+                {{else}}
+                    {{#if comment}}
+                        <row class="nested-summary-item">
+                            <columns>
+                                {{> summary_item comment}}
+                            </columns>
+                        </row>
+                    {{/if}}
+                {{/if}}
+            </columns>
+        </row>
+    </columns>
+</row>

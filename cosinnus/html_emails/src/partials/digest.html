@@ -1,0 +1,11 @@
+{{> page_header}}
+
+{{#if raw}}
+    {{{{raw}}}}
+        {{ digest_body_html }}
+    {{{{/raw}}}}
+{{else}}
+    {{#each groups}}
+        {{> summary_group}}
+    {{/each}}
+{{/if}}

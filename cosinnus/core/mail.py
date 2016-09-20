@@ -24,55 +24,59 @@ if 'djcelery' in settings.INSTALLED_APPS:
         pass
 
 
-def _django_send_mail(to, subject, template, data, from_email=None, bcc=None):
+def _django_send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=False):
     """ From django.core.mail, extended with bcc """
     if from_email is None:
         from_email = settings.COSINNUS_DEFAULT_FROM_EMAIL
     message = render_to_string(template, data)
 
     connection = get_connection()
-    return EmailMessage(subject, message, from_email, [to], bcc,
-                        connection=connection).send()
+    mail = EmailMessage(subject, message, from_email, [to], bcc, connection=connection)
+    if is_html:
+        mail.content_subtype = 'html'
+    return mail.send()
 
 
 if CELERY_AVAILABLE:
     @task
-    def send_mail(to, subject, template, data, from_email=None, bcc=None):
+    def send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=False):
         return _django_send_mail.delay(to, subject, template, data,
-                                       from_email=from_email, bcc=bcc)
+                                       from_email=from_email, bcc=bcc, is_html=is_html)
 else:
-    def send_mail(to, subject, template, data, from_email=None, bcc=None):
+    def send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=False):
         return _django_send_mail(to, subject, template, data,
-                                 from_email=from_email, bcc=bcc)
+                                 from_email=from_email, bcc=bcc, is_html=is_html)
         
         
         
 
-def _mail_print(to, subject, template, data, from_email=None, bcc=None):
+def _mail_print(to, subject, template, data, from_email=None, bcc=None, is_html=False):
     """ DEBUG ONLY """
     if settings.DEBUG:
         print ">> Mail printing:"
+        if is_html:
+            print ">> (HTML)"
         print ">> To: ", to
         print ">> Subject: ", force_text(subject)
         print ">> Body:"
         print render_to_string(template, data)
     
-def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None):
+def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None, is_html=False):
     # remove newlines from header
     subject = subject.replace('\n', ' ').replace('\r', ' ')
     try:
-        send_mail(to, subject, template, data, from_email, bcc)
+        send_mail(to, subject, template, data, from_email, bcc, is_html=is_html)
     except Exception, e:
         # fail silently. log this, though
         if settings.DEBUG:
-            _mail_print(to, subject, template, data, from_email, bcc)
+            _mail_print(to, subject, template, data, from_email, bcc, is_html)
         logger.warn('Cosinnus.core.mail: Failed to send mail!', 
                      extra={'to_user': to, 'subject': subject, 'exception': str(e)})
 
 
-def send_mail_or_fail_threaded(to, subject, template, data, from_email=None, bcc=None):
+def send_mail_or_fail_threaded(to, subject, template, data, from_email=None, bcc=None, is_html=False):
     mail_thread = MailThread()
-    mail_thread.add_mail(to, subject, template, data, from_email, bcc)
+    mail_thread.add_mail(to, subject, template, data, from_email, bcc, is_html=is_html)
     mail_thread.start()
 
 
@@ -110,17 +114,19 @@ class MailThread(Thread):
         self.data = []
         self.from_email = []
         self.bcc = []
+        self.is_html = []
         super(MailThread, self).__init__(*args, **kwargs)
         
     
-    def add_mail(self, to, subject, template, data, from_email=None, bcc=None):
+    def add_mail(self, to, subject, template, data, from_email=None, bcc=None, is_html=False):
         self.to.append(to)
         self.subject.append(subject)
         self.template.append(template)
         self.data.append(data)
         self.from_email.append(from_email)
+        self.is_html.append(is_html)
         self.bcc.append(bcc)
         
     def run(self):
         for i, to in enumerate(self.to):
-            send_mail_or_fail(to, self.subject[i], self.template[i], self.data[i], self.from_email[i], self.bcc[i])
+            send_mail_or_fail(to, self.subject[i], self.template[i], self.data[i], self.from_email[i], self.bcc[i], is_html=self.is_html[i])

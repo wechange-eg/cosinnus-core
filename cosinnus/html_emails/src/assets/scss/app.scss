@@ -1,0 +1,39 @@
+@import 'settings';
+@import 'foundation-emails';
+@import 'wechange_variables';
+@import 'mixins';
+
+// Components
+// ----------
+
+@import 'footer';
+@import 'header';
+@import 'notification';
+@import 'page_header';
+@import 'summary_group';
+@import 'summary_item';
+@import 'nested_summary_item';
+
+// Global Styles
+// -------------
+
+.content {
+    border-radius: 6px;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.02);
+}
+
+img {
+    width: 100%;
+}
+
+.body {
+    &.body-inner {
+        background-color: transparent;
+    }
+}
+
+.columns {
+    &.tight {
+        padding-bottom: 0;
+    }
+}

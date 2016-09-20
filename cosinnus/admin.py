@@ -198,6 +198,7 @@ admin.site.register(CosinnusSociety, CosinnusSocietyAdmin)
 class CosinnusPortalAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'site', 'public')
     prepopulated_fields = {'slug': ('name', )}
+    readonly_fields = ('saved_infos',)
     
     def queryset(self, request):
         """ Allow portals to be accessed only by superusers and Portal-Admins """

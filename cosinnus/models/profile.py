@@ -224,7 +224,7 @@ class BaseUserProfile(FacebookIntegrationUserProfileMixin, models.Model):
 
     def get_avatar_thumbnail_url(self, size=(80, 80)):
         tn = self.get_avatar_thumbnail(size)
-        return tn.url if tn else None
+        return tn.url if tn else static('images/jane-doe.png')
     
     def get_map_marker_image_url(self):
         """ Returns a static image URL to use as a map marker image, or '' if none available """

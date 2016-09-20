@@ -1,0 +1,31 @@
+@import 'settings';
+@import 'wechange_variables';
+
+.page-header {
+    .columns {
+        padding-bottom: 0;
+    }
+
+    .address {
+        margin-top: $global-margin * 3.5;
+
+        h2 {
+            @extend h5;
+            font-weight: 500;
+        }
+    }
+
+    .intro {
+        margin-bottom: $global-margin * 2;
+        border-bottom: 2px solid $body-background;
+
+        h2 {
+            font-size: $global-font-size;
+        }
+
+        .columns {
+            padding-bottom: $global-margin * 2;
+        }
+    }
+
+}

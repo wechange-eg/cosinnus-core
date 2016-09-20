@@ -1,0 +1,101 @@
+@import 'settings';
+@import 'wechange_variables';
+@import 'mixins';
+
+.summary-item {
+    @include respond() {
+        margin-bottom: $global-margin * 2;
+    }
+
+    .columns {
+        padding-bottom: $global-margin / 2;
+    }
+
+    .text {
+        h3 {
+            @extend h5;
+            font-size: $global-font-size - 2;
+            margin-bottom: 0;
+            font-weight: 500;
+
+            a {
+                text-decoration: none;
+                font-weight: 700;
+            }
+        }
+
+        .columns {
+            padding-bottom: 0;
+        }
+
+        .row {
+            margin-left: $global-margin;
+
+            @include respond() {
+                margin-left: 0 !important;
+            }
+
+            &.event-text {
+                a {
+                    font-size: 12px;
+                    color: #999;
+                    text-decoration: none;
+                }
+            }
+
+            &.object-name {
+                width: auto;
+                border-bottom-style: solid;
+                border-bottom-width: 1px;
+                margin-bottom: 6px;
+
+                &.news {
+                    border-bottom-color: $news-color;
+                }
+
+                &.event {
+                    border-bottom-color: $event-color;
+                }
+
+                &.todo {
+                    border-bottom-color: $todo-color;
+                }
+
+                &.doc {
+                    border-bottom-color: $doc-color;
+                }
+
+                &.file {
+                    border-bottom-color: $file-color;
+                }
+
+                &.poll {
+                    border-bottom-color: $poll-color;
+                }
+
+                h3 {
+                    display: inline-block;
+                }
+            }
+
+            &.object-text {
+                p {
+                    font-size: $global-font-size - 2;
+                }
+            }
+
+        }
+    }
+
+    .image {
+        @include respond() {
+            padding-bottom: 6px !important;
+        }
+
+        img {
+            @include respond() {
+                width: 33% !important;
+            }
+        }
+    }
+}

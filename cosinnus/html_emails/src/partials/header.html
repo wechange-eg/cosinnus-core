@@ -1,0 +1,19 @@
+{{#if raw}}{{{{raw}}}}{% load i18n %}{{{{/raw}}}}{{/if}}
+
+<container class="header">
+    <row>
+        <columns large="7" valign="middle"></columns>
+
+        <columns class="logo" small="2" large="1" valign="middle">
+            <a href="{{#rw this}}portal_url{{/rw}}" target="_blank">
+                <img src="{{#rw this}}portal_image_url{{/rw}}" />
+            </a>
+        </columns>
+
+        <columns small="10" large="4" valign="middle">
+            <a href="{{#rw this}}portal_url{{/rw}}" target="_blank">
+                {{#rw this}}portal_name{{/rw}}
+            </a>
+        </columns>
+    </row>
+</container>

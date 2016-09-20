@@ -1,0 +1,34 @@
+{{> page_header}}
+
+<row class="origin">
+    <columns small="2" large="1" valign="middle">
+        <a href="{{#rw this}}origin_url{{/rw}}" target="_blank">
+            <img src="{{#rw this}}origin_image_url{{/rw}}" />
+        </a>
+    </columns>
+
+    <columns small="10" large="11" valign="middle">
+        <h3>
+            <a href="{{#rw this}}origin_url{{/rw}}" target="_blank">
+                {{#rw this}}origin_name{{/rw}}
+            </a>
+        </h3>
+    </columns>
+</row>
+
+<row class="notification-body">
+    <columns>
+        <p>{{#rw this}}notification_body{{/rw}}</p>
+    </columns>
+</row>
+
+
+{{#if raw}}
+    {{{{raw}}}}
+        {% if notification_item_html %}
+        	{{ notification_item_html }}
+        {% endif %}
+    {{{{/raw}}}}
+{{else}}
+	{{> summary_item notification_object}}
+{{/if}}

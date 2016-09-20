@@ -1,0 +1,12 @@
+@import 'settings';
+
+// Colors
+$news-color: #16778D;
+$doc-color: #E55C55;
+$event-color: #779B48;
+$todo-color: #EFA02D;
+$file-color: #14A085;
+$poll-color: #009EE3;
+
+$hue: hue($primary-color);
+$link-emphasis-color: hsl($hue, 40, 40);
