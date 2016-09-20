@@ -328,6 +328,10 @@ class CosinnusConf(AppConf):
     # if False, users can only create Projects 
     USERS_CAN_CREATE_GROUPS = False
     
+    
+    # TEMPORARY SETTING FOR THE DIGEST TEST PHASE
+    DIGEST_ONLY_FOR_ADMINS = True
+    
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.
