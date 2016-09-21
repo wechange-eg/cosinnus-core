@@ -5,6 +5,7 @@ from django.core.mail import get_connection, EmailMessage
 from django.template.loader import render_to_string
 from django.contrib.sites.models import get_current_site
 from django.utils.encoding import force_text
+from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
 
@@ -27,7 +28,9 @@ if 'djcelery' in settings.INSTALLED_APPS:
 def _django_send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=False):
     """ From django.core.mail, extended with bcc """
     if from_email is None:
-        from_email = settings.COSINNUS_DEFAULT_FROM_EMAIL
+        portal_name =  force_text(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS))
+        # add from-email readable name (yes, this is how this works)
+        from_email = '%(portal_name)s <%(from_email)s>' % {'portal_name': portal_name, 'from_email': settings.COSINNUS_DEFAULT_FROM_EMAIL}
     message = render_to_string(template, data)
 
     connection = get_connection()
@@ -68,10 +71,11 @@ def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None, is
         send_mail(to, subject, template, data, from_email, bcc, is_html=is_html)
     except Exception, e:
         # fail silently. log this, though
+        extra = {'to_user': to, 'subject': subject, 'exception': str(e)}
+        logger.warn('Cosinnus.core.mail: Failed to send mail!', extra=extra)
         if settings.DEBUG:
+            print ">> extra:", extra 
             _mail_print(to, subject, template, data, from_email, bcc, is_html)
-        logger.warn('Cosinnus.core.mail: Failed to send mail!', 
-                     extra={'to_user': to, 'subject': subject, 'exception': str(e)})
 
 
 def send_mail_or_fail_threaded(to, subject, template, data, from_email=None, bcc=None, is_html=False):
