@@ -58,6 +58,7 @@ notifications = {
             'object_url': 'get_member_page_url', # the group members page
             'object_text': '_sender.cosinnus_profile.description', 
         },
+       'notification_reason': 'admin',
     },
     'user_group_invitation_accepted': {
         'label': _('A user has accepted the invitation to this team (admins only)'), 
@@ -75,6 +76,7 @@ notifications = {
             'object_url': 'get_member_page_url', # the group members page
             'object_text': '_sender.cosinnus_profile.description', 
         },
+       'notification_reason': 'admin',
     },
     'user_group_invitation_declined': {
         'label': _('A user has declined the invitation to this team (admins only)'), 
@@ -92,6 +94,7 @@ notifications = {
             'object_url': 'get_member_page_url', # the group members page
             'object_text': '_sender.cosinnus_profile.description', 
         },
+       'notification_reason': 'admin',
     },    
     'user_tagged_in_object': {
         'label': _('You were tagged in a post, document or other item'), 
