@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-20 13:26+0200\n"
+"POT-Creation-Date: 2016-09-27 17:56+0200\n"
 "PO-Revision-Date: 2016-09-20 13:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -176,6 +176,11 @@ msgstr "Вас отметили в посте, документе или дру�
 #, python-format
 msgid "%(sender_name)s tagged you in"
 msgstr ""
+
+#, fuzzy, python-format
+#| msgid "You were tagged in: \"%(object_name)s\", in %(team_name)s"
+msgid "You were tagged by %(sender_name)s"
+msgstr "Вы были помечены в: \"%(object_name)s\" в %(team_name)s"
 
 #, fuzzy, python-format
 #| msgid "You were tagged in: \"%(object_name)s\", in %(team_name)s"
