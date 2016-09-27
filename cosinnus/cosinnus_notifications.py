@@ -52,6 +52,7 @@ notifications = {
         'is_html': True,
         'snippet_type': 'news',
         'event_text': _('New membership request'),
+        'notification_text': _('"%(sender_name)s" requested to become a member of %(team_name)s.'),
         'subject_text': _('"%(sender_name)s" requested to become a member of %(team_name)s.'),
         'data_attributes': {
             'object_name': '_sender_name',
@@ -106,6 +107,7 @@ notifications = {
         'is_html': True,
         'snippet_type': 'event',
         'event_text': _('%(sender_name)s tagged you in'),
+        'notification_text': _('You were tagged by %(sender_name)s'),
         'subject_text': _('You were tagged in "%(object_name)s" in %(team_name)s.'),
         'data_attributes': {
             'object_name': 'title', 
