@@ -12,10 +12,11 @@
 	{% include 'cosinnus/group/group_og_meta_attributes.html' with group=group %}
 {% endblock og_meta_attributes %}
 
+{% block container_classes %}container{% endblock container_classes %}
 
 {% block main_page_header %}
     
-    <div class="row">
+    <div class="row app-main">
         <!-- start with left navigation -->
         <div class="col-lg-3 col-md-3"><!-- left column -->
             {% if group %}
