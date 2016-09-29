@@ -762,6 +762,17 @@ def insert_current_language(input_string, following_string):
     return (input_string or '') + lang + following_string
 
 @register.filter
+def is_app_deactivated(group, app_name):
+    """ Renders a textfield's text safely with escaping, but retains linebreaks 
+        and formats URLs as target="_blank" links. """
+    ret = False
+    try:
+        ret = group.is_app_deactivated(app_name)
+    except:
+        pass
+    return ret
+
+@register.filter
 def debugthis(obj):
     """ Debug-inspects a template element """
     if not settings.DEBUG:
