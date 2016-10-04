@@ -24,22 +24,26 @@
 			    	</div>
 			    </div>
             </div>
-            <div class="row ultra-space">
-			    <div class="col-md-12">
-			    	<div>
-				        {{ page.header_text|richtext_or_stream }}
-			    	</div>
-			    </div>
-            </div>
             
-            <div class="row ultra-space">
-			    <div class="col-md-12">
-			    	<div>
-				        {{ page.header_content|richtext_or_stream }}
-			    	</div>
-			    </div>
-            </div>
+            {% if page.header_text|richtext_or_stream %}
+	            <div class="row ultra-space">
+				    <div class="col-md-12">
+				    	<div>
+					        {{ page.header_text|richtext_or_stream }}
+				    	</div>
+				    </div>
+	            </div>
+            {% endif %}
             
+            {% if page.header_content|richtext_or_stream %}
+	            <div class="row ultra-space">
+				    <div class="col-md-12">
+				    	<div>
+					        {{ page.header_content|richtext_or_stream }}
+				    	</div>
+				    </div>
+	            </div>
+            {% endif %}
             
             {% if page.show_register_button and not request.user.is_authenticated %}
 	            <div class="row ultra-space">
