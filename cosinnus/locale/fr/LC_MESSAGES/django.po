@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-20 13:26+0200\n"
+"POT-Creation-Date: 2016-09-27 17:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -151,6 +151,10 @@ msgstr ""
 
 #, python-format
 msgid "%(sender_name)s tagged you in"
+msgstr ""
+
+#, python-format
+msgid "You were tagged by %(sender_name)s"
 msgstr ""
 
 #, python-format

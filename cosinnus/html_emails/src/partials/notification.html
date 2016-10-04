@@ -16,12 +16,13 @@
     </columns>
 </row>
 
-<row class="notification-body">
-    <columns>
-        <p>{{#rw this}}notification_body{{/rw}}</p>
-    </columns>
-</row>
-
+{{#rwif notification_body raw_if="notification_body"}}
+    <row class="notification-body">
+        <columns>
+            <p>{{#rw this}}notification_body{{/rw}}</p>
+        </columns>
+    </row>
+{{/rwif}}
 
 {{#if raw}}
     {{{{raw}}}}

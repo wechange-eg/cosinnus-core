@@ -52,12 +52,14 @@ notifications = {
         'is_html': True,
         'snippet_type': 'news',
         'event_text': _('New membership request'),
+        'notification_text': _('"%(sender_name)s" requested to become a member of %(team_name)s.'),
         'subject_text': _('"%(sender_name)s" requested to become a member of %(team_name)s.'),
         'data_attributes': {
             'object_name': '_sender_name',
             'object_url': 'get_member_page_url', # the group members page
             'object_text': '_sender.cosinnus_profile.description', 
         },
+       'notification_reason': 'admin',
     },
     'user_group_invitation_accepted': {
         'label': _('A user has accepted the invitation to this team (admins only)'), 
@@ -75,6 +77,7 @@ notifications = {
             'object_url': 'get_member_page_url', # the group members page
             'object_text': '_sender.cosinnus_profile.description', 
         },
+       'notification_reason': 'admin',
     },
     'user_group_invitation_declined': {
         'label': _('A user has declined the invitation to this team (admins only)'), 
@@ -92,6 +95,7 @@ notifications = {
             'object_url': 'get_member_page_url', # the group members page
             'object_text': '_sender.cosinnus_profile.description', 
         },
+       'notification_reason': 'admin',
     },    
     'user_tagged_in_object': {
         'label': _('You were tagged in a post, document or other item'), 
@@ -103,6 +107,7 @@ notifications = {
         'is_html': True,
         'snippet_type': 'event',
         'event_text': _('%(sender_name)s tagged you in'),
+        'notification_text': _('You were tagged by %(sender_name)s'),
         'subject_text': _('You were tagged in "%(object_name)s" in %(team_name)s.'),
         'data_attributes': {
             'object_name': 'title', 

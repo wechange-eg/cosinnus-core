@@ -9,14 +9,12 @@ from wagtail.wagtailcore.fields import RichTextField, RichTextArea
 from wagtail.wagtailcore.rich_text import DbWhitelister
 
 from django.utils.functional import cached_property
-from wagtail.wagtailcore.blocks.field_block import RichTextBlock, RawHTMLBlock,\
-    URLBlock
+from wagtail.wagtailcore.blocks.field_block import RichTextBlock, RawHTMLBlock
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailcore.blocks.struct_block import StructBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
 from cosinnus.models.group_extra import CosinnusProject
-from random import shuffle
 import json
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
@@ -253,10 +251,16 @@ class RandomProjectsWidgetBlock(blocks.ChoiceBlock):
         template = 'cosinnus/wagtail/widgets/random_projects.html'
     
     def get_random_projects(self, count=4):
-        all_pks = CosinnusProject.objects.get_pks().keys()
-        shuffle(all_pks)
-        pks = all_pks[:count]
-        projects = CosinnusProject.objects.get_cached(pks=pks)
+        projects = CosinnusProject.objects.all_in_portal()
+        
+        # filter projects to include only ones with description and an avatar image
+        projects = projects.exclude(description__isnull=True).exclude(description__exact='')
+        projects = projects.exclude(avatar__exact='')
+        
+        # shuffle QS random. this may be a large performance decrease
+        projects = projects.order_by('?')
+        projects = projects[:count]
+        
         return projects
     
     def get_context(self, value):
