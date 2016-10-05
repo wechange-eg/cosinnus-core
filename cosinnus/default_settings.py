@@ -199,15 +199,16 @@ def compile_installed_apps(internal_apps=[]):
         'bootstrap3_datetime',
         'captcha',
         'djajax',
-        'haystack',
         'easy_thumbnails',
         'embed_video',
         'endless_pagination',
+        'haystack',
+        'osm_field',
+        'phonenumber_field',
+        'postman',
+        'raven.contrib.django.raven_compat',
         'rest_framework',
         'taggit',
-        'postman',
-        'osm_field',
-        'raven.contrib.django.raven_compat',
     ]
     return _INSTALLED_APPS
 
