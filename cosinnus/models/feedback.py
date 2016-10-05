@@ -59,7 +59,7 @@ class CosinnusReportedObject(models.Model):
     
     def get_absolute_url(self):
         """ Point at URL of referenced ContentType object """
-        if self.content_type.model == 'user':
+        if self.target_object and self.content_type.model == 'user':
             # patch for user model get_absolute_url pointing to nowhere
             return get_domain_for_portal(CosinnusPortal.get_current()) + reverse('cosinnus:profile-detail', kwargs={'username': self.target_object.username})
         if self.target_object and hasattr(self.target_object, 'get_absolute_url'):
