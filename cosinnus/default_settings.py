@@ -181,6 +181,7 @@ def compile_installed_apps(internal_apps=[]):
         'cosinnus_etherpad',
         'cosinnus_event',
         'cosinnus_file',
+        'cosinnus_marketplace',
         'cosinnus_message',
         'cosinnus_note',
         'cosinnus_notifications',
