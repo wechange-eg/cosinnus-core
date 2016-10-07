@@ -235,6 +235,9 @@ class CosinnusConf(AppConf):
     # and is the button shown?
     IMPORT_PROJECTS_PERMITTED = False
     
+    # default number of days offers in the Marketplace stay active
+    MARKETPLACE_OFFER_ACTIVITY_DURATION_DAYS = 30
+    
     # 
     """
         Can overwrite the default cosinnus map marker icons. needs to be in a format like

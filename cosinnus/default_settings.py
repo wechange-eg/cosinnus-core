@@ -401,3 +401,6 @@ NEWW_FORUM_GROUP_SLUG = 'forum'
 # pretty wonky and unintuitive right now, so be careful!
 COSINNUS_ALLOW_DASHBOARD_WIDGET_REARRANGE = True
 
+# Default country code to assume when none is entered for django-phonenumber-field
+PHONENUMBER_DEFAULT_REGION = 'DE'
+

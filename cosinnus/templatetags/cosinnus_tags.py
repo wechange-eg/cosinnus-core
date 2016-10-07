@@ -198,9 +198,15 @@ def subtract(value, arg):
 
 @register.filter
 def intify(value):
-    """Template filter to multiply two numbers
+    """Template filter to cast a value to int
     """
     return int(value)
+
+@register.filter
+def stringify(value):
+    """Template filter to stringify a value
+    """
+    return str(value)
 
 @register.simple_tag(takes_context=True)
 def cosinnus_group_url_path(context, group=None):
