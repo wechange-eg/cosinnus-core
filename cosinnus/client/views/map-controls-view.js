@@ -76,7 +76,6 @@ module.exports = View.extend({
     },
 
     handleXhrError: function (event) {
-        console.log('#handleXhrError');
         var $message = this.$el.find('form .message');
         new ErrorView({
             message: 'Ein Fehler ist bei der Suche aufgetreten.',
