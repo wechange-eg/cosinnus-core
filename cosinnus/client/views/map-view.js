@@ -185,7 +185,6 @@ module.exports = View.extend({
         var ret = !s || !_(s.getAllChildMarkers()).find(function (m) {
             return _(m.getLatLng()).isEqual(marker.getLatLng());
         });
-        console.log('returning: ' + ret);
         return ret;
     },
 

@@ -25,6 +25,18 @@
         position: fixed;
         top: 80px;
     }
+    
+    /* For fullscreen mode, don't move the controls to compensate for the navbar */
+    &.no-navbar{
+        .map-controls {
+            top: 18px;
+        }
+        .leaflet-top {
+            .leaflet-control {
+                top: 0px;
+            }
+        }
+    } 
 }
 
 .map-root {

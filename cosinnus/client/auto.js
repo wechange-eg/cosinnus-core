@@ -19,7 +19,9 @@ module.exports = {
         var map = new Map({}, {
             availableFilters: settings.availableFilters,
             activeFilters: settings.activeFilters,
-            pushState: settings.pushState
+            pushState: settings.pushState,
+            controlsEnabled: settings.controlsEnabled,
+            filterGroup: settings.filterGroup,
         });
 
         new MapView({

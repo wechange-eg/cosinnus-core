@@ -16,7 +16,9 @@ module.exports = Backbone.Model.extend({
         },
         layer: 'street',
         pushState: true,
-        controlsEnabled: true
+        controlsEnabled: true,
+        filterGroup: null,
+        baseUrl: '/maps/search/',
     },
 
     limitWithoutClustering: 400,
@@ -38,6 +40,7 @@ module.exports = Backbone.Model.extend({
     search: function () {
         var self = this;
         var url = self.buildURL(true);
+        
         self.set('searching', true);
         $.get(url, function (res) {
             self.set('searching', false);
@@ -52,7 +55,7 @@ module.exports = Backbone.Model.extend({
                 self.trigger('change:results');
                 // Save the search state in the url.
                 if (self.get('pushState')) {
-                    Backbone.mediator.publish('navigate:router', self.buildURL(false).replace('/maps/search/', '/map/'))
+                    Backbone.mediator.publish('navigate:router', self.buildURL(false).replace(self.get('baseUrl'), '/map/'))
                 }
             }
         }).fail(function () {
@@ -107,7 +110,12 @@ module.exports = Backbone.Model.extend({
             });
         }
         var query = $.param(searchParams);
-        return '/maps/search/?' + query;
+        
+        var url = this.get('baseUrl');
+        if (this.get('filterGroup')) {
+            url = url + this.get('filterGroup') + '/';
+        }
+        return url + '?' + query;
     },
 
     toggleFilter: function (resultType) {
