@@ -266,10 +266,16 @@ def _filter_qs_text(qs, text, attributes=['title',]):
     return qs
 
 
-def map_search_endpoint(request):
+def map_search_endpoint(request, filter_group_id=None):
     """ Maps API search endpoints. For parameters see ``MAP_PARAMETERS``
-        returns JSON with the contents of type ``MapSearchResults``"""
-
+        returns JSON with the contents of type ``MapSearchResults``
+        
+        @param filter_group_id: Will filter all items by group relation, where applicable 
+                (i.e. users are filtered by group memberships for that group, events as events in that group)
+        """
+    
+    print ">>> this is", filter_group_id
+    
     params = _collect_parameters(request.GET, MAP_PARAMETERS)
     query = force_text(params['q'])
 
@@ -291,6 +297,17 @@ def map_search_endpoint(request):
         user_qs = _filter_qs_location_bounds(user_qs, params, 'cosinnus_profile__media_tag__')
         if query:
             user_qs = _filter_qs_text(user_qs, query, ['first_name', 'last_name'])
+        # filter for group members of optinally given group id
+        if filter_group_id:
+            filter_group_id = int(filter_group_id)
+            # id could be of a CoinnusProject or CosinnusGroup (seperate cache)
+            group = CosinnusProject.objects.get_by_id(filter_group_id)
+            if not group:
+                group = CosinnusSociety.objects.get_by_id(filter_group_id)
+            if group:
+                user_qs = user_qs.filter(id__in=group.members)
+            else:
+                user_qs = []
         for user in user_qs[:limit_per_set]:
             people.append(UserMapResult(user))
         results['people'] = people
@@ -322,6 +339,8 @@ def map_search_endpoint(request):
             events_qs = _filter_qs_location_bounds(events_qs, params, 'media_tag__')
             if query:
                 events_qs = _filter_qs_text(events_qs, query, ['title'])
+            if filter_group_id:
+                events_qs = events_qs.filter(group_id=filter_group_id)
         for event in events_qs[:limit_per_set]:
             events.append(EventMapResult(event))
         results['events'] = events

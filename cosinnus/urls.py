@@ -16,6 +16,8 @@ urlpatterns = patterns('cosinnus.views',
     
     url(r'^map/$', 'maps.map_view', name='map'),
     url(r'^maps/search/$', 'maps.map_search_endpoint', name='map-search-endpoint'),
+    url(r'^maps/search/(?P<filter_group_id>\d+)/$', 'maps.map_search_endpoint', name='map-search-endpoint-filtered'),
+    
     url(r'^map/embed/$', TemplateView.as_view(template_name='cosinnus/universal/map/map_embed.html')),
     
     
