@@ -29,6 +29,7 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Etherpad',
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
+            'cosinnus_marketplace.Offer',
         ],
         'cosinnus_event.Event': [
             'cosinnus_file.FileEntry',
@@ -36,6 +37,7 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Etherpad',
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
+            'cosinnus_marketplace.Offer',
         ],
         'cosinnus_todo.TodoEntry': [
             'cosinnus_file.FileEntry',
@@ -44,6 +46,7 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Etherpad',
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
+            'cosinnus_marketplace.Offer',
         ],
         'cosinnus_poll.Poll': [
             'cosinnus_file.FileEntry',
@@ -51,6 +54,16 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Etherpad',
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
+            'cosinnus_marketplace.Offer',
+        ],
+      'cosinnus_marketplace.Offer': [
+            'cosinnus_file.FileEntry',
+            'cosinnus_todo.TodoEntry',
+            'cosinnus_etherpad.Etherpad',
+            'cosinnus_etherpad.Ethercalc',
+            'cosinnus_poll.Poll',
+            'cosinnus_event.Event',
+            'cosinnus_note.Note',
         ]
     }
     
@@ -71,13 +84,23 @@ class CosinnusConf(AppConf):
             'etherpad',
             'diskussion'
         ],
-        'cosinnus_event.Poll': [
+        'cosinnus_poll.Poll': [
             'umfrage',
             'poll',
             'meinung',
             'diskussion',
             'discussion',
             'opinion',
+        ],
+        'cosinnus_marketplace.Offer': [
+            'suche',
+            'biete',
+            'buying',
+            'selling',
+            'annonce',
+            'classifieds',
+            'angebot',
+            'kleinanzeige',
         ],
         'cosinnus_todo.TodoEntry': [
             'todo',
@@ -98,6 +121,7 @@ class CosinnusConf(AppConf):
         'cosinnus_todo',
         'cosinnus_etherpad',
         'cosinnus_file',
+        'cosinnus_marketplace',
     ]
     
     # CSV Import settings

@@ -148,6 +148,15 @@
                 <div class="multiline-ellipsis-main">
                     {% if user.pk in group.members or user in group.admins or not user.is_authenticated %}
                     	
+                    	{% if "marketplace" in object_counts %}
+                            <div class="dashboard-header-link app-marketplace">
+                                <a href="{% group_url 'cosinnus:marketplace:list' group=group %}">
+                                    <i class="fa fa-exchange"></i>
+                                    <span>{{ object_counts.marketplace }}</span>
+                                    {% if object_counts.marketplace == 1 %}{% trans "Offer" %}{% else %}{% trans "Offers" %}{% endif %}
+                                </a>
+                            </div>
+                        {% endif %}
                     	{% if "poll" in object_counts %}
                             <div class="dashboard-header-link app-poll">
                                 <a href="{% group_url 'cosinnus:poll:list' group=group %}">

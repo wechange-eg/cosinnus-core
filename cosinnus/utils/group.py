@@ -9,6 +9,7 @@ DEFAULT_CONTENT_MODELS = [
     'cosinnus_file.FileEntry',
     'cosinnus_event.Event',
     'cosinnus_poll.Poll',
+    'cosinnus_marketplace.Offer',
     'cosinnus_todo.TodoEntry',
     'cosinnus_etherpad.Etherpad'
 ]
