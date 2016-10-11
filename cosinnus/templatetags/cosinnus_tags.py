@@ -292,7 +292,7 @@ def cosinnus_render_widget(context, widget):
     return mark_safe(widget.render(**flat))
 
 @register.simple_tag(takes_context=True)
-def cosinnus_render_attached_objects(context, source, filter=None):
+def cosinnus_render_attached_objects(context, source, filter=None, skipImages=False):
     """
     Renders all attached files on a given source cosinnus object. This will
     collect and group all attached objects (`source.attached_objects`) by their
@@ -303,15 +303,18 @@ def cosinnus_render_attached_objects(context, source, filter=None):
     :param filter: a comma seperated list of allowed Object types to be
         rendered. eg.: 'cosinnus_event.Event,cosinnus_file.FileEntry' will
         allow only Files and events to be rendered.
+    :param skipImages: will not display image type attached files
     """
     attached_objects = source.attached_objects.all()
     allowed_types = filter.replace(' ', '').split(',') if filter else []
-
+    
     typed_objects = defaultdict(list)
     for att in attached_objects:
         attobj = att.target_object
         content_model = att.model_name
         if filter and content_model not in allowed_types:
+            continue
+        if getattr(attobj, 'is_image', False):
             continue
         if attobj is not None:
             typed_objects[content_model].append(attobj)
