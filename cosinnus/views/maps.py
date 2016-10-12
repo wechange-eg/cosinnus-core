@@ -274,8 +274,6 @@ def map_search_endpoint(request, filter_group_id=None):
                 (i.e. users are filtered by group memberships for that group, events as events in that group)
         """
     
-    print ">>> this is", filter_group_id
-    
     params = _collect_parameters(request.GET, MAP_PARAMETERS)
     query = force_text(params['q'])
 
@@ -318,6 +316,8 @@ def map_search_endpoint(request, filter_group_id=None):
         projects_qs = _filter_qs_location_bounds(projects_qs, params, 'locations__')
         if query:
             projects_qs = _filter_qs_text(projects_qs, query, CosinnusProject.NAME_LOOKUP_FIELDS)
+        if filter_group_id:
+            projects_qs = projects_qs.filter(parent_id=filter_group_id)
         for project in projects_qs[:limit_per_set]:
             projects.append(GroupMapResult(project))
         results['projects'] = projects

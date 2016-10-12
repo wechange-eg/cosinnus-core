@@ -29,7 +29,7 @@
     <!-- a box with semi transparent background -->
     <div class="content-box">
 		<div class="map-root"></div>
-		{% captureas map_settings %}{"filterGroup": {{ group.id }}, "controlsEnabled": false, "activeFilters": {"groups": false, "events": false, "projects": false, "people": true}, "availableFilters": {"groups": true, "events": true, "projects": true, "people": true}, "markerIcons": {% render_map_marker_icon_json %}}{% endcaptureas %}
+		{% captureas map_settings %}{"filterGroup": {{ group.id }}, "controlsEnabled": false, "activeFilters": {"groups": false, "events": false, "projects": {% if group.type == 1 %}true{% else %}false{% endif %}, "people": true}, "availableFilters": {"groups": true, "events": true, "projects": true, "people": true}, "markerIcons": {% render_map_marker_icon_json %}}{% endcaptureas %}
 		{% include 'cosinnus/common/init_client_module.html' with module='map' id=""|add_uuid height=400 settings=map_settings %}
         <div class="clearfix"></div>
     </div>
