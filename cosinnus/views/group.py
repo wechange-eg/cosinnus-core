@@ -137,11 +137,15 @@ class CosinnusGroupFormMixin(object):
             app = app_name.split('_')[-1] # eg 'todo'
             # filter for cosinnus app being deactivatable
             if app_registry.is_deactivatable(app_name):
+                if not self.object:
+                    app_is_active = app_registry.is_active_by_default(app_name)
+                else:
+                    app_is_active = not self.object.deactivated_apps or app_name not in deactivated_apps
                 deactivated_app_selection.append({
                     'app_name': app_name,
                     'app': app,
                     'label': pgettext_lazy('the_app', app),
-                    'checked': True if (not self.object or not self.object.deactivated_apps) else app_name not in deactivated_apps,
+                    'checked': app_is_active,
                 })
             
         context.update({
