@@ -782,6 +782,20 @@ def is_app_deactivated(group, app_name):
     return ret
 
 @register.filter
+def querydictlist(querydict, key):
+    """ Returns the ``getlist`` item of a querydict """
+    if not querydict or not key or not key in querydict:
+        return []
+    return querydict.getlist(key)
+
+@register.filter
+def makelist(splitstring):
+    """ Makes an impromptu list from comma-seperated values of a string
+        to get around not being able to form lists in templates """
+    return splitstring.split(',')
+
+
+@register.filter
 def debugthis(obj):
     """ Debug-inspects a template element """
     if not settings.DEBUG:
