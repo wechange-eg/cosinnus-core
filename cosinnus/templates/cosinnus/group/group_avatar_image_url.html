@@ -1,1 +1,1 @@
-{% load static thumbnail %}{% if group and group.avatar %}{% thumbnail group.avatar 200x200 crop=1 upscale=1 %}{% else %}{% static 'images/group-avatar-placeholder.png' %}{% endif %}
+{% load static thumbnail %}{% if group and group.avatar %}{% if large_avatar_image %}{% thumbnail group.avatar 360x360 crop=1 upscale=1 %}{% else %}{% thumbnail group.avatar 200x200 crop=1 upscale=1 %}{% endif %}{% else %}{% static 'images/group-avatar-placeholder.png' %}{% endif %}
