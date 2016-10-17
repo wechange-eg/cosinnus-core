@@ -187,6 +187,7 @@ class CosinnusConf(AppConf):
         ("etherpad", "latest", {'amount':'5', 'sort_field':'4'}),
         ("file", "latest", {'sort_field':'5', 'amount':'5'}),
         ("poll", "current", {'sort_field':'6', 'amount':'5'}),
+        ("marketplace", "current", {'sort_field':'7', 'amount':'5'}),
         ("cosinnus", "group_members", {'amount':'5', 'sort_field':'7'}),
         ("cosinnus", "related_groups", {'amount':'5', 'sort_field':'8'}),
     ]
