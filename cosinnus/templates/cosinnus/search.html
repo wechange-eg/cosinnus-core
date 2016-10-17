@@ -95,6 +95,70 @@
                 </ul>
               </button>
             </div>
+            
+            
+            <div class="app-etherpad">
+              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_etherpad.ethercalc">
+                <ul class="media-list">
+                  <li class="media">
+                    <!--
+                    <a class="pull-left" href="#">
+                      2
+                    </a>
+                    <a class="pull-left" style="background-color:inherit;" href="#">
+                    -->
+                    <a class="pull-left" href="#">
+                      <i class="fa fa-table"></i>
+                    </a>
+                    <div class="media-body">
+                      {% trans "Ethercalcs" %}
+                    </div>
+                  </li>
+                </ul>
+              </button>
+            </div>
+            
+            <div class="app-poll">
+              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_poll.Poll">
+                <ul class="media-list">
+                  <li class="media">
+                    <!--
+                    <a class="pull-left" href="#">
+                      2
+                    </a>
+                    <a class="pull-left" style="background-color:inherit;" href="#">
+                    -->
+                    <a class="pull-left" href="#">
+                      <i class="fa fa-bar-chart"></i>
+                    </a>
+                    <div class="media-body">
+                      {% trans "Polls" %}
+                    </div>
+                  </li>
+                </ul>
+              </button>
+            </div>
+            
+            <div class="app-marketplace">
+              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_marketplace.Offer">
+                <ul class="media-list">
+                  <li class="media">
+                    <!--
+                    <a class="pull-left" href="#">
+                      2
+                    </a>
+                    <a class="pull-left" style="background-color:inherit;" href="#">
+                    -->
+                    <a class="pull-left" href="#">
+                      <i class="fa fa-exchange"></i>
+                    </a>
+                    <div class="media-body">
+                      {% trans "Offers" %}
+                    </div>
+                  </li>
+                </ul>
+              </button>
+            </div>
         
             <div class="app-main">
               <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_note.note">
