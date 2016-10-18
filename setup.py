@@ -71,6 +71,7 @@ setup(
         'django-filter==0.11.0',
         'django-haystack==2.3.1',
         'django-model-utils==1.5.0',
+        'django-postman==3.3.1',
         'django-phonenumber-field==1.1.0',
         'django-recaptcha==1.0.2',
         'django-sekizai==0.8.2',
@@ -107,7 +108,7 @@ setup(
         'django-djajax',
         'django-awesome-avatar',
         'django-bootstrap3',
-        'ethercalc-python',
+        'ethercalc-python==0.0.4',
     ],
     dependency_links=[
         'git+git://github.com/Markush2010/django-bootstrap3.git@develop#egg=django-bootstrap3',
@@ -115,7 +116,7 @@ setup(
         'git+git://github.com/sinnwerkstatt/django-select2.git@master#egg=Django-Select2',
         'git+git://github.com/sinnwerkstatt/django-awesome-avatar.git@master#egg=django-awesome-avatar',
         'git+git://github.com/saschan/django-djajax.git@master#egg=django-djajax',
-        'git+git://github.com/saschan/ethercalc-python.git@master#ethercalc-python',
+        'git+git://github.com/saschan/ethercalc-python.git@master#ethercalc-python-0.0.4',
         'git+git://github.com/sinnwerkstatt/django-osm-field.git@master#egg=django-osm-field'
     ],
     classifiers=[
