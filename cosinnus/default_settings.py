@@ -181,6 +181,7 @@ def compile_installed_apps(internal_apps=[]):
         'cosinnus_etherpad',
         'cosinnus_event',
         'cosinnus_file',
+        'cosinnus_marketplace',
         'cosinnus_message',
         'cosinnus_note',
         'cosinnus_notifications',
@@ -199,15 +200,16 @@ def compile_installed_apps(internal_apps=[]):
         'bootstrap3_datetime',
         'captcha',
         'djajax',
-        'haystack',
         'easy_thumbnails',
         'embed_video',
         'endless_pagination',
+        'haystack',
+        'osm_field',
+        'phonenumber_field',
+        'postman',
+        'raven.contrib.django.raven_compat',
         'rest_framework',
         'taggit',
-        'postman',
-        'osm_field',
-        'raven.contrib.django.raven_compat',
     ]
     return _INSTALLED_APPS
 
@@ -398,4 +400,7 @@ NEWW_FORUM_GROUP_SLUG = 'forum'
 # if enabled, group admins will see a "rearrange" button and can re-order the widgets.
 # pretty wonky and unintuitive right now, so be careful!
 COSINNUS_ALLOW_DASHBOARD_WIDGET_REARRANGE = True
+
+# Default country code to assume when none is entered for django-phonenumber-field
+PHONENUMBER_DEFAULT_REGION = 'DE'
 

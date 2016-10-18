@@ -71,6 +71,7 @@ setup(
         'django-filter==0.11.0',
         'django-haystack==2.3.1',
         'django-model-utils==1.5.0',
+        'django-phonenumber-field==1.1.0',
         'django-recaptcha==1.0.2',
         'django-sekizai==0.8.2',
         'django-suit==0.2.15',

@@ -10,6 +10,7 @@
     </li>
 </ol>
 
+{% if not disable_tags %}
 <ol class="input-area" {% if not show_all == True %}style="display: none;"{% endif %} id="tags-selector">
     <li class="w100">
         <i class="fa fa-fw fa-tags"></i>
@@ -17,6 +18,7 @@
         {% render_field form.forms.media_tag.tags placeholder=placeholder %}
     </li>
 </ol>
+{% endif %}
     
 <ol class="input-area" {% if not show_all == True %}style="display: none;"{% endif %} id="location-selector">
     <li class="w100">
@@ -126,11 +128,13 @@
         </a>
     </li>
 {% endcomment %}
+	{% if not disable_tags %}
     <li class="input-area-lighter">
         <a href="#" onclick="return false;" data-show-id="tags-selector" title="{% trans 'Select tags' %}">
             <i class="fa fa-fw fa-tags"></i>
         </a>
     </li>
+    {% endif %}
     <li class="input-area-lighter">
         <a href="#" onclick="return false;" data-show-id="topics-selector" title="{% trans 'Select topic' %}">
             <i class="fa fa-fw fa-lightbulb-o"></i>
