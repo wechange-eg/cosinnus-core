@@ -64,6 +64,7 @@ setup(
         'django-appconf==0.6',
         'django-bootstrap3-datetimepicker==2.2.0',
         'django-classy-tags==0.4',
+        'django-cron==0.5.0',
         'django-embed-video==0.6',
         'django-endless-pagination==2.0',
         'django-extra-views==0.6.3',

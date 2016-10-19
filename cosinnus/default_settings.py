@@ -192,6 +192,7 @@ def compile_installed_apps(internal_apps=[]):
         # 'django_extensions',
         'django_filters',
         'django_select2',
+        'django_cron',
         'widget_tweaks',
         
         # External Apps
@@ -334,6 +335,16 @@ FORMAT_MODULE_PATH = 'cosinnus.formats'
 # will then trigger an update/delete of that model instance within the search index proper.
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
+
+# django-cron cronjob class definitions
+# TODO: FIXME: this should be inverted, ie each cosinnus app should set these settings!
+# cosinnus-core should not know about other cosinnus apps here!
+CRON_CLASSES = [
+    'cosinnus_marketplace.cron.DeactivateExpiredOffers',
+                 
+]
+# delete cronjob logs older than 30 days
+DJANGO_CRON_DELETE_LOGS_OLDER_THAN = 30
 
 
 """ -----------  Important Cosinnus-specific settings:  ----------- """
