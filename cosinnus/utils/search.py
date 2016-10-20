@@ -39,7 +39,7 @@ class TagObjectIndex(indexes.SearchIndex):
     mt_topics = indexes.MultiValueField(model_attr='media_tag__topics', null=True)
     mt_persons = indexes.MultiValueField(null=True)
     mt_likes = indexes.IntegerField(model_attr='media_tag__likes', null=True)
-    mt_visibility = indexes.BooleanField(model_attr='media_tag__visibility', null=True)
+    mt_visibility = indexes.IntegerField(model_attr='media_tag__visibility', null=True)
 
     def prepare_mt_persons(self, obj):
         if obj.media_tag:

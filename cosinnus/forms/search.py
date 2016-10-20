@@ -12,7 +12,7 @@ from haystack.backends import SQ
 from haystack.constants import DEFAULT_ALIAS
 from haystack.forms import SearchForm, model_choices
 
-from cosinnus.models.tagged import BaseTaggableObjectModel
+from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.models.profile import get_user_profile_model
 
@@ -48,7 +48,7 @@ class TaggableModelSearchForm(SearchForm):
         self.fields['models'].choices = MODEL_ALIASES.items()
 
     def get_models(self):
-        """Return an alphabetical list of model classes in the index."""
+        """ Return the models of types user has selected to filter search on """
         search_models = []
 
         if self.is_valid():
@@ -76,9 +76,8 @@ class TaggableModelSearchForm(SearchForm):
         result set to only include elements with read access.
         """
         public_node = (
-            SQ(public__exact=True) |  # public on the object itself
-            SQ(group_public__exact=True) |  # public group
-            SQ(mt_public__exact=True)  # public via meta attribute
+            SQ(public__exact=True) |  # public on the object itself (applicable for groups)
+            SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_ALL)  # public via "everyone can see me" visibility meta attribute
         )
 
         user = self.request.user
@@ -92,6 +91,7 @@ class TaggableModelSearchForm(SearchForm):
                 )
         else:
             sqs = sqs.filter_and(public_node)
+            
         return sqs
 
 
