@@ -1,0 +1,3 @@
+{% load cosinnus_tags %}
+{{ object.user|full_name }}
+{{ object.user.email }}
