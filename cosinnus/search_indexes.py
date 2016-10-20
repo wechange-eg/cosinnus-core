@@ -21,8 +21,8 @@ class CosinnusGroupIndexMixin(object):
 
 class CosinnusProjectIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexes.Indexable):
     
-    text = TemplateResolveEdgeNgramField(document=True, use_template=True, template_name='search/indexes/{app_label}/cosinnusgroup_{field_name}.txt')
-    rendered = TemplateResolveCharField(use_template=True, indexed=False, template_name='search/indexes/{app_label}/cosinnusgroup_{field_name}.txt')
+    text = TemplateResolveEdgeNgramField(document=True, use_template=True, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
+    rendered = TemplateResolveCharField(use_template=True, indexed=False, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
 
     name = indexes.CharField(model_attr='name', boost=1.25)
     slug = indexes.CharField(model_attr='slug', indexed=False)
@@ -37,8 +37,8 @@ class CosinnusProjectIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
     
 class CosinnusSocietyIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexes.Indexable):
     
-    text = TemplateResolveEdgeNgramField(document=True, use_template=True, template_name='search/indexes/{app_label}/cosinnusgroup_{field_name}.txt')
-    rendered = TemplateResolveCharField(use_template=True, indexed=False, template_name='search/indexes/{app_label}/cosinnusgroup_{field_name}.txt')
+    text = TemplateResolveEdgeNgramField(document=True, use_template=True, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
+    rendered = TemplateResolveCharField(use_template=True, indexed=False, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
 
     name = indexes.CharField(model_attr='name', boost=1.25)
     slug = indexes.CharField(model_attr='slug', indexed=False)
@@ -52,8 +52,8 @@ class CosinnusSocietyIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
 
 
 class UserProfileIndex(TagObjectSearchIndex, indexes.Indexable):
-    text = TemplateResolveEdgeNgramField(document=True, use_template=True, template_name='search/indexes/{app_label}/userprofile_{field_name}.txt')
-    rendered = TemplateResolveCharField(use_template=True, indexed=False, template_name='search/indexes/{app_label}/userprofile_{field_name}.txt')
+    text = TemplateResolveEdgeNgramField(document=True, use_template=True, template_name='search/indexes/cosinnus/userprofile_{field_name}.txt')
+    rendered = TemplateResolveCharField(use_template=True, indexed=False, template_name='search/indexes/cosinnus/userprofile_{field_name}.txt')
     
     first_name = indexes.CharField(model_attr='user__first_name')
     last_name = indexes.CharField(model_attr='user__last_name')
