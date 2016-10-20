@@ -14,31 +14,16 @@ from haystack.forms import SearchForm, model_choices
 
 from cosinnus.models.tagged import BaseTaggableObjectModel
 from cosinnus.utils.permissions import check_user_superuser
+from cosinnus.models.profile import get_user_profile_model
 
-
-def taggable_model_choices(using=DEFAULT_ALIAS):
-    """
-    Returns all models sorted by their verbose_name_plural that fulfill the
-    following criteria:
-
-    1. has a valid haystack index
-    2. has a haystack index is defined on the default haystack connection
-    3. is not abstract
-    4. inherits from :class:`~cosinnus.model.tagged.BaseTaggableObjectModel`
-    
-    :returns: Returns a list of 2-tuple of the form
-        `('`cosinnus_todo.TodoEntry', 'TodoEntries')`
-    """
-    choices = [
-        (
-            "%s.%s" % (m._meta.app_label, m._meta.model_name),
-            capfirst(smart_text(m._meta.verbose_name_plural))
-        ) for m in filter(
-            lambda m: not m._meta.abstract and issubclass(m, BaseTaggableObjectModel),
-            connections[using].get_unified_index().get_indexed_models()
-        )
-    ]
-    return sorted(choices, key=lambda x: x[1])
+MODEL_ALIASES = {
+    'todo': 'cosinnus_todo.todoentry',
+    'file': 'cosinnus_file.fileentry',
+    'etherpad': 'cosinnus_etherpad.etherpad',
+    'note': 'cosinnus_note.note',
+    'event': 'cosinnus_event.event',
+    'user': '<userprofile>',
+}
 
 
 class TaggableModelSearchForm(SearchForm):
@@ -56,20 +41,25 @@ class TaggableModelSearchForm(SearchForm):
     location = forms.CharField(required=False)
     valid_start = forms.DateField(required=False)
     valid_end = forms.DateField(required=False)
-
+    
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request')
         super(TaggableModelSearchForm, self).__init__(*args, **kwargs)
-        self.fields['models'].choices =taggable_model_choices()
+        self.fields['models'].choices = MODEL_ALIASES.items()
 
     def get_models(self):
         """Return an alphabetical list of model classes in the index."""
         search_models = []
 
         if self.is_valid():
-            for model in self.cleaned_data.get('models', []):
-                search_models.append(models.get_model(*model.split('.')))
-
+            for model_alias in self.cleaned_data.get('models', []):
+                if model_alias in MODEL_ALIASES.keys():
+                    model_string = MODEL_ALIASES[model_alias]
+                    if model_string == '<userprofile>':
+                        model = get_user_profile_model()
+                    else:
+                        model = models.get_model(*model_string.split('.'))
+                    search_models.append(model)
         return search_models
 
     def search(self):

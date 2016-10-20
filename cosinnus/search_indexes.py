@@ -27,9 +27,9 @@ class CosinnusProjectIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
     name = indexes.CharField(model_attr='name', boost=1.25)
     slug = indexes.CharField(model_attr='slug', indexed=False)
     public = indexes.BooleanField(model_attr='public')
-    admins = indexes.MultiValueField(model_attr='admins', indexed=False)
-    members = indexes.MultiValueField(model_attr='members', indexed=False)
-    pendings = indexes.MultiValueField(model_attr='pendings', indexed=False)
+    group_admins = indexes.MultiValueField(model_attr='admins', indexed=False)
+    group_members = indexes.MultiValueField(model_attr='members', indexed=False)
+    group_pendings = indexes.MultiValueField(model_attr='pendings', indexed=False)
     
     def get_model(self):
         return CosinnusProject
@@ -43,9 +43,9 @@ class CosinnusSocietyIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
     name = indexes.CharField(model_attr='name', boost=1.25)
     slug = indexes.CharField(model_attr='slug', indexed=False)
     public = indexes.BooleanField(model_attr='public')
-    admins = indexes.MultiValueField(model_attr='admins', indexed=False)
-    members = indexes.MultiValueField(model_attr='members', indexed=False)
-    pendings = indexes.MultiValueField(model_attr='pendings', indexed=False)
+    group_admins = indexes.MultiValueField(model_attr='admins', indexed=False)
+    group_members = indexes.MultiValueField(model_attr='members', indexed=False)
+    group_pendings = indexes.MultiValueField(model_attr='pendings', indexed=False)
     
     def get_model(self):
         return CosinnusSociety
