@@ -10,21 +10,12 @@ from cosinnus.utils.import_utils import import_from_settings
 from cosinnus.models.group import CosinnusGroup
 
 
-def prepare_user(obj):
-    if obj is None:
-        return ''
-    return obj.get_full_name() or obj.username
-
-
-def prepare_users(users):
-    if not users:
-        return []
-    return map(prepare_user, users)
+BOOSTED_FIELD_BOOST = 1.5
 
 
 class DefaultTagObjectIndex(indexes.SearchIndex):
-    mt_location_place = indexes.CharField(model_attr='media_tag__location_place', null=True)
-    mt_people_name = indexes.CharField(model_attr='media_tag__people_name', null=True)
+    #mt_location_place = indexes.CharField(model_attr='media_tag__location_place', null=True)
+    #mt_people_name = indexes.CharField(model_attr='media_tag__people_name', null=True)
     mt_public = indexes.BooleanField(model_attr='media_tag__public', null=True)
 
 
@@ -32,13 +23,8 @@ class TagObjectIndex(indexes.SearchIndex):
     mt_location = indexes.CharField(model_attr='media_tag__location', null=True)
     mt_location_lat = indexes.FloatField(model_attr='media_tag__location_lat', null=True)
     mt_location_lon = indexes.FloatField(model_attr='media_tag__location_lon', null=True)
-    mt_place = indexes.CharField(model_attr='media_tag__place', null=True)
-    mt_valid_start = indexes.DateTimeField(model_attr='media_tag__valid_start', null=True)
-    mt_valid_end = indexes.DateTimeField(model_attr='media_tag__valid_end', null=True)
-    mt_approach = indexes.CharField(model_attr='media_tag__approach', null=True)
+    #mt_approach = indexes.CharField(model_attr='media_tag__approach', null=True) # approach hidden for now
     mt_topics = indexes.MultiValueField(model_attr='media_tag__topics', null=True)
-    mt_persons = indexes.MultiValueField(null=True)
-    mt_likes = indexes.IntegerField(model_attr='media_tag__likes', null=True)
     mt_visibility = indexes.IntegerField(model_attr='media_tag__visibility', null=True)
 
     def prepare_mt_persons(self, obj):
@@ -116,17 +102,10 @@ class BaseTaggableObjectIndex(TagObjectSearchIndex):
     text = TemplateResolveEdgeNgramField(document=True, use_template=True)
     rendered = TemplateResolveCharField(use_template=True, indexed=False)
     
-    title = indexes.EdgeNgramField(model_attr='title', boost=1.25)
-    slug = indexes.CharField(model_attr='slug', indexed=False)
-    creator = indexes.EdgeNgramField(model_attr='creator', null=True)
-    created = indexes.DateTimeField(model_attr='created')
+    boosted = indexes.EdgeNgramField(model_attr='title', boost=BOOSTED_FIELD_BOOST)
 
-    get_absolute_url = indexes.CharField(model_attr='get_absolute_url', indexed=False)
-
+    creator = indexes.IntegerField(model_attr='creator__id', null=True)
     group = indexes.IntegerField(model_attr='group_id', indexed=False)
-    group_name = indexes.CharField(model_attr='group__name')
-    group_slug = indexes.CharField(model_attr='group__slug', indexed=False)
-    group_public = indexes.BooleanField(model_attr='group__public')
     group_members = indexes.MultiValueField(model_attr='group__members')
 
     def index_queryset(self, using=None):
@@ -139,9 +118,6 @@ class BaseTaggableObjectIndex(TagObjectSearchIndex):
         qs = qs.filter(group__is_active=True)
         return qs.select_related('media_tag').all()
 
-    def prepare_creator(self, obj):
-        return prepare_user(obj.creator)
-    
     
 class BaseHierarchicalTaggableObjectIndex(BaseTaggableObjectIndex):
     

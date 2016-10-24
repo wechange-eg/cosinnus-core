@@ -1,2 +1,4 @@
 {{ object.name }}
+{{ object.description }}
+{{ object.description_long }}
 {% include "search/indexes/cosinnus/_media_tag_text.txt" %}

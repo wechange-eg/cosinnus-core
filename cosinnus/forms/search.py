@@ -16,11 +16,13 @@ from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.group import get_cosinnus_group_model
+from haystack.inputs import AutoQuery
 
 MODEL_ALIASES = {
     'todo': 'cosinnus_todo.todoentry',
     'file': 'cosinnus_file.fileentry',
     'etherpad': 'cosinnus_etherpad.etherpad',
+    'ethercalc': 'cosinnus_etherpad.ethercalc',
     'note': 'cosinnus_note.note',
     'event': 'cosinnus_event.event',
     'user': '<userprofile>',
@@ -65,11 +67,18 @@ class TaggableModelSearchForm(SearchForm):
 
     def search(self):
         sqs = super(TaggableModelSearchForm, self).search()
+        
         if hasattr(self, 'cleaned_data'):
             sqs = self._filter_for_read_access(sqs)
             sqs = self._filter_group_selection(sqs)
             sqs = self._filter_media_tags(sqs)
+            sqs = self._boost_search_query(sqs)
         return sqs.models(*self.get_models())
+
+    def _boost_search_query(self, sqs):
+        q = self.cleaned_data['q']
+        sqs = sqs.filter(SQ(boosted=AutoQuery(q)) | SQ(text=AutoQuery(q)))
+        return sqs
 
     def _filter_for_read_access(self, sqs):
         """
@@ -92,17 +101,29 @@ class TaggableModelSearchForm(SearchForm):
                     SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
                     SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) # logged in users can see users who are visible           
                 )
-                same_group_members_visibility = (
+                group_member_user_visibility = (
                     SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
-                    SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_USER) &# team mambers can see this user 
+                    SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_USER) & # team mambers can see this user 
                     SQ(membership_groups__in=users_group_ids)
+                )
+                my_item = (
+                     SQ(creator__exact=user.id)
+                )
+                
+                # FIXME: known problem: ``group_members`` is a stale indexed representation of the members
+                # of an items group. New members of a group won't be able to find old indexed items if the index
+                # is not refreshed regularly
+                group_visible_and_in_my_group = (
+                     SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) &
+                     SQ(group_members__contains=user.id)
                 )
                 
                 sqs = sqs.filter_and(
-                    SQ(group_members__contains=user.id) |
                     public_node |
-                    logged_in_user_visibility |
-                    same_group_members_visibility
+                    group_visible_and_in_my_group |
+                    my_item |
+                    group_member_user_visibility |
+                    logged_in_user_visibility 
                 )
         else:
             sqs = sqs.filter_and(public_node)
