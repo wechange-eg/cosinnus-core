@@ -77,7 +77,8 @@ class TaggableModelSearchForm(SearchForm):
         """
         public_node = (
             SQ(public__exact=True) |  # public on the object itself (applicable for groups)
-            SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_ALL)  # public via "everyone can see me" visibility meta attribute
+            SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_ALL) |  # public via "everyone can see me" visibility meta attribute
+            SQ(always_visible__exact=True) # special marker for indexed objects that should always show up in search
         )
 
         user = self.request.user

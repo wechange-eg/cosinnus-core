@@ -27,6 +27,8 @@ class CosinnusProjectIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
     name = indexes.CharField(model_attr='name', boost=1.25)
     slug = indexes.CharField(model_attr='slug', indexed=False)
     public = indexes.BooleanField(model_attr='public')
+    always_visible = indexes.BooleanField(default=True)
+    
     group_admins = indexes.MultiValueField(model_attr='admins', indexed=False)
     group_members = indexes.MultiValueField(model_attr='members', indexed=False)
     group_pendings = indexes.MultiValueField(model_attr='pendings', indexed=False)
@@ -43,6 +45,8 @@ class CosinnusSocietyIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
     name = indexes.CharField(model_attr='name', boost=1.25)
     slug = indexes.CharField(model_attr='slug', indexed=False)
     public = indexes.BooleanField(model_attr='public')
+    always_visible = indexes.BooleanField(default=True)
+    
     group_admins = indexes.MultiValueField(model_attr='admins', indexed=False)
     group_members = indexes.MultiValueField(model_attr='members', indexed=False)
     group_pendings = indexes.MultiValueField(model_attr='pendings', indexed=False)
