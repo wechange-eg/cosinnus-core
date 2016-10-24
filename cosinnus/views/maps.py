@@ -46,6 +46,8 @@ from operator import __or__ as OR, __and__ as AND
 from django.utils.encoding import force_text
 from cosinnus.templatetags.cosinnus_map_tags import get_map_marker_icon_settings,\
     get_map_marker_icon_settings_json
+from django.views.generic.base import TemplateView
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 
 USER_MODEL = get_user_model()
@@ -82,8 +84,20 @@ class MapView(ListView):
 
     template_name = 'cosinnus/map/map_page.html'
 
-
 map_view = MapView.as_view()
+
+
+class MapEmbedView(TemplateView):
+    """ An embeddable, resizable Map view without any other elements than the map """
+    
+    template_name = 'cosinnus/universal/map/map_embed.html'
+    
+    @method_decorator(xframe_options_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super(MapEmbedView, self).dispatch(*args, **kwargs)
+
+map_embed_view = MapEmbedView.as_view()
+
 
 def _better_json_loads(s):
     """ Can pass pure string values and None through without exception """

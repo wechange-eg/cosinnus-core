@@ -8,6 +8,7 @@ from cosinnus.core.registries import url_registry
 from cosinnus.conf import settings
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 urlpatterns = patterns('cosinnus.views',
     # we do not define an index anymore and let CMS handle that.
@@ -18,7 +19,7 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^maps/search/$', 'maps.map_search_endpoint', name='map-search-endpoint'),
     url(r'^maps/search/(?P<filter_group_id>\d+)/$', 'maps.map_search_endpoint', name='map-search-endpoint-filtered'),
     
-    url(r'^map/embed/$', TemplateView.as_view(template_name='cosinnus/universal/map/map_embed.html')),
+    url(r'^map/embed/$', 'maps.map_embed_view', name='map-embed'),
     
     
     url(r'^portal/admins/$', 'user.portal_admin_list', name='portal-admin-list'),
