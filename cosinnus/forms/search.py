@@ -15,6 +15,7 @@ from haystack.forms import SearchForm, model_choices
 from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.models.profile import get_user_profile_model
+from cosinnus.utils.group import get_cosinnus_group_model
 
 MODEL_ALIASES = {
     'todo': 'cosinnus_todo.todoentry',
@@ -86,15 +87,22 @@ class TaggableModelSearchForm(SearchForm):
             if check_user_superuser(user):
                 pass
             else:
+                users_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
                 logged_in_user_visibility = (
                     SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
                     SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) # logged in users can see users who are visible           
+                )
+                same_group_members_visibility = (
+                    SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
+                    SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_USER) &# team mambers can see this user 
+                    SQ(membership_groups__in=users_group_ids)
                 )
                 
                 sqs = sqs.filter_and(
                     SQ(group_members__contains=user.id) |
                     public_node |
-                    logged_in_user_visibility
+                    logged_in_user_visibility |
+                    same_group_members_visibility
                 )
         else:
             sqs = sqs.filter_and(public_node)

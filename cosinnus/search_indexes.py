@@ -63,9 +63,11 @@ class UserProfileIndex(TagObjectSearchIndex, indexes.Indexable):
     last_name = indexes.CharField(model_attr='user__last_name')
     email = indexes.CharField(model_attr='user__email')
     
+    user_visibility_mode = indexes.BooleanField(default=True) # switch to filter differently on mt_visibility
+    membership_groups = indexes.MultiValueField(model_attr='cosinnus_groups_pks') # ids of all groups the user is member/admin of
+    
     get_absolute_url = indexes.CharField(model_attr='get_absolute_url', indexed=False)
     
-    user_visibility_mode = indexes.BooleanField(default=True) # switch to filter differently on mt_visibility
     
     def get_model(self):
         return get_user_profile_model()
