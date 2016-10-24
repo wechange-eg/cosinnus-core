@@ -65,6 +65,8 @@ class UserProfileIndex(TagObjectSearchIndex, indexes.Indexable):
     
     get_absolute_url = indexes.CharField(model_attr='get_absolute_url', indexed=False)
     
+    user_visibility_mode = indexes.BooleanField(default=True) # switch to filter differently on mt_visibility
+    
     def get_model(self):
         return get_user_profile_model()
 

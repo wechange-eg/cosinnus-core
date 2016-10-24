@@ -86,9 +86,15 @@ class TaggableModelSearchForm(SearchForm):
             if check_user_superuser(user):
                 pass
             else:
+                logged_in_user_visibility = (
+                    SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
+                    SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) # logged in users can see users who are visible           
+                )
+                
                 sqs = sqs.filter_and(
                     SQ(group_members__contains=user.id) |
-                    public_node
+                    public_node |
+                    logged_in_user_visibility
                 )
         else:
             sqs = sqs.filter_and(public_node)
