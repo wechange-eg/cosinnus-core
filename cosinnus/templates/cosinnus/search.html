@@ -191,7 +191,7 @@
             <p class="navi-explanation">{% trans "Search for Users" %}:</p>
             
             {% comment %}  {% if "groups" in request.GET %} {% endcomment %}
-            <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "users" %}&models=user">
+            <button type="button" class="btn w100 btn-emphasized large-space" href="?&models=user">
               <ul class="media-list">
                 <li class="media">
                   <!--
@@ -269,7 +269,6 @@
           <div class="col-lg-9 col-md-9">
             <div class="row">
               <div class="col-xs-12">
-                {% include 'cosinnus/messages.html' %}
                 <div class="content-box">
                   <div type="button" class="btn btn-default w100 large-space">
                     <ul class="media-list">
@@ -303,22 +302,46 @@
         
                   {% if query %}
                     {% for result in page.object_list %}
-                      {{ result.rendered|safe }}
+                        {{ result.rendered|safe }}
+                    {% empty %}
+                    	{% captureas empty_message %}{% trans "We could not find any results matching your search query." %}{% endcaptureas %}
+			            {% include 'cosinnus/common/empty_button.html' with message=empty_message %}
                     {% endfor %}
         
                     {% if page.has_previous or page.has_next %}
-                      <ul class="pagination">
-                        <li>{% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}{% trans "previous" %}{% if page.has_previous %}</a>{% endif %}</li>
-                        <!--<li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li> -->
-                        <li>{% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}{% trans "next" %}{% if page.has_next %}</a>{% endif %}</li>
-                      </ul>
+                      	<div>
+                      		<button type="button" class="btn btn-{% if page.has_previous %}emphasized{% else %}default{% endif %} pull-left" style="margin: 0;" {% if page.has_previous %}href="?{% strip_params request "page" %}&page={{ page.previous_page_number }}"{% else %}disabled=1{% endif %}>
+					            <ul class="media-list">
+					                <li class="media">
+					                    <a class="pull-left" href="#">
+					                        <i class="fa fa-chevron-left"></i>
+					                    </a>
+					                    <div class="media-body">
+					                        {% trans "previous" %}
+					                    </div>
+					                </li>
+					            </ul>
+					        </button> 
+					        
+					        <button type="button" class="btn btn-{% if page.has_next %}emphasized{% else %}default{% endif %}" {% if page.has_next %}href="?{% strip_params request "page" %}&page={{ page.next_page_number }}"{% else %}disabled=1{% endif %}>
+					            <ul class="media-list">
+					                <li class="media">
+					                    <a class="pull-left" href="#">
+					                        <i class="fa fa-chevron-right"></i>
+					                    </a>
+					                    <div class="media-body">
+					                        {% trans "next" %}
+					                    </div>
+					                </li>
+					            </ul>
+					        </button> 
+                      	
+                      	</div>
+                      
                     {% endif %}
                   {% else %}
-                    {# Show some example queries to run, maybe query syntax, something else? #}
+                  	  {# Search page without query #}
+                      {# Show some example queries to run, maybe query syntax, something else? #}
                   {% endif %}
                 </div><!-- content-box -->
               </div><!-- col -->
