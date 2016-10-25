@@ -83,7 +83,7 @@ class UserProfileIndex(TagObjectSearchIndex, indexes.Indexable):
     def prepare(self, obj):
         """ Boost all objects of this type """
         data = super(UserProfileIndex, self).prepare(obj)
-        data['boost'] = 1.1
+        data['boost'] = 1.5
         return data
     
     
