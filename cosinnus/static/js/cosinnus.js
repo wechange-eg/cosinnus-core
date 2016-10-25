@@ -994,6 +994,32 @@
                 singleFileUploads: false,
                 add: function (e, data) {
                     
+                    // sort out size 0 files (those may also be folders in browsers not supporting folder upload)
+                    for (var i=data.files.length-1; i >= 0; i--) {
+                        if (data.files[i].size == 0) {
+                            console.log(data.files[i])
+                            data.files.splice(i, 1);
+                        }
+                    }
+                    if (data.files.length == 0) {
+                        alert('You tried to upload an empty file, or your browser does not support uploading whole folders.');
+                        return;
+                    }
+                    
+                    // collect infos (relative path) of files, if provided by the browser
+                    var fileData = [];
+                    for (var i=0; i<data.files.length; i++) {
+                        var relativePath = data.files[i].webkitRelativePath || data.files[i].relativePath || null;
+                        fileData.push({'name': data.files[i].name, 'relative_path': relativePath});
+                    }
+                    // add file info to the POST data
+                    var formData = {};
+                    if (typeof $('#fileupload').attr('data-form-data') !== 'undefined') {
+                        formData = JSON.parse($('#fileupload').attr('data-form-data'));
+                    }
+                    formData['file_info'] = JSON.stringify(fileData);
+                    data.formData = formData;
+                    
                     /*if (!data.files || data.files.length != 1) {
                         alert('Es kann nur eine Datei auf einmal hochgeladen werden!');
                         return;
@@ -1031,6 +1057,7 @@
                             });
                         } else if (data.result.on_success == 'refresh_page') {
                             location.reload();
+                            return; // return so we don't remove the progress bar on page refresh (confuses users)
                         } else if (data.result.on_success == 'render_object') {
                             $.each(data.result.data, function(index, object_html) {
                                 // append rendered object to object list
