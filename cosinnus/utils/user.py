@@ -92,11 +92,17 @@ def ensure_user_to_default_portal_groups(sender, created, **kwargs):
         # We fail silently, because we never want to 500 here unexpectedly
         logger.error("Error while trying to add User Membership for newly created user.")
 
-def filter_active_users(user_model_qs):
+def filter_active_users(user_model_qs, filter_on_user_profile_model=False):
     """ Filters a QS of ``get_user_model()`` so that all users are removed that are either of
             - inactive
             - have never logged in
-            - have not accepted the ToS """
-    return user_model_qs.exclude(is_active=False).\
-        exclude(last_login__exact=None).\
-        filter(cosinnus_profile__settings__contains='tos_accepted')
+            - have not accepted the ToS 
+        @param filter_on_user_profile_model: Filter not on User, but on CosinnusUserProfile instead """
+    if filter_on_user_profile_model:
+        return user_model_qs.exclude(user__is_active=False).\
+            exclude(user__last_login__exact=None).\
+            filter(settings__contains='tos_accepted')
+    else:
+        return user_model_qs.exclude(is_active=False).\
+            exclude(last_login__exact=None).\
+            filter(cosinnus_profile__settings__contains='tos_accepted')

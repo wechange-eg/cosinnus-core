@@ -12,33 +12,21 @@ from haystack.backends import SQ
 from haystack.constants import DEFAULT_ALIAS
 from haystack.forms import SearchForm, model_choices
 
-from cosinnus.models.tagged import BaseTaggableObjectModel
+from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject
 from cosinnus.utils.permissions import check_user_superuser
+from cosinnus.models.profile import get_user_profile_model
+from cosinnus.utils.group import get_cosinnus_group_model
+from haystack.inputs import AutoQuery
 
-
-def taggable_model_choices(using=DEFAULT_ALIAS):
-    """
-    Returns all models sorted by their verbose_name_plural that fulfill the
-    following criteria:
-
-    1. has a valid haystack index
-    2. has a haystack index is defined on the default haystack connection
-    3. is not abstract
-    4. inherits from :class:`~cosinnus.model.tagged.BaseTaggableObjectModel`
-    
-    :returns: Returns a list of 2-tuple of the form
-        `('`cosinnus_todo.TodoEntry', 'TodoEntries')`
-    """
-    choices = [
-        (
-            "%s.%s" % (m._meta.app_label, m._meta.model_name),
-            capfirst(smart_text(m._meta.verbose_name_plural))
-        ) for m in filter(
-            lambda m: not m._meta.abstract and issubclass(m, BaseTaggableObjectModel),
-            connections[using].get_unified_index().get_indexed_models()
-        )
-    ]
-    return sorted(choices, key=lambda x: x[1])
+MODEL_ALIASES = {
+    'todo': 'cosinnus_todo.todoentry',
+    'file': 'cosinnus_file.fileentry',
+    'etherpad': 'cosinnus_etherpad.etherpad',
+    'ethercalc': 'cosinnus_etherpad.ethercalc',
+    'note': 'cosinnus_note.note',
+    'event': 'cosinnus_event.event',
+    'user': '<userprofile>',
+}
 
 
 class TaggableModelSearchForm(SearchForm):
@@ -56,29 +44,41 @@ class TaggableModelSearchForm(SearchForm):
     location = forms.CharField(required=False)
     valid_start = forms.DateField(required=False)
     valid_end = forms.DateField(required=False)
-
+    
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request')
         super(TaggableModelSearchForm, self).__init__(*args, **kwargs)
-        self.fields['models'].choices =taggable_model_choices()
+        self.fields['models'].choices = MODEL_ALIASES.items()
 
     def get_models(self):
-        """Return an alphabetical list of model classes in the index."""
+        """ Return the models of types user has selected to filter search on """
         search_models = []
 
         if self.is_valid():
-            for model in self.cleaned_data.get('models', []):
-                search_models.append(models.get_model(*model.split('.')))
-
+            for model_alias in self.cleaned_data.get('models', []):
+                if model_alias in MODEL_ALIASES.keys():
+                    model_string = MODEL_ALIASES[model_alias]
+                    if model_string == '<userprofile>':
+                        model = get_user_profile_model()
+                    else:
+                        model = models.get_model(*model_string.split('.'))
+                    search_models.append(model)
         return search_models
 
     def search(self):
         sqs = super(TaggableModelSearchForm, self).search()
+        
         if hasattr(self, 'cleaned_data'):
             sqs = self._filter_for_read_access(sqs)
             sqs = self._filter_group_selection(sqs)
             sqs = self._filter_media_tags(sqs)
+            sqs = self._boost_search_query(sqs)
         return sqs.models(*self.get_models())
+
+    def _boost_search_query(self, sqs):
+        q = self.cleaned_data['q']
+        sqs = sqs.filter(SQ(boosted=AutoQuery(q)) | SQ(text=AutoQuery(q)))
+        return sqs
 
     def _filter_for_read_access(self, sqs):
         """
@@ -86,9 +86,9 @@ class TaggableModelSearchForm(SearchForm):
         result set to only include elements with read access.
         """
         public_node = (
-            SQ(public__exact=True) |  # public on the object itself
-            SQ(group_public__exact=True) |  # public group
-            SQ(mt_public__exact=True)  # public via meta attribute
+            SQ(public__exact=True) |  # public on the object itself (applicable for groups)
+            SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_ALL) |  # public via "everyone can see me" visibility meta attribute
+            SQ(always_visible__exact=True) # special marker for indexed objects that should always show up in search
         )
 
         user = self.request.user
@@ -96,12 +96,38 @@ class TaggableModelSearchForm(SearchForm):
             if check_user_superuser(user):
                 pass
             else:
+                users_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
+                logged_in_user_visibility = (
+                    SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
+                    SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) # logged in users can see users who are visible           
+                )
+                group_member_user_visibility = (
+                    SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
+                    SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_USER) & # team mambers can see this user 
+                    SQ(membership_groups__in=users_group_ids)
+                )
+                my_item = (
+                     SQ(creator__exact=user.id)
+                )
+                
+                # FIXME: known problem: ``group_members`` is a stale indexed representation of the members
+                # of an items group. New members of a group won't be able to find old indexed items if the index
+                # is not refreshed regularly
+                group_visible_and_in_my_group = (
+                     SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) &
+                     SQ(group_members__contains=user.id)
+                )
+                
                 sqs = sqs.filter_and(
-                    SQ(group_members__contains=user.id) |
-                    public_node
+                    public_node |
+                    group_visible_and_in_my_group |
+                    my_item |
+                    group_member_user_visibility |
+                    logged_in_user_visibility 
                 )
         else:
             sqs = sqs.filter_and(public_node)
+            
         return sqs
 
 

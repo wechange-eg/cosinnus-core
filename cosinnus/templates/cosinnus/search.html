@@ -34,7 +34,7 @@
             </div>
             
             <div class="app-todos">
-              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_todo.todoentry">
+              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=todo">
                 <ul class="media-list">
                   <li class="media">
                     <!--
@@ -55,7 +55,7 @@
             </div>
         
             <div class="app-files">
-              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_file.fileentry">
+              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=file">
                 <ul class="media-list">
                   <li class="media">
                     <!--
@@ -76,7 +76,7 @@
             </div>
         
             <div class="app-etherpad">
-              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_etherpad.etherpad">
+              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=etherpad&models=ethercalc">
                 <ul class="media-list">
                   <li class="media">
                     <!--
@@ -95,9 +95,9 @@
                 </ul>
               </button>
             </div>
-        
+            
             <div class="app-main">
-              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_note.note">
+              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=note">
                 <ul class="media-list">
                   <li class="media">
                     <!--
@@ -118,7 +118,7 @@
             </div>
         
             <div class="app-calendar">
-              <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "models" %}&models=cosinnus_event.event">
+              <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "models" %}&models=event">
                 <ul class="media-list">
                   <li class="media">
                     <!--
@@ -138,6 +138,7 @@
               </button>
             </div>
         
+            {% if user.is_authenticated %}
         
             <p class="navi-explanation">{% trans "Search in teams" %}:</p>
             
@@ -152,11 +153,12 @@
                     <i class="fa fa-group"></i>
                   </a>
                   <div class="media-body">
-                    {% trans "All" %}
+                    {% trans "All Projects and Groups" %}
                   </div>
                 </li>
               </ul>
             </button>
+            
             
             <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "groups" %}&groups=mine">
               <ul class="media-list">
@@ -165,7 +167,7 @@
                       <i class="fa fa-group"></i>
                   </a>
                   <div class="media-body">
-                    {% trans "My Projects" %}
+                    {% trans "My Projects and Groups" %}
                   </div>
                 </li>
               </ul>
@@ -178,13 +180,32 @@
                       <i class="fa fa-group"></i>
                   </a>
                   <div class="media-body">
-                    {% trans "Other Projects" %}
+                    {% trans "Other Projects and Groups" %}
                   </div>
                 </li>
               </ul>
             </button>
-        
+        	
+        	{% endif %}
             
+            <p class="navi-explanation">{% trans "Search for Users" %}:</p>
+            
+            {% comment %}  {% if "groups" in request.GET %} {% endcomment %}
+            <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "users" %}&models=user">
+              <ul class="media-list">
+                <li class="media">
+                  <!--
+                  <a class="pull-left" style="background-color:inherit;" href="#">
+                  -->
+                  <a class="pull-left" href="#">
+                    <i class="fa fa-user"></i>
+                  </a>
+                  <div class="media-body">
+                    {% trans "Users" %}
+                  </div>
+                </li>
+              </ul>
+            </button>
         
             {% comment %}
             <p class="navi-explanation">Ergebnisse filtern:</p>

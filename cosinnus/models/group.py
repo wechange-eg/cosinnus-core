@@ -1086,6 +1086,8 @@ class BaseGroupMembership(models.Model):
 
     def delete(self, *args, **kwargs):
         super(BaseGroupMembership, self).delete(*args, **kwargs)
+        # run an empty save on user so userprofile search indices get updated with new memberships through signals
+        self.user.cosinnus_profile.save()
         self._clear_cache()
 
     def save(self, *args, **kwargs):
@@ -1095,6 +1097,8 @@ class BaseGroupMembership(models.Model):
                 (self.status == MEMBERSHIP_ADMIN or self.status == MEMBERSHIP_MEMBER):
             self.date = now()
         super(BaseGroupMembership, self).save(*args, **kwargs)
+        # run an empty save on user so userprofile search indices get updated with new memberships through signals
+        self.user.cosinnus_profile.save()
         self._clear_cache()
 
     def _clear_cache(self):
