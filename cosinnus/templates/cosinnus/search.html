@@ -191,7 +191,7 @@
             <p class="navi-explanation">{% trans "Search for Users" %}:</p>
             
             {% comment %}  {% if "groups" in request.GET %} {% endcomment %}
-            <button type="button" class="btn w100 btn-emphasized large-space" href="?&models=user">
+            <button type="button" class="btn w100 btn-emphasized large-space" href="?&models=user{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
               <ul class="media-list">
                 <li class="media">
                   <!--
