@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-27 17:56+0200\n"
+"POT-Creation-Date: 2016-10-25 15:26+0200\n"
 "PO-Revision-Date: 2016-09-20 13:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2540,8 +2540,28 @@ msgstr "Поиск в приложениях"
 msgid "Search in teams"
 msgstr "Поиск в группах"
 
-msgid "Other Projects"
-msgstr "Другие группы"
+#, fuzzy
+#| msgid "Import Projects and Groups"
+msgid "All Projects and Groups"
+msgstr "Импортировать проект и группу"
+
+#, fuzzy
+#| msgid "Import Projects and Groups"
+msgid "My Projects and Groups"
+msgstr "Импортировать проект и группу"
+
+#, fuzzy
+#| msgid "Import Projects and Groups"
+msgid "Other Projects and Groups"
+msgstr "Импортировать проект и группу"
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search for Users"
+msgstr "Поиск в группах"
+
+msgid "We could not find any results matching your search query."
+msgstr ""
 
 msgid "previous"
 msgstr "предыдущее"
@@ -3308,6 +3328,9 @@ msgstr "Возникла непредвиденная ошибка при чте
 #| msgid "Export"
 msgid "Import"
 msgstr "Экспортировать"
+
+#~ msgid "Other Projects"
+#~ msgstr "Другие группы"
 
 # ???
 #, fuzzy

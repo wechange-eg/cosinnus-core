@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-27 17:56+0200\n"
+"POT-Creation-Date: 2016-10-25 15:26+0200\n"
 "PO-Revision-Date: 2015-11-11 10:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2532,8 +2532,28 @@ msgstr "Пошук серед застосунків"
 msgid "Search in teams"
 msgstr "Пошук серед проектів"
 
-msgid "Other Projects"
+#, fuzzy
+#| msgid "Re-Activate Project/Group"
+msgid "All Projects and Groups"
+msgstr "Повторно активувати проект/спільноту"
+
+#, fuzzy
+#| msgid "Re-Activate Project/Group"
+msgid "My Projects and Groups"
+msgstr "Повторно активувати проект/спільноту"
+
+#, fuzzy
+#| msgid "Other Projects"
+msgid "Other Projects and Groups"
 msgstr "Інші проекти"
+
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search for Users"
+msgstr "Пошук серед проектів"
+
+msgid "We could not find any results matching your search query."
+msgstr ""
 
 msgid "previous"
 msgstr "Назад"

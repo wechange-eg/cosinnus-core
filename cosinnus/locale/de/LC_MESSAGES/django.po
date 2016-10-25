@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-27 17:56+0200\n"
-"PO-Revision-Date: 2016-09-27 17:58+0200\n"
+"POT-Creation-Date: 2016-10-25 15:26+0200\n"
+"PO-Revision-Date: 2016-10-25 15:28+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -2391,8 +2391,20 @@ msgstr "Suche in Anwendungen"
 msgid "Search in teams"
 msgstr "In Projekten suchen"
 
-msgid "Other Projects"
-msgstr "Andere Projekte"
+msgid "All Projects and Groups"
+msgstr "Alle Projekte und Gruppen"
+
+msgid "My Projects and Groups"
+msgstr "Meine Projekte und Gruppen"
+
+msgid "Other Projects and Groups"
+msgstr "Andere Projekte und Gruppen"
+
+msgid "Search for Users"
+msgstr "Nach Benutzern suchen"
+
+msgid "We could not find any results matching your search query."
+msgstr "Wir konnten keine Ergebnisse finden die mit deiner Suchanfrage übereinstimmen."
 
 msgid "previous"
 msgstr "Zurück"
