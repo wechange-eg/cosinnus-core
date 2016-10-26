@@ -30,6 +30,8 @@
     
     <!-- a box with semi transparent background -->
     <div class="content-box">
+    	{% include 'cosinnus/common/internet_explorer_not_supported.html' %}
+    
 		<div class="map-root"></div>
 		{% captureas map_settings %}{"activeFilters": {"groups": false, "events": false, "projects": false, "people": true}, "availableFilters": {"groups": true, "events": true, "projects": true, "people": true}, "markerIcons": {% render_map_marker_icon_json %}}{% endcaptureas %}
 		{% include 'cosinnus/common/init_client_module.html' with module='map' id=""|add_uuid height=400 settings=map_settings %}
