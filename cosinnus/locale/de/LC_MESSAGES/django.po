@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-25 15:26+0200\n"
+"POT-Creation-Date: 2016-11-02 11:30+0100\n"
 "PO-Revision-Date: 2016-10-26 16:59+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -1038,6 +1038,12 @@ msgstr "Fehler beim Einbetten eines Twitter Feeds"
 msgid "Error embedding a video"
 msgstr "Fehler beim Einbetten eines Videos"
 
+msgid "We're sorry. The Map is not supported in Internet Explorer."
+msgstr ""
+
+msgid "Consider using an alternate browser!"
+msgstr ""
+
 msgid "Expand"
 msgstr "Erweitern"
 
@@ -1080,6 +1086,9 @@ msgstr "Schaut sie euch an über den Link im Menü oben oder"
 
 msgid "get started here..."
 msgstr "direkt hier..."
+
+msgid "Marketplace"
+msgstr ""
 
 msgid "Poll"
 msgstr "Umfrage"
@@ -2387,6 +2396,14 @@ msgstr "Suche"
 
 msgid "Search in Apps"
 msgstr "Suche in Anwendungen"
+
+#, fuzzy
+#| msgid "Etherpads"
+msgid "Ethercalcs"
+msgstr "Dokumente"
+
+msgid "Offers"
+msgstr ""
 
 msgid "Search in teams"
 msgstr "In Projekten suchen"

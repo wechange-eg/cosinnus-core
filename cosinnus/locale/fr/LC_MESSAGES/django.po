@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-25 15:26+0200\n"
+"POT-Creation-Date: 2016-11-02 11:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1016,6 +1016,12 @@ msgstr ""
 msgid "Error embedding a video"
 msgstr ""
 
+msgid "We're sorry. The Map is not supported in Internet Explorer."
+msgstr ""
+
+msgid "Consider using an alternate browser!"
+msgstr ""
+
 msgid "Expand"
 msgstr ""
 
@@ -1057,6 +1063,9 @@ msgid "Access it from the top menu or"
 msgstr ""
 
 msgid "get started here..."
+msgstr ""
+
+msgid "Marketplace"
 msgstr ""
 
 msgid "Poll"
@@ -2229,6 +2238,12 @@ msgid "Search"
 msgstr ""
 
 msgid "Search in Apps"
+msgstr ""
+
+msgid "Ethercalcs"
+msgstr ""
+
+msgid "Offers"
 msgstr ""
 
 msgid "Search in teams"

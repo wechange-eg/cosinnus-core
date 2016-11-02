@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-25 15:26+0200\n"
+"POT-Creation-Date: 2016-11-02 11:30+0100\n"
 "PO-Revision-Date: 2015-11-11 10:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1093,6 +1093,12 @@ msgstr ""
 msgid "Error embedding a video"
 msgstr ""
 
+msgid "We're sorry. The Map is not supported in Internet Explorer."
+msgstr ""
+
+msgid "Consider using an alternate browser!"
+msgstr ""
+
 msgid "Expand"
 msgstr "ширити"
 
@@ -1137,6 +1143,9 @@ msgstr "Перейдіть за допомогою меню зверху або"
 
 msgid "get started here..."
 msgstr "розпочніть прямо тут..."
+
+msgid "Marketplace"
+msgstr ""
 
 #, fuzzy
 #| msgid "Portal"
@@ -2528,6 +2537,14 @@ msgstr "Пошук"
 
 msgid "Search in Apps"
 msgstr "Пошук серед застосунків"
+
+#, fuzzy
+#| msgid "Etherpads"
+msgid "Ethercalcs"
+msgstr "Документи"
+
+msgid "Offers"
+msgstr ""
 
 msgid "Search in teams"
 msgstr "Пошук серед проектів"
