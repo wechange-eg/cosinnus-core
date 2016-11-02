@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-27 17:56+0200\n"
-"PO-Revision-Date: 2016-04-28 18:13+0200\n"
+"POT-Creation-Date: 2016-10-25 15:26+0200\n"
+"PO-Revision-Date: 2016-10-26 16:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1279,7 +1279,7 @@ msgid "Member"
 msgstr ""
 
 msgid "Kick"
-msgstr ""
+msgstr "Remove"
 
 msgid "Make Member"
 msgstr ""
@@ -2275,8 +2275,26 @@ msgstr ""
 msgid "Search in teams"
 msgstr ""
 
-msgid "Other Projects"
+#, fuzzy
+#| msgid "Convert selected Projects to Groups"
+msgid "All Projects and Groups"
+msgstr "Convert selected Projects to Groups"
+
+#, fuzzy
+#| msgid "Convert selected Projects to Groups"
+msgid "My Projects and Groups"
+msgstr "Convert selected Projects to Groups"
+
+#, fuzzy
+#| msgid "Other Projects"
+msgid "Other Projects and Groups"
 msgstr "Other Projects"
+
+msgid "Search for Users"
+msgstr ""
+
+msgid "We could not find any results matching your search query."
+msgstr ""
 
 msgid "previous"
 msgstr ""

@@ -24,6 +24,8 @@
 	</head>
 	
 	<body>
+    	{% include 'cosinnus/common/internet_explorer_not_supported.html' %}
+		
 		<div class="map-root"></div>
 		{% include 'cosinnus/common/init_client_module.html' with module='map' id="fullscreen" extra_classes="no-navbar" controlsEnabled=True settings='{}' %}
 	</body>

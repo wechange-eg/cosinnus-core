@@ -804,3 +804,11 @@ def debugthis(obj):
         obj = obj
         import ipdb; ipdb.set_trace(); from pprint import pprint as pp;
 
+@register.filter
+def printthis(obj):
+    """ Debug-inspects a template element """
+    if settings.DEBUG:
+        print ">> printing"
+        print obj
+    return obj
+

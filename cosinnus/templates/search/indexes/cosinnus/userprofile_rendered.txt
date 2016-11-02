@@ -1,0 +1,24 @@
+{% load static cosinnus_tags %}
+
+{% with user_profile=object user_url=object.get_absolute_url %}
+	<div class="app-main">
+	    <div class="btn btn-emphasized w100">
+	        <ul class="media-list large-space">
+	            <li class="media">
+                    <a class="pull-left" href="{{ user_url }}">
+                        {% include "cosinnus/user/user_avatar_image.html" with user=user_profile.user %}
+                    </a>
+	                <a class="pull-right" href="{{ user_url }}" target="_blank">
+	                    <i class="fa fa-chain"></i>
+	                </a>
+	                <div class="media-body">
+                        <a href="{{ user_url }}">
+							<i class="fa fa-user"></i>
+							{{ user_profile.user|full_name }}
+						</a>
+	                </div>
+	            </li>
+	        </ul>
+	    </div>
+	</div>
+{% endwith %}

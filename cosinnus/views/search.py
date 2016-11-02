@@ -7,6 +7,8 @@ from cosinnus.forms.search import TaggableModelSearchForm
 
 
 class TaggableSearchView(SearchView):
+    
+    results_per_page = 50
 
     def __call__(self, request):
         self.request = request

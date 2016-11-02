@@ -160,6 +160,8 @@ def check_user_can_see_user(user, target_user):
         return True
     if check_user_superuser(user):
         return True
+    if user == target_user:
+        return True
     # in any case, group members of the same project/group can always see each other
     user_groups = get_cosinnus_group_model().objects.get_for_user_pks(user)
     target_user_groups = get_cosinnus_group_model().objects.get_for_user_pks(target_user)

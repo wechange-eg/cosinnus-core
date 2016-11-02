@@ -200,6 +200,11 @@ class BaseUserProfile(FacebookIntegrationUserProfileMixin, models.Model):
         return get_cosinnus_group_model().objects.get_for_user(self.user)
     
     @property
+    def cosinnus_groups_pks(self):
+        """ Returns all group ids this user is a member or admin of """
+        return get_cosinnus_group_model().objects.get_for_user_pks(self.user)
+    
+    @property
     def avatar_url(self):
         return self.avatar.url if self.avatar else None
 

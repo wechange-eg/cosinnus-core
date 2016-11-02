@@ -153,6 +153,9 @@ def compile_installed_apps(internal_apps=[]):
         'django.contrib.admin',
         'sekizai',
         
+        # haystack needs to precede wagtail because wagtail idiotically overrides haystack's mmanagement commands
+        'haystack',
+        
         # wagtail
         'overextends',
         'wagtail_overextends',

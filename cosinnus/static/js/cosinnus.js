@@ -592,20 +592,20 @@
         },
 
 
-        // searchbar in top fixed navigation
+        // searchbar in top fixed navigation, expands on hover, contracts on hover-out on navbar
         searchbar : function() {
             $('#searchbar').hover( function() {
                 $(this).addClass('expanded');
-                $(this).addClass('mouseover');
             }, function() {
-                if (!$(this).find('input').is(':focus'))
-                    $(this).removeClass('expanded');
-                $(this).removeClass('mouseover');
+                // nothing on leave
             });
-            $('#searchbar').find('input').blur( function() {
-                if(!$(this).parent().hasClass('mouseover'))
-                    $(this).parent().removeClass('expanded');
+            $('.navbar').hover( function() {
+                // nothing on enter
+            }, function() {
+                if (!$('#searchbar').find('input').is(':focus'))
+                    $('#searchbar').removeClass('expanded');
             });
+            
             $('#searchbar').click( function() {
                 $(this).addClass('expanded');
             });

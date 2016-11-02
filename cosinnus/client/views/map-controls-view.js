@@ -3,6 +3,7 @@
 var View = require('views/base/view');
 var ErrorView = require('views/error-view');
 var template = require('map/map-controls');
+var util = require('lib/util.js');
 
 module.exports = View.extend({
     initialize: function () {
@@ -20,7 +21,8 @@ module.exports = View.extend({
         'click .layer-button': 'switchLayer',
         'focusin .q': 'toggleTyping',
         'focusout .q': 'toggleTyping',
-        'keyup .q': 'handleTyping'
+        'keyup .q': 'handleTyping',
+        'keydown .q': 'handleKeyDown',
     },
 
     // Event Handlers
@@ -54,12 +56,24 @@ module.exports = View.extend({
     },
 
     handleTyping: function (event) {
+        if (util.isIgnorableKey(event)) {
+            event.preventDefault();
+            return false;
+        }
+        
         var query = $(event.currentTarget).val();
         if (query.length > 2 || query.length === 0) {
             this.model.set({
                 q: query
             });
             this.model.attemptSearch();
+        }
+    },
+    
+    handleKeyDown: function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            return false;
         }
     },
 
