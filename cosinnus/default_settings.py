@@ -207,7 +207,6 @@ def compile_installed_apps(internal_apps=[]):
         'easy_thumbnails',
         'embed_video',
         'endless_pagination',
-        'haystack',
         'osm_field',
         'phonenumber_field',
         'postman',
