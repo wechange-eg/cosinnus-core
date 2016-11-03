@@ -997,7 +997,6 @@
                     // sort out size 0 files (those may also be folders in browsers not supporting folder upload)
                     for (var i=data.files.length-1; i >= 0; i--) {
                         if (data.files[i].size == 0) {
-                            console.log(data.files[i])
                             data.files.splice(i, 1);
                         }
                     }
@@ -1005,6 +1004,9 @@
                         alert('You tried to upload an empty file, or your browser does not support uploading whole folders.');
                         return;
                     }
+                    
+                    console.log('Upload starting with these files:')
+                    console.log(data.files)
                     
                     // collect infos (relative path) of files, if provided by the browser
                     var fileData = [];
