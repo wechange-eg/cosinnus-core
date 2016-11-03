@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-02 11:30+0100\n"
+"POT-Creation-Date: 2016-11-03 16:37+0100\n"
 "PO-Revision-Date: 2016-11-02 11:37+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1059,11 +1059,31 @@ msgstr "Выбрать приложение"
 msgid "Drag and Drop files here..."
 msgstr "Перетащите файлы сюда..."
 
+#, fuzzy
+#| msgid "Drag and Drop files here..."
+msgid "Drag and Drop files or folders here..."
+msgstr "Перетащите файлы сюда..."
+
 msgid "Click to upload a new file/image. You can also drag & drop a file from your computer."
 msgstr "Щелкните, чтобы загрузить новый файл или изображение. Вы также можете перетащить файлы со своего компьютера"
 
 msgid "Browse..."
 msgstr "Искать..."
+
+msgid "Drag and drop one or more files into this area to upload them to this folder."
+msgstr ""
+
+msgid "You can also upload a whole folder, including all files and subfolders, by dragging it here. The new folders will be created automatically, with the same folder structure as on your computer."
+msgstr ""
+
+msgid "Unfortunately, the folder upload feature is only available on some browsers. This is because some browsers will not provide the file path information that is needed for the upload. If your browser doesn't support this, you may wish to switch to a different browser for your upload."
+msgstr ""
+
+msgid "Currently, the Browsers supporting folder upload are:"
+msgstr ""
+
+msgid "File and Folder Upload"
+msgstr ""
 
 msgid "Group overview"
 msgstr "Обзор группы"
