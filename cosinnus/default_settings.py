@@ -412,7 +412,7 @@ NEWW_FORUM_GROUP_SLUG = 'forum'
 
 # if enabled, group admins will see a "rearrange" button and can re-order the widgets.
 # pretty wonky and unintuitive right now, so be careful!
-COSINNUS_ALLOW_DASHBOARD_WIDGET_REARRANGE = True
+COSINNUS_ALLOW_DASHBOARD_WIDGET_REARRANGE = False
 
 # Default country code to assume when none is entered for django-phonenumber-field
 PHONENUMBER_DEFAULT_REGION = 'DE'
