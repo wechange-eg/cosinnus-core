@@ -1,6 +1,17 @@
 @charset "UTF-8";
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:700);
+@OpenSansPath: '../css/fonts/open-sans';
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url('@{OpenSansPath}/OpenSans-Bold.eot');
+  src: url('@{OpenSansPath}/OpenSans-Bold.eot?#iefix') format('embedded-opentype'),
+       url('@{OpenSansPath}/OpenSans-Bold.woff') format('woff'),
+       url('@{OpenSansPath}/OpenSans-Bold.ttf') format('truetype'),
+       url('@{OpenSansPath}/OpenSans-Bold.svg#OpenSansBold') format('svg');
+}
 
 body.cosinnus-cms {
 	padding-bottom: 0;
