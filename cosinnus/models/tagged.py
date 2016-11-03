@@ -349,7 +349,7 @@ class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
         help_text='A special folder appears differently on the site and cannot be deleted by users',
         blank=True, null=True, default=None, editable=False, max_length=8)
     path = models.CharField(_('Path'),
-        blank=False, null=False, default='/', max_length=100)
+        blank=False, null=False, default='/', max_length=250)
 
     class Meta(BaseTaggableObjectModel.Meta):
         abstract = True
