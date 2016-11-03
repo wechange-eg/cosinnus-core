@@ -45,7 +45,7 @@
         {% captureas placeholder %}{% trans "Attach existing Files..." %}{% endcaptureas %}
         {% render_field form.forms.obj.attached_objects placeholder=placeholder %}
 	    <div class="">
-		    {% include 'cosinnus/attached/file_upload_button.html' %}
+		    {% include 'cosinnus/attached/file_upload_button.html' with attachments_only=True %}
 	    </div>
         </div>
     </li>
