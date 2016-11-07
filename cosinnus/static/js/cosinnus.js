@@ -1005,9 +1005,6 @@
                         return;
                     }
                     
-                    console.log('Upload starting with these files:')
-                    console.log(data.files)
-                    
                     // collect infos (relative path) of files, if provided by the browser
                     var fileData = [];
                     for (var i=0; i<data.files.length; i++) {
@@ -1075,6 +1072,10 @@
                         alert('Es gab einen unbekannten Fehler beim hochladen. Wir werden das Problem umgehend beheben!');
                     }
 
+                    data.context.remove(); // remove progress bar
+                },
+                fail: function (e, data) {
+                    alert('Es gab einen Fehler beim Hochladen. Möglicherweise ist der Server nicht erreichbar, oder ihr Browser unterstützt diese Art des Uploads nicht. Bitte beachte auch die Hinweise zum Hochladen von Ordnern!')
                     data.context.remove(); // remove progress bar
                 }
             });
