@@ -12,7 +12,7 @@ APP_NAME_RE = re.compile(r'^[a-zA-Z0-9_-]+$')
 
 class AppRegistry(DictBaseRegistry):
 
-    def register(self, app, app_name, app_label=None, deactivatable=False, active_by_default=True):
+    def register(self, app, app_name, app_label=None, deactivatable=False, active_by_default=True, activatable_for_groups_only=False):
         """
         Register a new cosinnus Django app. This app will then automatically
         show up in the top menu.
@@ -30,7 +30,7 @@ class AppRegistry(DictBaseRegistry):
                 '[a-zA-Z0-9_-]. It is "%s"' % app_name)
         if app_label is None:
             app_label = app_name.title()
-        self[app] = (app_name, app_label, deactivatable, active_by_default)
+        self[app] = (app_name, app_label, deactivatable, active_by_default, activatable_for_groups_only)
 
     def get_name(self, app):
         return self[app][0]  # name is 1nd element in tuple
@@ -44,8 +44,11 @@ class AppRegistry(DictBaseRegistry):
     def is_active_by_default(self, app):
         return self[app][3]  # active_by_default is 4nd element in tuple
     
+    def is_activatable_for_groups_only(self, app):
+        return self[app][4]
+     
     def items(self):
-        for app, (app_name, app_label, _, _) in six.iteritems(self._storage):
+        for app, (app_name, app_label, _, _, _) in six.iteritems(self._storage):
             yield app, app_name, app_label
     
     def get_deactivatable_apps(self):
@@ -61,6 +64,13 @@ class AppRegistry(DictBaseRegistry):
             if not self.is_active_by_default(app):
                 non_default_active_apps.append(app)
         return non_default_active_apps
+    
+    def get_activatable_for_groups_only_apps(self):
+        non_activatable_for_groups_only_apps = []
+        for app in self:
+            if self.is_activatable_for_groups_only(app):
+                non_activatable_for_groups_only_apps.append(app)
+        return non_activatable_for_groups_only_apps
 
 app_registry = AppRegistry()
 
