@@ -275,8 +275,9 @@ class DashboardWidgetMixin(object):
                 continue
             
             widget_class = widget_registry.get(wc.app_name, wc.widget_name)
-            widget = widget_class(self.request, wc)
-            widgets.append(widget)
+            if widget_class:
+                widget = widget_class(self.request, wc)
+                widgets.append(widget)
         
         widgets = self.reorder_equal_widgets(widgets)
         kwargs.update({
