@@ -150,6 +150,10 @@ class CosinnusConf(AppConf):
     # when etherpad objects are deleted, should the etherpads on the server be deleted as well?
     DELETE_ETHERPADS_ON_SERVER_ON_DELETE = False
     
+    # a list of cosinnus apps that are installed but are disabled for the users, e.g. ['cosinnus_marketplace', ]
+    # (they are still admin accessible)
+    DISABLED_COSINNUS_APPS = []
+    
     # should the facebook integration scripts and templates be loaded?
     FACEBOOK_INTEGRATION_ENABLED = False
     # Facebook app id to use
