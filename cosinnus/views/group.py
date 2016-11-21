@@ -142,7 +142,8 @@ class CosinnusGroupFormMixin(object):
                     app_is_active = app_registry.is_active_by_default(app_name)
                 else:
                     app_is_active = not self.object.deactivated_apps or app_name not in deactivated_apps
-                app_not_activatable = (self.object.type != CosinnusGroup.TYPE_SOCIETY and app_registry.is_activatable_for_groups_only(app_name))
+                    
+                app_not_activatable = (self.group_model_class.GROUP_MODEL_TYPE != CosinnusGroup.TYPE_SOCIETY and app_registry.is_activatable_for_groups_only(app_name))
                 deactivated_app_selection.append({
                     'app_name': app_name,
                     'app': app,
