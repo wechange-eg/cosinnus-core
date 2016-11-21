@@ -181,7 +181,7 @@ def profile_url(value):
 def url_target_blank(link):
     """ Template filter that turns any html link into a target="_blank" link.
     """
-    return mark_safe(link.replace('<a ', '<a target="_blank" '))
+    return mark_safe(link.replace('<a ', '<a target="_blank" rel="nofollow noopener noreferrer" '))
 
 
 @register.filter
