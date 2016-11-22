@@ -155,7 +155,7 @@ def _get_events_base_queryset(request, show_past_events=False):
         from cosinnus_event.models import Event, upcoming_event_filter
     except:
         return []
-    qs = Event.objects.all()
+    qs = Event.objects.filter(group__portal=CosinnusPortal.get_current())
     qs = filter_tagged_object_queryset_for_user(qs, request.user)
     qs = qs.filter(state=Event.STATE_SCHEDULED)
     if not show_past_events:
