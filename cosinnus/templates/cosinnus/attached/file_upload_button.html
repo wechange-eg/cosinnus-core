@@ -17,7 +17,15 @@
 				<span style="width: 0%;" class="app-files"></span>
 			</div>
 		</div>
-		{% trans "Drag and Drop files here..." %}
+		{% if attachments_only %}
+			{% trans "Drag and Drop files here..." %}
+		{% else %}
+			{% trans "Drag and Drop files or folders here..." %}
+			<a href="#" data-toggle="modal" data-target="#upload-info-modal">
+				<i class="fa fa-question-circle-o"></i>
+			</a>
+			
+		{% endif %}
 	</label>
 	<label class="file-upload-overlay pull-right" title="{% trans "Click to upload a new file/image. You can also drag & drop a file from your computer." %}">
 		<i class="fa fa-upload"></i>
@@ -32,3 +40,26 @@
     </ul>
 </div>
 {% endif %}
+
+{% captureas label %}
+	<p>
+		{% trans "Drag and drop one or more files into this area to upload them to this folder." %}
+	</p>
+	<p>
+		{% trans "You can also upload a whole folder, including all files and subfolders, by dragging it here. The new folders will be created automatically, with the same folder structure as on your computer." %}
+	</p>
+	<p>
+		{% trans "Unfortunately, the folder upload feature is only available on some browsers. This is because some browsers will not provide the file path information that is needed for the upload. If your browser doesn't support this, you may wish to switch to a different browser for your upload." %}
+	</p>
+	<p>
+		{% trans "Currently, the Browsers supporting folder upload are:" %}
+	<p/>
+	<ul style="color: #333333;">
+		<li><span>Google Chrome</span></li>
+		<li>Opera</li>
+	</ul>
+		
+{% endcaptureas %}
+{% captureas title %}{% trans "File and Folder Upload" %}{% endcaptureas %}
+{% include "cosinnus/modal_box.html" with id="upload-info-modal" label=label title=title title_icon="fa-file" %}
+

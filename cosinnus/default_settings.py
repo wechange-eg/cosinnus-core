@@ -184,6 +184,7 @@ def compile_installed_apps(internal_apps=[]):
         'cosinnus_etherpad',
         'cosinnus_event',
         'cosinnus_file',
+        'cosinnus_marketplace',
         'cosinnus_message',
         'cosinnus_note',
         'cosinnus_notifications',
@@ -194,6 +195,7 @@ def compile_installed_apps(internal_apps=[]):
         # 'django_extensions',
         'django_filters',
         'django_select2',
+        'django_cron',
         'widget_tweaks',
         
         # External Apps
@@ -205,11 +207,12 @@ def compile_installed_apps(internal_apps=[]):
         'easy_thumbnails',
         'embed_video',
         'endless_pagination',
+        'osm_field',
+        'phonenumber_field',
+        'postman',
+        'raven.contrib.django.raven_compat',
         'rest_framework',
         'taggit',
-        'postman',
-        'osm_field',
-        'raven.contrib.django.raven_compat',
     ]
     return _INSTALLED_APPS
 
@@ -335,6 +338,16 @@ FORMAT_MODULE_PATH = 'cosinnus.formats'
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 
+# django-cron cronjob class definitions
+# TODO: FIXME: this should be inverted, ie each cosinnus app should set these settings!
+# cosinnus-core should not know about other cosinnus apps here!
+CRON_CLASSES = [
+    'cosinnus_marketplace.cron.DeactivateExpiredOffers',
+                 
+]
+# delete cronjob logs older than 30 days
+DJANGO_CRON_DELETE_LOGS_OLDER_THAN = 30
+
 
 """ -----------  Important Cosinnus-specific settings:  ----------- """
 
@@ -400,4 +413,7 @@ NEWW_FORUM_GROUP_SLUG = 'forum'
 # if enabled, group admins will see a "rearrange" button and can re-order the widgets.
 # pretty wonky and unintuitive right now, so be careful!
 COSINNUS_ALLOW_DASHBOARD_WIDGET_REARRANGE = False
+
+# Default country code to assume when none is entered for django-phonenumber-field
+PHONENUMBER_DEFAULT_REGION = 'DE'
 

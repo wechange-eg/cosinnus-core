@@ -1,7 +1,10 @@
 {% load i18n cosinnus_tags widget_tweaks %}
 
+{% if not no_imports %}
 {{ form.forms.media_tag.media }}
+{% endif %}
 
+{% if not disable_persons %}
 <ol class="input-area" {% if not show_persons == True and not show_all == True %}style="display: none;"{% endif %} id="user-selector">
     <li class="w100">
         <i class="fa fa-fw fa-user"></i>
@@ -9,7 +12,9 @@
         {% render_field form.forms.media_tag.persons placeholder=placeholder %}
     </li>
 </ol>
+{% endif %}
 
+{% if not disable_tags %}
 <ol class="input-area" {% if not show_all == True %}style="display: none;"{% endif %} id="tags-selector">
     <li class="w100">
         <i class="fa fa-fw fa-tags"></i>
@@ -17,7 +22,9 @@
         {% render_field form.forms.media_tag.tags placeholder=placeholder %}
     </li>
 </ol>
-    
+{% endif %}
+
+{% if not disable_location %}
 <ol class="input-area" {% if not show_all == True %}style="display: none;"{% endif %} id="location-selector">
     <li class="w100">
         <i class="fa fa-fw fa-map-marker"></i>
@@ -28,7 +35,9 @@
     </li>
 </ol>
 <div id="id_media_tag-location-map"></div>
-{% if form.forms.obj.attached_objects %}
+{% endif %}
+
+{% if form.forms.obj.attached_objects and not disable_files %}
 <ol class="input-area" {% if not show_files == True and not show_all == True %}style="display: none;"{% endif %} id="attachments-selector">
     <li class="w100">
     	<div>
@@ -36,7 +45,7 @@
         {% captureas placeholder %}{% trans "Attach existing Files..." %}{% endcaptureas %}
         {% render_field form.forms.obj.attached_objects placeholder=placeholder %}
 	    <div class="">
-		    {% include 'cosinnus/attached/file_upload_button.html' %}
+		    {% include 'cosinnus/attached/file_upload_button.html' with attachments_only=True %}
 	    </div>
         </div>
     </li>
@@ -49,6 +58,8 @@
         {{ form.forms.media_tag.valid_end }}
     </li>
 {% endcomment %}
+
+{% if not disable_topics %}
 <ol class="input-area" {% if not show_all == True %}style="display: none;"{% endif %} id="topics-selector">
     <li class="w100">
         <i class="fa fa-fw fa-lightbulb-o"></i>
@@ -56,6 +67,8 @@
         {% render_field form.forms.media_tag.topics placeholder=placeholder %}
     </li>
 </ol>
+{% endif %}
+
 
 {% comment %} Approach hidden for now
 <ol class="input-area" style="display: none;" id="approach-selector">
@@ -67,7 +80,7 @@
 </ol>
  {% endcomment %}
 
-
+{% if not disable_visibility %}
 <ol class="input-area media-tag-warning-area small" {% if form.forms.media_tag.initial.visibility != 2 %}style="display: none;"{% endif %} id="visibility-warning">
     <li class="w100">
         <i class="fa fa-fw fa-globe"></i>
@@ -93,6 +106,8 @@
 		} 
 	});
 </script>
+{% endif %}
+
 
 
 {% if not show_all == True %}
@@ -100,25 +115,28 @@
 <ol class="input-area">
     <!-- When things are to be hidden by default,
         simply invent an ID and add a link like these: -->
-    {% if form.forms.obj.attached_objects and not show_files %}
+    {% if form.forms.obj.attached_objects and not show_files and not disable_files %}
     <li class="input-area-lighter">
         <a href="#" onclick="$('#s2id_{{ form.forms.obj.attached_objects.id_for_label }} input').css('width', ''); return false;" data-show-id="attachments-selector" title="{% trans 'Add attachment' %}">
             <i class="fa fa-fw fa-paperclip"></i>
         </a>
     </li>
     {% endif %}
-    {% if not show_persons == True %}
+    {% if not show_persons == True and not disable_persons %}
     <li class="input-area-lighter">
         <a href="#" onclick="return false;" data-show-id="user-selector" title="{% trans 'Tag users' %}">
             <i class="fa fa-fw fa-user"></i>
         </a>
     </li>
     {% endif %}
+	{% if not disable_location %}
     <li class="input-area-lighter">
         <a href="#" onclick="return false;" data-show-id="location-selector" title="{% trans 'Tag location' %}">
             <i class="fa fa-fw fa-map-marker"></i>
         </a>
     </li>
+	{% endif %}
+
 {% comment %}  The clock tag doesn't currently make sense overall, so taken out till further  
     <li>
         <a href="#" onclick="return false;" data-show-id="tags-selector">
@@ -126,16 +144,20 @@
         </a>
     </li>
 {% endcomment %}
+	{% if not disable_tags %}
     <li class="input-area-lighter">
         <a href="#" onclick="return false;" data-show-id="tags-selector" title="{% trans 'Select tags' %}">
             <i class="fa fa-fw fa-tags"></i>
         </a>
     </li>
+    {% endif %}
+	{% if not disable_topics %}
     <li class="input-area-lighter">
         <a href="#" onclick="return false;" data-show-id="topics-selector" title="{% trans 'Select topic' %}">
             <i class="fa fa-fw fa-lightbulb-o"></i>
         </a>
     </li>
+    {% endif %}
     {% comment %} Approach hidden for now 
     <li class="input-area-lighter">
         <a href="#" onclick="return false;" data-show-id="approach-selector" title="{% trans 'Ansatz taggen' %}">
@@ -143,11 +165,13 @@
         </a>
     </li>
     {% endcomment %}
+	{% if not disable_visibility %}
     <li class="input-area-lighter">
         <a href="#" onclick="return false;" data-show-id="visibility-selector" title="{% trans 'Change privacy' %}">
             <i class="fa fa-fw fa-globe"></i>
         </a>
     </li>
+    {% endif %}
     
     {% if SETTINGS.COSINNUS_FACEBOOK_INTEGRATION_ENABLED and do_include_facebook_button and not request.user.cosinnus_profile.get_facebook_user_id %}
     <li class="input-area-lighter">

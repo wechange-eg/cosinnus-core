@@ -339,10 +339,19 @@
 					                            {% for app_option in deactivated_app_selection %}
 					                                {% captureas cosinnus_css_class %}{% if app_option.app == 'todo' %}app-todos{% elif app_option.app == 'note' %}app-main{% elif app_option.app == 'file' %}app-files{% elif app_option.app == 'event' %}app-calendar{% elif app_option.app %}app-{{ app_option.app }}{% else %}app-main{% endif %}{% endcaptureas %}
 					                                <span class="pull-left inline-list nowrap {{ cosinnus_css_class }}">
-					                                    <a class="app-background small-padding"><input id="checkbox_{{ app_option.app_name }}" type="checkbox" name="deactivated_apps" {% if app_option.checked == True %}checked="true"{% endif %} value="{{ app_option.app_name }}" /></a
-					                                    ><span class="app-background-light dark-color small-padding" onclick="$('#checkbox_{{ app_option.app_name }}').prop('checked', !($('#checkbox_{{ app_option.app_name }}').prop('checked')));">
-					                                        {{ app_option.label }}
-					                                    </span>
+					                                	{% if app_option.app_not_activatable %}
+					                                		<span class="select-disabled" title="{% trans "This App can only be activated for a Group, but not for a Project!" %}">
+						                                		<span class="app-background small-padding"><input type="checkbox" disabled="disabled"/></span
+							                                    ><span class="app-background-light dark-color small-padding">
+							                                        {{ app_option.label }}
+							                                    </span>
+						                                    </span>
+					                                	{% else %}
+						                                    <a class="app-background small-padding"><input id="checkbox_{{ app_option.app_name }}" type="checkbox" name="deactivated_apps" {% if app_option.checked == True %}checked="true"{% endif %} value="{{ app_option.app_name }}" /></a
+						                                    ><span class="app-background-light dark-color small-padding" onclick="$('#checkbox_{{ app_option.app_name }}').prop('checked', !($('#checkbox_{{ app_option.app_name }}').prop('checked')));">
+						                                        {{ app_option.label }}
+						                                    </span>
+						                                {% endif %}
 					                                </span>
 					                            {% endfor %}
 					                        </li>

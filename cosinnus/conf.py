@@ -29,6 +29,7 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Etherpad',
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
+            'cosinnus_marketplace.Offer',
         ],
         'cosinnus_event.Event': [
             'cosinnus_file.FileEntry',
@@ -36,6 +37,7 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Etherpad',
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
+            'cosinnus_marketplace.Offer',
         ],
         'cosinnus_todo.TodoEntry': [
             'cosinnus_file.FileEntry',
@@ -44,6 +46,7 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Etherpad',
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
+            'cosinnus_marketplace.Offer',
         ],
         'cosinnus_poll.Poll': [
             'cosinnus_file.FileEntry',
@@ -51,6 +54,16 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Etherpad',
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
+            'cosinnus_marketplace.Offer',
+        ],
+      'cosinnus_marketplace.Offer': [
+            'cosinnus_file.FileEntry',
+            'cosinnus_todo.TodoEntry',
+            'cosinnus_etherpad.Etherpad',
+            'cosinnus_etherpad.Ethercalc',
+            'cosinnus_poll.Poll',
+            'cosinnus_event.Event',
+            'cosinnus_note.Note',
         ]
     }
     
@@ -71,13 +84,23 @@ class CosinnusConf(AppConf):
             'etherpad',
             'diskussion'
         ],
-        'cosinnus_event.Poll': [
+        'cosinnus_poll.Poll': [
             'umfrage',
             'poll',
             'meinung',
             'diskussion',
             'discussion',
             'opinion',
+        ],
+        'cosinnus_marketplace.Offer': [
+            'suche',
+            'biete',
+            'buying',
+            'selling',
+            'annonce',
+            'classifieds',
+            'angebot',
+            'kleinanzeige',
         ],
         'cosinnus_todo.TodoEntry': [
             'todo',
@@ -98,6 +121,7 @@ class CosinnusConf(AppConf):
         'cosinnus_todo',
         'cosinnus_etherpad',
         'cosinnus_file',
+        'cosinnus_marketplace',
     ]
     
     # CSV Import settings
@@ -125,6 +149,10 @@ class CosinnusConf(AppConf):
     
     # when etherpad objects are deleted, should the etherpads on the server be deleted as well?
     DELETE_ETHERPADS_ON_SERVER_ON_DELETE = False
+    
+    # a list of cosinnus apps that are installed but are disabled for the users, e.g. ['cosinnus_marketplace', ]
+    # (they are still admin accessible)
+    DISABLED_COSINNUS_APPS = []
     
     # should the facebook integration scripts and templates be loaded?
     FACEBOOK_INTEGRATION_ENABLED = False
@@ -163,6 +191,7 @@ class CosinnusConf(AppConf):
         ("etherpad", "latest", {'amount':'5', 'sort_field':'4'}),
         ("file", "latest", {'sort_field':'5', 'amount':'5'}),
         ("poll", "current", {'sort_field':'6', 'amount':'5'}),
+        ("marketplace", "current", {'sort_field':'7', 'amount':'5'}),
         ("cosinnus", "group_members", {'amount':'5', 'sort_field':'7'}),
         ("cosinnus", "related_groups", {'amount':'5', 'sort_field':'8'}),
     ]
@@ -234,6 +263,9 @@ class CosinnusConf(AppConf):
     # can a staff user import CosinnusGroups via a CSV upload in the wagtail admin?
     # and is the button shown?
     IMPORT_PROJECTS_PERMITTED = False
+    
+    # default number of days offers in the Marketplace stay active
+    MARKETPLACE_OFFER_ACTIVITY_DURATION_DAYS = 30
     
     # 
     """

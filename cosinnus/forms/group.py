@@ -58,6 +58,11 @@ class CleanDeactivatedAppsMixin(object):
         deactivatable_apps = app_registry.get_deactivatable_apps()
         # the form field is actually inverse, and active apps are checked
         active_apps = self.data.getlist('deactivated_apps')
+        
+        # if this is not a group, remove from the choices all apps that are group-only
+        if self.instance.type != CosinnusSociety.TYPE_SOCIETY:
+            active_apps = [app for app in active_apps if app not in app_registry.get_activatable_for_groups_only_apps()]
+        
         deactivated_apps = [option_app for option_app in deactivatable_apps if not option_app in active_apps]
         return ','.join(deactivated_apps)
 
