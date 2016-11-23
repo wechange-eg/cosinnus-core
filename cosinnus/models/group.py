@@ -711,7 +711,8 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
             group.name_ru depending on the language. """
         return getattr(self, key)
 
-    def save(self, *args, **kwargs):
+    def save(self, keep_unmodified=False, *args, **kwargs):
+        """ @param keep_unmodified: is de-referenced from kwargs here to support extended arguments. could be cleaner """
         created = bool(self.pk is None)
         slugs = [self.slug] if self.slug else []
         self.name = clean_single_line_text(self.name)
