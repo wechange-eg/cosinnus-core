@@ -24,7 +24,7 @@ module.exports = {
             39, // rightarrow
             40, // downarrow
             45, // insert
-            46, // delete
+            46 // delete
         ];
         return _(keycodes).contains(event.keyCode);
     }
