@@ -5,7 +5,7 @@ module.exports = {
         return window.location.protocol;
     },
     
-    isIgnorableKey(event) {
+    isIgnorableKey: function (event) {
         var keycodes = [
             9,  // tab
             13, // enter
