@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-03 16:37+0100\n"
+"POT-Creation-Date: 2016-11-28 11:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1429,6 +1429,9 @@ msgstr ""
 msgid "Which apps should be activated?"
 msgstr ""
 
+msgid "This App can only be activated for a Group, but not for a Project!"
+msgstr ""
+
 msgid "Describe your activities and goals"
 msgstr ""
 
@@ -2533,86 +2536,6 @@ msgstr ""
 msgid "Jetzt anmelden und mitgestalten"
 msgstr ""
 
-msgid "Custom Wagtail Page"
-msgstr ""
-
-msgid "Tools"
-msgstr ""
-
-msgid "Import Projects and Groups or Users"
-msgstr ""
-
-msgid "Import from a CSV File"
-msgstr ""
-
-msgid "Upload either a CSV-file to import projects and groups or a CSV-file to import Users. Only one import can happen simultaneously. The format must be the one that has been agreed on. If the format changes (more/less/different columns), please contact the developers!"
-msgstr ""
-
-msgid "Project/group CSV File"
-msgstr ""
-
-msgid "User CSV File"
-msgstr ""
-
-msgid "Options"
-msgstr ""
-
-msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
-msgstr ""
-
-msgid "Encoding of the CSV file"
-msgstr ""
-
-msgid "Delimiter of the CSV file"
-msgstr ""
-
-msgid "Upload and Import..."
-msgstr ""
-
-msgid "Import Projects and Groups"
-msgstr ""
-
-msgid "Clear results and start a new import!"
-msgstr ""
-
-msgid "CSV Import Results"
-msgstr ""
-
-msgid "The import has finished. Here are the results:"
-msgstr ""
-
-msgid "Read errors:"
-msgstr ""
-
-msgid "These rows in your CSV file had errors or an incorrect number of columns and were IGNORED:"
-msgstr ""
-
-msgid "Saved items:"
-msgstr ""
-
-msgid "Important messages:"
-msgstr ""
-
-msgid "Errors:"
-msgstr ""
-
-msgid "Info messages:"
-msgstr ""
-
-msgid "The CSV file was read successfully and the import is currently running on the server!"
-msgstr ""
-
-#, python-format
-msgid ""
-"This page will show the results when the import is finished.\n"
-"\t\t\n"
-"\t\t\t\tDepending on the number of imported items, this process might take from a few seconds to a few minutes. You do not have to keep this page open. We will send you an email to your address <b>\"%(email)s\"</b> as soon as the import finishes!\n"
-"\t\t\t"
-msgstr ""
-
-msgid "Progress:"
-msgstr ""
-
 msgid "Show more Projects"
 msgstr ""
 
@@ -2975,41 +2898,4 @@ msgid "You are not currently a member of %s! If you wish you can request to beco
 msgstr ""
 
 msgid "Your changes have been saved."
-msgstr ""
-
-msgid "An import has just finished. Please click the \"Start a new import\" button to start a new one!"
-msgstr ""
-
-msgid "You uploaded a CSV file for both projects/groups AND users! Please only upload one file to import at a time!"
-msgstr ""
-
-msgid "You did not upload a CSV file or something went wrong during the upload!"
-msgstr ""
-
-msgid "The CSV file was read successfully! You will be notified by email when it completes."
-msgstr ""
-
-#, python-format
-msgid "The CSV file you supplied is not formatted in the proper encoding (%s)!"
-msgstr ""
-
-#, python-format
-msgid "The CSV file you supplied was empty or not formatted in the proper encoding (%(encoding)s) or with a wrong delimiter (%(delimiter)s)!"
-msgstr ""
-
-#, python-format
-msgid "One or more rows in the CSV file you supplied contained less columns than expected (%s)! Either the file was read in a wrong encoding, or the file was using a different format than the server expected."
-msgstr ""
-
-msgid "Another import is currently running! Please wait till that one is finished."
-msgstr ""
-
-#, python-format
-msgid "A CSV configuration error occured, has the CSV format changed?. Message was: %s"
-msgstr ""
-
-msgid "There was an unexpected error when reading the CSV file! Please make sure the file is properly formatted. If the problem persists, please contact an administrator!"
-msgstr ""
-
-msgid "Import"
 msgstr ""

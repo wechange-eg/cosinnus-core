@@ -12,7 +12,6 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 
 from wagtail.wagtailadmin.menu import MenuItem
 
-from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
@@ -27,6 +26,12 @@ from cosinnus.utils.permissions import check_user_portal_admin
 from django.http.response import HttpResponseForbidden
 from django.core.exceptions import ImproperlyConfigured
 logger = logging.getLogger('cosinnus')
+
+# swap this to re-enable translating these internal strings
+# (we didn't do this to save translator work for admin pages)
+#from django.utils.translation import ugettext_lazy as _
+dotrans_ = str
+
 
 
 @hooks.register('insert_editor_js')
@@ -108,15 +113,15 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
                 cache.delete(GROUP_IMPORT_RESULTS_CACHE_KEY)
                 return redirect(reverse('import-projects'))
             elif import_results:
-                messages.success(request, _('An import has just finished. Please click the "Start a new import" button to start a new one!'))
+                messages.success(request, dotrans_('An import has just finished. Please click the "Start a new import" button to start a new one!'))
             else:
                 csv_file_groups = request.FILES.get('csv_upload_groups', None)
                 csv_file_users = request.FILES.get('csv_upload_users', None)
                 
                 if csv_file_groups and csv_file_users:
-                    messages.error(request, _('You uploaded a CSV file for both projects/groups AND users! Please only upload one file to import at a time!'))
+                    messages.error(request, dotrans_('You uploaded a CSV file for both projects/groups AND users! Please only upload one file to import at a time!'))
                 elif not (csv_file_groups or csv_file_users):
-                    messages.error(request, _('You did not upload a CSV file or something went wrong during the upload!'))
+                    messages.error(request, dotrans_('You did not upload a CSV file or something went wrong during the upload!'))
                 else:
                     csv_file = csv_file_groups or csv_file_users
                     import_type = 'groups' if csv_file_groups else 'users'
@@ -127,20 +132,20 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
                     
                     try:
                         debug = csv_import_projects(csv_file, request=request, encoding=encoding, delimiter=delimiter, import_type=import_type)
-                        messages.success(request, _('The CSV file was read successfully! You will be notified by email when it completes.'))
+                        messages.success(request, dotrans_('The CSV file was read successfully! You will be notified by email when it completes.'))
                         import_running = True
                     except (UnicodeDecodeError, UnicodeError):
-                        messages.error(request, _('The CSV file you supplied is not formatted in the proper encoding (%s)!' % encoding))
+                        messages.error(request, dotrans_('The CSV file you supplied is not formatted in the proper encoding (%s)!' % encoding))
                     except EmptyOrUnreadableCSVContent:
-                        messages.error(request, _('The CSV file you supplied was empty or not formatted in the proper encoding (%(encoding)s) or with a wrong delimiter (%(delimiter)s)!' % {'encoding':encoding, 'delimiter':delimiter}))
+                        messages.error(request, dotrans_('The CSV file you supplied was empty or not formatted in the proper encoding (%(encoding)s) or with a wrong delimiter (%(delimiter)s)!' % {'encoding':encoding, 'delimiter':delimiter}))
                     except UnexpectedNumberOfColumns, e:
-                        messages.error(request, _('One or more rows in the CSV file you supplied contained less columns than expected (%s)! Either the file was read in a wrong encoding, or the file was using a different format than the server expected.' % str(e)))
+                        messages.error(request, dotrans_('One or more rows in the CSV file you supplied contained less columns than expected (%s)! Either the file was read in a wrong encoding, or the file was using a different format than the server expected.' % str(e)))
                     except ImportAlreadyRunning:
-                        messages.error(request, _('Another import is currently running! Please wait till that one is finished.'))
+                        messages.error(request, dotrans_('Another import is currently running! Please wait till that one is finished.'))
                     except ImproperlyConfigured, e:
-                        messages.error(request, _('A CSV configuration error occured, has the CSV format changed?. Message was: %s') % str(e))
+                        messages.error(request, dotrans_('A CSV configuration error occured, has the CSV format changed?. Message was: %s') % str(e))
                     except Exception, e:
-                        messages.error(request, _('There was an unexpected error when reading the CSV file! Please make sure the file is properly formatted. If the problem persists, please contact an administrator!'))
+                        messages.error(request, dotrans_('There was an unexpected error when reading the CSV file! Please make sure the file is properly formatted. If the problem persists, please contact an administrator!'))
                         logger.warn('A CSV file uploaded for import encountered an unexpected error! The exception was: "%s"' % str(e), extra={'encoding_used': encoding, 'delimiter_used': delimiter})
                         if getattr(settings, 'DEBUG_LOCAL', False):
                             raise
@@ -179,5 +184,5 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
         
     @hooks.register('register_admin_menu_item')
     def register_import_menu_item():
-        return ImportProjectsMenutItem(_('Import'), reverse('import-projects'), classnames='icon icon-plus', order=1005)
+        return ImportProjectsMenutItem(dotrans_('Import'), reverse('import-projects'), classnames='icon icon-plus', order=1005)
 
