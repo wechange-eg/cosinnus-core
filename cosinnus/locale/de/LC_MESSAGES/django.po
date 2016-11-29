@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-28 11:48+0100\n"
-"PO-Revision-Date: 2016-11-28 11:32+0100\n"
+"POT-Creation-Date: 2016-11-29 16:32+0100\n"
+"PO-Revision-Date: 2016-11-29 16:36+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -474,6 +474,9 @@ msgstr "Flickr Gallerie/Slideshow URL"
 msgid "Deactivated Apps"
 msgstr "Deaktivierte Apps"
 
+msgid "Microsite Public Apps"
+msgstr "Microsite Öffentliche Apps"
+
 msgid "Is active"
 msgstr "Ist aktiv"
 
@@ -574,20 +577,14 @@ msgstr ""
 msgid "Terms of Service"
 msgstr "Nutzungsbedingungen"
 
-#, fuzzy
-#| msgid "Name"
 msgid "Name (EN)"
-msgstr "Name"
+msgstr "Name (EN)"
 
-#, fuzzy
-#| msgid "Name"
 msgid "Name (RU)"
-msgstr "Name"
+msgstr "Name (RU)"
 
-#, fuzzy
-#| msgid "Name"
 msgid "Name (UK)"
-msgstr "Name"
+msgstr "Name (UK)"
 
 msgid "Only me"
 msgstr "Nur ich"
@@ -1454,7 +1451,7 @@ msgid "Which apps should be activated?"
 msgstr "Welche Apps sollen aktiviert sein?"
 
 msgid "This App can only be activated for a Group, but not for a Project!"
-msgstr ""
+msgstr "Diese Anwendung kann nur für eine Gruppe, aber nicht für ein Projekt aktiviert werden!"
 
 msgid "Describe your activities and goals"
 msgstr "Beschreibe die Aktivitäten und Ziele"
@@ -1480,6 +1477,9 @@ msgstr "Dies ist eine öffentliche Beschreibung die auf der Microseite angezeigt
 
 msgid "Contact info. How you can be reached, addresses, social media, etc..."
 msgstr "Kontaktinfos. Wie man euch erreichen kann - Adressen, Social Media Links, etc..."
+
+msgid "From which apps should public items be shown on the microsite?"
+msgstr "Aus welchen Anwendungen sollen öffentliche Inhalte auf der Microsite angezeigt werden?"
 
 msgid "Microsite Gallery Images"
 msgstr "Microsite Galleriebilder"
@@ -1636,6 +1636,9 @@ msgstr "Kontakt"
 
 msgid "No contact data has been added yet."
 msgstr "Es wurden noch keine Kontaktdaten eingetragen."
+
+msgid "Recent Items"
+msgstr "Aktuelle Inhalte"
 
 msgid "Tweets"
 msgstr "Tweets"
