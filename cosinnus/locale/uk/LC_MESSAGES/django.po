@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-28 11:48+0100\n"
+"POT-Creation-Date: 2016-11-29 16:32+0100\n"
 "PO-Revision-Date: 2015-11-11 10:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -501,6 +501,11 @@ msgstr ""
 
 msgid "Deactivated Apps"
 msgstr "Деактивовані застосунки"
+
+#, fuzzy
+#| msgid "Microsite Wallpaper"
+msgid "Microsite Public Apps"
+msgstr "Фон мікросайту"
 
 msgid "Is active"
 msgstr "Активний"
@@ -1560,6 +1565,9 @@ msgstr "Це публічний опис, який буде знаходитис
 msgid "Contact info. How you can be reached, addresses, social media, etc..."
 msgstr "Як можна з вами зв'язатися: адреси, соціальні медіа і т. п."
 
+msgid "From which apps should public items be shown on the microsite?"
+msgstr ""
+
 #, fuzzy
 #| msgid "Microsite Wallpaper"
 msgid "Microsite Gallery Images"
@@ -1745,6 +1753,9 @@ msgid "Contact"
 msgstr "Контакти"
 
 msgid "No contact data has been added yet."
+msgstr ""
+
+msgid "Recent Items"
 msgstr ""
 
 #, fuzzy
