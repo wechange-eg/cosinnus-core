@@ -287,6 +287,11 @@ class CosinnusConf(AppConf):
     # this can be override for each portal to either activate or deactivate them
     MICROSITES_ENABLED = False
     
+    # the default setting used when a group has no microsite_public_apps setting set
+    # determines which apps public objects are shown on a microsite
+    # e.g: ['cosinnus_file', 'cosinnus_event', ]
+    MICROSITE_DEFAULT_PUBLIC_APPS = []
+    
     # --- for the old microsites ---
     # which apps objects as object lists will be listed on the microsite? 
     # must be model names of BaseTaggableObjects that can be resolved via a 
@@ -295,14 +300,12 @@ class CosinnusConf(AppConf):
     MICROSITE_DISPLAYED_APP_OBJECTS = ['cosinnus_note.Note', 'cosinnus_etherpad.Etherpad',
         'cosinnus_file.FileEntry', 'cosinnus_event.Event']
     
-    # the default setting used when a group has no microsite_public_apps setting set
-    # determines which apps public objects are shown on a microsite
-    # e.g: ['cosinnus_file', 'cosinnus_event', ]
-    MICROSITE_DEFAULT_PUBLIC_APPS = []
-    
     # --- for the old microsites ---
     # should empty apps list be displayed at all, or omitted?
     MICROSITE_RENDER_EMPTY_APPS = True
+    
+    # how many public items should be shown on the microsite?
+    MICROSITE_PUBLIC_APPS_NUMBER_OF_ITEMS = 10
     
     #: A list of app_names (``'cosinnus_note'`` rather than ``note``) that will
     #: e.g. not be displayed in the cosinnus menu

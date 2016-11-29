@@ -499,10 +499,10 @@
 			                </li>
 			            </ul>
 			        </div><!-- btn -->
-			        <div class="">
+			        <div class="" style="background-color: #ffffff !important;">
 			        	{% with user=anonymous_user %}
 				        	{% for public_object in public_objects %}
-				        		{% cosinnus_render_single_object public_object %}
+				        		{% cosinnus_render_single_object public_object hide_group_name=True %}
 				        	{% endfor %}
 			        	{% endwith %}
 					</div>

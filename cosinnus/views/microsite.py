@@ -20,7 +20,8 @@ class GroupMicrositeView(DipatchGroupURLMixin, GroupObjectCountMixin, DisplayTag
     
     def get_public_objects(self):
         querysets = self.get_object_querysets(group=self.group, cosinnus_apps=self.group.get_microsite_public_apps())
-        return [item for queryset in querysets for item in queryset]
+        items = self.sort_and_limit_querysets(querysets, item_limit=settings.COSINNUS_MICROSITE_PUBLIC_APPS_NUMBER_OF_ITEMS)
+        return items
     
     def get_context_data(self, **kwargs):
         context = super(GroupMicrositeView, self).get_context_data(**kwargs)
