@@ -375,25 +375,28 @@ class HierarchyDeleteMixin(object):
 
 class DisplayTaggedObjectsMixin(object):
     
-    def get_object_querysets(self, group, cosinnus_models=[], user=None):
+    def get_object_querysets(self, group, cosinnus_apps=None, user=None):
         """ Returns all (still-lazy) querysets for BaseTaggableObjects in cosinnus apps.
             Can be filtered to be viewable by a certain user, or only publicly viewable,
             and can be filtered for a certain group only.
-            @param cosinnus_models: Returns objects for these models, or for all registered models if [] 
+            @param cosinnus_apps: Returns objects for these models, or for all registered models if None 
                 - example: ['cosinnus_etherpad.Etherpad', 'cosinnus_event.Event', 'cosinnus_file.FileEntry']
             @param group: Filter the objects to belong to this group, or any group if None
             @param user: Filter the objects to be viewable by this user, or an anonymous user if None """
             
         if user is None:
             user = AnonymousUser()
-        
+            
         querysets = []
         for registered_model in aor:
-            # filter out unwanted model types if set in the Stream
-            if cosinnus_models and registered_model not in cosinnus_models:
-                continue
             
             app_label, model_name = registered_model.split('.')
+            app_is_active = app_label not in group.get_deactivated_apps()
+            
+            # filter out unwanted model types if set in the Stream
+            if not app_is_active or cosinnus_apps is not None and app_label not in cosinnus_apps:
+                continue
+            
             model_class = get_model(app_label, model_name)
             
             if hasattr(model_class, 'get_current'):
@@ -410,6 +413,8 @@ class DisplayTaggedObjectsMixin(object):
             
             # sorting by created date
             #queryset = queryset.order_by('-created')
+            
+            # TODO: sort and weave
             
             querysets.append(queryset)
             

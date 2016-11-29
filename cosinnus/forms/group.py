@@ -52,7 +52,7 @@ class GroupKwargModelFormMixin(object):
             self.instance.group_id = self.group.id
 
 
-class CleanDeactivatedAppsMixin(object):
+class CleanAppSettingsMixin(object):
     
     def clean_deactivated_apps(self):
         deactivatable_apps = app_registry.get_deactivatable_apps()
@@ -65,6 +65,15 @@ class CleanDeactivatedAppsMixin(object):
         
         deactivated_apps = [option_app for option_app in deactivatable_apps if not option_app in active_apps]
         return ','.join(deactivated_apps)
+    
+    def clean_microsite_public_apps(self):
+        deactivatable_apps = app_registry.get_deactivatable_apps()
+        # public apps are checked
+        public_apps = self.data.getlist('microsite_public_apps')
+        # only accept existing, deactivatable apps
+        public_apps = [option_app for option_app in deactivatable_apps if option_app in public_apps]
+        return ','.join(public_apps) if public_apps else '<all_deselected>'
+    
 
 class AsssignPortalMixin(object):
     """ Assign current portal on save when created """
@@ -88,7 +97,7 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
     class Meta:
         fields = ['name', 'public', 'description', 'description_long', 'contact_info', 
                         'avatar', 'wallpaper', 'website', 'video', 'twitter_username',
-                         'twitter_widget_id', 'flickr_url', 'deactivated_apps'] \
+                         'twitter_widget_id', 'flickr_url', 'deactivated_apps', 'microsite_public_apps'] \
                         + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) \
                         + (['facebook_group_id', 'facebook_page_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else [])
 
@@ -180,7 +189,7 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
         return self.instance
                 
                 
-class _CosinnusProjectForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
+class _CosinnusProjectForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
     
     class Meta:
         fields = CosinnusBaseGroupForm.Meta.fields + ['parent',]
@@ -191,7 +200,7 @@ class _CosinnusProjectForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, Cosinn
         self.fields['parent'].queryset = CosinnusSociety.objects.all_in_portal()
         
 
-class _CosinnusSocietyForm(CleanDeactivatedAppsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
+class _CosinnusSocietyForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
     
     class Meta:
         fields = CosinnusBaseGroupForm.Meta.fields

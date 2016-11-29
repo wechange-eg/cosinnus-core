@@ -295,6 +295,11 @@ class CosinnusConf(AppConf):
     MICROSITE_DISPLAYED_APP_OBJECTS = ['cosinnus_note.Note', 'cosinnus_etherpad.Etherpad',
         'cosinnus_file.FileEntry', 'cosinnus_event.Event']
     
+    # the default setting used when a group has no microsite_public_apps setting set
+    # determines which apps public objects are shown on a microsite
+    # e.g: ['cosinnus_file', 'cosinnus_event', ]
+    MICROSITE_DEFAULT_PUBLIC_APPS = []
+    
     # --- for the old microsites ---
     # should empty apps list be displayed at all, or omitted?
     MICROSITE_RENDER_EMPTY_APPS = True

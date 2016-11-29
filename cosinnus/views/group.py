@@ -130,8 +130,10 @@ class CosinnusGroupFormMixin(object):
     def get_context_data(self, **kwargs):
         context = super(CosinnusGroupFormMixin, self).get_context_data(**kwargs)
         deactivated_apps = self.object.get_deactivated_apps() if self.object else []
+        microsite_public_apps = self.object.get_microsite_public_apps() if self.object else settings.COSINNUS_MICROSITE_DEFAULT_PUBLIC_APPS
         
         deactivated_app_selection = []
+        microsite_public_apps_selection = []
         
         for app_name in app_registry: # eg 'cosinnus_todo'
             # label for the checkbox is the app identifier translation
@@ -151,10 +153,18 @@ class CosinnusGroupFormMixin(object):
                     'checked': app_is_active,
                     'app_not_activatable': app_not_activatable,
                 })
+                if app_is_active and not app_not_activatable:
+                    microsite_public_apps_selection.append({
+                        'app_name': app_name,
+                        'app': app,
+                        'label': pgettext_lazy('the_app', app),
+                        'checked': app_name in microsite_public_apps,
+                    })
             
         context.update({
             'group_model': self.group_model_class.__name__,
             'deactivated_app_selection': deactivated_app_selection,
+            'microsite_public_apps_selection': microsite_public_apps_selection,
         })
         return context
 
