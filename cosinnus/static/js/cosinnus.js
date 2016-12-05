@@ -1008,7 +1008,7 @@
                     // collect infos (relative path) of files, if provided by the browser
                     var fileData = [];
                     for (var i=0; i<data.files.length; i++) {
-                        var relativePath = data.files[i].webkitRelativePath || data.files[i].relativePath || null;
+                        var relativePath = data.files[i].relativePath || null;
                         fileData.push({'name': data.files[i].name, 'relative_path': relativePath});
                     }
                     // add file info to the POST data
