@@ -66,8 +66,13 @@ def unique_aware_slugify(item, slug_source, slug_field,
     slug = slugify(getattr(item, slug_source)[:slug_len])
     
     # sanity check, we can never ever have an empty slug!
+    # note: cyrillic-only names will slugify to empty, so generate a uuid
+    # (unless the slug field has already been filled before)
     if not slug:
-        slug = str(uuid1().int)[:10]
+        if getattr(item, slug_field, None):
+            slug = getattr(item, slug_field)
+        else:
+            slug = str(uuid1().int)[:10]
     
     # resolve proxy classes to their lowest common database model
     model = item.__class__
