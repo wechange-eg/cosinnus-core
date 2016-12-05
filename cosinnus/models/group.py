@@ -660,6 +660,8 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
     # be editable, or be indexed by search indices for this group
     deactivated_apps = models.CharField(_('Deactivated Apps'), max_length=255, 
         blank=True, null=True, editable=True)
+    microsite_public_apps = models.CharField(_('Microsite Public Apps'), max_length=255, 
+        blank=True, null=True, editable=True)
     is_active = models.BooleanField(_('Is active'),
         help_text=_('If a team is not active, it counts as non-existent for all purposes and views on the website.'),
         default=True)
@@ -986,6 +988,14 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
         if self.deactivated_apps:
             return self.deactivated_apps.split(',')
         return []
+    
+    def get_microsite_public_apps(self):
+        """ Returns a list of cosinnus apps whose public objects should be shown on the microsite.
+            If not set, used the default setting in COSINNUS_MICROSITE_DEFAULT_PUBLIC_APPS """
+        if getattr(self, 'microsite_public_apps', None):
+            return self.microsite_public_apps.split(',')
+        else:
+            return settings.COSINNUS_MICROSITE_DEFAULT_PUBLIC_APPS
     
     def is_app_deactivated(self, app_name):
         """ Returns True if the cosinnus app with the given app_name has been deactivated for this group """

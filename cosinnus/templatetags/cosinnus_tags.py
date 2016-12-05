@@ -335,7 +335,7 @@ def cosinnus_render_attached_objects(context, source, filter=None, skipImages=Fa
 
 
 @register.simple_tag(takes_context=True)
-def cosinnus_render_single_object(context, object):
+def cosinnus_render_single_object(context, object, *args, **kwargs):
     """
     Render a single cosinnus BaseTaggableObject using the
      configured renderer for that model type
@@ -343,6 +343,8 @@ def cosinnus_render_single_object(context, object):
 
     :param object: the source object to render
     """
+    NAMED_ARGS = ['hide_group_name']
+    
     model_name = object.__class__.__module__.split('.')[0] + '.' + object.__class__.__name__
     
     # find manager object for attached object type
@@ -350,6 +352,9 @@ def cosinnus_render_single_object(context, object):
     
     rendered_output = ''
     if Renderer:
+        for arg in NAMED_ARGS:
+            if arg in kwargs:
+                context[arg] = kwargs[arg]
         # pass the list to that manager and expect a rendered html string
         rendered_output = Renderer.render_single(context, object)
     elif settings.DEBUG:
