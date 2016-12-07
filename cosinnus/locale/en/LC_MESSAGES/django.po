@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-29 16:32+0100\n"
+"POT-Creation-Date: 2016-12-07 15:28+0100\n"
 "PO-Revision-Date: 2016-10-26 16:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -366,6 +366,12 @@ msgid "Description"
 msgstr ""
 
 msgid "Website"
+msgstr ""
+
+msgid "Welcome-Email Text"
+msgstr ""
+
+msgid "If set, this text overrides the default welcome e-mail text which will be sent on portals with \"Users Need Activation\" enabled."
 msgstr ""
 
 msgid "Public"

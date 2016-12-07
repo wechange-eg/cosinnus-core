@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-29 16:32+0100\n"
+"POT-Creation-Date: 2016-12-07 15:28+0100\n"
 "PO-Revision-Date: 2016-11-28 15:13+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -370,6 +370,12 @@ msgstr "Описание"
 
 msgid "Website"
 msgstr "Сайт"
+
+msgid "Welcome-Email Text"
+msgstr ""
+
+msgid "If set, this text overrides the default welcome e-mail text which will be sent on portals with \"Users Need Activation\" enabled."
+msgstr ""
 
 msgid "Public"
 msgstr "В открытом доступе"

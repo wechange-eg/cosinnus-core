@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-29 16:32+0100\n"
-"PO-Revision-Date: 2016-12-05 16:49+0100\n"
+"POT-Creation-Date: 2016-12-07 15:28+0100\n"
+"PO-Revision-Date: 2016-12-07 15:29+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -368,6 +368,12 @@ msgstr "Beschreibung"
 
 msgid "Website"
 msgstr "Webseite"
+
+msgid "Welcome-Email Text"
+msgstr "Willkommens-Email Text"
+
+msgid "If set, this text overrides the default welcome e-mail text which will be sent on portals with \"Users Need Activation\" enabled."
+msgstr "Wenn gesetzt, wird dieser Text statt der Standard-Willkommens-Email an neue Benutzer geschickt. Gilt nur für Portale mit aktivierter \"Bestätigung für neue Benutzer\" Option."
 
 msgid "Public"
 msgstr "Öffentlich"

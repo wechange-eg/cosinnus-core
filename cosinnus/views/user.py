@@ -36,6 +36,7 @@ from django.core.paginator import Paginator
 from cosinnus.views.mixins.group import EndlessPaginationMixin
 from cosinnus.utils.user import filter_active_users
 from uuid import uuid1
+from django.utils.encoding import force_text
 
 
 USER_MODEL = get_user_model()
@@ -221,8 +222,20 @@ def approve_user(request, user_id):
     data.update({
         'user': user,
     })
+    template = 'cosinnus/mail/user_registration_approved.html'
+    
+    # if a welcome email text is set in the portal in admin, send that text instead of the default template
+    portal = CosinnusPortal.get_current()
+    welcome_text = getattr(portal, 'welcome_email_text', None) or '' 
+    welcome_text = force_text(welcome_text).strip()
+    if welcome_text:
+        template = None
+        data.update({
+           'content': portal.welcome_email_text,
+        })
+    
     subj_user = render_to_string('cosinnus/mail/user_registration_approved_subj.txt', data)
-    send_mail_or_fail_threaded(user.email, subj_user, 'cosinnus/mail/user_registration_approved.html', data)
+    send_mail_or_fail_threaded(user.email, subj_user, template, data)
     
     
     messages.success(request, _('Thank you for approving user %(username)s (%(email)s)! An introduction-email was sent out to them and they can now log in to the site.') \
