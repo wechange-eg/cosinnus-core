@@ -1275,6 +1275,14 @@ class CosinnusPermanentRedirect(models.Model):
             CosinnusPermanentRedirect._set_cache_dict(cached_dict)
         super(CosinnusPermanentRedirect, self).save(*args, **kwargs)
         
+        # Bugfixing a heisenbug: after saving, check if this redirect violates integrity.
+        # if so, immediately delete it, and report error:
+        if not self.check_integrity():
+            import traceback
+            logger.error('Prevented a bad redirect-loop from saving itself! Deleted the loop, but TODO: find the cause! Traceback in extra. ', extra={'trace': traceback.format_exc()})
+            self.delete()
+            return
+            
         # add group pattern to cache
         self._cache_string = self.cache_string
         cached_dict = CosinnusPermanentRedirect._get_cache_dict()
