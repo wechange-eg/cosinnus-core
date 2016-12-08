@@ -118,12 +118,15 @@ class UserCreateView(CreateView):
 
     form_class = UserCreationForm
     model = USER_MODEL
-    success_url = reverse_lazy('login')
     template_name = 'cosinnus/registration/signup.html'
 
     message_success = _('User "%(user)s" was registered successfully. You can now log in using this username.')
     message_success_inactive = _('User "%(user)s" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address "%(email)s" when this happens.')
     message_success_email_verification = _('User "%(user)s" was registered successfully. We will send an email to your address %(email)s" soon. You need to confirm the email address before you can log in.')
+    
+    def get_success_url(self):
+        next_param = self.request.GET.get('next', '')
+        return reverse('login') + '?next=%s' % next_param if next_param else ''
     
     def form_valid(self, form):
         ret = super(UserCreateView, self).form_valid(form)

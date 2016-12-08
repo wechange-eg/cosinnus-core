@@ -1,0 +1,13 @@
+{% load i18n cosinnus_tags %}
+
+{% captureas label %}
+	<p>{% blocktrans with group_name=object.name %}Enter the email addresses of people you wish to invite to join the platform.{% endblocktrans %}</p>
+	<p>{% blocktrans with group_name=object.name %}We will send them an email asking them to sign up and join {{ group_name }}.{% endblocktrans %}</p>
+	<textarea cols="40" id="recruit-user-emails" name="emails" 
+		placeholder="{% trans 'Enter up to 10 email addresses, one on each line or seperated with a comma' %}" 
+		rows="10" style="border: 1px solid #DADADA;"></textarea>
+{% endcaptureas %}
+{% captureas title %}{% trans "Invite new Members" %}{% endcaptureas %}
+{% captureas submit_button_label %}{% trans "Invite" %}{% endcaptureas %}
+{% captureas action %}{% group_url 'cosinnus:group-user-recruit' group=object %}{% endcaptureas %}
+{% include "cosinnus/modal_box.html" with id="modal-recruit-users" label=label title=title form_action=action title_icon="fa-user-plus" %}

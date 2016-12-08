@@ -8,8 +8,10 @@
                     {{else}}
                         Hi
                     {{/if}}
-
-                    {{#rw this}}addressee{{/rw}},
+                    
+					{{#rwif addressee raw_if="addressee"}}
+                    	{{#rw this}}addressee{{/rw}},
+                    {{/rwif}}
                 </h2>
             </columns>
         </row>

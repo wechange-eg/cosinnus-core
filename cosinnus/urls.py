@@ -103,6 +103,7 @@ for url_key in group_model_registry:
         #url(r'^%s/(?P<group>[^/]+)/_microsite__old_/$' % url_key, 'cms.group_microsite', name=prefix+'group-microsite'),
         #url(r'^%s/(?P<group>[^/]+)/_microsite__old_/edit/$' % url_key, 'cms.group_microsite_edit', name=prefix+'group-microsite-edit'),
         url(r'^%s/(?P<group>[^/]+)/members/$' % url_key, 'group.group_detail', name=prefix+'group-detail'),
+        url(r'^%s/(?P<group>[^/]+)/members/recruit/$' % url_key, 'group.group_user_recruit', name=prefix+'group-user-recruit'),
         #url(r'^%s/(?P<group>[^/]+)/members/map/$' % url_key, 'group.group_members_map', name=prefix+'group-members-map'),
         url(r'^%s/(?P<group>[^/]+)/edit/$' % url_key, 'group.group_update', name=prefix+'group-edit'),
         url(r'^%s/(?P<group>[^/]+)/delete/$' % url_key, 'group.group_delete', name=prefix+'group-delete'),
@@ -111,7 +112,7 @@ for url_key in group_model_registry:
         url(r'^%s/(?P<group>[^/]+)/withdraw/$' % url_key, 'group.group_user_withdraw', name=prefix+'group-user-withdraw'),
         url(r'^%s/(?P<group>[^/]+)/decline/$' % url_key, 'group.group_user_invitation_decline', name=prefix+'group-user-decline'),
         url(r'^%s/(?P<group>[^/]+)/accept/$' % url_key, 'group.group_user_invitation_accept', name=prefix+'group-user-accept'),
-                
+        
         url(r'^%s/(?P<group>[^/]+)/users/$' % url_key, 'group.group_user_list', name=prefix+'group-user-list'),
         url(r'^%s/(?P<group>[^/]+)/users/add/$' % url_key, 'group.group_user_add', name=prefix+'group-user-add-generic'),
         url(r'^%s/(?P<group>[^/]+)/users/add/(?P<username>[^/]+)/$' % url_key, 'group.group_user_add', name=prefix+'group-user-add'),

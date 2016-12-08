@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-07 15:28+0100\n"
+"POT-Creation-Date: 2016-12-08 18:52+0100\n"
 "PO-Revision-Date: 2015-11-11 10:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -187,6 +187,20 @@ msgstr "Вас позначено: «%(object_name)s» у %(team_name)s"
 #| msgid "You were tagged in: \"%(object_name)s\", in %(team_name)s"
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgstr "Вас позначено: «%(object_name)s» у %(team_name)s"
+
+#, fuzzy
+#| msgid "Remove Member"
+msgid "Invited you"
+msgstr "Видалити члена"
+
+#, python-format
+msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
 
 msgid "Deutsch"
 msgstr "Deutsch"
@@ -1136,6 +1150,26 @@ msgstr "ширити"
 msgid "Shrink"
 msgstr "скоротити"
 
+msgid "Enter the email addresses of people you wish to invite to join the platform."
+msgstr ""
+
+#, python-format
+msgid "We will send them an email asking them to sign up and join %(group_name)s."
+msgstr ""
+
+msgid "Enter up to 10 email addresses, one on each line or seperated with a comma"
+msgstr ""
+
+#, fuzzy
+#| msgid "Remove Member"
+msgid "Invite new Members"
+msgstr "Видалити члена"
+
+#, fuzzy
+#| msgid "view"
+msgid "Invite"
+msgstr "Переглянути"
+
 msgid "Rearrange"
 msgstr ""
 
@@ -1389,6 +1423,14 @@ msgstr ""
 #| msgid "Do you really want to decline member „%(name)s“?"
 msgid "Do you really want to decline the invitation?"
 msgstr "Ви дійсно бажаєте відмовити члену %(name)s?"
+
+msgid "Invite People to Register and Join"
+msgstr ""
+
+#, fuzzy
+#| msgid "Not a member"
+msgid "Invite people"
+msgstr "Не член"
 
 msgid "Send Message"
 msgstr "Надіслати повідомлення"
@@ -1665,6 +1707,16 @@ msgstr "Не задоволені тим, як виглядає ваш мікр�
 
 msgid "Change it here..."
 msgstr "Змініть це тут..."
+
+#, fuzzy
+#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+msgid "You have been invited to collaborate!"
+msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
+
+#, fuzzy
+#| msgid "Register"
+msgid "Register and join!"
+msgstr "Зареєструватися"
 
 msgid "Join now and collaborate!"
 msgstr ""
@@ -3111,6 +3163,22 @@ msgstr "Ця спільнота/цей проект уже активна/-й!"
 
 msgid "This project/group is already inactive!"
 msgstr "Ця спільнота/цей проект уже неактивна/-й!"
+
+msgid "Only group/project members have permission to do this!"
+msgstr ""
+
+#, python-format
+msgid "Sorry, these did not seem to be valid email addresses: %s"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "This email address already has a registered user!"
+msgid "Good news! The people with these addresses already have a registered user account: %s"
+msgstr "Під цією адресою електронної скриньки уже хтось зареєструвався!"
+
+#, python-format
+msgid "Success! We are now sending out invitations to these email addresses: %s"
+msgstr ""
 
 msgid "No appname given for adding containers."
 msgstr "Не вказано імені застосунку для додавання контейнерів."

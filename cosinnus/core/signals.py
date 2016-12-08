@@ -32,6 +32,9 @@ user_group_invitation_accepted = dispatch.Signal(providing_args=["user", "obj", 
 user_group_invitation_declined = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 
+""" Called when a person (not a user yet) is being recruited for a group """
+user_group_recruited = dispatch.Signal(providing_args=["user", "obj", "audience"])
+
 
 # we need to load the receivers for them to be active
 import receivers

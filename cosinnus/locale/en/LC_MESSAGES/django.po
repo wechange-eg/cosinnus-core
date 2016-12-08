@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-07 15:28+0100\n"
+"POT-Creation-Date: 2016-12-08 18:52+0100\n"
 "PO-Revision-Date: 2016-10-26 16:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -159,6 +159,17 @@ msgstr ""
 
 #, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
+msgstr ""
+
+msgid "Invited you"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgstr ""
 
 msgid "Deutsch"
@@ -1068,6 +1079,22 @@ msgstr ""
 msgid "Shrink"
 msgstr ""
 
+msgid "Enter the email addresses of people you wish to invite to join the platform."
+msgstr ""
+
+#, python-format
+msgid "We will send them an email asking them to sign up and join %(group_name)s."
+msgstr ""
+
+msgid "Enter up to 10 email addresses, one on each line or seperated with a comma"
+msgstr ""
+
+msgid "Invite new Members"
+msgstr ""
+
+msgid "Invite"
+msgstr ""
+
 msgid "Rearrange"
 msgstr ""
 
@@ -1304,6 +1331,12 @@ msgstr ""
 #| msgid "Do you really want to leave „%(title)s“?"
 msgid "Do you really want to decline the invitation?"
 msgstr "Do you really want to leave project „%(title)s“?"
+
+msgid "Invite People to Register and Join"
+msgstr ""
+
+msgid "Invite people"
+msgstr ""
 
 msgid "Send Message"
 msgstr ""
@@ -1571,6 +1604,12 @@ msgid "Not happy with how your Microsite looks?"
 msgstr ""
 
 msgid "Change it here..."
+msgstr ""
+
+msgid "You have been invited to collaborate!"
+msgstr ""
+
+msgid "Register and join!"
 msgstr ""
 
 msgid "Join now and collaborate!"
@@ -2841,6 +2880,21 @@ msgid "This project/group is already active!"
 msgstr ""
 
 msgid "This project/group is already inactive!"
+msgstr ""
+
+msgid "Only group/project members have permission to do this!"
+msgstr ""
+
+#, python-format
+msgid "Sorry, these did not seem to be valid email addresses: %s"
+msgstr ""
+
+#, python-format
+msgid "Good news! The people with these addresses already have a registered user account: %s"
+msgstr ""
+
+#, python-format
+msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr ""
 
 msgid "No appname given for adding containers."

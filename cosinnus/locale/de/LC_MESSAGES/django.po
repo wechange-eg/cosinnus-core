@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-07 15:28+0100\n"
-"PO-Revision-Date: 2016-12-07 15:29+0100\n"
+"POT-Creation-Date: 2016-12-08 18:52+0100\n"
+"PO-Revision-Date: 2016-12-08 19:04+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -161,6 +161,17 @@ msgstr "Du wurdest markiert von %(sender_name)s."
 #, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgstr "Du wurdest markiert in: \"%(object_name)s\", in %(team_name)s."
+
+msgid "Invited you"
+msgstr "Hat dich eingeladen"
+
+#, python-format
+msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
+msgstr "%(sender_name)s hat dich eingeladen auf %(portal_name)s dem Projekt \"%(team_name)s\" beizutreten! Klicke unten auf den Projektnamen um es dir anzuschauen und mitzumachen!"
+
+#, python-format
+msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s hat dich eingeladen, %(team_name)s beizutreten auf %(portal_name)s!"
 
 msgid "Deutsch"
 msgstr "Deutsch"
@@ -1071,6 +1082,22 @@ msgstr "Erweitern"
 msgid "Shrink"
 msgstr "Verkleinern"
 
+msgid "Enter the email addresses of people you wish to invite to join the platform."
+msgstr "Gib die E-Mail Adressen von den Leuten ein, die du einladen möchtest der Platform beizutreten."
+
+#, python-format
+msgid "We will send them an email asking them to sign up and join %(group_name)s."
+msgstr "Wir schicken ihnen eine E-Mail und bitten sie darum sich zu registrieren und %(group_name)s beizutreten."
+
+msgid "Enter up to 10 email addresses, one on each line or seperated with a comma"
+msgstr "Gibt bis zu 10 E-Mail Adressen ein - eine pro Zeile oder mit Kommas getrennt"
+
+msgid "Invite new Members"
+msgstr "Neue Mitglieder einladen"
+
+msgid "Invite"
+msgstr "Einladen"
+
 msgid "Rearrange"
 msgstr "Umsortieren"
 
@@ -1303,6 +1330,12 @@ msgstr "Einladung für Benutzer zurückziehen"
 
 msgid "Do you really want to decline the invitation?"
 msgstr "Möchtest du die Einladung wirklich ablehnen?"
+
+msgid "Invite People to Register and Join"
+msgstr "Lade Leute zum Registrieren und Beitreten ein"
+
+msgid "Invite people"
+msgstr "Leute einladen"
 
 msgid "Send Message"
 msgstr "Nachricht schicken"
@@ -1573,6 +1606,12 @@ msgstr "Nicht zufrieden mit eurer Microsite?"
 
 msgid "Change it here..."
 msgstr "Ändere sie hier..."
+
+msgid "You have been invited to collaborate!"
+msgstr "Du wurdest zum Mitmachen eingeladen!"
+
+msgid "Register and join!"
+msgstr "Registrieren und beitreten!"
 
 msgid "Join now and collaborate!"
 msgstr "Jetzt anmelden und mitgestalten!"
@@ -2941,6 +2980,21 @@ msgstr "Dieses Projekt/Gruppe ist bereits aktiv!"
 msgid "This project/group is already inactive!"
 msgstr "Dieses Projekt/Gruppe ist bereits inaktiv!"
 
+msgid "Only group/project members have permission to do this!"
+msgstr ""
+
+#, python-format
+msgid "Sorry, these did not seem to be valid email addresses: %s"
+msgstr "Tut uns leid, aber dies hier scheinen keine gültigen E-Mail Adressen gewesen zu sein: %s"
+
+#, python-format
+msgid "Good news! The people with these addresses already have a registered user account: %s"
+msgstr "Gute Nachrichten! Unter diesen E-Mail Adressen haben sich bereits Mitglieder angemeldet: %s"
+
+#, python-format
+msgid "Success! We are now sending out invitations to these email addresses: %s"
+msgstr "Super! Wir schicken jetzt die Einladungen an folgende E-Mail Adressen: %s"
+
 msgid "No appname given for adding containers."
 msgstr "Kein Appname zum Hinzufügen von Zusammenstellungen angegeben."
 
@@ -3170,9 +3224,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "Hidden"
 #~ msgstr "Versteckt"
-
-#~ msgid "Register now!"
-#~ msgstr "Jetzt registrieren!"
 
 #~ msgid "show on map"
 #~ msgstr "auf Karte anzeigen"
