@@ -503,7 +503,7 @@
 				        <div class="" style="background-color: #ffffff !important;">
 				        	{% with user=anonymous_user %}
 					        	{% for public_object in public_object_list %}
-					        		{% cosinnus_render_single_object public_object hide_group_name=True %}
+					        		{% cosinnus_render_single_object public_object hide_group_name=True no_space=True %}
 					        	{% endfor %}
 				        	{% endwith %}
 						</div>

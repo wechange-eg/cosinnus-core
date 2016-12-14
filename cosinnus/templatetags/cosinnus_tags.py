@@ -343,7 +343,7 @@ def cosinnus_render_single_object(context, object, *args, **kwargs):
 
     :param object: the source object to render
     """
-    NAMED_ARGS = ['hide_group_name']
+    NAMED_ARGS = ['hide_group_name', 'no_space']
     
     model_name = object.__class__.__module__.split('.')[0] + '.' + object.__class__.__name__
     
