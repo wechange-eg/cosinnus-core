@@ -488,24 +488,26 @@
 				</div>
 				
 				{# Public objects box #}
-				{% if public_objects %}				
-					<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
-			            <ul class="media-list">
-			                <li class="media">
-			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
-			                    <div class="media-body">
-			                        {% trans "Recent Items" %}
-			                    </div>
-			                </li>
-			            </ul>
-			        </div><!-- btn -->
-			        <div class="" style="background-color: #ffffff !important;">
-			        	{% with user=anonymous_user %}
-				        	{% for public_object in public_objects %}
-				        		{% cosinnus_render_single_object public_object hide_group_name=True %}
-				        	{% endfor %}
-			        	{% endwith %}
-					</div>
+				{% if public_objects %}
+					{% for app_name, public_object_list in public_objects.items %}
+						<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+				            <ul class="media-list">
+				                <li class="media">
+				                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+				                    <div class="media-body">
+				                        {% trans app_name context "the_app" %}
+				                    </div>
+				                </li>
+				            </ul>
+				        </div><!-- btn -->
+				        <div class="" style="background-color: #ffffff !important;">
+				        	{% with user=anonymous_user %}
+					        	{% for public_object in public_object_list %}
+					        		{% cosinnus_render_single_object public_object hide_group_name=True %}
+					        	{% endfor %}
+				        	{% endwith %}
+						</div>
+					{% endfor %}
 				{% endif %}
 				
 				

@@ -304,8 +304,8 @@ class CosinnusConf(AppConf):
     # should empty apps list be displayed at all, or omitted?
     MICROSITE_RENDER_EMPTY_APPS = True
     
-    # how many public items should be shown on the microsite?
-    MICROSITE_PUBLIC_APPS_NUMBER_OF_ITEMS = 10
+    # how many public items per type should be shown on the microsite?
+    MICROSITE_PUBLIC_APPS_NUMBER_OF_ITEMS = 5
     
     #: A list of app_names (``'cosinnus_note'`` rather than ``note``) that will
     #: e.g. not be displayed in the cosinnus menu
