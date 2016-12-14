@@ -13,7 +13,7 @@
 	
         <div class="container ultra-space big-headers">
             <div class="row ultra-space"> {# class="vertical-align" #}
-            	<div class="col-md-4">
+            	<div class="col-md-4" {% if page.header_image %}style="margin-top: 30px"{% endif %}>
 			        {% if page.header_image %}
 			        	{% image page.header_image original class="image" %}
 			        {% endif %}
