@@ -390,7 +390,6 @@ class DisplayTaggedObjectsMixin(object):
             
         querysets = []
         for registered_model in aor:
-            
             app_label, model_name = registered_model.split('.')
             app_is_active = app_label not in group.get_deactivated_apps()
             
@@ -399,6 +398,11 @@ class DisplayTaggedObjectsMixin(object):
                 continue
             
             model_class = get_model(app_label, model_name)
+            
+            # only use basic tagged models, not extending ones (to avoid duplicates)
+            bases_modules = [base.__module__ for base in model_class.__bases__]
+            if not 'cosinnus.models.tagged' in bases_modules:
+                continue
             
             if hasattr(model_class, 'get_current'):
                 # get a pre-filtered user-specific recent set for this model
@@ -423,4 +427,7 @@ class DisplayTaggedObjectsMixin(object):
         items = sorted(chain(*querysets), key=lambda instance: instance.sort_key, reverse=True) 
         items = items[:item_limit]
         return items
+    
+    def sort_and_limit_single_queryset(self, queryset, item_limit=10):
+        return self.sort_and_limit_querysets([queryset], item_limit)
     

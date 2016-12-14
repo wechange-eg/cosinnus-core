@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from collections import defaultdict
+
 from django.contrib.auth.models import AnonymousUser
 from django.http.response import Http404
 from django.views.generic import TemplateView
@@ -19,9 +21,16 @@ class GroupMicrositeView(DipatchGroupURLMixin, GroupObjectCountMixin, DisplayTag
         return super(GroupMicrositeView, self).dispatch(request, *args, **kwargs)
     
     def get_public_objects(self):
+        """ Returns a dict {'<app_name': [<app_items>], ...} """
         querysets = self.get_object_querysets(group=self.group, cosinnus_apps=self.group.get_microsite_public_apps())
-        items = self.sort_and_limit_querysets(querysets, item_limit=settings.COSINNUS_MICROSITE_PUBLIC_APPS_NUMBER_OF_ITEMS)
-        return items
+        
+        public_objects = defaultdict(list)
+        for queryset in querysets:
+            items = self.sort_and_limit_single_queryset(queryset, item_limit=settings.COSINNUS_MICROSITE_PUBLIC_APPS_NUMBER_OF_ITEMS)
+            if items:
+                public_objects[items[0].get_cosinnus_app_name()].extend(items)
+        
+        return dict(public_objects)#.items()
     
     def get_context_data(self, **kwargs):
         context = super(GroupMicrositeView, self).get_context_data(**kwargs)
