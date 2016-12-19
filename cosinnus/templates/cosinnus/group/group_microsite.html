@@ -65,33 +65,52 @@
 		<div class="group-microsite-login-box overlay-box-gray">
 		
 			{% if not user.is_authenticated %}
-				<h2>{% trans "Join now and collaborate!" %}</h2> {#  Jetzt anmelden und mitgestalten #}
-                <span class="app-calendar"> {# Hacky green color #}
-	                <button href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
+				{% if request.GET.invited == "1" %}
+					<h2>{% trans "You have been invited to collaborate!" %}</h2> {#  Jetzt anmelden und mitgestalten #}
+					<span class="app-calendar"> {# Hacky green color #}
+		                <button href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}join/?direct=1" style="width: auto !important;" type="button" class="btn btn-emphasized">
+		                    <ul class="media-list">
+		                        <li class="media">
+		                            <a class="pull-left" href="#">
+		                                <i class="fa fa-user-plus"></i>
+		                            </a>
+		                            <div class="media-body">
+										{% trans "Register and join!" %}
+		                            </div>
+		                        </li>
+		                    </ul>
+		                </button>
+	                </span>
+				{% else %}
+					<h2>{% trans "Join now and collaborate!" %}</h2> {#  Jetzt anmelden und mitgestalten #}
+					<span class="app-calendar"> {# Hacky green color #}
+		                <button href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
+		                    <ul class="media-list">
+		                        <li class="media">
+		                            <a class="pull-left" href="#">
+		                                <i class="fa fa-user-plus"></i>
+		                            </a>
+		                            <div class="media-body">
+			                                {% trans "Register" %}
+		                            </div>
+		                        </li>
+		                    </ul>
+		                </button>
+	                </span>
+					<button href="{% url 'login' %}?next={{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
 	                    <ul class="media-list">
 	                        <li class="media">
 	                            <a class="pull-left" href="#">
-	                                <i class="fa fa-user-plus"></i>
+	                                <i class="fa fa-sign-in"></i>
 	                            </a>
 	                            <div class="media-body">
-	                                {% trans "Register" %}
+	                                {% trans "Login" %}
 	                            </div>
 	                        </li>
 	                    </ul>
 	                </button>
-                </span>
-	    		<button href="{% url 'login' %}?next={{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
-                    <ul class="media-list">
-                        <li class="media">
-                            <a class="pull-left" href="#">
-                                <i class="fa fa-sign-in"></i>
-                            </a>
-                            <div class="media-body">
-                                {% trans "Login" %}
-                            </div>
-                        </li>
-                    </ul>
-                </button>
+				{% endif %}
+	    		
                 
 	    	{% elif user.pk in group.members %}
 	    		<h2>{% trans "You are a member!" %}</h2>

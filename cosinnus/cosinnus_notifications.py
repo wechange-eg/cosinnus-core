@@ -14,7 +14,8 @@ from django.utils.translation import ugettext_lazy as _
 """ Signal definitions """
 # also see cosinnus.core.signals
 from cosinnus.core.signals import user_group_join_requested,\
-    user_group_invitation_accepted, user_group_invitation_declined
+    user_group_invitation_accepted, user_group_invitation_declined,\
+    user_group_recruited
 
 user_tagged_in_object = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
@@ -113,5 +114,26 @@ notifications = {
             'object_name': 'title', 
             'object_url': 'get_absolute_url', 
         },
-    },    
+    },   
+    'user_group_recruited': {
+        'label': '<hidden-user_group_recruited>', 
+        'mail_template': '<html-only>',
+        'subject_template': '<html-only>',
+        'signals': [user_group_recruited],
+        'default': True,
+        'hidden': True,
+        
+        'is_html': True,
+        'snippet_type': 'news',
+        'event_text': _('Invited you'),
+        'notification_text': _('%(sender_name)s would like you to come join the project "%(team_name)s" on %(portal_name)s! Click the project\'s name below to check it out and collaborate!'),
+        'subject_text': _('%(sender_name)s has invited you to join "%(team_name)s" on %(portal_name)s!'),
+        'data_attributes': {
+            'object_name': '_sender_name',
+            'object_url': 'get_member_page_url', # the group members page
+            'object_text': '_sender.cosinnus_profile.description', 
+        },
+        'origin_url_suffix': '?invited=1',
+        'notification_reason': 'none',
+    }, 
 }

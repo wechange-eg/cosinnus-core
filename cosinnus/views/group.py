@@ -6,7 +6,7 @@ from itertools import chain
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import ImproperlyConfigured
+from django.core.exceptions import ImproperlyConfigured, ValidationError
 from django.core.urlresolvers import reverse, reverse_lazy, NoReverseMatch
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
@@ -16,7 +16,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView,
     ListView, UpdateView, TemplateView)
 
 from cosinnus.core.decorators.views import membership_required, redirect_to_403,\
-    dispatch_group_access
+    dispatch_group_access, get_group_for_request
 from cosinnus.core.registries import app_registry
 from cosinnus.forms.group import MembershipForm, CosinnusLocationForm,\
     CosinnusGroupGalleryImageForm
@@ -44,7 +44,7 @@ from cosinnus.forms.tagged import get_form  # circular import
 from cosinnus.utils.urls import group_aware_reverse, get_non_cms_root_url
 from cosinnus.models.tagged import BaseTagObject
 from django.shortcuts import redirect, get_object_or_404
-from django.http.response import Http404
+from django.http.response import Http404, HttpResponseNotAllowed
 from cosinnus.utils.permissions import check_ug_admin, check_user_superuser,\
     check_object_read_access
 from cosinnus.views.widget import GroupDashboard
@@ -55,6 +55,14 @@ from django.conf import settings
 from django.core.paginator import Paginator
 from cosinnus.utils.user import filter_active_users
 from cosinnus.utils.functions import resolve_class
+from django.views.decorators.csrf import csrf_protect
+
+import logging
+from cosinnus.templatetags.cosinnus_tags import is_superuser
+from django.core.validators import validate_email
+from annoying.functions import get_object_or_None
+from django.contrib.auth.models import AnonymousUser
+logger = logging.getLogger('cosinnus')
 
 
 class SamePortalGroupMixin(object):
@@ -510,8 +518,13 @@ class GroupConfirmMixin(object):
     success_url = reverse_lazy('cosinnus:group-list')
     
     def get(self, *args, **kwargs):
-        messages.error(self.request, _('This action is not available directly!'))
-        return redirect(group_aware_reverse('cosinnus:group-detail', kwargs=kwargs))
+        """ We make the allowance to call this by GET if called with ?direct=1 param,
+            so that user joins can be automated with a direct link (like after being recruited) """
+        if not self.request.GET.get('direct', None) == '1':
+            messages.error(self.request, _('This action is not available directly!'))
+            return redirect(group_aware_reverse('cosinnus:group-detail', kwargs=kwargs))
+        else:
+            return self.post(*args, **kwargs)
 
     def post(self, *args, **kwargs):
         self.object = self.get_object()
@@ -564,7 +577,6 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
                 m.save()
                 messages.success(self.request, _('You had already been invited to "%(team_name)s" and have now been made a member immediately!') % {'team_name': self.object.name})
                 signals.user_group_invitation_accepted.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
-                self.referer = self.object.get_absolute_url()
         except CosinnusGroupMembership.DoesNotExist:
             CosinnusGroupMembership.objects.create(
                 user=self.request.user,
@@ -573,6 +585,7 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
             )
             signals.user_group_join_requested.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
             messages.success(self.request, self.message_success % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name})
+        self.referer = self.object.get_absolute_url()
         
 
 group_user_join = GroupUserJoinView.as_view()
@@ -944,3 +957,73 @@ class GroupStartpage(View):
             return self.dashboard_view(request, *args, **kwargs)
 
 group_startpage = GroupStartpage.as_view()
+
+
+@csrf_protect
+def group_user_recruit(request, group): 
+    MAXIMUM_EMAILS = 10
+    
+    if not request.method=='POST':
+        return HttpResponseNotAllowed(['POST'])
+    
+    # resolve group either from the slug, or like the permission group mixin does it
+    # (group type needs to also be used for that)
+    group = get_group_for_request(group, request)
+    if not group:
+        logger.error('No group found when trying to recruit users!', extra={'group_slug': group, 
+            'request': request, 'path': request.path})
+        return redirect(reverse('cosinnus:group-list'))
+    
+    emails = request.POST.get('emails', '')
+    user = request.user
+    redirect_url = request.META.get('HTTP_REFERER', group_aware_reverse('cosinnus:group-detail', kwargs={'group': group}))
+    
+    # do permission checking using has_write_access(request.user, group)
+    if not is_superuser(user) or not user.id in group.members:
+        logger.error('Permission error when trying to recruit users!', 
+             extra={'user': request.user, 'request': request, 'path': request.path, 'group_slug': group})
+        messages.error(request, _('Only group/project members have permission to do this!'))
+        return redirect(redirect_url)
+    
+    invalid = []
+    existing = []
+    success = []
+    
+    # format and validate emails
+    emails = emails.replace(';', ',').replace('\n', ',').replace('\r', ',').split(',')
+    for email in emails:
+        # stop after 10 fragments to prevent malicious overloading
+        if len(invalid) + len(existing) + len(success) > MAXIMUM_EMAILS:
+            break
+        
+        email = email.strip(' \t\n\r')
+        if not email:
+            continue
+        try:
+            validate_email(email)
+        except ValidationError:
+            invalid.append(email)
+            continue
+        # from here on, we have a real email. check if a user with that email exists
+        if get_object_or_None(get_user_model(), email=email):
+            existing.append(email) 
+        else:
+            success.append(email)
+    
+    # send emails as notification signal
+    virtual_users = []
+    for email in success:
+        virtual_user = AnonymousUser()
+        virtual_user.email = email
+        virtual_users.append(virtual_user)
+    signals.user_group_recruited.send(sender=user, obj=group, user=user, audience=virtual_users)
+    
+    if invalid:
+        messages.error(request, _("Sorry, these did not seem to be valid email addresses: %s") % ', '.join(invalid))
+    if existing:
+        messages.success(request, _("Good news! The people with these addresses already have a registered user account: %s") % ', '.join(existing))
+    if success:
+        messages.success(request, _("Success! We are now sending out invitations to these email addresses: %s") % ', '.join(success))
+        
+    return redirect(redirect_url)
+    

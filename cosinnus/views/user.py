@@ -36,6 +36,7 @@ from django.core.paginator import Paginator
 from cosinnus.views.mixins.group import EndlessPaginationMixin
 from cosinnus.utils.user import filter_active_users
 from uuid import uuid1
+from django.utils.encoding import force_text
 
 
 USER_MODEL = get_user_model()
@@ -117,12 +118,15 @@ class UserCreateView(CreateView):
 
     form_class = UserCreationForm
     model = USER_MODEL
-    success_url = reverse_lazy('login')
     template_name = 'cosinnus/registration/signup.html'
 
     message_success = _('User "%(user)s" was registered successfully. You can now log in using this username.')
     message_success_inactive = _('User "%(user)s" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address "%(email)s" when this happens.')
     message_success_email_verification = _('User "%(user)s" was registered successfully. We will send an email to your address %(email)s" soon. You need to confirm the email address before you can log in.')
+    
+    def get_success_url(self):
+        next_param = self.request.GET.get('next', '')
+        return reverse('login') + '?next=%s' % next_param if next_param else ''
     
     def form_valid(self, form):
         ret = super(UserCreateView, self).form_valid(form)
@@ -221,8 +225,20 @@ def approve_user(request, user_id):
     data.update({
         'user': user,
     })
+    template = 'cosinnus/mail/user_registration_approved.html'
+    
+    # if a welcome email text is set in the portal in admin, send that text instead of the default template
+    portal = CosinnusPortal.get_current()
+    welcome_text = getattr(portal, 'welcome_email_text', None) or '' 
+    welcome_text = force_text(welcome_text).strip()
+    if welcome_text:
+        template = None
+        data.update({
+           'content': portal.welcome_email_text,
+        })
+    
     subj_user = render_to_string('cosinnus/mail/user_registration_approved_subj.txt', data)
-    send_mail_or_fail_threaded(user.email, subj_user, 'cosinnus/mail/user_registration_approved.html', data)
+    send_mail_or_fail_threaded(user.email, subj_user, template, data)
     
     
     messages.success(request, _('Thank you for approving user %(username)s (%(email)s)! An introduction-email was sent out to them and they can now log in to the site.') \

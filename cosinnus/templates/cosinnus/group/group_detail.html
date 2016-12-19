@@ -273,7 +273,27 @@
 	        {% endfor %}
             
         {% endif %}
-		
+        
+        {% if user in members %}
+	        <legend>{% trans "Invite People to Register and Join" %}</legend>
+	        
+	        <button type="submit" class="btn btn-emphasized btn-left large-space" data-toggle="modal" data-target="#modal-recruit-users">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <a class="pull-left" href="#">
+	                        <i class="fa fa-user-plus"></i>
+	                    </a>
+	                    <div class="media-body">
+	                        {% trans "Invite people" %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </button>
+	        
+	        {% include 'cosinnus/common/modal_box_recruit_users.html' %}
+	        
+        {% endif %}
+	
         <legend>{% trans "Members" %}{% if member_count %} ({{ member_count }}){% endif %}</legend>
     
         {% for member in members %}
