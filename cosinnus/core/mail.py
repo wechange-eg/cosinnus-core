@@ -26,12 +26,22 @@ if 'djcelery' in settings.INSTALLED_APPS:
 
 
 def _django_send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=False):
-    """ From django.core.mail, extended with bcc """
+    """ From django.core.mail, extended with bcc 
+        Note: ``template`` can be None, if so we are looking for a ``content`` key in ``data`` to fill the email message."""
+    
     if from_email is None:
         portal_name =  force_text(_(settings.COSINNUS_BASE_PAGE_TITLE_TRANS))
         # add from-email readable name (yes, this is how this works)
         from_email = '%(portal_name)s <%(from_email)s>' % {'portal_name': portal_name, 'from_email': settings.COSINNUS_DEFAULT_FROM_EMAIL}
-    message = render_to_string(template, data)
+        
+    if template is not None:
+        message = render_to_string(template, data)
+    else:
+        if not 'content' in data:
+            import traceback
+            logger.error('Could not send email because of missing template/content parameters. Detail in extra.', extra={'to': to, 'trace': traceback.format_exc()})
+            return
+        message = data['content']
 
     connection = get_connection()
     mail = EmailMessage(subject, message, from_email, [to], bcc, connection=connection)

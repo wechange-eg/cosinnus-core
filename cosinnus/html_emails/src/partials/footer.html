@@ -5,6 +5,7 @@
         <columns large="10">
             <row class="opt-out">
                 <columns>
+                	{{#rwif notification_reason raw_if="notification_reason"}}
                     <p>
                     	{{#rw this}}notification_reason{{/rw}}
 
@@ -22,6 +23,7 @@
                             {{/if}}
                         </a>
                     </p>
+                    {{/rwif}}
                 </columns>
             </row>
         </columns>

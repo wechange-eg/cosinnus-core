@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-29 16:32+0100\n"
+"POT-Creation-Date: 2016-12-08 18:52+0100\n"
 "PO-Revision-Date: 2016-11-28 15:13+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -160,6 +160,20 @@ msgstr "Вы были отмечены %(sender_name)s"
 #, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
 msgstr "Вы были отмечены в \"%(object_name)s\" в %(team_name)s"
+
+#, fuzzy
+#| msgid "Invite user"
+msgid "Invited you"
+msgstr "Пригласить пользователя"
+
+#, python-format
+msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s  пожелал(а) присоединиться к %(team_name)s на %(site_name)s!"
 
 msgid "Deutsch"
 msgstr "Deutsch"
@@ -370,6 +384,12 @@ msgstr "Описание"
 
 msgid "Website"
 msgstr "Сайт"
+
+msgid "Welcome-Email Text"
+msgstr ""
+
+msgid "If set, this text overrides the default welcome e-mail text which will be sent on portals with \"Users Need Activation\" enabled."
+msgstr ""
 
 msgid "Public"
 msgstr "В открытом доступе"
@@ -1058,6 +1078,26 @@ msgstr "расширить"
 msgid "Shrink"
 msgstr "уменьшить"
 
+msgid "Enter the email addresses of people you wish to invite to join the platform."
+msgstr ""
+
+#, python-format
+msgid "We will send them an email asking them to sign up and join %(group_name)s."
+msgstr ""
+
+msgid "Enter up to 10 email addresses, one on each line or seperated with a comma"
+msgstr ""
+
+#, fuzzy
+#| msgid "Invited Members"
+msgid "Invite new Members"
+msgstr "Приглашенные Участники"
+
+#, fuzzy
+#| msgid "Invite user"
+msgid "Invite"
+msgstr "Пригласить пользователя"
+
 msgid "Rearrange"
 msgstr "перегруппировать"
 
@@ -1292,6 +1332,14 @@ msgstr "Отозвать приглашение для участника"
 
 msgid "Do you really want to decline the invitation?"
 msgstr "Вы действительно хотите отклонить приглашение?"
+
+msgid "Invite People to Register and Join"
+msgstr ""
+
+#, fuzzy
+#| msgid "Invite user"
+msgid "Invite people"
+msgstr "Пригласить пользователя"
 
 msgid "Send Message"
 msgstr "Отправить сообщение"
@@ -1559,6 +1607,16 @@ msgstr "Вам не нравится, как выглядит Ваш микро�
 
 msgid "Change it here..."
 msgstr "Измените его здесь…"
+
+#, fuzzy
+#| msgid "Join now and collaborate!"
+msgid "You have been invited to collaborate!"
+msgstr "Присоединяйтесь сейчас и давайте сотрудничать!"
+
+#, fuzzy
+#| msgid "Register"
+msgid "Register and join!"
+msgstr "Регистрация"
 
 msgid "Join now and collaborate!"
 msgstr "Присоединяйтесь сейчас и давайте сотрудничать!"
@@ -2946,6 +3004,22 @@ msgstr "Проект/группа уже активированы!"
 
 msgid "This project/group is already inactive!"
 msgstr "Проект/группа уже неактивны!"
+
+msgid "Only group/project members have permission to do this!"
+msgstr ""
+
+#, python-format
+msgid "Sorry, these did not seem to be valid email addresses: %s"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "This email address already has a registered user!"
+msgid "Good news! The people with these addresses already have a registered user account: %s"
+msgstr "Этот адрес электронной почты уже используется зарегистрированным пользователем!"
+
+#, python-format
+msgid "Success! We are now sending out invitations to these email addresses: %s"
+msgstr ""
 
 # ???
 msgid "No appname given for adding containers."
