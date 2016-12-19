@@ -68,7 +68,7 @@
 				{% if request.GET.invited == "1" %}
 					<h2>{% trans "You have been invited to collaborate!" %}</h2> {#  Jetzt anmelden und mitgestalten #}
 					<span class="app-calendar"> {# Hacky green color #}
-		                <button href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}join/?direct=1" style="width: auto !important;" type="button" class="btn btn-emphasized">
+		                <button href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}join/?direct=1" style="width: 100% !important;" type="button" class="btn btn-emphasized">
 		                    <ul class="media-list">
 		                        <li class="media">
 		                            <a class="pull-left" href="#">
