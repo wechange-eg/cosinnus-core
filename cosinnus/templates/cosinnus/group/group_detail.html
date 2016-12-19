@@ -274,7 +274,7 @@
             
         {% endif %}
         
-        {% if user in members %}
+        {% if user in members or user|is_superuser %}
 	        <legend>{% trans "Invite People to Register and Join" %}</legend>
 	        
 	        <button type="submit" class="btn btn-emphasized btn-left large-space" data-toggle="modal" data-target="#modal-recruit-users">
