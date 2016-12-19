@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-08 18:52+0100\n"
-"PO-Revision-Date: 2016-12-08 19:04+0100\n"
+"PO-Revision-Date: 2016-12-19 12:49+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -167,7 +167,7 @@ msgstr "Hat dich eingeladen"
 
 #, python-format
 msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
-msgstr "%(sender_name)s hat dich eingeladen auf %(portal_name)s dem Projekt \"%(team_name)s\" beizutreten! Klicke unten auf den Projektnamen um es dir anzuschauen und mitzumachen!"
+msgstr "%(sender_name)s hat dich eingeladen, auf %(portal_name)s dem Projekt \"%(team_name)s\" beizutreten! Klicke unten auf den Projektnamen um es dir anzuschauen und mitzumachen!"
 
 #, python-format
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
