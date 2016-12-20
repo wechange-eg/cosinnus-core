@@ -979,7 +979,8 @@ def group_user_recruit(request, group):
     redirect_url = request.META.get('HTTP_REFERER', group_aware_reverse('cosinnus:group-detail', kwargs={'group': group}))
     
     # do permission checking using has_write_access(request.user, group)
-    if not is_superuser(user) or not user.id in group.members:
+    
+    if not is_superuser(user) and not user.id in group.members:
         logger.error('Permission error when trying to recruit users!', 
              extra={'user': request.user, 'request': request, 'path': request.path, 'group_slug': group})
         messages.error(request, _('Only group/project members have permission to do this!'))
