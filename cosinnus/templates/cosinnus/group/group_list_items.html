@@ -114,7 +114,7 @@
                 {% endif %}
                 
                 {% if group.public or user.pk in members or user|is_superuser or user.pk in invited %}
-	                <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:group-detail' group=group %}">
+	                <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:group-microsite' group=group %}">
 	                    <ul class="media-list">
 	                        <li class="media">
 	                            <a class="pull-left" href="#">
