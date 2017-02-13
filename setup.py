@@ -118,7 +118,7 @@ setup(
         'git+git://github.com/sinnwerkstatt/django-select2.git@master#egg=Django-Select2',
         'git+git://github.com/sinnwerkstatt/django-awesome-avatar.git@master#egg=django-awesome-avatar',
         'git+git://github.com/saschan/django-djajax.git@master#egg=django-djajax',
-        'git+git://github.com/saschan/ethercalc-python.git@master#ethercalc-python-saschan',
+        'git+git://github.com/saschan/ethercalc-python.git@master#egg=ethercalc-python-saschan',
         'git+git://github.com/sinnwerkstatt/django-osm-field.git@master#egg=django-osm-field'
     ],
     classifiers=[
