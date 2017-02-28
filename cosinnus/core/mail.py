@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from cosinnus.conf import settings
 
 import logging
+import sys
 from threading import Thread
 logger = logging.getLogger('cosinnus')
 
@@ -81,7 +82,11 @@ def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None, is
         send_mail(to, subject, template, data, from_email, bcc, is_html=is_html)
     except Exception, e:
         # fail silently. log this, though
-        extra = {'to_user': to, 'subject': subject, 'exception': str(e)}
+        extra = {'to_user': to, 'subject': subject, 'exception': force_text(e), 'exc_reason': e}
+        try: 
+            extra.update({'sys_except': sys.exc_info()[0]})
+        except:
+            extra.update({'sys_except': 'could not print'})
         logger.warn('Cosinnus.core.mail: Failed to send mail!', extra=extra)
         if settings.DEBUG:
             print ">> extra:", extra 
