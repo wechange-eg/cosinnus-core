@@ -11,7 +11,9 @@ from cosinnus.conf import settings
 
 import logging
 import sys
+import html2text
 from threading import Thread
+from django.core.mail.message import EmailMultiAlternatives
 logger = logging.getLogger('cosinnus')
 
 __all__ = ['CELERY_AVAILABLE', 'send_mail']
@@ -45,10 +47,14 @@ def _django_send_mail(to, subject, template, data, from_email=None, bcc=None, is
         message = data['content']
 
     connection = get_connection()
-    mail = EmailMessage(subject, message, from_email, [to], bcc, connection=connection)
     if is_html:
-        mail.content_subtype = 'html'
-    return mail.send()
+        text_message = convert_html_email_to_plaintext(message)
+        mail = EmailMultiAlternatives(subject, text_message, from_email, [to], connection=connection)
+        mail.attach_alternative(message, 'text/html')
+        return mail.send()
+    else:
+        mail = EmailMessage(subject, message, from_email, [to], bcc, connection=connection)
+        return mail.send()
 
 
 if CELERY_AVAILABLE:
@@ -62,7 +68,24 @@ else:
                                  from_email=from_email, bcc=bcc, is_html=is_html)
         
         
-        
+def convert_html_email_to_plaintext(html_message):
+    """ Converts a cosinnus HTML rendered message to useful plaintext """
+    
+    htmler = html2text.HTML2Text()
+    htmler.ignore_images = True
+    htmler.body_width = 0
+    text_message = htmler.handle(html_message)
+    # clean text message from any lines containing ONLY '-' or '|' in any order, but preserve newlines
+    clean_text = ''
+    for line in text_message.split('\n'):
+        line = line.strip()
+        if len(line) > 0 and len(line.replace('|', '').replace('-', '').replace(' ', '')) == 0:
+            continue
+        if line.startswith('| '):
+            continue
+        clean_text += line + '\n'
+    return clean_text
+
 
 def _mail_print(to, subject, template, data, from_email=None, bcc=None, is_html=False):
     """ DEBUG ONLY """

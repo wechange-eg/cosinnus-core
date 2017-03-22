@@ -87,6 +87,7 @@ setup(
         'fabvenv==0.1.1',
         'jsonfield==1.0.0',
         'html5lib==0.99',
+        'html2text==2016.9.19',
         'paramiko==1.12.0',
         'pycrypto==2.6.1',
         'requests==2.0.1',
