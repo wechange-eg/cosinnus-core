@@ -17,9 +17,9 @@ django-filer==0.9.12
 django-filter==0.11.0
 django-geoposition==0.1.5
 django-haystack==2.3.1
+django-mailbox==4.5.4
 django-model-utils==1.5.0
 django-phonenumber-field==1.1.0
-django-postman==3.3.1
 django-recaptcha==1.0.2
 django-sekizai
 django-suit==0.2.15

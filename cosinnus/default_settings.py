@@ -204,6 +204,7 @@ def compile_installed_apps(internal_apps=[]):
         'bootstrap3_datetime',
         'captcha',
         'djajax',
+        'django_mailbox',
         'easy_thumbnails',
         'embed_video',
         'endless_pagination',
