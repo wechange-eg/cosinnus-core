@@ -64,6 +64,8 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^housekeeping/user_statistics', 'housekeeping.user_statistics', name='housekeeping-user-statistics'),
     url(r'^housekeeping/create_map_test_entities/(?P<count>\d+)/', 'housekeeping.create_map_test_entities', name='housekeeping-create-map-test-entities'),
     url(r'^housekeeping/reset_user_tos_flags/', 'housekeeping.reset_user_tos_flags', name='housekeeping-reset-user-tos-flags'),
+    url(r'^housekeeping/send_testmail/', 'housekeeping.send_testmail', name='housekeeping-send-testmail'),
+    
     
     url(r'^select2/', include('cosinnus.urls_select2', namespace='select2')),
 )

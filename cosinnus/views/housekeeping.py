@@ -25,6 +25,9 @@ import random
 from django.utils.timezone import now
 from cosinnus.utils.user import filter_active_users
 from cosinnus.models.profile import get_user_profile_model
+from django.core.mail.message import EmailMessage
+from cosinnus.core.mail import send_mail_or_fail, send_mail,\
+    send_mail_or_fail_threaded
 
 
 def housekeeping(request=None):
@@ -322,3 +325,29 @@ def reset_user_tos_flags(request=None):
         ret = 'Successfully reset the ToS flag for %d users.' % count
         
     return HttpResponse(ret)
+
+def send_testmail(request):
+    if request and not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    mode = request.GET.get('mode', None)
+    if mode not in ['or_fail', 'direct', 'threaded', 'override']:
+        mode = 'or_fail'
+    
+    subject =  mode + ': Testmail from Housekeeping at %s' % str(now())
+    template = 'cosinnus/common/internet_explorer_not_supported.html'
+    retmsg = '\n\n<br><br> Use ?mode=[or_fail, direct, threaded, override]'
+    
+    if mode == 'or_fail':
+        send_mail_or_fail(request.user.email, subject, template, {})
+        return HttpResponse('Sent mail using or_fail mode. ' + retmsg)
+    if mode == 'direct':
+        send_mail(request.user.email, subject, template, {})
+        return HttpResponse('Sent mail using direct mode. ' + retmsg)
+    if mode == 'threaded':
+        send_mail_or_fail_threaded(request.user.email, subject, template, {})
+        return HttpResponse('Sent mail using threaded mode. ' + retmsg)
+    if mode == 'override':
+        EmailMessage(subject, 'No content', 'Testing <%s>' % settings.COSINNUS_DEFAULT_FROM_EMAIL, [request.user.email]).send()
+        return HttpResponse('Sent mail using override mode. ' + retmsg)
+        
+    return HttpResponse('Did not send any mail. ' + retmsg)
