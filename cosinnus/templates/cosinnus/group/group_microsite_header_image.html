@@ -1,1 +1,15 @@
-<img class="image" src="{% if group.wallpaper %}{{ group.static_wallpaper_url }}{% else %}{% if COSINNUS_CURRENT_PORTAL.protocol %}{{ COSINNUS_CURRENT_PORTAL.protocol }}{% else %}{% if SETTINGS.COSINNUS_SITE_PROTOCOL %}{{ SETTINGS.COSINNUS_SITE_PROTOCOL }}{% else %}http{% endif %}{% endif %}://placehold.it/1140x240/ffffff/000000?text=+{% endif %}"></img>
+{% load static %}
+<img class="image" src="{% if group.wallpaper %}{{ group.static_wallpaper_url }}{% else %}{% static 'img/microsite-background-placeholder.png' %}{% endif %}"></img>
+{% comment %}  
+    Placehold.it placeholder image for resolutions
+    {% if COSINNUS_CURRENT_PORTAL.protocol %}
+        {{ COSINNUS_CURRENT_PORTAL.protocol }}
+    {% else %}
+        {% if SETTINGS.COSINNUS_SITE_PROTOCOL %}
+            {{ SETTINGS.COSINNUS_SITE_PROTOCOL }}
+        {% else %}
+            http
+        {% endif %}
+    {% endif %}
+    ://placehold.it/1140x240/ffffff/000000?text=+
+{% endcomment %}
