@@ -13,7 +13,7 @@ from awesome_avatar import forms as avatar_forms
 from cosinnus.models.group import (CosinnusGroupMembership,
     MEMBERSHIP_MEMBER, CosinnusPortal,
     CosinnusLocation, RelatedGroups, CosinnusGroupGalleryImage,
-    MEMBERSHIP_INVITED_PENDING)
+    MEMBERSHIP_INVITED_PENDING, CosinnusGroupCallToActionButton)
 from cosinnus.core.registries.apps import app_registry
 from cosinnus.conf import settings
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
@@ -97,7 +97,8 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
     class Meta:
         fields = ['name', 'public', 'description', 'description_long', 'contact_info', 
                         'avatar', 'wallpaper', 'website', 'video', 'twitter_username',
-                         'twitter_widget_id', 'flickr_url', 'deactivated_apps', 'microsite_public_apps'] \
+                         'twitter_widget_id', 'flickr_url', 'deactivated_apps', 'microsite_public_apps',
+                         'call_to_action_active', 'call_to_action_title', 'call_to_action_description'] \
                         + getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_FORM_FIELDS', []) \
                         + (['facebook_group_id', 'facebook_page_id',] if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED else [])
 
@@ -243,5 +244,11 @@ class CosinnusGroupGalleryImageForm(forms.ModelForm):
         model = CosinnusGroupGalleryImage
         fields = ('group', 'image', )
         
+        
+class CosinnusGroupCallToActionButtonForm(forms.ModelForm):
 
+    class Meta:
+        model = CosinnusGroupCallToActionButton
+        fields = ('group', 'label', 'url', )
+        
 

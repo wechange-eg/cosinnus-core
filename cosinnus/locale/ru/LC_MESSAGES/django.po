@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-08 18:52+0100\n"
+"POT-Creation-Date: 2017-03-29 18:12+0200\n"
 "PO-Revision-Date: 2017-01-09 11:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -495,6 +495,20 @@ msgstr "Микросайт Твиттер Лента новостей Custom Wid
 msgid "Flickr Gallery URL"
 msgstr "Ссылка на Flickr Gallery/Слайдшоу галерею"
 
+msgid "Call to Action Microsite Box active"
+msgstr ""
+
+#, fuzzy
+#| msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
+msgid "If this is active, a Call to Action box will be shown on the microsite."
+msgstr "Это публичное описание, доступ к которому есть у всех и которое появится на микросайте."
+
+msgid "Call to Action Box title"
+msgstr ""
+
+msgid "Call to Action Box Description"
+msgstr ""
+
 msgid "Deactivated Apps"
 msgstr "Деактивированные приложения"
 
@@ -532,6 +546,14 @@ msgstr "Slug не может быть пустым"
 
 msgid "The URL for this team has changed. A redirect from all existing URLs has automatically been created!"
 msgstr "Ссылка этой группы изменена. Создано автоматическое перенаправление со всех существующих ссылок!"
+
+#, python-format
+msgid "Request about your project \"%(group_name)s\""
+msgstr ""
+
+#, python-format
+msgid "Request about your group \"%(group_name)s\""
+msgstr ""
 
 msgid "Team membership"
 msgstr "Членство в группе"
@@ -587,6 +609,15 @@ msgstr "Группа Cosinnus Галерея изображение"
 
 msgid "CosinnusGroup GalleryImages"
 msgstr "Группа Cosinnus Галерея изображения"
+
+msgid "URL"
+msgstr ""
+
+msgid "CosinnusGroup CallToAction Button"
+msgstr ""
+
+msgid "CosinnusGroup CallToAction Buttons"
+msgstr ""
 
 msgid "Cosinnus group"
 msgstr "Группа Cosinnus"
@@ -1279,6 +1310,14 @@ msgstr "Пригласить участника"
 msgid "Invite user"
 msgstr "Пригласить пользователя"
 
+msgid "Invite People to Register and Join"
+msgstr ""
+
+#, fuzzy
+#| msgid "Invite user"
+msgid "Invite people"
+msgstr "Пригласить пользователя"
+
 msgid "Membership requests"
 msgstr "Заявки на вступление"
 
@@ -1332,14 +1371,6 @@ msgstr "Отозвать приглашение для участника"
 
 msgid "Do you really want to decline the invitation?"
 msgstr "Вы действительно хотите отклонить приглашение?"
-
-msgid "Invite People to Register and Join"
-msgstr ""
-
-#, fuzzy
-#| msgid "Invite user"
-msgid "Invite people"
-msgstr "Пригласить пользователя"
 
 msgid "Send Message"
 msgstr "Отправить сообщение"
@@ -1458,6 +1489,16 @@ msgstr "Где Вы проводите свой проект?"
 msgid "Enter a place or address."
 msgstr "Укажите место/адрес"
 
+#, fuzzy
+#| msgid "My location"
+msgid "Remove location"
+msgstr "Моё местоположение"
+
+#, fuzzy
+#| msgid "My location"
+msgid "Add location"
+msgstr "Моё местоположение"
+
 msgid "Which Group does the group belong to?"
 msgstr "К какой группе относится проект?"
 
@@ -1521,12 +1562,6 @@ msgstr "Контактная информация. Как Вас найти, а�
 msgid "From which apps should public items be shown on the microsite?"
 msgstr ""
 
-msgid "Microsite Gallery Images"
-msgstr "Микросайт Галерея изображений"
-
-msgid "Choose and upload a gallery image"
-msgstr "Выбрать и загрузить изображение галереи"
-
 msgid "Video"
 msgstr "Видео"
 
@@ -1553,6 +1588,56 @@ msgstr "Интегрировать Flickr Gallery/Слайдшоу галере�
 
 msgid "Flickr Gallery URL (example: \"https://www.flickr.com/photos/username/sets/1234567890\")"
 msgstr "Ссылка Flickr Gallery/Слайдшоу галереи (например: \"https://www.flickr.com/photos/username/sets/1234567890\")"
+
+msgid "Microsite Gallery Images"
+msgstr "Микросайт Галерея изображений"
+
+msgid "Choose and upload a gallery image"
+msgstr "Выбрать и загрузить изображение галереи"
+
+#, fuzzy
+#| msgid "Microsite Gallery Images"
+msgid "Remove gallery image"
+msgstr "Микросайт Галерея изображений"
+
+#, fuzzy
+#| msgid "Wallpaper image"
+msgid "Add gallery image"
+msgstr "Фоновое изображение"
+
+msgid "Show Microsite Call to Action Box"
+msgstr ""
+
+msgid "Show Call to Action Box"
+msgstr ""
+
+msgid "Call to Action Box Title"
+msgstr ""
+
+msgid "Title of the box header"
+msgstr ""
+
+#, fuzzy
+#| msgid "Description and Infos"
+msgid "Description text inside the box"
+msgstr "Описание и информация"
+
+msgid "Call to Action Button"
+msgstr ""
+
+msgid "Label of the Button"
+msgstr ""
+
+msgid "Link URL"
+msgstr ""
+
+#, fuzzy
+#| msgid "Remove Member"
+msgid "Remove button"
+msgstr "Удалить пользователя из проекта"
+
+msgid "Add button"
+msgstr ""
 
 msgid "Facebook integration is available after you created the group!"
 msgstr "Фейсбук-Интеграция будет доступна, как только Вы создадите группу!"
@@ -1687,14 +1772,26 @@ msgstr "Контакт"
 msgid "No contact data has been added yet."
 msgstr "Контактная информация ещё не была внесена"
 
-msgid "Recent Items"
-msgstr ""
+#, fuzzy
+#| msgid "Portal Administrators"
+msgid "Project Administrator"
+msgstr "Администраторы портала"
+
+#, fuzzy
+#| msgid "Portal Administrators"
+msgid "Group Administrator"
+msgstr "Администраторы портала"
 
 msgid "Tweets"
 msgstr "Tweets"
 
 msgid "Flickr Gallery"
 msgstr "Галерея Flickr/Слайдшоу"
+
+#, fuzzy
+#| msgid "Tag location"
+msgid "Call to Action"
+msgstr "Отметить место"
 
 #, python-format
 msgid "Users in team %(group)s"

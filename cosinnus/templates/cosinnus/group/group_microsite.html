@@ -505,6 +505,33 @@
 						{% endblock microsite_group_contact %}
 		        	</p>
 				</div>
+				{% with group_admins=group.actual_admins %}
+				    {% if group_admins %}
+						<div class="white-content">
+						    <p>
+						        <b>{% if group.type == 0 %}{% trans "Project Administrator" %}{% else %}{% trans "Group Administrator" %}{% endif %}:</b>&nbsp;
+						        {% for admin in group_admins %}
+						            <a href="{{ admin|profile_url }}" >{{ admin|full_name }}</a>
+						            {% if not forloop.last %}, {% endif %}
+						        {% endfor %}
+						    </p>
+						    {% with contact_url=group.get_admin_contact_url %}
+							    <button href="{% if user.is_authenticated %}{{ contact_url }}{% else %}{% url 'login' %}?next={{ contact_url|urlencode }}{% endif %}" type="button" class="btn btn-emphasized" style="float: none; margin-left: 0px;">
+			                        <ul class="media-list">
+			                            <li class="media">
+			                                <a class="pull-left" href="#">
+			                                    <i class="fa fa-envelope"></i>
+			                                </a>
+			                                <div class="media-body">
+			                                    {% trans "Contact" %}
+			                                </div>
+			                            </li>
+			                        </ul>
+			                    </button>
+		                    {% endwith %}
+						</div>
+				    {% endif %}
+				{% endwith %}
 				
 				{# Public objects box #}
 				{% if public_objects %}
@@ -549,7 +576,7 @@
 			            </ul>
 			        </div><!-- btn -->
 			        <div class="white-content no-padding">
-			        	<iframe src="{% group_url 'cosinnus:note:embed' group=group %}" style="width: 100%; height: 250px;" frameborder=0></iframe>
+			        	<iframe src="{% group_url 'cosinnus:note:embed' group=group %}" style="width: 100%; height: 350px;" frameborder=0></iframe>
 					</div>
 				{% endif %}
 				
@@ -604,6 +631,49 @@
 			        	{% include 'cosinnus/common/embed_flickr_field.html' with data=group.get_flickr_properties %}
 					</div>
 				{% endif %}
+				
+				{% with call_to_action_buttons=group.call_to_action_buttons.all  %}
+					{% if group.call_to_action_active %}
+					    {% if call_to_action_buttons or group.call_to_action_description %}
+						    {# Call to Action box #}
+						    <div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+		                        <ul class="media-list">
+		                            <li class="media">
+		                                <a class="pull-left btn-extra-emphasized" href="#"></a>
+		                                <div class="media-body">
+		                                    {% if group.call_to_action_title %}
+		                                        {{ group.call_to_action_title }}
+		                                    {% else %}
+		                                        {% trans "Call to Action" %}
+		                                    {% endif %}
+		                                </div>
+		                            </li>
+		                        </ul>
+		                    </div><!-- btn -->
+		                    <div class="white-content">
+		                        {% if group.call_to_action_description %}
+		                            <p>
+		                                {{ group.call_to_action_description|textfield }}
+		                            </p>
+		                        {% endif %}
+		                        {% for cta_button in call_to_action_buttons %}
+		                            <button href="{{ cta_button.url }}" target="_blank" type="button" class="btn btn-emphasized" style="float: none; margin-left: 0px;">
+	                                    <ul class="media-list">
+	                                        <li class="media">
+	                                            <a class="pull-left" href="#">
+	                                                <i class="fa fa-external-link"></i>
+	                                            </a>
+	                                            <div class="media-body">
+	                                                {{ cta_button.label }}
+	                                            </div>
+	                                        </li>
+	                                    </ul>
+	                                </button>
+		                        {% endfor %}
+		                    </div>
+		                {% endif %}
+					{% endif %}
+				{% endwith %}
 				
 				
 			{% endblock microsite_right_column %}

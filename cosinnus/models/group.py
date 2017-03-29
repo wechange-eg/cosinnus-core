@@ -660,6 +660,15 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
     # Flickr gallery field, requires a flickr URL to a gallery
     flickr_url = models.URLField(_('Flickr Gallery URL'), max_length=200, blank=True, null=True, validators=[MaxLengthValidator(200)])
     
+    # Call to Action Microsite Box
+    call_to_action_active = models.BooleanField(_('Call to Action Microsite Box active'),
+        help_text=_('If this is active, a Call to Action box will be shown on the microsite.'),
+        default=False)
+    call_to_action_title = models.CharField(_('Call to Action Box title'), max_length=250, validators=[MaxLengthValidator(250)],
+        blank=True, null=True)
+    call_to_action_description = models.TextField(verbose_name=_('Call to Action Box Description'), 
+        blank=True, null=True)
+    
     # a comma-seperated list of all cosinnus apps that should not be shown in the frontend, 
     # be editable, or be indexed by search indices for this group
     deactivated_apps = models.CharField(_('Deactivated Apps'), max_length=255, 
@@ -790,6 +799,13 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
     @property
     def admins(self):
         return CosinnusGroupMembership.objects.get_admins(self.pk)
+    
+    @property
+    def actual_admins(self):
+        """ Returns a QS of users that are admins of this group and are actually active and visible on the site """
+        qs = get_user_model().objects.filter(id__in=self.admins)
+        qs = filter_active_users(qs)
+        return qs
 
     def is_admin(self, user):
         """Checks whether the given user is an admin of this group"""
@@ -803,10 +819,10 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
     
     @property
     def actual_members(self):
-        """ Returns a QS of users that are members of this group and actually active and visible on the site """
-        members_qs = get_user_model().objects.filter(id__in=self.members)
-        members_qs = filter_active_users(members_qs)
-        return members_qs
+        """ Returns a QS of users that are members of this group and are actually active and visible on the site """
+        qs = get_user_model().objects.filter(id__in=self.members)
+        qs = filter_active_users(qs)
+        return qs
     
     @property
     def member_count(self):
@@ -828,13 +844,37 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
         return uid in self.pendings
     
     @property
+    def actual_pendings(self):
+        """ Returns a QS of users that have a pending status on this group and are actually active and visible on the site """
+        qs = get_user_model().objects.filter(id__in=self.pendings)
+        qs = filter_active_users(qs)
+        return qs
+    
+    @property
     def invited_pendings(self):
+        """ Returns a QS of users that have a pending invitation on this group """
         return CosinnusGroupMembership.objects.get_invited_pendings(self.pk)
 
     def is_invited_pending(self, user):
         """Checks whether the given user has a pending invitation status on this group"""
         uid = isinstance(user, int) and user or user.pk
         return uid in self.invited_pendings
+    
+    @property
+    def actual_invited_pendings(self):
+        """ Returns a QS of users that have a pending invitation on this group and are actually active and visible on the site """
+        qs = get_user_model().objects.filter(id__in=self.invited_pendings)
+        qs = filter_active_users(qs)
+        return qs
+    
+    def get_admin_contact_url(self):
+        subject = _('Request about your project "%(group_name)s"') if self.type == self.TYPE_PROJECT else _('Request about your group "%(group_name)s"')
+        subject = subject % {'group_name': self.name} 
+        return '%s?subject=%s&next=%s' % (
+            reverse('postman:write', kwargs={'recipients': ':'.join(['sascha', 'newuser'])}), 
+            subject,
+            reverse('postman:sent')
+        )
     
     @classmethod
     def _clear_cache(self, slug=None, slugs=None, group=None):
@@ -1369,6 +1409,23 @@ class CosinnusGroupGalleryImage(ThumbnailableImageMixin, models.Model):
     @property
     def image_url(self):
         return self.image.url if self.image else None
+    
+    
+class CosinnusGroupCallToActionButton(models.Model):
+    
+    label = models.CharField(_('Title'), max_length=250, null=False, blank=False) 
+    url = models.URLField(_('URL'), max_length=200, blank=False, null=False, validators=[MaxLengthValidator(200)])
+    
+    group = models.ForeignKey(
+        settings.COSINNUS_GROUP_OBJECT_MODEL,
+        verbose_name=_('Team'),
+        on_delete=models.CASCADE,
+        related_name='call_to_action_buttons',
+    )
+    
+    class Meta:
+        verbose_name = _('CosinnusGroup CallToAction Button')
+        verbose_name_plural = _('CosinnusGroup CallToAction Buttons')
     
 
 

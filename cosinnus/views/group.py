@@ -19,10 +19,11 @@ from cosinnus.core.decorators.views import membership_required, redirect_to_403,
     dispatch_group_access, get_group_for_request
 from cosinnus.core.registries import app_registry
 from cosinnus.forms.group import MembershipForm, CosinnusLocationForm,\
-    CosinnusGroupGalleryImageForm
+    CosinnusGroupGalleryImageForm, CosinnusGroupCallToActionButtonForm
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, CosinnusPortal, CosinnusLocation,
-    CosinnusGroupGalleryImage, MEMBERSHIP_INVITED_PENDING)
+    CosinnusGroupGalleryImage, MEMBERSHIP_INVITED_PENDING,
+    CosinnusGroupCallToActionButton)
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.serializers.group import GroupSimpleSerializer
 from cosinnus.models.serializers.profile import UserSimpleSerializer
@@ -85,13 +86,19 @@ class CosinnusGroupGalleryImageInlineFormset(InlineFormSet):
     max_num = 6
     form_class = CosinnusGroupGalleryImageForm
     model = CosinnusGroupGalleryImage
+    
+class CosinnusGroupCallToActionButtonInlineFormset(InlineFormSet):
+    extra = 10
+    max_num = 10
+    form_class = CosinnusGroupCallToActionButtonForm
+    model = CosinnusGroupCallToActionButton
 
 
 class CosinnusGroupFormMixin(object):
     
     model = CosinnusGroup
     # we can define additional inline formsets in settings.COSINNUS_GROUP_ADDITIONAL_INLINE_FORMSETS
-    inlines = [CosinnusLocationInlineFormset, CosinnusGroupGalleryImageInlineFormset] \
+    inlines = [CosinnusLocationInlineFormset, CosinnusGroupGalleryImageInlineFormset, CosinnusGroupCallToActionButtonInlineFormset] \
                 + ([resolve_class(class_path) for class_path in settings.COSINNUS_GROUP_ADDITIONAL_INLINE_FORMSETS] \
                     if getattr(settings, 'COSINNUS_GROUP_ADDITIONAL_INLINE_FORMSETS', []) else [])
     template_name = 'cosinnus/group/group_form.html'
