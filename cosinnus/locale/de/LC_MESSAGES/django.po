@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-08 18:52+0100\n"
-"PO-Revision-Date: 2017-01-11 13:08+0100\n"
+"POT-Creation-Date: 2017-03-29 18:12+0200\n"
+"PO-Revision-Date: 2017-03-29 18:22+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -488,6 +488,18 @@ msgstr ""
 msgid "Flickr Gallery URL"
 msgstr "Flickr Gallerie/Slideshow URL"
 
+msgid "Call to Action Microsite Box active"
+msgstr "Aufruf zum Handeln - Microsite-Box aktiv"
+
+msgid "If this is active, a Call to Action box will be shown on the microsite."
+msgstr "Wenn dies aktiv ist, wird die Aufruf zum Handeln - Microsite-Box auf der Microsite angezeigt."
+
+msgid "Call to Action Box title"
+msgstr "Aufruf zum Handeln - Microsite-Box Titel"
+
+msgid "Call to Action Box Description"
+msgstr "Aufruf zum Handeln - Microsite-Box Beschreibungstext"
+
 msgid "Deactivated Apps"
 msgstr "Deaktivierte Apps"
 
@@ -523,6 +535,14 @@ msgstr "Slug darf nicht leer sein."
 
 msgid "The URL for this team has changed. A redirect from all existing URLs has automatically been created!"
 msgstr "Durch die Änderung hat sich die URL der Gruppe geändert. Eine dauerhafte Weiterleitung von der alten auf die neue Adresse wurde automatisch eingerichtet!"
+
+#, python-format
+msgid "Request about your project \"%(group_name)s\""
+msgstr "Frage zu deinem Projekt \"%(group_name)s\""
+
+#, python-format
+msgid "Request about your group \"%(group_name)s\""
+msgstr "Frage zu deiner Gruppe \"%(group_name)s\""
 
 msgid "Team membership"
 msgstr "Gruppen/Projekt-Mitgliedschaft"
@@ -582,6 +602,15 @@ msgstr "CosinnusGroup Galleriebild"
 msgid "CosinnusGroup GalleryImages"
 msgstr "CosinnusGroup Galleriebilder"
 
+msgid "URL"
+msgstr ""
+
+msgid "CosinnusGroup CallToAction Button"
+msgstr "CosinnusGroup CallToAction Button"
+
+msgid "CosinnusGroup CallToAction Buttons"
+msgstr "CosinnusGroup CallToAction Buttons"
+
 msgid "Cosinnus group"
 msgstr "Gruppe"
 
@@ -589,7 +618,7 @@ msgid "Cosinnus groups"
 msgstr "Gruppen"
 
 msgid "Language"
-msgstr ""
+msgstr "Sprache"
 
 msgid "Terms of Service"
 msgstr "Nutzungsbedingungen"
@@ -741,7 +770,7 @@ msgid "Portal Root Page"
 msgstr "Portal-Root Seite"
 
 msgid "Assigned Portal"
-msgstr ""
+msgstr "Zugewiesenes Portal"
 
 msgid "Footer"
 msgstr ""
@@ -1277,6 +1306,12 @@ msgstr "Mitglied einladen"
 msgid "Invite user"
 msgstr "Benutzer einladen"
 
+msgid "Invite People to Register and Join"
+msgstr "Lade Leute zum Registrieren und Beitreten ein"
+
+msgid "Invite people"
+msgstr "Leute einladen"
+
 msgid "Membership requests"
 msgstr "Mitglieder-Anträge"
 
@@ -1330,12 +1365,6 @@ msgstr "Einladung für Benutzer zurückziehen"
 
 msgid "Do you really want to decline the invitation?"
 msgstr "Möchtest du die Einladung wirklich ablehnen?"
-
-msgid "Invite People to Register and Join"
-msgstr "Lade Leute zum Registrieren und Beitreten ein"
-
-msgid "Invite people"
-msgstr "Leute einladen"
 
 msgid "Send Message"
 msgstr "Nachricht schicken"
@@ -1439,7 +1468,7 @@ msgid "File Size"
 msgstr "Dateigröße"
 
 msgid "max. 10 MB"
-msgstr ""
+msgstr "max. 10 MB"
 
 msgid "Description and Infos"
 msgstr "Beschreibung und Infos"
@@ -1455,6 +1484,12 @@ msgstr "Wo bist du aktiv?"
 
 msgid "Enter a place or address."
 msgstr "Gib einen Ort oder Adresse ein."
+
+msgid "Remove location"
+msgstr "Ort entfernen"
+
+msgid "Add location"
+msgstr "Ort hinzufügen"
 
 msgid "Which Group does the group belong to?"
 msgstr "Welcher Gruppe gehört das Projekt an?"
@@ -1520,12 +1555,6 @@ msgstr "Kontaktinfos. Wie man euch erreichen kann - Adressen, Social Media Links
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "Aus welchen Anwendungen sollen öffentliche Inhalte auf der Microsite angezeigt werden?"
 
-msgid "Microsite Gallery Images"
-msgstr "Microsite Galleriebilder"
-
-msgid "Choose and upload a gallery image"
-msgstr "Wähle ein Galleriebild zum Hochladen aus"
-
 msgid "Video"
 msgstr "Video"
 
@@ -1552,6 +1581,48 @@ msgstr "Flickr Gallerie einbinden"
 
 msgid "Flickr Gallery URL (example: \"https://www.flickr.com/photos/username/sets/1234567890\")"
 msgstr "Flickr Gallerie URL (Beispiel: \"https://www.flickr.com/photos/username/sets/1234567890\")"
+
+msgid "Microsite Gallery Images"
+msgstr "Microsite Galleriebilder"
+
+msgid "Choose and upload a gallery image"
+msgstr "Wähle ein Galleriebild zum Hochladen aus"
+
+msgid "Remove gallery image"
+msgstr "Galleriebild entfernen"
+
+msgid "Add gallery image"
+msgstr "Galleriebild hinzufügen"
+
+msgid "Show Microsite Call to Action Box"
+msgstr "Aufruf zum Handeln - Microsite-Box anzeigen"
+
+msgid "Show Call to Action Box"
+msgstr "Zeige die Microsite-Box an"
+
+msgid "Call to Action Box Title"
+msgstr "Aufruf zum Handeln - Microsite-Box Titel"
+
+msgid "Title of the box header"
+msgstr "Titel der Box-Überschrift"
+
+msgid "Description text inside the box"
+msgstr "Beschreibungstext in der Box"
+
+msgid "Call to Action Button"
+msgstr "Aufruf zum Handeln - Microsite-Box Link"
+
+msgid "Label of the Button"
+msgstr "Text des Links"
+
+msgid "Link URL"
+msgstr "URL des Links"
+
+msgid "Remove button"
+msgstr "Link entfernen"
+
+msgid "Add button"
+msgstr "Link hinzufügen"
 
 msgid "Facebook integration is available after you created the group!"
 msgstr "Die Facebook-Integration wird verfügbar sobald du die Gruppe erstellt hast!"
@@ -1682,14 +1753,20 @@ msgstr "Kontakt"
 msgid "No contact data has been added yet."
 msgstr "Es wurden noch keine Kontaktdaten eingetragen."
 
-msgid "Recent Items"
-msgstr "Aktuelle Inhalte"
+msgid "Project Administrator"
+msgstr "Projekt-Administrator"
+
+msgid "Group Administrator"
+msgstr "Gruppen-Administrator"
 
 msgid "Tweets"
 msgstr "Tweets"
 
 msgid "Flickr Gallery"
 msgstr "Flickr Gallerie"
+
+msgid "Call to Action"
+msgstr "Aufruf zum Handeln"
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -2466,13 +2543,11 @@ msgstr "Suche"
 msgid "Search in Apps"
 msgstr "Suche in Anwendungen"
 
-#, fuzzy
-#| msgid "Etherpads"
 msgid "Ethercalcs"
-msgstr "Dokumente"
+msgstr "Ethercalcs"
 
 msgid "Offers"
-msgstr ""
+msgstr "Inserate"
 
 msgid "Search in teams"
 msgstr "In Projekten suchen"
@@ -2981,7 +3056,7 @@ msgid "This project/group is already inactive!"
 msgstr "Dieses Projekt/Gruppe ist bereits inaktiv!"
 
 msgid "Only group/project members have permission to do this!"
-msgstr ""
+msgstr "Nur Gruppen-/Projektmitglieder dürfen dies tun!"
 
 #, python-format
 msgid "Sorry, these did not seem to be valid email addresses: %s"
@@ -3126,6 +3201,9 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten 
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "Recent Items"
+#~ msgstr "Aktuelle Inhalte"
 
 #~ msgid "Import"
 #~ msgstr "Importieren"

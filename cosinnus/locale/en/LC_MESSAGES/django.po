@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-08 18:52+0100\n"
+"POT-Creation-Date: 2017-03-29 18:12+0200\n"
 "PO-Revision-Date: 2016-10-26 16:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -487,6 +487,18 @@ msgstr ""
 msgid "Flickr Gallery URL"
 msgstr ""
 
+msgid "Call to Action Microsite Box active"
+msgstr ""
+
+msgid "If this is active, a Call to Action box will be shown on the microsite."
+msgstr ""
+
+msgid "Call to Action Box title"
+msgstr ""
+
+msgid "Call to Action Box Description"
+msgstr ""
+
 msgid "Deactivated Apps"
 msgstr ""
 
@@ -521,6 +533,14 @@ msgid "Slug must not be empty."
 msgstr ""
 
 msgid "The URL for this team has changed. A redirect from all existing URLs has automatically been created!"
+msgstr ""
+
+#, python-format
+msgid "Request about your project \"%(group_name)s\""
+msgstr ""
+
+#, python-format
+msgid "Request about your group \"%(group_name)s\""
 msgstr ""
 
 msgid "Team membership"
@@ -587,6 +607,15 @@ msgstr "Group"
 #| msgid "Cosinnus groups"
 msgid "CosinnusGroup GalleryImages"
 msgstr "Groups"
+
+msgid "URL"
+msgstr ""
+
+msgid "CosinnusGroup CallToAction Button"
+msgstr ""
+
+msgid "CosinnusGroup CallToAction Buttons"
+msgstr ""
 
 msgid "Cosinnus group"
 msgstr "Group"
@@ -1275,6 +1304,12 @@ msgstr ""
 msgid "Invite user"
 msgstr ""
 
+msgid "Invite People to Register and Join"
+msgstr ""
+
+msgid "Invite people"
+msgstr ""
+
 msgid "Membership requests"
 msgstr ""
 
@@ -1331,12 +1366,6 @@ msgstr ""
 #| msgid "Do you really want to leave „%(title)s“?"
 msgid "Do you really want to decline the invitation?"
 msgstr "Do you really want to leave project „%(title)s“?"
-
-msgid "Invite People to Register and Join"
-msgstr ""
-
-msgid "Invite people"
-msgstr ""
 
 msgid "Send Message"
 msgstr ""
@@ -1455,6 +1484,12 @@ msgstr ""
 msgid "Enter a place or address."
 msgstr ""
 
+msgid "Remove location"
+msgstr ""
+
+msgid "Add location"
+msgstr ""
+
 msgid "Which Group does the group belong to?"
 msgstr "Which Group does the project belong to?"
 
@@ -1520,12 +1555,6 @@ msgstr ""
 msgid "From which apps should public items be shown on the microsite?"
 msgstr ""
 
-msgid "Microsite Gallery Images"
-msgstr ""
-
-msgid "Choose and upload a gallery image"
-msgstr ""
-
 msgid "Video"
 msgstr ""
 
@@ -1551,6 +1580,48 @@ msgid "Embed Flickr Gallery"
 msgstr ""
 
 msgid "Flickr Gallery URL (example: \"https://www.flickr.com/photos/username/sets/1234567890\")"
+msgstr ""
+
+msgid "Microsite Gallery Images"
+msgstr ""
+
+msgid "Choose and upload a gallery image"
+msgstr ""
+
+msgid "Remove gallery image"
+msgstr ""
+
+msgid "Add gallery image"
+msgstr ""
+
+msgid "Show Microsite Call to Action Box"
+msgstr ""
+
+msgid "Show Call to Action Box"
+msgstr ""
+
+msgid "Call to Action Box Title"
+msgstr ""
+
+msgid "Title of the box header"
+msgstr ""
+
+msgid "Description text inside the box"
+msgstr ""
+
+msgid "Call to Action Button"
+msgstr ""
+
+msgid "Label of the Button"
+msgstr ""
+
+msgid "Link URL"
+msgstr ""
+
+msgid "Remove button"
+msgstr ""
+
+msgid "Add button"
 msgstr ""
 
 msgid "Facebook integration is available after you created the group!"
@@ -1696,13 +1767,19 @@ msgstr ""
 msgid "No contact data has been added yet."
 msgstr ""
 
-msgid "Recent Items"
+msgid "Project Administrator"
+msgstr ""
+
+msgid "Group Administrator"
 msgstr ""
 
 msgid "Tweets"
 msgstr ""
 
 msgid "Flickr Gallery"
+msgstr ""
+
+msgid "Call to Action"
 msgstr ""
 
 #, python-format
