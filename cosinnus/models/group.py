@@ -660,6 +660,15 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
     # Flickr gallery field, requires a flickr URL to a gallery
     flickr_url = models.URLField(_('Flickr Gallery URL'), max_length=200, blank=True, null=True, validators=[MaxLengthValidator(200)])
     
+    # Call to Action Microsite Box
+    call_to_action_active = models.BooleanField(_('Call to Action Microsite Box active'),
+        help_text=_('If this is active, a Call to Action box will be shown on the microsite.'),
+        default=False)
+    call_to_action_title = models.CharField(_('Call to Action Box title'), max_length=250, validators=[MaxLengthValidator(250)],
+        blank=True, null=True)
+    call_to_action_description = models.TextField(verbose_name=_('Call to Action Box Description'), 
+        blank=True, null=True)
+    
     # a comma-seperated list of all cosinnus apps that should not be shown in the frontend, 
     # be editable, or be indexed by search indices for this group
     deactivated_apps = models.CharField(_('Deactivated Apps'), max_length=255, 
@@ -1400,6 +1409,23 @@ class CosinnusGroupGalleryImage(ThumbnailableImageMixin, models.Model):
     @property
     def image_url(self):
         return self.image.url if self.image else None
+    
+    
+class CosinnusGroupCallToActionButton(models.Model):
+    
+    label = models.CharField(_('Title'), max_length=250, null=False, blank=False) 
+    url = models.URLField(_('URL'), max_length=200, blank=False, null=False, validators=[MaxLengthValidator(200)])
+    
+    group = models.ForeignKey(
+        settings.COSINNUS_GROUP_OBJECT_MODEL,
+        verbose_name=_('Team'),
+        on_delete=models.CASCADE,
+        related_name='call_to_action_buttons',
+    )
+    
+    class Meta:
+        verbose_name = _('CosinnusGroup CallToAction Button')
+        verbose_name_plural = _('CosinnusGroup CallToAction Buttons')
     
 
 
