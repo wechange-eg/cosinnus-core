@@ -871,7 +871,7 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
         subject = _('Request about your project "%(group_name)s"') if self.type == self.TYPE_PROJECT else _('Request about your group "%(group_name)s"')
         subject = subject % {'group_name': self.name} 
         return '%s?subject=%s&next=%s' % (
-            reverse('postman:write', kwargs={'recipients': ':'.join(['sascha', 'newuser'])}), 
+            reverse('postman:write', kwargs={'recipients': ':'.join([user.username for user in self.actual_admins])}), 
             subject,
             reverse('postman:sent')
         )
