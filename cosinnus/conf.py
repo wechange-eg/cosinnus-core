@@ -39,6 +39,15 @@ class CosinnusConf(AppConf):
             'cosinnus_poll.Poll',
             'cosinnus_marketplace.Offer',
         ],
+        'cosinnus_etherpad.Etherpad': [
+            'cosinnus_file.FileEntry',
+            'cosinnus_event.Event',
+            'cosinnus_todo.TodoEntry',
+            'cosinnus_etherpad.Etherpad',
+            'cosinnus_etherpad.Ethercalc',
+            'cosinnus_poll.Poll',
+            'cosinnus_marketplace.Offer',
+        ],
         'cosinnus_todo.TodoEntry': [
             'cosinnus_file.FileEntry',
             'cosinnus_event.Event',
@@ -74,15 +83,18 @@ class CosinnusConf(AppConf):
         'cosinnus_file.FileEntry': [
             'dateien',
             'files',
-            'bilder'
+            'bilder',
         ],
         'cosinnus_event.Event': [
             'veranstaltung',
-            'event'
+            'event',
         ],
         'cosinnus_etherpad.Etherpad': [
             'etherpad',
-            'diskussion'
+            'ethercalc',
+            'dokumente',
+            'documents',
+            'diskussion',
         ],
         'cosinnus_poll.Poll': [
             'umfrage',
