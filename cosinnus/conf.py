@@ -264,6 +264,10 @@ class CosinnusConf(AppConf):
     # and is the button shown?
     IMPORT_PROJECTS_PERMITTED = False
     
+    # in addition to the django setting, so we can know when this is set to None
+    # may be used for specific portals to overwrite login redirect
+    LOGIN_REDIRECT_URL = None
+    
     # default number of days offers in the Marketplace stay active
     MARKETPLACE_OFFER_ACTIVITY_DURATION_DAYS = 30
     
