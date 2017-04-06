@@ -1,0 +1,6 @@
+{% load i18n cosinnus_tags %}{% blocktrans with user_name=user.first_name team_name=group.name %}Hi, {{ user_name }}!
+
+
+You have been invited to join "{{ team_name }}"! Follow the link below to join and get active!{% endblocktrans %}
+
+{{ group.get_absolute_url }}

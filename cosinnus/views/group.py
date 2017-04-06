@@ -63,6 +63,7 @@ from cosinnus.templatetags.cosinnus_tags import is_superuser
 from django.core.validators import validate_email
 from annoying.functions import get_object_or_None
 from django.contrib.auth.models import AnonymousUser
+from django.template.loader import render_to_string
 logger = logging.getLogger('cosinnus')
 
 
@@ -765,6 +766,19 @@ class GroupUserInviteView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
         except self.model.DoesNotExist:
             ret = super(GroupUserInviteView, self).form_valid(form)
             signals.user_group_invited.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
+            # we will also send out an internal direct message about the invitation to the user
+            try:
+                from cosinnus_message.utils import write_postman_message
+                subject = _('I invited you to join "%(team_name)s"!') % {'team_name': self.object.group.name}
+                data = {
+                    'user': user,
+                    'group': self.object.group,
+                }
+                text = render_to_string('cosinnus/mail/user_group_invited_direct_message.txt', data)
+                write_postman_message(user, self.request.user, subject, text)
+            except ImportError:
+                pass
+        
             messages.success(self.request, _('User %(username)s was successfully invited!') % {'username': user.get_full_name()})
             return ret
 
