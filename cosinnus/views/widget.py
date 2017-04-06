@@ -28,9 +28,11 @@ from cosinnus.utils.functions import resolve_class
 from cosinnus.utils.urls import group_aware_reverse
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 from cosinnus.utils.user import ensure_user_widget
 from django.http.response import HttpResponseNotAllowed, JsonResponse
+from cosinnus.conf import settings
+
 
 def widget_list(request):
     data = {}
@@ -313,8 +315,8 @@ class UserDashboard(DashboardWidgetMixin, TemplateView):
     default_widget_order = ['stream.my_streams', 'event.upcoming', 'todo.mine']
     
     def get(self, request, *args, **kwargs):
-        """ NOTE! Permanent redirect! """
-        return redirect(reverse_lazy('cosinnus:my_stream'), *args, **kwargs)
+        """ NOTE! Permanent redirect! Since login.html default ?next points here. """
+        return redirect(getattr(settings, 'COSINNUS_LOGIN_REDIRECT_URL', None) or reverse('cosinnus:my_stream'), *args, **kwargs)
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
