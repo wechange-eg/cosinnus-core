@@ -758,13 +758,13 @@ class GroupUserInviteView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
             if m.status == MEMBERSHIP_PENDING:
                 m.status = MEMBERSHIP_MEMBER
                 m.save()
-                signals.user_group_join_accepted.send(sender=self, group=self.group, user=user)
+                signals.user_group_join_accepted.send(sender=self, obj=self.group, user=user, audience=[user])
                 messages.success(self.request, _('User %(username)s had already requested membership and has now been made a member immediately!') % {'username': user.get_full_name()})
                 # trigger signal for accepting that user's join request
             return HttpResponseRedirect(self.get_success_url())
         except self.model.DoesNotExist:
             ret = super(GroupUserInviteView, self).form_valid(form)
-            signals.user_group_invited.send(sender=self, group=self.object.group, user=user)
+            signals.user_group_invited.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
             messages.success(self.request, _('User %(username)s was successfully invited!') % {'username': user.get_full_name()})
             return ret
 
@@ -788,7 +788,7 @@ class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
         if (len(self.group.admins) > 1 or not self.group.is_admin(user)):
             if user != self.request.user or check_user_superuser(self.request.user):
                 if current_status == MEMBERSHIP_PENDING and new_status == MEMBERSHIP_MEMBER:
-                    signals.user_group_join_accepted.send(sender=self, group=self.object.group, user=user)
+                    signals.user_group_join_accepted.send(sender=self, obj=self.group, user=user, audience=[user])
                 return super(GroupUserUpdateView, self).form_valid(form)
             else:
                 messages.error(self.request, _('You cannot change your own admin status.'))
@@ -825,7 +825,7 @@ class GroupUserDeleteView(AjaxableFormMixin, RequireAdminMixin,
             return HttpResponseRedirect(self.get_success_url())
         
         if current_status == MEMBERSHIP_PENDING:
-            signals.user_group_join_declined.send(sender=self, group=group, user=user)
+            signals.user_group_join_declined.send(sender=self, obj=group, user=user, audience=[user])
             messages.success(self.request, _('Your join request was withdrawn from %(team_type)s "%(team_name)s" successfully.') % {'team_type':self.object._meta.verbose_name, 'team_name': group.name})
         if current_status == MEMBERSHIP_INVITED_PENDING:
             messages.success(self.request, _('Your invitation to user "%(username)s" was withdrawn successfully.') % {'username': user.get_full_name()})

@@ -16,14 +16,14 @@ userprofile_ceated = dispatch.Signal(providing_args=["profile"])
 user_group_join_requested = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 """ Called when an admin accepts a user membership request of a group """
-user_group_join_accepted = dispatch.Signal(providing_args=["group", "user"])
+user_group_join_accepted = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 """ Called when an admin declines a user membership request of a group """
-user_group_join_declined = dispatch.Signal(providing_args=["group", "user"])
+user_group_join_declined = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 
 """ Called when a user was invited to a group """
-user_group_invited = dispatch.Signal(providing_args=["group", "user"])
+user_group_invited = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 """ Called when an user accepts a group invitation """
 user_group_invitation_accepted = dispatch.Signal(providing_args=["user", "obj", "audience"])

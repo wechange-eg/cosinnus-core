@@ -15,7 +15,8 @@ from django.utils.translation import ugettext_lazy as _
 # also see cosinnus.core.signals
 from cosinnus.core.signals import user_group_join_requested,\
     user_group_invitation_accepted, user_group_invitation_declined,\
-    user_group_recruited
+    user_group_recruited, user_group_join_accepted, user_group_join_declined,\
+    user_group_invited
 
 user_tagged_in_object = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
@@ -62,6 +63,44 @@ notifications = {
         },
        'notification_reason': 'admin',
     },
+                 
+    'user_group_join_accepted': {
+        'label': '<hidden-user_group_join_accepted>', 
+        'mail_template': 'cosinnus/mail/user_group_join_accepted.html',
+        'subject_template': 'cosinnus/mail/user_group_join_accepted_subj.txt',
+        'signals': [user_group_join_accepted],
+        'default': True,
+        'hidden': True,
+        
+        'is_html': True,
+        'snippet_type': 'news',
+        'event_text': _('Membership request accepted'),
+        'notification_text': _('Your membership request for %(team_name)s was accepted!'),
+        'subject_text': _('Your membership request for %(team_name)s was accepted!'),
+        'data_attributes': {
+            'object_name': '_sender_name',
+        },
+       'notification_reason': 'none',
+    },
+    'user_group_join_declined': {
+        'label': '<hidden-user_group_join_declined>', 
+        'mail_template': 'cosinnus/mail/user_group_join_declined.html',
+        'subject_template': 'cosinnus/mail/user_group_join_declined_subj.txt',
+        'signals': [user_group_join_declined],
+        'default': True,
+        'hidden': True,
+        
+        'is_html': True,
+        'snippet_type': 'news',
+        'event_text': _('Membership request declined'),
+        'notification_text': _("We're sorry, but your membership request for %(team_name)s was declined."),
+        'subject_text': _('Your membership request for %(team_name)s was declined.'),
+        'data_attributes': {
+            'object_name': '_sender_name',
+        },
+       'notification_reason': 'none',
+    },
+    
     'user_group_invitation_accepted': {
         'label': _('A user has accepted the invitation to this team (admins only)'), 
         'mail_template': 'cosinnus/mail/user_group_invitation_accepted.html',
@@ -115,6 +154,25 @@ notifications = {
             'object_url': 'get_absolute_url', 
         },
     },   
+    'user_group_invited': {
+        'label': '<hidden-user_group_invited>', 
+        'mail_template': '<html-only>',
+        'subject_template': '<html-only>',
+        'signals': [user_group_invited],
+        'default': True,
+        'hidden': True,
+        
+        'is_html': True,
+        'snippet_type': 'news',
+        'event_text': _('Invited you'),
+        'notification_text': _('%(sender_name)s invited you to join "%(team_name)s" on %(portal_name)s!'),
+        'subject_text': _('%(sender_name)s has invited you to join "%(team_name)s" on %(portal_name)s!'),
+        'data_attributes': {
+            'object_name': '_sender_name',
+            'object_text': '_sender.cosinnus_profile.description', 
+        },
+        'notification_reason': 'none',
+    }, 
     'user_group_recruited': {
         'label': '<hidden-user_group_recruited>', 
         'mail_template': '<html-only>',
@@ -130,7 +188,7 @@ notifications = {
         'subject_text': _('%(sender_name)s has invited you to join "%(team_name)s" on %(portal_name)s!'),
         'data_attributes': {
             'object_name': '_sender_name',
-            'object_url': 'get_member_page_url', # the group members page
+            #'object_url': 'get_member_page_url', # the group members page
             'object_text': '_sender.cosinnus_profile.description', 
         },
         'origin_url_suffix': '?invited=1',
