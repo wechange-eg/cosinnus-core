@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-29 18:12+0200\n"
+"POT-Creation-Date: 2017-04-06 16:19+0200\n"
 "PO-Revision-Date: 2016-10-26 16:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -102,18 +102,6 @@ msgstr ""
 msgid "This account is no longer active. You have been logged out."
 msgstr ""
 
-#, python-format
-msgid "Your membership request for %(team_name)s has been accepted on %(site_name)s!"
-msgstr ""
-
-#, python-format
-msgid "Your membership request for %(team_name)s has been declined on %(site_name)s."
-msgstr ""
-
-#, python-format
-msgid "You have been invited to join \"%(team_name)s\" on %(site_name)s."
-msgstr ""
-
 msgid "A user requested to become a member of this team (admins only)"
 msgstr ""
 
@@ -122,6 +110,24 @@ msgstr ""
 
 #, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
+msgstr ""
+
+msgid "Membership request accepted"
+msgstr ""
+
+#, python-format
+msgid "Your membership request for %(team_name)s was accepted!"
+msgstr ""
+
+msgid "Membership request declined"
+msgstr ""
+
+#, python-format
+msgid "We're sorry, but your membership request for %(team_name)s was declined."
+msgstr ""
+
+#, python-format
+msgid "Your membership request for %(team_name)s was declined."
 msgstr ""
 
 msgid "A user has accepted the invitation to this team (admins only)"
@@ -165,11 +171,15 @@ msgid "Invited you"
 msgstr ""
 
 #, python-format
-msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
+msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgstr ""
 
 #, python-format
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
 msgstr ""
 
 msgid "Deutsch"
@@ -2908,6 +2918,10 @@ msgstr ""
 
 #, python-format
 msgid "User %(username)s had already requested membership and has now been made a member immediately!"
+msgstr ""
+
+#, python-format
+msgid "I invited you to join \"%(team_name)s\"!"
 msgstr ""
 
 #, python-format

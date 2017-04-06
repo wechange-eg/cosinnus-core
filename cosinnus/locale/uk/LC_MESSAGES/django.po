@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-29 18:12+0200\n"
+"POT-Creation-Date: 2017-04-06 16:19+0200\n"
 "PO-Revision-Date: 2015-11-11 10:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -115,19 +115,6 @@ msgstr "Ця спільнота або проект більше не знахо
 msgid "This account is no longer active. You have been logged out."
 msgstr "Здійснено вихід із системи, тому що цей обліковий запис більше не активний."
 
-#, python-format
-msgid "Your membership request for %(team_name)s has been accepted on %(site_name)s!"
-msgstr "Ваш запит членства у %(team_name)s було задовільнено на %(site_name)s!"
-
-#, python-format
-msgid "Your membership request for %(team_name)s has been declined on %(site_name)s."
-msgstr "Ваш запит членства у %(team_name)s було відхилено на %(site_name)s."
-
-#, fuzzy, python-format
-#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
-msgid "You have been invited to join \"%(team_name)s\" on %(site_name)s."
-msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
-
 msgid "A user requested to become a member of this team (admins only)"
 msgstr "Хтось надіслав запит членства у цій спільноті (стосується тільки адміністраторів спільноти)"
 
@@ -140,6 +127,37 @@ msgstr "Запити членства"
 #| msgid "You have requested to become a member of %(site_name)s!"
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgstr "Ваш запит членства на %(site_name)s!"
+
+#, fuzzy
+#| msgid "Membership requested"
+msgid "Membership request accepted"
+msgstr "Надіслано запит членства"
+
+#, fuzzy, python-format
+#| msgid "Your membership request for %(team_name)s has been accepted on %(site_name)s!"
+msgid "Your membership request for %(team_name)s was accepted!"
+msgstr "Ваш запит членства у %(team_name)s було задовільнено на %(site_name)s!"
+
+#, fuzzy
+#| msgid "Membership requested"
+msgid "Membership request declined"
+msgstr "Надіслано запит членства"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "Hi, %(user_name)s!\n"
+#| "\n"
+#| "We're sorry, but your membership request for %(team_name)s has been declined."
+msgid "We're sorry, but your membership request for %(team_name)s was declined."
+msgstr ""
+"Вітаємо, %(user_name)s!\n"
+"\n"
+"Вибачте, вам відмовлено у проханні про членство у проекті %(team_name)s."
+
+#, fuzzy, python-format
+#| msgid "Your membership request for %(team_name)s has been declined on %(site_name)s."
+msgid "Your membership request for %(team_name)s was declined."
+msgstr "Ваш запит членства у %(team_name)s було відхилено на %(site_name)s."
 
 #, fuzzy
 #| msgid "A user requested to become a member of this team (admins only)"
@@ -193,14 +211,19 @@ msgstr "Вас позначено: «%(object_name)s» у %(team_name)s"
 msgid "Invited you"
 msgstr "Видалити члена"
 
-#, python-format
-msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
-msgstr ""
+#, fuzzy, python-format
+#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
 
 #, fuzzy, python-format
 #| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
+
+#, python-format
+msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
+msgstr ""
 
 msgid "Deutsch"
 msgstr "Deutsch"
@@ -3211,6 +3234,11 @@ msgid "User %(username)s had already requested membership and has now been made 
 msgstr ""
 
 #, fuzzy, python-format
+#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+msgid "I invited you to join \"%(team_name)s\"!"
+msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
+
+#, fuzzy, python-format
 #| msgid "The %(team_type)s was changed successfully."
 msgid "User %(username)s was successfully invited!"
 msgstr "%(team_type)s було успішно змінено."
@@ -3412,6 +3440,11 @@ msgstr "Ви, на разі, не є членом %s! Якщо ви бажаєт
 
 msgid "Your changes have been saved."
 msgstr ""
+
+#, fuzzy
+#~| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+#~ msgid "You have been invited to join \"%(team_name)s\" on %(site_name)s."
+#~ msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
 
 #, fuzzy
 #~| msgctxt "the verb"

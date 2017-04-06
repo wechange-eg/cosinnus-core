@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-29 18:12+0200\n"
+"POT-Creation-Date: 2017-04-06 16:19+0200\n"
 "PO-Revision-Date: 2017-01-09 11:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -102,18 +102,6 @@ msgstr "Эта группа/этот проект больше не находи
 msgid "This account is no longer active. You have been logged out."
 msgstr "Вы были выведены из системы, так как Ваш аккаунт неактивен"
 
-#, python-format
-msgid "Your membership request for %(team_name)s has been accepted on %(site_name)s!"
-msgstr "Ваш запрос на вступление в группу %(team_name)s принят на %(site_name)s"
-
-#, python-format
-msgid "Your membership request for %(team_name)s has been declined on %(site_name)s."
-msgstr "Ваш запрос на вступление в группу %(team_name)s был отклонен %(site_name)s"
-
-#, python-format
-msgid "You have been invited to join \"%(team_name)s\" on %(site_name)s."
-msgstr "Вас пригласили присоединиться к \"%(team_name)s\" на %(site_name)s"
-
 msgid "A user requested to become a member of this team (admins only)"
 msgstr "Новый пользователь отправил запрос на членство в этой группе (только для админов)"
 
@@ -123,6 +111,37 @@ msgstr "Новые заявки на вступление"
 #, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgstr "\"%(sender_name)s\" отправил(a) заявку на членство в %(team_name)s."
+
+#, fuzzy
+#| msgid "Membership requested"
+msgid "Membership request accepted"
+msgstr "Подана заявка на членство"
+
+#, fuzzy, python-format
+#| msgid "Your membership request for %(team_name)s has been accepted on %(site_name)s!"
+msgid "Your membership request for %(team_name)s was accepted!"
+msgstr "Ваш запрос на вступление в группу %(team_name)s принят на %(site_name)s"
+
+#, fuzzy
+#| msgid "Membership requested"
+msgid "Membership request declined"
+msgstr "Подана заявка на членство"
+
+#, fuzzy, python-format
+#| msgid ""
+#| "Hi, %(user_name)s!\n"
+#| "\n"
+#| "We're sorry, but your membership request for %(team_name)s has been declined."
+msgid "We're sorry, but your membership request for %(team_name)s was declined."
+msgstr ""
+"Здравствуйте, %(user_name)s!\n"
+"\n"
+"Извините, но Вашу заявку на членство в  %(team_name)s отклонили"
+
+#, fuzzy, python-format
+#| msgid "Your membership request for %(team_name)s has been declined on %(site_name)s."
+msgid "Your membership request for %(team_name)s was declined."
+msgstr "Ваш запрос на вступление в группу %(team_name)s был отклонен %(site_name)s"
 
 msgid "A user has accepted the invitation to this team (admins only)"
 msgstr "Новый пользователь принял приглашение на членство в этой группе (только для админов)"
@@ -166,14 +185,19 @@ msgstr "Вы были отмечены в \"%(object_name)s\" в %(team_name)s"
 msgid "Invited you"
 msgstr "Пригласить пользователя"
 
-#, python-format
-msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
-msgstr ""
+#, fuzzy, python-format
+#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s  пожелал(а) присоединиться к %(team_name)s на %(site_name)s!"
 
 #, fuzzy, python-format
 #| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s  пожелал(а) присоединиться к %(team_name)s на %(site_name)s!"
+
+#, python-format
+msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
+msgstr ""
 
 msgid "Deutsch"
 msgstr "Deutsch"
@@ -3054,6 +3078,11 @@ msgstr "Вы приняты в члены %(team_type)s “%(team_name)s”. Д�
 msgid "User %(username)s had already requested membership and has now been made a member immediately!"
 msgstr "Пользователь  %(username)s уже подал заявку на членство и поэтому  был сразу принят в члены группы/проекта!"
 
+#, fuzzy, python-format
+#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+msgid "I invited you to join \"%(team_name)s\"!"
+msgstr "%(sender_name)s  пожелал(а) присоединиться к %(team_name)s на %(site_name)s!"
+
 #, python-format
 msgid "User %(username)s was successfully invited!"
 msgstr "Пользователь %(username)s успешно приглашен!"
@@ -3252,6 +3281,9 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены"
+
+#~ msgid "You have been invited to join \"%(team_name)s\" on %(site_name)s."
+#~ msgstr "Вас пригласили присоединиться к \"%(team_name)s\" на %(site_name)s"
 
 #~ msgid "An import has just finished. Please click the \"Start a new import\" button to start a new one!"
 #~ msgstr "Загрузка файла завершена. Пожалуйста, нажмите кнопку \"Начать новую загрузку\", чтобы загрузить новый файл!"

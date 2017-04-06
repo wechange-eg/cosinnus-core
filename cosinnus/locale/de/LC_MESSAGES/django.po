@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-29 18:12+0200\n"
-"PO-Revision-Date: 2017-03-29 18:22+0200\n"
+"POT-Creation-Date: 2017-04-06 16:19+0200\n"
+"PO-Revision-Date: 2017-04-06 16:49+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -103,18 +103,6 @@ msgstr "Die Gruppe oder das Projekt liegt nicht länger unter der URL die du ein
 msgid "This account is no longer active. You have been logged out."
 msgstr "Sie wurden ausgeloggt, weil dieses Benutzerkonto nicht mehr aktiv ist."
 
-#, python-format
-msgid "Your membership request for %(team_name)s has been accepted on %(site_name)s!"
-msgstr "Dein Mitgliedsantrag für %(team_name)s wurde angenommen auf %(site_name)s!"
-
-#, python-format
-msgid "Your membership request for %(team_name)s has been declined on %(site_name)s."
-msgstr "Dein Mitgliedsantrag für %(team_name)s wurde abgelehnt auf %(site_name)s."
-
-#, python-format
-msgid "You have been invited to join \"%(team_name)s\" on %(site_name)s."
-msgstr "Du wurdest eingeladen \"%(team_name)s\" beizutreten auf %(site_name)s!"
-
 msgid "A user requested to become a member of this team (admins only)"
 msgstr "Jemand hat beantragt Mitglied in dieser Gruppe zu werden (betrifft nur Gruppenadministratoren)"
 
@@ -124,6 +112,24 @@ msgstr "Neuer Mitgliedschaftsantrag"
 #, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
 msgstr "\"%(sender_name)s\" möchte Mitglied bei %(team_name)s werden."
+
+msgid "Membership request accepted"
+msgstr "Mitgliedsantrag wurde angenommen"
+
+#, python-format
+msgid "Your membership request for %(team_name)s was accepted!"
+msgstr "Dein Mitgliedsantrag für %(team_name)s wurde angenommen!"
+
+msgid "Membership request declined"
+msgstr "Mitgliedsantrag wurde abgelehnt"
+
+#, python-format
+msgid "We're sorry, but your membership request for %(team_name)s was declined."
+msgstr "Tut uns leid, dein Mitgliedsantrag für %(team_name)s wurde leider abgelehnt."
+
+#, python-format
+msgid "Your membership request for %(team_name)s was declined."
+msgstr "Dein Mitgliedsantrag für %(team_name)s wurde abgelehnt."
 
 msgid "A user has accepted the invitation to this team (admins only)"
 msgstr "Jemand hat die Einladung Mitglied zu werden angenommen (betrifft nur Gruppenadministratoren)"
@@ -166,12 +172,16 @@ msgid "Invited you"
 msgstr "Hat dich eingeladen"
 
 #, python-format
-msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
-msgstr "%(sender_name)s hat dich eingeladen, auf %(portal_name)s dem Projekt \"%(team_name)s\" beizutreten! Klicke unten auf den Projektnamen um es dir anzuschauen und mitzumachen!"
+msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s hat dich eingeladen, %(team_name)s beizutreten auf %(portal_name)s!"
 
 #, python-format
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s hat dich eingeladen, %(team_name)s beizutreten auf %(portal_name)s!"
+
+#, python-format
+msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
+msgstr "%(sender_name)s hat dich eingeladen, auf %(portal_name)s dem Projekt \"%(team_name)s\" beizutreten! Klicke unten auf den Projektnamen um es dir anzuschauen und mitzumachen!"
 
 msgid "Deutsch"
 msgstr "Deutsch"
@@ -3008,6 +3018,10 @@ msgid "User %(username)s had already requested membership and has now been made 
 msgstr "Benutzer \"%(username)s\" hatte bereits einen Antrag auf Mitgliedschaft gestellt und wurde deshalb sofort zum Mitglied gemacht!"
 
 #, python-format
+msgid "I invited you to join \"%(team_name)s\"!"
+msgstr "Ich habe dich eingeladen, %(team_name)s beizutreten!"
+
+#, python-format
 msgid "User %(username)s was successfully invited!"
 msgstr "Benutzer %(username)s wurde erfolgreich eingeladen!"
 
@@ -3201,6 +3215,9 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten 
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "You have been invited to join \"%(team_name)s\" on %(site_name)s."
+#~ msgstr "Du wurdest eingeladen \"%(team_name)s\" beizutreten auf %(site_name)s!"
 
 #~ msgid "Recent Items"
 #~ msgstr "Aktuelle Inhalte"
