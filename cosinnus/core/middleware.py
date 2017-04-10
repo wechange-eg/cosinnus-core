@@ -173,7 +173,7 @@ class ConditionalRedirectMiddleware(object):
     def process_request(self, request):
         if request.user.is_authenticated():
             redirect_url = getattr(settings, 'COSINNUS_LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET', None)
-            if redirect_url and (request.path == reverse('login') or request.path == reverse('user-add')):
+            if redirect_url and request.path in ['/login/', '/signup/']:
                 return HttpResponseRedirect(redirect_url)
                 
             
