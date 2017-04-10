@@ -280,6 +280,10 @@ class CosinnusConf(AppConf):
     # may be used for specific portals to overwrite login redirect
     LOGIN_REDIRECT_URL = None
     
+    # if set to anything but None, logged-in users will be redirected to this
+    # URL if they try to visit the register or login pages
+    LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET = '/map/'
+    
     # default number of days offers in the Marketplace stay active
     MARKETPLACE_OFFER_ACTIVITY_DURATION_DAYS = 30
     

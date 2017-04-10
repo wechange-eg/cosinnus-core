@@ -95,6 +95,7 @@ MIDDLEWARE_CLASSES = (
     
     'cosinnus.core.middleware.StartupMiddleware',
     'cosinnus.core.middleware.ForceInactiveUserLogoutMiddleware',
+    'cosinnus.core.middleware.ConditionalRedirectMiddleware',
     'cosinnus.core.middleware.AddRequestToModelSaveMiddleware',
     'cosinnus.core.middleware.GroupPermanentRedirectMiddleware',
 )
