@@ -330,12 +330,12 @@ def send_testmail(request):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
     mode = request.GET.get('mode', None)
-    if mode not in ['or_fail', 'direct', 'threaded', 'override']:
+    if mode not in ['or_fail', 'direct', 'direct_html', 'threaded', 'override']:
         mode = 'or_fail'
     
     subject =  mode + ': Testmail from Housekeeping at %s' % str(now())
     template = 'cosinnus/common/internet_explorer_not_supported.html'
-    retmsg = '\n\n<br><br> Use ?mode=[or_fail, direct, threaded, override]'
+    retmsg = '\n\n<br><br> Use ?mode=[or_fail, direct, direct_html, threaded, override]'
     
     if mode == 'or_fail':
         send_mail_or_fail(request.user.email, subject, template, {})
@@ -343,6 +343,10 @@ def send_testmail(request):
     if mode == 'direct':
         send_mail(request.user.email, subject, template, {})
         return HttpResponse('Sent mail using direct mode. ' + retmsg)
+    if mode == 'direct_html':
+        template = 'cosinnus/housekeeping/test_html_mail.html'
+        send_mail(request.user.email, subject, template, {}, is_html=True)
+        return HttpResponse('Sent mail using direct HTML mode. ' + retmsg)
     if mode == 'threaded':
         send_mail_or_fail_threaded(request.user.email, subject, template, {})
         return HttpResponse('Sent mail using threaded mode. ' + retmsg)
