@@ -164,5 +164,16 @@ class DenyAnonymousAccessMiddleware(object):
         if not request.user.is_authenticated():
             if request.path not in LOGIN_URLS:
                 return TemplateResponse(request, 'cosinnus/portal/no_anonymous_access_page.html')
+            
+            
+class ConditionalRedirectMiddleware(object):
+    """ A collection of redirects based on some requirements we want to put it,
+        usually to force some routing behaviour, like logged-in users being redirected off /login """
+    
+    def process_request(self, request):
+        if request.user.is_authenticated():
+            redirect_url = getattr(settings, 'COSINNUS_LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET', None)
+            if redirect_url and (request.path == reverse('login') or request.path == reverse('user-add')):
+                return HttpResponseRedirect(redirect_url)
                 
             
