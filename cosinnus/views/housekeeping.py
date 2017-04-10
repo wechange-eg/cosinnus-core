@@ -335,23 +335,23 @@ def send_testmail(request):
     
     subject =  mode + ': Testmail from Housekeeping at %s' % str(now())
     template = 'cosinnus/common/internet_explorer_not_supported.html'
-    retmsg = '\n\n<br><br> Use ?mode=[or_fail, direct, direct_html, threaded, override]'
+    retmsg = '\n\n<br><br> Use ?mode=[or_fail, direct, direct_html, threaded, override]\n\nThe Answer was: '
     
     if mode == 'or_fail':
-        send_mail_or_fail(request.user.email, subject, template, {})
+        retmsg += force_text(send_mail_or_fail(request.user.email, subject, template, {}))
         return HttpResponse('Sent mail using or_fail mode. ' + retmsg)
     if mode == 'direct':
-        send_mail(request.user.email, subject, template, {})
+        retmsg += force_text(send_mail(request.user.email, subject, template, {}))
         return HttpResponse('Sent mail using direct mode. ' + retmsg)
     if mode == 'direct_html':
         template = 'cosinnus/housekeeping/test_html_mail.html'
-        send_mail(request.user.email, subject, template, {}, is_html=True)
+        retmsg += force_text(send_mail(request.user.email, subject, template, {}, is_html=True))
         return HttpResponse('Sent mail using direct HTML mode. ' + retmsg)
     if mode == 'threaded':
-        send_mail_or_fail_threaded(request.user.email, subject, template, {})
+        retmsg += force_text(send_mail_or_fail_threaded(request.user.email, subject, template, {}))
         return HttpResponse('Sent mail using threaded mode. ' + retmsg)
     if mode == 'override':
-        EmailMessage(subject, 'No content', 'Testing <%s>' % settings.COSINNUS_DEFAULT_FROM_EMAIL, [request.user.email]).send()
+        retmsg += force_text(EmailMessage(subject, 'No content', 'Testing <%s>' % settings.COSINNUS_DEFAULT_FROM_EMAIL, [request.user.email]).send())
         return HttpResponse('Sent mail using override mode. ' + retmsg)
         
     return HttpResponse('Did not send any mail. ' + retmsg)
