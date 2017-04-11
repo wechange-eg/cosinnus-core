@@ -1,5 +1,5 @@
-<!-- Piwik -->
 {% if not request.GET.disableextrascripts %}
+<!-- Piwik -->
 <script type="text/javascript">
   var _paq = _paq || [];
   _paq.push(['trackPageView']);
@@ -14,18 +14,4 @@
 </script>
 <noscript><p><img src="http://wachstumswende.de/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
 <!-- End Piwik Code -->
-
-{% if COSINNUS_CURRENT_PORTAL.id != 7 or request.LANGUAGE_CODE == 'de' %} {# for drja only for language DE! #}
-<!-- Start Userreport Code -->
-<script type="text/javascript">
-var _urq = _urq || [];
-_urq.push(['initSite', '3a3a53f2-b1d1-4031-add5-63e393cf3683']);
-(function() {
-var ur = document.createElement('script'); ur.type = 'text/javascript'; ur.async = true;
-ur.src = ('https:' == document.location.protocol ? 'https://cdn.userreport.com/userreport.js' : 'http://cdn.userreport.com/userreport.js');
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ur, s);
-})();
-</script>
-<!-- End Userreport Code -->
-{% endif %}
 {% endif %}
