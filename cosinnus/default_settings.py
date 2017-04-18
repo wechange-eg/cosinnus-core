@@ -345,7 +345,7 @@ HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 # cosinnus-core should not know about other cosinnus apps here!
 CRON_CLASSES = [
     'cosinnus_marketplace.cron.DeactivateExpiredOffers',
-                 
+    'cosinnus_message.cron.ProcessDirectReplyMails',
 ]
 # delete cronjob logs older than 30 days
 DJANGO_CRON_DELETE_LOGS_OLDER_THAN = 30
