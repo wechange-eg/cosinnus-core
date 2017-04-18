@@ -32,9 +32,11 @@ fabric-virtualenv==0.2.1
 fabvenv==0.1.1
 jsonfield==1.0.0
 html5lib==0.99
+oauthlib==2.0.2
 paramiko==1.12.0
 pycrypto==2.6.1
 requests==2.0.1
+requests-oauthlib==0.8.0
 six==1.8.0
 sqlparse==0.1.10
 wsgiref==0.1.2
