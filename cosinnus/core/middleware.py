@@ -180,6 +180,5 @@ class ConditionalRedirectMiddleware(object):
         # always redirecting to the login flow in SSO portals for non-logged-in users
         if is_sso_portal() and not request.user.is_authenticated():
             if not request.path in [reverse('cosinnus:sso-login'), reverse('cosinnus:sso-callback'), reverse('cosinnus:sso-error')]:
-                print ">> middleware caught, redirecting to sso login", request.path
                 return HttpResponseRedirect(reverse('cosinnus:sso-login'))
         
