@@ -9,8 +9,9 @@ import six
 from django.core.serializers.json import DjangoJSONEncoder
 from django.http import HttpResponse
 
+"""
+FIXME: DO NOT COMMIT THIS AND REMOVE THE COMMENT!
 from cosinnus.conf import settings
-
 
 __all__ = ('JSONResponse', 'CSVResponse')
 
@@ -22,7 +23,7 @@ DUMPS_KWARGS = {
     'cls': DjangoJSONEncoder,
     'indent': True if settings.DEBUG else None
 }
-
+"""
 
 class JSONResponse(HttpResponse):
 

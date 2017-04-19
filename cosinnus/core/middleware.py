@@ -17,6 +17,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.core import signals as cosinnus_signals
+from cosinnus.templatetags.cosinnus_tags import is_sso_portal
 
 
 logger = logging.getLogger('cosinnus')
@@ -171,9 +172,14 @@ class ConditionalRedirectMiddleware(object):
         usually to force some routing behaviour, like logged-in users being redirected off /login """
     
     def process_request(self, request):
+        # hiding login and signup pages for logged in users
         if request.user.is_authenticated():
             redirect_url = getattr(settings, 'COSINNUS_LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET', None)
             if redirect_url and request.path in ['/login/', '/signup/']:
                 return HttpResponseRedirect(redirect_url)
-                
-            
+        # always redirecting to the login flow in SSO portals for non-logged-in users
+        if is_sso_portal() and not request.user.is_authenticated():
+            if not request.path in [reverse('cosinnus:sso-login'), reverse('cosinnus:sso-callback'), reverse('cosinnus:sso-error')]:
+                print ">> middleware caught, redirecting to sso login", request.path
+                return HttpResponseRedirect(reverse('cosinnus:sso-login'))
+        

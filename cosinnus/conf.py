@@ -272,6 +272,29 @@ class CosinnusConf(AppConf):
     #     * special views are active on /integrated/ URLs, enabling cross-site login/logout/user-creation
     IS_INTEGRATED_PORTAL = False
     
+    """ *******  SSO OAUTH Settings  ******* """
+    
+    # setting to be overriden by each portal
+    # if True, single-sign-on only mode is active:
+    #     * manual login/register is disabled. logout is enabled
+    #     * user accounts ????
+    #     * special views are active on /sso/ URLs, enabling OAuth flows
+    IS_SSO_PORTAL = False
+    
+    # these 3 settings MUST MATCH the data in your OAuth1 server application exactly, 
+    # otherwise the OAuth signature won't match
+    SSO_OAUTH_CLIENT_KEY = None
+    SSO_OAUTH_CLIENT_SECRET = None
+    SSO_OAUTH_CALLBACK_URL = None
+    
+    # OAuth1 target URLs
+    SSO_OAUTH_REQUEST_URL = None
+    SSO_OAUTH_AUTHORIZATION_URL = None
+    SSO_OAUTH_ACCESS_URL = None
+    SSO_OAUTH_CURRENT_USER_ENDPOINT_URL = None
+    # where to redirect when a user is already logged in when initiation the Oauth flow
+    SSO_ALREADY_LOGGED_IN_REDIRECT_URL = '/'
+    
     # can a staff user import CosinnusGroups via a CSV upload in the wagtail admin?
     # and is the button shown?
     IMPORT_PROJECTS_PERMITTED = False

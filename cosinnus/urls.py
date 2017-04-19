@@ -7,7 +7,8 @@ from django.views.generic import TemplateView
 from cosinnus.core.registries import url_registry
 from cosinnus.conf import settings
 from cosinnus.core.registries.group_models import group_model_registry
-from cosinnus.templatetags.cosinnus_tags import is_integrated_portal
+from cosinnus.templatetags.cosinnus_tags import is_integrated_portal,\
+    is_sso_portal
 from django.views.decorators.clickjacking import xframe_options_exempt
 
 urlpatterns = patterns('cosinnus.views',
@@ -79,7 +80,13 @@ if not is_integrated_portal():
                             
         url(r'^signup/$', 'user.user_create', name='user-add'),
         url(r'^profile/delete/$', 'profile.delete_view', name='profile-delete'),
-        
+    )
+    
+if is_sso_portal():
+    urlpatterns += patterns('cosinnus.views',
+        url(r'^sso/login/$', 'sso.login', name='sso-login'),
+        url(r'^sso/callback/$', 'sso.callback', name='sso-callback'),
+        url(r'^sso/error/$', 'sso.error', name='sso-error'),
     )
     
 
