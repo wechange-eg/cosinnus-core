@@ -43,10 +43,13 @@ def CosinnusPermanentRedirect():
 
 # these URLs are allowed to be accessed for anonymous accounts, even when everything else
 # is locked down. all integrated-API related URLs and all login/logout URLs should be in here!
-LOGIN_URLS = [
+NEVER_REDIRECT_URLS = [
     '/admin/',
     '/admin/login/',
     '/admin/logout/',
+]
+
+LOGIN_URLS = NEVER_REDIRECT_URLS + [
     '/login/',
     '/integrated/login/',
     '/integrated/logout/',
@@ -172,6 +175,9 @@ class ConditionalRedirectMiddleware(object):
         usually to force some routing behaviour, like logged-in users being redirected off /login """
     
     def process_request(self, request):
+        if request.path in NEVER_REDIRECT_URLS:
+            return
+        
         # hiding login and signup pages for logged in users
         if request.user.is_authenticated():
             redirect_url = getattr(settings, 'COSINNUS_LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET', None)

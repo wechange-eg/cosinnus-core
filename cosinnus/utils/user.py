@@ -144,6 +144,8 @@ def create_user(email, username=None, first_name=None, last_name=None, tos_check
     
     # username is always its id
     user.username = user.id
+    
+    user.backend = 'cosinnus.backends.EmailAuthBackend'
     user.save()
     
     return user
