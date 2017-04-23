@@ -74,10 +74,12 @@
   
 {% else %}
     
-    <h1>{% trans "Login" %}</h1>
     
-    <div class="content-box">
+    <div class="content-box cms-content">
         
+	    <h1>{% trans "Login" %}</h1>
+	    
+	    <br/>
         {% include 'cosinnus/registration/sso_login_button.html' %}                        
         <br/>
         

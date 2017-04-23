@@ -29,7 +29,7 @@
 			
 			        {% if request.user.is_authenticated and request.user == this_user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
 			            {% if not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
-				            <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:profile-edit' %}" style="width: auto;">
+				            <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:profile-edit' %}">
 	                            <ul class="media-list">
 	                                <li class="media">
 	                                    <a class="pull-left" href="#">
@@ -55,7 +55,7 @@
                             </ul>
                         </button>
                         {% if SETTINGS.COSINNUS_IS_SSO_PORTAL %}
-                            <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:profile-delete' %}" style="width: auto;">
+                            <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:profile-delete' %}">
                                 <ul class="media-list">
                                     <li class="media">
                                         <a class="pull-left" href="#">
