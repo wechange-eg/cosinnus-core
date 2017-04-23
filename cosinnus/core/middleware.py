@@ -183,8 +183,3 @@ class ConditionalRedirectMiddleware(object):
             redirect_url = getattr(settings, 'COSINNUS_LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET', None)
             if redirect_url and request.path in ['/login/', '/signup/']:
                 return HttpResponseRedirect(redirect_url)
-        # always redirecting to the login flow in SSO portals for non-logged-in users
-        if is_sso_portal() and not request.user.is_authenticated():
-            if not request.path in [reverse('cosinnus:sso-login'), reverse('cosinnus:sso-callback'), reverse('cosinnus:sso-error')]:
-                return HttpResponseRedirect(reverse('cosinnus:sso-login'))
-        

@@ -22,6 +22,7 @@ from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.files import get_avatar_filename
 from cosinnus.utils.oauth import do_oauth1_request, do_oauth1_receive
 from cosinnus.utils.user import create_user
+from django.utils.http import is_safe_url
 
 
 logger = logging.getLogger('cosinnus')
@@ -30,11 +31,11 @@ logger = logging.getLogger('cosinnus')
 SSO_USERPROFILE_FIELD_ID = 'sso_id'
 SSO_USERPROFILE_FIELD_OAUTH_TOKEN = 'sso_token'
 SSO_USERPROFILE_FIELD_OAUTH_SECRET = 'sso_token_secret'
-
-
+        
+        
 def login(request):
     if request.user.is_authenticated():
-        return redirect(settings.COSINNUS_SSO_ALREADY_LOGGED_IN_REDIRECT_URL)
+        return redirect(_get_redirect_url(request))
     
     try:    
         # user is not logged in. get temporary oauth tokens
@@ -44,14 +45,16 @@ def login(request):
         messages.error(request, _('Sorry, we could not connect your user account. Please contact a system administrator!'))
         if settings.DEBUG:
             raise
-        return redirect(reverse('cosinnus:sso-error'))
+        return redirect(reverse('sso-error'))
+    
+    request.session['sso-next'] = request.GET.get('next', None)
     
     # redirect user to auth on the OAuth server
     return redirect(auth_url)
 
 def callback(request):
     if request.user.is_authenticated():
-        return redirect(settings.COSINNUS_SSO_ALREADY_LOGGED_IN_REDIRECT_URL)
+        return redirect(_get_redirect_url(request))
     try:    
         user_info = do_oauth1_receive(request)
     except Exception, e:
@@ -59,21 +62,22 @@ def callback(request):
         messages.error(request, _('Sorry, we could not connect your user account. Please contact a system administrator!'))
         if settings.DEBUG:
             raise
-        return redirect(reverse('cosinnus:sso-error'))
+        return redirect(reverse('sso-error'))
     
     # these properties are required and thus guarenteed to be in the user_info dict in the following code
     if not all([bool(prop in user_info) for prop in ['username', 'email', 'id']]):
         logger.error('Exception during SSO login, not all expected properties in returned user info JSON!', extra={'user_info': user_info})
         messages.error(request, _('Sorry, we could not connect your user account, because we could not retrieve important user account infos. Please contact a system administrator!'))
-        return redirect('cosinnus:sso-error')
+        return redirect('sso-error')
     
     # match user over ID, never email! this could be used to take over other user accounts if the SSO server does not enforce email validation
     # because of this, we actually may end up with non-unique emails in cosinnus, but since regular authentication is disabled,  this should not cause problems
     # Note: using a raw query here for actual safe JSON-matching
-    profile = get_user_profile_model().objects.all().extra(where=["settings::json->>'%s' = '%d'" % (SSO_USERPROFILE_FIELD_ID, user_info['id'])]).get()
-    
-    # if the user doesn't exist yet, create a user acount and portal membership for him
-    if not profile:
+    try:
+        profile = get_user_profile_model().objects.all().extra(where=["settings::json->>'%s' = '%d'" % (SSO_USERPROFILE_FIELD_ID, user_info['id'])]).get()
+        user = profile.user
+    except get_user_profile_model().DoesNotExist:
+        # if the user doesn't exist yet, create a user acount and portal membership for him
         # we create the user with a random email to get around cosinnus' unique-email validation,
         # because we cannot be sure if the SSO server has unique emails we will replace the email here later on
         user = create_user(
@@ -84,12 +88,10 @@ def callback(request):
         if not user:
             logger.error('Exception during SSO login, User could not be created!', extra={'user_info': user_info})
             messages.error(request, _('Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!') + '(1)')
-            return redirect('cosinnus:sso-error')
+            return redirect('sso-error')
         
         profile = user.cosinnus_profile
         profile.settings[SSO_USERPROFILE_FIELD_ID] = user_info['id']
-    else:
-        user = profile.user
         
     # update the user's profile info and email and oauth_token and oauth_secret in settings
     user.first_name = user_info.get('first_name', user_info.get('username'))
@@ -124,7 +126,7 @@ def callback(request):
     django_login(request, user)
     translation.activate(getattr(profile, 'language', settings.LANGUAGES[0][0]))
     
-    return redirect(settings.COSINNUS_SSO_ALREADY_LOGGED_IN_REDIRECT_URL)
+    return redirect(_get_redirect_url(request))
     
     
 class ErrorView(TemplateView):
@@ -132,3 +134,14 @@ class ErrorView(TemplateView):
 
 error = ErrorView.as_view()
 
+
+def _get_redirect_url(request):
+    """ Gets the redirect URL (1) from request's next param, (2) from session (3) fallbacks to
+        settings.COSINNUS_SSO_ALREADY_LOGGED_IN_REDIRECT_URL """
+    if request.GET.get('next', None) and is_safe_url(url=request.GET.get('next'), host=request.get_host()):
+        return request.GET.get('next')
+    if request.session.get('sso-next', None) and is_safe_url(url=request.session.get('sso-next'), host=request.get_host()):
+        url = request.session.get('sso-next')
+        request.session['sso-next'] = None
+        return url
+    return settings.COSINNUS_SSO_ALREADY_LOGGED_IN_REDIRECT_URL

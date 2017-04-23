@@ -65,50 +65,59 @@
 		<div class="group-microsite-login-box overlay-box-gray">
 		
 			{% if not user.is_authenticated %}
+			
 				{% if request.GET.invited == "1" %}
 					<h2>{% trans "You have been invited to collaborate!" %}</h2> {#  Jetzt anmelden und mitgestalten #}
-					<span class="app-calendar"> {# Hacky green color #}
-		                <button href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}join/?direct=1" style="width: 100% !important;" type="button" class="btn btn-emphasized">
-		                    <ul class="media-list">
-		                        <li class="media">
-		                            <a class="pull-left" href="#">
-		                                <i class="fa fa-user-plus"></i>
-		                            </a>
-		                            <div class="media-body">
-										{% trans "Register and join!" %}
-		                            </div>
-		                        </li>
-		                    </ul>
-		                </button>
-	                </span>
+					{% if SETTINGS.COSINNUS_IS_SSO_PORTAL %}
+                        {% include 'cosinnus/registration/sso_login_button.html' with next=group.get_absolute_url|addstr:'join/?direct=1' %}
+                    {% else %}   
+						<span class="app-calendar"> {# Hacky green color #}
+			                <button href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}join/?direct=1" style="width: 100% !important;" type="button" class="btn btn-emphasized">
+			                    <ul class="media-list">
+			                        <li class="media">
+			                            <a class="pull-left" href="#">
+			                                <i class="fa fa-user-plus"></i>
+			                            </a>
+			                            <div class="media-body">
+											{% trans "Register and join!" %}
+			                            </div>
+			                        </li>
+			                    </ul>
+			                </button>
+		                </span>
+		            {% endif %}
 				{% else %}
 					<h2>{% trans "Join now and collaborate!" %}</h2> {#  Jetzt anmelden und mitgestalten #}
-					<span class="app-calendar"> {# Hacky green color #}
-		                <button href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
+					{% if SETTINGS.COSINNUS_IS_SSO_PORTAL %}
+                        {% include 'cosinnus/registration/sso_login_button.html' with next=group.get_absolute_url %}   
+                    {% else %}
+						<span class="app-calendar"> {# Hacky green color #}
+			                <button href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
+			                    <ul class="media-list">
+			                        <li class="media">
+			                            <a class="pull-left" href="#">
+			                                <i class="fa fa-user-plus"></i>
+			                            </a>
+			                            <div class="media-body">
+				                                {% trans "Register" %}
+			                            </div>
+			                        </li>
+			                    </ul>
+			                </button>
+		                </span>
+						<button href="{% url 'login' %}?next={{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
 		                    <ul class="media-list">
 		                        <li class="media">
 		                            <a class="pull-left" href="#">
-		                                <i class="fa fa-user-plus"></i>
+		                                <i class="fa fa-sign-in"></i>
 		                            </a>
 		                            <div class="media-body">
-			                                {% trans "Register" %}
+		                                {% trans "Login" %}
 		                            </div>
 		                        </li>
 		                    </ul>
 		                </button>
-	                </span>
-					<button href="{% url 'login' %}?next={{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
-	                    <ul class="media-list">
-	                        <li class="media">
-	                            <a class="pull-left" href="#">
-	                                <i class="fa fa-sign-in"></i>
-	                            </a>
-	                            <div class="media-body">
-	                                {% trans "Login" %}
-	                            </div>
-	                        </li>
-	                    </ul>
-	                </button>
+		            {% endif %}
 				{% endif %}
 	    		
                 

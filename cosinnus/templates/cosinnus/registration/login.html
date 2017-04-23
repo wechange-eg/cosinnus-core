@@ -7,10 +7,15 @@
 {% endblock override_breadcrumb %}
 
 {% block leftnav %}
-    {% include "cosinnus/registration/leftnav.html"  with current_page="login" %}
+    {% if not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
+        {% include "cosinnus/registration/leftnav.html"  with current_page="login" %}
+    {% endif %}
 {% endblock leftnav %}
 
 {% block content %}
+
+{% if not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
+
   <form action="" method="post" class="form-horizontal" role="form">
     {% csrf_token %}
     <input type="hidden" name="next" value="{% if request.GET.next %}{{ request.GET.next }}{% else %}{% url 'cosinnus:user-dashboard' %}{% endif %}">
@@ -66,6 +71,20 @@
 
 
   </form>
+  
+{% else %}
+    
+    <h1>{% trans "Login" %}</h1>
+    
+    <div class="content-box">
+        
+        {% include 'cosinnus/registration/sso_login_button.html' %}                        
+        <br/>
+        
+    </div><!-- content-box -->
+
+{% endif %}
+
 {% endblock content %}
 
 

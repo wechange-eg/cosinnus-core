@@ -27,26 +27,28 @@
 	    </ul>
 	</button>
 	
-	<button type="button" class="btn w100 btn-{% if view == "edit_profile" %}extra-{% endif %}emphasized fine-space" href="{% url 'cosinnus:profile-edit' %}">
-	    <ul class="media-list">
-	        <li class="media">
-	           <a class="pull-left">
-	                <i class="fa fa-pencil"></i>
-	            </a>
-	            {% if view == "edit_profile" %}
-	                <a class="pull-right" href="#">
-	                    <i class="fa fa-caret-right"></i>
-	                </a>
-	            {% endif %}
-	            <div class="media-body">
-	                {% trans "Edit Profile" %}
-	            </div>
-	        </li>
-	    </ul>
-	</button>
+	{% if not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
+		<button type="button" class="btn w100 btn-{% if view == "edit_profile" %}extra-{% endif %}emphasized fine-space" href="{% url 'cosinnus:profile-edit' %}">
+		    <ul class="media-list">
+		        <li class="media">
+		           <a class="pull-left">
+		                <i class="fa fa-pencil"></i>
+		            </a>
+		            {% if view == "edit_profile" %}
+		                <a class="pull-right" href="#">
+		                    <i class="fa fa-caret-right"></i>
+		                </a>
+		            {% endif %}
+		            <div class="media-body">
+		                {% trans "Edit Profile" %}
+		            </div>
+		        </li>
+		    </ul>
+		</button>
+	{% endif %}
 {% endif %}
 
-<button type="button" class="btn w100 btn-{% if view == "edit_notifications" %}extra-{% endif %}emphasized {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}fine-space{% endif %}" href="{% url 'cosinnus:notifications' %}">
+<button type="button" class="btn w100 btn-{% if view == "edit_notifications" %}extra-{% endif %}emphasized {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL and not SETTINGS.COSINNUS_IS_SSO_PORTAL %}fine-space{% endif %}" href="{% url 'cosinnus:notifications' %}">
     <ul class="media-list">
         <li class="media">
            <a class="pull-left">
@@ -64,7 +66,7 @@
     </ul>
 </button>
 
-{% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+{% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL and not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
 	<button type="button" class="btn w100 btn-{% if view == "change_password" %}extra-{% endif %}emphasized regular-space" href="{% url 'password_change' %}">
 	    <ul class="media-list">
 	        <li class="media">
