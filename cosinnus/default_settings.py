@@ -419,3 +419,6 @@ COSINNUS_ALLOW_DASHBOARD_WIDGET_REARRANGE = False
 # Default country code to assume when none is entered for django-phonenumber-field
 PHONENUMBER_DEFAULT_REGION = 'DE'
 
+# PIWIK settings. set individually for each portal. won't load if PIWIK_SITE_ID is not set
+PIWIK_SERVER_URL = '//stats.wechange.de/'
+PIWIK_SITE_ID = None
