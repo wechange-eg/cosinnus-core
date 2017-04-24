@@ -461,8 +461,8 @@ def user_api_me(request):
         data.update({
             'username': user.username,
             'id': user.id,
-            'first_name': user.first_name,
-            'last_name': user.last_name,
+            'first_name': user.first_name or '',
+            'last_name': user.last_name or '',
             'avatar_url': CosinnusPortal.get_current().get_domain() + user.cosinnus_profile.get_avatar_thumbnail_url(), 
         })
     
