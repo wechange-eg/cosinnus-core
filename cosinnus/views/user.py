@@ -25,7 +25,7 @@ from cosinnus.models.group import CosinnusPortal
 from cosinnus.core.mail import MailThread, get_common_mail_context,\
     send_mail_or_fail_threaded
 from django.template.loader import render_to_string
-from django.http.response import HttpResponseNotAllowed
+from django.http.response import HttpResponseNotAllowed, JsonResponse
 from django.shortcuts import redirect
 from cosinnus.templatetags.cosinnus_tags import full_name_force
 from django.contrib.auth.views import password_reset, password_change
@@ -450,3 +450,21 @@ def set_user_email_to_verify(user, new_email, request=None, user_has_just_regist
         subj_user = render_to_string('cosinnus/mail/user_email_verification%s_subj.txt' % ('_onchange' if not user_has_just_registered else ''), data)
         send_mail_or_fail_threaded(new_email, subj_user, 'cosinnus/mail/user_email_verification%s.html' \
                     % ('_onchange' if not user_has_just_registered else ''), data)
+
+
+def user_api_me(request):
+    """ Returns a JSON dict of publicly available user data about the currently logged-in user.
+        Returens {} if no user is logged in this session. """
+    data = {}
+    if request.user.is_authenticated():
+        user = request.user
+        data.update({
+            'username': user.username,
+            'id': user.id,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'avatar_url': CosinnusPortal.get_current().get_domain() + user.cosinnus_profile.get_avatar_thumbnail_url(), 
+        })
+    
+    return JsonResponse(data)
+

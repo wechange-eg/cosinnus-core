@@ -13,6 +13,7 @@ urlpatterns = api_patterns(1, None, False, 'cosinnus.views',
     url(r'^logout/$', 'user.logout_api', name='logout'),
     
     url(r'^statistics/general/$', 'statistics.general',  name='statistics-general'),
+    url(r'^user/me/$', 'user.user_api_me',  name='user-api-me'),
 )
 
 
