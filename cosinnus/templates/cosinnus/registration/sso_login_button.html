@@ -1,0 +1,16 @@
+{% load i18n %}
+
+<button href="{% url "sso-login" %}{% if next %}?next={{ next }}{% elif request.GET.next %}?next={{ request.GET.next }}{% endif %}" class="btn btn-emphasized pull-left large-space" style="width: auto; margin-left: 0;">
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#" tabindex="-1">
+                {% include 'cosinnus/brand.html' %}
+            </a>
+            <div class="media-body">
+                {% block login_button_label %}
+                    {% trans "Log in" %}
+                {% endblock %}
+            </div>
+        </li>
+    </ul>
+</button>

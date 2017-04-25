@@ -9,6 +9,7 @@ from cosinnus.core.registries.widgets import widget_registry
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.contrib.auth import get_user_model
 from django.core.exceptions import MultipleObjectsReturned
+from django.utils.crypto import get_random_string
 
 logger = logging.getLogger('cosinnus')
 
@@ -106,3 +107,45 @@ def filter_active_users(user_model_qs, filter_on_user_profile_model=False):
         return user_model_qs.exclude(is_active=False).\
             exclude(last_login__exact=None).\
             filter(cosinnus_profile__settings__contains='tos_accepted')
+
+        
+def create_user(email, username=None, first_name=None, last_name=None, tos_checked=True):
+    """ Creates a user with a random password, and adds proper PortalMemberships for this portal.
+        @param email: Email is required because it's basically our pk
+        @param username: Can be left blank and will then be set to the user's id after creation.
+        @param tos_checked: Set to False if the user should have to check the Terms of Services upon first login.
+        @return: A <USER_MODEL> instance if creation successful, False if failed to create (was the username taken?)
+    """
+    from cosinnus.forms.user import UserCreationForm 
+    from cosinnus.models.profile import get_user_profile_model # leave here because of cyclic imports
+    
+    pwd = get_random_string()
+    data = {
+        'username': username or get_random_string(),
+        'email': email,
+        'password1': pwd,
+        'password2': pwd,
+        'first_name': first_name,
+        'last_name': last_name,
+        'tos_check': True, # needs to be True for form validation, may be reset later
+    }
+    # use Cosinnus' UserCreationForm to apply all usual user-creation-related effects
+    form = UserCreationForm(data)
+    if form.is_valid():
+        user = form.save()
+    else:
+        return False
+    # always retrieve this to make sure the profile was created, we had a Heisenbug here
+    profile = get_user_profile_model()._default_manager.get_for_user(user)
+    
+    if not tos_checked:
+        profile.settings['tos_accepted'] = False
+        profile.save()
+    
+    # username is always its id
+    user.username = user.id
+    
+    user.backend = 'cosinnus.backends.EmailAuthBackend'
+    user.save()
+    
+    return user

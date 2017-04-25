@@ -28,19 +28,21 @@
 			        <legend class="large-space userprofile-title ">{{ this_user.cosinnus_profile.get_extended_full_name }}</legend>
 			
 			        {% if request.user.is_authenticated and request.user == this_user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
-			            <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:profile-edit' %}">
-                            <ul class="media-list">
-                                <li class="media">
-                                    <a class="pull-left" href="#">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                    <div class="media-body">
-                                        {% trans "Edit Profile" %}
-                                    </div>
-                                </li>
-                            </ul>
-                        </button>
-                        <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:notifications' %}" title="{% trans "Notification Preferences" %}">
+			            {% if not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
+				            <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:profile-edit' %}">
+	                            <ul class="media-list">
+	                                <li class="media">
+	                                    <a class="pull-left" href="#">
+	                                        <i class="fa fa-pencil"></i>
+	                                    </a>
+	                                    <div class="media-body">
+	                                        {% trans "Edit Profile" %}
+	                                    </div>
+	                                </li>
+	                            </ul>
+	                        </button>
+                        {% endif %}
+                        <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:notifications' %}" title="{% trans "Notification Preferences" %}" style="width: auto;">
                             <ul class="media-list">
                                 <li class="media">
                                     <a class="pull-left" href="#">
@@ -52,6 +54,20 @@
                                 </li>
                             </ul>
                         </button>
+                        {% if SETTINGS.COSINNUS_IS_SSO_PORTAL %}
+                            <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:profile-delete' %}">
+                                <ul class="media-list">
+                                    <li class="media">
+                                        <a class="pull-left" href="#">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                        <div class="media-body">
+                                            {% trans "Delete profile" %}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </button>
+                        {% endif %}
 			        {% else %}
 			            {% comment %} Abonnieren is out for now 
 			            <button type="button" class="btn btn-default">

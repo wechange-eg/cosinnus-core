@@ -7,8 +7,11 @@ from django.views.generic import TemplateView
 from cosinnus.core.registries import url_registry
 from cosinnus.conf import settings
 from cosinnus.core.registries.group_models import group_model_registry
-from cosinnus.templatetags.cosinnus_tags import is_integrated_portal
+from cosinnus.templatetags.cosinnus_tags import is_integrated_portal,\
+    is_sso_portal
 from django.views.decorators.clickjacking import xframe_options_exempt
+from django.views.generic.base import RedirectView
+from django.core.urlresolvers import reverse_lazy
 
 urlpatterns = patterns('cosinnus.views',
     # we do not define an index anymore and let CMS handle that.
@@ -70,19 +73,27 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^select2/', include('cosinnus.urls_select2', namespace='select2')),
 )
 
-# user management not allowed in integrated mode
+# some user management not allowed in integrated mode and sso-mode
+if not is_integrated_portal() and not is_sso_portal():
+    urlpatterns += patterns('cosinnus.views',
+        url(r'^profile/dashboard/$', 'widget.user_dashboard', name='user-dashboard'),
+        url(r'^profile/edit/$', 'profile.update_view', name='profile-edit'),
+        url(r'^signup/$', 'user.user_create', name='user-add'),
+    )
+
+# some more user management not allowed in integrated mode
 if not is_integrated_portal():
     urlpatterns += patterns('cosinnus.views',
         url(r'^profile/$', 'profile.detail_view', name='profile-detail'),
-        url(r'^profile/dashboard/$', 'widget.user_dashboard', name='user-dashboard'),
-        url(r'^profile/edit/$', 'profile.update_view', name='profile-edit'),
-                            
-        url(r'^signup/$', 'user.user_create', name='user-add'),
         url(r'^profile/delete/$', 'profile.delete_view', name='profile-delete'),
-        
+    )
+
+# in SSO-portals we redirect the signup page to the login page
+if is_sso_portal():
+    urlpatterns += patterns('cosinnus.views',
+        url(r'^signup/$', RedirectView.as_view(url=reverse_lazy('login'), permanent=False)),
     )
     
-
 if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED:
     urlpatterns += patterns('cosinnus.views', 
         url(r'^fb-integration/save-auth-tokens/$', 'facebook_integration.save_auth_tokens',  name='facebook-save-auth-tokens'),

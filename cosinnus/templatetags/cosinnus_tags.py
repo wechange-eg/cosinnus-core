@@ -706,6 +706,12 @@ def is_integrated_portal():
     return getattr(settings, 'COSINNUS_IS_INTEGRATED_PORTAL', False)
 
 
+@register.simple_tag()
+def is_sso_portal():
+    """ Returns True if this portal is running in single external sign-on only mode for user auth """
+    return getattr(settings, 'COSINNUS_IS_SSO_PORTAL', False)
+
+
 @register.filter
 def textfield(field):
     """ Renders a textfield's text safely with escaping, but retains linebreaks 
