@@ -10,4 +10,3 @@ class CosinnusAppConfig(AppConfig):
     def ready(self):
         from cosinnus.models.group import replace_swapped_group_model
         replace_swapped_group_model()
-        from cosinnus.models.hooks import *
