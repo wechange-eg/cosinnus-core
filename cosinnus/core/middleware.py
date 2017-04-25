@@ -17,7 +17,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.core import signals as cosinnus_signals
-from cosinnus.templatetags.cosinnus_tags import is_sso_portal
 
 
 logger = logging.getLogger('cosinnus')
