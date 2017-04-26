@@ -20,6 +20,7 @@ from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.utils.group import get_cosinnus_group_model
+from django.contrib.auth import login as django_login
 
 
 class SingleDeleteActionMixin(object):
@@ -297,7 +298,7 @@ class UserHasLoggedInFilter(admin.SimpleListFilter):
 
 class UserAdmin(DjangoUserAdmin):
     inlines = (UserProfileInline, PortalMembershipInline)#, GroupMembershipInline)
-    actions = ['deactivate_users', 'export_as_csv']
+    actions = ['deactivate_users', 'export_as_csv', 'log_in_as_user']
     list_display = ('email', 'is_active', 'has_logged_in', 'tos_accepted', 'username', 'first_name', 'last_name', 'is_staff', )
     list_filter = list(DjangoUserAdmin.list_filter) + [UserHasLoggedInFilter, UserToSAcceptedFilter,]
     
@@ -320,6 +321,11 @@ class UserAdmin(DjangoUserAdmin):
         message = _('%d Users were deactivated successfully.') % count
         self.message_user(request, message)
     deactivate_users.short_description = _('Deactivate users (will keep all all items they created on the site)')
+    
+    def log_in_as_user(self, request, queryset):
+        user = queryset[0]
+        user.backend = 'cosinnus.backends.EmailAuthBackend'
+        django_login(request, user)
     
 
 admin.site.unregister(USER_MODEL)
