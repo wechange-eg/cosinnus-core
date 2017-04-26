@@ -23,6 +23,7 @@ from cosinnus.utils.files import get_avatar_filename
 from cosinnus.utils.oauth import do_oauth1_request, do_oauth1_receive
 from cosinnus.utils.user import create_user
 from django.utils.http import is_safe_url
+from django.db.models import Q
 
 
 logger = logging.getLogger('cosinnus')
@@ -74,8 +75,19 @@ def callback(request):
     # because of this, we actually may end up with non-unique emails in cosinnus, but since regular authentication is disabled,  this should not cause problems
     # Note: using a raw query here for actual safe JSON-matching
     try:
-        profile = get_user_profile_model().objects.all().extra(where=["settings::json->>'%s' = '%d'" % (SSO_USERPROFILE_FIELD_ID, user_info['id'])]).get()
+        if getattr(settings, 'COSINNUS_DO_ALL_SERVERS_HAVE_PSQL_9_3', False):
+            # psql 9.3 does JSON right
+            profile = get_user_profile_model().objects.all().extra(where=["settings::json->>'%s' = '%d'" % (SSO_USERPROFILE_FIELD_ID, user_info['id'])]).get()
+        else:
+            # fall back to a bad method for JSON field filtering
+            attr = '"%s":%d' % (SSO_USERPROFILE_FIELD_ID, user_info['id'])
+            profile = get_user_profile_model().objects.all().filter(Q(settings__icontains='%s,' % attr) | Q(settings__icontains='%s}' % attr)).get()
+        
         user = profile.user
+        if not user.is_active:
+            messages.error(request, _('Sorry, you cannot log in because your account is suspended. Please contact a system administrator!'))
+            return redirect('sso-error')
+        
     except get_user_profile_model().DoesNotExist:
         # if the user doesn't exist yet, create a user acount and portal membership for him
         # we create the user with a random email to get around cosinnus' unique-email validation,
