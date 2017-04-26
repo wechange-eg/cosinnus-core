@@ -44,7 +44,7 @@ def login(request):
         auth_url = do_oauth1_request(request) 
     except Exception, e:
         logger.error('Exception during SSO login, exception was "%s"' % str(e), extra={'trace': traceback.format_exc()})
-        messages.error(request, force_text(_('Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!')) + '(sso:1)')
+        messages.error(request, force_text(_('Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!')) + ' (sso:1)')
         if settings.DEBUG:
             raise
         return redirect(reverse('sso-error'))
@@ -61,7 +61,7 @@ def callback(request):
         user_info = do_oauth1_receive(request)
     except Exception, e:
         logger.error('Exception during SSO callback, exception was "%s"' % str(e), extra={'trace': traceback.format_exc()})
-        messages.error(request, force_text(_('Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!')) + '(sso:2)')
+        messages.error(request, force_text(_('Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!')) + ' (sso:2)')
         if settings.DEBUG:
             raise
         return redirect(reverse('sso-error'))
@@ -69,7 +69,7 @@ def callback(request):
     # these properties are required and thus guarenteed to be in the user_info dict in the following code
     if not all([bool(prop in user_info) for prop in ['username', 'email', 'id']]):
         logger.error('Exception during SSO login, not all expected properties in returned user info JSON!', extra={'user_info': user_info})
-        messages.error(request, force_text(_('Sorry, we could not connect your user account, because we could not retrieve important user account infos. Please contact a system administrator!')) + '(sso:3)')
+        messages.error(request, force_text(_('Sorry, we could not connect your user account, because we could not retrieve important user account infos. Please contact a system administrator!')) + ' (sso:3)')
         return redirect('sso-error')
     
     # match user over ID, never email! this could be used to take over other user accounts if the SSO server does not enforce email validation
@@ -86,7 +86,7 @@ def callback(request):
         
         user = profile.user
         if not user.is_active:
-            messages.error(request, force_text(_('Sorry, you cannot log in because your account is suspended. Please contact a system administrator!')) + '(sso:4)')
+            messages.error(request, force_text(_('Sorry, you cannot log in because your account is suspended. Please contact a system administrator!')) + ' (sso:4)')
             return redirect('sso-error')
         
     except get_user_profile_model().DoesNotExist:
@@ -100,7 +100,7 @@ def callback(request):
         )
         if not user:
             logger.error('Exception during SSO login, User could not be created!', extra={'user_info': user_info})
-            messages.error(request, force_text(_('Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!')) + '(sso:5)')
+            messages.error(request, force_text(_('Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!')) + ' (sso:5)')
             return redirect('sso-error')
         
         profile = user.cosinnus_profile

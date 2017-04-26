@@ -134,6 +134,7 @@ def create_user(email, username=None, first_name=None, last_name=None, tos_check
     if form.is_valid():
         user = form.save()
     else:
+        logger.warning('Manual user creation failed because of form errors!', extra={'data': data, 'form-errors': form.errors})
         return False
     # always retrieve this to make sure the profile was created, we had a Heisenbug here
     profile = get_user_profile_model()._default_manager.get_for_user(user)
