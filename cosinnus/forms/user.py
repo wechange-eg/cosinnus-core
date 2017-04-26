@@ -50,7 +50,7 @@ class UserCreationForm(DjUserCreationForm):
     tos_check = forms.BooleanField(label='tos_check', required=True)
     
     
-    if not settings.DEBUG and not settings.TESTING and not settings.COSINNUS_IS_INTEGRATED_PORTAL: 
+    if not settings.DEBUG and not settings.TESTING and not settings.COSINNUS_IS_INTEGRATED_PORTAL and not settings.COSINNUS_IS_SSO_PORTAL: 
         captcha = ReCaptchaField(attrs={'theme': 'clean'}, required=settings.DEBUG == False)
     
     def __init__(self, *args, **kwargs):
