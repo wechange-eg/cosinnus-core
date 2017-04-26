@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-06 16:19+0200\n"
-"PO-Revision-Date: 2017-04-06 16:49+0200\n"
+"POT-Creation-Date: 2017-04-26 16:38+0200\n"
+"PO-Revision-Date: 2017-04-26 16:39+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -2547,6 +2547,9 @@ msgstr "Ich habe die Nutzungsbedingungen gelesen und akzeptiere sie:"
 msgid "Terms and Services"
 msgstr "Nutzungsbedingungen"
 
+msgid "Log in"
+msgstr "Login"
+
 msgid "Search"
 msgstr "Suche"
 
@@ -3156,6 +3159,15 @@ msgstr "Dein Profil wurde erfolgreich gelöscht. Schade dass du nicht länger be
 msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
 msgstr "Du bist der/die letzte Administrator(in) übrig in \"%s\". Bitte wähle vor dem Löschen deines Profils einen anderen Administrator aus oder lösche das Projekt zuerst."
 
+msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
+msgstr "Entschuldige, wir konnten aufgrund eines internen Fehlers dein Benutzerkonto nicht einloggen. Bitte kontaktiere einen Administrator!"
+
+msgid "Sorry, we could not connect your user account, because we could not retrieve important user account infos. Please contact a system administrator!"
+msgstr "Entschuldige, wir konnten dein Benutzerkonto nicht einloggen, weil wir Benutzerinformationen nicht auslesen konnten. Bitte kontaktiere einen Administrator!"
+
+msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
+msgstr "Entschuldige, du kannst dich nicht einloggen, weil dein Benutzerkonto gesperrt wurde. Bitte kontaktiere einen Administrator!"
+
 #, python-format
 msgid "User \"%(user)s\" was registered successfully. You can now log in using this username."
 msgstr "Benutzer_in \"%(user)s\" wurde erfolgreich registriert. Sie können sich jetzt mit diesen Benutzer_innen-Namen einloggen."
@@ -3215,6 +3227,9 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten 
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "Sorry, we could not connect your user account. Please contact a system administrator!"
+#~ msgstr "Entschuldige, wir konnten aufgrund eines Fehlers dein Benutzerkonto nicht einloggen. Bitte kontaktiere einen Administrator!"
 
 #~ msgid "You have been invited to join \"%(team_name)s\" on %(site_name)s."
 #~ msgstr "Du wurdest eingeladen \"%(team_name)s\" beizutreten auf %(site_name)s!"

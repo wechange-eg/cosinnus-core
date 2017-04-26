@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-06 16:19+0200\n"
+"POT-Creation-Date: 2017-04-26 16:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2396,6 +2396,9 @@ msgstr ""
 msgid "Terms and Services"
 msgstr ""
 
+msgid "Log in"
+msgstr ""
+
 msgid "Search"
 msgstr ""
 
@@ -2998,6 +3001,15 @@ msgstr ""
 
 #, python-format
 msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
+msgstr ""
+
+msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
+msgstr ""
+
+msgid "Sorry, we could not connect your user account, because we could not retrieve important user account infos. Please contact a system administrator!"
+msgstr ""
+
+msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr ""
 
 #, python-format

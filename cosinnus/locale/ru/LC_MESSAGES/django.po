@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-06 16:19+0200\n"
+"POT-Creation-Date: 2017-04-26 16:38+0200\n"
 "PO-Revision-Date: 2017-01-09 11:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2609,6 +2609,11 @@ msgstr "Я ознакомился и согласен с условиями по
 msgid "Terms and Services"
 msgstr "Условия пользования сайтом"
 
+#, fuzzy
+#| msgid "Login"
+msgid "Log in"
+msgstr "Логин"
+
 msgid "Search"
 msgstr "Поиск"
 
@@ -3222,6 +3227,21 @@ msgstr "Ваш профиль удален. Жаль, что Вы больше �
 msgid "You are the only administrator left for \"%s\". Please appoint a different administrator or delete it first."
 msgstr "Вы последний администратор \"%s\". Пожалуйста, определите другого администратора перед тем, как удалить свой профиль, или сначала удалите проект."
 
+#, fuzzy
+#| msgid "We could not retrieve your groups from Facebook because of an error. Please contact an administrator!"
+msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
+msgstr "Произошла ошибка! Мы не смогли подключиться к Вашим группам на Фейсбуке. Пожалуйста, обратитесь к администратору."
+
+#, fuzzy
+#| msgid "We could not retrieve your groups from Facebook because of an error. Please contact an administrator!"
+msgid "Sorry, we could not connect your user account, because we could not retrieve important user account infos. Please contact a system administrator!"
+msgstr "Произошла ошибка! Мы не смогли подключиться к Вашим группам на Фейсбуке. Пожалуйста, обратитесь к администратору."
+
+#, fuzzy
+#| msgid "An error occured when trying to disconnect your facebook account! Please contact an administrator!"
+msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
+msgstr "Произошла ошибка при попытке отсоединения Вашего Фейсбук-аккаунта! Пожалуйста, обратитесь к администратору!"
+
 #, python-format
 msgid "User \"%(user)s\" was registered successfully. You can now log in using this username."
 msgstr "Пользователь \"%(user)s\" зарегистрирован. Теперь Вы можете войти в систему, используя это имя."
@@ -3281,6 +3301,11 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены"
+
+#, fuzzy
+#~| msgid "An error occured when trying to disconnect your facebook account! Please contact an administrator!"
+#~ msgid "Sorry, we could not connect your user account. Please contact a system administrator!"
+#~ msgstr "Произошла ошибка при попытке отсоединения Вашего Фейсбук-аккаунта! Пожалуйста, обратитесь к администратору!"
 
 #~ msgid "You have been invited to join \"%(team_name)s\" on %(site_name)s."
 #~ msgstr "Вас пригласили присоединиться к \"%(team_name)s\" на %(site_name)s"
