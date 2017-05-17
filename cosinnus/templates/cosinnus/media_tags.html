@@ -41,12 +41,8 @@
 <ol class="input-area" {% if not show_files == True and not show_all == True %}style="display: none;"{% endif %} id="attachments-selector">
     <li class="w100">
     	<div>
-        <i class="fa fa-fw fa-paperclip"></i>
-        {% captureas placeholder %}{% trans "Attach existing Files..." %}{% endcaptureas %}
-        {% render_field form.forms.obj.attached_objects placeholder=placeholder %}
-	    <div class="">
-		    {% include 'cosinnus/attached/file_upload_button.html' with attachments_only=True %}
-	    </div>
+	        <i class="fa fa-fw fa-paperclip"></i>
+	        {% include 'cosinnus/attached/attached_objects_widget.html' with form=form.forms.obj %}
         </div>
     </li>
 </ol>

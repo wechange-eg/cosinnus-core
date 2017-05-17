@@ -1,0 +1,9 @@
+{% load i18n cosinnus_tags widget_tweaks %}
+
+{% with group=form.target_group %}
+	{% captureas placeholder %}{% trans "Attach existing Files..." %}{% endcaptureas %}
+	{% render_field form.attached_objects placeholder=placeholder %}
+	<div class="">
+	   {% include 'cosinnus/attached/file_upload_button.html' with attachments_only=True %}
+	</div>
+{% endwith %}

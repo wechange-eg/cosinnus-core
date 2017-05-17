@@ -410,6 +410,7 @@ NEWW_DEFAULT_USER_AUTH_GROUPS = ['Users']
 # new user that register will automatically become members of these groups/projects (supply group slugs!)
 NEWW_DEFAULT_USER_GROUPS = ['forum']
 
+# the "Home" group for this portal. if not set, some things won't work (like attaching files to direct messages)
 NEWW_FORUM_GROUP_SLUG = 'forum'
 
 # if enabled, group admins will see a "rearrange" button and can re-order the widgets.

@@ -28,7 +28,7 @@ def build_attachment_field_result(obj_type, obj):
 
 class AttachableViewMixin(object):
     """
-    Used together with FormAttachable.
+    Used together with FormAttachableMixin.
 
     Extending this view will add form fields for Cosinnus attachable objects to
     `CreateView`s and `UpdateView`s. Configure which cosinnus objects may be

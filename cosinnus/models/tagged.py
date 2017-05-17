@@ -220,8 +220,35 @@ class AttachedObject(models.Model):
         return self._model_name
 
 
+class AttachableObjectModel(models.Model):
+    
+    class Meta:
+        abstract = True
+    
+    attached_objects = models.ManyToManyField(AttachedObject, blank=True, null=True)
+    
+    @cached_property
+    def attached_image(self):
+        """ Return the first image file attached to the event as the event's image """
+        for attached_file in self.attached_objects.all():
+            if attached_file.model_name == "cosinnus_file.FileEntry" and attached_file.target_object is not None and \
+                        attached_file.target_object.is_image:
+                return attached_file.target_object
+        return None
+    
+    @cached_property
+    def attached_images(self):
+        """ Return the all image files attached to the event"""
+        images = []
+        for attached_file in self.attached_objects.all():
+            if attached_file.model_name == "cosinnus_file.FileEntry" and attached_file.target_object is not None and \
+                         attached_file.target_object.is_image:
+                images.append(attached_file.target_object)
+        return images
+    
+
 @python_2_unicode_compatible
-class BaseTaggableObjectModel(models.Model):
+class BaseTaggableObjectModel(AttachableObjectModel):
     """
     Represents the base for all cosinnus main models. Each inheriting model
     has a set of simple ``tags`` which are just strings. Additionally each
@@ -231,8 +258,6 @@ class BaseTaggableObjectModel(models.Model):
 
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
         blank=True, null=True, on_delete=models.SET_NULL)
-
-    attached_objects = models.ManyToManyField(AttachedObject, blank=True, null=True)
 
     group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, verbose_name=_('Team'),
         related_name='%(app_label)s_%(class)s_set', on_delete=models.CASCADE)
@@ -292,26 +317,6 @@ class BaseTaggableObjectModel(models.Model):
             else:
                 setattr(self, key, self.media_tag)
         return getattr(self, key)
-    
-    @cached_property
-    def attached_image(self):
-        """ Return the first image file attached to the event as the event's image """
-        for attached_file in self.attached_objects.all():
-            if attached_file.model_name == "cosinnus_file.FileEntry" and attached_file.target_object is not None and \
-                        attached_file.target_object.is_image:
-                return attached_file.target_object
-        return None
-    
-    @cached_property
-    def attached_images(self):
-        """ Return the all image files attached to the event"""
-        images = []
-        for attached_file in self.attached_objects.all():
-            if attached_file.model_name == "cosinnus_file.FileEntry" and attached_file.target_object is not None and \
-                         attached_file.target_object.is_image:
-                images.append(attached_file.target_object)
-        return images
-    
     
     @property
     def sort_key(self):

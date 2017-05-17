@@ -14,11 +14,13 @@ from cosinnus.views.attached_object import AttachableObjectSelect2View,\
 from cosinnus.core.registries import attached_object_registry
 from django.core.urlresolvers import reverse
 from django_select2.util import JSFunction
-from cosinnus.forms.tagged import BaseTaggableObjectForm
 from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.conf import settings
+from annoying.functions import get_object_or_None
+from cosinnus.utils.group import get_cosinnus_group_model
 
 
-class FormAttachable(BaseTaggableObjectForm):
+class FormAttachableMixin(object):
     """
     Used together with AttachableViewMixin.
 
@@ -29,7 +31,7 @@ class FormAttachable(BaseTaggableObjectForm):
     `attached_objects` M2M field.
     """
     def __init__(self, *args, **kwargs):
-        super(FormAttachable, self).__init__(*args, **kwargs)
+        super(FormAttachableMixin, self).__init__(*args, **kwargs)
         
         # retrieve the attached objects ids to select them in the update view
         preresults = []
@@ -47,19 +49,31 @@ class FormAttachable(BaseTaggableObjectForm):
         # each field's name is something like 'attached:cosinnus_file.FileEntry'
         # and fill the field with all available objects for that type (this is passed from our view)
         source_model_id = self._meta.model._meta.app_label + '.' + self._meta.model._meta.object_name
-        
+
+        # get target groups to add newly attached files to        
+        target_group = getattr(self, 'group', None)
+        if not target_group:
+            # if this form's model has no group, it may be a global object that can still have attachments,
+            # so fall back to the forum group to add attached objects to. if this doesn't exist, attaching in not possible.
+            forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+            if forum_slug:
+                target_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug)
+                    
         """ Add attachable objects field if this model is configured in settings.py to have objects that can be attached to it """
-        if attached_object_registry.get_attachable_to(source_model_id):
+        if target_group and attached_object_registry.get_attachable_to(source_model_id):
             self.fields['attached_objects'] = AttachableObjectSelect2MultipleChoiceField(
                 label=_("Attachments"), 
                 help_text=_("Type the title and/or type of attachment"), 
-                data_url=group_aware_reverse('cosinnus:attached_object_select2_view', kwargs={'group': self.group, 'model':source_model_id}),
+                data_url=group_aware_reverse('cosinnus:attached_object_select2_view', kwargs={'group': target_group, 'model':source_model_id}),
                 required=False
             )
             # we need to cheat our way around select2's annoying way of clearing initial data fields
             self.fields['attached_objects'].choices = preresults #((1, 'hi'),)
             self.fields['attached_objects'].initial = [key for key,val in preresults] #[1]
-            
+            setattr(self, 'target_group', target_group)
+            print ">w", self.target_group
+        else:
+            print ">> didnt add"
 
     def save_attachable(self):
         """ Called by `AttachableViewMixin.form_valid()`
