@@ -71,19 +71,22 @@ class FormAttachableMixin(object):
             self.fields['attached_objects'].choices = preresults #((1, 'hi'),)
             self.fields['attached_objects'].initial = [key for key,val in preresults] #[1]
             setattr(self, 'target_group', target_group)
-            print ">w", self.target_group
-        else:
-            print ">> didnt add"
 
     def save_attachable(self):
         """ Called by `AttachableViewMixin.form_valid()`
             For some reason, this field is not being saved automatically,
-            even though field and model field are named the same. """
-        self.instance.attached_objects.clear()
-        for attached_obj in self.cleaned_data.get('attached_objects', []):
-            self.instance.attached_objects.add(attached_obj)
+            even though field and model field are named the same.
+            We also run this on any instances in `self.extra_instances, because sometimes
+            like in postman, forms save aways more than one instance.`
+             """
+        instances = [self.instance]
+        if getattr(self, 'extra_instances', []):
+            instances.extend(self.extra_instances)
+        for instance in instances:
+            instance.attached_objects.clear()
+            for attached_obj in self.cleaned_data.get('attached_objects', []):
+                instance.attached_objects.add(attached_obj)
         
-                    
 
 class AttachableObjectSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoiceField):
     queryset = AttachedObject
