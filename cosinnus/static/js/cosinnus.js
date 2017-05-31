@@ -1047,6 +1047,7 @@
                         // and had clicked the result in the select2 result dropdown 
                         // by directly interfacing with the select2 object on that field
                         if (data.result.on_success == 'add_to_select2') {
+                            $('#attachments-existing-files').show();
                             var select2_obj = $('#s2id_' + $(this).data('cosinnus-upload-select2-target-field')).data('select2');
                             if (!select2_obj) {
                                 alert('Upload complete but the file could not be added to the field. Type in the filename to attach it!')

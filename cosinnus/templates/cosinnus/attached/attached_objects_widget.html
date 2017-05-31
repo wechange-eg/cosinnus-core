@@ -1,9 +1,11 @@
 {% load i18n cosinnus_tags widget_tweaks %}
 
 {% with group=form.target_group %}
-	{% captureas placeholder %}{% trans "Attach existing Files..." %}{% endcaptureas %}
-	{% render_field form.attached_objects placeholder=placeholder %}
-	<div class="">
-	   {% include 'cosinnus/attached/file_upload_button.html' with attachments_only=True %}
-	</div>
+    <span id="attachments-existing-files" {% if hide_existing_file_field %}style="display: none;"{% endif %}>
+        {% captureas placeholder %}{% trans "Attach existing Files..." %}{% endcaptureas %}
+        {% render_field form.attached_objects placeholder=placeholder %}
+    </span>
+    <div class="">
+       {% include 'cosinnus/attached/file_upload_button.html' with attachments_only=True %}
+    </div>
 {% endwith %}
