@@ -12,7 +12,7 @@
 		{% with persons=mt.persons.all tags=mt.tags.all location=mt.location topics=mt.get_topics approach=mt.approach visibility=mt.visibility %}
 		    {% if persons or tags or location or topics or approach or visibility != 1 and not hide_visibility_tag %}
 		
-				<div class="{% if list_view %}btn btn-default w100 indented{% else %}btn btn-default dashboard-appwidget-contentline-extra-indented{% endif %}">
+				<div class="{% if list_view %}btn btn-default w100 indented{% else %}btn btn-default dashboard-appwidget-contentline-indented{% endif %}">
 				    <ul class="media-list fine-space">
 				        <li class="media">
 				            <div class="media-body no-vertical-padding">
