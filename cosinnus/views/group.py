@@ -768,7 +768,7 @@ class GroupUserInviteView(AjaxableFormMixin, RequireAdminMixin, UserSelectMixin,
             signals.user_group_invited.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
             # we will also send out an internal direct message about the invitation to the user
             try:
-                from cosinnus_message.utils import write_postman_message
+                from cosinnus_message.utils.utils import write_postman_message
                 subject = _('I invited you to join "%(team_name)s"!') % {'team_name': self.object.group.name}
                 data = {
                     'user': user,
