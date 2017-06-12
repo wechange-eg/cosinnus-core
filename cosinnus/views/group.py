@@ -586,13 +586,22 @@ class GroupUserJoinView(SamePortalGroupMixin, GroupConfirmMixin, DetailView):
                 messages.success(self.request, _('You had already been invited to "%(team_name)s" and have now been made a member immediately!') % {'team_name': self.object.name})
                 signals.user_group_invitation_accepted.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
         except CosinnusGroupMembership.DoesNotExist:
-            CosinnusGroupMembership.objects.create(
-                user=self.request.user,
-                group=self.object,
-                status=MEMBERSHIP_PENDING
-            )
-            signals.user_group_join_requested.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
-            messages.success(self.request, self.message_success % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name})
+            # default user-auto-join groups will accept immediately
+            if self.object.slug in getattr(settings, 'NEWW_DEFAULT_USER_GROUPS', []):
+                CosinnusGroupMembership.objects.create(
+                    user=self.request.user,
+                    group=self.object,
+                    status=MEMBERSHIP_MEMBER
+                )
+                messages.success(self.request, _('You are now a member of %(team_type)s “%(team_name)s”. Welcome!') % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name})
+            else:
+                CosinnusGroupMembership.objects.create(
+                    user=self.request.user,
+                    group=self.object,
+                    status=MEMBERSHIP_PENDING
+                )
+                signals.user_group_join_requested.send(sender=self, obj=self.object, user=self.request.user, audience=list(get_user_model()._default_manager.filter(id__in=self.object.admins)))
+                messages.success(self.request, self.message_success % {'team_name': self.object.name, 'team_type':self.object._meta.verbose_name})
         self.referer = self.object.get_absolute_url()
         
 

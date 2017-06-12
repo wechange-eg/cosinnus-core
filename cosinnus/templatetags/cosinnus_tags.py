@@ -37,6 +37,7 @@ from django.template.defaultfilters import linebreaksbr, urlizetrunc
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from wagtail.wagtailcore.templatetags.wagtailcore_tags import richtext
 from uuid import uuid1
+from annoying.functions import get_object_or_None
 logger = logging.getLogger('cosinnus')
 
 register = template.Library()
@@ -126,6 +127,17 @@ def is_portal_admin_of(user, portal):
     """
     return check_user_portal_admin(user, portal=portal)
 
+@register.filter
+def is_member_in_forum(user):
+    """
+    Template filter to check if a user is in the default forum group.
+    """
+    forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+    if forum_slug:
+        forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug)
+        if forum_group:
+            return is_group_member(user, forum_group)
+    return False
 
 @register.filter
 def full_name(value):
