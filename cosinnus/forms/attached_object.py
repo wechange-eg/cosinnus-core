@@ -18,6 +18,7 @@ from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.conf import settings
 from annoying.functions import get_object_or_None
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.models.group import CosinnusPortal
 
 
 class FormAttachableMixin(object):
@@ -57,7 +58,7 @@ class FormAttachableMixin(object):
             # so fall back to the forum group to add attached objects to. if this doesn't exist, attaching in not possible.
             forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
             if forum_slug:
-                target_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug)
+                target_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
                     
         """ Add attachable objects field if this model is configured in settings.py to have objects that can be attached to it """
         if target_group and attached_object_registry.get_attachable_to(source_model_id):
