@@ -134,7 +134,7 @@ def is_member_in_forum(user):
     """
     forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
     if forum_slug:
-        forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug)
+        forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
         if forum_group:
             return is_group_member(user, forum_group)
     return False
