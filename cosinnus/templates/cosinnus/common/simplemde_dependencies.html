@@ -5,6 +5,13 @@
 
 <script>
   $(function(){
-      var simplemde = new SimpleMDE({ element: $('#{{ element_id }}')[0] });
+      var simplemde = new SimpleMDE({ 
+          element: $('#{{ element_id }}')[0],
+          spellChecker: false,
+          status: false,
+          shortcuts: {},
+          toolbar: ["bold", "italic", "strikethrough", "|", "unordered-list", "ordered-list", "|", "preview"],
+          
+      });
   });
 </script>
