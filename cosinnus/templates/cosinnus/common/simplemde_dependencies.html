@@ -1,0 +1,10 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/vendor/simplemde.min.css' %}">
+<script src="{% static 'js/vendor/simplemde.min.js' %}"></script>
+
+<script>
+  $(function(){
+      var simplemde = new SimpleMDE({ element: $('#{{ element_id }}')[0] });
+  });
+</script>
