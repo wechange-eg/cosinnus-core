@@ -69,7 +69,7 @@
         <div>
             {% if group.description and group.description|length > 0 %}
 	            <div class="media-body well">
-                    <p>{{ group.description|textfield }}</p>
+                    <div class="textfield">{{ group.description|textfield }}</div>
 	            </div>
             {% endif %}
             

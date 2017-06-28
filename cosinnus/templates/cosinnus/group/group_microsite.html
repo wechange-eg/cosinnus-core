@@ -349,7 +349,7 @@
 	        <div class="white-content">
 	        	{% block microsite_group_description %}
 	        		
-	        		<p>
+	        		<div class="textfield">
 		        	{% if group.description_long and group.description_long|length > 0 %}
 			            {{ group.description_long|textfield }}
 			        {% elif group.description and group.description|length > 0 %}
@@ -363,7 +363,7 @@
 			        		{% endif %}
 		        		</i>
 			        {% endif %}
-			        </p>
+			        </div>
 			        
 			        		{% comment %}  
 			        <div class="row">
@@ -490,9 +490,9 @@
 		        <div id="microsite_contact_content" class="white-content">
 					
 		        	{% if group.contact_info and group.contact_info|length > 0 %}
-			            <p>
+			            <div class="textfield">
 			            	{{ group.contact_info|textfield }}
-		            	</p>
+		            	</div>
 			        {% endif %}
 		        	
 		        	<p>
@@ -661,9 +661,9 @@
 		                    </div><!-- btn -->
 		                    <div class="white-content">
 		                        {% if group.call_to_action_description %}
-		                            <p>
+		                            <div class="textfield">
 		                                {{ group.call_to_action_description|textfield }}
-		                            </p>
+		                            </div>
 		                        {% endif %}
 		                        {% for cta_button in call_to_action_buttons %}
 		                            <button href="{{ cta_button.url }}" target="_blank" type="button" class="btn btn-emphasized" style="float: none; margin-left: 0px;">

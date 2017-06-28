@@ -270,7 +270,7 @@
                     
                     {% if group.description and group.description|length > 0 %}
                         <p></p>
-                        <p>{{ group.description|textfield }}</p>
+                        <div class="textfield transparent">{{ group.description|textfield }}</div>
                     {% else %}
                         <i>{% trans "No Description set" %}</i>
                     {% endif %}

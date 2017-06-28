@@ -124,9 +124,9 @@ body.body-no-nav {
 .content-box .form-control:-ms-input-placeholder { text-align: left; }
 
 // Simple text
-p, .white-content {
+p, .white-content, .textfield {
 	margin-bottom: 0;
-	padding: 8px;
+    padding: 8px;
 	background-color: @app-neutral-color-white;
 	color: @app-neutral-color-dark;
 
@@ -146,10 +146,17 @@ p, .white-content {
 		padding: 8px 0;
 	}
 }
+.textfield p:first-child {
+    padding-top: 0;    
+}
+.textfield p:last-child {
+    padding-bottom: 0;    
+}
+
 .white-content {
 	background-color: @app-neutral-color-white !important;
 }
-p.transparent, .white-content.transparent, .transparent-p p {
+p.transparent, .white-content.transparent, .transparent-p p, .textfield.transparent, .textfield.transparent p {
 	background-color: transparent !important;
 	padding: 0;
 	margin: -4px 0 8px 0;
