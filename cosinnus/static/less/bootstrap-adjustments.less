@@ -124,7 +124,7 @@ body.body-no-nav {
 .content-box .form-control:-ms-input-placeholder { text-align: left; }
 
 // Simple text
-p, .white-content, .textfield {
+p, .white-content, .textfield, .CodeMirror .editor-preview {
 	margin-bottom: 0;
     padding: 8px;
 	background-color: @app-neutral-color-white;
@@ -152,15 +152,19 @@ p, .white-content, .textfield {
 	}
 	
 }
+.media-body .textfield {
+    padding-top: 0;
+    padding-left: 0;
+}
+.media-body .textfield p {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
 .textfield p:first-child {
     padding-top: 0;    
 }
 .textfield p:last-child {
     padding-bottom: 0;    
-}
-.media-body .textfield p {
-    padding-top: 8px;
-    padding-bottom: 8px;
 }
 .media-body .textfield ul, .media-body .textfield ol {
     padding-bottom: 8px;
