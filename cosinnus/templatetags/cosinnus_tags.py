@@ -736,10 +736,7 @@ def textfield(text, arg=''):
         
     if not text:
         return ''
-    print ">>  in", text
-    #text = markdown(linebreaksbr(url_target_blank(urlizetrunc(text, 35)))).strip()
-    text = markdown(url_target_blank(urlizetrunc(text, 35)), 'strike').strip()
-    print ">> out", text
+    text = markdown(url_target_blank(urlizetrunc(text, 35)), 'strike,break-on-newline').strip()
     if arg == 'simple':
         text = text.replace('<p>', '').replace('</p>', '')
     return mark_safe(text)
