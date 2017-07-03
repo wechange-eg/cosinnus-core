@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-26 16:38+0200\n"
+"POT-Creation-Date: 2017-07-03 16:09+0200\n"
 "PO-Revision-Date: 2016-10-26 16:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -150,6 +150,16 @@ msgstr ""
 
 #, python-format
 msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
+msgstr ""
+
+msgid "You were made an admin of this team"
+msgstr ""
+
+msgid "Made you an admin"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
 msgstr ""
 
 msgid "You were tagged in a post, document or other item"
@@ -1041,6 +1051,9 @@ msgid "Members"
 msgstr ""
 
 msgid "Choose App"
+msgstr ""
+
+msgid "Attach existing Files..."
 msgstr ""
 
 msgid "Drag and Drop files here..."
@@ -2177,9 +2190,6 @@ msgstr ""
 msgid "Place or adress"
 msgstr ""
 
-msgid "Attach existing Files..."
-msgstr ""
-
 msgid "Select topic"
 msgstr ""
 
@@ -2900,6 +2910,10 @@ msgid "You had already been invited to \"%(team_name)s\" and have now been made 
 msgstr ""
 
 #, python-format
+msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
+msgstr ""
+
+#, python-format
 msgid "You are no longer a member of the %(team_type)s “%(team_name)s”."
 msgstr ""
 
@@ -2913,10 +2927,6 @@ msgstr ""
 
 #, python-format
 msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
-msgstr ""
-
-#, python-format
-msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
 msgstr ""
 
 #, python-format

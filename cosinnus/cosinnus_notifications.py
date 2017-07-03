@@ -19,7 +19,7 @@ from cosinnus.core.signals import user_group_join_requested,\
     user_group_invited
 
 user_tagged_in_object = dispatch.Signal(providing_args=["user", "obj", "audience"])
-
+user_group_made_admin = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 
 """ Notification definitions.
@@ -137,6 +137,24 @@ notifications = {
         },
        'notification_reason': 'admin',
     },    
+    'user_group_made_admin': {
+        'label': _('You were made an admin of this team'), 
+        'mail_template': '<html-only>',
+        'subject_template': '<html-only>',
+        'signals': [user_group_made_admin],
+        'default': True,
+        
+        'is_html': True,
+        'snippet_type': 'news',
+        'event_text': _('Made you an admin'),
+        'notification_text': _('%(sender_name)s made you an admin of "%(team_name)s" on %(portal_name)s!'),
+        'subject_text': _('%(sender_name)s made you an admin of "%(team_name)s" on %(portal_name)s!'),
+        'data_attributes': {
+            'object_name': '_sender_name',
+            'object_text': '_sender.cosinnus_profile.description', 
+        },
+        'notification_reason': 'none',
+    }, 
     'user_tagged_in_object': {
         'label': _('You were tagged in a post, document or other item'), 
         'mail_template': 'cosinnus/mail/user_tagged_in_object.txt',   # this template will be overwritten by specific items in other cosinnus apps

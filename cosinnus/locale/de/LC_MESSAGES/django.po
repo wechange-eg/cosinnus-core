@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-26 16:38+0200\n"
-"PO-Revision-Date: 2017-04-26 16:39+0200\n"
+"POT-Creation-Date: 2017-07-03 16:09+0200\n"
+"PO-Revision-Date: 2017-07-03 16:20+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -152,6 +152,16 @@ msgstr "%(sender_name)s hat die Einladung abgelehnt"
 #, python-format
 msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
 msgstr "%(sender_name)s hat die Einladung zu %(team_name)s abgelehnt."
+
+msgid "You were made an admin of this team"
+msgstr "Du wurdest in dieser Gruppe/Projekt zum Administrator befördert"
+
+msgid "Made you an admin"
+msgstr "Hat dich zum Administrator befördert"
+
+#, python-format
+msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s hat dich zu einem Administrator gemacht von %(team_name)s auf %(portal_name)s!"
 
 msgid "You were tagged in a post, document or other item"
 msgstr "Du wurdest in einem Beitrag, Dokument oder anderem Element markiert"
@@ -1045,6 +1055,9 @@ msgstr "Mitglieder"
 
 msgid "Choose App"
 msgstr "App auswählen"
+
+msgid "Attach existing Files..."
+msgstr "Vorhandene Datei wählen..."
 
 msgid "Drag and Drop files here..."
 msgstr "Dateien vom Computer hierher ziehen..."
@@ -2286,9 +2299,6 @@ msgstr "Tags markieren"
 msgid "Place or adress"
 msgstr "Ort oder Adresse"
 
-msgid "Attach existing Files..."
-msgstr "Vorhandene Datei wählen..."
-
 msgid "Select topic"
 msgstr "Thema markieren"
 
@@ -2997,6 +3007,10 @@ msgid "You had already been invited to \"%(team_name)s\" and have now been made 
 msgstr "Du wurdest bereits zu \"%(team_name)s\" eingeladen und bist deswegen direkt Mitglied geworden!"
 
 #, python-format
+msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
+msgstr "Du bist jetzt Mitglied von %(team_type)s “%(team_name)s”. Willkommen!"
+
+#, python-format
 msgid "You are no longer a member of the %(team_type)s “%(team_name)s”."
 msgstr "Du bist jetzt nicht mehr Mitglied von %(team_type)s “%(team_name)s”."
 
@@ -3011,10 +3025,6 @@ msgstr "Deine Beitrittsanfrage für %(team_type)s “%(team_name)s” wurde zur�
 #, python-format
 msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
 msgstr "Deine Einladung zu %(team_type)s “%(team_name)s” wurde erfolgreich abgelehnt."
-
-#, python-format
-msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
-msgstr "Du bist jetzt Mitglied von %(team_type)s “%(team_name)s”. Willkommen!"
 
 #, python-format
 msgid "User %(username)s had already requested membership and has now been made a member immediately!"
