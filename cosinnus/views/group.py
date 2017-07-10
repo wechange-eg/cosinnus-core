@@ -234,7 +234,7 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
         return kwargs
     
     def get_success_url(self):
-        return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.object})
+        return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.object})
 
 group_create = GroupCreateView.as_view()
 group_create_api = GroupCreateView.as_view(is_ajax_request_url=True)
@@ -502,7 +502,7 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin, AvatarFormMi
         return super(GroupUpdateView, self).forms_valid(form, inlines)
 
     def get_success_url(self):
-        return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.group})
+        return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group})
 
 group_update = GroupUpdateView.as_view()
 group_update_api = GroupUpdateView.as_view(is_ajax_request_url=True)
