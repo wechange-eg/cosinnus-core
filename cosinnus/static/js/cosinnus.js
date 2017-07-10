@@ -901,9 +901,9 @@
             $('.fa-square-o, .fa-check-square-o').parent().click(function() {
                 // message selected or deselected
                 if ($('.fa-check-square-o').length) {
-                    $('.messages-delete-button, .messages-archive-button').show();
+                    $('.messages-delete-button, .messages-archive-button, .mark_messages').show();
                 } else {
-                    $('.messages-delete-button, .messages-archive-button').hide();
+                    $('.messages-delete-button, .messages-archive-button, .mark_messages').hide();
                 }
             });
 
@@ -932,7 +932,9 @@
                         .next() // INPUT type="hidden"
                         .attr('value','false');
                         $('.mark_messages').hide();
-                        $('.mark_messages_true').show();
+                        if ($('.fa-check-square-o').length) {
+                            $('.mark_messages_true').show();
+                        }
                         $('.messages-delete-button, .messages-archive-button').hide();
                     }
                 });
