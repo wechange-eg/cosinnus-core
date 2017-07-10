@@ -15,7 +15,10 @@ from cosinnus.utils.choices import get_user_choices
 from cosinnus.utils.permissions import check_ug_membership
 from cosinnus.views.mixins.select2 import RequireGroupMember, RequireLoggedIn
 from cosinnus.utils.group import get_cosinnus_group_model
-from cosinnus.utils.user import filter_active_users
+from cosinnus.utils.user import filter_active_users,\
+    get_user_query_filter_for_search_terms
+from cosinnus.models.profile import get_user_profile_model
+
 
 
 class GroupMembersView(RequireGroupMember, Select2View):
@@ -33,11 +36,11 @@ class GroupMembersView(RequireGroupMember, Select2View):
         # (disabled for now as it leads to a lot of confusion)
         # if self.group.parent:
         #    uids = list(set(uids + self.group.parent.members))
-            
-        q = Q(id__in=uids)
-        q &= Q(first_name__icontains=term) | Q(last_name__icontains=term) | Q(username__icontains=term) | Q(email__icontains=term)
         
-        user_qs = filter_active_users(User.objects.filter(q))
+        terms = term.strip().lower().split(' ')
+        q = get_user_query_filter_for_search_terms(terms)
+        
+        user_qs = filter_active_users(User.objects.filter(id__in=uids).filter(q))
         
         count = user_qs.count()
         if count < start:
@@ -52,17 +55,17 @@ class GroupMembersView(RequireGroupMember, Select2View):
 group_members = GroupMembersView.as_view()
 
 
-
 class AllMembersView(RequireLoggedIn, Select2View):
     
     def get_results(self, request, term, page, context):
-        term = term.lower()
         start = (page - 1) * 10
         end = page * 10
 
         User = get_user_model()
-
-        q = Q(first_name__icontains=term) | Q(last_name__icontains=term) | Q(username__icontains=term) | Q(email__icontains=term)
+        
+        terms = term.strip().lower().split(' ')
+        q = get_user_query_filter_for_search_terms(terms)
+        
         user_qs = filter_active_users(User.objects.filter(id__in=CosinnusPortal.get_current().members).filter(q))
         
         count = user_qs.count()

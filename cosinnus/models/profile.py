@@ -89,6 +89,10 @@ class BaseUserProfile(FacebookIntegrationUserProfileMixin, models.Model):
             user = request.user
             profile = MyUserProfile.objects.get_for_user(user)
     """
+    # if this or any extending profile models define additional username fields,
+    # such as middle name, list the field names here
+    ADDITIONAL_USERNAME_FIELDS = []
+    
     user = models.OneToOneField(settings.AUTH_USER_MODEL, editable=False,
         related_name='cosinnus_profile')
     

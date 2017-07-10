@@ -10,6 +10,7 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from django.contrib.auth import get_user_model
 from django.core.exceptions import MultipleObjectsReturned
 from django.utils.crypto import get_random_string
+from django.db.models import Q
 
 logger = logging.getLogger('cosinnus')
 
@@ -108,6 +109,33 @@ def filter_active_users(user_model_qs, filter_on_user_profile_model=False):
             exclude(last_login__exact=None).\
             filter(cosinnus_profile__settings__contains='tos_accepted')
 
+
+def get_user_query_filter_for_search_terms(terms):
+    """ Returns a django Q filter for use on USER_MODEL that returns all users with matching
+        names, given an array of search terms. Each search term needs to be matched (AND)
+        on at least one of the user's name fields (OR). Case is insensitive.
+        User name fields are USER_MODEL.first_name, USER_MODEL.last_name, as well as any
+        additional fields defined in the user profile model (``ADDITIONAL_USERNAME_FIELDS``).
+        @param terms: An array of string search terms.
+        @return: A django Q object.
+    """
+    from cosinnus.models.profile import get_user_profile_model
+    ADDITIONAL_USERNAME_FIELDS = get_user_profile_model().ADDITIONAL_USERNAME_FIELDS
+    first_term, other_terms = terms[0], terms[1:]
+
+    # username is not used as filter for the term for now, might confuse
+    # users why a search result is found
+    q = Q(first_name__icontains=first_term) | Q(last_name__icontains=first_term) 
+    for field_name in ADDITIONAL_USERNAME_FIELDS:
+        q |= Q(**{'cosinnus_profile__%s__icontains' % field_name: first_term})
+    for other_term in other_terms:
+        add_q = Q(first_name__icontains=other_term) | Q(last_name__icontains=other_term)
+        for field_name in ADDITIONAL_USERNAME_FIELDS:
+            add_q |= Q(**{'cosinnus_profile__%s__icontains' % field_name: first_term})
+        q &= add_q
+        
+    return q
+        
         
 def create_user(email, username=None, first_name=None, last_name=None, tos_checked=True):
     """ Creates a user with a random password, and adds proper PortalMemberships for this portal.
