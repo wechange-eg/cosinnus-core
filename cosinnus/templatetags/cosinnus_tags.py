@@ -737,12 +737,7 @@ def textfield(text, arg=''):
         
     if not text:
         return ''
-    # python-markdown2 misbehaves sometimes when being faced with single-newlines before lists,
-    # so we convert all linebreaks into double-linebreaks
-    text = force_text(normalize_newlines(text))
-    text = text.replace('\n', '\n\n')
-    text = markdown(url_target_blank(urlizetrunc(text, 35)), 'strike,break-on-newline').strip()
-    
+    text = markdown(url_target_blank(urlizetrunc(text, 35)), 'strike,break-on-newline,cuddled-lists').strip()
     if arg == 'simple':
         text = text.replace('<p>', '').replace('</p>', '')
     return mark_safe(text)
