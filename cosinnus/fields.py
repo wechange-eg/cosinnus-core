@@ -25,6 +25,20 @@ class UserSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoiceField):
         #self.widget.options['formatResult'] = JSFunction('function(data) { return data.text; }')
         #self.widget.options['formatSelection'] = JSFunction('function(data) { return data.text; }')
     
+    def get_user_and_group_ids_for_value(self, value):
+        user_ids = []
+        group_ids = []
+        for val in value:
+            value_type, value_id = val.split(':')
+            if value_type == 'user':
+                user_ids.append(int(value_id))
+            elif value_type == 'group':
+                group_ids.append(int(value_id))
+            else:
+                if settings.DEBUG:
+                    raise Http404("Programming error: message recipient field contained unrecognised id '%s'" % val)
+        return user_ids, group_ids
+    
     def clean(self, value):
         """ We organize the ids gotten back from the recipient select2 field.
             This is a list of mixed ids which could either be groups or users.
@@ -36,18 +50,8 @@ class UserSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoiceField):
         if self.required and not value:
             raise ValidationError(self.error_messages['required'])
         
-        group_ids = []
-        user_ids = []
-        for val in value:
-            value_type, value_id = val.split(':')
-            if value_type == 'user':
-                user_ids.append(int(value_id))
-            elif value_type == 'group':
-                group_ids.append(int(value_id))
-            else:
-                if settings.DEBUG:
-                    raise Http404("Programming error: message recipient field contained unrecognised id '%s'" % val)
-
+        user_ids, group_ids = self.get_user_and_group_ids_for_value(value)
+        
         # unpack the members of the selected groups
         groups = CosinnusGroup.objects.get_cached(pks=group_ids)
         recipients = set()

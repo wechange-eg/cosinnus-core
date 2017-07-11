@@ -28,6 +28,7 @@ from django.forms.widgets import SelectMultiple
 from django_select2.widgets import Select2MultipleWidget
 from cosinnus.utils.user import get_user_select2_pills
 from cosinnus.fields import UserSelect2MultipleChoiceField
+from cosinnus.templatetags.cosinnus_tags import full_name
 
 
 TagObject = get_tag_object_model()
@@ -89,8 +90,10 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
           
         if self.instance.pk:
             # choices and initial must be set so pre-existing form fields can be prepopulated
-            self.fields['persons'].initial = get_user_select2_pills(self.instance.persons.all())
-            self.fields['persons'].choices = self.fields['persons'].initial
+            preresults = get_user_select2_pills(self.instance.persons.all(), text_only=True)
+            self.fields['persons'].choices = preresults
+            self.fields['persons'].initial = [key for key,val in preresults]
+            self.initial['persons'] = self.fields['persons'].initial
 
         if self.group and self.group.media_tag_id:
             group_media_tag = self.group.media_tag

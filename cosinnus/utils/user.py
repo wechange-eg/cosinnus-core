@@ -183,12 +183,17 @@ def create_user(email, username=None, first_name=None, last_name=None, tos_check
     return user
 
 
-def get_user_select2_pills(users, request=None):
-    return [("user:" + six.text_type(user.id), render_to_string('cosinnus/common/user_select2_pill.html', {'user': user}),)
-                   for user in users]
+def get_user_select2_pills(users, text_only=False):
+    from cosinnus.templatetags.cosinnus_tags import full_name
+    return [(
+         "user:" + six.text_type(user.id), 
+         render_to_string('cosinnus/common/user_select2_pill.html', {'user': user}) if not text_only else escape(full_name(user)),
+         ) for user in users]
     
-def get_group_select2_pills(groups, request=None):
-    return [("group:" + six.text_type(group.id), render_to_string('cosinnus/common/group_select2_pill.html', {'text':escape(group.name)}),)
-                       for group in groups]
+def get_group_select2_pills(groups, text_only=False):
+    return [(
+         "group:" + six.text_type(group.id), 
+         render_to_string('cosinnus/common/group_select2_pill.html', {'text':escape(group.name)}) if not text_only else escape(group.name),
+         ) for group in groups]
     
     
