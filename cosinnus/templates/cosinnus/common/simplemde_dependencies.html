@@ -10,6 +10,9 @@
       var simplemde = new SimpleMDE({ 
           element: $('#{{ element_id }}')[0],
           indentWithTabs: false,
+          renderingConfig: {
+              singleLineBreaks: false,
+          },
           shortcuts: {},
           spellChecker: false,
           status: false,

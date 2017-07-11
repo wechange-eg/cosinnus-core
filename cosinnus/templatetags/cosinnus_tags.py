@@ -39,6 +39,7 @@ from wagtail.wagtailcore.templatetags.wagtailcore_tags import richtext
 from uuid import uuid1
 from annoying.functions import get_object_or_None
 from django_markdown2.templatetags.md2 import markdown
+from django.utils.text import normalize_newlines
 
 
 logger = logging.getLogger('cosinnus')
@@ -736,7 +737,12 @@ def textfield(text, arg=''):
         
     if not text:
         return ''
+    # python-markdown2 misbehaves sometimes when being faced with single-newlines before lists,
+    # so we convert all linebreaks into double-linebreaks
+    text = force_text(normalize_newlines(text))
+    text = text.replace('\n', '\n\n')
     text = markdown(url_target_blank(urlizetrunc(text, 35)), 'strike,break-on-newline').strip()
+    
     if arg == 'simple':
         text = text.replace('<p>', '').replace('</p>', '')
     return mark_safe(text)
