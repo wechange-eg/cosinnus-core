@@ -183,11 +183,12 @@ notifications = {
         'is_html': True,
         'snippet_type': 'news',
         'event_text': _('Invited you'),
-        'notification_text': _('%(sender_name)s invited you to join "%(team_name)s" on %(portal_name)s!'),
+        'notification_text': _('%(sender_name)s invited you to join "%(team_name)s" on %(portal_name)s! <br/><br/>' 
+                           ' To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation.'),
         'subject_text': _('%(sender_name)s has invited you to join "%(team_name)s" on %(portal_name)s!'),
         'data_attributes': {
             'object_name': '_sender_name',
-            'object_text': '_sender.cosinnus_profile.description', 
+            'object_text': 'description', 
         },
         'notification_reason': 'none',
     }, 

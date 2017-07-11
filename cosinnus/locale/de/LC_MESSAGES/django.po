@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-03 16:09+0200\n"
-"PO-Revision-Date: 2017-07-03 16:20+0200\n"
+"POT-Creation-Date: 2017-07-11 18:07+0200\n"
+"PO-Revision-Date: 2017-07-11 18:10+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -182,8 +182,8 @@ msgid "Invited you"
 msgstr "Hat dich eingeladen"
 
 #, python-format
-msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s!"
-msgstr "%(sender_name)s hat dich eingeladen, %(team_name)s beizutreten auf %(portal_name)s!"
+msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
+msgstr "%(sender_name)s hat dich eingeladen, \"%(team_name)s\" auf %(portal_name)s beizutreten! <br/><br/> Um beizutreten, klicke bitte auf den unten stehenden Link. Du wirst dann auf das Portal weitergeleitet und kannst dort die Einladung ansehen und annehmen."
 
 #, python-format
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
@@ -3237,6 +3237,9 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten 
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s!"
+#~ msgstr "%(sender_name)s hat dich eingeladen, %(team_name)s beizutreten auf %(portal_name)s!"
 
 #~ msgid "Sorry, we could not connect your user account. Please contact a system administrator!"
 #~ msgstr "Entschuldige, wir konnten aufgrund eines Fehlers dein Benutzerkonto nicht einloggen. Bitte kontaktiere einen Administrator!"
