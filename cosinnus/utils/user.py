@@ -11,6 +11,9 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import MultipleObjectsReturned
 from django.utils.crypto import get_random_string
 from django.db.models import Q
+import six
+from django.template.loader import render_to_string
+from django.utils.html import escape
 
 logger = logging.getLogger('cosinnus')
 
@@ -178,3 +181,19 @@ def create_user(email, username=None, first_name=None, last_name=None, tos_check
     user.save()
     
     return user
+
+
+def get_user_select2_pills(users, text_only=False):
+    from cosinnus.templatetags.cosinnus_tags import full_name
+    return [(
+         "user:" + six.text_type(user.id), 
+         render_to_string('cosinnus/common/user_select2_pill.html', {'user': user}) if not text_only else escape(full_name(user)),
+         ) for user in users]
+    
+def get_group_select2_pills(groups, text_only=False):
+    return [(
+         "group:" + six.text_type(group.id), 
+         render_to_string('cosinnus/common/group_select2_pill.html', {'text':escape(group.name)}) if not text_only else escape(group.name),
+         ) for group in groups]
+    
+    
