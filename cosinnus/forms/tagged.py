@@ -22,11 +22,12 @@ from django.utils.translation import ugettext_lazy as _
 from django_select2.fields import HeavySelect2MultipleChoiceField, Select2ChoiceField
 
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField
-from cosinnus.utils.choices import get_user_choices
 
 from cosinnus.utils.urls import group_aware_reverse
 from django.forms.widgets import SelectMultiple
 from django_select2.widgets import Select2MultipleWidget
+from cosinnus.utils.user import get_user_select2_pills
+from cosinnus.fields import UserSelect2MultipleChoiceField
 
 
 TagObject = get_tag_object_model()
@@ -39,7 +40,7 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
     approach = Select2ChoiceField(choices=TagObject.APPROACH_CHOICES, required=False)
     topics = CommaSeparatedSelect2MultipleChoiceField(choices=TagObject.TOPIC_CHOICES, required=False)
     visibility = Select2ChoiceField(choices=TagObject.VISIBILITY_CHOICES, required=False)
-
+    # persons = will be defined in __init__
     
     class Meta:
         model = TagObject
@@ -83,13 +84,12 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
             data_url = reverse('cosinnus:select2:all-members')
         
         # override the default persons field with select2
-        self.fields['persons'] = HeavySelect2MultipleChoiceField(
-                label=_("Persons"), help_text='', required=False,
-                data_url=data_url)
+        #self.fields['persons'] = HeavySelect2MultipleChoiceField(label=_("Persons"), help_text='', required=False, data_url=data_url)
+        self.fields['persons'] = UserSelect2MultipleChoiceField(label=_("Persons"), help_text='', required=False, data_url=data_url)
           
         if self.instance.pk:
             # choices and initial must be set so pre-existing form fields can be prepopulated
-            self.fields['persons'].initial = get_user_choices(self.instance.persons.all())
+            self.fields['persons'].initial = get_user_select2_pills(self.instance.persons.all())
             self.fields['persons'].choices = self.fields['persons'].initial
 
         if self.group and self.group.media_tag_id:

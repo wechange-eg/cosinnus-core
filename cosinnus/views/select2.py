@@ -11,12 +11,11 @@ from taggit.models import Tag
 
 from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.templatetags.cosinnus_tags import full_name
-from cosinnus.utils.choices import get_user_choices
 from cosinnus.utils.permissions import check_ug_membership
 from cosinnus.views.mixins.select2 import RequireGroupMember, RequireLoggedIn
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.utils.user import filter_active_users,\
-    get_user_query_filter_for_search_terms
+    get_user_query_filter_for_search_terms, get_user_select2_pills
 from cosinnus.models.profile import get_user_profile_model
 
 
@@ -48,7 +47,8 @@ class GroupMembersView(RequireGroupMember, Select2View):
         has_more = count > end
 
         users = user_qs.all()[start:end]
-        results = get_user_choices(users)
+        #results = get_user_choices(users)
+        results = get_user_select2_pills(users)
 
         return (NO_ERR_RESP, has_more, results)
 
@@ -74,7 +74,8 @@ class AllMembersView(RequireLoggedIn, Select2View):
         has_more = count > end
 
         users = user_qs.all()[start:end]
-        results = get_user_choices(users)
+        #results = get_user_choices(users)
+        results = get_user_select2_pills(users)
 
         return (NO_ERR_RESP, has_more, results)
 
