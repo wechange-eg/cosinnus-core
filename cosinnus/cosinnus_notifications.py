@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 import django.dispatch as dispatch
 from django.utils.translation import ugettext_lazy as _
-
+from cosinnus.conf import settings
 
 
 
@@ -203,12 +203,12 @@ notifications = {
         'is_html': True,
         'snippet_type': 'news',
         'event_text': _('Invited you'),
-        'notification_text': _('%(sender_name)s would like you to come join the project "%(team_name)s" on %(portal_name)s! Click the project\'s name below to check it out and collaborate!'),
+        'notification_text': settings.COSINNUS_RECRUIT_EMAIL_BODY_TEXT,
         'subject_text': _('%(sender_name)s has invited you to join "%(team_name)s" on %(portal_name)s!'),
         'data_attributes': {
             'object_name': '_sender_name',
             #'object_url': 'get_member_page_url', # the group members page
-            'object_text': '_sender.cosinnus_profile.description', 
+            'object_text': 'description', 
         },
         'origin_url_suffix': '?invited=1',
         'notification_reason': 'none',
