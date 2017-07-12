@@ -348,8 +348,8 @@ def save_auth_tokens(request):
         logger.error('Error when trying to retrieve long-lived-access-token from Facebook (non-200 response):', extra={'response': force_text(response.__dict__)})
         return HttpResponseServerError('Facebook request could not be completed (2).')
     
-    # for some reason, the oauth graph node returns a QSL string, and not JSON
-    content_auth = dict(urlparse.parse_qsl(response.read()))
+    # this node finally returns JSON
+    content_auth = json.loads(response.read())
     # content should contain 'access_token' (string) and 'expires' (string, in seconds)
     seconds_expired = 60 * 60 * 24 * 60
     # this used to be the old style API
