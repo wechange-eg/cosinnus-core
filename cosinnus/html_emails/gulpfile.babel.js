@@ -117,7 +117,7 @@ function inliner(css) {
     })
     .pipe($.replace, '<!-- <style> -->', `<style>${css}</style>`)
     .pipe($.htmlmin, {
-      collapseWhitespace: true,
+      collapseWhitespace: false,
       minifyCSS: true
     });
 
