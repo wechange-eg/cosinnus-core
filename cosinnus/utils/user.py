@@ -183,6 +183,14 @@ def create_user(email, username=None, first_name=None, last_name=None, tos_check
     return user
 
 
+def get_newly_registered_user_email(user):
+    """ Safely gets a user object's email address, even if they have yet to veryify their email address
+        (in this case, the `user.email` field is scrambled.
+        See `cosinnus.views.user.set_user_email_to_verify()` """
+    from cosinnus.models.profile import PROFILE_SETTING_EMAIL_TO_VERIFY
+    return user.cosinnus_profile.settings.get(PROFILE_SETTING_EMAIL_TO_VERIFY, user.email)
+
+
 def get_user_select2_pills(users, text_only=False):
     from cosinnus.templatetags.cosinnus_tags import full_name
     return [(

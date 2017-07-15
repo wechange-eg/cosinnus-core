@@ -37,6 +37,7 @@ from cosinnus.views.mixins.group import EndlessPaginationMixin
 from cosinnus.utils.user import filter_active_users
 from uuid import uuid1
 from django.utils.encoding import force_text
+from cosinnus.core import signals
 
 
 USER_MODEL = get_user_model()
@@ -172,7 +173,10 @@ class UserCreateView(CreateView):
 
         if not CosinnusPortal.get_current().users_need_activation and not CosinnusPortal.get_current().email_needs_verification:
             messages.success(self.request, self.message_success % {'user': user.email})
-            
+        
+        # send user registration signal
+        signals.user_registered.send(sender=self, user=user)
+        
         return ret
     
     def dispatch(self, *args, **kwargs):

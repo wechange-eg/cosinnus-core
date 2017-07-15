@@ -148,6 +148,15 @@ class CosinnusConf(AppConf):
         'cosinnus_marketplace',
     ]
     
+    # enable this to sign up new members to a cleverreach newsletter group
+    CLEVERREACH_AUTO_SIGNUP_ENABLED = False
+    # the int id of the cleverreach group
+    CLEVERREACH_GROUP_ID = None
+    # access token, as given after a login to /v2/login.json
+    CLEVERREACH_ACCESS_TOKEN = None 
+    # cleverreach API endpoint base URL (no trailing slash)
+    CLEVERREACH_BASE_URL = 'https://rest.cleverreach.com/v2'
+    
     # CSV Import settings
     CSV_IMPORT_DEFAULT_ENCODING = 'utf-8'
     CSV_IMPORT_DEFAULT_DELIMITER = b','
