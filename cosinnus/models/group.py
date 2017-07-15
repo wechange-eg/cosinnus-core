@@ -1134,8 +1134,8 @@ class BaseGroupMembership(models.Model):
 
     def __str__(self):
         return "<user: %(user)s, group: %(group)s, status: %(status)d>" % {
-            'user': self.user,
-            'group': self.group,
+            'user': getattr(self, 'user', None),
+            'group': getattr(self, 'group', None),
             'status': self.status,
         }
 
@@ -1153,7 +1153,8 @@ class BaseGroupMembership(models.Model):
             self.date = now()
         super(BaseGroupMembership, self).save(*args, **kwargs)
         # run an empty save on user so userprofile search indices get updated with new memberships through signals
-        self.user.cosinnus_profile.save()
+        if hasattr(self, 'user'):
+            self.user.cosinnus_profile.save()
         self._clear_cache()
 
     def _clear_cache(self):
@@ -1197,7 +1198,25 @@ class CosinnusPortalMembership(BaseGroupMembership):
     class Meta(BaseGroupMembership.Meta):
         verbose_name = _('Portal membership')
         verbose_name_plural = _('Portal memberships')
-
+        
+        
+class CosinnusUnregisterdUserGroupInvite(BaseGroupMembership):
+    """ A placeholder for a  group invite of person's who has been invited via email to join.
+        Used to imprint a real `CosinnusGroupMembership` once that user registers.
+        The ``status`` field is ignored because it would always be on pending anyways. """
+        
+    group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, related_name='unregistered_user_invites',
+        on_delete=models.CASCADE)
+    email = models.EmailField(_('email address'))
+    last_modified = models.DateTimeField(_('Last modified'), auto_now=True, editable=False)
+    
+    CACHE_KEY_MODEL = 'CosinnusUnregisterdUserGroupInvite'
+    
+    class Meta:
+        app_label = 'cosinnus'
+        verbose_name = _('Team Invite for Unregistered User')
+        verbose_name_plural = _('Team Invites for Unregistered Users')  
+        unique_together = (('email', 'group'),)  
 
 
 class CosinnusPermanentRedirect(models.Model):

@@ -23,7 +23,7 @@ from cosinnus.forms.group import MembershipForm, CosinnusLocationForm,\
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, CosinnusPortal, CosinnusLocation,
     CosinnusGroupGalleryImage, MEMBERSHIP_INVITED_PENDING,
-    CosinnusGroupCallToActionButton)
+    CosinnusGroupCallToActionButton, CosinnusUnregisterdUserGroupInvite)
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.serializers.group import GroupSimpleSerializer
 from cosinnus.models.serializers.profile import UserSimpleSerializer
@@ -65,6 +65,9 @@ from annoying.functions import get_object_or_None
 from django.contrib.auth.models import AnonymousUser
 from django.template.loader import render_to_string
 from cosinnus import cosinnus_notifications
+import datetime
+from django.utils.timezone import now
+from django.db import transaction
 logger = logging.getLogger('cosinnus')
 
 
@@ -1022,16 +1025,19 @@ def group_user_recruit(request, group):
     
     invalid = []
     existing = []
+    spam_protected = []
     success = []
+    prev_invites_to_refresh = []
     
     # format and validate emails
     emails = emails.replace(';', ',').replace('\n', ',').replace('\r', ',').split(',')
+    emails = list(set([email.strip(' \t\n\r') for email in emails]))
+    
     for email in emails:
         # stop after 10 fragments to prevent malicious overloading
         if len(invalid) + len(existing) + len(success) > MAXIMUM_EMAILS:
             break
         
-        email = email.strip(' \t\n\r')
         if not email:
             continue
         try:
@@ -1039,11 +1045,22 @@ def group_user_recruit(request, group):
         except ValidationError:
             invalid.append(email)
             continue
+        
+        prev_invite = get_object_or_None(CosinnusUnregisterdUserGroupInvite, email=email, group=group)
+        
         # from here on, we have a real email. check if a user with that email exists
         if get_object_or_None(get_user_model(), email=email):
             existing.append(email) 
-        else:
-            success.append(email)
+            continue
+        
+        # check if the user has been invited recently (if so, we don't send another mail)
+        if prev_invite and prev_invite.last_modified > (now() - datetime.timedelta(days=1)):
+            spam_protected.append(email)
+            continue
+        
+        success.append(email)
+        if prev_invite:
+            prev_invites_to_refresh.append(prev_invite)
     
     # send emails as notification signal
     virtual_users = []
@@ -1053,8 +1070,19 @@ def group_user_recruit(request, group):
         virtual_users.append(virtual_user)
     signals.user_group_recruited.send(sender=user, obj=group, user=user, audience=virtual_users)
     
+    # create invite objects
+    with transaction.atomic():
+        for email in success:
+            just_refresh_invites = [inv for inv in prev_invites_to_refresh if inv.email == email]
+            if just_refresh_invites:
+                just_refresh_invites[0].save()
+                continue
+            CosinnusUnregisterdUserGroupInvite.objects.create(email=email, group=group)
+    
     if invalid:
         messages.error(request, _("Sorry, these did not seem to be valid email addresses: %s") % ', '.join(invalid))
+    if spam_protected:
+        messages.warning(request, _("These people have been sent an email invite only recently. You can send them an invite again tomorrow: %s") % ', '.join(spam_protected))
     if existing:
         messages.success(request, _("Good news! The people with these addresses already have a registered user account: %s") % ', '.join(existing))
     if success:
