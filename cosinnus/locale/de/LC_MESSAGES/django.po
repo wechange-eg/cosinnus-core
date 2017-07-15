@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-11 18:07+0200\n"
-"PO-Revision-Date: 2017-07-11 18:10+0200\n"
+"POT-Creation-Date: 2017-07-15 15:28+0200\n"
+"PO-Revision-Date: 2017-07-15 15:30+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -80,6 +80,10 @@ msgstr "%d Benutzer wurden erfolgreich deaktiviert."
 
 msgid "Deactivate users (will keep all all items they created on the site)"
 msgstr "Ausgewählte Benutzer deaktivieren (deren erstellte Items bleiben auf der Seite erhalten)"
+
+#, python-format
+msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
+msgstr "%(sender_name)s hat dich eingeladen, auf %(portal_name)s dem Projekt \"%(team_name)s\" beizutreten! Klicke unten auf den Projektnamen um es dir anzuschauen und mitzumachen!"
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieser Gruppe/Projekts können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
@@ -188,10 +192,6 @@ msgstr "%(sender_name)s hat dich eingeladen, \"%(team_name)s\" auf %(portal_name
 #, python-format
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s hat dich eingeladen, %(team_name)s beizutreten auf %(portal_name)s!"
-
-#, python-format
-msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
-msgstr "%(sender_name)s hat dich eingeladen, auf %(portal_name)s dem Projekt \"%(team_name)s\" beizutreten! Klicke unten auf den Projektnamen um es dir anzuschauen und mitzumachen!"
 
 msgid "Deutsch"
 msgstr "Deutsch"
@@ -1388,6 +1388,9 @@ msgstr "Einladung für Benutzer zurückziehen"
 
 msgid "Do you really want to decline the invitation?"
 msgstr "Möchtest du die Einladung wirklich ablehnen?"
+
+msgid "There are no pending invitations."
+msgstr "Es gibt aktuell keine eingeladenen Mitglieder."
 
 msgid "Send Message"
 msgstr "Nachricht schicken"

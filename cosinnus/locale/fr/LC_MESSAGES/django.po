@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-11 18:07+0200\n"
+"POT-Creation-Date: 2017-07-15 15:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,6 +78,10 @@ msgid "%d Users were deactivated successfully."
 msgstr ""
 
 msgid "Deactivate users (will keep all all items they created on the site)"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
 msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
@@ -186,10 +190,6 @@ msgstr ""
 
 #, python-format
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
-msgstr ""
-
-#, python-format
-msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
 msgstr ""
 
 msgid "Deutsch"
@@ -1371,6 +1371,9 @@ msgid "Revoke Invitation for Member"
 msgstr ""
 
 msgid "Do you really want to decline the invitation?"
+msgstr ""
+
+msgid "There are no pending invitations."
 msgstr ""
 
 msgid "Send Message"

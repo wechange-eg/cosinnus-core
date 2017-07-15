@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-11 18:07+0200\n"
+"POT-Creation-Date: 2017-07-15 15:28+0200\n"
 "PO-Revision-Date: 2015-11-11 10:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -92,6 +92,10 @@ msgstr "%d член/-и/-ів було успішно деактивовано."
 
 msgid "Deactivate users (will keep all all items they created on the site)"
 msgstr "Деактивувати вибраних членів (зберігає усі створені ними об'єкти на сторінці)"
+
+#, python-format
+msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
+msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgstr "Тільки члени спільноти/проекту можуть бачити цей вміст. Надішліть запит членства зараз!"
@@ -232,10 +236,6 @@ msgstr ""
 #| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
-
-#, python-format
-msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
-msgstr ""
 
 msgid "Deutsch"
 msgstr "Deutsch"
@@ -1500,6 +1500,11 @@ msgstr ""
 #| msgid "Do you really want to decline member „%(name)s“?"
 msgid "Do you really want to decline the invitation?"
 msgstr "Ви дійсно бажаєте відмовити члену %(name)s?"
+
+#, fuzzy
+#| msgid "There are no projects."
+msgid "There are no pending invitations."
+msgstr "Немає жодного проекту."
 
 msgid "Send Message"
 msgstr "Надіслати повідомлення"
