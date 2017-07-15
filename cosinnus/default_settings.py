@@ -381,6 +381,14 @@ COSINNUS_ETHERPAD_ETHERCALC_BASE_URL = 'https://calc.wechange.de'
 COSINNUS_DEFAULT_FROM_EMAIL = 'noreply@wachstumswende.de'
 DEFAULT_FROM_EMAIL = COSINNUS_DEFAULT_FROM_EMAIL
 
+# settings for email-dkim signing. you can follow this guide for creating a key https://blog.codinghorror.com/so-youd-like-to-send-some-email-through-code/ (point 2)
+DKIM_DOMAIN = None # e.g. 'example.com'
+DKIM_SELECTOR = None # e.g. 'selector' if using selector._domainkey.example.com
+DKIM_PRIVATE_KEY = None # full private key string, including """-----BEGIN RSA PRIVATE KEY-----""", etc
+# set these settings in your server's settings.py. then if you have all of them, you also need to include this:
+if DKIM_SELECTOR and DKIM_DOMAIN and DKIM_PRIVATE_KEY: 
+    EMAIL_BACKEND = 'cosinnus.backends.DKIMEmailBackend'
+
 COSINNUS_SITE_PROTOCOL = 'http'
 
 # should microsites be enabled per default for all portals?
