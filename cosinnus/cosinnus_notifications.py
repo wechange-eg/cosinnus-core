@@ -151,6 +151,7 @@ notifications = {
         'subject_text': _('%(sender_name)s made you an admin of "%(team_name)s" on %(portal_name)s!'),
         'data_attributes': {
             'object_name': '_sender_name',
+            'object_url': '_sender.cosinnus_profile.get_absolute_url',
             'object_text': '_sender.cosinnus_profile.description', 
         },
         'notification_reason': 'none',
