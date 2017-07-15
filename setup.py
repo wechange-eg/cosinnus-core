@@ -80,6 +80,7 @@ setup(
         'django-taggit==0.17.3',
         'django-widget-tweaks==1.3',
         'djangorestframework==2.3.12',
+        'dnspython==1.15.0',
         'easy-thumbnails==1.4',
         'ecdsa==0.10',
         'jsonfield==1.0.0',
