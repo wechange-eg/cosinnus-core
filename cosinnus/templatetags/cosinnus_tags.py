@@ -519,19 +519,26 @@ def cosinnus_cross_portal_token(context, portal):
     return '<input type="hidden" name="cosinnus_cross_portal" value="%s">' % portal_id
 
 
-def group_aware_url_name(view_name, group_slug, portal_id=None):
+def group_aware_url_name(view_name, group_or_group_slug, portal_id=None):
     """ Modifies a URL name that points to a URL within a CosinnusGroup so that the URL
         points to the correct sub-url of the type of the CosinnusGroup Model for the given
         group slug.
         
         @return: A modified URL view name
     """
-    # retrieve group type cached
-    group_type = cache.get(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, group_slug))
-    if group_type is None:
-        group_type = get_cosinnus_group_model().objects.get(slug=group_slug, portal_id=portal_id).type
-        cache.set(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, group_slug), group_type,
-                  31536000) # 1 year cache
+    if not group_or_group_slug:
+        return ''
+    
+    if not isinstance(group_or_group_slug, six.string_types) and \
+        (type(group_or_group_slug) is get_cosinnus_group_model() or issubclass(group_or_group_slug.__class__, get_cosinnus_group_model())):
+        group_type = group_or_group_slug.type
+    else:
+        # retrieve group type cached
+        group_type = cache.get(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, group_or_group_slug))
+        if group_type is None:
+            group_type = get_cosinnus_group_model().objects.get(slug=group_or_group_slug, portal_id=portal_id).type
+            cache.set(CosinnusGroupManager._GROUP_SLUG_TYPE_CACHE_KEY % (CosinnusPortal.get_current().id, group_or_group_slug), group_type,
+                      31536000) # 1 year cache
         
     # retrieve that type's prefix and add to URL viewname
     prefix = group_model_registry.get_url_name_prefix_by_type(group_type, 0)
