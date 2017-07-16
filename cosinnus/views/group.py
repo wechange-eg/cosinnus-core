@@ -440,6 +440,30 @@ class GroupListMineView(RequireLoggedInMixin, GroupListView):
 group_list_mine = GroupListMineView.as_view()
 
 
+class GroupListInvitedView(RequireLoggedInMixin, GroupListView):
+    paginate_by = None
+    
+    def get_queryset(self):
+        if self.kwargs.get('show_all', False):
+            model = CosinnusGroup
+            self.group_type = 'all'
+        else:
+            group_plural_url_key = self.request.path.split('/')[1]
+            group_class = group_model_registry.get_by_plural_key(group_plural_url_key, None)
+            self.group_type = group_class.GROUP_MODEL_TYPE
+            model = group_class or self.model
+        
+        my_invited_groups = model.objects.get_for_user_invited(self.request.user)
+        return my_invited_groups
+    
+    def get_context_data(self, **kwargs):
+        ctx = super(GroupListInvitedView, self).get_context_data(**kwargs)
+        ctx.update({'hide_group_map': True})
+        return ctx
+
+group_list_invited = GroupListInvitedView.as_view()
+
+
 class FilteredGroupListView(GroupListView):
     """ This will show 'related' groups and projects.
         For a given group slug, will only show the group itself.

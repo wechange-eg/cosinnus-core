@@ -468,8 +468,8 @@ def set_user_email_to_verify(user, new_email, request=None, user_has_just_regist
 def convert_email_group_invites(sender, profile, **kwargs):
     """ Converts all `CosinnusUnregisterdUserGroupInvite` to `CosinnusGroupMembership` pending invites
         for a user after registration. If there were any, also adds an entry to the user's profile's visit-next setting. """
-    user = profile.user
     # TODO: caching?
+    user = profile.user
     invites = CosinnusUnregisterdUserGroupInvite.objects.filter(email=get_newly_registered_user_email(user))
     if invites:
         with transaction.atomic():
@@ -479,7 +479,7 @@ def convert_email_group_invites(sender, profile, **kwargs):
                     continue
                 CosinnusGroupMembership.objects.create(group=invite.group, user=user, status=MEMBERSHIP_INVITED_PENDING)
             # create a user-settings-entry
-            profile.add_redirect_on_next_page('/looooool-todo-enter-the-my-invites-url')
+            profile.add_redirect_on_next_page(reverse('cosinnus:invitations'))
             # we actually do not delete the invites here yet, for many reasons such as re-registers when email verification didn't work
             # the invites will be deleted upon first login using the `user_logged_in_first_time` signal
 

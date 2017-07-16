@@ -44,6 +44,8 @@ urlpatterns = patterns('cosinnus.views',
 
     url(r'^search/$', 'search.search', name='search'),
     
+    url(r'^invitations/$', 'group.group_list_invited', name='invitations', kwargs={'show_all': True}),
+    
     url(r'^account/report/$', 'feedback.report_object', name='report-object'),
     
     url(r'^administration/approve_user/(?P<user_id>\d+)/$', 'user.approve_user', name='user-approve'),
@@ -108,6 +110,7 @@ for url_key in group_model_registry:
     urlpatterns += patterns('cosinnus.views',
         url(r'^%s/in-group-with/(?P<group>[^/]+)/$' % plural_url_key, 'group.group_list_filtered', name=prefix+'group-list-filtered'),
         url(r'^%s/mine/$' % plural_url_key, 'group.group_list_mine', name=prefix+'group-list-mine'),
+        url(r'^%s/invited/$' % plural_url_key, 'group.group_list_invited', name=prefix+'group-list-invited'),
         url(r'^%s/$' % plural_url_key, 'group.group_list', name=prefix+'group-list'),
         #url(r'^%s/map/$' % plural_url_key, 'group.group_list_map', name=prefix+'group-list-map'),
         url(r'^%s/add/$' % plural_url_key, 'group.group_create', name=prefix+'group-add'),

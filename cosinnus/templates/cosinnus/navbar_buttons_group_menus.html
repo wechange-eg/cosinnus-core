@@ -23,6 +23,9 @@
 	                {% endif %}
                 {% endif %}
                 <li class="divider"></li>
+                {% if societies_invited %}
+                    <li><a href="{% url 'cosinnus:group__group-list-invited' %}">{% trans "Invited Groups" %}</a></li>
+                {% endif %}
                 {% if societies %}
                 	<li><a href="{% url 'cosinnus:group__group-list-mine' %}">{% trans "My Groups" %}</a></li>
                 {% endif %}
@@ -55,6 +58,9 @@
 	                {% endif %}
                 {% endif %}
                 <li class="divider"></li>
+                {% if groups_invited %}
+                    <li><a href="{% url 'cosinnus:group-list-invited' %}">{% trans "Invited Projects" %}</a></li>
+                {% endif %}
                 <li><a href="{% url 'cosinnus:group-list-mine' %}">{% trans "My Projects" %}</a></li>
                 <li><a href="{% url 'cosinnus:group-list' %}">{% trans "All Projects" %}</a></li>
             </ul>

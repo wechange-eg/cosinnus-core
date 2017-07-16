@@ -251,11 +251,15 @@ class BaseUserProfile(FacebookIntegrationUserProfileMixin, models.Model):
             setattr(self, key, self.media_tag)
         return getattr(self, key)
     
-    def add_redirect_on_next_page(self, resolved_url):
+    def add_redirect_on_next_page(self, resolved_url, priority=False):
         """ Adds a redirect-page to the user's settings redirect list.
-            A middleware enforces that the user will be redirected to the first URL in the list on the next page hit. """
+            A middleware enforces that the user will be redirected to the first URL in the list on the next page hit.
+            @param priority: if set to `True`, will insert the redirect as first URL, so it will be the next one in queue """
         redirects = self.settings.get(PROFILE_SETTING_REDIRECT_NEXT_VISIT, [])
-        redirects.append(resolved_url)
+        if priority:
+            redirects.insert(0, resolved_url)
+        else:
+            redirects.append(resolved_url)
         self.settings[PROFILE_SETTING_REDIRECT_NEXT_VISIT] = redirects
         self.save(update_fields=['settings'])
     
