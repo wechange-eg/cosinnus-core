@@ -19,9 +19,12 @@ from cosinnus.views.mixins.ajax import patch_body_json_data
 from cosinnus.utils.http import JSONResponse
 from django.contrib import messages
 from cosinnus.models.profile import get_user_profile_model,\
-    PROFILE_SETTING_EMAIL_TO_VERIFY, PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN
+    PROFILE_SETTING_EMAIL_TO_VERIFY, PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN,\
+    PROFILE_SETTING_FIRST_LOGIN
 from cosinnus.models.tagged import BaseTagObject
-from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.group import CosinnusPortal,\
+    CosinnusUnregisterdUserGroupInvite, CosinnusGroupMembership,\
+    MEMBERSHIP_INVITED_PENDING
 from cosinnus.core.mail import MailThread, get_common_mail_context,\
     send_mail_or_fail_threaded
 from django.template.loader import render_to_string
@@ -34,10 +37,15 @@ from django.template.context import RequestContext
 from django.template.response import TemplateResponse
 from django.core.paginator import Paginator
 from cosinnus.views.mixins.group import EndlessPaginationMixin
-from cosinnus.utils.user import filter_active_users
+from cosinnus.utils.user import filter_active_users,\
+    get_newly_registered_user_email
 from uuid import uuid1
 from django.utils.encoding import force_text
 from cosinnus.core import signals
+from django.dispatch.dispatcher import receiver
+from cosinnus.core.signals import userprofile_ceated, user_logged_in_first_time
+from django.contrib.auth.signals import user_logged_in
+from cosinnus.conf import settings
 
 
 USER_MODEL = get_user_model()
@@ -454,7 +462,43 @@ def set_user_email_to_verify(user, new_email, request=None, user_has_just_regist
         subj_user = render_to_string('cosinnus/mail/user_email_verification%s_subj.txt' % ('_onchange' if not user_has_just_registered else ''), data)
         send_mail_or_fail_threaded(new_email, subj_user, 'cosinnus/mail/user_email_verification%s.html' \
                     % ('_onchange' if not user_has_just_registered else ''), data)
+        
+        
+@receiver(userprofile_ceated)
+def convert_email_group_invites(sender, profile, **kwargs):
+    """ Converts all `CosinnusUnregisterdUserGroupInvite` to `CosinnusGroupMembership` pending invites
+        for a user after registration. If there were any, also adds an entry to the user's profile's visit-next setting. """
+    user = profile.user
+    # TODO: caching?
+    invites = CosinnusUnregisterdUserGroupInvite.objects.filter(email=get_newly_registered_user_email(user))
+    if invites:
+        with transaction.atomic():
+            for invite in invites:
+                # skip inviting to auto-invite groups, users are in them automatically
+                if invite.group.slug in settings.NEWW_DEFAULT_USER_GROUPS:
+                    continue
+                CosinnusGroupMembership.objects.create(group=invite.group, user=user, status=MEMBERSHIP_INVITED_PENDING)
+            # create a user-settings-entry
+            profile.add_redirect_on_next_page('/looooool-todo-enter-the-my-invites-url')
+            # we actually do not delete the invites here yet, for many reasons such as re-registers when email verification didn't work
+            # the invites will be deleted upon first login using the `user_logged_in_first_time` signal
 
+@receiver(user_logged_in)
+def detect_first_user_login(sender, user, request, **kwargs):
+    """ Used to send out the user_first_logged_in_first_time signal """
+    profile = user.cosinnus_profile
+    first_login = profile.settings.get(PROFILE_SETTING_FIRST_LOGIN, None)
+    if not first_login:
+        profile.settings[PROFILE_SETTING_FIRST_LOGIN] = force_text(user.last_login)
+        profile.save(update_fields=['settings'])
+        user_logged_in_first_time.send(sender=sender, user=user, request=request)
+    
+
+@receiver(user_logged_in_first_time)
+def cleanup_user_after_first_login(sender, user, request, **kwargs):
+    """ Cleans up pre-registration objects and settings """
+    CosinnusUnregisterdUserGroupInvite.objects.filter(email=user.email).delete()
+    
 
 def user_api_me(request):
     """ Returns a JSON dict of publicly available user data about the currently logged-in user.
