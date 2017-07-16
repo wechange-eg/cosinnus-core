@@ -59,7 +59,8 @@ from cosinnus.utils.functions import resolve_class
 from django.views.decorators.csrf import csrf_protect
 
 import logging
-from cosinnus.templatetags.cosinnus_tags import is_superuser, full_name
+from cosinnus.templatetags.cosinnus_tags import is_superuser, full_name,\
+    textfield
 from django.core.validators import validate_email
 from annoying.functions import get_object_or_None
 from django.contrib.auth.models import AnonymousUser
@@ -68,6 +69,10 @@ from cosinnus import cosinnus_notifications
 import datetime
 from django.utils.timezone import now
 from django.db import transaction
+from django.utils.html import escape
+from copy import deepcopy
+from django.utils.safestring import mark_safe
+from django.template.defaultfilters import linebreaksbr
 logger = logging.getLogger('cosinnus')
 
 
@@ -1036,6 +1041,7 @@ def group_user_recruit(request, group):
         return redirect(reverse('cosinnus:group-list'))
     
     emails = request.POST.get('emails', '')
+    msg = request.POST.get('message', '').strip()
     user = request.user
     redirect_url = request.META.get('HTTP_REFERER', group_aware_reverse('cosinnus:group-detail', kwargs={'group': group}))
     
@@ -1086,13 +1092,24 @@ def group_user_recruit(request, group):
         if prev_invite:
             prev_invites_to_refresh.append(prev_invite)
     
+    # we attach the additional message to the object description (in this case our sender profile):
+    if msg:
+        content = mark_safe(render_to_string('cosinnus/html_mail/content_snippets/recruit_personal_message.html', {'sender': user}))
+        msg = mark_safe(linebreaksbr(escape(msg)))
+        def render_additional_notification_content_rows():
+            return [content, msg]
+        group_copy = deepcopy(group) # we deepcopy to avoid getting the attached function cached for this group
+        setattr(group_copy, 'render_additional_notification_content_rows', render_additional_notification_content_rows)
+    else:
+        group_copy = group
+        
     # send emails as notification signal
     virtual_users = []
     for email in success:
         virtual_user = AnonymousUser()
         virtual_user.email = email
         virtual_users.append(virtual_user)
-    signals.user_group_recruited.send(sender=user, obj=group, user=user, audience=virtual_users)
+    signals.user_group_recruited.send(sender=user, obj=group_copy, user=user, audience=virtual_users)
     
     # create invite objects
     with transaction.atomic():

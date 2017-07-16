@@ -208,8 +208,8 @@ notifications = {
         'subject_text': _('%(sender_name)s has invited you to join "%(team_name)s" on %(portal_name)s!'),
         'data_attributes': {
             'object_name': '_sender_name',
-            #'object_url': 'get_member_page_url', # the group members page
-            'object_text': 'description', 
+            'object_url': '_sender.cosinnus_profile.get_absolute_url',
+            'object_text': '_sender.cosinnus_profile.description', 
         },
         'origin_url_suffix': '?invited=1',
         'notification_reason': 'none',
