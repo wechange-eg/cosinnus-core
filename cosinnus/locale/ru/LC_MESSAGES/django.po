@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-15 15:28+0200\n"
+"POT-Creation-Date: 2017-07-16 15:13+0200\n"
 "PO-Revision-Date: 2017-01-09 11:46+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -602,6 +602,17 @@ msgstr "Членство на портале"
 
 msgid "Portal memberships"
 msgstr "Членства на портале"
+
+#, fuzzy
+#| msgid "Last edited"
+msgid "Last modified"
+msgstr "В последний раз отредактировано"
+
+msgid "Team Invite for Unregistered User"
+msgstr ""
+
+msgid "Team Invites for Unregistered Users"
+msgstr ""
 
 msgid "From Portal"
 msgstr "Из портала"
@@ -1689,6 +1700,11 @@ msgstr "Фейсбук-Интеграция будет доступна, как 
 msgid "Facebook integration is available after you created the project!"
 msgstr "Фейсбук-Интеграция будет доступна, как только Вы создадите проект!"
 
+#, fuzzy
+#| msgid "Revoke Invitation"
+msgid "Invitations"
+msgstr "Отозвать приглашение"
+
 msgid "Related to"
 msgstr "Имеются связи с "
 
@@ -1726,6 +1742,11 @@ msgid "There are no groups."
 msgstr "Групп нет"
 
 msgid "There are no projects."
+msgstr "Проектов нет"
+
+#, fuzzy
+#| msgid "There are no projects."
+msgid "There are no invitations."
 msgstr "Проектов нет"
 
 msgid "Map"
@@ -1861,6 +1882,11 @@ msgstr "Все пользователи"
 
 msgid "Portal Administrators"
 msgstr "Администраторы портала"
+
+#, fuzzy
+#| msgid "All projects"
+msgid "All societies"
+msgstr "Все проекты"
 
 msgid "Re-activate Group"
 msgstr "Восстановить группу"
@@ -2462,11 +2488,21 @@ msgstr "Форум"
 msgid "People"
 msgstr "Люди"
 
+#, fuzzy
+#| msgid "Invite user"
+msgid "Invited Groups"
+msgstr "Пригласить пользователя"
+
 msgid "My Groups"
 msgstr "Мои группы"
 
 msgid "All Groups"
 msgstr "Все группы"
+
+#, fuzzy
+#| msgid "Other Projects"
+msgid "Invited Projects"
+msgstr "Другие группы"
 
 msgid "My Projects"
 msgstr "Мои проекты"
@@ -3160,6 +3196,10 @@ msgstr ""
 msgid "Sorry, these did not seem to be valid email addresses: %s"
 msgstr ""
 
+#, python-format
+msgid "These people have been sent an email invite only recently. You can send them an invite again tomorrow: %s"
+msgstr ""
+
 #, fuzzy, python-format
 #| msgid "This email address already has a registered user!"
 msgid "Good news! The people with these addresses already have a registered user account: %s"
@@ -3312,6 +3352,9 @@ msgstr "Адрес Вашей электронной почты %(email)s был
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
 msgstr "Адрес Вашей электронной почты %(email)s был успешно подтверждён! Но тем не менее Ваш аккаунт ещё не активирован и должен быть подтверждён администратором, прежде чем Вы сможете зайти в систему. Мы вышлем Вам письмо, как только это произойдёт!"
 
+msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
+msgstr ""
+
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
 msgstr "Вы не являетесь членом %s! Если Вы желаете, ниже Вы можете отправить запрос на вступление."
@@ -3447,9 +3490,6 @@ msgstr "Ваши изменения были сохранены"
 
 #~ msgid "Progress:"
 #~ msgstr "Progress:"
-
-#~ msgid "Other Projects"
-#~ msgstr "Другие группы"
 
 # ???
 #, fuzzy

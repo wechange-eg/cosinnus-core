@@ -174,11 +174,20 @@ class ConditionalRedirectMiddleware(object):
         usually to force some routing behaviour, like logged-in users being redirected off /login """
     
     def process_request(self, request):
-        if request.path in NEVER_REDIRECT_URLS:
+        if request.path in NEVER_REDIRECT_URLS or request.path.startswith('/admin'):
             return
         
-        # hiding login and signup pages for logged in users
         if request.user.is_authenticated():
-            redirect_url = getattr(settings, 'COSINNUS_LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET', None)
-            if redirect_url and request.path in ['/login/', '/signup/']:
-                return HttpResponseRedirect(redirect_url)
+            # hiding login and signup pages for logged in users
+            if request.path in ['/login/', '/signup/']:
+                redirect_url = getattr(settings, 'COSINNUS_LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET', None)
+                if redirect_url:
+                    return HttpResponseRedirect(redirect_url)
+            
+            # redirect if it is set as a next redirect in user-settings
+            if request.method == 'GET':
+                settings_redirect = request.user.cosinnus_profile.pop_next_redirect()
+                if settings_redirect:
+                    if settings_redirect[1]:
+                        messages.success(request, _(settings_redirect[1]))
+                    return HttpResponseRedirect(settings_redirect[0])

@@ -251,22 +251,26 @@ class BaseUserProfile(FacebookIntegrationUserProfileMixin, models.Model):
             setattr(self, key, self.media_tag)
         return getattr(self, key)
     
-    def add_redirect_on_next_page(self, resolved_url, priority=False):
+    def add_redirect_on_next_page(self, resolved_url, message=None, priority=False):
         """ Adds a redirect-page to the user's settings redirect list.
             A middleware enforces that the user will be redirected to the first URL in the list on the next page hit.
+            @param message: (optional) Can be a string, that will be displayed as success-message at redirect time.
+                             i18n u_gettext will be applied *later, at redirect time* to this string! 
             @param priority: if set to `True`, will insert the redirect as first URL, so it will be the next one in queue """
         redirects = self.settings.get(PROFILE_SETTING_REDIRECT_NEXT_VISIT, [])
         if priority:
-            redirects.insert(0, resolved_url)
+            redirects.insert(0, (resolved_url, message))
         else:
-            redirects.append(resolved_url)
+            redirects.append((resolved_url, message))
         self.settings[PROFILE_SETTING_REDIRECT_NEXT_VISIT] = redirects
         self.save(update_fields=['settings'])
     
     def pop_next_redirect(self):
         """ Tries to remove the first redirect URL in the user's setting's redirect list, and return it.
-            @return: A string resolved URL, or False if none existed. """
+            @return: A tuple (string resolved URL, message), or False if none existed. """
         redirects = self.settings.get(PROFILE_SETTING_REDIRECT_NEXT_VISIT, [])
+        if not redirects:
+            return False
         next_redirect = redirects.pop()
         if next_redirect:
             self.settings[PROFILE_SETTING_REDIRECT_NEXT_VISIT] = redirects

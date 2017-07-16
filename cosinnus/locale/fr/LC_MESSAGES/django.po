@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-15 15:28+0200\n"
+"POT-Creation-Date: 2017-07-16 15:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -573,6 +573,15 @@ msgid "Portal membership"
 msgstr ""
 
 msgid "Portal memberships"
+msgstr ""
+
+msgid "Last modified"
+msgstr ""
+
+msgid "Team Invite for Unregistered User"
+msgstr ""
+
+msgid "Team Invites for Unregistered Users"
 msgstr ""
 
 msgid "From Portal"
@@ -1637,6 +1646,9 @@ msgstr ""
 msgid "Facebook integration is available after you created the project!"
 msgstr ""
 
+msgid "Invitations"
+msgstr ""
+
 msgid "Related to"
 msgstr ""
 
@@ -1673,6 +1685,9 @@ msgid "There are no groups."
 msgstr ""
 
 msgid "There are no projects."
+msgstr ""
+
+msgid "There are no invitations."
 msgstr ""
 
 msgid "Map"
@@ -1797,6 +1812,9 @@ msgid "All users"
 msgstr ""
 
 msgid "Portal Administrators"
+msgstr ""
+
+msgid "All societies"
 msgstr ""
 
 msgid "Re-activate Group"
@@ -2245,10 +2263,16 @@ msgstr ""
 msgid "People"
 msgstr ""
 
+msgid "Invited Groups"
+msgstr ""
+
 msgid "My Groups"
 msgstr ""
 
 msgid "All Groups"
+msgstr ""
+
+msgid "Invited Projects"
 msgstr ""
 
 msgid "My Projects"
@@ -2937,6 +2961,10 @@ msgid "Sorry, these did not seem to be valid email addresses: %s"
 msgstr ""
 
 #, python-format
+msgid "These people have been sent an email invite only recently. You can send them an invite again tomorrow: %s"
+msgstr ""
+
+#, python-format
 msgid "Good news! The people with these addresses already have a registered user account: %s"
 msgstr ""
 
@@ -3076,6 +3104,9 @@ msgstr ""
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
+msgstr ""
+
+msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr ""
 
 #, python-format

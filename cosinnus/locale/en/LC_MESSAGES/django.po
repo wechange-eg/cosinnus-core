@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-15 15:28+0200\n"
+"POT-Creation-Date: 2017-07-16 15:13+0200\n"
 "PO-Revision-Date: 2016-10-26 16:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -573,6 +573,15 @@ msgid "Portal membership"
 msgstr ""
 
 msgid "Portal memberships"
+msgstr ""
+
+msgid "Last modified"
+msgstr ""
+
+msgid "Team Invite for Unregistered User"
+msgstr ""
+
+msgid "Team Invites for Unregistered Users"
 msgstr ""
 
 msgid "From Portal"
@@ -1658,6 +1667,9 @@ msgstr ""
 msgid "Facebook integration is available after you created the project!"
 msgstr ""
 
+msgid "Invitations"
+msgstr ""
+
 msgid "Related to"
 msgstr ""
 
@@ -1695,6 +1707,11 @@ msgstr "There are no groups."
 
 msgid "There are no projects."
 msgstr ""
+
+#, fuzzy
+#| msgid "There are no groups."
+msgid "There are no invitations."
+msgstr "There are no groups."
 
 msgid "Map"
 msgstr ""
@@ -1834,6 +1851,11 @@ msgstr ""
 
 msgid "Portal Administrators"
 msgstr ""
+
+#, fuzzy
+#| msgid "All projects"
+msgid "All societies"
+msgstr "All projects"
 
 #, fuzzy
 msgid "Re-activate Group"
@@ -2288,11 +2310,21 @@ msgstr ""
 msgid "People"
 msgstr ""
 
+#, fuzzy
+#| msgid "Edit Group"
+msgid "Invited Groups"
+msgstr "Edit Project"
+
 msgid "My Groups"
 msgstr "My Groups"
 
 msgid "All Groups"
 msgstr "All Groups"
+
+#, fuzzy
+#| msgid "Edit Project"
+msgid "Invited Projects"
+msgstr "Edit Project"
 
 msgid "My Projects"
 msgstr "My Projects"
@@ -2999,6 +3031,10 @@ msgid "Sorry, these did not seem to be valid email addresses: %s"
 msgstr ""
 
 #, python-format
+msgid "These people have been sent an email invite only recently. You can send them an invite again tomorrow: %s"
+msgstr ""
+
+#, python-format
 msgid "Good news! The people with these addresses already have a registered user account: %s"
 msgstr ""
 
@@ -3138,6 +3174,9 @@ msgstr ""
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
+msgstr ""
+
+msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr ""
 
 #, python-format

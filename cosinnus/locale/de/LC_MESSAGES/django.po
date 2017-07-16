@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-15 15:28+0200\n"
-"PO-Revision-Date: 2017-07-15 15:30+0200\n"
+"POT-Creation-Date: 2017-07-16 15:13+0200\n"
+"PO-Revision-Date: 2017-07-16 15:17+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -575,6 +575,15 @@ msgstr "Portal-Mitgliedschaft"
 
 msgid "Portal memberships"
 msgstr "Portal-Mitgliedschaften"
+
+msgid "Last modified"
+msgstr "Zuletzt editiert"
+
+msgid "Team Invite for Unregistered User"
+msgstr "Gruppen/Projekt-Einladung für nicht registrierte Benutzer"
+
+msgid "Team Invites for Unregistered Users"
+msgstr "Gruppen/Projekt-Einladungen für nicht registrierte Benutzer"
 
 msgid "From Portal"
 msgstr "Von Portal"
@@ -1656,6 +1665,9 @@ msgstr "Die Facebook-Integration wird verfügbar sobald du die Gruppe erstellt h
 msgid "Facebook integration is available after you created the project!"
 msgstr "Die Facebook-Integration wird verfügbar sobald du das Projekt erstellt hast!"
 
+msgid "Invitations"
+msgstr "Einladungen"
+
 msgid "Related to"
 msgstr "Verwandt mit"
 
@@ -1694,6 +1706,9 @@ msgstr "Es gibt keine sichtbaren Gruppen."
 
 msgid "There are no projects."
 msgstr "Es gibt keine sichtbaren Projekte."
+
+msgid "There are no invitations."
+msgstr "Es gibt aktuell keine Einladungen."
 
 msgid "Map"
 msgstr "Karte"
@@ -1818,6 +1833,9 @@ msgstr "Alle Menschen"
 
 msgid "Portal Administrators"
 msgstr "Portal-Administrator_innen"
+
+msgid "All societies"
+msgstr "Alle Gruppen"
 
 msgid "Re-activate Group"
 msgstr "Gruppe reaktivieren"
@@ -2395,11 +2413,17 @@ msgstr "Forum"
 msgid "People"
 msgstr "Menschen"
 
+msgid "Invited Groups"
+msgstr "Gruppeneinladungen"
+
 msgid "My Groups"
 msgstr "Meine Gruppen"
 
 msgid "All Groups"
 msgstr "Alle Gruppen"
+
+msgid "Invited Projects"
+msgstr "Projekteinladungen"
 
 msgid "My Projects"
 msgstr "Meine Projekte"
@@ -3093,6 +3117,10 @@ msgid "Sorry, these did not seem to be valid email addresses: %s"
 msgstr "Tut uns leid, aber dies hier scheinen keine gültigen E-Mail Adressen gewesen zu sein: %s"
 
 #, python-format
+msgid "These people have been sent an email invite only recently. You can send them an invite again tomorrow: %s"
+msgstr ""
+
+#, python-format
 msgid "Good news! The people with these addresses already have a registered user account: %s"
 msgstr "Gute Nachrichten! Unter diesen E-Mail Adressen haben sich bereits Mitglieder angemeldet: %s"
 
@@ -3233,6 +3261,9 @@ msgstr "Deine Email-Adresse %(email)s wurde erfolgreich bestätigt! Du kannst di
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
 msgstr "Deine Email-Adresse %(email)s wurde erfolgreich bestätigt! Allerdings ist dein Konto noch nicht aktiv und muss von einem Administrator bestätigt werden bevor du dich einloggen kannst. Wir schicken dir eine Email sobald das passiert."
+
+msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
+msgstr "Willkommen! Du wurdest bereits in folgende Projekte und Gruppen eingeladen. Bitte klicke den Ausklappen-Button der Einladungen, die du annehmen oder ablehnen möchtest!"
 
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."

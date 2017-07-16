@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-15 15:28+0200\n"
+"POT-Creation-Date: 2017-07-16 15:13+0200\n"
 "PO-Revision-Date: 2015-11-11 10:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -627,6 +627,17 @@ msgstr "Членство на порталі"
 
 msgid "Portal memberships"
 msgstr "Членства на порталі"
+
+#, fuzzy
+#| msgid "Last edited"
+msgid "Last modified"
+msgstr "Востаннє редаговано"
+
+msgid "Team Invite for Unregistered User"
+msgstr ""
+
+msgid "Team Invites for Unregistered Users"
+msgstr ""
 
 msgid "From Portal"
 msgstr "Від порталу"
@@ -1789,6 +1800,11 @@ msgstr ""
 msgid "Facebook integration is available after you created the project!"
 msgstr ""
 
+#, fuzzy
+#| msgid "Toggle navigation"
+msgid "Invitations"
+msgstr "Переключення навігації"
+
 msgid "Related to"
 msgstr "Відноситься до"
 
@@ -1825,6 +1841,11 @@ msgid "There are no groups."
 msgstr "Немає жодної спільноти."
 
 msgid "There are no projects."
+msgstr "Немає жодного проекту."
+
+#, fuzzy
+#| msgid "There are no projects."
+msgid "There are no invitations."
 msgstr "Немає жодного проекту."
 
 msgid "Map"
@@ -1988,6 +2009,11 @@ msgstr "Усі користувачі"
 
 msgid "Portal Administrators"
 msgstr "Адміністратори порталу"
+
+#, fuzzy
+#| msgid "All projects"
+msgid "All societies"
+msgstr "Усі проекти"
 
 msgid "Re-activate Group"
 msgstr "Повторно активувати спільноту"
@@ -2597,11 +2623,21 @@ msgstr "Форум"
 msgid "People"
 msgstr "Люди"
 
+#, fuzzy
+#| msgid "Remove Member"
+msgid "Invited Groups"
+msgstr "Видалити члена"
+
 msgid "My Groups"
 msgstr "Мої спільноти"
 
 msgid "All Groups"
 msgstr "Усі спільноти"
+
+#, fuzzy
+#| msgid "Edit Project"
+msgid "Invited Projects"
+msgstr "Редагувати проект"
 
 msgid "My Projects"
 msgstr "Мої проекти"
@@ -3318,6 +3354,10 @@ msgstr ""
 msgid "Sorry, these did not seem to be valid email addresses: %s"
 msgstr ""
 
+#, python-format
+msgid "These people have been sent an email invite only recently. You can send them an invite again tomorrow: %s"
+msgstr ""
+
 #, fuzzy, python-format
 #| msgid "This email address already has a registered user!"
 msgid "Good news! The people with these addresses already have a registered user account: %s"
@@ -3464,6 +3504,9 @@ msgstr ""
 #| msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
 msgstr "Користувача/-ку «%(user)s» успішно зареєстровано. Обліковий запит необхідно перевірити та активувати, перш ніж ви зможете увійти в систему. Ми надішлемо вам електронного листа на вашу адресу «%(email)s», коли це буде зроблено."
+
+msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
+msgstr ""
 
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."

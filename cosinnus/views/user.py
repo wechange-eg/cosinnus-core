@@ -478,8 +478,11 @@ def convert_email_group_invites(sender, profile, **kwargs):
                 if invite.group.slug in settings.NEWW_DEFAULT_USER_GROUPS:
                     continue
                 CosinnusGroupMembership.objects.create(group=invite.group, user=user, status=MEMBERSHIP_INVITED_PENDING)
+            # trigger translation indexing
+            _('Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!')
+            msg = 'Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!'
             # create a user-settings-entry
-            profile.add_redirect_on_next_page(reverse('cosinnus:invitations'))
+            profile.add_redirect_on_next_page(reverse('cosinnus:invitations'), msg)
             # we actually do not delete the invites here yet, for many reasons such as re-registers when email verification didn't work
             # the invites will be deleted upon first login using the `user_logged_in_first_time` signal
 
@@ -498,7 +501,7 @@ def detect_first_user_login(sender, user, request, **kwargs):
 def cleanup_user_after_first_login(sender, user, request, **kwargs):
     """ Cleans up pre-registration objects and settings """
     CosinnusUnregisterdUserGroupInvite.objects.filter(email=user.email).delete()
-    
+
 
 def user_api_me(request):
     """ Returns a JSON dict of publicly available user data about the currently logged-in user.
