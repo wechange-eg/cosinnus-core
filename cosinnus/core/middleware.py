@@ -143,9 +143,9 @@ class ForceInactiveUserLogoutMiddleware(object):
             if not request.user.is_active:
                 messages.error(request, _('This account is no longer active. You have been logged out.'))
                 do_logout = True
-            # if the user has a force-logout flag set, remove the flag and log him out,
-            # unless he is currently trying to log in
-            if request.user.cosinnus_profile.settings.get('force_logout_next_request', False):
+            elif hasattr(request.user, 'cosinnus_profile') and request.user.cosinnus_profile.settings.get('force_logout_next_request', False):
+                # if the user has a force-logout flag set, remove the flag and log him out,
+                # unless he is currently trying to log in
                 del request.user.cosinnus_profile.settings['force_logout_next_request']
                 request.user.cosinnus_profile.save()
                 if request.path not in LOGIN_URLS:
