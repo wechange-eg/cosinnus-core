@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-16 15:13+0200\n"
+"POT-Creation-Date: 2017-07-26 18:21+0200\n"
 "PO-Revision-Date: 2016-10-26 16:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1147,7 +1147,16 @@ msgstr ""
 msgid "We will send them an email asking them to sign up and join %(group_name)s."
 msgstr ""
 
-msgid "Enter up to 10 email addresses, one on each line or seperated with a comma"
+msgid "E-Mail Addresses"
+msgstr ""
+
+msgid "(one per line or comma-seperated)"
+msgstr ""
+
+msgid "Personal Message (optional)"
+msgstr ""
+
+msgid "Include a personal message (optional)"
 msgstr ""
 
 msgid "Invite new Members"
@@ -1336,41 +1345,6 @@ msgstr ""
 msgid "Invite user"
 msgstr ""
 
-msgid "Invite People to Register and Join"
-msgstr ""
-
-msgid "Invite people"
-msgstr ""
-
-msgid "Membership requests"
-msgstr ""
-
-msgid "Membership requested"
-msgstr ""
-
-msgid "Decline User"
-msgstr ""
-
-msgid "Accept User"
-msgstr ""
-
-#, python-format
-msgid "Do you really want to accept user „%(name)s“ as a member?"
-msgstr ""
-
-msgid "Accept Member"
-msgstr ""
-
-#, python-format
-msgid "Do you really want to decline member „%(name)s“?"
-msgstr ""
-
-msgid "Decline Member"
-msgstr ""
-
-msgid "There are no new membership requests."
-msgstr ""
-
 msgid "Invited Members"
 msgstr ""
 
@@ -1403,6 +1377,51 @@ msgstr "Do you really want to leave project „%(title)s“?"
 #| msgid "There are no groups."
 msgid "There are no pending invitations."
 msgstr "There are no groups."
+
+msgid "Membership requests"
+msgstr ""
+
+msgid "Membership requested"
+msgstr ""
+
+msgid "Decline User"
+msgstr ""
+
+msgid "Accept User"
+msgstr ""
+
+#, python-format
+msgid "Do you really want to accept user „%(name)s“ as a member?"
+msgstr ""
+
+msgid "Accept Member"
+msgstr ""
+
+#, python-format
+msgid "Do you really want to decline member „%(name)s“?"
+msgstr ""
+
+msgid "Decline Member"
+msgstr ""
+
+msgid "There are no new membership requests."
+msgstr ""
+
+msgid "Invite People to Register and Join"
+msgstr ""
+
+msgid "Invite people"
+msgstr ""
+
+msgid "All currently invited people"
+msgstr ""
+
+msgid "People currently invited by you"
+msgstr ""
+
+msgctxt "an action done *by* <username>"
+msgid "by"
+msgstr ""
 
 msgid "Send Message"
 msgstr ""
@@ -1886,6 +1905,10 @@ msgid "Move to another Folder"
 msgstr ""
 
 msgid "Move"
+msgstr ""
+
+#, python-format
+msgid "A message from %(sender_full_name)s"
 msgstr ""
 
 msgid "Edit folder"

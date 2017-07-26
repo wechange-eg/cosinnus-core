@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-16 15:13+0200\n"
-"PO-Revision-Date: 2017-07-16 15:17+0200\n"
+"POT-Creation-Date: 2017-07-26 18:21+0200\n"
+"PO-Revision-Date: 2017-07-26 18:25+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -1150,8 +1150,19 @@ msgstr "Gib die E-Mail Adressen von den Leuten ein, die du einladen möchtest de
 msgid "We will send them an email asking them to sign up and join %(group_name)s."
 msgstr "Wir schicken ihnen eine E-Mail und bitten sie darum sich zu registrieren und %(group_name)s beizutreten."
 
-msgid "Enter up to 10 email addresses, one on each line or seperated with a comma"
-msgstr "Gibt bis zu 10 E-Mail Adressen ein - eine pro Zeile oder mit Kommas getrennt"
+#, fuzzy
+#| msgid "E-Mail Addresse"
+msgid "E-Mail Addresses"
+msgstr "E-Mail Adresse"
+
+msgid "(one per line or comma-seperated)"
+msgstr "(eine pro Zeile oder mit Kommas getrennt)"
+
+msgid "Personal Message (optional)"
+msgstr "Persönliche Nachricht (optional)"
+
+msgid "Include a personal message (optional)"
+msgstr "Deine persönliche Nachricht (optional)"
 
 msgid "Invite new Members"
 msgstr "Neue Mitglieder einladen"
@@ -1338,11 +1349,33 @@ msgstr "Mitglied einladen"
 msgid "Invite user"
 msgstr "Benutzer einladen"
 
-msgid "Invite People to Register and Join"
-msgstr "Lade Leute zum Registrieren und Beitreten ein"
+msgid "Invited Members"
+msgstr "Eingeladene Mitglieder"
 
-msgid "Invite people"
-msgstr "Leute einladen"
+msgid "Invited to be a member"
+msgstr "Als Mitglied eingeladen"
+
+msgid "Revoke Invitation"
+msgstr "Einladung zurückziehen"
+
+msgid "Decline Invitation"
+msgstr "Einladung ablehnen"
+
+msgid "Accept Invitation"
+msgstr "Einladung annehmen"
+
+#, python-format
+msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgstr "Möchtest du „%(name)s“'s Einladung wirklich zurückziehen?"
+
+msgid "Revoke Invitation for Member"
+msgstr "Einladung für Benutzer zurückziehen"
+
+msgid "Do you really want to decline the invitation?"
+msgstr "Möchtest du die Einladung wirklich ablehnen?"
+
+msgid "There are no pending invitations."
+msgstr "Es gibt aktuell keine eingeladenen Mitglieder."
 
 msgid "Membership requests"
 msgstr "Mitglieder-Anträge"
@@ -1373,33 +1406,21 @@ msgstr "Mitglied ablehen"
 msgid "There are no new membership requests."
 msgstr "Es gibt aktuell keine neuen Mitglieder-Anträge."
 
-msgid "Invited Members"
-msgstr "Eingeladene Mitglieder"
+msgid "Invite People to Register and Join"
+msgstr "Lade Leute zum Registrieren und Beitreten ein"
 
-msgid "Invited to be a member"
-msgstr "Als Mitglied eingeladen"
+msgid "Invite people"
+msgstr "Leute einladen"
 
-msgid "Revoke Invitation"
-msgstr "Einladung zurückziehen"
+msgid "All currently invited people"
+msgstr "Alle aktuell eingeladenen Leute"
 
-msgid "Decline Invitation"
-msgstr "Einladung ablehnen"
+msgid "People currently invited by you"
+msgstr "Von dir eingeladene Leute"
 
-msgid "Accept Invitation"
-msgstr "Einladung annehmen"
-
-#, python-format
-msgid "Do you really want to revoke the invitation for member „%(name)s“?"
-msgstr "Möchtest du „%(name)s“'s Einladung wirklich zurückziehen?"
-
-msgid "Revoke Invitation for Member"
-msgstr "Einladung für Benutzer zurückziehen"
-
-msgid "Do you really want to decline the invitation?"
-msgstr "Möchtest du die Einladung wirklich ablehnen?"
-
-msgid "There are no pending invitations."
-msgstr "Es gibt aktuell keine eingeladenen Mitglieder."
+msgctxt "an action done *by* <username>"
+msgid "by"
+msgstr "von"
 
 msgid "Send Message"
 msgstr "Nachricht schicken"
@@ -1863,6 +1884,11 @@ msgstr "In einen anderen Ordner verschieben"
 
 msgid "Move"
 msgstr "Verschieben"
+
+#, fuzzy, python-format
+#| msgid "You were tagged by %(sender_name)s"
+msgid "A message from %(sender_full_name)s"
+msgstr "Du wurdest markiert von %(sender_name)s."
 
 msgid "Edit folder"
 msgstr "Ordner bearbeiten"
@@ -3272,6 +3298,9 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
+#~ msgid "Enter up to 10 email addresses, one on each line or seperated with a comma"
+#~ msgstr "Gibt bis zu 10 E-Mail Adressen ein - eine pro Zeile oder mit Kommas getrennt"
+
 #~ msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s!"
 #~ msgstr "%(sender_name)s hat dich eingeladen, %(team_name)s beizutreten auf %(portal_name)s!"
 
@@ -3539,9 +3568,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "Nachname"
 #~ msgstr "Nachname"
-
-#~ msgid "E-Mail Addresse"
-#~ msgstr "E-Mail Adresse"
 
 #~ msgid "Passwort"
 #~ msgstr "Passwort"

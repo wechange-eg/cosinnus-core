@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-16 15:13+0200\n"
+"POT-Creation-Date: 2017-07-26 18:21+0200\n"
 "PO-Revision-Date: 2015-11-11 10:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1237,7 +1237,18 @@ msgstr ""
 msgid "We will send them an email asking them to sign up and join %(group_name)s."
 msgstr ""
 
-msgid "Enter up to 10 email addresses, one on each line or seperated with a comma"
+#, fuzzy
+#| msgid "Email address"
+msgid "E-Mail Addresses"
+msgstr "Адреса електронної скриньки"
+
+msgid "(one per line or comma-seperated)"
+msgstr ""
+
+msgid "Personal Message (optional)"
+msgstr ""
+
+msgid "Include a personal message (optional)"
 msgstr ""
 
 #, fuzzy
@@ -1439,43 +1450,6 @@ msgstr "Не член"
 msgid "Invite user"
 msgstr ""
 
-msgid "Invite People to Register and Join"
-msgstr ""
-
-#, fuzzy
-#| msgid "Not a member"
-msgid "Invite people"
-msgstr "Не член"
-
-msgid "Membership requests"
-msgstr "Запити членства"
-
-msgid "Membership requested"
-msgstr "Надіслано запит членства"
-
-msgid "Decline User"
-msgstr "Відмовити користувачу/-ці"
-
-msgid "Accept User"
-msgstr "Долучити користувача/-ку"
-
-#, python-format
-msgid "Do you really want to accept user „%(name)s“ as a member?"
-msgstr "Ви дійсно бажаєте надати членство користувачу/-ці %(name)s?"
-
-msgid "Accept Member"
-msgstr "Долучити члена"
-
-#, python-format
-msgid "Do you really want to decline member „%(name)s“?"
-msgstr "Ви дійсно бажаєте відмовити члену %(name)s?"
-
-msgid "Decline Member"
-msgstr "Відмовити члену"
-
-msgid "There are no new membership requests."
-msgstr "Нових запитів членства немає."
-
 #, fuzzy
 #| msgid "Remove Member"
 msgid "Invited Members"
@@ -1516,6 +1490,53 @@ msgstr "Ви дійсно бажаєте відмовити члену %(name)s?
 #| msgid "There are no projects."
 msgid "There are no pending invitations."
 msgstr "Немає жодного проекту."
+
+msgid "Membership requests"
+msgstr "Запити членства"
+
+msgid "Membership requested"
+msgstr "Надіслано запит членства"
+
+msgid "Decline User"
+msgstr "Відмовити користувачу/-ці"
+
+msgid "Accept User"
+msgstr "Долучити користувача/-ку"
+
+#, python-format
+msgid "Do you really want to accept user „%(name)s“ as a member?"
+msgstr "Ви дійсно бажаєте надати членство користувачу/-ці %(name)s?"
+
+msgid "Accept Member"
+msgstr "Долучити члена"
+
+#, python-format
+msgid "Do you really want to decline member „%(name)s“?"
+msgstr "Ви дійсно бажаєте відмовити члену %(name)s?"
+
+msgid "Decline Member"
+msgstr "Відмовити члену"
+
+msgid "There are no new membership requests."
+msgstr "Нових запитів членства немає."
+
+msgid "Invite People to Register and Join"
+msgstr ""
+
+#, fuzzy
+#| msgid "Not a member"
+msgid "Invite people"
+msgstr "Не член"
+
+msgid "All currently invited people"
+msgstr ""
+
+msgid "People currently invited by you"
+msgstr ""
+
+msgctxt "an action done *by* <username>"
+msgid "by"
+msgstr ""
 
 msgid "Send Message"
 msgstr "Надіслати повідомлення"
@@ -2041,6 +2062,11 @@ msgstr "Перемістити у іншу папку"
 
 msgid "Move"
 msgstr "Перемістити"
+
+#, fuzzy, python-format
+#| msgid "You were tagged in: \"%(object_name)s\", in %(team_name)s"
+msgid "A message from %(sender_full_name)s"
+msgstr "Вас позначено: «%(object_name)s» у %(team_name)s"
 
 msgid "Edit folder"
 msgstr "Редагувати папку"
