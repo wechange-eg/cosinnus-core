@@ -1208,6 +1208,8 @@ class CosinnusUnregisterdUserGroupInvite(BaseGroupMembership):
     group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, related_name='unregistered_user_invites',
         on_delete=models.CASCADE)
     email = models.EmailField(_('email address'))
+    invited_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True,
+        related_name='cosinnus_unregistered_user_invitations', on_delete=models.SET_NULL)
     last_modified = models.DateTimeField(_('Last modified'), auto_now=True, editable=False)
     
     CACHE_KEY_MODEL = 'CosinnusUnregisterdUserGroupInvite'

@@ -60,7 +60,7 @@ from django.views.decorators.csrf import csrf_protect
 
 import logging
 from cosinnus.templatetags.cosinnus_tags import is_superuser, full_name,\
-    textfield
+    textfield, has_write_access
 from django.core.validators import validate_email
 from annoying.functions import get_object_or_None
 from django.contrib.auth.models import AnonymousUser
@@ -342,11 +342,19 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         # set admins at the top of the list member
         members = list(admins) + list(members)
         
+        # collect recruited users
+        user = self.request.user
+        recruited = CosinnusUnregisterdUserGroupInvite.objects.filter(group=self.group)
+        if not (check_user_superuser(user) or check_ug_admin(user, self.group)):
+            # only admins or group admins may see email adresses they haven't invited themselves
+            recruited = recruited.filter(invited_by=user)
+        
         context.update({
             'admins': admins,
             'members': members,
             'pendings': pendings,
             'invited': invited,
+            'recruited': recruited,
             'non_members': non_members,
             'member_count': user_count,
             'hidden_user_count': hidden_members,
@@ -1076,18 +1084,15 @@ def group_user_recruit(request, group):
             invalid.append(email)
             continue
         
-        prev_invite = get_object_or_None(CosinnusUnregisterdUserGroupInvite, email=email, group=group)
-        
         # from here on, we have a real email. check if a user with that email exists
         if get_object_or_None(get_user_model(), email=email):
             existing.append(email) 
             continue
-        
         # check if the user has been invited recently (if so, we don't send another mail)
+        prev_invite = get_object_or_None(CosinnusUnregisterdUserGroupInvite, email=email, group=group)
         if prev_invite and prev_invite.last_modified > (now() - datetime.timedelta(days=1)):
             spam_protected.append(email)
             continue
-        
         success.append(email)
         if prev_invite:
             prev_invites_to_refresh.append(prev_invite)
@@ -1116,9 +1121,10 @@ def group_user_recruit(request, group):
         for email in success:
             just_refresh_invites = [inv for inv in prev_invites_to_refresh if inv.email == email]
             if just_refresh_invites:
+                just_refresh_invites[0].invited_by = user
                 just_refresh_invites[0].save()
                 continue
-            CosinnusUnregisterdUserGroupInvite.objects.create(email=email, group=group)
+            CosinnusUnregisterdUserGroupInvite.objects.create(email=email, group=group, invited_by=user)
     
     if invalid:
         messages.error(request, _("Sorry, these did not seem to be valid email addresses: %s") % ', '.join(invalid))
