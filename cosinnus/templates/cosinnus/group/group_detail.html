@@ -39,6 +39,9 @@
     <!-- a box with semi transparent background -->
     <div class="content-box">
         
+        {% comment %}  leave this here, the jump is what we want always  {% endcomment %} 
+        <a class="anchor" id="invite"></a>
+        
         {% if user|has_write_access:object %}
             <legend>{% trans "Invite a member" %}</legend>
             

@@ -20,6 +20,7 @@
               </div>
             {% endcomment %}
             <button type="button" class="btn btn-emphasized btn-headline" href="" data-target="widget-title-url">
+            
                 <ul class="media-list">
                     <li class="media">
                         <a class="pull-left btn-extra-emphasized" href="#"></a>
@@ -43,7 +44,9 @@
                             </a>
                         {% endif %}
                         <div class="media-body">
-                            <span {% if not widget_title %}data-target="widget-title"{% endif %}>{% block widget_title %}{% if widget_title %}{{ widget_title }}{% endif %}{% endblock widget_title %}</span>
+			                {% block header_content %}
+                                <span {% if not widget_title %}data-target="widget-title"{% endif %}>{% block widget_title %}{% if widget_title %}{{ widget_title }}{% endif %}{% endblock widget_title %}</span>
+			                {% endblock %}
                         </div>
                     </li>
                 </ul>

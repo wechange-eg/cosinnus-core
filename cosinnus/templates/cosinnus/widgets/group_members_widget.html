@@ -1,6 +1,16 @@
 {% extends "cosinnus/widgets/base_widget.html" %}
 {% load i18n cosinnus_tags %}
 
+{% block header_content %}
+    {{ block.super }}
+    <div class="pull-right">
+        <a href="{% group_url 'cosinnus:group-detail' group=group %}#invite" title="{% trans "Invite people" %}">
+	        <i class="fa fa-user-plus"></i>
+	        {% trans "Invite people" %}
+	    </a>
+	</div>
+{% endblock %}
+
 {% block widget_button %}
     <button type="button" class="btn btn-emphasized" href="{% group_url 'cosinnus:group-detail' group=group %}">
         <ul class="media-list">
