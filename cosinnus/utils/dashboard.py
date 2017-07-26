@@ -226,9 +226,8 @@ class GroupMembersWidget(DashboardWidget):
         if group is None:
             return ''
         
-        #count = int(self.config.get('amount', 24))
-        # FIXME: hardcoded widget item count for now
-        count = 23
+        # how many members display. it's -1 because the last tile is always the "+72 members"
+        count = getattr(settings, 'COSINNUS_GROUP_MEMBER_WIDGET_USER_COUNT', 15)
         
         admin_ids = CosinnusGroupMembership.objects.get_admins(group=group)
         member_ids = CosinnusGroupMembership.objects.get_members(group=group)

@@ -212,6 +212,8 @@ class CosinnusConf(AppConf):
     # the url pattern for group overview URLs
     GROUP_PLURAL_URL_PATH = 'projects'
     
+    # number of members displayed in the group widet
+    GROUP_MEMBER_WIDGET_USER_COUNT = 15
     
     # widgets listed here will be created for the group dashboard upon CosinnusGroup creation.
     # this. will check if the cosinnus app is installed and if the widget is registered, so
