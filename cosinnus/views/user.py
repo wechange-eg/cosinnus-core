@@ -446,10 +446,17 @@ def set_user_email_to_verify(user, new_email, request=None, user_has_just_regist
     # message user for email verification
     if request:
         data = get_common_mail_context(request)
-        data.update({'user':user, 'user_email':new_email, 'verification_url_param':verification_url_param})
+        data.update({
+            'user':user,
+            'user_email':new_email,
+            'verification_url_param':verification_url_param,
+        })
+        template = 'cosinnus/mail/user_email_verification%s.html' % ('_onchange' if not user_has_just_registered else '')
+        data.update({
+            'content': render_to_string(template, data)
+        })
         subj_user = render_to_string('cosinnus/mail/user_email_verification%s_subj.txt' % ('_onchange' if not user_has_just_registered else ''), data)
-        send_mail_or_fail_threaded(new_email, subj_user, 'cosinnus/mail/user_email_verification%s.html' \
-                    % ('_onchange' if not user_has_just_registered else ''), data)
+        send_mail_or_fail_threaded(new_email, subj_user, None, data)
 
 
 def user_api_me(request):
