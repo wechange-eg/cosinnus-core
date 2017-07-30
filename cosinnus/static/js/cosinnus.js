@@ -621,7 +621,7 @@
                     return;
                 }
                 if ($(this).find('i').hasClass('fa-check-square-o')) {
-                    // already checked
+                    // uncheck checked box and remove button highlight
                     $(this)
                         .find('i')
                         .removeClass('fa-check-square-o')
@@ -629,7 +629,13 @@
                         .next() // INPUT type="hidden"
                         .attr('value','false')
                         .trigger('change');
+                    $(this)
+                        .parents('.btn-extra-emphasized')
+                        .first()
+                        .removeClass('btn-extra-emphasized')
+                        .addClass('btn-emphasized');
                 } else {
+                    // check unchecked box and highlight button
                     $(this)
                         .find('i')
                         .removeClass('fa-square-o')
@@ -637,6 +643,11 @@
                         .next() // INPUT type="hidden"
                         .attr('value','true')
                         .trigger('change');
+                    $(this)
+                        .parents('.btn-emphasized')
+                        .first()
+                        .removeClass('btn-emphasized')
+                        .addClass('btn-extra-emphasized');
                 }
             });
 
