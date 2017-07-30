@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-26 16:38+0200\n"
-"PO-Revision-Date: 2017-07-28 19:18+0200\n"
+"PO-Revision-Date: 2017-07-30 15:31+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -2152,7 +2152,7 @@ msgstr ""
 
 #, python-format
 msgid "Please verify your email address for %(site_name)s!"
-msgstr ""
+msgstr "будь ласка пiдтверди свою емейл адресу для %(site_name)s!"
 
 #, fuzzy, python-format
 #| msgid ""
