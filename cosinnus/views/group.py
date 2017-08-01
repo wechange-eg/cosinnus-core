@@ -6,7 +6,8 @@ from itertools import chain
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import ImproperlyConfigured, ValidationError
+from django.core.exceptions import ImproperlyConfigured, ValidationError,\
+    PermissionDenied
 from django.core.urlresolvers import reverse, reverse_lazy, NoReverseMatch
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
@@ -43,11 +44,12 @@ from extra_views import (CreateWithInlinesView, FormSetView, InlineFormSet,
 
 from cosinnus.forms.tagged import get_form  # circular import
 from cosinnus.utils.urls import group_aware_reverse, get_non_cms_root_url
-from cosinnus.models.tagged import BaseTagObject
+from cosinnus.models.tagged import BaseTagObject, BaseTaggableObjectReflection
 from django.shortcuts import redirect, get_object_or_404
-from django.http.response import Http404, HttpResponseNotAllowed
+from django.http.response import Http404, HttpResponseNotAllowed,\
+    HttpResponseBadRequest
 from cosinnus.utils.permissions import check_ug_admin, check_user_superuser,\
-    check_object_read_access
+    check_object_read_access, check_ug_membership
 from cosinnus.views.widget import GroupDashboard
 from cosinnus.views.microsite import GroupMicrositeView
 from django.views.generic.base import View
@@ -73,6 +75,8 @@ from django.utils.html import escape
 from copy import deepcopy
 from django.utils.safestring import mark_safe
 from django.template.defaultfilters import linebreaksbr
+from django.contrib.contenttypes.models import ContentType
+from cosinnus.views.mixins.reflected_objects import ReflectedObjectSelectMixin
 logger = logging.getLogger('cosinnus')
 
 
@@ -1136,4 +1140,65 @@ def group_user_recruit(request, group):
         messages.success(request, _("Success! We are now sending out invitations to these email addresses: %s") % ', '.join(success))
         
     return redirect(redirect_url)
+
+
+@csrf_protect
+def group_assign_reflected_object(request, group): 
+    if not request.method=='POST':
+        return HttpResponseNotAllowed(['POST'])
+    if not request.user.is_authenticated():
+        raise PermissionDenied('Must be authenticated!')
+    group = get_group_for_request(group, request)
+    if not group:
+        return HttpResponseBadRequest('Target group not found!')
     
+    # parse params
+    reflecting_object_id = request.POST.get('reflecting_object_id', None)
+    reflecting_object_content_type = request.POST.get('reflecting_object_content_type', None)
+    checked_groups = request.POST.getlist('group_checked', None)
+    if reflecting_object_id is None or reflecting_object_content_type is None or checked_groups is None:
+        return HttpResponseBadRequest('Missing POST parameters!')
+    checked_groups = [int(group_id) for group_id in checked_groups]
+    
+    # get content type, check if among the allowed ones
+    if not reflecting_object_content_type in getattr(settings, 'COSINNUS_REFLECTABLE_OBJECTS', []):
+        raise PermissionDenied('This object type cannot be reflected!')
+    app_label, model_str = reflecting_object_content_type.split('.',1)
+    ct = ContentType.objects.get_by_natural_key(app_label, model_str)
+    
+    # get object
+    model = ct.model_class()
+    obj = get_object_or_None(model, id=reflecting_object_id)
+    if not obj:
+        return HttpResponseBadRequest('Target object not found!')
+    # check if object really part of current group
+    if not obj.group_id == group.id:
+        return HttpResponseBadRequest('Object does not belong in this group!')
+    # check user object read permission
+    if not check_object_read_access(obj, request.user):
+        raise PermissionDenied('You have no access to this object!')
+    
+    # get all reflectable groups and reflecting groups from mixin
+    mixin = ReflectedObjectSelectMixin()
+    reflect_data = mixin.get_reflect_data(request, group, obj)
+    added_groups = []
+    
+    with transaction.atomic():
+        for reflectable_group, reflecting in reflect_data['reflectable_groups']:
+            # if in checked but not reflecting, create
+            if reflectable_group.id in checked_groups and not reflecting:
+                BaseTaggableObjectReflection.objects.create(content_type=ct, object_id=obj.id, group=reflectable_group, creator=request.user)
+                added_groups.append(reflectable_group)
+            # if in reflecting, but not active, get reflecting object, delete it
+            if reflecting and not reflectable_group.id in checked_groups:
+                BaseTaggableObjectReflection.objects.get(content_type=ct, object_id=obj.id, group=reflectable_group).delete()
+    
+    success_message = _('Your selection for showing this event in projects/groups was updated.')
+    if added_groups:
+        group_names = ', '.join([show_group.name for show_group in added_groups])
+        success_message = force_text(success_message) + ' ' + force_text(_('This event is now being shown in these projects/groups: %(group_names)s') % {'group_names': group_names})
+    messages.success(request, success_message)
+    
+    redirect_url = obj.get_absolute_url()
+    return redirect(redirect_url)
+

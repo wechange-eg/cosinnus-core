@@ -133,6 +133,11 @@ class CosinnusConf(AppConf):
         ],
     }
     
+    # list of BaseTaggableObjectModels that can be reflected from groups into projects
+    REFLECTABLE_OBJECTS = [
+        'cosinnus_event.event',
+    ]
+    
     # The default title for all pages unless the title block is overwritten. 
     # This is translated through a {% trans %} tag.
     BASE_PAGE_TITLE_TRANS = 'Cosinnus'

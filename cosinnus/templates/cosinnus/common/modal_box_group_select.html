@@ -1,16 +1,24 @@
 {% load i18n cosinnus_tags %}
 
 {% captureas label %}
+
 	<p>{% blocktrans %}Check the projects/groups where you wish to show this event in. The event will be shown in the calendars and all lists, but will still remain in this group.{% endblocktrans %}</p>
-    <div style="overflow-y: scroll; height: 400px;" class="app-main-force">
+	{% if reflect_is_forum %}
+        <p>{% blocktrans %}Events from the Forum can be shown in any of your projects/groups.{% endblocktrans %}</p>
+    {% else %}
+        <p>{% blocktrans %}Events from this group can be shown in any of the group's subprojects.{% endblocktrans %}</p>
+    {% endif %}
+    <br/>
+	
+    <div style="overflow-y: scroll; height: 300px;" class="app-main-force">
         {% for select_group, selected in group_select_tuples %}
                 <div class="app-main">
 			        <div class="btn btn-{% if selected %}extra-{% endif %}emphasized w100">
 			            <ul class="media-list large-space">
 			                <li class="media">
 		                        <a id="checkbox_{{ select_group.id }}" class="pull-left">
-	                                <i class="fa {% if selected %}fa-square-check-o{% else %}fa-square-o{% endif %}"></i>
-	                                <input type="hidden" name="group__{{ select_group.id }}" value={% if selected %}1{% else %}0{% endif %}>
+	                                <i class="fa {% if selected %}fa-check-square-o{% else %}fa-square-o{% endif %}"></i>
+	                                <input type="checkbox" style="display: none;" name="group_checked" value="{{ select_group.id }}">
                                 </a>		                            
 			                    <a class="clicktransfer" data-transfertarget="#checkbox_{{ select_group.id }}" href="#">
 				                    <span class="pull-left">
@@ -26,6 +34,9 @@
 			    </div>
         {% endfor %}
     </div>
+    
+    <input type="hidden" name="reflecting_object_id" value="{{ reflecting_object_id }}">
+    <input type="hidden" name="reflecting_object_content_type" value={{ reflecting_object_content_type }}>
     
     <script type="text/javascript">
         $('a.clicktransfer').on('click', function(e, f) {
