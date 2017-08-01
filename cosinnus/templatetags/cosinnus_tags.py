@@ -23,7 +23,8 @@ from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
     check_group_create_objects_access, check_object_read_access, get_user_token,
     check_user_portal_admin, check_user_superuser)
-from django.template.base import TemplateSyntaxError
+from django.template.base import TemplateSyntaxError, VariableDoesNotExist,\
+    Variable
 from cosinnus.core.registries.group_models import group_model_registry
 from django.core.cache import cache
 from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
@@ -40,6 +41,7 @@ from uuid import uuid1
 from annoying.functions import get_object_or_None
 from django_markdown2.templatetags.md2 import markdown
 from django.utils.text import normalize_newlines
+from cosinnus.models.tagged import BaseTaggableObjectModel
 
 
 logger = logging.getLogger('cosinnus')
@@ -596,9 +598,31 @@ class GroupURLNode(URLNode):
             pass
         
         patched_group_slug_arg = None
+
+        # if this flag is True, we need to pop the context before returning from this tag        
+        switched_context_group_arg = False
+        url_suffix = ''       
+        
         
         # we accept a group object or a group slug
         if issubclass(group_arg.__class__, CosinnusGroup):
+                 
+            if 'ensure_object' in self.kwargs:
+                try:    
+                    ensure_object = self.kwargs.pop('ensure_object').resolve(context)
+                    if issubclass(ensure_object.__class__, BaseTaggableObjectModel):
+                        if ensure_object.group != group_arg:
+                            group_slug = ensure_object.group.slug
+                            group_arg = ensure_object.group
+                            context.push({'group': ensure_object.group})
+                            switched_context_group_arg = True
+                            url_suffix = '?reflected_item_redirect=1'
+                except Exception, e:
+                    logger.warn('Group URL tag: an error occured while trying to resolve a reflected object source!', extra={'exc': e})
+                    if settings.DEBUG:
+                        raise
+            
+            
             # determine the portal from the group
             group_slug = group_arg.slug
             
@@ -618,17 +642,18 @@ class GroupURLNode(URLNode):
         else:
             group_slug = group_arg
         
-            
         # make sure we have the foreign portal. we might not have yet retrieved it if we had a portal id explicitly set
         if portal_id and not portal_id == CosinnusPortal.get_current().id and not foreign_portal:
             foreign_portal = CosinnusPortal.objects.get(id=portal_id)
-
+        
         try:
             try:
                 view_name = group_aware_url_name(view_name, group_slug, portal_id)
             except CosinnusGroup.DoesNotExist:
                 # ignore errors if the group doesn't exist if it is inactive (return empty link)
                 if ignoreErrors or (not group_arg.is_active):
+                    if switched_context_group_arg:
+                        context.pop()
                     return ''
                 
                 logger.error(u'Cosinnus__group_url_tag: Could not find group for: group_arg: %s, view_name: %s, group_slug: %s, portal_id: %s' % (str(group_arg), view_name, group_slug, portal_id))
@@ -658,10 +683,14 @@ class GroupURLNode(URLNode):
                     context[self.asvar] = domain + context[self.asvar]
                 else:
                     ret_url = domain + ret_url
-            
-            return ret_url
+                    
+            if switched_context_group_arg:
+                context.pop()
+            return ret_url + url_suffix
         except:
             if ignoreErrors:
+                if switched_context_group_arg:
+                    context.pop()
                 return ''
             else:
                 raise
