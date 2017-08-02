@@ -1192,6 +1192,9 @@ def group_assign_reflected_object(request, group):
             # if in reflecting, but not active, get reflecting object, delete it
             if reflecting and not reflectable_group.id in checked_groups:
                 BaseTaggableObjectReflection.objects.get(content_type=ct, object_id=obj.id, group=reflectable_group).delete()
+            # just to display, unchanged reflecting groups
+            if reflecting and reflectable_group.id in checked_groups:
+                added_groups.append(reflectable_group)
     
     success_message = _('Your selection for showing this event in projects/groups was updated.')
     if added_groups:
