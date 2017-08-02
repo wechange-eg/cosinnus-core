@@ -10,6 +10,8 @@ from django.contrib import messages
 from django.utils.http import urlencode
 from django.shortcuts import redirect
 from django.core.exceptions import ImproperlyConfigured
+from django.utils.html import escape
+from django.utils.safestring import mark_safe
 
 
 class MixReflectedObjectsMixin(object):
@@ -89,10 +91,11 @@ class ReflectedObjectRedirectNoticeMixin(object):
     
     def get(self, request, *args, **kwargs):
         if self.request.GET.get('reflected_item_redirect', None) == '1':
-            messages.success(self.request, _(''
-                    'You are now viewing an item that is located in "%(group_name)s". '
+            messages.success(self.request, mark_safe(_(''
+                    'You are now located in %(group_name)s.'
+                    '<br/>'
                     'You were redirected here from another project or group that links to this item.'
-                ) % {'group_name': self.group.name})
+                ) % {'group_name': '"<b>%s</b>"' % escape(self.group.name)}))
             params = request.GET.copy()
             del params['reflected_item_redirect']
             params = urlencode(params)
