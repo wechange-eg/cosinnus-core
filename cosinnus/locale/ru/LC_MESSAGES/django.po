@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-26 18:21+0200\n"
+"POT-Creation-Date: 2017-08-02 16:06+0200\n"
 "PO-Revision-Date: 2017-07-26 16:19+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -762,6 +762,16 @@ msgstr "Прикрепленные объекты"
 msgid "Path"
 msgstr "Путь"
 
+#, fuzzy
+#| msgid "Reported object"
+msgid "Reflected Object"
+msgstr "Объект жалобы"
+
+#, fuzzy
+#| msgid "Reported objects"
+msgid "Reflected Objects"
+msgstr "Объекты жалобы"
+
 msgid "Create-Project or Group Button"
 msgstr "Создать кнопку группа/проект"
 
@@ -1158,6 +1168,23 @@ msgstr "расширить"
 
 msgid "Shrink"
 msgstr "уменьшить"
+
+msgid "Check the projects/groups where you wish to show this event in. The event will be shown in the calendars and all lists, but will still remain in this group."
+msgstr ""
+
+msgid "Events from the Forum can be shown in any of your projects/groups."
+msgstr ""
+
+msgid "Events from this group can be shown in any of the group's subprojects."
+msgstr ""
+
+#, fuzzy
+#| msgid "No related projects/groups"
+msgid "Show in other projects/groups"
+msgstr "Нет родственных проектов/групп"
+
+msgid "Apply"
+msgstr ""
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr ""
@@ -3235,6 +3262,13 @@ msgstr "Этот адрес электронной почты уже испол�
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr ""
 
+msgid "Your selection for showing this event in projects/groups was updated."
+msgstr ""
+
+#, python-format
+msgid "This event is now being shown in these projects/groups: %(group_names)s"
+msgstr ""
+
 # ???
 msgid "No appname given for adding containers."
 msgstr "Не указано название приложения для добавления контейнеров"
@@ -3258,6 +3292,10 @@ msgstr "Корневая папка"
 
 msgid "<Root folder>"
 msgstr "<Корневая папка>"
+
+#, python-format
+msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
+msgstr ""
 
 # ???
 #, python-format

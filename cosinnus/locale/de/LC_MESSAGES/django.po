@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-26 18:21+0200\n"
-"PO-Revision-Date: 2017-07-26 18:25+0200\n"
+"POT-Creation-Date: 2017-08-02 16:06+0200\n"
+"PO-Revision-Date: 2017-08-02 16:12+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -612,15 +612,11 @@ msgstr ""
 msgid "Team"
 msgstr "Team"
 
-#, fuzzy
-#| msgid "Cosinnus groups"
 msgid "CosinnusLocation"
-msgstr "Gruppen"
+msgstr "CosinnusLocation"
 
-#, fuzzy
-#| msgid "Cosinnus groups"
 msgid "CosinnusLocations"
-msgstr "Gruppen"
+msgstr "CosinnusLocations"
 
 msgid "Group Image"
 msgstr "Gruppenbild"
@@ -735,6 +731,12 @@ msgstr "Verknüpftes Objekt"
 
 msgid "Path"
 msgstr "Pfad"
+
+msgid "Reflected Object"
+msgstr "Reflected Object"
+
+msgid "Reflected Objects"
+msgstr "Reflected Objects"
 
 msgid "Create-Project or Group Button"
 msgstr "Projekt oder Gruppe-erstellen Button"
@@ -1143,6 +1145,21 @@ msgstr "Erweitern"
 msgid "Shrink"
 msgstr "Verkleinern"
 
+msgid "Check the projects/groups where you wish to show this event in. The event will be shown in the calendars and all lists, but will still remain in this group."
+msgstr "Wähle die Projekte/Gruppen, in denen die Veranstaltung angezeigt werden soll. Sie wird dort dann in allen Kalendern und Listen angezeigt, bleibt aber weiterhin in dieser Gruppe."
+
+msgid "Events from the Forum can be shown in any of your projects/groups."
+msgstr "Veranstaltungen aus dem Forum können in jedem deiner Projekte/Gruppen angezeigt werden."
+
+msgid "Events from this group can be shown in any of the group's subprojects."
+msgstr "Veranstaltungen aus dieser Gruppe können in jedem ihrer Unterprojekte angezeigt werden."
+
+msgid "Show in other projects/groups"
+msgstr "In anderen Projekten/Gruppen anzeigen"
+
+msgid "Apply"
+msgstr "Übernehmen"
+
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr "Gib die E-Mail Adressen von den Leuten ein, die du einladen möchtest der Platform beizutreten."
 
@@ -1150,10 +1167,8 @@ msgstr "Gib die E-Mail Adressen von den Leuten ein, die du einladen möchtest de
 msgid "We will send them an email asking them to sign up and join %(group_name)s."
 msgstr "Wir schicken ihnen eine E-Mail und bitten sie darum sich zu registrieren und %(group_name)s beizutreten."
 
-#, fuzzy
-#| msgid "E-Mail Addresse"
 msgid "E-Mail Addresses"
-msgstr "E-Mail Adresse"
+msgstr "E-Mail Adressen"
 
 msgid "(one per line or comma-seperated)"
 msgstr "(eine pro Zeile oder mit Kommas getrennt)"
@@ -3144,7 +3159,7 @@ msgstr "Tut uns leid, aber dies hier scheinen keine gültigen E-Mail Adressen ge
 
 #, python-format
 msgid "These people have been sent an email invite only recently. You can send them an invite again tomorrow: %s"
-msgstr ""
+msgstr "Diesen Leuten wurde erst kürzlich eine E-Mail geschickt. Du kannst ihnen morgen wieder eine Einladung schicken: %s"
 
 #, python-format
 msgid "Good news! The people with these addresses already have a registered user account: %s"
@@ -3153,6 +3168,13 @@ msgstr "Gute Nachrichten! Unter diesen E-Mail Adressen haben sich bereits Mitgli
 #, python-format
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "Super! Wir schicken jetzt die Einladungen an folgende E-Mail Adressen: %s"
+
+msgid "Your selection for showing this event in projects/groups was updated."
+msgstr "Deine Auswahl für die Anzeige der Veranstaltung in anderen Projekten/Gruppen wurde übernommen."
+
+#, python-format
+msgid "This event is now being shown in these projects/groups: %(group_names)s"
+msgstr "Die Veranstaltung wird jetzt in folgenden Projekten/Gruppen angezeigt: %(group_names)s"
 
 msgid "No appname given for adding containers."
 msgstr "Kein Appname zum Hinzufügen von Zusammenstellungen angegeben."
@@ -3175,6 +3197,10 @@ msgstr "Oberster Ordner"
 
 msgid "<Root folder>"
 msgstr "<Oberster Ordner>"
+
+#, python-format
+msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
+msgstr "Du befindest dich jetzt in %(group_name)s. <br/>Du wurdest hierhin geleitet über ein Projekt oder eine Gruppe, die auf diese Veranstaltung verweist."
 
 #, python-format
 msgid "Container \"%(title)s\" could not be deleted because it contained objects that could not be deleted."

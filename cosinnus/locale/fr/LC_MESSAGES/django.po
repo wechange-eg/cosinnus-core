@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-26 18:21+0200\n"
+"POT-Creation-Date: 2017-08-02 16:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -731,6 +731,12 @@ msgstr ""
 msgid "Path"
 msgstr ""
 
+msgid "Reflected Object"
+msgstr ""
+
+msgid "Reflected Objects"
+msgstr ""
+
 msgid "Create-Project or Group Button"
 msgstr ""
 
@@ -1125,6 +1131,21 @@ msgid "Expand"
 msgstr ""
 
 msgid "Shrink"
+msgstr ""
+
+msgid "Check the projects/groups where you wish to show this event in. The event will be shown in the calendars and all lists, but will still remain in this group."
+msgstr ""
+
+msgid "Events from the Forum can be shown in any of your projects/groups."
+msgstr ""
+
+msgid "Events from this group can be shown in any of the group's subprojects."
+msgstr ""
+
+msgid "Show in other projects/groups"
+msgstr ""
+
+msgid "Apply"
 msgstr ""
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
@@ -2995,6 +3016,13 @@ msgstr ""
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr ""
 
+msgid "Your selection for showing this event in projects/groups was updated."
+msgstr ""
+
+#, python-format
+msgid "This event is now being shown in these projects/groups: %(group_names)s"
+msgstr ""
+
 msgid "No appname given for adding containers."
 msgstr ""
 
@@ -3015,6 +3043,10 @@ msgid "Root Folder"
 msgstr ""
 
 msgid "<Root folder>"
+msgstr ""
+
+#, python-format
+msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
 msgstr ""
 
 #, python-format
