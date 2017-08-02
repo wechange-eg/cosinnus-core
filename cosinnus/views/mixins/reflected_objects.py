@@ -9,6 +9,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
 from django.utils.http import urlencode
 from django.shortcuts import redirect
+from django.core.exceptions import ImproperlyConfigured
 
 
 class MixReflectedObjectsMixin(object):
@@ -18,13 +19,28 @@ class MixReflectedObjectsMixin(object):
               after group filters like `FilterGroupMixin`, but before permission and slicing mixins
               like `CosinnusFilterMixin` and `RequireReadMixin`! """
     
-    def get_queryset(self, **kwargs):
-        queryset = super(MixReflectedObjectsMixin, self).get_queryset(**kwargs)
-        ct = ContentType.objects.get_for_model(self.model)
-        reflected_obj_ids = BaseTaggableObjectReflection.objects.filter(group=self.group, content_type=ct).values_list('object_id', flat=True)
-        reflected_qs = self.model.objects.filter(id__in=reflected_obj_ids)
+    def mix_queryset(self, queryset, model, group=None, user=None):
+        """ This function can be used independent of a view by just calling it on an instance of the mixin.
+            Either param `group` or `user` must be supplied
+            @param group: Filters group into which objects are reflected
+            @param user: Filters on all groups the given user is a member of """
+        
+        ct = ContentType.objects.get_for_model(model)
+        if group is not None:
+            reflected_obj_ids = BaseTaggableObjectReflection.objects.filter(group=group, content_type=ct).values_list('object_id', flat=True)
+        elif user is not None:
+            user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
+            reflected_obj_ids = BaseTaggableObjectReflection.objects.filter(group_id__in=user_group_ids, content_type=ct).values_list('object_id', flat=True)
+        else:
+            raise ImproperlyConfigured('MixReflectedObjectsMixin.mix_queryset: need to supply either a `group` or `user` parameter!')
+        reflected_qs = model.objects.filter(id__in=reflected_obj_ids)
         # need to distinctify, in case base_queryset was being made distinct somewhere else (cannot combine distinct + non-distinct)
         queryset = (queryset.distinct() | reflected_qs.distinct()).distinct()
+        return queryset
+    
+    def get_queryset(self, **kwargs):
+        queryset = super(MixReflectedObjectsMixin, self).get_queryset(**kwargs)
+        queryset = self.mix_queryset(queryset, self.model, self.group)
         self.queryset = queryset
         return queryset
 
