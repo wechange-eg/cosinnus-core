@@ -246,7 +246,9 @@ class CosinnusGroupGalleryImageForm(forms.ModelForm):
         
         
 class CosinnusGroupCallToActionButtonForm(forms.ModelForm):
-
+    
+    url = forms.URLField(widget=forms.TextInput, required=False)
+    
     class Meta:
         model = CosinnusGroupCallToActionButton
         fields = ('group', 'label', 'url', )

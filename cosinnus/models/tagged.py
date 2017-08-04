@@ -13,7 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 from taggit.managers import TaggableManager
 
 from cosinnus.conf import settings
-from cosinnus.models.group import CosinnusGroup
+from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.utils.functions import unique_aware_slugify,\
     clean_single_line_text
 from cosinnus.models.widget import WidgetConfig
@@ -27,6 +27,8 @@ from cosinnus.core.registries.group_models import group_model_registry
 from osm_field.fields import OSMField, LatitudeField, LongitudeField
 from cosinnus.utils.lanugages import MultiLanguageFieldMagicMixin
 from cosinnus.core.registries import app_registry
+from django.utils.safestring import mark_safe
+from django.template.loader import render_to_string
 
 
 
@@ -346,6 +348,19 @@ class BaseTaggableObjectModel(AttachableObjectModel):
     
     def get_cosinnus_app_name(self):
         return app_registry.get_name(self.__class__.__module__.split('.')[0])
+    
+    def render_additional_notification_content_rows(self):
+        """ Used when rendering email notifications for an object. Any list of html strings returned here
+            will be added, on row each, after the object_text of the notification object.
+            Note: use mark_safe on the html strings if you do not wish them to be escaped!
+            @return: An array of HTML strings or [] """
+        content_snippets = []
+        tag_object = self.media_tag
+        if tag_object.location and tag_object.location_url:
+            location_html = render_to_string('cosinnus/html_mail/content_snippets/tagged_location.html', 
+                                             {'tag_object': tag_object, 'domain': CosinnusPortal.get_current().get_domain()})
+            content_snippets.append(mark_safe(location_html))
+        return content_snippets
 
 
 class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):

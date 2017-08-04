@@ -3,7 +3,7 @@
         <row class="summary-item">
             <columns class="image" large="1" valign="top">
                 <a href="{{#rw this}}object_url{{/rw}}">
-                    <img class="level-2" src="{{#rw this}}image_url{{/rw}}" />
+                    <img class="level-2" src="{{#rw this}}image_url{{/rw}}" alt="" />
                 </a>
             </columns>
 
@@ -32,13 +32,30 @@
                     </row>
                 {{/rwif}}
 
-                {{#rwif object_text raw_if="object_text" }}
-                    <row class="object-text {{#rw this}}type{{/rw}}">
-                        <columns>
-                            <p>{{#rw this}}object_text{{/rw}}</p>
-                        </columns>
-                    </row>
-                {{/rwif}}
+                {{#if raw}}
+                    {{{{raw}}}}
+                        {% if object_text or content_rows and not this_is_a_sub_snippet %}
+	                        <row class="object-text {{ type }}">
+	                            <columns>
+	                                {% if object_text %}
+	                                   <p>{{ object_text }}</p>
+	                                {% endif %}
+		                            {% for content in content_rows %}
+		                                <p>{{ content }}</p>
+		                            {% endfor %}
+	                            </columns>
+	                        </row>
+                        {% endif %}
+                    {{{{/raw}}}}
+                {{else}}
+	                {{#rwif object_text raw_if="object_text" }}
+	                    <row class="object-text {{#rw this}}type{{/rw}}">
+	                        <columns>
+	                            <p>{{#rw this}}object_text{{/rw}}</p>
+	                        </columns>
+	                    </row>
+	                {{/rwif}}                    
+                {{/if}}
 
                 {{#if raw}}
                     {{{{raw}}}}

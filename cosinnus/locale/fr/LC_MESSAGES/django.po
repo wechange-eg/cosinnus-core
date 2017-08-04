@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-26 16:38+0200\n"
+"POT-Creation-Date: 2017-07-15 15:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,6 +78,10 @@ msgid "%d Users were deactivated successfully."
 msgstr ""
 
 msgid "Deactivate users (will keep all all items they created on the site)"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
 msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
@@ -152,6 +156,16 @@ msgstr ""
 msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
 msgstr ""
 
+msgid "You were made an admin of this team"
+msgstr ""
+
+msgid "Made you an admin"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
+msgstr ""
+
 msgid "You were tagged in a post, document or other item"
 msgstr ""
 
@@ -171,15 +185,11 @@ msgid "Invited you"
 msgstr ""
 
 #, python-format
-msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
 msgstr ""
 
 #, python-format
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
-msgstr ""
-
-#, python-format
-msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
 msgstr ""
 
 msgid "Deutsch"
@@ -1030,6 +1040,9 @@ msgstr ""
 msgid "Choose App"
 msgstr ""
 
+msgid "Attach existing Files..."
+msgstr ""
+
 msgid "Drag and Drop files here..."
 msgstr ""
 
@@ -1358,6 +1371,9 @@ msgid "Revoke Invitation for Member"
 msgstr ""
 
 msgid "Do you really want to decline the invitation?"
+msgstr ""
+
+msgid "There are no pending invitations."
 msgstr ""
 
 msgid "Send Message"
@@ -2136,9 +2152,6 @@ msgstr ""
 msgid "Place or adress"
 msgstr ""
 
-msgid "Attach existing Files..."
-msgstr ""
-
 msgid "Select topic"
 msgstr ""
 
@@ -2841,6 +2854,10 @@ msgid "You had already been invited to \"%(team_name)s\" and have now been made 
 msgstr ""
 
 #, python-format
+msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
+msgstr ""
+
+#, python-format
 msgid "You are no longer a member of the %(team_type)s “%(team_name)s”."
 msgstr ""
 
@@ -2854,10 +2871,6 @@ msgstr ""
 
 #, python-format
 msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
-msgstr ""
-
-#, python-format
-msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
 msgstr ""
 
 #, python-format

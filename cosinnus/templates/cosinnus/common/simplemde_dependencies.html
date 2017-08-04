@@ -1,0 +1,19 @@
+{% load static %}
+
+{% if not noinclude %}
+<link rel="stylesheet" href="{% static 'css/vendor/simplemde.min.css' %}">
+<script src="{% static 'js/vendor/simplemde.min.js' %}"></script>
+{% endif %}
+
+<script>
+  $(function(){
+      var simplemde = new SimpleMDE({ 
+          element: $('#{{ element_id }}')[0],
+          indentWithTabs: false,
+          shortcuts: {},
+          spellChecker: false,
+          status: false,
+          toolbar: ["bold", "italic", "strikethrough", "|", "unordered-list", "ordered-list", "|", "preview"],
+      });
+  });
+</script>

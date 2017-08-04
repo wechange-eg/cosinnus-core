@@ -128,9 +128,9 @@
 			        <div class="content-box large-space">
 			        	{% block userprofile_content %}
 				            {% if profile.description %} 
-				            <p class="transparent">
+				            <div class="textfield transparent">
 				                {{ profile.description|textfield }}
-				            </p>
+				            </div>
 				            {% endif %}
 				            
 				            {% if profile.website %}

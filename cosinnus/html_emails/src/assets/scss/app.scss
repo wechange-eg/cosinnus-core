@@ -37,3 +37,9 @@ img {
         padding-bottom: 0;
     }
 }
+
+/* Hide linebreaks in sublists (those linebreaks are some markdown glitch) */
+ul br, ol br, ul br {
+    display: none;
+}
+

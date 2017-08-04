@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-26 16:38+0200\n"
-"PO-Revision-Date: 2017-04-26 16:39+0200\n"
+"POT-Creation-Date: 2017-07-15 15:28+0200\n"
+"PO-Revision-Date: 2017-07-15 15:30+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -80,6 +80,10 @@ msgstr "%d Benutzer wurden erfolgreich deaktiviert."
 
 msgid "Deactivate users (will keep all all items they created on the site)"
 msgstr "Ausgewählte Benutzer deaktivieren (deren erstellte Items bleiben auf der Seite erhalten)"
+
+#, python-format
+msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
+msgstr "%(sender_name)s hat dich eingeladen, auf %(portal_name)s dem Projekt \"%(team_name)s\" beizutreten! Klicke unten auf den Projektnamen um es dir anzuschauen und mitzumachen!"
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieser Gruppe/Projekts können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
@@ -153,6 +157,16 @@ msgstr "%(sender_name)s hat die Einladung abgelehnt"
 msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
 msgstr "%(sender_name)s hat die Einladung zu %(team_name)s abgelehnt."
 
+msgid "You were made an admin of this team"
+msgstr "Du wurdest in dieser Gruppe/Projekt zum Administrator befördert"
+
+msgid "Made you an admin"
+msgstr "Hat dich zum Administrator befördert"
+
+#, python-format
+msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s hat dich zu einem Administrator gemacht von %(team_name)s auf %(portal_name)s!"
+
 msgid "You were tagged in a post, document or other item"
 msgstr "Du wurdest in einem Beitrag, Dokument oder anderem Element markiert"
 
@@ -172,16 +186,12 @@ msgid "Invited you"
 msgstr "Hat dich eingeladen"
 
 #, python-format
-msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s!"
-msgstr "%(sender_name)s hat dich eingeladen, %(team_name)s beizutreten auf %(portal_name)s!"
+msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
+msgstr "%(sender_name)s hat dich eingeladen, \"%(team_name)s\" auf %(portal_name)s beizutreten! <br/><br/> Um beizutreten, klicke bitte auf den unten stehenden Link. Du wirst dann auf das Portal weitergeleitet und kannst dort die Einladung ansehen und annehmen."
 
 #, python-format
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s hat dich eingeladen, %(team_name)s beizutreten auf %(portal_name)s!"
-
-#, python-format
-msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
-msgstr "%(sender_name)s hat dich eingeladen, auf %(portal_name)s dem Projekt \"%(team_name)s\" beizutreten! Klicke unten auf den Projektnamen um es dir anzuschauen und mitzumachen!"
 
 msgid "Deutsch"
 msgstr "Deutsch"
@@ -1046,6 +1056,9 @@ msgstr "Mitglieder"
 msgid "Choose App"
 msgstr "App auswählen"
 
+msgid "Attach existing Files..."
+msgstr "Vorhandene Datei wählen..."
+
 msgid "Drag and Drop files here..."
 msgstr "Dateien vom Computer hierher ziehen..."
 
@@ -1375,6 +1388,9 @@ msgstr "Einladung für Benutzer zurückziehen"
 
 msgid "Do you really want to decline the invitation?"
 msgstr "Möchtest du die Einladung wirklich ablehnen?"
+
+msgid "There are no pending invitations."
+msgstr "Es gibt aktuell keine eingeladenen Mitglieder."
 
 msgid "Send Message"
 msgstr "Nachricht schicken"
@@ -2286,9 +2302,6 @@ msgstr "Tags markieren"
 msgid "Place or adress"
 msgstr "Ort oder Adresse"
 
-msgid "Attach existing Files..."
-msgstr "Vorhandene Datei wählen..."
-
 msgid "Select topic"
 msgstr "Thema markieren"
 
@@ -2997,6 +3010,10 @@ msgid "You had already been invited to \"%(team_name)s\" and have now been made 
 msgstr "Du wurdest bereits zu \"%(team_name)s\" eingeladen und bist deswegen direkt Mitglied geworden!"
 
 #, python-format
+msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
+msgstr "Du bist jetzt Mitglied von %(team_type)s “%(team_name)s”. Willkommen!"
+
+#, python-format
 msgid "You are no longer a member of the %(team_type)s “%(team_name)s”."
 msgstr "Du bist jetzt nicht mehr Mitglied von %(team_type)s “%(team_name)s”."
 
@@ -3011,10 +3028,6 @@ msgstr "Deine Beitrittsanfrage für %(team_type)s “%(team_name)s” wurde zur�
 #, python-format
 msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
 msgstr "Deine Einladung zu %(team_type)s “%(team_name)s” wurde erfolgreich abgelehnt."
-
-#, python-format
-msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
-msgstr "Du bist jetzt Mitglied von %(team_type)s “%(team_name)s”. Willkommen!"
 
 #, python-format
 msgid "User %(username)s had already requested membership and has now been made a member immediately!"
@@ -3227,6 +3240,9 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten 
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s!"
+#~ msgstr "%(sender_name)s hat dich eingeladen, %(team_name)s beizutreten auf %(portal_name)s!"
 
 #~ msgid "Sorry, we could not connect your user account. Please contact a system administrator!"
 #~ msgstr "Entschuldige, wir konnten aufgrund eines Fehlers dein Benutzerkonto nicht einloggen. Bitte kontaktiere einen Administrator!"

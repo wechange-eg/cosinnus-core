@@ -1,0 +1,3 @@
+{% load static %}
+<img src="{{ domain }}{% static 'images/map-marker.png' %}" style="width: 16px; float: left; margin-right: 5px;">
+<a href="{{ tag_object.location_url }}" target="_blank">{{ tag_object.location|escape }}</a>

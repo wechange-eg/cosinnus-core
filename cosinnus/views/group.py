@@ -59,11 +59,12 @@ from cosinnus.utils.functions import resolve_class
 from django.views.decorators.csrf import csrf_protect
 
 import logging
-from cosinnus.templatetags.cosinnus_tags import is_superuser
+from cosinnus.templatetags.cosinnus_tags import is_superuser, full_name
 from django.core.validators import validate_email
 from annoying.functions import get_object_or_None
 from django.contrib.auth.models import AnonymousUser
 from django.template.loader import render_to_string
+from cosinnus import cosinnus_notifications
 logger = logging.getLogger('cosinnus')
 
 
@@ -233,7 +234,7 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
         return kwargs
     
     def get_success_url(self):
-        return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.object})
+        return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.object})
 
 group_create = GroupCreateView.as_view()
 group_create_api = GroupCreateView.as_view(is_ajax_request_url=True)
@@ -501,7 +502,7 @@ class GroupUpdateView(SamePortalGroupMixin, CosinnusGroupFormMixin, AvatarFormMi
         return super(GroupUpdateView, self).forms_valid(form, inlines)
 
     def get_success_url(self):
-        return group_aware_reverse('cosinnus:group-detail', kwargs={'group': self.group})
+        return group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': self.group})
 
 group_update = GroupUpdateView.as_view()
 group_update_api = GroupUpdateView.as_view(is_ajax_request_url=True)
@@ -812,12 +813,15 @@ class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
             if user != self.request.user or check_user_superuser(self.request.user):
                 if current_status == MEMBERSHIP_PENDING and new_status == MEMBERSHIP_MEMBER:
                     signals.user_group_join_accepted.send(sender=self, obj=self.group, user=user, audience=[user])
+                if current_status in [MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER] and new_status == MEMBERSHIP_ADMIN \
+                        and not user.id == self.request.user.id:
+                    cosinnus_notifications.user_group_made_admin.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
                 return super(GroupUserUpdateView, self).form_valid(form)
             else:
                 messages.error(self.request, _('You cannot change your own admin status.'))
         elif current_status == MEMBERSHIP_ADMIN and new_status != MEMBERSHIP_ADMIN:
             messages.error(self.request, _('You cannot remove “%(username)s” form '
-                'this team. Only one admin left.') % {'username': user.username})
+                'this team. Only one admin left.') % {'username': full_name(user)})
         return HttpResponseRedirect(self.get_success_url())
 
     def get_user_qs(self):

@@ -898,18 +898,57 @@
         },
 
         messagesList : function() {
-            $('.fa-square-o, .fa-check-square-o').parent().click(function() {
-                // message selected or deselected
-                if ($('.fa-check-square-o').length) {
-                    $('.messages-delete-button, .messages-archive-button').slideDown();
+            
+            // show buttons depending on what is checked:
+            // - mark all button always, except when every box is checked
+            // - action buttons when something is checked
+            // - deselect all button when every box is checked
+            $('.message_row .fa-square-o, .message_row .fa-check-square-o').parent().click(function() {
+                if ($('.message_row .fa-check-square-o').length && !$('.message_row .fa-square-o').length) {
+                    $('.messages-delete-button, .messages-archive-button, .mark_messages_false').show();
+                    $('.mark_messages_true').hide();
+                } else if ($('.message_row .fa-check-square-o').length) {
+                    $('.messages-delete-button, .messages-archive-button, .mark_messages_true').show();
+                    $('.mark_messages_false').hide();
                 } else {
-                    $('.messages-delete-button, .messages-archive-button').slideUp();
+                    $('.messages-delete-button, .messages-archive-button, .mark_messages').hide();
                 }
             });
-
-            if (!$('.fa-check-square-o').length) {
-                $('.messages-delete-button, .messages-archive-button').hide();
+            
+            // hide all context buttons except "mark all"
+            if (!$('.message_row .fa-check-square-o').length) {
+                $('.messages-delete-button, .messages-archive-button, .mark_messages').hide();
+                $('.mark_messages_true').show();
             }
+                
+            $('.mark_messages').click(function(e){
+                var $button = $(this);
+                $('.message_row i.fa-square-o, .message_row i.fa-check-square-o').each(function(){
+                    if ($button.hasClass('mark_messages_true')) {
+                        // checked
+                        $(this)
+                        .removeClass('fa-square-o')
+                        .addClass('fa-check-square-o')
+                        .next() // INPUT type="hidden"
+                        .attr('value','true');
+                        $('.mark_messages').hide();
+                        $('.mark_messages_false').show();
+                        $('.messages-delete-button, .messages-archive-button').show();
+                    } else {
+                        $(this)
+                        .addClass('fa-square-o')
+                        .removeClass('fa-check-square-o')
+                        .next() // INPUT type="hidden"
+                        .attr('value','false');
+                        $('.mark_messages').hide();
+                        if ($('.fa-check-square-o').length) {
+                            $('.mark_messages_true').show();
+                        }
+                        $('.messages-delete-button, .messages-archive-button').hide();
+                    }
+                });
+                e.preventDefault();
+            });
         },
 
         multilineEllipsis : function() {

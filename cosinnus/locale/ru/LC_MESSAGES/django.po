@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-26 16:38+0200\n"
-"PO-Revision-Date: 2017-01-09 11:46+0100\n"
+"POT-Creation-Date: 2017-07-15 15:28+0200\n"
+"PO-Revision-Date: 2017-07-26 15:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -79,6 +79,10 @@ msgstr "Деактивированные пользователи: %d."
 
 msgid "Deactivate users (will keep all all items they created on the site)"
 msgstr "Деактивировать выделенных пользователей (все элементы, созданные ими на сайте, будут сохранены)"
+
+#, python-format
+msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
+msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgstr "Данный контент доступен только для членов группы. Подайте заявку на вступление прямо сейчас!"
@@ -165,6 +169,19 @@ msgstr "%(sender_name)s  отклонил(а) приглашение"
 msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
 msgstr "%(sender_name)s  отклонил(а) приглашение %(team_name)s."
 
+#, fuzzy
+#| msgid "You were tagged in a post, document or other item"
+msgid "You were made an admin of this team"
+msgstr "Вас отметили в посте, документе или другом элементе"
+
+msgid "Made you an admin"
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s  пожелал(а) присоединиться к %(team_name)s на %(site_name)s!"
+
 msgid "You were tagged in a post, document or other item"
 msgstr "Вас отметили в посте, документе или другом элементе"
 
@@ -185,19 +202,14 @@ msgstr "Вы были отмечены в \"%(object_name)s\" в %(team_name)s"
 msgid "Invited you"
 msgstr "Пригласить пользователя"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
-msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s!"
-msgstr "%(sender_name)s  пожелал(а) присоединиться к %(team_name)s на %(site_name)s!"
+#, python-format
+msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
+msgstr "%(sender_name)s тебя пригласил присоединиться, \"%(team_name)s\" к %(portal_name)s! <br/><br/> Чтобы присоединиться, нажми пожалуйста на ссылку ниже. Ты будешь переадресован на портал, где сможешь посмотреть и принять приглашение."
 
 #, fuzzy, python-format
 #| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s  пожелал(а) присоединиться к %(team_name)s на %(site_name)s!"
-
-#, python-format
-msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
-msgstr ""
 
 msgid "Deutsch"
 msgstr "Deutsch"
@@ -1058,6 +1070,9 @@ msgstr "Члены"
 msgid "Choose App"
 msgstr "Выбрать приложение"
 
+msgid "Attach existing Files..."
+msgstr "Приложить имеющиеся файлы…"
+
 msgid "Drag and Drop files here..."
 msgstr "Перетащите файлы сюда..."
 
@@ -1395,6 +1410,11 @@ msgstr "Отозвать приглашение для участника"
 
 msgid "Do you really want to decline the invitation?"
 msgstr "Вы действительно хотите отклонить приглашение?"
+
+#, fuzzy
+#| msgid "There are no projects."
+msgid "There are no pending invitations."
+msgstr "Проектов нет"
 
 msgid "Send Message"
 msgstr "Отправить сообщение"
@@ -2349,9 +2369,6 @@ msgstr "Выбрать теги"
 msgid "Place or adress"
 msgstr "Место или адрес"
 
-msgid "Attach existing Files..."
-msgstr "Приложить имеющиеся файлы…"
-
 msgid "Select topic"
 msgstr "Выбрать тему"
 
@@ -3060,6 +3077,10 @@ msgid "You had already been invited to \"%(team_name)s\" and have now been made 
 msgstr "Вы уже были приглашены в \"%(team_name)s\" и поэтому Вы сразу приняты в члены группы/проекта!"
 
 #, python-format
+msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
+msgstr "Вы приняты в члены %(team_type)s “%(team_name)s”. Добро пожаловать!"
+
+#, python-format
 msgid "You are no longer a member of the %(team_type)s “%(team_name)s”."
 msgstr "Вы больше не являетесь членом %(team_type)s “%(team_name)s”."
 
@@ -3074,10 +3095,6 @@ msgstr "Ваш запрос на вступление в %(team_type)s “%(team
 #, python-format
 msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
 msgstr "Ваше приглашение %(team_type)s “%(team_name)s” было отклонено."
-
-#, python-format
-msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
-msgstr "Вы приняты в члены %(team_type)s “%(team_name)s”. Добро пожаловать!"
 
 #, python-format
 msgid "User %(username)s had already requested membership and has now been made a member immediately!"
@@ -3301,6 +3318,11 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены"
+
+#, fuzzy
+#~| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+#~ msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s!"
+#~ msgstr "%(sender_name)s  пожелал(а) присоединиться к %(team_name)s на %(site_name)s!"
 
 #, fuzzy
 #~| msgid "An error occured when trying to disconnect your facebook account! Please contact an administrator!"

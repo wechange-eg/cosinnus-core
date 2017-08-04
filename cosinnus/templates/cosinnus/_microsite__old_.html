@@ -197,7 +197,7 @@
                    <div class="content-box transparent_p">
                        <legend>{% trans "Description" %}</legend>
                        {% if group.description %}
-                           <p>{{ group.description|textfield }}</p>
+                           <div class="textfield">{{ group.description|textfield }}</div>
                        {% else %}
                            <p>({% trans "No informations set" %})</p>
                        {% endif %}

@@ -38,6 +38,10 @@ from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from wagtail.wagtailcore.templatetags.wagtailcore_tags import richtext
 from uuid import uuid1
 from annoying.functions import get_object_or_None
+from django_markdown2.templatetags.md2 import markdown
+from django.utils.text import normalize_newlines
+
+
 logger = logging.getLogger('cosinnus')
 
 register = template.Library()
@@ -725,10 +729,18 @@ def is_sso_portal():
 
 
 @register.filter
-def textfield(field):
-    """ Renders a textfield's text safely with escaping, but retains linebreaks 
-        and formats URLs as target="_blank" links. """
-    return linebreaksbr(url_target_blank(urlizetrunc(field, 35)))
+def textfield(text, arg=''):
+    """ Renders any object's bodytext with markdown, and safely with escaping, but retains linebreaks 
+        and formats URLs as target="_blank" links.
+        Note: This will wrap any text in <p> tags! It may also return multiple paragraphs as sibling. 
+        @param arg: If supplied "simple", will purge all <p> tags. """
+        
+    if not text:
+        return ''
+    text = markdown(url_target_blank(urlizetrunc(text, 35)), 'strike,break-on-newline,cuddled-lists').strip()
+    if arg == 'simple':
+        text = text.replace('<p>', '').replace('</p>', '')
+    return mark_safe(text)
 
 @register.filter
 def add_domain(url):

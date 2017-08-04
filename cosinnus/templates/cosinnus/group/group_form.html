@@ -1,6 +1,12 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n static cosinnus_tags widget_tweaks thumbnail %}
 
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label %}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description_long.id_for_label noinclude=1 %}
+{% endblock %}
+
 {% block page_title %}
 	{% if object %}
 	   {% blocktrans with team_name=object.name %}Edit “{{ team_name }}”{% endblocktrans %}
