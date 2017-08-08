@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-15 15:28+0200\n"
+"POT-Creation-Date: 2017-08-02 16:06+0200\n"
 "PO-Revision-Date: 2017-07-30 15:31+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -628,6 +628,17 @@ msgstr "Членство на порталі"
 msgid "Portal memberships"
 msgstr "Членства на порталі"
 
+#, fuzzy
+#| msgid "Last edited"
+msgid "Last modified"
+msgstr "Востаннє редаговано"
+
+msgid "Team Invite for Unregistered User"
+msgstr ""
+
+msgid "Team Invites for Unregistered Users"
+msgstr ""
+
 msgid "From Portal"
 msgstr "Від порталу"
 
@@ -796,6 +807,16 @@ msgstr "Додані об'єкти"
 
 msgid "Path"
 msgstr "Шлях"
+
+#, fuzzy
+#| msgid "Reported object"
+msgid "Reflected Object"
+msgstr "Об'єкт, про який повідомлено"
+
+#, fuzzy
+#| msgid "Reported objects"
+msgid "Reflected Objects"
+msgstr "Об'єкти, про які повідомлено"
 
 #, fuzzy
 #| msgid "Convert selected Projects to Groups"
@@ -1219,6 +1240,23 @@ msgstr "ширити"
 msgid "Shrink"
 msgstr "скоротити"
 
+msgid "Check the projects/groups where you wish to show this event in. The event will be shown in the calendars and all lists, but will still remain in this group."
+msgstr ""
+
+msgid "Events from the Forum can be shown in any of your projects/groups."
+msgstr ""
+
+msgid "Events from this group can be shown in any of the group's subprojects."
+msgstr ""
+
+#, fuzzy
+#| msgid "Convert selected Projects to Groups"
+msgid "Show in other projects/groups"
+msgstr "Перетворити вибрані проекти у спільноти"
+
+msgid "Apply"
+msgstr ""
+
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr ""
 
@@ -1226,7 +1264,18 @@ msgstr ""
 msgid "We will send them an email asking them to sign up and join %(group_name)s."
 msgstr ""
 
-msgid "Enter up to 10 email addresses, one on each line or seperated with a comma"
+#, fuzzy
+#| msgid "Email address"
+msgid "E-Mail Addresses"
+msgstr "Адреса електронної скриньки"
+
+msgid "(one per line or comma-seperated)"
+msgstr ""
+
+msgid "Personal Message (optional)"
+msgstr ""
+
+msgid "Include a personal message (optional)"
 msgstr ""
 
 #, fuzzy
@@ -1428,43 +1477,6 @@ msgstr "Не член"
 msgid "Invite user"
 msgstr ""
 
-msgid "Invite People to Register and Join"
-msgstr ""
-
-#, fuzzy
-#| msgid "Not a member"
-msgid "Invite people"
-msgstr "Не член"
-
-msgid "Membership requests"
-msgstr "Запити членства"
-
-msgid "Membership requested"
-msgstr "Надіслано запит членства"
-
-msgid "Decline User"
-msgstr "Відмовити користувачу/-ці"
-
-msgid "Accept User"
-msgstr "Долучити користувача/-ку"
-
-#, python-format
-msgid "Do you really want to accept user „%(name)s“ as a member?"
-msgstr "Ви дійсно бажаєте надати членство користувачу/-ці %(name)s?"
-
-msgid "Accept Member"
-msgstr "Долучити члена"
-
-#, python-format
-msgid "Do you really want to decline member „%(name)s“?"
-msgstr "Ви дійсно бажаєте відмовити члену %(name)s?"
-
-msgid "Decline Member"
-msgstr "Відмовити члену"
-
-msgid "There are no new membership requests."
-msgstr "Нових запитів членства немає."
-
 #, fuzzy
 #| msgid "Remove Member"
 msgid "Invited Members"
@@ -1505,6 +1517,53 @@ msgstr "Ви дійсно бажаєте відмовити члену %(name)s?
 #| msgid "There are no projects."
 msgid "There are no pending invitations."
 msgstr "Немає жодного проекту."
+
+msgid "Membership requests"
+msgstr "Запити членства"
+
+msgid "Membership requested"
+msgstr "Надіслано запит членства"
+
+msgid "Decline User"
+msgstr "Відмовити користувачу/-ці"
+
+msgid "Accept User"
+msgstr "Долучити користувача/-ку"
+
+#, python-format
+msgid "Do you really want to accept user „%(name)s“ as a member?"
+msgstr "Ви дійсно бажаєте надати членство користувачу/-ці %(name)s?"
+
+msgid "Accept Member"
+msgstr "Долучити члена"
+
+#, python-format
+msgid "Do you really want to decline member „%(name)s“?"
+msgstr "Ви дійсно бажаєте відмовити члену %(name)s?"
+
+msgid "Decline Member"
+msgstr "Відмовити члену"
+
+msgid "There are no new membership requests."
+msgstr "Нових запитів членства немає."
+
+msgid "Invite People to Register and Join"
+msgstr ""
+
+#, fuzzy
+#| msgid "Not a member"
+msgid "Invite people"
+msgstr "Не член"
+
+msgid "All currently invited people"
+msgstr ""
+
+msgid "People currently invited by you"
+msgstr ""
+
+msgctxt "an action done *by* <username>"
+msgid "by"
+msgstr ""
 
 msgid "Send Message"
 msgstr "Надіслати повідомлення"
@@ -1789,6 +1848,11 @@ msgstr ""
 msgid "Facebook integration is available after you created the project!"
 msgstr ""
 
+#, fuzzy
+#| msgid "Toggle navigation"
+msgid "Invitations"
+msgstr "Переключення навігації"
+
 msgid "Related to"
 msgstr "Відноситься до"
 
@@ -1825,6 +1889,11 @@ msgid "There are no groups."
 msgstr "Немає жодної спільноти."
 
 msgid "There are no projects."
+msgstr "Немає жодного проекту."
+
+#, fuzzy
+#| msgid "There are no projects."
+msgid "There are no invitations."
 msgstr "Немає жодного проекту."
 
 msgid "Map"
@@ -1989,6 +2058,11 @@ msgstr "Усі користувачі"
 msgid "Portal Administrators"
 msgstr "Адміністратори порталу"
 
+#, fuzzy
+#| msgid "All projects"
+msgid "All societies"
+msgstr "Усі проекти"
+
 msgid "Re-activate Group"
 msgstr "Повторно активувати спільноту"
 
@@ -2015,6 +2089,11 @@ msgstr "Перемістити у іншу папку"
 
 msgid "Move"
 msgstr "Перемістити"
+
+#, fuzzy, python-format
+#| msgid "You were tagged in: \"%(object_name)s\", in %(team_name)s"
+msgid "A message from %(sender_full_name)s"
+msgstr "Вас позначено: «%(object_name)s» у %(team_name)s"
 
 msgid "Edit folder"
 msgstr "Редагувати папку"
@@ -2612,11 +2691,21 @@ msgstr "Форум"
 msgid "People"
 msgstr "Люди"
 
+#, fuzzy
+#| msgid "Remove Member"
+msgid "Invited Groups"
+msgstr "Видалити члена"
+
 msgid "My Groups"
 msgstr "Мої спільноти"
 
 msgid "All Groups"
 msgstr "Усі спільноти"
+
+#, fuzzy
+#| msgid "Edit Project"
+msgid "Invited Projects"
+msgstr "Редагувати проект"
 
 msgid "My Projects"
 msgstr "Мої проекти"
@@ -3333,6 +3422,10 @@ msgstr ""
 msgid "Sorry, these did not seem to be valid email addresses: %s"
 msgstr ""
 
+#, python-format
+msgid "These people have been sent an email invite only recently. You can send them an invite again tomorrow: %s"
+msgstr ""
+
 #, fuzzy, python-format
 #| msgid "This email address already has a registered user!"
 msgid "Good news! The people with these addresses already have a registered user account: %s"
@@ -3340,6 +3433,13 @@ msgstr "Під цією адресою електронної скриньки �
 
 #, python-format
 msgid "Success! We are now sending out invitations to these email addresses: %s"
+msgstr ""
+
+msgid "Your selection for showing this event in projects/groups was updated."
+msgstr ""
+
+#, python-format
+msgid "This event is now being shown in these projects/groups: %(group_names)s"
 msgstr ""
 
 msgid "No appname given for adding containers."
@@ -3363,6 +3463,10 @@ msgstr "Головна папка"
 
 msgid "<Root folder>"
 msgstr "<Головна папка>"
+
+#, python-format
+msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
+msgstr ""
 
 #, python-format
 msgid "Container \"%(title)s\" could not be deleted because it contained objects that could not be deleted."
@@ -3479,6 +3583,9 @@ msgstr ""
 #| msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
 msgstr "Користувача/-ку «%(user)s» успішно зареєстровано. Обліковий запит необхідно перевірити та активувати, перш ніж ви зможете увійти в систему. Ми надішлемо вам електронного листа на вашу адресу «%(email)s», коли це буде зроблено."
+
+msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
+msgstr ""
 
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."

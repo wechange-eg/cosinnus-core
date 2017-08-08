@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-15 15:28+0200\n"
-"PO-Revision-Date: 2017-07-15 15:30+0200\n"
+"POT-Creation-Date: 2017-08-02 16:06+0200\n"
+"PO-Revision-Date: 2017-08-02 16:12+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -576,6 +576,15 @@ msgstr "Portal-Mitgliedschaft"
 msgid "Portal memberships"
 msgstr "Portal-Mitgliedschaften"
 
+msgid "Last modified"
+msgstr "Zuletzt editiert"
+
+msgid "Team Invite for Unregistered User"
+msgstr "Gruppen/Projekt-Einladung für nicht registrierte Benutzer"
+
+msgid "Team Invites for Unregistered Users"
+msgstr "Gruppen/Projekt-Einladungen für nicht registrierte Benutzer"
+
 msgid "From Portal"
 msgstr "Von Portal"
 
@@ -603,15 +612,11 @@ msgstr ""
 msgid "Team"
 msgstr "Team"
 
-#, fuzzy
-#| msgid "Cosinnus groups"
 msgid "CosinnusLocation"
-msgstr "Gruppen"
+msgstr "CosinnusLocation"
 
-#, fuzzy
-#| msgid "Cosinnus groups"
 msgid "CosinnusLocations"
-msgstr "Gruppen"
+msgstr "CosinnusLocations"
 
 msgid "Group Image"
 msgstr "Gruppenbild"
@@ -726,6 +731,12 @@ msgstr "Verknüpftes Objekt"
 
 msgid "Path"
 msgstr "Pfad"
+
+msgid "Reflected Object"
+msgstr "Reflected Object"
+
+msgid "Reflected Objects"
+msgstr "Reflected Objects"
 
 msgid "Create-Project or Group Button"
 msgstr "Projekt oder Gruppe-erstellen Button"
@@ -1134,6 +1145,21 @@ msgstr "Erweitern"
 msgid "Shrink"
 msgstr "Verkleinern"
 
+msgid "Check the projects/groups where you wish to show this event in. The event will be shown in the calendars and all lists, but will still remain in this group."
+msgstr "Wähle die Projekte/Gruppen, in denen die Veranstaltung angezeigt werden soll. Sie wird dort dann in allen Kalendern und Listen angezeigt, bleibt aber weiterhin in dieser Gruppe."
+
+msgid "Events from the Forum can be shown in any of your projects/groups."
+msgstr "Veranstaltungen aus dem Forum können in jedem deiner Projekte/Gruppen angezeigt werden."
+
+msgid "Events from this group can be shown in any of the group's subprojects."
+msgstr "Veranstaltungen aus dieser Gruppe können in jedem ihrer Unterprojekte angezeigt werden."
+
+msgid "Show in other projects/groups"
+msgstr "In anderen Projekten/Gruppen anzeigen"
+
+msgid "Apply"
+msgstr "Übernehmen"
+
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr "Gib die E-Mail Adressen von den Leuten ein, die du einladen möchtest der Platform beizutreten."
 
@@ -1141,8 +1167,17 @@ msgstr "Gib die E-Mail Adressen von den Leuten ein, die du einladen möchtest de
 msgid "We will send them an email asking them to sign up and join %(group_name)s."
 msgstr "Wir schicken ihnen eine E-Mail und bitten sie darum sich zu registrieren und %(group_name)s beizutreten."
 
-msgid "Enter up to 10 email addresses, one on each line or seperated with a comma"
-msgstr "Gibt bis zu 10 E-Mail Adressen ein - eine pro Zeile oder mit Kommas getrennt"
+msgid "E-Mail Addresses"
+msgstr "E-Mail Adressen"
+
+msgid "(one per line or comma-seperated)"
+msgstr "(eine pro Zeile oder mit Kommas getrennt)"
+
+msgid "Personal Message (optional)"
+msgstr "Persönliche Nachricht (optional)"
+
+msgid "Include a personal message (optional)"
+msgstr "Deine persönliche Nachricht (optional)"
 
 msgid "Invite new Members"
 msgstr "Neue Mitglieder einladen"
@@ -1329,11 +1364,33 @@ msgstr "Mitglied einladen"
 msgid "Invite user"
 msgstr "Benutzer einladen"
 
-msgid "Invite People to Register and Join"
-msgstr "Lade Leute zum Registrieren und Beitreten ein"
+msgid "Invited Members"
+msgstr "Eingeladene Mitglieder"
 
-msgid "Invite people"
-msgstr "Leute einladen"
+msgid "Invited to be a member"
+msgstr "Als Mitglied eingeladen"
+
+msgid "Revoke Invitation"
+msgstr "Einladung zurückziehen"
+
+msgid "Decline Invitation"
+msgstr "Einladung ablehnen"
+
+msgid "Accept Invitation"
+msgstr "Einladung annehmen"
+
+#, python-format
+msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgstr "Möchtest du „%(name)s“'s Einladung wirklich zurückziehen?"
+
+msgid "Revoke Invitation for Member"
+msgstr "Einladung für Benutzer zurückziehen"
+
+msgid "Do you really want to decline the invitation?"
+msgstr "Möchtest du die Einladung wirklich ablehnen?"
+
+msgid "There are no pending invitations."
+msgstr "Es gibt aktuell keine eingeladenen Mitglieder."
 
 msgid "Membership requests"
 msgstr "Mitglieder-Anträge"
@@ -1364,33 +1421,21 @@ msgstr "Mitglied ablehen"
 msgid "There are no new membership requests."
 msgstr "Es gibt aktuell keine neuen Mitglieder-Anträge."
 
-msgid "Invited Members"
-msgstr "Eingeladene Mitglieder"
+msgid "Invite People to Register and Join"
+msgstr "Lade Leute zum Registrieren und Beitreten ein"
 
-msgid "Invited to be a member"
-msgstr "Als Mitglied eingeladen"
+msgid "Invite people"
+msgstr "Leute einladen"
 
-msgid "Revoke Invitation"
-msgstr "Einladung zurückziehen"
+msgid "All currently invited people"
+msgstr "Alle aktuell eingeladenen Leute"
 
-msgid "Decline Invitation"
-msgstr "Einladung ablehnen"
+msgid "People currently invited by you"
+msgstr "Von dir eingeladene Leute"
 
-msgid "Accept Invitation"
-msgstr "Einladung annehmen"
-
-#, python-format
-msgid "Do you really want to revoke the invitation for member „%(name)s“?"
-msgstr "Möchtest du „%(name)s“'s Einladung wirklich zurückziehen?"
-
-msgid "Revoke Invitation for Member"
-msgstr "Einladung für Benutzer zurückziehen"
-
-msgid "Do you really want to decline the invitation?"
-msgstr "Möchtest du die Einladung wirklich ablehnen?"
-
-msgid "There are no pending invitations."
-msgstr "Es gibt aktuell keine eingeladenen Mitglieder."
+msgctxt "an action done *by* <username>"
+msgid "by"
+msgstr "von"
 
 msgid "Send Message"
 msgstr "Nachricht schicken"
@@ -1656,6 +1701,9 @@ msgstr "Die Facebook-Integration wird verfügbar sobald du die Gruppe erstellt h
 msgid "Facebook integration is available after you created the project!"
 msgstr "Die Facebook-Integration wird verfügbar sobald du das Projekt erstellt hast!"
 
+msgid "Invitations"
+msgstr "Einladungen"
+
 msgid "Related to"
 msgstr "Verwandt mit"
 
@@ -1694,6 +1742,9 @@ msgstr "Es gibt keine sichtbaren Gruppen."
 
 msgid "There are no projects."
 msgstr "Es gibt keine sichtbaren Projekte."
+
+msgid "There are no invitations."
+msgstr "Es gibt aktuell keine Einladungen."
 
 msgid "Map"
 msgstr "Karte"
@@ -1819,6 +1870,9 @@ msgstr "Alle Menschen"
 msgid "Portal Administrators"
 msgstr "Portal-Administrator_innen"
 
+msgid "All societies"
+msgstr "Alle Gruppen"
+
 msgid "Re-activate Group"
 msgstr "Gruppe reaktivieren"
 
@@ -1845,6 +1899,11 @@ msgstr "In einen anderen Ordner verschieben"
 
 msgid "Move"
 msgstr "Verschieben"
+
+#, fuzzy, python-format
+#| msgid "You were tagged by %(sender_name)s"
+msgid "A message from %(sender_full_name)s"
+msgstr "Du wurdest markiert von %(sender_name)s."
 
 msgid "Edit folder"
 msgstr "Ordner bearbeiten"
@@ -2395,11 +2454,17 @@ msgstr "Forum"
 msgid "People"
 msgstr "Menschen"
 
+msgid "Invited Groups"
+msgstr "Gruppeneinladungen"
+
 msgid "My Groups"
 msgstr "Meine Gruppen"
 
 msgid "All Groups"
 msgstr "Alle Gruppen"
+
+msgid "Invited Projects"
+msgstr "Projekteinladungen"
 
 msgid "My Projects"
 msgstr "Meine Projekte"
@@ -3093,12 +3158,23 @@ msgid "Sorry, these did not seem to be valid email addresses: %s"
 msgstr "Tut uns leid, aber dies hier scheinen keine gültigen E-Mail Adressen gewesen zu sein: %s"
 
 #, python-format
+msgid "These people have been sent an email invite only recently. You can send them an invite again tomorrow: %s"
+msgstr "Diesen Leuten wurde erst kürzlich eine E-Mail geschickt. Du kannst ihnen morgen wieder eine Einladung schicken: %s"
+
+#, python-format
 msgid "Good news! The people with these addresses already have a registered user account: %s"
 msgstr "Gute Nachrichten! Unter diesen E-Mail Adressen haben sich bereits Mitglieder angemeldet: %s"
 
 #, python-format
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "Super! Wir schicken jetzt die Einladungen an folgende E-Mail Adressen: %s"
+
+msgid "Your selection for showing this event in projects/groups was updated."
+msgstr "Deine Auswahl für die Anzeige der Veranstaltung in anderen Projekten/Gruppen wurde übernommen."
+
+#, python-format
+msgid "This event is now being shown in these projects/groups: %(group_names)s"
+msgstr "Die Veranstaltung wird jetzt in folgenden Projekten/Gruppen angezeigt: %(group_names)s"
 
 msgid "No appname given for adding containers."
 msgstr "Kein Appname zum Hinzufügen von Zusammenstellungen angegeben."
@@ -3121,6 +3197,10 @@ msgstr "Oberster Ordner"
 
 msgid "<Root folder>"
 msgstr "<Oberster Ordner>"
+
+#, python-format
+msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
+msgstr "Du befindest dich jetzt in %(group_name)s. <br/>Du wurdest hierhin geleitet über ein Projekt oder eine Gruppe, die auf diese Veranstaltung verweist."
 
 #, python-format
 msgid "Container \"%(title)s\" could not be deleted because it contained objects that could not be deleted."
@@ -3234,12 +3314,18 @@ msgstr "Deine Email-Adresse %(email)s wurde erfolgreich bestätigt! Du kannst di
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
 msgstr "Deine Email-Adresse %(email)s wurde erfolgreich bestätigt! Allerdings ist dein Konto noch nicht aktiv und muss von einem Administrator bestätigt werden bevor du dich einloggen kannst. Wir schicken dir eine Email sobald das passiert."
 
+msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
+msgstr "Willkommen! Du wurdest bereits in folgende Projekte und Gruppen eingeladen. Bitte klicke den Ausklappen-Button der Einladungen, die du annehmen oder ablehnen möchtest!"
+
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
 msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten die Mitgliedschaft beantragen."
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "Enter up to 10 email addresses, one on each line or seperated with a comma"
+#~ msgstr "Gibt bis zu 10 E-Mail Adressen ein - eine pro Zeile oder mit Kommas getrennt"
 
 #~ msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s!"
 #~ msgstr "%(sender_name)s hat dich eingeladen, %(team_name)s beizutreten auf %(portal_name)s!"
@@ -3508,9 +3594,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "Nachname"
 #~ msgstr "Nachname"
-
-#~ msgid "E-Mail Addresse"
-#~ msgstr "E-Mail Adresse"
 
 #~ msgid "Passwort"
 #~ msgstr "Passwort"

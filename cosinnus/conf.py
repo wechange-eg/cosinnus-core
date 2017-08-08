@@ -133,6 +133,11 @@ class CosinnusConf(AppConf):
         ],
     }
     
+    # list of BaseTaggableObjectModels that can be reflected from groups into projects
+    REFLECTABLE_OBJECTS = [
+        'cosinnus_event.event',
+    ]
+    
     # The default title for all pages unless the title block is overwritten. 
     # This is translated through a {% trans %} tag.
     BASE_PAGE_TITLE_TRANS = 'Cosinnus'
@@ -147,6 +152,15 @@ class CosinnusConf(AppConf):
         'cosinnus_file',
         'cosinnus_marketplace',
     ]
+    
+    # enable this to sign up new members to a cleverreach newsletter group
+    CLEVERREACH_AUTO_SIGNUP_ENABLED = False
+    # the int id of the cleverreach group
+    CLEVERREACH_GROUP_ID = None
+    # access token, as given after a login to /v2/login.json
+    CLEVERREACH_ACCESS_TOKEN = None 
+    # cleverreach API endpoint base URL (no trailing slash)
+    CLEVERREACH_BASE_URL = 'https://rest.cleverreach.com/v2'
     
     # CSV Import settings
     CSV_IMPORT_DEFAULT_ENCODING = 'utf-8'
@@ -203,6 +217,8 @@ class CosinnusConf(AppConf):
     # the url pattern for group overview URLs
     GROUP_PLURAL_URL_PATH = 'projects'
     
+    # number of members displayed in the group widet
+    GROUP_MEMBER_WIDGET_USER_COUNT = 15
     
     # widgets listed here will be created for the group dashboard upon CosinnusGroup creation.
     # this. will check if the cosinnus app is installed and if the widget is registered, so

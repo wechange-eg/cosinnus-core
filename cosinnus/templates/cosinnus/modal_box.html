@@ -22,6 +22,18 @@
                 {{ label|safe }}
             </div>
             <div class="modal-footer">
+                <button type="submit" id="{{ id }}_btnsubmit" class="submit-btn-x btn btn-emphasized" {% if not form_action %}data-dismiss="modal"{% endif %} {% if disable_on_submit %}onclick="setTimeout(function(){$('#{{ id }}_btnsubmit').attr('disabled', true);},50);"{% endif %}>
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-check"></i>
+                            </a>
+                            <div class="media-body">
+                                {% if submit_button_label %}{{ submit_button_label }}{% else %}{% trans "OK" %}{% endif %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
                 {% if form_action %}
 	                <button type="button" class="btn btn-emphasized" data-dismiss="modal">
 	                    <ul class="media-list">
@@ -39,18 +51,6 @@
 	                    {{ form_extra_fields }}
 	                {% endif %}
                 {% endif %}
-                <button type="submit" id="{{ id }}_btnsubmit" class="submit-btn-x btn btn-emphasized" {% if not form_action %}data-dismiss="modal"{% endif %} {% if disable_on_submit %}onclick="setTimeout(function(){$('#{{ id }}_btnsubmit').attr('disabled', true);},50);"{% endif %}>
-                    <ul class="media-list">
-                        <li class="media">
-                            <a class="pull-left" href="#">
-                                <i class="fa fa-check"></i>
-                            </a>
-                            <div class="media-body">
-                                {% if submit_button_label %}{{ submit_button_label }}{% else %}{% trans "OK" %}{% endif %}
-                            </div>
-                        </li>
-                    </ul>
-                </button>
             </div>
             {% if form_action %}
             </form>

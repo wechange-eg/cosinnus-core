@@ -45,6 +45,7 @@ class DashboardWidget(object):
     def __init__(self, request, config_instance):
         self.request = request
         self.config = config_instance
+        self.group = self.config.group
 
     @classonlymethod
     def create(cls, request, group=None, user=None, widget_type=WidgetConfig.TYPE_DASHBOARD):
@@ -65,11 +66,13 @@ class DashboardWidget(object):
          """
         raise NotImplementedError("Subclasses need to implement this method.")
 
-    def get_queryset(self):
+    def get_queryset(self, skipFilter=False):
+        """ @param skipFilter: If true, the filtering for user will be skipped, so it can be done at a later (MRO) time. """
         if not self.model:
             raise ImproperlyConfigured('%s must define a model', self.__class__.__name__)
         qs = self.model._default_manager.filter(**self.get_queryset_filter())
-        qs = filter_tagged_object_queryset_for_user(qs, self.request.user)
+        if not skipFilter:
+            qs = filter_tagged_object_queryset_for_user(qs, self.request.user)
         return qs
 
     def get_queryset_filter(self, **kwargs):
@@ -226,9 +229,8 @@ class GroupMembersWidget(DashboardWidget):
         if group is None:
             return ''
         
-        #count = int(self.config.get('amount', 24))
-        # FIXME: hardcoded widget item count for now
-        count = 23
+        # how many members display. it's -1 because the last tile is always the "+72 members"
+        count = getattr(settings, 'COSINNUS_GROUP_MEMBER_WIDGET_USER_COUNT', 15)
         
         admin_ids = CosinnusGroupMembership.objects.get_admins(group=group)
         member_ids = CosinnusGroupMembership.objects.get_members(group=group)

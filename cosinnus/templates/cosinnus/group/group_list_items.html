@@ -231,8 +231,10 @@
 {% empty %}
    {% if group_type == 1 %}
        {% trans "There are no groups." as no_group_message %}
-   {% else %}
+   {% elif group_type == 0 %}
        {% trans "There are no projects." as no_group_message %}
+   {% else %}
+       {% trans "There are no invitations." as no_group_message %}
    {% endif %}
    {% include 'cosinnus/common/empty_button.html' with message=no_group_message %}
 {% endfor %}

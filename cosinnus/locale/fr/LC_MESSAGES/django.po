@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-15 15:28+0200\n"
+"POT-Creation-Date: 2017-08-02 16:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -575,6 +575,15 @@ msgstr ""
 msgid "Portal memberships"
 msgstr ""
 
+msgid "Last modified"
+msgstr ""
+
+msgid "Team Invite for Unregistered User"
+msgstr ""
+
+msgid "Team Invites for Unregistered Users"
+msgstr ""
+
 msgid "From Portal"
 msgstr ""
 
@@ -720,6 +729,12 @@ msgid "Attached objects"
 msgstr ""
 
 msgid "Path"
+msgstr ""
+
+msgid "Reflected Object"
+msgstr ""
+
+msgid "Reflected Objects"
 msgstr ""
 
 msgid "Create-Project or Group Button"
@@ -1118,6 +1133,21 @@ msgstr ""
 msgid "Shrink"
 msgstr ""
 
+msgid "Check the projects/groups where you wish to show this event in. The event will be shown in the calendars and all lists, but will still remain in this group."
+msgstr ""
+
+msgid "Events from the Forum can be shown in any of your projects/groups."
+msgstr ""
+
+msgid "Events from this group can be shown in any of the group's subprojects."
+msgstr ""
+
+msgid "Show in other projects/groups"
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr ""
 
@@ -1125,7 +1155,16 @@ msgstr ""
 msgid "We will send them an email asking them to sign up and join %(group_name)s."
 msgstr ""
 
-msgid "Enter up to 10 email addresses, one on each line or seperated with a comma"
+msgid "E-Mail Addresses"
+msgstr ""
+
+msgid "(one per line or comma-seperated)"
+msgstr ""
+
+msgid "Personal Message (optional)"
+msgstr ""
+
+msgid "Include a personal message (optional)"
 msgstr ""
 
 msgid "Invite new Members"
@@ -1313,10 +1352,32 @@ msgstr ""
 msgid "Invite user"
 msgstr ""
 
-msgid "Invite People to Register and Join"
+msgid "Invited Members"
 msgstr ""
 
-msgid "Invite people"
+msgid "Invited to be a member"
+msgstr ""
+
+msgid "Revoke Invitation"
+msgstr ""
+
+msgid "Decline Invitation"
+msgstr ""
+
+msgid "Accept Invitation"
+msgstr ""
+
+#, python-format
+msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgstr ""
+
+msgid "Revoke Invitation for Member"
+msgstr ""
+
+msgid "Do you really want to decline the invitation?"
+msgstr ""
+
+msgid "There are no pending invitations."
 msgstr ""
 
 msgid "Membership requests"
@@ -1348,32 +1409,20 @@ msgstr ""
 msgid "There are no new membership requests."
 msgstr ""
 
-msgid "Invited Members"
+msgid "Invite People to Register and Join"
 msgstr ""
 
-msgid "Invited to be a member"
+msgid "Invite people"
 msgstr ""
 
-msgid "Revoke Invitation"
+msgid "All currently invited people"
 msgstr ""
 
-msgid "Decline Invitation"
+msgid "People currently invited by you"
 msgstr ""
 
-msgid "Accept Invitation"
-msgstr ""
-
-#, python-format
-msgid "Do you really want to revoke the invitation for member „%(name)s“?"
-msgstr ""
-
-msgid "Revoke Invitation for Member"
-msgstr ""
-
-msgid "Do you really want to decline the invitation?"
-msgstr ""
-
-msgid "There are no pending invitations."
+msgctxt "an action done *by* <username>"
+msgid "by"
 msgstr ""
 
 msgid "Send Message"
@@ -1637,6 +1686,9 @@ msgstr ""
 msgid "Facebook integration is available after you created the project!"
 msgstr ""
 
+msgid "Invitations"
+msgstr ""
+
 msgid "Related to"
 msgstr ""
 
@@ -1673,6 +1725,9 @@ msgid "There are no groups."
 msgstr ""
 
 msgid "There are no projects."
+msgstr ""
+
+msgid "There are no invitations."
 msgstr ""
 
 msgid "Map"
@@ -1799,6 +1854,9 @@ msgstr ""
 msgid "Portal Administrators"
 msgstr ""
 
+msgid "All societies"
+msgstr ""
+
 msgid "Re-activate Group"
 msgstr ""
 
@@ -1824,6 +1882,10 @@ msgid "Move to another Folder"
 msgstr ""
 
 msgid "Move"
+msgstr ""
+
+#, python-format
+msgid "A message from %(sender_full_name)s"
 msgstr ""
 
 msgid "Edit folder"
@@ -2245,10 +2307,16 @@ msgstr ""
 msgid "People"
 msgstr ""
 
+msgid "Invited Groups"
+msgstr ""
+
 msgid "My Groups"
 msgstr ""
 
 msgid "All Groups"
+msgstr ""
+
+msgid "Invited Projects"
 msgstr ""
 
 msgid "My Projects"
@@ -2937,11 +3005,22 @@ msgid "Sorry, these did not seem to be valid email addresses: %s"
 msgstr ""
 
 #, python-format
+msgid "These people have been sent an email invite only recently. You can send them an invite again tomorrow: %s"
+msgstr ""
+
+#, python-format
 msgid "Good news! The people with these addresses already have a registered user account: %s"
 msgstr ""
 
 #, python-format
 msgid "Success! We are now sending out invitations to these email addresses: %s"
+msgstr ""
+
+msgid "Your selection for showing this event in projects/groups was updated."
+msgstr ""
+
+#, python-format
+msgid "This event is now being shown in these projects/groups: %(group_names)s"
 msgstr ""
 
 msgid "No appname given for adding containers."
@@ -2964,6 +3043,10 @@ msgid "Root Folder"
 msgstr ""
 
 msgid "<Root folder>"
+msgstr ""
+
+#, python-format
+msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
 msgstr ""
 
 #, python-format
@@ -3076,6 +3159,9 @@ msgstr ""
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
+msgstr ""
+
+msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr ""
 
 #, python-format

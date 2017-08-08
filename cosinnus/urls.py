@@ -44,6 +44,8 @@ urlpatterns = patterns('cosinnus.views',
 
     url(r'^search/$', 'search.search', name='search'),
     
+    url(r'^invitations/$', 'group.group_list_invited', name='invitations', kwargs={'show_all': True}),
+    
     url(r'^account/report/$', 'feedback.report_object', name='report-object'),
     
     url(r'^administration/approve_user/(?P<user_id>\d+)/$', 'user.approve_user', name='user-approve'),
@@ -108,6 +110,7 @@ for url_key in group_model_registry:
     urlpatterns += patterns('cosinnus.views',
         url(r'^%s/in-group-with/(?P<group>[^/]+)/$' % plural_url_key, 'group.group_list_filtered', name=prefix+'group-list-filtered'),
         url(r'^%s/mine/$' % plural_url_key, 'group.group_list_mine', name=prefix+'group-list-mine'),
+        url(r'^%s/invited/$' % plural_url_key, 'group.group_list_invited', name=prefix+'group-list-invited'),
         url(r'^%s/$' % plural_url_key, 'group.group_list', name=prefix+'group-list'),
         #url(r'^%s/map/$' % plural_url_key, 'group.group_list_map', name=prefix+'group-list-map'),
         url(r'^%s/add/$' % plural_url_key, 'group.group_create', name=prefix+'group-add'),
@@ -136,6 +139,7 @@ for url_key in group_model_registry:
         url(r'^%s/(?P<group>[^/]+)/widgets/add/$' % url_key, 'widget.widget_add_group', name=prefix+'widget-add-group-empty'),
         url(r'^%s/(?P<group>[^/]+)/widgets/add/(?P<app_name>[^/]+)/(?P<widget_name>[^/]+)/$' % url_key, 'widget.widget_add_group', name=prefix+'widget-add-group'),
         
+        url(r'^%s/(?P<group>[^/]+)/reflectedassign/$' % url_key, 'group.group_assign_reflected_object', name=prefix+'group-assign-reflected'),
         url(r'^%s/(?P<group>[^/]+)/attachmentselect/(?P<model>[^/]+)$' % url_key, 'attached_object.attachable_object_select2_view', name=prefix+'attached_object_select2_view'),
     )
 

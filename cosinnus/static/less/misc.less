@@ -347,3 +347,22 @@
 .CodeMirror .editor-preview pre {
     background-color: @app-neutral-color-light;
 }
+
+/** Anchors with nicer offset */
+a.anchor {
+    display: block;
+    position: relative;
+    top: -150px;
+    visibility: hidden;
+}
+
+/** Siblings with .comma get proper commas inserted between them */
+.comma:not(:first-child) {
+  margin-left: -.3em;  
+}
+.comma:empty {
+  display: none;
+}
+.comma:not(:first-child):before {
+  content: ", ";
+}

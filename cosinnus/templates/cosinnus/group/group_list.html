@@ -1,7 +1,7 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n thumbnail cosinnus_tags cosinnus_map_tags static %}
 
-{% block page_title %}{% if group_type == 1 %}{% trans "Groups" %}{% else %}{% trans "Projects" %}{% endif %}{% endblock %}
+{% block page_title %}{% if group_type == 1 %}{% trans "Groups" %}{% elif group_type == 0 %}{% trans "Projects" %}{% else %}{% trans "Invitations" %}{% endif %}{% endblock %}
 
 {% block extrahead %}
     {{ block.super }}
@@ -13,14 +13,18 @@
 				});
 			});
 	</script>
-	{% include 'cosinnus/map/static_dependencies.html' %}
+	{% if not hide_group_map %}
+	    {% include 'cosinnus/map/static_dependencies.html' %}
+	{% endif %}
 {% endblock extrahead %}
 
 {% block leftnav %}
     {% if group_type == 1 %}
         {% include "cosinnus/group/leftnav_all_groups.html"  with current_page="grouplist__society" %}
-    {% else %}
+    {% elif group_type == 0 %}
         {% include "cosinnus/group/leftnav_all_groups.html"  with current_page="grouplist" %}
+    {% else %}
+        {% include "cosinnus/group/leftnav_all_groups.html"  with current_page="all" %}
     {% endif %}
 {% endblock leftnav %}
 
@@ -29,6 +33,8 @@
     {{ block.super }}
     {% if filter_group %}
         <li class="active">{% trans "Related to" %} {{ filter_group.name }}</li>
+    {% elif group_type == 'all' %}
+        <li class="active">{% trans "Invitations" %}</li>
     {% else %}
         <li class="active">{% trans "Overview" %}</li>
     {% endif %}
@@ -41,15 +47,17 @@
 
 {% block content %}
     
-    <!-- a box with semi transparent background -->
-    <div class="content-box">
-    	{% include 'cosinnus/common/internet_explorer_not_supported.html' %}
-    
-		<div class="map-root"></div>
-		{% captureas map_settings %}{"activeFilters": {"groups": {% if group_type == 1 %}true{% else %}false{% endif %}, "events": false, "projects": {% if group_type == 1 %}false{% else %}true{% endif %}, "people": false}, "availableFilters": {"groups": true, "events": true, "projects": true, "people": true}, "markerIcons": {% render_map_marker_icon_json %}}{% endcaptureas %}
-		{% include 'cosinnus/common/init_client_module.html' with module='map' id=""|add_uuid height=400 settings=map_settings %}
-        <div class="clearfix"></div>
-    </div>
+    {% if not hide_group_map %}
+	    <!-- a box with semi transparent background -->
+	    <div class="content-box">
+	    	{% include 'cosinnus/common/internet_explorer_not_supported.html' %}
+	    
+			<div class="map-root"></div>
+			{% captureas map_settings %}{"activeFilters": {"groups": {% if group_type == 1 %}true{% else %}false{% endif %}, "events": false, "projects": {% if group_type == 1 %}false{% else %}true{% endif %}, "people": false}, "availableFilters": {"groups": true, "events": true, "projects": true, "people": true}, "markerIcons": {% render_map_marker_icon_json %}}{% endcaptureas %}
+			{% include 'cosinnus/common/init_client_module.html' with module='map' id=""|add_uuid height=400 settings=map_settings %}
+	        <div class="clearfix"></div>
+	    </div>
+    {% endif %}
     
     <!-- a box with semi transparent background -->
     <div class="content-box">

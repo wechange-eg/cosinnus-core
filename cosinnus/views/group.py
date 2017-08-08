@@ -6,7 +6,8 @@ from itertools import chain
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import ImproperlyConfigured, ValidationError
+from django.core.exceptions import ImproperlyConfigured, ValidationError,\
+    PermissionDenied
 from django.core.urlresolvers import reverse, reverse_lazy, NoReverseMatch
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
@@ -23,7 +24,7 @@ from cosinnus.forms.group import MembershipForm, CosinnusLocationForm,\
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, CosinnusPortal, CosinnusLocation,
     CosinnusGroupGalleryImage, MEMBERSHIP_INVITED_PENDING,
-    CosinnusGroupCallToActionButton)
+    CosinnusGroupCallToActionButton, CosinnusUnregisterdUserGroupInvite)
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.serializers.group import GroupSimpleSerializer
 from cosinnus.models.serializers.profile import UserSimpleSerializer
@@ -43,11 +44,12 @@ from extra_views import (CreateWithInlinesView, FormSetView, InlineFormSet,
 
 from cosinnus.forms.tagged import get_form  # circular import
 from cosinnus.utils.urls import group_aware_reverse, get_non_cms_root_url
-from cosinnus.models.tagged import BaseTagObject
+from cosinnus.models.tagged import BaseTagObject, BaseTaggableObjectReflection
 from django.shortcuts import redirect, get_object_or_404
-from django.http.response import Http404, HttpResponseNotAllowed
+from django.http.response import Http404, HttpResponseNotAllowed,\
+    HttpResponseBadRequest
 from cosinnus.utils.permissions import check_ug_admin, check_user_superuser,\
-    check_object_read_access
+    check_object_read_access, check_ug_membership
 from cosinnus.views.widget import GroupDashboard
 from cosinnus.views.microsite import GroupMicrositeView
 from django.views.generic.base import View
@@ -59,12 +61,22 @@ from cosinnus.utils.functions import resolve_class
 from django.views.decorators.csrf import csrf_protect
 
 import logging
-from cosinnus.templatetags.cosinnus_tags import is_superuser, full_name
+from cosinnus.templatetags.cosinnus_tags import is_superuser, full_name,\
+    textfield, has_write_access
 from django.core.validators import validate_email
 from annoying.functions import get_object_or_None
 from django.contrib.auth.models import AnonymousUser
 from django.template.loader import render_to_string
 from cosinnus import cosinnus_notifications
+import datetime
+from django.utils.timezone import now
+from django.db import transaction
+from django.utils.html import escape
+from copy import deepcopy
+from django.utils.safestring import mark_safe
+from django.template.defaultfilters import linebreaksbr
+from django.contrib.contenttypes.models import ContentType
+from cosinnus.views.mixins.reflected_objects import ReflectedObjectSelectMixin
 logger = logging.getLogger('cosinnus')
 
 
@@ -334,11 +346,19 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         # set admins at the top of the list member
         members = list(admins) + list(members)
         
+        # collect recruited users
+        user = self.request.user
+        recruited = CosinnusUnregisterdUserGroupInvite.objects.filter(group=self.group)
+        if not (check_user_superuser(user) or check_ug_admin(user, self.group)):
+            # only admins or group admins may see email adresses they haven't invited themselves
+            recruited = recruited.filter(invited_by=user)
+        
         context.update({
             'admins': admins,
             'members': members,
             'pendings': pendings,
             'invited': invited,
+            'recruited': recruited,
             'non_members': non_members,
             'member_count': user_count,
             'hidden_user_count': hidden_members,
@@ -435,6 +455,30 @@ class GroupListMineView(RequireLoggedInMixin, GroupListView):
         return my_groups
 
 group_list_mine = GroupListMineView.as_view()
+
+
+class GroupListInvitedView(RequireLoggedInMixin, GroupListView):
+    paginate_by = None
+    
+    def get_queryset(self):
+        if self.kwargs.get('show_all', False):
+            model = CosinnusGroup
+            self.group_type = 'all'
+        else:
+            group_plural_url_key = self.request.path.split('/')[1]
+            group_class = group_model_registry.get_by_plural_key(group_plural_url_key, None)
+            self.group_type = group_class.GROUP_MODEL_TYPE
+            model = group_class or self.model
+        
+        my_invited_groups = model.objects.get_for_user_invited(self.request.user)
+        return my_invited_groups
+    
+    def get_context_data(self, **kwargs):
+        ctx = super(GroupListInvitedView, self).get_context_data(**kwargs)
+        ctx.update({'hide_group_map': True})
+        return ctx
+
+group_list_invited = GroupListInvitedView.as_view()
 
 
 class FilteredGroupListView(GroupListView):
@@ -1009,6 +1053,7 @@ def group_user_recruit(request, group):
         return redirect(reverse('cosinnus:group-list'))
     
     emails = request.POST.get('emails', '')
+    msg = request.POST.get('message', '').strip()
     user = request.user
     redirect_url = request.META.get('HTTP_REFERER', group_aware_reverse('cosinnus:group-detail', kwargs={'group': group}))
     
@@ -1022,16 +1067,19 @@ def group_user_recruit(request, group):
     
     invalid = []
     existing = []
+    spam_protected = []
     success = []
+    prev_invites_to_refresh = []
     
     # format and validate emails
     emails = emails.replace(';', ',').replace('\n', ',').replace('\r', ',').split(',')
+    emails = list(set([email.strip(' \t\n\r') for email in emails]))
+    
     for email in emails:
         # stop after 10 fragments to prevent malicious overloading
         if len(invalid) + len(existing) + len(success) > MAXIMUM_EMAILS:
             break
         
-        email = email.strip(' \t\n\r')
         if not email:
             continue
         try:
@@ -1039,26 +1087,121 @@ def group_user_recruit(request, group):
         except ValidationError:
             invalid.append(email)
             continue
+        
         # from here on, we have a real email. check if a user with that email exists
         if get_object_or_None(get_user_model(), email=email):
             existing.append(email) 
-        else:
-            success.append(email)
+            continue
+        # check if the user has been invited recently (if so, we don't send another mail)
+        prev_invite = get_object_or_None(CosinnusUnregisterdUserGroupInvite, email=email, group=group)
+        if prev_invite and prev_invite.last_modified > (now() - datetime.timedelta(days=1)):
+            spam_protected.append(email)
+            continue
+        success.append(email)
+        if prev_invite:
+            prev_invites_to_refresh.append(prev_invite)
     
+    # we attach the additional message to the object description (in this case our sender profile):
+    if msg:
+        content = mark_safe(render_to_string('cosinnus/html_mail/content_snippets/recruit_personal_message.html', {'sender': user}))
+        msg = mark_safe(linebreaksbr(escape(msg)))
+        def render_additional_notification_content_rows():
+            return [content, msg]
+        group_copy = deepcopy(group) # we deepcopy to avoid getting the attached function cached for this group
+        setattr(group_copy, 'render_additional_notification_content_rows', render_additional_notification_content_rows)
+    else:
+        group_copy = group
+        
     # send emails as notification signal
     virtual_users = []
     for email in success:
         virtual_user = AnonymousUser()
         virtual_user.email = email
         virtual_users.append(virtual_user)
-    signals.user_group_recruited.send(sender=user, obj=group, user=user, audience=virtual_users)
+    signals.user_group_recruited.send(sender=user, obj=group_copy, user=user, audience=virtual_users)
+    
+    # create invite objects
+    with transaction.atomic():
+        for email in success:
+            just_refresh_invites = [inv for inv in prev_invites_to_refresh if inv.email == email]
+            if just_refresh_invites:
+                just_refresh_invites[0].invited_by = user
+                just_refresh_invites[0].save()
+                continue
+            CosinnusUnregisterdUserGroupInvite.objects.create(email=email, group=group, invited_by=user)
     
     if invalid:
         messages.error(request, _("Sorry, these did not seem to be valid email addresses: %s") % ', '.join(invalid))
+    if spam_protected:
+        messages.warning(request, _("These people have been sent an email invite only recently. You can send them an invite again tomorrow: %s") % ', '.join(spam_protected))
     if existing:
         messages.success(request, _("Good news! The people with these addresses already have a registered user account: %s") % ', '.join(existing))
     if success:
         messages.success(request, _("Success! We are now sending out invitations to these email addresses: %s") % ', '.join(success))
         
     return redirect(redirect_url)
+
+
+@csrf_protect
+def group_assign_reflected_object(request, group): 
+    if not request.method=='POST':
+        return HttpResponseNotAllowed(['POST'])
+    if not request.user.is_authenticated():
+        raise PermissionDenied('Must be authenticated!')
+    group = get_group_for_request(group, request)
+    if not group:
+        return HttpResponseBadRequest('Target group not found!')
     
+    # parse params
+    reflecting_object_id = request.POST.get('reflecting_object_id', None)
+    reflecting_object_content_type = request.POST.get('reflecting_object_content_type', None)
+    checked_groups = request.POST.getlist('group_checked', None)
+    if reflecting_object_id is None or reflecting_object_content_type is None or checked_groups is None:
+        return HttpResponseBadRequest('Missing POST parameters!')
+    checked_groups = [int(group_id) for group_id in checked_groups]
+    
+    # get content type, check if among the allowed ones
+    if not reflecting_object_content_type in getattr(settings, 'COSINNUS_REFLECTABLE_OBJECTS', []):
+        raise PermissionDenied('This object type cannot be reflected!')
+    app_label, model_str = reflecting_object_content_type.split('.',1)
+    ct = ContentType.objects.get_by_natural_key(app_label, model_str)
+    
+    # get object
+    model = ct.model_class()
+    obj = get_object_or_None(model, id=reflecting_object_id)
+    if not obj:
+        return HttpResponseBadRequest('Target object not found!')
+    # check if object really part of current group
+    if not obj.group_id == group.id:
+        return HttpResponseBadRequest('Object does not belong in this group!')
+    # check user object read permission
+    if not check_object_read_access(obj, request.user):
+        raise PermissionDenied('You have no access to this object!')
+    
+    # get all reflectable groups and reflecting groups from mixin
+    mixin = ReflectedObjectSelectMixin()
+    reflect_data = mixin.get_reflect_data(request, group, obj)
+    added_groups = []
+    
+    with transaction.atomic():
+        for reflectable_group, reflecting in reflect_data['reflectable_groups']:
+            # if in checked but not reflecting, create
+            if reflectable_group.id in checked_groups and not reflecting:
+                BaseTaggableObjectReflection.objects.create(content_type=ct, object_id=obj.id, group=reflectable_group, creator=request.user)
+                added_groups.append(reflectable_group)
+            # if in reflecting, but not active, get reflecting object, delete it
+            if reflecting and not reflectable_group.id in checked_groups:
+                BaseTaggableObjectReflection.objects.get(content_type=ct, object_id=obj.id, group=reflectable_group).delete()
+            # just to display, unchanged reflecting groups
+            if reflecting and reflectable_group.id in checked_groups:
+                added_groups.append(reflectable_group)
+    
+    success_message = _('Your selection for showing this event in projects/groups was updated.')
+    if added_groups:
+        group_names = ', '.join([show_group.name for show_group in added_groups])
+        success_message = force_text(success_message) + ' ' + force_text(_('This event is now being shown in these projects/groups: %(group_names)s') % {'group_names': group_names})
+    messages.success(request, success_message)
+    
+    redirect_url = obj.get_absolute_url()
+    return redirect(redirect_url)
+

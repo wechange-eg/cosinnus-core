@@ -29,11 +29,16 @@ from cosinnus.core.mail import send_mail_or_fail_threaded
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
+from cosinnus.utils.user import get_newly_registered_user_email
 
 # if a user profile has this settings, its user has not yet confirmed a new email
 # address and this long is bound to his old email (or to a scrambled, unusable one if they just registered)
 PROFILE_SETTING_EMAIL_TO_VERIFY = 'email_to_verify'
 PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN = 'email_verification_pwd'
+# a list of urls to redirect the user to on next page hit (only first in list), enforced by middleware
+PROFILE_SETTING_REDIRECT_NEXT_VISIT = 'redirect_next'
+# first login datetime, used to determine if user first logged in
+PROFILE_SETTING_FIRST_LOGIN = 'first_login'
 
 
 class BaseUserProfileManager(models.Manager):
@@ -162,7 +167,7 @@ class BaseUserProfile(FacebookIntegrationUserProfileMixin, models.Model):
                     'tos_content': tos_content,
                 }
                 subj_user = '%s - %s' % (_('Terms of Service'), data['site_name'])
-                send_mail_or_fail_threaded(self.user.email, subj_user, 'cosinnus/mail/user_terms_of_services.html', data)
+                send_mail_or_fail_threaded(get_newly_registered_user_email(self.user), subj_user, 'cosinnus/mail/user_terms_of_services.html', data)
 
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:profile-detail', kwargs={'username': self.user.username})
@@ -245,7 +250,34 @@ class BaseUserProfile(FacebookIntegrationUserProfileMixin, models.Model):
         if not hasattr(self, key):
             setattr(self, key, self.media_tag)
         return getattr(self, key)
-
+    
+    def add_redirect_on_next_page(self, resolved_url, message=None, priority=False):
+        """ Adds a redirect-page to the user's settings redirect list.
+            A middleware enforces that the user will be redirected to the first URL in the list on the next page hit.
+            @param message: (optional) Can be a string, that will be displayed as success-message at redirect time.
+                             i18n u_gettext will be applied *later, at redirect time* to this string! 
+            @param priority: if set to `True`, will insert the redirect as first URL, so it will be the next one in queue """
+        redirects = self.settings.get(PROFILE_SETTING_REDIRECT_NEXT_VISIT, [])
+        if priority:
+            redirects.insert(0, (resolved_url, message))
+        else:
+            redirects.append((resolved_url, message))
+        self.settings[PROFILE_SETTING_REDIRECT_NEXT_VISIT] = redirects
+        self.save(update_fields=['settings'])
+    
+    def pop_next_redirect(self):
+        """ Tries to remove the first redirect URL in the user's setting's redirect list, and return it.
+            @return: A tuple (string resolved URL, message), or False if none existed. """
+        redirects = self.settings.get(PROFILE_SETTING_REDIRECT_NEXT_VISIT, [])
+        if not redirects:
+            return False
+        next_redirect = redirects.pop()
+        if next_redirect:
+            self.settings[PROFILE_SETTING_REDIRECT_NEXT_VISIT] = redirects
+            self.save(update_fields=['settings'])
+            return next_redirect
+        return False
+    
 
 class UserProfile(BaseUserProfile):
     

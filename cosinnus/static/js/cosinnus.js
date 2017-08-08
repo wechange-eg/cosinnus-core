@@ -621,22 +621,43 @@
                     return;
                 }
                 if ($(this).find('i').hasClass('fa-check-square-o')) {
-                    // already checked
-                    $(this)
+                    // uncheck checked box and remove button highlight
+                    var $input = $(this)
                         .find('i')
                         .removeClass('fa-check-square-o')
                         .addClass('fa-square-o')
-                        .next() // INPUT type="hidden"
-                        .attr('value','false')
-                        .trigger('change');
-                } else {
+                        .next(); // INPUT type="hidden"
+                    if ($input.attr('type') == 'checkbox') {
+                        $input.prop('checked', false);
+                    } else {
+                        $input.attr('value','false')
+                    }
+                    $input.trigger('change');
+                    
                     $(this)
+                        .parents('.btn-extra-emphasized')
+                        .first()
+                        .removeClass('btn-extra-emphasized')
+                        .addClass('btn-emphasized');
+                } else {
+                    // check unchecked box and highlight button
+                    $input = $(this)
                         .find('i')
                         .removeClass('fa-square-o')
                         .addClass('fa-check-square-o')
-                        .next() // INPUT type="hidden"
-                        .attr('value','true')
-                        .trigger('change');
+                        .next(); // INPUT type="hidden"
+                    if ($input.attr('type') == 'checkbox') {
+                        $input.prop('checked', true);
+                    } else {
+                        $input.attr('value','true');
+                    }
+                    $input.trigger('change');
+                        
+                    $(this)
+                        .parents('.btn-emphasized')
+                        .first()
+                        .removeClass('btn-emphasized')
+                        .addClass('btn-extra-emphasized');
                 }
             });
 
@@ -644,13 +665,19 @@
             $('body .fa-square-o, body .fa-check-square-o').each(function() {
                 if ($(this).hasClass('fa-check-square-o')) {
                     // checked
-                    $(this)
-                        .next() // INPUT type="hidden"
-                        .attr('value','true');
+                    $input = $(this).next(); // INPUT type="hidden"
+                    if ($input.attr('type') == 'checkbox') {
+                        $input.prop('checked', true);
+                    } else {
+                        $input.attr('value','true');
+                    }
                 } else {
-                    $(this)
-                        .next() // INPUT type="hidden"
-                        .attr('value','false');
+                    $input = $(this).next(); // INPUT type="hidden"
+                    if ($input.attr('type') == 'checkbox') {
+                        $input.prop('checked', false);
+                    } else {
+                        $input.attr('value','false');
+                    }
                 }
             });
         },

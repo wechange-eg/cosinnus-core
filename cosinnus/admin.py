@@ -11,7 +11,8 @@ from django.utils.translation import ugettext_lazy as _
 from cosinnus.models.group import CosinnusGroupMembership,\
     CosinnusPortal, CosinnusPortalMembership,\
     CosinnusGroup, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING,\
-    CosinnusPermanentRedirect, MEMBERSHIP_ADMIN
+    CosinnusPermanentRedirect, MEMBERSHIP_ADMIN,\
+    CosinnusUnregisterdUserGroupInvite
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory
 from cosinnus.models.cms import CosinnusMicropage
@@ -54,6 +55,16 @@ class MembershipAdmin(admin.ModelAdmin):
     raw_id_fields = ('user',)
     
 admin.site.register(CosinnusGroupMembership, MembershipAdmin)
+
+
+class UnregisterdUserGroupInviteAdmin(admin.ModelAdmin):
+    list_display = ('group', 'email', 'last_modified',)
+    list_filter = ('group', )
+    search_fields = ('email', 'group__name')
+    readonly_fields = ('last_modified',)
+    
+admin.site.register(CosinnusUnregisterdUserGroupInvite, UnregisterdUserGroupInviteAdmin)
+
 
 
 class PermanentRedirectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):

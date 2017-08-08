@@ -29,6 +29,7 @@ from cosinnus.utils.lanugages import MultiLanguageFieldMagicMixin
 from cosinnus.core.registries import app_registry
 from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
+from cosinnus.utils.group import get_cosinnus_group_model
 
 
 
@@ -408,6 +409,68 @@ class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
         if first_list:
             return first_list[0]
         return None
+
+
+@python_2_unicode_compatible
+class BaseTaggableObjectReflection(models.Model):
+    """ Used as an additional link of a BaseTaggableObject into other Groups than its parent group.
+        Can be used to "symbolically link" an object into another group, to display it there as well,
+        while it still is retained in its original group. """
+        
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    reflected_object = generic.GenericForeignKey('content_type', 'object_id')
+    
+    group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
+        on_delete=models.CASCADE, 
+        related_name='reflected_objects')
+    
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL,
+        verbose_name=_('Creator'),
+        on_delete=models.CASCADE,
+        related_name='+')
+
+    class Meta:
+        app_label = 'cosinnus'
+        ordering = ('content_type',)
+        unique_together = (('content_type', 'object_id', 'group'),)
+        verbose_name = _('Reflected Object')
+        verbose_name_plural = _('Reflected Objects')
+
+    def __str__(self):
+        return '<reflect: %s::%s::%s>' % (self.content_type, self.object_id, self.group.slug)
+
+    @property
+    def model_name(self):
+        """
+        The model name of the reflected object, e.g.: `'cosinnus_event.Event'`
+        """
+        if not hasattr(self, '_model_name'):
+            ct = self.content_type
+            self._model_name = '%s.%s' % (ct.app_label, ct.model_class().__name__)
+        return self._model_name
+    
+    @classmethod
+    def get_objects_for_group(cls, model_class, group):
+        """ Will return a queryset of class `model_class` that are reflected into the given group """
+        ct = ContentType.objects.get_for_model(model_class)
+        ids = cls.objects.filter(content_type=ct, group=group).values_list('id', flat=True)
+        return model_class.objects.filter(id__in=ids)
+
+    @classmethod
+    def get_group_ids_for_object(cls, obj):
+        """ Will return a list of ids of CosinnusBaseGroup that the given object is being reflected into. """
+        ct = ContentType.objects.get_for_model(obj._meta.model)
+        group_ids = cls.objects.filter(content_type=ct, object_id=obj.id).values_list('group_id', flat=True)
+        return group_ids
+    
+    @classmethod
+    def get_groups_for_object(cls, obj):
+        """ Will return a queryset of all CosinnusBaseGroup (not projects or societies!) that the 
+            given object is being reflected into. """
+        group_ids = cls.get_group_ids_for_object(obj)
+        return get_cosinnus_group_model().objects.get_cached(pks=group_ids)
+
 
 def ensure_container(sender, **kwargs):
     """ Creates a root container instance for all hierarchical objects in a newly created group """

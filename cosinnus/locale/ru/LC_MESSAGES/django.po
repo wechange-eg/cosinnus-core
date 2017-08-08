@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-15 15:28+0200\n"
-"PO-Revision-Date: 2017-07-26 15:54+0200\n"
+"POT-Creation-Date: 2017-08-02 16:06+0200\n"
+"PO-Revision-Date: 2017-07-26 16:19+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -603,6 +603,17 @@ msgstr "Членство на портале"
 msgid "Portal memberships"
 msgstr "Членства на портале"
 
+#, fuzzy
+#| msgid "Last edited"
+msgid "Last modified"
+msgstr "В последний раз отредактировано"
+
+msgid "Team Invite for Unregistered User"
+msgstr ""
+
+msgid "Team Invites for Unregistered Users"
+msgstr ""
+
 msgid "From Portal"
 msgstr "Из портала"
 
@@ -750,6 +761,16 @@ msgstr "Прикрепленные объекты"
 
 msgid "Path"
 msgstr "Путь"
+
+#, fuzzy
+#| msgid "Reported object"
+msgid "Reflected Object"
+msgstr "Объект жалобы"
+
+#, fuzzy
+#| msgid "Reported objects"
+msgid "Reflected Objects"
+msgstr "Объекты жалобы"
 
 msgid "Create-Project or Group Button"
 msgstr "Создать кнопку группа/проект"
@@ -1148,6 +1169,23 @@ msgstr "расширить"
 msgid "Shrink"
 msgstr "уменьшить"
 
+msgid "Check the projects/groups where you wish to show this event in. The event will be shown in the calendars and all lists, but will still remain in this group."
+msgstr ""
+
+msgid "Events from the Forum can be shown in any of your projects/groups."
+msgstr ""
+
+msgid "Events from this group can be shown in any of the group's subprojects."
+msgstr ""
+
+#, fuzzy
+#| msgid "No related projects/groups"
+msgid "Show in other projects/groups"
+msgstr "Нет родственных проектов/групп"
+
+msgid "Apply"
+msgstr ""
+
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr ""
 
@@ -1155,7 +1193,18 @@ msgstr ""
 msgid "We will send them an email asking them to sign up and join %(group_name)s."
 msgstr ""
 
-msgid "Enter up to 10 email addresses, one on each line or seperated with a comma"
+#, fuzzy
+#| msgid "Email address"
+msgid "E-Mail Addresses"
+msgstr "Адрес электронной почты"
+
+msgid "(one per line or comma-seperated)"
+msgstr ""
+
+msgid "Personal Message (optional)"
+msgstr ""
+
+msgid "Include a personal message (optional)"
 msgstr ""
 
 #, fuzzy
@@ -1349,13 +1398,35 @@ msgstr "Пригласить участника"
 msgid "Invite user"
 msgstr "Пригласить пользователя"
 
-msgid "Invite People to Register and Join"
-msgstr ""
+msgid "Invited Members"
+msgstr "Приглашенные Участники"
+
+msgid "Invited to be a member"
+msgstr "Приглашены стать участником "
+
+msgid "Revoke Invitation"
+msgstr "Отозвать приглашение"
+
+msgid "Decline Invitation"
+msgstr "Отклонить приглашение"
+
+msgid "Accept Invitation"
+msgstr "Принять приглашение"
+
+#, python-format
+msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgstr "Вы действительно хотите отозвать приглашение на членство для пользователя „%(name)s“?"
+
+msgid "Revoke Invitation for Member"
+msgstr "Отозвать приглашение для участника"
+
+msgid "Do you really want to decline the invitation?"
+msgstr "Вы действительно хотите отклонить приглашение?"
 
 #, fuzzy
-#| msgid "Invite user"
-msgid "Invite people"
-msgstr "Пригласить пользователя"
+#| msgid "There are no projects."
+msgid "There are no pending invitations."
+msgstr "Проектов нет"
 
 msgid "Membership requests"
 msgstr "Заявки на вступление"
@@ -1386,35 +1457,23 @@ msgstr "Отклонить заявку"
 msgid "There are no new membership requests."
 msgstr "Новых заявок на вступление нет"
 
-msgid "Invited Members"
-msgstr "Приглашенные Участники"
-
-msgid "Invited to be a member"
-msgstr "Приглашены стать участником "
-
-msgid "Revoke Invitation"
-msgstr "Отозвать приглашение"
-
-msgid "Decline Invitation"
-msgstr "Отклонить приглашение"
-
-msgid "Accept Invitation"
-msgstr "Принять приглашение"
-
-#, python-format
-msgid "Do you really want to revoke the invitation for member „%(name)s“?"
-msgstr "Вы действительно хотите отозвать приглашение на членство для пользователя „%(name)s“?"
-
-msgid "Revoke Invitation for Member"
-msgstr "Отозвать приглашение для участника"
-
-msgid "Do you really want to decline the invitation?"
-msgstr "Вы действительно хотите отклонить приглашение?"
+msgid "Invite People to Register and Join"
+msgstr ""
 
 #, fuzzy
-#| msgid "There are no projects."
-msgid "There are no pending invitations."
-msgstr "Проектов нет"
+#| msgid "Invite user"
+msgid "Invite people"
+msgstr "Пригласить пользователя"
+
+msgid "All currently invited people"
+msgstr ""
+
+msgid "People currently invited by you"
+msgstr ""
+
+msgctxt "an action done *by* <username>"
+msgid "by"
+msgstr ""
 
 msgid "Send Message"
 msgstr "Отправить сообщение"
@@ -1689,6 +1748,11 @@ msgstr "Фейсбук-Интеграция будет доступна, как 
 msgid "Facebook integration is available after you created the project!"
 msgstr "Фейсбук-Интеграция будет доступна, как только Вы создадите проект!"
 
+#, fuzzy
+#| msgid "Revoke Invitation"
+msgid "Invitations"
+msgstr "Отозвать приглашение"
+
 msgid "Related to"
 msgstr "Имеются связи с "
 
@@ -1726,6 +1790,11 @@ msgid "There are no groups."
 msgstr "Групп нет"
 
 msgid "There are no projects."
+msgstr "Проектов нет"
+
+#, fuzzy
+#| msgid "There are no projects."
+msgid "There are no invitations."
 msgstr "Проектов нет"
 
 msgid "Map"
@@ -1862,6 +1931,11 @@ msgstr "Все пользователи"
 msgid "Portal Administrators"
 msgstr "Администраторы портала"
 
+#, fuzzy
+#| msgid "All projects"
+msgid "All societies"
+msgstr "Все проекты"
+
 msgid "Re-activate Group"
 msgstr "Восстановить группу"
 
@@ -1889,6 +1963,11 @@ msgstr "Переместить в другую папку"
 
 msgid "Move"
 msgstr "Переместить"
+
+#, fuzzy, python-format
+#| msgid "You were tagged by %(sender_name)s"
+msgid "A message from %(sender_full_name)s"
+msgstr "Вы были отмечены %(sender_name)s"
 
 msgid "Edit folder"
 msgstr "Редактировать папку"
@@ -2462,11 +2541,21 @@ msgstr "Форум"
 msgid "People"
 msgstr "Люди"
 
+#, fuzzy
+#| msgid "Invite user"
+msgid "Invited Groups"
+msgstr "Пригласить пользователя"
+
 msgid "My Groups"
 msgstr "Мои группы"
 
 msgid "All Groups"
 msgstr "Все группы"
+
+#, fuzzy
+#| msgid "Other Projects"
+msgid "Invited Projects"
+msgstr "Другие группы"
 
 msgid "My Projects"
 msgstr "Мои проекты"
@@ -3160,6 +3249,10 @@ msgstr ""
 msgid "Sorry, these did not seem to be valid email addresses: %s"
 msgstr ""
 
+#, python-format
+msgid "These people have been sent an email invite only recently. You can send them an invite again tomorrow: %s"
+msgstr ""
+
 #, fuzzy, python-format
 #| msgid "This email address already has a registered user!"
 msgid "Good news! The people with these addresses already have a registered user account: %s"
@@ -3167,6 +3260,13 @@ msgstr "Этот адрес электронной почты уже испол�
 
 #, python-format
 msgid "Success! We are now sending out invitations to these email addresses: %s"
+msgstr ""
+
+msgid "Your selection for showing this event in projects/groups was updated."
+msgstr ""
+
+#, python-format
+msgid "This event is now being shown in these projects/groups: %(group_names)s"
 msgstr ""
 
 # ???
@@ -3192,6 +3292,10 @@ msgstr "Корневая папка"
 
 msgid "<Root folder>"
 msgstr "<Корневая папка>"
+
+#, python-format
+msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
+msgstr ""
 
 # ???
 #, python-format
@@ -3311,6 +3415,9 @@ msgstr "Адрес Вашей электронной почты %(email)s был
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
 msgstr "Адрес Вашей электронной почты %(email)s был успешно подтверждён! Но тем не менее Ваш аккаунт ещё не активирован и должен быть подтверждён администратором, прежде чем Вы сможете зайти в систему. Мы вышлем Вам письмо, как только это произойдёт!"
+
+msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
+msgstr ""
 
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
@@ -3447,9 +3554,6 @@ msgstr "Ваши изменения были сохранены"
 
 #~ msgid "Progress:"
 #~ msgstr "Progress:"
-
-#~ msgid "Other Projects"
-#~ msgstr "Другие группы"
 
 # ???
 #, fuzzy
