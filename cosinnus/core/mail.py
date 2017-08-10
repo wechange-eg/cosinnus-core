@@ -103,6 +103,8 @@ def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None, is
     subject = subject.replace('\n', ' ').replace('\r', ' ')
     try:
         send_mail(to, subject, template, data, from_email, bcc, is_html=is_html)
+        extra = {'to_user': to, 'subject': subject}
+        logger.info('Cosinnus.core.mail: Successfully sent mail on site "%d".' % settings.SITE_ID, extra=extra)
     except Exception, e:
         # fail silently. log this, though
         extra = {'to_user': to, 'subject': subject, 'exception': force_text(e), 'exc_reason': e}
