@@ -20,7 +20,8 @@ from cosinnus.utils.http import JSONResponse
 from django.contrib import messages
 from cosinnus.models.profile import get_user_profile_model,\
     PROFILE_SETTING_EMAIL_TO_VERIFY, PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN,\
-    PROFILE_SETTING_FIRST_LOGIN
+    PROFILE_SETTING_FIRST_LOGIN, GlobalBlacklistedEmail,\
+    GlobalUserNotificationSetting
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.models.group import CosinnusPortal,\
     CosinnusUnregisterdUserGroupInvite, CosinnusGroupMembership,\
@@ -492,6 +493,24 @@ def convert_email_group_invites(sender, profile, **kwargs):
             profile.add_redirect_on_next_page(reverse('cosinnus:invitations'), msg)
             # we actually do not delete the invites here yet, for many reasons such as re-registers when email verification didn't work
             # the invites will be deleted upon first login using the `user_logged_in_first_time` signal
+
+
+@receiver(userprofile_ceated)
+def remove_user_from_blacklist(sender, profile, **kwargs):
+    user = profile.user
+    email = get_newly_registered_user_email(user)
+    GlobalBlacklistedEmail.remove_for_email(email)
+    # TODO remove print
+    print ">> removed (if existed) email from blacklist:", email
+    
+
+@receiver(userprofile_ceated)
+def create_user_notification_setting(sender, profile, **kwargs):
+    user = profile.user
+    GlobalUserNotificationSetting.objects.get_object_for_user(user)
+    # TODO remove print
+    print ">> created global notification setting for user:", user
+    
 
 @receiver(user_logged_in)
 def detect_first_user_login(sender, user, request, **kwargs):

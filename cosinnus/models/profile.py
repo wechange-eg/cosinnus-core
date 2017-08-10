@@ -6,10 +6,11 @@ import django
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
+from django.core.cache import cache
 from django.db import models
 from django.db.models.signals import post_save, class_prepared
 from django.utils.encoding import python_2_unicode_compatible, force_text
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 
 from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.exceptions import InvalidImageFormatError
@@ -30,6 +31,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from cosinnus.utils.user import get_newly_registered_user_email
+from annoying.functions import get_object_or_None
 
 # if a user profile has this settings, its user has not yet confirmed a new email
 # address and this long is bound to his old email (or to a scrambled, unusable one if they just registered)
@@ -334,3 +336,107 @@ else:
     # https://github.com/django/django/commit/eb38257e51
     post_save.connect(create_user_profile, sender=settings.AUTH_USER_MODEL,
         dispatch_uid='cosinnus_user_profile_post_save')
+
+
+
+class GlobalUserNotificationSettingManager(models.Manager):
+    """ Cached acces to user notification settings  """
+    
+    _NOTIFICATION_CACHE_KEY = 'cosinnus/core/portal/%d/user/%d/slugs' # portal_id, user_id  --> setting value (int)
+    
+    def get_for_user(self, user):
+        """ Returns the cached setting value for this user's global notification setting. """
+        setting = cache.get(self._NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current(), user.id))
+        if setting is None:
+            setting = self.get_object_for_user(user).setting
+            cache.set(self._NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current(), user.id), setting,
+                settings.COSINNUS_GLOBAL_USER_NOTIFICATION_SETTING_CACHE_TIMEOUT)
+        return setting
+    
+    def get_object_for_user(self, user):
+        """ Returns the settings object for this user, creates one if it didn't exist yet.
+            Will return uncached, as this should be asked for seldomly and will need to be fresh anyways """
+        try:
+            obj = self.get(user=user, portal=CosinnusPortal.get_current())
+        except self.model.DoesNotExist:
+            obj = self.create(user=user, portal=CosinnusPortal.get_current())
+        return obj
+    
+    def clear_cache_for_user(self, user):
+        cache.get(self._NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current(), user.id))
+    
+
+class GlobalUserNotificationSetting(models.Model):
+    """
+    A global setting for whether users want to receive mail *at all*, or in which intervals.
+    """
+    # do not send emails ever
+    SETTING_NEVER = 0
+    # send all emails and notifications immediately
+    SETTING_NOW = 1
+    # aggregates notifications for a daily email, sends other mail immediately
+    SETTING_DAILY = 2
+    # aggregates notifications for a weekly email, sends other mail immediately
+    SETTING_WEEKLY = 3
+    # notifications are sent out based on settings for each project/group, sends other mail immediately
+    SETTING_GROUP_INDIVIDUAL = 4
+    
+    SETTING_CHOICES = (
+        (SETTING_NEVER, pgettext_lazy('notification frequency', 'Never')),
+        (SETTING_NOW, pgettext_lazy('notification frequency', 'Immediately')),
+        (SETTING_DAILY, pgettext_lazy('notification frequency', 'Daily')),
+        (SETTING_WEEKLY, pgettext_lazy('notification frequency', 'Weekly')),
+        (SETTING_GROUP_INDIVIDUAL, pgettext_lazy('notification frequency', 'Individual for each Project/Group')),
+    )
+    
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, editable=False, related_name='cosinnus_notification_setting')
+    portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='user_notification_settings', 
+        null=False, blank=False, default=1)
+    setting = models.PositiveSmallIntegerField(choices=SETTING_CHOICES,
+            default=SETTING_WEEKLY,
+            help_text='Determines if the user wants no mail, immediate mails,s aggregated mails, or group specific settings')
+    last_modified = models.DateTimeField(_('Last modified'), auto_now=True, editable=False)
+    
+    objects = GlobalUserNotificationSettingManager()
+    
+    def save(self, *args, **kwargs):
+        super(GlobalUserNotificationSetting, self).save(*args, **kwargs)
+        self.objects.clear_cache_for_user(self.user)
+    
+
+class GlobalBlacklistedEmail(models.Model):
+    """
+    A list of blacklisted emails that will never ever receive emails from us, to comply with list-unsubscribe.
+    Only exception are email-validation mails.
+    """
+    
+    email = models.EmailField(_('email address'), unique=True, db_index=True)
+    created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
+    portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='blacklisted_emails', 
+        null=False, blank=False, default=1)
+    
+    @classmethod
+    def add_for_email(cls, email):
+        """ Will add an email if it doesn't exist yet if no user is registered with that email.
+            Otherwise will simply set the global "no-email" setting for that user. """
+        user = get_object_or_None(get_user_model(), email=email, portal=CosinnusPortal.get_current())
+        if user:
+            setting_object = GlobalUserNotificationSetting.objects.get_object_for_user(user) 
+            setting_object.setting = GlobalUserNotificationSetting.SETTING_NEVER
+            setting_object.save()
+            cls.remove_for_email(email)
+            print ">> received blacklist request for email", email,"but found a user so set his notif setting to NEVER", user
+        else:
+            cls.objects.get_or_create(email=email, portal=CosinnusPortal.get_current())
+        
+    @classmethod
+    def is_email_blacklisted(cls, email):
+        return (get_object_or_None(cls, email=email, portal=CosinnusPortal.get_current()) is not None)
+    
+    @classmethod
+    def remove_for_email(cls, email):
+        """ Will remove an email if it exists """
+        entry = get_object_or_None(cls, email=email, portal=CosinnusPortal.get_current())
+        if entry:
+            entry.delete()
+    

@@ -13,7 +13,8 @@ from cosinnus.models.group import CosinnusGroupMembership,\
     CosinnusGroup, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING,\
     CosinnusPermanentRedirect, MEMBERSHIP_ADMIN,\
     CosinnusUnregisterdUserGroupInvite
-from cosinnus.models.profile import get_user_profile_model
+from cosinnus.models.profile import get_user_profile_model,\
+    GlobalBlacklistedEmail, GlobalUserNotificationSetting
 from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory
 from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.models.feedback import CosinnusReportedObject
@@ -359,6 +360,23 @@ class BaseTaggableAdminMixin(object):
 
 class BaseHierarchicalTaggableAdminMixin(BaseTaggableAdminMixin):
     list_display = list(BaseTaggableAdminMixin.list_display) + ['path',]
+
+
+class GlobalUserNotificationSettingAdmin(admin.ModelAdmin):
+    list_display = ('user', 'setting', 'portal',)
+    list_filter = ('setting', 'portal',)
+    search_fields = ('user__first_name', 'user__last_name', 'user__email',) 
+    
+admin.site.register(GlobalUserNotificationSetting, GlobalUserNotificationSettingAdmin)
+
+
+class GlobalBlacklistedEmailAdmin(admin.ModelAdmin):
+    list_display = ('email', 'created', 'portal',)
+    search_fields = ('email', 'portal',) 
+    
+admin.site.register(GlobalBlacklistedEmail, GlobalBlacklistedEmailAdmin)
+
+
 
 ## TODO: FIXME: re-enable after 1.8 migration
 #class SpamUserModel(USER_MODEL):

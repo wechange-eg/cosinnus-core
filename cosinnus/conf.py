@@ -214,6 +214,9 @@ class CosinnusConf(AppConf):
     # How long a groups list of locations should be cached
     GROUP_LOCATIONS_CACHE_TIMEOUT = GROUP_CACHE_TIMEOUT
     
+    # how long should user notification settings be retained in cache
+    GLOBAL_USER_NOTIFICATION_SETTING_CACHE_TIMEOUT = GROUP_CACHE_TIMEOUT
+    
     # the url pattern for group overview URLs
     GROUP_PLURAL_URL_PATH = 'projects'
     
