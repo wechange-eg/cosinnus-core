@@ -363,7 +363,7 @@ class GlobalUserNotificationSettingManager(models.Manager):
         return obj
     
     def clear_cache_for_user(self, user):
-        cache.get(self._NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current(), user.id))
+        cache.delete(self._NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id))
     
 
 class GlobalUserNotificationSetting(models.Model):
