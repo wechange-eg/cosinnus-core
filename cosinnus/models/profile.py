@@ -346,10 +346,10 @@ class GlobalUserNotificationSettingManager(models.Manager):
     
     def get_for_user(self, user):
         """ Returns the cached setting value for this user's global notification setting. """
-        setting = cache.get(self._NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current(), user.id))
+        setting = cache.get(self._NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id))
         if setting is None:
             setting = self.get_object_for_user(user).setting
-            cache.set(self._NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current(), user.id), setting,
+            cache.set(self._NOTIFICATION_CACHE_KEY % (CosinnusPortal.get_current().id, user.id), setting,
                 settings.COSINNUS_GLOBAL_USER_NOTIFICATION_SETTING_CACHE_TIMEOUT)
         return setting
     
@@ -382,11 +382,11 @@ class GlobalUserNotificationSetting(models.Model):
     SETTING_GROUP_INDIVIDUAL = 4
     
     SETTING_CHOICES = (
-        (SETTING_NEVER, pgettext_lazy('notification frequency', 'Never')),
-        (SETTING_NOW, pgettext_lazy('notification frequency', 'Immediately')),
-        (SETTING_DAILY, pgettext_lazy('notification frequency', 'Daily')),
-        (SETTING_WEEKLY, pgettext_lazy('notification frequency', 'Weekly')),
-        (SETTING_GROUP_INDIVIDUAL, pgettext_lazy('notification frequency', 'Individual for each Project/Group')),
+        (SETTING_NEVER, pgettext_lazy('notification frequency', 'Never (we will not send you any emails)')),
+        (SETTING_WEEKLY, pgettext_lazy('notification frequency', 'Weekly Report')),
+        (SETTING_DAILY, pgettext_lazy('notification frequency', 'Daily Report')),
+        (SETTING_NOW, pgettext_lazy('notification frequency', 'Immediately (an individual email per event)')),
+        (SETTING_GROUP_INDIVIDUAL, pgettext_lazy('notification frequency', 'Individual settings for each Project/Group')),
     )
     
     user = models.OneToOneField(settings.AUTH_USER_MODEL, editable=False, related_name='cosinnus_notification_setting')
@@ -401,7 +401,7 @@ class GlobalUserNotificationSetting(models.Model):
     
     def save(self, *args, **kwargs):
         super(GlobalUserNotificationSetting, self).save(*args, **kwargs)
-        self.objects.clear_cache_for_user(self.user)
+        self._meta.model.objects.clear_cache_for_user(self.user)
     
 
 class GlobalBlacklistedEmail(models.Model):
