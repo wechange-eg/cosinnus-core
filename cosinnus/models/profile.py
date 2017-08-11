@@ -7,7 +7,7 @@ import django
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.core.cache import cache
-from django.db import models
+from django.db import models, transaction
 from django.db.models.signals import post_save, class_prepared
 from django.utils.encoding import python_2_unicode_compatible, force_text
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
@@ -19,7 +19,8 @@ from jsonfield import JSONField
 from cosinnus.conf import settings
 from cosinnus.conf import settings as cosinnus_settings
 from cosinnus.utils.files import get_avatar_filename
-from cosinnus.models.group import CosinnusGroup, CosinnusPortal
+from cosinnus.models.group import CosinnusGroup, CosinnusPortal,\
+    CosinnusPortalMembership
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.core import signals
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -401,6 +402,7 @@ class GlobalUserNotificationSetting(models.Model):
     
     def save(self, *args, **kwargs):
         super(GlobalUserNotificationSetting, self).save(*args, **kwargs)
+        import traceback; traceback.print_stack()
         self._meta.model.objects.clear_cache_for_user(self.user)
     
 
@@ -417,15 +419,18 @@ class GlobalBlacklistedEmail(models.Model):
     
     @classmethod
     def add_for_email(cls, email):
-        """ Will add an email if it doesn't exist yet if no user is registered with that email.
+        """ Will add an email to the blacklist if it doesn't exist yet if no user is registered with that email 
+            or doesn't have a portal membership in this current portal.
             Otherwise will simply set the global "no-email" setting for that user. """
-        user = get_object_or_None(get_user_model(), email=email, portal=CosinnusPortal.get_current())
-        if user:
-            setting_object = GlobalUserNotificationSetting.objects.get_object_for_user(user) 
-            setting_object.setting = GlobalUserNotificationSetting.SETTING_NEVER
-            setting_object.save()
-            cls.remove_for_email(email)
-            print ">> received blacklist request for email", email,"but found a user so set his notif setting to NEVER", user
+        from django.contrib.auth import get_user_model
+        user = get_object_or_None(get_user_model(), email=email)
+        portal_membership = get_object_or_None(CosinnusPortalMembership, user=user, group=CosinnusPortal.get_current())
+        if portal_membership:
+            with transaction.atomic():
+                setting_object = GlobalUserNotificationSetting.objects.get_object_for_user(user) 
+                setting_object.setting = GlobalUserNotificationSetting.SETTING_NEVER
+                setting_object.save()
+                cls.remove_for_email(email)
         else:
             cls.objects.get_or_create(email=email, portal=CosinnusPortal.get_current())
         

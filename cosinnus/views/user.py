@@ -29,8 +29,9 @@ from cosinnus.models.group import CosinnusPortal,\
 from cosinnus.core.mail import MailThread, get_common_mail_context,\
     send_mail_or_fail_threaded
 from django.template.loader import render_to_string
-from django.http.response import HttpResponseNotAllowed, JsonResponse
-from django.shortcuts import redirect
+from django.http.response import HttpResponseNotAllowed, JsonResponse,\
+    HttpResponse, HttpResponseBadRequest
+from django.shortcuts import redirect, render
 from cosinnus.templatetags.cosinnus_tags import full_name_force
 from django.contrib.auth.views import password_reset, password_change
 from cosinnus.utils.permissions import check_user_integrated_portal_member
@@ -47,6 +48,8 @@ from django.dispatch.dispatcher import receiver
 from cosinnus.core.signals import userprofile_ceated, user_logged_in_first_time
 from django.contrib.auth.signals import user_logged_in
 from cosinnus.conf import settings
+from cosinnus.utils.tokens import email_blacklist_token_generator
+from cosinnus.utils.functions import is_email_valid
 
 
 USER_MODEL = get_user_model()
@@ -508,8 +511,6 @@ def remove_user_from_blacklist(sender, profile, **kwargs):
 def create_user_notification_setting(sender, profile, **kwargs):
     user = profile.user
     GlobalUserNotificationSetting.objects.get_object_for_user(user)
-    # TODO remove print
-    print ">> created global notification setting for user:", user
     
 
 @receiver(user_logged_in)
@@ -545,3 +546,24 @@ def user_api_me(request):
     
     return JsonResponse(data)
 
+
+def add_email_to_blacklist(request, email, token):
+    """ Adds an email to the email blacklist. Used for generating list-unsubscribe links in our emails.
+        Use `email_blacklist_token_generator.make_token(email)` to generate a token. """
+    
+    if not is_email_valid(email):
+        messages.error(request, _('The unsubscribe link you have clicked does not seem to be valid!') + ' (1)')
+        return render(request, 'cosinnus/common/200.html')
+    
+    # todo: remove comment, is for debugging
+    #made_token = email_blacklist_token_generator.make_token(email)
+    if not email_blacklist_token_generator.check_token(email, token):
+        messages.error(request, _('The unsubscribe link you have clicked does not seem to be valid!') + ' (2)')
+        return render(request, 'cosinnus/common/200.html')
+    
+    GlobalBlacklistedEmail.add_for_email(email)
+    messages.success(request, _('We have unsubscribed your email "%(email)s" from our mailing list. You will not receive any more emails from us!') 
+        % {'email': email})
+    
+    return render(request, 'cosinnus/common/200.html')
+    

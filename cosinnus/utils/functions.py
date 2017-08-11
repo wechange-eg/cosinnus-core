@@ -6,6 +6,8 @@ from django.core.exceptions import ImproperlyConfigured
 from django.utils.text import normalize_newlines, unescape_entities
 from django.utils.html import strip_tags
 from django.utils.encoding import force_text
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
 
 def unique_aware_slugify(item, slug_source, slug_field, 
@@ -204,3 +206,13 @@ def resolve_attributes(obj, attr_or_function, default=None):
         return resolve_attributes(value, rest_attributes, default)
     else:
         return value
+
+
+def is_email_valid(email):
+    """ Returns True if the given email is a valid email address, False else """
+    try:
+        validate_email( email )
+        return True
+    except ValidationError:
+        return False
+    

@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from cosinnus.models.group import CosinnusGroup, CosinnusPortalMembership, \
-    MEMBERSHIP_MEMBER, CosinnusGroupMembership
+    MEMBERSHIP_MEMBER, CosinnusGroupMembership, CosinnusPortal
 from cosinnus.utils.user import assign_user_to_default_auth_group, \
     ensure_user_to_default_portal_groups
 from django.contrib.auth import get_user_model
@@ -13,6 +13,10 @@ from cosinnus.models.tagged import ensure_container
 from cosinnus.core.registries.group_models import group_model_registry
 
 import logging
+from django.contrib.auth.signals import user_logged_in
+from cosinnus.models.profile import GlobalBlacklistedEmail,\
+    GlobalUserNotificationSetting
+from django.db import transaction
 logger = logging.getLogger('cosinnus')
 
 User = get_user_model()
@@ -41,6 +45,33 @@ post_save.connect(ensure_user_in_group_portal, sender=CosinnusGroupMembership)
 
 post_save.connect(assign_user_to_default_auth_group, sender=User)
 post_save.connect(ensure_user_to_default_portal_groups, sender=CosinnusPortalMembership)
+
+@receiver(user_logged_in)
+def ensure_user_in_logged_in_portal(sender, user, request, **kwargs):
+    """ Make sure on user login, that the user becomes a member of this portal """
+    try:
+        CosinnusPortalMembership.objects.get_or_create(user=user, group=CosinnusPortal.get_current(), defaults={'status': MEMBERSHIP_MEMBER})
+    except:
+        # We fail silently, because we never want to 500 here unexpectedly
+        logger.error("Error while trying to add User Portal Membership for user that has just logged in.")
+
+
+@receiver(user_logged_in)
+def ensure_user_blacklist_converts_to_setting(sender, user, request, **kwargs):
+    """ Make sure on user login, that the user becomes a member of this portal """
+    try:
+        email = user.email
+        if GlobalBlacklistedEmail.is_email_blacklisted(email):
+            with transaction.atomic():
+                GlobalBlacklistedEmail.remove_for_email(email)
+                settings_obj = GlobalUserNotificationSetting.objects.get_object_for_user(user)
+                settings_obj.setting = GlobalUserNotificationSetting.SETTING_NEVER
+                settings_obj.save()
+    except:
+        # We fail silently, because we never want to 500 here unexpectedly
+        logger.error("Error while trying to add User Portal Membership for user that has just logged in.")
+        if settings.DEBUG:
+            raise
 
 post_save.connect(ensure_container, sender=CosinnusGroup)
 for url_key in group_model_registry:
