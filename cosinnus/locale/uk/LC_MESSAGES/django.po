@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-02 16:06+0200\n"
+"POT-Creation-Date: 2017-08-12 16:18+0200\n"
 "PO-Revision-Date: 2017-07-30 15:31+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -363,6 +363,12 @@ msgstr ""
 msgid "Notification Preferences"
 msgstr "Налаштування сповіщення"
 
+msgid "Click the following link to never receive any more emails from us:"
+msgstr ""
+
+msgid "Unsubscribe"
+msgstr ""
+
 msgid "Tiny (50 x *)"
 msgstr ""
 
@@ -715,6 +721,26 @@ msgstr ""
 #| msgid "User overview"
 msgid "Terms of Service"
 msgstr "Огляд користувачів"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "Never (we will not send you any emails)"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "Immediately (an individual email per event)"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "In a Daily Report"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "In a Weekly Report"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "Individual settings for each Project/Group..."
+msgstr ""
 
 #, fuzzy
 #| msgid "Name"
@@ -1197,6 +1223,11 @@ msgstr "Огляд спільнот"
 
 msgid "Project overview"
 msgstr "Огляд проектів"
+
+#, fuzzy
+#| msgid "Overview"
+msgid "Services"
+msgstr "Огляд"
 
 msgid "Access denied!"
 msgstr "Відмовлено у доступі!"
@@ -3585,6 +3616,13 @@ msgid "Your email address %(email)s was successfully confirmed! However, you acc
 msgstr "Користувача/-ку «%(user)s» успішно зареєстровано. Обліковий запит необхідно перевірити та активувати, перш ніж ви зможете увійти в систему. Ми надішлемо вам електронного листа на вашу адресу «%(email)s», коли це буде зроблено."
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
+msgstr ""
+
+msgid "The unsubscribe link you have clicked does not seem to be valid!"
+msgstr ""
+
+#, python-format
+msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
 msgstr ""
 
 #, python-format

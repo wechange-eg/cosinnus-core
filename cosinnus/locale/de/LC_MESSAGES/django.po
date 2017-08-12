@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-02 16:06+0200\n"
-"PO-Revision-Date: 2017-08-02 16:12+0200\n"
+"POT-Creation-Date: 2017-08-12 16:18+0200\n"
+"PO-Revision-Date: 2017-08-12 16:38+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -318,6 +318,12 @@ msgstr "Klicke den folgenden Link, um einzustellen welche E-Mails du erhältst:"
 
 msgid "Notification Preferences"
 msgstr "Benachrichtigungseinstellungen"
+
+msgid "Click the following link to never receive any more emails from us:"
+msgstr "Klicke den folgenden Link, um keine Emails mehr von uns zu erhalten:"
+
+msgid "Unsubscribe"
+msgstr "Abbestellen"
 
 msgid "Tiny (50 x *)"
 msgstr ""
@@ -647,6 +653,26 @@ msgstr "Sprache"
 
 msgid "Terms of Service"
 msgstr "Nutzungsbedingungen"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "Never (we will not send you any emails)"
+msgstr "Niemals (wir schicken dir keine Emails)"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "Immediately (an individual email per event)"
+msgstr "Sofort (eine einzelne Email für jedes Ereignis)"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "In a Daily Report"
+msgstr "In einem täglichen Report"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "In a Weekly Report"
+msgstr "In einem wöchentlichen Report"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "Individual settings for each Project/Group..."
+msgstr "Individuelle Einstellungen pro Projekt/Gruppe..."
 
 msgid "Name (EN)"
 msgstr "Name (EN)"
@@ -1102,6 +1128,11 @@ msgstr "Gruppenübersicht"
 
 msgid "Project overview"
 msgstr "Projektübersicht"
+
+#, fuzzy
+#| msgid "Overview"
+msgid "Services"
+msgstr "Übersicht"
 
 msgid "Access denied!"
 msgstr "Zugriff verweigert!"
@@ -1900,10 +1931,9 @@ msgstr "In einen anderen Ordner verschieben"
 msgid "Move"
 msgstr "Verschieben"
 
-#, fuzzy, python-format
-#| msgid "You were tagged by %(sender_name)s"
+#, python-format
 msgid "A message from %(sender_full_name)s"
-msgstr "Du wurdest markiert von %(sender_name)s."
+msgstr "Nachricht von %(sender_full_name)s"
 
 msgid "Edit folder"
 msgstr "Ordner bearbeiten"
@@ -3316,6 +3346,13 @@ msgstr "Deine Email-Adresse %(email)s wurde erfolgreich bestätigt! Allerdings i
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr "Willkommen! Du wurdest bereits in folgende Projekte und Gruppen eingeladen. Bitte klicke den Ausklappen-Button der Einladungen, die du annehmen oder ablehnen möchtest!"
+
+msgid "The unsubscribe link you have clicked does not seem to be valid!"
+msgstr "Der Abbestellen-Link, den du geklickt hast, scheint nicht gültig zu sein!"
+
+#, python-format
+msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
+msgstr "Wir haben deine Email-Adresse \"%(email)s\" von unserer Mailingliste entfernt. Du erhältst ab sofort keine Emails mehr von uns!"
 
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."

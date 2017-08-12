@@ -383,11 +383,11 @@ class GlobalUserNotificationSetting(models.Model):
     SETTING_GROUP_INDIVIDUAL = 4
     
     SETTING_CHOICES = (
-        (SETTING_NEVER, pgettext_lazy('notification frequency', 'Never (we will not send you any emails)')),
-        (SETTING_WEEKLY, pgettext_lazy('notification frequency', 'Weekly Report')),
-        (SETTING_DAILY, pgettext_lazy('notification frequency', 'Daily Report')),
-        (SETTING_NOW, pgettext_lazy('notification frequency', 'Immediately (an individual email per event)')),
-        (SETTING_GROUP_INDIVIDUAL, pgettext_lazy('notification frequency', 'Individual settings for each Project/Group')),
+        (SETTING_NEVER, pgettext_lazy('answer to "i wish to receive notification emails:"', 'Never (we will not send you any emails)')),
+        (SETTING_NOW, pgettext_lazy('answer to "i wish to receive notification emails:"', 'Immediately (an individual email per event)')),
+        (SETTING_DAILY, pgettext_lazy('answer to "i wish to receive notification emails:"', 'In a Daily Report')),
+        (SETTING_WEEKLY, pgettext_lazy('answer to "i wish to receive notification emails:"', 'In a Weekly Report')),
+        (SETTING_GROUP_INDIVIDUAL, pgettext_lazy('answer to "i wish to receive notification emails:"', 'Individual settings for each Project/Group...')),
     )
     
     user = models.OneToOneField(settings.AUTH_USER_MODEL, editable=False, related_name='cosinnus_notification_setting')
