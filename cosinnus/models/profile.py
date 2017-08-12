@@ -402,7 +402,6 @@ class GlobalUserNotificationSetting(models.Model):
     
     def save(self, *args, **kwargs):
         super(GlobalUserNotificationSetting, self).save(*args, **kwargs)
-        import traceback; traceback.print_stack()
         self._meta.model.objects.clear_cache_for_user(self.user)
     
 
