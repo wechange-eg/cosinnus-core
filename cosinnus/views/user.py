@@ -555,8 +555,6 @@ def add_email_to_blacklist(request, email, token):
         messages.error(request, _('The unsubscribe link you have clicked does not seem to be valid!') + ' (1)')
         return render(request, 'cosinnus/common/200.html')
     
-    # todo: remove comment, is for debugging
-    #made_token = email_blacklist_token_generator.make_token(email)
     if not email_blacklist_token_generator.check_token(email, token):
         messages.error(request, _('The unsubscribe link you have clicked does not seem to be valid!') + ' (2)')
         return render(request, 'cosinnus/common/200.html')

@@ -14,6 +14,7 @@ import sys
 import html2text
 from threading import Thread
 from django.core.mail.message import EmailMultiAlternatives
+from cosinnus.utils.user import get_list_unsubscribe_url
 logger = logging.getLogger('cosinnus')
 
 __all__ = ['CELERY_AVAILABLE', 'send_mail']
@@ -37,6 +38,12 @@ def _django_send_mail(to, subject, template, data, from_email=None, bcc=None, is
         # add from-email readable name (yes, this is how this works)
         from_email = '%(portal_name)s <%(from_email)s>' % {'portal_name': portal_name, 'from_email': settings.COSINNUS_DEFAULT_FROM_EMAIL}
         
+    if data and 'unsubscribe_url' in data:
+        unsubscribe_url = data.get('unsubscribe_url')
+    else:
+        unsubscribe_url = get_list_unsubscribe_url(to)
+        data['unsubscribe_url'] = unsubscribe_url
+        
     if template is not None:
         message = render_to_string(template, data)
     else:
@@ -46,14 +53,18 @@ def _django_send_mail(to, subject, template, data, from_email=None, bcc=None, is
             return
         message = data['content']
 
+    headers = {
+        'List-Unsubscribe': '<%s>' % unsubscribe_url,
+    }
+    
     connection = get_connection()
     if is_html:
         text_message = convert_html_email_to_plaintext(message)
-        mail = EmailMultiAlternatives(subject, text_message, from_email, [to], connection=connection)
+        mail = EmailMultiAlternatives(subject, text_message, from_email, [to], connection=connection, headers=headers)
         mail.attach_alternative(message, 'text/html')
         return mail.send()
     else:
-        mail = EmailMessage(subject, message, from_email, [to], bcc, connection=connection)
+        mail = EmailMessage(subject, message, from_email, [to], bcc, connection=connection, headers=headers)
         return mail.send()
 
 

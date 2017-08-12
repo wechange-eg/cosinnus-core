@@ -14,6 +14,12 @@ from django.db.models import Q
 import six
 from django.template.loader import render_to_string
 from django.utils.html import escape
+from django.db.models.loading import get_model
+from django.core.urlresolvers import reverse
+from cosinnus.utils.urls import get_domain_for_portal
+from cosinnus.utils.tokens import email_blacklist_token_generator
+
+_CosinnusPortal = None
 
 logger = logging.getLogger('cosinnus')
 
@@ -204,4 +210,10 @@ def get_group_select2_pills(groups, text_only=False):
          render_to_string('cosinnus/common/group_select2_pill.html', {'text':escape(group.name)}) if not text_only else escape(group.name),
          ) for group in groups]
     
-    
+def get_list_unsubscribe_url(email):
+    """ Generates a URL to be used for a List-Unsubscribe header. Util function. """
+    global _CosinnusPortal
+    if _CosinnusPortal is None: 
+        _CosinnusPortal = get_model('cosinnus', 'CosinnusPortal')
+    domain = get_domain_for_portal(_CosinnusPortal.get_current())
+    return domain + reverse('cosinnus:user-add-email-blacklist', kwargs={'email': email, 'token': email_blacklist_token_generator.make_token(email)})
