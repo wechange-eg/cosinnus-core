@@ -18,6 +18,9 @@ user_registered = dispatch.Signal(providing_args=["user"])
 """ Called when the user logs in for the first time ever """
 user_logged_in_first_time = dispatch.Signal(providing_args=['request', 'user'])
 
+""" Called after a new user voluntarily signs up on the portal, using the web frontend """
+user_joined_group = dispatch.Signal(providing_args=["user", "group"])
+
 """ Called when a user requests membership of a group """
 user_group_join_requested = dispatch.Signal(providing_args=["user", "obj", "audience"])
 

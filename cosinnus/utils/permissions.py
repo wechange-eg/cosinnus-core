@@ -6,7 +6,8 @@ from django.db.models import Q
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject,\
     BaseHierarchicalTaggableObjectModel
-from cosinnus.models.profile import BaseUserProfile
+from cosinnus.models.profile import BaseUserProfile, GlobalBlacklistedEmail,\
+    GlobalUserNotificationSetting
 from uuid import uuid1
 from django.conf import settings
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -190,6 +191,16 @@ def check_user_integrated_portal_member(user):
     """ Returns ``True`` if the user is a member, admin, or pending in an integrated Portal """
     portal_memberships = user.cosinnus_portal_memberships.all().values_list('group__id', flat=True)
     return any([portal_id in settings.COSINNUS_INTEGRATED_PORTAL_IDS for portal_id in portal_memberships])
+
+
+def check_user_can_receive_emails(user):
+    """ Checks if a user can receive emails *at all*, ignoring any frequency settings.
+        This checks the global notification setting for authenticated users,
+        and the email blacklist for anonymous users. """
+    if not user.is_authenticated():
+        return not GlobalBlacklistedEmail.is_email_blacklisted(user.email)
+    else:
+        return GlobalUserNotificationSetting.objects.get_for_user(user) > GlobalUserNotificationSetting.SETTING_NEVER
 
 
 def filter_tagged_object_queryset_for_user(qs, user):

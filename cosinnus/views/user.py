@@ -20,7 +20,8 @@ from cosinnus.utils.http import JSONResponse
 from django.contrib import messages
 from cosinnus.models.profile import get_user_profile_model,\
     PROFILE_SETTING_EMAIL_TO_VERIFY, PROFILE_SETTING_EMAIL_VERFICIATION_TOKEN,\
-    PROFILE_SETTING_FIRST_LOGIN
+    PROFILE_SETTING_FIRST_LOGIN, GlobalBlacklistedEmail,\
+    GlobalUserNotificationSetting
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.models.group import CosinnusPortal,\
     CosinnusUnregisterdUserGroupInvite, CosinnusGroupMembership,\
@@ -28,8 +29,9 @@ from cosinnus.models.group import CosinnusPortal,\
 from cosinnus.core.mail import MailThread, get_common_mail_context,\
     send_mail_or_fail_threaded
 from django.template.loader import render_to_string
-from django.http.response import HttpResponseNotAllowed, JsonResponse
-from django.shortcuts import redirect
+from django.http.response import HttpResponseNotAllowed, JsonResponse,\
+    HttpResponse, HttpResponseBadRequest
+from django.shortcuts import redirect, render
 from cosinnus.templatetags.cosinnus_tags import full_name_force
 from django.contrib.auth.views import password_reset, password_change
 from cosinnus.utils.permissions import check_user_integrated_portal_member
@@ -46,6 +48,8 @@ from django.dispatch.dispatcher import receiver
 from cosinnus.core.signals import userprofile_ceated, user_logged_in_first_time
 from django.contrib.auth.signals import user_logged_in
 from cosinnus.conf import settings
+from cosinnus.utils.tokens import email_blacklist_token_generator
+from cosinnus.utils.functions import is_email_valid
 
 
 USER_MODEL = get_user_model()
@@ -493,6 +497,22 @@ def convert_email_group_invites(sender, profile, **kwargs):
             # we actually do not delete the invites here yet, for many reasons such as re-registers when email verification didn't work
             # the invites will be deleted upon first login using the `user_logged_in_first_time` signal
 
+
+@receiver(userprofile_ceated)
+def remove_user_from_blacklist(sender, profile, **kwargs):
+    user = profile.user
+    email = get_newly_registered_user_email(user)
+    GlobalBlacklistedEmail.remove_for_email(email)
+    # TODO remove print
+    print ">> removed (if existed) email from blacklist:", email
+    
+
+@receiver(userprofile_ceated)
+def create_user_notification_setting(sender, profile, **kwargs):
+    user = profile.user
+    GlobalUserNotificationSetting.objects.get_object_for_user(user)
+    
+
 @receiver(user_logged_in)
 def detect_first_user_login(sender, user, request, **kwargs):
     """ Used to send out the user_first_logged_in_first_time signal """
@@ -526,3 +546,22 @@ def user_api_me(request):
     
     return JsonResponse(data)
 
+
+def add_email_to_blacklist(request, email, token):
+    """ Adds an email to the email blacklist. Used for generating list-unsubscribe links in our emails.
+        Use `email_blacklist_token_generator.make_token(email)` to generate a token. """
+    
+    if not is_email_valid(email):
+        messages.error(request, _('The unsubscribe link you have clicked does not seem to be valid!') + ' (1)')
+        return render(request, 'cosinnus/common/200.html')
+    
+    if not email_blacklist_token_generator.check_token(email, token):
+        messages.error(request, _('The unsubscribe link you have clicked does not seem to be valid!') + ' (2)')
+        return render(request, 'cosinnus/common/200.html')
+    
+    GlobalBlacklistedEmail.add_for_email(email)
+    messages.success(request, _('We have unsubscribed your email "%(email)s" from our mailing list. You will not receive any more emails from us!') 
+        % {'email': email})
+    
+    return render(request, 'cosinnus/common/200.html')
+    

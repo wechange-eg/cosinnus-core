@@ -24,6 +24,22 @@
                         </a>
                     </p>
                     {{/rwif}}
+                    
+                    <p>
+                        {{#if raw}}
+                            {{{{raw}}}}{% trans "Click the following link to never receive any more emails from us:" %}{{{{/raw}}}}
+                        {{else}}
+                            Click the following link to never receive any more emails from us:
+                        {{/if}}
+
+                        <a href="{{#rw this}}unsubscribe_url{{/rw}}" target="_blank">
+                            {{#if raw}}
+                                {{{{raw}}}}{% trans "Unsubscribe" %}{{{{/raw}}}}
+                            {{else}}
+                                Unsubscribe
+                            {{/if}}
+                        </a>
+                    </p>
                 </columns>
             </row>
         </columns>

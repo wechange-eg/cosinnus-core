@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-02 16:06+0200\n"
+"POT-Creation-Date: 2017-08-12 16:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -316,6 +316,12 @@ msgid "Click the following link to change which emails you receive:"
 msgstr ""
 
 msgid "Notification Preferences"
+msgstr ""
+
+msgid "Click the following link to never receive any more emails from us:"
+msgstr ""
+
+msgid "Unsubscribe"
 msgstr ""
 
 msgid "Tiny (50 x *)"
@@ -645,6 +651,26 @@ msgid "Language"
 msgstr ""
 
 msgid "Terms of Service"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "Never (we will not send you any emails)"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "Immediately (an individual email per event)"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "In a Daily Report"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "In a Weekly Report"
+msgstr ""
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "Individual settings for each Project/Group..."
 msgstr ""
 
 msgid "Name (EN)"
@@ -1089,6 +1115,9 @@ msgid "Group overview"
 msgstr ""
 
 msgid "Project overview"
+msgstr ""
+
+msgid "Services"
 msgstr ""
 
 msgid "Access denied!"
@@ -3162,6 +3191,13 @@ msgid "Your email address %(email)s was successfully confirmed! However, you acc
 msgstr ""
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
+msgstr ""
+
+msgid "The unsubscribe link you have clicked does not seem to be valid!"
+msgstr ""
+
+#, python-format
+msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
 msgstr ""
 
 #, python-format
