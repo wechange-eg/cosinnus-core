@@ -1185,6 +1185,19 @@ class CosinnusGroupMembership(BaseGroupMembership):
     class Meta(BaseGroupMembership.Meta):
         verbose_name = _('Team membership')
         verbose_name_plural = _('Team memberships')  
+        
+    def __init__(self, *args, **kwargs):
+        super(CosinnusGroupMembership, self).__init__(*args, **kwargs)
+        self._status = self.status
+        
+    def save(self, *args, **kwargs):
+        """ Checks and fires `user_joined_group` signal if a user has hereby joined this group """
+        created = bool(self.pk is None)
+        super(CosinnusGroupMembership, self).save(*args, **kwargs)
+        created_as_membership = bool(created and self.status in MEMBER_STATUS)
+        changed_to_membership = bool(not created and self._status not in MEMBER_STATUS and self.status in MEMBER_STATUS)
+        if created_as_membership or changed_to_membership:
+            signals.user_joined_group.send(sender=self, user=self.user, group=self.group)
     
 
 class CosinnusPortalMembership(BaseGroupMembership):
