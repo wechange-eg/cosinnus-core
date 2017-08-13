@@ -105,6 +105,7 @@ class CosinnusProjectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
     list_filter = ('portal', 'public', 'is_active',)
     search_fields = ('name', )
     prepopulated_fields = {'slug': ('name', )}
+    readonly_fields = ('created',)
     
     def convert_to_society(self, request, queryset):
         """ Converts this CosinnusGroup's type """
