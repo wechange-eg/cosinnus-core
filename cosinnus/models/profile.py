@@ -390,7 +390,7 @@ class GlobalUserNotificationSetting(models.Model):
         (SETTING_GROUP_INDIVIDUAL, pgettext_lazy('answer to "i wish to receive notification emails:"', 'Individual settings for each Project/Group...')),
     )
     
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, editable=False, related_name='cosinnus_notification_setting')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, editable=False, related_name='cosinnus_notification_settings')
     portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='user_notification_settings', 
         null=False, blank=False, default=1)
     setting = models.PositiveSmallIntegerField(choices=SETTING_CHOICES,
@@ -399,6 +399,9 @@ class GlobalUserNotificationSetting(models.Model):
     last_modified = models.DateTimeField(_('Last modified'), auto_now=True, editable=False)
     
     objects = GlobalUserNotificationSettingManager()
+    
+    class Meta:
+        unique_together = ('user', 'portal', )
     
     def save(self, *args, **kwargs):
         super(GlobalUserNotificationSetting, self).save(*args, **kwargs)
