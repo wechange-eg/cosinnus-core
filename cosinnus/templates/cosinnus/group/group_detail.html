@@ -288,7 +288,7 @@
         
             <legend>{% trans "Invite People to Register and Join" %}</legend>
             
-            <button type="submit" class="btn btn-emphasized btn-left {% if recruited %}regular-space{% else %}large-space{% endif %}" data-toggle="modal" data-target="#modal-recruit-users">
+            <button type="submit" class="btn btn-emphasized btn-left" data-toggle="modal" data-target="#modal-recruit-users">
                 <ul class="media-list">
                     <li class="media">
                         <a class="pull-left" href="#">
@@ -303,9 +303,7 @@
             
             {% include 'cosinnus/common/modal_box_recruit_users.html' %}
             
-            {% if not recruited %}
-                <div class="clearfix"></div>
-            {% endif %}
+            <div class="clearfix"></div>
         {% endif %}
         
         {% if recruited %}
