@@ -43,6 +43,8 @@ def group_aware_reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=N
             portal_id = group.portal_id
             domain = get_domain_for_portal(group.portal)
             kwargs['group'] = group.slug
+        else:
+            group = kwargs['group']
         
         viewname = _group_aware_url_name(viewname, group, portal_id=portal_id)
     else:
