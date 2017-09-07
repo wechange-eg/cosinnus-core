@@ -17,7 +17,8 @@ from cosinnus.models.profile import get_user_profile_model,\
     GlobalBlacklistedEmail, GlobalUserNotificationSetting
 from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory
 from cosinnus.models.cms import CosinnusMicropage
-from cosinnus.models.feedback import CosinnusReportedObject
+from cosinnus.models.feedback import CosinnusReportedObject,\
+    CosinnusSentEmailLog
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
@@ -377,6 +378,14 @@ class GlobalBlacklistedEmailAdmin(admin.ModelAdmin):
     
 admin.site.register(GlobalBlacklistedEmail, GlobalBlacklistedEmailAdmin)
 
+
+class CosinnusSentEmailLogAdmin(admin.ModelAdmin):
+    list_display = ('date', 'email', 'title')
+    list_filter = ('email', 'title')
+    search_fields = ('date', 'email', 'title') 
+    readonly_fields = ('date',)
+
+admin.site.register(CosinnusSentEmailLog, CosinnusSentEmailLogAdmin)
 
 
 ## TODO: FIXME: re-enable after 1.8 migration

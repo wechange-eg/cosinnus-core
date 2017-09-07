@@ -62,11 +62,19 @@ def _django_send_mail(to, subject, template, data, from_email=None, bcc=None, is
         text_message = convert_html_email_to_plaintext(message)
         mail = EmailMultiAlternatives(subject, text_message, from_email, [to], connection=connection, headers=headers)
         mail.attach_alternative(message, 'text/html')
-        return mail.send()
+        ret = mail.send()
     else:
         mail = EmailMessage(subject, message, from_email, [to], bcc, connection=connection, headers=headers)
-        return mail.send()
-
+        ret = mail.send()
+    
+    if getattr(settings, 'COSINNUS_LOG_SENT_EMAILS', False):
+        try:
+            from cosinnus.models.feedback import CosinnusSentEmailLog
+            CosinnusSentEmailLog.objects.create(email=to, title=subject)
+        except Exception, e:
+            logger.error('Error while trying to log a sent email!', extra={'exception': force_text(e)})
+        
+    return ret
 
 if CELERY_AVAILABLE:
     @task

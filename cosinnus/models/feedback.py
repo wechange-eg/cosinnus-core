@@ -80,4 +80,14 @@ class CosinnusReportedObject(models.Model):
     def get_target_delete_url(self):
         return reverse('admin:%s_%s_delete' % (self.content_type.app_label, self.get_target_model_name()), args=(self.target_object.id,))
     
-
+     
+class CosinnusSentEmailLog(models.Model):
+    """ Logs an email that was sent out """
+    
+    class Meta:
+        ordering = ('date',)
+        
+    email = models.EmailField(_('Email'))
+    title = models.CharField(_('Notification ID'), max_length=300)
+    date = models.DateTimeField(auto_now_add=True, editable=False)
+    
