@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-08-12 16:18+0200\n"
-"PO-Revision-Date: 2017-07-30 15:31+0200\n"
+"PO-Revision-Date: 2017-09-07 15:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 2.0.3\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Language: uk_UA\n"
 
@@ -38,18 +38,14 @@ msgstr "Перетворити вибрані проекти у спільнот
 msgid "The following Users were added to this portal:"
 msgstr "Наступні члени були долучені до порталу:"
 
-#, fuzzy
-#| msgid "Add all members to current Portal (%s)"
 msgid "Add all members to current Portal"
-msgstr "Долучити усіх членів до поточного порталу (%s)"
+msgstr "Додати всіх членів до цього порталу"
 
 msgid "In addition, the members were removed from all other Portals."
 msgstr "Крім цього, члени були вилучені з усіх інших порталів."
 
-#, fuzzy
-#| msgid "Move all members to current Portal (%s) (removes all other memberships!)"
 msgid "Move all members to current Portal (removes all other memberships!)"
-msgstr "Перемістити усіх членів до поточного порталу (%s) (анулює усі інші членства!)"
+msgstr "Перемістити усіх членів до поточного порталу (анулює усі інші членства!)"
 
 msgid "The following Groups were converted to Projects:"
 msgstr "Наступні спільноти були перетворені у проекти:"
@@ -57,45 +53,37 @@ msgstr "Наступні спільноти були перетворені у �
 msgid "Convert selected Groups to Projects"
 msgstr "Перетворити вибрані спільноти у проекти"
 
-#, fuzzy
-#| msgid "Accept User"
 msgid "ToS Accepted"
-msgstr "Долучити користувача/-ку"
+msgstr "Пользовательское соглашение прийнято"
 
 msgid "ToS not Accepted"
-msgstr ""
+msgstr "Пользовательсткое соглашение не прийнято"
 
 msgid "User Logged In"
-msgstr ""
+msgstr "Користувач увійшов"
 
-#, fuzzy
-#| msgid "Logged out"
 msgid "Logged in before"
-msgstr "Вийшли із системи"
+msgstr "Спершу увійти"
 
-#, fuzzy
-#| msgid "Not logged in."
 msgid "Never logged in"
-msgstr "Не в системі."
+msgstr "Ніколи не був в системі"
 
-#, fuzzy
-#| msgid "Logged out"
 msgid "Has Logged In"
-msgstr "Вийшли із системи"
+msgstr "Увійшов в систему"
 
 msgid "ToS accepted?"
-msgstr ""
+msgstr "Пользовательское соглашение прийнято?"
 
 #, python-format
 msgid "%d Users were deactivated successfully."
-msgstr "%d член/-и/-ів було успішно деактивовано."
+msgstr "%d користувач/ку/ів було успішно деактивовано."
 
 msgid "Deactivate users (will keep all all items they created on the site)"
-msgstr "Деактивувати вибраних членів (зберігає усі створені ними об'єкти на сторінці)"
+msgstr "Деактивувати вибраних користувачів (зберігає усі створені ними об'єкти на сторінці)"
 
 #, python-format
 msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
-msgstr ""
+msgstr "%(sender_name)s хоче, щоб Ви доєдналися до проекту %(team_name)s\" на %(portal_name)s! Клікніть на назву проекту нижче, для того щоб подивитися його і почати співпрацю!"
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgstr "Тільки члени спільноти/проекту можуть бачити цей вміст. Надішліть запит членства зараз!"
@@ -122,120 +110,88 @@ msgstr "Здійснено вихід із системи, тому що цей 
 msgid "A user requested to become a member of this team (admins only)"
 msgstr "Хтось надіслав запит членства у цій спільноті (стосується тільки адміністраторів спільноти)"
 
-#, fuzzy
-#| msgid "Membership requests"
 msgid "New membership request"
-msgstr "Запити членства"
+msgstr "Новий запит щодо членства"
 
-#, fuzzy, python-format
-#| msgid "You have requested to become a member of %(site_name)s!"
+#, python-format
 msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
-msgstr "Ваш запит членства на %(site_name)s!"
+msgstr "\"%(sender_name)s\" запросив членства в %(team_name)s."
 
-#, fuzzy
-#| msgid "Membership requested"
 msgid "Membership request accepted"
-msgstr "Надіслано запит членства"
+msgstr "Прийнято запит щодо членства"
 
-#, fuzzy, python-format
-#| msgid "Your membership request for %(team_name)s has been accepted on %(site_name)s!"
+#, python-format
 msgid "Your membership request for %(team_name)s was accepted!"
-msgstr "Ваш запит членства у %(team_name)s було задовільнено на %(site_name)s!"
+msgstr "Ваш запит щодо членства у %(team_name)s було прийнято!"
 
-#, fuzzy
-#| msgid "Membership requested"
 msgid "Membership request declined"
-msgstr "Надіслано запит членства"
+msgstr "Відхилено запит щодо членства"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "Hi, %(user_name)s!\n"
-#| "\n"
-#| "We're sorry, but your membership request for %(team_name)s has been declined."
+#, python-format
 msgid "We're sorry, but your membership request for %(team_name)s was declined."
-msgstr ""
-"Вітаємо, %(user_name)s!\n"
-"\n"
-"Вибачте, вам відмовлено у проханні про членство у проекті %(team_name)s."
+msgstr "Вибачте, Ваш запит щодо членства у %(team_name)s було відхилено."
 
-#, fuzzy, python-format
-#| msgid "Your membership request for %(team_name)s has been declined on %(site_name)s."
+#, python-format
 msgid "Your membership request for %(team_name)s was declined."
-msgstr "Ваш запит членства у %(team_name)s було відхилено на %(site_name)s."
+msgstr "Ваш запит щодо членства у %(team_name)s було відхилено."
 
-#, fuzzy
-#| msgid "A user requested to become a member of this team (admins only)"
 msgid "A user has accepted the invitation to this team (admins only)"
-msgstr "Хтось надіслав запит членства у цій спільноті (стосується тільки адміністраторів спільноти)"
+msgstr "Користувач у цій команді (стосується тільки адміністраторів спільноти)"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+#, python-format
 msgid "%(sender_name)s accepted the invitation"
-msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
+msgstr "%(sender_name)s прийняв запрошення"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+#, python-format
 msgid "\"%(sender_name)s\" has accepted the invitation to %(team_name)s."
-msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
+msgstr "%(sender_name)s прийняв запрошення долучитись до  %(team_name)s."
 
-#, fuzzy
-#| msgid "A user requested to become a member of this team (admins only)"
 msgid "A user has declined the invitation to this team (admins only)"
-msgstr "Хтось надіслав запит членства у цій спільноті (стосується тільки адміністраторів спільноти)"
+msgstr "Користувач відхилив запрошення щодо членства в цій команді (стосується лише адміністраторів)"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+#, python-format
 msgid "%(sender_name)s declined the invitation"
-msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
+msgstr "%(sender_name)s відхилив запрошення"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+#, python-format
 msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
-msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
+msgstr "%(sender_name)s відхилив запрошення до %(team_name)s."
 
-#, fuzzy
-#| msgid "You were tagged in a post, document or other item"
 msgid "You were made an admin of this team"
-msgstr "Вас було позначено у повідомленні, документі або в іншому елементі"
+msgstr "Вас було призначено адміністратором цієї команди"
 
 msgid "Made you an admin"
-msgstr ""
+msgstr "Вас призначено адміністратором"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+#, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
-msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
+msgstr "%(sender_name)s призначив Вас адміністратором %(team_name)s на %(portal_name)s!"
 
 msgid "You were tagged in a post, document or other item"
 msgstr "Вас було позначено у повідомленні, документі або в іншому елементі"
 
 #, python-format
 msgid "%(sender_name)s tagged you in"
-msgstr ""
+msgstr "%(sender_name)s відмітив Вас"
 
-#, fuzzy, python-format
-#| msgid "You were tagged in: \"%(object_name)s\", in %(team_name)s"
+#, python-format
 msgid "You were tagged by %(sender_name)s"
-msgstr "Вас позначено: «%(object_name)s» у %(team_name)s"
+msgstr "%(sender_name)s позначив Вас"
 
-#, fuzzy, python-format
-#| msgid "You were tagged in: \"%(object_name)s\", in %(team_name)s"
+#, python-format
 msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
-msgstr "Вас позначено: «%(object_name)s» у %(team_name)s"
+msgstr "Вас позначили в \"%(object_name)s\" у %(team_name)s."
 
-#, fuzzy
-#| msgid "Remove Member"
 msgid "Invited you"
-msgstr "Видалити члена"
+msgstr "Запросив Вас"
 
 #, python-format
 msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
-msgstr ""
+msgstr "%(sender_name)s запросив(ла) Вас доєднатися до \"%(team_name)s\" на  %(portal_name)s! <br/><br/> Щоб доєднатися, пройдіть за посиланням внизу. Ви будете перенаправлені на портал, де Ви зможете подивитися і прийняти запрошення."
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+#, python-format
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
-msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
+msgstr "%(sender_name)s запросив Вас долучитися до %(team_name)s на %(portal_name)s!"
 
 msgid "Deutsch"
 msgstr "Deutsch"
@@ -307,16 +263,16 @@ msgid "Next month"
 msgstr "Наступного місяця"
 
 msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
-msgstr ""
+msgstr "Це не правильне посилання на Youtube чи Vimeo!"
 
 msgid "This doesn't seem to be a Twitter username!"
-msgstr ""
+msgstr "Це не правильне ім'я користувача у Twitter!"
 
 msgid "This doesn't seem to be a valid widget ID or embed HTML code from Twitter!"
-msgstr ""
+msgstr "Це не правильний widget ID чи прикріплений код HTML з Twitter!"
 
 msgid "This doesn't seem to be a valid Flickr Gallery link! It should be in the form of \"https://www.flickr.com/photos/username/sets/1234567890\"!"
-msgstr ""
+msgstr "Це не правильне посилання на галерею у Flickr! Посилання має виглядати так - \"https://www.flickr.com/photos/username/sets/1234567890\"!"
 
 msgid "Name"
 msgstr "Ім'я"
@@ -337,10 +293,10 @@ msgid "Persons"
 msgstr "Люди"
 
 msgid "email address"
-msgstr "Адреса електронної скриньки"
+msgstr "адреса електронної скриньки"
 
 msgid "first name"
-msgstr "Ім'я"
+msgstr "ім'я"
 
 msgid "This email address already has a registered user!"
 msgstr "Під цією адресою електронної скриньки уже хтось зареєструвався!"
@@ -355,52 +311,52 @@ msgid "This account is inactive."
 msgstr "Цей обліковий запис було деактивовано."
 
 msgid "Hi,"
-msgstr ""
+msgstr "Вітання,"
 
 msgid "Click the following link to change which emails you receive:"
-msgstr ""
+msgstr "Пройдіть за цим посиланням, щоб змінити налаштування електронних листів, які ви отримуєте:"
 
 msgid "Notification Preferences"
 msgstr "Налаштування сповіщення"
 
 msgid "Click the following link to never receive any more emails from us:"
-msgstr ""
+msgstr "Пройдіть за цим посиланням, щоб ніколи більше не отримувати електронних листів від нас:"
 
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Відписатися"
 
 msgid "Tiny (50 x *)"
-msgstr ""
+msgstr "Крихітний (50 x *)"
 
 msgid "Very Small (100 x *)"
-msgstr ""
+msgstr "Дуже малий (100 x *)"
 
 msgid "Smaller (150 x *)"
-msgstr ""
+msgstr "Менший (150 x *)"
 
 msgid "Small (200 x *)"
-msgstr ""
+msgstr "Малий (200 x *)"
 
 msgid "Medium-small (250 x *)"
-msgstr ""
+msgstr "Середньо-малий (250 x *)"
 
 msgid "Medium (300 x *)"
-msgstr ""
+msgstr "Середній (300 x *)"
 
 msgid "Large (400 x *)"
-msgstr ""
+msgstr "Великий (400 x *)"
 
 msgid "Larger (500 x *)"
-msgstr ""
+msgstr "Більший (500 x *)"
 
 msgid "Very large (650 x *)"
-msgstr ""
+msgstr "Дуже великий (650 x *)"
 
 msgid "Extra large (800 x *)"
-msgstr ""
+msgstr "Надто великий (800 x *)"
 
 msgid "XXL (1200 x *)"
-msgstr ""
+msgstr "XXL (1200 x *)"
 
 msgid "Title"
 msgstr "Назва"
@@ -451,10 +407,10 @@ msgid "Website"
 msgstr "Веб-сайт"
 
 msgid "Welcome-Email Text"
-msgstr ""
+msgstr "Текст вітального електронного листа"
 
 msgid "If set, this text overrides the default welcome e-mail text which will be sent on portals with \"Users Need Activation\" enabled."
-msgstr ""
+msgstr "Якщо встановити, цей текст замінить вітальний електронний лист, який буде направлено на портали з позначкою \"Користувачі потребують активації\"."
 
 msgid "Public"
 msgstr "Публічний"
@@ -472,10 +428,10 @@ msgid "If activated, newly registered users need to be approved by a portal admi
 msgstr "Якщо вибрано, після реєстрації нові облікові записи користувачів повинен підтвердити адміністратор порталу, перш ніж вони зможуть увійти в систему."
 
 msgid "Emails Need Verification"
-msgstr ""
+msgstr "Електронні адреси потребують верифікації"
 
 msgid "If activated, newly registered users and users who change their email address will need to confirm their email by clicking a link in a mail sent to them."
-msgstr ""
+msgstr "Якщо вибрано, користувачі, які тільки зареєструвалися, або ті, хто змінив електронні адреси, матимуть підтвердити електронні адреси, пройшовши за посиланням у листі."
 
 msgid "Background Image"
 msgstr "Зображення фону"
@@ -546,41 +502,35 @@ msgstr "Фонове зображення"
 msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
 msgstr "Відображається як великий банер на мікросайті (1140 x 240 px)"
 
-#, fuzzy
-#| msgid "Microsite"
 msgid "Microsite Video"
-msgstr "Мікросайт"
+msgstr "Відео Мікросайту"
 
 msgid "Microsite Twitter Timeline Username"
-msgstr ""
+msgstr "Мікросайт Twitter Стрічка Ім'я користувача"
 
 msgid "Microsite Twitter Timeline Custom Widget ID"
-msgstr ""
+msgstr "Мікросайт Twitter Стрічка"
 
 msgid "Flickr Gallery URL"
-msgstr ""
+msgstr "URL Flickr галереї"
 
 msgid "Call to Action Microsite Box active"
-msgstr ""
+msgstr "Активувати вікно Заклик до дії на мікросайті"
 
-#, fuzzy
-#| msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgid "If this is active, a Call to Action box will be shown on the microsite."
-msgstr "Це публічний опис, який буде знаходитися на мікросайті, та який кожен зможе побачити."
+msgstr "Якщо це активовано, то вікно Заклик до дії буде показано на мікросайті."
 
 msgid "Call to Action Box title"
-msgstr ""
+msgstr "Назва вікна Заклик до дії"
 
 msgid "Call to Action Box Description"
-msgstr ""
+msgstr "Опис вікна Заклик до дії"
 
 msgid "Deactivated Apps"
 msgstr "Деактивовані застосунки"
 
-#, fuzzy
-#| msgid "Microsite Wallpaper"
 msgid "Microsite Public Apps"
-msgstr "Фон мікросайту"
+msgstr "Публічні додатки мікросайту"
 
 msgid "Is active"
 msgstr "Активний"
@@ -589,18 +539,16 @@ msgid "If a team is not active, it counts as non-existent for all purposes and v
 msgstr "Якщо проект/спільнота неактивний/-а, вважається що він/вона не існує, і не відображається на веб-сайті."
 
 msgid "Facebook Group ID"
-msgstr ""
+msgstr "ID Facebook спільноти"
 
 msgid "Facebook Page ID"
-msgstr ""
+msgstr "ID Facebook сторінки"
 
 msgid "Parent Group"
 msgstr "Основна спільнота"
 
-#, fuzzy
-#| msgid "Related to"
 msgid "Related Teams"
-msgstr "Відноситься до"
+msgstr "Пов'язані команди"
 
 msgid "Cosinnus project"
 msgstr "Проект"
@@ -616,11 +564,11 @@ msgstr "У зв'язку зі змінами змінилася URL-адреса
 
 #, python-format
 msgid "Request about your project \"%(group_name)s\""
-msgstr ""
+msgstr "Запити щодо Вашого проекту \"%(group_name)s\""
 
 #, python-format
 msgid "Request about your group \"%(group_name)s\""
-msgstr ""
+msgstr "Запити щодо Вашої спільноти \"%(group_name)s\""
 
 msgid "Team membership"
 msgstr "Членство у спільноті/проекті"
@@ -634,16 +582,14 @@ msgstr "Членство на порталі"
 msgid "Portal memberships"
 msgstr "Членства на порталі"
 
-#, fuzzy
-#| msgid "Last edited"
 msgid "Last modified"
-msgstr "Востаннє редаговано"
+msgstr "Востаннє змінено"
 
 msgid "Team Invite for Unregistered User"
-msgstr ""
+msgstr "Запрошення команди для незареєстрованого користувача"
 
 msgid "Team Invites for Unregistered Users"
-msgstr ""
+msgstr "Запрошення команди для незареєстрованих користувачів"
 
 msgid "From Portal"
 msgstr "Від порталу"
@@ -669,93 +615,73 @@ msgstr "Довгота"
 msgid "Longitude"
 msgstr "Широта"
 
-#, fuzzy
-#| msgid "Stream"
 msgid "Team"
-msgstr "Діяльність"
+msgstr "Команда"
 
-#, fuzzy
-#| msgid "Cosinnus groups"
 msgid "CosinnusLocation"
-msgstr "Спільноти"
+msgstr "Cosinnus місце знаходження"
 
-#, fuzzy
-#| msgid "Cosinnus groups"
 msgid "CosinnusLocations"
-msgstr "Спільноти"
+msgstr "Cosinnus місця знаходження"
 
-#, fuzzy
-#| msgid "Background Image"
 msgid "Group Image"
-msgstr "Зображення фону"
+msgstr "Зображення спільноти"
 
-#, fuzzy
-#| msgid "Cosinnus Micropages"
 msgid "CosinnusGroup GalleryImage"
-msgstr "Cosinnus CMS мікросторінки"
+msgstr "Cosinnus Зображення галереї в спільноті"
 
-#, fuzzy
-#| msgid "Cosinnus Micropages"
 msgid "CosinnusGroup GalleryImages"
-msgstr "Cosinnus CMS мікросторінки"
+msgstr "Cosinnus Зображення галереї в спільноті"
 
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 msgid "CosinnusGroup CallToAction Button"
-msgstr ""
+msgstr "Cosinnus Група Кнопка ЗакликДоДії"
 
 msgid "CosinnusGroup CallToAction Buttons"
-msgstr ""
+msgstr "Cosinnus Група Кнопки ЗакликДоДії"
 
 msgid "Cosinnus group"
-msgstr "Спільнота"
+msgstr "Cosinnus Спільнота"
 
 msgid "Cosinnus groups"
-msgstr "Спільноти"
+msgstr "Cosinnus Спільноти"
 
 msgid "Language"
-msgstr ""
+msgstr "Мова"
 
-#, fuzzy
-#| msgid "User overview"
 msgid "Terms of Service"
-msgstr "Огляд користувачів"
+msgstr "Угода користувачів"
 
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Never (we will not send you any emails)"
-msgstr ""
+msgstr "Ніколи (ми не будемо відправляти Вам електронні листи)"
 
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Immediately (an individual email per event)"
-msgstr ""
+msgstr "Одразу (окремий лист на кожну подію)"
 
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "In a Daily Report"
-msgstr ""
+msgstr "Щоденний звіт"
 
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "In a Weekly Report"
-msgstr ""
+msgstr "Щотижневий звіт"
 
 msgctxt "answer to \"i wish to receive notification emails:\""
 msgid "Individual settings for each Project/Group..."
-msgstr ""
+msgstr "Окремі налаштування для кожного проекту/спільноти..."
 
-#, fuzzy
-#| msgid "Name"
 msgid "Name (EN)"
-msgstr "Ім'я"
+msgstr "Ім'я (EN)"
 
-#, fuzzy
-#| msgid "Name"
 msgid "Name (RU)"
-msgstr "Ім'я"
+msgstr "Ім'я (RU)"
 
-#, fuzzy
-#| msgid "Name"
 msgid "Name (UK)"
-msgstr "Ім'я"
+msgstr "Ім'я (UA)"
 
 msgid "Only me"
 msgstr "Тільки я"
@@ -817,10 +743,8 @@ msgstr "Підхід"
 msgid "Topics"
 msgstr "Теми"
 
-#, fuzzy
-#| msgid "Topics"
 msgid "Text Topics"
-msgstr "Теми"
+msgstr "Теми текстів"
 
 msgid "Likes"
 msgstr "Вподобання"
@@ -834,20 +758,14 @@ msgstr "Додані об'єкти"
 msgid "Path"
 msgstr "Шлях"
 
-#, fuzzy
-#| msgid "Reported object"
 msgid "Reflected Object"
-msgstr "Об'єкт, про який повідомлено"
+msgstr "Об'єкт, який відображається"
 
-#, fuzzy
-#| msgid "Reported objects"
 msgid "Reflected Objects"
-msgstr "Об'єкти, про які повідомлено"
+msgstr "Об'єкти, які відображаються"
 
-#, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Create-Project or Group Button"
-msgstr "Перетворити вибрані проекти у спільноти"
+msgstr "Кнопкп створити проект чи групу"
 
 msgid "Users"
 msgstr "Користувачі"
@@ -862,167 +780,145 @@ msgid "Groups"
 msgstr "Спільноти"
 
 msgid "At least one type of Map object must be chosen!"
-msgstr ""
+msgstr "Мінімум один тип об'єктів на карті має бути обрано!"
 
-#, fuzzy
-#| msgid "Informations"
 msgid "Proportions"
-msgstr "Інформація"
+msgstr "Пропорції"
 
 msgid "1/2 + 1/2"
-msgstr ""
+msgstr "1/2 + 1/2"
 
 msgid "2/3 + 1/3"
-msgstr ""
+msgstr "2/3 + 1/3"
 
 msgid "1/3 + 2/3"
-msgstr ""
+msgstr "1/3 + 2/3"
 
 msgid "1/3 + 1/3 + 1/3"
-msgstr ""
+msgstr "1/3 + 1/3 + 1/3"
 
 msgid "1/2 + 1/4 + 1/4"
-msgstr ""
+msgstr "1/2 + 1/4 + 1/4"
 
 msgid "1/4 + 1/2 + 1/4"
-msgstr ""
+msgstr "1/4 + 1/2 + 1/4"
 
 msgid "1/4 + 1/4 + 1/2"
-msgstr ""
+msgstr "1/4 + 1/4 + 1/2"
 
-#, fuzzy
-#| msgid "Edit Widget"
 msgid "Medium News Widget"
-msgstr "Редагувати веб-віджет"
+msgstr "Середній новинний веб-віджет"
 
 msgid "Large News Widget"
-msgstr ""
+msgstr "Великий новинний веб-віджет"
 
 msgid "4 Random Projects Widget"
-msgstr ""
+msgstr "4 випадкових веб-віджетів проекту"
 
 msgid "8 Random Projects Widget"
-msgstr ""
+msgstr "8 випадкових веб-віджетів проекту"
 
-#, fuzzy
-#| msgid "Contact"
 msgid "Content"
-msgstr "Контакти"
+msgstr "Вміст"
 
 msgid "Portal Root Page"
-msgstr ""
+msgstr "Корнева сторінка порталу"
 
 msgid "Assigned Portal"
-msgstr ""
+msgstr "Приписаний портал"
 
 msgid "Footer"
-msgstr ""
+msgstr "Нижній колонтитул"
 
 msgid "Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)"
-msgstr ""
+msgstr "Буде відображено як нижній колонтитул на кожній сторінці сайту (не лише на перший сторінках!)"
 
-#, fuzzy
-#| msgid "Register now!"
 msgid "Show Register Button"
-msgstr "Зареєструйтеся зараз!"
+msgstr "Показати кнопкну реєстрації"
 
 msgid "Redirect Logged in Users"
-msgstr ""
+msgstr "Перенаправити зареєстрованих користувачів"
 
 msgid "If active, this page will only be visible to non-logged-in users. All others will be redirected to the activities page."
-msgstr ""
+msgstr "Якщо активувати, ця сторінка буде видна тільки для користувачів, які не зареєструвалися. Всі інші користувачі будуть перенаправлені на сторінки діяльності."
 
 msgid "Left banner (top)"
-msgstr ""
+msgstr "Лівий банер (зверху)"
 
 msgid "Right banner (top)"
-msgstr ""
+msgstr "Правий банер (зверху)"
 
 msgid "Header"
-msgstr ""
+msgstr "Верхній колонтитул"
 
 msgid "Left footer"
-msgstr ""
+msgstr "Лівий нижній колонтитул"
 
-#, fuzzy
-#| msgid "Edit folder"
 msgid "Right footer"
-msgstr "Редагувати папку"
+msgstr "Правий нижній колонтитул"
 
 msgid "1-Column Dashboard Page"
-msgstr ""
+msgstr "Перший стовпчик панелі інструментів"
 
 msgid "2-Column Dashboard Page"
-msgstr ""
+msgstr "Другий стовпчик панелі інструментів"
 
 msgid "Content (left column)"
-msgstr ""
+msgstr "Зміст (лівий стовпчик)"
 
 msgid "Content (right column)"
-msgstr ""
+msgstr "Зміст (правий стовпчик)"
 
 msgid "3-Column Dashboard Page"
-msgstr ""
+msgstr "Третій стовпчик панелі інструментів"
 
 msgid "Content (center column)"
-msgstr ""
+msgstr "Зміст (центральний стовпчик)"
 
 msgid "Simple One-Column Page"
-msgstr ""
+msgstr "Проста однастовпова сторінка"
 
 msgid "Simple Page with Left Navigation"
-msgstr ""
+msgstr "Проста сторінка з навігацією зліва"
 
 msgid "Left Sidebar"
-msgstr ""
+msgstr "Ліві бокові поля"
 
-#, fuzzy
-#| msgid "Regular Dashboard page (1 Column)"
 msgid "1-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr "Звичайна сторінка інформаційної панелі (1 стовпець)"
+msgstr "Сторінка панелі інструментів в один стовпчик (Модульно, Більше не використовувати)"
 
-#, fuzzy
-#| msgid "Regular Dashboard page (1 Column)"
 msgid "2-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr "Звичайна сторінка інформаційної панелі (1 стовпець)"
+msgstr "Сторінка панелі інструментів в два стовпчики (Модульно, Більше не використовувати)"
 
-#, fuzzy
-#| msgid "Regular Dashboard page (1 Column)"
 msgid "3-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
-msgstr "Звичайна сторінка інформаційної панелі (1 стовпець)"
+msgstr "Сторінка панелі інструментів в три стовпчики ((Модульно, Більше не використовувати)"
 
 msgid "Simple One-Column Page (Modular)"
-msgstr ""
+msgstr "Проста сторінка в один стовпчик (модульна)"
 
 msgid "Simple Page with Left Navigation (Modular)"
-msgstr ""
+msgstr "Проста сторінка з лівою навігацією (модульна)"
 
-#, fuzzy
-#| msgid "Regular Dashboard page (1 Column)"
 msgid "Start Page (Modular)"
-msgstr "Звичайна сторінка інформаційної панелі (1 стовпець)"
+msgstr "Стартова сторінка (Модульна)"
 
-#, fuzzy
-#| msgid "Wallpaper image"
 msgid "Header image"
-msgstr "Фонове зображення"
+msgstr "Зображення верхнього колонтитула"
 
 msgid "Header Title"
-msgstr ""
+msgstr "Назва верхнього колонтитула"
 
 msgid "Header Text"
-msgstr ""
+msgstr "Текст верхнього колонтитула"
 
 msgid "Additional Header content"
-msgstr ""
+msgstr "Додатковий зміст верхнього колонтитула"
 
-#, fuzzy
-#| msgid "Edit Widget"
 msgid "Site Widgets"
-msgstr "Редагувати веб-віджет"
+msgstr "Веб-віджети сайту"
 
 msgid "Bottom content (gray background)"
-msgstr ""
+msgstr "Нижній контент (сірий фон)"
 
 msgid "Dashboard"
 msgstr "Інформаційна панель"
@@ -1052,10 +948,10 @@ msgid "Either team or user must be defined."
 msgstr "Необхідно вибрати або проект, або користувача/-ку."
 
 msgid "key"
-msgstr "Ключ"
+msgstr "ключ"
 
 msgid "value"
-msgstr "Значення"
+msgstr "значення"
 
 msgid "Widget configuration item"
 msgstr "Параметр конфігурації веб-віджету"
@@ -1064,56 +960,56 @@ msgid "Widget configuration items"
 msgstr "Параметри конфігурації веб-віджету"
 
 msgid "select this page"
-msgstr "Вибрати цю сторінку"
+msgstr "обрати цю сторінку"
 
 msgid "edit this page"
-msgstr "Редагувати цю сторінку"
+msgstr "редагувати цю сторінку"
 
 msgid "edit"
-msgstr "Редагувати"
+msgstr "редагувати"
 
 msgid "insert above"
-msgstr "Вставити вище"
+msgstr "вставити вище"
 
 msgid "insert below"
-msgstr "Вставити нижче"
+msgstr "вставити нижче"
 
 msgid "insert inside"
-msgstr "Вставити всередину"
+msgstr "вставити всередину"
 
 msgid "softroot"
 msgstr "softroot"
 
 msgid "home"
-msgstr "Головна сторінка"
+msgstr "головна сторінка"
 
 #, python-format
 msgid "Edit this page in %(language)s "
-msgstr "Редагувати цю сторінку наступною мовою: %(language)s"
+msgstr "Редагувати цю сторінку наступною мовою: %(language)s "
 
 msgid "Cut"
 msgstr "Вирізати"
 
 msgid "cut"
-msgstr "Вирізати"
+msgstr "вирізати"
 
 msgid "Copy"
 msgstr "Копіювати"
 
 msgid "copy"
-msgstr "Копіювати"
+msgstr "копіювати"
 
 msgid "Add Child"
 msgstr "Додати дочірній елемент"
 
 msgid "add"
-msgstr "Додати"
+msgstr "додати"
 
 msgid "Delete"
 msgstr "Видалити"
 
 msgid "delete"
-msgstr "Видалити"
+msgstr "видалити"
 
 msgid "Unpublish"
 msgstr "Не публікувати"
@@ -1125,7 +1021,7 @@ msgid "View on page"
 msgstr "Переглянути на сторінці"
 
 msgid "view"
-msgstr "Переглянути"
+msgstr "переглянути"
 
 msgid "View reported item..."
 msgstr "Переглянути об'єкт, про який повідомлено..."
@@ -1192,10 +1088,8 @@ msgstr "Додати існуючі файли..."
 msgid "Drag and Drop files here..."
 msgstr "Перетягніть файли сюди..."
 
-#, fuzzy
-#| msgid "Drag and Drop files here..."
 msgid "Drag and Drop files or folders here..."
-msgstr "Перетягніть файли сюди..."
+msgstr "Перетягніть файли, чи папки сюди..."
 
 msgid "Click to upload a new file/image. You can also drag & drop a file from your computer."
 msgstr "Натисніть, щоб завантажити новий файл/зображення. Ви можете також перетягувати файли з вашого комп'ютера."
@@ -1204,19 +1098,19 @@ msgid "Browse..."
 msgstr "Вибрати файл..."
 
 msgid "Drag and drop one or more files into this area to upload them to this folder."
-msgstr ""
+msgstr "Перетягніть і киньте один чи більше файлів у цю область, щоб завантажити їх у цю теку."
 
 msgid "You can also upload a whole folder, including all files and subfolders, by dragging it here. The new folders will be created automatically, with the same folder structure as on your computer."
-msgstr ""
+msgstr "Ви також можете завантажити всю теку, включно з файлами і підтеками, перетягнувши їх сюди. Нові теки будуть створені автоматично, з тією ж самою структурою як і на Вашому компьютері."
 
 msgid "Unfortunately, the folder upload feature is only available on some browsers. This is because some browsers will not provide the file path information that is needed for the upload. If your browser doesn't support this, you may wish to switch to a different browser for your upload."
-msgstr ""
+msgstr "Нажаль, завантаження тек можливо лише на деяких браузерах. Все через те, що деякі браузери не надають інформацію про шлях файлу, яка є необзідною для завантаження. Якщо Ваш браузер це не підтримує, ви можете переключитися на інший браузер для Вашого завантаження."
 
 msgid "Currently, the Browsers supporting folder upload are:"
-msgstr ""
+msgstr "Наразі, такі браузери підтримують завантаження тек:"
 
 msgid "File and Folder Upload"
-msgstr ""
+msgstr "Завантажити файл та теки"
 
 msgid "Group overview"
 msgstr "Огляд спільнот"
@@ -1224,10 +1118,8 @@ msgstr "Огляд спільнот"
 msgid "Project overview"
 msgstr "Огляд проектів"
 
-#, fuzzy
-#| msgid "Overview"
 msgid "Services"
-msgstr "Огляд"
+msgstr "Послуги"
 
 msgid "Access denied!"
 msgstr "Відмовлено у доступі!"
@@ -1245,82 +1137,74 @@ msgid "Server Error"
 msgstr "Помилка сервера"
 
 msgid "Sorry! Something went wrong..."
-msgstr "Вибачте, щось пішло не так під час збереження вашого профілю!"
+msgstr "Вибачте! Щось пішло не так..."
 
 msgid "Looks like we had an internal problem while processing your request. The error has been recorded, and we will try to fix it as soon as possible!"
 msgstr "Виглядає на те, що під час виконання вашого запиту виникла внутрішня проблема. Помилка була зареєстрована, і ми спробуємо максимально швидко виправити її!"
 
 msgid "Error embedding a Flickr gallery"
-msgstr ""
+msgstr "У Flickr  знайдена помилка"
 
 msgid "Error embedding a twitter timeline"
-msgstr ""
+msgstr "У стрічці twitter знайдена помилка"
 
 msgid "Error embedding a video"
-msgstr ""
+msgstr "У відео знайдена помилка"
 
 msgid "We're sorry. The Map is not supported in Internet Explorer."
-msgstr ""
+msgstr "Вибачте, ця карта не підтримується в Internet Explorer."
 
 msgid "Consider using an alternate browser!"
-msgstr ""
+msgstr "Розгляньте використання альтернативного браузера!"
 
 msgid "Expand"
-msgstr "ширити"
+msgstr "Поширити"
 
 msgid "Shrink"
-msgstr "скоротити"
+msgstr "Скоротити"
 
 msgid "Check the projects/groups where you wish to show this event in. The event will be shown in the calendars and all lists, but will still remain in this group."
-msgstr ""
+msgstr "Подивитися проекти/спільноти, які ви хочете відобразити у цьому заході. Захід буде продемонстровано в календарях та всіх списках, але залишиться у цій спільноті."
 
 msgid "Events from the Forum can be shown in any of your projects/groups."
-msgstr ""
+msgstr "Заходи з Форуму можуть бути показані в будь-якій з ваших спільнот/проектів."
 
 msgid "Events from this group can be shown in any of the group's subprojects."
-msgstr ""
+msgstr "Заходи з цієї спільноти можуть бути відображені в будь якому з підпроектів спільноти."
 
-#, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "Show in other projects/groups"
-msgstr "Перетворити вибрані проекти у спільноти"
+msgstr "Відобразити в інших проектах/спільнотах"
 
 msgid "Apply"
-msgstr ""
+msgstr "Подати"
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
-msgstr ""
+msgstr "Введіть електронні адреси людей, яких ви бажаєте запросити до платформи."
 
 #, python-format
 msgid "We will send them an email asking them to sign up and join %(group_name)s."
-msgstr ""
+msgstr "Ми надішлемо їм електронні листи з проханням зареєструватися і приєднатися до %(group_name)s."
 
-#, fuzzy
-#| msgid "Email address"
 msgid "E-Mail Addresses"
-msgstr "Адреса електронної скриньки"
+msgstr "Адреси електронної пошти"
 
 msgid "(one per line or comma-seperated)"
-msgstr ""
+msgstr "(по одному в рядку, або через кому)"
 
 msgid "Personal Message (optional)"
-msgstr ""
+msgstr "Приватне повідомлення (опціонально)"
 
 msgid "Include a personal message (optional)"
-msgstr ""
+msgstr "Включити приватне повідомлення (опціонально)"
 
-#, fuzzy
-#| msgid "Remove Member"
 msgid "Invite new Members"
-msgstr "Видалити члена"
+msgstr "Запросити нових членів"
 
-#, fuzzy
-#| msgid "view"
 msgid "Invite"
-msgstr "Переглянути"
+msgstr "Запросити"
 
 msgid "Rearrange"
-msgstr ""
+msgstr "Переоформити"
 
 msgid "Save"
 msgstr "Зберегти"
@@ -1328,20 +1212,18 @@ msgstr "Зберегти"
 msgid "Cancel"
 msgstr "Скасувати"
 
-#, fuzzy
-#| msgid "Submitting..."
 msgid "Saving..."
-msgstr "Надсилання..."
+msgstr "Збереження..."
 
 msgid "You are now editing the dashboard's layout"
-msgstr ""
+msgstr "Зараз Ви редагуєте схему панелі інструментів"
 
 #, python-format
 msgid "The layout you choose will be the layout for all members of %(team_name)s! Click save to apply your changes."
-msgstr ""
+msgstr "Схема, яку ви оберете, буде схемою для всіх членів %(team_name)s! Нажміть зберегти, щоб застосувати зміни."
 
 msgid "Drag and drop individual widgets to rearrange their order. Please note that the order you give is only an approximate prioritization for the widgets. After saving, the actual order on the page might differ depending on the widgets' current size and the overall page layout."
-msgstr ""
+msgstr "Перетягніть і киньте окремі віджети, щоб змінити їх порядок. Будь ласка зауважте, порядок, який ви задаєте, є лише приблизним пріоритетом віджетів. Після збереження, поточний порядок сторінки може відрізнятися в залежності від розміру віджетів та від загальної схеми."
 
 msgid "Your Microsite needs some love!"
 msgstr "Ваш мікросайт потребує трохи уваги!"
@@ -1359,17 +1241,13 @@ msgid "get started here..."
 msgstr "розпочніть прямо тут..."
 
 msgid "Marketplace"
-msgstr ""
+msgstr "Дошка оголошень"
 
-#, fuzzy
-#| msgid "Portal"
 msgid "Poll"
-msgstr "Портал"
+msgstr "Опитування"
 
-#, fuzzy
-#| msgid "Portals"
 msgid "Polls"
-msgstr "Портали"
+msgstr "Опитування"
 
 msgid "File"
 msgstr "Файл"
@@ -1406,7 +1284,7 @@ msgstr "Відкликати"
 
 msgctxt "withdraw join team button second item"
 msgid "Request"
-msgstr "запит"
+msgstr "Запит"
 
 msgctxt "join request pending team button first item"
 msgid "Join"
@@ -1414,7 +1292,7 @@ msgstr "Запит членства"
 
 msgctxt "join request pending team button second item"
 msgid "Requested"
-msgstr "надіслано"
+msgstr "Запит надіслано"
 
 msgctxt "join team button first item"
 msgid "Join"
@@ -1422,12 +1300,10 @@ msgstr "Долучитися"
 
 msgctxt "join team button second item"
 msgid "Now"
-msgstr "зараз"
+msgstr "Зараз"
 
-#, fuzzy
-#| msgid "View on page"
 msgid "View on Facebook"
-msgstr "Переглянути на сторінці"
+msgstr "Переглянути на Facebook"
 
 msgid "Group:"
 msgstr "Спільнота:"
@@ -1436,7 +1312,7 @@ msgid "No Description set"
 msgstr "Опис не створено"
 
 msgid "more"
-msgstr "Більше"
+msgstr "більше"
 
 msgid "Report offensive content"
 msgstr "Повідомити про образливий зміст"
@@ -1500,54 +1376,39 @@ msgstr "Ви дійсно бажаєте видалити цей проект?"
 msgid "%(team_name)s - Members"
 msgstr "Члени %(team_name)s"
 
-#, fuzzy
-#| msgid "Not a member"
 msgid "Invite a member"
-msgstr "Не член"
+msgstr "Запросити члена"
 
 msgid "Invite user"
-msgstr ""
+msgstr "Запросити користувача"
 
-#, fuzzy
-#| msgid "Remove Member"
 msgid "Invited Members"
-msgstr "Видалити члена"
+msgstr "Запросити членів"
 
-#, fuzzy
-#| msgid "You are a member. View Group!"
 msgid "Invited to be a member"
-msgstr "Ви член. Переглянути спільноту!"
+msgstr "Запросити стати членом"
 
-#, fuzzy
-#| msgid "Toggle navigation"
 msgid "Revoke Invitation"
-msgstr "Переключення навігації"
+msgstr "Відмінити запрошення"
 
-#, fuzzy
-#| msgid "Toggle navigation"
 msgid "Decline Invitation"
-msgstr "Переключення навігації"
+msgstr "Відхилити запрошення"
 
 msgid "Accept Invitation"
-msgstr ""
+msgstr "Прийняти запрошення"
 
-#, fuzzy, python-format
-#| msgid "Do you really want to decline member „%(name)s“?"
+#, python-format
 msgid "Do you really want to revoke the invitation for member „%(name)s“?"
-msgstr "Ви дійсно бажаєте відмовити члену %(name)s?"
+msgstr "Ви дійсно бажаєте відмінити запрошення члена %(name)s?"
 
 msgid "Revoke Invitation for Member"
-msgstr ""
+msgstr "Відмінити запрошення члена"
 
-#, fuzzy
-#| msgid "Do you really want to decline member „%(name)s“?"
 msgid "Do you really want to decline the invitation?"
-msgstr "Ви дійсно бажаєте відмовити члену %(name)s?"
+msgstr "Ви дійсно бажаєте віхилити запрошення?"
 
-#, fuzzy
-#| msgid "There are no projects."
 msgid "There are no pending invitations."
-msgstr "Немає жодного проекту."
+msgstr "Немає актуальних запрошень."
 
 msgid "Membership requests"
 msgstr "Запити членства"
@@ -1579,22 +1440,22 @@ msgid "There are no new membership requests."
 msgstr "Нових запитів членства немає."
 
 msgid "Invite People to Register and Join"
-msgstr ""
+msgstr "Запросити людей зареєструватися та приєднатися"
 
-#, fuzzy
-#| msgid "Not a member"
 msgid "Invite people"
-msgstr "Не член"
+msgstr "Запросити людей"
 
 msgid "All currently invited people"
-msgstr ""
+msgstr "Всі ті, кого наразі запросили"
 
 msgid "People currently invited by you"
-msgstr ""
+msgstr "Люди, яких наразі запросили Ви"
 
 msgctxt "an action done *by* <username>"
 msgid "by"
 msgstr ""
+"Дії, здійснені\n"
+" *by*<username>"
 
 msgid "Send Message"
 msgstr "Надіслати повідомлення"
@@ -1641,7 +1502,7 @@ msgstr "Та інших прихованих користувачів %(hidden_c
 
 #, python-format
 msgid "Show all of the other %(more_count)s users..."
-msgstr ""
+msgstr "Відобразити всіх інших %(more_count)s користувачів..."
 
 #, python-format
 msgid "Export Team “%(team_name)s”"
@@ -1672,13 +1533,13 @@ msgid "Edit Project"
 msgstr "Редагувати проект"
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
-msgstr ""
+msgstr "В одному з полів, в які Ви увійшли сталася помилка. Будь ласка, виправьте перед тим як зберегти!"
 
 msgid "General"
 msgstr "Загальна інформація"
 
 msgid "Facebook-Integration"
-msgstr ""
+msgstr "Інтеграція з Facebook"
 
 msgid "Enter a name for the group."
 msgstr "Уведіть назву для спільноти."
@@ -1692,13 +1553,11 @@ msgstr "При збереженні зображення буде видален
 msgid "A picture for better recognition."
 msgstr "Зображення для кращої впізнаваності."
 
-#, fuzzy
-#| msgid "File"
 msgid "File Size"
-msgstr "Файл"
+msgstr "Розмір Файлу"
 
 msgid "max. 10 MB"
-msgstr ""
+msgstr "max. 10 MB"
 
 msgid "Description and Infos"
 msgstr "Опис та інформація"
@@ -1715,15 +1574,11 @@ msgstr "У якій сфері ви активно працюєте?"
 msgid "Enter a place or address."
 msgstr "Уведіть місце або адресу."
 
-#, fuzzy
-#| msgid "My location"
 msgid "Remove location"
-msgstr "Моє місцезнаходження"
+msgstr "Прибрати місцезнаходження"
 
-#, fuzzy
-#| msgid "My location"
 msgid "Add location"
-msgstr "Моє місцезнаходження"
+msgstr "Додати місцезнаходження"
 
 msgid "Which Group does the group belong to?"
 msgstr "До якої спільноти належить проект?"
@@ -1732,36 +1587,34 @@ msgid "Select Group"
 msgstr "Вибрати спільноту"
 
 msgid "Are there any projects/groups related to this one?"
-msgstr ""
+msgstr "Існують пов'язані проекти/групи?"
 
-#, fuzzy
-#| msgid "Deactivate Project/Group"
 msgid "Select related Projects/Groups"
-msgstr "Деактивувати проект/спільноту"
+msgstr "Обрати пов'язані проекти/спільноти"
 
 msgid "Privacy"
-msgstr "Хто може бачити?"
+msgstr "Приватність"
 
 msgid "This group will be set to be publicly visible!"
-msgstr ""
+msgstr "Ця спільнота має бути налаштована як публічно видима!"
 
 msgid "This project will be set to be publicly visible!"
-msgstr ""
+msgstr "Цей проект має бути налаштований як публічно видимий!"
 
 msgid "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
-msgstr ""
+msgstr "Це означає, що кожен зареєстрований користувач отримує доступ і зможе все бачити, не зважаючи на те, що лише члени можуть створювати контент. Додатково, весь контент за замовченням буде встановлено як публічно видимий (це можна змінити для кожного елементу при створенні). Публічно видимий контент може бачити КОЖЕН в Інтергенті і його можна потенційно включити в результати пошукових машин!"
 
 msgid "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the public visibility setting!"
-msgstr ""
+msgstr "Адміністратор спільноти чи проекту несе відповідальність за контент, який постять члени, в тому числі за порушення авторських прав та інших законів. Будь ласка, візьміть до уваги, особливо, вмикаючи можливість публічного доступу!"
 
 msgid "If you do not wish this, you can change the visibility setting above."
-msgstr ""
+msgstr "Якщо ви цього не бажаєте, ви можете зверху змінити налаштування приватності."
 
 msgid "Which apps should be activated?"
 msgstr "Які застосунки потрібно використовувати?"
 
 msgid "This App can only be activated for a Group, but not for a Project!"
-msgstr ""
+msgstr "Цей додаток можна активувати для групи, але не для проекту!"
 
 msgid "Describe your activities and goals"
 msgstr "Опишіть вашу діяльність та цілі"
@@ -1788,101 +1641,85 @@ msgid "Contact info. How you can be reached, addresses, social media, etc..."
 msgstr "Як можна з вами зв'язатися: адреси, соціальні медіа і т. п."
 
 msgid "From which apps should public items be shown on the microsite?"
-msgstr ""
+msgstr "Публічні елементи з якого додатку мають бути показані на мікросайті?"
 
-#, fuzzy
-#| msgid "Valid to"
 msgid "Video"
-msgstr "Дійсний до"
+msgstr "Відео"
 
 msgid "Youtube or Vimeo URL"
-msgstr ""
+msgstr "Youtube чи Vimeo URL"
 
 msgid "Twitter: Embedded User Timeline"
-msgstr ""
+msgstr "Twitter: додана стрічка користувача"
 
-#, fuzzy
-#| msgid "User profile: %(username)s"
 msgid "Twitter Username (example: @username)"
-msgstr "Профіль користувача/-ки: %(username)s"
+msgstr "Twitter Ім'я користувача (приклад: @username)"
 
 msgid "Twitter: Embedded Hashtag or Custom Timeline"
-msgstr ""
+msgstr "Twitter: дозволити Hashtag чи стрічку клієнта"
 
 msgid "You can create a custom twitter timeline here:"
-msgstr ""
+msgstr "Ви можете створити службову:"
 
 msgid "Widget-id (example: 744907261810618721) or embed-code (HTML)"
-msgstr ""
+msgstr "Widget-id (приклад: 744907261810618721) чи прикріплений код (HTML)"
 
 msgid "Embed Flickr Gallery"
-msgstr ""
+msgstr "Прикріплена галерея Flickr"
 
 msgid "Flickr Gallery URL (example: \"https://www.flickr.com/photos/username/sets/1234567890\")"
-msgstr ""
+msgstr "Flickr галерея URL (приклад: \"https://www.flickr.com/photos/username/sets/1234567890\")"
 
-#, fuzzy
-#| msgid "Microsite Wallpaper"
 msgid "Microsite Gallery Images"
-msgstr "Фон мікросайту"
+msgstr "Мікросайт Галерея зображень"
 
 msgid "Choose and upload a gallery image"
-msgstr ""
+msgstr "Обрати та завантажити зображення галереї"
 
-#, fuzzy
-#| msgid "Microsite Wallpaper"
 msgid "Remove gallery image"
-msgstr "Фон мікросайту"
+msgstr "Прибрати зображення галереї"
 
-#, fuzzy
-#| msgid "Wallpaper image"
 msgid "Add gallery image"
-msgstr "Фонове зображення"
+msgstr "Додати зображення галереї"
 
 msgid "Show Microsite Call to Action Box"
-msgstr ""
+msgstr "Показати Заклик до Дії на мікросайті"
 
 msgid "Show Call to Action Box"
-msgstr ""
+msgstr "Показати вікно Заклик до Дії"
 
 msgid "Call to Action Box Title"
-msgstr ""
+msgstr "Назва Заклику до дії"
 
 msgid "Title of the box header"
-msgstr ""
+msgstr "Верхній колонтитул вікна"
 
-#, fuzzy
-#| msgid "Description and Infos"
 msgid "Description text inside the box"
-msgstr "Опис та інформація"
+msgstr "Описовий текст в середині вікна"
 
 msgid "Call to Action Button"
-msgstr ""
+msgstr "Кнопка Заклик до Дії"
 
 msgid "Label of the Button"
-msgstr ""
+msgstr "Назва кнопки"
 
 msgid "Link URL"
-msgstr ""
+msgstr "Посилання URL"
 
-#, fuzzy
-#| msgid "Remove Member"
 msgid "Remove button"
-msgstr "Видалити члена"
+msgstr "Видалити кнопку"
 
 msgid "Add button"
-msgstr ""
+msgstr "Додати кнопку"
 
 msgid "Facebook integration is available after you created the group!"
-msgstr ""
+msgstr "Інтеграція з Facebook можлива після того як Ви створили спільноту!"
 
 msgid "Facebook integration is available after you created the project!"
-msgstr ""
+msgstr "Інтеграція з Facebook можлива після того як Ви створили проект!"
 
-#, fuzzy
-#| msgid "Toggle navigation"
 msgid "Invitations"
-msgstr "Переключення навігації"
+msgstr "Запрошення"
 
 msgid "Related to"
 msgstr "Відноситься до"
@@ -1922,10 +1759,8 @@ msgstr "Немає жодної спільноти."
 msgid "There are no projects."
 msgstr "Немає жодного проекту."
 
-#, fuzzy
-#| msgid "There are no projects."
 msgid "There are no invitations."
-msgstr "Немає жодного проекту."
+msgstr "Немає запрошень."
 
 msgid "Map"
 msgstr "Мапа"
@@ -1936,18 +1771,14 @@ msgstr "Не задоволені тим, як виглядає ваш мікр�
 msgid "Change it here..."
 msgstr "Змініть це тут..."
 
-#, fuzzy
-#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
 msgid "You have been invited to collaborate!"
-msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
+msgstr "Вас запросили до співпраці!"
 
-#, fuzzy
-#| msgid "Register"
 msgid "Register and join!"
-msgstr "Зареєструватися"
+msgstr "Зареєструватися і долучитися!"
 
 msgid "Join now and collaborate!"
-msgstr ""
+msgstr "Увійдіть і почніть співпрацю!"
 
 msgid "Register"
 msgstr "Зареєструватися"
@@ -1955,30 +1786,20 @@ msgstr "Зареєструватися"
 msgid "Login"
 msgstr "Вхід в систему"
 
-#, fuzzy
-#| msgid "You are a member. View Group!"
 msgid "You are a member!"
-msgstr "Ви член. Переглянути спільноту!"
+msgstr "Тепер ви член!"
 
-#, fuzzy
-#| msgid "Edit Project"
 msgid "View Project"
-msgstr "Редагувати проект"
+msgstr "Переглянути проект"
 
-#, fuzzy
-#| msgid "Edit Group"
 msgid "View Group"
-msgstr "Редагувати спільноту"
+msgstr "Переглянути спільноту"
 
-#, fuzzy
-#| msgid "Membership requested"
 msgid "Membership request pending..."
-msgstr "Надіслано запит членства"
+msgstr "Запит щодо членства очікує..."
 
-#, fuzzy
-#| msgid "You are a member. View Group!"
 msgid "You are invited!"
-msgstr "Ви член. Переглянути спільноту!"
+msgstr "Вас запросили!"
 
 msgid "Collaborate!"
 msgstr "Долучитися!"
@@ -1986,10 +1807,8 @@ msgstr "Долучитися!"
 msgid "Join now!"
 msgstr "Долучитися зараз!"
 
-#, fuzzy
-#| msgid "Browse..."
 msgid "Browse"
-msgstr "Вибрати файл..."
+msgstr "Передивитися"
 
 msgid "Public Project"
 msgstr "Публічний проект"
@@ -2000,69 +1819,47 @@ msgstr "Публічна спільнота"
 msgid "News posts"
 msgstr "Новини"
 
-#, fuzzy
-#| msgid "Activate Project"
 msgid "About the Project"
-msgstr "Активувати проект"
+msgstr "Про проект"
 
-#, fuzzy
-#| msgid "About me"
 msgid "About the Group"
-msgstr "Про мене"
+msgstr "Про групу"
 
-#, fuzzy
-#| msgid "There are no projects in this group yet."
 msgid "There is no description for this project yet."
-msgstr "У цій спільноті немає жодного проекту."
+msgstr "В проекті поки немає опису."
 
-#, fuzzy
-#| msgid "There are no projects in this group yet."
 msgid "There is no description for this group yet."
-msgstr "У цій спільноті немає жодного проекту."
+msgstr "В групі поки немає опису."
 
-#, fuzzy
-#| msgid "Re-Activate Project/Group"
 msgid "Related Projects/Groups"
-msgstr "Повторно активувати проект/спільноту"
+msgstr "Пов'язані проекти/спільноти"
 
-#, fuzzy
-#| msgid "Save"
 msgid "Share"
-msgstr "Зберегти"
+msgstr "Поширити"
 
-#, fuzzy
-#| msgid "View on page"
 msgid "Share on Facebook"
-msgstr "Переглянути на сторінці"
+msgstr "Поширити на Facebook"
 
 msgid "Contact"
 msgstr "Контакти"
 
 msgid "No contact data has been added yet."
-msgstr ""
+msgstr "Поки не було додано контактних даних."
 
-#, fuzzy
-#| msgid "Portal Administrators"
 msgid "Project Administrator"
-msgstr "Адміністратори порталу"
+msgstr "Адміністратори проекту"
 
-#, fuzzy
-#| msgid "Portal Administrators"
 msgid "Group Administrator"
-msgstr "Адміністратори порталу"
+msgstr "Адміністратори спільноти"
 
-#, fuzzy
-#| msgid "Text"
 msgid "Tweets"
-msgstr "Текст"
+msgstr "Твіти"
 
 msgid "Flickr Gallery"
-msgstr ""
+msgstr "Галерея Flickr"
 
-#, fuzzy
-#| msgid "Tag location"
 msgid "Call to Action"
-msgstr "Вказати місце"
+msgstr "Заклик до дії"
 
 #, python-format
 msgid "Users in team %(group)s"
@@ -2089,10 +1886,8 @@ msgstr "Усі користувачі"
 msgid "Portal Administrators"
 msgstr "Адміністратори порталу"
 
-#, fuzzy
-#| msgid "All projects"
 msgid "All societies"
-msgstr "Усі проекти"
+msgstr "Усі спільноти"
 
 msgid "Re-activate Group"
 msgstr "Повторно активувати спільноту"
@@ -2121,10 +1916,9 @@ msgstr "Перемістити у іншу папку"
 msgid "Move"
 msgstr "Перемістити"
 
-#, fuzzy, python-format
-#| msgid "You were tagged in: \"%(object_name)s\", in %(team_name)s"
+#, python-format
 msgid "A message from %(sender_full_name)s"
-msgstr "Вас позначено: «%(object_name)s» у %(team_name)s"
+msgstr "Повідомлення від %(sender_full_name)s"
 
 msgid "Edit folder"
 msgstr "Редагувати папку"
@@ -2168,6 +1962,9 @@ msgid ""
 "\n"
 "Here is a summary: %(msg)s"
 msgstr ""
+"%(site_name)s CSV імпорт не успішний!\n"
+"\n"
+"Тут узагальнення: %(msg)s"
 
 #, python-format
 msgid ""
@@ -2175,6 +1972,9 @@ msgid ""
 "\n"
 "Here is why: %(msg)s"
 msgstr ""
+"Імпорт CSV на %(site_name)s не успішний.\n"
+"\n"
+"Тут причина:%(msg)s"
 
 #, python-format
 msgid ""
@@ -2182,10 +1982,13 @@ msgid ""
 "\n"
 "Here is a summary: %(msg)s"
 msgstr ""
+"Імпорт CSV на %(site_name)s був успішний.\n"
+"\n"
+"Тут узагальнення: %(msg)s"
 
 #, python-format
 msgid "%(site_name)s CSV import was successful"
-msgstr ""
+msgstr "%(site_name)s імпорт CSV був успішним"
 
 #, python-format
 msgid ""
@@ -2279,24 +2082,25 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
+"Вітання, %(user_name)s,\n"
+"\n"
+"Ви тільки що змінили свою електронну адресу на %(site_name)s.\n"
+"\n"
+"Ви маєте верифікувати свою електронну адресу %(user_email)s перед тим як зміни вступлять у силу.\n"
+"\n"
+"\n"
+"Будь ласка,пройдіть за цим лінком, щоб верифікувати Вашу електронну адресу (або скопіювати і вставити посилання у Ваш браузер):\n"
+"%(domain_url)s%(user_verification_url)s\n"
+"\n"
+"\n"
+"\n"
+"Ваша %(site_name)s Команда"
 
 #, python-format
 msgid "Please verify your email address for %(site_name)s!"
-msgstr "будь ласка пiдтверди свою емейл адресу для %(site_name)s!"
+msgstr "Будь ласка, пiдтверіть свою електронну адресу для %(site_name)s!"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "User \"%(sender_name)s\" has requested to join %(team_name)s.\n"
-#| "\n"
-#| "Please go to the following page to accept or decline the request:\n"
-#| "%(domain_url)s%(group_page_url)s\n"
-#| "\n"
-#| "You're receiving this email because you are an administrator of this team.\n"
-#| "\n"
-#| "(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-#| "\n"
-#| "\n"
-#| "Your %(site_name)s Team"
+#, python-format
 msgid ""
 "User \"%(sender_name)s\" has accepted the invitation to join \"%(team_name)s\".\n"
 "\n"
@@ -2307,36 +2111,20 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
-"Користувач/-ка «%(sender_name)s» хоче долучитися до спільноти %(team_name)s.\n"
+"Користувач/-ка «%(sender_name)s» прийняв запрошення щодо членства у %(team_name)s.\n"
 "\n"
-"Будь ласка, перейдіть на наступну сторінку, щоб підтвердити запит або відмовити:\n"
-"%(domain_url)s%(group_page_url)s\n"
+"Ви отримуєте це повідомлення, бо Ви є адміністратором цієї команди.\n"
 "\n"
-"Ви отримали цей лист, тому що ви адміністратор/-ка цієї/цього спільноти/проекту.\n"
-"\n"
-"(Перейдіть за цим посиланням, щоб редагувати ваші налаштування сповіщення: %(notification_settings_url)s )\n"
+"(Перейдіть за цим посиланням, щоб редагувати Ваші налаштування сповіщення: %(notification_settings_url)s )\n"
 "\n"
 "\n"
 "З повагою, команда %(site_name)s"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+#, python-format
 msgid "%(sender_name)s has accepted the invitation to %(team_name)s on %(site_name)s!"
-msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
+msgstr "%(sender_name)s прийняв запрошення долучитися до %(team_name)s на %(site_name)s!"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "User \"%(sender_name)s\" has requested to join %(team_name)s.\n"
-#| "\n"
-#| "Please go to the following page to accept or decline the request:\n"
-#| "%(domain_url)s%(group_page_url)s\n"
-#| "\n"
-#| "You're receiving this email because you are an administrator of this team.\n"
-#| "\n"
-#| "(Follow this link to edit your notification preferences: %(notification_settings_url)s )\n"
-#| "\n"
-#| "\n"
-#| "Your %(site_name)s Team"
+#, python-format
 msgid ""
 "User \"%(sender_name)s\" has declined the invitation to join \"%(team_name)s\".\n"
 "\n"
@@ -2347,28 +2135,20 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
-"Користувач/-ка «%(sender_name)s» хоче долучитися до спільноти %(team_name)s.\n"
+"Користувач/-ка «%(sender_name)s» відхилив запрошення до %(team_name)s.\n"
 "\n"
-"Будь ласка, перейдіть на наступну сторінку, щоб підтвердити запит або відмовити:\n"
-"%(domain_url)s%(group_page_url)s\n"
-"\n"
-"Ви отримали цей лист, тому що ви адміністратор/-ка цієї/цього спільноти/проекту.\n"
+"Ви отримали цей лист, тому що Ви - адміністратор/-ка цієї/цього спільноти/проекту.\n"
 "\n"
 "(Перейдіть за цим посиланням, щоб редагувати ваші налаштування сповіщення: %(notification_settings_url)s )\n"
 "\n"
 "\n"
 "З повагою, команда %(site_name)s"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+#, python-format
 msgid "%(sender_name)s has declined the invitation to %(team_name)s on %(site_name)s!"
-msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
+msgstr "%(sender_name)s відзилив запрошення долучитися до %(team_name)s на %(site_name)s!"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "Hi, %(user_name)s!\n"
-#| "\n"
-#| "Your membership request for %(team_name)s has been accepted!"
+#, python-format
 msgid ""
 "Hi, %(user_name)s!\n"
 "\n"
@@ -2377,7 +2157,8 @@ msgid ""
 msgstr ""
 "Вітаємо, %(user_name)s!\n"
 "\n"
-"Ваше прохання про членство у проекті %(team_name)s було задовільнено!"
+"\n"
+"Вас запросили долучитися до \"%(team_name)s\"! Пройдіть за посиланням знизу, щоб долучитися і брати активну участь в діяльності!"
 
 #, python-format
 msgid "The %(site_name)s team"
@@ -2477,24 +2258,7 @@ msgstr ""
 msgid "New user request: %(user_name)s wants to join %(site_name)s!"
 msgstr "Нова реєстрація: %(user_name)s хоче долучитися до %(site_name)s!"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "Hallo, %(user_name)s! Herzlich willkommen bei %(site_name)s! \n"
-#| "\n"
-#| "Du kannst dich ab sofort unter %(domain_url)s einloggen.\n"
-#| "\n"
-#| "Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.\n"
-#| "\n"
-#| "\n"
-#| "Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, ist die Standardeinstellung bei der Option \"Benachrichtigungseinstellungen\" in dieser Gruppe auf \"alle Benachrichtigungen\" gesetzt. Das kannst du einfach entsprechend deines Informationsbedürfnisses individuell einstellen (Klick rechts oben auf deinen Namen), damit du nicht zu viele ungewünschte Emails bekommst.\n"
-#| "\n"
-#| "Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert ist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
-#| "\n"
-#| "Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern bei den Portaladministrator_innen: %(domain_url)s%(portal_admin_url)s \n"
-#| "\n"
-#| "\n"
-#| "Viele Grüße und viel Spaß hier,\n"
-#| "dein %(site_name)s Team"
+#, python-format
 msgid ""
 "Hallo, %(user_name)s! Herzlich willkommen bei %(site_name)s! \n"
 "\n"
@@ -2515,18 +2279,18 @@ msgid ""
 msgstr ""
 "Вітаємо, %(user_name)s! Ласкаво просимо на %(site_name)s! \n"
 "\n"
-"З цього моменту ви можете входити у систему за наступним посиланням %(domain_url)s.\n"
+"З цього моменту ви можете заходити в систему за таким посиланням %(domain_url)s.\n"
 "\n"
-"Ми раді тому, що ви бажаєте користуватися платформою. Щоб познайомитися з найважливішими функціями, перегляньте відео (якщо ще не переглядали) на нашій головній сторінці. Щоб перейти на головну сторінку натисніть на логотип порталу зверху.\n"
+"Ми раді тому, що ви бажаєте користуватися платформою. Щоб ознайомитися з найважливішими функціями, перегляньте відео (якщо ще не переглядали) на нашій головній сторінці. Щоб перейти на головну сторінку натисніть на логотип порталу зверху зліва.\n"
 "\n"
+"Спершу деяка інформація: зареєструвавшись, ви автоматично стаєте членом спільноти «Форум» де міститься уся інформація порталу. Щоб мати уявлення про те, що тут відбувається, у стандартних налаштуваннях функції «Налаштування сповіщення» у цій спільноті вибрано «Усі сповіщення». Цю функцію ви можете легко налаштувати відповідно до ваших особистих потреб (натисніть у правому верхньому кутку на ваше ім'я). Для того, щоб Ви не отримувати надто багато небажаних сповіщень, стандартні налаштування передбачають \"Жодних сповіщень\".\n"
 "\n"
-"Спершу деяка інформація: зареєструвавшись, ви автоматично стаєте членом спільноти «Форум» де міститься уся інформація порталу. Щоб мати уявлення про те, що тут відбувається, у стандартних налаштуваннях функції «Налаштування сповіщення» у цій спільноті вибрано «Усі сповіщення». Цю функцію ви можете легко налаштувати відповідно до ваших потреб (натисніть у правому верхньому кутку на ваше ім'я), щоб не отримувати надто багато небажаних сповіщень.\n"
+"Для всіх спільнот та проектів, до яких Ви бажаєте долучитися, стандартні налаштування передбачають \"всі сповіщення\". Це Ви також можете змінити потім.\n"
 "\n"
-"І ще дещо важливе: цей портал лише один із багатьох на wechange.de. Якщо ви бажаєте переглянути інші портали, ви можете просто увійти з існуючими даними для входу. Якщо ви зареєстровані на декількох порталах, у розділі «Діяльність» (ліворуч у верхньому меню) відображаються усі новини кожної спільноти та кожного проекту, у яких ви є членом.\n"
-"Натискаючи на різні логотипи, можна переходити до відповідного порталу. Якщо ви зареєстровані у інших порталах ви хочете стати членом Форуму, вам просто необхідно надіслати запит членства.\n"
+"І ще дещо важливе: цей портал лише один із багатьох на wechange.de. Якщо Ви бажаєте переглянути інші портали, ви можете просто увійти з існуючими даними для входу. Якщо ви зареєстровані на декількох порталах, у розділі «Діяльність» (ліворуч у верхньому меню) відображаються усі новини кожної спільноти та кожного проекту, у яких ви є членом.\n"
+"Натискаючи на різні логотипи, можна переходити до відповідного порталу. Якщо ви зареєстровані у інших порталах ви хочете стати членом Форуму, вам просто необхідно надіслати запит щодо членства.\n"
 "\n"
-"Якщо у вас є запитання, пропозиції, побажання або виникають повідомлення про помилки, звертайтеся до адміністраторів порталу: %(domain_url)s%(portal_admin_url)s \n"
-"\n"
+"Якщо у вас є запитання, пропозиції, побажання або виникають повідомлення про помилки, звертайтеся до адміністраторів порталу.\n"
 "\n"
 "З найкращими побажаннями,\n"
 "ваша команда %(site_name)s"
@@ -2619,6 +2383,17 @@ msgid ""
 "\n"
 "%(domain_url)s"
 msgstr ""
+"Вітання, %(user_name)s,\n"
+"\n"
+"Ви тільки що прийняли Умови користування на %(site_name)s. Тут копія для Вашої інформації.\n"
+"\n"
+"\n"
+"%(tos_content)s\n"
+"\n"
+"\n"
+"Ваша %(site_name)s Команда \n"
+"\n"
+"%(domain_url)s"
 
 msgid "Tag persons"
 msgstr "Вказати людей"
@@ -2633,10 +2408,10 @@ msgid "Select topic"
 msgstr "Вказати тему"
 
 msgid "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
-msgstr ""
+msgstr "Цей елемент буде опубліковано як публічно видимий! Це означає, що будь-хто в Інтернеті може отримати до нього доступ і він потенційно може бути включений в результати пошукових машин."
 
 msgid "If you do not wish this, you can change this item's visibility setting below."
-msgstr ""
+msgstr "Якщо Ви цього не хочете, Ви можете змінити налаштування приватності елемента нижче."
 
 msgid "Add attachment"
 msgstr "Додати додаток"
@@ -2651,7 +2426,7 @@ msgid "Change privacy"
 msgstr "Налаштувати приватність"
 
 msgid "Connect Facebook Account"
-msgstr ""
+msgstr "Пов'язати з аккаунтом на Facebook"
 
 msgid "Which topics are you involved with?"
 msgstr "З якими темами ви працюєте?"
@@ -2684,7 +2459,7 @@ msgid "Who is allowed to see you on the platform?"
 msgstr "Хто може бачити вас на платформі?"
 
 msgid "Logged in Members only"
-msgstr ""
+msgstr "Тільки зареєстровані члени"
 
 msgid "Everybody"
 msgstr "Усі"
@@ -2722,10 +2497,8 @@ msgstr "Форум"
 msgid "People"
 msgstr "Люди"
 
-#, fuzzy
-#| msgid "Remove Member"
 msgid "Invited Groups"
-msgstr "Видалити члена"
+msgstr "Запросити групи"
 
 msgid "My Groups"
 msgstr "Мої спільноти"
@@ -2733,10 +2506,8 @@ msgstr "Мої спільноти"
 msgid "All Groups"
 msgstr "Усі спільноти"
 
-#, fuzzy
-#| msgid "Edit Project"
 msgid "Invited Projects"
-msgstr "Редагувати проект"
+msgstr "Запросити проекти"
 
 msgid "My Projects"
 msgstr "Мої проекти"
@@ -2891,13 +2662,11 @@ msgstr "Прізвище"
 
 msgctxt "read and accept the [Terms of Services]"
 msgid "I have read and accept the"
-msgstr ""
+msgstr "Я прочитав та приймаю"
 
 msgid "Terms and Services"
-msgstr ""
+msgstr "Угода користувача"
 
-#, fuzzy
-#| msgid "Login"
 msgid "Log in"
 msgstr "Вхід в систему"
 
@@ -2907,45 +2676,35 @@ msgstr "Пошук"
 msgid "Search in Apps"
 msgstr "Пошук серед застосунків"
 
-#, fuzzy
-#| msgid "Etherpads"
 msgid "Ethercalcs"
-msgstr "Документи"
+msgstr "Таблиці"
 
 msgid "Offers"
-msgstr ""
+msgstr "Оголошення"
 
 msgid "Search in teams"
 msgstr "Пошук серед проектів"
 
-#, fuzzy
-#| msgid "Re-Activate Project/Group"
 msgid "All Projects and Groups"
-msgstr "Повторно активувати проект/спільноту"
+msgstr "Всі проекти та спільноти"
 
-#, fuzzy
-#| msgid "Re-Activate Project/Group"
 msgid "My Projects and Groups"
-msgstr "Повторно активувати проект/спільноту"
+msgstr "Мо"
 
-#, fuzzy
-#| msgid "Other Projects"
 msgid "Other Projects and Groups"
-msgstr "Інші проекти"
+msgstr "Інші проекти та групи"
 
-#, fuzzy
-#| msgid "Search in teams"
 msgid "Search for Users"
-msgstr "Пошук серед проектів"
+msgstr "Пошук користувачів"
 
 msgid "We could not find any results matching your search query."
-msgstr ""
+msgstr "Ми не можемо знайти результатів, що відповідають Вашому пошуку."
 
 msgid "previous"
-msgstr "Назад"
+msgstr "назад"
 
 msgid "next"
-msgstr "Далі"
+msgstr "далі"
 
 msgid "About me"
 msgstr "Про мене"
@@ -2955,13 +2714,13 @@ msgstr "Редагувати профіль"
 
 #, python-format
 msgid "Your account is currently connected with the Facebook account \"%(name)s\". Do you really want to disconnect your Facebook account? This will also revoke all permissions you granted us to your Facebook account."
-msgstr ""
+msgstr "Ваш акаунт наразі пов'язаний з Facebook акаунтом\"%(name)s\". Ви насправді хочете від'єднати Ваш Facebook акаунт? Це відізве всі дозволи, які ви надали своєму Facebook акаунту."
 
 msgid "Disconnect Facebook Account"
-msgstr ""
+msgstr "Від'єднати Facebook акаунт"
 
 msgid "Disconnect Facebook"
-msgstr ""
+msgstr "Від'єднати Facebook"
 
 msgid "Delete profile"
 msgstr "Видалити профіль"
@@ -3043,150 +2802,148 @@ msgid "User Dashboard"
 msgstr "Моя інформаційна панель"
 
 msgid "Enable posting to Facebook"
-msgstr ""
+msgstr "Дозволити публікування на Facebook"
 
 msgid "Loading Facebook-Scripts..."
-msgstr ""
+msgstr "Завантаження Facebook скріптів..."
 
 msgid "If nothing happens please disable any addons like Ghostery or NoScript..."
-msgstr ""
+msgstr "Якщо нічого не станеться, будь ласка, вийдіть з таких додатків як Ghostery чи NoScript..."
 
 msgctxt "Facebook connect explanation box"
 msgid "Why connect?"
-msgstr ""
+msgstr "Чому пов'язати?"
 
 msgctxt "Facebook connect explanation box"
 msgid "When you connect your Facebook account you can easily publish your news posts on your Facebook timeline. You can also connect your projects/groups to a Facebook Group or Fan-Site to enable members to publish their news posts there, too."
-msgstr ""
+msgstr "Якщо ви пов'язуєте Ваш Facebook акаунт, Ви зможете легко публікувати Ваші новини у стрічку Facebook. Ви зможете поєднати Ваші групи/проекти з Facebook Групою та фан-сторінкою, щоб дати можливість членам також публікувати свої новини."
 
 msgctxt "Facebook connect explanation box"
 msgid "For that, we need your permission to publish on Facebook in your name."
-msgstr ""
+msgstr "Для цього нам потрібен Ваш дозвіл, щоб публікувати інформацію на Facebook від Вашого імені."
 
 msgctxt "Facebook connect explanation box list header"
 msgid "We guarantee:"
-msgstr ""
+msgstr "Ми гарантуємо: "
 
 msgctxt "Facebook connect explanation box list items"
 msgid "We will only post exactly what you have written"
-msgstr ""
+msgstr "Ми будемо публікувати в точності те, що Ви написали"
 
 msgctxt "Facebook connect explanation box list items"
 msgid "We will only post with your explicit consent for every news post, and never automatically"
-msgstr ""
+msgstr "Ми будемо публікувати виключно з Вашої чіткої згоди і ніколи автоматично"
 
 msgctxt "Facebook connect explanation box list items"
 msgid "Except for your name and profile picture, we will obtain absolutely no other data from your Facebook account"
-msgstr ""
+msgstr "Окрім Вашого імені та фото профіля, ми не будемо отримувати жодної інформації з Вашого Facebook акаунта"
 
 #, python-format
 msgctxt "Facebook connect explanation box list items"
 msgid "You can revoke your permission at any time from your %(site_name)s profile settings"
-msgstr ""
+msgstr "Ви можете забрати Ваш дозвіл у будь-який час у ваших %(site_name)s налаштуваннях профіля"
 
 msgid "Log in with Facebook"
-msgstr ""
+msgstr "Зайти з Facebook"
 
 msgid "Also post this to my Facebook timeline"
-msgstr ""
+msgstr "Додати це також до моєї Facebook стрічки"
 
 msgid "When you submit this post, it will be posted on your Facebook timeline exactly as seen."
-msgstr ""
+msgstr "Коли ви опублікуєте цей допис, його буде розміщено у Вашій Facebook стрічці точно так як він виглядає."
 
 msgid "Also post this to this project/group's Facebook Fan-Page"
-msgstr ""
+msgstr "Також опублікувати це на Facebook фан-сторінці проекту/спільноти"
 
 msgid "Also post this as a visitor's post to this project/group's Facebook Fan-Page"
-msgstr ""
+msgstr "Також опублікувати це як гостьовий допис на Facebook фан-сторінці проекту/спільноти"
 
 msgid "If you are an Editor of the Fan-Page on Facebook, confirm your Editor access to post in the voice of that Fan-Page!"
-msgstr ""
+msgstr "Якщо Ви є редактором фан-сторінки на Facebook, підтвердіть свій редакторський доступ, щоб опублікувати це від імені фан-сторінці!"
 
 msgctxt "a link to click on"
 msgid "You can do this here"
-msgstr ""
+msgstr "Ви можете зробити це тут"
 
 msgid "Also post this to this project/group's Facebook Group"
-msgstr ""
+msgstr "Також опублікувати це в Facebook спільноті цього проекту/спільноти"
 
 msgid "When you submit this post, it will be posted to the Facebook Fan-Page of this project/group, in the voice of that Fan-Page."
-msgstr ""
+msgstr "Якщо ви публікуєте цей пост, його буде розміщено на Facebook фан-сторінці проекту/групи, від імені фан-сторінки."
 
 msgid "When you submit this post, it will be posted from your Facebook Account as a visitor's post to the Facebook Fan-Page of this project/group."
-msgstr ""
+msgstr "Коли Ви опублікуєте цей допис, його буде розміщено на Вашому Facebook акауні як гостьовий пост Facebook фан-сторінки проекту/групи."
 
 msgid "When you submit this post, it will be posted from your Facebook Account, exactly as seen, on the Facebook Group of this project/group."
-msgstr ""
+msgstr "Коли ви опублікуєте цей допис, його буде розміщено від імені Вашого Facebook акаунта, точно як він виглядає на Facebook Групі проекту/групи."
 
 msgid "Connect a Facebook Group or Fan-Page to enable members to publish their news posts there, too!"
-msgstr ""
+msgstr "Поєднати Facebook Групу чи Фан-сторінку щоб дати можливість членам також публікувати там свої новини!"
 
 msgid "You need to connect your user account to Facebook before you can link this group/project!"
-msgstr ""
+msgstr "Ви маєте поєднати Ваш акаунт користувача з Facebook перед тим, як Ви зможете пов'язувати з групою/проектом!"
 
 msgid "Connect a Facebook Group"
-msgstr ""
+msgstr "Зв'язати з Facebook спільнотою"
 
 #, python-format
 msgid "You can connect your projects and groups to a Facebook Group. Once connected, your members can choose to share the news posts they write on %(site_name)s to the Facebook Group. (They need to connect their accounts to Facebook, as well!)"
-msgstr ""
+msgstr "Ви можете пов'язати Ваші проекти та групи з Facebook групою. Одного разу пов'язавши, Ваші члени зможуть обирати, чи поширювати їх новини на %(site_name)s в Facebook Групі. (Вони також мають пов'язати свої акаунти з Facebook!)"
 
 msgid "Please be aware that users can only post to your Group if they would also be permitted post in it on Facebook!"
-msgstr ""
+msgstr "Будь ласка, будьте свідомими, що користувачі зможуть публікувати у Вашій Групі тільки лише якщо вони матимуть дозвіл публікувати це на Facebook!"
 
 msgid "You can find the ID of your Facebook Group on the Info-page in the About tab of the Group on Facebook."
-msgstr ""
+msgstr "Ви можете знайти ID Вашої Facebook групи на сторінці Інфо у вкладці Про нас у групі на Facebook."
 
 msgid "Facebook Group to link to"
-msgstr ""
+msgstr "Facebook Група поєднана з"
 
 msgid "Group Id or name (example: 1172392116092353)"
-msgstr ""
+msgstr "Id Групи чи ім'я (приклад: 1172392116092353)"
 
 msgid "Connect a Facebook Fan-Page"
-msgstr ""
+msgstr "Зв'язати з фан-сторінкою Facebook"
 
 #, python-format
 msgid "You can connect your projects and groups to a Facebook Fan-Page. Once connected, you can publish the posts you write on %(site_name)s directly on that Fan-Page, if you are one of its administrators on Facebook."
-msgstr ""
+msgstr "Ви можете поєднати проекти та спільноти з Facebook фан-сторінкою. Одного разу поєднавши, ви можете публікувати дописи і писати напряму на %(site_name)s на тій фан-сторінці, якщо ви є одним з її адміністраторів на Facebook."
 
 msgid "All other members of your project/group can publish their posts as visitor's posts on the Fan-Page. (They need to connect their accounts to Facebook, as well!)"
-msgstr ""
+msgstr "Всі інші члени Вашого проекту/групи можуть публікувати свої пости як гості на фан-сторінці. (Їм також потрібно приєднати свої Facebook акаунти)"
 
 msgid "If you wish for other members to be able to post directly to the Fan-Page, you can make them co-administrators of your project/group (and you must make them Editors of the Fan-Page on Facebook!). They will be asked to confirm their Editor access of the Fan-Page, and then will be able to publish to it."
-msgstr ""
+msgstr "Якщо Ви бажаєте дозволити іншим членам напряму дописувати на фан-сторінку, Ви можете зробити їх адміністраторами Вашого проекту/групи (Ви також маєте зробити їх редакторами фан-сторінки на Facebook!). Їх запросять підтвердити їх редакторський доступ до фан-сторінки і потім вони зможуть публікувати дописи."
 
 msgid "The unique name of your Fan-Page is the name of the Fan-Page in the URL on Facebook (example: https://www.facebook.com/myfanpage/)"
-msgstr ""
+msgstr "Унікальне ім'я Вашої фан-сторінки - це ім'я URL фан-сторінки на Facebook (приклад: https://www.facebook.com/myfanpage/)"
 
 msgid "Facebook Fan-Page link to"
-msgstr ""
+msgstr "Пов'язати Facebook  фан-сторінку з"
 
 msgid "Choose from your Pages..."
-msgstr ""
+msgstr "ОБрати з Ваших Сторінок.."
 
 msgid "Fan-Page unique name (example: myfanpage)"
-msgstr ""
+msgstr "Унікальна назва фан-сторінки (приклад:myfanpage)"
 
 msgid "You have Editor access to this Fan-Page and can publish your posts directly to it."
-msgstr ""
+msgstr "Ви маєте редакторський доступ до фан-сторінки і можете публікувати пости прямо на ній."
 
 msgid "Editor access of your Facebook-account for this Fan-Page has not been confirmed. This is required before you can publish your posts in the voice of the Fan-Page!"
-msgstr ""
+msgstr "Редакторський доступ для вашого Facebook акаунту до цієї фан-сторінки підтверджено. Це потрібно до того як Ви зможете публікувати Ваші дописи від імені Фан-сторінки!"
 
-#, fuzzy
-#| msgid "Join now!"
 msgid "Confirm now!"
-msgstr "Долучитися зараз!"
+msgstr "Підтвердити зараз!"
 
 msgid "Select one of your Facebook pages to connect to"
-msgstr ""
+msgstr "Обрати одну з Ваших Facebook сторінок, щоб приєднати"
 
 msgid "You do not seem to be Editor or Admin of any pages."
-msgstr ""
+msgstr "Ви не є редактором чи адміністратором сторінок."
 
 msgid "We could not retrieve your groups from Facebook because of an error. Please contact an administrator!"
-msgstr ""
+msgstr "Ми не можемо від'єднати Вашу групу від Facebook через помилку. Будь ласка, зверніться до вдміністратора!"
 
 msgid "Next"
 msgstr "Далі"
@@ -3194,10 +2951,8 @@ msgstr "Далі"
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Зареєструватися та долучитися"
 
-#, fuzzy
-#| msgid "Other Projects"
 msgid "Show more Projects"
-msgstr "Інші проекти"
+msgstr "Показати більше проектів"
 
 msgid "Add Widget"
 msgstr "Додати веб-віджет"
@@ -3247,15 +3002,11 @@ msgstr "Ви не можете помістити цей веб-віджет н�
 msgid "Widget not found."
 msgstr "Веб-віджет не знайдено."
 
-#, fuzzy
-#| msgid "Convert selected Projects to Groups"
 msgid "No related projects/groups"
-msgstr "Перетворити вибрані проекти у спільноти"
+msgstr "Немає пов'язаних проектів/спільнот"
 
-#, fuzzy
-#| msgid "Russian"
 msgid "Assign"
-msgstr "Русский"
+msgstr "Призначити"
 
 msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
 msgstr "Будь ласка, прочитайте та погодьтеся з умовами користування"
@@ -3297,46 +3048,46 @@ msgid "No model given to export data from."
 msgstr "Не задано моделі для експортування даних."
 
 msgid "Your news post was also posted on your Facebook timeline."
-msgstr ""
+msgstr "Ваш новий допис також було опубліковано у Facebook стрічці."
 
 msgid "We could not post this news post on your Facebook timeline. If this problem persists, please make sure you have granted us all required Facebook permissions, or try disconnecting and re-connecting your Facebook account!"
-msgstr ""
+msgstr "Ви не можете публікувати цю новину у Вашій Facebook стрічці. Якщо ця помилка повториться, будь ласка, переконайтеся, що Ви надали нам всі необхідні дозволи Facebook, або сробували від'єднати і приєднати Facebook акаунт!"
 
 msgid "Your news post was also posted to the Facebook Fan-Page."
-msgstr ""
+msgstr "Ваша новина була опублікована на фан-сторінці у Facebook."
 
 msgid "Your news post was also posted on the Facebook Fan-Page as a visitor's post."
-msgstr ""
+msgstr "Ваш допис з новиною також було розміщено на фан-сторінці у Facebook як гостьовий допис."
 
 msgid "Your news post was also posted in the Facebook Group."
-msgstr ""
+msgstr "Ваш допис з новиною було також розміщено у Facebook групі."
 
 msgid "We could not post this news post on the Facebook Group/Fan-Page. If this problem persists, please try disconnecting and re-connecting your Facebook account and make sure you allow us to post with a visibility of at least \"Friends\". If you are trying to post as a Fan-Page, make sure you accept the necessary permissions for us to post there, and make sure you are an Editor of the Fan-Page! If this doesn't work, contact this project/group's administrator!"
-msgstr ""
+msgstr "Ви не можете опублікувати цю новину в Facebook спільноті/фан-сторінці. Якщо проблема повториться, будь ласка спробуйте вийти та зайти на свій аккаунт на Facebook та переконайтеся, що ви встановили правильні налаштування приватності допису. Якщо Ви намагаєтеся дописати до фан-сторінки, переконайтеся, що ви отримали необхідні дозволи для публікації там, перконайтеся також, що ви є редактором фан-сторінки! Якщо це не спрацює, сконтактуйте з адміністратором проекту/спільноти!"
 
 msgid "You can only connect to either a Facebook Group or a Fan-Page, but not both!"
-msgstr ""
+msgstr "Ви можете приєднатися до Facebook групи, або до фан-сторінки, але не до двох одночасно!"
 
 msgid "Please enter a numeric Facebook Group-ID only!"
-msgstr ""
+msgstr "Будь ласка, вводіть тільки цифровий ID Facebook спільноти!"
 
 msgid "The Facebook Fan-Page ID or Group ID could not be found on Facebook! Make sure you have entered the correct ID for your Group/Fan-Page!"
-msgstr ""
+msgstr "ID Facebook фан-сторінка чи ID групи не вдається знайти на Facebook! Переконайтеся, що ви ввели коректні ID для Вашої групи/фан-сторінки!"
 
 msgid "We could not obtain access to the Fan-Page for your connected Facebook Account. Please check that you entered the correct Fan-Page name, and that you are an Editor of that Fan-Page!"
-msgstr ""
+msgstr "Ви не можете отримати доступ до фан-сторінки, пов'язаної з Facebook акаунтом. Будь ласка, перевірте, чи Ви ввели правильне ім'я фан-сторінки і що ви є редактором фан-сторінки!"
 
 msgid "This group does not have a Facebook Fan-Page associated with it!"
-msgstr ""
+msgstr "Ця група не має пов'язаної Facebook фан-сторінки!"
 
 msgid "Your Editor access for the linked Facebook Fan-Page was confirmed!"
-msgstr ""
+msgstr "Ваш доступ редакторадл пов'язаної Facebook фан-сторінки було підтверджено!"
 
 msgid "An error occured when trying to disconnect your facebook account! Please contact an administrator!"
-msgstr ""
+msgstr "При спробі від'єднати цей акаунт від Вашого facebook акаунту сталася помилка! Будь ласка, зверніться до адміністратора!"
 
 msgid "Your Facebook account was successfully disconnected from this account."
-msgstr ""
+msgstr "Ваш Facebook акаунт було успішно від'єднано від цього акаунту."
 
 msgid "Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators."
 msgstr "Вибачте, лише адміністратори порталу можуть створювати спільноти! Ви можете створити або проект, або написати одному/одній з адміністраторів, щоб вони створили для вас спільноту. Нижче наведений перелік усіх адміністраторів."
@@ -3353,21 +3104,19 @@ msgid "The %(team_type)s was changed successfully."
 msgstr "%(team_type)s було успішно змінено."
 
 msgid "This action is not available directly!"
-msgstr ""
+msgstr "Ця дія напряму не доступна!"
 
 #, python-format
 msgid "You have requested to join the %(team_type)s “%(team_name)s”. You will receive an email as soon as a team administrator responds to your request."
 msgstr "Ваш запит членства у %(team_type)s «%(team_name)s» було надіслано. Ви отримаєте електронного листа, як тільки адміністратор/-ка проекту опрацює ваш запит."
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+#, python-format
 msgid "You had already been invited to \"%(team_name)s\" and have now been made a member immediately!"
-msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
+msgstr "Ви вже були запрошені до \"%(team_name)s\" і зарад одразу стали членом!"
 
-#, fuzzy, python-format
-#| msgid "You are no longer a member of the %(team_type)s “%(team_name)s”."
+#, python-format
 msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
-msgstr "Ви більше не член %(team_type)s «%(team_name)s»."
+msgstr "Тепер ви член %(team_type)s «%(team_name)s». Ласкаво просимо!"
 
 #, python-format
 msgid "You are no longer a member of the %(team_type)s “%(team_name)s”."
@@ -3381,24 +3130,21 @@ msgstr "Ви не можете залишити цю/цей %(team_type)s. Ви 
 msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
 msgstr "Ваш запит членства у %(team_type)s «%(team_name)s» успішно відкликано."
 
-#, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
+#, python-format
 msgid "Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
-msgstr "Ваш запит членства у %(team_type)s «%(team_name)s» успішно відкликано."
+msgstr "Ваше запрошення до %(team_type)s \"%(team_name)s\" було успішно відхилено."
 
 #, python-format
 msgid "User %(username)s had already requested membership and has now been made a member immediately!"
-msgstr ""
+msgstr "Користувач %(username)s вже подав запит на членство і зараз одразу став членом!"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+#, python-format
 msgid "I invited you to join \"%(team_name)s\"!"
-msgstr "%(sender_name)s хоче долучитися до %(team_name)s на %(site_name)s!"
+msgstr "Я запрошую Вас долучитися до \"%(team_name)s\"!"
 
-#, fuzzy, python-format
-#| msgid "The %(team_type)s was changed successfully."
+#, python-format
 msgid "User %(username)s was successfully invited!"
-msgstr "%(team_type)s було успішно змінено."
+msgstr "Кристувача %(username)s було успішно запрошено!"
 
 msgid "You cannot change your own admin status."
 msgstr "Ви не можете змінити власний статус адміністратора/-ки."
@@ -3411,23 +3157,21 @@ msgstr "Ви не можете видалити %(username)s з цього пр�
 msgid "You cannot remove yourself from a %(team_type)s."
 msgstr "Ви не можете видалити себе з %(team_type)s."
 
-#, fuzzy, python-format
-#| msgid "You cannot remove “%(username)s” form this team. Only one admin left."
+#, python-format
 msgid "You cannot remove \"%(username)s\" form this team. Only one admin left."
-msgstr "Ви не можете видалити %(username)s з цього проекту. Він/вона єдиний/-а адміністратор/-ка, що залишився/-лася."
+msgstr "Ви не можете видалити %(username)s з цієї команди. Залишився лише один адміністратор."
 
-#, fuzzy, python-format
-#| msgid "Your join request was withdrawn from %(team_type)s “%(team_name)s” successfully."
+#, python-format
 msgid "Your join request was withdrawn from %(team_type)s \"%(team_name)s\" successfully."
-msgstr "Ваш запит членства у %(team_type)s «%(team_name)s» успішно відкликано."
+msgstr "Ваш запит щодо членства у %(team_type)s \"%(team_name)s\" було успішно відкликано."
 
 #, python-format
 msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
-msgstr ""
+msgstr "Ваше запрошення до користувачів \"%(username)s\" було успішно відізване."
 
 #, python-format
 msgid "User \"%(username)s\" is no longer a member."
-msgstr ""
+msgstr "Користувач \"%(username)s\" більше не член."
 
 #, python-format
 msgid "%(team_name)s was re-activated successfully!"
@@ -3447,31 +3191,30 @@ msgid "This project/group is already inactive!"
 msgstr "Ця спільнота/цей проект уже неактивна/-й!"
 
 msgid "Only group/project members have permission to do this!"
-msgstr ""
+msgstr "Тільки члени спільноти/проекту мають право робити це!"
 
 #, python-format
 msgid "Sorry, these did not seem to be valid email addresses: %s"
-msgstr ""
+msgstr "Вибачте, на жаль, це не актуальна електронна адреса: %s"
 
 #, python-format
 msgid "These people have been sent an email invite only recently. You can send them an invite again tomorrow: %s"
-msgstr ""
+msgstr "Цим людям нещодавно вже відправляли листи з запрошеннями. Ви зможете знову відправляти їм запрошення завтра: %s"
 
-#, fuzzy, python-format
-#| msgid "This email address already has a registered user!"
+#, python-format
 msgid "Good news! The people with these addresses already have a registered user account: %s"
-msgstr "Під цією адресою електронної скриньки уже хтось зареєструвався!"
+msgstr "Хороші новини! Люди з цією адресою вже зареєвали акаунт користувача: %s"
 
 #, python-format
 msgid "Success! We are now sending out invitations to these email addresses: %s"
-msgstr ""
+msgstr "Успішно! Ви зараз відправляєте запрошення за такими адресами: %s"
 
 msgid "Your selection for showing this event in projects/groups was updated."
-msgstr ""
+msgstr "Ваша вибірка для відображення заходу в проектах/спільнотах була актуалізована."
 
 #, python-format
 msgid "This event is now being shown in these projects/groups: %(group_names)s"
-msgstr ""
+msgstr "Цей захід тепер відображається в цих проектах/спільнотах: %(group_names)s"
 
 msgid "No appname given for adding containers."
 msgstr "Не вказано імені застосунку для додавання контейнерів."
@@ -3497,7 +3240,7 @@ msgstr "<Головна папка>"
 
 #, python-format
 msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
-msgstr ""
+msgstr "Ви зараз знаходитесь в %(group_name)s.<br/> Ви були перенаправлені сюди з іншого проекту чи спільноти яка пов'язана з цим елементом."
 
 #, python-format
 msgid "Container \"%(title)s\" could not be deleted because it contained objects that could not be deleted."
@@ -3534,7 +3277,7 @@ msgid "Your user account is associated with an integrated Portal. This account's
 msgstr "Ваш обліковий запис було створено через інтегрований портал. Неможливо змінити адресу електронної скриньки цього облікового запису, тому ваші зміни не були збережені."
 
 msgid "You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!"
-msgstr ""
+msgstr "Ви змінили електронну адресу. Скоро ми надішлемо вам електронного листа з посиланням для підтвердження. Поки ви не пройшли по тому посиланню, Ваш профіль залишиться за старою електронною адресою!"
 
 msgid "Sorry, your profile could not be saved because there was an error while processing the avatar!"
 msgstr "Вибачте, не вдалося зберегти ваш профіль. Під час обробки основного фото виникла помилка!"
@@ -3550,13 +3293,13 @@ msgid "You are the only administrator left for \"%s\". Please appoint a differen
 msgstr "Ви єдиний/-а адміністратор/-ка у «%s». Перед видаленням вашого профілю назначте іншого адміністратора або видаліть спершу проект."
 
 msgid "Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!"
-msgstr ""
+msgstr "Вибачте, не можемо зв'язатися з Вашим акаунтом, тому що не виникла внутрішня помилка. Будь ласка, зверніться до системного адміністратора!"
 
 msgid "Sorry, we could not connect your user account, because we could not retrieve important user account infos. Please contact a system administrator!"
-msgstr ""
+msgstr "Вибачте, не можемо зв'язатися з Вашим акаунтом, тому що не можемо знайти важливу інформацію з акаунту. Будь ласка, зверніться до системного адміністратора!"
 
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
-msgstr ""
+msgstr "Вибачте, Ви не можете увійти, бо на вашому акаунті зафіксована підозріла діяльність. Будь ласка, зверніться до системного адміністратора!"
 
 #, python-format
 msgid "User \"%(user)s\" was registered successfully. You can now log in using this username."
@@ -3566,10 +3309,9 @@ msgstr "Користувача/-ку «%(user)s» успішно зареєст�
 msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
 msgstr "Користувача/-ку «%(user)s» успішно зареєстровано. Обліковий запит необхідно перевірити та активувати, перш ніж ви зможете увійти в систему. Ми надішлемо вам електронного листа на вашу адресу «%(email)s», коли це буде зроблено."
 
-#, fuzzy, python-format
-#| msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
+#, python-format
 msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
-msgstr "Користувача/-ку «%(user)s» успішно зареєстровано. Обліковий запит необхідно перевірити та активувати, перш ніж ви зможете увійти в систему. Ми надішлемо вам електронного листа на вашу адресу «%(email)s», коли це буде зроблено."
+msgstr "Користувача/-ку «%(user)s» успішно зареєстровано. Ми надішлемо вам електронного листа на вашу адресу «%(email)s», коли це буде зроблено. Обліковий запит необхідно перевірити та активувати, перш ніж ви зможете увійти в систему."
 
 msgid "You are already logged in!"
 msgstr "Ви уже увійшли в систему!"
@@ -3592,45 +3334,42 @@ msgstr "Обліковий запис %(username)s (%(email)s) уже підтв
 msgid "You have denied the join request of %(username)s (%(email)s)! An email was sent to let them know."
 msgstr "Ви відхилили реєстрацію %(username)s (%(email)s)! Було надіслано електронного листа з повідомленням про це."
 
-#, fuzzy
-#| msgid "The user account you were looking for does not exist! Their registration was probably already denied."
 msgid "The user account you were looking for does not exist! Your registration was probably already denied or the email token has expired."
-msgstr "Обліковий запис, який ви шукаєте не існує! Ймовірно інший/-ша адміністратор/-ка уже відхилив/-ли реєстрацію."
+msgstr "Акаунт користувача, який Ви шукаєте, не існує! Ваша реєстрація була відхилена, або електронний лист більше не актуальний."
 
 msgid "The email for this account seems to already have been confirmed!"
-msgstr ""
+msgstr "Електронна адреса для ціього акаунту вже була підтверджена!"
 
 msgid "The link you supplied for the email confirmation is no longer valid!"
-msgstr ""
+msgstr "Посилання, за яким ви пройшли для підтверждення електронної адреси, більше не актуальне!"
 
 msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
-msgstr ""
+msgstr "Електронна адреса, яку ви намагаєтеся затвердити, вже затверджена і належить іншому користувачеві!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! You can now log in and get started!"
-msgstr ""
+msgstr "Ваша електронна адреса %(email)s була успішно затверджена! Ви можете зайти та почати!"
 
-#, fuzzy, python-format
-#| msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
+#, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
-msgstr "Користувача/-ку «%(user)s» успішно зареєстровано. Обліковий запит необхідно перевірити та активувати, перш ніж ви зможете увійти в систему. Ми надішлемо вам електронного листа на вашу адресу «%(email)s», коли це буде зроблено."
+msgstr "Ваша електронна адреса %(email)s була успішно підтверджена! Проте, ваш акаунт поки не є активним, оскільки адміністратор має затвердити його перед тим як ви зможете увійти. Ми відправимо Вам електронний лист як тільки це буде зроблено!"
 
 msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
-msgstr ""
+msgstr "Ласкаво просимо! Вас запросили до таких проектів та спільнот. Будь ласка, натисніть клавішу, що випадає, для того, щоб прийняти, або відхилити запрошення!"
 
 msgid "The unsubscribe link you have clicked does not seem to be valid!"
-msgstr ""
+msgstr "Посилання на відписку, по якому ви пройшли, більше не є актуальним!"
 
 #, python-format
 msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
-msgstr ""
+msgstr "Ми прибрали вашу електронну адресу \"%(email)s\" зі списки нашої розсилки. Ви більше не будете отримувати листів від нас!"
 
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
 msgstr "Ви, на разі, не є членом %s! Якщо ви бажаєте стати членом, надішліть запит нижче."
 
 msgid "Your changes have been saved."
-msgstr ""
+msgstr "Ваші зміни були збережені."
 
 #, fuzzy
 #~| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
