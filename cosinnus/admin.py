@@ -380,8 +380,8 @@ admin.site.register(GlobalBlacklistedEmail, GlobalBlacklistedEmailAdmin)
 
 
 class CosinnusSentEmailLogAdmin(admin.ModelAdmin):
-    list_display = ('date', 'email', 'title')
-    list_filter = ('email', 'title')
+    list_display = ('date', 'email', 'title', 'portal')
+    list_filter = ('date', 'portal')
     search_fields = ('date', 'email', 'title') 
     readonly_fields = ('date',)
 

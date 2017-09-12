@@ -85,9 +85,11 @@ class CosinnusSentEmailLog(models.Model):
     """ Logs an email that was sent out """
     
     class Meta:
-        ordering = ('date',)
+        ordering = ('-date',)
         
     email = models.EmailField(_('Email'))
     title = models.CharField(_('Notification ID'), max_length=300)
     date = models.DateTimeField(auto_now_add=True, editable=False)
+    portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='+', 
+        null=True, blank=True, default=None)
     

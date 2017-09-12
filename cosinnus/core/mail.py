@@ -70,7 +70,8 @@ def _django_send_mail(to, subject, template, data, from_email=None, bcc=None, is
     if getattr(settings, 'COSINNUS_LOG_SENT_EMAILS', False):
         try:
             from cosinnus.models.feedback import CosinnusSentEmailLog
-            CosinnusSentEmailLog.objects.create(email=to, title=subject)
+            from cosinnus.models.group import CosinnusPortal
+            CosinnusSentEmailLog.objects.create(email=to, title=subject, portal=CosinnusPortal.get_current())
         except Exception, e:
             logger.error('Error while trying to log a sent email!', extra={'exception': force_text(e)})
         
