@@ -77,6 +77,7 @@
         <script src="{% static 'js/cosinnus.js' %}?v=0.31"></script>
         <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
         <script src="{% static 'js/cosinnus.feedback.js' %}"></script>
+        <script src="{% static 'js/cookie-compliance.js' %}"></script>
         
         {% captureas cosinnus_css_class %}{% if COSINNUS_CURRENT_APP == 'todo' %}app-todos{% elif COSINNUS_CURRENT_APP == 'note' %}app-main{% elif COSINNUS_CURRENT_APP == 'file' %}app-files{% elif COSINNUS_CURRENT_APP == 'event' %}app-calendar{% elif COSINNUS_CURRENT_APP %}app-{{ COSINNUS_CURRENT_APP }}{% else %}app-main{% endif %} {% if request.path == '/' %}landing{% endif %}{% endcaptureas %}
         
