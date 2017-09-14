@@ -52,7 +52,6 @@ class CosinnusConf(AppConf):
         'cosinnus_todo.TodoEntry': [
             'cosinnus_file.FileEntry',
             'cosinnus_event.Event',
-            'cosinnus_note.Note',
             'cosinnus_etherpad.Etherpad',
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
@@ -73,7 +72,6 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
             'cosinnus_event.Event',
-            'cosinnus_note.Note',
         ],
       'postman.Message': [
             'cosinnus_file.FileEntry',
@@ -82,7 +80,6 @@ class CosinnusConf(AppConf):
             'cosinnus_etherpad.Ethercalc',
             'cosinnus_poll.Poll',
             'cosinnus_event.Event',
-            'cosinnus_note.Note',
             'cosinnus_marketplace.Offer',
         ],
     }
