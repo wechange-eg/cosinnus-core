@@ -152,8 +152,13 @@ class CosinnusConf(AppConf):
     
     # enable this to sign up new members to a cleverreach newsletter group
     CLEVERREACH_AUTO_SIGNUP_ENABLED = False
-    # the int id of the cleverreach group
-    CLEVERREACH_GROUP_ID = None
+    # dict of language --> int group-id of the cleverreach groups to sign up
+    CLEVERREACH_GROUP_IDS = {}
+    # dict of int group-id --> int formid of the cleverreach groups to sign up
+    # if you add this for each group-id in `CLEVERREACH_GROUP_IDS`, users will be subscribed
+    # to the group via the form, instead of directly (allows double-opt in confirmation etc)
+    CLEVERREACH_FORM_IDS = {}
+    
     # access token, as given after a login to /v2/login.json
     CLEVERREACH_ACCESS_TOKEN = None 
     # cleverreach API endpoint base URL (no trailing slash)

@@ -503,8 +503,6 @@ def remove_user_from_blacklist(sender, profile, **kwargs):
     user = profile.user
     email = get_newly_registered_user_email(user)
     GlobalBlacklistedEmail.remove_for_email(email)
-    # TODO remove print
-    print ">> removed (if existed) email from blacklist:", email
     
 
 @receiver(userprofile_ceated)
