@@ -171,6 +171,7 @@ class BaseUserProfile(FacebookIntegrationUserProfileMixin, models.Model):
                 }
                 subj_user = '%s - %s' % (_('Terms of Service'), data['site_name'])
                 send_mail_or_fail_threaded(get_newly_registered_user_email(self.user), subj_user, 'cosinnus/mail/user_terms_of_services.html', data)
+        self._settings = copy.deepcopy(self.settings)
 
     def get_absolute_url(self):
         return group_aware_reverse('cosinnus:profile-detail', kwargs={'username': self.user.username})

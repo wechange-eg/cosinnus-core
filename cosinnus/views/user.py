@@ -146,7 +146,7 @@ class UserCreateView(CreateView):
         user = self.object
         
         # sanity check, retrieve the user's profile (will create it if it doesnt exist)
-        profile = get_user_profile_model()._default_manager.get_for_user(user)
+        profile = user.cosinnus_profile or get_user_profile_model()._default_manager.get_for_user(user)
         
         # set current django language during signup as user's profile language
         lang = get_language()
@@ -503,8 +503,6 @@ def remove_user_from_blacklist(sender, profile, **kwargs):
     user = profile.user
     email = get_newly_registered_user_email(user)
     GlobalBlacklistedEmail.remove_for_email(email)
-    # TODO remove print
-    print ">> removed (if existed) email from blacklist:", email
     
 
 @receiver(userprofile_ceated)
