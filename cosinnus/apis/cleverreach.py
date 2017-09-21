@@ -24,7 +24,7 @@ def signup_user_to_cleverreach_group_receiver(sender, user, **kwargs):
     
     
 def signup_user_to_cleverreach_group(user):
-    """ Does a signup to a cleverreach newsletter group for a given user.
+    """ Does a signup to a cleverreach newsletter group for a given user (unless they have already signed up before).
         Settings `COSINNUS_CLEVERREACH_BASE_URL`, `COSINNUS_CLEVERREACH_GROUP_IDS`, `COSINNUS_CLEVERREACH_ACCESS_TOKEN` must be configured.
         If setting `COSINNUS_CLEVERREACH_FORM_IDS` is also configured, the user will be signed up
             to the newsletter group, then deactivated, then sent an activation mail via the signup form.
@@ -44,7 +44,30 @@ def signup_user_to_cleverreach_group(user):
         return
     
     cleverreach_form_id = getattr(settings, 'COSINNUS_CLEVERREACH_FORM_IDS', {}).get(cleverreach_group_id, None)
-    print ">> going for lang, groupid, email", language, cleverreach_group_id, cleverreach_form_id, user_email
+
+    try:
+        # group signup, must sign up the user as a receiver
+        get_url = "%(base_url)s/groups.json/%(group_id)d/receivers/%(user_email)s?token=%(access_token)s" \
+               % {
+                  'base_url': cleverreach_base_url,
+                  'group_id': cleverreach_group_id,
+                  'user_email': urlquote(user_email),
+                  'access_token': settings.COSINNUS_CLEVERREACH_ACCESS_TOKEN,
+               }
+        req = requests.get(get_url)
+    except Exception, e:
+        logger.error('Error when trying to signup a newly registered user to CleverReach (Exception)', 
+                     extra={'exception': force_text(e), 'language': language, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id, 'user_email': user_email, 'base_url': cleverreach_base_url})
+        return
+    # if this returns a 200-code, the user has already signed up for the newsletter!
+    if req.status_code == 200:
+        logger.info('Aborted signing up a newly registered user to CleverReach (user was already signed up for this newsletter!):', 
+                     extra={'status':req.status_code, 'language': language, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id, 'content': req.text, 'user_email': user_email, 'base_url': cleverreach_base_url})
+        return
+    elif req.status_code != 404:
+        logger.error('Error when trying to signup a newly registered user to CleverReach (error response on pre-signup check):', 
+                     extra={'status':req.status_code, 'language': language, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id, 'content': req.text, 'user_email': user_email, 'base_url': cleverreach_base_url})
+        return
     
     try:
         # group signup, must sign up the user as a receiver
@@ -80,7 +103,6 @@ def signup_user_to_cleverreach_group(user):
         return
     
     if cleverreach_form_id:
-        print ">> going for form now!"
         # form signup, we deactivate the user first for this group and then send him the signup confirmation 
         # as if he has signed up via the form
         try:
@@ -96,15 +118,11 @@ def signup_user_to_cleverreach_group(user):
         except Exception, e:
             extra = {'exception': force_text(e), 'language': language, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id, 'user_email': user_email, 'base_url': cleverreach_base_url}
             logger.error('Error when trying to signup a newly registered user to CleverReach (Exception during set-inactive)', extra=extra)
-            if settings.DEBUG:
-                print "extra", extra
-                print "post_url", post_url
+            # we do not return here, as cleverreach may change their set-deactive endpoint to throw an error on already inactive users
         if not req.status_code == 200:
             extra = {'status':req.status_code, 'language': language, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id, 'content': req.text, 'user_email': user_email, 'base_url': cleverreach_base_url}
             logger.error('Error when trying to signup a newly registered user to CleverReach (non-200 response during set-inactive):', extra=extra) 
-            if settings.DEBUG:
-                print "extra", extra
-                print "post_url", post_url
+            # we do not return here, as cleverreach may change their set-deactive endpoint to throw an error on already inactive users
         
         try:
             # register user as if he had filled out a form, for the group
@@ -129,16 +147,10 @@ def signup_user_to_cleverreach_group(user):
         except Exception, e:
             extra = {'exception': force_text(e), 'language': language, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id, 'user_email': user_email, 'base_url': cleverreach_base_url}
             logger.error('Error when trying to signup a newly registered user to CleverReach (Exception during Form)', extra=extra)
-            if settings.DEBUG:
-                print "extra", extra
-                raise e
             return
         if not req.status_code == 200:
             extra = {'status':req.status_code, 'language': language, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id, 'content': req.text, 'user_email': user_email, 'base_url': cleverreach_base_url}
             logger.error('Error when trying to signup a newly registered user to CleverReach (non-200 response during Form signup):', extra=extra)
-            if settings.DEBUG:
-                print "extra", extra
-                raise e
             return
         
         
@@ -149,8 +161,6 @@ def signup_user_to_cleverreach_group(user):
     response = req.json()
     extra = {'user_email': user_email, 'language': language, 'received_response': response, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id}
     logger.info('Successfully signed up a user to the DRJA newsletter upon registration.', extra=extra)
-    if settings.DEBUG:
-        print "extra", extra
     
     
 # set signal upon registration for cleverreach signup
