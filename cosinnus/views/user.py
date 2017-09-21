@@ -146,7 +146,7 @@ class UserCreateView(CreateView):
         user = self.object
         
         # sanity check, retrieve the user's profile (will create it if it doesnt exist)
-        profile = get_user_profile_model()._default_manager.get_for_user(user)
+        profile = user.cosinnus_profile or get_user_profile_model()._default_manager.get_for_user(user)
         
         # set current django language during signup as user's profile language
         lang = get_language()
