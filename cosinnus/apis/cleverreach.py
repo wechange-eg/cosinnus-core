@@ -10,11 +10,28 @@ import requests
 from django.utils.encoding import force_text
 from cosinnus.utils.user import get_newly_registered_user_email
 from django.utils.http import urlquote
+from threading import Thread
 
 logger = logging.getLogger('cosinnus')
 
 
-def signup_user_to_cleverreach_group(sender, user, **kwargs):
+def signup_user_to_cleverreach_group_receiver(sender, user, **kwargs):
+    """ Runs a threaded cleverreach signup """
+    class SignupThread(Thread):
+        def run(self):
+            signup_user_to_cleverreach_group(user)
+    SignupThread().start()
+    
+    
+def signup_user_to_cleverreach_group(user):
+    """ Does a signup to a cleverreach newsletter group for a given user.
+        Settings `COSINNUS_CLEVERREACH_BASE_URL`, `COSINNUS_CLEVERREACH_GROUP_IDS`, `COSINNUS_CLEVERREACH_ACCESS_TOKEN` must be configured.
+        If setting `COSINNUS_CLEVERREACH_FORM_IDS` is also configured, the user will be signed up
+            to the newsletter group, then deactivated, then sent an activation mail via the signup form.
+            This acts as if he had just signed up via the form himself, and thus, the confirmation mail
+            and the subsequent welcome mails are triggered.
+        We will also flag the user as signed up to the newsletter in his profile settings. """ 
+    
     from cosinnus.models.group import CosinnusPortal
     user_email = get_newly_registered_user_email(user)
     language = user.cosinnus_profile.language
@@ -126,7 +143,7 @@ def signup_user_to_cleverreach_group(sender, user, **kwargs):
         
         
     profile = user.cosinnus_profile
-    profile.settings['drja_newsletter_registered'] = True
+    profile.settings['cleverreach_newsletter_registered'] = cleverreach_group_id
     profile.save()
     
     response = req.json()
@@ -138,9 +155,9 @@ def signup_user_to_cleverreach_group(sender, user, **kwargs):
     
 # set signal upon registration for cleverreach signup
 if settings.COSINNUS_CLEVERREACH_AUTO_SIGNUP_ENABLED:
-    if not settings.COSINNUS_CLEVERREACH_GROUP_IDS or not settings.COSINNUS_CLEVERREACH_ACCESS_TOKEN:
+    if not settings.COSINNUS_CLEVERREACH_BASE_URL or not settings.COSINNUS_CLEVERREACH_GROUP_IDS or not settings.COSINNUS_CLEVERREACH_ACCESS_TOKEN:
         logger.error('The Cleverreach API integration was set to be enabled on this portal, some of the required '
-                     'settings are not configured: `COSINNUS_CLEVERREACH_GROUP_IDS`, `COSINNUS_CLEVERREACH_ACCESS_TOKEN`')
+                     'settings are not configured: `COSINNUS_CLEVERREACH_BASE_URL`, `COSINNUS_CLEVERREACH_GROUP_IDS`, `COSINNUS_CLEVERREACH_ACCESS_TOKEN`')
     else:
-        signals.user_registered.connect(signup_user_to_cleverreach_group)
+        signals.user_registered.connect(signup_user_to_cleverreach_group_receiver)
     
