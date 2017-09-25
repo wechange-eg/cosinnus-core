@@ -45,6 +45,7 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^search/$', 'search.search', name='search'),
     
     url(r'^invitations/$', 'group.group_list_invited', name='invitations', kwargs={'show_all': True}),
+    url(r'^welcome/$', 'user.welcome_settings', name='welcome-settings'),
     
     url(r'^account/report/$', 'feedback.report_object', name='report-object'),
     

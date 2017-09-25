@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-12 16:18+0200\n"
+"POT-Creation-Date: 2017-09-25 15:24+0200\n"
 "PO-Revision-Date: 2017-08-15 17:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -389,11 +389,19 @@ msgstr "Объект жалобы"
 msgid "Reported objects"
 msgstr "Объекты жалобы"
 
-msgid "Enter a valid name. Forward slash is not allowed."
-msgstr "Введите допустимое имя. Косую черту не допускается."
+msgid "Email"
+msgstr "Адрес электронной почты"
+
+#, fuzzy
+#| msgid "Notification Preferences"
+msgid "Notification ID"
+msgstr "Настройки уведомлений"
 
 msgid "Portal"
 msgstr "Портал"
+
+msgid "Enter a valid name. Forward slash is not allowed."
+msgstr "Введите допустимое имя. Косую черту не допускается."
 
 msgid "Portals"
 msgstr "Порталы"
@@ -1733,6 +1741,9 @@ msgstr "Имеются связи с"
 msgid "Overview"
 msgstr "Обзор"
 
+msgid "To the Forum"
+msgstr ""
+
 msgctxt "Group"
 msgid "Public"
 msgstr "В открытом доступе"
@@ -2461,12 +2472,6 @@ msgstr "Что бы Вы хотели узнать?"
 msgid "Who is allowed to see you on the platform?"
 msgstr "Кто может видеть Вас на платформе?"
 
-msgid "Logged in Members only"
-msgstr "Только зарегистрированные члены"
-
-msgid "Everybody"
-msgstr "Все"
-
 msgid "My location"
 msgstr "Моё местоположение"
 
@@ -2478,6 +2483,12 @@ msgstr "Что я хочу узнать"
 
 msgid "Visibility"
 msgstr "Кто может видеть мой профиль"
+
+msgid "Logged in Members only"
+msgstr "Только зарегистрированные члены"
+
+msgid "Everybody"
+msgstr "Все"
 
 msgid "OK"
 msgstr "OK"
@@ -2547,9 +2558,6 @@ msgstr "Забыли пароль?"
 
 msgid "Logged out"
 msgstr "Вы вышли из системы"
-
-msgid "Email"
-msgstr "Адрес электронной почты"
 
 msgid "Password"
 msgstr "Пароль"
@@ -2731,6 +2739,19 @@ msgstr "Удалить профиль"
 msgid "User overview"
 msgstr "Обзор пользователей"
 
+#, fuzzy
+#| msgid "My Projects and Groups"
+msgid "Members of your projects and groups only"
+msgstr "Мои проекты и группы"
+
+#, fuzzy
+#| msgid "Register and join!"
+msgid "Registered users only"
+msgstr "Зарегистрируйтесь и присоединитесь!"
+
+msgid "Everybody (public profile)"
+msgstr ""
+
 msgid "Delete user profile"
 msgstr "Удалить профиль пользователя"
 
@@ -2800,6 +2821,29 @@ msgstr "Подробное описание"
 
 msgid "Describe yourself, your activities and your interests."
 msgstr "Расскажите о себе, своей деятельности и интересах."
+
+msgid "Welcome!"
+msgstr ""
+
+msgid "We give you full control over what people can see of you on the platform and what you hear from us!"
+msgstr ""
+
+msgid "You can change this setting later in your profile settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Content (right column)"
+msgid "in the top right menu"
+msgstr "Контент (правая колонка)"
+
+msgid "When may we send you email notifications?"
+msgstr ""
+
+msgid "You can change or customize this setting later in your notification settings"
+msgstr ""
+
+msgid "Your privacy: You are in control!"
+msgstr ""
 
 msgid "User Dashboard"
 msgstr "Панель управления пользователя"
@@ -3305,12 +3349,12 @@ msgstr "Извините, мы не смогли связаться с ваши�
 msgid "Sorry, we could not connect your user account, because we could not retrieve important user account infos. Please contact a system administrator!"
 msgstr "Извините, мы не связаться с Вашим аккаунтом, потому что не можем найти важные данные аккаунта. Пожалуйста, обратитесь к администратору!"
 
-#| msgid "An error occured when trying to disconnect your facebook account! Please contact an administrator!"
 msgid "Sorry, you cannot log in because your account is suspended. Please contact a system administrator!"
 msgstr "Извините, вы не можете войти, потому, что с аккаунта осуществлялась подозрительная активность. Пожалуйста, обратитесь к администратору!"
 
-#, python-format
-msgid "User \"%(user)s\" was registered successfully. You can now log in using this username."
+#, fuzzy, python-format
+#| msgid "User \"%(user)s\" was registered successfully. You can now log in using this username."
+msgid "Your account \"%(user)s\" was registered successfully. Welcome to the community!"
 msgstr "Пользователь \"%(user)s\" зарегистрирован. Теперь Вы можете войти в систему, используя это имя."
 
 #, python-format
@@ -3323,6 +3367,9 @@ msgstr "Пользователь \"%(user)s“ зарегистрирован. �
 
 msgid "You are already logged in!"
 msgstr "Вы уже вошли в систему!"
+
+msgid "Your privacy settings were saved. Welcome!"
+msgstr ""
 
 msgid "The user account you were looking for does not exist! Their registration was probably already denied."
 msgstr "Аккаунта, который Вы ищете, не существует. Вероятно, в его регистрации было отказано."
@@ -3354,8 +3401,9 @@ msgstr "Ссылка, предоставленная Вам для подтве�
 msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
 msgstr "Адрес электронной почты, который Вы пытаетесь подтвердить уже подтверждён или принадлежит другому пользователю!"
 
-#, python-format
-msgid "Your email address %(email)s was successfully confirmed! You can now log in and get started!"
+#, fuzzy, python-format
+#| msgid "Your email address %(email)s was successfully confirmed! You can now log in and get started!"
+msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
 msgstr "Адрес Вашей электронной почты %(email)s был успешно подтверждён! Теперь Вы можете войти в систему и приступить к работе!"
 
 #, python-format

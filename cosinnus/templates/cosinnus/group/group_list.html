@@ -96,6 +96,24 @@
     	{% include 'cosinnus/group/group_list_items.html' %}
         
     </div>
-
+    
+    {% if group_type == 'all' %}
+	    {% group_url 'cosinnus:group-dashboard' group=SETTINGS.NEWW_FORUM_GROUP_SLUG ignoreErrors=True as blog_url %}
+		{% if blog_url %}
+		    <button type="button" class="btn btn-emphasized" href="{{ blog_url }}">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left" href="#">
+                            <i class="fa fa-arrow-right"></i>
+                        </a>
+                        <div class="media-body">
+                            {% trans "To the Forum" %}
+                        </div>
+                    </li>
+                </ul>
+            </button> 
+		{% endif %}
+    {% endif %}
+    
 {% endblock %}
 

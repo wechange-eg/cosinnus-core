@@ -425,6 +425,9 @@ class CosinnusConf(AppConf):
     # can be overriden to let cosinnus know that the server uses HTTPS. this is important to set!
     SITE_PROTOCOL = 'http'
     
+    # whether or not to redirect to the welcome settings page after a user registers
+    SHOW_WELCOME_SETTINGS_PAGE = True
+    
     # the duration of the user stream (must be very short, otherwise notifications will not appear)
     STREAM_SHORT_CACHE_TIMEOUT = 30
     

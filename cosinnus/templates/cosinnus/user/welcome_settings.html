@@ -1,0 +1,45 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags djajax_tags widget_tweaks %}
+
+{% block page_title %}
+    {% trans "Welcome!" %}
+{% endblock page_title %}
+
+{% block main_page %}
+    
+    {% include 'cosinnus/messages.html' %}
+    
+	{% captureas label %}
+	    <p class="no-horizontal-padding no-vertical-padding large-space">
+            {% trans "We give you full control over what people can see of you on the platform and what you hear from us!" %}
+        </p>
+        
+        <h3>{% trans "Who is allowed to see you on the platform?" %}</h3>
+        <select id="id_visibility_setting" name="visibility_setting" class="form-control form-control-heavy">
+            {% include 'cosinnus/user/user_visibility_formfield_options.html' with visibility=visibility_setting %}
+        </select>
+        <em class="small">
+           {% trans "You can change this setting later in your profile settings" %}
+           ({% trans "in the top right menu" %})
+        </em>
+        
+	    <h3>{% trans "When may we send you email notifications?" %}</h3>
+        <select id="id_notification_setting" name="notification_setting" class="form-control form-control-heavy">
+            {% for choice, label in notification_choices %}
+                <option {% if notification_setting == choice %}selected{% endif %} value="{{ choice }}">{{ label }}</option>
+            {% endfor %}
+        </select>
+	    <em class="small">
+	       {% trans "You can change or customize this setting later in your notification settings" %}
+	       ({% trans "in the top right menu" %})
+	    </em>
+        
+	    
+	{% endcaptureas %}
+	
+	{% captureas title %}{% trans "Your privacy: You are in control!" %}{% endcaptureas %}
+	{% include "cosinnus/modal_box.html" with id="modal-recruit-users" label=label title=title form_action="." title_icon="fa-user" show_inline=True hide_cancel_button=True %}
+        
+    
+{% endblock main_page %}
+

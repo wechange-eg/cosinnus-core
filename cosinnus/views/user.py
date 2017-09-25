@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib.auth import get_user_model, login as auth_login, logout as auth_logout
+from django.contrib.auth import get_user_model, login as auth_login, logout as auth_logout,\
+    login
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db import transaction
@@ -30,7 +31,7 @@ from cosinnus.core.mail import MailThread, get_common_mail_context,\
     send_mail_or_fail_threaded
 from django.template.loader import render_to_string
 from django.http.response import HttpResponseNotAllowed, JsonResponse,\
-    HttpResponse, HttpResponseBadRequest
+    HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from cosinnus.templatetags.cosinnus_tags import full_name_force
 from django.contrib.auth.views import password_reset, password_change
@@ -38,7 +39,8 @@ from cosinnus.utils.permissions import check_user_integrated_portal_member
 from django.template.context import RequestContext
 from django.template.response import TemplateResponse
 from django.core.paginator import Paginator
-from cosinnus.views.mixins.group import EndlessPaginationMixin
+from cosinnus.views.mixins.group import EndlessPaginationMixin,\
+    RequireLoggedInMixin
 from cosinnus.utils.user import filter_active_users,\
     get_newly_registered_user_email
 from uuid import uuid1
@@ -50,6 +52,9 @@ from django.contrib.auth.signals import user_logged_in
 from cosinnus.conf import settings
 from cosinnus.utils.tokens import email_blacklist_token_generator
 from cosinnus.utils.functions import is_email_valid
+from django.views.generic.base import TemplateView
+from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.utils.group import get_cosinnus_group_model
 
 
 USER_MODEL = get_user_model()
@@ -133,7 +138,7 @@ class UserCreateView(CreateView):
     model = USER_MODEL
     template_name = 'cosinnus/registration/signup.html'
 
-    message_success = _('User "%(user)s" was registered successfully. You can now log in using this username.')
+    message_success = _('Your account "%(user)s" was registered successfully. Welcome to the community!')
     message_success_inactive = _('User "%(user)s" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address "%(email)s" when this happens.')
     message_success_email_verification = _('User "%(user)s" was registered successfully. We will send an email to your address %(email)s" soon. You need to confirm the email address before you can log in.')
     
@@ -185,9 +190,15 @@ class UserCreateView(CreateView):
 
         if not CosinnusPortal.get_current().users_need_activation and not CosinnusPortal.get_current().email_needs_verification:
             messages.success(self.request, self.message_success % {'user': user.email})
+            user.backend = 'cosinnus.backends.EmailAuthBackend'
+            login(self.request, user)
         
         # send user registration signal
         signals.user_registered.send(sender=self, user=user)
+        
+        if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
+            # add redirect to the welcome-settings page, with priority so that it is shown as first one
+            profile.add_redirect_on_next_page(reverse('cosinnus:welcome-settings'), message=None, priority=True)
         
         return ret
     
@@ -203,6 +214,53 @@ class UserCreateView(CreateView):
         return context
 
 user_create = UserCreateView.as_view()
+
+
+class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
+    """ A welcome settings page that saves the two most important privacy aspects:
+        the global notification setting and the userprofile visibility setting. """
+    
+    template_name = 'cosinnus/user/welcome_settings.html'
+    message_success = _('Your privacy settings were saved. Welcome!')
+
+    def post(self, request, *args, **kwargs):
+        self.get_data()
+        with transaction.atomic():
+            # save language preference:
+            notification_setting = request.POST.get('notification_setting', None)
+            if notification_setting is not None and int(notification_setting) in (choice for choice, label in self.notification_choices):
+                self.notification_setting.setting = int(notification_setting)
+                self.notification_setting.save()
+            # save visibility setting:
+            visibility_setting = request.POST.get('visibility_setting', None)
+            if visibility_setting is not None and int(visibility_setting) in (choice for choice, label in self.visibility_choices):
+                self.media_tag.visibility = int(visibility_setting)
+                self.media_tag.save()
+        
+        messages.success(request, self.message_success)
+        redirect_url = get_cosinnus_group_model().objects.get(slug=getattr(settings, 'NEWW_FORUM_GROUP_SLUG')).get_absolute_url() if hasattr(settings, 'NEWW_FORUM_GROUP_SLUG') else '/'
+        return HttpResponseRedirect(redirect_url)
+    
+    def get_context_data(self, **kwargs):
+        context = super(WelcomeSettingsView, self).get_context_data(**kwargs)
+        #profile_model = get_user_profile_model()
+        self.get_data()
+        context.update({
+            'visibility_setting': self.media_tag.visibility, #profile_model._meta.get_field_by_name('setting').default
+            'visibility_choices': self.visibility_choices,
+            'notification_choices': self.notification_choices,
+            'notification_setting': self.notification_setting.setting,
+        })
+        return context
+    
+    def get_data(self):
+        self.media_tag = self.request.user.cosinnus_profile.media_tag
+        self.visibility_choices = self.media_tag.VISIBILITY_CHOICES
+        self.notification_setting = GlobalUserNotificationSetting.objects.get_object_for_user(self.request.user)
+        # exclude the "individual" option, as this can only be set in notification preferences
+        self.notification_choices = [choice for choice in self.notification_setting.SETTING_CHOICES if choice[0] != self.notification_setting.SETTING_GROUP_INDIVIDUAL]
+        
+welcome_settings = WelcomeSettingsView.as_view()
 
 
 def _check_user_approval_permissions(request, user_id):
@@ -336,11 +394,13 @@ def verifiy_user_email(request, email_verification_param):
         profile.save()
     
     if user.is_active:
-        messages.success(request, _('Your email address %(email)s was successfully confirmed! You can now log in and get started!') % {'email': user.email})
+        messages.success(request, _('Your email address %(email)s was successfully confirmed! Welcome to the community!') % {'email': user.email})
+        user.backend = 'cosinnus.backends.EmailAuthBackend'
+        login(request, user)
+        return redirect('/')
     else:
         messages.success(request, _('Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!') % {'email': user.email})
-        
-    return redirect(reverse('login'))
+        return redirect(reverse('login'))
     
 
 class UserDetailView(DetailView):

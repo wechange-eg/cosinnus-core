@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-12 16:18+0200\n"
+"POT-Creation-Date: 2017-09-25 15:24+0200\n"
 "PO-Revision-Date: 2016-10-26 16:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -387,10 +387,16 @@ msgstr ""
 msgid "Reported objects"
 msgstr ""
 
-msgid "Enter a valid name. Forward slash is not allowed."
+msgid "Email"
+msgstr ""
+
+msgid "Notification ID"
 msgstr ""
 
 msgid "Portal"
+msgstr ""
+
+msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 
 msgid "Portals"
@@ -1749,6 +1755,9 @@ msgstr ""
 msgid "Overview"
 msgstr ""
 
+msgid "To the Forum"
+msgstr ""
+
 msgctxt "Group"
 msgid "Public"
 msgstr ""
@@ -2348,12 +2357,6 @@ msgstr ""
 msgid "Who is allowed to see you on the platform?"
 msgstr ""
 
-msgid "Logged in Members only"
-msgstr ""
-
-msgid "Everybody"
-msgstr ""
-
 msgid "My location"
 msgstr ""
 
@@ -2364,6 +2367,12 @@ msgid "What I wish to learn"
 msgstr ""
 
 msgid "Visibility"
+msgstr ""
+
+msgid "Logged in Members only"
+msgstr ""
+
+msgid "Everybody"
 msgstr ""
 
 msgid "OK"
@@ -2437,9 +2446,6 @@ msgid "Forgot password?"
 msgstr ""
 
 msgid "Logged out"
-msgstr ""
-
-msgid "Email"
 msgstr ""
 
 msgid "Password"
@@ -2630,6 +2636,17 @@ msgstr ""
 msgid "User overview"
 msgstr ""
 
+#, fuzzy
+#| msgid "Convert selected Projects to Groups"
+msgid "Members of your projects and groups only"
+msgstr "Convert selected Projects to Groups"
+
+msgid "Registered users only"
+msgstr ""
+
+msgid "Everybody (public profile)"
+msgstr ""
+
 msgid "Delete user profile"
 msgstr ""
 
@@ -2698,6 +2715,27 @@ msgid "Detailed description"
 msgstr ""
 
 msgid "Describe yourself, your activities and your interests."
+msgstr ""
+
+msgid "Welcome!"
+msgstr ""
+
+msgid "We give you full control over what people can see of you on the platform and what you hear from us!"
+msgstr ""
+
+msgid "You can change this setting later in your profile settings"
+msgstr ""
+
+msgid "in the top right menu"
+msgstr ""
+
+msgid "When may we send you email notifications?"
+msgstr ""
+
+msgid "You can change or customize this setting later in your notification settings"
+msgstr ""
+
+msgid "Your privacy: You are in control!"
 msgstr ""
 
 msgid "User Dashboard"
@@ -3212,7 +3250,7 @@ msgid "Sorry, you cannot log in because your account is suspended. Please contac
 msgstr ""
 
 #, python-format
-msgid "User \"%(user)s\" was registered successfully. You can now log in using this username."
+msgid "Your account \"%(user)s\" was registered successfully. Welcome to the community!"
 msgstr ""
 
 #, python-format
@@ -3224,6 +3262,9 @@ msgid "User \"%(user)s\" was registered successfully. We will send an email to y
 msgstr ""
 
 msgid "You are already logged in!"
+msgstr ""
+
+msgid "Your privacy settings were saved. Welcome!"
 msgstr ""
 
 msgid "The user account you were looking for does not exist! Their registration was probably already denied."
@@ -3257,7 +3298,7 @@ msgid "The email you are trying to confirm has already been confirmed or belongs
 msgstr ""
 
 #, python-format
-msgid "Your email address %(email)s was successfully confirmed! You can now log in and get started!"
+msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
 msgstr ""
 
 #, python-format
