@@ -236,10 +236,10 @@ class FacebookIntegrationGroupFormMixin(object):
                        }
                 response_info = urllib2.urlopen(location_url)
             except Exception, e:
-                logger.warn('Error when trying to retrieve FB group info from Facebook:', extra={'exception': force_text(e), 'url': location_url})
+                logger.warn('Error when trying to retrieve FB group info from Facebook:', extra={'exception': force_text(e), 'url': location_url, 'group_id': facebook_id})
                 had_error = True
             if not had_error and not response_info.code == 200:
-                logger.warn('Error when trying to retrieve FB group info from Facebook (non-200 response):', extra={'response_info': force_text(response_info.__dict__)})
+                logger.warn('Error when trying to retrieve FB group info from Facebook (non-200 response):', extra={'response_info': force_text(response_info.__dict__), 'group_id': facebook_id})
                 had_error = True
             if not had_error:
                 content_info = json.loads(response_info.read()) # this graph returns a JSON string, not a query response
@@ -280,35 +280,43 @@ def confirm_page_admin(request, group_id):
 def obtain_facebook_page_access_token_for_user(group, page_id, user):
     """ Tries to obtain a Facebook-Page access token for a user and for a group, and its connected page-id.
         Then saves this page-access token in the userprofile.settings as {'fb_page_%(group_id)d_%(page_id)s': <access-token>} 
+        Page tokens are retrieved via the /me/accounts node on the graph.
+        See https://developers.facebook.com/docs/facebook-login/access-tokens/#pagetokens
         @return: True if the fan-page access token was obtained and saved in the user profile.
                  False if anything went wrong.
         """
     # using a facebook fan-page access token, using the user access token of an admin of that page (see https://developers.facebook.com/docs/pages/getting-started)
     access_token = user.cosinnus_profile.settings['fb_accessToken']
     had_error = False
+    
     try:
-        location_url = "https://graph.facebook.com/%(page_id)s?fields=access_token&access_token=%(access_token)s" \
+        location_url = "https://graph.facebook.com/me/accounts?access_token=%(access_token)s" \
             % {
-               'page_id': page_id,
                'access_token': access_token,
             }
         response_info = urllib2.urlopen(location_url)
     except Exception, e:
-        logger.warn('Error when trying to retrieve FB page access-token from Facebook:', extra={'exception': force_text(e), 'url': location_url})
+        logger.warn('Error when trying to retrieve FB page access-token from Facebook:', extra={'exception': force_text(e), 'url': location_url, 'page_id': page_id})
         had_error = True
     if not had_error and not response_info.code == 200:
-        logger.warn('Error when trying to retrieve FB page access-token from Facebook (non-200 response):', extra={'response_info': force_text(response_info.__dict__)})
+        logger.warn('Error when trying to retrieve FB page access-token from Facebook (non-200 response):', extra={'response_info': force_text(response_info.__dict__), 'page_id': page_id})
         had_error = True
     if not had_error:
-        token_info = json.loads(response_info.read()) # this graph returns a JSON string, not a query response
-        if not 'access_token' in token_info:
+        accounts_info = json.loads(response_info.read()) # this graph returns a JSON string, not a query response
+        logger.info('Got back new fb acounts info. delete this!', extra={'returned_data': accounts_info})
+        access_token = None
+        for account_data in accounts_info['data']:
+            if account_data.get('id', None) == page_id and account_data.get('access_token', None):
+                access_token = account_data.get('access_token')
+                break  
+        if not access_token:
             had_error = True
             
     if had_error:
         return False
     page_settings_key = 'fb_page_%(group_id)d_%(page_id)s' % {'group_id': group.id, 'page_id': page_id}
     
-    user.cosinnus_profile.settings[page_settings_key] = token_info['access_token']
+    user.cosinnus_profile.settings[page_settings_key] = access_token
     user.cosinnus_profile.save()
     
     return True
