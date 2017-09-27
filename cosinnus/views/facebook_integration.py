@@ -76,6 +76,9 @@ class FacebookIntegrationUserProfileMixin(object):
             del self.settings['fb_expiresAfterUTCSeconds']
         if 'fb_username' in self.settings:
             del self.settings['fb_username']
+        for key in self.settings.keys():
+            if key.startswith('fb_page_'):
+                del self.settings[key]
         self.save()
     
 class FacebookIntegrationViewMixin(object):
