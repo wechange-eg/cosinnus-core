@@ -744,7 +744,8 @@ def textfield(text, arg=''):
         
     if not text:
         return ''
-    text = markdown(url_target_blank(urlizetrunc(text, 35)), 'strike,break-on-newline,cuddled-lists').strip()
+    # see https://github.com/trentm/python-markdown2/wiki/Extras for option parameters!
+    text = markdown(url_target_blank(urlizetrunc(text, 35)), 'strike,break-on-newline,cuddled-lists,code-friendly').strip()
     if arg == 'simple':
         text = text.replace('<p>', '').replace('</p>', '')
     return mark_safe(text)
