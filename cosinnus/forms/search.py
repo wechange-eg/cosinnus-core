@@ -17,6 +17,8 @@ from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.group import get_cosinnus_group_model
 from haystack.inputs import AutoQuery
+from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField
+from haystack.query import EmptySearchQuerySet
 
 MODEL_ALIASES = {
     'todo': 'cosinnus_todo.todoentry',
@@ -40,6 +42,7 @@ class TaggableModelSearchForm(SearchForm):
         choices=(('all', _('All')), ('mine', _('My teams')), ('others', _('Other teams'))),
         widget=forms.RadioSelect)
     models = forms.MultipleChoiceField(required=False)
+    topics = CommaSeparatedSelect2MultipleChoiceField(required=False, choices=BaseTagObject.TOPIC_CHOICES)
 
     location = forms.CharField(required=False)
     valid_start = forms.DateField(required=False)
@@ -72,8 +75,16 @@ class TaggableModelSearchForm(SearchForm):
             sqs = self._filter_for_read_access(sqs)
             sqs = self._filter_group_selection(sqs)
             sqs = self._filter_media_tags(sqs)
-            sqs = self._boost_search_query(sqs)
-        return sqs.models(*self.get_models())
+            if self.cleaned_data.get('q', None):
+                sqs = self._boost_search_query(sqs)
+        ret = sqs.models(*self.get_models())
+        return ret
+    
+    def no_query_found(self):
+        """ Overriding default behaviour to allow topic searches without textual query. """
+        if hasattr(self, 'cleaned_data') and self.cleaned_data.get('topics', None):
+            return self.searchqueryset.all()
+        return EmptySearchQuerySet()
 
     def _boost_search_query(self, sqs):
         q = self.cleaned_data['q']
@@ -160,6 +171,9 @@ class TaggableModelSearchForm(SearchForm):
         return sqs
 
     def _filter_media_tags(self, sqs):
+        topics = self.cleaned_data.get('topics', None)
+        if topics:
+            sqs = sqs.filter_and(mt_topics__in=topics)
         location = self.cleaned_data.get('location', None)
         if location:
             sqs = sqs.filter_and(mt_location__contains=location.lower())

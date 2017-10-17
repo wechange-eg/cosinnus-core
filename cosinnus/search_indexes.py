@@ -23,7 +23,7 @@ class CosinnusProjectIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
     
     text = TemplateResolveEdgeNgramField(document=True, use_template=True, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
     rendered = TemplateResolveCharField(use_template=True, indexed=False, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
-
+    
     boosted = indexes.CharField(model_attr='name', boost=BOOSTED_FIELD_BOOST)
 
     group_members = indexes.MultiValueField(model_attr='members', indexed=False)
