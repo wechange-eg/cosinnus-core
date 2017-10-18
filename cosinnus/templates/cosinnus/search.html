@@ -394,7 +394,7 @@
                     <p class="large-space">
                       {% if query and form.cleaned_data.topics %}
                         {% blocktrans with start=page.start_index end=page.end_index total=paginator.count %}
-                          Showing {{ end }} of {{ total }} results for your query "{{ query }}" tagged with topics:
+                          Showing {{ end }} of {{ total }} results for your query "{{ query }}" with topics:
                         {% endblocktrans %}
                       {% elif query %}
                         {% blocktrans with start=page.start_index end=page.end_index total=paginator.count %}
@@ -402,19 +402,14 @@
                         {% endblocktrans %}
                       {% elif form.cleaned_data.topics %}
 	                    {% blocktrans with start=page.start_index end=page.end_index total=paginator.count %}
-	                      Showing {{ end }} of {{ total }} results tagged with topics:
+	                      Showing {{ end }} of {{ total }} results with topics:
 	                    {% endblocktrans %}
 	                  {% endif %}
+	                  
                       {% if form.cleaned_data.topics %}
-                        {% for topic in form.cleaned_data.topics|makelist %}
-                           {% for value, label in form.fields.topics.choices %}
-                             {% if value == topic|intify %}
-                              <a href="{% url 'cosinnus:search' %}?topics={{ topic }}">{{ label }}</a>
-                             {% endif %}
-                           {% endfor %}
-                           {% if not forloop.last %} {% trans "or" %} {% endif %}
-                        {% endfor %}  
-                      {% endif %}	                  
+                        {% trans "or" as or_seperator %}
+                        {% render_cosinnus_topics form.cleaned_data.topics or_seperator %}
+                      {% endif %}	
                     </p>
         
                     {% for result in page.object_list %}

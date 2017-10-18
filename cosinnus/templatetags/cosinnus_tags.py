@@ -855,3 +855,39 @@ def printthis(obj):
         print obj
     return obj
 
+
+@register.simple_tag()
+def render_cosinnus_topics(topics, seperator_word=','):
+    """ Renders a list of media-tag Topics as html <a> tags linking to the topics search page, 
+        with proper labels and seperators 
+        @param topics: A single int/str number or list or comma-seperated list of int/str numbers that are IDs 
+                        in ``BaseTagObject.TOPIC_CHOICES``
+    """
+    if not topics:
+        return ''
+    from cosinnus.models.tagged import BaseTagObject
+    choices_dict = dict(BaseTagObject.TOPIC_CHOICES)
+    
+    # guarantee list of ints
+    if isinstance(topics, six.string_types):
+        if ',' in topics:
+            topics = [int(topic) for topic in topics.split(',')]
+        else:
+            topics = [int(topics)]
+    elif isinstance(topics, int):
+        topics = [topics]
+    elif isinstance(topics, list):
+        topics = [int(topic) for topic in topics]
+    
+    template = """<a href="%(url)s?topics=%(topic)d">%(label)s</a>"""
+    search_url = reverse('cosinnus:search')
+    seperator_word = ' %s ' % seperator_word
+    
+    rendered_topics = [template % {
+            'url': search_url,
+            'topic': topic,
+            'label': choices_dict[topic],
+        } for topic in topics]
+    
+    return seperator_word.join(rendered_topics)
+    
