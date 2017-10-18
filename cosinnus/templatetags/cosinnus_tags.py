@@ -771,12 +771,14 @@ def tag_group_filtered(tag_object, group="None"):
         # filter location
         if tag_object.location == group_tag.location:
             tag_object.location = None
+            
+        """ Disabled for now - we want topics to always be displayed 
         # filter topics
         if tag_object.topics:
             tag_object.topics = copy(tag_object.topics)
             group_topics = group_tag.topics and group_tag.topics.split(',') or []
             tag_object.topics = ','.join([top for top in tag_object.topics.split(',') if top not in group_topics])
-        
+        """
     return tag_object
 
 
@@ -857,7 +859,7 @@ def printthis(obj):
 
 
 @register.simple_tag()
-def render_cosinnus_topics(topics, seperator_word=','):
+def render_cosinnus_topics(topics, seperator_word=None):
     """ Renders a list of media-tag Topics as html <a> tags linking to the topics search page, 
         with proper labels and seperators 
         @param topics: A single int/str number or list or comma-seperated list of int/str numbers that are IDs 
@@ -881,7 +883,7 @@ def render_cosinnus_topics(topics, seperator_word=','):
     
     template = """<a href="%(url)s?topics=%(topic)d">%(label)s</a>"""
     search_url = reverse('cosinnus:search')
-    seperator_word = ' %s ' % seperator_word
+    seperator_word = ' %s ' % seperator_word if seperator_word else ', '
     
     rendered_topics = [template % {
             'url': search_url,

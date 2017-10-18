@@ -413,7 +413,7 @@
 					
 					<p>
 						{% block microsite_metadata %}
-					        {% with tags=group.media_tag_object.tags.all topics=group.media_tag_object.get_topics %}
+					        {% with tags=group.media_tag_object.tags.all topics=group.media_tag_object.topics %}
 						        {% if tags %}
 						        	<b>{% trans "Tags" %}:</b>
 									{% for tag in tags %}
@@ -423,9 +423,7 @@
 								{% endif %}
 								{% if topics %}
 									<b>{% trans "Topics" %}:</b>
-									{% for topic in group.media_tag_object.get_topics %}
-							            <a href="#">{{ topic }}{% if not forloop.last %}, {% endif %}</a>
-							        {% endfor %}
+                                    {% render_cosinnus_topics topics %}
 									<br/>
 								{% endif %}
 								

@@ -9,10 +9,10 @@
 
 {% with group_carry=group %}
 	{% with mt=object.media_tag_object|tag_group_filtered:group_carry %}
-		{% with persons=mt.persons.all tags=mt.tags.all location=mt.location topics=mt.get_topics approach=mt.approach visibility=mt.visibility %}
+		{% with persons=mt.persons.all tags=mt.tags.all location=mt.location topics=mt.topics approach=mt.approach visibility=mt.visibility %}
 		    {% if persons or tags or location or topics or approach or visibility != 1 and not hide_visibility_tag %}
 		
-				<div class="{% if list_view %}btn btn-default w100 indented{% else %}btn btn-default dashboard-appwidget-contentline-indented{% endif %}">
+				<div class="{% if list_view %}btn btn-default w100 {% if not list_view == "noindent" %}indented{% endif %}{% else %}btn btn-default dashboard-appwidget-contentline-indented{% endif %}">
 				    <ul class="media-list fine-space">
 				        <li class="media">
 				            <div class="media-body no-vertical-padding">
@@ -40,7 +40,7 @@
 				                    </ol>
 				                {% endif %}
 				  
-				                {% if location %}
+				                {% if location and not hide_location %}
 				                    <ol class="input-area">
 				                        <li class="w100 font11px no-vertical-padding no-horizontal-padding">
 					                        <i class="fa fa-fw fa-map-marker"></i>
@@ -53,9 +53,7 @@
 				                    <ol class="input-area">
 				                        <li class="w100 font11px no-vertical-padding no-horizontal-padding">
 					                        <i class="fa fa-fw fa-lightbulb-o"></i>
-					                        {% for topic in topics %}
-				                                <a href="#">{{ topic }}</a>
-				                            {% endfor %}
+					                        {% render_cosinnus_topics topics %}
 				                       </li>
 				                    </ol>
 				                {% endif %}
