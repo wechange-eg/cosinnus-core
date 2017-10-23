@@ -29,6 +29,13 @@ class CosinnusProjectIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
     group_members = indexes.MultiValueField(model_attr='members', indexed=False)
     public = indexes.BooleanField(model_attr='public')
     always_visible = indexes.BooleanField(default=True)
+    location = indexes.LocationField(null=True)
+
+    def prepare_location(self, obj):
+        if obj.media_tag and obj.media_tag.location_lat and obj.media_tag.location_lon:
+            # this expects (lat,lon)!
+            return "%s,%s" % (obj.media_tag.location_lat, obj.media_tag.location_lon)
+        return None
     
     def get_model(self):
         return CosinnusProject

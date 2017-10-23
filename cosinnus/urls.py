@@ -19,10 +19,14 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^users/$', 'user.user_list', name='user-list'),
     
     url(r'^map/$', 'maps.map_view', name='map'),
+    url(r'^map/embed/$', 'maps.map_embed_view', name='map-embed'),
+    
     url(r'^maps/search/$', 'maps.map_search_endpoint', name='map-search-endpoint'),
     url(r'^maps/search/(?P<filter_group_id>\d+)/$', 'maps.map_search_endpoint', name='map-search-endpoint-filtered'),
     
-    url(r'^map/embed/$', 'maps.map_embed_view', name='map-embed'),
+    url(r'^maps/search-haystack/$', 'map_api.map_search_endpoint', name='map-search-endpoint-haystack'),
+    url(r'^maps/search-haystack/(?P<filter_group_id>\d+)/$', 'map_api.map_search_endpoint', name='map-search-endpoint-haystack-filtered'),
+    
     
     
     url(r'^portal/admins/$', 'user.portal_admin_list', name='portal-admin-list'),

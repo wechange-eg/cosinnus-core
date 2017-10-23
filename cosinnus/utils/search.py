@@ -107,6 +107,13 @@ class BaseTaggableObjectIndex(TagObjectSearchIndex):
     creator = indexes.IntegerField(model_attr='creator__id', null=True)
     group = indexes.IntegerField(model_attr='group_id', indexed=False)
     group_members = indexes.MultiValueField(model_attr='group__members')
+    location = indexes.LocationField(null=True)
+
+    def prepare_location(self, obj):
+        if obj.media_tag and obj.media_tag.location_lat and obj.media_tag.location_lon:
+            # this expects (lat,lon)!
+            return "%s,%s" % (obj.media_tag.location_lat, obj.media_tag.location_lon)
+        return None
 
     def index_queryset(self, using=None):
         model_cls = self.get_model()
