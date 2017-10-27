@@ -3,7 +3,7 @@
 <li id="searchbar">
     <form id="cosinnus_search_form" action="{% url "cosinnus:search" %}" method="GET">
         <input class="form-control" placeholder="{% trans "Search..." %}" value="" name="q" />
-        <i class="fa fa-search" onclick="$('#cosinnus_search_form').submit();"></i>
+        <i class="fa fa-search" onclick="$('#cosinnus_search_form').submit();" title="{% trans "Search" %}"></i>
     </form>
 </li>
 {% if request.user.is_authenticated %}
