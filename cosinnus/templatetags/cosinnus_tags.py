@@ -23,6 +23,8 @@ from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
     check_group_create_objects_access, check_object_read_access, get_user_token,
     check_user_portal_admin, check_user_superuser)
+from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,  CommaSeparatedSelect2MultipleWidget
+from cosinnus.models.tagged import get_tag_object_model, BaseTagObject
 from django.template.base import TemplateSyntaxError
 from cosinnus.core.registries.group_models import group_model_registry
 from django.core.cache import cache
@@ -45,6 +47,7 @@ from django.utils.text import normalize_newlines
 logger = logging.getLogger('cosinnus')
 
 register = template.Library()
+TAG_OBJECT = get_tag_object_model()
 
 
 @register.filter
@@ -867,7 +870,6 @@ def render_cosinnus_topics(topics, seperator_word=None):
     """
     if not topics:
         return ''
-    from cosinnus.models.tagged import BaseTagObject
     choices_dict = dict(BaseTagObject.TOPIC_CHOICES)
     
     # guarantee list of ints
@@ -892,4 +894,17 @@ def render_cosinnus_topics(topics, seperator_word=None):
         } for topic in topics]
     
     return seperator_word.join(rendered_topics)
+    
+
+@register.simple_tag()
+def render_cosinnus_topics_field(escape_html=None):
+    topics = CommaSeparatedSelect2MultipleChoiceField(choices=TAG_OBJECT.TOPIC_CHOICES, required=False, 
+            widget=CommaSeparatedSelect2MultipleWidget(select2_options={'closeOnSelect': 'true'}))
+    topics_field_name = 'topics'
+    topics_field_value = "1"
+    topics_html = topics.widget.render(topics_field_name, topics_field_value, {'id': 'id_topics'})
+    topics_html = topics_html.replace('\r', '').replace('\n', '')
+    if escape_html:
+        topics_html = escape(topics_html)
+    return topics_html
     

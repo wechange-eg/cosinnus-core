@@ -17,7 +17,8 @@ from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.group import get_cosinnus_group_model
 from haystack.inputs import AutoQuery
-from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField
+from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,\
+    CommaSeparatedSelect2MultipleWidget
 from haystack.query import EmptySearchQuerySet
 
 MODEL_ALIASES = {
@@ -42,7 +43,8 @@ class TaggableModelSearchForm(SearchForm):
         choices=(('all', _('All')), ('mine', _('My teams')), ('others', _('Other teams'))),
         widget=forms.RadioSelect)
     models = forms.MultipleChoiceField(required=False)
-    topics = CommaSeparatedSelect2MultipleChoiceField(required=False, choices=BaseTagObject.TOPIC_CHOICES)
+    topics = CommaSeparatedSelect2MultipleChoiceField(required=False, choices=BaseTagObject.TOPIC_CHOICES,
+            widget=CommaSeparatedSelect2MultipleWidget(select2_options={'closeOnSelect': 'true'}))
 
     location = forms.CharField(required=False)
     valid_start = forms.DateField(required=False)

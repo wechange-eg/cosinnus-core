@@ -461,13 +461,4 @@
         </form>
     </div><!-- row -->
     
-    {% comment %} We want the topics list to always close here (much more UX friendly) {% endcomment %}
-    <script type="text/javascript">
-        $(function(){
-            $('#id_topics').select2({
-                closeOnSelect: true
-            });
-        });
-    </script>
-    
 {% endblock main_page %}

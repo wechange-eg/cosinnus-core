@@ -61,6 +61,10 @@
             &nbsp;
         {% endif %}
     </div>
+    
+    <div class="line">
+        {{ topicsHtml|safe }}
+    </div>
 
     <div class="line text-field">
         <input type="text" class="q" name="q" placeholder="Suche" value="{{ q }}" />

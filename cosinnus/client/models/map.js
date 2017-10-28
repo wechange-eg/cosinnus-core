@@ -16,6 +16,7 @@ module.exports = Backbone.Model.extend({
         },
         layer: 'street',
         pushState: true,
+        topicsHtml: '',
         controlsEnabled: true,
         filterGroup: null,
         baseUrl: '/maps/search/',
