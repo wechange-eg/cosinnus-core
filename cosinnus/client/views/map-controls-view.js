@@ -19,6 +19,7 @@ module.exports = View.extend({
         'click .result-filter': 'toggleFilter',
         'click .reset-filters': 'resetFilters',
         'click .layer-button': 'switchLayer',
+        'change #id_topics': 'toggleTopicFilter',
         'focusin .q': 'toggleTyping',
         'focusout .q': 'toggleTyping',
         'keyup .q': 'handleTyping',
@@ -48,6 +49,12 @@ module.exports = View.extend({
             this.render();
             this.trigger('change:layer', layer);
         }
+    },
+    
+    toggleTopicFilter: function (event) {
+        var topic_ids = $(event.currentTarget).val()
+        this.model.toggleTopicFilter(topic_ids);
+        this.render();
     },
 
     toggleTyping: function (event) {
@@ -95,5 +102,16 @@ module.exports = View.extend({
             message: 'Ein Fehler ist bei der Suche aufgetreten.',
             el: $message
         }).render();
+    },
+
+    afterRender: function () {
+        // update topics selector with current topics
+        var topics_selector = this.$el.find('#id_topics');
+        if (this.model.get('activeTopicIds')) {
+            topics_selector.val(this.model.get('activeTopicIds')).select2();
+        } else {
+            topics_selector.val().select2();
+        }
+        
     }
 });

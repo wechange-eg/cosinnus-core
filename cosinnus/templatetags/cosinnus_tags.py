@@ -901,7 +901,7 @@ def render_cosinnus_topics_field(escape_html=None):
     topics = CommaSeparatedSelect2MultipleChoiceField(choices=TAG_OBJECT.TOPIC_CHOICES, required=False, 
             widget=CommaSeparatedSelect2MultipleWidget(select2_options={'closeOnSelect': 'true'}))
     topics_field_name = 'topics'
-    topics_field_value = "1"
+    topics_field_value = None
     topics_html = topics.widget.render(topics_field_name, topics_field_value, {'id': 'id_topics'})
     topics_html = topics_html.replace('\r', '').replace('\n', '')
     if escape_html:
