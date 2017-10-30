@@ -42,6 +42,7 @@ from uuid import uuid1
 from annoying.functions import get_object_or_None
 from django_markdown2.templatetags.md2 import markdown
 from django.utils.text import normalize_newlines
+from cosinnus.utils.functions import ensure_list_of_ints
 
 
 logger = logging.getLogger('cosinnus')
@@ -872,16 +873,7 @@ def render_cosinnus_topics(topics, seperator_word=None):
         return ''
     choices_dict = dict(BaseTagObject.TOPIC_CHOICES)
     
-    # guarantee list of ints
-    if isinstance(topics, six.string_types):
-        if ',' in topics:
-            topics = [int(topic) for topic in topics.split(',')]
-        else:
-            topics = [int(topics)]
-    elif isinstance(topics, int):
-        topics = [topics]
-    elif isinstance(topics, list):
-        topics = [int(topic) for topic in topics]
+    topics = ensure_list_of_ints(topics)
     
     template = """<a href="%(url)s?topics=%(topic)d">%(label)s</a>"""
     search_url = reverse('cosinnus:search')

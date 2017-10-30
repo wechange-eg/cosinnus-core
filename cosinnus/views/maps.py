@@ -40,7 +40,7 @@ from cosinnus.utils.user import filter_active_users
 from django.conf import settings
 from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from cosinnus.utils.functions import is_number
+from cosinnus.utils.functions import is_number, ensure_list_of_ints
 import six
 from django.db.models import Q
 from operator import __or__ as OR, __and__ as AND
@@ -252,6 +252,7 @@ MAP_PARAMETERS = {
     'projects': True,
     'groups': True,
     'limit': None, # result count limit, integer or None
+    'topics': None,
 }
 
 def _filter_qs_location_bounds(qs, params, location_object_prefix='media_tag__'):
@@ -265,6 +266,22 @@ def _filter_qs_location_bounds(qs, params, location_object_prefix='media_tag__')
     }
     qs = qs.exclude(**{location_object_prefix + 'location_lat': None})
     qs = qs.filter(**filter_kwargs)
+    return qs
+
+
+def _filter_qs_topics(qs, params, media_tag_object_prefix='media_tag__'):
+    """ Filters a Queryset for latitude, longitude inside a given bounding box.
+        @return: the filtered Queryset """
+    topic_ids = ensure_list_of_ints(params.get('topics', ''))
+    if not topic_ids:
+        return qs
+    media_tag_object_prefix = media_tag_object_prefix + 'topics'
+    
+    def filter_topic(qs, topic_id):
+        return qs.filter( Q(**{media_tag_object_prefix+'__startswith':topic_id+','}) | Q(**{media_tag_object_prefix+'__endswith':','+topic_id}) | Q(**{media_tag_object_prefix+'__contains':',%s,' % topic_id}) | Q(**{media_tag_object_prefix+'__exact':topic_id}) )
+    
+    for topic in topic_ids:
+        qs = filter_topic(qs, str(topic))
     return qs
 
 
@@ -310,6 +327,7 @@ def map_search_endpoint(request, filter_group_id=None):
         people = []
         user_qs = _get_user_base_queryset(request)
         user_qs = _filter_qs_location_bounds(user_qs, params, 'cosinnus_profile__media_tag__')
+        user_qs = _filter_qs_topics(user_qs, params, 'cosinnus_profile__media_tag__')
         if query:
             user_qs = _filter_qs_text(user_qs, query, ['first_name', 'last_name'])
         # filter for group members of optinally given group id
@@ -331,6 +349,7 @@ def map_search_endpoint(request, filter_group_id=None):
         projects = []
         projects_qs = _get_projects_base_queryset(request)
         projects_qs = _filter_qs_location_bounds(projects_qs, params, 'locations__')
+        projects_qs = _filter_qs_topics(projects_qs, params)
         if query:
             projects_qs = _filter_qs_text(projects_qs, query, CosinnusProject.NAME_LOOKUP_FIELDS)
         if filter_group_id:
@@ -343,6 +362,7 @@ def map_search_endpoint(request, filter_group_id=None):
         groups = []
         groups_qs = _get_societies_base_queryset(request)
         groups_qs = _filter_qs_location_bounds(groups_qs, params, 'locations__')
+        groups_qs = _filter_qs_topics(groups_qs, params)
         if query:
             groups_qs = _filter_qs_text(groups_qs, query, CosinnusSociety.NAME_LOOKUP_FIELDS)
         for group in groups_qs[:limit_per_set]:
@@ -354,6 +374,7 @@ def map_search_endpoint(request, filter_group_id=None):
         events_qs = _get_events_base_queryset(request)
         if events_qs:
             events_qs = _filter_qs_location_bounds(events_qs, params, 'media_tag__')
+            events_qs = _filter_qs_topics(events_qs, params)
             if query:
                 events_qs = _filter_qs_text(events_qs, query, ['title'])
             if filter_group_id:

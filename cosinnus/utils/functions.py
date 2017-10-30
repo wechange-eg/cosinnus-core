@@ -8,6 +8,7 @@ from django.utils.html import strip_tags
 from django.utils.encoding import force_text
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+import six
 
 
 def unique_aware_slugify(item, slug_source, slug_field, 
@@ -215,4 +216,21 @@ def is_email_valid(email):
         return True
     except ValidationError:
         return False
+    
+def ensure_list_of_ints(value):
+    """ Will accept a single int/str number or list or comma-seperated list of int/str numbers
+        and always return a list of integers, or an empty list """
+    # guarantee list of ints
+    if not value:
+        return []
+    if isinstance(value, six.string_types):
+        if ',' in value:
+            value = [int(val) for val in value.split(',')]
+        else:
+            value = [int(value)]
+    elif isinstance(value, int):
+        value = [value]
+    elif isinstance(value, list):
+        value = [int(val) for val in value]
+    return value
     
