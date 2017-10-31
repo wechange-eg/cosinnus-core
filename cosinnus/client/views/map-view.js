@@ -103,6 +103,16 @@ module.exports = View.extend({
         this.leaflet.on('dragend', this.handleViewportChange, this);
         this.leaflet.on('popupopen', this.handlePopup, this);
         this.leaflet.on('popupclose', this.handlePopup, this);
+        
+        // disable drag dropping inside map controls
+        var div = this.$el.find('.map-controls')[0];
+        if (!L.Browser.touch) {
+            L.DomEvent.disableClickPropagation(div);
+            L.DomEvent.on(div, 'mousewheel', L.DomEvent.stopPropagation);
+        } else {
+            L.DomEvent.on(div, 'click', L.DomEvent.stopPropagation);
+        }
+        
         this.updateBounds();
     },
 

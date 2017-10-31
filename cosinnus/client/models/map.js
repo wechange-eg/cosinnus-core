@@ -25,7 +25,7 @@ module.exports = Backbone.Model.extend({
 
     limitWithoutClustering: 400,
 
-    searchDelay: 1000,
+    searchDelay: 400,
 
     whileSearchingDelay: 5000,
 
