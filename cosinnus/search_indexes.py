@@ -32,9 +32,11 @@ class CosinnusProjectIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
     location = indexes.LocationField(null=True)
 
     def prepare_location(self, obj):
-        if obj.media_tag and obj.media_tag.location_lat and obj.media_tag.location_lon:
+        locations = obj.locations.all()
+        if locations and locations[0].location_lat and locations[0].location_lon:
             # this expects (lat,lon)!
-            return "%s,%s" % (obj.media_tag.location_lat, obj.media_tag.location_lon)
+            ret = "%s,%s" % (locations[0].location_lat, locations[0].location_lon)
+            return ret
         return None
     
     def get_model(self):
