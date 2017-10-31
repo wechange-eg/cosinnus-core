@@ -39,7 +39,7 @@ from cosinnus.utils.user import filter_active_users
 from django.conf import settings
 from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
 from django.contrib.staticfiles.templatetags.staticfiles import static
-from cosinnus.utils.functions import is_number
+from cosinnus.utils.functions import is_number, ensure_list_of_ints
 import six
 from django.db.models import Q
 from operator import __or__ as OR, __and__ as AND
@@ -48,6 +48,7 @@ from cosinnus.templatetags.cosinnus_map_tags import get_map_marker_icon_settings
     get_map_marker_icon_settings_json
 from django.views.generic.base import TemplateView
 from django.views.decorators.clickjacking import xframe_options_exempt
+from cosinnus.forms.search import filter_searchqueryset_for_read_access
 
 
 USER_MODEL = get_user_model()
@@ -234,6 +235,19 @@ def _filter_qs_text(qs, text, attributes=['title',]):
     return qs
 
 
+SEARCH_MODEL_NAMES = {
+    get_user_profile_model(): 'people',
+    CosinnusProject: 'projects',
+    CosinnusSociety: 'groups',
+}
+try:
+    from cosinnus_event.models import Event, get_past_event_filter_expression
+    SEARCH_MODEL_NAMES.update({
+        Event: 'events',                           
+    })
+except:
+    Event = None
+
 def map_search_endpoint(request, filter_group_id=None):
     """ Maps API search endpoints. For parameters see ``MAP_PARAMETERS``
         returns JSON with the contents of type ``MapSearchResults``
@@ -248,23 +262,39 @@ def map_search_endpoint(request, filter_group_id=None):
     
     from haystack.utils.geo import Point
     from haystack.query import SearchQuerySet
-    b1 = 34.2
-    b2 = -10.0
-    t1 = 58.0 
-    t2 = 31.9
-    # Do the bounding box query.
-    # Points are constructed ith (lon, lat)!!!!!!!!!
-    sqs = SearchQuerySet().within('location', Point(b2, b1), Point(t2, t1))
-    print ">>wow", sqs
-    
-    
-    
-    
-    
-    
     
     params = _collect_parameters(request.GET, MAP_PARAMETERS)
     query = force_text(params['q'])
+    
+    # filter for model types
+    sqs = SearchQuerySet().models(*[klass for klass,param_name in SEARCH_MODEL_NAMES.items() if params[param_name]])
+    # filter for map bounds (Points are constructed ith (lon, lat)!!!)
+    sqs = sqs.within('location', Point(params['sw_lon'], params['sw_lat']), Point(params['ne_lon'], params['ne_lat']))
+    # filter for search terms
+    if query:
+        sqs = sqs.auto_query(query)
+    # group-filtered-map view for on-group pages
+    if filter_group_id:
+        sqs = sqs.filter_and(Q(membership_groups=filter_group_id) | Q(group=filter_group_id))
+    # filter topics
+    topics = ensure_list_of_ints(params.get('topics', ''))
+    if topics: 
+        sqs = sqs.filter_and(mt_topics__in=topics)
+    # filter for read access by this user
+    sqs = filter_searchqueryset_for_read_access(sqs, request.user)
+    # filter events by upcoming
+    if params['events'] and Event is not None:
+        """ TODO: filter events by upcoming is not working! """
+        #sqs = sqs.exclude(Q(needs_date_filtering=True) & get_past_event_filter_expression())
+        pass 
+        
+    """ CHECK: user visibility like in profile settings """
+        
+    for res in sqs:
+        print ">> res:", res.boosted[:14], res.model, res.app_label, res.model_name, res.from_date, res.needs_date_filtering
+
+
+    # ----------------
 
     # return equal count parts of the data limit for each dataset
     datasets = [setname for setname in ['people', 'projects', 'groups', 'events'] if params[setname]]

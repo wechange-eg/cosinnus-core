@@ -32,6 +32,56 @@ MODEL_ALIASES = {
 }
 
 
+
+def filter_searchqueryset_for_read_access(sqs, user):
+    """
+    Given a SearchQuerySet, this function adds a filter that limits the
+    result set to only include elements with read access.
+    """
+    public_node = (
+        SQ(public__exact=True) |  # public on the object itself (applicable for groups)
+        SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_ALL) |  # public via "everyone can see me" visibility meta attribute
+        SQ(always_visible__exact=True) # special marker for indexed objects that should always show up in search
+    )
+
+    if user.is_authenticated():
+        if check_user_superuser(user):
+            pass
+        else:
+            users_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
+            logged_in_user_visibility = (
+                SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
+                SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) # logged in users can see users who are visible           
+            )
+            group_member_user_visibility = (
+                SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
+                SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_USER) & # team mambers can see this user 
+                SQ(membership_groups__in=users_group_ids)
+            )
+            my_item = (
+                 SQ(creator__exact=user.id)
+            )
+            
+            # FIXME: known problem: ``group_members`` is a stale indexed representation of the members
+            # of an items group. New members of a group won't be able to find old indexed items if the index
+            # is not refreshed regularly
+            group_visible_and_in_my_group = (
+                 SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) &
+                 SQ(group_members__contains=user.id)
+            )
+            
+            sqs = sqs.filter_and(
+                public_node |
+                group_visible_and_in_my_group |
+                my_item |
+                group_member_user_visibility |
+                logged_in_user_visibility 
+            )
+    else:
+        sqs = sqs.filter_and(public_node)
+        
+    return sqs
+
 class TaggableModelSearchForm(SearchForm):
     """
     This is almost the same search form as shipped with django-haystack except
@@ -74,7 +124,7 @@ class TaggableModelSearchForm(SearchForm):
         sqs = super(TaggableModelSearchForm, self).search()
         
         if hasattr(self, 'cleaned_data'):
-            sqs = self._filter_for_read_access(sqs)
+            sqs = filter_searchqueryset_for_read_access(sqs, self.request.user)
             sqs = self._filter_group_selection(sqs)
             sqs = self._filter_media_tags(sqs)
             if self.cleaned_data.get('q', None):
@@ -92,57 +142,6 @@ class TaggableModelSearchForm(SearchForm):
         q = self.cleaned_data['q']
         sqs = sqs.filter(SQ(boosted=AutoQuery(q)) | SQ(text=AutoQuery(q)))
         return sqs
-
-    def _filter_for_read_access(self, sqs):
-        """
-        Given a SearchQuerySet, this function adds a filter that limits the
-        result set to only include elements with read access.
-        """
-        public_node = (
-            SQ(public__exact=True) |  # public on the object itself (applicable for groups)
-            SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_ALL) |  # public via "everyone can see me" visibility meta attribute
-            SQ(always_visible__exact=True) # special marker for indexed objects that should always show up in search
-        )
-
-        user = self.request.user
-        if user.is_authenticated():
-            if check_user_superuser(user):
-                pass
-            else:
-                users_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
-                logged_in_user_visibility = (
-                    SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
-                    SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) # logged in users can see users who are visible           
-                )
-                group_member_user_visibility = (
-                    SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
-                    SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_USER) & # team mambers can see this user 
-                    SQ(membership_groups__in=users_group_ids)
-                )
-                my_item = (
-                     SQ(creator__exact=user.id)
-                )
-                
-                # FIXME: known problem: ``group_members`` is a stale indexed representation of the members
-                # of an items group. New members of a group won't be able to find old indexed items if the index
-                # is not refreshed regularly
-                group_visible_and_in_my_group = (
-                     SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) &
-                     SQ(group_members__contains=user.id)
-                )
-                
-                sqs = sqs.filter_and(
-                    public_node |
-                    group_visible_and_in_my_group |
-                    my_item |
-                    group_member_user_visibility |
-                    logged_in_user_visibility 
-                )
-        else:
-            sqs = sqs.filter_and(public_node)
-            
-        return sqs
-
 
     def _filter_group_selection(self, sqs):
         """
