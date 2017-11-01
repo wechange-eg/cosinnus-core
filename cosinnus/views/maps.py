@@ -102,6 +102,17 @@ class MapEmbedView(TemplateView):
 map_embed_view = MapEmbedView.as_view()
 
 
+
+
+
+""" 
+    DEPRECATION:
+
+    Everything below this point is deprecated and can be should now longer be used. 
+    It is kept only for legacy search purposes until all portals have switched to haystack search.
+"""
+
+
 def _better_json_loads(s):
     """ Can pass pure string values and None through without exception """
     if s is None:

@@ -21,14 +21,6 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^map/$', 'maps.map_view', name='map'),
     url(r'^map/embed/$', 'maps.map_embed_view', name='map-embed'),
     
-    url(r'^maps/search/$', 'maps.map_search_endpoint', name='map-search-endpoint'),
-    url(r'^maps/search/(?P<filter_group_id>\d+)/$', 'maps.map_search_endpoint', name='map-search-endpoint-filtered'),
-    
-    url(r'^maps/search-haystack/$', 'map_api.map_search_endpoint', name='map-search-endpoint-haystack'),
-    url(r'^maps/search-haystack/(?P<filter_group_id>\d+)/$', 'map_api.map_search_endpoint', name='map-search-endpoint-haystack-filtered'),
-    
-    
-    
     url(r'^portal/admins/$', 'user.portal_admin_list', name='portal-admin-list'),
     #url(r'^users/map/$', 'user.user_list_map', name='user-list-map'),
     url(r'^user/(?P<username>[^/]+)/$', 'profile.detail_view', name='profile-detail'),
@@ -80,6 +72,18 @@ urlpatterns = patterns('cosinnus.views',
     
     url(r'^select2/', include('cosinnus.urls_select2', namespace='select2')),
 )
+
+# shall we use the deprecated non-haystack Map query API?
+if getattr(settings, 'COSINNUS_USE_DEPRECATED_NON_HAYSTACK_MAP_API', False):
+    urlpatterns += patterns('cosinnus.views',
+        url(r'^maps/search/$', 'maps.map_search_endpoint', name='map-search-endpoint'),
+        url(r'^maps/search/(?P<filter_group_id>\d+)/$', 'maps.map_search_endpoint', name='map-search-endpoint-filtered'),
+    )
+else:
+    urlpatterns += patterns('cosinnus.views',
+        url(r'^maps/search/$', 'map_api.map_search_endpoint', name='map-search-endpoint'),
+        url(r'^maps/search/(?P<filter_group_id>\d+)/$', 'map_api.map_search_endpoint', name='map-search-endpoint-filtered'),
+    )
 
 # some user management not allowed in integrated mode and sso-mode
 if not is_integrated_portal() and not is_sso_portal():

@@ -49,6 +49,9 @@ from cosinnus.templatetags.cosinnus_map_tags import get_map_marker_icon_settings
 from django.views.generic.base import TemplateView
 from django.views.decorators.clickjacking import xframe_options_exempt
 from cosinnus.forms.search import filter_searchqueryset_for_read_access
+from django.utils.timezone import now
+import datetime
+import collections
 
 
 USER_MODEL = get_user_model()
@@ -181,6 +184,22 @@ class EventMapResult(MapResult):
         )
 
 
+class HaystackMapResult(MapResult):
+    """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
+         into a proper MapResult """
+
+    def __init__(self, result, *args, **kwargs):
+        return super(HaystackMapResult, self).__init__(
+            result.mt_location_lat,
+            result.mt_location_lon,
+            result.mt_location,
+            result.title, 
+            result.url,
+            result.marker_image_url,
+            result.description,
+        )
+
+
 class MapSearchResults(dict):
     """ The return of a map search, containing lists of ``MapResult``, enforcing required sets of results """
 
@@ -204,6 +223,7 @@ MAP_PARAMETERS = {
     'projects': True,
     'groups': True,
     'limit': None, # result count limit, integer or None
+    'topics': None,
 }
 
 def _filter_qs_location_bounds(qs, params, location_object_prefix='media_tag__'):
@@ -241,7 +261,7 @@ SEARCH_MODEL_NAMES = {
     CosinnusSociety: 'groups',
 }
 try:
-    from cosinnus_event.models import Event, get_past_event_filter_expression
+    from cosinnus_event.models import Event
     SEARCH_MODEL_NAMES.update({
         Event: 'events',                           
     })
@@ -265,9 +285,14 @@ def map_search_endpoint(request, filter_group_id=None):
     
     params = _collect_parameters(request.GET, MAP_PARAMETERS)
     query = force_text(params['q'])
+    limit = params['limit']
     
-    # filter for model types
-    sqs = SearchQuerySet().models(*[klass for klass,param_name in SEARCH_MODEL_NAMES.items() if params[param_name]])
+    if not is_number(limit) or limit < 0:
+            return HttpResponseBadRequest('``limit`` param must be a positive number or 0!')
+        
+    # filter for requested model types
+    model_list = [klass for klass,param_name in SEARCH_MODEL_NAMES.items() if params[param_name]]
+    sqs = SearchQuerySet().models(*model_list)
     # filter for map bounds (Points are constructed ith (lon, lat)!!!)
     sqs = sqs.within('location', Point(params['sw_lon'], params['sw_lat']), Point(params['ne_lon'], params['ne_lat']))
     # filter for search terms
@@ -278,91 +303,35 @@ def map_search_endpoint(request, filter_group_id=None):
         sqs = sqs.filter_and(Q(membership_groups=filter_group_id) | Q(group=filter_group_id))
     # filter topics
     topics = ensure_list_of_ints(params.get('topics', ''))
+    print ">> topis?", params.get('topics', '')
+    print ">> got", request.GET
     if topics: 
+        print ">> filtering for topics:", topics
         sqs = sqs.filter_and(mt_topics__in=topics)
     # filter for read access by this user
     sqs = filter_searchqueryset_for_read_access(sqs, request.user)
-    # filter events by upcoming
+    # filter events by upcoming status
     if params['events'] and Event is not None:
-        """ TODO: filter events by upcoming is not working! """
-        #sqs = sqs.exclude(Q(needs_date_filtering=True) & get_past_event_filter_expression())
+        _now = now()
+        event_horizon = datetime.datetime(_now.year, _now.month, _now.day)
+        sqs = sqs.exclude(Q(to_date__lt=event_horizon) | (Q(_missing_='to_date') & Q(from_date__lt=event_horizon)))
         pass 
         
     """ CHECK: user visibility like in profile settings """
         
     for res in sqs:
         print ">> res:", res.boosted[:14], res.model, res.app_label, res.model_name, res.from_date, res.needs_date_filtering
-
-
-    # ----------------
-
-    # return equal count parts of the data limit for each dataset
-    datasets = [setname for setname in ['people', 'projects', 'groups', 'events'] if params[setname]]
-    limit_per_set = 100000
-    limit = params['limit']
-    if limit and datasets:
-        if not is_number(limit) or limit < 0:
-            return HttpResponseBadRequest('``limit`` param must be a positive number or 0!')
-        limit_per_set = int(float(limit) / float(len(datasets))) if limit != 0 else limit_per_set
-        if limit > 0 and limit_per_set < 1:
-            limit_per_set = 1
-
-    results = {}
-    if params['people']:
-        people = []
-        user_qs = _get_user_base_queryset(request)
-        user_qs = _filter_qs_location_bounds(user_qs, params, 'cosinnus_profile__media_tag__')
-        if query:
-            user_qs = _filter_qs_text(user_qs, query, ['first_name', 'last_name'])
-        # filter for group members of optinally given group id
-        if filter_group_id:
-            filter_group_id = int(filter_group_id)
-            # id could be of a CoinnusProject or CosinnusGroup (seperate cache)
-            group = CosinnusProject.objects.get_by_id(filter_group_id)
-            if not group:
-                group = CosinnusSociety.objects.get_by_id(filter_group_id)
-            if group:
-                user_qs = user_qs.filter(id__in=group.members)
-            else:
-                user_qs = []
-        for user in user_qs[:limit_per_set]:
-            people.append(UserMapResult(user))
-        results['people'] = people
-
-    if params['projects']:
-        projects = []
-        projects_qs = _get_projects_base_queryset(request)
-        projects_qs = _filter_qs_location_bounds(projects_qs, params, 'locations__')
-        if query:
-            projects_qs = _filter_qs_text(projects_qs, query, CosinnusProject.NAME_LOOKUP_FIELDS)
-        if filter_group_id:
-            projects_qs = projects_qs.filter(parent_id=filter_group_id)
-        for project in projects_qs[:limit_per_set]:
-            projects.append(GroupMapResult(project))
-        results['projects'] = projects
-
-    if params['groups']:
-        groups = []
-        groups_qs = _get_societies_base_queryset(request)
-        groups_qs = _filter_qs_location_bounds(groups_qs, params, 'locations__')
-        if query:
-            groups_qs = _filter_qs_text(groups_qs, query, CosinnusSociety.NAME_LOOKUP_FIELDS)
-        for group in groups_qs[:limit_per_set]:
-            groups.append(GroupMapResult(group))
-        results['groups'] = groups
-
-    if params['events']:
-        events = []
-        events_qs = _get_events_base_queryset(request)
-        if events_qs:
-            events_qs = _filter_qs_location_bounds(events_qs, params, 'media_tag__')
-            if query:
-                events_qs = _filter_qs_text(events_qs, query, ['title'])
-            if filter_group_id:
-                events_qs = events_qs.filter(group_id=filter_group_id)
-        for event in events_qs[:limit_per_set]:
-            events.append(EventMapResult(event))
-        results['events'] = events
-
+    
+    
+    sqs = sqs[:limit]
+    
+    # sort results into one list per model
+    results = collections.defaultdict(list)
+    for result in sqs:
+        print ">> adding results for", result.model, result
+        results[SEARCH_MODEL_NAMES[result.model]].append(HaystackMapResult(result))
+    
     data = MapSearchResults(**results)
     return JsonResponse(data)
+
+    # ----------------

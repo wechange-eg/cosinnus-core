@@ -4,13 +4,14 @@ from __future__ import unicode_literals
 from haystack import indexes
 
 from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveEdgeNgramField,\
-    TagObjectSearchIndex, BOOSTED_FIELD_BOOST
+    TagObjectSearchIndex, BOOSTED_FIELD_BOOST, StoredDataIndexMixin
 from cosinnus.utils.user import filter_active_users
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from django.contrib.staticfiles.templatetags.staticfiles import static
+    
 
-
-class CosinnusGroupIndexMixin(indexes.SearchIndex):
+class CosinnusGroupIndexMixin(StoredDataIndexMixin, indexes.SearchIndex):
     
     location = indexes.LocationField(null=True)
     boosted = indexes.CharField(model_attr='name', boost=BOOSTED_FIELD_BOOST)
@@ -26,6 +27,41 @@ class CosinnusGroupIndexMixin(indexes.SearchIndex):
             ret = "%s,%s" % (locations[0].location_lat, locations[0].location_lon)
             return ret
         return None
+    
+    def prepare_mt_location(self, obj):
+        """ Groups have save their location in related model GroupLocation and not in media_tag """
+        locations = obj.locations.all()
+        if locations:
+            return locations[0].location
+        return None
+        
+    def prepare_mt_location_lat(self, obj):
+        """ Groups have save their location in related model GroupLocation and not in media_tag """
+        locations = obj.locations.all()
+        if locations:
+            return locations[0].location_lat
+        return None
+    
+    def prepare_mt_location_lon(self, obj):
+        """ Groups have save their location in related model GroupLocation and not in media_tag """
+        locations = obj.locations.all()
+        if locations:
+            return locations[0].location_lon
+        return None
+    
+    def prepare_title(self, obj):
+        """ TODO: this should actually reflect the group['name'] language-sensitive magic! """
+        return obj.name
+    
+    def prepare_url(self, obj):
+        return obj.get_absolute_url()
+    
+    def prepare_marker_image_url(self, obj):
+        return obj.get_map_marker_image_url() or static('images/group-avatar-placeholder.png')
+    
+    def prepare_description(self, obj):
+        """ TODO: this should actually reflect the group['description'] language-sensitive magic! """
+        return obj.description_long or obj.description
     
     def index_queryset(self, using=None):
         qs = self.get_model().objects.all()
@@ -58,7 +94,7 @@ class CosinnusSocietyIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
         return CosinnusSociety
 
 
-class UserProfileIndex(TagObjectSearchIndex, indexes.Indexable):
+class UserProfileIndex(StoredDataIndexMixin, TagObjectSearchIndex, indexes.Indexable):
     text = TemplateResolveEdgeNgramField(document=True, use_template=True, template_name='search/indexes/cosinnus/userprofile_{field_name}.txt')
     rendered = TemplateResolveCharField(use_template=True, indexed=False, template_name='search/indexes/cosinnus/userprofile_{field_name}.txt')
     
@@ -73,6 +109,12 @@ class UserProfileIndex(TagObjectSearchIndex, indexes.Indexable):
             # this expects (lat,lon)!
             return "%s,%s" % (obj.media_tag.location_lat, obj.media_tag.location_lon)
         return None
+    
+    def prepare_title(self, obj):
+        return obj.user.get_full_name()
+    
+    def prepare_marker_image_url(self, obj):
+        return obj.get_map_marker_image_url()
     
     def get_model(self):
         return get_user_profile_model()
