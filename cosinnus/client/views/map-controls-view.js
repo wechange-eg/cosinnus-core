@@ -18,6 +18,7 @@ module.exports = View.extend({
     events: {
         'click .result-filter': 'toggleFilter',
         'click .reset-filters': 'resetFilters',
+        'click .show-topics': 'showTopics',
         'click .layer-button': 'switchLayer',
         'change #id_topics': 'toggleTopicFilter',
         'focusin .q': 'toggleTyping',
@@ -40,6 +41,12 @@ module.exports = View.extend({
         this.model.resetFilters();
         this.render();
     },
+    
+    showTopics: function (event) {
+        event.preventDefault();
+        this.model.showTopics();
+        this.render();
+    },
 
     // Switch layers if clicked layer isn't the active layer.
     switchLayer: function (event) {
@@ -54,7 +61,6 @@ module.exports = View.extend({
     toggleTopicFilter: function (event) {
         var topic_ids = $(event.currentTarget).val()
         this.model.toggleTopicFilter(topic_ids);
-        this.render();
     },
 
     toggleTyping: function (event) {

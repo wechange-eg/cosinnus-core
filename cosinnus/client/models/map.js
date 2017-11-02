@@ -16,6 +16,7 @@ module.exports = Backbone.Model.extend({
         },
         layer: 'street',
         pushState: true,
+        topicsVisible: false,
         topicsHtml: '',
         controlsEnabled: true,
         filterGroup: null,
@@ -85,6 +86,9 @@ module.exports = Backbone.Model.extend({
                 limit: json.limit,
                 activeTopicIds: json.topics
             });
+            if (json.topics) {
+                this.showTopics();
+            }
             this.trigger('change:bounds');
             this.trigger('change:controls');
         }
@@ -136,6 +140,10 @@ module.exports = Backbone.Model.extend({
     resetFilters: function () {
         this.set('activeFilters', _(this.get('availableFilters')).clone());
         this.attemptSearch();
+    },
+    
+    showTopics: function () {
+        this.set('topicsVisible', true);
     },
     
     toggleTopicFilter: function (topic_ids) {
