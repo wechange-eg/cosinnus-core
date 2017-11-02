@@ -166,7 +166,8 @@ module.exports = View.extend({
             imageURL: result.imageUrl,
             title: result.title,
             url: result.url,
-            address: result.address
+            address: result.address,
+            description: result.description
         }));
 
         if (this.markerNotPopup(marker) && this.markerNotSpiderfied(marker)) {

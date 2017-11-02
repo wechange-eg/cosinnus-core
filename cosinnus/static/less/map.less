@@ -37,11 +37,14 @@
             }
         }
     } 
+    
+    
 }
 
 .map-root {
     .popup {
-        width: 180px;
+        max-width: 250px;
+        min-width: 180px;
 
         img {
             float: left;
@@ -50,8 +53,13 @@
 
         .details {
             margin-left: 60px;
-            width: 120px;
+            max-width: 190px;
             min-height: 50px;
+            
+            .description {
+                margin: 5px 0 0 0;
+                color: #333;
+            }
         }
     }
 
