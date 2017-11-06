@@ -18,7 +18,10 @@ module.exports = Backbone.Router.extend({
                  activeFilters: settings.activeFilters,
              */
             // TODO: find a good solution for not using COSINNUS_MAP_MARKER_ICONS as a global JS variable
-            this.mapFullscreen = new Map();
+            var topicsHtml = typeof COSINNUS_MAP_TOPICS_HTML !== 'undefined' ? $("<div/>").html(COSINNUS_MAP_TOPICS_HTML).text() : '';
+            this.mapFullscreen = new Map({}, {
+                topicsHtml: topicsHtml
+            });
             var view = new MapView({
                 el: '#map-fullscreen',
                 model: this.mapFullscreen,

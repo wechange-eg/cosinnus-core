@@ -1,14 +1,14 @@
 {% load i18n cosinnus_tags %}
 
-{% if object.media_tag_object.topics %}
-	<p class="">
-	<b>{% trans "Topics we are involved with" %}</b>
-	    <i class="fa fa-fw fa-lightbulb-o"></i> 
-	    {% for topic in object.media_tag_object.get_topics %}
-            <a href="#">{{ topic }}</a>
-        {% endfor %}
-	</p>
-{% endif %}
+{% with topics=object.media_tag_object.topics %}
+    {% if topics %}
+		<p class="">
+		<b>{% trans "Topics we are involved with" %}</b>
+		    <i class="fa fa-fw fa-lightbulb-o"></i>
+            {% render_cosinnus_topics topics %}
+		</p>
+	{% endif %}
+{% endwith %}
 
 {% for tag in object.media_tag_object.tags.all %}
     {% if forloop.first %} 

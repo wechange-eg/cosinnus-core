@@ -608,6 +608,7 @@
             
             $('#searchbar').click( function() {
                 $(this).addClass('expanded');
+                $(this).find('input').focus();
             });
 
         },

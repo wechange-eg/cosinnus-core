@@ -464,6 +464,9 @@ class CosinnusConf(AppConf):
     # not all servers are running Postgres >= 9.3 yet. as long as this is true, we cannot uniformly run some nicer queries
     DO_ALL_SERVERS_HAVE_PSQL_9_3 = False
     
+    # if True, do not use haystack for map queries, but a deprecated, slow version
+    USE_DEPRECATED_NON_HAYSTACK_MAP_API = False
+    
 
 class CosinnusDefaultSettings(AppConf):
     """ Settings without a prefix namespace to provide default setting values for other apps.

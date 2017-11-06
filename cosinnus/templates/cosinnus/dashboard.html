@@ -268,12 +268,22 @@
                         {% endif %}
                     {% endwith %}
                     
+                    <p></p>
                     {% if group.description and group.description|length > 0 %}
-                        <p></p>
                         <div class="textfield transparent">{{ group.description|textfield }}</div>
                     {% else %}
-                        <i>{% trans "No Description set" %}</i>
+                        <p>
+                            <i>{% trans "No Description set" %}</i>
+                        </p>
                     {% endif %}
+                    
+                    {% with  topics=group.media_tag_object.topics %}
+                        {% if topics %}
+                            <p>
+	                           {% trans "Topics" %}: {% render_cosinnus_topics topics %}
+                            </p>
+	                    {% endif %}
+                    {% endwith %}
                     
                     </div>
                 <div class="multiline-ellipsis-realend"><a href="#">....{% trans "more" %}</a></div>

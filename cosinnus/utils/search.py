@@ -27,10 +27,6 @@ class TagObjectIndex(indexes.SearchIndex):
     mt_topics = indexes.MultiValueField(model_attr='media_tag__topics', null=True)
     mt_visibility = indexes.IntegerField(model_attr='media_tag__visibility', null=True)
 
-    def prepare_mt_persons(self, obj):
-        if obj.media_tag:
-            return prepare_users(obj.media_tag.persons.all())
-
 
 def get_tag_object_index():
     """
@@ -98,7 +94,30 @@ class TemplateResolveEdgeNgramField(TemplateResolveMixin, indexes.EdgeNgramField
     pass
 
 
-class BaseTaggableObjectIndex(TagObjectSearchIndex):
+class StoredDataIndexMixin(indexes.SearchIndex):
+    """ Stored field data, used when the rendered search result is not appropriate (e.g. in map search).
+        Override the prepare_<field> method for different implementing Models where the field sources differ!
+     """
+    
+    title = indexes.CharField(stored=True, indexed=False)
+    url = indexes.CharField(stored=True, indexed=False)
+    marker_image_url = indexes.CharField(stored=True, indexed=False)
+    description = indexes.CharField(stored=True, indexed=False)
+    
+    def prepare_title(self, obj):
+        return obj.title
+    
+    def prepare_url(self, obj):
+        return obj.get_absolute_url()
+    
+    def prepare_marker_image_url(self, obj):
+        return None
+    
+    def prepare_description(self, obj):
+        return obj.description
+
+
+class BaseTaggableObjectIndex(StoredDataIndexMixin, TagObjectSearchIndex):
     text = TemplateResolveEdgeNgramField(document=True, use_template=True)
     rendered = TemplateResolveCharField(use_template=True, indexed=False)
     
@@ -107,7 +126,17 @@ class BaseTaggableObjectIndex(TagObjectSearchIndex):
     creator = indexes.IntegerField(model_attr='creator__id', null=True)
     group = indexes.IntegerField(model_attr='group_id', indexed=False)
     group_members = indexes.MultiValueField(model_attr='group__members')
+    location = indexes.LocationField(null=True)
 
+    def prepare_location(self, obj):
+        if obj.media_tag and obj.media_tag.location_lat and obj.media_tag.location_lon:
+            # this expects (lat,lon)!
+            return "%s,%s" % (obj.media_tag.location_lat, obj.media_tag.location_lon)
+        return None
+
+    def prepare_description(self, obj):
+        return None
+    
     def index_queryset(self, using=None):
         model_cls = self.get_model()
         app_name = model_cls.__module__.split('.')[0] # eg 'cosinnus_etherpad'

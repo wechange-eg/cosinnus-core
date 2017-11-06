@@ -9,22 +9,22 @@
 	{% endfor %}
 {% endif %}
 
-{% if object.media_tag_object.topics %}
-	<legend>{% trans "Topics" %}</legend>
-    {% comment %} Approach disabled for now 
-	{% if object.media_tag_object.approach %}
+{% with topics=object.media_tag_object.topics %}
+    {% if topics %}
+		<legend>{% trans "Topics" %}</legend>
+	    {% comment %} Approach disabled for now 
+		{% if object.media_tag_object.approach %}
+			<p class="transparent">
+			    <i class="fa fa-fw fa-bolt"></i> {{ object.media_tag_object.get_approach_display }}
+			</p>
+		{% endif %}
+		{% endcomment %}
 		<p class="transparent">
-		    <i class="fa fa-fw fa-bolt"></i> {{ object.media_tag_object.get_approach_display }}
+		    <i class="fa fa-fw fa-lightbulb-o"></i> 
+	        {% render_cosinnus_topics topics %}
 		</p>
 	{% endif %}
-	{% endcomment %}
-	<p class="transparent">
-	    <i class="fa fa-fw fa-lightbulb-o"></i> 
-	    {% for topic in object.media_tag_object.get_topics %}
-            <a href="#">{{ topic }}</a>
-        {% endfor %}
-	</p>
-{% endif %}
+{% endwith %}
 
 {% for tag in object.media_tag_object.tags.all %}
     {% if forloop.first %} 
