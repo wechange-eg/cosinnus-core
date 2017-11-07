@@ -147,7 +147,6 @@ module.exports = Backbone.Model.extend({
     },
     
     toggleTopicFilter: function (topic_ids) {
-        var activeTopicIds = this.get('activeTopicIds');
         this.set('activeTopicIds', topic_ids);
         this.attemptSearch();
     },
@@ -181,7 +180,7 @@ module.exports = Backbone.Model.extend({
                 } catch (err) {}
             }
         });
-        if (json['topics']) {
+        if (typeof json['topics'] === "number" || (typeof json['topics'] === "string" && json['topics'].length > 0)) {
             json['topics'] = json['topics'].toString().split(',');
         }
         return json;

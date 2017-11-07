@@ -59,7 +59,7 @@ module.exports = View.extend({
     },
     
     toggleTopicFilter: function (event) {
-        var topic_ids = $(event.currentTarget).val()
+        var topic_ids = $(event.currentTarget).val();
         this.model.toggleTopicFilter(topic_ids);
     },
 

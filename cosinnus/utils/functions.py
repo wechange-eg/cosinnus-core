@@ -221,7 +221,7 @@ def ensure_list_of_ints(value):
     """ Will accept a single int/str number or list or comma-seperated list of int/str numbers
         and always return a list of integers, or an empty list """
     # guarantee list of ints
-    if not value:
+    if value is None or value == '' or value == []:
         return []
     if isinstance(value, six.string_types):
         if ',' in value:
