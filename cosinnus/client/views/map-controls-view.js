@@ -100,6 +100,8 @@ module.exports = View.extend({
             this.$el.find('.icon-search').removeClass('hidden');
         }
         this.$el.find('.icon-loading').addClass('hidden');
+        var $message = this.$el.find('form .message');
+        $message.hide();
     },
 
     handleXhrError: function (event) {
@@ -108,6 +110,7 @@ module.exports = View.extend({
             message: 'Ein Fehler ist bei der Suche aufgetreten.',
             el: $message
         }).render();
+        $message.show();
     },
 
     afterRender: function () {
