@@ -393,17 +393,11 @@
                   {% if query or form.cleaned_data.topics %}
                     <p class="large-space">
                       {% if query and form.cleaned_data.topics %}
-                        {% blocktrans with start=page.start_index end=page.end_index total=paginator.count %}
-                          Showing {{ end }} of {{ total }} results for your query "{{ query }}" with topics:
-                        {% endblocktrans %}
+                        {% blocktrans with start=page.start_index end=page.end_index total=paginator.count %}Showing {{ end }} of {{ total }} results for your query "{{ query }}" with topics:{% endblocktrans %}
                       {% elif query %}
-                        {% blocktrans with start=page.start_index end=page.end_index total=paginator.count %}
-                          Showing {{ end }} of {{ total }} results for your query "{{ query }}"
-                        {% endblocktrans %}
+                        {% blocktrans with start=page.start_index end=page.end_index total=paginator.count %}Showing {{ end }} of {{ total }} results for your query "{{ query }}"{% endblocktrans %}
                       {% elif form.cleaned_data.topics %}
-	                    {% blocktrans with start=page.start_index end=page.end_index total=paginator.count %}
-	                      Showing {{ end }} of {{ total }} results with topics:
-	                    {% endblocktrans %}
+	                    {% blocktrans with start=page.start_index end=page.end_index total=paginator.count %}Showing {{ end }} of {{ total }} results with topics:{% endblocktrans %}
 	                  {% endif %}
 	                  
                       {% if form.cleaned_data.topics %}

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-25 15:24+0200\n"
+"POT-Creation-Date: 2017-11-08 16:07+0100\n"
 "PO-Revision-Date: 2017-09-07 15:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2529,6 +2529,9 @@ msgstr "Усі проекти"
 msgid "Search..."
 msgstr "Пошук..."
 
+msgid "Search"
+msgstr "Пошук"
+
 msgid "Messages"
 msgstr "Повідомлення"
 
@@ -2678,9 +2681,6 @@ msgstr "Угода користувача"
 msgid "Log in"
 msgstr "Вхід в систему"
 
-msgid "Search"
-msgstr "Пошук"
-
 msgid "Search in Apps"
 msgstr "Пошук серед застосунків"
 
@@ -2705,6 +2705,23 @@ msgstr "Інші проекти та групи"
 msgid "Search for Users"
 msgstr "Пошук користувачів"
 
+#, python-format
+msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\" with topics:"
+msgstr ""
+
+#, python-format
+msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\""
+msgstr ""
+
+#, python-format
+msgid "Showing %(end)s of %(total)s results with topics:"
+msgstr ""
+
+#, fuzzy
+#| msgid "more"
+msgid "or"
+msgstr "більше"
+
 msgid "We could not find any results matching your search query."
 msgstr "Ми не можемо знайти результатів, що відповідають Вашому пошуку."
 
@@ -2713,6 +2730,9 @@ msgstr "назад"
 
 msgid "next"
 msgstr "далі"
+
+msgid "Enter one or more search terms or select a topic to search."
+msgstr ""
 
 msgid "About me"
 msgstr "Про мене"

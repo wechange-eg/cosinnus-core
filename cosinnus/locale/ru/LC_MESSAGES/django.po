@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-25 15:24+0200\n"
+"POT-Creation-Date: 2017-11-08 16:07+0100\n"
 "PO-Revision-Date: 2017-08-15 17:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2532,6 +2532,9 @@ msgstr "Все проекты"
 msgid "Search..."
 msgstr "Поиск..."
 
+msgid "Search"
+msgstr "Поиск"
+
 msgid "Messages"
 msgstr "Сообщения"
 
@@ -2681,9 +2684,6 @@ msgstr "Условия пользования сайтом"
 msgid "Log in"
 msgstr "Войти"
 
-msgid "Search"
-msgstr "Поиск"
-
 msgid "Search in Apps"
 msgstr "Поиск в приложениях"
 
@@ -2708,6 +2708,23 @@ msgstr "Другие проекты и группы"
 msgid "Search for Users"
 msgstr "Поиск пользователей"
 
+#, python-format
+msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\" with topics:"
+msgstr ""
+
+#, python-format
+msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\""
+msgstr ""
+
+#, python-format
+msgid "Showing %(end)s of %(total)s results with topics:"
+msgstr ""
+
+#, fuzzy
+#| msgid "more"
+msgid "or"
+msgstr "больше"
+
 msgid "We could not find any results matching your search query."
 msgstr "По Вашему запросу мы не смогли ничего найти."
 
@@ -2716,6 +2733,9 @@ msgstr "предыдущее"
 
 msgid "next"
 msgstr "следующее"
+
+msgid "Enter one or more search terms or select a topic to search."
+msgstr ""
 
 msgid "About me"
 msgstr "Обо мне"

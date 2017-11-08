@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-25 15:24+0200\n"
+"POT-Creation-Date: 2017-11-08 16:07+0100\n"
 "PO-Revision-Date: 2016-10-26 16:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2421,6 +2421,9 @@ msgstr "All Projects"
 msgid "Search..."
 msgstr ""
 
+msgid "Search"
+msgstr ""
+
 msgid "Messages"
 msgstr ""
 
@@ -2570,9 +2573,6 @@ msgstr ""
 msgid "Log in"
 msgstr ""
 
-msgid "Search"
-msgstr ""
-
 msgid "Search in Apps"
 msgstr ""
 
@@ -2605,6 +2605,21 @@ msgstr "Other Projects"
 msgid "Search for Users"
 msgstr ""
 
+#, python-format
+msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\" with topics:"
+msgstr ""
+
+#, python-format
+msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\""
+msgstr ""
+
+#, python-format
+msgid "Showing %(end)s of %(total)s results with topics:"
+msgstr ""
+
+msgid "or"
+msgstr ""
+
 msgid "We could not find any results matching your search query."
 msgstr ""
 
@@ -2612,6 +2627,9 @@ msgid "previous"
 msgstr ""
 
 msgid "next"
+msgstr ""
+
+msgid "Enter one or more search terms or select a topic to search."
 msgstr ""
 
 msgid "About me"

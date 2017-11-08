@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-25 15:24+0200\n"
-"PO-Revision-Date: 2017-09-25 15:30+0200\n"
+"POT-Creation-Date: 2017-11-08 16:07+0100\n"
+"PO-Revision-Date: 2017-11-08 16:09+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -2514,6 +2514,9 @@ msgstr "Alle Projekte"
 msgid "Search..."
 msgstr "Suchen..."
 
+msgid "Search"
+msgstr "Suche"
+
 msgid "Messages"
 msgstr "Nachrichten"
 
@@ -2664,9 +2667,6 @@ msgstr "Nutzungsbedingungen"
 msgid "Log in"
 msgstr "Login"
 
-msgid "Search"
-msgstr "Suche"
-
 msgid "Search in Apps"
 msgstr "Suche in Anwendungen"
 
@@ -2691,6 +2691,21 @@ msgstr "Andere Projekte und Gruppen"
 msgid "Search for Users"
 msgstr "Nach Benutzern suchen"
 
+#, python-format
+msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\" with topics:"
+msgstr "Zeige %(end)s von %(total)s Ergebnissen für deine Suche \"%(query)s\" mit den Themen:"
+
+#, python-format
+msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\""
+msgstr "Zeige %(end)s von %(total)s Ergebnissen für deine Suche \"%(query)s\""
+
+#, python-format
+msgid "Showing %(end)s of %(total)s results with topics:"
+msgstr "Zeige %(end)s von %(total)s Ergebnissen für die Themen:"
+
+msgid "or"
+msgstr "oder"
+
 msgid "We could not find any results matching your search query."
 msgstr "Wir konnten keine Ergebnisse finden die mit deiner Suchanfrage übereinstimmen."
 
@@ -2699,6 +2714,9 @@ msgstr "Zurück"
 
 msgid "next"
 msgstr "Weiter"
+
+msgid "Enter one or more search terms or select a topic to search."
+msgstr "Gib einen oder mehrere Suchbegriffe ein oder wähle ein Thema aus um zu Suchen."
 
 msgid "About me"
 msgstr "Über mich"
@@ -3375,10 +3393,9 @@ msgstr "Dieser Bestätigungslink ist nicht länger gültig!"
 msgid "The email you are trying to confirm has already been confirmed or belongs to another user!"
 msgstr "Die Email-Adresse die du bestätigen wolltest wurde bereits bestätigt oder ist inzwischen von einem andern Benutzer registriert worden!"
 
-#, fuzzy, python-format
-#| msgid "Your email address %(email)s was successfully confirmed! You can now log in and get started!"
+#, python-format
 msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
-msgstr "Deine Email-Adresse %(email)s wurde erfolgreich bestätigt! Du kannst dich jetzt einloggen und loslegen!"
+msgstr "Deine Email-Adresse %(email)s wurde erfolgreich bestätigt! Willkommen!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
