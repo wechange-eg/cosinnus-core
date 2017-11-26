@@ -116,11 +116,8 @@ module.exports = View.extend({
     afterRender: function () {
         // update topics selector with current topics
         var topics_selector = this.$el.find('#id_topics');
-        if (this.model.get('activeTopicIds')) {
+        if (topics_selector.length > 0 && this.model.get('activeTopicIds')) {
             topics_selector.val(this.model.get('activeTopicIds')).select2();
-        } else {
-            topics_selector.val().select2();
         }
-        
     }
 });

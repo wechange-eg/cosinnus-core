@@ -29,8 +29,8 @@
     	{% include 'cosinnus/common/internet_explorer_not_supported.html' %}
 		
 		<div class="map-root"></div>
-        {% captureas map_settings %}{"topicsHtml": "{% render_cosinnus_topics_field "escape" %}", "markerIcons": {% render_map_marker_icon_json %}}{% endcaptureas %}
-		
-		{% include 'cosinnus/common/init_client_module.html' with module='map' id="fullscreen" extra_classes="no-navbar" controlsEnabled=True settings=map_settings  %}
+		{% captureas map_settings %}{"controlsEnabled": {% if request.GET.controls_disabled %}false{% else %}true{% endif %}, "topicsHtml": "{% render_cosinnus_topics_field "escape" %}", "markerIcons": {% render_map_marker_icon_json %}}{% endcaptureas %}
+            
+		{% include 'cosinnus/common/init_client_module.html' with module='map' id="fullscreen" extra_classes="no-navbar" settings=map_settings  %}
 	</body>
 </html>

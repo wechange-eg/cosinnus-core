@@ -70,21 +70,25 @@ module.exports = Backbone.Model.extend({
 
     initialSearch: function () {
         var json = this.parseUrl(window.location.href.replace(window.location.origin, ''));
+        var ifundef = function(a, b) {
+            return typeof a == "undefined" ? b : a;
+        };
+        
         if (_(json).keys().length) {
             this.set({
                 activeFilters: {
-                    people: json.people,
-                    events: json.events,
-                    projects: json.projects,
-                    groups: json.groups
+                    people: ifundef(json.people, this.get('activeFilters').people),
+                    events: ifundef(json.events, this.get('activeFilters').events),
+                    projects: ifundef(json.projects, this.get('activeFilters').projects),
+                    groups: ifundef(json.groups, this.get('activeFilters').groups)
                 },
-                q: json.q,
-                north: json.ne_lat,
-                east: json.ne_lon,
-                south: json.sw_lat,
-                west: json.sw_lon,
-                limit: json.limit,
-                activeTopicIds: json.topics
+                q: ifundef(json.q, this.get('q')),
+                north: ifundef(json.ne_lat, this.get('north')),
+                east: ifundef(json.ne_lon, this.get('east')),
+                south: ifundef(json.sw_lat, this.get('south')),
+                west: ifundef(json.sw_lon, this.get('west')),
+                limit: ifundef(json.limits, this.get('limit')),
+                activeTopicIds: ifundef(json.topics, this.get('activeTopicIds'))
             });
             if (json.topics) {
                 this.showTopics();

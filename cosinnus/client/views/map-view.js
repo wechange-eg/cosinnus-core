@@ -106,11 +106,13 @@ module.exports = View.extend({
         
         // disable drag dropping inside map controls
         var div = this.$el.find('.map-controls')[0];
-        if (!L.Browser.touch) {
-            L.DomEvent.disableClickPropagation(div);
-            L.DomEvent.on(div, 'mousewheel', L.DomEvent.stopPropagation);
-        } else {
-            L.DomEvent.on(div, 'click', L.DomEvent.stopPropagation);
+        if (div) {
+            if (!L.Browser.touch) {
+                L.DomEvent.disableClickPropagation(div);
+                L.DomEvent.on(div, 'mousewheel', L.DomEvent.stopPropagation);
+            } else {
+                L.DomEvent.on(div, 'click', L.DomEvent.stopPropagation);
+            }
         }
         
         this.updateBounds();
