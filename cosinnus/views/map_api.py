@@ -17,7 +17,8 @@ from django.utils.timezone import now
 from haystack.query import SearchQuerySet
 from haystack.utils.geo import Point
 
-from cosinnus.forms.search import filter_searchqueryset_for_read_access
+from cosinnus.forms.search import filter_searchqueryset_for_read_access,\
+    filter_searchqueryset_for_portal
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
 from cosinnus.models.profile import get_user_profile_model
@@ -155,6 +156,8 @@ def map_search_endpoint(request, filter_group_id=None):
     topics = ensure_list_of_ints(params.get('topics', ''))
     if topics: 
         sqs = sqs.filter_and(mt_topics__in=topics)
+    # filter for portal visibility
+    sqs = filter_searchqueryset_for_portal(sqs)
     # filter for read access by this user
     sqs = filter_searchqueryset_for_read_access(sqs, request.user)
     # filter events by upcoming status

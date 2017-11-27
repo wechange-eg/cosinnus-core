@@ -124,6 +124,7 @@ class BaseTaggableObjectIndex(StoredDataIndexMixin, TagObjectSearchIndex):
     boosted = indexes.EdgeNgramField(model_attr='title', boost=BOOSTED_FIELD_BOOST)
 
     creator = indexes.IntegerField(model_attr='creator__id', null=True)
+    portal = indexes.IntegerField(model_attr='group__portal_id')
     group = indexes.IntegerField(model_attr='group_id', indexed=False)
     group_members = indexes.MultiValueField(model_attr='group__members')
     location = indexes.LocationField(null=True)

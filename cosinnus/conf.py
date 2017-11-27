@@ -417,6 +417,9 @@ class CosinnusConf(AppConf):
 
     #: The default search index for the :attr:`TAG_OBJECT_MODEL`
     TAG_OBJECT_SEARCH_INDEX = 'cosinnus.utils.search.DefaultTagObjectIndex'
+    
+    # a list of portal-ids of foreign portals to display search data from
+    SEARCH_DISPLAY_FOREIGN_PORTALS = []
 
     # should the nutzungsbedingungen_content.html be sent to the user as an email
     # after successful registration?

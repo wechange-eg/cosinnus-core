@@ -15,7 +15,8 @@ class CosinnusGroupIndexMixin(StoredDataIndexMixin, indexes.SearchIndex):
     
     location = indexes.LocationField(null=True)
     boosted = indexes.CharField(model_attr='name', boost=BOOSTED_FIELD_BOOST)
-
+    
+    portal = indexes.IntegerField(model_attr='portal_id')
     group_members = indexes.MultiValueField(model_attr='members', indexed=False)
     public = indexes.BooleanField(model_attr='public')
     always_visible = indexes.BooleanField(default=True)
@@ -102,8 +103,12 @@ class UserProfileIndex(StoredDataIndexMixin, TagObjectSearchIndex, indexes.Index
     
     user_visibility_mode = indexes.BooleanField(default=True) # switch to filter differently on mt_visibility
     membership_groups = indexes.MultiValueField(model_attr='cosinnus_groups_pks') # ids of all groups the user is member/admin of
+    portals = indexes.MultiValueField()
     location = indexes.LocationField(null=True)
-
+    
+    def prepare_portals(self, obj):
+        return list(obj.user.cosinnus_portal_memberships.values_list('group_id', flat=True))
+    
     def prepare_location(self, obj):
         if obj.media_tag and obj.media_tag.location_lat and obj.media_tag.location_lon:
             # this expects (lat,lon)!

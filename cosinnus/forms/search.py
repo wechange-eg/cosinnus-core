@@ -12,6 +12,7 @@ from haystack.backends import SQ
 from haystack.constants import DEFAULT_ALIAS
 from haystack.forms import SearchForm, model_choices
 
+from cosinnus.conf import settings
 from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.models.profile import get_user_profile_model
@@ -20,6 +21,7 @@ from haystack.inputs import AutoQuery
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,\
     CommaSeparatedSelect2MultipleWidget
 from haystack.query import EmptySearchQuerySet
+from cosinnus.models.group import CosinnusPortal
 
 MODEL_ALIASES = {
     'todo': 'cosinnus_todo.todoentry',
@@ -82,6 +84,22 @@ def filter_searchqueryset_for_read_access(sqs, user):
         
     return sqs
 
+
+def filter_searchqueryset_for_portal(sqs, portals=None):
+    """ Filters a searchqueryset by which portal the objects belong to.
+        @param portals: If not provided, will default to this portal and all foreign portals allowed in settings 
+            ([current-portal] + settings.COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS) """
+            
+    current_portal = CosinnusPortal.get_current().id
+    portals = portals or [current_portal] + \
+        getattr(settings, 'COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS', [])
+    portals = list(set(portals))
+    
+    if portals:
+        sqs = sqs.filter_and(SQ(portal__in=portals) | SQ(portals__in=portals))
+    return sqs
+
+
 class TaggableModelSearchForm(SearchForm):
     """
     This is almost the same search form as shipped with django-haystack except
@@ -125,6 +143,7 @@ class TaggableModelSearchForm(SearchForm):
         
         if hasattr(self, 'cleaned_data'):
             sqs = filter_searchqueryset_for_read_access(sqs, self.request.user)
+            sqs = filter_searchqueryset_for_portal(sqs)
             sqs = self._filter_group_selection(sqs)
             sqs = self._filter_media_tags(sqs)
             if self.cleaned_data.get('q', None):
