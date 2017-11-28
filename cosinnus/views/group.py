@@ -77,6 +77,7 @@ from django.utils.safestring import mark_safe
 from django.template.defaultfilters import linebreaksbr
 from django.contrib.contenttypes.models import ContentType
 from cosinnus.views.mixins.reflected_objects import ReflectedObjectSelectMixin
+from cosinnus.search_indexes import CosinnusProjectIndex, CosinnusSocietyIndex
 logger = logging.getLogger('cosinnus')
 
 
@@ -196,6 +197,17 @@ class CosinnusGroupFormMixin(object):
             'microsite_public_apps_selection': microsite_public_apps_selection,
         })
         return context
+    
+    def forms_valid(self, form, inlines):
+        """ We update the haystack index again after the inlineforms have also been saved,
+            so that data changed in those forms are reflected in the updated group object """
+        ret = super(CosinnusGroupFormMixin, self).forms_valid(form, inlines)
+        if self.object.type == CosinnusGroup.TYPE_PROJECT:
+            group_index = CosinnusProjectIndex()
+        else:
+            group_index = CosinnusSocietyIndex()
+        group_index.update_object(self.object)
+        return ret
 
 
 class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin, UserFormKwargsMixin, 
