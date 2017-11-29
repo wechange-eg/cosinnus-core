@@ -602,7 +602,7 @@ class GroupURLNode(URLNode):
         patched_group_slug_arg = None
         
         # we accept a group object or a group slug
-        if issubclass(group_arg.__class__, CosinnusGroup):
+        if issubclass(group_arg.__class__, get_cosinnus_group_model()):
             # determine the portal from the group
             group_slug = group_arg.slug
             
