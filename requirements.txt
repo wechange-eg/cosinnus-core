@@ -32,6 +32,7 @@ easy-thumbnails==1.4
 ecdsa==0.10
 fabric-virtualenv==0.2.1
 fabvenv==0.1.1
+geopy==1.11.0
 jsonfield==1.0.0
 html5lib==0.99
 oauthlib==2.0.2
