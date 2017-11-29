@@ -70,6 +70,13 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
             self.fields['tags'].choices = preresults
             self.fields['tags'].initial = [key for key,val in preresults]#[tag.name for tag in self.instance.tags.all()]
             self.initial['tags'] = self.fields['tags'].initial
+            
+        # if no media tag data was supplied the object was created directly and not through a frontend form
+        # we then manually inherit the group's media_tag topics by adding them to the data 
+        # (usually they would have been added into the form's initial data)
+        if self.data and not any([key.startswith('media_tag-') for key in self.data.keys()]) and self.group and self.group.media_tag and self.group.media_tag.topics:
+            self.data._mutable = True
+            self.data.setlist('media_tag-topics', self.group.media_tag.topics.split(','))
         
         if self.group and not self.instance.pk:
             # for new TaggableObjects (not groups), set the default visibility corresponding to the group's public status

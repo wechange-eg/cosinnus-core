@@ -15,10 +15,11 @@ module.exports = {
         };
         var settings = JSON.parse(params.settings);
         settings = $.extend(true, {}, d, settings);
-
+        
         var map = new Map({}, {
             availableFilters: settings.availableFilters,
             activeFilters: settings.activeFilters,
+            topicsHtml: $("<div/>").html(settings.topicsHtml).text(),
             pushState: settings.pushState,
             controlsEnabled: settings.controlsEnabled,
             filterGroup: settings.filterGroup,

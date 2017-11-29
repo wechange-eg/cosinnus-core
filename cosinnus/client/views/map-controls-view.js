@@ -18,7 +18,9 @@ module.exports = View.extend({
     events: {
         'click .result-filter': 'toggleFilter',
         'click .reset-filters': 'resetFilters',
+        'click .show-topics': 'showTopics',
         'click .layer-button': 'switchLayer',
+        'change #id_topics': 'toggleTopicFilter',
         'focusin .q': 'toggleTyping',
         'focusout .q': 'toggleTyping',
         'keyup .q': 'handleTyping',
@@ -39,6 +41,12 @@ module.exports = View.extend({
         this.model.resetFilters();
         this.render();
     },
+    
+    showTopics: function (event) {
+        event.preventDefault();
+        this.model.showTopics();
+        this.render();
+    },
 
     // Switch layers if clicked layer isn't the active layer.
     switchLayer: function (event) {
@@ -48,6 +56,11 @@ module.exports = View.extend({
             this.render();
             this.trigger('change:layer', layer);
         }
+    },
+    
+    toggleTopicFilter: function (event) {
+        var topic_ids = $(event.currentTarget).val();
+        this.model.toggleTopicFilter(topic_ids);
     },
 
     toggleTyping: function (event) {
@@ -87,6 +100,8 @@ module.exports = View.extend({
             this.$el.find('.icon-search').removeClass('hidden');
         }
         this.$el.find('.icon-loading').addClass('hidden');
+        var $message = this.$el.find('form .message');
+        $message.hide();
     },
 
     handleXhrError: function (event) {
@@ -95,5 +110,14 @@ module.exports = View.extend({
             message: 'Ein Fehler ist bei der Suche aufgetreten.',
             el: $message
         }).render();
+        $message.show();
+    },
+
+    afterRender: function () {
+        // update topics selector with current topics
+        var topics_selector = this.$el.find('#id_topics');
+        if (topics_selector.length > 0 && this.model.get('activeTopicIds')) {
+            topics_selector.val(this.model.get('activeTopicIds')).select2();
+        }
     }
 });

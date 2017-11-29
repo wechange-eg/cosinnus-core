@@ -103,6 +103,18 @@ module.exports = View.extend({
         this.leaflet.on('dragend', this.handleViewportChange, this);
         this.leaflet.on('popupopen', this.handlePopup, this);
         this.leaflet.on('popupclose', this.handlePopup, this);
+        
+        // disable drag dropping inside map controls
+        var div = this.$el.find('.map-controls')[0];
+        if (div) {
+            if (!L.Browser.touch) {
+                L.DomEvent.disableClickPropagation(div);
+                L.DomEvent.on(div, 'mousewheel', L.DomEvent.stopPropagation);
+            } else {
+                L.DomEvent.on(div, 'click', L.DomEvent.stopPropagation);
+            }
+        }
+        
         this.updateBounds();
     },
 
@@ -156,7 +168,8 @@ module.exports = View.extend({
             imageURL: result.imageUrl,
             title: result.title,
             url: result.url,
-            address: result.address
+            address: result.address,
+            description: result.description
         }));
 
         if (this.markerNotPopup(marker) && this.markerNotSpiderfied(marker)) {

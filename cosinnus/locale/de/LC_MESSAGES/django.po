@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-12 16:18+0200\n"
-"PO-Revision-Date: 2017-08-12 16:38+0200\n"
+"POT-Creation-Date: 2017-11-08 16:07+0100\n"
+"PO-Revision-Date: 2017-11-08 16:09+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -388,11 +388,17 @@ msgstr "Gemeledetes Objekt"
 msgid "Reported objects"
 msgstr "Gemeledete Objekte"
 
-msgid "Enter a valid name. Forward slash is not allowed."
-msgstr "Bitte einen gültigen Namen angeben. Ein Vorwärtsslash ist nicht erlaubt."
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Notification ID"
+msgstr "Benachrichtigs-Id"
 
 msgid "Portal"
 msgstr "Portal"
+
+msgid "Enter a valid name. Forward slash is not allowed."
+msgstr "Bitte einen gültigen Namen angeben. Ein Vorwärtsslash ist nicht erlaubt."
 
 msgid "Portals"
 msgstr "Portale"
@@ -1741,6 +1747,9 @@ msgstr "Verwandt mit"
 msgid "Overview"
 msgstr "Übersicht"
 
+msgid "To the Forum"
+msgstr ""
+
 msgctxt "Group"
 msgid "Public"
 msgstr "Öffentlich"
@@ -2445,12 +2454,6 @@ msgstr "Was möchtest du lernen?"
 msgid "Who is allowed to see you on the platform?"
 msgstr "Wer darf dich auf der Plattform sehen?"
 
-msgid "Logged in Members only"
-msgstr "Nur eingeloggte Mitglieder"
-
-msgid "Everybody"
-msgstr "Jeder"
-
 msgid "My location"
 msgstr "Wo lebst du?"
 
@@ -2462,6 +2465,12 @@ msgstr "Was ich lernen möchte"
 
 msgid "Visibility"
 msgstr "Sichtbarkeit"
+
+msgid "Logged in Members only"
+msgstr "Nur eingeloggte Mitglieder"
+
+msgid "Everybody"
+msgstr "Jeder"
 
 msgid "OK"
 msgstr "OK"
@@ -2505,6 +2514,9 @@ msgstr "Alle Projekte"
 msgid "Search..."
 msgstr "Suchen..."
 
+msgid "Search"
+msgstr "Suche"
+
 msgid "Messages"
 msgstr "Nachrichten"
 
@@ -2531,9 +2543,6 @@ msgstr "Passwort vergessen?"
 
 msgid "Logged out"
 msgstr "Abgemeldet"
-
-msgid "Email"
-msgstr "E-mail"
 
 msgid "Password"
 msgstr "Passwort"
@@ -2658,9 +2667,6 @@ msgstr "Nutzungsbedingungen"
 msgid "Log in"
 msgstr "Login"
 
-msgid "Search"
-msgstr "Suche"
-
 msgid "Search in Apps"
 msgstr "Suche in Anwendungen"
 
@@ -2685,6 +2691,21 @@ msgstr "Andere Projekte und Gruppen"
 msgid "Search for Users"
 msgstr "Nach Benutzern suchen"
 
+#, python-format
+msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\" with topics:"
+msgstr "Zeige %(end)s von %(total)s Ergebnissen für deine Suche \"%(query)s\" mit den Themen:"
+
+#, python-format
+msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\""
+msgstr "Zeige %(end)s von %(total)s Ergebnissen für deine Suche \"%(query)s\""
+
+#, python-format
+msgid "Showing %(end)s of %(total)s results with topics:"
+msgstr "Zeige %(end)s von %(total)s Ergebnissen für die Themen:"
+
+msgid "or"
+msgstr "oder"
+
 msgid "We could not find any results matching your search query."
 msgstr "Wir konnten keine Ergebnisse finden die mit deiner Suchanfrage übereinstimmen."
 
@@ -2693,6 +2714,9 @@ msgstr "Zurück"
 
 msgid "next"
 msgstr "Weiter"
+
+msgid "Enter one or more search terms or select a topic to search."
+msgstr "Gib einen oder mehrere Suchbegriffe ein oder wähle ein Thema aus um zu Suchen."
 
 msgid "About me"
 msgstr "Über mich"
@@ -2715,6 +2739,15 @@ msgstr "Profil löschen"
 
 msgid "User overview"
 msgstr "Benutzer_innen-Übersicht"
+
+msgid "Members of your projects and groups only"
+msgstr "Nur Mitglieder deiner Projekte und Gruppen"
+
+msgid "Registered users only"
+msgstr "Nur registrierte Benutzer"
+
+msgid "Everybody (public profile)"
+msgstr "Jeder (öffentliches Profil)"
 
 msgid "Delete user profile"
 msgstr "Benutzerinnen_innen-Profil löschen"
@@ -2787,6 +2820,27 @@ msgstr "Detaillierte Beschreibung"
 
 msgid "Describe yourself, your activities and your interests."
 msgstr "Beschreibe dich, deine Aktivitäten und Interessen"
+
+msgid "Welcome!"
+msgstr "Willkommen!"
+
+msgid "We give you full control over what people can see of you on the platform and what you hear from us!"
+msgstr "Wir geben dir die volle Kontrolle darüber, welche Leute dich auf der Plattform sehen können und was du von uns hörst!"
+
+msgid "You can change this setting later in your profile settings"
+msgstr "Du kannst diese Einstellung später in deinen Profileinstellungen ändern"
+
+msgid "in the top right menu"
+msgstr "im Menü rechts oben"
+
+msgid "When may we send you email notifications?"
+msgstr "Wann dürfen wir dir Benachrichtigungsemails schicken?"
+
+msgid "You can change or customize this setting later in your notification settings"
+msgstr "Du kannst diese Einstellung später in deinen Benachrichtigunseinstellungen ändern"
+
+msgid "Your privacy: You are in control!"
+msgstr "Deine Privatsphäre: Du hast die Kontrolle!"
 
 msgid "User Dashboard"
 msgstr "Mein Dashboard"
@@ -3292,8 +3346,8 @@ msgid "Sorry, you cannot log in because your account is suspended. Please contac
 msgstr "Entschuldige, du kannst dich nicht einloggen, weil dein Benutzerkonto gesperrt wurde. Bitte kontaktiere einen Administrator!"
 
 #, python-format
-msgid "User \"%(user)s\" was registered successfully. You can now log in using this username."
-msgstr "Benutzer_in \"%(user)s\" wurde erfolgreich registriert. Sie können sich jetzt mit diesen Benutzer_innen-Namen einloggen."
+msgid "Your account \"%(user)s\" was registered successfully. Welcome to the community!"
+msgstr "Dein Benutzerkonto \"%(user)s\" wurde erfolgreich registriert. Willkommen auf der Plattform!"
 
 #, python-format
 msgid "User \"%(user)s\" was registered successfully. The account will need to be approved before you can log in. We will send an email to your address \"%(email)s\" when this happens."
@@ -3305,6 +3359,9 @@ msgstr "Benutzer \"%(user)s\" wurde erfolgreich registriert. Wir senden eine Ema
 
 msgid "You are already logged in!"
 msgstr "Du bist bereits eingeloggt!"
+
+msgid "Your privacy settings were saved. Welcome!"
+msgstr "Deine Privatsphären-Einstellungen wurden gespeichert. Willkommen!"
 
 msgid "The user account you were looking for does not exist! Their registration was probably already denied."
 msgstr "Das Benutzerkonto was du suchst gibt es nicht. Wahrscheinlich wurde die Registrierungsanfrage schon von einem anderen Portaladministrator abgelehnt."
@@ -3337,8 +3394,8 @@ msgid "The email you are trying to confirm has already been confirmed or belongs
 msgstr "Die Email-Adresse die du bestätigen wolltest wurde bereits bestätigt oder ist inzwischen von einem andern Benutzer registriert worden!"
 
 #, python-format
-msgid "Your email address %(email)s was successfully confirmed! You can now log in and get started!"
-msgstr "Deine Email-Adresse %(email)s wurde erfolgreich bestätigt! Du kannst dich jetzt einloggen und loslegen!"
+msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
+msgstr "Deine Email-Adresse %(email)s wurde erfolgreich bestätigt! Willkommen!"
 
 #, python-format
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
@@ -3462,11 +3519,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "Wait..."
 #~ msgstr "Warte..."
-
-#, fuzzy
-#~| msgid "Redirect Logged in Users"
-#~ msgid "Logged in Users only"
-#~ msgstr "Eingeloggte Benutzer weiterleiten"
 
 #~ msgid "This is an internal description for the members."
 #~ msgstr "Dies ist eine Mitglieder-interne Beschreibung."

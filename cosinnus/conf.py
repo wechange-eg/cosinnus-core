@@ -417,6 +417,9 @@ class CosinnusConf(AppConf):
 
     #: The default search index for the :attr:`TAG_OBJECT_MODEL`
     TAG_OBJECT_SEARCH_INDEX = 'cosinnus.utils.search.DefaultTagObjectIndex'
+    
+    # a list of portal-ids of foreign portals to display search data from
+    SEARCH_DISPLAY_FOREIGN_PORTALS = []
 
     # should the nutzungsbedingungen_content.html be sent to the user as an email
     # after successful registration?
@@ -424,6 +427,9 @@ class CosinnusConf(AppConf):
     
     # can be overriden to let cosinnus know that the server uses HTTPS. this is important to set!
     SITE_PROTOCOL = 'http'
+    
+    # whether or not to redirect to the welcome settings page after a user registers
+    SHOW_WELCOME_SETTINGS_PAGE = True
     
     # the duration of the user stream (must be very short, otherwise notifications will not appear)
     STREAM_SHORT_CACHE_TIMEOUT = 30
@@ -460,6 +466,9 @@ class CosinnusConf(AppConf):
     
     # not all servers are running Postgres >= 9.3 yet. as long as this is true, we cannot uniformly run some nicer queries
     DO_ALL_SERVERS_HAVE_PSQL_9_3 = False
+    
+    # if True, do not use haystack for map queries, but a deprecated, slow version
+    USE_DEPRECATED_NON_HAYSTACK_MAP_API = False
     
 
 class CosinnusDefaultSettings(AppConf):

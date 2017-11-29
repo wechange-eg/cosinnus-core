@@ -275,7 +275,7 @@ class BaseUserProfile(FacebookIntegrationUserProfileMixin, models.Model):
         redirects = self.settings.get(PROFILE_SETTING_REDIRECT_NEXT_VISIT, [])
         if not redirects:
             return False
-        next_redirect = redirects.pop()
+        next_redirect = redirects.pop(0)
         if next_redirect:
             self.settings[PROFILE_SETTING_REDIRECT_NEXT_VISIT] = redirects
             self.save(update_fields=['settings'])

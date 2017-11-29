@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-12 16:18+0200\n"
+"POT-Creation-Date: 2017-11-08 16:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -387,10 +387,16 @@ msgstr ""
 msgid "Reported objects"
 msgstr ""
 
-msgid "Enter a valid name. Forward slash is not allowed."
+msgid "Email"
+msgstr ""
+
+msgid "Notification ID"
 msgstr ""
 
 msgid "Portal"
+msgstr ""
+
+msgid "Enter a valid name. Forward slash is not allowed."
 msgstr ""
 
 msgid "Portals"
@@ -1724,6 +1730,9 @@ msgstr ""
 msgid "Overview"
 msgstr ""
 
+msgid "To the Forum"
+msgstr ""
+
 msgctxt "Group"
 msgid "Public"
 msgstr ""
@@ -2297,12 +2306,6 @@ msgstr ""
 msgid "Who is allowed to see you on the platform?"
 msgstr ""
 
-msgid "Logged in Members only"
-msgstr ""
-
-msgid "Everybody"
-msgstr ""
-
 msgid "My location"
 msgstr ""
 
@@ -2313,6 +2316,12 @@ msgid "What I wish to learn"
 msgstr ""
 
 msgid "Visibility"
+msgstr ""
+
+msgid "Logged in Members only"
+msgstr ""
+
+msgid "Everybody"
 msgstr ""
 
 msgid "OK"
@@ -2357,6 +2366,9 @@ msgstr ""
 msgid "Search..."
 msgstr ""
 
+msgid "Search"
+msgstr ""
+
 msgid "Messages"
 msgstr ""
 
@@ -2382,9 +2394,6 @@ msgid "Forgot password?"
 msgstr ""
 
 msgid "Logged out"
-msgstr ""
-
-msgid "Email"
 msgstr ""
 
 msgid "Password"
@@ -2509,9 +2518,6 @@ msgstr ""
 msgid "Log in"
 msgstr ""
 
-msgid "Search"
-msgstr ""
-
 msgid "Search in Apps"
 msgstr ""
 
@@ -2536,6 +2542,21 @@ msgstr ""
 msgid "Search for Users"
 msgstr ""
 
+#, python-format
+msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\" with topics:"
+msgstr ""
+
+#, python-format
+msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\""
+msgstr ""
+
+#, python-format
+msgid "Showing %(end)s of %(total)s results with topics:"
+msgstr ""
+
+msgid "or"
+msgstr ""
+
 msgid "We could not find any results matching your search query."
 msgstr ""
 
@@ -2543,6 +2564,9 @@ msgid "previous"
 msgstr ""
 
 msgid "next"
+msgstr ""
+
+msgid "Enter one or more search terms or select a topic to search."
 msgstr ""
 
 msgid "About me"
@@ -2565,6 +2589,15 @@ msgid "Delete profile"
 msgstr ""
 
 msgid "User overview"
+msgstr ""
+
+msgid "Members of your projects and groups only"
+msgstr ""
+
+msgid "Registered users only"
+msgstr ""
+
+msgid "Everybody (public profile)"
 msgstr ""
 
 msgid "Delete user profile"
@@ -2635,6 +2668,27 @@ msgid "Detailed description"
 msgstr ""
 
 msgid "Describe yourself, your activities and your interests."
+msgstr ""
+
+msgid "Welcome!"
+msgstr ""
+
+msgid "We give you full control over what people can see of you on the platform and what you hear from us!"
+msgstr ""
+
+msgid "You can change this setting later in your profile settings"
+msgstr ""
+
+msgid "in the top right menu"
+msgstr ""
+
+msgid "When may we send you email notifications?"
+msgstr ""
+
+msgid "You can change or customize this setting later in your notification settings"
+msgstr ""
+
+msgid "Your privacy: You are in control!"
 msgstr ""
 
 msgid "User Dashboard"
@@ -3138,7 +3192,7 @@ msgid "Sorry, you cannot log in because your account is suspended. Please contac
 msgstr ""
 
 #, python-format
-msgid "User \"%(user)s\" was registered successfully. You can now log in using this username."
+msgid "Your account \"%(user)s\" was registered successfully. Welcome to the community!"
 msgstr ""
 
 #, python-format
@@ -3150,6 +3204,9 @@ msgid "User \"%(user)s\" was registered successfully. We will send an email to y
 msgstr ""
 
 msgid "You are already logged in!"
+msgstr ""
+
+msgid "Your privacy settings were saved. Welcome!"
 msgstr ""
 
 msgid "The user account you were looking for does not exist! Their registration was probably already denied."
@@ -3183,7 +3240,7 @@ msgid "The email you are trying to confirm has already been confirmed or belongs
 msgstr ""
 
 #, python-format
-msgid "Your email address %(email)s was successfully confirmed! You can now log in and get started!"
+msgid "Your email address %(email)s was successfully confirmed! Welcome to the community!"
 msgstr ""
 
 #, python-format

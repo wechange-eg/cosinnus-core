@@ -46,6 +46,9 @@ NEVER_REDIRECT_URLS = [
     '/admin/',
     '/admin/login/',
     '/admin/logout/',
+    '/media/',
+    '/static/',
+    '/language',
 ]
 
 LOGIN_URLS = NEVER_REDIRECT_URLS + [
@@ -55,6 +58,11 @@ LOGIN_URLS = NEVER_REDIRECT_URLS + [
     '/integrated/create_user/',
 ]
 
+# if any of these URLs was requested, auto-redirects in the user's profile settings won't trigger
+NO_AUTO_REDIRECTS = (
+    reverse('cosinnus:invitations'),
+    reverse('cosinnus:welcome-settings'),
+)
 
 def initialize_cosinnus_after_startup():
     cosinnus_signals.all_cosinnus_apps_loaded.send(sender=None)
@@ -174,7 +182,7 @@ class ConditionalRedirectMiddleware(object):
         usually to force some routing behaviour, like logged-in users being redirected off /login """
     
     def process_request(self, request):
-        if request.path in NEVER_REDIRECT_URLS or request.path.startswith('/admin'):
+        if any([request.path.startswith(never_path) for never_path in NEVER_REDIRECT_URLS]):
             return
         
         if request.user.is_authenticated():
@@ -184,10 +192,14 @@ class ConditionalRedirectMiddleware(object):
                 if redirect_url:
                     return HttpResponseRedirect(redirect_url)
             
+            if 'next_redirect_pending' in request.session:
+                del request.session['next_redirect_pending']
             # redirect if it is set as a next redirect in user-settings
-            if request.method == 'GET':
+            elif request.method == 'GET' and request.path not in NO_AUTO_REDIRECTS:
                 settings_redirect = request.user.cosinnus_profile.pop_next_redirect()
                 if settings_redirect:
+                    # set flag so multiple redirects aren't consumed instantly
+                    request.session['next_redirect_pending'] = True
                     if settings_redirect[1]:
                         messages.success(request, _(settings_redirect[1]))
                     return HttpResponseRedirect(settings_redirect[0])

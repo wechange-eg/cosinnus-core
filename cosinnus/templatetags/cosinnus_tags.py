@@ -23,6 +23,8 @@ from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
     check_group_create_objects_access, check_object_read_access, get_user_token,
     check_user_portal_admin, check_user_superuser)
+from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,  CommaSeparatedSelect2MultipleWidget
+from cosinnus.models.tagged import get_tag_object_model, BaseTagObject
 from django.template.base import TemplateSyntaxError
 from cosinnus.core.registries.group_models import group_model_registry
 from django.core.cache import cache
@@ -40,11 +42,13 @@ from uuid import uuid1
 from annoying.functions import get_object_or_None
 from django_markdown2.templatetags.md2 import markdown
 from django.utils.text import normalize_newlines
+from cosinnus.utils.functions import ensure_list_of_ints
 
 
 logger = logging.getLogger('cosinnus')
 
 register = template.Library()
+TAG_OBJECT = get_tag_object_model()
 
 
 @register.filter
@@ -771,12 +775,14 @@ def tag_group_filtered(tag_object, group="None"):
         # filter location
         if tag_object.location == group_tag.location:
             tag_object.location = None
+            
+        """ Disabled for now - we want topics to always be displayed 
         # filter topics
         if tag_object.topics:
             tag_object.topics = copy(tag_object.topics)
             group_topics = group_tag.topics and group_tag.topics.split(',') or []
             tag_object.topics = ','.join([top for top in tag_object.topics.split(',') if top not in group_topics])
-        
+        """
     return tag_object
 
 
@@ -855,3 +861,42 @@ def printthis(obj):
         print obj
     return obj
 
+
+@register.simple_tag()
+def render_cosinnus_topics(topics, seperator_word=None):
+    """ Renders a list of media-tag Topics as html <a> tags linking to the topics search page, 
+        with proper labels and seperators 
+        @param topics: A single int/str number or list or comma-seperated list of int/str numbers that are IDs 
+                        in ``BaseTagObject.TOPIC_CHOICES``
+    """
+    if not topics:
+        return ''
+    choices_dict = dict(BaseTagObject.TOPIC_CHOICES)
+    
+    topics = ensure_list_of_ints(topics)
+    
+    template = """<a href="%(url)s?topics=%(topic)d">%(label)s</a>"""
+    search_url = reverse('cosinnus:search')
+    seperator_word = ' %s ' % seperator_word if seperator_word else ', '
+    
+    rendered_topics = [template % {
+            'url': search_url,
+            'topic': topic,
+            'label': choices_dict[topic],
+        } for topic in topics]
+    
+    return seperator_word.join(rendered_topics)
+    
+
+@register.simple_tag()
+def render_cosinnus_topics_field(escape_html=None):
+    topics = CommaSeparatedSelect2MultipleChoiceField(choices=TAG_OBJECT.TOPIC_CHOICES, required=False, 
+            widget=CommaSeparatedSelect2MultipleWidget(select2_options={'closeOnSelect': 'true'}))
+    topics_field_name = 'topics'
+    topics_field_value = None
+    topics_html = topics.widget.render(topics_field_name, topics_field_value, {'id': 'id_topics', 'placeholder': _('Topics')})
+    topics_html = topics_html.replace('\r', '').replace('\n', '')
+    if escape_html:
+        topics_html = escape(topics_html)
+    return topics_html
+    

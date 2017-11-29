@@ -1,13 +1,18 @@
 {% load i18n %}
 
 <!-- Modal -->
+{% if not show_inline %}
 <div class="modal fade" id="{{ id }}" tabindex="1" role="dialog" aria-labelledby="{{ id }}Label" aria-hidden="true">
+{% endif %}
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                
+                {% if not show_inline %}
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <i class="fa fa-times"></i>
                 </button>
+                {% endif %}
                 <h4 class="modal-title" id="{{ id }}Label">
                     <i class="fa {% if title_icon %}{{ title_icon }}{% else %}fa-eraser{% endif %}"></i>
                     {{ title }}
@@ -34,7 +39,7 @@
                         </li>
                     </ul>
                 </button>
-                {% if form_action %}
+                {% if form_action and not hide_cancel_button %}
 	                <button type="button" class="btn btn-emphasized" data-dismiss="modal">
 	                    <ul class="media-list">
 	                        <li class="media">
@@ -57,4 +62,7 @@
             {% endif %}
         </div>
     </div>
+   
+{% if not show_inline %}
 </div><!-- modal -->
+{% endif %}

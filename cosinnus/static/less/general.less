@@ -23,7 +23,10 @@ body {
 // spaces below full width elements
 body .fine-space,
 body .fine-space.form-control {
-	border-bottom: 1px solid @app-neutral-color-light;
+    border-bottom: 1px solid @app-neutral-color-light;
+}
+body .form-control-heavy {
+    border: 1px solid @app-neutral-color-light;
 }
 body .regular-space {
 	margin-bottom: 7px;
@@ -152,6 +155,7 @@ body .ultra-space {
 	white-space: nowrap;
 	color: @app-neutral-color-dark;
 	font-size: 1.1em;
+	cursor: text;
 }
 #searchbar.expanded {
 	background-color: @app-neutral-color-white;
@@ -165,7 +169,7 @@ body .ultra-space {
 }
 #searchbar.expanded input {
 	width: 125px;
-	transition: all 500ms linear;
+	transition: all 200ms linear;
 	color: @app-neutral-color-dark;
 	box-shadow: none;
 }

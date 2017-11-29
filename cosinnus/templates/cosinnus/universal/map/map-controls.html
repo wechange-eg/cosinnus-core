@@ -51,16 +51,16 @@
             </div>
         </div>
     {% endif %}
+    
+    <div class="large-space"></div>
 
-    <div class="line link">
-        {% if not activeFilters.people or not activeFilters.events or not activeFilters.projects or not activeFilters.groups %}
+    {% if not activeFilters.people or not activeFilters.events or not activeFilters.projects or not activeFilters.groups %}
+        <div class="line">
             <a href="#" class="reset-filters">
                 Alle anzeigen
             </a>
-        {% else %}
-            &nbsp;
-        {% endif %}
-    </div>
+	    </div>
+    {% endif %}
 
     <div class="line text-field">
         <input type="text" class="q" name="q" placeholder="Suche" value="{{ q }}" />
@@ -70,7 +70,20 @@
             <div class="sk-child sk-double-bounce2"></div>
         </div>
     </div>
-
+    
+    {% if topicsVisible %} 
+        <div class="line topics">
+            {{ topicsHtml|safe }}
+        </div>
+    {% else %}
+        <div class="line link show-topics">
+            <a href="#">
+                <i class="fa fa-caret-down pull-right"></i>
+                <span>Nach Themen filtern...</span>
+            </a>
+        </div>
+    {% endif %}
+    
     <div class="message"></div>
 </form>
 

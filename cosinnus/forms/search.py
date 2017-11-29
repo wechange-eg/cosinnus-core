@@ -12,11 +12,16 @@ from haystack.backends import SQ
 from haystack.constants import DEFAULT_ALIAS
 from haystack.forms import SearchForm, model_choices
 
+from cosinnus.conf import settings
 from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject
 from cosinnus.utils.permissions import check_user_superuser
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.group import get_cosinnus_group_model
 from haystack.inputs import AutoQuery
+from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,\
+    CommaSeparatedSelect2MultipleWidget
+from haystack.query import EmptySearchQuerySet
+from cosinnus.models.group import CosinnusPortal
 
 MODEL_ALIASES = {
     'todo': 'cosinnus_todo.todoentry',
@@ -27,6 +32,72 @@ MODEL_ALIASES = {
     'event': 'cosinnus_event.event',
     'user': '<userprofile>',
 }
+
+
+
+def filter_searchqueryset_for_read_access(sqs, user):
+    """
+    Given a SearchQuerySet, this function adds a filter that limits the
+    result set to only include elements with read access.
+    """
+    public_node = (
+        SQ(public__exact=True) |  # public on the object itself (applicable for groups)
+        SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_ALL) |  # public via "everyone can see me" visibility meta attribute
+        SQ(always_visible__exact=True) # special marker for indexed objects that should always show up in search
+    )
+
+    if user.is_authenticated():
+        if check_user_superuser(user):
+            pass
+        else:
+            users_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
+            logged_in_user_visibility = (
+                SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
+                SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) # logged in users can see users who are visible           
+            )
+            group_member_user_visibility = (
+                SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
+                SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_USER) & # team mambers can see this user 
+                SQ(membership_groups__in=users_group_ids)
+            )
+            my_item = (
+                 SQ(creator__exact=user.id)
+            )
+            
+            # FIXME: known problem: ``group_members`` is a stale indexed representation of the members
+            # of an items group. New members of a group won't be able to find old indexed items if the index
+            # is not refreshed regularly
+            group_visible_and_in_my_group = (
+                 SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) &
+                 SQ(group_members__contains=user.id)
+            )
+            
+            sqs = sqs.filter_and(
+                public_node |
+                group_visible_and_in_my_group |
+                my_item |
+                group_member_user_visibility |
+                logged_in_user_visibility 
+            )
+    else:
+        sqs = sqs.filter_and(public_node)
+        
+    return sqs
+
+
+def filter_searchqueryset_for_portal(sqs, portals=None):
+    """ Filters a searchqueryset by which portal the objects belong to.
+        @param portals: If not provided, will default to this portal and all foreign portals allowed in settings 
+            ([current-portal] + settings.COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS) """
+            
+    current_portal = CosinnusPortal.get_current().id
+    portals = portals or [current_portal] + \
+        getattr(settings, 'COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS', [])
+    portals = list(set(portals))
+    
+    if portals:
+        sqs = sqs.filter_and(SQ(portal__in=portals) | SQ(portals__in=portals))
+    return sqs
 
 
 class TaggableModelSearchForm(SearchForm):
@@ -40,6 +111,8 @@ class TaggableModelSearchForm(SearchForm):
         choices=(('all', _('All')), ('mine', _('My teams')), ('others', _('Other teams'))),
         widget=forms.RadioSelect)
     models = forms.MultipleChoiceField(required=False)
+    topics = CommaSeparatedSelect2MultipleChoiceField(required=False, choices=BaseTagObject.TOPIC_CHOICES,
+            widget=CommaSeparatedSelect2MultipleWidget(select2_options={'closeOnSelect': 'true'}))
 
     location = forms.CharField(required=False)
     valid_start = forms.DateField(required=False)
@@ -69,67 +142,25 @@ class TaggableModelSearchForm(SearchForm):
         sqs = super(TaggableModelSearchForm, self).search()
         
         if hasattr(self, 'cleaned_data'):
-            sqs = self._filter_for_read_access(sqs)
+            sqs = filter_searchqueryset_for_read_access(sqs, self.request.user)
+            sqs = filter_searchqueryset_for_portal(sqs)
             sqs = self._filter_group_selection(sqs)
             sqs = self._filter_media_tags(sqs)
-            sqs = self._boost_search_query(sqs)
-        return sqs.models(*self.get_models())
+            if self.cleaned_data.get('q', None):
+                sqs = self._boost_search_query(sqs)
+        ret = sqs.models(*self.get_models())
+        return ret
+    
+    def no_query_found(self):
+        """ Overriding default behaviour to allow topic searches without textual query. """
+        if hasattr(self, 'cleaned_data') and self.cleaned_data.get('topics', None):
+            return self.searchqueryset.all()
+        return EmptySearchQuerySet()
 
     def _boost_search_query(self, sqs):
         q = self.cleaned_data['q']
         sqs = sqs.filter(SQ(boosted=AutoQuery(q)) | SQ(text=AutoQuery(q)))
         return sqs
-
-    def _filter_for_read_access(self, sqs):
-        """
-        Given a SearchQuerySet, this function adds a filter that limits the
-        result set to only include elements with read access.
-        """
-        public_node = (
-            SQ(public__exact=True) |  # public on the object itself (applicable for groups)
-            SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_ALL) |  # public via "everyone can see me" visibility meta attribute
-            SQ(always_visible__exact=True) # special marker for indexed objects that should always show up in search
-        )
-
-        user = self.request.user
-        if user.is_authenticated():
-            if check_user_superuser(user):
-                pass
-            else:
-                users_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
-                logged_in_user_visibility = (
-                    SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
-                    SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) # logged in users can see users who are visible           
-                )
-                group_member_user_visibility = (
-                    SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
-                    SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_USER) & # team mambers can see this user 
-                    SQ(membership_groups__in=users_group_ids)
-                )
-                my_item = (
-                     SQ(creator__exact=user.id)
-                )
-                
-                # FIXME: known problem: ``group_members`` is a stale indexed representation of the members
-                # of an items group. New members of a group won't be able to find old indexed items if the index
-                # is not refreshed regularly
-                group_visible_and_in_my_group = (
-                     SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) &
-                     SQ(group_members__contains=user.id)
-                )
-                
-                sqs = sqs.filter_and(
-                    public_node |
-                    group_visible_and_in_my_group |
-                    my_item |
-                    group_member_user_visibility |
-                    logged_in_user_visibility 
-                )
-        else:
-            sqs = sqs.filter_and(public_node)
-            
-        return sqs
-
 
     def _filter_group_selection(self, sqs):
         """
@@ -160,6 +191,9 @@ class TaggableModelSearchForm(SearchForm):
         return sqs
 
     def _filter_media_tags(self, sqs):
+        topics = self.cleaned_data.get('topics', None)
+        if topics:
+            sqs = sqs.filter_and(mt_topics__in=topics)
         location = self.cleaned_data.get('location', None)
         if location:
             sqs = sqs.filter_and(mt_location__contains=location.lower())

@@ -16,14 +16,17 @@ module.exports = Backbone.Model.extend({
         },
         layer: 'street',
         pushState: true,
+        topicsVisible: false,
+        topicsHtml: '',
         controlsEnabled: true,
         filterGroup: null,
         baseUrl: '/maps/search/',
+        activeTopicIds: null,
     },
 
     limitWithoutClustering: 400,
 
-    searchDelay: 1000,
+    searchDelay: 400,
 
     whileSearchingDelay: 5000,
 
@@ -67,21 +70,29 @@ module.exports = Backbone.Model.extend({
 
     initialSearch: function () {
         var json = this.parseUrl(window.location.href.replace(window.location.origin, ''));
+        var ifundef = function(a, b) {
+            return typeof a == "undefined" ? b : a;
+        };
+        
         if (_(json).keys().length) {
             this.set({
                 activeFilters: {
-                    people: json.people,
-                    events: json.events,
-                    projects: json.projects,
-                    groups: json.groups
+                    people: ifundef(json.people, this.get('activeFilters').people),
+                    events: ifundef(json.events, this.get('activeFilters').events),
+                    projects: ifundef(json.projects, this.get('activeFilters').projects),
+                    groups: ifundef(json.groups, this.get('activeFilters').groups)
                 },
-                q: json.q,
-                north: json.ne_lat,
-                east: json.ne_lon,
-                south: json.sw_lat,
-                west: json.sw_lon,
-                limit: json.limit
+                q: ifundef(json.q, this.get('q')),
+                north: ifundef(json.ne_lat, this.get('north')),
+                east: ifundef(json.ne_lon, this.get('east')),
+                south: ifundef(json.sw_lat, this.get('south')),
+                west: ifundef(json.sw_lon, this.get('west')),
+                limit: ifundef(json.limits, this.get('limit')),
+                activeTopicIds: ifundef(json.topics, this.get('activeTopicIds'))
             });
+            if (json.topics) {
+                this.showTopics();
+            }
             this.trigger('change:bounds');
             this.trigger('change:controls');
         }
@@ -93,6 +104,10 @@ module.exports = Backbone.Model.extend({
         var east = padded ? this.get('paddedEast') : this.get('east');
         var south = padded ? this.get('paddedSouth') : this.get('south');
         var west = padded ? this.get('paddedWest') : this.get('west');
+        var topic_ids = '';
+        if (this.get('activeTopicIds')) {
+            topic_ids = this.get('activeTopicIds').join(',');
+        }
         var searchParams = {
             q: this.get('q'),
             ne_lat: north,
@@ -102,7 +117,8 @@ module.exports = Backbone.Model.extend({
             people: this.get('activeFilters').people,
             events: this.get('activeFilters').events,
             projects: this.get('activeFilters').projects,
-            groups: this.get('activeFilters').groups
+            groups: this.get('activeFilters').groups,
+            topics: topic_ids
         };
         if (!this.get('clustering')) {
             _(searchParams).extend({
@@ -129,6 +145,15 @@ module.exports = Backbone.Model.extend({
         this.set('activeFilters', _(this.get('availableFilters')).clone());
         this.attemptSearch();
     },
+    
+    showTopics: function () {
+        this.set('topicsVisible', true);
+    },
+    
+    toggleTopicFilter: function (topic_ids) {
+        this.set('activeTopicIds', topic_ids);
+        this.attemptSearch();
+    },
 
     // Register a change in the controls or the map UI which should queue
     // a search attempt.
@@ -148,7 +173,7 @@ module.exports = Backbone.Model.extend({
 
     parseUrl: function (url) {
         if (url.indexOf('?') >= 0) {
-            var json = JSON.parse('{"' + decodeURI(url.replace(/[^?]*\?/, '').replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
+            var json = JSON.parse('{"' + decodeURI(url.replace(/\%2C/g, ',').replace(/[^?]*\?/, '').replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
         } else {
             var json = {};
         }
@@ -159,6 +184,9 @@ module.exports = Backbone.Model.extend({
                 } catch (err) {}
             }
         });
+        if (typeof json['topics'] === "number" || (typeof json['topics'] === "string" && json['topics'].length > 0)) {
+            json['topics'] = json['topics'].toString().split(',');
+        }
         return json;
     },
 
