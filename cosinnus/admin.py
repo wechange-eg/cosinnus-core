@@ -356,9 +356,8 @@ admin.site.register(CosinnusTopicCategory, CosinnusTopicCategoryAdmin)
 class BaseTaggableAdminMixin(object):
     """ Base mixin for the common properties for a BaseTaggableObject admin  """
     list_display = ('title', 'group', 'creator', 'created')
-    list_filter = ('group', 'group__portal', 'title')
-    search_fields = ('title', 'group__title', 'creator__username', 
-         'creator__first_name', 'creator__last_name', 'creator__email')
+    list_filter = ('group__portal',)
+    search_fields = ('title', 'slug', )
 
 class BaseHierarchicalTaggableAdminMixin(BaseTaggableAdminMixin):
     list_display = list(BaseTaggableAdminMixin.list_display) + ['path',]
