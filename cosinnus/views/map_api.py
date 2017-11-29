@@ -41,7 +41,7 @@ MAP_PARAMETERS = {
     'events': True,
     'projects': True,
     'groups': True,
-    'limit': None, # result count limit, integer or None
+    'limit': 500, # result count limit, integer or None
     'topics': None,
 }
 
