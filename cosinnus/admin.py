@@ -100,7 +100,7 @@ class MembershipInline(admin.StackedInline):
     extra = 0
 
 
-class CosinnusProjectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
+class CosinnusProjectAdmin(admin.ModelAdmin):
     actions = ['convert_to_society', 'add_members_to_current_portal', 'move_members_to_current_portal']
     list_display = ('name', 'slug', 'portal', 'public', 'is_active',)
     list_filter = ('portal', 'public', 'is_active',)
