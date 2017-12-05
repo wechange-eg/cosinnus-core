@@ -12,7 +12,7 @@ from cosinnus.models.group import CosinnusGroupMembership,\
     CosinnusPortal, CosinnusPortalMembership,\
     CosinnusGroup, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING,\
     CosinnusPermanentRedirect, MEMBERSHIP_ADMIN,\
-    CosinnusUnregisterdUserGroupInvite
+    CosinnusUnregisterdUserGroupInvite, RelatedGroups
 from cosinnus.models.profile import get_user_profile_model,\
     GlobalBlacklistedEmail, GlobalUserNotificationSetting
 from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory
@@ -111,7 +111,6 @@ class CosinnusProjectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
     def convert_to_society(self, request, queryset):
         """ Converts this CosinnusGroup's type """
         converted_names = []
-        slugs = []
         for group in queryset:
             group.type = CosinnusGroup.TYPE_SOCIETY
             # clear parent group if the project had one (societies cannot have parents!)
@@ -119,8 +118,12 @@ class CosinnusProjectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):
             group.save(allow_type_change=True)
             if group.type == CosinnusGroup.TYPE_SOCIETY:
                 converted_names.append(group.name)
-                slugs.append(group.slug)
-        get_cosinnus_group_model()._clear_cache(slugs=slugs)
+            # we beat the cache with a hammer on all class models, to be sure
+            CosinnusProject._clear_cache(group=group)
+            CosinnusSociety._clear_cache(group=group)
+            get_cosinnus_group_model()._clear_cache(group=group)
+            CosinnusGroupMembership.clear_member_cache_for_group(group)
+            
                 
         # delete and recreate all group widgets (there might be different ones for group than for porject)
         WidgetConfig.objects.filter(group_id=group.pk).delete()
@@ -186,14 +189,24 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
     def convert_to_project(self, request, queryset):
         """ Converts this CosinnusGroup's type """
         converted_names = []
-        slugs = []
         for group in queryset:
             group.type = CosinnusGroup.TYPE_PROJECT
             group.save(allow_type_change=True)
             if group.type == CosinnusGroup.TYPE_PROJECT:
                 converted_names.append(group.name)
-                slugs.append(group.slug)
-        get_cosinnus_group_model()._clear_cache(slugs=slugs)
+                # all projects that had this group as parent, get set their parent=None and set this as related project
+                # and all of those former child projects are also added as related to this newly-converted project
+                for project in get_cosinnus_group_model().objects.filter(parent=group):
+                    project.parent = None
+                    project.save(update_fields=['parent'])
+                    RelatedGroups.objects.get_or_create(from_group=project, to_group=group)
+                    RelatedGroups.objects.get_or_create(from_group=group, to_group=project)
+                    
+            # we beat the cache with a hammer on all class models, to be sure
+            CosinnusProject._clear_cache(group=group)
+            CosinnusSociety._clear_cache(group=group)
+            get_cosinnus_group_model()._clear_cache(group=group)
+            CosinnusGroupMembership.clear_member_cache_for_group(group)
         
         # delete and recreate all group widgets (there might be different ones for group than for porject)
         WidgetConfig.objects.filter(group_id=group.pk).delete()
