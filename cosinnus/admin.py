@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.db.models import Q
@@ -111,7 +111,11 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     def convert_to_society(self, request, queryset):
         """ Converts this CosinnusGroup's type """
         converted_names = []
+        refused_portal_names = []
         for group in queryset:
+            if group.portal_id != CosinnusPortal.get_current().id:
+                refused_portal_names.append(group.name)
+                continue
             group.type = CosinnusGroup.TYPE_SOCIETY
             # clear parent group if the project had one (societies cannot have parents!)
             group.parent = None
@@ -124,13 +128,17 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             get_cosinnus_group_model()._clear_cache(group=group)
             CosinnusGroupMembership.clear_member_cache_for_group(group)
             
-                
-        # delete and recreate all group widgets (there might be different ones for group than for porject)
-        WidgetConfig.objects.filter(group_id=group.pk).delete()
-        create_initial_group_widgets(group, group)
+            # delete and recreate all group widgets (there might be different ones for group than for project)
+            WidgetConfig.objects.filter(group_id=group.pk).delete()
+            create_initial_group_widgets(group, group)
         
-        message = _('The following Projects were converted to Groups:') + '\n' + ", ".join(converted_names)
-        self.message_user(request, message)
+        if converted_names:
+            message = _('The following Projects were converted to Groups:') + '\n' + ", ".join(converted_names)
+            self.message_user(request, message, messages.SUCCESS)
+        if refused_portal_names:
+            message_error = 'These Projects could not be converted because they do not belong to this portal:' + '\n' + ", ".join(refused_portal_names)
+            self.message_user(request, message_error, messages.ERROR)
+        
     convert_to_society.short_description = _("Convert selected Projects to Groups")
     
     
@@ -189,7 +197,11 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
     def convert_to_project(self, request, queryset):
         """ Converts this CosinnusGroup's type """
         converted_names = []
+        refused_portal_names = []
         for group in queryset:
+            if group.portal_id != CosinnusPortal.get_current().id:
+                refused_portal_names.append(group.name)
+                continue
             group.type = CosinnusGroup.TYPE_PROJECT
             group.save(allow_type_change=True)
             if group.type == CosinnusGroup.TYPE_PROJECT:
@@ -208,12 +220,17 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
             get_cosinnus_group_model()._clear_cache(group=group)
             CosinnusGroupMembership.clear_member_cache_for_group(group)
         
-        # delete and recreate all group widgets (there might be different ones for group than for porject)
-        WidgetConfig.objects.filter(group_id=group.pk).delete()
-        create_initial_group_widgets(group, group)
+            # delete and recreate all group widgets (there might be different ones for group than for porject)
+            WidgetConfig.objects.filter(group_id=group.pk).delete()
+            create_initial_group_widgets(group, group)
         
-        message = _('The following Groups were converted to Projects:') + '\n' + ", ".join(converted_names)
-        self.message_user(request, message)
+        if converted_names:
+            message = _('The following Groups were converted to Projects:') + '\n' + ", ".join(converted_names)
+            self.message_user(request, message, messages.SUCCESS)
+        if refused_portal_names:
+            message_error = 'These Groups could not be converted because they do not belong to this portal:' + '\n' + ", ".join(refused_portal_names)
+            self.message_user(request, message_error, messages.ERROR)
+        
     convert_to_project.short_description = _("Convert selected Groups to Projects")
     
     def get_form(self, request, obj=None, **kwargs):
