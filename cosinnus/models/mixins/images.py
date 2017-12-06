@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import logging
 import os
 import shutil
 from os.path import exists, join
@@ -10,6 +11,8 @@ from django.core.exceptions import ImproperlyConfigured
 from cosinnus.conf import settings
 from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.exceptions import InvalidImageFormatError
+
+logger = logging.getLogger('cosinnus')
 
 
 class ThumbnailableImageMixin(object):
@@ -62,7 +65,8 @@ class ThumbnailableImageMixin(object):
                     'size': size,
                 })
             except InvalidImageFormatError:
-                raise
+                logger.warn('Invalid Image format on an object', extra={'class': self.__class__.__name__, 'id': getattr(self, 'id')})
+                return ''
             
             if not thumbnail:
                 return ''
