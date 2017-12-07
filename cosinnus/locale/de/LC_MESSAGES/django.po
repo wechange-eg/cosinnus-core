@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-08 16:07+0100\n"
-"PO-Revision-Date: 2017-11-08 16:09+0100\n"
+"POT-Creation-Date: 2017-12-07 16:44+0100\n"
+"PO-Revision-Date: 2017-12-07 16:47+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -1611,7 +1611,7 @@ msgstr "Gibt es verwandte Projekte/Gruppen?"
 msgid "Select related Projects/Groups"
 msgstr "Verwandte Projekte/Gruppen auswählen"
 
-msgid "Privacy"
+msgid "Visibility"
 msgstr "Sichtbarkeit"
 
 msgid "This group will be set to be publicly visible!"
@@ -2418,7 +2418,8 @@ msgstr "Personen markieren"
 msgid "Tag location"
 msgstr "Ort markieren"
 
-msgid "Change privacy"
+# msgid "Visibility"
+msgid "Change visibility"
 msgstr "Sichtbarkeit einstellen"
 
 msgid "Connect Facebook Account"
@@ -2454,6 +2455,9 @@ msgstr "Was möchtest du lernen?"
 msgid "Who is allowed to see you on the platform?"
 msgstr "Wer darf dich auf der Plattform sehen?"
 
+msgid "Privacy"
+msgstr "Sichtbarkeit"
+
 msgid "My location"
 msgstr "Wo lebst du?"
 
@@ -2462,9 +2466,6 @@ msgstr "Themen die mich interessieren"
 
 msgid "What I wish to learn"
 msgstr "Was ich lernen möchte"
-
-msgid "Visibility"
-msgstr "Sichtbarkeit"
 
 msgid "Logged in Members only"
 msgstr "Nur eingeloggte Mitglieder"
@@ -3417,6 +3418,9 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten 
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "Change privacy"
+#~ msgstr "Sichtbarkeit einstellen"
 
 #~ msgid "Enter up to 10 email addresses, one on each line or seperated with a comma"
 #~ msgstr "Gibt bis zu 10 E-Mail Adressen ein - eine pro Zeile oder mit Kommas getrennt"

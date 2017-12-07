@@ -88,7 +88,7 @@
 <ol class="input-area" {% if not show_all == True %}style="display: none;"{% endif %} id="visibility-selector">
     <li class="w100">
         <i class="fa fa-fw fa-globe"></i>
-        {% captureas placeholder %}{% trans "Privacy" %}{% endcaptureas %}
+        {% captureas placeholder %}{% trans "Visibility" %}{% endcaptureas %}
         {% render_field form.forms.media_tag.visibility placeholder=placeholder %}
     </li>
 </ol><!-- input-area -->
@@ -163,7 +163,7 @@
     {% endcomment %}
 	{% if not disable_visibility %}
     <li class="input-area-lighter">
-        <a href="#" onclick="return false;" data-show-id="visibility-selector" title="{% trans 'Change privacy' %}">
+        <a href="#" onclick="return false;" data-show-id="visibility-selector" title="{% trans 'Change visibility' %}">
             <i class="fa fa-fw fa-globe"></i>
         </a>
     </li>

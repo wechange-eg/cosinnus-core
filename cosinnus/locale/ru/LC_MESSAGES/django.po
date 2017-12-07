@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-08 16:07+0100\n"
-"PO-Revision-Date: 2017-11-20 15:15+0100\n"
+"POT-Creation-Date: 2017-12-07 16:44+0100\n"
+"PO-Revision-Date: 2017-12-07 16:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1604,8 +1604,8 @@ msgstr "Существуют ли родственные проекты/груп
 msgid "Select related Projects/Groups"
 msgstr "Выбрать родственный проект или группу"
 
-msgid "Privacy"
-msgstr "Конфиденциальность"
+msgid "Visibility"
+msgstr "Кто может видеть мой профиль"
 
 msgid "This group will be set to be publicly visible!"
 msgstr "Эта группа становится общедоступной!"
@@ -2434,7 +2434,8 @@ msgstr "Отметить пользователей"
 msgid "Tag location"
 msgstr "Отметить место"
 
-msgid "Change privacy"
+# msgid "Visibility"
+msgid "Change visibility"
 msgstr "Изменить настройки конфиденциальности"
 
 msgid "Connect Facebook Account"
@@ -2470,6 +2471,9 @@ msgstr "Что бы Вы хотели узнать?"
 msgid "Who is allowed to see you on the platform?"
 msgstr "Кто может видеть Вас на платформе?"
 
+msgid "Privacy"
+msgstr "Конфиденциальность"
+
 msgid "My location"
 msgstr "Моё местоположение"
 
@@ -2478,9 +2482,6 @@ msgstr "Темы, которые меня интересуют"
 
 msgid "What I wish to learn"
 msgstr "Что я хочу узнать"
-
-msgid "Visibility"
-msgstr "Кто может видеть мой профиль"
 
 msgid "Logged in Members only"
 msgstr "Только зарегистрированные члены"
@@ -3434,6 +3435,9 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
+
+#~ msgid "Change privacy"
+#~ msgstr "Изменить настройки конфиденциальности"
 
 #, fuzzy
 #~| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"

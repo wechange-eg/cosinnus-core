@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-08 16:07+0100\n"
-"PO-Revision-Date: 2017-11-20 15:15+0100\n"
+"POT-Creation-Date: 2017-12-07 16:44+0100\n"
+"PO-Revision-Date: 2017-12-07 16:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1598,8 +1598,8 @@ msgstr "Існують пов'язані проекти/групи?"
 msgid "Select related Projects/Groups"
 msgstr "Обрати пов'язані проекти/спільноти"
 
-msgid "Privacy"
-msgstr "Приватність"
+msgid "Visibility"
+msgstr "Видимість для інших"
 
 msgid "This group will be set to be publicly visible!"
 msgstr "Ця спільнота має бути налаштована як публічно видима!"
@@ -2431,7 +2431,8 @@ msgstr "Вказати людей"
 msgid "Tag location"
 msgstr "Вказати місце"
 
-msgid "Change privacy"
+# msgid "Visibility"
+msgid "Change visibility"
 msgstr "Налаштувати приватність"
 
 msgid "Connect Facebook Account"
@@ -2467,6 +2468,9 @@ msgstr "Чого би ви хотіли навчитися?"
 msgid "Who is allowed to see you on the platform?"
 msgstr "Хто може бачити вас на платформі?"
 
+msgid "Privacy"
+msgstr "Приватність"
+
 msgid "My location"
 msgstr "Моє місцезнаходження"
 
@@ -2475,9 +2479,6 @@ msgstr "Теми, якими я цікавлюся"
 
 msgid "What I wish to learn"
 msgstr "Чого я хочу навчитися"
-
-msgid "Visibility"
-msgstr "Видимість для інших"
 
 msgid "Logged in Members only"
 msgstr "Тільки зареєстровані члени"
@@ -3427,6 +3428,9 @@ msgstr "Ви, на разі, не є членом %s! Якщо ви бажаєт
 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
+
+#~ msgid "Change privacy"
+#~ msgstr "Налаштувати приватність"
 
 #, fuzzy
 #~| msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"

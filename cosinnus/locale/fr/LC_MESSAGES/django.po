@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-08 16:07+0100\n"
+"POT-Creation-Date: 2017-12-07 16:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1595,7 +1595,7 @@ msgstr ""
 msgid "Select related Projects/Groups"
 msgstr ""
 
-msgid "Privacy"
+msgid "Visibility"
 msgstr ""
 
 msgid "This group will be set to be publicly visible!"
@@ -2270,7 +2270,7 @@ msgstr ""
 msgid "Tag location"
 msgstr ""
 
-msgid "Change privacy"
+msgid "Change visibility"
 msgstr ""
 
 msgid "Connect Facebook Account"
@@ -2306,6 +2306,9 @@ msgstr ""
 msgid "Who is allowed to see you on the platform?"
 msgstr ""
 
+msgid "Privacy"
+msgstr ""
+
 msgid "My location"
 msgstr ""
 
@@ -2313,9 +2316,6 @@ msgid "Topics I am interested in"
 msgstr ""
 
 msgid "What I wish to learn"
-msgstr ""
-
-msgid "Visibility"
 msgstr ""
 
 msgid "Logged in Members only"
