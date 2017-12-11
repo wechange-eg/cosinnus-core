@@ -1,0 +1,35 @@
+{% load i18n cosinnus_tags widget_tweaks %}
+
+{% captureas inlineform_html %}
+    {% with locations_formset=inline_form %}
+        {{ locations_formset.management_form }}
+        {% for inlineform in locations_formset %}
+            {# if inlineform.data // pre-existing? #}
+            {# locations_formset.management_form.initial.MIN_NUM_FORMS': 0, u'MAX_NUM_FORMS': 5, u'TOTAL_FORMS': 5, u'INITIAL_FORMS': 0 #}
+            <div id="locations-wrapper-{{ forloop.counter0 }}" {% if not forloop.counter == 1 and not forloop.counter <= locations_formset.management_form.INITIAL_FORMS.value %}style="display: none;"{% endif %}>
+                
+                <div class="cosinnus-field-input regular-field">
+                    {% captureas placeholder %}{% trans "Enter a place or address." %}{% endcaptureas %}
+                    {% render_field inlineform.location placeholder=placeholder %}
+                    {{ inlineform.location_lat }}
+                    {{ inlineform.location_lon }}
+                    {{ inlineform.group }}
+                    {{ inlineform.id }}
+                    {% if forloop.counter >= locations_formset.management_form.INITIAL_FORMS.value and forloop.counter < locations_formset.management_form.MAX_NUM_FORMS.value %}
+                        <div id="locations-more-{{ forloop.counter0 }}">
+                            <button class="btn btn-emphasized pull-right" onclick="$('#locations-more-{{ forloop.counter0 }}').hide(); $('#locations-wrapper-{{ forloop.counter }}').show(); return false;">+ {% trans "Add location" %}...</button>
+                        </div>
+                    {% endif %}
+                </div>
+                <div>
+                    <label for="{{ inlineform.DELETE.id_for_label }}">{% trans "Remove location" %}:</label>
+                    {{ inlineform.DELETE }}
+                </div>
+                <div id="id_locations-{{ forloop.counter0 }}-location-map"></div>
+                
+            </div>
+        {% endfor %}
+    {% endwith %}
+{% endcaptureas %}
+
+{% include 'cosinnus/fields/default_field.html' with extra_html=inlineform_html %}

@@ -1,0 +1,40 @@
+{% load i18n cosinnus_tags %}
+
+{% captureas avatar_html %}
+    <div class="row">
+        
+        {{ avatar_field.errors }}
+    
+        <div class="col-xs-6 col-sm-4">
+            {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.width}}px;height:{{SETTINGS.AWESOME_AVATAR.height}}px{% endcaptureas %}
+            {% captureas group_avatar_type %}{% if group_model == "CosinnusSociety" %}group{% else %}project{% endif %}{% endcaptureas %}
+            <div id="id_avatar-preview" class="awesome-avatar-preview regular-space" style="{{ preview_style }}">
+                {% include "cosinnus/group/group_avatar_image.html" with group=object extra_style=preview_style type=group_avatar_type %}
+            </div>
+            
+            <div type="button" class="btn btn-emphasized  no-margin" style="float: none;">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left" href="#" onclick="$('#avatar_deletion_notice').toggleClass('hidden');">
+                            <i id="avatar_clear_checkbox" class="fa fa-square-o"></i>
+                            <input type="hidden" name="avatar_clear" >
+                        </a>
+                        <div class="media-body">
+                            <a href="#" onclick="$('#avatar_clear_checkbox').click();">{% trans "Delete" %}</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div id="avatar_deletion_notice" class="hidden"><p>{% trans "Avatar will be deleted once you save." %}</p></div>
+        </div>
+
+
+        <div class="col-xs-6 col-sm-8">
+            {{ avatar_field }}
+        </div><!-- col -->
+        
+    </div><!-- row -->
+{% endcaptureas %}
+                                
+{% include 'cosinnus/fields/default_field.html' with field_html=avatar_html large_field=True %}

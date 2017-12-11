@@ -1,0 +1,37 @@
+{% load i18n widget_tweaks %}
+
+<div class="cosinnus-field">
+	{% if legend %}
+	    <legend>{{ legend }}</legend>
+	{% endif %}
+	
+	{% if label %}
+		<label>
+		    {% if field and field.required %}
+		        *&nbsp;
+		    {% endif %}
+		    {{ label }}
+		    {% if field and field.required %}
+                {% trans "(required)" %}
+            {% endif %}
+		</label>
+	{% endif %}
+	
+	{% if field and field.errors %}
+	   {{ field.errors }}
+	{% endif %}
+	
+	{% if field or field_html %}
+		<div class="cosinnus-field-input {% if not large_field %}regular-field{% endif %}">
+	        {% if field %}	    
+	            {% render_field field placeholder=placeholder %}
+	        {% elif field_html %}
+	            {{ field_html|safe }}
+	        {% endif %}
+	    </div>
+    {% endif %}
+    
+    {% if extra_html %}
+       {{ extra_html|safe }}
+    {% endif %}
+</div>

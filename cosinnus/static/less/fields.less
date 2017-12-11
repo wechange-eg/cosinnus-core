@@ -1,0 +1,58 @@
+/*
+    Styles for all the form fields used throughout cosinnus.
+*/
+
+.cosinnus-field {
+    margin-bottom: 7px;
+    
+    legend {
+        margin-top: 20px;
+    }
+    
+    .cosinnus-field-input {
+        background-color: @app-neutral-color-white;
+        font-size: 14px;
+        text-align: left;
+        
+        input, textarea, select {
+            font-size: 14px;
+            width: 100%;
+            border-width: 0;
+            line-height: 20px;
+            min-height: 40px;
+            margin: 0;
+            padding: 7px 10px 5px 10px;
+            color: @app-neutral-color-dark;
+        }
+        
+        input, select {
+            height: 40px;
+        }
+        
+        input:focus, textarea:focus {
+            /* TODO: set outline invisible? */
+            /* outline: 0; */
+        }
+        
+    }
+    .cosinnus-field-input.regular-field {
+        height: 40px;
+    }
+}
+
+
+/* Third-party field-specific overrides */
+.cosinnus-field-input {
+    
+    input.osmfield-input {
+        width: 100% !important;
+    }
+
+    input.select2-input {
+        padding: 7px 10px 5px 10px !important;
+    }
+    .select2-search-choice {
+        margin-top: 10px !important;
+        margin-left: 10px !important;
+    }
+}
