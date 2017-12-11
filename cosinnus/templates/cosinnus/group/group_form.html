@@ -220,6 +220,7 @@
 					<div class="tab-pane {% if SETTINGS.COSINNUS_MICROSITES_ENABLED and request.GET.tab == 'microsite' %}active{% endif %}" id="microsite" >
 						
 						{% block group_form_microsite_tab %}
+						
 		                    {% captureas wallpaper_label %}{% trans "Microsite Wallpaper" %} (1140px x 240px, {% trans "max. 10 MB" %}){% endcaptureas %}
 		                    {% captureas wallpaper_html %}
 									{{ form.forms.obj.wallpaper.errors }}
@@ -246,6 +247,7 @@
 	                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long label=description_long_label legend=description_long_legend large_field=True %}
 		                    {% endblock group_form_microsite_description_field %}
 		                    
+		                    
 	                        {# Contact Info Field #}
 		                    {% captureas contact_info_label %}
 		                    	{% trans "Contact info. How you can be reached, addresses, social media, etc..." %}
@@ -256,22 +258,21 @@
 	                        
 		                    
 		                    
-			                <label>{% trans "From which apps should public items be shown on the microsite?" %}</label>
-			                <div class="regular-space">
-			                    <ol class="input-area">
-			                        <li class= "w100" style="white-space:normal;">
-			                            {% for app_option in microsite_public_apps_selection %}
-			                                {% captureas cosinnus_css_class %}{% if app_option.app == 'todo' %}app-todos{% elif app_option.app == 'note' %}app-main{% elif app_option.app == 'file' %}app-files{% elif app_option.app == 'event' %}app-calendar{% elif app_option.app %}app-{{ app_option.app }}{% else %}app-main{% endif %}{% endcaptureas %}
-			                                <span class="pull-left inline-list nowrap {{ cosinnus_css_class }}">
-			                                    <a class="app-background small-padding"><input id="checkbox_microsite_{{ app_option.app_name }}" type="checkbox" name="microsite_public_apps" {% if app_option.checked == True %}checked="true"{% endif %} value="{{ app_option.app_name }}" /></a
-			                                    ><span class="app-background-light dark-color small-padding" onclick="$('#checkbox_microsite_{{ app_option.app_name }}').prop('checked', !($('#checkbox_microsite_{{ app_option.app_name }}').prop('checked')));">
-			                                        {{ app_option.label }}
-			                                    </span>
-			                                </span>
-			                            {% endfor %}
-			                        </li>
-			                    </ol>
-			                </div>
+			                {% trans "From which apps should public items be shown on the microsite?" as microsite_apps_label %}
+			                {% captureas microsite_apps_html %}
+			                    <div class="input-area" style="padding: 5px;">
+	                                {% for app_option in microsite_public_apps_selection %}
+	                                    {% captureas cosinnus_css_class %}{% if app_option.app == 'todo' %}app-todos{% elif app_option.app == 'note' %}app-main{% elif app_option.app == 'file' %}app-files{% elif app_option.app == 'event' %}app-calendar{% elif app_option.app %}app-{{ app_option.app }}{% else %}app-main{% endif %}{% endcaptureas %}
+	                                    <span class="pull-left inline-list nowrap {{ cosinnus_css_class }}">
+	                                        <a class="app-background small-padding"><input id="checkbox_microsite_{{ app_option.app_name }}" type="checkbox" name="microsite_public_apps" {% if app_option.checked == True %}checked="true"{% endif %} value="{{ app_option.app_name }}" /></a
+	                                        ><span class="app-background-light dark-color small-padding" onclick="$('#checkbox_microsite_{{ app_option.app_name }}').prop('checked', !($('#checkbox_microsite_{{ app_option.app_name }}').prop('checked')));">
+	                                            {{ app_option.label }}
+	                                        </span>
+	                                    </span>
+	                                {% endfor %}
+                                </div>
+	                        {% endcaptureas %}
+	                        {% include 'cosinnus/fields/default_field.html' with extra_html=microsite_apps_html label=microsite_apps_label large_field=True %}
 		                    
 							
 							{# Video URL field #}
