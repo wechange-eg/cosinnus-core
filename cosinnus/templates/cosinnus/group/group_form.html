@@ -129,7 +129,9 @@
                         
                         {# Locations Inlineform #}
                         {% trans "Where are you active?" as locations_label %}
-                        {% include 'cosinnus/fields/inlineform_location_fields.html' with inline_form=inlines.0 label=locations_label %}
+                        {% trans "Remove location" as loc_rm_label %}
+                        {% captureas loc_ab_label %}+ {% trans "Add location" %}...{% endcaptureas %}                
+                        {% include 'cosinnus/fields/inlineform_field.html' with   inline_form=inlines.0 label=locations_label   content_template='cosinnus/fields/inlineform_group_locations_content.html'    unique_id='locations'   add_button_label=loc_ab_label   remove_button_label=loc_rm_label %}
                         
                         
                         {% if form.forms.obj.parent %}
@@ -311,82 +313,18 @@
                             
 	                        
 	                        
-                            <label>{% trans "Microsite Gallery Images" %}</label>
-                            {% with gallery_image_formset=inlines.1 %}
-                                {{ gallery_image_formset.management_form }}
-                                {% for inlineform in gallery_image_formset %}
-                                    <div id="gallery-images-wrapper-{{ forloop.counter0 }}" {% if not forloop.counter == 1 and not forloop.counter <= gallery_image_formset.management_form.INITIAL_FORMS.value %}style="display: none;"{% endif %}>
-                                    
-                                        <div type="button" class="btn btn-default w100 ">
-                                            <ul class="media-list">
-                                                <li class="media">
-                                                    <a class="pull-left" href="#">
-                                                        <i class="fa fa-image"></i>
-                                                    </a>
-                                                    <div class="media-body {% if forloop.last %}regular-space{% else %}fine-space{% endif %}">
-                                                        
-                                                        <div class="media">
-                                                            <a class="pull-left">
-                                                                {% if inlineform.image.value %}
-                                                                    <img class="image" src="{% thumbnail inlineform.image.value 40x40 crop=1 upscale=1 %}"></img>
-                                                                {% else %}
-                                                                    <i class="fa fa-image"></i>
-                                                                {% endif %}
-                                                            </a>
-                                                            <div style="padding: 0px 10px; display: inline-block;">
-                                                                {% captureas placeholder %}{% trans "Choose and upload a gallery image" %}{% endcaptureas %}
-                                                                {{ inlineform.image.errors }}
-                                                                {% render_field inlineform.image class+="form-control" placeholder=placeholder %}
-                                                                
-                                                                <div>
-                                                                    <i>{% trans "File Size" %}: {% trans "max. 10 MB" %}</i>
-                                                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                                                    
-                                                                    <label for="{{ inlineform.DELETE.id_for_label }}">{% trans "Remove gallery image" %}:</label>
-                                                                    {{ inlineform.DELETE }}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        {{ inlineform.group }}
-                                                        {{ inlineform.id }}
-                                                        {% if forloop.counter >= gallery_image_formset.management_form.INITIAL_FORMS.value and forloop.counter < gallery_image_formset.management_form.MAX_NUM_FORMS.value %}
-                                                            <div id="gallery-images-more-{{ forloop.counter0 }}">
-                                                                <button class="btn btn-emphasized pull-right" onclick="$('#gallery-images-more-{{ forloop.counter0 }}').hide(); $('#gallery-images-wrapper-{{ forloop.counter }}').show(); return false;">+ {% trans "Add gallery image" %}...</button>
-                                                            </div>
-                                                        {% endif %}
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        
-                                    </div>
-                                {% endfor %}
-                            {% endwith %}
+	                        {# Microsite Gallery Images Inlineform #}
+	                        {% trans "Microsite Gallery Images" as mcg_label %}
+	                        {% trans "Remove gallery image" as  mcg_rm_label %}
+	                        {% captureas  mcg_ab_label %}+ {% trans "Add gallery image" %}...{% endcaptureas %}                
+	                        {% include 'cosinnus/fields/inlineform_field.html' with   inline_form=inlines.1 label=mcg_label   content_template='cosinnus/fields/inlineform_group_microsite_gallery_content.html'    unique_id='mcg'   add_button_label=mcg_ab_label   remove_button_label=mcg_rm_label %}
 	                        
-	                        <hr>
 	                        
-                            <label>{% trans "Show Microsite Call to Action Box" %}</label>
-                            {{ form.forms.obj.call_to_action_active.errors }}
-                            <div type="button" class="btn btn-default w100 regular-space">
-                                <ul class="media-list">
-                                    <li class="media">
-                                        <a class="pull-left" href="#">
-                                            <i class="fa fa-exclamation"></i>
-                                        </a>
-                                        <div class="media-body media-body-form-control">
-		                                    <ol class="input-area">
-		                                        <li class="w100">
-		                                            {{ form.forms.obj.call_to_action_active.errors }}
-		                                            <label for="{{ form.forms.obj.call_to_action_active.auto_id }}">
-		                                                {% render_field form.forms.obj.call_to_action_active %}
-		                                                {% trans "Show Call to Action Box" %}
-		                                            </label>
-		                                        </li>
-		                                    </ol>
-		                                </div>
-                                    </li>
-                                </ul>
-                            </div>
+                            {# Microsite Checkbox field #}
+                            {% trans "Show Microsite Call to Action Box" as mc_label %}
+                            {% trans "Show Call to Action Box" as mc_box_label %}
+                            {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.call_to_action_active label=mc_label checkbox_label=mc_box_label %}
+                            
                             
                             <script type="text/javascript">
                                 var updateCallToActionFrame = function(e, target) {
@@ -397,111 +335,29 @@
                                         $("#call-to-action-fields").slideUp(400);
                                     };
                                 };
-                                $("#{{ form.forms.obj.call_to_action_active.auto_id }}").on("change click", updateCallToActionFrame)
+                                $("#{{ form.forms.obj.call_to_action_active.auto_id }}").on("change click", updateCallToActionFrame);
                             </script>
                             
                             <div id="call-to-action-fields" {% if form.forms.obj.call_to_action_active.value == False %}style="display: none;"{% endif %}>
                             
-	                            <label>{% trans "Call to Action Box Title" %}</label>
-	                            {{ form.forms.obj.call_to_action_title.errors }}
-	                            <div type="button" class="btn btn-default w100 regular-space">
-	                                <ul class="media-list">
-	                                    <li class="media">
-	                                        <a class="pull-left" href="#">
-	                                            <i class="fa fa-pencil"></i>
-	                                        </a>
-	                                        <div class="media-body media-body-form-control">
-	                                            {% captureas placeholder %}{% trans "Title of the box header" %}{% endcaptureas %}
-	                                            {% render_field form.forms.obj.call_to_action_title class+="form-control" placeholder=placeholder %}
-	                                        </div>
-	                                    </li>
-	                                </ul>
-	                            </div>
 	                            
-	                            <label>{% trans "Call to Action Box Description" %}</label>
-	                            {{ form.forms.obj.call_to_action_description.errors }}
-	                            <div type="button" class="btn btn-default w100 regular-space">
-	                                <ul class="media-list">
-	                                    <li class="media">
-	                                        <a class="pull-left" href="#">
-	                                            <i class="fa fa-pencil"></i>
-	                                        </a>
-	                                        <div class="media-body media-body-form-control">
-                                                {% captureas placeholder %}{% trans "Description text inside the box" %}{% endcaptureas %}
-	                                            {% render_field form.forms.obj.call_to_action_description class+="form-control" placeholder=placeholder %}
-	                                        </div>
-	                                    </li>
-	                                </ul>
-	                            </div>
-                            
-	                            {% with call_to_action_formset=inlines.2 %}
-	                                {{ call_to_action_formset.management_form }}
-	                                {% for inlineform in call_to_action_formset %}
-	                                    <div id="call-to-action-wrapper-{{ forloop.counter0 }}" {% if not forloop.counter == 1 and not forloop.counter <= call_to_action_formset.management_form.INITIAL_FORMS.value %}style="display: none;"{% endif %}>
-	                                    
-	                                        <div type="button" class="btn btn-default w100 ">
-	                                            <ul class="media-list">
-	                                                <li class="media">
-	                                                    <a class="pull-left" href="#">
-	                                                        <i class="fa fa-file"></i>
-	                                                    </a>
-	                                                    <div class="media-body {% if forloop.last %}regular-space{% else %}fine-space{% endif %}">
-	                                                        
-                                                                
-                                                                <label>{% trans "Call to Action Button" %} #{{ forloop.counter }}</label><br/>
-								                                {{ inlineform.label.errors }}
-								                                <div type="button" class="btn btn-default w100 regular-space">
-								                                    <ul class="media-list">
-								                                        <li class="media">
-								                                            <a class="pull-left" href="#">
-								                                                <i class="fa fa-pencil"></i>
-								                                            </a>
-								                                            <div class="media-body media-body-form-control">
-								                                                {% captureas placeholder %}{% trans "Label of the Button" %}{% endcaptureas %}
-								                                                {% render_field inlineform.label class+="form-control" placeholder=placeholder %}
-								                                            </div>
-								                                        </li>
-								                                    </ul>
-								                                </div>
-								                                
-								                                <br/>
-								                                
-									                            {{ inlineform.url.errors }}
-									                            <div type="button" class="btn btn-default w100 regular-space">
-									                                <ul class="media-list">
-									                                    <li class="media">
-									                                        <a class="pull-left" href="#">
-									                                            <i class="fa fa-link"></i>
-									                                        </a>
-									                                        <div class="media-body media-body-form-control">
-									                                            {% captureas placeholder %}{% trans 'Link URL' %}{% endcaptureas %}
-									                                            {% render_field inlineform.url class+="form-control" placeholder=placeholder %}
-									                                        </div>
-									                                    </li>
-									                                </ul>
-									                            </div>
-                                                                
-                                                            <div>
-                                                                <label for="{{ inlineform.DELETE.id_for_label }}">{% trans "Remove button" %}:</label>
-                                                                {{ inlineform.DELETE }}
-                                                            </div>
-                                                                
-                                                                
-	                                                        {{ inlineform.group }}
-	                                                        {{ inlineform.id }}
-	                                                        {% if forloop.counter >= call_to_action_formset.management_form.INITIAL_FORMS.value and forloop.counter < call_to_action_formset.management_form.MAX_NUM_FORMS.value %}
-	                                                            <div id="call-to-action-more-{{ forloop.counter0 }}">
-	                                                                <button class="btn btn-emphasized pull-right" onclick="$('#call-to-action-more-{{ forloop.counter0 }}').hide(); $('#call-to-action-wrapper-{{ forloop.counter }}').show(); return false;">+ {% trans "Add button" %}...</button>
-	                                                            </div>
-	                                                        {% endif %}
-	                                                    </div>
-	                                                </li>
-	                                            </ul>
-	                                        </div>
-	                                        
-	                                    </div>
-	                                {% endfor %}
-	                            {% endwith %}
+	                            {# Call to Action Title field #}
+	                            {% trans "Call to Action Box Title" as cta_label %}
+	                            {% trans "Title of the box header" as cta_placeholder %}
+	                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.call_to_action_title label=cta_label placeholder=cta_placeholder %}
+	                            
+	                            
+	                            {# Contact Info Field #}
+	                            {% trans "Call to Action Box Description" as cta2_label %}
+	                            {% trans "Description text inside the box" as cta2_placeholder %}
+	                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.call_to_action_description label=cta2_label placeholder=cta2_placeholder large_field=True %}
+	                            
+	                            
+	                            {# Microsite Gallery Images Inlineform #}
+	                            {% trans "Remove button" as  ctab_rm_label %}
+	                            {% captureas  ctab_ab_label %}+ {% trans "Add button" %}...{% endcaptureas %}                
+	                            {% include 'cosinnus/fields/inlineform_field.html' with   inline_form=inlines.2   content_template='cosinnus/fields/inlineform_group_call_to_action_button_content.html'    unique_id='ctab'   add_button_label=ctab_ab_label   remove_button_label=ctab_rm_label %}
+	                            
                             </div>
 	                        
 	                    {% endblock group_form_microsite_tab %}

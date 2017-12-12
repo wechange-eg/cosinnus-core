@@ -1,0 +1,31 @@
+{% load i18n cosinnus_tags widget_tweaks %}
+
+{% captureas inlineform_html %}
+    {% with formset=inline_form %}
+        {{ formset.management_form }}
+        {% for inlineform in formset %}
+            {# if inlineform.data // pre-existing? #}
+            {# formset.management_form.initial.MIN_NUM_FORMS': 0, u'MAX_NUM_FORMS': 5, u'TOTAL_FORMS': 5, u'INITIAL_FORMS': 0 #}
+            <div id="{{ unique_id }}-wrapper-{{ forloop.counter0 }}" {% if not forloop.counter == 1 and not forloop.counter <= formset.management_form.INITIAL_FORMS.value %}style="display: none;"{% endif %}>
+                
+                <div class="cosinnus-field-input">
+                    {% include content_template with inlineform=inlineform %}
+                </div>
+                <div id="id_{{ unique_id }}-{{ forloop.counter0 }}-location-map"></div>
+                
+                <div class="cosinnus-inlinefied-actions">
+                    {% if forloop.counter >= formset.management_form.INITIAL_FORMS.value and forloop.counter < formset.management_form.MAX_NUM_FORMS.value %}
+                        <div id="{{ unique_id }}-more-{{ forloop.counter0 }}">
+                            <button class="btn btn-emphasized pull-right" onclick="$('#{{ unique_id }}-more-{{ forloop.counter0 }}').hide(); $('#{{ unique_id }}-wrapper-{{ forloop.counter }}').show(); return false;">{{ add_button_label }}</button>
+                        </div>
+                    {% endif %}
+                    <label for="{{ inlineform.DELETE.id_for_label }}">{{ remove_button_label }}:</label>
+                    {{ inlineform.DELETE }}
+                </div>
+                
+            </div>
+        {% endfor %}
+    {% endwith %}
+{% endcaptureas %}
+
+{% include 'cosinnus/fields/default_field.html' with extra_html=inlineform_html %}

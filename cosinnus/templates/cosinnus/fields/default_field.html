@@ -22,11 +22,11 @@
 	{% endif %}
 	
 	{% if field or field_html %}
-		<div class="cosinnus-field-input {% if not large_field %}regular-field{% endif %}">
-	        {% if field %}	    
-	            {% render_field field placeholder=placeholder %}
-	        {% elif field_html %}
+		<div class="cosinnus-field-input {% if not large_field %}regular-field{% endif %} {% if field_classes %}{{ field_classes }}{% endif %}">
+	        {% if field_html %}
 	            {{ field_html|safe }}
+	        {% elif field %}	    
+	            {% render_field field placeholder=placeholder %}
 	        {% endif %}
 	    </div>
     {% endif %}

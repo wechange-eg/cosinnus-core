@@ -1,0 +1,9 @@
+{% load i18n widget_tweaks %}
+
+{{ inlineform.location.errors }}
+{% trans "Enter a place or address." as placeholder %}
+{% render_field inlineform.location placeholder=placeholder %}
+{{ inlineform.location_lat }}
+{{ inlineform.location_lon }}
+{{ inlineform.group }}
+{{ inlineform.id }}

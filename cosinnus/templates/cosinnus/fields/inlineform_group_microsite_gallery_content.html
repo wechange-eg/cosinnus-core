@@ -1,0 +1,23 @@
+{% load i18n widget_tweaks thumbnail %}
+
+<div class="media">
+    <a class="pull-left">
+        {% if inlineform.image.value %}
+            <img class="image" src="{% thumbnail inlineform.image.value 40x40 crop=1 upscale=1 %}"></img>
+        {% else %}
+            <i class="fa fa-image"></i>
+        {% endif %}
+    </a>
+    <div style="padding: 0px 10px; display: inline-block;">
+        {% trans "Choose and upload a gallery image" as placeholder %}
+        {{ inlineform.image.errors }}
+        {% render_field inlineform.image class+="form-control" placeholder=placeholder %}
+        
+        <div>
+            <i>{% trans "File Size" %}: {% trans "max. 10 MB" %}</i>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+    </div>
+</div>
+{{ inlineform.group }}
+{{ inlineform.id }}
