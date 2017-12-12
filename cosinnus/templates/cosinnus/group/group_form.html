@@ -90,7 +90,6 @@
 				{% block group_form_tab_panes %}
 					<div class="tab-pane {% if not SETTINGS.COSINNUS_MICROSITES_ENABLED or not request.GET.tab %}active{% endif %}" id="general">
 						
-						
                         {# Name Field #}
 						{% block group_form_name_field %}
                             {% trans "Name" as name_label %}
@@ -123,14 +122,13 @@
                         {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.website label=website_label placeholder=website_placeholder %}
                         
                         
-                        
                         {% include "cosinnus/media_tags_group.html"%} 
                         
                         
                         {# Locations Inlineform #}
                         {% trans "Where are you active?" as locations_label %}
                         {% trans "Remove location" as loc_rm_label %}
-                        {% captureas loc_ab_label %}+ {% trans "Add location" %}...{% endcaptureas %}                
+                        {% captureas loc_ab_label %}{% trans "Add location" %}{% endcaptureas %}                
                         {% include 'cosinnus/fields/inlineform_field.html' with   inline_form=inlines.0 label=locations_label   content_template='cosinnus/fields/inlineform_group_locations_content.html'    unique_id='locations'   add_button_label=loc_ab_label   remove_button_label=loc_rm_label %}
                         
                         
@@ -222,7 +220,8 @@
 					<div class="tab-pane {% if SETTINGS.COSINNUS_MICROSITES_ENABLED and request.GET.tab == 'microsite' %}active{% endif %}" id="microsite" >
 						
 						{% block group_form_microsite_tab %}
-						
+						    
+						    {# Microsite Wallpaper Field #}
 		                    {% captureas wallpaper_label %}{% trans "Microsite Wallpaper" %} (1140px x 240px, {% trans "max. 10 MB" %}){% endcaptureas %}
 		                    {% captureas wallpaper_html %}
 									{{ form.forms.obj.wallpaper.errors }}
@@ -258,8 +257,8 @@
                         	{% trans "Contact Information" as contact_info_placeholder %}
 	                        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.contact_info label=contact_info_label placeholder=contact_info_placeholder large_field=True %}
 	                        
-		                    
-		                    
+
+		                    {# Microsite Public Apps Field #}
 			                {% trans "From which apps should public items be shown on the microsite?" as microsite_apps_label %}
 			                {% captureas microsite_apps_html %}
 			                    <div class="input-area" style="padding: 5px;">
@@ -312,11 +311,10 @@
                             {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.flickr_url label=flickr_label placeholder=flickr_placeholder %}
                             
 	                        
-	                        
 	                        {# Microsite Gallery Images Inlineform #}
-	                        {% trans "Microsite Gallery Images" as mcg_label %}
+	                        {% captureas mcg_label %}{% trans "Microsite Gallery Images" %} <i>({% trans "File Size" %}: {% trans "max. 10 MB" %})</i>{% endcaptureas %}
 	                        {% trans "Remove gallery image" as  mcg_rm_label %}
-	                        {% captureas  mcg_ab_label %}+ {% trans "Add gallery image" %}...{% endcaptureas %}                
+	                        {% captureas  mcg_ab_label %}{% trans "Add gallery image" %}{% endcaptureas %}                
 	                        {% include 'cosinnus/fields/inlineform_field.html' with   inline_form=inlines.1 label=mcg_label   content_template='cosinnus/fields/inlineform_group_microsite_gallery_content.html'    unique_id='mcg'   add_button_label=mcg_ab_label   remove_button_label=mcg_rm_label %}
 	                        
 	                        
@@ -340,7 +338,6 @@
                             
                             <div id="call-to-action-fields" {% if form.forms.obj.call_to_action_active.value == False %}style="display: none;"{% endif %}>
                             
-	                            
 	                            {# Call to Action Title field #}
 	                            {% trans "Call to Action Box Title" as cta_label %}
 	                            {% trans "Title of the box header" as cta_placeholder %}
@@ -355,7 +352,7 @@
 	                            
 	                            {# Microsite Gallery Images Inlineform #}
 	                            {% trans "Remove button" as  ctab_rm_label %}
-	                            {% captureas  ctab_ab_label %}+ {% trans "Add button" %}...{% endcaptureas %}                
+	                            {% captureas  ctab_ab_label %}{% trans "Add button" %}{% endcaptureas %}                
 	                            {% include 'cosinnus/fields/inlineform_field.html' with   inline_form=inlines.2   content_template='cosinnus/fields/inlineform_group_call_to_action_button_content.html'    unique_id='ctab'   add_button_label=ctab_ab_label   remove_button_label=ctab_rm_label %}
 	                            
                             </div>

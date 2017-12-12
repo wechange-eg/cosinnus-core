@@ -902,6 +902,12 @@
             $('body').on('click','a[href="#"]',function(e) {
                 e.preventDefault();
             });
+            
+            // add a click-proxy on media-body buttons that have .click-previous-a
+            $('.click-previous-a').on('click',function(e) {
+                $(this).prev('a').click();
+            });
+            
         },
 
 

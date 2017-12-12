@@ -13,6 +13,11 @@
         background-color: @app-neutral-color-white;
         font-size: 14px;
         text-align: left;
+        word-break: break-all;
+        
+        a {
+            color: @app-neutral-color-dark;
+        }
         
         input, textarea, select {
             font-size: 14px;
@@ -23,6 +28,7 @@
             margin: 0;
             padding: 7px 10px 5px 10px;
             color: @app-neutral-color-dark;
+            
         }
         
         input, select {
@@ -32,6 +38,12 @@
         input:focus, textarea:focus {
             /* TODO: set outline invisible? */
             /* outline: 0; */
+        }
+        
+        .file-input {
+            input {
+                display: inline-block;
+            }
         }
         
     }
@@ -61,3 +73,4 @@
         margin-left: 10px !important;
     }
 }
+

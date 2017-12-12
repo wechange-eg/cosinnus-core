@@ -12,15 +12,15 @@
                 {% include "cosinnus/group/group_avatar_image.html" with group=object extra_style=preview_style type=group_avatar_type %}
             </div>
             
-            <div type="button" class="btn btn-emphasized  no-margin" style="float: none;">
+            <div class="btn btn-emphasized btn-small btn-no-float">
                 <ul class="media-list">
                     <li class="media">
                         <a class="pull-left" href="#" onclick="$('#avatar_deletion_notice').toggleClass('hidden');">
                             <i id="avatar_clear_checkbox" class="fa fa-square-o"></i>
                             <input type="hidden" name="avatar_clear" >
                         </a>
-                        <div class="media-body">
-                            <a href="#" onclick="$('#avatar_clear_checkbox').click();">{% trans "Delete" %}</a>
+                        <div class="media-body click-previous-a">
+                            {% trans "Delete" %}
                         </div>
                     </li>
                 </ul>

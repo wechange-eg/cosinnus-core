@@ -16,11 +16,37 @@
                 <div class="cosinnus-inlinefied-actions">
                     {% if forloop.counter >= formset.management_form.INITIAL_FORMS.value and forloop.counter < formset.management_form.MAX_NUM_FORMS.value %}
                         <div id="{{ unique_id }}-more-{{ forloop.counter0 }}">
-                            <button class="btn btn-emphasized pull-right" onclick="$('#{{ unique_id }}-more-{{ forloop.counter0 }}').hide(); $('#{{ unique_id }}-wrapper-{{ forloop.counter }}').show(); return false;">{{ add_button_label }}</button>
+                        
+                            <div class="btn btn-emphasized btn-small pull-right regular-space" onclick="$('#{{ unique_id }}-more-{{ forloop.counter0 }}').hide(); $('#{{ unique_id }}-wrapper-{{ forloop.counter }}').show(); return false;">
+		                        <ul class="media-list">
+		                            <li class="media">
+		                                <a class="pull-left" href="#">
+		                                    <i class="fa fa-plus"></i>
+		                                </a>
+		                                <div class="media-body">
+		                                    {{ add_button_label }}
+		                                </div>
+		                            </li>
+		                        </ul>
+		                    </div>
+                            
                         </div>
                     {% endif %}
-                    <label for="{{ inlineform.DELETE.id_for_label }}">{{ remove_button_label }}:</label>
-                    {{ inlineform.DELETE }}
+                    
+                    <div class="btn btn-emphasized btn-small btn-no-float regular-space">
+		                <ul class="media-list">
+		                    <li class="media">
+		                        <a class="pull-left" href="#">
+		                            <i class="fa fa-square-o"></i>
+		                            <input type="hidden" id="{{ inlineform.DELETE.id_for_label }}" name="{{ inlineform.DELETE.html_name }}">
+		                        </a>
+		                        <div class="media-body click-previous-a">
+                                    {{ remove_button_label }}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
                 </div>
                 
             </div>
