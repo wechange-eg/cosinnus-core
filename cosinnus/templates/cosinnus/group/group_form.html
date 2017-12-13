@@ -90,11 +90,15 @@
 				{% block group_form_tab_panes %}
 					<div class="tab-pane {% if not SETTINGS.COSINNUS_MICROSITES_ENABLED or not request.GET.tab %}active{% endif %}" id="general">
 						
+						
+                        {% trans "Description and Infos" as group_legend %}
+                        {% captureas name_label %}{% if group_model == "CosinnusSociety" %}{% trans "TODO: give the group a good name" %}{% else %}{% trans "TODO: give the project a good name" %}{% endif %}{% endcaptureas %}
+                        {% include 'cosinnus/fields/default_field.html' with legend=group_legend label=name_label first=True %}
+                        
                         {# Name Field #}
 						{% block group_form_name_field %}
-                            {% trans "Name" as name_label %}
 	                        {% captureas name_placeholder %}{% if group_model == "CosinnusSociety" %}{% trans "Enter a name for the group." %}{% else %}{% trans "Enter a name for the project." %}{% endif %}{% endcaptureas %}
-                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name label=name_label placeholder=name_placeholder %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name %}
 					    {% endblock group_form_name_field %}
 					
 					
@@ -105,15 +109,16 @@
 						
 				
                         {# SimpleMDE Description Field (gets initialized in extrahead) #}					                
+	                    {% if group_model == "CosinnusSociety" %}
+	                        {% trans "Describe the group in a few sentences." as group_label %}
+                        {% else %}
+                            {% trans "Describe the project in a few sentences." as group_label %}
+                        {% endif %}
+                        {% trans "Description and Infos" as group_legend %}
+                        {% include 'cosinnus/fields/default_field.html' with label=group_label legend=group_legend %}
+                        
 		                {% block group_form_description_field %}
-		                    {% if group_model == "CosinnusSociety" %}
-		                        {% trans "Describe the group in a few sentences." as group_label %}
-	                        {% else %}
-	                            {% trans "Describe the project in a few sentences." as group_label %}
-	                        {% endif %}
-	                        {% trans "Description and Infos" as group_legend %}
-	                         
-					        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description label=group_label legend=group_legend large_field=True %}
+					        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description large_field=True %}
                         {% endblock group_form_description_field %}
                         
                         {# Website Field #}
@@ -225,27 +230,53 @@
 		                    {% captureas wallpaper_label %}{% trans "Microsite Wallpaper" %} (1140px x 240px, {% trans "max. 10 MB" %}){% endcaptureas %}
 		                    {% captureas wallpaper_html %}
 									{{ form.forms.obj.wallpaper.errors }}
-	                                <input class="form-control" id="fileToUpload" name="wallpaper" placeholder="{% trans "Upload an image." %}" type="file">
+									
+									{% if object.wallpaper %}
+								        <div class="row">
+								            <div class="col-xs-4 col-sm-2">
+								                <img class="image" style="width: 120px;" src="{% thumbnail object.wallpaper 120x120 crop=1 upscale=1 %}"></img>
+								            </div>
+								            <div class="col-xs-8 col-sm-10">
+								    {% endif %} 
+								    <div class="file-input">
+		                                <input class="form-control" id="fileToUpload" name="wallpaper" placeholder="{% trans "Upload an image." %}" type="file">
+								    </div>
+								    {% if object.wallpaper %}
+								            </div>
+								        </div>
+								    {% endif %}
+									
 	                        {% endcaptureas %}
                             {% captureas wallpaper_extra_html %}
 			                        {% if object.wallpaper %}
-	                                    {% trans "Currently" %}: <a href="{{ object.wallpaper.url }}">{{ object.wallpaper }}</a> 
+					                    <div class="btn btn-emphasized btn-small btn-no-float regular-space">
+					                        <ul class="media-list">
+					                            <li class="media">
+					                                <a class="pull-left" href="#">
+					                                    <i class="fa fa-square-o"></i>
+	                                                    <input type="hidden" id="wallpaper-clear_id" name="wallpaper-clear"> 
+					                                </a>
+					                                <div class="media-body click-previous-a">
+					                                    {% trans "Reset" %}
+					                                </div>
+					                            </li>
+					                        </ul>
+					                    </div>
 	                                {% endif %}
-	                                <input id="wallpaper-clear_id" name="wallpaper-clear" type="checkbox"> 
-	                                <label for="wallpaper-clear_id">{% trans "Reset" %}</label><br>
 		                    {% endcaptureas %}
-							{% include 'cosinnus/fields/default_field.html' with label=wallpaper_label field_html=wallpaper_html extra_html=wallpaper_extra_html %}
+							{% include 'cosinnus/fields/default_field.html' with label=wallpaper_label field_html=wallpaper_html extra_html=wallpaper_extra_html large_field=True %}
 							
 							
                             {# SimpleMDE Description Long Field (gets initialized in extrahead) #}                                   
+                            {% trans "Description and Infos" as description_long_legend %}
+                                {% captureas description_long_label %}
+                                    {% if group_model == "CosinnusSociety" %}{% trans "Describe the group in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
+                                    {% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+                                {% endcaptureas %}
+                            {% include 'cosinnus/fields/default_field.html' with label=description_long_label legend=description_long_legend %}
+                            
 							{% block group_form_microsite_description_field %}
-	                            {% trans "Description and Infos" as description_long_legend %}
-			                    {% captureas description_long_label %}
-			                    	{% if group_model == "CosinnusSociety" %}{% trans "Describe the group in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
-			                    	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
-			                    {% endcaptureas %}
-	                             
-	                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long label=description_long_label legend=description_long_legend large_field=True %}
+	                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True %}
 		                    {% endblock group_form_microsite_description_field %}
 		                    
 		                    

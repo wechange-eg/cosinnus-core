@@ -2,7 +2,7 @@
 
 <div class="cosinnus-field">
 	{% if legend %}
-	    <legend>{{ legend }}</legend>
+	    <legend {% if first %}class="first"{% endif %}>{{ legend }}</legend>
 	{% endif %}
 	
 	{% if label %}

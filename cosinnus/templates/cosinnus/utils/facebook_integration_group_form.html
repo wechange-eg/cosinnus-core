@@ -28,27 +28,20 @@
         	</ul>
         </p>
     </div>
-
-    <label>{% trans "Facebook Group to link to" %}</label>
-    {{ form.forms.obj.facebook_group_id.errors }}
-    <div type="button" class="btn btn-default w100 regular-space">
-        <ul class="media-list">
-            <li class="media">
-                <a class="pull-left" href="#">
-                    <i class="fa fa-facebook"></i>
-                </a>
-                <div class="media-body media-body-form-control">
-                    {% captureas placeholder %}{% trans "Group Id or name (example: 1172392116092353)" %}{% endcaptureas %}
-                    {% if is_fb_connected %}
-                        {% render_field form.forms.obj.facebook_group_id class+="form-control" placeholder=placeholder %}
-                    {% else %}
-                    	{% render_field form.forms.obj.facebook_group_id class+="form-control" disabled="true" placeholder=placeholder %}
-                    {% endif %}
-                </div>
-            </li>
-        </ul>
-    </div>
     
+    {# Facebook group id Field #}
+    {% trans "Facebook Group to link to" as fb_id_label %}
+    {% captureas fb_gid_html %}
+	    {% captureas fb_id_placeholder %}{% trans "Group Id or name (example: 1172392116092353)" %}{% endcaptureas %}
+        {% if is_fb_connected %}
+            {% render_field form.forms.obj.facebook_group_id class+="form-control" placeholder=fb_id_placeholder %}
+        {% else %}
+            {% render_field form.forms.obj.facebook_group_id class+="form-control" disabled="true" placeholder=fb_id_placeholder %}
+        {% endif %}
+    {% endcaptureas %}
+    {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.facebook_group_id field_html=fb_gid_html label=fb_id_label %}
+                        
+
     <hr/>
     <br/>
     
@@ -72,30 +65,31 @@
         </p>
     </div>
     
-    <label>{% trans "Facebook Fan-Page link to" %}</label>
-    {{ form.forms.obj.facebook_group_id.errors }}
-    <div type="button" class="btn btn-default w100 regular-space">
-        <ul class="media-list">
-            <li class="media">
-            	{% if is_fb_connected %}
-	                <div class="pull-right disabled" style="display: inline-block; width: auto; padding: 0px 10px; cursor: pointer;" onclick="loadFacebookPageChooser();">
-	                	<a>{% trans "Choose from your Pages..." %}</a>
-	            	</div>
-            	{% endif %}
-                <a class="pull-left" href="#">
-                    <i class="fa fa-facebook"></i>
-                </a>
-                <div class="media-body media-body-form-control">
-                    {% captureas placeholder %}{% trans "Fan-Page unique name (example: myfanpage)" %}{% endcaptureas %}
-                    {% if is_fb_connected %}
-                        {% render_field form.forms.obj.facebook_page_id class+="form-control" placeholder=placeholder %}
-                    {% else %}
-                    	{% render_field form.forms.obj.facebook_page_id class+="form-control" disabled="true" placeholder=placeholder %}
-                    {% endif %}
-                </div>
-            </li>
-        </ul>
-    </div>
+    {# Facebook group id Field #}
+    {% trans "Facebook Fan-Page link to" as fb_page_label %}
+    {% captureas fb_page_html %}
+        {% captureas fb_page_placeholder %}{% trans "Fan-Page unique name (example: myfanpage)" %}{% endcaptureas %}
+        {% if is_fb_connected %}
+            {% render_field form.forms.obj.facebook_page_id class+="form-control" placeholder=fb_page_placeholder %}
+            <div class="btn btn-emphasized btn-small pull-right regular-space" onclick="loadFacebookPageChooser();">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left" href="#">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                        <div class="media-body">
+                            {% trans "Choose from your Pages..." %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        {% else %}
+            {% render_field form.forms.obj.facebook_page_id class+="form-control" disabled="true" placeholder=fb_page_placeholder %}
+        {% endif %}
+    {% endcaptureas %}
+    {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.facebook_page_id field_html=fb_page_html label=fb_page_label %}
+          
+    
     
     {% if group.facebook_page_id and is_fb_connected %}
 	    {% if user|user_has_group_fb_page_access:group %}
