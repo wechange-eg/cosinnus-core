@@ -12,6 +12,7 @@
                 {% include "cosinnus/group/group_avatar_image.html" with group=object extra_style=preview_style type=group_avatar_type %}
             </div>
             
+            {% if object.avatar %}
             <div class="btn btn-emphasized btn-small btn-no-float">
                 <ul class="media-list">
                     <li class="media">
@@ -27,6 +28,7 @@
             </div>
             
             <div id="avatar_deletion_notice" class="hidden"><p>{% trans "Avatar will be deleted once you save." %}</p></div>
+            {% endif %}
         </div>
 
 

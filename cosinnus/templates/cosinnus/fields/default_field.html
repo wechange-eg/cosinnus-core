@@ -7,12 +7,14 @@
 	
 	{% if label %}
 		<label>
-		    {% if field and field.required %}
-		        *&nbsp;
+		    {% comment %}  
+		    {% if field and field.field.required %}
+		        *
 		    {% endif %}
+		    {% endcomment %}
 		    {{ label }}
-		    {% if field and field.required %}
-                {% trans "(required)" %}
+		    {% if field and not field.field.required %}
+                {% trans "(optional)" context "written next to optional form fields" %}
             {% endif %}
 		</label>
 	{% endif %}

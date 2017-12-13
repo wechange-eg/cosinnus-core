@@ -40,7 +40,7 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
     like = forms.BooleanField(label=_('Like'), required=False)
     approach = Select2ChoiceField(choices=TagObject.APPROACH_CHOICES, required=False)
     topics = CommaSeparatedSelect2MultipleChoiceField(choices=TagObject.TOPIC_CHOICES, required=False)
-    visibility = Select2ChoiceField(choices=TagObject.VISIBILITY_CHOICES, required=False)
+    visibility = Select2ChoiceField(choices=TagObject.VISIBILITY_CHOICES, required=True)
     # persons = will be defined in __init__
     
     class Meta:
