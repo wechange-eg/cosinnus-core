@@ -11,7 +11,9 @@
                 <div class="cosinnus-field-input">
                     {% include content_template with inlineform=inlineform %}
                 </div>
-                <div id="id_{{ unique_id }}-{{ forloop.counter0 }}-location-map"></div>
+                {% if extra_id_div %}
+                    <div id="id_{{ unique_id }}-{{ forloop.counter0 }}-{{ extra_id_div }}"></div>
+                {% endif %}
                 
                 <div class="cosinnus-inlinefied-actions">
                     {% if forloop.counter >= formset.management_form.INITIAL_FORMS.value and forloop.counter < formset.management_form.MAX_NUM_FORMS.value %}

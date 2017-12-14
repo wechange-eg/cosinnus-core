@@ -105,7 +105,14 @@
 					    {# Avatar Field #}
 				        {% trans "Avatar" as avatar_legend %}
 		                {% captureas avatar_label %}{% trans "A picture for better recognition." %} {% trans "File Size" %}: {% trans "max. 10 MB" %}{% endcaptureas %}
-				        {% include 'cosinnus/fields/avatar_field.html' with avatar_field=form.forms.obj.avatar label=avatar_label legend=avatar_legend %}
+		                {% captureas preview_html %}
+		                    {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.width}}px;height:{{SETTINGS.AWESOME_AVATAR.height}}px{% endcaptureas %}
+				            {% captureas group_avatar_type %}{% if group_model == "CosinnusSociety" %}group{% else %}project{% endif %}{% endcaptureas %}
+				            <div id="id_avatar-preview" class="awesome-avatar-preview regular-space" style="{{ preview_style }}">
+				                {% include "cosinnus/group/group_avatar_image.html" with group=object extra_style=preview_style type=group_avatar_type %}
+				            </div>
+		                {% endcaptureas %}
+				        {% include 'cosinnus/fields/avatar_field.html' with avatar_field=form.forms.obj.avatar label=avatar_label legend=avatar_legend preview_html=preview_html %}
 						
 				
                         {# SimpleMDE Description Field (gets initialized in extrahead) #}					                
@@ -134,7 +141,8 @@
                         {% trans "Where are you active?" as locations_label %}
                         {% trans "Remove location" as loc_rm_label %}
                         {% captureas loc_ab_label %}{% trans "Add location" %}{% endcaptureas %}                
-                        {% include 'cosinnus/fields/inlineform_field.html' with   inline_form=inlines.0 label=locations_label   content_template='cosinnus/fields/inlineform_group_locations_content.html'    unique_id='locations'   add_button_label=loc_ab_label   remove_button_label=loc_rm_label %}
+                        {% include 'cosinnus/fields/inlineform_field.html' with inline_form=inlines.0 label=locations_label   content_template='cosinnus/fields/inlineform_group_locations_content.html'    unique_id='locations'   add_button_label=loc_ab_label   remove_button_label=loc_rm_label extra_id_div="location-map" %}
+                        
                         
                         
                         {% if form.forms.obj.parent %}

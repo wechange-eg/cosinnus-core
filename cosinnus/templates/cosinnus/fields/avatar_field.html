@@ -6,11 +6,7 @@
         {{ avatar_field.errors }}
     
         <div class="col-xs-6 col-sm-4">
-            {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.width}}px;height:{{SETTINGS.AWESOME_AVATAR.height}}px{% endcaptureas %}
-            {% captureas group_avatar_type %}{% if group_model == "CosinnusSociety" %}group{% else %}project{% endif %}{% endcaptureas %}
-            <div id="id_avatar-preview" class="awesome-avatar-preview regular-space" style="{{ preview_style }}">
-                {% include "cosinnus/group/group_avatar_image.html" with group=object extra_style=preview_style type=group_avatar_type %}
-            </div>
+            {{ preview_html|safe }}
             
             {% if object.avatar %}
             <div class="btn btn-emphasized btn-small btn-no-float">

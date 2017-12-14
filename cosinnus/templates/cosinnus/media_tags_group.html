@@ -2,98 +2,20 @@
 
 {{ form.forms.media_tag.media }}
 
-{% comment %}  
-CosinnusGroups now use the group.locations.all foreign key location objects, not the media_tag location!
-
-<label>{% trans "Where are you active?" %}</label>
-<div type="button" class="btn btn-default w100 regular-space">
-    <ul class="media-list">
-        <li class="media">
-            <a class="pull-left" href="#">
-                <i class="fa fa-map-marker"></i>
-            </a>
-            <div class="media-body">
-                {% captureas placeholder %}{% trans "Enter a place or address." %}{% endcaptureas %}
-                {% render_field form.forms.media_tag.location placeholder=placeholder %}
-		        {{ form.forms.media_tag.location_lat }}
-		        {{ form.forms.media_tag.location_lon }}
-            </div>
-        </li>
-    </ul>
-</div>
-<div id="id_media_tag-location-map"></div>
-{% endcomment %}
 
 {% block media_tag_topics_field %}
-<label>{% trans "Which topics are you involved with?" %}</label>
-<div type="button" class="btn btn-default w100 regular-space">
-    <ul class="media-list">
-        <li class="media">
-            <a class="pull-left" href="#">
-                <i class="fa fa-lightbulb-o"></i>
-            </a>
-            <div class="media-body">
-                {{ form.forms.media_tag.topics.errors }}
-                {% captureas placeholder %}{% trans "Select topics" %}{% endcaptureas %}
-                {% render_field form.forms.media_tag.topics class+=" w100" placeholder=placeholder %}
-            </div>
-            
-        </li>
-    </ul>
-</div>
+
+	{# Large Field #}
+	{% trans "Which topics are you involved with?" as topics_label %}
+	{% trans "Select topics" as topics_placeholder %}
+	{% include 'cosinnus/fields/default_field.html' with field=form.forms.media_tag.topics label=topics_label placeholder=topics_placeholder large_field=True %}
+
 {% endblock media_tag_topics_field %}
 
-{% comment %} Approach hidden for now
-<label>{% trans "Was ist das Haupthandlungsfeld der Gruppe?" %}</label>
-<div type="button" class="btn btn-default w100 regular-space">
-    <ul class="media-list">
-        <li class="media">
-            <a class="pull-left" href="#">
-                <i class="fa fa-bolt"></i>
-            </a>
-            <div class="media-body media-body-form-control">
-                {{ form.forms.media_tag.approach.errors }}
-                {% captureas placeholder %}{% trans "Ansatz markieren" %}{% endcaptureas %}
-                {% render_field form.forms.media_tag.approach class+="form-control w100" placeholder=placeholder %}
-            </div>
-        </li>
-    </ul>
-</div>
-{% endcomment %}
 
-<label>{% trans "Which tags further describe your activities?" %}</label>
-<div type="button" class="btn btn-default w100 regular-space">
-    <ul class="media-list">
-        <li class="media">
-            <a class="pull-left" href="#">
-                <i class="fa fa-tags"></i>
-            </a>
-            <div class="media-body">
-                {{ form.forms.media_tag.tags.errors }}
-                {% captureas placeholder %}{% trans "Select or create tags" %}{% endcaptureas %}
-                {% render_field form.forms.media_tag.tags class+="w100" placeholder=placeholder %}
-            </div>
-        </li>
-    </ul>
-</div>
+{# Tags Field #}
+{% trans "Which tags further describe your activities?" as tags_label %}
+{% trans "Select or create tags" as tags_placeholder %}
+{% include 'cosinnus/fields/default_field.html' with field=form.forms.media_tag.tags label=tags_label placeholder=tags_placeholder large_field=True %}
 
-{% comment %} Privacy tag
-<ol class="input-area" style="display: none;" id="visibility-selector">
-    <li>
-        <i class="fa fa-fw fa-globe"></i>
-        {{ form.forms.media_tag.visibility }}
-    </li>
-</ol>
-{% endcomment %}
-<!-- input-area -->
-
-
-    {% comment %}  Tags are disabled until they are fixed
-    <ol class="input-area" style="display: none;" id="tags-selector">
-    <li>
-        <i class="fa fa-fw fa-tags"></i>
-        {{ form.forms.obj.tags }}
-    </li>
-    </ol>
-    {% endcomment %}
 

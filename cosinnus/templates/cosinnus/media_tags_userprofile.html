@@ -2,103 +2,60 @@
 
 {{ form.forms.media_tag.media }}
 
-<label>{% trans "Where do you live?" %}</label>
-<div type="button" class="btn btn-default w100 regular-space">
-    <ul class="media-list">
-        <li class="media">
-            <a class="pull-left" href="#">
-                <i class="fa fa-map-marker"></i>
-            </a>
-            <div class="media-body">
-                {% captureas placeholder %}{% trans "Enter a place or address." %}{% endcaptureas %}
-                {% render_field form.forms.media_tag.location placeholder=placeholder %}
-                {{ form.forms.media_tag.location_lat }}
-                {{ form.forms.media_tag.location_lon }}
-            </div>
-        </li>
-    </ul>
-</div>
-<div id="id_media_tag-location-map"></div>
 
-<label>{% trans "Which topics are you interested in?" %}</label>
-<div type="button" class="btn btn-default w100 regular-space">
-    <ul class="media-list">
-        <li class="media">
-            <a class="pull-left" href="#">
-                <i class="fa fa-lightbulb-o"></i>
-            </a>
-            <div class="media-body">
-                {{ form.forms.media_tag.topics.errors }}
-                {% captureas placeholder %}{% trans "Select topics" %}{% endcaptureas %}
-                {% render_field form.forms.media_tag.topics class+="w100" placeholder=placeholder %}
-            </div>
-            
-        </li>
-    </ul>
-</div>
-
-{% comment %} Approach disabled for now
-<label>{% trans "In welchem Ansatz bist du haupstächlich aktiv?" %}</label>
-<div type="button" class="btn btn-default w100 regular-space">
-    <ul class="media-list">
-        <li class="media">
-            <a class="pull-left" href="#">
-                <i class="fa fa-bolt"></i>
-            </a>
-            <div class="media-body media-body-form-control">
-                {{ form.forms.media_tag.approach.errors }}
-                {% captureas placeholder %}{% trans "Ansatz markieren" %}{% endcaptureas %}
-                {% render_field form.forms.media_tag.approach class+="form-control w100" placeholder=placeholder %}
-            </div>
-        </li>
-    </ul>
-</div>
-{% endcomment %}
-
-<label>{% trans "What would you like to learn?" %}</label>
-<div type="button" class="btn btn-default w100 regular-space">
-    <ul class="media-list">
-        <li class="media">
-            <a class="pull-left" href="#">
-                <i class="fa fa-tags"></i>
-            </a>
-            <div class="media-body">
-                {{ form.forms.media_tag.tags.errors }}
-                {% captureas placeholder %}{% trans "Select or create tags" %}{% endcaptureas %}
-                {% render_field form.forms.media_tag.tags class+="w100" placeholder=placeholder %}
-            </div>
-        </li>
-    </ul>
-</div>
-
-<label>{% trans "Who is allowed to see you on the platform?" %}</label>
-<div type="button" class="btn btn-default w100 regular-space">
-    <ul class="media-list">
-        <li class="media">
-            <a class="pull-left" href="#">
-                <i class="fa fa-user"></i>
-            </a>
-            <div class="media-body media-body-form-control">
-                {{ form.forms.media_tag.visibility.errors }}
-                <select id="id_media_tag-visibility" name="media_tag-visibility" class="form-control" placeholder="{% trans "Privacy" %}">
-                    {% include 'cosinnus/user/user_visibility_formfield_options.html' with visibility=object.media_tag.visibility %}
-                </select>
-            </div>
-        </li>
-    </ul>
-</div>
+{# Regular field with custom HTML #}
+{% trans "Where do you live?" as location_label %}
+{% captureas location_html %}
+    {% trans "Enter a place or address and then choose a point on the map." as location_placeholder %}
+    {% render_field form.forms.media_tag.location placeholder=location_placeholder %}
+    {{ form.forms.media_tag.location_lat }}
+    {{ form.forms.media_tag.location_lon }}
+    <div id="id_media_tag-location-map"></div>
+{% endcaptureas %}
+{% include 'cosinnus/fields/default_field.html' with field=form.forms.media_tag.location field_html=location_html label=location_label placeholder=location_placeholder large_field=True %}
 
 
+{# Large Field #}
+{% trans "Which topics are you interested in?" as topics_label %}
+{% trans "Select topics" as topics_placeholder %}
+{% include 'cosinnus/fields/default_field.html' with field=form.forms.media_tag.topics label=topics_label placeholder=topics_placeholder large_field=True %}
 
-<!-- input-area -->
+
+{# Tags Field #}
+{% trans "What would you like to learn?" as tags_label %}
+{% trans "Select or create tags" as tags_placeholder %}
+{% include 'cosinnus/fields/default_field.html' with field=form.forms.media_tag.tags label=tags_label placeholder=tags_placeholder large_field=True %}
 
 
-    {% comment %}  Tags are disabled until they are fixed
-    <ol class="input-area" style="display: none;" id="tags-selector">
-    <li>
-        <i class="fa fa-fw fa-tags"></i>
-        {{ form.forms.obj.tags }}
-    </li>
-    </ol>
-    {% endcomment %}
+{# Visibility Field #}
+{% trans "Who is allowed to see you on the platform?" as visibility_label %}
+{% captureas visibility_warning_html %}
+    <div class="group-public-warning-area" {% if not object or not object.media_tag.visibility == 2 %}style="display: none;"{% endif %} id="user-visibility-warning">
+        <i class="fa fa-fw fa-globe"></i>
+        {% trans "Your profile will be set to be publicly visible!" %}
+        <br/><br/>
+        {% trans "This means that your name, avatar and user profile can be seen by ANYONE on the internet and may potentially be included in search engine results!" %}
+        <br/><br/>
+        {% trans "If you do not wish this, you can change the visibility setting above." %}
+        {% trans "Please note that changes in this setting will not have an immediate effect on search engine results! Depending on the search provider, it might take days or weeks until this setting is reflected in their results." %}
+    </div>
+    <script type="text/javascript">
+        {# show or hide a visibility warning #}
+        $(function(){
+            $('#id_media_tag-visibility').on('change', function(){
+                if ($(this).val() == 2) {
+                    $('#user-visibility-warning').show();
+                } else {
+                    $('#user-visibility-warning').hide();
+                } 
+            });
+        });
+    </script>
+{% endcaptureas %}
+{% captureas visibility_field_html %}
+    <select id="id_media_tag-visibility" name="media_tag-visibility" class="form-control" placeholder="{% trans "Privacy" %}">
+        {% include 'cosinnus/user/user_visibility_formfield_options.html' with visibility=object.media_tag.visibility %}
+    </select>
+{% endcaptureas %}
 
+{% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html label=visibility_label extra_html=visibility_warning_html %}
