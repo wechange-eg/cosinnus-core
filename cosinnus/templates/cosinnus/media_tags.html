@@ -16,7 +16,7 @@
 </script>
 
 {% trans "Additional settings" as media_tags_legend %}
-{% if not media_tags_label %}{% trans "Adjust visibility, add a location, attach files and mark topics" as media_tags_label %}{% endif %}
+{% if not media_tags_label %}{% trans "Attach files, add a location, mark topics and adjust visibility settings" as media_tags_label %}{% endif %}
 <div class="media_tag_initial_hidden" style="display: none;">
     {% include 'cosinnus/fields/default_field.html' with legend=media_tags_legend label=media_tags_label %}
 </div>
