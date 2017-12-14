@@ -148,7 +148,7 @@
                             {# Related Groups Field #}
                             {% trans "Are there any projects/groups related to this one?" as related_label %}
                             {% trans "Select related Projects/Groups" as related_placeholder %}
-                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.related_groups label=related_label placeholder=related_placeholder %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.related_groups label=related_label placeholder=related_placeholder large_field=True %}
                         {% endif %}
                         
                         

@@ -82,7 +82,7 @@
         {% trans "Visibility" as visibility_placeholder %}
         {% include 'cosinnus/fields/media_tag_field.html' with field=form.forms.media_tag.visibility label=visibility_label icon="fa-globe" placeholder=visibility_placeholder %}
     </div>
-	<ol class="input-area media-tag-warning-area small" {% if form.forms.media_tag.initial.visibility != 2 %}style="display: none;"{% endif %} id="visibility-warning">
+	<ol class="group-public-warning-area" {% if form.forms.media_tag.initial.visibility != 2 %}style="display: none;"{% endif %} id="visibility-warning">
 	    <li class="w100">
 	        <i class="fa fa-fw fa-globe"></i>
 	        {% trans "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results." %}
