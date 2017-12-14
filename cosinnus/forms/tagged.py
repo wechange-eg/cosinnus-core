@@ -25,7 +25,7 @@ from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField
 
 from cosinnus.utils.urls import group_aware_reverse
 from django.forms.widgets import SelectMultiple
-from django_select2.widgets import Select2MultipleWidget
+from django_select2.widgets import Select2MultipleWidget, Select2Widget
 from cosinnus.utils.user import get_user_select2_pills
 from cosinnus.fields import UserSelect2MultipleChoiceField
 from cosinnus.templatetags.cosinnus_tags import full_name
@@ -40,7 +40,8 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
     like = forms.BooleanField(label=_('Like'), required=False)
     approach = Select2ChoiceField(choices=TagObject.APPROACH_CHOICES, required=False)
     topics = CommaSeparatedSelect2MultipleChoiceField(choices=TagObject.TOPIC_CHOICES, required=False)
-    visibility = Select2ChoiceField(choices=TagObject.VISIBILITY_CHOICES, required=True)
+    visibility = Select2ChoiceField(choices=TagObject.VISIBILITY_CHOICES, required=False,
+        widget=Select2Widget(select2_options={'allowClear': False})) # the widget currently ignores the allowClear setting!
     # persons = will be defined in __init__
     
     class Meta:
@@ -136,6 +137,10 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
         for field in [self.fields['text_topics'], ]:
             if type(field.widget) is SelectMultiple:
                 field.widget = Select2MultipleWidget(choices=field.choices)
+        
+        # since the widget currently ignores the allowClear setting we have
+        # to use this hack to remove the clear-button
+        self.fields['visibility'].widget.is_required = True
             
         
     def save(self, commit=True):
