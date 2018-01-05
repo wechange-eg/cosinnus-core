@@ -151,35 +151,6 @@
                 }
             }).trigger('click');
 
-            $('.priority-selector').each(function() {
-                function formatSelection(val) {
-                    switch (val.id) {
-                        case 3: return '<i class="fa fa-exclamation-circle"></i>';
-                        case 2: return '<i class="fa fa-exclamation"></i>';
-                        case 1: return '<i class="fa fa-minus"></i>';
-                    }
-                }
-                function formatResult(val) {
-                    switch (val.id) {
-                        case 3: return '<i class="fa fa-exclamation-circle"></i> &nbsp; '+val.text;
-                        case 2: return '<i class="fa fa-exclamation"></i> &nbsp; '+val.text;
-                        case 1: return '<i class="fa fa-minus"></i> &nbsp; '+val.text;
-                    }
-                }
-
-                $(this).select2({
-                    minimumResultsForSearch: -1,
-                    escapeMarkup: function(m) { return m; }, // do not escape HTML
-                    formatSelection: formatSelection,
-                    formatResult: formatResult,
-                    data: [
-                        {id:3, text:'Wichtig'},
-                        {id:2, text:'Normal'},
-                        {id:1, text:'Später'}
-                    ]
-                });
-            });
-
             $('.tags-selector, .location-selector').each(function() {
                 $(this).select2({
                     width: 'off',

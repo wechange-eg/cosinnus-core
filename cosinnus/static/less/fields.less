@@ -34,7 +34,6 @@
             margin: 0;
             padding: 7px 10px 5px 10px;
             color: @app-neutral-color-dark;
-            
         }
         
         input, select {
@@ -44,6 +43,14 @@
         input:focus, textarea:focus {
             /* TODO: set outline invisible? */
             /* outline: 0; */
+        }
+        
+        select {
+            cursor: pointer;
+        }
+        
+        textarea.textarea-small {
+            height: 40px;
         }
         
         .file-input {
@@ -68,6 +75,10 @@
         width: inherit;
         vertical-align: middle;
         margin-left: 10px;
+        cursor: pointer;
+    }
+    .cosinnus-field-input.checkbox-field label {
+        cursor: pointer;
     }
     .cosinnus-field-input.transparent {
         background-color: transparent;

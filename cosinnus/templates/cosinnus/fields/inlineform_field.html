@@ -15,11 +15,25 @@
                     <div id="id_{{ unique_id }}-{{ forloop.counter0 }}-{{ extra_id_div }}"></div>
                 {% endif %}
                 
-                <div class="cosinnus-inlinefied-actions">
+                <div class="cosinnus-inlinefied-actions regular-space clearfix">
+                    <div class="btn btn-emphasized btn-small pull-right">
+		                <ul class="media-list">
+		                    <li class="media">
+		                        <a class="pull-left" href="#">
+		                            <i class="fa fa-square-o"></i>
+		                            <input type="hidden" id="{{ inlineform.DELETE.id_for_label }}" name="{{ inlineform.DELETE.html_name }}">
+		                        </a>
+		                        <div class="media-body click-previous-a">
+                                    {{ remove_button_label }}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
                     {% if forloop.counter >= formset.management_form.INITIAL_FORMS.value and forloop.counter < formset.management_form.MAX_NUM_FORMS.value %}
                         <div id="{{ unique_id }}-more-{{ forloop.counter0 }}">
                         
-                            <div class="btn btn-emphasized btn-small pull-right regular-space" onclick="$('#{{ unique_id }}-more-{{ forloop.counter0 }}').hide(); $('#{{ unique_id }}-wrapper-{{ forloop.counter }}').show(); return false;">
+                            <div class="btn btn-emphasized btn-small btn-no-float regular-space" onclick="$('#{{ unique_id }}-more-{{ forloop.counter0 }}').hide(); $('#{{ unique_id }}-wrapper-{{ forloop.counter }}').show(); return false;">
 		                        <ul class="media-list">
 		                            <li class="media">
 		                                <a class="pull-left" href="#">
@@ -35,19 +49,6 @@
                         </div>
                     {% endif %}
                     
-                    <div class="btn btn-emphasized btn-small btn-no-float regular-space">
-		                <ul class="media-list">
-		                    <li class="media">
-		                        <a class="pull-left" href="#">
-		                            <i class="fa fa-square-o"></i>
-		                            <input type="hidden" id="{{ inlineform.DELETE.id_for_label }}" name="{{ inlineform.DELETE.html_name }}">
-		                        </a>
-		                        <div class="media-body click-previous-a">
-                                    {{ remove_button_label }}
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
                     
                 </div>
                 
