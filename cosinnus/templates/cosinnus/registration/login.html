@@ -16,44 +16,25 @@
 
 {% if not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
 
-  <form action="" method="post" class="form-horizontal" role="form">
+<form action="" method="post" class="form-horizontal" role="form">
     {% csrf_token %}
     <input type="hidden" name="next" value="{% if request.GET.next %}{{ request.GET.next }}{% else %}{% url 'cosinnus:user-dashboard' %}{% endif %}">
     {{ form.non_field_errors }}
     
     <!-- a box with semi transparent background -->
     <div class="content-box">
-
-        <div type="button" class="btn btn-default w100 large-space">
-            <ul class="media-list">
-                <li class="media">
-                    <a class="pull-left" href="#" tabindex="-1">
-                        <i class="fa fa-user"></i>
-                    </a>
-                    <div class="media-body media-body-form-control">
-                        {{ form.username.errors }}
-                        {% captureas placeholder %}{% trans "Email" %}{% endcaptureas %}
-                        {% render_field form.username class+="form-control" placeholder=placeholder %}
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <div type="button" class="btn btn-default w100">
-            <ul class="media-list">
-                <li class="media">
-                    <a class="pull-left" href="#" tabindex="-1">
-                        <i class="fa fa-lock"></i>
-                    </a>
-                    <div class="media-body media-body-form-control">
-                        {{ form.password.errors }}
-                        {% captureas placeholder %}{% trans "Password" %}{% endcaptureas %}
-                        {% render_field form.password class+="form-control" placeholder=placeholder %}
-                    </div>
-                </li>
-            </ul>
-        </div>
-
+    
+        {# Regular Field #}
+        {% trans "Log in" as login_legend %}
+		{% trans "Email" as login_label %}
+		{% trans "Email" as login_placeholder %}
+		{% include 'cosinnus/fields/default_field.html' with field=form.username legend=login_legend label=login_label placeholder=login_placeholder first=True %}
+	        
+	    {# Regular Field #}
+		{% trans "Password" as password_label %}
+		{% trans "Password" as password_placeholder %}
+		{% include 'cosinnus/fields/default_field.html' with field=form.password label=password_label placeholder=password_placeholder %}
+	        
     </div><!-- content-box -->
 
     <button type="submit" class="btn btn-emphasized">
@@ -70,7 +51,7 @@
     </button>
 
 
-  </form>
+</form>
   
 {% else %}
     
