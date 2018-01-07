@@ -30,8 +30,8 @@
 	}
 }
 
-.btn .form-control, .select2-container {
-	font-size:14px;
+.btn .form-control, .select2-container, .select2-chosen {
+	font-size: 14px !important;
 }
 .btn-default {
 	background-color: transparent;
@@ -552,6 +552,38 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	}
 
 }
+
+
+.btn-small {
+    height: 24px;
+    margin: 0;
+    cursor: pointer !important;
+    width: auto;
+    
+    .media .pull-left, .media .pull-right {
+        height: 24px;
+        width: 24px;
+        line-height: 24px;
+        font-size: 1.2em;
+        cursor: pointer !important;
+    }
+    
+    .media-body {
+        line-height: 12px;
+        padding: 6px 4px;
+        min-height: 24px;
+    }
+    
+}
+
+.btn-autosize {
+    width: auto;
+}
+
+.btn-no-float {
+    float: none;
+}
+
 
 a.light-link i { display: none; }
 a.light-link:hover i { display: inherit; }

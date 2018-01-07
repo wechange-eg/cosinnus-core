@@ -4,179 +4,118 @@
 {{ form.forms.media_tag.media }}
 {% endif %}
 
+
+<script type="text/javascript">
+    function display_media_tags() {
+        $('.media_tag_initial_hidden').fadeIn();
+        $('.media_tag_initial_visible').hide();
+        {% if form.forms.obj.attached_objects %}
+        $('#s2id_{{ form.forms.obj.attached_objects.id_for_label }} input').css('width', '');
+        {% endif %}
+    }
+</script>
+
+{% if not media_tags_legend %}{% trans "Additional settings" as media_tags_legend %}{% endif %}
+{% if not media_tags_label %}{% trans "Attach files, add a location, mark topics and adjust visibility settings" as media_tags_label %}{% endif %}
+<div {% if not show_all %}class="media_tag_initial_hidden" style="display: none;"{% endif %}>
+    {% include 'cosinnus/fields/default_field.html' with legend=media_tags_legend label=media_tags_label %}
+</div>
+
+
 {% if not disable_persons %}
-<ol class="input-area" {% if not show_persons == True and not show_all == True %}style="display: none;"{% endif %} id="user-selector">
-    <li class="w100">
-        <i class="fa fa-fw fa-user"></i>
-        {% captureas placeholder %}{% trans "Tag persons" %}{% endcaptureas %}
-        {% render_field form.forms.media_tag.persons placeholder=placeholder %}
-    </li>
-</ol>
+	<div class="media_tag_initial_hidden" {% if not show_persons == True and not show_all == True %}style="display: none;"{% endif %}>
+		{% if not persons_label %}{% trans "Tag persons" as persons_label %}{% endif %}
+        {% trans "Tag persons" as persons_placeholder %}
+		{% include 'cosinnus/fields/media_tag_field.html' with field=form.forms.media_tag.persons label=persons_label icon="fa-user" placeholder=persons_placeholder %}
+	</div>
 {% endif %}
+
 
 {% if not disable_tags %}
-<ol class="input-area" {% if not show_all == True %}style="display: none;"{% endif %} id="tags-selector">
-    <li class="w100">
-        <i class="fa fa-fw fa-tags"></i>
-        {% captureas placeholder %}{% trans "Select tags" %}{% endcaptureas %}
-        {% render_field form.forms.media_tag.tags placeholder=placeholder %}
-    </li>
-</ol>
+    <div class="media_tag_initial_hidden" {% if not show_tags == True and not show_all == True %}style="display: none;"{% endif %}>
+        {% if not tags_label %}{% trans "Select tags" as tags_label %}{% endif %}
+        {% trans "Select tags" as tags_placeholder %}
+        {% include 'cosinnus/fields/media_tag_field.html' with field=form.forms.media_tag.tags label=tags_label icon="fa-tags" placeholder=tags_placeholder %}
+    </div>
 {% endif %}
+
 
 {% if not disable_location %}
-<ol class="input-area" {% if not show_all == True %}style="display: none;"{% endif %} id="location-selector">
-    <li class="w100">
-        <i class="fa fa-fw fa-map-marker"></i>
-        {% captureas placeholder %}{% trans "Place or adress" %}{% endcaptureas %}
-        {% render_field form.forms.media_tag.location placeholder=placeholder class+="font14px" %}
+    {% captureas loc_html %}
+        {% trans "Place or adress" as loc_placeholder %}
+        {% render_field form.forms.media_tag.location placeholder=loc_placeholder class+="font14px" %}
         {{ form.forms.media_tag.location_lat }}
         {{ form.forms.media_tag.location_lon }}
-    </li>
-</ol>
-<div id="id_media_tag-location-map"></div>
+        <div id="id_media_tag-location-map"></div>
+    {% endcaptureas %}
+
+    <div class="media_tag_initial_hidden" {% if not show_location == True and not show_all == True %}style="display: none;"{% endif %}>
+        {% if not loc_label %}{% trans "Location" as loc_label %}{% endif %}
+        {% include 'cosinnus/fields/media_tag_field.html' with field_html=loc_html label=loc_label icon="fa-map-marker" %}
+    </div>
 {% endif %}
+
 
 {% if form.forms.obj.attached_objects and not disable_files %}
-<ol class="input-area" {% if not show_files == True and not show_all == True %}style="display: none;"{% endif %} id="attachments-selector">
-    <li class="w100">
-    	<div>
-	        <i class="fa fa-fw fa-paperclip"></i>
-	        {% include 'cosinnus/attached/attached_objects_widget.html' with form=form.forms.obj %}
-        </div>
-    </li>
-</ol>
+    <div class="media_tag_initial_hidden" {% if not show_files == True and not show_all == True %}style="display: none;"{% endif %}>
+        {% if not files_label %}{% trans "Upload a file or image or attach an existing one" as files_label %}{% endif %}
+        {% captureas files_html %}
+            {% include 'cosinnus/attached/attached_objects_widget.html' with form=form.forms.obj %}
+        {% endcaptureas %}
+        {% include 'cosinnus/fields/media_tag_field.html' with field_html=files_html label=files_label icon="fa-paperclip" %}
+    </div>
 {% endif %}
-{% comment %}  The clock tag doesn't currently make sense overall, so taken out till further 
-    <li>
-        <i class="fa fa-fw fa-clock-o"></i>
-        {{ form.forms.media_tag.valid_start }}
-        {{ form.forms.media_tag.valid_end }}
-    </li>
-{% endcomment %}
+
 
 {% if not disable_topics %}
-<ol class="input-area" {% if not show_all == True %}style="display: none;"{% endif %} id="topics-selector">
-    <li class="w100">
-        <i class="fa fa-fw fa-lightbulb-o"></i>
-        {% captureas placeholder %}{% trans "Select topic" %}{% endcaptureas %}
-        {% render_field form.forms.media_tag.topics placeholder=placeholder %}
-    </li>
-</ol>
+    <div class="media_tag_initial_hidden" {% if not show_topics == True and not show_all == True %}style="display: none;"{% endif %}>
+        {% if not topics_label %}{% trans "Select topic" as topics_label %}{% endif %}
+        {% trans "Select topic" as topics_placeholder %}
+        {% include 'cosinnus/fields/media_tag_field.html' with field=form.forms.media_tag.topics label=topics_label icon="fa-lightbulb-o" placeholder=topics_placeholder %}
+    </div>
 {% endif %}
 
-
-{% comment %} Approach hidden for now
-<ol class="input-area" style="display: none;" id="approach-selector">
-    <li class="w100">
-        <i class="fa fa-fw fa-bolt"></i>
-        {% captureas placeholder %}{% trans "Ansatz markieren" %}{% endcaptureas %}
-        {% render_field form.forms.media_tag.approach placeholder=placeholder %}
-    </li>
-</ol>
- {% endcomment %}
 
 {% if not disable_visibility %}
-<ol class="input-area media-tag-warning-area small" {% if form.forms.media_tag.initial.visibility != 2 %}style="display: none;"{% endif %} id="visibility-warning">
-    <li class="w100">
-        <i class="fa fa-fw fa-globe"></i>
-        {% trans "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results." %}
-        {% trans "If you do not wish this, you can change this item's visibility setting below." %}
-    </li>
-</ol><!-- input-area -->
+    <div class="media_tag_initial_hidden" {% if not form.forms.media_tag.initial.visibility == 2 and not show_visibility == True and not show_all == True %}style="display: none;"{% endif %}>
+        {% if not visibility_label %}{% trans "Visibility" as visibility_label %}{% endif %}
+        {% trans "Visibility" as visibility_placeholder %}
+        {% include 'cosinnus/fields/media_tag_field.html' with field=form.forms.media_tag.visibility label=visibility_label icon="fa-globe" placeholder=visibility_placeholder %}
+    </div>
+	<ol class="group-public-warning-area" {% if form.forms.media_tag.initial.visibility != 2 %}style="display: none;"{% endif %} id="visibility-warning">
+	    <li class="w100">
+	        <i class="fa fa-fw fa-globe"></i>
+	        {% trans "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results." %}
+	        {% trans "If you do not wish this, you can change this item's visibility setting below." %}
+	    </li>
+	</ol>
 
-<ol class="input-area" {% if not show_all == True %}style="display: none;"{% endif %} id="visibility-selector">
-    <li class="w100">
-        <i class="fa fa-fw fa-globe"></i>
-        {% captureas placeholder %}{% trans "Visibility" %}{% endcaptureas %}
-        {% render_field form.forms.media_tag.visibility placeholder=placeholder %}
-    </li>
-</ol><!-- input-area -->
-<script type="text/javascript">
-	{# show or hide a visibility warning #}
-	$('#{{ form.forms.media_tag.visibility.auto_id }}').on('change', function(){
-		if ($(this).val() == "2") {
-			$('#visibility-warning').show();
-		} else {
-			$('#visibility-warning').hide();
-		} 
-	});
-</script>
+	<script type="text/javascript">
+		{# show or hide a visibility warning #}
+		$('#{{ form.forms.media_tag.visibility.auto_id }}').on('change', function(){
+			if ($(this).val() == "2") {
+				$('#visibility-warning').show();
+			} else {
+				$('#visibility-warning').hide();
+			} 
+		});
+	</script>
 {% endif %}
 
-
-
-{% if not show_all == True %}
-<!-- Hidden field display buttons -->
-<ol class="input-area">
-    <!-- When things are to be hidden by default,
-        simply invent an ID and add a link like these: -->
-    {% if form.forms.obj.attached_objects and not show_files and not disable_files %}
-    <li class="input-area-lighter">
-        <a href="#" onclick="$('#s2id_{{ form.forms.obj.attached_objects.id_for_label }} input').css('width', ''); return false;" data-show-id="attachments-selector" title="{% trans 'Add attachment' %}">
-            <i class="fa fa-fw fa-paperclip"></i>
-        </a>
-    </li>
-    {% endif %}
-    {% if not show_persons == True and not disable_persons %}
-    <li class="input-area-lighter">
-        <a href="#" onclick="return false;" data-show-id="user-selector" title="{% trans 'Tag users' %}">
-            <i class="fa fa-fw fa-user"></i>
-        </a>
-    </li>
-    {% endif %}
-	{% if not disable_location %}
-    <li class="input-area-lighter">
-        <a href="#" onclick="return false;" data-show-id="location-selector" title="{% trans 'Tag location' %}">
-            <i class="fa fa-fw fa-map-marker"></i>
-        </a>
-    </li>
-	{% endif %}
-
-{% comment %}  The clock tag doesn't currently make sense overall, so taken out till further  
-    <li>
-        <a href="#" onclick="return false;" data-show-id="tags-selector">
-            <i class="fa fa-fw fa-tags"></i>
-        </a>
-    </li>
-{% endcomment %}
-	{% if not disable_tags %}
-    <li class="input-area-lighter">
-        <a href="#" onclick="return false;" data-show-id="tags-selector" title="{% trans 'Select tags' %}">
-            <i class="fa fa-fw fa-tags"></i>
-        </a>
-    </li>
-    {% endif %}
-	{% if not disable_topics %}
-    <li class="input-area-lighter">
-        <a href="#" onclick="return false;" data-show-id="topics-selector" title="{% trans 'Select topic' %}">
-            <i class="fa fa-fw fa-lightbulb-o"></i>
-        </a>
-    </li>
-    {% endif %}
-    {% comment %} Approach hidden for now 
-    <li class="input-area-lighter">
-        <a href="#" onclick="return false;" data-show-id="approach-selector" title="{% trans 'Ansatz taggen' %}">
-            <i class="fa fa-fw fa-bolt"></i>
-        </a>
-    </li>
-    {% endcomment %}
-	{% if not disable_visibility %}
-    <li class="input-area-lighter">
-        <a href="#" onclick="return false;" data-show-id="visibility-selector" title="{% trans 'Change visibility' %}">
-            <i class="fa fa-fw fa-globe"></i>
-        </a>
-    </li>
-    {% endif %}
-    
-    {% if SETTINGS.COSINNUS_FACEBOOK_INTEGRATION_ENABLED and do_include_facebook_button and not request.user.cosinnus_profile.get_facebook_user_id %}
-    <li class="input-area-lighter">
-        <a href="#" onclick="return false;" data-show-id="facebook-integration" title="{% trans "Connect Facebook Account" %}">
-            <i class="fa fa-fw fa-facebook-square"></i>
-        </a>
-    </li>
-    {% endif %}
-    
-    
-</ol><!-- input-area -->
+{% if not show_all %}
+	<div class="media_tag_initial_visible">
+	    {% include 'cosinnus/fields/default_field.html' with legend=media_tags_legend label=media_tags_label %}
+	    <div class="btn btn-emphasized btn-small btn-no-float regular-space w100" onclick="display_media_tags();">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-left" href="#">
+	                    <i class="fa fa-caret-down"></i>
+	                </a>
+	                <div class="media-body">
+	                    {% trans "Show more settings..." %}
+	                </div>
+	            </li>
+	        </ul>
+	    </div>
+	</div>
 {% endif %}

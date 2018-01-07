@@ -28,7 +28,6 @@
     <!-- a box with semi transparent background -->
     <div class="content-box">
 	    
-        <fieldset>
             <legend>{% if activate %}{% trans "Re-Activate Project/Group" %}{% else %}{% trans "Deactivate Project/Group" %}{% endif %}: {{ target_group.name }}</legend>
 
             <!-- On large screens the long explanation texts are on the right side next to the input elements -->
@@ -44,7 +43,6 @@
 					{% endif %}
                 </div>
             </div><!-- row -->
-        </fieldset>
     </div>
     
     <form method="POST" action=".">{% csrf_token %}

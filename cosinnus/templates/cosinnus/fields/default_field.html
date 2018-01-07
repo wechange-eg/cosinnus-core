@@ -1,0 +1,56 @@
+{% load i18n widget_tweaks %}
+
+{% comment %}  
+    Cosinnus Field Framework Template
+        To be used for *ALL* fields in all forms inside cosinnus. Most fields can be templated using this, but there are specific 
+        implementations for fields like checkboxes or inline formsets (check the fields template folder).
+    
+    Parameters:
+        - field: supply the formfield you want to render
+        - *or* field_html: supply some html to be displayed inside the field. ``field`` can additionally be passed, but will only be used
+                for error and optional status display
+        - legend: the <legend> header content
+        - label: the <label> explanatory content
+        - placeholder: the field placeholder content
+        
+    Extra Options:
+        - first: indicates this is the first field in the form, removing the top margin
+        - large-field: removes the 40px height constraint and wraps around the content. used for larger (or smaller) fields
+        - unstyled: will apply no styles to field-input, so that custom ``field_html`` is not affected by the default styles
+        - field_classes: extra CSS classes to apply to the input area
+        - extra_html: extra HTML that will be placed after the field
+
+{% endcomment %}
+
+<div class="cosinnus-field">
+	{% if legend %}
+	    <legend {% if first %}class="first"{% endif %}>{{ legend }}</legend>
+	{% endif %}
+	
+	{% if label %}
+		<label>
+		    {{ label }}
+		    {% if field and not field.field.required %}
+                {% trans "(optional)" context "written next to optional form fields" %}
+            {% endif %}
+		</label>
+	{% endif %}
+	
+	{% if field and field.errors %}
+	   {{ field.errors }}
+	{% endif %}
+	
+	{% if field or field_html %}
+		<div class="{% if not unstyled %}cosinnus-field-input{% endif %} {% if not large_field %}regular-field{% endif %} {% if field_classes %}{{ field_classes }}{% endif %}">
+	        {% if field_html %}
+	            {{ field_html|safe }}
+	        {% elif field %}	    
+	            {% render_field field placeholder=placeholder %}
+	        {% endif %}
+	    </div>
+    {% endif %}
+    
+    {% if extra_html %}
+       {{ extra_html|safe }}
+    {% endif %}
+</div>

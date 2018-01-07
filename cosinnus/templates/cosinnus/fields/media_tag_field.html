@@ -1,0 +1,33 @@
+{% load i18n widget_tweaks %}
+
+<div class="cosinnus-media-field">
+	{% if label %}
+		<label>
+		    {{ label }}
+		</label>
+	{% endif %}
+	
+	{% if field or field_html %}
+	<div type="button" class="btn btn-default w100 regular-space">
+	    <ul class="media-list">
+	        <li class="media">
+	            <a class="pull-left" href="#">
+	                <i class="fa fa-fw {{ icon }}"></i>
+	            </a>
+	            <div class="media-body">
+					{% if field and field.errors %}
+					   {{ field.errors }}
+					{% endif %}
+					
+	                {% if field_html %}
+		                {{ field_html|safe }}
+		            {% elif field %}        
+		                {% render_field field class+=" w100" placeholder=placeholder %}
+		            {% endif %}
+	            </div>
+	            
+	        </li>
+	    </ul>
+	</div>
+	{% endif %}
+</div>

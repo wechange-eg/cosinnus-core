@@ -32,193 +32,66 @@
 		    {{ form.forms.user.non_field_errors }}
             {{ form.forms.media_tag.non_field_errors }}
 		    
-            <fieldset>
                 <legend>{% trans "Basic data" %}</legend>
 
-                <!-- On large screens the long explanation texts are on the right side next to the input elements -->
-                <div class="row">
-                    <div class="col-md-8">
-
-                        {% block user_info %}
-	                        <div class="row">
-	                            <div class="col-sm-6 regular-space">
-	                                <div type="button" class="btn btn-default w100">
-	                                    <ul class="media-list">
-	                                        <li class="media">
-	                                            <a class="pull-left" href="#">
-	                                                <i class="fa fa-user"></i>
-	                                            </a>
-	                                            <div class="media-body media-body-form-control">
-	                                                {{ form.forms.user.first_name.errors }}
-						                            {% captureas placeholder %}{% trans "First name" %}{% endcaptureas %}
-						                            {% render_field form.forms.user.first_name class+="form-control" placeholder=placeholder %}
-	                                            </div>
-	                                        </li>
-	                                    </ul>
-	                                </div>
-	                            </div>
-	                            <div class="col-sm-6 regular-space">
-	                                <div type="button" class="btn btn-default w100">
-	                                    <ul class="media-list">
-	                                        <li class="media">
-	                                            <a class="pull-left" href="#">
-	                                                <i class="fa fa-user"></i>
-	                                            </a>
-	                                            <div class="media-body media-body-form-control">
-	                                                {{ form.forms.user.last_name.errors }}
-						                            {% captureas placeholder %}{% trans "Last name" %}{% endcaptureas %}
-						                            {% render_field form.forms.user.last_name class+="form-control" placeholder=placeholder %}
-	                                            </div>
-	                                        </li>
-	                                    </ul>
-	                                </div>
-	                            </div>
-	                        </div><!-- row -->
-                        
-                        {% endblock user_info %}
-
-
-                        <div type="button" class="btn btn-default w100 regular-space">
-                            <ul class="media-list">
-                                <li class="media">
-                                    <a class="pull-left" href="#">
-                                        <i class="fa fa-envelope"></i>
-                                    </a>
-                                    <div class="media-body media-body-form-control">
-                                        {{ form.forms.user.email.errors }}
-			                            {% captureas placeholder %}{% trans "E-Mail" %}{% endcaptureas %}
-			                            {% render_field form.forms.user.email class+="form-control" placeholder=placeholder %}
-                                    </div>
-                                </li>
-                            </ul>
+                {% block user_info %}
+                    <div class="row">
+                        <div class="col-sm-6 regular-space">
+                            {# Regular Field #}
+							{% trans "First name" as first_name_label %}
+							{% trans "First name" as  first_name_placeholder %}
+							{% include 'cosinnus/fields/default_field.html' with field=form.forms.user.first_name label=first_name_label placeholder=first_name_placeholder %}
                         </div>
-
-                        <div type="button" class="btn btn-default w100 regular-space">
-                            <ul class="media-list">
-                                <li class="media">
-                                    <a class="pull-left" href="#">
-                                        <i class="fa fa-chain"></i>
-                                    </a>
-                                    <div class="media-body media-body-form-control">
-                                        {{ form.forms.obj.website.errors }}
-                                        {% captureas placeholder %}{% trans "Website" %}{% endcaptureas %}
-                                        {% render_field form.forms.obj.website class+="form-control" placeholder=placeholder %}
-                                    </div>
-                                </li>
-                            </ul>
+                        <div class="col-sm-6 regular-space">
+                            {# Regular Field #}
+							{% trans "Last name" as last_name_label %}
+							{% trans "Last name" as  last_name_placeholder %}
+							{% include 'cosinnus/fields/default_field.html' with field=form.forms.user.last_name label=last_name_label placeholder=last_name_placeholder %}
                         </div>
+                    </div><!-- row -->
+                
+                {% endblock user_info %}
+                
+                
+                {# email Field #}
+				{% trans "E-Mail" as email_label %}
+				{% trans "E-Mail" as  email_placeholder %}
+				{% include 'cosinnus/fields/default_field.html' with field=form.forms.user.email label=email_label placeholder=email_placeholder %}
+				                
 
-                    </div><!-- col -->
-
-                    <!-- explanation text -->
-                    <div class="col-md-4">
-                        <p class="transparent"></p><!-- Text here if neccessary -->
+                {# Avatar Field #}
+				{% trans "Profile avatar" as avatar_legend %}
+				{% captureas avatar_label %}{% trans "A picture for better recognition." %} {% trans "File Size" %}: {% trans "max. 10 MB" %}{% endcaptureas %}
+				{% captureas preview_html %}
+				    {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.width}}px;height:{{SETTINGS.AWESOME_AVATAR.height}}px{% endcaptureas %}
+                    <div id="id_avatar-preview" class="awesome-avatar-preview" style="{{ preview_style }}">
+                        {% include "cosinnus/user/user_avatar_image.html" with user=request.user extra_style=preview_style image_size="medium-large" %}
                     </div>
-                </div><!-- row -->
-            </fieldset>
-
-		
-		    <fieldset>
-		        <legend>{% trans "Profile avatar" %}</legend>
-		
-		        <!-- On large screens the long explanation texts are on the right side next to the input elements -->
-		        <div class="row">
-		        
-                    <div class="col-md-8">
-
-                        <!-- image left, inputs right -->
-                        <div class="row">
-                            
-                            {{ form.forms.obj.avatar.errors }}
-                        
-                            <div class="col-sm-4 regular-space">
-                                {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.width}}px;height:{{SETTINGS.AWESOME_AVATAR.height}}px{% endcaptureas %}
-                                <div id="id_avatar-preview" class="awesome-avatar-preview" style="{{ preview_style }}">
-                                    {% include "cosinnus/user/user_avatar_image.html" with user=request.user extra_style=preview_style %}
-                                </div>
-                                <div id="avatar_deletion_notice" class="hidden"><p>{% trans "Avatar will be deleted once you save your profile." %}</p></div>
-                            </div>
+				{% endcaptureas %}
+				{% include 'cosinnus/fields/avatar_field.html' with avatar_field=form.forms.obj.avatar label=avatar_label legend=avatar_legend preview_html=preview_html %}
 
 
-                            <div class="col-sm-8 regular-space">
+        <legend>{% trans "About yourself" %}</legend>
 
-                                <div type="button" class="btn btn-default w100 regular-space">
-                                    <ul class="media-list">
-                                        <li class="media">
-                                            <a class="pull-left" href="#">
-                                                <i class="fa fa-file-image-o"></i>
-                                            </a>
-                                            <div class="media-body">
-                                                {{ form.forms.obj.avatar }}
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div type="button" class="btn btn-default w100">
-                                    <ul class="media-list">
-                                        <li class="media">
-                                            <a class="pull-left" href="#" onclick="$('#avatar_deletion_notice').toggleClass('hidden');">
-                                                <i id="avatar_clear_checkbox" class="fa fa-square-o"></i>
-                                                <input type="hidden" name="avatar_clear" >
-                                            </a>
-                                            <div class="media-body">
-                                                <a href="#" onclick="$('#avatar_clear_checkbox').click();">{% trans "Delete" %}</a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div><!-- col -->
-                        </div><!-- row -->
-                    </div><!-- col -->
-		        
-		            <!-- explanation text -->
-		            <div class="col-md-4">
-		                <p class="transparent">{% trans "A picture that lets others recognize you quickly." %} {% trans "File Size" %}: {% trans "max. 10 MB" %}</p>
-		            </div>
-		        </div><!-- row -->
-		    </fieldset>
-		
-		
-		    <fieldset>
-		        <legend>{% trans "About yourself" %}</legend>
-		
-		        <!-- On large screens the long explanation texts are on the right side next to the input elements -->
-		        <div class="row">
-		            <div class="col-md-8 regular-space">
-                        
-                        {% include "cosinnus/media_tags_userprofile.html" %} 
-            
-                        {% block userprofile_about_fields %}
-                            
-                            <label>{% trans "Who are you and what motivates you?" %}</label>
-                            <div type="button" class="btn btn-default w100 regular-space">
-                                <ul class="media-list">
-                                    <li class="media">
-                                        <a class="pull-left" href="#">
-                                            <i class="fa fa-pencil"></i>
-                                        </a>
-                                        <div class="media-body media-body-form-control">
-                                            {% comment %}  {% render_field form.forms.obj.description  %}{% endcomment %}
-                                            {{ form.forms.obj.description.errors }}
-                                            {% captureas placeholder %}{% trans "Tell others something about you!" %}{% endcaptureas %}
-                                            {% render_field form.forms.obj.description class+="form-control" placeholder=placeholder %}
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                {% block userprofile_about_fields %}
                     
-                       {% endblock userprofile_about_fields %}
+                    {# SimpleMDE Description Field (gets initialized in extrahead) #}
+                    {# Large Field #}
+					{% trans "Who are you and what motivates you?" as description_label %}
+					{% trans "Tell others something about you!" as  description_placeholder %}
+					{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description label=description_label placeholder=description_placeholder large_field=True %}
+					                    
+                    {# Regular Field #}
+					{% trans "Website" as website_label %}
+					{% trans "Example: http://mywebsite.com" as  website_placeholder %}
+					{% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.website label=website_label placeholder=website_placeholder %}
+					                    
+               {% endblock userprofile_about_fields %}
                     
-		            </div><!-- col -->
-		            <div class="col-md-4">
-		                <p class="transparent"><strong>{% trans "Detailed description" %}</strong></p>
-		                <p class="transparent">{% trans "Describe yourself, your activities and your interests." %}</p>
-		            </div><!-- col -->
-		        </div><!-- row -->
-	       
-	       </fieldset>
-	    
+                    
+               
+                {% include "cosinnus/media_tags_userprofile.html" %} 
+    
 	    </div>
 	    
 	    <button type="submit" class="btn btn-emphasized">

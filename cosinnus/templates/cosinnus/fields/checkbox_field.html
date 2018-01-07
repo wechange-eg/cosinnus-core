@@ -1,0 +1,10 @@
+{% load i18n cosinnus_tags widget_tweaks %}
+
+{% captureas checkbox_html %}
+    {% render_field field %}
+    <label for="{{ field.auto_id }}">
+        {{ checkbox_label }}
+    </label>
+{% endcaptureas %}
+                                
+{% include 'cosinnus/fields/default_field.html' with field_html=checkbox_html field=field field_classes="checkbox-field" %}

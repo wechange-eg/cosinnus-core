@@ -204,7 +204,7 @@
 
 
 .btn-no-interact {
-    cursor: default;
+    cursor: default !important;
 }
 
 .app-main .btn-no-interact:hover .media, .app-main .btn-no-interact:hover .media > .media-body {
@@ -347,6 +347,14 @@
 .CodeMirror .editor-preview pre, .CodeMirror .editor-preview h1,
 .CodeMirror .editor-preview h2, .CodeMirror .editor-preview h3 {
     background-color: @app-neutral-color-light;
+}
+
+.CodeMirror-scroll {
+    cursor: text;
+}
+
+.cursor-text {
+    cursor: text;
 }
 
 /** Anchors with nicer offset */
