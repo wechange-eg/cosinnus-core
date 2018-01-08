@@ -90,7 +90,7 @@
 						
 						
                         {% trans "Description and Infos" as group_legend %}
-                        {% captureas name_label %}{% if group_model == "CosinnusSociety" %}{% trans "TODO: give the group a good name" %}{% else %}{% trans "TODO: give the project a good name" %}{% endif %}{% endcaptureas %}
+                        {% captureas name_label %}{% if group_model == "CosinnusSociety" %}{% trans "Give the group a good name" %}{% else %}{% trans "Give the project a good name" %}{% endif %}{% endcaptureas %}
                         {% include 'cosinnus/fields/default_field.html' with legend=group_legend label=name_label first=True %}
                         
                         {# Name Field #}

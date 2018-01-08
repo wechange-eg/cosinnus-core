@@ -22,7 +22,7 @@
 
 {% endcomment %}
 
-<div class="cosinnus-field">
+<div class="cosinnus-field {% if legend or label and not field and not field_html %}header-only{% endif %}">
 	{% if legend %}
 	    <legend {% if first %}class="first"{% endif %}>{{ legend }}</legend>
 	{% endif %}
