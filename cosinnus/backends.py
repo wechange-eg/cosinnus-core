@@ -34,7 +34,8 @@ class EmailAuthBackend(ModelBackend):
     
     def authenticate(self, username=None, password=None):
         """ Authenticate a user based on email address as the user name. """
-        user = get_user_by_email_safe(username)
+        email = username.lower().strip()
+        user = get_user_by_email_safe(email)
         if user and user.check_password(password):
             return user
 
