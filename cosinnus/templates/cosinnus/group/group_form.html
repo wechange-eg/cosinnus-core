@@ -90,7 +90,7 @@
 						
 						
                         {% trans "Description and Infos" as group_legend %}
-                        {% captureas name_label %}{% if group_model == "CosinnusSociety" %}{% trans "Give the group a good name" %}{% else %}{% trans "Give the project a good name" %}{% endif %}{% endcaptureas %}
+                        {% captureas name_label %}{% if group_model == "CosinnusSociety" %}{% trans "Enter a descriptive name for your group." %}{% else %}{% trans "Enter a descriptive name for your project." %}{% endif %}{% endcaptureas %}
                         {% include 'cosinnus/fields/default_field.html' with legend=group_legend label=name_label first=True %}
                         
                         {# Name Field #}
@@ -100,36 +100,37 @@
 					    {% endblock group_form_name_field %}
 					
 					
-					    {# Avatar Field #}
-				        {% trans "Avatar" as avatar_legend %}
-		                {% captureas avatar_label %}{% trans "A picture for better recognition." %} {% trans "File Size" %}: {% trans "max. 10 MB" %}{% endcaptureas %}
-		                {% captureas preview_html %}
-		                    {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.width}}px;height:{{SETTINGS.AWESOME_AVATAR.height}}px{% endcaptureas %}
-				            {% captureas group_avatar_type %}{% if group_model == "CosinnusSociety" %}group{% else %}project{% endif %}{% endcaptureas %}
-				            <div id="id_avatar-preview" class="awesome-avatar-preview regular-space" style="{{ preview_style }}">
-				                {% include "cosinnus/group/group_avatar_image.html" with group=object extra_style=preview_style type=group_avatar_type %}
-				            </div>
-		                {% endcaptureas %}
-				        {% include 'cosinnus/fields/avatar_field.html' with avatar_field=form.forms.obj.avatar label=avatar_label legend=avatar_legend preview_html=preview_html %}
-						
 				
                         {# SimpleMDE Description Field (gets initialized in extrahead) #}					                
 	                    {% if group_model == "CosinnusSociety" %}
-	                        {% trans "Describe the group in a few sentences." as group_label %}
+	                        {% captureas group_label %}{% trans "Describe the group in a few sentences." %} {% trans "This description will be publicly visible." %}{% endcaptureas %}
                         {% else %}
-                            {% trans "Describe the project in a few sentences." as group_label %}
+                            {% captureas group_label %}{% trans "Describe the project in a few sentences." %} {% trans "This description will be publicly visible." %}{% endcaptureas %}
                         {% endif %}
-                        {% trans "Description and Infos" as group_legend %}
-                        {% include 'cosinnus/fields/default_field.html' with label=group_label legend=group_legend %}
+                        {% include 'cosinnus/fields/default_field.html' with label=group_label %}
                         
 		                {% block group_form_description_field %}
 					        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description large_field=True %}
                         {% endblock group_form_description_field %}
                         
+                        
+                        {# Avatar Field #}
+                        {% trans "Avatar" as avatar_legend %}
+                        {% captureas avatar_label %}{% trans "A picture for better recognition." %} {% trans "File Size" %}: {% trans "max. 10 MB" %}{% endcaptureas %}
+                        {% captureas preview_html %}
+                            {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.width}}px;height:{{SETTINGS.AWESOME_AVATAR.height}}px{% endcaptureas %}
+                            {% captureas group_avatar_type %}{% if group_model == "CosinnusSociety" %}group{% else %}project{% endif %}{% endcaptureas %}
+                            <div id="id_avatar-preview" class="awesome-avatar-preview regular-space" style="{{ preview_style }}">
+                                {% include "cosinnus/group/group_avatar_image.html" with group=object extra_style=preview_style type=group_avatar_type %}
+                            </div>
+                        {% endcaptureas %}
+                        {% include 'cosinnus/fields/avatar_field.html' with avatar_field=form.forms.obj.avatar label=avatar_label legend=avatar_legend preview_html=preview_html %}
+                        
+                        
                         {# Website Field #}
-                        {% trans "Website" as website_label %}
+                        {% trans "Website (optional)" as website_label %}
                         {% trans "Example: http://mywebsite.com" as website_placeholder %}
-                        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.website label=website_label placeholder=website_placeholder %}
+                        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.website legend=website_label label=website_legend placeholder=website_placeholder %}
                         
                         
                         {% include "cosinnus/media_tags_group.html"%} 
