@@ -176,7 +176,7 @@ def check_user_superuser(user, portal=None):
         For this it checks permissions if a user is a portal admin or a superuser
             returns ``True`` if the user is a superuser or portal admin
     """
-    return user.is_superuser or user.is_staff or check_user_portal_admin(user, portal)
+    return user.is_superuser or check_user_portal_admin(user, portal)
 
 
 def check_user_portal_admin(user, portal=None):
