@@ -1,0 +1,21 @@
+{% load i18n cosinnus_tags %}
+
+{% comment %}
+    Help Popup for use with ``help_button_for_popup.html``
+    
+    Parameters:
+      - help_text_id: the id for a help text (ex: "helptext_1_group") that is one of the defined i18n strings in ``help_button_for_popup.html``.
+                      this is used to pull the translated help text from i18n, which is then rendered as markdown.
+      - help_modal_id: id for the modal
+      - help_title: The title for this popup (defaults to "Help")
+{% endcomment %}
+
+{% captureas help_body %}
+	{% trans help_text_id context "Look up this ID in the help text register for the translation text!" as help_text %}
+	<div class="textfield">{{ help_text|textfield }}</div>
+{% endcaptureas %}
+
+
+
+{% if not help_title %}{% trans "Help" as help_title %}{% endif %}
+{% include "cosinnus/modal_box.html" with id=help_modal_id label=help_body title=help_title title_icon="fa-book" %}

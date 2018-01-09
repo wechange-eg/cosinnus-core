@@ -1,0 +1,35 @@
+{% load i18n cosinnus_tags %}
+
+{% comment %}  
+    Help Button that opens a help popup.
+    
+    Paramters:
+      - help_text_id: one of the strings defined below
+      - help_title (optional): Title for the popup, defaults to "Help"
+{% endcomment %}
+
+{% captureas help_modal_id %}modal-{{ help_text_id }}{% endcaptureas %}
+{% include 'cosinnus/common/modal_box_help_popup.html' with help_text_id=help_text_id help_title=help_title help_modal_id=help_modal_id %}
+
+<a class="help-popup-button {% if not outer_form %}help-popup-button-inner-form{% endif %} pull-right" data-toggle="modal" data-target="#{{ help_modal_id }}" title="{% trans "Help and Assistance for this page" %}">
+    <i class="fa fa-question-circle-o"></i>
+</a>
+
+
+{% comment %}  
+DO NOT DELETE THESE DEFINITIONS!
+This contains all the i18n help-text ids. These must be coded here, because they
+would otherwise not appear in the auto-generated PO-Files.
+{% endcomment %}
+
+{% trans "helptext_1_group" context "Look up this ID in the help text register for the translation text!" as _nil_ %}
+{% trans "helptext_2_project" context "Look up this ID in the help text register for the translation text!" as _nil_ %}
+{% trans "helptext_3_marketplace" context "Look up this ID in the help text register for the translation text!" as _nil_ %}
+{% trans "helptext_4_profile" context "Look up this ID in the help text register for the translation text!" as _nil_ %}
+{% trans "helptext_5_password" context "Look up this ID in the help text register for the translation text!" as _nil_ %}
+{% trans "helptext_6_microsite" context "Look up this ID in the help text register for the translation text!" as _nil_ %}
+{% trans "helptext_7_notes" context "Look up this ID in the help text register for the translation text!" as _nil_ %}
+{% trans "helptext_8_poll" context "Look up this ID in the help text register for the translation text!" as _nil_ %}
+{% trans "helptext_9_todo" context "Look up this ID in the help text register for the translation text!" as _nil_ %}
+{% trans "helptext_10_documentsetting" context "Look up this ID in the help text register for the translation text!" as _nil_ %}
+{% trans "helptext_11_document" context "Look up this ID in the help text register for the translation text!" as _nil_ %}

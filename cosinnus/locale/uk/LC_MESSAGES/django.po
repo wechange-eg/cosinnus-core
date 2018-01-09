@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-07 16:44+0100\n"
+"POT-Creation-Date: 2018-01-09 18:32+0100\n"
 "PO-Revision-Date: 2017-12-07 16:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1157,6 +1157,59 @@ msgstr "У стрічці twitter знайдена помилка"
 msgid "Error embedding a video"
 msgstr "У відео знайдена помилка"
 
+msgid "Help and Assistance for this page"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_1_group"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_2_project"
+msgstr ""
+
+#, fuzzy
+#| msgid "Marketplace"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_3_marketplace"
+msgstr "Дошка оголошень"
+
+#, fuzzy
+#| msgid "Delete profile"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_4_profile"
+msgstr "Видалити профіль"
+
+#, fuzzy
+#| msgid "Reset password"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_5_password"
+msgstr "Змінити пароль"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_6_microsite"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_7_notes"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_8_poll"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_9_todo"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_10_documentsetting"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_11_document"
+msgstr ""
+
 msgid "We're sorry. The Map is not supported in Internet Explorer."
 msgstr "Вибачте, ця карта не підтримується в Internet Explorer."
 
@@ -1183,6 +1236,9 @@ msgstr "Відобразити в інших проектах/спільнота
 
 msgid "Apply"
 msgstr "Подати"
+
+msgid "Help"
+msgstr ""
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr "Введіть електронні адреси людей, яких ви бажаєте запросити до платформи."
@@ -1343,6 +1399,28 @@ msgstr "Надсилання..."
 
 msgid "Close"
 msgstr "Закрити"
+
+msgid "Avatar will be deleted once you save."
+msgstr "При збереженні зображення буде видалено."
+
+msgctxt "written next to optional form fields"
+msgid "(optional)"
+msgstr ""
+
+msgid "Call to Action Button"
+msgstr "Кнопка Заклик до Дії"
+
+msgid "Label of the Button"
+msgstr "Назва кнопки"
+
+msgid "Link URL"
+msgstr "Посилання URL"
+
+msgid "Enter a place or address."
+msgstr "Уведіть місце або адресу."
+
+msgid "Choose and upload a gallery image"
+msgstr "Обрати та завантажити зображення галереї"
 
 msgid "Re-Activate Project/Group"
 msgstr "Повторно активувати проект/спільноту"
@@ -1547,14 +1625,35 @@ msgstr "Загальна інформація"
 msgid "Facebook-Integration"
 msgstr "Інтеграція з Facebook"
 
+msgid "Description and Infos"
+msgstr "Опис та інформація"
+
+#, fuzzy
+#| msgid "Enter a name for the group."
+msgid "Enter a descriptive name for your group."
+msgstr "Уведіть назву для спільноти."
+
+#, fuzzy
+#| msgid "Enter a name for the project."
+msgid "Enter a descriptive name for your project."
+msgstr "Уведіть назву для проекту."
+
 msgid "Enter a name for the group."
 msgstr "Уведіть назву для спільноти."
 
 msgid "Enter a name for the project."
 msgstr "Уведіть назву для проекту."
 
-msgid "Avatar will be deleted once you save."
-msgstr "При збереженні зображення буде видалено."
+msgid "Describe the group in a few sentences."
+msgstr "Опишіть спільноту кількома реченнями."
+
+#, fuzzy
+#| msgid "This project will be set to be publicly visible!"
+msgid "This description will be publicly visible."
+msgstr "Цей проект має бути налаштований як публічно видимий!"
+
+msgid "Describe the project in a few sentences."
+msgstr "Опишіть проект кількома реченнями."
 
 msgid "A picture for better recognition."
 msgstr "Зображення для кращої впізнаваності."
@@ -1565,20 +1664,16 @@ msgstr "Розмір Файлу"
 msgid "max. 10 MB"
 msgstr "max. 10 MB"
 
-msgid "Description and Infos"
-msgstr "Опис та інформація"
+#, fuzzy
+#| msgid "Personal Message (optional)"
+msgid "Website (optional)"
+msgstr "Приватне повідомлення (опціонально)"
 
-msgid "Describe the group in a few sentences."
-msgstr "Опишіть спільноту кількома реченнями."
-
-msgid "Describe the project in a few sentences."
-msgstr "Опишіть проект кількома реченнями."
+msgid "Example: http://mywebsite.com"
+msgstr ""
 
 msgid "Where are you active?"
 msgstr "У якій сфері ви активно працюєте?"
-
-msgid "Enter a place or address."
-msgstr "Уведіть місце або адресу."
 
 msgid "Remove location"
 msgstr "Прибрати місцезнаходження"
@@ -1622,23 +1717,14 @@ msgstr "Які застосунки потрібно використовува�
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Цей додаток можна активувати для групи, але не для проекту!"
 
-msgid "Describe your activities and goals"
-msgstr "Опишіть вашу діяльність та цілі"
-
 msgid "Microsite Wallpaper"
 msgstr "Фон мікросайту"
 
-msgid "Currently"
-msgstr "Поточний"
+msgid "Upload an image."
+msgstr "Завантажити зображення."
 
 msgid "Reset"
 msgstr "Скинути"
-
-msgid "Change"
-msgstr "Змінити"
-
-msgid "Upload an image."
-msgstr "Завантажити зображення."
 
 msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgstr "Це публічний опис, який буде знаходитися на мікросайті, та який кожен зможе побачити."
@@ -1654,6 +1740,9 @@ msgstr "Відео"
 
 msgid "Youtube or Vimeo URL"
 msgstr "Youtube чи Vimeo URL"
+
+msgid "https://www.youtube.com/watch?v=example-video"
+msgstr ""
 
 msgid "Twitter: Embedded User Timeline"
 msgstr "Twitter: додана стрічка користувача"
@@ -1679,9 +1768,6 @@ msgstr "Flickr галерея URL (приклад: \"https://www.flickr.com/phot
 msgid "Microsite Gallery Images"
 msgstr "Мікросайт Галерея зображень"
 
-msgid "Choose and upload a gallery image"
-msgstr "Обрати та завантажити зображення галереї"
-
 msgid "Remove gallery image"
 msgstr "Прибрати зображення галереї"
 
@@ -1702,15 +1788,6 @@ msgstr "Верхній колонтитул вікна"
 
 msgid "Description text inside the box"
 msgstr "Описовий текст в середині вікна"
-
-msgid "Call to Action Button"
-msgstr "Кнопка Заклик до Дії"
-
-msgid "Label of the Button"
-msgstr "Назва кнопки"
-
-msgid "Link URL"
-msgstr "Посилання URL"
 
 msgid "Remove button"
 msgstr "Видалити кнопку"
@@ -2404,6 +2481,14 @@ msgstr ""
 "\n"
 "%(domain_url)s"
 
+#, fuzzy
+#| msgid "Additional Header content"
+msgid "Additional settings"
+msgstr "Додатковий зміст верхнього колонтитула"
+
+msgid "Attach files, add a location, mark topics and adjust visibility settings"
+msgstr ""
+
 msgid "Tag persons"
 msgstr "Вказати людей"
 
@@ -2412,6 +2497,9 @@ msgstr "Вказати ключові слова"
 
 msgid "Place or adress"
 msgstr "Місце або адреса"
+
+msgid "Upload a file or image or attach an existing one"
+msgstr ""
 
 msgid "Select topic"
 msgstr "Вказати тему"
@@ -2422,21 +2510,10 @@ msgstr "Цей елемент буде опубліковано як публі�
 msgid "If you do not wish this, you can change this item's visibility setting below."
 msgstr "Якщо Ви цього не хочете, Ви можете змінити налаштування приватності елемента нижче."
 
-msgid "Add attachment"
-msgstr "Додати додаток"
-
-msgid "Tag users"
-msgstr "Вказати людей"
-
-msgid "Tag location"
-msgstr "Вказати місце"
-
-# msgid "Visibility"
-msgid "Change visibility"
-msgstr "Налаштувати приватність"
-
-msgid "Connect Facebook Account"
-msgstr "Пов'язати з аккаунтом на Facebook"
+#, fuzzy
+#| msgid "Show more Projects"
+msgid "Show more settings..."
+msgstr "Показати більше проектів"
 
 msgid "Which topics are you involved with?"
 msgstr "З якими темами ви працюєте?"
@@ -2459,6 +2536,9 @@ msgstr "Діяльність та інтереси"
 msgid "Where do you live?"
 msgstr "Де ви мешкаєте?"
 
+msgid "Enter a place or address and then choose a point on the map."
+msgstr ""
+
 msgid "Which topics are you interested in?"
 msgstr "Яким темами цікавитеся?"
 
@@ -2467,6 +2547,19 @@ msgstr "Чого би ви хотіли навчитися?"
 
 msgid "Who is allowed to see you on the platform?"
 msgstr "Хто може бачити вас на платформі?"
+
+#, fuzzy
+#| msgid "This project will be set to be publicly visible!"
+msgid "Your profile will be set to be publicly visible!"
+msgstr "Цей проект має бути налаштований як публічно видимий!"
+
+#, fuzzy
+#| msgid "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
+msgid "This means that your name, avatar and user profile can be seen by ANYONE on the internet and may potentially be included in search engine results!"
+msgstr "Цей елемент буде опубліковано як публічно видимий! Це означає, що будь-хто в Інтернеті може отримати до нього доступ і він потенційно може бути включений в результати пошукових машин."
+
+msgid "Please note that changes in this setting will not have an immediate effect on search engine results! Depending on the search provider, it might take days or weeks until this setting is reflected in their results."
+msgstr ""
 
 msgid "Privacy"
 msgstr "Приватність"
@@ -2558,6 +2651,9 @@ msgstr "Забули пароль?"
 msgid "Logged out"
 msgstr "Вийшли із системи"
 
+msgid "Log in"
+msgstr "Вхід в систему"
+
 msgid "Password"
 msgstr "Пароль"
 
@@ -2588,14 +2684,20 @@ msgstr "Ваш пароль успішно змінено!"
 msgid "Enter old password"
 msgstr "Введіть старий пароль"
 
+msgid "We need to make sure it's really you"
+msgstr ""
+
 msgid "Old password"
 msgstr "Старий пароль"
 
-msgid "Please enter your new password twice so we can verify you typed it in correctly."
-msgstr "Введіть, будь ласка, ваш новий пароль двічі, щоб перевірити правильність його вводу."
-
 msgid "New Password"
 msgstr "Новий пароль"
+
+msgid "Enter a password you don't use anywhere else. The longer the better!"
+msgstr ""
+
+msgid "Repeat your password just to make sure"
+msgstr ""
 
 msgid "Repeat new Password"
 msgstr "Повторіть новий пароль"
@@ -2614,6 +2716,9 @@ msgstr "Ваш пароль змінено. Тепер за допомогою �
 
 msgid "Enter new password"
 msgstr "Введіть новий пароль"
+
+msgid "Please enter your new password twice so we can verify you typed it in correctly."
+msgstr "Введіть, будь ласка, ваш новий пароль двічі, щоб перевірити правильність його вводу."
 
 msgid "New password"
 msgstr "Новий пароль"
@@ -2652,6 +2757,12 @@ msgstr "Дякуємо, що користуєтеся нашим веб-сайт
 msgid "Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one."
 msgstr "Забули пароль? Введіть нижче адресу вашої електронної скриньки, і ми надішлемо вам інструкції для призначення нового паролю."
 
+msgid "The email you used to register your account. This is the one you receive email notifications on"
+msgstr ""
+
+msgid "Example: mymail@example.com"
+msgstr ""
+
 msgid "Sign up"
 msgstr "Зареєструватися"
 
@@ -2661,14 +2772,31 @@ msgstr "Створити обліковий запис"
 msgid "Email address"
 msgstr "Адреса електронної скриньки"
 
-msgid "Repeat passwort"
-msgstr "Повторіть пароль"
+msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
+msgstr ""
+
+#, fuzzy
+#| msgid "Folder name"
+msgid "Your name"
+msgstr "Ім'я папки"
+
+msgid "This name will be displayed to other users on the site"
+msgstr ""
 
 msgid "First name"
 msgstr "Ім'я"
 
+msgid "You can supply your last name to be displayed as well"
+msgstr ""
+
 msgid "Last name"
 msgstr "Прізвище"
+
+msgid "Captcha"
+msgstr ""
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr ""
 
 msgctxt "read and accept the [Terms of Services]"
 msgid "I have read and accept the"
@@ -2676,9 +2804,6 @@ msgstr "Я прочитав та приймаю"
 
 msgid "Terms and Services"
 msgstr "Угода користувача"
-
-msgid "Log in"
-msgstr "Вхід в систему"
 
 msgid "Search in Apps"
 msgstr "Пошук серед застосунків"
@@ -2811,12 +2936,6 @@ msgstr "Адреса електронної скриньки"
 msgid "Profile avatar"
 msgstr "Основне фото"
 
-msgid "Avatar will be deleted once you save your profile."
-msgstr "Основне фото буде видалено при збереженні профілю."
-
-msgid "A picture that lets others recognize you quickly."
-msgstr "Фотографія, яка дозволить людям швидко впізнавати вас."
-
 msgid "About yourself"
 msgstr "Про вас"
 
@@ -2825,12 +2944,6 @@ msgstr "Хто ви і що вас мотивує?"
 
 msgid "Tell others something about you!"
 msgstr "Розкажіть іншим щось про себе!"
-
-msgid "Detailed description"
-msgstr "Детальний опис"
-
-msgid "Describe yourself, your activities and your interests."
-msgstr "Опишіть себе, вашу діяльність та ваші інтереси."
 
 msgid "Welcome!"
 msgstr "Вітаємо!"
@@ -2864,6 +2977,9 @@ msgstr "Завантаження Facebook скріптів..."
 
 msgid "If nothing happens please disable any addons like Ghostery or NoScript..."
 msgstr "Якщо нічого не станеться, будь ласка, вийдіть з таких додатків як Ghostery чи NoScript..."
+
+msgid "Connect Facebook Account"
+msgstr "Пов'язати з аккаунтом на Facebook"
 
 msgctxt "Facebook connect explanation box"
 msgid "Why connect?"
@@ -2976,11 +3092,11 @@ msgstr "Унікальне ім'я Вашої фан-сторінки - це і�
 msgid "Facebook Fan-Page link to"
 msgstr "Пов'язати Facebook  фан-сторінку з"
 
-msgid "Choose from your Pages..."
-msgstr "ОБрати з Ваших Сторінок.."
-
 msgid "Fan-Page unique name (example: myfanpage)"
 msgstr "Унікальна назва фан-сторінки (приклад:myfanpage)"
+
+msgid "Choose from your Pages..."
+msgstr "ОБрати з Ваших Сторінок.."
 
 msgid "You have Editor access to this Fan-Page and can publish your posts directly to it."
 msgstr "Ви маєте редакторський доступ до фан-сторінки і можете публікувати пости прямо на ній."
@@ -3428,6 +3544,43 @@ msgstr "Ви, на разі, не є членом %s! Якщо ви бажаєт
 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
+
+#~ msgid "Describe your activities and goals"
+#~ msgstr "Опишіть вашу діяльність та цілі"
+
+#~ msgid "Currently"
+#~ msgstr "Поточний"
+
+#~ msgid "Change"
+#~ msgstr "Змінити"
+
+#~ msgid "Add attachment"
+#~ msgstr "Додати додаток"
+
+#~ msgid "Tag users"
+#~ msgstr "Вказати людей"
+
+#~ msgid "Tag location"
+#~ msgstr "Вказати місце"
+
+# msgid "Visibility"
+#~ msgid "Change visibility"
+#~ msgstr "Налаштувати приватність"
+
+#~ msgid "Repeat passwort"
+#~ msgstr "Повторіть пароль"
+
+#~ msgid "Avatar will be deleted once you save your profile."
+#~ msgstr "Основне фото буде видалено при збереженні профілю."
+
+#~ msgid "A picture that lets others recognize you quickly."
+#~ msgstr "Фотографія, яка дозволить людям швидко впізнавати вас."
+
+#~ msgid "Detailed description"
+#~ msgstr "Детальний опис"
+
+#~ msgid "Describe yourself, your activities and your interests."
+#~ msgstr "Опишіть себе, вашу діяльність та ваші інтереси."
 
 #~ msgid "Change privacy"
 #~ msgstr "Налаштувати приватність"

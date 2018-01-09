@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-07 16:44+0100\n"
-"PO-Revision-Date: 2018-01-02 17:50+0100\n"
+"POT-Creation-Date: 2018-01-09 18:32+0100\n"
+"PO-Revision-Date: 2018-01-09 18:59+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -1170,6 +1170,81 @@ msgstr "Fehler beim Einbetten eines Twitter Feeds"
 msgid "Error embedding a video"
 msgstr "Fehler beim Einbetten eines Videos"
 
+msgid "Help and Assistance for this page"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_1_group"
+msgstr ""
+"Auf diesem Portal gibt es Gruppen und Projekte. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen.\n"
+"Wenn Du eine Gruppe erstellen möchtest, sende bitte eine Nachricht mit der Bitte um Gruppengründung an die Portaladministratoren. Diese regeln alle Details."
+
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_1_group"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_2_project"
+msgstr "Auf diesem Portal gibt es *Gruppen und Projekte*. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen. Wenn Du eine Gruppe erstellen möchtest, sende bitte eine Nachricht mit der Bitte um Gruppengründung an die Portaladministratoren. Diese regeln alle Details."
+
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_1_group"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_3_marketplace"
+msgstr "Auf diesem Portal gibt es *Gruppen und Projekte*. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen. Wenn Du eine Gruppe erstellen möchtest, sende bitte eine Nachricht mit der Bitte um Gruppengründung an die Portaladministratoren. Diese regeln alle Details."
+
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_1_group"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_4_profile"
+msgstr "Auf diesem Portal gibt es *Gruppen und Projekte*. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen. Wenn Du eine Gruppe erstellen möchtest, sende bitte eine Nachricht mit der Bitte um Gruppengründung an die Portaladministratoren. Diese regeln alle Details."
+
+#, fuzzy
+#| msgid "Reset password"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_5_password"
+msgstr "Passwort zurücksetzen"
+
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_1_group"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_6_microsite"
+msgstr "Auf diesem Portal gibt es *Gruppen und Projekte*. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen. Wenn Du eine Gruppe erstellen möchtest, sende bitte eine Nachricht mit der Bitte um Gruppengründung an die Portaladministratoren. Diese regeln alle Details."
+
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_1_group"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_7_notes"
+msgstr "Auf diesem Portal gibt es *Gruppen und Projekte*. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen. Wenn Du eine Gruppe erstellen möchtest, sende bitte eine Nachricht mit der Bitte um Gruppengründung an die Portaladministratoren. Diese regeln alle Details."
+
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_1_group"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_8_poll"
+msgstr "Auf diesem Portal gibt es *Gruppen und Projekte*. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen. Wenn Du eine Gruppe erstellen möchtest, sende bitte eine Nachricht mit der Bitte um Gruppengründung an die Portaladministratoren. Diese regeln alle Details."
+
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_1_group"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_9_todo"
+msgstr "Auf diesem Portal gibt es *Gruppen und Projekte*. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen. Wenn Du eine Gruppe erstellen möchtest, sende bitte eine Nachricht mit der Bitte um Gruppengründung an die Portaladministratoren. Diese regeln alle Details."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_10_documentsetting"
+msgstr "Hier kannst Du zu dem bereits gewählten Titel Deines Dokumentes noch einige Dinge hinzufügen. Z.B. kannst Du Deinem Dokument ein Thema, einen Ort oder eine Datei zuweisen. "
+
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_1_group"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_11_document"
+msgstr "Auf diesem Portal gibt es *Gruppen und Projekte*. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen. Wenn Du eine Gruppe erstellen möchtest, sende bitte eine Nachricht mit der Bitte um Gruppengründung an die Portaladministratoren. Diese regeln alle Details."
+
 msgid "We're sorry. The Map is not supported in Internet Explorer."
 msgstr "Tut uns leid, die Karte wird in Internet Explorer nicht unterstützt."
 
@@ -1196,6 +1271,9 @@ msgstr "In anderen Projekten/Gruppen anzeigen"
 
 msgid "Apply"
 msgstr "Übernehmen"
+
+msgid "Help"
+msgstr ""
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr "Gib die E-Mail Adressen von den Leuten ein, die du einladen möchtest der Platform beizutreten."
@@ -1356,6 +1434,28 @@ msgstr "Übertrage..."
 
 msgid "Close"
 msgstr "Schließen"
+
+msgid "Avatar will be deleted once you save."
+msgstr "Bild wird beim speichern gelöscht."
+
+msgctxt "written next to optional form fields"
+msgid "(optional)"
+msgstr ""
+
+msgid "Call to Action Button"
+msgstr "Aufruf zum Handeln - Microsite-Box Link"
+
+msgid "Label of the Button"
+msgstr "Text des Links"
+
+msgid "Link URL"
+msgstr "URL des Links"
+
+msgid "Enter a place or address."
+msgstr "Gib einen Ort oder Adresse ein."
+
+msgid "Choose and upload a gallery image"
+msgstr "Wähle ein Galleriebild zum Hochladen aus"
 
 msgid "Re-Activate Project/Group"
 msgstr "Projekt/Gruppe reaktivieren"
@@ -1560,14 +1660,35 @@ msgstr "Allgemein"
 msgid "Facebook-Integration"
 msgstr "Facebook-Integration"
 
+msgid "Description and Infos"
+msgstr "Beschreibung und Infos"
+
+#, fuzzy
+#| msgid "Enter a name for the group."
+msgid "Enter a descriptive name for your group."
+msgstr "Gib einen Namen für die Gruppe ein"
+
+#, fuzzy
+#| msgid "Enter a name for the project."
+msgid "Enter a descriptive name for your project."
+msgstr "Gib einen Namen für das Projekt ein"
+
 msgid "Enter a name for the group."
 msgstr "Gib einen Namen für die Gruppe ein"
 
 msgid "Enter a name for the project."
 msgstr "Gib einen Namen für das Projekt ein"
 
-msgid "Avatar will be deleted once you save."
-msgstr "Bild wird beim speichern gelöscht."
+msgid "Describe the group in a few sentences."
+msgstr "Beschreibe die Gruppe in ein paar Sätzen."
+
+#, fuzzy
+#| msgid "This project will be set to be publicly visible!"
+msgid "This description will be publicly visible."
+msgstr "Dieses Projekt wird auf öffentlich sichtbar eingestellt!"
+
+msgid "Describe the project in a few sentences."
+msgstr "Beschreibe das Projekt in ein paar Sätzen."
 
 msgid "A picture for better recognition."
 msgstr "Ein Bild für die schnellere Wiedererkennung."
@@ -1578,20 +1699,16 @@ msgstr "Dateigröße"
 msgid "max. 10 MB"
 msgstr "max. 10 MB"
 
-msgid "Description and Infos"
-msgstr "Beschreibung und Infos"
+#, fuzzy
+#| msgid "Personal Message (optional)"
+msgid "Website (optional)"
+msgstr "Persönliche Nachricht (optional)"
 
-msgid "Describe the group in a few sentences."
-msgstr "Beschreibe die Gruppe in ein paar Sätzen."
-
-msgid "Describe the project in a few sentences."
-msgstr "Beschreibe das Projekt in ein paar Sätzen."
+msgid "Example: http://mywebsite.com"
+msgstr ""
 
 msgid "Where are you active?"
 msgstr "Wo bist du aktiv?"
-
-msgid "Enter a place or address."
-msgstr "Gib einen Ort oder Adresse ein."
 
 msgid "Remove location"
 msgstr "Ort entfernen"
@@ -1635,24 +1752,14 @@ msgstr "Welche Apps sollen aktiviert sein?"
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Diese Anwendung kann nur für eine Gruppe, aber nicht für ein Projekt aktiviert werden!"
 
-msgid "Describe your activities and goals"
-msgstr "Beschreibe die Aktivitäten und Ziele"
-
 msgid "Microsite Wallpaper"
 msgstr "Microsite Hintergrundbild"
 
-msgid "Currently"
-msgstr "Aktuell"
+msgid "Upload an image."
+msgstr "Lade ein Bild hoch."
 
 msgid "Reset"
 msgstr "Zurücksetzen"
-
-#
-msgid "Change"
-msgstr "Ändern"
-
-msgid "Upload an image."
-msgstr "Lade ein Bild hoch."
 
 msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgstr "Dies ist eine öffentliche Beschreibung die auf der Microseite angezeigt wird und von jedem im Internet gesehen werden kann."
@@ -1668,6 +1775,9 @@ msgstr "Video"
 
 msgid "Youtube or Vimeo URL"
 msgstr "Youtube oder Vimeo URL"
+
+msgid "https://www.youtube.com/watch?v=example-video"
+msgstr ""
 
 msgid "Twitter: Embedded User Timeline"
 msgstr "Twitter: Eingebetteter Benutzer-Feed"
@@ -1693,9 +1803,6 @@ msgstr "Flickr Gallerie URL (Beispiel: \"https://www.flickr.com/photos/username/
 msgid "Microsite Gallery Images"
 msgstr "Microsite Galleriebilder"
 
-msgid "Choose and upload a gallery image"
-msgstr "Wähle ein Galleriebild zum Hochladen aus"
-
 msgid "Remove gallery image"
 msgstr "Galleriebild entfernen"
 
@@ -1716,15 +1823,6 @@ msgstr "Titel der Box-Überschrift"
 
 msgid "Description text inside the box"
 msgstr "Beschreibungstext in der Box"
-
-msgid "Call to Action Button"
-msgstr "Aufruf zum Handeln - Microsite-Box Link"
-
-msgid "Label of the Button"
-msgstr "Text des Links"
-
-msgid "Link URL"
-msgstr "URL des Links"
 
 msgid "Remove button"
 msgstr "Link entfernen"
@@ -2391,6 +2489,12 @@ msgstr ""
 "\n"
 "%(domain_url)s"
 
+msgid "Additional settings"
+msgstr ""
+
+msgid "Attach files, add a location, mark topics and adjust visibility settings"
+msgstr ""
+
 msgid "Tag persons"
 msgstr "Personen markieren"
 
@@ -2399,6 +2503,9 @@ msgstr "Tags markieren"
 
 msgid "Place or adress"
 msgstr "Ort oder Adresse"
+
+msgid "Upload a file or image or attach an existing one"
+msgstr ""
 
 msgid "Select topic"
 msgstr "Thema markieren"
@@ -2409,21 +2516,10 @@ msgstr "Dieser Inhalt wird als öffentlich sichtbar erstellt! Das bedeutet, dass
 msgid "If you do not wish this, you can change this item's visibility setting below."
 msgstr "Wenn du das nicht möchtest, kannst du unten die Sichtbarkeitseinstellung anpassen."
 
-msgid "Add attachment"
-msgstr "Anhang hinzufügen"
-
-msgid "Tag users"
-msgstr "Personen markieren"
-
-msgid "Tag location"
-msgstr "Ort markieren"
-
-# msgid "Visibility"
-msgid "Change visibility"
-msgstr "Sichtbarkeit einstellen"
-
-msgid "Connect Facebook Account"
-msgstr "Facebook-Konto verbinden"
+#, fuzzy
+#| msgid "Show more Projects"
+msgid "Show more settings..."
+msgstr "Weitere Projekte anzeigen"
 
 msgid "Which topics are you involved with?"
 msgstr "Um welche Themen geht es?"
@@ -2446,6 +2542,9 @@ msgstr "Interessen und Aktivitäten"
 msgid "Where do you live?"
 msgstr "Wo lebst du?"
 
+msgid "Enter a place or address and then choose a point on the map."
+msgstr ""
+
 msgid "Which topics are you interested in?"
 msgstr "An welchen Themen bist du interessiert?"
 
@@ -2454,6 +2553,19 @@ msgstr "Was möchtest du lernen?"
 
 msgid "Who is allowed to see you on the platform?"
 msgstr "Wer darf dich auf der Plattform sehen?"
+
+#, fuzzy
+#| msgid "This project will be set to be publicly visible!"
+msgid "Your profile will be set to be publicly visible!"
+msgstr "Dieses Projekt wird auf öffentlich sichtbar eingestellt!"
+
+#, fuzzy
+#| msgid "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
+msgid "This means that your name, avatar and user profile can be seen by ANYONE on the internet and may potentially be included in search engine results!"
+msgstr "Dieser Inhalt wird als öffentlich sichtbar erstellt! Das bedeutet, dass jeder im Internet darauf Zugriff hat und ihn lesen kann, und er möglicherweise in Suchmaschinenergebnissen erscheint."
+
+msgid "Please note that changes in this setting will not have an immediate effect on search engine results! Depending on the search provider, it might take days or weeks until this setting is reflected in their results."
+msgstr ""
 
 msgid "Privacy"
 msgstr "Sichtbarkeit"
@@ -2545,6 +2657,9 @@ msgstr "Passwort vergessen?"
 msgid "Logged out"
 msgstr "Abgemeldet"
 
+msgid "Log in"
+msgstr "Login"
+
 msgid "Password"
 msgstr "Passwort"
 
@@ -2575,14 +2690,20 @@ msgstr "Dein Passwort wurde erfolgreich geändert."
 msgid "Enter old password"
 msgstr "Altes Passwort eingeben"
 
+msgid "We need to make sure it's really you"
+msgstr ""
+
 msgid "Old password"
 msgstr "Altes Passwort"
 
-msgid "Please enter your new password twice so we can verify you typed it in correctly."
-msgstr "Bitte das neue Passwort zur Kontrolle zwei mal eingeben."
-
 msgid "New Password"
 msgstr "Neues Passwort"
+
+msgid "Enter a password you don't use anywhere else. The longer the better!"
+msgstr ""
+
+msgid "Repeat your password just to make sure"
+msgstr ""
 
 msgid "Repeat new Password"
 msgstr "Neues Passwort wiederholen"
@@ -2601,6 +2722,9 @@ msgstr "Ihr Passwort wurde geändert. Sie können sich jetzt damit einloggen."
 
 msgid "Enter new password"
 msgstr "Neues Passwort eingeben"
+
+msgid "Please enter your new password twice so we can verify you typed it in correctly."
+msgstr "Bitte das neue Passwort zur Kontrolle zwei mal eingeben."
 
 msgid "New password"
 msgstr "Neues Passwort"
@@ -2639,6 +2763,12 @@ msgstr "Danke dass sie unsere Webseite benutzen!"
 msgid "Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one."
 msgstr "Passwort vergessen? Wenn sie unten ihre E-Mail-Addresse eintragen, schicken wir ihnen Anweisungen wie sie ein neues Passwort vergeben können. "
 
+msgid "The email you used to register your account. This is the one you receive email notifications on"
+msgstr ""
+
+msgid "Example: mymail@example.com"
+msgstr ""
+
 msgid "Sign up"
 msgstr "Registrieren"
 
@@ -2649,14 +2779,31 @@ msgstr "Konto erstellen"
 msgid "Email address"
 msgstr "E-mail Adresse"
 
-msgid "Repeat passwort"
-msgstr "Passwort wiederholen"
+msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
+msgstr ""
+
+#, fuzzy
+#| msgid "Vorname"
+msgid "Your name"
+msgstr "Vorname"
+
+msgid "This name will be displayed to other users on the site"
+msgstr ""
 
 msgid "First name"
 msgstr "Vorname"
 
+msgid "You can supply your last name to be displayed as well"
+msgstr ""
+
 msgid "Last name"
 msgstr "Nachname"
+
+msgid "Captcha"
+msgstr ""
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr ""
 
 msgctxt "read and accept the [Terms of Services]"
 msgid "I have read and accept the"
@@ -2664,9 +2811,6 @@ msgstr "Ich habe die Nutzungsbedingungen gelesen und akzeptiere sie:"
 
 msgid "Terms and Services"
 msgstr "Nutzungsbedingungen"
-
-msgid "Log in"
-msgstr "Login"
 
 msgid "Search in Apps"
 msgstr "Suche in Anwendungen"
@@ -2801,12 +2945,6 @@ msgstr "E-Mail"
 msgid "Profile avatar"
 msgstr "Avatar"
 
-msgid "Avatar will be deleted once you save your profile."
-msgstr "Dein Avatar wird gelöscht wenn du dein Profil speicherst,"
-
-msgid "A picture that lets others recognize you quickly."
-msgstr "Ein Bild das andere dich leicht erkennen lässt."
-
 msgid "About yourself"
 msgstr "Über dich"
 
@@ -2815,12 +2953,6 @@ msgstr "Wer bist du und was motiviert dich?"
 
 msgid "Tell others something about you!"
 msgstr "Erzähle anderen etwas über dich!"
-
-msgid "Detailed description"
-msgstr "Detaillierte Beschreibung"
-
-msgid "Describe yourself, your activities and your interests."
-msgstr "Beschreibe dich, deine Aktivitäten und Interessen"
 
 msgid "Welcome!"
 msgstr "Willkommen!"
@@ -2854,6 +2986,9 @@ msgstr "Lade Facebook-Skripte..."
 
 msgid "If nothing happens please disable any addons like Ghostery or NoScript..."
 msgstr "Wenn nichts passiert, deaktiviere bitte Browser-Addons wie Ghostery oder NoScript..."
+
+msgid "Connect Facebook Account"
+msgstr "Facebook-Konto verbinden"
 
 msgctxt "Facebook connect explanation box"
 msgid "Why connect?"
@@ -2966,11 +3101,11 @@ msgstr "Der Kennungsname deiner Fan-Seite ist der Name der Fan-Seite in der URL 
 msgid "Facebook Fan-Page link to"
 msgstr "Facebook Fan-Seite zum Verbinden"
 
-msgid "Choose from your Pages..."
-msgstr "Eine deiner Seiten auswählen..."
-
 msgid "Fan-Page unique name (example: myfanpage)"
 msgstr "Fan-Seiten-Kennungsname (Beispiel: meinefanseite)"
+
+msgid "Choose from your Pages..."
+msgstr "Eine deiner Seiten auswählen..."
 
 msgid "You have Editor access to this Fan-Page and can publish your posts directly to it."
 msgstr "Du hast Bearbeiter-Zugriffsrechte auf diese Fan-Seite und kannst Posts direkt darauf veröffentlichen."
@@ -3419,6 +3554,44 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
+#~ msgid "Describe your activities and goals"
+#~ msgstr "Beschreibe die Aktivitäten und Ziele"
+
+#~ msgid "Currently"
+#~ msgstr "Aktuell"
+
+#
+#~ msgid "Change"
+#~ msgstr "Ändern"
+
+#~ msgid "Add attachment"
+#~ msgstr "Anhang hinzufügen"
+
+#~ msgid "Tag users"
+#~ msgstr "Personen markieren"
+
+#~ msgid "Tag location"
+#~ msgstr "Ort markieren"
+
+# msgid "Visibility"
+#~ msgid "Change visibility"
+#~ msgstr "Sichtbarkeit einstellen"
+
+#~ msgid "Repeat passwort"
+#~ msgstr "Passwort wiederholen"
+
+#~ msgid "Avatar will be deleted once you save your profile."
+#~ msgstr "Dein Avatar wird gelöscht wenn du dein Profil speicherst,"
+
+#~ msgid "A picture that lets others recognize you quickly."
+#~ msgstr "Ein Bild das andere dich leicht erkennen lässt."
+
+#~ msgid "Detailed description"
+#~ msgstr "Detaillierte Beschreibung"
+
+#~ msgid "Describe yourself, your activities and your interests."
+#~ msgstr "Beschreibe dich, deine Aktivitäten und Interessen"
+
 #~ msgid "Change privacy"
 #~ msgstr "Sichtbarkeit einstellen"
 
@@ -3681,9 +3854,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "Mein Netzwerk"
 #~ msgstr "Mein Netzwerk"
-
-#~ msgid "Vorname"
-#~ msgstr "Vorname"
 
 #~ msgid "Nachname"
 #~ msgstr "Nachname"

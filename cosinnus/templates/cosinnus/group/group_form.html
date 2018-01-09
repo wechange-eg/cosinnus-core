@@ -38,6 +38,8 @@
 
 
 {% block content %}
+
+    {% include 'cosinnus/common/help_button_for_popup.html' with help_text_id="helptext_1_group" outer_form=True %}
     
     <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
     {% csrf_token %}
@@ -87,7 +89,6 @@
 			<div class="tab-content">
 				{% block group_form_tab_panes %}
 					<div class="tab-pane {% if not SETTINGS.COSINNUS_MICROSITES_ENABLED or not request.GET.tab %}active{% endif %}" id="general">
-						
 						
                         {% trans "Description and Infos" as group_legend %}
                         {% captureas name_label %}{% if group_model == "CosinnusSociety" %}{% trans "Enter a descriptive name for your group." %}{% else %}{% trans "Enter a descriptive name for your project." %}{% endif %}{% endcaptureas %}
