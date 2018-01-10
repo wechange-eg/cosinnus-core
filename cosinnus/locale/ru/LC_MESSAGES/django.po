@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-09 18:32+0100\n"
+"POT-Creation-Date: 2018-01-10 17:40+0100\n"
 "PO-Revision-Date: 2017-12-07 16:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1410,9 +1410,11 @@ msgstr "Закрыть"
 msgid "Avatar will be deleted once you save."
 msgstr "Аватар будет удален после сохранения."
 
+#, fuzzy
+#| msgid "Options"
 msgctxt "written next to optional form fields"
-msgid "(optional)"
-msgstr ""
+msgid "optional"
+msgstr "Опции"
 
 msgid "Call to Action Button"
 msgstr "Клавиша Призыв к действию"
@@ -1428,6 +1430,10 @@ msgstr "Укажите место/адрес."
 
 msgid "Choose and upload a gallery image"
 msgstr "Выбрать и загрузить изображение галереи"
+
+msgctxt "written next to optional form fields"
+msgid "(optional)"
+msgstr ""
 
 msgid "Re-Activate Project/Group"
 msgstr "Заново активировать проект или группу"
@@ -1631,24 +1637,26 @@ msgstr "Общие"
 msgid "Facebook-Integration"
 msgstr "Интегрирование с Фейсбук"
 
-msgid "Description and Infos"
-msgstr "Описание и информация"
+#, fuzzy
+#| msgid "Group Image"
+msgid "Group name"
+msgstr "Группа Изображение"
 
 #, fuzzy
-#| msgid "Enter a name for the group."
-msgid "Enter a descriptive name for your group."
-msgstr "Введите название группы."
-
-#, fuzzy
-#| msgid "Enter a name for the project."
-msgid "Enter a descriptive name for your project."
-msgstr "Введите название проекта."
+#| msgid "Project Type"
+msgid "Project name"
+msgstr "Тип проекта"
 
 msgid "Enter a name for the group."
 msgstr "Введите название группы."
 
 msgid "Enter a name for the project."
 msgstr "Введите название проекта."
+
+#, fuzzy
+#| msgid "Short Description"
+msgid "Short description"
+msgstr "Краткое описание"
 
 msgid "Describe the group in a few sentences."
 msgstr "Описать группу в нескольких предложениях."
@@ -1669,11 +1677,6 @@ msgstr "Размер файла"
 
 msgid "max. 10 MB"
 msgstr "максимально 10 МБ"
-
-#, fuzzy
-#| msgid "Personal Message (optional)"
-msgid "Website (optional)"
-msgstr "Личное сообщение (опционально)"
 
 msgid "Example: http://mywebsite.com"
 msgstr ""
@@ -1699,8 +1702,13 @@ msgstr "Существуют ли родственные проекты/груп
 msgid "Select related Projects/Groups"
 msgstr "Выбрать родственный проект или группу"
 
-msgid "Visibility"
-msgstr "Кто может видеть мой профиль"
+#, fuzzy
+#| msgid "Additional Header content"
+msgid "Privacy settings"
+msgstr "Верхний колонтитул Дополнительный контент"
+
+msgid "This will be the default setting for all content created by members."
+msgstr ""
 
 msgid "This group will be set to be publicly visible!"
 msgstr "Эта группа становится общедоступной!"
@@ -1732,10 +1740,20 @@ msgstr "Загрузить изображение."
 msgid "Reset"
 msgstr "Сбросить"
 
+msgid "Description and Infos"
+msgstr "Описание и информация"
+
 msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgstr "Это публичное описание, доступ к которому есть у всех и которое появится на микросайте."
 
-msgid "Contact info. How you can be reached, addresses, social media, etc..."
+#, fuzzy
+#| msgid "No Contact info set"
+msgid "Contact info"
+msgstr "Не указана контактная информация"
+
+#, fuzzy
+#| msgid "Contact info. How you can be reached, addresses, social media, etc..."
+msgid "How you can be reached, addresses, social media, etc..."
 msgstr "Контактная информация. Как Вас найти, адреса, социальные медиа и пр."
 
 msgid "From which apps should public items be shown on the microsite?"
@@ -1782,6 +1800,9 @@ msgstr "Добавить изображение в галлерею"
 
 msgid "Show Microsite Call to Action Box"
 msgstr "Показать окно призыв к действию на микросайте"
+
+msgid "A box shown on the microsite that contains buttons to your external campaigns or websites"
+msgstr ""
 
 msgid "Show Call to Action Box"
 msgstr "Показать Окно Призыв к действию"
@@ -2486,7 +2507,7 @@ msgstr ""
 
 #, fuzzy
 #| msgid "Additional Header content"
-msgid "Additional settings"
+msgid "Additional options"
 msgstr "Верхний колонтитул Дополнительный контент"
 
 msgid "Attach files, add a location, mark topics and adjust visibility settings"
@@ -2507,6 +2528,9 @@ msgstr ""
 msgid "Select topic"
 msgstr "Выбрать тему"
 
+msgid "Visibility"
+msgstr "Кто может видеть мой профиль"
+
 msgid "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
 msgstr "Это сообщение будет размещено в открытом доступе!  Это означает, что любой пользователь может его увидеть и, потенциально, оно может быть найдено поисковыми машинами в сети интернет."
 
@@ -2515,7 +2539,7 @@ msgstr "Если Вы этого не хотите, то ниже Вы може�
 
 #, fuzzy
 #| msgid "Show more Projects"
-msgid "Show more settings..."
+msgid "Show more options..."
 msgstr "Показать больше проектов"
 
 msgid "Which topics are you involved with?"
@@ -2779,6 +2803,11 @@ msgid "This will be used as your login. Notification emails will be sent to this
 msgstr ""
 
 #, fuzzy
+#| msgid "Repeat new Password"
+msgid "Repeat Password"
+msgstr "Повторите новый пароль"
+
+#, fuzzy
 #| msgid "Folder name"
 msgid "Your name"
 msgstr "Название папки"
@@ -2789,11 +2818,11 @@ msgstr ""
 msgid "First name"
 msgstr "Имя"
 
-msgid "You can supply your last name to be displayed as well"
-msgstr ""
-
 msgid "Last name"
 msgstr "Фамилия"
+
+msgid "You can supply your last name to be displayed as well"
+msgstr ""
 
 msgid "Captcha"
 msgstr ""
@@ -2921,9 +2950,6 @@ msgstr "Удалить аккаунт пользователя"
 msgid "User profile: %(username)s"
 msgstr "Профиль пользователя: %(username)s"
 
-msgid "This message will never reappear when you remove it."
-msgstr "Если Вы удалите это сообщение, оно больше не появится."
-
 msgid "My Website"
 msgstr "Мой сайт"
 
@@ -2938,9 +2964,6 @@ msgstr "Электронная почта"
 
 msgid "Profile avatar"
 msgstr "Аватар"
-
-msgid "About yourself"
-msgstr "О себе"
 
 msgid "Who are you and what motivates you?"
 msgstr "Кто Вы и что Вами движет?"
@@ -3552,6 +3575,27 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
 
+#~ msgid "This message will never reappear when you remove it."
+#~ msgstr "Если Вы удалите это сообщение, оно больше не появится."
+
+#, fuzzy
+#~| msgid "Enter a name for the group."
+#~ msgid "Enter a descriptive name for your group."
+#~ msgstr "Введите название группы."
+
+#, fuzzy
+#~| msgid "Enter a name for the project."
+#~ msgid "Enter a descriptive name for your project."
+#~ msgstr "Введите название проекта."
+
+#, fuzzy
+#~| msgid "Personal Message (optional)"
+#~ msgid "Website (optional)"
+#~ msgstr "Личное сообщение (опционально)"
+
+#~ msgid "About yourself"
+#~ msgstr "О себе"
+
 #~ msgid "Describe your activities and goals"
 #~ msgstr "Дайте описание Вашей деятельности и Ваших целей"
 
@@ -3659,9 +3703,6 @@ msgstr "Ваши изменения были сохранены."
 #~ msgid "User CSV File"
 #~ msgstr "Пользователь CSV-файл"
 
-#~ msgid "Options"
-#~ msgstr "Опции"
-
 #~ msgid "The default settings for the CSV file. Only change these if you absolutely know what you are doing!"
 #~ msgstr "Параметры для CSV-файла установлены по умолчанию. Изменение возможно только в том случае, если Вы АБСОЛЮТНО уверены в том, что Вы делаете!"
 
@@ -3761,9 +3802,6 @@ msgstr "Ваши изменения были сохранены."
 
 #~ msgid "No Location set"
 #~ msgstr "Место не указано"
-
-#~ msgid "No Contact info set"
-#~ msgstr "Не указана контактная информация"
 
 #~ msgid "You are a member. View Project!"
 #~ msgstr "Вы являетесь членом проекта. Посмотреть проект! "

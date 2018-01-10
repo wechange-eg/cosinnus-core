@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-09 18:32+0100\n"
-"PO-Revision-Date: 2018-01-09 18:59+0100\n"
+"POT-Creation-Date: 2018-01-10 17:40+0100\n"
+"PO-Revision-Date: 2018-01-10 17:42+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -788,10 +788,8 @@ msgstr "Gruppen"
 msgid "At least one type of Map object must be chosen!"
 msgstr "Es muss mindestens ein Typ von Kartenobjekten ausgewählt werden!"
 
-#, fuzzy
-#| msgid "Informations"
 msgid "Proportions"
-msgstr "Informationen"
+msgstr "Proportionen"
 
 msgid "1/2 + 1/2"
 msgstr ""
@@ -910,28 +908,20 @@ msgstr "Simple Seite mit Navigationsspalte links (Modular)"
 msgid "Start Page (Modular)"
 msgstr "Startseite (Modular)"
 
-#, fuzzy
-#| msgid "Wallpaper image"
 msgid "Header image"
-msgstr "Hintergrundbild"
+msgstr "Header image"
 
-#, fuzzy
-#| msgid "Header"
 msgid "Header Title"
 msgstr "Kopfzeile (nach Banner)"
 
-#, fuzzy
-#| msgid "Header"
 msgid "Header Text"
 msgstr "Kopfzeile (nach Banner)"
 
 msgid "Additional Header content"
 msgstr ""
 
-#, fuzzy
-#| msgid "Edit Widget"
 msgid "Site Widgets"
-msgstr "Widget bearbeiten"
+msgstr "Site Widgets"
 
 msgid "Bottom content (gray background)"
 msgstr ""
@@ -1135,10 +1125,8 @@ msgstr "Gruppenübersicht"
 msgid "Project overview"
 msgstr "Projektübersicht"
 
-#, fuzzy
-#| msgid "Overview"
 msgid "Services"
-msgstr "Übersicht"
+msgstr "Dienste"
 
 msgid "Access denied!"
 msgstr "Zugriff verweigert!"
@@ -1171,7 +1159,7 @@ msgid "Error embedding a video"
 msgstr "Fehler beim Einbetten eines Videos"
 
 msgid "Help and Assistance for this page"
-msgstr ""
+msgstr "Hilfe und Erklärungen zu dieser Seite"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_1_group"
@@ -1273,7 +1261,7 @@ msgid "Apply"
 msgstr "Übernehmen"
 
 msgid "Help"
-msgstr ""
+msgstr "Help"
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr "Gib die E-Mail Adressen von den Leuten ein, die du einladen möchtest der Platform beizutreten."
@@ -1439,8 +1427,8 @@ msgid "Avatar will be deleted once you save."
 msgstr "Bild wird beim speichern gelöscht."
 
 msgctxt "written next to optional form fields"
-msgid "(optional)"
-msgstr ""
+msgid "optional"
+msgstr "optional"
 
 msgid "Call to Action Button"
 msgstr "Aufruf zum Handeln - Microsite-Box Link"
@@ -1456,6 +1444,10 @@ msgstr "Gib einen Ort oder Adresse ein."
 
 msgid "Choose and upload a gallery image"
 msgstr "Wähle ein Galleriebild zum Hochladen aus"
+
+msgctxt "written next to optional form fields"
+msgid "(optional)"
+msgstr "optional"
 
 msgid "Re-Activate Project/Group"
 msgstr "Projekt/Gruppe reaktivieren"
@@ -1660,18 +1652,11 @@ msgstr "Allgemein"
 msgid "Facebook-Integration"
 msgstr "Facebook-Integration"
 
-msgid "Description and Infos"
-msgstr "Beschreibung und Infos"
+msgid "Group name"
+msgstr "Gruppenname"
 
-#, fuzzy
-#| msgid "Enter a name for the group."
-msgid "Enter a descriptive name for your group."
-msgstr "Gib einen Namen für die Gruppe ein"
-
-#, fuzzy
-#| msgid "Enter a name for the project."
-msgid "Enter a descriptive name for your project."
-msgstr "Gib einen Namen für das Projekt ein"
+msgid "Project name"
+msgstr "Projektname"
 
 msgid "Enter a name for the group."
 msgstr "Gib einen Namen für die Gruppe ein"
@@ -1679,13 +1664,14 @@ msgstr "Gib einen Namen für die Gruppe ein"
 msgid "Enter a name for the project."
 msgstr "Gib einen Namen für das Projekt ein"
 
+msgid "Short description"
+msgstr "Kurze Beschreibung"
+
 msgid "Describe the group in a few sentences."
 msgstr "Beschreibe die Gruppe in ein paar Sätzen."
 
-#, fuzzy
-#| msgid "This project will be set to be publicly visible!"
 msgid "This description will be publicly visible."
-msgstr "Dieses Projekt wird auf öffentlich sichtbar eingestellt!"
+msgstr "Diese Beschreibung wird öffentlich sichtbar sein."
 
 msgid "Describe the project in a few sentences."
 msgstr "Beschreibe das Projekt in ein paar Sätzen."
@@ -1699,13 +1685,8 @@ msgstr "Dateigröße"
 msgid "max. 10 MB"
 msgstr "max. 10 MB"
 
-#, fuzzy
-#| msgid "Personal Message (optional)"
-msgid "Website (optional)"
-msgstr "Persönliche Nachricht (optional)"
-
 msgid "Example: http://mywebsite.com"
-msgstr ""
+msgstr "Beispiel: http://mywebsite.com"
 
 msgid "Where are you active?"
 msgstr "Wo bist du aktiv?"
@@ -1728,8 +1709,11 @@ msgstr "Gibt es verwandte Projekte/Gruppen?"
 msgid "Select related Projects/Groups"
 msgstr "Verwandte Projekte/Gruppen auswählen"
 
-msgid "Visibility"
-msgstr "Sichtbarkeit"
+msgid "Privacy settings"
+msgstr "Sichtbarkeits-Einstellungen"
+
+msgid "This will be the default setting for all content created by members."
+msgstr "Dies wird die Standardeinstellungen für alle Inhalte sein, die von Mitgliedern erstellt werden."
 
 msgid "This group will be set to be publicly visible!"
 msgstr "Diese Gruppe wird auf öffentlich sichtbar eingestellt!"
@@ -1761,11 +1745,17 @@ msgstr "Lade ein Bild hoch."
 msgid "Reset"
 msgstr "Zurücksetzen"
 
+msgid "Description and Infos"
+msgstr "Beschreibung und Infos"
+
 msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgstr "Dies ist eine öffentliche Beschreibung die auf der Microseite angezeigt wird und von jedem im Internet gesehen werden kann."
 
-msgid "Contact info. How you can be reached, addresses, social media, etc..."
-msgstr "Kontaktinfos. Wie man euch erreichen kann - Adressen, Social Media Links, etc..."
+msgid "Contact info"
+msgstr "Kontaktinfos"
+
+msgid "How you can be reached, addresses, social media, etc..."
+msgstr "Wie man euch erreichen kann - Adressen, Social Media Links, etc..."
 
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "Aus welchen Anwendungen sollen öffentliche Inhalte auf der Microsite angezeigt werden?"
@@ -1777,7 +1767,7 @@ msgid "Youtube or Vimeo URL"
 msgstr "Youtube oder Vimeo URL"
 
 msgid "https://www.youtube.com/watch?v=example-video"
-msgstr ""
+msgstr "https://www.youtube.com/watch?v=example-video"
 
 msgid "Twitter: Embedded User Timeline"
 msgstr "Twitter: Eingebetteter Benutzer-Feed"
@@ -1811,6 +1801,9 @@ msgstr "Galleriebild hinzufügen"
 
 msgid "Show Microsite Call to Action Box"
 msgstr "Aufruf zum Handeln - Microsite-Box anzeigen"
+
+msgid "A box shown on the microsite that contains buttons to your external campaigns or websites"
+msgstr "Ein Kasten auf der Microsite mit Buttons, die auf deine externen Kampagnen oder Webseiten verlinken"
 
 msgid "Show Call to Action Box"
 msgstr "Zeige die Microsite-Box an"
@@ -1846,7 +1839,7 @@ msgid "Overview"
 msgstr "Übersicht"
 
 msgid "To the Forum"
-msgstr ""
+msgstr "Zum Forum"
 
 msgctxt "Group"
 msgid "Public"
@@ -2489,11 +2482,11 @@ msgstr ""
 "\n"
 "%(domain_url)s"
 
-msgid "Additional settings"
-msgstr ""
+msgid "Additional options"
+msgstr "Zusätzliche Optionen"
 
 msgid "Attach files, add a location, mark topics and adjust visibility settings"
-msgstr ""
+msgstr "Dateien anhängen, einen Ort markieren, Themen auswählen und Sichtbarkeits-Einstellungen ändern"
 
 msgid "Tag persons"
 msgstr "Personen markieren"
@@ -2505,10 +2498,13 @@ msgid "Place or adress"
 msgstr "Ort oder Adresse"
 
 msgid "Upload a file or image or attach an existing one"
-msgstr ""
+msgstr "Lade eine Datei hoch oder wähle eine Vorhandene zum anhängen aus"
 
 msgid "Select topic"
 msgstr "Thema markieren"
+
+msgid "Visibility"
+msgstr "Sichtbarkeit"
 
 msgid "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
 msgstr "Dieser Inhalt wird als öffentlich sichtbar erstellt! Das bedeutet, dass jeder im Internet darauf Zugriff hat und ihn lesen kann, und er möglicherweise in Suchmaschinenergebnissen erscheint."
@@ -2516,10 +2512,8 @@ msgstr "Dieser Inhalt wird als öffentlich sichtbar erstellt! Das bedeutet, dass
 msgid "If you do not wish this, you can change this item's visibility setting below."
 msgstr "Wenn du das nicht möchtest, kannst du unten die Sichtbarkeitseinstellung anpassen."
 
-#, fuzzy
-#| msgid "Show more Projects"
-msgid "Show more settings..."
-msgstr "Weitere Projekte anzeigen"
+msgid "Show more options..."
+msgstr "Zusätzliche Optionen anzeigen..."
 
 msgid "Which topics are you involved with?"
 msgstr "Um welche Themen geht es?"
@@ -2543,7 +2537,7 @@ msgid "Where do you live?"
 msgstr "Wo lebst du?"
 
 msgid "Enter a place or address and then choose a point on the map."
-msgstr ""
+msgstr "Gib einen Ort oder Adresse ein und wähle dann einen Punkt auf der Karte aus."
 
 msgid "Which topics are you interested in?"
 msgstr "An welchen Themen bist du interessiert?"
@@ -2554,18 +2548,14 @@ msgstr "Was möchtest du lernen?"
 msgid "Who is allowed to see you on the platform?"
 msgstr "Wer darf dich auf der Plattform sehen?"
 
-#, fuzzy
-#| msgid "This project will be set to be publicly visible!"
 msgid "Your profile will be set to be publicly visible!"
-msgstr "Dieses Projekt wird auf öffentlich sichtbar eingestellt!"
+msgstr "Dein Profil wird auf öffentlich sichtbar eingestellt!"
 
-#, fuzzy
-#| msgid "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
 msgid "This means that your name, avatar and user profile can be seen by ANYONE on the internet and may potentially be included in search engine results!"
-msgstr "Dieser Inhalt wird als öffentlich sichtbar erstellt! Das bedeutet, dass jeder im Internet darauf Zugriff hat und ihn lesen kann, und er möglicherweise in Suchmaschinenergebnissen erscheint."
+msgstr "Das bedeutet, dass jeder im Internet darauf Zugriff hat und es lesen kann, und es möglicherweise in Suchmaschinenergebnissen erscheint!"
 
 msgid "Please note that changes in this setting will not have an immediate effect on search engine results! Depending on the search provider, it might take days or weeks until this setting is reflected in their results."
-msgstr ""
+msgstr "Bitte beachte, dass Änderungen dieser Einstellungen keinen sofortigen Einfluss auf Suchmaschinenresultate haben! Je nach Suchanbieter kann es mehrere Tage oder Wochen dauern, bis die Resultate aktualisiert wurden."
 
 msgid "Privacy"
 msgstr "Sichtbarkeit"
@@ -2691,7 +2681,7 @@ msgid "Enter old password"
 msgstr "Altes Passwort eingeben"
 
 msgid "We need to make sure it's really you"
-msgstr ""
+msgstr "Wir müssen sicherstellen, dass du es bist"
 
 msgid "Old password"
 msgstr "Altes Passwort"
@@ -2700,10 +2690,10 @@ msgid "New Password"
 msgstr "Neues Passwort"
 
 msgid "Enter a password you don't use anywhere else. The longer the better!"
-msgstr ""
+msgstr "Gib ein Passwort ein, das du nirgendwo anders benutzt. Je länger, desto besser!"
 
 msgid "Repeat your password just to make sure"
-msgstr ""
+msgstr "Gib dein Passwort zur Sicherheit nochmal an"
 
 msgid "Repeat new Password"
 msgstr "Neues Passwort wiederholen"
@@ -2764,10 +2754,10 @@ msgid "Forgotten your password? Enter your email address below, and we'll email 
 msgstr "Passwort vergessen? Wenn sie unten ihre E-Mail-Addresse eintragen, schicken wir ihnen Anweisungen wie sie ein neues Passwort vergeben können. "
 
 msgid "The email you used to register your account. This is the one you receive email notifications on"
-msgstr ""
+msgstr "Die Email-Adresse, mit der du dein Benutzerkonto registriert hast. Das ist auch die Adresse, auf der Email-Benachrichtigungen bei dir ankommen"
 
 msgid "Example: mymail@example.com"
-msgstr ""
+msgstr "Beispiel: meinemail@beispiel.de"
 
 msgid "Sign up"
 msgstr "Registrieren"
@@ -2780,30 +2770,31 @@ msgid "Email address"
 msgstr "E-mail Adresse"
 
 msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
-msgstr ""
+msgstr "Diese Adresse wird zum Einloggen benutzt. An diese Adresse werden auch Benachrichtigungs-Emails geschickt (wenn du das möchtest)"
 
-#, fuzzy
-#| msgid "Vorname"
+msgid "Repeat Password"
+msgstr "Passwort wiederholen"
+
 msgid "Your name"
-msgstr "Vorname"
+msgstr "Dein Name"
 
 msgid "This name will be displayed to other users on the site"
-msgstr ""
+msgstr "Dieser Name wird anderen Benutzern auf der Plattform angezeit"
 
 msgid "First name"
 msgstr "Vorname"
 
-msgid "You can supply your last name to be displayed as well"
-msgstr ""
-
 msgid "Last name"
 msgstr "Nachname"
 
+msgid "You can supply your last name to be displayed as well"
+msgstr "Wenn du möchtest kannst du auch deinen Nachnamen anzeigen lassen"
+
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 msgid "We need to make sure you are a real person (sorry!)"
-msgstr ""
+msgstr "Wir müssen sicherstellen dass du eine echte Person bist (tut uns leid!)"
 
 msgctxt "read and accept the [Terms of Services]"
 msgid "I have read and accept the"
@@ -2927,9 +2918,6 @@ msgstr "Benutzer_innen-Konto löschen"
 msgid "User profile: %(username)s"
 msgstr "Benutzer_innen-Profil: %(username)s"
 
-msgid "This message will never reappear when you remove it."
-msgstr ""
-
 msgid "My Website"
 msgstr "Meine Webseite"
 
@@ -2944,9 +2932,6 @@ msgstr "E-Mail"
 
 msgid "Profile avatar"
 msgstr "Avatar"
-
-msgid "About yourself"
-msgstr "Über dich"
 
 msgid "Who are you and what motivates you?"
 msgstr "Wer bist du und was motiviert dich?"
@@ -3554,6 +3539,24 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
+#, fuzzy
+#~| msgid "Enter a name for the group."
+#~ msgid "Enter a descriptive name for your group."
+#~ msgstr "Gib einen Namen für die Gruppe ein"
+
+#, fuzzy
+#~| msgid "Enter a name for the project."
+#~ msgid "Enter a descriptive name for your project."
+#~ msgstr "Gib einen Namen für das Projekt ein"
+
+#, fuzzy
+#~| msgid "Personal Message (optional)"
+#~ msgid "Website (optional)"
+#~ msgstr "Persönliche Nachricht (optional)"
+
+#~ msgid "About yourself"
+#~ msgstr "Über dich"
+
 #~ msgid "Describe your activities and goals"
 #~ msgstr "Beschreibe die Aktivitäten und Ziele"
 
@@ -3669,9 +3672,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "No Location set"
 #~ msgstr "Kein Ort angegeben."
-
-#~ msgid "No Contact info set"
-#~ msgstr "Keine Kontaktinfos eingetragen."
 
 #~ msgid "You are a member. View Project!"
 #~ msgstr "Du bist Mitglied. Projekt ansehen!"

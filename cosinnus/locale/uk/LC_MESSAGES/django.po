@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-09 18:32+0100\n"
+"POT-Creation-Date: 2018-01-10 17:40+0100\n"
 "PO-Revision-Date: 2017-12-07 16:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1403,9 +1403,11 @@ msgstr "Закрити"
 msgid "Avatar will be deleted once you save."
 msgstr "При збереженні зображення буде видалено."
 
+#, fuzzy
+#| msgid "Proportions"
 msgctxt "written next to optional form fields"
-msgid "(optional)"
-msgstr ""
+msgid "optional"
+msgstr "Пропорції"
 
 msgid "Call to Action Button"
 msgstr "Кнопка Заклик до Дії"
@@ -1421,6 +1423,10 @@ msgstr "Уведіть місце або адресу."
 
 msgid "Choose and upload a gallery image"
 msgstr "Обрати та завантажити зображення галереї"
+
+msgctxt "written next to optional form fields"
+msgid "(optional)"
+msgstr ""
 
 msgid "Re-Activate Project/Group"
 msgstr "Повторно активувати проект/спільноту"
@@ -1625,24 +1631,26 @@ msgstr "Загальна інформація"
 msgid "Facebook-Integration"
 msgstr "Інтеграція з Facebook"
 
-msgid "Description and Infos"
-msgstr "Опис та інформація"
+#, fuzzy
+#| msgid "Group Image"
+msgid "Group name"
+msgstr "Зображення спільноти"
 
 #, fuzzy
-#| msgid "Enter a name for the group."
-msgid "Enter a descriptive name for your group."
-msgstr "Уведіть назву для спільноти."
-
-#, fuzzy
-#| msgid "Enter a name for the project."
-msgid "Enter a descriptive name for your project."
-msgstr "Уведіть назву для проекту."
+#| msgid "Project Type"
+msgid "Project name"
+msgstr "Тип спільноти"
 
 msgid "Enter a name for the group."
 msgstr "Уведіть назву для спільноти."
 
 msgid "Enter a name for the project."
 msgstr "Уведіть назву для проекту."
+
+#, fuzzy
+#| msgid "Short Description"
+msgid "Short description"
+msgstr "Короткий опис"
 
 msgid "Describe the group in a few sentences."
 msgstr "Опишіть спільноту кількома реченнями."
@@ -1663,11 +1671,6 @@ msgstr "Розмір Файлу"
 
 msgid "max. 10 MB"
 msgstr "max. 10 MB"
-
-#, fuzzy
-#| msgid "Personal Message (optional)"
-msgid "Website (optional)"
-msgstr "Приватне повідомлення (опціонально)"
 
 msgid "Example: http://mywebsite.com"
 msgstr ""
@@ -1693,8 +1696,13 @@ msgstr "Існують пов'язані проекти/групи?"
 msgid "Select related Projects/Groups"
 msgstr "Обрати пов'язані проекти/спільноти"
 
-msgid "Visibility"
-msgstr "Видимість для інших"
+#, fuzzy
+#| msgid "Additional Header content"
+msgid "Privacy settings"
+msgstr "Додатковий зміст верхнього колонтитула"
+
+msgid "This will be the default setting for all content created by members."
+msgstr ""
 
 msgid "This group will be set to be publicly visible!"
 msgstr "Ця спільнота має бути налаштована як публічно видима!"
@@ -1726,10 +1734,20 @@ msgstr "Завантажити зображення."
 msgid "Reset"
 msgstr "Скинути"
 
+msgid "Description and Infos"
+msgstr "Опис та інформація"
+
 msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgstr "Це публічний опис, який буде знаходитися на мікросайті, та який кожен зможе побачити."
 
-msgid "Contact info. How you can be reached, addresses, social media, etc..."
+#, fuzzy
+#| msgid "No Contact info set"
+msgid "Contact info"
+msgstr "Контактна інформація відсутня"
+
+#, fuzzy
+#| msgid "Contact info. How you can be reached, addresses, social media, etc..."
+msgid "How you can be reached, addresses, social media, etc..."
 msgstr "Як можна з вами зв'язатися: адреси, соціальні медіа і т. п."
 
 msgid "From which apps should public items be shown on the microsite?"
@@ -1776,6 +1794,9 @@ msgstr "Додати зображення галереї"
 
 msgid "Show Microsite Call to Action Box"
 msgstr "Показати Заклик до Дії на мікросайті"
+
+msgid "A box shown on the microsite that contains buttons to your external campaigns or websites"
+msgstr ""
 
 msgid "Show Call to Action Box"
 msgstr "Показати вікно Заклик до Дії"
@@ -2483,7 +2504,7 @@ msgstr ""
 
 #, fuzzy
 #| msgid "Additional Header content"
-msgid "Additional settings"
+msgid "Additional options"
 msgstr "Додатковий зміст верхнього колонтитула"
 
 msgid "Attach files, add a location, mark topics and adjust visibility settings"
@@ -2504,6 +2525,9 @@ msgstr ""
 msgid "Select topic"
 msgstr "Вказати тему"
 
+msgid "Visibility"
+msgstr "Видимість для інших"
+
 msgid "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
 msgstr "Цей елемент буде опубліковано як публічно видимий! Це означає, що будь-хто в Інтернеті може отримати до нього доступ і він потенційно може бути включений в результати пошукових машин."
 
@@ -2512,7 +2536,7 @@ msgstr "Якщо Ви цього не хочете, Ви можете зміни
 
 #, fuzzy
 #| msgid "Show more Projects"
-msgid "Show more settings..."
+msgid "Show more options..."
 msgstr "Показати більше проектів"
 
 msgid "Which topics are you involved with?"
@@ -2776,6 +2800,11 @@ msgid "This will be used as your login. Notification emails will be sent to this
 msgstr ""
 
 #, fuzzy
+#| msgid "Repeat new Password"
+msgid "Repeat Password"
+msgstr "Повторіть новий пароль"
+
+#, fuzzy
 #| msgid "Folder name"
 msgid "Your name"
 msgstr "Ім'я папки"
@@ -2786,11 +2815,11 @@ msgstr ""
 msgid "First name"
 msgstr "Ім'я"
 
-msgid "You can supply your last name to be displayed as well"
-msgstr ""
-
 msgid "Last name"
 msgstr "Прізвище"
+
+msgid "You can supply your last name to be displayed as well"
+msgstr ""
 
 msgid "Captcha"
 msgstr ""
@@ -2918,9 +2947,6 @@ msgstr "Видалити обліковий запис"
 msgid "User profile: %(username)s"
 msgstr "Профіль користувача/-ки: %(username)s"
 
-msgid "This message will never reappear when you remove it."
-msgstr "Це повідомлення не буде знову з'являтися, якщо ви його видалите."
-
 msgid "My Website"
 msgstr "Мій веб-сайт"
 
@@ -2935,9 +2961,6 @@ msgstr "Адреса електронної скриньки"
 
 msgid "Profile avatar"
 msgstr "Основне фото"
-
-msgid "About yourself"
-msgstr "Про вас"
 
 msgid "Who are you and what motivates you?"
 msgstr "Хто ви і що вас мотивує?"
@@ -3545,6 +3568,27 @@ msgstr "Ви, на разі, не є членом %s! Якщо ви бажаєт
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
 
+#~ msgid "This message will never reappear when you remove it."
+#~ msgstr "Це повідомлення не буде знову з'являтися, якщо ви його видалите."
+
+#, fuzzy
+#~| msgid "Enter a name for the group."
+#~ msgid "Enter a descriptive name for your group."
+#~ msgstr "Уведіть назву для спільноти."
+
+#, fuzzy
+#~| msgid "Enter a name for the project."
+#~ msgid "Enter a descriptive name for your project."
+#~ msgstr "Уведіть назву для проекту."
+
+#, fuzzy
+#~| msgid "Personal Message (optional)"
+#~ msgid "Website (optional)"
+#~ msgstr "Приватне повідомлення (опціонально)"
+
+#~ msgid "About yourself"
+#~ msgstr "Про вас"
+
 #~ msgid "Describe your activities and goals"
 #~ msgstr "Опишіть вашу діяльність та цілі"
 
@@ -3656,9 +3700,6 @@ msgstr "Ваші зміни були збережені."
 #, fuzzy
 #~ msgid "No Location set"
 #~ msgstr "Опис відсутній"
-
-#~ msgid "No Contact info set"
-#~ msgstr "Контактна інформація відсутня"
 
 #~ msgid "You are a member. View Project!"
 #~ msgstr "Ви член. Переглянути проект!"

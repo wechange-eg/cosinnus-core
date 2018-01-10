@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-09 18:32+0100\n"
+"POT-Creation-Date: 2018-01-10 17:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1397,7 +1397,7 @@ msgid "Avatar will be deleted once you save."
 msgstr ""
 
 msgctxt "written next to optional form fields"
-msgid "(optional)"
+msgid "optional"
 msgstr ""
 
 msgid "Call to Action Button"
@@ -1413,6 +1413,10 @@ msgid "Enter a place or address."
 msgstr ""
 
 msgid "Choose and upload a gallery image"
+msgstr ""
+
+msgctxt "written next to optional form fields"
+msgid "(optional)"
 msgstr ""
 
 msgid "Re-Activate Project/Group"
@@ -1616,19 +1620,19 @@ msgstr ""
 msgid "Facebook-Integration"
 msgstr ""
 
-msgid "Description and Infos"
+msgid "Group name"
 msgstr ""
 
-msgid "Enter a descriptive name for your group."
-msgstr ""
-
-msgid "Enter a descriptive name for your project."
+msgid "Project name"
 msgstr ""
 
 msgid "Enter a name for the group."
 msgstr ""
 
 msgid "Enter a name for the project."
+msgstr ""
+
+msgid "Short description"
 msgstr ""
 
 msgid "Describe the group in a few sentences."
@@ -1647,9 +1651,6 @@ msgid "File Size"
 msgstr ""
 
 msgid "max. 10 MB"
-msgstr ""
-
-msgid "Website (optional)"
 msgstr ""
 
 msgid "Example: http://mywebsite.com"
@@ -1676,7 +1677,10 @@ msgstr ""
 msgid "Select related Projects/Groups"
 msgstr ""
 
-msgid "Visibility"
+msgid "Privacy settings"
+msgstr ""
+
+msgid "This will be the default setting for all content created by members."
 msgstr ""
 
 msgid "This group will be set to be publicly visible!"
@@ -1709,10 +1713,16 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
+msgid "Description and Infos"
+msgstr ""
+
 msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgstr ""
 
-msgid "Contact info. How you can be reached, addresses, social media, etc..."
+msgid "Contact info"
+msgstr ""
+
+msgid "How you can be reached, addresses, social media, etc..."
 msgstr ""
 
 msgid "From which apps should public items be shown on the microsite?"
@@ -1758,6 +1768,9 @@ msgid "Add gallery image"
 msgstr ""
 
 msgid "Show Microsite Call to Action Box"
+msgstr ""
+
+msgid "A box shown on the microsite that contains buttons to your external campaigns or websites"
 msgstr ""
 
 msgid "Show Call to Action Box"
@@ -2306,7 +2319,7 @@ msgid ""
 "%(domain_url)s"
 msgstr ""
 
-msgid "Additional settings"
+msgid "Additional options"
 msgstr ""
 
 msgid "Attach files, add a location, mark topics and adjust visibility settings"
@@ -2327,13 +2340,16 @@ msgstr ""
 msgid "Select topic"
 msgstr ""
 
+msgid "Visibility"
+msgstr ""
+
 msgid "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
 msgstr ""
 
 msgid "If you do not wish this, you can change this item's visibility setting below."
 msgstr ""
 
-msgid "Show more settings..."
+msgid "Show more options..."
 msgstr ""
 
 msgid "Which topics are you involved with?"
@@ -2592,6 +2608,9 @@ msgstr ""
 msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
 msgstr ""
 
+msgid "Repeat Password"
+msgstr ""
+
 msgid "Your name"
 msgstr ""
 
@@ -2601,10 +2620,10 @@ msgstr ""
 msgid "First name"
 msgstr ""
 
-msgid "You can supply your last name to be displayed as well"
+msgid "Last name"
 msgstr ""
 
-msgid "Last name"
+msgid "You can supply your last name to be displayed as well"
 msgstr ""
 
 msgid "Captcha"
@@ -2733,9 +2752,6 @@ msgstr ""
 msgid "User profile: %(username)s"
 msgstr ""
 
-msgid "This message will never reappear when you remove it."
-msgstr ""
-
 msgid "My Website"
 msgstr ""
 
@@ -2749,9 +2765,6 @@ msgid "E-Mail"
 msgstr ""
 
 msgid "Profile avatar"
-msgstr ""
-
-msgid "About yourself"
 msgstr ""
 
 msgid "Who are you and what motivates you?"
