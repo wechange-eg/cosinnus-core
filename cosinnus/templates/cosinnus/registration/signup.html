@@ -3,6 +3,10 @@
 
 {% block page_title %}{% trans "Sign up" %}{% endblock %}
 
+{% block jshead %}
+        <!-- A message from your friendly developer: this page deals with sensitive authentication data and does not import any third-party scripts -->
+{% endblock jshead %}
+
 {% block breadcrumb %}
 	<li><a href="#">{% trans "Login" %}</a></li>
 	<li class="active">{% trans "Create account" %}</li>
@@ -14,7 +18,7 @@
 
 {% block content %}
 
-<form action="" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+<form action="" method="post" enctype="multipart/form-data" class="cosinnus-form form-horizontal" role="form">
     {% csrf_token %}
     <input type="hidden" name="next" value="/">
     
@@ -23,39 +27,40 @@
         {{ form.non_field_errors }}
         
         {# Regular Field #}
-		{% trans "Email address" as email_legend %}
-		{% trans "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)." as email_label %}
+		{% trans "Email address" as email_label %}
+		{% trans "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)." as email_legend %}
 		{% trans "Example: mymail@example.com" as email_placeholder %}
 		{% include 'cosinnus/fields/default_field.html' with field=form.email legend=email_legend label=email_label placeholder=email_placeholder first=True %}
 		        
         
         {# Regular Field #}
-        {% trans "Password" as pass1_legend %}
-        {% trans "Enter a password you don't use anywhere else. The longer the better!" as pass1_label %}
+        {% trans "Password" as pass1_label %}
+        {% trans "Enter a password you don't use anywhere else. The longer the better!" as pass1_legend %}
         {% trans "Password" as pass1_placeholder %}
         {% include 'cosinnus/fields/default_field.html' with field=form.password1 legend=pass1_legend label=pass1_label placeholder=pass1_placeholder %}
         
         {# Regular Field #}
         {% trans "Repeat your password just to make sure" as pass2_label %}
-        {% trans "Password" as pass2_placeholder %}
-        {% include 'cosinnus/fields/default_field.html' with field=form.password2 label=pass2_label placeholder=pass2_placeholder %}
+        {% trans "Repeat Password" as pass2_placeholder %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.password2 label=pass2_label placeholder=pass2_placeholder first=True %}
 
         
         {# Regular Field #}
-        {% trans "Your name" as firstname_legend %}
-        {% trans "This name will be displayed to other users on the site" as firstname_label %}
+        {% trans "Your name" as firstname_label %}
+        {% trans "This name will be displayed to other users on the site" as firstname_legend %}
         {% trans "First name" as firstname_placeholder %}
         {% include 'cosinnus/fields/default_field.html' with field=form.first_name legend=firstname_legend label=firstname_label placeholder=firstname_placeholder %}
                 
         {# Regular Field #}
-        {% trans "You can supply your last name to be displayed as well" as lastname_label %}
+        {% trans "Last name" as lastname_label %}
+        {% trans "You can supply your last name to be displayed as well" as lastname_legend %}
         {% trans "Last name" as lastname_placeholder %}
-        {% include 'cosinnus/fields/default_field.html' with field=form.last_name label=lastname_label placeholder=lastname_placeholder %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.last_name label=lastname_label legend=lastname_legend placeholder=lastname_placeholder %}
                 
         
         {# Regular Field #}
-        {% trans "Captcha" as captcha_legend %}
-        {% trans "We need to make sure you are a real person (sorry!)" as captcha_label %}
+        {% trans "Captcha" as captcha_label %}
+        {% trans "We need to make sure you are a real person (sorry!)" as captcha_legend %}
         {% include 'cosinnus/fields/default_field.html' with field=form.captcha legend=captcha_legend label=captcha_label %}
                 
         <br>

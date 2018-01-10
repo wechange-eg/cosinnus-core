@@ -2,6 +2,15 @@
     Styles for all the form fields used throughout cosinnus.
 */
 
+.cosinnus-form {
+    
+    h2 {
+        margin-top: 4px;
+        margin-bottom: 18px;
+    }
+    
+}
+
 .cosinnus-field {
     margin-bottom: 7px;
     
@@ -9,15 +18,23 @@
         margin-bottom: 0;
     }
     
-    legend {
-        margin-top: 20px;
+    label {
+        margin-top: 14px;
+        margin-bottom: 6px;
+        font-size: 16px;
     }
-    legend, label {
-        color: @app-neutral-color-dark;
-    }
-    .first {
+    label.first {
         margin-top: 0;
     }
+    label {
+        color: @app-neutral-color-dark;
+    }
+    .field-description {
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: @app-neutral-color;
+    }
+    
     
     .cosinnus-field-input {
         background-color: @app-neutral-color-white;
@@ -27,6 +44,10 @@
         
         a {
             color: @app-neutral-color-dark;
+        }
+        
+        label {
+            margin-top: inherit;
         }
         
         input, textarea, select {

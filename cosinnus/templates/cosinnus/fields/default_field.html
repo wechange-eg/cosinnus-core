@@ -1,4 +1,4 @@
-{% load i18n widget_tweaks %}
+{% load i18n widget_tweaks cosinnus_tags %}
 
 {% comment %}  
     Cosinnus Field Framework Template
@@ -9,8 +9,8 @@
         - field: supply the formfield you want to render
         - *or* field_html: supply some html to be displayed inside the field. ``field`` can additionally be passed, but will only be used
                 for error and optional status display
-        - legend: the <legend> header content
-        - label: the <label> explanatory content
+        - label: the <label> for the field
+        - legend: a descriptive text, shown as an explanation for the field
         - placeholder: the field placeholder content
         
     Extra Options:
@@ -22,18 +22,22 @@
 
 {% endcomment %}
 
-<div class="cosinnus-field {% if legend or label and not field and not field_html %}header-only{% endif %}">
-	{% if legend %}
-	    <legend {% if first %}class="first"{% endif %}>{{ legend }}</legend>
-	{% endif %}
+{% if field or field_id %}{% captureas for_id %}{% if field %}{{ field.id_for_label }}{% else %}{{ field_id }}{% endif %}{% endcaptureas %}{% endif %}
+{% if field and legend %}{% captureas described_id %}{{ field.id_for_label }}-description{% endcaptureas %}{% endif %}
+
+<div class="cosinnus-field {% if label and not field and not field_html %}header-only{% endif %}">
 	
 	{% if label %}
-		<label>
+		<label {% if for_id %}for="{{ for_id }}"{% endif %} {% if first %}class="first"{% endif %}>
 		    {{ label }}
 		    {% if field and not field.field.required %}
                 {% trans "(optional)" context "written next to optional form fields" %}
             {% endif %}
 		</label>
+	{% endif %}
+	
+	{% if legend %}
+	    <div class="field-description no-select" {% if described_id %}id="{{ described_id }}"{% endif %}>{{ legend }}</div>
 	{% endif %}
 	
 	{% if field and field.errors %}
@@ -44,8 +48,8 @@
 		<div class="{% if not unstyled %}cosinnus-field-input{% endif %} {% if not large_field %}regular-field{% endif %} {% if field_classes %}{{ field_classes }}{% endif %}">
 	        {% if field_html %}
 	            {{ field_html|safe }}
-	        {% elif field %}	    
-	            {% render_field field placeholder=placeholder %}
+	        {% elif field %}
+	            {% render_field field placeholder=placeholder aria-describedby=described_id %}
 	        {% endif %}
 	    </div>
     {% endif %}

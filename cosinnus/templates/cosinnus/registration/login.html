@@ -3,6 +3,10 @@
 
 {% block page_title %}{% trans "Login" %}{% endblock %}
 
+{% block jshead %}
+        <!-- A message from your friendly developer: this page deals with sensitive authentication data and does not import any third-party scripts -->
+{% endblock jshead %}
+
 {% block override_breadcrumb %}
 {% endblock override_breadcrumb %}
 
@@ -16,19 +20,19 @@
 
 {% if not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
 
-<form action="" method="post" class="form-horizontal" role="form">
+<form action="" method="post" class="cosinnus-form form-horizontal" role="form">
     {% csrf_token %}
     <input type="hidden" name="next" value="{% if request.GET.next %}{{ request.GET.next }}{% else %}{% url 'cosinnus:user-dashboard' %}{% endif %}">
     {{ form.non_field_errors }}
     
     <!-- a box with semi transparent background -->
     <div class="content-box">
+        <h2>{% trans "Log in" %}</h2>
     
         {# Regular Field #}
-        {% trans "Log in" as login_legend %}
 		{% trans "Email" as login_label %}
 		{% trans "Email" as login_placeholder %}
-		{% include 'cosinnus/fields/default_field.html' with field=form.username legend=login_legend label=login_label placeholder=login_placeholder first=True %}
+		{% include 'cosinnus/fields/default_field.html' with field=form.username label=login_label placeholder=login_placeholder first=True %}
 	        
 	    {# Regular Field #}
 		{% trans "Password" as password_label %}
@@ -40,9 +44,9 @@
     <button type="submit" class="btn btn-emphasized">
         <ul class="media-list">
             <li class="media">
-                <a class="pull-left" href="#" tabindex="-1">
+                <span class="pull-left" href="#" tabindex="-1">
                     <i class="fa fa-hand-o-right"></i>
-                </a>
+                </span>
                 <div class="media-body">
                     {% trans "Login" %}
                 </div>

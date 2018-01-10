@@ -32,8 +32,9 @@
 		    {{ form.forms.user.non_field_errors }}
             {{ form.forms.media_tag.non_field_errors }}
 		    
-                <legend>{% trans "Basic data" %}</legend>
-
+                {% trans "Basic data" as basic_label %}
+                {% include 'cosinnus/fields/default_field.html' with label=basic_label first=True %}
+                
                 {% block user_info %}
                     <div class="row">
                         <div class="col-sm-6 regular-space">
@@ -60,8 +61,8 @@
 				                
 
                 {# Avatar Field #}
-				{% trans "Profile avatar" as avatar_legend %}
-				{% captureas avatar_label %}{% trans "A picture for better recognition." %} {% trans "File Size" %}: {% trans "max. 10 MB" %}{% endcaptureas %}
+				{% trans "Profile avatar" as avatar_label %}
+				{% captureas avatar_legend %}{% trans "A picture for better recognition." %} {% trans "File Size" %}: {% trans "max. 10 MB" %}{% endcaptureas %}
 				{% captureas preview_html %}
 				    {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.width}}px;height:{{SETTINGS.AWESOME_AVATAR.height}}px{% endcaptureas %}
                     <div id="id_avatar-preview" class="awesome-avatar-preview" style="{{ preview_style }}">
@@ -70,8 +71,6 @@
 				{% endcaptureas %}
 				{% include 'cosinnus/fields/avatar_field.html' with avatar_field=form.forms.obj.avatar label=avatar_label legend=avatar_legend preview_html=preview_html %}
 
-
-        <legend>{% trans "About yourself" %}</legend>
 
                 {% block userprofile_about_fields %}
                     

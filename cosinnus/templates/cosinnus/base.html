@@ -27,56 +27,60 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'images/apple-touch-icon-114x114-precomposed.png' %}" />
         
         {% block csshead %}
-        {% comment %} Statics for Select2, always loaded, but only once {% endcomment %}
-        {% import_django_select2_css %}
-        
-        <link href="{% static 'css/bootstrap3-cosinnus.css' %}" rel="stylesheet">
-        <link href="{% static 'css/vendor/font-awesome.min.css' %}" rel="stylesheet">
-        <link href="{% static 'css/vendor/select2.css' %}" rel="stylesheet">
-        <link href="{% static 'css/vendor/fullcalendar.css' %}" rel="stylesheet">
-        <link href="{% static 'css/vendor/lightbox.css' %}" rel="stylesheet">
-        {% if SETTINGS.DEBUG %}
-		<link rel="stylesheet/less" href="{% static "less/cosinnus.less" %}">
-		<script src="{% static "js/vendor/less.min.js" %}"></script>
-		{% else %}
-	    <link href="{% static 'css/cosinnus.css' %}?v=0.38" rel="stylesheet">
-		{% endif %}
-        <link href="{% static 'css/cosinnus_portal_style.css' %}?v=0.4" rel="stylesheet">
-        <link href="{% static COSINNUS_CURRENT_PORTAL.custom_stylesheet_url %}?v=0.1" rel="stylesheet">
-        
+	        {% comment %} Statics for Select2, always loaded, but only once {% endcomment %}
+	        {% import_django_select2_css %}
+	        
+	        <link href="{% static 'css/bootstrap3-cosinnus.css' %}" rel="stylesheet">
+	        <link href="{% static 'css/vendor/font-awesome.min.css' %}" rel="stylesheet">
+	        <link href="{% static 'css/vendor/select2.css' %}" rel="stylesheet">
+	        <link href="{% static 'css/vendor/fullcalendar.css' %}" rel="stylesheet">
+	        <link href="{% static 'css/vendor/lightbox.css' %}" rel="stylesheet">
+	        {% if SETTINGS.DEBUG %}
+			<link rel="stylesheet/less" href="{% static "less/cosinnus.less" %}">
+			<script src="{% static "js/vendor/less.min.js" %}"></script>
+			{% else %}
+		    <link href="{% static 'css/cosinnus.css' %}?v=0.38" rel="stylesheet">
+			{% endif %}
+	        <link href="{% static 'css/cosinnus_portal_style.css' %}?v=0.4" rel="stylesheet">
+	        <link href="{% static COSINNUS_CURRENT_PORTAL.custom_stylesheet_url %}?v=0.1" rel="stylesheet">
         {% endblock csshead %}
         
-        <script type="text/javascript">
-            var cosinnus_base_url = "{{ COSINNUS_BASE_URL|default:'/' }}";
-            var cosinnus_active_group = {% if group %}"{{ group.slug }}"{% else %}false{% endif %};
-            var cosinnus_active_user = JSON.parse("{{ COSINNUS_USER|escapejs }}");
-            var cosinnus_date_format = "{{ COSINNUS_DATE_FORMAT }}";
-            var cosinnus_datetime_format = "{{ COSINNUS_DATETIME_FORMAT }}";
-            var cosinnus_time_format = "{{ COSINNUS_TIME_FORMAT }}";
-            var cosinnus_group_url_path = "{% cosinnus_group_url_path %}";
-            var cosinnus_current_language = "{{ COSINNUS_CURRENT_LANGUAGE }}";
-            var cosinnus_report_object_url = "{% url 'cosinnus:report-object' %}";
-        </script>
+        {% block jshead %}        
+	        <script src="{% static 'js/vendor/jquery-2.1.0.min.js' %}"></script>
+	        <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+	        <script src="{% static 'js/vendor/select2.min.js' %}"></script>
+	        <script src="{% static 'js/vendor/fullcalendar.min.js' %}"></script>
+	        <script src="{% static 'js/vendor/jquery.sortElements.js' %}"></script>
+	        <script src="{% static 'js/vendor/moment-with-langs.min.js' %}"></script>
+	        <script src="{% static 'js/vendor/jquery.autogrow-textarea.js' %}"></script>
+	        <script src="{% static 'js/vendor/jquery.ui.widget.js' %}"></script>
+	        <script src="{% static 'js/vendor/jquery.fileupload.js' %}"></script>
+	        {% comment %}  Load this for sortable dashboard widgets {% endcomment %}
+	        {% if SETTINGS.COSINNUS_ALLOW_DASHBOARD_WIDGET_REARRANGE %}
+	        <script src="{% static 'js/vendor/html.sortable.min.js' %}"></script>
+	        {% endif %}
+	        <script src="{% static 'js/lightbox.js' %}"></script>
+	        {% comment %} Statics for Select2, always loaded, but only once {% endcomment %}
+	        {% import_django_select2_js %}
+        {% endblock jshead %}
         
-        <script src="{% static 'js/vendor/jquery-2.1.0.min.js' %}"></script>
-        <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
-        <script src="{% static 'js/vendor/select2.min.js' %}"></script>
-        <script src="{% static 'js/vendor/fullcalendar.min.js' %}"></script>
-        <script src="{% static 'js/vendor/jquery.sortElements.js' %}"></script>
-        <script src="{% static 'js/vendor/moment-with-langs.min.js' %}"></script>
-        <script src="{% static 'js/vendor/jquery.autogrow-textarea.js' %}"></script>
-        <script src="{% static 'js/vendor/jquery.ui.widget.js' %}"></script>
-        <script src="{% static 'js/vendor/jquery.fileupload.js' %}"></script>
-        {% comment %}  Load this for sortable dashboard widgets {% endcomment %}
-        {% if SETTINGS.COSINNUS_ALLOW_DASHBOARD_WIDGET_REARRANGE %}
-        <script src="{% static 'js/vendor/html.sortable.min.js' %}"></script>
-        {% endif %}
-        <script src="{% static 'js/lightbox.js' %}"></script>
-        {% comment %} Statics for Select2, always loaded, but only once {% endcomment %}
-        {% import_django_select2_js %}
-        <script src="{% static 'js/cosinnus.js' %}?v=0.32"></script>
-        <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
-        <script src="{% static 'js/cosinnus.feedback.js' %}"></script>
+        {% block cosinnus_jshead %}
+            <script type="text/javascript">
+                var cosinnus_base_url = "{{ COSINNUS_BASE_URL|default:'/' }}";
+                var cosinnus_active_group = {% if group %}"{{ group.slug }}"{% else %}false{% endif %};
+                var cosinnus_active_user = JSON.parse("{{ COSINNUS_USER|escapejs }}");
+                var cosinnus_date_format = "{{ COSINNUS_DATE_FORMAT }}";
+                var cosinnus_datetime_format = "{{ COSINNUS_DATETIME_FORMAT }}";
+                var cosinnus_time_format = "{{ COSINNUS_TIME_FORMAT }}";
+                var cosinnus_group_url_path = "{% cosinnus_group_url_path %}";
+                var cosinnus_current_language = "{{ COSINNUS_CURRENT_LANGUAGE }}";
+                var cosinnus_report_object_url = "{% url 'cosinnus:report-object' %}";
+            </script>
+	        <script src="{% static 'js/cosinnus.js' %}?v=0.32"></script>
+	        <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
+	        <script src="{% static 'js/cosinnus.feedback.js' %}"></script>
+        {% endblock cosinnus_jshead %}
+        
         
         {% captureas cosinnus_css_class %}{% if COSINNUS_CURRENT_APP == 'todo' %}app-todos{% elif COSINNUS_CURRENT_APP == 'note' %}app-main{% elif COSINNUS_CURRENT_APP == 'file' %}app-files{% elif COSINNUS_CURRENT_APP == 'event' %}app-calendar{% elif COSINNUS_CURRENT_APP %}app-{{ COSINNUS_CURRENT_APP }}{% else %}app-main{% endif %} {% if request.path == '/' %}landing{% endif %}{% endcaptureas %}
         
