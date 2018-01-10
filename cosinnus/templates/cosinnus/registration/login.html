@@ -4,7 +4,7 @@
 {% block page_title %}{% trans "Login" %}{% endblock %}
 
 {% block jshead %}
-        <!-- A message from your friendly developer: this page deals with sensitive authentication data and does not import any third-party scripts -->
+    {% comment %} This page deals with authentication data and loads only the most necessary vendor scripts! {% endcomment %}
 {% endblock jshead %}
 
 {% block override_breadcrumb %}
@@ -56,7 +56,6 @@
 
 
 </form>
-  
 {% else %}
     
     

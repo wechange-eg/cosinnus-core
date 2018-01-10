@@ -39,15 +39,19 @@
 			<link rel="stylesheet/less" href="{% static "less/cosinnus.less" %}">
 			<script src="{% static "js/vendor/less.min.js" %}"></script>
 			{% else %}
-		    <link href="{% static 'css/cosinnus.css' %}?v=0.38" rel="stylesheet">
+		    <link href="{% static 'css/cosinnus.css' %}?v=0.39" rel="stylesheet">
 			{% endif %}
 	        <link href="{% static 'css/cosinnus_portal_style.css' %}?v=0.4" rel="stylesheet">
 	        <link href="{% static COSINNUS_CURRENT_PORTAL.custom_stylesheet_url %}?v=0.1" rel="stylesheet">
         {% endblock csshead %}
         
-        {% block jshead %}        
+        {% block base_jshead %}
+            {% comment %} Bare JS required for the site. Only this is loaded on auth pages {% endcomment %}
 	        <script src="{% static 'js/vendor/jquery-2.1.0.min.js' %}"></script>
 	        <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+        {% endblock base_jshead %}
+        
+        {% block jshead %}        
 	        <script src="{% static 'js/vendor/select2.min.js' %}"></script>
 	        <script src="{% static 'js/vendor/fullcalendar.min.js' %}"></script>
 	        <script src="{% static 'js/vendor/jquery.sortElements.js' %}"></script>
@@ -76,9 +80,9 @@
                 var cosinnus_current_language = "{{ COSINNUS_CURRENT_LANGUAGE }}";
                 var cosinnus_report_object_url = "{% url 'cosinnus:report-object' %}";
             </script>
-	        <script src="{% static 'js/cosinnus.js' %}?v=0.32"></script>
-	        <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
-	        <script src="{% static 'js/cosinnus.feedback.js' %}"></script>
+            <script src="{% static 'js/cosinnus.js' %}?v=0.32"></script>
+            <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
+            <script src="{% static 'js/cosinnus.feedback.js' %}"></script>
         {% endblock cosinnus_jshead %}
         
         

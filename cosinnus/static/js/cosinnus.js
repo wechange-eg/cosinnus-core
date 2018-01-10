@@ -248,24 +248,25 @@
                 }, $.cosinnus.fullcalendar_format));
             }
             
-            $('.small-calendar').empty();
-            $('.small-calendar').fullCalendar($.extend({
-                header: {
-                    left: 'prev',
-                    center: 'title',
-                    right: 'next'
-                },
-                events: (typeof cosinnus_calendarWidgetEvents !== "undefined" ? cosinnus_calendarWidgetEvents : []),
-                dayClick: function(date, allDay, jsEvent, view) {
-                    $(this).trigger('fullCalendarDayClick',[date,jsEvent]);
-                },
-                viewRender: function(date, cell) {
-                    // A day has to be rendered because of redraw or something
-                    $(cell).closest('.small-calendar').trigger('fullCalendarViewRender',[cell]);
-                }
-
-            }, $.cosinnus.fullcalendar_format));
-
+            if ($('.small-calendar').length) {
+                $('.small-calendar').empty();
+                $('.small-calendar').fullCalendar($.extend({
+                    header: {
+                        left: 'prev',
+                        center: 'title',
+                        right: 'next'
+                    },
+                    events: (typeof cosinnus_calendarWidgetEvents !== "undefined" ? cosinnus_calendarWidgetEvents : []),
+                    dayClick: function(date, allDay, jsEvent, view) {
+                        $(this).trigger('fullCalendarDayClick',[date,jsEvent]);
+                    },
+                    viewRender: function(date, cell) {
+                        // A day has to be rendered because of redraw or something
+                        $(cell).closest('.small-calendar').trigger('fullCalendarViewRender',[cell]);
+                    }
+    
+                }, $.cosinnus.fullcalendar_format));
+            }
         },
 
 
@@ -330,6 +331,9 @@
         },
 
         calendarCreateDoodle : function() {
+            if (!$('#calendar-doodle-days-selector-list').length) {
+                return;
+            }
             var CREATE_MULTIPLE_DOODLE_DAYS = true;
             
             function selectDays() {
@@ -728,12 +732,13 @@
 
 
         renderMomentDataDate : function() {
-            // set current language for moment formatting
-            var moment_lang = typeof cosinnus_current_language === "undefined" ? "" : cosinnus_current_language; 
-            moment.lang(moment_lang || "en");
             
             // when .moment-data-date elements have a data-date attribute, render date.
             $('.moment-data-date').on("renderMomentDataDate", function() {
+                // set current language for moment formatting
+                var moment_lang = typeof cosinnus_current_language === "undefined" ? "" : cosinnus_current_language; 
+                moment.lang(moment_lang || "en");
+                
                 if (!$(this).attr('data-date')) return;
                 // Format: 2014-05-05
                 // Format: 2013-02-08 09:30:26
@@ -1031,6 +1036,9 @@
         
 
         initFileUpload: function() {
+            if (!$('#fileupload').length) {
+                return;
+            }
 
             $('#fileupload').fileupload({
                 dataType: 'json',
@@ -1562,12 +1570,16 @@
 
 // Set global language here
 $.cosinnus.lang = cosinnus_current_language;
-moment.lang($.cosinnus.lang);
+if (typeof moment !== "undefined") {
+    moment.lang($.cosinnus.lang);
+}
 
-// select2 localizations
-$.fn.select2.defaults=$.extend($.fn.select2.defaults, { 
-    formatNoMatches: function () { return $.cosinnus.no_matches_found; }, 
-}); 
+if (typeof $.fn.select2 !== "undefined") {
+    // select2 localizations
+    $.fn.select2.defaults=$.extend($.fn.select2.defaults, { 
+        formatNoMatches: function () { return $.cosinnus.no_matches_found; }, 
+    }); 
+}
 
 /* string sprintf format for JS
  * from http://stackoverflow.com/a/4673436
