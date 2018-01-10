@@ -24,6 +24,8 @@
         {% captureas current_page %}{% if group_model == "CosinnusSociety" %}addsociety{% else %}addgroup{% endif %}{% endcaptureas %}
         {% include "cosinnus/group/leftnav_all_groups.html"  with current_page=current_page %}
     {% endif %}
+    
+    {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_1_group" outer_form=True %}
 {% endblock leftnav %}
 
 
@@ -39,8 +41,6 @@
 
 {% block content %}
 
-    {% include 'cosinnus/common/help_button_for_popup.html' with help_text_id="helptext_1_group" outer_form=True %}
-    
     <form action="" method="post" enctype="multipart/form-data" class="cosinnus-form form-horizontal" role="form">
     {% csrf_token %}
     {{ form.forms.obj.media }}
