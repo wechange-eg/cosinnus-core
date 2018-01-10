@@ -12,7 +12,7 @@
         <div class="alert alert-info alert-dismissable">
             <i class="fa fa-info-circle fa-3x"></i>
             <button id="close_button" type="button" class="close" data-dismiss="alert" aria-hidden="true" {% djajax_connect user.cosinnus_profile.settings trigger_on="click" fixed_value="test_msg:true" %}>&#215;</button>
-            <p>{% trans "This message will never reappear when you remove it." %}</p>
+            <p>This message will never reappear when you remove it.</p>
         </div>
     {% endif %}
 
