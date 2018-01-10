@@ -28,10 +28,10 @@
 			
 		{% endif %}
 	</label>
-	<label class="file-upload-overlay pull-right" title="{% trans "Click to upload a new file/image. You can also drag & drop a file from your computer." %}">
-		<i class="fa fa-upload"></i>
-		<a>{% trans "Browse..." %}</a>
-		<input id="fileupload" type="file" name="file" {% if form_data %}data-form-data='{{ form_data }}'{% endif %} data-cosinnus-upload-select2-target-field="{{ form.attached_objects.id_for_label }}" data-url="{% group_url 'cosinnus:file:upload-inline' group=group.slug %}" multiple>
+	<label class="file-upload-overlay pull-right cursor-pointer-input" for="fileupload" title="{% trans "Click to upload a new file/image. You can also drag & drop a file from your computer." %}">
+		<i class="fa fa-upload  cursor-pointer-input"></i>
+		<span class=" cursor-pointer-input">{% trans "Browse..." %}</span>
+		<input id="fileupload" type="file" style="width: 200px;" name="file" {% if form_data %}data-form-data='{{ form_data }}'{% endif %} data-cosinnus-upload-select2-target-field="{{ form.attached_objects.id_for_label }}" data-url="{% group_url 'cosinnus:file:upload-inline' group=group.slug %}" multiple>
 	</label>
 </div> 
 

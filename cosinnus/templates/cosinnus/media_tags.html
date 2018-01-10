@@ -15,8 +15,8 @@
     }
 </script>
 
-{% if not media_tags_legend %}{% trans "Additional settings" as media_tags_legend %}{% endif %}
-{% if not media_tags_label %}{% trans "Attach files, add a location, mark topics and adjust visibility settings" as media_tags_label %}{% endif %}
+{% if not media_tags_label %}{% trans "Additional options" as media_tags_label %}{% endif %}
+{% if not media_tags_legend %}{% trans "Attach files, add a location, mark topics and adjust visibility settings" as media_tags_legend %}{% endif %}
 <div {% if not show_all %}class="media_tag_initial_hidden" style="display: none;"{% endif %}>
     {% include 'cosinnus/fields/default_field.html' with legend=media_tags_legend label=media_tags_label %}
 </div>
@@ -51,7 +51,7 @@
 
     <div class="media_tag_initial_hidden" {% if not show_location == True and not show_all == True %}style="display: none;"{% endif %}>
         {% if not loc_label %}{% trans "Location" as loc_label %}{% endif %}
-        {% include 'cosinnus/fields/media_tag_field.html' with field_html=loc_html label=loc_label icon="fa-map-marker" %}
+        {% include 'cosinnus/fields/media_tag_field.html' with field_html=loc_html label=loc_label legend=loc_legend icon="fa-map-marker" %}
     </div>
 {% endif %}
 
@@ -62,7 +62,7 @@
         {% captureas files_html %}
             {% include 'cosinnus/attached/attached_objects_widget.html' with form=form.forms.obj %}
         {% endcaptureas %}
-        {% include 'cosinnus/fields/media_tag_field.html' with field_html=files_html label=files_label icon="fa-paperclip" %}
+        {% include 'cosinnus/fields/media_tag_field.html' with field_html=files_html label=files_label legend=files_legend icon="fa-paperclip" %}
     </div>
 {% endif %}
 

@@ -23,7 +23,6 @@
 {% endcomment %}
 
 {% if field or field_id %}{% captureas for_id %}{% if field %}{{ field.id_for_label }}{% else %}{{ field_id }}{% endif %}{% endcaptureas %}{% endif %}
-{% if field and legend %}{% captureas described_id %}{{ field.id_for_label }}-description{% endcaptureas %}{% endif %}
 
 <div class="cosinnus-field {% if label and not field and not field_html %}header-only{% endif %}">
 	
@@ -37,7 +36,7 @@
 	{% endif %}
 	
 	{% if legend %}
-	    <div class="field-description no-select" {% if described_id %}id="{{ described_id }}"{% endif %}>{{ legend }}</div>
+	    <div class="field-description no-select">{{ legend }}</div>
 	{% endif %}
 	
 	{% if field and field.errors %}
@@ -49,7 +48,7 @@
 	        {% if field_html %}
 	            {{ field_html|safe }}
 	        {% elif field %}
-	            {% render_field field placeholder=placeholder aria-describedby=described_id %}
+	            {% render_field field placeholder=placeholder %}
 	        {% endif %}
 	    </div>
     {% endif %}

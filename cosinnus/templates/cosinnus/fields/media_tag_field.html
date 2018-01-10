@@ -1,10 +1,19 @@
-{% load i18n widget_tweaks %}
+{% load i18n widget_tweaks cosinnus_tags %}
+
+{% if field or field_id %}{% captureas for_id %}{% if field %}{{ field.id_for_label }}{% else %}{{ field_id }}{% endif %}{% endcaptureas %}{% endif %}
 
 <div class="cosinnus-media-field">
-	{% if label %}
-		<label>
-		    {{ label }}
-		</label>
+    {% if label %}
+        <label {% if for_id %}for="{{ for_id }}"{% endif %} {% if first %}class="first"{% endif %}>
+            {{ label }}
+            {% if field and not field.field.required %}
+                {% trans "(optional)" context "written next to optional form fields" %}
+            {% endif %}
+        </label>
+    {% endif %}
+    
+    {% if legend %}
+	   <div class="field-description no-select">{{ legend }}</div>
 	{% endif %}
 	
 	{% if field or field_html %}
