@@ -25,7 +25,16 @@
         {% include "cosinnus/group/leftnav_all_groups.html"  with current_page=current_page %}
     {% endif %}
     
-    {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_1_group" outer_form=True %}
+    {% if group_model == "CosinnusSociety" %}
+        {% trans "Help about groups" as help_label %}
+        {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_1_group" label=help_label %}
+    {% else %}
+        {% trans "Help about projects" as help_label %}
+        {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_2_project" label=help_label %}
+    {% endif %}
+    
+    {% trans "Help about the microsite" as help_label %}
+    {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_6_microsite" label=help_label no_space=True %}
 {% endblock leftnav %}
 
 

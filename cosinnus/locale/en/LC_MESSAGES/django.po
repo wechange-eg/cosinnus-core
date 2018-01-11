@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-10 17:40+0100\n"
+"POT-Creation-Date: 2018-01-11 14:16+0100\n"
 "PO-Revision-Date: 2016-10-26 16:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1174,6 +1174,41 @@ msgstr ""
 msgid "Help and Assistance for this page"
 msgstr ""
 
+msgid "Help for this page"
+msgstr ""
+
+msgid "We're sorry. The Map is not supported in Internet Explorer."
+msgstr ""
+
+msgid "Consider using an alternate browser!"
+msgstr ""
+
+msgid "Expand"
+msgstr ""
+
+msgid "Shrink"
+msgstr ""
+
+msgid "Check the projects/groups where you wish to show this event in. The event will be shown in the calendars and all lists, but will still remain in this group."
+msgstr ""
+
+msgid "Events from the Forum can be shown in any of your projects/groups."
+msgstr ""
+
+msgid "Events from this group can be shown in any of the group's subprojects."
+msgstr ""
+
+#, fuzzy
+#| msgid "Convert selected Projects to Groups"
+msgid "Show in other projects/groups"
+msgstr "Convert selected Projects to Groups"
+
+msgid "Apply"
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_1_group"
 msgstr ""
@@ -1218,36 +1253,12 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_11_document"
 msgstr ""
 
-msgid "We're sorry. The Map is not supported in Internet Explorer."
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_12_projectadministration"
 msgstr ""
 
-msgid "Consider using an alternate browser!"
-msgstr ""
-
-msgid "Expand"
-msgstr ""
-
-msgid "Shrink"
-msgstr ""
-
-msgid "Check the projects/groups where you wish to show this event in. The event will be shown in the calendars and all lists, but will still remain in this group."
-msgstr ""
-
-msgid "Events from the Forum can be shown in any of your projects/groups."
-msgstr ""
-
-msgid "Events from this group can be shown in any of the group's subprojects."
-msgstr ""
-
-#, fuzzy
-#| msgid "Convert selected Projects to Groups"
-msgid "Show in other projects/groups"
-msgstr "Convert selected Projects to Groups"
-
-msgid "Apply"
-msgstr ""
-
-msgid "Help"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_13_groupadministration"
 msgstr ""
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
@@ -1627,6 +1638,17 @@ msgstr "Create Group"
 
 msgid "Create Project"
 msgstr "Create Project"
+
+msgid "Help about groups"
+msgstr ""
+
+#, fuzzy
+#| msgid "All projects"
+msgid "Help about projects"
+msgstr "All projects"
+
+msgid "Help about the microsite"
+msgstr ""
 
 msgid "Edit Group"
 msgstr "Edit Project"

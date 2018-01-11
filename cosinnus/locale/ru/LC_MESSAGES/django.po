@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-10 17:40+0100\n"
+"POT-Creation-Date: 2018-01-11 14:16+0100\n"
 "PO-Revision-Date: 2017-12-07 16:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1166,6 +1166,41 @@ msgstr "Ошибка встраивания видео"
 msgid "Help and Assistance for this page"
 msgstr ""
 
+#, fuzzy
+#| msgid "select this page"
+msgid "Help for this page"
+msgstr "выбрать эту страницу"
+
+msgid "We're sorry. The Map is not supported in Internet Explorer."
+msgstr "Мы сожалеем. Карта не поддерживается в браузере Internet Explorer."
+
+msgid "Consider using an alternate browser!"
+msgstr "Попробуйте использовать альтернативный браузер!"
+
+msgid "Expand"
+msgstr "Расширить"
+
+msgid "Shrink"
+msgstr "Уменьшить"
+
+msgid "Check the projects/groups where you wish to show this event in. The event will be shown in the calendars and all lists, but will still remain in this group."
+msgstr "Проверьте проекты/группы, где Вы зотите продемонстрировать это событие. Событие будет указано в календарях и во всех списках, но все еще останется в этой группе."
+
+msgid "Events from the Forum can be shown in any of your projects/groups."
+msgstr "События Форума могут быть показаны в любых Ваших проектах/группах."
+
+msgid "Events from this group can be shown in any of the group's subprojects."
+msgstr "События этой группы могут быть показаны в любом из подпроектов группы."
+
+msgid "Show in other projects/groups"
+msgstr "Показать в других проектах/группах"
+
+msgid "Apply"
+msgstr "Подать заявку"
+
+msgid "Help"
+msgstr ""
+
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_1_group"
 msgstr ""
@@ -1216,35 +1251,17 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_11_document"
 msgstr ""
 
-msgid "We're sorry. The Map is not supported in Internet Explorer."
-msgstr "Мы сожалеем. Карта не поддерживается в браузере Internet Explorer."
+#, fuzzy
+#| msgid "Project Administrator"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_12_projectadministration"
+msgstr "Администратор проекта"
 
-msgid "Consider using an alternate browser!"
-msgstr "Попробуйте использовать альтернативный браузер!"
-
-msgid "Expand"
-msgstr "Расширить"
-
-msgid "Shrink"
-msgstr "Уменьшить"
-
-msgid "Check the projects/groups where you wish to show this event in. The event will be shown in the calendars and all lists, but will still remain in this group."
-msgstr "Проверьте проекты/группы, где Вы зотите продемонстрировать это событие. Событие будет указано в календарях и во всех списках, но все еще останется в этой группе."
-
-msgid "Events from the Forum can be shown in any of your projects/groups."
-msgstr "События Форума могут быть показаны в любых Ваших проектах/группах."
-
-msgid "Events from this group can be shown in any of the group's subprojects."
-msgstr "События этой группы могут быть показаны в любом из подпроектов группы."
-
-msgid "Show in other projects/groups"
-msgstr "Показать в других проектах/группах"
-
-msgid "Apply"
-msgstr "Подать заявку"
-
-msgid "Help"
-msgstr ""
+#, fuzzy
+#| msgid "Group Administrator"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_13_groupadministration"
+msgstr "Администратор группы"
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr "Введите электронные адреса людей, которых вы хотите пригласить присоединиться к платформе."
@@ -1621,6 +1638,17 @@ msgstr "Создать группу"
 
 msgid "Create Project"
 msgstr "Создать проект"
+
+msgid "Help about groups"
+msgstr ""
+
+#, fuzzy
+#| msgid "All projects"
+msgid "Help about projects"
+msgstr "Все проекты"
+
+msgid "Help about the microsite"
+msgstr ""
 
 msgid "Edit Group"
 msgstr "Редактировать группу"

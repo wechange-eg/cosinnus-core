@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-10 17:40+0100\n"
-"PO-Revision-Date: 2018-01-10 17:42+0100\n"
+"POT-Creation-Date: 2018-01-11 14:16+0100\n"
+"PO-Revision-Date: 2018-01-11 14:30+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -1161,77 +1161,8 @@ msgstr "Fehler beim Einbetten eines Videos"
 msgid "Help and Assistance for this page"
 msgstr "Hilfe und Erklärungen zu dieser Seite"
 
-msgctxt "Look up this ID in the help text register for the translation text!"
-msgid "helptext_1_group"
-msgstr ""
-"Auf diesem Portal gibt es Gruppen und Projekte. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen.\n"
-"Wenn Du eine Gruppe erstellen möchtest, sende bitte eine Nachricht mit der Bitte um Gruppengründung an die Portaladministratoren. Diese regeln alle Details."
-
-#, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_1_group"
-msgctxt "Look up this ID in the help text register for the translation text!"
-msgid "helptext_2_project"
-msgstr "Auf diesem Portal gibt es *Gruppen und Projekte*. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen. Wenn Du eine Gruppe erstellen möchtest, sende bitte eine Nachricht mit der Bitte um Gruppengründung an die Portaladministratoren. Diese regeln alle Details."
-
-#, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_1_group"
-msgctxt "Look up this ID in the help text register for the translation text!"
-msgid "helptext_3_marketplace"
-msgstr "Auf diesem Portal gibt es *Gruppen und Projekte*. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen. Wenn Du eine Gruppe erstellen möchtest, sende bitte eine Nachricht mit der Bitte um Gruppengründung an die Portaladministratoren. Diese regeln alle Details."
-
-#, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_1_group"
-msgctxt "Look up this ID in the help text register for the translation text!"
-msgid "helptext_4_profile"
-msgstr "Auf diesem Portal gibt es *Gruppen und Projekte*. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen. Wenn Du eine Gruppe erstellen möchtest, sende bitte eine Nachricht mit der Bitte um Gruppengründung an die Portaladministratoren. Diese regeln alle Details."
-
-#, fuzzy
-#| msgid "Reset password"
-msgctxt "Look up this ID in the help text register for the translation text!"
-msgid "helptext_5_password"
-msgstr "Passwort zurücksetzen"
-
-#, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_1_group"
-msgctxt "Look up this ID in the help text register for the translation text!"
-msgid "helptext_6_microsite"
-msgstr "Auf diesem Portal gibt es *Gruppen und Projekte*. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen. Wenn Du eine Gruppe erstellen möchtest, sende bitte eine Nachricht mit der Bitte um Gruppengründung an die Portaladministratoren. Diese regeln alle Details."
-
-#, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_1_group"
-msgctxt "Look up this ID in the help text register for the translation text!"
-msgid "helptext_7_notes"
-msgstr "Auf diesem Portal gibt es *Gruppen und Projekte*. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen. Wenn Du eine Gruppe erstellen möchtest, sende bitte eine Nachricht mit der Bitte um Gruppengründung an die Portaladministratoren. Diese regeln alle Details."
-
-#, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_1_group"
-msgctxt "Look up this ID in the help text register for the translation text!"
-msgid "helptext_8_poll"
-msgstr "Auf diesem Portal gibt es *Gruppen und Projekte*. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen. Wenn Du eine Gruppe erstellen möchtest, sende bitte eine Nachricht mit der Bitte um Gruppengründung an die Portaladministratoren. Diese regeln alle Details."
-
-#, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_1_group"
-msgctxt "Look up this ID in the help text register for the translation text!"
-msgid "helptext_9_todo"
-msgstr "Auf diesem Portal gibt es *Gruppen und Projekte*. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen. Wenn Du eine Gruppe erstellen möchtest, sende bitte eine Nachricht mit der Bitte um Gruppengründung an die Portaladministratoren. Diese regeln alle Details."
-
-msgctxt "Look up this ID in the help text register for the translation text!"
-msgid "helptext_10_documentsetting"
-msgstr "Hier kannst Du zu dem bereits gewählten Titel Deines Dokumentes noch einige Dinge hinzufügen. Z.B. kannst Du Deinem Dokument ein Thema, einen Ort oder eine Datei zuweisen. "
-
-#, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_1_group"
-msgctxt "Look up this ID in the help text register for the translation text!"
-msgid "helptext_11_document"
-msgstr "Auf diesem Portal gibt es *Gruppen und Projekte*. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen. Wenn Du eine Gruppe erstellen möchtest, sende bitte eine Nachricht mit der Bitte um Gruppengründung an die Portaladministratoren. Diese regeln alle Details."
+msgid "Help for this page"
+msgstr "Hilfe zu dieser Seite"
 
 msgid "We're sorry. The Map is not supported in Internet Explorer."
 msgstr "Tut uns leid, die Karte wird in Internet Explorer nicht unterstützt."
@@ -1261,7 +1192,61 @@ msgid "Apply"
 msgstr "Übernehmen"
 
 msgid "Help"
-msgstr "Help"
+msgstr "Hilfe"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_1_group"
+msgstr ""
+"Auf diesem Portal gibt es Gruppen und Projekte. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen.\n"
+"Wenn Du eine Gruppe erstellen möchtest, sende bitte eine Nachricht mit der Bitte um Gruppengründung an die Portaladministratoren. Diese regeln alle Details."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_2_project"
+msgstr "Auf diesem Portal gibt es Gruppen und Projekte. \"Projekte\" bilden eine bestimmte Anzahl von Personen ab, die sich gemeinsam innerhalb dieses \"Projektes\" koordinieren können. Wenn sich mehrere Projekte unter einem Dach zusammenschließen möchten, um beispielsweise Themen für alle Einzelprojekte zu besprechen, können sie gemeinsam eine Gruppe gründen. Innerhalb eines Projektes kannst Du gemeinsam mit den Projektmitgliedern To-Do-Listen erstellen, Dokumente ablegen, Etherpads erstellen und vieles mehr."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_3_marketplace"
+msgstr "Wenn Du ein Inserat auf Wechange erstellen möchtest kannst Du dies hier unten tun. Wähle zunächst einen Titel, eine Beschreibung, eine Kategorie und ein Foto (o.ä.) für das Inserat aus. Durch Klicken auf den \"Erstellen\"-Button wird das Inserat für vier Wochen freigeschaltet. "
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_4_profile"
+msgstr "Hier kannst Du Dein Profil bearbeiten. Lade etwa einen Avatar hoch, gib Deine Adresse oder ein Thema an, an dem Du interessiert bist und bestätige anschließend unten rechts mit \"sichern\". "
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_5_password"
+msgstr "In den untenstehenden Feldern kannst Du Dein Passwort ändern. Dabei ist es besonders wichtig, dass Du versuchst Dein Passwort möglichst lang zu gestalten (mind. 10 Zeichen). Je länger es ist, desto besser. Darüberhinaus ist ein Sonderzeichen, ein Groß- und ein Kleinbuchstabe empfehlenswert."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_6_microsite"
+msgstr "Um Dein Projekt nach außen hin sichtbar zu machen, kannst Du eine Microsite errichten. Auf dieser Microsite gibt es die Möglichkeit Bilder hochzuladen, Social-Media-Accounts zu verlinken, Kontaktinfos zu hinterlegen und Fotos hochzuladen. Da ein Ausschnitt der Kurzbeschreibung des Projektes auch auf der Vernetzungskarte zu sehen ist, solltest Du in den ersten drei Sätzen alle wichtigen Informationen unterbringen."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_7_notes"
+msgstr "In dieser Liste kannst Du eine Neuigkeit erstellen. Diese Neuigkeit wird allen Mitgliedern in deinem Projekt/ deiner Gruppe angezeigt und dient dazu alle auf dem neuesten Stand zu halten. "
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_8_poll"
+msgstr "Hier kannst Du eine Umfrage erstellen. Diese dient der Abstimmung über bestimmte Dinge (beispielsweise Essensvorschläge). Wenn Du in Deinem Projekt mit Deinem Team einen Termin finden möchtest, musst Du auf den Reiter Veranstaltungen und anschließend \"Terminvorschläge\" gehen."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_9_todo"
+msgstr "Hier kannst Du eine Aufgabe erstellen. Oben rechts kannst Du ein Fälligkeitsdatum wählen oder die Aufgabe einer Person aus Deinem Team zuweisen. Unten rechts musst Du mit \"Erstellen\" abschließen und hast dann die Aufgabe erstellen. "
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_10_documentsetting"
+msgstr "Hier kannst Du zu dem bereits gewählten Titel Deines Dokumentes noch einige Dinge hinzufügen. Z.B. kannst Du Deinem Dokument ein Thema, einen Ort oder eine Datei zuweisen. "
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_11_document"
+msgstr "Hier kannst Du Dein Dokument bearbeiten, indem Du Dinge in das Pad einträgst. Mithilfe des Timesliders (Uhrsymbol) kannst Du Dir vergangene Versionen anschauen und mit den Pfeilsymbolen das Pad bequem in ein Pdf umwandeln. Einen Link zum Pad kannst Du freigeben, indem Du </> klickst. "
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_12_projectadministration"
+msgstr "Die Administration von Projekten beginnt mit der Mitgliederverwaltung. Hier kannst Du entscheiden, wer Deinem Projekt beitreten darf und wer Administrator sein soll. Du kannst Mitglieder aus dem Portal einladen oder Menschen über die Eingabe ihrer Emailadressen einladen sich auf dem Portal und in Deinem Projekt zu registrieren. "
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_13_groupadministration"
+msgstr "Die Administration von Gruppen beginnt mit der Mitgliederverwaltung. Hier kannst Du entscheiden, wer Deiner Gruppe beitreten darf und wer Administrator sein soll. Du kannst Mitglieder aus dem Portal einladen oder Menschen über die Eingabe ihrer Emailadressen einladen sich auf dem Portal und in Deiner Gruppe zu registrieren. "
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr "Gib die E-Mail Adressen von den Leuten ein, die du einladen möchtest der Platform beizutreten."
@@ -1636,6 +1621,15 @@ msgstr "Gruppe erstellen"
 #
 msgid "Create Project"
 msgstr "Projekt erstellen"
+
+msgid "Help about groups"
+msgstr "Hilfe zu Gruppen"
+
+msgid "Help about projects"
+msgstr "Hilfe zu Projekten"
+
+msgid "Help about the microsite"
+msgstr "Hilfe zur Microsite"
 
 msgid "Edit Group"
 msgstr "Gruppe bearbeiten"

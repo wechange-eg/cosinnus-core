@@ -16,6 +16,12 @@
 
 {% block leftnav %}
     {% include "cosinnus/group/leftnav_group.html"  with current_page="groupdetails" %}
+    
+    {% if object.type == 0 %}
+        {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_12_projectadministration" %}
+    {% else %}
+        {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_13_groupadministration" %}
+    {% endif %}
 {% endblock leftnav %}
 
 {% block breadcrumb %}
