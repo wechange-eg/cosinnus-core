@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-15 11:54+0100\n"
-"PO-Revision-Date: 2018-01-15 12:06+0100\n"
+"PO-Revision-Date: 2018-01-15 13:04+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -1335,10 +1335,10 @@ msgid "Files"
 msgstr "Dateien"
 
 msgid "Etherpad"
-msgstr "Dokument"
+msgstr "Pad"
 
 msgid "Etherpads"
-msgstr "Dokumente"
+msgstr "Pads"
 
 msgid "Todo"
 msgstr "Aufgabe"
@@ -2901,7 +2901,7 @@ msgid "By clicking the button below, you will irrevocably delete your user accou
 msgstr "Indem du auf den Button unten klickst, werden dein gesamtesBenutzer_innen-Konto, Benutzer_innen-Profil und deine persönlichen Informationen unwiderruflich gelöscht."
 
 msgid "Your created documents, news posts, uploaded files, and other content will be retained on the site. However this content will no longer bear your name or be connected to you."
-msgstr "Deine Dokumente, Neuigkeiten, hochgeladenen Dateien und anderer Inhalt wird weiter auf der Webseite verbleiben. Dein Name wird jedoch nicht mehr als Ersteller_in angezeigt werden und dein Profil wird nicht mehr mit dem Inhalt verknüpft sein."
+msgstr "Deine Pads, Neuigkeiten, hochgeladenen Dateien und anderer Inhalt wird weiter auf der Webseite verbleiben. Dein Name wird jedoch nicht mehr als Ersteller_in angezeigt werden und dein Profil wird nicht mehr mit dem Inhalt verknüpft sein."
 
 msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
 msgstr "Falls du noch Inhalte von dir löschen möchtest, tue dies bitte jetzt indem du die Inhalte auf den entsprechenden Seiten löscht. Sobald du dein Konto löschst wirst du absolut keinen Zugriff mehr auf übrig gebliebene Inhalte von dir auf dieser Seite haben!"

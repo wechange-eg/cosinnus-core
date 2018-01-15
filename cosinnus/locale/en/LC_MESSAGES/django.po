@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-15 11:54+0100\n"
-"PO-Revision-Date: 2018-01-15 12:05+0100\n"
+"PO-Revision-Date: 2018-01-15 13:04+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1348,10 +1348,10 @@ msgid "Files"
 msgstr ""
 
 msgid "Etherpad"
-msgstr "Document"
+msgstr "Pad"
 
 msgid "Etherpads"
-msgstr "Documents"
+msgstr "Pads"
 
 msgid "Todo"
 msgstr ""
@@ -2734,10 +2734,8 @@ msgstr ""
 msgid "Search in Apps"
 msgstr ""
 
-#, fuzzy
-#| msgid "Etherpads"
 msgid "Ethercalcs"
-msgstr "Documents"
+msgstr ""
 
 msgid "Offers"
 msgstr ""
@@ -2836,7 +2834,7 @@ msgid "By clicking the button below, you will irrevocably delete your user accou
 msgstr ""
 
 msgid "Your created documents, news posts, uploaded files, and other content will be retained on the site. However this content will no longer bear your name or be connected to you."
-msgstr ""
+msgstr "Your created pads, news posts, uploaded files, and other content will be retained on the site. However this content will no longer bear your name or be connected to you."
 
 msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
 msgstr ""
