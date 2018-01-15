@@ -21,6 +21,12 @@
 				height: 50px;
 			}
 		}
+		
+		> div:first-child {
+		    position: -webkit-sticky;
+            position: sticky;
+            left: 0;
+		}
 
 		.doodle-vote-cell + .doodle-vote-cell  {
 			margin-left: 8px;
@@ -84,9 +90,10 @@
 	}
 
 	h2 {
-			font-size: 1em;
-			font-weight: bold;
-		}
+		font-size: 1em;
+		font-weight: bold;
+        margin-left: 58px;
+	}
 
 	.doodle-vote-inputarea {
 		a {
