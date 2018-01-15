@@ -155,26 +155,42 @@
 			                        <i class="fa fa-users"></i>
 			                    </a>
 			                    <div class="media-body">
-			                        {% trans "My Projects" %}
+			                        {% trans "My Groups and Projects" %}
 			                    </div>
 			                </li>
 			            </ul>
 			        </div><!-- btn -->
 			        
-			        {% for group in profile.cosinnus_groups %}
-			            <button type="button" class="btn btn-default w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ group.get_absolute_url }}">
-			                <ul class="media-list">
-			                    <li class="media">
-			                        <a class="pull-left">
-			                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
-			                        </a>
-			                        <div class="media-body">
-			                            {{ group.name }}
-			                        </div>
-			                    </li>
-			                </ul>
-			            </button>
-			        {% endfor %}
+			        {% with groups=profile.cosinnus_societies projects=profile.cosinnus_projects %}
+				        {% for group in groups %}
+				            <button type="button" class="btn btn-default w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ group.get_absolute_url }}">
+				                <ul class="media-list">
+				                    <li class="media">
+				                        <a class="pull-left">
+				                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
+				                        </a>
+				                        <div class="media-body">
+				                            {{ group.name }}
+				                        </div>
+				                    </li>
+				                </ul>
+				            </button>
+				        {% endfor %}
+				        {% for group in projects %}
+                            <button type="button" class="btn btn-default w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ group.get_absolute_url }}">
+                                <ul class="media-list">
+                                    <li class="media">
+                                        <a class="pull-left">
+                                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
+                                        </a>
+                                        <div class="media-body">
+                                            {{ group.name }}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </button>
+                        {% endfor %}
+			        {% endwith %}
 			
 			        {% comment %} Mehr button is hidden till we can load more results  
 			        <button type="button" class="btn btn-emphasized large-space">
