@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-11 14:16+0100\n"
+"POT-Creation-Date: 2018-01-15 11:54+0100\n"
 "PO-Revision-Date: 2017-12-07 16:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1160,6 +1160,9 @@ msgstr "У відео знайдена помилка"
 msgid "Help and Assistance for this page"
 msgstr ""
 
+msgid "Help"
+msgstr ""
+
 #, fuzzy
 #| msgid "select this page"
 msgid "Help for this page"
@@ -1191,9 +1194,6 @@ msgstr "Відобразити в інших проектах/спільнота
 
 msgid "Apply"
 msgstr "Подати"
-
-msgid "Help"
-msgstr ""
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_1_group"
@@ -1256,6 +1256,12 @@ msgstr "Адміністратори проекту"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_13_groupadministration"
 msgstr "Адміністратори спільноти"
+
+#, fuzzy
+#| msgid "Delete profile"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_50_profileprivacy"
+msgstr "Видалити профіль"
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr "Введіть електронні адреси людей, яких ви бажаєте запросити до платформи."
@@ -2597,8 +2603,8 @@ msgstr "Яким темами цікавитеся?"
 msgid "What would you like to learn?"
 msgstr "Чого би ви хотіли навчитися?"
 
-msgid "Who is allowed to see you on the platform?"
-msgstr "Хто може бачити вас на платформі?"
+msgid "Who may see your plattform profile?"
+msgstr ""
 
 #, fuzzy
 #| msgid "This project will be set to be publicly visible!"
@@ -3001,6 +3007,9 @@ msgstr "Вітаємо!"
 
 msgid "We give you full control over what people can see of you on the platform and what you hear from us!"
 msgstr "Ми надаємо Вам повний контроль над тим, що з Вашої активності можна побачити на платформі і що ви почуєте від нас!"
+
+msgid "Who is allowed to see you on the platform?"
+msgstr "Хто може бачити вас на платформі?"
 
 msgid "You can change this setting later in your profile settings"
 msgstr "Ви можете пізніше змінити ці налаштування в налаштуваннях профілю"

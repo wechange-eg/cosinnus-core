@@ -28,7 +28,7 @@
 
 
 {# Visibility Field #}
-{% trans "Who is allowed to see you on the platform?" as visibility_label %}
+{% trans "Who may see your plattform profile?" as visibility_label %}
 {% captureas visibility_warning_html %}
     <div class="group-public-warning-area" {% if not object or not object.media_tag.visibility == 2 %}style="display: none;"{% endif %} id="user-visibility-warning">
         <i class="fa fa-fw fa-globe"></i>
@@ -58,4 +58,5 @@
     </select>
 {% endcaptureas %}
 
-{% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html label=visibility_label extra_html=visibility_warning_html %}
+
+{% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html label=visibility_label extra_html=visibility_warning_html help_popup="helptext_50_profileprivacy" %}

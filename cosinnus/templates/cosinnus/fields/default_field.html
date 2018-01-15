@@ -19,6 +19,7 @@
         - unstyled: will apply no styles to field-input, so that custom ``field_html`` is not affected by the default styles
         - field_classes: extra CSS classes to apply to the input area
         - extra_html: extra HTML that will be placed after the field
+        - help_popup: if supplied, add a Help-Button next to the label which will popup a help field using the supplied id string
 
 {% endcomment %}
 
@@ -31,6 +32,9 @@
 		    {{ label }}
 		    {% if field and not field.field.required %}
                 ({% trans "optional" context "written next to optional form fields" %})
+            {% endif %}
+            {% if help_popup %}
+                {% include 'cosinnus/common/help_button_for_popup.html' with help_text_id=help_popup %}
             {% endif %}
 		</label>
 	{% endif %}
