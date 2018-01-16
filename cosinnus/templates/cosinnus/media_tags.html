@@ -15,15 +15,16 @@
     }
 </script>
 
+
 {% if not media_tags_label %}{% trans "Additional options" as media_tags_label %}{% endif %}
 {% if not media_tags_legend %}{% trans "Attach files, add a location, mark topics and adjust visibility settings" as media_tags_legend %}{% endif %}
-<div {% if not show_all %}class="media_tag_initial_hidden" style="display: none;"{% endif %}>
+<div {% if not show_all and not all_errors %}class="media_tag_initial_hidden" style="display: none;"{% endif %}>
     {% include 'cosinnus/fields/default_field.html' with legend=media_tags_legend label=media_tags_label %}
 </div>
 
 
 {% if not disable_persons %}
-	<div class="media_tag_initial_hidden" {% if not show_persons == True and not show_all == True %}style="display: none;"{% endif %}>
+	<div class="media_tag_initial_hidden" {% if not show_persons == True and not show_all == True and not form.forms.media_tag.persons.errors %}style="display: none;"{% endif %}>
 		{% if not persons_label %}{% trans "Tag persons" as persons_label %}{% endif %}
         {% trans "Tag persons" as persons_placeholder %}
 		{% include 'cosinnus/fields/media_tag_field.html' with field=form.forms.media_tag.persons label=persons_label icon="fa-user" placeholder=persons_placeholder %}
@@ -32,7 +33,7 @@
 
 
 {% if not disable_tags %}
-    <div class="media_tag_initial_hidden" {% if not show_tags == True and not show_all == True %}style="display: none;"{% endif %}>
+    <div class="media_tag_initial_hidden" {% if not show_tags == True and not show_all == True and not form.forms.media_tag.tags.errors %}style="display: none;"{% endif %}>
         {% if not tags_label %}{% trans "Select tags" as tags_label %}{% endif %}
         {% trans "Select tags" as tags_placeholder %}
         {% include 'cosinnus/fields/media_tag_field.html' with field=form.forms.media_tag.tags label=tags_label icon="fa-tags" placeholder=tags_placeholder %}
@@ -49,7 +50,7 @@
         <div id="id_media_tag-location-map"></div>
     {% endcaptureas %}
 
-    <div class="media_tag_initial_hidden" {% if not show_location == True and not show_all == True %}style="display: none;"{% endif %}>
+    <div class="media_tag_initial_hidden" {% if not show_location == True and not show_all == True and not form.forms.media_tag.location.errors %}style="display: none;"{% endif %}>
         {% if not loc_label %}{% trans "Location" as loc_label %}{% endif %}
         {% include 'cosinnus/fields/media_tag_field.html' with field_html=loc_html label=loc_label legend=loc_legend icon="fa-map-marker" %}
     </div>
@@ -57,7 +58,7 @@
 
 
 {% if form.forms.obj.attached_objects and not disable_files %}
-    <div class="media_tag_initial_hidden" {% if not show_files == True and not show_all == True %}style="display: none;"{% endif %}>
+    <div class="media_tag_initial_hidden" {% if not show_files == True and not show_all == True and not form.forms.obj.attached_objects.errors %}style="display: none;"{% endif %}>
         {% if not files_label %}{% trans "Upload a file or image or attach an existing one" as files_label %}{% endif %}
         {% captureas files_html %}
             {% include 'cosinnus/attached/attached_objects_widget.html' with form=form.forms.obj %}
@@ -68,7 +69,7 @@
 
 
 {% if not disable_topics %}
-    <div class="media_tag_initial_hidden" {% if not show_topics == True and not show_all == True %}style="display: none;"{% endif %}>
+    <div class="media_tag_initial_hidden" {% if not show_topics == True and not show_all == True and not form.forms.media_tag.topics.errors %}style="display: none;"{% endif %}>
         {% if not topics_label %}{% trans "Select topic" as topics_label %}{% endif %}
         {% trans "Select topic" as topics_placeholder %}
         {% include 'cosinnus/fields/media_tag_field.html' with field=form.forms.media_tag.topics label=topics_label icon="fa-lightbulb-o" placeholder=topics_placeholder %}
@@ -77,7 +78,7 @@
 
 
 {% if not disable_visibility %}
-    <div class="media_tag_initial_hidden" {% if not form.forms.media_tag.initial.visibility == 2 and not show_visibility == True and not show_all == True %}style="display: none;"{% endif %}>
+    <div class="media_tag_initial_hidden" {% if not form.forms.media_tag.initial.visibility == 2 and not show_visibility == True and not show_all == True and not form.forms.media_tag.visibility.errors %}style="display: none;"{% endif %}>
         {% if not visibility_label %}{% trans "Visibility" as visibility_label %}{% endif %}
         {% trans "Visibility" as visibility_placeholder %}
         {% include 'cosinnus/fields/media_tag_field.html' with field=form.forms.media_tag.visibility label=visibility_label icon="fa-globe" placeholder=visibility_placeholder %}

@@ -50,19 +50,13 @@
 
 {% block content %}
 
-    <form action="" method="post" enctype="multipart/form-data" class="cosinnus-form form-horizontal" role="form">
-    {% csrf_token %}
-    {{ form.forms.obj.media }}
-    {{ form.forms.obj.non_field_errors }}
-    {{ form.forms.media_tag.non_field_errors }}
-    
     {% if form.forms.obj.errors or form.forms.media_tag.errors or inlines.0.errors or inlines.1.errors or inlines.2.errors %}
 	    <div class="alert alert-danger alert-dismissable">
             <i class="fa fa-exclamation-triangle fa-3x"></i>
-	        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#215;</button>
 	        <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
 	    </div>
     {% endif %}
+    
     	
         <ul class="nav nav-tabs" role="tablist">
         	{% block group_form_navtabs %}
@@ -91,6 +85,12 @@
 			{% endblock group_form_navtabs %}
 		</ul>
 		
+	<form action="" method="post" enctype="multipart/form-data" class="cosinnus-form form-horizontal" role="form">
+	    {% csrf_token %}
+	    {{ form.forms.obj.media }}
+	    {{ form.forms.obj.non_field_errors }}
+	    {{ form.forms.media_tag.non_field_errors }}
+	    
         <!-- a box with semi transparent background -->
         <div class="content-box">
 			
@@ -105,9 +105,8 @@
                         {# Name Field #}
 						{% block group_form_name_field %}
 	                        {% captureas name_placeholder %}{% if group_model == "CosinnusSociety" %}{% trans "Enter a name for the group." %}{% else %}{% trans "Enter a name for the project." %}{% endif %}{% endcaptureas %}
-                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=name_placeholder %}
 					    {% endblock group_form_name_field %}
-					
 					
 				
                         {# SimpleMDE Description Field (gets initialized in extrahead) #}					                
@@ -208,7 +207,7 @@
                             </select>
 		                {% endcaptureas %}
 		                
-		                {% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html field_id="group-public-field" label=visibility_label legend=visibility_legend extra_html=visibility_warning_html %}
+		                {% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html field=form.forms.media_tag.visibility field_id="group-public-field" label=visibility_label legend=visibility_legend extra_html=visibility_warning_html %}
 		                
 		            
                         {# Apps selector fields #}			                

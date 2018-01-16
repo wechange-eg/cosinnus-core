@@ -7,7 +7,7 @@
         <label {% if for_id %}for="{{ for_id }}"{% endif %} {% if first %}class="first"{% endif %}>
             {{ label }}
             {% if field and not field.field.required %}
-                {% trans "(optional)" context "written next to optional form fields" %}
+                ({% trans "optional" context "written next to optional form fields" %})
             {% endif %}
         </label>
     {% endif %}
@@ -17,26 +17,28 @@
 	{% endif %}
 	
 	{% if field or field_html %}
-	<div type="button" class="btn btn-default w100 regular-space">
-	    <ul class="media-list">
-	        <li class="media">
-	            <a class="pull-left" href="#">
-	                <i class="fa fa-fw {{ icon }}"></i>
-	            </a>
-	            <div class="media-body">
-					{% if field and field.errors %}
-					   {{ field.errors }}
-					{% endif %}
-					
-	                {% if field_html %}
-		                {{ field_html|safe }}
-		            {% elif field %}        
-		                {% render_field field class+=" w100" placeholder=placeholder %}
-		            {% endif %}
-	            </div>
-	            
-	        </li>
-	    </ul>
-	</div>
+	
+		{% if field and field.errors %}
+		   {{ field.errors }}
+		{% endif %}
+		
+		<div type="button" class="btn btn-default w100 regular-space">
+		    <ul class="media-list">
+		        <li class="media">
+		            <a class="pull-left" href="#">
+		                <i class="fa fa-fw {{ icon }}"></i>
+		            </a>
+		            <div class="media-body">
+						
+		                {% if field_html %}
+			                {{ field_html|safe }}
+			            {% elif field %}        
+			                {% render_field field class+=" w100" placeholder=placeholder %}
+			            {% endif %}
+		            </div>
+		            
+		        </li>
+		    </ul>
+		</div>
 	{% endif %}
 </div>
