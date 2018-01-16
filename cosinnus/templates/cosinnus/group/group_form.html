@@ -120,7 +120,7 @@
                         {% include 'cosinnus/fields/default_field.html' with label=desc_label legend=group_legend field_id=form.forms.obj.description.id_for_label %}
                         
 		                {% block group_form_description_field %}
-					        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description large_field=True %}
+					        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description large_field=True placeholder=desc_label %}
                         {% endblock group_form_description_field %}
                         
                         
