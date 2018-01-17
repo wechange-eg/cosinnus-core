@@ -58,7 +58,7 @@
     // Attach event handlers to the new DOM elements. click click click
     Lightbox.prototype.build = function() {
       var self = this;
-      $("<div id='lightboxOverlay' class='lightboxOverlay'></div><div id='lightbox' class='lightbox'><div class='lb-outerContainer'><div class='lb-container'><img class='lb-image' src='' /><div class='lb-nav'><a class='lb-prev' href='' ></a><a class='lb-next' href='' ></a></div><div class='lb-loader'><a class='lb-cancel'></a></div></div></div><div class='lb-dataContainer'><div class='lb-data'><div class='lb-details'><span class='lb-caption'></span><span class='lb-number'></span></div><div class='lb-closeContainer'><a class='lb-close'></a></div></div></div></div>").appendTo($('body'));
+      $("<div id='lightboxOverlay' class='lightboxOverlay'></div><div id='lightbox' class='lightbox'><div class='lb-outerContainer'><div class='lb-container'><img class='lb-image' src='' /><div class='lb-nav'><a class='lb-prev' href='' ></a><a class='lb-next' href='' ></a></div><div class='lb-loader'><a class='lb-cancel'></a></div></div></div><div class='lb-dataContainer'><div class='lb-data'><div class='lb-details'><span class='lb-caption'></span><span class='lb-number'></span></div><div class='lb-closeContainer'><a class='lb-close'></a></div><div class='lb-downloadContainer'><a class='lb-download' href=\'\' download></a></div></div></div></div>").appendTo($('body'));
       
       // Cache jQuery objects
       this.$lightbox       = $('#lightbox');
@@ -81,6 +81,9 @@
       this.$lightbox.hide().on('click', function(event) {
         if ($(event.target).attr('id') === 'lightbox') {
           self.end();
+        }
+        if ($(event.target).attr('href')) {
+            return true;
         }
         return false;
       });
@@ -109,7 +112,6 @@
         }
         return false;
       });
-
       this.$lightbox.find('.lb-loader, .lb-close').on('click', function() {
         self.end();
         return false;
@@ -141,6 +143,7 @@
 
       // Support both data-lightbox attribute and rel attribute implementations
       var dataLightboxValue = $link.attr('data-lightbox');
+      var dataLightboxDownloadValue = $link.attr('data-lightbox-download');
       var $links;
 
       if (dataLightboxValue) {
@@ -165,6 +168,12 @@
             }
           }
         }
+      }
+      // assign download URL if present, hide download button if not
+      if (dataLightboxDownloadValue) {
+          this.$lightbox.find('.lb-download').attr('href', dataLightboxDownloadValue);
+      } else {
+          this.$lightbox.find('.lb-downloadContainer').hide();
       }
       
       // Position Lightbox
