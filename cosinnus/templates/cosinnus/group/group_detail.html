@@ -107,9 +107,11 @@
                                     </a>
                                     {% endif %}
                                     <div class="media-body">
-                                            <span class="annotation">
-                                                {% trans "Invited to be a member" %}
-                                            </span>
+                                        <span class="annotation">
+                                            {% trans "Invited to be a member" %}
+                                            &nbsp;
+                                            <span class="moment-data-date" data-date="{{ member.membership_status_date|date:'c' }}"></span>
+                                        </span>
                                         <a href="{% url 'cosinnus:profile-detail' username=member.username %}">
                                             {{ member|full_name }}
                                         </a>
@@ -216,9 +218,11 @@
 		                            </a>
 		                            {% endif %}
 		                            <div class="media-body">
-		                                    <span class="annotation">
-	                                            {% trans "Membership requested" %}
-		                                    </span>
+	                                    <span class="annotation">
+                                            {% trans "Membership requested" %}
+	                                        &nbsp;
+	                                        <span class="moment-data-date" data-date="{{ member.membership_status_date|date:'c' }}"></span>
+	                                    </span>
 		                                <a href="{% url 'cosinnus:profile-detail' username=member.username %}">
 		                                    {{ member|full_name }}
 		                                </a>
