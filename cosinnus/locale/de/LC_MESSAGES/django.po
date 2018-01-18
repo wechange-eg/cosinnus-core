@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-15 13:20+0100\n"
-"PO-Revision-Date: 2018-01-15 13:21+0100\n"
+"POT-Creation-Date: 2018-01-18 15:27+0100\n"
+"PO-Revision-Date: 2018-01-18 15:35+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -1149,6 +1149,10 @@ msgstr "Entschuldigung! Etwas ist schiefgelaufen..."
 msgid "Looks like we had an internal problem while processing your request. The error has been recorded, and we will try to fix it as soon as possible!"
 msgstr "Sieht so als aus ob ein internes Problem aufgetreten ist. Der Fehlerwurde aufgezeichnet und wir werden so schnell wie möglich versuchen das Problem zu beheben!"
 
+#, python-format
+msgid "+%(num_pictures)s more..."
+msgstr "+%(num_pictures)s weitere..."
+
 msgid "Error embedding a Flickr gallery"
 msgstr "Fehler beim Einbetten einer Flickr Gallerie"
 
@@ -1438,10 +1442,6 @@ msgstr "Gib einen Ort oder Adresse ein."
 
 msgid "Choose and upload a gallery image"
 msgstr "Wähle ein Galleriebild zum Hochladen aus"
-
-msgctxt "written next to optional form fields"
-msgid "(optional)"
-msgstr "optional"
 
 msgid "Re-Activate Project/Group"
 msgstr "Projekt/Gruppe reaktivieren"
@@ -3547,6 +3547,10 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten 
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgctxt "written next to optional form fields"
+#~ msgid "(optional)"
+#~ msgstr "optional"
 
 #, fuzzy
 #~| msgid "Enter a name for the group."

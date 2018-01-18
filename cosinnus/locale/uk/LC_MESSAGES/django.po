@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-15 13:20+0100\n"
+"POT-Creation-Date: 2018-01-18 15:27+0100\n"
 "PO-Revision-Date: 2017-12-07 16:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1148,6 +1148,10 @@ msgstr "Вибачте! Щось пішло не так..."
 msgid "Looks like we had an internal problem while processing your request. The error has been recorded, and we will try to fix it as soon as possible!"
 msgstr "Виглядає на те, що під час виконання вашого запиту виникла внутрішня проблема. Помилка була зареєстрована, і ми спробуємо максимально швидко виправити її!"
 
+#, python-format
+msgid "+%(num_pictures)s more..."
+msgstr ""
+
 msgid "Error embedding a Flickr gallery"
 msgstr "У Flickr  знайдена помилка"
 
@@ -1446,10 +1450,6 @@ msgstr "Уведіть місце або адресу."
 
 msgid "Choose and upload a gallery image"
 msgstr "Обрати та завантажити зображення галереї"
-
-msgctxt "written next to optional form fields"
-msgid "(optional)"
-msgstr ""
 
 msgid "Re-Activate Project/Group"
 msgstr "Повторно активувати проект/спільноту"
