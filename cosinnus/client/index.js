@@ -5,5 +5,5 @@
 var Application = require('application');
 
 $(function () {
-    new Application().start();
+    window.App = new Application().start();
 });

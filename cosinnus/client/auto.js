@@ -5,11 +5,11 @@ var MapView = require('views/map-view');
 
 module.exports = {
     initialize: function () {
-        Backbone.mediator.subscribe('init:map', this.map);
+        Backbone.mediator.subscribe('init:map', this.init_map);
         Backbone.mediator.publish('init:client');
     },
 
-    map: function (event, params) {
+    init_map: function (event, params) {
         var d = {
             pushState: false
         };

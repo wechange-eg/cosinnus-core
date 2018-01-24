@@ -45,7 +45,7 @@ module.exports = View.extend({
 
     maxClusterRadius: 15,
 
-    default: {
+    defaults: {
         zoom: 7,
         location: [
             52.5233,
@@ -56,7 +56,7 @@ module.exports = View.extend({
     initialize: function (options) {
         var self = this;
         self.template = template;
-        self.options = $.extend(true, {}, self.default, options);
+        self.options = $.extend(true, {}, self.defaults, options);
         self.model.on('change:results', self.updateMarkers, self);
         self.model.on('change:bounds', self.fitBounds, self);
         Backbone.mediator.subscribe('resize:window', function () {

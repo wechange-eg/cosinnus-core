@@ -23,7 +23,7 @@ module.exports = function Application () {
         });
         // Autoinitialize inline views and models.
         auto.initialize();
-
+        return self;
     };
 
     self.initMediator = function () {

@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = Backbone.Model.extend({
-    default: {
+    defaults: {
         availableFilters: {
             people: true,
             events: true,
@@ -32,7 +32,7 @@ module.exports = Backbone.Model.extend({
 
     initialize: function (attributes, options) {
         var self = this;
-        var attrs = $.extend(true, {}, self.default, options);
+        var attrs = $.extend(true, {}, self.defaults, options);
         self.set(attrs);
         Backbone.mediator.subscribe('navigate:map', function () {
             self.initialSearch();
@@ -134,6 +134,25 @@ module.exports = Backbone.Model.extend({
         return url + '?' + query;
     },
 
+    parseUrl: function (url) {
+        if (url.indexOf('?') >= 0) {
+            var json = JSON.parse('{"' + decodeURI(url.replace(/\%2C/g, ',').replace(/[^?]*\?/, '').replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
+        } else {
+            var json = {};
+        }
+        _(_(json).keys()).each(function (key) {
+            if (json[key] !== '') {
+                try {
+                    json[key] = JSON.parse(json[key]);
+                } catch (err) {}
+            }
+        });
+        if (typeof json['topics'] === "number" || (typeof json['topics'] === "string" && json['topics'].length > 0)) {
+            json['topics'] = json['topics'].toString().split(',');
+        }
+        return json;
+    },
+
     toggleFilter: function (resultType) {
         var activeFilters = this.get('activeFilters');
         activeFilters[resultType] = !activeFilters[resultType];
@@ -169,25 +188,6 @@ module.exports = Backbone.Model.extend({
             self.search();
             self.set('wantsToSearch', false);
         }, delay);
-    },
-
-    parseUrl: function (url) {
-        if (url.indexOf('?') >= 0) {
-            var json = JSON.parse('{"' + decodeURI(url.replace(/\%2C/g, ',').replace(/[^?]*\?/, '').replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
-        } else {
-            var json = {};
-        }
-        _(_(json).keys()).each(function (key) {
-            if (json[key] !== '') {
-                try {
-                    json[key] = JSON.parse(json[key]);
-                } catch (err) {}
-            }
-        });
-        if (typeof json['topics'] === "number" || (typeof json['topics'] === "string" && json['topics'].length > 0)) {
-            json['topics'] = json['topics'].toString().split(',');
-        }
-        return json;
     },
 
     activeFilterList: function () {
