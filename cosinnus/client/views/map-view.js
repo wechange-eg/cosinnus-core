@@ -38,6 +38,10 @@ module.exports = View.extend({
         projects: 'green',
         groups: 'blue'
     },
+    
+    // if a marker popup is open, but the search results change and the marker would be removed,
+    // should we still keep it and the popup?
+    keepOpenMarkersAfterResultChange: false, 
 
     clusterZoomThreshold: 5,
 
@@ -171,14 +175,15 @@ module.exports = View.extend({
             address: result.address,
             description: result.description
         }));
+        
 
-        if (this.markerNotPopup(marker) && this.markerNotSpiderfied(marker)) {
-            if (this.state.clustering) {
-                this.clusteredMarkers.addLayer(marker);
-            } else {
-                marker.addTo(this.leaflet);
-            }
-            this.markers.push(marker);
+        if (!self.keepOpenMarkersAfterResultChange || (this.markerNotPopup(marker) && this.markerNotSpiderfied(marker))) {
+	        if (this.state.clustering) {
+	            this.clusteredMarkers.addLayer(marker);
+	        } else {
+	            marker.addTo(this.leaflet);
+	        }
+	        this.markers.push(marker);
         }
     },
 
@@ -220,9 +225,10 @@ module.exports = View.extend({
         // Remove previous markers from map based on current clustering state.
         if (self.markers) {
             _(self.markers).each(function (marker) {
-                if (self.markerNotPopup(marker) && self.markerNotSpiderfied(marker)) {
-                    self.removeMarker(marker);
-                }
+
+            	if (!self.keepOpenMarkersAfterResultChange || (self.markerNotPopup(marker) && self.markerNotSpiderfied(marker))) {
+            		self.removeMarker(marker);
+            	}
             });
         }
 
@@ -231,12 +237,14 @@ module.exports = View.extend({
 
         // Ensure popup and spiderfied markers are in the markers array;
         // even when they aren't included in the latest results.
-        if (self.state.popup) {
-            self.markers.push(self.state.popup._source);
-        } else if (self.state.spiderfied) {
-            _(self.state.spiderfied.getAllChildMarkers()).each(function (m) {
-                self.markers.push(m);
-            });
+        if (self.keepOpenMarkersAfterResultChange) {
+	        if (self.state.popup) {
+	            self.markers.push(self.state.popup._source);
+	        } else if (self.state.spiderfied) {
+	            _(self.state.spiderfied.getAllChildMarkers()).each(function (m) {
+	                self.markers.push(m);
+	            });
+	        }
         }
 
         // Add the individual markers.
