@@ -26,6 +26,8 @@ class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
         else only allows creating them on the root level.
      """
     allow_deep_hierarchy = True
+    # if False, we will manually sort the list if no ordering param is present
+    strict_default_sort = False
     
     def get_context_data(self, *args, **kwargs):
         # on form invalids, we need to retrieve the objects
@@ -44,7 +46,7 @@ class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
         # convert qs to list
         sorted_object_list = list(self.queryset)
         # sort case insensitive by title, ignoring umlauts unless we already have a filter in place
-        if not self.request.GET.get('o', ''):
+        if not self.request.GET.get('o', '') and not self.strict_default_sort:
             sorted_object_list.sort(cmp=locale.strcoll, key=lambda x: x.title)
         
         # assemble container and current hierarchy objects.
