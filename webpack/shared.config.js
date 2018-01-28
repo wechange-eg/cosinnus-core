@@ -3,7 +3,7 @@ var path = require('path');
 var base = path.resolve('.');
 
 module.exports = {
-    entry: path.join(base, 'cosinnus/client/index.js'),
+    entry: path.join(base, 'cosinnus/client/app.js'),
     output: {
         path: path.join(base, 'cosinnus/static/js/'),
         filename: 'client.js'

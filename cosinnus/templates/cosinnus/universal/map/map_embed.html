@@ -10,6 +10,9 @@
         <script src="{% static 'js/vendor/select2.min.js' %}"></script>
 		<script src="{% static 'js/client.js' %}?v=0.3"></script>
 		
+		<script type="text/javascript">var COSINNUS_MAP_MARKER_ICONS = JSON.parse('{% render_map_marker_icon_json %}');</script>
+		<script type="text/javascript">var COSINNUS_MAP_TOPICS_HTML = '{% render_cosinnus_topics_field "escape" %}';</script>
+		
 		<link href="{% static 'css/bootstrap3-cosinnus.css' %}" rel="stylesheet">
         <link href="{% static 'css/vendor/font-awesome.min.css' %}" rel="stylesheet">
 		<link href="{% static 'css/vendor/leaflet.css' %}" rel="stylesheet">
@@ -30,7 +33,7 @@
     	{% include 'cosinnus/common/internet_explorer_not_supported.html' %}
 		
 		<div class="map-root"></div>
-		{% captureas map_settings %}{"controlsEnabled": {% if request.GET.controls_disabled %}false{% else %}true{% endif %}, "topicsHtml": "{% render_cosinnus_topics_field "escape" %}", "markerIcons": {% render_map_marker_icon_json %}}{% endcaptureas %}
+		{% captureas map_settings %}{"controlsEnabled": {% if request.GET.controls_disabled %}false{% else %}true{% endif %}{% endcaptureas %}
             
 		{% include 'cosinnus/common/init_client_module.html' with module='map' id="fullscreen" extra_classes="no-navbar" settings=map_settings  %}
 	</body>

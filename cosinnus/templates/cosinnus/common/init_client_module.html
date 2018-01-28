@@ -2,9 +2,16 @@
 
 <script>
     $('html').on('init:client', function () {
+        console.log('got init client, now init:{{module}}');
         Backbone.mediator.publish('init:{{module}}', {
             el: '#{{module}}-{{id}}',
-            settings: '{{settings|safe}}'
+            settings: '{{settings|safe}}',
+            display: {
+                showMap: true,
+                showTiles: false,
+                showControls: false,
+                fullscreen: false
+           }
         });
     });
 </script>

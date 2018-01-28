@@ -34,9 +34,6 @@ module.exports = Backbone.Model.extend({
         var self = this;
         var attrs = $.extend(true, {}, self.defaults, options);
         self.set(attrs);
-        Backbone.mediator.subscribe('navigate:map', function () {
-            self.initialSearch();
-        });
         Backbone.Model.prototype.initialize.call(this);
     },
 
