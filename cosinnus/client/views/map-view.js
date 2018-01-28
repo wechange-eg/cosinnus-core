@@ -7,6 +7,8 @@ var template = require('map/map');
 var util = require('lib/util');
 
 module.exports = View.extend({
+    
+	
     layers: {
         street: {
             url: (util.protocol() === 'http:' ?
@@ -54,8 +56,13 @@ module.exports = View.extend({
         location: [
             52.5233,
             13.4138
-        ]
+        ],
+
+	    layer: 'street',
+	    
+	    limitWithoutClustering: 400,
     },
+    options: {},
 
     initialize: function (options) {
         var self = this;
@@ -73,14 +80,6 @@ module.exports = View.extend({
     afterRender: function () {
         var self = this;
 
-        if (self.model.get('controlsEnabled')) {
-            self.controlsView = new MapControlsView({
-                el: self.$el.find('.map-controls'),
-                model: self.model,
-                options: self.options
-            }).render();
-            self.controlsView.on('change:layer', self.handleSwitchLayer, self);
-        }
 
         self.renderMap();
         self.model.initialSearch();
