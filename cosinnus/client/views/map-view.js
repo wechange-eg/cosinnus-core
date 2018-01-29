@@ -1,13 +1,13 @@
 'use strict';
 
-var View = require('views/base/view');
-var MapControlsView = require('views/map-controls-view');
+var ContentControlView = require('views/base/content-control-view');
+var MapLayerButtonsView = require('views/map-layer-buttons-view');
 var popupTemplate = require('map/popup');
-var template = require('map/map');
 var util = require('lib/util');
 
-module.exports = View.extend({
+module.exports = ContentControlView.extend({
     
+	template: require('map/map'),
 	
     layers: {
         street: {
@@ -51,38 +51,77 @@ module.exports = View.extend({
 
     maxClusterRadius: 15,
 
+    // the curren Leaflet layer object
+    currentLayer: null,
+    
+    //
+    mapLayerButtonsView: null,
+    
     defaults: {
         zoom: 7,
         location: [
             52.5233,
             13.4138
         ],
-
+        
+        // the current layer option as string
 	    layer: 'street',
 	    
 	    limitWithoutClustering: 400,
     },
     options: {},
-
+    
     initialize: function (options) {
         var self = this;
-        self.template = template;
         self.options = $.extend(true, {}, self.defaults, options);
-        self.model.on('change:results', self.updateMarkers, self);
-        self.model.on('change:bounds', self.fitBounds, self);
+        Backbone.mediator.subscribe('change:results', self.updateMarkers, self);
+        Backbone.mediator.subscribe('change:bounds', self.fitBounds, self);
         Backbone.mediator.subscribe('resize:window', function () {
             self.leaflet.invalidateSize();
             self.handleViewportChange();
-        });
-        View.prototype.initialize.call(this);
+        }, self);
+        Backbone.mediator.subscribe('change:layer', self.setLayer, self);
+        
+    	// this calls self.initializeSearchParameters()
+        ContentControlView.prototype.initialize.call(self, options);
     },
 
     afterRender: function () {
         var self = this;
-
-
+        self.mapLayerButtonsView = new MapLayerButtonsView({
+        	el: self.$el.find('.map-layers-buttons'),
+        	layer: self.options.layer,
+        	mapView: self
+        }).render();
         self.renderMap();
-        self.model.initialSearch();
+    },
+    
+    // extended from content-control-view.js
+    initializeSearchParameters: function (urlParams) {
+        _.extend(this.state, {
+            north: self.ifundef(urlParams.ne_lat, this.get('north')),
+            east: self.ifundef(urlParams.ne_lon, this.get('east')),
+            south: self.ifundef(urlParams.sw_lat, this.get('south')),
+            west: self.ifundef(urlParams.sw_lon, this.get('west')),
+        });
+    },
+    
+    // extended from content-control-view.js
+    contributeToSearchParameters: function() {
+    	console.log('TODO: completely ignoring coordinate padding rn!')
+    	var padded = false;
+        var searchParams = {
+            ne_lat: padded ? this.get('paddedNorth') : this.get('north'),
+            ne_lon: padded ? this.get('paddedEast') : this.get('east'),
+            sw_lat: padded ? this.get('paddedSouth') : this.get('south'),
+            sw_lon: padded ? this.get('paddedWest') : this.get('west'),
+        };
+        if (!this.get('clustering')) {
+        	_.extend(searchParams, {
+                limit: this.get('limit') || this.limitWithoutClustering
+            });
+        }
+    	return searchParams
     },
 
     // Private
@@ -90,9 +129,9 @@ module.exports = View.extend({
 
     renderMap: function () {
         this.markers = [];
-        this.leaflet = L.map(this.options.el.replace('#', ''))
+        this.leaflet = L.map('map-container')
             .setView(this.options.location, this.options.zoom);
-        this.setLayer(this.model.get('layer'));
+        this.setLayer(this.options.layer);
 
         // Setup the cluster layer
         this.clusteredMarkers = L.markerClusterGroup({
@@ -261,11 +300,6 @@ module.exports = View.extend({
         });
         this.updateBounds();
         this.model.attemptSearch();
-    },
-
-    // Change between layers.
-    handleSwitchLayer: function (layer) {
-        this.setLayer(layer);
     },
 
     // Handle change bounds (from URL).

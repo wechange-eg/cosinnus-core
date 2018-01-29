@@ -1,4 +1,4 @@
-#map-fullscreen {
+.map-fullscreen {
     position: fixed;
     top: 0;
     left: 0;
@@ -42,6 +42,31 @@
 }
 
 .map-root {
+	
+	.map-layers-buttons {
+	
+	    position: absolute;
+	    bottom: 20px;
+	    left: 5px;
+	   
+        .layer-button {
+            float: none;
+            width: 50px;
+            margin-left: 0;
+            display: inline-block;
+            background-color: @app-main-color-light;
+            padding: 5px;
+            color: black;
+            font-size: 9.5px;
+            letter-spacing: 0.02em;
+
+            &.active {
+                background-color: @app-main-color;
+                color: white;
+            }
+        }
+	}
+	
     .popup {
         max-width: 250px;
         min-width: 180px;
@@ -203,23 +228,6 @@
                 letter-spacing: 0.04em;
                 height: @check-height;
                 line-height: @check-height;
-            }
-        }
-
-        .layer-button {
-            float: none;
-            width: 50px;
-            margin-left: 0;
-            display: inline-block;
-            background-color: @app-main-color-light;
-            padding: 5px;
-            color: black;
-            font-size: 9.5px;
-            letter-spacing: 0.02em;
-
-            &.active {
-                background-color: @app-main-color;
-                color: white;
             }
         }
 

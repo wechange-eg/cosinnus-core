@@ -1,0 +1,17 @@
+{% load i18n %}
+<div class="line button">
+    <div data-layer="street"
+        class="btn layer-button {% if layer == 'street' %} active {% endif %}">
+        Street
+    </div>
+
+    <div data-layer="satellite"
+        class="btn layer-button {% if layer == 'satellite' %} active {% endif %}">
+        Satellite
+    </div>
+
+    <div data-layer="terrain"
+        class="btn layer-button {% if layer == 'terrain' %} active {% endif %}">
+        Terrain
+    </div>
+</div>

@@ -1,6 +1,5 @@
 'use strict'
 
-var Map = require('models/map');
 var MapView = require('views/map-view');
 
 module.exports = Backbone.Router.extend({

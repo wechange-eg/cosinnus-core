@@ -3,10 +3,10 @@
 // Pub-sub event mediator and  data store.
 module.exports = {
     publish: function (eventName, data) {
-        $('html').trigger(eventName, data);
+        Backbone.trigger(eventName, data);
     },
 
-    subscribe: function (events, data, handler) {
-        $('html').on(events, data, handler);
+    subscribe: function (event, callback, context) {
+        Backbone.on(event, callback, context);
     }
 };

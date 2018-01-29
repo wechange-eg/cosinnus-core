@@ -5,8 +5,9 @@
 var Router = require('router');
 var mediator = require('mediator');
 
-var Map = require('models/map');
 var MapView = require('views/map-view');
+var ControlView = require('views/control-view');
+
 
 
 var App = function App () {
@@ -40,9 +41,9 @@ var App = function App () {
         // otherwise, an init:app must be published
 
         // (The first routing will autoinitialize views and model)
-        Backbone.mediator.subscribe('navigate:map', self.navigate_map);
+        Backbone.mediator.subscribe('navigate:map', self.navigate_map, self);
         // event for manual initialization (non-fullscreen view)
-        Backbone.mediator.subscribe('init:map', self.init_app);
+        Backbone.mediator.subscribe('init:map', self.init_app, self);
         
         console.log('app.js: init routing')
         // Start routing...
@@ -74,7 +75,7 @@ var App = function App () {
     };
     
     self.navigate_map = function (event) {
-    	if (self.controlView.length == 0) {
+    	if (self.controlView == null) {
     		self.auto_init_app();
     	}
     	self.initialSearch();
@@ -87,7 +88,8 @@ var App = function App () {
     self.auto_init_app = function () {
     	// add defaults into params
     	var params = {
-    		el: '#map-fullscreen',
+    		el: '#app-fullscreen',
+    		display: self.defaulDisplayOptions
     	}
     	self.init_app(null, params);
     };
@@ -113,32 +115,48 @@ var App = function App () {
         if (!topicsHtml) {alert('no topicsHtml!')}
         if (!markerIcons) {alert('no markerIcons!')}
         
+        // TODO: set to actual current URL!
+        var basePageURL = '/map';
         
         /** TODO next: 
          * - depending on display-settings: load each view
          * - remove Map model, put most of it into controlView and MapView
          * - refactor these settings and params and data into sensible different variables! */
-        var map = new Map({}, {
-        });
-
+        self.controlView = new ControlView({
+        	el: params.el, // TODO put in el in root div!
+        	el_append: true,
+        	availableFilters: settings.availableFilters,
+        	activeFilters: settings.activeFilters,
+        	topicsHtml: topicsHtml,
+        	controlsEnabled: self.displayOptions.showControls,
+        	filterGroup: settings.filterGroup,
+        	basePageURL: basePageURL,
+        }, self);
+        self.contentViews.push(self.controlView);
+        
+        console.log('app.js: TODO: really do this if check for controlsEnabled?')
+        console.log(self.displayOptions)
+        
         if (self.displayOptions.showControls) {
-            self.controlsView = new MapControlsView({
-                el: self.$el.find('.map-controls'), // TODO put in el in root div!
-                availableFilters: settings.availableFilters,
-                activeFilters: settings.activeFilters,
-                topicsHtml: topicsHtml,
-                controlsEnabled: self.displayOptions.showControls,
-                filterGroup: settings.filterGroup,
-            }).render();
-            self.controlsView.on('change:layer', self.handleSwitchLayer, self);
+        	console.log('app.js: actually rendering controls')
+        	self.controlView.render();
         }
-
-        new MapView({
-            el: params.el,
-            model: map,
-            location: settings.location,
-            markerIcons: markerIcons
+        
+        
+        var mapView = new MapView({
+        	el: params.el,
+        	el_append: true,
+        	location: settings.location,
+        	markerIcons: markerIcons,
+        	fullscreen: self.displayOptions.fullscreen
         }).render();
+        self.contentViews.push(mapView);
+        
+        // TODO: should these be here???
+        Backbone.mediator.publish('change:bounds');
+        Backbone.mediator.publish('change:controls');
+
+        Backbone.mediator.publish('app:ready');
     };
     
     

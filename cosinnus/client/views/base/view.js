@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = Backbone.View.extend({
+	
     initialize: function (options) {
         this.state = options && options.state || {};
     },
@@ -12,7 +13,12 @@ module.exports = Backbone.View.extend({
         // Use nunjucks to render the template (specified in child view).
         if (this.template && this.template.render &&
             typeof this.template.render === 'function') {
-            this.$el.html(this.template.render(data));
+        	var rendered = this.template.render(data);
+        	if (self.options.el_append) {
+        		this.$el.append(rendered);
+        	} else {
+        		this.$el.html(rendered);
+        	}
         }
         // After a repaint (to allow further rendering in #afterRender),
         // call the after render method if it exists.
@@ -28,6 +34,7 @@ module.exports = Backbone.View.extend({
     getTemplateData: function () {
         var modelData = this.model && this.model.toJSON() || {};
         var data = _(modelData).extend(this.state);
+        data.options = this.options;
         return data;
     }
 });
