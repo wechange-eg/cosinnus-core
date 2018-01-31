@@ -326,6 +326,7 @@
             <p class="large-space">
 	            {% for recruitation in recruited %}
 	                {{ recruitation.email }}
+	                - <span class="moment-data-date" data-date="{{ recruitation.last_modified|date:'c' }}"></span>
 	                {% if not recruitation.invited_by == user %}
 	                    <i>
 	                       ({% trans "by" context "an action done *by* <username>" %}
