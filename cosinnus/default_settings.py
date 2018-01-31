@@ -93,11 +93,11 @@ MIDDLEWARE_CLASSES = (
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
     
-    'cosinnus.core.middleware.StartupMiddleware',
-    'cosinnus.core.middleware.ForceInactiveUserLogoutMiddleware',
-    'cosinnus.core.middleware.ConditionalRedirectMiddleware',
-    'cosinnus.core.middleware.AddRequestToModelSaveMiddleware',
-    'cosinnus.core.middleware.GroupPermanentRedirectMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.StartupMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.ForceInactiveUserLogoutMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.ConditionalRedirectMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.AddRequestToModelSaveMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.GroupPermanentRedirectMiddleware',
 )
 
 

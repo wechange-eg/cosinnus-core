@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django_cron import CronJobBase, Schedule
 
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.core.middleware import initialize_cosinnus_after_startup
+from cosinnus.core.middleware.cosinnus_middleware import initialize_cosinnus_after_startup
 from django.core.exceptions import ImproperlyConfigured
 
 
