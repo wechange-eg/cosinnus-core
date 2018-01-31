@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-18 15:27+0100\n"
-"PO-Revision-Date: 2018-01-18 15:35+0100\n"
+"POT-Creation-Date: 2018-01-31 13:51+0100\n"
+"PO-Revision-Date: 2018-01-31 13:53+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -1260,6 +1260,17 @@ msgstr ""
 "*  **Nur Gruppen/Projekt-Mitglieder:** Dein Profil ist nur für Mitglieder deiner Gruppen/Projekte sichtbar. Dein Profil ist nicht öffentich. Du wirst nicht in der Liste „Menschen“ in der oberen Leiste angezeigt.\n"
 "*  **Nur eingeloggte Mitglieder:** Personen, die Mitglied der Plattform sind, können sich dein Profil anschauen. Dein Profil ist nicht öffentich. Du wirst in der Liste „Menschen“ angezeigt.\n"
 "*  **Jeder:** Auch nicht eingeloggte Personen können sich dein Profil anschauen. Dein Profil ist öffentlich sichtbar und kann über Suchmaschinen im Internet gefunden werden."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_51_objectprivacy"
+msgstr ""
+"Sichtbarkeitseinstellungen für Inhalte:\n"
+"\n"
+"*  **Nur ich:** Du bist die einzige Person aus deiner Gruppe/ deinem Projekt, die dieses Objekt sehen kann.  \n"
+"\n"
+"*  **Nur Gruppen/Projekt-Mitglieder:** Nur Personen der Gruppe oder des Projektes, in der dieses Objekt  gepostet wurde, haben Zugriff.  \n"
+"\n"
+"*  **Öffentlich (sichtbar ohne Anmeldung):** Dieser Inhalt wird als öffentlich sichtbar erstellt! Das bedeutet, dass jeder im Internet darauf Zugriff hat und ihn lesen kann, und er möglicherweise in Suchmaschinenergebnissen erscheint. Wenn du das nicht möchtest, kannst du unten die Sichtbarkeitseinstellung anpassen."
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr "Gib die E-Mail Adressen von den Leuten ein, die du einladen möchtest der Platform beizutreten."
@@ -2924,9 +2935,6 @@ msgstr "Benutzer_innen-Profil: %(username)s"
 msgid "My Website"
 msgstr "Meine Webseite"
 
-msgid "My Groups and Projects"
-msgstr "Meine Gruppen und Projekte"
-
 msgid "Edit Your Profile"
 msgstr "Profil bearbeiten"
 
@@ -3547,6 +3555,9 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten 
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "My Groups and Projects"
+#~ msgstr "Meine Gruppen und Projekte"
 
 #~ msgctxt "written next to optional form fields"
 #~ msgid "(optional)"

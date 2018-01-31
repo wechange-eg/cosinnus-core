@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-18 15:27+0100\n"
-"PO-Revision-Date: 2018-01-15 13:04+0100\n"
+"POT-Creation-Date: 2018-01-31 13:51+0100\n"
+"PO-Revision-Date: 2018-01-31 14:02+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1273,6 +1273,17 @@ msgstr ""
 "*  **Members of your projects and groups only:** Your profile is only visible for members of your projects and groups. You will not be listed in \"People\" in the top navigation bar.\n"
 "*  **Registered users only:** People that have registered a user account on the platform can see your profile. Your profile is not publicly visible. You will be listed in \"People\" in the top navigation bar.\n"
 "*  **Everybody:** Even people who are not logged in can see your profile. Your profile is publicly visible and can be found using search engines on the internet."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_51_objectprivacy"
+msgstr ""
+"Privacy settings for content:\n"
+"\n"
+"*  **Only me:** You are the only one in your group or project who can see and access the content.  \n"
+"\n"
+"*  **Team Members only:** Only members of the group or project, in which this content was posted, may access it.\n"
+"\n"
+"*  **Public (visible without login):** This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr ""
@@ -2855,11 +2866,6 @@ msgstr ""
 msgid "My Website"
 msgstr ""
 
-#, fuzzy
-#| msgid "My Projects"
-msgid "My Groups and Projects"
-msgstr "My Projects"
-
 msgid "Edit Your Profile"
 msgstr ""
 
@@ -3488,6 +3494,11 @@ msgstr ""
 
 msgid "Your changes have been saved."
 msgstr ""
+
+#, fuzzy
+#~| msgid "My Projects"
+#~ msgid "My Groups and Projects"
+#~ msgstr "My Projects"
 
 #, fuzzy
 #~| msgid "Enter a name for the group."

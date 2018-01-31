@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-18 15:27+0100\n"
+"POT-Creation-Date: 2018-01-31 13:51+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1250,6 +1250,10 @@ msgstr ""
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_51_objectprivacy"
 msgstr ""
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
@@ -2777,9 +2781,6 @@ msgid "User profile: %(username)s"
 msgstr ""
 
 msgid "My Website"
-msgstr ""
-
-msgid "My Groups and Projects"
 msgstr ""
 
 msgid "Edit Your Profile"
