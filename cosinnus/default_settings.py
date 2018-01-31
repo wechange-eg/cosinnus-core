@@ -151,6 +151,7 @@ def compile_installed_apps(internal_apps=[]):
         'django.contrib.sites',
         'django.contrib.staticfiles',
         'django.contrib.webdesign',
+        'suit_overextends',
         'suit',
         'django.contrib.admin',
         'sekizai',
