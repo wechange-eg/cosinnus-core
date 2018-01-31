@@ -85,7 +85,6 @@ def register_and_limit_failed_login_attempt(sender, credentials, **kwargs):
         if num_tries == attempt_limit:
             # We have reached the first rate limit attempt, send signal and maybe do logging
             if getattr(settings, 'LOGIN_RATELIMIT_LOG_ON_LIMIT', default_settings.LOGIN_RATELIMIT_LOG_ON_LIMIT):
-                print ">> logginngg"
                 logger.warning('LoginRateLimitMiddleware: Failed Login Attempt Limit reached targetting an email. Details in extra.', extra={
                     'username': 'username',
                     'ip': None,
