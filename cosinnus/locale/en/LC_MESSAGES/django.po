@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-31 13:51+0100\n"
+"POT-Creation-Date: 2018-01-31 18:20+0100\n"
 "PO-Revision-Date: 2018-01-31 14:02+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -104,6 +104,10 @@ msgid "This team no longer resides under the URL you entered. You have been redi
 msgstr ""
 
 msgid "This account is no longer active. You have been logged out."
+msgstr ""
+
+#, python-format
+msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
 msgstr ""
 
 msgid "A user requested to become a member of this team (admins only)"

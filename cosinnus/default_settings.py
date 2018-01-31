@@ -98,6 +98,7 @@ MIDDLEWARE_CLASSES = (
     'cosinnus.core.middleware.cosinnus_middleware.ConditionalRedirectMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.AddRequestToModelSaveMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.GroupPermanentRedirectMiddleware',
+    'cosinnus.core.middleware.login_ratelimit_middleware.LoginRateLimitMiddleware',
 )
 
 
@@ -408,6 +409,14 @@ COSINNUS_MICROSITES_ENABLED = True
 #COSINNUS_MICROSITE_DISPLAYED_APP_OBJECTS = [...] 
 # Navbar display in the apps menu
 #COSINNUS_HIDE_APPS = [(...)]
+
+# LOGIN Rate limiting settings:
+LOGIN_RATELIMIT_USERNAME_FIELD = 'email'
+LOGIN_RATELIMIT_LOGIN_URLS = {
+    '/admin/login/': 'username',
+    '/login/': 'username',
+}
+LOGIN_RATELIMIT_LOGGER_NAME = 'cosinnus'
 
 
 """ -----------  This app's cosinnus-related custom settings  ----------- """
