@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-31 18:20+0100\n"
-"PO-Revision-Date: 2018-01-31 19:24+0100\n"
+"PO-Revision-Date: 2018-01-31 19:54+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -109,7 +109,7 @@ msgstr "Sie wurden ausgeloggt, weil dieses Benutzerkonto nicht mehr aktiv ist."
 
 #, python-format
 msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
-msgstr "Du hast zu oft versucht, dich einzuloggen. Du kannst in einer Weile wieder versuchen: %(duration)s."
+msgstr "Du hast zu oft versucht, dich einzuloggen. Du kannst es in einer Weile wieder versuchen: %(duration)s."
 
 msgid "A user requested to become a member of this team (admins only)"
 msgstr "Jemand hat beantragt Mitglied in dieser Gruppe zu werden (betrifft nur Gruppenadministratoren)"
