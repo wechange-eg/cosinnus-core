@@ -2,8 +2,21 @@
 
 module.exports = Backbone.View.extend({
 	
+	/**
+	 * Sets these values on the view:
+	 *  - self.options: 
+	 *  	- purpose: the general behavioural settings for the view. only differ from default
+	 *  		if passed through as View.init(options). don't change during runtime
+	 *  	- value: extended self.defaults with the parameter options
+	 *  - self.state:
+	 *  	- purpose: current state variables of the view. defaults can be set in 
+	 *  		self.defaults.state, or passed through View.init(options.state).
+	 *  		constantly change with the view's current state
+	 *  	- value: self.options.state if exists or {}
+	 */
     initialize: function (options) {
-        this.state = options && options.state || {};
+    	this.options = $.extend(true, {}, this.defaults, options);
+        this.state = this.options && this.options.state || {};
     },
 
     render: function () {

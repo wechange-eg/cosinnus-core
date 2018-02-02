@@ -116,7 +116,7 @@ var App = function App () {
         if (!markerIcons) {alert('no markerIcons!')}
         
         // TODO: set to actual current URL!
-        var basePageURL = '/map';
+        var basePageURL = '/map/';
         
         /** TODO next: 
          * - depending on display-settings: load each view

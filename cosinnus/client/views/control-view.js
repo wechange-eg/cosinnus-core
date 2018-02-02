@@ -10,6 +10,7 @@ module.exports = ContentControlView.extend({
 	
 	template: require('map/map-controls'),
 	
+	// will be set to self.options during initialization
 	defaults: {
         availableFilters: {
             people: true,
@@ -29,27 +30,30 @@ module.exports = ContentControlView.extend({
         
         // in fullscreen mode, this must always be the base URL we started at
         basePageURL: '/map/',
-    },
-    
-    searchEndpointURL: '/maps/search/',
-    searchDelay: 400,
-    whileSearchingDelay: 5000,
-	
-    options: {
+        
+        // will be set to self.state during initialization
     	state: {
     		// current query
     		q: '',
     		topicsVisible: false,
 			activeTopicIds: null,
 			wantsToSearch: false,
-			searching: false
+			searching: false,
+			searchResultLimit: 400,
     	}
     },
     
+    searchEndpointURL: '/maps/search/',
+    searchDelay: 400,
+    whileSearchingDelay: 5000,
+	
+    
     initialize: function (options, app) {
     	var self = this;
+    	// this calls self.initializeSearchParameters()
+    	ContentControlView.prototype.initialize.call(self, options);
+    	
     	self.App = app;
-    	self.options = $.extend(true, {}, self.defaults, options);
     	Backbone.mediator.subscribe('want:search', self.handleStartSearch, self);
     	Backbone.mediator.subscribe('end:search', self.handleEndSearch, self);
     	Backbone.mediator.subscribe('change:controls', self.render, self);
@@ -58,8 +62,6 @@ module.exports = ContentControlView.extend({
     	
     	console.log('control-view.js: initialized. with self.App=' + self.App)
     	
-    	// this calls self.initializeSearchParameters()
-        ContentControlView.prototype.initialize.call(self, options);
 
         if (self.state.activeTopicIds) {
             this.showTopics();
@@ -202,16 +204,16 @@ module.exports = ContentControlView.extend({
     initializeSearchParameters: function (urlParams) {
         _.extend(this.state, {
             activeFilters: {
-                people: this.ifundef(urlParams.people, this.options.activeFilters.people),
-                events: this.ifundef(urlParams.events, this.options.activeFilters.events),
-                projects: this.ifundef(urlParams.projects, this.options.activeFilters.projects),
-                groups: this.ifundef(urlParams.groups, this.options.activeFilters.groups)
+                people: util.ifundef(urlParams.people, this.options.activeFilters.people),
+                events: util.ifundef(urlParams.events, this.options.activeFilters.events),
+                projects: util.ifundef(urlParams.projects, this.options.activeFilters.projects),
+                groups: util.ifundef(urlParams.groups, this.options.activeFilters.groups)
             },
-            q: this.ifundef(urlParams.q, this.state.q),
-            //limit: this.ifundef(urlParams.limits, this.get('limit')),
-            activeTopicIds: this.ifundef(urlParams.topics, this.state.activeTopicIds)
+            q: util.ifundef(urlParams.q, this.state.q),
+            searchResultLimit: util.ifundef(urlParams.limits, this.state.searchResultLimit),
+            activeTopicIds: util.ifundef(urlParams.topics, this.state.activeTopicIds)
         });
-        console.log('TODO: we removed the "limit" param. what to do with it?')
+        console.log('TODO: we need to remove the "limit" param from the router URL, but not from the API call URL!')
     },
     
     // extended from content-control-view.js
@@ -222,6 +224,7 @@ module.exports = ContentControlView.extend({
             events: this.state.activeFilters.events,
             projects: this.state.activeFilters.projects,
             groups: this.state.activeFilters.groups,
+            limit: this.state.searchResultLimit
         };
         if (this.state.activeTopicIds) {
         	_.extend(searchParams, {

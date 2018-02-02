@@ -34,46 +34,66 @@ module.exports = ContentControlView.extend({
         }
     },
 
-    resultColours: {
-        people: 'red',
-        events: 'yellow',
-        projects: 'green',
-        groups: 'blue'
-    },
     
-    // if a marker popup is open, but the search results change and the marker would be removed,
-    // should we still keep it and the popup?
-    keepOpenMarkersAfterResultChange: false, 
-
-    clusterZoomThreshold: 5,
-
-    latLngBuffer: 0.1,
-
-    maxClusterRadius: 15,
-
-    // the curren Leaflet layer object
-    currentLayer: null,
-    
-    //
+    // TODO
     mapLayerButtonsView: null,
     
+    // handle on the current popup
+    popup: null,
+    
+    
+    // will be set to self.options during initialization
     defaults: {
+    	// shall we cluster close markers together
+    	clusteringEnabled: false,
+    	clusterZoomThreshold: 5,
+    	maxClusterRadius: 15,
+    	
+    	// if a marker popup is open, but the search results change and the marker would be removed,
+    	// should we still keep it and the popup?
+    	keepOpenMarkersAfterResultChange: false, 
+    	
+    	// added percentage to visible map area
+    	// the resulting area is actually sent as coords to the search API 
+    	latLngBuffer: 0.01,
+    	
+    	resultColours: {
+    		people: 'red',
+    		events: 'yellow',
+    		projects: 'green',
+    		groups: 'blue'
+    	},
+    	
         zoom: 7,
         location: [
             52.5233,
             13.4138
         ],
-        
         // the current layer option as string
 	    layer: 'street',
 	    
-	    limitWithoutClustering: 400,
+	    state: {
+	        // the curren Leaflet layer object
+	        currentLayer: null,
+
+	        // are we currently seeing clustered markers?
+	        currentlyClustering: false,
+	        // the current open spider cluster handle, or null if no spider open
+	        currentSpiderfied: null,
+	        
+	        // TODO: somewhere we need to set fallback defaults when navigated without loc params!!
+	        north: null, 
+	        east: null,
+	        south: null,
+	        west: null,
+	    }
     },
-    options: {},
     
     initialize: function (options) {
         var self = this;
-        self.options = $.extend(true, {}, self.defaults, options);
+        // this calls self.initializeSearchParameters()
+        ContentControlView.prototype.initialize.call(self, options);
+        
         Backbone.mediator.subscribe('change:results', self.updateMarkers, self);
         Backbone.mediator.subscribe('change:bounds', self.fitBounds, self);
         Backbone.mediator.subscribe('resize:window', function () {
@@ -82,8 +102,7 @@ module.exports = ContentControlView.extend({
         }, self);
         Backbone.mediator.subscribe('change:layer', self.setLayer, self);
         
-    	// this calls self.initializeSearchParameters()
-        ContentControlView.prototype.initialize.call(self, options);
+        self.state.currentlyClustering = self.options.clusteringEnabled;
     },
 
     afterRender: function () {
@@ -98,11 +117,12 @@ module.exports = ContentControlView.extend({
     
     // extended from content-control-view.js
     initializeSearchParameters: function (urlParams) {
+    	console.log('map-view.js: url params on init: ' + urlParams)
         _.extend(this.state, {
-            north: self.ifundef(urlParams.ne_lat, this.get('north')),
-            east: self.ifundef(urlParams.ne_lon, this.get('east')),
-            south: self.ifundef(urlParams.sw_lat, this.get('south')),
-            west: self.ifundef(urlParams.sw_lon, this.get('west')),
+            north: util.ifundef(urlParams.ne_lat, this.state.north),
+            east: util.ifundef(urlParams.ne_lon, this.state.east),
+            south: util.ifundef(urlParams.sw_lat, this.state.south),
+            west: util.ifundef(urlParams.sw_lon, this.state.west),
         });
     },
     
@@ -111,16 +131,11 @@ module.exports = ContentControlView.extend({
     	console.log('TODO: completely ignoring coordinate padding rn!')
     	var padded = false;
         var searchParams = {
-            ne_lat: padded ? this.get('paddedNorth') : this.get('north'),
-            ne_lon: padded ? this.get('paddedEast') : this.get('east'),
-            sw_lat: padded ? this.get('paddedSouth') : this.get('south'),
-            sw_lon: padded ? this.get('paddedWest') : this.get('west'),
+            ne_lat: padded ? this.state.paddedNorth : this.state.north,
+            ne_lon: padded ? this.state.paddedEast : this.state.east,
+            sw_lat: padded ? this.state.paddedSouth : this.state.south,
+            sw_lon: padded ? this.state.paddedWest : this.state.west,
         };
-        if (!this.get('clustering')) {
-        	_.extend(searchParams, {
-                limit: this.get('limit') || this.limitWithoutClustering
-            });
-        }
     	return searchParams
     },
 
@@ -132,14 +147,16 @@ module.exports = ContentControlView.extend({
         this.leaflet = L.map('map-container')
             .setView(this.options.location, this.options.zoom);
         this.setLayer(this.options.layer);
-
-        // Setup the cluster layer
-        this.clusteredMarkers = L.markerClusterGroup({
-            maxClusterRadius: this.maxClusterRadius
-        });
-        this.clusteredMarkers.on('spiderfied', this.handleSpiderfied, this);
-        this.leaflet.addLayer(this.clusteredMarkers);
-        this.setClusterState();
+        
+        if (this.options.clusteringEnabled) {
+        	// Setup the cluster layer
+        	this.clusteredMarkers = L.markerClusterGroup({
+        		maxClusterRadius: this.options.maxClusterRadius
+        	});
+        	this.clusteredMarkers.on('spiderfied', this.handleSpiderfied, this);
+        	this.leaflet.addLayer(this.clusteredMarkers);
+        	this.setClusterState();
+        }
 
         this.leaflet.on('zoomend', this.handleViewportChange, this);
         this.leaflet.on('dragend', this.handleViewportChange, this);
@@ -161,18 +178,18 @@ module.exports = ContentControlView.extend({
     },
 
     setLayer: function (layer) {
-        this.currentLayer && this.leaflet.removeLayer(this.currentLayer);
+        this.state.currentLayer && this.leaflet.removeLayer(this.state.currentLayer);
         var options = _(this.layers[layer].options).extend({
             maxZoom: 15,
             minZoom:3
         });
-        this.currentLayer = L.tileLayer(this.layers[layer].url, options)
+        this.state.currentLayer = L.tileLayer(this.layers[layer].url, options)
             .addTo(this.leaflet);
     },
 
     updateBounds: function () {
         var bounds = this.leaflet.getBounds()
-        var paddedBounds = bounds.pad(this.latLngBuffer);
+        var paddedBounds = bounds.pad(this.options.latLngBuffer);
         this.model.set({
             south: bounds.getSouth(),
             paddedSouth: paddedBounds.getSouth(),
@@ -194,7 +211,7 @@ module.exports = ContentControlView.extend({
             iconHeight = iconSettings.height;
         } else {
             iconUrl = '/static/js/vendor/images/marker-icon-2x-' +
-                this.resultColours[resultType] + '.png';
+                this.options.resultColours[resultType] + '.png';
             iconWidth = 17;
             iconHeight = 28;
         }
@@ -215,8 +232,8 @@ module.exports = ContentControlView.extend({
         }));
         
 
-        if (!self.keepOpenMarkersAfterResultChange || (this.markerNotPopup(marker) && this.markerNotSpiderfied(marker))) {
-	        if (this.state.clustering) {
+        if (!self.options.keepOpenMarkersAfterResultChange || (this.markerNotPopup(marker) && this.markerNotSpiderfied(marker))) {
+	        if (this.state.currentlyClustering) {
 	            this.clusteredMarkers.addLayer(marker);
 	        } else {
 	            marker.addTo(this.leaflet);
@@ -226,18 +243,20 @@ module.exports = ContentControlView.extend({
     },
 
     setClusterState: function () {
-        // Set clustering state: cluster only when zoomed in enough.
-        var zoom = this.leaflet.getZoom();
-        this.state.clustering = zoom > this.clusterZoomThreshold;
+    	if (self.options.clusteringEnabled) {
+    		// Set clustering state: cluster only when zoomed in enough.
+    		var zoom = this.leaflet.getZoom();
+    		this.state.currentlyClustering = zoom > this.options.clusterZoomThreshold;
+    	}
     },
 
     markerNotPopup: function (marker) {
-        var p = this.state.popup;
+        var p = this.popup;
         return !p || !_(p.getLatLng()).isEqual(marker.getLatLng());
     },
 
     markerNotSpiderfied: function (marker) {
-        var s = this.state.spiderfied;
+        var s = this.state.currentSpiderfied;
         var ret = !s || !_(s.getAllChildMarkers()).find(function (m) {
             return _(m.getLatLng()).isEqual(marker.getLatLng());
         });
@@ -245,7 +264,7 @@ module.exports = ContentControlView.extend({
     },
 
     removeMarker: function (marker) {
-        if (this.state.clustering) {
+        if (this.state.currentlyClustering) {
             this.clusteredMarkers.removeLayer(marker);
         } else {
             this.leaflet.removeLayer(marker);
@@ -264,7 +283,7 @@ module.exports = ContentControlView.extend({
         if (self.markers) {
             _(self.markers).each(function (marker) {
 
-            	if (!self.keepOpenMarkersAfterResultChange || (self.markerNotPopup(marker) && self.markerNotSpiderfied(marker))) {
+            	if (!self.options.keepOpenMarkersAfterResultChange || (self.markerNotPopup(marker) && self.markerNotSpiderfied(marker))) {
             		self.removeMarker(marker);
             	}
             });
@@ -275,11 +294,11 @@ module.exports = ContentControlView.extend({
 
         // Ensure popup and spiderfied markers are in the markers array;
         // even when they aren't included in the latest results.
-        if (self.keepOpenMarkersAfterResultChange) {
-	        if (self.state.popup) {
-	            self.markers.push(self.state.popup._source);
-	        } else if (self.state.spiderfied) {
-	            _(self.state.spiderfied.getAllChildMarkers()).each(function (m) {
+        if (self.options.keepOpenMarkersAfterResultChange) {
+	        if (self.popup) {
+	            self.markers.push(self.popup._source);
+	        } else if (self.state.currentSpiderfied) {
+	            _(self.state.currentSpiderfied.getAllChildMarkers()).each(function (m) {
 	                self.markers.push(m);
 	            });
 	        }
@@ -294,10 +313,7 @@ module.exports = ContentControlView.extend({
     },
 
     handleViewportChange: function () {
-        var zoom = this.leaflet.getZoom();
-        this.model.set({
-            clustering: zoom > self.clusterZoomThreshold
-        });
+        this.setClusterState();
         this.updateBounds();
         this.model.attemptSearch();
     },
@@ -305,26 +321,26 @@ module.exports = ContentControlView.extend({
     // Handle change bounds (from URL).
     fitBounds: function () {
         this.leaflet.fitBounds(L.latLngBounds(
-            L.latLng(this.model.get('south'), this.model.get('west')),
-            L.latLng(this.model.get('north'), this.model.get('east'))
+            L.latLng(this.state.south, this.state.west),
+            L.latLng(this.state.north, this.state.east)
         ));
     },
 
     handlePopup: function (event) {
         if (event.type === 'popupopen') {
-            this.state.popup = event.popup;
+            this.popup = event.popup;
         } else {
-            var popLatLng = this.state.popup.getLatLng();
+            var popLatLng = this.popup.getLatLng();
             var marker = event.popup._source;
             // Remove the popup's marker if it's now off screen.
-            if (!this.leaflet.getBounds().pad(this.latLngBuffer).contains(popLatLng)) {
+            if (!this.leaflet.getBounds().pad(this.options.latLngBuffer).contains(popLatLng)) {
                 this.removeMarker(marker);
             }
-            this.state.popup = null;
+            this.popup = null;
         }
     },
 
     handleSpiderfied: function (event) {
-        this.state.spiderfied = event.cluster;
+        this.state.currentSpiderfied = event.cluster;
     }
 });

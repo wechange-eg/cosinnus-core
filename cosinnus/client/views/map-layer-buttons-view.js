@@ -1,23 +1,28 @@
 'use strict';
 
-var View = require('views/base/view');
+var BaseView = require('views/base/view');
 var util = require('lib/util.js');
 
-module.exports = View.extend({
+module.exports = BaseView.extend({
 	
 	template: require('map/map-layers'),
 	
 	mapView: null,
 	
-	options: {
-		layer: null
+	// will be set to self.options during initialization
+	defaults: {
+		// will be set to self.state during initialization
+		state: {
+			layer: null
+		}
 	},
 	
     initialize: function (options) {
     	var self = this;
-    	self.options.layer = options.layer;
+    	BaseView.prototype.initialize.call(self, options);
+    	
+    	self.state.layer = options.layer;
     	self.mapView = options.mapView;
-        View.prototype.initialize.call(self, options);
     },
 
     events: {
@@ -32,7 +37,7 @@ module.exports = View.extend({
         var layer = $(event.currentTarget).data('layer');
         if (this.mapView.options.layer !== layer) {
             this.mapView.options.layer = layer;
-            this.layer = layer;
+            this.state.layer = layer;
             // TODO: is layer arriving in the template?
             console.log('map-layer-buttons-view.js: TODO: is layer arriving in the template?')
             this.render();

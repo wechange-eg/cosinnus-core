@@ -27,5 +27,11 @@ module.exports = {
             46 // delete
         ];
         return _(keycodes).contains(event.keyCode);
+    },
+    
+    /** Returns a if it is defined, else b */
+    ifundef: function(a, b) {
+        return typeof a == "undefined" ? b : a;
     }
+    
 };

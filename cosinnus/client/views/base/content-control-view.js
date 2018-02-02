@@ -8,7 +8,6 @@ module.exports = BaseView.extend({
     initialize: function (options) {
         var self = this;
     	BaseView.prototype.initialize.call(self, options);
-        
     	
     	var urlParams = this.parseUrl(window.location.href.replace(window.location.origin, ''));
         self.initializeSearchParameters(urlParams);
@@ -56,9 +55,5 @@ module.exports = BaseView.extend({
         return json;
     },
     
-    /** Returns a if it is defined, else b */
-    ifundef: function(a, b) {
-        return typeof a == "undefined" ? b : a;
-    },
     
 });
