@@ -31,6 +31,7 @@ from django.core.cache import cache
 from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
 
 import logging
+import json as _json
 from django.utils.encoding import force_text
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
@@ -43,6 +44,8 @@ from annoying.functions import get_object_or_None
 from django_markdown2.templatetags.md2 import markdown
 from django.utils.text import normalize_newlines
 from cosinnus.utils.functions import ensure_list_of_ints
+from django.db.models.query import QuerySet
+from django.core.serializers import serialize
 
 
 logger = logging.getLogger('cosinnus')
@@ -843,6 +846,12 @@ def makelist(splitstring):
         to get around not being able to form lists in templates """
     return splitstring.split(',')
 
+@register.filter
+def json(obj):
+    """ Returns the given object as JSON """
+    if isinstance(obj, QuerySet):
+        return serialize('json', obj)
+    return _json.dumps(obj)
 
 @register.filter
 def debugthis(obj):

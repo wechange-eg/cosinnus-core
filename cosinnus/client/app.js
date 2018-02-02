@@ -4,6 +4,7 @@
 
 var Router = require('router');
 var mediator = require('mediator');
+var util = require('lib/util.js');
 
 var MapView = require('views/map-view');
 var ControlView = require('views/control-view');
@@ -42,10 +43,14 @@ var App = function App () {
 
         // (The first routing will autoinitialize views and model)
         Backbone.mediator.subscribe('navigate:map', self.navigate_map, self);
-        // event for manual initialization (non-fullscreen view)
-        Backbone.mediator.subscribe('init:map', self.init_app, self);
+        Backbone.mediator.subscribe('navigate:router', self.router.on_navigate, self);
         
-        console.log('app.js: init routing')
+        // event for manual initialization (non-fullscreen view)
+        Backbone.mediator.subscribe('init:app', self.init_app, self);
+        Backbone.mediator.subscribe('init:map-standalone', function(){alert('app.js: tried to init map-standalone but found no handlers')}, self);
+        Backbone.mediator.subscribe('init:map', function(){alert('app.js: tried to init "map" but this is no longer supported')}, self);
+        
+        util.log('app.js: init routing')
         // Start routing...
         Backbone.history.start({
             pushState: true
@@ -58,28 +63,21 @@ var App = function App () {
         
         Backbone.mediator.publish('init:client');
         
-        console.log('app.js: finish start()')
+        util.log('app.js: finish start()')
         return self;
     };
 
     self.initMediator = function () {
         self.mediator = Backbone.mediator = mediator;
         self.mediator.settings = window.settings || {};
-        self.mediator.subscribe('navigate:router', function (event, url) {
-            if (url) {
-                self.router.navigate(url, {
-                    trigger: false
-                });
-            }
-        });
     };
     
     self.navigate_map = function (event) {
     	if (self.controlView == null) {
     		self.auto_init_app();
+    	} else {
+    		Backbone.mediator.publish('app:stale-results', {reason: 'map-navigate'});
     	}
-    	self.initialSearch();
-    	
     };
     
     /** Called when the App is auto-initied on a fullscreen page with no further parameters
@@ -97,7 +95,7 @@ var App = function App () {
     /** This is called from the event init:app and is used to initialize the non-fullscreen app
      * 	after page load (when no navigation occurs) */
     self.init_app = function (event, params) {
-    	console.log('app.js: init_map called')
+    	util.log('app.js: init_map called')
     	/* params contains:
     	 * - el: DOM element
     	 * - settings: JSON config dict
@@ -111,7 +109,7 @@ var App = function App () {
         var markerIcons = typeof COSINNUS_MAP_MARKER_ICONS !== 'undefined' ? COSINNUS_MAP_MARKER_ICONS : {};
         
         // TODO: remove!
-        console.log('TODO: at end of refactor remove thisss check for markerIcons and TopicsHtml!')
+        util.log('TODO: at end of refactor remove thisss check for markerIcons and TopicsHtml!')
         if (!topicsHtml) {alert('no topicsHtml!')}
         if (!markerIcons) {alert('no markerIcons!')}
         
@@ -134,14 +132,13 @@ var App = function App () {
         }, self);
         self.contentViews.push(self.controlView);
         
-        console.log('app.js: TODO: really do this if check for controlsEnabled?')
-        console.log(self.displayOptions)
+        util.log('app.js: TODO: really do this if check for controlsEnabled?')
+        util.log(self.displayOptions)
         
         if (self.displayOptions.showControls) {
-        	console.log('app.js: actually rendering controls')
+        	util.log('app.js: actually rendering controls')
         	self.controlView.render();
         }
-        
         
         var mapView = new MapView({
         	el: params.el,
@@ -152,10 +149,6 @@ var App = function App () {
         }).render();
         self.contentViews.push(mapView);
         
-        // TODO: should these be here???
-        Backbone.mediator.publish('change:bounds');
-        Backbone.mediator.publish('change:controls');
-
         Backbone.mediator.publish('app:ready');
     };
     

@@ -81,11 +81,11 @@ module.exports = ContentControlView.extend({
 	        // the current open spider cluster handle, or null if no spider open
 	        currentSpiderfied: null,
 	        
-	        // TODO: somewhere we need to set fallback defaults when navigated without loc params!!
-	        north: null, 
-	        east: null,
-	        south: null,
-	        west: null,
+	        // fallback default coordinates when navigated without loc params
+	        north: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES.ne_lat, 55.78), 
+	        east: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES.ne_lon, 23.02),
+	        south: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES.sw_lat, 49.00),
+	        west: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES.sw_lon, 3.80),
 	    }
     },
     
@@ -105,6 +105,13 @@ module.exports = ContentControlView.extend({
         self.state.currentlyClustering = self.options.clusteringEnabled;
     },
 
+    render: function () {
+    	var self = this;
+        ContentControlView.prototype.render.call(self);
+    	self.renderMap();
+    	return self;
+    },
+    
     afterRender: function () {
         var self = this;
         self.mapLayerButtonsView = new MapLayerButtonsView({
@@ -112,12 +119,12 @@ module.exports = ContentControlView.extend({
         	layer: self.options.layer,
         	mapView: self
         }).render();
-        self.renderMap();
     },
     
     // extended from content-control-view.js
     initializeSearchParameters: function (urlParams) {
-    	console.log('map-view.js: url params on init: ' + urlParams)
+    	util.log('map-view.js: url params on init: ')
+    	util.log(urlParams)
         _.extend(this.state, {
             north: util.ifundef(urlParams.ne_lat, this.state.north),
             east: util.ifundef(urlParams.ne_lon, this.state.east),
@@ -127,15 +134,18 @@ module.exports = ContentControlView.extend({
     },
     
     // extended from content-control-view.js
-    contributeToSearchParameters: function() {
-    	console.log('TODO: completely ignoring coordinate padding rn!')
-    	var padded = false;
+    contributeToSearchParameters: function(forAPI) {
+    	var padded = forAPI;
+    	util.log('==================')
+    	util.log(this.state)
         var searchParams = {
             ne_lat: padded ? this.state.paddedNorth : this.state.north,
             ne_lon: padded ? this.state.paddedEast : this.state.east,
             sw_lat: padded ? this.state.paddedSouth : this.state.south,
             sw_lon: padded ? this.state.paddedWest : this.state.west,
         };
+        util.log('map-view.js: returning search params:')
+        util.log(searchParams)
     	return searchParams
     },
 
@@ -143,6 +153,8 @@ module.exports = ContentControlView.extend({
     // -------
 
     renderMap: function () {
+    	util.log('++++++ map-view.js renderMap called! This should only happen once at init! +++++++++++++++++++')
+    	
         this.markers = [];
         this.leaflet = L.map('map-container')
             .setView(this.options.location, this.options.zoom);
@@ -157,6 +169,8 @@ module.exports = ContentControlView.extend({
         	this.leaflet.addLayer(this.clusteredMarkers);
         	this.setClusterState();
         }
+        
+        this.fitBounds();
 
         this.leaflet.on('zoomend', this.handleViewportChange, this);
         this.leaflet.on('dragend', this.handleViewportChange, this);
@@ -190,7 +204,12 @@ module.exports = ContentControlView.extend({
     updateBounds: function () {
         var bounds = this.leaflet.getBounds()
         var paddedBounds = bounds.pad(this.options.latLngBuffer);
-        this.model.set({
+        util.log('#################################')
+        util.log(this.options.latLngBuffer)
+        util.log(paddedBounds)
+        util.log(bounds.getSouth())
+        util.log(paddedBounds.getSouth())
+        _.extend(this.state, {
             south: bounds.getSouth(),
             paddedSouth: paddedBounds.getSouth(),
             west: bounds.getWest(),
@@ -200,6 +219,7 @@ module.exports = ContentControlView.extend({
             east: bounds.getEast(),
             paddedEast: paddedBounds.getEast()
         });
+        util.log(this.state)
     },
 
     addMarker: function (result, resultType) {
@@ -243,7 +263,7 @@ module.exports = ContentControlView.extend({
     },
 
     setClusterState: function () {
-    	if (self.options.clusteringEnabled) {
+    	if (this.options.clusteringEnabled) {
     		// Set clustering state: cluster only when zoomed in enough.
     		var zoom = this.leaflet.getZoom();
     		this.state.currentlyClustering = zoom > this.options.clusterZoomThreshold;
@@ -315,15 +335,20 @@ module.exports = ContentControlView.extend({
     handleViewportChange: function () {
         this.setClusterState();
         this.updateBounds();
-        this.model.attemptSearch();
+        Backbone.mediator.publish('app:stale-results', {reason: 'viewport-changed'});
     },
 
     // Handle change bounds (from URL).
     fitBounds: function () {
-        this.leaflet.fitBounds(L.latLngBounds(
-            L.latLng(this.state.south, this.state.west),
-            L.latLng(this.state.north, this.state.east)
-        ));
+    	if (this.leaflet) {
+    		util.log('map-view.js: fitBounds called')
+    		this.leaflet.fitBounds(L.latLngBounds(
+    				L.latLng(this.state.south, this.state.west),
+    				L.latLng(this.state.north, this.state.east)
+    		));
+    	} else {
+    		util.log('map-view.js: fitBounds fizzled')
+    	}
     },
 
     handlePopup: function (event) {

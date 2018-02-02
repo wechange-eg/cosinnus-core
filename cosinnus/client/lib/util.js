@@ -32,6 +32,13 @@ module.exports = {
     /** Returns a if it is defined, else b */
     ifundef: function(a, b) {
         return typeof a == "undefined" ? b : a;
+    },
+    
+    log: function(obj) {
+    	// TODO: determine test/prod environment!
+    	if (true) {
+    		console.log(obj);
+    	}
     }
     
 };

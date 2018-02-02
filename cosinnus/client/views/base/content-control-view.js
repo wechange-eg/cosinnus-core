@@ -26,12 +26,15 @@ module.exports = BaseView.extend({
     
     /** Add all relevant search parameters to the search API query for your view.
      *  Anything happening in your view that affects the search should be involved here.
-     *  @return: dict of params */
-    contributeToSearchParameters: function() {
+     *  
+     *  @param forAPI: if true, contains all search parameters.
+     * 		if false, contains only these that should be visible in the browser URL 
+     *  @return: dict of params 
+     */
+    contributeToSearchParameters: function(forAPI) {
     	// stub, extend this in the inheriting view
     	return {}
     },
-    
     
     
     // private

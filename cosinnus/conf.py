@@ -365,6 +365,14 @@ class CosinnusConf(AppConf):
     """
     MAP_MARKER_ICONS = {}
     
+    # Default starting map coordinates if no coordinates have been specified
+    MAP_DEFAULT_COORDINATES = {
+        'ne_lat': 52.65, # north,
+        'ne_lon': 13.69, # east,
+        'sw_lat': 52.43, # south,
+        'sw_lon': 13.09, # west,
+    }
+    
     # switch to set if Microsites should be enabled.
     # this can be override for each portal to either activate or deactivate them
     MICROSITES_ENABLED = False

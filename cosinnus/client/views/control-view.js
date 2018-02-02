@@ -58,9 +58,10 @@ module.exports = ContentControlView.extend({
     	Backbone.mediator.subscribe('end:search', self.handleEndSearch, self);
     	Backbone.mediator.subscribe('change:controls', self.render, self);
     	Backbone.mediator.subscribe('error:search', self.handleXhrError, self);
-    	Backbone.mediator.subscribe('app:ready', self.fhandleAppReady, self);
+    	Backbone.mediator.subscribe('app:ready', self.handleAppReady, self);
+    	Backbone.mediator.subscribe('app:stale-results', self.handleStaleResults, self);
     	
-    	console.log('control-view.js: initialized. with self.App=' + self.App)
+    	util.log('control-view.js: initialized. with self.App=' + self.App)
     	
 
         if (self.state.activeTopicIds) {
@@ -119,7 +120,7 @@ module.exports = ContentControlView.extend({
         var query = $(event.currentTarget).val();
         if (query.length > 2 || query.length === 0) {
             this.state.q = query;
-            this.attemptSearch();
+            this.triggerDelayedSearch();
         }
     },
     
@@ -153,14 +154,31 @@ module.exports = ContentControlView.extend({
         $message.show();
     },
     
+    /** Called when the App is fully loaded for the first time.
+     * 	WARNING: Due to the threaded after_render() method, this may
+     * 		currently actually happen before a full load.
+     *  */
     handleAppReady: function (event) {
-    	alert('control-view.js: app is ready to search!!! but not doing anything rn')
-    	
-    	return;
-
-        this.search();
+    	util.log('control-view.js: app is ready to search. starting this.search()!')
+    	this.search();
     },
     
+    /**
+     * The context can contain `reason` for a signal for out-of-date result sets:
+     * - viewport-changed: The map was scrolled or window was resized
+     * - map-navigate: Router navigate on the map (not called during initial navigation)
+     * - ...
+     */
+    handleStaleResults: function (context) {
+    	if (context.reason == 'viewport-changed') {
+    		util.log('control-view.js: Received signal for stale results bc of viewport change, but doing nothing rn')
+    	} else if (context.reason == 'viewport-changed') {
+    		util.log('control-view.js: Received signal for stale results bc of map-navigate, but doing nothing rn')
+    	}
+    	// this.triggerDelayedSearch();
+    	// or
+    	// this.search();
+    },
 
     afterRender: function () {
         // update topics selector with current topics
@@ -182,16 +200,17 @@ module.exports = ContentControlView.extend({
             // (The search endpoint is single-thread).
             // If there is a queued search, requeue it.
             if (self.state.wantsToSearch) {
-                self.attemptSearch();
+                self.triggerDelayedSearch();
             // Update the results if there isn't a queued search.
             } else {
+            	// Save the search state in the url.
+            	if (App.displayOptions.fullscreen) {
+            		util.log('control-view.js: +++++++++++++++++ since we are fullscreen, publishing router URL update!')
+            		Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, self.options.basePageURL))
+            	}
             	alert('control-view.js: TODO: we got the results back! put them in a collection and implement all the "change:results" subscribers!')
                 self.set('results', res);
                 Backbone.mediator.publish('change:results');
-                // Save the search state in the url.
-                if (App.displayOptions.fullscreen) {
-                    Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, self.options.basePageURL))
-                }
             }
         }).fail(function () {
             self.state.searching = false;
@@ -213,32 +232,45 @@ module.exports = ContentControlView.extend({
             searchResultLimit: util.ifundef(urlParams.limits, this.state.searchResultLimit),
             activeTopicIds: util.ifundef(urlParams.topics, this.state.activeTopicIds)
         });
-        console.log('TODO: we need to remove the "limit" param from the router URL, but not from the API call URL!')
+        util.log('TODO: we need to remove the "limit" param from the router URL, but not from the API call URL!')
     },
     
     // extended from content-control-view.js
-    contributeToSearchParameters: function() {
+    contributeToSearchParameters: function(forAPI) {
         var searchParams = {
             q: this.state.q,
             people: this.state.activeFilters.people,
             events: this.state.activeFilters.events,
             projects: this.state.activeFilters.projects,
             groups: this.state.activeFilters.groups,
-            limit: this.state.searchResultLimit
         };
         if (this.state.activeTopicIds) {
         	_.extend(searchParams, {
         		topics: this.state.activeTopicIds.join(',')
         	});
         }
+        if (forAPI) {
+        	_.extend(searchParams, {
+        		limit: this.state.searchResultLimit
+        	});
+        }
+        
+        util.log('control-view.js: returning search params:')
+        util.log(searchParams)
     	return searchParams
     },
     
-    buildSearchQueryURL: function (padded) {
+    /**
+     * Build the URL containing all parameters for the current view
+     * 
+     * @param forAPI: if true, contains all search parameters.
+     * 		if false, contains only these that should be visible in the browser URL 
+     */
+    buildSearchQueryURL: function (forAPI) {
     	// collect all search parameters from content views that affect them
     	var searchParams = {};
     	_.each(this.App.contentViews, function(view){
-    		_.extend(searchParams, view.contributeToSearchParameters());
+    		_.extend(searchParams, view.contributeToSearchParameters(forAPI));
     	});
         var query = $.param(searchParams);
         
@@ -246,19 +278,23 @@ module.exports = ContentControlView.extend({
         if (this.options.filterGroup) {
             url = url + this.options.filterGroup + '/';
         }
-        return url + '?' + query;
+        url = url + '?' + query
+        
+        util.log(' ************  BUILD SEARCH QUERY URL RETURNED (*** ' + forAPI)
+        util.log(url)
+        return url;
     },
 
     toggleFilter: function (resultType) {
         var activeFilters = this.state.activeFilters;
         activeFilters[resultType] = !activeFilters[resultType];
         this.state.activeFilters = activeFilters;
-        this.attemptSearch();
+        this.triggerDelayedSearch();
     },
 
     resetFilters: function () {
         this.state.activeFilters = _(this.options.availableFilters).clone();
-        this.attemptSearch();
+        this.triggerDelayedSearch();
     },
     
     showTopics: function () {
@@ -267,15 +303,15 @@ module.exports = ContentControlView.extend({
     
     toggleTopicFilter: function (topic_ids) {
         this.state.activeTopicIds = topic_ids;
-        this.attemptSearch();
+        this.triggerDelayedSearch();
     },
 
     // Register a change in the controls or the map UI which should queue
-    // a search attempt.
-    attemptSearch: function () {
+    // a search attempt after a delay.
+    triggerDelayedSearch: function () {
         var self = this;
             // Increase the search delay when a search is in progress.
-        var delay = self.get('searching') ?
+        var delay = self.state.searching ?
                 self.whileSearchingDelay : self.searchDelay;
         clearTimeout(this.searchTimeout);
         self.state.wantsToSearch = true;

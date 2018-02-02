@@ -39,7 +39,7 @@ module.exports = BaseView.extend({
             this.mapView.options.layer = layer;
             this.state.layer = layer;
             // TODO: is layer arriving in the template?
-            console.log('map-layer-buttons-view.js: TODO: is layer arriving in the template?')
+            util.log('map-layer-buttons-view.js: TODO: is layer arriving in the template?')
             this.render();
             Backbone.mediator.publish('change:layer', layer);
         }
