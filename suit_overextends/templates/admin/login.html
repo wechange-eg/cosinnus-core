@@ -1,0 +1,6 @@
+{% overextends 'admin/login.html' %}
+
+{% block content %}
+    {% include 'cosinnus/messages.html' %}
+{{ block.super }}
+{% endblock content %}

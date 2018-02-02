@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-18 15:27+0100\n"
+"POT-Creation-Date: 2018-01-31 18:20+0100\n"
 "PO-Revision-Date: 2017-12-07 16:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -105,6 +105,10 @@ msgstr "Эта группа/этот проект больше не находи
 
 msgid "This account is no longer active. You have been logged out."
 msgstr "Вы были выведены из системы, так как Ваш аккаунт неактивен."
+
+#, python-format
+msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
+msgstr ""
 
 msgid "A user requested to become a member of this team (admins only)"
 msgstr "Новый пользователь отправил запрос на членство в этой группе (только для админов)"
@@ -1271,6 +1275,12 @@ msgstr "Администратор группы"
 #| msgid "Delete profile"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
+msgstr "Удалить профиль"
+
+#, fuzzy
+#| msgid "Delete profile"
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_51_objectprivacy"
 msgstr "Удалить профиль"
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
@@ -2987,11 +2997,6 @@ msgstr "Профиль пользователя: %(username)s"
 msgid "My Website"
 msgstr "Мой сайт"
 
-#, fuzzy
-#| msgid "My Projects"
-msgid "My Groups and Projects"
-msgstr "Мои проекты"
-
 msgid "Edit Your Profile"
 msgstr "Редактировать Ваш профиль"
 
@@ -3616,6 +3621,11 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
+
+#, fuzzy
+#~| msgid "My Projects"
+#~ msgid "My Groups and Projects"
+#~ msgstr "Мои проекты"
 
 #~ msgid "This message will never reappear when you remove it."
 #~ msgstr "Если Вы удалите это сообщение, оно больше не появится."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-18 15:27+0100\n"
+"POT-Creation-Date: 2018-01-31 18:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,6 +104,10 @@ msgid "This team no longer resides under the URL you entered. You have been redi
 msgstr ""
 
 msgid "This account is no longer active. You have been logged out."
+msgstr ""
+
+#, python-format
+msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
 msgstr ""
 
 msgid "A user requested to become a member of this team (admins only)"
@@ -1250,6 +1254,10 @@ msgstr ""
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
+msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_51_objectprivacy"
 msgstr ""
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
@@ -2777,9 +2785,6 @@ msgid "User profile: %(username)s"
 msgstr ""
 
 msgid "My Website"
-msgstr ""
-
-msgid "My Groups and Projects"
 msgstr ""
 
 msgid "Edit Your Profile"

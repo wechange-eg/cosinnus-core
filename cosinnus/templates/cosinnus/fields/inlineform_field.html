@@ -3,10 +3,11 @@
 {% captureas inlineform_html %}
     {% with formset=inline_form %}
         {{ formset.management_form }}
+        
         {% for inlineform in formset %}
             {# if inlineform.data // pre-existing? #}
             {# formset.management_form.initial.MIN_NUM_FORMS': 0, u'MAX_NUM_FORMS': 5, u'TOTAL_FORMS': 5, u'INITIAL_FORMS': 0 #}
-            <div id="{{ unique_id }}-wrapper-{{ forloop.counter0 }}" {% if not forloop.counter == 1 and not forloop.counter <= formset.management_form.INITIAL_FORMS.value %}style="display: none;"{% endif %}>
+            <div id="{{ unique_id }}-wrapper-{{ forloop.counter0 }}" {% if not forloop.counter == 1 and not forloop.counter <= formset.management_form.INITIAL_FORMS.value|intify %}style="display: none;"{% endif %}>
                 
                 <div class="cosinnus-field-input">
                     {% include content_template with inlineform=inlineform %}
@@ -30,7 +31,7 @@
                         </ul>
                     </div>
                     
-                    {% if forloop.counter >= formset.management_form.INITIAL_FORMS.value and forloop.counter < formset.management_form.MAX_NUM_FORMS.value %}
+                    {% if forloop.counter >= formset.management_form.INITIAL_FORMS.value|intify and forloop.counter < formset.management_form.MAX_NUM_FORMS.value|intify %}
                         <div id="{{ unique_id }}-more-{{ forloop.counter0 }}">
                         
                             <div class="btn btn-emphasized btn-small btn-no-float regular-space" onclick="$('#{{ unique_id }}-more-{{ forloop.counter0 }}').hide(); $('#{{ unique_id }}-wrapper-{{ forloop.counter }}').show(); return false;">

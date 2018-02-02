@@ -93,11 +93,12 @@ MIDDLEWARE_CLASSES = (
     'wagtail.wagtailcore.middleware.SiteMiddleware',
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
     
-    'cosinnus.core.middleware.StartupMiddleware',
-    'cosinnus.core.middleware.ForceInactiveUserLogoutMiddleware',
-    'cosinnus.core.middleware.ConditionalRedirectMiddleware',
-    'cosinnus.core.middleware.AddRequestToModelSaveMiddleware',
-    'cosinnus.core.middleware.GroupPermanentRedirectMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.StartupMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.ForceInactiveUserLogoutMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.ConditionalRedirectMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.AddRequestToModelSaveMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.GroupPermanentRedirectMiddleware',
+    'cosinnus.core.middleware.login_ratelimit_middleware.LoginRateLimitMiddleware',
 )
 
 
@@ -150,6 +151,7 @@ def compile_installed_apps(internal_apps=[]):
         'django.contrib.sites',
         'django.contrib.staticfiles',
         'django.contrib.webdesign',
+        'suit_overextends',
         'suit',
         'django.contrib.admin',
         'sekizai',
@@ -408,6 +410,14 @@ COSINNUS_MICROSITES_ENABLED = True
 #COSINNUS_MICROSITE_DISPLAYED_APP_OBJECTS = [...] 
 # Navbar display in the apps menu
 #COSINNUS_HIDE_APPS = [(...)]
+
+# LOGIN Rate limiting settings:
+LOGIN_RATELIMIT_USERNAME_FIELD = 'email'
+LOGIN_RATELIMIT_LOGIN_URLS = {
+    '/admin/login/': 'username',
+    '/login/': 'username',
+}
+LOGIN_RATELIMIT_LOGGER_NAME = 'cosinnus'
 
 
 """ -----------  This app's cosinnus-related custom settings  ----------- """
