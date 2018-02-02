@@ -204,7 +204,7 @@ module.exports = ContentControlView.extend({
             // Update the results if there isn't a queued search.
             } else {
             	// Save the search state in the url.
-            	if (App.displayOptions.fullscreen) {
+            	if (App.displayOptions.routeNavigation) {
             		util.log('control-view.js: +++++++++++++++++ since we are fullscreen, publishing router URL update!')
             		Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, self.options.basePageURL))
             	}
@@ -280,7 +280,7 @@ module.exports = ContentControlView.extend({
         }
         url = url + '?' + query
         
-        util.log(' ************  BUILD SEARCH QUERY URL RETURNED (*** ' + forAPI)
+        util.log(' ************  BUILD SEARCH QUERY URL RETURNED (forAPI): ' + forAPI)
         util.log(url)
         return url;
     },

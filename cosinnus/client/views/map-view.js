@@ -44,6 +44,8 @@ module.exports = ContentControlView.extend({
     
     // will be set to self.options during initialization
     defaults: {
+    	fullscreen: true,
+    	
     	// shall we cluster close markers together
     	clusteringEnabled: false,
     	clusterZoomThreshold: 5,
@@ -59,9 +61,9 @@ module.exports = ContentControlView.extend({
     	
     	resultColours: {
     		people: 'red',
-    		events: 'yellow',
-    		projects: 'green',
-    		groups: 'blue'
+    		events: 'green',
+    		projects: 'blue',
+    		groups: 'yellow'
     	},
     	
         zoom: 7,
@@ -82,10 +84,10 @@ module.exports = ContentControlView.extend({
 	        currentSpiderfied: null,
 	        
 	        // fallback default coordinates when navigated without loc params
-	        north: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES.ne_lat, 55.78), 
-	        east: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES.ne_lon, 23.02),
-	        south: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES.sw_lat, 49.00),
-	        west: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES.sw_lon, 3.80),
+	        north: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES && COSINNUS_MAP_DEFAULT_COORDINATES.ne_lat, 55.78), 
+	        east: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES && COSINNUS_MAP_DEFAULT_COORDINATES.ne_lon, 23.02),
+	        south: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES && COSINNUS_MAP_DEFAULT_COORDINATES.sw_lat, 49.00),
+	        west: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES && COSINNUS_MAP_DEFAULT_COORDINATES.sw_lon, 3.80),
 	    }
     },
     
@@ -136,16 +138,12 @@ module.exports = ContentControlView.extend({
     // extended from content-control-view.js
     contributeToSearchParameters: function(forAPI) {
     	var padded = forAPI;
-    	util.log('==================')
-    	util.log(this.state)
         var searchParams = {
             ne_lat: padded ? this.state.paddedNorth : this.state.north,
             ne_lon: padded ? this.state.paddedEast : this.state.east,
             sw_lat: padded ? this.state.paddedSouth : this.state.south,
             sw_lon: padded ? this.state.paddedWest : this.state.west,
         };
-        util.log('map-view.js: returning search params:')
-        util.log(searchParams)
     	return searchParams
     },
 
@@ -204,11 +202,6 @@ module.exports = ContentControlView.extend({
     updateBounds: function () {
         var bounds = this.leaflet.getBounds()
         var paddedBounds = bounds.pad(this.options.latLngBuffer);
-        util.log('#################################')
-        util.log(this.options.latLngBuffer)
-        util.log(paddedBounds)
-        util.log(bounds.getSouth())
-        util.log(paddedBounds.getSouth())
         _.extend(this.state, {
             south: bounds.getSouth(),
             paddedSouth: paddedBounds.getSouth(),

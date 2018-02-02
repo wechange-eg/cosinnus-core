@@ -1,5 +1,7 @@
 'use strict';
 
+var util = require('lib/util.js');
+
 module.exports = Backbone.View.extend({
 	
 	/**
@@ -41,13 +43,19 @@ module.exports = Backbone.View.extend({
         return this;
     },
 
-    // Default implementation to retrieve data to be rendered.
-    // If a model is set, return its attributes as JSON, otherwise
-    // an empty object with any state attributes on the view mixed in.
+    /**
+     *  Default implementation to retrieve data to be rendered.
+     *  If a model is set, return its attributes as JSON, otherwise
+     *  an empty object with any options and state attributes on the 
+     *  view mixed in.
+     */
     getTemplateData: function () {
         var modelData = this.model && this.model.toJSON() || {};
-        var data = _(modelData).extend(this.state);
-        data.options = this.options;
+        var data = _.extend(
+    		modelData,
+    		this.options,
+    		this.state
+    	);
         return data;
     }
 });

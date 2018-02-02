@@ -52,7 +52,6 @@
 	    <div class="content-box">
 	    	{% include 'cosinnus/common/internet_explorer_not_supported.html' %}
 	    
-			<div class="map-root"></div>
 			{% captureas map_settings %}{"activeFilters": {"groups": {% if group_type == 1 %}true{% else %}false{% endif %}, "events": false, "projects": {% if group_type == 1 %}false{% else %}true{% endif %}, "people": false}, "availableFilters": {"groups": true, "events": true, "projects": true, "people": true}}{% endcaptureas %}
 			{% include 'cosinnus/common/init_client_module.html' with module='map-standalone' id=""|add_uuid height=400 settings=map_settings %}
 	        <div class="clearfix"></div>

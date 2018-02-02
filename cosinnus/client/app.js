@@ -30,7 +30,8 @@ var App = function App () {
 		showMap: true,
 		showTiles: true,
 		showControls: true,
-		fullscreen: true
+		fullscreen: true,
+		routeNavigation: true
 	};
     self.displayOptions = {}
     
@@ -60,8 +61,10 @@ var App = function App () {
             Backbone.mediator.publish('resize:window');
         });
         
-        
+        // we trigger both on the mediator and on html, in case scripts loaded earlier than this
+        // have already subsribed on 'html'
         Backbone.mediator.publish('init:client');
+        $('html').trigger('init:client');
         
         util.log('app.js: finish start()')
         return self;
@@ -74,7 +77,7 @@ var App = function App () {
     
     self.navigate_map = function (event) {
     	if (self.controlView == null) {
-    		self.auto_init_app();
+    		self.init_default_app();
     	} else {
     		Backbone.mediator.publish('app:stale-results', {reason: 'map-navigate'});
     	}
@@ -83,19 +86,20 @@ var App = function App () {
     /** Called when the App is auto-initied on a fullscreen page with no further parameters
      *  (triggered by navigation). 
      *  Uses mostly default settings self.defaultSettings and self.defaultDisplay */
-    self.auto_init_app = function () {
+    self.init_default_app = function () {
     	// add defaults into params
     	var params = {
     		el: '#app-fullscreen',
     		display: self.defaulDisplayOptions
     	}
-    	self.init_app(null, params);
+    	self.init_app(params);
     };
     
     /** This is called from the event init:app and is used to initialize the non-fullscreen app
      * 	after page load (when no navigation occurs) */
-    self.init_app = function (event, params) {
-    	util.log('app.js: init_map called')
+    self.init_app = function (params) {
+    	util.log('app.js: init_app called with event, params')
+    	
     	/* params contains:
     	 * - el: DOM element
     	 * - settings: JSON config dict

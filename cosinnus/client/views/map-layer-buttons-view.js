@@ -5,7 +5,7 @@ var util = require('lib/util.js');
 
 module.exports = BaseView.extend({
 	
-	template: require('map/map-layers'),
+	template: require('map/map-layer-buttons'),
 	
 	mapView: null,
 	
@@ -38,8 +38,6 @@ module.exports = BaseView.extend({
         if (this.mapView.options.layer !== layer) {
             this.mapView.options.layer = layer;
             this.state.layer = layer;
-            // TODO: is layer arriving in the template?
-            util.log('map-layer-buttons-view.js: TODO: is layer arriving in the template?')
             this.render();
             Backbone.mediator.publish('change:layer', layer);
         }
