@@ -58,7 +58,20 @@ try:
     })
 except:
     Event = None
-    
+
+SHORTENED_ID_MAP = {
+    'cosinnus.cosinnusproject': 1,
+    'cosinnus.cosinnussociety': 2,
+    'cosinnus.userprofile': 3,
+    'cosinnus_event.event': 4,
+}
+
+def _shorten_haystack_id(long_id):
+    """ Shortens ids by replacing the <module.model> part of the id with a number. 
+        Example: long_id 'cosinnus.userprofile.2' --> '3.2' """
+    modulemodel, pk = long_id.rsplit('.', 1)
+    short_id = '%d.%s' % (SHORTENED_ID_MAP[modulemodel], pk)
+    return short_id
 
 def _better_json_loads(s):
     """ Can pass pure string values and None through without exception """
@@ -88,7 +101,9 @@ def _collect_parameters(param_dict, parameter_list):
 class MapResult(dict):
     """ A single result for the search of the map, enforcing required fields """
 
-    def __init__(self, lat, lon, address, title, url=None, imageUrl=None, description=None, *args, **kwargs):
+    def __init__(self, short_id, result_type, lat, lon, address, title, url=None, imageUrl=None, description=None, *args, **kwargs):
+        self['id'] = short_id
+        self['type'] = result_type
         self['lat'] = lat
         self['lon'] = lon
         self['address'] = address
@@ -105,6 +120,8 @@ class HaystackMapResult(MapResult):
 
     def __init__(self, result, *args, **kwargs):
         return super(HaystackMapResult, self).__init__(
+            _shorten_haystack_id(result.id),
+            SEARCH_MODEL_NAMES[result.model],
             result.mt_location_lat,
             result.mt_location_lon,
             result.mt_location,
@@ -114,16 +131,6 @@ class HaystackMapResult(MapResult):
             result.description,
         )
 
-
-class MapSearchResults(dict):
-    """ The return of a map search, containing lists of ``MapResult``, enforcing required sets of results """
-
-    def __init__(self, people=[], events=[], projects=[], groups=[], *args, **kwargs):
-        self['people'] = people
-        self['events'] = events
-        self['projects'] = projects
-        self['groups'] = groups
-        return super(MapSearchResults, self).__init__(*args, **kwargs)
 
 
 def map_search_endpoint(request, filter_group_id=None):
@@ -168,10 +175,10 @@ def map_search_endpoint(request, filter_group_id=None):
         
     # sort results into one list per model
     sqs = sqs[:limit]
-    results = collections.defaultdict(list)
+    results = []
     for result in sqs:
-        results[SEARCH_MODEL_NAMES[result.model]].append(HaystackMapResult(result))
+        results.append(HaystackMapResult(result))
     
-    data = MapSearchResults(**results)
+    data = {'results': results}
     return JsonResponse(data)
 

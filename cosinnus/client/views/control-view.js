@@ -2,11 +2,13 @@
 
 var ContentControlView = require('views/base/content-control-view');
 var ErrorView = require('views/error-view');
+
+var ResultCollection = require('collections/result-collection');
+var Result = require('models/result');
+
 var util = require('lib/util.js');
 
 module.exports = ContentControlView.extend({
-	
-	App: null,
 	
 	template: require('map/map-controls'),
 	
@@ -44,16 +46,19 @@ module.exports = ContentControlView.extend({
     },
     
     searchEndpointURL: '/maps/search/',
-    searchDelay: 400,
+    searchDelay: 600,
     whileSearchingDelay: 5000,
 	
     
-    initialize: function (options, app) {
+    initialize: function (options, app, collection) {
     	var self = this;
     	// this calls self.initializeSearchParameters()
-    	ContentControlView.prototype.initialize.call(self, options);
+    	ContentControlView.prototype.initialize.call(self, options, app, collection);
     	
-    	self.App = app;
+    	if (!self.collection) {
+    		self.collection = new ResultCollection();
+    	}
+    	
     	Backbone.mediator.subscribe('want:search', self.handleStartSearch, self);
     	Backbone.mediator.subscribe('end:search', self.handleEndSearch, self);
     	Backbone.mediator.subscribe('change:controls', self.render, self);
@@ -171,13 +176,62 @@ module.exports = ContentControlView.extend({
      */
     handleStaleResults: function (context) {
     	if (context.reason == 'viewport-changed') {
-    		util.log('control-view.js: Received signal for stale results bc of viewport change, but doing nothing rn')
-    	} else if (context.reason == 'viewport-changed') {
-    		util.log('control-view.js: Received signal for stale results bc of map-navigate, but doing nothing rn')
+    		util.log('*** control-view.js: Received signal for stale results bc of viewport change, and triggering a delayed search')
+    		this.triggerDelayedSearch(true);
+    	} else if (context.reason == 'map-navigate') {
+    		util.log('*** control-view.js: Received signal for stale results bc of map-navigate, but doing nothing rn')
     	}
     	// this.triggerDelayedSearch();
     	// or
     	// this.search();
+    },
+    
+    // called with a list of dicts of results freshly returned after a search
+    processSearchResults: function (jsonResultList) {
+    	var self = this;
+    	
+    	var resultModels = [];
+    	_.each(jsonResultList, function(res){
+    		resultModels.push(new Result(res));
+    	});
+    	
+    	// TODO: take the current selected model and check if it is in the new result list
+    	// if not: add it to it, with selected=true!
+    	util.log('control-view.js:processSearchResults: check that the currently selected object is kept in the collection!')
+    	
+    	self.collection.set(resultModels);
+    	util.log('control-view.js: got the results back and updated the collection!')
+    	util.log(self.collection.toJSON());
+    	
+    	
+    	util.log('control-view.js: implement all the "change:results" subscribers!')
+    	
+    	/**
+    	 * Merges existing models and updates them.
+    	 * Calls 'add'/'change'/'remove'!
+    	 * 
+    	 * TodosCollection.set([
+			    { id: 1, title: 'go to Jamaica.', completed: true },
+			    { id: 2, title: 'go to China.', completed: false },
+			    { id: 4, title: 'go to Disney World.', completed: false }
+			]);
+    	 * 
+    	 */
+    	
+    	/**
+    	 * Does NOT call add/change/remove!
+    	 * Calls 'reset' signal!
+    	 * options.previousModels is the removed set!
+    	 * 
+    	 * var todo = new Backbone.Model();
+			var todos = new Backbone.Collection([todo])
+			.on('reset', function(todos, options) {
+			  console.log(options.previousModels);
+			  console.log([todo]);
+			  console.log(options.previousModels[0] === todo); // true
+			});
+			todos.reset([]);
+    	 */
     },
 
     afterRender: function () {
@@ -194,12 +248,15 @@ module.exports = ContentControlView.extend({
         var url = self.buildSearchQueryURL(true);
         
         self.state.searching = true;
-        $.get(url, function (res) {
+        $.get(url, function (data) {
             self.state.searching = false;
             Backbone.mediator.publish('end:search');
+            
+            
             // (The search endpoint is single-thread).
             // If there is a queued search, requeue it.
             if (self.state.wantsToSearch) {
+            	// TODO: Check if we want this! This behaviour may cause long wait times!
                 self.triggerDelayedSearch();
             // Update the results if there isn't a queued search.
             } else {
@@ -208,9 +265,8 @@ module.exports = ContentControlView.extend({
             		util.log('control-view.js: +++++++++++++++++ since we are fullscreen, publishing router URL update!')
             		Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, self.options.basePageURL))
             	}
-            	alert('control-view.js: TODO: we got the results back! put them in a collection and implement all the "change:results" subscribers!')
-                self.set('results', res);
-                Backbone.mediator.publish('change:results');
+            	var results = data.results;
+            	self.processSearchResults(results);
             }
         }).fail(function () {
             self.state.searching = false;
@@ -232,7 +288,6 @@ module.exports = ContentControlView.extend({
             searchResultLimit: util.ifundef(urlParams.limits, this.state.searchResultLimit),
             activeTopicIds: util.ifundef(urlParams.topics, this.state.activeTopicIds)
         });
-        util.log('TODO: we need to remove the "limit" param from the router URL, but not from the API call URL!')
     },
     
     // extended from content-control-view.js
@@ -308,11 +363,17 @@ module.exports = ContentControlView.extend({
 
     // Register a change in the controls or the map UI which should queue
     // a search attempt after a delay.
-    triggerDelayedSearch: function () {
+    triggerDelayedSearch: function (fireImmediatelyIfPossible) {
         var self = this;
             // Increase the search delay when a search is in progress.
         var delay = self.state.searching ?
                 self.whileSearchingDelay : self.searchDelay;
+        
+        if (fireImmediatelyIfPossible) {
+        	console.log('WHHHAHSASHASHHEHEHEE')
+        } else {
+        	console.log('NNNNNNNNNNNNNNNNNNNO')
+        }
         clearTimeout(this.searchTimeout);
         self.state.wantsToSearch = true;
         Backbone.mediator.publish('want:search');

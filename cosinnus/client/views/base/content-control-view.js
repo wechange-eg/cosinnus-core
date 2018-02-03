@@ -4,10 +4,19 @@ var BaseView = require('views/base/view');
 var util = require('lib/util');
 
 module.exports = BaseView.extend({
+	
+	// reference back to the main App
+	App: null,
+	
+	// the resultCollection data source this view operates on.
+	// often the same collection other views use as well
+	collection: null,
 
-    initialize: function (options) {
+    initialize: function (options, app, collection) {
         var self = this;
     	BaseView.prototype.initialize.call(self, options);
+    	self.App = app;
+    	self.collection = collection;
     	
     	var urlParams = this.parseUrl(window.location.href.replace(window.location.origin, ''));
         self.initializeSearchParameters(urlParams);

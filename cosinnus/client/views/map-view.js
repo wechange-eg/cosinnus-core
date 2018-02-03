@@ -6,7 +6,7 @@ var popupTemplate = require('map/popup');
 var util = require('lib/util');
 
 module.exports = ContentControlView.extend({
-    
+
 	template: require('map/map'),
 	
     layers: {
@@ -59,6 +59,7 @@ module.exports = ContentControlView.extend({
     	// the resulting area is actually sent as coords to the search API 
     	latLngBuffer: 0.01,
     	
+    	// correcspond to the model values of Result.type
     	resultColours: {
     		people: 'red',
     		events: 'green',
@@ -84,17 +85,17 @@ module.exports = ContentControlView.extend({
 	        currentSpiderfied: null,
 	        
 	        // fallback default coordinates when navigated without loc params
-	        north: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES && COSINNUS_MAP_DEFAULT_COORDINATES.ne_lat, 55.78), 
-	        east: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES && COSINNUS_MAP_DEFAULT_COORDINATES.ne_lon, 23.02),
-	        south: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES && COSINNUS_MAP_DEFAULT_COORDINATES.sw_lat, 49.00),
-	        west: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES && COSINNUS_MAP_DEFAULT_COORDINATES.sw_lon, 3.80),
+	        north: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES.ne_lat, 55.78), 
+	        east: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES.ne_lon, 23.02),
+	        south: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES.sw_lat, 49.00),
+	        west: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES.sw_lon, 3.80),
 	    }
     },
     
-    initialize: function (options) {
+    initialize: function (options, app, collection) {
         var self = this;
         // this calls self.initializeSearchParameters()
-        ContentControlView.prototype.initialize.call(self, options);
+        ContentControlView.prototype.initialize.call(self, options, app, collection);
         
         Backbone.mediator.subscribe('change:results', self.updateMarkers, self);
         Backbone.mediator.subscribe('change:bounds', self.fitBounds, self);

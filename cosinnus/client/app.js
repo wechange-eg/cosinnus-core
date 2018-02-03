@@ -52,13 +52,25 @@ var App = function App () {
         Backbone.mediator.subscribe('init:map', function(){alert('app.js: tried to init "map" but this is no longer supported')}, self);
         
         util.log('app.js: init routing')
+        
         // Start routing...
         Backbone.history.start({
             pushState: true
         });
-        // A global resize event
+        // Use this param for the history if we don't want any default apps
+        // on auto start
+        // silent: true  // starts without the router listening for a match of the current url
+        
+        
+
+        var triggerResizeEvent = function (){
+        	Backbone.mediator.publish('resize:window');
+        }
+        var resizeTimer;
+        // A global resize event with a delay so it won't fire constantly
         $(window).on('resize', function () {
-            Backbone.mediator.publish('resize:window');
+        	clearTimeout(resizeTimer);
+        	resizeTimer = setTimeout(triggerResizeEvent, 500);
         });
         
         // we trigger both on the mediator and on html, in case scripts loaded earlier than this
@@ -125,15 +137,18 @@ var App = function App () {
          * - remove Map model, put most of it into controlView and MapView
          * - refactor these settings and params and data into sensible different variables! */
         self.controlView = new ControlView({
-        	el: params.el, // TODO put in el in root div!
-        	el_append: true,
-        	availableFilters: settings.availableFilters,
-        	activeFilters: settings.activeFilters,
-        	topicsHtml: topicsHtml,
-        	controlsEnabled: self.displayOptions.showControls,
-        	filterGroup: settings.filterGroup,
-        	basePageURL: basePageURL,
-        }, self);
+	        	el: params.el, // TODO put in el in root div!
+	        	el_append: true,
+	        	availableFilters: settings.availableFilters,
+	        	activeFilters: settings.activeFilters,
+	        	topicsHtml: topicsHtml,
+	        	controlsEnabled: self.displayOptions.showControls,
+	        	filterGroup: settings.filterGroup,
+	        	basePageURL: basePageURL,
+	        }, 
+	        self, 
+	        null
+        ); // collection=null here, gets instantiated in the control view
         self.contentViews.push(self.controlView);
         
         util.log('app.js: TODO: really do this if check for controlsEnabled?')
@@ -145,12 +160,15 @@ var App = function App () {
         }
         
         var mapView = new MapView({
-        	el: params.el,
-        	el_append: true,
-        	location: settings.location,
-        	markerIcons: markerIcons,
-        	fullscreen: self.displayOptions.fullscreen
-        }).render();
+	        	el: params.el,
+	        	el_append: true,
+	        	location: settings.location,
+	        	markerIcons: markerIcons,
+	        	fullscreen: self.displayOptions.fullscreen
+	        }, 
+	        self,
+	        self.controlView.collection
+        ).render();
         self.contentViews.push(mapView);
         
         Backbone.mediator.publish('app:ready');
