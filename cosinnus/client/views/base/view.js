@@ -20,7 +20,7 @@ module.exports = Backbone.View.extend({
     	this.options = $.extend(true, {}, this.defaults, options);
         this.state = this.options && this.options.state || {};
     },
-
+    
     render: function () {
         var self = this;
         // Collect the data to be rendered; can be overridden in child view.
@@ -57,5 +57,20 @@ module.exports = Backbone.View.extend({
     		this.state
     	);
         return data;
+    },
+    
+    /** Wrap you signal handlers in this function inside views to retain
+     *  the view as `this` as context.
+     *  Example: 
+	 *      collection.on({
+	 *  	   'add' : self.thisContext(self.myCall)
+	 *  	});
+	 *  ==>  myCall(...) will have `this` set to `self`
+	*/
+    thisContext: function(func) {
+    	var self = this;
+    	return function(...args){
+    		func.apply(self, args);
+    	};
     }
 });

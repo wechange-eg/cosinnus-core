@@ -34,7 +34,18 @@ module.exports = Backbone.Model.extend({
 	},
 	
 	initialize: function(){
-        console.log('Result model has been initialized.');
+		
+    },
+    
+    locEquals: function(other_result) {
+    	return this.get('lat') != null 
+    		&& this.get('lon') != null
+    		&& other_result.get('lat') == this.get('lat') 
+    		&& other_result.get('lon') == this.get('lon');
+    },
+    
+    getLocs: function() {
+    	return [this.get('lat'), this.get('lon')];
     }
 
 });

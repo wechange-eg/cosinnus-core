@@ -192,7 +192,8 @@ module.exports = ContentControlView.extend({
     	
     	var resultModels = [];
     	_.each(jsonResultList, function(res){
-    		resultModels.push(new Result(res));
+    		var newmod = new Result(res);
+    		resultModels.push(newmod);
     	});
     	
     	// TODO: take the current selected model and check if it is in the new result list
@@ -204,7 +205,6 @@ module.exports = ContentControlView.extend({
     	util.log(self.collection.toJSON());
     	
     	
-    	util.log('control-view.js: implement all the "change:results" subscribers!')
     	
     	/**
     	 * Merges existing models and updates them.
@@ -266,6 +266,8 @@ module.exports = ContentControlView.extend({
             		Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, self.options.basePageURL))
             	}
             	var results = data.results;
+            	util.log('got resulties')
+            	util.log(data)
             	self.processSearchResults(results);
             }
         }).fail(function () {

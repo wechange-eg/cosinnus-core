@@ -1,10 +1,25 @@
-.map-fullscreen {
+.app-fullscreen, .map-fullscreen {
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
 
+    .map-controls {
+        position: fixed;
+        top: 80px;
+    }
+    
+    /* For fullscreen mode, don't move the controls to compensate for the navbar */
+    &.no-navbar{
+        .map-controls {
+            top: 18px;
+        }
+    } 
+}
+
+.map-fullscreen {
+	
     .leaflet-top {
         .leaflet-control {
             top: 65px;
@@ -21,24 +36,14 @@
         }
     }
 
-    .map-controls {
-        position: fixed;
-        top: 80px;
-    }
-    
     /* For fullscreen mode, don't move the controls to compensate for the navbar */
     &.no-navbar{
-        .map-controls {
-            top: 18px;
-        }
         .leaflet-top {
             .leaflet-control {
                 top: 0px;
             }
         }
     } 
-    
-    
 }
 
 .map-root {

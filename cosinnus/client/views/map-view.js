@@ -35,11 +35,19 @@ module.exports = ContentControlView.extend({
     },
 
     
-    // TODO
+    // the map Layer Buttons (Sattelite, Street, Terrain)
     mapLayerButtonsView: null,
     
     // handle on the current popup
     popup: null,
+    
+    // leaflet instance
+    leaflet: null,
+    
+    // Marker storage dict of {<resultModel.id>: <L.marker>, ...}
+    // id corresponds to self.collection.get(<id>)
+    // updated through the handlers of self.collection's signals
+    markers: {},
     
     
     // will be set to self.options during initialization
@@ -97,7 +105,8 @@ module.exports = ContentControlView.extend({
         // this calls self.initializeSearchParameters()
         ContentControlView.prototype.initialize.call(self, options, app, collection);
         
-        Backbone.mediator.subscribe('change:results', self.updateMarkers, self);
+        self.state.currentlyClustering = self.options.clusteringEnabled;
+        
         Backbone.mediator.subscribe('change:bounds', self.fitBounds, self);
         Backbone.mediator.subscribe('resize:window', function () {
             self.leaflet.invalidateSize();
@@ -105,7 +114,14 @@ module.exports = ContentControlView.extend({
         }, self);
         Backbone.mediator.subscribe('change:layer', self.setLayer, self);
         
-        self.state.currentlyClustering = self.options.clusteringEnabled;
+        // result events
+        self.collection.on({
+    	   'add' : self.thisContext(self.markerAdd),
+    	   'change:hover': self.thisContext(self.markerChangeHover),
+    	   'change:selected': self.thisContext(self.markerChangeSelected),
+    	   'change': self.thisContext(self.markerUpdate),
+    	   'remove': self.thisContext(self.markerRemove),
+    	});
     },
 
     render: function () {
@@ -147,6 +163,93 @@ module.exports = ContentControlView.extend({
         };
     	return searchParams
     },
+    
+    
+    // ResultCollection Event handlers
+    // --------------
+
+    markerAdd: function(result) {
+    	var self = this;
+    	// adding a marker that is already there? impossibru! but best be sure.
+    	if (result.id in this.markers) {
+    		this.markerRemove(result);
+    	}
+    	
+    	var markerIcon = this.getMarkerIconForType(result.get('type'));
+    	var coords = [result.get('lat'), result.get('lon')];
+    	
+    	util.log('adding marker at coords ' + JSON.stringify(coords))
+        var marker = L.marker(coords, {
+            icon: L.icon({
+                iconUrl: markerIcon.iconUrl,
+                iconSize: [markerIcon.iconWidth, markerIcon.iconHeight],
+                iconAnchor: [markerIcon.iconWidth / 2, markerIcon.iconHeight],
+                popupAnchor: [1, -27],
+                shadowSize: [28, 28]
+            })
+        }).bindPopup(popupTemplate.render({
+            imageURL: result.get('imageUrl'),
+            title: result.get('title'),
+            url: result.get('url'),
+            address: result.get('address'),
+            description: result.get('description')
+        }));
+        
+        if (!this.options.keepOpenMarkersAfterResultChange || (this.markerNotPopup(marker) && this.markerNotSpiderfied(marker))) {
+	        if (this.state.currentlyClustering) {
+	            this.clusteredMarkers.addLayer(marker);
+	        } else {
+	            marker.addTo(this.leaflet);
+	        }
+	        this.markers[result.id] = marker;
+        }
+    },
+    
+
+    markerChangeHover: function(result) {
+    	
+    },
+    
+
+    markerChangeSelected: function(result) {
+    	
+    },
+    
+
+    markerUpdate: function(result) {
+    	// don't use this trigger when only hover/selected state was changed - they have their own handlers
+    	if (result.changedAttributes && (result.changedAttributes.selected || result.changedAttributes.hover)) {
+    		util.log('map-view.js: WOWWEEEE! canceled a markerUpdate when selected/hover was changed')
+    		return;
+    	}
+    	util.log('map-view.js: TODO: actually *update* the marker and dont just remove/add it!')
+    	if (!result.selected) {
+    		this.markerRemove(result);
+    		this.markerAdd(result);
+    	} else {
+    		util.log('map-view.js: TODO:: was ordered to remove a marker that is currently selected. NOT DOING ANYTHING RN!')
+    	}
+    },
+    
+    /** Remove a leaflet marker from the map. 
+     *  Acts as handler for model Result removal from self.collection */
+    markerRemove: function(result) {
+    	if (result.id in this.markers) {
+    		var marker = this.markers[result.id];
+    		
+    		if (this.state.currentlyClustering) {
+    			this.clusteredMarkers.removeLayer(marker);
+    		} else {
+    			this.leaflet.removeLayer(marker);
+    		}
+    		delete this.markers[result.id];
+    		util.log('Removed marker at ' + result.get('lat') + ', ' + result.get('lon'));
+    	}
+    },
+    
+    
+    
+    
 
     // Private
     // -------
@@ -154,7 +257,6 @@ module.exports = ContentControlView.extend({
     renderMap: function () {
     	util.log('++++++ map-view.js renderMap called! This should only happen once at init! +++++++++++++++++++')
     	
-        this.markers = [];
         this.leaflet = L.map('map-container')
             .setView(this.options.location, this.options.zoom);
         this.setLayer(this.options.layer);
@@ -213,47 +315,7 @@ module.exports = ContentControlView.extend({
             east: bounds.getEast(),
             paddedEast: paddedBounds.getEast()
         });
-        util.log(this.state)
-    },
-
-    addMarker: function (result, resultType) {
-        var iconUrl, iconWidth, iconHeight = null;
-        if (this.options.markerIcons && this.options.markerIcons[resultType]) {
-            var iconSettings = this.options.markerIcons[resultType];
-            iconUrl = iconSettings.url;
-            iconWidth = iconSettings.width;
-            iconHeight = iconSettings.height;
-        } else {
-            iconUrl = '/static/js/vendor/images/marker-icon-2x-' +
-                this.options.resultColours[resultType] + '.png';
-            iconWidth = 17;
-            iconHeight = 28;
-        }
-        var marker = L.marker([result.lat, result.lon], {
-            icon: L.icon({
-                iconUrl: iconUrl,
-                iconSize: [iconWidth, iconHeight],
-                iconAnchor: [iconWidth / 2, iconHeight],
-                popupAnchor: [1, -27],
-                shadowSize: [28, 28]
-            })
-        }).bindPopup(popupTemplate.render({
-            imageURL: result.imageUrl,
-            title: result.title,
-            url: result.url,
-            address: result.address,
-            description: result.description
-        }));
-        
-
-        if (!self.options.keepOpenMarkersAfterResultChange || (this.markerNotPopup(marker) && this.markerNotSpiderfied(marker))) {
-	        if (this.state.currentlyClustering) {
-	            this.clusteredMarkers.addLayer(marker);
-	        } else {
-	            marker.addTo(this.leaflet);
-	        }
-	        this.markers.push(marker);
-        }
+        this.state.zoom = this.leaflet._zoom;
     },
 
     setClusterState: function () {
@@ -262,6 +324,29 @@ module.exports = ContentControlView.extend({
     		var zoom = this.leaflet.getZoom();
     		this.state.currentlyClustering = zoom > this.options.clusterZoomThreshold;
     	}
+    },
+    
+    /** Gets a dict of {iconUrl: <str>, iconWidth: <int>, iconHeight: <int>}
+     *  for a given type corresponding to model Result.type. */
+    getMarkerIconForType: function(resultType) {
+    	var markerIcon;
+    	// if custom marker icons are supplied, use those, else default ones
+        if (this.options.markerIcons && this.options.markerIcons[resultType]) {
+            var iconSettings = this.options.markerIcons[resultType];
+            markerIcon = {
+        		iconUrl: iconSettings.url,
+        		iconWidth: iconSettings.width,
+        		iconHeight: iconSettings.height
+            };
+        } else {
+        	markerIcon = {
+	            iconUrl: '/static/js/vendor/images/marker-icon-2x-' +
+	                this.options.resultColours[resultType] + '.png',
+	            iconWidth: 17,
+	            iconHeight: 28
+        	};
+        }
+        return markerIcon;
     },
 
     markerNotPopup: function (marker) {
@@ -277,18 +362,11 @@ module.exports = ContentControlView.extend({
         return ret;
     },
 
-    removeMarker: function (marker) {
-        if (this.state.currentlyClustering) {
-            this.clusteredMarkers.removeLayer(marker);
-        } else {
-            this.leaflet.removeLayer(marker);
-        }
-    },
-
     // Event Handlers
     // --------------
 
     // Render the search results as markers on the map.
+    // TODO: remove! deprecated and unused.
     updateMarkers: function () {
         var self = this,
             results = self.model.get('results');
@@ -352,9 +430,11 @@ module.exports = ContentControlView.extend({
             var popLatLng = this.popup.getLatLng();
             var marker = event.popup._source;
             // Remove the popup's marker if it's now off screen.
+            /*
             if (!this.leaflet.getBounds().pad(this.options.latLngBuffer).contains(popLatLng)) {
                 this.removeMarker(marker);
             }
+            */
             this.popup = null;
         }
     },
