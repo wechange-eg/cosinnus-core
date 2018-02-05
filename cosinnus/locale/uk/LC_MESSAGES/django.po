@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-31 18:20+0100\n"
-"PO-Revision-Date: 2017-12-07 16:47+0100\n"
+"POT-Creation-Date: 2018-02-05 13:07+0100\n"
+"PO-Revision-Date: 2018-02-05 13:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1154,7 +1154,7 @@ msgstr "Виглядає на те, що під час виконання ваш
 
 #, python-format
 msgid "+%(num_pictures)s more..."
-msgstr ""
+msgstr "+%(num_pictures)s більше..."
 
 msgid "Error embedding a Flickr gallery"
 msgstr "У Flickr  знайдена помилка"
@@ -1166,15 +1166,13 @@ msgid "Error embedding a video"
 msgstr "У відео знайдена помилка"
 
 msgid "Help and Assistance for this page"
-msgstr ""
+msgstr "Допомога та довідка для цієї сторінки"
 
 msgid "Help"
-msgstr ""
+msgstr "Допомога"
 
-#, fuzzy
-#| msgid "select this page"
 msgid "Help for this page"
-msgstr "обрати цю сторінку"
+msgstr "Допомога для цієї сторінки"
 
 msgid "We're sorry. The Map is not supported in Internet Explorer."
 msgstr "Вибачте, ця карта не підтримується в Internet Explorer."
@@ -1205,77 +1203,63 @@ msgstr "Подати"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_1_group"
-msgstr ""
+msgstr "На цьому порталі є Групи та Проекти. “Проекти” являють собою об’єднання людей, які можуть координувати зусилля в цих “Проектах”. Якщо декілька проектів хочуть об’єднатися під одним дахом, до прикладу, щоб обговорити спільне питання, вони можуть разом заснувати групу. Якщо Ви хочете створити групу, будь ласка, надішліть повідомлення із запитом до адміністраторів порталу. Вони прояснять деталі.   "
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_2_project"
-msgstr ""
+msgstr "На цьому порталі є Групи та Проекти. “Проекти” являють собою об’єднання людей, які можуть координувати зусилля в цих “Проектах”. Якщо декілька проектів хочуть об’єднатися під одним дахом, до прикладу, щоб обговорити спільне питання, вони можуть разом заснувати Групу. В проекті, разом з його членами, Ви можете створити список завдань, розмістити файли, створити таблиці тощо."
 
-#, fuzzy
-#| msgid "Marketplace"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_3_marketplace"
-msgstr "Дошка оголошень"
+msgstr "Якщо Ви хочете створити оголошення на Wechange, ви можете зробити це прямо тут. Спершу оберіть назву, опис категорії та фото для оголошення. Оголошення буде увімкнене на чотири тижні після того як Ви натиснете клавішу «створити». "
 
-#, fuzzy
-#| msgid "Delete profile"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_4_profile"
-msgstr "Видалити профіль"
+msgstr "Тут Ви можете змінити свій профіль. Завантажуйте фотографію, вкажіть локацію та тему, яка Вас цікавить и підтвердіть зміни, натиснувши справа на клавіш “зберегти”. "
 
-#, fuzzy
-#| msgid "Reset password"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_5_password"
-msgstr "Змінити пароль"
+msgstr "У полі знизу Ви можете змінити свій пароль. Важливо, щоб ви зробили пароль як можна більш довгим (мінімум 10 символів). Чим довший пароль, тим краще. Крім того, рекомендується вживати великі літери, малі літери та спеціальні символи."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_6_microsite"
-msgstr ""
+msgstr "Ви можете створити Мікросайт, щоб зробити видимим Ваш проект. На мікросайт можна завантажувати фотографії, посилання на профілі в соціальних мережах та додати контактну інформацію. Оскільки частина опису проекту видна на карті, ви маєте включити всю важливу інформацію у перші три речення."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_7_notes"
-msgstr ""
+msgstr "В цьому полі Ви можете розмістити новину. Новину покажуть всім членам Вашого проекту/групи. Вона слугує для актуалізації інформації."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_8_poll"
-msgstr ""
+msgstr "Тут Ви можете створити опитування. Воно слугує для відповіді на певні питання (таких як дієтичні вимоги). Якщо ви хочете визначити час зустрічі з командою, Вам треба натиснути на Події та перейти до “опитування події”."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_9_todo"
-msgstr ""
+msgstr "Ви можете створити завдання. У правому верхньому куті Ви можете встановити дату та відповідальну особу для завдання. Натиснувши на “створити” нижньому правому куті, ви можете створити Ваше завдання."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_10_documentsetting"
-msgstr ""
+msgstr "Ви можете додати подальшу інформацію до Вашого документу на додаток до назви, яку Ви вже обрали. Наприклад, Ви можете віднести документ до певної теми, місця, чи файлу. "
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_11_document"
-msgstr ""
+msgstr "Тут Ви можете змінити документ, додаючи елементи до документу. За допомогою лінійки часу (символ годинника), ви можете переглянути попередні версії. Легко змінити документ на PDF. Ви можете активувати посилання в документі, натиснувши на </>."
 
-#, fuzzy
-#| msgid "Project Administrator"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_12_projectadministration"
-msgstr "Адміністратори проекту"
+msgstr "Адміністрація Проектів починається з керування режимом членства. Ви можете визначити, хто може брати участь в проекті і хто має бути адміністратором. Ви можете запрошувати учасників з інших порталів, чи інших людей, вказуючи електронні адреси. Вони отримують запрошення до реєстрації на порталі."
 
-#, fuzzy
-#| msgid "Group Administrator"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_13_groupadministration"
-msgstr "Адміністратори спільноти"
+msgstr "Адміністрація Груп починається з керування режимом членства. Ви можете визначити, хто може долучитися до групи і хто має бути адміністратором. Ви можете запрошувати учасників з інших порталів, чи інших людей, вказуючи електронні адреси. Вони отримують запрошення до реєстрації на порталі."
 
-#, fuzzy
-#| msgid "Delete profile"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
-msgstr "Видалити профіль"
+msgstr ""
 
-#, fuzzy
-#| msgid "Delete profile"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_51_objectprivacy"
-msgstr "Видалити профіль"
+msgstr ""
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr "Введіть електронні адреси людей, яких ви бажаєте запросити до платформи."
@@ -1440,11 +1424,9 @@ msgstr "Закрити"
 msgid "Avatar will be deleted once you save."
 msgstr "При збереженні зображення буде видалено."
 
-#, fuzzy
-#| msgid "Proportions"
 msgctxt "written next to optional form fields"
 msgid "optional"
-msgstr "Пропорції"
+msgstr "Опціонально"
 
 msgid "Call to Action Button"
 msgstr "Кнопка Заклик до Дії"
@@ -1650,15 +1632,13 @@ msgid "Create Project"
 msgstr "Створити проект"
 
 msgid "Help about groups"
-msgstr ""
+msgstr "Допомога із групами"
 
-#, fuzzy
-#| msgid "All projects"
 msgid "Help about projects"
-msgstr "Усі проекти"
+msgstr "Допомогаз проектами"
 
 msgid "Help about the microsite"
-msgstr ""
+msgstr "Допомога з мікросайтом"
 
 msgid "Edit Group"
 msgstr "Редагувати спільноту"
@@ -1675,15 +1655,11 @@ msgstr "Загальна інформація"
 msgid "Facebook-Integration"
 msgstr "Інтеграція з Facebook"
 
-#, fuzzy
-#| msgid "Group Image"
 msgid "Group name"
-msgstr "Зображення спільноти"
+msgstr "Назва групи"
 
-#, fuzzy
-#| msgid "Project Type"
 msgid "Project name"
-msgstr "Тип спільноти"
+msgstr "Назва проекту"
 
 msgid "Enter a name for the group."
 msgstr "Уведіть назву для спільноти."
@@ -1691,18 +1667,14 @@ msgstr "Уведіть назву для спільноти."
 msgid "Enter a name for the project."
 msgstr "Уведіть назву для проекту."
 
-#, fuzzy
-#| msgid "Short Description"
 msgid "Short description"
 msgstr "Короткий опис"
 
 msgid "Describe the group in a few sentences."
 msgstr "Опишіть спільноту кількома реченнями."
 
-#, fuzzy
-#| msgid "This project will be set to be publicly visible!"
 msgid "This description will be publicly visible."
-msgstr "Цей проект має бути налаштований як публічно видимий!"
+msgstr "Цей опис буде публічно видимий!"
 
 msgid "Describe the project in a few sentences."
 msgstr "Опишіть проект кількома реченнями."
@@ -1717,7 +1689,7 @@ msgid "max. 10 MB"
 msgstr "max. 10 MB"
 
 msgid "Example: http://mywebsite.com"
-msgstr ""
+msgstr "Приклад: http://mywebsite.com"
 
 msgid "Where are you active?"
 msgstr "У якій сфері ви активно працюєте?"
@@ -1740,13 +1712,11 @@ msgstr "Існують пов'язані проекти/групи?"
 msgid "Select related Projects/Groups"
 msgstr "Обрати пов'язані проекти/спільноти"
 
-#, fuzzy
-#| msgid "Additional Header content"
 msgid "Privacy settings"
-msgstr "Додатковий зміст верхнього колонтитула"
+msgstr "Налаштування приватності"
 
 msgid "This will be the default setting for all content created by members."
-msgstr ""
+msgstr "Ці налаштування будуть за замовченням встановлені для всього контенту користувачів."
 
 msgid "This group will be set to be publicly visible!"
 msgstr "Ця спільнота має бути налаштована як публічно видима!"
@@ -1784,15 +1754,11 @@ msgstr "Опис та інформація"
 msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgstr "Це публічний опис, який буде знаходитися на мікросайті, та який кожен зможе побачити."
 
-#, fuzzy
-#| msgid "No Contact info set"
 msgid "Contact info"
-msgstr "Контактна інформація відсутня"
+msgstr "Контактна інформація "
 
-#, fuzzy
-#| msgid "Contact info. How you can be reached, addresses, social media, etc..."
 msgid "How you can be reached, addresses, social media, etc..."
-msgstr "Як можна з вами зв'язатися: адреси, соціальні медіа і т. п."
+msgstr "Як можна з вами зв'язатися: адреси, соціальні мережі і т. п."
 
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "Публічні елементи з якого додатку мають бути показані на мікросайті?"
@@ -1804,7 +1770,7 @@ msgid "Youtube or Vimeo URL"
 msgstr "Youtube чи Vimeo URL"
 
 msgid "https://www.youtube.com/watch?v=example-video"
-msgstr ""
+msgstr "https://www.youtube.com/watch?v=example-video"
 
 msgid "Twitter: Embedded User Timeline"
 msgstr "Twitter: додана стрічка користувача"
@@ -1840,7 +1806,7 @@ msgid "Show Microsite Call to Action Box"
 msgstr "Показати Заклик до Дії на мікросайті"
 
 msgid "A box shown on the microsite that contains buttons to your external campaigns or websites"
-msgstr ""
+msgstr "Вікно на мікросайті показує посилання на Вашу зовнішню компанію чи сайт "
 
 msgid "Show Call to Action Box"
 msgstr "Показати вікно Заклик до Дії"
@@ -2546,13 +2512,11 @@ msgstr ""
 "\n"
 "%(domain_url)s"
 
-#, fuzzy
-#| msgid "Additional Header content"
 msgid "Additional options"
-msgstr "Додатковий зміст верхнього колонтитула"
+msgstr "Додаткові можливості"
 
 msgid "Attach files, add a location, mark topics and adjust visibility settings"
-msgstr ""
+msgstr "Додати файли, локацію, вказати теми та встановіть налаштування видимості"
 
 msgid "Tag persons"
 msgstr "Вказати людей"
@@ -2564,7 +2528,7 @@ msgid "Place or adress"
 msgstr "Місце або адреса"
 
 msgid "Upload a file or image or attach an existing one"
-msgstr ""
+msgstr "Завантажити файл чи зображення або додати те, що вже існує"
 
 msgid "Select topic"
 msgstr "Вказати тему"
@@ -2578,10 +2542,8 @@ msgstr "Цей елемент буде опубліковано як публі�
 msgid "If you do not wish this, you can change this item's visibility setting below."
 msgstr "Якщо Ви цього не хочете, Ви можете змінити налаштування приватності елемента нижче."
 
-#, fuzzy
-#| msgid "Show more Projects"
 msgid "Show more options..."
-msgstr "Показати більше проектів"
+msgstr "Показати більше можливостей..."
 
 msgid "Which topics are you involved with?"
 msgstr "З якими темами ви працюєте?"
@@ -2605,7 +2567,7 @@ msgid "Where do you live?"
 msgstr "Де ви мешкаєте?"
 
 msgid "Enter a place or address and then choose a point on the map."
-msgstr ""
+msgstr "введіть місце зосташування чи адресу, а потім оберіть точку на карті. "
 
 msgid "Which topics are you interested in?"
 msgstr "Яким темами цікавитеся?"
@@ -2614,20 +2576,16 @@ msgid "What would you like to learn?"
 msgstr "Чого би ви хотіли навчитися?"
 
 msgid "Who may see your plattform profile?"
-msgstr ""
+msgstr "Хто може бачити Ваш профіль на платформі?"
 
-#, fuzzy
-#| msgid "This project will be set to be publicly visible!"
 msgid "Your profile will be set to be publicly visible!"
-msgstr "Цей проект має бути налаштований як публічно видимий!"
+msgstr "Ваш профіль буде налаштований як публічно видимий!"
 
-#, fuzzy
-#| msgid "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
 msgid "This means that your name, avatar and user profile can be seen by ANYONE on the internet and may potentially be included in search engine results!"
-msgstr "Цей елемент буде опубліковано як публічно видимий! Це означає, що будь-хто в Інтернеті може отримати до нього доступ і він потенційно може бути включений в результати пошукових машин."
+msgstr "Це означає, що Ваше ім'я, аватар та профиль користувача буде видимий для БУДЬ-КОГО в інтернеті. Крім того, вони потенційно можуть бути включениі в результати пошукових систем."
 
 msgid "Please note that changes in this setting will not have an immediate effect on search engine results! Depending on the search provider, it might take days or weeks until this setting is reflected in their results."
-msgstr ""
+msgstr "Будь ласка, зверніть увагу, що зміни в налаштуваннях не призведуть до зміни в результатах пошукових систем! Залежно від пошукової системи, відображення результатів може зайняти дні, або тижні."
 
 msgid "Privacy"
 msgstr "Приватність"
@@ -2753,7 +2711,7 @@ msgid "Enter old password"
 msgstr "Введіть старий пароль"
 
 msgid "We need to make sure it's really you"
-msgstr ""
+msgstr "Ми маємо переконатися, що це насправді Ви"
 
 msgid "Old password"
 msgstr "Старий пароль"
@@ -2762,10 +2720,10 @@ msgid "New Password"
 msgstr "Новий пароль"
 
 msgid "Enter a password you don't use anywhere else. The longer the better!"
-msgstr ""
+msgstr "Введіть пароль, який ви ніде не використовуєте. Чим довший, тим краще."
 
 msgid "Repeat your password just to make sure"
-msgstr ""
+msgstr "Повторіть пароль, щоб переконатися"
 
 msgid "Repeat new Password"
 msgstr "Повторіть новий пароль"
@@ -2826,10 +2784,10 @@ msgid "Forgotten your password? Enter your email address below, and we'll email 
 msgstr "Забули пароль? Введіть нижче адресу вашої електронної скриньки, і ми надішлемо вам інструкції для призначення нового паролю."
 
 msgid "The email you used to register your account. This is the one you receive email notifications on"
-msgstr ""
+msgstr "Електронна адреса, яку ви використовуєте для реєстрації аккаунту. Нанього ви будете отримувати електронні листи з повідомленнями"
 
 msgid "Example: mymail@example.com"
-msgstr ""
+msgstr "Приклад: mymail@example.com"
 
 msgid "Sign up"
 msgstr "Зареєструватися"
@@ -2841,20 +2799,16 @@ msgid "Email address"
 msgstr "Адреса електронної скриньки"
 
 msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
-msgstr ""
+msgstr "Це буде використано як Ваш логін. Повідомлення будуть відправлені на цю адресу (якщо ви хочете їх отримувати)."
 
-#, fuzzy
-#| msgid "Repeat new Password"
 msgid "Repeat Password"
-msgstr "Повторіть новий пароль"
+msgstr "Повторіть пароль"
 
-#, fuzzy
-#| msgid "Folder name"
 msgid "Your name"
-msgstr "Ім'я папки"
+msgstr "Ваше ім'я"
 
 msgid "This name will be displayed to other users on the site"
-msgstr ""
+msgstr "Ваше ім'я буде видиме іншим користувачам сайту"
 
 msgid "First name"
 msgstr "Ім'я"
@@ -2863,13 +2817,13 @@ msgid "Last name"
 msgstr "Прізвище"
 
 msgid "You can supply your last name to be displayed as well"
-msgstr ""
+msgstr "Ви можете встановити своє прізвище як публічно доступне"
 
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 msgid "We need to make sure you are a real person (sorry!)"
-msgstr ""
+msgstr "Ми маємо переконатися, що Ві є реальною персоною (вибачте!)"
 
 msgctxt "read and accept the [Terms of Services]"
 msgid "I have read and accept the"
@@ -3615,10 +3569,8 @@ msgstr "Ви, на разі, не є членом %s! Якщо ви бажаєт
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
 
-#, fuzzy
-#~| msgid "My Projects"
 #~ msgid "My Groups and Projects"
-#~ msgstr "Мої проекти"
+#~ msgstr "Мої групи та проекти"
 
 #~ msgid "This message will never reappear when you remove it."
 #~ msgstr "Це повідомлення не буде знову з'являтися, якщо ви його видалите."
