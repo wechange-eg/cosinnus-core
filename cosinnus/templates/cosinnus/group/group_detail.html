@@ -323,19 +323,32 @@
                 <legend>{% trans "People currently invited by you" %}</legend>
             {% endif %}
             
-            <p class="large-space">
 	            {% for recruitation in recruited %}
-	                {{ recruitation.email }}
-	                - <span class="moment-data-date" data-date="{{ recruitation.last_modified|date:'c' }}"></span>
-	                {% if not recruitation.invited_by == user %}
-	                    <i>
-	                       ({% trans "by" context "an action done *by* <username>" %}
-	                       <a href="{% url 'cosinnus:profile-detail' username=recruitation.invited_by.username %}">{{ recruitation.invited_by|full_name }}</a>)
-	                    </i>
-	                {% endif %}
-	                {% if not forloop.last %}<br/>{% endif %}
+	                
+	                
+	                <div class="btn btn-default w100 regular-space">
+                        <ul class="media-list">
+                            <li class="media">
+                                <div class="media-body">
+                                    <span class="annotation">
+                                        {% trans "Invited to be a member" %}
+                                        &nbsp;
+                                        <span class="moment-data-date" data-date="{{ recruitation.last_modified|date:'c' }}"></span>
+                                    </span>
+                                    {{ recruitation.email }}
+                                    {% if not recruitation.invited_by == user %}
+				                        <i>
+				                           ({% trans "by" context "an action done *by* <username>" %}
+				                           <a href="{% url 'cosinnus:profile-detail' username=recruitation.invited_by.username %}">{{ recruitation.invited_by|full_name }}</a>)
+				                        </i>
+				                    {% endif %}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
 	            {% endfor %}
-            </p>
+	            
+	            
             
 	        <div class="clearfix"></div>
         {% endif %}
