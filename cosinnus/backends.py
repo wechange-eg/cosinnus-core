@@ -81,6 +81,8 @@ class RobustElasticSearchBackend(ElasticsearchSearchBackend):
                 return f(self, *args, **kwargs)
             except (TransportError, ProtocolError, ConnectionError) as e:
                 logger.exception('Could not connect to the ElasticSearch backend for indexing! The search function will not work and saving objects on the site will be terribly slow! Exception in extra.', extra={'exception': force_text(e)})
+            except Exception as e:
+                logger.exception('An unknown error occured while indexing an object! Exception in extra.', extra={'exception': force_text(e)})
         return error_wrapper
 
     def __init__(self, connectionalias, **options):
