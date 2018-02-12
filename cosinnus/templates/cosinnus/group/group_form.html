@@ -24,6 +24,17 @@
         {% captureas current_page %}{% if group_model == "CosinnusSociety" %}addsociety{% else %}addgroup{% endif %}{% endcaptureas %}
         {% include "cosinnus/group/leftnav_all_groups.html"  with current_page=current_page %}
     {% endif %}
+    
+    {% if group_model == "CosinnusSociety" %}
+        {% trans "Help about groups" as help_label %}
+        {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_1_group" label=help_label %}
+    {% else %}
+        {% trans "Help about projects" as help_label %}
+        {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_2_project" label=help_label %}
+    {% endif %}
+    
+    {% trans "Help about the microsite" as help_label %}
+    {% include 'cosinnus/common/help_button_leftnav_for_popup.html' with help_text_id="helptext_6_microsite" label=help_label no_space=True %}
 {% endblock leftnav %}
 
 
@@ -38,20 +49,14 @@
 
 
 {% block content %}
-    
-    <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
-    {% csrf_token %}
-    {{ form.forms.obj.media }}
-    {{ form.forms.obj.non_field_errors }}
-    {{ form.forms.media_tag.non_field_errors }}
-    
+
     {% if form.forms.obj.errors or form.forms.media_tag.errors or inlines.0.errors or inlines.1.errors or inlines.2.errors %}
 	    <div class="alert alert-danger alert-dismissable">
-	            <i class="fa fa-exclamation-triangle fa-3x"></i>
-	        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&#215;</button>
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
 	        <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
 	    </div>
     {% endif %}
+    
     	
         <ul class="nav nav-tabs" role="tablist">
         	{% block group_form_navtabs %}
@@ -80,533 +85,294 @@
 			{% endblock group_form_navtabs %}
 		</ul>
 		
+	<form action="" method="post" enctype="multipart/form-data" class="cosinnus-form form-horizontal" role="form">
+	    {% csrf_token %}
+	    {{ form.forms.obj.media }}
+	    {{ form.forms.obj.non_field_errors }}
+	    {{ form.forms.media_tag.non_field_errors }}
+	    
         <!-- a box with semi transparent background -->
         <div class="content-box">
-	        {{ form.forms.obj.non_field_errors }}
-	        {{ form.forms.media_tag.non_field_errors }}
 			
 			<!-- Tab panes -->
 			<div class="tab-content">
 				{% block group_form_tab_panes %}
 					<div class="tab-pane {% if not SETTINGS.COSINNUS_MICROSITES_ENABLED or not request.GET.tab %}active{% endif %}" id="general">
 						
+                        {% captureas name_label %}{% if group_model == "CosinnusSociety" %}{% trans "Group name" %}{% else %}{% trans "Project name" %}{% endif %}{% endcaptureas %}
+                        {% include 'cosinnus/fields/default_field.html' with label=name_label field_id=form.forms.obj.name.id_for_label first=True %}
+                        
+                        {# Name Field #}
 						{% block group_form_name_field %}
-						    <div type="button" class="btn btn-default w100 large-space">
-						        <ul class="media-list">
-						            <li class="media">
-						                <a class="pull-left btn-emphasized" href="#">
-						                    {% if object %}
-						                       <i class="fa fa-users"></i>
-						                    {% else %}
-						                       <i class="fa fa-plus"></i>
-						                    {% endif %}
-						                </a>
-						                <div class="media-body media-body-form-control">
-						                    {{ form.forms.obj.name.errors }}
-					                        {% captureas placeholder %}{% if group_model == "CosinnusSociety" %}{% trans "Enter a name for the group." %}{% else %}{% trans "Enter a name for the project." %}{% endif %}{% endcaptureas %}
-					                        {% render_field form.forms.obj.name class+="form-control" placeholder=placeholder %}
-						                </div>
-						            </li>
-						        </ul>
-						    </div>
+	                        {% captureas name_placeholder %}{% if group_model == "CosinnusSociety" %}{% trans "Enter a name for the group." %}{% else %}{% trans "Enter a name for the project." %}{% endif %}{% endcaptureas %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=name_placeholder %}
 					    {% endblock group_form_name_field %}
 					
-					    <fieldset>
-					        <legend>{% trans "Avatar" %}</legend>
-					
-					        <!-- On large screens the long explanation texts are on the right side next to the input elements -->
-					        <div class="row">
-					        
-			                    <div class="col-md-8">
-			
-			                        <!-- image left, inputs right -->
-			                        <div class="row">
-			                            
-			                            {{ form.forms.obj.avatar.errors }}
-			                        
-			                            <div class="col-sm-4 regular-space">
-			                                {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.width}}px;height:{{SETTINGS.AWESOME_AVATAR.height}}px{% endcaptureas %}
-			                                {% captureas group_avatar_type %}{% if group_model == "CosinnusSociety" %}group{% else %}project{% endif %}{% endcaptureas %}
-			                                <div id="id_avatar-preview" class="awesome-avatar-preview" style="{{ preview_style }}">
-			                                    {% include "cosinnus/group/group_avatar_image.html" with group=object extra_style=preview_style type=group_avatar_type %}
-			                                </div>
-			                                <div id="avatar_deletion_notice" class="hidden"><p>{% trans "Avatar will be deleted once you save." %}</p></div>
-			                            </div>
-			
-			
-			                            <div class="col-sm-8 regular-space">
-			
-			                                <div type="button" class="btn btn-default w100 regular-space">
-			                                    <ul class="media-list">
-			                                        <li class="media">
-			                                            <a class="pull-left" href="#">
-			                                                <i class="fa fa-file-image-o"></i>
-			                                            </a>
-			                                            <div class="media-body">
-			                                                {{ form.forms.obj.avatar }}
-			                                            </div>
-			                                        </li>
-			                                    </ul>
-			                                </div>
-			
-			                                <div type="button" class="btn btn-default w100">
-			                                    <ul class="media-list">
-			                                        <li class="media">
-			                                            <a class="pull-left" href="#" onclick="$('#avatar_deletion_notice').toggleClass('hidden');">
-			                                                <i id="avatar_clear_checkbox" class="fa fa-square-o"></i>
-			                                                <input type="hidden" name="avatar_clear" >
-			                                            </a>
-			                                            <div class="media-body">
-			                                                <a href="#" onclick="$('#avatar_clear_checkbox').click();">{% trans "Delete" %}</a>
-			                                            </div>
-			                                        </li>
-			                                    </ul>
-			                                </div>
-			                            </div><!-- col -->
-			                        </div><!-- row -->
-			                    </div><!-- col -->
-					        
-					            <!-- explanation text -->
-					            <div class="col-md-4">
-					                <p class="transparent">{% trans "A picture for better recognition." %} {% trans "File Size" %}: {% trans "max. 10 MB" %}</p>
-					            </div>
-					        </div><!-- row -->
-							
-					    </fieldset>
-					
-					
-					    <fieldset>
-					        <legend>{% trans "Description and Infos" %}</legend>
-					
-					        <!-- On large screens the long explanation texts are on the right side next to the input elements -->
-					        <div class="row">
-					            <div class="col-md-8 regular-space">
-					                
-					                {% block group_form_description_field %}
-				                        <label>
-				                        	{% if group_model == "CosinnusSociety" %}{% trans "Describe the group in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
-				                        </label>
-				                        {{ form.forms.obj.description.errors }}
-				                        <div type="button" class="btn btn-default w100 regular-space">
-				                            <ul class="media-list">
-				                                <li class="media">
-				                                    <a class="pull-left" href="#">
-				                                        <i class="fa fa-pencil"></i>
-				                                    </a>
-				                                    <div class="media-body media-body-form-control">
-				                                        {% render_field form.forms.obj.description class+="form-control" %}
-				                                    </div>
-				                                </li>
-				                            </ul>
-				                        </div>
-			                        {% endblock group_form_description_field %}
-			                        
-			                        <label>{% trans "Website" %}</label>
-			                        {{ form.forms.obj.website.errors }}
-			                        <div type="button" class="btn btn-default w100 regular-space">
-			                            <ul class="media-list">
-			                                <li class="media">
-			                                    <a class="pull-left" href="#">
-			                                        <i class="fa fa-chain"></i>
-			                                    </a>
-			                                    <div class="media-body media-body-form-control">
-			                                        {% captureas placeholder %}{% trans "Website" %}{% endcaptureas %}
-			                                        {% render_field form.forms.obj.website class+="form-control" placeholder=placeholder %}
-			                                    </div>
-			                                </li>
-			                            </ul>
-			                        </div>
-					                
-			                        {% include "cosinnus/media_tags_group.html"%} 
-	
-			                        
-									<label>{% trans "Where are you active?" %}</label>
-								    {% with locations_formset=inlines.0 %}
-										{{ locations_formset.management_form }}
-										{% for inlineform in locations_formset %}
-											{# if inlineform.data // pre-existing? #}
-											{# locations_formset.management_form.initial.MIN_NUM_FORMS': 0, u'MAX_NUM_FORMS': 5, u'TOTAL_FORMS': 5, u'INITIAL_FORMS': 0 #}
-											<div id="locations-wrapper-{{ forloop.counter0 }}" {% if not forloop.counter == 1 and not forloop.counter <= locations_formset.management_form.INITIAL_FORMS.value %}style="display: none;"{% endif %}>
-											
-												<div type="button" class="btn btn-default w100 ">
-												    <ul class="media-list">
-												        <li class="media">
-												            <a class="pull-left" href="#">
-												                <i class="fa fa-map-marker"></i>
-												            </a>
-												            <div class="media-body {% if forloop.last %}regular-space{% else %}fine-space{% endif %}">
-												                {% captureas placeholder %}{% trans "Enter a place or address." %}{% endcaptureas %}
-												                {% render_field inlineform.location placeholder=placeholder %}
-														        {{ inlineform.location_lat }}
-														        {{ inlineform.location_lon }}
-																{{ inlineform.group }}
-																{{ inlineform.id }}
-																<div>
-																	<label for="{{ inlineform.DELETE.id_for_label }}">{% trans "Remove location" %}:</label>
-																	{{ inlineform.DELETE }}
-																</div>
-																{% if forloop.counter >= locations_formset.management_form.INITIAL_FORMS.value and forloop.counter < locations_formset.management_form.MAX_NUM_FORMS.value %}
-																	<div id="locations-more-{{ forloop.counter0 }}">
-																		<button class="btn btn-emphasized pull-right" onclick="$('#locations-more-{{ forloop.counter0 }}').hide(); $('#locations-wrapper-{{ forloop.counter }}').show(); return false;">+ {% trans "Add location" %}...</button>
-																	</div>
-																{% endif %}
-												            </div>
-												        </li>
-												    </ul>
-												</div>
-												<div id="id_locations-{{ forloop.counter0 }}-location-map"></div>
-												
-											</div>
-										{% endfor %}
-									{% endwith %}
-			                        
-			                        
-			                        {% if form.forms.obj.parent %}
-			                        <label>{% trans "Which Group does the group belong to?" %}</label>
-			                        <div type="button" class="btn btn-default w100">
-			                            <ul class="media-list">
-			                                <li class="media">
-			                                    <a class="pull-left" href="#">
-			                                        <i class="fa fa-globe"></i>
-			                                    </a>
-			                                    <div class="media-body media-body-form-control">
-			                                        {{ form.forms.obj.parent.errors }}
-									                {% captureas placeholder %}{% trans "Select Group" %}{% endcaptureas %}
-									                {% render_field form.forms.obj.parent class+="form-control w100" placeholder=placeholder %}
-			                                    </div>
-			                                </li>
-			                            </ul>
-			                        </div>
-			                        {% endif %}
-			                        
-			                        {% if form.forms.obj.related_groups %}
-									<label id="select-related">{% trans "Are there any projects/groups related to this one?" %}</label>
-			                        <div type="button" class="btn btn-default w100">
-			                            <ul class="media-list">
-			                                <li class="media">
-			                                    <a class="pull-left" href="#">
-			                                        <i class="fa fa-users"></i>
-			                                    </a>
-			                                    <div class="media-body media-body-form-control">
-			                                        {{ form.forms.obj.related_groups.errors }}
-									                {% captureas placeholder %}{% trans "Select related Projects/Groups" %}{% endcaptureas %}
-									                {% render_field form.forms.obj.related_groups class+="w100" placeholder=placeholder %} {# no 'form-control' class so the content isn't height-enforced! #}
-			                                    </div>
-			                                </li>
-			                            </ul>
-			                        </div>
-			                        {% endif %}
-					
-					                <label>{% trans "Visibility" %}</label>
-					                <div type="button" class="btn btn-default w100 large-space">
-					                    <ul class="media-list">
-					                        <li class="media">
-					                            <a class="pull-left" href="#">
-					                                <i class="fa fa-globe"></i>
-					                            </a>
-					                            <div class="media-body media-body-form-control">
-					                                <select name="public" class="form-control" id="group-public-field">
-					                                    <option default value="false">{% trans "Team members only" %}</option>
-					                                    <option {% if object and object.public %}selected{% endif %} value="true">{% trans "Public (visible without login)" %}</option>
-					                                </select>
-					                            </div>
-					                        </li>
-					                        <li class="group-public-warning-area" {% if not object or not object.public %}style="display: none;"{% endif %} id="group-visibility-warning">
-					                        	<i class="fa fa-fw fa-globe"></i>
-					                        	{% if group_model == "CosinnusSociety" %}
-					                        		{% trans "This group will be set to be publicly visible!" %}
-					                        	{% else %}
-					                        		{% trans "This project will be set to be publicly visible!" %}
-					                        	{% endif %}
-					                        	<br/><br/>
-										        {% trans "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!" %}
-										        <br/><br/>
-												{% trans "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the public visibility setting!" %}
-										        <br/><br/>
-										        {% trans "If you do not wish this, you can change the visibility setting above." %}
-					                        </li>
-					                    </ul>
-					                </div>
-					                <script type="text/javascript">
-										{# show or hide a visibility warning #}
-										$('#group-public-field').on('change', function(){
-											if ($(this).val() == "true") {
-												$('#group-visibility-warning').show();
-											} else {
-												$('#group-visibility-warning').hide();
-											} 
-										});
-									</script>
+				
+                        {# SimpleMDE Description Field (gets initialized in extrahead) #}					                
+                        
+                        {% trans "Short description" as desc_label %}
+	                    {% if group_model == "CosinnusSociety" %}
+	                        {% captureas group_legend %}{% trans "Describe the group in a few sentences." %} {% trans "This description will be publicly visible." %}{% endcaptureas %}
+                        {% else %}
+                            {% captureas group_legend %}{% trans "Describe the project in a few sentences." %} {% trans "This description will be publicly visible." %}{% endcaptureas %}
+                        {% endif %}
+                        {% include 'cosinnus/fields/default_field.html' with label=desc_label legend=group_legend field_id=form.forms.obj.description.id_for_label %}
+                        
+		                {% block group_form_description_field %}
+					        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description large_field=True placeholder=desc_label %}
+                        {% endblock group_form_description_field %}
+                        
+                        
+                        {# Avatar Field #}
+                        {% trans "Avatar" as avatar_label %}
+                        {% captureas avatar_legend %}{% trans "A picture for better recognition." %} {% trans "File Size" %}: {% trans "max. 10 MB" %}{% endcaptureas %}
+                        {% captureas preview_html %}
+                            {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.width}}px;height:{{SETTINGS.AWESOME_AVATAR.height}}px{% endcaptureas %}
+                            {% captureas group_avatar_type %}{% if group_model == "CosinnusSociety" %}group{% else %}project{% endif %}{% endcaptureas %}
+                            <div id="id_avatar-preview" class="awesome-avatar-preview regular-space" style="{{ preview_style }}">
+                                {% include "cosinnus/group/group_avatar_image.html" with group=object extra_style=preview_style type=group_avatar_type %}
+                            </div>
+                        {% endcaptureas %}
+                        {% include 'cosinnus/fields/avatar_field.html' with avatar_field=form.forms.obj.avatar label=avatar_label legend=avatar_legend preview_html=preview_html %}
+                        
+                        
+                        {# Website Field #}
+                        {% trans "Website" as website_label %}
+                        {% trans "Example: http://mywebsite.com" as website_placeholder %}
+                        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.website label=website_label placeholder=website_placeholder %}
+                        
+                        
+                        {% include "cosinnus/media_tags_group.html"%} 
+                        
+                        
+                        {# Locations Inlineform #}
+                        {% trans "Where are you active?" as locations_label %}
+                        {% trans "Remove location" as loc_rm_label %}
+                        {% captureas loc_ab_label %}{% trans "Add location" %}{% endcaptureas %}                
+                        {% include 'cosinnus/fields/inlineform_field.html' with inline_form=inlines.0 label=locations_label   content_template='cosinnus/fields/inlineform_group_locations_content.html'    unique_id='locations'   add_button_label=loc_ab_label   remove_button_label=loc_rm_label extra_id_div="location-map" %}
+                        
+                        
+                        
+                        {% if form.forms.obj.parent %}
+	                        {# Parent Field #}
+                            {% trans "Which Group does the group belong to?" as parent_label %}
+						    {% trans "Select Group" as parent_placeholder %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.parent label=parent_label placeholder=parent_placeholder %}
+                        {% endif %}
+                        
+                        {% if form.forms.obj.related_groups %}
+                            {# Related Groups Field #}
+                            {% trans "Are there any projects/groups related to this one?" as related_label %}
+                            {% trans "Select related Projects/Groups" as related_placeholder %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.related_groups label=related_label placeholder=related_placeholder large_field=True %}
+                        {% endif %}
+                        
+                        
+                        {# Group Visibility Field #}
+		                {% trans "Privacy settings" as visibility_label %}
+		                {% trans "This will be the default setting for all content created by members." as visibility_legend %}
+		                {% captureas visibility_warning_html %}
+		                    <div class="group-public-warning-area" {% if not object or not object.public %}style="display: none;"{% endif %} id="group-visibility-warning">
+                                <i class="fa fa-fw fa-globe"></i>
+                                {% if group_model == "CosinnusSociety" %}
+                                    {% trans "This group will be set to be publicly visible!" %}
+                                {% else %}
+                                    {% trans "This project will be set to be publicly visible!" %}
+                                {% endif %}
+                                <br/><br/>
+                                {% trans "This means that any registered user can access and see it, although only members can create content. In addition, all content will be set to be publicly visible by default (this can be changed for each item on creation). Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!" %}
+                                <br/><br/>
+                                {% trans "As administrator of a group or project, it is your responsibility to ensure that the content posted by its members does not infringe any copyright or other laws. Please keep this in mind, especially when enabling the public visibility setting!" %}
+                                <br/><br/>
+                                {% trans "If you do not wish this, you can change the visibility setting above." %}
+                            </div>
+                            <script type="text/javascript">
+                                {# show or hide a visibility warning #}
+                                $(function(){
+	                                $('#group-public-field').on('change', function(){
+	                                    if ($(this).val() == "true") {
+	                                        $('#group-visibility-warning').show();
+	                                    } else {
+	                                        $('#group-visibility-warning').hide();
+	                                    } 
+	                                });
+                                });
+                            </script>
+		                {% endcaptureas %}
+		                {% captureas visibility_field_html %}
+		                    <select name="public" id="group-public-field">
+                                <option default value="false">{% trans "Team members only" %}</option>
+                                <option {% if object and object.public %}selected{% endif %} value="true">{% trans "Public (visible without login)" %}</option>
+                            </select>
+		                {% endcaptureas %}
+		                
+		                {% include 'cosinnus/fields/default_field.html' with field_html=visibility_field_html field=form.forms.media_tag.visibility field_id="group-public-field" label=visibility_label legend=visibility_legend extra_html=visibility_warning_html %}
+		                
+		            
+                        {# Apps selector fields #}			                
+		                {% trans "Which apps should be activated?" as apps_label %}
+		                {% captureas apps_html %}
+		                    <div class="input-area" style="padding: 5px;">
+			                    {% for app_option in deactivated_app_selection %}
+                                    {% captureas cosinnus_css_class %}{% if app_option.app == 'todo' %}app-todos{% elif app_option.app == 'note' %}app-main{% elif app_option.app == 'file' %}app-files{% elif app_option.app == 'event' %}app-calendar{% elif app_option.app %}app-{{ app_option.app }}{% else %}app-main{% endif %}{% endcaptureas %}
+                                    <span class="pull-left inline-list nowrap {{ cosinnus_css_class }}">
+                                        {% if app_option.app_not_activatable %}
+                                            <span class="select-disabled" title="{% trans "This App can only be activated for a Group, but not for a Project!" %}">
+                                                <span class="app-background small-padding"><input type="checkbox" disabled="disabled"/></span
+                                                ><span class="app-background-light dark-color small-padding">
+                                                    {{ app_option.label }}
+                                                </span>
+                                            </span>
+                                        {% else %}
+                                            <a class="app-background small-padding"><input id="checkbox_{{ app_option.app_name }}" type="checkbox" name="deactivated_apps" {% if app_option.checked == True %}checked="true"{% endif %} value="{{ app_option.app_name }}" /></a
+                                            ><span class="app-background-light dark-color small-padding" onclick="$('#checkbox_{{ app_option.app_name }}').prop('checked', !($('#checkbox_{{ app_option.app_name }}').prop('checked')));">
+                                                {{ app_option.label }}
+                                            </span>
+                                        {% endif %}
+                                    </span>
+                                {% endfor %}
+                            </div>
+		                {% endcaptureas %}
+		                {% include 'cosinnus/fields/default_field.html' with extra_html=apps_html label=apps_label large_field=True %}
+                        
 					            
-					                <label>{% trans "Which apps should be activated?" %}</label>
-					                <div class="regular-space">
-					                    <ol class="input-area">
-					                        <li class= "w100" style="white-space:normal;">
-					                            {% for app_option in deactivated_app_selection %}
-					                                {% captureas cosinnus_css_class %}{% if app_option.app == 'todo' %}app-todos{% elif app_option.app == 'note' %}app-main{% elif app_option.app == 'file' %}app-files{% elif app_option.app == 'event' %}app-calendar{% elif app_option.app %}app-{{ app_option.app }}{% else %}app-main{% endif %}{% endcaptureas %}
-					                                <span class="pull-left inline-list nowrap {{ cosinnus_css_class }}">
-					                                	{% if app_option.app_not_activatable %}
-					                                		<span class="select-disabled" title="{% trans "This App can only be activated for a Group, but not for a Project!" %}">
-						                                		<span class="app-background small-padding"><input type="checkbox" disabled="disabled"/></span
-							                                    ><span class="app-background-light dark-color small-padding">
-							                                        {{ app_option.label }}
-							                                    </span>
-						                                    </span>
-					                                	{% else %}
-						                                    <a class="app-background small-padding"><input id="checkbox_{{ app_option.app_name }}" type="checkbox" name="deactivated_apps" {% if app_option.checked == True %}checked="true"{% endif %} value="{{ app_option.app_name }}" /></a
-						                                    ><span class="app-background-light dark-color small-padding" onclick="$('#checkbox_{{ app_option.app_name }}').prop('checked', !($('#checkbox_{{ app_option.app_name }}').prop('checked')));">
-						                                        {{ app_option.label }}
-						                                    </span>
-						                                {% endif %}
-					                                </span>
-					                            {% endfor %}
-					                        </li>
-					                    </ol>
-					                </div>
-					            
-					            
-					            </div><!-- col -->
-					            <div class="col-md-4">
-					                <p class="transparent"><strong>{% trans "Description" %}</strong></p>
-					                <p class="transparent">{% trans "Describe your activities and goals" %}</p>
-					            </div><!-- col -->
-					        </div><!-- row -->
-					        
-				        </fieldset>
-						
-						
 					</div>
 					
 					
 					<div class="tab-pane {% if SETTINGS.COSINNUS_MICROSITES_ENABLED and request.GET.tab == 'microsite' %}active{% endif %}" id="microsite" >
 						
 						{% block group_form_microsite_tab %}
-							<label>
-		                    	{% trans "Microsite Wallpaper" %} (1140px x 240px, {% trans "max. 10 MB" %})
-		                    </label>
-							{{ form.forms.obj.wallpaper.errors }}
-							<div class="row">
-			                 	<div class="col-md-8 regular-space">
+						    
+						    {# Microsite Wallpaper Field #}
+		                    {% captureas wallpaper_label %}{% trans "Microsite Wallpaper" %} (1140px x 240px, {% trans "max. 10 MB" %}){% endcaptureas %}
+		                    {% captureas wallpaper_html %}
+									{{ form.forms.obj.wallpaper.errors }}
+									
 									{% if object.wallpaper %}
-									{% trans "Currently" %}: <a href="{{ object.wallpaper.url }}">{{ object.wallpaper }}</a> 
-									{% endif %}
-									<input id="wallpaper-clear_id" name="wallpaper-clear" type="checkbox"> 
-									<label for="wallpaper-clear_id">{% trans "Reset" %}</label><br>
-									{% trans "Change" %}: 
-									<input class="form-control" id="fileToUpload" name="wallpaper" placeholder="{% trans "Upload an image." %}" type="file">
-								</div>
-			             	</div>
+								        <div class="row">
+								            <div class="col-xs-4 col-sm-2">
+								                <img class="image" style="width: 120px;" src="{% thumbnail object.wallpaper 120x120 crop=1 upscale=1 %}"></img>
+								            </div>
+								            <div class="col-xs-8 col-sm-10">
+								    {% endif %} 
+								    <div class="file-input">
+		                                <input class="form-control" id="fileToUpload" name="wallpaper" placeholder="{% trans "Upload an image." %}" type="file">
+								    </div>
+								    {% if object.wallpaper %}
+								            </div>
+								        </div>
+								    {% endif %}
+									
+	                        {% endcaptureas %}
+                            {% captureas wallpaper_extra_html %}
+			                        {% if object.wallpaper %}
+					                    <div class="btn btn-emphasized btn-small btn-no-float regular-space">
+					                        <ul class="media-list">
+					                            <li class="media">
+					                                <a class="pull-left" href="#">
+					                                    <i class="fa fa-square-o"></i>
+	                                                    <input type="hidden" id="wallpaper-clear_id" name="wallpaper-clear"> 
+					                                </a>
+					                                <div class="media-body click-previous-a">
+					                                    {% trans "Reset" %}
+					                                </div>
+					                            </li>
+					                        </ul>
+					                    </div>
+	                                {% endif %}
+		                    {% endcaptureas %}
+							{% include 'cosinnus/fields/default_field.html' with label=wallpaper_label field_html=wallpaper_html extra_html=wallpaper_extra_html first=True large_field=True %}
 							
+							
+                            {# SimpleMDE Description Long Field (gets initialized in extrahead) #}                                   
+                            {% trans "Description and Infos" as description_long_label %}
+                            {% captureas description_long_legend %}
+                                {% if group_model == "CosinnusSociety" %}{% trans "Describe the group in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
+                                {% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
+                            {% endcaptureas %}
+                            {% include 'cosinnus/fields/default_field.html' with label=description_long_label legend=description_long_legend %}
+                            
 							{% block group_form_microsite_description_field %}
-			                    <label>
-			                    	{% if group_model == "CosinnusSociety" %}{% trans "Describe the group in a few sentences." %}{% else %}{% trans "Describe the project in a few sentences." %}{% endif %}
-			                    	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
-			                    </label>
-			                    {{ form.forms.obj.description_long.errors }}
-			                    <div type="button" class="btn btn-default w100 regular-space">
-			                        <ul class="media-list">
-			                            <li class="media">
-			                                <a class="pull-left" href="#">
-			                                    <i class="fa fa-pencil"></i>
-			                                </a>
-			                                <div class="media-body">
-			                                    {% render_field form.forms.obj.description_long  %}
-			                                </div>
-			                            </li>
-			                        </ul>
-			                    </div>
+	                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description_long large_field=True %}
 		                    {% endblock group_form_microsite_description_field %}
 		                    
-		                    <label>
-		                    	{% trans "Contact info. How you can be reached, addresses, social media, etc..." %}
+		                    
+	                        {# Contact Info Field #}
+	                        {% trans "Contact info" as contact_info_label %}
+		                    {% captureas contact_info_legend %}
+		                    	{% trans "How you can be reached, addresses, social media, etc..." %}
 		                    	{% trans "This is a public description that can be seen by anyone and will be shown on the microsite." %}
-		                    </label>
-		                    {{ form.forms.obj.contact_info.errors }}
-		                    <div type="button" class="btn btn-default w100 regular-space">
-		                        <ul class="media-list">
-		                            <li class="media">
-		                                <a class="pull-left" href="#">
-		                                    <i class="fa fa-pencil"></i>
-		                                </a>
-		                                <div class="media-body">
-		                                	{% captureas placeholder %}{% trans "Contact Information" %}{% endcaptureas %}
-		                                    {% render_field form.forms.obj.contact_info placeholder=placeholder %}
-		                                </div>
-		                            </li>
-		                        </ul>
-		                    </div>
-		                    
-		                    
-			                <label>{% trans "From which apps should public items be shown on the microsite?" %}</label>
-			                <div class="regular-space">
-			                    <ol class="input-area">
-			                        <li class= "w100" style="white-space:normal;">
-			                            {% for app_option in microsite_public_apps_selection %}
-			                                {% captureas cosinnus_css_class %}{% if app_option.app == 'todo' %}app-todos{% elif app_option.app == 'note' %}app-main{% elif app_option.app == 'file' %}app-files{% elif app_option.app == 'event' %}app-calendar{% elif app_option.app %}app-{{ app_option.app }}{% else %}app-main{% endif %}{% endcaptureas %}
-			                                <span class="pull-left inline-list nowrap {{ cosinnus_css_class }}">
-			                                    <a class="app-background small-padding"><input id="checkbox_microsite_{{ app_option.app_name }}" type="checkbox" name="microsite_public_apps" {% if app_option.checked == True %}checked="true"{% endif %} value="{{ app_option.app_name }}" /></a
-			                                    ><span class="app-background-light dark-color small-padding" onclick="$('#checkbox_microsite_{{ app_option.app_name }}').prop('checked', !($('#checkbox_microsite_{{ app_option.app_name }}').prop('checked')));">
-			                                        {{ app_option.label }}
-			                                    </span>
-			                                </span>
-			                            {% endfor %}
-			                        </li>
-			                    </ol>
-			                </div>
+		                    {% endcaptureas %}
+                        	{% trans "Contact Information" as contact_info_placeholder %}
+	                        {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.contact_info label=contact_info_label legend=contact_info_legend placeholder=contact_info_placeholder large_field=True %}
+	                        
+
+		                    {# Microsite Public Apps Field #}
+			                {% trans "From which apps should public items be shown on the microsite?" as microsite_apps_label %}
+			                {% captureas microsite_apps_html %}
+			                    <div class="input-area" style="padding: 5px;">
+	                                {% for app_option in microsite_public_apps_selection %}
+	                                    {% if not app_option.app == 'note' %} {% comment %} Fix "MICROSITE_DOUBLE_NEWSBOX": hide note checkbox {% endcomment %}
+		                                    {% captureas cosinnus_css_class %}{% if app_option.app == 'todo' %}app-todos{% elif app_option.app == 'note' %}app-main{% elif app_option.app == 'file' %}app-files{% elif app_option.app == 'event' %}app-calendar{% elif app_option.app %}app-{{ app_option.app }}{% else %}app-main{% endif %}{% endcaptureas %}
+		                                    <span class="pull-left inline-list nowrap {{ cosinnus_css_class }}">
+		                                        <a class="app-background small-padding"><input id="checkbox_microsite_{{ app_option.app_name }}" type="checkbox" name="microsite_public_apps" {% if app_option.checked == True %}checked="true"{% endif %} value="{{ app_option.app_name }}" /></a
+		                                        ><span class="app-background-light dark-color small-padding" onclick="$('#checkbox_microsite_{{ app_option.app_name }}').prop('checked', !($('#checkbox_microsite_{{ app_option.app_name }}').prop('checked')));">
+		                                            {{ app_option.label }}
+		                                        </span>
+		                                    </span>
+		                                {% endif %}
+	                                {% endfor %}
+                                </div>
+	                        {% endcaptureas %}
+	                        {% include 'cosinnus/fields/default_field.html' with extra_html=microsite_apps_html label=microsite_apps_label large_field=True %}
 		                    
 							
-							<hr>
-							
-	                        <label>{% trans "Video" %}</label>
-	                        {{ form.forms.obj.video.errors }}
-	                        <div type="button" class="btn btn-default w100 regular-space">
-	                            <ul class="media-list">
-	                                <li class="media">
-	                                    <a class="pull-left" href="#">
-	                                        <i class="fa fa-play"></i>
-	                                    </a>
-	                                    <div class="media-body media-body-form-control">
-	                                        {% captureas placeholder %}{% trans "Youtube or Vimeo URL" %}{% endcaptureas %}
-	                                        {% render_field form.forms.obj.video class+="form-control" placeholder=placeholder %}
-	                                    </div>
-	                                </li>
-	                            </ul>
-	                        </div>
+							{# Video URL field #}
+                            {% captureas video_label %}
+                                {% trans "Video" %}
+                            {% endcaptureas %}
+                            {% trans "Youtube or Vimeo URL" as video_legend %}
+                            {% trans "https://www.youtube.com/watch?v=example-video" as video_placeholder %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.video legend=video_legend label=video_label placeholder=video_placeholder %}
+                            
 	                        
-	                        <label>{% trans "Twitter: Embedded User Timeline" %}</label>
-	                        {{ form.forms.obj.twitter_username.errors }}
-	                        <div type="button" class="btn btn-default w100 regular-space">
-	                            <ul class="media-list">
-	                                <li class="media">
-	                                    <a class="pull-left" href="#">
-	                                        <i class="fa fa-twitter"></i>
-	                                    </a>
-	                                    <div class="media-body media-body-form-control">
-	                                        {% captureas placeholder %}{% trans "Twitter Username (example: @username)" %}{% endcaptureas %}
-	                                        {% render_field form.forms.obj.twitter_username class+="form-control" placeholder=placeholder %}
-	                                    </div>
-	                                </li>
-	                            </ul>
-	                        </div>
+	                        {# Twitter Username Embed field #}
+                            {% trans "Twitter: Embedded User Timeline" as twitter_label %}
+                            {% trans "Twitter Username (example: @username)" as twitter_placeholder %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.twitter_username label=twitter_label placeholder=twitter_placeholder %}
+                            
 	                        
-	                        <label>
-	                        	{% trans "Twitter: Embedded Hashtag or Custom Timeline" %}
-		                        <br/>
-		                        <i>
-	                        		{% trans "You can create a custom twitter timeline here:" %}
-	                        		<a href="https://twitter.com/settings/widgets" target="_blank">https://twitter.com/settings/widgets</a>
-	                        		<i class="fa fa-external-link"></i>
-	                    		</i>
-	                        </label>
-	                        {{ form.forms.obj.twitter_widget_id.errors }}
-	                        <div type="button" class="btn btn-default w100 regular-space">
-	                            <ul class="media-list">
-	                                <li class="media">
-	                                    <a class="pull-left" href="#">
-	                                        <i class="fa fa-twitter"></i>
-	                                    </a>
-	                                    <div class="media-body media-body-form-control">
-	                                        {% captureas placeholder %}{% trans "Widget-id (example: 744907261810618721) or embed-code (HTML)" %}{% endcaptureas %}
-	                                        {% render_field form.forms.obj.twitter_widget_id class+="form-control" placeholder=placeholder %}
-	                                    </div>
-	                                </li>
-	                            </ul>
-	                        </div>
+                            {# Twitter widget Field #}
+                            {% trans "Twitter: Embedded Hashtag or Custom Timeline" as twitter_widget_label %}
+                            {% captureas twitter_widget_legend %}
+                                {% trans "You can create a custom twitter timeline here:" %}
+                                <a href="https://twitter.com/settings/widgets" target="_blank">https://twitter.com/settings/widgets</a>
+                                <i class="fa fa-external-link"></i>
+                            {% endcaptureas %}
+                            {% trans "Widget-id (example: 744907261810618721) or embed-code (HTML)" as twitter_widget_placeholder %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.twitter_widget_id label=twitter_widget_label legend=twitter_widget_legend placeholder=twitter_widget_placeholder large_field=True %}
+                            
 	                        
-	                        <label>{% trans "Embed Flickr Gallery" %}</label>
-	                        {{ form.forms.obj.flickr_url.errors }}
-	                        <div type="button" class="btn btn-default w100 regular-space">
-	                            <ul class="media-list">
-	                                <li class="media">
-	                                    <a class="pull-left" href="#">
-	                                        <i class="fa fa-play"></i>
-	                                    </a>
-	                                    <div class="media-body media-body-form-control">
-	                                        {% captureas placeholder %}{% trans 'Flickr Gallery URL (example: "https://www.flickr.com/photos/username/sets/1234567890")' %}{% endcaptureas %}
-	                                        {% render_field form.forms.obj.flickr_url class+="form-control" placeholder=placeholder %}
-	                                    </div>
-	                                </li>
-	                            </ul>
-	                        </div>
+                            {# Twitter Username Embed field #}
+                            {% trans "Embed Flickr Gallery" as flickr_label %}
+                            {% trans 'Flickr Gallery URL (example: "https://www.flickr.com/photos/username/sets/1234567890")' as flickr_placeholder %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.flickr_url label=flickr_label placeholder=flickr_placeholder %}
+                            
 	                        
-	                        <hr>
+	                        {# Microsite Gallery Images Inlineform #}
+	                        {% captureas mcg_label %}{% trans "Microsite Gallery Images" %} <i>({% trans "File Size" %}: {% trans "max. 10 MB" %})</i>{% endcaptureas %}
+	                        {% trans "Remove gallery image" as  mcg_rm_label %}
+	                        {% captureas  mcg_ab_label %}{% trans "Add gallery image" %}{% endcaptureas %}                
+	                        {% include 'cosinnus/fields/inlineform_field.html' with   inline_form=inlines.1 label=mcg_label   content_template='cosinnus/fields/inlineform_group_microsite_gallery_content.html'    unique_id='mcg'   add_button_label=mcg_ab_label   remove_button_label=mcg_rm_label %}
 	                        
-                            <label>{% trans "Microsite Gallery Images" %}</label>
-                            {% with gallery_image_formset=inlines.1 %}
-                                {{ gallery_image_formset.management_form }}
-                                {% for inlineform in gallery_image_formset %}
-                                    <div id="gallery-images-wrapper-{{ forloop.counter0 }}" {% if not forloop.counter == 1 and not forloop.counter <= gallery_image_formset.management_form.INITIAL_FORMS.value %}style="display: none;"{% endif %}>
-                                    
-                                        <div type="button" class="btn btn-default w100 ">
-                                            <ul class="media-list">
-                                                <li class="media">
-                                                    <a class="pull-left" href="#">
-                                                        <i class="fa fa-image"></i>
-                                                    </a>
-                                                    <div class="media-body {% if forloop.last %}regular-space{% else %}fine-space{% endif %}">
-                                                        
-                                                        <div class="media">
-                                                            <a class="pull-left">
-                                                                {% if inlineform.image.value %}
-                                                                    <img class="image" src="{% thumbnail inlineform.image.value 40x40 crop=1 upscale=1 %}"></img>
-                                                                {% else %}
-                                                                    <i class="fa fa-image"></i>
-                                                                {% endif %}
-                                                            </a>
-                                                            <div style="padding: 0px 10px; display: inline-block;">
-                                                                {% captureas placeholder %}{% trans "Choose and upload a gallery image" %}{% endcaptureas %}
-                                                                {{ inlineform.image.errors }}
-                                                                {% render_field inlineform.image class+="form-control" placeholder=placeholder %}
-                                                                
-                                                                <div>
-                                                                    <i>{% trans "File Size" %}: {% trans "max. 10 MB" %}</i>
-                                                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                                                    
-                                                                    <label for="{{ inlineform.DELETE.id_for_label }}">{% trans "Remove gallery image" %}:</label>
-                                                                    {{ inlineform.DELETE }}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        {{ inlineform.group }}
-                                                        {{ inlineform.id }}
-                                                        {% if forloop.counter >= gallery_image_formset.management_form.INITIAL_FORMS.value and forloop.counter < gallery_image_formset.management_form.MAX_NUM_FORMS.value %}
-                                                            <div id="gallery-images-more-{{ forloop.counter0 }}">
-                                                                <button class="btn btn-emphasized pull-right" onclick="$('#gallery-images-more-{{ forloop.counter0 }}').hide(); $('#gallery-images-wrapper-{{ forloop.counter }}').show(); return false;">+ {% trans "Add gallery image" %}...</button>
-                                                            </div>
-                                                        {% endif %}
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        
-                                    </div>
-                                {% endfor %}
-                            {% endwith %}
 	                        
-	                        <hr>
-	                        
-                            <label>{% trans "Show Microsite Call to Action Box" %}</label>
-                            {{ form.forms.obj.call_to_action_active.errors }}
-                            <div type="button" class="btn btn-default w100 regular-space">
-                                <ul class="media-list">
-                                    <li class="media">
-                                        <a class="pull-left" href="#">
-                                            <i class="fa fa-exclamation"></i>
-                                        </a>
-                                        <div class="media-body media-body-form-control">
-		                                    <ol class="input-area">
-		                                        <li class="w100">
-		                                            {{ form.forms.obj.call_to_action_active.errors }}
-		                                            <label for="{{ form.forms.obj.call_to_action_active.auto_id }}">
-		                                                {% render_field form.forms.obj.call_to_action_active %}
-		                                                {% trans "Show Call to Action Box" %}
-		                                            </label>
-		                                        </li>
-		                                    </ol>
-		                                </div>
-                                    </li>
-                                </ul>
-                            </div>
+                            {# Microsite Checkbox field #}
+                            {% trans "Show Microsite Call to Action Box" as mc_label %}
+                            {% trans "A box shown on the microsite that contains buttons to your external campaigns or websites" as mc_legend %}
+                            {% trans "Show Call to Action Box" as mc_box_label %}
+                            {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.call_to_action_active label=mc_label legend=mc_legend checkbox_label=mc_box_label %}
+                            
                             
                             <script type="text/javascript">
                                 var updateCallToActionFrame = function(e, target) {
@@ -617,111 +383,28 @@
                                         $("#call-to-action-fields").slideUp(400);
                                     };
                                 };
-                                $("#{{ form.forms.obj.call_to_action_active.auto_id }}").on("change click", updateCallToActionFrame)
+                                $("#{{ form.forms.obj.call_to_action_active.auto_id }}").on("change click", updateCallToActionFrame);
                             </script>
                             
                             <div id="call-to-action-fields" {% if form.forms.obj.call_to_action_active.value == False %}style="display: none;"{% endif %}>
                             
-	                            <label>{% trans "Call to Action Box Title" %}</label>
-	                            {{ form.forms.obj.call_to_action_title.errors }}
-	                            <div type="button" class="btn btn-default w100 regular-space">
-	                                <ul class="media-list">
-	                                    <li class="media">
-	                                        <a class="pull-left" href="#">
-	                                            <i class="fa fa-pencil"></i>
-	                                        </a>
-	                                        <div class="media-body media-body-form-control">
-	                                            {% captureas placeholder %}{% trans "Title of the box header" %}{% endcaptureas %}
-	                                            {% render_field form.forms.obj.call_to_action_title class+="form-control" placeholder=placeholder %}
-	                                        </div>
-	                                    </li>
-	                                </ul>
-	                            </div>
+	                            {# Call to Action Title field #}
+	                            {% trans "Call to Action Box Title" as cta_label %}
+	                            {% trans "Title of the box header" as cta_placeholder %}
+	                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.call_to_action_title label=cta_label placeholder=cta_placeholder %}
 	                            
-	                            <label>{% trans "Call to Action Box Description" %}</label>
-	                            {{ form.forms.obj.call_to_action_description.errors }}
-	                            <div type="button" class="btn btn-default w100 regular-space">
-	                                <ul class="media-list">
-	                                    <li class="media">
-	                                        <a class="pull-left" href="#">
-	                                            <i class="fa fa-pencil"></i>
-	                                        </a>
-	                                        <div class="media-body media-body-form-control">
-                                                {% captureas placeholder %}{% trans "Description text inside the box" %}{% endcaptureas %}
-	                                            {% render_field form.forms.obj.call_to_action_description class+="form-control" placeholder=placeholder %}
-	                                        </div>
-	                                    </li>
-	                                </ul>
-	                            </div>
-                            
-	                            {% with call_to_action_formset=inlines.2 %}
-	                                {{ call_to_action_formset.management_form }}
-	                                {% for inlineform in call_to_action_formset %}
-	                                    <div id="call-to-action-wrapper-{{ forloop.counter0 }}" {% if not forloop.counter == 1 and not forloop.counter <= call_to_action_formset.management_form.INITIAL_FORMS.value %}style="display: none;"{% endif %}>
-	                                    
-	                                        <div type="button" class="btn btn-default w100 ">
-	                                            <ul class="media-list">
-	                                                <li class="media">
-	                                                    <a class="pull-left" href="#">
-	                                                        <i class="fa fa-file"></i>
-	                                                    </a>
-	                                                    <div class="media-body {% if forloop.last %}regular-space{% else %}fine-space{% endif %}">
-	                                                        
-                                                                
-                                                                <label>{% trans "Call to Action Button" %} #{{ forloop.counter }}</label><br/>
-								                                {{ inlineform.label.errors }}
-								                                <div type="button" class="btn btn-default w100 regular-space">
-								                                    <ul class="media-list">
-								                                        <li class="media">
-								                                            <a class="pull-left" href="#">
-								                                                <i class="fa fa-pencil"></i>
-								                                            </a>
-								                                            <div class="media-body media-body-form-control">
-								                                                {% captureas placeholder %}{% trans "Label of the Button" %}{% endcaptureas %}
-								                                                {% render_field inlineform.label class+="form-control" placeholder=placeholder %}
-								                                            </div>
-								                                        </li>
-								                                    </ul>
-								                                </div>
-								                                
-								                                <br/>
-								                                
-									                            {{ inlineform.url.errors }}
-									                            <div type="button" class="btn btn-default w100 regular-space">
-									                                <ul class="media-list">
-									                                    <li class="media">
-									                                        <a class="pull-left" href="#">
-									                                            <i class="fa fa-link"></i>
-									                                        </a>
-									                                        <div class="media-body media-body-form-control">
-									                                            {% captureas placeholder %}{% trans 'Link URL' %}{% endcaptureas %}
-									                                            {% render_field inlineform.url class+="form-control" placeholder=placeholder %}
-									                                        </div>
-									                                    </li>
-									                                </ul>
-									                            </div>
-                                                                
-                                                            <div>
-                                                                <label for="{{ inlineform.DELETE.id_for_label }}">{% trans "Remove button" %}:</label>
-                                                                {{ inlineform.DELETE }}
-                                                            </div>
-                                                                
-                                                                
-	                                                        {{ inlineform.group }}
-	                                                        {{ inlineform.id }}
-	                                                        {% if forloop.counter >= call_to_action_formset.management_form.INITIAL_FORMS.value and forloop.counter < call_to_action_formset.management_form.MAX_NUM_FORMS.value %}
-	                                                            <div id="call-to-action-more-{{ forloop.counter0 }}">
-	                                                                <button class="btn btn-emphasized pull-right" onclick="$('#call-to-action-more-{{ forloop.counter0 }}').hide(); $('#call-to-action-wrapper-{{ forloop.counter }}').show(); return false;">+ {% trans "Add button" %}...</button>
-	                                                            </div>
-	                                                        {% endif %}
-	                                                    </div>
-	                                                </li>
-	                                            </ul>
-	                                        </div>
-	                                        
-	                                    </div>
-	                                {% endfor %}
-	                            {% endwith %}
+	                            
+	                            {# Contact Info Field #}
+	                            {% trans "Call to Action Box Description" as cta2_label %}
+	                            {% trans "Description text inside the box" as cta2_placeholder %}
+	                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.call_to_action_description label=cta2_label placeholder=cta2_placeholder large_field=True %}
+	                            
+	                            
+	                            {# Microsite Gallery Images Inlineform #}
+	                            {% trans "Remove button" as  ctab_rm_label %}
+	                            {% captureas  ctab_ab_label %}{% trans "Add button" %}{% endcaptureas %}                
+	                            {% include 'cosinnus/fields/inlineform_field.html' with   inline_form=inlines.2   content_template='cosinnus/fields/inlineform_group_call_to_action_button_content.html'    unique_id='ctab'   add_button_label=ctab_ab_label   remove_button_label=ctab_rm_label %}
+	                            
                             </div>
 	                        
 	                    {% endblock group_form_microsite_tab %}

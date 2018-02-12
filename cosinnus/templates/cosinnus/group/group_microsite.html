@@ -400,7 +400,7 @@
 							    		{% for gallery_image in gallery_images %}
 							    			{# up to 3 images side by side in video view , or 6 in non-video. xs always gets 2 images next to each other #}
 							    			<div class="{% if group.video %}col-xs-6 col-md-4{% else %}col-xs-6 col-sm-3 col-md-2{% endif %} regular-space">
-								                <a href="{{ gallery_image.static_image_url }}" data-lightbox="microsite-image-gallery" data-title="{{ gallery_image.title }}">
+								                <a href="{{ gallery_image.static_image_url }}" data-lightbox-download="{{ gallery_image.static_image_url }}" data-lightbox="microsite-image-gallery" data-title="{{ gallery_image.title }}">
 								                    <img class="image" src="{% thumbnail gallery_image.image 300x300 crop=1 upscale=1 %}" title='{{ gallery_image.title }}'/>
 								                </a>
 							    			</div>
@@ -543,23 +543,25 @@
 				{# Public objects box #}
 				{% if public_objects %}
 					{% for app_name, public_object_list in public_objects.items %}
-						<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
-				            <ul class="media-list">
-				                <li class="media">
-				                    <a class="pull-left btn-extra-emphasized" href="#"></a>
-				                    <div class="media-body">
-				                        {% trans app_name context "the_app" %}
-				                    </div>
-				                </li>
-				            </ul>
-				        </div><!-- btn -->
-				        <div class="" style="background-color: #ffffff !important;">
-				        	{% with user=anonymous_user %}
-					        	{% for public_object in public_object_list %}
-					        		{% cosinnus_render_single_object public_object hide_group_name=True no_space=True %}
-					        	{% endfor %}
-				        	{% endwith %}
-						</div>
+					    {% if not app_name == 'note' %} {% comment %} Fix "MICROSITE_DOUBLE_NEWSBOX": hide note box {% endcomment %}
+							<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+					            <ul class="media-list">
+					                <li class="media">
+					                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+					                    <div class="media-body">
+					                        {% trans app_name context "the_app" %}
+					                    </div>
+					                </li>
+					            </ul>
+					        </div><!-- btn -->
+					        <div class="" style="background-color: #ffffff !important;">
+					        	{% with user=anonymous_user %}
+						        	{% for public_object in public_object_list %}
+						        		{% cosinnus_render_single_object public_object hide_group_name=True no_space=True %}
+						        	{% endfor %}
+					        	{% endwith %}
+							</div>
+					    {% endif %}
 					{% endfor %}
 				{% endif %}
 				

@@ -12,7 +12,7 @@
         <div class="alert alert-info alert-dismissable">
             <i class="fa fa-info-circle fa-3x"></i>
             <button id="close_button" type="button" class="close" data-dismiss="alert" aria-hidden="true" {% djajax_connect user.cosinnus_profile.settings trigger_on="click" fixed_value="test_msg:true" %}>&#215;</button>
-            <p>{% trans "This message will never reappear when you remove it." %}</p>
+            <p>This message will never reappear when you remove it.</p>
         </div>
     {% endif %}
 
@@ -110,7 +110,7 @@
 			
 			
 			<div class="row">
-			    <div class="col-md-6 col-lg-4">
+			    <div class="col-md-6 col-lg-4 large-space">
 			
 			        <div type="button" class="btn btn-emphasized btn-headline btn-no-interact">
 			            <ul class="media-list">
@@ -145,7 +145,7 @@
 			        </div><!-- content-box -->
 			    </div><!-- column -->
 			
-			    <div class="col-md-6 col-lg-4">
+			    <div class="col-md-6 col-lg-4 large-space">
 			
 			        <div type="button" class="btn btn-emphasized btn-headline btn-no-interact fine-space">
 			            <ul class="media-list">
@@ -155,26 +155,28 @@
 			                        <i class="fa fa-users"></i>
 			                    </a>
 			                    <div class="media-body">
-			                        {% trans "My Projects" %}
+			                        {% trans "My Groups" %}
 			                    </div>
 			                </li>
 			            </ul>
 			        </div><!-- btn -->
 			        
-			        {% for group in profile.cosinnus_groups %}
-			            <button type="button" class="btn btn-default w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ group.get_absolute_url }}">
-			                <ul class="media-list">
-			                    <li class="media">
-			                        <a class="pull-left">
-			                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
-			                        </a>
-			                        <div class="media-body">
-			                            {{ group.name }}
-			                        </div>
-			                    </li>
-			                </ul>
-			            </button>
-			        {% endfor %}
+			        {% with groups=profile.cosinnus_societies %}
+				        {% for group in groups %}
+				            <button type="button" class="btn btn-default w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ group.get_absolute_url }}">
+				                <ul class="media-list">
+				                    <li class="media">
+				                        <a class="pull-left">
+				                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
+				                        </a>
+				                        <div class="media-body">
+				                            {{ group.name }}
+				                        </div>
+				                    </li>
+				                </ul>
+				            </button>
+				        {% endfor %}
+			        {% endwith %}
 			
 			        {% comment %} Mehr button is hidden till we can load more results  
 			        <button type="button" class="btn btn-emphasized large-space">
@@ -196,6 +198,60 @@
 			
 			
 			    </div><!-- column -->
+			    
+			    <div class="col-md-6 col-lg-4 large-space">
+            
+                    <div type="button" class="btn btn-emphasized btn-headline btn-no-interact fine-space">
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left btn-extra-emphasized" href="#"></a>
+                                <a class="pull-left" href="#">
+                                    <i class="fa fa-users"></i>
+                                </a>
+                                <div class="media-body">
+                                    {% trans "My Projects" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </div><!-- btn -->
+                    
+                    {% with projects=profile.cosinnus_projects %}
+                        {% for group in groups %}
+                            <button type="button" class="btn btn-default w100 {% if forloop.last %}large{% else %}fine{% endif %}-space" href="{{ group.get_absolute_url }}">
+                                <ul class="media-list">
+                                    <li class="media">
+                                        <a class="pull-left">
+                                            {% include "cosinnus/group/group_avatar_image.html" with group=group %}
+                                        </a>
+                                        <div class="media-body">
+                                            {{ group.name }}
+                                        </div>
+                                    </li>
+                                </ul>
+                            </button>
+                        {% endfor %}
+                    {% endwith %}
+            
+                    {% comment %} Mehr button is hidden till we can load more results  
+                    <button type="button" class="btn btn-emphasized large-space">
+                        <ul class="media-list">
+                            <li class="media">
+                                <a class="pull-left" href="#"></a>
+                                <a class="pull-right btn-extra-emphasized" href="#">
+                                    <i class="fa fa-chevron-right "></i>
+                                </a>
+                                <div class="media-body">
+                                    <a href="#">
+                                        {% trans "More" %}
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </button>
+                     {% endcomment %}
+            
+            
+                </div><!-- column -->
 			
 			    {% comment %} My Network widget deactivated instead of placeholder 
 			    <div class="col-md-6 col-lg-4">

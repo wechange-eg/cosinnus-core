@@ -364,6 +364,17 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         if not (check_user_superuser(user) or check_ug_admin(user, self.group)):
             # only admins or group admins may see email adresses they haven't invited themselves
             recruited = recruited.filter(invited_by=user)
+            
+        # attach invitation/request date from Membership to user objects
+        membership_object_user_ids = [user.id for user in invited] + [user.id for user in pendings]
+        membership_objects = CosinnusGroupMembership.objects.filter(user_id__in=membership_object_user_ids)
+        dates_dict = dict(membership_objects.values_list('user_id', 'date'))
+        for user in invited:
+            setattr(user, 'membership_status_date', dates_dict[user.id])
+        for user in pendings:
+            setattr(user, 'membership_status_date', dates_dict[user.id])
+        invited = sorted(invited, key=lambda u: u.membership_status_date, reverse=True)
+        pendings = sorted(pendings, key=lambda u: u.membership_status_date, reverse=True)
         
         context.update({
             'admins': admins,

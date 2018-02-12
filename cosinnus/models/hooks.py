@@ -16,7 +16,12 @@ import logging
 from django.contrib.auth.signals import user_logged_in
 from cosinnus.models.profile import GlobalBlacklistedEmail,\
     GlobalUserNotificationSetting
+from cosinnus.models.feedback import CosinnusFailedLoginRateLimitLog
 from django.db import transaction
+
+from cosinnus.core.middleware.login_ratelimit_middleware import login_ratelimit_triggered
+from django.utils.encoding import force_text
+
 logger = logging.getLogger('cosinnus')
 
 User = get_user_model()
@@ -77,5 +82,16 @@ post_save.connect(ensure_container, sender=CosinnusGroup)
 for url_key in group_model_registry:
     group_model = group_model_registry.get(url_key)
     post_save.connect(ensure_container, sender=group_model)
+    
+    
+def on_login_ratelimit_triggered(sender, username, ip, **kwargs):
+    """ Log rate limit attempts """
+    try:
+        CosinnusFailedLoginRateLimitLog.objects.create(username=username, ip=None, portal=CosinnusPortal.get_current())
+    except Exception, e:
+        logger.error('Error while trying to log failed login ratelimit trigger!', extra={'exception': force_text(e)})
+
+login_ratelimit_triggered.connect(on_login_ratelimit_triggered)
+    
     
 from cosinnus.apis.cleverreach import *

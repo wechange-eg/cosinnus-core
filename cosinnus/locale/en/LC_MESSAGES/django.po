@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-07 16:44+0100\n"
-"PO-Revision-Date: 2016-10-26 16:56+0200\n"
+"POT-Creation-Date: 2018-02-05 13:07+0100\n"
+"PO-Revision-Date: 2018-02-05 13:53+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -104,6 +104,10 @@ msgid "This team no longer resides under the URL you entered. You have been redi
 msgstr ""
 
 msgid "This account is no longer active. You have been logged out."
+msgstr ""
+
+#, python-format
+msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
 msgstr ""
 
 msgid "A user requested to become a member of this team (admins only)"
@@ -1162,6 +1166,10 @@ msgstr ""
 msgid "Looks like we had an internal problem while processing your request. The error has been recorded, and we will try to fix it as soon as possible!"
 msgstr ""
 
+#, python-format
+msgid "+%(num_pictures)s more..."
+msgstr ""
+
 msgid "Error embedding a Flickr gallery"
 msgstr ""
 
@@ -1169,6 +1177,15 @@ msgid "Error embedding a twitter timeline"
 msgstr ""
 
 msgid "Error embedding a video"
+msgstr ""
+
+msgid "Help and Assistance for this page"
+msgstr ""
+
+msgid "Help"
+msgstr ""
+
+msgid "Help for this page"
 msgstr ""
 
 msgid "We're sorry. The Map is not supported in Internet Explorer."
@@ -1199,6 +1216,78 @@ msgstr "Convert selected Projects to Groups"
 
 msgid "Apply"
 msgstr ""
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_1_group"
+msgstr "There are Groups and Projects on this Portal. \"Projects\" represent a certain number of people, who can coordinate themselves within this \"Project\". If several projects wish to join together under one roof, for example, in order to discuss topics for all the individual projects, they can found a Group together. If you wish to create a Group, please send a message to the Portal Administrators with the request to create a group. They will clarify all the details."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_2_project"
+msgstr "There are Groups and Projects on this Portal. \"Projects\" represent a certain number of people, who can coordinate themselves within this \"Project\". If several Projects wish to join together under one roof, for example, in order to discuss topics for all the individual projects, thez can found a Group together. Within a project, together with its members, you can create to-do lists, deposit files, create Etherpads and much more."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_3_marketplace"
+msgstr "If you would like to place an advert on Wechange, you can do it here. First choose a title, description a category and a photo (amongst other things) for the ad. By clicking on the \"Create\" button, the ad will be activated for four weeks."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_4_profile"
+msgstr "Here you can edit your profile. Upload an avatar, enter your location or a topic you are interested in and confirm the changes by clicking on \"Save\" on the bottom right-hand side. "
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_5_password"
+msgstr "You can change your password in the fields below. When doing so, it is especially important that you try to make your password as long as possible (at least 10 characters). The longer it is, the better. In addition, a special character, a capital letter and a small letter are recommended."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_6_microsite"
+msgstr "You can create a Microsite to make your project externally visible. On this Microsite, you have the opportunity to upload photos, link social media accounts and include contact details. Since an excerpt of the project's short description is visible on the networking map, you should include all the important information in the first three sentences."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_7_notes"
+msgstr "You can post a news item in this section. The news post will be shows to all members of your project/group and serves to keep them updated with the latest."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_8_poll"
+msgstr "Here you can create a poll. This is here for voting over certain things (such as dietary requirements). If you want to find an appointment time with your team, you need to go to the Events tab and then go to \"Event Polls\". "
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_9_todo"
+msgstr "Here you can create a To-Do. In the top right hand corner, you can set a due date or assign the task to a person from your team. By clicking on \"Create\" in the bottom right-hand corner, you have created your To-Do."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_10_documentsetting"
+msgstr "Here you cann add further information to your document, in addition to its already chosen title. For instance, you can assign your document a topic, a place or a file."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_11_document"
+msgstr "Here you can edit your document by entering things into the pad. With the help of the Timeslider (clock symbol), you can look at previous versions and with the arrow symbol, you can easily change the pad into a PDF. You can activate a link in the pad by clicking on </>."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_12_projectadministration"
+msgstr "The administration of Projects begins with managing its membership. Here you can decide who can join your project and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_13_groupadministration"
+msgstr "The administration of Groups begins with managing its membership. Here you can decide who can join your Group and who the Administrator should be. You can invite members from the portal or other people by entering in their email addresses. They will then receive an invitation to register on the portal. "
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_50_profileprivacy"
+msgstr ""
+"Privacy settings for your profile:\n"
+"\n"
+"*  **Members of your projects and groups only:** Your profile is only visible for members of your projects and groups. You will not be listed in \"People\" in the top navigation bar.\n"
+"*  **Registered users only:** People that have registered a user account on the platform can see your profile. Your profile is not publicly visible. You will be listed in \"People\" in the top navigation bar.\n"
+"*  **Everybody:** Even people who are not logged in can see your profile. Your profile is publicly visible and can be found using search engines on the internet."
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_51_objectprivacy"
+msgstr ""
+"Privacy settings for content:\n"
+"\n"
+"*  **Only me:** You are the only one in your group or project who can see and access the content.  \n"
+"\n"
+"*  **Team Members only:** Only members of the group or project, in which this content was posted, may access it.\n"
+"\n"
+"*  **Public (visible without login):** This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr ""
@@ -1278,10 +1367,10 @@ msgid "Files"
 msgstr ""
 
 msgid "Etherpad"
-msgstr "Document"
+msgstr "Pad"
 
 msgid "Etherpads"
-msgstr "Documents"
+msgstr "Pads"
 
 msgid "Todo"
 msgstr ""
@@ -1358,6 +1447,28 @@ msgid "Submitting..."
 msgstr ""
 
 msgid "Close"
+msgstr ""
+
+msgid "Avatar will be deleted once you save."
+msgstr ""
+
+msgctxt "written next to optional form fields"
+msgid "optional"
+msgstr ""
+
+msgid "Call to Action Button"
+msgstr ""
+
+msgid "Label of the Button"
+msgstr ""
+
+msgid "Link URL"
+msgstr ""
+
+msgid "Enter a place or address."
+msgstr ""
+
+msgid "Choose and upload a gallery image"
 msgstr ""
 
 msgid "Re-Activate Project/Group"
@@ -1552,6 +1663,17 @@ msgstr "Create Group"
 msgid "Create Project"
 msgstr "Create Project"
 
+msgid "Help about groups"
+msgstr ""
+
+#, fuzzy
+#| msgid "All projects"
+msgid "Help about projects"
+msgstr "All projects"
+
+msgid "Help about the microsite"
+msgstr ""
+
 msgid "Edit Group"
 msgstr "Edit Project"
 
@@ -1567,14 +1689,33 @@ msgstr ""
 msgid "Facebook-Integration"
 msgstr ""
 
+#, fuzzy
+#| msgid "Group"
+msgid "Group name"
+msgstr "Group"
+
+#, fuzzy
+#| msgid "Project Type"
+msgid "Project name"
+msgstr "Project Type"
+
 msgid "Enter a name for the group."
 msgstr "Enter a name for the project."
 
 msgid "Enter a name for the project."
 msgstr "Enter a name for the project."
 
-msgid "Avatar will be deleted once you save."
+msgid "Short description"
 msgstr ""
+
+msgid "Describe the group in a few sentences."
+msgstr "Describe the project in a few sentences."
+
+msgid "This description will be publicly visible."
+msgstr ""
+
+msgid "Describe the project in a few sentences."
+msgstr "Describe the project in a few sentences."
 
 msgid "A picture for better recognition."
 msgstr ""
@@ -1585,19 +1726,10 @@ msgstr ""
 msgid "max. 10 MB"
 msgstr ""
 
-msgid "Description and Infos"
+msgid "Example: http://mywebsite.com"
 msgstr ""
-
-msgid "Describe the group in a few sentences."
-msgstr "Describe the project in a few sentences."
-
-msgid "Describe the project in a few sentences."
-msgstr "Describe the project in a few sentences."
 
 msgid "Where are you active?"
-msgstr ""
-
-msgid "Enter a place or address."
 msgstr ""
 
 msgid "Remove location"
@@ -1620,7 +1752,10 @@ msgstr ""
 msgid "Select related Projects/Groups"
 msgstr "Convert selected Projects to Groups"
 
-msgid "Visibility"
+msgid "Privacy settings"
+msgstr ""
+
+msgid "This will be the default setting for all content created by members."
 msgstr ""
 
 msgid "This group will be set to be publicly visible!"
@@ -1644,28 +1779,25 @@ msgstr ""
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr ""
 
-msgid "Describe your activities and goals"
-msgstr ""
-
 msgid "Microsite Wallpaper"
-msgstr ""
-
-msgid "Currently"
-msgstr ""
-
-msgid "Reset"
-msgstr ""
-
-msgid "Change"
 msgstr ""
 
 msgid "Upload an image."
 msgstr ""
 
+msgid "Reset"
+msgstr ""
+
+msgid "Description and Infos"
+msgstr ""
+
 msgid "This is a public description that can be seen by anyone and will be shown on the microsite."
 msgstr ""
 
-msgid "Contact info. How you can be reached, addresses, social media, etc..."
+msgid "Contact info"
+msgstr ""
+
+msgid "How you can be reached, addresses, social media, etc..."
 msgstr ""
 
 msgid "From which apps should public items be shown on the microsite?"
@@ -1675,6 +1807,9 @@ msgid "Video"
 msgstr ""
 
 msgid "Youtube or Vimeo URL"
+msgstr ""
+
+msgid "https://www.youtube.com/watch?v=example-video"
 msgstr ""
 
 msgid "Twitter: Embedded User Timeline"
@@ -1701,9 +1836,6 @@ msgstr ""
 msgid "Microsite Gallery Images"
 msgstr ""
 
-msgid "Choose and upload a gallery image"
-msgstr ""
-
 msgid "Remove gallery image"
 msgstr ""
 
@@ -1711,6 +1843,9 @@ msgid "Add gallery image"
 msgstr ""
 
 msgid "Show Microsite Call to Action Box"
+msgstr ""
+
+msgid "A box shown on the microsite that contains buttons to your external campaigns or websites"
 msgstr ""
 
 msgid "Show Call to Action Box"
@@ -1723,15 +1858,6 @@ msgid "Title of the box header"
 msgstr ""
 
 msgid "Description text inside the box"
-msgstr ""
-
-msgid "Call to Action Button"
-msgstr ""
-
-msgid "Label of the Button"
-msgstr ""
-
-msgid "Link URL"
 msgstr ""
 
 msgid "Remove button"
@@ -2294,6 +2420,12 @@ msgid ""
 "%(domain_url)s"
 msgstr ""
 
+msgid "Additional options"
+msgstr ""
+
+msgid "Attach files, add a location, mark topics and adjust visibility settings"
+msgstr ""
+
 msgid "Tag persons"
 msgstr ""
 
@@ -2303,7 +2435,13 @@ msgstr ""
 msgid "Place or adress"
 msgstr ""
 
+msgid "Upload a file or image or attach an existing one"
+msgstr ""
+
 msgid "Select topic"
+msgstr ""
+
+msgid "Visibility"
 msgstr ""
 
 msgid "This item will be posted as publicly visible! This means that anyone on the internet can access and see it, and it may potentially be included in search engine results."
@@ -2312,20 +2450,10 @@ msgstr ""
 msgid "If you do not wish this, you can change this item's visibility setting below."
 msgstr ""
 
-msgid "Add attachment"
-msgstr ""
-
-msgid "Tag users"
-msgstr ""
-
-msgid "Tag location"
-msgstr ""
-
-msgid "Change visibility"
-msgstr ""
-
-msgid "Connect Facebook Account"
-msgstr ""
+#, fuzzy
+#| msgid "Other Projects"
+msgid "Show more options..."
+msgstr "Other Projects"
 
 msgid "Which topics are you involved with?"
 msgstr ""
@@ -2348,13 +2476,25 @@ msgstr ""
 msgid "Where do you live?"
 msgstr ""
 
+msgid "Enter a place or address and then choose a point on the map."
+msgstr ""
+
 msgid "Which topics are you interested in?"
 msgstr ""
 
 msgid "What would you like to learn?"
 msgstr ""
 
-msgid "Who is allowed to see you on the platform?"
+msgid "Who may see your plattform profile?"
+msgstr ""
+
+msgid "Your profile will be set to be publicly visible!"
+msgstr ""
+
+msgid "This means that your name, avatar and user profile can be seen by ANYONE on the internet and may potentially be included in search engine results!"
+msgstr ""
+
+msgid "Please note that changes in this setting will not have an immediate effect on search engine results! Depending on the search provider, it might take days or weeks until this setting is reflected in their results."
 msgstr ""
 
 msgid "Privacy"
@@ -2451,6 +2591,9 @@ msgstr ""
 msgid "Logged out"
 msgstr ""
 
+msgid "Log in"
+msgstr ""
+
 msgid "Password"
 msgstr ""
 
@@ -2481,13 +2624,19 @@ msgstr ""
 msgid "Enter old password"
 msgstr ""
 
+msgid "We need to make sure it's really you"
+msgstr ""
+
 msgid "Old password"
 msgstr ""
 
-msgid "Please enter your new password twice so we can verify you typed it in correctly."
+msgid "New Password"
 msgstr ""
 
-msgid "New Password"
+msgid "Enter a password you don't use anywhere else. The longer the better!"
+msgstr ""
+
+msgid "Repeat your password just to make sure"
 msgstr ""
 
 msgid "Repeat new Password"
@@ -2506,6 +2655,9 @@ msgid "Your password has been set.  You may go ahead and log in now."
 msgstr ""
 
 msgid "Enter new password"
+msgstr ""
+
+msgid "Please enter your new password twice so we can verify you typed it in correctly."
 msgstr ""
 
 msgid "New password"
@@ -2545,6 +2697,12 @@ msgstr ""
 msgid "Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one."
 msgstr ""
 
+msgid "The email you used to register your account. This is the one you receive email notifications on"
+msgstr ""
+
+msgid "Example: mymail@example.com"
+msgstr ""
+
 msgid "Sign up"
 msgstr ""
 
@@ -2554,13 +2712,31 @@ msgstr ""
 msgid "Email address"
 msgstr ""
 
-msgid "Repeat passwort"
+msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
+msgstr ""
+
+msgid "Repeat Password"
+msgstr ""
+
+msgid "Your name"
+msgstr ""
+
+msgid "This name will be displayed to other users on the site"
 msgstr ""
 
 msgid "First name"
 msgstr ""
 
 msgid "Last name"
+msgstr ""
+
+msgid "You can supply your last name to be displayed as well"
+msgstr ""
+
+msgid "Captcha"
+msgstr ""
+
+msgid "We need to make sure you are a real person (sorry!)"
 msgstr ""
 
 msgctxt "read and accept the [Terms of Services]"
@@ -2570,16 +2746,11 @@ msgstr ""
 msgid "Terms and Services"
 msgstr ""
 
-msgid "Log in"
-msgstr ""
-
 msgid "Search in Apps"
 msgstr ""
 
-#, fuzzy
-#| msgid "Etherpads"
 msgid "Ethercalcs"
-msgstr "Documents"
+msgstr ""
 
 msgid "Offers"
 msgstr ""
@@ -2678,7 +2849,7 @@ msgid "By clicking the button below, you will irrevocably delete your user accou
 msgstr ""
 
 msgid "Your created documents, news posts, uploaded files, and other content will be retained on the site. However this content will no longer bear your name or be connected to you."
-msgstr ""
+msgstr "Your created pads, news posts, uploaded files, and other content will be retained on the site. However this content will no longer bear your name or be connected to you."
 
 msgid "If you wish to delete any of your content, please go back and do so now. Once you delete your profile, you will no longer have any access to anything you have created with this account."
 msgstr ""
@@ -2696,9 +2867,6 @@ msgstr ""
 msgid "User profile: %(username)s"
 msgstr ""
 
-msgid "This message will never reappear when you remove it."
-msgstr ""
-
 msgid "My Website"
 msgstr ""
 
@@ -2714,31 +2882,19 @@ msgstr ""
 msgid "Profile avatar"
 msgstr ""
 
-msgid "Avatar will be deleted once you save your profile."
-msgstr ""
-
-msgid "A picture that lets others recognize you quickly."
-msgstr ""
-
-msgid "About yourself"
-msgstr ""
-
 msgid "Who are you and what motivates you?"
 msgstr ""
 
 msgid "Tell others something about you!"
 msgstr ""
 
-msgid "Detailed description"
-msgstr ""
-
-msgid "Describe yourself, your activities and your interests."
-msgstr ""
-
 msgid "Welcome!"
 msgstr ""
 
 msgid "We give you full control over what people can see of you on the platform and what you hear from us!"
+msgstr ""
+
+msgid "Who is allowed to see you on the platform?"
 msgstr ""
 
 msgid "You can change this setting later in your profile settings"
@@ -2766,6 +2922,9 @@ msgid "Loading Facebook-Scripts..."
 msgstr ""
 
 msgid "If nothing happens please disable any addons like Ghostery or NoScript..."
+msgstr ""
+
+msgid "Connect Facebook Account"
 msgstr ""
 
 msgctxt "Facebook connect explanation box"
@@ -2879,10 +3038,10 @@ msgstr ""
 msgid "Facebook Fan-Page link to"
 msgstr ""
 
-msgid "Choose from your Pages..."
+msgid "Fan-Page unique name (example: myfanpage)"
 msgstr ""
 
-msgid "Fan-Page unique name (example: myfanpage)"
+msgid "Choose from your Pages..."
 msgstr ""
 
 msgid "You have Editor access to this Fan-Page and can publish your posts directly to it."
@@ -3339,6 +3498,21 @@ msgstr ""
 
 msgid "Your changes have been saved."
 msgstr ""
+
+#, fuzzy
+#~| msgid "My Projects"
+#~ msgid "My Groups and Projects"
+#~ msgstr "My Projects"
+
+#, fuzzy
+#~| msgid "Enter a name for the group."
+#~ msgid "Enter a descriptive name for your group."
+#~ msgstr "Enter a name for the project."
+
+#, fuzzy
+#~| msgid "Enter a name for the project."
+#~ msgid "Enter a descriptive name for your project."
+#~ msgstr "Enter a name for the project."
 
 #, fuzzy
 #~ msgid "Browse this public team"

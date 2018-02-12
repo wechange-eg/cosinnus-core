@@ -1,0 +1,153 @@
+/*
+    Styles for all the form fields used throughout cosinnus.
+*/
+
+.cosinnus-form {
+    
+    background-color: #FFF;
+    
+    h2 {
+        margin-top: 4px;
+        margin-bottom: 18px;
+    }
+    
+}
+
+.cosinnus-field, .cosinnus-media-field {
+    margin-bottom: 7px;
+    
+    &.header-only {
+        margin-bottom: 0;
+    }
+    
+    label {
+        margin-top: 14px;
+        margin-bottom: 6px;
+        font-size: 16px;
+    }
+    label.first {
+        margin-top: 0;
+    }
+    label {
+        color: @app-neutral-color-dark;
+    }
+    .field-description {
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: @app-neutral-color-medium;
+    }
+    
+    
+    .cosinnus-field-input {
+        background-color: @app-neutral-color-white;
+        font-size: 14px;
+        text-align: left;
+        word-break: break-all;
+        
+        a {
+            color: @app-neutral-color-dark;
+        }
+        
+        label {
+            margin-top: inherit;
+        }
+        
+        input, textarea, select {
+            font-size: 14px;
+            width: 100%;
+            border-width: 0;
+            line-height: 20px;
+            min-height: 40px;
+            margin: 0;
+            padding: 7px 10px 5px 10px;
+            color: @app-neutral-color-dark;
+        }
+        
+        input, select {
+            height: 40px;
+        }
+        
+        input:focus, textarea:focus {
+            /* TODO: set outline invisible? */
+            outline: 0;
+        }
+        
+        select {
+            cursor: pointer;
+        }
+        
+        textarea.textarea-small {
+            height: 40px;
+        }
+        
+        input[type="file"] {
+            height: auto;
+        }
+        
+        .file-input {
+            input {
+                display: inline-block;
+            }
+            
+            input[type='checkbox'] {
+                width: 14px;
+                height: 14px;
+                min-height: 14px;
+                margin-left: 20px;
+            }
+            
+        }
+        
+    }
+    .cosinnus-field-input.regular-field {
+        height: 40px;
+    }
+    .cosinnus-field-input.checkbox-field input {
+        width: inherit;
+        vertical-align: middle;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+    .cosinnus-field-input.checkbox-field label {
+        cursor: pointer;
+    }
+    .cosinnus-field-input.transparent {
+        background-color: transparent;
+    }
+}
+
+/* Other cosinnus apps' field classes */
+.cosinnus-field-input.doodle-select-dates-field input {
+    border: 1px solid @app-neutral-color-light;
+}
+
+/* Third-party field-specific overrides */
+.cosinnus-field-input {
+    
+    input.osmfield-input {
+        width: 100% !important;
+    }
+
+    input.select2-input {
+        padding: 7px 10px 5px 10px !important;
+    }
+    .select2-search-choice {
+        margin-top: 10px !important;
+        margin-left: 10px !important;
+    }
+    .awesome-avatar-widget {
+        background-color: @app-neutral-color-white !important;
+    }
+}
+
+
+.media-body input.osmfield-input {
+    width: auto !important;
+    margin: 0px -5px;
+    padding: 0px 10px;
+}
+
+.media-body input.osmfield-input:focus {
+    /* TODO: set outline invisible? */
+    outline: 0;
+}

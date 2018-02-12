@@ -152,6 +152,15 @@ p, .white-content, .textfield, .CodeMirror .editor-preview {
 	}
 	
 }
+.textfield {
+    font-size: 14px;
+    
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
 .media-body .textfield {
     padding-top: 0;
     padding-left: 0;
@@ -340,10 +349,12 @@ label {
 }
 .content-box .dropdown {
 	margin-bottom: 13px;
+	margin-left: 5px;
 
 	button {
 		text-align: right;
 		color: @app-neutral-color-dark;
+		font-size: 14px;
 
 		&:hover, &:active, &:focus {
 			color: @app-neutral-color-dark;

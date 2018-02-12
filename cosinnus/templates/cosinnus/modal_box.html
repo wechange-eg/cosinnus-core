@@ -4,7 +4,7 @@
 {% if not show_inline %}
 <div class="modal fade" id="{{ id }}" tabindex="1" role="dialog" aria-labelledby="{{ id }}Label" aria-hidden="true">
 {% endif %}
-    <div class="modal-dialog">
+    <div class="modal-dialog {{ extra_modal_classes }}">
         <div class="modal-content">
             <div class="modal-header">
                 
@@ -13,7 +13,7 @@
                     <i class="fa fa-times"></i>
                 </button>
                 {% endif %}
-                <h4 class="modal-title" id="{{ id }}Label">
+                <h4 class="modal-title no-select" id="{{ id }}Label">
                     <i class="fa {% if title_icon %}{{ title_icon }}{% else %}fa-eraser{% endif %}"></i>
                     {{ title }}
                 </h4>

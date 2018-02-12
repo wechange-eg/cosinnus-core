@@ -1,0 +1,61 @@
+{% load i18n cosinnus_tags widget_tweaks %}
+
+{% captureas inlineform_html %}
+    {% with formset=inline_form %}
+        {{ formset.management_form }}
+        
+        {% for inlineform in formset %}
+            {# if inlineform.data // pre-existing? #}
+            {# formset.management_form.initial.MIN_NUM_FORMS': 0, u'MAX_NUM_FORMS': 5, u'TOTAL_FORMS': 5, u'INITIAL_FORMS': 0 #}
+            <div id="{{ unique_id }}-wrapper-{{ forloop.counter0 }}" {% if not forloop.counter == 1 and not forloop.counter <= formset.management_form.INITIAL_FORMS.value|intify %}style="display: none;"{% endif %}>
+                
+                <div class="cosinnus-field-input">
+                    {% include content_template with inlineform=inlineform %}
+                </div>
+                {% if extra_id_div %}
+                    <div id="id_{{ unique_id }}-{{ forloop.counter0 }}-{{ extra_id_div }}"></div>
+                {% endif %}
+                
+                <div class="cosinnus-inlinefied-actions regular-space clearfix">
+                    <div class="btn btn-emphasized btn-small pull-right">
+		                <ul class="media-list">
+		                    <li class="media">
+		                        <a class="pull-left" href="#">
+		                            <i class="fa fa-square-o"></i>
+		                            <input type="hidden" id="{{ inlineform.DELETE.id_for_label }}" name="{{ inlineform.DELETE.html_name }}">
+		                        </a>
+		                        <div class="media-body click-previous-a">
+                                    {{ remove_button_label }}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    {% if forloop.counter >= formset.management_form.INITIAL_FORMS.value|intify and forloop.counter < formset.management_form.MAX_NUM_FORMS.value|intify %}
+                        <div id="{{ unique_id }}-more-{{ forloop.counter0 }}">
+                        
+                            <div class="btn btn-emphasized btn-small btn-no-float regular-space" onclick="$('#{{ unique_id }}-more-{{ forloop.counter0 }}').hide(); $('#{{ unique_id }}-wrapper-{{ forloop.counter }}').show(); return false;">
+		                        <ul class="media-list">
+		                            <li class="media">
+		                                <a class="pull-left" href="#">
+		                                    <i class="fa fa-plus"></i>
+		                                </a>
+		                                <div class="media-body">
+		                                    {{ add_button_label }}
+		                                </div>
+		                            </li>
+		                        </ul>
+		                    </div>
+                            
+                        </div>
+                    {% endif %}
+                    
+                    
+                </div>
+                
+            </div>
+        {% endfor %}
+    {% endwith %}
+{% endcaptureas %}
+
+{% include 'cosinnus/fields/default_field.html' with extra_html=inlineform_html label=label %}

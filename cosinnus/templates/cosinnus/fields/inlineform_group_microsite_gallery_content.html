@@ -1,0 +1,22 @@
+{% load i18n widget_tweaks thumbnail %}
+        
+{{ inlineform.image.errors }}
+
+{% if inlineform.image.value %}
+    <div class="row">
+        <div class="col-xs-4 col-sm-2">
+            <img class="image" style="width: 120px;" src="{% thumbnail inlineform.image.value 120x120 crop=1 upscale=1 %}"></img>
+        </div>
+        <div class="col-xs-8 col-sm-10">
+{% endif %}
+<div class="file-input small-padding">
+    {% trans "Choose and upload a gallery image" as placeholder %}
+    {% render_field inlineform.image placeholder=placeholder %}
+</div>
+{% if inlineform.image.value %}
+        </div>
+    </div>
+{% endif %}
+        
+{{ inlineform.group }}
+{{ inlineform.id }}

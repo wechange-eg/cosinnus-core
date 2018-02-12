@@ -103,6 +103,8 @@ class UserChangeForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserChangeForm, self).__init__(*args, **kwargs)
         self.fields['first_name'].required = True
+        self.fields['email'].required = True
+        
         
     def clean_email(self):
         email = self.cleaned_data.get('email')

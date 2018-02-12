@@ -42,7 +42,6 @@
 }
 
 .group-microsite-header {
-    font-family: Verdana, Geneva, sans-serif;
     position: relative;
 }
 
@@ -204,7 +203,7 @@
 
 
 .btn-no-interact {
-    cursor: default;
+    cursor: default !important;
 }
 
 .app-main .btn-no-interact:hover .media, .app-main .btn-no-interact:hover .media > .media-body {
@@ -325,9 +324,15 @@
 	font-size: 1.1em;
 }
 
-.cursor-pointer-input, .cursor-pointer-input input {
+.cursor-pointer-input, .cursor-pointer, .cursor-pointer-input input {
     cursor: pointer;
-} 
+}
+
+.cursor-zoom {
+    cursor: -moz-zoom-in; 
+    cursor: -webkit-zoom-in; 
+    cursor: zoom-in;
+}
 
 .list-link-panel {
     float: left;
@@ -339,6 +344,10 @@
 }
 
 /* SimpleMDE Editor fixes */
+.CodeMirror {
+    font-size: 14px !important;
+}
+
 .CodeMirror .editor-preview {
     white-space: normal;
 }
@@ -347,6 +356,14 @@
 .CodeMirror .editor-preview pre, .CodeMirror .editor-preview h1,
 .CodeMirror .editor-preview h2, .CodeMirror .editor-preview h3 {
     background-color: @app-neutral-color-light;
+}
+
+.CodeMirror-scroll {
+    cursor: text;
+}
+
+.cursor-text {
+    cursor: text;
 }
 
 /** Anchors with nicer offset */

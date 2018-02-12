@@ -1,0 +1,47 @@
+{% load i18n widget_tweaks cosinnus_tags %}
+
+{% if field or field_id %}{% captureas for_id %}{% if field %}{{ field.id_for_label }}{% else %}{{ field_id }}{% endif %}{% endcaptureas %}{% endif %}
+
+<div class="cosinnus-media-field">
+    {% if label %}
+        <label {% if for_id %}for="{{ for_id }}"{% endif %} {% if first %}class="first"{% endif %}>
+            {{ label }}
+            {% if field and not field.field.required %}
+                ({% trans "optional" context "written next to optional form fields" %})
+            {% endif %}
+            {% if help_popup %}
+                {% include 'cosinnus/common/help_button_for_popup.html' with help_text_id=help_popup %}
+            {% endif %}
+        </label>
+    {% endif %}
+    
+    {% if legend %}
+	   <div class="field-description no-select">{{ legend }}</div>
+	{% endif %}
+	
+	{% if field or field_html %}
+	
+		{% if field and field.errors %}
+		   {{ field.errors }}
+		{% endif %}
+		
+		<div type="button" class="btn btn-default w100 regular-space">
+		    <ul class="media-list">
+		        <li class="media">
+		            <a class="pull-left" href="#">
+		                <i class="fa fa-fw {{ icon }}"></i>
+		            </a>
+		            <div class="media-body">
+						
+		                {% if field_html %}
+			                {{ field_html|safe }}
+			            {% elif field %}        
+			                {% render_field field class+=" w100" placeholder=placeholder %}
+			            {% endif %}
+		            </div>
+		            
+		        </li>
+		    </ul>
+		</div>
+	{% endif %}
+</div>

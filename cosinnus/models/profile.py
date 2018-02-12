@@ -19,8 +19,7 @@ from jsonfield import JSONField
 from cosinnus.conf import settings
 from cosinnus.conf import settings as cosinnus_settings
 from cosinnus.utils.files import get_avatar_filename
-from cosinnus.models.group import CosinnusGroup, CosinnusPortal,\
-    CosinnusPortalMembership
+from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.core import signals
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -216,6 +215,18 @@ class BaseUserProfile(FacebookIntegrationUserProfileMixin, models.Model):
     def cosinnus_groups_pks(self):
         """ Returns all group ids this user is a member or admin of """
         return get_cosinnus_group_model().objects.get_for_user_pks(self.user)
+    
+    @property
+    def cosinnus_projects(self):
+        """ Returns all projects this user is a member or admin of """
+        from cosinnus.models.group_extra import CosinnusProject
+        return CosinnusProject.objects.get_for_user(self.user)
+    
+    @property
+    def cosinnus_societies(self):
+        """ Returns all societies this user is a member or admin of """
+        from cosinnus.models.group_extra import CosinnusSociety
+        return CosinnusSociety.objects.get_for_user(self.user)
     
     @property
     def avatar_url(self):

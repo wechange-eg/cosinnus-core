@@ -6,12 +6,13 @@
 
 	> div, > form > div {
 		// Horizontal lines
-		display: table;
+		display: block;
 		border-spacing: 4px 2px;
 
 		> div, > form > div {
-			display: table-cell;
+			display: inline-block;
 			text-align: center;
+			vertical-align: top;
 
 			min-width: 50px;
 			min-height:5px;
@@ -20,6 +21,12 @@
 				width: 50px;
 				height: 50px;
 			}
+		}
+		
+		> div:first-child {
+		    position: -webkit-sticky;
+            position: sticky;
+            left: 0;
 		}
 
 		.doodle-vote-cell + .doodle-vote-cell  {
@@ -84,9 +91,10 @@
 	}
 
 	h2 {
-			font-size: 1em;
-			font-weight: bold;
-		}
+		font-size: 1em;
+		font-weight: bold;
+        margin-left: 58px;
+	}
 
 	.doodle-vote-inputarea {
 		a {

@@ -17,16 +17,16 @@
 	    {% endcomment %}
 	    
 	    
-	    <div class="btn btn-white btn-headline fadedown-clickarea">
+	    <div class="btn btn-white btn-headline {% block fadedown_class %}fadedown-clickarea{% endblock %}" {% block headline_properties %}{% endblock %}>
 	        <ul class="media-list">
-	            <li class="media">
+	            <li class="media cursor-text">
 	                <a class="pull-left" href="{{ request.user|profile_url }}">
 	                    {% include "cosinnus/user/user_avatar_image.html" with user=request.user %}
 	                </a>
 	                <a class="pull-right" href="#">
 	                    <i class="fa fa-pencil"></i>
 	                </a>
-	                <div class="media-body">
+	                <div class="media-body ">
 	                        <span data-target="widget-title"></span>
 	                </div>
 	            </li>

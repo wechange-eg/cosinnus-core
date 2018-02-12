@@ -1,0 +1,38 @@
+{% load i18n cosinnus_tags %}
+
+{% captureas avatar_html %}
+    <div class="row">
+        
+        {{ avatar_field.errors }}
+    
+        <div class="col-xs-6 col-sm-4">
+            {{ preview_html|safe }}
+            
+            {% if object.avatar %}
+            <div class="btn btn-emphasized btn-small btn-no-float">
+                <ul class="media-list">
+                    <li class="media">
+                        <a class="pull-left" href="#" onclick="$('#avatar_deletion_notice').toggleClass('hidden');">
+                            <i id="avatar_clear_checkbox" class="fa fa-square-o"></i>
+                            <input type="hidden" name="avatar_clear" >
+                        </a>
+                        <div class="media-body click-previous-a">
+                            {% trans "Delete" %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div id="avatar_deletion_notice" class="hidden small"><p>{% trans "Avatar will be deleted once you save." %}</p></div>
+            {% endif %}
+        </div>
+
+
+        <div class="col-xs-6 col-sm-8">
+            {{ avatar_field }}
+        </div><!-- col -->
+        
+    </div><!-- row -->
+{% endcaptureas %}
+                                
+{% include 'cosinnus/fields/default_field.html' with field_html=avatar_html large_field=True field_classes="transparent" %}

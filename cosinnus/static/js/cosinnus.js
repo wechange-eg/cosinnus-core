@@ -151,35 +151,6 @@
                 }
             }).trigger('click');
 
-            $('.priority-selector').each(function() {
-                function formatSelection(val) {
-                    switch (val.id) {
-                        case 3: return '<i class="fa fa-exclamation-circle"></i>';
-                        case 2: return '<i class="fa fa-exclamation"></i>';
-                        case 1: return '<i class="fa fa-minus"></i>';
-                    }
-                }
-                function formatResult(val) {
-                    switch (val.id) {
-                        case 3: return '<i class="fa fa-exclamation-circle"></i> &nbsp; '+val.text;
-                        case 2: return '<i class="fa fa-exclamation"></i> &nbsp; '+val.text;
-                        case 1: return '<i class="fa fa-minus"></i> &nbsp; '+val.text;
-                    }
-                }
-
-                $(this).select2({
-                    minimumResultsForSearch: -1,
-                    escapeMarkup: function(m) { return m; }, // do not escape HTML
-                    formatSelection: formatSelection,
-                    formatResult: formatResult,
-                    data: [
-                        {id:3, text:'Wichtig'},
-                        {id:2, text:'Normal'},
-                        {id:1, text:'Später'}
-                    ]
-                });
-            });
-
             $('.tags-selector, .location-selector').each(function() {
                 $(this).select2({
                     width: 'off',
@@ -277,24 +248,25 @@
                 }, $.cosinnus.fullcalendar_format));
             }
             
-            $('.small-calendar').empty();
-            $('.small-calendar').fullCalendar($.extend({
-                header: {
-                    left: 'prev',
-                    center: 'title',
-                    right: 'next'
-                },
-                events: (typeof cosinnus_calendarWidgetEvents !== "undefined" ? cosinnus_calendarWidgetEvents : []),
-                dayClick: function(date, allDay, jsEvent, view) {
-                    $(this).trigger('fullCalendarDayClick',[date,jsEvent]);
-                },
-                viewRender: function(date, cell) {
-                    // A day has to be rendered because of redraw or something
-                    $(cell).closest('.small-calendar').trigger('fullCalendarViewRender',[cell]);
-                }
-
-            }, $.cosinnus.fullcalendar_format));
-
+            if ($('.small-calendar').length) {
+                $('.small-calendar').empty();
+                $('.small-calendar').fullCalendar($.extend({
+                    header: {
+                        left: 'prev',
+                        center: 'title',
+                        right: 'next'
+                    },
+                    events: (typeof cosinnus_calendarWidgetEvents !== "undefined" ? cosinnus_calendarWidgetEvents : []),
+                    dayClick: function(date, allDay, jsEvent, view) {
+                        $(this).trigger('fullCalendarDayClick',[date,jsEvent]);
+                    },
+                    viewRender: function(date, cell) {
+                        // A day has to be rendered because of redraw or something
+                        $(cell).closest('.small-calendar').trigger('fullCalendarViewRender',[cell]);
+                    }
+    
+                }, $.cosinnus.fullcalendar_format));
+            }
         },
 
 
@@ -359,6 +331,9 @@
         },
 
         calendarCreateDoodle : function() {
+            if (!$('#calendar-doodle-days-selector-list').length) {
+                return;
+            }
             var CREATE_MULTIPLE_DOODLE_DAYS = true;
             
             function selectDays() {
@@ -757,12 +732,13 @@
 
 
         renderMomentDataDate : function() {
-            // set current language for moment formatting
-            var moment_lang = typeof cosinnus_current_language === "undefined" ? "" : cosinnus_current_language; 
-            moment.lang(moment_lang || "en");
             
             // when .moment-data-date elements have a data-date attribute, render date.
             $('.moment-data-date').on("renderMomentDataDate", function() {
+                // set current language for moment formatting
+                var moment_lang = typeof cosinnus_current_language === "undefined" ? "" : cosinnus_current_language; 
+                moment.lang(moment_lang || "en");
+                
                 if (!$(this).attr('data-date')) return;
                 // Format: 2014-05-05
                 // Format: 2013-02-08 09:30:26
@@ -902,6 +878,12 @@
             $('body').on('click','a[href="#"]',function(e) {
                 e.preventDefault();
             });
+            
+            // add a click-proxy on media-body buttons that have .click-previous-a
+            $('.click-previous-a').on('click',function(e) {
+                $(this).prev('a').click();
+            });
+            
         },
 
 
@@ -1054,6 +1036,9 @@
         
 
         initFileUpload: function() {
+            if (!$('#fileupload').length) {
+                return;
+            }
 
             $('#fileupload').fileupload({
                 dataType: 'json',
@@ -1585,12 +1570,16 @@
 
 // Set global language here
 $.cosinnus.lang = cosinnus_current_language;
-moment.lang($.cosinnus.lang);
+if (typeof moment !== "undefined") {
+    moment.lang($.cosinnus.lang);
+}
 
-// select2 localizations
-$.fn.select2.defaults=$.extend($.fn.select2.defaults, { 
-    formatNoMatches: function () { return $.cosinnus.no_matches_found; }, 
-}); 
+if (typeof $.fn.select2 !== "undefined") {
+    // select2 localizations
+    $.fn.select2.defaults=$.extend($.fn.select2.defaults, { 
+        formatNoMatches: function () { return $.cosinnus.no_matches_found; }, 
+    }); 
+}
 
 /* string sprintf format for JS
  * from http://stackoverflow.com/a/4673436

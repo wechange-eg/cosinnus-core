@@ -1,0 +1,25 @@
+{% load i18n cosinnus_tags %}
+
+{% comment %}  
+    Single gallery with only 1 picture (and the rest on click)
+    Parameters:
+        - object: the object object
+{% endcomment %}
+
+{% with images=object.attached_images %}
+    {% for image in images %}
+        <a href="{{ image.static_image_url }}" data-lightbox="image-{{ object.slug }}" data-lightbox-download="{{ image.static_image_url }}" data-title="{{ image.title }}" 
+                    class="cursor-zoom" {% if forloop.counter > 1 %}style="display: none"{% endif %}>
+		    <img src="{{ image.static_image_url }}" />
+		</a>
+    {% endfor %}
+    {% if images|length > 1 %}
+       <p class="regular-space">
+           <a href="#" onclick="$('a[data-lightbox=\'image-{{ object.slug }}\']')[0].click();">
+               {% blocktrans with num_pictures=images|length|subtract:1 %}+{{ num_pictures }} more...{% endblocktrans %}
+           </a>
+       </p>
+    {% endif %}
+{% endwith %}
+
+

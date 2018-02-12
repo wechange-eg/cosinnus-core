@@ -84,7 +84,10 @@
             }
 
             $self.change(update).keyup(update).keydown({event:'keydown'},update).data('autogrow-inited', true);
-            $(window).resize(update);
+            
+            // sascha took this out
+            // this completely messes up mobile text input, whenever the keyboard popups up, this refreshes, popping the keyboard down
+            //$(window).resize(update);
             
             update();
         });

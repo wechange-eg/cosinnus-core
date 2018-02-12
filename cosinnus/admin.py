@@ -18,7 +18,7 @@ from cosinnus.models.profile import get_user_profile_model,\
 from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory
 from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.models.feedback import CosinnusReportedObject,\
-    CosinnusSentEmailLog
+    CosinnusSentEmailLog, CosinnusFailedLoginRateLimitLog
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
@@ -415,6 +415,15 @@ class CosinnusSentEmailLogAdmin(admin.ModelAdmin):
     readonly_fields = ('date',)
 
 admin.site.register(CosinnusSentEmailLog, CosinnusSentEmailLogAdmin)
+
+
+class CosinnusFailedLoginRateLimitLogAdmin(admin.ModelAdmin):
+    list_display = ('date', 'username', 'ip', 'portal')
+    list_filter = ('date', 'portal')
+    search_fields = ('date', 'username', 'ip',) 
+    readonly_fields = ('date',)
+
+admin.site.register(CosinnusFailedLoginRateLimitLog, CosinnusFailedLoginRateLimitLogAdmin)
 
 
 ## TODO: FIXME: re-enable after 1.8 migration

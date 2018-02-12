@@ -169,7 +169,7 @@ body:after {
 }
 
 .lb-data .lb-details {
-  width: 85%;
+  width: 65%;
   float: left;
   text-align: left;
   line-height: 1.1em;
@@ -189,12 +189,11 @@ body:after {
   color: #999999;
 }
 
-.lb-data .lb-close {
+.lb-data .lb-close, .lb-data .lb-download {
   display: block;
   float: right;
   width: 30px;
   height: 30px;
-  background: url(../img/close.png) top right no-repeat;
   text-align: right;
   outline: none;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
@@ -205,7 +204,16 @@ body:after {
   transition: opacity 0.2s;
 }
 
-.lb-data .lb-close:hover {
+.lb-data .lb-close {
+  background: url(../img/close.png) top right no-repeat;
+}
+
+.lb-data .lb-download {
+  background: url(../img/download.png) top right no-repeat;
+  margin-right: 5px;
+}
+
+.lb-data .lb-close:hover, .lb-data .lb-download:hover {
   cursor: pointer;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;

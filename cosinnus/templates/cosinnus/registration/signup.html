@@ -3,6 +3,10 @@
 
 {% block page_title %}{% trans "Sign up" %}{% endblock %}
 
+{% block jshead %}
+    {% comment %} This page deals with authentication data and loads only the most necessary vendor scripts! {% endcomment %}
+{% endblock jshead %}
+
 {% block breadcrumb %}
 	<li><a href="#">{% trans "Login" %}</a></li>
 	<li class="active">{% trans "Create account" %}</li>
@@ -13,102 +17,53 @@
 {% endblock leftnav %}
 
 {% block content %}
-  <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+
+<form action="" method="post" enctype="multipart/form-data" class="cosinnus-form form-horizontal" role="form">
     {% csrf_token %}
     <input type="hidden" name="next" value="/">
     
     <!-- a box with semi transparent background -->
     <div class="content-box">
         {{ form.non_field_errors }}
-
-        <div type="button" class="btn btn-default w100 large-space">
-            <ul class="media-list">
-                <li class="media">
-                    <a class="pull-left" href="#" tabindex="-1">
-                        <i class="fa fa-envelope"></i>
-                    </a>
-                    <div class="media-body media-body-form-control">{{ form.email.errors }}
-                        {% captureas placeholder %}{% trans "Email address" %}{% endcaptureas %}
-                        {% render_field form.email class+="form-control" placeholder=placeholder %}
-                    
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <div type="button" class="btn btn-default w100 regular-space">
-            <ul class="media-list">
-                <li class="media">
-                    <a class="pull-left" href="#" tabindex="-1">
-                        <i class="fa fa-lock"></i>
-                    </a>
-                    <div class="media-body media-body-form-control">
-                        {{ form.password1.errors }}
-                        {% captureas placeholder %}{% trans "Password" %}{% endcaptureas %}
-                        {% render_field form.password1 class+="form-control" placeholder=placeholder %}
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <div type="button" class="btn btn-default w100 large-space">
-            <ul class="media-list">
-                <li class="media">
-                    <a class="pull-left" href="#" tabindex="-1">
-                        <i class="fa fa-lock"></i>
-                    </a>
-                    <div class="media-body media-body-form-control">
-                        {{ form.password2.errors }}
-                        {% captureas placeholder %}{% trans "Repeat passwort" %}{% endcaptureas %}
-                        {% render_field form.password2 class+="form-control" placeholder=placeholder %}
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <div type="button" class="btn btn-default w100 regular-space">
-            <ul class="media-list">
-                <li class="media">
-                    <a class="pull-left" href="#" tabindex="-1">
-                        <i class="fa fa-user"></i>
-                    </a>
-                    <div class="media-body media-body-form-control">
-                        {{ form.first_name.errors }}
-                        {% captureas placeholder %}{% trans "First name" %}{% endcaptureas %}
-                        {% render_field form.first_name class+="form-control" placeholder=placeholder %}
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <div type="button" class="btn btn-default w100 large-space">
-            <ul class="media-list">
-                <li class="media">
-                    <a class="pull-left" href="#" tabindex="-1">
-                        <i class="fa fa-user"></i>
-                    </a>
-                    <div class="media-body media-body-form-control">
-                        {{ form.last_name.errors }}
-                        {% captureas placeholder %}{% trans "Last name" %}{% endcaptureas %}
-                        {% render_field form.last_name class+="form-control" placeholder=placeholder %}
-                    </div>
-                </li>
-            </ul>
-        </div>
         
-        <div type="button" class="btn btn-default w100 large-space">
-            <ul class="media-list">
-                <li class="media">
-                    <a class="pull-left" href="#" tabindex="-1">
-                        <i class="fa fa-question"></i>
-                    </a>
-                    <div class="media-body media-body-form-control">
-	                    {% if form.captcha.errors %}<div class="alert alert-danger">{{ form.captcha.errors }}</div>{% endif %}
-	                    {{ form.captcha }}
-                    </div>
-                </li>
-            </ul>
-        </div>
+        {# Regular Field #}
+		{% trans "Email address" as email_label %}
+		{% trans "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)." as email_legend %}
+		{% trans "Example: mymail@example.com" as email_placeholder %}
+		{% include 'cosinnus/fields/default_field.html' with field=form.email legend=email_legend label=email_label placeholder=email_placeholder first=True %}
+		        
+        
+        {# Regular Field #}
+        {% trans "Password" as pass1_label %}
+        {% trans "Enter a password you don't use anywhere else. The longer the better!" as pass1_legend %}
+        {% trans "Password" as pass1_placeholder %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.password1 legend=pass1_legend label=pass1_label placeholder=pass1_placeholder %}
+        
+        {# Regular Field #}
+        {% trans "Repeat your password just to make sure" as pass2_label %}
+        {% trans "Repeat Password" as pass2_placeholder %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.password2 label=pass2_label placeholder=pass2_placeholder first=True %}
+
+        
+        {# Regular Field #}
+        {% trans "Your name" as firstname_label %}
+        {% trans "This name will be displayed to other users on the site" as firstname_legend %}
+        {% trans "First name" as firstname_placeholder %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.first_name legend=firstname_legend label=firstname_label placeholder=firstname_placeholder %}
+                
+        {# Regular Field #}
+        {% trans "Last name" as lastname_label %}
+        {% trans "You can supply your last name to be displayed as well" as lastname_legend %}
+        {% trans "Last name" as lastname_placeholder %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.last_name label=lastname_label legend=lastname_legend placeholder=lastname_placeholder %}
+                
+        
+        {# Regular Field #}
+        {% trans "Captcha" as captcha_label %}
+        {% trans "We need to make sure you are a real person (sorry!)" as captcha_legend %}
+        {% include 'cosinnus/fields/default_field.html' with field=form.captcha legend=captcha_legend label=captcha_label large_field=True %}
+                
+        <br>
                             
         <div class="pull-right">
     		{{ form.tos_check.errors }}
@@ -128,9 +83,9 @@
     <button type="submit" class="btn btn-emphasized">
         <ul class="media-list">
             <li class="media">
-                <a class="pull-left" href="#" tabindex="-1">
+                <span class="pull-left" href="#" tabindex="-1">
                     <i class="fa fa-hand-o-right"></i>
-                </a>
+                </span>
                 <div class="media-body">
                     {% trans "Register" %}
                 </div>

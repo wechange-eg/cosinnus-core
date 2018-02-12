@@ -1,0 +1,17 @@
+{% load i18n widget_tweaks thumbnail %}
+
+<p>{% trans "Call to Action Button" %} #{{ forloop.counter }}</p>
+
+<div class="small-padding">
+	{{ inlineform.label.errors }}
+	{% trans "Label of the Button" as placeholder %}
+	{% render_field inlineform.label class+="form-control regular-space" placeholder=placeholder %}
+</div>
+<div class="small-padding">
+	{{ inlineform.url.errors }}
+	{% trans 'Link URL' as placeholder %}
+	{% render_field inlineform.url class+="form-control" placeholder=placeholder %}
+</div>
+
+{{ inlineform.group }}
+{{ inlineform.id }}

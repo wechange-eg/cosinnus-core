@@ -1,0 +1,22 @@
+{% load i18n cosinnus_tags %}
+
+{% comment %}  
+    Help Button that opens a help popup.
+    
+    Paramters:
+      - help_text_id: one of the strings defined in ``modal_box_help_popup.html``
+      - help_title (optional): Title for the popup, defaults to "Help"
+{% endcomment %}
+
+{% if not no_space %}
+    <div class="large-space"></div>
+{% endif %}
+{% captureas extra_classes %}{% if not no_space %}large-space{% endif %}{% endcaptureas %}
+
+{% captureas help_modal_id %}modal-{{ help_text_id }}{% endcaptureas %}
+{% include 'cosinnus/common/modal_box_help_popup.html' with help_text_id=help_text_id help_title=help_title help_modal_id=help_modal_id %}
+
+{% if not label %}{% trans "Help for this page" as label %}{% endif %}
+{% captureas extra_atts %}data-toggle="modal" data-target="#{{ help_modal_id }}"{% endcaptureas %}
+{% include "cosinnus/leftnav_button.html" with active=is_deactivategroup extra_classes=extra_classes icon="fa-question-circle-o" extra_atts=extra_atts label=label %}
+

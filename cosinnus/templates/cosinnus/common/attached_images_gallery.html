@@ -1,0 +1,32 @@
+{% load i18n cosinnus_tags thumbnail %}
+
+{% comment %}  
+    Parameters:
+        - object: the basetaggableobject object with attached_images
+        - max_images: max number of gallery preview frames to show
+{% endcomment %}
+
+<div class="indented row">
+    {% with images=object.attached_images %}
+        {% for image in images %}
+            <div class="col-sm-4" {% if max_images and forloop.counter > max_images %}style="display: none"{% endif %}>
+                <a href="{{ image.static_image_url }}" data-lightbox="image-detailed-{{ object.slug }}" data-lightbox-download="{{ image.static_image_url }}" data-title="{{ image.title }}" class="thumbnail cursor-zoom">
+                    <img src="{% thumbnail image.file 263x263 crop=1 upscale=1 %}" title='{{ image.title }}'/>
+                </a>
+            </div>
+            {% if forloop.counter|divisibleby:3 %}
+                <div class="clearfix"></div>
+            {% endif %}
+        {% endfor %}
+        {% if max_images and max_images|intify < images|length %}
+            <div class="clearfix"></div>
+            <div class="col-sm-4">
+               <p>
+                   <a href="#" onclick="$('a[data-lightbox=\'image-detailed-{{ object.slug }}\']')[0].click();">
+                       {% blocktrans with num_pictures=images|length|subtract:max_images|intify %}+{{ num_pictures }} more...{% endblocktrans %}
+                   </a>
+               </p>
+            </div>
+        {% endif %}
+    {% endwith %}
+</div>
