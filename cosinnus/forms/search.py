@@ -22,6 +22,7 @@ from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,\
     CommaSeparatedSelect2MultipleWidget
 from haystack.query import EmptySearchQuerySet
 from cosinnus.models.group import CosinnusPortal
+from cosinnus.utils.functions import ensure_list_of_ints
 
 MODEL_ALIASES = {
     'todo': 'cosinnus_todo.todoentry',
@@ -191,7 +192,7 @@ class TaggableModelSearchForm(SearchForm):
         return sqs
 
     def _filter_media_tags(self, sqs):
-        topics = self.cleaned_data.get('topics', None)
+        topics = ensure_list_of_ints(self.cleaned_data.get('topics', []))
         if topics:
             sqs = sqs.filter_and(mt_topics__in=topics)
         location = self.cleaned_data.get('location', None)

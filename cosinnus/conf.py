@@ -426,6 +426,23 @@ class CosinnusConf(AppConf):
     #: The default search index for the :attr:`TAG_OBJECT_MODEL`
     TAG_OBJECT_SEARCH_INDEX = 'cosinnus.utils.search.DefaultTagObjectIndex'
     
+    # the default choices for topics for tagged objects
+    # WARNING: do NOT change remove/change these without a data migration! pure adding is ok.
+    TOPIC_CHOICES = (
+        ('', ''),
+        (0, _('Mobilität')),
+        (1, _('Energie')),
+        (2, _('Umwelt')),
+        (3, _('Bildung')),
+        (4, _('Gesundheit')),
+        (5, _('Ernährung und Konsum')),
+        (6, _('Kunst und Kultur')),
+        (7, _('Geld und Finanzen')),
+        (8, _('Arbeit und Recht')),
+        (9, _('Bauen und Wohnen')),
+    )
+    
+    
     # a list of portal-ids of foreign portals to display search data from
     SEARCH_DISPLAY_FOREIGN_PORTALS = []
 

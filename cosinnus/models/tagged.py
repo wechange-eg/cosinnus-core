@@ -109,22 +109,6 @@ class BaseTagObject(models.Model):
         ('unternehmen', 'Unternehmen'),
     )
 
-    #: Choices for :attr:`topics`: ``(int, str)``
-    # Empty first choice must be included for select2 placeholder compatibility!
-    TOPIC_CHOICES = (
-        ('', ''),
-        (0, _('Mobilität')),
-        (1, _('Energie')),
-        (2, _('Umwelt')),
-        (3, _('Bildung')),
-        (4, _('Gesundheit')),
-        (5, _('Ernährung und Konsum')),
-        (6, _('Kunst und Kultur')),
-        (7, _('Geld und Finanzen')),
-        (8, _('Arbeit und Recht')),
-        (9, _('Bauen und Wohnen')),
-    )
-
     location = OSMField(_('Location'), blank=True, null=True)
     location_lat = LatitudeField(_('Latitude'), blank=True, null=True)
     location_lon = LongitudeField(_('Longitude'), blank=True, null=True)
@@ -138,8 +122,12 @@ class BaseTagObject(models.Model):
     approach = models.CharField(_('Approach'), blank=True, null=True,
         choices=APPROACH_CHOICES, max_length=255)
 
+    #: Choices for :attr:`topics`: ``(int, str)``
+    # Empty first choice must be included for select2 placeholder compatibility!
+    TOPIC_CHOICES = getattr(settings, 'COSINNUS_TOPIC_CHOICES', [])
+
     topics = models.CommaSeparatedIntegerField(_('Topics'), blank=True,
-        null=True, max_length=255)  # We cannot at choices here as this would 
+        null=True, max_length=255)  # We cannot add choices here as this would 
                                     # fail validation
     text_topics = models.ManyToManyField(CosinnusTopicCategory, verbose_name=_('Text Topics'), 
         related_name='tagged_objects', blank=True, null=True)

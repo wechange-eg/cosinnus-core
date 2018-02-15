@@ -8,9 +8,17 @@ from haystack.exceptions import SearchFieldError
 
 from cosinnus.utils.import_utils import import_from_settings
 from cosinnus.models.group import CosinnusGroup
+from cosinnus.utils.functions import ensure_list_of_ints
 
 
 BOOSTED_FIELD_BOOST = 1.5
+
+
+class CommaSeperatedIntegerMultiValueField(indexes.MultiValueField):
+    """ Custom SearchField, to use with a model's `CommaSeparatedIntegerField` """
+    
+    def convert(self, value):
+        return ensure_list_of_ints(value)
 
 
 class DefaultTagObjectIndex(indexes.SearchIndex):
@@ -24,7 +32,7 @@ class TagObjectIndex(indexes.SearchIndex):
     mt_location_lat = indexes.FloatField(model_attr='media_tag__location_lat', null=True)
     mt_location_lon = indexes.FloatField(model_attr='media_tag__location_lon', null=True)
     #mt_approach = indexes.CharField(model_attr='media_tag__approach', null=True) # approach hidden for now
-    mt_topics = indexes.MultiValueField(model_attr='media_tag__topics', null=True)
+    mt_topics = CommaSeperatedIntegerMultiValueField(model_attr='media_tag__topics', null=True)
     mt_visibility = indexes.IntegerField(model_attr='media_tag__visibility', null=True)
 
 
