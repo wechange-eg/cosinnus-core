@@ -24,6 +24,7 @@
     "nunjucks-loader": "^2.4.2",
     "script-loader": "^0.7.0",
     "underscore": "^1.8.3",
-    "webpack": "^1.13.0"
+    "webpack": "^1.13.0",
+    "pofile": "^1.0.10"
   }
 }
