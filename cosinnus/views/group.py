@@ -367,7 +367,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             
         # attach invitation/request date from Membership to user objects
         membership_object_user_ids = [user.id for user in invited] + [user.id for user in pendings]
-        membership_objects = CosinnusGroupMembership.objects.filter(user_id__in=membership_object_user_ids)
+        membership_objects = CosinnusGroupMembership.objects.filter(user_id__in=membership_object_user_ids, group=self.group)
         dates_dict = dict(membership_objects.values_list('user_id', 'date'))
         for user in invited:
             setattr(user, 'membership_status_date', dates_dict[user.id])
