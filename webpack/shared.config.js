@@ -2,15 +2,8 @@ var webpack = require('webpack');
 var path = require('path');
 var base = path.resolve('.');
 
-var fs = require('fs');
-var PO = require('pofile');
+var collectPO = require('../cosinnus/client/lib/collect-po.js');
 
-function parsePO () {
-	var _podict = {};
-	var po_contents = fs.readFileSync('./cosinnus/locale/de/LC_MESSAGES/django.po', 'utf-8').toString();
-	var po = PO.parse(po_contents);
-	return {'po': po};
-}
 
 module.exports = {
     entry: path.join(base, 'cosinnus/client/app.js'),
@@ -45,7 +38,7 @@ module.exports = {
     },
     plugins: [
     	new webpack.DefinePlugin({
-	      'OMGSASCHA': JSON.stringify(parsePO())
+	      'OMGSASCHA': JSON.stringify(collectPO.parsePO())
 	    })
     ],
     node: {
