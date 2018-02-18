@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-05 13:07+0100\n"
+"POT-Creation-Date: 2018-02-19 16:30+0100\n"
 "PO-Revision-Date: 2018-02-05 13:57+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -83,6 +83,36 @@ msgstr "Деактивировать выделенных пользовател
 #, python-format
 msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
 msgstr "%(sender_name)s желает, чтобы вы присоединились к проекту \"%(team_name)s\" на %(portal_name)s! Кликните на название проекта снизу, чтобы посмотреть его и начать сотрудничать!"
+
+msgid "Mobilität"
+msgstr "Мобильность"
+
+msgid "Energie"
+msgstr "Энергия"
+
+msgid "Umwelt"
+msgstr "Окружающая среда"
+
+msgid "Bildung"
+msgstr "Образование"
+
+msgid "Gesundheit"
+msgstr "Здравоохранение"
+
+msgid "Ernährung und Konsum"
+msgstr "Питание и потребление"
+
+msgid "Kunst und Kultur"
+msgstr "Искусство и культура"
+
+msgid "Geld und Finanzen"
+msgstr "Деньги и финансы"
+
+msgid "Arbeit und Recht"
+msgstr "Труд и право"
+
+msgid "Bauen und Wohnen"
+msgstr "Строительство и жильё"
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgstr "Данный контент доступен только для членов группы. Подайте заявку на вступление прямо сейчас!"
@@ -712,36 +742,6 @@ msgstr "Теги"
 
 msgid "Permissions"
 msgstr "Полномочия"
-
-msgid "Mobilität"
-msgstr "Мобильность"
-
-msgid "Energie"
-msgstr "Энергия"
-
-msgid "Umwelt"
-msgstr "Окружающая среда"
-
-msgid "Bildung"
-msgstr "Образование"
-
-msgid "Gesundheit"
-msgstr "Здравоохранение"
-
-msgid "Ernährung und Konsum"
-msgstr "Питание и потребление"
-
-msgid "Kunst und Kultur"
-msgstr "Искусство и культура"
-
-msgid "Geld und Finanzen"
-msgstr "Деньги и финансы"
-
-msgid "Arbeit und Recht"
-msgstr "Труд и право"
-
-msgid "Bauen und Wohnen"
-msgstr "Строительство и жильё"
 
 msgid "Place"
 msgstr "Место"

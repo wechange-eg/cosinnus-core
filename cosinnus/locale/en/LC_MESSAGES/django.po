@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-05 13:07+0100\n"
+"POT-Creation-Date: 2018-02-19 16:30+0100\n"
 "PO-Revision-Date: 2018-02-05 13:53+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -83,6 +83,36 @@ msgstr ""
 #, python-format
 msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
 msgstr ""
+
+msgid "Mobilität"
+msgstr "Mobility"
+
+msgid "Energie"
+msgstr "Energy"
+
+msgid "Umwelt"
+msgstr "Environment"
+
+msgid "Bildung"
+msgstr "Education"
+
+msgid "Gesundheit"
+msgstr "Health"
+
+msgid "Ernährung und Konsum"
+msgstr "Nutrition and Consumption"
+
+msgid "Kunst und Kultur"
+msgstr "Art and Culture"
+
+msgid "Geld und Finanzen"
+msgstr "Money and Finance"
+
+msgid "Arbeit und Recht"
+msgstr "Business and Law"
+
+msgid "Bauen und Wohnen"
+msgstr "Construction and Living"
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgstr ""
@@ -717,36 +747,6 @@ msgstr ""
 
 msgid "Permissions"
 msgstr ""
-
-msgid "Mobilität"
-msgstr "Mobility"
-
-msgid "Energie"
-msgstr "Energy"
-
-msgid "Umwelt"
-msgstr "Environment"
-
-msgid "Bildung"
-msgstr "Education"
-
-msgid "Gesundheit"
-msgstr "Health"
-
-msgid "Ernährung und Konsum"
-msgstr "Nutrition and Consumption"
-
-msgid "Kunst und Kultur"
-msgstr "Art and Culture"
-
-msgid "Geld und Finanzen"
-msgstr "Money and Finance"
-
-msgid "Arbeit und Recht"
-msgstr "Business and Law"
-
-msgid "Bauen und Wohnen"
-msgstr "Construction and Living"
 
 msgid "Place"
 msgstr ""

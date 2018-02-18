@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-05 13:07+0100\n"
+"POT-Creation-Date: 2018-02-19 16:30+0100\n"
 "PO-Revision-Date: 2018-02-05 13:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -84,6 +84,36 @@ msgstr "Деактивувати вибраних користувачів (зб
 #, python-format
 msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
 msgstr "%(sender_name)s хоче, щоб Ви доєдналися до проекту %(team_name)s\" на %(portal_name)s! Клікніть на назву проекту нижче, для того щоб подивитися його і почати співпрацю!"
+
+msgid "Mobilität"
+msgstr "Мобільність"
+
+msgid "Energie"
+msgstr "Енергія"
+
+msgid "Umwelt"
+msgstr "Навколишнє середовище"
+
+msgid "Bildung"
+msgstr "Будівництво"
+
+msgid "Gesundheit"
+msgstr "Здоров'я"
+
+msgid "Ernährung und Konsum"
+msgstr "Харчування та споживання"
+
+msgid "Kunst und Kultur"
+msgstr "Мистецтво і культура"
+
+msgid "Geld und Finanzen"
+msgstr "Гроші та фінанси"
+
+msgid "Arbeit und Recht"
+msgstr "Робота та право"
+
+msgid "Bauen und Wohnen"
+msgstr "Будівництво та житло"
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgstr "Тільки члени спільноти/проекту можуть бачити цей вміст. Надішліть запит членства зараз!"
@@ -707,36 +737,6 @@ msgstr "Ключові слова"
 
 msgid "Permissions"
 msgstr "Права"
-
-msgid "Mobilität"
-msgstr "Мобільність"
-
-msgid "Energie"
-msgstr "Енергія"
-
-msgid "Umwelt"
-msgstr "Навколишнє середовище"
-
-msgid "Bildung"
-msgstr "Будівництво"
-
-msgid "Gesundheit"
-msgstr "Здоров'я"
-
-msgid "Ernährung und Konsum"
-msgstr "Харчування та споживання"
-
-msgid "Kunst und Kultur"
-msgstr "Мистецтво і культура"
-
-msgid "Geld und Finanzen"
-msgstr "Гроші та фінанси"
-
-msgid "Arbeit und Recht"
-msgstr "Робота та право"
-
-msgid "Bauen und Wohnen"
-msgstr "Будівництво та житло"
 
 msgid "Place"
 msgstr "Місце"

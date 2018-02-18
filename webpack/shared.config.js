@@ -4,6 +4,7 @@ var base = path.resolve('.');
 
 var collectPO = require('../cosinnus/client/lib/collect-po.js');
 
+var LANGUAGES = ['en', 'de', 'ru', 'uk'];
 
 module.exports = {
     entry: path.join(base, 'cosinnus/client/app.js'),
@@ -38,7 +39,7 @@ module.exports = {
     },
     plugins: [
     	new webpack.DefinePlugin({
-	      'OMGSASCHA': JSON.stringify(collectPO.parsePO())
+	      'COSINNUS_PO_TRANS': {'po': JSON.stringify(collectPO.parsePO(LANGUAGES))}
 	    })
     ],
     node: {

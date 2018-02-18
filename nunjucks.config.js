@@ -5,11 +5,13 @@ module.exports = function(env){
         parser.advanceAfterBlockEnd(tok.value);
         return new nodes.CallExtension(this, 'run', key);
     }
-
+    
     function Translation () {
         this.tags = ['trans'];
         this.parse = parse;
         this.run = function (ctx, key) {
+        	//console.log('HAHAH no')
+        	//console.log(COSINNUS_PO_TRANS)
             return key;
         };
     }

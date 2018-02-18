@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-05 13:07+0100\n"
+"POT-Creation-Date: 2018-02-19 16:30+0100\n"
 "PO-Revision-Date: 2018-01-31 19:54+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -84,6 +84,36 @@ msgstr "Ausgewählte Benutzer deaktivieren (deren erstellte Items bleiben auf de
 #, python-format
 msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
 msgstr "%(sender_name)s hat dich eingeladen, auf %(portal_name)s dem Projekt \"%(team_name)s\" beizutreten! Klicke unten auf den Projektnamen um es dir anzuschauen und mitzumachen!"
+
+msgid "Mobilität"
+msgstr ""
+
+msgid "Energie"
+msgstr ""
+
+msgid "Umwelt"
+msgstr ""
+
+msgid "Bildung"
+msgstr ""
+
+msgid "Gesundheit"
+msgstr ""
+
+msgid "Ernährung und Konsum"
+msgstr ""
+
+msgid "Kunst und Kultur"
+msgstr ""
+
+msgid "Geld und Finanzen"
+msgstr ""
+
+msgid "Arbeit und Recht"
+msgstr ""
+
+msgid "Bauen und Wohnen"
+msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieser Gruppe/Projekts können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
@@ -707,36 +737,6 @@ msgstr "Schlagworte"
 
 msgid "Permissions"
 msgstr "Berechtigungen"
-
-msgid "Mobilität"
-msgstr ""
-
-msgid "Energie"
-msgstr ""
-
-msgid "Umwelt"
-msgstr ""
-
-msgid "Bildung"
-msgstr ""
-
-msgid "Gesundheit"
-msgstr ""
-
-msgid "Ernährung und Konsum"
-msgstr ""
-
-msgid "Kunst und Kultur"
-msgstr ""
-
-msgid "Geld und Finanzen"
-msgstr ""
-
-msgid "Arbeit und Recht"
-msgstr ""
-
-msgid "Bauen und Wohnen"
-msgstr ""
 
 msgid "Place"
 msgstr "Ort"
