@@ -583,7 +583,7 @@
             
             $('#searchbar').click( function() {
                 $(this).addClass('expanded');
-                $(this).find('input').focus();
+                $(this).find('input').click();
             });
 
         },
