@@ -1500,7 +1500,48 @@
                     return url;
             }
         },
+        
+        addClassChangeTrigger: function() {
+        	// from: https://stackoverflow.com/questions/1950038/jquery-fire-event-if-css-class-changed
+        	//Create a closure
+        	(function(){
+        		 // Your base, I'm in it!
+	        	 var originalAddClassMethod = jQuery.fn.addClass;
+	        	 jQuery.fn.addClass = function(){
+	        	     // Execute the original method.
+	        	     var result = originalAddClassMethod.apply( this, arguments );
+	        	     // trigger a custom event
+	        	     jQuery(this).trigger('cssClassChanged');
+	        	     // return the original result
+	        	     return result;
+	        	 }
+        		 // Your base, I'm in it!
+	        	 var originalRemoveClassMethod = jQuery.fn.removeClass;
+	        	 jQuery.fn.removeClass = function(){
+	        	     // Execute the original method.
+	        	     var result = originalRemoveClassMethod.apply( this, arguments );
+	        	     // trigger a custom event
+	        	     jQuery(this).trigger('cssClassChanged');
+	        	     // return the original result
+	        	     return result;
+	        	 }
+        	})();
 
+        	//document ready function
+        	$(function(){
+        	});
+        },
+
+	    fixBootstrapModalScroll: function() {
+	    	$("body").bind('cssClassChanged', function(){ 
+	    		if ($(this).hasClass('modal-open')) {
+	    			$('html').addClass('modal-open');
+	    		} else {
+	    			$('html').removeClass('modal-open');
+	    		}
+	    	});
+	    },
+    	
         dashboardArrangeInput: function() {
             $(window).on('dashboardArrangeInputShow', function() {
                 // Alle Widgets mit unsichtbaren Elementen abdecken
@@ -1630,5 +1671,7 @@ $(function() {
     $.cosinnus.toggleSwitch();
     $.cosinnus.snapToBottom();
     $.cosinnus.addBtnTitles();
+    $.cosinnus.addClassChangeTrigger();
+    $.cosinnus.fixBootstrapModalScroll();
 });
 
