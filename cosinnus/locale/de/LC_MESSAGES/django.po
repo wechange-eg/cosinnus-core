@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-19 16:30+0100\n"
+"POT-Creation-Date: 2018-02-19 17:10+0100\n"
 "PO-Revision-Date: 2018-01-31 19:54+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -780,12 +780,15 @@ msgstr "Projekt oder Gruppe-erstellen Button"
 msgid "Users"
 msgstr "Benutzer_innen"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Events"
 msgstr "Veranstaltungen"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Projekte"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "Gruppen"
 
@@ -2611,6 +2614,7 @@ msgstr "Aktivitäten"
 msgid "Forum"
 msgstr "Forum"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Menschen"
 

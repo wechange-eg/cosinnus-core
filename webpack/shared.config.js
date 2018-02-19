@@ -39,7 +39,7 @@ module.exports = {
     },
     plugins: [
     	new webpack.DefinePlugin({
-	      'COSINNUS_PO_TRANS': {'po': JSON.stringify(collectPO.parsePO(LANGUAGES))}
+	      'COSINNUS_PO_TRANS': JSON.stringify(collectPO.parsePO(LANGUAGES))
 	    })
     ],
     node: {

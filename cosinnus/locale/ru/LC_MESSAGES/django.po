@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-19 16:30+0100\n"
+"POT-Creation-Date: 2018-02-19 17:10+0100\n"
 "PO-Revision-Date: 2018-02-05 13:57+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -785,12 +785,15 @@ msgstr "Создать кнопку группа/проект"
 msgid "Users"
 msgstr "Пользователи"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Events"
 msgstr "События"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Проекты"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "Группы"
 
@@ -2626,6 +2629,7 @@ msgstr "Лента"
 msgid "Forum"
 msgstr "Форум"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Люди"
 

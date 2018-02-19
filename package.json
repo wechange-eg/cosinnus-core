@@ -19,12 +19,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "exports-loader": "0.6.3",
-    "nunjucks": "2.4.2",
-    "nunjucks-loader": "2.4.2",
-    "script-loader": "0.7.0",
-    "underscore": "1.8.3",
-    "webpack": "1.13.0",
-    "pofile": "1.0.10"
+    "exports-loader": "^0.6.3",
+    "nunjucks": "^2.4.2",
+    "nunjucks-loader": "^2.4.2",
+    "script-loader": "^0.7.0",
+    "underscore": "^1.8.3",
+    "webpack": "^1.13.0",
+    "pofile": "^1.0.10"
   }
 }

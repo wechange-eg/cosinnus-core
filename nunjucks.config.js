@@ -10,8 +10,8 @@ module.exports = function(env){
         this.tags = ['trans'];
         this.parse = parse;
         this.run = function (ctx, key) {
-        	//console.log('HAHAH no')
-        	//console.log(COSINNUS_PO_TRANS)
+        	console.log('HAHAH no')
+        	console.log(COSINNUS_PO_TRANS)
             return key;
         };
     }
