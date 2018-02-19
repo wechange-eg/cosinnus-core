@@ -29,6 +29,8 @@ class UserSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoiceField):
         user_ids = []
         group_ids = []
         for val in value:
+            if not val:
+                continue
             value_type, value_id = val.split(':')
             if value_type == 'user':
                 user_ids.append(int(value_id))
