@@ -10,8 +10,14 @@ module.exports = function(env){
         this.tags = ['trans'];
         this.parse = parse;
         this.run = function (ctx, key) {
-        	console.log('HAHAH no')
-        	console.log(COSINNUS_PO_TRANS)
+        	// cosinnus_current_language is defined in base.html
+        	// COSINNUS_PO_TRANS is defined in webpack/shared.config.js
+        	if (cosinnus_current_language in COSINNUS_PO_TRANS && key in COSINNUS_PO_TRANS[cosinnus_current_language]) {
+        		var trans = COSINNUS_PO_TRANS[cosinnus_current_language][key];
+        		if (trans && trans.length > 0) {
+        			return trans;
+        		}
+        	}
             return key;
         };
     }

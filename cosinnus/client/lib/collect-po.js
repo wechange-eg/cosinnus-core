@@ -25,8 +25,6 @@ module.exports = {
 			} catch (e) {
 			}
 		});
-		console.log('>>\nreturning podicts:')
-		console.log(podicts)
 		return podicts;
 	}
     
