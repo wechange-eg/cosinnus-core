@@ -1273,7 +1273,7 @@
                 return a.priority - b.priority;
             });
 
-            $( window ).on('resize orientationchange ready dashboardchange', function() {
+            $( window ).on('orientationchange ready dashboardchange', function() {
                 if ($('textarea:focus, input:focus').length > 0) {
                     return;
                 }
