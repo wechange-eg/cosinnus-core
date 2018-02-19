@@ -970,11 +970,6 @@
             });
         },
 
-
-        autogrow : function() {
-            $('textarea.autogrow').autogrow();
-        },
-        
         pressEnterOn : function(target_selector) {
             var e = jQuery.Event("keydown");
             e.which = 13;
@@ -1661,7 +1656,6 @@ $(function() {
     $.cosinnus.fileList();
     $.cosinnus.messagesList();
     $.cosinnus.multilineEllipsis();
-    $.cosinnus.autogrow();
     $.cosinnus.map();
     $.cosinnus.initFileUpload();
     $.cosinnus.dashboardArrange();

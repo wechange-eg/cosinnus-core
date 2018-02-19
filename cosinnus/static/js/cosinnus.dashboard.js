@@ -267,7 +267,6 @@ $('.js-todo-link').on('click', function(e) {
         },
         refreshUI: function() {
             $.cosinnus.renderMomentDataDate();
-            $.cosinnus.autogrow();
             $( window ).trigger( 'dashboardchange' );
         },
         _delayedRefreshTimer: 0,
