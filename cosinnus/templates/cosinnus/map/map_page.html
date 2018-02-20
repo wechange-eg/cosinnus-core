@@ -1,6 +1,8 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n thumbnail cosinnus_tags %}
 
+{% block html_attributes %}style="overflow: hidden;"{% endblock html_attributes %}
+
 {% block page_title %}{% trans "Map" %}{% endblock %}
 
 {% block extrahead %}

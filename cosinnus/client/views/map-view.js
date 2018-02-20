@@ -52,7 +52,11 @@ module.exports = ContentControlView.extend({
     
     // will be set to self.options during initialization
     defaults: {
+    	// is the window in full-screen mode (instead of inside a widget or similar)
     	fullscreen: true,
+    	
+    	// is this view shown together with the map view as a 50% split screen?
+    	splitscreen: false,
     	
     	// shall we cluster close markers together
     	clusteringEnabled: false,

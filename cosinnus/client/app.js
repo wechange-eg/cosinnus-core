@@ -6,13 +6,15 @@ var Router = require('router');
 var mediator = require('mediator');
 var util = require('lib/util.js');
 
-var MapView = require('views/map-view');
 var ControlView = require('views/control-view');
-
+var MapView = require('views/map-view');
+var TileListView = require('views/tile-list-view');
 
 
 var App = function App () {
     self = this;
+    
+    self.el = null;
     
     // contains all views that can display Results
     self.contentViews = [];
@@ -132,13 +134,11 @@ var App = function App () {
         // TODO: set to actual current URL!
         var basePageURL = '/map/';
         
-        /** TODO next: 
-         * - depending on display-settings: load each view
-         * - remove Map model, put most of it into controlView and MapView
-         * - refactor these settings and params and data into sensible different variables! */
+        self.el = params.el;
+        
         self.controlView = new ControlView({
 	        	el: params.el, // TODO put in el in root div!
-	        	el_append: true,
+	        	elAppend: true,
 	        	availableFilters: settings.availableFilters,
 	        	activeFilters: settings.activeFilters,
 	        	topicsHtml: topicsHtml,
@@ -159,17 +159,33 @@ var App = function App () {
         	self.controlView.render();
         }
         
-        var mapView = new MapView({
-	        	el: params.el,
-	        	el_append: true,
-	        	location: settings.location,
-	        	markerIcons: markerIcons,
-	        	fullscreen: self.displayOptions.fullscreen
-	        }, 
-	        self,
-	        self.controlView.collection
-        ).render();
-        self.contentViews.push(mapView);
+        if (self.displayOptions.showMap) {
+        	var mapView = new MapView({
+        		el: params.el,
+        		elAppend: true,
+        		location: settings.location,
+        		markerIcons: markerIcons,
+        		fullscreen: self.displayOptions.fullscreen,
+        		splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
+        	}, 
+        	self,
+        	self.controlView.collection
+        	).render();
+        	self.contentViews.push(mapView);
+        }
+        
+        if (self.displayOptions.showTiles) {
+        	var tileListView = new TileListView({
+        		el: params.el,
+        		elAppend: true,
+        		fullscreen: self.displayOptions.fullscreen,
+        		splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
+        	}, 
+        	self,
+        	self.controlView.collection
+        	).render();
+        	self.contentViews.push(tileListView);
+        }
         
         Backbone.mediator.publish('app:ready');
     };

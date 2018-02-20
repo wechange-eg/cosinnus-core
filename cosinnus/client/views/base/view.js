@@ -21,6 +21,13 @@ module.exports = Backbone.View.extend({
         this.state = this.options && this.options.state || {};
     },
     
+    /**
+     * If self.options.elAppend == true,
+     * 		the given $el is considered the parent element, so
+     * 		instead of creating this template by filling a giving element,
+     * 		the complete rendered template will appended to the given $el,
+     * 		and then become this views actual $el!
+     */
     render: function () {
         var self = this;
         // Collect the data to be rendered; can be overridden in child view.
@@ -29,8 +36,10 @@ module.exports = Backbone.View.extend({
         if (this.template && this.template.render &&
             typeof this.template.render === 'function') {
         	var rendered = this.template.render(data);
-        	if (self.options.el_append) {
+        	if (self.options.elAppend) {
+        		rendered = $(rendered);
         		this.$el.append(rendered);
+        		this.$el = rendered;
         	} else {
         		this.$el.html(rendered);
         	}

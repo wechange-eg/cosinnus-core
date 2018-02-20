@@ -1,4 +1,4 @@
-.app-fullscreen, .map-fullscreen {
+.app-fullscreen, .map-fullscreen, .tile-list-fullscreen {
     position: fixed;
     top: 0;
     left: 0;
@@ -16,6 +16,32 @@
             top: 18px;
         }
     } 
+}
+.map-splitscreen {
+	width: 50%;
+}
+.tile-list-splitscreen {
+	width: 50%;
+	left: 50%;
+}
+
+.tile-list {
+	background-color: #85c1ff;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	
+	.tile-container {
+	    height: auto;
+	    margin-left: 20px;
+	}
+	
+	.tile {
+		padding: 20px;
+		
+		.tile-image {
+		    width: 100%;
+		}
+	}
 }
 
 .map-fullscreen {
