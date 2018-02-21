@@ -137,8 +137,7 @@ var App = function App () {
         self.el = params.el;
         
         self.controlView = new ControlView({
-	        	el: params.el, // TODO put in el in root div!
-	        	elAppend: true,
+	        	elParent: params.el, // TODO put in el in root div!
 	        	availableFilters: settings.availableFilters,
 	        	activeFilters: settings.activeFilters,
 	        	topicsHtml: topicsHtml,
@@ -161,8 +160,7 @@ var App = function App () {
         
         if (self.displayOptions.showMap) {
         	var mapView = new MapView({
-        		el: params.el,
-        		elAppend: true,
+        		elParent: params.el,
         		location: settings.location,
         		markerIcons: markerIcons,
         		fullscreen: self.displayOptions.fullscreen,
@@ -176,8 +174,7 @@ var App = function App () {
         
         if (self.displayOptions.showTiles) {
         	var tileListView = new TileListView({
-        		el: params.el,
-        		elAppend: true,
+        		elParent: params.el,
         		fullscreen: self.displayOptions.fullscreen,
         		splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
         	}, 

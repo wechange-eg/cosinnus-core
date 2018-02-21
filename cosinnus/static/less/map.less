@@ -29,6 +29,7 @@
 	background-color: #85c1ff;
 	overflow-y: scroll;
 	overflow-x: hidden;
+	padding: 50px 20px;
 	
 	.tile-container {
 	    height: auto;
@@ -40,6 +41,14 @@
 		
 		.tile-image {
 		    width: 100%;
+		}
+		
+		.link {
+		    cursor: pointer;
+		}
+		
+		&.selected {
+		    border: 4px solid blue;
 		}
 	}
 }

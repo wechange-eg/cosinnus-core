@@ -220,9 +220,10 @@ module.exports = ContentControlView.extend({
     },
     
 
-    markerUpdate: function(result) {
+    markerUpdate: function(result, what) {
     	// don't use this trigger when only hover/selected state was changed - they have their own handlers
-    	if (result.changedAttributes && (result.changedAttributes.selected || result.changedAttributes.hover)) {
+    	var attrs = result.changedAttributes();
+    	if (attrs && ('selected' in attrs || 'hover' in attrs)) {
     		util.log('map-view.js: WOWWEEEE! canceled a markerUpdate when selected/hover was changed')
     		return;
     	}

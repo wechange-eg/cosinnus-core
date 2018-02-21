@@ -45,6 +45,13 @@ module.exports = ContentControlView.extend({
     	}
     },
     
+    // the main ResultCollection of all displayed results
+    collection: null,
+    
+    // the currently hovered on and selected Result items
+    selectedResult: null,
+    hoveredResult: null,
+    
     searchEndpointURL: '/maps/search/',
     searchDelay: 600,
     whileSearchingDelay: 5000,
@@ -68,7 +75,6 @@ module.exports = ContentControlView.extend({
     	
     	util.log('control-view.js: initialized. with self.App=' + self.App)
     	
-
         if (self.state.activeTopicIds) {
             this.showTopics();
         }
@@ -195,9 +201,29 @@ module.exports = ContentControlView.extend({
     		var newmod = new Result(res);
     		resultModels.push(newmod);
     	});
+    	// take the current selected model and check if it is in the new result list
+    	// if so, set that to selected
+    	// if not: add it to it
+    	if (self.selectedResult) {
+    		var position = resultModels.map(function(e){return e.id;}).indexOf(self.selectedResult.id);
+    		if (position > -1) {
+    			resultModels[position].set('selected', true);
+    		} else {
+    			resultModels.push(self.selectedResult);
+    		}
+    	}
+    	// take the current hovered model and check if it is in the new result list
+    	// if so, set that to hovered
+    	// if not: add it to it
+    	if (self.hoveredResult) {
+    		var position = resultModels.map(function(e){return e.id;}).indexOf(self.hoveredResult.id);
+    		if (position > -1) {
+    			resultModels[position].set('hovered', true);
+    		} else {
+    			resultModels.push(self.hoveredResult);
+    		}
+    	}
     	
-    	// TODO: take the current selected model and check if it is in the new result list
-    	// if not: add it to it, with selected=true!
     	util.log('control-view.js:processSearchResults: check that the currently selected object is kept in the collection!')
     	
     	self.collection.set(resultModels);
@@ -240,6 +266,38 @@ module.exports = ContentControlView.extend({
         if (topics_selector.length > 0 && this.state.activeTopicIds) {
             topics_selector.val(this.state.activeTopicIds).select2();
         }
+    },
+    
+    
+    
+    // public functions
+    
+    /**
+     * Will set a new selected result and un-set the old one.
+     * If result == null, will just un-set the current one.
+     */
+    setSelectedResult: function (result) {
+    	if (this.selectedResult != null) {
+    		this.selectedResult.set('selected', false);
+    	}
+    	this.selectedResult = result;
+    	if (this.selectedResult != null) {
+    		this.selectedResult.set('selected', true);
+    	}
+    },
+    
+    /**
+     * Will set a new hovered result and un-set the old one.
+     * If result == null, will just un-set the current one.
+     */
+    setHoveredResult: function (result) {
+    	if (this.hoveredResult != null) {
+    		this.hoveredResult.set('hovered', false);
+    	}
+    	this.hoveredResult = result;
+    	if (this.hoveredResult != null) {
+    		this.hoveredResult.set('hovered', true);
+    	}
     },
     
 

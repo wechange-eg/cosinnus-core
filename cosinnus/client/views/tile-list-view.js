@@ -74,8 +74,7 @@ module.exports = ContentControlView.extend({
 
         var tile = new TileView({
         	model: result,
-        	el: '#tile-container',
-        	elAppend: true
+        	elParent: '#tile-container',
         }, 
     	this.App).render();
         this.tiles[result.id] = tile;
@@ -91,21 +90,22 @@ module.exports = ContentControlView.extend({
 
     tileUpdate: function(result) {
     	// don't use this trigger when only hover/selected state was changed - they have their own handlers
-    	if (result.changedAttributes && (result.changedAttributes.selected || result.changedAttributes.hover)) {
+    	var attrs = result.changedAttributes();
+    	if (attrs && ('selected' in attrs || 'hover' in attrs)) {
     		util.log('tile-list-view.js: WOWWEEEE! canceled a tileUpdate when selected/hover was changed')
     		return;
     	}
-    	// TODO: what this log message says
-    	util.log('tile-list-view.js: TODO: actually *re-render* the tile and dont just remove/add it!')
-    	if (!result.selected) {
-    		this.tileRemove(result);
-    		this.tileAdd(result);
-    	} else {
-    		util.log('tile-list-view.js: TODO:: was ordered to remove a tile that is currently selected. NOT DOING ANYTHING RN!')
+    	if (result.id in this.tiles) {
+    		var tile = this.tiles[result.id];
+    		tile.render();
     	}
     },
     
     tileRemove: function(result) {
+    	if (result.get('selected')) {
+    		util.log('tile-list-view.js: TODO:: was ordered to remove a tile that is currently selected. NOT DOING ANYTHING RN!')
+    		return;
+    	}
     	if (result.id in this.tiles) {
     		var tile = this.tiles[result.id];
     		

@@ -22,8 +22,9 @@ module.exports = Backbone.View.extend({
     },
     
     /**
-     * If self.options.elAppend == true,
-     * 		the given $el is considered the parent element, so
+     * If self.options.elParent is set,
+     * 		the given el is ignored at first and elParent is considered the 
+     * 		parent element, so
      * 		instead of creating this template by filling a giving element,
      * 		the complete rendered template will appended to the given $el,
      * 		and then become this views actual $el!
@@ -36,10 +37,17 @@ module.exports = Backbone.View.extend({
         if (this.template && this.template.render &&
             typeof this.template.render === 'function') {
         	var rendered = this.template.render(data);
-        	if (self.options.elAppend) {
+        	
+        	if (self.options.elParent) {
+        		// if this element is not in place yet, append it to the parent
+        		// otherwise replace it
         		rendered = $(rendered);
-        		this.$el.append(rendered);
-        		this.$el = rendered;
+        		if (self.$el.parent().length == 0) {
+        			$(self.options.elParent).append(rendered);
+        		} else {
+        			self.$el.replaceWith(rendered);
+        		}
+        		this.setElement(rendered);
         	} else {
         		this.$el.html(rendered);
         	}
