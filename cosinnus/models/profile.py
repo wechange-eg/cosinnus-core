@@ -257,8 +257,7 @@ class BaseUserProfile(FacebookIntegrationUserProfileMixin, models.Model):
     
     def get_map_marker_image_url(self):
         """ Returns a static image URL to use as a map marker image, or '' if none available """
-        small_avatar = self.get_avatar_thumbnail(size=(40, 40))
-        return small_avatar.url if small_avatar else static('images/jane-doe.png')
+        return self.get_avatar_thumbnail_url(settings.COSINNUS_MAP_IMAGE_SIZE) or static('images/jane-doe.png')
     
     def media_tag_object(self):
         key = '_media_tag_cache'

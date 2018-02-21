@@ -47,6 +47,7 @@ from cosinnus.models.mixins.images import ThumbnailableImageMixin
 from cosinnus.views.mixins.media import VideoEmbedFieldMixin,\
     FlickrEmbedFieldMixin
 from jsonfield.fields import JSONField
+from django.templatetags.static import static
 
 logger = logging.getLogger('cosinnus')
 
@@ -943,19 +944,7 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
         return tn.url if tn else None
     
     def get_map_marker_image_url(self):
-        if self.avatar:
-            thumbnailer = get_thumbnailer(self.avatar)
-            try:
-                small_avatar = thumbnailer.get_thumbnail({
-                    'crop': True,
-                    'upscale': True,
-                    'size': (40, 40),
-                })
-                return small_avatar.url if small_avatar else ''
-            except InvalidImageFormatError:
-                if settings.DEBUG:
-                    raise
-        return ''
+        return self.get_avatar_thumbnail_url(settings.COSINNUS_MAP_IMAGE_SIZE) or static('images/group-avatar-placeholder.png')
     
     def get_facebook_avatar_url(self):
         page_or_group_id = self.facebook_page_id or self.facebook_group_id or None
