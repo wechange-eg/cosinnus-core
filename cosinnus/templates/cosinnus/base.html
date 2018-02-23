@@ -56,7 +56,6 @@
 	        <script src="{% static 'js/vendor/fullcalendar.min.js' %}"></script>
 	        <script src="{% static 'js/vendor/jquery.sortElements.js' %}"></script>
 	        <script src="{% static 'js/vendor/moment-with-langs.min.js' %}"></script>
-	        <script src="{% static 'js/vendor/jquery.autogrow-textarea.js' %}"></script>
 	        <script src="{% static 'js/vendor/jquery.ui.widget.js' %}"></script>
 	        <script src="{% static 'js/vendor/jquery.fileupload.js' %}"></script>
 	        {% comment %}  Load this for sortable dashboard widgets {% endcomment %}
@@ -80,7 +79,7 @@
                 var cosinnus_current_language = "{{ COSINNUS_CURRENT_LANGUAGE }}";
                 var cosinnus_report_object_url = "{% url 'cosinnus:report-object' %}";
             </script>
-            <script src="{% static 'js/cosinnus.js' %}?v=0.32"></script>
+            <script src="{% static 'js/cosinnus.js' %}?v=0.36"></script>
             <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
             <script src="{% static 'js/cosinnus.feedback.js' %}"></script>
         {% endblock cosinnus_jshead %}
@@ -124,6 +123,8 @@
                             </ol>
                         {% endblock override_breadcrumb %}
                     </div>
+                    {# this fixes the breadcrumb being unclickable in mobile views #}
+                    <div class="visible-xs clearfix"></div>
                     
                     {% block override_leftnav %}
                     <div class="col-lg-3 col-md-3"><!-- left column -->
