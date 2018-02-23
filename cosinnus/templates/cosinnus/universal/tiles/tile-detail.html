@@ -1,0 +1,12 @@
+<div class="tile-detail tile-{{ type }} {% if selected %}selected{% endif %}">
+    <div class="tile-close-button">
+        <i class="fa fa-fw fa-close"></i>
+    </div>
+    <div class="tile-detail-link">
+	    <img class="tile-image" src="{{imageUrl}}" />
+	    <br/>
+        <a href="{{url}}" target="_blank">{{title}}</a>
+    </div>
+    <div class="address">{{address}}</div>
+    <div class="description">{{description}}</div>
+</div>

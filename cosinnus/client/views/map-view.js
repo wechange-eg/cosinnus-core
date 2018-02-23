@@ -58,6 +58,12 @@ module.exports = ContentControlView.extend({
     	// is this view shown together with the map view as a 50% split screen?
     	splitscreen: false,
     	
+    	// will a popup be shown when a map marker is clicked?
+    	enablePopup: false,
+    	
+    	// will clicking on a marker cause its result to be selected?
+    	enableDetailSelection: true,
+    	
     	// shall we cluster close markers together
     	clusteringEnabled: false,
     	clusterZoomThreshold: 5,
@@ -190,14 +196,24 @@ module.exports = ContentControlView.extend({
                 iconAnchor: [markerIcon.iconWidth / 2, markerIcon.iconHeight],
                 popupAnchor: [1, -27],
                 shadowSize: [28, 28]
-            })
-        }).bindPopup(popupTemplate.render({
-            imageURL: result.get('imageUrl'),
-            title: result.get('title'),
-            url: result.get('url'),
-            address: result.get('address'),
-            description: result.get('description')
-        }));
+            }),
+            riseOnHover: true
+        });
+    	
+    	if (this.options.enablePopup) {
+    		marker.bindPopup(popupTemplate.render({
+    			imageURL: result.get('imageUrl'),
+    			title: result.get('title'),
+    			url: result.get('url'),
+    			address: result.get('address'),
+    			description: result.get('description')
+    		}));
+    	} 
+    	if (this.options.enableDetailSelection) {
+    		marker.on('click', function(){
+    			self.App.controlView.setSelectedResult(result);
+    		});
+    	}
         
         if (!this.options.keepOpenMarkersAfterResultChange || (this.markerNotPopup(marker) && this.markerNotSpiderfied(marker))) {
 	        if (this.state.currentlyClustering) {
@@ -216,7 +232,10 @@ module.exports = ContentControlView.extend({
     
 
     markerChangeSelected: function(result) {
-    	
+    	if (result.id in this.markers) {
+    		var marker = this.markers[result.id];
+    		$(marker._icon).toggleClass('marker-selected', result.get('selected'));
+    	}
     },
     
 

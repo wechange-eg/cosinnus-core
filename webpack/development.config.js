@@ -10,5 +10,3 @@ module.exports = _(shared).extend({
 		})
     ])
 });
-
-console.log(module.exports.plugins)

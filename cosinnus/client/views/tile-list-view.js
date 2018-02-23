@@ -6,7 +6,7 @@ var util = require('lib/util');
 
 module.exports = ContentControlView.extend({
 
-	template: require('map/tile-list'),
+	template: require('tiles/tile-list'),
 	
     // Marker storage dict of {<resultModel.id>: tileView, ...}
     // id corresponds to self.collection.get(<id>)
