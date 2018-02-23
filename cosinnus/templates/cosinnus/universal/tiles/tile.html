@@ -1,11 +1,9 @@
-<div class="tile tile-{{ type }} col-xs-12 col-md-6 {% if selected %}selected{% endif %}">
-    <div class="details">
-        <div class="tile-detail-link">
-		    <img class="tile-image" src="{{imageUrl}}" />
-		    <br/>
-            <a href="{{url}}" target="_blank">{{title}}</a>
-        </div>
-        <div class="address">{{address}}</div>
-        <div class="description">{{description}}</div>
+<div class="tile tile-{{ type }} col-xs-12 col-md-6 {% if selected %}selected{% endif %} {% if hovered %}hovered{% endif %}">
+    <div class="tile-detail-link">
+	    <img class="tile-image" src="{{imageUrl}}" />
+	    <br/>
+        <a href="{{url}}" target="_blank">{{title}}</a>
     </div>
+    <div class="address">{{address}}</div>
+    <div class="description">{{description}}</div>
 </div>

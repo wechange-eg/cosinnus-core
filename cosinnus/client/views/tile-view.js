@@ -20,6 +20,9 @@ module.exports = BaseView.extend({
     events: {
         'click .tile-detail-link': 'onSelectClicked',
         'click .tile-close-button': 'onDeselectClicked',
+
+        'mouseenter': 'onMouseEnter',
+        'mouseleave': 'onMouseLeave',
     },
 	
     initialize: function (options, app) {
@@ -29,12 +32,12 @@ module.exports = BaseView.extend({
     	
     	self.model.on({
     		'change:selected': self.thisContext(self.onSelectChanged),
-    		'change:hover': self.thisContext(self.render),
+    		'change:hovered': self.thisContext(self.onHoverChanged),
     	});
     },
     
     /**
-     * Called when the .select property of the Result model was changed.
+     * Called when the .selected property of the Result model was changed.
      * We actually do the display and re-render here, because
      * the selected change may be triggered in other views.
      */
@@ -50,13 +53,33 @@ module.exports = BaseView.extend({
     },
     
     /**
+     * Called when the .hovered property of the Result model was changed.
+     * We actually do the display and re-render here, because
+     * the selected change may be triggered in other views.
+     */
+    onHoverChanged: function () {
+		this.$el.toggleClass('hovered', this.model.get('hovered'));
+    },
+    
+    
+    onMouseEnter: function() {
+    	util.log('tile-view.js: got a hover event! id: ' + this.model.id);
+    	this.App.controlView.setHoveredResult(this.model);
+    },
+    onMouseLeave: function() {
+    	util.log('tile-view.js: got an unhover event! id: ' + this.model.id);
+    	this.App.controlView.setHoveredResult(null);
+    },
+    
+    
+    /**
      * Called when a tile detail link is clicked, to expand the tile view
      * to the full size detail view.
      * We only change the Result model's .selected property and
      * don't do any rendering here.
      */
     onSelectClicked: function () {
-    	util.log('tile-view.js: got a select click event!')
+    	util.log('tile-view.js: got a select click event! id: ' + this.model.id);
     	this.App.controlView.setSelectedResult(this.model);
     },
     
@@ -66,7 +89,7 @@ module.exports = BaseView.extend({
      * don't do any rendering here.
      */
     onDeselectClicked: function () {
-    	util.log('tile-view.js: got a deselect click event!')
+    	util.log('tile-view.js: got a deselect click event! id: ' + this.model.id);
     	this.App.controlView.setSelectedResult(null);
     },
     

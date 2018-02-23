@@ -127,7 +127,7 @@ module.exports = ContentControlView.extend({
         // result events
         self.collection.on({
     	   'add' : self.thisContext(self.markerAdd),
-    	   'change:hover': self.thisContext(self.markerChangeHover),
+    	   'change:hovered': self.thisContext(self.markerChangeHovered),
     	   'change:selected': self.thisContext(self.markerChangeSelected),
     	   'change': self.thisContext(self.markerUpdate),
     	   'remove': self.thisContext(self.markerRemove),
@@ -200,6 +200,8 @@ module.exports = ContentControlView.extend({
             riseOnHover: true
         });
     	
+    	// bind click/hover events 
+    	
     	if (this.options.enablePopup) {
     		marker.bindPopup(popupTemplate.render({
     			imageURL: result.get('imageUrl'),
@@ -214,6 +216,13 @@ module.exports = ContentControlView.extend({
     			self.App.controlView.setSelectedResult(result);
     		});
     	}
+    	marker.on('mouseover', function(){
+			self.App.controlView.setHoveredResult(result);
+		});
+    	marker.on('mouseout', function(){
+			self.App.controlView.setHoveredResult(null);
+		});
+    	
         
         if (!this.options.keepOpenMarkersAfterResultChange || (this.markerNotPopup(marker) && this.markerNotSpiderfied(marker))) {
 	        if (this.state.currentlyClustering) {
@@ -226,8 +235,11 @@ module.exports = ContentControlView.extend({
     },
     
 
-    markerChangeHover: function(result) {
-    	
+    markerChangeHovered: function(result) {
+    	if (result.id in this.markers) {
+    		var marker = this.markers[result.id];
+    		$(marker._icon).toggleClass('marker-hovered', result.get('hovered'));
+    	}
     },
     
 
@@ -240,10 +252,9 @@ module.exports = ContentControlView.extend({
     
 
     markerUpdate: function(result, what) {
-    	// don't use this trigger when only hover/selected state was changed - they have their own handlers
+    	// don't use this trigger when only hovered/selected state was changed - they have their own handlers
     	var attrs = result.changedAttributes();
-    	if (attrs && ('selected' in attrs || 'hover' in attrs)) {
-    		util.log('map-view.js: WOWWEEEE! canceled a markerUpdate when selected/hover was changed')
+    	if (attrs && ('selected' in attrs || 'hovered' in attrs)) {
     		return;
     	}
     	util.log('map-view.js: TODO: actually *update* the marker and dont just remove/add it!')

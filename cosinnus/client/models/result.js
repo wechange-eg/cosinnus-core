@@ -12,14 +12,14 @@ module.exports = Backbone.Model.extend({
 		 *  'groups', 'projects', 'events', 'people' */
 		type: null,
 		
-		/** Centralised hover state of this result in the views. 
-		 *  Used to transport hover state over the same result, even if displayed in different 
-		 *  views (tile, map, etc). The corresponding change:hover signal can be subscribed to 
+		/** Centralised hovered state of this result in the views. 
+		 *  Used to transport hovered state over the same result, even if displayed in different 
+		 *  views (tile, map, etc). The corresponding change:hovered signal can be subscribed to 
 		 *  to register visual changes in the views.  */
-		hover: false,
+		hovered: false,
 		
 		/** Centralised selected/clicked state of this result in the views. 
-		 *  Used to transport hover state over the same result, even if displayed in different 
+		 *  Used to transport selected state over the same result, even if displayed in different 
 		 *  views (tile, map, etc). The corresponding selected signal can be subscribed to to 
 		 *  register visual changes in the views.  */
 		selected: false,

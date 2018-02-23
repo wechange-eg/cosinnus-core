@@ -34,7 +34,7 @@ module.exports = ContentControlView.extend({
         // result events
         self.collection.on({
     	   'add' : self.thisContext(self.tileAdd),
-    	   'change:hover': self.thisContext(self.tileChangeHover),
+    	   'change:hovered': self.thisContext(self.tileChangeHover),
     	   'change:selected': self.thisContext(self.tileChangeSelected),
     	   'change': self.thisContext(self.tileUpdate),
     	   'remove': self.thisContext(self.tileRemove),
@@ -89,10 +89,9 @@ module.exports = ContentControlView.extend({
     },
 
     tileUpdate: function(result) {
-    	// don't use this trigger when only hover/selected state was changed - they have their own handlers
+    	// don't use this trigger when only hovered/selected state was changed - they have their own handlers
     	var attrs = result.changedAttributes();
-    	if (attrs && ('selected' in attrs || 'hover' in attrs)) {
-    		util.log('tile-list-view.js: WOWWEEEE! canceled a tileUpdate when selected/hover was changed')
+    	if (attrs && ('selected' in attrs || 'hovered' in attrs)) {
     		return;
     	}
     	if (result.id in this.tiles) {
