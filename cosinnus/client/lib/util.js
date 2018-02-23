@@ -35,8 +35,8 @@ module.exports = {
     },
     
     log: function(obj) {
-    	// TODO: determine test/prod environment!
-    	if (true) {
+    	// determine test/prod environment
+    	if (DEBUG) {
     		if (typeof obj == "string") {
     			console.log(obj + '    || from:  ' + new Error().stack.replace(/(?:\r\n|\r|\n)/g, '').split(' at ')[2]);
     		} else {
