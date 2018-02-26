@@ -43,6 +43,8 @@ module.exports = BaseView.extend({
      */
     onSelectChanged: function () {
     	if (this.model.get('selected') == true) {
+    		// clear hover on this to not confuse styles
+    		this.App.controlView.setHoveredResult(null);
     		this.template = detailTemplate;
     		$('.tile-list').addClass('tile-detail-open');
     	} else {
@@ -63,12 +65,16 @@ module.exports = BaseView.extend({
     
     
     onMouseEnter: function() {
-    	util.log('tile-view.js: got a hover event! id: ' + this.model.id);
-    	this.App.controlView.setHoveredResult(this.model);
+    	if (!this.model.get('selected')) {
+    		util.log('tile-view.js: got a hover event! id: ' + this.model.id);
+    		this.App.controlView.setHoveredResult(this.model);
+    	}
     },
     onMouseLeave: function() {
-    	util.log('tile-view.js: got an unhover event! id: ' + this.model.id);
-    	this.App.controlView.setHoveredResult(null);
+    	if (!this.model.get('selected')) {
+	    	util.log('tile-view.js: got an unhover event! id: ' + this.model.id);
+	    	this.App.controlView.setHoveredResult(null);
+    	}
     },
     
     
