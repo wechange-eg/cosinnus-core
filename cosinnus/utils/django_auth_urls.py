@@ -16,13 +16,13 @@ if not is_integrated_portal():
     
     urlpatterns = patterns('',
         url(r'^login/$',
-            'django.contrib.auth.views.login',
+            'cosinnus.views.common.cosinnus_login',
             {'template_name': 'cosinnus/registration/login.html',
              'authentication_form': UserEmailLoginForm},
             name='login'),
         url(r'^logout/$',
-            'django.contrib.auth.views.logout',
-            {'template_name': 'cosinnus/registration/logged_out.html'},
+            'cosinnus.views.common.cosinnus_logout',
+            {'next_page': '/'},
             name='logout'),
     )
     
