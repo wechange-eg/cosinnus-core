@@ -14,6 +14,7 @@ from cosinnus.utils.urls import safe_redirect
 from django.http.response import  HttpResponseNotFound,\
     HttpResponseForbidden, HttpResponseServerError
 from django.template.loader import render_to_string
+from django.contrib.auth.views import login, logout
 
 class IndexView(RedirectView):
     url = reverse_lazy('cosinnus:group-list')
@@ -77,3 +78,20 @@ class SwitchLanguageView(RedirectView):
         
 
 switch_language = SwitchLanguageView.as_view()
+
+
+def cosinnus_login(request, **kwargs):
+    """ Wraps the django login view to set the "wp_user_logged_in" cookie on logins """
+    response = login(request, **kwargs)
+    if request.method == 'POST' and not request.user.is_anonymous():
+        response.set_cookie('wp_user_logged_in', 1, 60*60*24*30) # 30 day expiry
+    return response
+
+def cosinnus_logout(request, **kwargs):
+    """ Wraps the django logout view to delete the "wp_user_logged_in" cookie on logouts
+        (this seems to only clear the value of the cookie and not completely delete it!) """
+    response = logout(request, **kwargs)
+    if request.user.is_anonymous():
+        response.delete_cookie('wp_user_logged_in')
+    return response
+
