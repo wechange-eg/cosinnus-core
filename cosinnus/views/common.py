@@ -7,11 +7,13 @@ from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _, LANGUAGE_SESSION_KEY
 
 from cosinnus.conf import settings
-from django.shortcuts import render_to_response
 
 from cosinnus.utils.context_processors import cosinnus as cosinnus_context
 from cosinnus.utils.context_processors import settings as cosinnus_context_settings
 from cosinnus.utils.urls import safe_redirect
+from django.http.response import  HttpResponseNotFound,\
+    HttpResponseForbidden, HttpResponseServerError
+from django.template.loader import render_to_string
 
 class IndexView(RedirectView):
     url = reverse_lazy('cosinnus:group-list')
@@ -41,13 +43,16 @@ def _get_bare_cosinnus_context(request):
 
 
 def view_403(request):
-    return render_to_response('cosinnus/common/403.html', _get_bare_cosinnus_context(request))
+    content = render_to_string('cosinnus/common/403.html', _get_bare_cosinnus_context(request))
+    return HttpResponseForbidden(content)
 
 def view_404(request):
-    return render_to_response('cosinnus/common/404.html', _get_bare_cosinnus_context(request))
+    content = render_to_string('cosinnus/common/404.html', _get_bare_cosinnus_context(request))
+    return HttpResponseNotFound(content)
 
 def view_500(request):
-    return render_to_response('cosinnus/common/500.html')
+    content = render_to_string('cosinnus/common/500.html')
+    return HttpResponseServerError(content)
 
 
 class SwitchLanguageView(RedirectView):
