@@ -400,6 +400,9 @@ class CosinnusConf(AppConf):
     RECRUIT_EMAIL_BODY_TEXT = _('%(sender_name)s would like you to come join the project "%(team_name)s" '
         'on %(portal_name)s! Click the project\'s name below to check it out and collaborate!')
     
+    # default URL used for this portal, used for example in the navbar "home" link
+    ROOT_URL = '/'
+    
     # if set to True, private groups will be shown in group lists, even for non-logged in users
     SHOW_PRIVATE_GROUPS_FOR_ANONYMOUS_USERS = True
     

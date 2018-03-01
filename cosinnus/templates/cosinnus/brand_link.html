@@ -1,5 +1,5 @@
 {% load i18n %}
 
-<a class="navbar-brand" title="{% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}" href="/">
+<a class="navbar-brand" title="{% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}" href="{% if SETTINGS.COSINNUS_ROOT_URL %}{{ SETTINGS.COSINNUS_ROOT_URL }}{% else %}/{% endif %}">
     {% include 'cosinnus/brand.html' %}
 </a>
