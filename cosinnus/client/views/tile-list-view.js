@@ -38,6 +38,7 @@ module.exports = ContentControlView.extend({
     	   'change:selected': self.thisContext(self.tileChangeSelected),
     	   'change': self.thisContext(self.tileUpdate),
     	   'remove': self.thisContext(self.tileRemove),
+    	   'reset': self.thisContext(self.tilesReset),
     	});
     },
 
@@ -113,6 +114,17 @@ module.exports = ContentControlView.extend({
     		delete this.tiles[result.id];
     		util.log('Removed tile at ' + result.id);
     	}
+    },
+    
+    /** Handler for when the entire collection changes */
+    tilesReset: function(resultCollection, options) {
+    	var self = this;
+    	_.each(options.previousModels, function(result){
+    		self.tileRemove(result);
+    	});
+    	_.each(resultCollection.models, function(result){
+    		self.tileAdd(result);
+    	});
     },
     
     

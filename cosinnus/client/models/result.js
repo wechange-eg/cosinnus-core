@@ -29,6 +29,9 @@ module.exports = Backbone.Model.extend({
 		lat: null,
 		lon: null,
 		
+		/** Result relevance as float, 0 or positive, can be larger than 1.0! */
+		relevance: 0.0,
+		
 		/** All other attributes come directly from the backend, and aren't listed here as
 		 *  they are only used in the templates directly. */
 	},

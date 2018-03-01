@@ -226,12 +226,13 @@ module.exports = ContentControlView.extend({
     	
     	util.log('control-view.js:processSearchResults: check that the currently selected object is kept in the collection!')
     	
-    	self.collection.set(resultModels);
+    	
     	util.log('control-view.js: got the results back and updated the collection!')
     	util.log(self.collection.toJSON());
     	
     	
-    	
+
+//    	self.collection.set(resultModels);
     	/**
     	 * Merges existing models and updates them.
     	 * Calls 'add'/'change'/'remove'!
@@ -244,6 +245,7 @@ module.exports = ContentControlView.extend({
     	 * 
     	 */
     	
+    	self.collection.reset(resultModels);
     	/**
     	 * Does NOT call add/change/remove!
     	 * Calls 'reset' signal!

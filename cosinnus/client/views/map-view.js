@@ -131,6 +131,7 @@ module.exports = ContentControlView.extend({
     	   'change:selected': self.thisContext(self.markerChangeSelected),
     	   'change': self.thisContext(self.markerUpdate),
     	   'remove': self.thisContext(self.markerRemove),
+    	   'reset': self.thisContext(self.markersReset),
     	});
     },
 
@@ -282,8 +283,16 @@ module.exports = ContentControlView.extend({
     	}
     },
     
-    
-    
+    /** Handler for when the entire collection changes */
+    markersReset: function(resultCollection, options) {
+    	var self = this;
+    	_.each(options.previousModels, function(result){
+    		self.markerRemove(result);
+    	});
+    	_.each(resultCollection.models, function(result){
+    		self.markerAdd(result);
+    	});
+    },
     
 
     // Private
