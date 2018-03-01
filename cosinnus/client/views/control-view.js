@@ -432,9 +432,9 @@ module.exports = ContentControlView.extend({
                 self.whileSearchingDelay : self.searchDelay;
         
         if (fireImmediatelyIfPossible) {
-        	console.log('WHHHAHSASHASHHEHEHEE')
+        	util.log('control-view.js: TODO: FireImmediately was passed true! Do something with it.')
         } else {
-        	console.log('NNNNNNNNNNNNNNNNNNNO')
+        	util.log('control-view.js: TODO: FireImmediately was passed false! Do something with it.')
         }
         clearTimeout(this.searchTimeout);
         self.state.wantsToSearch = true;

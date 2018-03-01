@@ -13,6 +13,9 @@ module.exports = ContentControlView.extend({
     // updated through the handlers of self.collection's signals
     tiles: {},
     
+    // the Masonry grid for our tiles
+    grid: null,
+    
     // will be set to self.options during initialization
     defaults: {
     	// is the window in full-screen mode (instead of inside a widget or similar)
@@ -45,6 +48,7 @@ module.exports = ContentControlView.extend({
     render: function () {
     	var self = this;
         ContentControlView.prototype.render.call(self);
+        
     	self.renderTilesInitial();
     	return self;
     },
@@ -125,6 +129,25 @@ module.exports = ContentControlView.extend({
     	_.each(resultCollection.models, function(result){
     		self.tileAdd(result);
     	});
+    	
+    	if (!this.grid) {
+    		this.grid = $('.grid').imagesLoaded( function() { 
+    			$('.grid').masonry({
+    				// set itemSelector so .grid-sizer is not used in layout
+    				itemSelector: '.grid-item',
+    				// use element for option
+    				columnWidth: '.grid-sizer',
+    				percentPosition: true,
+    				transitionDuration: 0
+    			});
+    		});
+    	} else {
+    		this.grid = $('.grid').imagesLoaded( function() { 
+    	    	self.grid.masonry('reloadItems');
+    			self.grid.masonry('layout')
+    		});
+    	}
+    	
     },
     
     
@@ -132,6 +155,9 @@ module.exports = ContentControlView.extend({
     // -------
 
     renderTilesInitial: function () {
+    	
+    	
+    	console.log('MAsonry initted')
     	
     },
 

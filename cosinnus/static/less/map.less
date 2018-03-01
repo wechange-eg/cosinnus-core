@@ -28,7 +28,13 @@
 	background-color: #85c1ff;
 	overflow-y: scroll;
 	overflow-x: hidden;
-	padding: 50px 15px;
+	padding-top: 50px;
+    
+    /** Masonry */
+    .grid-sizer, .grid-item { 
+        width: 50%; 
+        height: auto;
+    }
 	
 	&.tile-detail-open {
 	   overflow-y: hidden;
