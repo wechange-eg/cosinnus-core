@@ -13,7 +13,7 @@
                     {% endif %}
                 </a>
                 <a id="folder_clickarea_{{ folder.group.pk }}_{{ folder.pk }}" class="pull-right fadedown-clickarea edit-this-clickarea" title="{% trans "Edit folder" %}" href="#">
-                    <i class="fa fa-pencil"></i>
+                    <i class="fa fa-chevron-down"></i>
                 </a>
                 <div class="media-body" href="{{ href }}" >
                     <span>{{ label }}</span>
@@ -31,23 +31,35 @@
         <div type="button" class="btn btn-emphasized fine-space" onclick="$.cosinnus.pressEnterOn('#folder_{{ folder.group.pk }}_{{ folder.pk }}')">
             <ul class="media-list">
                 <li class="media">
-                    <a class="pull-right btn-extra-emphasized" href="#">
+                    <span class="pull-right btn-extra-emphasized" href="#">
                         <i class="fa fa-floppy-o"></i>
-                    </a>
+                    </span>
                     <div class="media-body">
                         {% trans "Save" %}
                     </div>
                 </li>
             </ul>
         </div>
-        <div type="button" class="btn btn-emphasized large-space" title="{% trans "Delete folder" %}" data-toggle="modal" data-target="#deleteFolder_{{folder.pk}}">
+        <div type="button" class="btn btn-emphasized regular-space" title="{% trans "Delete folder" %}" data-toggle="modal" data-target="#deleteFolder_{{folder.pk}}">
             <ul class="media-list">
                 <li class="media">
-                    <a class="pull-right btn-extra-emphasized" href="#">
+                    <span class="pull-right btn-extra-emphasized" href="#">
                         <i class="fa fa-trash-o"></i>
-                    </a>
+                    </span>
                     <div class="media-body">
                         {% trans "Delete" %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div type="button" class="btn btn-emphasized large-space" title="{% trans "Download" %}" href="{{ href }}download/">
+            <ul class="media-list">
+                <li class="media">
+                    <span class="pull-right btn-extra-emphasized">
+                        <i class="fa fa-download"></i>
+                    </span>
+                    <div class="media-body">
+                        {% trans "Download" %}
                     </div>
                 </li>
             </ul>
