@@ -49,7 +49,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.http.response import Http404, HttpResponseNotAllowed,\
     HttpResponseBadRequest
 from cosinnus.utils.permissions import check_ug_admin, check_user_superuser,\
-    check_object_read_access, check_ug_membership
+    check_object_read_access, check_ug_membership, check_object_write_access
 from cosinnus.views.widget import GroupDashboard
 from cosinnus.views.microsite import GroupMicrositeView
 from django.views.generic.base import View
@@ -357,6 +357,9 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
             more_user_count = 0
         # set admins at the top of the list member
         members = list(admins) + list(members)
+        # always include current user in list if member, and at top
+        if self.request.user.is_authenticated() and check_ug_membership(self.request.user, self.group):
+            members = [self.request.user] + [member for member in members if member != self.request.user]
         
         # collect recruited users
         user = self.request.user
@@ -1062,6 +1065,10 @@ group_startpage = GroupStartpage.as_view()
 
 @csrf_protect
 def group_user_recruit(request, group): 
+    """ Invites users to become group members by creating a CosinnusUnregisterdUserGroupInvite for each email to be recruited.
+        Checks for recent invites and existing ones first. 
+        Sends out invitation mails to newly invited users. """
+    
     MAXIMUM_EMAILS = 10
     
     if not request.method=='POST':
@@ -1163,6 +1170,41 @@ def group_user_recruit(request, group):
         messages.success(request, _("Success! We are now sending out invitations to these email addresses: %s") % ', '.join(success))
         
     return redirect(redirect_url)
+
+
+@csrf_protect
+def group_user_recruit_delete(request, group, id): 
+    """ Deletes a specific CosinnusUnregisterdUserGroupInvite """
+    
+    if not request.method=='POST':
+        return HttpResponseNotAllowed(['POST'])
+    
+    msg_error = _('There was an error when trying to delete the invitation.')
+    msg_success = _('The invitation was successfully deleted.')
+    
+    # resolve group either from the slug, or like the permission group mixin does it
+    # (group type needs to also be used for that)
+    group = get_group_for_request(group, request)
+    if not group:
+        messages.error(request, msg_error)
+        logger.error('No group found when trying to delete a recruited users!', extra={'group_slug': group, 
+            'request': request, 'path': request.path})
+        return redirect(reverse('cosinnus:group-list'))
+    
+    group_redirect = redirect(group_aware_reverse('cosinnus:group-detail', kwargs={'group': group}))
+    recruitation = get_object_or_None(CosinnusUnregisterdUserGroupInvite, id=id)
+    if not recruitation or not recruitation.group == group:
+        messages.error(request, msg_error)
+        return group_redirect
+    # check permissions
+    if not (request.user.id == recruitation.invited_by_id or check_object_write_access(group, request.user)):
+        messages.error(request, msg_error)
+        return group_redirect
+    
+    # don't use .delete() on the object to avoid unnecessary cache deletes (recruitations aren't cached)
+    CosinnusUnregisterdUserGroupInvite.objects.filter(id=recruitation.id).delete()
+    messages.success(request, msg_success)
+    return group_redirect
 
 
 @csrf_protect
