@@ -1,0 +1,5 @@
+{% if group != note.group %}
+    <a href="{{ note.get_absolute_url }}?reflected_item_redirect=1">
+        &#8599; {{ note.group.name|truncatechars:14 }}
+    </a>
+ {% endif %}

@@ -1261,10 +1261,10 @@ def group_assign_reflected_object(request, group):
             if reflecting and reflectable_group.id in checked_groups:
                 added_groups.append(reflectable_group)
     
-    success_message = _('Your selection for showing this event in projects/groups was updated.')
+    success_message = _('Your selection for showing this item in projects/groups was updated.')
     if added_groups:
         group_names = ', '.join([show_group.name for show_group in added_groups])
-        success_message = force_text(success_message) + ' ' + force_text(_('This event is now being shown in these projects/groups: %(group_names)s') % {'group_names': group_names})
+        success_message = force_text(success_message) + ' ' + force_text(_('This item is now being shown in these projects/groups: %(group_names)s') % {'group_names': group_names})
     messages.success(request, success_message)
     
     redirect_url = obj.get_absolute_url()

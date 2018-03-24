@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-05 13:07+0100\n"
-"PO-Revision-Date: 2018-01-31 19:54+0100\n"
+"PO-Revision-Date: 2018-03-24 18:30+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -3426,7 +3426,7 @@ msgstr "<Oberster Ordner>"
 
 #, python-format
 msgid "You are now located in %(group_name)s.<br/>You were redirected here from another project or group that links to this item."
-msgstr "Du befindest dich jetzt in %(group_name)s. <br/>Du wurdest hierhin geleitet über ein Projekt oder eine Gruppe, die auf diese Veranstaltung verweist."
+msgstr "Du befindest dich jetzt in %(group_name)s. <br/>Du wurdest hierhin geleitet über ein Projekt oder eine Gruppe, die auf diesen Inhalt verweist."
 
 #, python-format
 msgid "Container \"%(title)s\" could not be deleted because it contained objects that could not be deleted."

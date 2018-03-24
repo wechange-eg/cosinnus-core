@@ -132,6 +132,7 @@ class CosinnusConf(AppConf):
     
     # list of BaseTaggableObjectModels that can be reflected from groups into projects
     REFLECTABLE_OBJECTS = [
+        'cosinnus_note.note',
         'cosinnus_event.event',
     ]
     

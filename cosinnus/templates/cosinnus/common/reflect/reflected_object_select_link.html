@@ -1,0 +1,30 @@
+{% load i18n cosinnus_tags %}
+
+{# todo: put style in less! #}
+{% if may_reflect and reflectable_groups %}
+    {% captureas modal_id %}modal-group-select{% if unique_id %}-{{ unique_id }}{% endif %}{% endcaptureas %}
+    
+    {% if not only_modal %}
+	    <a href="#" data-toggle="modal" data-target="#{{ modal_id }}">
+	        <i class="fa fa-fw {{ select_icon }}"></i>
+	        {% if reflecting_group_ids %}
+	            {% trans "Shown in my projects..." %}
+	        {% else %}
+	            {% trans "Show in my projects..." %}
+	        {% endif %}
+	        {% if reflecting_group_ids %}
+	           ({{ reflecting_group_ids|length }})
+	        {% endif %}
+	    </a>
+    {% endif %}
+    {% if not only_link %}
+        {% include 'cosinnus/common/modal_box_group_select.html' with button_id=modal_id post_url='cosinnus:group-assign-reflected' group=group group_select_tuples=reflectable_groups %}
+        {% if request.GET.select_reflect == "1" %}
+            <script type="text/javascript">
+                $(function(){
+                    $('#{{ modal_id }}').modal('show');
+                });
+            </script>
+        {% endif %}
+    {% endif %}
+{% endif %}
