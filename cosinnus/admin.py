@@ -122,6 +122,8 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             group.save(allow_type_change=True)
             if group.type == CosinnusGroup.TYPE_SOCIETY:
                 converted_names.append(group.name)
+                CosinnusPermanentRedirect.create_for_pattern(group.portal, CosinnusGroup.TYPE_PROJECT, group.slug, group)
+                
             # we beat the cache with a hammer on all class models, to be sure
             CosinnusProject._clear_cache(group=group)
             CosinnusSociety._clear_cache(group=group)
@@ -206,6 +208,7 @@ class CosinnusSocietyAdmin(CosinnusProjectAdmin):
             group.save(allow_type_change=True)
             if group.type == CosinnusGroup.TYPE_PROJECT:
                 converted_names.append(group.name)
+                CosinnusPermanentRedirect.create_for_pattern(group.portal, CosinnusGroup.TYPE_SOCIETY, group.slug, group)
                 # all projects that had this group as parent, get set their parent=None and set this as related project
                 # and all of those former child projects are also added as related to this newly-converted project
                 for project in get_cosinnus_group_model().objects.filter(parent=group):
