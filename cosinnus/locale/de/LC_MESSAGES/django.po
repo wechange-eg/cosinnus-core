@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-05 13:07+0100\n"
-"PO-Revision-Date: 2018-03-24 18:30+0100\n"
+"POT-Creation-Date: 2018-03-29 16:15+0200\n"
+"PO-Revision-Date: 2018-03-29 16:18+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -84,6 +84,36 @@ msgstr "Ausgewählte Benutzer deaktivieren (deren erstellte Items bleiben auf de
 #, python-format
 msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
 msgstr "%(sender_name)s hat dich eingeladen, auf %(portal_name)s dem Projekt \"%(team_name)s\" beizutreten! Klicke unten auf den Projektnamen um es dir anzuschauen und mitzumachen!"
+
+msgid "Mobilität"
+msgstr ""
+
+msgid "Energie"
+msgstr ""
+
+msgid "Umwelt"
+msgstr ""
+
+msgid "Bildung"
+msgstr ""
+
+msgid "Gesundheit"
+msgstr ""
+
+msgid "Ernährung und Konsum"
+msgstr ""
+
+msgid "Kunst und Kultur"
+msgstr ""
+
+msgid "Geld und Finanzen"
+msgstr ""
+
+msgid "Arbeit und Recht"
+msgstr ""
+
+msgid "Bauen und Wohnen"
+msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieser Gruppe/Projekts können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
@@ -708,36 +738,6 @@ msgstr "Schlagworte"
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-msgid "Mobilität"
-msgstr ""
-
-msgid "Energie"
-msgstr ""
-
-msgid "Umwelt"
-msgstr ""
-
-msgid "Bildung"
-msgstr ""
-
-msgid "Gesundheit"
-msgstr ""
-
-msgid "Ernährung und Konsum"
-msgstr ""
-
-msgid "Kunst und Kultur"
-msgstr ""
-
-msgid "Geld und Finanzen"
-msgstr ""
-
-msgid "Arbeit und Recht"
-msgstr ""
-
-msgid "Bauen und Wohnen"
-msgstr ""
-
 msgid "Place"
 msgstr "Ort"
 
@@ -1301,6 +1301,12 @@ msgstr "Neue Mitglieder einladen"
 msgid "Invite"
 msgstr "Einladen"
 
+msgid "Shown in my projects..."
+msgstr "In Projekten angezeigt..."
+
+msgid "Show in my projects..."
+msgstr "In Projekten anzeigen..."
+
 msgid "Rearrange"
 msgstr "Umsortieren"
 
@@ -1571,9 +1577,16 @@ msgstr "Alle aktuell eingeladenen Leute"
 msgid "People currently invited by you"
 msgstr "Von dir eingeladene Leute"
 
+msgid "Delete invitation"
+msgstr "Einladung löschen"
+
 msgctxt "an action done *by* <username>"
 msgid "by"
 msgstr "von"
+
+#, python-format
+msgid "Do you really want to delete the invitation for \"%(title)s\"?"
+msgstr "Möchtest du die Einladung für \"%(title)s\" wirklich löschen?"
 
 msgid "Send Message"
 msgstr "Nachricht schicken"
@@ -2061,6 +2074,9 @@ msgstr "Ordnername"
 
 msgid "Delete folder"
 msgstr "Ordner löschen"
+
+msgid "Download"
+msgstr ""
 
 msgid "Do you really want to delete this folder and ALL folders and items it contains? This actions CANNOT be reversed!"
 msgstr "Willst du diesen Ordner und ALLE Unterordner und Elemente die er enthält endgültig löschen? Dies kann nicht rückgängig gemacht werden!"
@@ -3395,12 +3411,18 @@ msgstr "Gute Nachrichten! Unter diesen E-Mail Adressen haben sich bereits Mitgli
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "Super! Wir schicken jetzt die Einladungen an folgende E-Mail Adressen: %s"
 
-msgid "Your selection for showing this event in projects/groups was updated."
-msgstr "Deine Auswahl für die Anzeige der Veranstaltung in anderen Projekten/Gruppen wurde übernommen."
+msgid "There was an error when trying to delete the invitation."
+msgstr "Es gab einen Fehler beim Löshen der Einladung."
+
+msgid "The invitation was successfully deleted."
+msgstr "Die Einladung wurde erfolgreich gelöscht."
+
+msgid "Your selection for showing this item in projects/groups was updated."
+msgstr "Deine Auswahl für die Anzeige dieses Inhalts in anderen Projekten/Gruppen wurde übernommen."
 
 #, python-format
-msgid "This event is now being shown in these projects/groups: %(group_names)s"
-msgstr "Die Veranstaltung wird jetzt in folgenden Projekten/Gruppen angezeigt: %(group_names)s"
+msgid "This item is now being shown in these projects/groups: %(group_names)s"
+msgstr "Dieser Inhalt wird jetzt in folgenden Projekten/Gruppen angezeigt: %(group_names)s"
 
 msgid "No appname given for adding containers."
 msgstr "Kein Appname zum Hinzufügen von Zusammenstellungen angegeben."

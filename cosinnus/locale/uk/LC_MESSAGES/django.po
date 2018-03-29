@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-05 13:07+0100\n"
+"POT-Creation-Date: 2018-03-29 16:15+0200\n"
 "PO-Revision-Date: 2018-02-05 13:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -84,6 +84,36 @@ msgstr "Деактивувати вибраних користувачів (зб
 #, python-format
 msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
 msgstr "%(sender_name)s хоче, щоб Ви доєдналися до проекту %(team_name)s\" на %(portal_name)s! Клікніть на назву проекту нижче, для того щоб подивитися його і почати співпрацю!"
+
+msgid "Mobilität"
+msgstr "Мобільність"
+
+msgid "Energie"
+msgstr "Енергія"
+
+msgid "Umwelt"
+msgstr "Навколишнє середовище"
+
+msgid "Bildung"
+msgstr "Будівництво"
+
+msgid "Gesundheit"
+msgstr "Здоров'я"
+
+msgid "Ernährung und Konsum"
+msgstr "Харчування та споживання"
+
+msgid "Kunst und Kultur"
+msgstr "Мистецтво і культура"
+
+msgid "Geld und Finanzen"
+msgstr "Гроші та фінанси"
+
+msgid "Arbeit und Recht"
+msgstr "Робота та право"
+
+msgid "Bauen und Wohnen"
+msgstr "Будівництво та житло"
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgstr "Тільки члени спільноти/проекту можуть бачити цей вміст. Надішліть запит членства зараз!"
@@ -708,36 +738,6 @@ msgstr "Ключові слова"
 msgid "Permissions"
 msgstr "Права"
 
-msgid "Mobilität"
-msgstr "Мобільність"
-
-msgid "Energie"
-msgstr "Енергія"
-
-msgid "Umwelt"
-msgstr "Навколишнє середовище"
-
-msgid "Bildung"
-msgstr "Будівництво"
-
-msgid "Gesundheit"
-msgstr "Здоров'я"
-
-msgid "Ernährung und Konsum"
-msgstr "Харчування та споживання"
-
-msgid "Kunst und Kultur"
-msgstr "Мистецтво і культура"
-
-msgid "Geld und Finanzen"
-msgstr "Гроші та фінанси"
-
-msgid "Arbeit und Recht"
-msgstr "Робота та право"
-
-msgid "Bauen und Wohnen"
-msgstr "Будівництво та житло"
-
 msgid "Place"
 msgstr "Місце"
 
@@ -1286,6 +1286,16 @@ msgstr "Запросити нових членів"
 msgid "Invite"
 msgstr "Запросити"
 
+#, fuzzy
+#| msgid "Show more Projects"
+msgid "Shown in my projects..."
+msgstr "Показати більше проектів"
+
+#, fuzzy
+#| msgid "Show more Projects"
+msgid "Show in my projects..."
+msgstr "Показати більше проектів"
+
 msgid "Rearrange"
 msgstr "Переоформити"
 
@@ -1556,11 +1566,21 @@ msgstr "Всі ті, кого наразі запросили"
 msgid "People currently invited by you"
 msgstr "Люди, яких наразі запросили Ви"
 
+#, fuzzy
+#| msgid "Decline Invitation"
+msgid "Delete invitation"
+msgstr "Відхилити запрошення"
+
 msgctxt "an action done *by* <username>"
 msgid "by"
 msgstr ""
 "дії, здійснені\n"
 " *by*<username>"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to delete the invitation for \"%(title)s\"?"
+msgstr "Ви дійсно бажаєте віхилити запрошення?"
 
 msgid "Send Message"
 msgstr "Надіслати повідомлення"
@@ -2045,6 +2065,9 @@ msgstr "Ім'я папки"
 
 msgid "Delete folder"
 msgstr "Видалити папку"
+
+msgid "Download"
+msgstr ""
 
 msgid "Do you really want to delete this folder and ALL folders and items it contains? This actions CANNOT be reversed!"
 msgstr "Ви дійсно бажаєте видалити цю папку разом з УСІМА папками та файлами, що містяться у ній? Цю дію НЕМОЖЛИВО скасувати!"
@@ -3404,11 +3427,24 @@ msgstr "Хороші новини! Люди з цією адресою вже з
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "Успішно! Ви зараз відправляєте запрошення за такими адресами: %s"
 
-msgid "Your selection for showing this event in projects/groups was updated."
+#, fuzzy
+#| msgid "There was an error while trying to submit your report. Please try again in a moment."
+msgid "There was an error when trying to delete the invitation."
+msgstr "При надсиланні повідомлення виникла помилка. Будь ласка, спробуйте знову за кілька хвилин."
+
+#, fuzzy
+#| msgid "The %(team_type)s was changed successfully."
+msgid "The invitation was successfully deleted."
+msgstr "%(team_type)s було успішно змінено."
+
+#, fuzzy
+#| msgid "Your selection for showing this event in projects/groups was updated."
+msgid "Your selection for showing this item in projects/groups was updated."
 msgstr "Ваша вибірка для відображення заходу в проектах/спільнотах була актуалізована."
 
-#, python-format
-msgid "This event is now being shown in these projects/groups: %(group_names)s"
+#, fuzzy, python-format
+#| msgid "This event is now being shown in these projects/groups: %(group_names)s"
+msgid "This item is now being shown in these projects/groups: %(group_names)s"
 msgstr "Цей захід тепер відображається в цих проектах/спільнотах: %(group_names)s"
 
 msgid "No appname given for adding containers."
