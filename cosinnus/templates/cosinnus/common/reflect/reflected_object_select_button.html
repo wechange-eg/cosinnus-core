@@ -1,0 +1,47 @@
+{% load i18n cosinnus_tags %}
+
+{# todo: put style in less! #}
+{% if may_reflect and reflectable_groups %}
+    {% captureas modal_id %}modal-group-select{% if unique_id %}-{{ unique_id }}{% endif %}{% endcaptureas %}
+    <div class="white-content app-main-force">
+        <button type="button" class="btn btn-emphasized pull-left" style="width: 250px; margin-left: 40px;" data-toggle="modal" data-target="#{{ modal_id }}">
+            <ul class="media-list">
+                <li class="media">
+                    <a class="pull-left" href="#">
+                        <i class="fa fa-fw {{ select_icon }}"></i>
+                    </a>
+                    <div class="media-body">
+                        {% if reflecting_group_ids %}
+                            {% trans "Shown in my projects..." %}
+                        {% else %}
+                            {% trans "Show in my projects..." %}
+                        {% endif %}
+                        {% if reflecting_group_ids %}
+                           ({{ reflecting_group_ids|length }})
+                        {% endif %}
+                    </div>
+                </li>
+            </ul>
+        </button>
+        <div class="clearfix"></div>
+        {% comment %} 
+           Uncomment this to show a placeholder message that reflecting is not possible here
+           Took out for now because its not interesting
+        {% else %}
+            <div style="margin-left: 40px;">
+                <p>
+                   <em>
+                       {% if reflect_is_forum %}
+                           {% trans "You are not a member of any projects or groups this event could also be shown in." %}
+                       {% else %}
+                           {% trans "You are not a member of any subprojects of this group where this event could also be shown in." %}
+                       {% endif %}
+                       {# TODO: Remove! #}
+                       <br/>FRAGE: SOLLTEN WIR DAS ÜBERHAUPT ANZEIGEN?
+                    </em>
+                </p>
+            </div>
+         {% endcomment %}
+    </div>
+    {% include 'cosinnus/common/modal_box_group_select.html' with button_id=modal_id post_url='cosinnus:group-assign-reflected' group=group group_select_tuples=reflectable_groups %}
+{% endif %}

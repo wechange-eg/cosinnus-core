@@ -53,13 +53,17 @@ class ReflectedObjectSelectMixin(object):
     so users will be able to pick projects/groups to reflect the DetailView.object into.
     """
     
-    def get_reflect_data(self, request, group, obj):
+    def get_reflect_data(self, request, group, obj=None):
         # if this is a group or the Forum, we can select this event to be reflected into other groups        
         reflect_is_forum = group.slug == getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
         reflectable_groups = {}
         reflecting_group_ids = []
         may_reflect = request.user.is_authenticated() and \
                     ((group.type == group.TYPE_SOCIETY) or reflect_is_forum)
+        if obj is None:
+            return {
+                'may_reflect': may_reflect,
+            }
         if may_reflect:
             # find all groups the user can reflect into (for the forum: all of theirs, for other groups, the subprojects)
             if reflect_is_forum:
@@ -83,7 +87,7 @@ class ReflectedObjectSelectMixin(object):
     
     def get_context_data(self, **kwargs):
         context = super(ReflectedObjectSelectMixin, self).get_context_data(**kwargs)
-        context.update(self.get_reflect_data(self.request, self.group, self.object))
+        context.update(self.get_reflect_data(self.request, self.group, getattr(self, 'object', None)))
         return context
 
 

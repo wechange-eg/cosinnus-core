@@ -323,7 +323,7 @@
             {% endif %}
             
 	            {% for recruitation in recruited %}
-	                
+	                {% captureas modal_id %}deleteModal_{{recruitation.id}}{% endcaptureas %}
 	                
 	                <div class="btn btn-default w100 regular-space">
                         <ul class="media-list">
@@ -331,6 +331,11 @@
                                 <div class="media-body">
                                     <span class="annotation">
                                         {% trans "Invited to be a member" %}
+                                        {% if user == recruitation.invited_by or user in admins or user|is_superuser %}
+                                            <a title="{% trans "Delete invitation" %}" href="#" data-toggle="modal" data-target="#{{modal_id}}">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        {% endif %}
                                         &nbsp;
                                         <span class="moment-data-date" data-date="{{ recruitation.last_modified|date:'c' }}"></span>
                                     </span>
@@ -345,6 +350,12 @@
                             </li>
                         </ul>
                     </div>
+                    {% if user == recruitation.invited_by or user in admins or user|is_superuser %}
+                        {% captureas label %}{% blocktrans with title=recruitation.email %}Do you really want to delete the invitation for "{{ title }}"?{% endblocktrans %}{% endcaptureas %}
+                        {% captureas title %}{% trans "Delete invitation" %}{% endcaptureas %}
+                        {% captureas action %}{% group_url 'cosinnus:group-user-recruit-delete' group=group id=recruitation.id %}{% endcaptureas %}
+                        {% include "cosinnus/modal_box.html" with id=modal_id label=label title=title form_action=action %}
+                    {% endif %}
 	            {% endfor %}
 	            
 	            

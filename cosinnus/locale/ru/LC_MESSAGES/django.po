@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-19 17:10+0100\n"
+"POT-Creation-Date: 2018-03-31 13:53+0200\n"
 "PO-Revision-Date: 2018-02-05 13:57+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1295,6 +1295,16 @@ msgstr "Пригласить новых участников"
 msgid "Invite"
 msgstr "Пригласить"
 
+#, fuzzy
+#| msgid "Show more Projects"
+msgid "Shown in my projects..."
+msgstr "Показать больше проектов"
+
+#, fuzzy
+#| msgid "Show more Projects"
+msgid "Show in my projects..."
+msgstr "Показать больше проектов"
+
 msgid "Rearrange"
 msgstr "Перегруппировать"
 
@@ -1567,9 +1577,19 @@ msgstr "Все приглашенные люди"
 msgid "People currently invited by you"
 msgstr "Люди, приглашенные Вами"
 
+#, fuzzy
+#| msgid "Decline Invitation"
+msgid "Delete invitation"
+msgstr "Отклонить приглашение"
+
 msgctxt "an action done *by* <username>"
 msgid "by"
 msgstr "Действия, совершенные *by*<username>"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to decline the invitation?"
+msgid "Do you really want to delete the invitation for \"%(title)s\"?"
+msgstr "Вы действительно хотите отклонить приглашение?"
 
 msgid "Send Message"
 msgstr "Отправить сообщение"
@@ -2056,6 +2076,9 @@ msgstr "Название папки"
 
 msgid "Delete folder"
 msgstr "Удалить папку"
+
+msgid "Download"
+msgstr ""
 
 msgid "Do you really want to delete this folder and ALL folders and items it contains? This actions CANNOT be reversed!"
 msgstr "Вы действительно хотите удалить эту папку и ВСЕ папки и элементы, которые она содержит? Это НЕОБРАТИМАЯ операция!"
@@ -3412,11 +3435,24 @@ msgstr "Хорошие новости! Люди с такими адресами
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "Получилось! Сейчас мы отправляем приглашение на следующие электронные адреса: %s"
 
-msgid "Your selection for showing this event in projects/groups was updated."
+#, fuzzy
+#| msgid "There was an error while trying to submit your report. Please try again in a moment."
+msgid "There was an error when trying to delete the invitation."
+msgstr "Произошла ошибка при отправке жалобы. Пожалуйста, попробуйте снова через несколько секунд."
+
+#, fuzzy
+#| msgid "The %(team_type)s was changed successfully."
+msgid "The invitation was successfully deleted."
+msgstr "Изменения в %(team_type)s приняты."
+
+#, fuzzy
+#| msgid "Your selection for showing this event in projects/groups was updated."
+msgid "Your selection for showing this item in projects/groups was updated."
 msgstr "Ваша подборка для демонстрации этого события в проектах/группах была обновлена."
 
-#, python-format
-msgid "This event is now being shown in these projects/groups: %(group_names)s"
+#, fuzzy, python-format
+#| msgid "This event is now being shown in these projects/groups: %(group_names)s"
+msgid "This item is now being shown in these projects/groups: %(group_names)s"
 msgstr "Событие сейчас демонстрируется в таких проектах/группах: %(group_names)s"
 
 # ???

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-19 17:10+0100\n"
+"POT-Creation-Date: 2018-03-31 13:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1288,6 +1288,12 @@ msgstr ""
 msgid "Invite"
 msgstr ""
 
+msgid "Shown in my projects..."
+msgstr ""
+
+msgid "Show in my projects..."
+msgstr ""
+
 msgid "Rearrange"
 msgstr ""
 
@@ -1558,8 +1564,15 @@ msgstr ""
 msgid "People currently invited by you"
 msgstr ""
 
+msgid "Delete invitation"
+msgstr ""
+
 msgctxt "an action done *by* <username>"
 msgid "by"
+msgstr ""
+
+#, python-format
+msgid "Do you really want to delete the invitation for \"%(title)s\"?"
 msgstr ""
 
 msgid "Send Message"
@@ -2044,6 +2057,9 @@ msgid "Folder name"
 msgstr ""
 
 msgid "Delete folder"
+msgstr ""
+
+msgid "Download"
 msgstr ""
 
 msgid "Do you really want to delete this folder and ALL folders and items it contains? This actions CANNOT be reversed!"
@@ -3244,11 +3260,17 @@ msgstr ""
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr ""
 
-msgid "Your selection for showing this event in projects/groups was updated."
+msgid "There was an error when trying to delete the invitation."
+msgstr ""
+
+msgid "The invitation was successfully deleted."
+msgstr ""
+
+msgid "Your selection for showing this item in projects/groups was updated."
 msgstr ""
 
 #, python-format
-msgid "This event is now being shown in these projects/groups: %(group_names)s"
+msgid "This item is now being shown in these projects/groups: %(group_names)s"
 msgstr ""
 
 msgid "No appname given for adding containers."
