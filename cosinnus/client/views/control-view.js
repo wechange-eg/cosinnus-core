@@ -145,6 +145,10 @@ module.exports = ContentControlView.extend({
     handleStartSearch: function (event) {
         this.$el.find('.icon-search').addClass('hidden');
         this.$el.find('.icon-loading').removeClass('hidden');
+        // disable input in content views during search (up to the views to decide what to disable)
+        _.each(this.App.contentViews, function(view){
+    		view.disableInput();
+    	});
     },
 
     handleEndSearch: function (event) {
@@ -154,6 +158,10 @@ module.exports = ContentControlView.extend({
         this.$el.find('.icon-loading').addClass('hidden');
         var $message = this.$el.find('form .message');
         $message.hide();
+        // enable input in content views during search (up to the views to decide what to enable)
+        _.each(this.App.contentViews, function(view){
+    		view.enableInput();
+    	});
     },
 
     handleXhrError: function (event) {

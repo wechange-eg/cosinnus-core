@@ -1,3 +1,6 @@
+@tile-background-color: #85c1ff;
+
+
 .app-fullscreen, .map-fullscreen, .tile-list-fullscreen {
     position: fixed;
     top: 0;
@@ -25,24 +28,46 @@
 }
 
 .tile-list {
-	background-color: #85c1ff;
+	background-color: @tile-background-color;
 	overflow-y: scroll;
 	overflow-x: hidden;
 	padding-top: 50px;
     
     /** Masonry */
+	.grid {
+	    margin-left: 20px;
+        min-height: 100%;
+        background-color: @tile-background-color;
+	}
+	
     .grid-sizer, .grid-item { 
         width: 50%; 
         height: auto;
     }
 	
-	&.tile-detail-open {
-	   overflow-y: hidden;
+	.overlay {
+	    display: none;
+	}
+	&.disabled .overlay {
+	    display: block;
+	    position: absolute;
+	    height: 100%;
+	    width: 100%;
+	    z-index: 3;
+	    background-color: gray;
+	    opacity: 0.6;
+	    
+ 	    -webkit-touch-callout: none; /* iOS Safari */
+		-webkit-user-select: none;   /* Chrome/Safari/Opera */
+		-khtml-user-select: none;    /* Konqueror */
+		-moz-user-select: none;      /* Firefox */
+		-ms-user-select: none;       /* IE/Edge */
+		user-select: none;           /* non-prefixed version, currently */
+		cursor: default;
 	}
 	
-	.tile-container {
-	    height: auto;
-	    margin-left: 20px;
+	&.tile-detail-open {
+	   overflow-y: hidden;
 	}
 	
 	.tile {

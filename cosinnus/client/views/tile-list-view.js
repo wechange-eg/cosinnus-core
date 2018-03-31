@@ -85,6 +85,21 @@ module.exports = ContentControlView.extend({
         this.tiles[result.id] = tile;
     },
 
+    tileRemove: function(result) {
+    	if (result.get('selected')) {
+    		util.log('tile-list-view.js: TODO:: was ordered to remove a tile that is currently selected. NOT DOING ANYTHING RN!')
+    		return;
+    	}
+    	if (result.id in this.tiles) {
+    		var tile = this.tiles[result.id];
+    		
+    		tile.remove();
+    		
+    		delete this.tiles[result.id];
+    		util.log('Removed tile at ' + result.id);
+    	}
+    },
+
     tileChangeHover: function(result) {
     	
     },
@@ -105,51 +120,87 @@ module.exports = ContentControlView.extend({
     	}
     },
     
-    tileRemove: function(result) {
-    	if (result.get('selected')) {
-    		util.log('tile-list-view.js: TODO:: was ordered to remove a tile that is currently selected. NOT DOING ANYTHING RN!')
-    		return;
-    	}
-    	if (result.id in this.tiles) {
-    		var tile = this.tiles[result.id];
-    		
-    		tile.remove();
-    		
-    		delete this.tiles[result.id];
-    		util.log('Removed tile at ' + result.id);
-    	}
-    },
-    
     /** Handler for when the entire collection changes */
     tilesReset: function(resultCollection, options) {
+    	// options.previousModels contains the old models if we need them
+    	this.swapTileset(resultCollection.models);
+    },
+    
+    /** Swaps out a new tile set by disabling the tile list interaction, 
+     * 	loading the new tiles into a seperate container, waiting until all their
+     *  images have loaded, and then swapping in the new container for the old one. */ 
+    swapTileset: function(newTileModels) {
     	var self = this;
-    	_.each(options.previousModels, function(result){
-    		self.tileRemove(result);
-    	});
-    	_.each(resultCollection.models, function(result){
+    	var $old_grid = self.grid;
+    	var old_tiles = self.tiles;
+    	self.tiles = [];
+    	
+    	// disable tile view, set old container aside above the new one
+    	self.disableInput();
+    	if ($old_grid) {
+    		$old_grid.removeAttr('id').css({'z-index': 2});
+    	}
+    	// load new tiles into new container (which is covered by old)
+    	self.grid = self.$el.find('#tile-container-proto')
+    		.clone()
+    		.attr('id', 'tile-container')
+    		.appendTo(self.$el)
+    		.show();
+    	
+    	_.each(newTileModels, function(result){
     		self.tileAdd(result);
     	});
     	
-    	if (!this.grid) {
-    		this.grid = $('.grid').imagesLoaded( function() { 
-    			$('.grid').masonry({
-    				// set itemSelector so .grid-sizer is not used in layout
-    				itemSelector: '.grid-item',
-    				// use element for option
-    				columnWidth: '.grid-sizer',
-    				percentPosition: true,
-    				transitionDuration: 0
-    			});
-    		});
-    	} else {
-    		this.grid = $('.grid').imagesLoaded( function() { 
-    	    	self.grid.masonry('reloadItems');
-    			self.grid.masonry('layout')
-    		});
-    	}
-    	
+		self.grid.imagesLoaded( function() { 
+			self.grid.masonry({
+				// set itemSelector so .grid-sizer is not used in layout
+				itemSelector: '.grid-item',
+				// use element for option
+				columnWidth: '.grid-sizer',
+				percentPosition: true,
+				transitionDuration: 0
+			});
+			
+			if ($old_grid) {
+				$old_grid.hide();
+			}
+			// re-enable tile-view
+			self.enableInput(true);
+			
+			// cleanly remove old tile views and old grid to not cause leaks
+			if (old_tiles) {
+				_.each(old_tiles, function(tile){
+					tile.remove();
+				});
+			}
+			if ($old_grid) {
+				$old_grid.remove();
+			}
+		});
+		
+		util.log('TODO: add a case for imagesLoaded() never triggering!')
     },
     
+    /** Orders Masonry to reorder tiles after a refresh */
+    gridRefresh: function () {
+    	var self = this;
+    	self.grid.imagesLoaded( function() { 
+	    	self.grid.masonry('reloadItems');
+			self.grid.masonry('layout')
+		});
+    },
+    
+    disableInput: function() {
+    	this.$el.addClass('disabled');
+    },
+    
+    enableInput: function(local_enable) {
+    	// we ignore the enable signal from the content view and only
+    	// re-enable the tile view once we have rendered the results.
+    	if (local_enable) {
+    		this.$el.removeClass('disabled');
+    	}
+    },
     
     // Private
     // -------

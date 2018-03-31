@@ -45,6 +45,15 @@ module.exports = BaseView.extend({
     	return {}
     },
     
+    /** Called during search */
+    disableInput: function() {
+    	// stub, extend this in the inheriting view
+    },
+    
+    /** Called when searches end */
+    enableInput: function() {
+    	// stub, extend this in the inheriting view
+    },
     
     // private
 
