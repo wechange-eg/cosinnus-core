@@ -288,7 +288,18 @@ module.exports = ContentControlView.extend({
      */
     setSelectedResult: function (result) {
     	if (this.selectedResult != null) {
+    		// unselect previously selected result
     		this.selectedResult.set('selected', false);
+    		if (result != null) {
+    			// we're instantly selecting a new result
+    			Backbone.mediator.publish('result:reselected', result);
+    		} else {
+    			// just unselecting, without selecting a new result
+    			Backbone.mediator.publish('result:unselected', this.selectedResult);
+    		}
+    	} else if (result != null) {
+    		// we select a new result without a previous one having been selected
+    		Backbone.mediator.publish('result:selected', result);
     	}
     	this.selectedResult = result;
     	if (this.selectedResult != null) {

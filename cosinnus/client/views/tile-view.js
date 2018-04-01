@@ -5,7 +5,6 @@ var Result = require('models/result');
 var util = require('lib/util');
 
 var tileTemplate = require('tiles/tile');
-var detailTemplate = require('tiles/tile-detail');
 
 module.exports = BaseView.extend({
 	
@@ -19,7 +18,6 @@ module.exports = BaseView.extend({
 	// The DOM events specific to an item.
     events: {
         'click .tile-detail-link': 'onSelectClicked',
-        'click .tile-close-button': 'onDeselectClicked',
 
         'mouseenter': 'onMouseEnter',
         'mouseleave': 'onMouseLeave',
@@ -31,27 +29,8 @@ module.exports = BaseView.extend({
     	self.App = app;
     	
     	self.model.on({
-    		'change:selected': self.thisContext(self.onSelectChanged),
     		'change:hovered': self.thisContext(self.onHoverChanged),
     	});
-    },
-    
-    /**
-     * Called when the .selected property of the Result model was changed.
-     * We actually do the display and re-render here, because
-     * the selected change may be triggered in other views.
-     */
-    onSelectChanged: function () {
-    	if (this.model.get('selected') == true) {
-    		// clear hover on this to not confuse styles
-    		this.App.controlView.setHoveredResult(null);
-    		this.template = detailTemplate;
-    		$('.tile-list').addClass('tile-detail-open');
-    	} else {
-    		this.template = tileTemplate;
-    		$('.tile-list').removeClass('tile-detail-open');
-    	}
-    	this.render();
     },
     
     /**
@@ -87,16 +66,6 @@ module.exports = BaseView.extend({
     onSelectClicked: function () {
     	util.log('tile-view.js: got a select click event! id: ' + this.model.id);
     	this.App.controlView.setSelectedResult(this.model);
-    },
-    
-    /**
-     * Called when a tile detail close button is clicked.
-     * We only change the Result model's .selected property and
-     * don't do any rendering here.
-     */
-    onDeselectClicked: function () {
-    	util.log('tile-view.js: got a deselect click event! id: ' + this.model.id);
-    	this.App.controlView.setSelectedResult(null);
     },
     
 });

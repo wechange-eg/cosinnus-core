@@ -67,7 +67,7 @@ module.exports = Backbone.View.extend({
      *  view mixed in.
      */
     getTemplateData: function () {
-        var modelData = this.model && this.model.toJSON() || {};
+        var modelData = this.model && this.model.toJSON() || {'noModel': true};
         var data = _.extend(
     		modelData,
     		this.options,

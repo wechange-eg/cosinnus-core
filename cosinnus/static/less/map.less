@@ -1,5 +1,12 @@
 @tile-background-color: #85c1ff;
 
+/**
+  z-indexes:
+    0: default. map, tiles
+    1: map-buttons, old search controls
+    2: tile-list/map disabled-input overlay (during search)
+    3: tile-detail frame
+*/
 
 .app-fullscreen, .map-fullscreen, .tile-list-fullscreen {
     position: fixed;
@@ -53,7 +60,7 @@
 	    position: absolute;
 	    height: 100%;
 	    width: 100%;
-	    z-index: 3;
+	    z-index: 2;
 	    background-color: gray;
 	    opacity: 0.6;
 	    
@@ -97,29 +104,29 @@
         &.hovered {
             border: 1px solid blue;
         }
+	}
+}
 
-	}
-	
-	/** The full-50%-screen tile overlay */
-	.tile-detail {
-	    position: fixed;
-	    top: 0;
-	    z-index: 2;
-	    width: 50%;
-	    height: 100%;
-	    
-	    padding: 65px 10px;
-	    background-color: white;
-	    
-	    .tile-close-button {
-	        cursor: pointer;
-		    position: fixed;
-		    right: 50px;
-		    font-size: 22px;
-		    border: 3px solid;
-		    border-radius: 20px;
-	    }
-	}
+/** The full-50%-screen tile overlay */
+.tile-detail {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    z-index: 3;
+    width: 50%;
+    height: 100%;
+    
+    padding: 65px 10px;
+    background-color: white;
+    
+    .tile-close-button {
+        cursor: pointer;
+        position: fixed;
+        right: 50px;
+        font-size: 22px;
+        border: 3px solid;
+        border-radius: 20px;
+    }
 }
 
 .map-fullscreen {
@@ -157,7 +164,7 @@
 	    position: absolute;
 	    bottom: 20px;
 	    left: 5px;
-	    z-index: 2;
+	    z-index: 1;
 	   
         .layer-button {
             float: none;

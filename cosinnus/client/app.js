@@ -9,6 +9,7 @@ var util = require('lib/util.js');
 var ControlView = require('views/control-view');
 var MapView = require('views/map-view');
 var TileListView = require('views/tile-list-view');
+var TileDetailView = require('views/tile-detail-view');
 
 
 var App = function App () {
@@ -183,6 +184,16 @@ var App = function App () {
         	).render();
         	self.contentViews.push(tileListView);
         }
+        
+        var tileDetailView = new TileDetailView({
+        	model: null,
+    		elParent: params.el,
+    		fullscreen: self.displayOptions.fullscreen,
+    		splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
+    	}, 
+    	self
+    	).render();
+        
         
         Backbone.mediator.publish('app:ready');
     };
