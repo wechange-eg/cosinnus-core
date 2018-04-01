@@ -16,6 +16,11 @@ module.exports = ContentControlView.extend({
     // the Masonry grid for our tiles
     grid: null,
     
+    // on every inputs disable, that thread +1s this counter it and may only
+    // re-enable inputs if the counter stayed the same in the meantime
+    // (i.e. no new threads are running now) to prevent enabled inputs on working threads
+    disableCounter: 0,
+    
     // will be set to self.options during initialization
     defaults: {
     	// is the window in full-screen mode (instead of inside a widget or similar)
@@ -133,10 +138,12 @@ module.exports = ContentControlView.extend({
     	var self = this;
     	var $old_grid = self.grid;
     	var old_tiles = self.tiles;
-    	self.tiles = [];
+    	self.tiles = {};
     	
     	// disable tile view, set old container aside above the new one
     	self.disableInput();
+    	self.disableCounter += 1;
+    	var localDisableCounter = self.disableCounter;
     	if ($old_grid) {
     		$old_grid.removeAttr('id').css({'z-index': 2});
     	}
@@ -146,13 +153,16 @@ module.exports = ContentControlView.extend({
     		.attr('id', 'tile-container')
     		.appendTo(self.$el)
     		.show();
+    	// use a local grid variable because new threads might
+    	// swap out self.grid before imagesloaded resolves
+    	var grid = self.grid;
     	
     	_.each(newTileModels, function(result){
     		self.tileAdd(result);
     	});
     	
-		self.grid.imagesLoaded( function() { 
-			self.grid.masonry({
+		grid.imagesLoaded( function() { 
+			grid.masonry({
 				// set itemSelector so .grid-sizer is not used in layout
 				itemSelector: '.grid-item',
 				// use element for option
@@ -164,8 +174,10 @@ module.exports = ContentControlView.extend({
 			if ($old_grid) {
 				$old_grid.hide();
 			}
-			// re-enable tile-view
-			self.enableInput(true);
+			// re-enable tile-view input unless a new thread is now running
+			if (self.disableCounter == localDisableCounter) {
+				self.enableInput(true);
+			}
 			
 			// cleanly remove old tile views and old grid to not cause leaks
 			if (old_tiles) {
