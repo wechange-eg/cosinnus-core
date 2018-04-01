@@ -26,6 +26,7 @@ from cosinnus.models.tagged import BaseTagObject
 from cosinnus.utils.functions import is_number, ensure_list_of_ints
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from cosinnus.utils.user import filter_active_users
+from cosinnus.templatetags.cosinnus_tags import textfield
 
 
 USER_MODEL = get_user_model()
@@ -129,7 +130,7 @@ class HaystackMapResult(MapResult):
             result.title, 
             result.url,
             result.marker_image_url,
-            result.description,
+            textfield(result.description),
             result.score
         )
 
