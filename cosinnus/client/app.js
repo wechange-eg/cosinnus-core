@@ -143,6 +143,7 @@ var App = function App () {
 	        	activeFilters: settings.activeFilters,
 	        	topicsHtml: topicsHtml,
 	        	controlsEnabled: self.displayOptions.showControls,
+	        	scrollControlsEnabled: self.displayOptions.showControls && self.displayOptions.showMap,
 	        	filterGroup: settings.filterGroup,
 	        	basePageURL: basePageURL,
 	        }, 

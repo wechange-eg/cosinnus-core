@@ -101,3 +101,30 @@
 	</form>
 </div>
 
+{% if scrollControlsEnabled %}
+    <div class="map-scroll-controls">
+        <div class="line">
+	        <div class="check scroll toggle-search-on-scroll">
+	            <div class="box">
+	                {% if searchOnScroll %}
+	                    <i class="fa fa-check"></i>
+	                {% endif %}
+	            </div>
+	            <div class="check__label">
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans 'Search when moving the map' %}
+	            </div>
+	        </div>
+	        
+	        {% if not searchOnScroll and resultsStale and not searching %}
+                <div class="map-button stale-search-button">
+                   <span>
+                       {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans 'Search this area' %}
+                   </span>
+                </div>
+            {% endif %}
+	    </div>
+    </div>
+{% endif %}
+

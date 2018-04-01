@@ -241,7 +241,7 @@
     
 }
 
-.map-controls {
+.map-controls, .map-scroll-controls {
     position: absolute;
     right: 20px;
     bottom: 20px;
@@ -315,6 +315,7 @@
             @check-height: 30px;
             cursor: pointer;
             height: @check-height;
+            display: inline-block;
 
             &.people .box  {
                 background-color: @app-people-color;
@@ -330,6 +331,10 @@
 
             &.groups .box  {
                 background-color: @app-groups-color;
+            }
+            
+            &.scroll .box  {
+                background-color: @app-scroll-color;
             }
 
             .box {
@@ -373,4 +378,33 @@
             font-size: 12px;
         }
     }
+    
+    .map-button {
+	    color: #333;
+	    height: 28px;
+	    padding: 0px 20px;
+	    float: right;
+	    border: 1px solid #666;
+	    
+	    line-height: 28px;
+	    border-radius: 3px;
+	    display: inline-block;
+	    text-align: center;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    
+	    &[disabled] {
+	        cursor: not-allowed;
+            pointer-events: none;
+            opacity: 0.65;
+	    }
+    }
 }
+
+.map-scroll-controls {
+    position: absolute;
+    left: 10%;
+    bottom: 60px;
+    width: 30%;
+}
+

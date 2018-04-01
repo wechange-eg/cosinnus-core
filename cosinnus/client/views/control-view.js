@@ -42,6 +42,8 @@ module.exports = ContentControlView.extend({
 			wantsToSearch: false,
 			searching: false,
 			searchResultLimit: 400,
+			searchOnScroll: true,
+			resultsStale: false,
     	}
     },
     
@@ -84,6 +86,8 @@ module.exports = ContentControlView.extend({
         'click .result-filter': 'toggleFilterClicked',
         'click .reset-filters': 'resetFiltersClicked',
         'click .show-topics': 'showTopicsClicked',
+        'click .toggle-search-on-scroll': 'toggleSearchOnScrollClicked',
+        'click .stale-search-button': 'staleSearchButtonClicked',
         'change #id_topics': 'toggleTopicFilterClicked',
         'focusin .q': 'toggleTyping',
         'focusout .q': 'toggleTyping',
@@ -110,6 +114,22 @@ module.exports = ContentControlView.extend({
         event.preventDefault();
         this.showTopics();
         this.render();
+    },
+    
+    toggleSearchOnScrollClicked: function (event) {
+    	event.preventDefault();
+    	this.state.searchOnScroll = !this.state.searchOnScroll;
+    	if (this.state.searchOnScroll == true && this.state.resultsStale) {
+    		this.staleSearchButtonClicked(event);
+    	} else {
+    		this.render();
+    	}
+    },
+    
+    staleSearchButtonClicked: function (event) {
+    	event.preventDefault();
+    	this.triggerDelayedSearch(true);
+    	this.render();
     },
 
     toggleTopicFilterClicked: function (event) {
@@ -179,7 +199,7 @@ module.exports = ContentControlView.extend({
      *  */
     handleAppReady: function (event) {
     	util.log('control-view.js: app is ready to search. starting this.search()!')
-    	this.search();
+    	this.triggerDelayedSearch(true);
     },
     
     /**
@@ -191,13 +211,23 @@ module.exports = ContentControlView.extend({
     handleStaleResults: function (context) {
     	if (context.reason == 'viewport-changed') {
     		util.log('*** control-view.js: Received signal for stale results bc of viewport change, and triggering a delayed search')
-    		this.triggerDelayedSearch(true);
     	} else if (context.reason == 'map-navigate') {
     		util.log('*** control-view.js: Received signal for stale results bc of map-navigate, but doing nothing rn')
     	}
-    	// this.triggerDelayedSearch();
-    	// or
-    	// this.search();
+    	
+    	var staleBefore = this.state.resultsStale;
+    	this.state.resultsStale = true;
+    	
+    	// search or do nothing, depending on if we re-search on scroll
+    	if (this.state.searchOnScroll) {
+    		this.triggerDelayedSearch();
+    	} else {
+    		// re-render controls so the manual search button will be enabled
+    		if (!staleBefore) {
+    			this.render();
+    		}
+    	}
+    	
     },
     
     // called with a list of dicts of results freshly returned after a search
@@ -324,8 +354,9 @@ module.exports = ContentControlView.extend({
 
     search: function () {
         var self = this;
-        var url = self.buildSearchQueryURL(true);
+        self.state.resultsStale = false;
         
+        var url = self.buildSearchQueryURL(true);
         self.state.searching = true;
         $.get(url, function (data) {
             self.state.searching = false;
@@ -349,10 +380,12 @@ module.exports = ContentControlView.extend({
             	util.log(data)
             	self.processSearchResults(results);
             }
+            self.render();
         }).fail(function () {
             self.state.searching = false;
             Backbone.mediator.publish('end:search');
             Backbone.mediator.publish('error:search');
+            self.render();
         });
     },
     
@@ -425,12 +458,12 @@ module.exports = ContentControlView.extend({
         var activeFilters = this.state.activeFilters;
         activeFilters[resultType] = !activeFilters[resultType];
         this.state.activeFilters = activeFilters;
-        this.triggerDelayedSearch();
+        this.triggerDelayedSearch(true);
     },
 
     resetFilters: function () {
         this.state.activeFilters = _(this.options.availableFilters).clone();
-        this.triggerDelayedSearch();
+        this.triggerDelayedSearch(true);
     },
     
     showTopics: function () {
@@ -439,7 +472,7 @@ module.exports = ContentControlView.extend({
     
     toggleTopicFilter: function (topic_ids) {
         this.state.activeTopicIds = topic_ids;
-        this.triggerDelayedSearch();
+        this.triggerDelayedSearch(true);
     },
 
     // Register a change in the controls or the map UI which should queue
@@ -451,10 +484,9 @@ module.exports = ContentControlView.extend({
                 self.whileSearchingDelay : self.searchDelay;
         
         if (fireImmediatelyIfPossible) {
-        	util.log('control-view.js: TODO: FireImmediately was passed true! Do something with it.')
-        } else {
-        	util.log('control-view.js: TODO: FireImmediately was passed false! Do something with it.')
-        }
+        	delay = 0;
+        	util.log('control-view.js: TODO: FireImmediately was passed true!')
+        } 
         clearTimeout(this.searchTimeout);
         self.state.wantsToSearch = true;
         Backbone.mediator.publish('want:search');
