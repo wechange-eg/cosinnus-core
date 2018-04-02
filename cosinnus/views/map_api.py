@@ -45,21 +45,9 @@ MAP_PARAMETERS = {
     'limit': 20, # result count limit, integer or None
     'page': 0,
     'topics': None,
+    'item': None,
 }
 
-
-SEARCH_MODEL_NAMES = {
-    get_user_profile_model(): 'people',
-    CosinnusProject: 'projects',
-    CosinnusSociety: 'groups',
-}
-try:
-    from cosinnus_event.models import Event
-    SEARCH_MODEL_NAMES.update({
-        Event: 'events',                           
-    })
-except:
-    Event = None
 
 SHORTENED_ID_MAP = {
     'cosinnus.cosinnusproject': 1,
@@ -67,6 +55,28 @@ SHORTENED_ID_MAP = {
     'cosinnus.userprofile': 3,
     'cosinnus_event.event': 4,
 }
+
+SEARCH_MODEL_NAMES = {
+    get_user_profile_model(): 'people',
+    CosinnusProject: 'projects',
+    CosinnusSociety: 'groups',
+}
+SHORT_MODEL_MAP = {
+    1: CosinnusProject,
+    2: CosinnusSociety,
+    3: get_user_profile_model(),
+}
+try:
+    from cosinnus_event.models import Event
+    SEARCH_MODEL_NAMES.update({
+        Event: 'events',                           
+    })
+    SHORT_MODEL_MAP.update({
+        4: Event,
+    })
+except:
+    Event = None
+
 
 def _shorten_haystack_id(long_id):
     """ Shortens ids by replacing the <module.model> part of the id with a number. 
@@ -148,6 +158,7 @@ def map_search_endpoint(request, filter_group_id=None):
     query = force_text(params['q'])
     limit = params['limit']
     page = params['page']
+    item_id = params['item']
     
     if not is_number(limit) or limit < 0:
         return HttpResponseBadRequest('``limit`` param must be a positive number or 0!')
@@ -185,6 +196,17 @@ def map_search_endpoint(request, filter_group_id=None):
     results = []
     for result in sqs:
         results.append(HaystackMapResult(result))
+        
+    # if the requested item (direct select) is not in the queryset snippet
+    # (might happen because of an old URL), then mix it in as first item and drop the last
+    if item_id:
+        item_id = str(item_id)
+        if not any([res['id'] == item_id for res in results]):
+            model_type, model_id = item_id.split('.')
+            model_class = SHORT_MODEL_MAP[int(model_type)]
+            smallsqs = SearchQuerySet().models(model_class).filter(id=int(model_id))
+            if len(smallsqs) > 0:
+                results = [HaystackMapResult(smallsqs[0])] + results[:-1]
     
     page_obj = None
     if results:

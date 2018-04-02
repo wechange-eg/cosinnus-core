@@ -33,6 +33,17 @@ module.exports = Backbone.Router.extend({
     			App.router.first_route_event = false;
     		}
         }
+    },
+    
+    /**
+     * Direct convenience function to update the URL without any fetches or routing
+     */
+    replaceUrl: function(url) {
+    	util.log('router.js: Replacing the current history URL without navigation or routing.')
+    	Backbone.Router.prototype.navigate.call(this, url, { 
+			trigger: false,
+			replace: true
+		});
     }
     
     

@@ -43,9 +43,10 @@ module.exports = ContentControlView.extend({
 			searching: false,
 			searchResultLimit: 20,
 			page: null,
-			page_index: 0,
+			pageIndex: 0,
 			searchOnScroll: true,
 			resultsStale: false,
+			urlSelectedResultId: null,
     	}
     },
     
@@ -63,7 +64,6 @@ module.exports = ContentControlView.extend({
     
     initialize: function (options, app, collection) {
     	var self = this;
-    	// this calls self.applyUrlSearchParameters()
     	ContentControlView.prototype.initialize.call(self, options, app, collection);
     	
     	if (!self.collection) {
@@ -150,15 +150,15 @@ module.exports = ContentControlView.extend({
     paginationForwardClicked: function (event) {
     	event.preventDefault();
     	if (this.state.page.has_next) {
-    		this.state.page_index += 1;
+    		this.state.pageIndex += 1;
     		this.triggerDelayedSearch(true, true);
     	}
     },
     
     paginationBackClicked: function (event) {
     	event.preventDefault();
-    	if (this.state.page.has_previous && this.state.page_index > 0) {
-    		this.state.page_index -= 1;
+    	if (this.state.page.has_previous && this.state.pageIndex > 0) {
+    		this.state.pageIndex -= 1;
     		this.triggerDelayedSearch(true, true);
     	}
     },
@@ -335,6 +335,7 @@ module.exports = ContentControlView.extend({
     		}
     	}
     	
+    	
     	util.log('control-view.js:processSearchResults: check that the currently selected object is kept in the collection!')
     	
     	
@@ -342,8 +343,20 @@ module.exports = ContentControlView.extend({
     	util.log(self.collection.toJSON());
     	
     	
+    	
+    	self.collection.reset(resultModels);
+    	
+    	// if our URL points directly at an item, select it.
+    	// the API should take care that it is *always* in the result set
+    	if (!self.selectedResult && self.state.urlSelectedResultId) {
+    		self.setSelectedResult(self.collection.get(self.state.urlSelectedResultId));
+    		self.state.urlSelectedResultId = null;
+    	}
+    	
 
-//    	self.collection.set(resultModels);
+    	// TODO: clean up if not needed anymore
+    	
+    	// self.collection.set(resultModels);
     	/**
     	 * Merges existing models and updates them.
     	 * Calls 'add'/'change'/'remove'!
@@ -356,7 +369,6 @@ module.exports = ContentControlView.extend({
     	 * 
     	 */
     	
-    	self.collection.reset(resultModels);
     	/**
     	 * Does NOT call add/change/remove!
     	 * Calls 'reset' signal!
@@ -408,6 +420,11 @@ module.exports = ContentControlView.extend({
     	if (this.selectedResult != null) {
     		this.selectedResult.set('selected', true);
     	}
+    	// selecting a result changes the URL so results can be directly linked
+    	if (App.displayOptions.routeNavigation) {
+    		var newUrl = this.buildSearchQueryURL(false).replace(this.searchEndpointURL, this.options.basePageURL);
+    		App.router.replaceUrl(newUrl);
+    	}
     },
     
     /**
@@ -453,7 +470,7 @@ module.exports = ContentControlView.extend({
             	util.log(data)
             	self.processSearchResults(results);
             	self.state.page = data.page;
-            	self.state.page_index = data.page && data.page.index || 0;
+            	self.state.pageIndex = data.page && data.page.index || 0;
             	self.render();
             }
         }).fail(function () {
@@ -476,7 +493,8 @@ module.exports = ContentControlView.extend({
             q: util.ifundef(urlParams.q, this.state.q),
             searchResultLimit: util.ifundef(urlParams.limits, this.state.searchResultLimit),
             activeTopicIds: util.ifundef(urlParams.topics, this.state.activeTopicIds),
-            page_index: util.ifundef(urlParams.page, this.state.page_index),
+            pageIndex: util.ifundef(urlParams.page, this.state.pageIndex),
+            urlSelectedResultId: util.ifundef(urlParams.item, this.state.urlSelectedResultId),
         });
     },
     
@@ -494,9 +512,18 @@ module.exports = ContentControlView.extend({
         		topics: this.state.activeTopicIds.join(',')
         	});
         }
-        if (this.state.page_index > 0) {
+        if (this.state.pageIndex > 0) {
         	_.extend(searchParams, {
-        		page: this.state.page_index
+        		page: this.state.pageIndex
+        	});
+        }
+        if (this.selectedResult) {
+        	_.extend(searchParams, {
+        		item: this.selectedResult.id
+        	});
+        } else if (this.state.urlSelectedResultId) {
+        	_.extend(searchParams, {
+        		item: this.state.urlSelectedResultId
         	});
         }
         if (forAPI) {
@@ -569,7 +596,7 @@ module.exports = ContentControlView.extend({
         	util.log('control-view.js: TODO: FireImmediately was passed true!')
         }
         if (!noPageReset) {
-        	self.state.page_index = 0;
+        	self.state.pageIndex = 0;
         }
         clearTimeout(this.searchTimeout);
         self.state.wantsToSearch = true;
