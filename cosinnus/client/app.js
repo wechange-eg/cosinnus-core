@@ -144,6 +144,7 @@ var App = function App () {
 	        	topicsHtml: topicsHtml,
 	        	controlsEnabled: self.displayOptions.showControls,
 	        	scrollControlsEnabled: self.displayOptions.showControls && self.displayOptions.showMap,
+	        	paginationControlsEnabled: self.displayOptions.showTiles,
 	        	filterGroup: settings.filterGroup,
 	        	basePageURL: basePageURL,
 	        }, 

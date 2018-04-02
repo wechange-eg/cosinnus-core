@@ -41,7 +41,9 @@ module.exports = ContentControlView.extend({
 			activeTopicIds: null,
 			wantsToSearch: false,
 			searching: false,
-			searchResultLimit: 400,
+			searchResultLimit: 20,
+			page: null,
+			page_index: 0,
 			searchOnScroll: true,
 			resultsStale: false,
     	}
@@ -88,6 +90,8 @@ module.exports = ContentControlView.extend({
         'click .show-topics': 'showTopicsClicked',
         'click .toggle-search-on-scroll': 'toggleSearchOnScrollClicked',
         'click .stale-search-button': 'staleSearchButtonClicked',
+        'click .pagination-forward-button': 'paginationForwardClicked',
+        'click .pagination-back-button': 'paginationBackClicked',
         'change #id_topics': 'toggleTopicFilterClicked',
         'focusin .q': 'toggleTyping',
         'focusout .q': 'toggleTyping',
@@ -129,7 +133,26 @@ module.exports = ContentControlView.extend({
     staleSearchButtonClicked: function (event) {
     	event.preventDefault();
     	this.triggerDelayedSearch(true);
+    	// we cheat this in because we know the search will do it anyways in a millisecond,
+    	// but without this it won't be in time for the render() of the controls
+    	this.state.resultsStale = false;
     	this.render();
+    },
+    
+    paginationForwardClicked: function (event) {
+    	event.preventDefault();
+    	if (this.state.page.has_next) {
+    		this.state.page_index += 1;
+    		this.triggerDelayedSearch(true, true);
+    	}
+    },
+    
+    paginationBackClicked: function (event) {
+    	event.preventDefault();
+    	if (this.state.page.has_previous && this.state.page_index > 0) {
+    		this.state.page_index -= 1;
+    		this.triggerDelayedSearch(true, true);
+    	}
     },
 
     toggleTopicFilterClicked: function (event) {
@@ -199,7 +222,7 @@ module.exports = ContentControlView.extend({
      *  */
     handleAppReady: function (event) {
     	util.log('control-view.js: app is ready to search. starting this.search()!')
-    	this.triggerDelayedSearch(true);
+    	this.triggerDelayedSearch(true, true);
     },
     
     /**
@@ -376,11 +399,13 @@ module.exports = ContentControlView.extend({
             		Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, self.options.basePageURL))
             	}
             	var results = data.results;
-            	util.log('got resulties')
+            	util.log('got resultssss')
             	util.log(data)
             	self.processSearchResults(results);
+            	self.state.page = data.page;
+            	self.state.page_index = data.page && data.page.index || 0;
+            	self.render();
             }
-            self.render();
         }).fail(function () {
             self.state.searching = false;
             Backbone.mediator.publish('end:search');
@@ -400,7 +425,8 @@ module.exports = ContentControlView.extend({
             },
             q: util.ifundef(urlParams.q, this.state.q),
             searchResultLimit: util.ifundef(urlParams.limits, this.state.searchResultLimit),
-            activeTopicIds: util.ifundef(urlParams.topics, this.state.activeTopicIds)
+            activeTopicIds: util.ifundef(urlParams.topics, this.state.activeTopicIds),
+            page_index: util.ifundef(urlParams.page, this.state.page_index),
         });
     },
     
@@ -416,6 +442,11 @@ module.exports = ContentControlView.extend({
         if (this.state.activeTopicIds) {
         	_.extend(searchParams, {
         		topics: this.state.activeTopicIds.join(',')
+        	});
+        }
+        if (this.state.page_index > 0) {
+        	_.extend(searchParams, {
+        		page: this.state.page_index
         	});
         }
         if (forAPI) {
@@ -477,7 +508,7 @@ module.exports = ContentControlView.extend({
 
     // Register a change in the controls or the map UI which should queue
     // a search attempt after a delay.
-    triggerDelayedSearch: function (fireImmediatelyIfPossible) {
+    triggerDelayedSearch: function (fireImmediatelyIfPossible, noPageReset) {
         var self = this;
             // Increase the search delay when a search is in progress.
         var delay = self.state.searching ?
@@ -486,7 +517,10 @@ module.exports = ContentControlView.extend({
         if (fireImmediatelyIfPossible) {
         	delay = 0;
         	util.log('control-view.js: TODO: FireImmediately was passed true!')
-        } 
+        }
+        if (!noPageReset) {
+        	self.state.page_index = 0;
+        }
         clearTimeout(this.searchTimeout);
         self.state.wantsToSearch = true;
         Backbone.mediator.publish('want:search');

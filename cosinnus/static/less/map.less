@@ -241,7 +241,7 @@
     
 }
 
-.map-controls, .map-scroll-controls {
+.map-controls, .map-scroll-controls, .map-pagination-controls {
     position: absolute;
     right: 20px;
     bottom: 20px;
@@ -350,7 +350,7 @@
                 }
             }
 
-            .check__label {
+            .check-label {
                 margin-left: 30px;
                 padding-left: 10px;
                 display: block;
@@ -358,6 +358,10 @@
                 letter-spacing: 0.04em;
                 height: @check-height;
                 line-height: @check-height;
+                -webkit-user-select: none; /* Safari */        
+				-moz-user-select: none; /* Firefox */
+				-ms-user-select: none; /* IE10+/Edge */
+				user-select: none; /* Standard */
             }
         }
 
@@ -380,11 +384,11 @@
     }
     
     .map-button {
-	    color: #333;
+	    color: #666;
 	    height: 28px;
 	    padding: 0px 20px;
 	    float: right;
-	    border: 1px solid #666;
+	    border: 1px solid #999;
 	    
 	    line-height: 28px;
 	    border-radius: 3px;
@@ -393,10 +397,10 @@
 	    vertical-align: middle;
 	    cursor: pointer;
 	    
-	    &[disabled] {
+	    &.disabled {
 	        cursor: not-allowed;
             pointer-events: none;
-            opacity: 0.65;
+            opacity: 0.45;
 	    }
     }
 }
@@ -405,6 +409,13 @@
     position: absolute;
     left: 10%;
     bottom: 60px;
+    width: 30%;
+}
+
+.map-pagination-controls {
+    position: absolute;
+    left: 10%;
+    bottom: 10px;
     width: 30%;
 }
 

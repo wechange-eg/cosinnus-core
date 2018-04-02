@@ -42,7 +42,8 @@ MAP_PARAMETERS = {
     'events': True,
     'projects': True,
     'groups': True,
-    'limit': 500, # result count limit, integer or None
+    'limit': 20, # result count limit, integer or None
+    'page': 0,
     'topics': None,
 }
 
@@ -143,13 +144,15 @@ def map_search_endpoint(request, filter_group_id=None):
         @param filter_group_id: Will filter all items by group relation, where applicable 
                 (i.e. users are filtered by group memberships for that group, events as events in that group)
         """
-    
     params = _collect_parameters(request.GET, MAP_PARAMETERS)
     query = force_text(params['q'])
     limit = params['limit']
+    page = params['page']
     
     if not is_number(limit) or limit < 0:
-            return HttpResponseBadRequest('``limit`` param must be a positive number or 0!')
+        return HttpResponseBadRequest('``limit`` param must be a positive number or 0!')
+    if not is_number(page) or page < 0:
+        return HttpResponseBadRequest('``page`` param must be a positive number or 0!')
     
     # filter for requested model types
     model_list = [klass for klass,param_name in SEARCH_MODEL_NAMES.items() if params[param_name]]
@@ -177,11 +180,27 @@ def map_search_endpoint(request, filter_group_id=None):
         sqs = sqs.exclude(Q(to_date__lt=event_horizon) | (Q(_missing_='to_date') & Q(from_date__lt=event_horizon)))
         
     # sort results into one list per model
-    sqs = sqs[:limit]
+    total_count = sqs.count()
+    sqs = sqs[limit*page:limit*(page+1)]
     results = []
     for result in sqs:
         results.append(HaystackMapResult(result))
     
-    data = {'results': results}
+    page_obj = None
+    if results:
+        page_obj = {
+            'index': page,
+            'count': len(results),
+            'total_count': total_count,
+            'start': (limit * page) + 1,
+            'end': (limit * page) + len(results),
+            'has_next': total_count > (limit * (page + 1)),
+            'has_previous': page > 0,
+        }
+    
+    data = {
+        'results': results,
+        'page': page_obj,
+    }
     return JsonResponse(data)
 
