@@ -257,10 +257,12 @@
         .q {
             width: 100%;
             padding: 5px;
+            color: #333;
         }
 
         .icon-search,
-        .icon-loading {
+        .icon-loading,
+        .icon-reset {
             position: absolute;
             font-size: 15px;
             top: 7px;
@@ -271,6 +273,17 @@
             width: 15px;
             height: 15px;
             margin: 0;
+        }
+        .icon-reset {
+            right: 30px;
+        }
+    }
+    
+    .clickable-button {
+        cursor: pointer;
+        
+        &:hover {
+            color: #333;
         }
     }
 
@@ -363,10 +376,6 @@
 				-ms-user-select: none; /* IE10+/Edge */
 				user-select: none; /* Standard */
             }
-        }
-
-        .reset-filters {
-            color: #999;
         }
 
         a {

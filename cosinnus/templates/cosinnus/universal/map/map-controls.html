@@ -78,7 +78,10 @@
 		
 		    <div class="line text-field">
 		        <input type="text" class="q" name="q" placeholder="Suche" value="{{ q }}" />
-		        <i class="fa fa-search icon-search{% if wantsToSearch %} hidden{% endif %}"></i>
+		        <i class="fa fa-search clickable-button query-search-button icon-search{% if wantsToSearch %} hidden{% endif %}"></i>
+		        {% if q or activeTopicIds %}
+		            <i class="fa fa-close clickable-button reset-all icon-reset"></i>
+		        {% endif %}
 		        <div class="icon-loading sk-double-bounce{% if not wantsToSearch %} hidden{% endif %}">
 		            <div class="sk-child sk-double-bounce1"></div>
 		            <div class="sk-child sk-double-bounce2"></div>

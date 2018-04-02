@@ -87,14 +87,14 @@ module.exports = ContentControlView.extend({
     events: {
         'click .result-filter': 'toggleFilterClicked',
         'click .reset-filters': 'resetFiltersClicked',
+        'click .reset-all': 'resetAllClicked',
         'click .show-topics': 'showTopicsClicked',
         'click .toggle-search-on-scroll': 'toggleSearchOnScrollClicked',
         'click .stale-search-button': 'staleSearchButtonClicked',
         'click .pagination-forward-button': 'paginationForwardClicked',
         'click .pagination-back-button': 'paginationBackClicked',
+        'click .query-search-button ': 'triggerQuerySearch',
         'change #id_topics': 'toggleTopicFilterClicked',
-        'focusin .q': 'toggleTyping',
-        'focusout .q': 'toggleTyping',
         'keyup .q': 'handleTyping',
         'keydown .q': 'handleKeyDown',
     },
@@ -110,6 +110,14 @@ module.exports = ContentControlView.extend({
 
     resetFiltersClicked: function (event) {
         event.preventDefault();
+        this.resetFilters();
+        this.render();
+    },
+
+    resetAllClicked: function (event) {
+        event.preventDefault();
+        this.state.q = '';
+        this.state.activeTopicIds = null;
         this.resetFilters();
         this.render();
     },
@@ -159,7 +167,12 @@ module.exports = ContentControlView.extend({
         var topic_ids = $(event.currentTarget).val();
         this.toggleTopicFilter(topic_ids);
     },
-
+    
+    /**
+     * Unused now, this used to be the search-while-typing feature.
+     * TODO: Remove completely (also this.state.typing) once sure 
+     * we don't want it
+     
     toggleTyping: function (event) {
         this.state.typing = !this.state.typing;
         this.$el.find('.icon-search').toggle();
@@ -178,12 +191,32 @@ module.exports = ContentControlView.extend({
         }
     },
     
-    handleKeyDown: function (event) {
-        if (event.keyCode == 13) {
+    */
+    
+    handleTyping: function (event) {
+        if (util.isIgnorableKey(event)) {
             event.preventDefault();
             return false;
         }
     },
+    
+    handleKeyDown: function (event) {
+        if (event.keyCode == 13) {
+        	event.preventDefault();
+        	this.triggerQuerySearch();
+            return false;
+        }
+    },
+    
+    /**
+     * Will start a fresh search with the current query of the search textbox.
+     */
+    triggerQuerySearch: function () {
+        var query = this.$el.find('.q').val();
+		this.state.q = query;
+		this.triggerDelayedSearch(true);
+    },
+    
 
     handleStartSearch: function (event) {
         this.$el.find('.icon-search').addClass('hidden');
