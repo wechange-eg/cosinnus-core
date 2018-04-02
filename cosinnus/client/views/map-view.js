@@ -112,7 +112,7 @@ module.exports = ContentControlView.extend({
     
     initialize: function (options, app, collection) {
         var self = this;
-        // this calls self.initializeSearchParameters()
+        // this calls self.applyUrlSearchParameters()
         ContentControlView.prototype.initialize.call(self, options, app, collection);
         
         self.state.currentlyClustering = self.options.clusteringEnabled;
@@ -152,7 +152,7 @@ module.exports = ContentControlView.extend({
     },
     
     // extended from content-control-view.js
-    initializeSearchParameters: function (urlParams) {
+    applyUrlSearchParameters: function (urlParams) {
     	util.log('map-view.js: url params on init: ')
     	util.log(urlParams)
         _.extend(this.state, {
@@ -161,6 +161,8 @@ module.exports = ContentControlView.extend({
             south: util.ifundef(urlParams.sw_lat, this.state.south),
             west: util.ifundef(urlParams.sw_lon, this.state.west),
         });
+        this.fitBounds();
+        this.updateBounds();
     },
     
     // extended from content-control-view.js

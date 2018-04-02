@@ -36,7 +36,7 @@ module.exports = ContentControlView.extend({
     
     initialize: function (options, app, collection) {
         var self = this;
-        // this calls self.initializeSearchParameters()
+        // this calls self.applyUrlSearchParameters()
         ContentControlView.prototype.initialize.call(self, options, app, collection);
         
         // result events
@@ -63,7 +63,7 @@ module.exports = ContentControlView.extend({
     },
     
     // extended from content-control-view.js
-    initializeSearchParameters: function (urlParams) {
+    applyUrlSearchParameters: function (urlParams) {
     	// don't need this here
     },
     

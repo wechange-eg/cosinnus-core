@@ -17,9 +17,6 @@ module.exports = BaseView.extend({
     	BaseView.prototype.initialize.call(self, options);
     	self.App = app;
     	self.collection = collection;
-    	
-    	var urlParams = this.parseUrl(window.location.href.replace(window.location.origin, ''));
-        self.initializeSearchParameters(urlParams);
     },
     
     /** Called at the end of initialization.
@@ -29,7 +26,7 @@ module.exports = BaseView.extend({
      *  using params from each ContentControlView's `contributeToSearchParameters()` 
      *  
      *  */
-    initializeSearchParameters: function(urlParams) {
+    applyUrlSearchParameters: function(urlParams) {
     	// stub, extend this in the inheriting view
     },
     

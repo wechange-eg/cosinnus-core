@@ -63,7 +63,7 @@ module.exports = ContentControlView.extend({
     
     initialize: function (options, app, collection) {
     	var self = this;
-    	// this calls self.initializeSearchParameters()
+    	// this calls self.applyUrlSearchParameters()
     	ContentControlView.prototype.initialize.call(self, options, app, collection);
     	
     	if (!self.collection) {
@@ -254,8 +254,21 @@ module.exports = ContentControlView.extend({
      * 		currently actually happen before a full load.
      *  */
     handleAppReady: function (event) {
-    	util.log('control-view.js: app is ready to search. starting this.search()!')
-    	this.triggerDelayedSearch(true, true);
+    	util.log('control-view.js: app is ready to search. starting search from URL!')
+    	this.triggerSearchFromUrl();
+    },
+    
+    /**
+     * Let all content views parse the URL parameters they are interested in, and then start 
+     * a fresh search.
+     */
+    triggerSearchFromUrl: function (noNewNavigateEvent) {
+    	var urlParams = this.parseUrl(window.location.href.replace(window.location.origin, ''));
+    	_.each(this.App.contentViews, function(view){
+    		view.applyUrlSearchParameters(urlParams);
+    		console.log(view.state)
+    	});
+    	this.triggerDelayedSearch(true, true, noNewNavigateEvent);
     },
     
     /**
@@ -274,16 +287,20 @@ module.exports = ContentControlView.extend({
     	var staleBefore = this.state.resultsStale;
     	this.state.resultsStale = true;
     	
-    	// search or do nothing, depending on if we re-search on scroll
-    	if (this.state.searchOnScroll) {
-    		this.triggerDelayedSearch();
+    	if (context.reason == 'map-navigate') {
+    		// on a navigate event we have to re-read the URL (but add no history state)
+    		this.triggerSearchFromUrl(true);
     	} else {
-    		// re-render controls so the manual search button will be enabled
-    		if (!staleBefore) {
-    			this.render();
+    		// search or do nothing, depending on if we re-search on scroll
+    		if (this.state.searchOnScroll) {
+    			this.triggerDelayedSearch();
+    		} else {
+    			// re-render controls so the manual search button will be enabled
+    			if (!staleBefore) {
+    				this.render();
+    			}
     		}
     	}
-    	
     },
     
     // called with a list of dicts of results freshly returned after a search
@@ -408,7 +425,7 @@ module.exports = ContentControlView.extend({
     },
     
 
-    search: function () {
+    search: function (noNavigate) {
         var self = this;
         self.state.resultsStale = false;
         
@@ -427,7 +444,7 @@ module.exports = ContentControlView.extend({
             // Update the results if there isn't a queued search.
             } else {
             	// Save the search state in the url.
-            	if (App.displayOptions.routeNavigation) {
+            	if (App.displayOptions.routeNavigation && !noNavigate) {
             		util.log('control-view.js: +++++++++++++++++ since we are fullscreen, publishing router URL update!')
             		Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, self.options.basePageURL))
             	}
@@ -448,7 +465,7 @@ module.exports = ContentControlView.extend({
     },
     
     // extended from content-control-view.js
-    initializeSearchParameters: function (urlParams) {
+    applyUrlSearchParameters: function (urlParams) {
         _.extend(this.state, {
             activeFilters: {
                 people: util.ifundef(urlParams.people, this.options.activeFilters.people),
@@ -541,7 +558,7 @@ module.exports = ContentControlView.extend({
 
     // Register a change in the controls or the map UI which should queue
     // a search attempt after a delay.
-    triggerDelayedSearch: function (fireImmediatelyIfPossible, noPageReset) {
+    triggerDelayedSearch: function (fireImmediatelyIfPossible, noPageReset, noNavigate) {
         var self = this;
             // Increase the search delay when a search is in progress.
         var delay = self.state.searching ?
@@ -558,7 +575,7 @@ module.exports = ContentControlView.extend({
         self.state.wantsToSearch = true;
         Backbone.mediator.publish('want:search');
         self.searchTimeout = setTimeout(function () {
-            self.search();
+            self.search(noNavigate);
             self.state.wantsToSearch = false;
         }, delay);
     },
