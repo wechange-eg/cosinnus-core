@@ -397,7 +397,7 @@ def verifiy_user_email(request, email_verification_param):
         messages.success(request, _('Your email address %(email)s was successfully confirmed! Welcome to the community!') % {'email': user.email})
         user.backend = 'cosinnus.backends.EmailAuthBackend'
         login(request, user)
-        return redirect('/')
+        return redirect(reverse('cosinnus:map'))
     else:
         messages.success(request, _('Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!') % {'email': user.email})
         return redirect(reverse('login'))
