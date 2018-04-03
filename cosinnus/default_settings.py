@@ -441,3 +441,6 @@ PHONENUMBER_DEFAULT_REGION = 'DE'
 # PIWIK settings. set individually for each portal. won't load if PIWIK_SITE_ID is not set
 PIWIK_SERVER_URL = '//stats.wechange.de/'
 PIWIK_SITE_ID = None
+
+# reCaptcha uses v2 ("nocaptcha")
+NOCAPTCHA = True

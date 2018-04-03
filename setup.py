@@ -74,7 +74,6 @@ setup(
         'django-markdown2==0.3.0',
         'django-model-utils==1.5.0',
         'django-phonenumber-field==1.1.0',
-        'django-recaptcha==1.0.2',
         'django-sekizai==0.8.2',
         'django-suit==0.2.15',
         'django-taggit==0.17.3',
@@ -122,7 +121,8 @@ setup(
         'git+git://github.com/sinnwerkstatt/django-select2.git@master#egg=Django-Select2',
         'git+git://github.com/sinnwerkstatt/django-awesome-avatar.git@master#egg=django-awesome-avatar',
         'git+git://github.com/saschan/django-djajax.git@master#egg=django-djajax',
-        'git+git://github.com/sinnwerkstatt/django-osm-field.git@master#egg=django-osm-field'
+        'git+git://github.com/sinnwerkstatt/django-osm-field.git@master#egg=django-osm-field',
+        'git+git://github.com/praekelt/django-recaptcha.git@1.3.1#egg=django-recaptcha',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
