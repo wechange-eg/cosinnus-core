@@ -189,12 +189,19 @@ def map_search_endpoint(request, filter_group_id=None):
         _now = now()
         event_horizon = datetime.datetime(_now.year, _now.month, _now.day)
         sqs = sqs.exclude(Q(to_date__lt=event_horizon) | (Q(_missing_='to_date') & Q(from_date__lt=event_horizon)))
+    
+    # if we hae no query-boosted results, use *only* our custom sorting (haystack's is very random)
+    if not query:
+        sqs = sqs.order_by('-local_boost')
         
     # sort results into one list per model
     total_count = sqs.count()
     sqs = sqs[limit*page:limit*(page+1)]
     results = []
     for result in sqs:
+        # if we hae no query-boosted results, use *only* our custom sorting (haystack's is very random)
+        if not query:
+            result.score = result.local_boost
         results.append(HaystackMapResult(result))
         
     # if the requested item (direct select) is not in the queryset snippet

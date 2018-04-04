@@ -138,19 +138,26 @@ class DocumentBoostMixin(object):
     """ Handles standardized document boosting and exposes an index-specific
         `boost_model()` method to be implemented by each extending SearchIndex """
     
+    local_boost = indexes.FloatField(default=0.0, indexed=False)
+    
     def boost_model(self, obj, indexed_data):
         """ 
             Model specific boost for an instance given it and its indexed data.
             Stub, implement this in your SearchIndex to customize boosting for that model.
-            @return: NOTE: Please normalize all return values to a range of [1.0..2.0]!
+            @return: NOTE: Please normalize all return values to a range of [0.0..1.0]!
         """
         return 1.0
         
     def prepare(self, obj):
         """ Boost all objects of this type """
         data = super(DocumentBoostMixin, self).prepare(obj)
-        global_boost = GLOBAL_MODEL_BOOST_MULTIPLIERS.get(data['django_ct'], 1.0)
-        data['boost'] = self.boost_model(obj, data) * global_boost
+        global_boost = GLOBAL_MODEL_BOOST_MULTIPLIERS.get(data['django_ct'], 0.0)
+        model_boost = self.boost_model(obj, data)
+        # this is our custom field
+        data['local_boost'] = model_boost * (global_boost + 1.0)
+        # this tells haystack to boost the ._score
+        data['boost'] = data['local_boost']
+        print ">> databosted is", data['boost'], " --> ", global_boost, data['django_ct'], data['boosted']
         return data
     
 

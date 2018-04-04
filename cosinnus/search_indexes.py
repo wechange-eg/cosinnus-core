@@ -142,7 +142,7 @@ class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearch
     def boost_model(self, obj, indexed_data):
         """ We boost by number of group memberships normalized over
             [the maximum number of memberships | or | the median with falloff caps ] 
-            in a range of [1.0..2.0] """
+            in a range of [0.0..1.0] """
         global _CosinnusPortal
         if _CosinnusPortal is None: 
             _CosinnusPortal = get_model('cosinnus', 'CosinnusPortal')
@@ -162,12 +162,10 @@ class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearch
             count_population = ann.values_list('cosinnus_memberships_count', flat=True)
             mean = numpy.mean(count_population)
             stddev = numpy.std(count_population)
-            # we can only find groups via this function that are in the same portal we run in
             cache.set(PORTAL_USER_MEMBERSHIP_COUNT_MEAN % portal_id, mean, 60*60*12)
             cache.set(PORTAL_USER_MEMBERSHIP_COUNT_STDDEV % portal_id, stddev, 60*60*12)
         
         user_memberships_count = obj.user.cosinnus_memberships.count()
-        memberships_rank = normalize_within_stddev(user_memberships_count, mean, stddev)
-        boost = 1.0 + memberships_rank
-        return boost
+        memberships_rank = normalize_within_stddev(user_memberships_count, mean, stddev, stddev_factor=2.0)
+        return memberships_rank
     
