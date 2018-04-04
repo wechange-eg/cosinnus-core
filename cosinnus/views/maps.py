@@ -51,6 +51,7 @@ from django.views.generic.base import TemplateView
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.forms.forms import BaseForm
 from django.utils.html import escape
+from cosinnus.views.map_api import get_searchresult_by_itemid
 
 
 USER_MODEL = get_user_model()
@@ -59,31 +60,15 @@ USER_MODEL = get_user_model()
 class MapView(TemplateView):
 
     def get_context_data(self, **kwargs):
-        # Instantiate map state
-        # TODO: sadly, these are ignored, as the JS takes the client's default settings on router /map/ auto init
-        
-        """
-        Unused for now, could be defined, but would then also have to be passsed in the template,
-        in a similar way to passing the arguments in group_list.html.
-        settings = {
-            'availableFilters': {
-                 'people': True,
-                 'events': True,
-                 'projects': True,
-                 'groups': True
-            },
-            'activeFilters': {
-                'people': True,
-                'events': True,
-                'projects': True,
-                'groups': True
-            },
-            'markerIcons': get_map_marker_icon_settings(),
-        }
-        """
-        return {
+        ctx = {
             'markers': get_map_marker_icon_settings_json(),
         }
+        item = self.request.GET.get('item', None)
+        if item:
+            ctx.update({
+                'item': get_searchresult_by_itemid(item)
+            })
+        return ctx
 
     template_name = 'cosinnus/map/map_page.html'
 

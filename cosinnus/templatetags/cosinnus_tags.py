@@ -757,6 +757,16 @@ def textfield(text, arg=''):
         text = text.replace('<p>', '').replace('</p>', '')
     return mark_safe(text)
 
+
+@register.filter
+def linebreaksoneline(text, arg=''):
+    """ Removes all linebreaks so the given text becomes a single line. """
+    if not text:
+        return ''
+    text = normalize_newlines(text).replace('\n', ' ')
+    return text
+
+
 @register.filter
 def add_domain(url):
     """ Adds the current domain to a given URL, unless it already starts with http """

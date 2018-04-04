@@ -78,7 +78,7 @@ except:
     Event = None
 
 
-def _shorten_haystack_id(long_id):
+def shorten_haystack_id(long_id):
     """ Shortens ids by replacing the <module.model> part of the id with a number. 
         Example: long_id 'cosinnus.userprofile.2' --> '3.2' """
     modulemodel, pk = long_id.rsplit('.', 1)
@@ -133,7 +133,7 @@ class HaystackMapResult(MapResult):
 
     def __init__(self, result, *args, **kwargs):
         return super(HaystackMapResult, self).__init__(
-            _shorten_haystack_id(result.id),
+            shorten_haystack_id(result.id),
             SEARCH_MODEL_NAMES[result.model],
             result.mt_location_lat,
             result.mt_location_lon,
@@ -202,12 +202,10 @@ def map_search_endpoint(request, filter_group_id=None):
     if item_id:
         item_id = str(item_id)
         if not any([res['id'] == item_id for res in results]):
-            model_type, model_id = item_id.split('.')
-            model_class = SHORT_MODEL_MAP[int(model_type)]
-            smallsqs = SearchQuerySet().models(model_class).filter(id=int(model_id))
-            if len(smallsqs) > 0:
-                results = [HaystackMapResult(smallsqs[0])] + results[:-1]
-    
+            item_result = get_searchresult_by_itemid(item_id)
+            if item_result:
+                results = [item_result] + results[:-1]
+        
     page_obj = None
     if results:
         page_obj = {
@@ -226,3 +224,15 @@ def map_search_endpoint(request, filter_group_id=None):
     }
     return JsonResponse(data)
 
+
+def get_searchresult_by_itemid(item_id):
+    """ Retrieves a HaystackMapResult just as the API would, for a given shortid
+        in the form of `<classid>.<instanceid>` (see `shorten_haystack_id()`). """
+        
+    item_id = str(item_id)
+    model_type, model_id = item_id.split('.')
+    model_class = SHORT_MODEL_MAP[int(model_type)]
+    smallsqs = SearchQuerySet().models(model_class).filter(id=int(model_id))
+    if len(smallsqs) > 0:
+        return HaystackMapResult(smallsqs[0])
+    return None
