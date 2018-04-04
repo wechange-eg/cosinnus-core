@@ -4,14 +4,23 @@ from __future__ import unicode_literals
 from haystack import indexes
 
 from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveEdgeNgramField,\
-    TagObjectSearchIndex, BOOSTED_FIELD_BOOST, StoredDataIndexMixin
-from cosinnus.utils.user import filter_active_users
+    TagObjectSearchIndex, BOOSTED_FIELD_BOOST, StoredDataIndexMixin,\
+    DocumentBoostMixin
+from cosinnus.utils.user import filter_active_users, filter_portal_users
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.contrib.auth import get_user_model
+from django.db.models import Count, Max, Min, Avg
+from cosinnus.utils.functions import normalize_within_stddev
+from django.core.cache import cache
+from django.db.models.loading import get_model
+import numpy
+
+_CosinnusPortal = None
     
 
-class CosinnusGroupIndexMixin(StoredDataIndexMixin, indexes.SearchIndex):
+class CosinnusGroupIndexMixin(DocumentBoostMixin, StoredDataIndexMixin, indexes.SearchIndex):
     
     location = indexes.LocationField(null=True)
     boosted = indexes.CharField(model_attr='name', boost=BOOSTED_FIELD_BOOST)
@@ -95,7 +104,7 @@ class CosinnusSocietyIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
         return CosinnusSociety
 
 
-class UserProfileIndex(StoredDataIndexMixin, TagObjectSearchIndex, indexes.Indexable):
+class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearchIndex, indexes.Indexable):
     text = TemplateResolveEdgeNgramField(document=True, use_template=True, template_name='search/indexes/cosinnus/userprofile_{field_name}.txt')
     rendered = TemplateResolveCharField(use_template=True, indexed=False, template_name='search/indexes/cosinnus/userprofile_{field_name}.txt')
     
@@ -130,10 +139,35 @@ class UserProfileIndex(StoredDataIndexMixin, TagObjectSearchIndex, indexes.Index
         qs = qs.select_related('user').all()
         return qs
     
-    def prepare(self, obj):
-        """ Boost all objects of this type """
-        data = super(UserProfileIndex, self).prepare(obj)
-        data['boost'] = 1.5
-        return data
-    
+    def boost_model(self, obj, indexed_data):
+        """ We boost by number of group memberships normalized over
+            [the maximum number of memberships | or | the median with falloff caps ] 
+            in a range of [1.0..2.0] """
+        global _CosinnusPortal
+        if _CosinnusPortal is None: 
+            _CosinnusPortal = get_model('cosinnus', 'CosinnusPortal')
+        portal_id = _CosinnusPortal.get_current().id
+        
+        PORTAL_USER_MEMBERSHIP_COUNT_MEAN = 'cosinnus/core/portal/%d/users/memberships/mean'
+        PORTAL_USER_MEMBERSHIP_COUNT_STDDEV = 'cosinnus/core/portal/%d/users/memberships/stddev'
+        
+        mean = cache.get(PORTAL_USER_MEMBERSHIP_COUNT_MEAN % portal_id)
+        stddev = cache.get(PORTAL_USER_MEMBERSHIP_COUNT_STDDEV % portal_id)
+        if mean is None or stddev is None:
+            # calculate mean and stddev of the counts of group memberships for active users in this portal
+            portal_users = filter_portal_users(filter_active_users(get_user_model().objects.all()))
+            ann = portal_users.annotate(
+                cosinnus_memberships_count=Count('cosinnus_memberships')
+            )
+            count_population = ann.values_list('cosinnus_memberships_count', flat=True)
+            mean = numpy.mean(count_population)
+            stddev = numpy.std(count_population)
+            # we can only find groups via this function that are in the same portal we run in
+            cache.set(PORTAL_USER_MEMBERSHIP_COUNT_MEAN % portal_id, mean, 60*60*12)
+            cache.set(PORTAL_USER_MEMBERSHIP_COUNT_STDDEV % portal_id, stddev, 60*60*12)
+        
+        user_memberships_count = obj.user.cosinnus_memberships.count()
+        memberships_rank = normalize_within_stddev(user_memberships_count, mean, stddev)
+        boost = 1.0 + memberships_rank
+        return boost
     

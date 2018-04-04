@@ -9,6 +9,7 @@ from django.utils.encoding import force_text
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 import six
+import numpy
 
 
 def unique_aware_slugify(item, slug_source, slug_field, 
@@ -234,3 +235,14 @@ def ensure_list_of_ints(value):
         value = [int(val) for val in value]
     return value
     
+    
+def normalize_within_stddev(member, mean, stddev):
+    """ Normalizes the given member-number from within a mean and stddev for a population,
+        so that members inside 2 bands of standard deviation fall within [0..1.0].
+        Members outside are min/maxed to 0/1.0 respective.
+        @return: 0 for members < (mean-stddev), 1.0 for members > (mean+stddev), and 0..1.0 for members within that range. 
+    """
+    local_max = mean+stddev
+    local_min = mean-stddev
+    place = (member-local_min)/(local_max-local_min)
+    return max(0.0, (min(place, 1.0)))

@@ -13,6 +13,15 @@ from cosinnus.utils.functions import ensure_list_of_ints
 
 BOOSTED_FIELD_BOOST = 1.5
 
+# global, multiplicative boost multipliers multiplied to *every* instance of
+# the given models (as django contenttypes strs).
+# if a model is not listed here, 1.0 is assumend
+# this exists so we can blanket boost specific models for visibility without diving
+# into the SearchIndexes and boost logic.
+GLOBAL_MODEL_BOOST_MULTIPLIERS = {
+    'cosinnus_event.event': 2.0,
+} 
+
 
 class CommaSeperatedIntegerMultiValueField(indexes.MultiValueField):
     """ Custom SearchField, to use with a model's `CommaSeparatedIntegerField` """
@@ -125,7 +134,27 @@ class StoredDataIndexMixin(indexes.SearchIndex):
         return obj.description
 
 
-class BaseTaggableObjectIndex(StoredDataIndexMixin, TagObjectSearchIndex):
+class DocumentBoostMixin(object):
+    """ Handles standardized document boosting and exposes an index-specific
+        `boost_model()` method to be implemented by each extending SearchIndex """
+    
+    def boost_model(self, obj, indexed_data):
+        """ 
+            Model specific boost for an instance given it and its indexed data.
+            Stub, implement this in your SearchIndex to customize boosting for that model.
+            @return: NOTE: Please normalize all return values to a range of [1.0..2.0]!
+        """
+        return 1.0
+        
+    def prepare(self, obj):
+        """ Boost all objects of this type """
+        data = super(DocumentBoostMixin, self).prepare(obj)
+        global_boost = GLOBAL_MODEL_BOOST_MULTIPLIERS.get(data['django_ct'], 1.0)
+        data['boost'] = self.boost_model(obj, data) * global_boost
+        return data
+    
+
+class BaseTaggableObjectIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearchIndex):
     text = TemplateResolveEdgeNgramField(document=True, use_template=True)
     rendered = TemplateResolveCharField(use_template=True, indexed=False)
     
