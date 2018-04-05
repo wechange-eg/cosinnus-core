@@ -77,7 +77,7 @@
 		    {% endif %}
 		
 		    <div class="line text-field">
-		        <input type="text" class="q" name="q" placeholder="Suche" value="{{ q }}" />
+		        <input type="text" class="q" name="q" placeholder="Suche" value="{{ q }}" autocomplete="off" />
 		        <i class="fa fa-search clickable-button query-search-button icon-search{% if wantsToSearch %} hidden{% endif %}"></i>
 		        {% if q or activeTopicIds %}
 		            <i class="fa fa-close clickable-button reset-all icon-reset"></i>
@@ -101,7 +101,12 @@
 		        </div>
 		    {% endif %}
 		    
-		    <div class="message"></div>
+		    {% if searchHadErrors %}
+		      <div class="message">
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans 'Could not complete the search due to an error.' %}
+		      </div>
+		    {% endif %}
 		</form>
 	</div>
 	

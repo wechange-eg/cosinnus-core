@@ -48,6 +48,8 @@ module.exports = ContentControlView.extend({
     	   'remove': self.thisContext(self.tileRemove),
     	   'reset': self.thisContext(self.tilesReset),
     	});
+        
+        Backbone.mediator.subscribe('error:search', self.onSearchError, self);
     },
 
     render: function () {
@@ -214,14 +216,16 @@ module.exports = ContentControlView.extend({
     	}
     },
     
+    onSearchError: function() {
+    	// when the search fails, re-enable the tile-list
+    	this.enableInput(true);
+    },
+    
     // Private
     // -------
 
     renderTilesInitial: function () {
-    	
-    	
-    	console.log('MAsonry initted')
-    	
+    	// nothing to do here for now
     },
 
 });

@@ -43,6 +43,28 @@ module.exports = {
     			console.log(obj);
     		}
     	}
+    },
+    
+    /** Returns a statusData dict of important state data of a text input,
+     *  to be restored later using `restoreInputStatus()` */
+    saveInputStatus: function ($input) {
+    	var elem = $input[0];
+    	return {
+    		hadFocus: $input.is(":focus"),
+    		val: elem.value,
+    		start: elem.selectionStart,
+    		end: elem.selectionEnd
+    	}
+    },
+    
+    /** Restores a text input's state saved with `saveInputStatus` */
+    restoreInputStatus: function ($input, statusData) {
+    	var elem = $input[0];
+    	elem.value = statusData['val'];
+    	elem.setSelectionRange(statusData['start'], statusData['end']);
+    	if (statusData['hadFocus']) {
+    		$input.focus();
+    	}
     }
     
 };

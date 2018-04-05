@@ -39,8 +39,8 @@ module.exports = ContentControlView.extend({
     		q: '',
     		topicsVisible: false,
 			activeTopicIds: null,
-			wantsToSearch: false,
 			searching: false,
+			searchHadErrors: false,
 			searchResultLimit: 20,
 			page: null,
 			pageIndex: 0,
@@ -59,8 +59,8 @@ module.exports = ContentControlView.extend({
     
     searchEndpointURL: '/maps/search/',
     searchDelay: 600,
-    whileSearchingDelay: 5000,
-	
+    searchXHRTimeout: 15000,
+    currentSearchHttpRequest: null, 
     
     initialize: function (options, app, collection) {
     	var self = this;
@@ -73,7 +73,6 @@ module.exports = ContentControlView.extend({
     	Backbone.mediator.subscribe('want:search', self.handleStartSearch, self);
     	Backbone.mediator.subscribe('end:search', self.handleEndSearch, self);
     	Backbone.mediator.subscribe('change:controls', self.render, self);
-    	Backbone.mediator.subscribe('error:search', self.handleXhrError, self);
     	Backbone.mediator.subscribe('app:ready', self.handleAppReady, self);
     	Backbone.mediator.subscribe('app:stale-results', self.handleStaleResults, self);
     	
@@ -219,36 +218,25 @@ module.exports = ContentControlView.extend({
     
 
     handleStartSearch: function (event) {
-        this.$el.find('.icon-search').addClass('hidden');
-        this.$el.find('.icon-loading').removeClass('hidden');
+    	this.$el.find('.icon-loading').removeClass('hidden');
+    	this.$el.find('.icon-reset').addClass('hidden');
+        this.$el.find('.q').blur();
         // disable input in content views during search (up to the views to decide what to disable)
         _.each(this.App.contentViews, function(view){
     		view.disableInput();
     	});
+        
     },
 
     handleEndSearch: function (event) {
-        if (!this.state.typing) {
-            this.$el.find('.icon-search').removeClass('hidden');
-        }
         this.$el.find('.icon-loading').addClass('hidden');
-        var $message = this.$el.find('form .message');
-        $message.hide();
+    	this.$el.find('.icon-reset').removeClass('hidden');
         // enable input in content views during search (up to the views to decide what to enable)
         _.each(this.App.contentViews, function(view){
     		view.enableInput();
     	});
     },
 
-    handleXhrError: function (event) {
-        var $message = this.$el.find('form .message');
-        new ErrorView({
-            message: 'Ein Fehler ist bei der Suche aufgetreten.',
-            el: $message
-        }).render();
-        $message.show();
-    },
-    
     /** Called when the App is fully loaded for the first time.
      * 	WARNING: Due to the threaded after_render() method, this may
      * 		currently actually happen before a full load.
@@ -448,37 +436,59 @@ module.exports = ContentControlView.extend({
         
         var url = self.buildSearchQueryURL(true);
         self.state.searching = true;
-        $.get(url, function (data) {
-            self.state.searching = false;
-            Backbone.mediator.publish('end:search');
-            
-            
-            // (The search endpoint is single-thread).
-            // If there is a queued search, requeue it.
-            if (self.state.wantsToSearch) {
-            	// TODO: Check if we want this! This behaviour may cause long wait times!
-                self.triggerDelayedSearch();
-            // Update the results if there isn't a queued search.
-            } else {
+        
+        // cancel the currently ongoing request
+        if (self.currentSearchHttpRequest) {
+        	util.log('control-view.js: New search! Aborting current search request.')
+        	self.currentSearchHttpRequest.abort();
+        }
+        
+        self.currentSearchHttpRequest = $.ajax(url, {
+        	type: 'GET',
+        	timeout: self.searchXHRTimeout,
+        	success: function (data, textStatus) {
             	// Save the search state in the url.
             	if (App.displayOptions.routeNavigation && !noNavigate) {
             		util.log('control-view.js: +++++++++++++++++ since we are fullscreen, publishing router URL update!')
             		Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, self.options.basePageURL))
             	}
-            	var results = data.results;
             	util.log('got resultssss')
             	util.log(data)
+            	util.log(textStatus)
+            	var results = data.results;
             	self.processSearchResults(results);
             	self.state.page = data.page;
             	self.state.pageIndex = data.page && data.page.index || 0;
-            	self.render();
-            }
-        }).fail(function () {
-            self.state.searching = false;
-            Backbone.mediator.publish('end:search');
-            Backbone.mediator.publish('error:search');
-            self.render();
+            	self.state.searchHadErrors = false;
+	        },
+	        error: function (xhr, textStatus) {
+	            util.log('control-view.js: Search XHR failed.')
+	            if (textStatus === 'abort') {
+	        		return;
+	        	}
+	            Backbone.mediator.publish('error:search');
+	            self.state.searchHadErrors = true;
+	        },
+	        complete: function (xhr, textStatus) {
+	        	util.log('control-view.js: Search complete: ' + textStatus)
+	        	if (textStatus === 'abort') {
+	        		return;
+	        	}
+	        	if (textStatus !== 'success') {
+	        		self.state.searchHadErrors = true;
+	        	}
+	            self.state.searching = false;
+	            
+	            // restore the search textbox after the render so we don't throw the user out
+	            var qdata = util.saveInputStatus(self.$el.find('.q'));
+	            self.render();
+	            util.restoreInputStatus(self.$el.find('.q'), qdata);
+	            
+	            Backbone.mediator.publish('end:search');
+	        }
         });
+        		
+    		
     },
     
     // extended from content-control-view.js
@@ -587,10 +597,8 @@ module.exports = ContentControlView.extend({
     // a search attempt after a delay.
     triggerDelayedSearch: function (fireImmediatelyIfPossible, noPageReset, noNavigate) {
         var self = this;
-            // Increase the search delay when a search is in progress.
-        var delay = self.state.searching ?
-                self.whileSearchingDelay : self.searchDelay;
         
+        var delay = self.searchDelay;
         if (fireImmediatelyIfPossible) {
         	delay = 0;
         	util.log('control-view.js: TODO: FireImmediately was passed true!')
@@ -599,11 +607,9 @@ module.exports = ContentControlView.extend({
         	self.state.pageIndex = 0;
         }
         clearTimeout(this.searchTimeout);
-        self.state.wantsToSearch = true;
         Backbone.mediator.publish('want:search');
         self.searchTimeout = setTimeout(function () {
             self.search(noNavigate);
-            self.state.wantsToSearch = false;
         }, delay);
     },
 
