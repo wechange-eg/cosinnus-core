@@ -332,13 +332,13 @@
                                 <div class="media-body">
                                     <span class="annotation">
                                         {% trans "Invited to be a member" %}
+                                        &nbsp;
+                                        <span class="moment-data-date" data-date="{{ recruitation.last_modified|date:'c' }}"></span>
                                         {% if user == recruitation.invited_by or user in admins or user|is_superuser %}
                                             <a title="{% trans "Delete invitation" %}" href="#" data-toggle="modal" data-target="#{{modal_id}}">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         {% endif %}
-                                        &nbsp;
-                                        <span class="moment-data-date" data-date="{{ recruitation.last_modified|date:'c' }}"></span>
                                     </span>
                                     {{ recruitation.email }}
                                     {% if not recruitation.invited_by == user %}

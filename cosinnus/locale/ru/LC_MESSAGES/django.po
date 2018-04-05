@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-29 16:15+0200\n"
+"POT-Creation-Date: 2018-04-05 16:12+0200\n"
 "PO-Revision-Date: 2018-02-05 13:57+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1192,13 +1192,19 @@ msgstr "Расширить"
 msgid "Shrink"
 msgstr "Уменьшить"
 
-msgid "Check the projects/groups where you wish to show this event in. The event will be shown in the calendars and all lists, but will still remain in this group."
+#, fuzzy
+#| msgid "Check the projects/groups where you wish to show this event in. The event will be shown in the calendars and all lists, but will still remain in this group."
+msgid "Check the projects/groups where you wish to show this item in. It will be shown in all lists, but will still remain in this group."
 msgstr "Проверьте проекты/группы, где Вы зотите продемонстрировать это событие. Событие будет указано в календарях и во всех списках, но все еще останется в этой группе."
 
-msgid "Events from the Forum can be shown in any of your projects/groups."
+#, fuzzy
+#| msgid "Events from the Forum can be shown in any of your projects/groups."
+msgid "Items from the Forum can be shown in any of your projects/groups."
 msgstr "События Форума могут быть показаны в любых Ваших проектах/группах."
 
-msgid "Events from this group can be shown in any of the group's subprojects."
+#, fuzzy
+#| msgid "Events from this group can be shown in any of the group's subprojects."
+msgid "Items from this group can be shown in any of the group's subprojects."
 msgstr "События этой группы могут быть показаны в любом из подпроектов группы."
 
 msgid "Show in other projects/groups"
