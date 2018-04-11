@@ -6,14 +6,17 @@ from django.template import loader, Context
 from haystack import indexes
 from haystack.exceptions import SearchFieldError
 
+from cosinnus.conf import settings
 from cosinnus.utils.import_utils import import_from_settings
 from cosinnus.models.group import CosinnusGroup
-from cosinnus.utils.functions import ensure_list_of_ints
+from cosinnus.utils.functions import ensure_list_of_ints,\
+    normalize_within_stddev
 
 from django.db.models import Count
 from django.core.cache import cache
 from django.db.models.loading import get_model
 import numpy
+from cosinnus.utils.group import get_cosinnus_group_model
 
 _CosinnusPortal = None
 
@@ -156,11 +159,11 @@ class DocumentBoostMixin(object):
             _CosinnusPortal = get_model('cosinnus', 'CosinnusPortal')
         portal_id = _CosinnusPortal.get_current().id
         
-        PORTAL_USER_MEMBERSHIP_COUNT_MEAN = 'cosinnus/core/portal/%d/users/%s/%s/mean' % (portal_id, self.__class__.__name__, count_property)
-        PORTAL_USER_MEMBERSHIP_COUNT_STDDEV = 'cosinnus/core/portal/%d/users/%s/%s/stddev' % (portal_id, self.__class__.__name__, count_property)
+        INDEX_POP_COUNT_MEAN = 'cosinnus/core/portal/%d/users/%s/%s/mean' % (portal_id, self.__class__.__name__, count_property)
+        INDEX_POP_COUNT_STDDEV = 'cosinnus/core/portal/%d/users/%s/%s/stddev' % (portal_id, self.__class__.__name__, count_property)
         
-        mean = cache.get(PORTAL_USER_MEMBERSHIP_COUNT_MEAN)
-        stddev = cache.get(PORTAL_USER_MEMBERSHIP_COUNT_STDDEV)
+        mean = cache.get(INDEX_POP_COUNT_MEAN)
+        stddev = cache.get(INDEX_POP_COUNT_STDDEV)
         if mean is None or stddev is None:
             # calculate mean and stddev of the counts of group memberships for active users in this portal
             qs = qs_or_func() if callable(qs_or_func) else qs_or_func
@@ -170,8 +173,8 @@ class DocumentBoostMixin(object):
             count_population = ann.values_list('pop_property_count', flat=True)
             mean = numpy.mean(count_population)
             stddev = numpy.std(count_population)
-            cache.set(PORTAL_USER_MEMBERSHIP_COUNT_MEAN , mean, 60*60*12)
-            cache.set(PORTAL_USER_MEMBERSHIP_COUNT_STDDEV, stddev, 60*60*12)
+            cache.set(INDEX_POP_COUNT_MEAN , mean, 60*60*12)
+            cache.set(INDEX_POP_COUNT_STDDEV, stddev, 60*60*12)
         return mean, stddev
     
     
@@ -192,7 +195,10 @@ class DocumentBoostMixin(object):
         data['local_boost'] = model_boost * (global_boost + 1.0)
         # this tells haystack to boost the ._score
         data['boost'] = data['local_boost']
-        print ">> local_boost is", data['boost'], " from model*global ", model_boost, '*', global_boost+1.0, data['django_ct']
+        if settings.DEBUG:
+            print ">> local_boost is", data['boost'], " from model*global ", model_boost, '*', \
+                global_boost+1.0, data['django_ct'], getattr(obj, 'name', getattr(obj, 'title', None)), \
+                getattr(obj, 'group', None) and ( 'group is: ' + obj.group.name) or ''
         return data
     
 
@@ -226,8 +232,29 @@ class BaseTaggableObjectIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjec
         # don't index inactive group's items
         qs = qs.filter(group__is_active=True)
         return qs.select_related('media_tag').all()
-
     
+    def boost_model(self, obj, indexed_data):
+        """ We boost by number of members the tagged objects's group has, normalized over
+            the mean/stddev of the member count of all groups in this portal (excluded the Forum!), 
+            in a range of [0.0..1.0].
+            Special case: Events in the Forum always return 0.5! (Because everyone is in the Forum
+            so it should be average. """
+        group = obj.group
+        forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+        if group.slug == forum_slug:
+            return 0.5
+        
+        def qs_func():
+            qs = get_cosinnus_group_model().objects.all_in_portal()
+            if forum_slug:
+                qs = qs.exclude(slug=forum_slug)
+            return qs
+        
+        mean, stddev = self.get_mean_and_stddev(qs_func, 'memberships')
+        group_member_count = group.actual_members.count()
+        members_rank = normalize_within_stddev(group_member_count, mean, stddev, stddev_factor=1.0)
+        return members_rank
+        
 class BaseHierarchicalTaggableObjectIndex(BaseTaggableObjectIndex):
     
     def index_queryset(self, using=None):

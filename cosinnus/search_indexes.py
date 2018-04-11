@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from haystack import indexes
 
+from cosinnus.conf import settings
 from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveEdgeNgramField,\
     TagObjectSearchIndex, BOOSTED_FIELD_BOOST, StoredDataIndexMixin,\
     DocumentBoostMixin
@@ -12,6 +13,7 @@ from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.contrib.auth import get_user_model
 from cosinnus.utils.functions import normalize_within_stddev
+from cosinnus.utils.group import get_cosinnus_group_model
     
 
 class CosinnusGroupIndexMixin(DocumentBoostMixin, StoredDataIndexMixin, indexes.SearchIndex):
@@ -73,12 +75,22 @@ class CosinnusGroupIndexMixin(DocumentBoostMixin, StoredDataIndexMixin, indexes.
         qs = qs.select_related('media_tag').all()
         return qs
     
-    def prepare(self, obj):
-        """ Boost all objects of this type """
-        data = super(CosinnusGroupIndexMixin, self).prepare(obj)
-        data['boost'] = 1.25
-        return data
-    
+    def boost_model(self, obj, indexed_data):
+        """ We boost by number of members this group has, normalized over
+            the mean/stddev of the member count of all groups in this portal (excluded the Forum!), 
+            in a range of [0.0..1.0]."""
+        group = obj
+        forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+        def qs_func():
+            qs = get_cosinnus_group_model().objects.all_in_portal()
+            if forum_slug:
+                qs = qs.exclude(slug=forum_slug)
+            return qs
+        
+        mean, stddev = self.get_mean_and_stddev(qs_func, 'memberships')
+        group_member_count = group.actual_members.count()
+        members_rank = normalize_within_stddev(group_member_count, mean, stddev, stddev_factor=1.0)
+        return members_rank
 
 class CosinnusProjectIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexes.Indexable):
     
@@ -134,8 +146,8 @@ class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearch
         return qs
     
     def boost_model(self, obj, indexed_data):
-        """ We boost by number of group memberships normalized over
-            [the maximum number of memberships | or | the median with falloff caps ] 
+        """ We boost by number of groups the user is a member of, normalized over
+            the mean/stddev of the count of groups each portal user is a members of, 
             in a range of [0.0..1.0] """
         def qs_func():
             return filter_portal_users(filter_active_users(get_user_model().objects.all()))
