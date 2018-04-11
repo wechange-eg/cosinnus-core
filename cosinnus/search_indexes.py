@@ -11,13 +11,7 @@ from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.contrib.auth import get_user_model
-from django.db.models import Count, Max, Min, Avg
 from cosinnus.utils.functions import normalize_within_stddev
-from django.core.cache import cache
-from django.db.models.loading import get_model
-import numpy
-
-_CosinnusPortal = None
     
 
 class CosinnusGroupIndexMixin(DocumentBoostMixin, StoredDataIndexMixin, indexes.SearchIndex):
@@ -143,28 +137,9 @@ class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearch
         """ We boost by number of group memberships normalized over
             [the maximum number of memberships | or | the median with falloff caps ] 
             in a range of [0.0..1.0] """
-        global _CosinnusPortal
-        if _CosinnusPortal is None: 
-            _CosinnusPortal = get_model('cosinnus', 'CosinnusPortal')
-        portal_id = _CosinnusPortal.get_current().id
-        
-        PORTAL_USER_MEMBERSHIP_COUNT_MEAN = 'cosinnus/core/portal/%d/users/memberships/mean'
-        PORTAL_USER_MEMBERSHIP_COUNT_STDDEV = 'cosinnus/core/portal/%d/users/memberships/stddev'
-        
-        mean = cache.get(PORTAL_USER_MEMBERSHIP_COUNT_MEAN % portal_id)
-        stddev = cache.get(PORTAL_USER_MEMBERSHIP_COUNT_STDDEV % portal_id)
-        if mean is None or stddev is None:
-            # calculate mean and stddev of the counts of group memberships for active users in this portal
-            portal_users = filter_portal_users(filter_active_users(get_user_model().objects.all()))
-            ann = portal_users.annotate(
-                cosinnus_memberships_count=Count('cosinnus_memberships')
-            )
-            count_population = ann.values_list('cosinnus_memberships_count', flat=True)
-            mean = numpy.mean(count_population)
-            stddev = numpy.std(count_population)
-            cache.set(PORTAL_USER_MEMBERSHIP_COUNT_MEAN % portal_id, mean, 60*60*12)
-            cache.set(PORTAL_USER_MEMBERSHIP_COUNT_STDDEV % portal_id, stddev, 60*60*12)
-        
+        def qs_func():
+            return filter_portal_users(filter_active_users(get_user_model().objects.all()))
+        mean, stddev = self.get_mean_and_stddev(qs_func, 'cosinnus_memberships')
         user_memberships_count = obj.user.cosinnus_memberships.count()
         memberships_rank = normalize_within_stddev(user_memberships_count, mean, stddev, stddev_factor=2.0)
         return memberships_rank

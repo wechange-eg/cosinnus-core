@@ -10,6 +10,12 @@ from cosinnus.utils.import_utils import import_from_settings
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.functions import ensure_list_of_ints
 
+from django.db.models import Count
+from django.core.cache import cache
+from django.db.models.loading import get_model
+import numpy
+
+_CosinnusPortal = None
 
 BOOSTED_FIELD_BOOST = 1.5
 
@@ -140,6 +146,35 @@ class DocumentBoostMixin(object):
     
     local_boost = indexes.FloatField(default=0.0, indexed=False)
     
+    def get_mean_and_stddev(self, qs_or_func, count_property):
+        """ For a given QS or function that returns one, and the countable property
+            to be annotated, return mean and stddev for the population of counts.
+            Mean and Stddev are cached. """
+        
+        global _CosinnusPortal
+        if _CosinnusPortal is None: 
+            _CosinnusPortal = get_model('cosinnus', 'CosinnusPortal')
+        portal_id = _CosinnusPortal.get_current().id
+        
+        PORTAL_USER_MEMBERSHIP_COUNT_MEAN = 'cosinnus/core/portal/%d/users/%s/%s/mean' % (portal_id, self.__class__.__name__, count_property)
+        PORTAL_USER_MEMBERSHIP_COUNT_STDDEV = 'cosinnus/core/portal/%d/users/%s/%s/stddev' % (portal_id, self.__class__.__name__, count_property)
+        
+        mean = cache.get(PORTAL_USER_MEMBERSHIP_COUNT_MEAN)
+        stddev = cache.get(PORTAL_USER_MEMBERSHIP_COUNT_STDDEV)
+        if mean is None or stddev is None:
+            # calculate mean and stddev of the counts of group memberships for active users in this portal
+            qs = qs_or_func() if callable(qs_or_func) else qs_or_func
+            ann = qs.annotate(
+                pop_property_count=Count(count_property)
+            )
+            count_population = ann.values_list('pop_property_count', flat=True)
+            mean = numpy.mean(count_population)
+            stddev = numpy.std(count_population)
+            cache.set(PORTAL_USER_MEMBERSHIP_COUNT_MEAN , mean, 60*60*12)
+            cache.set(PORTAL_USER_MEMBERSHIP_COUNT_STDDEV, stddev, 60*60*12)
+        return mean, stddev
+    
+    
     def boost_model(self, obj, indexed_data):
         """ 
             Model specific boost for an instance given it and its indexed data.
@@ -151,13 +186,13 @@ class DocumentBoostMixin(object):
     def prepare(self, obj):
         """ Boost all objects of this type """
         data = super(DocumentBoostMixin, self).prepare(obj)
-        global_boost = GLOBAL_MODEL_BOOST_MULTIPLIERS.get(data['django_ct'], 0.0)
+        global_boost = GLOBAL_MODEL_BOOST_MULTIPLIERS.get(data['django_ct'], 1.0)
         model_boost = self.boost_model(obj, data)
         # this is our custom field
         data['local_boost'] = model_boost * (global_boost + 1.0)
         # this tells haystack to boost the ._score
         data['boost'] = data['local_boost']
-        print ">> databosted is", data['boost'], " --> ", global_boost, data['django_ct'], data['boosted']
+        print ">> local_boost is", data['boost'], " from model*global ", model_boost, '*', global_boost+1.0, data['django_ct']
         return data
     
 
