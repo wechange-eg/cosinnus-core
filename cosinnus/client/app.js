@@ -38,34 +38,11 @@ var App = function App () {
 	};
     self.displayOptions = {}
     
-
+    /** Main entry point */
     self.start = function () {
-        self.initMediator();
+        self.mediator = Backbone.mediator = mediator;
+        self.mediator.settings = window.settings || {};
         
-        // set default options, these will be used if the page is auto-inited by a route during page load
-        // otherwise, an init:app must be published
-
-        // (The first routing will autoinitialize views and model)
-        Backbone.mediator.subscribe('navigate:map', self.navigate_map, self);
-        Backbone.mediator.subscribe('navigate:router', self.router.on_navigate, self);
-        
-        // event for manual initialization (non-fullscreen view)
-        Backbone.mediator.subscribe('init:app', self.init_app, self);
-        Backbone.mediator.subscribe('init:map-standalone', function(){alert('app.js: tried to init map-standalone but found no handlers')}, self);
-        Backbone.mediator.subscribe('init:map', function(){alert('app.js: tried to init "map" but this is no longer supported')}, self);
-        
-        util.log('app.js: init routing')
-        
-        // Start routing...
-        Backbone.history.start({
-            pushState: true
-        });
-        // Use this param for the history if we don't want any default apps
-        // on auto start
-        // silent: true  // starts without the router listening for a match of the current url
-        
-        
-
         var triggerResizeEvent = function (){
         	Backbone.mediator.publish('resize:window');
         }
@@ -76,20 +53,49 @@ var App = function App () {
         	resizeTimer = setTimeout(triggerResizeEvent, 500);
         });
         
-        // we trigger both on the mediator and on html, in case scripts loaded earlier than this
-        // have already subsribed on 'html'
+        // init-module calls. inside a listener to the 'init:client' event,
+        // one of these need to be called from the template to initialize the required modules
+        Backbone.mediator.subscribe('init:module-full-routed', self.initModuleFullRouted, self);
+        Backbone.mediator.subscribe('init:module-embed', self.initModuleEmbed, self);
+        
+        // - the 'init:client' signal is the marker for all pages using this client.js to now
+        // 	 publish the "init:<module>" event for whichever module configuration they wish to load (see above)
+        util.log('app.js: finish start() and publishing "init:client"')
         Backbone.mediator.publish('init:client');
+        // we trigger both on the mediator and on html, in case scripts loaded earlier than this have already subsribed on 'html'
         $('html').trigger('init:client');
         
-        util.log('app.js: finish start()')
         return self;
     };
-
-    self.initMediator = function () {
-        self.mediator = Backbone.mediator = mediator;
-        self.mediator.settings = window.settings || {};
+    
+    /** Module configuration for a fullscreen App with full control of the page, that uses routing and history.
+     *  This module uses the full set of default options and gets passed no options */
+    self.initModuleFullRouted = function () {
+        // (The first routing will autoinitialize views and model)
+        Backbone.mediator.subscribe('navigate:map', self.navigate_map, self);
+        Backbone.mediator.subscribe('navigate:router', self.router.on_navigate, self);
+        
+        // Start routing... this will automatically call `self.navigate_map()` once
+        util.log('app.js: init routing')
+        Backbone.history.start({
+            pushState: true
+        });
     };
     
+    /** Module configuration for an embeddable App (in a widget or iframe).
+     *  Many options can be configured for hiding the tile-list, disabling the visual control-view
+     *  or enabling only specific Result model types. */
+    self.initModuleEmbed = function (options) {
+    	// add passed options into params
+    	var params = {
+    		el: options.el,
+    		display: options.display,
+    		settings: options.settings,
+    	}
+    	self.init_app(params);
+    };
+    
+    /** Called on navigate, from router.js */
     self.navigate_map = function (event) {
     	if (self.controlView == null) {
     		self.init_default_app();
@@ -98,8 +104,7 @@ var App = function App () {
     	}
     };
     
-    /** Called when the App is auto-initied on a fullscreen page with no further parameters
-     *  (triggered by navigation). 
+    /** Called when the App is auto-initied on a fullscreen page with no further parameters. 
      *  Uses mostly default settings self.defaultSettings and self.defaultDisplay */
     self.init_default_app = function () {
     	// add defaults into params
@@ -110,8 +115,7 @@ var App = function App () {
     	self.init_app(params);
     };
     
-    /** This is called from the event init:app and is used to initialize the non-fullscreen app
-     * 	after page load (when no navigation occurs) */
+    /** Main initialization function, this eventually gets called no matter which modules we load. */
     self.init_app = function (params) {
     	util.log('app.js: init_app called with event, params')
     	
@@ -132,13 +136,13 @@ var App = function App () {
         if (!topicsHtml) {alert('no topicsHtml!')}
         if (!markerIcons) {alert('no markerIcons!')}
         
-        // TODO: set to actual current URL!
+        // TODO: set to actual dynamic current URL!
         var basePageURL = '/map/';
         
         self.el = params.el;
         
         self.controlView = new ControlView({
-	        	elParent: params.el, // TODO put in el in root div!
+	        	elParent: params.el,
 	        	availableFilters: settings.availableFilters,
 	        	activeFilters: settings.activeFilters,
 	        	topicsHtml: topicsHtml,
@@ -196,12 +200,8 @@ var App = function App () {
     	self
     	).render();
         
-        
         Backbone.mediator.publish('app:ready');
     };
-    
-    
-    
 };
 
 module.exports = App;

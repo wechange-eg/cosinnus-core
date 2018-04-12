@@ -33,6 +33,13 @@
 	width: 50%;
 	left: 50%;
 }
+.app-embed {
+	position: relative;
+}
+.map-embed {
+	width: 100%;
+	height: 100%;
+}
 
 .tile-list {
 	background-color: @tile-background-color;
@@ -108,15 +115,29 @@
 }
 
 /** The full-50%-screen tile overlay */
-.tile-detail {
+.app-fullscreen .tile-detail {
     position: fixed;
     top: 0;
     left: 50%;
     z-index: 3;
+    padding: 65px 10px;
+}
+.app-embed .tile-detail {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 75%;
+    height: inherit;
+    overflow-y: scroll;
+    padding: 10px;
+}
+.app-fullscreen.no-navbar .tile-detail {
+	padding: 10px;
+}
+.tile-detail {
     width: 50%;
     height: 100%;
     
-    padding: 65px 10px;
     background-color: white;
     
     .tile-close-button {
@@ -126,6 +147,7 @@
         font-size: 22px;
         border: 3px solid;
         border-radius: 20px;
+        color: #666;
     }
 }
 
@@ -137,16 +159,6 @@
         }
     }
 
-    .leaflet-bottom {
-        position: static;
-
-        .leaflet-control-attribution {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-        }
-    }
-
     /* For fullscreen mode, don't move the controls to compensate for the navbar */
     &.no-navbar{
         .leaflet-top {
@@ -155,6 +167,20 @@
             }
         }
     } 
+}
+
+.map-fullscreen, .map-embed {
+	
+	.leaflet-bottom {
+        position: static;
+
+        .leaflet-control-attribution {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+    }
+	
 }
 
 .map-root {

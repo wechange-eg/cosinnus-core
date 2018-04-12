@@ -254,7 +254,6 @@ module.exports = ContentControlView.extend({
     	var urlParams = this.parseUrl(window.location.href.replace(window.location.origin, ''));
     	_.each(this.App.contentViews, function(view){
     		view.applyUrlSearchParameters(urlParams);
-    		console.log(view.state)
     	});
     	this.triggerDelayedSearch(true, true, noNewNavigateEvent);
     },
@@ -479,10 +478,12 @@ module.exports = ContentControlView.extend({
 	        	}
 	            self.state.searching = false;
 	            
-	            // restore the search textbox after the render so we don't throw the user out
-	            var qdata = util.saveInputStatus(self.$el.find('.q'));
-	            self.render();
-	            util.restoreInputStatus(self.$el.find('.q'), qdata);
+	            if (self.options.controlsEnabled) {
+	            	// restore the search textbox after the render so we don't throw the user out
+	            	var qdata = util.saveInputStatus(self.$el.find('.q'));
+	            	self.render();
+	            	util.restoreInputStatus(self.$el.find('.q'), qdata);
+	            }
 	            
 	            Backbone.mediator.publish('end:search');
 	        }

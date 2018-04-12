@@ -20,14 +20,19 @@
     <div class="row">
     	{% include 'cosinnus/common/internet_explorer_not_supported.html' %}
     
-        {% comment %} Settings for this map are initialized in the extraheader, and passed in a router.js, and uses a lot of
-                       the default settings defined in map.js.        
+        {% comment %} Some settings for this map are initialized in the extraheader, and passed in a router.js, and uses a lot of
+                       the default settings defined in map.js.  
+                      We don't pass a `settings param here because we use all the default ones.`      
         {% endcomment %}
         <div id="app-fullscreen" class="app-root app-fullscreen"></div>
-        {% comment %}
-            {% include 'cosinnus/common/init_client_module.html' with module='map' id=1 height=400 settings=settings %}
-            {% include 'cosinnus/common/init_client_module.html' with module='map' id=2 height=800 settings=settings %}
-        {% endcomment %}
+        <script>
+		    $('html').on('init:client', function () {
+		        console.log('got init client, now init:module-full-routed');
+		        Backbone.mediator.publish('init:module-full-routed', {
+		            el: '#app-fullscreen',
+		        });
+		    });
+		</script>
     </div>
 
 {% endblock main_page %}
