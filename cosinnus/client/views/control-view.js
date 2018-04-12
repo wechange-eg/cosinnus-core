@@ -266,7 +266,7 @@ module.exports = ContentControlView.extend({
      */
     handleStaleResults: function (context) {
     	if (context.reason == 'viewport-changed') {
-    		util.log('*** control-view.js: Received signal for stale results bc of viewport change, and triggering a delayed search')
+    		util.log('*** control-view.js: Received signal for stale results bc of viewport change, and triggering a delayed search if nothing prevents it')
     	} else if (context.reason == 'map-navigate') {
     		util.log('*** control-view.js: Received signal for stale results bc of map-navigate, but doing nothing rn')
     	}
@@ -280,7 +280,13 @@ module.exports = ContentControlView.extend({
     	} else {
     		// search or do nothing, depending on if we re-search on scroll
     		if (this.state.searchOnScroll) {
-    			this.triggerDelayedSearch();
+    			// check before auto-rerendering that the input-box is not focused!
+    			// if so, on mobile this search would pull down the keyboard
+    			if (!this.$el.find('.q').is(":focus")) {
+    				this.triggerDelayedSearch();
+    			} else {
+    				util.log('control-view.js: Prevented a search while input is focused!')
+    			}
     		} else {
     			// re-render controls so the manual search button will be enabled
     			if (!staleBefore) {
