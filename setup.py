@@ -88,6 +88,7 @@ setup(
         'jsonfield==1.0.0',
         'html5lib==0.99',
         'html2text==2016.9.19',
+        'numpy==1.14.2',
         'oauthlib==2.0.2',
         'paramiko==1.12.0',
         'pycrypto==2.6.1',

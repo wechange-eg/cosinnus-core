@@ -86,8 +86,8 @@ module.exports = Backbone.View.extend({
 	*/
     thisContext: function(func) {
     	var self = this;
-    	return function(...args){
-    		func.apply(self, args);
+    	return function(){
+    		func.apply(self, arguments);
     	};
     }
 });
