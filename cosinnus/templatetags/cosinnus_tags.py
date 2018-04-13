@@ -919,3 +919,9 @@ def render_cosinnus_topics_field(escape_html=None):
         topics_html = escape(topics_html)
     return topics_html
     
+
+@register.simple_tag()
+def render_cosinnus_topics_json():
+    """ Returns a JSON dict of {<topic-id>: <topic-label-translated>, ...} """
+    topic_choices = dict([(top_id, force_text(val)) for top_id, val in TAG_OBJECT.TOPIC_CHOICES])
+    return _json.dumps(topic_choices)

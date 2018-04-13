@@ -4,7 +4,7 @@
 	<head>
 		<script type="text/javascript">
 		    var COSINNUS_MAP_MARKER_ICONS = JSON.parse('{% render_map_marker_icon_json %}');
-		    var COSINNUS_MAP_TOPICS_HTML = '{% render_cosinnus_topics_field "escape" %}';
+		    var COSINNUS_MAP_TOPICS_JSON = JSON.parse('{% render_cosinnus_topics_json %}');
 		    var COSINNUS_MAP_DEFAULT_COORDINATES = JSON.parse('{{ SETTINGS.COSINNUS_MAP_DEFAULT_COORDINATES|json|safe }}');
 		    var cosinnus_current_language = "{{ COSINNUS_CURRENT_LANGUAGE }}";
 		</script>

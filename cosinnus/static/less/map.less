@@ -1,4 +1,18 @@
-@tile-background-color: #85c1ff;
+@map-tile-background-color: #85c1ff;
+
+@map-scroll-color: #DDDDDD;
+
+@map-button-color: #FFF;
+
+@map-topic-color: #bebebe;
+
+@map-people-color: #e66661;
+@map-events-color: #b8c26e;
+@map-projects-color: #e69761;
+@map-groups-color: #92ae76;
+@map-ideas-color: #e7c76d;
+
+
 
 /**
   z-indexes:
@@ -42,7 +56,7 @@
 }
 
 .tile-list {
-	background-color: @tile-background-color;
+	background-color: @map-tile-background-color;
 	overflow-y: scroll;
 	overflow-x: hidden;
 	padding-top: 50px;
@@ -51,7 +65,7 @@
 	.grid {
 	    margin-left: 20px;
         min-height: 100%;
-        background-color: @tile-background-color;
+        background-color: @map-tile-background-color;
 	}
 	
     .grid-sizer, .grid-item { 
@@ -102,16 +116,16 @@
 		}
 		
         &.tile-people  {
-            border: 1px solid @app-people-color;
+            border: 1px solid @map-people-color;
         }
         &.tile-events  {
-            border: 1px solid @app-events-color;
+            border: 1px solid @map-events-color;
         }
         &.tile-projects  {
-            border: 1px solid @app-projects-color;
+            border: 1px solid @map-projects-color;
         }
         &.tile-groups  {
-            border: 1px solid @app-groups-color;
+            border: 1px solid @map-groups-color;
         }
         
         &.hovered {
@@ -274,42 +288,132 @@
 }
 
 .map-controls, .map-scroll-controls, .map-pagination-controls {
+    
+    .rounded-button {
+	    display: inline-block;
+	    cursor: pointer;
+	    
+	    height: 34px;
+	    line-height: 32px;
+	    font-size: 14px;
+	    border-radius: 4px;
+	    
+	    .rounded-button-inner {
+		    padding: 0 10px;
+		    -webkit-user-select: none; /* Safari */        
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+		    
+		    i {
+		        margin-right: 5px;
+		    }
+	    }
+	    &:hover {
+            text-decoration: none;
+            -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.35);
+			-moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.35);
+			box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.35);
+	    }
+	    
+        /** Topics */
+	    &.button-color-topic {
+            color: @map-topic-color;
+            background-color: @map-button-color;
+		    border: 1px solid @map-topic-color;
+        }
+        &.button-color-topic.selected {
+            color: @map-button-color;
+            background-color: @map-topic-color;
+        }
+        
+        /** Events */
+        &.button-color-events {
+            color: @map-events-color;
+            background-color: @map-button-color;
+            border: 1px solid @map-events-color;
+        }
+        &.button-color-events.selected {
+            color: @map-button-color;
+            background-color: @map-events-color;
+        }
+        
+        /** People */
+        &.button-color-people {
+            color: @map-people-color;
+            background-color: @map-button-color;
+            border: 1px solid @map-people-color;
+        }
+        &.button-color-people.selected {
+            color: @map-button-color;
+            background-color: @map-people-color;
+        }
+        
+        /** Projects */
+        &.button-color-projects {
+            color: @map-projects-color;
+            background-color: @map-button-color;
+            border: 1px solid @map-projects-color;
+        }
+        &.button-color-projects.selected {
+            color: @map-button-color;
+            background-color: @map-projects-color;
+        }
+        
+        /** Groups */
+        &.button-color-groups {
+            color: @map-groups-color;
+            background-color: @map-button-color;
+            border: 1px solid @map-groups-color;
+        }
+        &.button-color-groups.selected {
+            color: @map-button-color;
+            background-color: @map-groups-color;
+        }
+	    
+    }
+    
+    .button-list {
+        line-height: 40px;
+    }
+    
+    
+    /** ********* old map controls from here *************/
+    
+    
     position: absolute;
     right: 20px;
     bottom: 20px;
     z-index: 1;
-    width: 190px;
+    width: 500px;
     background-color: rgba(255,255,255,0.95);
     padding: 15px;
     cursor: auto;
+    
 
-    form {
-        margin-bottom: 15px;
+    .q {
+        width: 100%;
+        padding: 5px;
+        color: #333;
+    }
 
-        .q {
-            width: 100%;
-            padding: 5px;
-            color: #333;
-        }
+    .icon-search,
+    .icon-loading,
+    .icon-reset {
+        position: absolute;
+        font-size: 15px;
+        top: 7px;
+        right: 7px;
+    }
 
-        .icon-search,
-        .icon-loading,
-        .icon-reset {
-            position: absolute;
-            font-size: 15px;
-            top: 7px;
-            right: 7px;
-        }
-
-        .icon-loading {
-            width: 15px;
-            height: 15px;
-            margin: 0;
-            right: 30px;
-        }
-        .icon-reset {
-            right: 30px;
-        }
+    .icon-loading {
+        width: 15px;
+        height: 15px;
+        margin: 0;
+        right: 30px;
+    }
+    .icon-reset {
+        right: 30px;
     }
     
     .clickable-button {
@@ -328,20 +432,6 @@
             margin-top: 8px;
             margin-bottom: 8px;
             cursor: pointer;
-        }
-        
-        &.topics {
-            border: 1px solid #a8a8a8;
-            padding: 0 5px 0 0;
-            
-            input {
-                font-family: "Helvetica Neue", Arial, Helvetica, sans-serif !important;
-                font-size: 12px;
-                color: #a8a8a8;
-            }
-            .select2-search-choice {
-                margin-top: 5px;
-            }
         }
         
         &.text-field {
@@ -364,23 +454,23 @@
             display: inline-block;
 
             &.people .box  {
-                background-color: @app-people-color;
+                background-color: @map-people-color;
             }
 
             &.events .box  {
-                background-color: @app-events-color;
+                background-color: @map-events-color;
             }
 
             &.projects .box  {
-                background-color: @app-projects-color;
+                background-color: @map-projects-color;
             }
 
             &.groups .box  {
-                background-color: @app-groups-color;
+                background-color: @map-groups-color;
             }
             
             &.scroll .box  {
-                background-color: @app-scroll-color;
+                background-color: @map-scroll-color;
             }
 
             .box {

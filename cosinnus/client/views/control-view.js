@@ -26,7 +26,7 @@ module.exports = ContentControlView.extend({
             projects: true,
             groups: true
         },
-        topicsHtml: '',
+        allTopics: {},  // the dict of all searchable topics
         controlsEnabled: true,
         filterGroup: null,
         
@@ -37,8 +37,8 @@ module.exports = ContentControlView.extend({
     	state: {
     		// current query
     		q: '',
-    		topicsVisible: false,
-			activeTopicIds: null,
+			activeTopicIds: [],
+			filtersActive: false, // if true, *any* filter is active and we display a reset-filter button
 			searching: false,
 			searchHadErrors: false,
 			searchResultLimit: 20,
@@ -77,23 +77,20 @@ module.exports = ContentControlView.extend({
     	Backbone.mediator.subscribe('app:stale-results', self.handleStaleResults, self);
     	
     	util.log('control-view.js: initialized. with self.App=' + self.App)
-    	
-        if (self.state.activeTopicIds) {
-            this.showTopics();
-        }
     },
 
     events: {
-        'click .result-filter': 'toggleFilterClicked',
-        'click .reset-filters': 'resetFiltersClicked',
+    	'click .result-filter-button': 'toggleFilterButton',
+    	'click .topic-button': 'toggleFilterButton',
+    	
         'click .reset-all': 'resetAllClicked',
-        'click .show-topics': 'showTopicsClicked',
         'click .toggle-search-on-scroll': 'toggleSearchOnScrollClicked',
         'click .stale-search-button': 'staleSearchButtonClicked',
         'click .pagination-forward-button': 'paginationForwardClicked',
         'click .pagination-back-button': 'paginationBackClicked',
+        
         'click .query-search-button ': 'triggerQuerySearch',
-        'change #id_topics': 'toggleTopicFilterClicked',
+        
         'keyup .q': 'handleTyping',
         'keydown .q': 'handleKeyDown',
     },
@@ -101,30 +98,40 @@ module.exports = ContentControlView.extend({
     // Event Handlers
     // --------------
 
-    toggleFilterClicked: function (event) {
-        var resultType = $(event.currentTarget).data('result-type');
-        this.toggleFilter(resultType);
-        this.render();
-    },
 
-    resetFiltersClicked: function (event) {
+    toggleFilterButton: function (event) {
         event.preventDefault();
-        this.resetFilters();
-        this.render();
+        var $button = $(event.currentTarget);
+        // check if all buttons of this type are selected.
+        //  if so, make this click only select this button (deselect all others)
+        if ($button.hasClass('result-filter-button') &&
+    		this.$el.find('.result-filter-button').length == this.$el.find('.result-filter-button.selected').length) {
+        	this.$el.find('.result-filter-button').removeClass('selected');
+        } else if ($button.hasClass('topic-button') &&
+    		this.$el.find('.topic-button').length == this.$el.find('.topic-button.selected').length) {
+        	this.$el.find('.topic-button').removeClass('selected');
+        }
+        // toggle the button
+    	$button.toggleClass('selected');
     },
-
+    
+    /** Reset all types of input filters and trigger a new search */
     resetAllClicked: function (event) {
         event.preventDefault();
         this.state.q = '';
-        this.state.activeTopicIds = null;
-        this.resetFilters();
-        this.render();
+        this.resetTopics();
+        this.resetResultFilters();
+    	this.triggerDelayedSearch(true);
     },
     
-    showTopicsClicked: function (event) {
-        event.preventDefault();
-        this.showTopics();
-        this.render();
+    /** Internal state reset of filtered topics */
+    resetTopics: function () {
+    	this.state.activeTopicIds = [];
+    },
+    
+    /** Internal state reset of filtered result types */
+    resetResultFilters: function () {
+    	this.state.activeFilters = _(this.options.availableFilters).clone();
     },
     
     toggleSearchOnScrollClicked: function (event) {
@@ -162,10 +169,6 @@ module.exports = ContentControlView.extend({
     	}
     },
 
-    toggleTopicFilterClicked: function (event) {
-        var topic_ids = $(event.currentTarget).val();
-        this.toggleTopicFilter(topic_ids);
-    },
     
     /**
      * Unused now, this used to be the search-while-typing feature.
@@ -213,6 +216,7 @@ module.exports = ContentControlView.extend({
     triggerQuerySearch: function () {
         var query = this.$el.find('.q').val();
 		this.state.q = query;
+		this.applyFilters();
 		this.triggerDelayedSearch(true);
     },
     
@@ -379,11 +383,7 @@ module.exports = ContentControlView.extend({
     },
 
     afterRender: function () {
-        // update topics selector with current topics
-        var topics_selector = this.$el.find('#id_topics');
-        if (topics_selector.length > 0 && this.state.activeTopicIds) {
-            topics_selector.val(this.state.activeTopicIds).select2();
-        }
+    	// nothing right now
     },
     
     
@@ -485,6 +485,18 @@ module.exports = ContentControlView.extend({
 	            self.state.searching = false;
 	            
 	            if (self.options.controlsEnabled) {
+	            	// determine if *any* filtering method is active (text, topics or result types)
+	            	self.state.filtersActive = false;
+	            	if (self.state.q || self.state.activeTopicIds.length > 0) {
+	            		self.state.filtersActive = true;
+	            	} else {
+	            		_.each(Object.keys(self.options.availableFilters), function(key) {
+	            			if (self.options.availableFilters[key] != self.state.activeFilters[key]) {
+	            				self.state.filtersActive = true;
+	            			}
+	            		});
+	            	}
+	            	
 	            	// restore the search textbox after the render so we don't throw the user out
 	            	var qdata = util.saveInputStatus(self.$el.find('.q'));
 	            	self.render();
@@ -524,7 +536,7 @@ module.exports = ContentControlView.extend({
             projects: this.state.activeFilters.projects,
             groups: this.state.activeFilters.groups,
         };
-        if (this.state.activeTopicIds) {
+        if (this.state.activeTopicIds.length > 0) {
         	_.extend(searchParams, {
         		topics: this.state.activeTopicIds.join(',')
         	});
@@ -578,25 +590,47 @@ module.exports = ContentControlView.extend({
         util.log(url)
         return url;
     },
+    
+    /** Collects all toggled states of filter buttons and applies them onto the current control-view state */
+    applyFilters: function () {
+    	var self = this;
 
+    	// Result types
+    	var all_deselected = true;
+    	self.$el.find('.result-filter-button').each(function(){
+    		var $button = $(this);
+    		var resultType = $button.attr('data-result-filter-type');
+    		var selected = $button.hasClass('selected');
+    		self.state.activeFilters[resultType] = selected;
+    		if (selected) {
+    			all_deselected = false;
+    		}
+    	});
+    	// if we select all types, drop the filter (select all is default). 
+    	if (all_deselected) {
+    		self.resetResultFilters();
+    	}
+    	
+    	// Topics
+    	self.resetTopics();
+    	self.$el.find('.topic-button.selected').each(function(){
+        	var $button = $(this);
+        	var bid = parseInt($button.attr('data-topic-id'));
+        	self.state.activeTopicIds.push(bid);
+        });
+    	// if we select all topics, drop the filter (select all is default). 
+    	// -1 because allTopics contains the empty choice
+    	if (self.state.activeTopicIds.length >= Object.keys(self.options.allTopics).length-1) {
+    		self.resetTopics();
+    	}
+        
+    },
+
+    // TODO REMOVE
     toggleFilter: function (resultType) {
         var activeFilters = this.state.activeFilters;
         activeFilters[resultType] = !activeFilters[resultType];
         this.state.activeFilters = activeFilters;
-        this.triggerDelayedSearch(true);
-    },
-
-    resetFilters: function () {
-        this.state.activeFilters = _(this.options.availableFilters).clone();
-        this.triggerDelayedSearch(true);
-    },
-    
-    showTopics: function () {
-        this.state.topicsVisible = true;
-    },
-    
-    toggleTopicFilter: function (topic_ids) {
-        this.state.activeTopicIds = topic_ids;
         this.triggerDelayedSearch(true);
     },
 
