@@ -29,10 +29,6 @@
     height: 100%;
     width: 100%;
 
-    .map-controls {
-        position: fixed;
-    }
-    
     /* For fullscreen mode, don't move the controls to compensate for the navbar */
     &.no-navbar{
         .map-controls {
@@ -57,10 +53,10 @@
 
 .tile-list {
 	background-color: @map-tile-background-color;
+	padding-top: 55px;
 	overflow-y: scroll;
 	overflow-x: hidden;
-	padding-top: 50px;
-    
+	
     /** Masonry */
 	.grid {
 	    margin-left: 20px;
@@ -377,128 +373,119 @@
         line-height: 40px;
     }
     
+    width: auto;
+    background-color: #FFF;
+    cursor: auto;
+    
+    .map-controls-search {
+        padding: 15px;
+        border-top: 2px solid #ebebeb;
+        border-bottom: 2px solid #ebebeb;
+        position: relative;
+        
+	    .q {
+	        width: 100%;
+	        font-size: 16px;
+	        padding: 0 30px 0 2px;
+	        
+	        color: #000;
+	        /** TODO: set placeholder color to grey */
+	        border: none;
+	        outline: none;
+	    }
+	
+	    .icon-search,
+	    .icon-loading,
+	    .icon-reset {
+	        position: absolute;
+		    padding: 15px;
+	        top: 0;
+	        right: 0;
+	        font-size: 24px;
+		    color: #bebebe;
+	    }
+	    
+	    .icon-loading {
+	        width: 15px;
+	        height: 15px;
+	        margin: 0;
+	        right: 30px;
+	    }
+	    .icon-reset {
+	        right: 30px;
+	    }
+	    
+	    .clickable-button {
+	        cursor: pointer;
+	        
+	        &:hover {
+	            color: #333;
+	        }
+	    }
+        
+    }
+    
+    .map-controls-filters {
+        padding: 15px;
+    }
+    
+    
     
     /** ********* old map controls from here *************/
     
-    
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-    z-index: 1;
-    width: 500px;
-    background-color: rgba(255,255,255,0.95);
-    padding: 15px;
-    cursor: auto;
-    
 
-    .q {
-        width: 100%;
-        padding: 5px;
-        color: #333;
-    }
 
-    .icon-search,
-    .icon-loading,
-    .icon-reset {
-        position: absolute;
-        font-size: 15px;
-        top: 7px;
-        right: 7px;
-    }
-
-    .icon-loading {
-        width: 15px;
-        height: 15px;
-        margin: 0;
-        right: 30px;
-    }
-    .icon-reset {
-        right: 30px;
-    }
-    
-    .clickable-button {
+    .check {
+        @check-height: 30px;
         cursor: pointer;
+        height: @check-height;
+        display: inline-block;
+
+        &.people .box  {
+            background-color: @map-people-color;
+        }
+
+        &.events .box  {
+            background-color: @map-events-color;
+        }
+
+        &.projects .box  {
+            background-color: @map-projects-color;
+        }
+
+        &.groups .box  {
+            background-color: @map-groups-color;
+        }
         
-        &:hover {
-            color: #333;
-        }
-    }
-
-    .line {
-        margin-bottom: 5px;
-
-        &.link,
-        &.button {
-            margin-top: 8px;
-            margin-bottom: 8px;
-            cursor: pointer;
-        }
-        
-        &.text-field {
-            position: relative;
-            margin-top: 10px;
-
-            .hidden {
-                display: none;
-            }
+        &.scroll .box  {
+            background-color: @map-scroll-color;
         }
 
-        &:last-child {
-            margin-bottom: 0;
-        }
-
-        .check {
-            @check-height: 30px;
-            cursor: pointer;
+        .box {
+            float: left;
+            width: @check-height;
             height: @check-height;
-            display: inline-block;
 
-            &.people .box  {
-                background-color: @map-people-color;
+            i {
+                color: white;
+                font-size: 18px;
+                margin-top: 6px;
+                margin-left: 6px;
             }
+        }
 
-            &.events .box  {
-                background-color: @map-events-color;
-            }
-
-            &.projects .box  {
-                background-color: @map-projects-color;
-            }
-
-            &.groups .box  {
-                background-color: @map-groups-color;
-            }
-            
-            &.scroll .box  {
-                background-color: @map-scroll-color;
-            }
-
-            .box {
-                float: left;
-                width: @check-height;
-                height: @check-height;
-
-                i {
-                    color: white;
-                    font-size: 18px;
-                    margin-top: 6px;
-                    margin-left: 6px;
-                }
-            }
-
-            .check-label {
-                margin-left: 30px;
-                padding-left: 10px;
-                display: block;
-                color: #333;
-                letter-spacing: 0.04em;
-                height: @check-height;
-                line-height: @check-height;
-                -webkit-user-select: none; /* Safari */        
-				-moz-user-select: none; /* Firefox */
-				-ms-user-select: none; /* IE10+/Edge */
-				user-select: none; /* Standard */
-            }
+        .check-label {
+            margin-left: 30px;
+            padding-left: 10px;
+            display: block;
+            color: #333;
+            letter-spacing: 0.04em;
+            height: @check-height;
+            line-height: @check-height;
+            -webkit-user-select: none; /* Safari */        
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none; /* IE10+/Edge */
+user-select: none; /* Standard */
         }
 
         a {
@@ -542,14 +529,14 @@
 }
 
 .map-scroll-controls {
-    position: absolute;
+    position: fixed;
     left: 10%;
     bottom: 60px;
     width: 30%;
 }
 
 .map-pagination-controls {
-    position: absolute;
+    position: fixed;
     left: 10%;
     bottom: 10px;
     width: 30%;

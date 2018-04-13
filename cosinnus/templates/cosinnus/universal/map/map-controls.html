@@ -1,133 +1,134 @@
 {% load i18n %}
-<div class="controls">
-	<div class="map-controls">
-		<form id="map-search">
-		  
-            <div class="line text-field">
-                <input type="text" class="q" name="q" placeholder="Suche" value="{{ q }}" autocomplete="off" />
-                <i class="fa fa-search clickable-button query-search-button icon-search{% if wantsToSearch %} hidden{% endif %}"></i>
-                {% if filtersActive %}
-                    <i class="fa fa-close clickable-button reset-all icon-reset"></i>
+<div class="map-controls">
+	 <div class="map-controls-search">
+            <input type="text" class="q" name="q" 
+placeholder="{# Translators: __INCLUDE_JS_PO__ #}
+{% trans "Search for Names, People and Places..." %}"
+                 value="{{ q }}" autocomplete="off" />
+            <i class="fa fa-search clickable-button query-search-button icon-search{% if wantsToSearch %} hidden{% endif %}"></i>
+            {% if filtersActive %}
+                <i class="fa fa-close clickable-button reset-all icon-reset"></i>
+            {% endif %}
+            <div class="icon-loading sk-double-bounce{% if not wantsToSearch %} hidden{% endif %}">
+                <div class="sk-child sk-double-bounce1"></div>
+                <div class="sk-child sk-double-bounce2"></div>
+            </div>
+     </div>
+	    
+	 <div class="map-controls-filters">
+        <div class="button-list">
+            {% for filter_type, available in availableFilters %}
+                {% if available %}
+                    <a class="rounded-button button-color-{{ filter_type }} result-filter-button {% if activeFilters[filter_type] %}selected{% endif %}" data-result-filter-type="{{ filter_type }}">
+                        <span class="rounded-button-inner">
+                            {% if filter_type == "people" %}
+                                <i class="fa fa-user"></i>
+                                {# Translators: __INCLUDE_JS_PO__ #}
+                                {% trans "People" %}
+                            {% elif filter_type == "events" %}
+                                <i class="fa fa-calendar"></i>
+                                {# Translators: __INCLUDE_JS_PO__ #}
+                                {% trans "Events" %}
+                            {% elif filter_type == "projects" %}
+                                <i class="fa fa-group"></i>
+                                {# Translators: __INCLUDE_JS_PO__ #}
+                                {% trans "Projects" %}
+                            {% elif filter_type == "groups" %}
+                                <i class="fa fa-sitemap"></i>
+                                {# Translators: __INCLUDE_JS_PO__ #}
+                                {% trans "Groups" %}
+                            {% endif %}
+                        </span>
+                    </a>
                 {% endif %}
-                <div class="icon-loading sk-double-bounce{% if not wantsToSearch %} hidden{% endif %}">
-                    <div class="sk-child sk-double-bounce1"></div>
-                    <div class="sk-child sk-double-bounce2"></div>
-                </div>
-            </div>
-		    
-            <div class="button-list">
-                {% for filter_type, available in availableFilters %}
-                    {% if available %}
-                        <a class="rounded-button button-color-{{ filter_type }} result-filter-button {% if activeFilters[filter_type] %}selected{% endif %}" data-result-filter-type="{{ filter_type }}">
-                            <span class="rounded-button-inner">
-                                {% if filter_type == "people" %}
-                                    <i class="fa fa-user"></i>
-                                    {# Translators: __INCLUDE_JS_PO__ #}
-                                    {% trans "People" %}
-                                {% elif filter_type == "events" %}
-                                    <i class="fa fa-calendar"></i>
-                                    {# Translators: __INCLUDE_JS_PO__ #}
-                                    {% trans "Events" %}
-                                {% elif filter_type == "projects" %}
-                                    <i class="fa fa-group"></i>
-                                    {# Translators: __INCLUDE_JS_PO__ #}
-                                    {% trans "Projects" %}
-                                {% elif filter_type == "groups" %}
-                                    <i class="fa fa-sitemap"></i>
-                                    {# Translators: __INCLUDE_JS_PO__ #}
-                                    {% trans "Groups" %}
-                                {% endif %}
-                            </span>
-                        </a>
-                    {% endif %}
-                {% endfor %}
-            </div>
-		
-	        <div class="button-list">
-	            {% for topic_id, topic in allTopics %}
-	                {% if topic_id != "" and topic %}
-		                <a class="rounded-button button-color-topic topic-button {% if activeTopicIds|length == 0 %}selected{% else %}{% for tid in activeTopicIds %}{% if tid == topic_id %}selected{% endif %}{% endfor %}{% endif %}" data-topic-id="{{ topic_id }}">
-			                <span class="rounded-button-inner">
-			                    {{ topic }}
-			                </span>
-			            </a>
-		            {% endif %}
-	            {% endfor %}
-	        </div>
-	        
-		    <div class="large-space"></div>
-		
-		    {% if searchHadErrors %}
-		      <div class="message">
-                {# Translators: __INCLUDE_JS_PO__ #}
-                {% trans 'Could not complete the search due to an error.' %}
-		      </div>
-		    {% endif %}
-		</form>
+            {% endfor %}
+        </div>
+	
+        <div class="button-list">
+            {% for topic_id, topic in allTopics %}
+                {% if topic_id != "" and topic %}
+	                <a class="rounded-button button-color-topic topic-button {% if activeTopicIds|length == 0 %}selected{% else %}{% for tid in activeTopicIds %}{% if tid == topic_id %}selected{% endif %}{% endfor %}{% endif %}" data-topic-id="{{ topic_id }}">
+		                <span class="rounded-button-inner">
+		                    {{ topic }}
+		                </span>
+		            </a>
+	            {% endif %}
+            {% endfor %}
+        </div>
+        
+	    <div class="large-space"></div>
+	
 	</div>
-	
-	{% if scrollControlsEnabled %}
-        <div class="map-scroll-controls">
-            <div class="line">
-                <div class="check scroll toggle-search-on-scroll">
-                    <div class="box">
-                        {% if searchOnScroll %}
-                            <i class="fa fa-check"></i>
-                        {% endif %}
-                    </div>
-                    <div class="check-label">
-                        {# Translators: __INCLUDE_JS_PO__ #}
-                        {% trans 'Search when moving the map' %}
-                    </div>
-                </div>
-                
-                {% if not searchOnScroll and resultsStale and not searching %}
-                    <div class="map-button stale-search-button">
-                       <span>
-                           {# Translators: __INCLUDE_JS_PO__ #}
-                           {% trans 'Search this area' %}
-                       </span>
-                    </div>
-                {% endif %}
-            </div>
-        </div>
-    {% endif %}
-    
-    {% if paginationControlsEnabled %}
-        <div class="map-pagination-controls">
-            <div class="line">
-                {% if page %}
-		            <span>
-		                {# Translators: __INCLUDE_JS_PO__ #}
-		                {% trans 'Showing results' %}
-		            </span>
-		            <span>
-		                {{ page.start }} - {{ page.end }}
-		            </span>
-		            {% if 1  %}
-		                <i>
-	                        ({{ page.total_count }})
-	                    </i>
-		            {% endif %}
-		            
-		            
-		            {% if page and page.has_next or page and page.has_previous %}
-		                <div class="map-button pagination-forward-button {% if not page.has_next %}disabled {% endif %}">
-		                    <i class="fa fa-chevron-right"></i>
-		                </div>
-		                <div class="map-button pagination-back-button {% if not page.has_previous %}disabled {% endif %}">
-		                    <i class="fa fa-chevron-left"></i>
-		                </div>
-	                {% endif %}
-                {% else %}
-                    <i>
-                        {# Translators: __INCLUDE_JS_PO__ #}
-                        {% trans 'No results found.' %}
-                    </i>
-                {% endif %}
-            </div>
-        </div>
-    {% endif %}
-	
-	
 </div>
+
+{% if scrollControlsEnabled %}
+    <div class="map-scroll-controls">
+        <div class="line">
+            <div class="check scroll toggle-search-on-scroll">
+                <div class="box">
+                    {% if searchOnScroll %}
+                        <i class="fa fa-check"></i>
+                    {% endif %}
+                </div>
+                <div class="check-label">
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans 'Search when moving the map' %}
+                </div>
+            </div>
+            
+            {% if not searchOnScroll and resultsStale and not searching %}
+                <div class="map-button stale-search-button">
+                   <span>
+                       {# Translators: __INCLUDE_JS_PO__ #}
+                       {% trans 'Search this area' %}
+                   </span>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
+
+{% if paginationControlsEnabled %}
+    <div class="map-pagination-controls">
+        <div class="line">
+            {% if page %}
+	            <span>
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans 'Showing results' %}
+	            </span>
+	            <span>
+	                {{ page.start }} - {{ page.end }}
+	            </span>
+	            {% if 1  %}
+	                <i>
+                        ({{ page.total_count }})
+                    </i>
+	            {% endif %}
+	            
+	            
+	            {% if page and page.has_next or page and page.has_previous %}
+	                <div class="map-button pagination-forward-button {% if not page.has_next %}disabled {% endif %}">
+	                    <i class="fa fa-chevron-right"></i>
+	                </div>
+	                <div class="map-button pagination-back-button {% if not page.has_previous %}disabled {% endif %}">
+	                    <i class="fa fa-chevron-left"></i>
+	                </div>
+                {% endif %}
+            {% else %}
+                <i>
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans 'No results found.' %}
+                </i>
+            {% endif %}
+            
+            
+        {% if searchHadErrors %}
+          <div class="message">
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans 'Could not complete the search due to an error.' %}
+          </div>
+        {% endif %}
+        
+        </div>
+    </div>
+{% endif %}

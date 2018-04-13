@@ -153,7 +153,7 @@ module.exports = ContentControlView.extend({
     	self.grid = self.$el.find('#tile-container-proto')
     		.clone()
     		.attr('id', 'tile-container')
-    		.appendTo(self.$el)
+    		.appendTo(self.$el.find('#tile-container-proto').parent())
     		.show();
     	// use a local grid variable because new threads might
     	// swap out self.grid before imagesloaded resolves

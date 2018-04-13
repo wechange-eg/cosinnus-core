@@ -142,7 +142,7 @@ var App = function App () {
         self.el = params.el;
         
         self.controlView = new ControlView({
-	        	elParent: params.el,
+	        	el: null, // will only be set if attached to tile-view
 	        	availableFilters: settings.availableFilters,
 	        	activeFilters: settings.activeFilters,
 	        	allTopics: topicsJson,
@@ -160,10 +160,6 @@ var App = function App () {
         util.log('app.js: TODO: really do this if check for controlsEnabled?')
         util.log(self.displayOptions)
         
-        if (self.displayOptions.showControls) {
-        	util.log('app.js: actually rendering controls')
-        	self.controlView.render();
-        }
         
         if (self.displayOptions.showMap) {
         	var mapView = new MapView({
@@ -189,6 +185,13 @@ var App = function App () {
         	self.controlView.collection
         	).render();
         	self.contentViews.push(tileListView);
+        	
+        	// render control-view controls inside tile-list-view
+            if (self.displayOptions.showControls) {
+            	util.log('app.js: actually rendering controls')
+            	self.controlView.setElement(tileListView.$el.find('.controls'));
+            	self.controlView.render();
+            }
         }
         
         var tileDetailView = new TileDetailView({
