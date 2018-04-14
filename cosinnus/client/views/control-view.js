@@ -2,6 +2,7 @@
 
 var ContentControlView = require('views/base/content-control-view');
 var ErrorView = require('views/error-view');
+var PaginationControlView = require('views/pagination-control-view');
 
 var ResultCollection = require('collections/result-collection');
 var Result = require('models/result');
@@ -53,6 +54,8 @@ module.exports = ContentControlView.extend({
     // the main ResultCollection of all displayed results
     collection: null,
     
+    paginationControlView: null,
+    
     // the currently hovered on and selected Result items
     selectedResult: null,
     hoveredResult: null,
@@ -72,7 +75,6 @@ module.exports = ContentControlView.extend({
     	
     	Backbone.mediator.subscribe('want:search', self.handleStartSearch, self);
     	Backbone.mediator.subscribe('end:search', self.handleEndSearch, self);
-    	Backbone.mediator.subscribe('change:controls', self.render, self);
     	Backbone.mediator.subscribe('app:ready', self.handleAppReady, self);
     	Backbone.mediator.subscribe('app:stale-results', self.handleStaleResults, self);
     	
@@ -82,13 +84,7 @@ module.exports = ContentControlView.extend({
     events: {
     	'click .result-filter-button': 'toggleFilterButton',
     	'click .topic-button': 'toggleFilterButton',
-    	
         'click .reset-all': 'resetAllClicked',
-        'click .toggle-search-on-scroll': 'toggleSearchOnScrollClicked',
-        'click .stale-search-button': 'staleSearchButtonClicked',
-        'click .pagination-forward-button': 'paginationForwardClicked',
-        'click .pagination-back-button': 'paginationBackClicked',
-        
         'click .query-search-button ': 'triggerQuerySearch',
         
         'keyup .q': 'handleTyping',
@@ -121,6 +117,7 @@ module.exports = ContentControlView.extend({
         this.state.q = '';
         this.resetTopics();
         this.resetResultFilters();
+        this.render();
     	this.triggerDelayedSearch(true);
     },
     
@@ -140,7 +137,7 @@ module.exports = ContentControlView.extend({
     	if (this.state.searchOnScroll == true && this.state.resultsStale) {
     		this.staleSearchButtonClicked(event);
     	} else {
-    		this.render();
+    		this.paginationControlView.render();
     	}
     },
     
@@ -150,7 +147,7 @@ module.exports = ContentControlView.extend({
     	// we cheat this in because we know the search will do it anyways in a millisecond,
     	// but without this it won't be in time for the render() of the controls
     	this.state.resultsStale = false;
-    	this.render();
+    	this.paginationControlView.render();
     },
     
     paginationForwardClicked: function (event) {
@@ -250,6 +247,23 @@ module.exports = ContentControlView.extend({
     	this.triggerSearchFromUrl();
     },
     
+    /** Executed *every time* after render */
+    afterRender: function () {
+    	var self = this;
+    	// Create the pagination control view if not exists
+    	if (!self.paginationControlView && self.App.tileListView) {
+    		self.paginationControlView = new PaginationControlView({
+    			model: null,
+    			el: self.App.tileListView.$el.find('.pagination-controls'),
+    			fullscreen: self.App.displayOptions.fullscreen,
+    			splitscreen: self.App.displayOptions.showMap && self.App.displayOptions.showTiles
+    		}, 
+    		self.App,
+    		self
+    		).render();
+    	}
+    },
+    
     /**
      * Let all content views parse the URL parameters they are interested in, and then start 
      * a fresh search.
@@ -294,7 +308,7 @@ module.exports = ContentControlView.extend({
     		} else {
     			// re-render controls so the manual search button will be enabled
     			if (!staleBefore) {
-    				this.render();
+    				this.paginationControlView.render();
     			}
     		}
     	}
@@ -381,12 +395,6 @@ module.exports = ContentControlView.extend({
 			todos.reset([]);
     	 */
     },
-
-    afterRender: function () {
-    	// nothing right now
-    },
-    
-    
     
     // public functions
     
@@ -496,18 +504,21 @@ module.exports = ContentControlView.extend({
 	            			}
 	            		});
 	            	}
-	            	
-	            	// restore the search textbox after the render so we don't throw the user out
-	            	var qdata = util.saveInputStatus(self.$el.find('.q'));
-	            	self.render();
-	            	util.restoreInputStatus(self.$el.find('.q'), qdata);
+	            	// refresh pagination controls
+	            	self.paginationControlView.render();
 	            }
 	            
 	            Backbone.mediator.publish('end:search');
 	        }
         });
-        		
-    		
+    },
+    
+    /** Unused, remove if not needed */
+    refreshSearchControls: function () {
+    	// restore the search textbox after the render so we don't throw the user out
+    	var qdata = util.saveInputStatus(self.$el.find('.q'));
+    	self.render();
+    	util.restoreInputStatus(self.$el.find('.q'), qdata);
     },
     
     // extended from content-control-view.js

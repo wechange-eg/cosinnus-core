@@ -54,8 +54,15 @@
 .tile-list {
 	background-color: @map-tile-background-color;
 	padding-top: 55px;
-	overflow-y: scroll;
-	overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+	
+	.tile-contents {
+	    flex-grow: 1;
+		overflow-y: scroll;
+		overflow-x: hidden;
+	}
+	
 	
     /** Masonry */
 	.grid {
@@ -283,6 +290,7 @@
     
 }
 
+
 .map-controls, .map-scroll-controls, .map-pagination-controls {
     
     .rounded-button {
@@ -378,15 +386,36 @@
     cursor: auto;
     
     .map-controls-search {
-        padding: 15px;
         border-top: 2px solid #ebebeb;
         border-bottom: 2px solid #ebebeb;
         position: relative;
+        display: flex;
+        flex-direction: row;
+        
+        .search-box {
+            padding: 15px;
+            flex-grow: 1;
+            &:after {
+	            content: " ";
+	            position: absolute;
+	            right: 54px;
+	            top: 10px;
+	            border-left: 2px solid #ebebeb;
+	            height: 34px;
+	        }
+        }
+        .filter-button-box {
+            width: 54px;
+		    font-size: 25px;
+		    padding: 10px;
+		    text-align: center;
+		    
+        }
         
 	    .q {
 	        width: 100%;
 	        font-size: 16px;
-	        padding: 0 30px 0 2px;
+	        padding-left: 39px;
 	        
 	        color: #000;
 	        /** TODO: set placeholder color to grey */
@@ -400,19 +429,22 @@
 	        position: absolute;
 		    padding: 15px;
 	        top: 0;
-	        right: 0;
-	        font-size: 24px;
+	        font-size: 25px;
 		    color: #bebebe;
 	    }
 	    
+	    .icon-search {
+	        left: 0;
+	    }
+	    
 	    .icon-loading {
-	        width: 15px;
-	        height: 15px;
-	        margin: 0;
-	        right: 30px;
+	        right: 54px;
+	        margin: 12px 10px;
+	        width: 25px;
+	        height: 25px;
 	    }
 	    .icon-reset {
-	        right: 30px;
+	        right: 54px;
 	    }
 	    
 	    .clickable-button {
@@ -528,17 +560,7 @@ user-select: none; /* Standard */
     }
 }
 
-.map-scroll-controls {
-    position: fixed;
-    left: 10%;
-    bottom: 60px;
-    width: 30%;
-}
-
-.map-pagination-controls {
-    position: fixed;
-    left: 10%;
-    bottom: 10px;
-    width: 30%;
+.map-scroll-controls, .map-pagination-controls {
+    padding: 15px;
 }
 

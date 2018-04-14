@@ -20,6 +20,7 @@ var App = function App () {
     // contains all views that can display Results
     self.contentViews = [];
     self.controlView = null;
+    self.tileListView = null;
 
     self.router = new Router();
     self.mediator = null;
@@ -185,6 +186,7 @@ var App = function App () {
         	self.controlView.collection
         	).render();
         	self.contentViews.push(tileListView);
+        	self.tileListView = tileListView;
         	
         	// render control-view controls inside tile-list-view
             if (self.displayOptions.showControls) {

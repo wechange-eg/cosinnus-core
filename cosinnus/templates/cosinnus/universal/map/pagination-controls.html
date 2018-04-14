@@ -1,0 +1,73 @@
+{% load i18n %}
+
+{% if scrollControlsEnabled %}
+    <div class="map-scroll-controls">
+        <div class="line">
+            <div class="check scroll toggle-search-on-scroll">
+                <div class="box">
+                    {% if searchOnScroll %}
+                        <i class="fa fa-check"></i>
+                    {% endif %}
+                </div>
+                <div class="check-label">
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans 'Search when moving the map' %}
+                </div>
+            </div>
+            
+            {% if not searchOnScroll and resultsStale and not searching %}
+                <div class="map-button stale-search-button">
+                   <span>
+                       {# Translators: __INCLUDE_JS_PO__ #}
+                       {% trans 'Search this area' %}
+                   </span>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
+
+{% if paginationControlsEnabled %}
+    <div class="map-pagination-controls">
+        <div class="line">
+            {% if page %}
+	            <span>
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans 'Showing results' %}
+	            </span>
+	            <span>
+	                {{ page.start }} - {{ page.end }}
+	            </span>
+	            {% if 1  %}
+	                <i>
+                        ({{ page.total_count }})
+                    </i>
+	            {% endif %}
+	            
+	            
+	            {% if page and page.has_next or page and page.has_previous %}
+	                <div class="map-button pagination-forward-button {% if not page.has_next %}disabled {% endif %}">
+	                    <i class="fa fa-chevron-right"></i>
+	                </div>
+	                <div class="map-button pagination-back-button {% if not page.has_previous %}disabled {% endif %}">
+	                    <i class="fa fa-chevron-left"></i>
+	                </div>
+                {% endif %}
+            {% else %}
+                <i>
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans 'No results found.' %}
+                </i>
+            {% endif %}
+            
+            
+        {% if searchHadErrors %}
+          <div class="message">
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans 'Could not complete the search due to an error.' %}
+          </div>
+        {% endif %}
+        
+        </div>
+    </div>
+{% endif %}
