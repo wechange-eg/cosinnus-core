@@ -4,13 +4,17 @@
 
 @map-button-color: #FFF;
 
-@map-topic-color: #bebebe;
+@map-topic-color: #aaa;
 
 @map-people-color: #e66661;
 @map-events-color: #b8c26e;
 @map-projects-color: #e69761;
 @map-groups-color: #92ae76;
 @map-ideas-color: #e7c76d;
+
+@map-clickable-icon-color: #bebebe;
+@map-clickable-icon-hover-color: #333;
+@map-clickable-icon-active-color: #4285F4;
 
 
 
@@ -35,6 +39,17 @@
             top: 18px;
         }
     } 
+    
+    &:not(.no-navbar) {
+        &:before {
+            content: " ";
+            background-color: #FFF;
+            width: 100%;
+		    height: 55px;
+            position: absolute;
+            z-index: 1;
+        }
+    }
 }
 .map-splitscreen {
 	width: 50%;
@@ -290,6 +305,9 @@
     
 }
 
+.controls {
+	z-index: 1;
+}
 
 .map-controls, .map-scroll-controls, .map-pagination-controls {
     
@@ -386,7 +404,6 @@
     cursor: auto;
     
     .map-controls-search {
-        border-top: 2px solid #ebebeb;
         border-bottom: 2px solid #ebebeb;
         position: relative;
         display: flex;
@@ -409,7 +426,7 @@
 		    font-size: 25px;
 		    padding: 10px;
 		    text-align: center;
-		    
+		    color: @map-clickable-icon-color;
         }
         
 	    .q {
@@ -418,9 +435,29 @@
 	        padding-left: 39px;
 	        
 	        color: #000;
-	        /** TODO: set placeholder color to grey */
 	        border: none;
 	        outline: none;
+	        
+	        &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+			    color:    @map-clickable-icon-color;
+			}
+			&:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+			   color:    @map-clickable-icon-color;
+			   opacity:  1;
+			}
+			&::-moz-placeholder { /* Mozilla Firefox 19+ */
+			   color:    @map-clickable-icon-color;
+			   opacity:  1;
+			}
+			&:-ms-input-placeholder { /* Internet Explorer 10-11 */
+			   color:    @map-clickable-icon-color;
+			}
+			&::-ms-input-placeholder { /* Microsoft Edge */
+			   color:    @map-clickable-icon-color;
+			}
+			&::placeholder { /* Most modern browsers support this now. */
+			   color:    @map-clickable-icon-color;
+			}
 	    }
 	
 	    .icon-search,
@@ -430,7 +467,7 @@
 		    padding: 15px;
 	        top: 0;
 	        font-size: 25px;
-		    color: #bebebe;
+		    color: @map-clickable-icon-color;
 	    }
 	    
 	    .icon-search {
@@ -449,9 +486,14 @@
 	    
 	    .clickable-button {
 	        cursor: pointer;
+	        color: @map-clickable-icon-color;
 	        
-	        &:hover {
-	            color: #333;
+	        &.active {
+	            color: @map-clickable-icon-active-color
+	        }
+	        
+	        &:hover, &.open {
+	            color: @map-clickable-icon-hover-color;
 	        }
 	    }
         

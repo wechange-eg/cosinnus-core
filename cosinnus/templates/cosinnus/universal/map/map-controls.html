@@ -6,21 +6,19 @@
 placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 {% trans "Search for Names, People and Places..." %}"
                  value="{{ q }}" autocomplete="off" />
-            <i class="fa fa-search clickable-button query-search-button icon-search{% if wantsToSearch %} hidden{% endif %}"></i>
-            {% if filtersActive %}
-                <i class="fa fa-close clickable-button reset-all icon-reset"></i>
-            {% endif %}
+            <i class="fa fa-search clickable-button query-search-button icon-search {% if wantsToSearch %}hidden{% endif %}"></i>
+            <i class="fa fa-close clickable-button reset-all icon-reset {% if not filtersActive and not q %}hidden{% endif %}"></i>
             <div class="icon-loading sk-double-bounce{% if not wantsToSearch %} hidden{% endif %}">
                 <div class="sk-child sk-double-bounce1"></div>
                 <div class="sk-child sk-double-bounce2"></div>
             </div>
          </div>
 	     <div class="filter-button-box">
-	         <i class="fa fa-question clickable-button icon-filters"></i>
+	         <i class="fa fa-sliders clickable-button icon-filters {% if filterPanelVisible %}open{% endif %}"></i>
 	     </div>
      </div>
 	    
-	 <div class="map-controls-filters">
+	 <div class="map-controls-filters" {% if not filterPanelVisible %}style="display: none;"{% endif %}>
         <div class="button-list">
             {% for filter_type, available in availableFilters %}
                 {% if available %}

@@ -39,7 +39,7 @@ module.exports = ContentControlView.extend({
     		// current query
     		q: '',
 			activeTopicIds: [],
-			filtersActive: false, // if true, *any* filter is active and we display a reset-filter button
+			filtersActive: false, // if true, any filter is active and we display a reset-filter button
 			searching: false,
 			searchHadErrors: false,
 			searchResultLimit: 20,
@@ -48,6 +48,7 @@ module.exports = ContentControlView.extend({
 			searchOnScroll: true,
 			resultsStale: false,
 			urlSelectedResultId: null,
+			filterPanelVisible: false,
     	}
     },
     
@@ -86,6 +87,8 @@ module.exports = ContentControlView.extend({
     	'click .topic-button': 'toggleFilterButton',
         'click .reset-all': 'resetAllClicked',
         'click .query-search-button ': 'triggerQuerySearch',
+        'click .icon-filters': 'toggleFilterPanel',
+        'focus .q': 'showFilterPanel',
         
         'keyup .q': 'handleTyping',
         'keydown .q': 'handleKeyDown',
@@ -109,6 +112,8 @@ module.exports = ContentControlView.extend({
         }
         // toggle the button
     	$button.toggleClass('selected');
+    	// mark search box as searchable
+    	this.markSearchBoxSearchable();
     },
     
     /** Reset all types of input filters and trigger a new search */
@@ -165,6 +170,38 @@ module.exports = ContentControlView.extend({
     		this.triggerDelayedSearch(true, true);
     	}
     },
+    
+    toggleFilterPanel: function (event) {
+    	if (event) {
+    		event.preventDefault();
+    	}
+    	if (this.filterPanelVisible) {
+    		this.hideFilterPanel(event);
+    	} else {
+    		this.showFilterPanel(event);
+    	}
+    },
+    
+    showFilterPanel: function (event) {
+    	if (event) {
+    		event.preventDefault();
+    	}
+    	this.filterPanelVisible = true;
+    	this.$el.find('.map-controls-filters').slideDown(250);
+    	this.$el.find('.icon-filters').addClass('open');
+    },
+    
+    hideFilterPanel: function (event) {
+    	if (event) {
+    		event.preventDefault();
+    	}
+    	this.filterPanelVisible = false;
+    	this.$el.find('.map-controls-filters').slideUp(250);
+    	this.$el.find('.icon-filters').removeClass('open');
+    	
+    },
+    
+    
 
     
     /**
@@ -193,10 +230,12 @@ module.exports = ContentControlView.extend({
     */
     
     handleTyping: function (event) {
+    	var self = this;
         if (util.isIgnorableKey(event)) {
             event.preventDefault();
             return false;
         }
+        self.markSearchBoxSearchable();
     },
     
     handleKeyDown: function (event) {
@@ -205,6 +244,10 @@ module.exports = ContentControlView.extend({
         	this.triggerQuerySearch();
             return false;
         }
+    },
+    
+    markSearchBoxSearchable: function () {
+    	this.$el.find('.icon-search').addClass('active');
     },
     
     /**
@@ -220,7 +263,6 @@ module.exports = ContentControlView.extend({
 
     handleStartSearch: function (event) {
     	this.$el.find('.icon-loading').removeClass('hidden');
-    	this.$el.find('.icon-reset').addClass('hidden');
         this.$el.find('.q').blur();
         // disable input in content views during search (up to the views to decide what to disable)
         _.each(this.App.contentViews, function(view){
@@ -231,7 +273,6 @@ module.exports = ContentControlView.extend({
 
     handleEndSearch: function (event) {
         this.$el.find('.icon-loading').addClass('hidden');
-    	this.$el.find('.icon-reset').removeClass('hidden');
         // enable input in content views during search (up to the views to decide what to enable)
         _.each(this.App.contentViews, function(view){
     		view.enableInput();
@@ -273,6 +314,7 @@ module.exports = ContentControlView.extend({
     	_.each(this.App.contentViews, function(view){
     		view.applyUrlSearchParameters(urlParams);
     	});
+    	this.render();
     	this.triggerDelayedSearch(true, true, noNewNavigateEvent);
     },
     
@@ -493,9 +535,9 @@ module.exports = ContentControlView.extend({
 	            self.state.searching = false;
 	            
 	            if (self.options.controlsEnabled) {
-	            	// determine if *any* filtering method is active (text, topics or result types)
+	            	// determine if any filtering method is active (topics or result types)
 	            	self.state.filtersActive = false;
-	            	if (self.state.q || self.state.activeTopicIds.length > 0) {
+	            	if (self.state.activeTopicIds.length > 0) {
 	            		self.state.filtersActive = true;
 	            	} else {
 	            		_.each(Object.keys(self.options.availableFilters), function(key) {
@@ -504,6 +546,8 @@ module.exports = ContentControlView.extend({
 	            			}
 	            		});
 	            	}
+	            	self.refreshSearchControls();
+	            	self.hideFilterPanel();
 	            	// refresh pagination controls
 	            	self.paginationControlView.render();
 	            }
@@ -513,13 +557,23 @@ module.exports = ContentControlView.extend({
         });
     },
     
+    refreshSearchControls: function () {
+    	var self = this;
+    	self.$el.find('.icon-filters').toggleClass('active', self.state.filtersActive);
+    	self.$el.find('.icon-reset').toggleClass('hidden', (!self.state.filtersActive && ! self.state.q));
+        self.$el.find('.icon-search').removeClass('active');
+    },
+    
     /** Unused, remove if not needed */
+    /** Old version: we do not re-render the search controls any more because of loss
+     *  of new search input for the user
     refreshSearchControls: function () {
     	// restore the search textbox after the render so we don't throw the user out
     	var qdata = util.saveInputStatus(self.$el.find('.q'));
     	self.render();
     	util.restoreInputStatus(self.$el.find('.q'), qdata);
     },
+    */
     
     // extended from content-control-view.js
     applyUrlSearchParameters: function (urlParams) {
