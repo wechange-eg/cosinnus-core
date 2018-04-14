@@ -13,6 +13,8 @@ module.exports = ContentControlView.extend({
 	
 	template: require('map/map-controls'),
 	
+	activeFiltersTemplate: require('map/map-controls-active-filters'), 
+	
 	// will be set to self.options during initialization
 	defaults: {
         availableFilters: {
@@ -40,6 +42,8 @@ module.exports = ContentControlView.extend({
     		q: '',
 			activeTopicIds: [],
 			filtersActive: false, // if true, any filter is active and we display a reset-filter button
+			typeFiltersActive: false, // a result type filter is active
+			topicFiltersActive: false, // a topic filter is active
 			searching: false,
 			searchHadErrors: false,
 			searchResultLimit: 20,
@@ -89,6 +93,10 @@ module.exports = ContentControlView.extend({
         'click .query-search-button ': 'triggerQuerySearch',
         'click .icon-filters': 'toggleFilterPanel',
         'focus .q': 'showFilterPanel',
+        'click .reset-type-filters': 'resetTypeFiltersClicked',
+        'click .reset-topic-filters': 'resetTopicFiltersClicked',
+        'click .reset-q': 'resetQClicked',
+        'click .active-filters': 'showFilterPanel',
         
         'keyup .q': 'handleTyping',
         'keydown .q': 'handleKeyDown',
@@ -121,7 +129,7 @@ module.exports = ContentControlView.extend({
         event.preventDefault();
         this.state.q = '';
         this.resetTopics();
-        this.resetResultFilters();
+        this.resetTypeFilters();
         this.render();
     	this.triggerDelayedSearch(true);
     },
@@ -132,8 +140,29 @@ module.exports = ContentControlView.extend({
     },
     
     /** Internal state reset of filtered result types */
-    resetResultFilters: function () {
+    resetTypeFilters: function () {
     	this.state.activeFilters = _(this.options.availableFilters).clone();
+    },
+
+    resetTypeFiltersClicked: function (event) {
+    	event.preventDefault();
+        this.resetTypeFilters();
+        this.render();
+    	this.triggerDelayedSearch(true);
+    },
+
+    resetTopicFiltersClicked: function (event) {
+    	event.preventDefault();
+        this.resetTopics();
+        this.render();
+    	this.triggerDelayedSearch(true);
+    },
+
+    resetQClicked: function (event) {
+    	event.preventDefault();
+        this.state.q = '';
+        this.render();
+    	this.triggerDelayedSearch(true);
     },
     
     toggleSearchOnScrollClicked: function (event) {
@@ -537,17 +566,22 @@ module.exports = ContentControlView.extend({
 	            if (self.options.controlsEnabled) {
 	            	// determine if any filtering method is active (topics or result types)
 	            	self.state.filtersActive = false;
+	            	self.state.topicFiltersActive = false;
+	            	self.state.typeFiltersActive = false;
+	            	
 	            	if (self.state.activeTopicIds.length > 0) {
 	            		self.state.filtersActive = true;
-	            	} else {
-	            		_.each(Object.keys(self.options.availableFilters), function(key) {
-	            			if (self.options.availableFilters[key] != self.state.activeFilters[key]) {
-	            				self.state.filtersActive = true;
-	            			}
-	            		});
+	            		self.state.topicFiltersActive = true;
 	            	}
+            		_.each(Object.keys(self.options.availableFilters), function(key) {
+            			if (self.options.availableFilters[key] != self.state.activeFilters[key]) {
+            				self.state.filtersActive = true;
+            				self.state.typeFiltersActive = true;
+            			}
+            		});
 	            	self.refreshSearchControls();
 	            	self.hideFilterPanel();
+	            	self.renderActiveFilters();
 	            	// refresh pagination controls
 	            	self.paginationControlView.render();
 	            }
@@ -562,6 +596,16 @@ module.exports = ContentControlView.extend({
     	self.$el.find('.icon-filters').toggleClass('active', self.state.filtersActive);
     	self.$el.find('.icon-reset').toggleClass('hidden', (!self.state.filtersActive && ! self.state.q));
         self.$el.find('.icon-search').removeClass('active');
+    },
+    
+    renderActiveFilters: function () {
+    	if (this.state.filtersActive || this.state.q) {
+    		var data = this.getTemplateData();
+    		var rendered = this.activeFiltersTemplate.render(data);
+    		this.$el.find('.map-controls-active-filters').html(rendered).show();
+    	} else {
+    		this.$el.find('.map-controls-active-filters').hide().empty();
+    	}
     },
     
     /** Unused, remove if not needed */

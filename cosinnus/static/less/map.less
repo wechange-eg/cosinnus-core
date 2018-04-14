@@ -1,10 +1,10 @@
-@map-tile-background-color: #85c1ff;
+@map-tile-background-color: #FFF;
 
 @map-scroll-color: #DDDDDD;
 
 @map-button-color: #FFF;
 
-@map-topic-color: #aaa;
+@map-topic-color: #bebebe;
 
 @map-people-color: #e66661;
 @map-events-color: #b8c26e;
@@ -12,7 +12,7 @@
 @map-groups-color: #92ae76;
 @map-ideas-color: #e7c76d;
 
-@map-clickable-icon-color: #bebebe;
+@map-clickable-icon-color: #aaa;
 @map-clickable-icon-hover-color: #333;
 @map-clickable-icon-active-color: #4285F4;
 
@@ -50,6 +50,27 @@
             z-index: 1;
         }
     }
+    
+    .caps {
+        text-transform: capitalize;
+    }
+    
+    .apply-color-people {
+        color: @map-people-color;
+    }
+    .apply-color-events {
+        color: @map-events-color;
+    }
+    .apply-color-projects {
+        color: @map-projects-color;
+    }
+    .apply-color-groups {
+        color: @map-groups-color;
+    }
+    .apply-color-ideas {
+        color: @map-ideas-color;
+    }
+    
 }
 .map-splitscreen {
 	width: 50%;
@@ -311,6 +332,10 @@
 
 .map-controls, .map-scroll-controls, .map-pagination-controls {
     
+    width: auto;
+    background-color: #FFF;
+    cursor: auto;
+    
     .rounded-button {
 	    display: inline-block;
 	    cursor: pointer;
@@ -392,6 +417,17 @@
             color: @map-button-color;
             background-color: @map-groups-color;
         }
+        
+        /** Ideas */
+        &.button-color-ideas {
+            color: @map-ideas-color;
+            background-color: @map-button-color;
+            border: 1px solid @map-ideas-color;
+        }
+        &.button-color-ideas.selected {
+            color: @map-button-color;
+            background-color: @map-ideas-color;
+        }
 	    
     }
     
@@ -399,9 +435,6 @@
         line-height: 40px;
     }
     
-    width: auto;
-    background-color: #FFF;
-    cursor: auto;
     
     .map-controls-search {
         border-bottom: 2px solid #ebebeb;
@@ -484,21 +517,76 @@
 	        right: 54px;
 	    }
 	    
-	    .clickable-button {
-	        cursor: pointer;
-	        color: @map-clickable-icon-color;
-	        
-	        &.active {
-	            color: @map-clickable-icon-active-color
-	        }
-	        
-	        &:hover, &.open {
-	            color: @map-clickable-icon-hover-color;
-	        }
-	    }
-        
     }
     
+    .clickable-button {
+        cursor: pointer;
+        color: @map-clickable-icon-color;
+        
+        &.active {
+            color: @map-clickable-icon-active-color
+        }
+        
+        &:hover, &.open {
+            color: @map-clickable-icon-hover-color;
+        }
+    }
+    
+    .map-controls-active-filters {
+        min-height: 54px;
+        padding: 10px;
+        line-height: 32px;
+        border-bottom: 1px solid #ebebeb;
+    
+        .active-filters {
+            display: inline-block;
+            cursor: pointer;
+	        
+	        height: 34px;
+            padding: 0 0 5px 10px;
+	        font-size: 14px;
+	        
+	        border: 1px solid @map-clickable-icon-color;
+	        border-radius: 16px;
+	        
+	        .active-filters-inner {
+	            vertical-align: bottom;
+	            display: inline-block;
+	            max-width: 150px;
+	            overflow: hidden;
+	            white-space: nowrap;
+	            text-overflow: ellipsis;
+	            
+	            -webkit-user-select: none; /* Safari */        
+	            -moz-user-select: none; /* Firefox */
+	            -ms-user-select: none; /* IE10+/Edge */
+	            user-select: none; /* Standard */
+	            
+	            i {
+	                margin-right: 5px;
+	            }
+	        }
+	        
+	        i.clickable-button {
+                padding: 5px 10px 5px 5px;
+            }
+        }
+        
+        .active-filters-type {
+            .active-filters-inner {
+                float: left;
+                font-size: 18px;
+            }
+        }
+        
+        .active-filters-q {
+            .active-filters-inner {
+                font-weight: bold;
+                font-size: 18px;
+            }
+        }
+    }
+
     .map-controls-filters {
         padding: 15px;
     }
