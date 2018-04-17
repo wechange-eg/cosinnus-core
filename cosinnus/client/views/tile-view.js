@@ -33,6 +33,18 @@ module.exports = BaseView.extend({
     	});
     },
     
+    /** Extend the template data by the controlView's options and state */
+    getTemplateData: function () {
+    	var self = this;
+    	var data = BaseView.prototype.getTemplateData.call(self);
+    	data['controlView'] = _.extend(
+    		{},
+    		self.App.controlView.options,
+    		self.App.controlView.state
+    	);
+    	return data;
+    },
+    
     /**
      * Called when the .hovered property of the Result model was changed.
      * We actually do the display and re-render here, because

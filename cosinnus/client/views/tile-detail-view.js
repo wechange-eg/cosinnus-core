@@ -29,6 +29,18 @@ module.exports = BaseView.extend({
     	Backbone.mediator.subscribe('result:reselected', self.onResultSelected, self);
     	Backbone.mediator.subscribe('result:unselected', self.onResultUnselected, self);
     },
+
+    /** Extend the template data by the controlView's options and state */
+    getTemplateData: function () {
+    	var self = this;
+    	var data = BaseView.prototype.getTemplateData.call(self);
+    	data['controlView'] = _.extend(
+    		{},
+    		self.App.controlView.options,
+    		self.App.controlView.state
+    	);
+    	return data;
+    },
     
     // a new result is being selected
     onResultSelected: function (result) {

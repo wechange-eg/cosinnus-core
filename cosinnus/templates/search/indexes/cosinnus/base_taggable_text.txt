@@ -1,3 +1,4 @@
 {% load cosinnus_tags %}
 {{ object.title }}
 {% if object.creator %}{{ object.creator|full_name }}{% endif %}
+{% include "search/indexes/cosinnus/_media_tag_text.txt" %}

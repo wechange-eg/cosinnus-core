@@ -41,6 +41,7 @@ module.exports = BaseView.extend({
     	var self = this;
     	var data = BaseView.prototype.getTemplateData.call(self);
     	data = _.extend(
+    		data,
     		self.controlView.options,
     		self.controlView.state
     	);

@@ -195,7 +195,7 @@ class DocumentBoostMixin(object):
         data['local_boost'] = model_boost * (global_boost + 1.0)
         # this tells haystack to boost the ._score
         data['boost'] = data['local_boost']
-        if settings.DEBUG:
+        if False and settings.DEBUG:
             print ">> local_boost is", data['boost'], " from model*global ", model_boost, '*', \
                 global_boost+1.0, data['django_ct'], getattr(obj, 'name', getattr(obj, 'title', None)), \
                 getattr(obj, 'group', None) and ( 'group is: ' + obj.group.name) or ''

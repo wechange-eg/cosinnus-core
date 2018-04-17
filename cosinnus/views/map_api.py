@@ -114,7 +114,7 @@ def _collect_parameters(param_dict, parameter_list):
 class MapResult(dict):
     """ A single result for the search of the map, enforcing required fields """
 
-    def __init__(self, short_id, result_type, lat, lon, address, title, url=None, imageUrl=None, description=None, relevance=0, *args, **kwargs):
+    def __init__(self, short_id, result_type, lat, lon, address, title, url=None, imageUrl=None, description=None, relevance=0, topics=[], *args, **kwargs):
         self['id'] = short_id
         self['type'] = result_type
         self['lat'] = lat
@@ -125,6 +125,7 @@ class MapResult(dict):
         self['imageUrl'] = imageUrl
         self['description'] = description
         self['relevance'] = relevance
+        self['topics'] = topics
         return super(MapResult, self).__init__(*args, **kwargs)
 
 
@@ -143,7 +144,8 @@ class HaystackMapResult(MapResult):
             result.url,
             result.marker_image_url,
             textfield(result.description),
-            result.score
+            result.score,
+            result.mt_topics
         )
 
 

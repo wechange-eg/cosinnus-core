@@ -1,3 +1,3 @@
 {% load cosinnus_tags %}
 {{ object.user|full_name }}
-{{ object.user.email }}
+{% include "search/indexes/cosinnus/_media_tag_text.txt" %}

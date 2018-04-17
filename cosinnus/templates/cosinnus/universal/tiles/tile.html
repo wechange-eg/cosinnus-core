@@ -6,5 +6,13 @@
 	    <div class="address">{{address}}</div>
 	    <h2 class="address">{{relevance}}</h2>
         <div class="description">{{description|safe}}</div>
+        {% if topics %}
+            <div class="topics">
+                Topics: 
+                {% for topic in topics %}
+                    {{ controlView.allTopics[topic] }}{% if not loop.last %},{% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
 </div>

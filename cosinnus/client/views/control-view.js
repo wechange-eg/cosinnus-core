@@ -19,14 +19,14 @@ module.exports = ContentControlView.extend({
 	defaults: {
         availableFilters: {
             people: true,
-            events: true,
             projects: true,
+            events: true,
             groups: true
         },
         activeFilters: {
             people: true,
-            events: true,
             projects: true,
+            events: true,
             groups: true
         },
         allTopics: {},  // the dict of all searchable topics

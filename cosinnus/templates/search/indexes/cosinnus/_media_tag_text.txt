@@ -1,13 +1,3 @@
-{% comment %}
-This used to add some media tag information (most of it broken) to the document text, but we decided to take it out
-because if was too spammy.
-
-{% if object.media_tag %}
-a {{ object.media_tag.location }}
-b {{ object.media_tag.location_lat }},{{ object.media_tag.location_lon }}
-c {{ object.media_tag.place }}
-d {{ object.media_tag.approach }}
-e {{ object.media_tag.topics }}
-f {{ object.media_tag.persons }}
-{% endif %}
-{% endcomment %}
+{% load cosinnus_tags %}
+{% if object.media_tag and object.media_tag.location %}{{ object.media_tag.location }}{% endif %}
+{% if object.media_tag and object.media_tag.topics %}TOPS1: {{ object.media_tag.get_all_language_topics_rendered }}{% endif %}
