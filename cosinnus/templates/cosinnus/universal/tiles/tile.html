@@ -6,7 +6,7 @@
 	    <div class="address">{{address}}</div>
 	    <h2 class="address">{{relevance}}</h2>
         <div class="description">{{description|safe}}</div>
-        {% if topics %}
+        {% if topics|length > 0 %}
             <div class="topics">
                 Topics: 
                 {% for topic in topics %}
