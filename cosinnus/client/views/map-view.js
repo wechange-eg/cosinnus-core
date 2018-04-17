@@ -183,6 +183,13 @@ module.exports = ContentControlView.extend({
 
     markerAdd: function(result) {
     	var self = this;
+    	
+    	if (!result.get('lat') || !result.get('lon')) {
+    		// if the result has no location, the map cannot handle it. 
+    		util.log('Cancelled adding a marker for a result with no location.')
+    		return;
+    	}
+    	
     	// adding a marker that is already there? impossibru! but best be sure.
     	if (result.id in this.markers) {
     		this.markerRemove(result);

@@ -46,6 +46,7 @@ MAP_PARAMETERS = {
     'page': 0,
     'topics': None,
     'item': None,
+    'ignore_location': False, # if True, we completely ignore locs, and even return results without location
 }
 
 
@@ -169,7 +170,8 @@ def map_search_endpoint(request, filter_group_id=None):
     model_list = [klass for klass,param_name in SEARCH_MODEL_NAMES.items() if params[param_name]]
     sqs = SearchQuerySet().models(*model_list)
     # filter for map bounds (Points are constructed ith (lon, lat)!!!)
-    sqs = sqs.within('location', Point(params['sw_lon'], params['sw_lat']), Point(params['ne_lon'], params['ne_lat']))
+    if not params['ignore_location']:
+        sqs = sqs.within('location', Point(params['sw_lon'], params['sw_lat']), Point(params['ne_lon'], params['ne_lat']))
     # filter for search terms
     if query:
         sqs = sqs.auto_query(query)

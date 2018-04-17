@@ -34,9 +34,10 @@
 			            {% trans "Topics" %}:
 			        </span>
 			        {% for topic_id in activeTopicIds %}
+			            {% set outer_loop = loop %}
 			            {% for tid, topic in allTopics %}
 			                {% if topic_id == tid %}
-			                    <span>{{ topic }}{% if not forloop.last %}, {% endif %}</span>
+			                    <span>{{ topic }}{% if not outer_loop.last %}, {% endif %}</span>
 			                {% endif %}
 			            {% endfor %}
 			        {% endfor %}
