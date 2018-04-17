@@ -75,8 +75,26 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
             {% trans "Where" %}
         </h1>
         
-        <div class="">
-            [placeholder for "restrict search to map area"]
+        <table class="small-space">
+            <tr>
+	            <td class="onoffswitch-text-label">
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "In map area" %}
+	            </td>
+	            <td>
+		            <div class="onoffswitch">
+					    <input type="checkbox" name="onoffswitch-ignore-location" class="onoffswitch-checkbox check-ignore-location" id="check-ignore-location" {% if not ignoreLocation %}checked{% endif %}>
+					    <label class="onoffswitch-label" for="check-ignore-location">
+					        <span class="onoffswitch-inner"></span>
+					        <span class="onoffswitch-switch"></span>
+					    </label>
+					</div>
+			    </td>
+		    </tr>
+        </table>
+        <div class="pale-color">
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "If active, searching will be restricted to the visible map area." %}
         </div>
         
 	    <div class="spacer"></div>

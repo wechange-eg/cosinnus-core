@@ -44,6 +44,7 @@ module.exports = ContentControlView.extend({
 			filtersActive: false, // if true, any filter is active and we display a reset-filter button
 			typeFiltersActive: false, // a result type filter is active
 			topicFiltersActive: false, // a topic filter is active
+			ignoreLocation: false, // if true, search ignores all geo-loc and even shows results without tagged location
 			searching: false,
 			searchHadErrors: false,
 			searchResultLimit: 20,
@@ -98,6 +99,8 @@ module.exports = ContentControlView.extend({
         'click .reset-q': 'resetQClicked',
         'click .reset-type-and-topic-filters': 'resetAllClicked', // use this to only reset the filters box: 'resetTypeAndTopicFiltersClicked',
         'click .active-filters': 'showFilterPanel',
+        'click .check-ignore-location': 'markSearchBoxSearchable',
+        'click .onoffswitch-text-label': 'onOffSwitchLabelClicked',
         
         'keyup .q': 'handleTyping',
         'keydown .q': 'handleKeyDown',
@@ -213,6 +216,10 @@ module.exports = ContentControlView.extend({
     	}
     },
     
+    onOffSwitchLabelClicked: function (event) {
+    	$(event.target).next().find('input[type="checkbox"]').click()
+    },
+    
     toggleFilterPanel: function (event) {
     	if (event) {
     		event.preventDefault();
@@ -300,6 +307,7 @@ module.exports = ContentControlView.extend({
         var query = this.$el.find('.q').val();
 		this.state.q = query;
 		this.applyFilters();
+		this.state.ignoreLocation = !this.$el.find('.check-ignore-location').is(':checked');
 		this.triggerDelayedSearch(true);
     },
     
@@ -583,6 +591,9 @@ module.exports = ContentControlView.extend({
 	            	self.state.topicFiltersActive = false;
 	            	self.state.typeFiltersActive = false;
 	            	
+	            	if (self.state.ignoreLocation) {
+	            		self.state.filtersActive = true;
+	            	}
 	            	if (self.state.activeTopicIds.length > 0) {
 	            		self.state.filtersActive = true;
 	            		self.state.topicFiltersActive = true;
@@ -644,6 +655,7 @@ module.exports = ContentControlView.extend({
                 groups: util.ifundef(urlParams.groups, this.options.activeFilters.groups)
             },
             q: util.ifundef(urlParams.q, this.state.q),
+            ignoreLocation: util.ifundef(urlParams.ignore_location, this.state.ignoreLocation),
             searchResultLimit: util.ifundef(urlParams.limits, this.state.searchResultLimit),
             activeTopicIds: util.ifundef(urlParams.topics, this.state.activeTopicIds),
             pageIndex: util.ifundef(urlParams.page, this.state.pageIndex),
@@ -677,6 +689,11 @@ module.exports = ContentControlView.extend({
         } else if (this.state.urlSelectedResultId) {
         	_.extend(searchParams, {
         		item: this.state.urlSelectedResultId
+        	});
+        }
+        if (this.state.ignoreLocation) {
+        	_.extend(searchParams, {
+        		ignore_location: 1
         	});
         }
         if (forAPI) {
