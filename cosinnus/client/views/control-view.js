@@ -96,6 +96,7 @@ module.exports = ContentControlView.extend({
         'click .reset-type-filters': 'resetTypeFiltersClicked',
         'click .reset-topic-filters': 'resetTopicFiltersClicked',
         'click .reset-q': 'resetQClicked',
+        'click .reset-type-and-topic-filters': 'resetAllClicked', // use this to only reset the filters box: 'resetTypeAndTopicFiltersClicked',
         'click .active-filters': 'showFilterPanel',
         
         'keyup .q': 'handleTyping',
@@ -146,6 +147,7 @@ module.exports = ContentControlView.extend({
 
     resetTypeFiltersClicked: function (event) {
     	event.preventDefault();
+    	event.stopPropagation();
         this.resetTypeFilters();
         this.render();
     	this.triggerDelayedSearch(true);
@@ -153,6 +155,7 @@ module.exports = ContentControlView.extend({
 
     resetTopicFiltersClicked: function (event) {
     	event.preventDefault();
+    	event.stopPropagation();
         this.resetTopics();
         this.render();
     	this.triggerDelayedSearch(true);
@@ -160,7 +163,17 @@ module.exports = ContentControlView.extend({
 
     resetQClicked: function (event) {
     	event.preventDefault();
+    	event.stopPropagation();
         this.state.q = '';
+        this.render();
+    	this.triggerDelayedSearch(true);
+    },
+    
+    resetTypeAndTopicFiltersClicked: function (event) {
+    	event.preventDefault();
+    	event.stopPropagation();
+        this.resetTypeFilters();
+        this.resetTopics();
         this.render();
     	this.triggerDelayedSearch(true);
     },
@@ -277,6 +290,7 @@ module.exports = ContentControlView.extend({
     
     markSearchBoxSearchable: function () {
     	this.$el.find('.icon-search').addClass('active');
+    	this.$el.find('.button-search').removeClass('disabled');
     },
     
     /**
@@ -594,8 +608,9 @@ module.exports = ContentControlView.extend({
     refreshSearchControls: function () {
     	var self = this;
     	self.$el.find('.icon-filters').toggleClass('active', self.state.filtersActive);
-    	self.$el.find('.icon-reset').toggleClass('hidden', (!self.state.filtersActive && ! self.state.q));
-        self.$el.find('.icon-search').removeClass('active');
+    	self.$el.find('.icon-reset').toggleClass('hidden', (!self.state.filtersActive && !self.state.q));
+    	self.$el.find('.icon-search').removeClass('active');
+    	self.$el.find('.button-search').addClass('disabled');
     },
     
     renderActiveFilters: function () {

@@ -14,7 +14,11 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
             </div>
          </div>
 	     <div class="filter-button-box">
-	         <i class="fa fa-sliders clickable-button icon-filters {% if filterPanelVisible %}open{% endif %}"></i>
+	         <span class="clickable-button icon-filters {% if filterPanelVisible %}open{% endif %}">
+	             <i class="fa fa-sliders visible-default"></i>
+                 <i class="fa fa-chevron-down visible-open"></i>
+                 <i class="fa fa-chevron-up visible-open-hover"></i>
+	         </span>
 	     </div>
      </div>
      
@@ -48,6 +52,11 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
                 {% endif %}
             {% endfor %}
         </div>
+        
+        <h1>
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Topics" %}
+        </h1>
 	
         <div class="button-list">
             {% for topic_id, topic in allTopics %}
@@ -61,7 +70,32 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
             {% endfor %}
         </div>
         
-	    <div class="large-space"></div>
+        <h1>
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Where" %}
+        </h1>
+        
+        <div class="">
+            [placeholder for "restrict search to map area"]
+        </div>
+        
+	    <div class="spacer"></div>
+	    
+	    <div class="button-list">
+	        <a class="rounded-button button-color-action button-search query-search-button disabled">
+                <span class="rounded-button-inner">
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Apply Filters" %}
+                </span>
+            </a>
+            
+            <a class="rounded-button button-color-action reset-type-and-topic-filters">
+                <span class="rounded-button-inner">
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Clear Filters" %}
+                </span>
+            </a>
+	    </div>
 	
 	</div>
 </div>

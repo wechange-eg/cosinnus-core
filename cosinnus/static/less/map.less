@@ -3,6 +3,7 @@
 @map-scroll-color: #DDDDDD;
 
 @map-button-color: #FFF;
+@map-action-button-color: #34b4b5;
 
 @map-topic-color: #bebebe;
 
@@ -52,7 +53,7 @@
     }
     
     .caps {
-        text-transform: capitalize;
+        text-transform: uppercase;
     }
     
     .apply-color-people {
@@ -102,7 +103,6 @@
 	
     /** Masonry */
 	.grid {
-	    margin-left: 20px;
         min-height: 100%;
         background-color: @map-tile-background-color;
 	}
@@ -121,8 +121,8 @@
 	    height: 100%;
 	    width: 100%;
 	    z-index: 2;
-	    background-color: #FFF;
-	    opacity: 0.4;
+	    background-color: #000;
+	    opacity: 0.3;
 	    
  	    -webkit-touch-callout: none; /* iOS Safari */
 		-webkit-user-select: none;   /* Chrome/Safari/Opera */
@@ -362,6 +362,18 @@
 			-moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.35);
 			box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.35);
 	    }
+	    &.disabled {
+	        pointer-events: none;
+            cursor: default;
+            opacity: 0.3;
+	    }
+	    
+	    /** Action buttons */
+        &.button-color-action {
+            color: @map-button-color;
+            background-color: @map-action-button-color;
+            border: 1px solid @map-action-button-color;
+        }
 	    
         /** Topics */
 	    &.button-color-topic {
@@ -434,7 +446,15 @@
     .button-list {
         line-height: 40px;
     }
-    
+    .spacer {
+        margin-bottom: 30px;
+    }
+    h1 {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #333;
+        text-transform: uppercase;
+    }
     
     .map-controls-search {
         border-bottom: 2px solid #ebebeb;
@@ -457,9 +477,25 @@
         .filter-button-box {
             width: 54px;
 		    font-size: 25px;
-		    padding: 10px;
 		    text-align: center;
 		    color: @map-clickable-icon-color;
+		    
+		    .icon-filters {
+		        i {
+		            display: none;
+				    padding: 15px;
+		        }
+		        &:not(.open) .visible-default {
+		            display: inline-block;
+		        }
+		        &.open:not(:hover) .visible-open {
+                    display: inline-block; 
+                }
+                &.open:hover .visible-open-hover {
+                    display: inline-block;
+                }
+		        
+		    }
         }
         
 	    .q {
@@ -527,14 +563,14 @@
             color: @map-clickable-icon-active-color
         }
         
-        &:hover, &.open {
+        &:hover {
             color: @map-clickable-icon-hover-color;
         }
     }
     
-    .map-controls-active-filters {
+    .map-controls-active-filter-frame {
         min-height: 54px;
-        padding: 10px;
+        padding: 10px 15px;
         line-height: 32px;
         border-bottom: 1px solid #ebebeb;
     

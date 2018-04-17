@@ -56,7 +56,7 @@ module.exports = BaseView.extend({
 
     parseUrl: function (url) {
         if (url.indexOf('?') >= 0) {
-            var json = JSON.parse('{"' + decodeURI(url.replace(/\%2C/g, ',').replace(/[^?]*\?/, '').replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
+            var json = JSON.parse('{"' + decodeURI(url.replace(/\%2C/g, ',').replace(/\+/g,' ').replace(/[^?]*\?/, '').replace(/&/g, "\",\"").replace(/=/g,"\":\"")) + '"}')
         } else {
             var json = {};
         }
