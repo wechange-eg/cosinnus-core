@@ -77,13 +77,39 @@ module.exports = ContentControlView.extend({
     	// the resulting area is actually sent as coords to the search API 
     	latLngBuffer: 0.01,
     	
+    	mapMarkerStaticPath: '/static/images/map-markers/',
+    	
     	// correcspond to the model values of Result.type
-    	resultColours: {
-    		people: 'red',
-    		events: 'green',
-    		projects: 'blue',
-    		groups: 'yellow'
+    	resultMarkerImages: {
+    		people: 'marker-people.png',
+    		events: 'marker-events.png',
+    		projects: 'marker-projects.png',
+    		groups: 'marker-groups.png',
+    		ideas: 'marker-ideas.png',
+    		peopleLarge: 'marker-people-large.png',
+    		eventsLarge: 'marker-events-large.png',
+    		projectsLarge: 'marker-projects-large.png',
+    		groupsLarge: 'marker-groups-large.png',
+    		ideasLarge: 'marker-ideas-large.png'
     	},
+    	
+    	resultMarkerSizes: {
+    		width: 17,
+    		height: 28,
+    		widthLarge: 34,
+    		heightLarge: 56,
+    	},
+    	
+    	// calculated dynamically depending on zoom, in `handleViewportChange()`
+    	resultMarkerClusterDistance: {
+    		x: 0,
+    		y: 0,
+    		perPxX: 0,
+    		perPxY: 0,
+    	},
+    	
+    	MARKER_OFFSET_PER_CLUSTER_LEVEL: 10,
+    	MARKER_NUMBER_OF_LARGE_MARKERS: 8,
     	
         zoom: 7,
         location: [
@@ -180,8 +206,15 @@ module.exports = ContentControlView.extend({
     
     // ResultCollection Event handlers
     // --------------
-
-    markerAdd: function(result) {
+    
+    /**
+     * 
+     * @param result: Result model
+     * @param isLargeMarker: (optional) bool. make this marker icon large?
+     * @param isLargeMarker: (optional) int. if supplied, the result is considered in a cluster, at this rank. 0 means base cluster-marker
+     * @param isLargeMarker: (optional) {lat: int, lon: int} if result is in a cluster, the coords (rank will be added as offset)
+     */
+    markerAdd: function(result, isLargeMarker, clusterLevel, clusterCoords) {
     	var self = this;
     	
     	if (!result.get('lat') || !result.get('lon')) {
@@ -195,19 +228,26 @@ module.exports = ContentControlView.extend({
     		this.markerRemove(result);
     	}
     	
-    	var markerIcon = this.getMarkerIconForType(result.get('type'));
-    	var coords = [result.get('lat'), result.get('lon')];
+    	var markerIcon = this.getMarkerIconForType(result.get('type'), isLargeMarker);
+    	var coords = clusterCoords ? clusterCoords : [result.get('lat'), result.get('lon')];
+    	// add clusterLevel as offset
+    	if (clusterLevel && clusterLevel > 0) {
+    		coords = $.extend(true, {}, coords);
+    		coords['lat'] += clusterLevel * (this.options.resultMarkerClusterDistance['perPxY'] * this.options.MARKER_OFFSET_PER_CLUSTER_LEVEL); 
+    	}
     	
     	util.log('adding marker at coords ' + JSON.stringify(coords))
+    	// TODO: if clusterLevel > 0, dritte Icon-Form Benutzen
         var marker = L.marker(coords, {
             icon: L.icon({
                 iconUrl: markerIcon.iconUrl,
                 iconSize: [markerIcon.iconWidth, markerIcon.iconHeight],
                 iconAnchor: [markerIcon.iconWidth / 2, markerIcon.iconHeight],
-                popupAnchor: [1, -27],
-                shadowSize: [28, 28]
+//                popupAnchor: [1, -27],
+//                shadowSize: [28, 28]
             }),
-            riseOnHover: true
+            zIndexOffset: clusterLevel ? (1000 + clusterLevel) : null, // TODO: check leaflet what the parameter for zindex is
+            riseOnHover: false
         });
     	
     	// bind click/hover events 
@@ -260,9 +300,12 @@ module.exports = ContentControlView.extend({
     	}
     },
     
-
+    /**
+     * On marker update. This happens extremely infrequently, as on new searches the whole
+     * result collections gets exchanged (which triggers `markersReset()`)
+     */
     markerUpdate: function(result, what) {
-    	// don't use this trigger when only hovered/selected state was changed - they have their own handlers
+    	// don't use this trigger when only hovered/selected state was changed! - they have their own handlers
     	var attrs = result.changedAttributes();
     	if (attrs && ('selected' in attrs || 'hovered' in attrs)) {
     		return;
@@ -298,8 +341,91 @@ module.exports = ContentControlView.extend({
     	_.each(options.previousModels, function(result){
     		self.markerRemove(result);
     	});
-    	_.each(resultCollection.models, function(result){
-    		self.markerAdd(result);
+    	
+    	/**
+    	 * Cluster results by maximum radius
+    	 * [
+    	 * 	   { // cluster
+    	 * 		   loc: {lat: 0, lon: 0},
+    	 *         items: [ <result>, ...]
+    	 * 	   },
+    	 * 	   ...
+    	 * ]
+    	 */
+    	
+    	var clusters = [];
+    	//_.each(resultCollection.models, function(result){
+		for (var i=0; i < resultCollection.models.length; i++) {
+			var result = resultCollection.models[i];
+			if (!result.get('lat') || !result.get('lon')) {
+				// results without locations are ignored
+				continue;
+			}
+			
+    		//_.each(resultCollection.models, function(cluster){
+    		for (var j=0; j < clusters.length; j++) {
+    			var cluster = clusters[j];
+    			// calculate distance from this result to each cluster
+				var distx = Math.abs(cluster['loc']['lon'] - result.get('lon'));
+				var disty = Math.abs(cluster['loc']['lat'] - result.get('lat'));
+				if (distx < self.options.resultMarkerClusterDistance['x'] && disty < self.options.resultMarkerClusterDistance['y']) {
+					// result lies within radius of cluster
+					cluster['items'].push(result);
+					result = null;
+					break;
+				} 
+        	};
+        	// result didn't lie within radius of cluster, make a new one
+        	if (result != null) {
+        		clusters.push({
+        			loc: {
+        				lat: result.get('lat'),
+        				lon: result.get('lon')
+        			},
+        			items: [result]
+        		});
+        	}
+    	};
+    	
+    	// remove all single-result clusters and add their results into a single list
+    	var singleResults = [];
+    	for (var k=clusters.length-1; k >= 0; k--) {
+			var cluster = clusters[k];
+			if (cluster['items'].length == 1) {
+				singleResults.push(cluster['items'][0]);
+				delete clusters[k];
+			} else {
+				// TODO: sort the items inside a cluster?
+			}
+    	}
+    	
+    	// TODO: sort the singleResults!
+    	console.log('CLUST')
+    	console.log(clusters)
+    	var remainingLargeMarkers = self.options.MARKER_NUMBER_OF_LARGE_MARKERS;
+    	
+    	for (var i=0; i < clusters.length; i++) {
+			var cluster = clusters[i];
+			if (!cluster) {
+				continue; // TODO, deleted clusters are empty, delete them properly
+			}
+			// for each cluster, add all results in a stacking offset
+			for (var j=cluster['items'].length-1; j >= 0; j--) {
+				var item = cluster['items'][j];
+				self.markerAdd(item, j==0, j, cluster['loc']);
+	    	}
+			remainingLargeMarkers -= 1;
+    	}
+    	
+    	// add the results that aren't in a cluster
+    	_.each(singleResults, function(result){
+    		// TODO: determine isLargeMarker by score
+    		if (remainingLargeMarkers > 0) {
+    			self.markerAdd(result, true);
+    			remainingLargeMarkers -= 1;
+    		} else {
+    			self.markerAdd(result);
+    		}
     	});
     },
     
@@ -381,9 +507,10 @@ module.exports = ContentControlView.extend({
     
     /** Gets a dict of {iconUrl: <str>, iconWidth: <int>, iconHeight: <int>}
      *  for a given type corresponding to model Result.type. */
-    getMarkerIconForType: function(resultType) {
+    getMarkerIconForType: function(resultType, isLargeMarker) {
     	var markerIcon;
     	// if custom marker icons are supplied, use those, else default ones
+    	// custom marker icon ignore large-sizedness
         if (this.options.markerIcons && this.options.markerIcons[resultType]) {
             var iconSettings = this.options.markerIcons[resultType];
             markerIcon = {
@@ -393,10 +520,9 @@ module.exports = ContentControlView.extend({
             };
         } else {
         	markerIcon = {
-	            iconUrl: '/static/js/vendor/images/marker-icon-2x-' +
-	                this.options.resultColours[resultType] + '.png',
-	            iconWidth: 17,
-	            iconHeight: 28
+	            iconUrl: this.options.mapMarkerStaticPath + this.options.resultMarkerImages[resultType + (isLargeMarker ? 'Large' : '')],
+	            iconWidth: this.options.resultMarkerSizes['width' + (isLargeMarker ? 'Large' : '')],
+	            iconHeight: this.options.resultMarkerSizes['height' + (isLargeMarker ? 'Large' : '')]
         	};
         }
         return markerIcon;
@@ -420,6 +546,7 @@ module.exports = ContentControlView.extend({
 
     // Render the search results as markers on the map.
     // TODO: remove! deprecated and unused.
+    /*
     updateMarkers: function () {
         var self = this,
             results = self.model.get('results');
@@ -456,11 +583,27 @@ module.exports = ContentControlView.extend({
             });
         });
     },
+    */
 
     handleViewportChange: function () {
         this.setClusterState();
         this.updateBounds();
         Backbone.mediator.publish('app:stale-results', {reason: 'viewport-changed'});
+        
+        var ns = Math.abs(this.state.south - this.state.north) / this.$el.height();
+        var we = Math.abs(this.state.east - this.state.west) / this.$el.width();
+        this.options.resultMarkerClusterDistance['x'] = we * this.options.resultMarkerSizes['widthLarge'] * 1.1;
+        this.options.resultMarkerClusterDistance['y'] = ns * this.options.resultMarkerSizes['heightLarge'] * 1.1;
+        this.options.resultMarkerClusterDistance['perPxX'] = we;
+        this.options.resultMarkerClusterDistance['perPxY'] = ns;
+        
+        /* TODO: remove
+        $('.debugp').text('   N: ' + String(this.state.north) + '   S: ' +
+        		String(this.state.south) + '   W: ' + String(this.state.west) +
+        		'   S: ' + String(this.state.east) + '   NS: ' + String(Math.abs(this.state.south - this.state.north)) +
+        		'   WE: ' + String(Math.abs(this.state.east - this.state.west)) + '   wid: ' + this.$el.width() + '   hei: ' + 
+        		this.$el.height() + '      FIWID: ' + maxwid + '    FIHEI: ' + maxhei);
+        */
     },
 
     // Handle change bounds (from URL).
