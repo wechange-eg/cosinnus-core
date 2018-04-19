@@ -11,8 +11,17 @@
     <div class="address">{{address}}</div>
     <div class="description">{{description|safe}}</div>
     {% if lat and lon %}
-        <div>Show on map?</div>
+        <div>This result has a location (but may be off map) - Should we add a link to "show on map?"</div>
     {% else %}
         <div>This result has no location</div>
+    {% endif %}
+    
+    {% if topics|length > 0 %}
+        <div class="topics">
+            Topics: 
+            {% for topic in topics %}
+                <a class="topic-filter-link" data-topic-id="{{ topic }}">{{ controlView.allTopics[topic] }}</a>{% if not loop.last %},{% endif %}
+            {% endfor %}
+        </div>
     {% endif %}
 </div>

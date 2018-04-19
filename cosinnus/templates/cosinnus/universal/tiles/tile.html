@@ -10,7 +10,7 @@
             <div class="topics">
                 Topics: 
                 {% for topic in topics %}
-                    {{ controlView.allTopics[topic] }}{% if not loop.last %},{% endif %}
+                    <a class="topic-filter-link" data-topic-id="{{ topic }}">{{ controlView.allTopics[topic] }}</a>{% if not loop.last %},{% endif %}
                 {% endfor %}
             </div>
         {% endif %}

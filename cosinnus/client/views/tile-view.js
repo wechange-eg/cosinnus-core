@@ -17,7 +17,8 @@ module.exports = BaseView.extend({
 	
 	// The DOM events specific to an item.
     events: {
-        'click .tile-detail-link': 'onSelectClicked',
+    	'click .tile-detail-link': 'onSelectClicked',
+    	'click .topic-filter-link': 'onTopicLinkClicked',
 
         'mouseenter': 'onMouseEnter',
         'mouseleave': 'onMouseLeave',
@@ -68,6 +69,10 @@ module.exports = BaseView.extend({
     	}
     },
     
+    /** Called when a topic link is clicked to filter for that topic only */
+    onTopicLinkClicked: function(event) {
+    	this.App.controlView.onTopicLinkClicked(event);
+    },
     
     /**
      * Called when a tile detail link is clicked, to expand the tile view

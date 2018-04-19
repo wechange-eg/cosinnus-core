@@ -131,11 +131,15 @@ module.exports = ContentControlView.extend({
     /** Reset all types of input filters and trigger a new search */
     resetAllClicked: function (event) {
         event.preventDefault();
+        this.render();
+    	this.triggerDelayedSearch(true);
+    },
+    
+    /** Resets all filter states */
+    resetAll: function () {
         this.state.q = '';
         this.resetTopics();
         this.resetTypeFilters();
-        this.render();
-    	this.triggerDelayedSearch(true);
     },
     
     /** Internal state reset of filtered topics */
@@ -178,6 +182,18 @@ module.exports = ContentControlView.extend({
         this.resetTypeFilters();
         this.resetTopics();
         this.render();
+    	this.triggerDelayedSearch(true);
+    },
+    
+    /** This doesn't listen to events in this view, but rather is the target for 
+     * 	delegated events from tile-view and tile-detail-view */
+    onTopicLinkClicked: function(event) {
+    	event.preventDefault();
+    	event.stopPropagation();
+    	var $link = $(event.target);
+    	var topicId = $link.attr('data-topic-id');
+    	this.resetAll();
+    	this.state.activeTopicIds = [parseInt(topicId)];
     	this.triggerDelayedSearch(true);
     },
     
@@ -361,6 +377,7 @@ module.exports = ContentControlView.extend({
      * a fresh search.
      */
     triggerSearchFromUrl: function (noNewNavigateEvent) {
+    	this.resetAll();
     	var urlParams = this.parseUrl(window.location.href.replace(window.location.origin, ''));
     	_.each(this.App.contentViews, function(view){
     		view.applyUrlSearchParameters(urlParams);
@@ -513,11 +530,12 @@ module.exports = ContentControlView.extend({
     	this.selectedResult = result;
     	if (this.selectedResult != null) {
     		this.selectedResult.set('selected', true);
-    	}
-    	// selecting a result changes the URL so results can be directly linked
-    	if (App.displayOptions.routeNavigation) {
-    		var newUrl = this.buildSearchQueryURL(false).replace(this.searchEndpointURL, this.options.basePageURL);
-    		App.router.replaceUrl(newUrl);
+    		
+    		// selecting a result changes the URL so results can be directly linked
+    		if (App.displayOptions.routeNavigation) {
+    			var newUrl = this.buildSearchQueryURL(false).replace(this.searchEndpointURL, this.options.basePageURL);
+    			App.router.replaceUrl(newUrl);
+    		}
     	}
     },
     

@@ -3,6 +3,8 @@
 @map-scroll-color: #DDDDDD;
 @map-text-color: #333;
 @map-pale-color: #999;
+@map-strong-color: #000;
+
 
 @map-button-color: #FFF;
 @map-action-button-color: #34b4b5;
@@ -95,13 +97,12 @@
 	padding-top: 55px;
     display: flex;
     flex-direction: column;
-	
+    
 	.tile-contents {
 	    flex-grow: 1;
 		overflow-y: scroll;
 		overflow-x: hidden;
 	}
-	
 	
     /** Masonry */
 	.grid {
@@ -133,10 +134,6 @@
 		-ms-user-select: none;       /* IE/Edge */
 		user-select: none;           /* non-prefixed version, currently */
 		cursor: default;
-	}
-	
-	&.tile-detail-open {
-	   overflow-y: hidden;
 	}
 	
 	.tile {
@@ -195,11 +192,23 @@
 .app-fullscreen.no-navbar .tile-detail {
 	padding: 10px;
 }
+
+.tile, .tile-detail {
+    background-color: @map-tile-background-color;
+	
+    a {
+       color: @map-text-color;
+       cursor: pointer;
+       
+       &:hover {
+           color: @map-strong-color;
+       }
+    }
+	
+}
 .tile-detail {
     width: 50%;
     height: 100%;
-    
-    background-color: white;
     
     .tile-close-button {
         cursor: pointer;

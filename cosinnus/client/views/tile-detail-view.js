@@ -18,6 +18,7 @@ module.exports = BaseView.extend({
 	// The DOM events specific to an item.
     events: {
         'click .tile-close-button': 'onDeselectClicked',
+    	'click .topic-filter-link': 'onTopicLinkClicked',
     },
 	
     initialize: function (options, app) {
@@ -52,6 +53,13 @@ module.exports = BaseView.extend({
     onResultUnselected: function (result) {
     	this.model = null;
     	this.render();
+    },
+    
+    /** Called when a topic link is clicked to filter for that topic only */
+    onTopicLinkClicked: function(event) {
+    	// make sure to close
+    	this.App.controlView.setSelectedResult(null);
+    	this.App.controlView.onTopicLinkClicked(event);
     },
     
     /**
