@@ -116,6 +116,7 @@ module.exports = ContentControlView.extend({
     	
     	MARKER_OFFSET_PER_CLUSTER_LEVEL: 10,
     	MARKER_NUMBER_OF_LARGE_MARKERS: 8,
+    	MARKER_CLUSTER_RADIUS_LIMIT: 0.75, // cluster radius multiplier: modifier for how aggressively the clusters should pull in markers
     	MARKER_STACKED_OFFSET_BASE_VALUE: 0.85, // base of the dynamic px-per-zoom value. increase this to increase stack distance
     	MARKER_STACKED_INITIAL_OFFSET: 12.5, // offset of the first stackmarker to the base cluster marker, in multiples of MARKER_STACKED_OFFSET_BASE_VALUE
     	
@@ -605,8 +606,8 @@ module.exports = ContentControlView.extend({
     updateClusterDistances: function () {
         var ns = Math.abs(this.state.south - this.state.north) / this.$el.height();
         var we = Math.abs(this.state.east - this.state.west) / this.$el.width();
-        this.options.resultMarkerClusterDistance['x'] = we * this.options.resultMarkerSizes['widthLarge'] * 1.1;
-        this.options.resultMarkerClusterDistance['y'] = ns * this.options.resultMarkerSizes['heightLarge'] * 1.1;
+        this.options.resultMarkerClusterDistance['x'] = we * this.options.resultMarkerSizes['widthLarge'] * this.options.MARKER_CLUSTER_RADIUS_LIMIT;
+        this.options.resultMarkerClusterDistance['y'] = ns * this.options.resultMarkerSizes['heightLarge'] * this.options.MARKER_CLUSTER_RADIUS_LIMIT;
         this.options.resultMarkerClusterDistance['perZoom'] = this.options.MARKER_STACKED_OFFSET_BASE_VALUE / (Math.pow(2, this.leaflet.getZoom()));
     },
 
