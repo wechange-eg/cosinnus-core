@@ -81,30 +81,30 @@ module.exports = ContentControlView.extend({
     	
     	// correcspond to the model values of Result.type
     	resultMarkerImages: {
-    		people: 'marker-people.png',
-    		events: 'marker-events.png',
-    		projects: 'marker-projects.png',
-    		groups: 'marker-groups.png',
-    		ideas: 'marker-ideas.png',
-    		peopleLarge: 'marker-people-large.png',
-    		eventsLarge: 'marker-events-large.png',
-    		projectsLarge: 'marker-projects-large.png',
-    		groupsLarge: 'marker-groups-large.png',
-    		ideasLarge: 'marker-ideas-large.png',
-    		peopleStacked: 'marker-people-stacked.png',
-    		eventsStacked: 'marker-events-stacked.png',
-    		projectsStacked: 'marker-projects-stacked.png',
-    		groupsStacked: 'marker-groups-stacked.png',
-    		ideasStacked: 'marker-ideas-stacked.png'
+    		people: 'placemark-s-person.png',
+    		events: 'placemark-s-event.png',
+    		projects: 'placemark-s-project.png',
+    		groups: 'placemark-s-group.png',
+    		ideas: 'placemark-s-idea.png',
+    		peopleLarge: 'placemark-l-person.png',
+    		eventsLarge: 'placemark-l-event.png',
+    		projectsLarge: 'placemark-l-project.png',
+    		groupsLarge: 'placemark-l-group.png',
+    		ideasLarge: 'placemark-l-idea.png',
+    		peopleStacked: 'placemark-m-person.png',
+    		eventsStacked: 'placemark-m-event.png',
+    		projectsStacked: 'placemark-m-project.png',
+    		groupsStacked: 'placemark-m-group.png',
+    		ideasStacked: 'placemark-m-idea.png'
     	},
     	
     	resultMarkerSizes: {
-    		width: 17,
-    		height: 28,
-    		widthLarge: 34,
-    		heightLarge: 56,
-    		widthStacked: 17,
-    		heightStacked: 28,
+    		width: 14,
+    		height: 14,
+    		widthLarge: 28,
+    		heightLarge: 37,
+    		widthStacked: 23,
+    		heightStacked: 23,
     	},
     	
     	// calculated dynamically depending on zoom, in `handleViewportChange()`
@@ -117,8 +117,8 @@ module.exports = ContentControlView.extend({
     	MARKER_OFFSET_PER_CLUSTER_LEVEL: 10,
     	MARKER_NUMBER_OF_LARGE_MARKERS: 8,
     	MARKER_CLUSTER_RADIUS_LIMIT: 0.75, // cluster radius multiplier: modifier for how aggressively the clusters should pull in markers
-    	MARKER_STACKED_OFFSET_BASE_VALUE: 0.85, // base of the dynamic px-per-zoom value. increase this to increase stack distance
-    	MARKER_STACKED_INITIAL_OFFSET: 12.5, // offset of the first stackmarker to the base cluster marker, in multiples of MARKER_STACKED_OFFSET_BASE_VALUE
+    	MARKER_STACKED_OFFSET_BASE_VALUE: 0.75, // base of the dynamic px-per-zoom value. increase this to increase stack distance
+    	MARKER_STACKED_INITIAL_OFFSET: 5.0, // offset of the first stackmarker to the base cluster marker, in multiples of MARKER_STACKED_OFFSET_BASE_VALUE
     	
         zoom: 7,
         location: [
