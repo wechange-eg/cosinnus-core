@@ -14,6 +14,7 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.contrib.auth import get_user_model
 from cosinnus.utils.functions import normalize_within_stddev
 from cosinnus.utils.group import get_cosinnus_group_model
+from django.core.urlresolvers import reverse
     
 
 class CosinnusGroupIndexMixin(DocumentBoostMixin, StoredDataIndexMixin, indexes.SearchIndex):
@@ -135,6 +136,10 @@ class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearch
     
     def prepare_marker_image_url(self, obj):
         return obj.get_map_marker_image_url()
+    
+    def prepare_url(self, obj):
+        """ NOTE: UserProfiles always contain a relative URL! """
+        return reverse('cosinnus:profile-detail', kwargs={'username': obj.user.username})
     
     def get_model(self):
         return get_user_profile_model()

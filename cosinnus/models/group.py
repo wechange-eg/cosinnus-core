@@ -447,6 +447,8 @@ class CosinnusGroupMembershipManager(models.Manager):
 class CosinnusPortal(models.Model):
     
     _CURRENT_PORTAL_CACHE_KEY = 'cosinnus/core/portal/current'
+    _ALL_PORTAL_CACHE_KEY = 'cosinnus/core/portal/all'
+    
     if settings.DEBUG:
         _CUSTOM_CSS_FILENAME = '_ignoreme_cosinnus_custom_portal_%s_styles.css'
     else:
@@ -520,6 +522,15 @@ class CosinnusPortal(models.Model):
             cache.set(CosinnusPortal._CURRENT_PORTAL_CACHE_KEY, portal, 60 * 60 * 24 * 365) 
         return portal
     
+    @classmethod
+    def get_all(cls):
+        """ Cached, returns all Portals (short cache timeout to react to other sites' changes) """
+        portals = cache.get(CosinnusPortal._ALL_PORTAL_CACHE_KEY)
+        if portals is None:
+            portals = CosinnusPortal.objects.all().select_related('site')
+            cache.set(CosinnusPortal._ALL_PORTAL_CACHE_KEY, portals, 60 * 5) 
+        return portals
+    
     def save(self, *args, **kwargs):
         # clean color fields
         self.top_color = self.top_color.replace('#', '')
@@ -528,6 +539,7 @@ class CosinnusPortal(models.Model):
         super(CosinnusPortal, self).save(*args, **kwargs)
         self.compile_custom_stylesheet()
         cache.delete(self._CURRENT_PORTAL_CACHE_KEY)
+        cache.delete(self._ALL_PORTAL_CACHE_KEY)
     
     @property
     def admins(self):
@@ -572,6 +584,10 @@ class CosinnusPortal(models.Model):
     def get_domain(self):
         """ Gets the http/https protocol aware domain for this portal """
         return get_domain_for_portal(self)
+    
+    def get_logo_image_url(self):
+        """ Returns the portal logo static image URL """
+        return '%s%s' % (self.get_domain(), static('img/logo-icon.png'))
     
     def __str__(self):
         return self.name

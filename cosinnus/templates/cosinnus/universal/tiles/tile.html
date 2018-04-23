@@ -2,7 +2,7 @@
     <div class="tile-detail-link">
 	    <img class="tile-image" src="{{imageUrl}}" />
 	    <br/>
-        <div class="title">{{title}}</div>
+        <div class="title">{{title}} [{{ portal }}]</div>
 	    <div class="address">{{address}}</div>
 	    <h2 class="address">{{relevance}}</h2>
         <div class="description">{{description|safe}}</div>
@@ -13,6 +13,11 @@
                     <a class="topic-filter-link" data-topic-id="{{ topic }}">{{ controlView.allTopics[topic] }}</a>{% if not loop.last %},{% endif %}
                 {% endfor %}
             </div>
+        {% endif %}
+        {% if controlView.portalInfo.current != portal %}
+            [External!]: 
+            <a class="portal-inlink" href="{{ controlView.portalInfo[portal].domain }}" target="_blank" title="{{ controlView.portalInfo[portal].name }}"><img
+                src="{{ controlView.portalInfo[portal].image_url }}" style="width:20px;"></a> 
         {% endif %}
     </div>
 </div>

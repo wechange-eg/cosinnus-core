@@ -25,5 +25,7 @@
         </div>
     {% endif %}
     
-    <a href="{{ url }}" target="_blank">{{ url }}</a>
+    <div>
+	    Link: <a href="{% if type == "people" %}{{ controlView.portalInfo[portal].domain }}{% endif %}{{ url }}" target="_blank">Visit Page!</a>
+    </div>
 </div>

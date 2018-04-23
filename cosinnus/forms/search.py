@@ -34,7 +34,7 @@ MODEL_ALIASES = {
     'user': '<userprofile>',
 }
 
-
+VISIBLE_PORTAL_IDS = None  # global
 
 def filter_searchqueryset_for_read_access(sqs, user):
     """
@@ -85,16 +85,21 @@ def filter_searchqueryset_for_read_access(sqs, user):
         
     return sqs
 
+def get_visible_portal_ids():
+    global VISIBLE_PORTAL_IDS
+    if VISIBLE_PORTAL_IDS is None:
+        current_portal = CosinnusPortal.get_current().id
+        portals = [current_portal] + getattr(settings, 'COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS', [])
+        VISIBLE_PORTAL_IDS = list(set(portals))
+    return VISIBLE_PORTAL_IDS
 
 def filter_searchqueryset_for_portal(sqs, portals=None):
     """ Filters a searchqueryset by which portal the objects belong to.
         @param portals: If not provided, will default to this portal and all foreign portals allowed in settings 
             ([current-portal] + settings.COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS) """
             
-    current_portal = CosinnusPortal.get_current().id
-    portals = portals or [current_portal] + \
-        getattr(settings, 'COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS', [])
-    portals = list(set(portals))
+    if portals is None:
+        portals = get_visible_portal_ids()
     
     if portals:
         sqs = sqs.filter_and(SQ(portal__in=portals) | SQ(portals__in=portals))

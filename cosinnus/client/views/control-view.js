@@ -30,6 +30,7 @@ module.exports = ContentControlView.extend({
             groups: true
         },
         allTopics: {},  // the dict of all searchable topics
+        portalInfo: {}, // portal info by portal-id, from `get_cosinnus_portal_info()`
         controlsEnabled: true,
         filterGroup: null,
         

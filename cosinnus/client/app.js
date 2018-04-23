@@ -131,11 +131,13 @@ var App = function App () {
         self.displayOptions = $.extend(true, {}, self.defaultDisplayOptions, display);
         
         var topicsJson = typeof COSINNUS_MAP_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TOPICS_JSON : {};
+        var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
         var markerIcons = typeof COSINNUS_MAP_MARKER_ICONS !== 'undefined' ? COSINNUS_MAP_MARKER_ICONS : {};
         
         // TODO: remove!
         util.log('TODO: at end of refactor remove thisss check for markerIcons and topicsJson!')
         if (!topicsJson) {alert('no topicsJson!')}
+        if (!portalInfo) {alert('no topicsJson!')}
         if (!markerIcons) {alert('no markerIcons!')}
         
         // TODO: set to actual dynamic current URL!
@@ -148,6 +150,7 @@ var App = function App () {
 	        	availableFilters: settings.availableFilters,
 	        	activeFilters: settings.activeFilters,
 	        	allTopics: topicsJson,
+	        	portalInfo: portalInfo,
 	        	controlsEnabled: self.displayOptions.showControls,
 	        	scrollControlsEnabled: self.displayOptions.showControls && self.displayOptions.showMap,
 	        	paginationControlsEnabled: self.displayOptions.showTiles,

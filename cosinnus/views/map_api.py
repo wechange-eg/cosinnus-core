@@ -18,7 +18,7 @@ from haystack.query import SearchQuerySet
 from haystack.utils.geo import Point
 
 from cosinnus.forms.search import filter_searchqueryset_for_read_access,\
-    filter_searchqueryset_for_portal
+    filter_searchqueryset_for_portal, get_visible_portal_ids
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
 from cosinnus.models.profile import get_user_profile_model
@@ -114,7 +114,7 @@ def _collect_parameters(param_dict, parameter_list):
 class MapResult(dict):
     """ A single result for the search of the map, enforcing required fields """
 
-    def __init__(self, short_id, result_type, lat, lon, address, title, url=None, imageUrl=None, description=None, relevance=0, topics=[], *args, **kwargs):
+    def __init__(self, short_id, result_type, lat, lon, address, title, url=None, imageUrl=None, description=None, relevance=0, topics=[], portal=None, *args, **kwargs):
         self['id'] = short_id
         self['type'] = result_type
         self['lat'] = lat
@@ -126,6 +126,7 @@ class MapResult(dict):
         self['description'] = description
         self['relevance'] = relevance
         self['topics'] = topics
+        self['portal'] = portal or CosinnusPortal.get_current().id
         return super(MapResult, self).__init__(*args, **kwargs)
 
 
@@ -134,6 +135,16 @@ class HaystackMapResult(MapResult):
          into a proper MapResult """
 
     def __init__(self, result, *args, **kwargs):
+        if result.portals:
+            # some results, like users, have multiple portals associated. we select one of those to show
+            # the origin from
+            visible_portals = get_visible_portal_ids()
+            displayable_portals = [port_id for port_id in result.portals if port_id in visible_portals]
+            current_portal_id = CosinnusPortal.get_current().id
+            portal = current_portal_id if current_portal_id in displayable_portals else displayable_portals[0]
+        else:
+            portal = result.portal
+            
         return super(HaystackMapResult, self).__init__(
             shorten_haystack_id(result.id),
             SEARCH_MODEL_NAMES[result.model],
@@ -145,7 +156,8 @@ class HaystackMapResult(MapResult):
             result.marker_image_url,
             textfield(result.description),
             result.score,
-            result.mt_topics
+            result.mt_topics,
+            portal
         )
 
 
