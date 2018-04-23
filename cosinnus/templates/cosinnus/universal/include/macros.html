@@ -1,0 +1,49 @@
+{% macro typeLabel(type, classes="", singular=0) %}
+	<span class="button-color-{{ type }} {{ classes }}">
+	    {% if singular %}
+		    {% if type == "people" %}
+		        <i class="fa fa-user"></i>
+		        {# Translators: __INCLUDE_JS_PO__ #}
+		        {% trans "User" %}
+		    {% elif type == "events" %}
+		        <i class="fa fa-calendar"></i>
+		        {# Translators: __INCLUDE_JS_PO__ #}
+		        {% trans "Event" %}
+		    {% elif type == "projects" %}
+		        <i class="fa fa-group"></i>
+		        {# Translators: __INCLUDE_JS_PO__ #}
+		        {% trans "Project" %}
+            {% elif type == "groups" %}
+                <i class="fa fa-sitemap"></i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Group" %}
+            {% elif type == "ideas" %}
+                <i class="fa fa-lightbulb"></i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Idea" %}
+		    {% endif %}
+	    {% else %}
+	        {% if type == "people" %}
+                <i class="fa fa-user"></i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "People" %}
+            {% elif type == "events" %}
+                <i class="fa fa-calendar"></i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Events" %}
+            {% elif type == "projects" %}
+                <i class="fa fa-group"></i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Projects" %}
+            {% elif type == "groups" %}
+                <i class="fa fa-sitemap"></i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Groups" %}
+            {% elif type == "ideas" %}
+                <i class="fa fa-lightbulb"></i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Ideas" %}
+            {% endif %}
+	    {% endif %}
+	</span>
+{% endmacro %}

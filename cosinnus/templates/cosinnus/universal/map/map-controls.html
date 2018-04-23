@@ -1,4 +1,6 @@
 {% load i18n %}
+{% import "include/macros.html" as macros %}
+
 <div class="map-controls">
 	 <div class="map-controls-search">
 	     <div class="search-box">
@@ -29,25 +31,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
             {% for filter_type, available in availableFilters %}
                 {% if available %}
                     <a class="rounded-button button-color-{{ filter_type }} result-filter-button {% if activeFilters[filter_type] %}selected{% endif %}" data-result-filter-type="{{ filter_type }}">
-                        <span class="rounded-button-inner">
-                            {% if filter_type == "people" %}
-                                <i class="fa fa-user"></i>
-                                {# Translators: __INCLUDE_JS_PO__ #}
-                                {% trans "People" %}
-                            {% elif filter_type == "events" %}
-                                <i class="fa fa-calendar"></i>
-                                {# Translators: __INCLUDE_JS_PO__ #}
-                                {% trans "Events" %}
-                            {% elif filter_type == "projects" %}
-                                <i class="fa fa-group"></i>
-                                {# Translators: __INCLUDE_JS_PO__ #}
-                                {% trans "Projects" %}
-                            {% elif filter_type == "groups" %}
-                                <i class="fa fa-sitemap"></i>
-                                {# Translators: __INCLUDE_JS_PO__ #}
-                                {% trans "Groups" %}
-                            {% endif %}
-                        </span>
+                        {{ macros.typeLabel(filter_type, "rounded-button-inner") }}
                     </a>
                 {% endif %}
             {% endfor %}

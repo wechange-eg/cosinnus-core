@@ -4,7 +4,7 @@ var BaseView = require('views/base/view');
 var Result = require('models/result');
 var util = require('lib/util');
 
-var tileTemplate = require('tiles/tile');
+var tileTemplateDefault = require('tiles/grid-tile-default');
 
 module.exports = BaseView.extend({
 	
@@ -13,7 +13,7 @@ module.exports = BaseView.extend({
 	
 	model: Result,
 
-	template: tileTemplate,
+	template: tileTemplateDefault, // determined in `fitTemplate()`
 	
 	// The DOM events specific to an item.
     events: {
@@ -32,6 +32,18 @@ module.exports = BaseView.extend({
     	self.model.on({
     		'change:hovered': self.thisContext(self.onHoverChanged),
     	});
+    	self.fitTemplate();
+    },
+    
+    /** Adjust this view's template based on the result type it displays (and other states) */
+    fitTemplate: function () {
+    	var self = this;
+    	if (self.model.get('type') == 'people') {
+    		//self.template = tileTemplateSmall;
+    		self.state.isSmall = true;
+    	} else {
+    		//self.template = tileTemplateDefault;
+    	}
     },
     
     /** Extend the template data by the controlView's options and state */

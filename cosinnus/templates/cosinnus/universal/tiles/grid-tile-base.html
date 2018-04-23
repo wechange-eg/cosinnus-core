@@ -1,0 +1,24 @@
+<div class="tile tile-{{ type }} grid-item {% if selected %}selected{% endif %} {% if hovered %}hovered{% endif %}">
+    <div class="tile-detail-link">
+        {% block type_area %}{% endblock %}
+        
+        {% if isSmall %}
+            <div class="framed-tile-image">
+                <img class="tile-image-icon" src="{{imageUrl}}" />
+            </div>
+        {% else %}
+            <div class="dual-tile-image">
+                <img class="tile-image tile-image-background" src="{{imageUrl}}" /> {# TODO: put in wallpaper/placeholder img #}
+	            <div class="floating-tile-image">
+	               <img class="tile-image-icon" src="{{imageUrl}}" />
+                </div>
+            </div>
+        {% endif %}
+        
+        <div class="description">
+            {% block description_area %}{% endblock %}
+        </div>
+        
+        {% block icon_area %}{% endblock %}
+    </div> 
+</div>
