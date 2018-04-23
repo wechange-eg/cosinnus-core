@@ -864,6 +864,12 @@ def json(obj):
     return _json.dumps(obj)
 
 @register.filter
+def get_membership_portals(user):
+    """ Returns all portals a user is a member of """
+    return CosinnusPortal.objects.filter(id__in=user.cosinnus_portal_memberships.values_list('group_id', flat=True))
+
+
+@register.filter
 def debugthis(obj):
     """ Debug-inspects a template element """
     if not settings.DEBUG:

@@ -13,10 +13,7 @@
 	                    <i class="fa fa-chain"></i>
 	                </a>
 	                <div class="media-body">
-                        <a href="{{ group.get_absolute_url }}">
-							<i class="fa fa-users"></i>
-							{{ group.name }}
-						</a>
+						{% include 'cosinnus/group/group_label.html' with group=group %}
 	                </div>
 	            </li>
 	        </ul>

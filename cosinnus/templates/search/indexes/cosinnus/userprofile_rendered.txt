@@ -1,6 +1,8 @@
 {% load static cosinnus_tags %}
 
-{% with user_profile=object user_url=object.get_absolute_url %}
+{# use user_url=object.get_absolute_url for domain-specific URLs. here, we *mean* to use a relative URL so we always link into this portal! #}
+{% with user_profile=object %}
+    {% url 'cosinnus:profile-detail' username=user_profile.user.username as user_url %}
 	<div class="app-main">
 	    <div class="btn btn-emphasized w100">
 	        <ul class="media-list large-space">
@@ -16,6 +18,9 @@
 							<i class="fa fa-user"></i>
 							{{ user_profile.user|full_name }}
 						</a>
+						{% for portal in user_profile.user|get_membership_portals %}
+						    {% include 'cosinnus/portal/portal_link_icon.html' with portal=portal %}
+						{% endfor %}
 	                </div>
 	            </li>
 	        </ul>
