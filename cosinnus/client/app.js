@@ -21,6 +21,7 @@ var App = function App () {
     self.contentViews = [];
     self.controlView = null;
     self.tileListView = null;
+    self.mapView = null;
 
     self.router = new Router();
     self.mediator = null;
@@ -173,6 +174,7 @@ var App = function App () {
         	self,
         	self.controlView.collection
         	).render();
+        	self.mapView = mapView;
         	self.contentViews.push(mapView);
         }
         

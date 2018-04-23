@@ -90,7 +90,12 @@ module.exports = ContentControlView.extend({
     		eventsLarge: 'marker-events-large.png',
     		projectsLarge: 'marker-projects-large.png',
     		groupsLarge: 'marker-groups-large.png',
-    		ideasLarge: 'marker-ideas-large.png'
+    		ideasLarge: 'marker-ideas-large.png',
+    		peopleStacked: 'marker-people-stacked.png',
+    		eventsStacked: 'marker-events-stacked.png',
+    		projectsStacked: 'marker-projects-stacked.png',
+    		groupsStacked: 'marker-groups-stacked.png',
+    		ideasStacked: 'marker-ideas-stacked.png'
     	},
     	
     	resultMarkerSizes: {
@@ -98,18 +103,21 @@ module.exports = ContentControlView.extend({
     		height: 28,
     		widthLarge: 34,
     		heightLarge: 56,
+    		widthStacked: 17,
+    		heightStacked: 28,
     	},
     	
     	// calculated dynamically depending on zoom, in `handleViewportChange()`
     	resultMarkerClusterDistance: {
     		x: 0,
     		y: 0,
-    		perPxX: 0,
-    		perPxY: 0,
+    		perZoom: 0, // hardcoded function of px per zoom level
     	},
     	
     	MARKER_OFFSET_PER_CLUSTER_LEVEL: 10,
     	MARKER_NUMBER_OF_LARGE_MARKERS: 8,
+    	MARKER_STACKED_OFFSET_BASE_VALUE: 0.85, // base of the dynamic px-per-zoom value. increase this to increase stack distance
+    	MARKER_STACKED_INITIAL_OFFSET: 12.5, // offset of the first stackmarker to the base cluster marker, in multiples of MARKER_STACKED_OFFSET_BASE_VALUE
     	
         zoom: 7,
         location: [
@@ -228,16 +236,18 @@ module.exports = ContentControlView.extend({
     		this.markerRemove(result);
     	}
     	
-    	var markerIcon = this.getMarkerIconForType(result.get('type'), isLargeMarker);
+    	// for clustered markers, every marker but the base marker becomes a stacked marker.
+    	var markerIcon = this.getMarkerIconForType(result.get('type'), isLargeMarker, clusterLevel > 0);
     	var coords = clusterCoords ? clusterCoords : [result.get('lat'), result.get('lon')];
+    	
     	// add clusterLevel as offset
     	if (clusterLevel && clusterLevel > 0) {
+    		var initialOffset = this.options.resultMarkerClusterDistance['perZoom'] * this.options.MARKER_STACKED_INITIAL_OFFSET;
     		coords = $.extend(true, {}, coords);
-    		coords['lat'] += clusterLevel * (this.options.resultMarkerClusterDistance['perPxY'] * this.options.MARKER_OFFSET_PER_CLUSTER_LEVEL); 
+    		coords['lat'] += initialOffset + (clusterLevel * (this.options.resultMarkerClusterDistance['perZoom'] * this.options.MARKER_OFFSET_PER_CLUSTER_LEVEL)); 
     	}
     	
     	util.log('adding marker at coords ' + JSON.stringify(coords))
-    	// TODO: if clusterLevel > 0, dritte Icon-Form Benutzen
         var marker = L.marker(coords, {
             icon: L.icon({
                 iconUrl: markerIcon.iconUrl,
@@ -246,12 +256,11 @@ module.exports = ContentControlView.extend({
 //                popupAnchor: [1, -27],
 //                shadowSize: [28, 28]
             }),
-            zIndexOffset: clusterLevel ? (1000 + clusterLevel) : null, // TODO: check leaflet what the parameter for zindex is
+            zIndexOffset: clusterLevel ? (1000 + (100*clusterLevel)) : null,
             riseOnHover: false
         });
     	
     	// bind click/hover events 
-    	
     	if (this.options.enablePopup) {
     		marker.bindPopup(popupTemplate.render({
     			imageURL: result.get('imageUrl'),
@@ -393,22 +402,19 @@ module.exports = ContentControlView.extend({
 			var cluster = clusters[k];
 			if (cluster['items'].length == 1) {
 				singleResults.push(cluster['items'][0]);
-				delete clusters[k];
+				clusters.splice(k, 1);
 			} else {
-				// TODO: sort the items inside a cluster?
+				// sort the items inside a cluster, most important last (highest in stack)
+				cluster['items'].sort(function(a, b) {
+		    	    return a.get('relevance') - b.get('relevance');
+		    	});
 			}
     	}
     	
-    	// TODO: sort the singleResults!
-    	console.log('CLUST')
-    	console.log(clusters)
+    	// all cluster bases are large markers
     	var remainingLargeMarkers = self.options.MARKER_NUMBER_OF_LARGE_MARKERS;
-    	
     	for (var i=0; i < clusters.length; i++) {
 			var cluster = clusters[i];
-			if (!cluster) {
-				continue; // TODO, deleted clusters are empty, delete them properly
-			}
 			// for each cluster, add all results in a stacking offset
 			for (var j=cluster['items'].length-1; j >= 0; j--) {
 				var item = cluster['items'][j];
@@ -417,9 +423,11 @@ module.exports = ContentControlView.extend({
 			remainingLargeMarkers -= 1;
     	}
     	
-    	// add the results that aren't in a cluster
+    	// sort (by relevance) and add the results that aren't in a cluster
+    	singleResults.sort(function(a, b) {
+    	    return b.get('relevance') - a.get('relevance');
+    	});
     	_.each(singleResults, function(result){
-    		// TODO: determine isLargeMarker by score
     		if (remainingLargeMarkers > 0) {
     			self.markerAdd(result, true);
     			remainingLargeMarkers -= 1;
@@ -451,6 +459,7 @@ module.exports = ContentControlView.extend({
         }
         
         this.fitBounds();
+        this.updateClusterDistances();
 
         this.leaflet.on('zoomend', this.handleViewportChange, this);
         this.leaflet.on('dragend', this.handleViewportChange, this);
@@ -507,7 +516,7 @@ module.exports = ContentControlView.extend({
     
     /** Gets a dict of {iconUrl: <str>, iconWidth: <int>, iconHeight: <int>}
      *  for a given type corresponding to model Result.type. */
-    getMarkerIconForType: function(resultType, isLargeMarker) {
+    getMarkerIconForType: function(resultType, isLargeMarker, isStackedMarker) {
     	var markerIcon;
     	// if custom marker icons are supplied, use those, else default ones
     	// custom marker icon ignore large-sizedness
@@ -520,9 +529,9 @@ module.exports = ContentControlView.extend({
             };
         } else {
         	markerIcon = {
-	            iconUrl: this.options.mapMarkerStaticPath + this.options.resultMarkerImages[resultType + (isLargeMarker ? 'Large' : '')],
-	            iconWidth: this.options.resultMarkerSizes['width' + (isLargeMarker ? 'Large' : '')],
-	            iconHeight: this.options.resultMarkerSizes['height' + (isLargeMarker ? 'Large' : '')]
+	            iconUrl: this.options.mapMarkerStaticPath + this.options.resultMarkerImages[resultType + (isLargeMarker ? 'Large' : (isStackedMarker ? 'Stacked' : ''))],
+	            iconWidth: this.options.resultMarkerSizes['width' + (isLargeMarker ? 'Large' : (isStackedMarker ? 'Stacked' : ''))],
+	            iconHeight: this.options.resultMarkerSizes['height' + (isLargeMarker ? 'Large' : (isStackedMarker ? 'Stacked' : ''))]
         	};
         }
         return markerIcon;
@@ -588,22 +597,17 @@ module.exports = ContentControlView.extend({
     handleViewportChange: function () {
         this.setClusterState();
         this.updateBounds();
+        this.updateClusterDistances();
         Backbone.mediator.publish('app:stale-results', {reason: 'viewport-changed'});
-        
+    },
+    
+    /** Recalculate clustering distances based on current map area and zoom */
+    updateClusterDistances: function () {
         var ns = Math.abs(this.state.south - this.state.north) / this.$el.height();
         var we = Math.abs(this.state.east - this.state.west) / this.$el.width();
         this.options.resultMarkerClusterDistance['x'] = we * this.options.resultMarkerSizes['widthLarge'] * 1.1;
         this.options.resultMarkerClusterDistance['y'] = ns * this.options.resultMarkerSizes['heightLarge'] * 1.1;
-        this.options.resultMarkerClusterDistance['perPxX'] = we;
-        this.options.resultMarkerClusterDistance['perPxY'] = ns;
-        
-        /* TODO: remove
-        $('.debugp').text('   N: ' + String(this.state.north) + '   S: ' +
-        		String(this.state.south) + '   W: ' + String(this.state.west) +
-        		'   S: ' + String(this.state.east) + '   NS: ' + String(Math.abs(this.state.south - this.state.north)) +
-        		'   WE: ' + String(Math.abs(this.state.east - this.state.west)) + '   wid: ' + this.$el.width() + '   hei: ' + 
-        		this.$el.height() + '      FIWID: ' + maxwid + '    FIHEI: ' + maxhei);
-        */
+        this.options.resultMarkerClusterDistance['perZoom'] = this.options.MARKER_STACKED_OFFSET_BASE_VALUE / (Math.pow(2, this.leaflet.getZoom()));
     },
 
     // Handle change bounds (from URL).
