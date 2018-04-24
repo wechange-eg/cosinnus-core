@@ -360,6 +360,17 @@ class UserAdmin(DjangoUserAdmin):
     tos_accepted.short_description = _('ToS accepted?')
     tos_accepted.boolean = True
     
+    def get_actions(self, request):
+        """ We never allow users to be deleted, only deactivated! """
+        actions = super(UserAdmin, self).get_actions(request)
+        if 'delete_selected' in actions:
+            del actions['delete_selected']
+        return actions
+    
+    def has_delete_permission(self, request, obj=None):
+        """ We never allow users to be deleted, only deactivated! """
+        return False
+    
     def deactivate_users(self, request, queryset):
         count = 0
         for user in queryset:

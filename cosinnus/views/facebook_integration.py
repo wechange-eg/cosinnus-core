@@ -110,7 +110,7 @@ class FacebookIntegrationViewMixin(object):
                 return None
             
             post_target = fb_post_target_id or user_id
-            post_url = 'https://graph.facebook.com/v2.5/%(post_target)s/feed' % ({'post_target': post_target})
+            post_url = 'https://graph.facebook.com/v2.11/%(post_target)s/feed' % ({'post_target': post_target})
             data = {
                 'message': fb_post_text.encode('utf-8'),
                 'access_token': access_token,
@@ -425,7 +425,7 @@ def remove_facebook_association(request):
             messages.error(request, _('An error occured when trying to disconnect your facebook account! Please contact an administrator!'))
             return redirect(reverse('cosinnus:profile-edit'))
         
-        post_url = 'https://graph.facebook.com/v2.5/%(user_id)s/permissions' % ({'user_id': fb_user_id})
+        post_url = 'https://graph.facebook.com/v2.11/%(user_id)s/permissions' % ({'user_id': fb_user_id})
         data = {
             'access_token': access_token,
         }

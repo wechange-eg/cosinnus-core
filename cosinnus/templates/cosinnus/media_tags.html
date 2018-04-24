@@ -103,6 +103,17 @@
 	</script>
 {% endif %}
 
+
+{% if SETTINGS.COSINNUS_FACEBOOK_INTEGRATION_ENABLED and do_include_facebook_button %}
+	<div class="">
+        {% if not fb_label %}{% trans "Facebook-Integration" as fb_label %}{% endif %}
+        {% captureas fb_html %}
+			    {% include 'cosinnus/utils/facebook_integration.html' %}
+        {% endcaptureas %}
+        {% include 'cosinnus/fields/media_tag_field.html' with field_html=fb_html label=fb_label icon="fa-facebook-square" %}
+    </div>
+{% endif %}
+
 {% if not show_all %}
 	<div class="media_tag_initial_visible">
 	    {% include 'cosinnus/fields/default_field.html' with legend=media_tags_legend label=media_tags_label %}
