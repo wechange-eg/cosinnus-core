@@ -21,6 +21,8 @@
 @map-clickable-icon-hover-color: #333;
 @map-clickable-icon-active-color: #4285F4;
 
+@map-placeholder-gradient-top-color: #f5f5f5;
+
 
 
 /**
@@ -141,16 +143,24 @@
 	    
 	    .dual-tile-image {
             position: relative;
+            padding-top: 55%;
             	    
+		    .tile-image-background {
+		        position: absolute;
+		        height: 100%%;
+		        top: 0;
+		        left: 0;
+		    }
 		    .floating-tile-image {
-			    position: absolute;
+		        position: absolute;
+			    width: 25%;
 			    bottom: 10px;
 			    left: 10px;
+			    -webkit-box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.35);
+	            -moz-box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.35);
+	            box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.35);
 		    }
 		    
-		    .tile-image-background {
-		        width: 100%;
-		    }
 	    }
 	    
 	    .framed-tile-image {
@@ -160,12 +170,6 @@
 		    margin: 0 10px 10px 0;
 	    }
 	    
-	    .tile-image-icon {
-            width: 50px;
-            height: 50px;
-	    }
-	
-	
 		.title {
 			color: @map-text-color;
 			font-size: 18px;
@@ -229,6 +233,41 @@
        }
     }
 	
+	.image-placeholder-background-people {
+        background: @map-people-color; /* Old browsers */
+        background: -moz-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-people-color 90%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-people-color 90%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom,@map-placeholder-gradient-top-color 0%, @map-people-color 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@map-placeholder-gradient-top-color', endColorstr='@map-people-color', GradientType=0); /* IE6-9 */
+    }
+    .image-placeholder-background-events {
+        background: @map-events-color; /* Old browsers */
+        background: -moz-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-events-color 90%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-events-color 90%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom,@map-placeholder-gradient-top-color 0%, @map-events-color 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@map-placeholder-gradient-top-color', endColorstr='@map-events-color', GradientType=0); /* IE6-9 */
+    }
+    .image-placeholder-background-projects {
+        background: @map-projects-color; /* Old browsers */
+        background: -moz-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-projects-color 90%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-projects-color 90%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom,@map-placeholder-gradient-top-color 0%, @map-projects-color 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@map-placeholder-gradient-top-color', endColorstr='@map-projects-color', GradientType=0); /* IE6-9 */
+    }
+    .image-placeholder-background-groups {
+        background: @map-groups-color; /* Old browsers */
+        background: -moz-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-groups-color 90%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-groups-color 90%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom,@map-placeholder-gradient-top-color 0%, @map-groups-color 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@map-placeholder-gradient-top-color', endColorstr='@map-groups-color', GradientType=0); /* IE6-9 */
+    }
+    .image-placeholder-background-ideas {
+        background: @map-ideas-color; /* Old browsers */
+        background: -moz-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-ideas-color 90%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-ideas-color 90%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom,@map-placeholder-gradient-top-color 0%, @map-ideas-color 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@map-placeholder-gradient-top-color', endColorstr='@map-ideas-color', GradientType=0); /* IE6-9 */
+    }
 }
 .tile-detail {
     width: 50%;

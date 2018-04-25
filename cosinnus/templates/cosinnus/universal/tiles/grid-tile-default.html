@@ -5,8 +5,8 @@
     {{ macros.typeLabel(type, singular=1) }}
     <span>{{relevance}}</span> {# TODO: delete me #}
     
-    {% if controlView.portalInfo.current != portal %}
-        <div class="{% if not isSmall %}pull-right{% endif %}">
+    {% if not isSmall and controlView.portalInfo.current != portal %}
+        <div class="pull-right">
             <a class="portal-inlink" href="{{ controlView.portalInfo[portal].domain }}" target="_blank" title="{{ controlView.portalInfo[portal].name }}">
                 {# <img src="{{ controlView.portalInfo[portal].image_url }}" style="width:20px;"> #}
                 {{ controlView.portalInfo[portal].name }}
