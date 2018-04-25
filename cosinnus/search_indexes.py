@@ -63,8 +63,11 @@ class CosinnusGroupIndexMixin(DocumentBoostMixin, StoredDataIndexMixin, indexes.
     def prepare_url(self, obj):
         return obj.get_absolute_url()
     
-    def prepare_marker_image_url(self, obj):
-        return obj.get_map_marker_image_url() or static('images/group-avatar-placeholder.png')
+    def get_image_field_for_icon(self, obj):
+        return obj.get_image_field_for_icon()
+    
+    def get_image_field_for_background(self, obj):
+        return obj.get_image_field_for_background()
     
     def prepare_description(self, obj):
         """ TODO: this should actually reflect the group['description'] language-sensitive magic! """
@@ -134,8 +137,8 @@ class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearch
     def prepare_title(self, obj):
         return obj.user.get_full_name()
     
-    def prepare_marker_image_url(self, obj):
-        return obj.get_map_marker_image_url()
+    def get_image_field_for_icon(self, obj):
+        return obj.get_image_field_for_icon()
     
     def prepare_url(self, obj):
         """ NOTE: UserProfiles always contain a relative URL! """

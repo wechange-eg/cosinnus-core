@@ -14,6 +14,9 @@ from uuid import uuid4
 from django.utils.encoding import force_text
 from django.db.models.loading import get_model
 
+from easy_thumbnails.files import get_thumbnailer
+from easy_thumbnails.exceptions import InvalidImageFormatError
+
 # delegate import to avoid cyclic dependencies
 _CosinnusPortal = None
 
@@ -103,4 +106,32 @@ def append_string_to_filename(file_path, string_to_append):
     dir_name, file_name = os.path.split(file_path)
     file_root, file_ext = os.path.splitext(file_name)
     return os.path.join(dir_name, "%s_%s%s" % (file_root, string_to_append, file_ext))
-                
+
+
+def image_thumbnail(image, size):
+    """ Returns the thumbnail to a given image field in the required size, or None if no image is provided 
+        @param size: Tuple of sizes, e.g. (80, 80)
+    """
+    if not image:
+        return None
+
+    thumbnailer = get_thumbnailer(image)
+    try:
+        thumbnail = thumbnailer.get_thumbnail({
+            'crop': True,
+            'upscale': True,
+            'size': size,
+        })
+    except InvalidImageFormatError:
+        if settings.DEBUG:
+            raise
+    return thumbnail
+
+
+def image_thumbnail_url(image, size):
+    """ Returns the static image URL for a thumbnail to a given image field in the required size, 
+        or None if no image is provided 
+        @param size: Tuple of sizes, e.g. (80, 80) """
+    thumbnail = image_thumbnail(image, size)
+    return thumbnail.url if thumbnail else None
+    

@@ -17,6 +17,8 @@ from django.core.cache import cache
 from django.db.models.loading import get_model
 import numpy
 from cosinnus.utils.group import get_cosinnus_group_model
+import six
+from cosinnus.utils.files import image_thumbnail_url
 
 _CosinnusPortal = None
 
@@ -127,8 +129,13 @@ class StoredDataIndexMixin(indexes.SearchIndex):
     
     title = indexes.CharField(stored=True, indexed=False)
     url = indexes.CharField(stored=True, indexed=False)
-    marker_image_url = indexes.CharField(stored=True, indexed=False)
     description = indexes.CharField(stored=True, indexed=False)
+    # the small icon image, should be a 144x144 image
+    icon_image_url = indexes.CharField(stored=True, indexed=False)
+    # the small background image or None, should be a 500x275 image
+    background_image_small_url = indexes.CharField(stored=True, indexed=False)
+    # the large background image or None, should be a 1000x550 image
+    background_image_large_url = indexes.CharField(stored=True, indexed=False)
     
     def prepare_title(self, obj):
         return obj.title
@@ -136,8 +143,40 @@ class StoredDataIndexMixin(indexes.SearchIndex):
     def prepare_url(self, obj):
         return obj.get_absolute_url()
     
-    def prepare_marker_image_url(self, obj):
+    def get_image_field_for_icon(self, obj):
+        """ Stub: Overrride this and return one of:
+            - an image field to be resized (preferred)
+            - a string URL for a direct image that won't be resized
+            - None """
         return None
+    
+    def get_image_field_for_background(self, obj):
+        """ Stub: Overrride this and return one of:
+            - an image field to be resized (preferred)
+            - a string URL for a direct image that won't be resized
+            - None """
+        return None
+    
+    def prepare_icon_image_url(self, obj):
+        """ This should not be overridden """
+        image = self.get_image_field_for_icon(obj)
+        if image and isinstance(image, six.string_types):
+            return image
+        return image_thumbnail_url(image, (144, 144))
+    
+    def prepare_background_image_small_url(self, obj):
+        """ This should not be overridden """
+        image = self.get_image_field_for_background(obj)
+        if image and isinstance(image, six.string_types):
+            return image
+        return image_thumbnail_url(image, (500, 275))
+    
+    def prepare_background_image_large_url(self, obj):
+        """ This should not be overridden """
+        image = self.get_image_field_for_background(obj)
+        if image and isinstance(image, six.string_types):
+            return image
+        return image_thumbnail_url(image, (1000, 550))
     
     def prepare_description(self, obj):
         return obj.description
@@ -222,6 +261,9 @@ class BaseTaggableObjectIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjec
 
     def prepare_description(self, obj):
         return None
+    
+    def get_image_field_for_icon(self, obj):
+        return obj.group.get_image_field_for_icon()
     
     def index_queryset(self, using=None):
         model_cls = self.get_model()

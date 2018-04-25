@@ -12,13 +12,12 @@ from django.db.models.signals import post_save, class_prepared
 from django.utils.encoding import python_2_unicode_compatible, force_text
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 
-from easy_thumbnails.files import get_thumbnailer
-from easy_thumbnails.exceptions import InvalidImageFormatError
 from jsonfield import JSONField
 
 from cosinnus.conf import settings
 from cosinnus.conf import settings as cosinnus_settings
-from cosinnus.utils.files import get_avatar_filename
+from cosinnus.utils.files import get_avatar_filename, image_thumbnail,\
+    image_thumbnail_url
 from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.core import signals
@@ -231,33 +230,15 @@ class BaseUserProfile(FacebookIntegrationUserProfileMixin, models.Model):
     @property
     def avatar_url(self):
         return self.avatar.url if self.avatar else None
-
+    
     def get_avatar_thumbnail(self, size=(80, 80)):
-        if not self.avatar:
-            return None
-
-        thumbnails = getattr(self, '_avatar_thumbnails', {})
-        if size not in thumbnails:
-            thumbnailer = get_thumbnailer(self.avatar)
-            try:
-                thumbnails[size] = thumbnailer.get_thumbnail({
-                    'crop': True,
-                    'upscale': True,
-                    'size': size,
-                })
-            except InvalidImageFormatError:
-                if settings.DEBUG:
-                    raise
-            setattr(self, '_avatar_thumbnails', thumbnails)
-        return thumbnails.get(size, None)
+        return image_thumbnail(self.avatar, size)
 
     def get_avatar_thumbnail_url(self, size=(80, 80)):
-        tn = self.get_avatar_thumbnail(size)
-        return tn.url if tn else static('images/jane-doe.png')
+        return image_thumbnail_url(self.avatar, size) or static('images/jane-doe.png')
     
-    def get_map_marker_image_url(self):
-        """ Returns a static image URL to use as a map marker image, or '' if none available """
-        return self.get_avatar_thumbnail_url(settings.COSINNUS_MAP_IMAGE_SIZE) or static('images/jane-doe.png')
+    def get_image_field_for_icon(self):
+        return self.avatar or static('images/jane-doe.png')
     
     def media_tag_object(self):
         key = '_media_tag_cache'

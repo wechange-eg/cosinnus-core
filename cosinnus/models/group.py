@@ -24,7 +24,8 @@ from cosinnus.utils.functions import unique_aware_slugify,\
     clean_single_line_text
 from cosinnus.utils.files import get_group_avatar_filename,\
     get_portal_background_image_filename, get_group_wallpaper_filename,\
-    get_cosinnus_media_file_folder, get_group_gallery_image_filename
+    get_cosinnus_media_file_folder, get_group_gallery_image_filename,\
+    image_thumbnail, image_thumbnail_url
 from django.core.urlresolvers import reverse
 from django.utils.functional import cached_property
 from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
@@ -937,30 +938,16 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
         return self.avatar.url if self.avatar else None
     
     def get_avatar_thumbnail(self, size=(80, 80)):
-        if not self.avatar:
-            return None
-
-        thumbnails = getattr(self, '_avatar_thumbnails', {})
-        if size not in thumbnails:
-            thumbnailer = get_thumbnailer(self.avatar)
-            try:
-                thumbnails[size] = thumbnailer.get_thumbnail({
-                    'crop': True,
-                    'upscale': True,
-                    'size': size,
-                })
-            except InvalidImageFormatError:
-                if settings.DEBUG:
-                    raise
-            setattr(self, '_avatar_thumbnails', thumbnails)
-        return thumbnails.get(size, None)
+        return image_thumbnail(self.avatar, size)
 
     def get_avatar_thumbnail_url(self, size=(80, 80)):
-        tn = self.get_avatar_thumbnail(size)
-        return tn.url if tn else None
+        return image_thumbnail_url(self.avatar, size) or static('images/group-avatar-placeholder.png')
     
-    def get_map_marker_image_url(self):
-        return self.get_avatar_thumbnail_url(settings.COSINNUS_MAP_IMAGE_SIZE) or static('images/group-avatar-placeholder.png')
+    def get_image_field_for_icon(self):
+        return self.avatar or static('images/group-avatar-placeholder.png')
+    
+    def get_image_field_for_background(self):
+        return self.wallpaper
     
     def get_facebook_avatar_url(self):
         page_or_group_id = self.facebook_page_id or self.facebook_group_id or None

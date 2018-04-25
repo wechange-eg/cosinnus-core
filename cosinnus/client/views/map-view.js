@@ -220,8 +220,8 @@ module.exports = ContentControlView.extend({
      * 
      * @param result: Result model
      * @param isLargeMarker: (optional) bool. make this marker icon large?
-     * @param isLargeMarker: (optional) int. if supplied, the result is considered in a cluster, at this rank. 0 means base cluster-marker
-     * @param isLargeMarker: (optional) {lat: int, lon: int} if result is in a cluster, the coords (rank will be added as offset)
+     * @param clusterLevel: (optional) int. if supplied, the result is considered in a cluster, at this rank. 0 means base cluster-marker
+     * @param clusterCoords: (optional) {lat: int, lon: int} if result is in a cluster, the coords (rank will be added as offset)
      */
     markerAdd: function(result, isLargeMarker, clusterLevel, clusterCoords) {
     	var self = this;

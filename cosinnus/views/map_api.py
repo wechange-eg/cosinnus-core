@@ -114,7 +114,10 @@ def _collect_parameters(param_dict, parameter_list):
 class MapResult(dict):
     """ A single result for the search of the map, enforcing required fields """
 
-    def __init__(self, short_id, result_type, lat, lon, address, title, url=None, imageUrl=None, description=None, relevance=0, topics=[], portal=None, *args, **kwargs):
+    def __init__(self, short_id, result_type, lat, lon, address, title, 
+                 url=None, iconImageUrl=None, backgroundImageSmallUrl=None, backgroundImageLargeUrl=None,
+                 description=None, relevance=0, topics=[], 
+                 portal=None, *args, **kwargs):
         self['id'] = short_id
         self['type'] = result_type
         self['lat'] = lat
@@ -122,7 +125,9 @@ class MapResult(dict):
         self['address'] = address
         self['title'] = title
         self['url'] = url
-        self['imageUrl'] = imageUrl
+        self['iconImageUrl'] = iconImageUrl
+        self['backgroundImageSmallUrl'] = backgroundImageSmallUrl
+        self['backgroundImageLargeUrl'] = backgroundImageLargeUrl
         self['description'] = description
         self['relevance'] = relevance
         self['topics'] = topics
@@ -152,12 +157,14 @@ class HaystackMapResult(MapResult):
             result.mt_location_lon,
             result.mt_location,
             result.title, 
-            result.url,
-            result.marker_image_url,
-            textfield(result.description),
-            result.score,
-            result.mt_topics,
-            portal
+            url=result.url,
+            iconImageUrl=result.icon_image_url,
+            backgroundImageSmallUrl=result.background_image_small_url,
+            backgroundImageLargeUrl=result.background_image_large_url,
+            description=textfield(result.description),
+            relevance=result.score,
+            topics=result.mt_topics,
+            portal=portal
         )
 
 

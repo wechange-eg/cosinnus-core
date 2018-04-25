@@ -4,14 +4,14 @@
         
         {% if isSmall %}
             <div class="framed-tile-image">
-                <img class="tile-image-icon" src="{{imageUrl}}" />
+                <img class="tile-image-icon" src="{{ iconImageUrl }}" />
             </div>
         {% else %}
-            <div class="dual-tile-image {% if not backgroundImageUrl %}image-placeholder-background-{{ type }}{% endif %}">
-                {% if backgroundImageUrl %}
-                    <img class="tile-image tile-image-background" src="{{ backgroundImageUrl }}" /> {# TODO: put in wallpaper/placeholder img #}
+            <div class="dual-tile-image {% if not backgroundImageSmallUrl %}image-placeholder-background-{{ type }}{% endif %}">
+                {% if backgroundImageSmallUrl %}
+                    <img class="tile-image tile-image-background" src="{{ backgroundImageSmallUrl }}" /> {# TODO: put in wallpaper/placeholder img #}
                 {% endif %}
-	               <img class="floating-tile-image" src="{{ imageUrl }}" />
+                <img class="floating-tile-image" src="{{ iconImageUrl }}" />
             </div>
         {% endif %}
         
