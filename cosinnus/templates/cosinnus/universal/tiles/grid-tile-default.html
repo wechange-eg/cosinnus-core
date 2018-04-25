@@ -1,35 +1,26 @@
 {% extends 'tiles/grid-tile-base' %}
 {% import "include/macros.html" as macros %}
 
-{% block type_area %}
-    {{ macros.typeLabel(type, singular=1) }}
-    <span>{{relevance}}</span> {# TODO: delete me #}
-    
-    {% if not isSmall and controlView.portalInfo.current != portal %}
-        <div class="pull-right">
-            <a class="portal-inlink" href="{{ controlView.portalInfo[portal].domain }}" target="_blank" title="{{ controlView.portalInfo[portal].name }}">
-                {# <img src="{{ controlView.portalInfo[portal].image_url }}" style="width:20px;"> #}
-                {{ controlView.portalInfo[portal].name }}
-            </a> 
-        </div>
-    {% endif %}
-{% endblock %}
-
 {% block description_area %}
-    <div class="title">{{title}}</div>
+    <h1>{{title}}</h1>
     
     {% if topics|length > 0 %}
-        <div class="topics">
-            Topics: 
+        <div class="tile-section one-line">
+            <span class="pale-color">Topics:</span> 
             {% for topic in topics %}
-                <a class="topic-filter-link" data-topic-id="{{ topic }}">{{ controlView.allTopics[topic] }}</a>{% if not loop.last %},{% endif %}
+                <a class="topic-filter-link " data-topic-id="{{ topic }}">{{ controlView.allTopics[topic] }}</a>{% if not loop.last %},{% endif %}
             {% endfor %}
         </div>
     {% endif %}
     
-    <div class="description">{{description|safe}}</div>
+    {% if description %}
+        <div class="tile-section tile-description">{{description|safe}}</div>
+    {% endif %}
 {% endblock %}
 
 {% block icon_area %}
-    <div><i class="fa fa-user"></i> 123</div>
+    <div class="tile-section pale-color">
+        <i class="fa fa-user"></i> 
+        123
+    </div>
 {% endblock %}

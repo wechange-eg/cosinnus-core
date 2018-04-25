@@ -6,7 +6,6 @@
 @map-strong-color: #000;
 @map-frame-color: #ebebeb;
 
-
 @map-button-color: #FFF;
 @map-action-button-color: #34b4b5;
 
@@ -62,6 +61,15 @@
     .caps {
         text-transform: uppercase;
     }
+    .pale-color {
+        color: @map-pale-color;
+    }
+    .result-type-span {
+        i {
+            font-size: 16px;
+            margin: 0 5px;
+        }
+    } 
     
     .apply-color-people {
         color: @map-people-color;
@@ -172,14 +180,7 @@
 		    margin: 0 10px 10px 0;
 	    }
 	    
-		.title {
-			color: @map-text-color;
-			font-size: 18px;
-			font-weight: bold;
-		}
-		
 		.tile-detail-link {
-			padding: 20px;
 		    cursor: pointer;
 		}
 		
@@ -208,6 +209,43 @@
             -moz-box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.35);
             box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.35);
         }
+        
+        
+	    .tile-section {
+	        padding: 5px 0 5px 0;
+	        
+	        i.fa {
+	            font-size: 14px;
+	            padding: 0 5px 0 0;
+	        }
+	    }
+	    .tile-description {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-height: 56px;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+            margin-bottom: 10px;
+	    }
+	    .one-line {
+	        white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+        }
+	    
+	    h1 {
+	        font-size: 16px;
+	        font-weight: normal;
+	        margin: 10px 0 10px 0;
+	    }
+	    p {
+	        padding: 0;
+	    }
+	    a:not(.uncolored-link) {
+	       color: @map-action-button-color;
+	    }
+	    
 	}
 }
 
@@ -233,6 +271,8 @@
 }
 
 .tile, .tile-detail {
+	padding: 20px;
+    color: @map-text-color;
     background-color: @map-tile-background-color;
 	
     a {
@@ -279,6 +319,7 @@
         background: linear-gradient(to bottom,@map-placeholder-gradient-top-color 0%, @map-ideas-color 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@map-placeholder-gradient-top-color', endColorstr='@map-ideas-color', GradientType=0); /* IE6-9 */
     }
+    
 }
 .tile-detail {
     width: 50%;
@@ -423,7 +464,7 @@
     cursor: auto;
     color: @map-text-color;
     
-    p, .pale-color {
+    p, {
         color: @map-pale-color;
     }
     

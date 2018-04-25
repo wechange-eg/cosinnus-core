@@ -1,5 +1,5 @@
 {% macro typeLabel(type, classes="", singular=0) %}
-	<span class="button-color-{{ type }} {{ classes }}">
+	<span class="result-type-span apply-color-{{ type }} {{ classes }}">
 	    {% if singular %}
 		    {% if type == "people" %}
 		        <i class="fa fa-user"></i>
