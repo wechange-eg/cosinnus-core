@@ -4,6 +4,7 @@
 @map-text-color: #333;
 @map-pale-color: #999;
 @map-strong-color: #000;
+@map-frame-color: #ebebeb;
 
 
 @map-button-color: #FFF;
@@ -111,6 +112,7 @@
 	.grid {
         min-height: 100%;
         background-color: @map-tile-background-color;
+        margin-left: 10px; /* so the hover drop shadows don't get cut off */
 	}
 	
     .grid-sizer, .grid-item { 
@@ -182,20 +184,31 @@
 		}
 		
         &.tile-people  {
-            border: 1px solid @map-people-color;
+            /* border: 1px solid @map-people-color; */
         }
         &.tile-events  {
-            border: 1px solid @map-events-color;
+            /* border: 1px solid @map-events-color; */
         }
         &.tile-projects  {
-            border: 1px solid @map-projects-color;
+            /* border: 1px solid @map-projects-color; */
         }
         &.tile-groups  {
-            border: 1px solid @map-groups-color;
+            /* border: 1px solid @map-groups-color; */
+        }
+        &.tile-ideas  {
+            /* border: 1px solid @map-ideas-color; */
         }
         
+        border: 2px solid @map-frame-color;
+        border-left: 0;
+        border-bottom: 0;
+        
+        
         &.hovered {
-            border: 1px solid blue;
+            z-index: 2;
+             -webkit-box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.35);
+            -moz-box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.35);
+            box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.35);
         }
 	}
 }
@@ -392,10 +405,11 @@
     }
     
     .leaflet-marker-icon.marker-selected {
-        border: 3px solid green;
+        filter: grayscale(100%);
     }
     .leaflet-marker-icon.marker-hovered {
-        border: 1px solid blue;
+        filter: brightness(0.75);
+        
     }
     
 }
@@ -537,7 +551,11 @@
     }
     
     .map-controls-search {
-        border-bottom: 2px solid #ebebeb;
+        /*  border-bottom: 2px solid @map-frame-color; */
+        -webkit-box-shadow: 0px 0px 0px 1px @map-frame-color;
+        -moz-box-shadow: 0px 0px 0px 1px @map-frame-color;
+        box-shadow: 0px 0px 0px 1px @map-frame-color;
+    
         position: relative;
         display: flex;
         flex-direction: row;
@@ -550,7 +568,7 @@
 	            position: absolute;
 	            right: 54px;
 	            top: 10px;
-	            border-left: 2px solid #ebebeb;
+	            border-left: 2px solid @map-frame-color;
 	            height: 34px;
 	        }
         }
@@ -652,7 +670,7 @@
         min-height: 54px;
         padding: 10px 15px;
         line-height: 32px;
-        border-bottom: 1px solid #ebebeb;
+        border-bottom: 1px solid @map-frame-color;
     
         .active-filters {
             display: inline-block;

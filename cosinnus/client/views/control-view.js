@@ -531,6 +531,7 @@ module.exports = ContentControlView.extend({
     	this.selectedResult = result;
     	if (this.selectedResult != null) {
     		this.selectedResult.set('selected', true);
+    		this.setHoveredResult(null); // always unhover on select
     		
     		// selecting a result changes the URL so results can be directly linked
     		if (App.displayOptions.routeNavigation) {
@@ -545,6 +546,9 @@ module.exports = ContentControlView.extend({
      * If result == null, will just un-set the current one.
      */
     setHoveredResult: function (result) {
+    	if (result && result == this.selectedResult) {
+    		return; // prevent setting hovered state on the currently selected result
+    	}
     	if (this.hoveredResult != null) {
     		this.hoveredResult.set('hovered', false);
     	}
