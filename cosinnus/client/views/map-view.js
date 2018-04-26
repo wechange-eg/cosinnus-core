@@ -222,8 +222,9 @@ module.exports = ContentControlView.extend({
      * @param isLargeMarker: (optional) bool. make this marker icon large?
      * @param clusterLevel: (optional) int. if supplied, the result is considered in a cluster, at this rank. 0 means base cluster-marker
      * @param clusterCoords: (optional) {lat: int, lon: int} if result is in a cluster, the coords (rank will be added as offset)
+     * @param addNumberLabel: (optional) if true, adds the <clusterLevel+1> or "9+" number on top of the icon
      */
-    markerAdd: function(result, isLargeMarker, clusterLevel, clusterCoords) {
+    markerAdd: function(result, isLargeMarker, clusterLevel, clusterCoords, addNumberLabel) {
     	var self = this;
     	
     	if (!result.get('lat') || !result.get('lon')) {
@@ -249,17 +250,25 @@ module.exports = ContentControlView.extend({
     	}
     	
     	util.log('adding marker at coords ' + JSON.stringify(coords))
+    	
+    	// add number label
+    	var className = '';
+    	if (addNumberLabel) {
+    		className = 'marker-number-label number-label-' + (clusterLevel > 9 ? '9-plus' : String(clusterLevel));
+    	}
         var marker = L.marker(coords, {
             icon: L.icon({
                 iconUrl: markerIcon.iconUrl,
                 iconSize: [markerIcon.iconWidth, markerIcon.iconHeight],
                 iconAnchor: [markerIcon.iconWidth / 2, markerIcon.iconHeight],
+                className: className,
 //                popupAnchor: [1, -27],
 //                shadowSize: [28, 28]
             }),
             zIndexOffset: clusterLevel ? (1000 + (100*clusterLevel)) : null,
             riseOnHover: false
         });
+    	
     	
     	// bind click/hover events 
     	if (this.options.enablePopup) {
@@ -419,7 +428,7 @@ module.exports = ContentControlView.extend({
 			// for each cluster, add all results in a stacking offset
 			for (var j=cluster['items'].length-1; j >= 0; j--) {
 				var item = cluster['items'][j];
-				self.markerAdd(item, j==0, j, cluster['loc']);
+				self.markerAdd(item, j==0, j, cluster['loc'], j==cluster['items'].length-1);
 	    	}
 			remainingLargeMarkers -= 1;
     	}

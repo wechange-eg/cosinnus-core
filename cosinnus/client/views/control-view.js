@@ -132,6 +132,7 @@ module.exports = ContentControlView.extend({
     /** Reset all types of input filters and trigger a new search */
     resetAllClicked: function (event) {
         event.preventDefault();
+        this.resetAll();
         this.render();
     	this.triggerDelayedSearch(true);
     },
