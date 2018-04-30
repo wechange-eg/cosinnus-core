@@ -28,9 +28,10 @@
 /**
   z-indexes:
     0: default. map, tiles
-    1: map-buttons, old search controls
-    2: tile-list/map disabled-input overlay (during search)
-    3: tile-detail frame
+    1: map-buttons, hovered tile
+    2: disabled-input overlay (during search)
+    3: search controls
+    4: tile-detail frame
 */
 
 .app-fullscreen, .map-fullscreen, .tile-list-fullscreen {
@@ -209,7 +210,7 @@
         outline-offset: -1px;
         
         &.hovered {
-            z-index: 2;
+            z-index: 1;
             -webkit-box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.35);
             -moz-box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.35);
             box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.35);
@@ -261,7 +262,7 @@
     position: fixed;
     top: 0;
     left: 50%;
-    z-index: 3;
+    z-index: 4;
     padding: 65px 10px;
 }
 .app-embed .tile-detail {
@@ -466,7 +467,7 @@
 }
 
 .controls {
-	z-index: 1;
+	z-index: 3;
 }
 
 .map-controls, .map-scroll-controls, .map-pagination-controls {
