@@ -118,14 +118,14 @@ module.exports = ContentControlView.extend({
     	resultMarkerClusterDistance: {
     		x: 0,
     		y: 0,
-    		perZoom: 0, // hardcoded function of px per zoom level
+    		perZoom: 0, // hardcoded function of px per zoom level, if you want to offset in px for current zoom
     	},
     	
-    	MARKER_OFFSET_PER_CLUSTER_LEVEL: 10,
-    	MARKER_NUMBER_OF_LARGE_MARKERS: 8,
+    	MARKER_NUMBER_OF_LARGE_MARKERS: 8, // this many of the most relevant results become large markers
+    	
     	MARKER_CLUSTER_RADIUS_LIMIT: 0.85, // cluster radius multiplier: modifier for how aggressively the clusters should pull in markers
-    	MARKER_STACKED_OFFSET_BASE_VALUE: 0.95, // base of the dynamic px-per-zoom value. increase this to increase stack distance
-    	MARKER_STACKED_INITIAL_OFFSET: 4.0, // offset of the first stackmarker to the base cluster marker, in multiples of MARKER_STACKED_OFFSET_BASE_VALUE
+    	MARKER_STACK_PX_OFFSET_PER_CLUSTER_LEVEL: 12, // offset in px for clustered stack-makers per level
+    	MARKER_STACK_PX_OFFSET_BASE: 8, // additional offset in px of first clustered stack-marker (level 1) from the base marker
     	
         zoom: 7,
         location: [
@@ -248,26 +248,25 @@ module.exports = ContentControlView.extend({
     	// for clustered markers, every marker but the base marker becomes a stacked marker.
     	var markerIcon = this.getMarkerIconForType(result.get('type'), isLargeMarker, clusterLevel > 0, clusterLevel == 0);
     	var coords = clusterCoords ? clusterCoords : [result.get('lat'), result.get('lon')];
-    	
+    	var isPointedMarker = isLargeMarker || typeof clusterLevel !== 'undefined' || clusterLevel == 0;
+    	var clusterOffset = 0;
     	// add clusterLevel as offset
-    	if (clusterLevel && clusterLevel > 0) {
-    		var initialOffset = this.options.resultMarkerClusterDistance['perZoom'] * this.options.MARKER_STACKED_INITIAL_OFFSET;
-    		coords = $.extend(true, {}, coords);
-    		coords['lat'] += initialOffset + (clusterLevel * (this.options.resultMarkerClusterDistance['perZoom'] * this.options.MARKER_OFFSET_PER_CLUSTER_LEVEL)); 
+    	if (typeof clusterLevel !== 'undefined' && clusterLevel > 0) {
+    		clusterOffset = this.options.MARKER_STACK_PX_OFFSET_BASE + (this.options.MARKER_STACK_PX_OFFSET_PER_CLUSTER_LEVEL * clusterLevel);
     	}
-    	
     	util.log('adding marker at coords ' + JSON.stringify(coords))
     	
-    	// add number label
+    	// EXPERIMENTAL: TODO: add number label
     	var className = '';
     	if (addNumberLabel) {
     		className = 'marker-number-label number-label-' + (clusterLevel > 9 ? '9-plus' : String(clusterLevel));
     	}
+    	
         var marker = L.marker(coords, {
             icon: L.icon({
                 iconUrl: markerIcon.iconUrl,
                 iconSize: [markerIcon.iconWidth, markerIcon.iconHeight],
-                iconAnchor: [markerIcon.iconWidth / 2, markerIcon.iconHeight],
+                iconAnchor: [markerIcon.iconWidth / 2, (markerIcon.iconHeight / (isPointedMarker ? 1 : 2)) + clusterOffset],
                 className: className,
 //                popupAnchor: [1, -27],
 //                shadowSize: [28, 28]
@@ -632,7 +631,7 @@ module.exports = ContentControlView.extend({
         var we = Math.abs(this.state.east - this.state.west) / this.$el.width();
         this.options.resultMarkerClusterDistance['x'] = we * this.options.resultMarkerSizes['widthLarge'] * this.options.MARKER_CLUSTER_RADIUS_LIMIT;
         this.options.resultMarkerClusterDistance['y'] = ns * this.options.resultMarkerSizes['heightLarge'] * this.options.MARKER_CLUSTER_RADIUS_LIMIT;
-        this.options.resultMarkerClusterDistance['perZoom'] = this.options.MARKER_STACKED_OFFSET_BASE_VALUE / (Math.pow(2, this.leaflet.getZoom()));
+        this.options.resultMarkerClusterDistance['perZoom'] = 1 / (Math.pow(2, this.leaflet.getZoom()));
     },
 
     // Handle change bounds (from URL).
