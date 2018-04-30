@@ -117,8 +117,9 @@ class BaseMapResult(dict):
     
     fields = {
         'id': REQUIRED,
-        'type': REQUIRED, 
+        'type': REQUIRED,
         'title': REQUIRED, 
+        'slug': REQUIRED,
         'lat': None, 
         'lon': None, 
         'address': None, 
@@ -164,6 +165,7 @@ class HaystackMapResult(BaseMapResult):
             'id': shorten_haystack_id(result.id),
             'type': SEARCH_MODEL_NAMES[result.model],
             'title': result.title, 
+            'slug': result.slug,
             'lat': result.mt_location_lat,
             'lon': result.mt_location_lon,
             'address': result.mt_location,

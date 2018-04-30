@@ -8,10 +8,11 @@
         <div class="pale-color one-line">
 	        {% if type == "projects" %}
 	            {{ macros.typeLabel("groups", singular=1, useStyles=0, colon=1, showIcon=0) }}
+		        {{ macros.resultLink(portal, group_slug, group_name, "groups") }}
 	        {% else %}
 	            {{ macros.typeLabel("projects", singular=1, useStyles=0, colon=1, showIcon=0) }}
+                {{ macros.resultLink(portal, group_slug, group_name, "projects") }}
 	        {% endif %}
-	        {{ macros.groupLink(portal, group_slug, group_name) }}
         </div>
     {% endif %}
     

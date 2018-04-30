@@ -128,6 +128,8 @@ class StoredDataIndexMixin(indexes.SearchIndex):
      """
     
     title = indexes.CharField(stored=True, indexed=False)
+    # slug for linking
+    slug = indexes.CharField(stored=True, indexed=False)
     url = indexes.CharField(stored=True, indexed=False)
     description = indexes.CharField(stored=True, indexed=False)
     # the small icon image, should be a 144x144 image
@@ -169,6 +171,9 @@ class StoredDataIndexMixin(indexes.SearchIndex):
     
     def prepare_title(self, obj):
         return obj.title
+    
+    def prepare_slug(self, obj):
+        return obj.slug
     
     def prepare_url(self, obj):
         return obj.get_absolute_url()

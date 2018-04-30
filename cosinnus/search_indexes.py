@@ -163,6 +163,9 @@ class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearch
     def prepare_title(self, obj):
         return obj.user.get_full_name()
     
+    def prepare_slug(self, obj):
+        return obj.user.username
+    
     def get_image_field_for_icon(self, obj):
         return obj.get_image_field_for_icon()
     
