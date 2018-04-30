@@ -95,7 +95,12 @@ module.exports = ContentControlView.extend({
     		eventsStacked: 'placemark-m-event.png',
     		projectsStacked: 'placemark-m-project.png',
     		groupsStacked: 'placemark-m-group.png',
-    		ideasStacked: 'placemark-m-idea.png'
+    		ideasStacked: 'placemark-m-idea.png',
+    		peopleBase: 'placemark-x-person.png',
+    		eventsBase: 'placemark-x-event.png',
+    		projectsBase: 'placemark-x-project.png',
+    		groupsBase: 'placemark-x-group.png',
+    		ideasBase: 'placemark-x-idea.png'
     	},
     	
     	resultMarkerSizes: {
@@ -105,6 +110,8 @@ module.exports = ContentControlView.extend({
     		heightLarge: 37,
     		widthStacked: 23,
     		heightStacked: 23,
+    		widthBase: 28,
+    		heightBase: 37,
     	},
     	
     	// calculated dynamically depending on zoom, in `handleViewportChange()`
@@ -116,9 +123,9 @@ module.exports = ContentControlView.extend({
     	
     	MARKER_OFFSET_PER_CLUSTER_LEVEL: 10,
     	MARKER_NUMBER_OF_LARGE_MARKERS: 8,
-    	MARKER_CLUSTER_RADIUS_LIMIT: 0.75, // cluster radius multiplier: modifier for how aggressively the clusters should pull in markers
-    	MARKER_STACKED_OFFSET_BASE_VALUE: 0.75, // base of the dynamic px-per-zoom value. increase this to increase stack distance
-    	MARKER_STACKED_INITIAL_OFFSET: 5.0, // offset of the first stackmarker to the base cluster marker, in multiples of MARKER_STACKED_OFFSET_BASE_VALUE
+    	MARKER_CLUSTER_RADIUS_LIMIT: 0.85, // cluster radius multiplier: modifier for how aggressively the clusters should pull in markers
+    	MARKER_STACKED_OFFSET_BASE_VALUE: 0.95, // base of the dynamic px-per-zoom value. increase this to increase stack distance
+    	MARKER_STACKED_INITIAL_OFFSET: 4.0, // offset of the first stackmarker to the base cluster marker, in multiples of MARKER_STACKED_OFFSET_BASE_VALUE
     	
         zoom: 7,
         location: [
@@ -239,7 +246,7 @@ module.exports = ContentControlView.extend({
     	}
     	
     	// for clustered markers, every marker but the base marker becomes a stacked marker.
-    	var markerIcon = this.getMarkerIconForType(result.get('type'), isLargeMarker, clusterLevel > 0);
+    	var markerIcon = this.getMarkerIconForType(result.get('type'), isLargeMarker, clusterLevel > 0, clusterLevel == 0);
     	var coords = clusterCoords ? clusterCoords : [result.get('lat'), result.get('lon')];
     	
     	// add clusterLevel as offset
@@ -428,7 +435,7 @@ module.exports = ContentControlView.extend({
 			// for each cluster, add all results in a stacking offset
 			for (var j=cluster['items'].length-1; j >= 0; j--) {
 				var item = cluster['items'][j];
-				self.markerAdd(item, j==0, j, cluster['loc'], j==cluster['items'].length-1);
+				self.markerAdd(item, false, j, cluster['loc'], j==cluster['items'].length-1);
 	    	}
 			remainingLargeMarkers -= 1;
     	}
@@ -526,7 +533,7 @@ module.exports = ContentControlView.extend({
     
     /** Gets a dict of {iconUrl: <str>, iconWidth: <int>, iconHeight: <int>}
      *  for a given type corresponding to model Result.type. */
-    getMarkerIconForType: function(resultType, isLargeMarker, isStackedMarker) {
+    getMarkerIconForType: function(resultType, isLargeMarker, isStackedMarker, isBaseMarker) {
     	var markerIcon;
     	// if custom marker icons are supplied, use those, else default ones
     	// custom marker icon ignore large-sizedness
@@ -538,10 +545,18 @@ module.exports = ContentControlView.extend({
         		iconHeight: iconSettings.height
             };
         } else {
+        	var suffix = '';
+    		if (isBaseMarker) {
+        		suffix = 'Base';
+        	} else if (isStackedMarker) {
+        		suffix = 'Stacked';
+        	} else if (isLargeMarker) {
+        		suffix = 'Large';
+        	}
         	markerIcon = {
-	            iconUrl: this.options.mapMarkerStaticPath + this.options.resultMarkerImages[resultType + (isLargeMarker ? 'Large' : (isStackedMarker ? 'Stacked' : ''))],
-	            iconWidth: this.options.resultMarkerSizes['width' + (isLargeMarker ? 'Large' : (isStackedMarker ? 'Stacked' : ''))],
-	            iconHeight: this.options.resultMarkerSizes['height' + (isLargeMarker ? 'Large' : (isStackedMarker ? 'Stacked' : ''))]
+	            iconUrl: this.options.mapMarkerStaticPath + this.options.resultMarkerImages[resultType + suffix],
+	            iconWidth: this.options.resultMarkerSizes['width' + suffix],
+	            iconHeight: this.options.resultMarkerSizes['height' + suffix]
         	};
         }
         return markerIcon;
