@@ -111,31 +111,41 @@ def _collect_parameters(param_dict, parameter_list):
     return results
 
 
-class MapResult(dict):
+class BaseMapResult(dict):
     """ A single result for the search of the map, enforcing required fields """
+    REQUIRED = object()
+    
+    fields = {
+        'id': REQUIRED,
+        'type': REQUIRED, 
+        'title': REQUIRED, 
+        'lat': None, 
+        'lon': None, 
+        'address': None, 
+        'url': None,
+        'iconImageUrl': None, 
+        'backgroundImageSmallUrl': None,
+        'backgroundImageLargeUrl': None,
+        'description': None,
+        'relevance': 0,
+        'topics' : [], 
+        'portal': None,
+        'group_slug': None,
+        'group_name': None,
+        'participant_count': -1, # attendees for events, projects for groups
+        'member_count': -1, # member count for projects/groups, group-member count for events, memberships for users
+        'content_count': -1, # groups/projects: number of upcoming events
+    }
+    
+    def __init__(self, *args, **kwargs):
+        for key in self.fields.keys():
+            val = kwargs.get(key, self.fields.get(key))
+            if val == self.REQUIRED:
+                raise Exception('MAP API Error: Expected required key "%s" for MapResult!' % key)
+        return super(BaseMapResult, self).__init__(*args, **kwargs)
 
-    def __init__(self, short_id, result_type, lat, lon, address, title, 
-                 url=None, iconImageUrl=None, backgroundImageSmallUrl=None, backgroundImageLargeUrl=None,
-                 description=None, relevance=0, topics=[], 
-                 portal=None, *args, **kwargs):
-        self['id'] = short_id
-        self['type'] = result_type
-        self['lat'] = lat
-        self['lon'] = lon
-        self['address'] = address
-        self['title'] = title
-        self['url'] = url
-        self['iconImageUrl'] = iconImageUrl
-        self['backgroundImageSmallUrl'] = backgroundImageSmallUrl
-        self['backgroundImageLargeUrl'] = backgroundImageLargeUrl
-        self['description'] = description
-        self['relevance'] = relevance
-        self['topics'] = topics
-        self['portal'] = portal or CosinnusPortal.get_current().id
-        return super(MapResult, self).__init__(*args, **kwargs)
 
-
-class HaystackMapResult(MapResult):
+class HaystackMapResult(BaseMapResult):
     """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
          into a proper MapResult """
 
@@ -149,23 +159,31 @@ class HaystackMapResult(MapResult):
             portal = current_portal_id if current_portal_id in displayable_portals else displayable_portals[0]
         else:
             portal = result.portal
-            
-        return super(HaystackMapResult, self).__init__(
-            shorten_haystack_id(result.id),
-            SEARCH_MODEL_NAMES[result.model],
-            result.mt_location_lat,
-            result.mt_location_lon,
-            result.mt_location,
-            result.title, 
-            url=result.url,
-            iconImageUrl=result.icon_image_url,
-            backgroundImageSmallUrl=result.background_image_small_url,
-            backgroundImageLargeUrl=result.background_image_large_url,
-            description=textfield(result.description),
-            relevance=result.score,
-            topics=result.mt_topics,
-            portal=portal
-        )
+        
+        fields = {
+            'id': shorten_haystack_id(result.id),
+            'type': SEARCH_MODEL_NAMES[result.model],
+            'title': result.title, 
+            'lat': result.mt_location_lat,
+            'lon': result.mt_location_lon,
+            'address': result.mt_location,
+            'url': result.url,
+            'iconImageUrl': result.icon_image_url,
+            'backgroundImageSmallUrl': result.background_image_small_url,
+            'backgroundImageLargeUrl': result.background_image_large_url,
+            'description': textfield(result.description),
+            'relevance': result.score,
+            'topics': result.mt_topics,
+            'portal': portal,
+            'group_slug': result.group_slug,
+            'group_name': result.group_name,
+            'participant_count': result.participant_count,
+            'member_count': result.member_count,
+            'content_count': result.content_count,
+        }
+        fields.update(**kwargs)
+        
+        return super(HaystackMapResult, self).__init__(*args, **fields)
 
 
 

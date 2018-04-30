@@ -136,6 +136,36 @@ class StoredDataIndexMixin(indexes.SearchIndex):
     background_image_small_url = indexes.CharField(stored=True, indexed=False)
     # the large background image or None, should be a 1000x550 image
     background_image_large_url = indexes.CharField(stored=True, indexed=False)
+    # group slug for linking, subject to implementing indexed
+    group_slug = indexes.CharField(stored=True, indexed=False)
+    # group name for linking, subject to implementing indexed
+    group_name = indexes.CharField(stored=True, indexed=False)
+    # attendees for events, projects for groups
+    participant_count = indexes.IntegerField(stored=True, indexed=False)
+    # member count for projects/groups, group-member count for events, memberships for users
+    member_count = indexes.IntegerField(stored=True, indexed=False)
+    # groups/projects: number of upcoming events
+    content_count = indexes.IntegerField(stored=True, indexed=False)
+    
+    def prepare_participant_count(self, obj):
+        """ Stub, overridden by individual indexes """
+        return -1
+    
+    def prepare_member_count(self, obj):
+        """ Stub, overridden by individual indexes """
+        return -1
+    
+    def prepare_content_count(self, obj):
+        """ Stub, overridden by individual indexes """
+        return -1
+    
+    def prepare_group_slug(self, obj):
+        """ Stub, overridden by individual indexes """
+        return None
+    
+    def prepare_group_name(self, obj):
+        """ Stub, overridden by individual indexes """
+        return None
     
     def prepare_title(self, obj):
         return obj.title
@@ -234,6 +264,7 @@ class DocumentBoostMixin(object):
         data['local_boost'] = model_boost * (global_boost + 1.0)
         # this tells haystack to boost the ._score
         data['boost'] = data['local_boost']
+        # TODO: remove after mokwi launch
         if False and settings.DEBUG:
             print ">> local_boost is", data['boost'], " from model*global ", model_boost, '*', \
                 global_boost+1.0, data['django_ct'], getattr(obj, 'name', getattr(obj, 'title', None)), \
@@ -252,7 +283,17 @@ class BaseTaggableObjectIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjec
     group = indexes.IntegerField(model_attr='group_id', indexed=False)
     group_members = indexes.MultiValueField(model_attr='group__members')
     location = indexes.LocationField(null=True)
-
+    
+    def prepare_group_slug(self, obj):
+        return obj.group.slug
+    
+    def prepare_group_name(self, obj):
+        return obj.group.name
+    
+    def prepare_member_count(self, obj):
+        """ Group member count for taggable objects """
+        return obj.group.memberships.count()
+    
     def prepare_location(self, obj):
         if obj.media_tag and obj.media_tag.location_lat and obj.media_tag.location_lon:
             # this expects (lat,lon)!
@@ -273,7 +314,7 @@ class BaseTaggableObjectIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjec
         qs = model_cls.objects.exclude(group__id__in=excluded_groups_for_app)
         # don't index inactive group's items
         qs = qs.filter(group__is_active=True)
-        return qs.select_related('media_tag').all()
+        return qs.select_related('media_tag').select_related('group').all()
     
     def boost_model(self, obj, indexed_data):
         """ We boost by number of members the tagged objects's group has, normalized over

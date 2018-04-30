@@ -12,9 +12,11 @@ from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.contrib.auth import get_user_model
-from cosinnus.utils.functions import normalize_within_stddev
+from cosinnus.utils.functions import normalize_within_stddev, resolve_class
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.core.urlresolvers import reverse
+from django.utils.functional import cached_property
+from django.contrib.auth.models import AnonymousUser
     
 
 class CosinnusGroupIndexMixin(DocumentBoostMixin, StoredDataIndexMixin, indexes.SearchIndex):
@@ -73,6 +75,18 @@ class CosinnusGroupIndexMixin(DocumentBoostMixin, StoredDataIndexMixin, indexes.
         """ TODO: this should actually reflect the group['description'] language-sensitive magic! """
         return obj.description_long or obj.description
     
+    def prepare_member_count(self, obj):
+        """ Member count for projects/groups """
+        return obj.memberships.count()
+    
+    def prepare_content_count(self, obj):
+        """ Upcoming events for this project/group """
+        try:
+            event_model = resolve_class('cosinnus_event.models.Event')
+        except ImportError:
+            return -1
+        return event_model.get_current(obj, AnonymousUser()).count()
+    
     def index_queryset(self, using=None):
         qs = self.get_model().objects.all()
         qs = qs.filter(is_active=True)
@@ -104,6 +118,14 @@ class CosinnusProjectIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
     def get_model(self):
         return CosinnusProject
     
+    def prepare_group_slug(self, obj):
+        """ For projects assigned to a parent group, we link that group """
+        return obj.parent and obj.parent.slug or None
+    
+    def prepare_group_name(self, obj):
+        """ Stub, overridden by individual indexes """
+        return obj.parent and obj.parent.name or None
+    
     
 class CosinnusSocietyIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexes.Indexable):
     
@@ -112,6 +134,10 @@ class CosinnusSocietyIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
     
     def get_model(self):
         return CosinnusSociety
+    
+    def prepare_participant_count(self, obj):
+        """ child projects for groups """ 
+        return obj.groups.count()
 
 
 class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearchIndex, indexes.Indexable):
@@ -144,6 +170,10 @@ class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearch
         """ NOTE: UserProfiles always contain a relative URL! """
         return reverse('cosinnus:profile-detail', kwargs={'username': obj.user.username})
     
+    def prepare_member_count(self, obj):
+        """ Memberships for users """
+        return self._get_memberships_count(obj)
+    
     def get_model(self):
         return get_user_profile_model()
 
@@ -153,6 +183,11 @@ class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearch
         qs = qs.select_related('user').all()
         return qs
     
+    def _get_memberships_count(self, obj):
+        if not hasattr(obj, '_memberships_count'):
+            setattr(obj, '_memberships_count', obj.user.cosinnus_memberships.count())
+        return obj._memberships_count
+    
     def boost_model(self, obj, indexed_data):
         """ We boost by number of groups the user is a member of, normalized over
             the mean/stddev of the count of groups each portal user is a members of, 
@@ -160,7 +195,7 @@ class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearch
         def qs_func():
             return filter_portal_users(filter_active_users(get_user_model().objects.all()))
         mean, stddev = self.get_mean_and_stddev(qs_func, 'cosinnus_memberships')
-        user_memberships_count = obj.user.cosinnus_memberships.count()
+        user_memberships_count = self._get_memberships_count(obj)
         memberships_rank = normalize_within_stddev(user_memberships_count, mean, stddev, stddev_factor=2.0)
         return memberships_rank
     
