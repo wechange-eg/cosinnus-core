@@ -222,6 +222,9 @@
 	    .tile-section {
 	        padding: 5px 0 5px 0;
 	        
+            &:last-child {
+                padding-bottom: 0;
+            }
 	        i.fa {
 	            font-size: 14px;
 	            padding: 0 5px 0 0;
@@ -235,12 +238,11 @@
             -webkit-box-orient: vertical;
             display: -webkit-box;
             margin-bottom: 10px;
+            
+            &:last-child {
+                margin-bottom: 0;
+            }
 	    }
-	    .one-line {
-	        white-space: nowrap;
-			overflow: hidden;
-			text-overflow: ellipsis;
-        }
 	    
 	    h1 {
 	        font-size: 16px;
@@ -326,6 +328,16 @@
         background: -webkit-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-ideas-color 100%); /* Chrome10-25,Safari5.1-6 */
         background: linear-gradient(to bottom,@map-placeholder-gradient-top-color 0%, @map-ideas-color 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@map-placeholder-gradient-top-color', endColorstr='@map-ideas-color', GradientType=0); /* IE6-9 */
+    }
+    
+    .one-line {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .multi-span {
+        margin-right: 10px;
     }
     
 }
