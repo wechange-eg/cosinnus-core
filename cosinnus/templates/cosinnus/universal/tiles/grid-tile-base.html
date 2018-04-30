@@ -1,7 +1,7 @@
 {% import "include/macros.html" as macros %}
 
 <div class="tile tile-{{ type }} grid-item {% if selected %}selected{% endif %} {% if hovered %}hovered{% endif %}">
-    <div class="tile-detail-link">
+    <div class="tile-detail-link result-link" {{ macros.resultLink(portal, slug, title, type, inline_only=1) }}>
         {% if isSmall %}
             <div class="single-tile-image">
                 <img class="framed-tile-image" src="{{ iconImageUrl }}" />

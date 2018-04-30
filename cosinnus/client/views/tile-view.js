@@ -17,7 +17,7 @@ module.exports = BaseView.extend({
 	
 	// The DOM events specific to an item.
     events: {
-    	'click .tile-detail-link': 'onSelectClicked',
+    	'click .result-link': 'onResultLinkClicked',
     	'click .topic-filter-link': 'onTopicLinkClicked',
 
         'mouseenter': 'onMouseEnter',
@@ -87,14 +87,12 @@ module.exports = BaseView.extend({
     },
     
     /**
-     * Called when a tile detail link is clicked, to expand the tile view
-     * to the full size detail view.
+     * Called when a link is clicked that leads to opening a detail view.
      * We only change the Result model's .selected property and
      * don't do any rendering here.
      */
-    onSelectClicked: function () {
-    	util.log('tile-view.js: got a select click event! id: ' + this.model.id);
-    	this.App.controlView.setSelectedResult(this.model);
+    onResultLinkClicked: function (event) {
+    	this.App.controlView.onResultLinkClicked(event);
     },
     
 });

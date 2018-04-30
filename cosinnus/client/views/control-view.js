@@ -66,11 +66,15 @@ module.exports = ContentControlView.extend({
     // the currently hovered on and selected Result items
     selectedResult: null,
     hoveredResult: null,
+    detailResult: null, // the Result displayed as DetailView result. not the same as `selectedResult`!
+    detailResultCache: {},
     
     searchEndpointURL: '/maps/search/',
+    detailEndpointURL: '/maps/detail/',
     searchDelay: 600,
     searchXHRTimeout: 15000,
     currentSearchHttpRequest: null, 
+    currentDetailHttpRequest: null,
     
     initialize: function (options, app, collection) {
     	var self = this;
@@ -234,10 +238,133 @@ module.exports = ContentControlView.extend({
     	}
     },
     
+    /** Triggers on click of a link that opens a result detail view.
+     *  Can be triggered from multiple view. */
+    onResultLinkClicked: function (event, suppliedData, noNavigate) {
+    	var self = this;
+    	event.preventDefault();
+    	event.stopPropagation();
+    	// parse the target object from the link
+    	// TODO
+    	var data = null;
+    	if (!suppliedData) {
+    		var $tar = $(event.target).closest('.result-link');
+    		var data = suppliedData || {
+    			portal: $tar.attr('data-portal') || 0,
+    			slug: $tar.attr('data-slug'),
+    			type: $tar.attr('data-type'),
+    		}
+    	} else {
+    		data = {
+				portal: suppliedData['portal'],
+				slug: suppliedData['slug'],
+				type: suppliedData['type'],
+    		};
+    	}
+		util.log('tile-view.js: got a select click event! data: ' + JSON.stringify(data));
+    	
+    	// check if this item is in the local detail Result cache
+		var cachekey = String(data['portal']) + '_' + data['slug'] + '_' + data['type']
+    	var result = null;
+    	if (cachekey in self.detailResultCache) {
+    		result = self.detailResultCache[cachekey];
+    		self.displayDetailResult(result);
+    		
+    	} else {
+    		// if not, load it from the server
+    		
+    		// build detail URL
+    		var query = $.param(data);
+    		var url = this.detailEndpointURL + '?' + query;
+            
+            // cancel the currently ongoing request
+            if (self.currentDetailHttpRequest) {
+            	util.log('control-view.js: New detail request! Aborting current request.')
+            	self.currentDetailHttpRequest.abort();
+            }
+            
+            var detailHadErrors = false;
+            self.currentDetailHttpRequest = $.ajax(url, {
+            	type: 'GET',
+            	timeout: self.searchXHRTimeout,
+            	success: function (data, textStatus) {
+                	// TODO: Save the search state in the url.
+                	if (App.displayOptions.routeNavigation && !noNavigate) {
+                		util.log('control-view.js: +++++++++++++++++ since we are fullscreen, publishing detail router URL update!')
+                		Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, self.options.basePageURL))
+                	}
+                	
+                	util.log('got resultssss for detail')
+                	util.log(data)
+                	util.log(textStatus)
+                	
+                	if ('result' in data) {
+                		result = new Result(data.result);
+                		// put item in result cache
+                		cachekey = String(result.get('portal') + '_' + result.get('slug') + '_' + result.get('type'));
+                		self.detailResultCache[cachekey] = result;
+                		self.displayDetailResult(result);
+                	} else {
+                		// if the result came back empty, it might have been deleted on the server, show an error message and close detail view
+                		detailHadErrors = true;
+                	}
+    	        },
+    	        error: function (xhr, textStatus) {
+    	            util.log('control-view.js: Detail XHR failed.')
+    	            if (textStatus === 'abort') {
+    	        		return;
+    	        	}
+    	            detailHadErrors = true;
+    	        },
+    	        complete: function (xhr, textStatus) {
+    	        	util.log('control-view.js: Search complete: ' + textStatus)
+    	        	if (textStatus === 'abort') {
+    	        		return;
+    	        	}
+    	        	if (textStatus !== 'success') {
+    	        		detailHadErrors = true;
+    	        	}
+    	            self.currentDetailHttpRequest = null;
+    	            if (detailHadErrors) {
+    	            	alert('wowee error in detail. make a real error message here!')
+    	            }
+    	        }
+            });
+    		
+    		
+    	}
+    },
+    
+    /** Called manually or deferredly after loading a Result from the server,
+     *  to be shown as the Detail View.
+     *  @param result: This must be *a detailed* Result model, or null!
+     *  Calling this with `null` as parameter closes any open detail view. */
+    displayDetailResult: function (result) {
+    	// we simply unselect the current result
+    	if (!result) {
+    		this.setSelectedResult(null);
+    		Backbone.mediator.publish('result:detail-closed');
+    		return;
+    	}
+    	
+    	// try to find the result with this short id in our collection and set it to selected
+		var collectionModel = this.collection.get(result.id);
+    	if (collectionModel) {
+    		this.setSelectedResult(collectionModel);
+    	} else {
+    		this.setSelectedResult(null);
+    	}
+    	// publish the opening intent for the detail view (it does not need to be in our collection)
+    	this.detailResult = result;
+    	Backbone.mediator.publish('result:detail-opened', result);
+	},
+    
+	/** Trigger for state button elements */
     onOffSwitchLabelClicked: function (event) {
     	$(event.target).next().find('input[type="checkbox"]').click()
     },
     
+    /** State switcher for the filter frame */
     toggleFilterPanel: function (event) {
     	if (event) {
     		event.preventDefault();
@@ -248,7 +375,8 @@ module.exports = ContentControlView.extend({
     		this.showFilterPanel(event);
     	}
     },
-    
+
+    /** State switcher for the filter frame */
     showFilterPanel: function (event) {
     	if (event) {
     		event.preventDefault();
@@ -257,7 +385,8 @@ module.exports = ContentControlView.extend({
     	this.$el.find('.map-controls-filters').slideDown(250);
     	this.$el.find('.icon-filters').addClass('open');
     },
-    
+
+    /** State switcher for the filter frame */
     hideFilterPanel: function (event) {
     	if (event) {
     		event.preventDefault();
@@ -268,8 +397,6 @@ module.exports = ContentControlView.extend({
     	
     },
     
-    
-
     
     /**
      * Unused now, this used to be the search-while-typing feature.
@@ -635,6 +762,7 @@ module.exports = ContentControlView.extend({
 	            	self.paginationControlView.render();
 	            }
 	            
+	            self.currentSearchHttpRequest = null;
 	            Backbone.mediator.publish('end:search');
 	        }
         });
@@ -749,7 +877,7 @@ module.exports = ContentControlView.extend({
         if (this.options.filterGroup) {
             url = url + this.options.filterGroup + '/';
         }
-        url = url + '?' + query
+        url = url + '?' + query;
         
         util.log(' ************  BUILD SEARCH QUERY URL RETURNED (forAPI): ' + forAPI)
         util.log(url)
@@ -808,6 +936,9 @@ module.exports = ContentControlView.extend({
         if (fireImmediatelyIfPossible) {
         	delay = 0;
         	util.log('control-view.js: TODO: FireImmediately was passed true!')
+        	// whenever this is passed, the search resulted from a voluntary user action
+        	// so we delete the detail view cache!
+        	self.detailResultCache = {};
         }
         if (!noPageReset) {
         	self.state.pageIndex = 0;

@@ -48,8 +48,12 @@
 	</span>
 {% endmacro %}
 
-{% macro resultLink(portal, slug, name, type) %}
-    <a class="result-link" data-portal="{{ portal }}" data-slug="{{ slug }}" data-type="{{ type }}">
-        {{ name }}
-    </a>
+{% macro resultLink(portal, slug, name, type, inline_only=0) %}
+    {% if inline_only == 1 %}
+        data-portal="{{ portal }}" data-slug="{{ slug }}" data-type="{{ type }}"
+    {% else %}
+	    <a class="result-link" data-portal="{{ portal }}" data-slug="{{ slug }}" data-type="{{ type }}">
+	        {{ name }}
+	    </a>
+    {% endif %}
 {% endmacro %}

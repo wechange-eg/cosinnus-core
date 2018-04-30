@@ -17,6 +17,7 @@ module.exports = BaseView.extend({
 	
 	// The DOM events specific to an item.
     events: {
+    	'click .result-link': 'onResultLinkClicked',
         'click .tile-close-button': 'onDeselectClicked',
     	'click .topic-filter-link': 'onTopicLinkClicked',
     },
@@ -26,9 +27,13 @@ module.exports = BaseView.extend({
     	BaseView.prototype.initialize.call(self, options);
     	self.App = app;
     	
-    	Backbone.mediator.subscribe('result:selected', self.onResultSelected, self);
-    	Backbone.mediator.subscribe('result:reselected', self.onResultSelected, self);
-    	Backbone.mediator.subscribe('result:unselected', self.onResultUnselected, self);
+    	// TODO: delete once new detail open/close logic is in place
+//    	Backbone.mediator.subscribe('result:selected', self.onResultSelected, self);
+//    	Backbone.mediator.subscribe('result:reselected', self.onResultSelected, self);
+//    	Backbone.mediator.subscribe('result:unselected', self.onResultUnselected, self);
+    	
+    	Backbone.mediator.subscribe('result:detail-opened', self.onDetailOpened, self);
+    	Backbone.mediator.subscribe('result:detail-closed', self.onDetailClosed, self);
     },
 
     /** Extend the template data by the controlView's options and state */
@@ -44,13 +49,13 @@ module.exports = BaseView.extend({
     },
     
     // a new result is being selected
-    onResultSelected: function (result) {
+    onDetailOpened: function (result) {
     	this.model = result;
     	this.render();
     },
     
     // a result is being unselected
-    onResultUnselected: function (result) {
+    onDetailClosed: function () {
     	this.model = null;
     	this.render();
     },
@@ -58,7 +63,7 @@ module.exports = BaseView.extend({
     /** Called when a topic link is clicked to filter for that topic only */
     onTopicLinkClicked: function(event) {
     	// make sure to close
-    	this.App.controlView.setSelectedResult(null);
+    	this.App.controlView.displayDetailResult(null);
     	this.App.controlView.onTopicLinkClicked(event);
     },
     
@@ -69,7 +74,17 @@ module.exports = BaseView.extend({
      */
     onDeselectClicked: function () {
     	util.log('tile-view.js: got a deselect click event!');
-    	this.App.controlView.setSelectedResult(null);
+    	this.App.controlView.displayDetailResult(null);
+    },
+    
+
+    /**
+     * Called when a link is clicked that leads to opening a detail view.
+     * We only change the Result model's .selected property and
+     * don't do any rendering here.
+     */
+    onResultLinkClicked: function (event) {
+    	this.App.controlView.onResultLinkClicked(event);
     },
     
 });
