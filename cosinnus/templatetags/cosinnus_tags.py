@@ -28,12 +28,13 @@ from cosinnus.models.tagged import get_tag_object_model, BaseTagObject
 from django.template.base import TemplateSyntaxError
 from cosinnus.core.registries.group_models import group_model_registry
 from django.core.cache import cache
-from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
+from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal,\
+    BETTER_URL_RE
 
 import logging
 import json as _json
 from django.utils.encoding import force_text
-from django.utils.html import escape
+from django.utils.html import escape, urlize
 from django.utils.safestring import mark_safe
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.template.defaultfilters import linebreaksbr, urlizetrunc
@@ -751,8 +752,19 @@ def textfield(text, arg=''):
         
     if not text:
         return ''
+    text = force_text(text)
+    
+    # shorten and wrap un-linked URLs in markdown links
+    for m in reversed([it for it in BETTER_URL_RE.finditer(text)]):
+        if (m.start() == 0 or text[m.start()-2:m.start()] != '](') and (m.end() == len(text) or text[m.end():m.end()+2] != ']('):
+            short = (m.group()[:47] + '...') if len(m.group()) > 50 else m.group()
+            text = text[:m.start()] + ('[%s](%s)' % (short, m.group())) + text[m.end():] 
+    
+    text = escape(text.strip())
+    
     # see https://github.com/trentm/python-markdown2/wiki/Extras for option parameters!
-    text = markdown(url_target_blank(urlizetrunc(text, 35)), 'strike,break-on-newline,cuddled-lists,code-friendly').strip()
+    text = markdown(text, 'strike,break-on-newline,cuddled-lists,code-friendly,nofollow,target-blank-links')
+    
     if arg == 'simple':
         text = text.replace('<p>', '').replace('</p>', '')
     return mark_safe(text)
