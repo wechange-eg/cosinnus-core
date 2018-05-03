@@ -69,8 +69,8 @@ module.exports = ContentControlView.extend({
     detailResult: null, // the Result displayed as DetailView result. not the same as `selectedResult`!
     detailResultCache: {},
     
-    searchEndpointURL: '/maps/search/',
-    detailEndpointURL: '/maps/detail/',
+    searchEndpointURL: '/map/search/',
+    detailEndpointURL: '/map/detail/',
     searchDelay: 600,
     searchXHRTimeout: 15000,
     currentSearchHttpRequest: null, 
