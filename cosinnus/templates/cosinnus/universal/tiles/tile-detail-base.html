@@ -1,0 +1,133 @@
+{% import "include/macros.html" as macros %}
+
+<div class="tile-detail tile-{{ type }} {% if selected %}selected{% endif %}" {% if noModel %}style="display: none;"{% endif %}>
+    <div class="tile-close-button">
+        <i class="fa fa-fw fa-close"></i>
+    </div>
+    
+    {% block content %}
+        
+        {% block header_image %}
+            <div class="tile-section header-image">
+                <div class="dual-tile-image {% if not backgroundImageSmallUrl %}image-placeholder-background-{{ type }}{% endif %}">
+                    {% if backgroundImageSmallUrl %}
+                        <img class="tile-image tile-image-background" src="{{ backgroundImageSmallUrl }}" /> {# TODO: put in wallpaper/placeholder img #}
+                    {% endif %}
+                    <img class="floating-tile-image" src="{{ iconImageUrl }}" />
+                </div>
+            </div>
+        {% endblock header_image %}
+        
+        
+        {% block title %}
+            <div class="tile-section title">
+                <a href="{{ url }}" target="_blank">
+                    {{ title }}
+                    <i class="fa fa-external link"></i>
+                </a>
+            </div>
+        {% endblock title %}
+        
+        
+        {% block top_line %}
+            {% if address or group_slug and group_name and portal %}
+                <div class="tile-section top-line one-line">
+		            {% block top_line_group %}
+		                {% if group_slug and group_name and portal %}
+			                <div class="pale-color one-line">
+					            {% if type == "projects" %}
+					                {{ macros.typeLabel("groups", singular=1, useStyles=0, colon=1, showIcon=0) }}
+					                {{ macros.resultLink(portal, group_slug, group_name, "groups") }}
+					            {% else %}
+					                {{ macros.typeLabel("projects", singular=1, useStyles=0, colon=1, showIcon=0) }}
+					                {{ macros.resultLink(portal, group_slug, group_name, "projects") }}
+					            {% endif %}
+					        </div>
+				        {% endif %}
+		            {% endblock top_line_group %}
+	                
+		            {% block top_line_address %}
+		                {% if address %}
+                            <div class="address">{{ address }} ((link me?))</div>
+		                {% endif %}
+		            {% endblock top_line_address %}
+	            </div>
+            {% endif %}
+        {% endblock top_line %}
+        
+        
+        {% block topic_line %}
+	        <div class="tile-section topic-line one-line">
+	            <span class="pale-color">Topics:</span> 
+	            {% for topic in topics %}
+	                <a class="topic-filter-link " data-topic-id="{{ topic }}">{{ controlView.allTopics[topic] }}</a>{% if not loop.last %},{% endif %}
+	            {% endfor %}
+	        </div>
+        {% endblock topic_line %}
+        
+        
+        {% block description %}
+            <div class="tile-section description">
+                {{description|safe}}
+                <br/>
+                (( TODO: make me click-expandable ))
+            </div>
+        {% endblock description %}
+        
+        
+        {% block related_content %}
+        {% endblock related_content %}
+        
+        
+        
+        {% block contact %}
+        {% endblock xxxxxxxxxxxxxx %}
+        
+        
+        
+        {% block xxxxxxxxxxxxxxx %}
+        {% endblock xxxxxxxxxxxxxx %}
+        
+        
+        
+        {% block xxxxxxxxxxxxxxx %}
+        {% endblock xxxxxxxxxxxxxx %}
+        
+        
+        
+        {% block xxxxxxxxxxxxxxx %}
+        {% endblock xxxxxxxxxxxxxx %}
+        
+        
+        
+        
+    
+    
+	    <div class="tile-detail-link">
+		    <img class="tile-image" src="{{imageUrl}}" />
+		    <br/>
+	        <a href="{{url}}" target="_blank">{{title}}</a>
+	    </div>
+	    <div>{{ title }} ({{id}})</div>
+	    <div class="description">{{description|safe}}</div>
+	    {% if lat and lon %}
+	        <div>This result has a location (but may be off map) - Should we add a link to "show on map?"</div>
+	    {% else %}
+	        <div>This result has no location</div>
+	    {% endif %}
+	    
+	    {% if topics|length > 0 %}
+	        <div class="topics">
+	            Topics: 
+	            {% for topic in topics %}
+	                <a class="topic-filter-link" data-topic-id="{{ topic }}">{{ controlView.allTopics[topic] }}</a>{% if not loop.last %},{% endif %}
+	            {% endfor %}
+	        </div>
+	    {% endif %}
+	    
+	    <div>
+		    Link: <a href="{% if type == "people" %}{{ controlView.portalInfo[portal].domain }}{% endif %}{{ url }}" target="_blank">Visit Page!</a>
+	    </div>
+	    
+	{% endblock content %}
+</div>

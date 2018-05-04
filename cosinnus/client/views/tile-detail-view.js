@@ -4,7 +4,13 @@ var BaseView = require('views/base/view');
 var Result = require('models/result');
 var util = require('lib/util');
 
-var detailTemplate = require('tiles/tile-detail');
+var templates = {
+	'projects': require('tiles/tile-detail-projects'),
+	'groups': require('tiles/tile-detail-groups'),
+	'people': require('tiles/tile-detail-people'),
+	'events': require('tiles/tile-detail-events'),
+	'error': require('tiles/tile-detail-error'),
+};
 
 module.exports = BaseView.extend({
 	
@@ -13,7 +19,7 @@ module.exports = BaseView.extend({
 	
 	model: Result,
 
-	template: detailTemplate,
+	template: null,
 	
 	// The DOM events specific to an item.
     events: {
@@ -51,6 +57,11 @@ module.exports = BaseView.extend({
     // a new result is being selected
     onDetailOpened: function (result) {
     	this.model = result;
+    	if (result.get('type') in templates) {
+    		this.template = templates[result.get('type')];
+    	} else {
+    		this.template = templates['error'];
+    	}
     	this.render();
     },
     
