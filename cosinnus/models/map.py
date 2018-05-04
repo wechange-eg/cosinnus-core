@@ -9,15 +9,6 @@ from cosinnus.templatetags.cosinnus_tags import textfield
 from copy import copy
 
 
-def shorten_haystack_id(long_id):
-    """ Shortens ids by replacing the <module.model> part of the id with a number. 
-        Example: long_id 'cosinnus.userprofile.2' --> '3.2' """
-    modulemodel, pk = long_id.rsplit('.', 1)
-    short_id = '%d.%s' % (SHORTENED_ID_MAP[modulemodel], pk)
-    return short_id
-
-
-
 class BaseMapResult(dict):
     """ A single result for the search of the map, enforcing required fields """
     REQUIRED = object()
@@ -75,7 +66,7 @@ class HaystackMapResult(BaseMapResult):
             portal = result.portal
         
         fields = {
-            'id': shorten_haystack_id(result.id),
+            'id': itemid_from_searchresult(result),
             'type': SEARCH_MODEL_NAMES[result.model],
             'title': result.title, 
             'slug': result.slug,
@@ -101,40 +92,51 @@ class HaystackMapResult(BaseMapResult):
         return super(HaystackMapResult, self).__init__(*args, **fields)
     
     
-class DetailedMapResult(BaseMapResult):
-    """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
-         into a proper MapResult """
-
-    def __init__(self, obj, *args, **kwargs):
-        return super(DetailedMapResult, self).__init__(*args, **kwargs)
+class DetailedMapResult(HaystackMapResult):
+    """ Takes a Haystack Search Result and the actual Model Instance of that result and combines both of them """
+    
+    fields = copy(HaystackMapResult.fields)
+    fields.update({
+        'type': 'DetailedMapResult',
+    })
+    
+    def __init__(self, haystack_result, obj, *args, **kwargs):
+        ret = super(DetailedMapResult, self).__init__(haystack_result, *args, **kwargs)
+        
+        # TODO: additional fields
+        print ">> not adding additional stuff"
+        
+        return ret
 
 class DetailedUserMapResult(DetailedMapResult):
     """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
          into a proper MapResult """
+         
+    # todo: show portals?
 
-    def __init__(self, obj, *args, **kwargs):
-        return super(DetailedUserMapResult, self).__init__(obj, *args, **kwargs)
+    def __init__(self, haystack_result, obj, *args, **kwargs):
+        return super(DetailedUserMapResult, self).__init__(haystack_result, obj, *args, **kwargs)
 
 class DetailedProjectMapResult(DetailedMapResult):
     """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
          into a proper MapResult """
 
-    def __init__(self, obj, *args, **kwargs):
-        return super(DetailedProjectMapResult, self).__init__(obj, *args, **kwargs)
+    def __init__(self, haystack_result, obj, *args, **kwargs):
+        return super(DetailedProjectMapResult, self).__init__(haystack_result, obj, *args, **kwargs)
 
 class DetailedSocietyMapResult(DetailedMapResult):
     """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
          into a proper MapResult """
 
-    def __init__(self, obj, *args, **kwargs):
-        return super(DetailedSocietyMapResult, self).__init__(obj, *args, **kwargs)
+    def __init__(self, haystack_result, obj, *args, **kwargs):
+        return super(DetailedSocietyMapResult, self).__init__(haystack_result, obj, *args, **kwargs)
 
 class DetailedEventResult(DetailedMapResult):
     """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
          into a proper MapResult """
 
-    def __init__(self, obj, *args, **kwargs):
-        return super(DetailedEventResult, self).__init__(obj, *args, **kwargs)
+    def __init__(self, haystack_result, obj, *args, **kwargs):
+        return super(DetailedEventResult, self).__init__(haystack_result, obj, *args, **kwargs)
 
 
 
@@ -169,10 +171,18 @@ try:
         4: Event,
     })
     SEARCH_RESULT_DETAIL_TYPE_MAP.update({
-        'event': DetailedEventResult,
+        'events': DetailedEventResult,
     })
 except:
     Event = None
 
 SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in SEARCH_MODEL_NAMES.items()])
+
+
+def itemid_from_searchresult(result):
+    """ Returns a unique long id for a haystack result without revealing any DB ids. 
+        itemid: <portal_id>.<modeltype>.<slug>
+        Example:  `1.people.saschanarr` """
+    return '%d.%s.%s' % (result.portal or 0, SEARCH_MODEL_NAMES[result.model], result.slug)
+
 

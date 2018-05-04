@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import datetime
+import logging
 import json
 
 from annoying.functions import get_object_or_None
@@ -15,6 +16,7 @@ from haystack.query import SearchQuerySet
 from haystack.utils.geo import Point
 import six
 
+from cosinnus.conf import settings
 from cosinnus.forms.search import filter_searchqueryset_for_read_access, \
     filter_searchqueryset_for_portal
 from cosinnus.models.map import HaystackMapResult, \
@@ -23,7 +25,7 @@ from cosinnus.models.map import HaystackMapResult, \
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.functions import is_number, ensure_list_of_ints
 from cosinnus.utils.permissions import check_object_read_access
-
+from cosinnus.models.group import CosinnusPortal
 
 try:
     from cosinnus_event.models import Event #noqa
@@ -31,6 +33,7 @@ except:
     Event = None
 
 USER_MODEL = get_user_model()
+logger = logging.getLogger('cosinnus')
 
 
 def _better_json_loads(s):
@@ -179,22 +182,28 @@ def map_detail_endpoint(request):
     slug = params['slug']
     model_type = params['type']
     
-    if not is_number(portal) or portal < -1:
+    if not is_number(portal) or portal < 0:
         return HttpResponseBadRequest('``portal`` param must be a positive number!')
     if not slug:
         return HttpResponseBadRequest('``slug`` param must be supplied!')
     if not model_type or not isinstance(model_type, six.string_types):
         return HttpResponseBadRequest('``type`` param must be supplied and be a string!')
     
+    if portal == 0:
+        portal = CosinnusPortal.get_current().id
+    
     # try to retrieve the requested object
     model = SEARCH_MODEL_NAMES_REVERSE.get(model_type, None)
     if model is None:
         return HttpResponseBadRequest('``type`` param indicated an invalid data model type!')
     
-    if model == get_user_profile_model():
-        obj = get_object_or_None(get_user_model(), user__username=slug, cosinnus_portal_memberships=portal)
+    if model_type == 'people':
+        # UserProfiles are retrieved independent of the portal
+        obj = get_object_or_None(get_user_profile_model(), user__username=slug)
+    elif model_type == 'events':
+        obj = get_object_or_None(model, group__portal__id=portal, slug=slug)
     else:
-        obj = get_object_or_None(model, portal_id=portal, slug=slug)
+        obj = get_object_or_None(model, portal__id=portal, slug=slug)
     if obj is None:
         return HttpResponseNotFound('No item found that matches the requested type and slug.')
     
@@ -202,24 +211,38 @@ def map_detail_endpoint(request):
     if not check_object_read_access(obj, request.user):
         return HttpResponseForbidden('You do not have permission to access this item.')
     
+    # get the basic result data from the search index (as it is already prepared and faster to access there)
+    haystack_result = get_searchresult_by_args(portal, model_type, slug)
+    if not haystack_result:
+        return HttpResponseNotFound('No item found that matches the requested type and slug.')
+    
     # format data
     result_model = SEARCH_RESULT_DETAIL_TYPE_MAP[model_type]
-    result = result_model(obj)
+    result = result_model(haystack_result, obj)
     
     data = {
         'result': result,
     }
     return JsonResponse(data)
-    
 
-def get_searchresult_by_itemid(item_id):
+def get_searchresult_by_itemid(itemid):
+    portal, model_type, slug = itemid.split('.')
+    return get_searchresult_by_args(portal, model_type, slug)
+
+def get_searchresult_by_args(portal, model_type, slug):
     """ Retrieves a HaystackMapResult just as the API would, for a given shortid
-        in the form of `<classid>.<instanceid>` (see `shorten_haystack_id()`). """
+        in the form of `<classid>.<instanceid>` (see `itemid_from_searchresult()`). """
         
-    item_id = str(item_id)
-    model_type, model_id = item_id.split('.')
-    model_class = SHORT_MODEL_MAP[int(model_type)]
-    smallsqs = SearchQuerySet().models(model_class).filter(id=int(model_id))
-    if len(smallsqs) > 0:
-        return HaystackMapResult(smallsqs[0])
-    return None
+    model = SEARCH_MODEL_NAMES_REVERSE.get(model_type, None)
+    if model_type == 'people':
+        sqs = SearchQuerySet().models(model).filter_and(slug=slug)
+    else:
+        sqs = SearchQuerySet().models(model).filter_and(portal=portal, slug=slug)
+    if len(sqs) != 1:
+        logger.warn('Got a DetailMap request where %d indexed results were found!' % len(sqs), extra={
+            'portal': portal,
+            'model': model,
+            'slug': slug,
+        })
+        return None
+    return sqs[0]

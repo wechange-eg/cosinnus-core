@@ -9,7 +9,8 @@ module.exports = Backbone.Model.extend({
 		 * 		Example:  "3.215"  */
 		
 		/**  Object type of the result. currently:
-		 *  'groups', 'projects', 'events', 'people' */
+		 *  'groups', 'projects', 'events', 'people'.
+		 *  And the special result type: 'error' */
 		type: null,
 		
 		/** Centralised hovered state of this result in the views. 

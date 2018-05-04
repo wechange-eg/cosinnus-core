@@ -240,34 +240,35 @@ module.exports = ContentControlView.extend({
     
     /** Triggers on click of a link that opens a result detail view.
      *  Can be triggered from multiple view. */
-    onResultLinkClicked: function (event, suppliedData, noNavigate) {
+    onResultLinkClicked: function (event, directItemId, noNavigate) {
     	var self = this;
-    	event.preventDefault();
-    	event.stopPropagation();
+    	if (event) {
+    		event.preventDefault();
+    		event.stopPropagation();
+    	}
     	// parse the target object from the link
-    	// TODO
     	var data = null;
-    	if (!suppliedData) {
+    	if (!directItemId && event) {
     		var $tar = $(event.target).closest('.result-link');
-    		var data = suppliedData || {
+    		var data = {
     			portal: $tar.attr('data-portal') || 0,
     			slug: $tar.attr('data-slug'),
     			type: $tar.attr('data-type'),
     		}
     	} else {
+    		var itemData = directItemId.split('.'); // see util.itemIdFromResult(...)
     		data = {
-				portal: suppliedData['portal'],
-				slug: suppliedData['slug'],
-				type: suppliedData['type'],
+				portal: itemData[0],
+				type: itemData[1],
+				slug: itemData[2],
     		};
     	}
 		util.log('tile-view.js: got a select click event! data: ' + JSON.stringify(data));
     	
     	// check if this item is in the local detail Result cache
-		var cachekey = String(data['portal']) + '_' + data['slug'] + '_' + data['type']
     	var result = null;
-    	if (cachekey in self.detailResultCache) {
-    		result = self.detailResultCache[cachekey];
+    	if (directItemId in self.detailResultCache) {
+    		result = self.detailResultCache[directItemId];
     		self.displayDetailResult(result);
     		
     	} else {
@@ -288,11 +289,6 @@ module.exports = ContentControlView.extend({
             	type: 'GET',
             	timeout: self.searchXHRTimeout,
             	success: function (data, textStatus) {
-                	// TODO: Save the search state in the url.
-                	if (App.displayOptions.routeNavigation && !noNavigate) {
-                		util.log('control-view.js: +++++++++++++++++ since we are fullscreen, publishing detail router URL update!')
-                		Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, self.options.basePageURL))
-                	}
                 	
                 	util.log('got resultssss for detail')
                 	util.log(data)
@@ -301,9 +297,13 @@ module.exports = ContentControlView.extend({
                 	if ('result' in data) {
                 		result = new Result(data.result);
                 		// put item in result cache
-                		cachekey = String(result.get('portal') + '_' + result.get('slug') + '_' + result.get('type'));
-                		self.detailResultCache[cachekey] = result;
+                		self.detailResultCache[result.id] = result;
                 		self.displayDetailResult(result);
+                		
+                		if (App.displayOptions.routeNavigation && !noNavigate) {
+                			util.log('control-view.js: +++++++++++++++++ since we are fullscreen, publishing detail router URL update!')
+                			Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, self.options.basePageURL))
+                		} 
                 	} else {
                 		// if the result came back empty, it might have been deleted on the server, show an error message and close detail view
                 		detailHadErrors = true;
@@ -326,7 +326,7 @@ module.exports = ContentControlView.extend({
     	        	}
     	            self.currentDetailHttpRequest = null;
     	            if (detailHadErrors) {
-    	            	alert('wowee error in detail. make a real error message here!')
+                		self.displayDetailResult(new Result({type: 'error'}));
     	            }
     	        }
             });
@@ -343,6 +343,7 @@ module.exports = ContentControlView.extend({
     	// we simply unselect the current result
     	if (!result) {
     		this.setSelectedResult(null);
+    		this.detailResult = null;
     		Backbone.mediator.publish('result:detail-closed');
     		return;
     	}
@@ -598,8 +599,8 @@ module.exports = ContentControlView.extend({
     	
     	// if our URL points directly at an item, select it.
     	// the API should take care that it is *always* in the result set
-    	if (!self.selectedResult && self.state.urlSelectedResultId) {
-    		self.setSelectedResult(self.collection.get(self.state.urlSelectedResultId));
+    	if (!self.detailResult && self.state.urlSelectedResultId) {
+    		self.onResultLinkClicked(null, self.state.urlSelectedResultId);
     		self.state.urlSelectedResultId = null;
     	}
     	
@@ -834,9 +835,9 @@ module.exports = ContentControlView.extend({
         		page: this.state.pageIndex
         	});
         }
-        if (this.selectedResult) {
+        if (this.detailResult) {
         	_.extend(searchParams, {
-        		item: this.selectedResult.id
+        		item: this.detailResult.id
         	});
         } else if (this.state.urlSelectedResultId) {
         	_.extend(searchParams, {

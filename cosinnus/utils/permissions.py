@@ -75,6 +75,8 @@ def check_object_read_access(obj, user):
             # catch error cases where no media_tag was created. that case should break, but not here.
             obj_is_visible = is_member or is_admin
         return check_user_superuser(user) or obj_is_visible or obj.grant_extra_read_permissions(user)
+    elif issubclass(obj.__class__, BaseUserProfile):
+        return check_user_can_see_user(user, obj.user)
     else:
         met_proper_object_conditions = False
         extra_conditions = False
