@@ -147,7 +147,7 @@ module.exports = ContentControlView.extend({
     	self.disableCounter += 1;
     	var localDisableCounter = self.disableCounter;
     	if ($old_grid) {
-    		$old_grid.removeAttr('id').css({'z-index': 2});
+    		$old_grid.removeAttr('id').css({'z-index': 1});
     	}
     	// load new tiles into new container (which is covered by old)
     	self.grid = self.$el.find('#tile-container-proto')
