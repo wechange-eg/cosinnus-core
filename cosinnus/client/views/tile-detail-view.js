@@ -74,7 +74,12 @@ module.exports = BaseView.extend({
      */
     onDeselectClicked: function () {
     	util.log('tile-view.js: got a deselect click event!');
-    	this.App.controlView.displayDetailResult(null);
+    	// this voluntary action adds a history state!
+    	this.App.controlView.displayDetailResult(null, true);
+    	if (App.displayOptions.routeNavigation) {
+			util.log('tile-detail-view.js: +++++++++++++++++ since we are fullscreen, publishing detail-close router URL update!')
+			App.controlView.addCurrentHistoryState();
+		} 
     },
     
 

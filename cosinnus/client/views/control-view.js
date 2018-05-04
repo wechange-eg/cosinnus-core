@@ -71,7 +71,7 @@ module.exports = ContentControlView.extend({
     
     searchEndpointURL: '/map/search/',
     detailEndpointURL: '/map/detail/',
-    searchDelay: 600,
+    searchDelay: 1, // since we are cancelling xhrs properly, we do not need to delay searches anymore. but leaving it in if we ever do again.
     searchXHRTimeout: 15000,
     currentSearchHttpRequest: null, 
     currentDetailHttpRequest: null,
@@ -146,6 +146,7 @@ module.exports = ContentControlView.extend({
         this.state.q = '';
         this.resetTopics();
         this.resetTypeFilters();
+    	this.clearDetailResultCache();
     },
     
     /** Internal state reset of filtered topics */
@@ -163,6 +164,7 @@ module.exports = ContentControlView.extend({
     	event.stopPropagation();
         this.resetTypeFilters();
         this.render();
+    	this.clearDetailResultCache();
     	this.triggerDelayedSearch(true);
     },
 
@@ -171,6 +173,7 @@ module.exports = ContentControlView.extend({
     	event.stopPropagation();
         this.resetTopics();
         this.render();
+    	this.clearDetailResultCache();
     	this.triggerDelayedSearch(true);
     },
 
@@ -179,6 +182,7 @@ module.exports = ContentControlView.extend({
     	event.stopPropagation();
         this.state.q = '';
         this.render();
+    	this.clearDetailResultCache();
     	this.triggerDelayedSearch(true);
     },
     
@@ -188,6 +192,7 @@ module.exports = ContentControlView.extend({
         this.resetTypeFilters();
         this.resetTopics();
         this.render();
+    	this.clearDetailResultCache();
     	this.triggerDelayedSearch(true);
     },
     
@@ -200,6 +205,7 @@ module.exports = ContentControlView.extend({
     	var topicId = $link.attr('data-topic-id');
     	this.resetAll();
     	this.state.activeTopicIds = [parseInt(topicId)];
+    	this.clearDetailResultCache();
     	this.triggerDelayedSearch(true);
     },
     
@@ -215,6 +221,7 @@ module.exports = ContentControlView.extend({
     
     staleSearchButtonClicked: function (event) {
     	event.preventDefault();
+    	this.clearDetailResultCache();
     	this.triggerDelayedSearch(true);
     	// we cheat this in because we know the search will do it anyways in a millisecond,
     	// but without this it won't be in time for the render() of the controls
@@ -236,6 +243,23 @@ module.exports = ContentControlView.extend({
     		this.state.pageIndex -= 1;
     		this.triggerDelayedSearch(true, true);
     	}
+    },
+    
+    /**
+     * Will start a fresh search with the current query of the search textbox.
+     */
+    triggerQuerySearch: function () {
+        var query = this.$el.find('.q').val();
+		this.state.q = query;
+		this.applyFilters();
+		this.state.ignoreLocation = !this.$el.find('.check-ignore-location').is(':checked');
+    	this.clearDetailResultCache();
+		this.triggerDelayedSearch(true);
+    },
+    
+    /** Delete the detail result cache, should only happen on voluntary user "new search" actions! */
+    clearDetailResultCache() {
+    	self.detailResultCache = {};
     },
     
     /** Triggers on click of a link that opens a result detail view.
@@ -299,10 +323,10 @@ module.exports = ContentControlView.extend({
                 		// put item in result cache
                 		self.detailResultCache[result.id] = result;
                 		self.displayDetailResult(result);
-                		
+                		// add a route navigate history state?
                 		if (App.displayOptions.routeNavigation && !noNavigate) {
                 			util.log('control-view.js: +++++++++++++++++ since we are fullscreen, publishing detail router URL update!')
-                			Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, self.options.basePageURL))
+                			self.addCurrentHistoryState();
                 		} 
                 	} else {
                 		// if the result came back empty, it might have been deleted on the server, show an error message and close detail view
@@ -342,7 +366,7 @@ module.exports = ContentControlView.extend({
     displayDetailResult: function (result) {
     	// we simply unselect the current result
     	if (!result) {
-    		this.setSelectedResult(null);
+    		this._setSelectedResult(null);
     		this.detailResult = null;
     		Backbone.mediator.publish('result:detail-closed');
     		return;
@@ -351,9 +375,9 @@ module.exports = ContentControlView.extend({
     	// try to find the result with this short id in our collection and set it to selected
 		var collectionModel = this.collection.get(result.id);
     	if (collectionModel) {
-    		this.setSelectedResult(collectionModel);
+    		this._setSelectedResult(collectionModel);
     	} else {
-    		this.setSelectedResult(null);
+    		this._setSelectedResult(null);
     	}
     	// publish the opening intent for the detail view (it does not need to be in our collection)
     	this.detailResult = result;
@@ -445,18 +469,6 @@ module.exports = ContentControlView.extend({
     	this.$el.find('.icon-search').addClass('active');
     	this.$el.find('.button-search').removeClass('disabled');
     },
-    
-    /**
-     * Will start a fresh search with the current query of the search textbox.
-     */
-    triggerQuerySearch: function () {
-        var query = this.$el.find('.q').val();
-		this.state.q = query;
-		this.applyFilters();
-		this.state.ignoreLocation = !this.$el.find('.check-ignore-location').is(':checked');
-		this.triggerDelayedSearch(true);
-    },
-    
 
     handleStartSearch: function (event) {
     	this.$el.find('.icon-loading').removeClass('hidden');
@@ -554,6 +566,14 @@ module.exports = ContentControlView.extend({
     	}
     },
     
+    /** Adds the current search state, including all parameters and detail view state 
+     *  as a URL history state.
+     */
+    addCurrentHistoryState: function () {
+    	var self = this;
+    	Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, self.options.basePageURL))
+    },
+    
     // called with a list of dicts of results freshly returned after a search
     processSearchResults: function (jsonResultList) {
     	var self = this;
@@ -597,10 +617,14 @@ module.exports = ContentControlView.extend({
     	
     	self.collection.reset(resultModels);
     	
+    	// if we had a navigate event and we still have a detail-view open, but it's not in the URL, close it
+    	if (self.detailResult && !self.state.urlSelectedResultId) {
+    		self.displayDetailResult(null);
+    	} 
     	// if our URL points directly at an item, select it.
     	// the API should take care that it is *always* in the result set
-    	if (!self.detailResult && self.state.urlSelectedResultId) {
-    		self.onResultLinkClicked(null, self.state.urlSelectedResultId);
+    	if (self.state.urlSelectedResultId && (!self.detailResult || self.state.urlSelectedResultId != self.detailResult.id)) {
+    		self.onResultLinkClicked(null, self.state.urlSelectedResultId, true);
     		self.state.urlSelectedResultId = null;
     	}
     	
@@ -642,7 +666,7 @@ module.exports = ContentControlView.extend({
      * Will set a new selected result and un-set the old one.
      * If result == null, will just un-set the current one.
      */
-    setSelectedResult: function (result) {
+    _setSelectedResult: function (result) {
     	if (this.selectedResult != null) {
     		// unselect previously selected result
     		this.selectedResult.set('selected', false);
@@ -662,11 +686,13 @@ module.exports = ContentControlView.extend({
     		this.selectedResult.set('selected', true);
     		this.setHoveredResult(null); // always unhover on select
     		
+    		/** this no longer has any validity
     		// selecting a result changes the URL so results can be directly linked
     		if (App.displayOptions.routeNavigation) {
     			var newUrl = this.buildSearchQueryURL(false).replace(this.searchEndpointURL, this.options.basePageURL);
     			App.router.replaceUrl(newUrl);
     		}
+    		*/
     	}
     },
     
@@ -708,7 +734,7 @@ module.exports = ContentControlView.extend({
             	// Save the search state in the url.
             	if (App.displayOptions.routeNavigation && !noNavigate) {
             		util.log('control-view.js: +++++++++++++++++ since we are fullscreen, publishing router URL update!')
-            		Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, self.options.basePageURL))
+            		self.addCurrentHistoryState();
             	}
             	util.log('got resultssss')
             	util.log(data)
@@ -937,9 +963,6 @@ module.exports = ContentControlView.extend({
         if (fireImmediatelyIfPossible) {
         	delay = 0;
         	util.log('control-view.js: TODO: FireImmediately was passed true!')
-        	// whenever this is passed, the search resulted from a voluntary user action
-        	// so we delete the detail view cache!
-        	self.detailResultCache = {};
         }
         if (!noPageReset) {
         	self.state.pageIndex = 0;

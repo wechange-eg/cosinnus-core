@@ -288,7 +288,7 @@ module.exports = ContentControlView.extend({
     	} 
     	if (this.options.enableDetailSelection) {
     		marker.on('click', function(){
-    			self.App.controlView.setSelectedResult(result);
+    			self.App.controlView.onResultLinkClicked(null, result.id);
     		});
     	}
     	marker.on('mouseover', function(){
