@@ -1,4 +1,36 @@
 {% extends 'tiles/tile-detail-base' %}
 {% import "include/macros.html" as macros %}
 
+{% block header_image %}
+    (( background image, but only use the large one! ))
+{% endblock header_image %}
 
+        
+{% block additional_top_line %}
+    <div class="tile-section">
+        <div class="">
+            (( time and date ))        
+        </div>
+        <div class="">
+            (( adress or not ))
+        </div>
+    </div>
+{% endblock additional_top_line %}
+        
+
+{% block related_content %}
+    <div class="tile-section tile-section-divided">
+        <h2>
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Participants" %}
+        </h2>
+        <div class="tile-section">
+            (( contactinfo ))
+        </div>
+	    <div class="row">
+	        <div class="col-xs-6">
+                {{ macros.userInfoLink("Participant list", "", "", "") }}
+	        </div>
+	    </div>
+    </div>
+{% endblock related_content %}

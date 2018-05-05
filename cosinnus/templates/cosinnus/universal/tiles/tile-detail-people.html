@@ -1,4 +1,33 @@
 {% extends 'tiles/tile-detail-base' %}
 {% import "include/macros.html" as macros %}
 
+{% block header_image %}
+    <div class="tile-section small-header-image">
+        (( use the small image with float like in small tile ))
+    </div>
+{% endblock header_image %}
 
+{% block action_buttons %}
+    <div class="tile-section">
+        (( TODO: button projekt beitreten )) 
+    </div>
+{% endblock action_buttons %}
+
+
+{% block related_content %}
+    <div class="tile-section tile-section-divided">
+        <div class="row">
+            <div class="col-xs-6">
+                {{ macros.groupInfoLink("Group list", "", "", "") }}
+            </div>
+        </div>
+    </div>
+    
+    <div class="tile-section tile-section-divided">
+        <div class="row">
+            <div class="col-xs-6">
+                {{ macros.groupInfoLink("Project list", "", "", "") }}
+            </div>
+        </div>
+    </div>
+{% endblock related_content %}

@@ -52,8 +52,21 @@
     {% if inline_only == 1 %}
         data-portal="{{ portal }}" data-slug="{{ slug }}" data-type="{{ type }}"
     {% else %}
-	    <a class="result-link" data-portal="{{ portal }}" data-slug="{{ slug }}" data-type="{{ type }}">
-	        {{ name }}
-	    </a>
+        <a class="result-link" data-portal="{{ portal }}" data-slug="{{ slug }}" data-type="{{ type }}">
+            {{ name }}
+        </a>
     {% endif %}
+{% endmacro %}
+
+{% macro userInfoLink(name, url, image, address) %}
+    <div class="user-info-link">
+        (( user info link for  {{ name }} ))
+    </div>
+{% endmacro %}
+
+
+{% macro groupInfoLink(name, url, image, type, count) %}
+    <div class="group-info-link">
+        (( group info link for  {{ name }} ))
+    </div>
 {% endmacro %}

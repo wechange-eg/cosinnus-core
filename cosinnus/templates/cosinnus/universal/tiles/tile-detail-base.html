@@ -28,7 +28,6 @@
             </div>
         {% endblock title %}
         
-        
         {% block top_line %}
             {% if address or group_slug and group_name and portal %}
                 <div class="tile-section top-line one-line">
@@ -47,13 +46,17 @@
 		            {% endblock top_line_group %}
 	                
 		            {% block top_line_address %}
-		                {% if address %}
+		                {% if address and not type == "events" %}
                             <div class="address">{{ address }} ((link me?))</div>
 		                {% endif %}
 		            {% endblock top_line_address %}
 	            </div>
             {% endif %}
         {% endblock top_line %}
+        
+        
+        {% block additional_top_line %}
+        {% endblock additional_top_line %}
         
         
         {% block topic_line %}
@@ -64,6 +67,10 @@
 	            {% endfor %}
 	        </div>
         {% endblock topic_line %}
+        
+        
+        {% block action_buttons %}
+        {% endblock action_buttons %}
         
         
         {% block description %}
@@ -79,20 +86,8 @@
         {% endblock related_content %}
         
         
-        
         {% block contact %}
-        {% endblock xxxxxxxxxxxxxx %}
-        
-        
-        
-        {% block xxxxxxxxxxxxxxx %}
-        {% endblock xxxxxxxxxxxxxx %}
-        
-        
-        
-        {% block xxxxxxxxxxxxxxx %}
-        {% endblock xxxxxxxxxxxxxx %}
-        
+        {% endblock contact %}
         
         
         {% block xxxxxxxxxxxxxxx %}

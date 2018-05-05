@@ -3,9 +3,11 @@
 
 
 {% block action_buttons %}
-(( TODO: gruppe beitreten )) 
-</br>
-(( TODO: gruppe anschreiben ))
+    <div class="tile-section">
+		(( TODO: button gruppe beitreten )) 
+		</br>
+		(( TODO:  button gruppe anschreiben ))
+    </div>
 
 {% endblock action_buttons %}
 
@@ -14,6 +16,10 @@
     {{ block.super }}
 
     <div class="tile-section tile-section-divided">
-        (( projects ))
+        <div class="row">
+            <div class="col-xs-6">
+                {{ macros.groupInfoLink("Project list", "", "", "") }}
+            </div>
+        </div>
     </div>
 {% endblock related_content %}
