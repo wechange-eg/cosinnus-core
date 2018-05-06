@@ -150,141 +150,15 @@
 		cursor: default;
 	}
 	
-	.tile {
-	    
-	    .dual-tile-image {
-            position: relative;
-            padding-top: 55%;
-            	    
-		    .tile-image-background {
-		        position: absolute;
-		        width: 100%;
-		        top: 0;
-		        left: 0;
-		    }
-		    .floating-tile-image {
-		        position: absolute;
-			    width: 25%;
-			    bottom: 15px;
-			    left: 15px;
-			    -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.35);
-	            -moz-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.35);
-	            box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.35);
-		    }
-		    
-	    }
-	    
-	    .single-tile-image {
-		    display: inline-block;
-		    width: 25%;
-		    float: left;
-		    margin: 0 15px 15px 0;
-		    position: relative;
-		    outline: 1px solid @map-frame-color;
-	    }
-	    .framed-tile-image {
-	        width: 100%;
-	    }
-	    
-		.tile-detail-link {
-		    cursor: pointer;
-		}
-		
-        &.tile-people  {
-            /* border: 1px solid @map-people-color; */
-        }
-        &.tile-events  {
-            /* border: 1px solid @map-events-color; */
-        }
-        &.tile-projects  {
-            /* border: 1px solid @map-projects-color; */
-        }
-        &.tile-groups  {
-            /* border: 1px solid @map-groups-color; */
-        }
-        &.tile-ideas  {
-            /* border: 1px solid @map-ideas-color; */
-        }
-        
-        outline: 2px solid @map-frame-color;
-        outline-offset: -1px;
-        
-        &.hovered {
-            z-index: 1;
-            -webkit-box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.35);
-            -moz-box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.35);
-            box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.35);
-        }
-        
-        .tile-header-section {
-            margin-bottom: 2px;
-        }
-	    .tile-section {
-	        padding: 5px 0 5px 0;
-	        
-            &:last-child {
-                padding-bottom: 0;
-            }
-	        i.fa {
-	            font-size: 14px;
-	            padding: 0 5px 0 0;
-	        }
-	    }
-	    .tile-description {
-            text-overflow: ellipsis;
-            overflow: hidden;
-            max-height: 56px;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            display: -webkit-box;
-            margin-bottom: 10px;
-            
-            &:last-child {
-                margin-bottom: 0;
-            }
-	    }
-	    
-	    h1 {
-	        font-size: 16px;
-	        font-weight: normal;
-	        margin: 10px 0 10px 0;
-	    }
-	    p {
-	        padding: 0;
-	    }
-	    a:not(.uncolored-link) {
-	       color: @map-action-button-color;
-	    }
-	    
-	}
 }
 
-/** The full-50%-screen tile overlay */
-.app-fullscreen .tile-detail {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    z-index: 4;
-    padding: 65px 10px;
-}
-.app-embed .tile-detail {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 75%;
-    height: inherit;
-    overflow-y: scroll;
-    padding: 10px;
-}
-.app-fullscreen.no-navbar .tile-detail {
-	padding: 10px;
-}
 
-.tile, .tile-detail {
-	padding: 20px;
+.app-root .tile, 
+.app-root .tile-detail {
+    padding: 20px;
     color: @map-text-color;
     background-color: @map-tile-background-color;
-	
+    
     a {
        color: @map-text-color;
        cursor: pointer;
@@ -293,8 +167,8 @@
            color: @map-strong-color;
        }
     }
-	
-	.image-placeholder-background-people {
+    
+    .image-placeholder-background-people {
         background: @map-people-color; /* Old browsers */
         background: -moz-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-people-color 100%); /* FF3.6-15 */
         background: -webkit-linear-gradient(top, @map-placeholder-gradient-top-color 0%, @map-people-color 100%); /* Chrome10-25,Safari5.1-6 */
@@ -340,10 +214,131 @@
         margin-right: 10px;
     }
     
+    
+    .dual-tile-image {
+        position: relative;
+        padding-top: 55%;
+                
+        .tile-image-background {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+        .floating-tile-image {
+            position: absolute;
+            width: 25%;
+            bottom: 15px;
+            left: 15px;
+            -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.35);
+            -moz-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.35);
+            box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.35);
+        }
+        
+    }
+    
 }
-.tile-detail {
+
+.app-root .tile {
+    
+    
+    .single-tile-image {
+        display: inline-block;
+        width: 25%;
+        float: left;
+        margin: 0 15px 15px 0;
+        position: relative;
+        outline: 1px solid @map-frame-color;
+    }
+    .framed-tile-image {
+        width: 100%;
+    }
+    
+    .tile-detail-link {
+        cursor: pointer;
+    }
+    
+    &.tile-people  {
+        /* border: 1px solid @map-people-color; */
+    }
+    &.tile-events  {
+        /* border: 1px solid @map-events-color; */
+    }
+    &.tile-projects  {
+        /* border: 1px solid @map-projects-color; */
+    }
+    &.tile-groups  {
+        /* border: 1px solid @map-groups-color; */
+    }
+    &.tile-ideas  {
+        /* border: 1px solid @map-ideas-color; */
+    }
+    
+    outline: 2px solid @map-frame-color;
+    outline-offset: -1px;
+    
+    &.hovered {
+        z-index: 1;
+        -webkit-box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.35);
+        -moz-box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.35);
+        box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.35);
+    }
+    
+    .tile-header-section {
+        margin-bottom: 2px;
+    }
+    .tile-section {
+        padding: 5px 0 5px 0;
+        
+        &:last-child {
+            padding-bottom: 0;
+        }
+        i.fa {
+            font-size: 14px;
+            padding: 0 5px 0 0;
+        }
+    }
+    .tile-description {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-height: 56px;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        margin-bottom: 10px;
+        
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    
+    h1 {
+        font-size: 16px;
+        font-weight: normal;
+        margin: 10px 0 10px 0;
+    }
+    p {
+        padding: 0;
+    }
+    a:not(.uncolored-link) {
+       color: @map-action-button-color;
+    }
+    
+}
+
+
+.app-root .tile-detail {
     width: 50%;
     height: 100%;
+    
+    /** The image is smaller in height (and gets delivered that way) */
+    .dual-tile-image {
+        padding-top: 35%;
+        .floating-tile-image {
+            position: absolute;
+            width: 15%;
+        }
+    }
     
     .tile-close-button {
         cursor: pointer;
@@ -355,6 +350,30 @@
         color: #666;
     }
 }
+
+
+/** The full-50%-screen tile overlay */
+.app-fullscreen .tile-detail {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    z-index: 4;
+    padding: 65px 10px;
+}
+.app-embed .tile-detail {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 75%;
+    height: inherit;
+    overflow-y: scroll;
+    padding: 10px;
+}
+.app-fullscreen.no-navbar .tile-detail {
+    padding: 10px;
+}
+
+
 
 .map-fullscreen {
 	

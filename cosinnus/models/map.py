@@ -7,6 +7,8 @@ from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.templatetags.cosinnus_tags import textfield
 from copy import copy
+import six
+from cosinnus.utils.files import image_thumbnail_url
 
 
 class BaseMapResult(dict):
@@ -100,13 +102,28 @@ class DetailedMapResult(HaystackMapResult):
         'type': 'DetailedMapResult',
     })
     
+    background_image_field = None
+    
+    """
+    def prepare_background_image_large_url(self, image):
+        if not image:
+            return None
+        if image and isinstance(image, six.string_types):
+            return image
+        return image_thumbnail_url(image, (1000, 350))
+    """
+    
     def __init__(self, haystack_result, obj, *args, **kwargs):
-        ret = super(DetailedMapResult, self).__init__(haystack_result, *args, **kwargs)
+        kwargs.update({
+            'morestuff': 'Moar Stuff!',
+        })
+        """
+        if self.background_image_field:
+            kwargs['backgroundImageLargeUrl'] = self.prepare_background_image_large_url(getattr(obj, self.background_image_field))
+        """
         
-        # TODO: additional fields
-        print ">> not adding additional stuff"
-        
-        return ret
+        return super(DetailedMapResult, self).__init__(haystack_result, *args, **kwargs)
+
 
 class DetailedUserMapResult(DetailedMapResult):
     """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
@@ -117,19 +134,32 @@ class DetailedUserMapResult(DetailedMapResult):
     def __init__(self, haystack_result, obj, *args, **kwargs):
         return super(DetailedUserMapResult, self).__init__(haystack_result, obj, *args, **kwargs)
 
-class DetailedProjectMapResult(DetailedMapResult):
+
+class DetailedBaseGroupMapResult(DetailedMapResult):
+    """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
+         into a proper MapResult """
+         
+    background_image_field = 'wallpaper'
+
+    def __init__(self, haystack_result, obj, *args, **kwargs):
+        return super(DetailedBaseGroupMapResult, self).__init__(haystack_result, obj, *args, **kwargs)
+
+
+class DetailedProjectMapResult(DetailedBaseGroupMapResult):
     """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
          into a proper MapResult """
 
     def __init__(self, haystack_result, obj, *args, **kwargs):
         return super(DetailedProjectMapResult, self).__init__(haystack_result, obj, *args, **kwargs)
 
-class DetailedSocietyMapResult(DetailedMapResult):
+
+class DetailedSocietyMapResult(DetailedBaseGroupMapResult):
     """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
          into a proper MapResult """
 
     def __init__(self, haystack_result, obj, *args, **kwargs):
         return super(DetailedSocietyMapResult, self).__init__(haystack_result, obj, *args, **kwargs)
+
 
 class DetailedEventResult(DetailedMapResult):
     """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)

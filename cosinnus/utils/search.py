@@ -211,7 +211,7 @@ class StoredDataIndexMixin(indexes.SearchIndex):
         image = self.get_image_field_for_background(obj)
         if image and isinstance(image, six.string_types):
             return image
-        return image_thumbnail_url(image, (1000, 550))
+        return image_thumbnail_url(image, (1000, 350))
     
     def prepare_description(self, obj):
         return obj.description
