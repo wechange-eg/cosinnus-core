@@ -53,6 +53,14 @@ module.exports = BaseView.extend({
     	);
     	return data;
     },
+
+    /** Adjust this view's template based on the result type it displays (and other states) */
+    fitTemplate: function () {
+    	var self = this;
+    	if (self.model.get('type') == 'people') {
+    		self.state.isSmall = true;
+    	} 
+    },
     
     // a new result is being selected
     onDetailOpened: function (result) {
@@ -62,6 +70,7 @@ module.exports = BaseView.extend({
     	} else {
     		this.template = templates['error'];
     	}
+    	this.fitTemplate();
     	this.render();
     	// render moment dates
     	if (result.get('type') == "events") {

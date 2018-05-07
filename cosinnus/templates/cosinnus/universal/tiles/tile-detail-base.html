@@ -37,8 +37,8 @@
             <div class="tile-section title">
                 <a href="{% if type == "people" %}{{ controlView.portalInfo[portal].domain }}{% endif %}{{ url }}" target="_blank" class="uncolored-link">
                     <h1>
-                    {{ title }}
-                    <i class="fa fa-external-link"></i>
+	                    {{ title }}
+	                    <i class="fa fa-external-link"></i>
                     </h1>
                 </a>
             </div>
@@ -46,7 +46,7 @@
         
         {% block top_line %}
             {% if address or (group_slug and group_name and portal) %}
-                <div class="tile-section top-line one-line extra-space">
+                <div class="tile-section top-line one-line {% if isSmall %}no-space{% else %}extra-space{% endif %}">
 		            {% block top_line_group %}
 		                {% if group_slug and group_name and portal %}
 			                <span class="pale-color">
@@ -81,7 +81,7 @@
         
         {% block topic_line %}
             {% if topics|length > 0 %}
-		        <div class="tile-section topic-line one-line">
+		        <div class="tile-section topic-line">
 		            <span class="pale-color">Topics:</span> 
 		            {% for topic in topics %}
 		                <a class="topic-filter-link " data-topic-id="{{ topic }}">{{ controlView.allTopics[topic] }}</a>{% if not loop.last %},{% endif %}

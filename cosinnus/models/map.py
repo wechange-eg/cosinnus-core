@@ -18,10 +18,10 @@ from django.utils.html import escape
 from django.template.defaultfilters import linebreaksbr
 
 
-def _prepend_url(user, portal):
+def _prepend_url(user, portal=None):
     """ Adds a signup-url with ?next= parameter to a URL for unregistered users,
         and always adds the correct portal domain """
-    return portal.get_domain() + ('' if user.is_authenticated() else reverse('cosinnus:user-add') + '?join_msg=1&next=')
+    return (portal.get_domain() if portal else '') + ('' if user.is_authenticated() else reverse('cosinnus:user-add') + '?join_msg=1&next=')
 
 
 class BaseMapResult(dict):
@@ -188,7 +188,8 @@ class DetailedUserMapResult(DetailedMapResult):
 
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
         kwargs.update({
-            'is_member': user.id == obj.user_id
+            'is_member': user.id == obj.user_id,
+            'action_url_1': _prepend_url(user, None) + reverse('postman:write', kwargs={'recipients': obj.user.username}),
         })
         return super(DetailedUserMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 

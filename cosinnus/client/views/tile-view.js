@@ -39,11 +39,8 @@ module.exports = BaseView.extend({
     fitTemplate: function () {
     	var self = this;
     	if (self.model.get('type') == 'people') {
-    		//self.template = tileTemplateSmall;
     		self.state.isSmall = true;
-    	} else {
-    		//self.template = tileTemplateDefault;
-    	}
+    	} 
     },
     
     /** Extend the template data by the controlView's options and state */
