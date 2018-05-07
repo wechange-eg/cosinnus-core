@@ -13,13 +13,15 @@
 
         
 {% block additional_top_line %}
-    <div class="tile-section">
-        <div class="">
-            (( time and date ))        
+    <div class="tile-section tile-section">
+        <div>
+            <i class="fa fa-fw fa-clock-o"></i>{{ time_html|safe }}
         </div>
-        <div class="">
-            (( adress or not ))
-        </div>
+        {% if address %}
+            <div class="capitalize">
+                <i class="fa fa-fw fa-map-marker"></i>{{ address }}
+            </div>
+        {% endif %}
     </div>
 {% endblock additional_top_line %}
         
@@ -29,9 +31,6 @@
         <div class="subheading">
             {# Translators: __INCLUDE_JS_PO__ #}
             {% trans "Participants" %}
-        </div>
-        <div class="tile-section">
-            (( contactinfo ))
         </div>
 	    <div class="row">
 	        <div class="col-xs-6">

@@ -63,6 +63,10 @@ module.exports = BaseView.extend({
     		this.template = templates['error'];
     	}
     	this.render();
+    	// render moment dates
+    	if (result.get('type') == "events") {
+    		$.cosinnus.renderMomentDataDate();
+    	}
     },
     
     // a result is being unselected

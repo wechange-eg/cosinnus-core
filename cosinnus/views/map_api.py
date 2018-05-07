@@ -146,7 +146,7 @@ def map_search_endpoint(request, filter_group_id=None):
         if not any([res['id'] == item_id for res in results]):
             item_result = get_searchresult_by_itemid(item_id)
             if item_result:
-                results = [item_result] + results[:-1]
+                results = [HaystackMapResult(item_result)] + results[:-1]
         
     page_obj = None
     if results:

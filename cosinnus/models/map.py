@@ -199,7 +199,8 @@ class DetailedEventResult(DetailedMapResult):
 
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
         kwargs.update({
-            'is_member': check_ug_membership(user, obj.group)
+            'is_member': check_ug_membership(user, obj.group),
+            'time_html': obj.get_humanized_event_time_html(),
         })
         return super(DetailedEventResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
