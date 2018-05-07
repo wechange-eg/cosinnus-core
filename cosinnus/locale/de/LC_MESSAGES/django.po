@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-05 16:12+0200\n"
-"PO-Revision-Date: 2018-04-24 15:14+0200\n"
+"POT-Creation-Date: 2018-05-07 16:35+0200\n"
+"PO-Revision-Date: 2018-05-07 16:43+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -503,9 +503,11 @@ msgstr "Zusätzliches CSS"
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr "Wird vorgezogen gegenüber sämtlichem anderen CSS"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Projekt"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Group"
 msgstr "Gruppe"
 
@@ -750,6 +752,8 @@ msgstr "Gültig bis"
 msgid "Approach"
 msgstr "Ansatz"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Topics"
 msgstr "Themen"
 
@@ -780,6 +784,7 @@ msgstr "Projekt oder Gruppe-erstellen Button"
 msgid "Users"
 msgstr "Benutzer_innen"
 
+#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Events"
 msgstr "Veranstaltungen"
@@ -1090,6 +1095,7 @@ msgid "Settings"
 msgstr "Einstellungen"
 
 #
+#. Translators: __INCLUDE_JS_PO__
 msgid "Members"
 msgstr "Mitglieder"
 
@@ -1591,6 +1597,7 @@ msgstr "von"
 msgid "Do you really want to delete the invitation for \"%(title)s\"?"
 msgstr "Möchtest du die Einladung für \"%(title)s\" wirklich löschen?"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
 msgstr "Nachricht schicken"
 
@@ -1989,6 +1996,7 @@ msgstr "Teilen"
 msgid "Share on Facebook"
 msgstr "Auf Facebook teilen"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Contact"
 msgstr "Kontakt"
 
@@ -2017,6 +2025,7 @@ msgstr "Benutzer_in in Projekt %(group)s"
 msgid "Add user"
 msgstr "Benutzer_in hinzufügen"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "User"
 msgstr "Benutzer_in"
 
@@ -2804,6 +2813,25 @@ msgstr "Registrieren"
 msgid "Create account"
 msgstr "Konto erstellen"
 
+msgid "Welcome to the Community!"
+msgstr "Willkommen in der Gemeinde!"
+
+msgid "You need a user account to join projects and become active!"
+msgstr "Du brauchst ein Benutzerkonto um Projekten beizutreten und aktiv zu werden!"
+
+msgid "You need a user account to continue!"
+msgstr "Du braucht ein Benutzerkonto um weiterzumachen!"
+
+msgid "Signing up is easy and fast. Just fill out these fields and you're all set!"
+msgstr "Das Registrieren geht einfach und schnell. Füll einfach diese Felder aus und es kann losgehen!"
+
+#
+msgid "Already have an account?"
+msgstr "Du hast schon ein Konto?"
+
+msgid "Log in here"
+msgstr "Hier einloggen"
+
 msgid "Email address"
 msgstr "E-mail Adresse"
 
@@ -2891,6 +2919,116 @@ msgstr "Weiter"
 
 msgid "Enter one or more search terms or select a topic to search."
 msgstr "Gib einen oder mehrere Suchbegriffe ein oder wähle ein Thema aus um zu Suchen."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Veranstaltung"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Idea"
+msgstr "Idee"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Ideas"
+msgstr "Ideen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search for Names, Topics and Places..."
+msgstr "Suche nach Namen, Themen und Orten..."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Where"
+msgstr "Wo"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "In map area"
+msgstr "In Kartenaussschnit"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "If active, searching will be restricted to the visible map area."
+msgstr "Wenn aktiv wird die Suche auf die sichtbare Kartenfläche beschränkt"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Apply Filters"
+msgstr "Filter anwenden"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Clear Filters"
+msgstr "Filter zurücksetzen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Showing results"
+msgstr "Zeige Ergebnisse"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "No results found."
+msgstr "Keine Ergebnisse gefunden"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not complete the search due to an error."
+msgstr "Konnte die Suche aufgrund eines Fehlers nicht abschließen."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search when moving the map"
+msgstr "Suchen wenn die Karte bewegt wird"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search this area"
+msgstr "In diesem Ausschnitt suchen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Participants"
+msgstr "Teilnehmer"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Project/Group Memberships"
+msgstr "Projekt/Gruppenmitgliedschaften"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "No info."
+msgstr "Keine Informationen."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Administrator"
+msgstr "Administrator"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Administrators"
+msgstr "Administratoren"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "No description yet."
+msgstr "Noch keine Beschreibung erstellt."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Error!"
+msgstr "Fehler!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Sorry, but the requested content could not be retrieved from the server!"
+msgstr "Tut uns leid, aber der gewüschte Inhalt konnte nicht vom Server geladen werden!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are a Member"
+msgstr "Du bist Mitglied!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Join Group"
+msgstr "Gruppe beitreten"
+
+#
+#. Translators: __INCLUDE_JS_PO__
+msgid "Message Group"
+msgstr "Gruppe anschreiben"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Join Project"
+msgstr "Projekt beitreten"
+
+#
+#. Translators: __INCLUDE_JS_PO__
+msgid "Message Project"
+msgstr "Projekt anschreiben"
 
 msgid "About me"
 msgstr "Über mich"
@@ -3245,6 +3383,9 @@ msgstr "Projektbeschreibung"
 
 msgid "About Us"
 msgstr "Über uns"
+
+msgid "Question about"
+msgstr "Frage zu"
 
 #, python-format
 msgid "The language \"%s\" is not supported"
@@ -3784,9 +3925,6 @@ msgstr "Deine Änderungen wurden übernommen."
 #~ msgid "Access denied"
 #~ msgstr "Zugriff verweigert"
 
-#~ msgid "Not found"
-#~ msgstr "Widget nicht gefunden"
-
 #~ msgid "Portal administrators"
 #~ msgstr "Portal-Administrator_innen"
 
@@ -3856,10 +3994,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "Group description"
 #~ msgstr "Projektbeschreibung"
-
-#
-#~ msgid "Leave Group"
-#~ msgstr "Projekt verlassen"
 
 #~ msgid "The changes to the group were saved successfully."
 #~ msgstr "Die Änderungen am Projekt wurden erfolgreich gespeichert."

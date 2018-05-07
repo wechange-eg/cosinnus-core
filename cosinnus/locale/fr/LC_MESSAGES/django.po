@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-05 16:12+0200\n"
+"POT-Creation-Date: 2018-05-07 16:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -502,9 +502,11 @@ msgstr ""
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Group"
 msgstr ""
 
@@ -749,6 +751,8 @@ msgstr ""
 msgid "Approach"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Topics"
 msgstr ""
 
@@ -779,12 +783,16 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Events"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr ""
 
@@ -1085,6 +1093,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Members"
 msgstr ""
 
@@ -1572,6 +1581,7 @@ msgstr ""
 msgid "Do you really want to delete the invitation for \"%(title)s\"?"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
 msgstr ""
 
@@ -1967,6 +1977,7 @@ msgstr ""
 msgid "Share on Facebook"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Contact"
 msgstr ""
 
@@ -1995,6 +2006,7 @@ msgstr ""
 msgid "Add user"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "User"
 msgstr ""
 
@@ -2478,6 +2490,7 @@ msgstr ""
 msgid "Forum"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr ""
 
@@ -2650,6 +2663,24 @@ msgstr ""
 msgid "Create account"
 msgstr ""
 
+msgid "Welcome to the Community!"
+msgstr ""
+
+msgid "You need a user account to join projects and become active!"
+msgstr ""
+
+msgid "You need a user account to continue!"
+msgstr ""
+
+msgid "Signing up is easy and fast. Just fill out these fields and you're all set!"
+msgstr ""
+
+msgid "Already have an account?"
+msgstr ""
+
+msgid "Log in here"
+msgstr ""
+
 msgid "Email address"
 msgstr ""
 
@@ -2736,6 +2767,114 @@ msgid "next"
 msgstr ""
 
 msgid "Enter one or more search terms or select a topic to search."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Idea"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Ideas"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search for Names, Topics and Places..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Where"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "In map area"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "If active, searching will be restricted to the visible map area."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Apply Filters"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Clear Filters"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Showing results"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "No results found."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not complete the search due to an error."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search when moving the map"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search this area"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Participants"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Project/Group Memberships"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "No info."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Administrator"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Administrators"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "No description yet."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Error!"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Sorry, but the requested content could not be retrieved from the server!"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are a Member"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Join Group"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Message Group"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Join Project"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Message Project"
 msgstr ""
 
 msgid "About me"
@@ -3085,6 +3224,9 @@ msgid "Team Description"
 msgstr ""
 
 msgid "About Us"
+msgstr ""
+
+msgid "Question about"
 msgstr ""
 
 #, python-format
