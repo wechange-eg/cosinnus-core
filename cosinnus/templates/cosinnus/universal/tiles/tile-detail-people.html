@@ -18,19 +18,33 @@
 
 
 {% block related_content %}
-    <div class="tile-section tile-section-divided">
-        <div class="row">
-            <div class="col-xs-6">
-                {{ macros.groupInfoLink("Group list", "", "", "") }}
-            </div>
-        </div>
-    </div>
+    {% if related_groups|length > 0 %}
+	    <div class="tile-section tile-section-divided">
+	        <div class="subheading">
+	            {# Translators: __INCLUDE_JS_PO__ #}
+	            {% trans "Gruppen" %} ({{ related_groups|length }}))
+	        </div>
+	        <div class="row">
+	            <div class="col-xs-6">
+	                <!-- TODO -->
+	                {{ macros.groupInfoLink("Group list", "", "", "") }}
+	            </div>
+	        </div>
+	    </div>
+    {% endif %}
     
-    <div class="tile-section tile-section-divided">
-        <div class="row">
-            <div class="col-xs-6">
-                {{ macros.groupInfoLink("Project list", "", "", "") }}
-            </div>
-        </div>
-    </div>
+    {% if related_projects|length > 0 %}
+	    <div class="tile-section tile-section-divided">
+	        <div class="subheading">
+	            {# Translators: __INCLUDE_JS_PO__ #}
+	            {% trans "Gruppen" %} ({{ related_projects|length }}))
+	        </div>
+	        <div class="row">
+	            <div class="col-xs-6">
+	                <!-- TODO -->
+	                {{ macros.groupInfoLink("Project list", "", "", "") }}
+	            </div>
+	        </div>
+	    </div>
+    {% endif %}
 {% endblock related_content %}

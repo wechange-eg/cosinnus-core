@@ -27,15 +27,18 @@
         
 
 {% block related_content %}
-    <div class="tile-section tile-section-divided">
-        <div class="subheading">
-            {# Translators: __INCLUDE_JS_PO__ #}
-            {% trans "Participants" %}
-        </div>
-	    <div class="row">
-	        <div class="col-xs-6">
-                {{ macros.userInfoLink("Participant list", "", "", "") }}
+    {% if related_participants|length > 0 %}
+	    <div class="tile-section tile-section-divided">
+	        <div class="subheading">
+	            {# Translators: __INCLUDE_JS_PO__ #}
+	            {% trans "Participants" %}
 	        </div>
+		    <div class="row">
+		        <div class="col-xs-6">
+		            <!-- TODO -->
+	                {{ macros.userInfoLink("Participant list", "", "", "") }}
+		        </div>
+		    </div>
 	    </div>
-    </div>
+	{% endif %}
 {% endblock related_content %}

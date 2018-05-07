@@ -10,9 +10,7 @@
     
         {% block type_area %}
             <div class="tile-header-section">
-               {{ macros.typeLabel(type, singular=1) }}
-			    <span style="font-size:8px;color:#ccc;">score: {{relevance}}</span> {# TODO: delete me #}
-			    
+                {{ macros.typeLabel(type, singular=1) }}
 			    {% if not isSmall and controlView.portalInfo.current != portal %}
 			        <div class="pull-right">
 			            <a class="portal-inlink uncolored-link" href="{{ controlView.portalInfo[portal].domain }}" target="_blank" title="{{ controlView.portalInfo[portal].name }}">

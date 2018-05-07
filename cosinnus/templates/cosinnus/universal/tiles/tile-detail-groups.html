@@ -32,12 +32,15 @@
 
 {% block related_content %}
     {{ super() }}
-
-    <div class="tile-section tile-section-divided">
-        <div class="row">
-            <div class="col-xs-6">
-                {{ macros.groupInfoLink("Project list", "", "", "") }}
-            </div>
-        </div>
-    </div>
+    
+    {% if related_projects|length > 0 %}
+	    <div class="tile-section tile-section-divided">
+	        <div class="row">
+	            <div class="col-xs-6">
+	                <!-- TODO -->
+	                {{ macros.groupInfoLink("Project list", "", "", "") }}
+	            </div>
+	        </div>
+	    </div>
+    {% endif %}
 {% endblock related_content %}
