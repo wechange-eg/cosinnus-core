@@ -52,9 +52,7 @@
     {% if inline_only == 1 %}
         data-portal="{{ portal }}" data-slug="{{ slug }}" data-type="{{ type }}"
     {% else %}
-        <a class="result-link" data-portal="{{ portal }}" data-slug="{{ slug }}" data-type="{{ type }}">
-            {{ name }}
-        </a>
+        <a class="result-link" data-portal="{{ portal }}" data-slug="{{ slug }}" data-type="{{ type }}">{{ name }}</a>
     {% endif %}
 {% endmacro %}
 

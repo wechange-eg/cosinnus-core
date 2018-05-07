@@ -34,7 +34,7 @@
     4: tile-detail frame
 */
 
-.app-fullscreen, .map-fullscreen, .tile-list-fullscreen {
+.app-root, .app-fullscreen, .map-fullscreen, .tile-list-fullscreen {
     position: fixed;
     top: 0;
     left: 0;
@@ -62,6 +62,9 @@
     .caps {
         text-transform: uppercase;
     }
+    .capitalize {
+        text-transform: capitalize;
+    }
     .pale-color {
         color: @map-pale-color;
     }
@@ -86,6 +89,123 @@
     }
     .apply-color-ideas {
         color: @map-ideas-color;
+    }
+    
+    /** Rounded buttons */
+    .rounded-button {
+        display: inline-block;
+        cursor: pointer;
+        
+        height: 34px;
+        line-height: 32px;
+        font-size: 14px;
+        border-radius: 4px;
+        text-decoration: none;
+        
+        .rounded-button-inner {
+            padding: 0 10px;
+            -webkit-user-select: none; /* Safari */        
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+/Edge */
+            user-select: none; /* Standard */
+            
+            i {
+                margin-right: 5px;
+            }
+        }
+        &:hover {
+            -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.35);
+            -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.35);
+            box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.35);
+        }
+        &.disabled {
+            pointer-events: none;
+            cursor: default;
+            opacity: 0.3;
+        }
+        
+        /** Action buttons */
+        &.button-color-action, &.button-action:hover {
+            color: @map-button-color;
+            background-color: @map-action-button-color;
+            border: 1px solid @map-action-button-color;
+        }
+        &.button-action {
+            color: @map-action-button-color;
+            background-color: @map-button-color;
+            border: 1px solid @map-action-button-color;
+        }
+        
+        /** Topics */
+        &.button-color-topic {
+            color: @map-topic-color;
+            background-color: @map-button-color;
+            border: 1px solid @map-topic-color;
+        }
+        &.button-color-topic.selected {
+            color: @map-button-color;
+            background-color: @map-topic-color;
+        }
+        
+        /** Events */
+        &.button-color-events {
+            color: @map-events-color;
+            background-color: @map-button-color;
+            border: 1px solid @map-events-color;
+        }
+        &.button-color-events.selected {
+            color: @map-button-color;
+            background-color: @map-events-color;
+        }
+        
+        /** People */
+        &.button-color-people {
+            color: @map-people-color;
+            background-color: @map-button-color;
+            border: 1px solid @map-people-color;
+        }
+        &.button-color-people.selected {
+            color: @map-button-color;
+            background-color: @map-people-color;
+        }
+        
+        /** Projects */
+        &.button-color-projects {
+            color: @map-projects-color;
+            background-color: @map-button-color;
+            border: 1px solid @map-projects-color;
+        }
+        &.button-color-projects.selected {
+            color: @map-button-color;
+            background-color: @map-projects-color;
+        }
+        
+        /** Groups */
+        &.button-color-groups {
+            color: @map-groups-color;
+            background-color: @map-button-color;
+            border: 1px solid @map-groups-color;
+        }
+        &.button-color-groups.selected {
+            color: @map-button-color;
+            background-color: @map-groups-color;
+        }
+        
+        /** Ideas */
+        &.button-color-ideas {
+            color: @map-ideas-color;
+            background-color: @map-button-color;
+            border: 1px solid @map-ideas-color;
+        }
+        &.button-color-ideas.selected {
+            color: @map-button-color;
+            background-color: @map-ideas-color;
+        }
+    }
+    
+    .inline-spacer {
+        display: inline-block;
+        margin-left: 20px;
     }
     
 }
@@ -160,12 +280,16 @@
     background-color: @map-tile-background-color;
     
     a {
-       color: @map-text-color;
+       color:@map-action-button-color;
        cursor: pointer;
        
-       &:hover {
+       &:not(.uncolored-link,.rounded-button):hover {
            color: @map-strong-color;
        }
+    }
+    
+    a.uncolored-link {
+       color: @map-text-color;
     }
     
     .image-placeholder-background-people {
@@ -284,9 +408,7 @@
         box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.35);
     }
     
-    .tile-header-section {
-        margin-bottom: 2px;
-    }
+    
     .tile-section {
         padding: 5px 0 5px 0;
         
@@ -297,6 +419,9 @@
             font-size: 14px;
             padding: 0 5px 0 0;
         }
+    }
+    .tile-header-section {
+        margin-bottom: 2px;
     }
     .tile-description {
         text-overflow: ellipsis;
@@ -320,9 +445,6 @@
     p {
         padding: 0;
     }
-    a:not(.uncolored-link) {
-       color: @map-action-button-color;
-    }
     
 }
 
@@ -330,6 +452,74 @@
 .app-root .tile-detail {
     width: 50%;
     height: 100%;
+    padding: 20px 25px;
+    font-size: 14px;
+    color: @map-text-color;
+    
+    overflow-y: scroll;
+    overflow-x: hidden;
+    
+    
+    .tile-section {
+        padding: 10px 0 10px 0;
+        
+        &:last-child {
+            padding-bottom: 0;
+        }
+        i.fa {
+            font-size: 18px;
+            padding: 0 5px 0 0;
+            vertical-align: middle;
+        }
+    }
+    .tile-section-compact {
+        padding: 10px 0 10px 0;
+        line-height: 14px;
+        i.fa {
+            font-size: 14px;
+            vertical-align: initial;
+        }
+    }
+    .tile-section-divided::before {
+        content: " ";
+        display: block;
+        border-top: 2px solid @map-scroll-color;
+        margin: 5px -25px 20px -25px;
+        padding-top: 5px;
+    }
+    .tile-section-header {
+        margin-bottom: 5px;
+    }
+    .extra-space {
+        margin-bottom: 10px;
+    }
+    .extra-space-top {
+        margin-top: 10px;
+    }
+    .top-line {
+        padding-top: 0;
+    }
+    
+    .title {
+        h1 {
+            display: inline-block;
+            margin: 10px 0 0 0;
+            font-size: 26px;
+        }
+        a:hover, a:hover h1 {
+            text-decoration: none;
+        }
+        a i.fa {
+            color: @map-action-button-color;
+            font-size: 18px;
+        }
+        a:hover i.fa, a i.fa:hover {
+            font-weight: bold;
+        }
+    }
+    .subheading {
+        font-weight: bold;
+    }
     
     /** The image is smaller in height (and gets delivered that way) */
     .dual-tile-image {
@@ -342,13 +532,54 @@
     
     .tile-close-button {
         cursor: pointer;
-        position: fixed;
-        right: 50px;
+        position: absolute;
+        right: 20px;
         font-size: 22px;
-        border: 3px solid;
-        border-radius: 20px;
-        color: #666;
+        color: @map-pale-color;
+        /** makes the click-area bigger */
+        margin: -10px;
+        padding: 10px;
+        /** correct for own size */
+        margin-top: -20px;
+        
+        &:hover {
+            color: @map-text-color;
+        }
     }
+    
+    /** We tame the markdown to a nicer level */
+    .description {
+        line-height: 1.5em;
+    
+	    p {
+	       padding: 0;
+	       margin: 0;
+	    }
+	    ul {
+	        padding-top: 0;
+            padding-bottom: 0;
+            margin-top: 0;
+	    }
+	    p, ul {
+            margin-bottom: 15px;
+	    }
+	    
+	    h1, h2, h3, h4, h5 {
+	        font-size: 16px;
+	        font-weight: bold;
+	        padding: 0;
+	        margin: 0 0 5px 0;
+	    }
+	    
+	    br {
+	        display: none;
+	    }
+        img {
+            max-width:100%;
+            max-height:100%;
+        }
+    }
+    
 }
 
 
@@ -358,7 +589,8 @@
     top: 0;
     left: 50%;
     z-index: 4;
-    padding: 65px 10px;
+    margin-top: 55px;
+    height: ~"calc(100% - 55px)";
 }
 .app-embed .tile-detail {
     position: absolute;
@@ -510,114 +742,6 @@
     
     p, {
         color: @map-pale-color;
-    }
-    
-    
-    .rounded-button {
-	    display: inline-block;
-	    cursor: pointer;
-	    
-	    height: 34px;
-	    line-height: 32px;
-	    font-size: 14px;
-	    border-radius: 4px;
-	    
-	    .rounded-button-inner {
-		    padding: 0 10px;
-		    -webkit-user-select: none; /* Safari */        
-            -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* IE10+/Edge */
-            user-select: none; /* Standard */
-		    
-		    i {
-		        margin-right: 5px;
-		    }
-	    }
-	    &:hover {
-            text-decoration: none;
-            -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.35);
-			-moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.35);
-			box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.35);
-	    }
-	    &.disabled {
-	        pointer-events: none;
-            cursor: default;
-            opacity: 0.3;
-	    }
-	    
-	    /** Action buttons */
-        &.button-color-action {
-            color: @map-button-color;
-            background-color: @map-action-button-color;
-            border: 1px solid @map-action-button-color;
-        }
-	    
-        /** Topics */
-	    &.button-color-topic {
-            color: @map-topic-color;
-            background-color: @map-button-color;
-		    border: 1px solid @map-topic-color;
-        }
-        &.button-color-topic.selected {
-            color: @map-button-color;
-            background-color: @map-topic-color;
-        }
-        
-        /** Events */
-        &.button-color-events {
-            color: @map-events-color;
-            background-color: @map-button-color;
-            border: 1px solid @map-events-color;
-        }
-        &.button-color-events.selected {
-            color: @map-button-color;
-            background-color: @map-events-color;
-        }
-        
-        /** People */
-        &.button-color-people {
-            color: @map-people-color;
-            background-color: @map-button-color;
-            border: 1px solid @map-people-color;
-        }
-        &.button-color-people.selected {
-            color: @map-button-color;
-            background-color: @map-people-color;
-        }
-        
-        /** Projects */
-        &.button-color-projects {
-            color: @map-projects-color;
-            background-color: @map-button-color;
-            border: 1px solid @map-projects-color;
-        }
-        &.button-color-projects.selected {
-            color: @map-button-color;
-            background-color: @map-projects-color;
-        }
-        
-        /** Groups */
-        &.button-color-groups {
-            color: @map-groups-color;
-            background-color: @map-button-color;
-            border: 1px solid @map-groups-color;
-        }
-        &.button-color-groups.selected {
-            color: @map-button-color;
-            background-color: @map-groups-color;
-        }
-        
-        /** Ideas */
-        &.button-color-ideas {
-            color: @map-ideas-color;
-            background-color: @map-button-color;
-            border: 1px solid @map-ideas-color;
-        }
-        &.button-color-ideas.selected {
-            color: @map-button-color;
-            background-color: @map-ideas-color;
-        }
-	    
     }
     
     .button-list {

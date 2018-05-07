@@ -21,7 +21,8 @@ from cosinnus.forms.search import filter_searchqueryset_for_read_access, \
     filter_searchqueryset_for_portal
 from cosinnus.models.map import HaystackMapResult, \
     SEARCH_MODEL_NAMES, SEARCH_MODEL_NAMES_REVERSE, \
-    SEARCH_RESULT_DETAIL_TYPE_MAP, SHORT_MODEL_MAP
+    SEARCH_RESULT_DETAIL_TYPE_MAP, SHORT_MODEL_MAP,\
+    SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.functions import is_number, ensure_list_of_ints
 from cosinnus.utils.permissions import check_object_read_access
@@ -208,7 +209,7 @@ def map_detail_endpoint(request):
         return HttpResponseNotFound('No item found that matches the requested type and slug.')
     
     # check read permission
-    if not check_object_read_access(obj, request.user):
+    if not model_type in SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS and not check_object_read_access(obj, request.user):
         return HttpResponseForbidden('You do not have permission to access this item.')
     
     # get the basic result data from the search index (as it is already prepared and faster to access there)
@@ -218,7 +219,7 @@ def map_detail_endpoint(request):
     
     # format data
     result_model = SEARCH_RESULT_DETAIL_TYPE_MAP[model_type]
-    result = result_model(haystack_result, obj)
+    result = result_model(haystack_result, obj, request.user)
     
     data = {
         'result': result,

@@ -2,7 +2,13 @@
 {% import "include/macros.html" as macros %}
 
 {% block header_image %}
-    (( background image, but only use the large one! ))
+    {% if backgroundImageLargeUrl %}
+        <div class="tile-section header-image">
+            <div class="dual-tile-image">
+                <img class="tile-image tile-image-background" src="{{ backgroundImageLargeUrl }}" /> 
+            </div>
+        </div>
+    {% endif %}
 {% endblock header_image %}
 
         
@@ -20,10 +26,10 @@
 
 {% block related_content %}
     <div class="tile-section tile-section-divided">
-        <h2>
+        <div class="subheading">
             {# Translators: __INCLUDE_JS_PO__ #}
             {% trans "Participants" %}
-        </h2>
+        </div>
         <div class="tile-section">
             (( contactinfo ))
         </div>

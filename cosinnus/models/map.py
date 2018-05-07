@@ -1,14 +1,27 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from copy import copy
+
+from django.core.urlresolvers import reverse
+
 from cosinnus.forms.search import get_visible_portal_ids
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
+from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject, \
+    CosinnusGroup
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.templatetags.cosinnus_tags import textfield
-from copy import copy
-import six
-from cosinnus.utils.files import image_thumbnail_url
+from cosinnus.utils.permissions import check_ug_membership
+from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.utils.group import message_group_admins_url
+from django.utils.html import escape
+from django.template.defaultfilters import linebreaksbr
+
+
+def _prepend_url(user, portal):
+    """ Adds a signup-url with ?next= parameter to a URL for unregistered users,
+        and always adds the correct portal domain """
+    return portal.get_domain() + ('' if user.is_authenticated() else reverse('cosinnus:user-add') + '?join_msg=1&next=')
 
 
 class BaseMapResult(dict):
@@ -100,6 +113,7 @@ class DetailedMapResult(HaystackMapResult):
     fields = copy(HaystackMapResult.fields)
     fields.update({
         'type': 'DetailedMapResult',
+        'is_member': False,
     })
     
     background_image_field = None
@@ -113,7 +127,7 @@ class DetailedMapResult(HaystackMapResult):
         return image_thumbnail_url(image, (1000, 350))
     """
     
-    def __init__(self, haystack_result, obj, *args, **kwargs):
+    def __init__(self, haystack_result, obj, user, *args, **kwargs):
         kwargs.update({
             'morestuff': 'Moar Stuff!',
         })
@@ -125,48 +139,69 @@ class DetailedMapResult(HaystackMapResult):
         return super(DetailedMapResult, self).__init__(haystack_result, *args, **kwargs)
 
 
-class DetailedUserMapResult(DetailedMapResult):
-    """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
-         into a proper MapResult """
-         
-    # todo: show portals?
-
-    def __init__(self, haystack_result, obj, *args, **kwargs):
-        return super(DetailedUserMapResult, self).__init__(haystack_result, obj, *args, **kwargs)
-
-
 class DetailedBaseGroupMapResult(DetailedMapResult):
     """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
          into a proper MapResult """
          
     background_image_field = 'wallpaper'
 
-    def __init__(self, haystack_result, obj, *args, **kwargs):
-        return super(DetailedBaseGroupMapResult, self).__init__(haystack_result, obj, *args, **kwargs)
+    def __init__(self, haystack_result, obj, user, *args, **kwargs):
+        group_admins = list(obj.actual_admins)
+        
+        kwargs.update({
+            'is_member': check_ug_membership(user, obj),
+            'action_url_1': _prepend_url(user, obj.portal) + group_aware_reverse('cosinnus:group-microsite', kwargs={'group': obj}) + '?join=1',
+            'action_url_2': _prepend_url(user, obj.portal) + message_group_admins_url(obj, group_admins),
+            'youtube_url': obj.video,
+            'twitter_username': obj.twitter_username,
+            'flickr_url': obj.flickr_url,
+            'website_url': obj.website,
+            'contact': linebreaksbr(escape(obj.contact_info)),
+            
+        })
+        """ TODO: check all read permissions on related objects! """
+        
+        return super(DetailedBaseGroupMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
 
 class DetailedProjectMapResult(DetailedBaseGroupMapResult):
     """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
          into a proper MapResult """
 
-    def __init__(self, haystack_result, obj, *args, **kwargs):
-        return super(DetailedProjectMapResult, self).__init__(haystack_result, obj, *args, **kwargs)
+    def __init__(self, haystack_result, obj, user, *args, **kwargs):
+        return super(DetailedProjectMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
 
 class DetailedSocietyMapResult(DetailedBaseGroupMapResult):
     """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
          into a proper MapResult """
 
-    def __init__(self, haystack_result, obj, *args, **kwargs):
-        return super(DetailedSocietyMapResult, self).__init__(haystack_result, obj, *args, **kwargs)
+    def __init__(self, haystack_result, obj, user, *args, **kwargs):
+        return super(DetailedSocietyMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
+
+
+class DetailedUserMapResult(DetailedMapResult):
+    """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
+         into a proper MapResult """
+         
+    # todo: show portals?
+
+    def __init__(self, haystack_result, obj, user, *args, **kwargs):
+        kwargs.update({
+            'is_member': user.id == obj.user_id
+        })
+        return super(DetailedUserMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
 
 class DetailedEventResult(DetailedMapResult):
     """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
          into a proper MapResult """
 
-    def __init__(self, haystack_result, obj, *args, **kwargs):
-        return super(DetailedEventResult, self).__init__(haystack_result, obj, *args, **kwargs)
+    def __init__(self, haystack_result, obj, user, *args, **kwargs):
+        kwargs.update({
+            'is_member': check_ug_membership(user, obj.group)
+        })
+        return super(DetailedEventResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
 
 
@@ -207,6 +242,11 @@ except:
     Event = None
 
 SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in SEARCH_MODEL_NAMES.items()])
+# these can always be read by any user (returned fields still vary)
+SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS = [
+    'projects',
+    'groups',
+]
 
 
 def itemid_from_searchresult(result):

@@ -4,16 +4,34 @@
 
 {% block action_buttons %}
     <div class="tile-section">
-		(( TODO: button gruppe beitreten )) 
-		</br>
-		(( TODO:  button gruppe anschreiben ))
+        {% if is_member %}
+			<a class="rounded-button button-action disabled">
+	            <span class="rounded-button-inner">
+	                <i clasS="fa fa-check"></i>
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "You are a Member" %}
+	            </span>
+	        </a>
+	    {% else %}
+	       <a href="{{ action_url_1 }}" target="_blank" class="rounded-button button-action">
+                <span class="rounded-button-inner">
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Join Group" %}
+                </span>
+            </a>
+        {% endif %}
+        <a href="{{ action_url_2 }}" target="_blank" class="rounded-button button-action">
+            <span class="rounded-button-inner">
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Message Group" %}
+            </span>
+        </a>
     </div>
-
 {% endblock action_buttons %}
 
 
 {% block related_content %}
-    {{ block.super }}
+    {{ super() }}
 
     <div class="tile-section tile-section-divided">
         <div class="row">
