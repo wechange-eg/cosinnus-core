@@ -56,9 +56,8 @@ setup(
     install_requires=[
         # please mirror all changes in the requirements.txt for local installs!
         'Django==1.8.18',
-        'Pillow==2.3.0',
         'MarkupSafe==0.18',
-        'Pillow==2.3.0',
+        'Pillow==2.6.1',
         
         'django-annoying==0.7.6',
         'django-appconf==0.6',
@@ -74,11 +73,12 @@ setup(
         'django-markdown2==0.3.0',
         'django-model-utils==1.5.0',
         'django-phonenumber-field==1.1.0',
+        'django-polymorphic==0.7.2',
         'django-sekizai==0.8.2',
         'django-suit==0.2.15',
         'django-taggit==0.17.3',
         'django-widget-tweaks==1.3',
-        'djangorestframework==2.3.12',
+        'djangorestframework==3.1.3',
         'dnspython==1.15.0',
         'easy-thumbnails==1.4',
         'ecdsa==0.10',
@@ -86,7 +86,7 @@ setup(
         'fabric-virtualenv==0.2.1',
         'fabvenv==0.1.1',
         'jsonfield==1.0.0',
-        'html5lib==0.99',
+        'html5lib==0.999',
         'html2text==2016.9.19',
         'oauthlib==2.0.2',
         'paramiko==1.12.0',
