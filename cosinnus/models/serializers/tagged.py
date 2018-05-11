@@ -9,7 +9,7 @@ from rest_framework import serializers
 __all__ = ('TagListSerializer', )
 
 
-class TagListSerializer(serializers.WritableField):
+class TagListSerializer(serializers.ReadOnlyField):
     # from http://pypede.wordpress.com/2013/07/06/using-django-rest-framework-with-tagged-items-django-taggit/
 
     def _quote_string(self, tag):
