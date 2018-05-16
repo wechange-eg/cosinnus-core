@@ -83,8 +83,6 @@ setup(
         'easy-thumbnails==1.4',
         'ecdsa==0.10',
         'jsonfield==1.0.0',
-        'fabric-virtualenv==0.2.1',
-        'fabvenv==0.1.1',
         'jsonfield==1.0.0',
         'html5lib==0.999',
         'html2text==2016.9.19',
