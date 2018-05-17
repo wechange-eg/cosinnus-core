@@ -113,6 +113,17 @@
                 margin-right: 5px;
             }
         }
+        &.rounded-button-circular {
+            border-radius: 20px;
+            .rounded-button-inner {
+                padding: 0 8px;      
+	            i {
+	                margin-right: 0;
+	            }
+            } 
+            
+        }
+        
         &:hover {
             -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.35);
             -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.35);
@@ -996,9 +1007,9 @@
             height: @check-height;
             line-height: @check-height;
             -webkit-user-select: none; /* Safari */        
--moz-user-select: none; /* Firefox */
--ms-user-select: none; /* IE10+/Edge */
-user-select: none; /* Standard */
+			-moz-user-select: none; /* Firefox */
+			-ms-user-select: none; /* IE10+/Edge */
+			user-select: none; /* Standard */
         }
 
         a {
@@ -1041,10 +1052,17 @@ user-select: none; /* Standard */
     }
 }
 
-.map-scroll-controls, .map-pagination-controls {
-    padding: 15px;
+.map-scroll-controls {
+    padding: 10px;
+	position: fixed;
+	right: ~"calc(50% + 10px)";
+	bottom: 10px;
 }
 
+.map-pagination-controls {
+    padding: 10px;
+    text-align: center;	
+}
 
 .onoffswitch {
     position: relative; width: 28px;

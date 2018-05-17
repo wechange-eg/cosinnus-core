@@ -27,6 +27,7 @@ module.exports = BaseView.extend({
         'click .stale-search-button': 'staleSearchButtonClicked',
         'click .pagination-forward-button': 'paginationForwardClicked',
         'click .pagination-back-button': 'paginationBackClicked',
+        'click .onoffswitch-text-label': 'onOffSwitchLabelClicked',
     },
 	
     initialize: function (options, app, controlView) {
@@ -50,6 +51,11 @@ module.exports = BaseView.extend({
     
     
     // Events  -------------
+
+	/** Trigger for state button elements */
+    onOffSwitchLabelClicked: function (event) {
+    	$(event.target).next().find('input[type="checkbox"]').click()
+    },
     
     // delegate to controlView
     toggleSearchOnScrollClicked: function (event) {

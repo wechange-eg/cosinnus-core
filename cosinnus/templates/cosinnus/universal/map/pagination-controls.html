@@ -4,28 +4,30 @@
     <div class="map-pagination-controls">
         <div class="line">
             {% if page %}
-	            <span>
-	                {# Translators: __INCLUDE_JS_PO__ #}
-	                {% trans 'Showing results' %}
-	            </span>
-	            <span>
-	                {{ page.start }} - {{ page.end }}
-	            </span>
-	            {% if 1  %}
-	                <i>
-                        ({{ page.total_count }})
-                    </i>
-	            {% endif %}
-	            
-	            
-	            {% if page and page.has_next or page and page.has_previous %}
-	                <div class="map-button pagination-forward-button {% if not page.has_next %}disabled {% endif %}">
-	                    <i class="fa fa-chevron-right"></i>
-	                </div>
-	                <div class="map-button pagination-back-button {% if not page.has_previous %}disabled {% endif %}">
-	                    <i class="fa fa-chevron-left"></i>
-	                </div>
-                {% endif %}
+                <div class="rounded-button rounded-button-circular button-action {% if not page.has_previous %}disabled {% endif %}">
+                    <span class="rounded-button-inner">
+                        <i class="fa fa-fw fa-chevron-left"></i>
+                    </span>
+                </div>
+                <div class="inline-spacer">
+		            <span>
+		                {{ page.start }} - {{ page.end }}
+		            </span>
+		            {% if 1  %}
+	                    {# Translators: __INCLUDE_JS_PO__ #}
+	                    {% trans 'of' %}
+	                    {{ page.total_count }}
+		            {% endif %}
+		            <span>
+		                {# Translators: __INCLUDE_JS_PO__ #}
+		                {% trans 'Results' %}
+		            </span>
+	            </div>
+                <div class="inline-spacer rounded-button rounded-button-circular button-action {% if not page.has_next %}disabled {% endif %}">
+                    <span class="rounded-button-inner">
+                        <i class="fa fa-fw fa-chevron-right"></i>
+                    </span>
+                </div>
             {% else %}
                 <i>
                     {# Translators: __INCLUDE_JS_PO__ #}
@@ -35,11 +37,10 @@
             
             
         {% if searchHadErrors %}
-          <div class="message">
-            {# Translators: __INCLUDE_JS_PO__ #}
-            {% trans 'Could not complete the search due to an error.' %}
-            COMING SOON: [TRY AGAIN LINK] <!-- TODO -->
-          </div>
+            <div class="message">
+	            {# Translators: __INCLUDE_JS_PO__ #}
+	            {% trans 'Could not complete the search due to an error.' %}
+            </div>
         {% endif %}
         
         </div>
@@ -50,19 +51,27 @@
 {% if scrollControlsEnabled %}
     <div class="map-scroll-controls">
         <div class="line">
-            <div class="check scroll toggle-search-on-scroll">
-                <div class="box">
-                    {% if searchOnScroll %}
-                        <i class="fa fa-check"></i>
-                    {% endif %}
-                </div>
-                <div class="check-label">
-                    {# Translators: __INCLUDE_JS_PO__ #}
-                    {% trans 'Search when moving the map' %}
-                </div>
-            </div>
             
-            {% if not searchOnScroll and resultsStale and not searching %}
+	        <table class="small-space">
+	            <tr>
+	                <td class="onoffswitch-text-label">
+	                    {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans 'Search when moving the map' %}
+	                </td>
+	                <td>
+			            <div class="onoffswitch">
+			                <input type="checkbox" name="onoffswitch-search-on-scroll" class="onoffswitch-checkbox toggle-search-on-scroll" id="check-search-on-scroll" {% if searchOnScroll %}checked{% endif %}>
+			                <label class="onoffswitch-label" for="check-search-on-scroll">
+			                    <span class="onoffswitch-inner"></span>
+			                    <span class="onoffswitch-switch"></span>
+			                </label>
+			            </div>
+                    </td>
+                </tr>
+            </table>
+            
+            {# Currently not shown. #}
+            {% if 0 and not searchOnScroll and resultsStale and not searching %}
                 <div class="map-button stale-search-button">
                    <span>
                        {# Translators: __INCLUDE_JS_PO__ #}

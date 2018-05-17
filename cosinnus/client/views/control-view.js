@@ -210,13 +210,10 @@ module.exports = ContentControlView.extend({
     },
     
     toggleSearchOnScrollClicked: function (event) {
-    	event.preventDefault();
     	this.state.searchOnScroll = !this.state.searchOnScroll;
     	if (this.state.searchOnScroll == true && this.state.resultsStale) {
     		this.staleSearchButtonClicked(event);
-    	} else {
-    		this.paginationControlView.render();
-    	}
+    	} 
     },
     
     staleSearchButtonClicked: function (event) {
