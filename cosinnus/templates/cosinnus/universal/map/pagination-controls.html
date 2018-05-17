@@ -4,7 +4,7 @@
     <div class="map-pagination-controls">
         <div class="line">
             {% if page %}
-                <div class="rounded-button rounded-button-circular button-action {% if not page.has_previous %}disabled {% endif %}">
+                <div class="rounded-button rounded-button-circular button-action trigger-pagination-backward {% if not page.has_previous %}disabled {% endif %}">
                     <span class="rounded-button-inner">
                         <i class="fa fa-fw fa-chevron-left"></i>
                     </span>
@@ -23,7 +23,7 @@
 		                {% trans 'Results' %}
 		            </span>
 	            </div>
-                <div class="inline-spacer rounded-button rounded-button-circular button-action {% if not page.has_next %}disabled {% endif %}">
+                <div class="inline-spacer rounded-button rounded-button-circular button-action trigger-pagination-forward {% if not page.has_next %}disabled {% endif %}">
                     <span class="rounded-button-inner">
                         <i class="fa fa-fw fa-chevron-right"></i>
                     </span>

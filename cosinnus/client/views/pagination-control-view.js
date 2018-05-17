@@ -25,8 +25,8 @@ module.exports = BaseView.extend({
     events: {
         'click .toggle-search-on-scroll': 'toggleSearchOnScrollClicked',
         'click .stale-search-button': 'staleSearchButtonClicked',
-        'click .pagination-forward-button': 'paginationForwardClicked',
-        'click .pagination-back-button': 'paginationBackClicked',
+        'click .trigger-pagination-forward': 'paginationForwardClicked',
+        'click .trigger-pagination-backward': 'paginationBackClicked',
         'click .onoffswitch-text-label': 'onOffSwitchLabelClicked',
     },
 	
