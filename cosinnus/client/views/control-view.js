@@ -255,7 +255,7 @@ module.exports = ContentControlView.extend({
     },
     
     /** Delete the detail result cache, should only happen on voluntary user "new search" actions! */
-    clearDetailResultCache() {
+    clearDetailResultCache: function () {
     	self.detailResultCache = {};
     },
     
