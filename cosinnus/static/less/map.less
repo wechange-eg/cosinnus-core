@@ -23,8 +23,6 @@
 
 @map-placeholder-gradient-top-color: #e5e5e5;
 
-
-
 /**
   z-indexes:
     0: default. map, tiles
@@ -34,12 +32,46 @@
     4: tile-detail frame
 */
 
+@font-face {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: normal;
+    src: url('./../css/fonts/brandon/brandongrotesque.otf');
+}
+@font-face {
+    font-family: 'Brandon Text';
+    font-style: normal;
+    font-weight: normal;
+    src: url('./../css/fonts/brandon/brandon-text-regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Brandon Text';
+    font-style: italic;
+    font-weight: normal;
+    src: url('./../css/fonts/brandon/brandon-text-italic.ttf') format('truetype');
+}
+/* 
+    TODO: we're missing the Brandon Regular Bold Font!
+@font-face {
+    font-family: 'Brandon Text';
+    font-style: normal;
+    font-weight: bold;
+    src: url('./../css/fonts/brandon/brandon-text-bold.ttf') format('truetype');
+}
+*/
+
+
+
 .app-root, .app-fullscreen, .map-fullscreen, .tile-list-fullscreen {
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
+    
+    font-family: 'Brandon Text', sans-serif;
+    
+    
 
     /* For fullscreen mode, don't move the controls to compensate for the navbar */
     &.no-navbar{
@@ -448,6 +480,7 @@
     }
     
     h1 {
+        font-family: 'Brandon Grotesque', sans-serif;
         font-size: 16px;
         font-weight: normal;
         margin: 10px 0 10px 0;
@@ -523,6 +556,7 @@
             display: inline-block;
             margin: 5px 0 0 0;
             font-size: 26px;
+            font-family: 'Brandon Grotesque', sans-serif;
         }
         a:hover, a:hover h1 {
             text-decoration: none;
