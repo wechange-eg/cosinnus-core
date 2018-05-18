@@ -20,11 +20,13 @@
                 </span>
             </a>
         {% endif %}
-        <a href="{{ action_url_2 }}" target="_blank" class="rounded-button button-action">
-            <span class="rounded-button-inner">
-                {# Translators: __INCLUDE_JS_PO__ #}
-                {% trans "Message Project" %}
-            </span>
-        </a>
+        {% if action_url_2 %}
+	        <a href="{{ action_url_2 }}" target="_blank" class="rounded-button button-action">
+	            <span class="rounded-button-inner">
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Message Project" %}
+	            </span>
+	        </a>
+        {% endif %}
     </div>
 {% endblock action_buttons %}

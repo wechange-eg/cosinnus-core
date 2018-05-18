@@ -147,11 +147,12 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
 
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
         group_admins = list(obj.actual_admins)
+        message_url = message_group_admins_url(obj, group_admins)
         
         kwargs.update({
             'is_member': check_ug_membership(user, obj),
             'action_url_1': _prepend_url(user, obj.portal) + group_aware_reverse('cosinnus:group-microsite', kwargs={'group': obj}) + '?join=1',
-            'action_url_2': _prepend_url(user, obj.portal) + message_group_admins_url(obj, group_admins),
+            'action_url_2': (_prepend_url(user, obj.portal) + message_url) if message_url else None,
             'youtube_url': obj.video,
             'twitter_username': obj.twitter_username,
             'flickr_url': obj.flickr_url,
