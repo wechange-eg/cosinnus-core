@@ -533,9 +533,9 @@ module.exports = ContentControlView.extend({
      */
     handleStaleResults: function (context) {
     	if (context.reason == 'viewport-changed') {
-    		util.log('*** control-view.js: Received signal for stale results bc of viewport change, and triggering a delayed search if nothing prevents it')
+    		util.log('*** control-view.js: Received signal for stale results bc of viewport change')
     	} else if (context.reason == 'map-navigate') {
-    		util.log('*** control-view.js: Received signal for stale results bc of map-navigate, but doing nothing rn')
+    		util.log('*** control-view.js: Received signal for stale results bc of map-navigate')
     	}
     	
     	var staleBefore = this.state.resultsStale;
@@ -550,7 +550,7 @@ module.exports = ContentControlView.extend({
     			// check before auto-rerendering that the input-box is not focused!
     			// if so, on mobile this search would pull down the keyboard
     			if (!this.$el.find('.q').is(":focus")) {
-    				this.triggerDelayedSearch();
+    				this.triggerDelayedSearch(false, false, false, context.reason);
     			} else {
     				util.log('control-view.js: Prevented a search while input is focused!')
     			}
@@ -572,7 +572,7 @@ module.exports = ContentControlView.extend({
     },
     
     // called with a list of dicts of results freshly returned after a search
-    processSearchResults: function (jsonResultList) {
+    processSearchResults: function (jsonResultList, searchReason) {
     	var self = this;
     	
     	var resultModels = [];
@@ -603,19 +603,16 @@ module.exports = ContentControlView.extend({
     		}
     	}
     	
-    	
     	util.log('control-view.js:processSearchResults: check that the currently selected object is kept in the collection!')
-    	
-    	
     	util.log('control-view.js: got the results back and updated the collection!')
     	util.log(self.collection.toJSON());
-    	
-    	
     	
     	self.collection.reset(resultModels);
     	
     	// if we had a navigate event and we still have a detail-view open, but it's not in the URL, close it
-    	if (self.detailResult && !self.state.urlSelectedResultId) {
+    	// happens on back/forward buttons, but also on scroll events (where we don't want to close the detail view)
+    	
+    	if (self.detailResult && !self.state.urlSelectedResultId && !(searchReason == 'viewport-changed')) {
     		self.displayDetailResult(null);
     	} 
     	// if our URL points directly at an item, select it.
@@ -711,7 +708,7 @@ module.exports = ContentControlView.extend({
     },
     
 
-    search: function (noNavigate) {
+    search: function (noNavigate, searchReason) {
         var self = this;
         self.state.resultsStale = false;
         
@@ -729,7 +726,7 @@ module.exports = ContentControlView.extend({
         	timeout: self.searchXHRTimeout,
         	success: function (data, textStatus) {
             	// Save the search state in the url.
-            	if (App.displayOptions.routeNavigation && !noNavigate) {
+            	if (App.displayOptions.routeNavigation && !noNavigate && !self.selectedResult) {
             		util.log('control-view.js: +++++++++++++++++ since we are fullscreen, publishing router URL update!')
             		self.addCurrentHistoryState();
             	}
@@ -737,7 +734,7 @@ module.exports = ContentControlView.extend({
             	util.log(data)
             	util.log(textStatus)
             	var results = data.results;
-            	self.processSearchResults(results);
+            	self.processSearchResults(results, searchReason);
             	self.state.page = data.page;
             	self.state.pageIndex = data.page && data.page.index || 0;
             	self.state.searchHadErrors = false;
@@ -953,7 +950,7 @@ module.exports = ContentControlView.extend({
 
     // Register a change in the controls or the map UI which should queue
     // a search attempt after a delay.
-    triggerDelayedSearch: function (fireImmediatelyIfPossible, noPageReset, noNavigate) {
+    triggerDelayedSearch: function (fireImmediatelyIfPossible, noPageReset, noNavigate, searchReason) {
         var self = this;
         
         var delay = self.searchDelay;
@@ -967,7 +964,7 @@ module.exports = ContentControlView.extend({
         clearTimeout(this.searchTimeout);
         Backbone.mediator.publish('want:search');
         self.searchTimeout = setTimeout(function () {
-            self.search(noNavigate);
+            self.search(noNavigate, searchReason);
         }, delay);
     },
 

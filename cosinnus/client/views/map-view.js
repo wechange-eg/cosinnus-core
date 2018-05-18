@@ -254,7 +254,7 @@ module.exports = ContentControlView.extend({
     	if (typeof clusterLevel !== 'undefined' && clusterLevel > 0) {
     		clusterOffset = this.options.MARKER_STACK_PX_OFFSET_BASE + (this.options.MARKER_STACK_PX_OFFSET_PER_CLUSTER_LEVEL * clusterLevel);
     	}
-    	util.log('adding marker at coords ' + JSON.stringify(coords))
+    	//util.log('adding marker at coords ' + JSON.stringify(coords))
     	
     	// EXPERIMENTAL: TODO: add number label
     	var className = '';
@@ -356,7 +356,7 @@ module.exports = ContentControlView.extend({
     			this.leaflet.removeLayer(marker);
     		}
     		delete this.markers[result.id];
-    		util.log('Removed marker at ' + result.get('lat') + ', ' + result.get('lon'));
+    		//util.log('Removed marker at ' + result.get('lat') + ', ' + result.get('lon'));
     	}
     },
     
