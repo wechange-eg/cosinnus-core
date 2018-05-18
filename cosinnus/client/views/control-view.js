@@ -925,7 +925,7 @@ module.exports = ContentControlView.extend({
     	});
     	// if we select all types, drop the filter (select all is default). 
     	if (all_deselected) {
-    		self.resetResultFilters();
+    		self.resetTypeFilters();
     	}
     	
     	// Topics

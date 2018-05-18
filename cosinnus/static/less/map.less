@@ -19,7 +19,6 @@
 
 @map-clickable-icon-color: #aaa;
 @map-clickable-icon-hover-color: #333;
-@map-clickable-icon-active-color: #4285F4;
 
 @map-placeholder-gradient-top-color: #e5e5e5;
 
@@ -130,6 +129,7 @@
         
         height: 34px;
         line-height: 32px;
+        margin-right: 5px;
         font-size: 14px;
         border-radius: 4px;
         text-decoration: none;
@@ -156,10 +156,10 @@
             
         }
         
-        &:hover {
-            -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.35);
-            -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.35);
-            box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.35);
+        &:focus, &:active {
+            -webkit-box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.35);
+            -moz-box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.35);
+            box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.35);
         }
         &.disabled {
             pointer-events: none;
@@ -181,11 +181,12 @@
         
         /** Topics */
         &.button-color-topic {
-            color: @map-topic-color;
+            color: @map-text-color;
             background-color: @map-button-color;
             border: 1px solid @map-topic-color;
         }
-        &.button-color-topic.selected {
+        &.button-color-topic.selected,
+        &.button-color-topic:hover {
             color: @map-button-color;
             background-color: @map-topic-color;
         }
@@ -196,7 +197,8 @@
             background-color: @map-button-color;
             border: 1px solid @map-events-color;
         }
-        &.button-color-events.selected {
+        &.button-color-events.selected,
+        &.button-color-events:hover {
             color: @map-button-color;
             background-color: @map-events-color;
         }
@@ -207,7 +209,8 @@
             background-color: @map-button-color;
             border: 1px solid @map-people-color;
         }
-        &.button-color-people.selected {
+        &.button-color-people.selected,
+        &.button-color-people:hover {
             color: @map-button-color;
             background-color: @map-people-color;
         }
@@ -218,7 +221,8 @@
             background-color: @map-button-color;
             border: 1px solid @map-projects-color;
         }
-        &.button-color-projects.selected {
+        &.button-color-projects.selected,
+        &.button-color-projects:hover {
             color: @map-button-color;
             background-color: @map-projects-color;
         }
@@ -229,7 +233,8 @@
             background-color: @map-button-color;
             border: 1px solid @map-groups-color;
         }
-        &.button-color-groups.selected {
+        &.button-color-groups.selected,
+        &.button-color-groups:hover {
             color: @map-button-color;
             background-color: @map-groups-color;
         }
@@ -240,7 +245,8 @@
             background-color: @map-button-color;
             border: 1px solid @map-ideas-color;
         }
-        &.button-color-ideas.selected {
+        &.button-color-ideas.selected,
+        &.button-color-ideas:hover {
             color: @map-button-color;
             background-color: @map-ideas-color;
         }
@@ -258,6 +264,9 @@
 .tile-list-splitscreen {
 	width: 50%;
 	left: 50%;
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.35);
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.35);
 }
 .app-embed {
 	position: relative;
@@ -400,6 +409,7 @@
             -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.35);
             -moz-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.35);
             box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.35);
+            background: #FFF;
         }
         
     }
@@ -419,6 +429,18 @@
 }
 
 .app-root .tile {
+
+    border-bottom: 1px solid @map-frame-color;
+    border-left: 1px solid @map-frame-color;
+    margin-left: -1px;
+    margin-bottom: 1px;
+    
+	&[style*="left: 0%;"] {
+        border-right: 1px solid @map-frame-color;
+	    border-left: none;
+	    margin-left: 0;
+	}
+    
     
     .tile-detail-link {
         cursor: pointer;
@@ -440,14 +462,11 @@
         /* border: 1px solid @map-ideas-color; */
     }
     
-    outline: 2px solid @map-frame-color;
-    outline-offset: -1px;
-    
     &.hovered {
         z-index: 1;
-        -webkit-box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.35);
-        -moz-box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.35);
-        box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.35);
+        -webkit-box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
+        box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
     }
     
     
@@ -530,7 +549,7 @@
     .tile-section-divided::before {
         content: " ";
         display: block;
-        border-top: 2px solid @map-scroll-color;
+        border-top: 1px solid @map-frame-color;
         margin: 5px -25px 20px -25px;
         padding-top: 5px;
     }
@@ -813,17 +832,14 @@
     }
     
     .map-controls-search {
-        /*  border-bottom: 2px solid @map-frame-color; */
-        -webkit-box-shadow: 0px 0px 0px 1px @map-frame-color;
-        -moz-box-shadow: 0px 0px 0px 1px @map-frame-color;
-        box-shadow: 0px 0px 0px 1px @map-frame-color;
+        border-bottom: 1px solid @map-frame-color;
     
         position: relative;
         display: flex;
         flex-direction: row;
         
         .search-box {
-            padding: 15px;
+            padding: 12px;
             flex-grow: 1;
             &:after {
 	            content: " ";
@@ -860,7 +876,7 @@
         
 	    .q {
 	        width: 100%;
-	        font-size: 16px;
+	        font-size: 20px;
 	        padding-left: 39px;
 	        
 	        color: #000;
@@ -920,7 +936,7 @@
         color: @map-clickable-icon-color;
         
         &.active {
-            color: @map-clickable-icon-active-color
+            color: @map-action-button-color;
         }
         
         &:hover {
@@ -984,6 +1000,7 @@
     }
 
     .map-controls-filters {
+        border-bottom: 1px solid @map-frame-color;
         padding: 15px;
     }
     

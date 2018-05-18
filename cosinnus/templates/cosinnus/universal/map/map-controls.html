@@ -18,7 +18,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 	     <div class="filter-button-box">
 	         <span class="clickable-button icon-filters {% if filterPanelVisible %}open{% endif %}">
 	             <i class="fa fa-sliders visible-default"></i>
-                 <i class="fa fa-chevron-down visible-open"></i>
+                 <i class="fa fa-chevron-up visible-open"></i>
                  <i class="fa fa-chevron-up visible-open-hover"></i>
 	         </span>
 	     </div>
@@ -30,7 +30,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
         <div class="button-list">
             {% for filter_type, available in availableFilters %}
                 {% if available %}
-                    <a class="rounded-button button-color-{{ filter_type }} result-filter-button {% if activeFilters[filter_type] %}selected{% endif %}" data-result-filter-type="{{ filter_type }}">
+                    <a class="rounded-button button-color-{{ filter_type }} result-filter-button {% if topicFiltersActive and activeFilters[filter_type] %}selected{% endif %}" data-result-filter-type="{{ filter_type }}">
                         {{ macros.typeLabel(filter_type, "rounded-button-inner", button=1) }}
                     </a>
                 {% endif %}
@@ -45,7 +45,8 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
         <div class="button-list">
             {% for topic_id, topic in allTopics %}
                 {% if topic_id != "" and topic %}
-	                <a class="rounded-button button-color-topic topic-button {% if activeTopicIds|length == 0 %}selected{% else %}{% for tid in activeTopicIds %}{% if tid == topic_id %}selected{% endif %}{% endfor %}{% endif %}" data-topic-id="{{ topic_id }}">
+                    {# active state for button if none is selected disabled for now ("9999999") #}
+	                <a class="rounded-button button-color-topic topic-button {% if activeTopicIds|length == 9999999 %}selected{% else %}{% for tid in activeTopicIds %}{% if tid == topic_id %}selected{% endif %}{% endfor %}{% endif %}" data-topic-id="{{ topic_id }}">
 		                <span class="rounded-button-inner">
 		                    {{ topic }}
 		                </span>
