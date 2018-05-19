@@ -45,7 +45,7 @@ from cosinnus import get_version
 
 
 setup(
-    name='cosinnus',
+    name='cosinnus-core',
     version=get_version(),
     description='cosinnus core application',
     long_description=read('README'),
