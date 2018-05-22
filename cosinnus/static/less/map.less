@@ -60,6 +60,7 @@
 */
 
 
+/** Global Map/TileView styles */
 
 .app-root, .app-fullscreen, .map-fullscreen, .tile-list-fullscreen {
     position: fixed;
@@ -152,7 +153,12 @@
 	                margin-right: 0;
 	            }
             } 
-            
+        }
+        &.rounded-button-small {
+            font-size: 11px;
+            height: 22px;
+            line-height: 20px;
+            margin-right: 0;
         }
         
         &:focus, &:active {
@@ -167,7 +173,7 @@
         }
         
         /** Action buttons */
-        &.button-color-action, &.button-action:hover {
+        &.button-color-action, &.button-action:hover, &.button-action.selected {
             color: @map-button-color;
             background-color: @map-action-button-color;
             border: 1px solid @map-action-button-color;
@@ -256,6 +262,21 @@
         margin-left: 20px;
     }
     
+    
+    /** Layer-switch buttons and map attribution */
+    .map-layers-buttons {
+        position: absolute;
+        bottom: 20px;
+        left: 5px;
+        z-index: 1;
+    }
+    .leaflet-bottom {
+        .leaflet-control-attribution {
+            a {
+                color: #333;
+            }
+        }
+    }
 }
 .map-splitscreen {
 	width: 50%;
@@ -275,7 +296,7 @@
 	height: 100%;
 }
 
-
+/** Tile container styles */
 .tile-list {
 	background-color: @map-tile-background-color;
 	padding-top: 55px;
@@ -323,12 +344,15 @@
 	
 }
 
+/** Common styles for both tiles and detail-view */
 
 .app-root .tile, 
 .app-root .tile-detail {
-    padding: 20px;
+    font-size: 14px;
     color: @map-text-color;
     background-color: @map-tile-background-color;
+    
+    padding: 20px;
     
     a {
        color:@map-action-button-color;
@@ -427,39 +451,20 @@
     
 }
 
+/** Specific styles for small tiles, see above for common tile/detail styles */
+
 .app-root .tile {
 
+	/** Border-styling for tiles is complex */
     border-bottom: 1px solid @map-frame-color;
     border-left: 1px solid @map-frame-color;
     margin-left: -1px;
     margin-bottom: 1px;
-    
 	&[style*="left: 0%;"] {
         border-right: 1px solid @map-frame-color;
 	    border-left: none;
 	    margin-left: 0;
 	}
-    
-    
-    .tile-detail-link {
-        cursor: pointer;
-    }
-    
-    &.tile-people  {
-        /* border: 1px solid @map-people-color; */
-    }
-    &.tile-events  {
-        /* border: 1px solid @map-events-color; */
-    }
-    &.tile-projects  {
-        /* border: 1px solid @map-projects-color; */
-    }
-    &.tile-groups  {
-        /* border: 1px solid @map-groups-color; */
-    }
-    &.tile-ideas  {
-        /* border: 1px solid @map-ideas-color; */
-    }
     
     &.hovered {
         z-index: 1;
@@ -468,6 +473,9 @@
         box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
     }
     
+    .tile-detail-link {
+        cursor: pointer;
+    }
     
     .tile-section {
         padding: 5px 0 5px 0;
@@ -509,13 +517,12 @@
     
 }
 
+/** Specific styles for detail view, see above for common tile/detail styles */
 
 .app-root .tile-detail {
     width: 50%;
     height: 100%;
     padding: 20px 25px;
-    font-size: 14px;
-    color: @map-text-color;
     
     overflow-y: scroll;
     overflow-x: hidden;
@@ -648,8 +655,8 @@
 	        display: none;
 	    }
         img {
-            max-width:100%;
-            max-height:100%;
+            max-width: 100%;
+            max-height: 100%;
         }
     }
     
@@ -712,32 +719,8 @@
 	
 }
 
+/** Everything below here in .map-root is old-style! */
 .map-root {
-	
-	.map-layers-buttons {
-	
-	    position: absolute;
-	    bottom: 20px;
-	    left: 5px;
-	    z-index: 1;
-	   
-        .layer-button {
-            float: none;
-            width: 50px;
-            margin-left: 0;
-            display: inline-block;
-            background-color: @app-main-color-light;
-            padding: 5px;
-            color: black;
-            font-size: 9.5px;
-            letter-spacing: 0.02em;
-
-            &.active {
-                background-color: @app-main-color;
-                color: white;
-            }
-        }
-	}
 	
     .popup {
         max-width: 250px;
@@ -763,14 +746,6 @@
                 -webkit-line-clamp: 8;
                 -webkit-box-orient: vertical;
                 display: -webkit-box;
-            }
-        }
-    }
-
-    .leaflet-bottom {
-        .leaflet-control-attribution {
-            a {
-                color: #333;
             }
         }
     }
@@ -1002,104 +977,7 @@
         border-bottom: 1px solid @map-frame-color;
         padding: 15px;
     }
-    
-    
-    
-    /** ********* old map controls from here *************/
-    
 
-
-    .check {
-        @check-height: 30px;
-        cursor: pointer;
-        height: @check-height;
-        display: inline-block;
-
-        &.people .box  {
-            background-color: @map-people-color;
-        }
-
-        &.events .box  {
-            background-color: @map-events-color;
-        }
-
-        &.projects .box  {
-            background-color: @map-projects-color;
-        }
-
-        &.groups .box  {
-            background-color: @map-groups-color;
-        }
-        
-        &.scroll .box  {
-            background-color: @map-scroll-color;
-        }
-
-        .box {
-            float: left;
-            width: @check-height;
-            height: @check-height;
-
-            i {
-                color: white;
-                font-size: 18px;
-                margin-top: 6px;
-                margin-left: 6px;
-            }
-        }
-
-        .check-label {
-            margin-left: 30px;
-            padding-left: 10px;
-            display: block;
-            color: #333;
-            letter-spacing: 0.04em;
-            height: @check-height;
-            line-height: @check-height;
-            -webkit-user-select: none; /* Safari */        
-			-moz-user-select: none; /* Firefox */
-			-ms-user-select: none; /* IE10+/Edge */
-			user-select: none; /* Standard */
-        }
-
-        a {
-            color: #333;
-            
-            i.fa {
-                color: #666;
-                font-size: 16px;
-            }
-        }
-
-        label {
-            font-size: 12px;
-        }
-    }
-    
-    .map-button {
-	    color: #666;
-	    height: 28px;
-	    padding: 0px 20px;
-	    float: right;
-	    border: 1px solid #999;
-	    
-	    line-height: 28px;
-	    border-radius: 3px;
-	    display: inline-block;
-	    text-align: center;
-	    vertical-align: middle;
-	    cursor: pointer;
-	    
-	    &.disabled {
-	        cursor: not-allowed;
-            pointer-events: none;
-            opacity: 0.45;
-	    }
-    }
-    
-    .message {
-        color: #B50000
-    }
 }
 
 .map-scroll-controls {
