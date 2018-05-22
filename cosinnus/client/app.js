@@ -15,7 +15,9 @@ var TileDetailView = require('views/tile-detail-view');
 var App = function App () {
     self = this;
     
+    // emulate a view's anchorpoint
     self.el = null;
+    self.$el = null;
     
     // contains all views that can display Results
     self.contentViews = [];
@@ -144,6 +146,7 @@ var App = function App () {
         var basePageURL = '/map/';
         
         self.el = params.el;
+        self.$el = $(self.el);
         
         self.controlView = new ControlView({
 	        	el: null, // will only be set if attached to tile-view

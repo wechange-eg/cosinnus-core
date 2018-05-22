@@ -89,6 +89,8 @@ module.exports = ContentControlView.extend({
     	Backbone.mediator.subscribe('app:ready', self.handleAppReady, self);
     	Backbone.mediator.subscribe('app:stale-results', self.handleStaleResults, self);
     	
+    	self.triggerMobileMapView();
+    	
     	util.log('control-view.js: initialized. with self.App=' + self.App)
     },
 
@@ -106,6 +108,9 @@ module.exports = ContentControlView.extend({
         'click .active-filters': 'showFilterPanel',
         'click .check-ignore-location': 'markSearchBoxSearchable',
         'click .onoffswitch-text-label': 'onOffSwitchLabelClicked',
+        'click .trigger-mobile-list-view': 'triggerMobileListView',
+        'click .trigger-mobile-search-view': 'triggerMobileSearchView',
+        'click .trigger-mobile-map-view': 'triggerMobileMapView',
         
         'keyup .q': 'handleTyping',
         'keydown .q': 'handleKeyDown',
@@ -113,7 +118,6 @@ module.exports = ContentControlView.extend({
 
     // Event Handlers
     // --------------
-
 
     toggleFilterButton: function (event) {
         event.preventDefault();
@@ -240,6 +244,31 @@ module.exports = ContentControlView.extend({
     		this.state.pageIndex -= 1;
     		this.triggerDelayedSearch(true, true);
     	}
+    },
+    
+    /** Mobile view switch buttons */
+    _resetMobileView: function (event) {
+    	this.App.$el.removeClass('mobile-view-map mobile-view-search mobile-view-list mobile-view-detail');
+    },
+    
+    triggerMobileListView: function (event) {
+    	this._resetMobileView();
+    	this.App.$el.addClass('mobile-view-list');
+    },
+
+    triggerMobileSearchView: function (event) {
+    	this._resetMobileView();
+    	this.App.$el.addClass('mobile-view-search');
+    },
+
+    triggerMobileMapView: function (event) {
+    	this._resetMobileView();
+    	this.App.$el.addClass('mobile-view-map');
+    },
+
+    triggerMobileDetailView: function (event) {
+    	this._resetMobileView();
+    	this.App.$el.addClass('mobile-view-detail');
     },
     
     /**

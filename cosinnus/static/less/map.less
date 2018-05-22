@@ -135,7 +135,7 @@
         text-decoration: none;
         
         .rounded-button-inner {
-            padding: 0 10px;
+            padding: 10px;
             -webkit-user-select: none; /* Safari */        
             -moz-user-select: none; /* Firefox */
             -ms-user-select: none; /* IE10+/Edge */
@@ -148,7 +148,7 @@
         &.rounded-button-circular {
             border-radius: 20px;
             .rounded-button-inner {
-                padding: 0 8px;      
+                padding: 8px;      
 	            i {
 	                margin-right: 0;
 	            }
@@ -160,7 +160,11 @@
             line-height: 20px;
             margin-right: 0;
         }
-        
+        &.shadowed-button {
+            -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+            -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+            box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+        }
         &:focus, &:active {
             -webkit-box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.35);
             -moz-box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.35);
@@ -183,6 +187,18 @@
             background-color: @map-button-color;
             border: 1px solid @map-action-button-color;
         }
+        &.button-action-faded:hover, &.button-action-faded.selected {
+            color: @map-button-color;
+            background-color: @map-pale-color;
+            border: 1px solid @map-pale-color;
+        }
+        &.button-action-faded {
+            color: @map-pale-color;
+            background-color: @map-button-color;
+            border: 1px solid @map-scroll-color;
+        }
+        
+        
         
         /** Topics */
         &.button-color-topic {
@@ -986,6 +1002,11 @@
 	right: ~"calc(50% + 10px)";
 	bottom: 10px;
 }
+.map-mobile-controls {
+    position: fixed;
+    right: 5px;
+    bottom: 20px;
+}
 
 .map-pagination-controls {
     padding: 10px;
@@ -1051,4 +1072,64 @@
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
 }
+
+
+/** Mobile Styles, mostly hiding stuff or making it larger */
+/** Declare a container visible-by-current view by giving it a class like this:
+    class="mobile-view mobile-view-map-visible".
+    Multiple *-visible classes are possible.
+*/
+.app-root .mobile-only {
+	display: none;
+}
+
+@media (max-width: 767px) {
+	.app-root {
+		.mobile-only {
+		    display: inherit;
+		}
+		
+		.mobile-hidden,
+		.mobile-view {
+		    display: none;
+		}
+		
+        &.mobile-view-map .mobile-view-map-visible-block,
+        &.mobile-view-search .mobile-view-search-visible-block,
+        &.mobile-view-list .mobile-view-list-visible-block,
+        &.mobile-view-detail .mobile-view-detail-visible-block {
+            display: block;
+        }
+        
+        &.mobile-view-map .mobile-view-map-visible-inline-block,
+        &.mobile-view-search .mobile-view-search-visible-inline-block,
+        &.mobile-view-list .mobile-view-list-visible-inline-block,
+        &.mobile-view-detail .mobile-view-detail-visible-inline-block {
+            display: inline-block;
+        }
+        
+        &.mobile-view-map .mobile-view-map-visible-inline,
+        &.mobile-view-search .mobile-view-search-visible-inline,
+        &.mobile-view-list .mobile-view-list-visible-inline,
+        &.mobile-view-detail .mobile-view-detail-visible-inline {
+            display: inline;
+        }
+		
+		.rounded-button.rounded-button-circular {
+		    height: 52px;
+		    line-height: 48px;
+		    font-size: 24px;
+		    margin-right: 15px;
+		    
+	        border-radius: 34px;
+	        
+	        .rounded-button-inner {
+    	            padding: 10px;
+		    }
+		}
+	}
+}
+
+
+
 
