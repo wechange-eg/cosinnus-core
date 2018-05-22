@@ -33,6 +33,10 @@ module.exports = ContentControlView.extend({
             }
         }
     },
+    
+    // path to a geojson file in static folder containing regions that should be outlined on the map
+    // You can configure a geojson region here: http://opendatalab.de/projects/geojson-utilities/ 
+    geoRegionUrl: util.ifundef(COSINNUS_MAP_OPTIONS.geojson_region, null), 
 
     
     // the map Layer Buttons (Sattelite, Street, Terrain)
@@ -145,10 +149,10 @@ module.exports = ContentControlView.extend({
 	        currentSpiderfied: null,
 	        
 	        // fallback default coordinates when navigated without loc params
-	        north: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES.ne_lat, 55.78), 
-	        east: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES.ne_lon, 23.02),
-	        south: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES.sw_lat, 49.00),
-	        west: util.ifundef(COSINNUS_MAP_DEFAULT_COORDINATES.sw_lon, 3.80),
+	        north: util.ifundef(COSINNUS_MAP_OPTIONS.default_coordinates.ne_lat, 55.78), 
+	        east: util.ifundef(COSINNUS_MAP_OPTIONS.default_coordinates.ne_lon, 23.02),
+	        south: util.ifundef(COSINNUS_MAP_OPTIONS.default_coordinates.sw_lat, 49.00),
+	        west: util.ifundef(COSINNUS_MAP_OPTIONS.default_coordinates.sw_lon, 3.80),
 	    }
     },
     
@@ -458,11 +462,38 @@ module.exports = ContentControlView.extend({
     // -------
 
     renderMap: function () {
+    	var self = this;
+    	
     	util.log('++++++ map-view.js renderMap called! This should only happen once at init! +++++++++++++++++++')
     	
         this.leaflet = L.map('map-container')
             .setView(this.options.location, this.options.zoom);
         this.setLayer(this.options.layer);
+        
+        if (self.geoRegionUrl) {
+        	$.ajax({
+	        	dataType: "json",
+	        	url: self.geoRegionUrl,
+	        	success: function(data) {
+	        		// style see https://leafletjs.com/reference-1.3.0.html#path-option
+	        		var district_boundary = new L.geoJson(null, {
+	            	    style: function (feature) {
+	            	        return {
+	        	        		width: 1,
+	        	        		weight: 0.5,
+	        	        		fillOpacity: 0.035,
+		        			};
+	            	    }
+	            	});
+	            	district_boundary.addTo(self.leaflet);
+	        	    $(data.features).each(function(key, data) {
+	        	        district_boundary.addData(data);
+	        	    });
+	        	}
+        	}).error(function() {});
+        	
+        }
+        
         
         if (this.options.clusteringEnabled) {
         	// Setup the cluster layer

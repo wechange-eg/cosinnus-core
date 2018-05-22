@@ -50,35 +50,32 @@
 
 {% if scrollControlsEnabled %}
     <div class="map-scroll-controls">
-        <div class="line">
-            
-	        <table class="small-space">
-	            <tr>
-	                <td class="onoffswitch-text-label">
-	                    {# Translators: __INCLUDE_JS_PO__ #}
-                        {% trans 'Search when moving the map' %}
-	                </td>
-	                <td>
-			            <div class="onoffswitch">
-			                <input type="checkbox" name="onoffswitch-search-on-scroll" class="onoffswitch-checkbox toggle-search-on-scroll" id="check-search-on-scroll" {% if searchOnScroll %}checked{% endif %}>
-			                <label class="onoffswitch-label" for="check-search-on-scroll">
-			                    <span class="onoffswitch-inner"></span>
-			                    <span class="onoffswitch-switch"></span>
-			                </label>
-			            </div>
-                    </td>
-                </tr>
-            </table>
-            
-            {# Currently not shown. #}
-            {% if 0 and not searchOnScroll and resultsStale and not searching %}
-                <div class="map-button stale-search-button">
-                   <span>
-                       {# Translators: __INCLUDE_JS_PO__ #}
-                       {% trans 'Search this area' %}
-                   </span>
-                </div>
-            {% endif %}
-        </div>
+        <table>
+            <tr>
+                <td class="onoffswitch-text-label">
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans 'Search when moving the map' %}
+                </td>
+                <td>
+		            <div class="onoffswitch">
+		                <input type="checkbox" name="onoffswitch-search-on-scroll" class="onoffswitch-checkbox toggle-search-on-scroll" id="check-search-on-scroll" {% if searchOnScroll %}checked{% endif %}>
+		                <label class="onoffswitch-label" for="check-search-on-scroll">
+		                    <span class="onoffswitch-inner"></span>
+		                    <span class="onoffswitch-switch"></span>
+		                </label>
+		            </div>
+                </td>
+            </tr>
+        </table>
+        
+        {# Currently not shown. #}
+        {% if 0 and not searchOnScroll and resultsStale and not searching %}
+            <div class="map-button stale-search-button">
+               <span>
+                   {# Translators: __INCLUDE_JS_PO__ #}
+                   {% trans 'Search this area' %}
+               </span>
+            </div>
+        {% endif %}
     </div>
 {% endif %}

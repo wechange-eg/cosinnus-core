@@ -367,11 +367,14 @@ class CosinnusConf(AppConf):
     MAP_MARKER_ICONS = {}
     
     # Default starting map coordinates if no coordinates have been specified
-    MAP_DEFAULT_COORDINATES = {
-        'ne_lat': 52.65, # north,
-        'ne_lon': 13.69, # east,
-        'sw_lat': 52.43, # south,
-        'sw_lon': 13.09, # west,
+    COSINNUS_MAP_OPTIONS = {
+        'default_coordinates': {
+            'ne_lat': 52.65, # north,
+            'ne_lon': 13.69, # east,
+            'sw_lat': 52.43, # south,
+            'sw_lon': 13.09, # west,
+        },
+        'geojson_region': None,
     }
     
     # dimensions of the images for map images
