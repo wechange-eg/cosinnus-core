@@ -64,6 +64,7 @@ module.exports = BaseView.extend({
     
     // a new result is being selected
     onDetailOpened: function (result) {
+    	
     	this.model = result;
     	if (result.get('type') in templates) {
     		this.template = templates[result.get('type')];
@@ -72,6 +73,7 @@ module.exports = BaseView.extend({
     	}
     	this.fitTemplate();
     	this.render();
+    	this.App.controlView.triggerMobileDetailView();
     	// render moment dates
     	if (result.get('type') == "events") {
     		$.cosinnus.renderMomentDataDate();
@@ -82,6 +84,7 @@ module.exports = BaseView.extend({
     onDetailClosed: function () {
     	this.model = null;
     	this.render();
+    	this.App.controlView.untriggerMobileDetailView();
     },
     
     /** Called when a topic link is clicked to filter for that topic only */

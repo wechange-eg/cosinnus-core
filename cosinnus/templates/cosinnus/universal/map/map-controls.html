@@ -1,7 +1,7 @@
 {% load i18n %}
 {% import "include/macros.html" as macros %}
 
-<div class="map-controls">
+<div class="map-controls mobile-view mobile-view-search-visible-block">
 	 <div class="map-controls-search">
 	     <div class="search-box">
             <input type="text" class="q" name="q" 
@@ -15,7 +15,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
                 <div class="sk-child sk-double-bounce2"></div>
             </div>
          </div>
-	     <div class="filter-button-box">
+	     <div class="filter-button-box mobile-hidden">
 	         <span class="clickable-button icon-filters {% if filterPanelVisible %}open{% endif %}">
 	             <i class="fa fa-sliders visible-default"></i>
                  <i class="fa fa-chevron-up visible-open"></i>
@@ -26,7 +26,7 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
      
      <div class="map-controls-active-filters"></div>
      
-	 <div class="map-controls-filters" {% if not filterPanelVisible %}style="display: none;"{% endif %}>
+	 <div class="map-controls-filters mobile-only mobile-always-visible" {% if not filterPanelVisible %}style="display: none;"{% endif %}>
         <div class="button-list">
             {% for filter_type, available in availableFilters %}
                 {% if available %}
@@ -99,27 +99,12 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
                 </span>
             </a>
 	    </div>
+	    
+	    <div class="spacer mobile-only">&nbsp;</div>
+	    <div class="spacer mobile-only">&nbsp;</div>
 	
 	</div>
+	
+        
 </div>
 
-<div class="map-mobile-controls mobile-only">
-    <div class="rounded-button rounded-button-circular button-action-faded shadowed-button trigger-mobile-search-view   mobile-view mobile-view-detail-visible-inline-block  mobile-view-list-visible-inline-block  mobile-view-map-visible-inline-block">
-        <span class="rounded-button-inner">
-            <i class="fa fa-fw fa-search"></i>
-        </span>
-    </div>
-    <div class="rounded-button rounded-button-circular button-action-faded shadowed-button trigger-mobile-map-view   mobile-view mobile-view-search-visible-inline-block  mobile-view-list-visible-inline-block  mobile-view-detail-visible-inline-block">
-        <span class="rounded-button-inner">
-            <i class="fa fa-fw fa-map-marker"></i>
-        </span>
-    </div>
-    <div class="rounded-button rounded-button-circular button-action-faded shadowed-button trigger-mobile-list-view   mobile-view mobile-view-map-visible-inline-block  mobile-view-search-visible-inline-block">
-        <span class="rounded-button-inner">
-            <i class="fa fa-fw fa-list-ul"></i>
-        </span>
-    </div>
-    
-    
-    
-</div>

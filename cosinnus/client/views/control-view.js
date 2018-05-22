@@ -3,6 +3,7 @@
 var ContentControlView = require('views/base/content-control-view');
 var ErrorView = require('views/error-view');
 var PaginationControlView = require('views/pagination-control-view');
+var MobileControlView = require('views/mobile-control-view');
 
 var ResultCollection = require('collections/result-collection');
 var Result = require('models/result');
@@ -60,8 +61,9 @@ module.exports = ContentControlView.extend({
     
     // the main ResultCollection of all displayed results
     collection: null,
-    
+
     paginationControlView: null,
+    mobileControlView: null,
     
     // the currently hovered on and selected Result items
     selectedResult: null,
@@ -108,9 +110,6 @@ module.exports = ContentControlView.extend({
         'click .active-filters': 'showFilterPanel',
         'click .check-ignore-location': 'markSearchBoxSearchable',
         'click .onoffswitch-text-label': 'onOffSwitchLabelClicked',
-        'click .trigger-mobile-list-view': 'triggerMobileListView',
-        'click .trigger-mobile-search-view': 'triggerMobileSearchView',
-        'click .trigger-mobile-map-view': 'triggerMobileMapView',
         
         'keyup .q': 'handleTyping',
         'keydown .q': 'handleKeyDown',
@@ -142,7 +141,8 @@ module.exports = ContentControlView.extend({
         event.preventDefault();
         this.resetAll();
         this.render();
-    	this.triggerDelayedSearch(true);
+    	var searchReason = 'manual-search';
+		this.triggerDelayedSearch(true, false, false, searchReason);
     },
     
     /** Resets all filter states */
@@ -169,7 +169,8 @@ module.exports = ContentControlView.extend({
         this.resetTypeFilters();
         this.render();
     	this.clearDetailResultCache();
-    	this.triggerDelayedSearch(true);
+    	var searchReason = 'manual-search';
+		this.triggerDelayedSearch(true, false, false, searchReason);
     },
 
     resetTopicFiltersClicked: function (event) {
@@ -178,7 +179,8 @@ module.exports = ContentControlView.extend({
         this.resetTopics();
         this.render();
     	this.clearDetailResultCache();
-    	this.triggerDelayedSearch(true);
+    	var searchReason = 'manual-search';
+		this.triggerDelayedSearch(true, false, false, searchReason);
     },
 
     resetQClicked: function (event) {
@@ -187,7 +189,8 @@ module.exports = ContentControlView.extend({
         this.state.q = '';
         this.render();
     	this.clearDetailResultCache();
-    	this.triggerDelayedSearch(true);
+    	var searchReason = 'manual-search';
+		this.triggerDelayedSearch(true, false, false, searchReason);
     },
     
     resetTypeAndTopicFiltersClicked: function (event) {
@@ -197,7 +200,8 @@ module.exports = ContentControlView.extend({
         this.resetTopics();
         this.render();
     	this.clearDetailResultCache();
-    	this.triggerDelayedSearch(true);
+    	var searchReason = 'manual-search';
+		this.triggerDelayedSearch(true, false, false, searchReason);
     },
     
     /** This doesn't listen to events in this view, but rather is the target for 
@@ -248,17 +252,23 @@ module.exports = ContentControlView.extend({
     
     /** Mobile view switch buttons */
     _resetMobileView: function (event) {
+    	// unselect the detail view if one is open
+    	if (this.detailResult) {
+    		this.displayDetailResult(null);
+    	}
     	this.App.$el.removeClass('mobile-view-map mobile-view-search mobile-view-list mobile-view-detail');
     },
     
     triggerMobileListView: function (event) {
     	this._resetMobileView();
     	this.App.$el.addClass('mobile-view-list');
+    	this.App.tileListView.gridRefresh();
     },
 
     triggerMobileSearchView: function (event) {
     	this._resetMobileView();
     	this.App.$el.addClass('mobile-view-search');
+    	this.$el.find('.q').focus();
     },
 
     triggerMobileMapView: function (event) {
@@ -267,8 +277,14 @@ module.exports = ContentControlView.extend({
     },
 
     triggerMobileDetailView: function (event) {
-    	this._resetMobileView();
+    	// this actually doesn't reset the last view, the detail view will be over it!
     	this.App.$el.addClass('mobile-view-detail');
+    },
+    
+    untriggerMobileDetailView: function (event) {
+    	//this._resetMobileView();
+    	// this actually doesn't reset the last view, the detail view will be over it!
+    	this.App.$el.removeClass('mobile-view-detail');
     },
     
     /**
@@ -280,7 +296,8 @@ module.exports = ContentControlView.extend({
 		this.applyFilters();
 		this.state.ignoreLocation = !this.$el.find('.check-ignore-location').is(':checked');
     	this.clearDetailResultCache();
-		this.triggerDelayedSearch(true);
+    	var searchReason = 'manual-search';
+		this.triggerDelayedSearch(true, false, false, searchReason);
     },
     
     /** Delete the detail result cache, should only happen on voluntary user "new search" actions! */
@@ -289,7 +306,7 @@ module.exports = ContentControlView.extend({
     },
     
     /** Triggers on click of a link that opens a result detail view.
-     *  Can be triggered from multiple view. */
+     *  Can be triggered from multiple views. */
     onResultLinkClicked: function (event, directItemId, noNavigate) {
     	var self = this;
     	if (event) {
@@ -367,7 +384,8 @@ module.exports = ContentControlView.extend({
     	            detailHadErrors = true;
     	        },
     	        complete: function (xhr, textStatus) {
-    	        	util.log('control-view.js: Search complete: ' + textStatus)
+    	        	util.log('control-view.js: Search complete: ' + textStatus);
+    	        	
     	        	if (textStatus === 'abort') {
     	        		return;
     	        	}
@@ -533,6 +551,16 @@ module.exports = ContentControlView.extend({
     			el: self.App.tileListView.$el.find('.pagination-controls'),
     			fullscreen: self.App.displayOptions.fullscreen,
     			splitscreen: self.App.displayOptions.showMap && self.App.displayOptions.showTiles
+    		}, 
+    		self.App,
+    		self
+    		).render();
+    	}
+    	if (!self.mobileControlView) {
+    		// render mobile view buttons
+    		self.mobileControlView = new MobileControlView({
+    			model: null,
+    			elParent: self.App.el,
     		}, 
     		self.App,
     		self
@@ -810,6 +838,10 @@ module.exports = ContentControlView.extend({
 	            	self.renderActiveFilters();
 	            	// refresh pagination controls
 	            	self.paginationControlView.render();
+	            	// if we have done a manual search, set the view to map!
+	            	if (searchReason == 'manual-search') {
+	            		self.triggerMobileMapView();
+	            	}
 	            }
 	            
 	            self.currentSearchHttpRequest = null;

@@ -1,7 +1,7 @@
 {% load i18n %}
 
 {% if paginationControlsEnabled %}
-    <div class="map-pagination-controls">
+    <div class="map-pagination-controls mobile-view mobile-view-list-visible-block">
         <div class="line">
             {% if page %}
                 <div class="rounded-button rounded-button-circular button-action trigger-pagination-backward {% if not page.has_previous %}disabled {% endif %}">

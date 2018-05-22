@@ -29,6 +29,7 @@
     2: disabled-input overlay (during search)
     3: search controls
     4: tile-detail frame
+    5: overlays that reach beyond even tile-detail frame
 */
 
 @font-face {
@@ -795,6 +796,7 @@
 
 .controls {
 	z-index: 3;
+	overflow-y: scroll;
 }
 
 .map-controls, .map-scroll-controls, .map-pagination-controls {
@@ -831,14 +833,7 @@
         .search-box {
             padding: 12px;
             flex-grow: 1;
-            &:after {
-	            content: " ";
-	            position: absolute;
-	            right: 54px;
-	            top: 10px;
-	            border-left: 2px solid @map-frame-color;
-	            height: 34px;
-	        }
+            
         }
         .filter-button-box {
             width: 54px;
@@ -862,6 +857,14 @@
                 }
 		        
 		    }
+		    &:before {
+                content: " ";
+                position: absolute;
+                right: 54px;
+                top: 10px;
+                border-left: 2px solid @map-frame-color;
+                height: 34px;
+            }
         }
         
 	    .q {
@@ -1006,6 +1009,7 @@
     position: fixed;
     right: 5px;
     bottom: 20px;
+    z-index: 5;
 }
 
 .map-pagination-controls {
@@ -1086,8 +1090,11 @@
 @media (max-width: 767px) {
 	.app-root {
 		.mobile-only {
-		    display: inherit;
-		}
+            display: inherit;
+        }
+        .mobile-always-visible {
+            display: inherit !important;
+        }
 		
 		.mobile-hidden,
 		.mobile-view {
@@ -1114,20 +1121,67 @@
         &.mobile-view-detail .mobile-view-detail-visible-inline {
             display: inline;
         }
+        
+        &.mobile-view-map .mobile-view-map-visible-flex,
+        &.mobile-view-search .mobile-view-search-visible-flex,
+        &.mobile-view-list .mobile-view-list-visible-flex,
+        &.mobile-view-detail .mobile-view-detail-visible-flex {
+            display: flex;
+        }
 		
 		.rounded-button.rounded-button-circular {
 		    height: 52px;
 		    line-height: 48px;
 		    font-size: 24px;
 		    margin-right: 15px;
-		    
 	        border-radius: 34px;
 	        
 	        .rounded-button-inner {
-    	            padding: 10px;
+   	            padding: 10px;
 		    }
 		}
+		
 	}
+	
+	.map-splitscreen {
+	    width: 100%;
+	}
+	.mobile-view-list .tile-list-splitscreen,
+    .mobile-view-search .tile-list-splitscreen {
+        left: 0;
+        width: 100%;	
+	}
+	
+	.app-root .tile-detail {
+	    left: 0;
+	    width: 100%;
+	}
+	
+	/** Moving the pagination controls to top in mobile view */
+	.pagination-controls {
+		position: fixed;
+	    width: 100%;
+	}
+	.tile-contents {
+	    margin-top: 72px;
+	}
+	
+	
+	/** correcting weird mobile behaviours */
+	.map-controls .map-controls-filters {
+	    border-bottom: none;
+	}
+	.map-controls .map-controls-search .icon-reset {
+	    right: 0;
+	}
+   .tile-list-fullscreen {
+        &:before {
+            display: none;
+        }
+    }
+	
+	
+	
 }
 
 
