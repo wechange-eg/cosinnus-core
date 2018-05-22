@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-07 16:35+0200\n"
+"POT-Creation-Date: 2018-05-22 12:43+0200\n"
 "PO-Revision-Date: 2018-02-05 13:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -114,6 +114,9 @@ msgstr "Робота та право"
 
 msgid "Bauen und Wohnen"
 msgstr "Будівництво та житло"
+
+msgid "Klimaschutz"
+msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgstr "Тільки члени спільноти/проекту можуть бачити цей вміст. Надішліть запит членства зараз!"
@@ -2989,8 +2992,14 @@ msgid "Clear Filters"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Showing results"
+msgid "of"
 msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Reset"
+msgid "Results"
+msgstr "Скинути"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "No results found."
@@ -3071,6 +3080,12 @@ msgstr "Редагувати спільноту"
 #| msgid "Create Group"
 msgid "Message Group"
 msgstr "Створити спільноту"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Group"
+msgid "Gruppen"
+msgstr "Спільнота"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy

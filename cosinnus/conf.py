@@ -450,6 +450,7 @@ class CosinnusConf(AppConf):
         (7, _('Geld und Finanzen')),
         (8, _('Arbeit und Recht')),
         (9, _('Bauen und Wohnen')),
+        (10, _('Klimaschutz')),
     )
     
     

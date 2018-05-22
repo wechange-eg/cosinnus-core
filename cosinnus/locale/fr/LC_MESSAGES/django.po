@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-07 16:35+0200\n"
+"POT-Creation-Date: 2018-05-22 12:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -112,6 +112,9 @@ msgid "Arbeit und Recht"
 msgstr ""
 
 msgid "Bauen und Wohnen"
+msgstr ""
+
+msgid "Klimaschutz"
 msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
@@ -2806,7 +2809,11 @@ msgid "Clear Filters"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Showing results"
+msgid "of"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Results"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -2867,6 +2874,10 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Message Group"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Gruppen"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__

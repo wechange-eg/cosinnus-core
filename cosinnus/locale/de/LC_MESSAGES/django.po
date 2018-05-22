@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-07 16:35+0200\n"
+"POT-Creation-Date: 2018-05-22 12:43+0200\n"
 "PO-Revision-Date: 2018-05-07 16:43+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -113,6 +113,9 @@ msgid "Arbeit und Recht"
 msgstr ""
 
 msgid "Bauen und Wohnen"
+msgstr ""
+
+msgid "Klimaschutz"
 msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
@@ -2957,8 +2960,14 @@ msgid "Clear Filters"
 msgstr "Filter zurücksetzen"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Showing results"
-msgstr "Zeige Ergebnisse"
+msgid "of"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Reset"
+msgid "Results"
+msgstr "Zurücksetzen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "No results found."
@@ -3020,6 +3029,12 @@ msgstr "Gruppe beitreten"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Message Group"
 msgstr "Gruppe anschreiben"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Gruppenbild"
+msgid "Gruppen"
+msgstr "Projektbild"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
@@ -3727,6 +3742,9 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
+#~ msgid "Showing results"
+#~ msgstr "Zeige Ergebnisse"
+
 #~ msgid "My Groups and Projects"
 #~ msgstr "Meine Gruppen und Projekte"
 
@@ -4006,9 +4024,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "Gib den Namen für die Gruppe ein."
 #~ msgstr "Gib den Namen für das Projekt ein."
-
-#~ msgid "Gruppenbild"
-#~ msgstr "Projektbild"
 
 #~ msgid "Gruppenbild wird beim Speichern der Gruppe gelöscht."
 #~ msgstr "Projektbild wird beim Speichern des Projekts gelöscht."

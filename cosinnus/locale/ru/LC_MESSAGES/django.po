@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-07 16:35+0200\n"
+"POT-Creation-Date: 2018-05-22 12:43+0200\n"
 "PO-Revision-Date: 2018-02-05 13:57+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -113,6 +113,9 @@ msgstr "Труд и право"
 
 msgid "Bauen und Wohnen"
 msgstr "Строительство и жильё"
+
+msgid "Klimaschutz"
+msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgstr "Данный контент доступен только для членов группы. Подайте заявку на вступление прямо сейчас!"
@@ -2992,8 +2995,14 @@ msgid "Clear Filters"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Showing results"
+msgid "of"
 msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Reset"
+msgid "Results"
+msgstr "Сбросить"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "No results found."
@@ -3076,6 +3085,12 @@ msgstr "Редактировать группу"
 #| msgid "Create Group"
 msgid "Message Group"
 msgstr "Создать группу"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Group"
+msgid "Gruppen"
+msgstr "Группа"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
