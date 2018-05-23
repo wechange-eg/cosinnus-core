@@ -85,6 +85,7 @@ module.exports = BaseView.extend({
     	this.model = null;
     	this.render();
     	this.App.controlView.untriggerMobileDetailView();
+    	this.App.controlView.addCurrentHistoryState();
     },
     
     /** Called when a topic link is clicked to filter for that topic only */
