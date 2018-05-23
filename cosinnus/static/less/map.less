@@ -196,13 +196,19 @@
             background-color: @map-button-color;
             border: 1px solid @map-action-button-color;
         }
-        @media (min-width: 768px) {
-	        &.button-action:hover, &.button-action.selected {
-	            color: @map-button-color;
-	            background-color: @map-action-button-color;
-	            border: 1px solid @map-action-button-color;
-	        }
+        &.button-action.selected {
+            color: @map-button-color;
+            background-color: @map-action-button-color;
+            border: 1px solid @map-action-button-color;
         }
+        @media (min-width: 768px) {
+            &.button-action:hover {
+                color: @map-button-color;
+                background-color: @map-action-button-color;
+                border: 1px solid @map-action-button-color;
+            }
+        }
+        
         
         /** Grey action buttons */
         &.button-action-faded {
@@ -210,8 +216,13 @@
             background-color: @map-button-color;
             border: 1px solid @map-scroll-color;
         }
+         &.button-action-faded.selected {
+            color: @map-button-color;
+            background-color: @map-pale-color;
+            border: 1px solid @map-pale-color;
+        }
         @media (min-width: 768px) {
-	        &.button-action-faded:hover, &.button-action-faded.selected {
+	        &.button-action-faded:hover {
 	            color: @map-button-color;
 	            background-color: @map-pale-color;
 	            border: 1px solid @map-pale-color;
@@ -225,8 +236,11 @@
             background-color: @map-button-color;
             border: 1px solid @map-topic-color;
         }
+        &.button-color-topic.selected {
+            color: @map-button-color;
+            background-color: @map-topic-color;
+        }
         @media (min-width: 768px) {
-	        &.button-color-topic.selected,
 	        &.button-color-topic:hover {
 	            color: @map-button-color;
 	            background-color: @map-topic-color;
@@ -239,8 +253,11 @@
             background-color: @map-button-color;
             border: 1px solid @map-events-color;
         }
+        &.button-color-events:selected {
+            color: @map-button-color;
+            background-color: @map-events-color;
+        }
         @media (min-width: 768px) {
-	        &.button-color-events.selected,
 	        &.button-color-events:hover {
 	            color: @map-button-color;
 	            background-color: @map-events-color;
@@ -253,8 +270,11 @@
             background-color: @map-button-color;
             border: 1px solid @map-people-color;
         }
+        &.button-color-people.selected {
+            color: @map-button-color;
+            background-color: @map-people-color;
+        }
         @media (min-width: 768px) {
-	        &.button-color-people.selected,
 	        &.button-color-people:hover {
 	            color: @map-button-color;
 	            background-color: @map-people-color;
@@ -267,8 +287,11 @@
             background-color: @map-button-color;
             border: 1px solid @map-projects-color;
         }
+        &.button-color-projects.selected {
+            color: @map-button-color;
+            background-color: @map-projects-color;
+        }
         @media (min-width: 768px) {
-	        &.button-color-projects.selected,
 	        &.button-color-projects:hover {
 	            color: @map-button-color;
 	            background-color: @map-projects-color;
@@ -281,8 +304,11 @@
             background-color: @map-button-color;
             border: 1px solid @map-groups-color;
         }
+        &.button-color-groups.selected {
+            color: @map-button-color;
+            background-color: @map-groups-color;
+        }
         @media (min-width: 768px) {
-	        &.button-color-groups.selected,
 	        &.button-color-groups:hover {
 	            color: @map-button-color;
 	            background-color: @map-groups-color;
@@ -295,8 +321,11 @@
             background-color: @map-button-color;
             border: 1px solid @map-ideas-color;
         }
+        &.button-color-ideas.selected {
+            color: @map-button-color;
+            background-color: @map-ideas-color;
+        }
         @media (min-width: 768px) {
-	        &.button-color-ideas.selected,
 	        &.button-color-ideas:hover {
 	            color: @map-button-color;
 	            background-color: @map-ideas-color;
