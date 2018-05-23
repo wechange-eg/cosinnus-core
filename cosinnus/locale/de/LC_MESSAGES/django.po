@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-22 12:43+0200\n"
-"PO-Revision-Date: 2018-05-07 16:43+0200\n"
+"PO-Revision-Date: 2018-05-23 16:45+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -2961,13 +2961,11 @@ msgstr "Filter zurücksetzen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "of"
-msgstr ""
+msgstr "von"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Reset"
 msgid "Results"
-msgstr "Zurücksetzen"
+msgstr "Resultaten"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "No results found."

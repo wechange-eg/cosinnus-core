@@ -15,7 +15,7 @@ module.exports = ContentControlView.extend({
                 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png' :
                 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'),
             options: {
-                attribution: 'CartoDB | Open Streetmap'
+                attribution: 'CartoDB'
             }
         },
         satellite: {
