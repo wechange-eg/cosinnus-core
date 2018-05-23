@@ -181,27 +181,42 @@
         }
         
         /** Action buttons */
-        &.button-color-action, &.button-action:hover, &.button-action.selected {
+        /** Heavy hovers are disabled for mobile because it is really confusing on scrolling over */
+        
+        /** Colored submit buttons without hover effect */
+        &.button-color-action {
             color: @map-button-color;
             background-color: @map-action-button-color;
             border: 1px solid @map-action-button-color;
         }
+        
+        /** Colored action buttons */
         &.button-action {
             color: @map-action-button-color;
             background-color: @map-button-color;
             border: 1px solid @map-action-button-color;
         }
-        &.button-action-faded:hover, &.button-action-faded.selected {
-            color: @map-button-color;
-            background-color: @map-pale-color;
-            border: 1px solid @map-pale-color;
+        @media (min-width: 768px) {
+	        &.button-action:hover, &.button-action.selected {
+	            color: @map-button-color;
+	            background-color: @map-action-button-color;
+	            border: 1px solid @map-action-button-color;
+	        }
         }
+        
+        /** Grey action buttons */
         &.button-action-faded {
             color: @map-pale-color;
             background-color: @map-button-color;
             border: 1px solid @map-scroll-color;
         }
-        
+        @media (min-width: 768px) {
+	        &.button-action-faded:hover, &.button-action-faded.selected {
+	            color: @map-button-color;
+	            background-color: @map-pale-color;
+	            border: 1px solid @map-pale-color;
+	        }
+        }
         
         
         /** Topics */
@@ -210,10 +225,12 @@
             background-color: @map-button-color;
             border: 1px solid @map-topic-color;
         }
-        &.button-color-topic.selected,
-        &.button-color-topic:hover {
-            color: @map-button-color;
-            background-color: @map-topic-color;
+        @media (min-width: 768px) {
+	        &.button-color-topic.selected,
+	        &.button-color-topic:hover {
+	            color: @map-button-color;
+	            background-color: @map-topic-color;
+	        }
         }
         
         /** Events */
@@ -222,10 +239,12 @@
             background-color: @map-button-color;
             border: 1px solid @map-events-color;
         }
-        &.button-color-events.selected,
-        &.button-color-events:hover {
-            color: @map-button-color;
-            background-color: @map-events-color;
+        @media (min-width: 768px) {
+	        &.button-color-events.selected,
+	        &.button-color-events:hover {
+	            color: @map-button-color;
+	            background-color: @map-events-color;
+	        }
         }
         
         /** People */
@@ -234,10 +253,12 @@
             background-color: @map-button-color;
             border: 1px solid @map-people-color;
         }
-        &.button-color-people.selected,
-        &.button-color-people:hover {
-            color: @map-button-color;
-            background-color: @map-people-color;
+        @media (min-width: 768px) {
+	        &.button-color-people.selected,
+	        &.button-color-people:hover {
+	            color: @map-button-color;
+	            background-color: @map-people-color;
+	        }
         }
         
         /** Projects */
@@ -246,10 +267,12 @@
             background-color: @map-button-color;
             border: 1px solid @map-projects-color;
         }
-        &.button-color-projects.selected,
-        &.button-color-projects:hover {
-            color: @map-button-color;
-            background-color: @map-projects-color;
+        @media (min-width: 768px) {
+	        &.button-color-projects.selected,
+	        &.button-color-projects:hover {
+	            color: @map-button-color;
+	            background-color: @map-projects-color;
+	        }
         }
         
         /** Groups */
@@ -258,10 +281,12 @@
             background-color: @map-button-color;
             border: 1px solid @map-groups-color;
         }
-        &.button-color-groups.selected,
-        &.button-color-groups:hover {
-            color: @map-button-color;
-            background-color: @map-groups-color;
+        @media (min-width: 768px) {
+	        &.button-color-groups.selected,
+	        &.button-color-groups:hover {
+	            color: @map-button-color;
+	            background-color: @map-groups-color;
+	        }
         }
         
         /** Ideas */
@@ -270,10 +295,12 @@
             background-color: @map-button-color;
             border: 1px solid @map-ideas-color;
         }
-        &.button-color-ideas.selected,
-        &.button-color-ideas:hover {
-            color: @map-button-color;
-            background-color: @map-ideas-color;
+        @media (min-width: 768px) {
+	        &.button-color-ideas.selected,
+	        &.button-color-ideas:hover {
+	            color: @map-button-color;
+	            background-color: @map-ideas-color;
+	        }
         }
     }
     
