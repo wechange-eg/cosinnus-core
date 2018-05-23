@@ -13,7 +13,7 @@ from cosinnus.models.tagged import ensure_container
 from cosinnus.core.registries.group_models import group_model_registry
 
 import logging
-from django.contrib.auth.signals import user_logged_in
+from django.contrib.auth.signals import user_logged_in, user_logged_out
 from cosinnus.models.profile import GlobalBlacklistedEmail,\
     GlobalUserNotificationSetting
 from cosinnus.models.feedback import CosinnusFailedLoginRateLimitLog
@@ -92,6 +92,19 @@ def on_login_ratelimit_triggered(sender, username, ip, **kwargs):
         logger.error('Error while trying to log failed login ratelimit trigger!', extra={'exception': force_text(e)})
 
 login_ratelimit_triggered.connect(on_login_ratelimit_triggered)
-    
-    
+
+
+@receiver(user_logged_in)
+def set_cookie_expiry_for_authenticated_user(sender, user, request, **kwargs):
+    """ Default for cookies for anonymous users is browser-session and as set in 
+        `COSINNUS_SESSION_EXPIRY_AUTHENTICATED_IN_USERS` logged in users """
+    request.session.set_expiry(settings.COSINNUS_SESSION_EXPIRY_AUTHENTICATED_IN_USERS)
+
+@receiver(user_logged_out)
+def reset_cookie_expiry_for_anonymous_user(sender, user, request, **kwargs):
+    """ Default for cookies for anonymous users is browser-session and as set in 
+        `COSINNUS_SESSION_EXPIRY_AUTHENTICATED_IN_USERS` logged in users """
+    request.session.set_expiry(0)
+
+
 from cosinnus.apis.cleverreach import *
