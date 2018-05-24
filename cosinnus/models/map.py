@@ -151,7 +151,7 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
         
         kwargs.update({
             'is_member': check_ug_membership(user, obj),
-            'action_url_1': _prepend_url(user, obj.portal) + group_aware_reverse('cosinnus:group-microsite', kwargs={'group': obj}) + '?join=1',
+            'action_url_1': _prepend_url(user, obj.portal) + group_aware_reverse('cosinnus:group-microsite', kwargs={'group': obj}, skip_domain=True) + '?join=1',
             'action_url_2': (_prepend_url(user, obj.portal) + message_url) if message_url else None,
             'youtube_url': obj.video,
             'twitter_username': obj.twitter_username,

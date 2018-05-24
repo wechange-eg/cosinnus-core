@@ -20,7 +20,7 @@ _PORTAL_PROTOCOL_CACHE_KEY = 'cosinnus/core/portal/%d/protocol'
         
 _group_aware_url_name = object() # late import because we cannot reference CosinnusGroup models here yet
 _CosinnusPortal = None
-def group_aware_reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=None, current_app=None):
+def group_aware_reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=None, current_app=None, skip_domain=False):
     """ CosinnusGroup.type aware, and Portal aware function that returns reverse URLs pointing
         to the correct Portal domain and the correct group type URL (society, project).
         
@@ -56,7 +56,7 @@ def group_aware_reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=N
             _CosinnusPortal = get_model('cosinnus', 'CosinnusPortal')
         domain = get_domain_for_portal(_CosinnusPortal.get_current())
     
-    return domain + reverse(viewname, urlconf, args, kwargs, prefix, current_app)
+    return ('' if skip_domain else domain) + reverse(viewname, urlconf, args, kwargs, prefix, current_app)
         
 
 def get_domain_for_portal(portal):

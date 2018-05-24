@@ -16,7 +16,7 @@ module.exports = {
 				_.each(po.items, function(item){
 					// check for those translation items that contain "__INCLUDE_JS_PO__" as comment
 					if (_.some(item.extractedComments, function(comment){return comment.indexOf("__INCLUDE_JS_PO__") >= 0})) {
-						if (!item.obsolete) {
+						if (!item.obsolete && !item.flags.fuzzy) {
 							langdict[item.msgid] = item.msgstr[0];
 						}
 					}
