@@ -121,10 +121,12 @@ def map_search_endpoint(request, filter_group_id=None):
     sqs = filter_searchqueryset_for_read_access(sqs, request.user)
     # filter events by upcoming status
     if params['events'] and Event is not None:
+        # upcoming events
         _now = now()
         event_horizon = datetime.datetime(_now.year, _now.month, _now.day)
         sqs = sqs.exclude(Q(to_date__lt=event_horizon) | (Q(_missing_='to_date') & Q(from_date__lt=event_horizon)))
-    
+        # only actual events, no doodles
+        sqs = sqs.filter_and(Q(_missing_='event_state') | Q(event_state=1))
     # if we hae no query-boosted results, use *only* our custom sorting (haystack's is very random)
     if not query:
         sqs = sqs.order_by('-local_boost')
