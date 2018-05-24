@@ -589,56 +589,59 @@
 					</div>
 				{% endif %}
 				
-				{% if group.twitter_username %}
-					{# Twitter username feed box #}
-					<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
-			            <ul class="media-list">
-			                <li class="media">
-			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
-			                    <div class="media-body">
-			                        {% trans "Tweets" %}
-			                    </div>
-			                </li>
-			            </ul>
-			        </div><!-- btn -->
-			        <div class="white-content no-padding">
-			        	{% include 'cosinnus/common/embed_twitter_field.html' with twitter_username=group.twitter_username %}
-					</div>
-				{% endif %}
 				
-				{% if group.twitter_widget_id %}
-					{# Twitter custom feed box #}
-					<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
-			            <ul class="media-list">
-			                <li class="media">
-			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
-			                    <div class="media-body">
-			                        {% trans "Tweets" %}
-			                    </div>
-			                </li>
-			            </ul>
-			        </div><!-- btn -->
-			        <div class="white-content no-padding">
-			        	{% include 'cosinnus/common/embed_twitter_field.html' with twitter_widget_id=group.twitter_widget_id %}
-					</div>
-				{% endif %}
-				
-				
-				{% if group.flickr_url %}
-					{# Flickr custom feed box #}
-					<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
-			            <ul class="media-list">
-			                <li class="media">
-			                    <a class="pull-left btn-extra-emphasized" href="#"></a>
-			                    <div class="media-body">
-			                        {% trans "Flickr Gallery" %}
-			                    </div>
-			                </li>
-			            </ul>
-			        </div><!-- btn -->
-			        <div class="white-content no-padding">
-			        	{% include 'cosinnus/common/embed_flickr_field.html' with data=group.get_flickr_properties %}
-					</div>
+                {% if SETTINGS.COSINNUS_MICROSITE_SOCIAL_MEDIA_FIELDS_ACTIVE %}
+					{% if group.twitter_username %}
+						{# Twitter username feed box #}
+						<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+				            <ul class="media-list">
+				                <li class="media">
+				                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+				                    <div class="media-body">
+				                        {% trans "Tweets" %}
+				                    </div>
+				                </li>
+				            </ul>
+				        </div><!-- btn -->
+				        <div class="white-content no-padding">
+				        	{% include 'cosinnus/common/embed_twitter_field.html' with twitter_username=group.twitter_username %}
+						</div>
+					{% endif %}
+					
+					{% if group.twitter_widget_id %}
+						{# Twitter custom feed box #}
+						<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+				            <ul class="media-list">
+				                <li class="media">
+				                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+				                    <div class="media-body">
+				                        {% trans "Tweets" %}
+				                    </div>
+				                </li>
+				            </ul>
+				        </div><!-- btn -->
+				        <div class="white-content no-padding">
+				        	{% include 'cosinnus/common/embed_twitter_field.html' with twitter_widget_id=group.twitter_widget_id %}
+						</div>
+					{% endif %}
+					
+					
+					{% if group.flickr_url %}
+						{# Flickr custom feed box #}
+						<div type="button" class="btn btn-emphasized btn-headline v-offset-l btn-no-interact">
+				            <ul class="media-list">
+				                <li class="media">
+				                    <a class="pull-left btn-extra-emphasized" href="#"></a>
+				                    <div class="media-body">
+				                        {% trans "Flickr Gallery" %}
+				                    </div>
+				                </li>
+				            </ul>
+				        </div><!-- btn -->
+				        <div class="white-content no-padding">
+				        	{% include 'cosinnus/common/embed_flickr_field.html' with data=group.get_flickr_properties %}
+						</div>
+					{% endif %}
 				{% endif %}
 				
 				{% with call_to_action_buttons=group.call_to_action_buttons.all  %}

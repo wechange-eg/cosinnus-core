@@ -390,6 +390,9 @@ class CosinnusConf(AppConf):
     # how many public items per type should be shown on the microsite?
     MICROSITE_PUBLIC_APPS_NUMBER_OF_ITEMS = 5
     
+    # should twitter and flickr embed fields and display be active for microsites?
+    MICROSITE_SOCIAL_MEDIA_FIELDS_ACTIVE = False
+    
     #: A list of app_names (``'cosinnus_note'`` rather than ``note``) that will
     #: e.g. not be displayed in the cosinnus menu
     HIDE_APPS = set(['cosinnus_message', 'cosinnus_notifications', 'cosinnus_stream'])
