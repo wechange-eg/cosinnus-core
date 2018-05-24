@@ -148,8 +148,10 @@ class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearch
     
     user_visibility_mode = indexes.BooleanField(default=True) # switch to filter differently on mt_visibility
     membership_groups = indexes.MultiValueField(model_attr='cosinnus_groups_pks') # ids of all groups the user is member/admin of
+    admin_groups = indexes.MultiValueField() # ids of all groups the user is member/admin of
     portals = indexes.MultiValueField()
     location = indexes.LocationField(null=True)
+    user_id = indexes.IntegerField(model_attr='user__id')
     
     def prepare_portals(self, obj):
         return list(obj.user.cosinnus_portal_memberships.values_list('group_id', flat=True))
@@ -176,6 +178,9 @@ class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearch
     def prepare_member_count(self, obj):
         """ Memberships for users """
         return self._get_memberships_count(obj)
+    
+    def prepare_admin_groups(self, obj):
+        return list(get_cosinnus_group_model().objects.get_for_user_group_admin_pks(obj.user))
     
     def get_model(self):
         return get_user_profile_model()

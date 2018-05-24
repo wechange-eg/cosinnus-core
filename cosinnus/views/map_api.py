@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import datetime
 import logging
 import json
 
@@ -22,7 +21,8 @@ from cosinnus.forms.search import filter_searchqueryset_for_read_access, \
 from cosinnus.models.map import HaystackMapResult, \
     SEARCH_MODEL_NAMES, SEARCH_MODEL_NAMES_REVERSE, \
     SEARCH_RESULT_DETAIL_TYPE_MAP, SHORT_MODEL_MAP,\
-    SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS
+    SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS,\
+    filter_event_searchqueryset_by_upcoming
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.functions import is_number, ensure_list_of_ints
 from cosinnus.utils.permissions import check_object_read_access
@@ -121,12 +121,8 @@ def map_search_endpoint(request, filter_group_id=None):
     sqs = filter_searchqueryset_for_read_access(sqs, request.user)
     # filter events by upcoming status
     if params['events'] and Event is not None:
-        # upcoming events
-        _now = now()
-        event_horizon = datetime.datetime(_now.year, _now.month, _now.day)
-        sqs = sqs.exclude(Q(to_date__lt=event_horizon) | (Q(_missing_='to_date') & Q(from_date__lt=event_horizon)))
-        # only actual events, no doodles
-        sqs = sqs.filter_and(Q(_missing_='event_state') | Q(event_state=1))
+        sqs = filter_event_searchqueryset_by_upcoming(sqs)
+        
     # if we hae no query-boosted results, use *only* our custom sorting (haystack's is very random)
     if not query:
         sqs = sqs.order_by('-local_boost')
@@ -200,6 +196,7 @@ def map_detail_endpoint(request):
     if model is None:
         return HttpResponseBadRequest('``type`` param indicated an invalid data model type!')
     
+    # TODO: for groups/projects we should really use the cache here.
     if model_type == 'people':
         # UserProfiles are retrieved independent of the portal
         obj = get_object_or_None(get_user_profile_model(), user__username=slug)
