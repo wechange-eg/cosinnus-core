@@ -24,6 +24,18 @@
         {% endif %}
     </div>
 {% endblock additional_top_line %}
+
+{% block action_buttons %}
+    <div class="tile-section">
+        <a class="rounded-button button-action" href="{% if type == "people" %}{{ controlView.portalInfo[portal].domain }}{% endif %}{{ url }}" target="_blank">
+            <span class="rounded-button-inner">
+                <i clasS="fa fa-external-link"></i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Visit Event Page" %}
+            </span>
+        </a>
+    </div>
+{% endblock %}
         
 
 {% block related_content %}
