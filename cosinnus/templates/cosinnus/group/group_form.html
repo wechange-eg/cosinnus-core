@@ -336,29 +336,29 @@
                             {% trans "https://www.youtube.com/watch?v=example-video" as video_placeholder %}
                             {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.video legend=video_legend label=video_label placeholder=video_placeholder %}
                             
-	                        
-	                        {# Twitter Username Embed field #}
-                            {% trans "Twitter: Embedded User Timeline" as twitter_label %}
-                            {% trans "Twitter Username (example: @username)" as twitter_placeholder %}
-                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.twitter_username label=twitter_label placeholder=twitter_placeholder %}
-                            
-	                        
-                            {# Twitter widget Field #}
-                            {% trans "Twitter: Embedded Hashtag or Custom Timeline" as twitter_widget_label %}
-                            {% captureas twitter_widget_legend %}
-                                {% trans "You can create a custom twitter timeline here:" %}
-                                <a href="https://twitter.com/settings/widgets" target="_blank">https://twitter.com/settings/widgets</a>
-                                <i class="fa fa-external-link"></i>
-                            {% endcaptureas %}
-                            {% trans "Widget-id (example: 744907261810618721) or embed-code (HTML)" as twitter_widget_placeholder %}
-                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.twitter_widget_id label=twitter_widget_label legend=twitter_widget_legend placeholder=twitter_widget_placeholder large_field=True %}
-                            
-	                        
-                            {# Twitter Username Embed field #}
-                            {% trans "Embed Flickr Gallery" as flickr_label %}
-                            {% trans 'Flickr Gallery URL (example: "https://www.flickr.com/photos/username/sets/1234567890")' as flickr_placeholder %}
-                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.flickr_url label=flickr_label placeholder=flickr_placeholder %}
-                            
+	                        {% if SETTINGS.COSINNUS_MICROSITE_SOCIAL_MEDIA_FIELDS_ACTIVE %}
+		                        {# Twitter Username Embed field #}
+	                            {% trans "Twitter: Embedded User Timeline" as twitter_label %}
+	                            {% trans "Twitter Username (example: @username)" as twitter_placeholder %}
+	                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.twitter_username label=twitter_label placeholder=twitter_placeholder %}
+	                            
+		                        
+	                            {# Twitter widget Field #}
+	                            {% trans "Twitter: Embedded Hashtag or Custom Timeline" as twitter_widget_label %}
+	                            {% captureas twitter_widget_legend %}
+	                                {% trans "You can create a custom twitter timeline here:" %}
+	                                <a href="https://twitter.com/settings/widgets" target="_blank">https://twitter.com/settings/widgets</a>
+	                                <i class="fa fa-external-link"></i>
+	                            {% endcaptureas %}
+	                            {% trans "Widget-id (example: 744907261810618721) or embed-code (HTML)" as twitter_widget_placeholder %}
+	                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.twitter_widget_id label=twitter_widget_label legend=twitter_widget_legend placeholder=twitter_widget_placeholder large_field=True %}
+	                            
+		                        
+	                            {# Flickr Gallery Embed field #}
+	                            {% trans "Embed Flickr Gallery" as flickr_label %}
+	                            {% trans 'Flickr Gallery URL (example: "https://www.flickr.com/photos/username/sets/1234567890")' as flickr_placeholder %}
+	                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.flickr_url label=flickr_label placeholder=flickr_placeholder %}
+                            {% endif %}
 	                        
 	                        {# Microsite Gallery Images Inlineform #}
 	                        {% captureas mcg_label %}{% trans "Microsite Gallery Images" %} <i>({% trans "File Size" %}: {% trans "max. 10 MB" %})</i>{% endcaptureas %}
