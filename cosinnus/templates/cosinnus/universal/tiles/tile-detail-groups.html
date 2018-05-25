@@ -34,15 +34,24 @@
 
 {% block related_content %}
     {{ super() }}
-    
-    {% if related_projects|length > 0 %}
-	    <div class="tile-section tile-section-divided">
-	        <div class="row">
-	            <div class="col-xs-6">
-	                <!-- TODO -->
-	                {{ macros.groupInfoLink("Project list", "", "", "") }}
-	            </div>
-	        </div>
-	    </div>
+
+    {% if projects|length > 0 %}
+        <div class="tile-section tile-section-divided">
+            <div class="subheading">
+                <i class="fa fa-group"></i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Projects" %} ({{ projects|length }})
+            </div>
+        </div>
+        <div class="tile-section">
+            <div class="row">
+                {% for project in projects %}
+	                <div class="col-sm-6">
+		                {{ macros.itemCard(project.portal, project.slug, project.title, project.type, project.iconImageUrl, project.address, "fa-map-marker", project.dataSlot1, "fa-group") }}
+	                </div>
+	            {% endfor %}
+            </div>
+        </div>
     {% endif %}
+    
 {% endblock related_content %}

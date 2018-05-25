@@ -39,18 +39,24 @@
         
 
 {% block related_content %}
-    {% if related_participants|length > 0 %}
-	    <div class="tile-section tile-section-divided">
-	        <div class="subheading">
-	            {# Translators: __INCLUDE_JS_PO__ #}
-	            {% trans "Participants" %}
-	        </div>
-		    <div class="row">
-		        <div class="col-xs-6">
-		            <!-- TODO -->
-	                {{ macros.userInfoLink("Participant list", "", "", "") }}
-		        </div>
-		    </div>
-	    </div>
-	{% endif %}
+
+    {% if participants|length > 0 %}
+        <div class="tile-section tile-section-divided">
+            <div class="subheading">
+                <i class="fa fa-user"></i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Participants" %} ({{ participants|length }})
+            </div>
+        </div>
+        <div class="tile-section">
+            <div class="row">
+                {% for participant in participants %}
+                    <div class="col-sm-6">
+                        {{ macros.itemCard(participant.portal, participant.slug, participant.title, participant.type, participant.iconImageUrl, participant.address, "fa-map-marker") }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    
 {% endblock related_content %}

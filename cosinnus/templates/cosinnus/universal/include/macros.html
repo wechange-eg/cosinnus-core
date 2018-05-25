@@ -57,7 +57,7 @@
 {% endmacro %}
 
 {% macro itemCard(portal, slug, title, type, imageUrl=null, slot1data=null, slot1icon=null, slot2data=null, slot2icon=null) %}
-    <div class="card">
+    <div class="card result-link" {{ resultLink(portal, slug, title, type, inline_only=1) }}>
         {% if imageUrl %}
 	        <div class="card-image">
 	            <img src="{{ imageUrl }}">

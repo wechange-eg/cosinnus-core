@@ -676,6 +676,11 @@
     }
     .subheading {
         font-weight: bold;
+        
+        i.fa {
+            font-size: 16px;
+            vertical-align: initial;
+        }
     }
     
     /** The image is smaller in height (and gets delivered that way) */
@@ -743,6 +748,7 @@
     .card {
         clear: both;
         margin-bottom: 15px;
+        cursor: pointer;
         
 	    .card-image {
 	        display: inline-block;
@@ -759,6 +765,9 @@
 	    
 	    .card-title {
             margin-bottom: 2px;
+	    }
+	    &:hover .card-title a {
+	        text-decoration: underline;
 	    }
 	    
 	    .card-data  { 
