@@ -75,9 +75,7 @@ module.exports = BaseView.extend({
     	this.render();
     	this.App.controlView.triggerMobileDetailView();
     	// render moment dates
-    	if (result.get('type') == "events") {
-    		$.cosinnus.renderMomentDataDate();
-    	}
+    	$.cosinnus.renderMomentDataDate();
     },
     
     // a result is being unselected

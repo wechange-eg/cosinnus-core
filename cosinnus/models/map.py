@@ -50,6 +50,7 @@ class BaseMapCard(DictResult):
         'type': REQUIRED,
         'title': REQUIRED, 
         'slug': REQUIRED,
+        'portal': None,
         'address': None, 
         'url': None,
         'iconImageUrl': None,
@@ -62,11 +63,22 @@ class BaseMapCard(DictResult):
 class HaystackMapCard(BaseMapCard):
     
     def __init__(self, result, *args, **kwargs):
+        if result.portals:
+            # some results, like users, have multiple portals associated. we select one of those to show
+            # the origin from
+            visible_portals = get_visible_portal_ids()
+            displayable_portals = [port_id for port_id in result.portals if port_id in visible_portals]
+            current_portal_id = CosinnusPortal.get_current().id
+            portal = current_portal_id if current_portal_id in displayable_portals else displayable_portals[0]
+        else:
+            portal = result.portal
+            
         fields = {
             'id': itemid_from_searchresult(result),
             'type': SEARCH_MODEL_NAMES[result.model],
             'title': result.title, 
             'slug': result.slug,
+            'portal': portal,
             'address': result.mt_location,
             'url': result.url,
             'iconImageUrl': result.icon_image_url,

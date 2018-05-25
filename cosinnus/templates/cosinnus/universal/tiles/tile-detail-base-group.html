@@ -3,17 +3,26 @@
 
 
 {% block related_content %}
-    <!-- TODO
-    <div class="tile-section tile-section-divided">
-        (( events ))
-    </div>
-    -->
+
+    {% if events|length > 0 %}
+	    <div class="tile-section tile-section-divided">
+	        <div class="subheading spacer">
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Events" %} ({{ events|length }})
+            </div>
+	    </div>
+	    <div class="tile-section">
+	        {% for event in events %}
+	            {{ macros.itemCard(event.portal, event.slug, event.title, event.type, null, event.dataSlot1|safe, "fa-clock-o", event.address, "fa-map-marker") }}
+	        {% endfor %}
+	    </div>
+    {% endif %}
+    
 {% endblock related_content %}
 
 
-
 {% block contact %}
-    
+
     <div class="tile-section tile-section-divided">
         <div class="row">
             <div class="col-xs-6">
@@ -81,7 +90,14 @@
                     {% endif %}
                 </div>
                 <div class="tile-section">
-                    {{ macros.userInfoLink("admin list: COMING SOON", "", "", "") }}
+                    {% if admins|length > 0 %}
+                        {% for admin in admins %}
+		                    {{ macros.itemCard(admin.portal, admin.slug, admin.title, admin.type, admin.iconImageUrl, admin.address, "fa-map-marker") }}
+                        {% endfor %}
+                    {% else %}
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        </i>{% trans "Administrators unknown" %}</i>
+                    {% endif %}
                 </div>
             </div>
         </div>

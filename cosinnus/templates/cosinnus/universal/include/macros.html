@@ -56,15 +56,30 @@
     {% endif %}
 {% endmacro %}
 
-{% macro userInfoLink(name, url, image, address) %}
-    <div class="user-info-link">
-        (( user info link for  {{ name }} ))
+{% macro itemCard(portal, slug, title, type, imageUrl=null, slot1data=null, slot1icon=null, slot2data=null, slot2icon=null) %}
+    <div class="card">
+        {% if imageUrl %}
+	        <div class="card-image">
+	            <img src="{{ imageUrl }}">
+	        </div>
+        {% endif %}
+        <div class="card-title">
+            {{ resultLink(portal, slug, title, type) }}
+        </div>
+        <div class="card-data">
+	        {% if slot1data or slot2data %}
+	           {% if slot1data and slot1icon %}
+                   <i class="fa {{ slot1icon }}"></i>
+                   <span>{{ slot1data }}</span>
+               {% endif %}
+               {% if slot2data and slot2icon %}
+                   <i class="fa {{ slot2icon }}"></i>
+                   <span>{{ slot2data }}</span>
+               {% endif %}
+	        {% else %}
+	           <p></p>
+	        {% endif %}
+        </div>
     </div>
 {% endmacro %}
 
-
-{% macro groupInfoLink(name, url, image, type, count) %}
-    <div class="group-info-link">
-        (( group info link for  {{ name }} ))
-    </div>
-{% endmacro %}

@@ -740,6 +740,39 @@
         }
     }
     
+    .card {
+        clear: both;
+        margin-bottom: 15px;
+        
+	    .card-image {
+	        display: inline-block;
+	        width: 36px;
+	        float: left;
+	        margin: 3px 10px 15px 0;
+	        position: relative;
+	        outline: 1px solid @map-frame-color;
+	        
+		    img {
+		        width: 100%;
+		    }
+	    }
+	    
+	    .card-title {
+            margin-bottom: 2px;
+	    }
+	    
+	    .card-data  { 
+		    i.fa {
+		        padding: 0 2px 0 0;
+		        
+			    &:not(:first-child) {
+		            margin-left: 10px;	            
+		        }
+		    }
+        }
+    }
+    
+    
 }
 
 
