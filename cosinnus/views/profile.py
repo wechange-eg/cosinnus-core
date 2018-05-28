@@ -15,7 +15,7 @@ from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist, ValidationError,\
     PermissionDenied
 from django.http.response import Http404, HttpResponseRedirect
-from cosinnus.models.tagged import BaseTagObject
+from cosinnus.models.tagged import BaseTagObject, get_tag_object_model
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
     CosinnusPortal
 from cosinnus.models.widget import WidgetConfig
@@ -45,8 +45,11 @@ def delete_userprofile(user):
         membership.delete()
     
     # delete user media_tag
-    if profile.media_tag:
-        profile.media_tag.delete()
+    try:
+        if profile.media_tag:
+            profile.media_tag.delete()
+    except get_tag_object_model().DoesNotExist:
+        pass
     
     # delete user profile
     if profile.avatar:
