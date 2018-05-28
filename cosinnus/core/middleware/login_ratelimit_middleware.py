@@ -23,6 +23,7 @@ from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
 import django.dispatch as dispatch
+from django.utils.text import get_valid_filename
 
 
 class Struct:
@@ -65,7 +66,7 @@ login_ratelimit_triggered = dispatch.Signal(providing_args=['username', 'ip'])
 def reset_user_ratelimit_on_login_success(sender, request, user, **kwargs):
     """ After a user logs in successfully, delete all cache entries of failed attempts. """
     username = getattr(user, _get_setting('LOGIN_RATELIMIT_USERNAME_FIELD'))
-    username = username.strip()
+    username = get_valid_filename(username)
     cache.delete(_get_setting('LOGIN_RATELIMIT_NUM_TRIES_CACHE_KEY') % username) 
     cache.delete(_get_setting('LOGIN_RATELIMIT_LIMIT_ACTIVE_UNTIL_CACHE_KEY') % username) 
 
@@ -75,7 +76,7 @@ def register_and_limit_failed_login_attempt(sender, credentials, **kwargs):
         If it is greater than LOGIN_RATELIMIT_TRIGGER_ON_ATTEMPT, set an expiry time, before which 
         all further login attempts on that credential will be prevented entirely. """
     username = credentials['username']
-    username = username.strip()
+    username = get_valid_filename(username)
     
     # increase and save the current number of attempts
     num_tries = cache.get(_get_setting('LOGIN_RATELIMIT_NUM_TRIES_CACHE_KEY') % username, 0) + 1
@@ -148,7 +149,7 @@ class LoginRateLimitMiddleware(object):
         for watch_url, username_field in _get_setting('LOGIN_RATELIMIT_LOGIN_URLS').items():
             if request.path.startswith(watch_url) and request.method.lower() == 'post':
                 username = request.POST.get(username_field, None)
-                username = username.strip()
+                username = get_valid_filename(username)
                 if username:
                     return self.check_ratelimit_for_username(request, username)
         return
@@ -156,6 +157,7 @@ class LoginRateLimitMiddleware(object):
     def check_ratelimit_for_username(self, request, username):
         """ Check if an active rate limit is pending, and if so, send the user back to the
             originating URL and display a warning with the remaining rate limit duration. """
+        username = get_valid_filename(username)
         num_tries = cache.get(_get_setting('LOGIN_RATELIMIT_NUM_TRIES_CACHE_KEY') % username, 0)
         if num_tries > 0:
             limit_expires = cache.get(_get_setting('LOGIN_RATELIMIT_LIMIT_ACTIVE_UNTIL_CACHE_KEY') % username, None)
