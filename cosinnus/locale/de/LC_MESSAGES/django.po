@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-22 12:43+0200\n"
-"PO-Revision-Date: 2018-05-23 16:45+0200\n"
+"PO-Revision-Date: 2018-05-28 12:16+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -2945,7 +2945,7 @@ msgstr "Wo"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "In map area"
-msgstr "In Kartenaussschnit"
+msgstr "In Kartenaussschnitt"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "If active, searching will be restricted to the visible map area."
