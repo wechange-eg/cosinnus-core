@@ -516,6 +516,7 @@ module.exports = ContentControlView.extend({
 
     handleStartSearch: function (event) {
     	this.$el.find('.icon-loading').removeClass('hidden');
+    	this.$el.find('.icon-reset').addClass('hidden');
         this.$el.find('.q').blur();
         // disable input in content views during search (up to the views to decide what to disable)
         _.each(this.App.contentViews, function(view){
@@ -526,6 +527,7 @@ module.exports = ContentControlView.extend({
 
     handleEndSearch: function (event) {
         this.$el.find('.icon-loading').addClass('hidden');
+        self.$el.find('.icon-reset').toggleClass('hidden', (!self.state.filtersActive && !self.state.q));
         // enable input in content views during search (up to the views to decide what to enable)
         _.each(this.App.contentViews, function(view){
     		view.enableInput();
