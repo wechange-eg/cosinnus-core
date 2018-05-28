@@ -7,20 +7,17 @@
             <input type="text" class="q" name="q" 
 placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 {% trans "Search for Names, Topics and Places..." %}"
-                 value="{{ q }}" autocomplete="off" />
+                    value="{{ q }}" autocomplete="off" />
             <i class="fa fa-search clickable-button query-search-button icon-search {% if wantsToSearch %}hidden{% endif %}"></i>
-            <i class="fa fa-close clickable-button reset-all icon-reset {% if not filtersActive and not q %}hidden{% endif %}"></i>
-            <div class="icon-loading sk-double-bounce{% if not wantsToSearch %} hidden{% endif %}">
-                <div class="sk-child sk-double-bounce1"></div>
-                <div class="sk-child sk-double-bounce2"></div>
-            </div>
          </div>
-	     <div class="filter-button-box mobile-hidden">
-	         <span class="clickable-button icon-filters {% if filterPanelVisible %}open{% endif %}">
-	             <i class="fa fa-sliders visible-default"></i>
-                 <i class="fa fa-chevron-up visible-open"></i>
-                 <i class="fa fa-chevron-up visible-open-hover"></i>
-	         </span>
+         <span class="clickable-button icon-filters {% if filterPanelVisible %}open{% endif %}">
+             <i class="fa fa-bars visible-default"></i>
+             <i class="fa fa-chevron-up visible-open"></i>
+             <i class="fa fa-chevron-up visible-open-hover"></i>
+         </span>
+         <i class="fa fa-close clickable-button reset-all icon-reset {% if not filtersActive and not q %}hidden{% endif %}"></i>
+         <i class="fa fa-spinner fa-pulse icon-loading {% if not wantsToSearch %} hidden{% endif %}"></i>
+	     <div class="icon-box filter-button-box">
 	     </div>
      </div>
      

@@ -937,31 +937,15 @@
         .search-box {
             padding: 12px;
             flex-grow: 1;
-            
+            margin-left: 55px;
         }
-        .filter-button-box {
+        .icon-box {
             width: 54px;
-		    font-size: 25px;
-		    text-align: center;
-		    color: @map-clickable-icon-color;
-		    
-		    .icon-filters {
-		        i {
-		            display: none;
-				    padding: 15px;
-		        }
-		        &:not(.open) .visible-default {
-		            display: inline-block;
-		        }
-		        &.open:not(:hover) .visible-open {
-                    display: inline-block; 
-                }
-                &.open:hover .visible-open-hover {
-                    display: inline-block;
-                }
-		        
-		    }
-		    &:before {
+            font-size: 25px;
+            text-align: center;
+            color: @map-clickable-icon-color;
+            
+            &:before {
                 content: " ";
                 position: absolute;
                 right: 54px;
@@ -974,7 +958,7 @@
 	    .q {
 	        width: 100%;
 	        font-size: 20px;
-	        padding-left: 39px;
+	        padding: 0 39px 0 4px;
 	        
 	        color: #000;
 	        border: none;
@@ -1004,7 +988,8 @@
 	
 	    .icon-search,
 	    .icon-loading,
-	    .icon-reset {
+	    .icon-reset,
+	    .icon-filters {
 	        position: absolute;
 		    padding: 15px;
 	        top: 0;
@@ -1013,14 +998,26 @@
 	    }
 	    
 	    .icon-search {
-	        left: 0;
+	        right: 0;
 	    }
-	    
+	    .icon-filters {
+	        left: 0;
+	        display: flex;
+	        i {
+                display: none;
+            }
+            &:not(.open) .visible-default {
+                display: inline-block;
+            }
+            &.open:not(:hover) .visible-open {
+                   display: inline-block; 
+            }
+            &.open:hover .visible-open-hover {
+                display: inline-block;
+            }
+	    }
 	    .icon-loading {
 	        right: 54px;
-	        margin: 12px 10px;
-	        width: 25px;
-	        height: 25px;
 	    }
 	    .icon-reset {
 	        right: 54px;
@@ -1200,7 +1197,9 @@
             display: inherit !important;
         }
 		
-		.mobile-hidden,
+		.mobile-hidden {
+		    display: none;
+		}
 		.mobile-view {
 		    display: none;
 		}
@@ -1281,8 +1280,13 @@
 	.map-controls .map-controls-filters {
 	    border-bottom: none;
 	}
-	.map-controls .map-controls-search .icon-reset {
-	    right: 0;
+	.map-controls .map-controls-search {
+        .search-box {
+            margin-left: 0;
+        }
+        .icon-filters {
+            display: none;
+        }
 	}
    .tile-list-fullscreen {
         &:before {
@@ -1291,6 +1295,9 @@
     }
     .controls {
 	    overflow-y: scroll;
+	    .q {
+	        padding-left: 4px;
+	    }
 	}
 	
 	
