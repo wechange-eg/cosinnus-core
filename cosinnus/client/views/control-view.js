@@ -141,7 +141,7 @@ module.exports = ContentControlView.extend({
         event.preventDefault();
         this.resetAll();
         this.render();
-    	var searchReason = 'manual-search';
+    	var searchReason = 'reset-filters-search';
 		this.triggerDelayedSearch(true, false, false, searchReason);
     },
     
@@ -169,7 +169,7 @@ module.exports = ContentControlView.extend({
         this.resetTypeFilters();
         this.render();
     	this.clearDetailResultCache();
-    	var searchReason = 'manual-search';
+    	var searchReason = 'reset-filters-search';
 		this.triggerDelayedSearch(true, false, false, searchReason);
     },
 
@@ -179,7 +179,7 @@ module.exports = ContentControlView.extend({
         this.resetTopics();
         this.render();
     	this.clearDetailResultCache();
-    	var searchReason = 'manual-search';
+    	var searchReason = 'reset-filters-search';
 		this.triggerDelayedSearch(true, false, false, searchReason);
     },
 
@@ -189,7 +189,7 @@ module.exports = ContentControlView.extend({
         this.state.q = '';
         this.render();
     	this.clearDetailResultCache();
-    	var searchReason = 'manual-search';
+    	var searchReason = 'reset-filters-search';
 		this.triggerDelayedSearch(true, false, false, searchReason);
     },
     
@@ -200,7 +200,7 @@ module.exports = ContentControlView.extend({
         this.resetTopics();
         this.render();
     	this.clearDetailResultCache();
-    	var searchReason = 'manual-search';
+    	var searchReason = 'reset-filters-search';
 		this.triggerDelayedSearch(true, false, false, searchReason);
     },
     
@@ -578,6 +578,7 @@ module.exports = ContentControlView.extend({
     	_.each(this.App.contentViews, function(view){
     		view.applyUrlSearchParameters(urlParams);
     	});
+    	this.determineActiveFilterStatuses();
     	this.render();
     	this.triggerDelayedSearch(true, true, noNewNavigateEvent);
     },
@@ -764,6 +765,28 @@ module.exports = ContentControlView.extend({
     	}
     },
     
+    
+    /** determine if any filtering method is active (topics or result types) */
+    determineActiveFilterStatuses: function () {
+    	var self = this;
+    	self.state.filtersActive = false;
+    	self.state.topicFiltersActive = false;
+    	self.state.typeFiltersActive = false;
+    	
+    	if (self.state.ignoreLocation) {
+    		self.state.filtersActive = true;
+    	}
+    	if (self.state.activeTopicIds.length > 0) {
+    		self.state.filtersActive = true;
+    		self.state.topicFiltersActive = true;
+    	}
+		_.each(Object.keys(self.options.availableFilters), function(key) {
+			if (self.options.availableFilters[key] != self.state.activeFilters[key]) {
+				self.state.filtersActive = true;
+				self.state.typeFiltersActive = true;
+			}
+		});
+    },
 
     search: function (noNavigate, searchReason) {
         var self = this;
@@ -815,26 +838,11 @@ module.exports = ContentControlView.extend({
 	            self.state.searching = false;
 	            
 	            if (self.options.controlsEnabled) {
-	            	// determine if any filtering method is active (topics or result types)
-	            	self.state.filtersActive = false;
-	            	self.state.topicFiltersActive = false;
-	            	self.state.typeFiltersActive = false;
-	            	
-	            	if (self.state.ignoreLocation) {
-	            		self.state.filtersActive = true;
-	            	}
-	            	if (self.state.activeTopicIds.length > 0) {
-	            		self.state.filtersActive = true;
-	            		self.state.topicFiltersActive = true;
-	            	}
-            		_.each(Object.keys(self.options.availableFilters), function(key) {
-            			if (self.options.availableFilters[key] != self.state.activeFilters[key]) {
-            				self.state.filtersActive = true;
-            				self.state.typeFiltersActive = true;
-            			}
-            		});
+	            	self.determineActiveFilterStatuses();
 	            	self.refreshSearchControls();
-	            	self.hideFilterPanel();
+	            	if (searchReason == 'manual-search') {
+	            		self.hideFilterPanel();
+	            	}
 	            	self.renderActiveFilters();
 	            	// refresh pagination controls
 	            	self.paginationControlView.render();
