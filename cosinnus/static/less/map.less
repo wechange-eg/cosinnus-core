@@ -81,17 +81,6 @@
         }
     } 
     
-    &:not(.no-navbar) {
-        &:before {
-            content: " ";
-            background-color: #FFF;
-            width: 100%;
-		    height: 55px;
-            position: absolute;
-            z-index: 1;
-        }
-    }
-    
     .caps {
         text-transform: uppercase;
     }
@@ -357,6 +346,19 @@
             }
         }
     }
+}
+/** A blank white spacer that lies under the main page navbar */
+.app-fullscreen {    
+	&:not(.no-navbar) {
+	    &:before {
+	        content: " ";
+	        background-color: #FFF;
+	        width: 100%;
+	        height: 55px;
+	        position: absolute;
+	        z-index: 1;
+	    }
+	}
 }
 .map-splitscreen {
 	width: 50%;
@@ -809,22 +811,13 @@
 
 
 
-.map-fullscreen {
-	
+/* For fullscreen mode, don't move the controls to compensate for the navbar */
+.app-fullscreen:not(.no-navbar) .map-fullscreen {
     .leaflet-top {
         .leaflet-control {
             top: 65px;
         }
     }
-
-    /* For fullscreen mode, don't move the controls to compensate for the navbar */
-    &.no-navbar{
-        .leaflet-top {
-            .leaflet-control {
-                top: 0px;
-            }
-        }
-    } 
 }
 
 .map-fullscreen, .map-embed {

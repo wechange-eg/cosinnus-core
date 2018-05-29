@@ -53,8 +53,10 @@ from cosinnus.conf import settings
 from cosinnus.utils.tokens import email_blacklist_token_generator
 from cosinnus.utils.functions import is_email_valid
 from django.views.generic.base import TemplateView
-from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.utils.urls import group_aware_reverse, redirect_with_next,\
+    redirect_next_or
 from cosinnus.utils.group import get_cosinnus_group_model
+from django.utils.http import is_safe_url
 
 
 USER_MODEL = get_user_model()
@@ -143,8 +145,7 @@ class UserCreateView(CreateView):
     message_success_email_verification = _('User "%(user)s" was registered successfully. We will send an email to your address %(email)s" soon. You need to confirm the email address before you can log in.')
     
     def get_success_url(self):
-        next_param = self.request.GET.get('next', '')
-        return reverse('login') + '?next=%s' % next_param if next_param else ''
+        return redirect_with_next(reverse('login'), self.request)
     
     def form_valid(self, form):
         ret = super(UserCreateView, self).form_valid(form)
@@ -198,7 +199,7 @@ class UserCreateView(CreateView):
         
         if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
             # add redirect to the welcome-settings page, with priority so that it is shown as first one
-            profile.add_redirect_on_next_page(reverse('cosinnus:welcome-settings'), message=None, priority=True)
+            profile.add_redirect_on_next_page(redirect_with_next(reverse('cosinnus:welcome-settings'), self.request), message=None, priority=True)
         
         return ret
     
@@ -239,6 +240,7 @@ class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
         
         messages.success(request, self.message_success)
         redirect_url = get_cosinnus_group_model().objects.get(slug=getattr(settings, 'NEWW_FORUM_GROUP_SLUG')).get_absolute_url() if hasattr(settings, 'NEWW_FORUM_GROUP_SLUG') else '/'
+        redirect_url = redirect_next_or(self.request, redirect_url)
         return HttpResponseRedirect(redirect_url)
     
     def get_context_data(self, **kwargs):
@@ -526,10 +528,12 @@ def set_user_email_to_verify(user, new_email, request=None, user_has_just_regist
             'user':user,
             'user_email':new_email,
             'verification_url_param':verification_url_param,
+            'next': redirect_with_next('', request),
         })
         template = 'cosinnus/mail/user_email_verification%s.html' % ('_onchange' if not user_has_just_registered else '')
+        
         data.update({
-            'content': render_to_string(template, data)
+            'content': render_to_string(template, data),
         })
         subj_user = render_to_string('cosinnus/mail/user_email_verification%s_subj.txt' % ('_onchange' if not user_has_just_registered else ''), data)
         send_mail_or_fail_threaded(new_email, subj_user, None, data)

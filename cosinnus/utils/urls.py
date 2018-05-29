@@ -100,3 +100,21 @@ def iriToUri(iri):
         part.encode('idna') if parti==1 else urlEncodeNonAscii(part.encode('utf-8'))
         for parti, part in enumerate(parts)
     )
+
+def redirect_next_or(request_with_next, alternate_url):
+    """ Checks the given request if it contains a ?next= param, and if that is a safe url returns it.
+        Otherwise, returns `alternate_url` """
+    next_param = request_with_next.GET.get('next', None)
+    if not next_param or not is_safe_url(next_param, request_with_next.get_host()):
+        return alternate_url
+    return next_param
+
+def redirect_with_next(url, request_with_next):
+    """ Checks the given request if it contains a ?next= param, and if that is a safe url,
+        attaches to the given url a "?next=<next_url>" fragment.
+        Otherwise, returns `url` """
+    next_param = request_with_next.GET.get('next', None)
+    if not next_param or not is_safe_url(next_param, request_with_next.get_host()):
+        return url
+    return '%s?next=%s' % (url, next_param) 
+    
