@@ -857,6 +857,10 @@ module.exports = ContentControlView.extend({
 	            	if (searchReason == 'manual-search') {
 	            		self.triggerMobileMapView();
 	            	}
+	            	// scroll tile list to top on manual searches
+	            	if (searchReason == 'manual-search' || searchReason == 'reset-filters-search') {
+	            		$('.tile-contents').scrollTop(0);
+	            	}
 	            }
 	            
 	            self.currentSearchHttpRequest = null;
