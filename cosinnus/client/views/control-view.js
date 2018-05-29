@@ -231,7 +231,9 @@ module.exports = ContentControlView.extend({
         // we cheat this in because we know the search will do it anyways in a millisecond,
         // but without this it won't be in time for the render() of the controls
         this.state.resultsStale = false;
-        this.paginationControlView.render();
+        if (this.paginationControlView) {
+        	this.paginationControlView.render();
+        }
     },
     
     paginationForwardClicked: function (event) {
@@ -622,7 +624,9 @@ module.exports = ContentControlView.extend({
             } else {
                 // re-render controls so the manual search button will be enabled
                 if (!staleBefore) {
-                    this.paginationControlView.render();
+                	if (this.paginationControlView) {
+                		this.paginationControlView.render();
+                	}
                 }
             }
         }
@@ -852,7 +856,9 @@ module.exports = ContentControlView.extend({
                     }
                     self.renderActiveFilters();
                     // refresh pagination controls
-                    self.paginationControlView.render();
+                    if (self.paginationControlView) {
+                    	self.paginationControlView.render();
+                    }
                     // if we have done a manual search, set the view to map!
                     if (searchReason == 'manual-search') {
                         self.triggerMobileMapView();
