@@ -26,7 +26,7 @@
         <link href="{% static 'css/vendor/spinkit-double-bounce.css' %}" rel="stylesheet">
         <link href="{% static 'css/vendor/select2.css' %}" rel="stylesheet">
         
-        {% if True %}
+        {% if SETTINGS.DEBUG %}
         <link rel="stylesheet/less" href="{% static "less/cosinnus.less" %}">
         <script src="{% static "js/vendor/less.min.js" %}"></script>
         {% else %}
