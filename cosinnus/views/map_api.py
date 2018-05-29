@@ -142,7 +142,7 @@ def map_search_endpoint(request, filter_group_id=None):
     if item_id:
         item_id = str(item_id)
         if not any([res['id'] == item_id for res in results]):
-            item_result = get_searchresult_by_itemid(item_id)
+            item_result = get_searchresult_by_itemid(item_id, request.user)
             if item_result:
                 results = [HaystackMapResult(item_result)] + results[:-1]
         
@@ -225,11 +225,11 @@ def map_detail_endpoint(request):
     }
     return JsonResponse(data)
 
-def get_searchresult_by_itemid(itemid):
+def get_searchresult_by_itemid(itemid, user=None):
     portal, model_type, slug = itemid.split('.')
-    return get_searchresult_by_args(portal, model_type, slug)
+    return get_searchresult_by_args(portal, model_type, slug, user=user)
 
-def get_searchresult_by_args(portal, model_type, slug):
+def get_searchresult_by_args(portal, model_type, slug, user=None):
     """ Retrieves a HaystackMapResult just as the API would, for a given shortid
         in the form of `<classid>.<instanceid>` (see `itemid_from_searchresult()`). """
         
@@ -238,6 +238,9 @@ def get_searchresult_by_args(portal, model_type, slug):
         sqs = SearchQuerySet().models(model).filter_and(slug=slug)
     else:
         sqs = SearchQuerySet().models(model).filter_and(portal=portal, slug=slug)
+    if user:
+        # filter for read access by this user
+        sqs = filter_searchqueryset_for_read_access(sqs, user)
     if len(sqs) != 1:
         logger.warn('Got a DetailMap request where %d indexed results were found!' % len(sqs), extra={
             'portal': portal,
