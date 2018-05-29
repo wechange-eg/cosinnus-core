@@ -358,6 +358,7 @@ class DetailedEventResult(DetailedMapResult):
     fields = copy(DetailedMapResult.fields)
     fields.update({
         'participants': [],
+        'participant_count': 0
     })
     
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
@@ -372,7 +373,8 @@ class DetailedEventResult(DetailedMapResult):
         sqs = filter_searchqueryset_for_read_access(sqs, user)
         sqs = sqs.order_by('title')
         kwargs.update({
-            'participants': [HaystackUserMapCard(result) for result in sqs]
+            'participants': [HaystackUserMapCard(result) for result in sqs],
+            'participant_count': haystack_result.participant_count,
         })
         return super(DetailedEventResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 

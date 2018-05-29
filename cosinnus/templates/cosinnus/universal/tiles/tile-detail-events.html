@@ -40,12 +40,12 @@
 
 {% block related_content %}
 
-    {% if participants|length > 0 %}
+    {% if participant_count > 0 %}
         <div class="tile-section tile-section-divided">
             <div class="subheading">
                 <i class="fa fa-user"></i>
                 {# Translators: __INCLUDE_JS_PO__ #}
-                {% trans "Participants" %} ({{ participants|length }})
+                {% trans "Participants" %} ({{ participant_count }})
             </div>
         </div>
         <div class="tile-section">
@@ -56,6 +56,20 @@
                     </div>
                 {% endfor %}
             </div>
+            {% if participant_count - participants|length > 0 %}
+                <div class="">
+                    <i>
+                        +{{ participant_count - participants|length }} 
+                        {% if participant_count - participants|length > 1 %}
+		                    {# Translators: __INCLUDE_JS_PO__ #}
+		                    {% trans "Hidden Users" %}
+		                {% else %}
+		                    {# Translators: __INCLUDE_JS_PO__ #}
+                            {% trans "Hidden User" %}
+		                {% endif %}
+                    </i>
+                </div>
+            {% endif %}
         </div>
     {% endif %}
     
