@@ -7,8 +7,8 @@ var util = require('lib/util');
 
 module.exports = ContentControlView.extend({
 
-	template: require('map/map'),
-	
+    template: require('map/map'),
+    
     layers: {
         street: {
             url: (util.protocol() === 'http:' ?
@@ -56,78 +56,78 @@ module.exports = ContentControlView.extend({
     
     // will be set to self.options during initialization
     defaults: {
-    	// is the window in full-screen mode (instead of inside a widget or similar)
-    	fullscreen: true,
-    	
-    	// is this view shown together with the map view as a 50% split screen?
-    	splitscreen: false,
-    	
-    	// will a popup be shown when a map marker is clicked?
-    	enablePopup: false,
-    	
-    	// will clicking on a marker cause its result to be selected?
-    	enableDetailSelection: true,
-    	
-    	// shall we cluster close markers together
-    	clusteringEnabled: false,
-    	clusterZoomThreshold: 5,
-    	maxClusterRadius: 15,
-    	
-    	// if a marker popup is open, but the search results change and the marker would be removed,
-    	// should we still keep it and the popup?
-    	keepOpenMarkersAfterResultChange: false, 
-    	
-    	// added percentage to visible map area
-    	// the resulting area is actually sent as coords to the search API 
-    	latLngBuffer: 0.01,
-    	
-    	resultMarkerSizes: {
-    		width: 14,
-    		height: 14,
-    		widthLarge: 28,
-    		heightLarge: 37,
-    		widthStacked: 23,
-    		heightStacked: 23,
-    		widthBase: 28,
-    		heightBase: 37,
-    	},
-    	
-    	// calculated dynamically depending on zoom, in `handleViewportChange()`
-    	resultMarkerClusterDistance: {
-    		x: 0,
-    		y: 0,
-    		perZoom: 0, // hardcoded function of px per zoom level, if you want to offset in px for current zoom
-    	},
-    	
-    	MARKER_NUMBER_OF_LARGE_MARKERS: 8, // this many of the most relevant results become large markers
-    	
-    	MARKER_CLUSTER_RADIUS_LIMIT: 0.85, // cluster radius multiplier: modifier for how aggressively the clusters should pull in markers
-    	MARKER_STACK_PX_OFFSET_PER_CLUSTER_LEVEL: 12, // offset in px for clustered stack-makers per level
-    	MARKER_STACK_PX_OFFSET_BASE: 8, // additional offset in px of first clustered stack-marker (level 1) from the base marker
-    	
+        // is the window in full-screen mode (instead of inside a widget or similar)
+        fullscreen: true,
+        
+        // is this view shown together with the map view as a 50% split screen?
+        splitscreen: false,
+        
+        // will a popup be shown when a map marker is clicked?
+        enablePopup: false,
+        
+        // will clicking on a marker cause its result to be selected?
+        enableDetailSelection: true,
+        
+        // shall we cluster close markers together
+        clusteringEnabled: false,
+        clusterZoomThreshold: 5,
+        maxClusterRadius: 15,
+        
+        // if a marker popup is open, but the search results change and the marker would be removed,
+        // should we still keep it and the popup?
+        keepOpenMarkersAfterResultChange: false, 
+        
+        // added percentage to visible map area
+        // the resulting area is actually sent as coords to the search API 
+        latLngBuffer: 0.01,
+        
+        resultMarkerSizes: {
+            width: 14,
+            height: 14,
+            widthLarge: 28,
+            heightLarge: 37,
+            widthStacked: 23,
+            heightStacked: 23,
+            widthBase: 28,
+            heightBase: 37,
+        },
+        
+        // calculated dynamically depending on zoom, in `handleViewportChange()`
+        resultMarkerClusterDistance: {
+            x: 0,
+            y: 0,
+            perZoom: 0, // hardcoded function of px per zoom level, if you want to offset in px for current zoom
+        },
+        
+        MARKER_NUMBER_OF_LARGE_MARKERS: 8, // this many of the most relevant results become large markers
+        
+        MARKER_CLUSTER_RADIUS_LIMIT: 0.85, // cluster radius multiplier: modifier for how aggressively the clusters should pull in markers
+        MARKER_STACK_PX_OFFSET_PER_CLUSTER_LEVEL: 12, // offset in px for clustered stack-makers per level
+        MARKER_STACK_PX_OFFSET_BASE: 8, // additional offset in px of first clustered stack-marker (level 1) from the base marker
+        
         zoom: 7,
         location: [
             52.5233,
             13.4138
         ],
         // the current layer option as string
-	    layer: 'street',
-	    
-	    state: {
-	        // the curren Leaflet layer object
-	        currentLayer: null,
+        layer: 'street',
+        
+        state: {
+            // the curren Leaflet layer object
+            currentLayer: null,
 
-	        // are we currently seeing clustered markers?
-	        currentlyClustering: false,
-	        // the current open spider cluster handle, or null if no spider open
-	        currentSpiderfied: null,
-	        
-	        // fallback default coordinates when navigated without loc params
-	        north: util.ifundef(COSINNUS_MAP_OPTIONS.default_coordinates.ne_lat, 55.78), 
-	        east: util.ifundef(COSINNUS_MAP_OPTIONS.default_coordinates.ne_lon, 23.02),
-	        south: util.ifundef(COSINNUS_MAP_OPTIONS.default_coordinates.sw_lat, 49.00),
-	        west: util.ifundef(COSINNUS_MAP_OPTIONS.default_coordinates.sw_lon, 3.80),
-	    }
+            // are we currently seeing clustered markers?
+            currentlyClustering: false,
+            // the current open spider cluster handle, or null if no spider open
+            currentSpiderfied: null,
+            
+            // fallback default coordinates when navigated without loc params
+            north: util.ifundef(COSINNUS_MAP_OPTIONS.default_coordinates.ne_lat, 55.78), 
+            east: util.ifundef(COSINNUS_MAP_OPTIONS.default_coordinates.ne_lon, 23.02),
+            south: util.ifundef(COSINNUS_MAP_OPTIONS.default_coordinates.sw_lat, 49.00),
+            west: util.ifundef(COSINNUS_MAP_OPTIONS.default_coordinates.sw_lon, 3.80),
+        }
     },
     
     initialize: function (options, app, collection) {
@@ -146,35 +146,35 @@ module.exports = ContentControlView.extend({
         
         // result events
         self.collection.on({
-    	   'add' : self.thisContext(self.markerAdd),
-    	   'change:hovered': self.thisContext(self.markerChangeHovered),
-    	   'change:selected': self.thisContext(self.markerChangeSelected),
-    	   'change': self.thisContext(self.markerUpdate),
-    	   'remove': self.thisContext(self.markerRemove),
-    	   'reset': self.thisContext(self.markersReset),
-    	});
+           'add' : self.thisContext(self.markerAdd),
+           'change:hovered': self.thisContext(self.markerChangeHovered),
+           'change:selected': self.thisContext(self.markerChangeSelected),
+           'change': self.thisContext(self.markerUpdate),
+           'remove': self.thisContext(self.markerRemove),
+           'reset': self.thisContext(self.markersReset),
+        });
     },
 
     render: function () {
-    	var self = this;
+        var self = this;
         ContentControlView.prototype.render.call(self);
-    	self.renderMap();
-    	return self;
+        self.renderMap();
+        return self;
     },
     
     afterRender: function () {
         var self = this;
         self.mapLayerButtonsView = new MapLayerButtonsView({
-        	el: self.$el.find('.map-layers-buttons'),
-        	layer: self.options.layer,
-        	mapView: self
+            el: self.$el.find('.map-layers-buttons'),
+            layer: self.options.layer,
+            mapView: self
         }).render();
     },
     
     // extended from content-control-view.js
     applyUrlSearchParameters: function (urlParams) {
-    	util.log('map-view.js: url params on init: ')
-    	util.log(urlParams)
+        util.log('map-view.js: url params on init: ')
+        util.log(urlParams)
         _.extend(this.state, {
             north: util.ifundef(urlParams.ne_lat, this.state.north),
             east: util.ifundef(urlParams.ne_lon, this.state.east),
@@ -187,14 +187,14 @@ module.exports = ContentControlView.extend({
     
     // extended from content-control-view.js
     contributeToSearchParameters: function(forAPI) {
-    	var padded = forAPI;
+        var padded = forAPI;
         var searchParams = {
             ne_lat: padded ? this.state.paddedNorth : this.state.north,
             ne_lon: padded ? this.state.paddedEast : this.state.east,
             sw_lat: padded ? this.state.paddedSouth : this.state.south,
             sw_lon: padded ? this.state.paddedWest : this.state.west,
         };
-    	return searchParams
+        return searchParams
     },
     
     
@@ -209,31 +209,31 @@ module.exports = ContentControlView.extend({
      * @param clusterCoords: (optional) {lat: int, lon: int} if result is in a cluster, the coords (rank will be added as offset)
      */
     markerAdd: function(result, isLargeMarker, clusterLevel, clusterCoords) {
-    	var self = this;
-    	
-    	if (!result.get('lat') || !result.get('lon')) {
-    		// if the result has no location, the map cannot handle it. 
-    		util.log('Cancelled adding a marker for a result with no location.')
-    		return;
-    	}
-    	
-    	// adding a marker that is already there? impossibru! but best be sure.
-    	if (result.id in this.markers) {
-    		this.markerRemove(result);
-    	}
-    	
-    	// for clustered markers, every marker but the base marker becomes a stacked marker.
-    	var markerIcon = this.getMarkerIconForType(result.get('type'), isLargeMarker, clusterLevel > 0, clusterLevel == 0);
-    	var coords = clusterCoords ? clusterCoords : [result.get('lat'), result.get('lon')];
-    	var isPointedMarker = isLargeMarker || typeof clusterLevel !== 'undefined' || clusterLevel == 0;
-    	var clusterOffset = 0;
-    	
-    	// add clusterLevel as offset
-    	if (typeof clusterLevel !== 'undefined' && clusterLevel > 0) {
-    		clusterOffset = this.options.MARKER_STACK_PX_OFFSET_BASE + (this.options.MARKER_STACK_PX_OFFSET_PER_CLUSTER_LEVEL * clusterLevel);
-    	}
-    	//util.log('adding marker at coords ' + JSON.stringify(coords))
-    	
+        var self = this;
+        
+        if (!result.get('lat') || !result.get('lon')) {
+            // if the result has no location, the map cannot handle it. 
+            util.log('Cancelled adding a marker for a result with no location.')
+            return;
+        }
+        
+        // adding a marker that is already there? impossibru! but best be sure.
+        if (result.id in this.markers) {
+            this.markerRemove(result);
+        }
+        
+        // for clustered markers, every marker but the base marker becomes a stacked marker.
+        var markerIcon = this.getMarkerIconForType(result.get('type'), isLargeMarker, clusterLevel > 0, clusterLevel == 0);
+        var coords = clusterCoords ? clusterCoords : [result.get('lat'), result.get('lon')];
+        var isPointedMarker = isLargeMarker || typeof clusterLevel !== 'undefined' || clusterLevel == 0;
+        var clusterOffset = 0;
+        
+        // add clusterLevel as offset
+        if (typeof clusterLevel !== 'undefined' && clusterLevel > 0) {
+            clusterOffset = this.options.MARKER_STACK_PX_OFFSET_BASE + (this.options.MARKER_STACK_PX_OFFSET_PER_CLUSTER_LEVEL * clusterLevel);
+        }
+        //util.log('adding marker at coords ' + JSON.stringify(coords))
+        
         var marker = L.marker(coords, {
             icon: L.divIcon({
                 iconSize: [markerIcon.iconWidth, markerIcon.iconHeight],
@@ -246,53 +246,53 @@ module.exports = ContentControlView.extend({
         });
 
         
-    	// bind click/hover events 
-    	if (this.options.enablePopup) {
-    		marker.bindPopup(popupTemplate.render({
-    			imageURL: result.get('imageUrl'),
-    			title: result.get('title'),
-    			url: result.get('url'),
-    			address: result.get('address'),
-    			description: result.get('description')
-    		}));
-    	} 
-    	if (this.options.enableDetailSelection) {
-    		marker.on('click', function(){
-    			self.App.controlView.onResultLinkClicked(null, result.id);
-    		});
-    	}
-    	marker.on('mouseover', function(){
-			self.App.controlView.setHoveredResult(result);
-		});
-    	marker.on('mouseout', function(){
-			self.App.controlView.setHoveredResult(null);
-		});
-    	
+        // bind click/hover events 
+        if (this.options.enablePopup) {
+            marker.bindPopup(popupTemplate.render({
+                imageURL: result.get('imageUrl'),
+                title: result.get('title'),
+                url: result.get('url'),
+                address: result.get('address'),
+                description: result.get('description')
+            }));
+        } 
+        if (this.options.enableDetailSelection) {
+            marker.on('click', function(){
+                self.App.controlView.onResultLinkClicked(null, result.id);
+            });
+        }
+        marker.on('mouseover', function(){
+            self.App.controlView.setHoveredResult(result);
+        });
+        marker.on('mouseout', function(){
+            self.App.controlView.setHoveredResult(null);
+        });
+        
         
         if (!this.options.keepOpenMarkersAfterResultChange || (this.markerNotPopup(marker) && this.markerNotSpiderfied(marker))) {
-	        if (this.state.currentlyClustering) {
-	            this.clusteredMarkers.addLayer(marker);
-	        } else {
-	            marker.addTo(this.leaflet);
-	        }
-	        this.markers[result.id] = marker;
+            if (this.state.currentlyClustering) {
+                this.clusteredMarkers.addLayer(marker);
+            } else {
+                marker.addTo(this.leaflet);
+            }
+            this.markers[result.id] = marker;
         }
     },
     
 
     markerChangeHovered: function(result) {
-    	if (result.id in this.markers) {
-    		var marker = this.markers[result.id];
-    		$(marker._icon).toggleClass('marker-hovered', result.get('hovered'));
-    	}
+        if (result.id in this.markers) {
+            var marker = this.markers[result.id];
+            $(marker._icon).toggleClass('marker-hovered', result.get('hovered'));
+        }
     },
     
 
     markerChangeSelected: function(result) {
-    	if (result.id in this.markers) {
-    		var marker = this.markers[result.id];
-    		$(marker._icon).toggleClass('marker-selected', result.get('selected'));
-    	}
+        if (result.id in this.markers) {
+            var marker = this.markers[result.id];
+            $(marker._icon).toggleClass('marker-selected', result.get('selected'));
+        }
     },
     
     /**
@@ -300,127 +300,127 @@ module.exports = ContentControlView.extend({
      * result collections gets exchanged (which triggers `markersReset()`)
      */
     markerUpdate: function(result, what) {
-    	// don't use this trigger when only hovered/selected state was changed! - they have their own handlers
-    	var attrs = result.changedAttributes();
-    	if (attrs && ('selected' in attrs || 'hovered' in attrs)) {
-    		return;
-    	}
-    	util.log('map-view.js: TODO: actually *update* the marker and dont just remove/add it!')
-    	if (!result.selected) {
-    		this.markerRemove(result);
-    		this.markerAdd(result);
-    	} else {
-    		util.log('map-view.js: TODO:: was ordered to remove a marker that is currently selected. NOT DOING ANYTHING RN!')
-    	}
+        // don't use this trigger when only hovered/selected state was changed! - they have their own handlers
+        var attrs = result.changedAttributes();
+        if (attrs && ('selected' in attrs || 'hovered' in attrs)) {
+            return;
+        }
+        util.log('map-view.js: TODO: actually *update* the marker and dont just remove/add it!')
+        if (!result.selected) {
+            this.markerRemove(result);
+            this.markerAdd(result);
+        } else {
+            util.log('map-view.js: TODO:: was ordered to remove a marker that is currently selected. NOT DOING ANYTHING RN!')
+        }
     },
     
     /** Remove a leaflet marker from the map. 
      *  Acts as handler for model Result removal from self.collection */
     markerRemove: function(result) {
-    	if (result.id in this.markers) {
-    		var marker = this.markers[result.id];
-    		
-    		if (this.state.currentlyClustering) {
-    			this.clusteredMarkers.removeLayer(marker);
-    		} else {
-    			this.leaflet.removeLayer(marker);
-    		}
-    		delete this.markers[result.id];
-    		//util.log('Removed marker at ' + result.get('lat') + ', ' + result.get('lon'));
-    	}
+        if (result.id in this.markers) {
+            var marker = this.markers[result.id];
+            
+            if (this.state.currentlyClustering) {
+                this.clusteredMarkers.removeLayer(marker);
+            } else {
+                this.leaflet.removeLayer(marker);
+            }
+            delete this.markers[result.id];
+            //util.log('Removed marker at ' + result.get('lat') + ', ' + result.get('lon'));
+        }
     },
     
     /** Handler for when the entire collection changes */
     markersReset: function(resultCollection, options) {
-    	var self = this;
-    	_.each(options.previousModels, function(result){
-    		self.markerRemove(result);
-    	});
-    	
-    	/**
-    	 * Cluster results by maximum radius
-    	 * [
-    	 * 	   { // cluster
-    	 * 		   loc: {lat: 0, lon: 0},
-    	 *         items: [ <result>, ...]
-    	 * 	   },
-    	 * 	   ...
-    	 * ]
-    	 */
-    	
-    	var clusters = [];
-    	//_.each(resultCollection.models, function(result){
-		for (var i=0; i < resultCollection.models.length; i++) {
-			var result = resultCollection.models[i];
-			if (!result.get('lat') || !result.get('lon')) {
-				// results without locations are ignored
-				continue;
-			}
-			
-    		//_.each(resultCollection.models, function(cluster){
-    		for (var j=0; j < clusters.length; j++) {
-    			var cluster = clusters[j];
-    			// calculate distance from this result to each cluster
-				var distx = Math.abs(cluster['loc']['lon'] - result.get('lon'));
-				var disty = Math.abs(cluster['loc']['lat'] - result.get('lat'));
-				if (distx < self.options.resultMarkerClusterDistance['x'] && disty < self.options.resultMarkerClusterDistance['y']) {
-					// result lies within radius of cluster
-					cluster['items'].push(result);
-					result = null;
-					break;
-				} 
-        	};
-        	// result didn't lie within radius of cluster, make a new one
-        	if (result != null) {
-        		clusters.push({
-        			loc: {
-        				lat: result.get('lat'),
-        				lon: result.get('lon')
-        			},
-        			items: [result]
-        		});
-        	}
-    	};
-    	
-    	// remove all single-result clusters and add their results into a single list
-    	var singleResults = [];
-    	for (var k=clusters.length-1; k >= 0; k--) {
-			var cluster = clusters[k];
-			if (cluster['items'].length == 1) {
-				singleResults.push(cluster['items'][0]);
-				clusters.splice(k, 1);
-			} else {
-				// sort the items inside a cluster, most important last (highest in stack)
-				cluster['items'].sort(function(a, b) {
-		    	    return a.get('relevance') - b.get('relevance');
-		    	});
-			}
-    	}
-    	
-    	// all cluster bases are large markers
-    	var remainingLargeMarkers = self.options.MARKER_NUMBER_OF_LARGE_MARKERS;
-    	for (var i=0; i < clusters.length; i++) {
-			var cluster = clusters[i];
-			// for each cluster, add all results in a stacking offset
-			for (var j=cluster['items'].length-1; j >= 0; j--) {
-				var item = cluster['items'][j];
-				self.markerAdd(item, false, j, cluster['loc']);
-	    	}
-			remainingLargeMarkers -= 1;
-    	}
-    	
-    	// sort (by relevance) and add the results that aren't in a cluster
-    	singleResults.sort(function(a, b) {
-    	    return b.get('relevance') - a.get('relevance');
-    	});
-    	_.each(singleResults, function(result){
-    		if (remainingLargeMarkers > 0) {
-    			self.markerAdd(result, true);
-    			remainingLargeMarkers -= 1;
-    		} else {
-    			self.markerAdd(result);
-    		}
-    	});
+        var self = this;
+        _.each(options.previousModels, function(result){
+            self.markerRemove(result);
+        });
+        
+        /**
+         * Cluster results by maximum radius
+         * [
+         *        { // cluster
+         *            loc: {lat: 0, lon: 0},
+         *         items: [ <result>, ...]
+         *        },
+         *        ...
+         * ]
+         */
+        
+        var clusters = [];
+        //_.each(resultCollection.models, function(result){
+        for (var i=0; i < resultCollection.models.length; i++) {
+            var result = resultCollection.models[i];
+            if (!result.get('lat') || !result.get('lon')) {
+                // results without locations are ignored
+                continue;
+            }
+            
+            //_.each(resultCollection.models, function(cluster){
+            for (var j=0; j < clusters.length; j++) {
+                var cluster = clusters[j];
+                // calculate distance from this result to each cluster
+                var distx = Math.abs(cluster['loc']['lon'] - result.get('lon'));
+                var disty = Math.abs(cluster['loc']['lat'] - result.get('lat'));
+                if (distx < self.options.resultMarkerClusterDistance['x'] && disty < self.options.resultMarkerClusterDistance['y']) {
+                    // result lies within radius of cluster
+                    cluster['items'].push(result);
+                    result = null;
+                    break;
+                } 
+            };
+            // result didn't lie within radius of cluster, make a new one
+            if (result != null) {
+                clusters.push({
+                    loc: {
+                        lat: result.get('lat'),
+                        lon: result.get('lon')
+                    },
+                    items: [result]
+                });
+            }
+        };
+        
+        // remove all single-result clusters and add their results into a single list
+        var singleResults = [];
+        for (var k=clusters.length-1; k >= 0; k--) {
+            var cluster = clusters[k];
+            if (cluster['items'].length == 1) {
+                singleResults.push(cluster['items'][0]);
+                clusters.splice(k, 1);
+            } else {
+                // sort the items inside a cluster, most important last (highest in stack)
+                cluster['items'].sort(function(a, b) {
+                    return a.get('relevance') - b.get('relevance');
+                });
+            }
+        }
+        
+        // all cluster bases are large markers
+        var remainingLargeMarkers = self.options.MARKER_NUMBER_OF_LARGE_MARKERS;
+        for (var i=0; i < clusters.length; i++) {
+            var cluster = clusters[i];
+            // for each cluster, add all results in a stacking offset
+            for (var j=cluster['items'].length-1; j >= 0; j--) {
+                var item = cluster['items'][j];
+                self.markerAdd(item, false, j, cluster['loc']);
+            }
+            remainingLargeMarkers -= 1;
+        }
+        
+        // sort (by relevance) and add the results that aren't in a cluster
+        singleResults.sort(function(a, b) {
+            return b.get('relevance') - a.get('relevance');
+        });
+        _.each(singleResults, function(result){
+            if (remainingLargeMarkers > 0) {
+                self.markerAdd(result, true);
+                remainingLargeMarkers -= 1;
+            } else {
+                self.markerAdd(result);
+            }
+        });
     },
     
 
@@ -428,47 +428,47 @@ module.exports = ContentControlView.extend({
     // -------
 
     renderMap: function () {
-    	var self = this;
-    	
-    	util.log('++++++ map-view.js renderMap called! This should only happen once at init! +++++++++++++++++++')
-    	
+        var self = this;
+        
+        util.log('++++++ map-view.js renderMap called! This should only happen once at init! +++++++++++++++++++')
+        
         this.leaflet = L.map('map-container')
             .setView(this.options.location, this.options.zoom);
         this.setLayer(this.options.layer);
         
         if (self.geoRegionUrl) {
-        	$.ajax({
-	        	dataType: "json",
-	        	url: self.geoRegionUrl,
-	        	success: function(data) {
-	        		// style see https://leafletjs.com/reference-1.3.0.html#path-option
-	        		var district_boundary = new L.geoJson(null, {
-	            	    style: function (feature) {
-	            	        return {
-	        	        		width: 1,
-	        	        		weight: 0.5,
-	        	        		fillOpacity: 0.035,
-		        			};
-	            	    }
-	            	});
-	            	district_boundary.addTo(self.leaflet);
-	        	    $(data.features).each(function(key, data) {
-	        	        district_boundary.addData(data);
-	        	    });
-	        	}
-        	}).error(function() {});
-        	
+            $.ajax({
+                dataType: "json",
+                url: self.geoRegionUrl,
+                success: function(data) {
+                    // style see https://leafletjs.com/reference-1.3.0.html#path-option
+                    var district_boundary = new L.geoJson(null, {
+                        style: function (feature) {
+                            return {
+                                width: 1,
+                                weight: 0.5,
+                                fillOpacity: 0.035,
+                            };
+                        }
+                    });
+                    district_boundary.addTo(self.leaflet);
+                    $(data.features).each(function(key, data) {
+                        district_boundary.addData(data);
+                    });
+                }
+            }).error(function() {});
+            
         }
         
         
         if (this.options.clusteringEnabled) {
-        	// Setup the cluster layer
-        	this.clusteredMarkers = L.markerClusterGroup({
-        		maxClusterRadius: this.options.maxClusterRadius
-        	});
-        	this.clusteredMarkers.on('spiderfied', this.handleSpiderfied, this);
-        	this.leaflet.addLayer(this.clusteredMarkers);
-        	this.setClusterState();
+            // Setup the cluster layer
+            this.clusteredMarkers = L.markerClusterGroup({
+                maxClusterRadius: this.options.maxClusterRadius
+            });
+            this.clusteredMarkers.on('spiderfied', this.handleSpiderfied, this);
+            this.leaflet.addLayer(this.clusteredMarkers);
+            this.setClusterState();
         }
         
         this.fitBounds();
@@ -520,48 +520,48 @@ module.exports = ContentControlView.extend({
     },
 
     setClusterState: function () {
-    	if (this.options.clusteringEnabled) {
-    		// Set clustering state: cluster only when zoomed in enough.
-    		var zoom = this.leaflet.getZoom();
-    		this.state.currentlyClustering = zoom > this.options.clusterZoomThreshold;
-    	}
+        if (this.options.clusteringEnabled) {
+            // Set clustering state: cluster only when zoomed in enough.
+            var zoom = this.leaflet.getZoom();
+            this.state.currentlyClustering = zoom > this.options.clusterZoomThreshold;
+        }
     },
     
     /** Gets a dict of {iconUrl: <str>, iconWidth: <int>, iconHeight: <int>}
      *  for a given type corresponding to model Result.type. */
     getMarkerIconForType: function(resultType, isLargeMarker, isStackedMarker, isBaseMarker) {
-    	var markerIcon;
-    	// if custom marker icons are supplied, use those, else default ones
-    	// custom marker icon ignore large-sizedness
+        var markerIcon;
+        // if custom marker icons are supplied, use those, else default ones
+        // custom marker icon ignore large-sizedness
         if (this.options.markerIcons && this.options.markerIcons[resultType]) {
             var iconSettings = this.options.markerIcons[resultType];
             markerIcon = {
-        		iconWidth: iconSettings.width,
-        		iconHeight: iconSettings.height
+                iconWidth: iconSettings.width,
+                iconHeight: iconSettings.height
             };
         } else {
-        	var suffix = '';
-        	var className = 'placemark';
-    		if (isBaseMarker) {
-        		suffix = 'Base';
-        		className += ' l';
-        	} else if (isStackedMarker) {
-        		suffix = 'Stacked';
-        		className += ' m';
-        	} else if (isLargeMarker) {
-        		suffix = 'Large';
-        		className += ' l icon';
-        	} else {
-        		className += ' s';
-        	}
-    		// type of the marker
-        	className += ' ' + resultType;
-        	
-        	markerIcon = {
-	            iconWidth: this.options.resultMarkerSizes['width' + suffix],
-	            iconHeight: this.options.resultMarkerSizes['height' + suffix],
-	            className: className
-        	};
+            var suffix = '';
+            var className = 'placemark';
+            if (isBaseMarker) {
+                suffix = 'Base';
+                className += ' l';
+            } else if (isStackedMarker) {
+                suffix = 'Stacked';
+                className += ' m';
+            } else if (isLargeMarker) {
+                suffix = 'Large';
+                className += ' l icon';
+            } else {
+                className += ' s';
+            }
+            // type of the marker
+            className += ' ' + resultType;
+            
+            markerIcon = {
+                iconWidth: this.options.resultMarkerSizes['width' + suffix],
+                iconHeight: this.options.resultMarkerSizes['height' + suffix],
+                className: className
+            };
         }
         return markerIcon;
     },
@@ -593,9 +593,9 @@ module.exports = ContentControlView.extend({
         if (self.markers) {
             _(self.markers).each(function (marker) {
 
-            	if (!self.options.keepOpenMarkersAfterResultChange || (self.markerNotPopup(marker) && self.markerNotSpiderfied(marker))) {
-            		self.removeMarker(marker);
-            	}
+                if (!self.options.keepOpenMarkersAfterResultChange || (self.markerNotPopup(marker) && self.markerNotSpiderfied(marker))) {
+                    self.removeMarker(marker);
+                }
             });
         }
 
@@ -605,13 +605,13 @@ module.exports = ContentControlView.extend({
         // Ensure popup and spiderfied markers are in the markers array;
         // even when they aren't included in the latest results.
         if (self.options.keepOpenMarkersAfterResultChange) {
-	        if (self.popup) {
-	            self.markers.push(self.popup._source);
-	        } else if (self.state.currentSpiderfied) {
-	            _(self.state.currentSpiderfied.getAllChildMarkers()).each(function (m) {
-	                self.markers.push(m);
-	            });
-	        }
+            if (self.popup) {
+                self.markers.push(self.popup._source);
+            } else if (self.state.currentSpiderfied) {
+                _(self.state.currentSpiderfied.getAllChildMarkers()).each(function (m) {
+                    self.markers.push(m);
+                });
+            }
         }
 
         // Add the individual markers.
@@ -641,15 +641,15 @@ module.exports = ContentControlView.extend({
 
     // Handle change bounds (from URL).
     fitBounds: function () {
-    	if (this.leaflet) {
-    		util.log('map-view.js: fitBounds called')
-    		this.leaflet.fitBounds(L.latLngBounds(
-    				L.latLng(this.state.south, this.state.west),
-    				L.latLng(this.state.north, this.state.east)
-    		));
-    	} else {
-    		util.log('map-view.js: fitBounds fizzled')
-    	}
+        if (this.leaflet) {
+            util.log('map-view.js: fitBounds called')
+            this.leaflet.fitBounds(L.latLngBounds(
+                    L.latLng(this.state.south, this.state.west),
+                    L.latLng(this.state.north, this.state.east)
+            ));
+        } else {
+            util.log('map-view.js: fitBounds fizzled')
+        }
     },
 
     handlePopup: function (event) {

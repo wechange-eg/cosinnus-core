@@ -3,58 +3,58 @@
 {% if typeFiltersActive or topicFiltersActive or q %}
     <div class="map-controls-active-filter-frame">
 
-		{% if typeFiltersActive %}
-		    <div class="active-filters active-filters-type">
-		        <span class="active-filters-inner">
-					{% for filter_type, available in availableFilters %}
-			            {% if available and activeFilters[filter_type] %}
-			                <span class="apply-color-{{ filter_type }}">
-				                {% if filter_type == "people" %}
-				                    <i class="fa fa-user"></i>
-				                {% elif filter_type == "events" %}
-				                    <i class="fa fa-calendar"></i>
-				                {% elif filter_type == "projects" %}
-				                    <i class="fa fa-group"></i>
-				                {% elif filter_type == "groups" %}
-				                    <i class="fa fa-sitemap"></i>
-				                {% endif %}
-			                </span>
-			            {% endif %}
-			        {% endfor %}
-		        </span>
-		        <i class="fa fa-close clickable-button reset-type-filters"></i>
-		    </div>
-		{% endif %}
-		
-		{% if topicFiltersActive %}
-		    <div class="active-filters active-filters-topics">
-		        <span class="active-filters-inner">
-			        <span class="caps">
-			            {# Translators: __INCLUDE_JS_PO__ #}
-			            {% trans "Topics" %}:
-			        </span>
-			        {% for topic_id in activeTopicIds %}
-			            {% set outer_loop = loop %}
-			            {% for tid, topic in allTopics %}
-			                {% if topic_id == tid %}
-			                    <span>{{ topic }}{% if not outer_loop.last %}, {% endif %}</span>
-			                {% endif %}
-			            {% endfor %}
-			        {% endfor %}
-			    </span>
-		        <i class="fa fa-close clickable-button reset-topic-filters"></i>
-		    </div>
-		{% endif %}
-		
-		{% if q %}
-		    <div class="active-filters active-filters-q">
-		        <span class="active-filters-inner">
-		            "{{ q }}"
-		        </span>
-		        <i class="fa fa-close clickable-button reset-q"></i>
-		    </div>
-		{% endif %}
-	
-	</div>
+        {% if typeFiltersActive %}
+            <div class="active-filters active-filters-type">
+                <span class="active-filters-inner">
+                    {% for filter_type, available in availableFilters %}
+                        {% if available and activeFilters[filter_type] %}
+                            <span class="apply-color-{{ filter_type }}">
+                                {% if filter_type == "people" %}
+                                    <i class="fa fa-user"></i>
+                                {% elif filter_type == "events" %}
+                                    <i class="fa fa-calendar"></i>
+                                {% elif filter_type == "projects" %}
+                                    <i class="fa fa-group"></i>
+                                {% elif filter_type == "groups" %}
+                                    <i class="fa fa-sitemap"></i>
+                                {% endif %}
+                            </span>
+                        {% endif %}
+                    {% endfor %}
+                </span>
+                <i class="fa fa-close clickable-button reset-type-filters"></i>
+            </div>
+        {% endif %}
+        
+        {% if topicFiltersActive %}
+            <div class="active-filters active-filters-topics">
+                <span class="active-filters-inner">
+                    <span class="caps">
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Topics" %}:
+                    </span>
+                    {% for topic_id in activeTopicIds %}
+                        {% set outer_loop = loop %}
+                        {% for tid, topic in allTopics %}
+                            {% if topic_id == tid %}
+                                <span>{{ topic }}{% if not outer_loop.last %}, {% endif %}</span>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </span>
+                <i class="fa fa-close clickable-button reset-topic-filters"></i>
+            </div>
+        {% endif %}
+        
+        {% if q %}
+            <div class="active-filters active-filters-q">
+                <span class="active-filters-inner">
+                    "{{ q }}"
+                </span>
+                <i class="fa fa-close clickable-button reset-q"></i>
+            </div>
+        {% endif %}
+    
+    </div>
 {% endif %}
 

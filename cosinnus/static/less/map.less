@@ -147,9 +147,9 @@
             border-radius: 20px;
             .rounded-button-inner {
                 padding: 8px;      
-	            i {
-	                margin-right: 0;
-	            }
+                i {
+                    margin-right: 0;
+                }
             } 
         }
         &.rounded-button-small {
@@ -216,11 +216,11 @@
             border: 1px solid @map-pale-color;
         }
         @media (min-width: 768px) {
-	        &.button-action-faded:hover {
-	            color: @map-button-color;
-	            background-color: @map-pale-color;
-	            border: 1px solid @map-pale-color;
-	        }
+            &.button-action-faded:hover {
+                color: @map-button-color;
+                background-color: @map-pale-color;
+                border: 1px solid @map-pale-color;
+            }
         }
         
         
@@ -235,10 +235,10 @@
             background-color: @map-topic-color;
         }
         @media (min-width: 768px) {
-	        &.button-color-topic:hover {
-	            color: @map-button-color;
-	            background-color: @map-topic-color;
-	        }
+            &.button-color-topic:hover {
+                color: @map-button-color;
+                background-color: @map-topic-color;
+            }
         }
         
         /** Events */
@@ -252,10 +252,10 @@
             background-color: @map-events-color;
         }
         @media (min-width: 768px) {
-	        &.button-color-events:hover {
-	            color: @map-button-color;
-	            background-color: @map-events-color;
-	        }
+            &.button-color-events:hover {
+                color: @map-button-color;
+                background-color: @map-events-color;
+            }
         }
         
         /** People */
@@ -269,10 +269,10 @@
             background-color: @map-people-color;
         }
         @media (min-width: 768px) {
-	        &.button-color-people:hover {
-	            color: @map-button-color;
-	            background-color: @map-people-color;
-	        }
+            &.button-color-people:hover {
+                color: @map-button-color;
+                background-color: @map-people-color;
+            }
         }
         
         /** Projects */
@@ -286,10 +286,10 @@
             background-color: @map-projects-color;
         }
         @media (min-width: 768px) {
-	        &.button-color-projects:hover {
-	            color: @map-button-color;
-	            background-color: @map-projects-color;
-	        }
+            &.button-color-projects:hover {
+                color: @map-button-color;
+                background-color: @map-projects-color;
+            }
         }
         
         /** Groups */
@@ -303,10 +303,10 @@
             background-color: @map-groups-color;
         }
         @media (min-width: 768px) {
-	        &.button-color-groups:hover {
-	            color: @map-button-color;
-	            background-color: @map-groups-color;
-	        }
+            &.button-color-groups:hover {
+                color: @map-button-color;
+                background-color: @map-groups-color;
+            }
         }
         
         /** Ideas */
@@ -320,10 +320,10 @@
             background-color: @map-ideas-color;
         }
         @media (min-width: 768px) {
-	        &.button-color-ideas:hover {
-	            color: @map-button-color;
-	            background-color: @map-ideas-color;
-	        }
+            &.button-color-ideas:hover {
+                color: @map-button-color;
+                background-color: @map-ideas-color;
+            }
         }
     }
     
@@ -350,81 +350,81 @@
 }
 /** A blank white spacer that lies under the main page navbar */
 .app-fullscreen {    
-	&:not(.no-navbar) {
-	    &:before {
-	        content: " ";
-	        background-color: #FFF;
-	        width: 100%;
-	        height: 55px;
-	        position: absolute;
-	        z-index: 1;
-	    }
-	}
+    &:not(.no-navbar) {
+        &:before {
+            content: " ";
+            background-color: #FFF;
+            width: 100%;
+            height: 55px;
+            position: absolute;
+            z-index: 1;
+        }
+    }
 }
 .map-splitscreen {
-	width: 50%;
+    width: 50%;
 }
 .tile-list-splitscreen {
-	width: 50%;
-	left: 50%;
+    width: 50%;
+    left: 50%;
     -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.35);
     -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.35);
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.35);
 }
 .app-embed {
-	position: relative;
+    position: relative;
 }
 .map-embed {
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 /** Tile container styles */
 .tile-list {
-	background-color: @map-tile-background-color;
-	padding-top: 55px;
+    background-color: @map-tile-background-color;
+    padding-top: 55px;
     display: flex;
     flex-direction: column;
     
-	.tile-contents {
-	    flex-grow: 1;
-		overflow-y: scroll;
-		overflow-x: hidden;
-	}
-	
+    .tile-contents {
+        flex-grow: 1;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+    
     /** Masonry */
-	.grid {
+    .grid {
         min-height: 100%;
         background-color: @map-tile-background-color;
         margin: 0 0 10px 0; /* so the hover drop shadows don't get cut off */
-	}
-	
+    }
+    
     .grid-sizer, .grid-item { 
         width: 50%; 
         height: auto;
     }
-	
-	.overlay {
-	    display: none;
-	}
-	&.disabled .overlay {
-	    display: block;
-	    position: absolute;
-	    height: 100%;
-	    width: 100%;
-	    z-index: 2;
-	    background-color: #000;
-	    opacity: 0.3;
-	    
- 	    -webkit-touch-callout: none; /* iOS Safari */
-		-webkit-user-select: none;   /* Chrome/Safari/Opera */
-		-khtml-user-select: none;    /* Konqueror */
-		-moz-user-select: none;      /* Firefox */
-		-ms-user-select: none;       /* IE/Edge */
-		user-select: none;           /* non-prefixed version, currently */
-		cursor: default;
-	}
-	
+    
+    .overlay {
+        display: none;
+    }
+    &.disabled .overlay {
+        display: block;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: 2;
+        background-color: #000;
+        opacity: 0.3;
+        
+         -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none;   /* Chrome/Safari/Opera */
+        -khtml-user-select: none;    /* Konqueror */
+        -moz-user-select: none;      /* Firefox */
+        -ms-user-select: none;       /* IE/Edge */
+        user-select: none;           /* non-prefixed version, currently */
+        cursor: default;
+    }
+    
 }
 
 /** Common styles for both tiles and detail-view */
@@ -538,16 +538,16 @@
 
 .app-root .tile {
 
-	/** Border-styling for tiles is complex */
+    /** Border-styling for tiles is complex */
     border-bottom: 1px solid @map-frame-color;
     border-left: 1px solid @map-frame-color;
     margin-left: -1px;
     margin-bottom: 1px;
-	&[style*="left: 0%;"] {
+    &[style*="left: 0%;"] {
         border-right: 1px solid @map-frame-color;
-	    border-left: none;
-	    margin-left: 0;
-	}
+        border-left: none;
+        margin-left: 0;
+    }
     
     &.hovered {
         z-index: 1;
@@ -719,29 +719,29 @@
     .description {
         line-height: 1.5em;
     
-	    p {
-	       padding: 0;
-	       margin: 0;
-	    }
-	    ul {
-	        padding-top: 0;
+        p {
+           padding: 0;
+           margin: 0;
+        }
+        ul {
+            padding-top: 0;
             padding-bottom: 0;
             margin-top: 0;
-	    }
-	    p, ul {
+        }
+        p, ul {
             margin-bottom: 15px;
-	    }
-	    
-	    h1, h2, h3, h4, h5 {
-	        font-size: 16px;
-	        font-weight: bold;
-	        padding: 0;
-	        margin: 0 0 5px 0;
-	    }
-	    
-	    br {
-	        display: none;
-	    }
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-size: 16px;
+            font-weight: bold;
+            padding: 0;
+            margin: 0 0 5px 0;
+        }
+        
+        br {
+            display: none;
+        }
         img {
             max-width: 100%;
             max-height: 100%;
@@ -753,34 +753,34 @@
         margin-bottom: 20px;
         cursor: pointer;
         
-	    .card-image {
-	        display: inline-block;
-	        width: 36px;
-	        float: left;
-	        margin: 3px 10px 15px 0;
-	        position: relative;
-	        outline: 1px solid @map-frame-color;
-	        
-		    img {
-		        width: 100%;
-		    }
-	    }
-	    
-	    .card-title {
+        .card-image {
+            display: inline-block;
+            width: 36px;
+            float: left;
+            margin: 3px 10px 15px 0;
+            position: relative;
+            outline: 1px solid @map-frame-color;
+            
+            img {
+                width: 100%;
+            }
+        }
+        
+        .card-title {
             margin-bottom: 2px;
-	    }
-	    &:hover .card-title a {
-	        text-decoration: underline;
-	    }
-	    
-	    .card-data  { 
-		    i.fa {
-		        padding: 0 2px 0 0;
-		        
-			    &:not(:first-child) {
-		            margin-left: 10px;	            
-		        }
-		    }
+        }
+        &:hover .card-title a {
+            text-decoration: underline;
+        }
+        
+        .card-data  { 
+            i.fa {
+                padding: 0 2px 0 0;
+                
+                &:not(:first-child) {
+                    margin-left: 10px;                
+                }
+            }
         }
     }
     
@@ -822,8 +822,8 @@
 }
 
 .map-fullscreen, .map-embed {
-	
-	.leaflet-bottom {
+    
+    .leaflet-bottom {
         position: static;
 
         .leaflet-control-attribution {
@@ -832,12 +832,12 @@
             bottom: 0;
         }
     }
-	
+    
 }
 
 /** Everything below here in .map-root is old-style! */
 .map-root {
-	
+    
     .popup {
         max-width: 250px;
         min-width: 180px;
@@ -879,75 +879,69 @@
     }
     
     .placemark {
-	  display: block;
-	  background-repeat: no-repeat;
-	  background-size: contain;
-	  background-position: center center;
-	  
-	  &.s {
-	    height: 13px;
-	  }
-	  
-	  &.m {
-	    height: 23px;
-	  }
-	  
-	  &.l {
-	    height: 38px;
-	  }
-	}
+        display: block;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center center;
+      
+        &.s {
+            height: 13px;
+        }
+      
+        &.m {
+            height: 23px;
+        }
+      
+        &.l {
+            height: 38px;
+        }
+    }
     
     .placemark(@type, @filetype) {
-	  .placemark.s.@{type} {
-	    background-image: url('@{placemark-url}placemark-s-@{filetype}.png');
-	    &:hover,
-	    &.marker-selected,
-	    &.marker-hovered{
-	      background-image: url('@{placemark-url}placemark-s-@{filetype}-invert.png');
-	    }
-	  }
-	  .placemark.m.@{type} {
-	    background-image: url('@{placemark-url}placemark-m-@{filetype}.png');
-	    &:hover,
-	    &.marker-selected,
-        &.marker-hovered {
-	      background-image: url('@{placemark-url}placemark-m-@{filetype}-invert.png');
-	    }
-	  }
-	  .placemark.l.@{type} {
-	    background-image: url('@{placemark-url}placemark-l-@{filetype}.png');
-	    &:hover,
-	    &.marker-selected,
-        &.marker-hovered {
-	      background-image: url('@{placemark-url}placemark-l-@{filetype}-invert.png');
-	    }
-	  }
-	  .placemark.l.icon.@{type} {
-	    background-image: url('@{placemark-url}placemark-l-icon-@{filetype}.png');
-	    &:hover,
-	    &.marker-selected,
-        &.marker-hovered {
-	      background-image: url('@{placemark-url}placemark-l-icon-@{filetype}-invert.png');
-	    }
-	  }
-	}
-	
-	.placemark(events, event);
-	.placemark(groups, group);
-	.placemark(ideas, idea);
-	.placemark(people, person);
-	.placemark(projects, project);
+        .placemark.s.@{type} {
+            background-image: url('@{placemark-url}placemark-s-@{filetype}.png');
+            &:hover,
+            &.marker-selected,
+            &.marker-hovered{
+                background-image: url('@{placemark-url}placemark-s-@{filetype}-invert.png');
+            }
+        }
+        .placemark.m.@{type} {
+            background-image: url('@{placemark-url}placemark-m-@{filetype}.png');
+            &:hover,
+            &.marker-selected,
+            &.marker-hovered {
+                background-image: url('@{placemark-url}placemark-m-@{filetype}-invert.png');
+            }
+        }
+        .placemark.l.@{type} {
+            background-image: url('@{placemark-url}placemark-l-@{filetype}.png');
+            &:hover,
+            &.marker-selected,
+            &.marker-hovered {
+                background-image: url('@{placemark-url}placemark-l-@{filetype}-invert.png');
+            }
+        }
+        .placemark.l.icon.@{type} {
+            background-image: url('@{placemark-url}placemark-l-icon-@{filetype}.png');
+            &:hover,
+            &.marker-selected,
+            &.marker-hovered {
+                background-image: url('@{placemark-url}placemark-l-icon-@{filetype}-invert.png');
+            }
+        }
+    }
     
-    
-    
-    
-    
-    
+    .placemark(events, event);
+    .placemark(groups, group);
+    .placemark(ideas, idea);
+    .placemark(people, person);
+    .placemark(projects, project);
     
 }
 
 .controls {
-	z-index: 3;
+    z-index: 3;
 }
 
 .map-controls, .map-scroll-controls, .map-pagination-controls {
@@ -1002,55 +996,55 @@
             }
         }
         
-	    .q {
-	        width: 100%;
-	        font-size: 20px;
-	        padding: 0 39px 0 4px;
-	        
-	        color: #000;
-	        border: none;
-	        outline: none;
-	        
-	        &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-			    color:    @map-clickable-icon-color;
-			}
-			&:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-			   color:    @map-clickable-icon-color;
-			   opacity:  1;
-			}
-			&::-moz-placeholder { /* Mozilla Firefox 19+ */
-			   color:    @map-clickable-icon-color;
-			   opacity:  1;
-			}
-			&:-ms-input-placeholder { /* Internet Explorer 10-11 */
-			   color:    @map-clickable-icon-color;
-			}
-			&::-ms-input-placeholder { /* Microsoft Edge */
-			   color:    @map-clickable-icon-color;
-			}
-			&::placeholder { /* Most modern browsers support this now. */
-			   color:    @map-clickable-icon-color;
-			}
-	    }
-	
-	    .icon-search,
-	    .icon-loading,
-	    .icon-reset,
-	    .icon-filters {
-	        position: absolute;
-		    padding: 15px;
-	        top: 0;
-	        font-size: 25px;
-		    color: @map-clickable-icon-color;
-	    }
-	    
-	    .icon-search {
-	        right: 0;
-	    }
-	    .icon-filters {
-	        left: 0;
-	        display: flex;
-	        i {
+        .q {
+            width: 100%;
+            font-size: 20px;
+            padding: 0 39px 0 4px;
+            
+            color: #000;
+            border: none;
+            outline: none;
+            
+            &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+                color:    @map-clickable-icon-color;
+            }
+            &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+               color:    @map-clickable-icon-color;
+               opacity:  1;
+            }
+            &::-moz-placeholder { /* Mozilla Firefox 19+ */
+               color:    @map-clickable-icon-color;
+               opacity:  1;
+            }
+            &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+               color:    @map-clickable-icon-color;
+            }
+            &::-ms-input-placeholder { /* Microsoft Edge */
+               color:    @map-clickable-icon-color;
+            }
+            &::placeholder { /* Most modern browsers support this now. */
+               color:    @map-clickable-icon-color;
+            }
+        }
+    
+        .icon-search,
+        .icon-loading,
+        .icon-reset,
+        .icon-filters {
+            position: absolute;
+            padding: 15px;
+            top: 0;
+            font-size: 25px;
+            color: @map-clickable-icon-color;
+        }
+        
+        .icon-search {
+            right: 0;
+        }
+        .icon-filters {
+            left: 0;
+            display: flex;
+            i {
                 display: none;
             }
             &:not(.open) .visible-default {
@@ -1062,14 +1056,14 @@
             &.open:hover .visible-open-hover {
                 display: inline-block;
             }
-	    }
-	    .icon-loading {
-	        right: 54px;
-	    }
-	    .icon-reset {
-	        right: 54px;
-	    }
-	    
+        }
+        .icon-loading {
+            right: 54px;
+        }
+        .icon-reset {
+            right: 54px;
+        }
+        
     }
     
     .clickable-button {
@@ -1094,33 +1088,33 @@
         .active-filters {
             display: inline-block;
             cursor: pointer;
-	        
-	        height: 34px;
+            
+            height: 34px;
             padding: 0 0 5px 10px;
-	        font-size: 14px;
-	        
-	        border: 1px solid @map-clickable-icon-color;
-	        border-radius: 16px;
-	        
-	        .active-filters-inner {
-	            vertical-align: bottom;
-	            display: inline-block;
-	            max-width: 150px;
-	            overflow: hidden;
-	            white-space: nowrap;
-	            text-overflow: ellipsis;
-	            
-	            -webkit-user-select: none; /* Safari */        
-	            -moz-user-select: none; /* Firefox */
-	            -ms-user-select: none; /* IE10+/Edge */
-	            user-select: none; /* Standard */
-	            
-	            i {
-	                margin-right: 5px;
-	            }
-	        }
-	        
-	        i.clickable-button {
+            font-size: 14px;
+            
+            border: 1px solid @map-clickable-icon-color;
+            border-radius: 16px;
+            
+            .active-filters-inner {
+                vertical-align: bottom;
+                display: inline-block;
+                max-width: 150px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                
+                -webkit-user-select: none; /* Safari */        
+                -moz-user-select: none; /* Firefox */
+                -ms-user-select: none; /* IE10+/Edge */
+                user-select: none; /* Standard */
+                
+                i {
+                    margin-right: 5px;
+                }
+            }
+            
+            i.clickable-button {
                 padding: 5px 10px 5px 5px;
             }
         }
@@ -1149,9 +1143,9 @@
 
 .map-scroll-controls {
     padding: 10px;
-	position: fixed;
-	right: ~"calc(50% + 10px)";
-	bottom: 10px;
+    position: fixed;
+    right: ~"calc(50% + 10px)";
+    bottom: 10px;
 }
 .map-mobile-controls {
     position: fixed;
@@ -1162,7 +1156,7 @@
 
 .map-pagination-controls {
     padding: 10px;
-    text-align: center;	
+    text-align: center;    
 }
 
 .onoffswitch {
@@ -1205,7 +1199,7 @@
     transition: all 0.3s ease-in 0s; 
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-	border: 1px solid #FFF; 
+    border: 1px solid #FFF; 
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
     margin-left: 0;
@@ -1232,25 +1226,25 @@
     Multiple *-visible classes are possible.
 */
 .app-root .mobile-only {
-	display: none;
+    display: none;
 }
 
 @media (max-width: 767px) {
-	.app-root {
-		.mobile-only {
+    .app-root {
+        .mobile-only {
             display: inherit;
         }
         .mobile-always-visible {
             display: inherit !important;
         }
-		
-		.mobile-hidden {
-		    display: none;
-		}
-		.mobile-view {
-		    display: none;
-		}
-		
+        
+        .mobile-hidden {
+            display: none;
+        }
+        .mobile-view {
+            display: none;
+        }
+        
         &.mobile-view-map .mobile-view-map-visible-block,
         &.mobile-view-search .mobile-view-search-visible-block,
         &.mobile-view-list .mobile-view-list-visible-block,
@@ -1278,77 +1272,77 @@
         &.mobile-view-detail .mobile-view-detail-visible-flex {
             display: flex;
         }
-		
-		.rounded-button.rounded-button-circular {
-		    height: 52px;
-		    line-height: 48px;
-		    font-size: 24px;
-		    margin-right: 15px;
-	        border-radius: 34px;
-	        
-	        .rounded-button-inner {
-   	            padding: 10px;
-		    }
-		}
-		
-	}
-	
-	.map-splitscreen {
-	    width: 100%;
-	}
-	.mobile-view-list .tile-list-splitscreen,
+        
+        .rounded-button.rounded-button-circular {
+            height: 52px;
+            line-height: 48px;
+            font-size: 24px;
+            margin-right: 15px;
+            border-radius: 34px;
+            
+            .rounded-button-inner {
+                   padding: 10px;
+            }
+        }
+        
+    }
+    
+    .map-splitscreen {
+        width: 100%;
+    }
+    .mobile-view-list .tile-list-splitscreen,
     .mobile-view-search .tile-list-splitscreen {
         left: 0;
-        width: 100%;	
-	}
-    .tile-list {
-	    .grid-sizer, .grid-item { 
-	        width: 100%; 
-	        height: auto;
-	    }
+        width: 100%;    
     }
-	
-	.app-root .tile-detail {
-	    left: 0;
-	    width: 100%;
-	}
-	
-	/** Moving the pagination controls to top in mobile view */
-	.pagination-controls {
-		position: fixed;
-	    width: 100%;
-	}
-	.tile-contents {
-	    margin-top: 72px;
-	}
-	
-	
-	/** correcting weird mobile behaviours */
-	.map-controls .map-controls-filters {
-	    border-bottom: none;
-	}
-	.map-controls .map-controls-search {
+    .tile-list {
+        .grid-sizer, .grid-item { 
+            width: 100%; 
+            height: auto;
+        }
+    }
+    
+    .app-root .tile-detail {
+        left: 0;
+        width: 100%;
+    }
+    
+    /** Moving the pagination controls to top in mobile view */
+    .pagination-controls {
+        position: fixed;
+        width: 100%;
+    }
+    .tile-contents {
+        margin-top: 72px;
+    }
+    
+    
+    /** correcting weird mobile behaviours */
+    .map-controls .map-controls-filters {
+        border-bottom: none;
+    }
+    .map-controls .map-controls-search {
         .search-box {
             margin-left: 0;
         }
         .icon-filters {
             display: none;
         }
-	}
+    }
    .tile-list-fullscreen {
         &:before {
             display: none;
         }
     }
     .controls {
-	    overflow-y: scroll;
-	    .q {
-	        padding-left: 4px;
-	    }
-	}
-	
-	
-	
+        overflow-y: scroll;
+        .q {
+            padding-left: 4px;
+        }
+    }
+    
+    
+    
 }
 
 

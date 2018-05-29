@@ -4,25 +4,25 @@ var BaseView = require('views/base/view');
 var util = require('lib/util.js');
 
 module.exports = BaseView.extend({
-	
-	template: require('map/map-layer-buttons'),
-	
-	mapView: null,
-	
-	// will be set to self.options during initialization
-	defaults: {
-		// will be set to self.state during initialization
-		state: {
-			layer: null
-		}
-	},
-	
+    
+    template: require('map/map-layer-buttons'),
+    
+    mapView: null,
+    
+    // will be set to self.options during initialization
+    defaults: {
+        // will be set to self.state during initialization
+        state: {
+            layer: null
+        }
+    },
+    
     initialize: function (options) {
-    	var self = this;
-    	BaseView.prototype.initialize.call(self, options);
-    	
-    	self.state.layer = options.layer;
-    	self.mapView = options.mapView;
+        var self = this;
+        BaseView.prototype.initialize.call(self, options);
+        
+        self.state.layer = options.layer;
+        self.mapView = options.mapView;
     },
 
     events: {

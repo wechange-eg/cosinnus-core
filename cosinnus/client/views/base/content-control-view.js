@@ -4,19 +4,19 @@ var BaseView = require('views/base/view');
 var util = require('lib/util');
 
 module.exports = BaseView.extend({
-	
-	// reference back to the main App
-	App: null,
-	
-	// the resultCollection data source this view operates on.
-	// often the same collection other views use as well
-	collection: null,
+    
+    // reference back to the main App
+    App: null,
+    
+    // the resultCollection data source this view operates on.
+    // often the same collection other views use as well
+    collection: null,
 
     initialize: function (options, app, collection) {
         var self = this;
-    	BaseView.prototype.initialize.call(self, options);
-    	self.App = app;
-    	self.collection = collection;
+        BaseView.prototype.initialize.call(self, options);
+        self.App = app;
+        self.collection = collection;
     },
     
     /** Called at the end of initialization.
@@ -27,29 +27,29 @@ module.exports = BaseView.extend({
      *  
      *  */
     applyUrlSearchParameters: function(urlParams) {
-    	// stub, extend this in the inheriting view
+        // stub, extend this in the inheriting view
     },
     
     /** Add all relevant search parameters to the search API query for your view.
      *  Anything happening in your view that affects the search should be involved here.
      *  
      *  @param forAPI: if true, contains all search parameters.
-     * 		if false, contains only these that should be visible in the browser URL 
+     *         if false, contains only these that should be visible in the browser URL 
      *  @return: dict of params 
      */
     contributeToSearchParameters: function(forAPI) {
-    	// stub, extend this in the inheriting view
-    	return {}
+        // stub, extend this in the inheriting view
+        return {}
     },
     
     /** Called during search */
     disableInput: function() {
-    	// stub, extend this in the inheriting view
+        // stub, extend this in the inheriting view
     },
     
     /** Called when searches end */
     enableInput: function() {
-    	// stub, extend this in the inheriting view
+        // stub, extend this in the inheriting view
     },
     
     // private

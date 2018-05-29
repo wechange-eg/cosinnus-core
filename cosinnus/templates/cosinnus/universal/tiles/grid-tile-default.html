@@ -6,21 +6,21 @@
     
     {% if group_slug and group_name and portal %}
         <div class="pale-color one-line">
-	        {% if type == "projects" %}
-	            {{ macros.typeLabel("groups", singular=1, useStyles=0, colon=1, showIcon=0) }}
-		        {{ macros.resultLink(portal, group_slug, group_name, "groups") }}
-	        {% else %}
-	            {{ macros.typeLabel("projects", singular=1, useStyles=0, colon=1, showIcon=0) }}
+            {% if type == "projects" %}
+                {{ macros.typeLabel("groups", singular=1, useStyles=0, colon=1, showIcon=0) }}
+                {{ macros.resultLink(portal, group_slug, group_name, "groups") }}
+            {% else %}
+                {{ macros.typeLabel("projects", singular=1, useStyles=0, colon=1, showIcon=0) }}
                 {{ macros.resultLink(portal, group_slug, group_name, "projects") }}
-	        {% endif %}
+            {% endif %}
         </div>
     {% endif %}
     
     {% if topics|length > 0 %}
         <div class="tile-section one-line">
             <span class="pale-color">
-	            {# Translators: __INCLUDE_JS_PO__ #}
-	            {% trans "Topics" %}:
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Topics" %}:
             </span> 
             {% for topic in topics %}
                 <a class="topic-filter-link " data-topic-id="{{ topic }}">{{ controlView.allTopics[topic] }}</a>{% if not loop.last %},{% endif %}
@@ -50,8 +50,8 @@
                     {# Translators: __INCLUDE_JS_PO__ #}
                     {% trans "Project/Group Members" %}
                 {% else %}
-	                {# Translators: __INCLUDE_JS_PO__ #}
-	                {% trans "Members" %}
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Members" %}
                 {% endif %}
             ">
                 <i class="fa fa-group"></i> 
@@ -59,15 +59,15 @@
             </span>
         {% endif %}
         
-	    {% if content_count > 0 %}
-		    <span class="multi-span" title="
-		        {# Translators: __INCLUDE_JS_PO__ #}
+        {% if content_count > 0 %}
+            <span class="multi-span" title="
+                {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Events" %}
-		    ">
-	            <i class="fa fa-calendar"></i> 
-	            {{ content_count }}
-	        </span>
-	    {% endif %}
+            ">
+                <i class="fa fa-calendar"></i> 
+                {{ content_count }}
+            </span>
+        {% endif %}
     </div>
     {% endif %}
     

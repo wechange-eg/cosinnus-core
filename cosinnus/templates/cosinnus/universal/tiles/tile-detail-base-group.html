@@ -5,18 +5,18 @@
 {% block related_content %}
 
     {% if events|length > 0 %}
-	    <div class="tile-section tile-section-divided">
-	        <div class="subheading">
+        <div class="tile-section tile-section-divided">
+            <div class="subheading">
                 <i class="fa fa-calendar"></i>
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Events" %} ({{ events|length }})
             </div>
-	    </div>
-	    <div class="tile-section">
-	        {% for event in events %}
-	            {{ macros.itemCard(event.portal, event.slug, event.title, event.type, null, event.dataSlot1|safe, "fa-clock-o", event.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user) }}
-	        {% endfor %}
-	    </div>
+        </div>
+        <div class="tile-section">
+            {% for event in events %}
+                {{ macros.itemCard(event.portal, event.slug, event.title, event.type, null, event.dataSlot1|safe, "fa-clock-o", event.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user) }}
+            {% endfor %}
+        </div>
     {% endif %}
     
 {% endblock related_content %}
@@ -47,34 +47,34 @@
                     {% if website_url %}
                         <div class="tile-section tile-section-compact">
                             <a href="{{ website_url }}" target="_blank" class="compact-link">
-	                            <i class="fa fa-globe"></i>{{ website_url }}
+                                <i class="fa fa-globe"></i>{{ website_url }}
                             </a>
                         </div>
                     {% endif %}
                     
                     {% if youtube_url or twitter_username or flickr_url %}
                         <div class="tile-section tile-section-compact">
-	                    {% if youtube_url %}
-	                        <div>
-	                            <a href="{{ website_url }}" target="_blank" class="compact-link">
-		                            <i class="fa fa-youtube"></i>Youtube
+                        {% if youtube_url %}
+                            <div>
+                                <a href="{{ website_url }}" target="_blank" class="compact-link">
+                                    <i class="fa fa-youtube"></i>Youtube
                                 </a>
-	                        </div>
-	                    {% endif %}
-	                    {% if twitter_username %}
-	                        <div>
-	                            <a href="{{ website_url }}" target="_blank" class="compact-link">
-		                            <i class="fa fa-twitter"></i>Twitter
-	                            </a>
-	                        </div>
-	                    {% endif %}
-	                    {% if flickr_url %}
-	                        <div>
-	                            <a href="{{ flickr_url }}" target="_blank" class="compact-link">
-	                               <i class="fa fa-flickr"></i>Flickr
+                            </div>
+                        {% endif %}
+                        {% if twitter_username %}
+                            <div>
+                                <a href="{{ website_url }}" target="_blank" class="compact-link">
+                                    <i class="fa fa-twitter"></i>Twitter
                                 </a>
-	                        </div>
-	                    {% endif %}
+                            </div>
+                        {% endif %}
+                        {% if flickr_url %}
+                            <div>
+                                <a href="{{ flickr_url }}" target="_blank" class="compact-link">
+                                   <i class="fa fa-flickr"></i>Flickr
+                                </a>
+                            </div>
+                        {% endif %}
                         </div>
                     {% endif %}
                 {% endif %}
@@ -83,8 +83,8 @@
             <div class="col-xs-6">
                 <div class="subheading">
                     {% if "TODO"|length > 1 %} 
-	                    {# Translators: __INCLUDE_JS_PO__ #}
-	                    {% trans "Administrator" %}
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Administrator" %}
                     {% else %}
                         {# Translators: __INCLUDE_JS_PO__ #}
                         {% trans "Administrators" %}
@@ -93,7 +93,7 @@
                 <div class="tile-section">
                     {% if admins|length > 0 %}
                         {% for admin in admins %}
-		                    {{ macros.itemCard(admin.portal, admin.slug, admin.title, admin.type, admin.iconImageUrl, admin.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user) }}
+                            {{ macros.itemCard(admin.portal, admin.slug, admin.title, admin.type, admin.iconImageUrl, admin.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user) }}
                         {% endfor %}
                     {% else %}
                         {# Translators: __INCLUDE_JS_PO__ #}

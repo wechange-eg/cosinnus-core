@@ -2,7 +2,6 @@
 
 <script>
     $('html').on('init:client', function () {
-        console.log('got init client, now init:{{module}}');
         Backbone.mediator.publish('init:{{module}}', {
             el: '#app-{{id}}',
             settings: '{% if settings %}{{settings|safe}}{% else %}{}{% endif %}',

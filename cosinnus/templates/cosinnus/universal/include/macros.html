@@ -1,18 +1,18 @@
 {% macro typeLabel(type, classes="", singular=0, button=0, useStyles=1, colon=0, showIcon=1) %}
-	<span class="{% if useStyles == 1 %}result-type-span {% if button %}button{% else %}apply{% endif %}-color-{{ type }}{% endif %} {{ classes }}">
-	    {% if singular %}
-		    {% if type == "people" %}
-		        {% if showIcon == 1 %}<i class="fa fa-user"></i>{% endif %}
-		        {# Translators: __INCLUDE_JS_PO__ #}
-		        {% trans "User" %}{% if colon == 1 %}:{% endif %}
-		    {% elif type == "events" %}
-		        {% if showIcon == 1 %}<i class="fa fa-calendar"></i>{% endif %}
-		        {# Translators: __INCLUDE_JS_PO__ #}
-		        {% trans "Event" %}{% if colon == 1 %}:{% endif %}
-		    {% elif type == "projects" %}
-		        {% if showIcon == 1 %}<i class="fa fa-group"></i>{% endif %}
-		        {# Translators: __INCLUDE_JS_PO__ #}
-		        {% trans "Project" %}{% if colon == 1 %}:{% endif %}
+    <span class="{% if useStyles == 1 %}result-type-span {% if button %}button{% else %}apply{% endif %}-color-{{ type }}{% endif %} {{ classes }}">
+        {% if singular %}
+            {% if type == "people" %}
+                {% if showIcon == 1 %}<i class="fa fa-user"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "User" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "events" %}
+                {% if showIcon == 1 %}<i class="fa fa-calendar"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Event" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "projects" %}
+                {% if showIcon == 1 %}<i class="fa fa-group"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Project" %}{% if colon == 1 %}:{% endif %}
             {% elif type == "groups" %}
                 {% if showIcon == 1 %}<i class="fa fa-sitemap"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
@@ -21,9 +21,9 @@
                 {% if showIcon == 1 %}<i class="fa fa-lightbulb"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Idea" %}{% if colon == 1 %}:{% endif %}
-		    {% endif %}
-	    {% else %}
-	        {% if type == "people" %}
+            {% endif %}
+        {% else %}
+            {% if type == "people" %}
                 {% if showIcon == 1 %}<i class="fa fa-user"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "People" %}{% if colon == 1 %}:{% endif %}
@@ -44,8 +44,8 @@
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Ideas" %}{% if colon == 1 %}:{% endif %}
             {% endif %}
-	    {% endif %}
-	</span>
+        {% endif %}
+    </span>
 {% endmacro %}
 
 {% macro resultLink(portal, slug, name, type, inline_only=0) %}
@@ -59,9 +59,9 @@
 {% macro itemCard(portal, slug, title, type, imageUrl=null, slot1data=null, slot1icon=null, slot2data=null, slot2icon=null, cosinnus_active_user=null) %}
     <div class="card {% if type == "people" and not cosinnus_active_user %}" href="/signup/?acc_req_msg=1" target="_blank"{% else %}result-link" {{ resultLink(portal, slug, title, type, inline_only=1) }}{% endif %}>
         {% if imageUrl %}
-	        <div class="card-image">
-	            <img src="{{ imageUrl }}">
-	        </div>
+            <div class="card-image">
+                <img src="{{ imageUrl }}">
+            </div>
         {% endif %}
         <div class="card-title">
             {% if type == "people" and not cosinnus_active_user %}
@@ -71,8 +71,8 @@
             {% endif %}
         </div>
         <div class="card-data">
-	        {% if slot1data or slot2data %}
-	           {% if slot1data and slot1icon %}
+            {% if slot1data or slot2data %}
+               {% if slot1data and slot1icon %}
                    <i class="fa {{ slot1icon }}"></i>
                    <span>{{ slot1data }}</span>
                {% endif %}
@@ -80,9 +80,9 @@
                    <i class="fa {{ slot2icon }}"></i>
                    <span>{{ slot2data }}</span>
                {% endif %}
-	        {% else %}
-	           <p></p>
-	        {% endif %}
+            {% else %}
+               <p></p>
+            {% endif %}
         </div>
     </div>
 {% endmacro %}

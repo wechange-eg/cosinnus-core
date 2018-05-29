@@ -61,12 +61,12 @@
                     <i>
                         +{{ participant_count - participants|length }} 
                         {% if participant_count - participants|length > 1 %}
-		                    {# Translators: __INCLUDE_JS_PO__ #}
-		                    {% trans "Hidden Users" %}
-		                {% else %}
-		                    {# Translators: __INCLUDE_JS_PO__ #}
+                            {# Translators: __INCLUDE_JS_PO__ #}
+                            {% trans "Hidden Users" %}
+                        {% else %}
+                            {# Translators: __INCLUDE_JS_PO__ #}
                             {% trans "Hidden User" %}
-		                {% endif %}
+                        {% endif %}
                     </i>
                 </div>
             {% endif %}

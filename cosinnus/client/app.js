@@ -30,16 +30,16 @@ var App = function App () {
     
     // should have them all here
     self.defaultSettings = {
-    	
+        
     };
     
     self.defaulDisplayOptions = {
-		showMap: true,
-		showTiles: true,
-		showControls: true,
-		fullscreen: true,
-		routeNavigation: true
-	};
+        showMap: true,
+        showTiles: true,
+        showControls: true,
+        fullscreen: true,
+        routeNavigation: true
+    };
     self.displayOptions = {}
     
     /** Main entry point */
@@ -48,13 +48,13 @@ var App = function App () {
         self.mediator.settings = window.settings || {};
         
         var triggerResizeEvent = function (){
-        	Backbone.mediator.publish('resize:window');
+            Backbone.mediator.publish('resize:window');
         }
         var resizeTimer;
         // A global resize event with a delay so it won't fire constantly
         $(window).on('resize', function () {
-        	clearTimeout(resizeTimer);
-        	resizeTimer = setTimeout(triggerResizeEvent, 500);
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(triggerResizeEvent, 500);
         });
         
         // init-module calls. inside a listener to the 'init:client' event,
@@ -63,7 +63,7 @@ var App = function App () {
         Backbone.mediator.subscribe('init:module-embed', self.initModuleEmbed, self);
         
         // - the 'init:client' signal is the marker for all pages using this client.js to now
-        // 	 publish the "init:<module>" event for whichever module configuration they wish to load (see above)
+        //      publish the "init:<module>" event for whichever module configuration they wish to load (see above)
         util.log('app.js: finish start() and publishing "init:client"')
         Backbone.mediator.publish('init:client');
         // we trigger both on the mediator and on html, in case scripts loaded earlier than this have already subsribed on 'html'
@@ -90,44 +90,44 @@ var App = function App () {
      *  Many options can be configured for hiding the tile-list, disabling the visual control-view
      *  or enabling only specific Result model types. */
     self.initModuleEmbed = function (options) {
-    	// add passed options into params
-    	var params = {
-    		el: options.el,
-    		display: options.display,
-    		settings: options.settings,
-    	}
-    	self.init_app(params);
+        // add passed options into params
+        var params = {
+            el: options.el,
+            display: options.display,
+            settings: options.settings,
+        }
+        self.init_app(params);
     };
     
     /** Called on navigate, from router.js */
     self.navigate_map = function (event) {
-    	if (self.controlView == null) {
-    		self.init_default_app();
-    	} else {
-    		Backbone.mediator.publish('app:stale-results', {reason: 'map-navigate'});
-    	}
+        if (self.controlView == null) {
+            self.init_default_app();
+        } else {
+            Backbone.mediator.publish('app:stale-results', {reason: 'map-navigate'});
+        }
     };
     
     /** Called when the App is auto-initied on a fullscreen page with no further parameters. 
      *  Uses mostly default settings self.defaultSettings and self.defaultDisplay */
     self.init_default_app = function () {
-    	// add defaults into params
-    	var params = {
-    		el: '#app-fullscreen',
-    		display: self.defaulDisplayOptions
-    	}
-    	self.init_app(params);
+        // add defaults into params
+        var params = {
+            el: '#app-fullscreen',
+            display: self.defaulDisplayOptions
+        }
+        self.init_app(params);
     };
     
     /** Main initialization function, this eventually gets called no matter which modules we load. */
     self.init_app = function (params) {
-    	util.log('app.js: init_app called with event, params')
-    	
-    	/* params contains:
-    	 * - el: DOM element
-    	 * - settings: JSON config dict
-    	 */
-    	var settings = params.settings ? JSON.parse(params.settings) : {};
+        util.log('app.js: init_app called with event, params')
+        
+        /* params contains:
+         * - el: DOM element
+         * - settings: JSON config dict
+         */
+        var settings = params.settings ? JSON.parse(params.settings) : {};
         settings = $.extend(true, {}, self.defaultSettings, settings);
         var display = params.display || {};
         self.displayOptions = $.extend(true, {}, self.defaultDisplayOptions, display);
@@ -149,19 +149,19 @@ var App = function App () {
         self.$el = $(self.el);
         
         self.controlView = new ControlView({
-	        	el: null, // will only be set if attached to tile-view
-	        	availableFilters: settings.availableFilters,
-	        	activeFilters: settings.activeFilters,
-	        	allTopics: topicsJson,
-	        	portalInfo: portalInfo,
-	        	controlsEnabled: self.displayOptions.showControls,
-	        	scrollControlsEnabled: self.displayOptions.showControls && self.displayOptions.showMap,
-	        	paginationControlsEnabled: self.displayOptions.showTiles,
-	        	filterGroup: settings.filterGroup,
-	        	basePageURL: basePageURL,
-	        }, 
-	        self, 
-	        null
+                el: null, // will only be set if attached to tile-view
+                availableFilters: settings.availableFilters,
+                activeFilters: settings.activeFilters,
+                allTopics: topicsJson,
+                portalInfo: portalInfo,
+                controlsEnabled: self.displayOptions.showControls,
+                scrollControlsEnabled: self.displayOptions.showControls && self.displayOptions.showMap,
+                paginationControlsEnabled: self.displayOptions.showTiles,
+                filterGroup: settings.filterGroup,
+                basePageURL: basePageURL,
+            }, 
+            self, 
+            null
         ); // collection=null here, gets instantiated in the control view
         self.contentViews.push(self.controlView);
         
@@ -170,48 +170,48 @@ var App = function App () {
         
         
         if (self.displayOptions.showMap) {
-        	var mapView = new MapView({
-        		elParent: params.el,
-        		location: settings.location,
-        		markerIcons: markerIcons,
-        		fullscreen: self.displayOptions.fullscreen,
-        		splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
-        	}, 
-        	self,
-        	self.controlView.collection
-        	).render();
-        	self.mapView = mapView;
-        	self.contentViews.push(mapView);
+            var mapView = new MapView({
+                elParent: params.el,
+                location: settings.location,
+                markerIcons: markerIcons,
+                fullscreen: self.displayOptions.fullscreen,
+                splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
+            }, 
+            self,
+            self.controlView.collection
+            ).render();
+            self.mapView = mapView;
+            self.contentViews.push(mapView);
         }
         
         if (self.displayOptions.showTiles) {
-        	var tileListView = new TileListView({
-        		elParent: params.el,
-        		fullscreen: self.displayOptions.fullscreen,
-        		splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
-        	}, 
-        	self,
-        	self.controlView.collection
-        	).render();
-        	self.contentViews.push(tileListView);
-        	self.tileListView = tileListView;
-        	
-        	// render control-view controls inside tile-list-view
+            var tileListView = new TileListView({
+                elParent: params.el,
+                fullscreen: self.displayOptions.fullscreen,
+                splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
+            }, 
+            self,
+            self.controlView.collection
+            ).render();
+            self.contentViews.push(tileListView);
+            self.tileListView = tileListView;
+            
+            // render control-view controls inside tile-list-view
             if (self.displayOptions.showControls) {
-            	util.log('app.js: actually rendering controls')
-            	self.controlView.setElement(tileListView.$el.find('.controls'));
-            	self.controlView.render();
+                util.log('app.js: actually rendering controls')
+                self.controlView.setElement(tileListView.$el.find('.controls'));
+                self.controlView.render();
             }
         }
         
         var tileDetailView = new TileDetailView({
-        	model: null,
-    		elParent: params.el,
-    		fullscreen: self.displayOptions.fullscreen,
-    		splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
-    	}, 
-    	self
-    	).render();
+            model: null,
+            elParent: params.el,
+            fullscreen: self.displayOptions.fullscreen,
+            splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
+        }, 
+        self
+        ).render();
         
         Backbone.mediator.publish('app:ready');
     };
@@ -220,5 +220,5 @@ var App = function App () {
 module.exports = App;
 
 $(function () {
-	window.App = new App().start();
+    window.App = new App().start();
 });

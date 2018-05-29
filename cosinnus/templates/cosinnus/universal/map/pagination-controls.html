@@ -10,19 +10,19 @@
                     </span>
                 </div>
                 <div class="inline-spacer">
-		            <span>
-		                {{ page.start }} - {{ page.end }}
-		            </span>
-		            {% if 1  %}
-	                    {# Translators: __INCLUDE_JS_PO__ #}
-	                    {% trans 'of' %}
-	                    {{ page.total_count }}
-		            {% endif %}
-		            <span>
-		                {# Translators: __INCLUDE_JS_PO__ #}
-		                {% trans 'Results' %}
-		            </span>
-	            </div>
+                    <span>
+                        {{ page.start }} - {{ page.end }}
+                    </span>
+                    {% if 1  %}
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans 'of' %}
+                        {{ page.total_count }}
+                    {% endif %}
+                    <span>
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans 'Results' %}
+                    </span>
+                </div>
                 <div class="inline-spacer rounded-button rounded-button-circular button-action trigger-pagination-forward {% if not page.has_next %}disabled {% endif %}">
                     <span class="rounded-button-inner">
                         <i class="fa fa-fw fa-chevron-right"></i>
@@ -40,8 +40,8 @@
         {% if searchHadErrors %}
             <div class="message-error">
                 <i class="fa fa-warning"></i>
-	            {# Translators: __INCLUDE_JS_PO__ #}
-	            {% trans 'Could not complete the search due to an error.' %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans 'Could not complete the search due to an error.' %}
             </div>
         {% endif %}
         
@@ -59,13 +59,13 @@
                     {% trans 'Search when moving the map' %}
                 </td>
                 <td>
-		            <div class="onoffswitch">
-		                <input type="checkbox" name="onoffswitch-search-on-scroll" class="onoffswitch-checkbox toggle-search-on-scroll" id="check-search-on-scroll" {% if searchOnScroll %}checked{% endif %}>
-		                <label class="onoffswitch-label" for="check-search-on-scroll">
-		                    <span class="onoffswitch-inner"></span>
-		                    <span class="onoffswitch-switch"></span>
-		                </label>
-		            </div>
+                    <div class="onoffswitch">
+                        <input type="checkbox" name="onoffswitch-search-on-scroll" class="onoffswitch-checkbox toggle-search-on-scroll" id="check-search-on-scroll" {% if searchOnScroll %}checked{% endif %}>
+                        <label class="onoffswitch-label" for="check-search-on-scroll">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
                 </td>
             </tr>
         </table>
