@@ -233,9 +233,8 @@ module.exports = ContentControlView.extend({
      * @param isLargeMarker: (optional) bool. make this marker icon large?
      * @param clusterLevel: (optional) int. if supplied, the result is considered in a cluster, at this rank. 0 means base cluster-marker
      * @param clusterCoords: (optional) {lat: int, lon: int} if result is in a cluster, the coords (rank will be added as offset)
-     * @param addNumberLabel: (optional) if true, adds the <clusterLevel+1> or "9+" number on top of the icon
      */
-    markerAdd: function(result, isLargeMarker, clusterLevel, clusterCoords, addNumberLabel) {
+    markerAdd: function(result, isLargeMarker, clusterLevel, clusterCoords) {
     	var self = this;
     	
     	if (!result.get('lat') || !result.get('lon')) {
@@ -249,6 +248,7 @@ module.exports = ContentControlView.extend({
     		this.markerRemove(result);
     	}
     	
+    	
     	// for clustered markers, every marker but the base marker becomes a stacked marker.
     	var markerIcon = this.getMarkerIconForType(result.get('type'), isLargeMarker, clusterLevel > 0, clusterLevel == 0);
     	var coords = clusterCoords ? clusterCoords : [result.get('lat'), result.get('lon')];
@@ -260,18 +260,12 @@ module.exports = ContentControlView.extend({
     	}
     	//util.log('adding marker at coords ' + JSON.stringify(coords))
     	
-    	// EXPERIMENTAL: TODO: add number label
-    	var className = '';
-    	if (addNumberLabel) {
-    		className = 'marker-number-label number-label-' + (clusterLevel > 9 ? '9-plus' : String(clusterLevel));
-    	}
-    	
         var marker = L.marker(coords, {
-            icon: L.icon({
-                iconUrl: markerIcon.iconUrl,
+            icon: L.divIcon({
+//                iconUrl: markerIcon.iconUrl, // is being ignored by divIcon, use for Icon
                 iconSize: [markerIcon.iconWidth, markerIcon.iconHeight],
                 iconAnchor: [markerIcon.iconWidth / 2, (markerIcon.iconHeight / (isPointedMarker ? 1 : 2)) + clusterOffset],
-                className: className,
+                className: markerIcon.className, // only makes sense for divIcon, do not use for Icon
 //                popupAnchor: [1, -27],
 //                shadowSize: [28, 28]
             }),
@@ -438,7 +432,7 @@ module.exports = ContentControlView.extend({
 			// for each cluster, add all results in a stacking offset
 			for (var j=cluster['items'].length-1; j >= 0; j--) {
 				var item = cluster['items'][j];
-				self.markerAdd(item, false, j, cluster['loc'], j==cluster['items'].length-1);
+				self.markerAdd(item, false, j, cluster['loc']);
 	    	}
 			remainingLargeMarkers -= 1;
     	}
@@ -576,17 +570,27 @@ module.exports = ContentControlView.extend({
             };
         } else {
         	var suffix = '';
+        	var className = 'placemark';
     		if (isBaseMarker) {
         		suffix = 'Base';
+        		className += ' l';
         	} else if (isStackedMarker) {
         		suffix = 'Stacked';
+        		className += ' m';
         	} else if (isLargeMarker) {
         		suffix = 'Large';
+        		className += ' l icon';
+        	} else {
+        		className += ' s';
         	}
+    		// type of the marker
+        	className += ' ' + resultType;
+        	
         	markerIcon = {
 	            iconUrl: this.options.mapMarkerStaticPath + this.options.resultMarkerImages[resultType + suffix],
 	            iconWidth: this.options.resultMarkerSizes['width' + suffix],
-	            iconHeight: this.options.resultMarkerSizes['height' + suffix]
+	            iconHeight: this.options.resultMarkerSizes['height' + suffix],
+	            className: className
         	};
         }
         return markerIcon;

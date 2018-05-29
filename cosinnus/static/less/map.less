@@ -22,6 +22,7 @@
 @map-clickable-icon-hover-color: #333;
 
 @map-placeholder-gradient-top-color: #e5e5e5;
+@placemark-url: '/static/images/map-markers/';
 
 /**
   z-indexes:
@@ -877,18 +878,71 @@
         }
     }
     
-    .leaflet-marker-icon.marker-selected {
-        filter: grayscale(100%);
-    }
-    .leaflet-marker-icon.marker-hovered {
-        filter: brightness(0.75);
-    }
-    /* TODO: not working on <img>! */
-    .leaflet-marker-icon.marker-number-label:after {
-	    content: "x";
-	    color: #FFFFFF;
-	    
-    }
+    .placemark {
+	  display: block;
+	  background-repeat: no-repeat;
+	  background-size: contain;
+	  background-position: center center;
+	  
+	  &.s {
+	    height: 13px;
+	  }
+	  
+	  &.m {
+	    height: 23px;
+	  }
+	  
+	  &.l {
+	    height: 38px;
+	  }
+	}
+    
+    .placemark(@type, @filetype) {
+	  .placemark.s.@{type} {
+	    background-image: url('@{placemark-url}placemark-s-@{filetype}.png');
+	    &:hover,
+	    &.marker-selected,
+	    &.marker-hovered{
+	      background-image: url('@{placemark-url}placemark-s-@{filetype}-invert.png');
+	    }
+	  }
+	  .placemark.m.@{type} {
+	    background-image: url('@{placemark-url}placemark-m-@{filetype}.png');
+	    &:hover,
+	    &.marker-selected,
+        &.marker-hovered {
+	      background-image: url('@{placemark-url}placemark-m-@{filetype}-invert.png');
+	    }
+	  }
+	  .placemark.l.@{type} {
+	    background-image: url('@{placemark-url}placemark-l-@{filetype}.png');
+	    &:hover,
+	    &.marker-selected,
+        &.marker-hovered {
+	      background-image: url('@{placemark-url}placemark-l-@{filetype}-invert.png');
+	    }
+	  }
+	  .placemark.l.icon.@{type} {
+	    background-image: url('@{placemark-url}placemark-l-icon-@{filetype}.png');
+	    &:hover,
+	    &.marker-selected,
+        &.marker-hovered {
+	      background-image: url('@{placemark-url}placemark-l-icon-@{filetype}-invert.png');
+	    }
+	  }
+	}
+	
+	.placemark(events, event);
+	.placemark(groups, group);
+	.placemark(ideas, idea);
+	.placemark(people, person);
+	.placemark(projects, project);
+    
+    
+    
+    
+    
+    
     
 }
 
