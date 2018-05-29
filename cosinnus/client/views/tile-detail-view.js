@@ -9,6 +9,7 @@ var templates = {
 	'groups': require('tiles/tile-detail-groups'),
 	'people': require('tiles/tile-detail-people'),
 	'events': require('tiles/tile-detail-events'),
+	'error-403': require('tiles/tile-detail-error-403'),
 	'error': require('tiles/tile-detail-error'),
 };
 

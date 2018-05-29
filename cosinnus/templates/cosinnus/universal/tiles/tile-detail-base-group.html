@@ -14,7 +14,7 @@
 	    </div>
 	    <div class="tile-section">
 	        {% for event in events %}
-	            {{ macros.itemCard(event.portal, event.slug, event.title, event.type, null, event.dataSlot1|safe, "fa-clock-o", event.address, "fa-map-marker") }}
+	            {{ macros.itemCard(event.portal, event.slug, event.title, event.type, null, event.dataSlot1|safe, "fa-clock-o", event.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user) }}
 	        {% endfor %}
 	    </div>
     {% endif %}
@@ -93,7 +93,7 @@
                 <div class="tile-section">
                     {% if admins|length > 0 %}
                         {% for admin in admins %}
-		                    {{ macros.itemCard(admin.portal, admin.slug, admin.title, admin.type, admin.iconImageUrl, admin.address, "fa-map-marker") }}
+		                    {{ macros.itemCard(admin.portal, admin.slug, admin.title, admin.type, admin.iconImageUrl, admin.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user) }}
                         {% endfor %}
                     {% else %}
                         {# Translators: __INCLUDE_JS_PO__ #}

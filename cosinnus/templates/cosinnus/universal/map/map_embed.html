@@ -8,6 +8,7 @@
 		    var COSINNUS_MAP_OPTIONS = JSON.parse('{{ SETTINGS.COSINNUS_MAP_OPTIONS|json|safe }}');
 		    var COSINNUS_PORTAL_INFOS = JSON.parse('{% render_cosinnus_portal_info_json %}');
 		    var cosinnus_current_language = "{{ COSINNUS_CURRENT_LANGUAGE }}";
+            var cosinnus_active_user = JSON.parse("{{ COSINNUS_USER|escapejs }}");
 		</script>
 		
 		<script src="{% static 'js/vendor/jquery-2.1.0.min.js' %}"></script>

@@ -52,7 +52,7 @@
             <div class="row">
                 {% for participant in participants %}
                     <div class="col-sm-6">
-                        {{ macros.itemCard(participant.portal, participant.slug, participant.title, participant.type, participant.iconImageUrl, participant.address, "fa-map-marker") }}
+                        {{ macros.itemCard(participant.portal, participant.slug, participant.title, participant.type, participant.iconImageUrl, participant.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user) }}
                     </div>
                 {% endfor %}
             </div>

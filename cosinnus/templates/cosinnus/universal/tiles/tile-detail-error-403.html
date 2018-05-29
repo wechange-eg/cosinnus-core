@@ -1,0 +1,13 @@
+{% extends 'tiles/tile-detail-base' %}
+{% import "include/macros.html" as macros %}
+
+{% block content %}
+	<h1 class="error-title">
+	    {# Translators: __INCLUDE_JS_PO__ #}
+	    {% trans "Protected Content" %}
+	</h1>
+	<div class="error-text">
+	    {# Translators: __INCLUDE_JS_PO__ #}
+	    {% trans "Sorry, but you cannot view details for this content. This can happen when its visibility settings have changed recently." %}
+	</div>
+{% endblock content %}

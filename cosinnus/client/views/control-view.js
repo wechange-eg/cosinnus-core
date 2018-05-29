@@ -394,7 +394,11 @@ module.exports = ContentControlView.extend({
     	        	}
     	            self.currentDetailHttpRequest = null;
     	            if (detailHadErrors) {
-                		self.displayDetailResult(new Result({type: 'error'}));
+    	            	if (xhr.status == 403) {
+    	            		self.displayDetailResult(new Result({type: 'error-403'}));
+    	            	} else {
+    	            		self.displayDetailResult(new Result({type: 'error'}));
+    	            	}
     	            }
     	        }
             });
@@ -527,7 +531,7 @@ module.exports = ContentControlView.extend({
 
     handleEndSearch: function (event) {
         this.$el.find('.icon-loading').addClass('hidden');
-        self.$el.find('.icon-reset').toggleClass('hidden', (!self.state.filtersActive && !self.state.q));
+        this.$el.find('.icon-reset').toggleClass('hidden', (!this.state.filtersActive && !this.state.q));
         // enable input in content views during search (up to the views to decide what to enable)
         _.each(this.App.contentViews, function(view){
     		view.enableInput();

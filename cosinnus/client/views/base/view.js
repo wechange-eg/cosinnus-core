@@ -71,7 +71,10 @@ module.exports = Backbone.View.extend({
         var data = _.extend(
     		modelData,
     		this.options,
-    		this.state
+    		this.state,
+    		{
+    			'cosinnus_active_user': cosinnus_active_user,
+    		}
     	);
         return data;
     },

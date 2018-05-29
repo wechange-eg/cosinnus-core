@@ -33,7 +33,7 @@
             <div class="row">
                 {% for group in groups %}
                     <div class="col-sm-6">
-                        {{ macros.itemCard(group.portal, group.slug, group.title, group.type, group.iconImageUrl, group.address, "fa-map-marker", group.dataSlot1, "fa-group") }}
+                        {{ macros.itemCard(group.portal, group.slug, group.title, group.type, group.iconImageUrl, group.address, "fa-map-marker", group.dataSlot1, "fa-group", cosinnus_active_user=cosinnus_active_user) }}
                     </div>
                 {% endfor %}
             </div>
@@ -52,7 +52,7 @@
             <div class="row">
                 {% for project in projects %}
                     <div class="col-sm-6">
-                        {{ macros.itemCard(project.portal, project.slug, project.title, project.type, project.iconImageUrl, project.address, "fa-map-marker", project.dataSlot1, "fa-group") }}
+                        {{ macros.itemCard(project.portal, project.slug, project.title, project.type, project.iconImageUrl, project.address, "fa-map-marker", project.dataSlot1, "fa-group", cosinnus_active_user=cosinnus_active_user) }}
                     </div>
                 {% endfor %}
             </div>
