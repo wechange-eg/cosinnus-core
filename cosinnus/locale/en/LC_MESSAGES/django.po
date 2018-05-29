@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-22 12:43+0200\n"
+"POT-Creation-Date: 2018-05-29 15:06+0200\n"
 "PO-Revision-Date: 2018-05-22 12:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -767,6 +767,8 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Topics"
 msgstr ""
 
@@ -803,13 +805,17 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Events"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "Groups"
@@ -2234,7 +2240,7 @@ msgid ""
 "\n"
 "\n"
 "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s\n"
+"%(domain_url)s%(user_verification_url)s%(next)s\n"
 "\n"
 "\n"
 "\n"
@@ -2897,6 +2903,18 @@ msgid "Clear Filters"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Street"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Satellite"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Terrain"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "of"
 msgstr ""
 
@@ -2925,8 +2943,10 @@ msgid "Participants"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Project/Group Memberships"
-msgstr ""
+#, fuzzy
+#| msgid "Convert selected Projects to Groups"
+msgid "Project/Group Members"
+msgstr "Convert selected Projects to Groups"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "No info."
@@ -2941,7 +2961,29 @@ msgid "Administrators"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Administrators unknown"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "No description yet."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Project Type"
+msgid "Protected Content"
+msgstr "Project Type"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Sorry, but you cannot view details for this content."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This can happen when its visibility settings have changed recently."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Please register or log in to continue!"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -2949,7 +2991,19 @@ msgid "Error!"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Sorry, but the requested content could not be retrieved from the server!"
+msgid "Sorry, but the requested content could not be retrieved from the server."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Visit Event Page"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Hidden Users"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Hidden User"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -2967,12 +3021,6 @@ msgstr "Edit Project"
 #| msgid "Create Group"
 msgid "Message Group"
 msgstr "Create Group"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Group"
-msgid "Gruppen"
-msgstr "Group"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -3692,6 +3740,11 @@ msgstr ""
 
 msgid "Your changes have been saved."
 msgstr ""
+
+#, fuzzy
+#~| msgid "Group"
+#~ msgid "Gruppen"
+#~ msgstr "Group"
 
 #, fuzzy
 #~| msgid "My Projects"

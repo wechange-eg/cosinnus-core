@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-22 12:43+0200\n"
-"PO-Revision-Date: 2018-02-05 13:57+0100\n"
+"POT-Creation-Date: 2018-05-29 15:06+0200\n"
+"PO-Revision-Date: 2018-05-29 14:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -762,6 +762,8 @@ msgstr "Подход"
 
 #. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Topics"
 msgstr "Темы"
 
@@ -794,13 +796,17 @@ msgstr "Пользователи"
 
 #. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Events"
 msgstr "События"
 
 #. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Проекты"
 
+#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "Группы"
@@ -2211,7 +2217,7 @@ msgid ""
 "\n"
 "\n"
 "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s\n"
+"%(domain_url)s%(user_verification_url)s%(next)s\n"
 "\n"
 "\n"
 "\n"
@@ -2227,7 +2233,7 @@ msgstr ""
 "\n"
 "\n"
 "Пожалуйста, нажмите на следующую ссылку, чтобы подтвердить адрес Вашей электронной почты (или скопируйте ссылку и откройте её в Вашем браузере):\n"
-"%(domain_url)s%(user_verification_url)s\n"
+"%(domain_url)s%(user_verification_url)s%(next)s\n"
 "\n"
 "\n"
 "\n"
@@ -2995,6 +3001,24 @@ msgid "Clear Filters"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Stream"
+msgid "Street"
+msgstr "Лента"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Last edited"
+msgid "Satellite"
+msgstr "В последний раз отредактировано"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Rearrange"
+msgid "Terrain"
+msgstr "Перегруппировать"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "of"
 msgstr ""
 
@@ -3031,7 +3055,7 @@ msgstr ""
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "Portal memberships"
-msgid "Project/Group Memberships"
+msgid "Project/Group Members"
 msgstr "Членства на портале"
 
 #. Translators: __INCLUDE_JS_PO__
@@ -3054,9 +3078,33 @@ msgstr "Администраторы портала"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+#| msgid "Portal Administrators"
+msgid "Administrators unknown"
+msgstr "Администраторы портала"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 #| msgid "No Description set"
 msgid "No description yet."
 msgstr "Нет описания"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Project name"
+msgid "Protected Content"
+msgstr "Название проекта"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Sorry, but you cannot view details for this content."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This can happen when its visibility settings have changed recently."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Please register or log in to continue!"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -3065,8 +3113,24 @@ msgid "Error!"
 msgstr "Ошибки:"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Sorry, but the requested content could not be retrieved from the server!"
+msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Visit Event Page"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Hidden"
+msgid "Hidden Users"
+msgstr "Скрыто"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Hidden"
+msgid "Hidden User"
+msgstr "Скрыто"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -3085,12 +3149,6 @@ msgstr "Редактировать группу"
 #| msgid "Create Group"
 msgid "Message Group"
 msgstr "Создать группу"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Group"
-msgid "Gruppen"
-msgstr "Группа"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -3810,6 +3868,11 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
 
+#, fuzzy
+#~| msgid "Group"
+#~ msgid "Gruppen"
+#~ msgstr "Группа"
+
 #~ msgid "My Groups and Projects"
 #~ msgstr "Мои группы и проекты"
 
@@ -4055,9 +4118,6 @@ msgstr "Ваши изменения были сохранены."
 
 #~ msgid "This is an internal description for the members."
 #~ msgstr "Это описание для внутреннего пользования членов "
-
-#~ msgid "Hidden"
-#~ msgstr "Скрыто"
 
 #~ msgid "show on map"
 #~ msgstr "Показать на карте"

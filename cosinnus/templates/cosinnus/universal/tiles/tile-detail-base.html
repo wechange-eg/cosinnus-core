@@ -82,7 +82,10 @@
         {% block topic_line %}
             {% if topics|length > 0 %}
 		        <div class="tile-section topic-line">
-		            <span class="pale-color">Topics:</span> 
+		            <span class="pale-color">
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Topics" %}:
+                    </span> 
 		            {% for topic in topics %}
 		                <a class="topic-filter-link " data-topic-id="{{ topic }}">{{ controlView.allTopics[topic] }}</a>{% if not loop.last %},{% endif %}
 		            {% endfor %}

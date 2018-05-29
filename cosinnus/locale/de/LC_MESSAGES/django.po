@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-22 12:43+0200\n"
-"PO-Revision-Date: 2018-05-28 12:16+0200\n"
+"POT-Creation-Date: 2018-05-29 15:06+0200\n"
+"PO-Revision-Date: 2018-05-29 15:21+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -757,6 +757,8 @@ msgstr "Ansatz"
 
 #. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Topics"
 msgstr "Themen"
 
@@ -789,13 +791,17 @@ msgstr "Benutzer_innen"
 
 #. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Events"
 msgstr "Veranstaltungen"
 
 #. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Projekte"
 
+#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "Gruppen"
@@ -2197,7 +2203,7 @@ msgid ""
 "\n"
 "\n"
 "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s\n"
+"%(domain_url)s%(user_verification_url)s%(next)s\n"
 "\n"
 "\n"
 "\n"
@@ -2213,7 +2219,7 @@ msgstr ""
 "\n"
 "\n"
 "Bitte klicke auf den folgenden Link um deine Email-Adresse zu bestätigen (oder kopiere den Link und füge ihn in die Adresszeile in deinem Browser ein):\n"
-"%(domain_url)s%(user_verification_url)s\n"
+"%(domain_url)s%(user_verification_url)s%(next)s\n"
 "\n"
 "\n"
 "\n"
@@ -2960,6 +2966,18 @@ msgid "Clear Filters"
 msgstr "Filter zurücksetzen"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Street"
+msgstr "Straßen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Satellite"
+msgstr "Satellit"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Terrain"
+msgstr "Terrain"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "of"
 msgstr "von"
 
@@ -2988,8 +3006,8 @@ msgid "Participants"
 msgstr "Teilnehmer"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Project/Group Memberships"
-msgstr "Projekt/Gruppenmitgliedschaften"
+msgid "Project/Group Members"
+msgstr "Projekt/Gruppenmitglieder"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "No info."
@@ -3004,16 +3022,48 @@ msgid "Administrators"
 msgstr "Administratoren"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Administrators unknown"
+msgstr "Administratoren unbekannt"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "No description yet."
 msgstr "Noch keine Beschreibung erstellt."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Protected Content"
+msgstr "Geschützter Inhalt"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Sorry, but you cannot view details for this content."
+msgstr "Tut uns leid, aber du kannst keine Details dieses Inhalts sehen."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This can happen when its visibility settings have changed recently."
+msgstr " Dies kann passieren, wenn die Sichtbarkeitseinstellungen des Inhalts vor Kurzem geändert wurden."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Please register or log in to continue!"
+msgstr "Bitte registriere dich oder log dich ein um weiterzumachen!"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Error!"
 msgstr "Fehler!"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Sorry, but the requested content could not be retrieved from the server!"
+msgid "Sorry, but the requested content could not be retrieved from the server."
 msgstr "Tut uns leid, aber der gewüschte Inhalt konnte nicht vom Server geladen werden!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Visit Event Page"
+msgstr "Event-Seite besuchen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Hidden Users"
+msgstr "Versteckte Benutzer"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Hidden User"
+msgstr "Versteckter Benutzer"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are a Member"
@@ -3027,12 +3077,6 @@ msgstr "Gruppe beitreten"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Message Group"
 msgstr "Gruppe anschreiben"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Gruppenbild"
-msgid "Gruppen"
-msgstr "Projektbild"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
@@ -3740,6 +3784,11 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
 
+#, fuzzy
+#~| msgid "Gruppenbild"
+#~ msgid "Gruppen"
+#~ msgstr "Projektbild"
+
 #~ msgid "Showing results"
 #~ msgstr "Zeige Ergebnisse"
 
@@ -3910,9 +3959,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "This is an internal description for the members."
 #~ msgstr "Dies ist eine Mitglieder-interne Beschreibung."
-
-#~ msgid "Hidden"
-#~ msgstr "Versteckt"
 
 #~ msgid "show on map"
 #~ msgstr "auf Karte anzeigen"
