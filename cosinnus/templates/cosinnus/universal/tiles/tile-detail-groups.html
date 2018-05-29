@@ -1,0 +1,57 @@
+{% extends 'tiles/tile-detail-base-group' %}
+{% import "include/macros.html" as macros %}
+
+
+{% block action_buttons %}
+    <div class="tile-section">
+        {% if is_member %}
+            <a class="rounded-button button-action disabled">
+                <span class="rounded-button-inner">
+                    <i clasS="fa fa-check"></i>
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "You are a Member" %}
+                </span>
+            </a>
+        {% else %}
+           <a href="{{ action_url_1 }}" target="_blank" class="rounded-button button-action">
+                <span class="rounded-button-inner">
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Join Group" %}
+                </span>
+            </a>
+        {% endif %}
+        {% if action_url_2 %}
+            <a href="{{ action_url_2 }}" target="_blank" class="rounded-button button-action">
+                <span class="rounded-button-inner">
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Message Group" %}
+                </span>
+            </a>
+        {% endif %}
+    </div>
+{% endblock action_buttons %}
+
+
+{% block related_content %}
+    {{ super() }}
+
+    {% if projects|length > 0 %}
+        <div class="tile-section tile-section-divided">
+            <div class="subheading">
+                <i class="fa fa-group"></i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Projects" %} ({{ projects|length }})
+            </div>
+        </div>
+        <div class="tile-section">
+            <div class="row">
+                {% for project in projects %}
+                    <div class="col-sm-6">
+                        {{ macros.itemCard(project.portal, project.slug, project.title, project.type, project.iconImageUrl, project.address, "fa-map-marker", project.dataSlot1, "fa-group", cosinnus_active_user=cosinnus_active_user) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    
+{% endblock related_content %}

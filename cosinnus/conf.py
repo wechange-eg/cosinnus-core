@@ -366,6 +366,20 @@ class CosinnusConf(AppConf):
     """
     MAP_MARKER_ICONS = {}
     
+    # Default starting map coordinates if no coordinates have been specified
+    COSINNUS_MAP_OPTIONS = {
+        'default_coordinates': {
+            'ne_lat': 52.65, # north,
+            'ne_lon': 13.69, # east,
+            'sw_lat': 52.43, # south,
+            'sw_lon': 13.09, # west,
+        },
+        'geojson_region': None,
+    }
+    
+    # dimensions of the images for map images
+    MAP_IMAGE_SIZE = (500, 500)
+    
     # switch to set if Microsites should be enabled.
     # this can be override for each portal to either activate or deactivate them
     MICROSITES_ENABLED = False
@@ -439,6 +453,7 @@ class CosinnusConf(AppConf):
         (7, _('Geld und Finanzen')),
         (8, _('Arbeit und Recht')),
         (9, _('Bauen und Wohnen')),
+        (10, _('Klimaschutz')),
     )
     
     
@@ -490,9 +505,6 @@ class CosinnusConf(AppConf):
     
     # not all servers are running Postgres >= 9.3 yet. as long as this is true, we cannot uniformly run some nicer queries
     DO_ALL_SERVERS_HAVE_PSQL_9_3 = False
-    
-    # if True, do not use haystack for map queries, but a deprecated, slow version
-    USE_DEPRECATED_NON_HAYSTACK_MAP_API = False
     
 
 class CosinnusDefaultSettings(AppConf):

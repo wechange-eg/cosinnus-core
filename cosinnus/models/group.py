@@ -24,7 +24,8 @@ from cosinnus.utils.functions import unique_aware_slugify,\
     clean_single_line_text
 from cosinnus.utils.files import get_group_avatar_filename,\
     get_portal_background_image_filename, get_group_wallpaper_filename,\
-    get_cosinnus_media_file_folder, get_group_gallery_image_filename
+    get_cosinnus_media_file_folder, get_group_gallery_image_filename,\
+    image_thumbnail, image_thumbnail_url
 from django.core.urlresolvers import reverse
 from django.utils.functional import cached_property
 from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
@@ -47,6 +48,7 @@ from cosinnus.models.mixins.images import ThumbnailableImageMixin
 from cosinnus.views.mixins.media import VideoEmbedFieldMixin,\
     FlickrEmbedFieldMixin
 from jsonfield.fields import JSONField
+from django.templatetags.static import static
 
 logger = logging.getLogger('cosinnus')
 
@@ -446,6 +448,8 @@ class CosinnusGroupMembershipManager(models.Manager):
 class CosinnusPortal(models.Model):
     
     _CURRENT_PORTAL_CACHE_KEY = 'cosinnus/core/portal/current'
+    _ALL_PORTAL_CACHE_KEY = 'cosinnus/core/portal/all'
+    
     if settings.DEBUG:
         _CUSTOM_CSS_FILENAME = '_ignoreme_cosinnus_custom_portal_%s_styles.css'
     else:
@@ -519,6 +523,15 @@ class CosinnusPortal(models.Model):
             cache.set(CosinnusPortal._CURRENT_PORTAL_CACHE_KEY, portal, 60 * 60 * 24 * 365) 
         return portal
     
+    @classmethod
+    def get_all(cls):
+        """ Cached, returns all Portals (short cache timeout to react to other sites' changes) """
+        portals = cache.get(CosinnusPortal._ALL_PORTAL_CACHE_KEY)
+        if portals is None:
+            portals = CosinnusPortal.objects.all().select_related('site')
+            cache.set(CosinnusPortal._ALL_PORTAL_CACHE_KEY, portals, 60 * 5) 
+        return portals
+    
     def save(self, *args, **kwargs):
         # clean color fields
         self.top_color = self.top_color.replace('#', '')
@@ -527,6 +540,7 @@ class CosinnusPortal(models.Model):
         super(CosinnusPortal, self).save(*args, **kwargs)
         self.compile_custom_stylesheet()
         cache.delete(self._CURRENT_PORTAL_CACHE_KEY)
+        cache.delete(self._ALL_PORTAL_CACHE_KEY)
     
     @property
     def admins(self):
@@ -571,6 +585,10 @@ class CosinnusPortal(models.Model):
     def get_domain(self):
         """ Gets the http/https protocol aware domain for this portal """
         return get_domain_for_portal(self)
+    
+    def get_logo_image_url(self):
+        """ Returns the portal logo static image URL """
+        return '%s%s' % (self.get_domain(), static('img/logo-icon.png'))
     
     def __str__(self):
         return self.name
@@ -920,42 +938,16 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
         return self.avatar.url if self.avatar else None
     
     def get_avatar_thumbnail(self, size=(80, 80)):
-        if not self.avatar:
-            return None
-
-        thumbnails = getattr(self, '_avatar_thumbnails', {})
-        if size not in thumbnails:
-            thumbnailer = get_thumbnailer(self.avatar)
-            try:
-                thumbnails[size] = thumbnailer.get_thumbnail({
-                    'crop': True,
-                    'upscale': True,
-                    'size': size,
-                })
-            except InvalidImageFormatError:
-                if settings.DEBUG:
-                    raise
-            setattr(self, '_avatar_thumbnails', thumbnails)
-        return thumbnails.get(size, None)
+        return image_thumbnail(self.avatar, size)
 
     def get_avatar_thumbnail_url(self, size=(80, 80)):
-        tn = self.get_avatar_thumbnail(size)
-        return tn.url if tn else None
+        return image_thumbnail_url(self.avatar, size) or static('images/group-avatar-placeholder.png')
     
-    def get_map_marker_image_url(self):
-        if self.avatar:
-            thumbnailer = get_thumbnailer(self.avatar)
-            try:
-                small_avatar = thumbnailer.get_thumbnail({
-                    'crop': True,
-                    'upscale': True,
-                    'size': (40, 40),
-                })
-                return small_avatar.url if small_avatar else ''
-            except InvalidImageFormatError:
-                if settings.DEBUG:
-                    raise
-        return ''
+    def get_image_field_for_icon(self):
+        return self.avatar or static('images/group-avatar-placeholder.png')
+    
+    def get_image_field_for_background(self):
+        return self.wallpaper
     
     def get_facebook_avatar_url(self):
         page_or_group_id = self.facebook_page_id or self.facebook_group_id or None

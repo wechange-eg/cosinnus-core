@@ -117,6 +117,15 @@ def filter_active_users(user_model_qs, filter_on_user_profile_model=False):
         return user_model_qs.exclude(is_active=False).\
             exclude(last_login__exact=None).\
             filter(cosinnus_profile__settings__contains='tos_accepted')
+            
+def filter_portal_users(user_model_qs, portal=None):
+    """ Filters a QS of ``get_user_model()`` so that only users of this portal remain. """
+    if portal is None:
+        global _CosinnusPortal
+        if _CosinnusPortal is None: 
+            _CosinnusPortal = get_model('cosinnus', 'CosinnusPortal')
+        portal = _CosinnusPortal.get_current()
+    return user_model_qs.filter(id__in=portal.members)
 
 
 def get_user_query_filter_for_search_terms(terms):

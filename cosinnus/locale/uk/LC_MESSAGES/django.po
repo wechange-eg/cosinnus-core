@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-05 16:12+0200\n"
-"PO-Revision-Date: 2018-02-05 13:59+0100\n"
+"POT-Creation-Date: 2018-05-29 15:06+0200\n"
+"PO-Revision-Date: 2018-05-29 14:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -114,6 +114,9 @@ msgstr "Робота та право"
 
 msgid "Bauen und Wohnen"
 msgstr "Будівництво та житло"
+
+msgid "Klimaschutz"
+msgstr ""
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgstr "Тільки члени спільноти/проекту можуть бачити цей вміст. Надішліть запит членства зараз!"
@@ -503,9 +506,11 @@ msgstr "Додаткові CSS"
 msgid "Extra CSS for this portal, will be applied after all other styles."
 msgstr "Додаткові CSS для цього порталу застосовуються після усіх інших стилів."
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Project"
 msgstr "Проект"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Group"
 msgstr "Спільнота"
 
@@ -750,6 +755,10 @@ msgstr "Дійсний до"
 msgid "Approach"
 msgstr "Підхід"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Topics"
 msgstr "Теми"
 
@@ -780,12 +789,20 @@ msgstr "Кнопкп створити проект чи групу"
 msgid "Users"
 msgstr "Користувачі"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Events"
 msgstr "Заходи"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Проекти"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "Спільноти"
 
@@ -1086,6 +1103,7 @@ msgstr "Назад до огляду"
 msgid "Settings"
 msgstr "Налаштування"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Members"
 msgstr "Члени"
 
@@ -1588,6 +1606,7 @@ msgstr ""
 msgid "Do you really want to delete the invitation for \"%(title)s\"?"
 msgstr "Ви дійсно бажаєте віхилити запрошення?"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
 msgstr "Надіслати повідомлення"
 
@@ -1983,6 +2002,7 @@ msgstr "Поширити"
 msgid "Share on Facebook"
 msgstr "Поширити на Facebook"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Contact"
 msgstr "Контакти"
 
@@ -2011,6 +2031,7 @@ msgstr "Користувачів у проекті %(group)s"
 msgid "Add user"
 msgstr "Додати користувача/-ку"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "User"
 msgstr "Користувач/-ка"
 
@@ -2188,7 +2209,7 @@ msgid ""
 "\n"
 "\n"
 "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-"%(domain_url)s%(user_verification_url)s\n"
+"%(domain_url)s%(user_verification_url)s%(next)s\n"
 "\n"
 "\n"
 "\n"
@@ -2204,7 +2225,7 @@ msgstr ""
 "\n"
 "\n"
 "Будь ласка, перейдіть за нижче вказаним посиланням для підтвердження вашої email-адреси (або скопіюйте та вставте посилання в адресний рядок вашого браузера):\n"
-"%(domain_url)s%(user_verification_url)s\n"
+"%(domain_url)s%(user_verification_url)s%(next)s\n"
 "\n"
 "\n"
 "\n"
@@ -2652,6 +2673,7 @@ msgstr "Діяльність"
 msgid "Forum"
 msgstr "Форум"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "People"
 msgstr "Люди"
 
@@ -2824,6 +2846,28 @@ msgstr "Зареєструватися"
 msgid "Create account"
 msgstr "Створити обліковий запис"
 
+msgid "Welcome to the Community!"
+msgstr ""
+
+msgid "You need a user account to join projects and become active!"
+msgstr ""
+
+msgid "You need a user account to continue!"
+msgstr ""
+
+msgid "Signing up is easy and fast. Just fill out these fields and you're all set!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create account"
+msgid "Already have an account?"
+msgstr "Створити обліковий запис"
+
+#, fuzzy
+#| msgid "Logged in before"
+msgid "Log in here"
+msgstr "Спершу увійти"
+
 msgid "Email address"
 msgstr "Адреса електронної скриньки"
 
@@ -2911,6 +2955,207 @@ msgstr "далі"
 
 msgid "Enter one or more search terms or select a topic to search."
 msgstr "Вкажіть один чи більше пошукових запитів, або оберіть тему для пошуку."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgctxt "Calendar"
+#| msgid "Event"
+msgid "Event"
+msgstr "Захід"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Idea"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Ideas"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search for Names, Topics and Places..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Share"
+msgid "Where"
+msgstr "Поширити"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "In map area"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "If active, searching will be restricted to the visible map area."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Apply Filters"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Clear Filters"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Stream"
+msgid "Street"
+msgstr "Діяльність"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Last edited"
+msgid "Satellite"
+msgstr "Востаннє редаговано"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Rearrange"
+msgid "Terrain"
+msgstr "Переоформити"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "of"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Reset"
+msgid "Results"
+msgstr "Скинути"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "No results found."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not complete the search due to an error."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search when moving the map"
+msgstr "Пошук серед проектів"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Search in teams"
+msgid "Search this area"
+msgstr "Пошук серед проектів"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Participants"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Portal memberships"
+msgid "Project/Group Members"
+msgstr "Членства на порталі"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Contact info"
+msgid "No info."
+msgstr "Контактна інформація "
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Group Administrator"
+msgid "Administrator"
+msgstr "Адміністратори спільноти"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Portal Administrators"
+msgid "Administrators"
+msgstr "Адміністратори порталу"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Portal Administrators"
+msgid "Administrators unknown"
+msgstr "Адміністратори порталу"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "No Description set"
+msgid "No description yet."
+msgstr "Опис не створено"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Project name"
+msgid "Protected Content"
+msgstr "Назва проекту"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Sorry, but you cannot view details for this content."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This can happen when its visibility settings have changed recently."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Please register or log in to continue!"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Error!"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Sorry, but the requested content could not be retrieved from the server."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Visit Event Page"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Hidden"
+msgid "Hidden Users"
+msgstr "Приховано"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Hidden"
+msgid "Hidden User"
+msgstr "Приховано"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You are a member!"
+msgid "You are a Member"
+msgstr "Тепер ви член!"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Edit Group"
+msgid "Join Group"
+msgstr "Редагувати спільноту"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create Group"
+msgid "Message Group"
+msgstr "Створити спільноту"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Edit Project"
+msgid "Join Project"
+msgstr "Редагувати проект"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create Project"
+msgid "Message Project"
+msgstr "Створити проект"
 
 msgid "About me"
 msgstr "Про мене"
@@ -3264,6 +3509,9 @@ msgstr "Опис проекту"
 msgid "About Us"
 msgstr "Про нас"
 
+msgid "Question about"
+msgstr ""
+
 #, python-format
 msgid "The language \"%s\" is not supported"
 msgstr "Мова «%s» не підтримується"
@@ -3611,6 +3859,11 @@ msgstr "Ви, на разі, не є членом %s! Якщо ви бажаєт
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
 
+#, fuzzy
+#~| msgid "Group"
+#~ msgid "Gruppen"
+#~ msgstr "Спільнота"
+
 #~ msgid "My Groups and Projects"
 #~ msgstr "Мої групи та проекти"
 
@@ -3764,9 +4017,6 @@ msgstr "Ваші зміни були збережені."
 
 #~ msgid "This is an internal description for the members."
 #~ msgstr "Це внутрішній опис для членів."
-
-#~ msgid "Hidden"
-#~ msgstr "Приховано"
 
 #~ msgid "show on map"
 #~ msgstr "Показати на мапі"

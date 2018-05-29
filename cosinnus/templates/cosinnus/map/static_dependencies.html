@@ -1,10 +1,12 @@
-{% load static sekizai_tags %}
+{% load static sekizai_tags cosinnus_tags cosinnus_map_tags %}
 
 {% addtoblock "js" %}
 <script src="{% static 'js/vendor/underscore-1.8.3.js' %}"></script>
 <script src="{% static 'js/vendor/backbone-1.3.3.js' %}"></script>
 <script src="{% static 'js/vendor/leaflet.js' %}"></script>
 <script src="{% static 'js/vendor/leaflet.markercluster-0.7.js' %}"></script>
+<script src="{% static 'js/vendor/masonry.pkgd.min.js' %}"></script>
+<script src="{% static 'js/vendor/imagesloaded.pkgd.min.js' %}"></script>
 <script src="{% static 'js/client.js' %}?v=0.3"></script>
 {% endaddtoblock %}
 
@@ -14,3 +16,10 @@
 <link href="{% static 'css/vendor/leaflet.markercluster.default-0.7.css' %}" rel="stylesheet">
 <link href="{% static 'css/vendor/spinkit-double-bounce.css' %}" rel="stylesheet">
 {% endaddtoblock %}
+
+<script type="text/javascript">
+    var COSINNUS_MAP_MARKER_ICONS = JSON.parse('{% render_map_marker_icon_json %}');
+    var COSINNUS_MAP_TOPICS_JSON = JSON.parse('{% render_cosinnus_topics_json %}');
+	var COSINNUS_MAP_OPTIONS = JSON.parse('{{ SETTINGS.COSINNUS_MAP_OPTIONS|json|safe }}');
+    var COSINNUS_PORTAL_INFOS = JSON.parse('{% render_cosinnus_portal_info_json %}');
+</script>

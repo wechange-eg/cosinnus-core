@@ -1,0 +1,74 @@
+{% extends 'tiles/grid-tile-base' %}
+{% import "include/macros.html" as macros %}
+
+{% block description_area %}
+    <h1>{{title}}</h1>
+    
+    {% if group_slug and group_name and portal %}
+        <div class="pale-color one-line">
+            {% if type == "projects" %}
+                {{ macros.typeLabel("groups", singular=1, useStyles=0, colon=1, showIcon=0) }}
+                {{ macros.resultLink(portal, group_slug, group_name, "groups") }}
+            {% else %}
+                {{ macros.typeLabel("projects", singular=1, useStyles=0, colon=1, showIcon=0) }}
+                {{ macros.resultLink(portal, group_slug, group_name, "projects") }}
+            {% endif %}
+        </div>
+    {% endif %}
+    
+    {% if topics|length > 0 %}
+        <div class="tile-section one-line">
+            <span class="pale-color">
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Topics" %}:
+            </span> 
+            {% for topic in topics %}
+                <a class="topic-filter-link " data-topic-id="{{ topic }}">{{ controlView.allTopics[topic] }}</a>{% if not loop.last %},{% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+    {% if description %}
+        <div class="tile-section tile-description">{{description|safe}}</div>
+    {% endif %}
+{% endblock %}
+
+{% block icon_area %}
+    {% if (type == "events" and participant_count > 1) or (type !="events" and member_count > 1) or (content_count > 0) %}
+    <div class="tile-section pale-color one-line">
+        {% if type == "events" and participant_count > 1 %}
+            <span class="multi-span" title="
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Participants" %}
+            ">
+                <i class="fa fa-group"></i> 
+                {{ participant_count }}
+            </span>
+        {% elif type !="events" and member_count > 1 %}
+            <span class="multi-span" title="
+                {% if type == "people" %}
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Project/Group Members" %}
+                {% else %}
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Members" %}
+                {% endif %}
+            ">
+                <i class="fa fa-group"></i> 
+                {{ member_count }}
+            </span>
+        {% endif %}
+        
+        {% if content_count > 0 %}
+            <span class="multi-span" title="
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Events" %}
+            ">
+                <i class="fa fa-calendar"></i> 
+                {{ content_count }}
+            </span>
+        {% endif %}
+    </div>
+    {% endif %}
+    
+{% endblock %}

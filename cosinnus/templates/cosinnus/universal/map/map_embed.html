@@ -1,37 +1,43 @@
 {% load static cosinnus_tags cosinnus_map_tags %}
 
 <html>
-	<head>
-		<script src="{% static 'js/vendor/jquery-2.1.0.min.js' %}"></script>
-		<script src="{% static 'js/vendor/underscore-1.8.3.js' %}"></script>
-		<script src="{% static 'js/vendor/backbone-1.3.3.js' %}"></script>
-		<script src="{% static 'js/vendor/leaflet.js' %}"></script>
-		<script src="{% static 'js/vendor/leaflet.markercluster-0.7.js' %}"></script>
+    <head>
+        <script type="text/javascript">
+            var COSINNUS_MAP_MARKER_ICONS = JSON.parse('{% render_map_marker_icon_json %}');
+            var COSINNUS_MAP_TOPICS_JSON = JSON.parse('{% render_cosinnus_topics_json %}');
+            var COSINNUS_MAP_OPTIONS = JSON.parse('{{ SETTINGS.COSINNUS_MAP_OPTIONS|json|safe }}');
+            var COSINNUS_PORTAL_INFOS = JSON.parse('{% render_cosinnus_portal_info_json %}');
+            var cosinnus_current_language = "{{ COSINNUS_CURRENT_LANGUAGE }}";
+            var cosinnus_active_user = JSON.parse("{{ COSINNUS_USER|escapejs }}");
+        </script>
+        
+        <script src="{% static 'js/vendor/jquery-2.1.0.min.js' %}"></script>
+        <script src="{% static 'js/vendor/underscore-1.8.3.js' %}"></script>
+        <script src="{% static 'js/vendor/backbone-1.3.3.js' %}"></script>
+        <script src="{% static 'js/vendor/leaflet.js' %}"></script>
+        <script src="{% static 'js/vendor/leaflet.markercluster-0.7.js' %}"></script>
         <script src="{% static 'js/vendor/select2.min.js' %}"></script>
-		<script src="{% static 'js/client.js' %}?v=0.3"></script>
-		
-		<link href="{% static 'css/bootstrap3-cosinnus.css' %}" rel="stylesheet">
+        <script src="{% static 'js/client.js' %}?v=0.3"></script>
+        <link href="{% static 'css/bootstrap3-cosinnus.css' %}" rel="stylesheet">
         <link href="{% static 'css/vendor/font-awesome.min.css' %}" rel="stylesheet">
-		<link href="{% static 'css/vendor/leaflet.css' %}" rel="stylesheet">
-		<link href="{% static 'css/vendor/leaflet.markercluster-0.7.css' %}" rel="stylesheet">
-		<link href="{% static 'css/vendor/leaflet.markercluster.default-0.7.css' %}" rel="stylesheet">
-		<link href="{% static 'css/vendor/spinkit-double-bounce.css' %}" rel="stylesheet">
+        <link href="{% static 'css/vendor/leaflet.css' %}" rel="stylesheet">
+        <link href="{% static 'css/vendor/leaflet.markercluster-0.7.css' %}" rel="stylesheet">
+        <link href="{% static 'css/vendor/leaflet.markercluster.default-0.7.css' %}" rel="stylesheet">
+        <link href="{% static 'css/vendor/spinkit-double-bounce.css' %}" rel="stylesheet">
         <link href="{% static 'css/vendor/select2.css' %}" rel="stylesheet">
-		
-		{% if True %}
-		<link rel="stylesheet/less" href="{% static "less/cosinnus.less" %}">
-		<script src="{% static "js/vendor/less.min.js" %}"></script>
-		{% else %}
-	    <link href="{% static 'css/cosinnus.css' %}?v=0.29" rel="stylesheet">
-		{% endif %}
-	</head>
-	
-	<body>
-    	{% include 'cosinnus/common/internet_explorer_not_supported.html' %}
-		
-		<div class="map-root"></div>
-		{% captureas map_settings %}{"controlsEnabled": {% if request.GET.controls_disabled %}false{% else %}true{% endif %}, "topicsHtml": "{% render_cosinnus_topics_field "escape" %}", "markerIcons": {% render_map_marker_icon_json %}}{% endcaptureas %}
-            
-		{% include 'cosinnus/common/init_client_module.html' with module='map' id="fullscreen" extra_classes="no-navbar" settings=map_settings  %}
-	</body>
+        
+        {% if True %}
+        <link rel="stylesheet/less" href="{% static "less/cosinnus.less" %}">
+        <script src="{% static "js/vendor/less.min.js" %}"></script>
+        {% else %}
+        <link href="{% static 'css/cosinnus.css' %}?v=0.29" rel="stylesheet">
+        {% endif %}
+    </head>
+    
+    <body>
+        {% include 'cosinnus/common/internet_explorer_not_supported.html' %}
+        
+        {% captureas controlsEnabled %}{% if request.GET.controls_disabled %}0{% else %}1{% endif %}{% endcaptureas %}
+        {% include 'cosinnus/common/init_client_module.html' with module='module-embed' id="app-embed" extra_classes="no-navbar" fullscreen=True controlsEnabled=controlsEnabled  %}
+    </body>
 </html>

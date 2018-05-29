@@ -6,7 +6,7 @@ from django.contrib.contenttypes import generic
 from django.db import models
 from django.db.models import Q
 from django.db.models.signals import post_save
-from django.utils.encoding import python_2_unicode_compatible
+from django.utils.encoding import python_2_unicode_compatible, force_text
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
@@ -30,6 +30,7 @@ from cosinnus.core.registries import app_registry
 from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
 from cosinnus.utils.group import get_cosinnus_group_model
+from django.utils import translation
 
 
 
@@ -143,11 +144,28 @@ class BaseTagObject(models.Model):
             self.likes = self.likers.count()
         super(BaseTagObject, self).save(*args, **kwargs)
     
-    @property
-    def get_topics_display(self):
-        return ', '.join(self.get_topics())
+    def get_all_language_topics_rendered(self):
+        """ Returns a single string with all assigned topic strings for each language """
+        if not self.topics:
+            return ''
+        renders = []
+        cur_language = translation.get_language()
+        try:
+            for lang in settings.LANGUAGES:
+                translation.activate(lang[0])
+                topi = self.get_topics_rendered()
+                renders.append(topi)
+        finally:
+            if not cur_language:
+                translation.deactivate()
+            else:
+                translation.activate(cur_language)
+        return ', '.join([topic_str for topic_str in renders if topic_str])
     
-    @property
+    def get_topics_rendered(self):
+        ret = ', '.join([force_text(t) for t in self.get_topics()])
+        return ret 
+    
     def get_topics(self):
         ret = []
         if self.topics:

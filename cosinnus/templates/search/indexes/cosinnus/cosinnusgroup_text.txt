@@ -1,4 +1,5 @@
 {{ object.name }}
-{{ object.description }}
-{{ object.description_long }}
+{% if object.description %}{{ object.description }}{% endif %}
+{% if object.description_long %}{{ object.description_long }}{% endif %}
+{% if object.media_tag and object.media_tag.location %}{{ object.media_tag.location }}{% endif %}
 {% include "search/indexes/cosinnus/_media_tag_text.txt" %}

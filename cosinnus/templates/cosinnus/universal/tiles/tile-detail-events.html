@@ -1,0 +1,76 @@
+{% extends 'tiles/tile-detail-base' %}
+{% import "include/macros.html" as macros %}
+
+{% block header_image %}
+    {% if backgroundImageLargeUrl %}
+        <div class="tile-section header-image">
+            <div class="dual-tile-image">
+                <img class="tile-image tile-image-background" src="{{ backgroundImageLargeUrl }}" /> 
+            </div>
+        </div>
+    {% endif %}
+{% endblock header_image %}
+
+        
+{% block additional_top_line %}
+    <div class="tile-section tile-section">
+        <div>
+            <i class="fa fa-fw fa-clock-o"></i>{{ time_html|safe }}
+        </div>
+        {% if address %}
+            <div class="capitalize">
+                <i class="fa fa-fw fa-map-marker"></i>{{ address }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock additional_top_line %}
+
+{% block action_buttons %}
+    <div class="tile-section">
+        <a class="rounded-button button-action" href="{% if type == "people" %}{{ controlView.portalInfo[portal].domain }}{% endif %}{{ url }}" target="_blank">
+            <span class="rounded-button-inner">
+                <i clasS="fa fa-external-link"></i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Visit Event Page" %}
+            </span>
+        </a>
+    </div>
+{% endblock %}
+        
+
+{% block related_content %}
+
+    {% if participant_count > 0 %}
+        <div class="tile-section tile-section-divided">
+            <div class="subheading">
+                <i class="fa fa-user"></i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Participants" %} ({{ participant_count }})
+            </div>
+        </div>
+        <div class="tile-section">
+            <div class="row">
+                {% for participant in participants %}
+                    <div class="col-sm-6">
+                        {{ macros.itemCard(participant.portal, participant.slug, participant.title, participant.type, participant.iconImageUrl, participant.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user) }}
+                    </div>
+                {% endfor %}
+            </div>
+            {% if participant_count - participants|length > 0 %}
+                <div class="">
+                    <i>
+                        +{{ participant_count - participants|length }} 
+                        {% if participant_count - participants|length > 1 %}
+                            {# Translators: __INCLUDE_JS_PO__ #}
+                            {% trans "Hidden Users" %}
+                        {% else %}
+                            {# Translators: __INCLUDE_JS_PO__ #}
+                            {% trans "Hidden User" %}
+                        {% endif %}
+                    </i>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+    
+{% endblock related_content %}

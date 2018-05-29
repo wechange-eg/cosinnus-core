@@ -1,36 +1,50 @@
 'use strict'
 
-var Map = require('models/map');
 var MapView = require('views/map-view');
+var util = require('lib/util.js');
 
 module.exports = Backbone.Router.extend({
+    
     routes: {
-        'map/': 'map'
+        'map/': 'route_app_map_tiles'
     },
+    
+    first_route_event: true,
 
-    map: function () {
-        // If the map view hasn't been instantiated, create and render it.
-        if (!this.mapFullscreen) {
-            /* TODO: this should not take JS default values, but should also check for settings
-                 defined in the HTML context (via global variable?)
-                 
-                 availableFilters: settings.availableFilters,
-                 activeFilters: settings.activeFilters,
-             */
-            // TODO: find a good solution for not using COSINNUS_MAP_MARKER_ICONS as a global JS variable
-            var topicsHtml = typeof COSINNUS_MAP_TOPICS_HTML !== 'undefined' ? $("<div/>").html(COSINNUS_MAP_TOPICS_HTML).text() : '';
-            this.mapFullscreen = new Map({}, {
-                topicsHtml: topicsHtml
+    route_app_map_tiles: function () {
+        // If the base app view hasn't been instantiated, create and render it.
+        util.log('router.js: routed ')
+        Backbone.mediator.publish('navigate:map');
+    },
+    
+    /** Triggered by the mediator event 'navigate:router' */
+    on_navigate: function(url) {
+        util.log('router.js: got a navigate event!')
+        util.log(url)
+        
+        if (url) {
+            Backbone.Router.prototype.navigate.call(this, url, { 
+                trigger: false,
+                replace: App.router.first_route_event
             });
-            var view = new MapView({
-                el: '#map-fullscreen',
-                model: this.mapFullscreen,
-                markerIcons: typeof COSINNUS_MAP_MARKER_ICONS !== 'undefined' ? COSINNUS_MAP_MARKER_ICONS : {},
-            });
-            view.render();
-        // Otherwise navigation has occurred between map states.
-        } else {
-            Backbone.mediator.publish('navigate:map');
+            
+            if (App.router.first_route_event) {
+                util.log('router.js: THIS IS THE FIRST NAVIGATE EVENT. Replacing history state instead of adding a new one!')
+                App.router.first_route_event = false;
+            }
         }
+    },
+    
+    /**
+     * Direct convenience function to update the URL without any fetches or routing
+     */
+    replaceUrl: function(url) {
+        util.log('router.js: Replacing the current history URL without navigation or routing.')
+        Backbone.Router.prototype.navigate.call(this, url, { 
+            trigger: false,
+            replace: true
+        });
     }
+    
+    
 });

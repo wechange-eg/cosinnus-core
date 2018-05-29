@@ -1,0 +1,26 @@
+{% load i18n %}
+<div>
+    <div data-layer="street"
+        class="rounded-button rounded-button-small button-action layer-button {% if layer == 'street' %} selected {% endif %}">
+        <span class="rounded-button-inner">
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Street" %}
+        </span>
+    </div>
+
+    <div data-layer="satellite"
+        class="rounded-button rounded-button-small button-action layer-button {% if layer == 'satellite' %} selected {% endif %}">
+        <span class="rounded-button-inner">
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Satellite" %}
+        </span>
+    </div>
+
+    <div data-layer="terrain"
+        class="rounded-button rounded-button-small button-action layer-button {% if layer == 'terrain' %} selected {% endif %}">
+        <span class="rounded-button-inner">
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Terrain" %}
+        </span>
+    </div>
+</div>

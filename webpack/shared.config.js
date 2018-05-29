@@ -2,8 +2,12 @@ var webpack = require('webpack');
 var path = require('path');
 var base = path.resolve('.');
 
+var collectPO = require('../cosinnus/client/lib/collect-po.js');
+
+var LANGUAGES = ['en', 'de', 'ru', 'uk'];
+
 module.exports = {
-    entry: path.join(base, 'cosinnus/client/index.js'),
+    entry: path.join(base, 'cosinnus/client/app.js'),
     output: {
         path: path.join(base, 'cosinnus/static/js/'),
         filename: 'client.js'
@@ -19,7 +23,7 @@ module.exports = {
                 query: {
                     config: path.join(base, 'nunjucks.config.js')
                 }
-            }
+            },
         ],
     },
     resolve: {
@@ -32,5 +36,13 @@ module.exports = {
             '.html',
             ''
         ]
-    }
+    },
+    plugins: [
+    	new webpack.DefinePlugin({
+	      'COSINNUS_PO_TRANS': JSON.stringify(collectPO.parsePO(LANGUAGES))
+	    })
+    ],
+    node: {
+	  fs: "empty"
+	},
 }

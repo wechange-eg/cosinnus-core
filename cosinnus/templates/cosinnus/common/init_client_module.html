@@ -1,10 +1,17 @@
-<div id="{{module}}-{{id}}" style="width: {{width}}px; height: {{height}}px;" class="{{module}}-root {{ extra_classes }}"></div>
+<div id="app-{{id}}" style="width: {{width}}px; height: {{height}}px;" class="app-root {% if fullscreen == True %}app-fullscreen{% else %}app-embed{% endif %} {{ extra_classes }}"></div>
 
 <script>
     $('html').on('init:client', function () {
         Backbone.mediator.publish('init:{{module}}', {
-            el: '#{{module}}-{{id}}',
-            settings: '{{settings|safe}}'
+            el: '#app-{{id}}',
+            settings: '{% if settings %}{{settings|safe}}{% else %}{}{% endif %}',
+            display: {
+                showMap: true,
+                showTiles: false,
+                showControls: {% if controlsEnabled == True or controlsEnabled == "1" %}true{% else %}false{% endif %},
+                fullscreen: {% if fullscreen == True %}true{% else %}false{% endif %},
+                routeNavigation: false
+           }
         });
     });
 </script>

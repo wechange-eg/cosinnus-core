@@ -22,8 +22,33 @@
     {% csrf_token %}
     <input type="hidden" name="next" value="/">
     
+    
     <!-- a box with semi transparent background -->
     <div class="content-box">
+	    {% if request.GET.join_msg == "1" or request.GET.acc_req_msg == "1" %}
+	        <div class="alert alert-warning">
+	            <i class="fa fa-heart fa-3x"></i>
+	            <h4>{% trans "Welcome to the Community!" %}</h4>
+	            <div class="v-offset-s">
+		            <p>
+		                {% if request.GET.join_msg == "1" %}
+		                    {% trans "You need a user account to join projects and become active!" %}
+		                {% else %}
+		                    {% trans "You need a user account to continue!" %}
+		                {% endif %}
+		                {% trans "Signing up is easy and fast. Just fill out these fields and you're all set!" %}
+		            </p>
+	            </div>
+	            <div class="v-offset-s">
+		            <p>
+		                {% trans "Already have an account?" %} <a href="{% url 'login' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">{% trans "Log in here" %}</a>
+		            </p>
+	            </div>
+	        </div>
+	    {% endif %}
+	    
+        <h2>{% trans "Sign up" %}</h2>
+    
         {{ form.non_field_errors }}
         
         {# Regular Field #}

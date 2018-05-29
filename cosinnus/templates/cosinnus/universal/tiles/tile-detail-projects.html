@@ -1,0 +1,32 @@
+{% extends 'tiles/tile-detail-base-group' %}
+{% import "include/macros.html" as macros %}
+
+
+{% block action_buttons %}
+    <div class="tile-section">
+        {% if is_member %}
+            <a class="rounded-button button-action disabled">
+                <span class="rounded-button-inner">
+                    <i clasS="fa fa-check"></i>
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "You are a Member" %}
+                </span>
+            </a>
+        {% else %}
+           <a href="{{ action_url_1 }}" target="_blank" class="rounded-button button-action">
+                <span class="rounded-button-inner">
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Join Project" %}
+                </span>
+            </a>
+        {% endif %}
+        {% if action_url_2 %}
+            <a href="{{ action_url_2 }}" target="_blank" class="rounded-button button-action">
+                <span class="rounded-button-inner">
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Message Project" %}
+                </span>
+            </a>
+        {% endif %}
+    </div>
+{% endblock action_buttons %}

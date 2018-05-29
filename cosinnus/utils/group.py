@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.core.urlresolvers import reverse
 from django.db.models import get_model
+from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import force_text
+from django.utils.http import urlquote
 
 
 DEFAULT_CONTENT_MODELS = [
@@ -61,3 +65,13 @@ def get_cosinnus_group_model():
         _CosinnusGroup = group_model
         
     return _CosinnusGroup   
+
+
+def message_group_admins_url(group, group_admins=None):
+    """ Generates a postman:write URL to the admins of the given group, complete with subject line """
+    group_admins = group_admins or group.actual_admins
+    if not group_admins:
+        return None
+    message_subject = force_text(_('Question about')) + ' ' + force_text(_('Group') if group.type == group.TYPE_SOCIETY else _('Project')) + ': ' + group.name
+    return reverse('postman:write', kwargs={'recipients':','.join([user.username for user in group_admins])}) + '?subject=' + urlquote(message_subject)
+        

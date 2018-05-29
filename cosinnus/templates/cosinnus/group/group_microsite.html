@@ -694,10 +694,18 @@
 	
 	{% endblock microsite_content %}
 	
+	
 
 {% endblock main_page %}
 
 
 {% block extrafooter %}
-  {{ block.super }}
+    {{ block.super }}
+    {% if request.GET.join == "1" %}
+	    <script type="text/javascript">
+	        $(function(){
+	            $('#join_withdraw_modal').modal('show');
+	        });
+	    </script>
+	{% endif %}
 {% endblock %}

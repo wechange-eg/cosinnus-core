@@ -1,0 +1,26 @@
+{% extends 'tiles/tile-detail-base' %}
+{% import "include/macros.html" as macros %}
+
+{% block content %}
+    <h1 class="error-title">
+        {# Translators: __INCLUDE_JS_PO__ #}
+        {% trans "Protected Content" %}
+    </h1>
+    <div class="error-text">
+        <p>
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Sorry, but you cannot view details for this content." %}
+        </p>
+        <p>
+            {% if cosinnus_active_user %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "This can happen when its visibility settings have changed recently." %}
+            {% else %}
+                <a href="/signup/?acc_req_msg=1" target="_blank">
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Please register or log in to continue!" %}
+                </a>
+            {% endif %}
+        </p>
+    </div>
+{% endblock content %}

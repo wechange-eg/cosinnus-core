@@ -2,7 +2,7 @@
   "name": "cosinnus-core",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "directories": {
     "doc": "docs",
     "test": "tests"
@@ -24,6 +24,7 @@
     "nunjucks-loader": "^2.4.2",
     "script-loader": "^0.7.0",
     "underscore": "^1.8.3",
-    "webpack": "^1.13.0"
+    "webpack": "^1.13.0",
+    "pofile": "^1.0.10"
   }
 }

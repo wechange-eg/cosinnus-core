@@ -1,33 +1,38 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n thumbnail cosinnus_tags %}
 
+{% block html_attributes %}style="overflow: hidden;"{% endblock html_attributes %}
+
 {% block page_title %}{% trans "Map" %}{% endblock %}
+
+{% block og_url %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ request.path }}{% if request.GET.values %}?{{ request.GET.urlencode|safe }}{% endif %}{% endblock og_url %}
+{% block og_title %}{% if item %}{{ item.title }} - {% endif %}{{ block.super }}{% endblock %}
+{% block og_image %}{% if item and item.imageUrl %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ item.imageUrl }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+{% block og_description %}{% if item and item.description %}{{ item.description|linebreaksoneline|striptags }}{% else %}{{ block.super }}{% endif %}{% endblock %}
 
 {% block extrahead %}
     {{ block.super }}
-    
-    {% comment %}  
-    	TODO FIXME: clean up COSINNUS_MAP_MARKER_ICONS so they are not in global context anymore, but instead get
-    	put into a proper global cosinnus Object (once this object has been created)
-    {% endcomment %}
-	<script type="text/javascript">var COSINNUS_MAP_MARKER_ICONS = JSON.parse('{{ markers|safe }}');</script>
-    <script type="text/javascript">var COSINNUS_MAP_TOPICS_HTML = '{% render_cosinnus_topics_field "escape" %}';</script>
-    
 	{% include 'cosinnus/map/static_dependencies.html' %}
 {% endblock extrahead %}
+
 
 {% block main_page %}
     <div class="row">
     	{% include 'cosinnus/common/internet_explorer_not_supported.html' %}
     
-        {% comment %} Settings for this map are initialized in the extraheader, and passed in a router.js, and uses a lot of
-                       the default settings defined in map.js.        
+        {% comment %} Some settings for this map are initialized in the extraheader, and passed in a router.js, and uses a lot of
+                       the default settings defined in map.js.  
+                      We don't pass a `settings param here because we use all the default ones.`      
         {% endcomment %}
-        <div id="map-fullscreen" class="map-root"></div>
-        {% comment %}
-            {% include 'cosinnus/common/init_client_module.html' with module='map' id=1 height=400 settings=settings %}
-            {% include 'cosinnus/common/init_client_module.html' with module='map' id=2 height=800 settings=settings %}
-        {% endcomment %}
+        <div id="app-fullscreen" class="app-root app-fullscreen"></div>
+        <script>
+		    $('html').on('init:client', function () {
+		        console.log('got init client, now init:module-full-routed');
+		        Backbone.mediator.publish('init:module-full-routed', {
+		            el: '#app-fullscreen',
+		        });
+		    });
+		</script>
     </div>
 
 {% endblock main_page %}
