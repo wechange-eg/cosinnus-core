@@ -319,11 +319,12 @@ module.exports = ContentControlView.extend({
     		var $tar = $(event.target).closest('.result-link');
     		var data = {
     			portal: $tar.attr('data-portal') || 0,
-    			slug: $tar.attr('data-slug'),
     			type: $tar.attr('data-type'),
+    			slug: $tar.attr('data-slug'),
     		}
+    		directItemId = data['portal'] + '.' + data['type'] + '.' + data['slug'];
     	} else {
-    		var itemData = directItemId.split('.'); // see util.itemIdFromResult(...)
+    		var itemData = directItemId.split('.');
     		data = {
 				portal: itemData[0],
 				type: itemData[1],
