@@ -81,32 +81,6 @@ module.exports = ContentControlView.extend({
     	// the resulting area is actually sent as coords to the search API 
     	latLngBuffer: 0.01,
     	
-    	mapMarkerStaticPath: '/static/images/map-markers/',
-    	
-    	// correcspond to the model values of Result.type
-    	resultMarkerImages: {
-    		people: 'placemark-s-person.png',
-    		events: 'placemark-s-event.png',
-    		projects: 'placemark-s-project.png',
-    		groups: 'placemark-s-group.png',
-    		ideas: 'placemark-s-idea.png',
-    		peopleLarge: 'placemark-l-icon-person.png',
-    		eventsLarge: 'placemark-l-icon-event.png',
-    		projectsLarge: 'placemark-l-icon-project.png',
-    		groupsLarge: 'placemark-l-icon-group.png',
-    		ideasLarge: 'placemark-l-icon-idea.png',
-    		peopleStacked: 'placemark-m-person.png',
-    		eventsStacked: 'placemark-m-event.png',
-    		projectsStacked: 'placemark-m-project.png',
-    		groupsStacked: 'placemark-m-group.png',
-    		ideasStacked: 'placemark-m-idea.png',
-    		peopleBase: 'placemark-l-person.png',
-    		eventsBase: 'placemark-l-event.png',
-    		projectsBase: 'placemark-l-project.png',
-    		groupsBase: 'placemark-l-group.png',
-    		ideasBase: 'placemark-l-idea.png'
-    	},
-    	
     	resultMarkerSizes: {
     		width: 14,
     		height: 14,
@@ -248,12 +222,12 @@ module.exports = ContentControlView.extend({
     		this.markerRemove(result);
     	}
     	
-    	
     	// for clustered markers, every marker but the base marker becomes a stacked marker.
     	var markerIcon = this.getMarkerIconForType(result.get('type'), isLargeMarker, clusterLevel > 0, clusterLevel == 0);
     	var coords = clusterCoords ? clusterCoords : [result.get('lat'), result.get('lon')];
     	var isPointedMarker = isLargeMarker || typeof clusterLevel !== 'undefined' || clusterLevel == 0;
     	var clusterOffset = 0;
+    	
     	// add clusterLevel as offset
     	if (typeof clusterLevel !== 'undefined' && clusterLevel > 0) {
     		clusterOffset = this.options.MARKER_STACK_PX_OFFSET_BASE + (this.options.MARKER_STACK_PX_OFFSET_PER_CLUSTER_LEVEL * clusterLevel);
@@ -262,18 +236,16 @@ module.exports = ContentControlView.extend({
     	
         var marker = L.marker(coords, {
             icon: L.divIcon({
-//                iconUrl: markerIcon.iconUrl, // is being ignored by divIcon, use for Icon
                 iconSize: [markerIcon.iconWidth, markerIcon.iconHeight],
                 iconAnchor: [markerIcon.iconWidth / 2, (markerIcon.iconHeight / (isPointedMarker ? 1 : 2)) + clusterOffset],
-                className: markerIcon.className, // only makes sense for divIcon, do not use for Icon
+                className: markerIcon.className,
 //                popupAnchor: [1, -27],
-//                shadowSize: [28, 28]
             }),
             zIndexOffset: clusterLevel ? (1000 + (100*clusterLevel)) : null,
             riseOnHover: false
         });
-    	
-    	
+
+        
     	// bind click/hover events 
     	if (this.options.enablePopup) {
     		marker.bindPopup(popupTemplate.render({
@@ -564,7 +536,6 @@ module.exports = ContentControlView.extend({
         if (this.options.markerIcons && this.options.markerIcons[resultType]) {
             var iconSettings = this.options.markerIcons[resultType];
             markerIcon = {
-        		iconUrl: iconSettings.url,
         		iconWidth: iconSettings.width,
         		iconHeight: iconSettings.height
             };
@@ -587,7 +558,6 @@ module.exports = ContentControlView.extend({
         	className += ' ' + resultType;
         	
         	markerIcon = {
-	            iconUrl: this.options.mapMarkerStaticPath + this.options.resultMarkerImages[resultType + suffix],
 	            iconWidth: this.options.resultMarkerSizes['width' + suffix],
 	            iconHeight: this.options.resultMarkerSizes['height' + suffix],
 	            className: className
