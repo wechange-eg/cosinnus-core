@@ -62,6 +62,7 @@ class MapView(TemplateView):
     def get_context_data(self, **kwargs):
         ctx = {
             'markers': get_map_marker_icon_settings_json(),
+            'skip_page_footer': True,
         }
         item = self.request.GET.get('item', None)
         if item:
