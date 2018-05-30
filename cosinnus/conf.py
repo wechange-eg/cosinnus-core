@@ -367,12 +367,13 @@ class CosinnusConf(AppConf):
     MAP_MARKER_ICONS = {}
     
     # Default starting map coordinates if no coordinates have been specified
+    # currently: central europe with germany centered
     COSINNUS_MAP_OPTIONS = {
         'default_coordinates': {
-            'ne_lat': 52.65, # north,
-            'ne_lon': 13.69, # east,
-            'sw_lat': 52.43, # south,
-            'sw_lon': 13.09, # west,
+            'ne_lat': 55.32, # north,
+            'ne_lon': 15.56, # east,
+            'sw_lat': 47.58, # south,
+            'sw_lon': 5.01, # west,
         },
         'geojson_region': None,
     }
