@@ -122,11 +122,11 @@ def image_thumbnail(image, size):
             'upscale': True,
             'size': size,
         })
+        return thumbnail
     except InvalidImageFormatError:
         if settings.DEBUG:
             raise
-    return thumbnail
-
+    return None
 
 def image_thumbnail_url(image, size):
     """ Returns the static image URL for a thumbnail to a given image field in the required size, 
