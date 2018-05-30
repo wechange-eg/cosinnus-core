@@ -129,7 +129,7 @@ class StoredDataIndexMixin(indexes.SearchIndex):
     
     title = indexes.CharField(stored=True, indexed=False)
     # slug for linking
-    slug = indexes.CharField(stored=True, indexed=False)
+    slug = indexes.CharField(stored=True, indexed=True)
     url = indexes.CharField(stored=True, indexed=False)
     description = indexes.CharField(stored=True, indexed=False)
     # the small icon image, should be a 144x144 image
@@ -139,7 +139,7 @@ class StoredDataIndexMixin(indexes.SearchIndex):
     # the large background image or None, should be a 1000x550 image
     background_image_large_url = indexes.CharField(stored=True, indexed=False)
     # group slug for linking, subject to implementing indexed
-    group_slug = indexes.CharField(stored=True, indexed=False)
+    group_slug = indexes.CharField(stored=True, indexed=True)
     # group name for linking, subject to implementing indexed
     group_name = indexes.CharField(stored=True, indexed=False)
     # attendees for events, projects for groups
@@ -277,7 +277,7 @@ class DocumentBoostMixin(object):
         return data
     
 
-class BaseTaggableObjectIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearchIndex):
+class BaseTaggableObjectIndex(DocumentBoostMixin, TagObjectSearchIndex):
     text = TemplateResolveEdgeNgramField(document=True, use_template=True)
     rendered = TemplateResolveCharField(use_template=True, indexed=False)
     
