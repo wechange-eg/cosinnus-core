@@ -48,11 +48,11 @@
     </span>
 {% endmacro %}
 
-{% macro resultLink(portal, slug, name, type, inline_only=0) %}
+{% macro resultLink(portal, slug, name, type, group_slug=null, inline_only=0) %}
     {% if inline_only == 1 %}
-        data-portal="{{ portal }}" data-slug="{{ slug }}" data-type="{{ type }}"
+        data-portal="{{ portal }}" data-slug="{% if type == 'events' and group_slug %}{{ group_slug }}*{% endif %}{{ slug }}" data-type="{{ type }}"
     {% else %}
-        <a class="result-link" data-portal="{{ portal }}" data-slug="{{ slug }}" data-type="{{ type }}">{{ name }}</a>
+        <a class="result-link" data-portal="{{ portal }}" data-slug="{% if type == 'events' and group_slug %}{{ group_slug }}*{% endif %}{{ slug }}" data-type="{{ type }}">{{ name }}</a>
     {% endif %}
 {% endmacro %}
 
@@ -67,7 +67,7 @@
             {% if type == "people" and not cosinnus_active_user %}
                 <a href="/signup/?acc_req_msg=1" target="_blank">{{ title }}</a>
             {% else %}
-                {{ resultLink(portal, slug, title, type) }}
+                {{ resultLink(portal, slug, title, type, group_slug=group_slug) }}
             {% endif %}
         </div>
         <div class="card-data">

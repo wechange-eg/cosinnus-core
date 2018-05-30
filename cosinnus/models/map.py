@@ -428,7 +428,11 @@ def itemid_from_searchresult(result):
     """ Returns a unique long id for a haystack result without revealing any DB ids. 
         itemid: <portal_id>.<modeltype>.<slug>
         Example:  `1.people.saschanarr` """
-    return '%d.%s.%s' % (result.portal or 0, SEARCH_MODEL_NAMES[result.model], result.slug)
+    model_name = SEARCH_MODEL_NAMES[result.model]
+    slug = result.slug
+    if model_name == 'events':
+        slug = '%s*%s' % (result.group_slug, slug)
+    return '%d.%s.%s' % (result.portal or 0, model_name, slug)
 
 def filter_event_searchqueryset_by_upcoming(sqs):
     # upcoming events
