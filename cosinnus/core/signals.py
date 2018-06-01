@@ -9,6 +9,9 @@ all_cosinnus_apps_loaded = dispatch.Signal()
 """ Called after a CosinnusGroup, or one of its extending models is freshly created """
 group_object_ceated = dispatch.Signal(providing_args=["group"])
 
+""" Called after a CosinnusIdea is freshly created """
+idea_object_ceated = dispatch.Signal(providing_args=["idea"])
+
 """ Called after a new user and their profile is freshly created """
 userprofile_ceated = dispatch.Signal(providing_args=["profile"])
 

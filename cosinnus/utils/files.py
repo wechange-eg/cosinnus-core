@@ -51,6 +51,9 @@ def get_group_gallery_image_filename(instance, filename):
 def get_group_wallpaper_filename(instance, filename):
     return _get_avatar_filename(instance, filename, 'group_wallpapers', base_folder='group_images')
 
+def get_idea_image_filename(instance, filename):
+    return _get_avatar_filename(instance, filename, 'images', base_folder='idea_images')
+
 def _get_avatar_filename(instance, filename, folder_type, base_folder='avatars'):
     _, ext = path.splitext(filename)
     filedir = path.join(get_cosinnus_media_file_folder(), base_folder, folder_type)

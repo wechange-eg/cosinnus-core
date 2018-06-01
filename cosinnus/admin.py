@@ -25,6 +25,9 @@ from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.contrib.auth import login as django_login
 
+from cosinnus.conf import settings
+from cosinnus.models.idea import CosinnusIdea
+
 
 class SingleDeleteActionMixin(object):
     
@@ -438,6 +441,20 @@ class CosinnusFailedLoginRateLimitLogAdmin(admin.ModelAdmin):
     readonly_fields = ('date',)
 
 admin.site.register(CosinnusFailedLoginRateLimitLog, CosinnusFailedLoginRateLimitLogAdmin)
+
+
+if settings.COSINNUS_IDEAS_ENABLED:
+    
+    class CosinnusIdeaAdmin(admin.ModelAdmin):
+        list_display = ('created', 'title', 'creator', 'portal')
+        list_filter = ('created', 'portal')
+        search_fields = ('slug', 'title', 'creator__first_name', 'creator__last_name', 'creator__email') 
+        readonly_fields = ('created',)
+        raw_id_fields = ('creator',)
+    
+    admin.site.register(CosinnusIdea, CosinnusIdeaAdmin)
+
+
 
 
 ## TODO: FIXME: re-enable after 1.8 migration

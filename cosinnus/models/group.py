@@ -768,6 +768,7 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
         
         if not self.slug:
             raise ValidationError(_('Slug must not be empty.'))
+        slugs.append(self.slug)
         # sanity check for missing media_tag:
         if not self.media_tag:
             from cosinnus.models.tagged import get_tag_object_model
