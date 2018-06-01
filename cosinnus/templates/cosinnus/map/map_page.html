@@ -7,8 +7,19 @@
 
 {% block og_url %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ request.path }}{% if request.GET.values %}?{{ request.GET.urlencode|safe }}{% endif %}{% endblock og_url %}
 {% block og_title %}{% if item %}{{ item.title }} - {% endif %}{{ block.super }}{% endblock %}
-{% block og_image %}{% if item and item.imageUrl %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ item.imageUrl }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+{% block og_image %}{% if item and item.background_image_small_url %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ item.background_image_small_url }}{% elif item and item.icon_image_url %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ item.icon_image_url }}{% else %}{{ block.super }}{% endif %}{% endblock %}
 {% block og_description %}{% if item and item.description %}{{ item.description|linebreaksoneline|striptags }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+
+{% block og_meta_attributes %}
+    {{ block.super }}
+    {% if item.background_image_small_url %}
+        <meta property="og:image:width"           content="500" />
+        <meta property="og:image:height"          content="275" />
+    {% elif item.icon_image_url %}
+        <meta property="og:image:width"           content="144" />
+        <meta property="og:image:height"          content="144" />
+    {% endif %}
+{% endblock %}
 
 {% block extrahead %}
     {{ block.super }}
