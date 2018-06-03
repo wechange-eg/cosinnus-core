@@ -25,7 +25,7 @@ class CosinnusGroupIndexMixin(DocumentBoostMixin, StoredDataIndexMixin, indexes.
     boosted = indexes.CharField(model_attr='name', boost=BOOSTED_FIELD_BOOST)
     
     portal = indexes.IntegerField(model_attr='portal_id')
-    group_members = indexes.MultiValueField(model_attr='members', indexed=False)
+    group_members = indexes.MultiValueField(indexed=False)
     public = indexes.BooleanField(model_attr='public')
     always_visible = indexes.BooleanField(default=True)
     
@@ -75,9 +75,14 @@ class CosinnusGroupIndexMixin(DocumentBoostMixin, StoredDataIndexMixin, indexes.
         """ TODO: this should actually reflect the group['description'] language-sensitive magic! """
         return obj.description_long or obj.description
     
+    def prepare_group_members(self, obj):
+        if not hasattr(obj, '_group_members'):
+            obj._group_members = obj.members
+        return obj._group_members
+    
     def prepare_member_count(self, obj):
         """ Member count for projects/groups """
-        return obj.memberships.count()
+        return len(self.prepare_group_members(obj))
     
     def prepare_content_count(self, obj):
         """ Upcoming events for this project/group """

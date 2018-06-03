@@ -286,7 +286,7 @@ class BaseTaggableObjectIndex(DocumentBoostMixin, TagObjectSearchIndex):
     creator = indexes.IntegerField(model_attr='creator__id', null=True)
     portal = indexes.IntegerField(model_attr='group__portal_id')
     group = indexes.IntegerField(model_attr='group_id', indexed=False)
-    group_members = indexes.MultiValueField(model_attr='group__members')
+    group_members = indexes.MultiValueField(indexed=False)
     location = indexes.LocationField(null=True)
     
     def prepare_group_slug(self, obj):
@@ -295,9 +295,14 @@ class BaseTaggableObjectIndex(DocumentBoostMixin, TagObjectSearchIndex):
     def prepare_group_name(self, obj):
         return obj.group.name
     
+    def prepare_group_members(self, obj):
+        if not hasattr(obj, '_group_members'):
+            obj._group_members = obj.group.members
+        return obj._group_members
+    
     def prepare_member_count(self, obj):
         """ Group member count for taggable objects """
-        return obj.group.memberships.count()
+        return len(self.prepare_group_members(obj))
     
     def prepare_location(self, obj):
         if obj.media_tag and obj.media_tag.location_lat and obj.media_tag.location_lon:
