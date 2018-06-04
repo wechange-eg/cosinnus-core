@@ -56,8 +56,8 @@
     {% endif %}
 {% endmacro %}
 
-{% macro itemCard(portal, slug, title, type, imageUrl=null, slot1data=null, slot1icon=null, slot2data=null, slot2icon=null, cosinnus_active_user=null) %}
-    <div class="card {% if type == "people" and not cosinnus_active_user %}" href="/signup/?acc_req_msg=1" target="_blank"{% else %}result-link" {{ resultLink(portal, slug, title, type, inline_only=1) }}{% endif %}>
+{% macro itemCard(portal, slug, title, type, imageUrl=null, slot1data=null, slot1icon=null, slot2data=null, slot2icon=null, cosinnus_active_user=null, group_slug=null) %}
+    <div class="card {% if type == "people" and not cosinnus_active_user %}" href="/signup/?acc_req_msg=1" target="_blank"{% else %}result-link" {{ resultLink(portal, slug, title, type, inline_only=1, group_slug=group_slug) }}{% endif %}>
         {% if imageUrl %}
             <div class="card-image">
                 <img src="{{ imageUrl }}">
