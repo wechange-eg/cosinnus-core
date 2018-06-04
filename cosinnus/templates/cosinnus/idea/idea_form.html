@@ -1,0 +1,192 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags widget_tweaks thumbnail %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label %}
+{% endblock %}
+
+{% block page_title %}
+	{% if object %}
+	   {% blocktrans with team_name=object.title %}Edit “{{ team_name }}”{% endblocktrans %}
+	{% else %}
+	   {% trans "Create Idea" %}
+    {% endif %}
+{% endblock %}
+
+
+{% block leftnav %}
+    {% url 'cosinnus:idea-create' as href %}
+    {% captureas label %}{% trans "Create Idea" %}{% endcaptureas %}
+    {% include "cosinnus/leftnav_button.html" with extra_classes="large-space" icon="fa-lightbulb-o" label=label href=href  %}
+{% endblock leftnav %}
+
+
+{% block breadcrumb %}
+    {{ block.super }}
+    {% if object %}
+        <li class="active">{% trans "Edit Idea" %}</li>
+    {% else %}
+        <li class="active">{% trans "Create Idea" %}</li>
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}
+
+    {% if form.forms.obj.errors or form.forms.media_tag.errors %}
+	    <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+	        <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+	    </div>
+    {% endif %}
+    
+	<form action="" method="post" enctype="multipart/form-data" class="cosinnus-form form-horizontal" role="form">
+	    {% csrf_token %}
+	    {{ form.forms.obj.media }}
+	    {{ form.forms.obj.non_field_errors }}
+	    {{ form.forms.media_tag.non_field_errors }}
+	    
+        <!-- a box with semi transparent background -->
+        <div class="content-box">
+        
+            {% if form_view == "add" %}
+                
+	            <div class="alert alert-success">
+	                <i class="fa fa-lightbulb-o fa-3x"></i>
+	                <h4>{% trans "We make your ideas heard (TODO: slogan, and is the text ok?)!" %}</h4>
+	                <div class="v-offset-s">
+	                    <p>
+                            {% trans "Ideas are a great way to inspire poeple and start a project in your region!" %}
+	                    </p>
+	                </div>
+	                <div class="v-offset-s">
+	                    <p>
+	                        {% trans "Anyone can create a project from your idea and there is no limit how many projects can be created. Your idea will remain visible and will even show a list of all the projects inspired by it!" %}
+	                    </p>
+                    </div>
+                    <div class="v-offset-s">
+	                    <p>
+	                        {% trans "You and anyone who like (and follow) your idea will be notified when a new project gets created from it. This way, everyone interested can jump right into it and become active in the new project (they still have to ask permission to become a member)." %}
+	                    </p>
+	                </div>
+	            </div>
+            
+            {% endif %}
+            
+            {# Title Field #}
+            {% trans "Title" as title_label %}
+            {% captureas title_placeholder %}{% trans "Enter a descriptive title for your idea" %}{% endcaptureas %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.title placeholder=title_placeholder label=title_label first=True %}
+	        
+	        {# SimpleMDE Description Field (gets initialized in extrahead) #}                                  
+            {% trans "Description" as description_label %}
+            {% captureas description_placeholder %}{% trans "The description for your idea. Explain your vision and your goals." %}{% endcaptureas %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.description label=description_label placeholder=description_placeholder large_field=True %}
+            
+            {# Idea Image Field #}
+            {% captureas image_label %}{% trans "Image" %} ({% trans "max. 10 MB" %}){% endcaptureas %}
+            {% captureas image_html %}
+                    {{ form.forms.obj.image.errors }}
+                    
+                    {% if object.image %}
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-2">
+                                <img class="image" style="width: 120px;" src="{% thumbnail object.image 200x110 crop=1 upscale=1 %}"></img>
+                            </div>
+                            <div class="col-xs-8 col-sm-10">
+                    {% endif %} 
+                    <div class="file-input">
+                        <input class="form-control" id="fileToUpload" name="image" placeholder="{% trans "Upload an image." %}" type="file">
+                    </div>
+                    {% if object.image %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    
+            {% endcaptureas %}
+            {% captureas image_extra_html %}
+                    {% if object.image %}
+                        <div class="btn btn-emphasized btn-small btn-no-float regular-space">
+                            <ul class="media-list">
+                                <li class="media">
+                                    <a class="pull-left" href="#">
+                                        <i class="fa fa-square-o"></i>
+                                        <input type="hidden" id="image-clear_id" name="image-clear"> 
+                                    </a>
+                                    <div class="media-body click-previous-a">
+                                        {% trans "Reset" %}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    {% endif %}
+            {% endcaptureas %}
+            {% include 'cosinnus/fields/default_field.html' with label=image_label field_html=image_html extra_html=image_extra_html first=True large_field=True %}
+            
+            
+            {% include "cosinnus/media_tags_idea.html"%} 
+            
+            
+            {# Idea Visibility Field #}
+            {% trans "Privacy settings" as visibility_label %}
+            {% trans "This will determine who can see your idea." as visibility_legend %}
+            {% captureas visibility_warning_html %}
+                <div class="idea-public-warning-area" {% if not object or not object.public %}style="display: none;"{% endif %} id="idea-visibility-warning">
+                    <i class="fa fa-fw fa-globe"></i>
+                    {% trans "This idea will be set to be publicly visible!" %}
+                    <br/><br/>
+                    {% trans "Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!" %}
+                    <br/><br/>
+                    {% trans "If you do not wish this, you can change the visibility setting above." %}
+                </div>
+                <script type="text/javascript">
+                    {# show or hide a visibility warning #}
+                    $(function(){
+                        $('#idea-public-field').on('change', function(){
+                            if ($(this).val() == "true") {
+                                $('#idea-visibility-warning').show();
+                            } else {
+                                $('#idea-visibility-warning').hide();
+                            } 
+                        });
+                    });
+                </script>
+            {% endcaptureas %}
+            {% captureas visibility_field_html %}
+                <select name="public" id="idea-public-field">
+                    <option default value="false">{% trans "Registered users only" %}</option>
+                    <option {% if object and object.public %}selected{% endif %} value="true">{% trans "Public (visible without login)" %}</option>
+                </select>
+            {% endcaptureas %}
+            
+                        
+	    </div>
+	    
+	    <button type="submit" class="btn btn-emphasized">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-left" href="#">
+	                    <i class="fa fa-check"></i>
+	                </a>
+	                <div class="media-body">
+                        {% trans "Save" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+    
+    </form>
+
+{% endblock %}
+
+{% block extrafooter %}
+    <script type="text/javascript">
+        $(function(){
+            var osmfield = $('#id_media_tag-location');
+            if (!osmfield.val()) {
+                osmfield.val('Berlin');
+            }
+        });
+    </script>
+{% endblock %}

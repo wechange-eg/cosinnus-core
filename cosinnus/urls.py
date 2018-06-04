@@ -105,6 +105,15 @@ if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED:
         url(r'^fb-integration/confirm-page-admin/(?P<group_id>\d+)/$', 'facebook_integration.confirm_page_admin',  name='facebook-confirm-page-admin'),
     )
 
+if settings.COSINNUS_IDEAS_ENABLED:
+    urlpatterns += patterns('cosinnus.views', 
+        url(r'^ideas/add/$', 'idea.idea_create', name='idea-create'),
+        url(r'^ideas/list/$', 'idea.idea_list', name='idea-list'),
+        url(r'^ideas/mine/$', 'idea.idea_list_mine', name='idea-list-mine'),
+        url(r'^ideas/(?P<slug>[^/]+)/edit/$', 'idea.idea_edit', name='idea-edit'),
+        url(r'^ideas/(?P<slug>[^/]+)/delete/$', 'idea.idea_delete', name='idea-delete'),
+    )
+
 for url_key in group_model_registry:
     plural_url_key = group_model_registry.get_plural_url_key(url_key, url_key + '_s')
     prefix = group_model_registry.get_url_name_prefix(url_key, '')

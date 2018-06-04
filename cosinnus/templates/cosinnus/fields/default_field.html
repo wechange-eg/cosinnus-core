@@ -30,7 +30,7 @@
 	{% if label %}
 		<label {% if for_id %}for="{{ for_id }}"{% endif %} {% if first %}class="first"{% endif %}>
 		    {{ label }}
-		    {% if field and not field.field.required %}
+		    {% if field and not field.field.required and not required %}
                 ({% trans "optional" context "written next to optional form fields" %})
             {% endif %}
             {% if help_popup %}

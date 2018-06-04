@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from cosinnus.core.decorators.views import (require_read_access,
     require_write_access, require_admin_access,
     require_create_objects_in_access, redirect_to_not_logged_in,
-    dispatch_group_access, require_logged_in)
+    dispatch_group_access, require_logged_in, require_write_access_groupless)
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from cosinnus.models.tagged import BaseTaggableObjectModel
 from django.core.exceptions import PermissionDenied, ImproperlyConfigured
@@ -17,7 +17,7 @@ from cosinnus.utils.functions import resolve_class
 
 class RequireAdminMixin(object):
     """
-    Mixing to ease the use of :meth:`require_admin_access`.
+    Mixin to ease the use of :meth:`require_admin_access`.
 
     .. seealso:: :class:`RequireReadMixin`, :class:`RequireWriteMixin`, :class:`RequireCreateObjectsInMixin`
     """
@@ -34,7 +34,7 @@ class RequireAdminMixin(object):
 
 class RequireLoggedInMixin(object):
     """
-    Mixing to ease the use of :meth:`require_admin_access`.
+    Mixin to ease the use of :meth:`require_admin_access`.
 
     .. seealso:: :class:`RequireReadMixin`, :class:`RequireWriteMixin`, :class:`RequireCreateObjectsInMixin`
     """
@@ -70,7 +70,7 @@ class DipatchGroupURLMixin(object):
 
 class RequireReadMixin(object):
     """
-    Mixing to ease the use of :meth:`require_read_access`.
+    Mixin to ease the use of :meth:`require_read_access`.
 
     .. seealso:: :class:`RequireAdminMixin`, :class:`RequireWriteMixin`, :class:`RequireCreateObjectsInMixin`
     
@@ -167,7 +167,7 @@ class RequireReadOrRedirectMixin(RequireReadMixin):
 
 class RequireWriteMixin(object):
     """
-    Mixing to ease the use of :meth:`require_write_access`.
+    Mixin to ease the use of :meth:`require_write_access`.
 
     .. seealso:: :class:`RequireAdminMixin`, :class:`RequireReadMixin`, :class:`RequireCreateObjectsInMixin`
     """
@@ -181,6 +181,16 @@ class RequireWriteMixin(object):
         context.update({'group': self.group})
         return context
     
+    
+class RequireWriteGrouplessMixin(object):
+    """
+    Mixin to ease the use of :meth:`require_write_access_groupless`.
+    """
+
+    @require_write_access_groupless()
+    def dispatch(self, request, *args, **kwargs):
+        return super(RequireWriteGrouplessMixin, self).dispatch(request, *args, **kwargs)
+
 
 class RequireReadWriteHybridMixin(RequireWriteMixin, RequireReadMixin):
     """
@@ -201,7 +211,7 @@ class RequireReadWriteHybridMixin(RequireWriteMixin, RequireReadMixin):
     
 class RequireCreateObjectsInMixin(object):
     """
-    Mixing to ease the use of :meth:`require_create_objects_in_access`.
+    Mixin to ease the use of :meth:`require_create_objects_in_access`.
 
     .. seealso:: :class:`RequireAdminMixin`, :class:`RequireReadMixin`, :class:`RequireWriteMixin`
     """

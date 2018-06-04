@@ -2,26 +2,27 @@
 from __future__ import unicode_literals
 
 from collections import OrderedDict
-import six
+import locale
 
 from django.core.cache import cache
+from django.core.exceptions import ValidationError
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+import six
 
 from cosinnus.conf import settings
-from cosinnus.utils.files import get_idea_image_filename, image_thumbnail_url,\
-    image_thumbnail
-from cosinnus.utils.functions import clean_single_line_text,\
-    unique_aware_slugify
-from django.core.exceptions import ValidationError
 from cosinnus.core import signals
 from cosinnus.models.group import CosinnusPortal
+from cosinnus.utils.files import get_idea_image_filename, image_thumbnail_url, \
+    image_thumbnail
+from cosinnus.utils.functions import clean_single_line_text, \
+    unique_aware_slugify
+from cosinnus.utils.urls import get_domain_for_portal
+
 
 # this reads the environment and inits the right locale
-import locale
-from django.core.urlresolvers import reverse
-from cosinnus.utils.urls import get_domain_for_portal
 try:
     locale.setlocale(locale.LC_ALL, ("de_DE", "utf8"))
 except:

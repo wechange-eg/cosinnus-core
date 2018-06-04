@@ -375,6 +375,40 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
 
 
 
+def require_write_access_groupless():
+    """A method decorator that takes the requested object of i.e. an edit or delete view in the
+    dispatch function and checks that the requesting user is allowed to
+    perform write operations.
+    """
+
+    def decorator(function):
+        @functools.wraps(function, assigned=available_attrs(function))
+        def wrapper(self, request, *args, **kwargs):
+            user = request.user
+            
+            # catch anyonymous users trying to naviagte here
+            if not user.is_authenticated():
+                return redirect_to_not_logged_in(request, view=self)
+            
+            requested_object = None
+            try:
+                requested_object = self.get_object()
+            except (AttributeError, TypeError):
+                pass
+            
+            if requested_object:
+                # editing/deleting an object, check if we are owner or staff member or group admin or site admin
+                if check_object_write_access(requested_object, user):
+                    return function(self, request, *args, **kwargs)
+            
+            # Access denied, redirect to 403 page and and display an error message
+            return redirect_to_403(request, self)
+            
+        return wrapper
+    return decorator
+
+
+
 def require_user_token_access(token_name, group_url_kwarg='group', group_attr='group'):
     """ A method decorator that allows access only if the URL params
     `user=999&token=1234567` are supplied, and if the token supplied matches
