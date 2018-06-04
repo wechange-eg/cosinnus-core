@@ -52,7 +52,12 @@
 	        {% if field_html %}
 	            {{ field_html|safe }}
 	        {% elif field %}
-	            {% render_field field placeholder=placeholder autocomplete="off" %}
+	            {% if field_value %}
+	                {% render_field field placeholder=placeholder autocomplete="off" value=field_value %}
+	            {% else %}
+	                {% render_field field placeholder=placeholder autocomplete="off" %}
+	            {% endif %}
+	            
 	        {% endif %}
 	    </div>
     {% endif %}

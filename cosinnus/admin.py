@@ -449,7 +449,7 @@ if settings.COSINNUS_IDEAS_ENABLED:
         list_display = ('created', 'title', 'creator', 'portal')
         list_filter = ('created', 'portal')
         search_fields = ('slug', 'title', 'creator__first_name', 'creator__last_name', 'creator__email') 
-        readonly_fields = ('created',)
+        readonly_fields = ('created', 'created_groups')
         raw_id_fields = ('creator',)
     
     admin.site.register(CosinnusIdea, CosinnusIdeaAdmin)

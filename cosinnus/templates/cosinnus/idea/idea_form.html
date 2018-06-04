@@ -77,7 +77,10 @@
             {# Title Field #}
             {% trans "Title" as title_label %}
             {% captureas title_placeholder %}{% trans "Enter a descriptive title for your idea" %}{% endcaptureas %}
-            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.title placeholder=title_placeholder label=title_label first=True %}
+            {% if request.GET.title %}
+                {% captureas title_val %}{{ request.GET.title }}{% endcaptureas %}
+            {% endif %}
+            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.title placeholder=title_placeholder label=title_label field_value=title_val first=True %}
 	        
 	        {# SimpleMDE Description Field (gets initialized in extrahead) #}                                  
             {% trans "Description" as description_label %}

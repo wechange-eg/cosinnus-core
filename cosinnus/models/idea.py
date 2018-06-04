@@ -128,6 +128,18 @@ class IdeaManager(models.Manager):
         qs = qs = self.get_queryset()
         return qs.filter(active=True)
     
+    def get_by_shortid(self, shortid):
+        """ Gets an idea from a string id in the form of `"%(portal)d.%(type)s.%(slug)s"`. 
+            Returns None if not found. """
+        portal, __, slug = shortid.split('.')
+        portal = int(portal)
+        try:
+            qs = self.get_queryset().filter(portal_id=portal, slug=slug)
+            return qs[0]
+        except self.model.DoesNotExist:
+            return None
+        
+    
     def get_queryset(self):
         return super(IdeaManager, self).get_queryset().select_related('portal')
 
@@ -222,11 +234,12 @@ class CosinnusIdea(models.Model):
             # send creation signal
             signals.idea_object_ceated.send(sender=self, group=self)
     
-    
     def delete(self, *args, **kwargs):
         self._clear_cache(slug=self.slug)
         super(CosinnusIdea, self).delete(*args, **kwargs)
 
+    def update_index(self):
+        print ">>> TODOOOO: update self in index!"
     
     @classmethod
     def _clear_cache(self, slug=None, slugs=None):
@@ -267,5 +280,5 @@ class CosinnusIdea(models.Model):
     def get_absolute_url(self):
         item_id = '%d.ideas.%s' % (self.portal_id, self.slug)
         return get_domain_for_portal(self.portal) + reverse('cosinnus:map') + '?item=' + item_id
-    
+
     

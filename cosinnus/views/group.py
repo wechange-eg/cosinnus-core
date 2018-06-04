@@ -229,6 +229,18 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
         ret = super(GroupCreateView, self).forms_valid(form, inlines)
         CosinnusGroupMembership.objects.create(user=self.request.user,
             group=self.object, status=MEMBERSHIP_ADMIN)
+        
+        # add this project as a reference to the idea it was given as param, if given and enabled
+        if settings.COSINNUS_IDEAS_ENABLED and self.request.POST.get('idea_shortid', None) and self.object.type == CosinnusGroup.TYPE_PROJECT:
+            from cosinnus.models.idea import CosinnusIdea
+            shortid = self.request.POST.get('idea_shortid')
+            idea = CosinnusIdea.objects.get_by_shortid(shortid)
+            if idea:
+                idea.created_groups.add(self.object)
+                idea.update_index()
+            else:
+                logger.error('Could not attach an idea to a project on project creatiion because the idea was not found!', extra={'idea_shortid': shortid})
+        
         messages.success(self.request, self.message_success % {'group':self.object.name, 'team_type':self.object._meta.verbose_name})
         return ret
     
