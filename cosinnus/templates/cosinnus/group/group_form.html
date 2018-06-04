@@ -50,24 +50,24 @@
 
 {% block content %}
 
-    
-    {% if form_view == "add" and request.GET.idea and group_model == "CosinnusProject" %}
+    {# Info for creating a project from an idea #}
+    {% if not object and request.GET.idea and group_model == "CosinnusProject" %}
         <div class="alert alert-success">
             <i class="fa fa-lightbulb-o fa-3x"></i>
-            <h4>{% trans "We make your ideas heard (TODO: slogan, and is the text ok?)!" %}</h4>
+            <h4>{% trans "Let's bring this idea to life! (TODO: slogan, and is the text ok?)!" %}</h4>
             <div class="v-offset-s">
                 <p>
-                    {% trans "Ideas are a great way to inspire poeple and start a project in your region!" %}
+                    {% blocktrans with idea_name=request.GET.name %}Great to see you're creating a project from the idea "{{ idea_name }}"!{% endblocktrans %}
                 </p>
             </div>
             <div class="v-offset-s">
                 <p>
-                    {% trans "Anyone can create a project from your idea and there is no limit how many projects can be created. Your idea will remain visible and will even show a list of all the projects inspired by it!" %}
+                    {% trans "Once you have created your project, everyone who liked (and followed) the idea will receive a notification! They can then jump in and become a member of your new project. Don't worry - you still have to approve who may join and who can't when they request a membership." %}
                 </p>
             </div>
             <div class="v-offset-s">
                 <p>
-                    {% trans "You and anyone who like (and follow) your idea will be notified when a new project gets created from it. This way, everyone interested can jump right into it and become active in the new project (they still have to ask permission to become a member)." %}
+                    {% trans "Your new project will also be displayed on the idea itself, so that everyone can see it and join in later on." %}
                 </p>
             </div>
         </div>
