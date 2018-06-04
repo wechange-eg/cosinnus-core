@@ -28,6 +28,15 @@ try:
 except:
     locale.setlocale(locale.LC_ALL, "")
     
+_IDEA_SEARCH_INDEX = None
+
+def get_idea_search_index():
+    global _IDEA_SEARCH_INDEX
+    if _IDEA_SEARCH_INDEX is None:
+        from cosinnus.search_indexes import IdeaTaggableSearchIndex
+        _IDEA_SEARCH_INDEX = IdeaTaggableSearchIndex()
+    return _IDEA_SEARCH_INDEX
+    
 
 class IdeaManager(models.Manager):
     
@@ -126,7 +135,7 @@ class IdeaManager(models.Manager):
     def active(self):
         """ Returns active Ideas """
         qs = qs = self.get_queryset()
-        return qs.filter(active=True)
+        return qs.filter(is_active=True)
     
     def get_by_shortid(self, shortid):
         """ Gets an idea from a string id in the form of `"%(portal)d.%(type)s.%(slug)s"`. 
@@ -239,7 +248,7 @@ class CosinnusIdea(models.Model):
         super(CosinnusIdea, self).delete(*args, **kwargs)
 
     def update_index(self):
-        print ">>> TODOOOO: update self in index!"
+        get_idea_search_index().update_object(self)
     
     @classmethod
     def _clear_cache(self, slug=None, slugs=None):

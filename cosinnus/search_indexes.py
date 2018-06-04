@@ -17,6 +17,7 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from django.core.urlresolvers import reverse
 from django.utils.functional import cached_property
 from django.contrib.auth.models import AnonymousUser
+from cosinnus.models.idea import CosinnusIdea
     
 
 class CosinnusGroupIndexMixin(DocumentBoostMixin, StoredDataIndexMixin, indexes.SearchIndex):
@@ -206,4 +207,46 @@ class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearch
         user_memberships_count = self._get_memberships_count(obj)
         memberships_rank = normalize_within_stddev(user_memberships_count, mean, stddev, stddev_factor=2.0)
         return memberships_rank
+    
+    
+class IdeaTaggableSearchIndex(DocumentBoostMixin, TagObjectSearchIndex, StoredDataIndexMixin, indexes.Indexable):
+    
+    text = TemplateResolveEdgeNgramField(document=True, use_template=True)
+    boosted = indexes.EdgeNgramField(model_attr='title', boost=BOOSTED_FIELD_BOOST)
+
+    creator = indexes.IntegerField(model_attr='creator__id', null=True)
+    portal = indexes.IntegerField(model_attr='portal_id')
+    location = indexes.LocationField(null=True)
+    
+    _like_count = None
+    
+    def get_model(self):
+        return CosinnusIdea
+    
+    def prepare_member_count(self, obj):
+        """ Group member count for taggable objects """
+        if self._like_count is None:
+            self._like_count = 33
+        return self._like_count # TODO: likes
+    
+    def prepare_participant_count(self, obj):
+        self.prepare_member_count(obj)
+    
+    def prepare_location(self, obj):
+        if obj.media_tag and obj.media_tag.location_lat and obj.media_tag.location_lon:
+            # this expects (lat,lon)!
+            return "%s,%s" % (obj.media_tag.location_lat, obj.media_tag.location_lon)
+        return None
+
+    def get_image_field_for_background(self, obj):
+        return obj.image
+    
+    def index_queryset(self, using=None):
+        qs = self.get_model().objects.all_in_portal()
+        qs = qs.select_related('media_tag')
+        return qs
+    
+    def boost_model(self, obj, indexed_data):
+        """ TODO boost by likes with stddev! """
+        return 99
     
