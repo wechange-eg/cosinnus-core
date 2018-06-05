@@ -31,6 +31,7 @@ from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from cosinnus.utils.user import get_newly_registered_user_email
 from annoying.functions import get_object_or_None
+from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 
 # if a user profile has this settings, its user has not yet confirmed a new email
 # address and this long is bound to his old email (or to a scrambled, unusable one if they just registered)
@@ -67,7 +68,7 @@ class BaseUserProfileManager(models.Manager):
 
 
 @python_2_unicode_compatible
-class BaseUserProfile(FacebookIntegrationUserProfileMixin, models.Model):
+class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, models.Model):
     """
     This is a base user profile used within cosinnus. To use it, create your
     own model inheriting from this model.

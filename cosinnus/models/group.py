@@ -49,6 +49,7 @@ from cosinnus.views.mixins.media import VideoEmbedFieldMixin,\
     FlickrEmbedFieldMixin
 from jsonfield.fields import JSONField
 from django.templatetags.static import static
+from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 
 logger = logging.getLogger('cosinnus')
 
@@ -619,7 +620,7 @@ class CosinnusPortal(models.Model):
         
 
 @python_2_unicode_compatible
-class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Model):
+class CosinnusBaseGroup(IndexingUtilsMixin, FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Model):
     TYPE_PROJECT = 0
     TYPE_SOCIETY = 1
     
@@ -933,16 +934,6 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
     def _clear_local_cache(self):
         pass
     
-    def update_index(self):
-        """ Updates self in the proper search index depending on type """
-        index = get_project_search_index() if self.type == self.TYPE_PROJECT else get_society_search_index()
-        index.update_object(self)
-    
-    def remove_index(self):
-        """ Removes self from the proper search index depending on type """
-        index = get_project_search_index() if self.type == self.TYPE_PROJECT else get_society_search_index()
-        index.remove_object(self)
-        
     @property
     def avatar_url(self):
         return self.avatar.url if self.avatar else None
@@ -1464,27 +1455,6 @@ class CosinnusGroupCallToActionButton(models.Model):
     class Meta:
         verbose_name = _('CosinnusGroup CallToAction Button')
         verbose_name_plural = _('CosinnusGroup CallToAction Buttons')
-
-
-_PROJECT_SEARCH_INDEX = None
-
-def get_project_search_index():
-    global _PROJECT_SEARCH_INDEX
-    if _PROJECT_SEARCH_INDEX is None:
-        from cosinnus.search_indexes import CosinnusProjectIndex
-        _PROJECT_SEARCH_INDEX = CosinnusProjectIndex()
-    return _PROJECT_SEARCH_INDEX
-
-
-_SOCIETY_SEARCH_INDEX = None
-
-def get_society_search_index():
-    global _SOCIETY_SEARCH_INDEX
-    if _SOCIETY_SEARCH_INDEX is None:
-        from cosinnus.search_indexes import CosinnusSocietyIndex
-        _SOCIETY_SEARCH_INDEX = CosinnusSocietyIndex()
-    return _SOCIETY_SEARCH_INDEX
-
 
 
 def replace_swapped_group_model():
