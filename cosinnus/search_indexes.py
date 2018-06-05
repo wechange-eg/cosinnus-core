@@ -209,7 +209,7 @@ class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearch
         return memberships_rank
     
     
-class IdeaTaggableSearchIndex(DocumentBoostMixin, TagObjectSearchIndex, StoredDataIndexMixin, indexes.Indexable):
+class IdeaSearchIndex(DocumentBoostMixin, TagObjectSearchIndex, StoredDataIndexMixin, indexes.Indexable):
     
     text = TemplateResolveEdgeNgramField(document=True, use_template=True)
     boosted = indexes.EdgeNgramField(model_attr='title', boost=BOOSTED_FIELD_BOOST)
@@ -218,16 +218,14 @@ class IdeaTaggableSearchIndex(DocumentBoostMixin, TagObjectSearchIndex, StoredDa
     portal = indexes.IntegerField(model_attr='portal_id')
     location = indexes.LocationField(null=True)
     
-    _like_count = None
-    
     def get_model(self):
         return CosinnusIdea
     
     def prepare_member_count(self, obj):
         """ Group member count for taggable objects """
-        if self._like_count is None:
-            self._like_count = 33
-        return self._like_count # TODO: likes
+        if not hasattr(obj, '_like_count'):
+            obj._like_count = 33
+        return obj._like_count # TODO: likes
     
     def prepare_participant_count(self, obj):
         self.prepare_member_count(obj)
