@@ -20,6 +20,7 @@ from cosinnus.utils.files import get_idea_image_filename, image_thumbnail_url, \
 from cosinnus.utils.functions import clean_single_line_text, \
     unique_aware_slugify
 from cosinnus.utils.urls import get_domain_for_portal
+from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 
 
 # this reads the environment and inits the right locale
@@ -27,15 +28,6 @@ try:
     locale.setlocale(locale.LC_ALL, ("de_DE", "utf8"))
 except:
     locale.setlocale(locale.LC_ALL, "")
-    
-_IDEA_SEARCH_INDEX = None
-
-def get_idea_search_index():
-    global _IDEA_SEARCH_INDEX
-    if _IDEA_SEARCH_INDEX is None:
-        from cosinnus.search_indexes import IdeaTaggableSearchIndex
-        _IDEA_SEARCH_INDEX = IdeaTaggableSearchIndex()
-    return _IDEA_SEARCH_INDEX
     
 
 class IdeaManager(models.Manager):
@@ -154,7 +146,7 @@ class IdeaManager(models.Manager):
 
 
 @python_2_unicode_compatible
-class CosinnusIdea(models.Model):
+class CosinnusIdea(IndexingUtilsMixin, models.Model):
     # don't worry, the default Portal with id 1 is created in a datamigration
     # there was no other way to generate completely runnable migrations 
     # (with a get_default function, or any other way)
@@ -247,9 +239,6 @@ class CosinnusIdea(models.Model):
         self._clear_cache(slug=self.slug)
         super(CosinnusIdea, self).delete(*args, **kwargs)
 
-    def update_index(self):
-        get_idea_search_index().update_object(self)
-    
     @classmethod
     def _clear_cache(self, slug=None, slugs=None):
         slugs = set([s for s in slugs]) if slugs else set()
