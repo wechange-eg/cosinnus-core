@@ -49,6 +49,7 @@ from cosinnus.views.mixins.media import VideoEmbedFieldMixin,\
     FlickrEmbedFieldMixin
 from jsonfield.fields import JSONField
 from django.templatetags.static import static
+from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 
 logger = logging.getLogger('cosinnus')
 
@@ -619,7 +620,7 @@ class CosinnusPortal(models.Model):
         
 
 @python_2_unicode_compatible
-class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Model):
+class CosinnusBaseGroup(IndexingUtilsMixin, FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Model):
     TYPE_PROJECT = 0
     TYPE_SOCIETY = 1
     
@@ -933,7 +934,7 @@ class CosinnusBaseGroup(FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Mode
 
     def _clear_local_cache(self):
         pass
-        
+    
     @property
     def avatar_url(self):
         return self.avatar.url if self.avatar else None
@@ -1455,7 +1456,6 @@ class CosinnusGroupCallToActionButton(models.Model):
     class Meta:
         verbose_name = _('CosinnusGroup CallToAction Button')
         verbose_name_plural = _('CosinnusGroup CallToAction Buttons')
-    
 
 
 def replace_swapped_group_model():

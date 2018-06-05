@@ -87,7 +87,19 @@ class FormAttachableMixin(object):
             instance.attached_objects.clear()
             for attached_obj in self.cleaned_data.get('attached_objects', []):
                 instance.attached_objects.add(attached_obj)
-        
+            # safely invalidate the cached properties first
+            try:
+                del instance.attached_image
+            except:
+                pass
+            try:
+                del instance.attached_images
+            except:
+                pass
+            # then update the instance's index after attaching objects
+            if hasattr(instance, 'update_index'):
+                instance.update_index()
+                
 
 class AttachableObjectSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoiceField):
     queryset = AttachedObject

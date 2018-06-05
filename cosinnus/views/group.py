@@ -25,7 +25,8 @@ from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, CosinnusPortal, CosinnusLocation,
     CosinnusGroupGalleryImage, MEMBERSHIP_INVITED_PENDING,
     CosinnusGroupCallToActionButton, CosinnusUnregisterdUserGroupInvite)
-from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
+    ensure_group_type
 from cosinnus.models.serializers.group import GroupSimpleSerializer
 from cosinnus.models.serializers.profile import UserSimpleSerializer
 from cosinnus.utils.compat import atomic
@@ -1003,9 +1004,17 @@ class ActivateOrDeactivateGroupView(TemplateView):
     
     def post(self, request, *args, **kwargs):
         self.group.is_active = self.activate
+        # we need to manually reindex or remove index to be sure the index gets removed
+        if not self.activate:
+            # need to get a typed group first and remove it from index, because after saving it deactived the manager won't find it
+            typed_group = ensure_group_type(self.group)
+            typed_group.remove_index()
+            
         self.group.save() 
         # no clearing cache necessary as save() handles it
         if self.activate:
+            typed_group = ensure_group_type(self.group)
+            typed_group.update_index()
             messages.success(request, self.message_success_activate % {'team_name': self.group.name})
             return redirect(self.group.get_absolute_url())
         else:

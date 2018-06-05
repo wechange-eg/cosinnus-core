@@ -240,7 +240,7 @@ module.exports = ContentControlView.extend({
         event.preventDefault();
         if (this.state.page.has_next) {
             this.state.pageIndex += 1;
-            this.triggerDelayedSearch(true, true);
+            this.triggerDelayedSearch(true, true, false, 'paginate-search');
         }
     },
     
@@ -248,7 +248,7 @@ module.exports = ContentControlView.extend({
         event.preventDefault();
         if (this.state.page.has_previous && this.state.pageIndex > 0) {
             this.state.pageIndex -= 1;
-            this.triggerDelayedSearch(true, true);
+            this.triggerDelayedSearch(true, true, false, 'paginate-search');
         }
     },
     
@@ -864,7 +864,7 @@ module.exports = ContentControlView.extend({
                         self.triggerMobileMapView();
                     }
                     // scroll tile list to top on manual searches
-                    if (searchReason == 'manual-search' || searchReason == 'reset-filters-search') {
+                    if (searchReason == 'manual-search' || searchReason == 'reset-filters-search' || searchReason == 'paginate-search') {
                         $('.tile-contents').scrollTop(0);
                     }
                 }

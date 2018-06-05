@@ -31,6 +31,7 @@ from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.utils import translation
+from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 
 
 
@@ -257,7 +258,7 @@ class AttachableObjectModel(models.Model):
     
 
 @python_2_unicode_compatible
-class BaseTaggableObjectModel(AttachableObjectModel):
+class BaseTaggableObjectModel(IndexingUtilsMixin, AttachableObjectModel):
     """
     Represents the base for all cosinnus main models. Each inheriting model
     has a set of simple ``tags`` which are just strings. Additionally each

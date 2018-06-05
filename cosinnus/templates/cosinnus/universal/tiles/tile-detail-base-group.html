@@ -14,7 +14,7 @@
         </div>
         <div class="tile-section">
             {% for event in events %}
-                {{ macros.itemCard(event.portal, event.slug, event.title, event.type, null, event.dataSlot1|safe, "fa-clock-o", event.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user) }}
+                {{ macros.itemCard(event.portal, event.slug, event.title, event.type, null, event.dataSlot1|safe, "fa-clock-o", event.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user, group_slug=slug) }}
             {% endfor %}
         </div>
     {% endif %}
