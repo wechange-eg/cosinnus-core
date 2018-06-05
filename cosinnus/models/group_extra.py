@@ -114,3 +114,13 @@ class CosinnusSociety(get_cosinnus_group_model()):
 
     
 CosinnusGroup = get_cosinnus_group_model()
+
+
+def ensure_group_type(group):
+    """ If the given group is a CosinnusGroup model instance,
+        returns it as either a CosinnusProject or CosinnusSociety,
+        depending on group type """
+    if group.__class__ == get_cosinnus_group_model():
+        klass = CosinnusProject if group.type == group.TYPE_PROJECT else CosinnusSociety
+        group = klass.objects.get_cached(pks=group.id)
+    return group
