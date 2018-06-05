@@ -1,26 +1,26 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import datetime
 from copy import copy
+import datetime
 
 from django.core.urlresolvers import reverse
+from django.db.models import Q
+from django.template.defaultfilters import linebreaksbr
+from django.utils.html import escape
+from django.utils.timezone import now
+from haystack.query import SearchQuerySet
 
-from cosinnus.forms.search import get_visible_portal_ids,\
+from cosinnus.conf import settings
+from cosinnus.forms.search import get_visible_portal_ids, \
     filter_searchqueryset_for_read_access
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject, \
-    CosinnusGroup
+from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.templatetags.cosinnus_tags import textfield
+from cosinnus.utils.group import message_group_admins_url
 from cosinnus.utils.permissions import check_ug_membership
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus.utils.group import message_group_admins_url
-from django.utils.html import escape
-from django.template.defaultfilters import linebreaksbr
-from haystack.query import SearchQuerySet
-from django.utils.timezone import now
-from django.db.models import Q
 
 
 def _prepend_url(user, portal=None):
@@ -379,12 +379,33 @@ class DetailedEventResult(DetailedMapResult):
         return super(DetailedEventResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
 
+class DetailedIdeaMapResult(DetailedMapResult):
+    """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
+         into a proper MapResult """
+    
+    fields = copy(DetailedMapResult.fields)
+    fields.update({
+        'likes': 0,
+        'projects': [],
+    })
+    
+    def __init__(self, haystack_result, obj, user, *args, **kwargs):
+        
+        # TODO: collect created projects and like count
+        kwargs.update({
+            'likes': 44,
+            'projects': [],
+        })
+        return super(DetailedEventResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
+
+
 
 SHORTENED_ID_MAP = {
     'cosinnus.cosinnusproject': 1,
     'cosinnus.cosinnussociety': 2,
     'cosinnus.userprofile': 3,
     'cosinnus_event.event': 4,
+    'cosinnus.cosinnusidea': 5,
 }
 
 SEARCH_MODEL_NAMES = {
@@ -415,13 +436,27 @@ try:
     })
 except:
     Event = None
-
+    
+if settings.COSINNUS_IDEAS_ENABLED:
+    from cosinnus.models.idea import CosinnusIdea
+    SEARCH_MODEL_NAMES.update({
+        CosinnusIdea: 'ideas',                       
+    })
+    SHORT_MODEL_MAP.update({
+        5: CosinnusIdea,
+    })
+    SEARCH_RESULT_DETAIL_TYPE_MAP.update({
+        'ideas': DetailedIdeaMapResult,
+    })
+    
 SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in SEARCH_MODEL_NAMES.items()])
 # these can always be read by any user (returned fields still vary)
 SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS = [
     'projects',
     'groups',
 ]
+
+
 
 
 def itemid_from_searchresult(result):

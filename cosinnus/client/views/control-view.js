@@ -22,7 +22,7 @@ module.exports = ContentControlView.extend({
             people: true,
             projects: true,
             events: true,
-            groups: true
+            groups: true,
         },
         activeFilters: {
             people: true,
@@ -80,6 +80,12 @@ module.exports = ContentControlView.extend({
     
     initialize: function (options, app, collection) {
         var self = this;
+        // add idea models if active
+        if (COSINNUS_IDEAS_ENABLED) {
+        	self.defaults.availableFilters['ideas'] = true;
+        	self.defaults.activeFilters['ideas'] = true;
+        }
+        
         ContentControlView.prototype.initialize.call(self, options, app, collection);
         
         if (!self.collection) {
@@ -920,6 +926,9 @@ module.exports = ContentControlView.extend({
             pageIndex: util.ifundef(urlParams.page, this.state.pageIndex),
             urlSelectedResultId: util.ifundef(urlParams.item, this.state.urlSelectedResultId),
         });
+        if (COSINNUS_IDEAS_ENABLED) {
+        	this.state.activeFilters['ideas'] = util.ifundef(urlParams.ideas, this.options.activeFilters.ideas);
+        }
     },
     
     // extended from content-control-view.js
@@ -931,6 +940,11 @@ module.exports = ContentControlView.extend({
             projects: this.state.activeFilters.projects,
             groups: this.state.activeFilters.groups,
         };
+        if (COSINNUS_IDEAS_ENABLED) {
+        	_.extend(searchParams, {
+                ideas: this.state.activeFilters.ideas
+            });
+        }
         if (this.state.activeTopicIds.length > 0) {
             _.extend(searchParams, {
                 topics: this.state.activeTopicIds.join(',')

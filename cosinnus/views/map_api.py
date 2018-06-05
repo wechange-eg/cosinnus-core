@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import logging
 import json
+import logging
 
 from annoying.functions import get_object_or_None
 from django.contrib.auth import get_user_model
@@ -10,7 +10,6 @@ from django.db.models import Q
 from django.http.response import JsonResponse, HttpResponseBadRequest, \
     HttpResponseNotFound, HttpResponseForbidden
 from django.utils.encoding import force_text
-from django.utils.timezone import now
 from haystack.query import SearchQuerySet
 from haystack.utils.geo import Point
 import six
@@ -18,15 +17,16 @@ import six
 from cosinnus.conf import settings
 from cosinnus.forms.search import filter_searchqueryset_for_read_access, \
     filter_searchqueryset_for_portal
+from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.map import HaystackMapResult, \
     SEARCH_MODEL_NAMES, SEARCH_MODEL_NAMES_REVERSE, \
-    SEARCH_RESULT_DETAIL_TYPE_MAP, SHORT_MODEL_MAP,\
-    SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS,\
+    SEARCH_RESULT_DETAIL_TYPE_MAP, \
+    SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS, \
     filter_event_searchqueryset_by_upcoming
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.functions import is_number, ensure_list_of_ints
 from cosinnus.utils.permissions import check_object_read_access
-from cosinnus.models.group import CosinnusPortal
+
 
 try:
     from cosinnus_event.models import Event #noqa
@@ -79,6 +79,10 @@ MAP_SEARCH_PARAMETERS = {
     'item': None,
     'ignore_location': False, # if True, we completely ignore locs, and even return results without location
 }
+if settings.COSINNUS_IDEAS_ENABLED:
+    MAP_SEARCH_PARAMETERS.update({
+        'ideas': True,
+    })
 
 
 def map_search_endpoint(request, filter_group_id=None):

@@ -44,11 +44,13 @@
                 <i class="fa fa-group"></i> 
                 {{ participant_count }}
             </span>
-        {% elif type !="events" and member_count > 1 %}
+        {% endif %}
+        
+        {% if type == "people" and member_count > 1 %}
             <span class="multi-span" title="
                 {% if type == "people" %}
                     {# Translators: __INCLUDE_JS_PO__ #}
-                    {% trans "Project/Group Members" %}
+                    {% trans "Projects/Groups" %}
                 {% else %}
                     {# Translators: __INCLUDE_JS_PO__ #}
                     {% trans "Members" %}
@@ -59,15 +61,47 @@
             </span>
         {% endif %}
         
-        {% if content_count > 0 %}
+        {% if type =="projects" or type == "groups" %}
+            {% if member_count > 1 %}
+	            <span class="multi-span" title="
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Members" %}
+	            ">
+	                <i class="fa fa-group"></i> 
+	                {{ member_count }}
+	            </span>
+            {% endif %}
+	        {% if content_count > 0 %}
+	            <span class="multi-span" title="
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Events" %}
+	            ">
+	                <i class="fa fa-calendar"></i> 
+	                {{ content_count }}
+	            </span>
+	        {% endif %}
+        {% endif %}
+        
+        {% if type == "ideas" and participant_count > 1 %}
             <span class="multi-span" title="
                 {# Translators: __INCLUDE_JS_PO__ #}
-                {% trans "Events" %}
+                {% trans "Likes" %}
             ">
-                <i class="fa fa-calendar"></i> 
+                <i class="fa fa-heart"></i> 
+                {{ participant_count }}
+            </span>
+        {% endif %}
+        {% if type == "ideas" and content_count > 0 %}
+            <span class="multi-span" title="
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Projects" %}
+            ">
+                <i class="fa fa-group"></i> 
                 {{ content_count }}
             </span>
         {% endif %}
+        
+        
     </div>
     {% endif %}
     

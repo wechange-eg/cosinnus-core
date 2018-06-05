@@ -22,4 +22,5 @@
     var COSINNUS_MAP_TOPICS_JSON = JSON.parse('{% render_cosinnus_topics_json %}');
 	var COSINNUS_MAP_OPTIONS = JSON.parse('{{ SETTINGS.COSINNUS_MAP_OPTIONS|json|safe }}');
     var COSINNUS_PORTAL_INFOS = JSON.parse('{% render_cosinnus_portal_info_json %}');
+    var COSINNUS_IDEAS_ENABLED = {% if SETTINGS.COSINNUS_IDEAS_ENABLED %}true{% else %}false{% endif %};
 </script>
