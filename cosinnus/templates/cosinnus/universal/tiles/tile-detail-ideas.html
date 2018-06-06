@@ -11,66 +11,81 @@
     {% endif %}
 {% endblock header_image %}
 
+{% block title %}
+    <div class="tile-section title">
+        <h1>
+            {{ title }}
+        </h1>
+    </div>
+{% endblock title %}
         
-{% block additional_top_line %}
-    <div class="tile-section tile-section">
-        <div>
-            <i class="fa fa-fw fa-clock-o"></i>{{ time_html|safe }}
-        </div>
+{% block top_line %}
+    <div class="tile-section top-line one-line extra-space">
+        <span class="multi-span">
+	        <span class="pale-color">
+	            {# Translators: __INCLUDE_JS_PO__ #}
+	            {% trans "Author" %}:
+	        </span> 
+	        {% if not cosinnus_active_user %}
+	            <a href="/signup/?acc_req_msg=1" target="_blank">{{ creator_name }}</a>
+	        {% else %}
+	            {{ macros.resultLink(portal, creator_slug, creator_name, "people") }}
+	        {% endif %}
+	    </span>
         {% if address %}
-            <div class="capitalize">
+            <span class="multi-span capitalize">
                 <i class="fa fa-fw fa-map-marker"></i>{{ address }}
-            </div>
+            </span>
+        {% endif %}
+        {% if like_count > 0 %}
+            <span class="multi-span capitalize">
+                <i class="fa fa-fw fa-heart"></i>
+                {{ like_count }}
+            </span>
         {% endif %}
     </div>
-{% endblock additional_top_line %}
+{% endblock top_line %}
 
 {% block action_buttons %}
     <div class="tile-section">
-        <a class="rounded-button button-action" href="{% if type == "people" %}{{ controlView.portalInfo[portal].domain }}{% endif %}{{ url }}" target="_blank">
+        <a class="rounded-button button-action button-like">
             <span class="rounded-button-inner">
-                <i clasS="fa fa-external-link"></i>
+                <i clasS="fa fa-heart"></i>
                 {# Translators: __INCLUDE_JS_PO__ #}
-                {% trans "Visit Event Page" %}
+                {% trans "TODO: Like" %}
+            </span>
+        </a>
+        <a href="{{ action_url_1 }}" target="_blank" class="rounded-button button-action">
+            <span class="rounded-button-inner">
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Create Project from Idea" %}
             </span>
         </a>
     </div>
 {% endblock %}
-        
+
 
 {% block related_content %}
+    {{ super() }}
 
-    {% if participant_count > 0 %}
+    {% if projects|length > 0 %}
         <div class="tile-section tile-section-divided">
             <div class="subheading">
-                <i class="fa fa-user"></i>
+                <i class="fa fa-group"></i>
                 {# Translators: __INCLUDE_JS_PO__ #}
-                {% trans "Participants" %} ({{ participant_count }})
+                {% trans "Projects - Created from this Idea" %} ({{ projects|length }})
             </div>
         </div>
         <div class="tile-section">
             <div class="row">
-                {% for participant in participants %}
+                {% for project in projects %}
                     <div class="col-sm-6">
-                        {{ macros.itemCard(participant.portal, participant.slug, participant.title, participant.type, participant.iconImageUrl, participant.address, "fa-map-marker", cosinnus_active_user=cosinnus_active_user) }}
+                        {{ macros.itemCard(project.portal, project.slug, project.title, project.type, project.iconImageUrl, project.address, "fa-map-marker", project.dataSlot1, "fa-group", cosinnus_active_user=cosinnus_active_user) }}
                     </div>
                 {% endfor %}
             </div>
-            {% if participant_count - participants|length > 0 %}
-                <div class="">
-                    <i>
-                        +{{ participant_count - participants|length }} 
-                        {% if participant_count - participants|length > 1 %}
-                            {# Translators: __INCLUDE_JS_PO__ #}
-                            {% trans "Hidden Users" %}
-                        {% else %}
-                            {# Translators: __INCLUDE_JS_PO__ #}
-                            {% trans "Hidden User" %}
-                        {% endif %}
-                    </i>
-                </div>
-            {% endif %}
         </div>
     {% endif %}
     
 {% endblock related_content %}
+

@@ -219,6 +219,7 @@ class IdeaSearchIndex(DocumentBoostMixin, TagObjectSearchIndex, StoredDataIndexM
     text = TemplateResolveEdgeNgramField(document=True, use_template=True)
     boosted = indexes.EdgeNgramField(model_attr='title', boost=BOOSTED_FIELD_BOOST)
 
+    public = indexes.BooleanField(model_attr='public')
     creator = indexes.IntegerField(model_attr='creator__id', null=True)
     portal = indexes.IntegerField(model_attr='portal_id')
     location = indexes.LocationField(null=True)

@@ -226,7 +226,6 @@ class DetailedMapResult(HaystackMapResult):
     
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
         kwargs.update({
-            'morestuff': 'Moar Stuff!',
         })
         """
         if self.background_image_field:
@@ -308,7 +307,8 @@ class DetailedSocietyMapResult(DetailedBaseGroupMapResult):
         # collect group's visible projects
         sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['projects'])
         sqs = sqs.filter_and(id__in=obj.groups.all().values_list('id', flat=True))
-        sqs = filter_searchqueryset_for_read_access(sqs, user)
+        # the preview for projects and groups is always visible for everyone!
+        #sqs = filter_searchqueryset_for_read_access(sqs, user)
         sqs = sqs.order_by('title')
         kwargs.update({
             'projects': [HaystackProjectMapCard(result) for result in sqs]
@@ -336,7 +336,8 @@ class DetailedUserMapResult(DetailedMapResult):
         # collect visible groups and projects that this user is in
         sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['projects'], SEARCH_MODEL_NAMES_REVERSE['groups'])
         sqs = sqs.filter_and(id__in=haystack_result.membership_groups)
-        sqs = filter_searchqueryset_for_read_access(sqs, user)
+        # the preview for projects and groups is always visible for everyone!
+        #sqs = filter_searchqueryset_for_read_access(sqs, user)
         sqs = sqs.order_by('title')
         
         kwargs.update({
@@ -385,18 +386,26 @@ class DetailedIdeaMapResult(DetailedMapResult):
     
     fields = copy(DetailedMapResult.fields)
     fields.update({
-        'likes': 0,
+        'like_count': 0,
         'projects': [],
     })
     
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
+        # collect group's created visible projects
+        sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['projects'])
+        sqs = sqs.filter_and(id__in=obj.created_groups.all().values_list('id', flat=True))
+        # the preview for projects and groups is always visible for everyone!
+        #sqs = filter_searchqueryset_for_read_access(sqs, user)
+        sqs = sqs.order_by('title')
         
-        # TODO: collect created projects and like count
         kwargs.update({
-            'likes': 44,
-            'projects': [],
+            'like_count': 44,
+            'projects': [HaystackProjectMapCard(result) for result in sqs],
+            'action_url_1': _prepend_url(user, obj.portal) + reverse('cosinnus:group-add') + ('?idea=%s' % haystack_result.id),
+            'creator_name': obj.creator.get_full_name(),
+            'creator_slug': obj.creator.username,
         })
-        return super(DetailedEventResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
+        return super(DetailedIdeaMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
 
 

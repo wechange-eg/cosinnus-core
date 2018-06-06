@@ -11,6 +11,7 @@ from cosinnus.models.profile import BaseUserProfile, GlobalBlacklistedEmail,\
 from uuid import uuid1
 from django.conf import settings
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.models.idea import CosinnusIdea
 
 
 def check_ug_admin(user, group):
@@ -75,7 +76,9 @@ def check_object_read_access(obj, user):
             # catch error cases where no media_tag was created. that case should break, but not here.
             obj_is_visible = is_member or is_admin
         return check_user_superuser(user) or obj_is_visible or obj.grant_extra_read_permissions(user)
-    elif issubclass(obj.__class__, BaseUserProfile):
+    elif type(obj) is CosinnusIdea:
+        return obj.public or check_user_can_see_user(user, obj.creator)
+    elif (obj.__class__, BaseUserProfile):
         return check_user_can_see_user(user, obj.user)
     else:
         met_proper_object_conditions = False
