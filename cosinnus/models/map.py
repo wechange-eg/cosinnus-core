@@ -401,7 +401,7 @@ class DetailedIdeaMapResult(DetailedMapResult):
         
         kwargs.update({
             'projects': [HaystackProjectMapCard(result) for result in sqs],
-            'action_url_1': _prepend_url(user, obj.portal) + reverse('cosinnus:group-add') + ('?idea=%s' % haystack_result.id),
+            'action_url_1': _prepend_url(user, obj.portal) + reverse('cosinnus:group-add') + ('?idea=%s' % itemid_from_searchresult(haystack_result)),
             'creator_name': obj.creator.get_full_name(),
             'creator_slug': obj.creator.username,
         })
