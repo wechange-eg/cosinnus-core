@@ -246,6 +246,13 @@ def get_searchresult_by_args(portal, model_type, slug, user=None):
     if user:
         # filter for read access by this user
         sqs = filter_searchqueryset_for_read_access(sqs, user)
+        
+    # hack: haystack seems to be unable to filter *exact* on `slug` (even when using __exact). 
+    # this affects slugs like `my-slug` vs `my-slug-2`.
+    # so we manually post-filter on slug to get an exact match
+    if len(sqs) > 1:
+        sqs = [result for result in sqs if result.slug == slug]
+    
     if len(sqs) != 1:
         logger.warn('Got a DetailMap request where %d indexed results were found!' % len(sqs), extra={
             'portal': portal,
