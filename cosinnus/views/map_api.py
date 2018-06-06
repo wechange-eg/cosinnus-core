@@ -26,6 +26,7 @@ from cosinnus.models.map import HaystackMapResult, \
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.functions import is_number, ensure_list_of_ints
 from cosinnus.utils.permissions import check_object_read_access
+from django.utils.html import escape
 
 
 try:
@@ -210,7 +211,7 @@ def map_detail_endpoint(request):
     else:
         obj = get_object_or_None(model, portal__id=portal, slug=slug)
     if obj is None:
-        return HttpResponseNotFound('No item found that matches the requested type and slug.')
+        return HttpResponseNotFound('No item found that matches the requested type and slug (obj: %s, %s, %s).' % (escape(force_text(model)), portal, slug))
     
     # check read permission
     if not model_type in SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS and not check_object_read_access(obj, request.user):
@@ -219,7 +220,7 @@ def map_detail_endpoint(request):
     # get the basic result data from the search index (as it is already prepared and faster to access there)
     haystack_result = get_searchresult_by_args(portal, model_type, slug)
     if not haystack_result:
-        return HttpResponseNotFound('No item found that matches the requested type and slug.')
+        return HttpResponseNotFound('No item found that matches the requested type and slug (index: %s, %s, %s).' % (portal, model_type, slug))
     
     # format data
     result_model = SEARCH_RESULT_DETAIL_TYPE_MAP[model_type]
@@ -249,6 +250,13 @@ def get_searchresult_by_args(portal, model_type, slug, user=None):
     if user:
         # filter for read access by this user
         sqs = filter_searchqueryset_for_read_access(sqs, user)
+        
+    # hack: haystack seems to be unable to filter *exact* on `slug` (even when using __exact). 
+    # this affects slugs like `my-slug` vs `my-slug-2`.
+    # so we manually post-filter on slug to get an exact match
+    if len(sqs) > 1:
+        sqs = [result for result in sqs if result.slug == slug]
+    
     if len(sqs) != 1:
         logger.warn('Got a DetailMap request where %d indexed results were found!' % len(sqs), extra={
             'portal': portal,
