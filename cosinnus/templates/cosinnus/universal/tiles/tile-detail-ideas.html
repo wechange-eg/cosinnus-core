@@ -37,10 +37,10 @@
                 <i class="fa fa-fw fa-map-marker"></i>{{ address }}
             </span>
         {% endif %}
-        {% if like_count > 0 %}
+        {% if participant_count > 0 %}
             <span class="multi-span capitalize">
-                <i class="fa fa-fw fa-heart"></i>
-                {{ like_count }}
+                <i class="fa fa-fw fa-heart {% if liked %}apply-color-liked{% endif %}"></i>
+                {{ participant_count }}
             </span>
         {% endif %}
     </div>
@@ -48,11 +48,18 @@
 
 {% block action_buttons %}
     <div class="tile-section">
-        <a class="rounded-button button-action button-like">
+        <a class="rounded-button button-action 
+                {% if cosinnus_active_user %}button-like" {% else %}" href="/signup/?acc_req_msg=1" target="_blank"{% endif %}>
             <span class="rounded-button-inner">
-                <i clasS="fa fa-heart"></i>
-                {# Translators: __INCLUDE_JS_PO__ #}
-                {% trans "TODO: Like" %}
+                {% if liked %}
+                    <i clasS="fa fa-heart"></i>
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Liked" %}
+                {% else %}
+	                <i clasS="fa fa-heart-o"></i>
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Like" %}
+                {% endif %}
             </span>
         </a>
         <a href="{{ action_url_1 }}" target="_blank" class="rounded-button button-action">
@@ -61,6 +68,10 @@
                 {% trans "Create Project from Idea" %}
             </span>
         </a>
+        <div class="like-button-error message-error extra-space-top" style="display: none;">
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Could not save your like setting because of an error." %}
+        </div>
     </div>
 {% endblock %}
 

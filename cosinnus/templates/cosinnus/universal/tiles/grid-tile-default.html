@@ -82,12 +82,12 @@
 	        {% endif %}
         {% endif %}
         
-        {% if type == "ideas" and participant_count > 1 %}
+        {% if type == "ideas" and participant_count > 0 %}
             <span class="multi-span" title="
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Likes" %}
             ">
-                <i class="fa fa-heart"></i> 
+                <i class="fa fa-heart {% if liked %}apply-color-liked{% endif %}" ></i> 
                 {{ participant_count }}
             </span>
         {% endif %}

@@ -152,6 +152,7 @@ class BaseMapResult(DictResult):
         'member_count': -1, # member count for projects/groups, group-member count for events, memberships for users
         'content_count': -1, # groups/projects: number of upcoming events
         'type': 'BaseResult', # should be different for every class
+        'liked': False, # has the current user liked this?
     }
     
 
@@ -166,7 +167,7 @@ class HaystackMapResult(BaseMapResult):
         'type': 'CompactMapResult',
     })
 
-    def __init__(self, result, *args, **kwargs):
+    def __init__(self, result, user=None, *args, **kwargs):
         if result.portals:
             # some results, like users, have multiple portals associated. we select one of those to show
             # the origin from
@@ -198,6 +199,7 @@ class HaystackMapResult(BaseMapResult):
             'participant_count': result.participant_count,
             'member_count': result.member_count,
             'content_count': result.content_count,
+            'liked': user.id in result.liked_user_ids if (user and getattr(result, 'liked_user_ids', [])) else False,
         }
         fields.update(**kwargs)
         
@@ -232,7 +234,7 @@ class DetailedMapResult(HaystackMapResult):
             kwargs['backgroundImageLargeUrl'] = self.prepare_background_image_large_url(getattr(obj, self.background_image_field))
         """
         
-        return super(DetailedMapResult, self).__init__(haystack_result, *args, **kwargs)
+        return super(DetailedMapResult, self).__init__(haystack_result, user=user, *args, **kwargs)
 
 
 class DetailedBaseGroupMapResult(DetailedMapResult):
@@ -386,7 +388,6 @@ class DetailedIdeaMapResult(DetailedMapResult):
     
     fields = copy(DetailedMapResult.fields)
     fields.update({
-        'like_count': 0,
         'projects': [],
     })
     
@@ -399,13 +400,13 @@ class DetailedIdeaMapResult(DetailedMapResult):
         sqs = sqs.order_by('title')
         
         kwargs.update({
-            'like_count': 44,
             'projects': [HaystackProjectMapCard(result) for result in sqs],
             'action_url_1': _prepend_url(user, obj.portal) + reverse('cosinnus:group-add') + ('?idea=%s' % haystack_result.id),
             'creator_name': obj.creator.get_full_name(),
             'creator_slug': obj.creator.username,
         })
-        return super(DetailedIdeaMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
+        ret = super(DetailedIdeaMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
+        return ret
 
 
 

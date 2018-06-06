@@ -416,6 +416,58 @@ module.exports = ContentControlView.extend({
         }
     },
     
+    /** Will like/unlike a given result, depending on the current liked status */
+    triggerResultLikeOrUnlike: function (result) {
+    	var self = this;
+    	var url = '/like/'
+    	var ct = null;
+    	if (result.get('type') == 'ideas') {
+    		ct = 'cosinnus.CosinnusIdea';
+    	} else {
+    		util.log('Liking cancelled - invalid result type for liking: ' + result.get('type'))
+    	}
+    	var to_like = result.get('liked') ? '0' : 1;
+    	var unliked_count = result.get('participant_count') - (result.get('liked') ? 1 : 0);
+    	var likeHadErrors = false;
+    	
+    	util.log('Sending like request for slug "' + result.get('slug') + '" and like: ' + to_like);
+    	self.currentDetailHttpRequest = $.ajax(url, {
+            type: 'POST',
+            timeout: self.searchXHRTimeout,
+            data: {
+            	ct: ct,
+            	slug: result.get('slug'),
+            	like: to_like,
+            },
+            success: function (data, textStatus) {
+                
+                util.log('got resultssss for like')
+                util.log(data)
+                util.log(textStatus)
+                
+                if ('liked' in data) {
+                	result.set('participant_count', unliked_count + (data.liked ? 1 : 0));
+                    result.set('liked', data.liked);
+                    // graphics update happens via subscriptions on change:liked
+                } 
+            },
+            error: function (xhr, textStatus) {
+                util.log('control-view.js: Like XHR failed.')
+                likeHadErrors = true;
+            },
+            complete: function (xhr, textStatus) {
+                util.log('control-view.js: Like complete: ' + textStatus);
+                
+                if (textStatus !== 'success') {
+                	likeHadErrors = true;
+                }
+                if (likeHadErrors) {
+                    $('.like-button-error').show();
+                }
+            }
+        });
+    },
+    
     /** Called manually or deferredly after loading a Result from the server,
      *  to be shown as the Detail View.
      *  @param result: This must be *a detailed* Result model, or null!

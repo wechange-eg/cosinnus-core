@@ -162,7 +162,7 @@ class CosinnusIdea(IndexingUtilsMixin, models.Model):
         verbose_name=_('Creator'),
         on_delete=models.CASCADE,
         null=True,
-        related_name='%(app_label)s_%(class)s_set')
+        related_name='ideas')
     
     description = models.TextField(verbose_name=_('Short Description'),
          help_text=_('Short Description. Internal, will not be shown publicly.'), blank=True)

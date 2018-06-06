@@ -28,17 +28,13 @@ module.exports = BaseView.extend({
         'click .result-link': 'onResultLinkClicked',
         'click .tile-close-button': 'onDeselectClicked',
         'click .topic-filter-link': 'onTopicLinkClicked',
+        'click .button-like': 'onLikeButtonClicked',
     },
     
     initialize: function (options, app) {
         var self = this;
         BaseView.prototype.initialize.call(self, options);
         self.App = app;
-        
-        // TODO: delete once new detail open/close logic is in place
-//        Backbone.mediator.subscribe('result:selected', self.onResultSelected, self);
-//        Backbone.mediator.subscribe('result:reselected', self.onResultSelected, self);
-//        Backbone.mediator.subscribe('result:unselected', self.onResultUnselected, self);
         
         Backbone.mediator.subscribe('result:detail-opened', self.onDetailOpened, self);
         Backbone.mediator.subscribe('result:detail-closed', self.onDetailClosed, self);
@@ -66,13 +62,17 @@ module.exports = BaseView.extend({
     
     // a new result is being selected
     onDetailOpened: function (result) {
-        
+        var self = this;
         this.model = result;
         if (result.get('type') in templates) {
             this.template = templates[result.get('type')];
         } else {
             this.template = templates['error'];
         }
+
+        this.model.on({
+            'change:liked': self.thisContext(self.render),
+        });
         this.fitTemplate();
         this.render();
         this.App.controlView.triggerMobileDetailView();
@@ -119,5 +119,9 @@ module.exports = BaseView.extend({
     onResultLinkClicked: function (event) {
         this.App.controlView.onResultLinkClicked(event);
     },
+    
+    onLikeButtonClicked: function (event) {
+    	this.App.controlView.triggerResultLikeOrUnlike(this.model);
+    }
     
 });

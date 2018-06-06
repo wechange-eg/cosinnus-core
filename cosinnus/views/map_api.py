@@ -140,7 +140,7 @@ def map_search_endpoint(request, filter_group_id=None):
         # if we hae no query-boosted results, use *only* our custom sorting (haystack's is very random)
         if not query:
             result.score = result.local_boost
-        results.append(HaystackMapResult(result))
+        results.append(HaystackMapResult(result, user=request.user))
         
     # if the requested item (direct select) is not in the queryset snippet
     # (might happen because of an old URL), then mix it in as first item and drop the last
@@ -149,7 +149,7 @@ def map_search_endpoint(request, filter_group_id=None):
         if not any([res['id'] == item_id for res in results]):
             item_result = get_searchresult_by_itemid(item_id, request.user)
             if item_result:
-                results = [HaystackMapResult(item_result)] + results[:-1]
+                results = [HaystackMapResult(item_result, user=request.user)] + results[:-1]
         
     page_obj = None
     if results:
