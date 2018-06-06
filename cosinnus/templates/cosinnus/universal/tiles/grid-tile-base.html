@@ -28,7 +28,9 @@
                     {% if backgroundImageSmallUrl %}
                         <img class="tile-image tile-image-background" src="{{ backgroundImageSmallUrl }}" />
                     {% endif %}
-                    <img class="floating-tile-image" src="{{ iconImageUrl }}" />
+                    {% if iconImageUrl %}
+                        <img class="floating-tile-image" src="{{ iconImageUrl }}" />
+                    {% endif %}
                 </div>
             </div>
         {% endif %}

@@ -93,6 +93,9 @@
     .apply-color-ideas {
         color: @map-ideas-color;
     }
+    .apply-color-liked {
+        color: @map-liked-color;
+    }
     
     /** Rounded buttons */
     .rounded-button {
@@ -117,6 +120,9 @@
                 margin-right: 5px;
             }
         }
+        &+.rounded-button {
+            margin-left: 5px;
+        }
         &.rounded-button-circular {
             border-radius: 20px;
             .rounded-button-inner {
@@ -131,6 +137,15 @@
             height: 22px;
             line-height: 20px;
             margin-right: 0;
+        }
+        &.rounded-button-large {
+            font-size: 24px;
+            height: 42px;
+            line-height: 40px;
+            
+            &.rounded-button-circular {
+                border-radius: 24px;
+            }
         }
         &.shadowed-button {
             -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
@@ -1127,10 +1142,15 @@
     bottom: 20px;
     z-index: 5;
 }
-
 .map-pagination-controls {
     padding: 10px;
     text-align: center;    
+}
+.map-create-idea-button-frame {
+    padding: 10px;
+    position: fixed;
+    right: ~"calc(50% + 10px)";
+    bottom: 10px;
 }
 
 .onoffswitch {
@@ -1255,7 +1275,7 @@
             border-radius: 34px;
             
             .rounded-button-inner {
-                   padding: 10px;
+                padding: 10px;
             }
         }
         

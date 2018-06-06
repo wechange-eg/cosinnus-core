@@ -22,7 +22,7 @@ module.exports = ContentControlView.extend({
             people: true,
             projects: true,
             events: true,
-            groups: true
+            groups: true,
         },
         activeFilters: {
             people: true,
@@ -80,6 +80,12 @@ module.exports = ContentControlView.extend({
     
     initialize: function (options, app, collection) {
         var self = this;
+        // add idea models if active
+        if (COSINNUS_IDEAS_ENABLED) {
+        	self.defaults.availableFilters['ideas'] = true;
+        	self.defaults.activeFilters['ideas'] = true;
+        }
+        
         ContentControlView.prototype.initialize.call(self, options, app, collection);
         
         if (!self.collection) {
@@ -408,6 +414,58 @@ module.exports = ContentControlView.extend({
             
             
         }
+    },
+    
+    /** Will like/unlike a given result, depending on the current liked status */
+    triggerResultLikeOrUnlike: function (result) {
+    	var self = this;
+    	var url = '/like/'
+    	var ct = null;
+    	if (result.get('type') == 'ideas') {
+    		ct = 'cosinnus.CosinnusIdea';
+    	} else {
+    		util.log('Liking cancelled - invalid result type for liking: ' + result.get('type'))
+    	}
+    	var to_like = result.get('liked') ? '0' : 1;
+    	var unliked_count = result.get('participant_count') - (result.get('liked') ? 1 : 0);
+    	var likeHadErrors = false;
+    	
+    	util.log('Sending like request for slug "' + result.get('slug') + '" and like: ' + to_like);
+    	self.currentDetailHttpRequest = $.ajax(url, {
+            type: 'POST',
+            timeout: self.searchXHRTimeout,
+            data: {
+            	ct: ct,
+            	slug: result.get('slug'),
+            	like: to_like,
+            },
+            success: function (data, textStatus) {
+                
+                util.log('got resultssss for like')
+                util.log(data)
+                util.log(textStatus)
+                
+                if ('liked' in data) {
+                	result.set('participant_count', unliked_count + (data.liked ? 1 : 0));
+                    result.set('liked', data.liked);
+                    // graphics update happens via subscriptions on change:liked
+                } 
+            },
+            error: function (xhr, textStatus) {
+                util.log('control-view.js: Like XHR failed.')
+                likeHadErrors = true;
+            },
+            complete: function (xhr, textStatus) {
+                util.log('control-view.js: Like complete: ' + textStatus);
+                
+                if (textStatus !== 'success') {
+                	likeHadErrors = true;
+                }
+                if (likeHadErrors) {
+                    $('.like-button-error').show();
+                }
+            }
+        });
     },
     
     /** Called manually or deferredly after loading a Result from the server,
@@ -920,6 +978,9 @@ module.exports = ContentControlView.extend({
             pageIndex: util.ifundef(urlParams.page, this.state.pageIndex),
             urlSelectedResultId: util.ifundef(urlParams.item, this.state.urlSelectedResultId),
         });
+        if (COSINNUS_IDEAS_ENABLED) {
+        	this.state.activeFilters['ideas'] = util.ifundef(urlParams.ideas, this.options.activeFilters.ideas);
+        }
     },
     
     // extended from content-control-view.js
@@ -931,6 +992,11 @@ module.exports = ContentControlView.extend({
             projects: this.state.activeFilters.projects,
             groups: this.state.activeFilters.groups,
         };
+        if (COSINNUS_IDEAS_ENABLED) {
+        	_.extend(searchParams, {
+                ideas: this.state.activeFilters.ideas
+            });
+        }
         if (this.state.activeTopicIds.length > 0) {
             _.extend(searchParams, {
                 topics: this.state.activeTopicIds.join(',')

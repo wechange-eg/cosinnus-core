@@ -6,7 +6,7 @@ from haystack import indexes
 from cosinnus.conf import settings
 from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveEdgeNgramField,\
     TagObjectSearchIndex, BOOSTED_FIELD_BOOST, StoredDataIndexMixin,\
-    DocumentBoostMixin
+    DocumentBoostMixin, CommaSeperatedIntegerMultiValueField
 from cosinnus.utils.user import filter_active_users, filter_portal_users
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
@@ -17,6 +17,9 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from django.core.urlresolvers import reverse
 from django.utils.functional import cached_property
 from django.contrib.auth.models import AnonymousUser
+from cosinnus.models.idea import CosinnusIdea
+from cosinnus.models.tagged import LikeObject
+from django.contrib.contenttypes.models import ContentType
     
 
 class CosinnusGroupIndexMixin(DocumentBoostMixin, StoredDataIndexMixin, indexes.SearchIndex):
@@ -211,4 +214,55 @@ class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearch
         user_memberships_count = self._get_memberships_count(obj)
         memberships_rank = normalize_within_stddev(user_memberships_count, mean, stddev, stddev_factor=2.0)
         return memberships_rank
+    
+    
+class IdeaSearchIndex(DocumentBoostMixin, TagObjectSearchIndex, StoredDataIndexMixin, indexes.Indexable):
+    
+    text = TemplateResolveEdgeNgramField(document=True, use_template=True)
+    boosted = indexes.EdgeNgramField(model_attr='title', boost=BOOSTED_FIELD_BOOST)
+
+    public = indexes.BooleanField(model_attr='public')
+    creator = indexes.IntegerField(model_attr='creator__id', null=True)
+    portal = indexes.IntegerField(model_attr='portal_id')
+    location = indexes.LocationField(null=True)
+    liked_user_ids = CommaSeperatedIntegerMultiValueField(indexed=False, stored=True)
+    
+    def get_model(self):
+        return CosinnusIdea
+    
+    def prepare_liked_user_ids(self, obj):
+        if not hasattr(obj, '_liked_ids'):
+            ct = ContentType.objects.get_for_model(obj.__class__)
+            obj._liked_ids = list(LikeObject.objects.filter(content_type=ct, object_id=obj.id, liked=True).values_list('user__id', flat=True))
+        return obj._liked_ids
+    
+    def prepare_participant_count(self, obj):
+        """ Group member count for taggable objects """
+        if not hasattr(obj, '_like_count'):
+            obj._like_count = len(self.prepare_liked_user_ids(obj))
+        return obj._like_count 
+    
+    def prepare_member_count(self, obj):
+        return self.prepare_participant_count(obj)
+        
+    def prepare_content_count(self, obj):
+        return obj.created_groups.filter(is_active=True).count()
+    
+    def prepare_location(self, obj):
+        if obj.media_tag and obj.media_tag.location_lat and obj.media_tag.location_lon:
+            # this expects (lat,lon)!
+            return "%s,%s" % (obj.media_tag.location_lat, obj.media_tag.location_lon)
+        return None
+
+    def get_image_field_for_background(self, obj):
+        return obj.image
+    
+    def index_queryset(self, using=None):
+        qs = self.get_model().objects.all_in_portal()
+        qs = qs.select_related('media_tag')
+        return qs
+    
+    def boost_model(self, obj, indexed_data):
+        """ TODO boost by likes with stddev! """
+        return 99
     

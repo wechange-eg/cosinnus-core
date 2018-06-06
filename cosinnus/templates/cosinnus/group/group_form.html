@@ -50,6 +50,29 @@
 
 {% block content %}
 
+    {# Info for creating a project from an idea #}
+    {% if not object and request.GET.idea and group_model == "CosinnusProject" %}
+        <div class="alert alert-success">
+            <i class="fa fa-lightbulb-o fa-3x"></i>
+            <h4>{% trans "Let's bring this idea to life! (TODO: slogan, and is the text ok?)!" %}</h4>
+            <div class="v-offset-s">
+                <p>
+                    {% blocktrans with idea_name=request.GET.name %}Great to see you're creating a project from the idea "{{ idea_name }}"!{% endblocktrans %}
+                </p>
+            </div>
+            <div class="v-offset-s">
+                <p>
+                    {% trans "Once you have created your project, everyone who liked (and followed) the idea will receive a notification! They can then jump in and become a member of your new project. Don't worry - you still have to approve who may join and who can't when they request a membership." %}
+                </p>
+            </div>
+            <div class="v-offset-s">
+                <p>
+                    {% trans "Your new project will also be displayed on the idea itself, so that everyone can see it and join in later on." %}
+                </p>
+            </div>
+        </div>
+    {% endif %}
+
     {% if form.forms.obj.errors or form.forms.media_tag.errors or inlines.0.errors or inlines.1.errors or inlines.2.errors %}
 	    <div class="alert alert-danger alert-dismissable">
             <i class="fa fa-exclamation-triangle fa-3x"></i>
@@ -91,6 +114,10 @@
 	    {{ form.forms.obj.non_field_errors }}
 	    {{ form.forms.media_tag.non_field_errors }}
 	    
+	    {% if SETTINGS.COSINNUS_IDEAS_ENABLED and request.GET.idea %}
+	        <input type="hidden" name="idea_shortid" value="{{ request.GET.idea }}" />
+	    {% endif %}
+	    
         <!-- a box with semi transparent background -->
         <div class="content-box">
 			
@@ -105,7 +132,10 @@
                         {# Name Field #}
 						{% block group_form_name_field %}
 	                        {% captureas name_placeholder %}{% if group_model == "CosinnusSociety" %}{% trans "Enter a name for the group." %}{% else %}{% trans "Enter a name for the project." %}{% endif %}{% endcaptureas %}
-                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=name_placeholder %}
+	                        {% if request.GET.name %}
+	                            {% captureas name_val %}{{ request.GET.name }}{% endcaptureas %}
+	                        {% endif %}
+                            {% include 'cosinnus/fields/default_field.html' with field=form.forms.obj.name placeholder=name_placeholder field_value=name_val %}
 					    {% endblock group_form_name_field %}
 					
 				

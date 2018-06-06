@@ -26,8 +26,12 @@ from cosinnus.models.map import HaystackMapResult, \
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.functions import is_number, ensure_list_of_ints
 from cosinnus.utils.permissions import check_object_read_access
-from django.utils.html import escape
+<<<<<<< HEAD
 
+=======
+from cosinnus.models.group import CosinnusPortal
+from django.utils.html import escape
+>>>>>>> staging
 
 try:
     from cosinnus_event.models import Event #noqa
@@ -140,7 +144,7 @@ def map_search_endpoint(request, filter_group_id=None):
         # if we hae no query-boosted results, use *only* our custom sorting (haystack's is very random)
         if not query:
             result.score = result.local_boost
-        results.append(HaystackMapResult(result, user=request.user))
+        results.append(HaystackMapResult(result))
         
     # if the requested item (direct select) is not in the queryset snippet
     # (might happen because of an old URL), then mix it in as first item and drop the last
@@ -149,7 +153,7 @@ def map_search_endpoint(request, filter_group_id=None):
         if not any([res['id'] == item_id for res in results]):
             item_result = get_searchresult_by_itemid(item_id, request.user)
             if item_result:
-                results = [HaystackMapResult(item_result, user=request.user)] + results[:-1]
+                results = [HaystackMapResult(item_result)] + results[:-1]
         
     page_obj = None
     if results:

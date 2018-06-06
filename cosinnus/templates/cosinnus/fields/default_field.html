@@ -30,7 +30,7 @@
 	{% if label %}
 		<label {% if for_id %}for="{{ for_id }}"{% endif %} {% if first %}class="first"{% endif %}>
 		    {{ label }}
-		    {% if field and not field.field.required %}
+		    {% if field and not field.field.required and not required %}
                 ({% trans "optional" context "written next to optional form fields" %})
             {% endif %}
             {% if help_popup %}
@@ -52,7 +52,12 @@
 	        {% if field_html %}
 	            {{ field_html|safe }}
 	        {% elif field %}
-	            {% render_field field placeholder=placeholder autocomplete="off" %}
+	            {% if field_value %}
+	                {% render_field field placeholder=placeholder autocomplete="off" value=field_value %}
+	            {% else %}
+	                {% render_field field placeholder=placeholder autocomplete="off" %}
+	            {% endif %}
+	            
 	        {% endif %}
 	    </div>
     {% endif %}

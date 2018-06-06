@@ -479,6 +479,35 @@ class BaseTaggableObjectReflection(models.Model):
         return get_cosinnus_group_model().objects.get_cached(pks=group_ids)
 
 
+@python_2_unicode_compatible
+class LikeObject(models.Model):
+    """
+    A generic object to serve as a "Like", as well as a "Following" indicator for any object.
+    """
+
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    target_object = generic.GenericForeignKey('content_type', 'object_id')
+    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+        verbose_name=_('User'),
+        on_delete=models.CASCADE,
+        null=True,
+        related_name='likes')
+    liked = models.BooleanField(_('Liked'), default=True)
+    followed = models.BooleanField(_('Following'), default=True)
+
+    class Meta:
+        app_label = 'cosinnus'
+        ordering = ('content_type',)
+        unique_together = (('content_type', 'object_id', 'user'),)
+        verbose_name = _('Like')
+        verbose_name_plural = _('Likes')
+
+    def __str__(self):
+        return '<like: %s::%s::%s>' % (self.content_type, self.object_id, self.user.username)
+
+
 def ensure_container(sender, **kwargs):
     """ Creates a root container instance for all hierarchical objects in a newly created group """
     created = kwargs.get('created', False)

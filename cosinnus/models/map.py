@@ -1,26 +1,26 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import datetime
 from copy import copy
+import datetime
 
 from django.core.urlresolvers import reverse
+from django.db.models import Q
+from django.template.defaultfilters import linebreaksbr
+from django.utils.html import escape
+from django.utils.timezone import now
+from haystack.query import SearchQuerySet
 
-from cosinnus.forms.search import get_visible_portal_ids,\
+from cosinnus.conf import settings
+from cosinnus.forms.search import get_visible_portal_ids, \
     filter_searchqueryset_for_read_access
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject, \
-    CosinnusGroup
+from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.templatetags.cosinnus_tags import textfield
+from cosinnus.utils.group import message_group_admins_url
 from cosinnus.utils.permissions import check_ug_membership
 from cosinnus.utils.urls import group_aware_reverse
-from cosinnus.utils.group import message_group_admins_url
-from django.utils.html import escape
-from django.template.defaultfilters import linebreaksbr
-from haystack.query import SearchQuerySet
-from django.utils.timezone import now
-from django.db.models import Q
 
 
 def _prepend_url(user, portal=None):
@@ -152,6 +152,7 @@ class BaseMapResult(DictResult):
         'member_count': -1, # member count for projects/groups, group-member count for events, memberships for users
         'content_count': -1, # groups/projects: number of upcoming events
         'type': 'BaseResult', # should be different for every class
+        'liked': False, # has the current user liked this?
     }
     
 
@@ -166,7 +167,7 @@ class HaystackMapResult(BaseMapResult):
         'type': 'CompactMapResult',
     })
 
-    def __init__(self, result, *args, **kwargs):
+    def __init__(self, result, user=None, *args, **kwargs):
         if result.portals:
             # some results, like users, have multiple portals associated. we select one of those to show
             # the origin from
@@ -198,6 +199,7 @@ class HaystackMapResult(BaseMapResult):
             'participant_count': result.participant_count,
             'member_count': result.member_count,
             'content_count': result.content_count,
+            'liked': user.id in result.liked_user_ids if (user and getattr(result, 'liked_user_ids', [])) else False,
         }
         fields.update(**kwargs)
         
@@ -226,14 +228,13 @@ class DetailedMapResult(HaystackMapResult):
     
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
         kwargs.update({
-            'morestuff': 'Moar Stuff!',
         })
         """
         if self.background_image_field:
             kwargs['backgroundImageLargeUrl'] = self.prepare_background_image_large_url(getattr(obj, self.background_image_field))
         """
         
-        return super(DetailedMapResult, self).__init__(haystack_result, *args, **kwargs)
+        return super(DetailedMapResult, self).__init__(haystack_result, user=user, *args, **kwargs)
 
 
 class DetailedBaseGroupMapResult(DetailedMapResult):
@@ -308,7 +309,8 @@ class DetailedSocietyMapResult(DetailedBaseGroupMapResult):
         # collect group's visible projects
         sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['projects'])
         sqs = sqs.filter_and(id__in=obj.groups.all().values_list('id', flat=True))
-        sqs = filter_searchqueryset_for_read_access(sqs, user)
+        # the preview for projects and groups is always visible for everyone!
+        #sqs = filter_searchqueryset_for_read_access(sqs, user)
         sqs = sqs.order_by('title')
         kwargs.update({
             'projects': [HaystackProjectMapCard(result) for result in sqs]
@@ -336,7 +338,8 @@ class DetailedUserMapResult(DetailedMapResult):
         # collect visible groups and projects that this user is in
         sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['projects'], SEARCH_MODEL_NAMES_REVERSE['groups'])
         sqs = sqs.filter_and(id__in=haystack_result.membership_groups)
-        sqs = filter_searchqueryset_for_read_access(sqs, user)
+        # the preview for projects and groups is always visible for everyone!
+        #sqs = filter_searchqueryset_for_read_access(sqs, user)
         sqs = sqs.order_by('title')
         
         kwargs.update({
@@ -379,12 +382,40 @@ class DetailedEventResult(DetailedMapResult):
         return super(DetailedEventResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
 
+class DetailedIdeaMapResult(DetailedMapResult):
+    """ Takes a Haystack Search Result and funnels its properties (most data comes from ``StoredDataIndexMixin``)
+         into a proper MapResult """
+    
+    fields = copy(DetailedMapResult.fields)
+    fields.update({
+        'projects': [],
+    })
+    
+    def __init__(self, haystack_result, obj, user, *args, **kwargs):
+        # collect group's created visible projects
+        sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['projects'])
+        sqs = sqs.filter_and(id__in=obj.created_groups.all().values_list('id', flat=True))
+        # the preview for projects and groups is always visible for everyone!
+        #sqs = filter_searchqueryset_for_read_access(sqs, user)
+        sqs = sqs.order_by('title')
+        
+        kwargs.update({
+            'projects': [HaystackProjectMapCard(result) for result in sqs],
+            'action_url_1': _prepend_url(user, obj.portal) + reverse('cosinnus:group-add') + ('?idea=%s' % itemid_from_searchresult(haystack_result)),
+            'creator_name': obj.creator.get_full_name(),
+            'creator_slug': obj.creator.username,
+        })
+        ret = super(DetailedIdeaMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
+        return ret
+
+
 
 SHORTENED_ID_MAP = {
     'cosinnus.cosinnusproject': 1,
     'cosinnus.cosinnussociety': 2,
     'cosinnus.userprofile': 3,
     'cosinnus_event.event': 4,
+    'cosinnus.cosinnusidea': 5,
 }
 
 SEARCH_MODEL_NAMES = {
@@ -415,13 +446,27 @@ try:
     })
 except:
     Event = None
-
+    
+if settings.COSINNUS_IDEAS_ENABLED:
+    from cosinnus.models.idea import CosinnusIdea
+    SEARCH_MODEL_NAMES.update({
+        CosinnusIdea: 'ideas',                       
+    })
+    SHORT_MODEL_MAP.update({
+        5: CosinnusIdea,
+    })
+    SEARCH_RESULT_DETAIL_TYPE_MAP.update({
+        'ideas': DetailedIdeaMapResult,
+    })
+    
 SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in SEARCH_MODEL_NAMES.items()])
 # these can always be read by any user (returned fields still vary)
 SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS = [
     'projects',
     'groups',
 ]
+
+
 
 
 def itemid_from_searchresult(result):

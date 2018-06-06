@@ -43,6 +43,9 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^map/search/(?P<filter_group_id>\d+)/$', 'map_api.map_search_endpoint', name='map-search-endpoint-filtered'),
     url(r'^map/detail/$', 'map_api.map_detail_endpoint', name='map-detail-endpoint'),
     
+    url(r'^like/$', 'common.do_like',  name='like-view'),
+    
+    
     url(r'^invitations/$', 'group.group_list_invited', name='invitations', kwargs={'show_all': True}),
     url(r'^welcome/$', 'user.welcome_settings', name='welcome-settings'),
     
@@ -103,6 +106,15 @@ if settings.COSINNUS_FACEBOOK_INTEGRATION_ENABLED:
         url(r'^fb-integration/save-auth-tokens/$', 'facebook_integration.save_auth_tokens',  name='facebook-save-auth-tokens'),
         url(r'^fb-integration/remove-facebook/$', 'facebook_integration.remove_facebook_association',  name='facebook-remove-association'),
         url(r'^fb-integration/confirm-page-admin/(?P<group_id>\d+)/$', 'facebook_integration.confirm_page_admin',  name='facebook-confirm-page-admin'),
+    )
+
+if settings.COSINNUS_IDEAS_ENABLED:
+    urlpatterns += patterns('cosinnus.views', 
+        url(r'^ideas/add/$', 'idea.idea_create', name='idea-create'),
+        url(r'^ideas/list/$', 'idea.idea_list', name='idea-list'),
+        url(r'^ideas/mine/$', 'idea.idea_list_mine', name='idea-list-mine'),
+        url(r'^ideas/(?P<slug>[^/]+)/edit/$', 'idea.idea_edit', name='idea-edit'),
+        url(r'^ideas/(?P<slug>[^/]+)/delete/$', 'idea.idea_delete', name='idea-delete'),
     )
 
 for url_key in group_model_registry:

@@ -1,0 +1,102 @@
+{% extends 'tiles/tile-detail-base' %}
+{% import "include/macros.html" as macros %}
+
+{% block header_image %}
+    {% if backgroundImageLargeUrl %}
+        <div class="tile-section header-image">
+            <div class="dual-tile-image">
+                <img class="tile-image tile-image-background" src="{{ backgroundImageLargeUrl }}" /> 
+            </div>
+        </div>
+    {% endif %}
+{% endblock header_image %}
+
+{% block title %}
+    <div class="tile-section title">
+        <h1>
+            {{ title }}
+        </h1>
+    </div>
+{% endblock title %}
+        
+{% block top_line %}
+    <div class="tile-section top-line one-line extra-space">
+        <span class="multi-span">
+	        <span class="pale-color">
+	            {# Translators: __INCLUDE_JS_PO__ #}
+	            {% trans "Author" %}:
+	        </span> 
+	        {% if not cosinnus_active_user %}
+	            <a href="/signup/?acc_req_msg=1" target="_blank">{{ creator_name }}</a>
+	        {% else %}
+	            {{ macros.resultLink(portal, creator_slug, creator_name, "people") }}
+	        {% endif %}
+	    </span>
+        {% if address %}
+            <span class="multi-span capitalize">
+                <i class="fa fa-fw fa-map-marker"></i>{{ address }}
+            </span>
+        {% endif %}
+        {% if participant_count > 0 %}
+            <span class="multi-span capitalize">
+                <i class="fa fa-fw fa-heart {% if liked %}apply-color-liked{% endif %}"></i>
+                {{ participant_count }}
+            </span>
+        {% endif %}
+    </div>
+{% endblock top_line %}
+
+{% block action_buttons %}
+    <div class="tile-section">
+        <a class="rounded-button button-action 
+                {% if cosinnus_active_user %}button-like" {% else %}" href="/signup/?acc_req_msg=1" target="_blank"{% endif %}>
+            <span class="rounded-button-inner">
+                {% if liked %}
+                    <i clasS="fa fa-heart"></i>
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Liked" %}
+                {% else %}
+	                <i clasS="fa fa-heart-o"></i>
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Like" %}
+                {% endif %}
+            </span>
+        </a>
+        <a href="{{ action_url_1 }}" target="_blank" class="rounded-button button-action">
+            <span class="rounded-button-inner">
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Create Project from Idea" %}
+            </span>
+        </a>
+        <div class="like-button-error message-error extra-space-top" style="display: none;">
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Could not save your like setting because of an error." %}
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block related_content %}
+    {{ super() }}
+
+    {% if projects|length > 0 %}
+        <div class="tile-section tile-section-divided">
+            <div class="subheading">
+                <i class="fa fa-group"></i>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Projects - Created from this Idea" %} ({{ projects|length }})
+            </div>
+        </div>
+        <div class="tile-section">
+            <div class="row">
+                {% for project in projects %}
+                    <div class="col-sm-6">
+                        {{ macros.itemCard(project.portal, project.slug, project.title, project.type, project.iconImageUrl, project.address, "fa-map-marker", project.dataSlot1, "fa-group", cosinnus_active_user=cosinnus_active_user) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    
+{% endblock related_content %}
+

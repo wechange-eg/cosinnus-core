@@ -49,8 +49,8 @@
     </div>
 {% endif %}
 
-
-{% if scrollControlsEnabled %}
+{# scroll controls are no longer shown and always on search-when-scrolling #}
+{% if 0 and scrollControlsEnabled %}
     <div class="map-scroll-controls mobile-hidden">
         <table>
             <tr>
@@ -79,5 +79,15 @@
                </span>
             </div>
         {% endif %}
+    </div>
+{% endif %}
+
+{% if availableFilters.ideas %}
+    <div class="map-create-idea-button-frame mobile-hidden">
+        <a class="rounded-button rounded-button-large rounded-button-circular button-color-ideas shadowed-button" href="/ideas/add/" target="_blank">
+	        <span class="rounded-button-inner">
+	            <i class="fa fa-lightbulb-o"></i>+
+	        </span>
+	    </a>
     </div>
 {% endif %}

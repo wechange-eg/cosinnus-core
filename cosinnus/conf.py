@@ -208,6 +208,12 @@ class CosinnusConf(AppConf):
     # files of these mime types will always open within the browser when download is clicked
     FILE_NON_DOWNLOAD_MIMETYPES = ['application/pdf',]
     
+    #: How long an idea should at most stay in cache until it will be removed
+    IDEA_CACHE_TIMEOUT = 60 * 60 * 24
+    
+    # should CosinnusIdeas be enabled for this Portal?
+    IDEAS_ENABLED = False
+    
     #: How long a group should at most stay in cache until it will be removed
     GROUP_CACHE_TIMEOUT = 60 * 60 * 24
 
