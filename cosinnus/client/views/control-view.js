@@ -749,36 +749,6 @@ module.exports = ContentControlView.extend({
             self.state.urlSelectedResultId = null;
         }
         
-
-        // TODO: clean up if not needed anymore
-        
-        // self.collection.set(resultModels);
-        /**
-         * Merges existing models and updates them.
-         * Calls 'add'/'change'/'remove'!
-         * 
-         * TodosCollection.set([
-                { id: 1, title: 'go to Jamaica.', completed: true },
-                { id: 2, title: 'go to China.', completed: false },
-                { id: 4, title: 'go to Disney World.', completed: false }
-            ]);
-         * 
-         */
-        
-        /**
-         * Does NOT call add/change/remove!
-         * Calls 'reset' signal!
-         * options.previousModels is the removed set!
-         * 
-         * var todo = new Backbone.Model();
-            var todos = new Backbone.Collection([todo])
-            .on('reset', function(todos, options) {
-              console.log(options.previousModels);
-              console.log([todo]);
-              console.log(options.previousModels[0] === todo); // true
-            });
-            todos.reset([]);
-         */
     },
     
     // public functions
@@ -1108,7 +1078,6 @@ module.exports = ContentControlView.extend({
         var delay = self.searchDelay;
         if (fireImmediatelyIfPossible) {
             delay = 0;
-            util.log('control-view.js: TODO: FireImmediately was passed true!')
         }
         if (!noPageReset) {
             self.state.pageIndex = 0;
