@@ -8,6 +8,10 @@
 {% block main_page %}
     <div class="row">
         <form method="get" action="" role="form">
+        
+          {% if request.GET.models %}
+              <input type="hidden" name="models" value="{{ request.GET.models }}" />
+          {% endif %}
           <div class="col-lg-3 col-md-3">
           
           
@@ -119,7 +123,7 @@
             
             
             <div class="app-etherpad">
-              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_etherpad.ethercalc">
+              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=ethercalc">
                 <ul class="media-list">
                   <li class="media">
                     <!--
@@ -140,7 +144,7 @@
             </div>
             
             <div class="app-poll">
-              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_poll.Poll">
+              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=poll">
                 <ul class="media-list">
                   <li class="media">
                     <!--
@@ -161,7 +165,7 @@
             </div>
             
             <div class="app-marketplace">
-              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=cosinnus_marketplace.Offer">
+              <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=offer">
                 <ul class="media-list">
                   <li class="media">
                     <!--
@@ -222,6 +226,40 @@
                 </ul>
               </button>
             </div>
+            
+            {% comment %}  {% if "groups" in request.GET %} {% endcomment %}
+            <button type="button" class="btn w100 btn-emphasized fine-space" href="?{% strip_params request "models" %}&models=project">
+              <ul class="media-list">
+                <li class="media">
+                  <!--
+                  <a class="pull-left" style="background-color:inherit;" href="#">
+                  -->
+                  <a class="pull-left" href="#">
+                    <i class="fa fa-group"></i>
+                  </a>
+                  <div class="media-body">
+                    {% trans "Projects" %}
+                  </div>
+                </li>
+              </ul>
+            </button>
+            
+            {% comment %}  {% if "groups" in request.GET %} {% endcomment %}
+            <button type="button" class="btn w100 btn-emphasized large-space" href="?{% strip_params request "models" %}&models=group">
+              <ul class="media-list">
+                <li class="media">
+                  <!--
+                  <a class="pull-left" style="background-color:inherit;" href="#">
+                  -->
+                  <a class="pull-left" href="#">
+                    <i class="fa fa-group"></i>
+                  </a>
+                  <div class="media-body">
+                    {% trans "Groups" %}
+                  </div>
+                </li>
+              </ul>
+            </button>
         
             {% if user.is_authenticated %}
         
