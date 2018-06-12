@@ -68,6 +68,15 @@
                 {% trans "Create Project from Idea" %}
             </span>
         </a>
+        {% if cosinnus_active_user and cosinnus_active_user.username == creator_slug %}
+            <a href="/ideas/{{ slug }}/edit/" target="_blank" class="rounded-button button-action">
+	            <span class="rounded-button-inner">
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Edit your Idea" %}
+	            </span>
+	        </a>
+        {% endif %}
+         
         <div class="like-button-error message-error extra-space-top" style="display: none;">
             {# Translators: __INCLUDE_JS_PO__ #}
             {% trans "Could not save your like setting because of an error." %}
