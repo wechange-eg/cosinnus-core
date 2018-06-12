@@ -28,6 +28,7 @@ module.exports = BaseView.extend({
         'click .trigger-pagination-forward': 'paginationForwardClicked',
         'click .trigger-pagination-backward': 'paginationBackClicked',
         'click .onoffswitch-text-label': 'onOffSwitchLabelClicked',
+        'click .trigger-create-idea': 'createIdeaClicked',
     },
     
     initialize: function (options, app, controlView) {
@@ -77,6 +78,9 @@ module.exports = BaseView.extend({
         self.controlView.paginationBackClicked(event);
     },
     
-    
+    // delegate to controlView
+    createIdeaClicked: function (event) {
+        self.controlView.openCreateIdeaView(event);
+    },
     
 });

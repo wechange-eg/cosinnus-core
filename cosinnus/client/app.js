@@ -142,12 +142,6 @@ var App = function App () {
         var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
         var markerIcons = typeof COSINNUS_MAP_MARKER_ICONS !== 'undefined' ? COSINNUS_MAP_MARKER_ICONS : {};
         
-        // TODO: remove!
-        util.log('TODO: at end of refactor remove thisss check for markerIcons and topicsJson!')
-        if (!topicsJson) {alert('no topicsJson!')}
-        if (!portalInfo) {alert('no topicsJson!')}
-        if (!markerIcons) {alert('no markerIcons!')}
-        
         // TODO: set to actual dynamic current URL!
         var basePageURL = '/map/';
         

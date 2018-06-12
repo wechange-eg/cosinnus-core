@@ -82,9 +82,9 @@
     </div>
 {% endif %}
 
-{% if availableFilters.ideas %}
+{% if COSINNUS_IDEAS_ENABLED %}
     <div class="map-create-idea-button-frame mobile-hidden">
-        <a class="rounded-button rounded-button-large rounded-button-circular button-color-ideas shadowed-button" href="/ideas/add/" target="_blank">
+        <a class="trigger-create-idea rounded-button rounded-button-large rounded-button-circular button-color-ideas shadowed-button">
 	        <span class="rounded-button-inner">
 	            <i class="fa fa-lightbulb-o"></i>+
 	        </span>

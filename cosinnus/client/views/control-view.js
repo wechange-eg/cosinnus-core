@@ -4,6 +4,7 @@ var ContentControlView = require('views/base/content-control-view');
 var ErrorView = require('views/error-view');
 var PaginationControlView = require('views/pagination-control-view');
 var MobileControlView = require('views/mobile-control-view');
+var CreateIdeaView = require('views/create-idea-view');
 
 var ResultCollection = require('collections/result-collection');
 var Result = require('models/result');
@@ -65,6 +66,7 @@ module.exports = ContentControlView.extend({
 
     paginationControlView: null,
     mobileControlView: null,
+    createIdeaView: null,
     
     // the currently hovered on and selected Result items
     selectedResult: null,
@@ -257,6 +259,31 @@ module.exports = ContentControlView.extend({
             this.state.pageIndex -= 1;
             this.triggerDelayedSearch(true, true, false, 'paginate-search');
         }
+    },
+    
+    /** Open the Create-Idea view */
+    openCreateIdeaView: function (event) {
+    	var self = this;
+    	if (COSINNUS_IDEAS_ENABLED) {
+    		if (!self.createIdeaView) {
+    			self.createIdeaView = new CreateIdeaView({
+    				elParent: self.App.el,
+    			}, 
+    			self.App,
+    			self
+    			).render();
+    		} else {
+    			self.createIdeaView.$el.show();
+    		}
+            Backbone.mediator.publish('ideas:create-view-opened');
+    	}
+    },
+    
+    /** Open the Create-Idea view */
+    closeCreateIdeaView: function (event) {
+    	var self = this;
+    	self.createIdeaView.$el.hide();
+    	Backbone.mediator.publish('ideas:create-view-closed');
     },
     
     /** Mobile view switch buttons */

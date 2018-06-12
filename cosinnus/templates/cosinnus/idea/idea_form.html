@@ -3,7 +3,10 @@
 
 {% block extrahead %}
     {{ block.super }}
-    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label %}
+    {% if not object and request.GET.description %}
+	    {% captureas description_value %}{{ request.GET.description }}{% endcaptureas %}
+	{% endif %}
+    {% include 'cosinnus/common/simplemde_dependencies.html' with element_id=form.forms.obj.description.id_for_label value=description_value %}
 {% endblock %}
 
 {% block page_title %}

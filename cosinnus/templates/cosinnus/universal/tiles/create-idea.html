@@ -1,0 +1,61 @@
+{% import "include/macros.html" as macros %}
+
+<div class="tile-detail tile-idea tile-create-idea">
+    <div class="tile-close-button">
+        <i class="fa fa-fw fa-close"></i>
+    </div>
+    
+    
+    {% block title %}
+        <div class="tile-section title">
+            <h1>
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Create Idea" %}
+            </h1>
+        </div>
+        
+        <div class="tile-section">
+            <div class="pull-left multi-span non-map-placemark placemark l icon ideas"></div>
+            <div style="overflow: hidden;">
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on." %}
+            </div>
+        </div>
+        
+    {% endblock title %}
+    
+    {% block form %}
+        <div class="tile-detail-form">
+	        <div class="tile-section">
+	            <label class="caps" for="idea-create-title">
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Title" %}
+	            </label> 
+	            <input id="idea-create-title" type="text" />
+	        </div>
+	        
+	        <div class="tile-section">
+	            <label class="caps" for="idea-create-description">
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Description" %}
+	            </label> 
+	            <textarea id="idea-create-description" name="description"></textarea>
+	        </div>
+	        
+	        <div class="tile-section">
+	            <a class="pull-right rounded-button button-color-action trigger-create-idea-submit">
+	                <span class="rounded-button-inner">
+	                    {# Translators: __INCLUDE_JS_PO__ #}
+	                    {% trans "Next" %}
+	                </span>
+	            </a>
+	        </div>
+        </div>
+    {% endblock form %}
+        
+    
+    {# some more space to scroll over the floating search-buttons on mobile #}
+    <div class="spacer mobile-only">&nbsp;</div>
+    <div class="spacer mobile-only">&nbsp;</div>
+    <div class="spacer mobile-only">&nbsp;</div>
+</div>
