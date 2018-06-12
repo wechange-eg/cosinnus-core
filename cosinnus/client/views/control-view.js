@@ -41,21 +41,22 @@ module.exports = ContentControlView.extend({
         // will be set to self.state during initialization
         state: {
             // current query
-            q: '',
+            q: '', // URL param. 
             activeTopicIds: [],
-            filtersActive: false, // if true, any filter is active and we display a reset-filter button
-            typeFiltersActive: false, // a result type filter is active
-            topicFiltersActive: false, // a topic filter is active
+            filtersActive: false, // URL param.  if true, any filter is active and we display a reset-filter button
+            typeFiltersActive: false, // URL param.  a result type filter is active
+            topicFiltersActive: false, // URL param.  a topic filter is active
             ignoreLocation: false, // if true, search ignores all geo-loc and even shows results without tagged location
             searching: false,
             searchHadErrors: false,
             searchResultLimit: 20,
-            page: null,
+            page: null,  // URL param. 
             pageIndex: 0,
             searchOnScroll: true,
             resultsStale: false,
-            urlSelectedResultId: null,
+            urlSelectedResultId: null, // URL param. the currently selected result, given in the url
             filterPanelVisible: false,
+            showMine: false, // URL param. if true, only the current user's own results will be shown. ignored away if user is not logged in.
         }
     },
     
@@ -951,6 +952,9 @@ module.exports = ContentControlView.extend({
         if (COSINNUS_IDEAS_ENABLED) {
         	this.state.activeFilters['ideas'] = util.ifundef(urlParams.ideas, this.options.activeFilters.ideas);
         }
+        if (cosinnus_active_user) {
+        	this.state.showMine = util.ifundef(urlParams.mine, this.state.showMine);
+        }
     },
     
     // extended from content-control-view.js
@@ -986,6 +990,12 @@ module.exports = ContentControlView.extend({
                 item: this.state.urlSelectedResultId
             });
         }
+        if (this.state.showMine) {
+            _.extend(searchParams, {
+            	mine: 1
+            });
+        }
+        
         if (this.state.ignoreLocation) {
             _.extend(searchParams, {
                 ignore_location: 1

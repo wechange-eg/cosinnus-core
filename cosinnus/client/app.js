@@ -30,7 +30,13 @@ var App = function App () {
     
     // should have them all here
     self.defaultSettings = {
-        
+        // we can't actually define them here, as these get set in controlView.defaults!
+    	// see controlView.defaults for all their default values
+		/*
+		 * filterGroup: <int> if given, filters all content by the given group id
+		 * availableFilters: <dict> the shown result filters by type
+		 * activeFilters: <dict> the active (selected) current result filters by type
+		 */
     };
     
     self.defaulDisplayOptions = {

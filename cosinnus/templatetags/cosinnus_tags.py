@@ -47,6 +47,7 @@ from django.utils.text import normalize_newlines
 from cosinnus.utils.functions import ensure_list_of_ints
 from django.db.models.query import QuerySet
 from django.core.serializers import serialize
+from cosinnus.models.idea import CosinnusIdea
 
 
 logger = logging.getLogger('cosinnus')
@@ -261,6 +262,9 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
         context['societies'] = CosinnusSociety.objects.get_for_user(request.user)
         context['groups_invited'] = CosinnusProject.objects.get_for_user_invited(request.user)
         context['societies_invited'] = CosinnusSociety.objects.get_for_user_invited(request.user)
+        if settings.COSINNUS_IDEAS_ENABLED:
+            # TODO: cache
+            context['my_ideas_count'] = CosinnusIdea.objects.all_in_portal().filter(creator=user).count()
     
     try:
         current_app = resolve(request.path).app_name
