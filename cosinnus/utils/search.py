@@ -30,7 +30,7 @@ BOOSTED_FIELD_BOOST = 1.5
 # this exists so we can blanket boost specific models for visibility without diving
 # into the SearchIndexes and boost logic.
 GLOBAL_MODEL_BOOST_MULTIPLIERS = {
-    'cosinnus_event.event': 2.0,
+    #'cosinnus_event.event': 2.0,
 } 
 
 
