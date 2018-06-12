@@ -216,6 +216,20 @@ class StoredDataIndexMixin(indexes.SearchIndex):
     def prepare_description(self, obj):
         return obj.description
 
+class LocalCachedIndexMixin(object):
+    """ If an index caches attributes locally on object instances,
+        this mixin takes care of resetting them before a fresh update for that index.
+        
+        Define `local_cached_attrs` in the implementing class! """
+    
+    local_cached_attrs = []
+    
+    def update_object(self, instance, **kwargs):
+        # remove the local cache
+        for attr in self.local_cached_attrs:
+            if hasattr(instance, attr):
+                delattr(instance, attr)
+        return super(LocalCachedIndexMixin, self).update_object(instance, **kwargs)
 
 class DocumentBoostMixin(object):
     """ Handles standardized document boosting and exposes an index-specific
@@ -282,7 +296,7 @@ class DocumentBoostMixin(object):
         return data
     
 
-class BaseTaggableObjectIndex(DocumentBoostMixin, TagObjectSearchIndex):
+class BaseTaggableObjectIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObjectSearchIndex):
     text = TemplateResolveEdgeNgramField(document=True, use_template=True)
     rendered = TemplateResolveCharField(use_template=True, indexed=False)
     
@@ -293,6 +307,8 @@ class BaseTaggableObjectIndex(DocumentBoostMixin, TagObjectSearchIndex):
     group = indexes.IntegerField(model_attr='group_id', indexed=False)
     group_members = indexes.MultiValueField(indexed=False)
     location = indexes.LocationField(null=True)
+    
+    local_cached_attrs = ['_group_members']
     
     def prepare_group_slug(self, obj):
         return obj.group.slug
