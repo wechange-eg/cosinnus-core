@@ -223,10 +223,12 @@ class DocumentBoostMixin(object):
     
     local_boost = indexes.FloatField(default=0.0, indexed=False)
     
-    def get_mean_and_stddev(self, qs_or_func, count_property):
+    def get_mean_and_stddev(self, qs_or_func, count_property, non_annotated_property=False):
         """ For a given QS or function that returns one, and the countable property
             to be annotated, return mean and stddev for the population of counts.
-            Mean and Stddev are cached. """
+            Mean and Stddev are cached.
+            @param non_annotated_property: If true, the given property is considered a literal number
+                and will not be Count() aggregated """
         
         global _CosinnusPortal
         if _CosinnusPortal is None: 
@@ -241,10 +243,13 @@ class DocumentBoostMixin(object):
         if mean is None or stddev is None:
             # calculate mean and stddev of the counts of group memberships for active users in this portal
             qs = qs_or_func() if callable(qs_or_func) else qs_or_func
-            ann = qs.annotate(
-                pop_property_count=Count(count_property)
-            )
-            count_population = ann.values_list('pop_property_count', flat=True)
+            if non_annotated_property:
+                count_population = qs.values_list(count_property, flat=True)
+            else:
+                ann = qs.annotate(
+                    pop_property_count=Count(count_property)
+                )
+                count_population = ann.values_list('pop_property_count', flat=True)
             mean = numpy.mean(count_population)
             stddev = numpy.std(count_population)
             cache.set(INDEX_POP_COUNT_MEAN , mean, 60*60*12)

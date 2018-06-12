@@ -20,6 +20,8 @@ from django.contrib.auth.models import AnonymousUser
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.tagged import LikeObject
 from django.contrib.contenttypes.models import ContentType
+from django.db import models
+from django.utils.timezone import now
     
 
 class CosinnusGroupIndexMixin(DocumentBoostMixin, StoredDataIndexMixin, indexes.SearchIndex):
@@ -263,6 +265,26 @@ class IdeaSearchIndex(DocumentBoostMixin, TagObjectSearchIndex, StoredDataIndexM
         return qs
     
     def boost_model(self, obj, indexed_data):
-        """ TODO boost by likes with stddev! """
-        return 99
+        """ We boost a combined measure of 2 added factors: newness (50%) and like count (50%).
+            This means that a new idea with lots of likes will rank highest and an old idea with no likes lowest.
+            But it also means that new ideas with no likes will still rank quite high, as will old ideas with lots
+            of likes.
+            
+            Factors:
+            - 50%: the idea's like count, normalized over the mean/stddev of the like count of all other ideas, 
+                in a range of [0.0..1.0]
+            - 50%: the idea's created date, highest being now() and lowest >= 3 months
+            """
+        
+        def qs_func():
+            return CosinnusIdea.objects.all_in_portal().annotate_likes()
+        
+        mean, stddev = self.get_mean_and_stddev(qs_func, 'like_count', non_annotated_property=True)
+        current_like_count = obj.likes.filter(liked=True).count()
+        members_rank_from_likes = normalize_within_stddev(current_like_count, mean, stddev, stddev_factor=1.0)
+        
+        age_timedelta = now() - obj.created
+        members_rank_from_date = max(1.0 - (age_timedelta.days/90.0), 0) 
+        
+        return (members_rank_from_likes / 2.0) + (members_rank_from_date / 2.0)
     

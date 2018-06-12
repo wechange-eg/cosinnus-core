@@ -15,20 +15,36 @@ import six
 from cosinnus.conf import settings
 from cosinnus.core import signals
 from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.tagged import LikeObject
 from cosinnus.utils.files import get_idea_image_filename, image_thumbnail_url, \
     image_thumbnail
 from cosinnus.utils.functions import clean_single_line_text, \
     unique_aware_slugify
 from cosinnus.utils.urls import get_domain_for_portal
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
-
+from django.contrib.contenttypes.generic import GenericRelation
 
 # this reads the environment and inits the right locale
 try:
     locale.setlocale(locale.LC_ALL, ("de_DE", "utf8"))
 except:
     locale.setlocale(locale.LC_ALL, "")
-    
+
+
+
+class CosinnusIdeaQS(models.query.QuerySet):
+
+    def annotate_likes(self):
+        """ Annotates the number of likes as `like_count` """
+        ann = self.annotate(
+                like_count=models.Count(
+                    models.Case(
+                        models.When(likes__liked=True, then=1),
+                            default=0, output_field=models.IntegerField()
+                    )
+                )
+            )
+        return ann
 
 class IdeaManager(models.Manager):
     
@@ -118,7 +134,7 @@ class IdeaManager(models.Manager):
     def all_in_portal(self):
         """ Returns all groups within the current portal only """
         return self.active().filter(portal=CosinnusPortal.get_current())
-
+    
     def public(self):
         """ Returns active, public Ideas """
         qs = self.active()
@@ -142,7 +158,8 @@ class IdeaManager(models.Manager):
         
     
     def get_queryset(self):
-        return super(IdeaManager, self).get_queryset().select_related('portal')
+        return CosinnusIdeaQS(self.model, using=self._db).select_related('portal')
+    
 
 
 @python_2_unicode_compatible
@@ -183,6 +200,9 @@ class CosinnusIdea(IndexingUtilsMixin, models.Model):
     created_groups = models.ManyToManyField(settings.COSINNUS_GROUP_OBJECT_MODEL, 
         verbose_name=_('Created Projects'),
         blank=True, null=True, related_name='+')
+    
+    
+    likes = GenericRelation(LikeObject)
     
     objects = IdeaManager()
     

@@ -141,9 +141,7 @@ class TaggableModelSearchForm(SearchForm):
             # we either use the models given to us from the form, or if empty,
             # all models available for search
             model_aliases_query = self.cleaned_data.get('models', [])
-            print ">> use?"
             if not model_aliases_query:
-                print ">> use!!!"
                 model_aliases_query = MODEL_ALIASES.keys()
             for model_alias in model_aliases_query:
                 if model_alias in MODEL_ALIASES.keys():
@@ -154,7 +152,6 @@ class TaggableModelSearchForm(SearchForm):
                         model = models.get_model(*model_string.split('.'))
                     search_models.append(model)
         
-        print ">> mod",search_models
         return search_models
 
     def search(self):
@@ -168,7 +165,6 @@ class TaggableModelSearchForm(SearchForm):
             if self.cleaned_data.get('q', None):
                 sqs = self._boost_search_query(sqs)
         ret = sqs.models(*self.get_models())
-        print ">> ret is", ret
         return ret
     
     def no_query_found(self):
