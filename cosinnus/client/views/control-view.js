@@ -4,6 +4,7 @@ var ContentControlView = require('views/base/content-control-view');
 var ErrorView = require('views/error-view');
 var PaginationControlView = require('views/pagination-control-view');
 var MobileControlView = require('views/mobile-control-view');
+var CreateIdeaView = require('views/create-idea-view');
 
 var ResultCollection = require('collections/result-collection');
 var Result = require('models/result');
@@ -41,21 +42,22 @@ module.exports = ContentControlView.extend({
         // will be set to self.state during initialization
         state: {
             // current query
-            q: '',
+            q: '', // URL param. 
             activeTopicIds: [],
-            filtersActive: false, // if true, any filter is active and we display a reset-filter button
-            typeFiltersActive: false, // a result type filter is active
-            topicFiltersActive: false, // a topic filter is active
+            filtersActive: false, // URL param.  if true, any filter is active and we display a reset-filter button
+            typeFiltersActive: false, // URL param.  a result type filter is active
+            topicFiltersActive: false, // URL param.  a topic filter is active
             ignoreLocation: false, // if true, search ignores all geo-loc and even shows results without tagged location
             searching: false,
             searchHadErrors: false,
             searchResultLimit: 20,
-            page: null,
+            page: null,  // URL param. 
             pageIndex: 0,
             searchOnScroll: true,
             resultsStale: false,
-            urlSelectedResultId: null,
+            urlSelectedResultId: null, // URL param. the currently selected result, given in the url
             filterPanelVisible: false,
+            showMine: false, // URL param. if true, only the current user's own results will be shown. ignored away if user is not logged in.
         }
     },
     
@@ -64,6 +66,7 @@ module.exports = ContentControlView.extend({
 
     paginationControlView: null,
     mobileControlView: null,
+    createIdeaView: null,
     
     // the currently hovered on and selected Result items
     selectedResult: null,
@@ -256,6 +259,31 @@ module.exports = ContentControlView.extend({
             this.state.pageIndex -= 1;
             this.triggerDelayedSearch(true, true, false, 'paginate-search');
         }
+    },
+    
+    /** Open the Create-Idea view */
+    openCreateIdeaView: function (event) {
+    	var self = this;
+    	if (COSINNUS_IDEAS_ENABLED) {
+    		if (!self.createIdeaView) {
+    			self.createIdeaView = new CreateIdeaView({
+    				elParent: self.App.el,
+    			}, 
+    			self.App,
+    			self
+    			).render();
+    		} else {
+    			self.createIdeaView.$el.show();
+    		}
+            Backbone.mediator.publish('ideas:create-view-opened');
+    	}
+    },
+    
+    /** Open the Create-Idea view */
+    closeCreateIdeaView: function (event) {
+    	var self = this;
+    	self.createIdeaView.$el.hide();
+    	Backbone.mediator.publish('ideas:create-view-closed');
     },
     
     /** Mobile view switch buttons */
@@ -749,36 +777,6 @@ module.exports = ContentControlView.extend({
             self.state.urlSelectedResultId = null;
         }
         
-
-        // TODO: clean up if not needed anymore
-        
-        // self.collection.set(resultModels);
-        /**
-         * Merges existing models and updates them.
-         * Calls 'add'/'change'/'remove'!
-         * 
-         * TodosCollection.set([
-                { id: 1, title: 'go to Jamaica.', completed: true },
-                { id: 2, title: 'go to China.', completed: false },
-                { id: 4, title: 'go to Disney World.', completed: false }
-            ]);
-         * 
-         */
-        
-        /**
-         * Does NOT call add/change/remove!
-         * Calls 'reset' signal!
-         * options.previousModels is the removed set!
-         * 
-         * var todo = new Backbone.Model();
-            var todos = new Backbone.Collection([todo])
-            .on('reset', function(todos, options) {
-              console.log(options.previousModels);
-              console.log([todo]);
-              console.log(options.previousModels[0] === todo); // true
-            });
-            todos.reset([]);
-         */
     },
     
     // public functions
@@ -981,6 +979,9 @@ module.exports = ContentControlView.extend({
         if (COSINNUS_IDEAS_ENABLED) {
         	this.state.activeFilters['ideas'] = util.ifundef(urlParams.ideas, this.options.activeFilters.ideas);
         }
+        if (cosinnus_active_user) {
+        	this.state.showMine = util.ifundef(urlParams.mine, this.state.showMine);
+        }
     },
     
     // extended from content-control-view.js
@@ -1016,6 +1017,12 @@ module.exports = ContentControlView.extend({
                 item: this.state.urlSelectedResultId
             });
         }
+        if (this.state.showMine) {
+            _.extend(searchParams, {
+            	mine: 1
+            });
+        }
+        
         if (this.state.ignoreLocation) {
             _.extend(searchParams, {
                 ignore_location: 1
@@ -1108,7 +1115,6 @@ module.exports = ContentControlView.extend({
         var delay = self.searchDelay;
         if (fireImmediatelyIfPossible) {
             delay = 0;
-            util.log('control-view.js: TODO: FireImmediately was passed true!')
         }
         if (!noPageReset) {
             self.state.pageIndex = 0;

@@ -13,3 +13,8 @@ input.osmfield.osmfield-input {
     width: auto;
     margin-bottom: 5px;
 }
+
+.osmfield-error-msg {
+    color: #d00800;
+    padding: 5px;
+}

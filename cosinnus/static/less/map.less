@@ -5,7 +5,8 @@
     2: disabled-input overlay (during search)
     3: search controls
     4: tile-detail frame
-    5: overlays that reach beyond even tile-detail frame
+    5: tile-create-idea frame
+    6: overlays that reach beyond even tile-detail frame
 */
 
 @font-face {
@@ -104,7 +105,7 @@
         
         height: 34px;
         line-height: 32px;
-        margin-right: 5px;
+        margin-right: 10px;
         font-size: 14px;
         border-radius: 4px;
         text-decoration: none;
@@ -119,9 +120,6 @@
             i {
                 margin-right: 5px;
             }
-        }
-        &+.rounded-button {
-            margin-left: 5px;
         }
         &.rounded-button-circular {
             border-radius: 20px;
@@ -336,6 +334,76 @@
             }
         }
     }
+    
+    
+    
+    .placemark {
+        display: block;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center center;
+      
+        &.s {
+            height: 13px;
+        }
+      
+        &.m {
+            height: 23px;
+        }
+      
+        &.l {
+            height: 38px;
+        }
+        &.non-map-placemark {
+            width: 30px;
+            cursor: auto;
+        }
+        &.draggable-placemark {
+            cursor: move;
+        }
+    }
+
+    .placemark(@type, @filetype) {
+        .placemark.s.@{type} {
+            background-image: url('@{placemark-url}placemark-s-@{filetype}.png');
+            &:hover:not(.non-map-placemark):not(.draggable-placemark),
+            &.marker-selected,
+            &.marker-hovered{
+                background-image: url('@{placemark-url}placemark-s-@{filetype}-invert.png');
+            }
+        }
+        .placemark.m.@{type} {
+            background-image: url('@{placemark-url}placemark-m-@{filetype}.png');
+            &:hover:not(.non-map-placemark):not(.draggable-placemark),
+            &.marker-selected,
+            &.marker-hovered {
+                background-image: url('@{placemark-url}placemark-m-@{filetype}-invert.png');
+            }
+        }
+        .placemark.l.@{type} {
+            background-image: url('@{placemark-url}placemark-l-@{filetype}.png');
+            &:hover:not(.non-map-placemark):not(.draggable-placemark),
+            &.marker-selected,
+            &.marker-hovered {
+                background-image: url('@{placemark-url}placemark-l-@{filetype}-invert.png');
+            }
+        }
+        .placemark.l.icon.@{type} {
+            background-image: url('@{placemark-url}placemark-l-icon-@{filetype}.png');
+            &:hover:not(.non-map-placemark):not(.draggable-placemark),
+            &.marker-selected,
+            &.marker-hovered {
+                background-image: url('@{placemark-url}placemark-l-icon-@{filetype}-invert.png');
+            }
+        }
+    }
+    
+    .placemark(events, event);
+    .placemark(groups, group);
+    .placemark(ideas, idea);
+    .placemark(people, person);
+    .placemark(projects, project);
+    
 }
 /** A blank white spacer that lies under the main page navbar */
 .app-fullscreen {    
@@ -483,6 +551,14 @@
     
     .multi-span {
         margin-right: 10px;
+    }
+    
+    .half-line {
+        max-width: 40%;
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: top;
     }
     
     
@@ -773,6 +849,27 @@
         }
     }
     
+    .tile-detail-form {
+        input {
+            width: 100%;
+            font-size: 18px;
+            padding: 5px 8px;
+        }
+        
+        .CodeMirror .CodeMirror-code, .CodeMirror .editor-preview, 
+        .CodeMirror .editor-preview p, .CodeMirror .editor-preview ul,
+        .CodeMirror .editor-preview li {
+            font-size: 18px;
+            background-color: white;
+        }
+    
+        input, .CodeMirror {
+            border: 1px solid @map-scroll-color;
+            -webkit-box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+            -moz-box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+            box-shadow: inset 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+        }   
+    }
     
 }
 
@@ -785,6 +882,10 @@
     z-index: 4;
     margin-top: 55px;
     height: ~"calc(100% - 55px)";
+    
+    &.tile-create-idea {
+        z-index: 5;
+    }
 }
 .app-embed .tile-detail {
     position: absolute;
@@ -867,66 +968,13 @@
         }
     }
     
-    .placemark {
-        display: block;
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center center;
-      
-        &.s {
-            height: 13px;
-        }
-      
-        &.m {
-            height: 23px;
-        }
-      
-        &.l {
-            height: 38px;
+    /** During the Map-Marker-Place mode only the draggable marker is shown. */
+    .leaflet-marker-pane.marker-place-mode {
+        .placemark:not(.draggable-placemark) {
+            display: none;
         }
     }
-    
-    .placemark(@type, @filetype) {
-        .placemark.s.@{type} {
-            background-image: url('@{placemark-url}placemark-s-@{filetype}.png');
-            &:hover,
-            &.marker-selected,
-            &.marker-hovered{
-                background-image: url('@{placemark-url}placemark-s-@{filetype}-invert.png');
-            }
-        }
-        .placemark.m.@{type} {
-            background-image: url('@{placemark-url}placemark-m-@{filetype}.png');
-            &:hover,
-            &.marker-selected,
-            &.marker-hovered {
-                background-image: url('@{placemark-url}placemark-m-@{filetype}-invert.png');
-            }
-        }
-        .placemark.l.@{type} {
-            background-image: url('@{placemark-url}placemark-l-@{filetype}.png');
-            &:hover,
-            &.marker-selected,
-            &.marker-hovered {
-                background-image: url('@{placemark-url}placemark-l-@{filetype}-invert.png');
-            }
-        }
-        .placemark.l.icon.@{type} {
-            background-image: url('@{placemark-url}placemark-l-icon-@{filetype}.png');
-            &:hover,
-            &.marker-selected,
-            &.marker-hovered {
-                background-image: url('@{placemark-url}placemark-l-icon-@{filetype}-invert.png');
-            }
-        }
-    }
-    
-    .placemark(events, event);
-    .placemark(groups, group);
-    .placemark(ideas, idea);
-    .placemark(people, person);
-    .placemark(projects, project);
-    
+        
 }
 
 .controls {
@@ -1140,7 +1188,7 @@
     position: fixed;
     right: 5px;
     bottom: 20px;
-    z-index: 5;
+    z-index: 6;
 }
 .map-pagination-controls {
     padding: 10px;

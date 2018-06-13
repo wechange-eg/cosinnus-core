@@ -7,16 +7,29 @@
 
 {% comment %} See https://github.com/sparksuite/simplemde-markdown-editor for options!  {% endcomment %}
 <script>
-  $(function(){
-      var simplemde = new SimpleMDE({ 
-          element: $('#{{ element_id }}')[0],
-          indentWithTabs: false,
-          shortcuts: {},
-          spellChecker: false,
-          status: false,
-          styleSelectedText: false,
-          autoDownloadFontAwesome: false,
-          toolbar: ["bold", "italic", "strikethrough", "heading", "|", "image", "link", "|", "unordered-list", "ordered-list", "|", "preview"],
-      });
-  });
+  {% if lazy %}
+      var inited_simplemde = null;
+      var init_simplemde = function (input) {
+  {% else %}
+	  $(function(){
+  {% endif %}
+	      var simplemde = new SimpleMDE({ 
+	          element: {% if lazy %}input{% else %}$('#{{ element_id }}')[0]{% endif %},
+	          indentWithTabs: false,
+	          shortcuts: {},
+	          spellChecker: false,
+	          status: false,
+	          styleSelectedText: false,
+	          autoDownloadFontAwesome: false,
+	          toolbar: ["bold", "italic", "strikethrough", "heading", "|", "image", "link", "|", "unordered-list", "ordered-list", "|", "preview"],
+	      });
+	      {% if value %}
+	          simplemde.value($('<textarea />').html(decodeURIComponent("{{ value|urlencode }}")).text());
+	      {% endif %}
+	      inited_simplemde = simplemde;
+  {% if lazy %}
+    };
+  {% else %}
+    });
+  {% endif %}
 </script>

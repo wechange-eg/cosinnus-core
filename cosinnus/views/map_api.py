@@ -79,6 +79,7 @@ MAP_SEARCH_PARAMETERS = {
     'topics': None,
     'item': None,
     'ignore_location': False, # if True, we completely ignore locs, and even return results without location
+    'mine': False, # if True, we only show items of the current user. ignored if user not authenticated
 }
 if settings.COSINNUS_IDEAS_ENABLED:
     MAP_SEARCH_PARAMETERS.update({
@@ -110,6 +111,10 @@ def map_search_endpoint(request, filter_group_id=None):
     # filter for map bounds (Points are constructed ith (lon, lat)!!!)
     if not params['ignore_location']:
         sqs = sqs.within('location', Point(params['sw_lon'], params['sw_lat']), Point(params['ne_lon'], params['ne_lat']))
+    # filter for user's own content
+    if params['mine'] and request.user.is_authenticated():
+        user_id = request.user.id
+        sqs = sqs.filter_and(Q(creator=user_id) | Q(user_id=user_id) | Q(group_members=user_id))
     # filter for search terms
     if query:
         sqs = sqs.auto_query(query)

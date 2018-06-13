@@ -6,7 +6,8 @@ from haystack import indexes
 from cosinnus.conf import settings
 from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveEdgeNgramField,\
     TagObjectSearchIndex, BOOSTED_FIELD_BOOST, StoredDataIndexMixin,\
-    DocumentBoostMixin, CommaSeperatedIntegerMultiValueField
+    DocumentBoostMixin, CommaSeperatedIntegerMultiValueField,\
+    LocalCachedIndexMixin
 from cosinnus.utils.user import filter_active_users, filter_portal_users
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
@@ -20,9 +21,11 @@ from django.contrib.auth.models import AnonymousUser
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.tagged import LikeObject
 from django.contrib.contenttypes.models import ContentType
+from django.db import models
+from django.utils.timezone import now
     
 
-class CosinnusGroupIndexMixin(DocumentBoostMixin, StoredDataIndexMixin, indexes.SearchIndex):
+class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataIndexMixin, indexes.SearchIndex):
     
     location = indexes.LocationField(null=True)
     boosted = indexes.CharField(model_attr='name', boost=BOOSTED_FIELD_BOOST)
@@ -31,6 +34,8 @@ class CosinnusGroupIndexMixin(DocumentBoostMixin, StoredDataIndexMixin, indexes.
     group_members = indexes.MultiValueField(indexed=False)
     public = indexes.BooleanField(model_attr='public')
     always_visible = indexes.BooleanField(default=True)
+    
+    local_cached_attrs = ['_group_members']
     
     def prepare_location(self, obj):
         locations = obj.locations.all()
@@ -148,7 +153,8 @@ class CosinnusSocietyIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
         return obj.groups.count()
 
 
-class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearchIndex, indexes.Indexable):
+class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataIndexMixin, 
+           TagObjectSearchIndex, indexes.Indexable):
     text = TemplateResolveEdgeNgramField(document=True, use_template=True, template_name='search/indexes/cosinnus/userprofile_{field_name}.txt')
     rendered = TemplateResolveCharField(use_template=True, indexed=False, template_name='search/indexes/cosinnus/userprofile_{field_name}.txt')
     
@@ -160,6 +166,8 @@ class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearch
     portals = indexes.MultiValueField()
     location = indexes.LocationField(null=True)
     user_id = indexes.IntegerField(model_attr='user__id')
+    
+    local_cached_attrs = ['_memberships_count']
     
     def prepare_portals(self, obj):
         return list(obj.user.cosinnus_portal_memberships.values_list('group_id', flat=True))
@@ -216,7 +224,8 @@ class UserProfileIndex(DocumentBoostMixin, StoredDataIndexMixin, TagObjectSearch
         return memberships_rank
     
     
-class IdeaSearchIndex(DocumentBoostMixin, TagObjectSearchIndex, StoredDataIndexMixin, indexes.Indexable):
+class IdeaSearchIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObjectSearchIndex, 
+          StoredDataIndexMixin, indexes.Indexable):
     
     text = TemplateResolveEdgeNgramField(document=True, use_template=True)
     boosted = indexes.EdgeNgramField(model_attr='title', boost=BOOSTED_FIELD_BOOST)
@@ -227,13 +236,14 @@ class IdeaSearchIndex(DocumentBoostMixin, TagObjectSearchIndex, StoredDataIndexM
     location = indexes.LocationField(null=True)
     liked_user_ids = CommaSeperatedIntegerMultiValueField(indexed=False, stored=True)
     
+    local_cached_attrs = ['_like_count', '_liked_ids']
+    
     def get_model(self):
         return CosinnusIdea
     
     def prepare_liked_user_ids(self, obj):
         if not hasattr(obj, '_liked_ids'):
-            ct = ContentType.objects.get_for_model(obj.__class__)
-            obj._liked_ids = list(LikeObject.objects.filter(content_type=ct, object_id=obj.id, liked=True).values_list('user__id', flat=True))
+            obj._liked_ids = list(obj.likes.filter(liked=True).values_list('user__id', flat=True))
         return obj._liked_ids
     
     def prepare_participant_count(self, obj):
@@ -263,6 +273,26 @@ class IdeaSearchIndex(DocumentBoostMixin, TagObjectSearchIndex, StoredDataIndexM
         return qs
     
     def boost_model(self, obj, indexed_data):
-        """ TODO boost by likes with stddev! """
-        return 99
+        """ We boost a combined measure of 2 added factors: newness (50%) and like count (50%).
+            This means that a new idea with lots of likes will rank highest and an old idea with no likes lowest.
+            But it also means that new ideas with no likes will still rank quite high, as will old ideas with lots
+            of likes.
+            
+            Factors:
+            - 50%: the idea's like count, normalized over the mean/stddev of the like count of all other ideas, 
+                in a range of [0.0..1.0]
+            - 50%: the idea's created date, highest being now() and lowest >= 3 months
+            """
+        
+        def qs_func():
+            return CosinnusIdea.objects.all_in_portal().annotate_likes()
+        
+        mean, stddev = self.get_mean_and_stddev(qs_func, 'like_count', non_annotated_property=True)
+        current_like_count = obj.likes.filter(liked=True).count()
+        members_rank_from_likes = normalize_within_stddev(current_like_count, mean, stddev, stddev_factor=1.0)
+        
+        age_timedelta = now() - obj.created
+        members_rank_from_date = max(1.0 - (age_timedelta.days/90.0), 0) 
+        
+        return (members_rank_from_likes / 2.0) + (members_rank_from_date / 2.0)
     

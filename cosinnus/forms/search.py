@@ -32,6 +32,10 @@ MODEL_ALIASES = {
     'note': 'cosinnus_note.note',
     'event': 'cosinnus_event.event',
     'user': '<userprofile>',
+    'poll': 'cosinnus_poll.Poll',
+    'offer': 'cosinnus_marketplace.Offer',
+    'project': 'cosinnus.CosinnusProject',
+    'group': 'cosinnus.CosinnusSociety',
 }
 
 VISIBLE_PORTAL_IDS = None  # global
@@ -134,7 +138,12 @@ class TaggableModelSearchForm(SearchForm):
         search_models = []
 
         if self.is_valid():
-            for model_alias in self.cleaned_data.get('models', []):
+            # we either use the models given to us from the form, or if empty,
+            # all models available for search
+            model_aliases_query = self.cleaned_data.get('models', [])
+            if not model_aliases_query:
+                model_aliases_query = MODEL_ALIASES.keys()
+            for model_alias in model_aliases_query:
                 if model_alias in MODEL_ALIASES.keys():
                     model_string = MODEL_ALIASES[model_alias]
                     if model_string == '<userprofile>':
@@ -142,6 +151,7 @@ class TaggableModelSearchForm(SearchForm):
                     else:
                         model = models.get_model(*model_string.split('.'))
                     search_models.append(model)
+        
         return search_models
 
     def search(self):

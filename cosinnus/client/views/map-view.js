@@ -53,6 +53,8 @@ module.exports = ContentControlView.extend({
     // updated through the handlers of self.collection's signals
     markers: {},
     
+    // if not null, this is an active, draggable marker
+    draggableMarker: null,
     
     // will be set to self.options during initialization
     defaults: {
@@ -279,7 +281,6 @@ module.exports = ContentControlView.extend({
         }
     },
     
-
     markerChangeHovered: function(result) {
         if (result.id in this.markers) {
             var marker = this.markers[result.id];
@@ -421,6 +422,50 @@ module.exports = ContentControlView.extend({
                 self.markerAdd(result);
             }
         });
+    },
+    
+    /** Activates the Map-Marker-Place mode where a draggable marker is shown
+     * in the center of the map and all other markers are hidden. */
+    activateDraggableMarker: function (resultType) {
+    	var self = this;
+    	// hide all other markers
+    	$('.leaflet-marker-pane').addClass('marker-place-mode');
+    	var width = this.options.resultMarkerSizes['widthLarge'];
+    	var height = this.options.resultMarkerSizes['heightLarge']
+    	
+    	this.draggableMarker = L.marker(this.leaflet.getCenter(), {
+            icon: L.divIcon({
+                iconSize: [width, this.options.resultMarkerSizes['heightLarge']],
+                iconAnchor: [width / 2, height],
+                className: 'draggable-placemark placemark l icon ' + resultType,
+            }),
+            riseOnHover: false,
+            draggable: true,
+            keyboard: false
+        });
+    	this.draggableMarker.on("dragend", function(e) {
+    	    var marker = e.target;
+    	    self.leaflet.panTo(marker.getLatLng());
+    	});
+    	this.draggableMarker.addTo(this.leaflet);
+    },
+    
+    /** Deactivates the Map-Marker-Place mode. */
+    deactivateDraggableMarker: function () {
+    	this.leaflet.removeLayer(this.draggableMarker);
+    	this.draggableMarker = null;
+    	// show other markers again
+    	$('.leaflet-marker-pane').removeClass('marker-place-mode');
+    },
+    
+    /** If the Map-Marker-Place mode is active, return the LatLng object of
+     *  the draggable marker, else return null. */
+    getDraggableMarkerLatLng: function () {
+    	if (this.draggableMarker) {
+    		return this.draggableMarker.getLatLng();
+    	} else {
+    		return null;
+    	}
     },
     
 

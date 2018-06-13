@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-29 15:06+0200\n"
+"POT-Creation-Date: 2018-06-13 15:35+0200\n"
 "PO-Revision-Date: 2018-05-29 14:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -324,6 +324,7 @@ msgstr "Мои группы"
 msgid "Other teams"
 msgstr "Другие группы"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Like"
 msgstr "Нравится"
 
@@ -396,6 +397,7 @@ msgstr "Огромный (800 x *)"
 msgid "XXL (1200 x *)"
 msgstr "XXL (1200 x *)"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Title"
 msgstr "Название"
 
@@ -445,6 +447,7 @@ msgstr "Порталы"
 msgid "Slug"
 msgstr "Slug"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Description"
 msgstr "Описание"
 
@@ -698,6 +701,26 @@ msgstr "Группа Cosinnus"
 msgid "Cosinnus groups"
 msgstr "Группы Cosinnus"
 
+#, fuzzy
+#| msgid "Logo Image"
+msgid "Image"
+msgstr "Изображение логотипа"
+
+#, fuzzy
+#| msgid "Create Project"
+msgid "Created Projects"
+msgstr "Создать проект"
+
+#, fuzzy
+#| msgid "Cosinnus project"
+msgid "Cosinnus Idea"
+msgstr "Cosinnus Проект"
+
+#, fuzzy
+#| msgid "Cosinnus projects"
+msgid "Cosinnus Ideas"
+msgstr "Cosinnus Проекты"
+
 msgid "Language"
 msgstr "Язык"
 
@@ -770,6 +793,7 @@ msgstr "Темы"
 msgid "Text Topics"
 msgstr "Текст Темы"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Likes"
 msgstr "Нравится"
 
@@ -788,6 +812,19 @@ msgstr "Отраженный объект"
 msgid "Reflected Objects"
 msgstr "Отраженные объекты"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Пользователь"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Like"
+msgid "Liked"
+msgstr "Нравится"
+
+msgid "Following"
+msgstr ""
+
 msgid "Create-Project or Group Button"
 msgstr "Создать кнопку группа/проект"
 
@@ -800,6 +837,7 @@ msgstr "Пользователи"
 msgid "Events"
 msgstr "События"
 
+#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
@@ -1697,6 +1735,19 @@ msgstr "Редактировать группу"
 msgid "Edit Project"
 msgstr "Редактировать проект"
 
+msgid "Let's bring this idea to life! (TODO: slogan, and is the text ok?)!"
+msgstr ""
+
+#, python-format
+msgid "Great to see you're creating a project from the idea \"%(idea_name)s\"!"
+msgstr ""
+
+msgid "Once you have created your project, everyone who liked (and followed) the idea will receive a notification! They can then jump in and become a member of your new project. Don't worry - you still have to approve who may join and who can't when they request a membership."
+msgstr ""
+
+msgid "Your new project will also be displayed on the idea itself, so that everyone can see it and join in later on."
+msgstr ""
+
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "Произошла ошибка при заполнении одного из полей. Пожалуйста, исправьте её перед сохранением!"
 
@@ -2038,10 +2089,6 @@ msgstr "Пользователи в команде %(group)s"
 msgid "Add user"
 msgstr "Добавить пользователя"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Пользователь"
-
 msgid "There are no visible users."
 msgstr "Видимых пользователей нет."
 
@@ -2091,6 +2138,74 @@ msgstr "Переместить"
 #, python-format
 msgid "A message from %(sender_full_name)s"
 msgstr "Сообщение от %(sender_full_name)s"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created"
+msgid "Create Idea"
+msgstr "Создано"
+
+#, fuzzy
+#| msgid "Delete widget"
+msgid "Delete this idea"
+msgstr "Удалить виджет"
+
+#, fuzzy, python-format
+#| msgid "Do you really want to leave „%(title)s“?"
+msgid "Do you really want to delete idea „%(title)s“?"
+msgstr "Вы действительно хотите покинуть проект „%(title)s“?"
+
+#, fuzzy
+#| msgid "Delete folder"
+msgid "Delete Idea"
+msgstr "Удалить папку"
+
+msgid "Yes"
+msgstr ""
+
+#, fuzzy
+#| msgid "Edit folder"
+msgid "Edit Idea"
+msgstr "Редактировать папку"
+
+msgid "We make your ideas heard (TODO: slogan, and is the text ok?)!"
+msgstr ""
+
+msgid "Ideas are a great way to inspire poeple and start a project in your region!"
+msgstr ""
+
+msgid "Anyone can create a project based on your idea and there is no limit on how many projects can be created. Your idea will remain visible and will even show a list of all the projects inspired by it!"
+msgstr ""
+
+msgid "You and anyone who like (and follow) your idea will be notified when a new project gets created from it. This way, everyone who is interested can jump right into it and become active in the new project (they still have to ask permission to become a member)."
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a name for the project."
+msgid "Enter a descriptive title for your idea"
+msgstr "Введите название проекта."
+
+msgid "The description for your idea. Explain your vision and your goals."
+msgstr ""
+
+msgid "We could not find an address for your location. Please enter an address manually!"
+msgstr ""
+
+msgid "This will determine who can see your idea."
+msgstr ""
+
+#, fuzzy
+#| msgid "This project will be set to be publicly visible!"
+msgid "This idea will be set to be publicly visible!"
+msgstr "Этот проект становится общедоступным!"
+
+#, fuzzy
+#| msgid "This means that your name, avatar and user profile can be seen by ANYONE on the internet and may potentially be included in search engine results!"
+msgid "Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
+msgstr "Это означает, что Ваше имя, аватар и профиль может увидеть ЛЮБОЙ пользователь в интернете. Кроме того, они, потенциально, могут быть найдены поисковыми системами в интернете!"
+
+msgid "Registered users only"
+msgstr "Только зарегистрированные пользователи"
 
 msgid "Edit folder"
 msgstr "Редактировать папку"
@@ -2616,11 +2731,21 @@ msgstr "Темы, которыми мы занимаемся"
 msgid "Activities and interests"
 msgstr "Деятельность и сфера интересов"
 
-msgid "Where do you live?"
-msgstr "Где Вы живете?"
+#, fuzzy
+#| msgid "What would you like to learn?"
+msgid "Where would your idea be realized?"
+msgstr "Что бы Вы хотели узнать?"
 
 msgid "Enter a place or address and then choose a point on the map."
 msgstr "Введите свой город или адрес и тогда сможете выбрать место на карте."
+
+#, fuzzy
+#| msgid "Which topics are you involved with?"
+msgid "Which topics fit your idea?"
+msgstr "С какими темами Вы работаете?"
+
+msgid "Where do you live?"
+msgstr "Где Вы живете?"
 
 msgid "Which topics are you interested in?"
 msgstr "Какие темы Вас интересуют?"
@@ -2697,6 +2822,20 @@ msgstr "Мои проекты"
 
 msgid "All Projects"
 msgstr "Все проекты"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Ideas"
+msgstr ""
+
+#, fuzzy
+#| msgid "My teams"
+msgid "My Ideas"
+msgstr "Мои группы"
+
+#, fuzzy
+#| msgid "All users"
+msgid "All Ideas"
+msgstr "Все пользователи"
 
 msgid "Search..."
 msgstr "Поиск..."
@@ -2971,10 +3110,6 @@ msgid "Idea"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Ideas"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names, Topics and Places..."
 msgstr ""
 
@@ -3049,14 +3184,28 @@ msgid "Search this area"
 msgstr "Поиск в группах"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created"
+msgid "Create idea"
+msgstr "Создано"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Next"
+msgstr "Далее"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Participants"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
-#| msgid "Portal memberships"
-msgid "Project/Group Members"
-msgstr "Членства на портале"
+#| msgid "Related Projects/Groups"
+msgid "Projects/Groups"
+msgstr "Родственные проекты или группы"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -3151,6 +3300,30 @@ msgid "Message Group"
 msgstr "Создать группу"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Author"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create Project"
+msgid "Create Project from Idea"
+msgstr "Создать проект"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Edit Your Profile"
+msgid "Edit your Idea"
+msgstr "Редактировать Ваш профиль"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your like setting because of an error."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Projects - Created from this Idea"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "Edit Project"
 msgid "Join Project"
@@ -3186,9 +3359,6 @@ msgstr "Обзор пользователей"
 
 msgid "Members of your projects and groups only"
 msgstr "Только члены Ваших проектов и групп"
-
-msgid "Registered users only"
-msgstr "Только зарегистрированные пользователи"
 
 msgid "Everybody (public profile)"
 msgstr "Кто угодно (открытый профиль)"
@@ -3418,9 +3588,6 @@ msgstr "Кажется Вы не обладаете правами редакт�
 
 msgid "We could not retrieve your groups from Facebook because of an error. Please contact an administrator!"
 msgstr "Произошла ошибка! Мы не смогли подключиться к Вашим группам на Фейсбуке. Пожалуйста, обратитесь к администратору!"
-
-msgid "Next"
-msgstr "Далее"
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Зарегистрироваться"
@@ -3711,6 +3878,11 @@ msgstr "Событие сейчас демонстрируется в таких
 msgid "No appname given for adding containers."
 msgstr "Не указано название приложения для добавления контейнеров."
 
+#, fuzzy
+#| msgid "Your profile was edited successfully."
+msgid "Your idea was deleted successfully."
+msgstr "Ваш профиль отредактирован."
+
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "При обработке Вашего аватара произошла ошибка. Пожалуйста, убедитесь, что Вы выбрали деталь изображения достаточного размера!"
 
@@ -3869,6 +4041,16 @@ msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
 
 #, fuzzy
+#~| msgid "Logo Image"
+#~ msgid "Lmage"
+#~ msgstr "Изображение логотипа"
+
+#, fuzzy
+#~| msgid "Portal memberships"
+#~ msgid "Project/Group Members"
+#~ msgstr "Членства на портале"
+
+#, fuzzy
 #~| msgid "Group"
 #~ msgid "Gruppen"
 #~ msgstr "Группа"
@@ -3883,11 +4065,6 @@ msgstr "Ваши изменения были сохранены."
 #~| msgid "Enter a name for the group."
 #~ msgid "Enter a descriptive name for your group."
 #~ msgstr "Введите название группы."
-
-#, fuzzy
-#~| msgid "Enter a name for the project."
-#~ msgid "Enter a descriptive name for your project."
-#~ msgstr "Введите название проекта."
 
 #, fuzzy
 #~| msgid "Personal Message (optional)"

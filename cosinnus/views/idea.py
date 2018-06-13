@@ -10,8 +10,10 @@ from django.views.generic.base import RedirectView
 from cosinnus.forms.idea import CosinnusIdeaForm
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.idea import CosinnusIdea
-from cosinnus.utils.urls import group_aware_reverse
+from cosinnus.models.tagged import LikeObject
 from cosinnus.views.mixins.group import RequireLoggedInMixin, RequireWriteGrouplessMixin
+from django.contrib.contenttypes.models import ContentType
+from django.core.urlresolvers import reverse
 
 
 logger = logging.getLogger('cosinnus')
@@ -45,6 +47,9 @@ class CosinnusIdeaFormMixin(object):
     
 
 class IdeaCreateView(RequireLoggedInMixin, CosinnusIdeaFormMixin, CreateView):
+    """ Create View for Ideas """
+    
+    CREATOR_LIKES_OWN_IDEA = True
     
     form_view = 'add'
     
@@ -57,7 +62,14 @@ class IdeaCreateView(RequireLoggedInMixin, CosinnusIdeaFormMixin, CreateView):
     
     def form_valid(self, form):
         form.instance.creator = self.request.user
-        return super(IdeaCreateView, self).form_valid(form)
+        ret = super(IdeaCreateView, self).form_valid(form)
+        
+        if self.object and self.CREATOR_LIKES_OWN_IDEA:
+            # instantly create a like for the new idea from the creator
+            content_type = ContentType.objects.get_for_model(CosinnusIdea)
+            LikeObject.objects.create(content_type=content_type, object_id=self.object.id, user=self.request.user, liked=True)
+            self.object.update_index() # update the idea's index
+        return ret
     
     def get_success_url(self):
         return self.object.get_absolute_url() + '&action=create'
@@ -89,8 +101,9 @@ class IdeaDeleteView(RequireWriteGrouplessMixin, SamePortalGroupMixin, DeleteVie
     message_success = _('Your idea was deleted successfully.')
     
     def get_success_url(self):
-        messages.success(self.request, self.message_success)
-        return group_aware_reverse('cosinnus:idea-list-mine')
+        # disabled the success message for now as it isn't displayed on the map
+        #messages.success(self.request, self.message_success)
+        return reverse('cosinnus:idea-list-mine')
 
 idea_delete = IdeaDeleteView.as_view()
 
@@ -99,7 +112,7 @@ class IdeaListView(RedirectView):
     permanent = False
     
     def get_redirect_url(self, *args, **kwargs):
-        return ('/TODO-idea-list')
+        return reverse('cosinnus:map') + '?people=false&events=false&projects=false&groups=false&ideas=true&ignore_location=1'
     
 idea_list = IdeaListView.as_view()
 
@@ -108,7 +121,7 @@ class IdeaListMineView(RedirectView):
     permanent = False
     
     def get_redirect_url(self, *args, **kwargs):
-        return ('/TODO-idea-mine-list')
+        return reverse('cosinnus:map') + '?people=false&events=false&projects=false&groups=false&ideas=true&mine=1&ignore_location=1'
     
 idea_list_mine = IdeaListMineView.as_view()
 

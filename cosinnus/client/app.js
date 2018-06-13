@@ -30,7 +30,13 @@ var App = function App () {
     
     // should have them all here
     self.defaultSettings = {
-        
+        // we can't actually define them here, as these get set in controlView.defaults!
+    	// see controlView.defaults for all their default values
+		/*
+		 * filterGroup: <int> if given, filters all content by the given group id
+		 * availableFilters: <dict> the shown result filters by type
+		 * activeFilters: <dict> the active (selected) current result filters by type
+		 */
     };
     
     self.defaulDisplayOptions = {
@@ -135,12 +141,6 @@ var App = function App () {
         var topicsJson = typeof COSINNUS_MAP_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TOPICS_JSON : {};
         var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
         var markerIcons = typeof COSINNUS_MAP_MARKER_ICONS !== 'undefined' ? COSINNUS_MAP_MARKER_ICONS : {};
-        
-        // TODO: remove!
-        util.log('TODO: at end of refactor remove thisss check for markerIcons and topicsJson!')
-        if (!topicsJson) {alert('no topicsJson!')}
-        if (!portalInfo) {alert('no topicsJson!')}
-        if (!markerIcons) {alert('no markerIcons!')}
         
         // TODO: set to actual dynamic current URL!
         var basePageURL = '/map/';

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-29 15:06+0200\n"
+"POT-Creation-Date: 2018-06-13 15:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -322,6 +322,7 @@ msgstr ""
 msgid "Other teams"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Like"
 msgstr ""
 
@@ -394,6 +395,7 @@ msgstr ""
 msgid "XXL (1200 x *)"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Title"
 msgstr ""
 
@@ -442,6 +444,7 @@ msgstr ""
 msgid "Slug"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Description"
 msgstr ""
 
@@ -692,6 +695,18 @@ msgstr ""
 msgid "Cosinnus groups"
 msgstr ""
 
+msgid "Image"
+msgstr ""
+
+msgid "Created Projects"
+msgstr ""
+
+msgid "Cosinnus Idea"
+msgstr ""
+
+msgid "Cosinnus Ideas"
+msgstr ""
+
 msgid "Language"
 msgstr ""
 
@@ -764,6 +779,7 @@ msgstr ""
 msgid "Text Topics"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Likes"
 msgstr ""
 
@@ -782,6 +798,17 @@ msgstr ""
 msgid "Reflected Objects"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Liked"
+msgstr ""
+
+msgid "Following"
+msgstr ""
+
 msgid "Create-Project or Group Button"
 msgstr ""
 
@@ -794,6 +821,7 @@ msgstr ""
 msgid "Events"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
@@ -1675,6 +1703,19 @@ msgstr ""
 msgid "Edit Project"
 msgstr ""
 
+msgid "Let's bring this idea to life! (TODO: slogan, and is the text ok?)!"
+msgstr ""
+
+#, python-format
+msgid "Great to see you're creating a project from the idea \"%(idea_name)s\"!"
+msgstr ""
+
+msgid "Once you have created your project, everyone who liked (and followed) the idea will receive a notification! They can then jump in and become a member of your new project. Don't worry - you still have to approve who may join and who can't when they request a membership."
+msgstr ""
+
+msgid "Your new project will also be displayed on the idea itself, so that everyone can see it and join in later on."
+msgstr ""
+
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr ""
 
@@ -2015,10 +2056,6 @@ msgstr ""
 msgid "Add user"
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr ""
-
 msgid "There are no visible users."
 msgstr ""
 
@@ -2066,6 +2103,59 @@ msgstr ""
 
 #, python-format
 msgid "A message from %(sender_full_name)s"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Idea"
+msgstr ""
+
+msgid "Delete this idea"
+msgstr ""
+
+#, python-format
+msgid "Do you really want to delete idea „%(title)s“?"
+msgstr ""
+
+msgid "Delete Idea"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "Edit Idea"
+msgstr ""
+
+msgid "We make your ideas heard (TODO: slogan, and is the text ok?)!"
+msgstr ""
+
+msgid "Ideas are a great way to inspire poeple and start a project in your region!"
+msgstr ""
+
+msgid "Anyone can create a project based on your idea and there is no limit on how many projects can be created. Your idea will remain visible and will even show a list of all the projects inspired by it!"
+msgstr ""
+
+msgid "You and anyone who like (and follow) your idea will be notified when a new project gets created from it. This way, everyone who is interested can jump right into it and become active in the new project (they still have to ask permission to become a member)."
+msgstr ""
+
+msgid "Enter a descriptive title for your idea"
+msgstr ""
+
+msgid "The description for your idea. Explain your vision and your goals."
+msgstr ""
+
+msgid "We could not find an address for your location. Please enter an address manually!"
+msgstr ""
+
+msgid "This will determine who can see your idea."
+msgstr ""
+
+msgid "This idea will be set to be publicly visible!"
+msgstr ""
+
+msgid "Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
+msgstr ""
+
+msgid "Registered users only"
 msgstr ""
 
 msgid "Edit folder"
@@ -2439,10 +2529,16 @@ msgstr ""
 msgid "Activities and interests"
 msgstr ""
 
-msgid "Where do you live?"
+msgid "Where would your idea be realized?"
 msgstr ""
 
 msgid "Enter a place or address and then choose a point on the map."
+msgstr ""
+
+msgid "Which topics fit your idea?"
+msgstr ""
+
+msgid "Where do you live?"
 msgstr ""
 
 msgid "Which topics are you interested in?"
@@ -2519,6 +2615,16 @@ msgid "My Projects"
 msgstr ""
 
 msgid "All Projects"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Ideas"
+msgstr ""
+
+msgid "My Ideas"
+msgstr ""
+
+msgid "All Ideas"
 msgstr ""
 
 msgid "Search..."
@@ -2787,10 +2893,6 @@ msgid "Idea"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Ideas"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names, Topics and Places..."
 msgstr ""
 
@@ -2851,11 +2953,23 @@ msgid "Search this area"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Create idea"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Next"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Participants"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Project/Group Members"
+msgid "Projects/Groups"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -2927,6 +3041,26 @@ msgid "Message Group"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Author"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Project from Idea"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Edit your Idea"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your like setting because of an error."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Projects - Created from this Idea"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr ""
 
@@ -2957,9 +3091,6 @@ msgid "User overview"
 msgstr ""
 
 msgid "Members of your projects and groups only"
-msgstr ""
-
-msgid "Registered users only"
 msgstr ""
 
 msgid "Everybody (public profile)"
@@ -3189,9 +3320,6 @@ msgid "You do not seem to be Editor or Admin of any pages."
 msgstr ""
 
 msgid "We could not retrieve your groups from Facebook because of an error. Please contact an administrator!"
-msgstr ""
-
-msgid "Next"
 msgstr ""
 
 msgid "Jetzt anmelden und mitgestalten"
@@ -3469,6 +3597,9 @@ msgid "This item is now being shown in these projects/groups: %(group_names)s"
 msgstr ""
 
 msgid "No appname given for adding containers."
+msgstr ""
+
+msgid "Your idea was deleted successfully."
 msgstr ""
 
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"

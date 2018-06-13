@@ -30,7 +30,7 @@ BOOSTED_FIELD_BOOST = 1.5
 # this exists so we can blanket boost specific models for visibility without diving
 # into the SearchIndexes and boost logic.
 GLOBAL_MODEL_BOOST_MULTIPLIERS = {
-    'cosinnus_event.event': 2.0,
+    #'cosinnus_event.event': 2.0,
 } 
 
 
@@ -216,6 +216,20 @@ class StoredDataIndexMixin(indexes.SearchIndex):
     def prepare_description(self, obj):
         return obj.description
 
+class LocalCachedIndexMixin(object):
+    """ If an index caches attributes locally on object instances,
+        this mixin takes care of resetting them before a fresh update for that index.
+        
+        Define `local_cached_attrs` in the implementing class! """
+    
+    local_cached_attrs = []
+    
+    def update_object(self, instance, **kwargs):
+        # remove the local cache
+        for attr in self.local_cached_attrs:
+            if hasattr(instance, attr):
+                delattr(instance, attr)
+        return super(LocalCachedIndexMixin, self).update_object(instance, **kwargs)
 
 class DocumentBoostMixin(object):
     """ Handles standardized document boosting and exposes an index-specific
@@ -223,10 +237,12 @@ class DocumentBoostMixin(object):
     
     local_boost = indexes.FloatField(default=0.0, indexed=False)
     
-    def get_mean_and_stddev(self, qs_or_func, count_property):
+    def get_mean_and_stddev(self, qs_or_func, count_property, non_annotated_property=False):
         """ For a given QS or function that returns one, and the countable property
             to be annotated, return mean and stddev for the population of counts.
-            Mean and Stddev are cached. """
+            Mean and Stddev are cached.
+            @param non_annotated_property: If true, the given property is considered a literal number
+                and will not be Count() aggregated """
         
         global _CosinnusPortal
         if _CosinnusPortal is None: 
@@ -241,10 +257,13 @@ class DocumentBoostMixin(object):
         if mean is None or stddev is None:
             # calculate mean and stddev of the counts of group memberships for active users in this portal
             qs = qs_or_func() if callable(qs_or_func) else qs_or_func
-            ann = qs.annotate(
-                pop_property_count=Count(count_property)
-            )
-            count_population = ann.values_list('pop_property_count', flat=True)
+            if non_annotated_property:
+                count_population = qs.values_list(count_property, flat=True)
+            else:
+                ann = qs.annotate(
+                    pop_property_count=Count(count_property)
+                )
+                count_population = ann.values_list('pop_property_count', flat=True)
             mean = numpy.mean(count_population)
             stddev = numpy.std(count_population)
             cache.set(INDEX_POP_COUNT_MEAN , mean, 60*60*12)
@@ -277,7 +296,7 @@ class DocumentBoostMixin(object):
         return data
     
 
-class BaseTaggableObjectIndex(DocumentBoostMixin, TagObjectSearchIndex):
+class BaseTaggableObjectIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObjectSearchIndex):
     text = TemplateResolveEdgeNgramField(document=True, use_template=True)
     rendered = TemplateResolveCharField(use_template=True, indexed=False)
     
@@ -288,6 +307,8 @@ class BaseTaggableObjectIndex(DocumentBoostMixin, TagObjectSearchIndex):
     group = indexes.IntegerField(model_attr='group_id', indexed=False)
     group_members = indexes.MultiValueField(indexed=False)
     location = indexes.LocationField(null=True)
+    
+    local_cached_attrs = ['_group_members']
     
     def prepare_group_slug(self, obj):
         return obj.group.slug
