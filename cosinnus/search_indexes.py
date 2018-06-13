@@ -268,7 +268,7 @@ class IdeaSearchIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObjectSearch
         return obj.image
     
     def index_queryset(self, using=None):
-        qs = self.get_model().objects.all_in_portal()
+        qs = self.get_model().objects.active()
         qs = qs.select_related('media_tag')
         return qs
     
