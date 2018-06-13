@@ -11,9 +11,9 @@ from cosinnus.forms.idea import CosinnusIdeaForm
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.tagged import LikeObject
-from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.views.mixins.group import RequireLoggedInMixin, RequireWriteGrouplessMixin
 from django.contrib.contenttypes.models import ContentType
+from django.core.urlresolvers import reverse
 
 
 logger = logging.getLogger('cosinnus')
@@ -102,7 +102,7 @@ class IdeaDeleteView(RequireWriteGrouplessMixin, SamePortalGroupMixin, DeleteVie
     
     def get_success_url(self):
         messages.success(self.request, self.message_success)
-        return group_aware_reverse('cosinnus:idea-list-mine')
+        return reverse('cosinnus:idea-list-mine')
 
 idea_delete = IdeaDeleteView.as_view()
 
@@ -111,7 +111,7 @@ class IdeaListView(RedirectView):
     permanent = False
     
     def get_redirect_url(self, *args, **kwargs):
-        return ('/TODO-idea-list')
+        return reverse('cosinnus:map') + '?people=false&events=false&projects=false&groups=false&ideas=true&ignore_location=1'
     
 idea_list = IdeaListView.as_view()
 
@@ -120,7 +120,7 @@ class IdeaListMineView(RedirectView):
     permanent = False
     
     def get_redirect_url(self, *args, **kwargs):
-        return ('/TODO-idea-mine-list')
+        return reverse('cosinnus:map') + '?people=false&events=false&projects=false&groups=false&ideas=true&mine=1&ignore_location=1'
     
 idea_list_mine = IdeaListMineView.as_view()
 

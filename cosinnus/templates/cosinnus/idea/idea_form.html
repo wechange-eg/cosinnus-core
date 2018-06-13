@@ -21,7 +21,32 @@
 {% block leftnav %}
     {% url 'cosinnus:idea-create' as href %}
     {% captureas label %}{% trans "Create Idea" %}{% endcaptureas %}
-    {% include "cosinnus/leftnav_button.html" with extra_classes="large-space" icon="fa-lightbulb-o" label=label href=href  %}
+    {% include "cosinnus/leftnav_button.html" with extra_classes="large-space" icon="fa-lightbulb-o" label=label href=href %}
+    
+    {% if object %}
+        
+        <div class="app-etherpad">
+	        <div type="button" class="btn w100 btn-emphasized" data-toggle="modal" data-target="#deleteModal">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <a class="pull-left" href="#">
+	                        <i class="fa fa-eraser"></i>
+	                    </a>
+	                    <div class="media-body">
+	                        {% trans "Delete this idea" %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
+        {% captureas label %}{% blocktrans with title=object.title %}Do you really want to delete idea „{{ title }}“?{% endblocktrans %}{% endcaptureas %}
+        {% captureas title %}{% trans "Delete Idea" %}{% endcaptureas %}
+        {% trans "Yes" as submit_button_label %}
+        {% url "cosinnus:idea-delete" slug=object.slug as delete_url %}
+        {% include "cosinnus/modal_box.html" with id="deleteModal" label=label title=title form_action=delete_url submit_button_label=submit_button_label %}
+    
+    {% endif %}
+    
 {% endblock leftnav %}
 
 
@@ -233,5 +258,12 @@
 	            });
 	        </script>
 	    {% endif %}
+    {% endif %}
+    {% if object and request.GET.delete == "1" %}
+        <script type="text/javascript">
+            $(function(){
+                $('#deleteModal').modal('show');
+            });
+        </script>
     {% endif %}
 {% endblock %}

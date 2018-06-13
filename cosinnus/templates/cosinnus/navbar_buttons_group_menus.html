@@ -76,12 +76,12 @@
                 <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="{% url 'cosinnus:map' %}?people=false&events=false&projects=false&groups=false&ideas=true&mine=1&ignore_location=1">{% trans "My Ideas" %} ({{ my_ideas_count }})</a></li>
-                <li><a href="{% url 'cosinnus:map' %}?people=false&events=false&projects=false&groups=false&ideas=true"">{% trans "All Ideas" %}</a></li>
+                <li><a href="{% url 'cosinnus:idea-list-mine' %}">{% trans "My Ideas" %} ({{ my_ideas_count }})</a></li>
+                <li><a href="{% url 'cosinnus:idea-list' %}">{% trans "All Ideas" %}</a></li>
             </ul>
         </li>
     {% else %}
-        <li><a href="{% url 'cosinnus:map' %}?people=false&events=false&projects=false&groups=false&ideas=true">{% trans "Ideas" %}</a></li>
+        <li><a href="{% url 'cosinnus:idea-list' %}">{% trans "Ideas" %}</a></li>
     {% endif %}
 {% endif %}
     
