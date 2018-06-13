@@ -101,7 +101,8 @@ class IdeaDeleteView(RequireWriteGrouplessMixin, SamePortalGroupMixin, DeleteVie
     message_success = _('Your idea was deleted successfully.')
     
     def get_success_url(self):
-        messages.success(self.request, self.message_success)
+        # disabled the success message for now as it isn't displayed on the map
+        #messages.success(self.request, self.message_success)
         return reverse('cosinnus:idea-list-mine')
 
 idea_delete = IdeaDeleteView.as_view()

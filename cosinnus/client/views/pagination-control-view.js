@@ -45,7 +45,10 @@ module.exports = BaseView.extend({
         data = _.extend(
             data,
             self.controlView.options,
-            self.controlView.state
+            self.controlView.state,
+            {
+            	idea_creation_open: Boolean(self.App.mapView.draggableMarker)
+            }
         );
         return data;
     },

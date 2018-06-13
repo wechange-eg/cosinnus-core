@@ -223,32 +223,64 @@
 	        <script type="text/javascript">
 	            $(function(){
 	                try {
-	                    var url = 'https://nominatim.openstreetmap.org/reverse?json_callback=?';
-		                $.getJSON(url, {
-		                        format: 'json',
-		                        lat: {{ request.GET.lat }},
-		                        lon: {{ request.GET.lon }},
-		                        addressdetails: 0,
-		                        'accept-language': cosinnus_current_language
-		                        // osm_type: N,
-		                    }, function(data) {
-		                        // coordinates found for this address?
-		                        console.log('data')
-		                        console.log(data)
-		                        if (data && 'display_name' in data) {
-		                            var address = data.display_name;
-		                            $('#id_media_tag-location').val(address);
-		                        } else {
-		                            $('#osm-reverse-search-failed-error-display').show();
-		                        }
-		                });
+	                   // instantly use the given coordinates
+                        var osmfield = $('input.osmfield');
+                        var lat = {{ request.GET.lat }};
+                        var lng = {{ request.GET.lon }};
+                        osmfield.data('lat-element').val(lat);
+                        osmfield.data('lng-element').val(lng);
+                        var newLatLng = new L.LatLng(lat, lng);
+                        osmfield.data('marker').setLatLng(newLatLng);
+                        osmfield.data('map').panTo(newLatLng);
+                        
+                        osmfield.data('map-element').show();
+                        window.dispatchEvent(new Event('resize'));
 	                }
-	                catch (error) {
-	                    $('#osm-reverse-search-failed-error-display').show();
-	                }
+	                catch (error) {}
+	                function query_osm_reverse () {
+		                try {
+                            // also do a reverse search for the given adress
+		                    var url = 'https://nominatim.openstreetmap.org/reverse?json_callback=?';
+			                $.getJSON(url, {
+			                        format: 'json',
+			                        lat: {{ request.GET.lat }},
+			                        lon: {{ request.GET.lon }},
+			                        addressdetails: 1,
+			                        'accept-language': "{{ COSINNUS_CURRENT_LANGUAGE }}"
+			                        // osm_type: N,
+			                    }, function(data) {
+			                        // coordinates found for this address?
+			                        if (data && 'address' in data) {
+			                            console.log
+			                            var road = data.address.road ? data.address.road : '';
+			                            var city = data.address.city ? data.address.city : (
+                                             data.address.town ? data.address.town : (
+                                                  data.address.village ? data.address.village : (
+                                                      data.address.state ? data.address.state : (
+	                                                      data.address.suburb ? data.address.suburb : ''
+	                                                 )
+                                                 )
+                                             )
+                                         );
+			                            var address =  road + (road && city ? ', ' : '') + city ;
+			                            $('#id_media_tag-location').val(address);
+			                        } else {
+			                            $('#osm-reverse-search-failed-error-display').show();
+			                        }
+			                });
+		                }
+		                catch (error) {
+		                    $('#osm-reverse-search-failed-error-display').show();
+		                }
+		            }
+		            {# We wait a bit because sometimes the query fizzles if the osm map isnt fully loaded #}
+		            setTimeout(query_osm_reverse, 1000);
 	            });
 	        </script>
 	    {% else %}
+	        {% comment %}  
+	        No default location for now!
+	        
 	        <script type="text/javascript">
 	            $(function(){
 	                var osmfield = $('#id_media_tag-location');
@@ -257,6 +289,7 @@
 	                }
 	            });
 	        </script>
+	        {% endcomment %}
 	    {% endif %}
     {% endif %}
     {% if object and request.GET.delete == "1" %}

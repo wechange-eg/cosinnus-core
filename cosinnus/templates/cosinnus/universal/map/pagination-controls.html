@@ -82,11 +82,19 @@
     </div>
 {% endif %}
 
-{% if COSINNUS_IDEAS_ENABLED %}
+{% if COSINNUS_IDEAS_ENABLED and not idea_creation_open %}
+            
     <div class="map-create-idea-button-frame mobile-hidden">
-        <a class="trigger-create-idea rounded-button rounded-button-large rounded-button-circular button-color-ideas shadowed-button">
+        <a {% if not cosinnus_active_user %}href="/signup/?acc_req_msg=1" class="{% else %}class="trigger-create-idea{% endif %} rounded-button rounded-button-large rounded-button-circular button-color-ideas shadowed-button hidden">
 	        <span class="rounded-button-inner">
 	            <i class="fa fa-lightbulb-o"></i>+
+	        </span>
+	    </a>
+	    <a {% if not cosinnus_active_user %}href="/signup/?acc_req_msg=1" class="{% else %}class="trigger-create-idea{% endif %} rounded-button button-color-ideas shadowed-button">
+	        <span class="rounded-button-inner">
+	            <i class="fa fa-lightbulb-o"></i>
+	            {# Translators: __INCLUDE_JS_PO__ #}
+	            {% trans 'Create idea' %}
 	        </span>
 	    </a>
     </div>
