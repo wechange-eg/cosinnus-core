@@ -184,7 +184,7 @@ class CosinnusIdea(IndexingUtilsMixin, models.Model):
     description = models.TextField(verbose_name=_('Short Description'),
          help_text=_('Short Description. Internal, will not be shown publicly.'), blank=True)
     
-    image = models.ImageField(_("Lmage"), 
+    image = models.ImageField(_("Image"), 
         help_text='Shown as large banner image',
         null=True, blank=True,
         upload_to=get_idea_image_filename,

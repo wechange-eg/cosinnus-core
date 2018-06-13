@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
                 ('slug', models.SlugField(help_text='Be extremely careful when changing this slug manually! There can be many side-effects (redirects breaking e.g.)!', verbose_name='Slug')),
                 ('created', models.DateTimeField(auto_now_add=True, verbose_name='Created')),
                 ('description', models.TextField(help_text='Short Description. Internal, will not be shown publicly.', verbose_name='Short Description', blank=True)),
-                ('image', models.ImageField(upload_to=cosinnus.utils.files.get_idea_image_filename, max_length=250, blank=True, help_text='Shown as large banner image', null=True, verbose_name='Lmage')),
+                ('image', models.ImageField(upload_to=cosinnus.utils.files.get_idea_image_filename, max_length=250, blank=True, help_text='Shown as large banner image', null=True, verbose_name='Image')),
                 ('public', models.BooleanField(default=False, verbose_name='Public')),
                 ('is_active', models.BooleanField(default=True, help_text='If an idea is not active, it counts as non-existent for all purposes and views on the website.', verbose_name='Is active')),
                 ('created_groups', models.ManyToManyField(related_name='_cosinnusidea_created_groups_+', null=True, verbose_name='Created Projects', to=settings.COSINNUS_GROUP_OBJECT_MODEL, blank=True)),
