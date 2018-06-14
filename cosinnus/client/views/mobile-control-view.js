@@ -25,7 +25,9 @@ module.exports = BaseView.extend({
     events: {
         'click .trigger-mobile-list-view': 'triggerMobileListView',
         'click .trigger-mobile-search-view': 'triggerMobileSearchView',
-        'click .trigger-mobile-map-view': 'triggerMobileMapView'
+        'click .trigger-mobile-map-view': 'triggerMobileMapView',
+        'click .trigger-mobile-idea-create-1-view': 'triggerMobileIdeaCreate1View',
+        'click .trigger-mobile-idea-create-2-view': 'triggerMobileIdeaCreate2View'
     },
     
     initialize: function (options, app, controlView) {
@@ -64,6 +66,16 @@ module.exports = BaseView.extend({
     // delegate to controlView
     triggerMobileMapView: function (event) {
         self.controlView.triggerMobileMapView();
+    },
+    
+    // delegate to controlView
+    triggerMobileIdeaCreate1View: function (event) {
+        self.controlView.triggerMobileIdeaCreate1View();
+    },
+
+    // delegate to controlView
+    triggerMobileIdeaCreate2View: function (event) {
+        self.controlView.triggerMobileIdeaCreate2View();
     },
     
     

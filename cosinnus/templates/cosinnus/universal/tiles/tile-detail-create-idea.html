@@ -1,20 +1,20 @@
 {% import "include/macros.html" as macros %}
 
-<div class="tile-detail tile-idea tile-create-idea">
-    <div class="tile-close-button">
+<div class="tile-detail tile-idea tile-create-idea mobile-view mobile-view-idea-create-2-visible-block">
+    <div class="tile-close-button more-padding">
         <i class="fa fa-fw fa-close"></i>
     </div>
     
     
     {% block title %}
-        <div class="tile-section title">
+        <div class="tile-section no-top-spacing title">
             <h1>
                 {# Translators: __INCLUDE_JS_PO__ #}
-                {% trans "Create Idea" %}
+                {% trans "Create idea" %}
             </h1>
         </div>
         
-        <div class="tile-section">
+        <div class="tile-section mobile-hidden">
             <div class="pull-left multi-span non-map-placemark placemark l icon ideas"></div>
             <div style="overflow: hidden;">
                 {# Translators: __INCLUDE_JS_PO__ #}
@@ -42,13 +42,19 @@
 	            <textarea id="idea-create-description" name="description"></textarea>
 	        </div>
 	        
-	        <div class="tile-section">
+	        <div class="tile-section tile-section-button-list">
 	            <a class="pull-right rounded-button button-color-action trigger-create-idea-submit">
-	                <span class="rounded-button-inner">
-	                    {# Translators: __INCLUDE_JS_PO__ #}
-	                    {% trans "Next" %}
-	                </span>
-	            </a>
+                    <span class="rounded-button-inner">
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Next" %}
+                    </span>
+                </a>
+                <a class="pull-right rounded-button button-action trigger-mobile-idea-back mobile-only">
+                    <span class="rounded-button-inner">
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Back to location selection" %}
+                    </span>
+                </a>
 	        </div>
         </div>
     {% endblock form %}

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-13 15:35+0200\n"
+"POT-Creation-Date: 2018-06-14 17:21+0200\n"
 "PO-Revision-Date: 2018-05-29 14:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2139,7 +2139,6 @@ msgstr "Переместить"
 msgid "A message from %(sender_full_name)s"
 msgstr "Сообщение от %(sender_full_name)s"
 
-#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "Created"
 msgid "Create Idea"
@@ -3154,6 +3153,21 @@ msgid "Terrain"
 msgstr "Перегруппировать"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created"
+msgid "Create idea"
+msgstr "Создано"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Next"
+msgstr "Далее"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Choose a location for your idea by dragging the marker!"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "of"
 msgstr ""
 
@@ -3182,20 +3196,6 @@ msgstr "Поиск в группах"
 #| msgid "Search in teams"
 msgid "Search this area"
 msgstr "Поиск в группах"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Created"
-msgid "Create idea"
-msgstr "Создано"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on."
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Next"
-msgstr "Далее"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Participants"
@@ -3236,6 +3236,16 @@ msgstr "Администраторы портала"
 #| msgid "No Description set"
 msgid "No description yet."
 msgstr "Нет описания"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "No Location set"
+msgid "Back to location selection"
+msgstr "Место не указано"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -4274,9 +4284,6 @@ msgstr "Ваши изменения были сохранены."
 #~| msgid "Regular Dashboard page (1 Column)"
 #~ msgid "3-Column Dashboard Page (Modular)"
 #~ msgstr "3-колонная страница панели управления (модулярно)"
-
-#~ msgid "No Location set"
-#~ msgstr "Место не указано"
 
 #~ msgid "You are a member. View Project!"
 #~ msgstr "Вы являетесь членом проекта. Посмотреть проект! "

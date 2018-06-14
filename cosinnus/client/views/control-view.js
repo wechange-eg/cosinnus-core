@@ -58,6 +58,7 @@ module.exports = ContentControlView.extend({
             urlSelectedResultId: null, // URL param. the currently selected result, given in the url
             filterPanelVisible: false,
             showMine: false, // URL param. if true, only the current user's own results will be shown. ignored away if user is not logged in.
+            lastViewBeforeDetailWasListView: false, // a savestate so we know which view to return to after closing the detail view on mobile
         }
     },
     
@@ -273,7 +274,7 @@ module.exports = ContentControlView.extend({
     			self
     			).render();
     		} else {
-    			self.createIdeaView.$el.show();
+    			self.createIdeaView.$el.removeClass('hidden');
     		}
             Backbone.mediator.publish('ideas:create-view-opened');
     	}
@@ -282,17 +283,18 @@ module.exports = ContentControlView.extend({
     /** Open the Create-Idea view */
     closeCreateIdeaView: function (event) {
     	var self = this;
-    	self.createIdeaView.$el.hide();
+    	self.createIdeaView.$el.addClass('hidden');
+    	self.untriggerMobileIdeaCreateView(event);
     	Backbone.mediator.publish('ideas:create-view-closed');
     },
     
     /** Mobile view switch buttons */
-    _resetMobileView: function (event) {
+    _resetMobileView: function (event, dontResetDetailResult) {
         // unselect the detail view if one is open
-        if (this.detailResult) {
+        if (this.detailResult && !dontResetDetailResult) {
             this.displayDetailResult(null);
         }
-        this.App.$el.removeClass('mobile-view-map mobile-view-search mobile-view-list mobile-view-detail');
+        this.App.$el.removeClass('mobile-view-map mobile-view-search mobile-view-list mobile-view-detail mobile-view-idea-create-1 mobile-view-idea-create-2');
     },
     
     triggerMobileListView: function (event) {
@@ -313,14 +315,34 @@ module.exports = ContentControlView.extend({
     },
 
     triggerMobileDetailView: function (event) {
-        // this actually doesn't reset the last view, the detail view will be over it!
-        this.App.$el.addClass('mobile-view-detail');
+    	// save the current view 
+    	// (if it was list view we want to return to that instead of map view when closing detail)
+    	this.state.lastViewBeforeDetailWasListView = this.App.$el.hasClass('mobile-view-list');
+    	this._resetMobileView(event, true);
+    	this.App.$el.addClass('mobile-view-detail');
+    },
+
+    triggerMobileIdeaCreate1View: function (event) {
+        this._resetMobileView();
+        self.controlView.openCreateIdeaView(event);
+        this.App.$el.addClass('mobile-view-idea-create-1');
+    },
+
+    triggerMobileIdeaCreate2View: function (event) {
+        this._resetMobileView();
+        this.App.$el.addClass('mobile-view-idea-create-2');
+    },
+    
+    untriggerMobileIdeaCreateView: function (event) {
+        this.triggerMobileMapView(event);
     },
     
     untriggerMobileDetailView: function (event) {
-        //this._resetMobileView();
-        // this actually doesn't reset the last view, the detail view will be over it!
-        this.App.$el.removeClass('mobile-view-detail');
+        if (this.state.lastViewBeforeDetailWasListView) {
+        	this.triggerMobileListView(event);
+        } else {
+        	this.triggerMobileMapView(event);
+        }
     },
     
     /**
@@ -374,7 +396,6 @@ module.exports = ContentControlView.extend({
         if (directItemId in self.detailResultCache) {
             result = self.detailResultCache[directItemId];
             self.displayDetailResult(result);
-            
         } else {
             // if not, load it from the server
             

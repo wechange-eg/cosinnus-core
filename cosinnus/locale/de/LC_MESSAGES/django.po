@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-13 15:35+0200\n"
-"PO-Revision-Date: 2018-06-13 15:35+0200\n"
+"POT-Creation-Date: 2018-06-14 17:21+0200\n"
+"PO-Revision-Date: 2018-06-14 17:25+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -86,37 +86,37 @@ msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\"
 msgstr "%(sender_name)s hat dich eingeladen, auf %(portal_name)s dem Projekt \"%(team_name)s\" beizutreten! Klicke unten auf den Projektnamen um es dir anzuschauen und mitzumachen!"
 
 msgid "Mobilität"
-msgstr ""
+msgstr "Mobilität"
 
 msgid "Energie"
-msgstr ""
+msgstr "Energie"
 
 msgid "Umwelt"
-msgstr ""
+msgstr "Umwelt"
 
 msgid "Bildung"
-msgstr ""
+msgstr "Bildung"
 
 msgid "Gesundheit"
-msgstr ""
+msgstr "Gesundheit"
 
 msgid "Ernährung und Konsum"
-msgstr ""
+msgstr "Ernährung und Konsum"
 
 msgid "Kunst und Kultur"
-msgstr ""
+msgstr "Kunst und Kultur"
 
 msgid "Geld und Finanzen"
-msgstr ""
+msgstr "Geld und Finanzen"
 
 msgid "Arbeit und Recht"
-msgstr ""
+msgstr "Arbeit und Recht"
 
 msgid "Bauen und Wohnen"
-msgstr ""
+msgstr "Bauen und Wohnen"
 
 msgid "Klimaschutz"
-msgstr ""
+msgstr "Klimaschutz"
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgstr "Nur Mitglieder dieser Gruppe/Projekts können diesen Inhalt sehen. Stelle jetzt einen Antrag auf Mitgliedschaft!"
@@ -364,37 +364,37 @@ msgid "Unsubscribe"
 msgstr "Abbestellen"
 
 msgid "Tiny (50 x *)"
-msgstr ""
+msgstr "Tiny (50 x *)"
 
 msgid "Very Small (100 x *)"
-msgstr ""
+msgstr "Very Small (100 x *)"
 
 msgid "Smaller (150 x *)"
-msgstr ""
+msgstr "Smaller (150 x *)"
 
 msgid "Small (200 x *)"
-msgstr ""
+msgstr "Small (200 x *)"
 
 msgid "Medium-small (250 x *)"
-msgstr ""
+msgstr "Medium-small (250 x *)"
 
 msgid "Medium (300 x *)"
-msgstr ""
+msgstr "Medium (300 x *)"
 
 msgid "Large (400 x *)"
-msgstr ""
+msgstr "Large (400 x *)"
 
 msgid "Larger (500 x *)"
-msgstr ""
+msgstr "Larger (500 x *)"
 
 msgid "Very large (650 x *)"
-msgstr ""
+msgstr "Very large (650 x *)"
 
 msgid "Extra large (800 x *)"
-msgstr ""
+msgstr "Extra large (800 x *)"
 
 msgid "XXL (1200 x *)"
-msgstr ""
+msgstr "XXL (1200 x *)"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Title"
@@ -554,10 +554,10 @@ msgid "Microsite Video"
 msgstr "Microsite Video"
 
 msgid "Microsite Twitter Timeline Username"
-msgstr ""
+msgstr "Microsite Twitter Timeline Username"
 
 msgid "Microsite Twitter Timeline Custom Widget ID"
-msgstr ""
+msgstr "Microsite Twitter Timeline Custom Widget ID"
 
 msgid "Flickr Gallery URL"
 msgstr "Flickr Gallerie/Slideshow URL"
@@ -658,10 +658,10 @@ msgid "Location"
 msgstr "Standort"
 
 msgid "Latitude"
-msgstr ""
+msgstr "Latitude"
 
 msgid "Longitude"
-msgstr ""
+msgstr "Longitude"
 
 msgid "Team"
 msgstr "Team"
@@ -682,7 +682,7 @@ msgid "CosinnusGroup GalleryImages"
 msgstr "CosinnusGroup Galleriebilder"
 
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 msgid "CosinnusGroup CallToAction Button"
 msgstr "CosinnusGroup CallToAction Button"
@@ -809,7 +809,7 @@ msgid "Liked"
 msgstr "Gefällt dir"
 
 msgid "Following"
-msgstr ""
+msgstr "Following"
 
 msgid "Create-Project or Group Button"
 msgstr "Projekt oder Gruppe-erstellen Button"
@@ -842,25 +842,25 @@ msgid "Proportions"
 msgstr "Proportionen"
 
 msgid "1/2 + 1/2"
-msgstr ""
+msgstr "1/2 + 1/2"
 
 msgid "2/3 + 1/3"
-msgstr ""
+msgstr "2/3 + 1/3"
 
 msgid "1/3 + 2/3"
-msgstr ""
+msgstr "1/3 + 2/3"
 
 msgid "1/3 + 1/3 + 1/3"
-msgstr ""
+msgstr "1/3 + 1/3 + 1/3"
 
 msgid "1/2 + 1/4 + 1/4"
-msgstr ""
+msgstr "1/2 + 1/4 + 1/4"
 
 msgid "1/4 + 1/2 + 1/4"
-msgstr ""
+msgstr "1/4 + 1/2 + 1/4"
 
 msgid "1/4 + 1/4 + 1/2"
-msgstr ""
+msgstr "1/4 + 1/4 + 1/2"
 
 msgid "Medium News Widget"
 msgstr "Mittelgroßes Nachrichten-Widget"
@@ -884,10 +884,10 @@ msgid "Assigned Portal"
 msgstr "Zugewiesenes Portal"
 
 msgid "Footer"
-msgstr ""
+msgstr "Footer"
 
 msgid "Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)"
-msgstr ""
+msgstr "Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)"
 
 msgid "Show Register Button"
 msgstr "Registrieren Button anzeigen"
@@ -968,13 +968,13 @@ msgid "Header Text"
 msgstr "Kopfzeile (nach Banner)"
 
 msgid "Additional Header content"
-msgstr ""
+msgstr "Additional Header content"
 
 msgid "Site Widgets"
 msgstr "Site Widgets"
 
 msgid "Bottom content (gray background)"
-msgstr ""
+msgstr "Bottom content (gray background)"
 
 msgid "Dashboard"
 msgstr "Dashboard"
@@ -1016,68 +1016,68 @@ msgid "Widget configuration items"
 msgstr "Konfigurationseinstellungen"
 
 msgid "select this page"
-msgstr ""
+msgstr "select this page"
 
 msgid "edit this page"
-msgstr ""
+msgstr "edit this page"
 
 msgid "edit"
-msgstr ""
+msgstr "edit"
 
 msgid "insert above"
-msgstr ""
+msgstr "insert above"
 
 msgid "insert below"
-msgstr ""
+msgstr "insert below"
 
 msgid "insert inside"
-msgstr ""
+msgstr "insert inside"
 
 msgid "softroot"
-msgstr ""
+msgstr "softroot"
 
 msgid "home"
-msgstr ""
+msgstr "home"
 
 #, python-format
 msgid "Edit this page in %(language)s "
-msgstr ""
+msgstr "Edit this page in %(language)s "
 
 msgid "Cut"
-msgstr ""
+msgstr "Cut"
 
 msgid "cut"
-msgstr ""
+msgstr "cut"
 
 msgid "Copy"
-msgstr ""
+msgstr "Copy"
 
 msgid "copy"
-msgstr ""
+msgstr "copy"
 
 msgid "Add Child"
-msgstr ""
+msgstr "Add Child"
 
 msgid "add"
-msgstr ""
+msgstr "add"
 
 msgid "Delete"
 msgstr "Löschen"
 
 msgid "delete"
-msgstr ""
+msgstr "delete"
 
 msgid "Unpublish"
-msgstr ""
+msgstr "Unpublish"
 
 msgid "Publish"
-msgstr ""
+msgstr "Publish"
 
 msgid "View on page"
-msgstr ""
+msgstr "View on page"
 
 msgid "view"
-msgstr ""
+msgstr "view"
 
 msgid "View reported item..."
 msgstr "Gemeldetes Objekt ansehen..."
@@ -2125,7 +2125,6 @@ msgstr "Verschieben"
 msgid "A message from %(sender_full_name)s"
 msgstr "Nachricht von %(sender_full_name)s"
 
-#. Translators: __INCLUDE_JS_PO__
 msgid "Create Idea"
 msgstr "Idee erstellen"
 
@@ -2188,22 +2187,22 @@ msgid "Delete folder"
 msgstr "Ordner löschen"
 
 msgid "Download"
-msgstr ""
+msgstr "Download"
 
 msgid "Do you really want to delete this folder and ALL folders and items it contains? This actions CANNOT be reversed!"
 msgstr "Willst du diesen Ordner und ALLE Unterordner und Elemente die er enthält endgültig löschen? Dies kann nicht rückgängig gemacht werden!"
 
 msgid "Gesendet"
-msgstr ""
+msgstr "Gesendet"
 
 msgid "Archiv"
-msgstr ""
+msgstr "Archiv"
 
 msgid "Papierkorb"
-msgstr ""
+msgstr "Papierkorb"
 
 msgid "Verfassen"
-msgstr ""
+msgstr "Verfassen"
 
 msgid "Back"
 msgstr "Zurück"
@@ -2223,6 +2222,9 @@ msgid ""
 "\n"
 "Here is a summary: %(msg)s"
 msgstr ""
+"%(site_name)s CSV import failed!\n"
+"\n"
+"Here is a summary: %(msg)s"
 
 #, python-format
 msgid ""
@@ -2230,6 +2232,9 @@ msgid ""
 "\n"
 "Here is why: %(msg)s"
 msgstr ""
+"The CSV import on %(site_name)s failed.\n"
+"\n"
+"Here is why: %(msg)s"
 
 #, python-format
 msgid ""
@@ -2237,10 +2242,13 @@ msgid ""
 "\n"
 "Here is a summary: %(msg)s"
 msgstr ""
+"The CSV import on %(site_name)s was successful.\n"
+"\n"
+"Here is a summary: %(msg)s"
 
 #, python-format
 msgid "%(site_name)s CSV import was successful"
-msgstr ""
+msgstr "%(site_name)s CSV import was successful"
 
 #, python-format
 msgid ""
@@ -2529,6 +2537,22 @@ msgid ""
 "Viele Grüße und viel Spaß hier,\n"
 "das %(site_name)s Team"
 msgstr ""
+"Hallo, %(user_name)s! Herzlich willkommen bei %(site_name)s! \n"
+"\n"
+"Du kannst dich ab sofort unter %(domain_url)s einloggen.\n"
+"\n"
+"Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das Video auf unserer Frontseite an. Dahin kommst du per Klick auf das Portallogo links oben.\n"
+"\n"
+"Eine Information schon vorab: durch deine Registrierung bist du automatisch Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend deines Informationsbedürfnisses individuell einstellen, auf welche Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" gesetzt.\n"
+"\n"
+"Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das kannst du dann natürlich ebenso anpassen.\n"
+"\n"
+"Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du hierzu einfach die Mitgliedschaft beantragen.\n"
+"\n"
+"Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, melde dich gern den Portaladministrator_innen. \n"
+"\n"
+"Viele Grüße und viel Spaß hier,\n"
+"das %(site_name)s Team"
 
 #, python-format
 msgid "Your request to join %(site_name)s was approved!"
@@ -3081,6 +3105,19 @@ msgid "Terrain"
 msgstr "Terrain"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Create idea"
+msgstr "Idee erstellen"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Next"
+msgstr "Weiter"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Choose a location for your idea by dragging the marker!"
+msgstr "Wähle einen Ort für deine Idee indem du die Markierung in der Karte verschiebst."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "of"
 msgstr "von"
 
@@ -3103,18 +3140,6 @@ msgstr "Suchen wenn die Karte bewegt wird"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search this area"
 msgstr "In diesem Ausschnitt suchen"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Create idea"
-msgstr "Idee erstellen"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on."
-msgstr "Wähle einen Ort für deine Idee indem du die Markierung in der Karte verschiebst. Du kannst diesen Ort später ändern."
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Next"
-msgstr "Nächste"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Participants"
@@ -3143,6 +3168,14 @@ msgstr "Administratoren unbekannt"
 #. Translators: __INCLUDE_JS_PO__
 msgid "No description yet."
 msgstr "Noch keine Beschreibung erstellt."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on."
+msgstr "Wähle einen Ort für deine Idee indem du die Markierung in der Karte verschiebst. Du kannst diesen Ort später ändern."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Back to location selection"
+msgstr "Zurück zur Ortsauswahl"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Protected Content"
@@ -3204,7 +3237,7 @@ msgstr "Projekt aus Idee erstellen"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Edit your Idea"
-msgstr "Idee bearbeiten"
+msgstr "Deine Idee bearbeiten"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Could not save your like setting because of an error."
@@ -3480,7 +3513,7 @@ msgid "We could not retrieve your groups from Facebook because of an error. Plea
 msgstr "Wir konnten aufgrund eines Fehlers deine Gruppen nicht von Facebook lesen. Bitte kontaktiere einen Administrator!"
 
 msgid "Jetzt anmelden und mitgestalten"
-msgstr ""
+msgstr "Jetzt anmelden und mitgestalten"
 
 msgid "Show more Projects"
 msgstr "Weitere Projekte anzeigen"
@@ -3540,10 +3573,10 @@ msgid "Assign"
 msgstr "Zuweisen"
 
 msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
-msgstr ""
+msgstr "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
 
 msgid "Ich erkläre mich mit den Nutzungsbedingungen einverstanden"
-msgstr ""
+msgstr "Ich erkläre mich mit den Nutzungsbedingungen einverstanden"
 
 #, python-format
 msgid ""
@@ -3556,7 +3589,7 @@ msgstr ""
 "De/dier Benutzer_in %(user_name)s möchte dem Projekt %(team_name)s beitreten."
 
 msgid "Nutzungsbedingungen"
-msgstr ""
+msgstr "Nutzungsbedingungen"
 
 msgid "(Deleted User)"
 msgstr "(Gelöschter Nutzer)"
@@ -4065,9 +4098,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "Share on Google+"
 #~ msgstr "Auf Google+ teilen"
-
-#~ msgid "No Location set"
-#~ msgstr "Kein Ort angegeben."
 
 #~ msgid "You are a member. View Project!"
 #~ msgstr "Du bist Mitglied. Projekt ansehen!"
