@@ -13,7 +13,7 @@ module.exports = BaseView.extend({
     
     model: null,
 
-    template: require('tiles/create-idea'),
+    template: require('tiles/tile-detail-create-idea'),
     
     // The DOM events specific to an item.
     events: {

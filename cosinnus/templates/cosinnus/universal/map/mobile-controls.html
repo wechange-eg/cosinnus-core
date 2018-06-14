@@ -1,3 +1,29 @@
+{% if COSINNUS_IDEAS_ENABLED %}
+	<div class="map-mobile-controls left-side mobile-only mobile-view mobile-view-map-visible-block">
+		<a {% if not cosinnus_active_user %}href="/signup/?acc_req_msg=1" class="{% else %}class="trigger-mobile-idea-create-1-view{% endif %} pull-left rounded-button button-action-faded shadowed-button">
+		    <span class="rounded-button-inner">
+		        <i class="fa fa-fw fa-lightbulb-o apply-color-ideas"></i>
+		        {# Translators: __INCLUDE_JS_PO__ #}
+		        {% trans "Create idea" %}
+		    </span>
+		</a>
+	</div>
+	
+	<div class="map-mobile-controls map-pagination-controls full-width vertical-center-parent   mobile-only mobile-view mobile-view-idea-create-1-visible-block">
+        <a class="trigger-mobile-idea-create-2-view rounded-button button-color-action pull-right inline-spacer vertical-center-child">
+            <span class="rounded-button-inner">
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Next" %}
+            </span>
+        </a>
+	    <div class="controls-description vertical-center-child">
+	        {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Choose a location for your idea by dragging the marker!" %}
+	    </div>
+    </div>
+	
+{% endif %}
+
 <div class="map-mobile-controls mobile-only">
     <div class="rounded-button rounded-button-circular button-action-faded shadowed-button trigger-mobile-search-view   mobile-view mobile-view-list-visible-inline-block  mobile-view-map-visible-inline-block">
         <span class="rounded-button-inner">

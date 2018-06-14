@@ -105,10 +105,14 @@
         
         height: 34px;
         line-height: 32px;
-        margin-right: 10px;
         font-size: 14px;
         border-radius: 4px;
         text-decoration: none;
+        
+        &.pull-right {
+            margin-right: 0;
+            z-index: 1;
+        }
         
         .rounded-button-inner {
             padding: 10px;
@@ -140,6 +144,7 @@
             font-size: 24px;
             height: 42px;
             line-height: 40px;
+            border-radius: 6px;
             
             &.rounded-button-circular {
                 border-radius: 24px;
@@ -210,108 +215,46 @@
             }
         }
         
-        
-        /** Topics */
-        &.button-color-topic {
-            color: @map-text-color;
-            background-color: @map-button-color;
-            border: 1px solid @map-topic-color;
-        }
-        &.button-color-topic.selected {
-            color: @map-button-color;
-            background-color: @map-topic-color;
-        }
-        @media (min-width: 768px) {
-            &.button-color-topic:hover {
+        .colored-button(@type, @color, @textcolor) {
+            &.button-color-@{type} {
+                color: @textcolor;
+                background-color: @map-button-color;
+                border: 1px solid @color;
+            }
+            &.button-color-@{type}.selected {
                 color: @map-button-color;
-                background-color: @map-topic-color;
+                background-color: @color;
+            }
+            @media (min-width: 768px) {
+                &.button-color-@{type}:hover {
+                    color: @map-button-color;
+                    background-color: @color;
+                }
+            }
+            
+            &.button-color-@{type}-inverted {
+                color: @map-button-color;
+                background-color: @color;
+                border: 1px solid @color;
+            }
+            &.button-color-@{type}-inverted.selected {
+                color: @textcolor;
+                background-color: @map-button-color;
+            }
+            @media (min-width: 768px) {
+                &.button-color-@{type}-inverted:hover {
+                    color: @textcolor;
+                    background-color: @map-button-color;
+                }
             }
         }
+        .colored-button(topic, @map-topic-color, @map-text-color);
+        .colored-button(events, @map-events-color, @map-events-color);
+        .colored-button(people, @map-people-color, @map-people-color);
+        .colored-button(projects, @map-projects-color, @map-projects-color);
+        .colored-button(groups, @map-groups-color, @map-groups-color);
+        .colored-button(ideas, @map-ideas-color, @map-ideas-color);
         
-        /** Events */
-        &.button-color-events {
-            color: @map-events-color;
-            background-color: @map-button-color;
-            border: 1px solid @map-events-color;
-        }
-        &.button-color-events.selected {
-            color: @map-button-color;
-            background-color: @map-events-color;
-        }
-        @media (min-width: 768px) {
-            &.button-color-events:hover {
-                color: @map-button-color;
-                background-color: @map-events-color;
-            }
-        }
-        
-        /** People */
-        &.button-color-people {
-            color: @map-people-color;
-            background-color: @map-button-color;
-            border: 1px solid @map-people-color;
-        }
-        &.button-color-people.selected {
-            color: @map-button-color;
-            background-color: @map-people-color;
-        }
-        @media (min-width: 768px) {
-            &.button-color-people:hover {
-                color: @map-button-color;
-                background-color: @map-people-color;
-            }
-        }
-        
-        /** Projects */
-        &.button-color-projects {
-            color: @map-projects-color;
-            background-color: @map-button-color;
-            border: 1px solid @map-projects-color;
-        }
-        &.button-color-projects.selected {
-            color: @map-button-color;
-            background-color: @map-projects-color;
-        }
-        @media (min-width: 768px) {
-            &.button-color-projects:hover {
-                color: @map-button-color;
-                background-color: @map-projects-color;
-            }
-        }
-        
-        /** Groups */
-        &.button-color-groups {
-            color: @map-groups-color;
-            background-color: @map-button-color;
-            border: 1px solid @map-groups-color;
-        }
-        &.button-color-groups.selected {
-            color: @map-button-color;
-            background-color: @map-groups-color;
-        }
-        @media (min-width: 768px) {
-            &.button-color-groups:hover {
-                color: @map-button-color;
-                background-color: @map-groups-color;
-            }
-        }
-        
-        /** Ideas */
-        &.button-color-ideas {
-            color: @map-ideas-color;
-            background-color: @map-button-color;
-            border: 1px solid @map-ideas-color;
-        }
-        &.button-color-ideas.selected {
-            color: @map-button-color;
-            background-color: @map-ideas-color;
-        }
-        @media (min-width: 768px) {
-            &.button-color-ideas:hover {
-                color: @map-button-color;
-                background-color: @map-ideas-color;
-            }
-        }
     }
     
     .inline-spacer {
@@ -683,6 +626,9 @@
     .tile-section {
         padding: 10px 0 10px 0;
         
+        &.no-top-spacing {
+            padding-top: 0;
+        }
         &:last-child {
             padding-bottom: 0;
         }
@@ -772,8 +718,12 @@
         /** makes the click-area bigger */
         margin: -10px;
         padding: 10px;
-        /** correct for own size */
+        /** adjust for own size */
         margin-top: -20px;
+        
+        &.more-padding {
+            margin-top: -10px;
+        }
         
         &:hover {
             color: @map-text-color;
@@ -906,7 +856,7 @@
 .app-fullscreen:not(.no-navbar) .map-fullscreen {
     .leaflet-top {
         .leaflet-control {
-            top: 65px;
+            top: 55px;
         }
     }
 }
@@ -1189,6 +1139,24 @@
     right: 5px;
     bottom: 20px;
     z-index: 6;
+    
+    &.left-side {
+        right: unset;
+        left: 20px;
+    }
+    &.full-width {
+        bottom: 0;
+        left: 0;
+        right: unset;
+        width: 100%;
+        height: 70px;
+        background-color: @map-tile-background-color;
+        padding: 10px 20px;
+    }
+    
+    .controls-description {
+        text-align: left;
+    }
 }
 .map-pagination-controls {
     padding: 10px;
@@ -1290,28 +1258,36 @@
         &.mobile-view-map .mobile-view-map-visible-block,
         &.mobile-view-search .mobile-view-search-visible-block,
         &.mobile-view-list .mobile-view-list-visible-block,
-        &.mobile-view-detail .mobile-view-detail-visible-block {
+        &.mobile-view-detail .mobile-view-detail-visible-block,
+        &.mobile-view-idea-create-1 .mobile-view-idea-create-1-visible-block,
+        &.mobile-view-idea-create-2 .mobile-view-idea-create-2-visible-block {
             display: block;
         }
         
         &.mobile-view-map .mobile-view-map-visible-inline-block,
         &.mobile-view-search .mobile-view-search-visible-inline-block,
         &.mobile-view-list .mobile-view-list-visible-inline-block,
-        &.mobile-view-detail .mobile-view-detail-visible-inline-block {
+        &.mobile-view-detail .mobile-view-detail-visible-inline-block,
+        &.mobile-view-idea-create-1 .mobile-view-idea-create-1-visible-inline-block,
+        &.mobile-view-idea-create-2 .mobile-view-idea-create-2-visible-inline-block {
             display: inline-block;
         }
         
         &.mobile-view-map .mobile-view-map-visible-inline,
         &.mobile-view-search .mobile-view-search-visible-inline,
         &.mobile-view-list .mobile-view-list-visible-inline,
-        &.mobile-view-detail .mobile-view-detail-visible-inline {
+        &.mobile-view-detail .mobile-view-detail-visible-inline,
+        &.mobile-view-idea-create-1 .mobile-view-idea-create-1-visible-inline,
+        &.mobile-view-idea-create-2 .mobile-view-idea-create-2-visible-inline {
             display: inline;
         }
         
         &.mobile-view-map .mobile-view-map-visible-flex,
         &.mobile-view-search .mobile-view-search-visible-flex,
         &.mobile-view-list .mobile-view-list-visible-flex,
-        &.mobile-view-detail .mobile-view-detail-visible-flex {
+        &.mobile-view-detail .mobile-view-detail-visible-flex,
+        &.mobile-view-idea-create-1 .mobile-view-idea-create-1-visible-flex,
+        &.mobile-view-idea-create-2 .mobile-view-idea-create-2-visible-flex {
             display: flex;
         }
         
@@ -1328,7 +1304,14 @@
         }
         
     }
-    
+    .map-fullscreen {
+        .map-layers-buttons {
+            bottom: unset;
+            left: unset;
+            right: 5px;
+            top: 65px;
+        }
+    }
     .map-splitscreen {
         width: 100%;
     }
@@ -1384,9 +1367,19 @@
     }
     
     
-    
+    .app-root .tile-detail {
+        .tile-detail-form {
+            /** SimpleMDE is quite big */
+            .CodeMirror {
+                height: 250px;
+            }
+        
+            .CodeMirror .CodeMirror-code, .CodeMirror .editor-preview, 
+            .CodeMirror .editor-preview p, .CodeMirror .editor-preview ul,
+            .CodeMirror .editor-preview li {
+                font-size: 14px;
+            }
+        }
+    }
 }
-
-
-
 

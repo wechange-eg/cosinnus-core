@@ -273,7 +273,7 @@ module.exports = ContentControlView.extend({
     			self
     			).render();
     		} else {
-    			self.createIdeaView.$el.show();
+    			self.createIdeaView.$el.removeClass('hidden');
     		}
             Backbone.mediator.publish('ideas:create-view-opened');
     	}
@@ -282,7 +282,8 @@ module.exports = ContentControlView.extend({
     /** Open the Create-Idea view */
     closeCreateIdeaView: function (event) {
     	var self = this;
-    	self.createIdeaView.$el.hide();
+    	self.createIdeaView.$el.addClass('hidden');
+    	self.untriggerMobileIdeaCreateView(event);
     	Backbone.mediator.publish('ideas:create-view-closed');
     },
     
@@ -292,7 +293,7 @@ module.exports = ContentControlView.extend({
         if (this.detailResult) {
             this.displayDetailResult(null);
         }
-        this.App.$el.removeClass('mobile-view-map mobile-view-search mobile-view-list mobile-view-detail');
+        this.App.$el.removeClass('mobile-view-map mobile-view-search mobile-view-list mobile-view-detail mobile-view-idea-create-1 mobile-view-idea-create-2');
     },
     
     triggerMobileListView: function (event) {
@@ -315,6 +316,21 @@ module.exports = ContentControlView.extend({
     triggerMobileDetailView: function (event) {
         // this actually doesn't reset the last view, the detail view will be over it!
         this.App.$el.addClass('mobile-view-detail');
+    },
+
+    triggerMobileIdeaCreate1View: function (event) {
+        this._resetMobileView();
+        self.controlView.openCreateIdeaView(event);
+        this.App.$el.addClass('mobile-view-idea-create-1');
+    },
+
+    triggerMobileIdeaCreate2View: function (event) {
+        this._resetMobileView();
+        this.App.$el.addClass('mobile-view-idea-create-2');
+    },
+    
+    untriggerMobileIdeaCreateView: function (event) {
+        this.triggerMobileMapView(event);
     },
     
     untriggerMobileDetailView: function (event) {
