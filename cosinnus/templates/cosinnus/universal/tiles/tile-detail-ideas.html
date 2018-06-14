@@ -27,7 +27,7 @@
 	            {% trans "Author" %}:
 	        </span> 
 	        {% if not cosinnus_active_user %}
-	            <a href="/signup/?acc_req_msg=1" target="_blank">{{ creator_name }}</a>
+	            <a href="/signup/?acc_req_msg=1&next=/map/" target="_blank">{{ creator_name }}</a>
 	        {% else %}
 	            {{ macros.resultLink(portal, creator_slug, creator_name, "people") }}
 	        {% endif %}
@@ -49,7 +49,7 @@
 {% block action_buttons %}
     <div class="tile-section tile-section-button-list">
         <a class="rounded-button button-action 
-                {% if cosinnus_active_user %}button-like" {% else %}" href="/signup/?acc_req_msg=1" target="_blank"{% endif %}>
+                {% if cosinnus_active_user %}button-like" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
             <span class="rounded-button-inner">
                 {% if liked %}
                     <i clasS="fa fa-heart"></i>
