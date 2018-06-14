@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-13 15:35+0200\n"
+"POT-Creation-Date: 2018-06-14 17:21+0200\n"
 "PO-Revision-Date: 2018-05-29 14:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2131,7 +2131,6 @@ msgstr "Перемістити"
 msgid "A message from %(sender_full_name)s"
 msgstr "Повідомлення від %(sender_full_name)s"
 
-#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "Created"
 msgid "Create Idea"
@@ -3151,6 +3150,21 @@ msgid "Terrain"
 msgstr "Переоформити"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created"
+msgid "Create idea"
+msgstr "Створено"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Next"
+msgstr "Далі"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Choose a location for your idea by dragging the marker!"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "of"
 msgstr ""
 
@@ -3179,20 +3193,6 @@ msgstr "Пошук серед проектів"
 #| msgid "Search in teams"
 msgid "Search this area"
 msgstr "Пошук серед проектів"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Created"
-msgid "Create idea"
-msgstr "Створено"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on."
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Next"
-msgstr "Далі"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Participants"
@@ -3233,6 +3233,15 @@ msgstr "Адміністратори порталу"
 #| msgid "No Description set"
 msgid "No description yet."
 msgstr "Опис не створено"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+msgid "Back to location selection"
+msgstr "Опис відсутній"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -4172,10 +4181,6 @@ msgstr "Ваші зміни були збережені."
 #~| msgid "Regular Dashboard page (1 Column)"
 #~ msgid "3-Column Dashboard Page (Modular)"
 #~ msgstr "Звичайна сторінка інформаційної панелі (1 стовпець)"
-
-#, fuzzy
-#~ msgid "No Location set"
-#~ msgstr "Опис відсутній"
 
 #~ msgid "You are a member. View Project!"
 #~ msgstr "Ви член. Переглянути проект!"

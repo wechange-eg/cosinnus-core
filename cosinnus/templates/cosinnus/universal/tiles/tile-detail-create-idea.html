@@ -42,13 +42,19 @@
 	            <textarea id="idea-create-description" name="description"></textarea>
 	        </div>
 	        
-	        <div class="tile-section">
+	        <div class="tile-section tile-section-button-list">
 	            <a class="pull-right rounded-button button-color-action trigger-create-idea-submit">
-	                <span class="rounded-button-inner">
-	                    {# Translators: __INCLUDE_JS_PO__ #}
-	                    {% trans "Next" %}
-	                </span>
-	            </a>
+                    <span class="rounded-button-inner">
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Next" %}
+                    </span>
+                </a>
+                <a class="pull-right rounded-button button-action trigger-mobile-idea-back mobile-only">
+                    <span class="rounded-button-inner">
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Back to location selection" %}
+                    </span>
+                </a>
 	        </div>
         </div>
     {% endblock form %}

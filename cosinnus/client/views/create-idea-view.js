@@ -19,6 +19,7 @@ module.exports = BaseView.extend({
     events: {
         'click .tile-close-button': 'onCloseClicked',
         'click .trigger-create-idea-submit': 'onSubmitClicked',
+        'click .trigger-mobile-idea-back': 'onMobileIdeaBackClicked',
     },
     
     initialize: function (options, app, controlView) {
@@ -75,6 +76,10 @@ module.exports = BaseView.extend({
 	    	'lon=' + latlng.lng + '&' +
 	    	'description=' + encodeURIComponent(description); 
     	window.location.href = url;
+    },
+    
+    onMobileIdeaBackClicked: function (event) {
+    	this.controlView.triggerMobileIdeaCreate1View(event);
     }
     
 });

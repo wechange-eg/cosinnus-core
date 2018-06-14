@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-13 15:35+0200\n"
+"POT-Creation-Date: 2018-06-14 17:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2104,7 +2104,6 @@ msgstr ""
 msgid "A message from %(sender_full_name)s"
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
 msgid "Create Idea"
 msgstr ""
 
@@ -2928,6 +2927,19 @@ msgid "Terrain"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Create idea"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Next"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Choose a location for your idea by dragging the marker!"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "of"
 msgstr ""
 
@@ -2949,18 +2961,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search this area"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Create idea"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on."
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Next"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -2989,6 +2989,14 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "No description yet."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Back to location selection"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
