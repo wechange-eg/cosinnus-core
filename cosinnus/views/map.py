@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import json
+
 from django.contrib.auth import get_user_model
 from django.utils.decorators import method_decorator
 from django.views.decorators.clickjacking import xframe_options_exempt
@@ -14,11 +16,17 @@ USER_MODEL = get_user_model()
 
 
 class MapView(TemplateView):
+    
+    def collect_map_options(self):
+        return {
+            'basePageUrl': self.request.path,
+        }
 
     def get_context_data(self, **kwargs):
         ctx = {
             'markers': get_map_marker_icon_settings_json(),
             'skip_page_footer': True,
+            'map_options_json': json.dumps(self.collect_map_options())
         }
         item = self.request.GET.get('item', None)
         if item:
@@ -34,12 +42,12 @@ map_view = MapView.as_view()
 
 class TileProjectsView(MapView):
 
-    def get_context_data(self, **kwargs):
-        ctx = super(TileProjectsView, self).get_context_data(**kwargs)
-        ctx.update({
+    def collect_map_options(self, **kwargs):
+        options = super(TileProjectsView, self).collect_map_options(**kwargs)
+        options.update({
             
         })
-        return ctx
+        return options
 
     template_name = 'cosinnus/map/map_page.html'
 

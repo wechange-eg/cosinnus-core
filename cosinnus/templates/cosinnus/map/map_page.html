@@ -39,9 +39,7 @@
         <script>
 		    $('html').on('init:client', function () {
 		        console.log('got init client, now init:module-full-routed');
-		        Backbone.mediator.publish('init:module-full-routed', {
-		          
-		        });
+		        Backbone.mediator.publish('init:module-full-routed', {{ map_options_json|safe }});
 		    });
 		</script>
     </div>

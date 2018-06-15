@@ -744,7 +744,7 @@ module.exports = ContentControlView.extend({
      */
     addCurrentHistoryState: function () {
         var self = this;
-        Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, self.options.basePageURL))
+        Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, ''))
     },
     
     // called with a list of dicts of results freshly returned after a search

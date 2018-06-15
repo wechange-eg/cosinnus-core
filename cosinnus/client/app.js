@@ -25,7 +25,7 @@ var App = function App () {
     self.tileListView = null;
     self.mapView = null;
 
-    self.router = new Router();
+    self.router = null;
     self.mediator = null;
     
     // should have them all here
@@ -36,6 +36,8 @@ var App = function App () {
 		 * filterGroup: <int> if given, filters all content by the given group id
 		 * availableFilters: <dict> the shown result filters by type
 		 * activeFilters: <dict> the active (selected) current result filters by type
+		 * basePageUrl: <str> the eg "/map/" url fragment as base of this page, used to build history URLs 
+		 * 		(independent of search endpoint URLs)
 		 */
     };
     
@@ -49,6 +51,7 @@ var App = function App () {
     };
     self.displayOptions = {}
     self.defaultEl = '#app-fullscreen';
+    self.defaultBasePageUrl = '/map/';
     
     self.passedOptions = null;
     
@@ -88,14 +91,18 @@ var App = function App () {
     self.initModuleFullRouted = function (options) {
     	self.passedOptions = options;
     	
+    	self.router = new Router();
+    	
         // (The first routing will autoinitialize views and model in self.navigate_map())
         Backbone.mediator.subscribe('navigate:map', self.navigate_map, self);
         Backbone.mediator.subscribe('navigate:router', self.router.on_navigate, self);
         
         // Start routing... this will automatically call `self.navigate_map()` once
         util.log('app.js: init routing')
+        var root = options.basePageUrl || self.defaultBasePageUrl;
         Backbone.history.start({
-            pushState: true
+            pushState: true,
+            root: root
         });
     };
     
@@ -120,15 +127,14 @@ var App = function App () {
         // add passed options into params extended over the default options
     	var el = options.el ? options.el : self.defaultEl;
         var displayOptions = $.extend(true, {}, self.defaultDisplayOptions, options.display || {});
-        console.log('DISPLAYYYYY')
-        var settings = options.settings ? JSON.parse(options.settings) : {};
-        settings = $.extend(true, {}, self.defaultSettings, settings);
+        var settings = $.extend(true, {}, self.defaultSettings, options.settings || {});
+        var basePageUrl = options.basePageUrl || self.defaultBasePageUrl;
         
-        self.init_app(el, settings, displayOptions);
+        self.init_app(el, basePageUrl, settings, displayOptions);
     };
     
     /** Main initialization function, this eventually gets called no matter which modules we load. */
-    self.init_app = function (el, settings, displayOptions) {
+    self.init_app = function (el, basePageUrl, settings, displayOptions) {
         util.log('app.js: init_app called with event, params')
         
         self.el = el;
@@ -140,9 +146,6 @@ var App = function App () {
         var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
         var markerIcons = typeof COSINNUS_MAP_MARKER_ICONS !== 'undefined' ? COSINNUS_MAP_MARKER_ICONS : {};
         
-        // TODO: set to actual dynamic current URL!
-        var basePageURL = '/map/';
-        
         self.controlView = new ControlView({
                 el: null, // will only be set if attached to tile-view
                 availableFilters: settings.availableFilters,
@@ -153,7 +156,7 @@ var App = function App () {
                 scrollControlsEnabled: self.displayOptions.showControls && self.displayOptions.showMap,
                 paginationControlsEnabled: self.displayOptions.showTiles,
                 filterGroup: settings.filterGroup,
-                basePageURL: basePageURL,
+                basePageURL: basePageUrl,
             }, 
             self, 
             null

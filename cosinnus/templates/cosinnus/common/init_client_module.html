@@ -4,7 +4,7 @@
     $('html').on('init:client', function () {
         Backbone.mediator.publish('init:{{module}}', {
             el: '#app-{{id}}',
-            settings: '{% if settings %}{{settings|safe}}{% else %}{}{% endif %}',
+            settings: JSON.parse('{% if settings %}{{settings|safe}}{% else %}{}{% endif %}'),
             display: {
                 showMap: true,
                 showTiles: false,

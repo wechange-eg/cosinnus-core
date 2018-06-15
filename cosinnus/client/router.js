@@ -6,7 +6,7 @@ var util = require('lib/util.js');
 module.exports = Backbone.Router.extend({
     
     routes: {
-        'map/': 'route_app_map_tiles'
+        '': 'route_app_map_tiles'
     },
     
     first_route_event: true,
