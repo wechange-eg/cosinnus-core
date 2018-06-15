@@ -35,6 +35,7 @@ module.exports = ContentControlView.extend({
         portalInfo: {}, // portal info by portal-id, from `get_cosinnus_portal_info()`
         controlsEnabled: true,
         filterGroup: null,
+        showMine: false, // URL param. if true, only the current user's own results will be shown. ignored away if user is not logged in.
         
         // in fullscreen mode, this must always be the base URL we started at
         basePageURL: '/map/',
@@ -57,7 +58,6 @@ module.exports = ContentControlView.extend({
             resultsStale: false,
             urlSelectedResultId: null, // URL param. the currently selected result, given in the url
             filterPanelVisible: false,
-            showMine: false, // URL param. if true, only the current user's own results will be shown. ignored away if user is not logged in.
             lastViewBeforeDetailWasListView: false, // a savestate so we know which view to return to after closing the detail view on mobile
         }
     },
@@ -1001,7 +1001,7 @@ module.exports = ContentControlView.extend({
         	this.state.activeFilters['ideas'] = this.options.availableFilters.ideas ? util.ifundef(urlParams.ideas, this.options.activeFilters.ideas) : false;
         }
         if (cosinnus_active_user) {
-        	this.state.showMine = util.ifundef(urlParams.mine, this.state.showMine);
+        	this.options.showMine = util.ifundef(urlParams.mine, this.options.showMine);
         }
     },
     
@@ -1038,7 +1038,7 @@ module.exports = ContentControlView.extend({
                 item: this.state.urlSelectedResultId
             });
         }
-        if (this.state.showMine) {
+        if (this.options.showMine) {
             _.extend(searchParams, {
             	mine: 1
             });

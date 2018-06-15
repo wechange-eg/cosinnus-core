@@ -156,6 +156,7 @@ var App = function App () {
                 paginationControlsEnabled: self.displayOptions.showTiles,
                 filterGroup: settings.filterGroup,
                 basePageURL: basePageUrl,
+                showMine: settings.showMine,
             }, 
             self, 
             null

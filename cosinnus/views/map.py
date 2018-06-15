@@ -62,12 +62,22 @@ class MapView(TemplateView):
 
 map_view = MapView.as_view()
 
+
 class TileView(MapView):
+    
+    show_mine = False
+    
+    def dispatch(self, request, *args, **kwargs):
+        self.show_mine = kwargs.pop('show_mine', self.show_mine)
+        return super(TileView, self).dispatch(request, *args, **kwargs)
     
     def collect_map_options(self, **kwargs):
         options = super(TileView, self).collect_map_options(**kwargs)
+        _settings = {
+            'showMine': self.show_mine,
+        }
         options.update({
-            'settings': _generate_type_settings(projects=True),
+            'settings': _settings,
             'display': {
                 'showMap': False,
                 'showTiles': True,
@@ -81,11 +91,14 @@ class TileView(MapView):
     
 
 class TileProjectsView(TileView):
-
+    
     def collect_map_options(self, **kwargs):
         options = super(TileProjectsView, self).collect_map_options(**kwargs)
+        _settings = options['settings']
+        _settings.update(_generate_type_settings(projects=True))
+        
         options.update({
-            'settings': _generate_type_settings(projects=True)
+            'settings': _settings
         })
         return options
 
