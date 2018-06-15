@@ -364,6 +364,11 @@
     -moz-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.35);
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.35);
 }
+.app-root.tile-detail-open .tile-list:not(.tile-list-splitscreen) {
+    left: 0;
+    width: 50%;
+}
+
 .app-embed {
     position: relative;
 }
@@ -432,6 +437,12 @@
         cursor: default;
     }
     
+}
+
+.app-root.tile-detail-open .tile-list:not(.tile-list-splitscreen) {
+    .grid-sizer, .grid-item { 
+        width: 50%; 
+    }
 }
 
 /** Common styles for both tiles and detail-view */

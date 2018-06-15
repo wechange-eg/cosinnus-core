@@ -78,6 +78,7 @@ module.exports = BaseView.extend({
         this.App.controlView.triggerMobileDetailView();
         // render moment dates
         $.cosinnus.renderMomentDataDate();
+        Backbone.mediator.publish('tile-detail:opened');
     },
     
     // a result is being unselected
@@ -86,6 +87,7 @@ module.exports = BaseView.extend({
         this.render();
         this.App.controlView.untriggerMobileDetailView();
         this.App.controlView.addCurrentHistoryState();
+        Backbone.mediator.publish('tile-detail:closed');
     },
     
     /** Called when a topic link is clicked to filter for that topic only */

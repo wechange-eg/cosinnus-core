@@ -50,6 +50,9 @@ module.exports = ContentControlView.extend({
         });
         
         Backbone.mediator.subscribe('error:search', self.onSearchError, self);
+
+        Backbone.mediator.subscribe('tile-detail:opened', self.onTileDetailOpened, self);
+        Backbone.mediator.subscribe('tile-detail:closed', self.onTileDetailClosed, self);
     },
 
     render: function () {
@@ -215,6 +218,18 @@ module.exports = ContentControlView.extend({
             this.$el.removeClass('disabled');
         }
     },
+
+    onTileDetailOpened: function () {
+    	this.App.$el.addClass('tile-detail-open');
+    	this.App.tileListView.gridRefresh();
+    },
+    
+    onTileDetailClosed: function () {
+    	this.App.$el.removeClass('tile-detail-open');
+    	this.App.tileListView.gridRefresh();
+    },
+    
+    
     
     onSearchError: function() {
         // when the search fails, re-enable the tile-list
