@@ -44,7 +44,6 @@ var App = function App () {
     self.defaultDisplayOptions = {
         showMap: true,
         showTiles: true,
-        tilesFullscreen: false,
         showControls: true,
         fullscreen: true,
         routeNavigation: true

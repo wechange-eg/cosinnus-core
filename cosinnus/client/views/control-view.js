@@ -744,7 +744,7 @@ module.exports = ContentControlView.extend({
      */
     addCurrentHistoryState: function () {
         var self = this;
-        Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, ''))
+        Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, '/'))
     },
     
     // called with a list of dicts of results freshly returned after a search
@@ -985,10 +985,10 @@ module.exports = ContentControlView.extend({
     applyUrlSearchParameters: function (urlParams) {
         _.extend(this.state, {
             activeFilters: {
-                people: util.ifundef(urlParams.people, this.options.activeFilters.people),
-                events: util.ifundef(urlParams.events, this.options.activeFilters.events),
-                projects: util.ifundef(urlParams.projects, this.options.activeFilters.projects),
-                groups: util.ifundef(urlParams.groups, this.options.activeFilters.groups)
+                people: this.options.availableFilters.people ? util.ifundef(urlParams.people, this.options.activeFilters.people) : false,
+                events: this.options.availableFilters.events ? util.ifundef(urlParams.events, this.options.activeFilters.events) : false,
+                projects: this.options.availableFilters.projects ? util.ifundef(urlParams.projects, this.options.activeFilters.projects) : false,
+                groups: this.options.availableFilters.groups ? util.ifundef(urlParams.groups, this.options.activeFilters.groups) : false
             },
             q: util.ifundef(urlParams.q, this.state.q),
             ignoreLocation: util.ifundef(urlParams.ignore_location, this.state.ignoreLocation),
@@ -998,7 +998,7 @@ module.exports = ContentControlView.extend({
             urlSelectedResultId: util.ifundef(urlParams.item, this.state.urlSelectedResultId),
         });
         if (COSINNUS_IDEAS_ENABLED) {
-        	this.state.activeFilters['ideas'] = util.ifundef(urlParams.ideas, this.options.activeFilters.ideas);
+        	this.state.activeFilters['ideas'] = this.options.availableFilters.ideas ? util.ifundef(urlParams.ideas, this.options.activeFilters.ideas) : false;
         }
         if (cosinnus_active_user) {
         	this.state.showMine = util.ifundef(urlParams.mine, this.state.showMine);

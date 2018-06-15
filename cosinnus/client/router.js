@@ -23,6 +23,9 @@ module.exports = Backbone.Router.extend({
         util.log(url)
         
         if (url) {
+        	// since a '/' leading slash would be dropped by the router and we always
+        	// operate on the root url of this router, we have to format the URL like so './...'
+        	url = '.' + url;
             Backbone.Router.prototype.navigate.call(this, url, { 
                 trigger: false,
                 replace: App.router.first_route_event
