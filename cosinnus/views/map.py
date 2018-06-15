@@ -32,6 +32,20 @@ class MapView(TemplateView):
 map_view = MapView.as_view()
 
 
+class TileProjectsView(MapView):
+
+    def get_context_data(self, **kwargs):
+        ctx = super(TileProjectsView, self).get_context_data(**kwargs)
+        ctx.update({
+            
+        })
+        return ctx
+
+    template_name = 'cosinnus/map/map_page.html'
+
+tile_projects_view = TileProjectsView.as_view()
+
+
 class MapEmbedView(TemplateView):
     """ An embeddable, resizable Map view without any other elements than the map """
     

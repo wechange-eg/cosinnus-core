@@ -3,6 +3,7 @@
 <html>
     <head>
         <script type="text/javascript">
+            var cosinnus_base_url = "{{ COSINNUS_BASE_URL|default:'/' }}";
             var COSINNUS_MAP_MARKER_ICONS = JSON.parse('{% render_map_marker_icon_json %}');
             var COSINNUS_MAP_TOPICS_JSON = JSON.parse('{% render_cosinnus_topics_json %}');
             var COSINNUS_MAP_OPTIONS = JSON.parse('{{ SETTINGS.COSINNUS_MAP_OPTIONS|json|safe }}');
@@ -18,6 +19,10 @@
         <script src="{% static 'js/vendor/leaflet.js' %}"></script>
         <script src="{% static 'js/vendor/leaflet.markercluster-0.7.js' %}"></script>
         <script src="{% static 'js/vendor/select2.min.js' %}"></script>
+        <script src="{% static 'js/vendor/moment-with-langs.min.js' %}"></script>
+        <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/cosinnus.js' %}?v=0.37"></script>
+        <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
         <script src="{% static 'js/client.js' %}?v=0.7"></script>
         <link href="{% static 'css/bootstrap3-cosinnus.css' %}" rel="stylesheet">
         <link href="{% static 'css/vendor/font-awesome.min.css' %}" rel="stylesheet">

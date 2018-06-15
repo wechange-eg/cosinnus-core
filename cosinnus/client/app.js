@@ -39,14 +39,19 @@ var App = function App () {
 		 */
     };
     
-    self.defaulDisplayOptions = {
+    self.defaultDisplayOptions = {
         showMap: true,
         showTiles: true,
+        tilesFullscreen: false,
         showControls: true,
         fullscreen: true,
         routeNavigation: true
     };
     self.displayOptions = {}
+    self.defaultEl = '#app-fullscreen';
+    
+    self.passedOptions = null;
+    
     
     /** Main entry point */
     self.start = function () {
@@ -66,7 +71,7 @@ var App = function App () {
         // init-module calls. inside a listener to the 'init:client' event,
         // one of these need to be called from the template to initialize the required modules
         Backbone.mediator.subscribe('init:module-full-routed', self.initModuleFullRouted, self);
-        Backbone.mediator.subscribe('init:module-embed', self.initModuleEmbed, self);
+        Backbone.mediator.subscribe('init:module-embed', self.initAppFromOptions, self);
         
         // - the 'init:client' signal is the marker for all pages using this client.js to now
         //      publish the "init:<module>" event for whichever module configuration they wish to load (see above)
@@ -80,8 +85,10 @@ var App = function App () {
     
     /** Module configuration for a fullscreen App with full control of the page, that uses routing and history.
      *  This module uses the full set of default options and gets passed no options */
-    self.initModuleFullRouted = function () {
-        // (The first routing will autoinitialize views and model)
+    self.initModuleFullRouted = function (options) {
+    	self.passedOptions = options;
+    	
+        // (The first routing will autoinitialize views and model in self.navigate_map())
         Backbone.mediator.subscribe('navigate:map', self.navigate_map, self);
         Backbone.mediator.subscribe('navigate:router', self.router.on_navigate, self);
         
@@ -92,51 +99,42 @@ var App = function App () {
         });
     };
     
-    /** Module configuration for an embeddable App (in a widget or iframe).
-     *  Many options can be configured for hiding the tile-list, disabling the visual control-view
-     *  or enabling only specific Result model types. */
-    self.initModuleEmbed = function (options) {
-        // add passed options into params
-        var params = {
-            el: options.el,
-            display: options.display,
-            settings: options.settings,
-        }
-        self.init_app(params);
-    };
-    
     /** Called on navigate, from router.js */
     self.navigate_map = function (event) {
+    	// this will be called the on the first navigate to the URL, so we use
+    	// it to init the app
         if (self.controlView == null) {
-            self.init_default_app();
+            self.initAppFromOptions(self.passedOptions);
         } else {
             Backbone.mediator.publish('app:stale-results', {reason: 'map-navigate'});
         }
     };
     
-    /** Called when the App is auto-initied on a fullscreen page with no further parameters. 
-     *  Uses mostly default settings self.defaultSettings and self.defaultDisplay */
-    self.init_default_app = function () {
-        // add defaults into params
-        var params = {
-            el: '#app-fullscreen',
-            display: self.defaulDisplayOptions
-        }
-        self.init_app(params);
+
+    /** Inits the app with many or no passed options.
+     *  Default settings will be used for any options not passed.
+     * 
+     *  Many options can be configured for hiding the tile-list, disabling the visual control-view
+     *  or enabling only specific Result model types. */
+    self.initAppFromOptions = function (options) {
+        // add passed options into params extended over the default options
+    	var el = options.el ? options.el : self.defaultEl;
+        var displayOptions = $.extend(true, {}, self.defaultDisplayOptions, options.display || {});
+        console.log('DISPLAYYYYY')
+        var settings = options.settings ? JSON.parse(options.settings) : {};
+        settings = $.extend(true, {}, self.defaultSettings, settings);
+        
+        self.init_app(el, settings, displayOptions);
     };
     
     /** Main initialization function, this eventually gets called no matter which modules we load. */
-    self.init_app = function (params) {
+    self.init_app = function (el, settings, displayOptions) {
         util.log('app.js: init_app called with event, params')
         
-        /* params contains:
-         * - el: DOM element
-         * - settings: JSON config dict
-         */
-        var settings = params.settings ? JSON.parse(params.settings) : {};
-        settings = $.extend(true, {}, self.defaultSettings, settings);
-        var display = params.display || {};
-        self.displayOptions = $.extend(true, {}, self.defaultDisplayOptions, display);
+        self.el = el;
+        self.$el = $(self.el);
+        
+        self.displayOptions = displayOptions;
         
         var topicsJson = typeof COSINNUS_MAP_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TOPICS_JSON : {};
         var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
@@ -144,9 +142,6 @@ var App = function App () {
         
         // TODO: set to actual dynamic current URL!
         var basePageURL = '/map/';
-        
-        self.el = params.el;
-        self.$el = $(self.el);
         
         self.controlView = new ControlView({
                 el: null, // will only be set if attached to tile-view
@@ -171,7 +166,7 @@ var App = function App () {
         
         if (self.displayOptions.showMap) {
             var mapView = new MapView({
-                elParent: params.el,
+                elParent: self.el,
                 location: settings.location,
                 markerIcons: markerIcons,
                 fullscreen: self.displayOptions.fullscreen,
@@ -186,7 +181,7 @@ var App = function App () {
         
         if (self.displayOptions.showTiles) {
             var tileListView = new TileListView({
-                elParent: params.el,
+                elParent: self.el,
                 fullscreen: self.displayOptions.fullscreen,
                 splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
             }, 
@@ -206,7 +201,7 @@ var App = function App () {
         
         var tileDetailView = new TileDetailView({
             model: null,
-            elParent: params.el,
+            elParent: self.el,
             fullscreen: self.displayOptions.fullscreen,
             splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
         }, 
