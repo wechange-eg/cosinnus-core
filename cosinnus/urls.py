@@ -37,9 +37,8 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^search/$', 'search.search', name='search'),
     
     url(r'^map/$', 'map.map_view', name='map'),
-    url(r'^mapprojects/$', 'map.tile_projects_view', name='tile-projects'),
-    url(r'^mapprojects/mine/$', 'map.tile_projects_view', name='tile-projects-mine', kwargs={'show_mine': True}),
-    
+    #url(r'^mapprojects/$', 'map.tile_projects_view', name='tile-projects'),
+    #url(r'^mapprojects/mine/$', 'map.tile_projects_view', name='tile-projects-mine', kwargs={'show_mine': True}),
     #url(r'^mapprojects/mine/$', 'map.projects_view', name='mapprojects-mine'),
     
     

@@ -861,9 +861,6 @@ module.exports = ContentControlView.extend({
         self.state.topicFiltersActive = false;
         self.state.typeFiltersActive = false;
         
-        if (self.state.ignoreLocation) {
-            self.state.filtersActive = true;
-        }
         if (self.state.activeTopicIds.length > 0) {
             self.state.filtersActive = true;
             self.state.topicFiltersActive = true;
