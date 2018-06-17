@@ -389,6 +389,7 @@ class DetailedIdeaMapResult(DetailedMapResult):
     fields = copy(DetailedMapResult.fields)
     fields.update({
         'projects': [],
+        'followed': False,
     })
     
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
@@ -404,6 +405,7 @@ class DetailedIdeaMapResult(DetailedMapResult):
             'action_url_1': _prepend_url(user, obj.portal) + reverse('cosinnus:group-add') + ('?idea=%s' % itemid_from_searchresult(haystack_result)),
             'creator_name': obj.creator.get_full_name(),
             'creator_slug': obj.creator.username,
+            'followed': obj.likes.filter(followed=True, liked=True, user__id=user.id).count() > 0,
         })
         ret = super(DetailedIdeaMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
         return ret

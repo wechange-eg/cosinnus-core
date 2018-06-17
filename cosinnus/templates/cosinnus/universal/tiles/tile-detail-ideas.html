@@ -53,15 +53,30 @@
             <span class="rounded-button-inner">
                 {% if liked %}
                     <i clasS="fa fa-heart"></i>
-	                {# Translators: __INCLUDE_JS_PO__ #}
-	                {% trans "Liked" %}
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Liked" %}
                 {% else %}
-	                <i clasS="fa fa-heart-o"></i>
-	                {# Translators: __INCLUDE_JS_PO__ #}
-	                {% trans "Like" %}
+                    <i clasS="fa fa-heart-o"></i>
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Like" %}
                 {% endif %}
             </span>
         </a>
+        {% if liked %}
+	        <a class="rounded-button button-action button-follow">
+	            <span class="rounded-button-inner">
+	                {% if followed %}
+	                    <i clasS="fa fa-bell"></i>
+	                    {# Translators: __INCLUDE_JS_PO__ #}
+	                    {% trans "Following" %}
+	                {% else %}
+	                    <i clasS="fa fa-bell-o"></i>
+	                    {# Translators: __INCLUDE_JS_PO__ #}
+	                    {% trans "Follow" %}
+	                {% endif %}
+	            </span>
+	        </a>
+        {% endif %}
         <a href="{{ action_url_1 }}" target="_blank" class="rounded-button button-action">
             <span class="rounded-button-inner">
                 {# Translators: __INCLUDE_JS_PO__ #}
@@ -76,10 +91,22 @@
 	            </span>
 	        </a>
         {% endif %}
+    </div>
+    
+    <div class="no-input">
+        <div class="now-following-message message-success extra-space-top" style="display: none;">
+            <i class="fa fa-bell"></i>
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "You will receive a notification when a project is created for your liked idea. If you do not want notifications, click the unfollow button!" %}
+        </div>
          
         <div class="like-button-error message-error extra-space-top" style="display: none;">
             {# Translators: __INCLUDE_JS_PO__ #}
             {% trans "Could not save your like setting because of an error." %}
+        </div>
+        <div class="follow-button-error message-error extra-space-top" style="display: none;">
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Could not save your follow setting because of an error." %}
         </div>
     </div>
 {% endblock %}

@@ -475,19 +475,25 @@ module.exports = ContentControlView.extend({
     	} else {
     		util.log('Liking cancelled - invalid result type for liking: ' + result.get('type'))
     	}
-    	var to_like = result.get('liked') ? '0' : 1;
+    	var to_like = result.get('liked') ? '0' : '1';
     	var unliked_count = result.get('participant_count') - (result.get('liked') ? 1 : 0);
     	var likeHadErrors = false;
     	
     	util.log('Sending like request for slug "' + result.get('slug') + '" and like: ' + to_like);
+    	var data = {
+        	ct: ct,
+        	slug: result.get('slug'),
+        	like: to_like,
+        };
+    	// if we unlike it, also unfollow this idea
+    	if (to_like == '0') {
+    		data['follow'] = '0';
+    	}
+    	
     	self.currentDetailHttpRequest = $.ajax(url, {
             type: 'POST',
             timeout: self.searchXHRTimeout,
-            data: {
-            	ct: ct,
-            	slug: result.get('slug'),
-            	like: to_like,
-            },
+            data: data,
             success: function (data, textStatus) {
                 
                 util.log('got resultssss for like')
@@ -496,8 +502,12 @@ module.exports = ContentControlView.extend({
                 
                 if ('liked' in data) {
                 	result.set('participant_count', unliked_count + (data.liked ? 1 : 0));
-                    result.set('liked', data.liked);
+                	result.set('liked', data.liked);
+                	result.set('followed', data.followed);
                     // graphics update happens via subscriptions on change:liked
+                	if (data.liked && data.followed) {
+                		self.App.$el.find('.now-following-message').show();
+                	}
                 } 
             },
             error: function (xhr, textStatus) {
@@ -512,6 +522,58 @@ module.exports = ContentControlView.extend({
                 }
                 if (likeHadErrors) {
                     $('.like-button-error').show();
+                }
+            }
+        });
+    },
+    
+
+    /** Will follow/unfollow a given result, depending on the current followed status */
+    triggerResultFollowOrUnfollow: function (result) {
+    	var self = this;
+    	var url = '/like/'
+    	var ct = null;
+    	if (result.get('type') == 'ideas') {
+    		ct = 'cosinnus.CosinnusIdea';
+    	} else {
+    		util.log('Following cancelled - invalid result type for following: ' + result.get('type'))
+    	}
+    	var to_follow = result.get('followed') ? '0' : 1;
+    	var followHadErrors = false;
+    	
+    	util.log('Sending follow request for slug "' + result.get('slug') + '" and follow: ' + to_follow);
+    	var data = {
+        	ct: ct,
+        	slug: result.get('slug'),
+        	follow: to_follow,
+        };
+    	self.currentDetailHttpRequest = $.ajax(url, {
+            type: 'POST',
+            timeout: self.searchXHRTimeout,
+            data: data,
+            success: function (data, textStatus) {
+                
+                util.log('got resultssss for follow')
+                util.log(data)
+                util.log(textStatus)
+                
+                if ('followed' in data) {
+                    result.set('followed', data.followed);
+                    // graphics update happens via subscriptions on change:followed
+                } 
+            },
+            error: function (xhr, textStatus) {
+                util.log('control-view.js: Follow XHR failed.')
+                followHadErrors = true;
+            },
+            complete: function (xhr, textStatus) {
+                util.log('control-view.js: Follow complete: ' + textStatus);
+                
+                if (textStatus !== 'success') {
+                	followHadErrors = true;
+                }
+                if (followHadErrors) {
+                    $('.follow-button-error').show();
                 }
             }
         });

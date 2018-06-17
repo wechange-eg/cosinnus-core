@@ -29,6 +29,7 @@ module.exports = BaseView.extend({
         'click .tile-close-button': 'onDeselectClicked',
         'click .topic-filter-link': 'onTopicLinkClicked',
         'click .button-like': 'onLikeButtonClicked',
+        'click .button-follow': 'onFollowButtonClicked',
     },
     
     initialize: function (options, app) {
@@ -71,7 +72,8 @@ module.exports = BaseView.extend({
         }
 
         this.model.on({
-            'change:liked': self.thisContext(self.render),
+        	'change:liked': self.thisContext(self.render),
+        	'change:followed': self.thisContext(self.render),
         });
         this.fitTemplate();
         this.render();
@@ -124,6 +126,9 @@ module.exports = BaseView.extend({
     
     onLikeButtonClicked: function (event) {
     	this.App.controlView.triggerResultLikeOrUnlike(this.model);
-    }
+    },
     
+    onFollowButtonClicked: function (event) {
+    	this.App.controlView.triggerResultFollowOrUnfollow(this.model);
+    }
 });
