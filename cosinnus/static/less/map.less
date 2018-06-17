@@ -634,7 +634,7 @@
 
 .app-root .tile-detail {
     width: 50%;
-    height: 100%;
+    height: ~"calc(100% - 55px)";
     padding: 20px 25px;
     
     overflow-y: scroll;
@@ -849,6 +849,10 @@
 }
 
 
+.app-root.no-navbar .tile-detail {
+    height: 100%;
+}
+
 /** The full-50%-screen tile overlay */
 .app-fullscreen .tile-detail {
     position: fixed;
@@ -856,7 +860,7 @@
     left: 50%;
     z-index: 4;
     margin-top: 55px;
-    height: 100%;
+    height: ~"calc(100% - 55px)";
     
     &.tile-create-idea {
         z-index: 5;
@@ -872,6 +876,7 @@
 }
 .app-fullscreen.no-navbar .tile-detail {
     margin-top: 0;
+    height: 100%;
 }
 
 
