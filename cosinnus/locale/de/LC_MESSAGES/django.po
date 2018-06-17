@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-14 17:21+0200\n"
-"PO-Revision-Date: 2018-06-14 17:25+0200\n"
+"POT-Creation-Date: 2018-06-17 17:53+0200\n"
+"PO-Revision-Date: 2018-06-17 17:55+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -229,6 +229,17 @@ msgstr "%(sender_name)s hat dich eingeladen, \"%(team_name)s\" auf %(portal_name
 #, python-format
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s hat dich eingeladen, %(team_name)s beizutreten auf %(portal_name)s!"
+
+msgid "Has created"
+msgstr "Hat erstellt"
+
+#, python-format
+msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
+msgstr "%(sender_name)s hat gerade aus einer Idee, der du folgst, das Projekt \"%(team_name)s\" auf %(portal_name)s erstellt! <br/><br/> Um es dir anzuschauen, klicke bitte auf den unten stehenden Link. Dort kannst du auch dem Projekt beitreten wenn du möchtest."
+
+#, python-format
+msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
+msgstr "%(sender_name)s hat gerade das Projekt \"%(team_name)s\" aus einer Idee, der du folgst, erstellt!"
 
 msgid "Deutsch"
 msgstr "Deutsch"
@@ -808,8 +819,9 @@ msgstr "Benutzer_in"
 msgid "Liked"
 msgstr "Gefällt dir"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Following"
-msgstr "Following"
+msgstr "Gefolgt"
 
 msgid "Create-Project or Group Button"
 msgstr "Projekt oder Gruppe-erstellen Button"
@@ -1722,18 +1734,21 @@ msgstr "Gruppe bearbeiten"
 msgid "Edit Project"
 msgstr "Projekt bearbeiten"
 
-msgid "Let's bring this idea to life! (TODO: slogan, and is the text ok?)!"
-msgstr ""
+msgid "Let's bring this idea to life!"
+msgstr "Lass uns diese Idee verwirklichen!"
 
 #, python-format
 msgid "Great to see you're creating a project from the idea \"%(idea_name)s\"!"
-msgstr ""
+msgstr "Toll, dass du ein Projekt aus der Idee \"%(idea_name)s\" erstellst!"
 
 msgid "Once you have created your project, everyone who liked (and followed) the idea will receive a notification! They can then jump in and become a member of your new project. Don't worry - you still have to approve who may join and who can't when they request a membership."
-msgstr ""
+msgstr "Sobald du das Projekt erstellt hast, werden alle, die die Idee geliked haben (und ihr folgen), eine Benachrichtigung bekommen. Sie können dann sofort die Mitgliedschaft im Projekt beantragen. Du kannst natürlich bestimmen, wer Mitglied werden darf und wer nicht."
 
 msgid "Your new project will also be displayed on the idea itself, so that everyone can see it and join in later on."
-msgstr ""
+msgstr "Dein neues Projekt wird auch auf der Idee selbst angezeigt, so dass Leute es auch später noch sehen und mitmachen können."
+
+msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
+msgstr "Natürlich kannst du auch ein Projekt ohne diese Verbindung zur Idee erstellen - klicke dazu einfach links \"Projekt erstellen\"."
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "In einem der eingegebenen Felder trat ein Fehler auf. Bitte korrigiere ihn vor dem Speichern!"
@@ -2144,17 +2159,17 @@ msgstr "Ja"
 msgid "Edit Idea"
 msgstr "Idee bearbeiten"
 
-msgid "We make your ideas heard (TODO: slogan, and is the text ok?)!"
-msgstr ""
+msgid "We make your ideas heard!"
+msgstr "Wir verschaffen deinen Ideen Aufmerksamkeit!"
 
 msgid "Ideas are a great way to inspire poeple and start a project in your region!"
-msgstr ""
+msgstr "Ideen bieten eine tolle Möglichkeit, Leute zu inspirieren und ein Projekt in deiner Region zu starten!"
 
 msgid "Anyone can create a project based on your idea and there is no limit on how many projects can be created. Your idea will remain visible and will even show a list of all the projects inspired by it!"
-msgstr ""
+msgstr "Jeder kann basierend auf deiner Idee ein Projekt erstellen und es können beliebig viele Projekte erstellt werden. Deine Idee bleibt sichtbar und zeigt sogar eine Liste aller Projekte, die davon inspiriert wurden!"
 
 msgid "You and anyone who like (and follow) your idea will be notified when a new project gets created from it. This way, everyone who is interested can jump right into it and become active in the new project (they still have to ask permission to become a member)."
-msgstr ""
+msgstr "Du und alle Anderen, die deine Idee geliked haben (und ihr folgen), werden benachrichtigt, wenn ein neues Projekt daraus erstellt wird. So kann jeder, der Interesse hatte, sofort loslegen und im Projekt aktiv werden (die Mitgliedschaftsanfrage im Projekt muss aber immer durch den Projektadministrator bestätigt werden)."
 
 msgid "Enter a descriptive title for your idea"
 msgstr "Gib einen passenden Titel für deine Idee an"
@@ -3230,6 +3245,10 @@ msgstr "Gruppe anschreiben"
 msgid "Author"
 msgstr "Autor"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "Follow"
+msgstr "Folgen"
+
 #
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Project from Idea"
@@ -3240,8 +3259,16 @@ msgid "Edit your Idea"
 msgstr "Deine Idee bearbeiten"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
+msgstr "Du erhältst eine Benachrichtigung, wenn ein Projekt aus dieser Idee erstellt wird. Wenn du das nicht möchtest, klicke oben den Entfolgen-Button!"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Could not save your like setting because of an error."
 msgstr "Konnte deine \"Gefällt mir\"-Angabe aufgrund eines Fehlers nicht speichern."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your follow setting because of an error."
+msgstr "Konnte deine Folgen-Einstellung aufgrund eines Fehlers nicht speichern."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"

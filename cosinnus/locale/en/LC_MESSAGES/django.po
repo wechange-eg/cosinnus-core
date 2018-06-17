@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-14 17:21+0200\n"
+"POT-Creation-Date: 2018-06-17 17:53+0200\n"
 "PO-Revision-Date: 2018-05-22 12:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -227,6 +227,17 @@ msgstr ""
 
 #, python-format
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgstr ""
+
+msgid "Has created"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
 msgstr ""
 
 msgid "Deutsch"
@@ -827,6 +838,7 @@ msgstr ""
 msgid "Liked"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Following"
 msgstr ""
 
@@ -1755,7 +1767,7 @@ msgstr "Edit Project"
 msgid "Edit Project"
 msgstr "Edit Project"
 
-msgid "Let's bring this idea to life! (TODO: slogan, and is the text ok?)!"
+msgid "Let's bring this idea to life!"
 msgstr ""
 
 #, python-format
@@ -1766,6 +1778,9 @@ msgid "Once you have created your project, everyone who liked (and followed) the
 msgstr ""
 
 msgid "Your new project will also be displayed on the idea itself, so that everyone can see it and join in later on."
+msgstr ""
+
+msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
 msgstr ""
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
@@ -2210,7 +2225,7 @@ msgstr ""
 msgid "Edit Idea"
 msgstr ""
 
-msgid "We make your ideas heard (TODO: slogan, and is the text ok?)!"
+msgid "We make your ideas heard!"
 msgstr ""
 
 msgid "Ideas are a great way to inspire poeple and start a project in your region!"
@@ -3168,6 +3183,10 @@ msgid "Author"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Follow"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "Create Project"
 msgid "Create Project from Idea"
@@ -3178,7 +3197,15 @@ msgid "Edit your Idea"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Could not save your like setting because of an error."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your follow setting because of an error."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
