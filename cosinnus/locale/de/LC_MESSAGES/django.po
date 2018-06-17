@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-17 17:53+0200\n"
-"PO-Revision-Date: 2018-06-17 17:55+0200\n"
+"PO-Revision-Date: 2018-06-17 21:06+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -2148,7 +2148,7 @@ msgstr "Diese Idee löschen"
 
 #, python-format
 msgid "Do you really want to delete idea „%(title)s“?"
-msgstr "Möchtest du die Idee “%(title)s” verlassen?"
+msgstr "Möchtest du die Idee “%(title)s” wirklich löschen?"
 
 msgid "Delete Idea"
 msgstr "Idee löschen"
