@@ -35,6 +35,7 @@ module.exports = ContentControlView.extend({
         portalInfo: {}, // portal info by portal-id, from `get_cosinnus_portal_info()`
         controlsEnabled: true,
         filterGroup: null,
+        showMine: false, // URL param. if true, only the current user's own results will be shown. ignored away if user is not logged in.
         
         // in fullscreen mode, this must always be the base URL we started at
         basePageURL: '/map/',
@@ -57,7 +58,6 @@ module.exports = ContentControlView.extend({
             resultsStale: false,
             urlSelectedResultId: null, // URL param. the currently selected result, given in the url
             filterPanelVisible: false,
-            showMine: false, // URL param. if true, only the current user's own results will be shown. ignored away if user is not logged in.
             lastViewBeforeDetailWasListView: false, // a savestate so we know which view to return to after closing the detail view on mobile
         }
     },
@@ -475,19 +475,25 @@ module.exports = ContentControlView.extend({
     	} else {
     		util.log('Liking cancelled - invalid result type for liking: ' + result.get('type'))
     	}
-    	var to_like = result.get('liked') ? '0' : 1;
+    	var to_like = result.get('liked') ? '0' : '1';
     	var unliked_count = result.get('participant_count') - (result.get('liked') ? 1 : 0);
     	var likeHadErrors = false;
     	
     	util.log('Sending like request for slug "' + result.get('slug') + '" and like: ' + to_like);
+    	var data = {
+        	ct: ct,
+        	slug: result.get('slug'),
+        	like: to_like,
+        };
+    	// if we unlike it, also unfollow this idea
+    	if (to_like == '0') {
+    		data['follow'] = '0';
+    	}
+    	
     	self.currentDetailHttpRequest = $.ajax(url, {
             type: 'POST',
             timeout: self.searchXHRTimeout,
-            data: {
-            	ct: ct,
-            	slug: result.get('slug'),
-            	like: to_like,
-            },
+            data: data,
             success: function (data, textStatus) {
                 
                 util.log('got resultssss for like')
@@ -496,8 +502,12 @@ module.exports = ContentControlView.extend({
                 
                 if ('liked' in data) {
                 	result.set('participant_count', unliked_count + (data.liked ? 1 : 0));
-                    result.set('liked', data.liked);
+                	result.set('liked', data.liked);
+                	result.set('followed', data.followed);
                     // graphics update happens via subscriptions on change:liked
+                	if (data.liked && data.followed) {
+                		self.App.$el.find('.now-following-message').show();
+                	}
                 } 
             },
             error: function (xhr, textStatus) {
@@ -512,6 +522,58 @@ module.exports = ContentControlView.extend({
                 }
                 if (likeHadErrors) {
                     $('.like-button-error').show();
+                }
+            }
+        });
+    },
+    
+
+    /** Will follow/unfollow a given result, depending on the current followed status */
+    triggerResultFollowOrUnfollow: function (result) {
+    	var self = this;
+    	var url = '/like/'
+    	var ct = null;
+    	if (result.get('type') == 'ideas') {
+    		ct = 'cosinnus.CosinnusIdea';
+    	} else {
+    		util.log('Following cancelled - invalid result type for following: ' + result.get('type'))
+    	}
+    	var to_follow = result.get('followed') ? '0' : 1;
+    	var followHadErrors = false;
+    	
+    	util.log('Sending follow request for slug "' + result.get('slug') + '" and follow: ' + to_follow);
+    	var data = {
+        	ct: ct,
+        	slug: result.get('slug'),
+        	follow: to_follow,
+        };
+    	self.currentDetailHttpRequest = $.ajax(url, {
+            type: 'POST',
+            timeout: self.searchXHRTimeout,
+            data: data,
+            success: function (data, textStatus) {
+                
+                util.log('got resultssss for follow')
+                util.log(data)
+                util.log(textStatus)
+                
+                if ('followed' in data) {
+                    result.set('followed', data.followed);
+                    // graphics update happens via subscriptions on change:followed
+                } 
+            },
+            error: function (xhr, textStatus) {
+                util.log('control-view.js: Follow XHR failed.')
+                followHadErrors = true;
+            },
+            complete: function (xhr, textStatus) {
+                util.log('control-view.js: Follow complete: ' + textStatus);
+                
+                if (textStatus !== 'success') {
+                	followHadErrors = true;
+                }
+                if (followHadErrors) {
+                    $('.follow-button-error').show();
                 }
             }
         });
@@ -744,7 +806,7 @@ module.exports = ContentControlView.extend({
      */
     addCurrentHistoryState: function () {
         var self = this;
-        Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, self.options.basePageURL))
+        Backbone.mediator.publish('navigate:router', self.buildSearchQueryURL(false).replace(self.searchEndpointURL, '/'))
     },
     
     // called with a list of dicts of results freshly returned after a search
@@ -861,9 +923,6 @@ module.exports = ContentControlView.extend({
         self.state.topicFiltersActive = false;
         self.state.typeFiltersActive = false;
         
-        if (self.state.ignoreLocation) {
-            self.state.filtersActive = true;
-        }
         if (self.state.activeTopicIds.length > 0) {
             self.state.filtersActive = true;
             self.state.topicFiltersActive = true;
@@ -985,10 +1044,10 @@ module.exports = ContentControlView.extend({
     applyUrlSearchParameters: function (urlParams) {
         _.extend(this.state, {
             activeFilters: {
-                people: util.ifundef(urlParams.people, this.options.activeFilters.people),
-                events: util.ifundef(urlParams.events, this.options.activeFilters.events),
-                projects: util.ifundef(urlParams.projects, this.options.activeFilters.projects),
-                groups: util.ifundef(urlParams.groups, this.options.activeFilters.groups)
+                people: this.options.availableFilters.people ? util.ifundef(urlParams.people, this.options.activeFilters.people) : false,
+                events: this.options.availableFilters.events ? util.ifundef(urlParams.events, this.options.activeFilters.events) : false,
+                projects: this.options.availableFilters.projects ? util.ifundef(urlParams.projects, this.options.activeFilters.projects) : false,
+                groups: this.options.availableFilters.groups ? util.ifundef(urlParams.groups, this.options.activeFilters.groups) : false
             },
             q: util.ifundef(urlParams.q, this.state.q),
             ignoreLocation: util.ifundef(urlParams.ignore_location, this.state.ignoreLocation),
@@ -998,10 +1057,10 @@ module.exports = ContentControlView.extend({
             urlSelectedResultId: util.ifundef(urlParams.item, this.state.urlSelectedResultId),
         });
         if (COSINNUS_IDEAS_ENABLED) {
-        	this.state.activeFilters['ideas'] = util.ifundef(urlParams.ideas, this.options.activeFilters.ideas);
+        	this.state.activeFilters['ideas'] = this.options.availableFilters.ideas ? util.ifundef(urlParams.ideas, this.options.activeFilters.ideas) : false;
         }
         if (cosinnus_active_user) {
-        	this.state.showMine = util.ifundef(urlParams.mine, this.state.showMine);
+        	this.options.showMine = util.ifundef(urlParams.mine, this.options.showMine);
         }
     },
     
@@ -1038,7 +1097,7 @@ module.exports = ContentControlView.extend({
                 item: this.state.urlSelectedResultId
             });
         }
-        if (this.state.showMine) {
+        if (this.options.showMine) {
             _.extend(searchParams, {
             	mine: 1
             });

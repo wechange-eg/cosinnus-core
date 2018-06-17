@@ -6,7 +6,7 @@ var util = require('lib/util.js');
 module.exports = Backbone.Router.extend({
     
     routes: {
-        'map/': 'route_app_map_tiles'
+        '': 'route_app_map_tiles'
     },
     
     first_route_event: true,
@@ -23,6 +23,9 @@ module.exports = Backbone.Router.extend({
         util.log(url)
         
         if (url) {
+        	// since a '/' leading slash would be dropped by the router and we always
+        	// operate on the root url of this router, we have to format the URL like so './...'
+        	url = '.' + url;
             Backbone.Router.prototype.navigate.call(this, url, { 
                 trigger: false,
                 replace: App.router.first_route_event

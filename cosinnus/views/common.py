@@ -150,22 +150,23 @@ def do_like(request, **kwargs):
             pass
         else:
             liked_obj.delete()
+            liked_obj = None
+    else:
+        if liked_obj is None:
+            # initialize an object but don't save it yet
+            liked_obj = LikeObject(content_type=content_type, object_id=obj.id, user=request.user, liked=False)
             
-    if liked_obj is None:
-        # initialize an object but don't save it yet
-        liked_obj = LikeObject(content_type=content_type, object_id=obj.id, user=request.user, liked=False)
+        if not like is None:
+            liked_obj.liked = like == '1'
+        if not follow is None:
+            liked_obj.followed =  follow == '1'
+            
+        liked_obj.save()
         
-    if not like is None:
-        liked_obj.liked = like == '1'
-    if not follow is None:
-        liked_obj.followed =  follow == '1'
-        
-    liked_obj.save()
+        # update the liked object's index
+        if hasattr(obj, 'update_index'):
+            obj.update_index()
     
-    # update the liked object's index
-    if hasattr(obj, 'update_index'):
-        obj.update_index()
-    
-    return JsonResponse({'liked': like == '1', 'followed': follow == '1'})
+    return JsonResponse({'liked': liked_obj and liked_obj.liked or False, 'followed': liked_obj and liked_obj.followed or False})
     
     

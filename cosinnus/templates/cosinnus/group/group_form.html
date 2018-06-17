@@ -54,7 +54,7 @@
     {% if not object and request.GET.idea and group_model == "CosinnusProject" %}
         <div class="alert alert-success">
             <i class="fa fa-lightbulb-o fa-3x"></i>
-            <h4>{% trans "Let's bring this idea to life! (TODO: slogan, and is the text ok?)!" %}</h4>
+            <h4>{% trans "Let's bring this idea to life!" %}</h4>
             <div class="v-offset-s">
                 <p>
                     {% blocktrans with idea_name=request.GET.name %}Great to see you're creating a project from the idea "{{ idea_name }}"!{% endblocktrans %}
@@ -70,6 +70,12 @@
                     {% trans "Your new project will also be displayed on the idea itself, so that everyone can see it and join in later on." %}
                 </p>
             </div>
+            <div class="v-offset-s">
+                <p>
+                    {% trans 'Of course you can also create a project without a connection to the idea - just click "Create Project" on the left side to do so.' %}
+                </p>
+            </div>
+            
         </div>
     {% endif %}
 

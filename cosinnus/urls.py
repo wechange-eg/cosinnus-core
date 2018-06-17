@@ -19,7 +19,6 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^users/$', 'user.user_list', name='user-list'),
     
     url(r'^portal/admins/$', 'user.portal_admin_list', name='portal-admin-list'),
-    #url(r'^users/map/$', 'user.user_list_map', name='user-list-map'),
     url(r'^user/(?P<username>[^/]+)/$', 'profile.detail_view', name='profile-detail'),
     #url(r'^user/(?P<username>[^/]+)/edit/$', 'user.user_update', name='user-edit'),
     
@@ -38,6 +37,11 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^search/$', 'search.search', name='search'),
     
     url(r'^map/$', 'map.map_view', name='map'),
+    #url(r'^mapprojects/$', 'map.tile_projects_view', name='tile-projects'),
+    #url(r'^mapprojects/mine/$', 'map.tile_projects_view', name='tile-projects-mine', kwargs={'show_mine': True}),
+    #url(r'^mapprojects/mine/$', 'map.projects_view', name='mapprojects-mine'),
+    
+    
     url(r'^map/embed/$', 'map.map_embed_view', name='map-embed'),
     url(r'^map/search/$', 'map_api.map_search_endpoint', name='map-search-endpoint'),
     url(r'^map/search/(?P<filter_group_id>\d+)/$', 'map_api.map_search_endpoint', name='map-search-endpoint-filtered'),

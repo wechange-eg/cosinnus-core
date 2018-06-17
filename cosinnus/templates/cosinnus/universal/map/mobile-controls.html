@@ -1,6 +1,6 @@
 {% if COSINNUS_IDEAS_ENABLED %}
 	<div class="map-mobile-controls left-side mobile-only mobile-view mobile-view-map-visible-block">
-		<a {% if not cosinnus_active_user %}href="/signup/?acc_req_msg=1" class="{% else %}class="trigger-mobile-idea-create-1-view{% endif %} pull-left rounded-button button-action-faded shadowed-button">
+		<a {% if not cosinnus_active_user %}href="/signup/?acc_req_msg=1&next=/map/" class="{% else %}class="trigger-mobile-idea-create-1-view{% endif %} pull-left rounded-button button-action-faded shadowed-button">
 		    <span class="rounded-button-inner">
 		        <i class="fa fa-fw fa-lightbulb-o apply-color-ideas"></i>
 		        {# Translators: __INCLUDE_JS_PO__ #}

@@ -52,11 +52,13 @@ module.exports = BaseView.extend({
     	this.$el.find('#idea-create-title').focus();
     	this.App.mapView.activateDraggableMarker('ideas');
     	$('.trigger-create-idea').hide();
+        Backbone.mediator.publish('tile-detail:opened');
     },
     
     onViewClosed: function () {
     	this.App.mapView.deactivateDraggableMarker();
     	$('.trigger-create-idea').show();
+        Backbone.mediator.publish('tile-detail:closed');
     },
     
     // the view is being closed

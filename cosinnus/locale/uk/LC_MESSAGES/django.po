@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-14 17:21+0200\n"
+"POT-Creation-Date: 2018-06-17 17:53+0200\n"
 "PO-Revision-Date: 2018-05-29 14:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -229,6 +229,21 @@ msgstr "%(sender_name)s запросив(ла) Вас доєднатися до 
 #, python-format
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s запросив Вас долучитися до %(team_name)s на %(portal_name)s!"
+
+#, fuzzy
+#| msgid "Created"
+msgid "Has created"
+msgstr "Створено"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
+msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
+msgstr "%(sender_name)s запросив(ла) Вас доєднатися до \"%(team_name)s\" на  %(portal_name)s! <br/><br/> Щоб доєднатися, пройдіть за посиланням внизу. Ви будете перенаправлені на портал, де Ви зможете подивитися і прийняти запрошення."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s has accepted the invitation to %(team_name)s on %(site_name)s!"
+msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
+msgstr "%(sender_name)s прийняв запрошення долучитися до %(team_name)s на %(site_name)s!"
 
 msgid "Deutsch"
 msgstr "Німецька"
@@ -817,6 +832,7 @@ msgstr "Користувач/-ка"
 msgid "Liked"
 msgstr "Вподобання"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Following"
 msgstr ""
 
@@ -1729,7 +1745,7 @@ msgstr "Редагувати спільноту"
 msgid "Edit Project"
 msgstr "Редагувати проект"
 
-msgid "Let's bring this idea to life! (TODO: slogan, and is the text ok?)!"
+msgid "Let's bring this idea to life!"
 msgstr ""
 
 #, python-format
@@ -1740,6 +1756,9 @@ msgid "Once you have created your project, everyone who liked (and followed) the
 msgstr ""
 
 msgid "Your new project will also be displayed on the idea itself, so that everyone can see it and join in later on."
+msgstr ""
+
+msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
 msgstr ""
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
@@ -2159,7 +2178,7 @@ msgstr ""
 msgid "Edit Idea"
 msgstr "Редагувати папку"
 
-msgid "We make your ideas heard (TODO: slogan, and is the text ok?)!"
+msgid "We make your ideas heard!"
 msgstr ""
 
 msgid "Ideas are a great way to inspire poeple and start a project in your region!"
@@ -3309,6 +3328,12 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+#| msgid "Poll"
+msgid "Follow"
+msgstr "Опитування"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 #| msgid "Create Project"
 msgid "Create Project from Idea"
 msgstr "Створити проект"
@@ -3320,7 +3345,15 @@ msgid "Edit your Idea"
 msgstr "Редагувати профіль"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Could not save your like setting because of an error."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your follow setting because of an error."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__

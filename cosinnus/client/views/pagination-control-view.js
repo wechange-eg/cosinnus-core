@@ -42,17 +42,18 @@ module.exports = BaseView.extend({
     getTemplateData: function () {
         var self = this;
         var data = BaseView.prototype.getTemplateData.call(self);
+        var show_idea_button = COSINNUS_IDEAS_ENABLED && self.App.displayOptions.showMap && !self.App.mapView.draggableMarker;
+        
         data = _.extend(
             data,
             self.controlView.options,
             self.controlView.state,
             {
-            	idea_creation_open: Boolean(self.App.mapView.draggableMarker)
+            	show_idea_button: show_idea_button
             }
         );
         return data;
     },
-    
     
     // Events  -------------
 

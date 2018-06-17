@@ -20,6 +20,7 @@ from cosinnus.core.signals import user_group_join_requested,\
 
 user_tagged_in_object = dispatch.Signal(providing_args=["user", "obj", "audience"])
 user_group_made_admin = dispatch.Signal(providing_args=["user", "obj", "audience"])
+project_created_from_idea = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 
 """ Notification definitions.
@@ -215,3 +216,28 @@ notifications = {
         'notification_reason': 'none',
     }, 
 }
+
+if settings.COSINNUS_IDEAS_ENABLED:
+    notifications['idea_created_from_project'] = {
+        'label': '<hidden-idea_created_from_project>', 
+        'mail_template': '<html-only>',
+        'subject_template': '<html-only>',
+        'signals': [project_created_from_idea],
+        'default': True,
+        'hidden': True,
+        
+        'is_html': True,
+        'snippet_type': 'news',
+        #'snippet_template': 'cosinnus/html_mail/summary_group.html',
+        'event_text': _('Has created'),
+        'notification_text': _('%(sender_name)s just created the project "%(team_name)s" on %(portal_name)s from an idea you follow! <br/><br/>' 
+                           ' To check it out, please click on the link below. There you can see if you would like to join the project.'),
+        'subject_text': _('%(sender_name)s just created the project "%(team_name)s" from an idea you follow!'),
+        'data_attributes': {
+            'object_name': 'name',
+            'object_text': 'description',
+            'sub_object_text': 'description', # property of a sub-divided item below the main one, see doc above
+        
+        },
+        'notification_reason': 'none',
+    }
