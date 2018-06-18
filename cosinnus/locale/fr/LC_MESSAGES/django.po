@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-18 14:38+0200\n"
+"POT-Creation-Date: 2018-06-18 16:04+0200\n"
 "PO-Revision-Date: 2018-06-18 12:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3094,6 +3094,10 @@ msgstr "J'ai lu et accepte les"
 
 msgid "Terms and Services"
 msgstr "Conditions d'utilisation"
+
+#, python-format
+msgid "If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject \"Registration failed\" to %(email_link)s and we will assist you as soon as possible!"
+msgstr ""
 
 msgid "Search in Apps"
 msgstr "Rechercher dans les applications"

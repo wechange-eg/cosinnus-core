@@ -90,22 +90,28 @@
         {% trans "We need to make sure you are a real person (sorry!)" as captcha_legend %}
         {% include 'cosinnus/fields/default_field.html' with field=form.captcha legend=captcha_legend label=captcha_label large_field=True field_classes="captcha-field" %}
                 
-        <br>    
         <br>
                             
-        <div class="pull-right">
-    		{{ form.tos_check.errors }}
-        	<p class="pull-left inline-list transparent">
-                <span class="cursor-pointer-input">
-                	{% render_field form.tos_check %}
-                </span>
-	        	<span onclick="$('#{{ form.tos_check.id_for_label }}').prop('checked', !($('#{{ form.tos_check.id_for_label }}').prop('checked')));">
-	                {% trans "I have read and accept the" context "read and accept the [Terms of Services]" %}
-	            </span>
-            <b><a href="/nutzungsbedingungen/" target="_blank">{% trans "Terms and Services" %} <i class="fa fa-external-link"></i></a></b>
-            </p>
-        </div>
-
+		{{ form.tos_check.errors }}
+    	<p class="pull-left inline-list transparent">
+            <span class="cursor-pointer-input">
+            	{% render_field form.tos_check %}
+            </span>
+        	<span onclick="$('#{{ form.tos_check.id_for_label }}').prop('checked', !($('#{{ form.tos_check.id_for_label }}').prop('checked')));">
+                {% trans "I have read and accept the" context "read and accept the [Terms of Services]" %}
+            </span>
+            <a href="/nutzungsbedingungen/" target="_blank">{% trans "Terms and Services" %} <i class="fa fa-external-link"></i></a>
+        </p>
+        
+        <br>    
+        <br> 
+        <br>
+        
+        <p class="pull-left inline-list transparent pale-text">
+            {% captureas email_link %}<a href="mailto:support@wechange.de?subject=Registration failed" target="_blank">support@wechange.de</a>{% endcaptureas %}
+            {% blocktrans with email_link=email_link %}If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject "Registration failed" to {{ email_link }} and we will assist you as soon as possible!{% endblocktrans %}
+        </p>
+        
     </div><!-- content-box -->
 
     <button type="submit" class="btn btn-emphasized">

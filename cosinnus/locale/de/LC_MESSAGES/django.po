@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-18 14:38+0200\n"
-"PO-Revision-Date: 2018-06-18 14:39+0200\n"
+"POT-Creation-Date: 2018-06-18 16:04+0200\n"
+"PO-Revision-Date: 2018-06-18 16:09+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -3026,6 +3026,10 @@ msgstr "Ich habe die Nutzungsbedingungen gelesen und akzeptiere sie:"
 
 msgid "Terms and Services"
 msgstr "Nutzungsbedingungen"
+
+#, python-format
+msgid "If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject \"Registration failed\" to %(email_link)s and we will assist you as soon as possible!"
+msgstr "Falls du Hilfe bei der Registrierung benötigst oder du die Registrierung nicht abschließen kannst, schicke eine kurze Email mit dem Betreff \"Registrierung nicht möglich\" an %(email_link)s. Wir helfen dir sobald wie möglich!"
 
 msgid "Search in Apps"
 msgstr "Suche in Anwendungen"
