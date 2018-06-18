@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-18 12:47+0200\n"
+"POT-Creation-Date: 2018-06-18 14:38+0200\n"
 "PO-Revision-Date: 2018-06-18 12:49+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -250,9 +250,6 @@ msgstr "Німецька"
 
 msgid "English"
 msgstr "Англійська"
-
-msgid "French"
-msgstr "Français"
 
 msgid "Russian"
 msgstr "Російська"
@@ -1118,6 +1115,9 @@ msgstr "Видалити об'єкт, про який повідомлено..."
 
 msgid "(The reported item has been deleted.)"
 msgstr "(Зміст, про який повідомлено, було видалено.)"
+
+msgid "Enter the 4 capital letters in the scrambled image"
+msgstr ""
 
 msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
 msgstr "Ця сторінка є лише презентацією майбутнього мікросайту! Сайт знаходиться на стадії розробки, і багато функцій ще не завершено та можуть не працювати справно!"
@@ -4075,6 +4075,9 @@ msgstr "Ви, на разі, не є членом %s! Якщо ви бажаєт
 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
+
+#~ msgid "French"
+#~ msgstr "Français"
 
 #, fuzzy
 #~| msgid "Logo Image"

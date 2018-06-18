@@ -446,6 +446,3 @@ PIWIK_SITE_ID = None
 # for 30 days for logged in users
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 COSINNUS_SESSION_EXPIRY_AUTHENTICATED_IN_USERS = 60 * 60 * 24 * 60 # 60 days
-
-# reCaptcha uses v2 ("nocaptcha")
-NOCAPTCHA = True

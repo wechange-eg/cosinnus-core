@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-18 12:47+0200\n"
+"POT-Creation-Date: 2018-06-18 14:38+0200\n"
 "PO-Revision-Date: 2018-06-18 12:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -250,9 +250,6 @@ msgstr "Deutsch"
 
 msgid "English"
 msgstr "English"
-
-msgid "French"
-msgstr "Français"
 
 msgid "Russian"
 msgstr "Русский"
@@ -1118,6 +1115,9 @@ msgstr "Supprimer l'item rapporté"
 
 msgid "(The reported item has been deleted.)"
 msgstr "(L'item rapporté a été supprimé)"
+
+msgid "Enter the 4 capital letters in the scrambled image"
+msgstr ""
 
 msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
 msgstr "Cette page est une prévisualisation des bonnes choses à venir ! Elle est en développement et de nombreuses fonctionnalités sont incomplètes, ou ne fonctionnent pas encore bien !"
@@ -4106,6 +4106,9 @@ msgstr "Tu n'es pas membre de %s ! Si tu souhaites, tu peux demander à le deven
 
 msgid "Your changes have been saved."
 msgstr "Tes changements ont été enregistrés."
+
+#~ msgid "French"
+#~ msgstr "Français"
 
 #~ msgctxt "written next to optional form fields"
 #~ msgid "(optional)"

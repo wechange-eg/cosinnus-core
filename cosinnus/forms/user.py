@@ -9,10 +9,10 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
 
-from captcha.fields import ReCaptchaField
 from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
 from cosinnus.models.tagged import BaseTagObject
 from django.core.validators import MaxLengthValidator
+from captcha.fields import CaptchaField
 
 
 class UserKwargModelFormMixin(object):
@@ -48,10 +48,7 @@ class UserCreationForm(DjUserCreationForm):
     first_name = forms.CharField(label=_('first name'), required=True)  
     
     tos_check = forms.BooleanField(label='tos_check', required=True)
-    
-    
-    if not settings.DEBUG and not settings.TESTING and not settings.COSINNUS_IS_INTEGRATED_PORTAL and not settings.COSINNUS_IS_SSO_PORTAL: 
-        captcha = ReCaptchaField(attrs={'theme': 'clean'}, required=settings.DEBUG == False)
+    captcha = CaptchaField()
     
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-18 12:47+0200\n"
-"PO-Revision-Date: 2018-06-18 12:47+0200\n"
+"POT-Creation-Date: 2018-06-18 14:38+0200\n"
+"PO-Revision-Date: 2018-06-18 14:39+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -246,9 +246,6 @@ msgstr "Deutsch"
 
 msgid "English"
 msgstr "English"
-
-msgid "French"
-msgstr "Français"
 
 msgid "Russian"
 msgstr "Русский"
@@ -1105,6 +1102,9 @@ msgstr "Gemeldetes Objekt löschen..."
 
 msgid "(The reported item has been deleted.)"
 msgstr "(Der gemeldete Inhalt wurde gelöscht.)"
+
+msgid "Enter the 4 capital letters in the scrambled image"
+msgstr "Gib die 4 Großbuchstaben aus dem Bild ein"
 
 msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
 msgstr "Diese Seite ist eine Vorschau der zukünftigen Microsite. Die Seite befindet sich noch mitten im Aufbau und an vielen Features wird noch aktiv gearbeitet. Vieles ist daher noch nicht fertig gestellt, und es kann vorkommen dass noch vereinzelte Fehler auftreten. Wir bitten um Veständnis! "
@@ -3979,6 +3979,9 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten 
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "French"
+#~ msgstr "Français"
 
 #, fuzzy
 #~| msgid "Logo Image"

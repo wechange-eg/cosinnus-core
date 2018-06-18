@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-18 12:47+0200\n"
+"POT-Creation-Date: 2018-06-18 14:38+0200\n"
 "PO-Revision-Date: 2018-06-18 12:48+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -245,9 +245,6 @@ msgstr "Deutsch"
 
 msgid "English"
 msgstr "English"
-
-msgid "French"
-msgstr "Français"
 
 msgid "Russian"
 msgstr "Русский"
@@ -1125,6 +1122,9 @@ msgid "Delete reported item..."
 msgstr ""
 
 msgid "(The reported item has been deleted.)"
+msgstr ""
+
+msgid "Enter the 4 capital letters in the scrambled image"
 msgstr ""
 
 msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
@@ -3930,6 +3930,9 @@ msgstr ""
 
 msgid "Your changes have been saved."
 msgstr ""
+
+#~ msgid "French"
+#~ msgstr "Français"
 
 #, fuzzy
 #~| msgid "Convert selected Projects to Groups"
