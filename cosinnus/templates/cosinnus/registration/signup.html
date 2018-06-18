@@ -103,14 +103,16 @@
             <a href="/nutzungsbedingungen/" target="_blank">{% trans "Terms and Services" %} <i class="fa fa-external-link"></i></a>
         </p>
         
-        <br>    
-        <br> 
-        <br>
-        
-        <p class="pull-left inline-list transparent pale-text">
-            {% captureas email_link %}<a href="mailto:support@wechange.de?subject=Registration failed" target="_blank">support@wechange.de</a>{% endcaptureas %}
-            {% blocktrans with email_link=email_link %}If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject "Registration failed" to {{ email_link }} and we will assist you as soon as possible!{% endblocktrans %}
-        </p>
+        {% if SETTINGS.DEBUG or COSINNUS_CURRENT_PORTAL.slug == "wechange" %}
+	        <br>    
+	        <br> 
+	        <br>
+	        
+	        <p class="pull-left inline-list transparent pale-text">
+	            {% captureas email_link %}<a href="mailto:support@wechange.de?subject=Registration failed" target="_blank">support@wechange.de</a>{% endcaptureas %}
+	            {% blocktrans with email_link=email_link %}If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject "Registration failed" to {{ email_link }} and we will assist you as soon as possible!{% endblocktrans %}
+	        </p>
+        {% endif %}
         
     </div><!-- content-box -->
 
