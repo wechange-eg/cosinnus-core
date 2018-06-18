@@ -58,6 +58,7 @@ from cosinnus.utils.urls import group_aware_reverse, redirect_with_next,\
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.utils.http import is_safe_url
 
+from honeypot.decorators import check_honeypot
 
 USER_MODEL = get_user_model()
 
@@ -214,7 +215,7 @@ class UserCreateView(CreateView):
         context['submit_label'] = _('Create')
         return context
 
-user_create = UserCreateView.as_view()
+user_create = check_honeypot(UserCreateView.as_view())
 
 
 class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):

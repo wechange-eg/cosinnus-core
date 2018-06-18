@@ -1,5 +1,5 @@
 {% extends "cosinnus/base.html" %}
-{% load i18n  cosinnus_tags widget_tweaks %}
+{% load i18n  cosinnus_tags widget_tweaks honeypot %}
 
 {% block page_title %}{% trans "Sign up" %}{% endblock %}
 
@@ -20,6 +20,8 @@
 
 <form action="" method="post" enctype="multipart/form-data" class="cosinnus-form form-horizontal" role="form">
     {% csrf_token %}
+    {% render_honeypot_field %}
+    
     <input type="hidden" name="next" value="/">
     
     
