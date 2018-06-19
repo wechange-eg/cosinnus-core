@@ -19,7 +19,8 @@ from cosinnus.models.group_extra import CosinnusSociety, CosinnusProject
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.templatetags.cosinnus_tags import textfield
 from cosinnus.utils.group import message_group_admins_url
-from cosinnus.utils.permissions import check_ug_membership
+from cosinnus.utils.permissions import check_ug_membership, check_ug_pending,\
+    check_ug_invited_pending
 from cosinnus.utils.urls import group_aware_reverse
 
 
@@ -213,6 +214,8 @@ class DetailedMapResult(HaystackMapResult):
     fields.update({
         'type': 'DetailedMapResult',
         'is_member': False,
+        'is_invited': False,
+        'is_pending': False,
     })
     
     background_image_field = None
@@ -255,6 +258,8 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
         
         kwargs.update({
             'is_member': check_ug_membership(user, obj),
+            'is_pending': check_ug_pending(user, obj),
+            'is_invited': check_ug_invited_pending(user, obj),
             'action_url_1': _prepend_url(user, obj.portal) + group_aware_reverse('cosinnus:group-microsite', kwargs={'group': obj}, skip_domain=True) + '?join=1',
             'action_url_2': (_prepend_url(user, obj.portal) + message_url) if message_url else None,
             'youtube_url': obj.video,

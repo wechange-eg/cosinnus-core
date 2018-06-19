@@ -37,7 +37,7 @@ def check_ug_membership(user, group):
 
 
 def check_ug_pending(user, group):
-    """Returns ``True`` if the given user is member or admin of the given
+    """Returns ``True`` if the given user is has requested to be a member of this
     group. ``False`` otherwise.
 
     :param User user: The user object to check
@@ -45,6 +45,17 @@ def check_ug_pending(user, group):
     :returns: True if the user is a member of the group.
     """
     return group.is_pending(user)
+
+
+def check_ug_invited_pending(user, group):
+    """Returns ``True`` if the given user has been invited to join
+    group. ``False`` otherwise.
+
+    :param User user: The user object to check
+    :param Group group: The group object to check
+    :returns: True if the user is a member of the group.
+    """
+    return group.is_invited_pending(user)
 
 
 def check_object_read_access(obj, user):

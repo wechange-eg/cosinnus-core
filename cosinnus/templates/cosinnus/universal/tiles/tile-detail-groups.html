@@ -15,8 +15,16 @@
         {% else %}
            <a href="{{ action_url_1 }}" target="_blank" class="rounded-button button-action">
                 <span class="rounded-button-inner">
-                    {# Translators: __INCLUDE_JS_PO__ #}
-                    {% trans "Join Group" %}
+                    {% if is_invited %}
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "You are invited!" %}
+                    {% elif is_pending %}
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Membership request pending..." %}
+                    {% else %}
+	                    {# Translators: __INCLUDE_JS_PO__ #}
+	                    {% trans "Join Group" %}
+	                {% endif %}
                 </span>
             </a>
         {% endif %}
