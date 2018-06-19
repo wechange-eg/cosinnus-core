@@ -5,11 +5,23 @@
     <div class="overlay"></div>
     {% if not splitscreen %}
         <div class="tile-list-header">
+            <span class="pull-right">
+	            {% for type in ['projects', 'groups', 'ideas'] %}
+	                {% if type in controlView.availableFilterList %}
+			            <a href="{% if not cosinnus_active_user %}/signup/?acc_req_msg=1&next={% endif %}/{{type}}/add/" class="rounded-button button-color-{{ type }}-inverted">
+				            <span class="rounded-button-inner">
+				                {{ macros.typeLabel(type, useStyles=0, create=true) }}
+				            </span>
+				        </a>
+	                {% endif %}
+	            {% endfor %}
+            </span>
+            
 	        <h1 class="no-select">
                 {% for filter_type in controlView.availableFilterList %}
-                    {{ macros.typeLabel(filter_type, mine=controlView.options.showMine, all=true) }}
+                    {{ macros.typeLabel(filter_type, mine=controlView.showMine, all=true) }}
                 {% endfor %}
-            </h1>        
+            </h1>
         </div>
     {% endif %}
     <div class="controls"></div>

@@ -1,4 +1,4 @@
-{% macro typeLabel(type, classes="", singular=0, button=0, useStyles=1, colon=0, showIcon=1, mine=false, all=false) %}
+{% macro typeLabel(type, classes="", singular=0, button=0, useStyles=1, colon=0, showIcon=1, mine=false, all=false, create=false) %}
     <span class="{% if useStyles == 1 %}result-type-span {% if button %}button{% else %}apply{% endif %}-color-{{ type }}{% endif %} {{ classes }}">
         {% if mine %}
             {% if type == "people" %}
@@ -65,6 +65,28 @@
                 {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}
                 {% trans "Idea" %}{% if colon == 1 %}:{% endif %}
+            {% endif %}
+        {% elif create %}
+            {% if type == "people" %}
+                {% if showIcon == 1 %}<i class="fa fa-user"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Create User" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "events" %}
+                {% if showIcon == 1 %}<i class="fa fa-calendar"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Create Event" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "projects" %}
+                {% if showIcon == 1 %}<i class="fa fa-group"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Create Project" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "groups" %}
+                {% if showIcon == 1 %}<i class="fa fa-sitemap"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Create Group" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "ideas" %}
+                {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Create Idea" %}{% if colon == 1 %}:{% endif %}
             {% endif %}
         {% else %}
             {% if type == "people" %}
