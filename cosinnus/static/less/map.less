@@ -263,6 +263,11 @@
         
     }
     
+    .pull-right .rounded-button {
+        margin-right: 0;
+        margin-left: 10px;
+    }
+    
     .inline-spacer {
         display: inline-block;
         margin-left: 20px;
@@ -946,8 +951,22 @@
         
 }
 
-.controls {
+.tile-list-header, .controls {
     z-index: 3;
+}
+
+.tile-list-header {
+    padding: 0 15px;
+    border-bottom: 1px solid @map-frame-color;
+    background-color: #FFF;
+    
+    span.pull-right {
+        padding: 15px 0;
+    }
+    
+    h1, h1 i.fa {
+        font-size: 25px;
+    }
 }
 
 .map-controls, .map-scroll-controls, .map-pagination-controls {

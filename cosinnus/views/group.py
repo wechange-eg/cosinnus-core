@@ -420,6 +420,7 @@ class GroupMembersMapListView(GroupDetailView):
 group_members_map = GroupMembersMapListView.as_view()
 
 
+""" Deprecated, has been replaced by `cosinnus.views.map.TileView`! """
 class GroupListView(EndlessPaginationMixin, ListAjaxableResponseMixin, ListView):
 
     model = CosinnusGroup
@@ -478,6 +479,7 @@ group_list = GroupListView.as_view()
 group_list_api = GroupListView.as_view(is_ajax_request_url=True)
 
 
+""" Deprecated, has been replaced by `cosinnus.views.map.TileView`! """
 class GroupListMineView(RequireLoggedInMixin, GroupListView):
     paginate_by = None
     

@@ -1,5 +1,6 @@
 'use strict';
 
+var BaseView = require('views/base/view');
 var ContentControlView = require('views/base/content-control-view');
 var TileView = require('views/tile-view');
 var util = require('lib/util');
@@ -61,6 +62,18 @@ module.exports = ContentControlView.extend({
         
         self.renderTilesInitial();
         return self;
+    },
+    
+    /** Extend the template data by the controlView's options and state */
+    getTemplateData: function () {
+        var self = this;
+        var data = BaseView.prototype.getTemplateData.call(self);
+        data['controlView'] = _.extend(
+            {},
+            self.App.controlView.options,
+            self.App.controlView.state
+        );
+        return data;
     },
     
     afterRender: function () {

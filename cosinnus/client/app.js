@@ -145,6 +145,9 @@ var App = function App () {
         var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
         var markerIcons = typeof COSINNUS_MAP_MARKER_ICONS !== 'undefined' ? COSINNUS_MAP_MARKER_ICONS : {};
         
+        var fullscreen = self.displayOptions.fullscreen;
+        var splitscreen = self.displayOptions.showMap && self.displayOptions.showTiles;
+        
         self.controlView = new ControlView({
                 el: null, // will only be set if attached to tile-view
                 availableFilters: settings.availableFilters,
@@ -157,6 +160,8 @@ var App = function App () {
                 filterGroup: settings.filterGroup,
                 basePageURL: basePageUrl,
                 showMine: settings.showMine,
+                fullscreen: fullscreen,
+                splitscreen: splitscreen
             }, 
             self, 
             null
@@ -172,8 +177,8 @@ var App = function App () {
                 elParent: self.el,
                 location: settings.location,
                 markerIcons: markerIcons,
-                fullscreen: self.displayOptions.fullscreen,
-                splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
+                fullscreen: fullscreen,
+                splitscreen: splitscreen
             }, 
             self,
             self.controlView.collection
@@ -185,8 +190,8 @@ var App = function App () {
         if (self.displayOptions.showTiles) {
             var tileListView = new TileListView({
                 elParent: self.el,
-                fullscreen: self.displayOptions.fullscreen,
-                splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
+                fullscreen: fullscreen,
+                splitscreen: splitscreen
             }, 
             self,
             self.controlView.collection
@@ -205,7 +210,7 @@ var App = function App () {
         var tileDetailView = new TileDetailView({
             model: null,
             elParent: self.el,
-            fullscreen: self.displayOptions.fullscreen,
+            fullscreen: fullscreen,
             splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
         }, 
         self

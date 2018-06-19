@@ -5,8 +5,14 @@
      <div class="map-controls-search">
          <div class="search-box">
             <input type="text" class="q" name="q" 
+
+{% if splitscreen %}
 placeholder="{# Translators: __INCLUDE_JS_PO__ #}
 {% trans "Search for Names, Topics and Places..." %}"
+{% else %}
+placeholder="{# Translators: __INCLUDE_JS_PO__ #}
+{% trans "Search for Names and Topics..." %}"
+{% endif %}
                     value="{{ q }}" autocomplete="off" />
             <i class="fa fa-search clickable-button query-search-button icon-search {% if wantsToSearch %}hidden{% endif %}"></i>
          </div>
@@ -24,15 +30,16 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
      <div class="map-controls-active-filters"></div>
      
      <div class="map-controls-filters mobile-only mobile-always-visible" {% if not filterPanelVisible %}style="display: none;"{% endif %}>
-        <div class="button-list">
-            {% for filter_type, available in availableFilters %}
-                {% if available %}
-                    <a class="rounded-button button-color-{{ filter_type }} result-filter-button {% if topicFiltersActive and activeFilters[filter_type] %}selected{% endif %}" data-result-filter-type="{{ filter_type }}">
-                        {{ macros.typeLabel(filter_type, "rounded-button-inner", button=1) }}
-                    </a>
-                {% endif %}
-            {% endfor %}
-        </div>
+        
+        {% if availableFilterList|length > 1 %}
+	        <div class="button-list">
+	            {% for filter_type in availableFilterList %}
+	                <a class="rounded-button button-color-{{ filter_type }} result-filter-button {% if topicFiltersActive and activeFilters[filter_type] %}selected{% endif %}" data-result-filter-type="{{ filter_type }}">
+	                    {{ macros.typeLabel(filter_type, "rounded-button-inner", button=1) }}
+	                </a>
+	            {% endfor %}
+	        </div>
+        {% endif %}
         
         <h1>
             {# Translators: __INCLUDE_JS_PO__ #}
@@ -52,32 +59,34 @@ placeholder="{# Translators: __INCLUDE_JS_PO__ #}
             {% endfor %}
         </div>
         
-        <h1>
-            {# Translators: __INCLUDE_JS_PO__ #}
-            {% trans "Where" %}
-        </h1>
-        
-        <table class="small-space">
-            <tr>
-                <td class="onoffswitch-text-label">
-                    {# Translators: __INCLUDE_JS_PO__ #}
-                    {% trans "In map area" %}
-                </td>
-                <td>
-                    <div class="onoffswitch">
-                        <input type="checkbox" name="onoffswitch-ignore-location" class="onoffswitch-checkbox check-ignore-location" id="check-ignore-location" {% if not ignoreLocation %}checked{% endif %}>
-                        <label class="onoffswitch-label" for="check-ignore-location">
-                            <span class="onoffswitch-inner"></span>
-                            <span class="onoffswitch-switch"></span>
-                        </label>
-                    </div>
-                </td>
-            </tr>
-        </table>
-        <div class="pale-color">
-            {# Translators: __INCLUDE_JS_PO__ #}
-            {% trans "If active, searching will be restricted to the visible map area." %}
-        </div>
+        {% if splitscreen %}
+	        <h1>
+	            {# Translators: __INCLUDE_JS_PO__ #}
+	            {% trans "Where" %}
+	        </h1>
+	        
+	        <table class="small-space">
+	            <tr>
+	                <td class="onoffswitch-text-label">
+	                    {# Translators: __INCLUDE_JS_PO__ #}
+	                    {% trans "In map area" %}
+	                </td>
+	                <td>
+	                    <div class="onoffswitch">
+	                        <input type="checkbox" name="onoffswitch-ignore-location" class="onoffswitch-checkbox check-ignore-location" id="check-ignore-location" {% if not ignoreLocation %}checked{% endif %}>
+	                        <label class="onoffswitch-label" for="check-ignore-location">
+	                            <span class="onoffswitch-inner"></span>
+	                            <span class="onoffswitch-switch"></span>
+	                        </label>
+	                    </div>
+	                </td>
+	            </tr>
+	        </table>
+	        <div class="pale-color">
+	            {# Translators: __INCLUDE_JS_PO__ #}
+	            {% trans "If active, searching will be restricted to the visible map area." %}
+	        </div>
+        {% endif %}
         
         <div class="spacer"></div>
         
