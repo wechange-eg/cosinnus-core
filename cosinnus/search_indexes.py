@@ -231,6 +231,7 @@ class IdeaSearchIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObjectSearch
     boosted = indexes.EdgeNgramField(model_attr='title', boost=BOOSTED_FIELD_BOOST)
 
     public = indexes.BooleanField(model_attr='public')
+    visible_for_all_authenticated_users = indexes.BooleanField()
     creator = indexes.IntegerField(model_attr='creator__id', null=True)
     portal = indexes.IntegerField(model_attr='portal_id')
     location = indexes.LocationField(null=True)
@@ -240,6 +241,12 @@ class IdeaSearchIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObjectSearch
     
     def get_model(self):
         return CosinnusIdea
+    
+    def prepare_visible_for_all_authenticated_users(self, obj):
+        """ This is hacky, but Haystack provides no method to filter
+            for models in subqueries, so we set this indexed flag to be
+            able to filter on for permissions """
+        return True
     
     def prepare_liked_user_ids(self, obj):
         if not hasattr(obj, '_liked_ids'):

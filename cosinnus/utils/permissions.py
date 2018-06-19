@@ -77,7 +77,8 @@ def check_object_read_access(obj, user):
             obj_is_visible = is_member or is_admin
         return check_user_superuser(user) or obj_is_visible or obj.grant_extra_read_permissions(user)
     elif type(obj) is CosinnusIdea:
-        return obj.public or check_user_can_see_user(user, obj.creator)
+        # ideas are only either public or visible by any logged in user, no private setting
+        return obj.public or user.is_authenticated()
     elif (obj.__class__, BaseUserProfile):
         return check_user_can_see_user(user, obj.user)
     else:

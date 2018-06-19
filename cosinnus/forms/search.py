@@ -68,6 +68,9 @@ def filter_searchqueryset_for_read_access(sqs, user):
             my_item = (
                  SQ(creator__exact=user.id)
             )
+            visible_for_all_authenticated_users = (
+                SQ(visible_for_all_authenticated_users=True)
+            )
             
             # FIXME: known problem: ``group_members`` is a stale indexed representation of the members
             # of an items group. New members of a group won't be able to find old indexed items if the index
@@ -82,7 +85,8 @@ def filter_searchqueryset_for_read_access(sqs, user):
                 group_visible_and_in_my_group |
                 my_item |
                 group_member_user_visibility |
-                logged_in_user_visibility 
+                logged_in_user_visibility |
+                visible_for_all_authenticated_users
             )
     else:
         sqs = sqs.filter_and(public_node)
