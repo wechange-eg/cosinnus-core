@@ -1,6 +1,50 @@
-{% macro typeLabel(type, classes="", singular=0, button=0, useStyles=1, colon=0, showIcon=1) %}
+{% macro typeLabel(type, classes="", singular=0, button=0, useStyles=1, colon=0, showIcon=1, mine=false, all=false) %}
     <span class="{% if useStyles == 1 %}result-type-span {% if button %}button{% else %}apply{% endif %}-color-{{ type }}{% endif %} {{ classes }}">
-        {% if singular %}
+        {% if mine %}
+            {% if type == "people" %}
+                {% if showIcon == 1 %}<i class="fa fa-user"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "My Users" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "events" %}
+                {% if showIcon == 1 %}<i class="fa fa-calendar"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "My Events" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "projects" %}
+                {% if showIcon == 1 %}<i class="fa fa-group"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "My Projects" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "groups" %}
+                {% if showIcon == 1 %}<i class="fa fa-sitemap"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "My Groups" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "ideas" %}
+                {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "My Ideas" %}{% if colon == 1 %}:{% endif %}
+            {% endif %}
+        {% elif all %}
+            {% if type == "people" %}
+                {% if showIcon == 1 %}<i class="fa fa-user"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "All Users" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "events" %}
+                {% if showIcon == 1 %}<i class="fa fa-calendar"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "All Events" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "projects" %}
+                {% if showIcon == 1 %}<i class="fa fa-group"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "All Projects" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "groups" %}
+                {% if showIcon == 1 %}<i class="fa fa-sitemap"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "All Groups" %}{% if colon == 1 %}:{% endif %}
+            {% elif type == "ideas" %}
+                {% if showIcon == 1 %}<i class="fa fa-lightbulb-o"></i>{% endif %}
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "All Ideas" %}{% if colon == 1 %}:{% endif %}
+            {% endif %}
+        {% elif singular %}
             {% if type == "people" %}
                 {% if showIcon == 1 %}<i class="fa fa-user"></i>{% endif %}
                 {# Translators: __INCLUDE_JS_PO__ #}

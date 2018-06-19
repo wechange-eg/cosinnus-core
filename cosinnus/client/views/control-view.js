@@ -31,10 +31,14 @@ module.exports = ContentControlView.extend({
             events: true,
             groups: true
         },
+        availableFilterList: [], // contains availableFilters keys that are true, generated on initialize
+        
         allTopics: {},  // the dict of all searchable topics
         portalInfo: {}, // portal info by portal-id, from `get_cosinnus_portal_info()`
         controlsEnabled: true,
         filterGroup: null,
+        fullscreen: false,
+        splitscreen: false,
         showMine: false, // URL param. if true, only the current user's own results will be shown. ignored away if user is not logged in.
         
         // in fullscreen mode, this must always be the base URL we started at
@@ -91,6 +95,12 @@ module.exports = ContentControlView.extend({
         }
         
         ContentControlView.prototype.initialize.call(self, options, app, collection);
+        
+        _.each(this.options.availableFilters, function(active, type){
+            if (active) {
+            	self.options.availableFilterList.push(type); 
+            }
+        });
         
         if (!self.collection) {
             self.collection = new ResultCollection();

@@ -1,5 +1,17 @@
-<div id="tile-list" class="tile-list {% if fullscreen %} tile-list-fullscreen {% endif %} {% if splitscreen %} tile-list-splitscreen {% endif %} mobile-view mobile-view-list-visible-flex mobile-view-search-visible-flex">
+{% load i18n %}
+{% import "include/macros.html" as macros %}
+
+<div id="tile-list" class="tile-list {% if fullscreen %} tile-list-fullscreen {% endif %} {% if splitscreen %} tile-list-splitscreen {% else %} tile-list-fullscreen {% endif %} mobile-view mobile-view-list-visible-flex mobile-view-search-visible-flex">
     <div class="overlay"></div>
+    {% if not splitscreen %}
+        <div class="tile-list-header">
+	        <h1 class="no-select">
+                {% for filter_type in controlView.availableFilterList %}
+                    {{ macros.typeLabel(filter_type, mine=controlView.options.showMine, all=true) }}
+                {% endfor %}
+            </h1>        
+        </div>
+    {% endif %}
     <div class="controls"></div>
     <div class="tile-contents mobile-view mobile-view-list-visible-block">
         <div id="tile-container-proto" class="grid" style="display: none;">
