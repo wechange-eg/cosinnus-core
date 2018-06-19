@@ -16,24 +16,24 @@ from cosinnus.views.map_api import get_searchresult_by_itemid
 USER_MODEL = get_user_model()
 
 
-def _generate_type_settings(projects=False, groups=False, people=False, events=False, ideas=False):
+def _generate_type_settings(types=[]):
     options = {
         'availableFilters': {
-            'people': people,
-            'projects': projects,
-            'events': events,
-            'groups': groups,
+            'people': 'people' in types,
+            'projects': 'projects' in types,
+            'events': 'events' in types,
+            'groups': 'groups' in types,
         },
         'activeFilters': {
-            'people': people,
-            'projects': projects,
-            'events': events,
-            'groups': groups,
+            'people': 'people' in types,
+            'projects': 'projects' in types,
+            'events': 'events' in types,
+            'groups': 'groups' in types,
         },
     }
     if settings.COSINNUS_IDEAS_ENABLED:
-        options['availableFilters']['ideas'] = ideas
-        options['activeFilters']['ideas'] = ideas
+        options['availableFilters']['ideas'] = 'ideas' in types
+        options['activeFilters']['ideas'] = 'ideas' in types
     return options
         
     
@@ -66,16 +66,20 @@ map_view = MapView.as_view()
 class TileView(MapView):
     
     show_mine = False
+    types = []
     
     def dispatch(self, request, *args, **kwargs):
         self.show_mine = kwargs.pop('show_mine', self.show_mine)
+        self.types = kwargs.pop('types', self.types)
         return super(TileView, self).dispatch(request, *args, **kwargs)
     
     def collect_map_options(self, **kwargs):
         options = super(TileView, self).collect_map_options(**kwargs)
-        _settings = {
+        
+        _settings = _generate_type_settings(types=self.types)
+        _settings.update({
             'showMine': self.show_mine,
-        }
+        })
         options.update({
             'settings': _settings,
             'display': {
@@ -89,21 +93,7 @@ class TileView(MapView):
         })
         return options
     
-
-class TileProjectsView(TileView):
-    
-    def collect_map_options(self, **kwargs):
-        options = super(TileProjectsView, self).collect_map_options(**kwargs)
-        _settings = options['settings']
-        _settings.update(_generate_type_settings(projects=True))
-        
-        options.update({
-            'settings': _settings
-        })
-        return options
-
-
-tile_projects_view = TileProjectsView.as_view()
+tile_view = TileView.as_view()
 
 
 class MapEmbedView(TemplateView):

@@ -37,9 +37,9 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^search/$', 'search.search', name='search'),
     
     url(r'^map/$', 'map.map_view', name='map'),
-    #url(r'^mapprojects/$', 'map.tile_projects_view', name='tile-projects'),
-    #url(r'^mapprojects/mine/$', 'map.tile_projects_view', name='tile-projects-mine', kwargs={'show_mine': True}),
-    #url(r'^mapprojects/mine/$', 'map.projects_view', name='mapprojects-mine'),
+    url(r'^mapprojects/$', 'map.tile_view', name='tile-projects', kwargs={'types': ['projects']}),
+    url(r'^mapprojects/mine/$', 'map.tile_view', name='tile-projects-mine', kwargs={'types': ['projects'], 'show_mine': True}),
+    url(r'^mapgroups/$', 'map.tile_view', name='tile-projects', kwargs={'types': ['groups']}),
     
     
     url(r'^map/embed/$', 'map.map_embed_view', name='map-embed'),
@@ -128,8 +128,8 @@ for url_key in group_model_registry:
     urlpatterns += patterns('cosinnus.views',
         url(r'^%s/in-group-with/(?P<group>[^/]+)/$' % plural_url_key, 'group.group_list_filtered', name=prefix+'group-list-filtered'),
         url(r'^%s/mine/$' % plural_url_key, 'group.group_list_mine', name=prefix+'group-list-mine'),
-        url(r'^%s/invited/$' % plural_url_key, 'group.group_list_invited', name=prefix+'group-list-invited'),
         url(r'^%s/$' % plural_url_key, 'group.group_list', name=prefix+'group-list'),
+        url(r'^%s/invited/$' % plural_url_key, 'group.group_list_invited', name=prefix+'group-list-invited'),
         #url(r'^%s/map/$' % plural_url_key, 'group.group_list_map', name=prefix+'group-list-map'),
         url(r'^%s/add/$' % plural_url_key, 'group.group_create', name=prefix+'group-add'),
         url(r'^%s/(?P<group>[^/]+)/$' % url_key, 'group.group_startpage', name=prefix+'group-dashboard'),
