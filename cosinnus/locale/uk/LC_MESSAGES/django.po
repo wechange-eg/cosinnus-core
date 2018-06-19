@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-18 16:04+0200\n"
-"PO-Revision-Date: 2018-06-18 12:49+0200\n"
+"POT-Creation-Date: 2018-06-19 14:35+0200\n"
+"PO-Revision-Date: 2018-06-17 20:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Language: uk_UA\n"
 
@@ -1229,7 +1229,7 @@ msgstr "Виглядає на те, що під час виконання ваш
 
 #, python-format
 msgid "+%(num_pictures)s more..."
-msgstr "+%(num_pictures)s більше..."
+msgstr "+%(num_pictures)s більше…"
 
 msgid "Error embedding a Flickr gallery"
 msgstr "У Flickr  знайдена помилка"
@@ -1244,10 +1244,10 @@ msgid "Help and Assistance for this page"
 msgstr "Допомога та довідка для цієї сторінки"
 
 msgid "Help"
-msgstr "Допомога"
+msgstr "Довідка"
 
 msgid "Help for this page"
-msgstr "Допомога для цієї сторінки"
+msgstr "Довідка для цієї сторінки"
 
 msgid "We're sorry. The Map is not supported in Internet Explorer."
 msgstr "Вибачте, ця карта не підтримується в Internet Explorer."
@@ -1284,63 +1284,66 @@ msgstr "Подати"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_1_group"
-msgstr "На цьому порталі є Групи та Проекти. “Проекти” являють собою об’єднання людей, які можуть координувати зусилля в цих “Проектах”. Якщо декілька проектів хочуть об’єднатися під одним дахом, до прикладу, щоб обговорити спільне питання, вони можуть разом заснувати групу. Якщо Ви хочете створити групу, будь ласка, надішліть повідомлення із запитом до адміністраторів порталу. Вони прояснять деталі.   "
+msgstr "helptext_1_група"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_2_project"
-msgstr "На цьому порталі є Групи та Проекти. “Проекти” являють собою об’єднання людей, які можуть координувати зусилля в цих “Проектах”. Якщо декілька проектів хочуть об’єднатися під одним дахом, до прикладу, щоб обговорити спільне питання, вони можуть разом заснувати Групу. В проекті, разом з його членами, Ви можете створити список завдань, розмістити файли, створити таблиці тощо."
+msgstr "helptext_2_проект"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_3_marketplace"
-msgstr "Якщо Ви хочете створити оголошення на Wechange, ви можете зробити це прямо тут. Спершу оберіть назву, опис категорії та фото для оголошення. Оголошення буде увімкнене на чотири тижні після того як Ви натиснете клавішу «створити». "
+msgstr "helptext_3_дошка оголошень"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_4_profile"
-msgstr "Тут Ви можете змінити свій профіль. Завантажуйте фотографію, вкажіть локацію та тему, яка Вас цікавить и підтвердіть зміни, натиснувши справа на клавіш “зберегти”. "
+msgstr "helptext_4_профіль"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_5_password"
-msgstr "У полі знизу Ви можете змінити свій пароль. Важливо, щоб ви зробили пароль як можна більш довгим (мінімум 10 символів). Чим довший пароль, тим краще. Крім того, рекомендується вживати великі літери, малі літери та спеціальні символи."
+msgstr "helptext_5_пароль"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_6_microsite"
-msgstr "Ви можете створити Мікросайт, щоб зробити видимим Ваш проект. На мікросайт можна завантажувати фотографії, посилання на профілі в соціальних мережах та додати контактну інформацію. Оскільки частина опису проекту видна на карті, ви маєте включити всю важливу інформацію у перші три речення."
+msgstr "helptext_6_мікросайт"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_7_notes"
-msgstr "В цьому полі Ви можете розмістити новину. Новину покажуть всім членам Вашого проекту/групи. Вона слугує для актуалізації інформації."
+msgstr "helptext_7_нотатки"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_8_poll"
-msgstr "Тут Ви можете створити опитування. Воно слугує для відповіді на певні питання (таких як дієтичні вимоги). Якщо ви хочете визначити час зустрічі з командою, Вам треба натиснути на Події та перейти до “опитування події”."
+msgstr "helptext_8_опитування"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_9_todo"
-msgstr "Ви можете створити завдання. У правому верхньому куті Ви можете встановити дату та відповідальну особу для завдання. Натиснувши на “створити” нижньому правому куті, ви можете створити Ваше завдання."
+msgstr "helptext_9_завдання"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_10_documentsetting"
-msgstr "Ви можете додати подальшу інформацію до Вашого документу на додаток до назви, яку Ви вже обрали. Наприклад, Ви можете віднести документ до певної теми, місця, чи файлу. "
+msgstr "helptext_10_налаштування документу"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_11_document"
-msgstr "Тут Ви можете змінити документ, додаючи елементи до документу. За допомогою лінійки часу (символ годинника), ви можете переглянути попередні версії. Легко змінити документ на PDF. Ви можете активувати посилання в документі, натиснувши на </>."
+msgstr "helptext_11_документ"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_12_projectadministration"
-msgstr "Адміністрація Проектів починається з керування режимом членства. Ви можете визначити, хто може брати участь в проекті і хто має бути адміністратором. Ви можете запрошувати учасників з інших порталів, чи інших людей, вказуючи електронні адреси. Вони отримують запрошення до реєстрації на порталі."
+msgstr "helptext_12_адміністрація проекту"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_13_groupadministration"
-msgstr "Адміністрація Груп починається з керування режимом членства. Ви можете визначити, хто може долучитися до групи і хто має бути адміністратором. Ви можете запрошувати учасників з інших порталів, чи інших людей, вказуючи електронні адреси. Вони отримують запрошення до реєстрації на порталі."
+msgstr "helptext_13_Адміністрація спільноти"
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
-msgstr ""
+msgstr "helptext_50_приватність профілю"
 
+#, fuzzy
+#| msgctxt "Look up this ID in the help text register for the translation text!"
+#| msgid "helptext_50_profileprivacy"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_51_objectprivacy"
-msgstr ""
+msgstr "helptext_50_приватність профілю"
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr "Введіть електронні адреси людей, яких ви бажаєте запросити до платформи."
@@ -1517,7 +1520,7 @@ msgstr "При збереженні зображення буде видален
 
 msgctxt "written next to optional form fields"
 msgid "optional"
-msgstr "Опціонально"
+msgstr "опціонально"
 
 msgid "Call to Action Button"
 msgstr "Кнопка Заклик до Дії"
@@ -1734,13 +1737,13 @@ msgid "Create Project"
 msgstr "Створити проект"
 
 msgid "Help about groups"
-msgstr "Допомога із групами"
+msgstr "Довідка щодо груп"
 
 msgid "Help about projects"
-msgstr "Допомогаз проектами"
+msgstr "Довідка щодо проектів"
 
 msgid "Help about the microsite"
-msgstr "Допомога з мікросайтом"
+msgstr "Довідка щодо мікросайтів"
 
 msgid "Edit Group"
 msgstr "Редагувати спільноту"
@@ -1792,7 +1795,7 @@ msgid "Describe the group in a few sentences."
 msgstr "Опишіть спільноту кількома реченнями."
 
 msgid "This description will be publicly visible."
-msgstr "Цей опис буде публічно видимий!"
+msgstr "Цей опис буде налаштований як публічно видимий."
 
 msgid "Describe the project in a few sentences."
 msgstr "Опишіть проект кількома реченнями."
@@ -1834,7 +1837,7 @@ msgid "Privacy settings"
 msgstr "Налаштування приватності"
 
 msgid "This will be the default setting for all content created by members."
-msgstr "Ці налаштування будуть за замовченням встановлені для всього контенту користувачів."
+msgstr "Для всього контенту членів буде встановлено налаштування за замовченням."
 
 msgid "This group will be set to be publicly visible!"
 msgstr "Ця спільнота має бути налаштована як публічно видима!"
@@ -1873,10 +1876,10 @@ msgid "This is a public description that can be seen by anyone and will be shown
 msgstr "Це публічний опис, який буде знаходитися на мікросайті, та який кожен зможе побачити."
 
 msgid "Contact info"
-msgstr "Контактна інформація "
+msgstr "Контактна інформація"
 
 msgid "How you can be reached, addresses, social media, etc..."
-msgstr "Як можна з вами зв'язатися: адреси, соціальні мережі і т. п."
+msgstr "Як можна з вами зв'язатися: адреси, соціальні медіа і т. п."
 
 msgid "From which apps should public items be shown on the microsite?"
 msgstr "Публічні елементи з якого додатку мають бути показані на мікросайті?"
@@ -1924,7 +1927,7 @@ msgid "Show Microsite Call to Action Box"
 msgstr "Показати Заклик до Дії на мікросайті"
 
 msgid "A box shown on the microsite that contains buttons to your external campaigns or websites"
-msgstr "Вікно на мікросайті показує посилання на Вашу зовнішню компанію чи сайт "
+msgstr "Вкладка на мікросайті містить посилання до Ваших зовнішніх кампаній та вебсайтів"
 
 msgid "Show Call to Action Box"
 msgstr "Показати вікно Заклик до Дії"
@@ -2215,7 +2218,7 @@ msgstr "Цей проект має бути налаштований як пуб
 #, fuzzy
 #| msgid "This means that your name, avatar and user profile can be seen by ANYONE on the internet and may potentially be included in search engine results!"
 msgid "Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
-msgstr "Це означає, що Ваше ім'я, аватар та профиль користувача буде видимий для БУДЬ-КОГО в інтернеті. Крім того, вони потенційно можуть бути включениі в результати пошукових систем."
+msgstr "Це означає, що будь-хто в Інтернеті може бачити Ваше ім’я, фото профілю та профіль і він, потенційно, може бути включений в результати пошукових машин!"
 
 msgid "Registered users only"
 msgstr "Лише зареєстровані користувачі"
@@ -2335,7 +2338,23 @@ msgstr ""
 msgid "Offensive item reported: \"%(object_name)s\" on %(site_name)s!"
 msgstr "Образливий зміст, про який було повідомлено: у «%(object_name)s» на %(site_name)s!"
 
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Hi %(user_name)s,\n"
+#| "\n"
+#| "you have just registered an account at %(site_name)s. We're happy to see you!\n"
+#| "\n"
+#| "You will need to verify your email %(user_email)s before you can log in. \n"
+#| "\n"
+#| "\n"
+#| "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
+#| "%(domain_url)s%(user_verification_url)s\n"
+#| "\n"
+#| "\n"
+#| "\n"
+#| "Thank you and see you soon!\n"
+#| "\n"
+#| "Your %(site_name)s Team"
 msgid ""
 "Hi %(user_name)s,\n"
 "\n"
@@ -2361,7 +2380,7 @@ msgstr ""
 "\n"
 "\n"
 "Будь ласка, перейдіть за нижче вказаним посиланням для підтвердження вашої email-адреси (або скопіюйте та вставте посилання в адресний рядок вашого браузера):\n"
-"%(domain_url)s%(user_verification_url)s%(next)s\n"
+"%(domain_url)s%(user_verification_url)s\n"
 "\n"
 "\n"
 "\n"
@@ -2699,10 +2718,10 @@ msgstr ""
 "%(domain_url)s"
 
 msgid "Additional options"
-msgstr "Додаткові можливості"
+msgstr "Додаткові опції"
 
 msgid "Attach files, add a location, mark topics and adjust visibility settings"
-msgstr "Додати файли, локацію, вказати теми та встановіть налаштування видимості"
+msgstr "Додати файли, додати локацію, вказати тему та встановити налаштування видимості"
 
 msgid "Tag persons"
 msgstr "Вказати людей"
@@ -2714,7 +2733,7 @@ msgid "Place or adress"
 msgstr "Місце або адреса"
 
 msgid "Upload a file or image or attach an existing one"
-msgstr "Завантажити файл чи зображення або додати те, що вже існує"
+msgstr "Завантажити файл чи зображення, або додати ті, що існують"
 
 msgid "Select topic"
 msgstr "Вказати тему"
@@ -2729,7 +2748,7 @@ msgid "If you do not wish this, you can change this item's visibility setting be
 msgstr "Якщо Ви цього не хочете, Ви можете змінити налаштування приватності елемента нижче."
 
 msgid "Show more options..."
-msgstr "Показати більше можливостей..."
+msgstr "Показати більше опцій…"
 
 msgid "Which topics are you involved with?"
 msgstr "З якими темами ви працюєте?"
@@ -2755,7 +2774,7 @@ msgid "Where would your idea be realized?"
 msgstr "Чого би ви хотіли навчитися?"
 
 msgid "Enter a place or address and then choose a point on the map."
-msgstr "введіть місце зосташування чи адресу, а потім оберіть точку на карті. "
+msgstr "Введіть місце чи адресу а потім виберіть місце на карті."
 
 #, fuzzy
 #| msgid "Which topics are you involved with?"
@@ -2775,13 +2794,13 @@ msgid "Who may see your plattform profile?"
 msgstr "Хто може бачити Ваш профіль на платформі?"
 
 msgid "Your profile will be set to be publicly visible!"
-msgstr "Ваш профіль буде налаштований як публічно видимий!"
+msgstr "Ваш профіль буде виден для всіх, хто бажає!"
 
 msgid "This means that your name, avatar and user profile can be seen by ANYONE on the internet and may potentially be included in search engine results!"
-msgstr "Це означає, що Ваше ім'я, аватар та профиль користувача буде видимий для БУДЬ-КОГО в інтернеті. Крім того, вони потенційно можуть бути включениі в результати пошукових систем."
+msgstr "Це означає, що будь-хто в Інтернеті може бачити Ваше ім’я, фото профілю та профіль і він, потенційно, може бути включений в результати пошукових машин!"
 
 msgid "Please note that changes in this setting will not have an immediate effect on search engine results! Depending on the search provider, it might take days or weeks until this setting is reflected in their results."
-msgstr "Будь ласка, зверніть увагу, що зміни в налаштуваннях не призведуть до зміни в результатах пошукових систем! Залежно від пошукової системи, відображення результатів може зайняти дні, або тижні."
+msgstr "Будь ласка, зверніть увагу, що зміна цих налаштувань не матиме негайного ефекту на результати пошукових систем! Залежно від пошукової системи, можуть пройти дні, або тижні поки результати будуть відображені в системі."
 
 msgid "Privacy"
 msgstr "Приватність"
@@ -2922,7 +2941,7 @@ msgid "Enter old password"
 msgstr "Введіть старий пароль"
 
 msgid "We need to make sure it's really you"
-msgstr "Ми маємо переконатися, що це насправді Ви"
+msgstr "Ми маємо переконатись, що це справді Ви"
 
 msgid "Old password"
 msgstr "Старий пароль"
@@ -2931,10 +2950,10 @@ msgid "New Password"
 msgstr "Новий пароль"
 
 msgid "Enter a password you don't use anywhere else. The longer the better!"
-msgstr "Введіть пароль, який ви ніде не використовуєте. Чим довший, тим краще."
+msgstr "Введіть пароль, який Ви не використовуєте десь ще. Чим довше, тим краще!"
 
 msgid "Repeat your password just to make sure"
-msgstr "Повторіть пароль, щоб переконатися"
+msgstr "Повторіть Ваш пароль, щоби переконатися"
 
 msgid "Repeat new Password"
 msgstr "Повторіть новий пароль"
@@ -2995,7 +3014,7 @@ msgid "Forgotten your password? Enter your email address below, and we'll email 
 msgstr "Забули пароль? Введіть нижче адресу вашої електронної скриньки, і ми надішлемо вам інструкції для призначення нового паролю."
 
 msgid "The email you used to register your account. This is the one you receive email notifications on"
-msgstr "Електронна адреса, яку ви використовуєте для реєстрації аккаунту. Нанього ви будете отримувати електронні листи з повідомленнями"
+msgstr "Поштова адреса, яку Ви використовуєте для реєстрації Вашого акаунту. На нього ви будете отримувати сповіщення"
 
 msgid "Example: mymail@example.com"
 msgstr "Приклад: mymail@example.com"
@@ -3032,7 +3051,7 @@ msgid "Email address"
 msgstr "Адреса електронної скриньки"
 
 msgid "This will be used as your login. Notification emails will be sent to this address (if you want to receive them)."
-msgstr "Це буде використано як Ваш логін. Повідомлення будуть відправлені на цю адресу (якщо ви хочете їх отримувати)."
+msgstr "Це буде використано як Ваш логін. Листи-сповіщення будуть надіслані на цю адресу (якщо Ви хочете їх отримувати)."
 
 msgid "Repeat Password"
 msgstr "Повторіть пароль"
@@ -3041,7 +3060,7 @@ msgid "Your name"
 msgstr "Ваше ім'я"
 
 msgid "This name will be displayed to other users on the site"
-msgstr "Ваше ім'я буде видиме іншим користувачам сайту"
+msgstr "Це ім’я буде показано іншим користувачам на сайті"
 
 msgid "First name"
 msgstr "Ім'я"
@@ -3050,13 +3069,13 @@ msgid "Last name"
 msgstr "Прізвище"
 
 msgid "You can supply your last name to be displayed as well"
-msgstr "Ви можете встановити своє прізвище як публічно доступне"
+msgstr "Ви також можете вказати для відображення Ваше прізвище"
 
 msgid "Captcha"
-msgstr "Captcha"
+msgstr "Сиволи перевірки"
 
 msgid "We need to make sure you are a real person (sorry!)"
-msgstr "Ми маємо переконатися, що Ві є реальною персоною (вибачте!)"
+msgstr "Ми маємо переконатися, що Ви є реальною персоною (вибачте!)"
 
 msgctxt "read and accept the [Terms of Services]"
 msgid "I have read and accept the"
@@ -3234,7 +3253,7 @@ msgstr "Пов'язані проекти/спільноти"
 #, fuzzy
 #| msgid "Contact info"
 msgid "No info."
-msgstr "Контактна інформація "
+msgstr "Контактна інформація"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -4079,24 +4098,6 @@ msgstr "Ви, на разі, не є членом %s! Якщо ви бажаєт
 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
-
-#~ msgid "French"
-#~ msgstr "Français"
-
-#, fuzzy
-#~| msgid "Logo Image"
-#~ msgid "Lmage"
-#~ msgstr "Зображення логотипу"
-
-#, fuzzy
-#~| msgid "Portal memberships"
-#~ msgid "Project/Group Members"
-#~ msgstr "Членства на порталі"
-
-#, fuzzy
-#~| msgid "Group"
-#~ msgid "Gruppen"
-#~ msgstr "Спільнота"
 
 #~ msgid "My Groups and Projects"
 #~ msgstr "Мої групи та проекти"
