@@ -72,6 +72,7 @@ def email_portal_admins(subject, template, data):
     mail_thread.start()
 
 
+""" Deprecated, has been replaced by `cosinnus.views.map.TileView`! """
 class UserListView(EndlessPaginationMixin, ListView):
 
     model = USER_MODEL

@@ -108,21 +108,3 @@ class IdeaDeleteView(RequireWriteGrouplessMixin, SamePortalGroupMixin, DeleteVie
 idea_delete = IdeaDeleteView.as_view()
 
 
-class IdeaListView(RedirectView):
-    permanent = False
-    
-    def get_redirect_url(self, *args, **kwargs):
-        return reverse('cosinnus:map') + '?people=false&events=false&projects=false&groups=false&ideas=true&ignore_location=1'
-    
-idea_list = IdeaListView.as_view()
-
-
-class IdeaListMineView(RedirectView):
-    permanent = False
-    
-    def get_redirect_url(self, *args, **kwargs):
-        return reverse('cosinnus:map') + '?people=false&events=false&projects=false&groups=false&ideas=true&mine=1&ignore_location=1'
-    
-idea_list_mine = IdeaListMineView.as_view()
-
-
