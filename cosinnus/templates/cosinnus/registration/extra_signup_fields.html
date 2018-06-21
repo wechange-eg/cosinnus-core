@@ -1,0 +1,17 @@
+{% load i18n cosinnus_tags widget_tweaks %}
+
+<div class="v-spacer-l"></div>
+
+<div>                    
+    {{ form.tos_check.errors }}
+    <p class="inline-list transparent">
+        <span class="cursor-pointer-input">
+            {% render_field form.tos_check %}
+        </span>
+        <span class="cursor-pointer-input" onclick="$('#{{ form.tos_check.id_for_label }}').prop('checked', !($('#{{ form.tos_check.id_for_label }}').prop('checked')));">
+            {% trans "I have read and accept the" context "read and accept the [Terms of Services]" %}
+        </span>
+        <a href="/nutzungsbedingungen/" target="_blank">{% trans "Terms and Services" %} <i class="fa fa-external-link"></i></a>
+    </p>
+</div>
+

@@ -50,6 +50,10 @@ class UserCreationForm(DjUserCreationForm):
     tos_check = forms.BooleanField(label='tos_check', required=True)
     captcha = CaptchaField()
     
+    if settings.COSINNUS_SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK:
+        print ">> ho"
+        privacy_policy_check = forms.BooleanField(label='privacy_policy_check', required=True)
+    
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
         self.fields['first_name'].required = True

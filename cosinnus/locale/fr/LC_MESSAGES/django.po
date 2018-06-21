@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-19 14:35+0200\n"
+"POT-Creation-Date: 2018-06-21 17:39+0200\n"
 "PO-Revision-Date: 2018-06-18 12:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2912,6 +2912,29 @@ msgstr "Ce site n'autorise pas d'accès anonyme."
 msgid "Log in..."
 msgstr "Connexion..."
 
+msgctxt "read and accept the [Terms of Services]"
+msgid "I have read and accept the"
+msgstr "J'ai lu et accepte les"
+
+msgid "Terms and Services"
+msgstr "Conditions d'utilisation"
+
+#, fuzzy
+#| msgctxt "read and accept the [Terms of Services]"
+#| msgid "I have read and accept the"
+msgctxt "read and accept the [Privacy Policy]"
+msgid "I have read and accept the"
+msgstr "J'ai lu et accepte les"
+
+#, fuzzy
+#| msgid "Privacy"
+msgid "Privacy Policy"
+msgstr "Confidentialité"
+
+#, python-format
+msgid "If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject \"Registration failed\" to %(email_link)s and we will assist you as soon as possible!"
+msgstr ""
+
 msgid "Forgot password?"
 msgstr "Mot de passe oublié ?"
 
@@ -3087,17 +3110,6 @@ msgstr "Captcha"
 
 msgid "We need to make sure you are a real person (sorry!)"
 msgstr "Nous devons nous assurer que tu es une vraie personne"
-
-msgctxt "read and accept the [Terms of Services]"
-msgid "I have read and accept the"
-msgstr "J'ai lu et accepte les"
-
-msgid "Terms and Services"
-msgstr "Conditions d'utilisation"
-
-#, python-format
-msgid "If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject \"Registration failed\" to %(email_link)s and we will assist you as soon as possible!"
-msgstr ""
 
 msgid "Search in Apps"
 msgstr "Rechercher dans les applications"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-19 14:35+0200\n"
+"POT-Creation-Date: 2018-06-21 17:39+0200\n"
 "PO-Revision-Date: 2018-06-17 20:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2901,6 +2901,29 @@ msgstr "Щоб отримати доступ до цього веб-сайту, 
 msgid "Log in..."
 msgstr "Увійти в систему..."
 
+msgctxt "read and accept the [Terms of Services]"
+msgid "I have read and accept the"
+msgstr "Я прочитав та приймаю"
+
+msgid "Terms and Services"
+msgstr "Угода користувача"
+
+#, fuzzy
+#| msgctxt "read and accept the [Terms of Services]"
+#| msgid "I have read and accept the"
+msgctxt "read and accept the [Privacy Policy]"
+msgid "I have read and accept the"
+msgstr "Я прочитав та приймаю"
+
+#, fuzzy
+#| msgid "Privacy"
+msgid "Privacy Policy"
+msgstr "Приватність"
+
+#, python-format
+msgid "If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject \"Registration failed\" to %(email_link)s and we will assist you as soon as possible!"
+msgstr ""
+
 msgid "Forgot password?"
 msgstr "Забули пароль?"
 
@@ -3076,17 +3099,6 @@ msgstr "Сиволи перевірки"
 
 msgid "We need to make sure you are a real person (sorry!)"
 msgstr "Ми маємо переконатися, що Ви є реальною персоною (вибачте!)"
-
-msgctxt "read and accept the [Terms of Services]"
-msgid "I have read and accept the"
-msgstr "Я прочитав та приймаю"
-
-msgid "Terms and Services"
-msgstr "Угода користувача"
-
-#, python-format
-msgid "If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject \"Registration failed\" to %(email_link)s and we will assist you as soon as possible!"
-msgstr ""
 
 msgid "Search in Apps"
 msgstr "Пошук серед застосунків"
