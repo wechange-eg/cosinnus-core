@@ -959,6 +959,7 @@
     padding: 0 15px;
     border-bottom: 1px solid @map-frame-color;
     background-color: #FFF;
+    white-space: nowrap;
     
     span.pull-right {
         padding: 15px 0;
@@ -1347,7 +1348,7 @@
             bottom: unset;
             left: unset;
             right: 5px;
-            top: 65px;
+            top: 10px;
         }
     }
     .map-splitscreen {
@@ -1375,6 +1376,10 @@
     .pagination-controls {
         position: fixed;
         width: 100%;
+    }
+    /** In full-tile-view, we move it under the header */
+    .tile-list.tile-list-tile-fullscreen .pagination-controls {
+        margin-top: 65px;
     }
     .tile-contents {
         margin-top: 72px;

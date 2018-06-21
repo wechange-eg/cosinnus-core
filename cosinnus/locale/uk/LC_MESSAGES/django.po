@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-21 17:39+0200\n"
+"POT-Creation-Date: 2018-06-21 18:31+0200\n"
 "PO-Revision-Date: 2018-06-17 20:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1730,9 +1730,11 @@ msgstr "Експортувати"
 msgid "Edit “%(team_name)s”"
 msgstr "Редагувати проект «%(team_name)s»"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create Group"
 msgstr "Створити спільноту"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create Project"
 msgstr "Створити проект"
 
@@ -2033,9 +2035,13 @@ msgstr "Переглянути проект"
 msgid "View Group"
 msgstr "Переглянути спільноту"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Membership request pending..."
 msgstr "Запит щодо членства очікує..."
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are invited!"
 msgstr "Вас запросили!"
 
@@ -2156,6 +2162,7 @@ msgstr "Перемістити"
 msgid "A message from %(sender_full_name)s"
 msgstr "Повідомлення від %(sender_full_name)s"
 
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "Created"
 msgid "Create Idea"
@@ -2845,18 +2852,22 @@ msgstr "Люди"
 msgid "Invited Groups"
 msgstr "Запросити групи"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "My Groups"
 msgstr "Мої спільноти"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Groups"
 msgstr "Усі спільноти"
 
 msgid "Invited Projects"
 msgstr "Запросити проекти"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "My Projects"
 msgstr "Мої проекти"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Projects"
 msgstr "Усі проекти"
 
@@ -2864,11 +2875,13 @@ msgstr "Усі проекти"
 msgid "Ideas"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "My teams"
 msgid "My Ideas"
 msgstr "Мої проекти"
 
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "All users"
 msgid "All Ideas"
@@ -2907,22 +2920,6 @@ msgstr "Я прочитав та приймаю"
 
 msgid "Terms and Services"
 msgstr "Угода користувача"
-
-#, fuzzy
-#| msgctxt "read and accept the [Terms of Services]"
-#| msgid "I have read and accept the"
-msgctxt "read and accept the [Privacy Policy]"
-msgid "I have read and accept the"
-msgstr "Я прочитав та приймаю"
-
-#, fuzzy
-#| msgid "Privacy"
-msgid "Privacy Policy"
-msgstr "Приватність"
-
-#, python-format
-msgid "If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject \"Registration failed\" to %(email_link)s and we will assist you as soon as possible!"
-msgstr ""
 
 msgid "Forgot password?"
 msgstr "Забули пароль?"
@@ -3153,6 +3150,30 @@ msgstr "Вкажіть один чи більше пошукових запит�
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+#| msgid "Users"
+msgid "My Users"
+msgstr "Користувачі"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Events"
+msgid "My Events"
+msgstr "Заходи"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "All users"
+msgid "All Users"
+msgstr "Усі користувачі"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Events"
+msgid "All Events"
+msgstr "Заходи"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 #| msgctxt "Calendar"
 #| msgid "Event"
 msgid "Event"
@@ -3163,7 +3184,23 @@ msgid "Idea"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create folder"
+msgid "Create User"
+msgstr "Створити папку"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created"
+msgid "Create Event"
+msgstr "Створено"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names, Topics and Places..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search for Names and Topics..."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -4110,6 +4147,18 @@ msgstr "Ви, на разі, не є членом %s! Якщо ви бажаєт
 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
+
+#, fuzzy
+#~| msgctxt "read and accept the [Terms of Services]"
+#~| msgid "I have read and accept the"
+#~ msgctxt "read and accept the [Privacy Policy]"
+#~ msgid "I have read and accept the"
+#~ msgstr "Я прочитав та приймаю"
+
+#, fuzzy
+#~| msgid "Privacy"
+#~ msgid "Privacy Policy"
+#~ msgstr "Приватність"
 
 #~ msgid "My Groups and Projects"
 #~ msgstr "Мої групи та проекти"

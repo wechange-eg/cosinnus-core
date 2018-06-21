@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-21 17:39+0200\n"
-"PO-Revision-Date: 2018-06-21 17:40+0200\n"
+"POT-Creation-Date: 2018-06-21 18:31+0200\n"
+"PO-Revision-Date: 2018-06-21 18:34+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -1715,10 +1715,12 @@ msgstr "Exportieren"
 msgid "Edit “%(team_name)s”"
 msgstr "Projekt “%(team_name)s” bearbeiten"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create Group"
 msgstr "Gruppe erstellen"
 
 #
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create Project"
 msgstr "Projekt erstellen"
 
@@ -2020,9 +2022,13 @@ msgstr "Projekt ansehen"
 msgid "View Group"
 msgstr "Gruppe ansehen"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Membership request pending..."
 msgstr "Mitgliedschaft wurde beantragt..."
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are invited!"
 msgstr "Du bist eingeladen worden!"
 
@@ -2143,6 +2149,7 @@ msgstr "Verschieben"
 msgid "A message from %(sender_full_name)s"
 msgstr "Nachricht von %(sender_full_name)s"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create Idea"
 msgstr "Idee erstellen"
 
@@ -2794,18 +2801,22 @@ msgstr "Menschen"
 msgid "Invited Groups"
 msgstr "Gruppeneinladungen"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "My Groups"
 msgstr "Meine Gruppen"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Groups"
 msgstr "Alle Gruppen"
 
 msgid "Invited Projects"
 msgstr "Projekteinladungen"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "My Projects"
 msgstr "Meine Projekte"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Projects"
 msgstr "Alle Projekte"
 
@@ -2813,9 +2824,11 @@ msgstr "Alle Projekte"
 msgid "Ideas"
 msgstr "Ideen"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "My Ideas"
 msgstr "Meine Ideen"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Ideas"
 msgstr "Alle Ideen"
 
@@ -2852,17 +2865,6 @@ msgstr "Ich habe die Nutzungsbedingungen gelesen und akzeptiere sie:"
 
 msgid "Terms and Services"
 msgstr "Nutzungsbedingungen"
-
-msgctxt "read and accept the [Privacy Policy]"
-msgid "I have read and accept the"
-msgstr "Ich habe die Datenschutzerklärung gelesen und akzeptiere sie:"
-
-msgid "Privacy Policy"
-msgstr "Datenschutzerklärung"
-
-#, python-format
-msgid "If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject \"Registration failed\" to %(email_link)s and we will assist you as soon as possible!"
-msgstr "Falls du Hilfe bei der Registrierung benötigst oder du die Registrierung nicht abschließen kannst, schicke eine kurze Email mit dem Betreff \"Registrierung nicht möglich\" an %(email_link)s. Wir helfen dir sobald wie möglich!"
 
 msgid "Forgot password?"
 msgstr "Passwort vergessen?"
@@ -3090,6 +3092,22 @@ msgid "Enter one or more search terms or select a topic to search."
 msgstr "Gib einen oder mehrere Suchbegriffe ein oder wähle ein Thema aus um zu Suchen."
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "My Users"
+msgstr "Meine Benutzer_innen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Events"
+msgstr "Meine Veranstaltungen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Users"
+msgstr "Alle Benutzer_innen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Events"
+msgstr "Alle Veranstaltungen"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Event"
 msgstr "Veranstaltung"
 
@@ -3098,8 +3116,20 @@ msgid "Idea"
 msgstr "Idee"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Create User"
+msgstr "Benutzer_in erstellen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Event"
+msgstr "Veranstaltung erstellen"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names, Topics and Places..."
 msgstr "Suche nach Namen, Themen und Orten..."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search for Names and Topics..."
+msgstr "Suche nach Namen und Themen..."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Where"
@@ -3990,6 +4020,16 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten 
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgctxt "read and accept the [Privacy Policy]"
+#~ msgid "I have read and accept the"
+#~ msgstr "Ich habe die Datenschutzerklärung gelesen und akzeptiere sie:"
+
+#~ msgid "Privacy Policy"
+#~ msgstr "Datenschutzerklärung"
+
+#~ msgid "If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject \"Registration failed\" to %(email_link)s and we will assist you as soon as possible!"
+#~ msgstr "Falls du Hilfe bei der Registrierung benötigst oder du die Registrierung nicht abschließen kannst, schicke eine kurze Email mit dem Betreff \"Registrierung nicht möglich\" an %(email_link)s. Wir helfen dir sobald wie möglich!"
 
 #~ msgid "French"
 #~ msgstr "Français"

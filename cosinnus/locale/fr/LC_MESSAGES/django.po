@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-21 17:39+0200\n"
+"POT-Creation-Date: 2018-06-21 18:31+0200\n"
 "PO-Revision-Date: 2018-06-18 12:54+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1739,9 +1739,11 @@ msgstr "Exporter"
 msgid "Edit “%(team_name)s”"
 msgstr "Editer “%(team_name)s”"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create Group"
 msgstr "Créer groupe"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create Project"
 msgstr "Créer projet"
 
@@ -2047,9 +2049,13 @@ msgstr "Voir projet"
 msgid "View Group"
 msgstr "Voir groupe"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Membership request pending..."
 msgstr "Demande d'ajout en attente"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are invited!"
 msgstr "Tu es invité !"
 
@@ -2170,6 +2176,7 @@ msgstr "Déplacer"
 msgid "A message from %(sender_full_name)s"
 msgstr "Un message de %(sender_full_name)s"
 
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "Created"
 msgid "Create Idea"
@@ -2856,18 +2863,22 @@ msgstr "Personnes"
 msgid "Invited Groups"
 msgstr "Groupes invités"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "My Groups"
 msgstr "Mes groupes"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Groups"
 msgstr "Tous les groupes"
 
 msgid "Invited Projects"
 msgstr "Projets invités"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "My Projects"
 msgstr "Mes projets"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Projects"
 msgstr "Tous les projets"
 
@@ -2875,11 +2886,13 @@ msgstr "Tous les projets"
 msgid "Ideas"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "My teams"
 msgid "My Ideas"
 msgstr "Mes équipes"
 
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "All users"
 msgid "All Ideas"
@@ -2918,22 +2931,6 @@ msgstr "J'ai lu et accepte les"
 
 msgid "Terms and Services"
 msgstr "Conditions d'utilisation"
-
-#, fuzzy
-#| msgctxt "read and accept the [Terms of Services]"
-#| msgid "I have read and accept the"
-msgctxt "read and accept the [Privacy Policy]"
-msgid "I have read and accept the"
-msgstr "J'ai lu et accepte les"
-
-#, fuzzy
-#| msgid "Privacy"
-msgid "Privacy Policy"
-msgstr "Confidentialité"
-
-#, python-format
-msgid "If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject \"Registration failed\" to %(email_link)s and we will assist you as soon as possible!"
-msgstr ""
 
 msgid "Forgot password?"
 msgstr "Mot de passe oublié ?"
@@ -3164,6 +3161,30 @@ msgstr "Entre un terme de recherche ou plus ou sélectionne un sujet à recherch
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+#| msgid "Users"
+msgid "My Users"
+msgstr "Utilisateurs"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Events"
+msgid "My Events"
+msgstr "Evénements"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "All users"
+msgid "All Users"
+msgstr "Tous les utilisateurs"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Events"
+msgid "All Events"
+msgstr "Evénements"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 #| msgctxt "Calendar"
 #| msgid "Event"
 msgid "Event"
@@ -3174,7 +3195,23 @@ msgid "Idea"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create folder"
+msgid "Create User"
+msgstr "Créer dossier"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created"
+msgid "Create Event"
+msgstr "Créé"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names, Topics and Places..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search for Names and Topics..."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -4122,6 +4159,18 @@ msgstr "Tu n'es pas membre de %s ! Si tu souhaites, tu peux demander à le deven
 
 msgid "Your changes have been saved."
 msgstr "Tes changements ont été enregistrés."
+
+#, fuzzy
+#~| msgctxt "read and accept the [Terms of Services]"
+#~| msgid "I have read and accept the"
+#~ msgctxt "read and accept the [Privacy Policy]"
+#~ msgid "I have read and accept the"
+#~ msgstr "J'ai lu et accepte les"
+
+#, fuzzy
+#~| msgid "Privacy"
+#~ msgid "Privacy Policy"
+#~ msgstr "Confidentialité"
 
 #~ msgid "French"
 #~ msgstr "Français"

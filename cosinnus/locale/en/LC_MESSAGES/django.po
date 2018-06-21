@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-21 17:39+0200\n"
+"POT-Creation-Date: 2018-06-21 18:31+0200\n"
 "PO-Revision-Date: 2018-06-18 12:48+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1747,9 +1747,11 @@ msgstr ""
 msgid "Edit “%(team_name)s”"
 msgstr "Edit project “%(team_name)s”"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create Group"
 msgstr "Create Group"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create Project"
 msgstr "Create Project"
 
@@ -2064,9 +2066,13 @@ msgstr "Edit Project"
 msgid "View Group"
 msgstr "Edit Project"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Membership request pending..."
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are invited!"
 msgstr ""
 
@@ -2204,6 +2210,7 @@ msgstr ""
 msgid "A message from %(sender_full_name)s"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "Create Project"
 msgid "Create Idea"
@@ -2714,9 +2721,11 @@ msgstr ""
 msgid "Invited Groups"
 msgstr "Edit Project"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "My Groups"
 msgstr "My Groups"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Groups"
 msgstr "All Groups"
 
@@ -2725,9 +2734,11 @@ msgstr "All Groups"
 msgid "Invited Projects"
 msgstr "Edit Project"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "My Projects"
 msgstr "My Projects"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Projects"
 msgstr "All Projects"
 
@@ -2735,11 +2746,13 @@ msgstr "All Projects"
 msgid "Ideas"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "My teams"
 msgid "My Ideas"
 msgstr "My projects"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Ideas"
 msgstr ""
 
@@ -2775,17 +2788,6 @@ msgid "I have read and accept the"
 msgstr ""
 
 msgid "Terms and Services"
-msgstr ""
-
-msgctxt "read and accept the [Privacy Policy]"
-msgid "I have read and accept the"
-msgstr ""
-
-msgid "Privacy Policy"
-msgstr ""
-
-#, python-format
-msgid "If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject \"Registration failed\" to %(email_link)s and we will assist you as soon as possible!"
 msgstr ""
 
 msgid "Forgot password?"
@@ -3018,6 +3020,30 @@ msgid "Enter one or more search terms or select a topic to search."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "My teams"
+msgid "My Users"
+msgstr "My projects"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "My Projects"
+msgid "My Events"
+msgstr "My Projects"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "All projects"
+msgid "All Users"
+msgstr "All projects"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "All projects"
+msgid "All Events"
+msgstr "All projects"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Event"
 msgstr ""
 
@@ -3026,7 +3052,23 @@ msgid "Idea"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create Project"
+msgid "Create User"
+msgstr "Create Project"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create Project"
+msgid "Create Event"
+msgstr "Create Project"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names, Topics and Places..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search for Names and Topics..."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__

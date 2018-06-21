@@ -111,7 +111,7 @@ module.exports = ContentControlView.extend({
         Backbone.mediator.subscribe('app:ready', self.handleAppReady, self);
         Backbone.mediator.subscribe('app:stale-results', self.handleStaleResults, self);
         
-        self.triggerMobileMapView();
+        self.triggerMobileDefaultView();
         
         util.log('control-view.js: initialized. with self.App=' + self.App)
     },
@@ -307,10 +307,20 @@ module.exports = ContentControlView.extend({
         this.App.$el.removeClass('mobile-view-map mobile-view-search mobile-view-list mobile-view-detail mobile-view-idea-create-1 mobile-view-idea-create-2');
     },
     
+    triggerMobileDefaultView: function (event) {
+    	if (this.options.splitscreen) {
+    		this.triggerMobileMapView(event);
+        } else {
+        	this.triggerMobileListView(event);
+        }
+    },
+    
     triggerMobileListView: function (event) {
         this._resetMobileView();
         this.App.$el.addClass('mobile-view-list');
-        this.App.tileListView.gridRefresh();
+        if (this.App.tileListView) { // might not be loaded yet
+        	this.App.tileListView.gridRefresh();
+        }
     },
 
     triggerMobileSearchView: function (event) {
@@ -344,7 +354,7 @@ module.exports = ContentControlView.extend({
     },
     
     untriggerMobileIdeaCreateView: function (event) {
-        this.triggerMobileMapView(event);
+        this.triggerMobileDefaultView(event);
     },
     
     untriggerMobileDetailView: function (event) {
@@ -1005,9 +1015,9 @@ module.exports = ContentControlView.extend({
                     if (self.paginationControlView) {
                     	self.paginationControlView.render();
                     }
-                    // if we have done a manual search, set the view to map!
+                    // if we have done a manual search, set the view to default!
                     if (searchReason == 'manual-search') {
-                        self.triggerMobileMapView();
+                        self.triggerMobileDefaultView(event);
                     }
                     // scroll tile list to top on manual searches
                     if (searchReason == 'manual-search' || searchReason == 'reset-filters-search' || searchReason == 'paginate-search') {
