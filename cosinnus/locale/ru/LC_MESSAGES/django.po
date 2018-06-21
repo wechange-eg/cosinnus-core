@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-19 14:35+0200\n"
+"POT-Creation-Date: 2018-06-21 17:39+0200\n"
 "PO-Revision-Date: 2018-06-17 23:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2904,6 +2904,29 @@ msgstr "Этот сайт не допускает анонимного поль�
 msgid "Log in..."
 msgstr "Войти..."
 
+msgctxt "read and accept the [Terms of Services]"
+msgid "I have read and accept the"
+msgstr "Я ознакомился и согласен с условиями пользования сайтом"
+
+msgid "Terms and Services"
+msgstr "Условия пользования сайтом"
+
+#, fuzzy
+#| msgctxt "read and accept the [Terms of Services]"
+#| msgid "I have read and accept the"
+msgctxt "read and accept the [Privacy Policy]"
+msgid "I have read and accept the"
+msgstr "Я ознакомился и согласен с условиями пользования сайтом"
+
+#, fuzzy
+#| msgid "Privacy"
+msgid "Privacy Policy"
+msgstr "Конфиденциальность"
+
+#, python-format
+msgid "If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject \"Registration failed\" to %(email_link)s and we will assist you as soon as possible!"
+msgstr ""
+
 msgid "Forgot password?"
 msgstr "Забыли пароль?"
 
@@ -3079,17 +3102,6 @@ msgstr "Проверочные символы"
 
 msgid "We need to make sure you are a real person (sorry!)"
 msgstr "Нам необходимо убедиться, что Вы - реальная личность (просим прощения!)"
-
-msgctxt "read and accept the [Terms of Services]"
-msgid "I have read and accept the"
-msgstr "Я ознакомился и согласен с условиями пользования сайтом"
-
-msgid "Terms and Services"
-msgstr "Условия пользования сайтом"
-
-#, python-format
-msgid "If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject \"Registration failed\" to %(email_link)s and we will assist you as soon as possible!"
-msgstr ""
 
 msgid "Search in Apps"
 msgstr "Поиск в приложениях"

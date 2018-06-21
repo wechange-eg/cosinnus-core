@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-19 14:35+0200\n"
-"PO-Revision-Date: 2018-06-19 14:42+0200\n"
+"POT-Creation-Date: 2018-06-21 17:39+0200\n"
+"PO-Revision-Date: 2018-06-21 17:40+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -2846,6 +2846,24 @@ msgstr "Diese Webseite gestattet keinen Zugang für nicht eingeloggte Benutzer."
 msgid "Log in..."
 msgstr "Einloggen..."
 
+msgctxt "read and accept the [Terms of Services]"
+msgid "I have read and accept the"
+msgstr "Ich habe die Nutzungsbedingungen gelesen und akzeptiere sie:"
+
+msgid "Terms and Services"
+msgstr "Nutzungsbedingungen"
+
+msgctxt "read and accept the [Privacy Policy]"
+msgid "I have read and accept the"
+msgstr "Ich habe die Datenschutzerklärung gelesen und akzeptiere sie:"
+
+msgid "Privacy Policy"
+msgstr "Datenschutzerklärung"
+
+#, python-format
+msgid "If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject \"Registration failed\" to %(email_link)s and we will assist you as soon as possible!"
+msgstr "Falls du Hilfe bei der Registrierung benötigst oder du die Registrierung nicht abschließen kannst, schicke eine kurze Email mit dem Betreff \"Registrierung nicht möglich\" an %(email_link)s. Wir helfen dir sobald wie möglich!"
+
 msgid "Forgot password?"
 msgstr "Passwort vergessen?"
 
@@ -3019,17 +3037,6 @@ msgstr "Captcha"
 
 msgid "We need to make sure you are a real person (sorry!)"
 msgstr "Wir müssen sicherstellen dass du eine echte Person bist (tut uns leid!)"
-
-msgctxt "read and accept the [Terms of Services]"
-msgid "I have read and accept the"
-msgstr "Ich habe die Nutzungsbedingungen gelesen und akzeptiere sie:"
-
-msgid "Terms and Services"
-msgstr "Nutzungsbedingungen"
-
-#, python-format
-msgid "If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject \"Registration failed\" to %(email_link)s and we will assist you as soon as possible!"
-msgstr "Falls du Hilfe bei der Registrierung benötigst oder du die Registrierung nicht abschließen kannst, schicke eine kurze Email mit dem Betreff \"Registrierung nicht möglich\" an %(email_link)s. Wir helfen dir sobald wie möglich!"
 
 msgid "Search in Apps"
 msgstr "Suche in Anwendungen"

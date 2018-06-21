@@ -90,7 +90,7 @@ def check_object_read_access(obj, user):
     elif type(obj) is CosinnusIdea:
         # ideas are only either public or visible by any logged in user, no private setting
         return obj.public or user.is_authenticated()
-    elif (obj.__class__, BaseUserProfile):
+    elif issubclass(obj.__class__, BaseUserProfile):
         return check_user_can_see_user(user, obj.user)
     else:
         met_proper_object_conditions = False

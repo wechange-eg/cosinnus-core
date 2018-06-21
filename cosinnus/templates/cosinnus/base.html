@@ -12,6 +12,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="referrer" content="same-origin">
         
         {% block og_meta_attributes %}
         <meta property="og:url"           content="{% block og_url %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ request.path }}{% endblock og_url %}" />
