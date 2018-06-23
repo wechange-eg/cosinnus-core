@@ -16,8 +16,9 @@ from django.core.urlresolvers import reverse_lazy
 urlpatterns = patterns('cosinnus.views',
     # we do not define an index anymore and let CMS handle that.
 
-    url(r'^users/$', 'map.tile_view', name='user-list', kwargs={'types': ['people']}),
-    
+    # soon to be replaced by tile view
+    url(r'^users/$', 'user.user_list', name='user-list'),
+    #url(r'^users/$', 'map.tile_view', name='user-list', kwargs={'types': ['people']}),
     
     url(r'^portal/admins/$', 'user.portal_admin_list', name='portal-admin-list'),
     url(r'^user/(?P<username>[^/]+)/$', 'profile.detail_view', name='profile-detail'),
@@ -38,10 +39,11 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^search/$', 'search.search', name='search'),
     
     url(r'^map/$', 'map.map_view', name='map'),
-    url(r'^projects/$', 'map.tile_view', name='group-list', kwargs={'types': ['projects']}),
-    url(r'^groups/$', 'map.tile_view', name='group__group-list', kwargs={'types': ['groups']}),
-    url(r'^projects/mine/$', 'map.tile_view', name='group-list-mine', kwargs={'types': ['projects'], 'show_mine': True}),
-    url(r'^groups/mine/$', 'map.tile_view', name='group__group-list-mine', kwargs={'types': ['groups'], 'show_mine': True}),
+    # soon to be added when TileViews get added
+    #url(r'^projects/$', 'map.tile_view', name='group-list', kwargs={'types': ['projects']}),
+    #url(r'^groups/$', 'map.tile_view', name='group__group-list', kwargs={'types': ['groups']}),
+    #url(r'^projects/mine/$', 'map.tile_view', name='group-list-mine', kwargs={'types': ['projects'], 'show_mine': True}),
+    #url(r'^groups/mine/$', 'map.tile_view', name='group__group-list-mine', kwargs={'types': ['groups'], 'show_mine': True}),
     
     url(r'^map/embed/$', 'map.map_embed_view', name='map-embed'),
     url(r'^map/search/$', 'map_api.map_search_endpoint', name='map-search-endpoint'),
@@ -127,6 +129,10 @@ for url_key in group_model_registry:
     prefix = group_model_registry.get_url_name_prefix(url_key, '')
     
     urlpatterns += patterns('cosinnus.views',
+        # soon to be replaced by tile_view
+        url(r'^%s/mine/$' % plural_url_key, 'group.group_list_mine', name=prefix+'group-list-mine'),
+        url(r'^%s/$' % plural_url_key, 'group.group_list', name=prefix+'group-list'),
+        
         url(r'^%s/in-group-with/(?P<group>[^/]+)/$' % plural_url_key, 'group.group_list_filtered', name=prefix+'group-list-filtered'),
         url(r'^%s/invited/$' % plural_url_key, 'group.group_list_invited', name=prefix+'group-list-invited'),
         #url(r'^%s/map/$' % plural_url_key, 'group.group_list_map', name=prefix+'group-list-map'),
@@ -159,10 +165,6 @@ for url_key in group_model_registry:
         
         url(r'^%s/(?P<group>[^/]+)/reflectedassign/$' % url_key, 'group.group_assign_reflected_object', name=prefix+'group-assign-reflected'),
         url(r'^%s/(?P<group>[^/]+)/attachmentselect/(?P<model>[^/]+)$' % url_key, 'attached_object.attachable_object_select2_view', name=prefix+'attached_object_select2_view'),
-        
-        # deprecated, replaced by tile_view
-        #url(r'^%s/mine/$' % plural_url_key, 'group.group_list_mine', name=prefix+'group-list-mine'),
-        #url(r'^%s/$' % plural_url_key, 'group.group_list', name=prefix+'group-list'),
     )
 
 urlpatterns += url_registry.urlpatterns
