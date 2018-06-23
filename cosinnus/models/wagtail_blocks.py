@@ -18,7 +18,6 @@ from cosinnus.models.group_extra import CosinnusProject
 import json
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
-from cosinnus.templatetags.cosinnus_map_tags import get_map_marker_icon_settings
 from cosinnus.templatetags.cosinnus_tags import render_cosinnus_topics_json
 from django.utils.html import escape
 
@@ -129,7 +128,6 @@ class MapBlock(StructBlock):
         map_settings = {
             'availableFilters': map_switches,
             'activeFilters': map_switches,
-            'markerIcons': get_map_marker_icon_settings(),
             'topicsJson': render_cosinnus_topics_json(), 
         }
         context['map_settings'] = json.dumps(map_settings)

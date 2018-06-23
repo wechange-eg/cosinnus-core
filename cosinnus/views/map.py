@@ -9,7 +9,6 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.generic.base import TemplateView
 
 from cosinnus.conf import settings
-from cosinnus.templatetags.cosinnus_map_tags import get_map_marker_icon_settings_json
 from cosinnus.views.map_api import get_searchresult_by_itemid
 
 
@@ -47,7 +46,6 @@ class MapView(TemplateView):
 
     def get_context_data(self, **kwargs):
         ctx = {
-            'markers': get_map_marker_icon_settings_json(),
             'skip_page_footer': True,
             'map_options_json': json.dumps(self.collect_map_options())
         }

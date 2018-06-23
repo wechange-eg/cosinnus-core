@@ -576,38 +576,29 @@ module.exports = ContentControlView.extend({
      *  for a given type corresponding to model Result.type. */
     getMarkerIconForType: function(resultType, isLargeMarker, isStackedMarker, isBaseMarker) {
         var markerIcon;
-        // if custom marker icons are supplied, use those, else default ones
-        // custom marker icon ignore large-sizedness
-        if (this.options.markerIcons && this.options.markerIcons[resultType]) {
-            var iconSettings = this.options.markerIcons[resultType];
-            markerIcon = {
-                iconWidth: iconSettings.width,
-                iconHeight: iconSettings.height
-            };
+        var suffix = '';
+        var className = 'placemark';
+        
+        if (isBaseMarker) {
+            suffix = 'Base';
+            className += ' l';
+        } else if (isStackedMarker) {
+            suffix = 'Stacked';
+            className += ' m';
+        } else if (isLargeMarker) {
+            suffix = 'Large';
+            className += ' l icon';
         } else {
-            var suffix = '';
-            var className = 'placemark';
-            if (isBaseMarker) {
-                suffix = 'Base';
-                className += ' l';
-            } else if (isStackedMarker) {
-                suffix = 'Stacked';
-                className += ' m';
-            } else if (isLargeMarker) {
-                suffix = 'Large';
-                className += ' l icon';
-            } else {
-                className += ' s';
-            }
-            // type of the marker
-            className += ' ' + resultType;
-            
-            markerIcon = {
-                iconWidth: this.options.resultMarkerSizes['width' + suffix],
-                iconHeight: this.options.resultMarkerSizes['height' + suffix],
-                className: className
-            };
+            className += ' s';
         }
+        // type of the marker
+        className += ' ' + resultType;
+        
+        markerIcon = {
+            iconWidth: this.options.resultMarkerSizes['width' + suffix],
+            iconHeight: this.options.resultMarkerSizes['height' + suffix],
+            className: className
+        };
         return markerIcon;
     },
 

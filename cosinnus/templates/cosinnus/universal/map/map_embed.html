@@ -4,10 +4,9 @@
     <head>
         <script type="text/javascript">
             var cosinnus_base_url = "{{ COSINNUS_BASE_URL|default:'/' }}";
-            var COSINNUS_MAP_MARKER_ICONS = JSON.parse('{% render_map_marker_icon_json %}');
-            var COSINNUS_MAP_TOPICS_JSON = JSON.parse('{% render_cosinnus_topics_json %}');
-            var COSINNUS_MAP_OPTIONS = JSON.parse('{{ SETTINGS.COSINNUS_MAP_OPTIONS|json|safe }}');
-            var COSINNUS_PORTAL_INFOS = JSON.parse('{% render_cosinnus_portal_info_json %}');
+            var COSINNUS_MAP_TOPICS_JSON = {% render_cosinnus_topics_json %};
+            var COSINNUS_MAP_OPTIONS = {{ SETTINGS.COSINNUS_MAP_OPTIONS|json|safe }};
+            var COSINNUS_PORTAL_INFOS = {% render_cosinnus_portal_info_json %};
             var COSINNUS_IDEAS_ENABLED = {% if SETTINGS.COSINNUS_IDEAS_ENABLED %}true{% else %}false{% endif %};
             var cosinnus_current_language = "{{ COSINNUS_CURRENT_LANGUAGE }}";
             var cosinnus_active_user = JSON.parse("{{ COSINNUS_USER|escapejs }}");

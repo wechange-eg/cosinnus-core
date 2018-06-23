@@ -143,7 +143,6 @@ var App = function App () {
         
         var topicsJson = typeof COSINNUS_MAP_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TOPICS_JSON : {};
         var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
-        var markerIcons = typeof COSINNUS_MAP_MARKER_ICONS !== 'undefined' ? COSINNUS_MAP_MARKER_ICONS : {};
         
         var fullscreen = self.displayOptions.fullscreen;
         var splitscreen = self.displayOptions.showMap && self.displayOptions.showTiles;
@@ -176,7 +175,6 @@ var App = function App () {
             var mapView = new MapView({
                 elParent: self.el,
                 location: settings.location,
-                markerIcons: markerIcons,
                 fullscreen: fullscreen,
                 splitscreen: splitscreen
             }, 

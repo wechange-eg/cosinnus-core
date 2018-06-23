@@ -356,22 +356,6 @@ class CosinnusConf(AppConf):
     # default number of days offers in the Marketplace stay active
     MARKETPLACE_OFFER_ACTIVITY_DURATION_DAYS = 30
     
-    # 
-    """
-        Can overwrite the default cosinnus map marker icons. needs to be in a format like
-        'people': {
-            'url': '/static/js/vendor/images/marker-icon-2x-yellow.png',
-            'width': 50,
-            'height': 50
-        },
-        'events': {...},
-        'projects': {...},
-        'groups': {...},
-        
-        Omitted values or an empty dict default to the default marker icon for that type.
-    """
-    MAP_MARKER_ICONS = {}
-    
     # Default starting map coordinates if no coordinates have been specified
     # currently: central europe with germany centered
     COSINNUS_MAP_OPTIONS = {

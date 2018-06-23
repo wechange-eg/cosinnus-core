@@ -51,7 +51,6 @@ class UserCreationForm(DjUserCreationForm):
     captcha = CaptchaField()
     
     if settings.COSINNUS_SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK:
-        print ">> ho"
         privacy_policy_check = forms.BooleanField(label='privacy_policy_check', required=True)
     
     def __init__(self, *args, **kwargs):
