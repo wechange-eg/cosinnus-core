@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-21 18:31+0200\n"
-"PO-Revision-Date: 2018-06-17 20:00+0200\n"
+"POT-Creation-Date: 2018-06-23 16:58+0200\n"
+"PO-Revision-Date: 2018-06-23 17:09+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 1.8.4\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Language: uk_UA\n"
 
@@ -246,16 +246,22 @@ msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea y
 msgstr "%(sender_name)s прийняв запрошення долучитися до %(team_name)s на %(site_name)s!"
 
 msgid "Deutsch"
-msgstr "Німецька"
+msgstr "Deutsch"
 
 msgid "English"
-msgstr "Англійська"
+msgstr "English"
+
+msgid "French"
+msgstr "Français"
 
 msgid "Russian"
-msgstr "Російська"
+msgstr "Русский"
 
 msgid "Ukrainian"
 msgstr "Українська"
+
+msgid "Polish"
+msgstr "Polski"
 
 msgid "Attachments"
 msgstr "Додатки"

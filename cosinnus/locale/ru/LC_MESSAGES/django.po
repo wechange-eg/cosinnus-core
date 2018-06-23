@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-21 18:31+0200\n"
-"PO-Revision-Date: 2018-06-17 23:17+0200\n"
+"POT-Creation-Date: 2018-06-23 16:58+0200\n"
+"PO-Revision-Date: 2018-06-23 17:09+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Language: ru\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 1.8.4\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -250,11 +250,17 @@ msgstr "Deutsch"
 msgid "English"
 msgstr "English"
 
+msgid "French"
+msgstr "Français"
+
 msgid "Russian"
 msgstr "Русский"
 
 msgid "Ukrainian"
 msgstr "Українська"
+
+msgid "Polish"
+msgstr "Polski"
 
 msgid "Attachments"
 msgstr "Приложения"

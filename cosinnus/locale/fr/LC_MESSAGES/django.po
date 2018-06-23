@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-21 18:31+0200\n"
-"PO-Revision-Date: 2018-06-18 12:54+0200\n"
+"POT-Creation-Date: 2018-06-23 16:58+0200\n"
+"PO-Revision-Date: 2018-06-23 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -251,11 +251,17 @@ msgstr "Deutsch"
 msgid "English"
 msgstr "English"
 
+msgid "French"
+msgstr "Français"
+
 msgid "Russian"
 msgstr "Русский"
 
 msgid "Ukrainian"
 msgstr "Українська"
+
+msgid "Polish"
+msgstr "Polski"
 
 msgid "Attachments"
 msgstr "Pièces jointes"
@@ -4171,9 +4177,6 @@ msgstr "Tes changements ont été enregistrés."
 #~| msgid "Privacy"
 #~ msgid "Privacy Policy"
 #~ msgstr "Confidentialité"
-
-#~ msgid "French"
-#~ msgstr "Français"
 
 #~ msgctxt "written next to optional form fields"
 #~ msgid "(optional)"

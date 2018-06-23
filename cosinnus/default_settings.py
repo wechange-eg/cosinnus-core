@@ -226,6 +226,10 @@ LANGUAGES = [
     ('en', _('English')),
     ('ru', _('Russian')),
     ('uk', _('Ukrainian')),
+    # other languages available, but not yet, or not by default
+    # (enable them for your specific portals by defining `LANGUAGES` in settings.py
+    #('fr', _('French')),
+    #('pl', _('Polish')),
 ]
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

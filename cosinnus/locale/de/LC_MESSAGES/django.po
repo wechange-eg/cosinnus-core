@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-21 18:31+0200\n"
-"PO-Revision-Date: 2018-06-21 18:34+0200\n"
+"POT-Creation-Date: 2018-06-23 16:58+0200\n"
+"PO-Revision-Date: 2018-06-23 17:01+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -247,11 +247,17 @@ msgstr "Deutsch"
 msgid "English"
 msgstr "English"
 
+msgid "French"
+msgstr "Français"
+
 msgid "Russian"
 msgstr "Русский"
 
 msgid "Ukrainian"
 msgstr "Українська"
+
+msgid "Polish"
+msgstr "Polski"
 
 msgid "Attachments"
 msgstr "Anhänge"
@@ -4030,9 +4036,6 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject \"Registration failed\" to %(email_link)s and we will assist you as soon as possible!"
 #~ msgstr "Falls du Hilfe bei der Registrierung benötigst oder du die Registrierung nicht abschließen kannst, schicke eine kurze Email mit dem Betreff \"Registrierung nicht möglich\" an %(email_link)s. Wir helfen dir sobald wie möglich!"
-
-#~ msgid "French"
-#~ msgstr "Français"
 
 #, fuzzy
 #~| msgid "Logo Image"
