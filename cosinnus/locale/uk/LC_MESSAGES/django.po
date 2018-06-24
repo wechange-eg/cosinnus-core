@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-21 17:39+0200\n"
-"PO-Revision-Date: 2018-06-17 20:00+0200\n"
+"POT-Creation-Date: 2018-06-24 18:48+0200\n"
+"PO-Revision-Date: 2018-06-23 17:09+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 1.8.4\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Language: uk_UA\n"
 
@@ -41,11 +41,27 @@ msgstr "Такі учасники були долучені до порталу:
 msgid "Add all members to current Portal"
 msgstr "Додати всіх учасників до цього порталу"
 
+#, fuzzy
+#| msgid "Add all members to current Portal"
+msgid "Move selected teams to current portal"
+msgstr "Додати всіх учасників до цього порталу"
+
+#, fuzzy
+#| msgid "Move all members to current Portal (removes all other memberships!)"
+msgid "Move selected teams to current portal and message members"
+msgstr "Перемістити усіх учасників до поточного порталу (анулює усі інші членства!)"
+
 msgid "In addition, the members were removed from all other Portals."
 msgstr "Крім цього, учасники були вилучені з усіх інших порталів."
 
 msgid "Move all members to current Portal (removes all other memberships!)"
 msgstr "Перемістити усіх учасників до поточного порталу (анулює усі інші членства!)"
+
+msgid "Move selected groups and their subprojects to current portal"
+msgstr ""
+
+msgid "Move selected groups and their subprojects to current portal and message members"
+msgstr ""
 
 msgid "The following Groups were converted to Projects:"
 msgstr "Такі спільноти були перетворені у проекти:"
@@ -231,6 +247,20 @@ msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_nam
 msgstr "%(sender_name)s запросив Вас долучитися до %(team_name)s на %(portal_name)s!"
 
 #, fuzzy
+#| msgid "Show in other projects/groups"
+msgid "New link to the moved project/group"
+msgstr "Відобразити в інших проектах/спільнотах"
+
+#, python-format
+msgid "One of your projects/groups were moved to the portal \"%(portal_name)s\"! <br/><br/> Your user account for this portal is the same as for the old one - you do not need to register a new account! <br/><br/>All of your old URLs will continue to work and redirect you to the correct page on the new portal."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
+msgstr "%(sender_name)s запросив Вас долучитися до %(team_name)s на %(portal_name)s!"
+
+#, fuzzy
 #| msgid "Created"
 msgid "Has created"
 msgstr "Створено"
@@ -246,13 +276,13 @@ msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea y
 msgstr "%(sender_name)s прийняв запрошення долучитися до %(team_name)s на %(site_name)s!"
 
 msgid "Deutsch"
-msgstr "Німецька"
+msgstr "Deutsch"
 
 msgid "English"
-msgstr "Англійська"
+msgstr "English"
 
 msgid "Russian"
-msgstr "Російська"
+msgstr "Русский"
 
 msgid "Ukrainian"
 msgstr "Українська"
@@ -1730,9 +1760,12 @@ msgstr "Експортувати"
 msgid "Edit “%(team_name)s”"
 msgstr "Редагувати проект «%(team_name)s»"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create Group"
 msgstr "Створити спільноту"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create Project"
 msgstr "Створити проект"
 
@@ -2033,9 +2066,13 @@ msgstr "Переглянути проект"
 msgid "View Group"
 msgstr "Переглянути спільноту"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Membership request pending..."
 msgstr "Запит щодо членства очікує..."
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are invited!"
 msgstr "Вас запросили!"
 
@@ -2156,6 +2193,8 @@ msgstr "Перемістити"
 msgid "A message from %(sender_full_name)s"
 msgstr "Повідомлення від %(sender_full_name)s"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "Created"
 msgid "Create Idea"
@@ -2845,18 +2884,22 @@ msgstr "Люди"
 msgid "Invited Groups"
 msgstr "Запросити групи"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "My Groups"
 msgstr "Мої спільноти"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Groups"
 msgstr "Усі спільноти"
 
 msgid "Invited Projects"
 msgstr "Запросити проекти"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "My Projects"
 msgstr "Мої проекти"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Projects"
 msgstr "Усі проекти"
 
@@ -2864,11 +2907,13 @@ msgstr "Усі проекти"
 msgid "Ideas"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "My teams"
 msgid "My Ideas"
 msgstr "Мої проекти"
 
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "All users"
 msgid "All Ideas"
@@ -2907,22 +2952,6 @@ msgstr "Я прочитав та приймаю"
 
 msgid "Terms and Services"
 msgstr "Угода користувача"
-
-#, fuzzy
-#| msgctxt "read and accept the [Terms of Services]"
-#| msgid "I have read and accept the"
-msgctxt "read and accept the [Privacy Policy]"
-msgid "I have read and accept the"
-msgstr "Я прочитав та приймаю"
-
-#, fuzzy
-#| msgid "Privacy"
-msgid "Privacy Policy"
-msgstr "Приватність"
-
-#, python-format
-msgid "If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject \"Registration failed\" to %(email_link)s and we will assist you as soon as possible!"
-msgstr ""
 
 msgid "Forgot password?"
 msgstr "Забули пароль?"
@@ -3153,6 +3182,30 @@ msgstr "Вкажіть один чи більше пошукових запит�
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
+#| msgid "Users"
+msgid "My Users"
+msgstr "Користувачі"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Events"
+msgid "My Events"
+msgstr "Заходи"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "All users"
+msgid "All Users"
+msgstr "Усі користувачі"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Events"
+msgid "All Events"
+msgstr "Заходи"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
 #| msgctxt "Calendar"
 #| msgid "Event"
 msgid "Event"
@@ -3163,7 +3216,23 @@ msgid "Idea"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create folder"
+msgid "Create User"
+msgstr "Створити папку"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created"
+msgid "Create Event"
+msgstr "Створено"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names, Topics and Places..."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search for Names and Topics..."
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -4110,6 +4179,24 @@ msgstr "Ви, на разі, не є членом %s! Якщо ви бажаєт
 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
+
+#~ msgid "French"
+#~ msgstr "Français"
+
+#~ msgid "Polish"
+#~ msgstr "Polski"
+
+#, fuzzy
+#~| msgctxt "read and accept the [Terms of Services]"
+#~| msgid "I have read and accept the"
+#~ msgctxt "read and accept the [Privacy Policy]"
+#~ msgid "I have read and accept the"
+#~ msgstr "Я прочитав та приймаю"
+
+#, fuzzy
+#~| msgid "Privacy"
+#~ msgid "Privacy Policy"
+#~ msgstr "Приватність"
 
 #~ msgid "My Groups and Projects"
 #~ msgstr "Мої групи та проекти"

@@ -8,6 +8,8 @@ from django.db.models import Q
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext_lazy as _
 
+from collections import defaultdict
+
 from cosinnus.models.group import CosinnusGroupMembership,\
     CosinnusPortal, CosinnusPortalMembership,\
     CosinnusGroup, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING,\
@@ -27,6 +29,9 @@ from django.contrib.auth import login as django_login
 
 from cosinnus.conf import settings
 from cosinnus.models.idea import CosinnusIdea
+from cosinnus.utils.permissions import check_user_can_receive_emails
+from cosinnus.core import signals
+from copy import deepcopy, copy
 
 
 class SingleDeleteActionMixin(object):
@@ -104,7 +109,8 @@ class MembershipInline(admin.StackedInline):
 
 
 class CosinnusProjectAdmin(admin.ModelAdmin):
-    actions = ['convert_to_society', 'add_members_to_current_portal', 'move_members_to_current_portal']
+    actions = ['convert_to_society', 'add_members_to_current_portal', 'move_members_to_current_portal',
+                'move_groups_to_current_portal', 'move_groups_to_current_portal_and_message_users']
     list_display = ('name', 'slug', 'portal', 'public', 'is_active',)
     list_filter = ('portal', 'public', 'is_active',)
     search_fields = ('name', )
@@ -174,10 +180,69 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
             post_save.send(sender=CosinnusPortalMembership, instance=membership, created=True)
             member_names.append('%s %s (%s)' % (user.first_name, user.last_name, user.email))
         
-        
-        message = _('The following Users were added to this portal:') + '\n' + ", ".join(member_names)
-        self.message_user(request, message)
+        if member_names:
+            message = _('The following Users were added to this portal:') + '\n' + ", ".join(member_names)
+            self.message_user(request, message)
     add_members_to_current_portal.short_description = _("Add all members to current Portal")
+    
+    
+    def move_groups_to_current_portal(self, request, queryset, message_members=False):
+        """ queryset does not have to be a QS, but can also be a list of groups """
+        current_portal = CosinnusPortal.get_current()
+        # filter groups from this portal
+        ignored_groups = [group for group in queryset if group.portal == current_portal]
+        if ignored_groups:
+            message = 'The following groups were ignored as they were already in this portal:' + '\n' + ", ".join([group.name for group in ignored_groups])
+            self.message_user(request, message)
+        
+        # filter for groups in external portals
+        queryset = [group for group in queryset if not group.portal == current_portal]
+        
+        # add all members of the groups to this portal
+        self.add_members_to_current_portal(request, queryset)
+        
+        # move groups. redirects should be created automatically
+        moved_groups = []
+        for group in queryset:
+            group.portal = current_portal
+            group.save()
+            moved_groups.append(group)
+            
+        if moved_groups:
+            message = 'The following groups were moved to this portal:' + '\n' + ", ".join([group.name for group in moved_groups])
+            self.message_user(request, message)
+        else:
+            self.message_user(request, 'No groups were moved.')
+        
+        # message members if wished
+        if message_members:
+            member_names = []
+            members = []
+            
+            for group in moved_groups:
+                # skip messaging for inactive groups
+                if not group.is_active:
+                    continue
+                group.clear_member_cache()
+                group_members = group.members
+                users = list(get_user_model().objects.filter(id__in=group_members))
+                # send signal for this moved group
+                signals.group_moved_to_portal.send(sender=request.user, obj=group, user=request.user, audience=users)
+                members.extend(users)
+            
+            members = list(set(members))
+            if members:
+                for member in members:
+                    member_names.append('%s %s (%s)' % (member.first_name, member.last_name, member.email))
+                message = 'The following Users were messaged of the moves (depends on their notification settings)' + '\n' + ", ".join(member_names)
+                self.message_user(request, message)
+        
+    move_groups_to_current_portal.short_description = _("Move selected teams to current portal")
+    
+    
+    def move_groups_to_current_portal_and_message_users(self, request, queryset):
+        self.move_groups_to_current_portal(request, queryset, message_members=True)
+    move_groups_to_current_portal_and_message_users.short_description = _("Move selected teams to current portal and message members")
     
     
     def move_members_to_current_portal(self, request, queryset):
@@ -192,12 +257,27 @@ admin.site.register(CosinnusProject, CosinnusProjectAdmin)
 
 class CosinnusSocietyAdmin(CosinnusProjectAdmin):
     
-    actions = ['convert_to_project']
+    actions = ['convert_to_project', 'move_society_and_subprojects_to_portal', 
+                'move_society_and_subprojects_to_portal_and_message_users']
     
     def get_actions(self, request):
         actions = super(CosinnusSocietyAdmin, self).get_actions(request)
         del actions['convert_to_society']
         return actions
+    
+    def move_society_and_subprojects_to_portal(self, request, queryset, message_members=False):
+        groups_and_projects = []
+        for group in queryset:
+            groups_and_projects.append(group)
+            groups_and_projects.extend(group.groups.all())
+        groups_and_projects = list(set(groups_and_projects))
+        self.move_groups_to_current_portal(request, groups_and_projects, message_members)
+    move_society_and_subprojects_to_portal.short_description = _("Move selected groups and their subprojects to current portal")
+        
+    def move_society_and_subprojects_to_portal_and_message_users(self, request, queryset):
+        self.move_society_and_subprojects_to_portal(request, queryset, message_members=True)
+    move_society_and_subprojects_to_portal_and_message_users.short_description = _("Move selected groups and their subprojects to current portal and message members")
+    
     
     def convert_to_project(self, request, queryset):
         """ Converts this CosinnusGroup's type """

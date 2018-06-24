@@ -48,5 +48,10 @@ user_group_invitation_declined = dispatch.Signal(providing_args=["user", "obj", 
 user_group_recruited = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 
+""" Called when a group is moved to the current portal, serves as a notifcation message for users """
+group_moved_to_portal = dispatch.Signal(providing_args=["user", "obj", "audience"])
+
+
+
 # we need to load the receivers for them to be active
 import receivers

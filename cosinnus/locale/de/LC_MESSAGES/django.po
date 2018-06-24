@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-21 17:39+0200\n"
-"PO-Revision-Date: 2018-06-21 17:40+0200\n"
+"POT-Creation-Date: 2018-06-24 18:48+0200\n"
+"PO-Revision-Date: 2018-06-24 18:55+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -41,11 +41,23 @@ msgstr "Die folgenden Mitglieder wurden in dieses Portal mit-aufgenommen:"
 msgid "Add all members to current Portal"
 msgstr "Alle enthaltenen Mitglieder ins aktuelle Portal mit-aufnehmen"
 
+msgid "Move selected teams to current portal"
+msgstr "Ausgewählte Teams ins aktuelle Portal verschieben"
+
+msgid "Move selected teams to current portal and message members"
+msgstr "Ausgewählte Teams ins aktuelle Portal verschieben und Mitglieder benachrichtigen"
+
 msgid "In addition, the members were removed from all other Portals."
 msgstr "Zusätzlich wurden die Mitglieder aus allen anderen Portalen entfernt."
 
 msgid "Move all members to current Portal (removes all other memberships!)"
 msgstr "Alle enthaltenen Mitglieder ins aktuelle Portal verschieben (entfernt sie aus allen anderen Portalen!)"
+
+msgid "Move selected groups and their subprojects to current portal"
+msgstr "Ausgewählte Gruppen und ihre Unterprojekte ins aktuelle Portal verschieben"
+
+msgid "Move selected groups and their subprojects to current portal and message members"
+msgstr "Ausgewählte Gruppen und ihre Unterprojekte ins aktuelle Portal verschieben und Mitglieder benachrichtigen"
 
 msgid "The following Groups were converted to Projects:"
 msgstr "Die folgenden Gruppen wurden in Projekte umgewandelt:"
@@ -229,6 +241,17 @@ msgstr "%(sender_name)s hat dich eingeladen, \"%(team_name)s\" auf %(portal_name
 #, python-format
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s hat dich eingeladen, %(team_name)s beizutreten auf %(portal_name)s!"
+
+msgid "New link to the moved project/group"
+msgstr "Neue Adresse des Projekts/Gruppe"
+
+#, python-format
+msgid "One of your projects/groups were moved to the portal \"%(portal_name)s\"! <br/><br/> Your user account for this portal is the same as for the old one - you do not need to register a new account! <br/><br/>All of your old URLs will continue to work and redirect you to the correct page on the new portal."
+msgstr "Eins deiner Projekte/Gruppen wurde ins Portal \"%(portal_name)s\" verschoben! <br/><br/> Dein Benutzerkonto für das neue Portal ist das selbe wie für das Alte - du brauchst dich nicht neu zu Registrieren! <br/><br/>Alle alten URLs funktionieren weiterhin und leiten auf die korrekte Seite im neuen Portal um."
+
+#, python-format
+msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
+msgstr "\"%(team_name)s\" wurde nach %(portal_name)s verschoben!"
 
 msgid "Has created"
 msgstr "Hat erstellt"
@@ -1715,10 +1738,13 @@ msgstr "Exportieren"
 msgid "Edit “%(team_name)s”"
 msgstr "Projekt “%(team_name)s” bearbeiten"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create Group"
 msgstr "Gruppe erstellen"
 
 #
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create Project"
 msgstr "Projekt erstellen"
 
@@ -2020,9 +2046,13 @@ msgstr "Projekt ansehen"
 msgid "View Group"
 msgstr "Gruppe ansehen"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Membership request pending..."
 msgstr "Mitgliedschaft wurde beantragt..."
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are invited!"
 msgstr "Du bist eingeladen worden!"
 
@@ -2143,6 +2173,8 @@ msgstr "Verschieben"
 msgid "A message from %(sender_full_name)s"
 msgstr "Nachricht von %(sender_full_name)s"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create Idea"
 msgstr "Idee erstellen"
 
@@ -2794,18 +2826,22 @@ msgstr "Menschen"
 msgid "Invited Groups"
 msgstr "Gruppeneinladungen"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "My Groups"
 msgstr "Meine Gruppen"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Groups"
 msgstr "Alle Gruppen"
 
 msgid "Invited Projects"
 msgstr "Projekteinladungen"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "My Projects"
 msgstr "Meine Projekte"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Projects"
 msgstr "Alle Projekte"
 
@@ -2813,9 +2849,11 @@ msgstr "Alle Projekte"
 msgid "Ideas"
 msgstr "Ideen"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "My Ideas"
 msgstr "Meine Ideen"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Ideas"
 msgstr "Alle Ideen"
 
@@ -2852,17 +2890,6 @@ msgstr "Ich habe die Nutzungsbedingungen gelesen und akzeptiere sie:"
 
 msgid "Terms and Services"
 msgstr "Nutzungsbedingungen"
-
-msgctxt "read and accept the [Privacy Policy]"
-msgid "I have read and accept the"
-msgstr "Ich habe die Datenschutzerklärung gelesen und akzeptiere sie:"
-
-msgid "Privacy Policy"
-msgstr "Datenschutzerklärung"
-
-#, python-format
-msgid "If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject \"Registration failed\" to %(email_link)s and we will assist you as soon as possible!"
-msgstr "Falls du Hilfe bei der Registrierung benötigst oder du die Registrierung nicht abschließen kannst, schicke eine kurze Email mit dem Betreff \"Registrierung nicht möglich\" an %(email_link)s. Wir helfen dir sobald wie möglich!"
 
 msgid "Forgot password?"
 msgstr "Passwort vergessen?"
@@ -3090,6 +3117,22 @@ msgid "Enter one or more search terms or select a topic to search."
 msgstr "Gib einen oder mehrere Suchbegriffe ein oder wähle ein Thema aus um zu Suchen."
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "My Users"
+msgstr "Meine Benutzer_innen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Events"
+msgstr "Meine Veranstaltungen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Users"
+msgstr "Alle Benutzer_innen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Events"
+msgstr "Alle Veranstaltungen"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Event"
 msgstr "Veranstaltung"
 
@@ -3098,8 +3141,20 @@ msgid "Idea"
 msgstr "Idee"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Create User"
+msgstr "Benutzer_in erstellen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Event"
+msgstr "Veranstaltung erstellen"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names, Topics and Places..."
 msgstr "Suche nach Namen, Themen und Orten..."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search for Names and Topics..."
+msgstr "Suche nach Namen und Themen..."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Where"
@@ -3993,6 +4048,19 @@ msgstr "Deine Änderungen wurden übernommen."
 
 #~ msgid "French"
 #~ msgstr "Français"
+
+#~ msgid "Polish"
+#~ msgstr "Polski"
+
+#~ msgctxt "read and accept the [Privacy Policy]"
+#~ msgid "I have read and accept the"
+#~ msgstr "Ich habe die Datenschutzerklärung gelesen und akzeptiere sie:"
+
+#~ msgid "Privacy Policy"
+#~ msgstr "Datenschutzerklärung"
+
+#~ msgid "If you need assistance with your registration, or your registration fails, please send a short E-mail with the subject \"Registration failed\" to %(email_link)s and we will assist you as soon as possible!"
+#~ msgstr "Falls du Hilfe bei der Registrierung benötigst oder du die Registrierung nicht abschließen kannst, schicke eine kurze Email mit dem Betreff \"Registrierung nicht möglich\" an %(email_link)s. Wir helfen dir sobald wie möglich!"
 
 #, fuzzy
 #~| msgid "Logo Image"
