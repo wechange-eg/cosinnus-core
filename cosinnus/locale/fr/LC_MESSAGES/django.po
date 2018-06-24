@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-23 16:58+0200\n"
+"POT-Creation-Date: 2018-06-24 18:48+0200\n"
 "PO-Revision-Date: 2018-06-23 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -41,11 +41,27 @@ msgstr "Les utilisateurs suivants ont été ajoutés à ce portail :"
 msgid "Add all members to current Portal"
 msgstr "Ajouter tous les membres au portail actuel"
 
+#, fuzzy
+#| msgid "Add all members to current Portal"
+msgid "Move selected teams to current portal"
+msgstr "Ajouter tous les membres au portail actuel"
+
+#, fuzzy
+#| msgid "Move all members to current Portal (removes all other memberships!)"
+msgid "Move selected teams to current portal and message members"
+msgstr "Déplacer tous les membres vers le portail actuel (supprime toutes les autres appartenances !)"
+
 msgid "In addition, the members were removed from all other Portals."
 msgstr "De plus, les membres ont été supprimés du groupe."
 
 msgid "Move all members to current Portal (removes all other memberships!)"
 msgstr "Déplacer tous les membres vers le portail actuel (supprime toutes les autres appartenances !)"
+
+msgid "Move selected groups and their subprojects to current portal"
+msgstr ""
+
+msgid "Move selected groups and their subprojects to current portal and message members"
+msgstr ""
 
 msgid "The following Groups were converted to Projects:"
 msgstr "Les groupes suivants ont été convertis en projets :"
@@ -231,6 +247,20 @@ msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_nam
 msgstr "%(sender_name)s t'a invité à rejoindre \"%(team_name)s sur %(portal_name)s !"
 
 #, fuzzy
+#| msgid "Show in other projects/groups"
+msgid "New link to the moved project/group"
+msgstr "Afficher dans d'autres projets / groupes."
+
+#, python-format
+msgid "One of your projects/groups were moved to the portal \"%(portal_name)s\"! <br/><br/> Your user account for this portal is the same as for the old one - you do not need to register a new account! <br/><br/>All of your old URLs will continue to work and redirect you to the correct page on the new portal."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
+msgstr "%(sender_name)s t'a invité à rejoindre \"%(team_name)s sur %(portal_name)s !"
+
+#, fuzzy
 #| msgid "Created"
 msgid "Has created"
 msgstr "Créé"
@@ -251,17 +281,11 @@ msgstr "Deutsch"
 msgid "English"
 msgstr "English"
 
-msgid "French"
-msgstr "Français"
-
 msgid "Russian"
 msgstr "Русский"
 
 msgid "Ukrainian"
 msgstr "Українська"
-
-msgid "Polish"
-msgstr "Polski"
 
 msgid "Attachments"
 msgstr "Pièces jointes"
@@ -1750,6 +1774,7 @@ msgid "Create Group"
 msgstr "Créer groupe"
 
 #. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create Project"
 msgstr "Créer projet"
 
@@ -2182,6 +2207,7 @@ msgstr "Déplacer"
 msgid "A message from %(sender_full_name)s"
 msgstr "Un message de %(sender_full_name)s"
 
+#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "Created"
@@ -4165,6 +4191,12 @@ msgstr "Tu n'es pas membre de %s ! Si tu souhaites, tu peux demander à le deven
 
 msgid "Your changes have been saved."
 msgstr "Tes changements ont été enregistrés."
+
+#~ msgid "French"
+#~ msgstr "Français"
+
+#~ msgid "Polish"
+#~ msgstr "Polski"
 
 #, fuzzy
 #~| msgctxt "read and accept the [Terms of Services]"

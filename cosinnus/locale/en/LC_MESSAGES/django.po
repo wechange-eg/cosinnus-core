@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-23 16:58+0200\n"
+"POT-Creation-Date: 2018-06-24 18:48+0200\n"
 "PO-Revision-Date: 2018-06-23 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -40,10 +40,22 @@ msgstr ""
 msgid "Add all members to current Portal"
 msgstr ""
 
+msgid "Move selected teams to current portal"
+msgstr ""
+
+msgid "Move selected teams to current portal and message members"
+msgstr ""
+
 msgid "In addition, the members were removed from all other Portals."
 msgstr ""
 
 msgid "Move all members to current Portal (removes all other memberships!)"
+msgstr ""
+
+msgid "Move selected groups and their subprojects to current portal"
+msgstr ""
+
+msgid "Move selected groups and their subprojects to current portal and message members"
 msgstr ""
 
 msgid "The following Groups were converted to Projects:"
@@ -229,6 +241,19 @@ msgstr ""
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgstr ""
 
+#, fuzzy
+#| msgid "Convert selected Projects to Groups"
+msgid "New link to the moved project/group"
+msgstr "Convert selected Projects to Groups"
+
+#, python-format
+msgid "One of your projects/groups were moved to the portal \"%(portal_name)s\"! <br/><br/> Your user account for this portal is the same as for the old one - you do not need to register a new account! <br/><br/>All of your old URLs will continue to work and redirect you to the correct page on the new portal."
+msgstr ""
+
+#, python-format
+msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
+msgstr ""
+
 msgid "Has created"
 msgstr ""
 
@@ -246,17 +271,11 @@ msgstr "Deutsch"
 msgid "English"
 msgstr "English"
 
-msgid "French"
-msgstr "Français"
-
 msgid "Russian"
 msgstr "Русский"
 
 msgid "Ukrainian"
 msgstr "Українська"
-
-msgid "Polish"
-msgstr "Polski"
 
 msgid "Attachments"
 msgstr ""
@@ -1758,6 +1777,7 @@ msgid "Create Group"
 msgstr "Create Group"
 
 #. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create Project"
 msgstr "Create Project"
 
@@ -2216,6 +2236,7 @@ msgstr ""
 msgid "A message from %(sender_full_name)s"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "Create Project"
@@ -3989,6 +4010,12 @@ msgstr ""
 
 msgid "Your changes have been saved."
 msgstr ""
+
+#~ msgid "French"
+#~ msgstr "Français"
+
+#~ msgid "Polish"
+#~ msgstr "Polski"
 
 #, fuzzy
 #~| msgid "Convert selected Projects to Groups"

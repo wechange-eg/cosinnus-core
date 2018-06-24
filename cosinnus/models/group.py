@@ -587,6 +587,9 @@ class CosinnusPortal(models.Model):
         """ Gets the http/https protocol aware domain for this portal """
         return get_domain_for_portal(self)
     
+    def get_absolute_url(self):
+        return self.get_domain()
+    
     def get_logo_image_url(self):
         """ Returns the portal logo static image URL """
         return '%s%s' % (self.get_domain(), static('img/logo-icon.png'))
@@ -762,7 +765,7 @@ class CosinnusBaseGroup(IndexingUtilsMixin, FlickrEmbedFieldMixin, VideoEmbedFie
             group_id_portal_id = CosinnusPermanentRedirect.get_group_id_for_pattern(current_portal, group_type, slug)
             if group_id_portal_id:
                 group_id, portal_id = group_id_portal_id
-                if group_id != self.id or portal_id != self.portal_id:
+                if group_id != self.id: # or portal_id != self.portal_id: # we had this earlier, but unmatching portals with same id is not a conflict!
                     return True
             return False
         unique_aware_slugify(self, 'name', 'slug', extra_conflict_check=extra_check, force_redo=True, portal_id=current_portal)

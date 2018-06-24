@@ -16,7 +16,7 @@ from cosinnus.conf import settings
 from cosinnus.core.signals import user_group_join_requested,\
     user_group_invitation_accepted, user_group_invitation_declined,\
     user_group_recruited, user_group_join_accepted, user_group_join_declined,\
-    user_group_invited
+    user_group_invited, group_moved_to_portal
 
 user_tagged_in_object = dispatch.Signal(providing_args=["user", "obj", "audience"])
 user_group_made_admin = dispatch.Signal(providing_args=["user", "obj", "audience"])
@@ -213,6 +213,27 @@ notifications = {
             'object_text': '_sender.cosinnus_profile.description', 
         },
         'origin_url_suffix': '?invited=1',
+        'notification_reason': 'none',
+    }, 
+    'group_moved_to_portal': {
+        'label': '<hidden-group_moved_to_portal>', 
+        'mail_template': '<html-only>',
+        'subject_template': '<html-only>',
+        'signals': [group_moved_to_portal],
+        'default': True,
+        'hidden': True,
+        
+        'is_html': True,
+        'snippet_type': 'news',
+        'event_text': _('New link to the moved project/group'),
+        'notification_text': _('One of your projects/groups were moved to the portal "%(portal_name)s"! <br/><br/> '
+                               'Your user account for this portal is the same as for the old one - you do not need to register a new account! <br/><br/>'
+                               'All of your old URLs will continue to work and redirect you to the correct page on the new portal.'),
+        'subject_text': _('"%(team_name)s" was moved to %(portal_name)s!'),
+        'data_attributes': {
+            'object_name': 'name', # Main title and label of the notification object
+            'image_url': 'portal.get_logo_image_url', # image URL for the item. default if omitted is the event creator's user avatar
+        },
         'notification_reason': 'none',
     }, 
 }
