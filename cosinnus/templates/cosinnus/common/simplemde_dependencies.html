@@ -1,11 +1,12 @@
 {% load static %}
 
 {% if not noinclude %}
-<link rel="stylesheet" href="{% static 'css/vendor/simplemde.min.css' %}?v=1.2">
-<script src="{% static 'js/vendor/simplemde.min.js' %}?v=1.2"></script>
+<link rel="stylesheet" href="{% static 'css/vendor/easymde.min.css' %}?v=1.2">
+<script src="{% static 'js/vendor/easymde.min.js' %}?v=1.2"></script>
 {% endif %}
 
 {% comment %} See https://github.com/sparksuite/simplemde-markdown-editor for options!  {% endcomment %}
+{% comment %} We switched to the EasyMDE fork because SimpleMDE is abandoned: https://github.com/Ionaru/easy-markdown-editor {% endcomment %}
 <script>
   {% if lazy %}
       var inited_simplemde = null;
@@ -13,7 +14,7 @@
   {% else %}
 	  $(function(){
   {% endif %}
-	      var simplemde = new SimpleMDE({ 
+	      var simplemde = new EasyMDE({ 
 	          element: {% if lazy %}input{% else %}$('#{{ element_id }}')[0]{% endif %},
 	          indentWithTabs: false,
 	          shortcuts: {},
