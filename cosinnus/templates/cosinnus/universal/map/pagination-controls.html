@@ -104,11 +104,13 @@
 	    </a>
     {% endif %}
     
-    <a href="{% if not cosinnus_active_user %}/signup/?acc_req_msg=1&next={% endif %}/projects/add/" class="rounded-button button-color-projects-inverted shadowed-button">
-        <span class="rounded-button-inner">
-            <i class="fa fa-group"></i>
-            {# Translators: __INCLUDE_JS_PO__ #}
-            {% trans 'Create Project' %}
-        </span>
-    </a>
+    {% if splitscreen %}
+	    <a href="{% if not cosinnus_active_user %}/signup/?acc_req_msg=1&next={% endif %}/projects/add/" class="rounded-button button-color-projects-inverted shadowed-button">
+	        <span class="rounded-button-inner">
+	            <i class="fa fa-group"></i>
+	            {# Translators: __INCLUDE_JS_PO__ #}
+	            {% trans 'Create Project' %}
+	        </span>
+	    </a>
+    {% endif %}
 </div>
