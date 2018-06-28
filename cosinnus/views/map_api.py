@@ -94,6 +94,7 @@ def map_search_endpoint(request, filter_group_id=None):
         @param filter_group_id: Will filter all items by group relation, where applicable 
                 (i.e. users are filtered by group memberships for that group, events as events in that group)
     """
+    implicit_ignore_location = not any([loc_param in request.GET for loc_param in ['sw_lon', 'sw_lat', 'ne_lon', 'ne_lat']])
     params = _collect_parameters(request.GET, MAP_SEARCH_PARAMETERS)
     query = force_text(params['q'])
     limit = params['limit']
@@ -109,7 +110,7 @@ def map_search_endpoint(request, filter_group_id=None):
     model_list = [klass for klass,param_name in SEARCH_MODEL_NAMES.items() if params[param_name]]
     sqs = SearchQuerySet().models(*model_list)
     # filter for map bounds (Points are constructed ith (lon, lat)!!!)
-    if not params['ignore_location']:
+    if not params['ignore_location'] and not implicit_ignore_location:
         sqs = sqs.within('location', Point(params['sw_lon'], params['sw_lat']), Point(params['ne_lon'], params['ne_lat']))
     # filter for user's own content
     if params['mine'] and request.user.is_authenticated():
