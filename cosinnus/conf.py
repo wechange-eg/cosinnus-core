@@ -208,17 +208,21 @@ class CosinnusConf(AppConf):
     # files of these mime types will always open within the browser when download is clicked
     FILE_NON_DOWNLOAD_MIMETYPES = ['application/pdf',]
     
+    # Default timeout for objects. 
+    # We keep this relatively low, because otherwise inter-portal contents can become stale
+    DEFAULT_OBJECT_CACHE_TIMEOUT = 60 * 30 # 30 minutes
+    
     #: How long an idea should at most stay in cache until it will be removed
-    IDEA_CACHE_TIMEOUT = 60 * 60 * 24
+    IDEA_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
     
     # should CosinnusIdeas be enabled for this Portal?
     IDEAS_ENABLED = False
     
     #: How long a group should at most stay in cache until it will be removed
-    GROUP_CACHE_TIMEOUT = 60 * 60 * 24
+    GROUP_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
 
     #: How long a group membership should at most stay in cache until it will be removed
-    GROUP_MEMBERSHIP_CACHE_TIMEOUT = 60 * 60 * 24
+    GROUP_MEMBERSHIP_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
     
     # How long a groups list of children should be cached
     GROUP_CHILDREN_CACHE_TIMEOUT = GROUP_CACHE_TIMEOUT
