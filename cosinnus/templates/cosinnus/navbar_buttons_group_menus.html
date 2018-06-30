@@ -1,38 +1,40 @@
 {% load i18n static cosinnus_tags thumbnail %}
 
-{% if societies or societies_invited %}
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            {% trans "Groups" %}
-            <i class="fa fa-caret-down"></i>
-        </a>
-        <ul class="dropdown-menu">
-            {% for g in societies|slice:":30" %}
-                <li{% if g == appsmenu_society %} class="active"{% endif %}><a href="{% group_url 'cosinnus:group-dashboard' group=g %}">{{ g.name }}</a></li>
-            {% endfor %}
-            {% if societies|length > 30 %}
-            	<li><a href="{% url 'cosinnus:group__group-list' %}...</a></li>
-            {% endif %}
-            {% if societies_invited %}
-                {% for g in societies_invited|slice:":30" %}
-                    <li class="inactive{% if g == appsmenu_society %} active{% endif %}"><a href="{% group_url 'cosinnus:group-dashboard' group=g %}">{{ g.name }} ({% trans "Invited to be a member" %})</a></li>
-                {% endfor %}
-                {% if societies_invited|length > 30 %}
-                	<li>...</li>
-                {% endif %}
-            {% endif %}
-            <li class="divider"></li>
-            {% if societies_invited %}
-                <li><a href="{% url 'cosinnus:group__group-list-invited' %}">{% trans "Invited Groups" %}</a></li>
-            {% endif %}
-            {% if societies %}
-            	<li><a href="{% url 'cosinnus:group__group-list-mine' %}">{% trans "My Groups" %}</a></li>
-            {% endif %}
-            <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "All Groups" %}</a></li>
-        </ul>
-    </li>
-{% else %}
-    <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "Groups" %}</a></li>
+{% if SETTINGS.COSINNUS_NAVBAR_GROUP_MENU_VISIBLE %}
+	{% if societies or societies_invited %}
+	    <li class="dropdown">
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	            {% trans "Groups" %}
+	            <i class="fa fa-caret-down"></i>
+	        </a>
+	        <ul class="dropdown-menu">
+	            {% for g in societies|slice:":30" %}
+	                <li{% if g == appsmenu_society %} class="active"{% endif %}><a href="{% group_url 'cosinnus:group-dashboard' group=g %}">{{ g.name }}</a></li>
+	            {% endfor %}
+	            {% if societies|length > 30 %}
+	            	<li><a href="{% url 'cosinnus:group__group-list' %}...</a></li>
+	            {% endif %}
+	            {% if societies_invited %}
+	                {% for g in societies_invited|slice:":30" %}
+	                    <li class="inactive{% if g == appsmenu_society %} active{% endif %}"><a href="{% group_url 'cosinnus:group-dashboard' group=g %}">{{ g.name }} ({% trans "Invited to be a member" %})</a></li>
+	                {% endfor %}
+	                {% if societies_invited|length > 30 %}
+	                	<li>...</li>
+	                {% endif %}
+	            {% endif %}
+	            <li class="divider"></li>
+	            {% if societies_invited %}
+	                <li><a href="{% url 'cosinnus:group__group-list-invited' %}">{% trans "Invited Groups" %}</a></li>
+	            {% endif %}
+	            {% if societies %}
+	            	<li><a href="{% url 'cosinnus:group__group-list-mine' %}">{% trans "My Groups" %}</a></li>
+	            {% endif %}
+	            <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "All Groups" %}</a></li>
+	        </ul>
+	    </li>
+	{% else %}
+	    <li><a href="{% url 'cosinnus:group__group-list' %}">{% trans "Groups" %}</a></li>
+	{% endif %}
 {% endif %}
 
 {% if groups or groups_invited %}

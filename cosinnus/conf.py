@@ -286,6 +286,9 @@ class CosinnusConf(AppConf):
     # this is the thumbnail size for small image previews
     IMAGE_THUMBNAIL_SIZE_SCALE = (80, 80)
     
+    # is the "Groups" menu visible in the navbar menu?
+    NAVBAR_GROUP_MENU_VISIBLE = True
+    
     
     # widgets listed here will be created for the user dashboard upon user creation.
     # this will check if the cosinnus app is installed and if the widget is registered, so
