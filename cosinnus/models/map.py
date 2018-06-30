@@ -254,7 +254,9 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
 
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
         group_admins = list(obj.actual_admins)
-        message_url = message_group_admins_url(obj, group_admins)
+        message_url = None
+        if not settings.COSINNUS_IS_INTEGRATED_PORTAL:
+            message_url = message_group_admins_url(obj, group_admins)
         
         kwargs.update({
             'is_member': check_ug_membership(user, obj),
@@ -338,8 +340,11 @@ class DetailedUserMapResult(DetailedMapResult):
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
         kwargs.update({
             'is_member': user.id == obj.user_id,
-            'action_url_1': _prepend_url(user, None) + reverse('postman:write', kwargs={'recipients': obj.user.username}),
         })
+        if not settings.COSINNUS_IS_INTEGRATED_PORTAL:
+            kwargs.update({
+                'action_url_1': _prepend_url(user, None) + reverse('postman:write', kwargs={'recipients': obj.user.username}),
+            })
         # collect visible groups and projects that this user is in
         sqs = SearchQuerySet().models(SEARCH_MODEL_NAMES_REVERSE['projects'], SEARCH_MODEL_NAMES_REVERSE['groups'])
         sqs = sqs.filter_and(id__in=haystack_result.membership_groups)
