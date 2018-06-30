@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-18 12:47+0200\n"
-"PO-Revision-Date: 2018-06-28 17:54+0200\n"
+"PO-Revision-Date: 2018-06-30 15:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1306,33 +1306,21 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_11_document"
 msgstr "Tu peux modifier ton document en entrant de nouvelles choses dans le pad. Avec l'aide du Timeslider (symbole de l'horloge), tu peux regarder les versions précédents et avec le symbole flèche, tu peux changer le pad en PDF. Tu peux activer un lien sur le pad en cliquant sur </>."
 
-#, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_2_project"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_12_projectadministration"
-msgstr "Il y a des groupes et des projets sur ce portail. Les projets sont créés par un certain nombre de personnes, qui peuvent coordonner leur action au sein de ce projet. Pour réunir plusieurs projet sur un toit, pour discuter par exemple de thèmes pour chaque projet, ce personnes peuvent créer un groupe. Au sein d'un projet, tu peux créer des listes de tâches, des documents, des Etherpad et bien d'autres choses avec les membres du projet."
+msgstr "L'administration de projets commence avec la gestion des membres. Tu peux décider ici qui peut rejoindre ton projet et qui en est l'admin. Tu peux inviter des membres du portail ou d'autres personnes en entrant leurs adresses e-mail. Elles recevront une invitation pour s'inscrire sur le portail."
 
-#, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_10_documentsetting"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_13_groupadministration"
-msgstr "Tu peux ajouter ici plus d'informations à ton document, en plus du titre déjà choisi. Par exemple, tu peux lui attribuer un sujet, un lieu ou un fichier."
+msgstr "L'administration de groupes commence avec la gestion des membres. Tu peux décider ici qui peut rejoindre ton groupe et qui en est l'admin. Tu peux inviter des membres du portail ou d'autres personnes en entrant leurs adresses e-mail. Elles recevront une invitation pour s'inscrire sur le portail."
 
-#, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_4_profile"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
-msgstr "Tu peux modifier ton profil ici. Télécharge un avatar, donne ton adresse ou un thème qui t'intéresse, et confirme à la fin en cliquant sur \"enregistrer\" en bas à droite."
+msgstr "Paramètres de confidentialité pour ton profil : * **Membres de tes projets et groupes uniquement :** Ton profil est visible seulement par les membres de tes projets et groupes. Tu ne figureras pas sur la liste des \"Personnes\" dans la barre de navigation en haut.* *Membres inscrits uniquement :** Les personnes possédant un compte utilisateur sur la plateforme peuvent voir ton profil. Il n'est pas visible publiquement. Tu figureras sur la liste des \"Personnes\" dans la barre de navigation en haut. * **Tout le monde :** Même les personnes non connectées peuvent voir ton profil. Il est visible publiquement et peut être trouvé en utilisant des moteurs de recherche sur Internet. "
 
-#, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_2_project"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_51_objectprivacy"
-msgstr "Il y a des groupes et des projets sur ce portail. Les projets sont créés par un certain nombre de personnes, qui peuvent coordonner leur action au sein de ce projet. Pour réunir plusieurs projet sur un toit, pour discuter par exemple de thèmes pour chaque projet, ce personnes peuvent créer un groupe. Au sein d'un projet, tu peux créer des listes de tâches, des documents, des Etherpad et bien d'autres choses avec les membres du projet."
+msgstr "Paramètres confidentialité pour le contenu : * **Moi uniquement :** Tu es l'unique personne dans ton groupe ou projet à pouvoir accéder à ce contenu. * **Membres de l'équipe uniquement :** Seuls les membres du groupe ou du projet dans lequel ce contenu a été posté peuvent y accéder. * **Public (visible sans connexion) :** Cet item sera posté en tant que visible publiquement ! Cela signifie que n'importe qui sur Internet peut y accéder et le voir, et il peut être inclus dans les résultats des moteurs de recherche."
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr "Entre l'adresse e-mail des personnes que tu souhaites inviter à rejoindre la plateforme."
@@ -3124,7 +3112,7 @@ msgstr "Suivant"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Choose a location for your idea by dragging the marker!"
-msgstr "Choisis un lieu pour ton idée en déplaçant et en relâchant la souris."
+msgstr "Choisis un lieu pour ton idée en déplaçant et en relâchant la souris !"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "of"
@@ -3160,7 +3148,7 @@ msgstr "Projets / groupes"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "No info."
-msgstr "Pas d'info"
+msgstr "Pas d'info."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Administrator"
@@ -3176,7 +3164,7 @@ msgstr "Administrateurs inconnus"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "No description yet."
-msgstr "Pas encore de description"
+msgstr "Pas encore de description."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on."
