@@ -1015,12 +1015,14 @@ class ActivateOrDeactivateGroupView(TemplateView):
             # need to get a typed group first and remove it from index, because after saving it deactived the manager won't find it
             typed_group = ensure_group_type(self.group)
             typed_group.remove_index()
+            typed_group.remove_index_for_all_group_objects()
             
         self.group.save() 
         # no clearing cache necessary as save() handles it
         if self.activate:
             typed_group = ensure_group_type(self.group)
             typed_group.update_index()
+            typed_group.update_index_for_all_group_objects()
             messages.success(request, self.message_success_activate % {'team_name': self.group.name})
             return redirect(self.group.get_absolute_url())
         else:

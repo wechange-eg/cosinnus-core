@@ -50,6 +50,8 @@ from cosinnus.views.mixins.media import VideoEmbedFieldMixin,\
 from jsonfield.fields import JSONField
 from django.templatetags.static import static
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
+from cosinnus.core.registries.attached_objects import attached_object_registry
+from django.db.models.loading import get_model
 
 logger = logging.getLogger('cosinnus')
 
@@ -937,6 +939,28 @@ class CosinnusBaseGroup(IndexingUtilsMixin, FlickrEmbedFieldMixin, VideoEmbedFie
 
     def _clear_local_cache(self):
         pass
+    
+    def get_all_objects_for_group(self):
+        """ Returns in a list all the BaseTaggableObjects for this group """
+        from cosinnus.models.tagged import BaseTaggableObjectModel
+        base_taggable_objects = []
+        for full_model_name in attached_object_registry:
+            app_label, model_name = full_model_name.split('.')
+            model = get_model(app_label, model_name)
+            if issubclass(model, BaseTaggableObjectModel):
+                instances = model.objects.filter(group=self)
+                base_taggable_objects.extend(list(instances))
+        return base_taggable_objects
+    
+    def remove_index_for_all_group_objects(self):
+        """ Removes all of this group's BaseTaggableObjects from the search index """
+        for instance in self.get_all_objects_for_group():
+            instance.remove_index()
+    
+    def update_index_for_all_group_objects(self):
+        """ Adds all of this group's BaseTaggableObjects to the search index """
+        for instance in self.get_all_objects_for_group():
+            instance.remove_index()
     
     @property
     def avatar_url(self):
