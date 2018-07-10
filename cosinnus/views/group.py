@@ -905,6 +905,9 @@ class GroupUserUpdateView(AjaxableFormMixin, RequireAdminMixin,
                 if current_status in [MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER] and new_status == MEMBERSHIP_ADMIN \
                         and not user.id == self.request.user.id:
                     cosinnus_notifications.user_group_made_admin.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
+                elif current_status == MEMBERSHIP_ADMIN and new_status in [MEMBERSHIP_PENDING, MEMBERSHIP_MEMBER] \
+                        and not user.id == self.request.user.id:
+                    cosinnus_notifications.user_group_admin_demoted.send(sender=self, obj=self.object.group, user=self.request.user, audience=[user])
                 return super(GroupUserUpdateView, self).form_valid(form)
             else:
                 messages.error(self.request, _('You cannot change your own admin status.'))
