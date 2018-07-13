@@ -364,8 +364,23 @@
         {% endif %}
     
 
-	
-        <legend>{% trans "Members" %}{% if member_count %} ({{ member_count }}){% endif %}</legend>
+        
+        <div class="large-space">
+	        <div href="{% url "postman:write-group" group_recipients=group.slug %}" class="btn btn-small btn-emphasized">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <a class="pull-left" href="#">
+	                        <i class="fa fa-envelope"></i>
+	                    </a>
+	                    <div class="media-body">
+	                        {% trans "Message all members" %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </div>
+	        <legend>{% trans "Members" %}{% if member_count %} ({{ member_count }}){% endif %}</legend>
+        </div>
+        <div class="clearfix"></div>
     
         {% for member in members %}
             <div class="fadedown {% if not forloop.last or hidden_user_count > 0 %}regular-space{% endif %}">
