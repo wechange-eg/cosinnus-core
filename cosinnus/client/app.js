@@ -13,7 +13,7 @@ var TileDetailView = require('views/tile-detail-view');
 
 
 var App = function App () {
-    self = this;
+    var self = this;
     
     // emulate a view's anchorpoint
     self.el = null;
