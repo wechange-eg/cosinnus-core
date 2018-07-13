@@ -25,7 +25,7 @@ class UserSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoiceField):
         #self.widget.options['formatResult'] = JSFunction('function(data) { return data.text; }')
         #self.widget.options['formatSelection'] = JSFunction('function(data) { return data.text; }')
     
-    def get_user_and_group_ids_for_value(self, value):
+    def get_user_and_group_ids_for_value(self, value, intify=True):
         user_ids = []
         group_ids = []
         for val in value:
@@ -33,9 +33,13 @@ class UserSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoiceField):
                 continue
             value_type, value_id = val.split(':')
             if value_type == 'user':
-                user_ids.append(int(value_id))
+                if intify:
+                    value_id = int(value_id)
+                user_ids.append(value_id)
             elif value_type == 'group':
-                group_ids.append(int(value_id))
+                if intify:
+                    value_id = int(value_id)
+                group_ids.append(value_id)
             else:
                 if settings.DEBUG:
                     raise Http404("Programming error: message recipient field contained unrecognised id '%s'" % val)
