@@ -884,6 +884,17 @@ def get_membership_portals(user):
     """ Returns all portals a user is a member of """
     return CosinnusPortal.objects.filter(id__in=user.cosinnus_portal_memberships.values_list('group_id', flat=True))
 
+@register.filter
+def truncatenumber(value, max=99):
+    """ Shortens large numbers to i.e. "99+"
+    Returns a string of the given number or "<max>+" if value > max """
+    try:
+        intval = int(value)
+    except:
+        return value
+    if intval > max:
+        return '%d+' % max
+    return force_text(intval)
 
 @register.filter
 def debugthis(obj):
@@ -947,3 +958,4 @@ def render_cosinnus_topics_json():
     """ Returns a JSON dict of {<topic-id>: <topic-label-translated>, ...} """
     topic_choices = dict([(top_id, force_text(val)) for top_id, val in TAG_OBJECT.TOPIC_CHOICES])
     return _json.dumps(topic_choices)
+
