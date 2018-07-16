@@ -221,7 +221,7 @@
             // The .small-calendar is for tooltips or small static date chooser.
             // both are based on jQuery fullcalendar. http://arshaw.com/fullcalendar/
 
-            if ($('.big-calendar').length) {
+            if ($('.big-calendar').length && typeof(cosinnus_calendarEvents) !== "undefined") {
                 $('.big-calendar').empty();
                 $('.big-calendar').fullCalendar($.extend({
                     header: {
