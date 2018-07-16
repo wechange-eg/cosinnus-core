@@ -293,6 +293,8 @@ class CosinnusConf(AppConf):
     # is the "Groups" menu visible in the navbar menu?
     NAVBAR_GROUP_MENU_VISIBLE = True
     
+    # should the creator of an Event automatically be marked as "Going" in EventAttendance?
+    EVENT_MARK_CREATOR_AS_GOING = False
     
     # widgets listed here will be created for the user dashboard upon user creation.
     # this will check if the cosinnus app is installed and if the widget is registered, so
