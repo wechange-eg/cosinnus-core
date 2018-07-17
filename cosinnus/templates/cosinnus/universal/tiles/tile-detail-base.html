@@ -95,6 +95,16 @@
         
         
         {% block action_buttons %}
+            {% if cosinnus_active_user %}
+	            <a href="{% if type == "people" %}{{ controlView.portalInfo[portal].domain }}{% endif %}{{ url }}?report=1" target="_blank" class="rounded-button rounded-button-icon-only button-action">
+	                <span class="rounded-button-inner" title="
+{# Translators: __INCLUDE_JS_PO__ #}
+{% trans "Report offensive content" %}
+		                ">
+	                    <i class="fa fa-warning"></i>
+	                </span>
+	            </a>
+		    {% endif %}
         {% endblock action_buttons %}
         
         

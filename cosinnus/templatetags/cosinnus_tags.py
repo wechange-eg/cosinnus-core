@@ -698,7 +698,7 @@ def group_url(parser, token):
 
 
 @register.simple_tag(takes_context=True)
-def cosinnus_report_object_action(context, obj=None):
+def cosinnus_report_object_action(context, obj=None, instantly_trigger=False):
     if not context['request'].user.is_authenticated():
         return ''
     if not obj:
@@ -716,7 +716,10 @@ def cosinnus_report_object_action(context, obj=None):
     
     # mark_safe doesn't really seem to work here
     title = escape(title.replace('"', "'"))
-    return mark_safe(' onclick=\'$.cosinnus.Feedback.cosinnus_report_object("%s", %d, "%s");\' ' % (model_str, obj.id, title))
+    ret = '$.cosinnus.Feedback.cosinnus_report_object("%s", %d, "%s");' % (model_str, obj.id, title)
+    if not instantly_trigger:
+         ret = ' onclick=\'%s\' ' % ret
+    return mark_safe(ret)
 
 
 @register.simple_tag()
