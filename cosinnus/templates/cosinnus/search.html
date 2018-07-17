@@ -429,6 +429,30 @@
 	              </div>
                   
                   {% if query or form.cleaned_data.topics %}
+                    
+                    <div>
+                        {% if request.GET.o and request.GET.o == 'newest' %}
+                            <span class="inline-list nowrap">
+                                <a href="?{% strip_params request "o" %}" class="app-background small-padding"><i class="fa fa-times"></i></a
+                                ><span class="app-background-light dark-color small-padding">
+                                    {% trans "Ordering" %}: {% trans "Newest" %}
+                                </span>
+                            </span>
+                        {% endif %}
+                        
+                        <div class="dropdown pull-right">
+                            <button class="btn btn-default dropdown-toggle autowidth" type="button" id="filter-odering" data-toggle="dropdown" title="{% trans "Ordering" %}">
+                                {% trans "Ordering" %}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="?{% strip_params request "o" %}">{% trans "Relevance" %}</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="?{% strip_params request "o" %}&o=newest">{% trans "Newest" %}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    
                     <p class="large-space">
                       {% if query and form.cleaned_data.topics %}
                         {% blocktrans with start=page.start_index end=page.end_index total=paginator.count %}Showing {{ end }} of {{ total }} results for your query "{{ query }}" with topics:{% endblocktrans %}
@@ -441,8 +465,9 @@
                       {% if form.cleaned_data.topics %}
                         {% trans "or" as or_seperator %}
                         {% render_cosinnus_topics form.cleaned_data.topics or_seperator %}
-                      {% endif %}	
+                      {% endif %}    
                     </p>
+                    
         
                     {% for result in page.object_list %}
                       {{ result.rendered|safe }}

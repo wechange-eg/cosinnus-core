@@ -168,6 +168,8 @@ class TaggableModelSearchForm(SearchForm):
             sqs = self._filter_media_tags(sqs)
             if self.cleaned_data.get('q', None):
                 sqs = self._boost_search_query(sqs)
+            if self.request.GET.get('o', None) == 'newest':
+                sqs = sqs.order_by('-created')
         ret = sqs.models(*self.get_models())
         return ret
     
