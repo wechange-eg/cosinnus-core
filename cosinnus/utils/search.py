@@ -307,6 +307,7 @@ class BaseTaggableObjectIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObje
     group = indexes.IntegerField(model_attr='group_id', indexed=False)
     group_members = indexes.MultiValueField(indexed=False)
     location = indexes.LocationField(null=True)
+    created = indexes.DateTimeField(model_attr='created')
     
     local_cached_attrs = ['_group_members']
     

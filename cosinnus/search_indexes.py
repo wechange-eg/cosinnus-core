@@ -34,6 +34,7 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     group_members = indexes.MultiValueField(indexed=False)
     public = indexes.BooleanField(model_attr='public')
     always_visible = indexes.BooleanField(default=True)
+    created = indexes.DateTimeField(model_attr='created')
     
     local_cached_attrs = ['_group_members']
     
@@ -166,6 +167,8 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     portals = indexes.MultiValueField()
     location = indexes.LocationField(null=True)
     user_id = indexes.IntegerField(model_attr='user__id')
+    created = indexes.DateTimeField(model_attr='user__date_joined')
+    
     
     local_cached_attrs = ['_memberships_count']
     
