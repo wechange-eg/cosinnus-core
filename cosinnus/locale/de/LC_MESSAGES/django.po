@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-22 13:18+0200\n"
-"PO-Revision-Date: 2018-07-22 13:26+0200\n"
+"PO-Revision-Date: 2018-07-22 13:57+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -1688,7 +1688,7 @@ msgid "Do you really want to delete the invitation for \"%(title)s\"?"
 msgstr "Möchtest du die Einladung für \"%(title)s\" wirklich löschen?"
 
 msgid "Message all members"
-msgstr "Alle Mitglieder anschreiben"
+msgstr "Nachricht an alle Mitglieder"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
