@@ -67,18 +67,20 @@
 	        {% comment %} Statics for Select2, always loaded, but only once {% endcomment %}
 	        {% import_django_select2_js %}
 	        
-	        {% if request.GET.report == "1" and object or group %}
-	            <script>$(function(){
-	               {% if request.user.is_authenticated %}
-		               {% if object %}
-		                   {% cosinnus_report_object_action object True %}
-		               {% elif group %}
-		                   {% cosinnus_report_object_action group True %}
-		               {% endif %}
-		           {% else %}
-		               window.location.href = "/login/?next={{ request.path }}?{{ request.GET.urlencode }}";
-		           {% endif %}
-                })</script>
+	        {% if request.GET.report == "1" %}
+	            {% if object or group %}
+		            <script>$(function(){
+		               {% if request.user.is_authenticated %}
+			               {% if object %}
+			                   {% cosinnus_report_object_action object True %}
+			               {% elif group %}
+			                   {% cosinnus_report_object_action group True %}
+			               {% endif %}
+			           {% else %}
+			               window.location.href = "/login/?next={{ request.path }}?{{ request.GET.urlencode }}";
+			           {% endif %}
+	                })</script>
+	            {% endif %}
 	        {% endif %}
         {% endblock jshead %}
         
