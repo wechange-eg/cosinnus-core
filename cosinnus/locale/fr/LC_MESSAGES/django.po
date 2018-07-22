@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-18 12:47+0200\n"
+"POT-Creation-Date: 2018-07-22 13:18+0200\n"
 "PO-Revision-Date: 2018-06-30 15:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -41,11 +41,27 @@ msgstr "Les utilisateurs suivants ont été ajoutés à ce portail :"
 msgid "Add all members to current Portal"
 msgstr "Ajouter tous les membres au portail actuel"
 
+#, fuzzy
+#| msgid "Add all members to current Portal"
+msgid "Move selected teams to current portal"
+msgstr "Ajouter tous les membres au portail actuel"
+
+#, fuzzy
+#| msgid "Move all members to current Portal (removes all other memberships!)"
+msgid "Move selected teams to current portal and message members"
+msgstr "Déplacer tous les membres vers le portail actuel (supprime toutes les autres appartenances !)"
+
 msgid "In addition, the members were removed from all other Portals."
 msgstr "De plus, les membres ont été supprimés du groupe."
 
 msgid "Move all members to current Portal (removes all other memberships!)"
 msgstr "Déplacer tous les membres vers le portail actuel (supprime toutes les autres appartenances !)"
+
+msgid "Move selected groups and their subprojects to current portal"
+msgstr ""
+
+msgid "Move selected groups and their subprojects to current portal and message members"
+msgstr ""
 
 msgid "The following Groups were converted to Projects:"
 msgstr "Les groupes suivants ont été convertis en projets :"
@@ -204,6 +220,19 @@ msgstr "T'a rendu administrateur"
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s t'a rendu administrateur de \"%(team_name)s\" sur %(portal_name)s!"
 
+msgid "Your admin status for this team was revoked"
+msgstr ""
+
+#, fuzzy
+#| msgid "You cannot change your own admin status."
+msgid "Revoked your admin status"
+msgstr "Tu ne peux pas changer ton propre statut d'admin."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s revoked your admin status of \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s t'a rendu administrateur de \"%(team_name)s\" sur %(portal_name)s!"
+
 msgid "You were tagged in a post, document or other item"
 msgstr "Tu as été identifié dans un post, un document ou un autre item"
 
@@ -230,6 +259,20 @@ msgstr "%(sender_name)s t'a invité à rejoindre \"%(team_name)s\" sur %(portal_
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s t'a invité à rejoindre \"%(team_name)s sur %(portal_name)s !"
 
+#, fuzzy
+#| msgid "Show in other projects/groups"
+msgid "New link to the moved project/group"
+msgstr "Afficher dans d'autres projets / groupes"
+
+#, python-format
+msgid "One of your projects/groups were moved to the portal \"%(portal_name)s\"! <br/><br/> Your user account for this portal is the same as for the old one - you do not need to register a new account! <br/><br/>All of your old URLs will continue to work and redirect you to the correct page on the new portal."
+msgstr ""
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
+msgstr "%(sender_name)s t'a invité à rejoindre \"%(team_name)s sur %(portal_name)s !"
+
 msgid "Has created"
 msgstr "A créé"
 
@@ -246,9 +289,6 @@ msgstr "Deutsch"
 
 msgid "English"
 msgstr "English"
-
-msgid "French"
-msgstr "Français"
 
 msgid "Russian"
 msgstr "Русский"
@@ -1105,6 +1145,9 @@ msgstr "Supprimer l'item rapporté..."
 msgid "(The reported item has been deleted.)"
 msgstr "(L'item rapporté a été supprimé)"
 
+msgid "Enter the 4 capital letters in the scrambled image"
+msgstr ""
+
 msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
 msgstr "Cette page est une prévisualisation des bonnes choses à venir ! Elle est en développement et de nombreuses fonctionnalités sont incomplètes, ou ne fonctionnent pas encore bien !"
 
@@ -1234,6 +1277,9 @@ msgstr "Aide"
 
 msgid "Help for this page"
 msgstr "Aide pour cette page"
+
+msgid "Root Folder"
+msgstr "Fichier racine"
 
 msgid "We're sorry. The Map is not supported in Internet Explorer."
 msgstr "Désolé, cette carte n'est pas supportée sur Internet Explorer."
@@ -1464,6 +1510,7 @@ msgstr "Pas de descriptions définie"
 msgid "more"
 msgstr "plus"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
 msgstr "Rapporter un contenu choquant"
 
@@ -1634,6 +1681,11 @@ msgstr "par"
 msgid "Do you really want to delete the invitation for \"%(title)s\"?"
 msgstr "Veux-tu vraiment supprimer l'invitation pour \"%(title)s\" ?"
 
+#, fuzzy
+#| msgid "All members"
+msgid "Message all members"
+msgstr "Tous les membres"
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
 msgstr "Envoyer un message"
@@ -1698,9 +1750,12 @@ msgstr "Exporter"
 msgid "Edit “%(team_name)s”"
 msgstr "Editer “%(team_name)s”"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create Group"
 msgstr "Créer groupe"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create Project"
 msgstr "Créer projet"
 
@@ -2001,9 +2056,13 @@ msgstr "Voir projet"
 msgid "View Group"
 msgstr "Voir groupe"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Membership request pending..."
 msgstr "Demande d'ajout en attente..."
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "You are invited!"
 msgstr "Tu es invité !"
 
@@ -2124,6 +2183,8 @@ msgstr "Déplacer"
 msgid "A message from %(sender_full_name)s"
 msgstr "Un message de %(sender_full_name)s"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Create Idea"
 msgstr "Créer idée"
 
@@ -2762,9 +2823,6 @@ msgstr "Mon profil"
 msgid "Logout"
 msgstr "Déconnexion"
 
-msgid "Stream"
-msgstr "Flux"
-
 msgid "Forum"
 msgstr "Forum"
 
@@ -2775,18 +2833,22 @@ msgstr "Personnes"
 msgid "Invited Groups"
 msgstr "Groupes invités"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "My Groups"
 msgstr "Mes groupes"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Groups"
 msgstr "Tous les groupes"
 
 msgid "Invited Projects"
 msgstr "Projets invités"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "My Projects"
 msgstr "Mes projets"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Projects"
 msgstr "Tous les projets"
 
@@ -2794,9 +2856,11 @@ msgstr "Tous les projets"
 msgid "Ideas"
 msgstr "Idées"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "My Ideas"
 msgstr "Mes idées"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "All Ideas"
 msgstr "Toutes les idées"
 
@@ -2826,6 +2890,13 @@ msgstr "Ce site n'autorise pas d'accès anonyme."
 
 msgid "Log in..."
 msgstr "Connexion..."
+
+msgctxt "read and accept the [Terms of Services]"
+msgid "I have read and accept the"
+msgstr "J'ai lu et accepte les"
+
+msgid "Terms and Services"
+msgstr "Conditions d'utilisation"
 
 msgid "Forgot password?"
 msgstr "Mot de passe oublié ?"
@@ -2999,13 +3070,6 @@ msgstr "Captcha"
 msgid "We need to make sure you are a real person (sorry!)"
 msgstr "Nous devons nous assurer que tu es une vraie personne"
 
-msgctxt "read and accept the [Terms of Services]"
-msgid "I have read and accept the"
-msgstr "J'ai lu et accepte les"
-
-msgid "Terms and Services"
-msgstr "Conditions d'utilisation"
-
 msgid "Search in Apps"
 msgstr "Rechercher dans les applications"
 
@@ -3029,6 +3093,17 @@ msgstr "Autres projets et groupes"
 
 msgid "Search for Users"
 msgstr "Rechercher utilisateurs"
+
+msgid "Ordering"
+msgstr "Ordonner"
+
+#, fuzzy
+#| msgid "News"
+msgid "Newest"
+msgstr "Nouvelles"
+
+msgid "Relevance"
+msgstr ""
 
 #, python-format
 msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\" with topics:"
@@ -3058,6 +3133,30 @@ msgid "Enter one or more search terms or select a topic to search."
 msgstr "Entre un terme de recherche ou plus ou sélectionne un sujet à rechercher."
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Users"
+msgid "My Users"
+msgstr "Utilisateurs"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Events"
+msgid "My Events"
+msgstr "Evénements"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "All users"
+msgid "All Users"
+msgstr "Tous les utilisateurs"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Events"
+msgid "All Events"
+msgstr "Evénements"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Event"
 msgstr "Evénement"
 
@@ -3066,7 +3165,25 @@ msgid "Idea"
 msgstr "Idée"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create folder"
+msgid "Create User"
+msgstr "Créer dossier"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create Idea"
+msgid "Create Event"
+msgstr "Créer idée"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names, Topics and Places..."
+msgstr "Rechercher des noms, sujets et lieux..."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Search for Names, Topics and Places..."
+msgid "Search for Names and Topics..."
 msgstr "Rechercher des noms, sujets et lieux..."
 
 #. Translators: __INCLUDE_JS_PO__
@@ -3092,14 +3209,6 @@ msgstr "Supprimer les filtres"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Street"
 msgstr "Rue"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Satellite"
-msgstr "Satellite"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Terrain"
-msgstr "Terrain"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create idea"
@@ -3809,12 +3918,6 @@ msgstr "Il y a eu une erreur pendant la création de ton avatar. Le fichier imag
 msgid "%s (descending)"
 msgstr "%s (décroissant)"
 
-msgid "Ordering"
-msgstr "Ordonner"
-
-msgid "Root Folder"
-msgstr "Fichier racine"
-
 msgid "<Root folder>"
 msgstr "<Fichier racine>"
 
@@ -3953,6 +4056,18 @@ msgstr "Tu n'es pas membre de %s ! Si tu souhaites, tu peux demander à le deven
 
 msgid "Your changes have been saved."
 msgstr "Tes changements ont été enregistrés."
+
+#~ msgid "French"
+#~ msgstr "Français"
+
+#~ msgid "Stream"
+#~ msgstr "Flux"
+
+#~ msgid "Satellite"
+#~ msgstr "Satellite"
+
+#~ msgid "Terrain"
+#~ msgstr "Terrain"
 
 #~ msgctxt "written next to optional form fields"
 #~ msgid "(optional)"

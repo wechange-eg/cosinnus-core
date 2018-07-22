@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-24 18:48+0200\n"
+"POT-Creation-Date: 2018-07-22 13:18+0200\n"
 "PO-Revision-Date: 2018-06-23 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -213,6 +213,16 @@ msgstr ""
 
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
+msgstr ""
+
+msgid "Your admin status for this team was revoked"
+msgstr ""
+
+msgid "Revoked your admin status"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s revoked your admin status of \"%(team_name)s\" on %(portal_name)s!"
 msgstr ""
 
 msgid "You were tagged in a post, document or other item"
@@ -1282,6 +1292,9 @@ msgstr ""
 msgid "Help for this page"
 msgstr ""
 
+msgid "Root Folder"
+msgstr ""
+
 msgid "We're sorry. The Map is not supported in Internet Explorer."
 msgstr ""
 
@@ -1529,6 +1542,7 @@ msgstr ""
 msgid "more"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
 msgstr ""
 
@@ -1707,6 +1721,9 @@ msgstr ""
 #| msgid "Do you really want to leave „%(title)s“?"
 msgid "Do you really want to delete the invitation for \"%(title)s\"?"
 msgstr "Do you really want to leave project „%(title)s“?"
+
+msgid "Message all members"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
@@ -2733,9 +2750,6 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-msgid "Stream"
-msgstr ""
-
 msgid "Forum"
 msgstr ""
 
@@ -3019,6 +3033,15 @@ msgstr "Other Projects"
 msgid "Search for Users"
 msgstr ""
 
+msgid "Ordering"
+msgstr ""
+
+msgid "Newest"
+msgstr ""
+
+msgid "Relevance"
+msgstr ""
+
 #, python-format
 msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\" with topics:"
 msgstr ""
@@ -3120,14 +3143,6 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Street"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Satellite"
-msgstr ""
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Terrain"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -3864,12 +3879,6 @@ msgstr ""
 
 #, python-format
 msgid "%s (descending)"
-msgstr ""
-
-msgid "Ordering"
-msgstr ""
-
-msgid "Root Folder"
 msgstr ""
 
 msgid "<Root folder>"
