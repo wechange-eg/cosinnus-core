@@ -503,6 +503,9 @@ class CosinnusConf(AppConf):
     # set to ``False`` once testing is over
     DIGEST_ONLY_FOR_ADMINS = False
     
+    # whether to use celery on this instance
+    USE_CELERY = False
+    
     # not all servers are running Postgres >= 9.3 yet. as long as this is true, we cannot uniformly run some nicer queries
     DO_ALL_SERVERS_HAVE_PSQL_9_3 = False
     

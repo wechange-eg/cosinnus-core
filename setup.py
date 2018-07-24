@@ -58,6 +58,7 @@ setup(
         'Django==1.8.18',
         'MarkupSafe==0.18',
         'Pillow==2.6.1',
+        'Celery==4.2.0',
         
         'django-annoying==0.7.6',
         'django-appconf==0.6',
@@ -93,6 +94,7 @@ setup(
         'paramiko==1.12.0',
         'pycrypto==2.6.1',
         'pydkim==0.3',
+        'redis==2.10.6',
         'requests==2.0.1',
         'requests-oauthlib==0.8.0',
         'six==1.8.0',

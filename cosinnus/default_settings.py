@@ -403,6 +403,17 @@ COSINNUS_SITE_PROTOCOL = 'http'
 COSINNUS_MICROSITES_ENABLED = True
 
 
+# CELERY STUFF
+# set this in each portal's settings.py!
+#COSINNUS_USE_CELERY = True
+#BROKER_URL = 'redis://localhost:6379/%d' % SITE_ID
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json' 
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Europe/Berlin'
+
+
 """ -----------  More configurable Cosinnus settings (for defaults check cosinnus/conf.py!)  ----------- """
 
 #AWESOME_AVATAR = {...}
