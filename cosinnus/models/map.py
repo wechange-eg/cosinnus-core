@@ -175,7 +175,7 @@ class HaystackMapResult(BaseMapResult):
             visible_portals = get_visible_portal_ids()
             displayable_portals = [port_id for port_id in result.portals if port_id in visible_portals]
             current_portal_id = CosinnusPortal.get_current().id
-            portal = current_portal_id if current_portal_id in displayable_portals else displayable_portals[0]
+            portal = current_portal_id if ((not displayable_portals) or current_portal_id in displayable_portals) else displayable_portals[0]
         else:
             portal = result.portal
         
