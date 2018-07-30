@@ -11,5 +11,7 @@ class CosinnusAppConfig(AppConfig):
         from cosinnus.models.group import replace_swapped_group_model
         replace_swapped_group_model()
         
-        from cosinnus import init_celery_app
-        init_celery_app()
+        from cosinnus.conf import settings
+        if settings.COSINNUS_USE_CELERY:
+            from cosinnus import init_celery_app
+            init_celery_app()
