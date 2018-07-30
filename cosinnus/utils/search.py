@@ -118,7 +118,7 @@ class TemplateResolveMixin(object):
 class TemplateResolveCharField(TemplateResolveMixin, indexes.CharField):
     pass
 
-class TemplateResolveEdgeNgramField(TemplateResolveMixin, indexes.EdgeNgramField):
+class TemplateResolveNgramField(TemplateResolveMixin, indexes.NgramField):
     pass
 
 
@@ -297,10 +297,10 @@ class DocumentBoostMixin(object):
     
 
 class BaseTaggableObjectIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObjectSearchIndex):
-    text = TemplateResolveEdgeNgramField(document=True, use_template=True)
+    text = TemplateResolveNgramField(document=True, use_template=True)
     rendered = TemplateResolveCharField(use_template=True, indexed=False)
     
-    boosted = indexes.EdgeNgramField(model_attr='title', boost=BOOSTED_FIELD_BOOST)
+    boosted = indexes.NgramField(model_attr='title', boost=BOOSTED_FIELD_BOOST)
 
     creator = indexes.IntegerField(model_attr='creator__id', null=True)
     portal = indexes.IntegerField(model_attr='group__portal_id')
