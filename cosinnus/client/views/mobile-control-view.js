@@ -55,27 +55,27 @@ module.exports = BaseView.extend({
 
     // delegate to controlView
     triggerMobileListView: function (event) {
-        self.controlView.triggerMobileListView();
+        this.controlView.triggerMobileListView();
     },
 
     // delegate to controlView
     triggerMobileSearchView: function (event) {
-        self.controlView.triggerMobileSearchView();
+    	this.controlView.triggerMobileSearchView();
     },
 
     // delegate to controlView
     triggerMobileMapView: function (event) {
-        self.controlView.triggerMobileMapView();
+    	this.controlView.triggerMobileMapView();
     },
     
     // delegate to controlView
     triggerMobileIdeaCreate1View: function (event) {
-        self.controlView.triggerMobileIdeaCreate1View();
+    	this.controlView.triggerMobileIdeaCreate1View();
     },
 
     // delegate to controlView
     triggerMobileIdeaCreate2View: function (event) {
-        self.controlView.triggerMobileIdeaCreate2View();
+    	this.controlView.triggerMobileIdeaCreate2View();
     },
     
     

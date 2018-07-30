@@ -64,27 +64,27 @@ module.exports = BaseView.extend({
     
     // delegate to controlView
     toggleSearchOnScrollClicked: function (event) {
-        self.controlView.toggleSearchOnScrollClicked(event);
+        this.controlView.toggleSearchOnScrollClicked(event);
     },
     
     // delegate to controlView
     staleSearchButtonClicked: function (event) {
-        self.controlView.staleSearchButtonClicked(event);
+    	this.controlView.staleSearchButtonClicked(event);
     },
     
     // delegate to controlView
     paginationForwardClicked: function (event) {
-        self.controlView.paginationForwardClicked(event);
+    	this.controlView.paginationForwardClicked(event);
     },
     
     // delegate to controlView
     paginationBackClicked: function (event) {
-        self.controlView.paginationBackClicked(event);
+    	this.controlView.paginationBackClicked(event);
     },
     
     // delegate to controlView
     createIdeaClicked: function (event) {
-        self.controlView.openCreateIdeaView(event);
+    	this.controlView.openCreateIdeaView(event);
     },
     
 });
