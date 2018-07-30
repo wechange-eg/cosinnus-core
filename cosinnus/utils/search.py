@@ -31,6 +31,9 @@ BOOSTED_FIELD_BOOST = 1.5
 # into the SearchIndexes and boost logic.
 GLOBAL_MODEL_BOOST_MULTIPLIERS = {
     #'cosinnus_event.event': 2.0,
+    #'cosinnus.cosinnusproject': 1.0,
+    #'cosinnus.cosinnussociety': 1.0,
+    'cosinnus.userprofile': 0.5,
 } 
 
 
