@@ -52,9 +52,6 @@ def send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=Fa
         'List-Unsubscribe': '<%s>' % unsubscribe_url,
     }
 
-    from cosinnus import celery_app
-    print ">> now sending to celery app", celery_app.main
-
     # if celery is active, delay the actual delivery
     if settings.COSINNUS_USE_CELERY:
         from cosinnus.tasks import deliver_mail_task
