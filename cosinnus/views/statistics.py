@@ -78,22 +78,28 @@ class SimpleStatisticsView(FormView):
     
     def get_statistics(self, from_date, to_date):
         """ Actual collection of data """
-        registered_users = filter_active_users(get_user_model().objects.filter(id__in=CosinnusPortal.get_current().members))\
+        created_users = filter_active_users(get_user_model().objects.filter(id__in=CosinnusPortal.get_current().members))\
             .filter(date_joined__gte=from_date, date_joined__lte=to_date).count()
-        # note: pre-existing groups count as well!
+        active_users = filter_active_users(get_user_model().objects.filter(id__in=CosinnusPortal.get_current().members))\
+            .filter(date_joined__lte=to_date).count()
+        created_projects = CosinnusProject.objects.filter(portal=CosinnusPortal.get_current(), is_active=True, created__gte=from_date, created__lte=to_date).count()
+        created_groups = CosinnusSociety.objects.filter(portal=CosinnusPortal.get_current(), is_active=True,  created__gte=from_date, created__lte=to_date).count()
         active_projects = CosinnusProject.objects.filter(portal=CosinnusPortal.get_current(), is_active=True, created__lte=to_date).count()
         active_groups = CosinnusSociety.objects.filter(portal=CosinnusPortal.get_current(), is_active=True, created__lte=to_date).count()
         
         statistics = {
-            '1. Registered Users': registered_users,
-            '2. Active Projects': active_projects,
-            '3. Active Groups': active_groups,
+            '1. New Registered Users': created_users,
+            '2. Active Users': active_users,
+            '3. New Created Projects': created_projects,
+            '4. Active Projects': active_projects,
+            '5. New Created Groups': created_groups,
+            '6. Active Groups': active_groups,
         }
         try:
             from cosinnus_event.models import Event
             created_event_count = Event.objects.filter(group__portal=CosinnusPortal.get_current(), created__gte=from_date, created__lte=to_date).count()
             statistics.update({
-                '4. Created Events': created_event_count,      
+                '7. Created Events': created_event_count,      
             })
         except:
             pass
@@ -102,7 +108,7 @@ class SimpleStatisticsView(FormView):
             from cosinnus_note.models import Note
             created_note_count = Note.objects.filter(group__portal=CosinnusPortal.get_current(), created__gte=from_date, created__lte=to_date).count()
             statistics.update({
-                '5. Created News': created_note_count,      
+                '8. Created News': created_note_count,      
             })
         except:
             pass
