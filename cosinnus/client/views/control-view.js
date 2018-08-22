@@ -1071,7 +1071,7 @@ module.exports = ContentControlView.extend({
             },
             q: util.ifundef(urlParams.q, this.state.q),
             ignoreLocation: util.ifundef(urlParams.ignore_location, this.state.ignoreLocation),
-            searchResultLimit: util.ifundef(urlParams.limits, this.state.searchResultLimit),
+            searchResultLimit: util.ifundef(urlParams.limit, this.state.searchResultLimit),
             activeTopicIds: util.ifundef(urlParams.topics, this.state.activeTopicIds),
             pageIndex: util.ifundef(urlParams.page, this.state.pageIndex),
             urlSelectedResultId: util.ifundef(urlParams.item, this.state.urlSelectedResultId),
