@@ -65,6 +65,7 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^administration/activate/(?P<group_id>\d+)/$', 'group.activate_or_deactivate', name='group-activate', kwargs={'activate': True}),
     url(r'^administration/deactivate/(?P<group_id>\d+)/$', 'group.activate_or_deactivate', name='group-deactivate', kwargs={'activate': False}),
     
+    url(r'^statistics/simple/$', 'statistics.simple_statistics', name='simple-statistics'),
     
     
     url(r'^housekeeping/$', 'housekeeping.housekeeping', name='housekeeping'),
