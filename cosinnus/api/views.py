@@ -1,14 +1,14 @@
 from django.db.models import Q
 from rest_framework import viewsets
 
-from cosinnus.models.group import CosinnusGroup, CosinnusPortal
-from cosinnus.models.group_extra import CosinnusProject
+from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.tagged import BaseTagObject
 from .serializers import CosinnusGroupSerializer, CosinnusProjectSerializer
 
 
 class CosinnusGroupSerializerViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = CosinnusGroup.objects.all()
+    queryset = CosinnusSociety.objects.all()
     serializer_class = CosinnusGroupSerializer
 
     def get_queryset(self):
