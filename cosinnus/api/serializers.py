@@ -20,7 +20,7 @@ class CosinnusGroupSerializer(serializers.HyperlinkedModelSerializer):
     def get_locations(self, obj):
         locations = []
         for location in obj.get_locations():
-            location.append({
+            locations.append({
                 'location': location.location,
                 'lat': location.location_lat,
                 'lon': location.location_lat,

@@ -19,14 +19,6 @@ class CosinnusGroupSerializerViewSet(viewsets.ReadOnlyModelViewSet):
         queryset = self.queryset
         # Filter visibility
         queryset = queryset.filter(is_active=True, public=True)
-        queryset = queryset.filter(Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL) |
-                                   Q(
-                                       Q(
-                                           Q(media_tag__isnull=True) |
-                                           Q(media_tag__visibility__isnull=True)
-                                       ),
-                                       parent__media_tag__visibility = BaseTagObject.VISIBILITY_ALL
-                                   ))
         # Overwrite ugly but commonly used filters
         FILTER_MAP = {
             'tags': 'media_tag__tags__name'
