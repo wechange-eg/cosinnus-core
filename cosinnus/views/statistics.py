@@ -80,8 +80,9 @@ class SimpleStatisticsView(FormView):
         """ Actual collection of data """
         registered_users = filter_active_users(get_user_model().objects.filter(id__in=CosinnusPortal.get_current().members))\
             .filter(date_joined__gte=from_date, date_joined__lte=to_date).count()
-        active_projects = CosinnusProject.objects.filter(portal=CosinnusPortal.get_current(), is_active=True, created__gte=from_date, created__lte=to_date).count()
-        active_groups = CosinnusSociety.objects.filter(portal=CosinnusPortal.get_current(), is_active=True, created__gte=from_date, created__lte=to_date).count()
+        # note: pre-existing groups count as well!
+        active_projects = CosinnusProject.objects.filter(portal=CosinnusPortal.get_current(), is_active=True, created__lte=to_date).count()
+        active_groups = CosinnusSociety.objects.filter(portal=CosinnusPortal.get_current(), is_active=True, created__lte=to_date).count()
         
         statistics = {
             '1. Registered Users': registered_users,
@@ -105,6 +106,7 @@ class SimpleStatisticsView(FormView):
             })
         except:
             pass
+        statistics = sorted(statistics.iteritems())
         return statistics
     
     def form_valid(self, form):
