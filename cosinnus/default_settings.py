@@ -217,6 +217,7 @@ def compile_installed_apps(internal_apps=[]):
         'postman',
         'raven.contrib.django.raven_compat',
         'rest_framework',
+        'rest_framework_swagger',
         'taggit',
     ]
     return _INSTALLED_APPS
@@ -455,3 +456,17 @@ COSINNUS_SESSION_EXPIRY_AUTHENTICATED_IN_USERS = 60 * 60 * 24 * 60 # 60 days
 # honeypot field name shouldn't be too obvious, but also not trigger browsers' autofill
 HONEYPOT_FIELD_NAME = 'phnoenumber_8493'
 
+# API AND SWAGGER SETTINGS
+SWAGGER_SETTINGS = {
+    'api_version': '2',
+    'api_path': '/api/v2/',
+    'api_key': 'wechange',
+    'info': {
+        'contact': 'support@wechange.de',
+        'description': '',
+        'license': 'AGPL 3.0',
+        'licenseUrl': 'https://www.gnu.org/licenses/agpl-3.0.de.html',
+        #'termsOfServiceUrl': 'http://helloreverb.com/terms/',
+        'title': 'WECHANGE API',
+    },
+}

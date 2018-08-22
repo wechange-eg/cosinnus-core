@@ -75,6 +75,7 @@ setup(
         'django-model-utils==1.5.0',
         'django-phonenumber-field==1.1.0',
         'django-polymorphic==0.7.2',
+        'django-rest-swagger==0.3.10',
         'django-sekizai==0.8.2',
         'django-simple-captcha==0.5.7',
         'django-suit==0.2.15',
