@@ -1,70 +1,182 @@
-<div class="et_pb_module et_pb_blog_0 et_pb_blog_grid_wrapper">
-    <div class="et_pb_blog_grid clearfix et_pb_bg_layout_light ">
-        <div class="et_pb_ajax_pagination_container">
-            <div class="et_pb_salvattore_content" data-columns="3">
-                <div class="column size-1of3">
-                    <article id="post-144"
-                             class="et_pb_post clearfix post-144 post type-post status-publish format-standard has-post-thumbnail hentry category-unkategorisiert has-box-shadow-overlay">
-                        <div class="box-shadow-overlay"></div>
+{% load static from staticfiles %}
+{% load bootstrap3 i18n %}
+{% load cosinnus_tags %}
+{% load djajax_tags %}
+{% load django_select2_tags %}
+{% load sekizai_tags %}
+{% load wagtailcore_tags %}
 
-                        <div class="et_pb_image_container"><a
-                                href="https://oepr-partnerschaft.de/2018/08/18/eintrag-3/"
-                                class="entry-featured-image-url">
-                            <img src="https://oepr-partnerschaft.de/wp-content/uploads/2018/08/background-400x250.jpg"
-                                 alt="Eintrag #3" width="400" height="250"> </a>
-                        </div> <!-- .et_pb_image_container -->
-                        <h2 class="entry-title"><a
-                                href="https://oepr-partnerschaft.de/2018/08/18/eintrag-3/">Eintrag
-                            #3</a></h2>
+<!DOCTYPE html>
+<html lang="en" {% block html_attributes %}{% endblock html_attributes %}>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="referrer" content="same-origin">
 
-                        <div class="post-content"><p>Lorem ipsum dolor sit amet, consetetur
-                            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-                            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-                            et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-                            takimata sanctus est...</p>
-                        </div>
-                    </article>
-                </div>
-                <div class="column size-1of3">
-                    <article id="post-142"
-                             class="et_pb_post clearfix post-142 post type-post status-publish format-standard has-post-thumbnail hentry category-unkategorisiert has-box-shadow-overlay">
-                        <div class="box-shadow-overlay"></div>
+        {% block og_meta_attributes %}
+        <meta property="og:url"           content="{% block og_url %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ request.path }}{% endblock og_url %}" />
+        <meta property="og:title"         content="{% block og_title %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% endif %}{% endblock og_title %}" />
+        <meta property="og:image"         content="{% block og_image %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{% if COSINNUS_CURRENT_PORTAL.logo_image %}{{ COSINNUS_CURRENT_PORTAL.logo_image.url }}{% else %}{% static 'img/logo-icon.png' %}{% endif %}{% endblock og_image %}" />
+        <meta property="og:site_name"     content="{% block og_site_name %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% else %}{{ COSINNUS_CURRENT_PORTAL.name }}{% endif %}{% endblock og_site_name %}" />
+        <meta property="og:description"   content="{% block og_description %}{% endblock og_description %}" />
+        {% endblock og_meta_attributes %}
 
-                        <div class="et_pb_image_container"><a
-                                href="https://oepr-partnerschaft.de/2018/08/18/eintrag-2/"
-                                class="entry-featured-image-url">
-                            <img src="https://oepr-partnerschaft.de/wp-content/uploads/2018/08/background-400x250.jpg"
-                                 alt="Eintrag #2" width="400" height="250"> </a>
-                        </div> <!-- .et_pb_image_container -->
-                        <h2 class="entry-title"><a
-                                href="https://oepr-partnerschaft.de/2018/08/18/eintrag-2/">Eintrag
-                            #2</a></h2>
+        <!-- TODO: override main title that can be extended from (in main app!) -->
+        <title>{% block page_title %}{% endblock page_title %}{% block base_page_title %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %} - {% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% endif %}{% endblock base_page_title %}</title>
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'images/apple-touch-icon-114x114-precomposed.png' %}" />
 
-                        <div class="post-content"><p>Lorem ipsum dolor sit amet, consetetur
-                            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-                            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-                            et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-                            takimata sanctus est...</p>
-                        </div>
-                    </article>
-                </div>
-                <div class="column size-1of3">
-                    <article id="post-1"
-                             class="et_pb_post clearfix et_pb_no_thumb post-1 post type-post status-publish format-standard hentry category-unkategorisiert has-box-shadow-overlay">
-                        <div class="box-shadow-overlay"></div>
+        {% block csshead %}
+	        {% comment %} Statics for Select2, always loaded, but only once {% endcomment %}
+	        {% import_django_select2_css %}
+
+	        <link href="{% static 'css/bootstrap3-cosinnus.css' %}" rel="stylesheet">
+	        <link href="{% static 'css/vendor/font-awesome.min.css' %}" rel="stylesheet">
+	        <link href="{% static 'css/vendor/select2.css' %}" rel="stylesheet">
+	        <link href="{% static 'css/vendor/fullcalendar.css' %}" rel="stylesheet">
+	        <link href="{% static 'css/vendor/lightbox.css' %}" rel="stylesheet">
+	        {% if SETTINGS.DEBUG %}
+			<link rel="stylesheet/less" href="{% static "less/cosinnus.less" %}">
+			<script src="{% static "js/vendor/less.min.js" %}"></script>
+			{% else %}
+		    <link href="{% static 'css/cosinnus.css' %}?v=0.43" rel="stylesheet">
+			{% endif %}
+	        <link href="{% static 'css/cosinnus_portal_style.css' %}?v=0.6" rel="stylesheet">
+	        <link href="{% static COSINNUS_CURRENT_PORTAL.custom_stylesheet_url %}?v=0.2" rel="stylesheet">
+        {% endblock csshead %}
+
+        {% block base_jshead %}
+            {% comment %} Bare JS required for the site. Only this is loaded on auth pages {% endcomment %}
+	        <script src="{% static 'js/vendor/jquery-2.1.0.min.js' %}"></script>
+	        <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+        {% endblock base_jshead %}
+
+        {% block jshead %}
+	        <script src="{% static 'js/vendor/select2.min.js' %}"></script>
+	        <script src="{% static 'js/vendor/fullcalendar.min.js' %}"></script>
+	        <script src="{% static 'js/vendor/jquery.sortElements.js' %}"></script>
+	        <script src="{% static 'js/vendor/moment-with-langs.min.js' %}"></script>
+	        <script src="{% static 'js/vendor/jquery.ui.widget.js' %}"></script>
+	        <script src="{% static 'js/vendor/jquery.fileupload.js' %}"></script>
+	        {% comment %}  Load this for sortable dashboard widgets {% endcomment %}
+	        {% if SETTINGS.COSINNUS_ALLOW_DASHBOARD_WIDGET_REARRANGE %}
+	        <script src="{% static 'js/vendor/html.sortable.min.js' %}"></script>
+	        {% endif %}
+	        <script src="{% static 'js/lightbox.js' %}"></script>
+	        {% comment %} Statics for Select2, always loaded, but only once {% endcomment %}
+	        {% import_django_select2_js %}
+        {% endblock jshead %}
+
+        {% block cosinnus_jshead %}
+            <script type="text/javascript">
+                var cosinnus_base_url = "{{ COSINNUS_BASE_URL|default:'/' }}";
+                var cosinnus_active_group = {% if group %}"{{ group.slug }}"{% else %}false{% endif %};
+                var cosinnus_active_user = JSON.parse("{{ COSINNUS_USER|escapejs }}");
+                var cosinnus_date_format = "{{ COSINNUS_DATE_FORMAT }}";
+                var cosinnus_datetime_format = "{{ COSINNUS_DATETIME_FORMAT }}";
+                var cosinnus_time_format = "{{ COSINNUS_TIME_FORMAT }}";
+                var cosinnus_group_url_path = "{% cosinnus_group_url_path %}";
+                var cosinnus_current_language = "{{ COSINNUS_CURRENT_LANGUAGE }}";
+                var cosinnus_report_object_url = "{% url 'cosinnus:report-object' %}";
+            </script>
+            <script src="{% static 'js/cosinnus.js' %}?v=0.37"></script>
+            <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
+            <script src="{% static 'js/cosinnus.feedback.js' %}"></script>
+        {% endblock cosinnus_jshead %}
 
 
-                        <h2 class="entry-title"><a
-                                href="https://oepr-partnerschaft.de/2018/08/06/hallo-welt/">Hallo
-                            Welt!</a></h2>
+        {% captureas cosinnus_css_class %}{% if COSINNUS_CURRENT_APP == 'todo' %}app-todos{% elif COSINNUS_CURRENT_APP == 'note' %}app-main{% elif COSINNUS_CURRENT_APP == 'file' %}app-files{% elif COSINNUS_CURRENT_APP == 'event' %}app-calendar{% elif COSINNUS_CURRENT_APP %}app-{{ COSINNUS_CURRENT_APP }}{% else %}app-main{% endif %} {% if request.path == '/' %}landing{% endif %}{% endcaptureas %}
 
-                        <div class="post-content"><p>Willkommen zur deutschen Version von
-                            WordPress. Dies ist der erste Beitrag. Du kannst ihn bearbeiten oder
-                            löschen. Und dann starte mit dem Schreiben!</p>
-                        </div>
-                    </article>
-                </div>
-            </div><!-- .et_pb_salvattore_content -->
-        </div>
-    </div> <!-- .et_pb_posts -->
-</div>
+        {% include 'cosinnus/extrahead.html' %}
+        {% block extrahead %}{% endblock extrahead %}
+
+        {% render_block "css" %} {# sekizai use for extra scripts/styles #}
+        {% render_block "js" %} {# sekizai use for extra scripts/styles #}
+    </head>
+    {% comment %} 'lang=' attribute is required for OSM-Field language definition {% endcomment %}
+    <body {% block body_attributes %}{% endblock body_attributes %} lang="{{ COSINNUS_CURRENT_LANGUAGE }}">
+    <!-- class="{{ COSINNUS_CURRENT_APP }}" -->
+
+        {% include 'cosinnus/extra_body_header.html' %}
+        {% block body_header %}{% endblock body_header %}
+
+        {% block cosinnus_navbar %}
+        	{% cosinnus_menu "cosinnus/navbar.html" %}
+        {% endblock cosinnus_navbar %}
+
+
+        <div class="{% block container_classes %}container {{ cosinnus_css_class }}{% endblock container_classes %}">
+
+            {% block main_page_header %}{% endblock main_page_header %}
+
+            {% block main_page %}
+                <div class="row">
+                    <!-- start with left navigation -->
+
+                    <!-- now the content -->
+                    <div class="col-lg-9 col-md-9 pull-right"><!-- right column -->
+                        {% block override_breadcrumb %}
+                            <ol class="breadcrumb">
+                                {% block breadcrumb %}
+                                    {% include 'cosinnus/breadcrumb.html' %}
+                                {% endblock breadcrumb %}
+                            </ol>
+                        {% endblock override_breadcrumb %}
+                    </div>
+                    {# this fixes the breadcrumb being unclickable in mobile views #}
+                    <div class="visible-xs clearfix"></div>
+
+                    {% block override_leftnav %}
+                    <div class="col-lg-3 col-md-3"><!-- left column -->
+                        {% if group %}
+                            {% cosinnus_menu "cosinnus/appsmenu.html" %}
+                        {% endif %}
+                        {% block leftnav %}{% endblock leftnav %}
+                        <div class="clearfix regular-space"></div>
+                    </div><!-- left column -->
+                    {% endblock override_leftnav %}
+
+                    <div class="col-lg-9 col-md-9"><!-- right column -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                {% include 'cosinnus/messages.html' %}
+                                {% block content %}{% endblock content %}
+                            </div><!-- col -->
+                        </div><!-- row -->
+                    </div><!-- right column -->
+
+                </div><!-- row -->
+            {% endblock main_page %}
+
+            {% include 'cosinnus/feedback/report_modal.html' %}
+        </div><!-- main container -->
+
+        {% block footer %}
+            {% if not skip_page_footer %}
+		        {% with portal_cms_roots=COSINNUS_CURRENT_PORTAL.wagtail_root_pages.all %}
+		        	{% if portal_cms_roots and portal_cms_roots.0.footer %}
+		        		<div class="footer-spacer"></div>
+				        <div class="widget-footer overlay-box overlay-box-gray cms-content cms-footer">
+				            <div class="container">
+				                <div class="row">
+				                    <div class="col-xs-12">
+			                    		{{ portal_cms_roots.0.footer|richtext }}
+				                    </div>
+				                </div><!-- row -->
+				            </div><!-- container -->
+				        </div><!-- footer -->
+				    {% else %}
+				    	<br/><br/><br/> <!-- replacement space for missing footer -->
+		        	{% endif %}
+		        {% endwith %}
+	        {% endif %}
+        {% endblock footer %}
+
+    {% block extrafooter %}
+	    {% include 'cosinnus/extrafooter.html' %}
+        {% djajax generate %}
+    {% endblock extrafooter %}
+
+  </body>
+</html>
