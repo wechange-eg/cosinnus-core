@@ -2,16 +2,16 @@
 from __future__ import unicode_literals
 
 from django.conf.urls import include, patterns, url
-from django.views.generic import TemplateView
+from django.views.generic.base import RedirectView
+from django.core.urlresolvers import reverse_lazy
+from rest_framework import routers
 
 from cosinnus.core.registries import url_registry
 from cosinnus.conf import settings
 from cosinnus.core.registries.group_models import group_model_registry
-from cosinnus.templatetags.cosinnus_tags import is_integrated_portal,\
-    is_sso_portal
-from django.views.decorators.clickjacking import xframe_options_exempt
-from django.views.generic.base import RedirectView
-from django.core.urlresolvers import reverse_lazy
+from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
+from cosinnus.api.views import CosinnusGroupSerializerViewSet, CosinnusProjectSerializerViewSet
+
 
 urlpatterns = patterns('cosinnus.views',
     # we do not define an index anymore and let CMS handle that.
@@ -64,9 +64,8 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^administration/list-unsubscribe/(?P<email>[^/]+)/(?P<token>[^/]+)/$', 'user.add_email_to_blacklist', name='user-add-email-blacklist'),
     url(r'^administration/activate/(?P<group_id>\d+)/$', 'group.activate_or_deactivate', name='group-activate', kwargs={'activate': True}),
     url(r'^administration/deactivate/(?P<group_id>\d+)/$', 'group.activate_or_deactivate', name='group-deactivate', kwargs={'activate': False}),
-    
+
     url(r'^statistics/simple/$', 'statistics.simple_statistics', name='simple-statistics'),
-    
     
     url(r'^housekeeping/$', 'housekeeping.housekeeping', name='housekeeping'),
     url(r'^housekeeping/deletespamusers/$', 'housekeeping.delete_spam_users', name='housekeeping_delete_spam_users'),
@@ -169,3 +168,13 @@ for url_key in group_model_registry:
     )
 
 urlpatterns += url_registry.urlpatterns
+
+# URLs for API version 2
+router = routers.DefaultRouter()
+router.register(r'groups', CosinnusGroupSerializerViewSet)
+router.register(r'projects', CosinnusProjectSerializerViewSet)
+
+urlpatterns += [
+    url(r'api/v2/docs/', include('rest_framework_swagger.urls')),
+    url(r'api/v2/', include(router.urls)),
+]

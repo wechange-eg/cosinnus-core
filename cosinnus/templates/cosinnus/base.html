@@ -13,7 +13,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="referrer" content="same-origin">
-        
+
         {% block og_meta_attributes %}
         <meta property="og:url"           content="{% block og_url %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ request.path }}{% endblock og_url %}" />
         <meta property="og:title"         content="{% block og_title %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% endif %}{% endblock og_title %}" />
@@ -21,16 +21,16 @@
         <meta property="og:site_name"     content="{% block og_site_name %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% else %}{{ COSINNUS_CURRENT_PORTAL.name }}{% endif %}{% endblock og_site_name %}" />
         <meta property="og:description"   content="{% block og_description %}{% endblock og_description %}" />
         {% endblock og_meta_attributes %}
-        
+
         <!-- TODO: override main title that can be extended from (in main app!) -->
         <title>{% block page_title %}{% endblock page_title %}{% block base_page_title %}{% if SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %} - {% trans SETTINGS.COSINNUS_BASE_PAGE_TITLE_TRANS %}{% endif %}{% endblock base_page_title %}</title>
         <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'images/apple-touch-icon-114x114-precomposed.png' %}" />
-        
+
         {% block csshead %}
 	        {% comment %} Statics for Select2, always loaded, but only once {% endcomment %}
 	        {% import_django_select2_css %}
-	        
+
 	        <link href="{% static 'css/bootstrap3-cosinnus.css' %}" rel="stylesheet">
 	        <link href="{% static 'css/vendor/font-awesome.min.css' %}" rel="stylesheet">
 	        <link href="{% static 'css/vendor/select2.css' %}" rel="stylesheet">
@@ -45,14 +45,14 @@
 	        <link href="{% static 'css/cosinnus_portal_style.css' %}?v=0.6" rel="stylesheet">
 	        <link href="{% static COSINNUS_CURRENT_PORTAL.custom_stylesheet_url %}?v=0.2" rel="stylesheet">
         {% endblock csshead %}
-        
+
         {% block base_jshead %}
             {% comment %} Bare JS required for the site. Only this is loaded on auth pages {% endcomment %}
 	        <script src="{% static 'js/vendor/jquery-2.1.0.min.js' %}"></script>
 	        <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
         {% endblock base_jshead %}
-        
-        {% block jshead %}        
+
+        {% block jshead %}
 	        <script src="{% static 'js/vendor/select2.min.js' %}"></script>
 	        <script src="{% static 'js/vendor/fullcalendar.min.js' %}"></script>
 	        <script src="{% static 'js/vendor/jquery.sortElements.js' %}"></script>
@@ -83,7 +83,7 @@
 	            {% endif %}
 	        {% endif %}
         {% endblock jshead %}
-        
+
         {% block cosinnus_jshead %}
             <script type="text/javascript">
                 var cosinnus_base_url = "{{ COSINNUS_BASE_URL|default:'/' }}";
@@ -100,36 +100,36 @@
             <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
             <script src="{% static 'js/cosinnus.feedback.js' %}"></script>
         {% endblock cosinnus_jshead %}
-        
-        
+
+
         {% captureas cosinnus_css_class %}{% if COSINNUS_CURRENT_APP == 'todo' %}app-todos{% elif COSINNUS_CURRENT_APP == 'note' %}app-main{% elif COSINNUS_CURRENT_APP == 'file' %}app-files{% elif COSINNUS_CURRENT_APP == 'event' %}app-calendar{% elif COSINNUS_CURRENT_APP %}app-{{ COSINNUS_CURRENT_APP }}{% else %}app-main{% endif %} {% if request.path == '/' %}landing{% endif %}{% endcaptureas %}
-        
+
         {% include 'cosinnus/extrahead.html' %}
         {% block extrahead %}{% endblock extrahead %}
-        
+
         {% render_block "css" %} {# sekizai use for extra scripts/styles #}
         {% render_block "js" %} {# sekizai use for extra scripts/styles #}
     </head>
     {% comment %} 'lang=' attribute is required for OSM-Field language definition {% endcomment %}
     <body {% block body_attributes %}{% endblock body_attributes %} lang="{{ COSINNUS_CURRENT_LANGUAGE }}">
     <!-- class="{{ COSINNUS_CURRENT_APP }}" -->
-        
+
         {% include 'cosinnus/extra_body_header.html' %}
         {% block body_header %}{% endblock body_header %}
-        
+
         {% block cosinnus_navbar %}
         	{% cosinnus_menu "cosinnus/navbar.html" %}
         {% endblock cosinnus_navbar %}
-        
-        
+
+
         <div class="{% block container_classes %}container {{ cosinnus_css_class }}{% endblock container_classes %}">
-            
+
             {% block main_page_header %}{% endblock main_page_header %}
-            
+
             {% block main_page %}
                 <div class="row">
                     <!-- start with left navigation -->
-                    
+
                     <!-- now the content -->
                     <div class="col-lg-9 col-md-9 pull-right"><!-- right column -->
                         {% block override_breadcrumb %}
@@ -142,7 +142,7 @@
                     </div>
                     {# this fixes the breadcrumb being unclickable in mobile views #}
                     <div class="visible-xs clearfix"></div>
-                    
+
                     {% block override_leftnav %}
                     <div class="col-lg-3 col-md-3"><!-- left column -->
                         {% if group %}
@@ -152,7 +152,7 @@
                         <div class="clearfix regular-space"></div>
                     </div><!-- left column -->
                     {% endblock override_leftnav %}
-                    
+
                     <div class="col-lg-9 col-md-9"><!-- right column -->
                         <div class="row">
                             <div class="col-xs-12">
@@ -161,13 +161,13 @@
                             </div><!-- col -->
                         </div><!-- row -->
                     </div><!-- right column -->
-                
+
                 </div><!-- row -->
             {% endblock main_page %}
-                
+
             {% include 'cosinnus/feedback/report_modal.html' %}
         </div><!-- main container -->
-        
+
         {% block footer %}
             {% if not skip_page_footer %}
 		        {% with portal_cms_roots=COSINNUS_CURRENT_PORTAL.wagtail_root_pages.all %}
@@ -188,11 +188,11 @@
 		        {% endwith %}
 	        {% endif %}
         {% endblock footer %}
-        
+
     {% block extrafooter %}
 	    {% include 'cosinnus/extrafooter.html' %}
         {% djajax generate %}
     {% endblock extrafooter %}
-    
+
   </body>
 </html>
