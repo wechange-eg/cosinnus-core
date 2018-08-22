@@ -27,6 +27,7 @@ from cosinnus.models.profile import get_user_profile_model
 from cosinnus.utils.functions import is_number, ensure_list_of_ints
 from cosinnus.utils.permissions import check_object_read_access
 from django.utils.html import escape
+from cosinnus.utils.group import get_cosinnus_group_model
 
 
 try:
@@ -121,7 +122,12 @@ def map_search_endpoint(request, filter_group_id=None):
         sqs = sqs.auto_query(query)
     # group-filtered-map view for on-group pages
     if filter_group_id:
-        sqs = sqs.filter_and(Q(membership_groups=filter_group_id) | Q(group=filter_group_id))
+        group = get_object_or_None(get_cosinnus_group_model(), id=filter_group_id)
+        if group:
+            filtered_groups = [filter_group_id]
+            # get child projects of this group
+            filtered_groups += [subproject.id for subproject in group.get_children() if subproject.is_active]
+            sqs = sqs.filter_and(Q(membership_groups__in=filtered_groups) | Q(group__in=filtered_groups))
     # filter topics
     topics = ensure_list_of_ints(params.get('topics', ''))
     if topics: 

@@ -293,6 +293,8 @@ class CosinnusConf(AppConf):
     # is the "Groups" menu visible in the navbar menu?
     NAVBAR_GROUP_MENU_VISIBLE = True
     
+    # should the creator of an Event automatically be marked as "Going" in EventAttendance?
+    EVENT_MARK_CREATOR_AS_GOING = False
     
     # widgets listed here will be created for the user dashboard upon user creation.
     # this will check if the cosinnus app is installed and if the widget is registered, so
@@ -500,6 +502,9 @@ class CosinnusConf(AppConf):
     # Temporary setting for the digest test phase.
     # set to ``False`` once testing is over
     DIGEST_ONLY_FOR_ADMINS = False
+    
+    # whether to use celery on this instance
+    USE_CELERY = False
     
     # not all servers are running Postgres >= 9.3 yet. as long as this is true, we cannot uniformly run some nicer queries
     DO_ALL_SERVERS_HAVE_PSQL_9_3 = False

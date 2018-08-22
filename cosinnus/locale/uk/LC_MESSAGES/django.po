@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-24 18:48+0200\n"
+"POT-Creation-Date: 2018-07-22 13:18+0200\n"
 "PO-Revision-Date: 2018-06-23 17:09+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -218,6 +218,19 @@ msgstr "Вас призначено адміністратором"
 
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s призначив Вас адміністратором %(team_name)s на %(portal_name)s!"
+
+msgid "Your admin status for this team was revoked"
+msgstr ""
+
+#, fuzzy
+#| msgid "You cannot change your own admin status."
+msgid "Revoked your admin status"
+msgstr "Ви не можете змінити власний статус адміністратора/-ки."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s revoked your admin status of \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s призначив Вас адміністратором %(team_name)s на %(portal_name)s!"
 
 msgid "You were tagged in a post, document or other item"
@@ -1279,6 +1292,9 @@ msgstr "Довідка"
 msgid "Help for this page"
 msgstr "Довідка для цієї сторінки"
 
+msgid "Root Folder"
+msgstr "Головна папка"
+
 msgid "We're sorry. The Map is not supported in Internet Explorer."
 msgstr "Вибачте, ця карта не підтримується в Internet Explorer."
 
@@ -1521,6 +1537,7 @@ msgstr "Опис не створено"
 msgid "more"
 msgstr "більше"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
 msgstr "Повідомити про образливий зміст"
 
@@ -1695,6 +1712,11 @@ msgstr ""
 #| msgid "Do you really want to decline the invitation?"
 msgid "Do you really want to delete the invitation for \"%(title)s\"?"
 msgstr "Ви дійсно бажаєте віхилити запрошення?"
+
+#, fuzzy
+#| msgid "All members"
+msgid "Message all members"
+msgstr "Показати усіх"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
@@ -2871,9 +2893,6 @@ msgstr "Мій профіль"
 msgid "Logout"
 msgstr "Вихід"
 
-msgid "Stream"
-msgstr "Діяльність"
-
 msgid "Forum"
 msgstr "Форум"
 
@@ -3153,6 +3172,17 @@ msgstr "Інші проекти та групи"
 msgid "Search for Users"
 msgstr "Пошук користувачів"
 
+msgid "Ordering"
+msgstr "Сортування"
+
+#, fuzzy
+#| msgid "News"
+msgid "Newest"
+msgstr "Новини"
+
+msgid "Relevance"
+msgstr ""
+
 #, python-format
 msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\" with topics:"
 msgstr "Показує %(end)s of %(total)s результати щодо вашого запиту \"%(query)s\" з темами:"
@@ -3262,18 +3292,6 @@ msgstr ""
 #| msgid "Stream"
 msgid "Street"
 msgstr "Діяльність"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Last edited"
-msgid "Satellite"
-msgstr "Востаннє редаговано"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Rearrange"
-msgid "Terrain"
-msgstr "Переоформити"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -4035,12 +4053,6 @@ msgstr "Під час обробки вашого основного фото в
 msgid "%s (descending)"
 msgstr "%s (із зменшенням)"
 
-msgid "Ordering"
-msgstr "Сортування"
-
-msgid "Root Folder"
-msgstr "Головна папка"
-
 msgid "<Root folder>"
 msgstr "<Головна папка>"
 
@@ -4179,6 +4191,19 @@ msgstr "Ви, на разі, не є членом %s! Якщо ви бажаєт
 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
+
+#~ msgid "Stream"
+#~ msgstr "Діяльність"
+
+#, fuzzy
+#~| msgid "Last edited"
+#~ msgid "Satellite"
+#~ msgstr "Востаннє редаговано"
+
+#, fuzzy
+#~| msgid "Rearrange"
+#~ msgid "Terrain"
+#~ msgstr "Переоформити"
 
 #~ msgid "French"
 #~ msgstr "Français"

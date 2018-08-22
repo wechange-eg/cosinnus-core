@@ -175,7 +175,7 @@ class HaystackMapResult(BaseMapResult):
             visible_portals = get_visible_portal_ids()
             displayable_portals = [port_id for port_id in result.portals if port_id in visible_portals]
             current_portal_id = CosinnusPortal.get_current().id
-            portal = current_portal_id if current_portal_id in displayable_portals else displayable_portals[0]
+            portal = current_portal_id if ((not displayable_portals) or current_portal_id in displayable_portals) else displayable_portals[0]
         else:
             portal = result.portal
         
@@ -216,6 +216,8 @@ class DetailedMapResult(HaystackMapResult):
         'is_member': False,
         'is_invited': False,
         'is_pending': False,
+        'report_model': None,
+        'report_id': None,
     })
     
     background_image_field = None
@@ -230,7 +232,13 @@ class DetailedMapResult(HaystackMapResult):
     """
     
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
+        # collect '<app_label>.<model_name>' and id for the Feedback report popup
+        app_label = obj.__class__.__module__.split('.')[0]
+        model_name = obj.__class__.__name__
+        model_str = '%s.%s' % (app_label, model_name)
         kwargs.update({
+            'report_model': model_str,
+            'report_id': obj.id
         })
         """
         if self.background_image_field:

@@ -1,0 +1,119 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n thumbnail cosinnus_tags cosinnus_map_tags static %}
+
+{% block page_title %}{% trans "Simple Statistics" %}{% endblock %}
+
+{% block leftnav %}
+{% endblock leftnav %}
+
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block content %}
+    
+    
+    {% if form.errors %}
+        <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-exclamation-triangle fa-3x"></i>
+            <p>{% trans "There was an error in one of the fields you entered. Please correct it before saving!" %}</p>
+        </div>
+    {% endif %}
+    
+    <form method="POST" action="" class="cosinnus-form form-horizontal">{% csrf_token %}
+        {{ form.non_field_errors }}
+        
+        <!-- a box with semi transparent background -->
+        <div class="content-box">
+        
+	        <h1>Simple Statistics (only visible for Admins)</h1>
+	        
+	        <div>Select the date range for which you would like statistics</div>
+	        
+	        
+	        {% trans "Date" as date_label %}
+	        {% captureas date_html %}
+	            {{ form.from_date.errors }}
+	            {{ form.to_date.errors }}
+	            <ol class="input-area">
+	                <li class="calendar-date-time-chooser">
+	                    {% trans "From" %} <i class="fa fa-calendar"></i>
+	                    <input
+	                        placeholder="{% trans "Date" %}"
+	                        readonly ="readonly"
+	                        class="calendar-date-time-chooser-date" />
+	                    <input class="calendar-date-time-chooser-hiddendate" id="id_from_date_0" name="from_date_0" 
+	                        placeholder="{% trans "Start date." %}" type="hidden" 
+	                        {% if form.from_date.value|date:"Y-m-d" %}
+	                        value="{{ form.from_date.value|date:"Y-m-d" }}" 
+	                        {% else %}
+	                        value="{% now "Y-m-d" %}" 
+	                        {% endif %}
+	                    >
+	                    <input class="calendar-date-time-chooser-time" id="id_from_date_1" name="from_date_1" 
+	                        placeholder="{% trans "Time" %}" type="text" 
+	                        value="00:00" 
+	                        style="display: none;"
+	                    >                                           
+	                    <div class="small-calendar"></div>
+	                </li>
+	                <li class="calendar-date-time-chooser">
+	                    {% trans "Until" %} <i class="fa fa-calendar"></i>
+	                    <input
+	                        placeholder="{% trans "Date" %}"
+	                        readonly ="readonly"
+	                        class="calendar-date-time-chooser-date" />
+	                    <input class="calendar-date-time-chooser-hiddendate" id="id_to_date_0" name="to_date_0" 
+	                        placeholder="{% trans "End date." %}" type="hidden" 
+	                        {% if form.to_date.value|date:"Y-m-d" %}
+	                        value="{{ form.to_date.value|date:"Y-m-d" }}" 
+	                        {% else %}
+	                        value="{% now "Y-m-d" %}" 
+	                        {% endif %}
+	                    >
+	                    <input class="calendar-date-time-chooser-time" id="id_to_date_1" name="to_date_1" 
+	                        placeholder="{% trans "Time" %}" type="text" 
+	                        value="23:59" 
+	                        style="display: none;"
+	                    >    
+	                    <div class="small-calendar"></div>
+	                </li>
+	            </ol>
+	        {% endcaptureas %}
+	        {% include 'cosinnus/fields/default_field.html' with field_html=date_html label=date_label label=date_label large_field=True %} 
+        </div>
+        
+        
+        <button type="submit" class="btn btn-emphasized">
+	        <ul class="media-list">
+	            <li class="media">
+	                <a class="pull-left" href="#">
+	                    <i class="fa fa-pencil"></i>
+	                </a>
+	                <div class="media-body">
+	                      {% trans "Ok" %}
+	                </div>
+	            </li>
+	        </ul>
+	    </button>
+    </form>
+    
+    <div class="clearfix large-space"></div>
+
+    {% if statistics %}
+        <!-- a box with semi transparent background -->
+        <div class="content-box white-content">
+            <h3>Showing data for Portal <b>{{ COSINNUS_CURRENT_PORTAL.name }}</b> from {{ form.from_date.value|date:"d.m.Y" }} to {{ form.to_date.value|date:"d.m.Y" }}</h3>
+            <br/>
+            
+            <div class="row">
+	            {% for key, val in statistics.items %}
+                   <div class="col-xs-4">{{ key }}</div>
+                   <div class="col-xs-8">{{ val }}</div>
+	            {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    
+{% endblock %}
+

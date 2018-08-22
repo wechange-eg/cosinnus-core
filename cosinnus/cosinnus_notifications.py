@@ -20,6 +20,7 @@ from cosinnus.core.signals import user_group_join_requested,\
 
 user_tagged_in_object = dispatch.Signal(providing_args=["user", "obj", "audience"])
 user_group_made_admin = dispatch.Signal(providing_args=["user", "obj", "audience"])
+user_group_admin_demoted = dispatch.Signal(providing_args=["user", "obj", "audience"])
 project_created_from_idea = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 
@@ -156,7 +157,26 @@ notifications = {
             'object_text': '_sender.cosinnus_profile.description', 
         },
         'notification_reason': 'none',
-    }, 
+    },    
+    'user_group_admin_demoted': {
+        'label': _('Your admin status for this team was revoked'), 
+        'mail_template': '<html-only>',
+        'subject_template': '<html-only>',
+        'signals': [user_group_admin_demoted],
+        'default': True,
+        
+        'is_html': True,
+        'snippet_type': 'news',
+        'event_text': _('Revoked your admin status'),
+        'notification_text': _('%(sender_name)s revoked your admin status of "%(team_name)s" on %(portal_name)s!'),
+        'subject_text': _('%(sender_name)s revoked your admin status of "%(team_name)s" on %(portal_name)s!'),
+        'data_attributes': {
+            'object_name': '_sender_name',
+            'object_url': '_sender.cosinnus_profile.get_absolute_url',
+            'object_text': '_sender.cosinnus_profile.description', 
+        },
+        'notification_reason': 'none',
+    },
     'user_tagged_in_object': {
         'label': _('You were tagged in a post, document or other item'), 
         'mail_template': 'cosinnus/mail/user_tagged_in_object.txt',   # this template will be overwritten by specific items in other cosinnus apps

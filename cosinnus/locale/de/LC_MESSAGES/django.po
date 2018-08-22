@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-24 18:48+0200\n"
-"PO-Revision-Date: 2018-06-24 18:55+0200\n"
+"POT-Creation-Date: 2018-07-22 13:18+0200\n"
+"PO-Revision-Date: 2018-08-20 11:36+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -141,7 +141,7 @@ msgstr "Bitte melde dich an um auf diese Seite zugreifen zu können."
 
 #, python-format
 msgid "The page you tried to access belongs to an app that has been deactivated for this %(team_type)s. If you feel this is in error, ask the %(team_type)s's administrator to reactivate the app."
-msgstr "Die Seite die du versucht hast aufzurufen gehört zu einer App, die in diesem/dieser %(team_type)s deaktiviert wurde. Um sie wieder zu aktivieren kannst du dich an die/den %(team_type)s-Administrator_in wenden. "
+msgstr "Die Seite die du versucht hast aufzurufen gehört zu einer %(team_type)s-App, die deaktiviert wurde. Um sie wieder zu aktivieren kannst du dich an die/den %(team_type)s-Administrator_in wenden. "
 
 msgid "No team provided"
 msgstr "Kein Projekt angegeben"
@@ -215,6 +215,16 @@ msgstr "Hat dich zum Administrator befördert"
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s hat dich zu einem Administrator gemacht von %(team_name)s auf %(portal_name)s!"
+
+msgid "Your admin status for this team was revoked"
+msgstr "Dein Admin-Status wurde entzogen für"
+
+msgid "Revoked your admin status"
+msgstr "Hat deinen Admin-Status entzogen"
+
+#, python-format
+msgid "%(sender_name)s revoked your admin status of \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s hat deinen Admin-Status entzogen für %(team_name)s auf %(portal_name)s!"
 
 msgid "You were tagged in a post, document or other item"
 msgstr "Du wurdest in einem Beitrag, Dokument oder anderem Element markiert"
@@ -459,7 +469,7 @@ msgid "Reported object"
 msgstr "Gemeledetes Objekt"
 
 msgid "Reported objects"
-msgstr "Gemeledete Objekte"
+msgstr "Gemeldete Objekte"
 
 msgid "Email"
 msgstr "E-mail"
@@ -1260,6 +1270,9 @@ msgstr "Hilfe"
 msgid "Help for this page"
 msgstr "Hilfe zu dieser Seite"
 
+msgid "Root Folder"
+msgstr "Oberster Ordner"
+
 msgid "We're sorry. The Map is not supported in Internet Explorer."
 msgstr "Tut uns leid, die Karte wird in Internet Explorer nicht unterstützt."
 
@@ -1503,6 +1516,7 @@ msgstr "Keine Beschreibung erstellt"
 msgid "more"
 msgstr "mehr"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
 msgstr "Offensiven Inhalt melden"
 
@@ -1672,6 +1686,9 @@ msgstr "von"
 #, python-format
 msgid "Do you really want to delete the invitation for \"%(title)s\"?"
 msgstr "Möchtest du die Einladung für \"%(title)s\" wirklich löschen?"
+
+msgid "Message all members"
+msgstr "Nachricht an alle Mitglieder"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
@@ -2813,9 +2830,6 @@ msgstr "Mein Profil"
 msgid "Logout"
 msgstr "Abmelden"
 
-msgid "Stream"
-msgstr "Aktivitäten"
-
 msgid "Forum"
 msgstr "Forum"
 
@@ -3089,6 +3103,15 @@ msgstr "Andere Projekte und Gruppen"
 msgid "Search for Users"
 msgstr "Nach Benutzern suchen"
 
+msgid "Ordering"
+msgstr "Sortierung"
+
+msgid "Newest"
+msgstr "Neueste"
+
+msgid "Relevance"
+msgstr "Relevanz"
+
 #, python-format
 msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\" with topics:"
 msgstr "Zeige %(end)s von %(total)s Ergebnissen für deine Suche \"%(query)s\" mit den Themen:"
@@ -3179,14 +3202,6 @@ msgstr "Filter zurücksetzen"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Street"
 msgstr "Straßen"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Satellite"
-msgstr "Satellit"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Terrain"
-msgstr "Terrain"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create idea"
@@ -3901,12 +3916,6 @@ msgstr "Es gab einen Fehler beim Verarbeiten der Avatar-Auswahl. Die Bilddatei i
 msgid "%s (descending)"
 msgstr "%s (absteigend)"
 
-msgid "Ordering"
-msgstr "Sortierung"
-
-msgid "Root Folder"
-msgstr "Oberster Ordner"
-
 msgid "<Root folder>"
 msgstr "<Oberster Ordner>"
 
@@ -4045,6 +4054,15 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten 
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "Stream"
+#~ msgstr "Aktivitäten"
+
+#~ msgid "Satellite"
+#~ msgstr "Satellit"
+
+#~ msgid "Terrain"
+#~ msgstr "Terrain"
 
 #~ msgid "French"
 #~ msgstr "Français"

@@ -30,6 +30,7 @@ module.exports = BaseView.extend({
         'click .topic-filter-link': 'onTopicLinkClicked',
         'click .button-like': 'onLikeButtonClicked',
         'click .button-follow': 'onFollowButtonClicked',
+        'click .button-report-object': 'onReportButtonClicked',
     },
     
     initialize: function (options, app) {
@@ -130,5 +131,11 @@ module.exports = BaseView.extend({
     
     onFollowButtonClicked: function (event) {
     	this.App.controlView.triggerResultFollowOrUnfollow(this.model);
+    },
+    
+    /** report the currently open detail view object */
+    onReportButtonClicked: function (event) {
+    	$.cosinnus.Feedback.cosinnus_report_object(this.model.get("report_model"), this.model.get("report_id"), this.model.get("title"));
     }
+    
 });

@@ -8,16 +8,18 @@
 {% endblock header_image %}
 
 {% block action_buttons %}
-    {% if action_url_1 %}
-	    <div class="tile-section tile-section-button-list">
+    <div class="tile-section tile-section-button-list">
+        {% if action_url_1 %}
 	        <a href="{{ action_url_1 }}" target="_blank" class="rounded-button button-action">
 	            <span class="rounded-button-inner">
 	                {# Translators: __INCLUDE_JS_PO__ #}
 	                {% trans "Send Message" %}
 	            </span>
 	        </a>
-	    </div>
-    {% endif %}
+        {% endif %}
+    
+        {{ super() }}
+    </div>
 {% endblock action_buttons %}
 
 
