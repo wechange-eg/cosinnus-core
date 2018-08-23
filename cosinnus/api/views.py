@@ -1,4 +1,3 @@
-from django.db.models import Q
 from rest_framework import viewsets
 
 from cosinnus.models.group import CosinnusPortal
@@ -26,6 +25,9 @@ class CosinnusGroupSerializerViewSet(viewsets.ReadOnlyModelViewSet):
             'tags': 'media_tag__tags__name'
         }
         for key, value in self.request.query_params.items():
+            if key in (self.pagination_class.limit_query_param,
+                       self.pagination_class.offset_query_param):
+                continue
             key = FILTER_MAP.get(key, key)
             if value is not None:
                 queryset = queryset.filter(**{key: value})
