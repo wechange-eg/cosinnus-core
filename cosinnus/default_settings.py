@@ -457,6 +457,10 @@ COSINNUS_SESSION_EXPIRY_AUTHENTICATED_IN_USERS = 60 * 60 * 24 * 60 # 60 days
 HONEYPOT_FIELD_NAME = 'phnoenumber_8493'
 
 # API AND SWAGGER SETTINGS
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 10
+}
 SWAGGER_SETTINGS = {
     'api_version': '2',
     'api_path': '/api/v2/',
