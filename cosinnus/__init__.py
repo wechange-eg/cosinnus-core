@@ -1,10 +1,22 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
+from __future__ import absolute_import, unicode_literals
 
 VERSION = (0, 7, 0, 'alpha', 0)
 
 default_app_config = 'cosinnus.apps.CosinnusAppConfig'
+
+celery_app = None
+
+def init_celery_app():
+    try:
+        global celery_app
+        # This will make sure the app is always imported when
+        # Django starts so that shared_task will use this app.
+        from .celery import app as celery_app
+    except ImportError:
+        pass
+
+__all__ = ('celery_app',)
 
 
 def get_version(full=True):

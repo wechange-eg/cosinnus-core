@@ -17,19 +17,14 @@ from django.core.mail.message import EmailMultiAlternatives
 from cosinnus.utils.user import get_list_unsubscribe_url
 logger = logging.getLogger('cosinnus')
 
-__all__ = ['CELERY_AVAILABLE', 'send_mail']
+__all__ = ['send_mail']
 
 
-CELERY_AVAILABLE = False
-if 'djcelery' in settings.INSTALLED_APPS:
-    try:
-        from celery.task import task
-        CELERY_AVAILABLE = True
-    except ImportError:
-        pass
+if settings.COSINNUS_USE_CELERY:
+    from celery.task import task
 
 
-def _django_send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=False):
+def send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=False):
     """ From django.core.mail, extended with bcc 
         Note: ``template`` can be None, if so we are looking for a ``content`` key in ``data`` to fill the email message."""
     
@@ -56,7 +51,35 @@ def _django_send_mail(to, subject, template, data, from_email=None, bcc=None, is
     headers = {
         'List-Unsubscribe': '<%s>' % unsubscribe_url,
     }
-    
+
+    # if celery is active, delay the actual delivery
+    if settings.COSINNUS_USE_CELERY:
+        from cosinnus.tasks import deliver_mail_task
+        deliver_mail_task.delay(to, subject, message, from_email, bcc, is_html=is_html, headers=headers)
+        ret = None
+    else:
+        ret = deliver_mail(to, subject, message, from_email, bcc, is_html=is_html, headers=headers)
+
+    if getattr(settings, 'COSINNUS_LOG_SENT_EMAILS', False):
+        try:
+            from cosinnus.models.feedback import CosinnusSentEmailLog
+            from cosinnus.models.group import CosinnusPortal
+            if settings.COSINNUS_USE_CELERY:
+                subject = '[CELERY-DELEGATED] %s' % subject 
+            CosinnusSentEmailLog.objects.create(email=to, title=subject, portal=CosinnusPortal.get_current())
+        except Exception, e:
+            logger.error('Error while trying to log a sent email!', extra={'exception': force_text(e)})
+        
+
+    return ret
+
+
+def deliver_mail(to, subject, message, from_email, bcc=None, is_html=False, headers=None):
+    """ The actual delivery of the mail.
+        This may be called from inside a celery task as well! """     
+    if headers is None:
+        headers = {}
+
     connection = get_connection()
     if is_html:
         text_message = convert_html_email_to_plaintext(message)
@@ -66,28 +89,10 @@ def _django_send_mail(to, subject, template, data, from_email=None, bcc=None, is
     else:
         mail = EmailMessage(subject, message, from_email, [to], bcc, connection=connection, headers=headers)
         ret = mail.send()
-    
-    if getattr(settings, 'COSINNUS_LOG_SENT_EMAILS', False):
-        try:
-            from cosinnus.models.feedback import CosinnusSentEmailLog
-            from cosinnus.models.group import CosinnusPortal
-            CosinnusSentEmailLog.objects.create(email=to, title=subject, portal=CosinnusPortal.get_current())
-        except Exception, e:
-            logger.error('Error while trying to log a sent email!', extra={'exception': force_text(e)})
-        
-    return ret
 
-if CELERY_AVAILABLE:
-    @task
-    def send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=False):
-        return _django_send_mail.delay(to, subject, template, data,
-                                       from_email=from_email, bcc=bcc, is_html=is_html)
-else:
-    def send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=False):
-        return _django_send_mail(to, subject, template, data,
-                                 from_email=from_email, bcc=bcc, is_html=is_html)
+    return ret
         
-        
+
 def convert_html_email_to_plaintext(html_message):
     """ Converts a cosinnus HTML rendered message to useful plaintext """
     
@@ -121,8 +126,10 @@ def _mail_print(to, subject, template, data, from_email=None, bcc=None, is_html=
 def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None, is_html=False):
     # remove newlines from header
     subject = subject.replace('\n', ' ').replace('\r', ' ')
+    
     try:
-        send_mail(to, subject, template, data, from_email, bcc, is_html=is_html)
+        send_mail(to, subject, template, data, from_email, bcc, is_html)
+            
         extra = {'to_user': to, 'subject': subject}
         logger.info('Cosinnus.core.mail: Successfully sent mail on site "%d".' % settings.SITE_ID, extra=extra)
     except Exception, e:
@@ -135,13 +142,20 @@ def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None, is
         logger.warn('Cosinnus.core.mail: Failed to send mail!', extra=extra)
         if settings.DEBUG:
             print ">> extra:", extra 
+            raise
             _mail_print(to, subject, template, data, from_email, bcc, is_html)
 
 
+
 def send_mail_or_fail_threaded(to, subject, template, data, from_email=None, bcc=None, is_html=False):
-    mail_thread = MailThread()
-    mail_thread.add_mail(to, subject, template, data, from_email, bcc, is_html=is_html)
-    mail_thread.start()
+    if settings.COSINNUS_USE_CELERY:
+        # if this is meant to be threaded, but we have celery, just pass it on
+        send_mail_or_fail(to, subject, template, data, from_email=from_email, bcc=bcc, is_html=is_html)
+    else:
+        # else use this thread:
+        mail_thread = MailThread()
+        mail_thread.add_mail(to, subject, template, data, from_email, bcc, is_html=is_html)
+        mail_thread.start()
 
 
 def get_common_mail_context(request, group=None, user=None):

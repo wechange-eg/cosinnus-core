@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-24 18:48+0200\n"
+"POT-Creation-Date: 2018-07-22 13:18+0200\n"
 "PO-Revision-Date: 2018-06-23 17:09+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -217,6 +217,19 @@ msgstr "Зделал вас администратором"
 
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s  сделал Вас администратором %(team_name)s на %(portal_name)s!"
+
+msgid "Your admin status for this team was revoked"
+msgstr ""
+
+#, fuzzy
+#| msgid "You cannot change your own admin status."
+msgid "Revoked your admin status"
+msgstr "Вы не можете изменить свой собственный статус администратора."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s revoked your admin status of \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s  сделал Вас администратором %(team_name)s на %(portal_name)s!"
 
 msgid "You were tagged in a post, document or other item"
@@ -1285,6 +1298,9 @@ msgstr "Справка"
 msgid "Help for this page"
 msgstr "Справка для этой страницы"
 
+msgid "Root Folder"
+msgstr "Корневая папка"
+
 msgid "We're sorry. The Map is not supported in Internet Explorer."
 msgstr "Мы сожалеем. Карта не поддерживается в браузере Internet Explorer."
 
@@ -1528,6 +1544,7 @@ msgstr "Нет описания"
 msgid "more"
 msgstr "больше"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
 msgstr "Пожаловаться"
 
@@ -1701,6 +1718,11 @@ msgstr "Действия, совершенные *by*<username>"
 #| msgid "Do you really want to decline the invitation?"
 msgid "Do you really want to delete the invitation for \"%(title)s\"?"
 msgstr "Вы действительно хотите отклонить приглашение?"
+
+#, fuzzy
+#| msgid "All members"
+msgid "Message all members"
+msgstr "Все члены"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
@@ -2874,9 +2896,6 @@ msgstr "Мой профиль"
 msgid "Logout"
 msgstr "Выход из системы"
 
-msgid "Stream"
-msgstr "Лента"
-
 msgid "Forum"
 msgstr "Форум"
 
@@ -3156,6 +3175,18 @@ msgstr "Другие проекты и группы"
 msgid "Search for Users"
 msgstr "Поиск пользователей"
 
+# ???
+msgid "Ordering"
+msgstr "Порядок"
+
+#, fuzzy
+#| msgid "News"
+msgid "Newest"
+msgstr "Новости"
+
+msgid "Relevance"
+msgstr ""
+
 #, python-format
 msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\" with topics:"
 msgstr "Показывает %(end)s of %(total)s результатов по вашему запросу \"%(query)s\" с темами:"
@@ -3265,18 +3296,6 @@ msgstr ""
 #| msgid "Stream"
 msgid "Street"
 msgstr "Лента"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Last edited"
-msgid "Satellite"
-msgstr "В последний раз отредактировано"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Rearrange"
-msgid "Terrain"
-msgstr "Перегруппировать"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -4043,13 +4062,6 @@ msgstr "При обработке вашего аватара произошла
 msgid "%s (descending)"
 msgstr "%s (по убыванию)"
 
-# ???
-msgid "Ordering"
-msgstr "Порядок"
-
-msgid "Root Folder"
-msgstr "Корневая папка"
-
 msgid "<Root folder>"
 msgstr "<Корневая папка>"
 
@@ -4189,6 +4201,19 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
+
+#~ msgid "Stream"
+#~ msgstr "Лента"
+
+#, fuzzy
+#~| msgid "Last edited"
+#~ msgid "Satellite"
+#~ msgstr "В последний раз отредактировано"
+
+#, fuzzy
+#~| msgid "Rearrange"
+#~ msgid "Terrain"
+#~ msgstr "Перегруппировать"
 
 #~ msgid "French"
 #~ msgstr "Français"

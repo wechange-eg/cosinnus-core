@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib.auth import get_user_model, login as auth_login, logout as auth_logout,\
     login
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db import transaction
 from django.utils.decorators import method_decorator
@@ -57,6 +57,7 @@ from cosinnus.utils.urls import group_aware_reverse, redirect_with_next,\
     redirect_next_or
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.utils.http import is_safe_url
+from django.template import loader
 
 from honeypot.decorators import check_honeypot
 
@@ -494,6 +495,25 @@ def password_change_proxy(request, *args, **kwargs):
     return password_change(request, *args, **kwargs)
 
 
+class CosinnusPasswordResetForm(PasswordResetForm):
+    
+    def send_mail(self, subject_template_name, email_template_name,
+                  context, from_email, to_email, html_email_template_name=None):
+        """
+        Sends the email using the Cosinnus mailer instead of the default django one.
+        """
+        template = email_template_name
+        is_html = False
+        if html_email_template_name:
+            is_html = True
+            template = html_email_template_name
+        # Email subject *must not* contain newlines
+        subject = loader.render_to_string(subject_template_name, context)
+        subject = ''.join(subject.splitlines())
+        
+        send_mail_or_fail_threaded(to_email, subject, template, context, from_email=from_email, is_html=is_html)
+
+
 def password_reset_proxy(request, *args, **kwargs):
     """ Proxies the django.contrib.auth view. Only send a password reset mail
         if the email doesn't belong to a user that is a member of an integrated portal. """
@@ -507,6 +527,9 @@ def password_reset_proxy(request, *args, **kwargs):
                 pass
         if user and check_user_integrated_portal_member(user):
             return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_reset_page.html')
+    kwargs.update({
+        'password_reset_form': CosinnusPasswordResetForm,
+    })
     return password_reset(request, *args, **kwargs)
 
 

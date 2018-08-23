@@ -1,6 +1,6 @@
 {% load i18n static cosinnus_tags thumbnail %}
 
-<li><a href="{% url 'cosinnus:my_stream' %}">{% trans "Stream" %}</a></li>
+{% block first_navbar_buttons %}{% endblock first_navbar_buttons %}
 
 {% include 'cosinnus/navbar_buttons_group_menus.html' %}
 

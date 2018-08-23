@@ -1,0 +1,13 @@
+{% load i18n cosinnus_tags %}
+
+{% if object.path == '/' %}
+    <a href="{% group_url 'cosinnus:etherpad:list' group=object.group %}">
+        <i class="fa fa-fw fa-folder"></i>
+        {% trans "Root Folder" %}
+    </a>
+{% else %}
+    <a href="{% group_url 'cosinnus:etherpad:list' group=object.group slug=object.container.slug %}">
+        <i class="fa fa-fw fa-folder"></i>
+        {{ object.container.title }}
+    </a>
+{% endif %}

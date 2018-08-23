@@ -18,20 +18,6 @@ module.exports = ContentControlView.extend({
                 attribution: 'CartoDB'
             }
         },
-        satellite: {
-            url: util.protocol() + '//{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
-            options: {
-                attribution: 'Google Maps',
-                subdomains:['mt0','mt1','mt2','mt3']
-            }
-        },
-        terrain: {
-            url: util.protocol() + '//{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}',
-            options: {
-                attribution: 'Google Maps',
-                subdomains:['mt0','mt1','mt2','mt3']
-            }
-        }
     },
     
     // path to a geojson file in static folder containing regions that should be outlined on the map

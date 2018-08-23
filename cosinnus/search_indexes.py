@@ -35,6 +35,7 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
     public = indexes.BooleanField(model_attr='public')
     always_visible = indexes.BooleanField(default=True)
     created = indexes.DateTimeField(model_attr='created')
+    group = indexes.IntegerField(model_attr='id')
     
     local_cached_attrs = ['_group_members']
     

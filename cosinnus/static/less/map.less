@@ -140,6 +140,12 @@
                 }
             } 
         }
+        &.rounded-button-icon-only {
+            i.fa {
+                padding-right: 0 !important;
+                margin-right: 0 !important;
+            }
+        }
         &.rounded-button-small {
             font-size: 11px;
             height: 22px;
@@ -470,6 +476,9 @@
        
        &:not(.uncolored-link,.rounded-button):hover {
            color: @map-strong-color;
+       }
+       &.pale-color {
+           color: @map-pale-color
        }
     }
     

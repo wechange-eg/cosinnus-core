@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-24 18:48+0200\n"
+"POT-Creation-Date: 2018-07-22 13:18+0200\n"
 "PO-Revision-Date: 2018-06-23 17:05+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -217,6 +217,19 @@ msgstr "Mianował/a Cię jako administratora"
 
 #, python-format
 msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s mianował/a Cię jako administratora zespołu \\’’%(team_name)s'\\ na %(portal_name)s!"
+
+msgid "Your admin status for this team was revoked"
+msgstr ""
+
+#, fuzzy
+#| msgid "You cannot change your own admin status."
+msgid "Revoked your admin status"
+msgstr "Nie możesz zmienić swojego statusu administratora."
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s revoked your admin status of \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s mianował/a Cię jako administratora zespołu \\’’%(team_name)s'\\ na %(portal_name)s!"
 
 msgid "You were tagged in a post, document or other item"
@@ -1278,6 +1291,9 @@ msgstr "Pomoc"
 msgid "Help for this page"
 msgstr "Pomoc dla tej strony"
 
+msgid "Root Folder"
+msgstr "Folder źródłowy"
+
 msgid "We're sorry. The Map is not supported in Internet Explorer."
 msgstr "Przepraszamy, mapa nie jest wspierana na Internet Explorer."
 
@@ -1507,6 +1523,7 @@ msgstr "Nie ma opisu"
 msgid "more"
 msgstr "więcej"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
 msgstr "Zgłoś nieprzyzwoitą treść"
 
@@ -1676,6 +1693,11 @@ msgstr "przez"
 #, python-format
 msgid "Do you really want to delete the invitation for \"%(title)s\"?"
 msgstr "Czy na pewno chcesz usunąć zaproszenie dla „%(title)s”?"
+
+#, fuzzy
+#| msgid "All members"
+msgid "Message all members"
+msgstr "Wszyscy członkowie"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
@@ -2848,9 +2870,6 @@ msgstr "Mój Profil"
 msgid "Logout"
 msgstr "Wyloguj"
 
-msgid "Stream"
-msgstr "Transmisja"
-
 msgid "Forum"
 msgstr "Forum"
 
@@ -3130,6 +3149,17 @@ msgstr "Inne Projekty i Grupy"
 msgid "Search for Users"
 msgstr "Wyszukiwanie Użytkowników"
 
+msgid "Ordering"
+msgstr "Sortowanie"
+
+#, fuzzy
+#| msgid "News"
+msgid "Newest"
+msgstr "Aktualności"
+
+msgid "Relevance"
+msgstr ""
+
 #, python-format
 msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\" with topics:"
 msgstr "Wyświetlanie %(end)s z %(total)s wyników Twojego zapytania \"%(query)s\" z tematami:"
@@ -3239,18 +3269,6 @@ msgstr ""
 #| msgid "Stream"
 msgid "Street"
 msgstr "Transmisja"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Last edited"
-msgid "Satellite"
-msgstr "Ostatnio edytowane"
-
-#. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Rearrange"
-msgid "Terrain"
-msgstr "Ułóż"
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
@@ -4006,12 +4024,6 @@ msgstr "Wystąpił błąd podczas przetwarzania Twojego awatara. Plik jest uszko
 msgid "%s (descending)"
 msgstr "%s (malejąco)"
 
-msgid "Ordering"
-msgstr "Sortowanie"
-
-msgid "Root Folder"
-msgstr "Folder źródłowy"
-
 msgid "<Root folder>"
 msgstr "<Folder źródłowy>"
 
@@ -4150,6 +4162,19 @@ msgstr "Obecnie nie jesteś członkiem %s! Jeśli chcesz nim zostać, możesz wy
 
 msgid "Your changes have been saved."
 msgstr "Twoje zmiany zostały zapisane."
+
+#~ msgid "Stream"
+#~ msgstr "Transmisja"
+
+#, fuzzy
+#~| msgid "Last edited"
+#~ msgid "Satellite"
+#~ msgstr "Ostatnio edytowane"
+
+#, fuzzy
+#~| msgid "Rearrange"
+#~ msgid "Terrain"
+#~ msgstr "Ułóż"
 
 #~ msgid "French"
 #~ msgstr "Français"

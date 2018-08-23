@@ -43,6 +43,7 @@
         {% include 'cosinnus/common/internet_explorer_not_supported.html' %}
         
         {% captureas controlsEnabled %}{% if request.GET.controls_disabled %}0{% else %}1{% endif %}{% endcaptureas %}
-        {% include 'cosinnus/common/init_client_module.html' with module='module-embed' id="app-embed" extra_classes="no-navbar" fullscreen=True controlsEnabled=controlsEnabled  %}
+        {% captureas map_settings %}{% if request.GET.filter_group %}{"filterGroup": {{ request.GET.filter_group }}}{% else %}{}{% endif %}{% endcaptureas %}
+        {% include 'cosinnus/common/init_client_module.html' with module='module-embed' id="app-embed" extra_classes="no-navbar" fullscreen=True controlsEnabled=controlsEnabled settings=map_settings %}
     </body>
 </html>

@@ -127,6 +127,19 @@
         {% block contact %}
         {% endblock contact %}
         
+        {% block report_object %}
+            {% if cosinnus_active_user %}
+                <div class="spacer">&nbsp;</div>
+                <div class="spacer">&nbsp;</div>
+                <a class="pale-color button-report-object">
+                    <i class="fa fa-warning"></i>
+{# Translators: __INCLUDE_JS_PO__ #}
+{% trans "Report offensive content" %}
+                </a>
+                
+            {% endif %}
+        {% endblock report_object %}
+        
     {% endblock content %}
     
     {# some more space to scroll over the floating search-buttons on mobile #}

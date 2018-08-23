@@ -698,7 +698,7 @@ def group_url(parser, token):
 
 
 @register.simple_tag(takes_context=True)
-def cosinnus_report_object_action(context, obj=None):
+def cosinnus_report_object_action(context, obj=None, instantly_trigger=False):
     if not context['request'].user.is_authenticated():
         return ''
     if not obj:
@@ -716,7 +716,10 @@ def cosinnus_report_object_action(context, obj=None):
     
     # mark_safe doesn't really seem to work here
     title = escape(title.replace('"', "'"))
-    return mark_safe(' onclick=\'$.cosinnus.Feedback.cosinnus_report_object("%s", %d, "%s");\' ' % (model_str, obj.id, title))
+    ret = '$.cosinnus.Feedback.cosinnus_report_object("%s", %d, "%s");' % (model_str, obj.id, title)
+    if not instantly_trigger:
+         ret = ' onclick=\'%s\' ' % ret
+    return mark_safe(ret)
 
 
 @register.simple_tag()
@@ -884,6 +887,17 @@ def get_membership_portals(user):
     """ Returns all portals a user is a member of """
     return CosinnusPortal.objects.filter(id__in=user.cosinnus_portal_memberships.values_list('group_id', flat=True))
 
+@register.filter
+def truncatenumber(value, max=99):
+    """ Shortens large numbers to i.e. "99+"
+    Returns a string of the given number or "<max>+" if value > max """
+    try:
+        intval = int(value)
+    except:
+        return value
+    if intval > max:
+        return '%d+' % max
+    return force_text(intval)
 
 @register.filter
 def debugthis(obj):
@@ -947,3 +961,4 @@ def render_cosinnus_topics_json():
     """ Returns a JSON dict of {<topic-id>: <topic-label-translated>, ...} """
     topic_choices = dict([(top_id, force_text(val)) for top_id, val in TAG_OBJECT.TOPIC_CHOICES])
     return _json.dumps(topic_choices)
+
