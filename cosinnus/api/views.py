@@ -1,12 +1,13 @@
 from rest_framework import viewsets
 
-from cosinnus.models.group import CosinnusGroup
-from cosinnus.models.group_extra import CosinnusProject
+from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
+from cosinnus.models.tagged import BaseTagObject
 from .serializers import CosinnusGroupSerializer, CosinnusProjectSerializer
 
 
 class CosinnusGroupSerializerViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = CosinnusGroup.objects.all()
+    queryset = CosinnusSociety.objects.all()
     serializer_class = CosinnusGroupSerializer
 
     def get_queryset(self):
@@ -15,6 +16,8 @@ class CosinnusGroupSerializerViewSet(viewsets.ReadOnlyModelViewSet):
         FIXME: Use generic filters here after upgrade to django-filter==0.15.0
         """
         queryset = self.queryset
+        # filter for current portal
+        queryset = queryset.filter(portal=CosinnusPortal.get_current())
         # Filter visibility
         queryset = queryset.filter(is_active=True, public=True)
         # Overwrite ugly but commonly used filters
