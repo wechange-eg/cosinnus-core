@@ -366,7 +366,7 @@
 
         
         <div class="large-space">
-            {% if not group.slug == SETTINGS.NEWW_FORUM_GROUP_SLUG %}
+            {% if not group.slug == SETTINGS.NEWW_FORUM_GROUP_SLUG and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
 		        <div href="{% url "postman:write-group" group_recipients=group.slug %}" class="btn btn-small btn-emphasized">
 		            <ul class="media-list">
 		                <li class="media">
