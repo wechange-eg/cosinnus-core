@@ -3,7 +3,8 @@ from __future__ import unicode_literals
 
 from django.db.models import Q
 
-from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership,\
+    MEMBERSHIP_ADMIN
 from cosinnus.models.tagged import BaseTaggableObjectModel, BaseTagObject,\
     BaseHierarchicalTaggableObjectModel
 from cosinnus.models.profile import BaseUserProfile, GlobalBlacklistedEmail,\
@@ -12,6 +13,7 @@ from uuid import uuid1
 from django.conf import settings
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.models.idea import CosinnusIdea
+from annoying.functions import get_object_or_None
 
 
 def check_ug_admin(user, group):
@@ -202,6 +204,16 @@ def check_user_portal_admin(user, portal=None):
     """
     portal = portal or CosinnusPortal.get_current()
     return user.id in portal.admins
+
+
+def check_user_portal_moderator(user, portal=None):
+    """ Checks if a user is a portal moderator (must also be portal admin) in the given or current portal.
+            returns ``True`` if the user is a portal moderator
+    """
+    portal = portal or CosinnusPortal.get_current()
+    # TODO: this is currently not cached since it is queried very seldomly 
+    membership = get_object_or_None(CosinnusPortalMembership, status=MEMBERSHIP_ADMIN, group=portal, user=user)
+    return bool(membership and membership.is_moderator)
 
 
 def check_user_integrated_portal_member(user):

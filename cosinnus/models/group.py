@@ -1138,6 +1138,8 @@ class BaseGroupMembership(models.Model):
     status = models.PositiveSmallIntegerField(choices=MEMBERSHIP_STATUSES,
         db_index=True, default=MEMBERSHIP_PENDING)
     date = models.DateTimeField(auto_now_add=True, editable=False)
+    # moderator status for portals, unused for groups as of now
+    is_moderator = models.BooleanField(_('Is Moderator'), default=False)
 
     objects = CosinnusGroupMembershipManager()
     
