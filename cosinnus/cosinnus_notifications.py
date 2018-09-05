@@ -22,6 +22,8 @@ user_tagged_in_object = dispatch.Signal(providing_args=["user", "obj", "audience
 user_group_made_admin = dispatch.Signal(providing_args=["user", "obj", "audience"])
 user_group_admin_demoted = dispatch.Signal(providing_args=["user", "obj", "audience"])
 project_created_from_idea = dispatch.Signal(providing_args=["user", "obj", "audience"])
+idea_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
+group_created = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 
 """ Notification definitions.
@@ -255,30 +257,74 @@ notifications = {
             'image_url': 'portal.get_logo_image_url', # image URL for the item. default if omitted is the event creator's user avatar
         },
         'notification_reason': 'none',
-    }, 
-}
-
-if settings.COSINNUS_IDEAS_ENABLED:
-    notifications['idea_created_from_project'] = {
-        'label': '<hidden-idea_created_from_project>', 
+    },
+    'group_created': {
+        'label': '<hidden-group_created>', 
         'mail_template': '<html-only>',
         'subject_template': '<html-only>',
-        'signals': [project_created_from_idea],
-        'default': True,
+        'signals': [group_created],
+        'default': False,
         'hidden': True,
+        'moderatable_content': True,
         
         'is_html': True,
         'snippet_type': 'news',
-        #'snippet_template': 'cosinnus/html_mail/summary_group.html',
-        'event_text': _('Has created'),
-        'notification_text': _('%(sender_name)s just created the project "%(team_name)s" on %(portal_name)s from an idea you follow! <br/><br/>' 
-                           ' To check it out, please click on the link below. There you can see if you would like to join the project.'),
-        'subject_text': _('%(sender_name)s just created the project "%(team_name)s" from an idea you follow!'),
+        'event_text': _('Created'),
+        'notification_text': _('%(sender_name)s just created the project/group "%(team_name)s" on %(portal_name)s!'),
+        'subject_text': _('%(sender_name)s just created the project/group "%(team_name)s" on %(portal_name)s!'),
         'data_attributes': {
-            'object_name': 'name',
-            'object_text': 'description',
-            'sub_object_text': 'description', # property of a sub-divided item below the main one, see doc above
-        
+            'object_name': '_sender_name',
+            'object_text': 'description', 
         },
         'notification_reason': 'none',
-    }
+    },
+}
+
+if settings.COSINNUS_IDEAS_ENABLED:
+    notifications.update({
+        'idea_created': {
+            'label': '<hidden-idea_created>', 
+            'mail_template': '<html-only>',
+            'subject_template': '<html-only>',
+            'signals': [idea_created],
+            'default': False,
+            'hidden': True,
+            'moderatable_content': True,
+            
+            'is_html': True,
+            'snippet_type': 'news',
+            #'snippet_template': 'cosinnus/html_mail/summary_group.html',
+            'event_text': _('Has created'),
+            'notification_text': _('%(sender_name)s just created the idea "%(object_name)s" on %(portal_name)s!'),
+            'subject_text': _('%(sender_name)s just created the idea "%(object_name)s"!'),
+            'data_attributes': {
+                'object_name': 'title',
+                'object_text': 'description',
+                'sub_object_text': 'description', # property of a sub-divided item below the main one, see doc above
+            },
+            'notification_reason': 'none',
+        },
+        'idea_created_from_project': {
+            'label': '<hidden-idea_created_from_project>', 
+            'mail_template': '<html-only>',
+            'subject_template': '<html-only>',
+            'signals': [project_created_from_idea],
+            'default': True,
+            'hidden': True,
+            
+            'is_html': True,
+            'snippet_type': 'news',
+            #'snippet_template': 'cosinnus/html_mail/summary_group.html',
+            'event_text': _('Has created'),
+            'notification_text': _('%(sender_name)s just created the project "%(team_name)s" on %(portal_name)s from an idea you follow! <br/><br/>' 
+                               ' To check it out, please click on the link below. There you can see if you would like to join the project.'),
+            'subject_text': _('%(sender_name)s just created the project "%(team_name)s" from an idea you follow!'),
+            'data_attributes': {
+                'object_name': 'name',
+                'object_text': 'description',
+                'sub_object_text': 'description', # property of a sub-divided item below the main one, see doc above
+            
+            },
+            'notification_reason': 'none',
+        },
+    })

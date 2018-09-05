@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-22 13:18+0200\n"
+"POT-Creation-Date: 2018-09-05 13:12+0200\n"
 "PO-Revision-Date: 2018-06-23 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -264,7 +264,22 @@ msgstr ""
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr ""
 
+msgid "Created"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
+msgstr ""
+
 msgid "Has created"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgstr ""
+
+#, python-format
+msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
 msgstr ""
 
 #, python-format
@@ -463,9 +478,6 @@ msgstr ""
 msgid "Creator"
 msgstr ""
 
-msgid "Created"
-msgstr ""
-
 msgid "Reported object"
 msgstr ""
 
@@ -661,6 +673,9 @@ msgstr ""
 
 #, python-format
 msgid "Request about your group \"%(group_name)s\""
+msgstr ""
+
+msgid "Is Moderator"
 msgstr ""
 
 msgid "Team membership"
@@ -3067,6 +3082,30 @@ msgid "next"
 msgstr ""
 
 msgid "Enter one or more search terms or select a topic to search."
+msgstr ""
+
+msgid "Simple Statistics"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "From"
+msgstr ""
+
+msgid "Start date."
+msgstr ""
+
+msgid "Time"
+msgstr ""
+
+msgid "Until"
+msgstr ""
+
+msgid "End date."
+msgstr ""
+
+msgid "Ok"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__

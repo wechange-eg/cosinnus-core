@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-22 13:18+0200\n"
+"POT-Creation-Date: 2018-09-05 13:12+0200\n"
 "PO-Revision-Date: 2018-06-30 15:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -273,8 +273,26 @@ msgstr ""
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr "%(sender_name)s t'a invité à rejoindre \"%(team_name)s sur %(portal_name)s !"
 
+msgid "Created"
+msgstr "Créé"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s t'a invité à rejoindre \"%(team_name)s sur %(portal_name)s !"
+
 msgid "Has created"
 msgstr "A créé"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s t'a invité à rejoindre \"%(team_name)s sur %(portal_name)s !"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
+msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
+msgstr "%(sender_name)s vient de créer le projet %(team_name)s à partir d'une idée que tu suis !"
 
 #, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
@@ -472,9 +490,6 @@ msgstr "Texte de réclamation"
 msgid "Creator"
 msgstr "Créateur"
 
-msgid "Created"
-msgstr "Créé"
-
 msgid "Reported object"
 msgstr "Objet rapporté"
 
@@ -671,6 +686,9 @@ msgstr "Demande à propos de ton projet \"%(group_name)s\""
 #, python-format
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Demande à propos de ton groupe \"%(group_name)s\""
+
+msgid "Is Moderator"
+msgstr ""
 
 msgid "Team membership"
 msgstr "Appartenance à l'équipe"
@@ -3131,6 +3149,38 @@ msgstr "suivant"
 
 msgid "Enter one or more search terms or select a topic to search."
 msgstr "Entre un terme de recherche ou plus ou sélectionne un sujet à rechercher."
+
+msgid "Simple Statistics"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete"
+msgid "Date"
+msgstr "Supprimer"
+
+#, fuzzy
+#| msgid "Forum"
+msgid "From"
+msgstr "Forum"
+
+msgid "Start date."
+msgstr ""
+
+#, fuzzy
+#| msgid "Title"
+msgid "Time"
+msgstr "Titre"
+
+msgid "Until"
+msgstr ""
+
+#, fuzzy
+#| msgid "Any date"
+msgid "End date."
+msgstr "N'importe quelle date"
+
+msgid "Ok"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy

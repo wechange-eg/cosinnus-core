@@ -23,6 +23,9 @@ from cosinnus.utils.functions import clean_single_line_text, \
 from cosinnus.utils.urls import get_domain_for_portal
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from django.contrib.contenttypes.generic import GenericRelation
+from cosinnus import cosinnus_notifications
+from annoying.functions import get_object_or_None
+from cosinnus.utils.group import get_cosinnus_group_model
 
 # this reads the environment and inits the right locale
 try:
@@ -201,6 +204,9 @@ class CosinnusIdea(IndexingUtilsMixin, models.Model):
         verbose_name=_('Created Projects'),
         blank=True, null=True, related_name='+')
     
+    # this indicates that objects of this model are in some way always visible by registered users
+    # on the platform, no matter their visibility settings, and thus subject to moderation 
+    cosinnus_always_visible_by_users_moderator_flag = True
     
     likes = GenericRelation(LikeObject)
     
@@ -252,8 +258,16 @@ class CosinnusIdea(IndexingUtilsMixin, models.Model):
         self._slug = self.slug
         
         if created:
-            # send creation signal
-            signals.idea_object_ceated.send(sender=self, group=self)
+            forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
+            if forum_slug:
+                forum_group = get_object_or_None(get_cosinnus_group_model(), slug=forum_slug, portal=CosinnusPortal.get_current())
+                if forum_group:
+                    # send creation signal
+                    signals.idea_object_ceated.send(sender=self, group=forum_group)
+                    # we need to patch a group onto the idea, because notifications need a group
+                    setattr(self, 'group', forum_group)
+                    # the audience is empty because this is a moderator-only notification
+                    cosinnus_notifications.idea_created.send(sender=self, user=self.creator, obj=self, audience=[])
     
     def delete(self, *args, **kwargs):
         self._clear_cache(slug=self.slug)

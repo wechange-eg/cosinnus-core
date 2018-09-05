@@ -718,7 +718,9 @@ class CosinnusBaseGroup(IndexingUtilsMixin, FlickrEmbedFieldMixin, VideoEmbedFie
         symmetrical=False,
         blank=True, null=True, related_name='+')
     
-    
+    # this indicates that objects of this model are in some way always visible by registered users
+    # on the platform, no matter their visibility settings, and thus subject to moderation 
+    cosinnus_always_visible_by_users_moderator_flag = True
     
     objects = CosinnusGroupManager()
     

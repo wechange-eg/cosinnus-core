@@ -231,6 +231,11 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
         CosinnusGroupMembership.objects.create(user=self.request.user,
             group=self.object, status=MEMBERSHIP_ADMIN)
         
+        # send group creation signal, 
+        # from here, because in group.save() we don't know the group's creator
+        # the audience is empty because this is a moderator-only notification
+        cosinnus_notifications.group_created.send(sender=self, user=self.request.user, obj=self.object, audience=[])
+        
         # add this project as a reference to the idea it was given as param, if given and enabled
         if settings.COSINNUS_IDEAS_ENABLED and self.request.POST.get('idea_shortid', None) and self.object.type == CosinnusGroup.TYPE_PROJECT:
             from cosinnus.models.idea import CosinnusIdea

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-22 13:18+0200\n"
-"PO-Revision-Date: 2018-08-20 11:36+0200\n"
+"POT-Creation-Date: 2018-09-05 13:12+0200\n"
+"PO-Revision-Date: 2018-09-05 13:15+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -263,8 +263,23 @@ msgstr "Eins deiner Projekte/Gruppen wurde ins Portal \"%(portal_name)s\" versch
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr "\"%(team_name)s\" wurde nach %(portal_name)s verschoben!"
 
+msgid "Created"
+msgstr "Erstellt"
+
+#, python-format
+msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s hat gerade die Gruppe/das Projekt %(team_name)s erstellt auf %(portal_name)s!"
+
 msgid "Has created"
 msgstr "Hat erstellt"
+
+#, python-format
+msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s hat gerade die Idee \"%(object_name)s\" erstellt auf %(portal_name)s!"
+
+#, python-format
+msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
+msgstr "%(sender_name)s hat gerade die Idee \"%(object_name)s\" erstellt!"
 
 #, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
@@ -462,9 +477,6 @@ msgstr "Beschwerdetext"
 msgid "Creator"
 msgstr "Ersteller"
 
-msgid "Created"
-msgstr "Erstellt"
-
 msgid "Reported object"
 msgstr "Gemeledetes Objekt"
 
@@ -661,6 +673,9 @@ msgstr "Frage zu deinem Projekt \"%(group_name)s\""
 #, python-format
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Frage zu deiner Gruppe \"%(group_name)s\""
+
+msgid "Is Moderator"
+msgstr "Ist Moderator"
 
 msgid "Team membership"
 msgstr "Gruppen/Projekt-Mitgliedschaft"
@@ -3138,6 +3153,30 @@ msgstr "Weiter"
 
 msgid "Enter one or more search terms or select a topic to search."
 msgstr "Gib einen oder mehrere Suchbegriffe ein oder wähle ein Thema aus um zu Suchen."
+
+msgid "Simple Statistics"
+msgstr "Simple Statistiken"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "From"
+msgstr "Von"
+
+msgid "Start date."
+msgstr "Anfangsdatum"
+
+msgid "Time"
+msgstr "Zeit"
+
+msgid "Until"
+msgstr "Bis"
+
+msgid "End date."
+msgstr "Enddatum"
+
+msgid "Ok"
+msgstr "Ok"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Users"

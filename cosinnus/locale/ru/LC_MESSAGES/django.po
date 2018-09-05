@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-22 13:18+0200\n"
+"POT-Creation-Date: 2018-09-05 13:12+0200\n"
 "PO-Revision-Date: 2018-06-23 17:09+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -272,10 +272,28 @@ msgstr ""
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
 msgstr "%(sender_name)s  пригласил(а) Вас присоединиться к \"%(team_name)s\" на %(portal_name)s!"
 
+msgid "Created"
+msgstr "Создано"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s  пригласил(а) Вас присоединиться к \"%(team_name)s\" на %(portal_name)s!"
+
 #, fuzzy
 #| msgid "Created"
 msgid "Has created"
 msgstr "Создано"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgstr "%(sender_name)s  пригласил(а) Вас присоединиться к \"%(team_name)s\" на %(portal_name)s!"
+
+#, fuzzy, python-format
+#| msgid "%(sender_name)s has accepted the invitation to %(team_name)s on %(site_name)s!"
+msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
+msgstr "%(sender_name)s пожелал(a) присоединиться к %(team_name)s на %(site_name)s!"
 
 #, fuzzy, python-format
 #| msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
@@ -477,9 +495,6 @@ msgstr "Текст жалобы"
 msgid "Creator"
 msgstr "Создано пользователем"
 
-msgid "Created"
-msgstr "Создано"
-
 msgid "Reported object"
 msgstr "Объект жалобы"
 
@@ -679,6 +694,9 @@ msgstr "Запрос о Вашем проекте \"%(group_name)s\""
 #, python-format
 msgid "Request about your group \"%(group_name)s\""
 msgstr "Запрос о Вашей группе \"%(group_name)s\""
+
+msgid "Is Moderator"
+msgstr ""
 
 msgid "Team membership"
 msgstr "Членство в группе"
@@ -3213,6 +3231,38 @@ msgstr "следующее"
 
 msgid "Enter one or more search terms or select a topic to search."
 msgstr "Введите один или больше поисковых вопросов или выберите тему для поиска."
+
+msgid "Simple Statistics"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete"
+msgid "Date"
+msgstr "Удалить"
+
+#, fuzzy
+#| msgid "Forum"
+msgid "From"
+msgstr "Форум"
+
+msgid "Start date."
+msgstr ""
+
+#, fuzzy
+#| msgid "Title"
+msgid "Time"
+msgstr "Название"
+
+msgid "Until"
+msgstr ""
+
+#, fuzzy
+#| msgid "Any date"
+msgid "End date."
+msgstr "Любая дата"
+
+msgid "Ok"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
