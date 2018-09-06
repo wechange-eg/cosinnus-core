@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from haystack import indexes
 
 from cosinnus.conf import settings
-from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveEdgeNgramField,\
+from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveNgramField,\
     TagObjectSearchIndex, BOOSTED_FIELD_BOOST, StoredDataIndexMixin,\
     DocumentBoostMixin, CommaSeperatedIntegerMultiValueField,\
     LocalCachedIndexMixin
@@ -127,7 +127,7 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
 
 class CosinnusProjectIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexes.Indexable):
     
-    text = TemplateResolveEdgeNgramField(document=True, use_template=True, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
+    text = TemplateResolveNgramField(document=True, use_template=True, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
     rendered = TemplateResolveCharField(use_template=True, indexed=False, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
     
     def get_model(self):
@@ -144,7 +144,7 @@ class CosinnusProjectIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
     
 class CosinnusSocietyIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexes.Indexable):
     
-    text = TemplateResolveEdgeNgramField(document=True, use_template=True, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
+    text = TemplateResolveNgramField(document=True, use_template=True, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
     rendered = TemplateResolveCharField(use_template=True, indexed=False, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
     
     def get_model(self):
@@ -157,7 +157,7 @@ class CosinnusSocietyIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexe
 
 class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataIndexMixin, 
            TagObjectSearchIndex, indexes.Indexable):
-    text = TemplateResolveEdgeNgramField(document=True, use_template=True, template_name='search/indexes/cosinnus/userprofile_{field_name}.txt')
+    text = TemplateResolveNgramField(document=True, use_template=True, template_name='search/indexes/cosinnus/userprofile_{field_name}.txt')
     rendered = TemplateResolveCharField(use_template=True, indexed=False, template_name='search/indexes/cosinnus/userprofile_{field_name}.txt')
     
     boosted = indexes.CharField(model_attr='get_full_name', boost=BOOSTED_FIELD_BOOST)
@@ -231,8 +231,8 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
 class IdeaSearchIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObjectSearchIndex, 
           StoredDataIndexMixin, indexes.Indexable):
     
-    text = TemplateResolveEdgeNgramField(document=True, use_template=True)
-    boosted = indexes.EdgeNgramField(model_attr='title', boost=BOOSTED_FIELD_BOOST)
+    text = TemplateResolveNgramField(document=True, use_template=True)
+    boosted = indexes.NgramField(model_attr='title', boost=BOOSTED_FIELD_BOOST)
 
     public = indexes.BooleanField(model_attr='public')
     visible_for_all_authenticated_users = indexes.BooleanField()
