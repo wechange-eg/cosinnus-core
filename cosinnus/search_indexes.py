@@ -7,7 +7,7 @@ from cosinnus.conf import settings
 from cosinnus.utils.search import TemplateResolveCharField, TemplateResolveNgramField,\
     TagObjectSearchIndex, BOOSTED_FIELD_BOOST, StoredDataIndexMixin,\
     DocumentBoostMixin, CommaSeperatedIntegerMultiValueField,\
-    LocalCachedIndexMixin
+    LocalCachedIndexMixin, DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE
 from cosinnus.utils.user import filter_active_users, filter_portal_users
 from cosinnus.models.profile import get_user_profile_model
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
@@ -136,7 +136,16 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
         group_newness = max(1.0 - (age_timedelta.days/90.0), 0) 
         
         return (members_rank / 2.0) + (group_newness / 2.0)
-
+    
+    def apply_boost_penalty(self, obj, indexed_data):
+        """ Penaliize by 15% for not having a wallpaper image.
+            @return: 1.0 for no penalty, a float in range [0.0..1.0] for a penalty
+        """
+        if not self.get_image_field_for_background(obj):
+            return DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE
+        return 1.0
+    
+    
 class CosinnusProjectIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexes.Indexable):
     
     text = TemplateResolveNgramField(document=True, use_template=True, template_name='search/indexes/cosinnus/cosinnusgroup_{field_name}.txt')
@@ -239,6 +248,14 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
         memberships_rank = normalize_within_stddev(user_memberships_count, mean, stddev, stddev_factor=2.0)
         return memberships_rank
     
+    def apply_boost_penalty(self, obj, indexed_data):
+        """ Penaliize by 15% for not having an avatar image.
+            @return: 1.0 for no penalty, a float in range [0.0..1.0] for a penalty
+        """
+        if not self.get_image_field_for_icon(obj):
+            return DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE
+        return 1.0
+    
     
 class IdeaSearchIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObjectSearchIndex, 
           StoredDataIndexMixin, indexes.Indexable):
@@ -318,4 +335,12 @@ class IdeaSearchIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObjectSearch
         members_rank_from_date = max(1.0 - (age_timedelta.days/90.0), 0) 
         
         return (members_rank_from_likes / 2.0) + (members_rank_from_date / 2.0)
+    
+    def apply_boost_penalty(self, obj, indexed_data):
+        """ Penaliize by 15% for not having a wallpaper image.
+            @return: 1.0 for no penalty, a float in range [0.0..1.0] for a penalty
+        """
+        if not self.get_image_field_for_background(obj):
+            return DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE
+        return 1.0
     

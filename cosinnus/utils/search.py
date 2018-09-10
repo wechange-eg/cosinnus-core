@@ -46,6 +46,9 @@ GLOBAL_MODEL_BOOST_OFFSET = {
     #'cosinnus.userprofile': 0,
 }
 
+# how much multiplicative boost penalty some Models get for not having an image
+DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE = 0.85
+
 
 
 class CommaSeperatedIntegerMultiValueField(indexes.MultiValueField):
@@ -286,10 +289,17 @@ class DocumentBoostMixin(object):
     
     
     def boost_model(self, obj, indexed_data):
-        """ 
-            Model specific boost for an instance given it and its indexed data.
+        """ Model specific boost for an instance given it and its indexed data.
             Stub, implement this in your SearchIndex to customize boosting for that model.
             @return: NOTE: Please normalize all return values to a range of [0.0..1.0]!
+        """
+        return 1.0
+    
+    def apply_boost_penalty(self, obj, indexed_data):
+        """ Model-instance specific penalty, multiplied onto the boost calculated with `boost_model()`.
+            Can be used for example to penalize contents with no preview image.
+            Stub, implement this in your SearchIndex to customize boosting for that model.
+            @return: 1.0 for no penalty, a float in range [0.0..1.0] for a penalty
         """
         return 1.0
         
@@ -299,9 +309,12 @@ class DocumentBoostMixin(object):
         global_boost = GLOBAL_MODEL_BOOST_MULTIPLIERS.get(data['django_ct'], 1.0)
         global_offset = GLOBAL_MODEL_BOOST_OFFSET.get(data['django_ct'], 0.0)
         model_boost = self.boost_model(obj, data)
+        print ">> FINAL SCOOOOORE:", data['local_boost'], 'from global-boost, global-offset, model-boost, penalty', global_boost, global_offset, model_boost, self.apply_boost_penalty(obj, data), getattr(obj, 'title', '-'), getattr(obj, 'name', '-')
+        model_boost = model_boost * self.apply_boost_penalty(obj, data)
         # this is our custom field
         data['local_boost'] = global_offset + (model_boost * global_boost)
         # this tells haystack to boost the ._score
+        
         
         data['boost'] = data['local_boost']
         # TODO: remove after mokwi launch
