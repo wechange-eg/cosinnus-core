@@ -7,7 +7,7 @@
 <script src="{% static 'js/vendor/leaflet.markercluster-0.7.js' %}"></script>
 <script src="{% static 'js/vendor/masonry.pkgd.min.js' %}"></script>
 <script src="{% static 'js/vendor/imagesloaded.pkgd.min.js' %}"></script>
-<script src="{% static 'js/client.js' %}?v=0.10"></script>
+<script src="{% static 'js/client.js' %}?v=0.11"></script>
 {% endaddtoblock %}
 
 {% addtoblock "css" %}
@@ -24,4 +24,5 @@
 	var COSINNUS_MAP_OPTIONS = {{ SETTINGS.COSINNUS_MAP_OPTIONS|json|safe }};
     var COSINNUS_PORTAL_INFOS = {% render_cosinnus_portal_info_json %};
     var COSINNUS_IDEAS_ENABLED = {% if SETTINGS.COSINNUS_IDEAS_ENABLED %}true{% else %}false{% endif %};
+    var COSINNUS_SHOW_SUPERUSER_CONTROLS = {% if user|is_superuser %}true{% else %}false{% endif %};
 </script>
