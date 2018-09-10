@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 from django.utils.decorators import method_decorator
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.generic.base import TemplateView
+from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.views.map_api import get_searchresult_by_itemid
@@ -39,6 +40,13 @@ def _generate_type_settings(types=[]):
 
 class MapView(TemplateView):
     
+    template_name = 'cosinnus/map/map_page.html'
+    
+    def get_page_title(self):
+        """ Stub for overriding the HTML page title.
+            @return: String or None for default. """
+        return None
+    
     def collect_map_options(self):
         return {
             'basePageUrl': self.request.path,
@@ -47,7 +55,8 @@ class MapView(TemplateView):
     def get_context_data(self, **kwargs):
         ctx = {
             'skip_page_footer': True,
-            'map_options_json': json.dumps(self.collect_map_options())
+            'map_options_json': json.dumps(self.collect_map_options()),
+            'page_title': self.get_page_title(),
         }
         item = self.request.GET.get('item', None)
         if item:
@@ -56,7 +65,6 @@ class MapView(TemplateView):
             })
         return ctx
 
-    template_name = 'cosinnus/map/map_page.html'
 
 map_view = MapView.as_view()
 
@@ -90,6 +98,26 @@ class TileView(MapView):
            }
         })
         return options
+    
+    def get_page_title(self):
+        """ Depends on what types and/or "mine" page we show. """
+        if self.types == ['projects']:
+            if self.show_mine: 
+                return _('My Projects')
+            else:
+                return _('Projects')
+        if self.types == ['groups']:
+            if self.show_mine: 
+                return _('My Groups')
+            else:
+                return _('Groups')
+        if self.types == ['ideas']:
+            if self.show_mine: 
+                return _('My Ideas')
+            else:
+                return _('Ideas')
+        
+        return None
     
 tile_view = TileView.as_view()
 

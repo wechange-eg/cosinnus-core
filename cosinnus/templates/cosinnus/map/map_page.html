@@ -3,7 +3,7 @@
 
 {% block html_attributes %}style="overflow: hidden;"{% endblock html_attributes %}
 
-{% block page_title %}{% trans "Map" %}{% endblock %}
+{% block page_title %}{% if page_title %}{{ page_title }}{% else %}{% trans "Map" %}{% endif %}{% endblock %}
 
 {% block og_url %}{{ COSINNUS_CURRENT_PORTAL.get_domain }}{{ request.path }}{% if request.GET.values %}?{{ request.GET.urlencode|safe }}{% endif %}{% endblock og_url %}
 {% block og_title %}{% if item %}{{ item.title }} - {% endif %}{{ block.super }}{% endblock %}
