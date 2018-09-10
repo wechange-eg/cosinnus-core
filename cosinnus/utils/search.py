@@ -33,8 +33,19 @@ GLOBAL_MODEL_BOOST_MULTIPLIERS = {
     #'cosinnus_event.event': 2.0,
     #'cosinnus.cosinnusproject': 1.0,
     #'cosinnus.cosinnussociety': 1.0,
+    #'cosinnus.cosinnusidea': 1.0,
     'cosinnus.userprofile': 0.5,
 } 
+
+# global, additive boost offset. same as `GLOBAL_MODEL_BOOST_MULTIPLIERS`, but additive.
+GLOBAL_MODEL_BOOST_OFFSET = {
+    'cosinnus_event.event': 0.5,
+    'cosinnus.cosinnusproject': 0.5,
+    'cosinnus.cosinnussociety': 0.5,
+    'cosinnus.cosinnusidea': 0.5,
+    #'cosinnus.userprofile': 0,
+}
+
 
 
 class CommaSeperatedIntegerMultiValueField(indexes.MultiValueField):
@@ -286,10 +297,12 @@ class DocumentBoostMixin(object):
         """ Boost all objects of this type """
         data = super(DocumentBoostMixin, self).prepare(obj)
         global_boost = GLOBAL_MODEL_BOOST_MULTIPLIERS.get(data['django_ct'], 1.0)
+        global_offset = GLOBAL_MODEL_BOOST_OFFSET.get(data['django_ct'], 0.0)
         model_boost = self.boost_model(obj, data)
         # this is our custom field
-        data['local_boost'] = model_boost * (global_boost + 1.0)
+        data['local_boost'] = global_offset + (model_boost * global_boost)
         # this tells haystack to boost the ._score
+        
         data['boost'] = data['local_boost']
         # TODO: remove after mokwi launch
         if False and settings.DEBUG:

@@ -109,9 +109,17 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
         return qs
     
     def boost_model(self, obj, indexed_data):
-        """ We boost by number of members this group has, normalized over
+        """ We boost a combined measure of 2 added factors: newness (50%) and group member rank (50%).
+            This means that a new group with lots of members will rank highest and an old group with no members lowest.
+            But it also means that new groups with no members will still rank quite high, as will old groups with lots
+            of members.
+            
+            Factors:
+            - 50%: number of members this group has, normalized over
             the mean/stddev of the member count of all groups in this portal (excluded the Forum!), 
-            in a range of [0.0..1.0]."""
+            in a range of [0.0..1.0]
+            - 50%: the group's created date, highest being now() and lowest >= 3 months
+            """
         group = obj
         forum_slug = getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
         def qs_func():
@@ -123,7 +131,11 @@ class CosinnusGroupIndexMixin(LocalCachedIndexMixin, DocumentBoostMixin, StoredD
         mean, stddev = self.get_mean_and_stddev(qs_func, 'memberships')
         group_member_count = group.actual_members.count()
         members_rank = normalize_within_stddev(group_member_count, mean, stddev, stddev_factor=1.0)
-        return members_rank
+        
+        age_timedelta = now() - obj.created
+        group_newness = max(1.0 - (age_timedelta.days/90.0), 0) 
+        
+        return (members_rank / 2.0) + (group_newness / 2.0)
 
 class CosinnusProjectIndex(CosinnusGroupIndexMixin, TagObjectSearchIndex, indexes.Indexable):
     
