@@ -309,13 +309,10 @@ class DocumentBoostMixin(object):
         global_boost = GLOBAL_MODEL_BOOST_MULTIPLIERS.get(data['django_ct'], 1.0)
         global_offset = GLOBAL_MODEL_BOOST_OFFSET.get(data['django_ct'], 0.0)
         model_boost = self.boost_model(obj, data)
-        print ">> FINAL SCOOOOORE:", data['local_boost'], 'from global-boost, global-offset, model-boost, penalty', global_boost, global_offset, model_boost, self.apply_boost_penalty(obj, data), getattr(obj, 'title', '-'), getattr(obj, 'name', '-')
         model_boost = model_boost * self.apply_boost_penalty(obj, data)
         # this is our custom field
         data['local_boost'] = global_offset + (model_boost * global_boost)
         # this tells haystack to boost the ._score
-        
-        
         data['boost'] = data['local_boost']
         # TODO: remove after mokwi launch
         if False and settings.DEBUG:
