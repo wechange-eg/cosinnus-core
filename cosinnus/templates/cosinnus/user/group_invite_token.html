@@ -1,0 +1,61 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags djajax_tags widget_tweaks %}
+
+{% block page_title %}
+    {% trans "Quick Join" %}
+{% endblock page_title %}
+
+{% block main_page %}
+    
+    {% include 'cosinnus/messages.html' %}
+    
+    {% if token and invite %}
+		{% captureas label %}
+		    <p class="no-horizontal-padding no-vertical-padding large-space">
+	            {% trans "Using this token, you can automatically join the following projects and groups" %}:
+	        </p>
+	        
+	        {% for group in invite_groups %}
+	            {% include 'cosinnus/group/single_group.html' with group=group target_blank=True spaced=True %}
+	        {% endfor %}
+	        
+	        
+		{% endcaptureas %}
+		
+		{% captureas title %}{% trans "Team up quickly using an invite token" %}: <b>{{ token }}</b>{% endcaptureas %}
+		{% trans "Join all now!" as submit_button_label %}
+        {% if user.is_authenticated %}
+			{% include "cosinnus/modal_box.html" with id="modal-recruit-users" label=label submit_button_label=submit_button_label title=title form_action="." title_icon="fa-ticket" show_inline=True hide_cancel_button=True %}
+        {% else %}        
+            {% captureas custom_button_html %}
+                <button type="submit" id="{{ id }}_btnsubmit" class="pull-left no-margin submit-btn-x btn btn-emphasized" {% if not form_action %}data-dismiss="modal"{% endif %} {% if disable_on_submit %}onclick="setTimeout(function(){$('#{{ id }}_btnsubmit').attr('disabled', true);},50);"{% endif %}>
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-check"></i>
+                            </a>
+                            <div class="media-body">
+                                TODO: SIGN IN AND CONTINUE
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+                <button type="submit" id="{{ id }}_btnsubmit" class="submit-btn-x btn btn-emphasized" {% if not form_action %}data-dismiss="modal"{% endif %} {% if disable_on_submit %}onclick="setTimeout(function(){$('#{{ id }}_btnsubmit').attr('disabled', true);},50);"{% endif %}>
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-check"></i>
+                            </a>
+                            <div class="media-body">
+                                TODO: REGISTER AND CONTINUE
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+            {% endcaptureas %}
+            {% include "cosinnus/modal_box.html" with id="modal-recruit-users" label=label submit_button_label=submit_button_label title=title title_icon="fa-ticket" show_inline=True hide_cancel_button=True hide_submit_button=True custom_button_html=custom_button_html %}
+        {% endif %}		
+    {% endif %}
+    
+{% endblock main_page %}
+

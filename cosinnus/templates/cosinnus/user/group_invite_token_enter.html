@@ -1,0 +1,33 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags djajax_tags widget_tweaks %}
+
+{% block page_title %}
+    {% trans "Quick Join" %}
+{% endblock page_title %}
+
+{% block main_page %}
+    
+    {% include 'cosinnus/messages.html' %}
+    
+	{% captureas label %}
+	    <p class="no-horizontal-padding no-vertical-padding large-space">
+            {% trans "If you know an invite token, you can automatically join groups and projects, no matter if you have a user account yet or not." %}
+        </p>
+        
+        <h3>
+            {% trans "Enter a token:" %}
+        </h3>
+        <div class="cosinnus-field">
+            <div class="cosinnus-field-input heavy-input">
+                <input type="text" id="id_token" name="token" class="form-control form-control-heavy" placeholder="{% trans "For example" %}: JOIN2020 " />
+            </div>
+        </div>
+        
+	{% endcaptureas %}
+	
+	{% captureas title %}{% trans "Team up quickly using an invite token" %}{% endcaptureas %}
+	{% include "cosinnus/modal_box.html" with id="modal-recruit-users" label=label title=title form_action="." title_icon="fa-ticket" show_inline=True hide_cancel_button=True %}
+        
+    
+{% endblock main_page %}
+
