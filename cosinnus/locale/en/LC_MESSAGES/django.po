@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-05 13:12+0200\n"
+"POT-Creation-Date: 2018-09-13 13:00+0200\n"
 "PO-Revision-Date: 2018-06-23 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -26,6 +26,9 @@ msgid "%(number)d %(objects)s were deleted successfully"
 msgstr ""
 
 msgid "Delete selected entries"
+msgstr ""
+
+msgid "A token with the same code already exists! Please choose a different string for your token."
 msgstr ""
 
 msgid "The following Projects were converted to Groups:"
@@ -697,6 +700,36 @@ msgid "Team Invite for Unregistered User"
 msgstr ""
 
 msgid "Team Invites for Unregistered Users"
+msgstr ""
+
+msgid "Token"
+msgstr ""
+
+msgid "The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. Can contain letters and numbers, but no spaces, and can be as long or short as you want."
+msgstr ""
+
+msgid "Short Description (optional). Will be shown on the token page."
+msgstr ""
+
+msgid "Valid until"
+msgstr ""
+
+#, fuzzy
+#| msgid "Edit Group"
+msgid "Invite-Groups"
+msgstr "Edit Project"
+
+#, fuzzy
+#| msgid "Cosinnus group"
+msgid "Cosinnus Group Invite Token"
+msgstr "Group"
+
+#, fuzzy
+#| msgid "Cosinnus groups"
+msgid "Cosinnus Group Invite Tokens"
+msgstr "Groups"
+
+msgid "Token must not be empty."
 msgstr ""
 
 msgid "From Portal"
@@ -2988,6 +3021,12 @@ msgstr ""
 msgid "Log in here"
 msgstr ""
 
+msgid "You are signing up using this invite token:"
+msgstr ""
+
+msgid "After signup, you will automatically become a member of the associated projects and groups."
+msgstr ""
+
 msgid "Email address"
 msgstr ""
 
@@ -3360,6 +3399,32 @@ msgstr "Edit Project"
 #| msgid "Create Project"
 msgid "Message Project"
 msgstr "Create Project"
+
+msgid "Quick Join"
+msgstr ""
+
+msgid "Using this token, you can automatically join the following projects and groups"
+msgstr ""
+
+msgid "Team up quickly using an invite token"
+msgstr ""
+
+#, fuzzy
+msgid "Join all now!"
+msgstr "Join Project"
+
+msgid "Create account and join"
+msgstr ""
+
+msgid "If you know an invite token, you can automatically join groups and projects, no matter if you have a user account yet or not."
+msgstr ""
+
+msgid "Enter a token:"
+msgstr ""
+
+#, fuzzy
+msgid "For example"
+msgstr "Project Type"
 
 msgid "About me"
 msgstr ""
@@ -3998,10 +4063,28 @@ msgstr ""
 msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
 msgstr ""
 
+msgid "The invite token you have used does not exist!"
+msgstr ""
+
+msgid "Sorry, but the invite token you have used is not active yet or not active anymore!"
+msgstr ""
+
+msgid "Token invitations applied. You are now a member of the associated projects/groups!"
+msgstr ""
+
+msgid "There was an error while processing your invites. Some of your invites may not have been applied."
+msgstr ""
+
 msgid "You are already logged in!"
 msgstr ""
 
 msgid "Your privacy settings were saved. Welcome!"
+msgstr ""
+
+msgid "Please enter a token!"
+msgstr ""
+
+msgid "Sorry, but the invite token you have used does not seem to be valid!"
 msgstr ""
 
 msgid "The user account you were looking for does not exist! Their registration was probably already denied."

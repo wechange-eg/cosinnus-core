@@ -28,7 +28,7 @@
             </div>
             <div class="modal-footer">
                 {% if not hide_submit_button %}
-                <button type="submit" id="{{ id }}_btnsubmit" class="submit-btn-x btn btn-emphasized" {% if not form_action %}data-dismiss="modal"{% endif %} {% if disable_on_submit %}onclick="setTimeout(function(){$('#{{ id }}_btnsubmit').attr('disabled', true);},50);"{% endif %}>
+                <button type="submit" id="{{ id }}_btnsubmit" class="submit-btn-x btn btn-emphasized {% if large_buttons %}btn-autosize{% endif %}" {% if not form_action %}data-dismiss="modal"{% endif %} {% if disable_on_submit %}onclick="setTimeout(function(){$('#{{ id }}_btnsubmit').attr('disabled', true);},50);"{% endif %}>
                     <ul class="media-list">
                         <li class="media">
                             <a class="pull-left" href="#">
@@ -42,7 +42,7 @@
                 </button>
                 {% endif %}
                 {% if form_action and not hide_cancel_button %}
-	                <button type="button" class="btn btn-emphasized" data-dismiss="modal">
+	                <button type="button" class="btn btn-emphasized {% if large_buttons %}btn-autosize{% endif %}" data-dismiss="modal">
 	                    <ul class="media-list">
 	                        <li class="media">
 	                            <a class="pull-left" href="#">
