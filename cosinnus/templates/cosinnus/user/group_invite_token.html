@@ -1,0 +1,65 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n static cosinnus_tags djajax_tags widget_tweaks %}
+
+{% block page_title %}
+    {% trans "Quick Join" %}
+{% endblock page_title %}
+
+{% block main_page %}
+    
+    {% include 'cosinnus/messages.html' %}
+    
+    {% if token and invite %}
+        {% captureas label %}
+            {% if invite.description %}
+                <div class="textfield">{{ invite.description|textfield }}</div>
+                <hr>
+            {% endif %}
+            <p class="no-horizontal-padding no-vertical-padding large-space">
+                {% trans "Using this token, you can automatically join the following projects and groups" %}:
+            </p>
+            
+            {% for group in invite_groups %}
+                {% include 'cosinnus/group/single_group.html' with group=group target_blank=True spaced=True %}
+            {% endfor %}
+        {% endcaptureas %}
+        {% captureas title %}
+            {% if invite.title %}
+                {{ invite.title }}            
+            {% else %}
+                {% trans "Team up quickly using an invite token" %}: <b>{{ invite.token }}</b>
+            {% endif %}
+        {% endcaptureas %}
+        {% trans "Join all now!" as submit_button_label %}
+        
+        {% if user.is_authenticated %}
+            {% include "cosinnus/modal_box.html" with id="modal-recruit-users" label=label submit_button_label=submit_button_label title=title form_action="." title_icon="fa-ticket" show_inline=True hide_cancel_button=True large_buttons=True %}
+        {% else %}        
+            {% captureas custom_button_html %}
+                <div class="pull-left white-content" href="#">
+                    <span class="no-select">
+                        {% trans "Already have an account?" %}
+                    </span> 
+                    <span>
+                        <a href="{% url 'login' %}?next={% url "cosinnus:group-invite-token" token=invite.token %}">{% trans "Log in here" %}</a>
+                    </span>
+                </div>
+                <button href="{% url 'cosinnus:user-add' %}?invite_token={{ invite.token }}" class="submit-btn-x btn btn-emphasized btn-autosize" >
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-check"></i>
+                            </a>
+                            <div class="media-body">
+                                {% trans "Create account and join" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+            {% endcaptureas %}
+            {% include "cosinnus/modal_box.html" with id="modal-recruit-users" label=label submit_button_label=submit_button_label title=title title_icon="fa-ticket" show_inline=True hide_cancel_button=True hide_submit_button=True custom_button_html=custom_button_html %}
+        {% endif %}
+    {% endif %}
+    
+{% endblock main_page %}
+

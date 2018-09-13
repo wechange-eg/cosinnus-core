@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-05 13:12+0200\n"
-"PO-Revision-Date: 2018-09-05 13:15+0200\n"
+"POT-Creation-Date: 2018-09-13 13:00+0200\n"
+"PO-Revision-Date: 2018-09-13 13:16+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -28,6 +28,9 @@ msgstr "%(number)d %(objects)s wurden erfolgreich gelöscht."
 
 msgid "Delete selected entries"
 msgstr "Ausgewählte Objekte löschen"
+
+msgid "A token with the same code already exists! Please choose a different string for your token."
+msgstr ""
 
 msgid "The following Projects were converted to Groups:"
 msgstr "Die folgenden Projekte wurden in Gruppen umgewandelt:"
@@ -697,6 +700,30 @@ msgstr "Gruppen/Projekt-Einladung für nicht registrierte Benutzer"
 
 msgid "Team Invites for Unregistered Users"
 msgstr "Gruppen/Projekt-Einladungen für nicht registrierte Benutzer"
+
+msgid "Token"
+msgstr ""
+
+msgid "The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. Can contain letters and numbers, but no spaces, and can be as long or short as you want."
+msgstr ""
+
+msgid "Short Description (optional). Will be shown on the token page."
+msgstr "Kurze Beschreibung (optional). Wird auf der Einladungs-Token-Seite angezeigt."
+
+msgid "Valid until"
+msgstr "Gültig bis"
+
+msgid "Invite-Groups"
+msgstr "Einlade-Gruppen"
+
+msgid "Cosinnus Group Invite Token"
+msgstr "Cosinnus Gruppen-Einladungs-Token"
+
+msgid "Cosinnus Group Invite Tokens"
+msgstr "Cosinnus Gruppen-Einladungs-Token"
+
+msgid "Token must not be empty."
+msgstr "Einladungs-Token darf nicht leer sein."
 
 msgid "From Portal"
 msgstr "Von Portal"
@@ -3064,6 +3091,12 @@ msgstr "Du hast schon ein Konto?"
 msgid "Log in here"
 msgstr "Hier einloggen"
 
+msgid "You are signing up using this invite token:"
+msgstr ""
+
+msgid "After signup, you will automatically become a member of the associated projects and groups."
+msgstr ""
+
 msgid "Email address"
 msgstr "E-mail Adresse"
 
@@ -3405,6 +3438,31 @@ msgstr "Projekt beitreten"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Message Project"
 msgstr "Projekt anschreiben"
+
+msgid "Quick Join"
+msgstr ""
+
+msgid "Using this token, you can automatically join the following projects and groups"
+msgstr "Mit diesem Einladungs-Token wirst du automatisch Mitglied in den folgenden Projekten und Gruppen"
+
+msgid "Team up quickly using an invite token"
+msgstr "Leg schnell los mit einem Einladungs-Token"
+
+msgid "Join all now!"
+msgstr "Jetzt allen beitreten!"
+
+#
+msgid "Create account and join"
+msgstr "Konto erstellen und beitreten"
+
+msgid "If you know an invite token, you can automatically join groups and projects, no matter if you have a user account yet or not."
+msgstr "Wenn du ein Einladungs-Token hast, kannst du sofort Mitglied in Projekten und Gruppen werden, egal ob du schon ein Benutzerkonto hast oder nicht."
+
+msgid "Enter a token:"
+msgstr "Gib ein Einladungs-Token ein:"
+
+msgid "For example"
+msgstr "Zum Beispiel"
 
 msgid "About me"
 msgstr "Über mich"
@@ -4033,11 +4091,29 @@ msgstr "Benutzer \"%(user)s\" wurde erfolgreich registriert. Das Benutzerkonto m
 msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
 msgstr "Benutzer \"%(user)s\" wurde erfolgreich registriert. Wir senden eine Email an deine Adresse %(email)s\". Du musst den enthaltenen Bestätigungslink klicken bevor du dich einloggen kannst."
 
+msgid "The invite token you have used does not exist!"
+msgstr "Das Einladungs-Token, das du benutzt hast, existiert nicht!"
+
+msgid "Sorry, but the invite token you have used is not active yet or not active anymore!"
+msgstr "Tut uns leid, aber das Einladungs-Token, das du benutzt hast, ist noch nicht oder nicht mehr gültig!"
+
+msgid "Token invitations applied. You are now a member of the associated projects/groups!"
+msgstr "Einladungs-Token wurde angewandt. Du bist jetzt Mitglied in den dazugehörigen Projekten und Gruppen!"
+
+msgid "There was an error while processing your invites. Some of your invites may not have been applied."
+msgstr "Es gab einen Fehler beim Verarbeiten deiner Token-Einladungen. Es ist möglich, dass eine oder mehrere der Einladungen nicht angewandt wurden."
+
 msgid "You are already logged in!"
 msgstr "Du bist bereits eingeloggt!"
 
 msgid "Your privacy settings were saved. Welcome!"
 msgstr "Deine Privatsphären-Einstellungen wurden gespeichert. Willkommen!"
+
+msgid "Please enter a token!"
+msgstr "Bitte gib ein Einladungs-Token ein!"
+
+msgid "Sorry, but the invite token you have used does not seem to be valid!"
+msgstr "Das Einladungs-Token, das du benutzt hast, scheint nicht gültig zu sein!"
 
 msgid "The user account you were looking for does not exist! Their registration was probably already denied."
 msgstr "Das Benutzerkonto was du suchst gibt es nicht. Wahrscheinlich wurde die Registrierungsanfrage schon von einem anderen Portaladministrator abgelehnt."

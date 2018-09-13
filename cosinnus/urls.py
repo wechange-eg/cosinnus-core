@@ -53,6 +53,8 @@ urlpatterns = patterns('cosinnus.views',
     
     url(r'^invitations/$', 'group.group_list_invited', name='invitations', kwargs={'show_all': True}),
     url(r'^welcome/$', 'user.welcome_settings', name='welcome-settings'),
+    url(r'^join/$', 'user.group_invite_token_enter_view', name='group-invite-token-enter'),
+    url(r'^join/(?P<token>[^/]+)/$', 'user.group_invite_token_view', name='group-invite-token'),
     
     url(r'^account/report/$', 'feedback.report_object', name='report-object'),
     

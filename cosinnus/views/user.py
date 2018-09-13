@@ -26,7 +26,8 @@ from cosinnus.models.profile import get_user_profile_model,\
 from cosinnus.models.tagged import BaseTagObject
 from cosinnus.models.group import CosinnusPortal,\
     CosinnusUnregisterdUserGroupInvite, CosinnusGroupMembership,\
-    MEMBERSHIP_INVITED_PENDING
+    MEMBERSHIP_INVITED_PENDING, CosinnusGroupInviteToken, MEMBERSHIP_MEMBER,\
+    MEMBER_STATUS
 from cosinnus.core.mail import MailThread, get_common_mail_context,\
     send_mail_or_fail_threaded
 from django.template.loader import render_to_string
@@ -60,6 +61,10 @@ from django.utils.http import is_safe_url
 from django.template import loader
 
 from honeypot.decorators import check_honeypot
+from annoying.functions import get_object_or_None
+
+import logging
+logger = logging.getLogger('cosinnus')
 
 USER_MODEL = get_user_model()
 
@@ -200,6 +205,21 @@ class UserCreateView(CreateView):
         # send user registration signal
         signals.user_registered.send(sender=self, user=user)
         
+        # check if there was a token group invite associated with the signup
+        invite_token = self.request.POST.get('invite_token', None)
+        if invite_token:
+            invite = get_object_or_None(CosinnusGroupInviteToken, token__iexact=invite_token, portal=CosinnusPortal.get_current())
+            if not invite:
+                messages.warning(self.request, _('The invite token you have used does not exist!'))
+            elif not invite.is_active:
+                messages.warning(self.request, _('Sorry, but the invite token you have used is not active yet or not active anymore!'))
+            else:
+                success = apply_group_invite_token_for_user(invite, user)
+                if success:
+                    messages.success(self.request, _('Token invitations applied. You are now a member of the associated projects/groups!'))
+                else:
+                    messages.error(self.request, _('There was an error while processing your invites. Some of your invites may not have been applied.'))
+        
         if getattr(settings, 'COSINNUS_SHOW_WELCOME_SETTINGS_PAGE', True):
             # add redirect to the welcome-settings page, with priority so that it is shown as first one
             profile.add_redirect_on_next_page(redirect_with_next(reverse('cosinnus:welcome-settings'), self.request), message=None, priority=True)
@@ -266,6 +286,95 @@ class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
         self.notification_choices = [choice for choice in self.notification_setting.SETTING_CHOICES if choice[0] != self.notification_setting.SETTING_GROUP_INDIVIDUAL]
         
 welcome_settings = WelcomeSettingsView.as_view()
+
+
+class CosinnusGroupInviteTokenEnterView(TemplateView):
+    """ A welcome settings page that saves the two most important privacy aspects:
+        the global notification setting and the userprofile visibility setting. """
+    
+    template_name = 'cosinnus/user/group_invite_token_enter.html'
+    
+    def post(self, request, *args, **kwargs):
+        token = request.POST.get('token', None)
+        if not token:
+            messages.error(request, _('Please enter a token!'))
+            redirect_url = '.'
+        else:
+            redirect_url = reverse('cosinnus:group-invite-token', kwargs={'token': token})
+        return HttpResponseRedirect(redirect_url)
+    
+group_invite_token_enter_view = CosinnusGroupInviteTokenEnterView.as_view()
+
+
+class CosinnusGroupInviteTokenView(TemplateView):
+    """ A welcome settings page that saves the two most important privacy aspects:
+        the global notification setting and the userprofile visibility setting. """
+    
+    template_name = 'cosinnus/user/group_invite_token.html'
+    message_success = _('Token invitations applied. You are now a member of the associated projects/groups!')
+    
+    def dispatch(self, request, *args, **kwargs):
+        self.token = kwargs.get('token', None)
+        self.invite = get_object_or_None(CosinnusGroupInviteToken, token__iexact=self.token, portal=CosinnusPortal.get_current())
+        if not self.token or not self.invite:
+            messages.error(self.request, _('The invite token you have used does not exist!'))
+            return redirect('cosinnus:group-invite-token-enter')
+        self.invite_groups = list(self.invite.invite_groups.all())
+        return super(CosinnusGroupInviteTokenView, self).dispatch(request, *args, **kwargs)
+    
+    def post(self, request, *args, **kwargs):
+        if self.token and self.invite and self.invite.is_active and self.invite_groups:
+            success = apply_group_invite_token_for_user(self.invite, request.user)
+            if success:
+                redirect_url = self.invite_groups[0].get_absolute_url()
+                messages.success(request, self.message_success)
+            else:
+                redirect_url = '.'
+                messages.error(request, _('There was an error while processing your invites. Some of your invites may not have been applied.'))
+            return HttpResponseRedirect(redirect_url)
+        else:
+            return HttpResponseRedirect('.')
+    
+    def get_context_data(self, **kwargs):
+        context = super(CosinnusGroupInviteTokenView, self).get_context_data(**kwargs)
+        if not self.invite.is_active:
+            messages.warning(self.request, _('Sorry, but the invite token you have used is not active yet or not active anymore!'))
+        elif not self.invite_groups:
+            messages.warning(self.request, _('Sorry, but the invite token you have used does not seem to be valid!'))
+        else:
+            context.update({
+                'token': self.token,
+                'invite': self.invite,
+                'invite_groups': self.invite_groups,
+            })
+        return context
+        
+group_invite_token_view = CosinnusGroupInviteTokenView.as_view()
+
+
+def apply_group_invite_token_for_user(group_invite_token, user):
+    """ Applies a `CosinnusGroupInviteToken` for a user, making them a member (if not already) of all groups
+        determined by the invite token object. 
+        @return: True if the user became member of all the groups, False if there was an error """
+    success = True
+    with transaction.atomic():
+        for group in group_invite_token.invite_groups.all():
+            try:
+                membership = get_object_or_None(CosinnusGroupMembership, group=group, user=user)
+                if membership and membership.status not in MEMBER_STATUS:
+                    # if the user had a pending invite, convert them to member
+                    membership.status = MEMBERSHIP_MEMBER
+                    membership.save()
+                elif not membership:
+                    # make user a member of the group if they hadn't been before
+                    CosinnusGroupMembership.objects.create(group=group, user=user, status=MEMBERSHIP_MEMBER)
+                # else the user is already in the group
+            except Exception, e:
+                logger.error('Error when trying to apply a token group invite', 
+                         extra={'exception': force_text(e), 'user': user, 'group': group, 'token': group_invite_token.token})
+                success = False
+        
+    return success
 
 
 def _check_user_approval_permissions(request, user_id):

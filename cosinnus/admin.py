@@ -14,7 +14,7 @@ from cosinnus.models.group import CosinnusGroupMembership,\
     CosinnusPortal, CosinnusPortalMembership,\
     CosinnusGroup, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING,\
     CosinnusPermanentRedirect, MEMBERSHIP_ADMIN,\
-    CosinnusUnregisterdUserGroupInvite, RelatedGroups
+    CosinnusUnregisterdUserGroupInvite, RelatedGroups, CosinnusGroupInviteToken
 from cosinnus.models.profile import get_user_profile_model,\
     GlobalBlacklistedEmail, GlobalUserNotificationSetting
 from cosinnus.models.tagged import AttachedObject, CosinnusTopicCategory
@@ -32,6 +32,8 @@ from cosinnus.models.idea import CosinnusIdea
 from cosinnus.utils.permissions import check_user_can_receive_emails
 from cosinnus.core import signals
 from copy import deepcopy, copy
+from django import forms
+from django.core.exceptions import ValidationError
 
 
 class SingleDeleteActionMixin(object):
@@ -75,6 +77,29 @@ class UnregisterdUserGroupInviteAdmin(admin.ModelAdmin):
     
 admin.site.register(CosinnusUnregisterdUserGroupInvite, UnregisterdUserGroupInviteAdmin)
 
+
+class CosinnusGroupInviteTokenAdminForm(forms.ModelForm):
+    """ Case-insensitive unique validation for the token """
+    def clean_token(self):
+        current_portal = self.cleaned_data['portal'] or CosinnusPortal.get_current()
+        other_tokens = CosinnusGroupInviteToken.objects.filter(portal=current_portal, token__iexact=self.cleaned_data["token"])
+        if self.instance:
+            other_tokens = other_tokens.exclude(pk=self.instance.pk)
+        if other_tokens.count() > 0:
+            raise ValidationError(_('A token with the same code already exists! Please choose a different string for your token.'))
+        return self.cleaned_data["token"]
+
+
+class CosinnusGroupInviteTokenAdmin(admin.ModelAdmin):
+    form = CosinnusGroupInviteTokenAdminForm
+    
+    list_display = ('token', 'portal', 'is_active', 'title', 'created',)
+    list_filter = ('created', 'portal')
+    search_fields = ('token', 'title', 'creator__first_name', 'creator__last_name', 'creator__email') 
+    readonly_fields = ('created', 'valid_until') # valid_until is unused as of now
+    filter_horizontal = ('invite_groups',)
+
+admin.site.register(CosinnusGroupInviteToken, CosinnusGroupInviteTokenAdmin)
 
 
 class PermanentRedirectAdmin(SingleDeleteActionMixin, admin.ModelAdmin):

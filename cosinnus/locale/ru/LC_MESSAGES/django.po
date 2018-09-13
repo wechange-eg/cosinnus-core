@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-05 13:12+0200\n"
+"POT-Creation-Date: 2018-09-13 13:00+0200\n"
 "PO-Revision-Date: 2018-06-23 17:09+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -27,6 +27,9 @@ msgstr "%(number)d %(objects)s успешно удалены"
 
 msgid "Delete selected entries"
 msgstr "Удалить выделенные объекты"
+
+msgid "A token with the same code already exists! Please choose a different string for your token."
+msgstr ""
 
 msgid "The following Projects were converted to Groups:"
 msgstr "Следующие проекты были преобразованы в группы:"
@@ -718,6 +721,42 @@ msgstr "Приглашение команды для незарегистрир�
 
 msgid "Team Invites for Unregistered Users"
 msgstr "Приглашения команды для незарегистрированного юзера"
+
+msgid "Token"
+msgstr ""
+
+msgid "The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. Can contain letters and numbers, but no spaces, and can be as long or short as you want."
+msgstr ""
+
+#, fuzzy
+#| msgid "Short Description. Internal, will not be shown publicly."
+msgid "Short Description (optional). Will be shown on the token page."
+msgstr "Краткое описание для внутреннего использования, не отображается публично."
+
+#, fuzzy
+#| msgid "Valid to"
+msgid "Valid until"
+msgstr "Действителен до"
+
+#, fuzzy
+#| msgid "Invited Groups"
+msgid "Invite-Groups"
+msgstr "Приглашенные группы"
+
+#, fuzzy
+#| msgid "Cosinnus group"
+msgid "Cosinnus Group Invite Token"
+msgstr "Группа Cosinnus"
+
+#, fuzzy
+#| msgid "Cosinnus groups"
+msgid "Cosinnus Group Invite Tokens"
+msgstr "Группы Cosinnus"
+
+#, fuzzy
+#| msgid "Slug must not be empty."
+msgid "Token must not be empty."
+msgstr "Slug не может быть пустым."
 
 msgid "From Portal"
 msgstr "Из портала"
@@ -3139,6 +3178,12 @@ msgstr "Создать аккаунт"
 msgid "Log in here"
 msgstr "Входил в систему прежде"
 
+msgid "You are signing up using this invite token:"
+msgstr ""
+
+msgid "After signup, you will automatically become a member of the associated projects and groups."
+msgstr ""
+
 msgid "Email address"
 msgstr "Адрес электронной почты"
 
@@ -3553,6 +3598,38 @@ msgstr "Редактировать проект"
 #| msgid "Create Project"
 msgid "Message Project"
 msgstr "Создать проект"
+
+msgid "Quick Join"
+msgstr ""
+
+msgid "Using this token, you can automatically join the following projects and groups"
+msgstr ""
+
+msgid "Team up quickly using an invite token"
+msgstr ""
+
+#, fuzzy
+#| msgid "Join now!"
+msgid "Join all now!"
+msgstr "Присоединяйтесь сейчас!"
+
+#, fuzzy
+#| msgid "Create account"
+msgid "Create account and join"
+msgstr "Создать аккаунт"
+
+msgid "If you know an invite token, you can automatically join groups and projects, no matter if you have a user account yet or not."
+msgstr ""
+
+#, fuzzy
+#| msgid "Enter a description"
+msgid "Enter a token:"
+msgstr "Введите описание"
+
+#, fuzzy
+#| msgid "From Team Type"
+msgid "For example"
+msgstr "От типа группы"
 
 msgid "About me"
 msgstr "Обо мне"
@@ -4191,11 +4268,35 @@ msgstr "Пользователь \"%(user)s“ зарегистрирован. �
 msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
 msgstr "Пользователь \"%(user)s“ зарегистрирован. В ближайшее время мы вышлем Вам электронное письмо на Вашу электронную почту %(email)s\". Вам необходимо подтвердить адрес Вашей электронной почты, прежде чем Вы сможете зайти на сайт."
 
+#, fuzzy
+#| msgid "The unsubscribe link you have clicked does not seem to be valid!"
+msgid "The invite token you have used does not exist!"
+msgstr "Ссылка на отписку, по которой вы прошли, недействительна!"
+
+msgid "Sorry, but the invite token you have used is not active yet or not active anymore!"
+msgstr ""
+
+msgid "Token invitations applied. You are now a member of the associated projects/groups!"
+msgstr ""
+
+#, fuzzy
+#| msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
+msgid "There was an error while processing your invites. Some of your invites may not have been applied."
+msgstr "При обработке Вашего аватара произошла ошибка. Пожалуйста, убедитесь, что Вы выбрали деталь изображения достаточного размера!"
+
 msgid "You are already logged in!"
 msgstr "Вы уже вошли в систему!"
 
 msgid "Your privacy settings were saved. Welcome!"
 msgstr "Ваши настройки приватности сохранены. Добро пожаловать!"
+
+msgid "Please enter a token!"
+msgstr ""
+
+#, fuzzy
+#| msgid "The unsubscribe link you have clicked does not seem to be valid!"
+msgid "Sorry, but the invite token you have used does not seem to be valid!"
+msgstr "Ссылка на отписку, по которой вы прошли, недействительна!"
 
 msgid "The user account you were looking for does not exist! Their registration was probably already denied."
 msgstr "Аккаунта, который Вы ищете, не существует. Вероятно, в его регистрации было отказано."

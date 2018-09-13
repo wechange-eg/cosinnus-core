@@ -1261,6 +1261,71 @@ class CosinnusUnregisterdUserGroupInvite(BaseGroupMembership):
         unique_together = (('email', 'group'),)  
 
 
+@python_2_unicode_compatible
+class CosinnusGroupInviteToken(models.Model):
+    # determines on which portal the token will be accessible for users
+    portal = models.ForeignKey(CosinnusPortal, verbose_name=_('Portal'), related_name='group_invite_tokens', 
+        null=False, blank=False, default=1) # port_id 1 is created in a datamigration!
+    
+    title = models.CharField(_('Title'), max_length=250)
+    token = models.SlugField(_('Token'), 
+        help_text=_('The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. Can contain letters and numbers, but no spaces, and can be as long or short as you want.'), 
+        max_length=50,
+        null=False, blank=False)
+    created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
+    description = models.TextField(verbose_name=_('Short Description'),
+         help_text=_('Short Description (optional). Will be shown on the token page.'), blank=True)
+    
+    is_active = models.BooleanField(_('Is active'),
+        help_text='If a token is not active, users will see an error message when trying to use it.',
+        default=True)
+    # valid_until is unused for now
+    valid_until = models.DateTimeField(verbose_name=_('Valid until'), editable=False, blank=True, null=True)
+    
+    invite_groups = models.ManyToManyField(settings.COSINNUS_GROUP_OBJECT_MODEL, 
+        verbose_name=_('Invite-Groups'),
+        blank=False, null=True, related_name='+')
+    
+    
+    class Meta:
+        ordering = ('created',)
+        verbose_name = _('Cosinnus Group Invite Token')
+        verbose_name_plural = _('Cosinnus Group Invite Tokens')
+        unique_together = ('token', 'portal', )
+
+    def __init__(self, *args, **kwargs):
+        super(CosinnusGroupInviteToken, self).__init__(*args, **kwargs)
+        self._portal_id = self.portal_id
+        self._token = self.token
+        
+    def __str__(self):
+        return '<Cosinnus Token "%s" (Portal %d)' % (self.token, self.portal_id)
+    
+    def save(self, *args, **kwargs):
+        created = bool(self.pk is None)
+        self.title = clean_single_line_text(self.title)
+        self.token = clean_single_line_text(self.token)
+        
+        # token case-insensitive unique validation
+        if not self.token:
+            raise ValidationError(_('Token must not be empty.'))
+        current_portal = self.portal or CosinnusPortal.get_current()
+        other_tokens = self.__class__.objects.filter(portal=current_portal, token__iexact=self.token)
+        if not created:
+            other_tokens = other_tokens.exclude(pk=self.pk)
+        if other_tokens.count() > 0:
+            raise ValidationError(_('A token with the same code already exists! Please choose a different string for your token.'))
+        
+        # set portal to current
+        if created and not self.portal:
+            self.portal = CosinnusPortal.get_current()
+        
+        super(CosinnusGroupInviteToken, self).save(*args, **kwargs)
+        
+        self._portal_id = self.portal_id
+        self._token = self.token
+        
+
 class CosinnusPermanentRedirect(models.Model):
     """ Sets up a redirect for all URLs that match the pattern of
         http://<from-portal-url>/<from-type>/<from-slug/ where <from-type> is one of

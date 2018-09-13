@@ -23,31 +23,44 @@
     {% render_honeypot_field %}
     
     <input type="hidden" name="next" value="/">
-    
+    {% if request.GET.invite_token %}
+        <input type="hidden" name="invite_token" value="{{ request.GET.invite_token }}">
+    {% endif %}
+
     
     <!-- a box with semi transparent background -->
     <div class="content-box">
 	    {% if request.GET.join_msg == "1" or request.GET.acc_req_msg == "1" %}
-	        <div class="alert alert-warning">
-	            <i class="fa fa-heart fa-3x"></i>
-	            <h4>{% trans "Welcome to the Community!" %}</h4>
-	            <div class="v-offset-s">
-		            <p>
-		                {% if request.GET.join_msg == "1" %}
-		                    {% trans "You need a user account to join projects and become active!" %}
-		                {% else %}
-		                    {% trans "You need a user account to continue!" %}
-		                {% endif %}
-		                {% trans "Signing up is easy and fast. Just fill out these fields and you're all set!" %}
-		            </p>
-	            </div>
-	            <div class="v-offset-s">
-		            <p>
-		                {% trans "Already have an account?" %} <a href="{% url 'login' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">{% trans "Log in here" %}</a>
-		            </p>
-	            </div>
-	        </div>
-	    {% endif %}
+            <div class="alert alert-warning">
+                <i class="fa fa-heart fa-3x"></i>
+                <h4>{% trans "Welcome to the Community!" %}</h4>
+                <div class="v-offset-s">
+                    <p>
+                        {% if request.GET.join_msg == "1" %}
+                            {% trans "You need a user account to join projects and become active!" %}
+                        {% else %}
+                            {% trans "You need a user account to continue!" %}
+                        {% endif %}
+                        {% trans "Signing up is easy and fast. Just fill out these fields and you're all set!" %}
+                    </p>
+                </div>
+                <div class="v-offset-s">
+                    <p>
+                        {% trans "Already have an account?" %} <a href="{% url 'login' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">{% trans "Log in here" %}</a>
+                    </p>
+                </div>
+            </div>
+        {% endif %}
+        
+        {% if request.GET.invite_token %}
+            <div class="alert alert-success">
+                <i class="fa fa-ticket fa-3x"></i>
+                {% trans "You are signing up using this invite token:" %} <b>{{ request.GET.invite_token }}</b>
+                <br/>
+                {% trans "After signup, you will automatically become a member of the associated projects and groups." %}
+            </div>
+        {% endif %}
+        
 	    
         <h2>{% trans "Sign up" %}</h2>
     
