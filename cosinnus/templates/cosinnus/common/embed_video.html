@@ -1,0 +1,19 @@
+{% load cosinnus_tags i18n %}
+{% captureas yt_id %}{{ ""|add_uuid }}{% endcaptureas %}
+
+<div class="embed-video-frame embed-video-id-{{ yt_id }}">
+    <img class="image embed-video-placeholder" src="{% if video_base_thumbnail_url %}{{ video_base_thumbnail_url }}{% else %}https://img.youtube.com/vi/{% endif %}{{ video_id }}{% if video_base_thumbnail_url %}{{ video_base_thumbnail_url }}{% else %}/hqdefault.jpg{% endif %}"/> 
+    <div class="embed-video-overlay no-select">
+        <span>
+            <i class="fa fa-2x fa-{% if icon %}{{ icon }}{% else %}youtube{% endif %}"></i>
+            <br/>
+            {% trans "Click to activate video" %}
+        </span>
+    </div>
+</div>
+<script type="text/javascript">
+    var embed_video_html_{{ yt_id }} = "<div class='embed-container'><iframe src='{% if video_base_url %}{{ video_base_url }}{% else %}https://www.youtube.com/embed/{% endif %}{{ video_id }}' frameborder='0' mozallowfullscreen allowFullScreen></iframe></div>";
+    $('.embed-video-id-{{ yt_id }}').click(function(){
+        $('.embed-video-id-{{ yt_id }}').html(embed_video_html_{{ yt_id }});
+    });
+</script>    
