@@ -309,19 +309,24 @@
 	{% block microsite_subheader %}
 	<div class="group-microsite-subheader">
 		<div class="group-microsite-subheader-container">
-			<div class="group-microsite-subheader-item">
-				<header>{% trans "Members" %}</header>
-				<div class="group-microsite-subheader-item-value">{{ group.member_count }}</div>
-			</div>
-			<div class="group-microsite-subheader-item">
-				<header>{% trans "News posts" %}</header>
-				<div class="group-microsite-subheader-item-value">{{ object_counts.note }}</div>
-			</div>
-			
-			<div class="group-microsite-subheader-item">
-				<header>{% trans "Events" %}</header>
-				<div class="group-microsite-subheader-item-value">{{ object_counts.event }}</div>
-			</div>
+		    {% if group.member_count > 0 %}
+				<div class="group-microsite-subheader-item">
+					<header>{% trans "Members" %}</header>
+					<div class="group-microsite-subheader-item-value">{{ group.member_count }}</div>
+				</div>
+		    {% endif %}
+		    {% if object_counts.note > 0 %}
+				<div class="group-microsite-subheader-item">
+					<header>{% trans "News posts" %}</header>
+					<div class="group-microsite-subheader-item-value">{{ object_counts.note }}</div>
+				</div>
+			{% endif %}
+			{% if object_counts.event %}
+				<div class="group-microsite-subheader-item">
+					<header>{% trans "Events" %}</header>
+					<div class="group-microsite-subheader-item-value">{{ object_counts.event }}</div>
+				</div>
+			{% endif %}
 		</div>
 	</div>
 	{% endblock microsite_subheader %}

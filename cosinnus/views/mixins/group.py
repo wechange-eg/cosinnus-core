@@ -13,6 +13,7 @@ from django.http.response import Http404
 from cosinnus.utils.exceptions import CosinnusPermissionDeniedException
 from cosinnus.core.registries.apps import app_registry
 from cosinnus.utils.functions import resolve_class
+from django.contrib.auth.models import AnonymousUser
 
 
 class RequireAdminMixin(object):
@@ -296,7 +297,11 @@ class GroupObjectCountMixin(object):
                 continue
             if app in self.app_object_count_mappings:
                 model = resolve_class(self.app_object_count_mappings[app]) 
-                object_counts[app_name] = model.get_current(self.group, self.request.user).count()
+                # only for counting the objects, we use a fake superuser, so we get the actual 
+                # counts of the contents, and not the visible ones for current user
+                fake_admin = AnonymousUser()
+                fake_admin.is_superuser = True
+                object_counts[app_name] = model.get_current(self.group, fake_admin).count()
         context.update({
             'object_counts': object_counts,
         })
