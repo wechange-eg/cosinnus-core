@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-18 14:26+0200\n"
+"POT-Creation-Date: 2018-09-18 22:52+0200\n"
 "PO-Revision-Date: 2018-09-18 14:31+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
@@ -292,17 +292,23 @@ msgstr "%(sender_name)s hat gerade aus einer Idee, der du folgst, das Projekt \"
 msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
 msgstr "%(sender_name)s hat gerade das Projekt \"%(team_name)s\" aus einer Idee, der du folgst, erstellt!"
 
-msgid "Deutsch"
+msgid "Deutsch--NATIVE-LANGUAGE"
 msgstr "Deutsch"
 
-msgid "English"
+msgid "English--NATIVE-LANGUAGE"
 msgstr "English"
 
-msgid "Russian"
+msgid "Russian--NATIVE-LANGUAGE"
 msgstr "Русский"
 
-msgid "Ukrainian"
+msgid "Ukrainian--NATIVE-LANGUAGE"
 msgstr "Українська"
+
+msgid "French--NATIVE-LANGUAGE"
+msgstr "Français"
+
+msgid "Polish--NATIVE-LANGUAGE"
+msgstr "Polski"
 
 msgid "Attachments"
 msgstr "Anhänge"
@@ -4172,6 +4178,18 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten 
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "Deutsch"
+#~ msgstr "Deutsch"
+
+#~ msgid "English"
+#~ msgstr "English"
+
+#~ msgid "Russian"
+#~ msgstr "Русский"
+
+#~ msgid "Ukrainian"
+#~ msgstr "Українська"
 
 #~ msgid "Stream"
 #~ msgstr "Aktivitäten"

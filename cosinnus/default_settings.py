@@ -223,14 +223,14 @@ def compile_installed_apps(internal_apps=[]):
     return _INSTALLED_APPS
 
 LANGUAGES = [
-    ('de', _('Deutsch')),
-    ('en', _('English')),
-    ('ru', _('Russian')),
-    ('uk', _('Ukrainian')),
+    ('de', _('Deutsch--NATIVE-LANGUAGE')),
+    ('en', _('English--NATIVE-LANGUAGE')),
+    ('ru', _('Russian--NATIVE-LANGUAGE')),
+    ('uk', _('Ukrainian--NATIVE-LANGUAGE')),
     # other languages available, but not yet, or not by default
     # (enable them for your specific portals by defining `LANGUAGES` in settings.py
-    #('fr', _('French')),
-    #('pl', _('Polish')),
+    ('fr', _('French--NATIVE-LANGUAGE')),
+    ('pl', _('Polish--NATIVE-LANGUAGE')),
 ]
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

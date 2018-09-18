@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-18 14:26+0200\n"
-"PO-Revision-Date: 2018-06-30 15:08+0200\n"
+"POT-Creation-Date: 2018-09-18 22:52+0200\n"
+"PO-Revision-Date: 2018-09-14 18:21+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Language: fr\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 2.0.8\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -44,15 +44,11 @@ msgstr "Les utilisateurs suivants ont été ajoutés à ce portail :"
 msgid "Add all members to current Portal"
 msgstr "Ajouter tous les membres au portail actuel"
 
-#, fuzzy
-#| msgid "Add all members to current Portal"
 msgid "Move selected teams to current portal"
-msgstr "Ajouter tous les membres au portail actuel"
+msgstr "Déplacer les équipes sélectionnées au portail actuel"
 
-#, fuzzy
-#| msgid "Move all members to current Portal (removes all other memberships!)"
 msgid "Move selected teams to current portal and message members"
-msgstr "Déplacer tous les membres vers le portail actuel (supprime toutes les autres appartenances !)"
+msgstr "Déplacer les équipes sélectionnées au portail actuel et envoyer un message aux membres"
 
 msgid "In addition, the members were removed from all other Portals."
 msgstr "De plus, les membres ont été supprimés du groupe."
@@ -61,10 +57,10 @@ msgid "Move all members to current Portal (removes all other memberships!)"
 msgstr "Déplacer tous les membres vers le portail actuel (supprime toutes les autres appartenances !)"
 
 msgid "Move selected groups and their subprojects to current portal"
-msgstr ""
+msgstr "Déplacer les groupes sélectionnés et leurs sous-projets au portail actuel"
 
 msgid "Move selected groups and their subprojects to current portal and message members"
-msgstr ""
+msgstr "Déplacer les groupes sélectionnés et leurs sous-projets au portail actuel et envoyer un message aux membres"
 
 msgid "The following Groups were converted to Projects:"
 msgstr "Les groupes suivants ont été convertis en projets :"
@@ -224,17 +220,14 @@ msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s
 msgstr "%(sender_name)s t'a rendu administrateur de \"%(team_name)s\" sur %(portal_name)s!"
 
 msgid "Your admin status for this team was revoked"
-msgstr ""
+msgstr "Ton statut d'admin de cette équipe a été révoqué"
 
-#, fuzzy
-#| msgid "You cannot change your own admin status."
 msgid "Revoked your admin status"
-msgstr "Tu ne peux pas changer ton propre statut d'admin."
+msgstr "A changé ton statut d'admin."
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
+#, python-format
 msgid "%(sender_name)s revoked your admin status of \"%(team_name)s\" on %(portal_name)s!"
-msgstr "%(sender_name)s t'a rendu administrateur de \"%(team_name)s\" sur %(portal_name)s!"
+msgstr "%(sender_name)s a révoqué ton statut d'admin de \"%(team_name)s\" sur %(portal_name)s!"
 
 msgid "You were tagged in a post, document or other item"
 msgstr "Tu as été identifié dans un post, un document ou un autre item"
@@ -262,19 +255,16 @@ msgstr "%(sender_name)s t'a invité à rejoindre \"%(team_name)s\" sur %(portal_
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s t'a invité à rejoindre \"%(team_name)s sur %(portal_name)s !"
 
-#, fuzzy
-#| msgid "Show in other projects/groups"
 msgid "New link to the moved project/group"
-msgstr "Afficher dans d'autres projets / groupes"
+msgstr "Nouveau lien vers le projet / groupe déplacé"
 
 #, python-format
 msgid "One of your projects/groups were moved to the portal \"%(portal_name)s\"! <br/><br/> Your user account for this portal is the same as for the old one - you do not need to register a new account! <br/><br/>All of your old URLs will continue to work and redirect you to the correct page on the new portal."
-msgstr ""
+msgstr "Un de tes projets a été déplacé sur \"%(portal_name)s\" ! <br/><br/> Ton statut d'utilisateur pour ce portail est le même que pour l'ancien - tu ne dois pas créer de nouveau compte ! <br/><br/>Tes anciennes URL continueront à fonctionner et te redirigeront vers la bonne page sur le nouveau portail."
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+#, python-format
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
-msgstr "%(sender_name)s t'a invité à rejoindre \"%(team_name)s sur %(portal_name)s !"
+msgstr "\"%(team_name)s a été déplacée sur %(portal_name)s !"
 
 msgid "Created"
 msgstr "Créé"
@@ -305,17 +295,23 @@ msgstr "%(sender_name)s vient de créer le projet \"%(team_name)s\" sur %(portal
 msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
 msgstr "%(sender_name)s vient de créer le projet %(team_name)s à partir d'une idée que tu suis !"
 
-msgid "Deutsch"
+msgid "Deutsch--NATIVE-LANGUAGE"
 msgstr "Deutsch"
 
-msgid "English"
+msgid "English--NATIVE-LANGUAGE"
 msgstr "English"
 
-msgid "Russian"
+msgid "Russian--NATIVE-LANGUAGE"
 msgstr "Русский"
 
-msgid "Ukrainian"
+msgid "Ukrainian--NATIVE-LANGUAGE"
 msgstr "Українська"
+
+msgid "French--NATIVE-LANGUAGE"
+msgstr "Français"
+
+msgid "Polish--NATIVE-LANGUAGE"
+msgstr "Polski"
 
 msgid "Attachments"
 msgstr "Pièces jointes"
@@ -1203,7 +1199,7 @@ msgid "(The reported item has been deleted.)"
 msgstr "(L'item rapporté a été supprimé)"
 
 msgid "Enter the 4 capital letters in the scrambled image"
-msgstr ""
+msgstr "Ecris les 4 lettres majuscules de l'image brouillée"
 
 msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
 msgstr "Cette page est une prévisualisation des bonnes choses à venir ! Elle est en développement et de nombreuses fonctionnalités sont incomplètes, ou ne fonctionnent pas encore bien !"
@@ -1741,10 +1737,8 @@ msgstr "par"
 msgid "Do you really want to delete the invitation for \"%(title)s\"?"
 msgstr "Veux-tu vraiment supprimer l'invitation pour \"%(title)s\" ?"
 
-#, fuzzy
-#| msgid "All members"
 msgid "Message all members"
-msgstr "Tous les membres"
+msgstr "Envoyer un message à tous les membres"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
@@ -3163,13 +3157,11 @@ msgstr "Rechercher utilisateurs"
 msgid "Ordering"
 msgstr "Ordonner"
 
-#, fuzzy
-#| msgid "News"
 msgid "Newest"
-msgstr "Nouvelles"
+msgstr "Le plus récent"
 
 msgid "Relevance"
-msgstr ""
+msgstr "Pertinence"
 
 #, python-format
 msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\" with topics:"
@@ -3231,28 +3223,20 @@ msgid "Ok"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Users"
 msgid "My Users"
-msgstr "Utilisateurs"
+msgstr "Mes utilisateurs"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Events"
 msgid "My Events"
-msgstr "Evénements"
+msgstr "Mes événements"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "All users"
 msgid "All Users"
 msgstr "Tous les utilisateurs"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Events"
 msgid "All Events"
-msgstr "Evénements"
+msgstr "Tous les événements"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Event"
@@ -3263,26 +3247,20 @@ msgid "Idea"
 msgstr "Idée"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Create folder"
 msgid "Create User"
-msgstr "Créer dossier"
+msgstr "Créer utilisateur"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Create Idea"
 msgid "Create Event"
-msgstr "Créer idée"
+msgstr "Créer événement"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names, Topics and Places..."
 msgstr "Rechercher des noms, sujets et lieux..."
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Search for Names, Topics and Places..."
 msgid "Search for Names and Topics..."
-msgstr "Rechercher des noms, sujets et lieux..."
+msgstr "Rechercher des noms et des sujets..."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Where"
@@ -4210,6 +4188,18 @@ msgstr "Tu n'es pas membre de %s ! Si tu souhaites, tu peux demander à le deven
 
 msgid "Your changes have been saved."
 msgstr "Tes changements ont été enregistrés."
+
+#~ msgid "Deutsch"
+#~ msgstr "Deutsch"
+
+#~ msgid "English"
+#~ msgstr "English"
+
+#~ msgid "Russian"
+#~ msgstr "Русский"
+
+#~ msgid "Ukrainian"
+#~ msgstr "Українська"
 
 #~ msgid "French"
 #~ msgstr "Français"
