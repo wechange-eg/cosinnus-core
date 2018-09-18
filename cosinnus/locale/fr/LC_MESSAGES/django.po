@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-13 13:00+0200\n"
+"POT-Creation-Date: 2018-09-18 14:26+0200\n"
 "PO-Revision-Date: 2018-06-30 15:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1322,6 +1322,9 @@ msgstr "Erreur pendant l'intégration de la galerie Flicker"
 
 msgid "Error embedding a twitter timeline"
 msgstr "Erreur pendant l'intégration du fil Twitter"
+
+msgid "Click to activate video"
+msgstr ""
 
 msgid "Error embedding a video"
 msgstr "Erreur pendant l'intégration de la vidéo"

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-13 13:00+0200\n"
-"PO-Revision-Date: 2018-09-13 13:16+0200\n"
+"POT-Creation-Date: 2018-09-18 14:26+0200\n"
+"PO-Revision-Date: 2018-09-18 14:31+0200\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgid "Delete selected entries"
 msgstr "Ausgewählte Objekte löschen"
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
-msgstr ""
+msgstr "Ein token mit dem selben Code existiert bereits. Bitte wähle eine andere Zeichenfolge für das Token."
 
 msgid "The following Projects were converted to Groups:"
 msgstr "Die folgenden Projekte wurden in Gruppen umgewandelt:"
@@ -702,10 +702,10 @@ msgid "Team Invites for Unregistered Users"
 msgstr "Gruppen/Projekt-Einladungen für nicht registrierte Benutzer"
 
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 msgid "The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. Can contain letters and numbers, but no spaces, and can be as long or short as you want."
-msgstr ""
+msgstr "Die Token-Zeichenfolge. Es wird so angezeigt wie es ist, aber wenn ein Benutzer es eingibt, ist Groß- und Kleinschreibung egal. Das Token kann Buchstaben und Zahlen enthalten, aber keine Leerzeichen. Es kann beliebig lang oder kurz sein."
 
 msgid "Short Description (optional). Will be shown on the token page."
 msgstr "Kurze Beschreibung (optional). Wird auf der Einladungs-Token-Seite angezeigt."
@@ -1299,6 +1299,9 @@ msgstr "Fehler beim Einbetten einer Flickr Gallerie"
 
 msgid "Error embedding a twitter timeline"
 msgstr "Fehler beim Einbetten eines Twitter Feeds"
+
+msgid "Click to activate video"
+msgstr "Klicken um Video zu aktivieren"
 
 msgid "Error embedding a video"
 msgstr "Fehler beim Einbetten eines Videos"
@@ -3092,10 +3095,10 @@ msgid "Log in here"
 msgstr "Hier einloggen"
 
 msgid "You are signing up using this invite token:"
-msgstr ""
+msgstr "Du registrierst dich und benutzt dieses Einladungs-Token:"
 
 msgid "After signup, you will automatically become a member of the associated projects and groups."
-msgstr ""
+msgstr "Nach dem Registrieren wirst du automatisch Mitglied in den dazugehörigen Projekten und Gruppen."
 
 msgid "Email address"
 msgstr "E-mail Adresse"
@@ -3440,7 +3443,7 @@ msgid "Message Project"
 msgstr "Projekt anschreiben"
 
 msgid "Quick Join"
-msgstr ""
+msgstr "Schnellstart"
 
 msgid "Using this token, you can automatically join the following projects and groups"
 msgstr "Mit diesem Einladungs-Token wirst du automatisch Mitglied in den folgenden Projekten und Gruppen"

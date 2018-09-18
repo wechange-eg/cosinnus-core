@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-13 13:00+0200\n"
+"POT-Creation-Date: 2018-09-18 14:26+0200\n"
 "PO-Revision-Date: 2018-06-23 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1326,6 +1326,9 @@ msgid "Error embedding a Flickr gallery"
 msgstr ""
 
 msgid "Error embedding a twitter timeline"
+msgstr ""
+
+msgid "Click to activate video"
 msgstr ""
 
 msgid "Error embedding a video"
