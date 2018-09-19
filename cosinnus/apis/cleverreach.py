@@ -55,7 +55,7 @@ def signup_user_to_cleverreach_group(user):
                   'access_token': settings.COSINNUS_CLEVERREACH_ACCESS_TOKEN,
                }
         req = requests.get(get_url)
-    except Exception, e:
+    except Exception as e:
         logger.error('Error when trying to signup a newly registered user to CleverReach (Exception)', 
                      extra={'exception': force_text(e), 'language': language, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id, 'user_email': user_email, 'base_url': cleverreach_base_url})
         return
@@ -93,7 +93,7 @@ def signup_user_to_cleverreach_group(user):
         data = data=json.dumps(data)
         req = requests.post(post_url, data)
         
-    except Exception, e:
+    except Exception as e:
         logger.error('Error when trying to signup a newly registered user to CleverReach (Exception)', 
                      extra={'exception': force_text(e), 'language': language, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id, 'user_email': user_email, 'base_url': cleverreach_base_url})
         return
@@ -115,7 +115,7 @@ def signup_user_to_cleverreach_group(user):
                       'access_token': settings.COSINNUS_CLEVERREACH_ACCESS_TOKEN,
                    }
             req = requests.put(put_url)
-        except Exception, e:
+        except Exception as e:
             extra = {'exception': force_text(e), 'language': language, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id, 'user_email': user_email, 'base_url': cleverreach_base_url}
             logger.error('Error when trying to signup a newly registered user to CleverReach (Exception during set-inactive)', extra=extra)
             # we do not return here, as cleverreach may change their set-deactive endpoint to throw an error on already inactive users
@@ -144,7 +144,7 @@ def signup_user_to_cleverreach_group(user):
             data = data=json.dumps(data)
             req = requests.post(post_url, data)
         
-        except Exception, e:
+        except Exception as e:
             extra = {'exception': force_text(e), 'language': language, 'cleverreach_form_id': cleverreach_form_id, 'cleverreach_group_id': cleverreach_group_id, 'user_email': user_email, 'base_url': cleverreach_base_url}
             logger.error('Error when trying to signup a newly registered user to CleverReach (Exception during Form)', extra=extra)
             return

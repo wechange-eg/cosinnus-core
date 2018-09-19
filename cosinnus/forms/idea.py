@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
@@ -12,7 +13,7 @@ from cosinnus.models.idea import CosinnusIdea
 
 class _CosinnusIdeaForm(AsssignPortalMixin, forms.ModelForm):
     
-    class Meta:
+    class Meta(object):
         model = CosinnusIdea
         fields = ['title', 'description', 'image', 'public',]
 

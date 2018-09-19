@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from __future__ import division
 
+from builtins import str
+from builtins import object
 import csv
 import codecs
 from django.core.exceptions import ImproperlyConfigured
@@ -43,7 +46,7 @@ def import_from_settings(name=None, path_to_class=None):
     return klass
 
 
-class UTF8Recoder:
+class UTF8Recoder(object):
     """
     Iterator that reads an encoded stream and reencodes the input to UTF-8
     """
@@ -53,12 +56,12 @@ class UTF8Recoder:
     def __iter__(self):
         return self
 
-    def next(self):
+    def __next__(self):
         # always use utf-8 to encode, no matter which encoding we decoded while reading
         return self.reader.next().encode("utf-8")
     
 
-class UnicodeReader:
+class UnicodeReader(object):
     """
     A CSV reader which will iterate over lines in the CSV file "f",
     which is encoded in the given encoding.
@@ -71,18 +74,18 @@ class UnicodeReader:
         self._encoding = encoding
         self.reader = csv.reader(f, dialect=dialect, delimiter=delimiter, quotechar=b'"', **kwds)
 
-    def next(self):
+    def __next__(self):
         error = True
         while error:
             try:
-                row = self.reader.next()
+                row = next(self.reader)
                 error = False
-            except Exception, e:
+            except Exception as e:
                 if not 'line contains NULL byte' in force_text(e):
                     raise
             
         # utf-8 must be used here because we use a UTF8Reader
-        return [unicode(s, "utf-8") for s in row]
+        return [str(s, "utf-8") for s in row]
 
     def __iter__(self):
         return self
@@ -131,7 +134,7 @@ class GroupCSVImporter(Thread):
         self.rows = self.rows[1:]
         column_map = dict([(value.strip(), index) for index, value in enumerate(header)])
         # sanity check if all mapped aliases appear in CSV header
-        missing_aliases = [alias for alias in self.ALIAS_MAP.values() if alias not in column_map.keys()]
+        missing_aliases = [alias for alias in list(self.ALIAS_MAP.values()) if alias not in list(column_map.keys())]
         if missing_aliases:
             raise ImproperlyConfigured('The GroupCSVImporter was configured to access CSV columns [%s], but they were not found in the CSV header row!' % ', '.join(missing_aliases))
         return column_map
@@ -160,7 +163,7 @@ class GroupCSVImporter(Thread):
             val = val.strip().replace('\t', '').replace('\n', '').replace('\r', '')
         return val
     
-    def next(self):
+    def __next__(self):
         """ Advances to the next CSV item.
             @return: True if there was at least another row in the CSV rows, False if none are left after advancing. """
         self.item_index += 1
@@ -223,7 +226,7 @@ class GroupCSVImporter(Thread):
             self.set_is_running(True)
             logger.info('Import Utils: Import has started.')
             self._do_import()
-        except Exception, e:
+        except Exception as e:
             if getattr(settings, 'DEBUG_LOCAL', False):
                 raise
             logger.error('An unexpected error in outer import happened! Exception was: %s' % force_text(e), extra={'exception': e, 'trace': traceback.format_exc()})

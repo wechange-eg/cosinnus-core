@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import next
 import six
 
 from django.utils.importlib import import_module
@@ -73,7 +74,7 @@ class GroupModelRegistry(DictBaseRegistry):
         return self.get(self.group_type_index[type_index], None)
     
     def get_default_group_key(self):
-        return self.__iter__().next()
+        return next(self.__iter__())
     
     def get(self, url_key, default=None):
         plural_url_key, url_name_prefix, model, form_model = super(GroupModelRegistry, self).get(url_key, (None, None, default, None))

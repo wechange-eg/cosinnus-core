@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from functools import partial
 
 from django.contrib.auth import get_user_model
@@ -19,7 +20,7 @@ __all__ = ('BaseUserProfileSerializer', 'UserProfileSerializer',
 
 class BaseUserProfileSerializer(serializers.ModelSerializer):
 
-    class Meta:
+    class Meta(object):
         fields = ('id', )
 
 
@@ -65,7 +66,7 @@ class UserSimpleSerializer(serializers.ModelSerializer):
     
     profile = _UserProfileSerializer(source='cosinnus_profile', many=False, read_only=True)
 
-    class Meta:
+    class Meta(object):
         model = get_user_model()
         fields = ('id', 'username', 'first_name', 'last_name', 'profile', )
 

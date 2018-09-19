@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -64,7 +65,7 @@ class SplitMultiLangTabsMixin(object):
 
 class PortalRootPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
     
-    class Meta:
+    class Meta(object):
         verbose_name = _('Portal Root Page')
         
     # this template should never be visible, but if it is, the user will see an explanation
@@ -99,7 +100,7 @@ class PortalRootPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
 
 class BaseDashboardPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
     
-    class Meta:
+    class Meta(object):
         abstract = True
         
     # settings fields
@@ -159,7 +160,7 @@ class BaseDashboardPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
 
 class DashboardSingleColumnPage(BaseDashboardPage):
     
-    class Meta:
+    class Meta(object):
         verbose_name = _('1-Column Dashboard Page')
     
     content1 = BetterRichTextField(verbose_name=_('Content'), blank=True)
@@ -184,7 +185,7 @@ class DashboardSingleColumnPage(BaseDashboardPage):
 
 class DashboardDoubleColumnPage(BaseDashboardPage):
     
-    class Meta:
+    class Meta(object):
         verbose_name = _('2-Column Dashboard Page')
     
     content1 = BetterRichTextField(verbose_name=_('Content (left column)'), blank=True)
@@ -212,7 +213,7 @@ class DashboardDoubleColumnPage(BaseDashboardPage):
     
 class DashboardTripleColumnPage(BaseDashboardPage):
     
-    class Meta:
+    class Meta(object):
         verbose_name = _('3-Column Dashboard Page')
     
     content1 = BetterRichTextField(verbose_name=_('Content (left column)'), blank=True)
@@ -244,7 +245,7 @@ class DashboardTripleColumnPage(BaseDashboardPage):
     
 class BaseSimplePage(SplitMultiLangTabsMixin, TranslationMixin, Page):
     
-    class Meta:
+    class Meta(object):
         abstract = True
     
     # Database fields
@@ -268,7 +269,7 @@ class BaseSimplePage(SplitMultiLangTabsMixin, TranslationMixin, Page):
         
 class SimpleOnePage(BaseSimplePage):
     
-    class Meta:
+    class Meta(object):
         verbose_name = _('Simple One-Column Page')
     
     template = 'cosinnus/wagtail/simple_one_page.html'
@@ -276,7 +277,7 @@ class SimpleOnePage(BaseSimplePage):
 
 class SimpleTwoPage(BaseSimplePage):
     
-    class Meta:
+    class Meta(object):
         verbose_name = _('Simple Page with Left Navigation')
     
     # Database fields
@@ -309,7 +310,7 @@ class SimpleTwoPage(BaseSimplePage):
 class BaseStreamDashboardPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
     """ Same as the deprecated ``BaseDashboardPage``, only using mostly StreamFields """
     
-    class Meta:
+    class Meta(object):
         abstract = True
     
     # settings fields
@@ -369,7 +370,7 @@ class BaseStreamDashboardPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
 
 class StreamDashboardSingleColumnPage(BaseStreamDashboardPage):
     
-    class Meta:
+    class Meta(object):
         verbose_name = _('1-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)')
     
     content1 = StreamField(STREAMFIELD_OLD_BLOCKS, verbose_name=_('Content'), blank=True)
@@ -394,7 +395,7 @@ class StreamDashboardSingleColumnPage(BaseStreamDashboardPage):
 
 class StreamDashboardDoubleColumnPage(BaseStreamDashboardPage):
     
-    class Meta:
+    class Meta(object):
         verbose_name = _('2-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)')
     
     content1 = StreamField(STREAMFIELD_OLD_BLOCKS, verbose_name=_('Content (left column)'), blank=True)
@@ -422,7 +423,7 @@ class StreamDashboardDoubleColumnPage(BaseStreamDashboardPage):
     
 class StreamDashboardTripleColumnPage(BaseStreamDashboardPage):
     
-    class Meta:
+    class Meta(object):
         verbose_name = _('3-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)')
     
     content1 = StreamField(STREAMFIELD_OLD_BLOCKS, verbose_name=_('Content (left column)'), blank=True)
@@ -455,7 +456,7 @@ class StreamDashboardTripleColumnPage(BaseStreamDashboardPage):
    
 class BaseStreamSimplePage(SplitMultiLangTabsMixin, TranslationMixin, Page):
     
-    class Meta:
+    class Meta(object):
         abstract = True
     
     # Database fields
@@ -479,7 +480,7 @@ class BaseStreamSimplePage(SplitMultiLangTabsMixin, TranslationMixin, Page):
         
 class StreamSimpleOnePage(BaseStreamSimplePage):
     
-    class Meta:
+    class Meta(object):
         verbose_name = _('Simple One-Column Page (Modular)')
     
     template = 'cosinnus/wagtail/simple_one_page.html'
@@ -487,7 +488,7 @@ class StreamSimpleOnePage(BaseStreamSimplePage):
 
 class StreamSimpleTwoPage(BaseStreamSimplePage):
     
-    class Meta:
+    class Meta(object):
         verbose_name = _('Simple Page with Left Navigation (Modular)')
     
     # Database fields
@@ -513,7 +514,7 @@ class StreamSimpleTwoPage(BaseStreamSimplePage):
 class StreamStartPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
     """ A simple well-structured StartPage using StreamFields """
     
-    class Meta:
+    class Meta(object):
         verbose_name = _('Start Page (Modular)')
     
     # settings fields

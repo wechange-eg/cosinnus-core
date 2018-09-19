@@ -3,6 +3,7 @@ Created on 30.07.2014
 
 @author: Sascha Narr
 '''
+from builtins import str
 from django_filters.views import FilterMixin
 from django_filters.filterset import FilterSet
 from cosinnus.forms.filters import DropdownChoiceWidget
@@ -40,7 +41,7 @@ class CosinnusFilterMixin(FilterMixin):
         active_filters = []
         
         """ Add [(filter_param, chosen_value_str, label, type<'sort'|'filter'>)] for displaying current filters """
-        for param, value in self.filter.data.items():
+        for param, value in list(self.filter.data.items()):
             if value and param in self.filter.filters:
                 if not 'choices' in self.filter.filters[param].extra:
                     active_filters.append((param, value, self.filter.filters[param].label, 'filter'))
@@ -72,9 +73,9 @@ class CosinnusFilterSet(FilterSet):
         """ Add a reference to the form to the form's widgets """
         self.group = group
         super(CosinnusFilterSet, self).__init__(data, queryset, prefix, strict)
-        for name, filter_obj in self.filters.items():
+        for name, filter_obj in list(self.filters.items()):
             filter_obj.group = group
-        for field in self.form.fields.values():
+        for field in list(self.form.fields.values()):
             field.widget.form_instance = self.form
     
     def get_order_by(self, order_value):
@@ -97,7 +98,7 @@ class CosinnusFilterSet(FilterSet):
                 # add asc and desc field names
                 # use the filter's label if provided
                 choices = []
-                for f, fltr in self.filters.items():
+                for f, fltr in list(self.filters.items()):
                     choices.extend([
                         (fltr.name or f, fltr.label or capfirst(f)),
                         ("-%s" % (fltr.name or f), _('%s (descending)' % (fltr.label or capfirst(f))))

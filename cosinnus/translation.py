@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from wagtail_modeltranslation.translator import TranslationOptions
 from wagtail_modeltranslation.decorators import register
-from models.wagtail_models import DashboardTripleColumnPage, DashboardSingleColumnPage,\
+from cosinnus.models.wagtail_models import DashboardTripleColumnPage, DashboardSingleColumnPage,\
     DashboardDoubleColumnPage, SimpleOnePage, SimpleTwoPage, PortalRootPage
 from cosinnus.models.wagtail_models import StreamDashboardSingleColumnPage,\
     StreamDashboardDoubleColumnPage, StreamDashboardTripleColumnPage,\

@@ -1,3 +1,4 @@
+from builtins import object
 from rest_framework import serializers
 
 from cosinnus.models.group import CosinnusGroup
@@ -28,7 +29,7 @@ class CosinnusGroupSerializer(serializers.HyperlinkedModelSerializer):
             })
         return locations
 
-    class Meta:
+    class Meta(object):
         model = CosinnusGroup
         fields = ('name', 'slug', 'description', 'description_long', 'contact_info',
                   'avatar', 'website', 'parent', 'related_groups', 'topics', 'tags', 'locations')

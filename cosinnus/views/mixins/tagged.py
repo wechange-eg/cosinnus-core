@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from collections import defaultdict
 from itertools import chain
 from os.path import basename, dirname
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
@@ -93,10 +94,10 @@ class HierarchyTreeMixin(object):
         """
         # saves all container paths that have been created
         container_dict = {}
-        root = urllib.unquote(root)
+        root = urllib.parse.unquote(root)
 
         def get_or_create_container(path, container_object, special_name=None):
-            if path in container_dict.keys():
+            if path in list(container_dict.keys()):
                 container_entry = container_dict[path]
                 # attach the container's object if we were passed one
                 if container_object is not None:
@@ -118,7 +119,7 @@ class HierarchyTreeMixin(object):
             parent_path = dirname(container['path'][:-1])
             if parent_path[-1] != '/':
                 parent_path += '/'
-            if parent_path not in container_dict.keys():
+            if parent_path not in list(container_dict.keys()):
                 parent_container = get_or_create_container(parent_path, None)
             else:
                 parent_container = container_dict[parent_path]
@@ -173,7 +174,7 @@ class HierarchyPathMixin(object):
         # if a slug is given in the URL, we check if its a container, and if so,
         # let the user create an object under that path
         # if it is an object, we let the user create a new object on the same level
-        if 'slug' in self.kwargs.keys():
+        if 'slug' in list(self.kwargs.keys()):
             container = self.get_queryset().get(group=self.group, slug=self.kwargs.get('slug'))
             initial.update({'path': container.path})
         return initial

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from builtins import str
+from builtins import object
 from django.conf.urls import url
 from django.core.urlresolvers import reverse
 from django.utils.html import format_html
@@ -138,13 +140,13 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
                         messages.error(request, dotrans_('The CSV file you supplied is not formatted in the proper encoding (%s)!' % encoding))
                     except EmptyOrUnreadableCSVContent:
                         messages.error(request, dotrans_('The CSV file you supplied was empty or not formatted in the proper encoding (%(encoding)s) or with a wrong delimiter (%(delimiter)s)!' % {'encoding':encoding, 'delimiter':delimiter}))
-                    except UnexpectedNumberOfColumns, e:
+                    except UnexpectedNumberOfColumns as e:
                         messages.error(request, dotrans_('One or more rows in the CSV file you supplied contained less columns than expected (%s)! Either the file was read in a wrong encoding, or the file was using a different format than the server expected.' % str(e)))
                     except ImportAlreadyRunning:
                         messages.error(request, dotrans_('Another import is currently running! Please wait till that one is finished.'))
-                    except ImproperlyConfigured, e:
+                    except ImproperlyConfigured as e:
                         messages.error(request, dotrans_('A CSV configuration error occured, has the CSV format changed?. Message was: %s') % str(e))
-                    except Exception, e:
+                    except Exception as e:
                         messages.error(request, dotrans_('There was an unexpected error when reading the CSV file! Please make sure the file is properly formatted. If the problem persists, please contact an administrator!'))
                         logger.warn('A CSV file uploaded for import encountered an unexpected error! The exception was: "%s"' % str(e), extra={'encoding_used': encoding, 'delimiter_used': delimiter})
                         if getattr(settings, 'DEBUG_LOCAL', False):

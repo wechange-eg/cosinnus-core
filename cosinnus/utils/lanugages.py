@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from django.utils.translation import ugettext_lazy as _, get_language
 from django.core.exceptions import FieldDoesNotExist
 

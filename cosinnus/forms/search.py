@@ -135,7 +135,7 @@ class TaggableModelSearchForm(SearchForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request')
         super(TaggableModelSearchForm, self).__init__(*args, **kwargs)
-        self.fields['models'].choices = MODEL_ALIASES.items()
+        self.fields['models'].choices = list(MODEL_ALIASES.items())
 
     def get_models(self):
         """ Return the models of types user has selected to filter search on """
@@ -146,9 +146,9 @@ class TaggableModelSearchForm(SearchForm):
             # all models available for search
             model_aliases_query = self.cleaned_data.get('models', [])
             if not model_aliases_query:
-                model_aliases_query = MODEL_ALIASES.keys()
+                model_aliases_query = list(MODEL_ALIASES.keys())
             for model_alias in model_aliases_query:
-                if model_alias in MODEL_ALIASES.keys():
+                if model_alias in list(MODEL_ALIASES.keys()):
                     model_string = MODEL_ALIASES[model_alias]
                     if model_string == '<userprofile>':
                         model = get_user_profile_model()

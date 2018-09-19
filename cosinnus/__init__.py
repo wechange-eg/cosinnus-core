@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 
+from builtins import str
 VERSION = (0, 7, 0, 'alpha', 0)
 
 default_app_config = 'cosinnus.apps.CosinnusAppConfig'

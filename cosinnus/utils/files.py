@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 import hashlib
 import os
-import StringIO
+from io import StringIO
 import tempfile
 import zipfile
 
@@ -92,7 +92,7 @@ def create_zip_from_files(file_list):
         @return: A StringIO instance containing the zip in memory """
         
     # Open StringIO to grab in-memory ZIP contents
-    stringio = StringIO.StringIO()
+    stringio = StringIO()
     # The zip compressor
     zip_file = zipfile.ZipFile(stringio, "w", zipfile.ZIP_DEFLATED)
     # add files to zip with custom path

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import map
+from builtins import object
 from collections import OrderedDict
 import os
 import re
@@ -259,7 +261,7 @@ class CosinnusGroupManager(models.Manager):
                     cache.set_many(groups, settings.COSINNUS_GROUP_CACHE_TIMEOUT)
                 
                 # sort by a good sorting function that acknowldges umlauts, etc, case insensitive
-                group_list = groups.values()
+                group_list = list(groups.values())
                 group_list.sort(cmp=locale.strcoll, key=lambda x: x.name)
                 return group_list
             
@@ -274,7 +276,7 @@ class CosinnusGroupManager(models.Manager):
             else:
                 # We request multiple groups
                 cached_pks = self.get_pks(portal_id=portal_id)
-                slugs = filter(None, (cached_pks.get(id, []) for id in pks))
+                slugs = [_f for _f in (cached_pks.get(id, []) for id in pks) if _f]
                 if slugs:
                     return self.get_cached(slugs=slugs, portal_id=portal_id)
                 return []  # We rely on the slug and id maps being up to date
@@ -378,7 +380,6 @@ class CosinnusGroupMembershipManager(models.Manager):
             cache.set(key, uids, settings.COSINNUS_GROUP_MEMBERSHIP_CACHE_TIMEOUT)
             """ TODO: FIXME: bc of some bug, this cache key is often reset/cleared and read in again on each query!! 
                             The cache on this key seems not to get cleared from code, so no clue what's going on here. """
-            #print ">>   bad           X", uids, key
         return uids
 
     def _get_users_for_multiple_groups(self, group_ids, cache_key, status):
@@ -458,7 +459,7 @@ class CosinnusPortal(models.Model):
     else:
         _CUSTOM_CSS_FILENAME = 'cosinnus_custom_portal_%s_styles.css'
     
-    class Meta:
+    class Meta(object):
         app_label = 'cosinnus'
         verbose_name = _('Portal')
         verbose_name_plural = _('Portals')
@@ -726,7 +727,7 @@ class CosinnusBaseGroup(IndexingUtilsMixin, FlickrEmbedFieldMixin, VideoEmbedFie
     
     _portal_id = None
     
-    class Meta:
+    class Meta(object):
         abstract = True
         app_label = 'cosinnus'
         ordering = ('name',)
@@ -1126,7 +1127,7 @@ class RelatedGroups(models.Model):
     """ Need to have this through model for CosinnusGroup.related_groups so django doesn't mix up model names
         in apps that have swapped out the CosinnusGroup model """
         
-    class Meta:
+    class Meta(object):
         unique_together = (('from_group', 'to_group'),)  
         
     from_group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, on_delete=models.CASCADE, related_name='+')
@@ -1147,7 +1148,7 @@ class BaseGroupMembership(models.Model):
     
     CACHE_KEY_MODEL = None
 
-    class Meta:
+    class Meta(object):
         abstract = True
         app_label = 'cosinnus'
         unique_together = (('user', 'group'),)  
@@ -1254,7 +1255,7 @@ class CosinnusUnregisterdUserGroupInvite(BaseGroupMembership):
     
     CACHE_KEY_MODEL = 'CosinnusUnregisterdUserGroupInvite'
     
-    class Meta:
+    class Meta(object):
         app_label = 'cosinnus'
         verbose_name = _('Team Invite for Unregistered User')
         verbose_name_plural = _('Team Invites for Unregistered Users')  
@@ -1287,7 +1288,7 @@ class CosinnusGroupInviteToken(models.Model):
         blank=False, null=True, related_name='+')
     
     
-    class Meta:
+    class Meta(object):
         ordering = ('created',)
         verbose_name = _('Cosinnus Group Invite Token')
         verbose_name_plural = _('Cosinnus Group Invite Tokens')
@@ -1493,7 +1494,7 @@ class CosinnusLocation(models.Model):
         related_name='locations',
     )
     
-    class Meta:
+    class Meta(object):
         verbose_name = _('CosinnusLocation')
         verbose_name_plural = _('CosinnusLocations')
         
@@ -1528,7 +1529,7 @@ class CosinnusGroupGalleryImage(ThumbnailableImageMixin, models.Model):
     
     image_attr_name = 'image'
     
-    class Meta:
+    class Meta(object):
         verbose_name = _('CosinnusGroup GalleryImage')
         verbose_name_plural = _('CosinnusGroup GalleryImages')
         
@@ -1549,7 +1550,7 @@ class CosinnusGroupCallToActionButton(models.Model):
         related_name='call_to_action_buttons',
     )
     
-    class Meta:
+    class Meta(object):
         verbose_name = _('CosinnusGroup CallToAction Button')
         verbose_name_plural = _('CosinnusGroup CallToAction Buttons')
 

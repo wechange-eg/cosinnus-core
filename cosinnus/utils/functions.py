@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from builtins import str
 from django.utils.importlib import import_module
 from uuid import uuid1
 from django.core.exceptions import ImproperlyConfigured
@@ -113,7 +114,7 @@ def select_related_chain(qs, *args):
     """ Monkey-patch for django < 1.7  to be able to chain multiple calls
     to qs.select_related() without losing the args of the first calls. """
     def _flatten(dic, strin, chain):
-        for key, val in dic.items():
+        for key, val in list(dic.items()):
             if not val:
                 chain.append(strin and strin + '__' + key or key)
             else:

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from collections import OrderedDict
 import os
 import re
@@ -58,7 +59,7 @@ class CosinnusProjectManager(CosinnusGroupManager):
 @python_2_unicode_compatible
 class CosinnusProject(get_cosinnus_group_model()):
     
-    class Meta:
+    class Meta(object):
         """ For some reason, the Meta isn't inherited automatically from CosinnusGroup here """
         proxy = True
         app_label = 'cosinnus'
@@ -91,7 +92,7 @@ class CosinnusSocietyManager(CosinnusGroupManager):
 @python_2_unicode_compatible
 class CosinnusSociety(get_cosinnus_group_model()):
     
-    class Meta:
+    class Meta(object):
         """ For some reason, the Meta isn't inherited automatically from CosinnusGroup here """
         proxy = True        
         app_label = 'cosinnus'

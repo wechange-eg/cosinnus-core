@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import str
 from django.db.models import Q
 
 from cosinnus.models.group import CosinnusPortal, CosinnusPortalMembership,\

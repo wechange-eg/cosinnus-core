@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from collections import OrderedDict
 from copy import copy
 
@@ -44,7 +45,7 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
         widget=Select2Widget(select2_options={'allowClear': False})) # the widget currently ignores the allowClear setting!
     # persons = will be defined in __init__
     
-    class Meta:
+    class Meta(object):
         model = TagObject
         exclude = ('group', 'likes', 'likers', )
         widgets = {
@@ -75,7 +76,7 @@ class BaseTagObjectForm(GroupKwargModelFormMixin, UserKwargModelFormMixin,
         # if no media tag data was supplied the object was created directly and not through a frontend form
         # we then manually inherit the group's media_tag topics by adding them to the data 
         # (usually they would have been added into the form's initial data)
-        if self.data and not any([key.startswith('media_tag-') for key in self.data.keys()]) and self.group and self.group.media_tag and self.group.media_tag.topics:
+        if self.data and not any([key.startswith('media_tag-') for key in list(self.data.keys())]) and self.group and self.group.media_tag and self.group.media_tag.topics:
             self.data._mutable = True
             self.data.setlist('media_tag-topics', self.group.media_tag.topics.split(','))
         
@@ -195,7 +196,7 @@ def get_tag_object_form():
 
 class BaseTaggableObjectForm(forms.ModelForm):
     
-    class Meta:
+    class Meta(object):
         exclude = ('media_tag', 'group', 'slug', 'creator', 'created')
     
 
@@ -239,7 +240,7 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
                     
             
         # attach any extra form classes
-        for form_name, form_class in base_extra_forms.items():
+        for form_name, form_class in list(base_extra_forms.items()):
             base_forms[form_name] = form_class
             
         
@@ -272,7 +273,7 @@ def get_form(TaggableObjectFormClass, attachable=True, extra_forms={}):
                 obj.save()
                 
                 # save extra forms
-                for extra_form_name in self.base_extra_forms.keys():
+                for extra_form_name in list(self.base_extra_forms.keys()):
                     instances[extra_form_name].save()
                 # Some forms might contain m2m data. We need to save them
                 # explicitly since we called save() with commit=False before.

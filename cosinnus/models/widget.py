@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
@@ -30,7 +31,7 @@ class WidgetConfig(models.Model):
     group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, null=True, blank=True, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.CASCADE)
 
-    class Meta:
+    class Meta(object):
         app_label = 'cosinnus'
         # ordering = ('position',)
         verbose_name = _('Widget configuration')
@@ -60,7 +61,7 @@ class WidgetConfig(models.Model):
     def get(self, key, default=get_default):
         try:
             return self[key]
-        except KeyError, err:
+        except KeyError as err:
             if default == self.get_default:
                 raise err
             return default
@@ -95,7 +96,7 @@ class WidgetConfigItem(models.Model):
     config_key = models.CharField(_('key'), max_length=20, db_index=True)
     config_value = models.TextField(_('value'), default='')  # VARCHAR and TEXT don't mattern in PostgreSQL
 
-    class Meta:
+    class Meta(object):
         app_label = 'cosinnus'
         unique_together = ('config', 'config_key')
         verbose_name = _('Widget configuration item')

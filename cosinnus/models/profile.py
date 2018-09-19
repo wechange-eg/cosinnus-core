@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 import six
 import django
 
@@ -121,7 +122,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
                     
     _settings = None                
     
-    class Meta:
+    class Meta(object):
         abstract = True
         
     def __init__(self, *args, **kwargs):
@@ -277,7 +278,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
 
 class UserProfile(BaseUserProfile):
     
-    class Meta:
+    class Meta(object):
         app_label = 'cosinnus'
         swappable = 'COSINNUS_USER_PROFILE_MODEL'
     
@@ -393,7 +394,7 @@ class GlobalUserNotificationSetting(models.Model):
     
     objects = GlobalUserNotificationSettingManager()
     
-    class Meta:
+    class Meta(object):
         unique_together = ('user', 'portal', )
     
     def save(self, *args, **kwargs):

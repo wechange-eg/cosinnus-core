@@ -1,3 +1,4 @@
+from builtins import object
 from datetime import date
 
 from django.utils import six

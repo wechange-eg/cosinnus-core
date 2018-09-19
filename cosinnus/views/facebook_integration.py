@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from django.utils.translation import ugettext_lazy as _
 from django.http.response import HttpResponseNotAllowed, \
     HttpResponseForbidden, HttpResponseBadRequest, JsonResponse,\
     HttpResponseServerError
 
 import json
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import logging
 from datetime import datetime, timedelta
 import time
@@ -15,9 +16,9 @@ import time
 from cosinnus.conf import settings
 from django.core.exceptions import ImproperlyConfigured, PermissionDenied
 from django.utils.encoding import force_text
-import urlparse
+import urllib.parse
 import requests
-import urllib
+import urllib.request, urllib.parse, urllib.error
 from cosinnus.utils.urls import iriToUri, group_aware_reverse
 from django.shortcuts import redirect, get_object_or_404
 from django.core.urlresolvers import reverse
@@ -76,7 +77,7 @@ class FacebookIntegrationUserProfileMixin(object):
             del self.settings['fb_expiresAfterUTCSeconds']
         if 'fb_username' in self.settings:
             del self.settings['fb_username']
-        for key in self.settings.keys():
+        for key in list(self.settings.keys()):
             if key.startswith('fb_page_'):
                 del self.settings[key]
         self.save()
@@ -120,7 +121,7 @@ class FacebookIntegrationViewMixin(object):
                     'link': urls[0],
                 })
                 
-            post_url = post_url + '?' + urllib.urlencode(data)
+            post_url = post_url + '?' + urllib.parse.urlencode(data)
             post_url = iriToUri(post_url)
             
             req = requests.post(post_url, data=data, verify=False)
@@ -131,7 +132,7 @@ class FacebookIntegrationViewMixin(object):
             response = req.json()
             return response.get('id', '')
             
-        except Exception, e:
+        except Exception as e:
             logger.warning('Unexpected exception when posting to facebook timeline!', extra={
                            'user-email': userprofile.user.email, 'user_fbID': user_id, 'exception': force_text(e), 'alternate-post-target': fb_post_target_id})
         return None
@@ -237,8 +238,8 @@ class FacebookIntegrationGroupFormMixin(object):
                           'group_id': facebook_id,
                           'access_token': access_token,
                        }
-                response_info = urllib2.urlopen(location_url)
-            except Exception, e:
+                response_info = urllib.request.urlopen(location_url)
+            except Exception as e:
                 logger.warn('Error when trying to retrieve FB group info from Facebook:', extra={'exception': force_text(e), 'url': location_url, 'group_id': facebook_id})
                 had_error = True
             if not had_error and not response_info.code == 200:
@@ -297,8 +298,8 @@ def obtain_facebook_page_access_token_for_user(group, page_id, user):
             % {
                'access_token': access_token,
             }
-        response_info = urllib2.urlopen(location_url)
-    except Exception, e:
+        response_info = urllib.request.urlopen(location_url)
+    except Exception as e:
         logger.warn('Error when trying to retrieve FB page access-token from Facebook:', extra={'exception': force_text(e), 'url': location_url, 'page_id': page_id})
         had_error = True
     if not had_error and not response_info.code == 200:
@@ -350,8 +351,8 @@ def save_auth_tokens(request):
                   'app-secret': settings.COSINNUS_FACEBOOK_INTEGRATION_APP_SECRET,
                   'short-lived-token':authResponse['accessToken'],
                }
-        response = urllib2.urlopen(location_url)
-    except Exception, e:
+        response = urllib.request.urlopen(location_url)
+    except Exception as e:
         logger.error('Error when trying to retrieve long-lived-access-token from Facebook:', extra={'exception': force_text(e), 'url': location_url})
         return HttpResponseServerError('Facebook request could not be completed (1).')
     
@@ -379,8 +380,8 @@ def save_auth_tokens(request):
                   'user_id': user_id,
                   'access_token': access_token,
                }
-        response_info = urllib2.urlopen(location_url)
-    except Exception, e:
+        response_info = urllib.request.urlopen(location_url)
+    except Exception as e:
         logger.warn('Error when trying to retrieve user info from Facebook:', extra={'exception': force_text(e), 'url': location_url})
         fb_username = 'error'
         
@@ -429,7 +430,7 @@ def remove_facebook_association(request):
         data = {
             'access_token': access_token,
         }
-        post_url = post_url + '?' + urllib.urlencode(data)
+        post_url = post_url + '?' + urllib.parse.urlencode(data)
         post_url = iriToUri(post_url)
         
         req = requests.delete(post_url, data=data, verify=False)

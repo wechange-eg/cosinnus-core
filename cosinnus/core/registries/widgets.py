@@ -56,7 +56,7 @@ class WidgetRegistry(DictBaseRegistry):
             for app_name in self._unresolved:
                 self._resolve(app_name)
         for app_name, widgets in six.iteritems(self._storage):
-            yield (app_name, widgets.keys())
+            yield (app_name, list(widgets.keys()))
 
 widget_registry = WidgetRegistry()
 

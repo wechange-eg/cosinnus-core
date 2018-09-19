@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import str
+from builtins import object
 import re
 
 from django import forms
@@ -94,7 +96,7 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
     
     related_groups = forms.ModelMultipleChoiceField(queryset=get_cosinnus_group_model().objects.filter(portal_id=CosinnusPortal.get_current().id))
     
-    class Meta:
+    class Meta(object):
         fields = ['name', 'public', 'description', 'description_long', 'contact_info', 
                         'avatar', 'wallpaper', 'website', 'video', 'twitter_username',
                          'twitter_widget_id', 'flickr_url', 'deactivated_apps', 'microsite_public_apps',
@@ -115,7 +117,7 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
              )
         
         # use select2 widgets for m2m fields
-        for field in self.fields.values():
+        for field in list(self.fields.values()):
             if type(field.widget) is SelectMultiple:
                 field.widget = Select2MultipleWidget(choices=field.choices)
     
@@ -192,7 +194,7 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
                 
 class _CosinnusProjectForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
     
-    class Meta:
+    class Meta(object):
         fields = CosinnusBaseGroupForm.Meta.fields + ['parent',]
         model = CosinnusProject
     
@@ -203,14 +205,14 @@ class _CosinnusProjectForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBa
 
 class _CosinnusSocietyForm(CleanAppSettingsMixin, AsssignPortalMixin, CosinnusBaseGroupForm):
     
-    class Meta:
+    class Meta(object):
         fields = CosinnusBaseGroupForm.Meta.fields
         model = CosinnusSociety
         
 
 class MembershipForm(GroupKwargModelFormMixin, forms.ModelForm):
 
-    class Meta:
+    class Meta(object):
         fields = ('user', 'status',)
         model = CosinnusGroupMembership
 
@@ -229,7 +231,7 @@ class MembershipForm(GroupKwargModelFormMixin, forms.ModelForm):
 
 class CosinnusLocationForm(forms.ModelForm):
 
-    class Meta:
+    class Meta(object):
         model = CosinnusLocation
         fields = ('group', 'location', 'location_lat', 'location_lon', )
         widgets = {
@@ -240,7 +242,7 @@ class CosinnusLocationForm(forms.ModelForm):
         
 class CosinnusGroupGalleryImageForm(forms.ModelForm):
 
-    class Meta:
+    class Meta(object):
         model = CosinnusGroupGalleryImage
         fields = ('group', 'image', )
         
@@ -249,7 +251,7 @@ class CosinnusGroupCallToActionButtonForm(forms.ModelForm):
     
     url = forms.URLField(widget=forms.TextInput, required=False)
     
-    class Meta:
+    class Meta(object):
         model = CosinnusGroupCallToActionButton
         fields = ('group', 'label', 'url', )
         

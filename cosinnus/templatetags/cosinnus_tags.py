@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from __future__ import print_function
+from builtins import str
 from collections import defaultdict
 
 import six
@@ -245,7 +247,7 @@ def cosinnus_group_url_path(context, group=None):
 def _appsmenu_apps_sort_key(app_name):
     try:
         return settings.COSINNUS_APPS_MENU_ORDER.index(app_name)
-    except Exception, e:
+    except Exception as e:
         return 999
 
 @register.simple_tag(takes_context=True)
@@ -275,7 +277,7 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
     if 'group' in context:
         group = context['group']
         apps = []
-        for app, name, label in app_registry.items():
+        for app, name, label in list(app_registry.items()):
             if app in settings.COSINNUS_HIDE_APPS:
                 continue
             #print ">>", "TODO: tags: filter for self.group.id for deactivated apps"
@@ -912,8 +914,8 @@ def debugthis(obj):
 def printthis(obj):
     """ Debug-inspects a template element """
     if settings.DEBUG:
-        print ">> printing"
-        print obj
+        print(">> printing")
+        print(obj)
     return obj
 
 

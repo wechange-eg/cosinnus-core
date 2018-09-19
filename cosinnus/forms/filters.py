@@ -14,7 +14,7 @@ from django.contrib.auth.models import User
 try:
     from urllib.parse import urlencode
 except:
-    from urllib import urlencode  # noqa
+    from urllib.parse import urlencode  # noqa
 
 from django.utils.timezone import now
 from datetime import timedelta

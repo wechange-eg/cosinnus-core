@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from builtins import object
 import logging
 
 from django.contrib import messages

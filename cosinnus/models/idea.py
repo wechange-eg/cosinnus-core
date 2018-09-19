@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from collections import OrderedDict
 import locale
 
@@ -96,7 +97,7 @@ class IdeaManager(models.Manager):
                 cache.set_many(ideas, settings.COSINNUS_IDEA_CACHE_TIMEOUT)
             
             # sort by a good sorting function that acknowldges umlauts, etc, case insensitive
-            idea_list = ideas.values()
+            idea_list = list(ideas.values())
             idea_list.sort(cmp=locale.strcoll, key=lambda x: x.name)
             return idea_list
             
@@ -106,7 +107,7 @@ class IdeaManager(models.Manager):
             else:
                 # We request multiple ideas
                 cached_pks = self.get_pks(portal_id=portal_id)
-                slugs = filter(None, (cached_pks.get(pk, []) for pk in pks))
+                slugs = [_f for _f in (cached_pks.get(pk, []) for pk in pks) if _f]
                 if slugs:
                     return self.get_cached(slugs=slugs, portal_id=portal_id)
                 return []  # We rely on the slug and id maps being up to date
@@ -213,7 +214,7 @@ class CosinnusIdea(IndexingUtilsMixin, models.Model):
     objects = IdeaManager()
     
     
-    class Meta:
+    class Meta(object):
         ordering = ('created',)
         verbose_name = _('Cosinnus Idea')
         verbose_name_plural = _('Cosinnus Ideas')

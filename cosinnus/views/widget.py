@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 import six
 
 from django.contrib.auth.decorators import login_required
@@ -239,7 +240,7 @@ class DashboardWidgetMixin(object):
             except ValueError:
                 return 999
         
-        sort_fields = sorted(list(set(map(lambda widget:widget.config.sort_field, widgets))))
+        sort_fields = sorted(list(set([widget.config.sort_field for widget in widgets])))
         grouped_widgets = [[widget for widget in widgets if widget.config.sort_field == rank] for rank in sort_fields]
         
         sorted_widgets = []
@@ -352,7 +353,7 @@ def save_widget_config(request):
     
     import json
     widgets = json.loads(request.POST.get('widget_data'))
-    for widget_id, props in widgets.items():
+    for widget_id, props in list(widgets.items()):
         if 'priority' in props:
             try:
                 wc = WidgetConfig.objects.get(id=int(widget_id))

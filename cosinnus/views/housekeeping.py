@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from __future__ import print_function
+from builtins import str
+from builtins import range
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
     CosinnusPermanentRedirect, CosinnusPortal, MEMBERSHIP_MEMBER,\
     MEMBERSHIP_PENDING, CosinnusPortalMembership, CosinnusLocation
@@ -14,7 +17,7 @@ from django.core.cache import cache
 from django.conf import settings
 from cosinnus.conf import settings as cosinnus_settings
 import json
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 from django.utils.encoding import force_text
 from uuid import uuid4
 import pickle
@@ -119,7 +122,7 @@ def recreate_all_group_widgets(request=None, verbose=False):
         create_initial_group_widgets(None, group)
         groups_ids.append(str(group.id))
         if verbose:
-            print ">>> recreated widget config for group id", group.id
+            print((">>> recreated widget config for group id", group.id))
     
     return HttpResponse("The following groups were updated:<br/><br/>" + "<br/>".join(groups_ids))
 
@@ -228,7 +231,7 @@ def user_statistics(request=None):
     class Found(Exception): pass
     for id, lat, lon in user_locs:
         location_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f" % (lat, lon)
-        location_data = json.load(urllib2.urlopen(location_url))
+        location_data = json.load(urllib.request.urlopen(location_url))
         try:
             for r in location_data['results']:
                 for c in r['address_components']:
@@ -263,7 +266,7 @@ def create_map_test_entities(request=None, count=1):
     usernum = get_user_model().objects.all().count()
     eventnum = Event.objects.all().count()
     
-    print ">>> creating", count, "Projects, Groups, Events and Users"
+    print((">>> creating", count, "Projects, Groups, Events and Users"))
     for i in range(count):
         projnum += 1
         groupnum += 1
@@ -294,7 +297,7 @@ def create_map_test_entities(request=None, count=1):
             mt.location_lon = random.uniform(-160, 160)
             mt.save() 
             
-        print "> Created", i+1, "/", count, "Projects, Groups, Events and Users"
+        print(("> Created", i+1, "/", count, "Projects, Groups, Events and Users"))
         
     return HttpResponse("Done. Created %d Projects, Groups, Events and Users" % count)
 

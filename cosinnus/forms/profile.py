@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from django import forms
 
 from awesome_avatar import forms as avatar_forms
@@ -17,7 +18,7 @@ class _UserProfileForm(forms.ModelForm):
     website = forms.URLField(widget=forms.TextInput, required=False)
     language = forms.CharField(required=False)
     
-    class Meta:
+    class Meta(object):
         model = get_user_profile_model()
         fields = model.get_optional_fieldnames()
 

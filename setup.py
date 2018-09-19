@@ -100,7 +100,7 @@ setup(
         'requests-oauthlib==0.8.0',
         'six==1.8.0',
         'sqlparse==0.1.10',
-        'wsgiref==0.1.2',
+        #########'wsgiref==0.1.2',
         'python-dateutil==2.4.1',
         'python-memcached',
         

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.db import models
@@ -37,7 +38,7 @@ class CosinnusReportedObject(models.Model):
         auto_now_add=True)
     
 
-    class Meta:
+    class Meta(object):
         app_label = 'cosinnus'
         ordering = ('content_type',)
         verbose_name = _('Reported object')
@@ -84,7 +85,7 @@ class CosinnusReportedObject(models.Model):
 class CosinnusSentEmailLog(models.Model):
     """ Logs an email that was sent out """
     
-    class Meta:
+    class Meta(object):
         ordering = ('-date',)
         
     email = models.EmailField(_('Email'))
@@ -97,7 +98,7 @@ class CosinnusSentEmailLog(models.Model):
 class CosinnusFailedLoginRateLimitLog(models.Model):
     """ Logs an incured rate limit after n (default: 5) failed attempts on a user email login. """
     
-    class Meta:
+    class Meta(object):
         ordering = ('-date',)
         
     username = models.CharField(_('Email'), max_length=255)

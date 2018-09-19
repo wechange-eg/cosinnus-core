@@ -69,7 +69,7 @@ class SwitchLanguageView(RedirectView):
     def get(self, request, *args, **kwargs):
         language = kwargs.pop('language', None)
         
-        if not language or language not in dict(settings.LANGUAGES).keys():
+        if not language or language not in list(dict(settings.LANGUAGES).keys()):
             messages.error(request, _('The language "%s" is not supported' % language))
         else:
             request.session[LANGUAGE_SESSION_KEY] = language

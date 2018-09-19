@@ -11,6 +11,7 @@ https://github.com/Markush2010/django-dynamic-forms/tree/f306619e12
 
 from __future__ import unicode_literals
 
+from builtins import object
 from collections import OrderedDict
 import six
 import threading
