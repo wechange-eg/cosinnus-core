@@ -20,7 +20,7 @@ from cosinnus.models.tagged import LikeObject
 from cosinnus.utils.files import get_idea_image_filename, image_thumbnail_url, \
     image_thumbnail
 from cosinnus.utils.functions import clean_single_line_text, \
-    unique_aware_slugify
+    unique_aware_slugify, sort_key_strcoll_attr
 from cosinnus.utils.urls import get_domain_for_portal
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from django.contrib.contenttypes.generic import GenericRelation
@@ -98,7 +98,7 @@ class IdeaManager(models.Manager):
             
             # sort by a good sorting function that acknowldges umlauts, etc, case insensitive
             idea_list = list(ideas.values())
-            idea_list.sort(cmp=locale.strcoll, key=lambda x: x.name)
+            idea_list = sorted(idea_list, key=sort_key_strcoll_attr('name'))
             return idea_list
             
         elif pks is not None:

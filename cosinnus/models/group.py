@@ -23,7 +23,7 @@ from taggit.managers import TaggableManager
 from cosinnus.conf import settings
 from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.utils.functions import unique_aware_slugify,\
-    clean_single_line_text
+    clean_single_line_text, sort_key_strcoll_attr
 from cosinnus.utils.files import get_group_avatar_filename,\
     get_portal_background_image_filename, get_group_wallpaper_filename,\
     get_cosinnus_media_file_folder, get_group_gallery_image_filename,\
@@ -262,7 +262,7 @@ class CosinnusGroupManager(models.Manager):
                 
                 # sort by a good sorting function that acknowldges umlauts, etc, case insensitive
                 group_list = list(groups.values())
-                group_list.sort(cmp=locale.strcoll, key=lambda x: x.name)
+                group_list = sorted(group_list, key=sort_key_strcoll_attr('name'))
                 return group_list
             
         elif pks is not None:

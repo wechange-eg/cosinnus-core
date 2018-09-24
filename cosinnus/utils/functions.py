@@ -11,6 +11,8 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 import six
 import numpy
+import locale
+import functools
 
 
 def unique_aware_slugify(item, slug_source, slug_field, 
@@ -248,3 +250,19 @@ def normalize_within_stddev(member, mean, stddev, stddev_factor=1.0):
     local_min = mean - (stddev*stddev_factor)
     place = (member-local_min)/(local_max-local_min)
     return max(0.0, (min(place, 1.0)))
+
+
+def sort_key_strcoll_attr(attr_name):
+    """ Returns a function usable as key for the py3 sorted() function,
+        that will sort objects using strcoll() on their given attributes. """
+    def strcoll_cmp_attr(obj1, obj2):
+        return locale.strcoll(getattr(obj1, attr_name), getattr(obj2, attr_name))
+    return functools.cmp_to_key(strcoll_cmp_attr)
+
+def sort_key_strcoll_lambda(lambda_func):
+    """ Returns a function usable as key for the py3 sorted() function,
+        that will sort objects using strcoll() the attribute accessed by a given lambda function. """
+    def strcoll_cmp_attr(obj1, obj2):
+        return locale.strcoll(lambda_func(obj1), lambda_func(obj2))
+    return functools.cmp_to_key(strcoll_cmp_attr)
+
