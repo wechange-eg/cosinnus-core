@@ -280,7 +280,6 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
         for app, name, label in list(app_registry.items()):
             if app in settings.COSINNUS_HIDE_APPS:
                 continue
-            #print ">>", "TODO: tags: filter for self.group.id for deactivated apps"
             if group.is_app_deactivated(app):
                 continue
             
