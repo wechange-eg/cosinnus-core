@@ -106,7 +106,6 @@ setup(
         
         # wagtail
         'wagtail==1.2',
-        'wagtail-modeltranslation==0.3.2',
         'django-overextends==0.4.0',
         'django-compressor==1.5',
         'django-modelcluster==1.0',
@@ -120,12 +119,14 @@ setup(
         'django-bootstrap3',
     ],
     dependency_links=[
-        'git+git://github.com/Markush2010/django-bootstrap3.git@develop#egg=django-bootstrap3',
-        'git+http://git.sinnwerkstatt.com/mh/django-multiform.git@master#egg=django-multiform',
-        'git+git://github.com/sinnwerkstatt/django-select2.git@master#egg=Django-Select2',
         'git+git://github.com/sinnwerkstatt/django-awesome-avatar.git@master#egg=django-awesome-avatar',
+        'git+git://github.com/Markush2010/django-bootstrap3.git@46a84044e89937ebe6128b2a8c560f141741a70e#egg=django-bootstrap3',
+        'git+git://github.com/sinnwerkstatt/django-multiform.git@master#egg=django-multiform',
         'git+git://github.com/saschan/django-djajax.git@master#egg=django-djajax',
+        'git+git://github.com/sinnwerkstatt/django-select2.git@master#egg=Django-Select2',
         'git+git://github.com/sinnwerkstatt/django-osm-field.git@master#egg=django-osm-field',
+        'git+git://github.com/wechange-eg/pydkim.git@master#egg=pydkim',
+        'git+git://github.com/saschan/wagtail-modeltranslation.git@translatable-streamfields#egg=wagtail-modeltranslation',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
