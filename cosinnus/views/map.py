@@ -116,6 +116,8 @@ class TileView(MapView):
                 return _('My Ideas')
             else:
                 return _('Ideas')
+        if self.types == ['people']:
+            return _('People')
         
         return None
     
