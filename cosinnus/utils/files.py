@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 import hashlib
 import os
-from io import StringIO
+from io import BytesIO
 import tempfile
 import zipfile
 
@@ -86,15 +86,15 @@ def create_zip_file(files):
 
 
 def create_zip_from_files(file_list):
-    """ Will create an in-memory (StringIO) Zip-File from files on the disk. 
+    """ Will create an in-memory (BytesIO) Zip-File from files on the disk. 
         @param file_list: A list of string tuples: [(local_file_path, relative_zip_path)]
             Example: [('/tmp/file1.txt', 'file1.txt'), ('/tmp/sub/file2.txt', 'sub/file2.txt')]
-        @return: A StringIO instance containing the zip in memory """
+        @return: A BytesIO instance containing the zip in memory """
         
-    # Open StringIO to grab in-memory ZIP contents
-    stringio = StringIO()
+    # Open BytesIO to grab in-memory ZIP contents
+    io = BytesIO()
     # The zip compressor
-    zip_file = zipfile.ZipFile(stringio, "w", zipfile.ZIP_DEFLATED)
+    zip_file = zipfile.ZipFile(io, "w", zipfile.ZIP_DEFLATED)
     # add files to zip with custom path
     for file_path, zip_path in file_list:
         if path.exists(file_path):
@@ -102,7 +102,7 @@ def create_zip_from_files(file_list):
     # Must close zip for all contents to be written
     zip_file.close()
     
-    return stringio
+    return io
 
 def append_string_to_filename(file_path, string_to_append):
     """ Appends a string to *the base file name*, before the file extension, of a given file with path """

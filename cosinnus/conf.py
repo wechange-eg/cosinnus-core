@@ -168,7 +168,7 @@ class CosinnusConf(AppConf):
     
     # CSV Import settings
     CSV_IMPORT_DEFAULT_ENCODING = 'utf-8'
-    CSV_IMPORT_DEFAULT_DELIMITER = b','
+    CSV_IMPORT_DEFAULT_DELIMITER = ','
     CSV_IMPORT_DEFAULT_EXPECTED_COLUMNS = None
     
     # the class with the implementation for importing CosinnusGroups used for the CSV import

@@ -129,7 +129,7 @@ if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:
                     import_type = 'groups' if csv_file_groups else 'users'
                     
                     encoding = request.POST.get('encoding', "utf-8")
-                    delimiter = request.POST.get('delimiter', b',')
+                    delimiter = request.POST.get('delimiter', ',')
                     delimiter = str(delimiter)[0]
                     
                     try:

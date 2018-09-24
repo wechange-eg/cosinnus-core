@@ -11,6 +11,7 @@ from django.db import transaction
 from django.template.loader import render_to_string
 from threading import Thread
 import six
+import io
 
 import logging
 from django.conf import settings
@@ -46,21 +47,6 @@ def import_from_settings(name=None, path_to_class=None):
     return klass
 
 
-class UTF8Recoder(object):
-    """
-    Iterator that reads an encoded stream and reencodes the input to UTF-8
-    """
-    def __init__(self, f, encoding):
-        self.reader = codecs.getreader(encoding)(f)
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        # always use utf-8 to encode, no matter which encoding we decoded while reading
-        return self.reader.next().encode("utf-8")
-    
-
 class UnicodeReader(object):
     """
     A CSV reader which will iterate over lines in the CSV file "f",
@@ -69,10 +55,11 @@ class UnicodeReader(object):
     
     _encoding = None
 
-    def __init__(self, f, dialect=csv.excel, encoding="utf-8", delimiter=b',', **kwds):
-        f = UTF8Recoder(f, encoding)
+    def __init__(self, f, dialect=csv.excel, encoding="utf-8", delimiter=',', **kwds):
         self._encoding = encoding
-        self.reader = csv.reader(f, dialect=dialect, delimiter=delimiter, quotechar=b'"', **kwds)
+        f.seek(0)
+        io_file = io.StringIO(f.read().decode(encoding))
+        self.reader = csv.reader(io_file, dialect=dialect, delimiter=delimiter, quotechar='"', **kwds)
 
     def __next__(self):
         error = True
@@ -85,7 +72,7 @@ class UnicodeReader(object):
                     raise
             
         # utf-8 must be used here because we use a UTF8Reader
-        return [str(s, "utf-8") for s in row]
+        return [s for s in row]
 
     def __iter__(self):
         return self
@@ -270,7 +257,7 @@ class EmptyOrUnreadableCSVContent(Exception): pass
 class UnexpectedNumberOfColumns(Exception): pass 
 class ImportAlreadyRunning(Exception): pass
 
-def csv_import_projects(csv_file, request=None, encoding="utf-8", delimiter=b',', import_type=None):
+def csv_import_projects(csv_file, request=None, encoding="utf-8", delimiter=',', import_type=None):
     """ Imports CosinnusGroups (projects and societies) from a CSV file (InMemory or opened).
         
         @param expected_columns: if set to an integer, each row must have this number of columns,
