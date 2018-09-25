@@ -14,7 +14,7 @@ class SimpleDateWidget(SplitDateTimeWidget):
 
 class SimpleStatisticsForm(forms.Form):
     
-    from_date = forms.DateTimeField(widget=SplitHiddenDateWidget)
-    to_date = forms.DateTimeField(widget=SplitHiddenDateWidget)
+    from_date = forms.SplitDateTimeField(widget=SplitHiddenDateWidget)
+    to_date = forms.SplitDateTimeField(widget=SplitHiddenDateWidget)
     
     

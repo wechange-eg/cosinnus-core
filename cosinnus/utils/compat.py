@@ -17,11 +17,6 @@ except ImportError:
     from django.db.transaction import commit_on_success as atomic  # noqa
 
 
-try:  # pragma: no cover
-    from collections import OrderedDict
-except ImportError:  # pragma: no cover
-    warnings.warn("Cosinnus doesn't fully support Python 2.6.",
-                  DeprecationWarning, 2)
-    from django.utils.datastructures import SortedDict as OrderedDict  # noqa
+from collections import OrderedDict
 
 __all__ = ('atomic', 'OrderedDict', )

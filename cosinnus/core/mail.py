@@ -4,7 +4,7 @@ from __future__ import print_function
 
 from django.core.mail import get_connection, EmailMessage
 from django.template.loader import render_to_string
-from django.contrib.sites.models import get_current_site
+from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
 
