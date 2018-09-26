@@ -94,7 +94,7 @@ class BaseTagObject(models.Model):
         related_name='+', null=True, on_delete=models.CASCADE)
 
     persons = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
-        null=True, verbose_name=_('Persons'), related_name='+')
+        verbose_name=_('Persons'), related_name='+')
     
     tags = TaggableManager(_('Tags'), blank=True)
 
@@ -133,12 +133,12 @@ class BaseTagObject(models.Model):
         null=True, max_length=255)  # We cannot add choices here as this would 
                                     # fail validation
     text_topics = models.ManyToManyField(CosinnusTopicCategory, verbose_name=_('Text Topics'), 
-        related_name='tagged_objects', blank=True, null=True)
+        related_name='tagged_objects', blank=True)
     
                                     
     likes = models.PositiveSmallIntegerField(_('Likes'), blank=True, default=0)
     likers = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
-        null=True, related_name='likes+')  # no reverse relation on model
+        related_name='likes+')  # no reverse relation on model
     
     def save(self, *args, **kwargs):
         # update like count
@@ -236,7 +236,7 @@ class AttachableObjectModel(models.Model):
     class Meta(object):
         abstract = True
     
-    attached_objects = models.ManyToManyField(AttachedObject, blank=True, null=True)
+    attached_objects = models.ManyToManyField(AttachedObject, blank=True)
     
     @cached_property
     def attached_image(self):

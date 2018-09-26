@@ -102,7 +102,7 @@ class CosinnusFailedLoginRateLimitLog(models.Model):
         ordering = ('-date',)
         
     username = models.CharField(_('Email'), max_length=255)
-    ip = models.IPAddressField(blank=True, null=True)
+    ip = models.GenericIPAddressField(blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True, editable=False)
     portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='+', 
         null=True, blank=True, default=None)

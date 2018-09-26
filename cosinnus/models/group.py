@@ -53,7 +53,7 @@ from jsonfield.fields import JSONField
 from django.templatetags.static import static
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from cosinnus.core.registries.attached_objects import attached_object_registry
-from django.db.models.loading import get_model
+from django.apps import apps
 
 logger = logging.getLogger('cosinnus')
 
@@ -481,7 +481,7 @@ class CosinnusPortal(models.Model):
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
         related_name='cosinnus_portals', through='CosinnusPortalMembership')
     
-    site = models.ForeignKey(Site, unique=True, verbose_name=_('Associated Site'))
+    site = models.OneToOneField(Site, verbose_name=_('Associated Site'))
     
     protocol = models.CharField(_('Http/Https Protocol (overrides settings)'), max_length=8,
                         blank=True, null=True)
@@ -717,7 +717,7 @@ class CosinnusBaseGroup(IndexingUtilsMixin, FlickrEmbedFieldMixin, VideoEmbedFie
         through_fields=('to_group', 'from_group'),
         verbose_name=_('Related Teams'),
         symmetrical=False,
-        blank=True, null=True, related_name='+')
+        blank=True, related_name='+')
     
     # this indicates that objects of this model are in some way always visible by registered users
     # on the platform, no matter their visibility settings, and thus subject to moderation 
@@ -949,7 +949,7 @@ class CosinnusBaseGroup(IndexingUtilsMixin, FlickrEmbedFieldMixin, VideoEmbedFie
         base_taggable_objects = []
         for full_model_name in attached_object_registry:
             app_label, model_name = full_model_name.split('.')
-            model = get_model(app_label, model_name)
+            model = apps.get_model(app_label, model_name)
             if issubclass(model, BaseTaggableObjectModel):
                 instances = model.objects.filter(group=self)
                 base_taggable_objects.extend(list(instances))
@@ -1285,7 +1285,7 @@ class CosinnusGroupInviteToken(models.Model):
     
     invite_groups = models.ManyToManyField(settings.COSINNUS_GROUP_OBJECT_MODEL, 
         verbose_name=_('Invite-Groups'),
-        blank=False, null=True, related_name='+')
+        blank=False, related_name='+')
     
     
     class Meta(object):

@@ -16,7 +16,7 @@ from cosinnus.utils.functions import ensure_list_of_ints,\
 
 from django.db.models import Count
 from django.core.cache import cache
-from django.db.models.loading import get_model
+from django.apps import apps
 import numpy
 from cosinnus.utils.group import get_cosinnus_group_model
 import six
@@ -265,7 +265,7 @@ class DocumentBoostMixin(object):
         
         global _CosinnusPortal
         if _CosinnusPortal is None: 
-            _CosinnusPortal = get_model('cosinnus', 'CosinnusPortal')
+            _CosinnusPortal = apps.get_model('cosinnus', 'CosinnusPortal')
         portal_id = _CosinnusPortal.get_current().id
         
         INDEX_POP_COUNT_MEAN = 'cosinnus/core/portal/%d/users/%s/%s/mean' % (portal_id, self.__class__.__name__, count_property)

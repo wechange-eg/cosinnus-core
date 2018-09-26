@@ -23,7 +23,7 @@ from cosinnus.utils.functions import clean_single_line_text, \
     unique_aware_slugify, sort_key_strcoll_attr
 from cosinnus.utils.urls import get_domain_for_portal
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
-from django.contrib.contenttypes.generic import GenericRelation
+from django.contrib.contenttypes.fields import GenericRelation
 from cosinnus import cosinnus_notifications
 from annoying.functions import get_object_or_None
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -203,7 +203,7 @@ class CosinnusIdea(IndexingUtilsMixin, models.Model):
     
     created_groups = models.ManyToManyField(settings.COSINNUS_GROUP_OBJECT_MODEL, 
         verbose_name=_('Created Projects'),
-        blank=True, null=True, related_name='+')
+        blank=True, related_name='+')
     
     # this indicates that objects of this model are in some way always visible by registered users
     # on the platform, no matter their visibility settings, and thus subject to moderation 

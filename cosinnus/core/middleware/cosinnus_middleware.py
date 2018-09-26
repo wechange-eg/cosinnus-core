@@ -9,7 +9,7 @@ from django.contrib.auth.views import logout
 from django.core.exceptions import MiddlewareNotUsed
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.db.models import signals
-from django.db.models.loading import get_model
+from django.apps import apps
 from django.http.response import HttpResponseRedirect
 from django.template.response import TemplateResponse
 from django.utils.encoding import force_text
@@ -28,7 +28,7 @@ _CosinnusPortal = None
 def CosinnusPortal():
     global _CosinnusPortal
     if _CosinnusPortal is None: 
-        _CosinnusPortal = get_model('cosinnus', 'CosinnusPortal')
+        _CosinnusPortal = apps.get_model('cosinnus', 'CosinnusPortal')
     return _CosinnusPortal
 
 # delegate import to avoid cyclic dependencies
@@ -37,7 +37,7 @@ _CosinnusPermanentRedirect = None
 def CosinnusPermanentRedirect():
     global _CosinnusPermanentRedirect
     if _CosinnusPermanentRedirect is None: 
-        _CosinnusPermanentRedirect = get_model('cosinnus', 'CosinnusPermanentRedirect')
+        _CosinnusPermanentRedirect = apps.get_model('cosinnus', 'CosinnusPermanentRedirect')
     return _CosinnusPermanentRedirect
 
 

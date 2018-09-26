@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from builtins import str
 from builtins import object
-from django.db.models.loading import get_model
+from django.apps import apps
 from django.views.generic.edit import CreateView, UpdateView
 
 from cosinnus.core.registries import attached_object_registry
@@ -105,7 +105,7 @@ class AttachableObjectSelect2View(RequireReadMixin, Select2View):
             aliases = '||'.join(aliases)
             
             app_label, model_name = attach_model_id.split('.')
-            attach_model_class = get_model(app_label, model_name)
+            attach_model_class = apps.get_model(app_label, model_name)
             if BaseHierarchicalTaggableObjectModel in attach_model_class.__bases__:
                 queryset = attach_model_class._default_manager.filter(group__slug=self.kwargs.get('group', None), is_container=False)
             else:

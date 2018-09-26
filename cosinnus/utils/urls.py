@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.utils.importlib import import_module
-from django.db.models.loading import get_model
+from django.apps import apps
 
 from cosinnus.conf import settings
 from django.core.cache import cache
@@ -53,7 +53,7 @@ def group_aware_reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=N
     else:
         global _CosinnusPortal
         if _CosinnusPortal is None: 
-            _CosinnusPortal = get_model('cosinnus', 'CosinnusPortal')
+            _CosinnusPortal = apps.get_model('cosinnus', 'CosinnusPortal')
         domain = get_domain_for_portal(_CosinnusPortal.get_current())
     
     return ('' if skip_domain else domain) + reverse(viewname, urlconf, args, kwargs, prefix, current_app)

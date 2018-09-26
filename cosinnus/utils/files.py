@@ -12,7 +12,7 @@ from os import path
 from cosinnus.conf import settings
 from uuid import uuid4
 from django.utils.encoding import force_text
-from django.db.models.loading import get_model
+from django.apps import apps
 
 from easy_thumbnails.files import get_thumbnailer
 from easy_thumbnails.exceptions import InvalidImageFormatError
@@ -23,7 +23,7 @@ _CosinnusPortal = None
 def CosinnusPortal():
     global _CosinnusPortal
     if _CosinnusPortal is None: 
-        _CosinnusPortal = get_model('cosinnus', 'CosinnusPortal')
+        _CosinnusPortal = apps.get_model('cosinnus', 'CosinnusPortal')
     return _CosinnusPortal
 
 def get_cosinnus_all_portals_folder():
