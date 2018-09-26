@@ -34,6 +34,7 @@ class URLRegistry(BaseRegistry):
                     url(r'', include('cosinnus.urls_api'))
                 ]
             self.is_ready = True
+            print(">>>>>>>>>>>>>>>>>>>>> REDDAYYYS")
 
     def register(self, app, root_patterns=None, group_patterns=None,
                  api_patterns=None, url_app_name_override=None):
