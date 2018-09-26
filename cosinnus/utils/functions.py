@@ -256,7 +256,7 @@ def sort_key_strcoll_attr(attr_name):
     """ Returns a function usable as key for the py3 sorted() function,
         that will sort objects using strcoll() on their given attributes. """
     def strcoll_cmp_attr(obj1, obj2):
-        return locale.strcoll(getattr(obj1, attr_name), getattr(obj2, attr_name))
+        return locale.strcoll(getattr(obj1, attr_name, ''), getattr(obj2, attr_name, ''))
     return functools.cmp_to_key(strcoll_cmp_attr)
 
 def sort_key_strcoll_lambda(lambda_func):
