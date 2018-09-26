@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 from django.db import migrations, models
 import taggit.managers
 import cosinnus.models.group
-import wagtail_modeltranslation.models
 import osm_field.validators
 import jsonfield.fields
 import osm_field.fields
@@ -258,7 +257,7 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': '2-Column Dashboard Page',
             },
-            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, wagtail_modeltranslation.models.TranslationMixin, 'wagtailcore.page'),
+            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, 'wagtailcore.page'),
         ),
         migrations.CreateModel(
             name='DashboardSingleColumnPage',
@@ -304,7 +303,7 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': '1-Column Dashboard Page',
             },
-            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, wagtail_modeltranslation.models.TranslationMixin, 'wagtailcore.page'),
+            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, 'wagtailcore.page'),
         ),
         migrations.CreateModel(
             name='DashboardTripleColumnPage',
@@ -360,7 +359,7 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': '3-Column Dashboard Page',
             },
-            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, wagtail_modeltranslation.models.TranslationMixin, 'wagtailcore.page'),
+            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, 'wagtailcore.page'),
         ),
         migrations.CreateModel(
             name='PortalRootPage',
@@ -380,7 +379,7 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': 'Portal Root Page',
             },
-            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, wagtail_modeltranslation.models.TranslationMixin, 'wagtailcore.page'),
+            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, 'wagtailcore.page'),
         ),
         migrations.CreateModel(
             name='SimpleOnePage',
@@ -399,7 +398,7 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': 'Simple One-Column Page',
             },
-            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, wagtail_modeltranslation.models.TranslationMixin, 'wagtailcore.page'),
+            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, 'wagtailcore.page'),
         ),
         migrations.CreateModel(
             name='SimpleTwoPage',
@@ -423,7 +422,7 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': 'Simple Page with Left Navigation',
             },
-            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, wagtail_modeltranslation.models.TranslationMixin, 'wagtailcore.page'),
+            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, 'wagtailcore.page'),
         ),
         migrations.CreateModel(
             name='WidgetConfig',

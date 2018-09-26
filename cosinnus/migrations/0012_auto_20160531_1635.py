@@ -6,7 +6,6 @@ import wagtail.wagtailimages.blocks
 import wagtail.wagtailcore.fields
 import wagtail.wagtailcore.blocks
 import wagtail.wagtailembeds.blocks
-import wagtail_modeltranslation.models
 import cosinnus.models.wagtail_models
 import django.db.models.deletion
 import cosinnus.models.wagtail_blocks
@@ -61,7 +60,7 @@ class Migration(migrations.Migration):
             options={
                 'abstract': False,
             },
-            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, wagtail_modeltranslation.models.TranslationMixin, 'wagtailcore.page'),
+            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, 'wagtailcore.page'),
         ),
         migrations.AlterField(
             model_name='streamdashboarddoublecolumnpage',

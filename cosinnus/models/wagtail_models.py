@@ -14,9 +14,6 @@ from wagtail.wagtailcore.fields import RichTextField, RichTextArea
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailsearch import index
 from wagtail.wagtailadmin.edit_handlers import ObjectList
-from wagtail.wagtailadmin.views.pages import PAGE_EDIT_HANDLERS
-
-from wagtail_modeltranslation.models import TranslationMixin
 
 from django.shortcuts import redirect
 from cosinnus.utils.urls import get_non_cms_root_url
@@ -55,7 +52,8 @@ class SplitMultiLangTabsMixin(object):
         return object_lists 
     
     def __init__(self, *args, **kwargs):
-        super(SplitMultiLangTabsMixin, self).__init__(*args, **kwargs)
+        from wagtail.wagtailadmin.views.pages import PAGE_EDIT_HANDLERS
+        super(self).__init__(*args, **kwargs)
         if self.__class__ in PAGE_EDIT_HANDLERS and not getattr(PAGE_EDIT_HANDLERS[self.__class__], '_MULTILANG_TABS_PATCHED', False):
             handler = PAGE_EDIT_HANDLERS[self.__class__]
             tabs = [tab_handler.bind_to_model(self.__class__) for tab_handler in self._split_i18n_wagtail_translated_panels(self.content_panels)]
@@ -63,7 +61,7 @@ class SplitMultiLangTabsMixin(object):
             handler._MULTILANG_TABS_PATCHED = True
 
 
-class PortalRootPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
+class PortalRootPage(Page):
     
     class Meta(object):
         verbose_name = _('Portal Root Page')
@@ -98,7 +96,7 @@ class PortalRootPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
     )
 
 
-class BaseDashboardPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
+class BaseDashboardPage(Page):
     
     class Meta(object):
         abstract = True
@@ -243,7 +241,7 @@ class DashboardTripleColumnPage(BaseDashboardPage):
     )
     
     
-class BaseSimplePage(SplitMultiLangTabsMixin, TranslationMixin, Page):
+class BaseSimplePage(Page):
     
     class Meta(object):
         abstract = True
@@ -307,7 +305,7 @@ class SimpleTwoPage(BaseSimplePage):
     
 
 
-class BaseStreamDashboardPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
+class BaseStreamDashboardPage(Page):
     """ Same as the deprecated ``BaseDashboardPage``, only using mostly StreamFields """
     
     class Meta(object):
@@ -454,7 +452,7 @@ class StreamDashboardTripleColumnPage(BaseStreamDashboardPage):
     
     
    
-class BaseStreamSimplePage(SplitMultiLangTabsMixin, TranslationMixin, Page):
+class BaseStreamSimplePage(Page):
     
     class Meta(object):
         abstract = True
@@ -511,7 +509,7 @@ class StreamSimpleTwoPage(BaseStreamSimplePage):
     )
     
 
-class StreamStartPage(SplitMultiLangTabsMixin, TranslationMixin, Page):
+class StreamStartPage(Page):
     """ A simple well-structured StartPage using StreamFields """
     
     class Meta(object):

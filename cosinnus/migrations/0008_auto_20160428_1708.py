@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 from django.db import migrations, models
 import wagtail.wagtailimages.blocks
 import wagtail.wagtailcore.fields
-import wagtail_modeltranslation.models
 from django.conf import settings
 
 import cosinnus.models.wagtail_blocks
@@ -66,7 +65,7 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': '2-Column Dashboard Page (Modular)',
             },
-            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, wagtail_modeltranslation.models.TranslationMixin, 'wagtailcore.page'),
+            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, 'wagtailcore.page'),
         ),
         migrations.CreateModel(
             name='StreamDashboardSingleColumnPage',
@@ -112,7 +111,7 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': '1-Column Dashboard Page (Modular)',
             },
-            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, wagtail_modeltranslation.models.TranslationMixin, 'wagtailcore.page'),
+            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, 'wagtailcore.page'),
         ),
         migrations.CreateModel(
             name='StreamDashboardTripleColumnPage',
@@ -168,7 +167,7 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': '3-Column Dashboard Page (Modular)',
             },
-            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, wagtail_modeltranslation.models.TranslationMixin, 'wagtailcore.page'),
+            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, 'wagtailcore.page'),
         ),
         migrations.CreateModel(
             name='StreamSimpleOnePage',
@@ -187,7 +186,7 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': 'Simple One-Column Page (Modular)',
             },
-            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, wagtail_modeltranslation.models.TranslationMixin, 'wagtailcore.page'),
+            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, 'wagtailcore.page'),
         ),
         migrations.CreateModel(
             name='StreamSimpleTwoPage',
@@ -211,6 +210,6 @@ class Migration(migrations.Migration):
             options={
                 'verbose_name': 'Simple Page with Left Navigation (Modular)',
             },
-            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, wagtail_modeltranslation.models.TranslationMixin, 'wagtailcore.page'),
+            bases=(cosinnus.models.wagtail_models.SplitMultiLangTabsMixin, 'wagtailcore.page'),
         ),
     ]
