@@ -6,18 +6,17 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.db import models
 from django.db.models import Q
-from django.db.models.signals import post_save
 from django.utils.encoding import python_2_unicode_compatible, force_text
 from django.utils.timezone import now
+from django.apps import apps
 from django.utils.translation import ugettext_lazy as _
 
 from taggit.managers import TaggableManager
 
 from cosinnus.conf import settings
-from cosinnus.models.group import CosinnusGroup, CosinnusPortal
+from cosinnus.models.group import CosinnusPortal
 from cosinnus.utils.functions import unique_aware_slugify,\
     clean_single_line_text
-from cosinnus.models.widget import WidgetConfig
 from cosinnus.core.registries.widgets import widget_registry
 from django.utils.functional import cached_property
 from django.core.exceptions import ImproperlyConfigured
@@ -525,14 +524,13 @@ def get_tag_object_model():
     :data:`settings.COSINNUS_TAG_OBJECT_MODEL`
     """
     from django.core.exceptions import ImproperlyConfigured
-    from django.db.models import get_model
     from cosinnus.conf import settings
 
     try:
         app_label, model_name = settings.COSINNUS_TAG_OBJECT_MODEL.split('.')
     except ValueError:
         raise ImproperlyConfigured("COSINNUS_TAG_OBJECT_MODEL must be of the form 'app_label.model_name'")
-    tag_model = get_model(app_label, model_name)
+    tag_model = apps.get_model(app_label, model_name)
     if tag_model is None:
         raise ImproperlyConfigured("COSINNUS_TAG_OBJECT_MODEL refers to model '%s' that has not been installed" %
             settings.COSINNUS_TAG_OBJECT_MODEL)

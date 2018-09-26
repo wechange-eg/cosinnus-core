@@ -10,6 +10,8 @@ class CosinnusAppConfig(AppConfig):
     def ready(self):
         from cosinnus.models.group import replace_swapped_group_model
         replace_swapped_group_model()
+        from cosinnus.core.registries.urls import url_registry
+        url_registry.ready()
         
         from cosinnus.conf import settings
         if settings.COSINNUS_USE_CELERY:

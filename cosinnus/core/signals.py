@@ -53,6 +53,3 @@ user_group_recruited = dispatch.Signal(providing_args=["user", "obj", "audience"
 group_moved_to_portal = dispatch.Signal(providing_args=["user", "obj", "audience"])
 
 
-
-# we need to load the receivers for them to be active
-from . import receivers

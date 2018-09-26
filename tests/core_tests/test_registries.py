@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.test import SimpleTestCase
 from django.utils import unittest
 
@@ -116,12 +116,12 @@ class TestURLRegistry(SimpleTestCase):
             return request, args, kwargs
 
         cls.view_func = _view
-        cls.root_patterns = patterns('',
+        cls.root_patterns = [
             url(r'^root/view/$', cls.view_func, name='root-view'),
-        )
-        cls.group_patterns = patterns('',
+        ]
+        cls.group_patterns = [
             url(r'^%s/view/$' % settings.COSINNUS_GROUP_URL_PATH, cls.view_func, name='group-view'),
-        )
+        ]
 
     def setUp(self):
         self.reg = urls.URLRegistry()

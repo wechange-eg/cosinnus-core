@@ -42,9 +42,9 @@ class APIRegexURLResolver(RegexURLResolver):
         return self._regex_dict[lookup]
 
 
-def api_patterns(version, app=None, add_groups=False, prefix='', *args):
+def api_patterns(version, app=None, add_groups=False, *args):
     assert isinstance(version, int)
-    pattern_list = patterns(prefix, *args)
+    pattern_list = [*args]
     if add_groups:
         return [APIRegexURLResolver(version, pattern_list, app=app, url_group_key=url_key,
                                 add_groups=add_groups) for url_key in group_model_registry]

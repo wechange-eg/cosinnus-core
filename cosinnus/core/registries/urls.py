@@ -1,34 +1,39 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from cosinnus.core.registries.group_models import group_model_registry
-from copy import deepcopy
 
 try:
     import importlib
 except ImportError:
     from django.utils import importlib  # noqa
 
-from django.conf.urls import include, patterns, url
+from django.conf.urls import include, url
 from django.core.exceptions import ImproperlyConfigured
 
 from cosinnus.core.registries.base import BaseRegistry
 from cosinnus.core.registries.apps import app_registry
-from cosinnus.conf import settings
 
 
 class URLRegistry(BaseRegistry):
     """
     A registry handling all the cosinnus (app) related URLs
     """
+    is_ready = False
 
     def __init__(self):
         super(URLRegistry, self).__init__()
         with self.lock:
-            self._urlpatterns = patterns('')
-            self._api_urlpatterns = patterns('',
-                url(r'', include('cosinnus.urls_api'))
-            )
+            self._urlpatterns = []
+            self._api_urlpatterns = []
             self._apps = set()
+            
+    def ready(self):
+        if not self.is_ready:
+            with self.lock:
+                self._api_urlpatterns = [
+                    url(r'', include('cosinnus.urls_api'))
+                ]
+            self.is_ready = True
 
     def register(self, app, root_patterns=None, group_patterns=None,
                  api_patterns=None, url_app_name_override=None):
@@ -53,17 +58,17 @@ class URLRegistry(BaseRegistry):
                     for patt in group_patterns:
                         patterns_copy.append(url(url_base+patt._regex[1:], patt._callback_str or patt._callback, patt.default_args, name=group_model_registry.get_url_name_prefix(url_key, '') + patt.name))
                 
-                self._urlpatterns += patterns('',
+                self._urlpatterns += [
                     url('', include(patterns_copy, namespace=app_name, app_name=app)),
-                )
+                ]
             if root_patterns:
-                self._urlpatterns += patterns('',
+                self._urlpatterns += [
                     url(r'', include(root_patterns))
-                )
+                ]
             if api_patterns:
-                self._api_urlpatterns += patterns('',
+                self._api_urlpatterns += [
                     url(r'^', include(api_patterns, namespace=app_name, app_name=app)),
-                )
+                ]
 
     def register_urlconf(self, app, urlconf, url_app_name_override=None):
         module = importlib.import_module(urlconf)
