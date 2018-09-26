@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import str
 from django.contrib.auth import get_user_model, login as auth_login, logout as auth_logout,\
     login
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
@@ -369,7 +370,7 @@ def apply_group_invite_token_for_user(group_invite_token, user):
                     # make user a member of the group if they hadn't been before
                     CosinnusGroupMembership.objects.create(group=group, user=user, status=MEMBERSHIP_MEMBER)
                 # else the user is already in the group
-            except Exception, e:
+            except Exception as e:
                 logger.error('Error when trying to apply a token group invite', 
                          extra={'exception': force_text(e), 'user': user, 'group': group, 'token': group_invite_token.token})
                 success = False

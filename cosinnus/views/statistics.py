@@ -112,7 +112,7 @@ class SimpleStatisticsView(FormView):
             })
         except:
             pass
-        statistics = sorted(statistics.iteritems())
+        statistics = sorted(statistics.items())
         return statistics
     
     def form_valid(self, form):

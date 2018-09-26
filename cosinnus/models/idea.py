@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from collections import OrderedDict
 import locale
 
@@ -19,7 +20,7 @@ from cosinnus.models.tagged import LikeObject
 from cosinnus.utils.files import get_idea_image_filename, image_thumbnail_url, \
     image_thumbnail
 from cosinnus.utils.functions import clean_single_line_text, \
-    unique_aware_slugify
+    unique_aware_slugify, sort_key_strcoll_attr
 from cosinnus.utils.urls import get_domain_for_portal
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from django.contrib.contenttypes.generic import GenericRelation
@@ -96,8 +97,8 @@ class IdeaManager(models.Manager):
                 cache.set_many(ideas, settings.COSINNUS_IDEA_CACHE_TIMEOUT)
             
             # sort by a good sorting function that acknowldges umlauts, etc, case insensitive
-            idea_list = ideas.values()
-            idea_list.sort(cmp=locale.strcoll, key=lambda x: x.name)
+            idea_list = list(ideas.values())
+            idea_list = sorted(idea_list, key=sort_key_strcoll_attr('name'))
             return idea_list
             
         elif pks is not None:
@@ -106,7 +107,7 @@ class IdeaManager(models.Manager):
             else:
                 # We request multiple ideas
                 cached_pks = self.get_pks(portal_id=portal_id)
-                slugs = filter(None, (cached_pks.get(pk, []) for pk in pks))
+                slugs = [_f for _f in (cached_pks.get(pk, []) for pk in pks) if _f]
                 if slugs:
                     return self.get_cached(slugs=slugs, portal_id=portal_id)
                 return []  # We rely on the slug and id maps being up to date
@@ -213,7 +214,7 @@ class CosinnusIdea(IndexingUtilsMixin, models.Model):
     objects = IdeaManager()
     
     
-    class Meta:
+    class Meta(object):
         ordering = ('created',)
         verbose_name = _('Cosinnus Idea')
         verbose_name_plural = _('Cosinnus Ideas')

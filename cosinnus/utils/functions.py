@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from builtins import str
 from django.utils.importlib import import_module
 from uuid import uuid1
 from django.core.exceptions import ImproperlyConfigured
@@ -10,6 +11,8 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 import six
 import numpy
+import locale
+import functools
 
 
 def unique_aware_slugify(item, slug_source, slug_field, 
@@ -113,7 +116,7 @@ def select_related_chain(qs, *args):
     """ Monkey-patch for django < 1.7  to be able to chain multiple calls
     to qs.select_related() without losing the args of the first calls. """
     def _flatten(dic, strin, chain):
-        for key, val in dic.items():
+        for key, val in list(dic.items()):
             if not val:
                 chain.append(strin and strin + '__' + key or key)
             else:
@@ -247,3 +250,19 @@ def normalize_within_stddev(member, mean, stddev, stddev_factor=1.0):
     local_min = mean - (stddev*stddev_factor)
     place = (member-local_min)/(local_max-local_min)
     return max(0.0, (min(place, 1.0)))
+
+
+def sort_key_strcoll_attr(attr_name):
+    """ Returns a function usable as key for the py3 sorted() function,
+        that will sort objects using strcoll() on their given attributes. """
+    def strcoll_cmp_attr(obj1, obj2):
+        return locale.strcoll(getattr(obj1, attr_name), getattr(obj2, attr_name))
+    return functools.cmp_to_key(strcoll_cmp_attr)
+
+def sort_key_strcoll_lambda(lambda_func):
+    """ Returns a function usable as key for the py3 sorted() function,
+        that will sort objects using strcoll() the attribute accessed by a given lambda function. """
+    def strcoll_cmp_attr(obj1, obj2):
+        return locale.strcoll(lambda_func(obj1), lambda_func(obj2))
+    return functools.cmp_to_key(strcoll_cmp_attr)
+

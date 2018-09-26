@@ -24,7 +24,7 @@ class CosinnusGroupSerializerViewSet(viewsets.ReadOnlyModelViewSet):
         FILTER_MAP = {
             'tags': 'media_tag__tags__name'
         }
-        for key, value in self.request.query_params.items():
+        for key, value in list(self.request.query_params.items()):
             if key in (self.pagination_class.limit_query_param,
                        self.pagination_class.offset_query_param):
                 continue

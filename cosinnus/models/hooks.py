@@ -88,7 +88,7 @@ def on_login_ratelimit_triggered(sender, username, ip, **kwargs):
     """ Log rate limit attempts """
     try:
         CosinnusFailedLoginRateLimitLog.objects.create(username=username, ip=None, portal=CosinnusPortal.get_current())
-    except Exception, e:
+    except Exception as e:
         logger.error('Error while trying to log failed login ratelimit trigger!', extra={'exception': force_text(e)})
 
 login_ratelimit_triggered.connect(on_login_ratelimit_triggered)

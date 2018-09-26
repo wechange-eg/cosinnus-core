@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import zip
+from builtins import object
 from itertools import chain
 
 from django.contrib import messages
@@ -473,7 +475,7 @@ class GroupListView(EndlessPaginationMixin, ListAjaxableResponseMixin, ListView)
             invited.append(_invited)
             
         ctx.update({
-            'rows': zip(ctx['object_list'], members, pendings, admins, invited),
+            'rows': list(zip(ctx['object_list'], members, pendings, admins, invited)),
             'unpaginated_rows': self.object_list,
             'map_groups': self.object_list, # unpaginated groups
             'group_type': self.group_type,
@@ -967,7 +969,7 @@ class GroupExportView(SamePortalGroupMixin, RequireAdminMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         export_apps = []
-        for app, name, label in app_registry.items():
+        for app, name, label in list(app_registry.items()):
             try:
                 url = group_aware_reverse('cosinnus:%s:export' % name,
                               kwargs={'group': self.group})

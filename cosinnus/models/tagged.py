@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.db import models
@@ -39,21 +40,21 @@ from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 class PeopleModelMixin(models.Model):
     people_name = models.CharField(max_length=255, default='', blank=True)
 
-    class Meta:
+    class Meta(object):
         abstract = True
 
 
 class PublicModelMixin(models.Model):
     public = models.BooleanField(_('Public'), default=False, blank=True)
 
-    class Meta:
+    class Meta(object):
         abstract = True
 
 
 @python_2_unicode_compatible
 class CosinnusBaseCategory(models.Model):
     
-    class Meta:
+    class Meta(object):
         abstract = True
     
     name = models.CharField(_('Name'), max_length=250)
@@ -171,7 +172,7 @@ class BaseTagObject(models.Model):
         ret = []
         if self.topics:
             m = dict(BaseTagObject.TOPIC_CHOICES)
-            for i in map(lambda x: int(x.strip()), [topic for topic in self.topics.split(',') if topic]):
+            for i in [int(x.strip()) for x in [topic for topic in self.topics.split(',') if topic]]:
                 t = m.get(i, None)
                 if t:
                     ret.append(t)
@@ -183,7 +184,7 @@ class BaseTagObject(models.Model):
             return None
         return 'http://www.openstreetmap.org/?mlat=%s&mlon=%s&zoom=15&layers=M' % (self.location_lat, self.location_lon)
     
-    class Meta:
+    class Meta(object):
         abstract = True
 
     def __str__(self):
@@ -192,7 +193,7 @@ class BaseTagObject(models.Model):
 
 class TagObject(BaseTagObject):
 
-    class Meta:
+    class Meta(object):
         app_label = 'cosinnus'
         swappable = 'COSINNUS_TAG_OBJECT_MODEL'
 
@@ -208,7 +209,7 @@ class AttachedObject(models.Model):
     object_id = models.PositiveIntegerField()
     target_object = generic.GenericForeignKey('content_type', 'object_id')
 
-    class Meta:
+    class Meta(object):
         app_label = 'cosinnus'
         ordering = ('content_type',)
         unique_together = (('content_type', 'object_id'),)
@@ -232,7 +233,7 @@ class AttachedObject(models.Model):
 
 class AttachableObjectModel(models.Model):
     
-    class Meta:
+    class Meta(object):
         abstract = True
     
     attached_objects = models.ManyToManyField(AttachedObject, blank=True, null=True)
@@ -285,7 +286,7 @@ class BaseTaggableObjectModel(IndexingUtilsMixin, AttachableObjectModel):
         editable=False,
         auto_now_add=True)
 
-    class Meta:
+    class Meta(object):
         abstract = True
         unique_together = (('group', 'slug'),)
 
@@ -437,7 +438,7 @@ class BaseTaggableObjectReflection(models.Model):
         on_delete=models.CASCADE,
         related_name='+')
 
-    class Meta:
+    class Meta(object):
         app_label = 'cosinnus'
         ordering = ('content_type',)
         unique_together = (('content_type', 'object_id', 'group'),)
@@ -497,7 +498,7 @@ class LikeObject(models.Model):
     liked = models.BooleanField(_('Liked'), default=True)
     followed = models.BooleanField(_('Following'), default=True)
 
-    class Meta:
+    class Meta(object):
         app_label = 'cosinnus'
         ordering = ('content_type',)
         unique_together = (('content_type', 'object_id', 'user'),)

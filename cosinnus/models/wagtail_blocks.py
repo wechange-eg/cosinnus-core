@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from django.utils.translation import ugettext_lazy as _
 
 from django import forms
@@ -64,7 +65,7 @@ class BetterRichTextBlock(RichTextBlock):
     
 class CreateProjectButtonBlock(StructBlock):
     
-    class Meta:
+    class Meta(object):
         label = _('Create-Project or Group Button')
         icon = 'group'
         template = 'cosinnus/wagtail/widgets/create_project_button.html'
@@ -85,7 +86,7 @@ class LinkBlock(StructBlock):
     url = blocks.URLBlock(label='URL')
     text = blocks.CharBlock()
 
-    class Meta:
+    class Meta(object):
         icon = 'anchor'
         template = 'cosinnus/wagtail/widgets/link.html'
 
@@ -103,7 +104,7 @@ class MapBlock(StructBlock):
     projects = blocks.BooleanBlock(label=_('Projects'), required=False, default=True)
     groups = blocks.BooleanBlock(label=_('Groups'), required=False, default=True)
 
-    class Meta:
+    class Meta(object):
         icon = 'site'
         template = 'cosinnus/wagtail/widgets/map.html'
     
@@ -157,7 +158,7 @@ class DoubleFrameBlock(StructBlock):
     left = blocks.StreamBlock(STREAMFIELD_BLOCKS_NOFRAMES, icon='cogs')
     right = blocks.StreamBlock(STREAMFIELD_BLOCKS_NOFRAMES, icon='cogs')
     
-    class Meta:
+    class Meta(object):
         icon = 'fa fa-columns'
         template = 'cosinnus/wagtail/widgets/double_frame.html'
     
@@ -181,7 +182,7 @@ class TripleFrameBlock(StructBlock):
     middle = blocks.StreamBlock(STREAMFIELD_BLOCKS_NOFRAMES, icon='cogs')
     right = blocks.StreamBlock(STREAMFIELD_BLOCKS_NOFRAMES, icon='cogs')
     
-    class Meta:
+    class Meta(object):
         icon = 'fa fa-columns'
         template = 'cosinnus/wagtail/widgets/triple_frame.html'
     
@@ -200,7 +201,7 @@ class QuadFrameBlock(StructBlock):
     middle_right = blocks.StreamBlock(STREAMFIELD_BLOCKS_NOFRAMES, icon='cogs')
     right = blocks.StreamBlock(STREAMFIELD_BLOCKS_NOFRAMES, icon='cogs')
 
-    class Meta:
+    class Meta(object):
         icon = 'fa fa-columns'
         template = 'cosinnus/wagtail/widgets/quad_frame.html'
     
@@ -229,7 +230,7 @@ class GlobalNotesWidgetBlock(blocks.ChoiceBlock):
     ]
     default = '250'
     
-    class Meta:
+    class Meta(object):
         icon = 'form'
         template = 'cosinnus/wagtail/widgets/global_notes.html'
     
@@ -247,7 +248,7 @@ class RandomProjectsWidgetBlock(blocks.ChoiceBlock):
     ]
     default = '4'
     
-    class Meta:
+    class Meta(object):
         icon = 'group'
         template = 'cosinnus/wagtail/widgets/random_projects.html'
     

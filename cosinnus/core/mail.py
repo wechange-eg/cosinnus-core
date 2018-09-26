@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from __future__ import print_function
 
 from django.core.mail import get_connection, EmailMessage
 from django.template.loader import render_to_string
@@ -67,7 +68,7 @@ def send_mail(to, subject, template, data, from_email=None, bcc=None, is_html=Fa
             if settings.COSINNUS_USE_CELERY:
                 subject = '[CELERY-DELEGATED] %s' % subject 
             CosinnusSentEmailLog.objects.create(email=to, title=subject, portal=CosinnusPortal.get_current())
-        except Exception, e:
+        except Exception as e:
             logger.error('Error while trying to log a sent email!', extra={'exception': force_text(e)})
         
 
@@ -115,13 +116,13 @@ def convert_html_email_to_plaintext(html_message):
 def _mail_print(to, subject, template, data, from_email=None, bcc=None, is_html=False):
     """ DEBUG ONLY """
     if settings.DEBUG:
-        print ">> Mail printing:"
+        print(">> Mail printing:")
         if is_html:
-            print ">> (HTML)"
-        print ">> To: ", to
-        print ">> Subject: ", force_text(subject)
-        print ">> Body:"
-        print render_to_string(template, data)
+            print(">> (HTML)")
+        print((">> To: ", to))
+        print((">> Subject: ", force_text(subject)))
+        print(">> Body:")
+        print(render_to_string(template, data))
     
 def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None, is_html=False):
     # remove newlines from header
@@ -132,7 +133,7 @@ def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None, is
             
         extra = {'to_user': to, 'subject': subject}
         logger.info('Cosinnus.core.mail: Successfully sent mail on site "%d".' % settings.SITE_ID, extra=extra)
-    except Exception, e:
+    except Exception as e:
         # fail silently. log this, though
         extra = {'to_user': to, 'subject': subject, 'exception': force_text(e), 'exc_reason': e}
         try: 
@@ -141,7 +142,7 @@ def send_mail_or_fail(to, subject, template, data, from_email=None, bcc=None, is
             extra.update({'sys_except': 'could not print'})
         logger.warn('Cosinnus.core.mail: Failed to send mail!', extra=extra)
         if settings.DEBUG:
-            print ">> extra:", extra 
+            print((">> extra:", extra)) 
             raise
             _mail_print(to, subject, template, data, from_email, bcc, is_html)
 

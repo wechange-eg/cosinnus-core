@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import str
 import functools
 
 from django.contrib.auth.decorators import user_passes_test
@@ -78,7 +79,7 @@ def get_group_for_request(group_name, request):
             else:
                 logger.warn('Cosinnus.core.decorators: Failed to retrieve group because its classes didnt match!', 
                      extra={'team_name': group_name, 'url': request.path, 'team_type': type(group), 'group_class': group_class, 'group_slug': group.slug, 'group_pk': group.id, 'refered': request.META.get('HTTP_REFERER', 'N/A')})
-        except group_class.DoesNotExist, e:
+        except group_class.DoesNotExist as e:
             #logger.warn('Cosinnus.core.decorators: Failed to retrieve group! The exception was: "%s"' % str(e), 
             #         extra={'team_name': group_name, 'url': request.path, 'group_class': group_class, 'refered': request.META.get('HTTP_REFERER', 'N/A')})
             # this happens during a regular 404 when users navigate to a group URL that no longer exists

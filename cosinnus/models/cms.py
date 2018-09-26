@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
@@ -21,7 +22,7 @@ class CosinnusMicropage(models.Model):
     last_edited_by = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_('Last edited by'),
         editable=False, on_delete=models.PROTECT, null=True, related_name='%(app_label)s_%(class)s_set')
     
-    class Meta:
+    class Meta(object):
         app_label = 'cosinnus'
         verbose_name = _('Cosinnus CMS Micropage')
         verbose_name_plural = _('Cosinnus Micropages')

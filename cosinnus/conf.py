@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from django.conf import settings  # noqa
 from django.utils.translation import ugettext_lazy as _
 
@@ -16,7 +17,7 @@ class CosinnusConf(AppConf):
      check cosinnus/default_settings.py!
     """
     
-    class Meta:
+    class Meta(object):
         prefix = 'COSINNUS'
 
     #: A mapping of ``{'app1.Model1': ['app2.Model2', 'app3.Model3']}`` that
@@ -167,7 +168,7 @@ class CosinnusConf(AppConf):
     
     # CSV Import settings
     CSV_IMPORT_DEFAULT_ENCODING = 'utf-8'
-    CSV_IMPORT_DEFAULT_DELIMITER = b','
+    CSV_IMPORT_DEFAULT_DELIMITER = ','
     CSV_IMPORT_DEFAULT_EXPECTED_COLUMNS = None
     
     # the class with the implementation for importing CosinnusGroups used for the CSV import
@@ -517,7 +518,7 @@ class CosinnusDefaultSettings(AppConf):
         These are settings used by default in cosinnus apps, such as avatar dimensions, etc.
     """
     
-    class Meta:
+    class Meta(object):
         prefix = ''
         
     DJAJAX_VIEW_CLASS = 'cosinnus.views.djajax_endpoints.DjajaxCosinnusEndpoint'

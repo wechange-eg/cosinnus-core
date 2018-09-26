@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import str
 import json
 import logging
 
@@ -56,7 +57,7 @@ def _collect_parameters(param_dict, parameter_list):
     """ For a GET/POST dict, collects all attributes listes as keys in ``parameter_list``.
         If not present in the GET/POST dict, the value of the key in ``parameter_list`` will be used. """
     results = {}
-    for key, value in parameter_list.items():
+    for key, value in list(parameter_list.items()):
         if key in param_dict:
             results[key] = _better_json_loads(param_dict.get(key, None))
         else:
@@ -108,7 +109,7 @@ def map_search_endpoint(request, filter_group_id=None):
         return HttpResponseBadRequest('``page`` param must be a positive number or 0!')
     
     # filter for requested model types
-    model_list = [klass for klass,param_name in SEARCH_MODEL_NAMES.items() if params[param_name]]
+    model_list = [klass for klass,param_name in list(SEARCH_MODEL_NAMES.items()) if params[param_name]]
     sqs = SearchQuerySet().models(*model_list)
     # filter for map bounds (Points are constructed ith (lon, lat)!!!)
     if not params['ignore_location'] and not implicit_ignore_location:

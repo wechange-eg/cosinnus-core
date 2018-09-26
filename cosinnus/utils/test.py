@@ -9,4 +9,4 @@ def get_fields_from_multiform(multiform):
 
 def get_fieldnames_from_multiform(multiform):
     """Returns all field names for all forms grouped by their form"""
-    return {n: list(f.fields.keys()) for n, f in multiform.forms.items()}
+    return {n: list(f.fields.keys()) for n, f in list(multiform.forms.items())}

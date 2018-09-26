@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from __future__ import print_function
 
 from django.core.urlresolvers import reverse
 from django.db.models import get_model
@@ -32,7 +33,7 @@ def move_group_content(from_group, to_group, models=None, verbose=False):
             obj.save()
             s = "moved '%d' %s: from group %d to group %d" % (obj.id, model_str, from_group.id, to_group.id)
             if verbose:
-                print s
+                print(s)
             actions_done.append(s)
     return actions_done
 

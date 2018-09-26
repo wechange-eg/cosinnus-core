@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import str
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.utils.decorators import method_decorator
@@ -198,7 +199,7 @@ class UserProfileUpdateView(AvatarFormMixin, UserProfileObjectMixin, UpdateView)
                 set_user_email_to_verify(self.user, self.target_email_to_confirm, self.request, user_has_just_registered=False)
                 messages.warning(self.request, _('You have changed your email address. We will soon send you an email to that address with a confirmation link. Until you click on that link, your profile will retain your old email address!'))
             
-        except AttributeError, e:
+        except AttributeError as e:
             if str(e) == "'dict' object has no attribute '_committed'":
                 # here we couldn't save the avatar
                 messages.error(self.request, _('Sorry, your profile could not be saved because there was an error while processing the avatar!'))

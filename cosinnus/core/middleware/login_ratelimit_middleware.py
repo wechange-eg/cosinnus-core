@@ -10,6 +10,7 @@ See `LoginRateLimitMiddleware`'s doc for more information.
 
 from __future__ import unicode_literals
 
+from builtins import object
 from datetime import timedelta
 import logging
 
@@ -26,7 +27,7 @@ import django.dispatch as dispatch
 from django.utils.text import get_valid_filename
 
 
-class Struct:
+class Struct(object):
     def __init__(self, **entries):
         self.__dict__.update(entries)
         
@@ -146,7 +147,7 @@ class LoginRateLimitMiddleware(object):
     def process_request(self, request):
         """ If we see a POST on a defined login URL with user credentials filled, 
             check if a rate limit is active and if so, intercept the request"""
-        for watch_url, username_field in _get_setting('LOGIN_RATELIMIT_LOGIN_URLS').items():
+        for watch_url, username_field in list(_get_setting('LOGIN_RATELIMIT_LOGIN_URLS').items()):
             if request.path.startswith(watch_url) and request.method.lower() == 'post':
                 username = request.POST.get(username_field, None)
                 username = get_valid_filename(username)

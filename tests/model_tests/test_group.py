@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import zip
+from builtins import range
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
 from django.test import TestCase
@@ -40,8 +42,8 @@ class CosinnusGroupSlugPKCacheTest(TestCase):
             self.assertEqual(cache.get(_GROUP_CACHE_KEY % slug), None)
 
         cached_slugs_dict = CosinnusGroup.objects.get_slugs()
-        dict_slugs_pks = dict(zip(slugs, pks))
-        dict_pks_slugs = dict(zip(pks, slugs))
+        dict_slugs_pks = dict(list(zip(slugs, pks)))
+        dict_pks_slugs = dict(list(zip(pks, slugs)))
 
         self.assertEqual(cached_slugs_dict, dict_slugs_pks)
         self.assertEqual(cache.get(_GROUPS_SLUG_CACHE_KEY), dict_slugs_pks)
@@ -59,8 +61,8 @@ class CosinnusGroupSlugPKCacheTest(TestCase):
         slugs.append(g.slug)
 
         cached_slugs_dict = CosinnusGroup.objects.get_slugs()
-        dict_slugs_pks = dict(zip(slugs, pks))
-        dict_pks_slugs = dict(zip(pks, slugs))
+        dict_slugs_pks = dict(list(zip(slugs, pks)))
+        dict_pks_slugs = dict(list(zip(pks, slugs)))
 
         self.assertEqual(cached_slugs_dict, dict_slugs_pks)
         self.assertEqual(cache.get(_GROUPS_SLUG_CACHE_KEY), dict_slugs_pks)
@@ -78,8 +80,8 @@ class CosinnusGroupSlugPKCacheTest(TestCase):
         del_group.delete()
 
         cached_slugs_dict = CosinnusGroup.objects.get_slugs()
-        dict_slugs_pks = dict(zip(slugs, pks))
-        dict_pks_slugs = dict(zip(pks, slugs))
+        dict_slugs_pks = dict(list(zip(slugs, pks)))
+        dict_pks_slugs = dict(list(zip(pks, slugs)))
 
         self.assertEqual(cached_slugs_dict, dict_slugs_pks)
         self.assertEqual(cache.get(_GROUPS_SLUG_CACHE_KEY), dict_slugs_pks)
@@ -101,8 +103,8 @@ class CosinnusGroupSlugPKCacheTest(TestCase):
         slugs.extend([new_slug_2, new_slug_1])  # add in reverse order
 
         cached_slugs_dict = CosinnusGroup.objects.get_slugs()
-        dict_slugs_pks = dict(zip(slugs, pks))
-        dict_pks_slugs = dict(zip(pks, slugs))
+        dict_slugs_pks = dict(list(zip(slugs, pks)))
+        dict_pks_slugs = dict(list(zip(pks, slugs)))
 
         self.assertEqual(cached_slugs_dict, dict_slugs_pks)
         self.assertEqual(cache.get(_GROUPS_SLUG_CACHE_KEY), dict_slugs_pks)
@@ -120,8 +122,8 @@ class CosinnusGroupSlugPKCacheTest(TestCase):
             self.assertEqual(cache.get(_GROUP_CACHE_KEY % slug), None)
 
         cached_pks_dict = CosinnusGroup.objects.get_pks()
-        dict_slugs_pks = dict(zip(slugs, pks))
-        dict_pks_slugs = dict(zip(pks, slugs))
+        dict_slugs_pks = dict(list(zip(slugs, pks)))
+        dict_pks_slugs = dict(list(zip(pks, slugs)))
 
         self.assertEqual(cached_pks_dict, dict_pks_slugs)
         self.assertEqual(cache.get(_GROUPS_SLUG_CACHE_KEY), dict_slugs_pks)
@@ -139,8 +141,8 @@ class CosinnusGroupSlugPKCacheTest(TestCase):
         slugs.append(g.slug)
 
         cached_pks_dict = CosinnusGroup.objects.get_pks()
-        dict_slugs_pks = dict(zip(slugs, pks))
-        dict_pks_slugs = dict(zip(pks, slugs))
+        dict_slugs_pks = dict(list(zip(slugs, pks)))
+        dict_pks_slugs = dict(list(zip(pks, slugs)))
 
         self.assertEqual(cached_pks_dict, dict_pks_slugs)
         self.assertEqual(cache.get(_GROUPS_SLUG_CACHE_KEY), dict_slugs_pks)
@@ -158,8 +160,8 @@ class CosinnusGroupSlugPKCacheTest(TestCase):
         del_group.delete()
 
         cached_pks_dict = CosinnusGroup.objects.get_pks()
-        dict_slugs_pks = dict(zip(slugs, pks))
-        dict_pks_slugs = dict(zip(pks, slugs))
+        dict_slugs_pks = dict(list(zip(slugs, pks)))
+        dict_pks_slugs = dict(list(zip(pks, slugs)))
 
         self.assertEqual(cached_pks_dict, dict_pks_slugs)
         self.assertEqual(cache.get(_GROUPS_SLUG_CACHE_KEY), dict_slugs_pks)
@@ -181,8 +183,8 @@ class CosinnusGroupSlugPKCacheTest(TestCase):
         slugs.extend([new_slug_2, new_slug_1])  # add in reverse order
 
         cached_pks_dict = CosinnusGroup.objects.get_pks()
-        dict_slugs_pks = dict(zip(slugs, pks))
-        dict_pks_slugs = dict(zip(pks, slugs))
+        dict_slugs_pks = dict(list(zip(slugs, pks)))
+        dict_pks_slugs = dict(list(zip(pks, slugs)))
 
         self.assertEqual(cached_pks_dict, dict_pks_slugs)
         self.assertEqual(cache.get(_GROUPS_SLUG_CACHE_KEY), dict_slugs_pks)
@@ -241,8 +243,8 @@ class CosinnusGroupGetCachedTest(TestCase):
         self.assertEqual(cache.get(_GROUPS_PK_CACHE_KEY), None)
 
         g = CosinnusGroup.objects.get_cached(pks=p)
-        dict_slugs_pks = dict(zip(slugs, pks))
-        dict_pks_slugs = dict(zip(pks, slugs))
+        dict_slugs_pks = dict(list(zip(slugs, pks)))
+        dict_pks_slugs = dict(list(zip(pks, slugs)))
 
         self.assertEqual(g, groups[-1])
         self.assertEqual(cache.get(_GROUP_CACHE_KEY % s), g)
@@ -260,8 +262,8 @@ class CosinnusGroupGetCachedTest(TestCase):
         self.assertEqual(cache.get(_GROUPS_PK_CACHE_KEY), None)
 
         gs = CosinnusGroup.objects.get_cached(pks=ps)
-        dict_slugs_pks = dict(zip(slugs, pks))
-        dict_pks_slugs = dict(zip(pks, slugs))
+        dict_slugs_pks = dict(list(zip(slugs, pks)))
+        dict_pks_slugs = dict(list(zip(pks, slugs)))
 
         self.assertEqual(gs, groups[-2:])
         self.assertEqual(cache.get(_GROUP_CACHE_KEY % ss[0]), gs[0])

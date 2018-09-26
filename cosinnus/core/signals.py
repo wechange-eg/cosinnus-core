@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from __future__ import absolute_import
 
 import django.dispatch as dispatch
 
@@ -54,4 +55,4 @@ group_moved_to_portal = dispatch.Signal(providing_args=["user", "obj", "audience
 
 
 # we need to load the receivers for them to be active
-import receivers
+from . import receivers

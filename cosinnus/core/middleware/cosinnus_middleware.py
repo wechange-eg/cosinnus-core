@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 import logging
 
 from django.contrib import messages
@@ -67,7 +68,7 @@ NO_AUTO_REDIRECTS = (
 def initialize_cosinnus_after_startup():
     cosinnus_signals.all_cosinnus_apps_loaded.send(sender=None)
     # connect all signal listeners
-    from cosinnus.models.hooks import *  # noqa
+    import cosinnus.models.hooks  # noqa
 
 
 startup_middleware_inited = False
@@ -134,7 +135,7 @@ class GroupPermanentRedirectMiddleware(object):
                         redirect_url = ''.join((to_group.get_absolute_url(), '/'.join(request_tokens[5:])))
                         messages.success(request, _('This team no longer resides under the URL you entered. You have been redirected automatically to the current location.'))
                         return HttpResponseRedirect(redirect_url)
-        except Exception, e:
+        except Exception as e:
             if settings.DEBUG:
                 raise
             logger.error('cosinnus.GroupPermanentRedirectMiddleware: Error while processing possible group redirect!', extra={'exception', force_text(e)})

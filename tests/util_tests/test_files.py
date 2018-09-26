@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from django.test import SimpleTestCase
 
 from cosinnus.utils.files import get_avatar_filename

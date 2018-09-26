@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 
+from builtins import object
 class UserFormKwargsMixin(object):
     """
     Works nicely together with :class:`cosinnus.forms.GroupKwargModelFormMixin`

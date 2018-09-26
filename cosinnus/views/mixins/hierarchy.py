@@ -14,6 +14,8 @@ from cosinnus.models.group import CosinnusGroup
 
 # this reads the environment and inits the right locale
 import locale
+from cosinnus.utils.functions import sort_key_strcoll_attr,\
+    sort_key_strcoll_lambda
 try:
     locale.setlocale(locale.LC_ALL, ("de_DE", "utf8"))
 except:
@@ -47,7 +49,7 @@ class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
         sorted_object_list = list(self.queryset)
         # sort case insensitive by title, ignoring umlauts unless we already have a filter in place
         if not self.request.GET.get('o', '') and not self.strict_default_sort:
-            sorted_object_list.sort(cmp=locale.strcoll, key=lambda x: x.title)
+            sorted_object_list.sort(key=sort_key_strcoll_attr('title'))
         
         # assemble container and current hierarchy objects.
         # recursive must be =True, or we don't know how the size of a folder
@@ -66,9 +68,9 @@ class HierarchicalListCreateViewMixin(HierarchyTreeMixin):
             folders = root_folder_node['containers']
         
         # sort folders alphabetically
-        folders.sort(cmp=locale.strcoll, key=lambda container: (container['container_object'].title))
+        folders.sort(key=sort_key_strcoll_lambda(lambda container: (container['container_object'].title)))
         # and then sort folders so that special folders are always on top
-        folders.sort(cmp=locale.strcoll, key=lambda container: (container['container_object'].special_type or 'zzzzz'))
+        folders.sort(key=sort_key_strcoll_lambda(lambda container: (container['container_object'].special_type or 'zzzzz')))
         
         objects = current_folder_node['objects']
         current_folder = current_folder_node['container_object']

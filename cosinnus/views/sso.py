@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import str
 import logging
 import traceback
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 from annoying.functions import get_object_or_None
 from django.contrib import messages
@@ -42,7 +43,7 @@ def login(request):
     try:    
         # user is not logged in. get temporary oauth tokens
         auth_url = do_oauth1_request(request) 
-    except Exception, e:
+    except Exception as e:
         logger.error('Exception during SSO login, exception was "%s"' % str(e), extra={'trace': traceback.format_exc()})
         messages.error(request, force_text(_('Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!')) + ' (sso:1)')
         if settings.DEBUG:
@@ -59,7 +60,7 @@ def callback(request):
         return redirect(_get_redirect_url(request))
     try:    
         user_info = do_oauth1_receive(request)
-    except Exception, e:
+    except Exception as e:
         logger.error('Exception during SSO callback, exception was "%s"' % str(e), extra={'trace': traceback.format_exc()})
         messages.error(request, force_text(_('Sorry, we could not connect your user account because of an internal error. Please contact a system administrator!')) + ' (sso:2)')
         if settings.DEBUG:
@@ -119,10 +120,10 @@ def callback(request):
     # set user avatar to largest available
     try:
         # avatars are listed in a dictionary of 'size_in_px' --> 'avatar_url'
-        avatar_url = sorted(user_info.get('avatar_urls', {}).items(), reverse=True)[0][1]
+        avatar_url = sorted(list(user_info.get('avatar_urls', {}).items()), reverse=True)[0][1]
         
         img_temp = NamedTemporaryFile(delete=True)
-        img_temp.write(urllib2.urlopen(avatar_url).read())
+        img_temp.write(urllib.request.urlopen(avatar_url).read())
         img_temp.flush()
         
         profile.avatar.save(get_avatar_filename(img_temp, avatar_url.split('/')[-1]), File(img_temp))

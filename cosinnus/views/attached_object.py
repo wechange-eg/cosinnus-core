@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import str
+from builtins import object
 from django.db.models.loading import get_model
 from django.views.generic.edit import CreateView, UpdateView
 

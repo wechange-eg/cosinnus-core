@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from builtins import object
 from django.template.loader import render_to_string
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from django.shortcuts import render

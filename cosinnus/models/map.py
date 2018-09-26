@@ -37,7 +37,7 @@ class DictResult(dict):
     fields = {}
     
     def __init__(self, *args, **kwargs):
-        for key in self.fields.keys():
+        for key in list(self.fields.keys()):
             val = kwargs.get(key, self.fields.get(key))
             if val == REQUIRED:
                 raise Exception('MAP API Error: Expected required key "%s" for MapResult!' % key)
@@ -479,7 +479,7 @@ if settings.COSINNUS_IDEAS_ENABLED:
         'ideas': DetailedIdeaMapResult,
     })
     
-SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in SEARCH_MODEL_NAMES.items()])
+SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(SEARCH_MODEL_NAMES.items())])
 # these can always be read by any user (returned fields still vary)
 SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS = [
     'projects',
