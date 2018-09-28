@@ -344,7 +344,7 @@ module.exports = ContentControlView.extend({
 
     triggerMobileIdeaCreate1View: function (event) {
         this._resetMobileView();
-        self.controlView.openCreateIdeaView(event);
+        this.openCreateIdeaView(event);
         this.App.$el.addClass('mobile-view-idea-create-1');
     },
 
@@ -792,6 +792,13 @@ module.exports = ContentControlView.extend({
             util.log('*** control-view.js: Received signal for stale results bc of viewport change')
         } else if (context.reason == 'map-navigate') {
             util.log('*** control-view.js: Received signal for stale results bc of map-navigate')
+        }
+        
+        // prevent refreshing results on viewport changes when the mobile view search panel is open,
+        // as this is triggered by onscreen keyboards and leads to choppy behaviour
+        if (context.reason == 'viewport-changed' && this.App.$el.hasClass('mobile-view-search')) {
+        	util.log('*** control-view.js: Prevented refresh of results while search panel is open.')
+        	return;
         }
         
         var staleBefore = this.state.resultsStale;
