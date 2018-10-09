@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-18 22:52+0200\n"
-"PO-Revision-Date: 2018-06-23 17:09+0200\n"
+"PO-Revision-Date: 2018-10-01 11:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Language: uk_UA\n"
 
@@ -30,7 +30,7 @@ msgid "Delete selected entries"
 msgstr "Видалити вибрані об'єкти"
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
-msgstr ""
+msgstr "Токен з таким кодом вже інсує! Будь ласка, оберіть інший рядок для Вашого токену."
 
 msgid "The following Projects were converted to Groups:"
 msgstr "Наступні проекти були перетворені у спільноти:"
@@ -44,15 +44,11 @@ msgstr "Такі учасники були долучені до порталу:
 msgid "Add all members to current Portal"
 msgstr "Додати всіх учасників до цього порталу"
 
-#, fuzzy
-#| msgid "Add all members to current Portal"
 msgid "Move selected teams to current portal"
-msgstr "Додати всіх учасників до цього порталу"
+msgstr "Перемістити обрані команди до цього порталу"
 
-#, fuzzy
-#| msgid "Move all members to current Portal (removes all other memberships!)"
 msgid "Move selected teams to current portal and message members"
-msgstr "Перемістити усіх учасників до поточного порталу (анулює усі інші членства!)"
+msgstr "Перемістити обрані команди до поточного порталу та повідомити учасників"
 
 msgid "In addition, the members were removed from all other Portals."
 msgstr "Крім цього, учасники були вилучені з усіх інших порталів."
@@ -61,10 +57,10 @@ msgid "Move all members to current Portal (removes all other memberships!)"
 msgstr "Перемістити усіх учасників до поточного порталу (анулює усі інші членства!)"
 
 msgid "Move selected groups and their subprojects to current portal"
-msgstr ""
+msgstr "Перемістити обрані спільноти та їх підпроекти до поточного порталу"
 
 msgid "Move selected groups and their subprojects to current portal and message members"
-msgstr ""
+msgstr "Перемістити обрані спільноти та їх підпроекти до поточного порталу та повідомити учасників"
 
 msgid "The following Groups were converted to Projects:"
 msgstr "Такі спільноти були перетворені у проекти:"
@@ -108,7 +104,7 @@ msgid "Mobilität"
 msgstr "Мобільність"
 
 msgid "Energie"
-msgstr "Енергія"
+msgstr "Енергетика"
 
 msgid "Umwelt"
 msgstr "Навколишнє середовище"
@@ -135,7 +131,7 @@ msgid "Bauen und Wohnen"
 msgstr "Будівництво та житло"
 
 msgid "Klimaschutz"
-msgstr ""
+msgstr "Захист навколишнього середовища"
 
 msgid "Only team members can see the content you requested. Apply to become a member now!"
 msgstr "Тільки члени спільноти/проекту можуть бачити цей вміст. Надішліть запит членства зараз!"
@@ -161,7 +157,7 @@ msgstr "Здійснено вихід із системи, тому що цей 
 
 #, python-format
 msgid "You have tried to log in too many times. You may try to log in again in: %(duration)s."
-msgstr ""
+msgstr "Ви пробували увійти надто багато разів. Ви можете знову спробувати увійти через: %(duration)s."
 
 msgid "A user requested to become a member of this team (admins only)"
 msgstr "Хтось надіслав запит членства у цій спільноті (стосується тільки адміністраторів спільноти)"
@@ -224,17 +220,14 @@ msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s
 msgstr "%(sender_name)s призначив Вас адміністратором %(team_name)s на %(portal_name)s!"
 
 msgid "Your admin status for this team was revoked"
-msgstr ""
+msgstr "Ваш статус адміністратора цієї команди було анульовано"
 
-#, fuzzy
-#| msgid "You cannot change your own admin status."
 msgid "Revoked your admin status"
-msgstr "Ви не можете змінити власний статус адміністратора/-ки."
+msgstr "Відмінено Ваш статус адміністратора"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
+#, python-format
 msgid "%(sender_name)s revoked your admin status of \"%(team_name)s\" on %(portal_name)s!"
-msgstr "%(sender_name)s призначив Вас адміністратором %(team_name)s на %(portal_name)s!"
+msgstr "%(sender_name)s відмінив Ваш статус адміністратора в %(team_name)s на %(portal_name)s!"
 
 msgid "You were tagged in a post, document or other item"
 msgstr "Вас було позначено у повідомленні, документі або в іншому елементі"
@@ -262,70 +255,60 @@ msgstr "%(sender_name)s запросив(ла) Вас доєднатися до 
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s запросив Вас долучитися до %(team_name)s на %(portal_name)s!"
 
-#, fuzzy
-#| msgid "Show in other projects/groups"
 msgid "New link to the moved project/group"
-msgstr "Відобразити в інших проектах/спільнотах"
+msgstr "Нове посилання до проекту/спільноти, які було переміщено"
 
 #, python-format
 msgid "One of your projects/groups were moved to the portal \"%(portal_name)s\"! <br/><br/> Your user account for this portal is the same as for the old one - you do not need to register a new account! <br/><br/>All of your old URLs will continue to work and redirect you to the correct page on the new portal."
-msgstr ""
+msgstr "Один з Ваших проектів/спільнот було переміщено до порталу „%(portal_name)s“! <br/><br/> Ваш акаунт користувача для цього порталу такий же як і для попереднього - Вам не потрібно реєструвати новий акаунт! <br/><br/>Всі Ваші старі URL продовжують працювати і направляти на відповідні сторінки нового порталу."
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+#, python-format
 msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
-msgstr "%(sender_name)s запросив Вас долучитися до %(team_name)s на %(portal_name)s!"
+msgstr "„%(team_name)s“ було переміщено на %(portal_name)s!"
 
 msgid "Created"
 msgstr "Створено"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+#, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
-msgstr "%(sender_name)s запросив Вас долучитися до %(team_name)s на %(portal_name)s!"
+msgstr "%(sender_name)s тільки що створив проект/спільноту „%(team_name)s“ на %(portal_name)s!"
 
-#, fuzzy
-#| msgid "Created"
 msgid "Has created"
-msgstr "Створено"
+msgstr "Створив"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+#, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
-msgstr "%(sender_name)s запросив Вас долучитися до %(team_name)s на %(portal_name)s!"
+msgstr "%(sender_name)s тільки що створив ідею „%(object_name)s“ на %(portal_name)s!"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s has accepted the invitation to %(team_name)s on %(site_name)s!"
+#, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
-msgstr "%(sender_name)s прийняв запрошення долучитися до %(team_name)s на %(site_name)s!"
+msgstr "%(sender_name)s тільки що створив ідею „%(object_name)s“!"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! <br/><br/> To join, please click on the link below. You will be redirected to the portal, where you can view and accept the invitation."
+#, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
-msgstr "%(sender_name)s запросив(ла) Вас доєднатися до \"%(team_name)s\" на  %(portal_name)s! <br/><br/> Щоб доєднатися, пройдіть за посиланням внизу. Ви будете перенаправлені на портал, де Ви зможете подивитися і прийняти запрошення."
+msgstr "%(sender_name)s тільки що створив проект %(team_name)s“ на %(portal_name)s щодо ідеї, яку Ви відстежуєте! <br/><br/> Щоби ознайомитися, перейдіть за посиланням внизу. Ви зможете вирішити, чи хочете ви доєднатися до проекту."
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s has accepted the invitation to %(team_name)s on %(site_name)s!"
+#, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
-msgstr "%(sender_name)s прийняв запрошення долучитися до %(team_name)s на %(site_name)s!"
+msgstr "%(sender_name)s тільки що створив проект %(team_name)s“ щодо ідеї, яку Ви відстежуєте!"
 
 msgid "Deutsch--NATIVE-LANGUAGE"
-msgstr "Deutsch"
+msgstr "Deutsch - РІДНА-МОВА"
 
 msgid "English--NATIVE-LANGUAGE"
-msgstr "English"
+msgstr "English- РІДНА-МОВА"
 
 msgid "Russian--NATIVE-LANGUAGE"
-msgstr "Русский"
+msgstr "Русский- РІДНА-МОВА"
 
 msgid "Ukrainian--NATIVE-LANGUAGE"
-msgstr "Українська"
+msgstr "Українська- РІДНА-МОВА"
 
 msgid "French--NATIVE-LANGUAGE"
-msgstr "Français"
+msgstr "Français- РІДНА-МОВА"
 
 msgid "Polish--NATIVE-LANGUAGE"
-msgstr "Polski"
+msgstr "Polski- РІДНА-МОВА"
 
 msgid "Attachments"
 msgstr "Додатки"
@@ -701,7 +684,7 @@ msgid "Request about your group \"%(group_name)s\""
 msgstr "Запити щодо Вашої спільноти \"%(group_name)s\""
 
 msgid "Is Moderator"
-msgstr ""
+msgstr "Є Модератором"
 
 msgid "Team membership"
 msgstr "Членство у спільноті/проекті"
@@ -725,40 +708,28 @@ msgid "Team Invites for Unregistered Users"
 msgstr "Запрошення команди для незареєстрованих користувачів"
 
 msgid "Token"
-msgstr ""
+msgstr "Токен"
 
 msgid "The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. Can contain letters and numbers, but no spaces, and can be as long or short as you want."
-msgstr ""
+msgstr "Рядок токенів. Він буде відображений таким, який він є. Якщо користувач його вводить, капіталізація не важлива. Може містити букви і цифри, але не містити пробілів. Може бути такої довжини, якої забажаєте."
 
-#, fuzzy
-#| msgid "Short Description. Internal, will not be shown publicly."
 msgid "Short Description (optional). Will be shown on the token page."
-msgstr "Короткий опис. Внутрішній, не доступний для широкого кола."
+msgstr "Короткий опис (опціонально). Внутрішній, не доступний для широкого кола."
 
-#, fuzzy
-#| msgid "Valid to"
 msgid "Valid until"
 msgstr "Дійсний до"
 
-#, fuzzy
-#| msgid "Invited Groups"
 msgid "Invite-Groups"
-msgstr "Запросити групи"
+msgstr "Запросити спільноти"
 
-#, fuzzy
-#| msgid "Cosinnus group"
 msgid "Cosinnus Group Invite Token"
-msgstr "Cosinnus Спільнота"
+msgstr "Cosinnus токен запрошення до спільноти"
 
-#, fuzzy
-#| msgid "Cosinnus groups"
 msgid "Cosinnus Group Invite Tokens"
-msgstr "Cosinnus Спільноти"
+msgstr "Cosinnus токени запрошення до спільноти"
 
-#, fuzzy
-#| msgid "Slug must not be empty."
 msgid "Token must not be empty."
-msgstr "Коротке ім'я не повинно бути порожнім."
+msgstr "Токен не має бути порожнім."
 
 msgid "From Portal"
 msgstr "Від порталу"
@@ -817,25 +788,17 @@ msgstr "Cosinnus Спільнота"
 msgid "Cosinnus groups"
 msgstr "Cosinnus Спільноти"
 
-#, fuzzy
-#| msgid "Logo Image"
 msgid "Image"
-msgstr "Зображення логотипу"
+msgstr "Зображення"
 
-#, fuzzy
-#| msgid "Create Project"
 msgid "Created Projects"
-msgstr "Створити проект"
+msgstr "Створені проекти"
 
-#, fuzzy
-#| msgid "Cosinnus project"
 msgid "Cosinnus Idea"
-msgstr "Проект"
+msgstr "Ідея"
 
-#, fuzzy
-#| msgid "Cosinnus projects"
 msgid "Cosinnus Ideas"
-msgstr "Проекти"
+msgstr "Ідеї"
 
 msgid "Language"
 msgstr "Мова"
@@ -933,14 +896,12 @@ msgid "User"
 msgstr "Користувач/-ка"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Like"
 msgid "Liked"
-msgstr "Вподобання"
+msgstr "Вподобані"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Following"
-msgstr ""
+msgstr "Відстежуються"
 
 msgid "Create-Project or Group Button"
 msgstr "Кнопкп створити проект чи групу"
@@ -1223,7 +1184,7 @@ msgid "(The reported item has been deleted.)"
 msgstr "(Зміст, про який повідомлено, було видалено.)"
 
 msgid "Enter the 4 capital letters in the scrambled image"
-msgstr ""
+msgstr "Введіть 4 великі літери в закодоване зображення"
 
 msgid "This page is a preview of many good things to come! It is heavily under development and many features are incomplete or may not work properly yet!"
 msgstr "Ця сторінка є лише презентацією майбутнього мікросайту! Сайт знаходиться на стадії розробки, і багато функцій ще не завершено та можуть не працювати справно!"
@@ -1344,7 +1305,7 @@ msgid "Error embedding a twitter timeline"
 msgstr "У стрічці twitter знайдена помилка"
 
 msgid "Click to activate video"
-msgstr ""
+msgstr "Натисніть, щоб активувати відео"
 
 msgid "Error embedding a video"
 msgstr "У відео знайдена помилка"
@@ -1373,20 +1334,14 @@ msgstr "Поширити"
 msgid "Shrink"
 msgstr "Скоротити"
 
-#, fuzzy
-#| msgid "Check the projects/groups where you wish to show this event in. The event will be shown in the calendars and all lists, but will still remain in this group."
 msgid "Check the projects/groups where you wish to show this item in. It will be shown in all lists, but will still remain in this group."
-msgstr "Подивитися проекти/спільноти, які ви хочете відобразити у цьому заході. Захід буде продемонстровано в календарях та всіх списках, але залишиться у цій спільноті."
+msgstr "Подивитися проекти/спільноти, в яких Ви хочете відобразити цей об’єкт. Елемент буде продемонстровано в усіх списках, але він залишиться у цій спільноті."
 
-#, fuzzy
-#| msgid "Events from the Forum can be shown in any of your projects/groups."
 msgid "Items from the Forum can be shown in any of your projects/groups."
-msgstr "Заходи з Форуму можуть бути показані в будь-якій з ваших спільнот/проектів."
+msgstr "Об’єкти з Форуму можуть бути показані в будь-якому з Ваших проектів/спільнот."
 
-#, fuzzy
-#| msgid "Events from this group can be shown in any of the group's subprojects."
 msgid "Items from this group can be shown in any of the group's subprojects."
-msgstr "Заходи з цієї спільноти можуть бути відображені в будь якому з підпроектів спільноти."
+msgstr "Об’єкти з цієї спільноти можуть бути відображені у будь якому з підпроектів спільноти."
 
 msgid "Show in other projects/groups"
 msgstr "Відобразити в інших проектах/спільнотах"
@@ -1450,12 +1405,9 @@ msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_50_profileprivacy"
 msgstr "helptext_50_приватність профілю"
 
-#, fuzzy
-#| msgctxt "Look up this ID in the help text register for the translation text!"
-#| msgid "helptext_50_profileprivacy"
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_51_objectprivacy"
-msgstr "helptext_50_приватність профілю"
+msgstr "helptext_51_приватність об’єкту"
 
 msgid "Enter the email addresses of people you wish to invite to join the platform."
 msgstr "Введіть електронні адреси людей, яких ви бажаєте запросити до платформи."
@@ -1482,15 +1434,11 @@ msgstr "Запросити нових членів"
 msgid "Invite"
 msgstr "Запросити"
 
-#, fuzzy
-#| msgid "Show more Projects"
 msgid "Shown in my projects..."
-msgstr "Показати більше проектів"
+msgstr "Показати в моїх проектах…"
 
-#, fuzzy
-#| msgid "Show more Projects"
 msgid "Show in my projects..."
-msgstr "Показати більше проектів"
+msgstr "Показати в моїх проектах…"
 
 msgid "Rearrange"
 msgstr "Переоформити"
@@ -1763,10 +1711,8 @@ msgstr "Всі ті, кого наразі запросили"
 msgid "People currently invited by you"
 msgstr "Люди, яких наразі запросили Ви"
 
-#, fuzzy
-#| msgid "Decline Invitation"
 msgid "Delete invitation"
-msgstr "Відхилити запрошення"
+msgstr "Видалити запрошення"
 
 msgctxt "an action done *by* <username>"
 msgid "by"
@@ -1774,15 +1720,12 @@ msgstr ""
 "дії, здійснені\n"
 " *by*<username>"
 
-#, fuzzy, python-format
-#| msgid "Do you really want to decline the invitation?"
+#, python-format
 msgid "Do you really want to delete the invitation for \"%(title)s\"?"
-msgstr "Ви дійсно бажаєте віхилити запрошення?"
+msgstr "Ви дійсно бажаєте видалити запрошення для „%(title)s“?"
 
-#, fuzzy
-#| msgid "All members"
 msgid "Message all members"
-msgstr "Показати усіх"
+msgstr "Написати всім членам"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Send Message"
@@ -1873,20 +1816,20 @@ msgid "Edit Project"
 msgstr "Редагувати проект"
 
 msgid "Let's bring this idea to life!"
-msgstr ""
+msgstr "Давайте перевтілимо цю ідею в життя!"
 
 #, python-format
 msgid "Great to see you're creating a project from the idea \"%(idea_name)s\"!"
-msgstr ""
+msgstr "Чудово, що Ви створюєте проект з ідеї „%(idea_name)s“!"
 
 msgid "Once you have created your project, everyone who liked (and followed) the idea will receive a notification! They can then jump in and become a member of your new project. Don't worry - you still have to approve who may join and who can't when they request a membership."
-msgstr ""
+msgstr "Як тільки Ви створили проект, всі ті, хто вподобав (та відстежував) ідею, отримують сповіщення! Тоді вони зможуть доєднатися до Вашого нового проекту! Не хвилюйтеся, у Вас буде можливість підтвердити вступ, коли вони відправлять запити щодо членства."
 
 msgid "Your new project will also be displayed on the idea itself, so that everyone can see it and join in later on."
-msgstr ""
+msgstr "Ваш новий проект також буде відображено в ідеї, так щоб кожет міг її побачити та доєднатися пізніше."
 
 msgid "Of course you can also create a project without a connection to the idea - just click \"Create Project\" on the left side to do so."
-msgstr ""
+msgstr "Ви, звісно, можете створювати проекти без прив’язки до ідеї - просто натисніть „Створити проект“ з лівого боку."
 
 msgid "There was an error in one of the fields you entered. Please correct it before saving!"
 msgstr "В одному з полів, в які Ви увійшли сталася помилка. Будь ласка, виправьте перед тим як зберегти!"
@@ -1898,7 +1841,7 @@ msgid "Facebook-Integration"
 msgstr "Інтеграція з Facebook"
 
 msgid "Group name"
-msgstr "Назва групи"
+msgstr "Назва спільноти"
 
 msgid "Project name"
 msgstr "Назва проекту"
@@ -1949,7 +1892,7 @@ msgid "Select Group"
 msgstr "Вибрати спільноту"
 
 msgid "Are there any projects/groups related to this one?"
-msgstr "Існують пов'язані проекти/групи?"
+msgstr "Існують пов'язані проекти/спільноти?"
 
 msgid "Select related Projects/Groups"
 msgstr "Обрати пов'язані проекти/спільноти"
@@ -1979,7 +1922,7 @@ msgid "Which apps should be activated?"
 msgstr "Які застосунки потрібно використовувати?"
 
 msgid "This App can only be activated for a Group, but not for a Project!"
-msgstr "Цей додаток можна активувати для групи, але не для проекту!"
+msgstr "Цей додаток можна активувати для спільноти, але не для проекту!"
 
 msgid "Microsite Wallpaper"
 msgstr "Фон мікросайту"
@@ -2283,69 +2226,54 @@ msgstr "Повідомлення від %(sender_full_name)s"
 
 #. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Created"
 msgid "Create Idea"
-msgstr "Створено"
+msgstr "Створити ідею"
 
-#, fuzzy
-#| msgid "Delete widget"
 msgid "Delete this idea"
-msgstr "Видалити веб-віджет"
+msgstr "Видалити цю ідею"
 
-#, fuzzy, python-format
-#| msgid "Do you really want to leave „%(title)s“?"
+#, python-format
 msgid "Do you really want to delete idea „%(title)s“?"
-msgstr "Ви дійсно бажаєте залишити проект «%(title)s»?"
+msgstr "Ви дійсно бажаєте видалити ідею «%(title)s»?"
 
-#, fuzzy
-#| msgid "Delete folder"
 msgid "Delete Idea"
-msgstr "Видалити папку"
+msgstr "Видалити ідею"
 
 msgid "Yes"
-msgstr ""
+msgstr "Так"
 
-#, fuzzy
-#| msgid "Edit folder"
 msgid "Edit Idea"
-msgstr "Редагувати папку"
+msgstr "Редагувати ідею"
 
 msgid "We make your ideas heard!"
-msgstr ""
+msgstr "Ми робимо так, щоб Ваші ідеї були почуті!"
 
 msgid "Ideas are a great way to inspire poeple and start a project in your region!"
-msgstr ""
+msgstr "Ідеї - чудовий спосіб надихнути людей, щоб почати проект у Вашому регіоні!"
 
 msgid "Anyone can create a project based on your idea and there is no limit on how many projects can be created. Your idea will remain visible and will even show a list of all the projects inspired by it!"
-msgstr ""
+msgstr "Будь-хто може створювати проекти, базуючись на Вашій ідеї. Немає обмежень щодо того, скільки проектів може бути створено. Ваша ідея лишиться видимою та буде навіть відображена у спвску всіх проектів, які вона надихнула!"
 
 msgid "You and anyone who like (and follow) your idea will be notified when a new project gets created from it. This way, everyone who is interested can jump right into it and become active in the new project (they still have to ask permission to become a member)."
-msgstr ""
+msgstr "Ви та будь-хто, хто вподобає (та відстежує) Вашу ідею отримує сповіщення, коли новий проект буде створено задля її реалізації. Таким чином, будь-хто, кому цікаво, може почати активність у новому проекті (спершу потрібно запросити дозвіл членство)."
 
-#, fuzzy
-#| msgid "Enter a name for the project."
 msgid "Enter a descriptive title for your idea"
-msgstr "Уведіть назву для проекту."
+msgstr "Введіть опис Вашої ідеї"
 
 msgid "The description for your idea. Explain your vision and your goals."
-msgstr ""
+msgstr "Опис Вашої ідеї. Поясніть візію та цілі."
 
 msgid "We could not find an address for your location. Please enter an address manually!"
-msgstr ""
+msgstr "Ми не можемо знайти адресу для вашої локації. Будь ласка, введіть адресу вручну!"
 
 msgid "This will determine who can see your idea."
-msgstr ""
+msgstr "Це визначить, хто може бачити Вашу ідею."
 
-#, fuzzy
-#| msgid "This project will be set to be publicly visible!"
 msgid "This idea will be set to be publicly visible!"
-msgstr "Цей проект має бути налаштований як публічно видимий!"
+msgstr "Ця ідея буде налаштована як публічно видима!"
 
-#, fuzzy
-#| msgid "This means that your name, avatar and user profile can be seen by ANYONE on the internet and may potentially be included in search engine results!"
 msgid "Publicly visible content can be seen by ANYONE on the internet and it may potentially be included in search engine results!"
-msgstr "Це означає, що будь-хто в Інтернеті може бачити Ваше ім’я, фото профілю та профіль і він, потенційно, може бути включений в результати пошукових машин!"
+msgstr "Публічно видимий контент може бути видимий БУДЬ-КИМ в інтернеті та потенційно може бути доданий до пошукових результатів!"
 
 msgid "Registered users only"
 msgstr "Лише зареєстровані користувачі"
@@ -2360,7 +2288,7 @@ msgid "Delete folder"
 msgstr "Видалити папку"
 
 msgid "Download"
-msgstr ""
+msgstr "Завантажити"
 
 msgid "Do you really want to delete this folder and ALL folders and items it contains? This actions CANNOT be reversed!"
 msgstr "Ви дійсно бажаєте видалити цю папку разом з УСІМА папками та файлами, що містяться у ній? Цю дію НЕМОЖЛИВО скасувати!"
@@ -2465,23 +2393,7 @@ msgstr ""
 msgid "Offensive item reported: \"%(object_name)s\" on %(site_name)s!"
 msgstr "Образливий зміст, про який було повідомлено: у «%(object_name)s» на %(site_name)s!"
 
-#, fuzzy, python-format
-#| msgid ""
-#| "Hi %(user_name)s,\n"
-#| "\n"
-#| "you have just registered an account at %(site_name)s. We're happy to see you!\n"
-#| "\n"
-#| "You will need to verify your email %(user_email)s before you can log in. \n"
-#| "\n"
-#| "\n"
-#| "Please click on the following link to verify your email address (or copy and paste the link it in your browser):\n"
-#| "%(domain_url)s%(user_verification_url)s\n"
-#| "\n"
-#| "\n"
-#| "\n"
-#| "Thank you and see you soon!\n"
-#| "\n"
-#| "Your %(site_name)s Team"
+#, python-format
 msgid ""
 "Hi %(user_name)s,\n"
 "\n"
@@ -2501,19 +2413,20 @@ msgid ""
 msgstr ""
 "Вітаємо %(user_name)s,\n"
 "\n"
-"ви щойно зареєстрували свій обліковий запис користувача на %(site_name)s. Дякуємо що долучилися до нас!\n"
+"ви щойно зареєстрували свій акаунт на %(site_name)s. Дякуємо що долучилися до нас!\n"
 "\n"
-"Для того, щоб увійти на платформу, необхідно підтвердити вашу адресу електронної скриньки %(user_email)s.\n"
-"\n"
-"\n"
-"Будь ласка, перейдіть за нижче вказаним посиланням для підтвердження вашої email-адреси (або скопіюйте та вставте посилання в адресний рядок вашого браузера):\n"
-"%(domain_url)s%(user_verification_url)s\n"
+"Для того, щоб увійти на платформу, необхідно підтвердити вашу адресу електронної скриньки %(user_email)s. \n"
 "\n"
 "\n"
+"Будь ласка, перейдіть за нижче вказаним посиланням для підтвердження вашої email-адреси (або скопіюйте та вставьте посилання в адресний рядок вашого браузера):\n"
+"%(domain_url)s%(user_verification_url)s%(next)s\n"
 "\n"
-"Дякуємо та до зустрічі на нашому сервісі!\n"
 "\n"
-"Ваша команда %(site_name)s"
+"\n"
+"\n"
+"Дякуємо, та до зустрічі!\n"
+"\n"
+"Ваша %(site_name)s команда"
 
 #, python-format
 msgid ""
@@ -2895,18 +2808,14 @@ msgstr "Теми з якими ми працюємо"
 msgid "Activities and interests"
 msgstr "Діяльність та інтереси"
 
-#, fuzzy
-#| msgid "What would you like to learn?"
 msgid "Where would your idea be realized?"
-msgstr "Чого би ви хотіли навчитися?"
+msgstr "Де мала би бути реалізована Ваша ідея?"
 
 msgid "Enter a place or address and then choose a point on the map."
 msgstr "Введіть місце чи адресу а потім виберіть місце на карті."
 
-#, fuzzy
-#| msgid "Which topics are you involved with?"
 msgid "Which topics fit your idea?"
-msgstr "З якими темами ви працюєте?"
+msgstr "Яким темам відповідає Ваша ідея?"
 
 msgid "Where do you live?"
 msgstr "Де ви мешкаєте?"
@@ -2967,7 +2876,7 @@ msgid "People"
 msgstr "Люди"
 
 msgid "Invited Groups"
-msgstr "Запросити групи"
+msgstr "Спільноти, які запросили"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Groups"
@@ -2990,19 +2899,15 @@ msgstr "Усі проекти"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Ideas"
-msgstr ""
+msgstr "Ідеї"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "My teams"
 msgid "My Ideas"
-msgstr "Мої проекти"
+msgstr "Мої ідеї"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "All users"
 msgid "All Ideas"
-msgstr "Усі користувачі"
+msgstr "Всі ідеї"
 
 msgid "Search..."
 msgstr "Пошук..."
@@ -3163,32 +3068,28 @@ msgid "Create account"
 msgstr "Створити обліковий запис"
 
 msgid "Welcome to the Community!"
-msgstr ""
+msgstr "Ласкаво просимо до Спільноти!"
 
 msgid "You need a user account to join projects and become active!"
-msgstr ""
+msgstr "Вам потрібен акааунт користувача, для того щоб доєднуватися до проектів та ставати активним!"
 
 msgid "You need a user account to continue!"
-msgstr ""
+msgstr "Вам потрібен акаунт користувача, щоб продовжити!"
 
 msgid "Signing up is easy and fast. Just fill out these fields and you're all set!"
-msgstr ""
+msgstr "Реєстрація проста та швидка. Просто заповніть ці поля і все буде встановлення!"
 
-#, fuzzy
-#| msgid "Create account"
 msgid "Already have an account?"
-msgstr "Створити обліковий запис"
+msgstr "Ви вже маєте акаунт?"
 
-#, fuzzy
-#| msgid "Logged in before"
 msgid "Log in here"
-msgstr "Спершу увійти"
+msgstr "Увійти тут"
 
 msgid "You are signing up using this invite token:"
-msgstr ""
+msgstr "Ви реєструєтесь, використовуючи цей токен запрошення:"
 
 msgid "After signup, you will automatically become a member of the associated projects and groups."
-msgstr ""
+msgstr "Після реєстрації Ви автоматично станете членом асоційованих проектів та спільнот."
 
 msgid "Email address"
 msgstr "Адреса електронної скриньки"
@@ -3239,7 +3140,7 @@ msgid "My Projects and Groups"
 msgstr "Мо"
 
 msgid "Other Projects and Groups"
-msgstr "Інші проекти та групи"
+msgstr "Інші проекти та спільноти"
 
 msgid "Search for Users"
 msgstr "Пошук користувачів"
@@ -3247,13 +3148,11 @@ msgstr "Пошук користувачів"
 msgid "Ordering"
 msgstr "Сортування"
 
-#, fuzzy
-#| msgid "News"
 msgid "Newest"
-msgstr "Новини"
+msgstr "Найновіші"
 
 msgid "Relevance"
-msgstr ""
+msgstr "Актуальність"
 
 #, python-format
 msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\" with topics:"
@@ -3283,125 +3182,96 @@ msgid "Enter one or more search terms or select a topic to search."
 msgstr "Вкажіть один чи більше пошукових запитів, або оберіть тему для пошуку."
 
 msgid "Simple Statistics"
-msgstr ""
+msgstr "Проста статистика"
 
-#, fuzzy
-#| msgid "Delete"
 msgid "Date"
-msgstr "Видалити"
+msgstr "Дата"
 
-#, fuzzy
-#| msgid "Forum"
 msgid "From"
-msgstr "Форум"
+msgstr "З"
 
 msgid "Start date."
-msgstr ""
+msgstr "Дата початку."
 
-#, fuzzy
-#| msgid "Title"
 msgid "Time"
-msgstr "Назва"
+msgstr "Час"
 
 msgid "Until"
-msgstr ""
+msgstr "До"
 
-#, fuzzy
-#| msgid "Any date"
 msgid "End date."
-msgstr "Будь яка дата"
+msgstr "Кінцева дата."
 
 msgid "Ok"
-msgstr ""
+msgstr "Ок"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Users"
 msgid "My Users"
-msgstr "Користувачі"
+msgstr "Мої користувачі"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Events"
 msgid "My Events"
-msgstr "Заходи"
+msgstr "Мої заходи"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "All users"
 msgid "All Users"
 msgstr "Усі користувачі"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Events"
 msgid "All Events"
-msgstr "Заходи"
+msgstr "Уси заходи"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgctxt "Calendar"
-#| msgid "Event"
 msgid "Event"
 msgstr "Захід"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Idea"
-msgstr ""
+msgstr "Ідея"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Create folder"
 msgid "Create User"
-msgstr "Створити папку"
+msgstr "Створити користувача"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Created"
 msgid "Create Event"
-msgstr "Створено"
+msgstr "Створити захід"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names, Topics and Places..."
-msgstr ""
+msgstr "Шукати назви, теми та місця…"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search for Names and Topics..."
-msgstr ""
+msgstr "Шукати назви та теми…"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Share"
 msgid "Where"
-msgstr "Поширити"
+msgstr "Де"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "In map area"
-msgstr ""
+msgstr "На полі карти"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "If active, searching will be restricted to the visible map area."
-msgstr ""
+msgstr "Якщо це активно, пошук буде обмежено видимим полем карти."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Apply Filters"
-msgstr ""
+msgstr "Застосувати фільтри"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Clear Filters"
-msgstr ""
+msgstr "Відключити фільтри"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Stream"
 msgid "Street"
-msgstr "Діяльність"
+msgstr "Вулиця"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Created"
 msgid "Create idea"
-msgstr "Створено"
+msgstr "Створити ідею"
 
 #. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
@@ -3410,228 +3280,179 @@ msgstr "Далі"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Choose a location for your idea by dragging the marker!"
-msgstr ""
+msgstr "Обрати локацію для Вашої ідеї, перетягнувши курсор!"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "of"
-msgstr ""
+msgstr "з"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Reset"
 msgid "Results"
-msgstr "Скинути"
+msgstr "Результати"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "No results found."
-msgstr ""
+msgstr "Результатів немає."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Could not complete the search due to an error."
-msgstr ""
+msgstr "Не можно виконати пошук через помилку."
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Search in teams"
 msgid "Search when moving the map"
-msgstr "Пошук серед проектів"
+msgstr "Пошук на карті"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Search in teams"
 msgid "Search this area"
-msgstr "Пошук серед проектів"
+msgstr "Пошук у цьому районі"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Participants"
-msgstr ""
+msgstr "Учасники"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Related Projects/Groups"
 msgid "Projects/Groups"
-msgstr "Пов'язані проекти/спільноти"
+msgstr "Проекти/Спільноти"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Contact info"
 msgid "No info."
-msgstr "Контактна інформація"
+msgstr "Немає інформації."
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Group Administrator"
 msgid "Administrator"
-msgstr "Адміністратори спільноти"
+msgstr "Адміністратор"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Portal Administrators"
 msgid "Administrators"
-msgstr "Адміністратори порталу"
+msgstr "Адміністратори"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Portal Administrators"
 msgid "Administrators unknown"
-msgstr "Адміністратори порталу"
+msgstr "Адміністратори невідомі"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "No Description set"
 msgid "No description yet."
-msgstr "Опис не створено"
+msgstr "Опис не створено."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Choose a location for your idea by dragging & dropping the marker. You can still change this location later on."
-msgstr ""
+msgstr "Оберіть локацію для Вашої ідеї, перетягнувши курсор. Пізніше Ви зможете змінити локацію."
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
 msgid "Back to location selection"
-msgstr "Опис відсутній"
+msgstr "Повернутися до вибору локації"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Project name"
 msgid "Protected Content"
-msgstr "Назва проекту"
+msgstr "Захищенний контент"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sorry, but you cannot view details for this content."
-msgstr ""
+msgstr "Вибачте, але Ви не можете переглядати інформацію щодо цього контенту."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "This can happen when its visibility settings have changed recently."
-msgstr ""
+msgstr "Це може статися, якщо налаштування видимості були змінені нещодавно."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Please register or log in to continue!"
-msgstr ""
+msgstr "Будь ласка, щареєструйтеся чи увійдіть, щоб продовжити!"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Error!"
-msgstr ""
+msgstr "Помилка!"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Sorry, but the requested content could not be retrieved from the server."
-msgstr ""
+msgstr "Вибачте, контент, який ви хочете переглянути не вдається завантажити з сервера."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Visit Event Page"
-msgstr ""
+msgstr "Відвідати сторінку заходу"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Hidden"
 msgid "Hidden Users"
-msgstr "Приховано"
+msgstr "Приховані користувачі"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Hidden"
 msgid "Hidden User"
-msgstr "Приховано"
+msgstr "Прихований користувач"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "You are a member!"
 msgid "You are a Member"
-msgstr "Тепер ви член!"
+msgstr "Тепер ви Користувач"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Edit Group"
 msgid "Join Group"
-msgstr "Редагувати спільноту"
+msgstr "Долучитися до спільноти"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Create Group"
 msgid "Message Group"
-msgstr "Створити спільноту"
+msgstr "Написати спільноті"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Author"
-msgstr ""
+msgstr "Автор"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Poll"
 msgid "Follow"
-msgstr "Опитування"
+msgstr "Відстежувати"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Create Project"
 msgid "Create Project from Idea"
-msgstr "Створити проект"
+msgstr "Створити проект з ідеї"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Edit Your Profile"
 msgid "Edit your Idea"
-msgstr "Редагувати профіль"
+msgstr "Редагувати Вашу ідею"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
-msgstr ""
+msgstr "Ви отримуєте сповіщення, якщо буде створено проект щ ідеї, яку Ви вподобали. Якщо Ви не хочете отримувати сповіщення, натисніть кнопку „не стежити“!"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Could not save your like setting because of an error."
-msgstr ""
+msgstr "Не вдається зберегти налаштування Ваших вподобань через помилку."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Could not save your follow setting because of an error."
-msgstr ""
+msgstr "Не вдається зберегти налаштування Ваших відстежень через помилку."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"
-msgstr ""
+msgstr "Проекти — Створені з цієї ідеї"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Edit Project"
 msgid "Join Project"
-msgstr "Редагувати проект"
+msgstr "Долучитися до проекту"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "Create Project"
 msgid "Message Project"
-msgstr "Створити проект"
+msgstr "Написати проекту"
 
 msgid "Quick Join"
-msgstr ""
+msgstr "Швидко доєднатися"
 
 msgid "Using this token, you can automatically join the following projects and groups"
-msgstr ""
+msgstr "Використовуючи цей токен, ви автоматично доєднуєтеся до проектів та спільнот, які відстежуєте"
 
 msgid "Team up quickly using an invite token"
-msgstr ""
+msgstr "Швидко об’єднатися, використовуючи токен запрошення"
 
-#, fuzzy
-#| msgid "Join now!"
 msgid "Join all now!"
-msgstr "Долучитися зараз!"
+msgstr "Долучитися до всього зараз!"
 
-#, fuzzy
-#| msgid "Create account"
 msgid "Create account and join"
-msgstr "Створити обліковий запис"
+msgstr "Створити акаунт та доєднатися"
 
 msgid "If you know an invite token, you can automatically join groups and projects, no matter if you have a user account yet or not."
-msgstr ""
+msgstr "Якщо ви знаєте токен запрошення, Ви можете автоматично долучитися до груп та проектів, не залежно від того, чи маєте ви акаунт користувача."
 
-#, fuzzy
-#| msgid "Enter a description"
 msgid "Enter a token:"
-msgstr "Введіть опис"
+msgstr "Введіть токен:"
 
-#, fuzzy
-#| msgid "From Team Type"
 msgid "For example"
-msgstr "Від типу спільноти"
+msgstr "Для прикладу"
 
 msgid "About me"
 msgstr "Про мене"
@@ -3758,7 +3579,7 @@ msgstr "Чому пов'язати?"
 
 msgctxt "Facebook connect explanation box"
 msgid "When you connect your Facebook account you can easily publish your news posts on your Facebook timeline. You can also connect your projects/groups to a Facebook Group or Fan-Site to enable members to publish their news posts there, too."
-msgstr "Якщо ви пов'язуєте Ваш Facebook акаунт, Ви зможете легко публікувати Ваші новини у стрічку Facebook. Ви зможете поєднати Ваші групи/проекти з Facebook Групою та фан-сторінкою, щоб дати можливість членам також публікувати свої новини."
+msgstr "Якщо ви пов'язуєте Ваш Facebook акаунт, Ви зможете легко публікувати Ваші новини у стрічку Facebook. Ви зможете поєднати Ваші спільноти/проекти з Facebook Групою та фан-сторінкою, щоб дати можливість членам також публікувати свої новини."
 
 msgctxt "Facebook connect explanation box"
 msgid "For that, we need your permission to publish on Facebook in your name."
@@ -3811,13 +3632,13 @@ msgid "Also post this to this project/group's Facebook Group"
 msgstr "Також опублікувати це в Facebook спільноті цього проекту/спільноти"
 
 msgid "When you submit this post, it will be posted to the Facebook Fan-Page of this project/group, in the voice of that Fan-Page."
-msgstr "Якщо ви публікуєте цей пост, його буде розміщено на Facebook фан-сторінці проекту/групи, від імені фан-сторінки."
+msgstr "Якщо ви публікуєте цей пост, його буде розміщено на Facebook фан-сторінці проекту/спільноти, від імені фан-сторінки."
 
 msgid "When you submit this post, it will be posted from your Facebook Account as a visitor's post to the Facebook Fan-Page of this project/group."
-msgstr "Коли Ви опублікуєте цей допис, його буде розміщено на Вашому Facebook акауні як гостьовий пост Facebook фан-сторінки проекту/групи."
+msgstr "Коли Ви опублікуєте цей допис, його буде розміщено на Вашому Facebook акауні як гостьовий пост Facebook фан-сторінки проекту/спільноти."
 
 msgid "When you submit this post, it will be posted from your Facebook Account, exactly as seen, on the Facebook Group of this project/group."
-msgstr "Коли ви опублікуєте цей допис, його буде розміщено від імені Вашого Facebook акаунта, точно як він виглядає на Facebook Групі проекту/групи."
+msgstr "Коли ви опублікуєте цей допис, його буде розміщено від імені Вашого Facebook акаунта, точно як він виглядає на Facebook Групі проекту/спільноти."
 
 msgid "Connect a Facebook Group or Fan-Page to enable members to publish their news posts there, too!"
 msgstr "Поєднати Facebook Групу чи Фан-сторінку щоб дати можливість членам також публікувати там свої новини!"
@@ -3830,19 +3651,19 @@ msgstr "Зв'язати з Facebook спільнотою"
 
 #, python-format
 msgid "You can connect your projects and groups to a Facebook Group. Once connected, your members can choose to share the news posts they write on %(site_name)s to the Facebook Group. (They need to connect their accounts to Facebook, as well!)"
-msgstr "Ви можете пов'язати Ваші проекти та групи з Facebook групою. Одного разу пов'язавши, Ваші члени зможуть обирати, чи поширювати їх новини на %(site_name)s в Facebook Групі. (Вони також мають пов'язати свої акаунти з Facebook!)"
+msgstr "Ви можете пов'язати Ваші проекти та спільноти з Facebook спільнотою. Одного разу пов'язавши, Ваші члени зможуть обирати, чи поширювати їх новини на %(site_name)s в Facebook Спільноті. (Вони також мають пов'язати свої акаунти з Facebook!)"
 
 msgid "Please be aware that users can only post to your Group if they would also be permitted post in it on Facebook!"
 msgstr "Будь ласка, будьте свідомими, що користувачі зможуть публікувати у Вашій Групі тільки лише якщо вони матимуть дозвіл публікувати це на Facebook!"
 
 msgid "You can find the ID of your Facebook Group on the Info-page in the About tab of the Group on Facebook."
-msgstr "Ви можете знайти ID Вашої Facebook групи на сторінці Інфо у вкладці Про нас у групі на Facebook."
+msgstr "Ви можете знайти ID Вашої Facebook спільноти на сторінці Інфо у вкладці Про нас у групі на Facebook."
 
 msgid "Facebook Group to link to"
 msgstr "Facebook Група поєднана з"
 
 msgid "Group Id or name (example: 1172392116092353)"
-msgstr "Id Групи чи ім'я (приклад: 1172392116092353)"
+msgstr "Id Спільноти чи ім'я (приклад: 1172392116092353)"
 
 msgid "Connect a Facebook Fan-Page"
 msgstr "Зв'язати з фан-сторінкою Facebook"
@@ -3852,10 +3673,10 @@ msgid "You can connect your projects and groups to a Facebook Fan-Page. Once con
 msgstr "Ви можете поєднати проекти та спільноти з Facebook фан-сторінкою. Одного разу поєднавши, ви можете публікувати дописи і писати напряму на %(site_name)s на тій фан-сторінці, якщо ви є одним з її адміністраторів на Facebook."
 
 msgid "All other members of your project/group can publish their posts as visitor's posts on the Fan-Page. (They need to connect their accounts to Facebook, as well!)"
-msgstr "Всі інші члени Вашого проекту/групи можуть публікувати свої пости як гості на фан-сторінці. (Їм також потрібно приєднати свої Facebook акаунти)"
+msgstr "Всі інші члени Вашого проекту/спільноти можуть публікувати свої пости як гості на фан-сторінці. (Їм також потрібно приєднати свої Facebook акаунти)"
 
 msgid "If you wish for other members to be able to post directly to the Fan-Page, you can make them co-administrators of your project/group (and you must make them Editors of the Fan-Page on Facebook!). They will be asked to confirm their Editor access of the Fan-Page, and then will be able to publish to it."
-msgstr "Якщо Ви бажаєте дозволити іншим членам напряму дописувати на фан-сторінку, Ви можете зробити їх адміністраторами Вашого проекту/групи (Ви також маєте зробити їх редакторами фан-сторінки на Facebook!). Їх запросять підтвердити їх редакторський доступ до фан-сторінки і потім вони зможуть публікувати дописи."
+msgstr "Якщо Ви бажаєте дозволити іншим членам напряму дописувати на фан-сторінку, Ви можете зробити їх адміністраторами Вашого проекту/спільноти (Ви також маєте зробити їх редакторами фан-сторінки на Facebook!). Їх запросять підтвердити їх редакторський доступ до фан-сторінки і потім вони зможуть публікувати дописи."
 
 msgid "The unique name of your Fan-Page is the name of the Fan-Page in the URL on Facebook (example: https://www.facebook.com/myfanpage/)"
 msgstr "Унікальне ім'я Вашої фан-сторінки - це ім'я URL фан-сторінки на Facebook (приклад: https://www.facebook.com/myfanpage/)"
@@ -3980,7 +3801,7 @@ msgid "About Us"
 msgstr "Про нас"
 
 msgid "Question about"
-msgstr ""
+msgstr "Питання щодо"
 
 #, python-format
 msgid "The language \"%s\" is not supported"
@@ -4008,13 +3829,13 @@ msgid "We could not post this news post on the Facebook Group/Fan-Page. If this 
 msgstr "Ви не можете опублікувати цю новину в Facebook спільноті/фан-сторінці. Якщо проблема повториться, будь ласка спробуйте вийти та зайти на свій аккаунт на Facebook та переконайтеся, що ви встановили правильні налаштування приватності допису. Якщо Ви намагаєтеся дописати до фан-сторінки, переконайтеся, що ви отримали необхідні дозволи для публікації там, перконайтеся також, що ви є редактором фан-сторінки! Якщо це не спрацює, сконтактуйте з адміністратором проекту/спільноти!"
 
 msgid "You can only connect to either a Facebook Group or a Fan-Page, but not both!"
-msgstr "Ви можете приєднатися до Facebook групи, або до фан-сторінки, але не до двох одночасно!"
+msgstr "Ви можете приєднатися до Facebook спільноти, або до фан-сторінки, але не до двох одночасно!"
 
 msgid "Please enter a numeric Facebook Group-ID only!"
 msgstr "Будь ласка, вводіть тільки цифровий ID Facebook спільноти!"
 
 msgid "The Facebook Fan-Page ID or Group ID could not be found on Facebook! Make sure you have entered the correct ID for your Group/Fan-Page!"
-msgstr "ID Facebook фан-сторінка чи ID групи не вдається знайти на Facebook! Переконайтеся, що ви ввели коректні ID для Вашої групи/фан-сторінки!"
+msgstr "ID Facebook фан-сторінка чи ID спільноти не вдається знайти на Facebook! Переконайтеся, що ви ввели коректні ID для Вашої спільноти/фан-сторінки!"
 
 msgid "We could not obtain access to the Fan-Page for your connected Facebook Account. Please check that you entered the correct Fan-Page name, and that you are an Editor of that Fan-Page!"
 msgstr "Ви не можете отримати доступ до фан-сторінки, пов'язаної з Facebook акаунтом. Будь ласка, перевірте, чи Ви ввели правильне ім'я фан-сторінки і що ви є редактором фан-сторінки!"
@@ -4151,33 +3972,24 @@ msgstr "Хороші новини! Люди з цією адресою вже з
 msgid "Success! We are now sending out invitations to these email addresses: %s"
 msgstr "Успішно! Ви зараз відправляєте запрошення за такими адресами: %s"
 
-#, fuzzy
-#| msgid "There was an error while trying to submit your report. Please try again in a moment."
 msgid "There was an error when trying to delete the invitation."
-msgstr "При надсиланні повідомлення виникла помилка. Будь ласка, спробуйте знову за кілька хвилин."
+msgstr "Під час видалення запрошення сталася помилка."
 
-#, fuzzy
-#| msgid "The %(team_type)s was changed successfully."
 msgid "The invitation was successfully deleted."
-msgstr "%(team_type)s було успішно змінено."
+msgstr "Запрошення було успішно видалено."
 
-#, fuzzy
-#| msgid "Your selection for showing this event in projects/groups was updated."
 msgid "Your selection for showing this item in projects/groups was updated."
-msgstr "Ваша вибірка для відображення заходу в проектах/спільнотах була актуалізована."
+msgstr "Ваш вибір для відображення цього об’єкту в проектах/спільнотах була актуалізована."
 
-#, fuzzy, python-format
-#| msgid "This event is now being shown in these projects/groups: %(group_names)s"
+#, python-format
 msgid "This item is now being shown in these projects/groups: %(group_names)s"
-msgstr "Цей захід тепер відображається в цих проектах/спільнотах: %(group_names)s"
+msgstr "Цей об’єкт тепер відображається в цих проектах/спільнотах: %(group_names)s"
 
 msgid "No appname given for adding containers."
 msgstr "Не вказано імені застосунку для додавання контейнерів."
 
-#, fuzzy
-#| msgid "Your profile was edited successfully."
 msgid "Your idea was deleted successfully."
-msgstr "Ваш профіль успішно відредаговано."
+msgstr "Ваша ідея успішно видалена."
 
 msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgstr "Під час обробки вашого основного фото виникла помилка. Перевірте, чи вибрано достатньо велику частину зображення!"
@@ -4267,21 +4079,17 @@ msgstr "Користувача/-ку «%(user)s» успішно зареєст�
 msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
 msgstr "Користувача/-ку «%(user)s» успішно зареєстровано. Ми надішлемо вам електронного листа на вашу адресу «%(email)s», коли це буде зроблено. Обліковий запит необхідно перевірити та активувати, перш ніж ви зможете увійти в систему."
 
-#, fuzzy
-#| msgid "The unsubscribe link you have clicked does not seem to be valid!"
 msgid "The invite token you have used does not exist!"
-msgstr "Посилання на відписку, по якому ви пройшли, більше не є актуальним!"
+msgstr "Токен запрошення, який ви використали, не існує!"
 
 msgid "Sorry, but the invite token you have used is not active yet or not active anymore!"
-msgstr ""
+msgstr "Вибачте, але токен запрошення, який Ви використали, ще не активний, або вже не активний!"
 
 msgid "Token invitations applied. You are now a member of the associated projects/groups!"
-msgstr ""
+msgstr "Токен запрошень використано! Тепер ви — член асоційованих проектів/спільнот!"
 
-#, fuzzy
-#| msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgid "There was an error while processing your invites. Some of your invites may not have been applied."
-msgstr "Під час обробки вашого основного фото виникла помилка. Перевірте, чи вибрано достатньо велику частину зображення!"
+msgstr "Під час обробки ваших запрошень виникла помилка. Деякі з Ваших запрошень не можна застосувати."
 
 msgid "You are already logged in!"
 msgstr "Ви уже увійшли в систему!"
@@ -4290,12 +4098,10 @@ msgid "Your privacy settings were saved. Welcome!"
 msgstr "Ваші налаштування приватності збережено. Вітаємо!"
 
 msgid "Please enter a token!"
-msgstr ""
+msgstr "Будь ласка, введіть токен!"
 
-#, fuzzy
-#| msgid "The unsubscribe link you have clicked does not seem to be valid!"
 msgid "Sorry, but the invite token you have used does not seem to be valid!"
-msgstr "Посилання на відписку, по якому ви пройшли, більше не є актуальним!"
+msgstr "Вибачте, токен запрошення, який Ви вивикористали, не є дійсним!"
 
 msgid "The user account you were looking for does not exist! Their registration was probably already denied."
 msgstr "Обліковий запис, який ви шукаєте не існує! Ймовірно інший/-ша адміністратор/-ка уже відхилив/-ли реєстрацію."
