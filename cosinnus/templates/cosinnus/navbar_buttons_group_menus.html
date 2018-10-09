@@ -5,10 +5,13 @@
 	    <li class="dropdown">
 	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 	            {% trans "Groups" %}
+	            {% if societies_invited and societies_invited|length > 0 %}
+	                (+{{ societies_invited|length }})
+	            {% endif %}
 	            <i class="fa fa-caret-down"></i>
 	        </a>
-	        <ul class="dropdown-menu">
-	            {% for g in societies|slice:":30" %}
+	        <ul class="dropdown-menu scrollable-dropdown-desktop-only">
+	            {% for g in societies %}
 	                <li{% if g == appsmenu_society %} class="active"{% endif %}><a href="{% group_url 'cosinnus:group-dashboard' group=g %}">{{ g.name }}</a></li>
 	            {% endfor %}
 	            {% if societies|length > 30 %}
@@ -41,10 +44,13 @@
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             {% trans "Projects" %}
+            {% if groups_invited and groups_invited|length > 0 %}
+                (+{{ groups_invited|length }})
+            {% endif %}
             <i class="fa fa-caret-down"></i>
         </a>
-        <ul class="dropdown-menu">
-            {% for g in groups|slice:":30" %}
+        <ul class="dropdown-menu scrollable-dropdown-desktop-only">
+            {% for g in groups %}
                 <li{% if g == appsmenu_group %} class="active"{% endif %}><a href="{% group_url 'cosinnus:group-dashboard' group=g %}">{{ g.name }}</a></li>
             {% endfor %}
             {% if groups|length > 30 %}
@@ -77,7 +83,7 @@
                 {% trans "Ideas" %}
                 <i class="fa fa-caret-down"></i>
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu scrollable-dropdown-desktop-only">
                 <li><a href="{% url 'cosinnus:idea-list-mine' %}">{% trans "My Ideas" %} ({{ my_ideas_count }})</a></li>
                 <li><a href="{% url 'cosinnus:idea-list' %}">{% trans "All Ideas" %}</a></li>
             </ul>
