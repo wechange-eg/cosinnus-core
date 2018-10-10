@@ -49,7 +49,7 @@ GLOBAL_MODEL_BOOST_OFFSET = {
 }
 
 # how much multiplicative boost penalty some Models get for not having an image
-DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE = 0.85
+DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE = 0.7
 
 
 
