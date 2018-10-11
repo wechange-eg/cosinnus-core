@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-18 22:52+0200\n"
+"POT-Creation-Date: 2018-10-11 17:54+0200\n"
 "PO-Revision-Date: 2018-09-26 14:37+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3961,6 +3961,10 @@ msgid "Only group/project members have permission to do this!"
 msgstr "Только члены группы/проекты имеют право делать это!"
 
 #, python-format
+msgid "You may only invite %(maximum_number)d people at once. Any emails above that number have been ignored."
+msgstr ""
+
+#, python-format
 msgid "Sorry, these did not seem to be valid email addresses: %s"
 msgstr "Извините, похоже, что это - не действительный электронный адрес: %s"
 
@@ -3968,8 +3972,19 @@ msgstr "Извините, похоже, что это - не действите�
 msgid "These people have been sent an email invite only recently. You can send them an invite again tomorrow: %s"
 msgstr "Этим людям только недавно были отправленны письма с приглашениями. Вы сможете еще раз отправить им приглашения завтра: %s"
 
-#, python-format
-msgid "Good news! The people with these addresses already have a registered user account: %s"
+#, fuzzy, python-format
+#| msgid "Good news! The people with these addresses already have a registered user account: %s"
+msgid "Good news! The people with these addresses are already members: %s"
+msgstr "Хорошие новости! Люди с такими адресами уже зарегистрировали пользовательский аккаутнт: %s"
+
+#, fuzzy, python-format
+#| msgid "Good news! The people with these addresses already have a registered user account: %s"
+msgid "The people with these addresses already have a user account and already have a pending invitation: %s"
+msgstr "Хорошие новости! Люди с такими адресами уже зарегистрировали пользовательский аккаутнт: %s"
+
+#, fuzzy, python-format
+#| msgid "Good news! The people with these addresses already have a registered user account: %s"
+msgid "The people with these addresses already have a registered user account and have been invited directly: %s"
 msgstr "Хорошие новости! Люди с такими адресами уже зарегистрировали пользовательский аккаутнт: %s"
 
 #, python-format
