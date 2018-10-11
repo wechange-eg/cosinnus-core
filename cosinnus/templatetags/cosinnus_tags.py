@@ -34,6 +34,7 @@ from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal,\
     BETTER_URL_RE
 
 import logging
+import markdown2
 import json as _json
 from django.utils.encoding import force_text
 from django.utils.html import escape, urlize
@@ -44,7 +45,6 @@ from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from wagtail.wagtailcore.templatetags.wagtailcore_tags import richtext
 from uuid import uuid1
 from annoying.functions import get_object_or_None
-from django_markdown2.templatetags.md2 import markdown
 from django.utils.text import normalize_newlines
 from cosinnus.utils.functions import ensure_list_of_ints
 from django.db.models.query import QuerySet
@@ -771,7 +771,10 @@ def textfield(text, arg=''):
     text = escape(text.strip())
     
     # see https://github.com/trentm/python-markdown2/wiki/Extras for option parameters!
-    text = markdown(text, 'strike,break-on-newline,cuddled-lists,code-friendly,nofollow,target-blank-links')
+    # 'code-friendly-strict' is added on the wechange fork and means that intra-word
+    # asterisks like `Benutzer*innen` will not be italicized
+    extras = {'strike': {}, 'break-on-newline': {}, 'cuddled-lists': {}, 'code-friendly-strict': {},  'nofollow': {}, 'target-blank-links': {}}
+    text = markdown2.markdown(text, extras=extras)
     
     if arg == 'simple':
         text = text.replace('<p>', '').replace('</p>', '')
