@@ -26,7 +26,8 @@ from cosinnus.forms.group import MembershipForm, CosinnusLocationForm,\
 from cosinnus.models.group import (CosinnusGroup, CosinnusGroupMembership,
     MEMBERSHIP_ADMIN, MEMBERSHIP_MEMBER, MEMBERSHIP_PENDING, CosinnusPortal, CosinnusLocation,
     CosinnusGroupGalleryImage, MEMBERSHIP_INVITED_PENDING,
-    CosinnusGroupCallToActionButton, CosinnusUnregisterdUserGroupInvite)
+    CosinnusGroupCallToActionButton, CosinnusUnregisterdUserGroupInvite,
+    MEMBER_STATUS)
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety,\
     ensure_group_type
 from cosinnus.models.serializers.group import GroupSimpleSerializer
@@ -1108,7 +1109,7 @@ def group_user_recruit(request, group):
         Checks for recent invites and existing ones first. 
         Sends out invitation mails to newly invited users. """
     
-    MAXIMUM_EMAILS = 10
+    MAXIMUM_EMAILS = 20
     
     if not request.method=='POST':
         return HttpResponseNotAllowed(['POST'])
@@ -1135,7 +1136,9 @@ def group_user_recruit(request, group):
         return redirect(redirect_url)
     
     invalid = []
-    existing = []
+    existing_already_members = []
+    existing_already_invited = []
+    existing_newly_invited = []
     spam_protected = []
     success = []
     prev_invites_to_refresh = []
@@ -1145,8 +1148,10 @@ def group_user_recruit(request, group):
     emails = list(set([email.strip(' \t\n\r') for email in emails]))
     
     for email in emails:
-        # stop after 10 fragments to prevent malicious overloading
-        if len(invalid) + len(existing) + len(success) > MAXIMUM_EMAILS:
+        # stop after 20 fragments to prevent malicious overloading
+        if len(invalid) + len(existing_already_members) + len(existing_already_invited) \
+                + len(existing_newly_invited) + len(success) > MAXIMUM_EMAILS:
+            messages.warning(request, _('You may only invite %(maximum_number)d people at once. Any emails above that number have been ignored.') % {'maximum_number': MAXIMUM_EMAILS})
             break
         
         if not email:
@@ -1158,9 +1163,30 @@ def group_user_recruit(request, group):
             continue
         
         # from here on, we have a real email. check if a user with that email exists
-        if get_object_or_None(get_user_model(), email=email):
-            existing.append(email) 
+        existing_user = get_object_or_None(get_user_model(), email=email)
+        if existing_user:
+            # check if there is already a group membership for this user
+            membership = get_object_or_None(CosinnusGroupMembership, group=group, user=existing_user)
+            if not membership:
+                # user exists, invite him on the platform
+                CosinnusGroupMembership.objects.create(group=group, user=existing_user, status=MEMBERSHIP_INVITED_PENDING)
+                existing_newly_invited.append(email)
+            elif membership.status in MEMBER_STATUS:
+                # user is already a member
+                existing_already_members.append(email)
+            elif membership.status == MEMBERSHIP_PENDING:
+                # user has already requested to join, make member
+                membership.status = MEMBERSHIP_MEMBER
+                membership.save()
+                existing_newly_invited.append(email)
+            elif membership.status == MEMBERSHIP_INVITED_PENDING:
+                # we have already invited the user on the platform
+                existing_already_invited.append(email)
+            else:
+                logger.error('Group member recruit: An unreachable else case was reached. Were the membership statuses expanded?')
             continue
+        
+        
         # check if the user has been invited recently (if so, we don't send another mail)
         prev_invite = get_object_or_None(CosinnusUnregisterdUserGroupInvite, email=email, group=group)
         if prev_invite and prev_invite.last_modified > (now() - datetime.timedelta(days=1)):
@@ -1203,8 +1229,12 @@ def group_user_recruit(request, group):
         messages.error(request, _("Sorry, these did not seem to be valid email addresses: %s") % ', '.join(invalid))
     if spam_protected:
         messages.warning(request, _("These people have been sent an email invite only recently. You can send them an invite again tomorrow: %s") % ', '.join(spam_protected))
-    if existing:
-        messages.success(request, _("Good news! The people with these addresses already have a registered user account: %s") % ', '.join(existing))
+    if existing_already_members:
+        messages.success(request, _("Good news! The people with these addresses are already members: %s") % ', '.join(existing_already_members))
+    if existing_already_invited:
+        messages.warning(request, _("The people with these addresses already have a user account and already have a pending invitation: %s") % ', '.join(existing_already_invited))
+    if existing_newly_invited:
+        messages.success(request, _("The people with these addresses already have a registered user account and have been invited directly: %s") % ', '.join(existing_newly_invited))
     if success:
         messages.success(request, _("Success! We are now sending out invitations to these email addresses: %s") % ', '.join(success))
         

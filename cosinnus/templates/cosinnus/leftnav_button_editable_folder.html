@@ -52,18 +52,20 @@
                 </li>
             </ul>
         </div>
-        <div type="button" class="btn btn-emphasized large-space" title="{% trans "Download" %}" href="{{ href }}download/">
-            <ul class="media-list">
-                <li class="media">
-                    <span class="pull-right btn-extra-emphasized">
-                        <i class="fa fa-download"></i>
-                    </span>
-                    <div class="media-body">
-                        {% trans "Download" %}
-                    </div>
-                </li>
-            </ul>
-        </div>
+        {% if downloadable %}
+	        <div type="button" class="btn btn-emphasized large-space" title="{% trans "Download" %}" href="{{ href }}download/">
+	            <ul class="media-list">
+	                <li class="media">
+	                    <span class="pull-right btn-extra-emphasized">
+	                        <i class="fa fa-download"></i>
+	                    </span>
+	                    <div class="media-body">
+	                        {% trans "Download" %}
+	                    </div>
+	                </li>
+	            </ul>
+	        </div>
+        {% endif %}
     </div>
 </div>
 

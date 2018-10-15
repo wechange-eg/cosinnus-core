@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-18 22:52+0200\n"
-"PO-Revision-Date: 2018-09-14 18:21+0200\n"
+"POT-Creation-Date: 2018-10-11 17:54+0200\n"
+"PO-Revision-Date: 2018-10-09 16:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Language: fr\n"
-"X-Generator: Poedit 2.0.8\n"
+"X-Generator: Poedit 1.8.4\n"
 
 #, python-format
 msgid "1 %(object)s was deleted successfully"
@@ -30,7 +30,7 @@ msgid "Delete selected entries"
 msgstr "Supprimer les entrées sélectionnées"
 
 msgid "A token with the same code already exists! Please choose a different string for your token."
-msgstr ""
+msgstr "Un jeton avec le même code existe déjà! choisissez une chaîne différente pour votre jeton."
 
 msgid "The following Projects were converted to Groups:"
 msgstr "Les projets suivants ont été convertis en groupes :"
@@ -223,7 +223,7 @@ msgid "Your admin status for this team was revoked"
 msgstr "Ton statut d'admin de cette équipe a été révoqué"
 
 msgid "Revoked your admin status"
-msgstr "A changé ton statut d'admin."
+msgstr "Annuler votre statut d’administrateur"
 
 #, python-format
 msgid "%(sender_name)s revoked your admin status of \"%(team_name)s\" on %(portal_name)s!"
@@ -269,23 +269,20 @@ msgstr "\"%(team_name)s a été déplacée sur %(portal_name)s !"
 msgid "Created"
 msgstr "Créé"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+#, python-format
 msgid "%(sender_name)s just created the project/group \"%(team_name)s\" on %(portal_name)s!"
-msgstr "%(sender_name)s t'a invité à rejoindre \"%(team_name)s sur %(portal_name)s !"
+msgstr "%(sender_name) s vient de créer le projet/groupe \"%(team_name)s\" sur %(portal_name)s!"
 
 msgid "Has created"
 msgstr "A créé"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+#, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
-msgstr "%(sender_name)s t'a invité à rejoindre \"%(team_name)s sur %(portal_name)s !"
+msgstr "%(sender_name)s vient de créer l'idée \"%(object_name)s\" sur %(portal_name)s!"
 
-#, fuzzy, python-format
-#| msgid "%(sender_name)s just created the project \"%(team_name)s\" from an idea you follow!"
+#, python-format
 msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
-msgstr "%(sender_name)s vient de créer le projet %(team_name)s à partir d'une idée que tu suis !"
+msgstr "%(sender_name)s vient de créer l'idée \"%(object_name)s\"!"
 
 #, python-format
 msgid "%(sender_name)s just created the project \"%(team_name)s\" on %(portal_name)s from an idea you follow! <br/><br/> To check it out, please click on the link below. There you can see if you would like to join the project."
@@ -711,40 +708,28 @@ msgid "Team Invites for Unregistered Users"
 msgstr "Invitations à rejoindre l'équipe pour les utilisateurs non-enregistrés"
 
 msgid "Token"
-msgstr ""
+msgstr "Jeton"
 
 msgid "The token string. It will be displayed as it is, but when users enter it, upper/lower-case do not matter. Can contain letters and numbers, but no spaces, and can be as long or short as you want."
-msgstr ""
+msgstr "La chaîne du jeton. Il sera affiché tel quel, mais lorsque les utilisateurs le saisissent, il est insensible à la casse. Peut contenir des lettres et des chiffres, mais pas d’espaces, et être aussi long ou aussi court que vous le souhaitez."
 
-#, fuzzy
-#| msgid "Short Description. Internal, will not be shown publicly."
 msgid "Short Description (optional). Will be shown on the token page."
-msgstr "Description courte interne, ne sera pas affichée publiquement."
+msgstr "Description courte (optionelle), ne sera pas affichée publiquement."
 
-#, fuzzy
-#| msgid "Valid to"
 msgid "Valid until"
-msgstr "Valide jusqu'à"
+msgstr "Valide jusqu'au"
 
-#, fuzzy
-#| msgid "Invited Groups"
 msgid "Invite-Groups"
-msgstr "Groupes invités"
+msgstr "Inviter un groupe"
 
-#, fuzzy
-#| msgid "Cosinnus group"
 msgid "Cosinnus Group Invite Token"
-msgstr "Groupe Cosinnus"
+msgstr "Groupe Cosinnus jeton d’invitation"
 
-#, fuzzy
-#| msgid "Cosinnus groups"
 msgid "Cosinnus Group Invite Tokens"
-msgstr "Groupes Cosinnus"
+msgstr "Groupes Cosinnus jetons d’invitation"
 
-#, fuzzy
-#| msgid "Slug must not be empty."
 msgid "Token must not be empty."
-msgstr "Le slug ne doit pas être vide."
+msgstr "Le jeton ne doit pas être vide."
 
 msgid "From Portal"
 msgstr "Depuis le portail"
@@ -1320,7 +1305,7 @@ msgid "Error embedding a twitter timeline"
 msgstr "Erreur pendant l'intégration du fil Twitter"
 
 msgid "Click to activate video"
-msgstr ""
+msgstr "cliquez pour activer la vidéo"
 
 msgid "Error embedding a video"
 msgstr "Erreur pendant l'intégration de la vidéo"
@@ -1521,11 +1506,11 @@ msgstr "A faire (listes)"
 
 msgctxt "Calendar"
 msgid "Event"
-msgstr "Evénement"
+msgstr "Événement"
 
 msgctxt "Calendar"
 msgid "Events"
-msgstr "Evénements"
+msgstr "Événements"
 
 msgid "News"
 msgstr "Nouvelles"
@@ -3095,10 +3080,10 @@ msgid "Log in here"
 msgstr "Se connecter ici"
 
 msgid "You are signing up using this invite token:"
-msgstr ""
+msgstr "Vous vous inscrivez en utilisant ce jeton d’invitation:"
 
 msgid "After signup, you will automatically become a member of the associated projects and groups."
-msgstr ""
+msgstr "Après votre inscription, vous deviendrez automatiquement participant des projets et des groupes affiliés."
 
 msgid "Email address"
 msgstr "Adresse e-mail"
@@ -3191,36 +3176,28 @@ msgid "Enter one or more search terms or select a topic to search."
 msgstr "Entre un terme de recherche ou plus ou sélectionne un sujet à rechercher."
 
 msgid "Simple Statistics"
-msgstr ""
+msgstr "Statistiques simples"
 
-#, fuzzy
-#| msgid "Delete"
 msgid "Date"
-msgstr "Supprimer"
+msgstr "Date"
 
-#, fuzzy
-#| msgid "Forum"
 msgid "From"
-msgstr "Forum"
+msgstr "De"
 
 msgid "Start date."
-msgstr ""
+msgstr "date de début"
 
-#, fuzzy
-#| msgid "Title"
 msgid "Time"
-msgstr "Titre"
+msgstr "Temps"
 
 msgid "Until"
-msgstr ""
+msgstr "jusqu’à"
 
-#, fuzzy
-#| msgid "Any date"
 msgid "End date."
-msgstr "N'importe quelle date"
+msgstr "Date de fin."
 
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "My Users"
@@ -3448,36 +3425,28 @@ msgid "Message Project"
 msgstr "Projet message"
 
 msgid "Quick Join"
-msgstr ""
+msgstr "Inscrire vite"
 
 msgid "Using this token, you can automatically join the following projects and groups"
-msgstr ""
+msgstr "En utilisant ce jeton, vous pouvez automatiquement joindre les projets et groupes suivants"
 
 msgid "Team up quickly using an invite token"
-msgstr ""
+msgstr "Faites équipe rapidement en utilisant un jeton d’invitation"
 
-#, fuzzy
-#| msgid "Join now!"
 msgid "Join all now!"
-msgstr "Rejoins !"
+msgstr "joindre tout maintenant!"
 
-#, fuzzy
-#| msgid "Create account"
 msgid "Create account and join"
-msgstr "Créer compte"
+msgstr "Créer un account et joindre"
 
 msgid "If you know an invite token, you can automatically join groups and projects, no matter if you have a user account yet or not."
-msgstr ""
+msgstr "Si vous connaissez un jeton d’invitation, vous pouvez automatiquement joindre des groupes et des projets, si vous avez déjà un account ou pas."
 
-#, fuzzy
-#| msgid "Enter a description"
 msgid "Enter a token:"
-msgstr "Entrer une description"
+msgstr "Entrer une description:"
 
-#, fuzzy
-#| msgid "From Team Type"
 msgid "For example"
-msgstr "Depuis le type d'équipe"
+msgstr "Par exemple"
 
 msgid "About me"
 msgstr "A propos de moi"
@@ -3982,6 +3951,10 @@ msgid "Only group/project members have permission to do this!"
 msgstr "Seulement les membres du groupe / projet ont la permission de faire ça !"
 
 #, python-format
+msgid "You may only invite %(maximum_number)d people at once. Any emails above that number have been ignored."
+msgstr ""
+
+#, python-format
 msgid "Sorry, these did not seem to be valid email addresses: %s"
 msgstr "Désolé, ces adresses e-mail ne semblent pas valides : %s"
 
@@ -3989,8 +3962,19 @@ msgstr "Désolé, ces adresses e-mail ne semblent pas valides : %s"
 msgid "These people have been sent an email invite only recently. You can send them an invite again tomorrow: %s"
 msgstr "Ces personnes ont reçu une invitation par e-mail seulement récemment. Tu peux leur renvoyer une invitation demain : %s"
 
-#, python-format
-msgid "Good news! The people with these addresses already have a registered user account: %s"
+#, fuzzy, python-format
+#| msgid "Good news! The people with these addresses already have a registered user account: %s"
+msgid "Good news! The people with these addresses are already members: %s"
+msgstr "Bonne nouvelle ! Les personnes possédant ces adresses ont déjà un compte enregistré : %s"
+
+#, fuzzy, python-format
+#| msgid "Good news! The people with these addresses already have a registered user account: %s"
+msgid "The people with these addresses already have a user account and already have a pending invitation: %s"
+msgstr "Bonne nouvelle ! Les personnes possédant ces adresses ont déjà un compte enregistré : %s"
+
+#, fuzzy, python-format
+#| msgid "Good news! The people with these addresses already have a registered user account: %s"
+msgid "The people with these addresses already have a registered user account and have been invited directly: %s"
 msgstr "Bonne nouvelle ! Les personnes possédant ces adresses ont déjà un compte enregistré : %s"
 
 #, python-format
@@ -4104,10 +4088,8 @@ msgstr "L'utilisateur \"%(user)s\"  a été inscrit avec succès. Le compte devr
 msgid "User \"%(user)s\" was registered successfully. We will send an email to your address %(email)s\" soon. You need to confirm the email address before you can log in."
 msgstr "L'utilisateur \"%(user)s\"  a été inscrit avec succès. Nous enverrons bientôt un e-mail à ton adresse %(email)s\". Tu devras confirmer ton adresse avant de pouvoir te connecter."
 
-#, fuzzy
-#| msgid "The unsubscribe link you have clicked does not seem to be valid!"
 msgid "The invite token you have used does not exist!"
-msgstr "Le lien de désinscription sur lequel tu as cliqué ne semble pas être valide !"
+msgstr "Le jeton d’invitation que vous avez utilisé n’existe pas!"
 
 msgid "Sorry, but the invite token you have used is not active yet or not active anymore!"
 msgstr ""
@@ -4115,10 +4097,8 @@ msgstr ""
 msgid "Token invitations applied. You are now a member of the associated projects/groups!"
 msgstr ""
 
-#, fuzzy
-#| msgid "There was an error while processing your avatar. Please make sure you selected a large enough part of the image!"
 msgid "There was an error while processing your invites. Some of your invites may not have been applied."
-msgstr "Il y a eu une erreur pendant la création de ton avatar. Assure-toi d'avoir sélectionné une partie de l'image assez large !"
+msgstr "Il y a eu une erreur lors du traitement de vos invitations. Certaines de vos invitations n'ont peut-être pas été appliquées."
 
 msgid "You are already logged in!"
 msgstr "Tu es déjà connecté !"
@@ -4129,10 +4109,8 @@ msgstr "Tes paramètres de confidentialité ont été enregistrés. Bienvenue !"
 msgid "Please enter a token!"
 msgstr ""
 
-#, fuzzy
-#| msgid "The unsubscribe link you have clicked does not seem to be valid!"
 msgid "Sorry, but the invite token you have used does not seem to be valid!"
-msgstr "Le lien de désinscription sur lequel tu as cliqué ne semble pas être valide !"
+msgstr "Désolé, mais le jeton d’invitation que vous avez utilisé ne semble pas être valide!"
 
 msgid "The user account you were looking for does not exist! Their registration was probably already denied."
 msgstr "Le compte utilisateur que tu recherches n'existe pas ! Son inscription a probablement déjà été refusée."

@@ -549,4 +549,16 @@ a.portal-inlink:hover img {
     overflow: auto;
     max-height: 400px;
 }
+
+.scrollable-dropdown, .scrollable-dropdown-desktop-only {
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+@media (max-width: 767px) {
+    .scrollable-dropdown-desktop-only {
+        overflow-y: initial;
+        max-height: initial;
+    }
+}
  
