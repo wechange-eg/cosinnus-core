@@ -55,15 +55,9 @@ def filter_searchqueryset_for_read_access(sqs, user):
         if check_user_superuser(user):
             pass
         else:
-            users_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
             logged_in_user_visibility = (
                 SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
                 SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_GROUP) # logged in users can see users who are visible           
-            )
-            group_member_user_visibility = (
-                SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
-                SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_USER) & # team mambers can see this user 
-                SQ(membership_groups__in=users_group_ids)
             )
             my_item = (
                  SQ(creator__exact=user.id)
@@ -71,7 +65,6 @@ def filter_searchqueryset_for_read_access(sqs, user):
             visible_for_all_authenticated_users = (
                 SQ(visible_for_all_authenticated_users=True)
             )
-            
             # FIXME: known problem: ``group_members`` is a stale indexed representation of the members
             # of an items group. New members of a group won't be able to find old indexed items if the index
             # is not refreshed regularly
@@ -80,14 +73,19 @@ def filter_searchqueryset_for_read_access(sqs, user):
                  SQ(group_members__contains=user.id)
             )
             
-            sqs = sqs.filter_and(
-                public_node |
-                group_visible_and_in_my_group |
-                my_item |
-                group_member_user_visibility |
-                logged_in_user_visibility |
-                visible_for_all_authenticated_users
-            )
+            ored_query = public_node | group_visible_and_in_my_group | my_item \
+                 | logged_in_user_visibility | visible_for_all_authenticated_users
+            
+            users_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
+            if users_group_ids:
+                group_member_user_visibility = (
+                    SQ(user_visibility_mode__exact=True) & # for UserProfile search index objects
+                    SQ(mt_visibility__exact=BaseTagObject.VISIBILITY_USER) & # team mambers can see this user 
+                    SQ(membership_groups__in=users_group_ids)
+                )
+                ored_query = ored_query | group_member_user_visibility
+            
+            sqs = sqs.filter_and(ored_query)
     else:
         sqs = sqs.filter_and(public_node)
         
