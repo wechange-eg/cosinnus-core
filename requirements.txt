@@ -34,7 +34,6 @@ ecdsa==0.10
 geopy==1.11.0
 jsonfield==1.0.0
 html5lib==0.999
-markdown==2.3.6
 numpy==1.14.5
 oauthlib==2.0.2
 paramiko==1.12.0
