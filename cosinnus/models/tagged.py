@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 from builtins import object
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
 from django.db import models
 from django.db.models import Q
 from django.utils.encoding import python_2_unicode_compatible, force_text
@@ -32,6 +31,7 @@ from django.template.loader import render_to_string
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.utils import translation
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
+from django.contrib.contenttypes.fields import GenericForeignKey
 
 
 
@@ -206,7 +206,7 @@ class AttachedObject(models.Model):
 
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
-    target_object = generic.GenericForeignKey('content_type', 'object_id')
+    target_object = GenericForeignKey('content_type', 'object_id')
 
     class Meta(object):
         app_label = 'cosinnus'
@@ -426,7 +426,7 @@ class BaseTaggableObjectReflection(models.Model):
         
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
-    reflected_object = generic.GenericForeignKey('content_type', 'object_id')
+    reflected_object = GenericForeignKey('content_type', 'object_id')
     
     group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL,
         on_delete=models.CASCADE, 
@@ -487,7 +487,7 @@ class LikeObject(models.Model):
 
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
-    target_object = generic.GenericForeignKey('content_type', 'object_id')
+    target_object = GenericForeignKey('content_type', 'object_id')
     
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
         verbose_name=_('User'),

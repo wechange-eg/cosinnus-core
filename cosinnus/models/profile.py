@@ -5,6 +5,7 @@ from builtins import object
 import six
 import django
 
+from django.apps import apps
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.core.cache import cache
@@ -286,14 +287,13 @@ class UserProfile(BaseUserProfile):
 def get_user_profile_model():
     "Return the cosinnus user profile model that is active in this project"
     from django.core.exceptions import ImproperlyConfigured
-    from django.db.models import get_model
     from cosinnus.conf import settings
 
     try:
         app_label, model_name = settings.COSINNUS_USER_PROFILE_MODEL.split('.')
     except ValueError:
         raise ImproperlyConfigured("COSINNUS_USER_PROFILE_MODEL must be of the form 'app_label.model_name'")
-    user_profile_model = get_model(app_label, model_name)
+    user_profile_model = apps.get_model(app_label, model_name)
     if user_profile_model is None:
         raise ImproperlyConfigured("COSINNUS_USER_PROFILE_MODEL refers to model '%s' that has not been installed" %
             settings.COSINNUS_USER_PROFILE_MODEL)
@@ -418,7 +418,6 @@ class GlobalBlacklistedEmail(models.Model):
         """ Will add an email to the blacklist if it doesn't exist yet if no user is registered with that email 
             or doesn't have a portal membership in this current portal.
             Otherwise will simply set the global "no-email" setting for that user. """
-        from django.contrib.auth import get_user_model
         user = get_object_or_None(get_user_model(), email=email)
         portal_membership = get_object_or_None(CosinnusPortalMembership, user=user, group=CosinnusPortal.get_current())
         if portal_membership:

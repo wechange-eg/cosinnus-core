@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
+from django.apps import apps
 from django.http.response import HttpResponseNotAllowed, HttpResponseForbidden
 from cosinnus.utils.http import JSONResponse
 from django.views.decorators.csrf import csrf_protect
 from cosinnus.models.feedback import CosinnusReportedObject
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import get_model
 from cosinnus.utils.context_processors import cosinnus as cosinnus_context
 from cosinnus.core.mail import get_common_mail_context, send_mail_or_fail
 from cosinnus.templatetags.cosinnus_tags import full_name
@@ -75,7 +76,7 @@ def report_object(request):
     if model.lower() == 'user':
         model_cls = get_user_model()
     else:
-        model_cls = get_model(app_label, model)
+        model_cls = apps.get_model(app_label, model)
     
     content_type = ContentType.objects.get_for_model(model_cls)
     report_obj = CosinnusReportedObject.objects.create(content_type=content_type, object_id=obj_id, text=text, creator=request.user)

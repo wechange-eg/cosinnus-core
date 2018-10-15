@@ -28,13 +28,12 @@ class URLRegistry(BaseRegistry):
             self._apps = set()
             
     def ready(self):
-        if not self.is_ready:
-            with self.lock:
+        with self.lock:
+            if not self.is_ready:
                 self._api_urlpatterns = [
                     url(r'', include('cosinnus.urls_api'))
                 ]
-            self.is_ready = True
-            print(">>>>>>>>>>>>>>>>>>>>> REDDAYYYS")
+                self.is_ready = True
 
     def register(self, app, root_patterns=None, group_patterns=None,
                  api_patterns=None, url_app_name_override=None):
@@ -57,7 +56,7 @@ class URLRegistry(BaseRegistry):
                 for url_key in group_model_registry:
                     url_base = r'^%s/(?P<group>[^/]+)/%s/' % (url_key, url_app_name)
                     for patt in group_patterns:
-                        patterns_copy.append(url(url_base+patt._regex[1:], patt._callback_str or patt._callback, patt.default_args, name=group_model_registry.get_url_name_prefix(url_key, '') + patt.name))
+                        patterns_copy.append(url(url_base+patt._regex[1:], patt._callback or patt._callback_str, patt.default_args, name=group_model_registry.get_url_name_prefix(url_key, '') + patt.name))
                 
                 self._urlpatterns += [
                     url('', include(patterns_copy, namespace=app_name, app_name=app)),

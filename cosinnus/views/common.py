@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.apps import apps
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import RedirectView
 from django.contrib import messages
@@ -16,13 +17,13 @@ from django.http.response import  HttpResponseNotFound,\
     HttpResponseBadRequest, JsonResponse
 from django.template.loader import render_to_string
 from django.contrib.auth.views import login, logout
-from django.db.models import get_model
 from django.contrib.contenttypes.models import ContentType
 from cosinnus.models.tagged import LikeObject
 from annoying.functions import get_object_or_None
 from django.views.decorators.csrf import csrf_protect
 
 class IndexView(RedirectView):
+    permanent = False
     url = reverse_lazy('cosinnus:group-list')
 
 index = IndexView.as_view()
@@ -131,7 +132,7 @@ def do_like(request, **kwargs):
         return HttpResponseBadRequest('Incomplete data submitted.')
     
     app_label, model = ct.split('.')
-    model_cls = get_model(app_label, model)
+    model_cls = apps.get_model(app_label, model)
     content_type = ContentType.objects.get_for_model(model_cls)
     
     obj = None

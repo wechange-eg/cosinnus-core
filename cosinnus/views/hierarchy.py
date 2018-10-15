@@ -34,7 +34,7 @@ class AddContainerView(RequireWriteMixin, FilterGroupMixin,
         return group_aware_reverse('cosinnus:%s:list' % self.appname,
                        kwargs={'group': self.group})
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=None):
         """Override get_form to use model-specific form"""
         class ModelAddContainerForm(AddContainerForm):
             class Meta(AddContainerForm.Meta):

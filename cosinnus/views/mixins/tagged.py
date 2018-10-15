@@ -7,10 +7,10 @@ from itertools import chain
 from os.path import basename, dirname
 import urllib.request, urllib.parse, urllib.error
 
+from django.apps import apps
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import get_model
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
@@ -398,7 +398,7 @@ class DisplayTaggedObjectsMixin(object):
             if not app_is_active or cosinnus_apps is not None and app_label not in cosinnus_apps:
                 continue
             
-            model_class = get_model(app_label, model_name)
+            model_class = apps.get_model(app_label, model_name)
             
             # only use basic tagged models, not extending ones (to avoid duplicates)
             bases_modules = [base.__module__ for base in model_class.__bases__]

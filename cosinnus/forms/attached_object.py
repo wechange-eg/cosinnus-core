@@ -3,12 +3,12 @@ from __future__ import unicode_literals
 
 from builtins import str
 from builtins import object
-from django import forms
+from django import apps
+
 from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext_lazy as _
 from django_select2 import (HeavyModelSelect2MultipleChoiceField)
 from django.core.exceptions import ValidationError
-from django.db.models import get_model
 
 from cosinnus.models.tagged import AttachedObject
 from cosinnus.views.attached_object import AttachableObjectSelect2View,\
@@ -131,7 +131,7 @@ class AttachableObjectSelect2MultipleChoiceField(HeavyModelSelect2MultipleChoice
             """ expand id and model type to real AO """
             obj_type, _, object_id = str(attached_obj_str).partition(':')
             app_label, _, model = obj_type.rpartition('.')
-            content_type = ContentType.objects.get_for_model(get_model(app_label, model))
+            content_type = ContentType.objects.get_for_model(apps.get_model(app_label, model))
             (ao, _) = AttachedObject.objects.get_or_create(content_type=content_type, object_id=object_id)
             attached_objects.append(ao)
         

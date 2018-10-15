@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 from __future__ import print_function
 
+from django.apps import apps
 from django.core.urlresolvers import reverse
-from django.db.models import get_model
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import force_text
 from django.utils.http import urlquote
@@ -27,7 +27,7 @@ def move_group_content(from_group, to_group, models=None, verbose=False):
     actions_done = []
     for model_str in models:
         app_label, model = model_str.split('.')
-        model_cls = get_model(app_label, model)
+        model_cls = apps.get_model(app_label, model)
         for obj in model_cls.objects.filter(group=from_group):
             obj.group = to_group
             obj.save()
@@ -50,8 +50,6 @@ def get_cosinnus_group_model():
     global _CosinnusGroup
     if _CosinnusGroup is None:
         from django.core.exceptions import ImproperlyConfigured
-        #from django.db.models import get_model
-        from django.apps import apps
         from cosinnus.conf import settings
     
         try:

@@ -6,7 +6,6 @@ import logging
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, DeleteView, UpdateView
-from django.views.generic.base import RedirectView
 
 from cosinnus.forms.idea import CosinnusIdeaForm
 from cosinnus.models.group import CosinnusPortal
