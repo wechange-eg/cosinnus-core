@@ -79,7 +79,7 @@ setup(
         'django-sekizai==0.8.2',
         'django-simple-captcha==0.5.7',
         'django-suit==0.2.15',
-        'django-taggit',
+        'django-taggit==0.22.2',
         'django-widget-tweaks==1.3',
         'djangorestframework==3.6.4',
         'dnspython==1.15.0',
@@ -104,7 +104,7 @@ setup(
         'python-memcached',
         
         # wagtail
-        'wagtail==1.4.6',
+        'wagtail==1.13.4',
         'django-overextends',
         'django-compressor',
         'django-modelcluster',

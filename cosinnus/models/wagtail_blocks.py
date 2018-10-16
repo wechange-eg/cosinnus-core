@@ -1,28 +1,23 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from builtins import object
-from django.utils.translation import ugettext_lazy as _
-
-from django import forms
-
-from wagtail.wagtailcore.fields import RichTextField, RichTextArea
-from wagtail.wagtailcore.rich_text import DbWhitelister
-
-from django.utils.functional import cached_property
-from wagtail.wagtailcore.blocks.field_block import RichTextBlock, RawHTMLBlock
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailimages.blocks import ImageChooserBlock
-from wagtail.wagtailcore.blocks.struct_block import StructBlock
-from wagtail.wagtailembeds.blocks import EmbedBlock
-from cosinnus.models.group_extra import CosinnusProject
 import json
+
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
-from cosinnus.templatetags.cosinnus_tags import render_cosinnus_topics_json
-from django.utils.html import escape
+from django.utils.translation import ugettext_lazy as _
+from wagtail.wagtailcore import blocks
+from wagtail.wagtailcore.blocks.field_block import RichTextBlock, RawHTMLBlock
+from wagtail.wagtailcore.blocks.struct_block import StructBlock
+from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtailcore.rich_text import DbWhitelister
+from wagtail.wagtailembeds.blocks import EmbedBlock
+from wagtail.wagtailimages.blocks import ImageChooserBlock
 
-    
+from builtins import object
+from cosinnus.models.group_extra import CosinnusProject
+from cosinnus.templatetags.cosinnus_tags import render_cosinnus_topics_json
+
 
 class BetterDbWhitelister(DbWhitelister):
     """ Prevents <div> tags from being replaced by <p> """
@@ -34,33 +29,41 @@ class BetterDbWhitelister(DbWhitelister):
         else:
             super(BetterDbWhitelister, cls).clean_tag_node(doc, tag)
             
-
+"""
 class BetterRichTextArea(RichTextArea):
-    """ Enables using a custom DbWhitelister """
+    " Enables using a custom DbWhitelister "
+    "deprecated, cannot be used like this anymore in wagtail>1.6"
     
     def value_from_datadict(self, data, files, name):
         original_value = super(RichTextArea, self).value_from_datadict(data, files, name)
         if original_value is None:
             return None
         return BetterDbWhitelister.clean(original_value)
+"""
 
 
 class BetterRichTextField(RichTextField):
-    """ Enables using a custom DbWhitelister """
+    " Enables using a custom DbWhitelister "
+    """
+    "deprecated, cannot be used like this anymore in wagtail>1.6" 
     
     def formfield(self, **kwargs):
         defaults = {'widget': BetterRichTextArea}
         defaults.update(kwargs)
         return super(RichTextField, self).formfield(**defaults) # super on RichTextField, not self.__class__!
-
-
+    """
+    pass
+    
 class BetterRichTextBlock(RichTextBlock):
     """ Enables using a custom DbWhitelister """
     
+    """
+    deprecated, cannot be used like this anymore in wagtail>1.6
     @cached_property
     def field(self):
         return forms.CharField(widget=BetterRichTextArea, **self.field_options)
-
+    """
+    pass
     
     
 class CreateProjectButtonBlock(StructBlock):

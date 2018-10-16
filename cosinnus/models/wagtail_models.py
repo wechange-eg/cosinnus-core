@@ -1,36 +1,22 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from builtins import object
 from django.conf import settings
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
-
-from cosinnus.models.group import  CosinnusPortal
-from django import forms
-
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.fields import RichTextField, RichTextArea
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
-from wagtail.wagtailsearch import index
-from wagtail.wagtailadmin.edit_handlers import ObjectList
-
 from django.shortcuts import redirect
-from cosinnus.utils.urls import get_non_cms_root_url
-from wagtail.wagtailcore.rich_text import DbWhitelister
-
-from wagtail.wagtailcore import blocks
-from django.utils.functional import cached_property
-from wagtail.wagtailcore.blocks.field_block import RichTextBlock, RawHTMLBlock
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore import blocks
+from django.utils.translation import ugettext_lazy as _
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
-from wagtail.wagtailimages.blocks import ImageChooserBlock
-from wagtail.wagtailcore.blocks.struct_block import StructBlock
-from wagtail.wagtailembeds.blocks import EmbedBlock
-from cosinnus.models.wagtail_blocks import BetterRichTextField,\
-    STREAMFIELD_BLOCKS, STREAMFIELD_BLOCKS_WIDGETS, STREAMFIELD_OLD_BLOCKS
+from wagtail.wagtailadmin.edit_handlers import ObjectList
+from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailsearch import index
+
+from builtins import object
+from cosinnus.models.group import  CosinnusPortal
+from cosinnus.models.wagtail_blocks import BetterRichTextField, \
+    STREAMFIELD_BLOCKS, STREAMFIELD_BLOCKS_WIDGETS, STREAMFIELD_OLD_BLOCKS
+from cosinnus.utils.urls import get_non_cms_root_url
 
 
 class SplitMultiLangTabsMixin(object):
@@ -126,13 +112,13 @@ class BaseDashboardPage(Page):
     )
     
     # Search index configuraiton
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('banner_left'),
         index.SearchField('banner_right'),
         index.SearchField('header'),
         index.SearchField('footer_left'),
         index.SearchField('footer_right'),
-    )
+    ]
 
     # Editor panels configuration
     content_panels = Page.content_panels + [
@@ -164,9 +150,9 @@ class DashboardSingleColumnPage(BaseDashboardPage):
     content1 = BetterRichTextField(verbose_name=_('Content'), blank=True)
 
     # Search index configuraiton
-    search_fields = BaseDashboardPage.search_fields + (
+    search_fields = BaseDashboardPage.search_fields + [
         index.SearchField('content1'),
-    )
+    ]
 
     # Editor panels configuration
     content_panels = BaseDashboardPage.content_panels + [
@@ -190,10 +176,10 @@ class DashboardDoubleColumnPage(BaseDashboardPage):
     content2 = BetterRichTextField(verbose_name=_('Content (right column)'), blank=True)
 
     # Search index configuraiton
-    search_fields = BaseDashboardPage.search_fields + (
+    search_fields = BaseDashboardPage.search_fields + [
         index.SearchField('content1'),
         index.SearchField('content2'),
-    )
+    ]
 
     # Editor panels configuration
     content_panels = BaseDashboardPage.content_panels + [
@@ -219,11 +205,11 @@ class DashboardTripleColumnPage(BaseDashboardPage):
     content3 = BetterRichTextField(verbose_name=_('Content (right column)'), blank=True)
     
     # Search index configuraiton
-    search_fields = BaseDashboardPage.search_fields + (
+    search_fields = BaseDashboardPage.search_fields + [
         index.SearchField('content1'),
         index.SearchField('content2'),
         index.SearchField('content3'),
-    )
+    ]
 
     # Editor panels configuration
     content_panels = BaseDashboardPage.content_panels + [
@@ -250,9 +236,9 @@ class BaseSimplePage(Page):
     content = BetterRichTextField(verbose_name=_('Content'), blank=True)
     
     # Search index configuraiton
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('content'),
-    )
+    ]
 
     # Editor panels configuration
     content_panels = Page.content_panels + [
@@ -282,9 +268,9 @@ class SimpleTwoPage(BaseSimplePage):
     leftnav = BetterRichTextField(verbose_name=_('Left Sidebar'), blank=True)
     
     # Search index configuraiton
-    search_fields = BaseSimplePage.search_fields + (
+    search_fields = BaseSimplePage.search_fields + [
         index.SearchField('leftnav'),
-    )
+    ]
 
     # Editor panels configuration
     content_panels = BaseSimplePage.content_panels + [
@@ -336,13 +322,13 @@ class BaseStreamDashboardPage(Page):
     )
     
     # Search index configuraiton
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('banner_left'),
         index.SearchField('banner_right'),
         index.SearchField('header'),
         index.SearchField('footer_left'),
         index.SearchField('footer_right'),
-    )
+    ]
 
     # Editor panels configuration
     content_panels = Page.content_panels + [
@@ -374,9 +360,9 @@ class StreamDashboardSingleColumnPage(BaseStreamDashboardPage):
     content1 = StreamField(STREAMFIELD_OLD_BLOCKS, verbose_name=_('Content'), blank=True)
 
     # Search index configuraiton
-    search_fields = BaseStreamDashboardPage.search_fields + (
+    search_fields = BaseStreamDashboardPage.search_fields + [
         index.SearchField('content1'),
-    )
+    ]
 
     # Editor panels configuration
     content_panels = BaseStreamDashboardPage.content_panels + [
@@ -400,10 +386,10 @@ class StreamDashboardDoubleColumnPage(BaseStreamDashboardPage):
     content2 = StreamField(STREAMFIELD_OLD_BLOCKS, verbose_name=_('Content (right column)'), blank=True)
 
     # Search index configuraiton
-    search_fields = BaseStreamDashboardPage.search_fields + (
+    search_fields = BaseStreamDashboardPage.search_fields + [
         index.SearchField('content1'),
         index.SearchField('content2'),
-    )
+    ]
 
     # Editor panels configuration
     content_panels = BaseStreamDashboardPage.content_panels + [
@@ -429,11 +415,11 @@ class StreamDashboardTripleColumnPage(BaseStreamDashboardPage):
     content3 = StreamField(STREAMFIELD_OLD_BLOCKS, verbose_name=_('Content (right column)'), blank=True)
     
     # Search index configuraiton
-    search_fields = BaseStreamDashboardPage.search_fields + (
+    search_fields = BaseStreamDashboardPage.search_fields + [
         index.SearchField('content1'),
         index.SearchField('content2'),
         index.SearchField('content3'),
-    )
+    ]
 
     # Editor panels configuration
     content_panels = BaseStreamDashboardPage.content_panels + [
@@ -461,9 +447,9 @@ class BaseStreamSimplePage(Page):
     content = StreamField(STREAMFIELD_BLOCKS, verbose_name=_('Content'), blank=True)
     
     # Search index configuraiton
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('content'),
-    )
+    ]
 
     # Editor panels configuration
     content_panels = Page.content_panels + [
@@ -493,9 +479,9 @@ class StreamSimpleTwoPage(BaseStreamSimplePage):
     leftnav = StreamField(STREAMFIELD_BLOCKS, verbose_name=_('Left Sidebar'), blank=True)
     
     # Search index configuraiton
-    search_fields = BaseStreamSimplePage.search_fields + (
+    search_fields = BaseStreamSimplePage.search_fields + [
         index.SearchField('leftnav'),
-    )
+    ]
 
     # Editor panels configuration
     content_panels = BaseStreamSimplePage.content_panels + [
@@ -547,12 +533,12 @@ class StreamStartPage(Page):
     )
     
     # Search index configuraiton
-    search_fields = Page.search_fields + (
+    search_fields = Page.search_fields + [
         index.SearchField('header_title'),
         index.SearchField('header_text'),
         index.SearchField('header_content'),
         index.SearchField('bottom_content'),
-    )
+    ]
 
     # Editor panels configuration
     content_panels = Page.content_panels + [
