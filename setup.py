@@ -76,7 +76,7 @@ setup(
         'django-phonenumber-field==1.1.0',
         'django-polymorphic==0.7.2',
         'django-rest-swagger==0.3.10',
-        'django-sekizai==0.8.2',
+        'django-sekizai==0.10.0',
         'django-simple-captcha==0.5.7',
         'django-suit==0.2.15',
         'django-taggit==0.22.2',
@@ -95,19 +95,18 @@ setup(
         'pycrypto==2.6.1',
         'pydkim==0.3',
         'redis==2.10.6',
-        'requests<3.0',
+        'requests>=2.11.1,<3.0',
         'requests-oauthlib==0.8.0',
         'six==1.11.0',
         'sqlparse==0.1.10',
         #########'wsgiref==0.1.2',
         'python-dateutil==2.4.1',
-        'python-memcached',
+        'python-memcached==1.59',
         
         # wagtail
         'wagtail==1.13.4',
         'django-overextends',
         'django-compressor',
-        'django-modelcluster',
         
         # requirements loaded in from github
         'django-awesome-avatar',
