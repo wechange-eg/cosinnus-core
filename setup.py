@@ -61,7 +61,7 @@ setup(
         'Celery==4.2.0',
         
         'django-annoying==0.7.6',
-        'django-appconf==0.6',
+        'django-appconf==1.0.2',
         'django-bootstrap3-datetimepicker==2.2.0',
         'django-classy-tags==0.4',
         'django-cron==0.5.0',

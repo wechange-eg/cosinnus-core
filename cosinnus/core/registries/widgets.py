@@ -5,7 +5,7 @@ import six
 
 from collections import defaultdict, OrderedDict
 
-from django.utils.importlib import import_module
+from importlib import import_module
 
 from cosinnus.core.registries.base import DictBaseRegistry
 

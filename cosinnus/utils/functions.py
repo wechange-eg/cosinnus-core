@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from builtins import str
-from django.utils.importlib import import_module
+from importlib import import_module
 from uuid import uuid1
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.text import normalize_newlines, unescape_entities

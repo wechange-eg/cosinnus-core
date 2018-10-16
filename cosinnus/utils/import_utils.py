@@ -28,7 +28,7 @@ GROUP_IMPORT_RESULTS_CACHE_KEY = 'cosinnus/core/import/groups/results'
 
 def import_from_settings(name=None, path_to_class=None):
     from django.core.exceptions import ImproperlyConfigured
-    from django.utils.importlib import import_module
+    from importlib import import_module
     from cosinnus.conf import settings
 
     try:

@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 from builtins import object
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.timezone import now
@@ -14,6 +13,7 @@ from django.core.urlresolvers import reverse
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.utils.urls import get_domain_for_portal
+from django.contrib.contenttypes.fields import GenericForeignKey
 
 
 @python_2_unicode_compatible
@@ -24,7 +24,7 @@ class CosinnusReportedObject(models.Model):
 
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
-    target_object = generic.GenericForeignKey('content_type', 'object_id')
+    target_object = GenericForeignKey('content_type', 'object_id')
     
     text = models.TextField(_('Complaint Text'))
     creator = models.ForeignKey(settings.AUTH_USER_MODEL,
