@@ -211,7 +211,7 @@ def compile_installed_apps(internal_apps=[]):
         'django_mailbox',
         'easy_thumbnails',
         'embed_video',
-        'endless_pagination',
+        'el_pagination',
         'honeypot',
         'osm_field',
         'phonenumber_field',
@@ -299,9 +299,9 @@ THUMBNAIL_PROCESSORS = (
 )
 
 
-ENDLESS_PAGINATION_PER_PAGE = 8
-ENDLESS_PAGINATION_PREVIOUS_LABEL = '<b>&#9001;</b> Zurück'
-ENDLESS_PAGINATION_NEXT_LABEL = 'Weiter <b>&#9002;</b>'
+EL_PAGINATION_PER_PAGE = 8
+EL_PAGINATION_PREVIOUS_LABEL = '<b>&#9001;</b> Zurück'
+EL_PAGINATION_NEXT_LABEL = 'Weiter <b>&#9002;</b>'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 

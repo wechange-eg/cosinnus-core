@@ -310,11 +310,11 @@ class GroupObjectCountMixin(object):
     
 
 class EndlessPaginationMixin(object):
-    """ Support for views using endless-pagination (django-endless-pagination==2.0)
+    """ Support for views using el-pagination (django-el-pagination==2.0)
         Sets self.is_paginated = True if this view is a paginated reload.
         Required class properties:
             ``items_template`` path to template for items that is split from the main view template.
-                    See http://django-endless-pagination.readthedocs.org/en/latest/twitter_pagination.html#split-the-template """
+                    See http://django-el-pagination.readthedocs.org/en/latest/twitter_pagination.html#split-the-template """
     
     items_template = None
     is_paginated = False
@@ -322,7 +322,7 @@ class EndlessPaginationMixin(object):
     def dispatch(self, request, *args, **kwargs):
         if not self.items_template:
             raise ImproperlyConfigured('You must supply an ``items_template`` template path for the items that are loaded in pagination.')
-        # enable endless-pagination items-only rendering
+        # enable el-pagination items-only rendering
         if request.is_ajax():
             self.template_name = self.items_template
             self.is_paginated = True

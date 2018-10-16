@@ -62,11 +62,11 @@ setup(
         
         'django-annoying==0.7.6',
         'django-appconf==1.0.2',
-        'django-bootstrap3-datetimepicker==2.2.0',
+        'django-bootstrap3-datetimepicker-3==2.6.0',
         'django-classy-tags==0.4',
         'django-cron==0.5.0',
         'django-embed-video==0.6',
-        'django-endless-pagination==2.0',
+        'django-el-pagination==2.1.2',
         'django-extra-views==0.6.3',
         'django-filer==0.9.12',
         'django-filter==1.1.0',
