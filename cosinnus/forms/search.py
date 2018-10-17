@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django import forms
-from django.db import models
+from django.apps import apps
 from django.utils.encoding import smart_text
 from django.utils.text import capfirst
 from django.utils.translation import ugettext_lazy as _
@@ -151,7 +151,7 @@ class TaggableModelSearchForm(SearchForm):
                     if model_string == '<userprofile>':
                         model = get_user_profile_model()
                     else:
-                        model = models.get_model(*model_string.split('.'))
+                        model = apps.get_model(*model_string.split('.'))
                     search_models.append(model)
         
         return search_models

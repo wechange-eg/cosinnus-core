@@ -360,7 +360,7 @@ def cosinnus_render_attached_objects(context, source, filter=None, skipImages=Fa
                 'model_name': model_name
             })
 
-    return ''.join(rendered_output)
+    return mark_safe(''.join(rendered_output))
 
 
 @register.simple_tag(takes_context=True)
@@ -513,7 +513,7 @@ def cosinnus_user_token(context, token_name, request=None):
     if not request or not request.user.is_authenticated:
         return ''
     token = get_user_token(request.user, token_name)
-    return 'user=%s&token=%s' % (request.user.id, token)
+    return mark_safe('user=%s&token=%s' % (request.user.id, token))
 
 
 @register.simple_tag(takes_context=True)
@@ -529,7 +529,7 @@ def cosinnus_cross_portal_token(context, portal):
         portal_id = portal.id
     else:
         portal_id = int(portal)
-    return '<input type="hidden" name="cosinnus_cross_portal" value="%s">' % portal_id
+    return mark_safe('<input type="hidden" name="cosinnus_cross_portal" value="%s">' % portal_id)
 
 
 def group_aware_url_name(view_name, group_or_group_slug, portal_id=None):
@@ -944,7 +944,7 @@ def render_cosinnus_topics(topics, seperator_word=None):
             'label': choices_dict[topic],
         } for topic in topics]
     
-    return seperator_word.join(rendered_topics)
+    return mark_safe(seperator_word.join(rendered_topics))
     
 
 @register.simple_tag()
@@ -964,5 +964,5 @@ def render_cosinnus_topics_field(escape_html=None):
 def render_cosinnus_topics_json():
     """ Returns a JSON dict of {<topic-id>: <topic-label-translated>, ...} """
     topic_choices = dict([(top_id, force_text(val)) for top_id, val in TAG_OBJECT.TOPIC_CHOICES])
-    return _json.dumps(topic_choices)
+    return mark_safe(_json.dumps(topic_choices))
 

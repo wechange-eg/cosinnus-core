@@ -71,12 +71,25 @@ class EasyFormatTimeInput(TimeInput):
 class CosinnusSplitDateTimeWidget(SplitDateTimeWidget):
     """
     A Widget that splits datetime input into two <input type="text"> boxes.
+    
+    Use like this: `forms.SplitDateTimeField(widget=SplitHiddenDateWidget(default_time='00:00'))`
     """
+    
+    default_time = None
 
-    def __init__(self, attrs=None, date_format=None, time_format=None):
+    def __init__(self, attrs=None, date_format=None, time_format=None, default_time=None):
         widgets = (DateInput(attrs=attrs, format=date_format),
                    EasyFormatTimeInput(attrs=attrs, format=time_format))
+        self.default_time = default_time
         super(SplitDateTimeWidget, self).__init__(widgets, attrs)
+        
+    def value_from_datadict(self, data, files, name):
+        """ If no time value is given, patch in the default time if it is given """
+        time_name = "%s_1" % name
+        if self.default_time and not data.get(time_name):
+            data._mutable = True
+            data[time_name] = self.default_time
+        return super(CosinnusSplitDateTimeWidget, self).value_from_datadict(data, files, name)
     
 class SplitHiddenDateWidget(CosinnusSplitDateTimeWidget):
     """
@@ -84,6 +97,6 @@ class SplitHiddenDateWidget(CosinnusSplitDateTimeWidget):
     """
     is_hidden = True
 
-    def __init__(self, attrs=None, date_format=None, time_format=None):
-        super(SplitHiddenDateWidget, self).__init__(attrs, date_format, time_format)
+    def __init__(self, attrs=None, date_format=None, time_format=None, default_time=None):
+        super(SplitHiddenDateWidget, self).__init__(attrs, date_format, time_format, default_time=default_time)
         self.widgets[0].input_type = 'hidden'

@@ -131,6 +131,9 @@ TEMPLATES = [
                 'django.template.loaders.eggs.Loader',
             ),
             'debug': DEBUG,
+            'builtins': [
+                'overextends.templatetags.overextends_tags',
+            ],
         }
     },
 ]

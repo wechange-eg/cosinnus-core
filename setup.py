@@ -55,7 +55,7 @@ setup(
     data_files=data_files,
     install_requires=[
         # please mirror all changes in the requirements.txt for local installs!
-        'Django==1.8.18',
+        'Django==1.9.13',
         'MarkupSafe==0.18',
         'Pillow==5.2.0',
         'Celery==4.2.0',
@@ -68,11 +68,12 @@ setup(
         'django-embed-video==0.6',
         'django-el-pagination==2.1.2',
         'django-extra-views==0.6.3',
-        'django-filer==0.9.12',
+        'django-filer==1.3.2',
         'django-filter==1.1.0',
         'django-haystack==2.7.0',
         'django-honeypot==0.6.0',
         'django-model-utils==1.5.0',
+        'django-mptt-0.8.7',
         'django-phonenumber-field==1.1.0',
         'django-polymorphic==0.7.2',
         'django-rest-swagger==0.3.10',
@@ -83,7 +84,7 @@ setup(
         'django-widget-tweaks==1.3',
         'djangorestframework==3.6.4',
         'dnspython==1.15.0',
-        'easy-thumbnails==1.4',
+        'easy-thumbnails==2.5',
         'ecdsa==0.10',
         'jsonfield==1.0.0',
         'jsonfield==1.0.0',
@@ -102,10 +103,11 @@ setup(
         #########'wsgiref==0.1.2',
         'python-dateutil==2.4.1',
         'python-memcached==1.59',
+        'Unidecode-0.4.21',
         
         # wagtail
         'wagtail==1.13.4',
-        'django-overextends',
+        'django-overextends==0.4.3',
         'django-compressor',
         
         # requirements loaded in from github
@@ -124,7 +126,7 @@ setup(
         'git+git://github.com/Markush2010/django-bootstrap3.git@46a84044e89937ebe6128b2a8c560f141741a70e#egg=django-bootstrap3',
         'git+git://github.com/sinnwerkstatt/django-multiform.git@master#egg=django-multiform',
         'git+git://github.com/saschan/django-djajax.git@master#egg=django-djajax',
-        'git+git://github.com/sinnwerkstatt/django-select2.git@master#egg=Django-Select2',
+        'git+git://github.com/wechange-eg/django-select2.git@master#egg=Django-Select2',
         'git+git://github.com/sinnwerkstatt/django-osm-field.git@master#egg=django-osm-field',
         'git+git://github.com/wechange-eg/python-markdown2.git@master#egg=markdown2',
         'git+git://github.com/wechange-eg/pydkim.git@master#egg=pydkim',

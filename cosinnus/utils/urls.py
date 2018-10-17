@@ -56,7 +56,9 @@ def group_aware_reverse(viewname, urlconf=None, args=None, kwargs=None, prefix=N
             _CosinnusPortal = apps.get_model('cosinnus', 'CosinnusPortal')
         domain = get_domain_for_portal(_CosinnusPortal.get_current())
     
-    return ('' if skip_domain else domain) + reverse(viewname, urlconf, args, kwargs, prefix, current_app)
+    # NOTE: this used to be: reverse(viewname, urlconf, args, kwargs, prefix, current_app) in Django 1.8
+    # we simply removed the prefix arg as it should still work
+    return ('' if skip_domain else domain) + reverse(viewname, urlconf, args, kwargs, current_app)
         
 
 def get_domain_for_portal(portal):

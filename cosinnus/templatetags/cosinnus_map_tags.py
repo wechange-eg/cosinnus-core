@@ -6,6 +6,7 @@ from django import template
 
 from cosinnus.conf import settings
 from cosinnus.models.group import CosinnusPortal
+from django.utils.safestring import mark_safe
 
 register = template.Library()
 
@@ -26,5 +27,5 @@ def get_cosinnus_portal_info():
     
 @register.simple_tag()
 def render_cosinnus_portal_info_json():
-    return json.dumps(get_cosinnus_portal_info())
+    return mark_safe(json.dumps(get_cosinnus_portal_info()))
 
