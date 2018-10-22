@@ -232,9 +232,12 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
         ret = super(GroupCreateView, self).forms_valid(form, inlines)
         membership = CosinnusGroupMembership.objects.create(user=self.request.user,
             group=self.object, status=MEMBERSHIP_ADMIN)
-        # clear cache because race conditions can make the group memberships be cached as empty
         
+        # clear cache and manually refill because race conditions can make the group memberships be cached as empty
         membership._clear_cache() 
+        self.object.members # this refills the group's member cache immediately
+        self.object.admins # this refills the group's member cache immediately
+
         
         # send group creation signal, 
         # from here, because in group.save() we don't know the group's creator
