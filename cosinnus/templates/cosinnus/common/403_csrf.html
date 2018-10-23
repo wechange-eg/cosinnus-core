@@ -1,0 +1,18 @@
+{% extends "cosinnus/base.html" %}
+{% load i18n bootstrap3 cosinnus_tags %}
+{% load static from staticfiles %}
+{% load sekizai_tags %}
+
+{% block page_title %}{% trans "Access denied!" %}{% endblock page_title %}
+
+{% block override_breadcrumb %}
+{% endblock override_breadcrumb %}
+
+{% block content %}
+    <div class="alert alert-danger alert-dismissable">
+        <i class="fa fa-exclamation-triangle fa-3x"></i>
+        <h4>{% trans "Page expired!" %} (CSRF)</h4>
+        <p>{% trans "Your request seems to have come from an outdated version of this page. Please reload the page and try again!" %}</p>
+    </div>
+{% endblock content %}
+

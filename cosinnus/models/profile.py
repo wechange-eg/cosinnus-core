@@ -149,7 +149,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
             self.media_tag = media_tag
             
         try:
-            existing = self._default_manager.get(user=self.user)
+            existing = self._meta.model._default_manager.get(user=self.user)
             # workaround for http://goo.gl/4I8Ok
             self.id = existing.id  # force update instead of insert
         except ObjectDoesNotExist:
@@ -185,7 +185,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
 
         The list will only contain those fields not listed in ``SKIP_FIELDS``.
         """
-        return list(set(cls._meta.get_all_field_names()) - set(cls.SKIP_FIELDS))
+        return list(set([f.name for f in cls._meta.get_fields()]) - set(cls.SKIP_FIELDS))
 
     def get_optional_fields(self):
         """
@@ -194,14 +194,14 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
 
         The list will only contain those fields not listed in ``SKIP_FIELDS``.
         """
-        all_fields = self._meta.get_all_field_names()
+        all_fields = [f.name for f in self._meta.get_fields()]
         optional_fields = []
         for name in all_fields:
             if name in self.SKIP_FIELDS:
                 continue
-            value = getattr(self, name)
+            value = getattr(self, name, None)
             if value:
-                field = self._meta.get_field_by_name(name)[0]
+                field = self._meta.get_field(name)
                 optional_fields.append({
                     'name': field.verbose_name,
                     'value': value,

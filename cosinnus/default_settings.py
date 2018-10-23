@@ -154,7 +154,6 @@ def compile_installed_apps(internal_apps=[]):
         'django.contrib.sessions',
         'django.contrib.sites',
         'django.contrib.staticfiles',
-        'django.contrib.webdesign',
         'suit_overextends',
         'suit',
         'django.contrib.admin',
@@ -233,8 +232,8 @@ LANGUAGES = [
     ('uk', _('Ukrainian--NATIVE-LANGUAGE')),
     # other languages available, but not yet, or not by default
     # (enable them for your specific portals by defining `LANGUAGES` in settings.py
-    #('fr', _('French--NATIVE-LANGUAGE')),
-    #('pl', _('Polish--NATIVE-LANGUAGE')),
+    ('fr', _('French--NATIVE-LANGUAGE')),
+    ('pl', _('Polish--NATIVE-LANGUAGE')),
 ]
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -418,6 +417,14 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Europe/Berlin'
 
+
+# django upload restriction settings
+# POST body size
+DATA_UPLOAD_MAX_MEMORY_SIZE = 20971520 # 20mb (default is 2.5mb)
+# File upload size
+FILE_UPLOAD_MAX_MEMORY_SIZE = 524288000 # 500mb (default is 2.5mb)
+
+CSRF_FAILURE_VIEW = 'cosinnus.views.common.view_403_csrf'
 
 """ -----------  More configurable Cosinnus settings (for defaults check cosinnus/conf.py!)  ----------- """
 

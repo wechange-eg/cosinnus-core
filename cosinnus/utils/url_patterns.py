@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 import re
 
-from django.conf.urls import patterns
 from django.core.urlresolvers import RegexURLResolver
 
 from cosinnus.core.registries.group_models import group_model_registry

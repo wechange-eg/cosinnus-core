@@ -272,7 +272,7 @@ class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
         #profile_model = get_user_profile_model()
         self.get_data()
         context.update({
-            'visibility_setting': self.media_tag.visibility, #profile_model._meta.get_field_by_name('setting').default
+            'visibility_setting': self.media_tag.visibility,
             'visibility_choices': self.visibility_choices,
             'notification_choices': self.notification_choices,
             'notification_setting': self.notification_setting.setting,
