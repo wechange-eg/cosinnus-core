@@ -55,7 +55,7 @@ setup(
     data_files=data_files,
     install_requires=[
         # please mirror all changes in the requirements.txt for local installs!
-        'Django==1.9.13',
+        'Django==1.10.8',
         'MarkupSafe==0.18',
         'Pillow==5.2.0',
         'Celery==4.2.0',
@@ -73,7 +73,7 @@ setup(
         'django-haystack==2.7.0',
         'django-honeypot==0.6.0',
         'django-model-utils==1.5.0',
-        'django-mptt-0.8.7',
+        'django-mptt==0.8.7',
         'django-phonenumber-field==1.1.0',
         'django-polymorphic==0.7.2',
         'django-rest-swagger==0.3.10',
@@ -103,7 +103,7 @@ setup(
         #########'wsgiref==0.1.2',
         'python-dateutil==2.4.1',
         'python-memcached==1.59',
-        'Unidecode-0.4.21',
+        'Unidecode==0.4.21',
         
         # wagtail
         'wagtail==1.13.4',
