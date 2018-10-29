@@ -527,20 +527,22 @@
 						            {% if not forloop.last %}, {% endif %}
 						        {% endfor %}
 						    </p>
-						    {% with contact_url=group.get_admin_contact_url %}
-							    <button href="{% if user.is_authenticated %}{{ contact_url }}{% else %}{% url 'login' %}?next={{ contact_url|urlencode }}{% endif %}" type="button" class="btn btn-emphasized" style="float: none; margin-left: 0px;">
-			                        <ul class="media-list">
-			                            <li class="media">
-			                                <a class="pull-left" href="#">
-			                                    <i class="fa fa-envelope"></i>
-			                                </a>
-			                                <div class="media-body">
-			                                    {% trans "Contact" %}
-			                                </div>
-			                            </li>
-			                        </ul>
-			                    </button>
-		                    {% endwith %}
+						    {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+							    {% with contact_url=group.get_admin_contact_url %}
+								    <button href="{% if user.is_authenticated %}{{ contact_url }}{% else %}{% url 'login' %}?next={{ contact_url|urlencode }}{% endif %}" type="button" class="btn btn-emphasized" style="float: none; margin-left: 0px;">
+				                        <ul class="media-list">
+				                            <li class="media">
+				                                <a class="pull-left" href="#">
+				                                    <i class="fa fa-envelope"></i>
+				                                </a>
+				                                <div class="media-body">
+				                                    {% trans "Contact" %}
+				                                </div>
+				                            </li>
+				                        </ul>
+				                    </button>
+			                    {% endwith %}
+		                    {% endif %}
 						</div>
 				    {% endif %}
 				{% endwith %}

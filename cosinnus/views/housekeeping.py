@@ -31,6 +31,7 @@ from cosinnus.models.profile import get_user_profile_model
 from django.core.mail.message import EmailMessage
 from cosinnus.core.mail import send_mail_or_fail, send_mail,\
     send_mail_or_fail_threaded
+from django.template.defaultfilters import linebreaksbr
 
 
 def housekeeping(request=None):
@@ -358,3 +359,15 @@ def send_testmail(request):
         return HttpResponse('Sent mail using override mode. ' + retmsg)
         
     return HttpResponse('Did not send any mail. ' + retmsg)
+
+
+def print_settings(request):
+    if request and not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    setts = ''
+    for key in dir(settings):
+        val = force_text(getattr(settings, key))
+        if 'password' in key.lower() or 'password' in val.lower():
+            val = '***'
+        setts += '%s = %s<br/>' % (key, val)
+    return HttpResponse('Settings are:<br/>' + setts)
