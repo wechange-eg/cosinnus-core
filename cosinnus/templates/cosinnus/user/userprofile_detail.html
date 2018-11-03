@@ -127,11 +127,14 @@
 			        </div><!-- btn -->
 			        <div class="content-box large-space">
 			        	{% block userprofile_content %}
-				            {% if profile.description %} 
 				            <div class="textfield transparent">
-				                {{ profile.description|textfield }}
+    				            {% if profile.description %} 
+					                {{ profile.description|textfield }}
+					            {% else %}
+                                    <i>{% trans "No Description set" %}</i>
+					            {% endif %}
 				            </div>
-				            {% endif %}
+					            
 				            
 				            {% if profile.website %}
 				            <legend>{% trans "My Website" %}</legend>
