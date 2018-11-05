@@ -330,7 +330,7 @@ class BaseTaggableObjectIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObje
     
     boosted = indexes.NgramField(model_attr='title', boost=BOOSTED_FIELD_BOOST)
 
-    creator = indexes.IntegerField(model_attr='creator__id', null=True)
+    creator = indexes.IntegerField(null=True)
     portal = indexes.IntegerField(model_attr='group__portal_id')
     group = indexes.IntegerField(model_attr='group_id')
     group_members = indexes.MultiValueField(indexed=False)
@@ -338,6 +338,10 @@ class BaseTaggableObjectIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObje
     created = indexes.DateTimeField(model_attr='created')
     
     local_cached_attrs = ['_group_members']
+    
+    def prepare_creator(self, obj):
+        """ Returning this without using model_attr because of a haystack bug resolving lazy objects """
+        return obj.creator_id
     
     def prepare_group_slug(self, obj):
         return obj.group.slug
