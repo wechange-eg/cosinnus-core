@@ -311,6 +311,10 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 # detect testing mode
 TESTING = 'test' in sys.argv
 
+# use session storage for CSRF instead of cookie
+# can't use this yet, until we fix the jQuery-POST usage of csrf cookies
+CSRF_USE_SESSIONS = False
+
 
 # wagtail
 WAGTAIL_SITE_NAME = 'Wechange'

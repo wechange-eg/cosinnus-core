@@ -130,7 +130,7 @@ class TemplateResolveMixin(object):
         }
         resolved_template_names = [tn.format(**resolve_data) for tn in template_names]
         t = loader.select_template(resolved_template_names)
-        return t.render(Context({'object': obj}))
+        return t.render({'object': obj})
 
 
 

@@ -310,7 +310,7 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
         'active_app': active_app,
         'active_app_name': active_app_name,
     })
-    return render_to_string(template, context)
+    return render_to_string(template, context.flatten())
 
 @register.simple_tag(takes_context=True)
 def cosinnus_render_widget(context, widget):

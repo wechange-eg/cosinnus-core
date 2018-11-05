@@ -152,9 +152,9 @@ error = ErrorView.as_view()
 def _get_redirect_url(request):
     """ Gets the redirect URL (1) from request's next param, (2) from session (3) fallbacks to
         settings.COSINNUS_SSO_ALREADY_LOGGED_IN_REDIRECT_URL """
-    if request.GET.get('next', None) and is_safe_url(url=request.GET.get('next'), host=request.get_host()):
+    if request.GET.get('next', None) and is_safe_url(url=request.GET.get('next'), allowed_hosts=[request.get_host()]):
         return request.GET.get('next')
-    if request.session.get('sso-next', None) and is_safe_url(url=request.session.get('sso-next'), host=request.get_host()):
+    if request.session.get('sso-next', None) and is_safe_url(url=request.session.get('sso-next'), allowed_hosts=[request.get_host()]):
         url = request.session.get('sso-next')
         request.session['sso-next'] = None
         return url

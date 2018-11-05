@@ -87,7 +87,7 @@ def get_non_cms_root_url():
 def safe_redirect(url, request):
     """ Will return the supplied URL if it is safe or a safe wechange root URL """
     # Ensure the user-originating redirection url is safe.
-    if not is_safe_url(url=url, host=request.get_host()):
+    if not is_safe_url(url=url, allowed_hosts=[request.get_host()]):
         url = get_non_cms_root_url()
     return url
 
@@ -107,7 +107,7 @@ def redirect_next_or(request_with_next, alternate_url):
     """ Checks the given request if it contains a ?next= param, and if that is a safe url returns it.
         Otherwise, returns `alternate_url` """
     next_param = request_with_next.GET.get('next', None)
-    if not next_param or not is_safe_url(next_param, request_with_next.get_host()):
+    if not next_param or not is_safe_url(next_param, allowed_hosts=[request_with_next.get_host()]):
         return alternate_url
     return next_param
 
@@ -116,7 +116,7 @@ def redirect_with_next(url, request_with_next):
         attaches to the given url a "?next=<next_url>" fragment.
         Otherwise, returns `url` """
     next_param = request_with_next.GET.get('next', None)
-    if not next_param or not is_safe_url(next_param, request_with_next.get_host()):
+    if not next_param or not is_safe_url(next_param, allowed_hosts=[request_with_next.get_host()]):
         return url
     return '%s?next=%s' % (url, next_param) 
     

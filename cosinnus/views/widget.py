@@ -142,7 +142,7 @@ def widget_delete(request, id):
         return HttpResponse('Widget removed')
     else:
         c = RequestContext(request)
-        return render_to_response('cosinnus/widgets/delete.html', {}, c)
+        return render_to_response('cosinnus/widgets/delete.html', c.flatten())
 
 
 @ensure_csrf_cookie

@@ -55,7 +55,7 @@ setup(
     data_files=data_files,
     install_requires=[
         # please mirror all changes in the requirements.txt for local installs!
-        'Django==1.10.8',
+        'Django==1.11.16',
         'MarkupSafe==0.18',
         'Pillow==5.2.0',
         'Celery==4.2.0',
@@ -63,6 +63,7 @@ setup(
         'django-annoying==0.7.6',
         'django-appconf==1.0.2',
         'django-bootstrap3-datetimepicker-3==2.6.0',
+        'django-bootstrap3==11.0.0',
         'django-classy-tags==0.8.0',
         'django-cron==0.5.0',
         'django-embed-video==0.6',
@@ -70,7 +71,7 @@ setup(
         'django-extra-views==0.6.3',
         'django-filer==1.3.2',
         'django-filter==1.1.0',
-        'django-haystack==2.7.0',
+        'django-haystack==2.8.1',
         'django-honeypot==0.6.0',
         'django-model-utils==1.5.0',
         'django-mptt==0.8.7',
@@ -82,7 +83,7 @@ setup(
         'django-suit==0.2.26',
         'django-taggit==0.22.2',
         'django-widget-tweaks==1.3',
-        'djangorestframework==3.6.4',
+        'djangorestframework==3.8.2',
         'dnspython==1.15.0',
         'easy-thumbnails==2.5',
         'ecdsa==0.10',
@@ -102,6 +103,7 @@ setup(
         'sqlparse==0.1.10',
         #########'wsgiref==0.1.2',
         'python-dateutil==2.4.1',
+        'pytz==2018.5',
         'python-memcached==1.59',
         'Unidecode==0.4.21',
         
@@ -112,7 +114,6 @@ setup(
         
         # requirements loaded in from github
         'django-awesome-avatar',
-        'django-bootstrap3',
         'django-multiform',
         'django-djajax',
         'django_select2',
@@ -123,7 +124,6 @@ setup(
     ],
     dependency_links=[
         'git+git://github.com/sinnwerkstatt/django-awesome-avatar.git@master#egg=django-awesome-avatar',
-        'git+git://github.com/Markush2010/django-bootstrap3.git@46a84044e89937ebe6128b2a8c560f141741a70e#egg=django-bootstrap3',
         'git+git://github.com/sinnwerkstatt/django-multiform.git@master#egg=django-multiform',
         'git+git://github.com/saschan/django-djajax.git@master#egg=django-djajax',
         'git+git://github.com/wechange-eg/django-select2.git@master#egg=Django-Select2',

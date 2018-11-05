@@ -32,13 +32,11 @@ from cosinnus.models.group import CosinnusPortal,\
 from cosinnus.core.mail import MailThread, get_common_mail_context,\
     send_mail_or_fail_threaded
 from django.template.loader import render_to_string
-from django.http.response import HttpResponseNotAllowed, JsonResponse,\
-    HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
+from django.http.response import HttpResponseNotAllowed, JsonResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from cosinnus.templatetags.cosinnus_tags import full_name_force
 from django.contrib.auth.views import password_reset, password_change
 from cosinnus.utils.permissions import check_user_integrated_portal_member
-from django.template.context import RequestContext
 from django.template.response import TemplateResponse
 from django.core.paginator import Paginator
 from cosinnus.views.mixins.group import EndlessPaginationMixin,\
@@ -55,10 +53,8 @@ from cosinnus.conf import settings
 from cosinnus.utils.tokens import email_blacklist_token_generator
 from cosinnus.utils.functions import is_email_valid
 from django.views.generic.base import TemplateView
-from cosinnus.utils.urls import group_aware_reverse, redirect_with_next,\
-    redirect_next_or
+from cosinnus.utils.urls import redirect_with_next, redirect_next_or
 from cosinnus.utils.group import get_cosinnus_group_model
-from django.utils.http import is_safe_url
 from django.template import loader
 
 from honeypot.decorators import check_honeypot

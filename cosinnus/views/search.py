@@ -25,9 +25,5 @@ class TaggableSearchView(SearchView):
 
 search = search_view_factory(TaggableSearchView,
     template='cosinnus/search.html',
-    # load_all=True,
     form_class=TaggableModelSearchForm,
-    # searchqueryset=None,
-    # context_class=RequestContext,
-    # results_per_page=None
 )
