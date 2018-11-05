@@ -51,7 +51,7 @@ python-dateutil==2.4.1
 urllib3==1.21.1
 Unidecode==0.4.21
 
-wagtail==1.6.3 # when django is at 1.11, upgrade from 1.13.4 to 2.0.2 and then 2.2.2 (read https://docs.wagtail.io/en/stable/releases/2.0.html#upgrade-considerations)
+wagtail==1.13.4 # when django is at 1.11, upgrade from 1.13.4 to 2.0.2 and then 2.2.2 (read https://docs.wagtail.io/en/stable/releases/2.0.html#upgrade-considerations)
 django-overextends==0.4.3
 django-compressor
 
