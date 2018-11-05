@@ -15,7 +15,7 @@ django-el-pagination==2.1.2
 django-extra-views==0.6.3
 django-filer==1.3.2
 django-filter==1.1.0  # need to upgrade to 2.0.0 once django >=1.11 is installed
-django-haystack==2.7.0  # upg to 2.8.1, but will only work properly from django 1.11
+django-haystack==2.7.0  # will only work properly from django 1.11
 django-honeypot==0.6.0
 django-mailbox==4.5.4
 django-model-utils==1.5.0
@@ -51,7 +51,7 @@ html2text==2016.9.19
 urllib3==1.21.1
 Unidecode==0.4.21
 
-wagtail==1.13.4 # when django is at 1.11, upgrade to 2.0.2 and then 2.2.2 (read https://docs.wagtail.io/en/stable/releases/2.0.html#upgrade-considerations)
+wagtail<1.7  #1.13.4 # when django is at 1.11, upgrade to 2.0.2 and then 2.2.2 (read https://docs.wagtail.io/en/stable/releases/2.0.html#upgrade-considerations)
 django-overextends==0.4.3
 django-compressor
 
