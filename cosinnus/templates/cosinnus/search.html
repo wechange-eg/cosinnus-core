@@ -12,7 +12,30 @@
           {% if request.GET.models %}
               <input type="hidden" name="models" value="{{ request.GET.models }}" />
           {% endif %}
-          <div class="col-lg-3 col-md-3">
+          
+          <div class="col-lg-3 col-md-3 app-main mobile-only">
+              <button type="button" class="btn w100 btn-emphasized large-space" onclick="$('#search-options').toggleClass('mobile-hidden')">
+                <ul class="media-list">
+                  <li class="media">
+            
+                    <!--
+                    <a class="pull-left" href="#">
+                      4
+                    </a>
+                    <a class="pull-left" style="background-color:inherit;" href="#">
+                    -->
+                    <a class="pull-left" href="#">
+                      <i class="fa fa-caret-down"></i>
+                    </a>
+                    <div class="media-body">
+                      {% trans "Search options..." %}
+                    </div>
+                  </li>
+                </ul>
+              </button>
+          </div>
+          
+          <div id="search-options" class="col-lg-3 col-md-3 mobile-hidden" style="">
           
           
           <p class="navi-explanation">{% trans "Topics" %}:</p>
@@ -395,12 +418,12 @@
                 <div class="content-box">
                   
                   <div class="w100 large-space clearfix">
-	                  <button type="submit" class="btn btn-emphasized no-margin">
+	                  <button type="submit" class="btn btn-emphasized no-margin btn-icon-only">
 	                    <ul class="media-list">
 	                        <li class="media">
-	                            <a class="pull-left" href="#">
+	                            <span class="pull-left">
 	                                <i class="fa fa-search"></i>
-	                            </a>
+	                            </span>
 	                            <div class="media-body">
 	                                {% trans "Search" %}
 	                            </div>
@@ -411,9 +434,6 @@
 	                  <div type="button" class="btn btn-default w100" style="display: inline;">
 	                    <ul class="media-list">
 	                      <li class="media">
-	                        <a class="pull-left" href="#">
-	                          <i class="fa fa-search"></i>
-	                        </a>
 	                        <div class="media-body media-body-form-control">
 	                          <input class="form-control"
 	                            placeholder="Suche"

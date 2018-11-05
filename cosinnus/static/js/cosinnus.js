@@ -1536,6 +1536,16 @@
 	    		}
 	    	});
 	    },
+	    
+	    fixBootstrapMobileNavbar: function() {
+	    	$('#navbar').on('show.bs.collapse', function(x) {
+	    	    $('html').attr("style", "overflow: hidden");
+	    	});
+	    	$('#navbar').on('hide.bs.collapse', function(x) {
+	    		$('html').attr("style", "");
+	    	});
+	    },
+	    
     	
         dashboardArrangeInput: function() {
             $(window).on('dashboardArrangeInputShow', function() {
@@ -1667,5 +1677,6 @@ $(function() {
     $.cosinnus.addBtnTitles();
     $.cosinnus.addClassChangeTrigger();
     $.cosinnus.fixBootstrapModalScroll();
+    $.cosinnus.fixBootstrapMobileNavbar();
 });
 
