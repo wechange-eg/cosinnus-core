@@ -32,6 +32,7 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from django.utils import translation
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from django.contrib.contenttypes.fields import GenericForeignKey
+from django.core.validators import validate_comma_separated_integer_list
 
 
 
@@ -128,9 +129,10 @@ class BaseTagObject(models.Model):
     # Empty first choice must be included for select2 placeholder compatibility!
     TOPIC_CHOICES = getattr(settings, 'COSINNUS_TOPIC_CHOICES', [])
 
-    topics = models.CommaSeparatedIntegerField(_('Topics'), blank=True,
-        null=True, max_length=255)  # We cannot add choices here as this would 
-                                    # fail validation
+    # We cannot add choices here as this would fail validation
+    topics = models.CharField(_('Topics'), blank=True,
+        null=True, max_length=255, validators=[validate_comma_separated_integer_list])
+    
     text_topics = models.ManyToManyField(CosinnusTopicCategory, verbose_name=_('Text Topics'), 
         related_name='tagged_objects', blank=True)
     
