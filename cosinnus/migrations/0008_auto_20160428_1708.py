@@ -7,6 +7,7 @@ import wagtail.wagtailcore.fields
 from django.conf import settings
 
 import cosinnus.models.wagtail_blocks
+import cosinnus.models.wagtail_models
 
 class Migration(migrations.Migration):
 
