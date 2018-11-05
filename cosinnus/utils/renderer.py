@@ -63,7 +63,7 @@ class BaseRenderer(object):
     def render_single(cls, context, object=None, **kwargs):
         context.update(kwargs)
         context.update({'object': object})
-        return render_to_string(cls.get_template_single(), context)
+        return render_to_string(cls.get_template_single(), context.flatten())
     
     @classmethod
     def get_object_list_for_user(cls, user, qs_filter, limit=30):

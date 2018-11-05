@@ -35,7 +35,6 @@ from django.template.loader import render_to_string
 from django.http.response import HttpResponseNotAllowed, JsonResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from cosinnus.templatetags.cosinnus_tags import full_name_force
-from django.contrib.auth.views import password_reset, password_change
 from cosinnus.utils.permissions import check_user_integrated_portal_member
 from django.template.response import TemplateResponse
 from django.core.paginator import Paginator
@@ -61,6 +60,7 @@ from honeypot.decorators import check_honeypot
 from annoying.functions import get_object_or_None
 
 import logging
+from django.contrib.auth.views import PasswordChangeView, PasswordResetView
 logger = logging.getLogger('cosinnus')
 
 USER_MODEL = get_user_model()
@@ -598,7 +598,7 @@ def password_change_proxy(request, *args, **kwargs):
     user = request.user
     if user.is_authenticated() and check_user_integrated_portal_member(user):
         return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_changed_page.html')
-    return password_change(request, *args, **kwargs)
+    return PasswordChangeView.as_view(*args, **kwargs)(request)
 
 
 class CosinnusPasswordResetForm(PasswordResetForm):
@@ -634,9 +634,9 @@ def password_reset_proxy(request, *args, **kwargs):
         if user and check_user_integrated_portal_member(user):
             return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_reset_page.html')
     kwargs.update({
-        'password_reset_form': CosinnusPasswordResetForm,
+        'form_class': CosinnusPasswordResetForm,
     })
-    return password_reset(request, *args, **kwargs)
+    return PasswordResetView.as_view(*args, **kwargs)(request)
 
 
 def set_user_email_to_verify(user, new_email, request=None, user_has_just_registered=True):

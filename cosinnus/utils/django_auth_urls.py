@@ -8,8 +8,8 @@ from cosinnus.templatetags.cosinnus_tags import is_integrated_portal,\
     is_sso_portal
 from cosinnus.forms.user import UserEmailLoginForm
 from cosinnus.views import common, sso, user, integrated
-from django.contrib.auth.views import password_reset_done,\
-    password_reset_confirm, password_change_done, password_reset_complete
+from django.contrib.auth.views import PasswordChangeDoneView,\
+    PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 
 # regular auth URLs, disabled for integrated portals
 if not is_integrated_portal():
@@ -34,8 +34,7 @@ if not is_integrated_portal():
                 {'template_name': 'cosinnus/registration/password_change_form.html'},
                 name='password_change'),
             url(r'^password_change/done/$',
-                password_change_done,
-                {'template_name': 'cosinnus/registration/password_change_done.html'},
+                PasswordChangeDoneView.as_view(template_name='cosinnus/registration/password_change_done.html'),
                 name='password_change_done'),
         ]
         
@@ -51,22 +50,19 @@ if not is_integrated_portal():
         
         urlpatterns += [
             url(r'^password_reset/done/$',
-                password_reset_done,
-                {'template_name': 'cosinnus/registration/password_reset_done.html'},
+                PasswordResetDoneView.as_view(template_name='cosinnus/registration/password_reset_done.html'),
                 name='password_reset_done')
         ]
         
         urlpatterns += [
             url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-                password_reset_confirm,
-                {'template_name': 'cosinnus/registration/password_reset_confirm.html'},
+                PasswordResetConfirmView.as_view(template_name='cosinnus/registration/password_reset_confirm.html'),
                 name='password_reset_confirm')
         ]
         
         urlpatterns += [
             url(r'^reset/done/$',
-                password_reset_complete,
-                {'template_name': 'cosinnus/registration/password_reset_complete.html'},
+                PasswordResetCompleteView.as_view(template_name='cosinnus/registration/password_reset_complete.html'),
                 name='password_reset_complete'),
         ]
 

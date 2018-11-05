@@ -37,7 +37,7 @@ class BaseChoiceWidget(forms.Widget):
         self.data = data
         return value
 
-    def render(self, name, value, attrs=None, choices=()):
+    def render(self, name, value, attrs=None, choices=()): # TODO deprecated: accept `renderer=None` arg?
         if not hasattr(self, 'data'):
             self.data = {}
         if value is None:

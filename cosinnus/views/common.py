@@ -16,11 +16,11 @@ from django.http.response import  HttpResponseNotFound,\
     HttpResponseForbidden, HttpResponseServerError, HttpResponseNotAllowed,\
     HttpResponseBadRequest, JsonResponse
 from django.template.loader import render_to_string
-from django.contrib.auth.views import login, logout
 from django.contrib.contenttypes.models import ContentType
 from cosinnus.models.tagged import LikeObject
 from annoying.functions import get_object_or_None
 from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth.views import LoginView, LogoutView
 
 class IndexView(RedirectView):
     permanent = False
@@ -93,7 +93,7 @@ switch_language = SwitchLanguageView.as_view()
 
 def cosinnus_login(request, **kwargs):
     """ Wraps the django login view to set the "wp_user_logged_in" cookie on logins """
-    response = login(request, **kwargs)
+    response = LoginView.as_view(**kwargs)(request)  #login(request, **kwargs)
     if request.method == 'POST' and not request.user.is_anonymous():
         response.set_cookie('wp_user_logged_in', 1, 60*60*24*30) # 30 day expiry
     return response
@@ -101,7 +101,7 @@ def cosinnus_login(request, **kwargs):
 def cosinnus_logout(request, **kwargs):
     """ Wraps the django logout view to delete the "wp_user_logged_in" cookie on logouts
         (this seems to only clear the value of the cookie and not completely delete it!) """
-    response = logout(request, **kwargs)
+    response = LogoutView.as_view(**kwargs)(request) # logout(request, **kwargs)
     if request.user.is_anonymous():
         response.delete_cookie('wp_user_logged_in')
     return response

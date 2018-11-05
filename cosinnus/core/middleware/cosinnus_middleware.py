@@ -5,7 +5,6 @@ from builtins import object
 import logging
 
 from django.contrib import messages
-from django.contrib.auth.views import logout
 from django.core.exceptions import MiddlewareNotUsed
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.db.models import signals
@@ -18,6 +17,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
 from cosinnus.core import signals as cosinnus_signals
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 
 logger = logging.getLogger('cosinnus')
@@ -165,7 +166,8 @@ class ForceInactiveUserLogoutMiddleware(object):
                     next_page = reverse('login')
                 except NoReverseMatch:
                     next_page = '/'
-                return logout(request, next_page=next_page)
+                logout(request)
+                return redirect(next_page) 
 
 
 class DenyAnonymousAccessMiddleware(object):
