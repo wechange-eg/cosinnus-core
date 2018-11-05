@@ -86,7 +86,7 @@ setup(
         'dnspython==1.15.0',
         'easy-thumbnails==2.5',
         'ecdsa==0.10',
-        'jsonfield==1.0.0',
+        'geopy==1.11.0',
         'jsonfield==1.0.0',
         'html5lib',
         'html2text==2016.9.19',
@@ -106,7 +106,7 @@ setup(
         'Unidecode==0.4.21',
         
         # wagtail
-        'wagtail==1.13.4',
+        'wagtail==1.6.3',
         'django-overextends==0.4.3',
         'django-compressor',
         
