@@ -184,7 +184,7 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     boosted = indexes.CharField(model_attr='get_full_name', boost=BOOSTED_FIELD_BOOST)
     
     user_visibility_mode = indexes.BooleanField(default=True) # switch to filter differently on mt_visibility
-    membership_groups = indexes.MultiValueField(model_attr='cosinnus_groups_pks') # ids of all groups the user is member/admin of
+    membership_groups = indexes.MultiValueField() # ids of all groups the user is member/admin of
     admin_groups = indexes.MultiValueField() # ids of all groups the user is member/admin of
     portals = indexes.MultiValueField()
     location = indexes.LocationField(null=True)
@@ -215,6 +215,10 @@ class UserProfileIndex(LocalCachedIndexMixin, DocumentBoostMixin, StoredDataInde
     def prepare_url(self, obj):
         """ NOTE: UserProfiles always contain a relative URL! """
         return reverse('cosinnus:profile-detail', kwargs={'username': obj.user.username})
+    
+    def prepare_membership_groups(self, obj):
+        """ Better to convert this QS to native list """
+        return list(obj.cosinnus_groups_pks)
     
     def prepare_member_count(self, obj):
         """ Memberships for users """
