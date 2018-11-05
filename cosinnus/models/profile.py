@@ -418,6 +418,7 @@ class GlobalBlacklistedEmail(models.Model):
         """ Will add an email to the blacklist if it doesn't exist yet if no user is registered with that email 
             or doesn't have a portal membership in this current portal.
             Otherwise will simply set the global "no-email" setting for that user. """
+        from django.contrib.auth import get_user_model
         user = get_object_or_None(get_user_model(), email=email)
         portal_membership = get_object_or_None(CosinnusPortalMembership, user=user, group=CosinnusPortal.get_current())
         if portal_membership:
