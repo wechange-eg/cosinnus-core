@@ -39,6 +39,8 @@ except:
 USER_MODEL = get_user_model()
 logger = logging.getLogger('cosinnus')
 
+SERVER_SIDE_SEARCH_LIMIT = 30
+
 
 def _better_json_loads(s):
     """ Can pass pure string values and None through without exception """
@@ -105,6 +107,7 @@ def map_search_endpoint(request, filter_group_id=None):
     
     if not is_number(limit) or limit < 0:
         return HttpResponseBadRequest('``limit`` param must be a positive number or 0!')
+    limit = min(limit, SERVER_SIDE_SEARCH_LIMIT)
     if not is_number(page) or page < 0:
         return HttpResponseBadRequest('``page`` param must be a positive number or 0!')
     

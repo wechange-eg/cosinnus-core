@@ -106,7 +106,7 @@
                                     </a>
                                     {% endif %}
                                     <div class="media-body">
-                                        <span class="annotation">
+                                        <span class="annotation mobile-hidden">
                                             {% trans "Invited to be a member" %}
                                             &nbsp;
                                             <span class="moment-data-date" data-date="{{ member.membership_status_date|date:'c' }}"></span>
@@ -217,7 +217,7 @@
 		                            </a>
 		                            {% endif %}
 		                            <div class="media-body">
-	                                    <span class="annotation">
+	                                    <span class="annotation mobile-hidden">
                                             {% trans "Membership requested" %}
 	                                        &nbsp;
 	                                        <span class="moment-data-date" data-date="{{ member.membership_status_date|date:'c' }}"></span>
@@ -329,7 +329,7 @@
                         <ul class="media-list">
                             <li class="media">
                                 <div class="media-body">
-                                    <span class="annotation">
+                                    <span class="annotation mobile-hidden">
                                         {% trans "Invited to be a member" %}
                                         &nbsp;
                                         <span class="moment-data-date" data-date="{{ recruitation.last_modified|date:'c' }}"></span>

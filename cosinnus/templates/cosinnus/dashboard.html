@@ -149,7 +149,7 @@
                     {% if user.pk in group.members or user in group.admins or not user.is_authenticated %}
                     	
                     	{% if "marketplace" in object_counts %}
-                            <div class="dashboard-header-link app-marketplace">
+                            <div class="dashboard-header-link app-marketplace mobile-hidden">
                                 <a href="{% group_url 'cosinnus:marketplace:list' group=group %}">
                                     <i class="fa fa-exchange"></i>
                                     <span>{{ object_counts.marketplace }}</span>
@@ -158,7 +158,7 @@
                             </div>
                         {% endif %}
                     	{% if "poll" in object_counts %}
-                            <div class="dashboard-header-link app-poll">
+                            <div class="dashboard-header-link app-poll mobile-hidden">
                                 <a href="{% group_url 'cosinnus:poll:list' group=group %}">
                                     <i class="fa fa-bar-chart"></i>
                                     <span>{{ object_counts.poll }}</span>
@@ -167,7 +167,7 @@
                             </div>
                         {% endif %}
                         {% if "file" in object_counts %}
-                            <div class="dashboard-header-link app-files">
+                            <div class="dashboard-header-link app-files mobile-hidden">
                                 <a href="{% group_url 'cosinnus:file:list' group=group %}">
                                     <i class="fa fa-file"></i>
                                     <span>{{ object_counts.file }}</span>
@@ -176,7 +176,7 @@
                             </div>
                         {% endif %}
                         {% if "etherpad" in object_counts %}
-                            <div class="dashboard-header-link app-etherpad">
+                            <div class="dashboard-header-link app-etherpad mobile-hidden">
                                 <a href="{% group_url 'cosinnus:etherpad:list' group=group %}">
                                     <i class="fa fa-file-text-o"></i>
                                     <span>{{ object_counts.etherpad }}</span>
@@ -185,7 +185,7 @@
                             </div>
                         {% endif %}
                         {% if "todo" in object_counts %}
-                            <div class="dashboard-header-link app-todos">
+                            <div class="dashboard-header-link app-todos mobile-hidden">
                                 <a href="{% group_url 'cosinnus:todo:list' group=group %}">
                                     <i class="fa fa-tasks"></i>
                                     <span>{{ object_counts.todo }}</span>
@@ -194,7 +194,7 @@
                             </div>
                         {% endif %}
                         {% if "event" in object_counts %}
-                            <div class="dashboard-header-link app-calendar">
+                            <div class="dashboard-header-link app-calendar mobile-hidden">
                                 <a href="{% group_url 'cosinnus:event:list' group=group %}">
                                     <i class="fa fa-calendar"></i>
                                     <span>{{ object_counts.event }}</span>
@@ -203,7 +203,7 @@
                             </div>
                         {% endif %}
                         {% if "note" in object_counts %}
-                            <div class="dashboard-header-link app-main">
+                            <div class="dashboard-header-link app-main mobile-hidden">
                                 <a href="{% group_url 'cosinnus:note:list' group=group %}">
                                     <i class="fa fa-book"></i>
                                     <span>{{ object_counts.note }}</span>

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-11 17:54+0200\n"
-"PO-Revision-Date: 2018-10-11 17:58+0200\n"
+"PO-Revision-Date: 2018-11-03 19:03+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -1569,7 +1569,7 @@ msgstr "mehr"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Report offensive content"
-msgstr "Offensiven Inhalt melden"
+msgstr "Anstößigen Inhalt melden"
 
 msgid "Please enter a description of why you are reporting this content!"
 msgstr "Bitte beschreibe warum du diesen Inhalt meldest!"
@@ -2388,7 +2388,7 @@ msgid ""
 "\n"
 "Your %(site_name)s Team"
 msgstr ""
-"Benutzer_in \"%(sender_name)s\" hat gemeldet, dass \"%(object_name)s\" offensive Inhalte enthält.\n"
+"Benutzer_in \"%(sender_name)s\" hat gemeldet, dass \"%(object_name)s\" anstößige Inhalte enthält.\n"
 "\n"
 "Die Gründe für die Meldung, laut Reporter_in:\n"
 "\"%(report_text)s\"\n"
@@ -2408,7 +2408,7 @@ msgstr ""
 
 #, python-format
 msgid "Offensive item reported: \"%(object_name)s\" on %(site_name)s!"
-msgstr "Offensive Inhalte gemeldet in: \"%(object_name)s\", auf %(site_name)s"
+msgstr "Anstößige Inhalte gemeldet in: \"%(object_name)s\", auf %(site_name)s"
 
 #, python-format
 msgid ""
