@@ -299,6 +299,8 @@ THUMBNAIL_PROCESSORS = (
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters',
 )
+# this namer prevents exposing the source file in its path
+THUMBNAIL_NAMER = 'easy_thumbnails.namers.hashed'
 
 
 EL_PAGINATION_PER_PAGE = 8
