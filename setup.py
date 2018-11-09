@@ -123,7 +123,7 @@ setup(
         'wagtail-modeltranslation',
     ],
     dependency_links=[
-        'git+git://github.com/sinnwerkstatt/django-awesome-avatar.git@master#egg=django-awesome-avatar',
+        'git+git://github.com/wechange-eg/django-awesome-avatar.git@django2#egg=django-awesome-avatar',
         'git+git://github.com/sinnwerkstatt/django-multiform.git@master#egg=django-multiform',
         'git+git://github.com/saschan/django-djajax.git@master#egg=django-djajax',
         'git+git://github.com/wechange-eg/django-select2.git@master#egg=Django-Select2',

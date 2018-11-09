@@ -58,7 +58,7 @@ django-overextends==0.4.3
 django-compressor
 
 
--e git+git://github.com/sinnwerkstatt/django-awesome-avatar.git@master#egg=django-awesome-avatar
+-e git+git://github.com/wechange-eg/django-awesome-avatar.git@django2#egg=django-awesome-avatar
 -e git+git://github.com/sinnwerkstatt/django-multiform.git@master#egg=django-multiform
 -e git+git://github.com/saschan/django-djajax.git@django2#egg=django-djajax
 -e git+git://github.com/wechange-eg/django-select2.git@django2#egg=django-select2
