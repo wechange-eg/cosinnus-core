@@ -3,17 +3,14 @@
 {% with group=object %}
 	{% group_url 'cosinnus:group-dashboard' group=group as group_url %}
 	<div class="app-main">
-	    <div class="btn btn-emphasized w100">
+	    <div class="btn btn-emphasized w100" href="{{ group_url }}">
 	        <ul class="media-list large-space">
 	            <li class="media">
-                    <a class="pull-left" href="{{ group_url }}">
+                    <span class="pull-left">
                         {% include "cosinnus/group/group_avatar_image.html" with group=group %}
-                    </a>
-	                <a class="pull-right" href="{{ group_url }}" target="_blank">
-	                    <i class="fa fa-chain"></i>
-	                </a>
+                    </span>
 	                <div class="media-body">
-						{% include 'cosinnus/group/group_label.html' with group=group %}
+						{% include 'cosinnus/group/group_label.html' with group=group no_link=True %}
 	                </div>
 	            </li>
 	        </ul>

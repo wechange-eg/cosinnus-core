@@ -3447,13 +3447,13 @@ tbody.collapse.in {
 .navbar-fixed-top .navbar-collapse,
 .navbar-fixed-bottom .navbar-collapse {
   max-height: 400px;  /* fallback */
-  max-height: 90vh;
+  max-height: 80vh;
 }
 @media (max-width: 480px) and (orientation: landscape) {
   .navbar-fixed-top .navbar-collapse,
   .navbar-fixed-bottom .navbar-collapse {
   max-height: 300px;  /* fallback */
-  max-height: 90vh;
+  max-height: 80vh;
   }
 }
 

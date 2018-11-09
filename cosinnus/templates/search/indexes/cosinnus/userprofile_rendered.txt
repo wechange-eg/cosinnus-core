@@ -4,20 +4,17 @@
 {% with user_profile=object %}
     {% url 'cosinnus:profile-detail' username=user_profile.user.username as user_url %}
 	<div class="app-main">
-	    <div class="btn btn-emphasized w100">
+	    <div class="btn btn-emphasized w100" href="{{ user_url }}">
 	        <ul class="media-list large-space">
 	            <li class="media">
-                    <a class="pull-left" href="{{ user_url }}">
+                    <span class="pull-left">
                         {% include "cosinnus/user/user_avatar_image.html" with user=user_profile.user %}
-                    </a>
-	                <a class="pull-right" href="{{ user_url }}" target="_blank">
-	                    <i class="fa fa-chain"></i>
-	                </a>
+                    </span>
 	                <div class="media-body">
-                        <a href="{{ user_url }}">
+                        <span>
 							<i class="fa fa-user"></i>
 							{{ user_profile.user|full_name }}
-						</a>
+						</span>
 						{% for portal in user_profile.user|get_membership_portals %}
 						    {% include 'cosinnus/portal/portal_link_icon.html' with portal=portal %}
 						{% endfor %}

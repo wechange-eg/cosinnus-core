@@ -1,9 +1,17 @@
 {% load static %}
 
+{% if no_link %}
+<span>
+{% else %}
 <a href="{{ group.get_absolute_url }}">
+{% endif %}
 	<i class="fa fa-users"></i>
 	{{ group.name }}
+{% if no_link %}
+</span>
+{% else %}
 </a>
+{% endif %}
 {% if group.is_foreign_portal %} 
     {% include 'cosinnus/portal/portal_link_icon.html' with portal=group.portal %}
 {% endif %}
