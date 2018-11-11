@@ -29,9 +29,9 @@ class Migration(migrations.Migration):
                 ('public', models.BooleanField(default=False, verbose_name='Public')),
                 ('is_active', models.BooleanField(default=True, help_text='If an idea is not active, it counts as non-existent for all purposes and views on the website.', verbose_name='Is active')),
                 ('created_groups', models.ManyToManyField(related_name='_cosinnusidea_created_groups_+', null=True, verbose_name='Created Projects', to=settings.COSINNUS_GROUP_OBJECT_MODEL, blank=True)),
-                ('creator', models.ForeignKey(related_name='ideas', verbose_name='Creator', to=settings.AUTH_USER_MODEL, null=True)),
+                ('creator', models.ForeignKey(related_name='ideas', verbose_name='Creator', to=settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)),
                 ('media_tag', models.OneToOneField(null=True, on_delete=django.db.models.deletion.SET_NULL, blank=True, editable=False, to=settings.COSINNUS_TAG_OBJECT_MODEL)),
-                ('portal', models.ForeignKey(related_name='ideas', default=1, verbose_name='Portal', to='cosinnus.CosinnusPortal')),
+                ('portal', models.ForeignKey(related_name='ideas', default=1, verbose_name='Portal', to='cosinnus.CosinnusPortal', on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('created',),
@@ -47,8 +47,8 @@ class Migration(migrations.Migration):
                 ('object_id', models.PositiveIntegerField()),
                 ('liked', models.BooleanField(default=True, verbose_name='Liked')),
                 ('followed', models.BooleanField(default=True, verbose_name='Following')),
-                ('content_type', models.ForeignKey(to='contenttypes.ContentType')),
-                ('user', models.ForeignKey(related_name='likes', verbose_name='User', to=settings.AUTH_USER_MODEL, null=True)),
+                ('content_type', models.ForeignKey(to='contenttypes.ContentType', on_delete=models.CASCADE)),
+                ('user', models.ForeignKey(related_name='likes', verbose_name='User', to=settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('content_type',),

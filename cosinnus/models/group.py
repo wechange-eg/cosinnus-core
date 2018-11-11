@@ -481,7 +481,7 @@ class CosinnusPortal(models.Model):
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
         related_name='cosinnus_portals', through='CosinnusPortalMembership')
     
-    site = models.OneToOneField(Site, verbose_name=_('Associated Site'))
+    site = models.OneToOneField(Site, verbose_name=_('Associated Site'), on_delete=models.CASCADE)
     
     protocol = models.CharField(_('Http/Https Protocol (overrides settings)'), max_length=8,
                         blank=True, null=True)
@@ -538,8 +538,10 @@ class CosinnusPortal(models.Model):
     
     def save(self, *args, **kwargs):
         # clean color fields
-        self.top_color = self.top_color.replace('#', '')
-        self.bottom_color = self.bottom_color.replace('#', '')
+        if self.top_color:
+            self.top_color = self.top_color.replace('#', '')
+        if self.bottom_color:
+            self.bottom_color = self.bottom_color.replace('#', '')
         
         super(CosinnusPortal, self).save(*args, **kwargs)
         self.compile_custom_stylesheet()
@@ -645,7 +647,7 @@ class CosinnusBaseGroup(IndexingUtilsMixin, FlickrEmbedFieldMixin, VideoEmbedFie
     # there was no other way to generate completely runnable migrations 
     # (with a get_default function, or any other way)
     portal = models.ForeignKey(CosinnusPortal, verbose_name=_('Portal'), related_name='groups', 
-        null=False, blank=False, default=1) # port_id 1 is created in a datamigration!
+        null=False, blank=False, default=1, on_delete=models.CASCADE) # port_id 1 is created in a datamigration!
     
     name = models.CharField(_('Name'), max_length=250) # removed validators=[group_name_validator])
     slug = models.SlugField(_('Slug'), 

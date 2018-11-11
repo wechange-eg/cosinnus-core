@@ -172,7 +172,7 @@ class CosinnusIdea(IndexingUtilsMixin, models.Model):
     # there was no other way to generate completely runnable migrations 
     # (with a get_default function, or any other way)
     portal = models.ForeignKey(CosinnusPortal, verbose_name=_('Portal'), related_name='ideas', 
-        null=False, blank=False, default=1) # port_id 1 is created in a datamigration!
+        null=False, blank=False, default=1, on_delete=models.CASCADE) # port_id 1 is created in a datamigration!
     
     title = models.CharField(_('Title'), max_length=250) # removed validators=[group_name_validator])
     slug = models.SlugField(_('Slug'), 

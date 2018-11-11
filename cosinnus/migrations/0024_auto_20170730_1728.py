@@ -19,9 +19,9 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('object_id', models.PositiveIntegerField()),
-                ('content_type', models.ForeignKey(to='contenttypes.ContentType')),
-                ('creator', models.ForeignKey(related_name='+', verbose_name='Creator', to=settings.AUTH_USER_MODEL)),
-                ('group', models.ForeignKey(related_name='reflected_objects', to=settings.COSINNUS_GROUP_OBJECT_MODEL)),
+                ('content_type', models.ForeignKey(to='contenttypes.ContentType', on_delete=models.CASCADE)),
+                ('creator', models.ForeignKey(related_name='+', verbose_name='Creator', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
+                ('group', models.ForeignKey(related_name='reflected_objects', to=settings.COSINNUS_GROUP_OBJECT_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('content_type',),

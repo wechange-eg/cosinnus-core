@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('username', models.CharField(max_length=255, verbose_name='Email')),
                 ('ip', models.IPAddressField(null=True, blank=True)),
                 ('date', models.DateTimeField(auto_now_add=True)),
-                ('portal', models.ForeignKey(related_name='+', default=None, blank=True, to='cosinnus.CosinnusPortal', null=True, verbose_name='Portal')),
+                ('portal', models.ForeignKey(related_name='+', default=None, blank=True, to='cosinnus.CosinnusPortal', null=True, verbose_name='Portal', on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('-date',),

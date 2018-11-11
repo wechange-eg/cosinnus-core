@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('date', models.DateTimeField(auto_now_add=True)),
                 ('email', models.EmailField(max_length=254, verbose_name='email address')),
                 ('last_modified', models.DateTimeField(auto_now=True, verbose_name='Last modified')),
-                ('group', models.ForeignKey(related_name='unregistered_user_invites', to=settings.COSINNUS_GROUP_OBJECT_MODEL)),
+                ('group', models.ForeignKey(related_name='unregistered_user_invites', to=settings.COSINNUS_GROUP_OBJECT_MODEL, on_delete=models.CASCADE)),
                 ('invited_by', models.ForeignKey(related_name='cosinnus_unregistered_user_invitations', on_delete=django.db.models.deletion.SET_NULL, blank=True, to=settings.AUTH_USER_MODEL, null=True)),
             ],
             options={

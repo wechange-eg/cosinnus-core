@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='cosinnusportal',
             name='site',
-            field=models.OneToOneField(verbose_name='Associated Site', to='sites.Site'),
+            field=models.OneToOneField(verbose_name='Associated Site', to='sites.Site', on_delete=models.CASCADE),
         ),
         migrations.AlterField(
             model_name='tagobject',

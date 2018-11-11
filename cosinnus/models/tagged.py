@@ -206,7 +206,7 @@ class AttachedObject(models.Model):
     objects.
     """
 
-    content_type = models.ForeignKey(ContentType)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     target_object = GenericForeignKey('content_type', 'object_id')
 
@@ -426,7 +426,7 @@ class BaseTaggableObjectReflection(models.Model):
         Can be used to "symbolically link" an object into another group, to display it there as well,
         while it still is retained in its original group. """
         
-    content_type = models.ForeignKey(ContentType)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     reflected_object = GenericForeignKey('content_type', 'object_id')
     
@@ -487,7 +487,7 @@ class LikeObject(models.Model):
     A generic object to serve as a "Like", as well as a "Following" indicator for any object.
     """
 
-    content_type = models.ForeignKey(ContentType)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     target_object = GenericForeignKey('content_type', 'object_id')
     

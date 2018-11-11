@@ -53,7 +53,7 @@ class Migration(migrations.Migration):
                 ('website', models.URLField(max_length=100, null=True, verbose_name='Website', blank=True)),
                 ('settings', jsonfield.fields.JSONField(default={})),
                 ('media_tag', models.OneToOneField(null=True, on_delete=django.db.models.deletion.SET_NULL, blank=True, editable=False, to=settings.COSINNUS_TAG_OBJECT_MODEL)),
-                ('user', models.OneToOneField(related_name='cosinnus_profile', editable=False, to=settings.AUTH_USER_MODEL)),
+                ('user', models.OneToOneField(related_name='cosinnus_profile', editable=False, to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'swappable': 'COSINNUS_USER_PROFILE_MODEL',
@@ -64,7 +64,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('object_id', models.PositiveIntegerField()),
-                ('content_type', models.ForeignKey(to='contenttypes.ContentType')),
+                ('content_type', models.ForeignKey(to='contenttypes.ContentType', on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('content_type',),
@@ -103,8 +103,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('status', models.PositiveSmallIntegerField(default=0, db_index=True, choices=[(0, 'pending'), (1, 'member'), (2, 'admin')])),
                 ('date', models.DateTimeField(auto_now_add=True)),
-                ('group', models.ForeignKey(related_name='memberships', to='cosinnus.CosinnusGroup')),
-                ('user', models.ForeignKey(related_name='cosinnus_memberships', to=settings.AUTH_USER_MODEL)),
+                ('group', models.ForeignKey(related_name='memberships', to='cosinnus.CosinnusGroup', on_delete=models.CASCADE)),
+                ('user', models.ForeignKey(related_name='cosinnus_memberships', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,
@@ -119,7 +119,7 @@ class Migration(migrations.Migration):
                 ('location', osm_field.fields.OSMField(lat_field='location_lat', null=True, verbose_name='Location', lon_field='location_lon', blank=True)),
                 ('location_lat', osm_field.fields.LatitudeField(blank=True, null=True, verbose_name='Latitude', validators=[osm_field.validators.validate_latitude])),
                 ('location_lon', osm_field.fields.LongitudeField(blank=True, null=True, verbose_name='Longitude', validators=[osm_field.validators.validate_longitude])),
-                ('group', models.ForeignKey(related_name='locations', verbose_name='Group', to='cosinnus.CosinnusGroup')),
+                ('group', models.ForeignKey(related_name='locations', verbose_name='Group', to='cosinnus.CosinnusGroup', on_delete=models.CASCADE)),
             ],
             options={
                 'verbose_name': 'CosinnusLocation',
@@ -133,7 +133,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=100, verbose_name='Title')),
                 ('text', models.TextField(verbose_name='Text', blank=True)),
                 ('last_edited', models.DateTimeField(auto_now=True, verbose_name='Last edited')),
-                ('group', models.ForeignKey(related_name='micropages', blank=True, to='cosinnus.CosinnusGroup', null=True)),
+                ('group', models.ForeignKey(related_name='micropages', blank=True, to='cosinnus.CosinnusGroup', null=True, on_delete=models.CASCADE)),
                 ('last_edited_by', models.ForeignKey(related_name='cosinnus_cosinnusmicropage_set', on_delete=django.db.models.deletion.PROTECT, editable=False, to=settings.AUTH_USER_MODEL, null=True, verbose_name='Last edited by')),
             ],
             options={
@@ -170,7 +170,7 @@ class Migration(migrations.Migration):
                 ('top_color', models.CharField(validators=[django.core.validators.MaxLengthValidator(7)], max_length=10, blank=True, help_text='Main background color (css hex value, with or without "#")', null=True, verbose_name='Main color')),
                 ('bottom_color', models.CharField(validators=[django.core.validators.MaxLengthValidator(7)], max_length=10, blank=True, help_text='Bottom color for the gradient (css hex value, with or without "#")', null=True, verbose_name='Gradient color')),
                 ('extra_css', models.TextField(help_text='Extra CSS for this portal, will be applied after all other styles.', null=True, verbose_name='Extra CSS', blank=True)),
-                ('site', models.ForeignKey(verbose_name='Associated Site', to='sites.Site', unique=True)),
+                ('site', models.ForeignKey(verbose_name='Associated Site', to='sites.Site', unique=True, on_delete=models.CASCADE)),
             ],
             options={
                 'verbose_name': 'Portal',
@@ -183,8 +183,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('status', models.PositiveSmallIntegerField(default=0, db_index=True, choices=[(0, 'pending'), (1, 'member'), (2, 'admin')])),
                 ('date', models.DateTimeField(auto_now_add=True)),
-                ('group', models.ForeignKey(related_name='memberships', verbose_name='Portal', to='cosinnus.CosinnusPortal')),
-                ('user', models.ForeignKey(related_name='cosinnus_portal_memberships', to=settings.AUTH_USER_MODEL)),
+                ('group', models.ForeignKey(related_name='memberships', verbose_name='Portal', to='cosinnus.CosinnusPortal', on_delete=models.CASCADE)),
+                ('user', models.ForeignKey(related_name='cosinnus_portal_memberships', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,
@@ -199,8 +199,8 @@ class Migration(migrations.Migration):
                 ('object_id', models.PositiveIntegerField()),
                 ('text', models.TextField(verbose_name='Complaint Text')),
                 ('created', models.DateTimeField(auto_now_add=True, verbose_name='Created')),
-                ('content_type', models.ForeignKey(to='contenttypes.ContentType')),
-                ('creator', models.ForeignKey(related_name='cosinnus_cosinnusreportedobject_set', verbose_name='Creator', to=settings.AUTH_USER_MODEL, null=True)),
+                ('content_type', models.ForeignKey(to='contenttypes.ContentType', on_delete=models.CASCADE)),
+                ('creator', models.ForeignKey(related_name='cosinnus_cosinnusreportedobject_set', verbose_name='Creator', to=settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('content_type',),
@@ -211,7 +211,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='DashboardDoubleColumnPage',
             fields=[
-                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
+                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page', on_delete=models.CASCADE)),
                 ('title_de', models.CharField(help_text="The page title as you'd like it to be seen by the public", max_length=255, null=True, verbose_name='Title')),
                 ('title_en', models.CharField(help_text="The page title as you'd like it to be seen by the public", max_length=255, null=True, verbose_name='Title')),
                 ('title_ru', models.CharField(help_text="The page title as you'd like it to be seen by the public", max_length=255, null=True, verbose_name='Title')),
@@ -262,7 +262,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='DashboardSingleColumnPage',
             fields=[
-                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
+                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page', on_delete=models.CASCADE)),
                 ('title_de', models.CharField(help_text="The page title as you'd like it to be seen by the public", max_length=255, null=True, verbose_name='Title')),
                 ('title_en', models.CharField(help_text="The page title as you'd like it to be seen by the public", max_length=255, null=True, verbose_name='Title')),
                 ('title_ru', models.CharField(help_text="The page title as you'd like it to be seen by the public", max_length=255, null=True, verbose_name='Title')),
@@ -308,7 +308,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='DashboardTripleColumnPage',
             fields=[
-                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
+                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page', on_delete=models.CASCADE)),
                 ('title_de', models.CharField(help_text="The page title as you'd like it to be seen by the public", max_length=255, null=True, verbose_name='Title')),
                 ('title_en', models.CharField(help_text="The page title as you'd like it to be seen by the public", max_length=255, null=True, verbose_name='Title')),
                 ('title_ru', models.CharField(help_text="The page title as you'd like it to be seen by the public", max_length=255, null=True, verbose_name='Title')),
@@ -364,7 +364,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='PortalRootPage',
             fields=[
-                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
+                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page', on_delete=models.CASCADE)),
                 ('footer', cosinnus.models.wagtail_models.BetterRichTextField(help_text='Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)', verbose_name='Footer', blank=True)),
                 ('footer_de', cosinnus.models.wagtail_models.BetterRichTextField(help_text='Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)', null=True, verbose_name='Footer', blank=True)),
                 ('footer_en', cosinnus.models.wagtail_models.BetterRichTextField(help_text='Will be displayed as a footer on EVERY page on this website (not only dashboard pages!)', null=True, verbose_name='Footer', blank=True)),
@@ -384,7 +384,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SimpleOnePage',
             fields=[
-                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
+                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page', on_delete=models.CASCADE)),
                 ('title_de', models.CharField(help_text="The page title as you'd like it to be seen by the public", max_length=255, null=True, verbose_name='Title')),
                 ('title_en', models.CharField(help_text="The page title as you'd like it to be seen by the public", max_length=255, null=True, verbose_name='Title')),
                 ('title_ru', models.CharField(help_text="The page title as you'd like it to be seen by the public", max_length=255, null=True, verbose_name='Title')),
@@ -403,7 +403,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SimpleTwoPage',
             fields=[
-                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
+                ('page_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='wagtailcore.Page', on_delete=models.CASCADE)),
                 ('title_de', models.CharField(help_text="The page title as you'd like it to be seen by the public", max_length=255, null=True, verbose_name='Title')),
                 ('title_en', models.CharField(help_text="The page title as you'd like it to be seen by the public", max_length=255, null=True, verbose_name='Title')),
                 ('title_ru', models.CharField(help_text="The page title as you'd like it to be seen by the public", max_length=255, null=True, verbose_name='Title')),
@@ -432,8 +432,8 @@ class Migration(migrations.Migration):
                 ('widget_name', models.CharField(max_length=20, verbose_name='Widget name')),
                 ('type', models.PositiveIntegerField(default=1, verbose_name='Widget Type', editable=False, choices=[(1, 'Dashboard'), (2, 'Microsite')])),
                 ('sort_field', models.CharField(default='999', max_length=20, verbose_name='Sort field')),
-                ('group', models.ForeignKey(blank=True, to='cosinnus.CosinnusGroup', null=True)),
-                ('user', models.ForeignKey(blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+                ('group', models.ForeignKey(blank=True, to='cosinnus.CosinnusGroup', null=True, on_delete=models.CASCADE)),
+                ('user', models.ForeignKey(blank=True, to=settings.AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)),
             ],
             options={
                 'verbose_name': 'Widget configuration',
@@ -446,7 +446,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('config_key', models.CharField(max_length=20, verbose_name='key', db_index=True)),
                 ('config_value', models.TextField(default='', verbose_name='value')),
-                ('config', models.ForeignKey(related_name='items', to='cosinnus.WidgetConfig')),
+                ('config', models.ForeignKey(related_name='items', to='cosinnus.WidgetConfig', on_delete=models.CASCADE)),
             ],
             options={
                 'verbose_name': 'Widget configuration item',
@@ -461,17 +461,17 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='cosinnuspermanentredirect',
             name='from_portal',
-            field=models.ForeignKey(related_name='redirects', verbose_name='From Portal', to='cosinnus.CosinnusPortal'),
+            field=models.ForeignKey(related_name='redirects', verbose_name='From Portal', to='cosinnus.CosinnusPortal', on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='cosinnuspermanentredirect',
             name='to_group',
-            field=models.ForeignKey(related_name='redirects', verbose_name='Permanent Team Redirects', to='cosinnus.CosinnusGroup'),
+            field=models.ForeignKey(related_name='redirects', verbose_name='Permanent Team Redirects', to='cosinnus.CosinnusGroup', on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='cosinnusgroup',
             name='portal',
-            field=models.ForeignKey(related_name='groups', default=1, verbose_name='Portal', to='cosinnus.CosinnusPortal'),
+            field=models.ForeignKey(related_name='groups', default=1, verbose_name='Portal', to='cosinnus.CosinnusPortal', on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='cosinnusgroup',
@@ -481,7 +481,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='tagobject',
             name='group',
-            field=models.ForeignKey(related_name='+', verbose_name='Group', to='cosinnus.CosinnusGroup', null=True),
+            field=models.ForeignKey(related_name='+', verbose_name='Group', to='cosinnus.CosinnusGroup', null=True, on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='tagobject',

@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='cosinnuslocation',
             name='group',
-            field=models.ForeignKey(related_name='locations', verbose_name='Team', to=settings.COSINNUS_GROUP_OBJECT_MODEL),
+            field=models.ForeignKey(related_name='locations', verbose_name='Team', to=settings.COSINNUS_GROUP_OBJECT_MODEL, on_delete=models.CASCADE),
         ),
         migrations.AlterField(
             model_name='streamdashboarddoublecolumnpage',
@@ -649,6 +649,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='tagobject',
             name='group',
-            field=models.ForeignKey(related_name='+', verbose_name='Team', to=settings.COSINNUS_GROUP_OBJECT_MODEL, null=True),
+            field=models.ForeignKey(related_name='+', verbose_name='Team', to=settings.COSINNUS_GROUP_OBJECT_MODEL, null=True, on_delete=models.CASCADE),
         ),
     ]

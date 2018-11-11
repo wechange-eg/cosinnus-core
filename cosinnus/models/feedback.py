@@ -22,7 +22,7 @@ class CosinnusReportedObject(models.Model):
     A complaint report pointing to a generic object.
     """
 
-    content_type = models.ForeignKey(ContentType)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     target_object = GenericForeignKey('content_type', 'object_id')
     
@@ -92,7 +92,7 @@ class CosinnusSentEmailLog(models.Model):
     title = models.CharField(_('Notification ID'), max_length=300)
     date = models.DateTimeField(auto_now_add=True, editable=False)
     portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='+', 
-        null=True, blank=True, default=None)
+        null=True, blank=True, default=None, on_delete=models.CASCADE)
     
     
 class CosinnusFailedLoginRateLimitLog(models.Model):
@@ -105,5 +105,5 @@ class CosinnusFailedLoginRateLimitLog(models.Model):
     ip = models.GenericIPAddressField(blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True, editable=False)
     portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='+', 
-        null=True, blank=True, default=None)
+        null=True, blank=True, default=None, on_delete=models.CASCADE)
 

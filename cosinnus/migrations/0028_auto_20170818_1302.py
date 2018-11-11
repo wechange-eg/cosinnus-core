@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='globalusernotificationsetting',
             name='user',
-            field=models.ForeignKey(related_name='cosinnus_notification_settings', editable=False, to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(related_name='cosinnus_notification_settings', editable=False, to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE),
         ),
         migrations.AlterUniqueTogether(
             name='globalusernotificationsetting',

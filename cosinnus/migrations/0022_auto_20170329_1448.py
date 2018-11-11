@@ -43,6 +43,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='cosinnusgroupcalltoactionbutton',
             name='group',
-            field=models.ForeignKey(related_name='call_to_action_buttons', verbose_name='Team', to=settings.COSINNUS_GROUP_OBJECT_MODEL),
+            field=models.ForeignKey(related_name='call_to_action_buttons', verbose_name='Team', to=settings.COSINNUS_GROUP_OBJECT_MODEL, on_delete=models.CASCADE),
         ),
     ]

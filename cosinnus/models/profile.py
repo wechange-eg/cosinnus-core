@@ -103,7 +103,7 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
     ADDITIONAL_USERNAME_FIELDS = []
     
     user = models.OneToOneField(settings.AUTH_USER_MODEL, editable=False,
-        related_name='cosinnus_profile')
+        related_name='cosinnus_profile', on_delete=models.CASCADE)
     
     avatar = models.ImageField(_("Avatar"), null=True, blank=True,
         upload_to=get_avatar_filename)
@@ -384,9 +384,9 @@ class GlobalUserNotificationSetting(models.Model):
         (SETTING_GROUP_INDIVIDUAL, pgettext_lazy('answer to "i wish to receive notification emails:"', 'Individual settings for each Project/Group...')),
     )
     
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, editable=False, related_name='cosinnus_notification_settings')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, editable=False, related_name='cosinnus_notification_settings', on_delete=models.CASCADE)
     portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='user_notification_settings', 
-        null=False, blank=False, default=1)
+        null=False, blank=False, default=1, on_delete=models.CASCADE)
     setting = models.PositiveSmallIntegerField(choices=SETTING_CHOICES,
             default=SETTING_WEEKLY,
             help_text='Determines if the user wants no mail, immediate mails,s aggregated mails, or group specific settings')
@@ -411,7 +411,7 @@ class GlobalBlacklistedEmail(models.Model):
     email = models.EmailField(_('email address'), unique=True, db_index=True)
     created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
     portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='blacklisted_emails', 
-        null=False, blank=False, default=1)
+        null=False, blank=False, default=1, on_delete=models.CASCADE)
     
     @classmethod
     def add_for_email(cls, email):

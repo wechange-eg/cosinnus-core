@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=250, null=True, verbose_name='Title', blank=True)),
                 ('description', models.TextField(null=True, verbose_name='Description', blank=True)),
                 ('image', models.ImageField(upload_to=cosinnus.utils.files.get_group_gallery_image_filename, max_length=250, verbose_name='Group Image')),
-                ('group', models.ForeignKey(related_name='gallery_images', verbose_name='Team', to=settings.COSINNUS_GROUP_OBJECT_MODEL)),
+                ('group', models.ForeignKey(related_name='gallery_images', verbose_name='Team', to=settings.COSINNUS_GROUP_OBJECT_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'verbose_name': 'CosinnusGroup GalleryImage',

@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='cosinnussentemaillog',
             name='portal',
-            field=models.ForeignKey(related_name='+', default=None, blank=True, to='cosinnus.CosinnusPortal', null=True, verbose_name='Portal'),
+            field=models.ForeignKey(related_name='+', default=None, blank=True, to='cosinnus.CosinnusPortal', null=True, verbose_name='Portal', on_delete=models.CASCADE),
         ),
     ]

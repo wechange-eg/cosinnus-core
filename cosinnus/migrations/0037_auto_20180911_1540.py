@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('is_active', models.BooleanField(default=True, help_text='If a token is not active, users will see an error message when trying to use it.', verbose_name='Is active')),
                 ('valid_until', models.DateTimeField(verbose_name='Valid until', null=True, editable=False, blank=True)),
                 ('invite_groups', models.ManyToManyField(related_name='_cosinnusgroupinvitetoken_invite_groups_+', null=True, verbose_name='Invite-Groups', to=settings.COSINNUS_GROUP_OBJECT_MODEL)),
-                ('portal', models.ForeignKey(related_name='group_invite_tokens', default=1, verbose_name='Portal', to='cosinnus.CosinnusPortal')),
+                ('portal', models.ForeignKey(related_name='group_invite_tokens', default=1, verbose_name='Portal', to='cosinnus.CosinnusPortal', on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('created',),
