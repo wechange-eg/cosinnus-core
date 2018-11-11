@@ -126,9 +126,8 @@ def image_thumbnail(image, size):
             'size': size,
         })
         return thumbnail
-    except InvalidImageFormatError:
-        if settings.DEBUG:
-            raise
+    except (InvalidImageFormatError, OSError):
+        pass
     return None
 
 def image_thumbnail_url(image, size):

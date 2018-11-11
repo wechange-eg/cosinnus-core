@@ -611,7 +611,7 @@ class CosinnusPortal(models.Model):
                 os.makedirs(os.path.join(settings.STATIC_ROOT, 'css'))
             except:
                 pass
-        custom_css = render_to_string('cosinnus/css/portal_custom_styles.css', dictionary={'portal': self})
+        custom_css = render_to_string('cosinnus/css/portal_custom_styles.css', {'portal': self})
         css_path = os.path.join(self._get_static_folder(), 'css', self._CUSTOM_CSS_FILENAME % self.slug)
         css_file = open(css_path, 'w')
         css_file.write(custom_css)

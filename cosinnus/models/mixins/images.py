@@ -65,7 +65,7 @@ class ThumbnailableImageMixin(object):
                     'crop': 'scale',
                     'size': size,
                 })
-            except InvalidImageFormatError:
+            except (InvalidImageFormatError, OSError):
                 logger.warn('Invalid Image format on an object', extra={'class': self.__class__.__name__, 'id': getattr(self, 'id')})
                 return ''
             

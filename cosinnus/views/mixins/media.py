@@ -51,7 +51,7 @@ class VideoEmbedFieldMixin(object):
         return {}
     
     def render_video_embed(self):
-        return mark_safe(render_to_string(self.video_embed_template, dictionary={'data': self.get_video_properties()}))
+        return mark_safe(render_to_string(self.video_embed_template, {'data': self.get_video_properties()}))
     
 
 class FlickrEmbedFieldMixin(object):
@@ -91,5 +91,5 @@ class FlickrEmbedFieldMixin(object):
         return {}
     
     def render_flickr_embed(self):
-        return mark_safe(render_to_string(self.flickr_embed_template, dictionary={'data': self.get_flickr_properties()}))
+        return mark_safe(render_to_string(self.flickr_embed_template, {'data': self.get_flickr_properties()}))
     

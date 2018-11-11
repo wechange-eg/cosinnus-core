@@ -48,7 +48,7 @@ class BaseRenderer(object):
     def render(cls, context, objects=[], **kwargs):
         context.update(kwargs)
         context.update({'objects': objects})
-        return render_to_string(cls.get_template(), context)
+        return render_to_string(cls.get_template(), context.flatten())
     
     
     def get_context_data(self, *args, **kwargs):
