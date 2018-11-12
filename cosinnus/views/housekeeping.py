@@ -371,3 +371,20 @@ def print_settings(request):
             val = '***'
         setts += '%s = %s<br/>' % (key, val)
     return HttpResponse('Settings are:<br/>' + setts)
+
+
+def group_storage_info(request):
+    if request and not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    
+    prints = '<h1>All groups and projects with file storage usage over 10MB:</h1><br/>'
+    for group in CosinnusGroup.objects.all():
+        size = 0
+        for f in group.cosinnus_file_fileentry_set.all():
+            if f.file:
+                size += f.file.size
+        size = size * 0.00000095367431640625  # in Mb
+        if size > 10:
+            prints += '- %s (%s): %i MB<br/>' % (group.name, group.slug, size)
+
+    return HttpResponse(prints)
