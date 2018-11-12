@@ -22,7 +22,7 @@ class CosinnusGroupSerializerViewSet(viewsets.ReadOnlyModelViewSet):
         queryset = queryset.filter(is_active=True, public=True)
         # Order
         query_params = self.request.query_params.copy()
-        order_by = query_params.pop('order_by', '-created')
+        order_by = query_params.pop('order_by', ['-created',])
         queryset = queryset.order_by(*order_by)
         # Overwrite ugly but commonly used filters
         FILTER_MAP = {
