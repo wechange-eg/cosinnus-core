@@ -32,7 +32,7 @@ class CosinnusGroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta(object):
         model = CosinnusGroup
         fields = ('name', 'slug', 'description', 'description_long', 'contact_info',
-                  'avatar', 'website', 'parent', 'related_groups', 'topics', 'tags', 'locations')
+                  'avatar', 'website', 'parent', 'related_groups', 'topics', 'tags', 'locations', 'created')
 
 
 class CosinnusProjectSerializer(CosinnusGroupSerializer):
