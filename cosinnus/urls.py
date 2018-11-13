@@ -15,6 +15,8 @@ from cosinnus.api.views import CosinnusGroupSerializerViewSet, CosinnusProjectSe
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group,\
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object
 
+app_name = 'cosinnus'
+
 urlpatterns = [
     # we do not define an index anymore and let CMS handle that.
 
@@ -86,7 +88,7 @@ urlpatterns = [
     url(r'^housekeeping/print_settings/', housekeeping.print_settings, name='housekeeping-print-settings'),
     url(r'^housekeeping/group_storage_info/', housekeeping.group_storage_info, name='housekeeping-group-storage-info'),
     
-    url(r'^select2/', include('cosinnus.urls_select2', namespace='select2')),
+    url(r'^select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
 ]
 
 

@@ -59,7 +59,7 @@ class URLRegistry(BaseRegistry):
                         patterns_copy.append(url(url_base+patt._regex[1:], patt.callback, patt.default_args, name=group_model_registry.get_url_name_prefix(url_key, '') + patt.name))
                 
                 self._urlpatterns += [
-                    url('', include(patterns_copy, namespace=app_name, app_name=app)),
+                    url('', include((patterns_copy, app_name), namespace=app_name)),
                 ]
             if root_patterns:
                 self._urlpatterns += [
@@ -67,7 +67,7 @@ class URLRegistry(BaseRegistry):
                 ]
             if api_patterns:
                 self._api_urlpatterns += [
-                    url(r'^', include(api_patterns, namespace=app_name, app_name=app)),
+                    url(r'^', include((api_patterns, app_name), namespace=app_name)),
                 ]
 
     def register_urlconf(self, app, urlconf, url_app_name_override=None):

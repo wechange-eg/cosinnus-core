@@ -1268,7 +1268,7 @@ class CosinnusUnregisterdUserGroupInvite(BaseGroupMembership):
 class CosinnusGroupInviteToken(models.Model):
     # determines on which portal the token will be accessible for users
     portal = models.ForeignKey(CosinnusPortal, verbose_name=_('Portal'), related_name='group_invite_tokens', 
-        null=False, blank=False, default=1) # port_id 1 is created in a datamigration!
+        null=False, blank=False, default=1, on_delete=models.CASCADE) # port_id 1 is created in a datamigration!
     
     title = models.CharField(_('Title'), max_length=250)
     token = models.SlugField(_('Token'), 

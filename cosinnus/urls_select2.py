@@ -6,6 +6,8 @@ from django.conf.urls import url
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.views import select2
 
+app_name = 'select2'
+
 urlpatterns = []
 
 for url_key in group_model_registry:
