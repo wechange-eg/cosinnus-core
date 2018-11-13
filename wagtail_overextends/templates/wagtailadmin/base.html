@@ -1,6 +1,16 @@
 {% overextends "wagtailadmin/base.html" %}
 
 {% block branding_logo %}
+	{# Wagtail admin image fix #}
+	<style type="text/css">
+		.logo img {
+			width: 60px;
+		    float: none;
+		    margin: auto;
+		    display: block;
+		}
+	</style>
+	
     {% include 'cosinnus/brand.html' %}
     
     

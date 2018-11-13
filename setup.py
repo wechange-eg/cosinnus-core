@@ -81,7 +81,7 @@ setup(
         'django-sekizai==0.10.0',
         'django-simple-captcha==0.5.7',
         'django-suit==0.2.26',
-        'django-taggit==0.22.2',
+        'django-taggit==0.23.0',
         'django-widget-tweaks==1.3',
         'djangorestframework==3.8.2',
         'dnspython==1.15.0',
@@ -108,7 +108,7 @@ setup(
         'Unidecode==0.4.21',
         
         # wagtail
-        'wagtail==2.0.2',
+        'wagtail==2.3',
         'django-overextends==0.4.3',
         'django-compressor',
         

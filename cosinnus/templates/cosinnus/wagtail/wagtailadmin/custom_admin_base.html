@@ -1,11 +1,11 @@
 {% extends "wagtailadmin/home.html" %}
-{% load gravatar static compress i18n %}
+{% load static compress i18n %}
 {% block titletag %}{% trans "Custom Wagtail Page" %}{% endblock %}
 {% block bodyclass %}homepage{% endblock %}
 
 {% block extra_css %}
     {{ block.super }}
-
+    
     {% compress css %}
         
     {% endcompress %}
@@ -16,7 +16,7 @@
         <div class="row row-flush">
             {% if user.email %}
                 <div class="col1">
-                    <div class="avatar icon icon-user"><img src="{% gravatar_url user.email %}" /></div>
+                    <div class="avatar icon icon-user">{% include 'cosinnus/user/user_avatar_image.html' with user=user image_size="medium" %}</div>
                 </div>
             {% endif %}
             <div class="col9">
