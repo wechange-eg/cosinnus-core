@@ -20,11 +20,15 @@ class CosinnusGroupSerializerViewSet(viewsets.ReadOnlyModelViewSet):
         queryset = queryset.filter(portal=CosinnusPortal.get_current())
         # Filter visibility
         queryset = queryset.filter(is_active=True, public=True)
+        # Order
+        query_params = self.request.query_params.copy()
+        order_by = query_params.pop('order_by', ['-created',])
+        queryset = queryset.order_by(*order_by)
         # Overwrite ugly but commonly used filters
         FILTER_MAP = {
             'tags': 'media_tag__tags__name'
         }
-        for key, value in list(self.request.query_params.items()):
+        for key, value in list(query_params.items()):
             if key in (self.pagination_class.limit_query_param,
                        self.pagination_class.offset_query_param):
                 continue
