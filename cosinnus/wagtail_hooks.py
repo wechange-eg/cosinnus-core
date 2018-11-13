@@ -6,13 +6,15 @@ from django.conf.urls import url
 from django.core.urlresolvers import reverse
 from django.utils.html import format_html
 
-from wagtail.wagtailcore import hooks
-from wagtail.wagtailcore.whitelist import attribute_rule
+from wagtail.core import hooks
+from wagtail.core.whitelist import attribute_rule
 from django.conf import settings
 from django.contrib.staticfiles.templatetags.staticfiles import static
 
 
-from wagtail.wagtailadmin.menu import MenuItem
+from wagtail.admin.rich_text.converters.editor_html import WhitelistRule
+from wagtail.core.whitelist import allow_without_attributes
+from wagtail.admin.menu import MenuItem
 
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
@@ -67,35 +69,44 @@ def allow_all_attributes(attribute_value):
             return True
     return attribute_rule(Fn_get_true())
 
-@hooks.register('construct_whitelister_element_rules')
-def whitelister_element_rules():
-    return {
-        'iframe': allow_all_attributes,
-        'small': allow_all_attributes,
-        
-        '[document]': allow_all_attributes,
-        'a': allow_all_attributes,
-        'b': allow_all_attributes,
-        'br': allow_all_attributes,
-        'div': allow_all_attributes,
-        'em': allow_all_attributes,
-        'h1': allow_all_attributes,
-        'h2': allow_all_attributes,
-        'h3': allow_all_attributes,
-        'h4': allow_all_attributes,
-        'h5': allow_all_attributes,
-        'h6': allow_all_attributes,
-        'hr': allow_all_attributes,
-        'i': allow_all_attributes,
-        'img': allow_all_attributes,
-        'li': allow_all_attributes,
-        'ol': allow_all_attributes,
-        'p': allow_all_attributes,
-        'strong': allow_all_attributes,
-        'sub': allow_all_attributes,
-        'sup': allow_all_attributes,
-        'ul': allow_all_attributes,
-    }
+
+@hooks.register('register_rich_text_features')
+def all_tags_features(features):
+
+    allowed_tags = ['iframe',
+        'small',
+        '[document]',
+        'a',
+        'b',
+        'br',
+        'div',
+        'em',
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
+        'hr',
+        'i',
+        'img',
+        'li',
+        'ol',
+        'p',
+        'strong',
+        'sub',
+        'sup',
+        'ul',
+    ]
+    
+    for html_tag in allowed_tags:
+        # register a feature 'blockquote' which whitelists the <blockquote> element
+        features.register_converter_rule('editorhtml', html_tag, [
+            WhitelistRule(html_tag, allow_without_attributes),
+        ])
+        # add 'blockquote' to the default feature set
+        features.default_features.append(html_tag)
+
 
 
 if settings.COSINNUS_IMPORT_PROJECTS_PERMITTED:

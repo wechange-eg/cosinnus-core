@@ -42,7 +42,7 @@ from django.utils.safestring import mark_safe
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.template.defaultfilters import linebreaksbr, urlizetrunc
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
-from wagtail.wagtailcore.templatetags.wagtailcore_tags import richtext
+from wagtail.core.templatetags.wagtailcore_tags import richtext
 from uuid import uuid1
 from annoying.functions import get_object_or_None
 from django.utils.text import normalize_newlines

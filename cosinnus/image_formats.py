@@ -2,7 +2,7 @@
 
 from django.utils.translation import ugettext_lazy as _
 
-from wagtail.wagtailimages.formats import Format, register_image_format
+from wagtail.images.formats import Format, register_image_format
 
 register_image_format(Format('cosinnus_format_tiny', _('Tiny (50 x *)'), 'richtext-image richtext-image-tiny', 'width-50'))
 register_image_format(Format('cosinnus_format_very_small', _('Very Small (100 x *)'), 'richtext-image richtext-image-very-small', 'width-100'))

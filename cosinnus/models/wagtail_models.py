@@ -5,12 +5,12 @@ from django.conf import settings
 from django.db import models
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
-from wagtail.wagtailadmin.edit_handlers import ObjectList
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
-from wagtail.wagtailsearch import index
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.admin.edit_handlers import ObjectList
+from wagtail.core.fields import StreamField
+from wagtail.core.models import Page
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.search import index
 
 from builtins import object
 from cosinnus.models.group import  CosinnusPortal
@@ -38,7 +38,7 @@ class SplitMultiLangTabsMixin(object):
         return object_lists 
     
     def __init__(self, *args, **kwargs):
-        from wagtail.wagtailadmin.views.pages import PAGE_EDIT_HANDLERS
+        from wagtail.admin.views.pages import PAGE_EDIT_HANDLERS
         super(self).__init__(*args, **kwargs)
         if self.__class__ in PAGE_EDIT_HANDLERS and not getattr(PAGE_EDIT_HANDLERS[self.__class__], '_MULTILANG_TABS_PATCHED', False):
             handler = PAGE_EDIT_HANDLERS[self.__class__]

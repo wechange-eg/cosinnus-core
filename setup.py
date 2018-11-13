@@ -108,7 +108,7 @@ setup(
         'Unidecode==0.4.21',
         
         # wagtail
-        'wagtail==1.13.4',
+        'wagtail==2.0.2',
         'django-overextends==0.4.3',
         'django-compressor',
         

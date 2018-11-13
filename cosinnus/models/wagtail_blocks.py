@@ -6,17 +6,17 @@ import json
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
 from django.utils.translation import ugettext_lazy as _
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailcore.blocks.field_block import RichTextBlock, RawHTMLBlock
-from wagtail.wagtailcore.blocks.struct_block import StructBlock
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailcore.rich_text import DbWhitelister
-from wagtail.wagtailembeds.blocks import EmbedBlock
-from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.core import blocks
+from wagtail.core.blocks.field_block import RichTextBlock, RawHTMLBlock
+from wagtail.core.blocks.struct_block import StructBlock
+from wagtail.core.fields import RichTextField
+from wagtail.embeds.blocks import EmbedBlock
+from wagtail.images.blocks import ImageChooserBlock
 
 from builtins import object
 from cosinnus.models.group_extra import CosinnusProject
 from cosinnus.templatetags.cosinnus_tags import render_cosinnus_topics_json
+from wagtail.admin.rich_text.converters.editor_html import DbWhitelister
 
 
 class BetterDbWhitelister(DbWhitelister):
