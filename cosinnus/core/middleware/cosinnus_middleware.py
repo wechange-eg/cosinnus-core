@@ -19,6 +19,7 @@ from cosinnus.conf import settings
 from cosinnus.core import signals as cosinnus_signals
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+from django.utils.deprecation import MiddlewareMixin
 
 
 logger = logging.getLogger('cosinnus')
@@ -74,12 +75,12 @@ def initialize_cosinnus_after_startup():
 
 startup_middleware_inited = False
 
-class StartupMiddleware(object):
+class StartupMiddleware(MiddlewareMixin):
     """ This middleware will be run exactly once, after server startup, when all django
         apps are fully loaded. It is used to dispatch the all_cosinnus_apps_loaded signal.
     """
     
-    def __init__(self):
+    def __init__(self, get_response=None):
         # check using a global var because this gets executed twice otherwise
         global startup_middleware_inited
         logger.info('Cosinnus.middleware.StartupMiddleware inited. (inited_before=%s)' % startup_middleware_inited)
@@ -92,7 +93,7 @@ class StartupMiddleware(object):
 
 """Adds the request to the instance of a Model that is being saved (created or modified)
    Taken from https://github.com/Atomidata/django-audit-log/blob/master/audit_log/middleware.py  and modified """
-class AddRequestToModelSaveMiddleware(object):
+class AddRequestToModelSaveMiddleware(MiddlewareMixin):
     def process_request(self, request):
         if not request.method in ('GET', 'HEAD', 'OPTIONS', 'TRACE'):
             mark_request = curry(self.mark_request, request)
@@ -108,7 +109,7 @@ class AddRequestToModelSaveMiddleware(object):
 
 GROUP_TYPES = None
 
-class GroupPermanentRedirectMiddleware(object):
+class GroupPermanentRedirectMiddleware(MiddlewareMixin, object):
     """ This middleware checks if the group that is being accessed has an entry in the PermaRedirect
         table. If so, it redirects to the new group URL.
         This is used to make group URIs permanent after their type, slug, or portal changed.
@@ -143,7 +144,7 @@ class GroupPermanentRedirectMiddleware(object):
 
 
 
-class ForceInactiveUserLogoutMiddleware(object):
+class ForceInactiveUserLogoutMiddleware(MiddlewareMixin):
     """ This middleware will force-logout a user if his account has been disabled, or a force-logout flag is set. """
     
     def process_request(self, request):
@@ -170,7 +171,7 @@ class ForceInactiveUserLogoutMiddleware(object):
                 return redirect(next_page) 
 
 
-class DenyAnonymousAccessMiddleware(object):
+class DenyAnonymousAccessMiddleware(MiddlewareMixin):
     """ This middleware will show an error page on any anonymous request,
         unless the request is directed at a login URL. """
     
@@ -180,7 +181,7 @@ class DenyAnonymousAccessMiddleware(object):
                 return TemplateResponse(request, 'cosinnus/portal/no_anonymous_access_page.html')
             
             
-class ConditionalRedirectMiddleware(object):
+class ConditionalRedirectMiddleware(MiddlewareMixin):
     """ A collection of redirects based on some requirements we want to put it,
         usually to force some routing behaviour, like logged-in users being redirected off /login """
     

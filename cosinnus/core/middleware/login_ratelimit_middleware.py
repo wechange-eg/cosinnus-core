@@ -25,6 +25,7 @@ from django.utils.translation import ugettext_lazy as _
 
 import django.dispatch as dispatch
 from django.utils.text import get_valid_filename
+from django.utils.deprecation import MiddlewareMixin
 
 
 class Struct(object):
@@ -110,7 +111,7 @@ def register_and_limit_failed_login_attempt(sender, credentials, **kwargs):
             cache.set(_get_setting('LOGIN_RATELIMIT_LIMIT_ACTIVE_UNTIL_CACHE_KEY') % username, expiry)
 
 
-class LoginRateLimitMiddleware(object):
+class LoginRateLimitMiddleware(MiddlewareMixin):
     """ A Middleware that detects failed login attempts per username 
         and incurs a rate-limit specifically for the used credential after n specified attemps. 
         
@@ -140,9 +141,10 @@ class LoginRateLimitMiddleware(object):
                 being rate limited, not only existing ones.
      """
     
-    def __init__(self):
+    def __init__(self, get_response=None):
         user_login_failed.connect(register_and_limit_failed_login_attempt)
         user_logged_in.connect(reset_user_ratelimit_on_login_success)
+        super(LoginRateLimitMiddleware, self).__init__(get_response)
     
     def process_request(self, request):
         """ If we see a POST on a defined login URL with user credentials filled, 

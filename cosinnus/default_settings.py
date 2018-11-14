@@ -80,7 +80,7 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -99,7 +99,7 @@ MIDDLEWARE_CLASSES = (
     'cosinnus.core.middleware.cosinnus_middleware.AddRequestToModelSaveMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.GroupPermanentRedirectMiddleware',
     'cosinnus.core.middleware.login_ratelimit_middleware.LoginRateLimitMiddleware',
-)
+]
 
 
 TEMPLATES = [
