@@ -56,7 +56,7 @@ setup(
     install_requires=[
         # please mirror all changes in the requirements.txt for local installs!
         'Django==2.0.9',
-        'MarkupSafe==0.18',
+        'MarkupSafe==0.23',
         'Pillow==5.2.0',
         'Celery==4.2.0',
         
@@ -76,7 +76,7 @@ setup(
         'django-mptt==0.8.7',
         'django-phonenumber-field==1.1.0',
         'django-polymorphic==0.7.2',
-        'django-rest-swagger==0.3.10',
+        'django-rest-swagger==2.2.0',
         'django-sekizai==0.10.0',
         'django-simple-captcha==0.5.7',
         'django-suit==0.2.26',

@@ -176,6 +176,7 @@ router.register(r'groups', CosinnusGroupSerializerViewSet)
 router.register(r'projects', CosinnusProjectSerializerViewSet)
 
 urlpatterns += [
-    url(r'api/v2/docs/', include('rest_framework_swagger.urls')),
+    # TODO: @simonline
+    #url(r'api/v2/docs/', include('rest_framework_swagger.urls')),
     url(r'api/v2/', include(router.urls)),
 ]
