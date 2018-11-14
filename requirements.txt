@@ -53,7 +53,6 @@ urllib3==1.21.1
 Unidecode==0.4.21
 
 wagtail==2.3
-django-overextends==0.4.3
 django-compressor
 
 

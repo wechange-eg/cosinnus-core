@@ -132,7 +132,7 @@ class AllObjectsFilter(ChoiceFilter):
             filter_field_objects_qs = filter_field_objects_qs.filter(group=self.group)
         
         group_object_ids = filter_field_objects_qs.order_by(self.name).values_list(self.name, flat=True)
-        object_qs = getattr(self.model, self.name).field.rel.to._default_manager.filter(id__in=group_object_ids)
+        object_qs = getattr(self.model, self.name).field.related_model._default_manager.filter(id__in=group_object_ids)
         self.extra['choices'] = [(o.id, o) for o in object_qs]
         if None in group_object_ids:
             self.extra['choices'].insert(0, (None, _("Not assigned")))
