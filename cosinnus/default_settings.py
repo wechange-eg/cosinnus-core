@@ -94,7 +94,7 @@ MIDDLEWARE = [
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     
     'cosinnus.core.middleware.cosinnus_middleware.StartupMiddleware',
-    'cosinnus.core.middleware.cosinnus_middleware.ForceInactiveUserLogoutMiddleware',
+    #'cosinnus.core.middleware.cosinnus_middleware.ForceInactiveUserLogoutMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.ConditionalRedirectMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.AddRequestToModelSaveMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.GroupPermanentRedirectMiddleware',
@@ -127,12 +127,8 @@ TEMPLATES = [
             'loaders': (
                 'django.template.loaders.filesystem.Loader',
                 'django.template.loaders.app_directories.Loader',
-                'django.template.loaders.eggs.Loader',
             ),
             'debug': DEBUG,
-            'builtins': [
-                'overextends.templatetags.overextends_tags',
-            ],
         }
     },
 ]
@@ -162,7 +158,6 @@ def compile_installed_apps(internal_apps=[]):
         'haystack',
         
         # wagtail
-        'overextends',
         'wagtail_overextends',
         'compressor',
         'modelcluster',

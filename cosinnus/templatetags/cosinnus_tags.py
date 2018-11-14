@@ -119,7 +119,7 @@ def can_create_groups(user):
     """
     Template filter to check if a user can create CosinnusGroups.
     """
-    return user.is_authenticated()
+    return user.is_authenticated
 
 @register.filter
 def is_superuser(user):
@@ -259,7 +259,7 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
 
     request = context['request']
     user = request.user
-    if user.is_authenticated():
+    if user.is_authenticated:
         context['groups'] = CosinnusProject.objects.get_for_user(request.user)
         context['societies'] = CosinnusSociety.objects.get_for_user(request.user)
         context['groups_invited'] = CosinnusProject.objects.get_for_user_invited(request.user)
@@ -700,7 +700,7 @@ def group_url(parser, token):
 
 @register.simple_tag(takes_context=True)
 def cosinnus_report_object_action(context, obj=None, instantly_trigger=False):
-    if not context['request'].user.is_authenticated():
+    if not context['request'].user.is_authenticated:
         return ''
     if not obj:
         return ''

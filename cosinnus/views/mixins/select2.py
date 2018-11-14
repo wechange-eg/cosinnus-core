@@ -11,7 +11,7 @@ from cosinnus.utils.permissions import check_ug_membership, check_user_superuser
 class RequireLoggedIn(object):
 
     def check_all_permissions(self, request, *args, **kwargs):
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
             raise PermissionDenied
 
 

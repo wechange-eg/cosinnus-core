@@ -108,7 +108,6 @@ setup(
         
         # wagtail
         'wagtail==2.3',
-        'django-overextends==0.4.3',
         'django-compressor',
         
         # requirements loaded in from github

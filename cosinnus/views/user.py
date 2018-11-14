@@ -89,7 +89,7 @@ class UserListView(EndlessPaginationMixin, ListView):
         # we also exclude users who have never logged in
         all_users = filter_active_users(super(UserListView, self).get_queryset().filter(id__in=CosinnusPortal.get_current().members))
         
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             visibility_level = BaseTagObject.VISIBILITY_GROUP
         else:
             visibility_level = BaseTagObject.VISIBILITY_ALL
@@ -224,7 +224,7 @@ class UserCreateView(CreateView):
         return ret
     
     def dispatch(self, *args, **kwargs):
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             messages.info(self.request, _('You are already logged in!'))
             return redirect('/')
         return super(UserCreateView, self).dispatch(*args, **kwargs)
@@ -379,7 +379,7 @@ def _check_user_approval_permissions(request, user_id):
     if not request.method=='GET':
         return HttpResponseNotAllowed(['GET'])
     
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return redirect_to_not_logged_in(request)
     elif not request.user.id in CosinnusPortal.get_current().admins:
         return redirect_to_403(request)
@@ -596,7 +596,7 @@ def password_change_proxy(request, *args, **kwargs):
     """ Proxies the django.contrib.auth view. Only lets a user see the form or POST to it
         if the user is not a member of an integrated portal. """
     user = request.user
-    if user.is_authenticated() and check_user_integrated_portal_member(user):
+    if user.is_authenticated and check_user_integrated_portal_member(user):
         return TemplateResponse(request, 'cosinnus/registration/password_cannot_be_changed_page.html')
     return PasswordChangeView.as_view(*args, **kwargs)(request)
 
@@ -727,7 +727,7 @@ def user_api_me(request):
     """ Returns a JSON dict of publicly available user data about the currently logged-in user.
         Returens {} if no user is logged in this session. """
     data = {}
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         user = request.user
         data.update({
             'username': user.username,

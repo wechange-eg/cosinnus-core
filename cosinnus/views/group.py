@@ -359,7 +359,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
                  check_user_superuser(self.request.user)
                  
         # for public groups if user not a member of the group, show only public users in widget
-        if not self.request.user.is_authenticated():
+        if not self.request.user.is_authenticated:
             visibility_level = BaseTagObject.VISIBILITY_ALL
         elif not is_member_of_this_group:
             visibility_level = BaseTagObject.VISIBILITY_GROUP
@@ -389,7 +389,7 @@ class GroupDetailView(SamePortalGroupMixin, DetailAjaxableResponseMixin, Require
         # set admins at the top of the list member
         members = list(admins) + list(members)
         # always include current user in list if member, and at top
-        if self.request.user.is_authenticated() and check_ug_membership(self.request.user, self.group):
+        if self.request.user.is_authenticated and check_ug_membership(self.request.user, self.group):
             members = [self.request.user] + [member for member in members if member != self.request.user]
         
         # collect recruited users
@@ -449,7 +449,7 @@ class GroupListView(EndlessPaginationMixin, ListAjaxableResponseMixin, ListView)
         self.group_type = group_class.GROUP_MODEL_TYPE
         
         model = group_class or self.model
-        if settings.COSINNUS_SHOW_PRIVATE_GROUPS_FOR_ANONYMOUS_USERS or self.request.user.is_authenticated():
+        if settings.COSINNUS_SHOW_PRIVATE_GROUPS_FOR_ANONYMOUS_USERS or self.request.user.is_authenticated:
             regular_groups = model.objects.get_cached()
             return regular_groups
         else:
@@ -463,7 +463,7 @@ class GroupListView(EndlessPaginationMixin, ListAjaxableResponseMixin, ListView)
         # for this view, we do not care about other users, thus the reduced query
         for group in ctx['object_list']:
             _members, _pendings, _admins, _invited = [], [], [], []
-            if self.request.user.is_authenticated():
+            if self.request.user.is_authenticated:
                 user_pk = self.request.user.pk
                 try:
                     if user_pk in CosinnusGroupMembership.objects.get_admins(group=group):
@@ -1085,7 +1085,7 @@ class GroupStartpage(View):
         if not getattr(settings, 'COSINNUS_MICROSITES_ENABLED', False):
             return False
         
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
             return True
         if not check_object_read_access(self.group, request.user):
             return True
@@ -1296,7 +1296,7 @@ def group_user_recruit_delete(request, group, id):
 def group_assign_reflected_object(request, group): 
     if not request.method=='POST':
         return HttpResponseNotAllowed(['POST'])
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         raise PermissionDenied('Must be authenticated!')
     group = get_group_for_request(group, request)
     if not group:

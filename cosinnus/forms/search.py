@@ -51,7 +51,7 @@ def filter_searchqueryset_for_read_access(sqs, user):
         SQ(always_visible__exact=True) # special marker for indexed objects that should always show up in search
     )
 
-    if user.is_authenticated():
+    if user.is_authenticated:
         if check_user_superuser(user):
             pass
         else:
@@ -198,7 +198,7 @@ class TaggableModelSearchForm(SearchForm):
         Any other value will be interpreted as ``all``.
         """
         user = self.request.user
-        if user.is_authenticated():
+        if user.is_authenticated:
             term = self.cleaned_data.get('groups', 'all').lower()
             if term == 'mine':
                 sqs = sqs.filter_and(group_members__contains=user.id)

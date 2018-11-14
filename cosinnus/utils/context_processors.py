@@ -57,7 +57,7 @@ def cosinnus(request):
     base_url += '' if base_url[-1] == '/' else '/'
 
     user = request.user
-    if user.is_authenticated():
+    if user.is_authenticated:
         user_json = json.dumps(UserSimpleSerializer(user).data)
         unread_count = Message.objects.inbox_unread_count(user)
         from cosinnus_stream.models import Stream

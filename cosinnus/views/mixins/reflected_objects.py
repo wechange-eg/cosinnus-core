@@ -59,7 +59,7 @@ class ReflectedObjectSelectMixin(object):
         reflect_is_forum = group.slug == getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
         reflectable_groups = {}
         reflecting_group_ids = []
-        may_reflect = request.user.is_authenticated() and \
+        may_reflect = request.user.is_authenticated and \
                     ((group.type == group.TYPE_SOCIETY) or reflect_is_forum)
         if obj is None:
             return {

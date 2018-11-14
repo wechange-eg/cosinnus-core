@@ -252,7 +252,7 @@ class GroupMembersWidget(DashboardWidget):
         hidden_member_count = 0
         
         is_member_of_this_group = self.request.user.pk in all_ids
-        if not self.request.user.is_authenticated():
+        if not self.request.user.is_authenticated:
             visibility_level = BaseTagObject.VISIBILITY_ALL
         elif not is_member_of_this_group:
             visibility_level = BaseTagObject.VISIBILITY_GROUP

@@ -37,7 +37,7 @@ def redirect_to_403(request, view=None, group=None):
     # redirect to group's micropage and give permission denied Error message, but not 403
     if group is not None:
         # only redirect to micropage if user isn't a member of the group
-        if not request.user.is_authenticated() or not request.user.id in group.members:
+        if not request.user.is_authenticated or not request.user.id in group.members:
             messages.warning(request, _('Only team members can see the content you requested. Apply to become a member now!'))
             return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': group}))
     raise PermissionDenied
@@ -112,7 +112,7 @@ def membership_required(function):
     """A function decorator to assure a requesting user is an authenticated member
     """
     actual_decorator = user_passes_test(
-        lambda u: u.is_authenticated()
+        lambda u: u.is_authenticated
     )
     return actual_decorator(function)
 
@@ -138,7 +138,7 @@ def require_admin_access_decorator(group_url_arg='group'):
             group = get_group_for_request(group_name, request)
             user = request.user
 
-            if not user.is_authenticated():
+            if not user.is_authenticated:
                 return redirect_to_not_logged_in(request, view=self, group=group)
 
             if check_object_write_access(group, user):
@@ -161,7 +161,7 @@ def require_logged_in():
         def wrapper(self, request, *args, **kwargs):
             user = request.user
             
-            if not user.is_authenticated():
+            if not user.is_authenticated:
                 return redirect_to_not_logged_in(request, view=self)
             
             return function(self, request, *args, **kwargs)
@@ -235,7 +235,7 @@ def require_admin_access(group_url_kwarg='group', group_attr='group'):
             if deactivated_app_error:
                 return deactivated_app_error
             
-            if not user.is_authenticated():
+            if not user.is_authenticated:
                 return redirect_to_not_logged_in(request, view=self, group=group)
 
             if check_object_write_access(group, user):
@@ -284,7 +284,7 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
             except (AttributeError, TypeError):
                 pass
             except CosinnusPermissionDeniedException:
-                if not user.is_authenticated():
+                if not user.is_authenticated:
                     return redirect_to_not_logged_in(request, view=self, group=group)
                 else:
                     return redirect_to_403(request, self, group=group)
@@ -292,7 +292,7 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
             obj_public = requested_object and getattr(requested_object, 'media_tag', None) \
                     and requested_object.media_tag.visibility == BaseTagObject.VISIBILITY_ALL
             # catch anyonymous users trying to naviagte to private groups (else self.get_object() throws a Http404!)
-            if not (obj_public or group.public or user.is_authenticated()):
+            if not (obj_public or group.public or user.is_authenticated):
                 return redirect_to_not_logged_in(request, view=self, group=group)
             
             deactivated_app_error = _check_deactivated_app_access(self, group, request)
@@ -342,7 +342,7 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
             setattr(self, group_attr, group)
             
             # catch anyonymous users trying to naviagte to private groups (else self.get_object() throws a Http404!)
-            if not group.public and not user.is_authenticated():
+            if not group.public and not user.is_authenticated:
                 return redirect_to_not_logged_in(request, view=self, group=group)
             
             deactivated_app_error = _check_deactivated_app_access(self, group, request)
@@ -356,7 +356,7 @@ def require_write_access(group_url_kwarg='group', group_attr='group'):
                 pass
             
             # objects can never be written by non-logged in members
-            if not user.is_authenticated():
+            if not user.is_authenticated:
                 return redirect_to_not_logged_in(request, view=self, group=group)
             
             if requested_object:
@@ -388,7 +388,7 @@ def require_write_access_groupless():
             user = request.user
             
             # catch anyonymous users trying to naviagte here
-            if not user.is_authenticated():
+            if not user.is_authenticated:
                 return redirect_to_not_logged_in(request, view=self)
             
             requested_object = None
@@ -509,7 +509,7 @@ def require_create_objects_in_access(group_url_kwarg='group', group_attr='group'
             # set the group attribute
             setattr(self, group_attr, group)
             
-            if not group.public and not user.is_authenticated():
+            if not group.public and not user.is_authenticated:
                 return redirect_to_not_logged_in(request, view=self, group=group)
             
             deactivated_app_error = _check_deactivated_app_access(self, group, request)

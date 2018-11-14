@@ -37,7 +37,7 @@ SSO_USERPROFILE_FIELD_OAUTH_SECRET = 'sso_token_secret'
         
         
 def login(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return redirect(_get_redirect_url(request))
     
     try:    
@@ -56,7 +56,7 @@ def login(request):
     return redirect(auth_url)
 
 def callback(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return redirect(_get_redirect_url(request))
     try:    
         user_info = do_oauth1_receive(request)

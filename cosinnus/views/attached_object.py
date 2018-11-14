@@ -85,7 +85,7 @@ class AttachableObjectSelect2View(RequireReadMixin, Select2View):
         usergroups = CosinnusGroup.objects.get_for_user(request.user)
         is_member = any((current_group == group.slug) for group in usergroups)
         
-        if not user.is_authenticated() or not is_member:
+        if not user.is_authenticated or not is_member:
             raise PermissionDenied
         
     def get_results(self, request, term, page, context):

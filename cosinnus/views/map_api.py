@@ -118,7 +118,7 @@ def map_search_endpoint(request, filter_group_id=None):
     if not params['ignore_location'] and not implicit_ignore_location:
         sqs = sqs.within('location', Point(params['sw_lon'], params['sw_lat']), Point(params['ne_lon'], params['ne_lat']))
     # filter for user's own content
-    if params['mine'] and request.user.is_authenticated():
+    if params['mine'] and request.user.is_authenticated:
         user_id = request.user.id
         sqs = sqs.filter_and(Q(creator=user_id) | Q(user_id=user_id) | Q(group_members=user_id))
     # filter for search terms

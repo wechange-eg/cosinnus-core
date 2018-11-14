@@ -300,7 +300,7 @@ class GroupDashboard(RequireReadOrRedirectMixin, DashboardWidgetMixin, GroupObje
     
     def on_error(self, request, *args, **kwargs):
         """ Called when the require-read permission is not met """
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
             return redirect_to_not_logged_in(request, view=self)
         messages.warning(request, _('You are not currently a member of %s! If you wish you can request to become a member below.') % self.group.name)
         return redirect(group_aware_reverse('cosinnus:group-list-filtered', kwargs={'group': kwargs.get('group')}))
@@ -345,7 +345,7 @@ def save_widget_config(request):
     """ Save-endpoint WidgetConfig priorities for dashboard widget rearranging """
     
     user = request.user
-    if not user.is_authenticated():
+    if not user.is_authenticated:
         return HttpResponseForbidden()
     
     if not request.is_ajax() or not request.method=='POST':

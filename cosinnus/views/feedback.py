@@ -61,7 +61,7 @@ def _notify_users_for_reported_objects(report_obj, request=None):
 def report_object(request):
     if not request.is_ajax() or not request.method=='POST':
         return HttpResponseNotAllowed(['POST'])
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return HttpResponseForbidden('Not authenticated.')
     
     cls = request.POST.get('cls', None)  # expects 'cosinnus_note.Note'

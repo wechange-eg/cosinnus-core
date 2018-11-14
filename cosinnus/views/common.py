@@ -94,7 +94,7 @@ switch_language = SwitchLanguageView.as_view()
 def cosinnus_login(request, **kwargs):
     """ Wraps the django login view to set the "wp_user_logged_in" cookie on logins """
     response = LoginView.as_view(**kwargs)(request)  #login(request, **kwargs)
-    if request.method == 'POST' and not request.user.is_anonymous():
+    if request.method == 'POST' and request.user.is_authenticated:
         response.set_cookie('wp_user_logged_in', 1, 60*60*24*30) # 30 day expiry
     return response
 
@@ -102,7 +102,7 @@ def cosinnus_logout(request, **kwargs):
     """ Wraps the django logout view to delete the "wp_user_logged_in" cookie on logouts
         (this seems to only clear the value of the cookie and not completely delete it!) """
     response = LogoutView.as_view(**kwargs)(request) # logout(request, **kwargs)
-    if request.user.is_anonymous():
+    if not request.user.is_authenticated:
         response.delete_cookie('wp_user_logged_in')
     return response
 
@@ -123,7 +123,7 @@ def do_like(request, **kwargs):
     
     if not request.is_ajax() and not request.method=='POST':
         return HttpResponseNotAllowed('POST', content='This endpoint is for POST only.')
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return HttpResponseForbidden('Not authenticated.')
     
     ct = request.POST.get('ct', None)  # expects 'cosinnus_note.Note'

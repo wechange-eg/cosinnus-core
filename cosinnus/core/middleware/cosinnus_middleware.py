@@ -149,7 +149,7 @@ class ForceInactiveUserLogoutMiddleware(MiddlewareMixin):
     
     def process_request(self, request):
         # TODO: FIXME: optimize this, this might be an extra query during EVERY (!) logged in request!
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             do_logout = False
             if not request.user.is_active:
                 messages.error(request, _('This account is no longer active. You have been logged out.'))
@@ -176,7 +176,7 @@ class DenyAnonymousAccessMiddleware(MiddlewareMixin):
         unless the request is directed at a login URL. """
     
     def process_request(self, request):
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
             if request.path not in LOGIN_URLS:
                 return TemplateResponse(request, 'cosinnus/portal/no_anonymous_access_page.html')
             
@@ -189,7 +189,7 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
         if any([request.path.startswith(never_path) for never_path in NEVER_REDIRECT_URLS]):
             return
         
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             # hiding login and signup pages for logged in users
             if request.path in ['/login/', '/signup/']:
                 redirect_url = getattr(settings, 'COSINNUS_LOGGED_IN_USERS_LOGIN_PAGE_REDIRECT_TARGET', None)

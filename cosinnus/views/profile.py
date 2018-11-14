@@ -86,7 +86,7 @@ class UserProfileObjectMixin(SingleObjectMixin):
         
         # return the current user's userprofile if no slug is given
         if not pk and not slug:
-            if not self.request.user.is_authenticated():
+            if not self.request.user.is_authenticated:
                 return None
             return self.model._default_manager.get_for_user(self.request.user)
         
@@ -128,7 +128,7 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
         # VISIBILITY_ALL users can always be seen, so skip the check
         if not target_user_visibility == BaseTagObject.VISIBILITY_ALL:
             # all other views require at least to be logged in
-            if not user.is_authenticated():
+            if not user.is_authenticated:
                 return redirect_to_not_logged_in(request)
             if not check_user_can_see_user(user, target_user_profile.user):
                 raise PermissionDenied
@@ -225,7 +225,7 @@ class UserProfileDeleteView(AvatarFormMixin, UserProfileObjectMixin, DeleteView)
         return reverse('login')
     
     def _validate_user_delete_safe(self, user):
-        is_safe = user.is_authenticated()
+        is_safe = user.is_authenticated
         
         for group in CosinnusGroup.objects.get_for_user(user):
             admins = CosinnusGroupMembership.objects.get_admins(group=group)

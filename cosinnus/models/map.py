@@ -27,7 +27,7 @@ from cosinnus.utils.urls import group_aware_reverse
 def _prepend_url(user, portal=None):
     """ Adds a signup-url with ?next= parameter to a URL for unregistered users,
         and always adds the correct portal domain """
-    return (portal.get_domain() if portal else '') + ('' if user.is_authenticated() else reverse('cosinnus:user-add') + '?join_msg=1&next=')
+    return (portal.get_domain() if portal else '') + ('' if user.is_authenticated else reverse('cosinnus:user-add') + '?join_msg=1&next=')
 
 REQUIRED = object()
 

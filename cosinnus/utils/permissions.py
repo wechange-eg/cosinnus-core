@@ -71,7 +71,7 @@ def check_object_read_access(obj, user):
         group = obj
         is_member = check_ug_membership(user, group)
         is_admin = check_ug_admin(user, group) 
-        return (group.public and user.is_authenticated()) or check_user_superuser(user) or is_member or is_admin
+        return (group.public and user.is_authenticated) or check_user_superuser(user) or is_member or is_admin
     
     elif issubclass(obj.__class__, BaseTaggableObjectModel):
         group = obj.group
@@ -92,7 +92,7 @@ def check_object_read_access(obj, user):
         return check_user_superuser(user) or obj_is_visible or obj.grant_extra_read_permissions(user)
     elif type(obj) is CosinnusIdea:
         # ideas are only either public or visible by any logged in user, no private setting
-        return obj.public or user.is_authenticated()
+        return obj.public or user.is_authenticated
     elif issubclass(obj.__class__, BaseUserProfile):
         return check_user_can_see_user(user, obj.user)
     else:
@@ -177,7 +177,7 @@ def check_user_can_see_user(user, target_user):
     
     if visibility == BaseTagObject.VISIBILITY_ALL:
         return True
-    if visibility == BaseTagObject.VISIBILITY_GROUP and user.is_authenticated():
+    if visibility == BaseTagObject.VISIBILITY_GROUP and user.is_authenticated:
         return True
     if check_user_superuser(user):
         return True
@@ -227,7 +227,7 @@ def check_user_can_receive_emails(user):
     """ Checks if a user can receive emails *at all*, ignoring any frequency settings.
         This checks the global notification setting for authenticated users,
         and the email blacklist for anonymous users. """
-    if not user.is_authenticated():
+    if not user.is_authenticated:
         return not GlobalBlacklistedEmail.is_email_blacklisted(user.email)
     else:
         return GlobalUserNotificationSetting.objects.get_for_user(user) > GlobalUserNotificationSetting.SETTING_NEVER
@@ -251,7 +251,7 @@ def filter_tagged_object_queryset_for_user(qs, user):
     
     q = Q(media_tag__isnull=True) # get all objects that don't have a media_tag (folders for example)
     q |= Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)  # All public tagged objects
-    if user.is_authenticated():
+    if user.is_authenticated:
         gids = get_cosinnus_group_model().objects.get_for_user_pks(user)
         q |= Q(  # all tagged objects in groups the user is a member of
             media_tag__visibility=BaseTagObject.VISIBILITY_GROUP,

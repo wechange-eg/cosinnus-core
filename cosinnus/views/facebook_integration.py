@@ -265,7 +265,7 @@ class FacebookIntegrationGroupFormMixin(object):
 def confirm_page_admin(request, group_id):
     """ GET to this view to try to obtain a user access token for a facebook fan-page 
         linked to the group_id supplied. Will always redirect to the group form's facebook tab. """
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         raise PermissionDenied
     
     group = get_object_or_404(get_cosinnus_group_model(), id=group_id)
@@ -331,7 +331,7 @@ def save_auth_tokens(request):
     
     if not request.is_ajax() or not request.method=='POST':
         return HttpResponseNotAllowed(['POST'])
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return HttpResponseForbidden('Must be logged in!')
     if not 'authResponse' in request.POST:
         return HttpResponseBadRequest('authResponse data missing!')
@@ -413,7 +413,7 @@ def remove_facebook_association(request):
     """ Saves the given facebook auth tokens for the current user """
     if not request.method=='POST':
         return HttpResponseNotAllowed(['POST'])
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         return HttpResponseForbidden('Must be logged in!')
     
     userprofile = request.user.cosinnus_profile
