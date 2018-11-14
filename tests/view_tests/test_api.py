@@ -7,7 +7,7 @@ import json
 from os import path, unlink
 
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import QueryDict
 from django.test import Client, SimpleTestCase, TestCase, RequestFactory
 from django.utils.encoding import force_text

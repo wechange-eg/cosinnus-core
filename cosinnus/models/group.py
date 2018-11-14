@@ -28,7 +28,7 @@ from cosinnus.utils.files import get_group_avatar_filename,\
     get_portal_background_image_filename, get_group_wallpaper_filename,\
     get_cosinnus_media_file_folder, get_group_gallery_image_filename,\
     image_thumbnail, image_thumbnail_url
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.functional import cached_property
 from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal
 from cosinnus.utils.compat import atomic

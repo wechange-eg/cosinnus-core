@@ -10,7 +10,7 @@ from copy import copy, deepcopy
 
 from django import template
 from django.core.exceptions import ImproperlyConfigured
-from django.core.urlresolvers import resolve, reverse, Resolver404
+from django.urls import resolve, reverse, Resolver404
 from django.http import HttpRequest
 from django.template.defaulttags import URLNode, url as url_tag, url
 from django.template.loader import render_to_string

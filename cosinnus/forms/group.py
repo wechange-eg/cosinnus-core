@@ -21,7 +21,7 @@ from cosinnus.conf import settings
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from django_select2.fields import HeavyModelSelect2MultipleChoiceField
 from cosinnus.utils.group import get_cosinnus_group_model
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from cosinnus.views.facebook_integration import FacebookIntegrationGroupFormMixin
 from cosinnus.utils.lanugages import MultiLanguageFieldValidationFormMixin
 

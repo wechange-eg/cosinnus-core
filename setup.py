@@ -55,7 +55,7 @@ setup(
     data_files=data_files,
     install_requires=[
         # please mirror all changes in the requirements.txt for local installs!
-        'Django==1.11.16',
+        'Django==2.0.9',
         'MarkupSafe==0.18',
         'Pillow==5.2.0',
         'Celery==4.2.0',
@@ -69,7 +69,6 @@ setup(
         'django-embed-video==0.6',
         'django-el-pagination==2.1.2',
         'django-extra-views==0.6.3',
-        'django-filer==1.3.2',
         'django-filter==1.1.0',
         'django-haystack==2.8.1',
         'django-honeypot==0.6.0',
@@ -114,6 +113,7 @@ setup(
         
         # requirements loaded in from github
         'django-awesome-avatar',
+        'django-filer',
         'django-multiform',
         'django-djajax',
         'django_select2',
@@ -124,6 +124,7 @@ setup(
     ],
     dependency_links=[
         'git+git://github.com/wechange-eg/django-awesome-avatar.git@django2#egg=django-awesome-avatar',
+        'git+git://github.com/wechange-eg/django-filer.git@django2#egg=django-filer',
         'git+git://github.com/sinnwerkstatt/django-multiform.git@master#egg=django-multiform',
         'git+git://github.com/saschan/django-djajax.git@master#egg=django-djajax',
         'git+git://github.com/wechange-eg/django-select2.git@master#egg=Django-Select2',

@@ -14,7 +14,7 @@ from cosinnus.utils.permissions import check_object_write_access,\
     check_user_superuser
 from django.contrib import messages
 from django.http.response import HttpResponseRedirect, Http404
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.core.exceptions import PermissionDenied
 from cosinnus.core.registries.group_models import group_model_registry
 from django.contrib.auth.models import User

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.core.urlresolvers import reverse, clear_url_caches
+from django.urls import reverse, clear_url_caches
 from django.test import TestCase
 
 

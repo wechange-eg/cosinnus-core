@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from __future__ import print_function
 
 from django.apps import apps
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import force_text
 from django.utils.http import urlquote

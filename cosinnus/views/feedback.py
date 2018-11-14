@@ -15,7 +15,7 @@ from cosinnus.models.tagged import BaseTaggableObjectModel
 from django.template.loader import render_to_string
 from django.contrib.auth import get_user_model
 from cosinnus.models.group import CosinnusPortal, CosinnusGroup
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 
 def _notify_users_for_reported_objects(report_obj, request=None):

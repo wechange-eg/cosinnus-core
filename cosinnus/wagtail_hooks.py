@@ -3,7 +3,7 @@
 from builtins import str
 from builtins import object
 from django.conf.urls import url
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.html import format_html
 
 from wagtail.core import hooks

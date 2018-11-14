@@ -7,7 +7,7 @@ import django
 
 from django.apps import apps
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.core.cache import cache
 from django.db import models, transaction
 from django.db.models.signals import post_save, class_prepared

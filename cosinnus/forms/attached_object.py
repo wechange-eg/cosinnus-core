@@ -14,7 +14,7 @@ from cosinnus.models.tagged import AttachedObject
 from cosinnus.views.attached_object import AttachableObjectSelect2View,\
     build_attachment_field_result
 from cosinnus.core.registries import attached_object_registry
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django_select2.util import JSFunction
 from cosinnus.utils.urls import group_aware_reverse
 from cosinnus.conf import settings

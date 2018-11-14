@@ -13,7 +13,7 @@ from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.tagged import LikeObject
 from cosinnus.views.mixins.group import RequireLoggedInMixin, RequireWriteGrouplessMixin
 from django.contrib.contenttypes.models import ContentType
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 
 logger = logging.getLogger('cosinnus')

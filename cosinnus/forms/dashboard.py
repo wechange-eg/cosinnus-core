@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import six
 
 from django import forms
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.forms.fields import ChoiceField
 from cosinnus.utils.urls import group_aware_reverse

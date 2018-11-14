@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from copy import copy
 import datetime
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db.models import Q
 from django.template.defaultfilters import linebreaksbr
 from django.utils.html import escape

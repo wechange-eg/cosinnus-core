@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.conf.urls import include, url
 from django.views.generic.base import RedirectView
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from rest_framework import routers
 
 from cosinnus.core.registries import url_registry

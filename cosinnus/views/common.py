@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.apps import apps
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.views.generic import RedirectView
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _, LANGUAGE_SESSION_KEY

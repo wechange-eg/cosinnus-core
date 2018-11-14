@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.core.urlresolvers import reverse, resolve, Resolver404
+from django.urls import reverse, resolve, Resolver404
 from django.utils.formats import get_format
 from django.utils.translation import get_language
 

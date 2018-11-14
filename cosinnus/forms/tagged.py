@@ -13,11 +13,11 @@ from cosinnus.forms.user import UserKwargModelFormMixin
 from cosinnus.models.tagged import get_tag_object_model, BaseTagObject
 from cosinnus.utils.import_utils import import_from_settings
 from cosinnus.forms.select2 import TagSelect2Field
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.http.request import QueryDict
 
 from django.contrib.auth import get_user_model
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from django_select2.fields import HeavySelect2MultipleChoiceField, Select2ChoiceField

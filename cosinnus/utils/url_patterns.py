@@ -3,13 +3,13 @@ from __future__ import unicode_literals
 
 import re
 
-from django.core.urlresolvers import RegexURLResolver
 
 from cosinnus.core.registries.group_models import group_model_registry
 from django.core.exceptions import ImproperlyConfigured
+from django.conf.urls import url
 
 
-class APIRegexURLResolver(RegexURLResolver):
+class APIRegexURLResolver(object):
     """
     A URL resolver that always matches the active language code as URL prefix.
 
@@ -40,14 +40,36 @@ class APIRegexURLResolver(RegexURLResolver):
             self._regex_dict[lookup] = regex_compiled
         return self._regex_dict[lookup]
 
+    
+def simple_api_pattern_generator(version, pattern_list, app=None, add_groups=False,
+                 default_kwargs=None, app_name=None, url_group_key=None, namespace=None):
+    
+    api_regex = '^api/v%d/' % version
+    if add_groups:
+        if not url_group_key:
+            raise ImproperlyConfigured('Add groups was set to True for API URL matcher, but no group url key was specified!')
+        api_regex += '%s/(?P<group>[^/]+)/' % url_group_key
+    if app is not None:
+        api_regex += '%s/' % app
+    api_regex += '%s$'
+    
+    generated_api_patterns = []
+    for url_pattern in pattern_list:
+        path = url_pattern.pattern._regex[1:] # take the url regex pattern without the leading '^'
+        generated_api_patterns.append(url(api_regex % path, url_pattern.callback, name=url_pattern.name))
+    return generated_api_patterns
+
 
 def api_patterns(version, app=None, add_groups=False, *args):
     assert isinstance(version, int)
     pattern_list = [*args]
     if add_groups:
-        return [APIRegexURLResolver(version, pattern_list, app=app, url_group_key=url_key,
-                                add_groups=add_groups) for url_key in group_model_registry]
+        patterns = []
+        for url_key in group_model_registry:
+            patterns.extend(simple_api_pattern_generator(version, pattern_list, app=app, url_group_key=url_key,
+                                add_groups=add_groups))
+        return patterns
     else:
-        return [APIRegexURLResolver(version, pattern_list, app=app, url_group_key=None,
-                                add_groups=add_groups) ]
+        return simple_api_pattern_generator(version, pattern_list, app=app, url_group_key=None,
+                                add_groups=add_groups)
         

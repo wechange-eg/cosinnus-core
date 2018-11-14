@@ -6,7 +6,7 @@ import six
 
 
 from django.core.exceptions import ImproperlyConfigured
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.template.loader import render_to_string
 from django.utils.decorators import classonlymethod
 from django.utils.translation import ugettext_lazy as _

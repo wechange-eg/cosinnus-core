@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.contrib.auth import login as django_login
 from django.core.files import File
 from tempfile import NamedTemporaryFile
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.shortcuts import redirect
 from django.utils import translation
 from django.utils.crypto import get_random_string

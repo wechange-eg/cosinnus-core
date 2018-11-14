@@ -6,7 +6,7 @@ import six
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseForbidden
-from django.shortcuts import get_object_or_404, render_to_response, render,\
+from django.shortcuts import get_object_or_404, render,\
     redirect
 from django.template import RequestContext
 from django.utils.decorators import method_decorator
@@ -29,7 +29,7 @@ from cosinnus.utils.functions import resolve_class
 from cosinnus.utils.urls import group_aware_reverse
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
-from django.core.urlresolvers import reverse_lazy, reverse
+from django.urls import reverse_lazy, reverse
 from cosinnus.utils.user import ensure_user_widget
 from django.http.response import HttpResponseNotAllowed, JsonResponse
 from cosinnus.conf import settings
@@ -55,10 +55,10 @@ def widget_add_group(request, group, app_name=None, widget_name=None):
     if request.method == "POST":
         widget_class = widget_registry.get(app_name, widget_name)
         if widget_class is None:
-            return render_to_response('cosinnus/widgets/not_found.html')
+            return render('cosinnus/widgets/not_found.html')
         form_class = widget_class.get_setup_form_class()
         if not widget_class.allow_on_group:
-            return render_to_response('cosinnus/widgets/not_allowed_group.html')
+            return render('cosinnus/widgets/not_allowed_group.html')
         
         form = form_class(request.POST, group=group)
         if form.is_valid():
@@ -112,7 +112,7 @@ def widget_detail(request, id, offset=0):
         return HttpResponseForbidden('Access denied!')
     widget_class = widget_registry.get(wc.app_name, wc.widget_name)
     if widget_class is None:
-        return render_to_response('cosinnus/widgets/not_found.html')
+        return render('cosinnus/widgets/not_found.html')
     widget = widget_class(request, wc)
     widget_content, rows_returned, has_more = widget.get_data(int(offset))
     
@@ -142,7 +142,7 @@ def widget_delete(request, id):
         return HttpResponse('Widget removed')
     else:
         c = RequestContext(request)
-        return render_to_response('cosinnus/widgets/delete.html', c.flatten())
+        return render('cosinnus/widgets/delete.html', c.flatten())
 
 
 @ensure_csrf_cookie
@@ -164,7 +164,7 @@ def widget_edit(request, id, app_name=None, widget_name=None):
     
     widget_class = widget_registry.get(wc.app_name, wc.widget_name)
     if widget_class is None:
-        return render_to_response('cosinnus/widgets/not_found.html')
+        return render('cosinnus/widgets/not_found.html')
     form_class = widget_class.get_setup_form_class()
     widget = widget_class(request, wc)
     

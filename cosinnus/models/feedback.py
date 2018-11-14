@@ -9,7 +9,7 @@ from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
 from cosinnus.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.utils.urls import get_domain_for_portal

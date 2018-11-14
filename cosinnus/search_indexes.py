@@ -15,7 +15,7 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.contrib.auth import get_user_model
 from cosinnus.utils.functions import normalize_within_stddev, resolve_class
 from cosinnus.utils.group import get_cosinnus_group_model
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.functional import cached_property
 from django.contrib.auth.models import AnonymousUser
 from cosinnus.models.idea import CosinnusIdea

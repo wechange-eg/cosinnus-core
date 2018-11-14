@@ -5,7 +5,7 @@ from builtins import str
 from django.contrib.auth import get_user_model, login as auth_login, logout as auth_logout,\
     login
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.db import transaction
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _, get_language

@@ -10,7 +10,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ImproperlyConfigured, ValidationError,\
     PermissionDenied
-from django.core.urlresolvers import reverse, reverse_lazy, NoReverseMatch
+from django.urls import reverse, reverse_lazy, NoReverseMatch
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.utils.encoding import force_text

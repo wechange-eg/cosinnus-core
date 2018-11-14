@@ -21,7 +21,7 @@ import requests
 import urllib.request, urllib.parse, urllib.error
 from cosinnus.utils.urls import iriToUri, group_aware_reverse
 from django.shortcuts import redirect, get_object_or_404
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib import messages
 from django import forms
 from cosinnus.utils.group import get_cosinnus_group_model

@@ -15,7 +15,7 @@ import six
 from django.template.loader import render_to_string
 from django.utils.html import escape
 from django.apps import apps
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from cosinnus.utils.urls import get_domain_for_portal
 from cosinnus.utils.tokens import email_blacklist_token_generator
 

@@ -6,7 +6,7 @@ import logging
 
 from django.contrib import messages
 from django.core.exceptions import MiddlewareNotUsed
-from django.core.urlresolvers import reverse, NoReverseMatch
+from django.urls import reverse, NoReverseMatch
 from django.db.models import signals
 from django.apps import apps
 from django.http.response import HttpResponseRedirect
