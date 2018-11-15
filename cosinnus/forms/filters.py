@@ -49,7 +49,7 @@ class BaseChoiceWidget(forms.Widget):
         render_context = {
             'attrs': final_attrs,
             'options': render_options,
-            'widget_id': 'FilterChoiceWidget%s' % self.form_instance.fields[name].creation_counter,
+            'widget_id': 'FilterChoiceWidget%s' % name, # self.form_instance.fields[name].creation_counter, # TODO hacky to not error; replace again!
             'label': self.form_instance.fields[name].label,
         }
         
