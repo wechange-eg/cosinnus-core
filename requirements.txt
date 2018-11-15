@@ -66,5 +66,3 @@ django-compressor
 -e git+git://github.com/wechange-eg/pydkim.git@master#egg=pydkim
 -e git+git://github.com/saschan/wagtail-modeltranslation.git@translatable-streamfields#egg=wagtail-modeltranslation
 
-# ???
-#-e git+git://github.com/darklow/django-suit.git@v2#egg=django-suit
