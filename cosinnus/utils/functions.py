@@ -248,7 +248,10 @@ def normalize_within_stddev(member, mean, stddev, stddev_factor=1.0):
     """
     local_max = mean + (stddev*stddev_factor)
     local_min = mean - (stddev*stddev_factor)
-    place = (member-local_min)/(local_max-local_min)
+    if local_max != local_min:
+        place = (member-local_min)/(local_max-local_min)
+    else:
+        place = 1.0
     return max(0.0, (min(place, 1.0)))
 
 
