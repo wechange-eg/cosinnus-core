@@ -94,7 +94,7 @@ class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFiel
     twitter_widget_id = forms.CharField(widget=forms.Textarea, required=False)
 
     
-    related_groups = forms.ModelMultipleChoiceField(queryset=get_cosinnus_group_model().objects.filter(portal_id=CosinnusPortal.get_current().id))
+    related_groups = forms.ModelMultipleChoiceField(queryset=get_cosinnus_group_model().objects.none())
     
     class Meta(object):
         fields = ['name', 'public', 'description', 'description_long', 'contact_info', 
