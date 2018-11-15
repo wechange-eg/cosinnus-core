@@ -55,7 +55,7 @@ setup(
     data_files=data_files,
     install_requires=[
         # please mirror all changes in the requirements.txt for local installs!
-        'Django==2.0.9',
+        'Django==2.1.3',
         'MarkupSafe==0.23',
         'Pillow==5.2.0',
         'Celery==4.2.0',
@@ -69,7 +69,7 @@ setup(
         'django-embed-video==0.6',
         'django-el-pagination==2.1.2',
         'django-extra-views==0.6.3',
-        'django-filter==1.1.0',
+        'django-filter==2.0.0',
         'django-haystack==2.8.1',
         'django-honeypot==0.6.0',
         'django-model-utils==1.5.0',

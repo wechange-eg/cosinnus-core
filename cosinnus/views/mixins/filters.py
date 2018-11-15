@@ -54,7 +54,7 @@ class CosinnusFilterMixin(FilterMixin):
                         else:
                             chosen_value_str = choices_dict[value]
                         active_filters.append((param, chosen_value_str, self.filter.filters[param].label, 'filter'))
-            if value and param == self.filter.order_by_field:
+            if value and param == self.filter.order_by_field: # TODO should be in self.filter._meta.order_by_field
                 ordering_choices_dict = dict(self.filter.ordering_field.choices)
                 if value in ordering_choices_dict:
                     chosen_value_str = ordering_choices_dict[value]
@@ -69,10 +69,10 @@ class CosinnusFilterMixin(FilterMixin):
 
 class CosinnusFilterSet(FilterSet):
     
-    def __init__(self, data=None, queryset=None, prefix=None, strict=None, group=None):
+    def __init__(self, data=None, queryset=None, prefix=None, group=None):
         """ Add a reference to the form to the form's widgets """
         self.group = group
-        super(CosinnusFilterSet, self).__init__(data, queryset, prefix, strict)
+        super(CosinnusFilterSet, self).__init__(data, queryset, prefix)
         for name, filter_obj in list(self.filters.items()):
             filter_obj.group = group
         for field in list(self.form.fields.values()):
