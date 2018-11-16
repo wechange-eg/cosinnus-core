@@ -5,13 +5,14 @@ Created on 30.07.2014
 '''
 from builtins import str
 from django_filters.views import FilterMixin
-from django_filters.filterset import FilterSet
+from django_filters.filterset import FilterSet, FilterSetOptions
 from cosinnus.forms.filters import DropdownChoiceWidget
 
 from django import forms
 from django.utils.text import capfirst
 from django.utils.translation import ugettext as _
 from cosinnus.models.tagged import BaseHierarchicalTaggableObjectModel
+from django_filters.filters import OrderingFilter
 
 class CosinnusFilterMixin(FilterMixin):
     """
@@ -43,22 +44,24 @@ class CosinnusFilterMixin(FilterMixin):
         """ Add [(filter_param, chosen_value_str, label, type<'sort'|'filter'>)] for displaying current filters """
         for param, value in list(self.filter.data.items()):
             if value and param in self.filter.filters:
-                if not 'choices' in self.filter.filters[param].extra:
-                    active_filters.append((param, value, self.filter.filters[param].label, 'filter'))
+                active_filter = self.filter.filters[param]
+                if not 'choices' in active_filter.extra:
+                    active_filters.append((param, value, active_filter.label, 'filter'))
                 else:
-                    choices_dict = dict([(str(key), val) for key, val in self.filter.filters[param].extra['choices']])
+                    choices_dict = dict([(str(key), val) for key, val in active_filter.extra['choices']])
                     if value in choices_dict:
-                        format_func = getattr(self.filter.filters[param].field.widget, 'format_label_value', None)
+                        format_func = getattr(active_filter.field.widget, 'format_label_value', None)
                         if callable(format_func):
                             chosen_value_str = format_func(choices_dict[value])
                         else:
                             chosen_value_str = choices_dict[value]
-                        active_filters.append((param, chosen_value_str, self.filter.filters[param].label, 'filter'))
-            if value and param == self.filter.order_by_field: # TODO should be in self.filter._meta.order_by_field
-                ordering_choices_dict = dict(self.filter.ordering_field.choices)
-                if value in ordering_choices_dict:
-                    chosen_value_str = ordering_choices_dict[value]
-                    active_filters.append((param, chosen_value_str, self.filter.ordering_field.label, 'sort'))
+                        active_filters.append((param, chosen_value_str, active_filter.label, 'filter'))
+                active_filter_type = type(active_filter)
+                if (active_filter_type is OrderingFilter) or (OrderingFilter in active_filter_type.__bases__):  
+                    ordering_choices_dict = active_filter.extra['choices']
+                    if value in ordering_choices_dict:
+                        chosen_value_str = ordering_choices_dict[value]
+                        active_filters.append((param, chosen_value_str, active_filter.label, 'sort'))
                 
         
         context.update({
@@ -69,22 +72,17 @@ class CosinnusFilterMixin(FilterMixin):
 
 class CosinnusFilterSet(FilterSet):
     
+    
     def __init__(self, data=None, queryset=None, prefix=None, group=None):
         """ Add a reference to the form to the form's widgets """
         self.group = group
-        super(CosinnusFilterSet, self).__init__(data, queryset, prefix)
+        super(CosinnusFilterSet, self).__init__(data=data, queryset=queryset, prefix=prefix)
         for name, filter_obj in list(self.filters.items()):
             filter_obj.group = group
         for field in list(self.form.fields.values()):
             field.widget.form_instance = self.form
     
-    def get_order_by(self, order_value):
-        """ Chain comma-seperated orderings """
-        if ',' in order_value:
-            return order_value.split(',')
-        return super(CosinnusFilterSet, self).get_order_by(order_value)
-    
-    def get_ordering_field(self):
+    def __unused_deprecated__get_ordering_field(self):
         """ Overriding BaseFilterSet """
         if self._meta.order_by:
             if isinstance(self._meta.order_by, (list, tuple)):

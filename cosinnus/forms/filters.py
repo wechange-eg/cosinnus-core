@@ -37,7 +37,7 @@ class BaseChoiceWidget(forms.Widget):
         self.data = data
         return value
 
-    def render(self, name, value, attrs=None, choices=()): # TODO deprecated: accept `renderer=None` arg?
+    def render(self, name, value, attrs=None, choices=(), renderer=None):
         if not hasattr(self, 'data'):
             self.data = {}
         if value is None:
@@ -131,8 +131,8 @@ class AllObjectsFilter(ChoiceFilter):
         if group:
             filter_field_objects_qs = filter_field_objects_qs.filter(group=self.group)
         
-        group_object_ids = filter_field_objects_qs.order_by(self.name).values_list(self.name, flat=True)
-        object_qs = getattr(self.model, self.name).field.related_model._default_manager.filter(id__in=group_object_ids)
+        group_object_ids = filter_field_objects_qs.order_by(self.field_name).values_list(self.field_name, flat=True)
+        object_qs = getattr(self.model, self.field_name).field.related_model._default_manager.filter(id__in=group_object_ids)
         self.extra['choices'] = [(o.id, o) for o in object_qs]
         if None in group_object_ids:
             self.extra['choices'].insert(0, (None, _("Not assigned")))
@@ -146,23 +146,32 @@ class AllObjectsFilter(ChoiceFilter):
 
 
 class ForwardDateRangeFilter(DateRangeFilter):
-    options = {
-        '': (_('Any date'), lambda qs, name: qs.all()),
-        1: (_('Today'), lambda qs, name: qs.filter(**{
+    choices = [
+        ('', _('Any date')),
+        ('today', _('Today')),
+        ('week', _('This week')),
+        ('nextweek', _('Next week')),
+        ('month', _('Next month')),
+    ]
+
+    filters = {
+        '':  lambda qs, name: qs.all(),
+        'today': lambda qs, name: qs.filter(**{
             '%s__year' % name: now().year,
             '%s__month' % name: now().month,
             '%s__day' % name: now().day
-        })),
-        2: (_('This week'), lambda qs, name: qs.filter(**{
+        }),
+        'week': lambda qs, name: qs.filter(**{
             '%s__gte' % name: _truncate(now() - timedelta(days=now().weekday())),
             '%s__lt' % name: _truncate(now() + timedelta(days=7-now().weekday())),
-        })),
-        3: (_('Next week'), lambda qs, name: qs.filter(**{
+        }),
+        'nextweek': lambda qs, name: qs.filter(**{
             '%s__gte' % name: _truncate(now() + timedelta(days=7-now().weekday())),
             '%s__lt' % name: _truncate(now() + timedelta(days=14-now().weekday())),
-        })),
-        4: (_('Next month'), lambda qs, name: qs.filter(**{
+        }),
+        'month': lambda qs, name: qs.filter(**{
             '%s__year' % name: now().year + (1 if now().month == 11 else 0),
             '%s__month' % name: now().month + 1 if now().month < 11 else 0
-        })),
+        }),
     }
+    
