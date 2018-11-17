@@ -656,6 +656,7 @@ class CosinnusBaseGroup(IndexingUtilsMixin, FlickrEmbedFieldMixin, VideoEmbedFie
     type = models.PositiveSmallIntegerField(_('Project Type'), blank=False,
         default=TYPE_PROJECT, choices=TYPE_CHOICES, editable=False)
     created = models.DateTimeField(verbose_name=_('Created'), editable=False, auto_now_add=True)
+    last_modified = models.DateTimeField(verbose_name=_('Last modified'), editable=False, auto_now=True)
     
     description = models.TextField(verbose_name=_('Short Description'),
          help_text=_('Short Description. Internal, will not be shown publicly.'), blank=True)

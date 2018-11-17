@@ -23,6 +23,7 @@ from cosinnus.models.cms import CosinnusMicropage
 from cosinnus.models.feedback import CosinnusReportedObject,\
     CosinnusSentEmailLog, CosinnusFailedLoginRateLimitLog
 from cosinnus.utils.dashboard import create_initial_group_widgets
+from cosinnus.models.tagged import TagObject
 from cosinnus.models.widget import WidgetConfig
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -141,7 +142,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     list_filter = ('portal', 'public', 'is_active',)
     search_fields = ('name', )
     prepopulated_fields = {'slug': ('name', )}
-    readonly_fields = ('created',)
+    readonly_fields = ('created', 'last_modified')
     
     def convert_to_society(self, request, queryset):
         """ Converts this CosinnusGroup's type """
@@ -547,6 +548,12 @@ class CosinnusFailedLoginRateLimitLogAdmin(admin.ModelAdmin):
     readonly_fields = ('date',)
 
 admin.site.register(CosinnusFailedLoginRateLimitLog, CosinnusFailedLoginRateLimitLogAdmin)
+
+
+class TagObjectAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(TagObject, TagObjectAdmin)
 
 
 if settings.COSINNUS_IDEAS_ENABLED:

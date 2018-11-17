@@ -286,6 +286,10 @@ class BaseTaggableObjectModel(IndexingUtilsMixin, AttachableObjectModel):
         verbose_name=_('Created'),
         editable=False,
         auto_now_add=True)
+    last_modified = models.DateTimeField(
+        verbose_name=_('Last modified'),
+        editable=False,
+        auto_now=True)
 
     class Meta(object):
         abstract = True
