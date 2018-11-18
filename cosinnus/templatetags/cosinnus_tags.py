@@ -269,7 +269,7 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
             context['my_ideas_count'] = CosinnusIdea.objects.all_in_portal().filter(creator=user).count()
     
     try:
-        current_app = resolve(request.path).app_name
+        current_app = resolve(request.path).app_name.replace(':', '_')
     except Resolver404:
         pass
     active_app = None
