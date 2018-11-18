@@ -72,35 +72,31 @@ class CosinnusFilterMixin(FilterMixin):
 
 class CosinnusFilterSet(FilterSet):
     
-    
     def __init__(self, data=None, queryset=None, prefix=None, group=None):
         """ Add a reference to the form to the form's widgets """
         self.group = group
+        # this forces the filtering to apply even with no GET args, and enables filtering defaults
+        if not data:
+            data = {field: '' for field in self._meta.fields}
         super(CosinnusFilterSet, self).__init__(data=data, queryset=queryset, prefix=prefix)
         for name, filter_obj in list(self.filters.items()):
             filter_obj.group = group
         for field in list(self.form.fields.values()):
             field.widget.form_instance = self.form
     
-    def __unused_deprecated__get_ordering_field(self):
-        """ Overriding BaseFilterSet """
-        if self._meta.order_by:
-            if isinstance(self._meta.order_by, (list, tuple)):
-                if isinstance(self._meta.order_by[0], (list, tuple)):
-                    # e.g. (('field', 'Display name'), ...)
-                    choices = [(f[0], f[1]) for f in self._meta.order_by]
-                else:
-                    choices = [(f, _('%s (descending)' % capfirst(f[1:])) if f[0] == '-' else capfirst(f))
-                               for f in self._meta.order_by]
-            else:
-                # add asc and desc field names
-                # use the filter's label if provided
-                choices = []
-                for f, fltr in list(self.filters.items()):
-                    choices.extend([
-                        (fltr.name or f, fltr.label or capfirst(f)),
-                        ("-%s" % (fltr.name or f), _('%s (descending)' % (fltr.label or capfirst(f))))
-                    ])
-            return forms.ChoiceField(label=_("Ordering"), required=False,
-                                     choices=choices, widget=DropdownChoiceWidget)
+    
+
+class CosinnusOrderingFilter(OrderingFilter):
+    """ An ordering filter that supports a default ordering value if no orderin is chosen """
+    
+    default = None
+    
+    def __init__(self, *args, **kwargs):
+        self.default = kwargs.pop('default', None)
+        super(CosinnusOrderingFilter, self).__init__(*args, **kwargs)
+        
+    def filter(self, qs, value):
+        if not value and self.default:
+            return qs.order_by(self.default)
+        return super(CosinnusOrderingFilter, self).filter(qs, value)
     
