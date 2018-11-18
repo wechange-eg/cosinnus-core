@@ -235,7 +235,7 @@ def ensure_list_of_ints(value):
     elif isinstance(value, int):
         value = [value]
     elif isinstance(value, list):
-        value = [int(val) for val in value]
+        value = [int(val) for val in value if val]
     return value
     
     

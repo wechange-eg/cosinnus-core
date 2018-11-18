@@ -142,6 +142,8 @@ class AllObjectsFilter(ChoiceFilter):
         """ Filters for field-is-empty on 'None' parameters """
         if value == 'None':
             value = (True, 'isnull')
+        if not value:
+            return qs
         return super(AllObjectsFilter, self).filter(qs, value)
 
 

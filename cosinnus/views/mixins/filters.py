@@ -5,14 +5,12 @@ Created on 30.07.2014
 '''
 from builtins import str
 from django_filters.views import FilterMixin
-from django_filters.filterset import FilterSet, FilterSetOptions
-from cosinnus.forms.filters import DropdownChoiceWidget
+from django_filters.filterset import FilterSet
 
-from django import forms
-from django.utils.text import capfirst
-from django.utils.translation import ugettext as _
 from cosinnus.models.tagged import BaseHierarchicalTaggableObjectModel
 from django_filters.filters import OrderingFilter
+from django.http.request import QueryDict
+
 
 class CosinnusFilterMixin(FilterMixin):
     """
@@ -63,12 +61,12 @@ class CosinnusFilterMixin(FilterMixin):
                         chosen_value_str = ordering_choices_dict[value]
                         active_filters.append((param, chosen_value_str, active_filter.label, 'sort'))
                 
-        
         context.update({
             'filter': self.filter,
             'active_filters': active_filters,
         })
         return context
+
 
 class CosinnusFilterSet(FilterSet):
     
@@ -77,7 +75,8 @@ class CosinnusFilterSet(FilterSet):
         self.group = group
         # this forces the filtering to apply even with no GET args, and enables filtering defaults
         if not data:
-            data = {field: '' for field in self._meta.fields}
+            data = QueryDict('', mutable=True)
+            data.update({field: '' for field in self._meta.fields})
         super(CosinnusFilterSet, self).__init__(data=data, queryset=queryset, prefix=prefix)
         for name, filter_obj in list(self.filters.items()):
             filter_obj.group = group
