@@ -174,7 +174,6 @@ def compile_installed_apps(internal_apps=[]):
         'wagtail.contrib.redirects',
         'wagtail.contrib.forms',
         
-        #'wagtail_modeltranslation',
     ]
     
     # Internal Apps (as defined in external project)
