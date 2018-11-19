@@ -3,23 +3,43 @@ from rest_framework import viewsets
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.tagged import BaseTagObject
-from .serializers import CosinnusGroupSerializer, CosinnusProjectSerializer
+from .serializers import CosinnusSocietySerializer, CosinnusProjectSerializer, OrganisationListSerializer, \
+    OrganisationRetrieveSerializer
 
 
-class CosinnusGroupSerializerViewSet(viewsets.ReadOnlyModelViewSet):
+class PublicCosinnusGroupFilterMixin(object):
+
+    def get_queryset(self):
+        queryset = self.queryset
+        # filter for current portal
+        queryset = queryset.filter(portal=CosinnusPortal.get_current())
+        # Filter visibility
+        queryset = queryset.filter(is_active=True, public=True)
+        return queryset
+
+
+class PublicTaggableObjectFilterMixin(object):
+
+    def get_queryset(self):
+        queryset = self.queryset
+        # filter for current portal
+        queryset = queryset.filter(group__portal=CosinnusPortal.get_current())
+        # Filter visibility
+        queryset = queryset.filter(group__is_active=True, media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
+        return queryset
+
+
+class CosinnusSocietySerializerViewSet(PublicCosinnusGroupFilterMixin,
+                                       viewsets.ReadOnlyModelViewSet):
     queryset = CosinnusSociety.objects.all()
-    serializer_class = CosinnusGroupSerializer
+    serializer_class = CosinnusSocietySerializer
 
     def get_queryset(self):
         """
         Optionally filter by group
         FIXME: Use generic filters here after upgrade to django-filter==0.15.0
         """
-        queryset = self.queryset
-        # filter for current portal
-        queryset = queryset.filter(portal=CosinnusPortal.get_current())
-        # Filter visibility
-        queryset = queryset.filter(is_active=True, public=True)
+        queryset = super().get_queryset()
         # Order
         query_params = self.request.query_params.copy()
         order_by = query_params.pop('order_by', ['-created',])
@@ -38,6 +58,19 @@ class CosinnusGroupSerializerViewSet(viewsets.ReadOnlyModelViewSet):
         return queryset
 
 
-class CosinnusProjectSerializerViewSet(CosinnusGroupSerializerViewSet):
+class CosinnusProjectSerializerViewSet(CosinnusSocietySerializerViewSet):
     queryset = CosinnusProject.objects.all()
     serializer_class = CosinnusProjectSerializer
+
+
+class OrganisationSerializerViewSet(PublicCosinnusGroupFilterMixin,
+                                    viewsets.ModelViewSet):
+    queryset = CosinnusProject.objects.all()
+    serializer_class = OrganisationListSerializer
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return OrganisationListSerializer
+        if self.action == 'retrieve':
+            return OrganisationRetrieveSerializer
+        return OrganisationRetrieveSerializer

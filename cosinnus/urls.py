@@ -5,15 +5,19 @@ from django.conf.urls import include, url
 from django.views.generic.base import RedirectView
 from django.urls import reverse_lazy
 from rest_framework import routers
+from rest_framework_swagger.views import get_swagger_view
 
 from cosinnus.core.registries import url_registry
 from cosinnus.conf import settings
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
-from cosinnus.api.views import CosinnusGroupSerializerViewSet, CosinnusProjectSerializerViewSet
-
+from cosinnus.api.views import CosinnusSocietySerializerViewSet, CosinnusProjectSerializerViewSet, \
+    OrganisationSerializerViewSet
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group,\
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object
+from cosinnus_event.api.views import EventSerializerViewSet
+
+schema_view = get_swagger_view(title='WECHANGE API')
 
 app_name = 'cosinnus'
 
@@ -171,12 +175,13 @@ for url_key in group_model_registry:
 urlpatterns += url_registry.urlpatterns
 
 # URLs for API version 2
-router = routers.DefaultRouter()
-router.register(r'groups', CosinnusGroupSerializerViewSet)
+router = routers.SimpleRouter()
+router.register(r'groups', CosinnusSocietySerializerViewSet)
 router.register(r'projects', CosinnusProjectSerializerViewSet)
+router.register(r'organisation', OrganisationSerializerViewSet)
+router.register(r'event', EventSerializerViewSet)
 
 urlpatterns += [
-    # TODO: @simonline
-    #url(r'api/v2/docs/', include('rest_framework_swagger.urls')),
+    url(r'api/v2/docs/', get_swagger_view()),
     url(r'api/v2/', include(router.urls)),
 ]
