@@ -312,6 +312,8 @@ TESTING = 'test' in sys.argv
 # can't use this yet, until we fix the jQuery-POST usage of csrf cookies
 CSRF_USE_SESSIONS = False
 
+# leave this on for production, but may want to disable for dev
+#SESSION_COOKIE_SECURE = True
 
 # wagtail
 WAGTAIL_SITE_NAME = 'Wechange'
@@ -328,7 +330,7 @@ WAGTAIL_ENABLE_UPDATE_CHECK = False
     For cosinnus-specific internal default settings, check cosinnus/conf.py!
 """
 
-AUTHENTICATION_BACKENDS = ('cosinnus.backends.EmailAuthBackend',)
+AUTHENTICATION_BACKENDS = ['cosinnus.backends.EmailAuthBackend',]
 
 # select2 render static files
 AUTO_RENDER_SELECT2_STATICS = False

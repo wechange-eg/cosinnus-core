@@ -443,7 +443,6 @@ class CosinnusConf(AppConf):
     # the default choices for topics for tagged objects
     # WARNING: do NOT change remove/change these without a data migration! pure adding is ok.
     TOPIC_CHOICES = (
-        ('', ''),
         (0, _('Mobilität')),
         (1, _('Energie')),
         (2, _('Umwelt')),

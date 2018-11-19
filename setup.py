@@ -55,7 +55,7 @@ setup(
     data_files=data_files,
     install_requires=[
         # please mirror all changes in the requirements.txt for local installs!
-        'Django==2.0.9',
+        'Django==2.1.3',
         'MarkupSafe==0.23',
         'Pillow==5.2.0',
         'Celery==4.2.0',
@@ -124,10 +124,10 @@ setup(
     dependency_links=[
         'git+git://github.com/wechange-eg/django-awesome-avatar.git@django2#egg=django-awesome-avatar',
         'git+git://github.com/wechange-eg/django-filer.git@django2#egg=django-filer',
-        'git+git://github.com/sinnwerkstatt/django-multiform.git@master#egg=django-multiform',
+        'git+git://github.com/wechange-eg/django-multiform.git@master#egg=django-multiform',
         'git+git://github.com/saschan/django-djajax.git@master#egg=django-djajax',
         'git+git://github.com/wechange-eg/django-select2.git@master#egg=Django-Select2',
-        'git+git://github.com/sinnwerkstatt/django-osm-field.git@django2#egg=django-osm-field',
+        'git+git://github.com/wechange-eg/django-osm-field.git@django2#egg=django-osm-field',
         'git+git://github.com/wechange-eg/python-markdown2.git@master#egg=markdown2',
         'git+git://github.com/wechange-eg/pydkim.git@master#egg=pydkim',
         'git+git://github.com/saschan/wagtail-modeltranslation.git@translatable-streamfields#egg=wagtail-modeltranslation',

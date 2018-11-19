@@ -18,7 +18,7 @@ class CommaSeparatedSelect2MultipleWidget(Select2MultipleWidget):
         # field expect a string (not a list).
         return ','.join(data.getlist(name))
 
-    def render(self, name, value, attrs=None, choices=()):
+    def render(self, name, value, attrs=None, choices=(), renderer=None):
         # Convert comma separated integer string to a list, since the checkbox
         # rendering code expects a list (not a string)
         if value:

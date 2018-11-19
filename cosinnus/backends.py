@@ -32,19 +32,25 @@ class EmailAuthBackend(ModelBackend):
     a username/password pair.
     """
     
-    def authenticate(self, username=None, password=None):
+    def authenticate(self, request, username=None, password=None):
         """ Authenticate a user based on email address as the user name. """
         email = username.lower().strip()
         user = get_user_by_email_safe(email)
-        if user and user.check_password(password):
+        
+        if not user:
+            # Run the default password hasher once to reduce the timing
+            # difference between an existing and a nonexistent user (#20760).
+            USER_MODEL().set_password(password)
+        elif user and user.check_password(password) and self.user_can_authenticate(user):
             return user
 
     def get_user(self, user_id):
         """ Get a User object from the user_id. """
         try:
-            return USER_MODEL.objects.get(pk=user_id)
+            user = USER_MODEL._default_manager.get(pk=user_id)
         except USER_MODEL.DoesNotExist:
             return None
+        return user if self.user_can_authenticate(user) else None
 
 
 class DKIMEmailBackend(EmailBackend):

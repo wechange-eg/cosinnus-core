@@ -65,7 +65,8 @@ class UserCreationForm(DjUserCreationForm):
     def is_valid(self):
         """ Get the email from the form and set it as username. 
             If none was set, hide the username field and let validation take its course. """
-        self.data['username'] = self.data['email'][:30]
+        self.data._mutable = True
+        self.data['username'] = self.data['email'][:150]
         return super(UserCreationForm, self).is_valid()
 
     def clean_email(self):
