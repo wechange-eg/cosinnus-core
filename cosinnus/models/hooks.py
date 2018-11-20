@@ -108,3 +108,4 @@ def reset_cookie_expiry_for_anonymous_user(sender, user, request, **kwargs):
 
 
 from cosinnus.apis.cleverreach import *
+from cosinnus.models.wagtail_models import * # noqa
