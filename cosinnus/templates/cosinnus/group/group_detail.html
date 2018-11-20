@@ -101,7 +101,7 @@
                                         {% include "cosinnus/user/user_avatar_image.html" with user=member %}
                                     </a>
                                     {% if user|has_write_access:object or user == member %}
-                                    <a class="pull-right fadedown-clickarea" href="#">
+                                    <a class="pull-right fadedown-clickarea">
                                         <i class="fa fa-chevron-down"></i>
                                     </a>
                                     {% endif %}
@@ -212,7 +212,7 @@
 		                                {% include "cosinnus/user/user_avatar_image.html" with user=member %}
 		                            </a>
 		                            {% if user|has_write_access:object %}
-		                            <a class="pull-right fadedown-clickarea" href="#">
+		                            <a class="pull-right fadedown-clickarea">
 		                                <i class="fa fa-chevron-down"></i>
 		                            </a>
 		                            {% endif %}
@@ -393,7 +393,7 @@
                                 {% include "cosinnus/user/user_avatar_image.html" with user=member %}
                             </span>
                             {% if user|has_write_access:object %}
-                            <a class="pull-right fadedown-clickarea" href="#">
+                            <a class="pull-right fadedown-clickarea">
                                 <i class="fa fa-chevron-down"></i>
                             </a>
                             {% endif %}

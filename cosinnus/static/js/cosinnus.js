@@ -53,7 +53,7 @@
             if (typeof target === "undefined") {
                 target = 'body';
             }
-            $(target).on('click','.fadedown .btn:first-child .fadedown-clickarea, .fadedown .btn:first-child.fadedown-clickarea',function() {
+            $(target).on('click','.fadedown .btn:first-child .fadedown-clickarea, .fadedown .btn:first-child.fadedown-clickarea',function(e) {
                 if (!$(this).closest('.fadedown').hasClass('open')) {
                     // closed
                     $(this)
@@ -77,6 +77,8 @@
                         .removeClass('fa-chevron-up')
                         .addClass('fa-chevron-down');
                 }
+                e.stopPropagation();
+                return false;
             });
             // hide fadedown boxes unless .open class explicit set
             $('.fadedown').not('.open').find('> :not(:first-child)').hide();
