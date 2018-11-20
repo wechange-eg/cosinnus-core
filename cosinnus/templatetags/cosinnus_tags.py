@@ -966,3 +966,12 @@ def render_cosinnus_topics_json():
     topic_choices = dict([(top_id, force_text(val)) for top_id, val in TAG_OBJECT.TOPIC_CHOICES])
     return _json.dumps(topic_choices)
 
+
+@register.filter
+def app_url_for_model(obj):
+    """ Returns the base URL fragment for the given cosinnus model's app.
+        Eg for an Etherpad, return 'cosinnus:etherpad' """
+    if obj:
+        return obj.__class__.__module__.split('.')[0].replace('_', ':')
+    return ''
+
