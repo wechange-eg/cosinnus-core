@@ -45,10 +45,10 @@ $.cosinnus.Feedback = {
     },
     
 
-    cosinnus_move_element: function(obj_id, current_folder_id) {
+    cosinnus_move_element: function(obj_id_list, current_folder_id) {
        // called from js code that is rendered via a cosinnus_tags.py templatetag!
-        $('#cosinnus_move_element_obj_id').val(obj_id);
-        $('#cosinnus_move_element_current_folder_id').val(current_folder_id);
+       $('#cosinnus_move_element_obj_ids').val(obj_id_list.join(","));
+       $('#cosinnus_move_element_current_folder_id').val(current_folder_id);
        $('#move_element_modal_error').hide();
        $.cosinnus.modal_activate();
        $('#cosinnus_move_element_submit_btn').unbind().click($.cosinnus.Feedback.cosinnus_move_element_submit);
@@ -56,20 +56,20 @@ $.cosinnus.Feedback = {
    },
    
    cosinnus_move_element_submit: function() {
-       if (!$('#cosinnus_move_element_obj_id').val()) {
+       if (!$('#cosinnus_move_element_obj_ids').val()) {
            return;
        };
        
-       var element_id = $('#cosinnus_move_element_obj_id').val();
+       var element_ids = $('#cosinnus_move_element_obj_ids').val();
        var target_folder_id = $('#cosinnus_move_element_selected_folder').val();
        var current_folder_id = $('#cosinnus_move_element_current_folder_id').val()
        // don't do anything if we target the same folder the element is in
-       if (target_folder_id == current_folder_id || element_id == target_folder_id) {
+       if (target_folder_id == current_folder_id) {
            $('#cosinnus_move_element_modal').modal('hide');
            return;
        }
        post_data = {
-           'element_id': element_id,
+           'element_ids': element_ids.split(','),
            'target_folder_id': target_folder_id,
        };
        
@@ -79,11 +79,15 @@ $.cosinnus.Feedback = {
             url: cosinnus_move_element_object_url,
             data: post_data,
             success: function(data){
-                if (data == 'ok_element') {
+                if (data && data.successful_ids) {
                     $('#cosinnus_move_element_modal').modal('hide');
-                    $('#cosinnus_list_element_' + element_id).fadeOut(800, function() {
-                        $(this).remove();
+                    $.each(data.successful_ids, function(key, element_id) {
+                    	$('#cosinnus_list_element_' + element_id).fadeOut(800, function() {
+                    		$(this).remove();
+                    	});
                     });
+                    // hide all checked elements
+                    $('.item_checkbox_mark_all_false').click();
                 } else if (data == 'ok_folder') {
                     console.log('NYI');
                 }

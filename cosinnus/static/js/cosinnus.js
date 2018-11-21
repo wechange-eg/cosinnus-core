@@ -927,6 +927,8 @@
                 } else {
                     $('.item_checkbox_action_button, .item_checkbox_mark_all').hide();
                 }
+                // fill any checkbox counter with the number of checked boxes
+                $('.item_checkbox_count_label').text('(' + $('.item_checkbox_element .fa-check-square-o').length + ')');
             });
             
             // one of the "check all" or "uncheck all" buttons was clicked
@@ -966,6 +968,8 @@
                         $('.item_checkbox_action_button').hide();
                     }
                 });
+                // fill any checkbox counter with the number of checked boxes
+                $('.item_checkbox_count_label').text('(' + $('.item_checkbox_element .fa-check-square-o').length + ')');
                 e.preventDefault();
             });
             
@@ -973,6 +977,20 @@
             if (!$('.item_checkbox_element .fa-check-square-o').length) {
                 $('.item_checkbox_action_button, .item_checkbox_mark_all').hide();
             }
+        },
+        
+        /** Returns an array of input names for all checkbox elements that are checked 
+         * 	or [] if none are checked. */
+        getListOfCheckedItems: function() {
+        	var input_names = [];
+        	$('.item_checkbox_element i.fa-check-square-o').each(function(){
+                input_names.push(
+            		$(this)
+            		.next() // INPUT type="hidden"
+	                .attr('name')
+	            );
+        	});
+        	return input_names;
         },
 
         multilineEllipsis : function() {

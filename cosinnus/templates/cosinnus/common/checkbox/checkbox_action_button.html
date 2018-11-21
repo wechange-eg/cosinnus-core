@@ -1,0 +1,13 @@
+<button type="submit" class="btn btn-emphasized item_checkbox_action_button" {% if action %}onclick="{{ action }}"{% endif %}>
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#">
+                <i class="fa {{ icon }}"></i>
+            </a>
+            <div class="media-body">
+                {{ label }}
+                <span class="item_checkbox_count_label"></span>
+            </div>
+        </li>
+    </ul>
+</button>
