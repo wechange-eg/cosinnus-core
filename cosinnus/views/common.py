@@ -21,6 +21,11 @@ from django.contrib.contenttypes.models import ContentType
 from cosinnus.models.tagged import LikeObject
 from annoying.functions import get_object_or_None
 from django.views.decorators.csrf import csrf_protect
+from cosinnus.views.mixins.group import RequireCreateObjectsInMixin
+from django.views.generic.base import View
+from django.core.exceptions import ImproperlyConfigured
+from django.shortcuts import get_object_or_404
+from cosinnus.utils.permissions import check_object_write_access
 
 class IndexView(RedirectView):
     url = reverse_lazy('cosinnus:group-list')
@@ -169,4 +174,47 @@ def do_like(request, **kwargs):
     
     return JsonResponse({'liked': liked_obj and liked_obj.liked or False, 'followed': liked_obj and liked_obj.followed or False})
     
+
+class DeleteElementView(RequireCreateObjectsInMixin, View):
+    """ Deletes one or more instances of BaseTaggableObject. Will check write permissions for
+        each individual object.
+        
+        This is a pseudo-abstract class, superclass this with your own view for each cosinnus app.
+        Requires `model` to be set to a non-abstract HierarchicalBaseTaggableObject model.
+        Expects to find a `group` kwarg.
+        Excpects `element_ids[]` as POST arguments.
+     """
     
+    http_method_names = ['post', ]
+    
+    model = None
+    
+    def post(self, request, *args, **kwargs):
+        if not self.model:
+            raise ImproperlyConfigured('No model class is set for the pseudo-abstract view DeleteElementView.')
+        
+        element_ids = request.POST.getlist('element_ids[]', [])
+        if not (element_ids or self.group):
+            return HttpResponseBadRequest('Missing POST fields for this request.')
+        
+        successful_ids = []
+        for element_id in element_ids:
+            element = get_object_or_None(self.model, id=element_id, group=self.group)
+            
+            # check write permission on element
+            if not check_object_write_access(element, request.user):
+                continue
+            if self.delete_element(element):
+                successful_ids.append(element_id)
+        
+        data = {
+            'had_errors': len(successful_ids) != len(element_ids),
+            'successful_ids': successful_ids,
+        }
+        return JsonResponse(data)
+        
+        
+    def delete_element(self, element):
+        element.delete()
+        return True
+        

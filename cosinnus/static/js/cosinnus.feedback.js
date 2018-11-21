@@ -97,4 +97,49 @@ $.cosinnus.Feedback = {
             }
        });
    },
+   
+
+   cosinnus_delete_element: function(obj_id_list, current_folder_id) {
+      // called from js code that is rendered via a cosinnus_tags.py templatetag!
+      $('#cosinnus_delete_element_obj_ids').val(obj_id_list.join(","));
+      $('#delete_element_modal_error').hide();
+      $.cosinnus.modal_activate();
+      $('#cosinnus_delete_element_submit_btn').unbind().click($.cosinnus.Feedback.cosinnus_delete_element_submit);
+      $('#cosinnus_delete_element_modal').modal('show');
+  },
+  
+  cosinnus_delete_element_submit: function() {
+      if (!$('#cosinnus_delete_element_obj_ids').val()) {
+          return;
+      };
+      
+      var element_ids = $('#cosinnus_delete_element_obj_ids').val();
+      post_data = {
+          'element_ids': element_ids.split(',')
+      };
+      
+      $.cosinnus.modal_deactivate();
+      $.ajax({
+           type:"POST",
+           url: cosinnus_delete_element_object_url,
+           data: post_data,
+           success: function(data){
+               if (data && data.successful_ids) {
+                   $('#cosinnus_delete_element_modal').modal('hide');
+                   $.each(data.successful_ids, function(key, element_id) {
+                   	$('#cosinnus_list_element_' + element_id).fadeOut(800, function() {
+                   		$(this).remove();
+                   	});
+                   });
+                   // hide all checked elements
+                   $('.item_checkbox_mark_all_false').click();
+               } else if (data == 'ok_folder') {
+                   console.log('NYI');
+               }
+           },
+           error: function(data){
+               $.cosinnus.display_report_error('#cosinnus_delete_element_modal');
+           }
+      });
+  },
 };

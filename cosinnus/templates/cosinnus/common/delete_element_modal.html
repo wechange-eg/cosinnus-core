@@ -1,0 +1,67 @@
+{% load i18n cosinnus_tags %}
+
+
+<!-- Modal -->
+<div class="modal fade" id="cosinnus_delete_element_modal" tabindex="1" role="dialog" aria-labelledby="cosinnus_delete_element_modal_Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <i class="fa fa-times"></i>
+                </button>
+                <h4 class="modal-title" id="cosinnus_delete_element_modal_Label">
+                    <i class="fa fa-warning"></i>
+                    {% trans "Delete elements" %} <span id="cosinnus_delete_element_title"></span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                {% trans "Are you sure you want to delete all selected files?" %}
+                
+                <input type="hidden" id="cosinnus_delete_element_obj_ids" value="" >
+            </div>
+            <div class="modal-footer">
+                <div id="move_element_modal_error" style="display:none;" class="regular-space">
+                    <ul  class="errorlist" ><li>{% trans "There was an error while trying to submit your report. Please try again in a moment." %}</li></ul>
+                </div>
+            
+                <button id="cosinnus_delete_element_submit_btn" type="button" class="btn btn-emphasized _elem-action-hidden _elem-success-hidden _elem-start-shown">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-check"></i>
+                            </a>
+                            <div class="media-body">
+                                {% trans "Delete" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+                <button type="button" class="btn btn-emphasized _elem-action-hidden _elem-success-hidden _elem-start-shown" data-dismiss="modal">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-times"></i>
+                            </a>
+                            <div class="media-body">
+                                {% trans "Cancel" %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+                <button type="button" disabled="true" class="btn btn-emphasized _elem-action-shown _elem-success-hidden">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href="#">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </a>
+                            <div class="media-body">
+                                {% trans "Deleting..." %}
+                            </div>
+                        </li>
+                    </ul>
+                </button>
+                
+            </div>
+        </div>
+    </div>
+</div><!-- modal -->
