@@ -594,7 +594,7 @@
             // Parents of checkboxes like <i class="fa fa-square-o"></i> are always clickable.
             // If they contain a <input type="hidden" /> too, this will contain the value.
 
-            $('body .fa-square-o, body .fa-check-square-o').parent().click(function() {
+            $('body .fa-square-o, body .fa-check-square-o').parent().unbind("click").click(function() {
                 if ($(this).attr('disabled')) {
                     return;
                 }
@@ -932,7 +932,7 @@
             });
             
             // one of the "check all" or "uncheck all" buttons was clicked
-            $('.item_checkbox_mark_all').click(function(e){
+            $('.item_checkbox_mark_all').unbind("click").click(function(e){
                 var $button = $(this);
                 $('.item_checkbox_element i.fa-square-o, .item_checkbox_element i.fa-check-square-o').each(function(){
                     if ($button.hasClass('item_checkbox_mark_all_true')) {
@@ -1141,6 +1141,8 @@
                             $.each(data.result.data, function(index, object_html) {
                                 // append rendered object to object list
                                 $(object_html).hide().insertAfter('#object_list_anchor').fadeIn(800);
+                                $.cosinnus.checkBox();
+                                $.cosinnus.itemCheckboxList();
                             });
                         }
                         
