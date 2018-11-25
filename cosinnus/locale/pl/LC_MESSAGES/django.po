@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-11 17:54+0200\n"
+"POT-Creation-Date: 2018-11-25 15:01+0100\n"
 "PO-Revision-Date: 2018-08-30 04:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1279,12 +1279,6 @@ msgstr "Przeglądarki wspierające wysłanie folderu to obecnie:"
 msgid "File and Folder Upload"
 msgstr "Wysłanie Pliku i Folderu"
 
-msgid "Group overview"
-msgstr "Przegląd grupy"
-
-msgid "Project overview"
-msgstr "Przegląd projektu"
-
 msgid "Services"
 msgstr "Usługi"
 
@@ -1312,6 +1306,33 @@ msgstr "Wystąpił wewnętrzny problem podczas przetwarzania Twojego żądania. 
 #, python-format
 msgid "+%(num_pictures)s more..."
 msgstr "+%(num_pictures)s więcej..."
+
+msgid "Mark All"
+msgstr ""
+
+msgid "Deselect All"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete selected entries"
+msgid "Delete elements"
+msgstr "Usuń zaznaczone wpisy"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete all selected elements?"
+msgstr "Czy na pewno chcesz usunąć ten zespół?"
+
+msgid "There was an error while trying to submit your report. Please try again in a moment."
+msgstr "Wystąpił błąd podczas próby wysłania Twojego zgłoszenia. Spróbuj ponownie za chwilę."
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+#, fuzzy
+#| msgid "Saving..."
+msgid "Deleting..."
+msgstr "Zapisywanie..."
 
 msgid "Error embedding a Flickr gallery"
 msgstr "Błąd podczas zamieszczania galerii Flickr"
@@ -1461,9 +1482,6 @@ msgstr "Ułóż"
 msgid "Save"
 msgstr "Zapisz"
 
-msgid "Cancel"
-msgstr "Anuluj"
-
 msgid "Saving..."
 msgstr "Zapisywanie..."
 
@@ -1578,9 +1596,6 @@ msgstr "(wymagane)"
 
 msgid "Thank you! Your report has been received and we will review the items in question as soon as possible."
 msgstr "Dziękujemy! Twoje zgłoszenie zostało przyjęte, postaramy się sprawdzić zgłoszony element tak szybko, jak to możliwe."
-
-msgid "There was an error while trying to submit your report. Please try again in a moment."
-msgstr "Wystąpił błąd podczas próby wysłania Twojego zgłoszenia. Spróbuj ponownie za chwilę."
 
 msgid "Send"
 msgstr "Wyślij"
@@ -3131,6 +3146,11 @@ msgstr "Captcha"
 msgid "We need to make sure you are a real person (sorry!)"
 msgstr "Musimy upewnić się, że jesteś prawdziwym człowiekiem (niestety, musimy!)"
 
+#, fuzzy
+#| msgid "Show more options..."
+msgid "Search options..."
+msgstr "Pokaż więcej opcji..."
+
 msgid "Search in Apps"
 msgstr "Wyszukiwanie w Aplikacjach"
 
@@ -4207,6 +4227,12 @@ msgstr "Obecnie nie jesteś członkiem %s! Jeśli chcesz nim zostać, możesz wy
 
 msgid "Your changes have been saved."
 msgstr "Twoje zmiany zostały zapisane."
+
+#~ msgid "Group overview"
+#~ msgstr "Przegląd grupy"
+
+#~ msgid "Project overview"
+#~ msgstr "Przegląd projektu"
 
 #~ msgid "Deutsch"
 #~ msgstr "niemiecki"

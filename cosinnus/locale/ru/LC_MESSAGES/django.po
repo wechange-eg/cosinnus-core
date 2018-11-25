@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-07 17:49+0100\n"
+"POT-Creation-Date: 2018-11-25 15:01+0100\n"
 "PO-Revision-Date: 2018-11-20 17:02+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1298,6 +1298,33 @@ msgstr "Похоже, при обработке Вашего запроса пр
 msgid "+%(num_pictures)s more..."
 msgstr "+%(num_pictures)s больше…"
 
+msgid "Mark All"
+msgstr ""
+
+msgid "Deselect All"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete selected entries"
+msgid "Delete elements"
+msgstr "Удалить выделенные объекты"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete all selected elements?"
+msgstr "Вы уверены, что хотите удалить этот проект?"
+
+msgid "There was an error while trying to submit your report. Please try again in a moment."
+msgstr "Произошла ошибка при отправке жалобы. Пожалуйста, попробуйте снова через несколько секунд."
+
+msgid "Cancel"
+msgstr "Отмена"
+
+#, fuzzy
+#| msgid "Saving..."
+msgid "Deleting..."
+msgstr "Сохранение…"
+
 msgid "Error embedding a Flickr gallery"
 msgstr "Ошибка встраивания Flickr Gallery/Слайдшоу галереи"
 
@@ -1446,9 +1473,6 @@ msgstr "Перегруппировать"
 msgid "Save"
 msgstr "Сохранить"
 
-msgid "Cancel"
-msgstr "Отмена"
-
 msgid "Saving..."
 msgstr "Сохранение…"
 
@@ -1564,9 +1588,6 @@ msgstr "(обязательно для заполнения)"
 
 msgid "Thank you! Your report has been received and we will review the items in question as soon as possible."
 msgstr "Спасибо! Мы получили Вашу жалобу, и рассмотрим её как можно скорее."
-
-msgid "There was an error while trying to submit your report. Please try again in a moment."
-msgstr "Произошла ошибка при отправке жалобы. Пожалуйста, попробуйте снова через несколько секунд."
 
 msgid "Send"
 msgstr "Отправить"

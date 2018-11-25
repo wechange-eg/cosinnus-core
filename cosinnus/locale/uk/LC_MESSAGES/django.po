@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-07 17:49+0100\n"
+"POT-Creation-Date: 2018-11-25 15:01+0100\n"
 "PO-Revision-Date: 2018-11-20 17:02+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1292,6 +1292,33 @@ msgstr "Виглядає на те, що під час виконання ваш
 msgid "+%(num_pictures)s more..."
 msgstr "+%(num_pictures)s більше…"
 
+msgid "Mark All"
+msgstr ""
+
+msgid "Deselect All"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete selected entries"
+msgid "Delete elements"
+msgstr "Видалити вибрані об'єкти"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete all selected elements?"
+msgstr "Ви дійсно бажаєте видалити цей проект?"
+
+msgid "There was an error while trying to submit your report. Please try again in a moment."
+msgstr "При надсиланні повідомлення виникла помилка. Будь ласка, спробуйте знову за кілька хвилин."
+
+msgid "Cancel"
+msgstr "Скасувати"
+
+#, fuzzy
+#| msgid "Saving..."
+msgid "Deleting..."
+msgstr "Збереження..."
+
 msgid "Error embedding a Flickr gallery"
 msgstr "У Flickr  знайдена помилка"
 
@@ -1440,9 +1467,6 @@ msgstr "Переоформити"
 msgid "Save"
 msgstr "Зберегти"
 
-msgid "Cancel"
-msgstr "Скасувати"
-
 msgid "Saving..."
 msgstr "Збереження..."
 
@@ -1557,9 +1581,6 @@ msgstr "(обов'язково)"
 
 msgid "Thank you! Your report has been received and we will review the items in question as soon as possible."
 msgstr "Ми отримали ваше повідомлення та максимально швидко перевіримо вказаний вами зміст."
-
-msgid "There was an error while trying to submit your report. Please try again in a moment."
-msgstr "При надсиланні повідомлення виникла помилка. Будь ласка, спробуйте знову за кілька хвилин."
 
 msgid "Send"
 msgstr "Надіслати"

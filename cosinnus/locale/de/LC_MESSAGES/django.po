@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-11 17:54+0200\n"
-"PO-Revision-Date: 2018-11-03 19:03+0100\n"
+"POT-Creation-Date: 2018-11-25 15:01+0100\n"
+"PO-Revision-Date: 2018-11-25 15:04+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -1266,12 +1266,6 @@ msgstr "Aktuell unterstützen folgende Browser den Ordner-Upload:"
 msgid "File and Folder Upload"
 msgstr "Datei- und Ordner hochladen"
 
-msgid "Group overview"
-msgstr "Gruppenübersicht"
-
-msgid "Project overview"
-msgstr "Projektübersicht"
-
 msgid "Services"
 msgstr "Dienste"
 
@@ -1299,6 +1293,27 @@ msgstr "Sieht so als aus ob ein internes Problem aufgetreten ist. Der Fehlerwurd
 #, python-format
 msgid "+%(num_pictures)s more..."
 msgstr "+%(num_pictures)s weitere..."
+
+msgid "Mark All"
+msgstr "Alle auswählen"
+
+msgid "Deselect All"
+msgstr "Alle abwählen"
+
+msgid "Delete elements"
+msgstr "Elemente löschen"
+
+msgid "Are you sure you want to delete all selected elements?"
+msgstr "Bist du sicher, dass du alle ausgewählten Elemente löschen willst?"
+
+msgid "There was an error while trying to submit your report. Please try again in a moment."
+msgstr "Es gab einen Fehler bei der Übertragung deiner Meldung. Bitte versuch es in einem Moment noch einmal."
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Deleting..."
+msgstr "Lösche..."
 
 msgid "Error embedding a Flickr gallery"
 msgstr "Fehler beim Einbetten einer Flickr Gallerie"
@@ -1462,9 +1477,6 @@ msgstr "Umsortieren"
 msgid "Save"
 msgstr "Speichern"
 
-msgid "Cancel"
-msgstr "Abbrechen"
-
 msgid "Saving..."
 msgstr "Speichere..."
 
@@ -1579,9 +1591,6 @@ msgstr "(erforderlich)"
 
 msgid "Thank you! Your report has been received and we will review the items in question as soon as possible."
 msgstr "Vielen Dank! Deine Meldung wurde aufgenommen und wir werden die gemeldeten Inhalte so schnell wie möglich überprüfen."
-
-msgid "There was an error while trying to submit your report. Please try again in a moment."
-msgstr "Es gab einen Fehler bei der Übertragung deiner Meldung. Bitte versuch es in einem Moment noch einmal."
 
 msgid "Send"
 msgstr "Abschicken"
@@ -3136,6 +3145,9 @@ msgstr "Captcha"
 msgid "We need to make sure you are a real person (sorry!)"
 msgstr "Wir müssen sicherstellen dass du eine echte Person bist (tut uns leid!)"
 
+msgid "Search options..."
+msgstr "Suchoptionen..."
+
 msgid "Search in Apps"
 msgstr "Suche in Anwendungen"
 
@@ -4190,6 +4202,12 @@ msgstr "Du bist aktuell nicht Mitglied in %s! Wenn du möchtest kannst du unten 
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "Group overview"
+#~ msgstr "Gruppenübersicht"
+
+#~ msgid "Project overview"
+#~ msgstr "Projektübersicht"
 
 #~ msgid "Deutsch"
 #~ msgstr "Deutsch"
