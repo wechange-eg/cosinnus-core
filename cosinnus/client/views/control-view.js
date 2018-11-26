@@ -488,7 +488,7 @@ module.exports = ContentControlView.extend({
     /** Will like/unlike a given result, depending on the current liked status */
     triggerResultLikeOrUnlike: function (result) {
     	var self = this;
-    	var url = '/like/'
+    	var url = '/likefollow/'
     	var ct = null;
     	if (result.get('type') == 'ideas') {
     		ct = 'cosinnus.CosinnusIdea';

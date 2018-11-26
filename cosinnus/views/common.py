@@ -106,8 +106,42 @@ def cosinnus_logout(request, **kwargs):
         response.delete_cookie('wp_user_logged_in')
     return response
 
+
+UNSPECIFIED = object()
+
+def apply_likefollow_object(obj, user, like=UNSPECIFIED, follow=UNSPECIFIED, delete_if_unliked=False):
+    """
+        Toggles the like or follow, or both states on a LikeObject.
+        If no LikeObject existed, and either like or follow is True, create a new object.
+        If a LikeObject existed, and either like or follow is True, change the existing object.
+        If a LikeObject existed, and either like is False, and `delete_if_unliked` is True, 
+            delete the existing object.
+        If a LikeObject existed, and both like and follow are False, delete the existing object. 
+        
+        @param delete_if_unliked: apply the "no follow without like" rule to the LikeObject, deleting
+            it instantly if it is not liked, no matter the follow state.
+    """
+    pass
+
+def apply_like_object(obj, user, like):
+    # create, change or delete the LikeObj, but take care that the FOLLOW is false before deleting
+    return apply_likefollow_object(obj, user, like=like, follow=UNSPECIFIED)
+
+def apply_follow_object(obj, user, follow):
+    # create, change or delete the LikeObj, but take care that the LIKE is false before deleting
+    return apply_likefollow_object(obj, user, like=UNSPECIFIED, follow=follow)
+
 @csrf_protect
 def do_like(request, **kwargs):
+    pass
+
+@csrf_protect
+def do_follow(request, **kwargs):
+    pass
+    
+
+@csrf_protect
+def do_likefollow(request, **kwargs):
     """ Expected POST arguments:
         - ct: django content-type string (expects e.g. 'cosinnus_note.Note')
         - id: Id of the object. (optional if slug is given)
@@ -119,6 +153,8 @@ def do_like(request, **kwargs):
         Target object needs to be visible (permissions) to the logged in user.
         If `follow`=1 param is given without `like`, a liked=False,followed=True object will be created.
         If the LikeObject results in being liked=False,followed=False, it will be deleted immediately.
+        Special for likefollow combined:
+            If the LikeObject results in being liked=False, no matter the follow state, it will be deleted immediately
     """
     
     if not request.is_ajax() and not request.method=='POST':
