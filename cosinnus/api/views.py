@@ -39,7 +39,10 @@ class CosinnusGroupSerializerViewSet(viewsets.ReadOnlyModelViewSet):
             key = FILTER_MAP.get(key, key)
             value = VALUE_MAP.get(value, value)
             if value is not None:
-                queryset = queryset.filter(**{key: value})
+                if key.startswith('exclude_'):
+                    queryset = queryset.exclude(**{key[8:]: value})
+                else:
+                    queryset = queryset.filter(**{key: value})
         return queryset
 
 
