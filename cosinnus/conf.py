@@ -234,6 +234,9 @@ class CosinnusConf(AppConf):
     # how long should user notification settings be retained in cache
     GLOBAL_USER_NOTIFICATION_SETTING_CACHE_TIMEOUT = GROUP_CACHE_TIMEOUT
     
+    # how long like and follow counts should be retained in cache
+    LIKEFOLLOW_COUNT_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
+    
     # the url pattern for group overview URLs
     GROUP_PLURAL_URL_PATH = 'projects'
     

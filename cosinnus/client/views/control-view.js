@@ -551,7 +551,7 @@ module.exports = ContentControlView.extend({
     /** Will follow/unfollow a given result, depending on the current followed status */
     triggerResultFollowOrUnfollow: function (result) {
     	var self = this;
-    	var url = '/like/'
+    	var url = '/likefollow/'
     	var ct = null;
     	if (result.get('type') == 'ideas') {
     		ct = 'cosinnus.CosinnusIdea';

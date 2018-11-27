@@ -33,6 +33,8 @@ from django.template.loader import render_to_string
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.utils import translation
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
+from django.core.cache import cache
+from django.contrib.contenttypes.fields import GenericRelation
 
 
 
@@ -508,6 +510,89 @@ class LikeObject(models.Model):
     def __str__(self):
         return '<like: %s::%s::%s>' % (self.content_type, self.object_id, self.user.username)
 
+
+class LikableObjectMixin(models.Model):
+    """ Mixin for a model class that can be liked and/or followed """
+    
+    likes = GenericRelation(LikeObject)
+    
+    # determines if this model should be deleted if liked==False
+    NO_FOLLOW_WITHOUT_LIKE = True
+    
+    # key storing all user ids that have like an object
+    _LIKED_OBJECT_USER_IDS_CACHE_KEY = 'cosinnus/core/like_user_ids/model/%s/obj_id/%d' # modelclass_name, id -> [user_id, user_id, ...]
+    # key storing all user ids that are following an object
+    _FOLLOWED_OBJECT_USER_IDS_CACHE_KEY = 'cosinnus/core/follow_user_ids/model/%s/obj_id/%d' # modelclass_name, id -> [user_id, user_id, ...]
+    # local caches
+    _liked_obj_ids = None
+    _followed_obj_ids = None
+    
+    class Meta(object):
+        abstract = True
+    
+    def get_liked_user_ids(self):
+        """ Returns a list of int user ids for users that have liked this object. """
+        if self._liked_obj_ids is not None:
+            return self._liked_obj_ids
+        user_ids = cache.get(self._LIKED_OBJECT_USER_IDS_CACHE_KEY % (self._meta.model.__name__, self.id))
+        if user_ids is None:
+            user_ids = self.likes.filter(liked=True).values_list('user__id', flat=True)
+            cache.set(self._LIKED_OBJECT_USER_IDS_CACHE_KEY % (self._meta.model.__name__, self.id), user_ids, settings.COSINNUS_LIKEFOLLOW_COUNT_CACHE_TIMEOUT)
+            self._liked_obj_ids = user_ids
+        return user_ids
+    
+    def get_followed_user_ids(self):
+        """ Returns a list of int user ids for users that are following this object. """
+        if self._followed_obj_ids is not None:
+            return self._followed_obj_ids
+        user_ids = cache.get(self._FOLLOWED_OBJECT_USER_IDS_CACHE_KEY % (self._meta.model.__name__, self.id))
+        if user_ids is None:
+            user_ids = self.likes.filter(followed=True).values_list('user__id', flat=True)
+            cache.set(self._FOLLOWED_OBJECT_USER_IDS_CACHE_KEY % (self._meta.model.__name__, self.id), user_ids, settings.COSINNUS_LIKEFOLLOW_COUNT_CACHE_TIMEOUT)
+            self._followed_obj_ids = user_ids
+        return user_ids
+    
+    def clear_likes_cache(self):
+        """ Clears the remote and local object cache for this object's like and follow counts """
+        keys = [
+            self._LIKED_OBJECT_USER_IDS_CACHE_KEY % (self._meta.model.__name__, self.id),
+            self._FOLLOWED_OBJECT_USER_IDS_CACHE_KEY % (self._meta.model.__name__, self.id),
+        ]
+        cache.delete_many(keys)
+        self._liked_obj_ids = None
+        self._followed_obj_ids = None
+    
+    def save(self, *args, **kwargs):
+        super(LikableObjectMixin, self).save(*args, **kwargs)
+        self.clear_likes_cache()
+        
+    def get_content_type(self):
+        """ Returns the string concatenation of this object's content type 
+            (useful for identification and linking the likeable object to JS methods) """
+        ct = ContentType.objects.get_for_model(self)
+        return '%s.%s' % (ct.app_label, ct.model)
+    
+    @property
+    def like_count(self):
+        """ Returns the like count for this object """
+        return len(self.get_liked_user_ids())
+    
+    @property
+    def follow_count(self):
+        """ Returns the follower count for this object """
+        return len(self.get_followed_user_ids())
+    
+    @property
+    def is_user_liking(self, user):
+        return user.email
+        """ Returns True is the user likes this object, else False. """
+        return user.id in self.get_liked_user_ids()
+    
+    @property
+    def is_user_following(self, user):
+        """ Returns True is the user follows this object, else False. """
+        return user.id in self.get_followed_user_ids()
+    
 
 def ensure_container(sender, **kwargs):
     """ Creates a root container instance for all hierarchical objects in a newly created group """

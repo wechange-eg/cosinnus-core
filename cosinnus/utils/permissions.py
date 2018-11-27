@@ -168,6 +168,12 @@ def check_group_create_objects_access(group, user):
     is_admin = check_ug_admin(user, group)
     return is_member or is_admin or check_user_superuser(user)
 
+def check_object_likefollow_access(obj, user):
+    """ Checks permissions of a user to like/follow an object.
+        This permission may behave differently depending on the object model.
+    """
+    return user.is_authenticated() and check_object_read_access(obj, user)
+
 def check_user_can_see_user(user, target_user):
     """ Checks if ``user`` is in any relation with ``target_user`` so that he can see them and 
         their profile, and can send him messages, etc. 

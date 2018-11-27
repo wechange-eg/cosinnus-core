@@ -609,3 +609,32 @@ a.light-link:hover i { display: inherit; }
     display: inline-block;
     color: @app-neutral-color;
 }
+
+.like-button {
+    cursor: auto;
+    &:hover {
+        text-decoration: none;
+    }
+    
+    &.action-do-like {
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    
+    .show-liked {
+        display: none;
+    }
+    &.liked {
+        .show-unliked {
+            display: none;
+        }
+        .show-liked {
+            display: inherit;
+            i.fa {
+                color: #d00800;
+            }
+        }
+    }
+}

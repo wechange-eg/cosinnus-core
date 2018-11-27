@@ -25,7 +25,8 @@ from cosinnus.views.mixins.group import RequireCreateObjectsInMixin
 from django.views.generic.base import View
 from django.core.exceptions import ImproperlyConfigured
 from django.shortcuts import get_object_or_404
-from cosinnus.utils.permissions import check_object_write_access
+from cosinnus.utils.permissions import check_object_write_access,\
+    check_object_likefollow_access
 
 class IndexView(RedirectView):
     url = reverse_lazy('cosinnus:group-list')
@@ -109,19 +110,58 @@ def cosinnus_logout(request, **kwargs):
 
 UNSPECIFIED = object()
 
-def apply_likefollow_object(obj, user, like=UNSPECIFIED, follow=UNSPECIFIED, delete_if_unliked=False):
+def apply_likefollow_object(obj, user, like=UNSPECIFIED, follow=UNSPECIFIED):
     """
         Toggles the like or follow, or both states on a LikeObject.
         If no LikeObject existed, and either like or follow is True, create a new object.
         If a LikeObject existed, and either like or follow is True, change the existing object.
-        If a LikeObject existed, and either like is False, and `delete_if_unliked` is True, 
-            delete the existing object.
+        If a LikeObject existed, and either like is False, and the model has the `NO_FOLLOW_WITHOUT_LIKE`
+            property, delete the existing object.
         If a LikeObject existed, and both like and follow are False, delete the existing object. 
-        
-        @param delete_if_unliked: apply the "no follow without like" rule to the LikeObject, deleting
-            it instantly if it is not liked, no matter the follow state.
     """
-    pass
+    # todo: get model_cls from meta
+    # or obj.__class__?
+    print('  >> INNER GOT', obj, user, like, follow)
+    model_cls = obj._meta.model
+    delete_if_unlike = getattr(model_cls, 'NO_FOLLOW_WITHOUT_LIKE', False)
+    print('>> DEL IF UNLIKED', delete_if_unlike)
+    
+    
+    content_type = ContentType.objects.get_for_model(model_cls)
+    liked_obj = get_object_or_None(LikeObject, content_type=content_type, object_id=obj.id, user=user)
+    if (not like or like is UNSPECIFIED) and (not follow or follow is UNSPECIFIED) and liked_obj is None:
+        # only unlike or unfollow or both, and no object: nothing to do here
+        pass
+    elif not (like is UNSPECIFIED and follow is UNSPECIFIED):
+        if liked_obj is None:
+            # initialize an object but don't save it yet
+            liked_obj = LikeObject(content_type=content_type, object_id=obj.id, user=user, liked=False)
+        # apply properties
+        if not like is UNSPECIFIED:
+            liked_obj.liked = like
+        if not follow is UNSPECIFIED:
+            liked_obj.followed = follow
+        print('> applied:', liked_obj.liked, liked_obj.followed)
+        # check for deletion state
+        if not liked_obj.liked and (not liked_obj.followed or delete_if_unlike):
+            liked_obj.delete()
+            liked_obj = None
+            print('> deleted')
+        else:
+            liked_obj.save()
+            print('> saved')
+        # delete the objects like/folow cache
+        # TODO
+        print('TODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO: implement cache delete')
+        
+        # update the liked object's index
+        if hasattr(obj, 'update_index'):
+            obj.update_index()
+    
+    was_liked = liked_obj and liked_obj.liked or False
+    was_followed = liked_obj and liked_obj.followed or False
+    return was_liked, was_followed
+
 
 def apply_like_object(obj, user, like):
     # create, change or delete the LikeObj, but take care that the FOLLOW is false before deleting
@@ -131,14 +171,6 @@ def apply_follow_object(obj, user, follow):
     # create, change or delete the LikeObj, but take care that the LIKE is false before deleting
     return apply_likefollow_object(obj, user, like=UNSPECIFIED, follow=follow)
 
-@csrf_protect
-def do_like(request, **kwargs):
-    pass
-
-@csrf_protect
-def do_follow(request, **kwargs):
-    pass
-    
 
 @csrf_protect
 def do_likefollow(request, **kwargs):
@@ -161,19 +193,25 @@ def do_likefollow(request, **kwargs):
         return HttpResponseNotAllowed('POST', content='This endpoint is for POST only.')
     if not request.user.is_authenticated():
         return HttpResponseForbidden('Not authenticated.')
+    if not check_object_likefollow_access()
     
+    PARAM_VALUE_MAP = {
+        '1': True,
+        '0': False,
+    }
     ct = request.POST.get('ct', None)  # expects 'cosinnus_note.Note'
     obj_id = request.POST.get('id', None)
     slug = request.POST.get('slug', None)
-    like = request.POST.get('like', None)
-    follow = request.POST.get('follow', None)
+    like = PARAM_VALUE_MAP.get(request.POST.get('like', None), UNSPECIFIED)
+    follow = PARAM_VALUE_MAP.get(request.POST.get('follow', None), UNSPECIFIED)
     
-    if ct is None or (id is None and slug is None) or (like is None and follow is None):
+    if ct is None or (id is None and slug is None) or (like is UNSPECIFIED and follow is UNSPECIFIED):
         return HttpResponseBadRequest('Incomplete data submitted.')
+    
+    print('>> GOT:', ct, obj_id, slug, like, follow)
     
     app_label, model = ct.split('.')
     model_cls = get_model(app_label, model)
-    content_type = ContentType.objects.get_for_model(model_cls)
     
     obj = None
     if obj_id is None and slug:
@@ -183,32 +221,12 @@ def do_likefollow(request, **kwargs):
     if obj is None:
         return HttpResponseNotFound('Target object not found on server.')
     
-    liked_obj = get_object_or_None(LikeObject, content_type=content_type, object_id=obj.id, user=request.user)
-    # unlike and unfollow
-    if (like == '0' or like is None) and (follow == '0' or follow is None):
-        if liked_obj is None:
-            # nothing to do here
-            pass
-        else:
-            liked_obj.delete()
-            liked_obj = None
-    else:
-        if liked_obj is None:
-            # initialize an object but don't save it yet
-            liked_obj = LikeObject(content_type=content_type, object_id=obj.id, user=request.user, liked=False)
-            
-        if not like is None:
-            liked_obj.liked = like == '1'
-        if not follow is None:
-            liked_obj.followed =  follow == '1'
-            
-        liked_obj.save()
-        
-        # update the liked object's index
-        if hasattr(obj, 'update_index'):
-            obj.update_index()
+    if not check_object_likefollow_access(obj, request.user):
+        return HttpResponseForbidden('Your access to this object is forbidden.')
     
-    return JsonResponse({'liked': liked_obj and liked_obj.liked or False, 'followed': liked_obj and liked_obj.followed or False})
+    was_liked, was_followed = apply_likefollow_object(obj, request.user, like=like, follow=follow)
+    
+    return JsonResponse({'liked': was_liked, 'followed': was_followed})
     
 
 class DeleteElementView(RequireCreateObjectsInMixin, View):

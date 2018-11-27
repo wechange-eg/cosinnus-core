@@ -142,4 +142,24 @@ $.cosinnus.Feedback = {
            }
       });
   },
+  
+  cosinnus_register_likefollow: function() {
+	  $('body').on('click', '.like-button.action-do-like', function(event){
+		  var $this = $(this);
+		  var ct = $this.data('ct');
+		  var slug = $this.data('slug');
+		  var liked = $this.hasClass('liked');
+		  liked = !liked;
+		  
+		  alert('TODO: fire like request and return this only after the request came back! then add the modal confirm box! then add the follow button!')
+		  
+		  $('.like-button[data-ct="'+ct+'"][data-slug="'+slug+'"]').toggleClass('liked', liked);
+	  });
+	  
+  },
+  
 };
+
+$(function() {
+	$.cosinnus.Feedback.cosinnus_register_likefollow();
+});
