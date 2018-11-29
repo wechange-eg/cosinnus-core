@@ -172,7 +172,12 @@ def check_object_likefollow_access(obj, user):
     """ Checks permissions of a user to like/follow an object.
         This permission may behave differently depending on the object model.
     """
-    return getattr(obj, 'IS_LIKEABLE_OBJECT', False) and user.is_authenticated() and check_object_read_access(obj, user)
+    # liking this object must be enabled and user logged in
+    if not (getattr(obj, 'IS_LIKEABLE_OBJECT', False) or user.is_authenticated()):
+        return False
+    # groups can always be followed, and all other visible objects
+    is_group = type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model())
+    return is_group or check_object_read_access(obj, user)
 
 def check_user_can_see_user(user, target_user):
     """ Checks if ``user`` is in any relation with ``target_user`` so that he can see them and 

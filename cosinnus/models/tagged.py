@@ -534,7 +534,7 @@ class LikableObjectMixin(models.Model):
     class Meta(object):
         abstract = True
         
-    def _get_likable_model_name(self):
+    def _get_likeable_model_name(self):
         return self._meta.model.__name__
     
     def get_liked_user_ids(self):

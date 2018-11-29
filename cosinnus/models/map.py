@@ -256,6 +256,7 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
     fields.update({
         'events': [],
         'admins': [],
+        'followed': False,
     })
          
     background_image_field = 'wallpaper'
@@ -277,7 +278,7 @@ class DetailedBaseGroupMapResult(DetailedMapResult):
             'flickr_url': obj.flickr_url,
             'website_url': obj.website,
             'contact': linebreaksbr(escape(obj.contact_info)),
-            
+            'followed': obj.is_user_following(user),
         })
         """ TODO: check all read permissions on related objects! """
         
@@ -379,7 +380,8 @@ class DetailedEventResult(DetailedMapResult):
     fields = copy(DetailedMapResult.fields)
     fields.update({
         'participants': [],
-        'participant_count': 0
+        'participant_count': 0,
+        'followed': False,
     })
     
     def __init__(self, haystack_result, obj, user, *args, **kwargs):
@@ -396,6 +398,7 @@ class DetailedEventResult(DetailedMapResult):
         kwargs.update({
             'participants': [HaystackUserMapCard(result) for result in sqs],
             'participant_count': haystack_result.participant_count,
+            'followed': obj.is_user_following(user),
         })
         return super(DetailedEventResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 

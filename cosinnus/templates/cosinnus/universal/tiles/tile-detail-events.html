@@ -27,6 +27,35 @@
 
 {% block action_buttons %}
     <div class="tile-section tile-section-button-list">
+	    <a class="rounded-button button-action 
+	            {% if cosinnus_active_user %}button-like" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
+	        <span class="rounded-button-inner">
+	            {% if liked %}
+	                <i clasS="fa fa-heart"></i>
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Liked" %}
+	            {% else %}
+	                <i clasS="fa fa-heart-o"></i>
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Like" %}
+	            {% endif %}
+	        </span>
+	    </a>
+	    <a class="rounded-button button-action 
+	            {% if cosinnus_active_user %}button-follow" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
+	        <span class="rounded-button-inner">
+	            {% if followed %}
+	                <i clasS="fa fa-bell"></i>
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Following" %}
+	            {% else %}
+	                <i clasS="fa fa-bell-o"></i>
+	                {# Translators: __INCLUDE_JS_PO__ #}
+	                {% trans "Follow" %}
+	            {% endif %}
+	        </span>
+	    </a>
+
         <a class="rounded-button button-action" href="{{ url }}" target="_blank">
             <span class="rounded-button-inner">
                 <i clasS="fa fa-external-link"></i>
@@ -36,6 +65,25 @@
         </a>
         
         {{ super() }}
+    </div>
+    
+    <div class="no-input">
+        <div class="now-following-message message-success extra-space-top" style="display: none;">
+            <i class="fa fa-bell"></i>
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "You will receive a notification when this event's description, time, place, or date changes and when somebody comments on it." %}
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "If you do not want notifications, click the unfollow button!" %}
+        </div>
+         
+        <div class="like-button-error message-error extra-space-top" style="display: none;">
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Could not save your like setting because of an error." %}
+        </div>
+        <div class="follow-button-error message-error extra-space-top" style="display: none;">
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Could not save your follow setting because of an error." %}
+        </div>
     </div>
 {% endblock %}
         

@@ -492,6 +492,8 @@ module.exports = ContentControlView.extend({
     	var ct = null;
     	if (result.get('type') == 'ideas') {
     		ct = 'cosinnus.CosinnusIdea';
+    	} else if (result.get('type') == 'events') {
+    		ct = 'cosinnus_event.Event';
     	} else {
     		util.log('Liking cancelled - invalid result type for liking: ' + result.get('type'))
     	}
@@ -525,7 +527,7 @@ module.exports = ContentControlView.extend({
                 	result.set('liked', data.liked);
                 	result.set('followed', data.followed);
                     // graphics update happens via subscriptions on change:liked
-                	if (data.liked && data.followed) {
+                	if (data.followed) {
                 		self.App.$el.find('.now-following-message').show();
                 	}
                 } 
@@ -555,8 +557,14 @@ module.exports = ContentControlView.extend({
     	var ct = null;
     	if (result.get('type') == 'ideas') {
     		ct = 'cosinnus.CosinnusIdea';
+    	} else if (result.get('type') == 'events') {
+    		ct = 'cosinnus_event.Event';
+    	} else if (result.get('type') == 'projects') {
+    		ct = 'cosinnus.CosinnusProject';
+    	} else if (result.get('type') == 'groups') {
+    		ct = 'cosinnus.CosinnusSociety';
     	} else {
-    		util.log('Following cancelled - invalid result type for following: ' + result.get('type'))
+    		util.log('Following cancelled - invalid result type for liking: ' + result.get('type'))
     	}
     	var to_follow = result.get('followed') ? '0' : 1;
     	var followHadErrors = false;
@@ -580,6 +588,9 @@ module.exports = ContentControlView.extend({
                 if ('followed' in data) {
                     result.set('followed', data.followed);
                     // graphics update happens via subscriptions on change:followed
+                	if (data.followed) {
+                		self.App.$el.find('.now-following-message').show();
+                	}
                 } 
             },
             error: function (xhr, textStatus) {
