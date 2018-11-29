@@ -209,6 +209,7 @@ class CosinnusIdea(IndexingUtilsMixin, LikableObjectMixin, models.Model):
     cosinnus_always_visible_by_users_moderator_flag = True
     
     NO_FOLLOW_WITHOUT_LIKE = True
+    AUTO_FOLLOW_ON_LIKE = True
     
     objects = IdeaManager()
     

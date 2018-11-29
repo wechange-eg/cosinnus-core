@@ -1,42 +1,61 @@
 {% load i18n cosinnus_tags %}
 
+{% comment %}  
+    This enables "directly" liking or following an object by passing like=1 or follow=1 and ct= and slug= 
+    as URL parameters. This checks if a clickable like/follow button for the given object exists,
+    and if so, shows a popup on page load that asks for confirmation, then fires the like/follow action on OK click.
+    The popup will not show if the object already has been liked/followed by the user.
+{% endcomment %}
+{% if request.GET.like == "1" or request.GET.follow == "1" %}
+    {% if request.GET.ct and request.GET.slug %} 
+        <script type="text/javascript">
+            $(function(){
+                var type = "{% if request.GET.like == "1" %}like{% elif request.GET.follow == "1" %}follow{% endif %}";
+                var button= $('.likefollow-button.'+type+'-button.action-do-likefollow[data-ct="{{ request.GET.ct }}"][data-slug="{{ request.GET.slug }}"]')
+                if(button.length > 0 && !button.hasClass('selected')) {
+                    $('#confirm_likefollow_modal_submit_btn').unbind().click(function(){
+                        button.click();
+                        $('#confirm_likefollow_modal').modal('hide');
+                    });
+                    $('#confirm_likefollow_modal').modal('show');
+                }
+            });
+        </script>
+    {% endif %}
+{% endif %}
 
 <!-- Modal -->
-<div class="modal fade" id="cosinnus_delete_element_modal" tabindex="1" role="dialog" aria-labelledby="cosinnus_delete_element_modal_Label" aria-hidden="true">
+<div class="modal fade" id="confirm_likefollow_modal" tabindex="1" role="dialog" aria-labelledby="confirm_likefollow_modal_Label" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <i class="fa fa-times"></i>
                 </button>
-                <h4 class="modal-title" id="cosinnus_delete_element_modal_Label">
-                    <i class="fa fa-warning"></i>
-                    {% trans "Delete elements" %} <span id="cosinnus_delete_element_title"></span>
+                <h4 class="modal-title" id="confirm_likefollow_modal_Label">
+                    {% if request.GET.like %}
+                        <i class="fa fa-heart apply-color-liked"></i>
+                        {% trans "I want to like this" %}:
+                    {% else %}
+                        <i class="fa fa-bell apply-color-followed"></i>
+                        {% trans "I want to follow this" %}:
+                    {% endif %}
                 </h4>
             </div>
-            <div class="modal-body">
-                {% trans "Are you sure you want to delete all selected elements?" %}
-                
-                <input type="hidden" id="cosinnus_delete_element_obj_ids" value="" >
-            </div>
-            <div class="modal-footer">
-                <div id="move_element_modal_error" style="display:none;" class="regular-space">
-                    <ul  class="errorlist" ><li>{% trans "There was an error while trying to submit your report. Please try again in a moment." %}</li></ul>
-                </div>
-            
-                <button id="cosinnus_delete_element_submit_btn" type="button" class="btn btn-emphasized _elem-action-hidden _elem-success-hidden _elem-start-shown">
+            <div class="modal-footer no-border">
+                <button id="confirm_likefollow_modal_submit_btn" type="button" class="btn btn-emphasized">
                     <ul class="media-list">
                         <li class="media">
                             <a class="pull-left" href="#">
-                                <i class="fa fa-check"></i>
+                                <i class="fa {% if request.GET.like %}fa-heart{% else %}fa-bell{% endif %}"></i>
                             </a>
                             <div class="media-body">
-                                {% trans "Delete" %}
+                                {% trans "Yes" %}
                             </div>
                         </li>
                     </ul>
                 </button>
-                <button type="button" class="btn btn-emphasized _elem-action-hidden _elem-success-hidden _elem-start-shown" data-dismiss="modal">
+                <button type="button" class="btn btn-emphasized" data-dismiss="modal">
                     <ul class="media-list">
                         <li class="media">
                             <a class="pull-left" href="#">
@@ -48,20 +67,9 @@
                         </li>
                     </ul>
                 </button>
-                <button type="button" disabled="true" class="btn btn-emphasized _elem-action-shown _elem-success-hidden">
-                    <ul class="media-list">
-                        <li class="media">
-                            <a class="pull-left" href="#">
-                                <i class="fa fa-spinner fa-spin"></i>
-                            </a>
-                            <div class="media-body">
-                                {% trans "Deleting..." %}
-                            </div>
-                        </li>
-                    </ul>
-                </button>
                 
             </div>
         </div>
     </div>
 </div><!-- modal -->
+

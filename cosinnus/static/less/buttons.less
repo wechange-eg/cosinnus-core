@@ -610,31 +610,35 @@ a.light-link:hover i { display: inherit; }
     color: @app-neutral-color;
 }
 
-.like-button {
+.likefollow-button {
     cursor: auto;
     &:hover {
         text-decoration: none;
     }
     
-    &.action-do-like {
+    &.action-do-likefollow {
         cursor: pointer;
         &:hover {
             text-decoration: underline;
         }
     }
     
-    .show-liked {
+    .show-selected {
         display: none;
     }
-    &.liked {
-        .show-unliked {
+    &.selected {
+        .show-unselected {
             display: none;
         }
-        .show-liked {
+        .show-selected {
             display: inherit;
-            i.fa {
-                color: #d00800;
-            }
         }
     }
+}
+
+.apply-color-liked {
+    color: @map-liked-color;
+}
+.apply-color-followed {
+    color: @map-followed-color;
 }

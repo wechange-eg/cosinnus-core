@@ -119,13 +119,9 @@ def apply_likefollow_object(obj, user, like=UNSPECIFIED, follow=UNSPECIFIED):
             property, delete the existing object.
         If a LikeObject existed, and both like and follow are False, delete the existing object. 
     """
-    # todo: get model_cls from meta
-    # or obj.__class__?
-    print('  >> INNER GOT', obj, user, like, follow)
     model_cls = obj._meta.model
     delete_if_unlike = getattr(model_cls, 'NO_FOLLOW_WITHOUT_LIKE', False)
-    print('>> DEL IF UNLIKED', delete_if_unlike)
-    
+    auto_follow = getattr(model_cls, 'AUTO_FOLLOW_ON_LIKE', False)
     
     content_type = ContentType.objects.get_for_model(model_cls)
     liked_obj = get_object_or_None(LikeObject, content_type=content_type, object_id=obj.id, user=user)
@@ -135,25 +131,20 @@ def apply_likefollow_object(obj, user, like=UNSPECIFIED, follow=UNSPECIFIED):
     elif not (like is UNSPECIFIED and follow is UNSPECIFIED):
         if liked_obj is None:
             # initialize an object but don't save it yet
-            liked_obj = LikeObject(content_type=content_type, object_id=obj.id, user=user, liked=False)
+            liked_obj = LikeObject(content_type=content_type, object_id=obj.id, user=user, liked=False, followed=auto_follow)
         # apply properties
         if not like is UNSPECIFIED:
             liked_obj.liked = like
         if not follow is UNSPECIFIED:
             liked_obj.followed = follow
-        print('> applied:', liked_obj.liked, liked_obj.followed)
         # check for deletion state
         if not liked_obj.liked and (not liked_obj.followed or delete_if_unlike):
             liked_obj.delete()
             liked_obj = None
-            print('> deleted')
         else:
             liked_obj.save()
-            print('> saved')
         # delete the objects like/folow cache
-        # TODO
-        print('TODOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO: implement cache delete')
-        
+        obj.clear_likes_cache()
         # update the liked object's index
         if hasattr(obj, 'update_index'):
             obj.update_index()
@@ -193,11 +184,12 @@ def do_likefollow(request, **kwargs):
         return HttpResponseNotAllowed('POST', content='This endpoint is for POST only.')
     if not request.user.is_authenticated():
         return HttpResponseForbidden('Not authenticated.')
-    if not check_object_likefollow_access()
     
     PARAM_VALUE_MAP = {
         '1': True,
         '0': False,
+        1: True,
+        0: False,
     }
     ct = request.POST.get('ct', None)  # expects 'cosinnus_note.Note'
     obj_id = request.POST.get('id', None)

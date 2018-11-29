@@ -19,7 +19,7 @@ $.cosinnus.Feedback = {
             return;
         };
     
-        post_data = {
+        var post_data = {
             'cls': $('#cosinnus_report_cls').val(),
             'id': $('#cosinnus_report_id').val(),
             'text': $('#cosinnus_report_text').val(),
@@ -68,7 +68,7 @@ $.cosinnus.Feedback = {
            $('#cosinnus_move_element_modal').modal('hide');
            return;
        }
-       post_data = {
+       var post_data = {
            'element_ids': element_ids.split(','),
            'target_folder_id': target_folder_id,
        };
@@ -114,7 +114,7 @@ $.cosinnus.Feedback = {
       };
       
       var element_ids = $('#cosinnus_delete_element_obj_ids').val();
-      post_data = {
+      var post_data = {
           'element_ids': element_ids.split(',')
       };
       
@@ -144,17 +144,42 @@ $.cosinnus.Feedback = {
   },
   
   cosinnus_register_likefollow: function() {
-	  $('body').on('click', '.like-button.action-do-like', function(event){
+	  $('body').on('click', '.likefollow-button.action-do-likefollow', function(event){
 		  var $this = $(this);
 		  var ct = $this.data('ct');
 		  var slug = $this.data('slug');
-		  var liked = $this.hasClass('liked');
-		  liked = !liked;
+		  var type = $this.data('type');
+		  var selected = $this.hasClass('selected');
+		  selected = !selected;
+		  $('.'+type+'-button[data-ct="'+ct+'"][data-slug="'+slug+'"]').toggleClass('selected', selected);
 		  
-		  alert('TODO: fire like request and return this only after the request came back! then add the modal confirm box! then add the follow button!')
+		  var params = {};
+		  params[type] = selected ? '1' : '0';
+		  $.cosinnus.Feedback.cosinnus_fire_likefollow(ct, slug, params);
 		  
-		  $('.like-button[data-ct="'+ct+'"][data-slug="'+slug+'"]').toggleClass('liked', liked);
 	  });
+	  
+  },
+  
+  /**
+   * Fires a like/follow. Expects a param dict likefollowParams
+   * containing either/both of `like` `follow` with values '1' or '0'.
+   */
+  cosinnus_fire_likefollow: function(contentType, slug, likefollowParams) {
+	  var likefollowUrl = '/likefollow/';
+	  var post_data = likefollowParams;
+	  post_data['ct'] = contentType;
+	  post_data['slug'] = slug;
+	  
+	  $.ajax({
+          type:"POST",
+          url: likefollowUrl,
+          data: post_data,
+          success: function(data){
+          },
+          error: function(data){
+          }
+     });
 	  
   },
   

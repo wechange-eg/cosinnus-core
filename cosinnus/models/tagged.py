@@ -516,8 +516,12 @@ class LikableObjectMixin(models.Model):
     
     likes = GenericRelation(LikeObject)
     
+    IS_LIKEABLE_OBJECT = True
+    
     # determines if this model should be deleted if liked==False
-    NO_FOLLOW_WITHOUT_LIKE = True
+    NO_FOLLOW_WITHOUT_LIKE = False
+    # determines if newly liked items of this model should automatically be followed as well, unless specified otherwise
+    AUTO_FOLLOW_ON_LIKE = False
     
     # key storing all user ids that have like an object
     _LIKED_OBJECT_USER_IDS_CACHE_KEY = 'cosinnus/core/like_user_ids/model/%s/obj_id/%d' # modelclass_name, id -> [user_id, user_id, ...]
@@ -536,7 +540,7 @@ class LikableObjectMixin(models.Model):
             return self._liked_obj_ids
         user_ids = cache.get(self._LIKED_OBJECT_USER_IDS_CACHE_KEY % (self._meta.model.__name__, self.id))
         if user_ids is None:
-            user_ids = self.likes.filter(liked=True).values_list('user__id', flat=True)
+            user_ids = list(self.likes.filter(liked=True).values_list('user__id', flat=True))
             cache.set(self._LIKED_OBJECT_USER_IDS_CACHE_KEY % (self._meta.model.__name__, self.id), user_ids, settings.COSINNUS_LIKEFOLLOW_COUNT_CACHE_TIMEOUT)
             self._liked_obj_ids = user_ids
         return user_ids
@@ -547,7 +551,7 @@ class LikableObjectMixin(models.Model):
             return self._followed_obj_ids
         user_ids = cache.get(self._FOLLOWED_OBJECT_USER_IDS_CACHE_KEY % (self._meta.model.__name__, self.id))
         if user_ids is None:
-            user_ids = self.likes.filter(followed=True).values_list('user__id', flat=True)
+            user_ids = list(self.likes.filter(followed=True).values_list('user__id', flat=True))
             cache.set(self._FOLLOWED_OBJECT_USER_IDS_CACHE_KEY % (self._meta.model.__name__, self.id), user_ids, settings.COSINNUS_LIKEFOLLOW_COUNT_CACHE_TIMEOUT)
             self._followed_obj_ids = user_ids
         return user_ids

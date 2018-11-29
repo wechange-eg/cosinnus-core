@@ -1,15 +1,19 @@
 {% load i18n cosinnus_tags %}
 
-<a class="like-button {% if user.id in object.get_liked_user_ids %}liked{% endif %} {% if user|can_likefollow:object %}action-do-like{% endif %}" 
-        data-ct="{{ object.get_content_type }}" data-slug="{{ object.slug }}">
-    <span class="show-unliked">
+{% comment %}  
+    Expects an `object` context variable for the object to like/follow.
+{% endcomment %}
+
+<a class="likefollow-button like-button {% if user|can_likefollow:object %}action-do-likefollow{% endif %} {% if user.id in object.get_liked_user_ids %}selected{% endif %}" 
+        data-type="like" data-ct="{{ object.get_content_type }}" data-slug="{{ object.slug }}">
+    <span class="show-unselected">
         {% if user.id in object.get_liked_user_ids %}{{ object.like_count|subtract:1 }}{% else %}{{ object.like_count }}{% endif %}
         <i class="fa fa-heart"></i>
         {% trans "Like" %}
     </span>
-    <span class="show-liked">
+    <span class="show-selected">
         {% if user.id in object.get_liked_user_ids %}{{ object.like_count }}{% else %}{{ object.like_count|add:1 }}{% endif %}
-        <i class="fa fa-heart"></i>
+        <i class="fa fa-heart apply-color-liked"></i>
         {% trans "Liked" %}
     </span>
 </a>

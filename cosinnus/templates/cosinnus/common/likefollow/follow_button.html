@@ -1,0 +1,19 @@
+{% load i18n cosinnus_tags %}
+
+{% comment %}  
+    Expects an `object` context variable for the object to like/follow.
+{% endcomment %}
+
+<a class="likefollow-button follow-button {% if user|can_likefollow:object %}action-do-likefollow{% endif %} {% if user.id in object.get_followed_user_ids %}selected{% endif %}" 
+        data-type="follow" data-ct="{{ object.get_content_type }}" data-slug="{{ object.slug }}">
+    <span class="show-unselected">
+        {% if user.id in object.get_followed_user_ids %}{{ object.follow_count|subtract:1 }}{% else %}{{ object.follow_count }}{% endif %}
+        <i class="fa fa-bell"></i>
+        {% trans "Follow" %}
+    </span>
+    <span class="show-selected">
+        {% if user.id in object.get_followed_user_ids %}{{ object.follow_count }}{% else %}{{ object.follow_count|add:1 }}{% endif %}
+        <i class="fa fa-bell apply-color-followed"></i>
+        {% trans "Following" %}
+    </span>
+</a>
