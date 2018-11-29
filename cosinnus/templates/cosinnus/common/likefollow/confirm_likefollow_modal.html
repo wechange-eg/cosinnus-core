@@ -1,17 +1,17 @@
 {% load i18n cosinnus_tags %}
 
 {% comment %}  
-    This enables "directly" liking or following an object by passing like=1 or follow=1 and ct= and slug= 
+    This enables "directly" liking or following an object by passing like=1 or follow=1 and ct= and id= 
     as URL parameters. This checks if a clickable like/follow button for the given object exists,
     and if so, shows a popup on page load that asks for confirmation, then fires the like/follow action on OK click.
     The popup will not show if the object already has been liked/followed by the user.
 {% endcomment %}
 {% if request.GET.like == "1" or request.GET.follow == "1" %}
-    {% if request.GET.ct and request.GET.slug %} 
+    {% if request.GET.ct and request.GET.id %} 
         <script type="text/javascript">
             $(function(){
                 var type = "{% if request.GET.like == "1" %}like{% elif request.GET.follow == "1" %}follow{% endif %}";
-                var button= $('.likefollow-button.'+type+'-button.action-do-likefollow[data-ct="{{ request.GET.ct }}"][data-slug="{{ request.GET.slug }}"]')
+                var button= $('.likefollow-button.'+type+'-button.action-do-likefollow[data-ct="{{ request.GET.ct }}"][data-id="{{ request.GET.id }}"]')
                 if(button.length > 0 && !button.hasClass('selected')) {
                     $('#confirm_likefollow_modal_submit_btn').unbind().click(function(){
                         button.click();

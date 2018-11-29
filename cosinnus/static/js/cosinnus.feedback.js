@@ -147,15 +147,15 @@ $.cosinnus.Feedback = {
 	  $('body').on('click', '.likefollow-button.action-do-likefollow', function(event){
 		  var $this = $(this);
 		  var ct = $this.data('ct');
-		  var slug = $this.data('slug');
+		  var id = $this.data('id');
 		  var type = $this.data('type');
 		  var selected = $this.hasClass('selected');
 		  selected = !selected;
-		  $('.'+type+'-button[data-ct="'+ct+'"][data-slug="'+slug+'"]').toggleClass('selected', selected);
+		  $('.'+type+'-button[data-ct="'+ct+'"][data-id="'+id+'"]').toggleClass('selected', selected);
 		  
 		  var params = {};
 		  params[type] = selected ? '1' : '0';
-		  $.cosinnus.Feedback.cosinnus_fire_likefollow(ct, slug, params);
+		  $.cosinnus.Feedback.cosinnus_fire_likefollow(ct, id, params);
 		  
 	  });
 	  
@@ -165,11 +165,11 @@ $.cosinnus.Feedback = {
    * Fires a like/follow. Expects a param dict likefollowParams
    * containing either/both of `like` `follow` with values '1' or '0'.
    */
-  cosinnus_fire_likefollow: function(contentType, slug, likefollowParams) {
+  cosinnus_fire_likefollow: function(contentType, id, likefollowParams) {
 	  var likefollowUrl = '/likefollow/';
 	  var post_data = likefollowParams;
 	  post_data['ct'] = contentType;
-	  post_data['slug'] = slug;
+	  post_data['id'] = id;
 	  
 	  $.ajax({
           type:"POST",

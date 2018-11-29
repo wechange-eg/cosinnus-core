@@ -143,6 +143,7 @@ def apply_likefollow_object(obj, user, like=UNSPECIFIED, follow=UNSPECIFIED):
             liked_obj = None
         else:
             liked_obj.save()
+        
         # delete the objects like/folow cache
         obj.clear_likes_cache()
         # update the liked object's index
@@ -199,8 +200,6 @@ def do_likefollow(request, **kwargs):
     
     if ct is None or (id is None and slug is None) or (like is UNSPECIFIED and follow is UNSPECIFIED):
         return HttpResponseBadRequest('Incomplete data submitted.')
-    
-    print('>> GOT:', ct, obj_id, slug, like, follow)
     
     app_label, model = ct.split('.')
     model_cls = get_model(app_label, model)

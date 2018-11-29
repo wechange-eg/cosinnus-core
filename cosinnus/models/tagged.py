@@ -14,7 +14,6 @@ from django.utils.translation import ugettext_lazy as _
 from taggit.managers import TaggableManager
 
 from cosinnus.conf import settings
-from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.utils.functions import unique_aware_slugify,\
     clean_single_line_text
 from cosinnus.models.widget import WidgetConfig
@@ -368,6 +367,7 @@ class BaseTaggableObjectModel(IndexingUtilsMixin, AttachableObjectModel):
         content_snippets = []
         tag_object = self.media_tag
         if tag_object.location and tag_object.location_url:
+            from cosinnus.models.group import CosinnusPortal
             location_html = render_to_string('cosinnus/html_mail/content_snippets/tagged_location.html', 
                                              {'tag_object': tag_object, 'domain': CosinnusPortal.get_current().get_domain()})
             content_snippets.append(mark_safe(location_html))
@@ -533,15 +533,18 @@ class LikableObjectMixin(models.Model):
     
     class Meta(object):
         abstract = True
+        
+    def _get_likable_model_name(self):
+        return self._meta.model.__name__
     
     def get_liked_user_ids(self):
         """ Returns a list of int user ids for users that have liked this object. """
         if self._liked_obj_ids is not None:
             return self._liked_obj_ids
-        user_ids = cache.get(self._LIKED_OBJECT_USER_IDS_CACHE_KEY % (self._meta.model.__name__, self.id))
+        user_ids = cache.get(self._LIKED_OBJECT_USER_IDS_CACHE_KEY % (self._get_likeable_model_name(), self.id))
         if user_ids is None:
             user_ids = list(self.likes.filter(liked=True).values_list('user__id', flat=True))
-            cache.set(self._LIKED_OBJECT_USER_IDS_CACHE_KEY % (self._meta.model.__name__, self.id), user_ids, settings.COSINNUS_LIKEFOLLOW_COUNT_CACHE_TIMEOUT)
+            cache.set(self._LIKED_OBJECT_USER_IDS_CACHE_KEY % (self._get_likeable_model_name(), self.id), user_ids, settings.COSINNUS_LIKEFOLLOW_COUNT_CACHE_TIMEOUT)
             self._liked_obj_ids = user_ids
         return user_ids
     
@@ -549,18 +552,18 @@ class LikableObjectMixin(models.Model):
         """ Returns a list of int user ids for users that are following this object. """
         if self._followed_obj_ids is not None:
             return self._followed_obj_ids
-        user_ids = cache.get(self._FOLLOWED_OBJECT_USER_IDS_CACHE_KEY % (self._meta.model.__name__, self.id))
+        user_ids = cache.get(self._FOLLOWED_OBJECT_USER_IDS_CACHE_KEY % (self._get_likeable_model_name(), self.id))
         if user_ids is None:
             user_ids = list(self.likes.filter(followed=True).values_list('user__id', flat=True))
-            cache.set(self._FOLLOWED_OBJECT_USER_IDS_CACHE_KEY % (self._meta.model.__name__, self.id), user_ids, settings.COSINNUS_LIKEFOLLOW_COUNT_CACHE_TIMEOUT)
+            cache.set(self._FOLLOWED_OBJECT_USER_IDS_CACHE_KEY % (self._get_likeable_model_name(), self.id), user_ids, settings.COSINNUS_LIKEFOLLOW_COUNT_CACHE_TIMEOUT)
             self._followed_obj_ids = user_ids
         return user_ids
     
     def clear_likes_cache(self):
         """ Clears the remote and local object cache for this object's like and follow counts """
         keys = [
-            self._LIKED_OBJECT_USER_IDS_CACHE_KEY % (self._meta.model.__name__, self.id),
-            self._FOLLOWED_OBJECT_USER_IDS_CACHE_KEY % (self._meta.model.__name__, self.id),
+            self._LIKED_OBJECT_USER_IDS_CACHE_KEY % (self._get_likeable_model_name(), self.id),
+            self._FOLLOWED_OBJECT_USER_IDS_CACHE_KEY % (self._get_likeable_model_name(), self.id),
         ]
         cache.delete_many(keys)
         self._liked_obj_ids = None
@@ -586,13 +589,11 @@ class LikableObjectMixin(models.Model):
         """ Returns the follower count for this object """
         return len(self.get_followed_user_ids())
     
-    @property
     def is_user_liking(self, user):
         return user.email
         """ Returns True is the user likes this object, else False. """
         return user.id in self.get_liked_user_ids()
     
-    @property
     def is_user_following(self, user):
         """ Returns True is the user follows this object, else False. """
         return user.id in self.get_followed_user_ids()

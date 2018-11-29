@@ -5,7 +5,7 @@
 {% endcomment %}
 
 <a class="likefollow-button like-button {% if user|can_likefollow:object %}action-do-likefollow{% endif %} {% if user.id in object.get_liked_user_ids %}selected{% endif %}" 
-        data-type="like" data-ct="{{ object.get_content_type }}" data-slug="{{ object.slug }}">
+        data-type="like" data-ct="{{ object.get_content_type }}" data-id="{{ object.id }}">
     <span class="show-unselected">
         {% if user.id in object.get_liked_user_ids %}{{ object.like_count|subtract:1 }}{% else %}{{ object.like_count }}{% endif %}
         <i class="fa fa-heart"></i>

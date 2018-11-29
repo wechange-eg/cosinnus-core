@@ -277,6 +277,13 @@
                         </p>
                     {% endif %}
                     
+                    {% if user|can_likefollow:group %}
+                        <p>
+                            {% include 'cosinnus/common/likefollow/follow_button.html' with object=group %}
+                            {% include 'cosinnus/common/likefollow/confirm_likefollow_modal.html' %}
+                        </p>
+                    {% endif %}
+                    
                     {% with  topics=group.media_tag_object.topics %}
                         {% if topics %}
                             <p>

@@ -423,7 +423,7 @@ class DetailedIdeaMapResult(DetailedMapResult):
             'action_url_1': _prepend_url(user, obj.portal) + reverse('cosinnus:group-add') + ('?idea=%s&name=%s' % (itemid_from_searchresult(haystack_result), escape(haystack_result.title))),
             'creator_name': obj.creator.get_full_name(),
             'creator_slug': obj.creator.username,
-            'followed': obj.likes.filter(followed=True, liked=True, user__id=user.id).count() > 0,
+            'followed': obj.is_user_following(user),
         })
         ret = super(DetailedIdeaMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
         return ret

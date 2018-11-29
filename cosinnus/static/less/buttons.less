@@ -612,14 +612,19 @@ a.light-link:hover i { display: inherit; }
 
 .likefollow-button {
     cursor: auto;
-    &:hover {
-        text-decoration: none;
+    margin-right: 20px;
+    padding: 5px 5px 5px 0;
+    &,&:hover {
+        text-decoration: none !important;
+    }
+    i.fa {
+        margin-right: 5px;
     }
     
     &.action-do-likefollow {
         cursor: pointer;
         &:hover {
-            text-decoration: underline;
+            background-color: rgba(0,0,0,0.1);
         }
     }
     
