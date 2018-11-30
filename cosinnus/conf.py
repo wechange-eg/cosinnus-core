@@ -192,6 +192,9 @@ class CosinnusConf(AppConf):
     # the notification setting for groups when user newly join them (3: weekly)
     DEFAULT_GROUP_NOTIFICATION_SETTING = 3
     
+    # default setting for notifications for followed objects
+    DEFAULT_FOLLOWED_OBJECT_NOTIFICATION_SETTING = 2 # SETTING_DAILY = 2
+    
     # when etherpad objects are deleted, should the etherpads on the server be deleted as well?
     DELETE_ETHERPADS_ON_SERVER_ON_DELETE = False
     
