@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-25 15:01+0100\n"
-"PO-Revision-Date: 2018-11-25 15:04+0100\n"
+"PO-Revision-Date: 2018-11-30 14:02+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -1398,7 +1398,7 @@ msgstr "In dieser Liste kannst Du eine Neuigkeit erstellen. Diese Neuigkeit wird
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_8_poll"
-msgstr "Hier kannst Du eine Umfrage erstellen. Diese dient der Abstimmung über bestimmte Dinge (beispielsweise Essensvorschläge). Wenn Du in Deinem Projekt mit Deinem Team einen Termin finden möchtest, musst Du auf den Reiter Veranstaltungen und anschließend \"Terminvorschläge\" gehen."
+msgstr "Hier kannst Du eine Umfrage erstellen. Diese dient der Abstimmung über bestimmte Dinge (beispielsweise Essensvorschläge). Wenn Du in Deinem Projekt mit Deinem Team einen Termin finden möchtest, musst Du auf den Reiter Veranstaltungen und anschließend \"Terminabstimmungen\" gehen."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_9_todo"
