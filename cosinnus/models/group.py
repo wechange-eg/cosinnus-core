@@ -54,7 +54,7 @@ from django.templatetags.static import static
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from cosinnus.core.registries.attached_objects import attached_object_registry
 from django.db.models.loading import get_model
-from cosinnus.models.tagged import LikableObjectMixin
+from cosinnus.models.tagged import LikeableObjectMixin
 
 logger = logging.getLogger('cosinnus')
 
@@ -627,7 +627,7 @@ class CosinnusPortal(models.Model):
         
 
 @python_2_unicode_compatible
-class CosinnusBaseGroup(LikableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin, 
+class CosinnusBaseGroup(LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin, 
                         VideoEmbedFieldMixin, models.Model):
     TYPE_PROJECT = 0
     TYPE_SOCIETY = 1

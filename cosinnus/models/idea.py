@@ -16,7 +16,7 @@ import six
 from cosinnus.conf import settings
 from cosinnus.core import signals
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.models.tagged import LikeObject, LikableObjectMixin
+from cosinnus.models.tagged import LikeObject, LikeableObjectMixin
 from cosinnus.utils.files import get_idea_image_filename, image_thumbnail_url, \
     image_thumbnail
 from cosinnus.utils.functions import clean_single_line_text, \
@@ -166,7 +166,7 @@ class IdeaManager(models.Manager):
 
 
 @python_2_unicode_compatible
-class CosinnusIdea(IndexingUtilsMixin, LikableObjectMixin, models.Model):
+class CosinnusIdea(IndexingUtilsMixin, LikeableObjectMixin, models.Model):
     # don't worry, the default Portal with id 1 is created in a datamigration
     # there was no other way to generate completely runnable migrations 
     # (with a get_default function, or any other way)

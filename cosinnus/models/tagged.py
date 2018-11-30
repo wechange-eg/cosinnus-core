@@ -34,6 +34,7 @@ from django.utils import translation
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from django.core.cache import cache
 from django.contrib.contenttypes.fields import GenericRelation
+from django.utils.http import urlencode
 
 
 
@@ -511,7 +512,7 @@ class LikeObject(models.Model):
         return '<like: %s::%s::%s>' % (self.content_type, self.object_id, self.user.username)
 
 
-class LikableObjectMixin(models.Model):
+class LikeableObjectMixin(models.Model):
     """ Mixin for a model class that can be liked and/or followed """
     
     likes = GenericRelation(LikeObject)
@@ -570,7 +571,7 @@ class LikableObjectMixin(models.Model):
         self._followed_obj_ids = None
     
     def save(self, *args, **kwargs):
-        super(LikableObjectMixin, self).save(*args, **kwargs)
+        super(LikeableObjectMixin, self).save(*args, **kwargs)
         self.clear_likes_cache()
         
     def get_content_type(self):
@@ -597,6 +598,23 @@ class LikableObjectMixin(models.Model):
     def is_user_following(self, user):
         """ Returns True is the user follows this object, else False. """
         return user.id in self.get_followed_user_ids()
+    
+    def _get_likefollow_url_params(self, like_or_follow):
+        return {
+            like_or_follow: '1',
+            'ct': self.get_content_type(),
+            'id': self.id,
+        }
+        
+    def get_absolute_like_url(self):
+        """ Returns the absolute URL to this item with GET params that will trigger
+            the automatic like modal popup `confirm_likefollow_modal.html` """
+        return self.get_absolute_url() + '?%s' % urlencode(self._get_likefollow_url_params('like'))
+
+    def get_absolute_follow_url(self):
+        """ Returns the absolute URL to this item with GET params that will trigger
+            the automatic follow modal popup `confirm_likefollow_modal.html` """
+        return self.get_absolute_url() + '?%s' % urlencode(self._get_likefollow_url_params('follow'))
     
 
 def ensure_container(sender, **kwargs):

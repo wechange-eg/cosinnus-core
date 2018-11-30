@@ -14,3 +14,16 @@
         }
     }
 }
+.action_buttons {
+    margin-top: $global-margin * 2;
+}
+    
+a.action-button {
+    background-color: $link-emphasis-color;
+    color: #FFF;
+    border-radius: 3px;
+    padding: $global-padding * 0.5 $global-padding;
+    margin-right: $global-margin;
+    text-decoration: none;
+    font-weight: bold;
+}
