@@ -23,6 +23,7 @@ from taggit.models import Tag, TaggedItem
 from cosinnus.utils.permissions import check_object_write_access, filter_tagged_object_queryset_for_user
 from cosinnus.models.tagged import BaseHierarchicalTaggableObjectModel
 from django.contrib.auth.models import AnonymousUser
+from cosinnus.utils.functions import resolve_attributes
 
 
 class TaggedListMixin(object):
@@ -431,4 +432,62 @@ class DisplayTaggedObjectsMixin(object):
     
     def sort_and_limit_single_queryset(self, queryset, item_limit=10):
         return self.sort_and_limit_querysets([queryset], item_limit)
+
+
+class EditViewWatchChangesMixin():
+    """ A mixin for an EditView that handles watching the object and alerting
+        any changes to watched attributed after a successful save. """
+    
+    changed_attr_watchlist = []
+    watched_attr_vals = {}
+    edit_successful = False
+    
+    def on_save_changed_attrs(self, obj, changed_attr_dict):
+        """ Stub, implement this in your view 
+            @param obj: The newly saved object.
+            @param changed_attr_dict: k,v dict with k: changed attribue name, v: old value
+        """
+        pass
+    
+    def _compare_changed_obj(self, obj):
+        changed_attrs = []
+        for prop in self.changed_attr_watchlist:
+            if self.watched_attr_vals[prop] != resolve_attributes(obj, prop):
+                changed_attrs.append(prop)
+        return changed_attrs
+    
+    def get_object(self, *args, **kwargs):
+        obj = super(EditViewWatchChangesMixin, self).get_object(*args, **kwargs)
+        for prop in self.changed_attr_watchlist:
+            self.watched_attr_vals[prop] = resolve_attributes(obj, prop)
+        return obj
+    
+    def post(self, *args, **kwargs):
+        ret = super(EditViewWatchChangesMixin, self).post(*args, **kwargs)
+        if self.edit_successful:
+            changed_attrs = self._compare_changed_obj(self.object)
+            if changed_attrs:
+                changed_attr_dict = dict([(prop, self.watched_attr_vals[prop]) for prop in changed_attrs])
+                self.on_save_changed_attrs(self.object, changed_attr_dict)
+        return ret
+    
+    def form_valid(self, form):
+        ret = super(EditViewWatchChangesMixin, self).form_valid(form)
+        self.edit_successful = True
+        return ret
+    
+    def forms_valid(self, form, inlines):
+        ret = super(EditViewWatchChangesMixin, self).forms_valid(form, inlines)
+        self.edit_successful = True
+        return ret
+    
+    def form_invalid(self, form):
+        ret = super(EditViewWatchChangesMixin, self).form_invalid(form)
+        self.edit_successful = False
+        return ret
+    
+    def forms_invalid(self, form, inlines):
+        ret = super(EditViewWatchChangesMixin, self).forms_invalid(form, inlines)
+        self.edit_successful = False
+        return ret
     
