@@ -259,6 +259,10 @@ class AttachableObjectModel(models.Model):
                 images.append(attached_file.target_object)
         return images
     
+    def get_attached_objects_hash(self):
+        """ Returns a hashable tuple of sorted list of ids of all attached objects.
+            Usuable to compare equality of attached files to objects. """
+        return tuple(sorted(list(self.attached_objects.all().values_list('id', flat=True))))
 
 @python_2_unicode_compatible
 class BaseTaggableObjectModel(IndexingUtilsMixin, AttachableObjectModel):

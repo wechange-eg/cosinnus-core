@@ -436,11 +436,19 @@ class DisplayTaggedObjectsMixin(object):
 
 class EditViewWatchChangesMixin():
     """ A mixin for an EditView that handles watching the object and alerting
-        any changes to watched attributed after a successful save. """
+        any changes to watched attributed after a successful save. 
+        In your view, define `changed_attr_watchlist` and `on_save_changed_attrs()` """
     
+    # a list of attribute names for the view's object to be watched for changes
+    # dotted attributes will be resolved (ie 'media_tag.location')
     changed_attr_watchlist = []
-    watched_attr_vals = {}
+    
+    watched_attr_vals = None
     edit_successful = False
+    
+    def __init__(self, *args, **kwargs):
+        self.watched_attr_vals = {}
+        return super(EditViewWatchChangesMixin, self).__init__(*args, **kwargs)
     
     def on_save_changed_attrs(self, obj, changed_attr_dict):
         """ Stub, implement this in your view 
@@ -458,8 +466,9 @@ class EditViewWatchChangesMixin():
     
     def get_object(self, *args, **kwargs):
         obj = super(EditViewWatchChangesMixin, self).get_object(*args, **kwargs)
-        for prop in self.changed_attr_watchlist:
-            self.watched_attr_vals[prop] = resolve_attributes(obj, prop)
+        if self.request.method.upper() == 'POST' and not self.watched_attr_vals:
+            for prop in self.changed_attr_watchlist:
+                self.watched_attr_vals[prop] = resolve_attributes(obj, prop)
         return obj
     
     def post(self, *args, **kwargs):

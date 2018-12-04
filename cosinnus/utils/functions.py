@@ -200,7 +200,7 @@ def resolve_attributes(obj, attr_or_function, default=None):
     
     # if no attribute was given or the given object does not contain that attribute, try to resolve
     # the default attribute on the object, or return the default
-    if not attribute or not getattr(obj, attribute, None):
+    if not attribute or not hasattr(obj, attribute):
         return resolve_attributes(obj, default) if (default and default != attr_or_function) else None
     
     resolved_attr = getattr(obj, attribute, None)
