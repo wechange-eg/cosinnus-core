@@ -611,21 +611,20 @@ a.light-link:hover i { display: inherit; }
 }
 
 .likefollow-button {
-    cursor: auto;
+    cursor: pointer;
     margin-right: 20px;
-    padding: 5px 5px 5px 0;
+    padding: 5px;
+    font-size: 14px;
+    
     &,&:hover {
         text-decoration: none !important;
     }
+    &:hover {
+        background-color: rgba(0,0,0,0.1);
+        border-radius: 3px;
+    }
     i.fa {
         margin-right: 5px;
-    }
-    
-    &.action-do-likefollow {
-        cursor: pointer;
-        &:hover {
-            background-color: rgba(0,0,0,0.1);
-        }
     }
     
     .show-selected {

@@ -447,13 +447,11 @@
 		        		{% endif %}
 		        	{% endwith %}
 		        	
-		        	{% if user|can_likefollow:group %}
-		        	    <br/>
-		        	    <div>
-		        	        {% include 'cosinnus/common/likefollow/follow_button.html' with object=group %}
-                            {% include 'cosinnus/common/likefollow/confirm_likefollow_modal.html' %}
-		        	    </div>
-		        	{% endif %}
+	        	    <br/>
+	        	    <div>
+	        	        {% include 'cosinnus/common/likefollow/follow_button.html' with object=group %}
+                        {% include 'cosinnus/common/likefollow/confirm_likefollow_modal.html' with object=group %}
+	        	    </div>
 					
 					<p>
 						<b>{% trans "Share" %}:</b>&nbsp;

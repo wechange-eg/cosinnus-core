@@ -127,7 +127,7 @@ def can_likefollow(user, obj):
     """
     Template filter to check if a user can create like/follow an object.
     """
-    return check_object_likefollow_access(obj, user)
+    return user.is_authenticated() and check_object_likefollow_access(obj, user)
 
 @register.filter
 def is_superuser(user):
