@@ -244,15 +244,6 @@
                         {% include "cosinnus/modal_box.html" with id="join_withdraw_modal" label=label title=title form_action=action %}
                     {% endif %}
                     
-                    {% comment %} Group follow button is out for now
-                    <div class="dashboard-header-link app-main">
-                        <a href="#" title="Not available in this Beta version">
-                            <i class="fa fa-thumbs-o-up"></i>
-                            {% trans "Gruppe abonnieren" %}
-                        </a>
-                    </div>
-                     {% endcomment %}
-                    
                     <h2>
                     	{{ group.name }}
 	                    {% if group.facebook_group_id %}
