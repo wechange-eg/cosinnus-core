@@ -151,7 +151,13 @@ $.cosinnus.Feedback = {
 		  var type = $this.data('type');
 		  var selected = $this.hasClass('selected');
 		  selected = !selected;
-		  $('.'+type+'-button[data-ct="'+ct+'"][data-id="'+id+'"]').toggleClass('selected', selected);
+		  var $button = $('.'+type+'-button[data-ct="'+ct+'"][data-id="'+id+'"]')
+		  $button.toggleClass('selected', selected);
+		  if (selected) {
+			  $button.next('.likefollow-button-success-message').fadeIn();
+		  } else {
+			  $button.next('.likefollow-button-success-message').hide();
+		  }
 		  
 		  var params = {};
 		  params[type] = selected ? '1' : '0';
