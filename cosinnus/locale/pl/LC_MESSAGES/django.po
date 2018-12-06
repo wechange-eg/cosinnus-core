@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-25 15:01+0100\n"
+"POT-Creation-Date: 2018-12-06 17:15+0100\n"
 "PO-Revision-Date: 2018-08-30 04:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -394,6 +394,7 @@ msgstr "Moje zespoły"
 msgid "Other teams"
 msgstr "Inne zespoły"
 
+#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Like"
 msgstr "Polubienia"
@@ -911,9 +912,12 @@ msgid "User"
 msgstr "Użytkownik"
 
 #. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Liked"
 msgstr "Polubione"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Following"
 msgstr "Śledzone"
@@ -1364,6 +1368,32 @@ msgstr "Przepraszamy, mapa nie jest wspierana na Internet Explorer."
 msgid "Consider using an alternate browser!"
 msgstr "Spróbuj za pomocą innej przeglądarki!"
 
+msgid "I want to like this"
+msgstr ""
+
+msgid "I want to follow this"
+msgstr ""
+
+msgid "Yes"
+msgstr "Tak"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Follow"
+msgstr "Śledź"
+
+# "Unfollow" = "Przestań śledzić"
+#, fuzzy
+#| msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
+msgid "You will now receive notifications for comments or when this content is updated."
+msgstr "Otrzymasz powiadomienie, kiedy w ramach polubionej przez Ciebie idei zostanie utworzony projekt. Jeśli nie życzysz sobie otrzymywania powiadomień, kliknij na przycisk \"przestań śledzić\"!"
+
+#, fuzzy
+#| msgid "You are invited!"
+msgid "You are following this item"
+msgstr "Zostałeś/aś zaproszony/a!"
+
 msgid "Expand"
 msgstr "Rozwiń"
 
@@ -1580,6 +1610,14 @@ msgstr "Grupa:"
 
 msgid "No Description set"
 msgstr "Brak opisu"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications whenever public content is posted in this project."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications whenever public content is posted in this group."
+msgstr ""
 
 msgid "more"
 msgstr "więcej"
@@ -2266,9 +2304,6 @@ msgstr "Czy na pewno usunąć ideę „%(title)s“?"
 
 msgid "Delete Idea"
 msgstr "Usuń ideę"
-
-msgid "Yes"
-msgstr "Tak"
 
 msgid "Edit Idea"
 msgstr "Edytuj Ideę"
@@ -3408,6 +3443,28 @@ msgstr "Przepraszamy, ale żądana treść nie została odnaleziona na serwerze.
 msgid "Visit Event Page"
 msgstr "Odwiedź Stronę Wydarzenia"
 
+# "Unfollow" = "Przestań śledzić"
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
+msgid "You will now receive notifications for comments or when this event is updated or its details change."
+msgstr "Otrzymasz powiadomienie, kiedy w ramach polubionej przez Ciebie idei zostanie utworzony projekt. Jeśli nie życzysz sobie otrzymywania powiadomień, kliknij na przycisk \"przestań śledzić\"!"
+
+# "Unfollow" = "Przestań śledzić"
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
+msgid "If you do not want notifications, click the unfollow button!"
+msgstr "Otrzymasz powiadomienie, kiedy w ramach polubionej przez Ciebie idei zostanie utworzony projekt. Jeśli nie życzysz sobie otrzymywania powiadomień, kliknij na przycisk \"przestań śledzić\"!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your like setting because of an error."
+msgstr "Twoje ustawienia nie mogły zostać zapisane w wyniku wystąpienia błędu."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your follow setting because of an error."
+msgstr "Twoje ustawienia śledzenia nie mogły zostać zapisane w wyniku wystąpienia błędu."
+
 #. Translators: __INCLUDE_JS_PO__
 msgid "Hidden Users"
 msgstr "Ukryci Użytkownicy"
@@ -3433,10 +3490,6 @@ msgid "Author"
 msgstr "Autor"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Follow"
-msgstr "Śledź"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Create Project from Idea"
 msgstr "Utwórz Projekt dla Idei"
 
@@ -3446,16 +3499,10 @@ msgstr "Edytuj swoją Ideę"
 
 # "Unfollow" = "Przestań śledzić"
 #. Translators: __INCLUDE_JS_PO__
-msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
+#, fuzzy
+#| msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
+msgid "You will receive a notification when a project is created from your liked idea."
 msgstr "Otrzymasz powiadomienie, kiedy w ramach polubionej przez Ciebie idei zostanie utworzony projekt. Jeśli nie życzysz sobie otrzymywania powiadomień, kliknij na przycisk \"przestań śledzić\"!"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your like setting because of an error."
-msgstr "Twoje ustawienia nie mogły zostać zapisane w wyniku wystąpienia błędu."
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your follow setting because of an error."
-msgstr "Twoje ustawienia śledzenia nie mogły zostać zapisane w wyniku wystąpienia błędu."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"

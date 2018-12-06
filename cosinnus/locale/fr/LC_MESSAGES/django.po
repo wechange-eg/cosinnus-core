@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-25 15:01+0100\n"
+"POT-Creation-Date: 2018-12-06 17:15+0100\n"
 "PO-Revision-Date: 2018-10-09 16:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -391,6 +391,7 @@ msgstr "Mes équipes"
 msgid "Other teams"
 msgstr "Autres équipes"
 
+#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Like"
 msgstr "Aimer"
@@ -896,9 +897,12 @@ msgid "User"
 msgstr "Utilisateur"
 
 #. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Liked"
 msgstr "Est aimé"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Following"
 msgstr "Suit"
@@ -1349,6 +1353,31 @@ msgstr "Désolé, cette carte n'est pas supportée sur Internet Explorer."
 msgid "Consider using an alternate browser!"
 msgstr "Utilise un autre navigateur !"
 
+msgid "I want to like this"
+msgstr ""
+
+msgid "I want to follow this"
+msgstr ""
+
+msgid "Yes"
+msgstr "Oui"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Follow"
+msgstr "S'abonner"
+
+#, fuzzy
+#| msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
+msgid "You will now receive notifications for comments or when this content is updated."
+msgstr "Tu recevras une notification lorsqu'un projet sera créé à partir de l'idée que tu aimes. Si tu ne souhaites pas recevoir de notifications, clique sur le bouton de désabonnement !"
+
+#, fuzzy
+#| msgid "You are invited!"
+msgid "You are following this item"
+msgstr "Tu es invité !"
+
 msgid "Expand"
 msgstr "Agrandir"
 
@@ -1565,6 +1594,14 @@ msgstr "Groupe :"
 
 msgid "No Description set"
 msgstr "Pas de descriptions définie"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications whenever public content is posted in this project."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications whenever public content is posted in this group."
+msgstr ""
 
 msgid "more"
 msgstr "plus"
@@ -2251,9 +2288,6 @@ msgstr "Veux-tu vraiment supprime l'idée „%(title)s“ ?"
 
 msgid "Delete Idea"
 msgstr "Supprimer idée"
-
-msgid "Yes"
-msgstr "Oui"
 
 msgid "Edit Idea"
 msgstr "Modifier idée"
@@ -3385,6 +3419,26 @@ msgid "Visit Event Page"
 msgstr "Visiter la page de l'événement"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
+msgid "You will now receive notifications for comments or when this event is updated or its details change."
+msgstr "Tu recevras une notification lorsqu'un projet sera créé à partir de l'idée que tu aimes. Si tu ne souhaites pas recevoir de notifications, clique sur le bouton de désabonnement !"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
+msgid "If you do not want notifications, click the unfollow button!"
+msgstr "Tu recevras une notification lorsqu'un projet sera créé à partir de l'idée que tu aimes. Si tu ne souhaites pas recevoir de notifications, clique sur le bouton de désabonnement !"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your like setting because of an error."
+msgstr "Ton paramètre \"j'aime\" n'a pas pu être enregistré à cause d'une erreur."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your follow setting because of an error."
+msgstr "Ton paramètre \"abonné\" n'a pas pu être enregistré à cause d'une erreur."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Hidden Users"
 msgstr "Utilisateurs masqués"
 
@@ -3409,10 +3463,6 @@ msgid "Author"
 msgstr "Auteur"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Follow"
-msgstr "S'abonner"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Create Project from Idea"
 msgstr "Créer projet à partir d'une idée"
 
@@ -3421,16 +3471,10 @@ msgid "Edit your Idea"
 msgstr "Modifier ton idée"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
+#, fuzzy
+#| msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
+msgid "You will receive a notification when a project is created from your liked idea."
 msgstr "Tu recevras une notification lorsqu'un projet sera créé à partir de l'idée que tu aimes. Si tu ne souhaites pas recevoir de notifications, clique sur le bouton de désabonnement !"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your like setting because of an error."
-msgstr "Ton paramètre \"j'aime\" n'a pas pu être enregistré à cause d'une erreur."
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your follow setting because of an error."
-msgstr "Ton paramètre \"abonné\" n'a pas pu être enregistré à cause d'une erreur."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"
