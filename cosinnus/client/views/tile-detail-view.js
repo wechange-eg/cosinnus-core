@@ -79,8 +79,6 @@ module.exports = BaseView.extend({
         this.fitTemplate();
         this.render();
         this.App.controlView.triggerMobileDetailView();
-        // render moment dates
-        $.cosinnus.renderMomentDataDate();
         Backbone.mediator.publish('tile-detail:opened');
     },
     
@@ -91,6 +89,11 @@ module.exports = BaseView.extend({
         this.App.controlView.untriggerMobileDetailView();
         this.App.controlView.addCurrentHistoryState();
         Backbone.mediator.publish('tile-detail:closed');
+    },
+    
+    afterRender: function () {
+    	// render moment dates
+    	$.cosinnus.renderMomentDataDate();
     },
     
     /** Called when a topic link is clicked to filter for that topic only */

@@ -24,7 +24,8 @@ from cosinnus.models.group import CosinnusGroup, CosinnusGroupManager,\
 from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
     check_group_create_objects_access, check_object_read_access, get_user_token,
-    check_user_portal_admin, check_user_superuser)
+    check_user_portal_admin, check_user_superuser,
+    check_object_likefollow_access)
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,  CommaSeparatedSelect2MultipleWidget
 from cosinnus.models.tagged import get_tag_object_model, BaseTagObject
 from django.template.base import TemplateSyntaxError
@@ -120,6 +121,13 @@ def can_create_groups(user):
     Template filter to check if a user can create CosinnusGroups.
     """
     return user.is_authenticated()
+
+@register.filter
+def can_likefollow(user, obj):
+    """
+    Template filter to check if a user can create like/follow an object.
+    """
+    return user.is_authenticated() and check_object_likefollow_access(obj, user)
 
 @register.filter
 def is_superuser(user):

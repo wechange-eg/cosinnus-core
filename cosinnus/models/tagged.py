@@ -14,7 +14,6 @@ from django.utils.translation import ugettext_lazy as _
 from taggit.managers import TaggableManager
 
 from cosinnus.conf import settings
-from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.utils.functions import unique_aware_slugify,\
     clean_single_line_text
 from cosinnus.models.widget import WidgetConfig
@@ -33,6 +32,9 @@ from django.template.loader import render_to_string
 from cosinnus.utils.group import get_cosinnus_group_model
 from django.utils import translation
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
+from django.core.cache import cache
+from django.contrib.contenttypes.fields import GenericRelation
+from django.utils.http import urlencode
 
 
 
@@ -257,6 +259,10 @@ class AttachableObjectModel(models.Model):
                 images.append(attached_file.target_object)
         return images
     
+    def get_attached_objects_hash(self):
+        """ Returns a hashable tuple of sorted list of ids of all attached objects.
+            Usuable to compare equality of attached files to objects. """
+        return tuple(sorted(list(self.attached_objects.all().values_list('id', flat=True))))
 
 @python_2_unicode_compatible
 class BaseTaggableObjectModel(IndexingUtilsMixin, AttachableObjectModel):
@@ -350,6 +356,11 @@ class BaseTaggableObjectModel(IndexingUtilsMixin, AttachableObjectModel):
             @param user: The user to check for extra permissions for """
         return False
     
+    def get_tagged_persons_hash(self):
+        """ Returns a hashable tuple of sorted list of ids of all tagged persons.
+            Usuable to compare equality of attached files to objects. """
+        return tuple(sorted(list(self.media_tag.persons.all().values_list('id', flat=True))))
+    
     def get_delete_url(self):
         """ Similar to get_absolute_url, this returns the URL for this object's implemented delete view.
             Needs to be set by a specific implementation of BaseTaggableObjectModel """
@@ -366,6 +377,7 @@ class BaseTaggableObjectModel(IndexingUtilsMixin, AttachableObjectModel):
         content_snippets = []
         tag_object = self.media_tag
         if tag_object.location and tag_object.location_url:
+            from cosinnus.models.group import CosinnusPortal
             location_html = render_to_string('cosinnus/html_mail/content_snippets/tagged_location.html', 
                                              {'tag_object': tag_object, 'domain': CosinnusPortal.get_current().get_domain()})
             content_snippets.append(mark_safe(location_html))
@@ -508,6 +520,111 @@ class LikeObject(models.Model):
     def __str__(self):
         return '<like: %s::%s::%s>' % (self.content_type, self.object_id, self.user.username)
 
+
+class LikeableObjectMixin(models.Model):
+    """ Mixin for a model class that can be liked and/or followed """
+    
+    likes = GenericRelation(LikeObject)
+    
+    IS_LIKEABLE_OBJECT = True
+    
+    # determines if this model should be deleted if liked==False
+    NO_FOLLOW_WITHOUT_LIKE = False
+    # determines if newly liked items of this model should automatically be followed as well, unless specified otherwise
+    AUTO_FOLLOW_ON_LIKE = False
+    
+    # key storing all user ids that have like an object
+    _LIKED_OBJECT_USER_IDS_CACHE_KEY = 'cosinnus/core/like_user_ids/model/%s/obj_id/%d' # modelclass_name, id -> [user_id, user_id, ...]
+    # key storing all user ids that are following an object
+    _FOLLOWED_OBJECT_USER_IDS_CACHE_KEY = 'cosinnus/core/follow_user_ids/model/%s/obj_id/%d' # modelclass_name, id -> [user_id, user_id, ...]
+    # local caches
+    _liked_obj_ids = None
+    _followed_obj_ids = None
+    
+    class Meta(object):
+        abstract = True
+        
+    def _get_likeable_model_name(self):
+        return self._meta.model.__name__
+    
+    def get_liked_user_ids(self):
+        """ Returns a list of int user ids for users that have liked this object. """
+        if self._liked_obj_ids is not None:
+            return self._liked_obj_ids
+        user_ids = cache.get(self._LIKED_OBJECT_USER_IDS_CACHE_KEY % (self._get_likeable_model_name(), self.id))
+        if user_ids is None:
+            user_ids = list(self.likes.filter(liked=True).values_list('user__id', flat=True))
+            cache.set(self._LIKED_OBJECT_USER_IDS_CACHE_KEY % (self._get_likeable_model_name(), self.id), user_ids, settings.COSINNUS_LIKEFOLLOW_COUNT_CACHE_TIMEOUT)
+            self._liked_obj_ids = user_ids
+        return user_ids
+    
+    def get_followed_user_ids(self):
+        """ Returns a list of int user ids for users that are following this object. """
+        if self._followed_obj_ids is not None:
+            return self._followed_obj_ids
+        user_ids = cache.get(self._FOLLOWED_OBJECT_USER_IDS_CACHE_KEY % (self._get_likeable_model_name(), self.id))
+        if user_ids is None:
+            user_ids = list(self.likes.filter(followed=True).values_list('user__id', flat=True))
+            cache.set(self._FOLLOWED_OBJECT_USER_IDS_CACHE_KEY % (self._get_likeable_model_name(), self.id), user_ids, settings.COSINNUS_LIKEFOLLOW_COUNT_CACHE_TIMEOUT)
+            self._followed_obj_ids = user_ids
+        return user_ids
+    
+    def clear_likes_cache(self):
+        """ Clears the remote and local object cache for this object's like and follow counts """
+        keys = [
+            self._LIKED_OBJECT_USER_IDS_CACHE_KEY % (self._get_likeable_model_name(), self.id),
+            self._FOLLOWED_OBJECT_USER_IDS_CACHE_KEY % (self._get_likeable_model_name(), self.id),
+        ]
+        cache.delete_many(keys)
+        self._liked_obj_ids = None
+        self._followed_obj_ids = None
+    
+    def save(self, *args, **kwargs):
+        super(LikeableObjectMixin, self).save(*args, **kwargs)
+        self.clear_likes_cache()
+        
+    def get_content_type(self):
+        """ Returns the string concatenation of this object's content type 
+            (useful for identification and linking the likeable object to JS methods) """
+        ct = ContentType.objects.get_for_model(self)
+        return '%s.%s' % (ct.app_label, ct.model)
+    
+    @property
+    def like_count(self):
+        """ Returns the like count for this object """
+        return len(self.get_liked_user_ids())
+    
+    @property
+    def follow_count(self):
+        """ Returns the follower count for this object """
+        return len(self.get_followed_user_ids())
+    
+    def is_user_liking(self, user):
+        return user.email
+        """ Returns True is the user likes this object, else False. """
+        return user.id in self.get_liked_user_ids()
+    
+    def is_user_following(self, user):
+        """ Returns True is the user follows this object, else False. """
+        return user.id in self.get_followed_user_ids()
+    
+    def _get_likefollow_url_params(self, like_or_follow):
+        return {
+            like_or_follow: '1',
+            'ct': self.get_content_type(),
+            'id': self.id,
+        }
+        
+    def get_absolute_like_url(self):
+        """ Returns the absolute URL to this item with GET params that will trigger
+            the automatic like modal popup `confirm_likefollow_modal.html` """
+        return self.get_absolute_url() + '?%s' % urlencode(self._get_likefollow_url_params('like'))
+
+    def get_absolute_follow_url(self):
+        """ Returns the absolute URL to this item with GET params that will trigger
+            the automatic follow modal popup `confirm_likefollow_modal.html` """
+        return self.get_absolute_url() + '?%s' % urlencode(self._get_likefollow_url_params('follow'))
+    
 
 def ensure_container(sender, **kwargs):
     """ Creates a root container instance for all hierarchical objects in a newly created group """

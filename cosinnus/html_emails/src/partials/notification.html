@@ -33,3 +33,20 @@
 {{else}}
 	{{> summary_item notification_object}}
 {{/if}}
+
+{{#rwif show_action_buttons raw_if="show_action_buttons"}}
+    <row class="action_buttons">
+        <columns large="3">
+            {{#rwif action_button_1_text raw_if="action_button_1_text"}}
+	            <a class="action-button" href="{{#rw this}}action_button_1_url{{/rw}}" target="_blank">
+	                {{#rw this}}action_button_1_text{{/rw}}
+	            </a>
+            {{/rwif}}
+            {{#rwif action_button_2_text raw_if="action_button_2_text"}}
+	            <a class="action-button" href="{{#rw this}}action_button_2_url{{/rw}}" target="_blank">
+	                {{#rw this}}action_button_2_text{{/rw}}
+	            </a>
+            {{/rwif}}
+        </columns>
+    </row>
+{{/rwif}}

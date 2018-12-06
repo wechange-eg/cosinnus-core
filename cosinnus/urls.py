@@ -48,8 +48,7 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^map/search/(?P<filter_group_id>\d+)/$', 'map_api.map_search_endpoint', name='map-search-endpoint-filtered'),
     url(r'^map/detail/$', 'map_api.map_detail_endpoint', name='map-detail-endpoint'),
     
-    url(r'^like/$', 'common.do_like',  name='like-view'),
-    
+    url(r'^likefollow/$', 'common.do_likefollow',  name='likefollow-view'),
     
     url(r'^invitations/$', 'group.group_list_invited', name='invitations', kwargs={'show_all': True}),
     url(r'^welcome/$', 'user.welcome_settings', name='welcome-settings'),

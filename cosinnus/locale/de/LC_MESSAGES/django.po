@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-25 15:01+0100\n"
-"PO-Revision-Date: 2018-11-25 15:04+0100\n"
+"POT-Creation-Date: 2018-12-06 17:15+0100\n"
+"PO-Revision-Date: 2018-12-06 17:17+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -391,6 +391,7 @@ msgstr "Meine Projekte"
 msgid "Other teams"
 msgstr "Andere Projekte"
 
+#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Like"
 msgstr "Gefällt mir"
@@ -897,9 +898,12 @@ msgid "User"
 msgstr "Benutzer_in"
 
 #. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Liked"
 msgstr "Gefällt dir"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Following"
 msgstr "Gefolgt"
@@ -1345,6 +1349,27 @@ msgstr "Tut uns leid, die Karte wird in Internet Explorer nicht unterstützt."
 msgid "Consider using an alternate browser!"
 msgstr "Überlege ob du vielleicht einen anderen Browser benutzen möchtest!"
 
+msgid "I want to like this"
+msgstr "I möchte den Inhalt Liken"
+
+msgid "I want to follow this"
+msgstr "Ich möchte dem Inhalt folgen"
+
+msgid "Yes"
+msgstr "Ja"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Follow"
+msgstr "Folgen"
+
+msgid "You will now receive notifications for comments or when this content is updated."
+msgstr "Du wirst jetzt Benachrichtigungen erhalten wenn dieser Inhalt geändert oder ein Kommentar erstellt wird."
+
+msgid "You are following this item"
+msgstr "Du folgst diesem Inhalt"
+
 msgid "Expand"
 msgstr "Erweitern"
 
@@ -1398,7 +1423,7 @@ msgstr "In dieser Liste kannst Du eine Neuigkeit erstellen. Diese Neuigkeit wird
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_8_poll"
-msgstr "Hier kannst Du eine Umfrage erstellen. Diese dient der Abstimmung über bestimmte Dinge (beispielsweise Essensvorschläge). Wenn Du in Deinem Projekt mit Deinem Team einen Termin finden möchtest, musst Du auf den Reiter Veranstaltungen und anschließend \"Terminvorschläge\" gehen."
+msgstr "Hier kannst Du eine Umfrage erstellen. Diese dient der Abstimmung über bestimmte Dinge (beispielsweise Essensvorschläge). Wenn Du in Deinem Projekt mit Deinem Team einen Termin finden möchtest, musst Du auf den Reiter Veranstaltungen und anschließend \"Terminabstimmungen\" gehen."
 
 msgctxt "Look up this ID in the help text register for the translation text!"
 msgid "helptext_9_todo"
@@ -1575,6 +1600,14 @@ msgstr "Gruppe:"
 
 msgid "No Description set"
 msgstr "Keine Beschreibung erstellt"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications whenever public content is posted in this project."
+msgstr "Du wirst jetzt Benachrichtigungen erhalten wenn öffentliche Inhalte in diesem Projekt erstellt werden."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications whenever public content is posted in this group."
+msgstr "Du wirst jetzt Benachrichtigungen erhalten wenn öffentliche Inhalte in dieser Gruppe erstellt werden."
 
 msgid "more"
 msgstr "mehr"
@@ -2264,9 +2297,6 @@ msgstr "Möchtest du die Idee “%(title)s” wirklich löschen?"
 
 msgid "Delete Idea"
 msgstr "Idee löschen"
-
-msgid "Yes"
-msgstr "Ja"
 
 msgid "Edit Idea"
 msgstr "Idee bearbeiten"
@@ -3398,6 +3428,22 @@ msgid "Visit Event Page"
 msgstr "Event-Seite besuchen"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications for comments or when this event is updated or its details change."
+msgstr "Du wirst jetzt Benachrichtigungen für Kommentare erhalten und wenn dieser Inhalt geändert wird."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "If you do not want notifications, click the unfollow button!"
+msgstr "Wenn du das nicht möchtest, klicke oben den Entfolgen-Button!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your like setting because of an error."
+msgstr "Konnte deine \"Gefällt mir\"-Angabe aufgrund eines Fehlers nicht speichern."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your follow setting because of an error."
+msgstr "Konnte deine Folgen-Einstellung aufgrund eines Fehlers nicht speichern."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Hidden Users"
 msgstr "Versteckte Benutzer"
 
@@ -3422,10 +3468,6 @@ msgstr "Gruppe anschreiben"
 msgid "Author"
 msgstr "Autor"
 
-#. Translators: __INCLUDE_JS_PO__
-msgid "Follow"
-msgstr "Folgen"
-
 #
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Project from Idea"
@@ -3436,16 +3478,8 @@ msgid "Edit your Idea"
 msgstr "Deine Idee bearbeiten"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
-msgstr "Du erhältst eine Benachrichtigung, wenn ein Projekt aus dieser Idee erstellt wird. Wenn du das nicht möchtest, klicke oben den Entfolgen-Button!"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your like setting because of an error."
-msgstr "Konnte deine \"Gefällt mir\"-Angabe aufgrund eines Fehlers nicht speichern."
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your follow setting because of an error."
-msgstr "Konnte deine Folgen-Einstellung aufgrund eines Fehlers nicht speichern."
+msgid "You will receive a notification when a project is created from your liked idea."
+msgstr "Du erhältst eine Benachrichtigung, wenn ein Projekt aus dieser Idee erstellt wird."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"

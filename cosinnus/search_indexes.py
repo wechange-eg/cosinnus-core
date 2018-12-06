@@ -282,15 +282,11 @@ class IdeaSearchIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObjectSearch
         return True
     
     def prepare_liked_user_ids(self, obj):
-        if not hasattr(obj, '_liked_ids'):
-            obj._liked_ids = list(obj.likes.filter(liked=True).values_list('user__id', flat=True))
-        return obj._liked_ids
+        return obj.get_liked_user_ids()
     
     def prepare_participant_count(self, obj):
         """ Group member count for taggable objects """
-        if not hasattr(obj, '_like_count'):
-            obj._like_count = len(self.prepare_liked_user_ids(obj))
-        return obj._like_count 
+        return obj.like_count
     
     def prepare_member_count(self, obj):
         return self.prepare_participant_count(obj)

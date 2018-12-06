@@ -16,14 +16,13 @@ import six
 from cosinnus.conf import settings
 from cosinnus.core import signals
 from cosinnus.models.group import CosinnusPortal
-from cosinnus.models.tagged import LikeObject
+from cosinnus.models.tagged import LikeObject, LikeableObjectMixin
 from cosinnus.utils.files import get_idea_image_filename, image_thumbnail_url, \
     image_thumbnail
 from cosinnus.utils.functions import clean_single_line_text, \
     unique_aware_slugify, sort_key_strcoll_attr
 from cosinnus.utils.urls import get_domain_for_portal
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
-from django.contrib.contenttypes.generic import GenericRelation
 from cosinnus import cosinnus_notifications
 from annoying.functions import get_object_or_None
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -167,7 +166,7 @@ class IdeaManager(models.Manager):
 
 
 @python_2_unicode_compatible
-class CosinnusIdea(IndexingUtilsMixin, models.Model):
+class CosinnusIdea(IndexingUtilsMixin, LikeableObjectMixin, models.Model):
     # don't worry, the default Portal with id 1 is created in a datamigration
     # there was no other way to generate completely runnable migrations 
     # (with a get_default function, or any other way)
@@ -209,7 +208,8 @@ class CosinnusIdea(IndexingUtilsMixin, models.Model):
     # on the platform, no matter their visibility settings, and thus subject to moderation 
     cosinnus_always_visible_by_users_moderator_flag = True
     
-    likes = GenericRelation(LikeObject)
+    NO_FOLLOW_WITHOUT_LIKE = True
+    AUTO_FOLLOW_ON_LIKE = True
     
     objects = IdeaManager()
     

@@ -4,6 +4,8 @@
 
 {% block action_buttons %}
     <div class="tile-section tile-section-button-list">
+        {{ super() }}
+    
         {% if is_member %}
             <a class="rounded-button button-action disabled">
                 <span class="rounded-button-inner">
@@ -36,8 +38,25 @@
                 </span>
             </a>
         {% endif %}
-        
-        {{ super() }}
+    </div>
+    
+    <div class="no-input">
+        <div class="now-following-message message-success extra-space-top" style="display: none;">
+            <i class="fa fa-bell"></i>
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "You will now receive notifications whenever public content is posted in this group." %}
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "If you do not want notifications, click the unfollow button!" %}
+        </div>
+         
+        <div class="like-button-error message-error extra-space-top" style="display: none;">
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Could not save your like setting because of an error." %}
+        </div>
+        <div class="follow-button-error message-error extra-space-top" style="display: none;">
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Could not save your follow setting because of an error." %}
+        </div>
     </div>
 {% endblock action_buttons %}
 
