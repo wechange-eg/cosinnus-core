@@ -356,6 +356,11 @@ class BaseTaggableObjectModel(IndexingUtilsMixin, AttachableObjectModel):
             @param user: The user to check for extra permissions for """
         return False
     
+    def get_tagged_persons_hash(self):
+        """ Returns a hashable tuple of sorted list of ids of all tagged persons.
+            Usuable to compare equality of attached files to objects. """
+        return tuple(sorted(list(self.media_tag.persons.all().values_list('id', flat=True))))
+    
     def get_delete_url(self):
         """ Similar to get_absolute_url, this returns the URL for this object's implemented delete view.
             Needs to be set by a specific implementation of BaseTaggableObjectModel """
