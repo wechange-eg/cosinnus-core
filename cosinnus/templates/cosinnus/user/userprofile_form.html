@@ -75,7 +75,7 @@
 				{% captureas preview_html %}
 				    {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.width}}px;height:{{SETTINGS.AWESOME_AVATAR.height}}px{% endcaptureas %}
                     <div id="id_avatar-preview" class="awesome-avatar-preview" style="{{ preview_style }}">
-                        {% include "cosinnus/user/user_avatar_image.html" with user=request.user extra_style=preview_style image_size="medium-large" %}
+                        {% include "cosinnus/user/user_avatar_image.html" with user=request.user extra_style=preview_style image_size="large" %}
                     </div>
 				{% endcaptureas %}
 				{% include 'cosinnus/fields/avatar_field.html' with avatar_field=form.forms.obj.avatar label=avatar_label legend=avatar_legend preview_html=preview_html %}

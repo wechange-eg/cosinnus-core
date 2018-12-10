@@ -330,10 +330,10 @@ AUTHENTICATION_BACKENDS = ('cosinnus.backends.EmailAuthBackend',)
 AUTO_RENDER_SELECT2_STATICS = False
     
 AWESOME_AVATAR = {
-    'width': 120,
-    'height': 120,
-    'select_area_width': 120,
-    'select_area_height': 120,
+    'width': 263,
+    'height': 263,
+    'select_area_width': 263,
+    'select_area_height': 263,
     'save_quality': 100,
     'save_format': 'png',
     'no_resize': True,
