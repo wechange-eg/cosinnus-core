@@ -73,7 +73,7 @@
 				{% trans "Profile avatar" as avatar_label %}
 				{% captureas avatar_legend %}{% trans "A picture for better recognition." %} {% trans "File Size" %}: {% trans "max. 10 MB" %}{% endcaptureas %}
 				{% captureas preview_html %}
-				    {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.width}}px;height:{{SETTINGS.AWESOME_AVATAR.height}}px{% endcaptureas %}
+				    {% captureas preview_style %}width:{{SETTINGS.AWESOME_AVATAR.select_area_width}}px;height:{{SETTINGS.AWESOME_AVATAR.select_area_height}}px{% endcaptureas %}
                     <div id="id_avatar-preview" class="awesome-avatar-preview" style="{{ preview_style }}">
                         {% include "cosinnus/user/user_avatar_image.html" with user=request.user extra_style=preview_style image_size="large" %}
                     </div>
