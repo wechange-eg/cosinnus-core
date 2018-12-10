@@ -594,7 +594,7 @@
             // Parents of checkboxes like <i class="fa fa-square-o"></i> are always clickable.
             // If they contain a <input type="hidden" /> too, this will contain the value.
 
-            $('body .fa-square-o, body .fa-check-square-o').parent().unbind("click").click(function() {
+            $('body .fa-square-o, body .fa-check-square-o').parent().unbind("click").click(function(e) {
                 if ($(this).attr('disabled')) {
                     return;
                 }
@@ -639,6 +639,8 @@
                         .removeClass('btn-emphasized')
                         .addClass('btn-extra-emphasized');
                 }
+                e.preventDefault();
+                return false;
             });
 
             // set INPUT type="hidden" value on startup
@@ -971,6 +973,7 @@
                 // fill any checkbox counter with the number of checked boxes
                 $('.item_checkbox_count_label').text('(' + $('.item_checkbox_element .fa-check-square-o').length + ')');
                 e.preventDefault();
+                return false;
             });
             
             // hide all context buttons on start
