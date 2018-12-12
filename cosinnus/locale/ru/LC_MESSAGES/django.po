@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-10 12:52+0100\n"
-"PO-Revision-Date: 2018-11-20 17:02+0100\n"
+"PO-Revision-Date: 2018-12-12 14:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1303,20 +1303,16 @@ msgid "+%(num_pictures)s more..."
 msgstr "+%(num_pictures)s больше…"
 
 msgid "Mark All"
-msgstr ""
+msgstr "Отметить всех"
 
 msgid "Deselect All"
-msgstr ""
+msgstr "Убрать отметки"
 
-#, fuzzy
-#| msgid "Delete selected entries"
 msgid "Delete elements"
-msgstr "Удалить выделенные объекты"
+msgstr "Удалить элементы"
 
-#, fuzzy
-#| msgid "Are you sure you want to delete this team?"
 msgid "Are you sure you want to delete all selected elements?"
-msgstr "Вы уверены, что хотите удалить этот проект?"
+msgstr "Вы уверены, что хотите удалить все выбранные элементы?"
 
 msgid "There was an error while trying to submit your report. Please try again in a moment."
 msgstr "Произошла ошибка при отправке жалобы. Пожалуйста, попробуйте снова через несколько секунд."
@@ -1324,10 +1320,8 @@ msgstr "Произошла ошибка при отправке жалобы. П
 msgid "Cancel"
 msgstr "Отмена"
 
-#, fuzzy
-#| msgid "Saving..."
 msgid "Deleting..."
-msgstr "Сохранение…"
+msgstr "Удаление…"
 
 msgid "Error embedding a Flickr gallery"
 msgstr "Ошибка встраивания Flickr Gallery/Слайдшоу галереи"
@@ -1360,10 +1354,10 @@ msgid "Consider using an alternate browser!"
 msgstr "Попробуйте использовать альтернативный браузер!"
 
 msgid "I want to like this"
-msgstr ""
+msgstr "Я хочу лайкнуть это"
 
 msgid "I want to follow this"
-msgstr ""
+msgstr "Я хочу следить за этим"
 
 msgid "Yes"
 msgstr "Да"
@@ -1374,15 +1368,11 @@ msgstr "Да"
 msgid "Follow"
 msgstr "Подписаться"
 
-#, fuzzy
-#| msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
 msgid "You will now receive notifications for comments or when this content is updated."
-msgstr "Вы получите уведомление, когда проект будет создан на основе идеи, которая Вам нравится. Если вы не хотите получать уведомления, нажмите кнопку отписаться!"
+msgstr "Вы получите уведомление о комментариях и если контент будет обновлен."
 
-#, fuzzy
-#| msgid "You are invited!"
 msgid "You are following this item"
-msgstr "Вы приглашены!"
+msgstr "Вы следите за этим элементом"
 
 msgid "Expand"
 msgstr "Расширить"
@@ -1604,11 +1594,11 @@ msgstr "Нет описания"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications whenever public content is posted in this project."
-msgstr ""
+msgstr "Теперь Вы будете получать уведомления, если общественно-доступный контент будет опубликован в этом проекте."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "You will now receive notifications whenever public content is posted in this group."
-msgstr ""
+msgstr "Теперь Вы будете получать уведомления, если общественно-доступный контент будет опубликован в этой группе."
 
 msgid "more"
 msgstr "больше"
@@ -3172,10 +3162,8 @@ msgstr "Проверочные символы"
 msgid "We need to make sure you are a real person (sorry!)"
 msgstr "Нам необходимо убедиться, что Вы - реальная личность (просим прощения!)"
 
-#, fuzzy
-#| msgid "Show more options..."
 msgid "Search options..."
-msgstr "Показать больше вариантов…"
+msgstr "Искать варианты…"
 
 msgid "Search in Apps"
 msgstr "Поиск в приложениях"
@@ -3428,16 +3416,12 @@ msgid "Visit Event Page"
 msgstr "Посетите страницу мероприятия"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
 msgid "You will now receive notifications for comments or when this event is updated or its details change."
-msgstr "Вы получите уведомление, когда проект будет создан на основе идеи, которая Вам нравится. Если вы не хотите получать уведомления, нажмите кнопку отписаться!"
+msgstr "Вы получите уведомления о комментариях, а также если это событие будет обновлено или если изменятся его детали."
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
 msgid "If you do not want notifications, click the unfollow button!"
-msgstr "Вы получите уведомление, когда проект будет создан на основе идеи, которая Вам нравится. Если вы не хотите получать уведомления, нажмите кнопку отписаться!"
+msgstr "Если Вы не хотите получать уведомления, нажмите кнопку не следить!"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Could not save your like setting because of an error."
@@ -3480,10 +3464,8 @@ msgid "Edit your Idea"
 msgstr "Редактировать Вашу идею"
 
 #. Translators: __INCLUDE_JS_PO__
-#, fuzzy
-#| msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
 msgid "You will receive a notification when a project is created from your liked idea."
-msgstr "Вы получите уведомление, когда проект будет создан на основе идеи, которая Вам нравится. Если вы не хотите получать уведомления, нажмите кнопку отписаться!"
+msgstr "Вы получите уведомление, если проект будет создан в рамках идеи, которая Вам нравится."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"
@@ -4026,7 +4008,7 @@ msgstr "Только члены группы/проекты имеют прав�
 
 #, python-format
 msgid "You may only invite %(maximum_number)d people at once. Any emails above that number have been ignored."
-msgstr ""
+msgstr "Вы можете одновременно пригласить только %(maximum_number)d человек. Электронные письма превышающие это количество будут проигнорированны."
 
 #, python-format
 msgid "Sorry, these did not seem to be valid email addresses: %s"
