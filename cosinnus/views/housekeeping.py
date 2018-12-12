@@ -5,7 +5,8 @@ from builtins import str
 from builtins import range
 from cosinnus.models.group import CosinnusGroup, CosinnusGroupMembership,\
     CosinnusPermanentRedirect, CosinnusPortal, MEMBERSHIP_MEMBER,\
-    MEMBERSHIP_PENDING, CosinnusPortalMembership, CosinnusLocation
+    MEMBERSHIP_PENDING, CosinnusPortalMembership, CosinnusLocation,\
+    MEMBERSHIP_ADMIN
 from cosinnus.utils.dashboard import create_initial_group_widgets
 from django.http.response import HttpResponse, HttpResponseForbidden
 from django.contrib.auth import get_user_model
@@ -32,6 +33,7 @@ from django.core.mail.message import EmailMessage
 from cosinnus.core.mail import send_mail_or_fail, send_mail,\
     send_mail_or_fail_threaded
 from django.template.defaultfilters import linebreaksbr
+from django.db.models.aggregates import Count
 
 
 def housekeeping(request=None):
@@ -388,3 +390,39 @@ def group_storage_info(request):
             prints += '- %s (%s): %i MB<br/>' % (group.name, group.slug, size)
 
     return HttpResponse(prints)
+
+
+def user_activity_info(request):
+    if request and not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    
+    prints = '<h1>User activity of users who logged in at least once, in terms of memberships in projects+groups, sorted by highest, one user per row:</h1><br/></br>'
+    users = {}
+    
+    # this filtering simply does not work in django 1.8, the count subfilters are ignored
+#     group_projects = Count('cosinnus_memberships', filter=Q(cosinnus_memberships__group__portal=CosinnusPortal.get_current()))
+#     group_projects_admin = Count('cosinnus_memberships', filter=(Q(cosinnus_memberships__group__portal=CosinnusPortal.get_current()) & Q(cosinnus_memberships__status=MEMBERSHIP_ADMIN)))
+#     projects_only = Count('cosinnus_memberships', filter=(Q(cosinnus_memberships__group__portal=CosinnusPortal.get_current()) & Q(cosinnus_memberships__group__type=CosinnusGroup().TYPE_PROJECT)))
+#     groups_only = Count('cosinnus_memberships', filter=(Q(cosinnus_memberships__group__portal=CosinnusPortal.get_current()) & Q(cosinnus_memberships__group__type=CosinnusGroup().TYPE_SOCIETY)))
+#     for user in get_user_model().objects.filter(is_active=True).exclude(last_login__exact=None).\
+#                 annotate(group_projects=group_projects).annotate(group_projects_admin=group_projects_admin).\
+#                 annotate(projects_only=projects_only).annotate(groups_only=groups_only):
+    
+    for membership in CosinnusGroupMembership.objects.filter(group__portal=CosinnusPortal.get_current(), user__is_active=True).exclude(user__last_login__exact=None):
+        user_row = users.get(membership.user.id, [0, 0, 0, 0, (now()-membership.user.last_login).days])
+        user_row[0] += 1
+        if membership.group.type == CosinnusGroup().TYPE_PROJECT:
+            user_row[1] +=1 
+        if membership.group.type == CosinnusGroup().TYPE_SOCIETY:
+            user_row[2] +=1 
+        if membership.status == MEMBERSHIP_ADMIN:
+            user_row[3] += 1
+        users[membership.user.id] = user_row
+    
+    rows = users.values()
+    rows = sorted(rows, key=lambda row: row[0], reverse=True)
+    rows = [('projects-and-groups-count', 'groups-only-count', 'projects-only-count', 'admin-of-projects-and-groups-count', 'user-last-login-days'), ] + rows
+    prints += '<br/>'.join([','.join((str(cell) for cell in row)) for row in rows])
+    
+    return HttpResponse(prints)
+

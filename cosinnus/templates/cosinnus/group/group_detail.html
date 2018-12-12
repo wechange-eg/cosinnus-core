@@ -101,7 +101,7 @@
                                         {% include "cosinnus/user/user_avatar_image.html" with user=member %}
                                     </a>
                                     {% if user|has_write_access:object or user == member %}
-                                    <a class="pull-right fadedown-clickarea">
+                                    <a class="pull-right fadedown-clickarea" href="#">
                                         <i class="fa fa-chevron-down"></i>
                                     </a>
                                     {% endif %}
@@ -212,7 +212,7 @@
 		                                {% include "cosinnus/user/user_avatar_image.html" with user=member %}
 		                            </a>
 		                            {% if user|has_write_access:object %}
-		                            <a class="pull-right fadedown-clickarea">
+		                            <a class="pull-right fadedown-clickarea" href="#">
 		                                <i class="fa fa-chevron-down"></i>
 		                            </a>
 		                            {% endif %}
@@ -393,7 +393,7 @@
                                 {% include "cosinnus/user/user_avatar_image.html" with user=member %}
                             </span>
                             {% if user|has_write_access:object %}
-                            <a class="pull-right fadedown-clickarea">
+                            <a class="pull-right fadedown-clickarea" href="#">
                                 <i class="fa fa-chevron-down"></i>
                             </a>
                             {% endif %}
@@ -501,11 +501,13 @@
             <div class="btn btn-default w100" href="?show=all">
                 <ul class="media-list">
                     <li class="media">
-                        <a class="pull-left" >
+                        <a class="pull-left">
                             <i class="fa fa-chevron-down"></i>
                         </a>
                         <div class="media-body">
-                            {% blocktrans with more_count=more_user_count %}Show all of the other {{ more_count }} users...{% endblocktrans %}
+                            <a href="?show=all">
+                                {% blocktrans with more_count=more_user_count %}Show all of the other {{ more_count }} users...{% endblocktrans %}
+                            </a>
                         </div>
                     </li>
                 </ul>
