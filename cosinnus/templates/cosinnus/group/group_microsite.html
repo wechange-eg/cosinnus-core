@@ -92,7 +92,7 @@
                         {% include 'cosinnus/registration/sso_login_button.html' with next=group.get_absolute_url %}   
                     {% else %}
 						<span class="app-calendar"> {# Hacky green color #}
-			                <button href="{% url 'cosinnus:user-add' %}?next={{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
+			                <button href="{% url 'cosinnus:user-add' %}?next={% if request.GET.next %}{{ request.GET.next }}{% else %}{{ group.get_absolute_url }}{% endif %}" type="button" class="btn btn-emphasized">
 			                    <ul class="media-list">
 			                        <li class="media">
 			                            <a class="pull-left" href="#">
@@ -105,7 +105,7 @@
 			                    </ul>
 			                </button>
 		                </span>
-						<button href="{% url 'login' %}?next={{ group.get_absolute_url }}" type="button" class="btn btn-emphasized">
+						<button href="{% url 'login' %}?next={% if request.GET.next %}{{ request.GET.next }}{% else %}{{ group.get_absolute_url }}{% endif %}" type="button" class="btn btn-emphasized">
 		                    <ul class="media-list">
 		                        <li class="media">
 		                            <a class="pull-left" href="#">
