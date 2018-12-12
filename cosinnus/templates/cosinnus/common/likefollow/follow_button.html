@@ -6,7 +6,7 @@
 
 <a class="likefollow-button follow-button {% if user|can_likefollow:object %}action-do-likefollow{% endif %} {% if user.id in object.get_followed_user_ids %}selected{% endif %}" 
         data-type="follow" data-ct="{{ object.get_content_type }}" data-id="{{ object.id }}"
-        {% if not user|can_likefollow:object %}href="{% url 'login' %}?next={{ object.get_absolute_follow_url }}"{% endif %}>
+        {% if not user|can_likefollow:object %}href="{% url 'login' %}?next={{ object.get_absolute_follow_url|urlencode }}"{% endif %}>
     <span class="show-unselected">
         {% comment %}  
             No counter in follow buttons!
