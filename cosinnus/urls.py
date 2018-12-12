@@ -83,6 +83,7 @@ urlpatterns = patterns('cosinnus.views',
     url(r'^housekeeping/send_testmail/', 'housekeeping.send_testmail', name='housekeeping-send-testmail'),
     url(r'^housekeeping/print_settings/', 'housekeeping.print_settings', name='housekeeping-print-settings'),
     url(r'^housekeeping/group_storage_info/', 'housekeeping.group_storage_info', name='housekeeping-group-storage-info'),
+    url(r'^housekeeping/user_activity_info/', 'housekeeping.user_activity_info', name='housekeeping-user-activity-info'),
     
     
     url(r'^select2/', include('cosinnus.urls_select2', namespace='select2')),
