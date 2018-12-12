@@ -173,7 +173,11 @@ class CosinnusConf(AppConf):
     
     # the class with the implementation for importing CosinnusGroups used for the CSV import
     CSV_IMPORT_GROUP_IMPORTER = 'cosinnus.utils.import_utils.GroupCSVImporter'
-
+    
+    # should a custom premoum page be shown for actions that require a paid subscription,
+    # like creating groups. template for this is `premium_info_page.html`
+    CUSTOM_PREMIUM_PAGE_ENABLED = False
+    
     # These are the default values for the bootstrap3-datetime-picker and
     # are translated in `cosinnus/formats/LOCALE/formats.py`
 

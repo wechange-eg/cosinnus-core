@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.conf.urls import include, patterns, url
-from django.views.generic.base import RedirectView
+from django.views.generic.base import RedirectView, TemplateView
 from django.core.urlresolvers import reverse_lazy
 from rest_framework import routers
 
@@ -125,6 +125,11 @@ if settings.COSINNUS_IDEAS_ENABLED:
         url(r'^ideas/add/$', 'idea.idea_create', name='idea-create'),
         url(r'^ideas/(?P<slug>[^/]+)/edit/$', 'idea.idea_edit', name='idea-edit'),
         url(r'^ideas/(?P<slug>[^/]+)/delete/$', 'idea.idea_delete', name='idea-delete'),
+    )
+    
+if settings.COSINNUS_CUSTOM_PREMIUM_PAGE_ENABLED:
+    urlpatterns += patterns('cosinnus.views',
+        url(r'^portal/supporters/$', TemplateView.as_view(template_name='premium_info_page.html'), name='premium-info-page'),
     )
 
 for url_key in group_model_registry:
