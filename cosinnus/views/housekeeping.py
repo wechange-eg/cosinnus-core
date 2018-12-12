@@ -417,7 +417,6 @@ def user_activity_info(request):
             user_row[2] +=1 
         if membership.status == MEMBERSHIP_ADMIN:
             user_row[3] += 1
-        print('>> USRE', user_row)
         users[membership.user.id] = user_row
     
     rows = users.values()
