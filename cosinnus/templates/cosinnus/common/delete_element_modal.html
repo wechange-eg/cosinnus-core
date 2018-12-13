@@ -2,38 +2,36 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="cosinnus_move_element_modal" tabindex="1" role="dialog" aria-labelledby="cosinnus_move_element_modal_Label" aria-hidden="true">
+<div class="modal fade" id="cosinnus_delete_element_modal" tabindex="1" role="dialog" aria-labelledby="cosinnus_delete_element_modal_Label" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                     <i class="fa fa-times"></i>
                 </button>
-                <h4 class="modal-title" id="cosinnus_move_element_modal_Label">
+                <h4 class="modal-title" id="cosinnus_delete_element_modal_Label">
                     <i class="fa fa-warning"></i>
-                    {% trans "Move to another Folder" %}: <span id="cosinnus_move_element_title"></span>
+                    {% trans "Delete elements" %} <span id="cosinnus_delete_element_title"></span>
                 </h4>
             </div>
             <div class="modal-body">
-
-                <div id="jstree_move_div"></div>
-                <input type="hidden" id="cosinnus_move_element_obj_ids" value="" >
-                <input type="hidden" id="cosinnus_move_element_selected_folder" value="" >
-                <input type="hidden" id="cosinnus_move_element_current_folder_id" value="" >
+                {% trans "Are you sure you want to delete all selected elements?" %}
+                
+                <input type="hidden" id="cosinnus_delete_element_obj_ids" value="" >
             </div>
             <div class="modal-footer">
                 <div id="move_element_modal_error" style="display:none;" class="regular-space">
                     <ul  class="errorlist" ><li>{% trans "There was an error while trying to submit your report. Please try again in a moment." %}</li></ul>
                 </div>
             
-                <button id="cosinnus_move_element_submit_btn" type="button" class="btn btn-emphasized _elem-action-hidden _elem-success-hidden _elem-start-shown">
+                <button id="cosinnus_delete_element_submit_btn" type="button" class="btn btn-emphasized _elem-action-hidden _elem-success-hidden _elem-start-shown">
                     <ul class="media-list">
                         <li class="media">
                             <a class="pull-left" href="#">
                                 <i class="fa fa-check"></i>
                             </a>
                             <div class="media-body">
-                                {% trans "Move" %}
+                                {% trans "Delete" %}
                             </div>
                         </li>
                     </ul>
@@ -57,7 +55,7 @@
                                 <i class="fa fa-spinner fa-spin"></i>
                             </a>
                             <div class="media-body">
-                                {% trans "Submitting..." %}
+                                {% trans "Deleting..." %}
                             </div>
                         </li>
                     </ul>
@@ -67,38 +65,3 @@
         </div>
     </div>
 </div><!-- modal -->
-
-<script type="text/javascript">
-    $('#cosinnus_move_element_modal').on('shown.bs.modal', function () {
-        if ($('#jstree_move_div').is(':empty')){
-            console.log('showing jstree');
-            $('#jstree_move_div')
-                .on('loaded.jstree', function () {
-                    $('#jstree_move_div').jstree(true).open_all();
-                    $('#jstree_move_div').jstree(true).select_node("{{ current_folder.slug }}");
-                })
-                .on('changed.jstree', function (e, data) {
-                    var i, j = [];
-                    var folder_id = -1;
-                    for(i = 0, j = data.selected.length; i < j; i++) {
-                        var id = data.instance.get_node(data.selected[i]).id;
-                        folder_id = data.instance.get_node(data.selected[i]).a_attr.target_folder;
-                    }
-                    $('#cosinnus_move_element_selected_folder').val(folder_id);
-                });
-            var data = {{ all_folder_json|safe }};
-            // use this to customise the folder icons
-            //for(i = 0; i < data.length; i++) {
-            //    data[i]['icon'] = 'fa fa-folder-open';
-            //}    
-            $('#jstree_move_div').jstree({
-              "core" : {
-                "multiple" : false,
-                'data' : data,
-              },
-            });
-        }
-       
-        
-    });
-</script>

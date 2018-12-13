@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 
 from django.conf.urls import include, url
-from django.views.generic.base import RedirectView
 from django.urls import reverse_lazy
+from django.views.generic.base import RedirectView, TemplateView
 from rest_framework import routers
 from rest_framework_swagger.views import get_swagger_view
 
@@ -56,7 +56,7 @@ urlpatterns = [
     url(r'^map/search/(?P<filter_group_id>\d+)/$', map_api.map_search_endpoint, name='map-search-endpoint-filtered'),
     url(r'^map/detail/$', map_api.map_detail_endpoint, name='map-detail-endpoint'),
     
-    url(r'^like/$', common.do_like,  name='like-view'),
+    url(r'^likefollow/$', 'common.do_likefollow',  name='likefollow-view'),
     
     
     url(r'^invitations/$', group.group_list_invited, name='invitations', kwargs={'show_all': True}),
@@ -91,6 +91,7 @@ urlpatterns = [
     url(r'^housekeeping/send_testmail/', housekeeping.send_testmail, name='housekeeping-send-testmail'),
     url(r'^housekeeping/print_settings/', housekeeping.print_settings, name='housekeeping-print-settings'),
     url(r'^housekeeping/group_storage_info/', housekeeping.group_storage_info, name='housekeeping-group-storage-info'),
+    url(r'^housekeeping/user_activity_info/', 'housekeeping.user_activity_info', name='housekeeping-user-activity-info'),
     
     url(r'^select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
 ]
@@ -132,6 +133,11 @@ if settings.COSINNUS_IDEAS_ENABLED:
         url(r'^ideas/(?P<slug>[^/]+)/edit/$', idea.idea_edit, name='idea-edit'),
         url(r'^ideas/(?P<slug>[^/]+)/delete/$', idea.idea_delete, name='idea-delete'),
     ]
+    
+if settings.COSINNUS_CUSTOM_PREMIUM_PAGE_ENABLED:
+    urlpatterns += patterns('cosinnus.views',
+        url(r'^portal/supporters/$', TemplateView.as_view(template_name='premium_info_page.html'), name='premium-info-page'),
+    )
 
 for url_key in group_model_registry:
     plural_url_key = group_model_registry.get_plural_url_key(url_key, url_key + '_s')

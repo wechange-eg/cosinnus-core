@@ -52,7 +52,7 @@ def redirect_to_not_logged_in(request, view=None, group=None):
     # redirect to group's micropage and give login required error message
     if group is not None:
         messages.warning(request, _('Only registered members can see the content you requested! Log in or create an account now!'))
-        return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': group}))
+        return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': group}) + '?next=' + request.path)
     messages.error(request, _('Please log in to access this page.'))
     return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
     

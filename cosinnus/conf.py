@@ -173,7 +173,11 @@ class CosinnusConf(AppConf):
     
     # the class with the implementation for importing CosinnusGroups used for the CSV import
     CSV_IMPORT_GROUP_IMPORTER = 'cosinnus.utils.import_utils.GroupCSVImporter'
-
+    
+    # should a custom premoum page be shown for actions that require a paid subscription,
+    # like creating groups. template for this is `premium_info_page.html`
+    CUSTOM_PREMIUM_PAGE_ENABLED = False
+    
     # These are the default values for the bootstrap3-datetime-picker and
     # are translated in `cosinnus/formats/LOCALE/formats.py`
 
@@ -191,6 +195,9 @@ class CosinnusConf(AppConf):
     
     # the notification setting for groups when user newly join them (3: weekly)
     DEFAULT_GROUP_NOTIFICATION_SETTING = 3
+    
+    # default setting for notifications for followed objects
+    DEFAULT_FOLLOWED_OBJECT_NOTIFICATION_SETTING = 2 # SETTING_DAILY = 2
     
     # when etherpad objects are deleted, should the etherpads on the server be deleted as well?
     DELETE_ETHERPADS_ON_SERVER_ON_DELETE = False
@@ -233,6 +240,9 @@ class CosinnusConf(AppConf):
     
     # how long should user notification settings be retained in cache
     GLOBAL_USER_NOTIFICATION_SETTING_CACHE_TIMEOUT = GROUP_CACHE_TIMEOUT
+    
+    # how long like and follow counts should be retained in cache
+    LIKEFOLLOW_COUNT_CACHE_TIMEOUT = DEFAULT_OBJECT_CACHE_TIMEOUT
     
     # the url pattern for group overview URLs
     GROUP_PLURAL_URL_PATH = 'projects'

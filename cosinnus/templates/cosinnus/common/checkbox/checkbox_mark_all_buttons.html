@@ -1,0 +1,27 @@
+{% load i18n %}
+
+<button type="submit" class="btn btn-emphasized btn-icon-only pull-left item_checkbox_mark_all item_checkbox_mark_all_true">
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#" disabled="true">
+                <i class="fa fa-check-square-o"></i>
+            </a>
+            <div class="media-body">
+                {% trans "Mark All" %}
+            </div>
+        </li>
+    </ul>
+</button>
+
+<button type="submit" class="btn btn-emphasized btn-icon-only pull-left item_checkbox_mark_all item_checkbox_mark_all_false">
+    <ul class="media-list">
+        <li class="media">
+            <a class="pull-left" href="#" disabled="true">
+                <i class="fa fa-close"></i>
+            </a>
+            <div class="media-body">
+                {% trans "Deselect All" %}
+            </div>
+        </li>
+    </ul>
+</button>

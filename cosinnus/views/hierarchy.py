@@ -12,8 +12,13 @@ from cosinnus.views.mixins.group import (RequireWriteMixin, FilterGroupMixin,
 from cosinnus.views.mixins.tagged import HierarchyPathMixin
 from cosinnus.utils.urls import group_aware_reverse
 from django.views.generic.base import View
-from django.http.response import HttpResponseBadRequest, HttpResponse
+from django.http.response import HttpResponseBadRequest, HttpResponse,\
+    HttpResponseServerError
 from django.shortcuts import get_object_or_404
+from django.http.response import JsonResponse
+from cosinnus.templatetags.cosinnus_tags import has_write_access
+from cosinnus.utils.permissions import check_object_write_access
+from annoying.functions import get_object_or_None
 
 
 class AddContainerView(RequireWriteMixin, FilterGroupMixin,
@@ -68,12 +73,12 @@ class AddContainerView(RequireWriteMixin, FilterGroupMixin,
 
 
 class MoveElementView(RequireCreateObjectsInMixin, View):
-    """ Moves a superclass element of HierarchicalBaseTaggableObject to a different folder.
+    """ Moves one or more superclass elements of HierarchicalBaseTaggableObject to a different folder.
         
         This is a pseudo-abstract class, superclass this with your own view for each cosinnus app.
         Requires `model` to be set to a non-abstract HierarchicalBaseTaggableObject model.
         Expects to find a `group` kwarg.
-        Excpects `element_id` and `target_folder_id` as POST arguments.
+        Excpects `element_ids[]` and `target_folder_id` as POST arguments.
      """
     
     http_method_names = ['post', ]
@@ -86,27 +91,37 @@ class MoveElementView(RequireCreateObjectsInMixin, View):
         if not self.model:
             raise ImproperlyConfigured('No model class is set for the pseudo-abstract view MoveElementView.')
         
-        element_id = request.POST.get('element_id', None)
+        element_ids = request.POST.getlist('element_ids[]', [])
         target_folder_id = request.POST.get('target_folder_id', None)
         
-        if not (element_id or target_folder_id or self.group):
-            return HttpResponseBadRequest('Missing POST fields for this requests.')
-        if element_id == target_folder_id:
-            return HttpResponseBadRequest('Source and target are the same.')
+        if not (element_ids or target_folder_id or self.group):
+            return HttpResponseBadRequest('Missing POST fields for this request.')
         
-        element = get_object_or_404(self.model, id=element_id, group=self.group)
+        successful_ids = []
         target_folder = get_object_or_404(self.folder_model or self.model, id=target_folder_id, group=self.group)
+        for element_id in element_ids:
+            element = get_object_or_None(self.model, id=element_id, group=self.group)
+            
+            # check write permission on element
+            if not check_object_write_access(element, request.user):
+                continue
+            if self.move_element(element, target_folder):
+                successful_ids.append(element_id)
         
-        return self.move_element(element, target_folder)
+        data = {
+            'had_errors': len(successful_ids) != len(element_ids),
+            'successful_ids': successful_ids,
+        }
+        return JsonResponse(data)
         
         
     def move_element(self, element, target_folder):
         if element.is_container:
-            raise HttpResponseBadRequest('Container moving is bad!')
-        else:
+            raise HttpResponseBadRequest('Container moving is not yet implemented!')
+        elif not element.path == target_folder.path:
             element.path = target_folder.path
             element.save()
-            return HttpResponse('ok_element')
-        
+            return True
+        return False
         
         

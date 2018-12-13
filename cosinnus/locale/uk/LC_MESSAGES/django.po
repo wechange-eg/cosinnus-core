@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-11 17:54+0200\n"
-"PO-Revision-Date: 2018-10-01 11:45+0200\n"
+"POT-Creation-Date: 2018-12-10 12:52+0100\n"
+"PO-Revision-Date: 2018-12-12 14:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 1.8.4\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Language: uk_UA\n"
 
@@ -391,6 +391,7 @@ msgstr "Мої проекти"
 msgid "Other teams"
 msgstr "Інші проекти"
 
+#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Like"
 msgstr "Вподобання"
@@ -896,9 +897,12 @@ msgid "User"
 msgstr "Користувач/-ка"
 
 #. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Liked"
 msgstr "Вподобані"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Following"
 msgstr "Відстежуються"
@@ -1264,12 +1268,6 @@ msgstr "Наразі, такі браузери підтримують зава�
 msgid "File and Folder Upload"
 msgstr "Завантажити файл та теки"
 
-msgid "Group overview"
-msgstr "Огляд спільнот"
-
-msgid "Project overview"
-msgstr "Огляд проектів"
-
 msgid "Services"
 msgstr "Послуги"
 
@@ -1297,6 +1295,27 @@ msgstr "Виглядає на те, що під час виконання ваш
 #, python-format
 msgid "+%(num_pictures)s more..."
 msgstr "+%(num_pictures)s більше…"
+
+msgid "Mark All"
+msgstr "Відмітити все"
+
+msgid "Deselect All"
+msgstr "Прибрати Все"
+
+msgid "Delete elements"
+msgstr "Видалити елементи"
+
+msgid "Are you sure you want to delete all selected elements?"
+msgstr "Ви дійсно бажаєте видалити всі вибрані елементи?"
+
+msgid "There was an error while trying to submit your report. Please try again in a moment."
+msgstr "При надсиланні повідомлення виникла помилка. Будь ласка, спробуйте знову за кілька хвилин."
+
+msgid "Cancel"
+msgstr "Скасувати"
+
+msgid "Deleting..."
+msgstr "Видалення…"
 
 msgid "Error embedding a Flickr gallery"
 msgstr "У Flickr  знайдена помилка"
@@ -1327,6 +1346,27 @@ msgstr "Вибачте, ця карта не підтримується в Inter
 
 msgid "Consider using an alternate browser!"
 msgstr "Розгляньте використання альтернативного браузера!"
+
+msgid "I want to like this"
+msgstr "Я хоче все вподобати"
+
+msgid "I want to follow this"
+msgstr "Я хочу відстежувати це"
+
+msgid "Yes"
+msgstr "Так"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Follow"
+msgstr "Відстежувати"
+
+msgid "You will now receive notifications for comments or when this content is updated."
+msgstr "Відтепер Ви отримуєте сповіщення у випадку коментарів або коли буде оновлено контент."
+
+msgid "You are following this item"
+msgstr "Ви відстежуєте цей елемент"
 
 msgid "Expand"
 msgstr "Поширити"
@@ -1446,9 +1486,6 @@ msgstr "Переоформити"
 msgid "Save"
 msgstr "Зберегти"
 
-msgid "Cancel"
-msgstr "Скасувати"
-
 msgid "Saving..."
 msgstr "Збереження..."
 
@@ -1548,6 +1585,14 @@ msgstr "Спільнота:"
 msgid "No Description set"
 msgstr "Опис не створено"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications whenever public content is posted in this project."
+msgstr "Ви будете отримувати сповіщення, якщо загально доступний контент буде опубліковано в цьому проекті."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications whenever public content is posted in this group."
+msgstr "Ви будете отримувати сповіщення, якщо загально доступний контент буде опубліковано в цій групі."
+
 msgid "more"
 msgstr "більше"
 
@@ -1563,9 +1608,6 @@ msgstr "(обов'язково)"
 
 msgid "Thank you! Your report has been received and we will review the items in question as soon as possible."
 msgstr "Ми отримали ваше повідомлення та максимально швидко перевіримо вказаний вами зміст."
-
-msgid "There was an error while trying to submit your report. Please try again in a moment."
-msgstr "При надсиланні повідомлення виникла помилка. Будь ласка, спробуйте знову за кілька хвилин."
 
 msgid "Send"
 msgstr "Надіслати"
@@ -2238,9 +2280,6 @@ msgstr "Ви дійсно бажаєте видалити ідею «%(title)s»
 
 msgid "Delete Idea"
 msgstr "Видалити ідею"
-
-msgid "Yes"
-msgstr "Так"
 
 msgid "Edit Idea"
 msgstr "Редагувати ідею"
@@ -3121,6 +3160,9 @@ msgstr "Сиволи перевірки"
 msgid "We need to make sure you are a real person (sorry!)"
 msgstr "Ми маємо переконатися, що Ви є реальною персоною (вибачте!)"
 
+msgid "Search options..."
+msgstr "Пошук опцій…"
+
 msgid "Search in Apps"
 msgstr "Пошук серед застосунків"
 
@@ -3371,6 +3413,22 @@ msgid "Visit Event Page"
 msgstr "Відвідати сторінку заходу"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications for comments or when this event is updated or its details change."
+msgstr "Ви отримуєте сповіщення у випадку коментарів або якщо ця подія буде оновлена чи будуть змінені деталі."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "If you do not want notifications, click the unfollow button!"
+msgstr "Якщо Ви не хочете отримувати сповіщення, натисніть кнопку не стежити!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your like setting because of an error."
+msgstr "Не вдається зберегти налаштування Ваших вподобань через помилку."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your follow setting because of an error."
+msgstr "Не вдається зберегти налаштування Ваших відстежень через помилку."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Hidden Users"
 msgstr "Приховані користувачі"
 
@@ -3395,10 +3453,6 @@ msgid "Author"
 msgstr "Автор"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Follow"
-msgstr "Відстежувати"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Create Project from Idea"
 msgstr "Створити проект з ідеї"
 
@@ -3407,16 +3461,8 @@ msgid "Edit your Idea"
 msgstr "Редагувати Вашу ідею"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
-msgstr "Ви отримуєте сповіщення, якщо буде створено проект щ ідеї, яку Ви вподобали. Якщо Ви не хочете отримувати сповіщення, натисніть кнопку „не стежити“!"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your like setting because of an error."
-msgstr "Не вдається зберегти налаштування Ваших вподобань через помилку."
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your follow setting because of an error."
-msgstr "Не вдається зберегти налаштування Ваших відстежень через помилку."
+msgid "You will receive a notification when a project is created from your liked idea."
+msgstr "Ви будете отримувати сповіщення, якщо буде створено проект з ідеї, яку Ви вподобали."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"
@@ -3958,7 +4004,7 @@ msgstr "Тільки члени спільноти/проекту мають п�
 
 #, python-format
 msgid "You may only invite %(maximum_number)d people at once. Any emails above that number have been ignored."
-msgstr ""
+msgstr "Ви можете одночасно запросити лише %(maximum_number)d людей. Електронні листи більше за цю кількість будуть ігноруватися."
 
 #, python-format
 msgid "Sorry, these did not seem to be valid email addresses: %s"
@@ -3968,20 +4014,17 @@ msgstr "Вибачте, на жаль, це не актуальна електр
 msgid "These people have been sent an email invite only recently. You can send them an invite again tomorrow: %s"
 msgstr "Цим людям нещодавно вже відправляли листи з запрошеннями. Ви зможете знову відправляти їм запрошення завтра: %s"
 
-#, fuzzy, python-format
-#| msgid "Good news! The people with these addresses already have a registered user account: %s"
+#, python-format
 msgid "Good news! The people with these addresses are already members: %s"
-msgstr "Хороші новини! Люди з цією адресою вже зареєвали акаунт користувача: %s"
+msgstr "Хороші новини! Люди з цими адресами вже є членами: %s"
 
-#, fuzzy, python-format
-#| msgid "Good news! The people with these addresses already have a registered user account: %s"
+#, python-format
 msgid "The people with these addresses already have a user account and already have a pending invitation: %s"
-msgstr "Хороші новини! Люди з цією адресою вже зареєвали акаунт користувача: %s"
+msgstr "Люди з цими адресами вже зареєстрували акаунти користувачів та вже отримали запрошення: %s"
 
-#, fuzzy, python-format
-#| msgid "Good news! The people with these addresses already have a registered user account: %s"
+#, python-format
 msgid "The people with these addresses already have a registered user account and have been invited directly: %s"
-msgstr "Хороші новини! Люди з цією адресою вже зареєвали акаунт користувача: %s"
+msgstr "Хороші новини! Люди з цими адресами вже мають акаунти користувачів та отримали прямі запрошення: %s"
 
 #, python-format
 msgid "Success! We are now sending out invitations to these email addresses: %s"
@@ -4172,6 +4215,12 @@ msgstr "Ви, на разі, не є членом %s! Якщо ви бажаєт
 
 msgid "Your changes have been saved."
 msgstr "Ваші зміни були збережені."
+
+#~ msgid "Group overview"
+#~ msgstr "Огляд спільнот"
+
+#~ msgid "Project overview"
+#~ msgstr "Огляд проектів"
 
 #~ msgid "Deutsch"
 #~ msgstr "Deutsch"

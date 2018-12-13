@@ -1,0 +1,4 @@
+{% load i18n %}
+{% if user.id in object.get_followed_user_ids %}
+    <i class="fa fa-bell" title="{% trans "You are following this item" %}"></i>
+{% endif %}

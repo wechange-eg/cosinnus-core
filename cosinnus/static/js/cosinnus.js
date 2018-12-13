@@ -53,7 +53,7 @@
             if (typeof target === "undefined") {
                 target = 'body';
             }
-            $(target).on('click','.fadedown .btn:first-child .fadedown-clickarea, .fadedown .btn:first-child.fadedown-clickarea',function() {
+            $(target).on('click','.fadedown .btn:first-child .fadedown-clickarea, .fadedown .btn:first-child.fadedown-clickarea',function(e) {
                 if (!$(this).closest('.fadedown').hasClass('open')) {
                     // closed
                     $(this)
@@ -77,6 +77,8 @@
                         .removeClass('fa-chevron-up')
                         .addClass('fa-chevron-down');
                 }
+                e.stopPropagation();
+                return false;
             });
             // hide fadedown boxes unless .open class explicit set
             $('.fadedown').not('.open').find('> :not(:first-child)').hide();
@@ -592,7 +594,7 @@
             // Parents of checkboxes like <i class="fa fa-square-o"></i> are always clickable.
             // If they contain a <input type="hidden" /> too, this will contain the value.
 
-            $('body .fa-square-o, body .fa-check-square-o').parent().click(function() {
+            $('body .fa-square-o, body .fa-check-square-o').parent().unbind("click").click(function(e) {
                 if ($(this).attr('disabled')) {
                     return;
                 }
@@ -611,6 +613,7 @@
                     $input.trigger('change');
                     
                     $(this)
+                    	.removeClass('checkbox-checked')
                         .parents('.btn-extra-emphasized')
                         .first()
                         .removeClass('btn-extra-emphasized')
@@ -630,11 +633,14 @@
                     $input.trigger('change');
                         
                     $(this)
+                    	.addClass('checkbox-checked')
                         .parents('.btn-emphasized')
                         .first()
                         .removeClass('btn-emphasized')
                         .addClass('btn-extra-emphasized');
                 }
+                e.preventDefault();
+                return false;
             });
 
             // set INPUT type="hidden" value on startup
@@ -907,58 +913,87 @@
             });
         },
 
-        messagesList : function() {
+        itemCheckboxList : function() {
             
-            // show buttons depending on what is checked:
-            // - mark all button always, except when every box is checked
-            // - action buttons when something is checked
-            // - deselect all button when every box is checked
-            $('.message_row .fa-square-o, .message_row .fa-check-square-o').parent().click(function() {
-                if ($('.message_row .fa-check-square-o').length && !$('.message_row .fa-square-o').length) {
-                    $('.messages-delete-button, .messages-archive-button, .mark_messages_false').show();
-                    $('.mark_messages_true').hide();
-                } else if ($('.message_row .fa-check-square-o').length) {
-                    $('.messages-delete-button, .messages-archive-button, .mark_messages_true').show();
-                    $('.mark_messages_false').hide();
+            // A checkbox was clicked. Show buttons depending on what is checked:
+            //   - "check all" button if at least one is checked, except when every box is checked show the "uncheck all"
+            //   - action buttons when something is checked
+            //   - deselect all button when every box is checked
+            $('.item_checkbox_element .fa-square-o, .item_checkbox_element .fa-check-square-o').parent().click(function() {
+                if ($('.item_checkbox_element .fa-check-square-o').length && !$('.item_checkbox_element .fa-square-o').length) {
+                    $('.item_checkbox_action_button, .item_checkbox_mark_all_false').show();
+                    $('.item_checkbox_mark_all_true').hide();
+                } else if ($('.item_checkbox_element .fa-check-square-o').length) {
+                    $('.item_checkbox_action_button, .item_checkbox_mark_all_true').show();
+                    $('.item_checkbox_mark_all_false').hide();
                 } else {
-                    $('.messages-delete-button, .messages-archive-button, .mark_messages').hide();
+                    $('.item_checkbox_action_button, .item_checkbox_mark_all').hide();
                 }
+                // fill any checkbox counter with the number of checked boxes
+                $('.item_checkbox_count_label').text('(' + $('.item_checkbox_element .fa-check-square-o').length + ')');
             });
             
-            // hide all context buttons except "mark all"
-            if (!$('.message_row .fa-check-square-o').length) {
-                $('.messages-delete-button, .messages-archive-button, .mark_messages').hide();
-                $('.mark_messages_true').show();
-            }
-                
-            $('.mark_messages').click(function(e){
+            // one of the "check all" or "uncheck all" buttons was clicked
+            $('.item_checkbox_mark_all').unbind("click").click(function(e){
                 var $button = $(this);
-                $('.message_row i.fa-square-o, .message_row i.fa-check-square-o').each(function(){
-                    if ($button.hasClass('mark_messages_true')) {
-                        // checked
+                $('.item_checkbox_element i.fa-square-o, .item_checkbox_element i.fa-check-square-o').each(function(){
+                    if ($button.hasClass('item_checkbox_mark_all_true')) {
+                        // check all was clicked
                         $(this)
-                        .removeClass('fa-square-o')
-                        .addClass('fa-check-square-o')
-                        .next() // INPUT type="hidden"
-                        .attr('value','true');
-                        $('.mark_messages').hide();
-                        $('.mark_messages_false').show();
-                        $('.messages-delete-button, .messages-archive-button').show();
+	                        .removeClass('fa-square-o')
+	                        .addClass('fa-check-square-o')
+	                        .next() // INPUT type="hidden"
+	                        .attr('value','true')
+	                        .parent()
+	                        	.addClass('checkbox-checked')
+		                        .parents('.btn-emphasized')
+			                        .first()
+				                        .removeClass('btn-emphasized')
+				                        .addClass('btn-extra-emphasized');
+                        $('.item_checkbox_mark_all').hide();
+                        $('.item_checkbox_mark_all_false').show();
+                        $('.item_checkbox_action_button').show();
                     } else {
+                    	// uncheck all was clicked
                         $(this)
-                        .addClass('fa-square-o')
-                        .removeClass('fa-check-square-o')
-                        .next() // INPUT type="hidden"
-                        .attr('value','false');
-                        $('.mark_messages').hide();
-                        if ($('.fa-check-square-o').length) {
-                            $('.mark_messages_true').show();
-                        }
-                        $('.messages-delete-button, .messages-archive-button').hide();
+	                        .addClass('fa-square-o')
+	                        .removeClass('fa-check-square-o')
+	                        .next() // INPUT type="hidden"
+	                        .attr('value','false')
+	                        .parent()
+	                        	.removeClass('checkbox-checked')
+		                        .parents('.btn-extra-emphasized')
+		                        	.first()
+				                        .removeClass('btn-extra-emphasized')
+				                        .addClass('btn-emphasized');
+                        $('.item_checkbox_mark_all').hide();
+                        $('.item_checkbox_action_button').hide();
                     }
                 });
+                // fill any checkbox counter with the number of checked boxes
+                $('.item_checkbox_count_label').text('(' + $('.item_checkbox_element .fa-check-square-o').length + ')');
                 e.preventDefault();
+                return false;
             });
+            
+            // hide all context buttons on start
+            if (!$('.item_checkbox_element .fa-check-square-o').length) {
+                $('.item_checkbox_action_button, .item_checkbox_mark_all').hide();
+            }
+        },
+        
+        /** Returns an array of input names for all checkbox elements that are checked 
+         * 	or [] if none are checked. */
+        getListOfCheckedItems: function() {
+        	var input_names = [];
+        	$('.item_checkbox_element i.fa-check-square-o').each(function(){
+                input_names.push(
+            		$(this)
+            		.next() // INPUT type="hidden"
+	                .attr('name')
+	            );
+        	});
+        	return input_names;
         },
 
         multilineEllipsis : function() {
@@ -1109,6 +1144,8 @@
                             $.each(data.result.data, function(index, object_html) {
                                 // append rendered object to object list
                                 $(object_html).hide().insertAfter('#object_list_anchor').fadeIn(800);
+                                $.cosinnus.checkBox();
+                                $.cosinnus.itemCheckboxList();
                             });
                         }
                         
@@ -1664,7 +1701,7 @@ $(function() {
     $.cosinnus.calendarDayTimeChooser();
     $.cosinnus.calendarDoodleVote();
     $.cosinnus.fileList();
-    $.cosinnus.messagesList();
+    $.cosinnus.itemCheckboxList();
     $.cosinnus.multilineEllipsis();
     $.cosinnus.map();
     $.cosinnus.initFileUpload();

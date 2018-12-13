@@ -609,3 +609,45 @@ a.light-link:hover i { display: inherit; }
     display: inline-block;
     color: @app-neutral-color;
 }
+
+.likefollow-button {
+    cursor: pointer;
+    margin-right: 20px;
+    padding: 5px;
+    font-size: 14px;
+    
+    &,&:hover {
+        text-decoration: none !important;
+    }
+    &:hover {
+        background-color: rgba(0,0,0,0.1);
+        border-radius: 3px;
+    }
+    i.fa {
+        margin-right: 5px;
+    }
+    
+    .show-selected {
+        display: none;
+    }
+    &.selected {
+        .show-unselected {
+            display: none;
+        }
+        .show-selected {
+            display: inherit;
+        }
+    }
+}
+
+.apply-color-liked {
+    color: @map-liked-color;
+}
+.apply-color-followed {
+    color: @map-followed-color;
+}
+.likefollow-button-success-message {
+    padding: 8px 5px;
+    color: #779b48;
+    white-space: normal;
+}

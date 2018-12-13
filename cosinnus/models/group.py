@@ -54,6 +54,7 @@ from django.templatetags.static import static
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from cosinnus.core.registries.attached_objects import attached_object_registry
 from django.apps import apps
+from cosinnus.models.tagged import LikeableObjectMixin
 
 logger = logging.getLogger('cosinnus')
 
@@ -628,7 +629,8 @@ class CosinnusPortal(models.Model):
         
 
 @python_2_unicode_compatible
-class CosinnusBaseGroup(IndexingUtilsMixin, FlickrEmbedFieldMixin, VideoEmbedFieldMixin, models.Model):
+class CosinnusBaseGroup(LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFieldMixin, 
+                        VideoEmbedFieldMixin, models.Model):
     TYPE_PROJECT = 0
     TYPE_SOCIETY = 1
     
@@ -747,6 +749,9 @@ class CosinnusBaseGroup(IndexingUtilsMixin, FlickrEmbedFieldMixin, VideoEmbedFie
     def __str__(self):
         # FIXME: better caching for .portal.name
         return '%s (%s)' % (self.name, self.portal.name)
+    
+    def _get_likeable_model_name(self):
+        return 'CosinnusGroup'
     
     def __getitem__(self, key):
         """ Enable accessing fields and attributed of CosinnusGroup through dict lookup. 

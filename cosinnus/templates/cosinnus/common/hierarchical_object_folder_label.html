@@ -1,12 +1,14 @@
 {% load i18n cosinnus_tags %}
 
+{% captureas base_url %}{{ object|app_url_for_model }}:list{% endcaptureas %}
+
 {% if object.path == '/' %}
-    <a href="{% group_url 'cosinnus:etherpad:list' group=object.group %}">
+    <a href="{% group_url base_url group=object.group %}">
         <i class="fa fa-fw fa-folder"></i>
         {% trans "Root Folder" %}
     </a>
 {% else %}
-    <a href="{% group_url 'cosinnus:etherpad:list' group=object.group slug=object.container.slug %}">
+    <a href="{% group_url base_url group=object.group slug=object.container.slug %}">
         <i class="fa fa-fw fa-folder"></i>
         {{ object.container.title }}
     </a>

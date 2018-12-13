@@ -141,8 +141,13 @@ class CosinnusGroupFormMixin(object):
         # special check: only portal admins can create groups
         if not getattr(settings, 'COSINNUS_USERS_CAN_CREATE_GROUPS', False) and self.form_view == 'add' and model_class == CosinnusSociety:
             if not (self.request.user.id in CosinnusPortal.get_current().admins or check_user_superuser(self.request.user)):
-                messages.warning(self.request, _('Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators.'))
-                return redirect(reverse('cosinnus:portal-admin-list'))
+                
+                if getattr(settings, 'COSINNUS_CUSTOM_PREMIUM_PAGE_ENABLED', False):
+                    redirect_url = reverse('cosinnus:premium-info-page')
+                else:
+                    messages.warning(self.request, _('Sorry, only portal administrators can create Groups! You can either create a Project, or write a message to one of the administrators to create a Group for you. Below you can find a listing of all administrators.'))
+                    redirect_url = reverse('cosinnus:portal-admin-list')
+                return redirect(redirect_url) 
         
         return super(CosinnusGroupFormMixin, self).dispatch(*args, **kwargs)
     
@@ -254,7 +259,7 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
                 idea.created_groups.add(self.object)
                 idea.update_index()
                 # send out a notification to followers of this idea except for the new project's creator
-                idea_followers_ids = [uid for uid in idea.likes.filter(followed=True).values_list('user', flat=True) if not uid == self.request.user.id]
+                idea_followers_ids = [pk for pk in idea.get_followed_user_ids() if not pk in [self.request.user.id]]
                 idea_followers = get_user_model().objects.filter(id__in=idea_followers_ids)
                 cosinnus_notifications.project_created_from_idea.send(sender=self, obj=self.object, user=self.request.user, audience=idea_followers)
             else:

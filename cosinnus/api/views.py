@@ -48,13 +48,21 @@ class CosinnusSocietySerializerViewSet(PublicCosinnusGroupFilterMixin,
         FILTER_MAP = {
             'tags': 'media_tag__tags__name'
         }
+        VALUE_MAP = {
+            'false': False,
+            'true': True
+        }
         for key, value in list(query_params.items()):
             if key in (self.pagination_class.limit_query_param,
                        self.pagination_class.offset_query_param):
                 continue
             key = FILTER_MAP.get(key, key)
+            value = VALUE_MAP.get(value, value)
             if value is not None:
-                queryset = queryset.filter(**{key: value})
+                if key.startswith('exclude_'):
+                    queryset = queryset.exclude(**{key[8:]: value})
+                else:
+                    queryset = queryset.filter(**{key: value})
         return queryset
 
 

@@ -171,3 +171,16 @@
     
 }
 
+.item_checkbox_overlay_box {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    color: #333 !important;
+    display: none;
+}
+.item_checkbox_element:hover .item_checkbox_overlay_box,
+.item_checkbox_overlay_box.checkbox-checked,
+.item_checkbox_overlay_box:hover {
+    display: inherit;
+    cursor: pointer;
+}
+
