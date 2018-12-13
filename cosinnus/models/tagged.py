@@ -31,9 +31,8 @@ from cosinnus.utils.group import get_cosinnus_group_model
 from django.utils import translation
 from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from django.core.cache import cache
-from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
 from django.utils.http import urlencode
-from django.contrib.contenttypes.fields import GenericForeignKey
 from django.core.validators import validate_comma_separated_integer_list
 
 

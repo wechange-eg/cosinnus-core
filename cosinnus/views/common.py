@@ -208,7 +208,6 @@ def do_likefollow(request, **kwargs):
     
     app_label, model = ct.split('.')
     model_cls = apps.get_model(app_label, model)
-    content_type = ContentType.objects.get_for_model(model_cls)
     
     obj = None
     if obj_id is None and slug:

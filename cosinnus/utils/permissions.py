@@ -173,7 +173,7 @@ def check_object_likefollow_access(obj, user):
         This permission may behave differently depending on the object model.
     """
     # liking this object must be enabled and user logged in
-    if not (getattr(obj, 'IS_LIKEABLE_OBJECT', False) or user.is_authenticated()):
+    if not (getattr(obj, 'IS_LIKEABLE_OBJECT', False) or user.is_authenticated):
         return False
     # groups can always be followed, and all other visible objects
     is_group = type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model())

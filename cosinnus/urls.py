@@ -28,7 +28,6 @@ urlpatterns = [
     
     url(r'^portal/admins/$', user.portal_admin_list, name='portal-admin-list'),
     url(r'^user/(?P<username>[^/]+)/$', profile.detail_view, name='profile-detail'),
-    #url(r'^user/(?P<username>[^/]+)/edit/$', 'user.user_update', name='user-edit'),
     
     url(r'^language/(?P<language>[^/]+)/$', common.switch_language, name='switch-language'),
     
@@ -56,7 +55,7 @@ urlpatterns = [
     url(r'^map/search/(?P<filter_group_id>\d+)/$', map_api.map_search_endpoint, name='map-search-endpoint-filtered'),
     url(r'^map/detail/$', map_api.map_detail_endpoint, name='map-detail-endpoint'),
     
-    url(r'^likefollow/$', 'common.do_likefollow',  name='likefollow-view'),
+    url(r'^likefollow/$', common.do_likefollow,  name='likefollow-view'),
     
     
     url(r'^invitations/$', group.group_list_invited, name='invitations', kwargs={'show_all': True}),
@@ -91,7 +90,7 @@ urlpatterns = [
     url(r'^housekeeping/send_testmail/', housekeeping.send_testmail, name='housekeeping-send-testmail'),
     url(r'^housekeeping/print_settings/', housekeeping.print_settings, name='housekeeping-print-settings'),
     url(r'^housekeeping/group_storage_info/', housekeeping.group_storage_info, name='housekeeping-group-storage-info'),
-    url(r'^housekeeping/user_activity_info/', 'housekeeping.user_activity_info', name='housekeeping-user-activity-info'),
+    url(r'^housekeeping/user_activity_info/', housekeeping.user_activity_info, name='housekeeping-user-activity-info'),
     
     url(r'^select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
 ]
@@ -135,9 +134,9 @@ if settings.COSINNUS_IDEAS_ENABLED:
     ]
     
 if settings.COSINNUS_CUSTOM_PREMIUM_PAGE_ENABLED:
-    urlpatterns += patterns('cosinnus.views',
+    urlpatterns += [
         url(r'^portal/supporters/$', TemplateView.as_view(template_name='premium_info_page.html'), name='premium-info-page'),
-    )
+    ]
 
 for url_key in group_model_registry:
     plural_url_key = group_model_registry.get_plural_url_key(url_key, url_key + '_s')
