@@ -50,7 +50,7 @@ def _get_bare_cosinnus_context(request):
     return context
 
 
-def view_403(request):
+def view_403(request, exception):
     content = render_to_string('cosinnus/common/403.html', _get_bare_cosinnus_context(request), request)
     return HttpResponseForbidden(content)
 
@@ -58,7 +58,7 @@ def view_403_csrf(request, reason=""):
     content = render_to_string('cosinnus/common/403_csrf.html', _get_bare_cosinnus_context(request), request)
     return HttpResponseForbidden(content)
 
-def view_404(request):
+def view_404(request, exception):
     content = render_to_string('cosinnus/common/404.html', _get_bare_cosinnus_context(request), request)
     return HttpResponseNotFound(content)
 
