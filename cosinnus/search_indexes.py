@@ -269,7 +269,7 @@ class IdeaSearchIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObjectSearch
 
     public = indexes.BooleanField(model_attr='public')
     visible_for_all_authenticated_users = indexes.BooleanField()
-    creator = indexes.IntegerField(model_attr='creator__id', null=True)
+    creator = indexes.IntegerField(null=True)
     portal = indexes.IntegerField(model_attr='portal_id')
     location = indexes.LocationField(null=True)
     liked_user_ids = CommaSeperatedIntegerMultiValueField(indexed=False, stored=True)
@@ -278,6 +278,10 @@ class IdeaSearchIndex(LocalCachedIndexMixin, DocumentBoostMixin, TagObjectSearch
     
     def get_model(self):
         return CosinnusIdea
+    
+    def prepare_creator(self, obj):
+        """ Returning this without using model_attr because of a haystack bug resolving lazy objects """
+        return obj.creator_id
     
     def prepare_visible_for_all_authenticated_users(self, obj):
         """ This is hacky, but Haystack provides no method to filter
