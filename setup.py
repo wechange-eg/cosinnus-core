@@ -102,7 +102,7 @@ setup(
         'sqlparse==0.1.10',
         #########'wsgiref==0.1.2',
         'python-dateutil==2.4.1',
-        'urllib3==1.21.1',
+        'urllib3==1.24.1',
         'pytz==2018.5',
         'python-memcached==1.59',
         'Unidecode==0.4.21',
