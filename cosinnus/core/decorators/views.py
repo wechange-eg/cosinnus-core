@@ -25,6 +25,7 @@ import logging
 from cosinnus.models.group import CosinnusPortal
 from django.shortcuts import redirect
 from cosinnus.utils.urls import group_aware_reverse
+from django.template.defaultfilters import urlencode
 logger = logging.getLogger('cosinnus')
 
 
@@ -50,11 +51,15 @@ def redirect_to_not_logged_in(request, view=None, group=None):
     if view and getattr(view, 'is_ajax_request_url', False):
         return HttpResponseForbidden('Not authenticated')
     # redirect to group's micropage and give login required error message
+    next_arg = request.path
+    if request.GET.keys():
+        next_arg += '?' + '&'.join(["%s=%s" % (k,v) for k,v in request.GET.items()])
+    next_arg = urlencode(next_arg)
     if group is not None:
         messages.warning(request, _('Only registered members can see the content you requested! Log in or create an account now!'))
-        return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': group}) + '?next=' + request.path)
+        return redirect(group_aware_reverse('cosinnus:group-dashboard', kwargs={'group': group}) + '?next=' + next_arg)
     messages.error(request, _('Please log in to access this page.'))
-    return HttpResponseRedirect(reverse_lazy('login') + '?next=' + request.path)
+    return HttpResponseRedirect(reverse_lazy('login') + '?next=' + next_arg)
     
 
 def get_group_for_request(group_name, request):
