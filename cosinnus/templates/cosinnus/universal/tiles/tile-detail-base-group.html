@@ -22,7 +22,8 @@
 {% endblock related_content %}
 
 {% block action_buttons %}
-<a class="rounded-button button-action 
+    {% if controlView.portalInfo.current == portal %}
+        <a class="rounded-button button-action 
                 {% if cosinnus_active_user %}button-follow" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
             <span class="rounded-button-inner">
                 {% if followed %}
@@ -36,6 +37,7 @@
                 {% endif %}
             </span>
         </a>
+    {% endif %}
 {% endblock action_buttons %}
 
 

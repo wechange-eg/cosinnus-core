@@ -22,16 +22,16 @@
 {% block top_line %}
     <div class="tile-section top-line one-line extra-space">
         <span class="multi-span">
-	        <span class="pale-color">
-	            {# Translators: __INCLUDE_JS_PO__ #}
-	            {% trans "Author" %}:
-	        </span> 
-	        {% if not cosinnus_active_user %}
-	            <a href="/signup/?acc_req_msg=1&next=/map/" target="_blank">{{ creator_name }}</a>
-	        {% else %}
-	            {{ macros.resultLink(portal, creator_slug, creator_name, "people") }}
-	        {% endif %}
-	    </span>
+            <span class="pale-color">
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Author" %}:
+            </span> 
+            {% if not cosinnus_active_user %}
+                <a href="/signup/?acc_req_msg=1&next=/map/" target="_blank">{{ creator_name }}</a>
+            {% else %}
+                {{ macros.resultLink(portal, creator_slug, creator_name, "people") }}
+            {% endif %}
+        </span>
         {% if address %}
             <span class="multi-span half-line capitalize" title="{{ address }}">
                 <i class="fa fa-fw fa-map-marker"></i>{{ address }}
@@ -48,34 +48,36 @@
 
 {% block action_buttons %}
     <div class="tile-section tile-section-button-list">
-        <a class="rounded-button button-action 
-                {% if cosinnus_active_user %}button-like" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
-            <span class="rounded-button-inner">
-                {% if liked %}
-                    <i clasS="fa fa-heart"></i>
-                    {# Translators: __INCLUDE_JS_PO__ #}
-                    {% trans "Liked" %}
-                {% else %}
-                    <i clasS="fa fa-heart-o"></i>
-                    {# Translators: __INCLUDE_JS_PO__ #}
-                    {% trans "Like" %}
-                {% endif %}
-            </span>
-        </a>
-        {% if liked %}
-	        <a class="rounded-button button-action button-follow">
-	            <span class="rounded-button-inner">
-	                {% if followed %}
-	                    <i clasS="fa fa-bell"></i>
-	                    {# Translators: __INCLUDE_JS_PO__ #}
-	                    {% trans "Following" %}
-	                {% else %}
-	                    <i clasS="fa fa-bell-o"></i>
-	                    {# Translators: __INCLUDE_JS_PO__ #}
-	                    {% trans "Follow" %}
-	                {% endif %}
-	            </span>
-	        </a>
+        {% if controlView.portalInfo.current == portal %}
+            <a class="rounded-button button-action 
+                    {% if cosinnus_active_user %}button-like" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
+                <span class="rounded-button-inner">
+                    {% if liked %}
+                        <i clasS="fa fa-heart"></i>
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Liked" %}
+                    {% else %}
+                        <i clasS="fa fa-heart-o"></i>
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Like" %}
+                    {% endif %}
+                </span>
+            </a>
+            {% if liked %}
+                <a class="rounded-button button-action button-follow">
+                    <span class="rounded-button-inner">
+                        {% if followed %}
+                            <i clasS="fa fa-bell"></i>
+                            {# Translators: __INCLUDE_JS_PO__ #}
+                            {% trans "Following" %}
+                        {% else %}
+                            <i clasS="fa fa-bell-o"></i>
+                            {# Translators: __INCLUDE_JS_PO__ #}
+                            {% trans "Follow" %}
+                        {% endif %}
+                    </span>
+                </a>
+            {% endif %}
         {% endif %}
         <a href="{{ action_url_1 }}" target="_blank" class="rounded-button button-action">
             <span class="rounded-button-inner">
@@ -85,11 +87,11 @@
         </a>
         {% if COSINNUS_SHOW_SUPERUSER_CONTROLS or cosinnus_active_user and cosinnus_active_user.username == creator_slug %}
             <a href="/ideas/{{ slug }}/edit/" class="rounded-button button-action">
-	            <span class="rounded-button-inner">
-	                {# Translators: __INCLUDE_JS_PO__ #}
-	                {% trans "Edit your Idea" %}
-	            </span>
-	        </a>
+                <span class="rounded-button-inner">
+                    {# Translators: __INCLUDE_JS_PO__ #}
+                    {% trans "Edit your Idea" %}
+                </span>
+            </a>
         {% endif %}
         
         {{ super() }}
