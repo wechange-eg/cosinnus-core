@@ -27,34 +27,36 @@
 
 {% block action_buttons %}
     <div class="tile-section tile-section-button-list">
-	    <a class="rounded-button button-action 
-	            {% if cosinnus_active_user %}button-like" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
-	        <span class="rounded-button-inner">
-	            {% if liked %}
-	                <i clasS="fa fa-heart"></i>
-	                {# Translators: __INCLUDE_JS_PO__ #}
-	                {% trans "Liked" %}
-	            {% else %}
-	                <i clasS="fa fa-heart-o"></i>
-	                {# Translators: __INCLUDE_JS_PO__ #}
-	                {% trans "Like" %}
-	            {% endif %}
-	        </span>
-	    </a>
-	    <a class="rounded-button button-action 
-	            {% if cosinnus_active_user %}button-follow" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
-	        <span class="rounded-button-inner">
-	            {% if followed %}
-	                <i clasS="fa fa-bell"></i>
-	                {# Translators: __INCLUDE_JS_PO__ #}
-	                {% trans "Following" %}
-	            {% else %}
-	                <i clasS="fa fa-bell-o"></i>
-	                {# Translators: __INCLUDE_JS_PO__ #}
-	                {% trans "Follow" %}
-	            {% endif %}
-	        </span>
-	    </a>
+        {% if controlView.portalInfo.current == portal %}
+            <a class="rounded-button button-action 
+                    {% if cosinnus_active_user %}button-like" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
+                <span class="rounded-button-inner">
+                    {% if liked %}
+                        <i clasS="fa fa-heart"></i>
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Liked" %}
+                    {% else %}
+                        <i clasS="fa fa-heart-o"></i>
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Like" %}
+                    {% endif %}
+                </span>
+            </a>
+            <a class="rounded-button button-action 
+                    {% if cosinnus_active_user %}button-follow" {% else %}" href="/signup/?acc_req_msg=1&next=/map/" target="_blank"{% endif %}>
+                <span class="rounded-button-inner">
+                    {% if followed %}
+                        <i clasS="fa fa-bell"></i>
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Following" %}
+                    {% else %}
+                        <i clasS="fa fa-bell-o"></i>
+                        {# Translators: __INCLUDE_JS_PO__ #}
+                        {% trans "Follow" %}
+                    {% endif %}
+                </span>
+            </a>
+        {% endif %}
 
         <a class="rounded-button button-action" href="{{ url }}" target="_blank">
             <span class="rounded-button-inner">

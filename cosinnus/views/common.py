@@ -27,6 +27,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.shortcuts import get_object_or_404
 from cosinnus.utils.permissions import check_object_write_access,\
     check_object_likefollow_access
+from cosinnus.models.group import CosinnusPortal
 
 class IndexView(RedirectView):
     url = reverse_lazy('cosinnus:group-list')
@@ -206,7 +207,7 @@ def do_likefollow(request, **kwargs):
     
     obj = None
     if obj_id is None and slug:
-        obj = get_object_or_None(model_cls, slug=slug)
+        obj = get_object_or_None(model_cls, slug=slug, portal=CosinnusPortal.get_current())
     else:
         obj = get_object_or_None(model_cls, id=obj_id)
     if obj is None:
