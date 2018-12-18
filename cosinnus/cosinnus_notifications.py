@@ -213,7 +213,11 @@ notifications = {
         'data_attributes': {
             'object_name': '_sender_name',
             'object_text': 'description', 
+            'action_button_alternate_url': 'get_absolute_url',
         },
+        'origin_url_suffix': '?join=1',
+        'action_button_text': _('Accept invitation'),
+        'action_button_alternate_text': _('View invitation'),
         'notification_reason': 'none',
     }, 
     'user_group_recruited': {
@@ -233,8 +237,11 @@ notifications = {
             'object_name': '_sender_name',
             'object_url': '_sender.cosinnus_profile.get_absolute_url',
             'object_text': '_sender.cosinnus_profile.description', 
+            'action_button_alternate_url': 'get_absolute_url',
         },
         'origin_url_suffix': '?invited=1',
+        'action_button_text': _('Accept invitation'),
+        'action_button_alternate_text': _('View invitation'),
         'notification_reason': 'none',
     }, 
     'group_moved_to_portal': {
