@@ -12,6 +12,12 @@
   </head>
   <body>
     <!-- <style> -->
+    {{#rwif preview_summary raw_if="preview_summary" }}
+	    <!-- hidden pre-header for summary text -->
+        <div style="display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;font-family: sans-serif;">
+        {{#rw this}}preview_summary{{/rw}}&nbsp; -&nbsp;&nbsp; 
+        </div>
+    {{/rwif}}
     <span class="preheader">{{description}}</span>
     <table class="body">
       <tr>
