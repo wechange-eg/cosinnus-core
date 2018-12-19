@@ -386,7 +386,7 @@
     
         {% for member in members %}
             <div class="fadedown {% if not forloop.last or hidden_user_count > 0 %}regular-space{% endif %}">
-                <div class="btn btn-emphasized w100" href="{% url 'cosinnus:profile-detail' username=member.username %}">
+                <div class="btn btn-emphasized w100">
                     <ul class="media-list">
                         <li class="media">
                             <span class="pull-left" href="{{ member|profile_url }}">

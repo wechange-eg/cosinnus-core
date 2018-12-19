@@ -1417,7 +1417,12 @@ a.action-button {
   padding: 8px 16px;
   margin-right: 16px;
   text-decoration: none;
-  font-weight: bold; }
+  font-weight: bold;
+  border: 1px solid #265948; }
+  a.action-button.action-button-alternate {
+    background-color: #f1efeb;
+    border: 1px solid #d2cbbe;
+    color: #5a5a5a; }
 
 .page-header .columns {
   padding-bottom: 0; }
@@ -1532,7 +1537,11 @@ img {
 ul br, ol br, ul br {
   display: none; }
 </style>
-    <span class="preheader" style="color: #f6f5f2; display: none !important; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; mso-hide: all !important; opacity: 0; overflow: hidden; visibility: hidden"></span>
+{% if preview_summary %}	    <!-- hidden pre-header for summary text -->
+        <div style="display:none;font-size:1px;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;mso-hide:all;font-family: sans-serif">
+        {{preview_summary}}&nbsp; -&nbsp;&nbsp; 
+        </div>
+{% endif %}    <span class="preheader" style="color: #f6f5f2; display: none !important; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; mso-hide: all !important; opacity: 0; overflow: hidden; visibility: hidden"></span>
     <table class="body" style="Margin: 0; background: #f6f5f2; border-collapse: collapse; border-spacing: 0; color: #0a0a0a; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 16px; font-weight: normal; height: 100%; line-height: 1.3; margin: 0; padding: 0; text-align: left; vertical-align: top; width: 100%">
       <tr style="padding: 0; text-align: left; vertical-align: top">
         <td class="center" align="center" valign="top" style="-moz-hyphens: auto; -webkit-hyphens: auto; Margin: 0; border-collapse: collapse !important; color: #0a0a0a; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 16px; font-weight: normal; hyphens: auto; line-height: 1.3; margin: 0; padding: 0; text-align: left; vertical-align: top; word-wrap: break-word">
@@ -1675,12 +1684,15 @@ ul br, ol br, ul br {
       <table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%">
         <tr style="padding: 0; text-align: left; vertical-align: top">
           <th style="Margin: 0; color: #0a0a0a; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 16px; font-weight: normal; line-height: 1.3; margin: 0; padding: 0; text-align: left">
-                        {% if action_button_1_text %}	            <a class="action-button" href="{{action_button_1_url}}" target="_blank" style="Margin: 0; background-color: #3d8f73; border-radius: 3px; color: #FFF; font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: bold; line-height: 1.3; margin: 0; margin-right: 16px; padding: 8px 16px; text-align: left; text-decoration: none">
+                        {% if action_button_1_text %}	            <a class="action-button {% if action_button_1_alternate %}action-button-alternate{% endif %}" href="{{action_button_1_url}}" target="_blank" style="Margin: 0; background-color: #3d8f73; border: 1px solid #265948; border-radius: 3px; color: #FFF; font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: bold; line-height: 1.3; margin: 0; margin-right: 16px; padding: 8px 16px; text-align: left; text-decoration: none">
                         	                {{action_button_1_text}}
                         	            </a>
-                        {% endif %}{% if action_button_2_text %}	            <a class="action-button" href="{{action_button_2_url}}" target="_blank" style="Margin: 0; background-color: #3d8f73; border-radius: 3px; color: #FFF; font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: bold; line-height: 1.3; margin: 0; margin-right: 16px; padding: 8px 16px; text-align: left; text-decoration: none">
-                        	                {{action_button_2_text}}
-                        	            </a>
+                        {% endif %}{% if action_button_2_text %}                <a class="action-button {% if action_button_2_alternate %}action-button-alternate{% endif %}" href="{{action_button_2_url}}" target="_blank" style="Margin: 0; background-color: #3d8f73; border: 1px solid #265948; border-radius: 3px; color: #FFF; font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: bold; line-height: 1.3; margin: 0; margin-right: 16px; padding: 8px 16px; text-align: left; text-decoration: none">
+                                            {{action_button_2_text}}
+                                        </a>
+                        {% endif %}{% if action_button_alternate_text %}                <a class="action-button action-button-alternate" href="{{action_button_alternate_url}}" target="_blank" style="Margin: 0; background-color: #f1efeb; border: 1px solid #d2cbbe; border-radius: 3px; color: #5a5a5a; font-family: 'Helvetica Neue', Arial, sans-serif; font-weight: bold; line-height: 1.3; margin: 0; margin-right: 16px; padding: 8px 16px; text-align: left; text-decoration: none">
+                                            {{action_button_alternate_text}}
+                                        </a>
                         {% endif %}        </th>
         </tr>
       </table>
