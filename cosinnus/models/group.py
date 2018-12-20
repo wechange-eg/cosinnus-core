@@ -480,7 +480,7 @@ class CosinnusPortal(models.Model):
     
     public = models.BooleanField(_('Public'), default=False)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
-        related_name='cosinnus_portals', through='CosinnusPortalMembership')
+        related_name='cosinnus_portals', through='cosinnus.CosinnusPortalMembership')
     
     site = models.OneToOneField(Site, verbose_name=_('Associated Site'), on_delete=models.CASCADE)
     
@@ -679,7 +679,7 @@ class CosinnusBaseGroup(LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFiel
     website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
     public = models.BooleanField(_('Public'), default=False)
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True,
-        related_name='cosinnus_groups', through='CosinnusGroupMembership')
+        related_name='cosinnus_groups', through='cosinnus.CosinnusGroupMembership')
     media_tag = models.OneToOneField(settings.COSINNUS_TAG_OBJECT_MODEL,
         blank=True, null=True, editable=False, on_delete=models.SET_NULL)
     
@@ -718,7 +718,7 @@ class CosinnusBaseGroup(LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFiel
     parent = models.ForeignKey("self", verbose_name=_('Parent Group'),
         related_name='groups', null=True, blank=True, on_delete=models.SET_NULL)
     related_groups = models.ManyToManyField("self", 
-        through='RelatedGroups',
+        through='cosinnus.RelatedGroups',
         through_fields=('to_group', 'from_group'),
         verbose_name=_('Related Teams'),
         symmetrical=False,
