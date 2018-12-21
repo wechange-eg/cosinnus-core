@@ -178,7 +178,7 @@ class DenyAnonymousAccessMiddleware(MiddlewareMixin):
     def process_request(self, request):
         if not request.user.is_authenticated:
             if request.path not in LOGIN_URLS:
-                return TemplateResponse(request, 'cosinnus/portal/no_anonymous_access_page.html')
+                return TemplateResponse(request, 'cosinnus/portal/no_anonymous_access_page.html').render()
             
             
 class ConditionalRedirectMiddleware(MiddlewareMixin):
