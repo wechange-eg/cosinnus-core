@@ -297,7 +297,7 @@ def csv_import_projects(csv_file, request=None, encoding="utf-8", delimiter=',',
                 rows = [row for row in rows if len(row) == expected_columns]
                 read_errors = num_bad_rows
             else:
-                raise UnexpectedNumberOfColumns('%d / %d' % (len(row), expected_columns))
+                raise UnexpectedNumberOfColumns('%d / %d' % (len(rows), expected_columns))
     
     importer = Importer(rows, request=request, read_errors=read_errors, bad_rows=bad_rows)
     if importer.is_running():
