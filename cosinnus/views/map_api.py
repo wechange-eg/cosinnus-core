@@ -159,7 +159,7 @@ def map_search_endpoint(request, filter_group_id=None):
         # if we hae no query-boosted results, use *only* our custom sorting (haystack's is very random)
         if not query:
             result.score = result.local_boost
-            if getattr(settings, 'MAP_API_HACKS_PREFER_OWN_PORTAL', False) and int(result.portal) == CosinnusPortal.get_current().id:
+            if getattr(settings, 'MAP_API_HACKS_PREFER_OWN_PORTAL', False) and is_number(result.portal) and int(result.portal) == CosinnusPortal.get_current().id:
                 result.score += 100.0
         results.append(HaystackMapResult(result, user=request.user))
         
