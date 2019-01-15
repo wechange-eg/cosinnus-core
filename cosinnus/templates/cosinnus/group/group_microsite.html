@@ -446,6 +446,17 @@
 		        			</p>
 		        		{% endif %}
 		        	{% endwith %}
+		        	
+	        	    <br/>
+	        	    <div>
+	        	        {% if group.type == 0 %}
+	        	            {% trans "You will now receive notifications whenever public content is posted in this project." as follow_success_message %}
+	        	        {% else %}
+	        	            {% trans "You will now receive notifications whenever public content is posted in this group." as follow_success_message %}
+	        	        {% endif %}
+	        	        {% include 'cosinnus/common/likefollow/follow_button.html' with object=group success_message=follow_success_message %}
+                        {% include 'cosinnus/common/likefollow/confirm_likefollow_modal.html' with object=group %}
+	        	    </div>
 					
 					<p>
 						<b>{% trans "Share" %}:</b>&nbsp;

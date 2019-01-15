@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-07 17:49+0100\n"
-"PO-Revision-Date: 2018-11-20 17:02+0100\n"
+"POT-Creation-Date: 2018-12-10 12:52+0100\n"
+"PO-Revision-Date: 2018-12-12 14:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -391,6 +391,7 @@ msgstr "Мої проекти"
 msgid "Other teams"
 msgstr "Інші проекти"
 
+#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Like"
 msgstr "Вподобання"
@@ -896,9 +897,12 @@ msgid "User"
 msgstr "Користувач/-ка"
 
 #. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 msgid "Liked"
 msgstr "Вподобані"
 
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Following"
 msgstr "Відстежуються"
@@ -1292,6 +1296,27 @@ msgstr "Виглядає на те, що під час виконання ваш
 msgid "+%(num_pictures)s more..."
 msgstr "+%(num_pictures)s більше…"
 
+msgid "Mark All"
+msgstr "Відмітити все"
+
+msgid "Deselect All"
+msgstr "Прибрати Все"
+
+msgid "Delete elements"
+msgstr "Видалити елементи"
+
+msgid "Are you sure you want to delete all selected elements?"
+msgstr "Ви дійсно бажаєте видалити всі вибрані елементи?"
+
+msgid "There was an error while trying to submit your report. Please try again in a moment."
+msgstr "При надсиланні повідомлення виникла помилка. Будь ласка, спробуйте знову за кілька хвилин."
+
+msgid "Cancel"
+msgstr "Скасувати"
+
+msgid "Deleting..."
+msgstr "Видалення…"
+
 msgid "Error embedding a Flickr gallery"
 msgstr "У Flickr  знайдена помилка"
 
@@ -1321,6 +1346,27 @@ msgstr "Вибачте, ця карта не підтримується в Inter
 
 msgid "Consider using an alternate browser!"
 msgstr "Розгляньте використання альтернативного браузера!"
+
+msgid "I want to like this"
+msgstr "Я хоче все вподобати"
+
+msgid "I want to follow this"
+msgstr "Я хочу відстежувати це"
+
+msgid "Yes"
+msgstr "Так"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Follow"
+msgstr "Відстежувати"
+
+msgid "You will now receive notifications for comments or when this content is updated."
+msgstr "Відтепер Ви отримуєте сповіщення у випадку коментарів або коли буде оновлено контент."
+
+msgid "You are following this item"
+msgstr "Ви відстежуєте цей елемент"
 
 msgid "Expand"
 msgstr "Поширити"
@@ -1440,9 +1486,6 @@ msgstr "Переоформити"
 msgid "Save"
 msgstr "Зберегти"
 
-msgid "Cancel"
-msgstr "Скасувати"
-
 msgid "Saving..."
 msgstr "Збереження..."
 
@@ -1542,6 +1585,14 @@ msgstr "Спільнота:"
 msgid "No Description set"
 msgstr "Опис не створено"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications whenever public content is posted in this project."
+msgstr "Ви будете отримувати сповіщення, якщо загально доступний контент буде опубліковано в цьому проекті."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications whenever public content is posted in this group."
+msgstr "Ви будете отримувати сповіщення, якщо загально доступний контент буде опубліковано в цій групі."
+
 msgid "more"
 msgstr "більше"
 
@@ -1557,9 +1608,6 @@ msgstr "(обов'язково)"
 
 msgid "Thank you! Your report has been received and we will review the items in question as soon as possible."
 msgstr "Ми отримали ваше повідомлення та максимально швидко перевіримо вказаний вами зміст."
-
-msgid "There was an error while trying to submit your report. Please try again in a moment."
-msgstr "При надсиланні повідомлення виникла помилка. Будь ласка, спробуйте знову за кілька хвилин."
 
 msgid "Send"
 msgstr "Надіслати"
@@ -2232,9 +2280,6 @@ msgstr "Ви дійсно бажаєте видалити ідею «%(title)s»
 
 msgid "Delete Idea"
 msgstr "Видалити ідею"
-
-msgid "Yes"
-msgstr "Так"
 
 msgid "Edit Idea"
 msgstr "Редагувати ідею"
@@ -3368,6 +3413,22 @@ msgid "Visit Event Page"
 msgstr "Відвідати сторінку заходу"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "You will now receive notifications for comments or when this event is updated or its details change."
+msgstr "Ви отримуєте сповіщення у випадку коментарів або якщо ця подія буде оновлена чи будуть змінені деталі."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "If you do not want notifications, click the unfollow button!"
+msgstr "Якщо Ви не хочете отримувати сповіщення, натисніть кнопку не стежити!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your like setting because of an error."
+msgstr "Не вдається зберегти налаштування Ваших вподобань через помилку."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your follow setting because of an error."
+msgstr "Не вдається зберегти налаштування Ваших відстежень через помилку."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Hidden Users"
 msgstr "Приховані користувачі"
 
@@ -3392,10 +3453,6 @@ msgid "Author"
 msgstr "Автор"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "Follow"
-msgstr "Відстежувати"
-
-#. Translators: __INCLUDE_JS_PO__
 msgid "Create Project from Idea"
 msgstr "Створити проект з ідеї"
 
@@ -3404,16 +3461,8 @@ msgid "Edit your Idea"
 msgstr "Редагувати Вашу ідею"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You will receive a notification when a project is created from your liked idea. If you do not want notifications, click the unfollow button!"
-msgstr "Ви отримуєте сповіщення, якщо буде створено проект щ ідеї, яку Ви вподобали. Якщо Ви не хочете отримувати сповіщення, натисніть кнопку „не стежити“!"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your like setting because of an error."
-msgstr "Не вдається зберегти налаштування Ваших вподобань через помилку."
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "Could not save your follow setting because of an error."
-msgstr "Не вдається зберегти налаштування Ваших відстежень через помилку."
+msgid "You will receive a notification when a project is created from your liked idea."
+msgstr "Ви будете отримувати сповіщення, якщо буде створено проект з ідеї, яку Ви вподобали."
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Projects - Created from this Idea"

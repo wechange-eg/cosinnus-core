@@ -191,8 +191,10 @@
     // Hide most UI elements in preparation for the animated resizing of the lightbox.
     Lightbox.prototype.changeImage = function(imageNumber) {
       var self = this;
-
-      this.disableKeyboardNav();
+      
+      // we want to keep the scroll-key-disabling feature of the key listener
+      // even though keeping the button pressed will call the actions on top of each other
+      //this.disableKeyboardNav();
       var $image = this.$lightbox.find('.lb-image');
 
       this.$overlay.fadeIn(this.options.fadeDuration);
@@ -374,7 +376,7 @@
     };
 
     Lightbox.prototype.enableKeyboardNav = function() {
-      $(document).on('keyup.keyboard', $.proxy(this.keyboardAction, this));
+      $(document).off('.keyboard').on('keydown.keyboard', $.proxy(this.keyboardAction, this));
     };
 
     Lightbox.prototype.disableKeyboardNav = function() {
@@ -396,12 +398,18 @@
         } else if (this.options.wrapAround && this.album.length > 1) {
           this.changeImage(this.album.length - 1);
         }
+        event.preventDefault();
+        //event.detail.keyboardEvent.preventDefault();
+        return false;
       } else if (key === 'n' || keycode === KEYCODE_RIGHTARROW) {
         if (this.currentImageIndex !== this.album.length - 1) {
           this.changeImage(this.currentImageIndex + 1);
         } else if (this.options.wrapAround && this.album.length > 1) {
           this.changeImage(0);
         }
+        event.preventDefault();
+        //event.detail.keyboardEvent.preventDefault();
+        return false;
       }
     };
 

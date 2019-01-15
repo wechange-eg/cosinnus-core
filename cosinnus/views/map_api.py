@@ -211,6 +211,7 @@ def map_detail_endpoint(request):
         return HttpResponseBadRequest('``portal`` param must be a positive number!')
     if not slug:
         return HttpResponseBadRequest('``slug`` param must be supplied!')
+    slug = force_text(slug) # stringify is necessary for number-only slugs
     if not model_type or not isinstance(model_type, six.string_types):
         return HttpResponseBadRequest('``type`` param must be supplied and be a string!')
     

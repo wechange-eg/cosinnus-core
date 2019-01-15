@@ -7,7 +7,7 @@
     }
 
     .address {
-        margin-top: $global-margin * 3.5;
+        margin-top: $global-gutter;
 
         h2 {
             @extend h5;
@@ -24,7 +24,7 @@
         }
 
         .columns {
-            padding-bottom: $global-margin * 2;
+            padding-bottom: $global-margin;
         }
     }
 

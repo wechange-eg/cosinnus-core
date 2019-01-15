@@ -259,7 +259,7 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
                 idea.created_groups.add(self.object)
                 idea.update_index()
                 # send out a notification to followers of this idea except for the new project's creator
-                idea_followers_ids = [uid for uid in idea.likes.filter(followed=True).values_list('user', flat=True) if not uid == self.request.user.id]
+                idea_followers_ids = [pk for pk in idea.get_followed_user_ids() if not pk in [self.request.user.id]]
                 idea_followers = get_user_model().objects.filter(id__in=idea_followers_ids)
                 cosinnus_notifications.project_created_from_idea.send(sender=self, obj=self.object, user=self.request.user, audience=idea_followers)
             else:
