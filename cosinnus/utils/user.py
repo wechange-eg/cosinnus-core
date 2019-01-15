@@ -47,6 +47,8 @@ def get_user_by_email_safe(email):
         # if none of the users has logged in, take the newest registered
         if users.filter(last_login__isnull=False).count() == 1:
             newest = users.latest('date_joined')
+        elif users.filter(last_login__isnull=False).count() == 0:
+            newest = users[0]
         else:
             newest = users.filter(last_login__isnull=False).latest('last_login')
         others = users.exclude(id=newest.id)
