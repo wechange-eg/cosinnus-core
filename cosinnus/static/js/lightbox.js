@@ -137,7 +137,8 @@
       function addToAlbum($link) {
         self.album.push({
           link: $link.attr('href'),
-          title: $link.attr('data-title') || $link.attr('title')
+          title: $link.attr('data-title') || $link.attr('title'),
+          download: $link.attr('data-lightbox-download') || null
         });
       }
 
@@ -214,15 +215,22 @@
         $image.width(preloader.width);
         $image.height(preloader.height);
         
+        // assign download URL if present, hide download button if not
+        if (self.album[imageNumber].download) {
+        	self.$lightbox.find('.lb-download').attr('href', self.album[imageNumber].download);
+        } else {
+        	self.$lightbox.find('.lb-downloadContainer').hide();
+        }
+        
         if (self.options.fitImagesInViewport) {
           // Fit image inside the viewport.
           // Take into account the border around the image and an additional 10px gutter on each side.
 
-          windowWidth    = 10000;
-          windowHeight   = 10000;
+          windowWidth    = $(window).width();
+          windowHeight   = $(window).height();
           maxImageWidth  = windowWidth - self.containerLeftPadding - self.containerRightPadding - 20;
           maxImageHeight = windowHeight - self.containerTopPadding - self.containerBottomPadding - 120;
-
+          
           // Is there a fitting issue?
           if ((preloader.width > maxImageWidth) || (preloader.height > maxImageHeight)) {
             if ((preloader.width / maxImageWidth) > (preloader.height / maxImageHeight)) {
