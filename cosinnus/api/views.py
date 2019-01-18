@@ -19,7 +19,7 @@ class CosinnusGroupSerializerViewSet(viewsets.ReadOnlyModelViewSet):
         # filter for current portal
         queryset = queryset.filter(portal=CosinnusPortal.get_current())
         # Filter visibility
-        queryset = queryset.filter(is_active=True, public=True)
+        queryset = queryset.filter(is_active=True)
         # Order
         query_params = self.request.query_params.copy()
         order_by = query_params.pop('order_by', ['-created',])
