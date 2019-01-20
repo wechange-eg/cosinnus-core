@@ -70,7 +70,8 @@ class DKIMEmailBackend(EmailBackend):
                                   settings.DKIM_SELECTOR,
                                   settings.DKIM_DOMAIN,
                                   settings.DKIM_PRIVATE_KEY)
-            self.connection.sendmail(from_email, recipients, signature+message_string)
+            signed_message = (signature + message_string).encode('utf-8')
+            self.connection.sendmail(from_email, recipients, signed_message)
         except smtplib.SMTPException:
             if not self.fail_silently:
                 raise
