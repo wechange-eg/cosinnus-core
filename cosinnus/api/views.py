@@ -29,8 +29,8 @@ class PublicTaggableObjectFilterMixin(object):
         return queryset
 
 
-class CosinnusSocietySerializerViewSet(PublicCosinnusGroupFilterMixin,
-                                       viewsets.ReadOnlyModelViewSet):
+class CosinnusSocietyViewSet(PublicCosinnusGroupFilterMixin,
+                             viewsets.ReadOnlyModelViewSet):
     queryset = CosinnusSociety.objects.all()
     serializer_class = CosinnusSocietySerializer
 
@@ -66,13 +66,15 @@ class CosinnusSocietySerializerViewSet(PublicCosinnusGroupFilterMixin,
         return queryset
 
 
-class CosinnusProjectSerializerViewSet(CosinnusSocietySerializerViewSet):
+class CosinnusProjectViewSet(CosinnusSocietyViewSet):
+
     queryset = CosinnusProject.objects.all()
     serializer_class = CosinnusProjectSerializer
 
 
-class OrganisationSerializerViewSet(PublicCosinnusGroupFilterMixin,
-                                    viewsets.ModelViewSet):
+class OrganisationViewSet(PublicCosinnusGroupFilterMixin,
+                          viewsets.ModelViewSet):
+
     queryset = CosinnusProject.objects.all()
     serializer_class = OrganisationListSerializer
 

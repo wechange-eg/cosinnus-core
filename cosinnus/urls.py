@@ -11,11 +11,11 @@ from cosinnus.core.registries import url_registry
 from cosinnus.conf import settings
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
-from cosinnus.api.views import CosinnusSocietySerializerViewSet, CosinnusProjectSerializerViewSet, \
-    OrganisationSerializerViewSet
+from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
+    OrganisationViewSet
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group,\
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object
-from cosinnus_event.api.views import EventSerializerViewSet
+from cosinnus_event.api.views import EventViewSet
 
 schema_view = get_swagger_view(title='WECHANGE API')
 
@@ -181,10 +181,10 @@ urlpatterns += url_registry.urlpatterns
 
 # URLs for API version 2
 router = routers.SimpleRouter()
-router.register(r'groups', CosinnusSocietySerializerViewSet)
-router.register(r'projects', CosinnusProjectSerializerViewSet)
-router.register(r'organisation', OrganisationSerializerViewSet)
-router.register(r'event', EventSerializerViewSet)
+router.register(r'groups', CosinnusSocietyViewSet)
+router.register(r'projects', CosinnusProjectViewSet)
+router.register(r'organisation', OrganisationViewSet)
+router.register(r'event', EventViewSet)
 
 urlpatterns += [
     url(r'api/v2/docs/', get_swagger_view()),
