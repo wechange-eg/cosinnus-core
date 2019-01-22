@@ -284,6 +284,8 @@ LOGGING = {
     },
 }
 
+# allow a lot of POST parameters (notification settings will have many fields)
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000 
 
 # Required for cmsplugin_filer_image
 THUMBNAIL_PROCESSORS = (
