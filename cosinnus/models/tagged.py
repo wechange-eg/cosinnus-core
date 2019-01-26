@@ -78,17 +78,20 @@ class CosinnusTopicCategory(MultiLanguageFieldMagicMixin, CosinnusBaseCategory):
 @python_2_unicode_compatible
 class BaseTagObject(models.Model):
 
-    VISIBILITY_USER = 0 # for Users, this setting means: "Only Group Members can see me"
-    VISIBILITY_GROUP = 1 # for Users, this setting means: "Only Logged in Users can see me"
-    VISIBILITY_ALL = 2 # for Users, this setting means: "Everyone can see me"
+    VISIBILITY_LOGGEDIN = 0 # for Users, this setting means: "Only Logged in Users can see me"
+    VISIBILITY_GROUP = 1 # for Users, this setting means: "Only Group Members can see me"
+    VISIBILITY_PROJECT = 2 # for Users, this setting means: "Only Project Members can see me"
+    VISIBILITY_PUBLIC = 3 # for Users, this setting means: "Everyone can see me"
 
     #: Choices for :attr:`visibility`: ``(int, str)``
     # Empty first choice must be included for select2 placeholder compatibility!
     VISIBILITY_CHOICES = (
         ('', ''),
-        (VISIBILITY_USER, _('Only me')),  
-        (VISIBILITY_GROUP, _('Team members only')), 
-        (VISIBILITY_ALL, _('Public (visible without login)')), 
+        (VISIBILITY_ME, _('Only me')),
+        (VISIBILITY_LOGGEDIN, _('Logged in users only')),
+        (VISIBILITY_GROUP, _('Group members only')),
+        (VISIBILITY_PROJECT, _('Project members only')),
+        (VISIBILITY_PUBLIC, _('Public (visible without login)')),
     )
 
     group = models.ForeignKey(settings.COSINNUS_GROUP_OBJECT_MODEL, verbose_name=_('Team'),
