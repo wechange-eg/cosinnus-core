@@ -273,6 +273,7 @@ class GroupCreateView(CosinnusGroupFormMixin, AvatarFormMixin, AjaxableFormMixin
         # because taggit tags that don't exist yet cannot be rendered back properly
         # (during rendering, the then only string is attempted to be rendered as a tag-id and then not found)
         try:
+            form.forms['media_tag'].data._mutable = True
             del form.forms['media_tag'].data['media_tag-tags']
         except KeyError:
             pass
