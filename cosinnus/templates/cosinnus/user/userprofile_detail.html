@@ -134,13 +134,25 @@
                                     <i>{% trans "No Description set" %}</i>
 					            {% endif %}
 				            </div>
+				            
+				            
+							{% if SETTINGS.COSINNUS_USER_SHOW_MAY_BE_CONTACTED_FIELD %}
+								<legend>{% trans "Cooperation requests" %}</legend>
+					            <p class="transparent">
+					            	{% if profile.may_be_contacted %}
+					            		<i class="fa fa-fw fa-commenting-o"></i> {% trans "I am open to be contacted about potential collaboration opportunities!" %}
+					            	{% else %}
+					            		<i class="fa fa-fw fa-ban"></i> {% trans "I do NOT wish to be contacted for potential collaboration!" %}
+					            	{% endif %}
+					            </p>
+							{% endif %}
 					            
 				            
 				            {% if profile.website %}
-				            <legend>{% trans "My Website" %}</legend>
-				            <p class="transparent">
-				                <i class="fa fa-globe"></i> <a href="{{ profile.website }}" target="_blank">{{ profile.website }}</a>
-				            </p>
+					            <legend>{% trans "My Website" %}</legend>
+					            <p class="transparent">
+					                <i class="fa fa-globe"></i> <a href="{{ profile.website }}" target="_blank">{{ profile.website }}</a>
+					            </p>
 				            {% endif %}
 				            
 				            {% include "cosinnus/media_tags_userprofile_readonly.html" with object=profile %}

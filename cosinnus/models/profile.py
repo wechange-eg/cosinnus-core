@@ -113,6 +113,8 @@ class BaseUserProfile(IndexingUtilsMixin, FacebookIntegrationUserProfileMixin, m
     website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
     language = models.CharField(_('Language'), max_length=2,
         choices=settings.LANGUAGES, default='de')
+    # display and inclusion in forms is dependent on setting `COSINNUS_USER_SHOW_MAY_BE_CONTACTED_FIELD`
+    may_be_contacted = models.BooleanField(_('May be contacted'), default=False)
     
     settings = JSONField(default={})
 

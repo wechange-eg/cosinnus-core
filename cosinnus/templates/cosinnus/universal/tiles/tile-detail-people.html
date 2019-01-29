@@ -7,6 +7,25 @@
     </div>
 {% endblock header_image %}
 
+{% block topic_line %}
+	{{ super() }}
+	
+    {% if may_be_contacted == true %}
+		<div class="top-line extra-space extra-space-top">
+            <i class="fa fa-fw fa-commenting-o"></i>
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Open to be contacted about potential collaboration opportunities" %}
+        </div>
+	{% elif may_be_contacted == false %}
+		<div class="top-line extra-space extra-space-top">
+            <i class="fa fa-fw fa-ban"></i>
+            {# Translators: __INCLUDE_JS_PO__ #}
+            {% trans "Does NOT wish to be contacted for potential collaboration!" %}
+        </div>
+	{% endif %}
+	
+{% endblock topic_line %}
+
 {% block action_buttons %}
     <div class="tile-section tile-section-button-list">
         {% if action_url_1 %}

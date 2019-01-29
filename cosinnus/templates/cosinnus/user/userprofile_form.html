@@ -99,7 +99,15 @@
                     
                
                 {% include "cosinnus/media_tags_userprofile.html" %} 
-    
+				
+				
+				{% if SETTINGS.COSINNUS_USER_SHOW_MAY_BE_CONTACTED_FIELD %}
+					{# May be contacted checkbox #}
+	                {% trans "Cooperation requests for you" as mc_label %}
+	                {% trans "Signals your willingness to be contacted by other users who wish to collaborate with you" as mc_legend %}
+	                {% trans "I am open for cooperation requests" as mc_box_label %}
+	                {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.may_be_contacted label=mc_label legend=mc_legend checkbox_label=mc_box_label %}
+                {% endif %}
 	    </div>
 	    
 	    <button type="submit" class="btn btn-emphasized">

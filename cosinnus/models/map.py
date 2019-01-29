@@ -370,6 +370,11 @@ class DetailedUserMapResult(DetailedMapResult):
                 kwargs['projects'].append(HaystackProjectMapCard(result))
             else:
                 kwargs['groups'].append(HaystackGroupMapCard(result))
+                
+        if getattr(settings, 'COSINNUS_USER_SHOW_MAY_BE_CONTACTED_FIELD', False):
+            kwargs.update({
+                'may_be_contacted': obj.may_be_contacted,
+            })
         return super(DetailedUserMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
 

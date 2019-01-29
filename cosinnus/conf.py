@@ -512,6 +512,9 @@ class CosinnusConf(AppConf):
     # if False, users can only create Projects 
     USERS_CAN_CREATE_GROUPS = False
     
+    # will the `profile.may_be_contacted` be shown in forms and detail views?
+    USER_SHOW_MAY_BE_CONTACTED_FIELD = False
+    
     # Temporary setting for the digest test phase.
     # set to ``False`` once testing is over
     DIGEST_ONLY_FOR_ADMINS = False
