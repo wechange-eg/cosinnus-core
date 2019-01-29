@@ -8,7 +8,7 @@
         <div class="col-xs-12 col-sm-5 regular-space">
             {{ preview_html|safe }}
             
-            {% if object.avatar %}
+            {% if object.avatar and not avatar_field.field.required %}
             <div class="btn btn-emphasized btn-small btn-no-float">
                 <ul class="media-list">
                     <li class="media">

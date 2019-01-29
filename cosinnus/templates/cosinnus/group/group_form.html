@@ -186,7 +186,7 @@
 								            <div class="col-xs-8 col-sm-10">
 								    {% endif %} 
 								    <div class="file-input">
-		                                <input class="form-control" id="fileToUpload" name="wallpaper" placeholder="{% trans "Upload an image." %}" type="file">
+		                                <input class="form-control" id="fileToUpload" name="wallpaper" placeholder="{% trans "Upload an image." %}" type="file" {% if not object.wallpaper and form.forms.obj.wallpaper.field.required %}required{% endif %}>
 								    </div>
 								    {% if object.wallpaper %}
 								            </div>
@@ -195,7 +195,7 @@
 									
 	                        {% endcaptureas %}
                             {% captureas wallpaper_extra_html %}
-			                        {% if object.wallpaper %}
+			                        {% if object.wallpaper and not form.forms.obj.wallpaper.field.required %}
 					                    <div class="btn btn-emphasized btn-small btn-no-float regular-space">
 					                        <ul class="media-list">
 					                            <li class="media">

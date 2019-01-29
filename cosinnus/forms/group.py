@@ -88,11 +88,11 @@ class AsssignPortalMixin(object):
 
 class CosinnusBaseGroupForm(FacebookIntegrationGroupFormMixin, MultiLanguageFieldValidationFormMixin, forms.ModelForm):
     
-    avatar = avatar_forms.AvatarField(required=False, disable_preview=True)
+    avatar = avatar_forms.AvatarField(required=getattr(settings, 'COSINNUS_GROUP_AVATAR_REQUIRED', False), disable_preview=True)
     website = forms.URLField(widget=forms.TextInput, required=False)
     # we want a textarea without character limit here so HTML can be pasted (will be cleaned)
     twitter_widget_id = forms.CharField(widget=forms.Textarea, required=False)
-
+    
     
     related_groups = forms.ModelMultipleChoiceField(queryset=get_cosinnus_group_model().objects.none())
     

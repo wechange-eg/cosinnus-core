@@ -298,6 +298,9 @@ class CosinnusConf(AppConf):
     # additional inline formsets (as string python path to Class) for the CosinnusGroupForm
     GROUP_ADDITIONAL_INLINE_FORMSETS = []
     
+    # should the group avatar image be a required field?
+    GROUP_AVATAR_REQUIRED = False
+    
     # this is the thumbnail size for small image previews
     IMAGE_THUMBNAIL_SIZE_SCALE = (80, 80)
     
