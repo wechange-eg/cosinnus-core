@@ -375,6 +375,10 @@ class DetailedUserMapResult(DetailedMapResult):
             kwargs.update({
                 'may_be_contacted': obj.may_be_contacted,
             })
+        if obj.user_id == user.id:
+            kwargs.update({
+                'is_self': True,
+            })
         return super(DetailedUserMapResult, self).__init__(haystack_result, obj, user, *args, **kwargs)
 
 
