@@ -782,7 +782,15 @@ def textfield(text, arg=''):
     # 'code-friendly-strict' is added on the wechange fork and means that intra-word
     # asterisks like `Benutzer*innen` will not be italicized
     extras = {'strike': {}, 'break-on-newline': {}, 'cuddled-lists': {}, 'code-friendly-strict': {},  'nofollow': {}, 'target-blank-links': {}}
-    text = markdown2.markdown(text, extras=extras)
+    try:
+        text = markdown2.markdown(text, extras=extras)
+    except Exception as e:
+        logger.warning('Markdown2 crashed attempting to parse a given text with exception: %s' % e, extra={'faulty_text': text, 'exception': e})
+        try:
+            text = linebreaksbr(text)
+        except Exception as e2:
+            logger.warning('Even linebreaksbr crashed attempting to parse a given text with exception: %s' % e2, extra={'faulty_text': text, 'exception': e2})
+         
     
     if arg == 'simple':
         text = text.replace('<p>', '').replace('</p>', '')
