@@ -59,7 +59,6 @@ class SingleDeleteActionMixin(object):
     really_delete_selected.short_description = _("Delete selected entries")
 
 
-
 # group related admin
 
 class MembershipAdmin(admin.ModelAdmin):
@@ -143,6 +142,7 @@ class CosinnusProjectAdmin(admin.ModelAdmin):
     search_fields = ('name', )
     prepopulated_fields = {'slug': ('name', )}
     readonly_fields = ('created', 'last_modified')
+    raw_id_fields = ('parent',)
     
     def convert_to_society(self, request, queryset):
         """ Converts this CosinnusGroup's type """
@@ -457,7 +457,7 @@ class UserHasLoggedInFilter(admin.SimpleListFilter):
 class UserAdmin(DjangoUserAdmin):
     inlines = (UserProfileInline, PortalMembershipInline)#, GroupMembershipInline)
     actions = ['deactivate_users', 'export_as_csv', 'log_in_as_user']
-    list_display = ('email', 'is_active', 'has_logged_in', 'tos_accepted', 'username', 'first_name', 'last_name', 'is_staff', )
+    list_display = ('email', 'is_active', 'date_joined', 'has_logged_in', 'tos_accepted', 'username', 'first_name', 'last_name', 'is_staff', )
     list_filter = list(DjangoUserAdmin.list_filter) + [UserHasLoggedInFilter, UserToSAcceptedFilter,]
     
     def has_logged_in(self, obj):
@@ -509,12 +509,17 @@ admin.site.register(CosinnusTopicCategory, CosinnusTopicCategoryAdmin)
 
 class BaseTaggableAdminMixin(object):
     """ Base mixin for the common properties for a BaseTaggableObject admin  """
-    list_display = ('title', 'group', 'creator', 'created')
-    list_filter = ('group__portal',)
-    search_fields = ('title', 'slug', )
+    list_display = ['title', 'group', 'creator', 'created']
+    list_filter = ['group__portal',]
+    search_fields = ['title', 'slug', 'creator__first_name', 'creator__last_name', 'creator__email', 'group__name']
+    readonly_fields = ['media_tag', 'attached_objects']
+    inlines = []
+    raw_id_fields = ['group', 'creator']
+
 
 class BaseHierarchicalTaggableAdminMixin(BaseTaggableAdminMixin):
-    list_display = list(BaseTaggableAdminMixin.list_display) + ['path',]
+    list_display = BaseTaggableAdminMixin.list_display + ['path', 'is_container']
+    list_filter = BaseTaggableAdminMixin.list_filter + ['is_container']
 
 
 class GlobalUserNotificationSettingAdmin(admin.ModelAdmin):
