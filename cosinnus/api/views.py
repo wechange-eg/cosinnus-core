@@ -73,7 +73,7 @@ class CosinnusProjectViewSet(CosinnusSocietyViewSet):
 
 
 class OrganisationViewSet(PublicCosinnusGroupFilterMixin,
-                          viewsets.ModelViewSet):
+                          viewsets.ReadOnlyModelViewSet):
 
     queryset = CosinnusProject.objects.all()
     serializer_class = OrganisationListSerializer
