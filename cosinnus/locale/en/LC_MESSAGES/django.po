@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-10 12:52+0100\n"
+"POT-Creation-Date: 2019-02-01 15:10+0100\n"
 "PO-Revision-Date: 2018-06-23 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
 "X-Generator: Poedit 1.8.4\n"
 
 #, python-format
@@ -255,6 +255,16 @@ msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_nam
 msgstr ""
 
 #, fuzzy
+#| msgid "There are no groups."
+msgid "Accept invitation"
+msgstr "There are no groups."
+
+#, fuzzy
+#| msgid "There are no groups."
+msgid "View invitation"
+msgstr "There are no groups."
+
+#, fuzzy
 #| msgid "Convert selected Projects to Groups"
 msgid "New link to the moved project/group"
 msgstr "Convert selected Projects to Groups"
@@ -393,7 +403,6 @@ msgid "Other teams"
 msgstr "Other projects"
 
 #. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 msgid "Like"
 msgstr ""
 
@@ -418,9 +427,6 @@ msgstr ""
 msgid "This account is inactive."
 msgstr ""
 
-msgid "Hi,"
-msgstr ""
-
 msgid "Click the following link to change which emails you receive:"
 msgstr ""
 
@@ -431,6 +437,9 @@ msgid "Click the following link to never receive any more emails from us:"
 msgstr ""
 
 msgid "Unsubscribe"
+msgstr ""
+
+msgid "Hi,"
 msgstr ""
 
 msgid "Tiny (50 x *)"
@@ -590,6 +599,9 @@ msgstr ""
 msgid "Project Type"
 msgstr "Project Type"
 
+msgid "Last modified"
+msgstr ""
+
 msgid "Short Description"
 msgstr ""
 
@@ -698,9 +710,6 @@ msgid "Portal membership"
 msgstr ""
 
 msgid "Portal memberships"
-msgstr ""
-
-msgid "Last modified"
 msgstr ""
 
 msgid "Team Invite for Unregistered User"
@@ -830,6 +839,9 @@ msgstr "Projects"
 msgid "Language"
 msgstr ""
 
+msgid "May be contacted"
+msgstr ""
+
 msgid "Terms of Service"
 msgstr ""
 
@@ -890,9 +902,6 @@ msgid "Approach"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 msgid "Topics"
 msgstr ""
 
@@ -925,12 +934,9 @@ msgid "User"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 msgid "Liked"
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Following"
 msgstr ""
@@ -944,19 +950,13 @@ msgid "Users"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 msgid "Events"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "Groups"
@@ -1307,6 +1307,12 @@ msgstr ""
 msgid "You don't have permission to access this site."
 msgstr ""
 
+msgid "Page expired!"
+msgstr ""
+
+msgid "Your request seems to have come from an outdated version of this page. Please reload the page and try again!"
+msgstr ""
+
 msgid "Page not found!"
 msgstr ""
 
@@ -1388,8 +1394,6 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Follow"
 msgstr ""
@@ -1895,7 +1899,6 @@ msgid "Create Group"
 msgstr "Create Group"
 
 #. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 msgid "Create Project"
 msgstr "Create Project"
 
@@ -1978,6 +1981,12 @@ msgstr ""
 msgid "max. 10 MB"
 msgstr ""
 
+msgid "Upload an image."
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
 msgid "Example: http://mywebsite.com"
 msgstr ""
 
@@ -2029,15 +2038,6 @@ msgid "Which apps should be activated?"
 msgstr ""
 
 msgid "This App can only be activated for a Group, but not for a Project!"
-msgstr ""
-
-msgid "Microsite Wallpaper"
-msgstr ""
-
-msgid "Upload an image."
-msgstr ""
-
-msgid "Reset"
 msgstr ""
 
 msgid "Description and Infos"
@@ -2211,11 +2211,9 @@ msgid "View Group"
 msgstr "Edit Project"
 
 #. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 msgid "Membership request pending..."
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are invited!"
 msgstr ""
@@ -2354,7 +2352,6 @@ msgstr ""
 msgid "A message from %(sender_full_name)s"
 msgstr ""
 
-#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "Create Project"
@@ -3285,7 +3282,6 @@ msgid "Create idea"
 msgstr "Create Project"
 
 #. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 msgid "Next"
 msgstr ""
 
@@ -3448,6 +3444,14 @@ msgid "Projects - Created from this Idea"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Open to be contacted about potential collaboration opportunities"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Does NOT wish to be contacted for potential collaboration!"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 #, fuzzy
 #| msgid "Edit Project"
 msgid "Join Project"
@@ -3546,6 +3550,15 @@ msgstr ""
 msgid "User profile: %(username)s"
 msgstr ""
 
+msgid "Cooperation requests"
+msgstr ""
+
+msgid "I am open to be contacted about potential collaboration opportunities!"
+msgstr ""
+
+msgid "I do NOT wish to be contacted for potential collaboration!"
+msgstr ""
+
 msgid "My Website"
 msgstr ""
 
@@ -3565,6 +3578,15 @@ msgid "Who are you and what motivates you?"
 msgstr ""
 
 msgid "Tell others something about you!"
+msgstr ""
+
+msgid "Cooperation requests for you"
+msgstr ""
+
+msgid "Signals your willingness to be contacted by other users who wish to collaborate with you"
+msgstr ""
+
+msgid "I am open for cooperation requests"
 msgstr ""
 
 msgid "Welcome!"
@@ -4050,10 +4072,6 @@ msgid "There was an error while processing your avatar. Please make sure you sel
 msgstr ""
 
 msgid "There was an error while processing your avatar. The image file might be broken or the file transfer was interrupted."
-msgstr ""
-
-#, python-format
-msgid "%s (descending)"
 msgstr ""
 
 msgid "<Root folder>"

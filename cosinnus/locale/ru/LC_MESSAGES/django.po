@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-10 12:52+0100\n"
+"POT-Creation-Date: 2019-02-01 15:10+0100\n"
 "PO-Revision-Date: 2018-12-12 14:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: ru\n"
 "X-Generator: Poedit 1.8.4\n"
 
 #, python-format
@@ -254,6 +254,16 @@ msgstr "%(sender_name)s пригласил Вас присоединиться, 
 msgid "%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
 msgstr "%(sender_name)s  пригласил(а) Вас присоединиться к \"%(team_name)s\" на %(portal_name)s!"
 
+#, fuzzy
+#| msgid "Accept Invitation"
+msgid "Accept invitation"
+msgstr "Принять приглашение"
+
+#, fuzzy
+#| msgid "Delete invitation"
+msgid "View invitation"
+msgstr "Удалить приглашение"
+
 msgid "New link to the moved project/group"
 msgstr "Новая ссылка на перемещаемый проект/группу"
 
@@ -393,7 +403,6 @@ msgid "Other teams"
 msgstr "Другие группы"
 
 #. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 msgid "Like"
 msgstr "Нравится"
 
@@ -418,9 +427,6 @@ msgstr "Скорее всего, в Вашем браузере выключен
 msgid "This account is inactive."
 msgstr "Неактивный аккаунт."
 
-msgid "Hi,"
-msgstr "Здравствуйте,"
-
 msgid "Click the following link to change which emails you receive:"
 msgstr "Нажмите на ссылку, чтобы изменить уведомления, которые Вы будете получать:"
 
@@ -432,6 +438,9 @@ msgstr "Пройдите по ссылке, чтобы изменить увед
 
 msgid "Unsubscribe"
 msgstr "Отписаться"
+
+msgid "Hi,"
+msgstr "Здравствуйте,"
 
 msgid "Tiny (50 x *)"
 msgstr "Крошечный (50 x *)"
@@ -593,6 +602,9 @@ msgstr "Будьте предельно внимательны при ручно
 msgid "Project Type"
 msgstr "Тип проекта"
 
+msgid "Last modified"
+msgstr "В последний раз изменено"
+
 msgid "Short Description"
 msgstr "Краткое описание"
 
@@ -703,9 +715,6 @@ msgstr "Членство на портале"
 msgid "Portal memberships"
 msgstr "Членства на портале"
 
-msgid "Last modified"
-msgstr "В последний раз изменено"
-
 msgid "Team Invite for Unregistered User"
 msgstr "Приглашение команды для незарегистрированного пользователя"
 
@@ -809,6 +818,9 @@ msgstr "Cosinnus идеи"
 msgid "Language"
 msgstr "Язык"
 
+msgid "May be contacted"
+msgstr ""
+
 msgid "Terms of Service"
 msgstr "Условия пользования"
 
@@ -869,9 +881,6 @@ msgid "Approach"
 msgstr "Подход"
 
 #. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 msgid "Topics"
 msgstr "Темы"
 
@@ -902,12 +911,9 @@ msgid "User"
 msgstr "Пользователь"
 
 #. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 msgid "Liked"
 msgstr "Нравится"
 
-#. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Following"
 msgstr "Слежу"
@@ -919,19 +925,13 @@ msgid "Users"
 msgstr "Пользователи"
 
 #. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 msgid "Events"
 msgstr "События"
 
 #. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 msgid "Projects"
 msgstr "Проекты"
 
-#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Groups"
 msgstr "Группы"
@@ -1283,6 +1283,12 @@ msgstr "Доступ закрыт!"
 msgid "You don't have permission to access this site."
 msgstr "У Вас нет полномочий для доступа к этой странице."
 
+msgid "Page expired!"
+msgstr ""
+
+msgid "Your request seems to have come from an outdated version of this page. Please reload the page and try again!"
+msgstr ""
+
 msgid "Page not found!"
 msgstr "Страница не найдена!"
 
@@ -1362,8 +1368,6 @@ msgstr "Я хочу следить за этим"
 msgid "Yes"
 msgstr "Да"
 
-#. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Follow"
 msgstr "Подписаться"
@@ -1844,7 +1848,6 @@ msgid "Create Group"
 msgstr "Создать группу"
 
 #. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 msgid "Create Project"
 msgstr "Создать проект"
 
@@ -1921,6 +1924,12 @@ msgstr "Размер файла"
 msgid "max. 10 MB"
 msgstr "максимально 10 МБ"
 
+msgid "Upload an image."
+msgstr "Загрузить изображение."
+
+msgid "Reset"
+msgstr "Сбросить"
+
 msgid "Example: http://mywebsite.com"
 msgstr "Пример: http://mywebsite.com"
 
@@ -1971,15 +1980,6 @@ msgstr "Какие приложения нужно активировать?"
 
 msgid "This App can only be activated for a Group, but not for a Project!"
 msgstr "Это приложение может быть применено только к Группе, но не к Проекту!"
-
-msgid "Microsite Wallpaper"
-msgstr "Фон микросайта"
-
-msgid "Upload an image."
-msgstr "Загрузить изображение."
-
-msgid "Reset"
-msgstr "Сбросить"
 
 msgid "Description and Infos"
 msgstr "Описание и информация"
@@ -2147,11 +2147,9 @@ msgid "View Group"
 msgstr "Посмотреть группу"
 
 #. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 msgid "Membership request pending..."
 msgstr "Заявка на членство в ожидании..."
 
-#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "You are invited!"
 msgstr "Вы приглашены!"
@@ -2274,7 +2272,6 @@ msgstr "Переместить"
 msgid "A message from %(sender_full_name)s"
 msgstr "Сообщение от %(sender_full_name)s"
 
-#. Translators: __INCLUDE_JS_PO__
 #. Translators: __INCLUDE_JS_PO__
 msgid "Create Idea"
 msgstr "Создать идею"
@@ -3319,7 +3316,6 @@ msgid "Create idea"
 msgstr "Создать идею"
 
 #. Translators: __INCLUDE_JS_PO__
-#. Translators: __INCLUDE_JS_PO__
 msgid "Next"
 msgstr "Далее"
 
@@ -3472,6 +3468,14 @@ msgid "Projects - Created from this Idea"
 msgstr "Проекты - созданные на основе этой идеи"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Open to be contacted about potential collaboration opportunities"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Does NOT wish to be contacted for potential collaboration!"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Join Project"
 msgstr "Присоединиться к проекту"
 
@@ -3562,6 +3566,17 @@ msgstr "Удалить аккаунт пользователя"
 msgid "User profile: %(username)s"
 msgstr "Профиль пользователя: %(username)s"
 
+#, fuzzy
+#| msgid "Membership requests"
+msgid "Cooperation requests"
+msgstr "Заявки на вступление"
+
+msgid "I am open to be contacted about potential collaboration opportunities!"
+msgstr ""
+
+msgid "I do NOT wish to be contacted for potential collaboration!"
+msgstr ""
+
 msgid "My Website"
 msgstr "Мой сайт"
 
@@ -3582,6 +3597,15 @@ msgstr "Кто Вы и что Вами движет?"
 
 msgid "Tell others something about you!"
 msgstr "Расскажите немного о себе!"
+
+msgid "Cooperation requests for you"
+msgstr ""
+
+msgid "Signals your willingness to be contacted by other users who wish to collaborate with you"
+msgstr ""
+
+msgid "I am open for cooperation requests"
+msgstr ""
 
 msgid "Welcome!"
 msgstr "Добро пожаловать!"
@@ -4060,10 +4084,6 @@ msgstr "При обработке Вашего аватара произошла
 msgid "There was an error while processing your avatar. The image file might be broken or the file transfer was interrupted."
 msgstr "При обработке вашего аватара произошла ошибка. Файл с изображением может быть поврежден или передача файла была прервана."
 
-#, python-format
-msgid "%s (descending)"
-msgstr "%s (по убыванию)"
-
 msgid "<Root folder>"
 msgstr "<Корневая папка>"
 
@@ -4221,6 +4241,12 @@ msgstr "Вы не являетесь членом %s! Если Вы желает
 
 msgid "Your changes have been saved."
 msgstr "Ваши изменения были сохранены."
+
+#~ msgid "Microsite Wallpaper"
+#~ msgstr "Фон микросайта"
+
+#~ msgid "%s (descending)"
+#~ msgstr "%s (по убыванию)"
 
 #~ msgid "Group overview"
 #~ msgstr "Обзор группы"
