@@ -65,6 +65,57 @@ module.exports = {
         if (statusData['hadFocus']) {
             $input.focus();
         }
-    }
+    },
     
+    /** Parses a combined Result id from the backend into its parts.
+     * 	Example: "1.events.forum*tolles-event" or "1.groups.forum".
+     * 	Returns: A dict of parts:
+     *  {
+     * 		portal: int,
+     * 		type: str,
+     * 		slug: str,
+     *  }*/
+    parseDirectItemId: function (directItemIdStr) {
+    	var data = directItemIdStr.split('.');
+        data = {
+            portal: data[0],
+            type: data[1],
+            slug: data[2],
+        };
+        return data;
+    },
+    
+    /** Create a combined Result id for the backend from its parts */
+    makeDirectItemId: function (portal, type, slug) {
+    	return portal + '.' + type + '.' + slug;
+    },
+    
+    getAPIDataForDirectItemId: function (directItemId) {
+    	var data = this.parseDirectItemId(directItemId);
+    	var apiData = {};
+    	if (data.type == 'ideas') {
+    		apiData = {
+    			ct: 'cosinnus.CosinnusIdea',
+    			slug: data.slug,
+    		};
+    	} else if (data.type == 'events') {
+    		apiData = {
+				ct: 'cosinnus_event.Event',
+				slug: data.slug,
+    		};
+    	} else if (data.type == 'projects') {
+    		apiData = {
+				ct: 'cosinnus.CosinnusProject',
+				slug: data.slug,
+    		};
+    	} else if (data.type == 'groups') {
+    		apiData = {
+				ct: 'cosinnus.CosinnusSociety',
+				slug: data.slug,
+    		};
+    	} else {
+    		return null;
+    	}
+    	return apiData;
+    },
 };

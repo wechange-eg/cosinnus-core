@@ -228,7 +228,7 @@ def map_detail_endpoint(request):
         # UserProfiles are retrieved independent of the portal
         obj = get_object_or_None(get_user_profile_model(), user__username=slug)
     elif model_type == 'events':
-        group_slug, event_slug = slug.split('*')
+        group_slug, event_slug = slug.split('*', 1)
         obj = get_object_or_None(model, group__portal__id=portal, group__slug=group_slug, slug=event_slug)
     else:
         obj = get_object_or_None(model, portal__id=portal, slug=slug)
@@ -265,7 +265,7 @@ def get_searchresult_by_args(portal, model_type, slug, user=None):
     if model_type == 'people':
         sqs = SearchQuerySet().models(model).filter_and(slug=slug)
     elif model_type == 'events':
-        group_slug, slug = slug.split('*')
+        group_slug, slug = slug.split('*', 1)
         sqs = SearchQuerySet().models(model).filter_and(portal=portal, group_slug=group_slug, slug=slug)
     else:
         sqs = SearchQuerySet().models(model).filter_and(portal=portal, slug=slug)

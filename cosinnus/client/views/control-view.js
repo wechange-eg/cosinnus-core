@@ -400,14 +400,9 @@ module.exports = ContentControlView.extend({
                 type: $tar.attr('data-type'),
                 slug: $tar.attr('data-slug'),
             }
-            directItemId = data['portal'] + '.' + data['type'] + '.' + data['slug'];
+            directItemId = util.makeDirectItemId(data['portal'], data['type'], data['slug']);
         } else {
-            var itemData = directItemId.split('.');
-            data = {
-                portal: itemData[0],
-                type: itemData[1],
-                slug: itemData[2],
-            };
+            var data = util.parseDirectItemId(directItemId);
         }
         util.log('tile-view.js: got a select click event! data: ' + JSON.stringify(data));
         
@@ -485,33 +480,29 @@ module.exports = ContentControlView.extend({
         }
     },
     
+    // id is: "1.events.forum*tolles-event"
+    
     /** Will like/unlike a given result, depending on the current liked status */
     triggerResultLikeOrUnlike: function (result) {
     	var self = this;
     	var url = '/likefollow/'
-    	var ct = null;
-    	if (result.get('type') == 'ideas') {
-    		ct = 'cosinnus.CosinnusIdea';
-    	} else if (result.get('type') == 'events') {
-    		ct = 'cosinnus_event.Event';
-    	} else {
+    		
+    	var data = util.getAPIDataForDirectItemId(result.get('id'));
+    	if (data == null || !(result.get('type') == 'ideas' || result.get('type') == 'events')) {
     		util.log('Liking cancelled - invalid result type for liking: ' + result.get('type'))
+    		return;
     	}
+    	
     	var to_like = result.get('liked') ? '0' : '1';
     	var unliked_count = result.get('participant_count') - (result.get('liked') ? 1 : 0);
-    	var likeHadErrors = false;
-    	
-    	util.log('Sending like request for slug "' + result.get('slug') + '" and like: ' + to_like);
-    	var data = {
-        	ct: ct,
-        	slug: result.get('slug'),
-        	like: to_like,
-        };
-    	// if we unlike it, also unfollow this idea
-    	if (to_like == '0') {
+    	data['like'] = to_like;
+    	// if we unlike an idea, also unfollow it
+    	if (to_like == '0' && result.get('type') == 'ideas') {
     		data['follow'] = '0';
     	}
     	
+    	util.log('Sending like request for slug "' + result.get('slug') + '" and like: ' + to_like);
+    	var likeHadErrors = false;
     	self.currentDetailHttpRequest = $.ajax(url, {
             type: 'POST',
             timeout: self.searchXHRTimeout,
@@ -527,7 +518,8 @@ module.exports = ContentControlView.extend({
                 	result.set('liked', data.liked);
                 	result.set('followed', data.followed);
                     // graphics update happens via subscriptions on change:liked
-                	if (data.followed) {
+                	if (data.followed && result.get('type') == 'ideas') {
+                		// for ideas, a like triggers a follow, so show the now-following message
                 		self.App.$el.find('.now-following-message').show();
                 	}
                 } 
@@ -554,27 +546,17 @@ module.exports = ContentControlView.extend({
     triggerResultFollowOrUnfollow: function (result) {
     	var self = this;
     	var url = '/likefollow/'
-    	var ct = null;
-    	if (result.get('type') == 'ideas') {
-    		ct = 'cosinnus.CosinnusIdea';
-    	} else if (result.get('type') == 'events') {
-    		ct = 'cosinnus_event.Event';
-    	} else if (result.get('type') == 'projects') {
-    		ct = 'cosinnus.CosinnusProject';
-    	} else if (result.get('type') == 'groups') {
-    		ct = 'cosinnus.CosinnusSociety';
-    	} else {
-    		util.log('Following cancelled - invalid result type for liking: ' + result.get('type'))
+    		
+    	var data = util.getAPIDataForDirectItemId(result.get('id'));
+    	if (data == null) {
+    		util.log('Following cancelled - invalid result type for liking: ' + result.get('type'));
+    		return;
     	}
     	var to_follow = result.get('followed') ? '0' : 1;
-    	var followHadErrors = false;
+    	data['follow'] = to_follow;
     	
     	util.log('Sending follow request for slug "' + result.get('slug') + '" and follow: ' + to_follow);
-    	var data = {
-        	ct: ct,
-        	slug: result.get('slug'),
-        	follow: to_follow,
-        };
+    	var followHadErrors = false;
     	self.currentDetailHttpRequest = $.ajax(url, {
             type: 'POST',
             timeout: self.searchXHRTimeout,

@@ -211,7 +211,12 @@ def do_likefollow(request, **kwargs):
     model_cls = apps.get_model(app_label, model)
     
     obj = None
-    if obj_id is None and slug:
+    if obj_id is None and slug and '*' in slug:
+        # the map api may provide a slug argument in the form of "forum*tolles-event".
+        # in this case, the object belongs to a group and needs both slugs to be identified
+        group_slug, obj_slug = slug.split('*', 1)
+        obj = get_object_or_None(model_cls, slug=obj_slug, group__slug=group_slug, group__portal=CosinnusPortal.get_current())
+    elif obj_id is None and slug:
         obj = get_object_or_None(model_cls, slug=slug, portal=CosinnusPortal.get_current())
     else:
         obj = get_object_or_None(model_cls, id=obj_id)
