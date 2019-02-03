@@ -514,12 +514,16 @@ module.exports = ContentControlView.extend({
                 util.log(textStatus)
                 
                 if ('liked' in data) {
-                	result.set('participant_count', unliked_count + (data.liked ? 1 : 0));
+                	// for ideas, "participants" are the likers
+                	if (result.get('type') == 'ideas') {
+                		result.set('participant_count', unliked_count + (data.liked ? 1 : 0));
+                	}
+                	// graphics update happens here, via subscriptions on change:liked
                 	result.set('liked', data.liked);
                 	result.set('followed', data.followed);
-                    // graphics update happens via subscriptions on change:liked
-                	if (data.followed && result.get('type') == 'ideas') {
-                		// for ideas, a like triggers a follow, so show the now-following message
+
+                	// for ideas, a like triggers a follow, so show the now-following message
+                	if (result.get('type') == 'ideas' && data.followed) {
                 		self.App.$el.find('.now-following-message').show();
                 	}
                 } 
