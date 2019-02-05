@@ -32,7 +32,7 @@ from django.template.base import TemplateSyntaxError
 from cosinnus.core.registries.group_models import group_model_registry
 from django.core.cache import cache
 from cosinnus.utils.urls import group_aware_reverse, get_domain_for_portal,\
-    BETTER_URL_RE
+    BETTER_URL_RE, BETTER_EMAIL_RE
 
 import logging
 import markdown2
@@ -770,11 +770,19 @@ def textfield(text, arg=''):
         return ''
     text = force_text(text)
     
-    # shorten and wrap un-linked URLs in markdown links
-    for m in reversed([it for it in BETTER_URL_RE.finditer(text)]):
+    
+    # shorten and wrap un-linked email addresses in markdown links
+    for m in reversed([it for it in BETTER_EMAIL_RE.finditer(text)]):
         if (m.start() == 0 or text[m.start()-2:m.start()] != '](') and (m.end() == len(text) or text[m.end():m.end()+2] != ']('):
             short = (m.group()[:47] + '...') if len(m.group()) > 50 else m.group()
-            text = text[:m.start()] + ('[%s](%s)' % (short, m.group())) + text[m.end():] 
+            text = text[:m.start()] + ('[%s](mailto:%s)' % (short, m.group())) + text[m.end():] 
+    
+    # shorten and wrap un-linked URLs in markdown links unless they are part of an email
+    for m in reversed([it for it in BETTER_URL_RE.finditer(text)]):
+        if (m.start() == 0 or text[m.start()-2:m.start()] != '](') and (m.start() == 0 or text[m.start()-1] != '@') and (m.end() == len(text) or text[m.end():m.end()+2] != ']('):
+            short = (m.group()[:47] + '...') if len(m.group()) > 50 else m.group()
+            text = text[:m.start()] + ('[%s](%s%s)' % (short, 'http://' if not short.startswith('http') else '', m.group())) + text[m.end():] 
+    
     
     text = escape(text.strip())
     
