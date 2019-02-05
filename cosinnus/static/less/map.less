@@ -392,6 +392,56 @@
     height: 100%;
 }
 
+/** Map expand button hidden for embedded maps and
+ 	when the detail view is open */
+.app-root.tile-detail-open .map-expand-button,
+.map-embed  {
+	display: none;
+}
+
+.map-fullscreen {
+	
+	/** Toggle button for splitscreen/maximized map */
+	.map-expand-button {
+		z-index: 1;
+	    display: block;
+	    position: absolute;
+	    right: 0;
+	    top: 0;
+	    width: 22px;
+	    height: 52px;
+	    font-size: 18px;
+	    color: @map-clickable-icon-color;
+	    cursor: pointer;
+	    
+	    -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.35);
+        -moz-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.35);
+        box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.35);
+	    background: #FFF;
+	    
+	    i.fa {
+	    	padding: 16px 6px;
+	    }
+	    &:hover {
+	    	color: @map-clickable-icon-hover-color;
+	    	text-decoration: none;
+	    }
+	}
+	/** Toggle state for the expand-button icon */
+	.map-expand-button i.expanded {
+		display: none;
+	}
+	&.map-splitscreen {
+		.map-expand-button i.expanded {
+			display: inherit;
+		}
+		.map-expand-button i.contracted {
+			display: none;
+		}
+	}
+}
+
+
 /** Tile container styles */
 .tile-list {
     background-color: @map-tile-background-color;

@@ -24,6 +24,7 @@ var App = function App () {
     self.controlView = null;
     self.tileListView = null;
     self.mapView = null;
+    self.tileDetailView = null;
 
     self.router = null;
     self.mediator = null;
@@ -53,6 +54,9 @@ var App = function App () {
     self.defaultBasePageUrl = '/map/';
     
     self.passedOptions = null;
+    
+    // the most recent complete settings the app was initialized with
+    self.settings = null;
     
     
     /** Main entry point */
@@ -139,28 +143,26 @@ var App = function App () {
         self.el = el;
         self.$el = $(self.el);
         
+        self.settings = settings;
         self.displayOptions = displayOptions;
         
         var topicsJson = typeof COSINNUS_MAP_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TOPICS_JSON : {};
         var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
         
-        var fullscreen = self.displayOptions.fullscreen;
-        var splitscreen = self.displayOptions.showMap && self.displayOptions.showTiles;
-        
         self.controlView = new ControlView({
                 el: null, // will only be set if attached to tile-view
-                availableFilters: settings.availableFilters,
-                activeFilters: settings.activeFilters,
+                availableFilters: self.settings.availableFilters,
+                activeFilters: self.settings.activeFilters,
                 allTopics: topicsJson,
                 portalInfo: portalInfo,
                 controlsEnabled: self.displayOptions.showControls,
                 scrollControlsEnabled: self.displayOptions.showControls && self.displayOptions.showMap,
                 paginationControlsEnabled: self.displayOptions.showTiles,
-                filterGroup: settings.filterGroup,
+                filterGroup: self.settings.filterGroup,
                 basePageURL: basePageUrl,
-                showMine: settings.showMine,
-                fullscreen: fullscreen,
-                splitscreen: splitscreen
+                showMine: self.settings.showMine,
+                fullscreen: self.displayOptions.fullscreen,
+                splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
             }, 
             self, 
             null
@@ -170,52 +172,89 @@ var App = function App () {
         util.log('app.js: TODO: really do this if check for controlsEnabled?')
         util.log(self.displayOptions)
         
+        self.loadMapView();
+        self.loadTileView();
         
-        if (self.displayOptions.showMap) {
-            var mapView = new MapView({
-                elParent: self.el,
-                location: settings.location,
-                fullscreen: fullscreen,
-                splitscreen: splitscreen
-            }, 
-            self,
-            self.controlView.collection
-            ).render();
-            self.mapView = mapView;
-            self.contentViews.push(mapView);
-        }
-        
-        if (self.displayOptions.showTiles) {
-            var tileListView = new TileListView({
-                elParent: self.el,
-                fullscreen: fullscreen,
-                splitscreen: splitscreen
-            }, 
-            self,
-            self.controlView.collection
-            ).render();
-            self.contentViews.push(tileListView);
-            self.tileListView = tileListView;
-            
-            // render control-view controls inside tile-list-view
-            if (self.displayOptions.showControls) {
-                util.log('app.js: actually rendering controls')
-                self.controlView.setElement(tileListView.$el.find('.controls'));
-                self.controlView.render();
-            }
-        }
-        
-        var tileDetailView = new TileDetailView({
-            model: null,
-            elParent: self.el,
-            fullscreen: fullscreen,
-            splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
-        }, 
-        self
+        self.tileDetailView = new TileDetailView({
+	            model: null,
+	            elParent: self.el,
+	            fullscreen: self.displayOptions.fullscreen,
+	            splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
+	        }, 
+	        self
         ).render();
         
         Backbone.mediator.publish('app:ready');
     };
+    
+    /**
+     * Loads the map view based on display options
+     */
+    self.loadMapView = function() {
+    	if (self.mapView == null) {
+    		// load map from scratch
+    		if (self.displayOptions.showMap) {
+    			self.mapView = new MapView({
+	    				elParent: self.el,
+	    				location: self.settings.location,
+	    				fullscreen: self.displayOptions.fullscreen,
+	    				splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
+	    			}, 
+	    			self,
+	    			self.controlView.collection
+    			).render();
+    			self.contentViews.push(self.mapView);
+    		}
+        } else {
+        	if (self.displayOptions.showMap) {
+        		// update settings to show/hide view
+        		self.mapView.options.fullscreen = self.displayOptions.fullscreen;
+        		self.mapView.options.splitscreen = self.displayOptions.showMap && self.displayOptions.showTiles;
+        		self.mapView.reload();
+        	} else {
+        		// hide map and activate non-in-map-searching
+        		self.mapView.hide();
+        	}
+        }
+    };
+    
+    /**
+     * Loads the tile view based on display options
+     */
+    self.loadTileView = function() {
+    	if (self.tileListView == null) {
+    		if (self.displayOptions.showTiles) {
+    			// load tiles from scratch
+    			self.tileListView = new TileListView({
+	    				elParent: self.el,
+	    				fullscreen: self.displayOptions.fullscreen,
+	    				splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
+	    			}, 
+	    			self,
+	    			self.controlView.collection
+    			).render();
+    			self.contentViews.push(self.tileListView);
+    			
+    			// render control-view controls inside tile-list-view
+    			if (self.displayOptions.showControls) {
+    				util.log('app.js: actually rendering controls')
+    				self.controlView.setElement(self.tileListView.$el.find('.controls'));
+    				self.controlView.render();
+    			}
+    		}
+        } else {
+        	if (self.displayOptions.showTiles) {
+        		// update settings to show/hide view
+        		self.tileListView.options.fullscreen = self.displayOptions.fullscreen;
+        		self.tileListView.options.splitscreen = self.displayOptions.showMap && self.displayOptions.showTiles;
+        		self.tileListView.reload();
+        	} else {
+        		// hide tiles (animate!) but keep search params! 
+        		self.tileListView.hide();
+        	}
+        }
+    };
+    
 };
 
 module.exports = App;

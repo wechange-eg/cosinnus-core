@@ -9,6 +9,11 @@ module.exports = ContentControlView.extend({
 
     template: require('map/map'),
     
+    // The DOM events specific to an item.
+    events: {
+        'click .map-expand-button': 'onExpandButtonClicked',
+    },
+    
     layers: {
         street: {
             url: (util.protocol() === 'http:' ?
@@ -152,11 +157,15 @@ module.exports = ContentControlView.extend({
     
     afterRender: function () {
         var self = this;
-        self.mapLayerButtonsView = new MapLayerButtonsView({
-            el: self.$el.find('.map-layers-buttons'),
-            layer: self.options.layer,
-            mapView: self
-        }).render();
+        if (self.mapLayerButtonsView == null) {
+        	self.mapLayerButtonsView = new MapLayerButtonsView({
+        		el: self.$el.find('.map-layers-buttons'),
+        		layer: self.options.layer,
+        		mapView: self
+        	}).render();
+        } else {
+        	self.mapLayerButtonsView.render();
+        }
     },
     
     // extended from content-control-view.js
@@ -454,6 +463,29 @@ module.exports = ContentControlView.extend({
     	}
     },
     
+
+    /**
+     * Called when the expand button is clicked for expanding or contracting
+     * the map (splitscreen vs maximized).
+     */
+    onExpandButtonClicked: function (event) {
+    	this.App.controlView.switchDisplayState(true, !this.options.splitscreen);
+    },
+    
+    
+    /** Shows and reloads the map with current settings */
+    reload: function () {
+    	util.log('*** Reloading Map View ***')
+        this.$el.toggleClass('map-splitscreen', this.options.splitscreen);
+    	this.$el.show();
+        Backbone.mediator.publish('resize:window');
+    },
+    
+    /** Hides the map */
+    hide: function () {
+    	util.log('*** Hiding Map View ***')
+    	this.$el.hide();
+    },
 
     // Private
     // -------

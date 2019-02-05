@@ -272,6 +272,9 @@ module.exports = ContentControlView.extend({
         }
     },
     
+    /* ---------------------  Display-related logic    ------------------------------- */
+    
+    
     /** Open the Create-Idea view */
     openCreateIdeaView: function (event) {
     	var self = this;
@@ -364,6 +367,25 @@ module.exports = ContentControlView.extend({
         	this.triggerMobileMapView(event);
         }
     },
+    
+    /**
+     * Toggles the state of the views between splitview, map-fullscreen or tile-fullscreen.
+     */
+    switchDisplayState: function (showMap, showTiles) {
+    	if (!showMap && !showTiles) {
+            util.log('control-view.js: cant hide both tile and map views at the same time!');
+            return;
+    	}
+    	this.App.displayOptions.showMap = showMap;
+    	this.App.displayOptions.showTiles = showTiles;
+    	this.options.splitscreen = showMap && showTiles;
+    	this.App.loadTileView();
+    	this.App.loadMapView();
+    },
+
+    
+    /* ---------------------  Functional logic    ------------------------------- */
+    
     
     /**
      * Will start a fresh search with the current query of the search textbox.

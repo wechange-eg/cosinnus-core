@@ -80,6 +80,20 @@ module.exports = ContentControlView.extend({
         var self = this;
     },
     
+    /** Shows and reloads the tile view */
+    reload: function () {
+    	util.log('*** Reloading Tile View ***')
+    	this.$el.toggleClass('tile-list-splitscreen', this.options.splitscreen);
+    	this.$el.toggleClass('tile-list-tile-fullscreen', !this.options.splitscreen);
+        this.$el.show();
+    },
+    
+    /** Hides the tile view */
+    hide: function () {
+    	util.log('*** Hiding Tile View ***')
+    	this.$el.hide();
+    },
+    
     // extended from content-control-view.js
     applyUrlSearchParameters: function (urlParams) {
         // don't need this here
