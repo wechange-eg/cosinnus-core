@@ -1225,26 +1225,28 @@
                 $('.toggleable_content[data-id='+$(this).data('id')+']').show();
             });
         },
-        
-        /** Enables toggling content by clicking a button.
-         *    Set this up by giving your button elements: 
-         *    - a data-id="<num>", different for each
-         *    - a data-toggle-group="<name>", same for each (if omitted, assumes global group)
-         *    - the class "toggleable_button" 
-         *    
-         *    Give your content elements (multiple supported, for example for content, and a button highlight)
-         *    - the same data-id
-         *    - the same data-toggle-group
-         *    - the class "toggleable_content"
-         *    */
-        hidden_text : function() {
-            $('.hidden_text_button').off('click').click(function () {
-                var hide_id = $(this).data('hidden-text-id');
-                $('.hidden_text_hidden[data-hidden-text-id='+hide_id+']').show();
-                $('.hidden_text_shown[data-hidden-text-id='+hide_id+']').hide();
-                $(this).hide();
-            });
-        },
+
+		/**
+		 * Wrap your text in a div with class `.truncated-textfield` to have it
+		 * automatically limited to a height. If some text is hidden, the div
+		 * will become clickable to show the entire height of text.
+		 */
+		truncatedTextfield : function() {
+			$('.truncated-textfield:not(.truncated-textfield-applied)').each(function() {
+				var field = this; 
+				if (field.scrollHeight > field.offsetHeight) {
+					$(field).addClass('truncated-textfield-applied');
+				}
+			});
+			if (!$.cosinnus.truncatedTextfieldInited) {
+				$('body').on('click', '.truncated-textfield-applied', function() {
+					$(this).removeClass('truncated-textfield truncated-textfield-applied');
+				});
+				$.cosinnus.truncatedTextfieldInited = true;
+			}
+		},
+		truncatedTextfieldInited : false,
+
         
         modal_activate: function() {
             $('._elem-action-disabled').attr('disabled', false);
@@ -1715,5 +1717,6 @@ $(function() {
     $.cosinnus.addClassChangeTrigger();
     $.cosinnus.fixBootstrapModalScroll();
     $.cosinnus.fixBootstrapMobileNavbar();
+    $.cosinnus.truncatedTextfield();
 });
 

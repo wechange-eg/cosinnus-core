@@ -203,6 +203,29 @@ p.transparent, .white-content.transparent, .transparent-p p, .textfield.transpar
 	}
 }
 
+/**
+* Proper truncating of textfields. Just add the "truncated-textfield" class
+* to your textfield, the rest is in JS `$.cosinnus.truncatedTextfield()`
+*/
+.truncated-textfield {
+	max-height: 250px;
+    overflow: hidden;
+}
+.truncated-textfield-applied {
+	cursor: pointer;
+}
+.truncated-textfield-applied:after {
+    content: "";
+    position: absolute; top: 0; bottom: 0; left: -15px; right: -15px;
+	-webkit-box-shadow: inset 0px -65px 90px -10px rgba(255,255,255,1);
+	-moz-box-shadow: inset 0px -65px 90px -10px rgba(255,255,255,1);
+	box-shadow: inset 0px -65px 90px -10px rgba(255,255,255,1);
+}
+
+
+/**
+}
+*/
 textarea {
 	width: 100%;
 	border-width: 0;
