@@ -38,7 +38,7 @@ def _generate_type_settings(types=[]):
         
     
 
-class MapView(TemplateView):
+class BaseMapView(TemplateView):
     
     template_name = 'cosinnus/map/map_page.html'
     
@@ -66,10 +66,31 @@ class MapView(TemplateView):
         return ctx
 
 
+class MapView(BaseMapView):
+
+    def collect_map_options(self, **kwargs):
+        options = super(MapView, self).collect_map_options(**kwargs)
+        # for areas without a region, on the default map view, if the user has a location set up in his profile,
+        # zoom them into their location-region to start out at
+        if not self.request.user.is_anonymous\
+                and not any([arg_check in self.request.GET for arg_check in ['ne_lat', 'ne_lon', 'sw_lat', 'sw_lon']])\
+                and not getattr(settings, 'COSINNUS_MAP_OPTIONS', {}).get('geojson_region', None) :
+            mt = self.request.user.cosinnus_profile.media_tag
+            if mt.location_lat and mt.location_lon:
+                options.update({
+                    'settings': {
+                        'map': {
+                            'location': [mt.location_lat, mt.location_lon],
+                            'zoom': 9,
+                        },
+                    },
+                })
+        return options
+
 map_view = MapView.as_view()
 
 
-class TileView(MapView):
+class TileView(BaseMapView):
     
     show_mine = False
     types = []

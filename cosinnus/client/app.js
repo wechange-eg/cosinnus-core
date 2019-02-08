@@ -194,12 +194,20 @@ var App = function App () {
     	if (self.mapView == null) {
     		// load map from scratch
     		if (self.displayOptions.showMap) {
-    			self.mapView = new MapView({
-	    				elParent: self.el,
-	    				location: self.settings.location,
-	    				fullscreen: self.displayOptions.fullscreen,
-	    				splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
-	    			}, 
+    			var options = {
+    				elParent: self.el,
+    				fullscreen: self.displayOptions.fullscreen,
+    				splitscreen: self.displayOptions.showMap && self.displayOptions.showTiles
+    			};
+    			if (self.settings.map && self.settings.map.location) {
+    				options['location'] = self.settings.map.location;
+    			}
+    			if (self.settings.map && self.settings.map.zoom) {
+    				options['zoom'] = self.settings.map.zoom;
+    			}
+    			
+    			self.mapView = new MapView(
+    				options, 
 	    			self,
 	    			self.controlView.collection
     			).render();

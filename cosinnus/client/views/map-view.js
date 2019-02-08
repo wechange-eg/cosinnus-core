@@ -97,12 +97,13 @@ module.exports = ContentControlView.extend({
         MARKER_CLUSTER_RADIUS_LIMIT: 0.85, // cluster radius multiplier: modifier for how aggressively the clusters should pull in markers
         MARKER_STACK_PX_OFFSET_PER_CLUSTER_LEVEL: 12, // offset in px for clustered stack-makers per level
         MARKER_STACK_PX_OFFSET_BASE: 8, // additional offset in px of first clustered stack-marker (level 1) from the base marker
-        
+
+        // if location is set to a location pair at initialization,
+        // the `COSINNUS_MAP_OPTIONS.default_coordinates` will be ignored and the
+        // set `location` is used with the zoom setting instead!
+        location: [], // [52.5233, 13.4138],
         zoom: 7,
-        location: [
-            52.5233,
-            13.4138
-        ],
+        
         // the current layer option as string
         layer: 'street',
         
@@ -495,8 +496,7 @@ module.exports = ContentControlView.extend({
         
         util.log('++++++ map-view.js renderMap called! This should only happen once at init! +++++++++++++++++++')
         
-        this.leaflet = L.map('map-container')
-            .setView(this.options.location, this.options.zoom);
+        this.leaflet = L.map('map-container');
         this.setLayer(this.options.layer);
         
         if (self.geoRegionUrl) {
@@ -534,7 +534,14 @@ module.exports = ContentControlView.extend({
             this.setClusterState();
         }
         
-        this.fitBounds();
+        // if an initial location was defined, set that location and zoom as initial viewport
+        // otherwise, use fitBounds to adjust the viewport to the one 
+        // defined in `state` with `COSINNUS_MAP_OPTIONS.default_coordinates.ne_lat`
+        if (this.options.location && this.options.location.length == 2) {
+        	this.leaflet.setView(this.options.location, this.options.zoom);
+        } else {
+        	this.fitBounds();
+        }
         this.updateClusterDistances();
 
         this.leaflet.on('zoomend', this.handleViewportChange, this);
