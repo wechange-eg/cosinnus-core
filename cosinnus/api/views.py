@@ -1,6 +1,4 @@
-from django.http.response import JsonResponse
 from rest_framework import viewsets
-from rest_framework.views import APIView
 
 from cosinnus.models.group import CosinnusPortal
 from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
@@ -86,22 +84,3 @@ class OrganisationViewSet(PublicCosinnusGroupFilterMixin,
         if self.action == 'retrieve':
             return OrganisationRetrieveSerializer
         return OrganisationRetrieveSerializer
-
-
-class UserView(APIView):
-    """
-    Used by Oauth2 authentication (Rocket.Chat) to retrieve user details
-    """
-
-    def get(self, request):
-        if request.user.is_authenticated:
-            user = request.user
-            return JsonResponse({
-                'success': True,
-                'id': user.id,
-                'email': user.email,
-            })
-        else:
-            return JsonResponse({
-                'success': False,
-            })
