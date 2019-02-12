@@ -26,27 +26,6 @@ _CosinnusPortal = None
 
 BOOSTED_FIELD_BOOST = 1.5
 
-# global, multiplicative boost multipliers multiplied to *every* instance of
-# the given models (as django contenttypes strs).
-# if a model is not listed here, 1.0 is assumend
-# this exists so we can blanket boost specific models for visibility without diving
-# into the SearchIndexes and boost logic.
-GLOBAL_MODEL_BOOST_MULTIPLIERS = {
-    #'cosinnus_event.event': 2.0,
-    #'cosinnus.cosinnusproject': 1.0,
-    #'cosinnus.cosinnussociety': 1.0,
-    #'cosinnus.cosinnusidea': 1.0,
-    'cosinnus.userprofile': 0.5,
-} 
-
-# global, additive boost offset. same as `GLOBAL_MODEL_BOOST_MULTIPLIERS`, but additive.
-GLOBAL_MODEL_BOOST_OFFSET = {
-    'cosinnus_event.event': 0.5,
-    'cosinnus.cosinnusproject': 0.5,
-    'cosinnus.cosinnussociety': 0.5,
-    'cosinnus.cosinnusidea': 0.5,
-    #'cosinnus.userprofile': 0,
-}
 
 # how much multiplicative boost penalty some Models get for not having an image
 DEFAULT_BOOST_PENALTY_FOR_MISSING_IMAGE = 0.7
@@ -308,8 +287,8 @@ class DocumentBoostMixin(object):
     def prepare(self, obj):
         """ Boost all objects of this type """
         data = super(DocumentBoostMixin, self).prepare(obj)
-        global_boost = GLOBAL_MODEL_BOOST_MULTIPLIERS.get(data['django_ct'], 1.0)
-        global_offset = GLOBAL_MODEL_BOOST_OFFSET.get(data['django_ct'], 0.0)
+        global_boost = getattr(settings, 'COSINNUS_HAYSTACK_GLOBAL_MODEL_BOOST_MULTIPLIERS', {}).get(data['django_ct'], 1.0)
+        global_offset = getattr(settings, 'COSINNUS_HAYSTACK_GLOBAL_MODEL_BOOST_OFFSET', {}).get(data['django_ct'], 0.0)
         model_boost = self.boost_model(obj, data)
         model_boost = model_boost * self.apply_boost_penalty(obj, data)
         # this is our custom field

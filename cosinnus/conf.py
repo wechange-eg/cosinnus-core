@@ -310,6 +310,29 @@ class CosinnusConf(AppConf):
     # should the creator of an Event automatically be marked as "Going" in EventAttendance?
     EVENT_MARK_CREATOR_AS_GOING = False
     
+    
+    # global, multiplicative boost multipliers multiplied to *every* instance of
+    # the given models (as django contenttypes strs).
+    # if a model is not listed here, 1.0 is assumend
+    # this exists so we can blanket boost specific models for visibility without diving
+    # into the SearchIndexes and boost logic.
+    HAYSTACK_GLOBAL_MODEL_BOOST_MULTIPLIERS = {
+        'cosinnus_event.event': 0.65,
+        #'cosinnus.cosinnusproject': 1.0,
+        #'cosinnus.cosinnussociety': 1.0,
+        #'cosinnus.cosinnusidea': 1.0,
+        'cosinnus.userprofile': 0.5,
+    } 
+    
+    # global, additive boost offset. same as `HAYSTACK_GLOBAL_MODEL_BOOST_MULTIPLIERS`, but additive.
+    HAYSTACK_GLOBAL_MODEL_BOOST_OFFSET = {
+        'cosinnus_event.event': 0.5,
+        'cosinnus.cosinnusproject': 0.5,
+        'cosinnus.cosinnussociety': 0.5,
+        'cosinnus.cosinnusidea': 0.5,
+        #'cosinnus.userprofile': 0,
+    }
+    
     # widgets listed here will be created for the user dashboard upon user creation.
     # this will check if the cosinnus app is installed and if the widget is registered, so
     # invalid entries do not produce errors
