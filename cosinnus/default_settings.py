@@ -80,7 +80,8 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = (
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -90,16 +91,16 @@ MIDDLEWARE = [
     
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'wagtail.core.middleware.SiteMiddleware',
-    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+    'wagtail.wagtailcore.middleware.SiteMiddleware',
+    'wagtail.wagtailredirects.middleware.RedirectMiddleware',
     
     'cosinnus.core.middleware.cosinnus_middleware.StartupMiddleware',
-    #'cosinnus.core.middleware.cosinnus_middleware.ForceInactiveUserLogoutMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.ForceInactiveUserLogoutMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.ConditionalRedirectMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.AddRequestToModelSaveMiddleware',
     'cosinnus.core.middleware.cosinnus_middleware.GroupPermanentRedirectMiddleware',
     'cosinnus.core.middleware.login_ratelimit_middleware.LoginRateLimitMiddleware',
-]
+)
 
 
 TEMPLATES = [
@@ -127,7 +128,7 @@ TEMPLATES = [
             'loaders': (
                 'django.template.loaders.filesystem.Loader',
                 'django.template.loaders.app_directories.Loader',
-                'cosinnus.loaders.eggs.Loader',
+                'django.template.loaders.eggs.Loader',
             ),
             'debug': DEBUG,
         }
@@ -150,6 +151,7 @@ def compile_installed_apps(internal_apps=[]):
         'django.contrib.sessions',
         'django.contrib.sites',
         'django.contrib.staticfiles',
+        'django.contrib.webdesign',
         'suit_overextends',
         'suit',
         'django.contrib.admin',
@@ -159,21 +161,23 @@ def compile_installed_apps(internal_apps=[]):
         'haystack',
         
         # wagtail
+        'overextends',
         'wagtail_overextends',
         'compressor',
         'modelcluster',
-        'wagtail.core',
-        'wagtail.admin',
-        'wagtail.documents',
-        'wagtail.snippets',
-        'wagtail.users',
-        'wagtail.images',
-        'wagtail.embeds',
-        'wagtail.search',
-        'wagtail.sites',
-        'wagtail.contrib.redirects',
-        'wagtail.contrib.forms',
+        'wagtail.wagtailcore',
+        'wagtail.wagtailadmin',
+        'wagtail.wagtaildocs',
+        'wagtail.wagtailsnippets',
+        'wagtail.wagtailusers',
+        'wagtail.wagtailimages',
+        'wagtail.wagtailembeds',
+        'wagtail.wagtailsearch',
+        'wagtail.wagtailsites',
+        'wagtail.wagtailredirects',
+        'wagtail.wagtailforms',
         
+        'wagtail_modeltranslation',
     ]
     
     # Internal Apps (as defined in external project)
@@ -207,12 +211,14 @@ def compile_installed_apps(internal_apps=[]):
         'django_mailbox',
         'easy_thumbnails',
         'embed_video',
-        'el_pagination',
+        'endless_pagination',
         'honeypot',
         'osm_field',
         'phonenumber_field',
         'postman',
         'raven.contrib.django.raven_compat',
+        'oauth2_provider',
+        'corsheaders',
         'rest_framework',
         'rest_framework_swagger',
         'taggit',
@@ -226,8 +232,8 @@ LANGUAGES = [
     ('uk', _('Ukrainian--NATIVE-LANGUAGE')),
     # other languages available, but not yet, or not by default
     # (enable them for your specific portals by defining `LANGUAGES` in settings.py
-    ('fr', _('French--NATIVE-LANGUAGE')),
-    ('pl', _('Polish--NATIVE-LANGUAGE')),
+    #('fr', _('French--NATIVE-LANGUAGE')),
+    #('pl', _('Polish--NATIVE-LANGUAGE')),
 ]
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
@@ -284,8 +290,6 @@ LOGGING = {
     },
 }
 
-# allow a lot of POST parameters (notification settings will have many fields)
-DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000 
 
 # Required for cmsplugin_filer_image
 THUMBNAIL_PROCESSORS = (
@@ -295,13 +299,11 @@ THUMBNAIL_PROCESSORS = (
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters',
 )
-# this namer prevents exposing the source file in its path
-THUMBNAIL_NAMER = 'easy_thumbnails.namers.hashed'
 
 
-EL_PAGINATION_PER_PAGE = 8
-EL_PAGINATION_PREVIOUS_LABEL = '<b>&#9001;</b> Zurück'
-EL_PAGINATION_NEXT_LABEL = 'Weiter <b>&#9002;</b>'
+ENDLESS_PAGINATION_PER_PAGE = 8
+ENDLESS_PAGINATION_PREVIOUS_LABEL = '<b>&#9001;</b> Zurück'
+ENDLESS_PAGINATION_NEXT_LABEL = 'Weiter <b>&#9002;</b>'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
@@ -309,12 +311,6 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 # detect testing mode
 TESTING = 'test' in sys.argv
 
-# use session storage for CSRF instead of cookie
-# can't use this yet, until we fix the jQuery-POST usage of csrf cookies
-CSRF_USE_SESSIONS = False
-
-# leave this on for production, but may want to disable for dev
-#SESSION_COOKIE_SECURE = True
 
 # wagtail
 WAGTAIL_SITE_NAME = 'Wechange'
@@ -331,16 +327,16 @@ WAGTAIL_ENABLE_UPDATE_CHECK = False
     For cosinnus-specific internal default settings, check cosinnus/conf.py!
 """
 
-AUTHENTICATION_BACKENDS = ['cosinnus.backends.EmailAuthBackend',]
+AUTHENTICATION_BACKENDS = ('cosinnus.backends.EmailAuthBackend',)
 
 # select2 render static files
 AUTO_RENDER_SELECT2_STATICS = False
     
 AWESOME_AVATAR = {
-    'width': 263,
-    'height': 263,
-    'select_area_width': 263,
-    'select_area_height': 263,
+    'width': 120,
+    'height': 120,
+    'select_area_width': 120,
+    'select_area_height': 120,
     'save_quality': 100,
     'save_format': 'png',
     'no_resize': True,
@@ -422,14 +418,6 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Europe/Berlin'
 
 
-# django upload restriction settings
-# POST body size
-DATA_UPLOAD_MAX_MEMORY_SIZE = 20971520 # 20mb (default is 2.5mb)
-# File upload size
-FILE_UPLOAD_MAX_MEMORY_SIZE = 524288000 # 500mb (default is 2.5mb)
-
-CSRF_FAILURE_VIEW = 'cosinnus.views.common.view_403_csrf'
-
 """ -----------  More configurable Cosinnus settings (for defaults check cosinnus/conf.py!)  ----------- """
 
 #AWESOME_AVATAR = {...}
@@ -485,7 +473,11 @@ HONEYPOT_FIELD_NAME = 'phnoenumber_8493'
 # API AND SWAGGER SETTINGS
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    )
 }
 SWAGGER_SETTINGS = {
     'api_version': '2',
