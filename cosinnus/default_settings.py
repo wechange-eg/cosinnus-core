@@ -487,7 +487,11 @@ HONEYPOT_FIELD_NAME = 'phnoenumber_8493'
 # API AND SWAGGER SETTINGS
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    )
 }
 SWAGGER_SETTINGS = {
     'api_version': '2',
