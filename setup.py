@@ -94,7 +94,7 @@ setup(
         'html5lib',
         'html2text==2016.9.19',
         'numpy==1.14.5',
-        'oauthlib==2.0.2',
+        'oauthlib==3.0.1',
         'paramiko==2.4.2',
         'pycrypto==2.6.1',
         'redis==2.10.6',
