@@ -213,6 +213,8 @@ def compile_installed_apps(internal_apps=[]):
         'phonenumber_field',
         'postman',
         'raven.contrib.django.raven_compat',
+        'oauth2_provider',
+        'corsheaders',
         'rest_framework',
         'rest_framework_swagger',
         'taggit',
