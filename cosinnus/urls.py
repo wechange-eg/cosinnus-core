@@ -12,7 +12,7 @@ from cosinnus.conf import settings
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_portal
 from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
-    OrganisationViewSet
+    OrganisationViewSet, UserView
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group,\
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object
 from cosinnus_event.api.views import EventViewSet
@@ -187,6 +187,8 @@ router.register(r'organisation', OrganisationViewSet)
 router.register(r'event', EventViewSet)
 
 urlpatterns += [
+    url(r'^o/me/', UserView.as_view()),
+    url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     url(r'api/v2/docs/', get_swagger_view()),
     url(r'api/v2/', include(router.urls)),
 ]
