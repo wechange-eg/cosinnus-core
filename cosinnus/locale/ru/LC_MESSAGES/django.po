@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-01 15:10+0100\n"
+"POT-Creation-Date: 2019-02-14 18:24+0100\n"
 "PO-Revision-Date: 2018-12-12 14:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2858,6 +2858,9 @@ msgstr "Какие темы соответствуют Вашей идее?"
 msgid "Where do you live?"
 msgstr "Где Вы живете?"
 
+msgid "Set your location to let other users find your profile on the map (as long as your privacy setting permits it). You will also start out there when you open the map."
+msgstr ""
+
 msgid "Which topics are you interested in?"
 msgstr "Какие темы Вас интересуют?"
 
@@ -3346,6 +3349,10 @@ msgstr "Поиск при перемещении карты"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search this area"
 msgstr "Поиск в этой области"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You"
+msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Participants"

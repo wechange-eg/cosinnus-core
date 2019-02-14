@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-01 15:10+0100\n"
+"POT-Creation-Date: 2019-02-14 18:24+0100\n"
 "PO-Revision-Date: 2018-06-23 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2797,6 +2797,9 @@ msgstr ""
 msgid "Where do you live?"
 msgstr ""
 
+msgid "Set your location to let other users find your profile on the map (as long as your privacy setting permits it). You will also start out there when you open the map."
+msgstr ""
+
 msgid "Which topics are you interested in?"
 msgstr ""
 
@@ -3311,6 +3314,10 @@ msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Search this area"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__

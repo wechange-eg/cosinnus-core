@@ -38,6 +38,12 @@
                 <a href="{% if type == "people" %}{{ controlView.portalInfo[portal].domain }}{% endif %}{{ url }}" target="_blank" class="uncolored-link">
                     <h1>
                         {{ title }}
+                        {% if isYou %}
+				    		<i class="pale-color">
+				                {# Translators: __INCLUDE_JS_PO__ #}
+				                ({% trans "You" %})
+							</i>
+						{% endif %}
                         <i class="fa fa-external-link"></i>
                     </h1>
                 </a>

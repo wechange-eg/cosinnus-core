@@ -41,6 +41,7 @@ module.exports = BaseView.extend({
         if (self.model.get('type') == 'people') {
             self.state.isSmall = true;
         } 
+        self.state.isYou = self.model.get('type') == 'people' && cosinnus_active_user && self.model.get('slug') == cosinnus_active_user.username;
     },
     
     /** Extend the template data by the controlView's options and state */

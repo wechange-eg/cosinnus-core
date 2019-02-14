@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-01 15:10+0100\n"
-"PO-Revision-Date: 2019-02-01 15:19+0100\n"
+"POT-Creation-Date: 2019-02-14 18:24+0100\n"
+"PO-Revision-Date: 2019-02-14 18:24+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -323,11 +323,9 @@ msgstr ""
 "%(sender_name)s hat dich eingeladen, %(team_name)s beizutreten auf "
 "%(portal_name)s!"
 
-#| msgid "Accept Invitation"
 msgid "Accept invitation"
 msgstr "Einladung annehmen"
 
-#| msgid "Delete invitation"
 msgid "View invitation"
 msgstr "Einladung ansehen"
 
@@ -3415,6 +3413,15 @@ msgstr "Um welche Themen geht es?"
 msgid "Where do you live?"
 msgstr "Wo lebst du?"
 
+msgid ""
+"Set your location to let other users find your profile on the map (as long "
+"as your privacy setting permits it). You will also start out there when you "
+"open the map."
+msgstr ""
+"Gib deinen Standort an, damit dich andere Benutzer auf der Karte finden "
+"können (wenn es deine Sichtbarkeitseinstellungen erlauben). Deine Karte wird "
+"auf deinen Standort zentriert sein, wenn du sie öffnest."
+
 msgid "Which topics are you interested in?"
 msgstr "An welchen Themen bist du interessiert?"
 
@@ -3977,6 +3984,10 @@ msgid "Search this area"
 msgstr "In diesem Ausschnitt suchen"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "You"
+msgstr "Du"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Participants"
 msgstr "Teilnehmer"
 
@@ -4259,7 +4270,6 @@ msgstr "Benutzer_innen-Konto löschen"
 msgid "User profile: %(username)s"
 msgstr "Benutzer_innen-Profil: %(username)s"
 
-#| msgid "Membership requests"
 msgid "Cooperation requests"
 msgstr "Kooperationsanfragen"
 

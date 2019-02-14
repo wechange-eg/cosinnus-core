@@ -2,7 +2,15 @@
 {% import "include/macros.html" as macros %}
 
 {% block description_area %}
-    <h1>{{title}}</h1>
+    <h1>
+    	{{title}} 
+    	{% if isYou %}
+    		<i class="pale-color">
+                {# Translators: __INCLUDE_JS_PO__ #}
+                ({% trans "You" %})
+			</i>
+		{% endif %}
+    </h1>
     
     {% if group_slug and group_name and portal %}
         <div class="pale-color one-line">
