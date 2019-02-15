@@ -773,7 +773,8 @@ def textfield(text, arg=''):
     
     # shorten and wrap un-linked email addresses in markdown links
     for m in reversed([it for it in BETTER_EMAIL_RE.finditer(text)]):
-        if (m.start() == 0 or text[m.start()-2:m.start()] != '](') and (m.end() == len(text) or text[m.end():m.end()+2] != ']('):
+        if (m.start() == 0 or text[m.start()-2:m.start()] != '](') and (m.end() == len(text) or text[m.end():m.end()+2] != '](')\
+                and (text[m.start()-9:m.start()] != '](mailto:'):
             short = (m.group()[:47] + '...') if len(m.group()) > 50 else m.group()
             text = text[:m.start()] + ('[%s](mailto:%s)' % (short, m.group())) + text[m.end():] 
     
