@@ -104,6 +104,7 @@ def map_search_endpoint(request, filter_group_id=None):
     limit = params['limit']
     page = params['page']
     item_id = params['item']
+    prefer_own_portal = getattr(settings, 'MAP_API_HACKS_PREFER_OWN_PORTAL', False)
     
     if not is_number(limit) or limit < 0:
         return HttpResponseBadRequest('``limit`` param must be a positive number or 0!')
@@ -137,16 +138,17 @@ def map_search_endpoint(request, filter_group_id=None):
     if topics: 
         sqs = sqs.filter_and(mt_topics__in=topics)
     # filter for portal visibility
-    sqs = filter_searchqueryset_for_portal(sqs)
+    sqs = filter_searchqueryset_for_portal(sqs, restrict_multiportals_to_current=prefer_own_portal)
     # filter for read access by this user
     sqs = filter_searchqueryset_for_read_access(sqs, request.user)
     # filter events by upcoming status
     if params['events'] and Event is not None:
         sqs = filter_event_searchqueryset_by_upcoming(sqs)
-        
+    
+    
     # if we hae no query-boosted results, use *only* our custom sorting (haystack's is very random)
     if not query:
-        if getattr(settings, 'MAP_API_HACKS_PREFER_OWN_PORTAL', False):
+        if prefer_own_portal:
             sqs = sqs.order_by('-portal', '-local_boost')
         else:
             sqs = sqs.order_by('-local_boost')
@@ -159,7 +161,7 @@ def map_search_endpoint(request, filter_group_id=None):
         # if we hae no query-boosted results, use *only* our custom sorting (haystack's is very random)
         if not query:
             result.score = result.local_boost
-            if getattr(settings, 'MAP_API_HACKS_PREFER_OWN_PORTAL', False) and is_number(result.portal) and int(result.portal) == CosinnusPortal.get_current().id:
+            if prefer_own_portal and is_number(result.portal) and int(result.portal) == CosinnusPortal.get_current().id:
                 result.score += 100.0
         results.append(HaystackMapResult(result, user=request.user))
         

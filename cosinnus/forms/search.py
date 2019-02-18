@@ -99,15 +99,19 @@ def get_visible_portal_ids():
         VISIBLE_PORTAL_IDS = list(set(portals))
     return VISIBLE_PORTAL_IDS
 
-def filter_searchqueryset_for_portal(sqs, portals=None):
+def filter_searchqueryset_for_portal(sqs, portals=None, restrict_multiportals_to_current=False):
     """ Filters a searchqueryset by which portal the objects belong to.
         @param portals: If not provided, will default to this portal and all foreign portals allowed in settings 
-            ([current-portal] + settings.COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS) """
+            ([current-portal] + settings.COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS)
+        @param restrict_multiportals_to_current: if True, will force objects with multiple portals to
+            definitely be in the current portal  """
             
     if portals is None:
         portals = get_visible_portal_ids()
     
-    if portals:
+    if portals and restrict_multiportals_to_current:
+        sqs = sqs.filter_and(SQ(portal__in=portals) | SQ(portals__in=[CosinnusPortal.get_current().id]))
+    elif portals:
         sqs = sqs.filter_and(SQ(portal__in=portals) | SQ(portals__in=portals))
     return sqs
 
