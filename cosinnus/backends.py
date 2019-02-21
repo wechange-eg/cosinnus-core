@@ -8,6 +8,7 @@ from django.utils.decorators import method_decorator
 
 from cosinnus.utils.user import get_user_by_email_safe
 from cosinnus.conf import settings
+from django.utils.translation import ugettext_lazy as _
 
 import dkim
 import smtplib
@@ -17,8 +18,11 @@ from haystack.backends.elasticsearch_backend import ElasticsearchSearchBackend, 
 from urllib3.exceptions import ProtocolError, ConnectionError
 from elasticsearch.exceptions import TransportError
 
+from django.contrib import messages
+
 import logging 
 from django.utils.encoding import force_text
+from cosinnus.models.group import CosinnusPortal
 logger = logging.getLogger('cosinnus')
 
 
@@ -41,6 +45,16 @@ class EmailAuthBackend(ModelBackend):
             # Run the default password hasher once to reduce the timing
             # difference between an existing and a nonexistent user (#20760).
             USER_MODEL().set_password(password)
+            # check if a non-activated user with that email exists (ie the user hasnt activated his email yet)
+            if CosinnusPortal.get_current().email_needs_verification and \
+                USER_MODEL.objects.filter(is_active=True, email__iendswith='__%s' % email).count():
+                message_parts = force_text(_('The email address for the account you are trying to use needs to be activated before you can log in.'))
+                support_email = CosinnusPortal.get_current().support_email
+                if support_email:
+                    message_parts += ' ' + force_text(_('If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!' % {'email': support_email}))
+                else:
+                    message_parts += ' ' + force_text(_('If you have not received an activation email yet, please try signing up again or contact our support!'))
+                messages.error(request, message_parts)
         elif user and user.check_password(password) and self.user_can_authenticate(user):
             return user
 

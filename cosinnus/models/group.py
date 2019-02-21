@@ -473,6 +473,7 @@ class CosinnusPortal(models.Model):
     slug = models.SlugField(_('Slug'), max_length=50, unique=True, blank=True)
     
     description = models.TextField(verbose_name=_('Description'), blank=True)
+    support_email = models.EmailField(verbose_name=_('Support Email'), help_text=_('This email is shown to users as contact address on many pages'), blank=True)
     website = models.URLField(_('Website'), max_length=100, blank=True, null=True)
     welcome_email_text = models.TextField(verbose_name=_('Welcome-Email Text'), 
         blank=True, null=True, editable=True, 
