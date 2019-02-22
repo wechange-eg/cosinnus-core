@@ -123,6 +123,7 @@ TEMPLATES = [
                 'postman.context_processors.inbox',
                 'cosinnus.utils.context_processors.settings',
                 'cosinnus.utils.context_processors.cosinnus',
+                'announcements.context_processors.add_custom_announcements',
              ),
             'loaders': (
                 'django.template.loaders.filesystem.Loader',
@@ -191,6 +192,7 @@ def compile_installed_apps(internal_apps=[]):
         'cosinnus_poll',
         'cosinnus_stream',
         'cosinnus_todo',
+        'announcements',
         
         # 'django_extensions',
         'django_filters',
