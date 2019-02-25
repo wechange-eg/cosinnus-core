@@ -77,6 +77,7 @@ setup(
         'django-model-utils==1.5.0',
         'django-mptt==0.8.7',
         'django-oauth-toolkit==1.2.0',
+        'django-otp==0.5.2',
         'django-phonenumber-field==1.1.0',
         'django-polymorphic==0.7.2',
         'django-rest-swagger==2.2.0',
@@ -102,11 +103,11 @@ setup(
         'requests-oauthlib==0.8.0',
         'six==1.11.0',
         'sqlparse==0.1.10',
-        #########'wsgiref==0.1.2',
         'python-dateutil==2.4.1',
         'urllib3==1.24.1',
         'pytz==2018.5',
         'python-memcached==1.59',
+        'qrcode==6.1',
         'Unidecode==0.4.21',
         
         # wagtail

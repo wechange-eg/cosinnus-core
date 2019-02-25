@@ -91,6 +91,25 @@ class StartupMiddleware(MiddlewareMixin):
         raise MiddlewareNotUsed
 
 
+class AdminOnlyOTPMiddleware(MiddlewareMixin):
+    """
+  
+    """
+    def process_request(self, request):
+        if not getattr(settings, 'COSINNUS_ADMIN_ACCESS_ONLY_OTP', False):
+            return None
+        
+        user = getattr(request, 'user', None)
+        # on all "real" admin urls
+        if user and user.is_authenticated and request.path.startswith('/admin/') and not request.path in ['/admin/login/', '/admin/logout/']:
+            # check if the user is not yet 2fa verified, if so send him to the verification view
+            if not user.is_verified():
+                return redirect('cosinnus:login-2fa')
+
+        return None
+
+
+
 """Adds the request to the instance of a Model that is being saved (created or modified)
    Taken from https://github.com/Atomidata/django-audit-log/blob/master/audit_log/middleware.py  and modified """
 class AddRequestToModelSaveMiddleware(MiddlewareMixin):

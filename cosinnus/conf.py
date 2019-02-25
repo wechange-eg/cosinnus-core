@@ -152,6 +152,10 @@ class CosinnusConf(AppConf):
         'cosinnus_marketplace',
     ]
     
+    # if True, the entire /admin/ area is protected by 2-factor-authentication
+    # and no user that hasn't got a device set up can gain access.
+    ADMIN_ACCESS_ONLY_OTP = False
+    
     # enable this to sign up new members to a cleverreach newsletter group
     CLEVERREACH_AUTO_SIGNUP_ENABLED = False
     # dict of language --> int group-id of the cleverreach groups to sign up
