@@ -82,7 +82,9 @@
 		            		{% trans "You are logged in as" %}: <b>{{ request.user.email }}</b>
 		            	</p>
 		            	<p>
-		            		{% trans "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!" %}
+		            		{% trans "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!" %} 
+		            		<br/>
+		            		<a href="https://{{ request.get_host }}/admin/otp_totp/totpdevice/">https://{{ request.get_host }}/admin/otp_totp/totpdevice/</a>
 		            	</p>
 	            	</div>
 	            	
