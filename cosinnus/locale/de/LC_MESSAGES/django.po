@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-14 18:24+0100\n"
-"PO-Revision-Date: 2019-02-14 18:24+0100\n"
+"POT-Creation-Date: 2019-02-27 17:17+0100\n"
+"PO-Revision-Date: 2019-02-27 17:26+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -110,6 +110,29 @@ msgid "Deactivate users (will keep all all items they created on the site)"
 msgstr ""
 "Ausgewählte Benutzer deaktivieren (deren erstellte Items bleiben auf der "
 "Seite erhalten)"
+
+msgid ""
+"The email address for the account you are trying to use needs to be "
+"activated before you can log in."
+msgstr ""
+"Die Email-Adresse des Accounts, mit dem du versuchst einzuloggen, muss erst "
+"bestätigt werden."
+
+#, python-format
+msgid ""
+"If you have not received an activation email yet, please try signing up "
+"again or contact our support at %(email)s!"
+msgstr ""
+"Wenn du noch keine Mail mit einem Bestätigungslink bekommen hast, "
+"registriere dich bitte erneut oder kontaktiere unseren Support unter "
+"%(email)s!"
+
+msgid ""
+"If you have not received an activation email yet, please try signing up "
+"again or contact our support!"
+msgstr ""
+"Wenn du noch keine Mail mit einem Bestätigungslink bekommen hast, "
+"registriere dich bitte erneut oder kontaktiere unseren Support!"
 
 #, python-format
 msgid ""
@@ -631,6 +654,15 @@ msgstr "Slug"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Description"
 msgstr "Beschreibung"
+
+#| msgid "Sort field"
+msgid "Support Email"
+msgstr "Support Email"
+
+msgid "This email is shown to users as contact address on many pages"
+msgstr ""
+"Diese Email wird den Benutzern als Kontakt und Support-Adresse auf vielen "
+"Seiten angezeigt."
 
 msgid "Website"
 msgstr "Webseite"
@@ -1459,6 +1491,44 @@ msgstr "Aktuell unterstützen folgende Browser den Ordner-Upload:"
 
 msgid "File and Folder Upload"
 msgstr "Datei- und Ordner hochladen"
+
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] "Bitte korrigiere den Fehler unten."
+msgstr[1] "Bitte korrigiere die Fehler unten."
+
+msgid "2-factor access only"
+msgstr "Zugriff nur mit 2-Faktor"
+
+msgid "OTP Device:"
+msgstr "2-Faktor Authentifikator-Gerät"
+
+msgid "Enter the generated number code from your authenticator app"
+msgstr "Gib den generierten Nummerncode deiner Authentikator-App ein"
+
+#| msgid "Forgot password?"
+msgid "Forgotten your password or username?"
+msgstr "Benutzername oder Passwort vergessen?"
+
+#| msgid "Valid to"
+msgid "Validate"
+msgstr "Authentifizieren"
+
+#| msgid "Logged out"
+msgid "Log out"
+msgstr "Ausloggen"
+
+#| msgid "You are already logged in!"
+msgid "You are logged in as"
+msgstr "Du bist eingeloggt als"
+
+msgid ""
+"It appears that no authentication device is attached to your account. Please "
+"ask another admin to set one up and send you the QR code!"
+msgstr ""
+"Es scheint als ob kein Authentifikator-Gerät mit deinem Konto verbunden ist. "
+"Bitte bitte einen anderen Admin darum, dir ein Gerät einzurichten und dir "
+"den QR-code zu schicken!"
 
 msgid "Services"
 msgstr "Dienste"

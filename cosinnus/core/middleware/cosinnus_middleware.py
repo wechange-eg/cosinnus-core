@@ -20,6 +20,7 @@ from cosinnus.core import signals as cosinnus_signals
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.utils.deprecation import MiddlewareMixin
+from django.utils.http import is_safe_url
 
 
 logger = logging.getLogger('cosinnus')
@@ -93,21 +94,24 @@ class StartupMiddleware(MiddlewareMixin):
 
 class AdminOnlyOTPMiddleware(MiddlewareMixin):
     """
-  
+        If setting `COSINNUS_ADMIN_2_FACTOR_AUTH_ENABLED` is True, this middleware 
+        will restrict all access to the django admin area to accounts with a django-otp
+        2-factor authentication device set up, by redirecting the otp validation view.
+        Set up at least one device at <host>/admin/otp_totp/totpdevice/ before activating this!
     """
     def process_request(self, request):
-        if not getattr(settings, 'COSINNUS_ADMIN_ACCESS_ONLY_OTP', False):
+        if not getattr(settings, 'COSINNUS_ADMIN_2_FACTOR_AUTH_ENABLED', False):
             return None
         
         user = getattr(request, 'user', None)
         # on all "real" admin urls
-        if user and user.is_authenticated and request.path.startswith('/admin/') and not request.path in ['/admin/login/', '/admin/logout/']:
+        if user and (user.is_staff or user.is_superuser) and request.path.startswith('/admin/') and not request.path in ['/admin/login/', '/admin/logout/']:
             # check if the user is not yet 2fa verified, if so send him to the verification view
             if not user.is_verified():
-                return redirect('cosinnus:login-2fa')
+                next_url = request.path
+                return redirect(reverse('cosinnus:login-2fa') + (('?next=%s' % next_url) if is_safe_url(next_url, allowed_hosts=[request.get_host()]) else ''))
 
         return None
-
 
 
 """Adds the request to the instance of a Model that is being saved (created or modified)

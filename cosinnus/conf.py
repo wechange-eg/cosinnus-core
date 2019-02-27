@@ -154,7 +154,8 @@ class CosinnusConf(AppConf):
     
     # if True, the entire /admin/ area is protected by 2-factor-authentication
     # and no user that hasn't got a device set up can gain access.
-    ADMIN_ACCESS_ONLY_OTP = False
+    # Set up at least one device at <host>/admin/otp_totp/totpdevice/ before activating this setting!
+    ADMIN_2_FACTOR_AUTH_ENABLED = False
     
     # enable this to sign up new members to a cleverreach newsletter group
     CLEVERREACH_AUTO_SIGNUP_ENABLED = False
