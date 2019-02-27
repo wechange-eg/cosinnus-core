@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-14 18:24+0100\n"
+"POT-Creation-Date: 2019-02-27 17:17+0100\n"
 "PO-Revision-Date: 2018-12-12 14:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -95,6 +95,16 @@ msgstr "%d користувач/ку/ів було успішно деактив
 
 msgid "Deactivate users (will keep all all items they created on the site)"
 msgstr "Деактивувати вибраних користувачів (зберігає усі створені ними об'єкти на сторінці)"
+
+msgid "The email address for the account you are trying to use needs to be activated before you can log in."
+msgstr ""
+
+#, python-format
+msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
+msgstr ""
+
+msgid "If you have not received an activation email yet, please try signing up again or contact our support!"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
@@ -523,6 +533,14 @@ msgstr "Коротке ім'я"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Description"
 msgstr "Опис"
+
+#, fuzzy
+#| msgid "Sort field"
+msgid "Support Email"
+msgstr "Поле сортування"
+
+msgid "This email is shown to users as contact address on many pages"
+msgstr ""
 
 msgid "Website"
 msgstr "Веб-сайт"
@@ -1267,6 +1285,44 @@ msgstr "Наразі, такі браузери підтримують зава�
 
 msgid "File and Folder Upload"
 msgstr "Завантажити файл та теки"
+
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "2-factor access only"
+msgstr ""
+
+msgid "OTP Device:"
+msgstr ""
+
+msgid "Enter the generated number code from your authenticator app"
+msgstr ""
+
+#, fuzzy
+#| msgid "Forgot password?"
+msgid "Forgotten your password or username?"
+msgstr "Забули пароль?"
+
+#, fuzzy
+#| msgid "Valid to"
+msgid "Validate"
+msgstr "Дійсний до"
+
+#, fuzzy
+#| msgid "Logged out"
+msgid "Log out"
+msgstr "Вийшли із системи"
+
+#, fuzzy
+#| msgid "You are not logged in any more."
+msgid "You are logged in as"
+msgstr "Ви уже вийшли із системи."
+
+msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
+msgstr ""
 
 msgid "Services"
 msgstr "Послуги"
@@ -4481,9 +4537,6 @@ msgstr "Ваші зміни були збережені."
 
 #~ msgid "iFrameText"
 #~ msgstr "Текст iFrame"
-
-#~ msgid "You are not logged in any more."
-#~ msgstr "Ви уже вийшли із системи."
 
 #~ msgid "Please access this site by logging in through"
 #~ msgstr "Будь ласка, увійдіть в систему, щоб отримати доступ до цього веб-сайту."

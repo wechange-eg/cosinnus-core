@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-14 18:24+0100\n"
+"POT-Creation-Date: 2019-02-27 17:17+0100\n"
 "PO-Revision-Date: 2018-12-12 14:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -94,6 +94,16 @@ msgstr "Деактивированные пользователи: %d."
 
 msgid "Deactivate users (will keep all all items they created on the site)"
 msgstr "Деактивировать выделенных пользователей (все элементы, созданные ими на сайте, будут сохранены)"
+
+msgid "The email address for the account you are trying to use needs to be activated before you can log in."
+msgstr ""
+
+#, python-format
+msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
+msgstr ""
+
+msgid "If you have not received an activation email yet, please try signing up again or contact our support!"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
@@ -525,6 +535,15 @@ msgstr "Slug"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Description"
 msgstr "Описание"
+
+# ???
+#, fuzzy
+#| msgid "Sort field"
+msgid "Support Email"
+msgstr "Поле сортировки"
+
+msgid "This email is shown to users as contact address on many pages"
+msgstr ""
 
 msgid "Website"
 msgstr "Сайт"
@@ -1273,6 +1292,44 @@ msgstr "В настоящий момент, браузеры, поддержив
 
 msgid "File and Folder Upload"
 msgstr "Загрузить файл и папку"
+
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+msgid "2-factor access only"
+msgstr ""
+
+msgid "OTP Device:"
+msgstr ""
+
+msgid "Enter the generated number code from your authenticator app"
+msgstr ""
+
+#, fuzzy
+#| msgid "Forgot password?"
+msgid "Forgotten your password or username?"
+msgstr "Забыли пароль?"
+
+#, fuzzy
+#| msgid "Valid to"
+msgid "Validate"
+msgstr "Действителен до"
+
+#, fuzzy
+#| msgid "Logged out"
+msgid "Log out"
+msgstr "Вы вышли из системы"
+
+#, fuzzy
+#| msgid "You are already logged in!"
+msgid "You are logged in as"
+msgstr "Вы уже вошли в систему!"
+
+msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
+msgstr ""
 
 msgid "Services"
 msgstr "Услуги"

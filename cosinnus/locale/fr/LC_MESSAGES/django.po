@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-14 18:24+0100\n"
+"POT-Creation-Date: 2019-02-27 17:17+0100\n"
 "PO-Revision-Date: 2018-10-09 16:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -95,6 +95,16 @@ msgstr "%d utilisateurs ont été désactivés."
 
 msgid "Deactivate users (will keep all all items they created on the site)"
 msgstr "Désactiver les utilisateurs (garde les items créés par eux sur le site)"
+
+msgid "The email address for the account you are trying to use needs to be activated before you can log in."
+msgstr ""
+
+#, python-format
+msgid "If you have not received an activation email yet, please try signing up again or contact our support at %(email)s!"
+msgstr ""
+
+msgid "If you have not received an activation email yet, please try signing up again or contact our support!"
+msgstr ""
 
 #, python-format
 msgid "%(sender_name)s would like you to come join the project \"%(team_name)s\" on %(portal_name)s! Click the project's name below to check it out and collaborate!"
@@ -523,6 +533,14 @@ msgstr "Slug"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Description"
 msgstr "Description"
+
+#, fuzzy
+#| msgid "Sort field"
+msgid "Support Email"
+msgstr "Tri par champ"
+
+msgid "This email is shown to users as contact address on many pages"
+msgstr ""
 
 msgid "Website"
 msgstr "Site Internet"
@@ -1267,6 +1285,43 @@ msgstr "Actuellement, les navigateurs supportant le téléchargement de dossiers
 
 msgid "File and Folder Upload"
 msgstr "Téléchargement de fichier et dossier"
+
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "2-factor access only"
+msgstr ""
+
+msgid "OTP Device:"
+msgstr ""
+
+msgid "Enter the generated number code from your authenticator app"
+msgstr ""
+
+#, fuzzy
+#| msgid "Forgot password?"
+msgid "Forgotten your password or username?"
+msgstr "Mot de passe oublié ?"
+
+#, fuzzy
+#| msgid "Valid to"
+msgid "Validate"
+msgstr "Valide jusqu'à"
+
+#, fuzzy
+#| msgid "Logged out"
+msgid "Log out"
+msgstr "Déconnecté"
+
+#, fuzzy
+#| msgid "You are already logged in!"
+msgid "You are logged in as"
+msgstr "Tu es déjà connecté !"
+
+msgid "It appears that no authentication device is attached to your account. Please ask another admin to set one up and send you the QR code!"
+msgstr ""
 
 msgid "Services"
 msgstr "Services"

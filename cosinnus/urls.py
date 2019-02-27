@@ -14,8 +14,9 @@ from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_por
 from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
     OrganisationViewSet, UserView
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group,\
-    statistics, housekeeping, facebook_integration, microsite, idea, attached_object
+    statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication
 from cosinnus_event.api.views import EventViewSet
+from django_otp.views import LoginView
 
 schema_view = get_swagger_view(title='WECHANGE API')
 
@@ -71,6 +72,7 @@ urlpatterns = [
     url(r'^administration/list-unsubscribe/(?P<email>[^/]+)/(?P<token>[^/]+)/$', user.add_email_to_blacklist, name='user-add-email-blacklist'),
     url(r'^administration/activate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='group-activate', kwargs={'activate': True}),
     url(r'^administration/deactivate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='group-deactivate', kwargs={'activate': False}),
+    url(r'^administration/login-2fa/$', authentication.admin_only_otp_token_validation, name='login-2fa'),
 
     url(r'^statistics/simple/$', statistics.simple_statistics, name='simple-statistics'),
     

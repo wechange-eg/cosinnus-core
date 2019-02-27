@@ -84,7 +84,11 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_otp.middleware.OTPMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.AdminOnlyOTPMiddleware',
+    
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     
@@ -199,6 +203,8 @@ def compile_installed_apps(internal_apps=[]):
         'django_select2',
         'django_cron',
         'widget_tweaks',
+        'django_otp',
+        'django_otp.plugins.otp_totp',
         
         # External Apps
         'awesome_avatar',
@@ -508,3 +514,11 @@ SWAGGER_SETTINGS = {
         'title': 'WECHANGE API',
     },
 }
+
+SUIT_CONFIG = {
+    'ADMIN_NAME': 'Wechange Admin'
+}
+
+# 2-factor authentication issuer name for admin backend
+OTP_TOTP_ISSUER = 'WECHANGE eG'
+
