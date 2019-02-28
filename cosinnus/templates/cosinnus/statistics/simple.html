@@ -4,6 +4,32 @@
 {% block page_title %}{% trans "Simple Statistics" %}{% endblock %}
 
 {% block leftnav %}
+	<button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:housekeeping-group-storage-report' %}">
+	    <ul class="media-list">
+	        <li class="media">
+	           <a class="pull-left">
+	                <i class="fa fa-download"></i>
+	            </a>
+	            <div class="media-body">
+	                Speicherbedarf Gruppen
+	            </div>
+	        </li>
+	    </ul>
+	</button>
+	
+	<button type="button" class="btn w100 btn-emphasized" href="{% url 'cosinnus:housekeeping-project-storage-report' %}">
+	    <ul class="media-list">
+	        <li class="media">
+	           <a class="pull-left">
+	                <i class="fa fa-download"></i>
+	            </a>
+	            <div class="media-body">
+	                Speicherbedarf Projekte
+	            </div>
+	        </li>
+	    </ul>
+	</button>
+
 {% endblock leftnav %}
 
 
