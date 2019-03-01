@@ -11,6 +11,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.http import HttpResponse
 
 from cosinnus.conf import settings
+from django.utils.timezone import now
 
 
 __all__ = ('JSONResponse', 'CSVResponse')
@@ -96,3 +97,16 @@ class CSVResponse(HttpResponse):
         if fieldnames:
             writer.writerow(fieldnames)
         writer.writerows(rows)
+
+
+def make_csv_response(rows, row_names=[], file_name=None):
+    """ 
+        Shortcut to turn a list of rows into a quick CSV download response.
+    """
+    response = CSVResponse()
+    response.writerows(rows, fieldnames=row_names)
+    filename = '%s - %s.csv' % (
+        file_name or 'export',
+        now().strftime('%Y%m%d %H%M%S'))
+    response['Content-Disposition'] = 'attachment; filename="%s"' % filename
+    return response

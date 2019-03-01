@@ -34,6 +34,8 @@ from cosinnus.core.mail import send_mail_or_fail, send_mail,\
     send_mail_or_fail_threaded
 from django.template.defaultfilters import linebreaksbr
 from django.db.models.aggregates import Count
+from cosinnus.utils.http import make_csv_response
+from operator import itemgetter
 
 
 def housekeeping(request=None):
@@ -374,6 +376,13 @@ def print_settings(request):
         setts += '%s = %s<br/>' % (key, val)
     return HttpResponse('Settings are:<br/>' + setts)
 
+def _get_group_storage_space_mb(group):
+    size = 0
+    for f in group.cosinnus_file_fileentry_set.all():
+        if f.file:
+            size += f.file.size
+    size = size * 0.00000095367431640625  # in Mb
+    return size
 
 def group_storage_info(request):
     if request and not request.user.is_superuser:
@@ -381,17 +390,53 @@ def group_storage_info(request):
     
     prints = '<h1>All groups and projects with file storage usage over 10MB:</h1><br/>'
     for group in CosinnusGroup.objects.all():
-        size = 0
-        for f in group.cosinnus_file_fileentry_set.all():
-            if f.file:
-                size += f.file.size
-        size = size * 0.00000095367431640625  # in Mb
+        size = _get_group_storage_space_mb(group)
         if size > 10:
             prints += '- %s (%s): %i MB<br/>' % (group.name, group.slug, size)
 
     return HttpResponse(prints)
 
 
+def group_storage_report_csv(request):
+    """
+        Will return a CSV containing infos about all Group:s
+            URL, Member-count, Number-of-Projects, Storage-Size-in-MB, Storage-Size-of-Group-and-all-Child-Projects-in-MB
+    """
+    if request and not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    
+    rows = []
+    headers = ['url', 'member-count', 'number-projects', 'group-storage-mb', 'group-and-projects-sum-mb']
+    
+    for group in CosinnusSociety.objects.all_in_portal():
+        projects = group.get_children()
+        group_size = _get_group_storage_space_mb(group)
+        projects_size = 0
+        for project in projects:
+            projects_size += _get_group_storage_space_mb(project)
+        rows.append([group.get_absolute_url(), group.member_count, len(projects), group_size, group_size + projects_size])
+    rows = sorted(rows, key=itemgetter(4), reverse=True)
+    return make_csv_response(rows, headers, 'group-storage-report')
+
+
+def project_storage_report_csv(request):
+    """
+        Will return a CSV containing infos about all Projects:
+            URL, Member-count, Storage-Size-in-MB
+    """
+    if request and not request.user.is_superuser:
+        return HttpResponseForbidden('Not authenticated')
+    
+    rows = []
+    headers = ['url', 'member-count', 'project-storage-mb',]
+    
+    for project in CosinnusProject.objects.all_in_portal():
+        project_size = _get_group_storage_space_mb(project)
+        rows.append([project.get_absolute_url(), project.member_count, project_size])
+    rows = sorted(rows, key=itemgetter(2), reverse=True)
+    return make_csv_response(rows, headers, 'project-storage-report')
+
+    
 def user_activity_info(request):
     if request and not request.user.is_superuser:
         return HttpResponseForbidden('Not authenticated')
