@@ -278,13 +278,15 @@
                         {% include 'cosinnus/common/likefollow/confirm_likefollow_modal.html' with object=group %}
                     </p>
                     
-                    {% with  topics=group.media_tag_object.topics %}
-                        {% if topics %}
-                            <p>
-	                           {% trans "Topics" %}: {% render_cosinnus_topics topics %}
-                            </p>
-	                    {% endif %}
-                    {% endwith %}
+                    {% block group_metadata %}
+	                    {% with  topics=group.media_tag_object.topics %}
+	                        {% if topics %}
+	                            <p>
+		                           {% trans "Topics" %}: {% render_cosinnus_topics topics %}
+	                            </p>
+		                    {% endif %}
+	                    {% endwith %}
+                    {% endblock group_metadata %}
                     
                     </div>
                 <div class="multiline-ellipsis-realend"><a href="#">....{% trans "more" %}</a></div>
