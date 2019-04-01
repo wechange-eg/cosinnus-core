@@ -3,7 +3,7 @@
     {% include 'cosinnus/common/embed_video.html' with video_id=data.youtubeid %}
 {% endif %}
 {% if data.vimeoid %}
-    {% include 'cosinnus/common/embed_video.html' with video_id=data.vimeoid video_base_url="http://player.vimeo.com/video/" icon="vimeo" type="vimeo" %}
+    {% include 'cosinnus/common/embed_video.html' with video_id=data.vimeoid video_base_url="https://player.vimeo.com/video/" icon="vimeo" type="vimeo" %}
 {% endif %}
 {% if data.error %}
     <p><em>{% trans "Error embedding a video" %}: {{ data.error }}</em></p>
