@@ -332,118 +332,6 @@
 
         },
 
-        calendarCreateDoodle : function() {
-            if (!$('#calendar-doodle-days-selector-list').length) {
-                return;
-            }
-            var CREATE_MULTIPLE_DOODLE_DAYS = true;
-            
-            function selectDays() {
-                $('#calendar-doodle-days-selector-list table tr').sortElements(function(a, b){
-                    return $(a).attr('data-date') > $(b).attr('data-date') ? 1 : -1;
-                });
-
-                // mark the days that are picked in the calendar
-                $('#calendar-doodle-days-selector-list table tr').each(function() {
-                    var dateDataAttr = $(this).attr('data-date');
-                    $('#calendar-doodle-days-selector .small-calendar '+
-                        'td[data-date='+dateDataAttr+']:not(.fc-other-month)')
-                        .addClass('selected');
-                });
-
-                // when table empty hide even the headline
-                if($('#calendar-doodle-days-selector-list table tbody tr').length==1) {
-                    $('#calendar-doodle-days-selector-list table thead tr').hide();
-                } else {
-                    $('#calendar-doodle-days-selector-list table thead tr').show();
-                }
-            }
-            // instant initialize
-            selectDays();
-
-            $("#calendar-doodle-days-selector .small-calendar")
-                .on("fullCalendarDayClick", function(event, date, jsEvent) {
-                    var dayElement = jsEvent.currentTarget;
-                    if ($(dayElement).hasClass('fc-other-month')) return;
-
-                    var dateDataAttr = date.getFullYear() + "-"
-                        + ((date.getMonth()+1).toString().length === 2
-                            ? (date.getMonth()+1)
-                            : "0" + (date.getMonth()+1)) + "-"
-                        + (date.getDate().toString().length === 2
-                            ? date.getDate()
-                            : "0" + date.getDate());
-
-                    // unselect all and re-select later
-                    $(dayElement).parent().parent().find('td').removeClass('selected');
-
-                    if (CREATE_MULTIPLE_DOODLE_DAYS || $('#calendar-doodle-days-selector-list table tr[data-date='+dateDataAttr+']').length===0) {
-                        // add to list (select) now
-
-                        $('#calendar-doodle-days-selector-list table tr')
-                            .last()
-                            .clone()
-                            .show()
-                            .attr('data-date',dateDataAttr)
-                            .insertBefore($('#calendar-doodle-days-selector-list table tr').last())
-                            .children(":first")
-                            .click(function() {
-                                $(this).parent().remove();
-                                $("#calendar-doodle-days-selector .small-calendar")
-                                    .fullCalendar('render');
-                            })
-                            .next()
-                            .attr('data-date', dateDataAttr).addClass('moment-data-date')
-                            .next()
-                            .children()
-                            .val('')
-                            .parent()
-                            .next()
-                            .children()
-                            .val('');
-                        
-                    } else {
-                        // remove from list now
-                        $('#calendar-doodle-days-selector-list table tr[data-date='+dateDataAttr+']').remove();
-                    }
-
-                    selectDays();
-                    $.cosinnus.renderMomentDataDate();
-                })
-                .on("fullCalendarViewRender", function(event, cell) {
-                    selectDays();
-                });
-
-            $('#createDoodleButton').click(function() {
-                // validate and fire
-                if ($('#calendar-doodle-days-selector-list table tbody tr').length==1) {
-                    // no dates
-                    $('#createDoodleWarningModal').modal('show');
-                    return;
-                }
-
-                if ($('#createDoodleTitleInput').val()=="") {
-                    // no title
-                    $('#createDoodleWarningModal').modal('show');
-                    return;
-                }
-
-                // collect data
-                doodleData = {
-                    title: $('#createDoodleTitleInput').val(),
-                    dates: []
-                };
-                $('#calendar-doodle-days-selector-list table tbody tr').each(function() {
-                    doodleData.dates.push({
-                        date: $(this).attr('data-date'),
-                        time1: $(this).find('input').first().val()
-                    });
-                });
-                // remove last hidden line
-                doodleData.dates.pop();
-            });
-        },
-
 
         // When creating or editing an event the user has to select date and time.
         // Clicking one date input shows all calendars on the whole page.
@@ -1699,7 +1587,6 @@ $(function() {
     $.cosinnus.etherpadList();
     $.cosinnus.inputDynamicSendButton();
     $.cosinnus.buttonHref();
-    $.cosinnus.calendarCreateDoodle();
     $.cosinnus.calendarDayTimeChooser();
     $.cosinnus.calendarDoodleVote();
     $.cosinnus.fileList();
