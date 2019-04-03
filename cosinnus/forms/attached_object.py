@@ -22,6 +22,8 @@ from annoying.functions import get_object_or_None
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.models.group import CosinnusPortal
 
+import logging
+logger = logging.getLogger('cosinnus')
 
 class FormAttachableMixin(object):
     """
@@ -89,6 +91,17 @@ class FormAttachableMixin(object):
             instance.attached_objects.clear()
             for attached_obj in self.cleaned_data.get('attached_objects', []):
                 instance.attached_objects.add(attached_obj)
+                # set the visibility of the attached object to that of the parent object,
+                # Note: this may make existing attached_objects public even though they were previously not!
+                try:
+                    target_object_mt = attached_obj.target_object.media_tag
+                    target_object_mt.visibility = self.instance.media_tag.visibility
+                    target_object_mt.save(update_fields=['visibility'])
+                except Exception as e:
+                    logger.warning('Could not set the visibility of an attached object to that of its parent!', extra={'exception': e})
+                    if settings.DEBUG:
+                        raise
+                
             # safely invalidate the cached properties first
             try:
                 del instance.attached_image
