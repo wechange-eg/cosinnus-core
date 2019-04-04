@@ -41,6 +41,9 @@ module.exports = ContentControlView.extend({
         splitscreen: false,
         showMine: false, // URL param. if true, only the current user's own results will be shown. ignored away if user is not logged in.
         
+        paginationControlsEnabled: true, 
+        paginationControlsUseInfiniteScroll: false, // if true, the pagination controls will be hidden and infinite scroll will be used
+        
         // in fullscreen mode, this must always be the base URL we started at
         basePageURL: '/map/',
         
@@ -257,7 +260,9 @@ module.exports = ContentControlView.extend({
     },
     
     paginationForwardClicked: function (event) {
-        event.preventDefault();
+    	if (event) {
+    		event.preventDefault();
+    	}
         if (this.state.page.has_next) {
             this.state.pageIndex += 1;
             this.triggerDelayedSearch(true, true, false, 'paginate-search');
@@ -265,7 +270,9 @@ module.exports = ContentControlView.extend({
     },
     
     paginationBackClicked: function (event) {
-        event.preventDefault();
+    	if (event) {
+    		event.preventDefault();
+    	}
         if (this.state.page.has_previous && this.state.pageIndex > 0) {
             this.state.pageIndex -= 1;
             this.triggerDelayedSearch(true, true, false, 'paginate-search');
@@ -729,18 +736,21 @@ module.exports = ContentControlView.extend({
         this.$el.find('.button-search').removeClass('disabled');
     },
 
-    handleStartSearch: function (event) {
+    handleStartSearch: function (searchReason) {
         this.$el.find('.icon-loading').removeClass('hidden');
         this.$el.find('.icon-reset').addClass('hidden');
         this.$el.find('.q').blur();
         // disable input in content views during search (up to the views to decide what to disable)
-        _.each(this.App.contentViews, function(view){
-            view.disableInput();
-        });
+        // except if we are only adding some results after an infinite scroll event
+        if (!(this.options.paginationControlsUseInfiniteScroll && searchReason == 'paginate-search')) {
+        	_.each(this.App.contentViews, function(view){
+        		view.disableInput();
+        	});
+        }
         
     },
 
-    handleEndSearch: function (event) {
+    handleEndSearch: function (searchReason) {
         this.$el.find('.icon-loading').addClass('hidden');
         this.$el.find('.icon-reset').toggleClass('hidden', (!this.state.filtersActive && !this.state.q));
         // enable input in content views during search (up to the views to decide what to enable)
@@ -750,6 +760,7 @@ module.exports = ContentControlView.extend({
     },
 
     /** Called when the App is fully loaded for the first time.
+     * 	This is the initial search.
      *     WARNING: Due to the threaded after_render() method, this may
      *         currently actually happen before a full load.
      *  */
@@ -762,7 +773,7 @@ module.exports = ContentControlView.extend({
     afterRender: function () {
         var self = this;
         // Create the pagination control view if not exists
-        if (!self.paginationControlView && self.App.tileListView) {
+        if (!self.paginationControlView && self.options.paginationControlsEnabled && self.App.tileListView) {
             self.paginationControlView = new PaginationControlView({
                 model: null,
                 el: self.App.tileListView.$el.find('.pagination-controls'),
@@ -792,12 +803,16 @@ module.exports = ContentControlView.extend({
     triggerSearchFromUrl: function (noNewNavigateEvent) {
         this.resetAll();
         var urlParams = this.parseUrl(window.location.href.replace(window.location.origin, ''));
+        // if infinite scroll is enabled, always show the initial page, unscrolled and unpaginated
+        if (this.options.paginationControlsUseInfiniteScroll && 'page' in urlParams) {
+        	delete urlParams.page;
+        }
         _.each(this.App.contentViews, function(view){
             view.applyUrlSearchParameters(urlParams);
         });
         this.determineActiveFilterStatuses();
         this.render();
-        this.triggerDelayedSearch(true, true, noNewNavigateEvent);
+        this.triggerDelayedSearch(true, true, noNewNavigateEvent, 'initial-search');
     },
     
     /**
@@ -832,7 +847,8 @@ module.exports = ContentControlView.extend({
                 // check before auto-rerendering that the input-box is not focused!
                 // if so, on mobile this search would pull down the keyboard
                 if (!this.$el.find('.q').is(":focus")) {
-                    this.triggerDelayedSearch(false, false, false, context.reason);
+                	var noPaginationReset = context.reason == 'viewport-changed';
+                    this.triggerDelayedSearch(false, noPaginationReset, false, context.reason);
                 } else {
                     util.log('control-view.js: Prevented a search while input is focused!')
                 }
@@ -891,14 +907,20 @@ module.exports = ContentControlView.extend({
         util.log('control-view.js: got the results back and updated the collection!')
         util.log(self.collection.toJSON());
         
-        self.collection.reset(resultModels);
+        // if infinite-scroll is active, and this search has been triggered by a paginate event,
+        // we add the results to the collection instead of replacing them.
+        if (self.options.paginationControlsUseInfiniteScroll && searchReason == 'paginate-search') {
+        	self.collection.add(resultModels);
+        } else {
+        	self.collection.reset(resultModels);
+        	
+        	// if we had a navigate event and we still have a detail-view open, but it's not in the URL, close it
+        	// happens on back/forward buttons, but also on scroll events (where we don't want to close the detail view)
+        	if (self.detailResult && !self.state.urlSelectedResultId && !(searchReason == 'viewport-changed')) {
+        		self.displayDetailResult(null);
+        	} 
+        }
         
-        // if we had a navigate event and we still have a detail-view open, but it's not in the URL, close it
-        // happens on back/forward buttons, but also on scroll events (where we don't want to close the detail view)
-        
-        if (self.detailResult && !self.state.urlSelectedResultId && !(searchReason == 'viewport-changed')) {
-            self.displayDetailResult(null);
-        } 
         // if our URL points directly at an item, select it.
         // the API should take care that it is *always* in the result set
         if (self.state.urlSelectedResultId && (!self.detailResult || self.state.urlSelectedResultId != self.detailResult.id)) {
@@ -1046,13 +1068,13 @@ module.exports = ContentControlView.extend({
                         self.triggerMobileDefaultView(event);
                     }
                     // scroll tile list to top on manual searches
-                    if (searchReason == 'manual-search' || searchReason == 'reset-filters-search' || searchReason == 'paginate-search') {
-                        $('.tile-contents').scrollTop(0);
+                    if (searchReason == 'manual-search' || searchReason == 'reset-filters-search' || (searchReason == 'paginate-search' && !self.options.paginationControlsUseInfiniteScroll)) {
+                        $('.tile-contents').scrollTop(0); // scroll to top on tile list
                     }
                 }
                 
                 self.currentSearchHttpRequest = null;
-                Backbone.mediator.publish('end:search');
+                Backbone.mediator.publish('end:search', searchReason);
             }
         });
     },
@@ -1246,7 +1268,7 @@ module.exports = ContentControlView.extend({
             self.state.pageIndex = 0;
         }
         clearTimeout(this.searchTimeout);
-        Backbone.mediator.publish('want:search');
+    	Backbone.mediator.publish('want:search', searchReason);
         self.searchTimeout = setTimeout(function () {
             self.search(noNavigate, searchReason);
         }, delay);

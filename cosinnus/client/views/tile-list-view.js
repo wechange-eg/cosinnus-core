@@ -47,6 +47,7 @@ module.exports = ContentControlView.extend({
            'change:selected': self.thisContext(self.tileChangeSelected),
            'change': self.thisContext(self.tileUpdate),
            'remove': self.thisContext(self.tileRemove),
+           'update': self.thisContext(self.tilesUpdate),
            'reset': self.thisContext(self.tilesReset),
         });
         
@@ -61,6 +62,9 @@ module.exports = ContentControlView.extend({
         ContentControlView.prototype.render.call(self);
         
         self.renderTilesInitial();
+        
+        // scroll listener
+        self.$el.find('.tile-contents').off('scroll').on('scroll', self.onTileListScrolled);
         return self;
     },
     
@@ -94,6 +98,15 @@ module.exports = ContentControlView.extend({
     	this.$el.hide();
     },
     
+    /** Handles events for infinite scroll */
+    onTileListScrolled: function (event) {
+    	var $list = $(event.target);
+    	if ($list.scrollTop() + $list.innerHeight() >= $list[0].scrollHeight - 50) {
+        	Backbone.mediator.publish('tile-list:scroll-end-reached');
+    	}
+    },
+    
+    
     // extended from content-control-view.js
     applyUrlSearchParameters: function (urlParams) {
         // don't need this here
@@ -115,10 +128,10 @@ module.exports = ContentControlView.extend({
         }
 
         var tile = new TileView({
-            model: result,
-            elParent: '#tile-container',
-        }, 
-        this.App).render();
+	            model: result,
+	            elParent: '#tile-container',
+	        }, 
+	        this.App).render();
         this.tiles[result.id] = tile;
     },
 
@@ -155,6 +168,14 @@ module.exports = ContentControlView.extend({
             var tile = this.tiles[result.id];
             tile.render();
         }
+    },
+    
+    /** Handler for when tiles have been added to the collection, like after an infinite scroll event */
+    tilesUpdate: function(resultCollection, options) {
+        var self = this;
+
+        self.gridRefresh();
+        self.enableInput(true);
     },
     
     /** Handler for when the entire collection changes */

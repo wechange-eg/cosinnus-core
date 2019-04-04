@@ -1,6 +1,6 @@
 {% load i18n %}
 
-{% if paginationControlsEnabled %}
+{% if paginationControlsEnabled and not paginationControlsUseInfiniteScroll %}
     <div class="map-pagination-controls mobile-view mobile-view-list-visible-block">
         <div class="line">
             {% if page %}

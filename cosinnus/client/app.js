@@ -158,6 +158,7 @@ var App = function App () {
                 controlsEnabled: self.displayOptions.showControls,
                 scrollControlsEnabled: self.displayOptions.showControls && self.displayOptions.showMap,
                 paginationControlsEnabled: self.displayOptions.showTiles,
+                paginationControlsUseInfiniteScroll: !self.displayOptions.showMap && self.displayOptions.showTiles,
                 filterGroup: self.settings.filterGroup,
                 basePageURL: basePageUrl,
                 showMine: self.settings.showMine,
