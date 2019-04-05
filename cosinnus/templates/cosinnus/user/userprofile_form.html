@@ -108,6 +108,14 @@
 	                {% trans "I am open for cooperation requests" as mc_box_label %}
 	                {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.may_be_contacted label=mc_label legend=mc_legend checkbox_label=mc_box_label %}
                 {% endif %}
+                
+                {% if SETTINGS.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN and form.forms.obj.newsletter_opt_in %}
+					{# Newsletter opt-in checkbox #}
+	                {% trans "Newsletter Opt-in" as newsletter_label %}
+	                {% trans "the legend" as newsletter_legend %}
+	                {% trans "the box label" as newsletter_box_label %}
+	                {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.newsletter_opt_in label=newsletter_label legend=newsletter_legend checkbox_label=newsletter_box_label %}
+				{% endif %}
 	    </div>
 	    
 	    <button type="submit" class="btn btn-emphasized">

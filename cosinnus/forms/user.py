@@ -57,6 +57,8 @@ class UserCreationForm(DjUserCreationForm):
     if settings.COSINNUS_SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK:
         privacy_policy_check = forms.BooleanField(label='privacy_policy_check', required=True)
     
+    if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
+        newsletter_opt_in = forms.BooleanField(label='newsletter_opt_in', required=False)
     
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
@@ -94,6 +96,10 @@ class UserCreationForm(DjUserCreationForm):
         
         # set the user's tos_accepted flag to true
         user.cosinnus_profile.settings['tos_accepted'] = True
+        # set the newsletter opt-in
+        if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
+            user.cosinnus_profile.settings['newsletter_opt_in'] = self.cleaned_data.get('newsletter_opt_in')
+                
         user.cosinnus_profile.save()
         
         return user

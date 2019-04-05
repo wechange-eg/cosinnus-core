@@ -553,7 +553,14 @@ class CosinnusConf(AppConf):
     # not all servers are running Postgres >= 9.3 yet. as long as this is true, we cannot uniformly run some nicer queries
     DO_ALL_SERVERS_HAVE_PSQL_9_3 = False
     
+    # if true, an additional signup form field will be present
     SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK = False
+    
+    # if true, during signup and in the user profile, an additional
+    # opt-in checkbox will be shown to let the user choose if they wish to 
+    # receive a newsletter
+    USERPROFILE_ENABLE_NEWSLETTER_OPT_IN = False
+    
     
 
 class CosinnusDefaultSettings(AppConf):
