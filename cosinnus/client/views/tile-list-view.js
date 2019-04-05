@@ -101,7 +101,7 @@ module.exports = ContentControlView.extend({
     /** Handles events for infinite scroll */
     onTileListScrolled: function (event) {
     	var $list = $(event.target);
-    	if ($list.scrollTop() + $list.innerHeight() >= $list[0].scrollHeight - 50) {
+    	if ($list.scrollTop() + $list.innerHeight() >= $list[0].scrollHeight - 250) {
         	Backbone.mediator.publish('tile-list:scroll-end-reached');
     	}
     },
