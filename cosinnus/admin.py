@@ -120,7 +120,7 @@ admin.site.register(CosinnusPermanentRedirect, PermanentRedirectAdmin)
 
 class PortalMembershipAdmin(admin.ModelAdmin):
     list_display = ('group', 'user_email', 'status', 'date',)
-    list_filter = ('group', 'user', 'status',)
+    list_filter = ('group', 'status',)
     search_fields = ('user__first_name', 'user__last_name', 'user__email', 'group__name')
     raw_id_fields = ('user',)
 

@@ -127,6 +127,7 @@ TEMPLATES = [
                 'postman.context_processors.inbox',
                 'cosinnus.utils.context_processors.settings',
                 'cosinnus.utils.context_processors.cosinnus',
+                'cosinnus.utils.context_processors.tos_check',
                 'announcements.context_processors.add_custom_announcements',
              ),
             'loaders': (
