@@ -111,9 +111,9 @@
                 
                 {% if SETTINGS.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN and form.forms.obj.newsletter_opt_in %}
 					{# Newsletter opt-in checkbox #}
-	                {% trans "Newsletter Opt-in" as newsletter_label %}
-	                {% trans "the legend" as newsletter_legend %}
-	                {% trans "the box label" as newsletter_box_label %}
+	                {% trans "A1 TODO Header: Newsletter Opt-in" as newsletter_label %}
+	                {% trans "A2 TODO explanation: the legend" as newsletter_legend %}
+	                {% trans "A3 TODO checkbox label: the box label" as newsletter_box_label %}
 	                {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.newsletter_opt_in label=newsletter_label legend=newsletter_legend checkbox_label=newsletter_box_label %}
 				{% endif %}
 	    </div>
