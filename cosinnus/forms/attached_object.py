@@ -94,9 +94,10 @@ class FormAttachableMixin(object):
                 # set the visibility of the attached object to that of the parent object,
                 # Note: this may make existing attached_objects public even though they were previously not!
                 try:
-                    target_object_mt = attached_obj.target_object.media_tag
-                    target_object_mt.visibility = self.instance.media_tag.visibility
-                    target_object_mt.save(update_fields=['visibility'])
+                    if getattr(self.instance, 'media_tag', None) is not None:
+                        target_object_mt = attached_obj.target_object.media_tag
+                        target_object_mt.visibility = self.instance.media_tag.visibility
+                        target_object_mt.save(update_fields=['visibility'])
                 except Exception as e:
                     logger.warning('Could not set the visibility of an attached object to that of its parent!', extra={'exception': e})
                     if settings.DEBUG:
