@@ -10,15 +10,13 @@
 	            <div class="modal-header">
 	                <h4 class="modal-title" id="updated_tos_Label">
 	                    <i class="fa fa-book"></i>
-	                    {% trans "B1: TODO Title: Our Terms of Services have changed." %}
+	                    {% trans "Change of Terms of Services and Privacy Policy" %}
 	                </h4>
 	            </div>
 	            <div class="modal-body">
 		            	
 		            	<p class="no-padding">
-		            		{% blocktrans %}
-		            			B2: TODO Text: Our ToS have changed. Please review your changes, etc etc
-		            		{% endblocktrans %}
+		            		{% trans "We prioritise the protection of your data, so we updated our privacy policy and terms of services. To continue enjoying an optimal use of our plattform, we encourage you to read and accept the modifications." %}
 	            		</p>
 	        			{% include 'cosinnus/registration/extra_signup_fields.html' with form=form show_plain_form=True %}
 		        	
