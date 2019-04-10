@@ -1,0 +1,166 @@
+/** The main, top-fixated, always visible navbar */
+.v2-navbar {
+	/** Dimensions */
+	height: 50px;
+	border-bottom: 1px solid @border-color;
+	box-sizing: border-box;
+	line-height: 50px;
+	
+	/** Fixation to top */
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 1;
+	
+	/** Flexbox */
+	display: flex;
+	flex-direction: row;
+	
+	/** Colors and sizes */
+	background-color: @background-color;
+	color: @navbar-text-color;
+	font-size: 14px;
+	a, a:visited, i.fa {
+		color: @navbar-text-color;
+		text-decoration: none;
+	}
+	a:hover, a:active, a:hover i.fa, a:active i.fa {
+		color: @navbar-active-text-color;
+	}
+	i.fa {
+		font-size: 17px;
+	}
+	
+	.nav-section {
+		height: 50px;
+		margin: auto;
+		padding: 0 10px;
+	} 
+	.nav-content {
+		flex-grow: 2;
+	}
+	.nav-search {
+		width: 400px;
+		display: flex;
+		align-content: center;
+		position: relative;
+		
+		input.nav-search {
+			flex-grow: 2;
+			height: 49px;
+			font-size: 16px;
+			color: @navbar-text-color;
+			border: none;
+			outline: none;
+			padding: 0 10px;
+			
+			&:active, &:focus {
+				color: @navbar-active-text-color;
+			}
+		}
+		
+		/** The dropdown frame of search results shown as the user is typing */
+		.nav-quicksearch {
+			position: absolute;
+			top: 50px;
+			right: 0;
+			left: 0;
+			z-index: 10;
+			padding: 10px 0 5px 0;
+			background-color: @background-color;
+			line-height: 35px;
+			font-size: 14px;
+			
+			/** reset list styles */
+			ul, li {  
+				list-style: none;
+				padding: 0;
+				margin: 0;
+				text-indent: 0;
+			}
+			.nav-searchresult {
+				display: flex;
+				flex-direction: row;
+				width: 100%;
+				white-space: nowrap;
+				
+				&, i.fa {
+					color: @navbar-active-text-color;
+				}
+				i.fa {
+					margin-left: 10px;
+				}
+				div {
+					margin: 0 5px;
+				}
+				.result-text {
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+				.quicksearch-annotation {
+					margin-right: 15px;
+				}
+				
+				&:hover {
+					background-color: @navbar-highlight-color;
+					&, i.fa {
+						color: @background-color;
+					}
+				}
+			}
+			
+		}
+	}
+	.nav-buttons {
+	}
+	
+	.nav-brand {
+		img {
+			height: 30px;
+			width: auto;
+		}
+		height: 50px;
+	}
+	
+	.nav-button {
+		padding: 10px 5px;
+	}
+	.nav-button-search {
+		&.active {
+			color: @navbar-highlight-color;
+		}
+	}
+	.nav-header-textlink {
+		text-transform: uppercase;
+	}
+	
+	/** The left-side flyout containing a user's items of interest */
+	.nav-flyout {
+		position: absolute;
+		top: 50px;
+		left: 0;
+		z-index: 10;
+		padding: 10px 0 5px 0;
+		background-color: @background-color;
+		
+	}
+	
+	
+	
+	
+}
+
+
+
+/** Desktop only */
+@media (min-width: 768px) {
+	.seperator-left {
+		border-left: 1px solid @border-color;
+	}
+}
+
+/** Mobile only */
+@media (max-width: 767px) {
+	
+}

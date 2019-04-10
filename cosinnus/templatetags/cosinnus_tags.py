@@ -320,6 +320,29 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
     })
     return render_to_string(template, context.flatten())
 
+
+@register.simple_tag(takes_context=True)
+def cosinnus_menu_v2(context, template="cosinnus/v2/navbar.html"):
+    """ Renders the new style navbar """
+    if 'request' not in context:
+        raise ImproperlyConfigured("Current request missing in rendering "
+            "context. Include 'django.core.context_processors.request' in the "
+            "TEMPLATE_CONTEXT_PROCESSORS.")
+
+    request = context['request']
+    user = request.user
+    if user.is_authenticated:
+        context['groups'] = CosinnusProject.objects.get_for_user(request.user)
+        context['societies'] = CosinnusSociety.objects.get_for_user(request.user)
+        context['groups_invited'] = CosinnusProject.objects.get_for_user_invited(request.user)
+        context['societies_invited'] = CosinnusSociety.objects.get_for_user_invited(request.user)
+        if settings.COSINNUS_IDEAS_ENABLED:
+            # TODO: cache
+            context['my_ideas_count'] = CosinnusIdea.objects.all_in_portal().filter(creator=user).count()
+    
+    return render_to_string(template, context.flatten())
+
+
 @register.simple_tag(takes_context=True)
 def cosinnus_render_widget(context, widget):
     """ Renders a given widget config and passes all context on to its template """

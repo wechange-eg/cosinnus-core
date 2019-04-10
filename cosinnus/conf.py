@@ -550,6 +550,9 @@ class CosinnusConf(AppConf):
     # whether to use celery on this instance
     USE_CELERY = False
     
+    # whether to use the new style navbar
+    USE_V2_NAVBAR = False
+    
     # not all servers are running Postgres >= 9.3 yet. as long as this is true, we cannot uniformly run some nicer queries
     DO_ALL_SERVERS_HAVE_PSQL_9_3 = False
     

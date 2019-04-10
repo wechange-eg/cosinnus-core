@@ -1,0 +1,74 @@
+{% load i18n static cosinnus_tags thumbnail %}
+
+<nav id="v2-navbar" class="v2-navbar" role="navigation">
+    <div class="nav-content">
+    	<div class="nav-section nav-brand">
+            <a class="nav-button" href="#" rel="toggle" role="button" title="{% trans "Menu" %}" 
+		    		aria-expanded="false" aria-controls="main-collapse"
+		    		data-toggle="collapse" data-target="#main-collapse"> 
+	    		<i class="fa fa-fw fa-bars"></i>
+    		</a>
+            <a class="nav-button" href="#">
+            	{% include 'cosinnus/brand.html' %}
+            </a>
+             <a class="nav-button nav-header-textlink" href="#" title="{% trans "Discover" %}">
+            	{% trans "Discover" %}
+            </a>
+    	</div>
+    </div>
+    <div class="nav-section nav-search seperator-left">
+		<input id="search" class="nav-search" name="search" title="{% trans "Search" %}" autocomplete="off">
+		<div class="">
+	    	<a class="nav-button nav-button-search" href="#" title="{% trans "Search" %}"> 
+	    		<i class="fa fa-fw fa-search"></i>
+			</a>
+		</div>
+		
+		<div class="nav-quicksearch">
+			<ul>
+				<li>
+					<a class="nav-searchresult" href="#" role="button" aria-labelledby="searchresult-1"> 
+						<div>
+			    			<i class="fa fa-fw fa-star"></i>
+			    		</div>
+			    		<div class="result-text" id="searchresult-1">
+			    			Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text 
+			    		</div>
+			    		<div class="quicksearch-annotation">
+			    			in Projects
+			    		</div>
+					</a>
+				</li>
+				<li>
+					<a class="nav-searchresult" href="#" role="button" aria-labelledby="searchresult-2"> 
+						<div>
+			    		<i class="fa fa-fw fa-star"></i>
+			    		</div>
+			    		<div class="result-text" id="searchresult-2">
+			    			Item text
+			    		</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+    </div>
+    <div class="nav-section nav-buttons seperator-left">
+		<a class="nav-button" href="#" rel="toggle" role="button" title="{% trans "Button-Title" %}"> 
+    		<i class="fa fa-fw fa-plus"></i>
+		</a>
+		<a class="nav-button" href="#" rel="toggle" role="button" title="{% trans "Button-Title" %}"> 
+    		<i class="fa fa-fw fa-envelope"></i>
+		</a>
+		<a class="nav-button" href="#" rel="toggle" role="button" title="{% trans "Button-Title" %}"> 
+    		<i class="fa fa-fw fa-user"></i>
+		</a>
+		
+    </div>
+    
+	<div class="collapseXXXX nav-flyout" id="main-collapse">
+		projects and groups
+	</div>
+	
+    
+</nav>
+
