@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-27 17:17+0100\n"
+"POT-Creation-Date: 2019-04-10 12:14+0200\n"
 "PO-Revision-Date: 2018-08-30 04:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -574,6 +574,9 @@ msgstr "E-mail Wymaga Weryfikacji"
 
 msgid "If activated, newly registered users and users who change their email address will need to confirm their email by clicking a link in a mail sent to them."
 msgstr "To ustawienie sprawia, że nowi użytkownicy i użytkownicy, którzy zmienili adres e-mail, muszą potwierdzić swój e-mail poprzez kliknięcie w wysłany link."
+
+msgid "ToS Version"
+msgstr ""
 
 msgid "Background Image"
 msgstr "Obraz Tła"
@@ -3954,6 +3957,12 @@ msgstr "Zaakceptuj nasze warunki korzystania z usług"
 msgid "Ich erkläre mich mit den Nutzungsbedingungen einverstanden"
 msgstr "Akceptuję warunki korzystania z usług"
 
+msgid "Change of Terms of Services and Privacy Policy"
+msgstr ""
+
+msgid "We prioritise the protection of your data, so we updated our privacy policy and terms of services. To continue enjoying an optimal use of our plattform, we encourage you to read and accept the modifications."
+msgstr ""
+
 #, python-format
 msgid ""
 "Hi %(admin_name)s,\n"
@@ -4340,15 +4349,15 @@ msgstr "Twój adres e-mail %(email)s został pomyślnie zatwierdzony! Witaj w sp
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
 msgstr "Twój adres e-mail %(email)s został pomyślnie zatwierdzony! Jednak Twoje konto nie jest jeszcze aktywne i musi zostać zatwierdzone przez administratora, zanim będziesz mógł/mogła się zalogować. Gdy to się stanie, wyślemy Ci wiadomość e-mail!"
 
-msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
-msgstr "Witaj! Zostałeś/aś zaproszony/a do śledzenia projektów lub grup. Kliknij w przycisk rozwijania listy w celu zaakceptowania lub odrzucenia zaproszenia dla każdego z nich!"
-
 msgid "The unsubscribe link you have clicked does not seem to be valid!"
 msgstr "Kliknięty przez Ciebie link cofnięcia subskrypcji jest nieprawidłowy!"
 
 #, python-format
 msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
 msgstr "Wypisałeś/aś swój e-mail \"%(email)s\" z naszej listy subskrybentów. Nie będziesz już otrzymywać od nas wiadomości!"
+
+msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
+msgstr "Witaj! Zostałeś/aś zaproszony/a do śledzenia projektów lub grup. Kliknij w przycisk rozwijania listy w celu zaakceptowania lub odrzucenia zaproszenia dla każdego z nich!"
 
 #, python-format
 msgid "You are not currently a member of %s! If you wish you can request to become a member below."
