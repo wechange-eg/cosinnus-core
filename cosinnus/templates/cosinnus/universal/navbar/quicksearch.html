@@ -1,0 +1,36 @@
+{% load i18n %}
+{% import "include/macros.html" as macros %}
+
+<input id="search" class="nav-search" name="search" title="{% trans "Search" %}" autocomplete="off">
+<div class="">
+	<a class="nav-button nav-button-search" href="#" title="{% trans "Search" %}"> 
+		<i class="fa fa-fw fa-search"></i>
+	</a>
+</div>
+<div class="nav-quicksearch-results nav-dropdown" style="display: none;">
+	<ul>
+		<li>
+			<a class="nav-searchresult" href="#" role="button" aria-labelledby="searchresult-1"> 
+				<div>
+	    			<i class="fa fa-fw fa-star"></i>
+	    		</div>
+	    		<div class="result-text" id="searchresult-1">
+	    			Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text 
+	    		</div>
+	    		<div class="quicksearch-annotation">
+	    			in Projects
+	    		</div>
+			</a>
+		</li>
+		<li>
+			<a class="nav-searchresult" href="#" role="button" aria-labelledby="searchresult-2"> 
+				<div>
+	    		<i class="fa fa-fw fa-star"></i>
+	    		</div>
+	    		<div class="result-text" id="searchresult-2">
+	    			Item text
+	    		</div>
+			</a>
+		</li>
+	</ul>
+</div>

@@ -10,6 +10,7 @@ var ControlView = require('views/control-view');
 var MapView = require('views/map-view');
 var TileListView = require('views/tile-list-view');
 var TileDetailView = require('views/tile-detail-view');
+var NavbarQuickSearchView = require('views/navbar/quicksearch-view');
 
 
 var App = function App () {
@@ -25,6 +26,9 @@ var App = function App () {
     self.tileListView = null;
     self.mapView = null;
     self.tileDetailView = null;
+    
+    // other views
+    self.navbarQuickSearchView = null;
 
     self.router = null;
     self.mediator = null;
@@ -78,6 +82,7 @@ var App = function App () {
         // one of these need to be called from the template to initialize the required modules
         Backbone.mediator.subscribe('init:module-full-routed', self.initModuleFullRouted, self);
         Backbone.mediator.subscribe('init:module-embed', self.initAppFromOptions, self);
+        Backbone.mediator.subscribe('init:module-navbar-quicksearch', self.initNavbarQuicksearchFromOptions, self);
         
         // - the 'init:client' signal is the marker for all pages using this client.js to now
         //      publish the "init:<module>" event for whichever module configuration they wish to load (see above)
@@ -263,6 +268,27 @@ var App = function App () {
         	}
         }
     };
+    
+
+    self.initNavbarQuicksearchFromOptions = function (options) {
+        // add passed options into params extended over the default options
+    	var el = options.el ? options.el : '#nav-quicksearch';
+        var topicsJson = typeof COSINNUS_MAP_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TOPICS_JSON : {};
+        var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
+        
+        if (self.navbarQuickSearchView == null) {
+        	self.navbarQuickSearchView = new NavbarQuickSearchView({
+        		model: null,
+        		el: el,
+        		topicsJson: topicsJson,
+        		portalInfo: portalInfo,
+        	}, 
+        	self
+        	).render();
+        	Backbone.mediator.publish('navbar-quicksearch:ready');
+        }
+    };
+    
     
 };
 
