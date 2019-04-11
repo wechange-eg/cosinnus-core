@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-27 17:17+0100\n"
+"POT-Creation-Date: 2019-04-10 12:14+0200\n"
 "PO-Revision-Date: 2018-06-23 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -569,6 +569,9 @@ msgid "Emails Need Verification"
 msgstr ""
 
 msgid "If activated, newly registered users and users who change their email address will need to confirm their email by clicking a link in a mail sent to them."
+msgstr ""
+
+msgid "ToS Version"
 msgstr ""
 
 msgid "Background Image"
@@ -3888,6 +3891,12 @@ msgstr ""
 msgid "Ich erkläre mich mit den Nutzungsbedingungen einverstanden"
 msgstr ""
 
+msgid "Change of Terms of Services and Privacy Policy"
+msgstr ""
+
+msgid "We prioritise the protection of your data, so we updated our privacy policy and terms of services. To continue enjoying an optimal use of our plattform, we encourage you to read and accept the modifications."
+msgstr ""
+
 #, python-format
 msgid ""
 "Hi %(admin_name)s,\n"
@@ -4266,14 +4275,14 @@ msgstr ""
 msgid "Your email address %(email)s was successfully confirmed! However, you account is not active yet and will have to be approved by an administrator before you can log in. We will send you an email as soon as that happens!"
 msgstr ""
 
-msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
-msgstr ""
-
 msgid "The unsubscribe link you have clicked does not seem to be valid!"
 msgstr ""
 
 #, python-format
 msgid "We have unsubscribed your email \"%(email)s\" from our mailing list. You will not receive any more emails from us!"
+msgstr ""
+
+msgid "Welcome! You were invited to the following projects and groups. Please click the dropdown button to accept or decline the invitation for each of them!"
 msgstr ""
 
 #, python-format

@@ -55,6 +55,7 @@ from cosinnus.models.mixins.indexes import IndexingUtilsMixin
 from cosinnus.core.registries.attached_objects import attached_object_registry
 from django.apps import apps
 from cosinnus.models.tagged import LikeableObjectMixin
+import datetime
 
 logger = logging.getLogger('cosinnus')
 
@@ -497,6 +498,9 @@ class CosinnusPortal(models.Model):
     
     # The different keys used for this are static variables in CosinnusPortal!
     saved_infos = JSONField(default={})
+    
+    tos_date = models.DateTimeField(_('ToS Version'), default=datetime.datetime(1999, 1, 1, 13, 37, 0),
+        help_text='This is used to determine the date the newest ToS have been released, that users have acceppted. When a portal`s ToS update, set this to a newer date to have a popup come up for all users whose `settings.tos_accepted_date` is not after this date.')
     
     # css fields for custom portal styles
     background_image = models.ImageField(_('Background Image'),

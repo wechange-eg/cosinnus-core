@@ -16,7 +16,8 @@ from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from cosinnus.core.decorators.views import staff_required, superuser_required,\
     redirect_to_not_logged_in, redirect_to_403
-from cosinnus.forms.user import UserCreationForm, UserChangeForm
+from cosinnus.forms.user import UserCreationForm, UserChangeForm,\
+    TermsOfServiceFormFields
 from cosinnus.views.mixins.ajax import patch_body_json_data
 from cosinnus.utils.http import JSONResponse
 from django.contrib import messages
@@ -32,7 +33,8 @@ from cosinnus.models.group import CosinnusPortal,\
 from cosinnus.core.mail import MailThread, get_common_mail_context,\
     send_mail_or_fail_threaded
 from django.template.loader import render_to_string
-from django.http.response import HttpResponseNotAllowed, JsonResponse, HttpResponseRedirect
+from django.http.response import HttpResponseNotAllowed, JsonResponse, HttpResponseRedirect,\
+    HttpResponseForbidden
 from django.shortcuts import redirect, render
 from cosinnus.templatetags.cosinnus_tags import full_name_force
 from cosinnus.utils.permissions import check_user_integrated_portal_member
@@ -61,6 +63,7 @@ from annoying.functions import get_object_or_None
 
 import logging
 from django.contrib.auth.views import PasswordChangeView, PasswordResetView
+from django.utils.timezone import now
 logger = logging.getLogger('cosinnus')
 
 USER_MODEL = get_user_model()
@@ -669,7 +672,70 @@ def set_user_email_to_verify(user, new_email, request=None, user_has_just_regist
         subj_user = render_to_string('cosinnus/mail/user_email_verification%s_subj.txt' % ('_onchange' if not user_has_just_registered else ''), data)
         send_mail_or_fail_threaded(new_email, subj_user, None, data)
         
-        
+
+
+def user_api_me(request):
+    """ Returns a JSON dict of publicly available user data about the currently logged-in user.
+        Returens {} if no user is logged in this session. """
+    data = {}
+    if request.user.is_authenticated:
+        user = request.user
+        data.update({
+            'username': user.username,
+            'id': user.id,
+            'first_name': user.first_name or '',
+            'last_name': user.last_name or '',
+            'avatar_url': CosinnusPortal.get_current().get_domain() + user.cosinnus_profile.get_avatar_thumbnail_url(), 
+        })
+    
+    return JsonResponse(data)
+
+
+def add_email_to_blacklist(request, email, token):
+    """ Adds an email to the email blacklist. Used for generating list-unsubscribe links in our emails.
+        Use `email_blacklist_token_generator.make_token(email)` to generate a token. """
+    
+    if not is_email_valid(email):
+        messages.error(request, _('The unsubscribe link you have clicked does not seem to be valid!') + ' (1)')
+        return render(request, 'cosinnus/common/200.html')
+    
+    if not email_blacklist_token_generator.check_token(email, token):
+        messages.error(request, _('The unsubscribe link you have clicked does not seem to be valid!') + ' (2)')
+        return render(request, 'cosinnus/common/200.html')
+    
+    GlobalBlacklistedEmail.add_for_email(email)
+    messages.success(request, _('We have unsubscribed your email "%(email)s" from our mailing list. You will not receive any more emails from us!') 
+        % {'email': email})
+    
+    return render(request, 'cosinnus/common/200.html')
+
+
+def accept_updated_tos(request):
+    """ A bare-bones ajax endpoint to save a user's accepted ToS settings.
+        The frontend doesn't care about a return values, so we don't either 
+        (on fail, the user will just see another popup on next request). """
+    if request.method != 'POST':
+        return HttpResponseNotAllowed('POST')
+    if not request.user.is_authenticated:
+        return HttpResponseForbidden('Must be logged in!')
+    cosinnus_profile = request.user.cosinnus_profile
+    
+    form = TermsOfServiceFormFields(request.POST)
+    if form.is_valid():
+        # set the user's tos_accepted flag to true and date to now
+        cosinnus_profile.settings['tos_accepted'] = True
+        cosinnus_profile.settings['tos_accepted_date'] = now()
+        # set the newsletter opt-in
+        if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
+            cosinnus_profile.settings['newsletter_opt_in'] = form.cleaned_data.get('newsletter_opt_in')
+        cosinnus_profile.save()
+    else: 
+        logger.warning('Could not save a user\'s updated ToS settings.', extra={'errors': form.errors, 'post-data': request.POST})
+
+    return HttpResponseRedirect('/')
+    
+
+
 @receiver(userprofile_ceated)
 def convert_email_group_invites(sender, profile, **kwargs):
     """ Converts all `CosinnusUnregisterdUserGroupInvite` to `CosinnusGroupMembership` pending invites
@@ -723,38 +789,4 @@ def cleanup_user_after_first_login(sender, user, request, **kwargs):
     CosinnusUnregisterdUserGroupInvite.objects.filter(email=user.email).delete()
 
 
-def user_api_me(request):
-    """ Returns a JSON dict of publicly available user data about the currently logged-in user.
-        Returens {} if no user is logged in this session. """
-    data = {}
-    if request.user.is_authenticated:
-        user = request.user
-        data.update({
-            'username': user.username,
-            'id': user.id,
-            'first_name': user.first_name or '',
-            'last_name': user.last_name or '',
-            'avatar_url': CosinnusPortal.get_current().get_domain() + user.cosinnus_profile.get_avatar_thumbnail_url(), 
-        })
-    
-    return JsonResponse(data)
-
-
-def add_email_to_blacklist(request, email, token):
-    """ Adds an email to the email blacklist. Used for generating list-unsubscribe links in our emails.
-        Use `email_blacklist_token_generator.make_token(email)` to generate a token. """
-    
-    if not is_email_valid(email):
-        messages.error(request, _('The unsubscribe link you have clicked does not seem to be valid!') + ' (1)')
-        return render(request, 'cosinnus/common/200.html')
-    
-    if not email_blacklist_token_generator.check_token(email, token):
-        messages.error(request, _('The unsubscribe link you have clicked does not seem to be valid!') + ' (2)')
-        return render(request, 'cosinnus/common/200.html')
-    
-    GlobalBlacklistedEmail.add_for_email(email)
-    messages.success(request, _('We have unsubscribed your email "%(email)s" from our mailing list. You will not receive any more emails from us!') 
-        % {'email': email})
-    
-    return render(request, 'cosinnus/common/200.html')
     

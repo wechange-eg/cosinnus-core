@@ -1,9 +1,18 @@
 {% load cosinnus_tags %}
 {% comment %} Overriden! {% endcomment %}
 
-{% if user.is_authenticated and not user|cosinnus_setting:"tos_accepted" %}
-    {% include "modal_box_nutzungsbedingungen.html" %}
-    <script type="text/javascript">
-        $('#nutzungsbedingungen').modal('show');
-    </script>
+{% if user.is_authenticated %}
+
+	{% if not user|cosinnus_setting:"tos_accepted" %}
+	    {% include "modal_box_nutzungsbedingungen.html" %}
+	    <script type="text/javascript">
+	        $('#nutzungsbedingungen').modal('show');
+	    </script>
+	{% elif updated_tos_form %}
+	    {% include "modal_box_updated_tos.html" with form=updated_tos_form %}
+	    <script type="text/javascript">
+	        $('#updated_tos_modal').modal('show');
+	    </script>
+	{% endif %}
+	
 {% endif %}

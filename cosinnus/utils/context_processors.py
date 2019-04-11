@@ -12,6 +12,11 @@ from postman.models import Message
 import json
 from cosinnus.core.registries.group_models import group_model_registry
 from cosinnus.models.group import CosinnusPortal
+from cosinnus.forms.user import TermsOfServiceFormFields
+from dateutil import parser
+
+import logging
+logger = logging.getLogger('cosinnus')
 
 
 def settings(request):
@@ -93,3 +98,29 @@ def cosinnus(request):
         'COSINNUS_CURRENT_LANGUAGE': get_language(),
         'COSINNUS_CURRENT_PORTAL': CosinnusPortal.get_current(),
     }
+
+
+def tos_check(request):
+    """ Checks if the portal's ToS version is higher than those that the user
+        has accepted, and if so, renders the `updated_tos_form` into the context.
+        Currently, `extra_body_header.html` (from `base.html`) checks if the form
+        is present and renders a modal popup with it. """
+        
+    portal = CosinnusPortal.get_current()
+    user = request.user
+    if user.is_authenticated:
+        try:
+            tos_accepted_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
+            # if a portal's tos_date has never moved beyond the default, we don't check the tos_accepted_date, 
+            # to maintain backwards compatibility with users who have only the `settings.tos_accepted` boolean
+            if portal.tos_date.year > 2000 and (tos_accepted_date is None or parser.parse(tos_accepted_date) < portal.tos_date):
+                updated_tos_form = TermsOfServiceFormFields(initial={
+                    'newsletter_opt_in': user.cosinnus_profile.settings.get('newsletter_opt_in', False)
+                })
+                return {
+                    'updated_tos_form': updated_tos_form, 
+                }
+        except Exception as e:
+            logger.error('Error in `context_processory.tos_check`: %s' % e, extra={'exception': e})
+    
+    return {}

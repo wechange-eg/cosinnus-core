@@ -15,6 +15,7 @@ from cosinnus.models.group import CosinnusPortalMembership, CosinnusPortal
 from cosinnus.models.tagged import BaseTagObject
 from django.core.validators import MaxLengthValidator
 from captcha.fields import CaptchaField
+from django.utils.timezone import now
 
 
 class UserKwargModelFormMixin(object):
@@ -35,7 +36,19 @@ class UserKwargModelFormMixin(object):
             self.instance.user_id = self.user.id
 
 
-class UserCreationForm(DjUserCreationForm):
+class TermsOfServiceFormFields(forms.Form):
+    """ Used for the updated ToS popup and view. """
+    
+    tos_check = forms.BooleanField(label='tos_check', required=True)
+    
+    if settings.COSINNUS_SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK:
+        privacy_policy_check = forms.BooleanField(label='privacy_policy_check', required=True)
+    
+    if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
+        newsletter_opt_in = forms.BooleanField(label='newsletter_opt_in', required=False)
+        
+
+class UserCreationForm(TermsOfServiceFormFields, DjUserCreationForm):
     # Inherit from UserCreationForm for proper password hashing!
 
     class Meta(object):
@@ -49,13 +62,8 @@ class UserCreationForm(DjUserCreationForm):
     email = forms.EmailField(label=_('email address'), required=True, validators=[MaxLengthValidator(220)]) 
     first_name = forms.CharField(label=_('first name'), required=True)  
     
-    tos_check = forms.BooleanField(label='tos_check', required=True)
-    
     if not settings.COSINNUS_IS_INTEGRATED_PORTAL and not settings.COSINNUS_IS_SSO_PORTAL: 
         captcha = CaptchaField()
-    
-    if settings.COSINNUS_SIGNUP_REQUIRES_PRIVACY_POLICY_CHECK:
-        privacy_policy_check = forms.BooleanField(label='privacy_policy_check', required=True)
     
     
     def __init__(self, *args, **kwargs):
@@ -92,8 +100,14 @@ class UserCreationForm(DjUserCreationForm):
             media_tag.visibility = BaseTagObject.VISIBILITY_ALL
             media_tag.save()
         
-        # set the user's tos_accepted flag to true
+        # set the user's tos_accepted flag to true and date to now
         user.cosinnus_profile.settings['tos_accepted'] = True
+        user.cosinnus_profile.settings['tos_accepted_date'] = now()
+        
+        # set the newsletter opt-in
+        if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
+            user.cosinnus_profile.settings['newsletter_opt_in'] = self.cleaned_data.get('newsletter_opt_in')
+                
         user.cosinnus_profile.save()
         
         return user

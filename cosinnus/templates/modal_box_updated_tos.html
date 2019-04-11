@@ -1,0 +1,103 @@
+{% load i18n %}
+
+<!-- Modal -->
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="updated_tos_modal" tabindex="1" role="dialog" aria-labelledby="updated_tos_Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+	    	<form id="updated_tos_form" action="{% url 'cosinnus:accept-updated-tos' %}" method="post" enctype="multipart/form-data" class="cosinnus-form form-horizontal" role="form">
+				{% csrf_token %}
+				
+	            <div class="modal-header">
+	                <h4 class="modal-title" id="updated_tos_Label">
+	                    <i class="fa fa-book"></i>
+	                    {% trans "Change of Terms of Services and Privacy Policy" %}
+	                </h4>
+	            </div>
+	            <div class="modal-body">
+		            	
+		            	<p class="no-padding">
+		            		{% trans "We prioritise the protection of your data, so we updated our privacy policy and terms of services. To continue enjoying an optimal use of our plattform, we encourage you to read and accept the modifications." %}
+	            		</p>
+	        			{% include 'cosinnus/registration/extra_signup_fields.html' with form=form show_plain_form=True %}
+		        	
+	            </div>
+	            <div class="modal-footer">
+	                
+	                <div id="updated_tos_disabled_button_frame" class="" >
+	                    <button type="submit" class="btn btn-emphasized" disabled="true">
+	                        <ul class="media-list">
+	                            <li class="media">
+	                                <a class="pull-left" href="#">
+	                                    <i class="fa fa-check"></i>
+	                                </a>
+	                                <div class="media-body">
+	                                    {% trans "OK" %}
+	                                </div>
+	                            </li>
+	                        </ul>
+	                    </button>
+	                </div>
+	                
+	                <div id="updated_tos_ok_button_frame" class="app-main" style="display:none;">
+		                <button type="submit" class="btn btn-emphasized">
+		                    <ul class="media-list">
+		                        <li class="media">
+		                            <a class="pull-left" href="#">
+		                                <i class="fa fa-check"></i>
+		                            </a>
+		                            <div class="media-body">
+		                                {% trans "OK" %}
+		                            </div>
+		                        </li>
+		                    </ul>
+		                </button>
+	                </div>
+	                
+	                <div class="app-main">
+		                <button type="button" href="{% url 'logout' %}" class="btn btn-emphasized" >
+		                    <ul class="media-list">
+		                        <li class="media">
+		                            <a class="pull-left" href="#">
+		                                <i class="fa fa-times"></i>
+		                            </a>
+		                            <div class="media-body">
+		                                {% trans "Logout" %}
+		                            </div>
+		                        </li>
+		                    </ul>
+		                </button>
+	                </div>
+	                
+	                
+	            </div>
+            </form>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+    	$(function() {
+    		// check if all required checkboxes are set 
+    		$('#updated_tos_form').on('change', 'input', function() {
+    			var requiredUnchecked = $('#updated_tos_form').find('input:checkbox').filter('[required]:visible:not(":checked")');
+				if (requiredUnchecked.length == 0){
+				    $('#updated_tos_disabled_button_frame').hide();
+				    $('#updated_tos_ok_button_frame').show();
+				} else {
+					$('#updated_tos_disabled_button_frame').show();
+				    $('#updated_tos_ok_button_frame').hide();
+				};
+    		});
+    		// send the form as ajax POST instead of http POST
+    		$('#updated_tos_form').submit(function() { 
+	            $.ajax({ 
+	                data: $(this).serialize(),
+	                type: $(this).attr('method'),
+	                url: $(this).attr('action'), 
+	            });
+                $('#updated_tos_modal').modal('hide');
+	            return false;
+	        });
+    	});
+    </script>
+    
+</div><!-- modal -->

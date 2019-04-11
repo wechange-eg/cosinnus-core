@@ -108,6 +108,10 @@
 	                {% trans "I am open for cooperation requests" as mc_box_label %}
 	                {% include 'cosinnus/fields/checkbox_field.html' with field=form.forms.obj.may_be_contacted label=mc_label legend=mc_legend checkbox_label=mc_box_label %}
                 {% endif %}
+                
+                {% block userprofile_extra_fields %}
+                {% endblock userprofile_extra_fields %}
+                
 	    </div>
 	    
 	    <button type="submit" class="btn btn-emphasized">
