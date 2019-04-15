@@ -34,7 +34,7 @@ from cosinnus.core.mail import MailThread, get_common_mail_context,\
     send_mail_or_fail_threaded
 from django.template.loader import render_to_string
 from django.http.response import HttpResponseNotAllowed, JsonResponse, HttpResponseRedirect,\
-    HttpResponseForbidden, HttpResponse
+    HttpResponseForbidden, HttpResponse, HttpResponseServerError
 from django.shortcuts import redirect, render
 from cosinnus.templatetags.cosinnus_tags import full_name_force
 from cosinnus.utils.permissions import check_user_integrated_portal_member
@@ -729,10 +729,11 @@ def accept_updated_tos(request):
         if settings.COSINNUS_USERPROFILE_ENABLE_NEWSLETTER_OPT_IN:
             cosinnus_profile.settings['newsletter_opt_in'] = form.cleaned_data.get('newsletter_opt_in')
         cosinnus_profile.save()
+        return HttpResponse('Ok')
     else: 
         logger.warning('Could not save a user\'s updated ToS settings.', extra={'errors': form.errors, 'post-data': request.POST})
+        return HttpResponseServerError('Failed')
 
-    return HttpResponse('Ok')
     
 
 
