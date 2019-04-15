@@ -8,7 +8,7 @@
         <span class="cursor-pointer-input inline-list-input">
             {% render_field form.tos_check %}
         </span>
-        <span class="cursor-pointer-input" onclick="$('#{{ form.tos_check.id_for_label }}').prop('checked', !($('#{{ form.tos_check.id_for_label }}').prop('checked')));">
+        <span class="cursor-pointer-input" onclick="$('#{{ form.tos_check.id_for_label }}').prop('checked', !($('#{{ form.tos_check.id_for_label }}').prop('checked'))).trigger('change');">
             {% trans "I have read and accept the" context "read and accept the [Terms of Services]" %}
         </span>
         <a class="nowrap" href="/nutzungsbedingungen/" target="_blank">{% trans "Terms and Services" %} <i class="fa fa-external-link"></i></a>

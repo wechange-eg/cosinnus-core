@@ -36,6 +36,7 @@ from django.template.defaultfilters import linebreaksbr
 from django.db.models.aggregates import Count
 from cosinnus.utils.http import make_csv_response
 from operator import itemgetter
+from dateutil import parser
 
 
 def housekeeping(request=None):
@@ -452,9 +453,10 @@ def user_activity_info(request):
 #     for user in get_user_model().objects.filter(is_active=True).exclude(last_login__exact=None).\
 #                 annotate(group_projects=group_projects).annotate(group_projects_admin=group_projects_admin).\
 #                 annotate(projects_only=projects_only).annotate(groups_only=groups_only):
-    
+    portal = CosinnusPortal.get_current()
     for membership in CosinnusGroupMembership.objects.filter(group__portal=CosinnusPortal.get_current(), user__is_active=True).exclude(user__last_login__exact=None):
-        user_row = users.get(membership.user.id, [0, 0, 0, 0, (now()-membership.user.last_login).days])
+        user = membership.user
+        user_row = users.get(user.id, [0, 0, 0, 0, (now()-user.last_login).days, 1])
         user_row[0] += 1
         if membership.group.type == CosinnusGroup().TYPE_PROJECT:
             user_row[1] +=1 
@@ -462,12 +464,17 @@ def user_activity_info(request):
             user_row[2] +=1 
         if membership.status == MEMBERSHIP_ADMIN:
             user_row[3] += 1
+        tos_accepted_date = user.cosinnus_profile.settings.get('tos_accepted_date', None)
+        if portal.tos_date.year > 2000 and (tos_accepted_date is None or parser.parse(tos_accepted_date) < portal.tos_date):
+            user_row[5] = 0
+        
         users[membership.user.id] = user_row
     
     rows = users.values()
     rows = sorted(rows, key=lambda row: row[0], reverse=True)
-    rows = [('projects-and-groups-count', 'groups-only-count', 'projects-only-count', 'admin-of-projects-and-groups-count', 'user-last-login-days'), ] + rows
-    prints += '<br/>'.join([','.join((str(cell) for cell in row)) for row in rows])
-    
-    return HttpResponse(prints)
+    headers = ['projects-and-groups-count', 'groups-only-count', 'projects-only-count', 'admin-of-projects-and-groups-count', 'user-last-login-days', 'current-tos-accepted']
+
+    #prints += '<br/>'.join([','.join((str(cell) for cell in row)) for row in rows])
+    #return HttpResponse(prints)
+    return make_csv_response(rows, headers, 'user-activity-report')
 

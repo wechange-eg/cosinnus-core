@@ -4,6 +4,21 @@
 {% block page_title %}{% trans "Simple Statistics" %}{% endblock %}
 
 {% block leftnav %}
+	<div type="button" class="btn w100 btn-appnavi btn-no-interact regular-space">
+	    <ul class="media-list">
+	        <li class="media">
+	        	<a class="pull-left" href="#">
+                </a>
+                <a class="pull-left" href="#">
+                    <i class="fa fa-table"></i>
+                </a>
+	            <div class="media-body">
+	                CSV-Statistiken
+	            </div>
+	        </li>
+	    </ul>
+	</div>
+	
 	<button type="button" class="btn w100 btn-emphasized fine-space" href="{% url 'cosinnus:housekeeping-group-storage-report' %}">
 	    <ul class="media-list">
 	        <li class="media">
@@ -17,7 +32,7 @@
 	    </ul>
 	</button>
 	
-	<button type="button" class="btn w100 btn-emphasized" href="{% url 'cosinnus:housekeeping-project-storage-report' %}">
+	<button type="button" class="btn w100 btn-emphasized regular-space" href="{% url 'cosinnus:housekeeping-project-storage-report' %}">
 	    <ul class="media-list">
 	        <li class="media">
 	           <a class="pull-left">
@@ -25,6 +40,19 @@
 	            </a>
 	            <div class="media-body">
 	                Speicherbedarf Projekte
+	            </div>
+	        </li>
+	    </ul>
+	</button>
+	
+	<button type="button" class="btn w100 btn-emphasized" href="{% url 'cosinnus:housekeeping-user-activity-info' %}">
+	    <ul class="media-list">
+	        <li class="media">
+	           <a class="pull-left">
+	                <i class="fa fa-download"></i>
+	            </a>
+	            <div class="media-body">
+	                Benutzerstatistiken (min 1x eingeloggt)
 	            </div>
 	        </li>
 	    </ul>
