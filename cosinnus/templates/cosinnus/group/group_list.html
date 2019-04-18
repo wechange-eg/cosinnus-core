@@ -23,6 +23,10 @@
         {% include "cosinnus/group/leftnav_all_groups.html"  with current_page="grouplist__society" %}
     {% elif group_type == 0 %}
         {% include "cosinnus/group/leftnav_all_groups.html"  with current_page="grouplist" %}
+    {% elif is_deactivated_groups_view %}
+		{% url 'cosinnus:profile-detail' as userprofile_url %}
+		{% trans "About me" as label %}
+		{% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-reply" label=label href=userprofile_url  %}
     {% else %}
         {% include "cosinnus/group/leftnav_all_groups.html"  with current_page="all" %}
     {% endif %}
@@ -35,6 +39,9 @@
         <li class="active">{% trans "Related to" %} {{ filter_group.name }}</li>
     {% elif group_type == 'all' %}
         <li class="active">{% trans "Invitations" %}</li>
+    {% elif is_deactivated_groups_view %}
+        <li class="active"><a href="{% url 'cosinnus:profile-detail' %}">{% trans "Your Profile" %}</a></li>
+    	<li class="active">{% trans "Deactivated Projects and Groups" %}</li>
     {% else %}
         <li class="active">{% trans "Overview" %}</li>
     {% endif %}
@@ -92,7 +99,7 @@
         {% endif %}
         {% endcomment %}
     	
-    	{% include 'cosinnus/group/group_list_items.html' %}
+    	{% include 'cosinnus/group/group_list_items.html' with is_deactivated_groups_view=is_deactivated_groups_view %}
         
     </div>
     

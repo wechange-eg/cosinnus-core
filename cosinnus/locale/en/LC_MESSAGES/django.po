@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-10 12:14+0200\n"
+"POT-Creation-Date: 2019-04-18 18:40+0200\n"
 "PO-Revision-Date: 2018-06-23 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1748,6 +1748,11 @@ msgstr ""
 msgid "Deactivate Project/Group"
 msgstr ""
 
+#, fuzzy
+#| msgid "Other Projects"
+msgid "Deactivated Projects and Groups"
+msgstr "Other Projects"
+
 msgid "Warning!"
 msgstr ""
 
@@ -1761,7 +1766,7 @@ msgstr ""
 msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
 msgstr ""
 
-msgid "This process is reversible. You can reactivate the project/group from the project/group list page at any time."
+msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
 msgstr ""
 
 msgid "Re-Activate"
@@ -2175,7 +2180,13 @@ msgstr ""
 msgid "Invitations"
 msgstr ""
 
+msgid "About me"
+msgstr ""
+
 msgid "Related to"
+msgstr ""
+
+msgid "Your Profile"
 msgstr ""
 
 msgid "Overview"
@@ -2992,9 +3003,6 @@ msgstr ""
 msgid "Password change"
 msgstr ""
 
-msgid "Your Profile"
-msgstr ""
-
 msgid "Change password"
 msgstr ""
 
@@ -3543,9 +3551,6 @@ msgstr ""
 #, fuzzy
 msgid "For example"
 msgstr "Project Type"
-
-msgid "About me"
-msgstr ""
 
 msgid "Edit Profile"
 msgstr ""

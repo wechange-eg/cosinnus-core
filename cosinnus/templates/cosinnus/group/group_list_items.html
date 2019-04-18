@@ -13,7 +13,7 @@
         {% group_url 'cosinnus:group-microsite' group=group as group_url %}
     {% endif %}
     {% endcomment %}
-    <div class="fadedown regular-space {% if filter_group and filter_group.id == group.id %}open {% endif %}">
+    <div class="{% if not is_deactivated_groups_view %}fadedown{% endif %} regular-space {% if filter_group and filter_group.id == group.id %}open {% endif %}">
         <div class="btn btn-{% if group.is_active and user.is_authenticated and user.pk in members or group.is_active and user.is_authenticated and user.pk in invited or group.public and group.is_active %}emphasized{% else %}default{% endif %} w100">
             <ul class="media-list">
                 <li class="media">
@@ -26,9 +26,11 @@
                             {% include "cosinnus/group/group_avatar_image.html" with group=group %}
                         </a>
                     {% endif %}
-                    <a class="pull-right fadedown-clickarea" href="#">
-                        <i class="fa fa-chevron-down"></i>
-                    </a>
+                    {% if not is_deactivated_groups_view %}
+	                    <a class="pull-right fadedown-clickarea" href="#">
+	                        <i class="fa fa-chevron-down"></i>
+	                    </a>
+                    {% endif %}
                     <div class="media-body">
                         <span class="annotation">
                            {% include 'cosinnus/feedback/report_button_a.html' with object=group %}&nbsp;
@@ -188,7 +190,7 @@
             {% else %} {% comment %} --- Group inactive --- {% endcomment %}
             	
             	{% if user|is_superuser or user.pk in admins %}
-	                <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:group-activate' group_id=group.id %}">
+	                <button type="button" class="btn btn-emphasized {% if is_deactivated_groups_view %}regular-space {% endif %}" href="{% url 'cosinnus:group-activate' group_id=group.id %}">
 	                    <ul class="media-list">
 	                        <li class="media">
 	                            <a class="pull-left" href="#">

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-10 12:14+0200\n"
+"POT-Creation-Date: 2019-04-18 18:40+0200\n"
 "PO-Revision-Date: 2018-10-09 16:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1718,6 +1718,11 @@ msgstr "Réactiver le projet / groupe"
 msgid "Deactivate Project/Group"
 msgstr "Désactiver le projet / groupe"
 
+#, fuzzy
+#| msgid "Deactivate Project/Group"
+msgid "Deactivated Projects and Groups"
+msgstr "Désactiver le projet / groupe"
+
 msgid "Warning!"
 msgstr "Attention !"
 
@@ -1730,7 +1735,9 @@ msgstr "Tu vas réactiver ce projet / groupe. Il sera de nouveau visible ainsi q
 msgid "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you."
 msgstr "Tu vas désactiver ce projet / groupe. Il sera caché sur le site, ainsi que son contenu et invisible pour tous, toi compris."
 
-msgid "This process is reversible. You can reactivate the project/group from the project/group list page at any time."
+#, fuzzy
+#| msgid "This process is reversible. You can reactivate the project/group from the project/group list page at any time."
+msgid "This process is reversible. You can reactivate the project/group from your user profile at any time."
 msgstr "Ce processus est irréversible. Tu peux réactiver le projet / groupe depuis la page de liste des projets / groupes à tout moment."
 
 msgid "Re-Activate"
@@ -2128,8 +2135,14 @@ msgstr "L'intégration Facebook est disponible après la création du projet !"
 msgid "Invitations"
 msgstr "Invitations"
 
+msgid "About me"
+msgstr "A propos de moi"
+
 msgid "Related to"
 msgstr "Lié à"
+
+msgid "Your Profile"
+msgstr "Ton profil"
 
 msgid "Overview"
 msgstr "Vue d'ensemble"
@@ -3059,9 +3072,6 @@ msgstr "Mot de passe"
 msgid "Password change"
 msgstr "Changement de mot de passe"
 
-msgid "Your Profile"
-msgstr "Ton profil"
-
 msgid "Change password"
 msgstr "Changer le mot de passe"
 
@@ -3580,9 +3590,6 @@ msgstr "Entrer une description:"
 
 msgid "For example"
 msgstr "Par exemple"
-
-msgid "About me"
-msgstr "A propos de moi"
 
 msgid "Edit Profile"
 msgstr "Modifier mon profil"

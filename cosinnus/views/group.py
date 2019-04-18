@@ -522,6 +522,24 @@ class GroupListMineView(RequireLoggedInMixin, GroupListView):
 group_list_mine = GroupListMineView.as_view()
 
 
+class GroupListMineDeactivatedView(RequireLoggedInMixin, GroupListView):
+    paginate_by = None
+    
+    def get_queryset(self):
+        self.group_type = None
+        return self.model.objects.get_deactivated_for_user(self.request.user)
+    
+    def get_context_data(self, **kwargs):
+        ctx = super(GroupListMineDeactivatedView, self).get_context_data(**kwargs)
+        ctx.update({
+            'hide_group_map': True,
+            'is_deactivated_groups_view': True,
+        })
+        return ctx
+
+group_list_mine_deactivated = GroupListMineDeactivatedView.as_view()
+
+
 class GroupListInvitedView(RequireLoggedInMixin, GroupListView):
     paginate_by = None
     

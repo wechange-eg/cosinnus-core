@@ -71,6 +71,7 @@ urlpatterns = [
     url(r'^administration/deny_user/(?P<user_id>\d+)/$', user.deny_user, name='user-deny'),
     url(r'^administration/verify_email/(?P<email_verification_param>[^/]+)/$', user.verifiy_user_email, name='user-verifiy-email'),
     url(r'^administration/list-unsubscribe/(?P<email>[^/]+)/(?P<token>[^/]+)/$', user.add_email_to_blacklist, name='user-add-email-blacklist'),
+    url(r'^administration/deactivated/$', group.group_list_mine_deactivated, name='deactivated-groups'),
     url(r'^administration/activate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='group-activate', kwargs={'activate': True}),
     url(r'^administration/deactivate/(?P<group_id>\d+)/$', group.activate_or_deactivate, name='group-deactivate', kwargs={'activate': False}),
     url(r'^administration/login-2fa/$', authentication.admin_only_otp_token_validation, name='login-2fa'),

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-10 12:14+0200\n"
-"PO-Revision-Date: 2019-04-11 17:12+0100\n"
+"POT-Creation-Date: 2019-04-18 18:40+0200\n"
+"PO-Revision-Date: 2019-04-18 18:41+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -2060,6 +2060,9 @@ msgstr "Projekt/Gruppe reaktivieren"
 msgid "Deactivate Project/Group"
 msgstr "Projekt/Gruppe deaktivieren"
 
+msgid "Deactivated Projects and Groups"
+msgstr "Deaktivierte Projekte und Gruppen"
+
 msgid "Warning!"
 msgstr "Achtung!"
 
@@ -2080,12 +2083,15 @@ msgstr ""
 "Du bist dabei dieses Projekt/Gruppe zu deaktivieren. Es und all sein Inhalt  "
 "wird auf der Webseite unsichtbar sein."
 
+#| msgid ""
+#| "This process is reversible. You can reactivate the project/group from the "
+#| "project/group list page at any time."
 msgid ""
-"This process is reversible. You can reactivate the project/group from the "
-"project/group list page at any time."
+"This process is reversible. You can reactivate the project/group from your "
+"user profile at any time."
 msgstr ""
 "Diese Aktion kann rückgängig gemacht werden. Du kannst das Projekt/Gruppe "
-"jederzeit von der Projekt/Gruppen-Listenseite aus reaktivieren"
+"jederzeit von deinem Benutzerprofil aus reaktivieren."
 
 msgid "Re-Activate"
 msgstr "Reaktivieren"
@@ -2548,8 +2554,14 @@ msgstr ""
 msgid "Invitations"
 msgstr "Einladungen"
 
+msgid "About me"
+msgstr "Über mich"
+
 msgid "Related to"
 msgstr "Verwandt mit"
+
+msgid "Your Profile"
+msgstr "Über mich"
 
 msgid "Overview"
 msgstr "Übersicht"
@@ -3640,9 +3652,6 @@ msgstr "Passwort"
 msgid "Password change"
 msgstr "Passwort ändern"
 
-msgid "Your Profile"
-msgstr "Über mich"
-
 msgid "Change password"
 msgstr "Passwort ändern"
 
@@ -4245,9 +4254,6 @@ msgstr "Gib ein Einladungs-Token ein:"
 
 msgid "For example"
 msgstr "Zum Beispiel"
-
-msgid "About me"
-msgstr "Über mich"
 
 msgid "Edit Profile"
 msgstr "Profil bearbeiten"

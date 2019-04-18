@@ -153,6 +153,11 @@ class UserProfileDetailView(UserProfileObjectMixin, DetailView):
             'profile': profile,
             'this_user': profile.user,
         })
+        if profile.user == self.request.user:
+            context.update({
+                'has_deactivated_groups': CosinnusGroup.objects.get_deactivated_for_user(self.request.user).count() > 0,
+            })
+        
         return context
 
 detail_view = UserProfileDetailView.as_view()

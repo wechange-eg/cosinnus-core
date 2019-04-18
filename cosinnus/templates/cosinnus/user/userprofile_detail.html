@@ -28,8 +28,10 @@
 			        <legend class="large-space userprofile-title ">{{ this_user.cosinnus_profile.get_extended_full_name }}</legend>
 			
 			        {% if request.user.is_authenticated and request.user == this_user and not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
+			        	{# Buttons for my userprofile #}
+			        	
 			            {% if not SETTINGS.COSINNUS_IS_SSO_PORTAL %}
-				            <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:profile-edit' %}">
+				            <button type="button" class="btn btn-emphasized v-offset-s" href="{% url 'cosinnus:profile-edit' %}">
 	                            <ul class="media-list">
 	                                <li class="media">
 	                                    <a class="pull-left" href="#">
@@ -42,7 +44,8 @@
 	                            </ul>
 	                        </button>
                         {% endif %}
-                        <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:notifications' %}" title="{% trans "Notification Preferences" %}" style="width: auto;">
+                        
+                        <button type="button" class="btn btn-emphasized v-offset-s" href="{% url 'cosinnus:notifications' %}" title="{% trans "Notification Preferences" %}" style="width: auto;">
                             <ul class="media-list">
                                 <li class="media">
                                     <a class="pull-left" href="#">
@@ -54,8 +57,26 @@
                                 </li>
                             </ul>
                         </button>
+                        
+                        
+                        <button type="button" class="btn btn-emphasized v-offset-s" 
+                        		title="{% trans "Deactivated Projects and Groups" %}" style="width: auto;"
+                        		{% if has_deactivated_groups %}href="{% url 'cosinnus:deactivated-groups' %}"{% else %}disabled="true"{% endif %}>
+                            <ul class="media-list">
+                                <li class="media">
+                                    <a class="pull-left" href="#">
+                                        <i class="fa fa-flash"></i>
+                                    </a>
+                                    <div class="media-body">
+                                        {% trans "Deactivated Projects and Groups" %}
+                                    </div>
+                                </li>
+                            </ul>
+                        </button>
+                        
                         {% if SETTINGS.COSINNUS_IS_SSO_PORTAL %}
-                            <button type="button" class="btn btn-emphasized" href="{% url 'cosinnus:profile-delete' %}">
+                        	{# need this here because usually it shows in the profile form, but sso portals don't have that #}
+                            <button type="button" class="btn btn-emphasized v-offset-s" href="{% url 'cosinnus:profile-delete' %}">
                                 <ul class="media-list">
                                     <li class="media">
                                         <a class="pull-left" href="#">
@@ -68,7 +89,10 @@
                                 </ul>
                             </button>
                         {% endif %}
+                        
 			        {% else %}
+			        	{# Buttons for other users' profiles #}
+			        
 			            {% comment %} Abonnieren is out for now 
 			            <button type="button" class="btn btn-default">
 			                <ul class="media-list">
@@ -86,7 +110,7 @@
 			            </button>
 			             {% endcomment %}
 			            {% if not SETTINGS.COSINNUS_IS_INTEGRATED_PORTAL %}
-			            <button type="button" class="btn btn-emphasized" href="{% url 'postman:write' recipients=this_user.username %}?next={% url 'postman:sent' %}">
+			            <button type="button" class="btn btn-emphasized v-offset-s" href="{% url 'postman:write' recipients=this_user.username %}?next={% url 'postman:sent' %}">
 			                <ul class="media-list">
 			                    <li class="media">
 			                        <a class="pull-left" href="#">

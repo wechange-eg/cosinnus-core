@@ -20,13 +20,14 @@
 {% captureas label %}{% trans "Members" %}{% endcaptureas %}
 {% include "cosinnus/leftnav_button.html" with active=is_groupdetails extra_classes="large-space" icon="fa-users" label=label href=href  %}
 
-{% include 'cosinnus/feedback/report_button_leftnav_btn.html' with object=group %}
 
 {% if user|is_group_admin:group or user|is_superuser %}
 	{% captureas href %}{% if activate %}{% url 'cosinnus:group-activate' group_id=group.id %}{% else %}{% url 'cosinnus:group-deactivate' group_id=group.id %}{% endif %}{% endcaptureas %}
 	{% captureas label %}{% if group and group.type == 1 or group_model == "CosinnusSociety" %}{% if activate %}{% trans "Re-activate Group" %}{% else %}{% trans "Deactivate Group" %}{% endif %}{% else %}{% if activate %}{% trans "Activate Project" %}{% else %}{% trans "Deactivate Project" %}{% endif %}{% endif %}{% endcaptureas %}
 	{% captureas icon %}{% if activate %}fa-flash{% else %}fa-times{% endif %}{% endcaptureas %}
 	{% include "cosinnus/leftnav_button.html" with active=is_deactivategroup extra_classes="large-space" icon=icon label=label href=href  %}
+{% else %}
+	{% include 'cosinnus/feedback/report_button_leftnav_btn.html' with object=group %}
 {% endif %}
 
 {% if user.pk in object.members or user.pk in object.admins %}

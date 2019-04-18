@@ -11,7 +11,13 @@
 {% endblock %}
 
 {% block leftnav %}
-    {% include 'cosinnus/group/leftnav_group.html' with group=target_group current_page='groupdeactivate' %}
+	{% if activate %}
+		{% url 'cosinnus:deactivated-groups' as deactivated_groups_url %}
+		{% trans "Deactivated Projects and Groups" as label %}
+		{% include "cosinnus/leftnav_button.html" with extra_classes="regular-space" icon="fa-reply" label=label href=deactivated_groups_url  %}
+	{% else %}
+    	{% include 'cosinnus/group/leftnav_group.html' with group=target_group current_page='groupdeactivate' %}
+    {% endif %}
 {% endblock leftnav %}
 
 
@@ -39,7 +45,7 @@
 						<p class="transparent">{% trans "You are about to re-activate this project/group. It and all of its content will be visible on the website again." %}</p><!-- Text here if neccessary -->
 					{% else %}
 	                    <p class="transparent">{% trans "You are about to deactivate this project/group. It and all of its content will be hidden on the website and invisible to everyone, including you." %}</p><!-- Text here if neccessary -->
-	                    <p class="transparent">{% trans "This process is reversible. You can reactivate the project/group from the project/group list page at any time." %}</p><!-- Text here if neccessary -->
+	                    <p class="transparent">{% trans "This process is reversible. You can reactivate the project/group from your user profile at any time." %}</p><!-- Text here if neccessary -->
 					{% endif %}
                 </div>
             </div><!-- row -->
