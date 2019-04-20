@@ -21,6 +21,12 @@ module.exports = BaseView.extend({
         }
     },
     
+    // The DOM events specific to an item.
+    events: {
+    	'focus .nav-search-box': 'onSearchBoxFocusIn',
+    	'click .nav-button-search': 'onSearchIconClicked',
+    },
+    
     initialize: function (options, app) {
         var self = this;
         self.app = app;
@@ -59,13 +65,15 @@ module.exports = BaseView.extend({
     },
     
     /** Shows the quicksearch result list */
-    show: function () {
+    showDropdown: function () {
     	util.log('*** Showing quicksearch results ***')
-    	this.$el.find('.nav-quicksearch-results').show();
+    	var dropdown = this.$el.find('.nav-quicksearch-results');
+    	this.$el.find('.dropdown-underdrop').height(dropdown.outerHeight());
+    	this.$el.addClass('active');
     },
     
     /** Hides the quicksearch result list */
-    hide: function () {
+    hideDropdown: function () {
     	util.log('*** Hiding quicksearch results ***')
     	this.$el.find('.nav-quicksearch-results').hide();
     },
@@ -79,10 +87,31 @@ module.exports = BaseView.extend({
     	util.log('quicksearch got search input ' + text);
     	if (text.length > 0) {
     		// TODO: show first results, fire query
-    		util.log(self)
-    		self.show();
+    		self.showDropdown();
     	} else {
-    		self.hide();
+    		//self.hideDropdown(); we never hide, just ender something different
+    	}
+    },
+    
+    /** Searchbox focused */
+    onSearchBoxFocusIn: function (event) {
+    	this.showDropdown();
+    	document.addEventListener('click', this.thisContext(this.checkQuickSearchFocusOut));
+    },
+    
+    /** While we are focused, check for clicks outside to trigger closing the menu */
+    checkQuickSearchFocusOut: function (event) {
+    	if (this.$el.hasClass('active') && !this.el.contains(event.target)) {
+    		this.$el.removeClass('active');
+    		document.addEventListener('click', this.thisContext(this.checkQuickSearchFocusOut));
+    	}
+    },
+    
+    onSearchIconClicked: function (event) {
+    	if (this.$el.hasClass('active') && 0 == 1) { // todo check for has text
+    		// todo: fire search
+    	} else {
+    		this.$el.find('.nav-search-box').focus();
     	}
     },
     

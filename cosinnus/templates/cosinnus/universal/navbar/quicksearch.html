@@ -1,13 +1,18 @@
 {% load i18n %}
 {% import "include/macros.html" as macros %}
 
-<input id="search" class="nav-search" name="search" title="{% trans "Search" %}" autocomplete="off">
 <div class="">
-	<a class="nav-button nav-button-search" href="#" title="{% trans "Search" %}"> 
+	<a class="nav-button nav-button-search show-active" href="#" title="{% trans "Search" %}"> 
 		<i class="fa fa-fw fa-search"></i>
 	</a>
 </div>
-<div class="nav-quicksearch-results nav-dropdown" style="display: none;">
+<input id="search" class="nav-search-box" name="search" title="{% trans "Quick Search" %}" autocomplete="off">
+<div class="">
+	<a class="nav-button nav-button-search show-inactive" href="#" title="{% trans "Search" %}"> 
+		<i class="fa fa-fw fa-search"></i>
+	</a>
+</div>
+<div class="nav-quicksearch-results nav-dropdown">
 	<ul>
 		<li>
 			<a class="nav-searchresult" href="#" role="button" aria-labelledby="searchresult-1"> 
@@ -20,6 +25,7 @@
 	    		<div class="quicksearch-annotation">
 	    			in Projects
 	    		</div>
+	    		<div class="li-underdrop"></div>
 			</a>
 		</li>
 		<li>
@@ -30,7 +36,9 @@
 	    		<div class="result-text" id="searchresult-2">
 	    			Item text
 	    		</div>
+	    		<div class="li-underdrop"></div>
 			</a>
 		</li>
 	</ul>
 </div>
+<div class="dropdown-underdrop show-active"></div>

@@ -17,36 +17,57 @@
 	display: flex;
 	flex-direction: row;
 	
-	/** Colors and sizes */
+	/** Colors and font */
 	background-color: @background-color;
 	color: @navbar-text-color;
+	font-family: @font-regular;
 	font-size: 14px;
 	a, a:visited, i.fa {
 		color: @navbar-text-color;
 		text-decoration: none;
 	}
 	a:hover, a:active, a:hover i.fa, a:active i.fa {
-		color: @navbar-active-text-color;
+		color: @navbar-highlight-color;
 	}
 	i.fa {
 		font-size: 17px;
 	}
 	
 	.nav-section {
-		height: 50px;
+		height: 49px;
 		margin: auto;
 		padding: 0 10px;
 	} 
-	.nav-content {
-		flex-grow: 2;
-	}
 	.nav-search {
-		width: 400px;
+		flex-grow: 2;
 		display: flex;
 		align-content: center;
 		position: relative;
 		
-		input.nav-search {
+		
+		
+		/** Focused search box with open result dropdown */
+		&.active {
+			border-right: 1px solid @border-color;
+			border-left: 1px solid @border-color;
+			
+			&, & input {
+				background-color: @background-color-active;
+			}
+		}
+		
+		&.active .show-inactive,
+		&:not(.active) .show-active {
+			display: none;
+		}
+		
+		/** Highlight search button on hover and when active */
+		&.active .nav-button-search i.fa,
+		.nav-search-box:hover + div .nav-button-search i.fa {
+			color: @navbar-highlight-color; 	
+		}
+		
+		input.nav-search-box {
 			flex-grow: 2;
 			height: 49px;
 			font-size: 16px;
@@ -58,9 +79,23 @@
 			&:active, &:focus {
 				color: @navbar-active-text-color;
 			}
+			
 		}
 		
 		/** The dropdown frame of search results shown as the user is typing */
+		.dropdown-underdrop {
+			position: fixed;
+			background-color: @background-color-active;
+			width: 100%;
+			/** height is dynamically set in JS! */
+			top: 50px;
+			left: 0;
+			z-index: 1;
+			&:after {
+			    content: '.';
+			    visibility: hidden;
+			}
+		}
 		.nav-quicksearch-results {
 			position: absolute;
 			top: 50px;
@@ -68,9 +103,10 @@
 			left: 0;
 			z-index: 10;
 			padding: 10px 0 5px 0;
-			background-color: @background-color;
+			background-color: @background-color-active;
 			line-height: 35px;
 			font-size: 14px;
+			display: none;
 			
 			/** reset list styles */
 			ul, li {  
@@ -78,16 +114,47 @@
 				padding: 0;
 				margin: 0;
 				text-indent: 0;
-			}
-			.nav-searchresult {
-				display: flex;
-				flex-direction: row;
 				width: 100%;
-				white-space: nowrap;
-				
+			}
+			
+			/** 
+				Full width li with aligned items.
+				Underdrop is a full-screen-width background, while the other elements still retain their alignment 
+			*/
+			.li-underdrop {
+				position: fixed;
+				left: 0;
+				width: 100%;
+				background-color: @background-color-active;
+				&:after {
+				    content: '.';
+				    visibility: hidden;
+				}
+			}
+			li a div {
+				z-index: 3;
+			}
+			li a .li-underdrop {
+				z-index: 2;
+			}
+			li a {
+				width: 100%;
 				&, i.fa {
 					color: @navbar-active-text-color;
 				}
+				&:hover, &:hover .li-underdrop {
+					background-color: @navbar-highlight-color;
+					&, i.fa {
+						color: @background-color;
+					}
+				}
+			}
+			
+			.nav-searchresult {
+				display: flex;
+				flex-direction: row;
+				white-space: nowrap;
+				
 				i.fa {
 					margin-left: 10px;
 				}
@@ -97,20 +164,19 @@
 				.result-text {
 					overflow: hidden;
 					text-overflow: ellipsis;
+					flex-grow: 2;
 				}
 				.quicksearch-annotation {
 					margin-right: 15px;
 				}
 				
-				&:hover {
-					background-color: @navbar-highlight-color;
-					&, i.fa {
-						color: @background-color;
-					}
-				}
 			}
-			
 		}
+		&.active .nav-quicksearch-results {
+			display: inherit;
+		}
+		
+		
 	}
 	.nav-buttons {
 	}
@@ -133,6 +199,8 @@
 	}
 	.nav-header-textlink {
 		text-transform: uppercase;
+		font-weight: bold;
+		letter-spacing: 1px;
 	}
 	
 	/** The left-side flyout containing a user's items of interest */
