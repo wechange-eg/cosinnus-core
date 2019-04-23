@@ -64,20 +64,6 @@ module.exports = BaseView.extend({
         return data;
     },
     
-    /** Shows the quicksearch result list */
-    showDropdown: function () {
-    	util.log('*** Showing quicksearch results ***')
-    	var dropdown = this.$el.find('.nav-quicksearch-results');
-    	this.$el.find('.dropdown-underdrop').height(dropdown.outerHeight());
-    	this.$el.addClass('active');
-    },
-    
-    /** Hides the quicksearch result list */
-    hideDropdown: function () {
-    	util.log('*** Hiding quicksearch results ***')
-    	this.$el.find('.nav-quicksearch-results').hide();
-    },
-    
     /** Handles events for infinite scroll */
     onTextInput: function (event) {
     	var self = this;
@@ -96,7 +82,21 @@ module.exports = BaseView.extend({
     /** Searchbox focused */
     onSearchBoxFocusIn: function (event) {
     	this.showDropdown();
+    },
+    
+    /** Shows the quicksearch result list */
+    showDropdown: function () {
+    	util.log('*** Showing quicksearch results ***')
+    	var dropdown = this.$el.find('.nav-quicksearch-results');
+    	this.$el.find('.dropdown-underdrop').height(dropdown.outerHeight());
     	document.addEventListener('click', this.thisContext(this.checkQuickSearchFocusOut));
+    	this.$el.addClass('active');
+    },
+    
+    /** Hides the quicksearch result list */
+    hideDropdown: function () {
+    	util.log('*** Hiding quicksearch results ***')
+    	this.$el.find('.nav-quicksearch-results').hide();
     },
     
     /** While we are focused, check for clicks outside to trigger closing the menu */

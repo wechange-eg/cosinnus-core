@@ -3,15 +3,17 @@
 <nav id="v2-navbar" class="v2-navbar" role="navigation">
     <div class="nav-content">
     	<div class="nav-section nav-brand">
-            <a class="nav-button" href="#" rel="toggle" role="button" title="{% trans "Menu" %}" 
-		    		aria-expanded="false" aria-controls="main-collapse"
-		    		data-toggle="collapse" data-target="#main-collapse"> 
-	    		<i class="fa fa-fw fa-bars"></i>
-    		</a>
+    		{% if request.user.is_authenticated %}
+	            <a class="nav-button" href="#" rel="toggle" role="button" title="{% trans "Menu" %}" 
+			    		aria-expanded="false" aria-controls="main-collapse"
+			    		data-toggle="collapse" data-target="#main-collapse"> 
+		    		<i class="fa fa-fw fa-bars"></i>
+	    		</a>
+    		{% endif %}
             <a class="nav-button" href="#">
             	{% include 'cosinnus/brand.html' %}
             </a>
-             <a class="nav-button nav-header-textlink" href="#" title="{% trans "Discover" %}">
+            <a class="nav-button nav-header-textlink" href="#" title="{% trans "Discover" %}">
             	{% trans "Discover" %}
             </a>
     	</div>
@@ -30,20 +32,84 @@
 		{# This is the backbone App 'module-navbar-quicksearch!' #}
     </div>
     <div class="nav-section nav-buttons">
-		<a class="nav-button" href="#" rel="toggle" role="button" title="{% trans "Button-Title" %}"> 
+		<a class="nav-button" href="#(toggles create-content dropdown) rel="toggle" role="button" title="{% trans "Create content" %}"> 
     		<i class="fa fa-fw fa-plus"></i>
 		</a>
-		<a class="nav-button" href="#" rel="toggle" role="button" title="{% trans "Button-Title" %}"> 
-    		<i class="fa fa-fw fa-envelope"></i>
+		<a class="nav-button" href="#(leads to mokwi event group calendar)" role="button" title="{% trans "Events" %}"> 
+    		<i class="fa fa-fw fa-calendar"></i>
 		</a>
-		<a class="nav-button" href="#" rel="toggle" role="button" title="{% trans "Button-Title" %}"> 
-    		<i class="fa fa-fw fa-user"></i>
-		</a>
-		
+		{% if request.user.is_authenticated %}
+			<a class="nav-button" href="#(leads to postman messages)" rel="toggle" role="button" title="{% trans "Button-Title" %}"> 
+	    		<i class="fa fa-fw fa-envelope"></i>
+			</a>
+			<a class="nav-button" href="#(toggles user menu)"" rel="toggle" role="button" title="{% trans "Button-Title" %}"> 
+	    		<i class="fa fa-fw fa-user"></i>
+			</a>
+		{% else %}
+			<a class="nav-button nav-header-textlink" href="#" title="{% trans "Change language" %}">
+            	DE
+            </a>
+            <a class="nav-button nav-header-textlink" href="{% url 'login' %}" title="{% trans "Log in" %}">
+            	{% trans "Log in" %}
+            </a>
+            <a class="nav-button nav-header-textlink" href="{% url "cosinnus:user-add" %}" title="{% trans "Register a new account" %}">
+            	{% trans "Register" %}
+            </a>
+		{% endif %}
     </div>
     
-	<div class="collapseXXXX nav-flyout" id="main-collapse">
-		projects and groups
+	<div class="collapse nav-flyout" id="main-collapse">
+		<div class="row">
+			<div class="nav-column col-xs-12 col-md-4">
+			
+				<h2 class="headline">{% trans "My Groups and Projects" %}</h2>
+				
+				<ul class="item-list">
+					<li>
+						<a class="list-item" href="#" role="button" aria-labelledby="searchresult-1"> 
+							<div>
+				    			<i class="fa fa-fw fa-sitemap"></i>
+				    		</div>
+				    		<div class="item-text">
+				    			Group Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text 
+				    		</div>
+						</a>
+					</li>
+					<li>
+						<a class="list-item" href="#" role="button" aria-labelledby="searchresult-1"> 
+							<div>
+				    			<i class="fa fa-fw fa-group"></i>
+				    		</div>
+				    		<div class="item-text">
+				    			Project Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text 
+				    		</div>
+						</a>
+					</li>
+					<li>
+						<hr>
+					</li>
+					<li>
+						<a class="list-item" href="#" role="button" aria-labelledby="searchresult-1"> 
+							<div>
+				    			<i class="fa fa-fw fa-calendar"></i>
+				    		</div>
+				    		<div class="item-text">
+				    			Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text 
+					    		<span class="item-subtitle">
+					    			Subtitle subtitle 
+					    			TODO: navbar. make this push the item-text up and make a new line in gray under the title.
+					    		</span>
+				    		</div>
+						</a>
+					</li>
+				</ul>
+				
+				<div class="nav-column-footer">
+					TODO: navbar. continue here with the footer.
+				</div>
+			</div>	
+		</div>
+		
 	</div>
 	
     

@@ -44,8 +44,6 @@
 		align-content: center;
 		position: relative;
 		
-		
-		
 		/** Focused search box with open result dropdown */
 		&.active {
 			border-right: 1px solid @border-color;
@@ -54,6 +52,11 @@
 			&, & input {
 				background-color: @background-color-active;
 			}
+		}
+		/** The closed state search icon slides up to the other icons */
+		&:not(.active) {
+			padding-right: 0;
+			margin-right: -5px;
 		}
 		
 		&.active .show-inactive,
@@ -102,75 +105,10 @@
 			right: 0;
 			left: 0;
 			z-index: 10;
-			padding: 10px 0 5px 0;
 			background-color: @background-color-active;
-			line-height: 35px;
-			font-size: 14px;
 			display: none;
+			padding: 10px 0 5px 0;
 			
-			/** reset list styles */
-			ul, li {  
-				list-style: none;
-				padding: 0;
-				margin: 0;
-				text-indent: 0;
-				width: 100%;
-			}
-			
-			/** 
-				Full width li with aligned items.
-				Underdrop is a full-screen-width background, while the other elements still retain their alignment 
-			*/
-			.li-underdrop {
-				position: fixed;
-				left: 0;
-				width: 100%;
-				background-color: @background-color-active;
-				&:after {
-				    content: '.';
-				    visibility: hidden;
-				}
-			}
-			li a div {
-				z-index: 3;
-			}
-			li a .li-underdrop {
-				z-index: 2;
-			}
-			li a {
-				width: 100%;
-				&, i.fa {
-					color: @navbar-active-text-color;
-				}
-				&:hover, &:hover .li-underdrop {
-					background-color: @navbar-highlight-color;
-					&, i.fa {
-						color: @background-color;
-					}
-				}
-			}
-			
-			.nav-searchresult {
-				display: flex;
-				flex-direction: row;
-				white-space: nowrap;
-				
-				i.fa {
-					margin-left: 10px;
-				}
-				div {
-					margin: 0 5px;
-				}
-				.result-text {
-					overflow: hidden;
-					text-overflow: ellipsis;
-					flex-grow: 2;
-				}
-				.quicksearch-annotation {
-					margin-right: 15px;
-				}
-				
-			}
 		}
 		&.active .nav-quicksearch-results {
 			display: inherit;
@@ -208,13 +146,20 @@
 		position: absolute;
 		top: 50px;
 		left: 0;
-		z-index: 10;
+		z-index: 9;
+		width: 100%;
 		padding: 10px 0 5px 0;
-		background-color: @background-color;
+		background-color: @background-color-active;
 		
+		.nav-column {
+			&:not(:nth-child(3n)) {
+				border-right: 1px solid @border-color;
+			}
+		}
+		.nav-column-footer {
+			border-top: 1px solid @pale-border-color;
+		}
 	}
-	
-	
 	
 	
 }
