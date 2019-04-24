@@ -14,7 +14,8 @@ from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_por
 from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
     OrganisationViewSet, UserView
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group,\
-    statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication
+    statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication,\
+    user_dashboard
 from cosinnus_event.api.views import EventViewSet
 from django_otp.views import LoginView
 
@@ -99,11 +100,15 @@ urlpatterns = [
     url(r'^select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
 ]
 
+if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False):
+    urlpatterns += [
+        url(r'^home/$', user_dashboard.user_dashboard_view, name='user-dashboard'),
+    ]
+
 
 # some user management not allowed in integrated mode and sso-mode
 if not is_integrated_portal() and not is_sso_portal():
     urlpatterns += [
-        url(r'^profile/dashboard/$', widget.user_dashboard, name='user-dashboard'),
         url(r'^profile/edit/$', profile.update_view, name='profile-edit'),
         url(r'^signup/$', user.user_create, name='user-add'),
     ]

@@ -77,12 +77,16 @@ def get_domain_for_portal(portal):
 
 def get_non_cms_root_url():
     """ Tries to get a safe non-cms root URL to redirect to.
-        Will attempt the stream activity page first. If cosinnus_stream is not installed,
+        If the new user dashboard is enabled, will use that.
+        Else, will attempt the stream activity page. If cosinnus_stream is not installed,
         will redirect to the projects page. """
-    try:
-        return reverse('cosinnus:my_stream')
-    except NoReverseMatch:
-        return reverse('cosinnus:group-list')
+    if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False):
+        return reverse('cosinnus:user-dashboard')
+    else:
+        try:
+            return reverse('cosinnus:my_stream')
+        except NoReverseMatch:
+            return reverse('cosinnus:group-list')
 
 
 def safe_redirect(url, request):
