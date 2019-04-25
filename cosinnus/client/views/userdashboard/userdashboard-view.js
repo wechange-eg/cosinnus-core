@@ -1,13 +1,23 @@
 'use strict';
 
 var BaseView = require('views/base/view');
+var GroupWidgetView = require('views/userdashboard/group-widget-view');
 var util = require('lib/util');
 
 module.exports = BaseView.extend({
 
 	app: null,
-	
-    template: require('userdashboard/userdashboard'),
+    template: null,
+    el: null, // will be set to dashboard root manually
+    $el: null, // will be set to dashboard root manually
+    leftBar: '.dashboard-left-bar-content',
+    $leftBar: null, 
+    rightBar: '.dashboard-right-bar-content',
+    $rightBar: null,
+    timeline: '.timeline-root',
+    $timeline: null,
+    
+    groupWidgetView: null,
     
     // will be set to self.options during initialization
     defaults: {
@@ -26,24 +36,55 @@ module.exports = BaseView.extend({
         var self = this;
         self.app = app;
         BaseView.prototype.initialize.call(self, options);
+        self.el = '.v2-dashboard';
+        self.$el = $(self.el);
+        self.$leftBar = self.$el.find(self.leftBar);
+        self.$rightBar = self.$el.find(self.rightBar);
+        self.$timeline = self.$el.find(self.timeline);
         
-    },
-
-    render: function () {
-        var self = this;
-        BaseView.prototype.render.call(self);
-        
-        util.log('*** Rendered user dashboard! ***')
-        return self;
+        self.loadLeftBar();
+        self.loadRightBar();
+        self.loadTimeline();
     },
     
-    /** Extend the template data by the controlView's options and state */
-    getTemplateData: function () {
-        var self = this;
-        var data = BaseView.prototype.getTemplateData.call(self);
-        data['dashydata'] = 'such dashy';
-        return data;
+    /** Loads all widgets on the left bar and only then displays it */
+    loadLeftBar: function () {
+    	var self = this;
+    	self.groupWidgetView = new GroupWidgetView({
+    		el: self.$el.find('.group-widget-root'),
+    	}, self.app);
+    	
+    	var leftBarPromises = [
+    		self.groupWidgetView.load(),
+    	];
+    	Promise.all(leftBarPromises).then(function(){
+    		self.$leftBar.show();
+    	});
+    	
     },
+    
+    /** Receives completed-events from all sub-views in the left bar 
+     * and shows the left bar once all of them are complete */
+    leftBarLoadingReceiver: function() {
+    	
+    	
+    },
+    
+    /** Loads all widgets on the right bar and only then displays it */
+    loadRightBar: function () {
+    	var self = this;
+    	// todo: load widgets
+    },
+    
+    loadTimeline: function () {
+    	var self = this;
+    	// todo: load timeline
+    	
+    	self.$rightBar.show();
+    },
+    
+    
+
     
     /** While we are focused, check for clicks outside to trigger closing the menu */
     checkQuickSearchFocusOut: function (event) {

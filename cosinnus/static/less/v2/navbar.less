@@ -27,7 +27,7 @@
 		text-decoration: none;
 	}
 	a:hover, a:active, a:hover i.fa, a:active i.fa {
-		color: @navbar-highlight-color;
+		color: @text-highlight-color;
 	}
 	i.fa {
 		font-size: 17px;
@@ -50,7 +50,7 @@
 			border-left: 1px solid @border-color;
 			
 			&, & input {
-				background-color: @background-color-active;
+				background-color: @background-color-secondary;
 			}
 		}
 		/** The closed state search icon slides up to the other icons */
@@ -67,7 +67,7 @@
 		/** Highlight search button on hover and when active */
 		&.active .nav-button-search i.fa,
 		.nav-search-box:hover + div .nav-button-search i.fa {
-			color: @navbar-highlight-color; 	
+			color: @text-highlight-color; 	
 		}
 		
 		input.nav-search-box {
@@ -88,7 +88,7 @@
 		/** The dropdown frame of search results shown as the user is typing */
 		.dropdown-underdrop {
 			position: fixed;
-			background-color: @background-color-active;
+			background-color: @background-color-secondary;
 			width: 100%;
 			/** height is dynamically set in JS! */
 			top: 50px;
@@ -105,7 +105,7 @@
 			right: 0;
 			left: 0;
 			z-index: 10;
-			background-color: @background-color-active;
+			background-color: @background-color-secondary;
 			display: none;
 			padding: 10px 0 5px 0;
 			
@@ -132,7 +132,7 @@
 	}
 	.nav-button-search {
 		&.active {
-			color: @navbar-highlight-color;
+			color: @text-highlight-color;
 		}
 	}
 	.nav-header-textlink {
@@ -148,8 +148,7 @@
 		left: 0;
 		z-index: 9;
 		width: 100%;
-		padding: 10px 0 5px 0;
-		background-color: @background-color-active;
+		background-color: @background-color-secondary;
 		
 		.nav-column {
 			&:not(:nth-child(3n)) {

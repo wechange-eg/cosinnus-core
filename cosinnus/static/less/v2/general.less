@@ -11,7 +11,7 @@
 	} 
 	
 	.headline {
-		margin: 10px 15px 15px 15px;
+		margin: 20px;
 		font-size: 14px;
 		font-weight: bold;
 		color: @color-primary;
@@ -28,8 +28,9 @@
 		line-height: 26px;
 		text-transform: uppercase;
 	}
+	.headline
 	.label {
-		color: @label-color;
+		color: @color-dark-gray;
 		font-size: 12px;
 		line-height: 18px;
 	}
@@ -54,59 +55,76 @@
 		
 		hr {
 			border-top: 1px solid @pale-border-color;
-			margin: 10px 0;
+			margin: 10px 20px;
 		}
-	}
-	
-	.list-item {
-		width: 100%;
-		display: flex;
-		flex-direction: row;
-		white-space: nowrap;
-		color: @navbar-active-text-color;
-		
-		&:hover, &:hover .li-underdrop {
-			background-color: @navbar-highlight-color;
-			&, i.fa {
-				color: @background-color;
-			}
-		}
-		i.fa {
-			color: @navbar-active-text-color;
-			margin-left: 10px;
-		}
-		div {
-			z-index: 3;
-			margin: 0 5px;
-		}
-		.item-text {
-			overflow: hidden;
-			text-overflow: ellipsis;
-			flex-grow: 2;
-		}
-		.item-subtitle {
-			display: inline-block;
-			color: red;
-			/** TODO: navbar. make this push the item-text up and make a new line in gray under the title. */
-		}
-		.right-side-annotation {
-			margin-right: 15px;
-		}
-		/** 
-			Full width li with aligned items.
-			Underdrop is a full-screen-width background, while the other elements still retain their alignment 
-		*/
-		.li-underdrop {
-			position: fixed;
-			left: 0;
+		.list-item {
 			width: 100%;
-			background-color: @background-color-active;
-			z-index: 2;
-			&:after {
-			    content: '.';
-			    visibility: hidden;
+			display: flex;
+			flex-direction: row;
+			white-space: nowrap;
+			color: @navbar-active-text-color;
+			padding: 0 15px;
+			
+			i.fa {
+				color: @navbar-active-text-color;
+				font-size: 16px;
+			}
+			div {
+				z-index: 3;
+				margin: 0 5px;
+			}
+			.item-text {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				flex-grow: 2;
+			}
+			.item-subtitle {
+				display: inline-block;
+				color: red;
+				/** TODO: navbar. make this push the item-text up and make a new line in gray under the title. */
+			}
+			.right-side-annotation {
+				margin-right: 15px;
+			}
+			/** 
+				Full width li with aligned items.
+				Underdrop is a full-screen-width background, while the other elements still retain their alignment 
+			*/
+			.li-underdrop {
+				position: fixed;
+				left: 0;
+				width: 100%;
+				background-color: @background-color-secondary;
+				z-index: 2;
+				&:after {
+				    content: '.';
+				    visibility: hidden;
+				}
+			}
+			&.list-item-link {
+				color: @text-color-pale;
+				font-size: 12px;
+				&:hover, :active {
+					color: @text-highlight-color;
+					text-decoration: none;
+				}
 			}
 		}
-	}
+		a.list-item:not(.list-item-link) {
+			&:hover, &:hover .li-underdrop {
+				background-color: @text-highlight-color;
+				&, i.fa {
+					color: @background-color;
+				}
+			}
+		}
 	
+	}
+	/** Used with bootstrap rows and cols to override their padding */
+	.narrow-row {
+		margin: 0;
+	}
+	.narrow-column {
+		padding: 0;
+	}
 }

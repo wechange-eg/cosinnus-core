@@ -19,6 +19,7 @@
 	{% include 'cosinnus/map/static_dependencies.html' %}
 {% endblock extrahead %}
 
+{% block body_attributes %}class="v2-dashboard-body"{% endblock body_attributes %}
 
 {% block main_page %}
     <div class="row">
@@ -28,7 +29,56 @@
                        the default settings defined in map.js.  
                       We don't pass a `settings param here because we use all the default ones.`      
         {% endcomment %}
-        <div id="user-dashboard-root" class="user-dashboard-root"></div>
+        
+    	<div class="v2-dashboard">
+    		<div class="row narrow-row">
+			
+				<div class="dashboard-left-bar narrow-column dashboard-column col-xs-12 col-md-3">
+					<div class="dashboard-left-bar-content" style="display: none;">
+						<div class="group-widget-root">
+							groupwidget
+						</div>
+						<div class="ideas-widget-root">
+							ideas
+						</div>
+						<div class="map-widget-root">
+							map
+						</div>
+						<div class="legal-links">
+							links
+						</div>
+					</div>
+				</div>
+				
+				<div class="dashboard-center-bar narrow-column dashboard-column col-xs-12 col-md-6">
+					
+					<div class="dashboard-news-create-frame">
+						<h2 class="headline">{% trans "News" %}</h2>
+					</div>
+					
+					<div class="timeline-root">
+						
+						<div class="timeline-controls">
+							controls				
+						</div>
+						
+						<div class="timeline">
+							TODO: add flashy loading placeholder
+						
+						</div>
+					</div>
+					
+				</div>
+				
+				<div class="dashboard-right-bar narrow-column dashboard-column col-xs-12 col-md-3">
+					<div class="dashboard-right-bar-content" style="display: none;">
+						right bar
+					</div>
+				</div>
+			</div>
+		</div>
+        
+        
         <script>
 		    $('html').on('init:client', function () {
 		        console.log('got init client, now init:module-full-routed');

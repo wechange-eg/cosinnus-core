@@ -295,14 +295,13 @@ var App = function App () {
 
     self.initUserDashboardFromOptions = function (options) {
         // add passed options into params extended over the default options
-    	var el = options.el ? options.el : '#user-dashboard-root';
         var topicsJson = typeof COSINNUS_MAP_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TOPICS_JSON : {};
         var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
         
         if (self.userDashboardView == null) {
         	self.userDashboardView = new UserDashboardView({
         		model: null,
-        		el: el,
+        		el: null,
         		topicsJson: topicsJson,
         		portalInfo: portalInfo,
         	}, 

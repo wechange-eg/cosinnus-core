@@ -1391,6 +1391,24 @@
             });
         },
         
+        /** Will also set the `title` attribute of any button or link to the text of the 
+         *  element pointed at by the `titledby` attribute, or itself's text if `self` is given. */
+        titledby: function(parent) {
+        	if (typeof parent === 'undefined') {
+        		parent = $('body');
+        	}
+        	parent.find('button[titledby], a[titledby]').each(function(idx, el){
+                $el = $(el);
+                var target = $el.attr('titledby');
+                if (target == 'self') {
+                	target = $el;
+                } else {
+                	target = $el.find(target);
+                }
+                $el.attr('title', target.text().trim());
+            });
+        },
+        
         updateQueryString: function(key, value, url) {
             /** Adds/replaces/removes a URL query parameter. 
              * If no URL is given, will use the current browser URL. */
@@ -1601,6 +1619,7 @@ $(function() {
     $.cosinnus.toggleSwitch();
     $.cosinnus.snapToBottom();
     $.cosinnus.addBtnTitles();
+    $.cosinnus.titledby();
     $.cosinnus.addClassChangeTrigger();
     $.cosinnus.fixBootstrapModalScroll();
     $.cosinnus.fixBootstrapMobileNavbar();
