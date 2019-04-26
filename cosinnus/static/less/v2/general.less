@@ -18,17 +18,22 @@
 		letter-spacing: 1px;
 		line-height: 21px;
 		text-transform: uppercase;
+		
+		/** no text select */
+		-webkit-touch-callout: none; /* iOS Safari */
+		-webkit-user-select: none;   /* Chrome/Safari/Opera */
+		-khtml-user-select: none;    /* Konqueror */
+		-moz-user-select: none;      /* Firefox */
+		-ms-user-select: none;       /* IE/Edge */
+		user-select: none;           /* non-prefixed version, currently not supported by any browser */
+		cursor: default;
+		
+		&.headline-big {
+			margin: 15px 15px;
+			font-size: 20px;
+			line-height: 26px;
+		}
 	}
-	.headline-big {
-		margin: 15px 15px;
-		font-weight: bold;
-		color: @color-primary;
-		letter-spacing: 1px;
-		font-size: 20px;
-		line-height: 26px;
-		text-transform: uppercase;
-	}
-	.headline
 	.label {
 		color: @color-dark-gray;
 		font-size: 12px;
@@ -104,15 +109,21 @@
 			&.list-item-link {
 				color: @text-color-pale;
 				font-size: 12px;
-				&:hover, :active {
-					color: @text-highlight-color;
-					text-decoration: none;
-				}
+			}
+			&.list-item-center {
+				text-align: center;
+			}
+		}
+		a.list-item.list-item-link {
+			&:hover, :active {
+				color: @text-highlight-color;
+				text-decoration: none;
 			}
 		}
 		a.list-item:not(.list-item-link) {
 			&:hover, &:hover .li-underdrop {
 				background-color: @text-highlight-color;
+				text-decoration: none;
 				&, i.fa {
 					color: @background-color;
 				}
