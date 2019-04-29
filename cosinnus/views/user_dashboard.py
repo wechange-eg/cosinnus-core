@@ -32,6 +32,9 @@ from django.http.response import JsonResponse, HttpResponseForbidden
 from cosinnus.views.mixins.group import RequireLoggedInMixin
 from cosinnus.models.group import CosinnusGroup
 from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.models.idea import CosinnusIdea
+from django.contrib.contenttypes.models import ContentType
+from cosinnus.models.tagged import LikeObject
 
 
 logger = logging.getLogger('cosinnus')
@@ -83,6 +86,10 @@ class DashboardItem(dict):
                 self['icon'] = 'fa-sitemap' if obj.type == CosinnusGroup.TYPE_SOCIETY else 'fa-group'
                 self['text'] = obj.name
                 self['url'] = obj.get_absolute_url()
+            elif type(obj) is CosinnusIdea:
+                self['icon'] = 'fa-lightbulb-o'
+                self['text'] = obj.title
+                self['url'] = obj.get_absolute_url()
     
     
 
@@ -117,6 +124,20 @@ class GroupWidgetView(BaseUserDashboardWidgetView):
         return {'group_clusters': clusters}
 
 api_user_groups = GroupWidgetView.as_view()
+
+
+class LikedIdeasWidgetView(BaseUserDashboardWidgetView):
+    """ Shows all unlimited (for now) ideas the user likes. """
+    
+    def get_data(self, *kwargs):
+        idea_ct = ContentType.objects.get_for_model(CosinnusIdea)
+        likeobjects = LikeObject.objects.filter(user=self.request.user, content_type=idea_ct) 
+        liked_ideas_ids = likeobjects.values_list('object_id', flat=True)
+        liked_ideas = CosinnusIdea.objects.filter(id__in=liked_ideas_ids)
+        ideas = [DashboardItem(idea) for idea in liked_ideas]
+        return {'items': ideas}
+
+api_user_liked_ideas = LikedIdeasWidgetView.as_view()
 
 
 

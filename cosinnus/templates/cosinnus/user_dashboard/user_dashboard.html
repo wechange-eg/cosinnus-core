@@ -1,8 +1,6 @@
 {% extends "cosinnus/base.html" %}
 {% load i18n thumbnail cosinnus_tags %}
 
-{% block html_attributes %}style="overflow: hidden;"{% endblock html_attributes %}
-
 {% block page_title %}{% trans "Home" %}{% endblock %}
 
 {% block og_url %}{{ block.super }}{% endblock og_url %}
@@ -21,70 +19,68 @@
 
 {% block body_attributes %}class="v2-dashboard-body"{% endblock body_attributes %}
 
+{% block container_classes %}v2-dashboard{% endblock container_classes %}
+
 {% block main_page %}
-    <div class="row">
     	{% include 'cosinnus/common/internet_explorer_not_supported.html' %}
     
-        {% comment %} Some settings for this map are initialized in the extraheader, and passed in a router.js, and uses a lot of
+        {% comment %} Some settings for the dashboard are initialized in the extraheader, and passed in a router.js, and uses a lot of
                        the default settings defined in map.js.  
                       We don't pass a `settings param here because we use all the default ones.`      
         {% endcomment %}
         
-    	<div class="v2-dashboard">
-    		<div class="row narrow-row">
-			
-				<div class="dashboard-left-bar narrow-column dashboard-column col-xs-12 col-md-3">
-					<div class="dashboard-left-bar-content" style="display: none;">
-						<div class="group-widget-root">
-							groupwidget
-						</div>
-						<div class="ideas-widget-root">
-							ideas
-						</div>
-						<div class="map-widget-root">
-							map
-						</div>
-						<div class="legal-links">
-							links
-						</div>
+		<div class="row narrow-row">
+		
+			<div class="dashboard-left-bar narrow-column dashboard-column col-xs-12 col-md-3">
+				<div class="dashboard-left-bar-content" style="display: none;">
+					<div class="group-widget-root">
 					</div>
-				</div>
-				
-				<div class="dashboard-center-bar narrow-column dashboard-column col-xs-12 col-md-6">
-					
-					<div class="dashboard-news-create-frame">
-						<h2 class="headline">{% trans "News" %}</h2>
+					<div class="ideas-widget-root">
 					</div>
-					
-					<div class="timeline-root">
-						
-						<div class="timeline-controls">
-							controls				
-						</div>
-						
-						<div class="timeline">
-							TODO: add flashy loading placeholder
-						
-						</div>
+					<div class="map-widget-root">
+						map
 					</div>
-					
-				</div>
-				
-				<div class="dashboard-right-bar narrow-column dashboard-column col-xs-12 col-md-3">
-					<div class="dashboard-right-bar-content" style="display: none;">
-						right bar
+					<div class="legal-links">
+						links
 					</div>
 				</div>
 			</div>
+			
+			<div class="dashboard-center-bar narrow-column dashboard-column col-xs-12 col-md-6">
+				
+				<div class="dashboard-news-create-frame">
+					<h2 class="headline">{% trans "News" %}</h2>
+				</div>
+				
+				<div class="timeline-root">
+					
+					<div class="timeline-controls">
+						controls				
+					</div>
+					
+					<div class="timeline">
+						TODO: add flashy loading placeholder
+					
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="dashboard-right-bar narrow-column dashboard-column col-xs-12 col-md-3">
+				<div class="dashboard-right-bar-content" style="display: none;">
+					right bar
+				</div>
+			</div>
+			
 		</div>
-        
-        
-        <script>
-		    $('html').on('init:client', function () {
-		        console.log('got init client, now init:module-full-routed');
-		        Backbone.mediator.publish('init:module-user-dashboard', {{ user_dashboard_options_json|safe }});
-		    });
-		</script>
-    </div>
+	</div>
+	
+    
+    <script>
+	    $('html').on('init:client', function () {
+	        console.log('got init client, now init:module-full-routed');
+	        Backbone.mediator.publish('init:module-user-dashboard', {{ user_dashboard_options_json|safe }});
+	    });
+	</script>
 
 {% endblock main_page %}

@@ -1,0 +1,45 @@
+{% import "include/macros.html" as macros %}
+
+<div class="widget-content">
+	<h2 class="headline">
+		{% block title %}{% endblock %}
+	</h2>
+	
+	{% if hadErrors %}
+		<ul class="item-list">
+			<li>
+				<span class="list-item list-item-link list-item-center no-select" href="#" role="button" titledby=".item-text"> 
+		    		<div class="item-text">
+		                {# Translators: __INCLUDE_JS_PO__ #}
+						{% trans "There was an error loading the widget" %}
+		    		</div>
+				</span>
+			</li>
+		</ul>
+	{% else %}
+	
+		{% block content %}
+			<ul class="item-list">
+				{% if items|length > 0 %}
+					{% for item in items %}
+						{{ macros.listItem(item.text, item.url, item.icon) }}
+					{% endfor %}
+				{% else %}
+					{% block empty_content %}
+						<li>
+							<span class="list-item list-item-link list-item-center no-select" href="#" role="button" titledby=".item-text"> 
+					    		<div class="item-text">
+					                {% block empty_message %}
+						                {# Translators: __INCLUDE_JS_PO__ #}
+										{% trans "You are not in any groups or projects yet" %}
+									{% endblock %}
+					    		</div>
+							</span>
+						</li>
+					{% endblock %}
+				{% endif %}
+			</ul>
+		{% endblock %}
+		
+	{% endif %}
+</div>

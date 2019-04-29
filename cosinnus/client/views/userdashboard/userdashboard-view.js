@@ -2,6 +2,7 @@
 
 var BaseView = require('views/base/view');
 var GroupWidgetView = require('views/userdashboard/group-widget-view');
+var IdeasWidgetView = require('views/userdashboard/ideas-widget-view');
 var util = require('lib/util');
 
 module.exports = BaseView.extend({
@@ -53,9 +54,12 @@ module.exports = BaseView.extend({
     	self.groupWidgetView = new GroupWidgetView({
     		el: self.$el.find('.group-widget-root'),
     	}, self.app);
-    	
+    	self.ideasWidgetView = new IdeasWidgetView({
+    		el: self.$el.find('.ideas-widget-root'),
+    	}, self.app);
     	var leftBarPromises = [
     		self.groupWidgetView.load(),
+    		self.ideasWidgetView.load(),
     	];
     	Promise.all(leftBarPromises).then(function(){
     		self.$leftBar.show();

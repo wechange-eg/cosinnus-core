@@ -1,66 +1,46 @@
-{% load i18n %}
+{% extends 'userdashboard/base-widget' %}
 {% import "include/macros.html" as macros %}
 
-<div class="group-widget-content">
-	<h2 class="headline">{% trans "Groups and Projects" %}</h2>
+{% block title %}
+    {# Translators: __INCLUDE_JS_PO__ #}
+	{% trans "Groups and Projects" %}
+{% endblock %}
+
+{% block content %}
 	
-	{% if hadErrors %}
-		<ul class="item-list">
+	<ul class="item-list">
+		{% if group_clusters|length > 0 %}
+			{% for cluster in group_clusters %}
+				{% for item in cluster %}
+					{% if item.hasmorelink %}
+						<li>
+							<a class="list-item list-item-link" href="#" role="button" titledby=".item-text"> 
+								<div id="more-link1" class="item-text">
+					                {# Translators: __INCLUDE_JS_PO__ #}
+									{% trans "Show more Projects of this Group" %}
+								</div>
+							<a>
+						</li>
+					{% else %}
+						{{ macros.listItem(item.text, item.url, item.icon) }}
+					{% endif %}
+				{% endfor %}
+			
+				{% if not loop.last %}
+					<li>
+						<hr>
+					</li>
+				{% endif %}
+			{% endfor %}
+		{% else %}
 			<li>
 				<span class="list-item list-item-link list-item-center no-select" href="#" role="button" titledby=".item-text"> 
 		    		<div class="item-text">
 		                {# Translators: __INCLUDE_JS_PO__ #}
-						{% trans "There was an error loading the widget" %}
+						{% trans "There are no items yet" %}
 		    		</div>
 				</span>
 			</li>
-		</ul>
-	{% else %}
-	
-		<ul class="item-list">
-			{% if group_clusters|length > 0 %}
-				{% for cluster in group_clusters %}
-					{% for item in cluster %}
-						{% if item.hasmorelink %}
-							<li>
-								<a class="list-item list-item-link" href="#" role="button" titledby=".item-text"> 
-									<div id="more-link1" class="item-text">
-						                {# Translators: __INCLUDE_JS_PO__ #}
-										{% trans "Show more Projects of this Group" %}
-									</div>
-								<a>
-							</li>
-						{% else %}
-							<li>
-								<a class="list-item" href="{{ item.url }}" role="button" titledby=".item-text"> 
-									<div>
-						    			<i class="fa fa-fw {{ item.icon }}"></i>
-						    		</div>
-						    		<div class="item-text">
-						    			{{ item.text }} 
-						    		</div>
-								</a>
-							</li>
-						{% endif %}
-					{% endfor %}
-				
-					{% if not loop.last %}
-						<li>
-							<hr>
-						</li>
-					{% endif %}
-				{% endfor %}
-			{% else %}
-				<li>
-					<span class="list-item list-item-link list-item-center no-select" href="#" role="button" titledby=".item-text"> 
-			    		<div class="item-text">
-			                {# Translators: __INCLUDE_JS_PO__ #}
-							{% trans "You are not in any groups or projects yet" %}
-			    		</div>
-					</span>
-				</li>
-			{% endif %}
-		</ul>
-	{% endif %}
-	
-</div>
+		{% endif %}
+	</ul>
+{% endblock %}

@@ -104,6 +104,7 @@ if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False):
     urlpatterns += [
         url(r'^home/$', user_dashboard.user_dashboard_view, name='user-dashboard'),
         url(r'^home/api/user_groups/$', user_dashboard.api_user_groups, name='user-dashboard-api-groups'),
+        url(r'^home/api/user_liked_ideas/$', user_dashboard.api_user_liked_ideas, name='user-dashboard-api-liked-ideas'),
         
     ]
 

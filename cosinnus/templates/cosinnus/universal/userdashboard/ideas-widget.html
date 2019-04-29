@@ -1,0 +1,12 @@
+{% extends 'userdashboard/base-widget' %}
+{% import "include/macros.html" as macros %}
+
+{% block title %}
+    {# Translators: __INCLUDE_JS_PO__ #}
+	{% trans "Ideas I like" %}
+{% endblock %}
+
+{% block empty_message %}
+	{# Translators: __INCLUDE_JS_PO__ #}
+	{% trans "You have not liked any ideas yet" %}
+{% endblock %}

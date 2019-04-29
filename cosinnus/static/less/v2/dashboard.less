@@ -1,28 +1,32 @@
 .v2-dashboard-body {
 	background: @background-color-secondary;
+	padding-top: 50px;
 }
 
 .v2-dashboard {
-	position: fixed;
-	top: 50px;
-	left: 0;
 	width: 100%;
 	background-color: @background-color-secondary;
+	overflow: auto;
 	
 	.dashboard-left-bar, .dashboard-right-bar {
 		background-color: @background-color-secondary;
-						
-		
 	}
+	.widget-content {
+		border-bottom: 1px solid @pale-border-color;
+		padding: 10px 0px;
+	}
+	
 	.dashboard-center-bar {
 		background-color: @background-color;
 		border-right: 1px solid @border-color;
 		border-left: 1px solid @border-color;
+		height: 100vh;
+	}
+	.dashboard-news-create-frame {
+		padding: 10px 0;
 	}
 	.timeline-controls {
 		background-color: @background-color-secondary;
-		
-		
 	}
 	
 }
