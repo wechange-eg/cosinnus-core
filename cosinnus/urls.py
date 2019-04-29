@@ -105,6 +105,7 @@ if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False):
         url(r'^home/$', user_dashboard.user_dashboard_view, name='user-dashboard'),
         url(r'^home/api/user_groups/$', user_dashboard.api_user_groups, name='user-dashboard-api-groups'),
         url(r'^home/api/user_liked_ideas/$', user_dashboard.api_user_liked_ideas, name='user-dashboard-api-liked-ideas'),
+        url(r'^home/api/user_typed_content/(?P<content>[^/]+)/$', user_dashboard.api_user_typed_content, name='user-dashboard-api-typed-content'),
         
     ]
 

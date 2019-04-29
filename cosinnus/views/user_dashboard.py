@@ -28,13 +28,21 @@ from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety, \
     ensure_group_type
 from cosinnus.utils.urls import group_aware_reverse, get_non_cms_root_url
 from django.views.generic.base import View
-from django.http.response import JsonResponse, HttpResponseForbidden
+from django.http.response import JsonResponse, HttpResponseForbidden,\
+    HttpResponseBadRequest
 from cosinnus.views.mixins.group import RequireLoggedInMixin
-from cosinnus.models.group import CosinnusGroup
+from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.utils.group import get_cosinnus_group_model
 from cosinnus.models.idea import CosinnusIdea
 from django.contrib.contenttypes.models import ContentType
-from cosinnus.models.tagged import LikeObject
+from cosinnus.models.tagged import LikeObject, BaseTaggableObjectModel,\
+    BaseHierarchicalTaggableObjectModel, BaseTagObject
+from cosinnus.models.map import SEARCH_MODEL_NAMES_REVERSE
+import inspect
+from cosinnus.utils.filters import exclude_special_folders
+from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
+from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
+from django.db.models.query_utils import Q
 
 
 logger = logging.getLogger('cosinnus')
@@ -90,6 +98,24 @@ class DashboardItem(dict):
                 self['icon'] = 'fa-lightbulb-o'
                 self['text'] = obj.title
                 self['url'] = obj.get_absolute_url()
+            elif BaseTaggableObjectModel in inspect.getmro(obj.__class__):
+                self['icon'] = 'fa-question'
+                self['text'] = obj.title
+                self['url'] = obj.get_absolute_url()
+                if obj.__class__.__name__ == 'Event':
+                    self['icon'] = 'fa-calendar'
+                if obj.__class__.__name__ == 'Etherpad':
+                    self['icon'] = 'fa-file-text-o'
+                if obj.__class__.__name__ == 'Ethercalc':
+                    self['icon'] = 'fa-table'
+                if obj.__class__.__name__ == 'FileEntry':
+                    self['icon'] = 'fa-file'
+                if obj.__class__.__name__ == 'Message':
+                    self['icon'] = 'fa-envelope'
+                if obj.__class__.__name__ == 'TodoEntry':
+                    self['icon'] = 'fa-tasks'
+                if obj.__class__.__name__ == 'Poll':
+                    self['icon'] = 'fa-bar-chart'
     
     
 
@@ -138,6 +164,76 @@ class LikedIdeasWidgetView(BaseUserDashboardWidgetView):
         return {'items': ideas}
 
 api_user_liked_ideas = LikedIdeasWidgetView.as_view()
+
+
+class TypedContentWidgetView(BaseUserDashboardWidgetView):
+    """ Shows all unlimited (for now) ideas the user likes. """
+    
+    def get_data(self, content=None, *kwargs):
+        if not content:
+            return HttpResponseBadRequest('No content type supplied')
+        
+        user = self.request.user
+        model = SEARCH_MODEL_NAMES_REVERSE.get(content, None)
+        # TODO: set by parameter for the "show only from my groups and projects"
+        only_mine = True
+        
+        queryset = None
+        if "model" is "MEssage":
+            return HttpResponseBadRequest('Messages NYI')
+        elif BaseHierarchicalTaggableObjectModel in inspect.getmro(model):
+            queryset = model._default_manager.filter(is_container=False)
+            queryset = exclude_special_folders(queryset)
+        elif BaseTaggableObjectModel in inspect.getmro(model):
+            queryset = model._default_manager.all()
+    
+        else:
+            return HttpResponseBadRequest('Unknown content type supplied: "%s"' % content)
+    
+        ct = ContentType.objects.get_for_model(model)
+        model_name = '%s.%s' % (ct.app_label, ct.model_class().__name__)
+    
+        items = []
+        
+        if queryset:
+            # mix in reflected objects
+            if model_name.lower() in settings.COSINNUS_REFLECTABLE_OBJECTS and \
+                        BaseTaggableObjectModel in inspect.getmro(model):
+                mixin = MixReflectedObjectsMixin()
+                queryset = mixin.mix_queryset(queryset, model, None, user)
+            
+            # always filter for all portals in pool
+            portal_list = [CosinnusPortal.get_current().id] + getattr(settings, 'COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS', [])
+            queryset = queryset.filter(group__portal__id__in=portal_list)
+            
+            user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
+            filter_q = Q(group__pk__in=user_group_ids)
+            # if the switch is on, also include public posts from all portals
+            if not only_mine:
+                filter_q = filter_q | Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
+            queryset = queryset.filter(filter_q)
+
+            
+            # filter for read permissions for user
+            queryset = filter_tagged_object_queryset_for_user(queryset, user)
+            
+            # TODO "last-visited" ordering!
+            queryset = queryset.order_by('-created')
+            
+            
+            # TODO real limiting
+            queryset = queryset[:5]
+            
+            items = [DashboardItem(item) for item in queryset]
+        
+        return {
+            'items': items,
+            'widget_title': model._meta.verbose_name_plural,
+        }
+
+api_user_typed_content = TypedContentWidgetView.as_view()
+
+
 
 
 

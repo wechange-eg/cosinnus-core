@@ -33,7 +33,7 @@ module.exports = BaseView.extend({
      *  Stub to be overridden.
      *  */
     getParamsForFetchRequest: function() {
-    	return {}
+    	return {urlSuffix: null, urlParams: []}
     },
        
     /**
@@ -56,7 +56,14 @@ module.exports = BaseView.extend({
 			self.state['hadErrors'] = false;
 			self.widgetData = {};
 			
-			$.ajax(self.fetchURL, {
+			// build URL
+			var params = self.getParamsForFetchRequest();
+			var url = self.fetchURL + (params.urlSuffix ? params.urlSuffix + '/' : '');
+			if (params.urlParams) {
+				url += '?' + $.param(params.urlParams);
+			}
+			
+			$.ajax(url, {
                 type: 'GET',
                 success: function (response, textStatus, xhr) {
                     util.log('Fetched data for group-widget!')

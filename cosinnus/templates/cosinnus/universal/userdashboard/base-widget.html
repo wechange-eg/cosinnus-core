@@ -1,9 +1,15 @@
 {% import "include/macros.html" as macros %}
 
-<div class="widget-content">
+<div class="widget-content" {% block attrs %}{% endblock %}>
 	<h2 class="headline">
 		{% block title %}{% endblock %}
 	</h2>
+	
+	{% if isMovable or isHidable %}
+		<div class="widget-options">
+			TODO: widg options
+		</div>
+	{% endif %}
 	
 	{% if hadErrors %}
 		<ul class="item-list">
@@ -31,7 +37,7 @@
 					    		<div class="item-text">
 					                {% block empty_message %}
 						                {# Translators: __INCLUDE_JS_PO__ #}
-										{% trans "You are not in any groups or projects yet" %}
+										{% trans "There are no items yet" %}
 									{% endblock %}
 					    		</div>
 							</span>

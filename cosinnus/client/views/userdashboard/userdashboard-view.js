@@ -3,6 +3,7 @@
 var BaseView = require('views/base/view');
 var GroupWidgetView = require('views/userdashboard/group-widget-view');
 var IdeasWidgetView = require('views/userdashboard/ideas-widget-view');
+var TypedContentWidgetView = require('views/userdashboard/typed-content-widget-view');
 var util = require('lib/util');
 
 module.exports = BaseView.extend({
@@ -19,6 +20,10 @@ module.exports = BaseView.extend({
     $timeline: null,
     
     groupWidgetView: null,
+    ideasWidgetView: null,
+    
+    typedContentWidgetTypes: ['pads', 'files', 'messages', 'events', 'todos', 'polls'],
+    typedContentWidgets: {},
     
     // will be set to self.options during initialization
     defaults: {
@@ -57,12 +62,26 @@ module.exports = BaseView.extend({
     	self.ideasWidgetView = new IdeasWidgetView({
     		el: self.$el.find('.ideas-widget-root'),
     	}, self.app);
+    	
     	var leftBarPromises = [
     		self.groupWidgetView.load(),
     		self.ideasWidgetView.load(),
     	];
+    	var rightBarPromises = [];
+    	// for each content type, initialize the widget on that type and load its contents
+    	$.each(self.typedContentWidgetTypes, function(i, type){
+    		self.typedContentWidgets[type] = new TypedContentWidgetView({
+        		elParent: self.$el.find('.typed-widgets-root'),
+        		type: type,
+        	}, self.app);
+    		rightBarPromises.push(self.typedContentWidgets[type].load());
+    	});
+    	
     	Promise.all(leftBarPromises).then(function(){
     		self.$leftBar.show();
+    	});
+    	Promise.all(rightBarPromises).then(function(){
+    		self.$rightBar.show();
     	});
     	
     },
