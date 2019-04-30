@@ -113,7 +113,7 @@ def map_search_endpoint(request, filter_group_id=None):
         return HttpResponseBadRequest('``page`` param must be a positive number or 0!')
     
     # filter for requested model types
-    model_list = [klass for klass,param_name in list(SEARCH_MODEL_NAMES.items()) if params[param_name]]
+    model_list = [klass for klass,param_name in list(SEARCH_MODEL_NAMES.items()) if params.get(param_name, False)]
     sqs = SearchQuerySet().models(*model_list)
     # filter for map bounds (Points are constructed ith (lon, lat)!!!)
     if not params['ignore_location'] and not implicit_ignore_location:

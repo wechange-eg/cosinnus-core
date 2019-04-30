@@ -156,13 +156,13 @@
 
 {% macro listItem(text, url, icon, subtext=null, annotation=null, includeUnderdrop=false, is_emphasized=false) %}
         <li>
-			<a class="list-item" href="{{ url }}" role="button" titledby=".item-text"> 
+			<a class="list-item" href="{{ url }}" role="button" titledby="{% if subtext %}.item-text-primary{% else %}.item-text{% endif %}"> 
 				<div class="item-icon {% if subtext %}item-icon-offset{% endif %}">
 	    			<i class="fa fa-fw {{ icon }}"></i>
 	    		</div>
 	    		{% if subtext %}
 		    		<div class="item-text item-text-dual">
-		    			<div class="text-bold">{{ text }}</div>
+		    			<div class="item-text-primary text-bold">{{ text }}</div>
 		    			<br/>
 		    			{% if subtext['is_date'] %}
 		    				<div class="moment-data-date" data-date="{{ subtext.date }}" data-date-style="short"></div>

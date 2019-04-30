@@ -44,10 +44,61 @@ from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from django.db.models.query_utils import Q
 from django.template.defaultfilters import date as django_date_filter
-
+from cosinnus.templatetags.cosinnus_tags import full_name
 
 logger = logging.getLogger('cosinnus')
 
+
+
+class DashboardItem(dict):
+    
+    icon = None
+    text = None
+    url = None
+    subtext = None
+    is_emphasized = False
+    
+    def __init__(self, obj=None, is_emphasized=False, user=None):
+        if obj:
+            if is_emphasized:
+                self['is_emphasized'] = is_emphasized
+            # smart conversion by known models
+            if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
+                self['icon'] = 'fa-sitemap' if obj.type == CosinnusGroup.TYPE_SOCIETY else 'fa-group'
+                self['text'] = obj.name
+                self['url'] = obj.get_absolute_url()
+            elif type(obj) is CosinnusIdea:
+                self['icon'] = 'fa-lightbulb-o'
+                self['text'] = obj.title
+                self['url'] = obj.get_absolute_url()
+            elif obj._meta.model.__name__ == 'Message':
+                self['icon'] = 'fa-envelope'
+                self['text'] = obj.subject
+                self['url'] = reverse('postman:view_conversation', kwargs={'thread_id': obj.thread_id}) if obj.thread_id else obj.get_absolute_url()
+                self['subtext'] = ', '.join([full_name(participant) for participant in obj.other_participants(user)])
+            elif BaseTaggableObjectModel in inspect.getmro(obj.__class__):
+                self['icon'] = 'fa-question'
+                self['text'] = obj.title
+                self['url'] = obj.get_absolute_url()
+                self['subtext'] = obj.group.name
+                if obj.__class__.__name__ == 'Event':
+                    if obj.state == 2:
+                        self['icon'] = 'fa-calendar-check-o'
+                    else:
+                        self['subtext'] = {'is_date': True, 'date': django_date_filter(obj.from_date, 'Y-m-d')}
+                        self['icon'] = 'fa-calendar'
+                if obj.__class__.__name__ == 'Etherpad':
+                    self['icon'] = 'fa-file-text'
+                if obj.__class__.__name__ == 'Ethercalc':
+                    self['icon'] = 'fa-table'
+                if obj.__class__.__name__ == 'FileEntry':
+                    self['icon'] = 'fa-file'
+                if obj.__class__.__name__ == 'Message':
+                    self['icon'] = 'fa-envelope'
+                if obj.__class__.__name__ == 'TodoEntry':
+                    self['icon'] = 'fa-tasks'
+                if obj.__class__.__name__ == 'Poll':
+                    self['icon'] = 'fa-bar-chart'
 
 
 class UserDashboardView(TemplateView):
@@ -80,52 +131,6 @@ class BaseUserDashboardWidgetView(View):
             'data': self.get_data(**kwargs),
         }
         return JsonResponse(response)
-
-class DashboardItem(dict):
-    
-    icon = None
-    text = None
-    url = None
-    subtext = None
-    is_emphasized = False
-    
-    def __init__(self, obj=None, is_emphasized=False):
-        if obj:
-            if is_emphasized:
-                self['is_emphasized'] = is_emphasized
-            # smart conversion by known models
-            if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
-                self['icon'] = 'fa-sitemap' if obj.type == CosinnusGroup.TYPE_SOCIETY else 'fa-group'
-                self['text'] = obj.name
-                self['url'] = obj.get_absolute_url()
-            elif type(obj) is CosinnusIdea:
-                self['icon'] = 'fa-lightbulb-o'
-                self['text'] = obj.title
-                self['url'] = obj.get_absolute_url()
-            elif BaseTaggableObjectModel in inspect.getmro(obj.__class__):
-                self['icon'] = 'fa-question'
-                self['text'] = obj.title
-                self['url'] = obj.get_absolute_url()
-                self['subtext'] = obj.group.name
-                if obj.__class__.__name__ == 'Event':
-                    if obj.state == 2:
-                        self['icon'] = 'fa-calendar-check-o'
-                    else:
-                        self['subtext'] = {'is_date': True, 'date': django_date_filter(obj.from_date, 'Y-m-d')}
-                        self['icon'] = 'fa-calendar'
-                if obj.__class__.__name__ == 'Etherpad':
-                    self['icon'] = 'fa-file-text'
-                if obj.__class__.__name__ == 'Ethercalc':
-                    self['icon'] = 'fa-table'
-                if obj.__class__.__name__ == 'FileEntry':
-                    self['icon'] = 'fa-file'
-                if obj.__class__.__name__ == 'Message':
-                    self['icon'] = 'fa-envelope'
-                if obj.__class__.__name__ == 'TodoEntry':
-                    self['icon'] = 'fa-tasks'
-                if obj.__class__.__name__ == 'Poll':
-                    self['icon'] = 'fa-bar-chart'
-    
     
 
 class GroupWidgetView(BaseUserDashboardWidgetView):
@@ -198,6 +203,7 @@ class TypedContentWidgetView(BaseUserDashboardWidgetView):
         model_name = '%s.%s' % (ct.app_label, ct.model_class().__name__)
         
         queryset = None
+        skip_filters = False
         if BaseHierarchicalTaggableObjectModel in inspect.getmro(self.model):
             queryset = self.model._default_manager.filter(is_container=False)
             queryset = exclude_special_folders(queryset)
@@ -205,15 +211,15 @@ class TypedContentWidgetView(BaseUserDashboardWidgetView):
             queryset = self.model.objects.all_upcoming()
         elif BaseTaggableObjectModel in inspect.getmro(self.model):
             queryset = self.model._default_manager.all()
-        elif "model" is "MEssage":
-            return {'items':[], 'widget_title': '(error: %s)' % self.model.__name__}
+        elif model_name == "postman.Message":
+            queryset = self.model.objects.inbox(self.request.user)
+            skip_filters = True
         else:
             return {'items':[], 'widget_title': '(error: %s)' % self.model.__name__}
     
-    
+        assert queryset is not None
         items = []
-        
-        if queryset:
+        if not skip_filters:
             # mix in reflected objects
             if model_name.lower() in settings.COSINNUS_REFLECTABLE_OBJECTS and \
                         BaseTaggableObjectModel in inspect.getmro(self.model):
@@ -238,10 +244,10 @@ class TypedContentWidgetView(BaseUserDashboardWidgetView):
             # TODO "last-visited" ordering!
             queryset = queryset.order_by('-created')
             
-            # TODO real limiting
-            queryset = queryset[:5]
-            
-            items = [DashboardItem(item) for item in queryset]
+        # TODO real limiting
+        queryset = queryset[:5]
+        
+        items = [DashboardItem(item, user=self.request.user) for item in queryset]
             
         return {
             'items': items,
