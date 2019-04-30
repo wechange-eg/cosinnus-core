@@ -43,6 +43,7 @@ from cosinnus.utils.filters import exclude_special_folders
 from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from django.db.models.query_utils import Q
+from django.template.defaultfilters import date as django_date_filter
 
 
 logger = logging.getLogger('cosinnus')
@@ -86,9 +87,12 @@ class DashboardItem(dict):
     text = None
     url = None
     subtext = None
+    is_emphasized = False
     
-    def __init__(self, obj=None):
+    def __init__(self, obj=None, is_emphasized=False):
         if obj:
+            if is_emphasized:
+                self['is_emphasized'] = is_emphasized
             # smart conversion by known models
             if type(obj) is get_cosinnus_group_model() or issubclass(obj.__class__, get_cosinnus_group_model()):
                 self['icon'] = 'fa-sitemap' if obj.type == CosinnusGroup.TYPE_SOCIETY else 'fa-group'
@@ -102,10 +106,15 @@ class DashboardItem(dict):
                 self['icon'] = 'fa-question'
                 self['text'] = obj.title
                 self['url'] = obj.get_absolute_url()
+                self['subtext'] = obj.group.name
                 if obj.__class__.__name__ == 'Event':
-                    self['icon'] = 'fa-calendar'
+                    if obj.state == 2:
+                        self['icon'] = 'fa-calendar-check-o'
+                    else:
+                        self['subtext'] = {'is_date': True, 'date': django_date_filter(obj.from_date, 'Y-m-d')}
+                        self['icon'] = 'fa-calendar'
                 if obj.__class__.__name__ == 'Etherpad':
-                    self['icon'] = 'fa-file-text-o'
+                    self['icon'] = 'fa-file-text'
                 if obj.__class__.__name__ == 'Ethercalc':
                     self['icon'] = 'fa-table'
                 if obj.__class__.__name__ == 'FileEntry':
@@ -136,7 +145,7 @@ class GroupWidgetView(BaseUserDashboardWidgetView):
             if society.slug in filter_group_slugs:
                 continue
             
-            items = [DashboardItem(society)]
+            items = [DashboardItem(society, is_emphasized=True)]
             for i in range(len(projects)-1, 0, -1):
                 project = projects[i]
                 if project.parent == society:
@@ -169,38 +178,47 @@ api_user_liked_ideas = LikedIdeasWidgetView.as_view()
 class TypedContentWidgetView(BaseUserDashboardWidgetView):
     """ Shows all unlimited (for now) ideas the user likes. """
     
-    def get_data(self, content=None, *kwargs):
+    model = None 
+    
+    def get(self, request, *args, **kwargs):
+        content = kwargs.pop('content', None)
         if not content:
             return HttpResponseBadRequest('No content type supplied')
+        self.model = SEARCH_MODEL_NAMES_REVERSE.get(content, None)
+        if not self.model:
+            return HttpResponseBadRequest('Unknown content type supplied: "%s"' % content)
         
+        return super(TypedContentWidgetView, self).get(request, *args, **kwargs)
+    
+    def get_data(self, **kwargs):
         user = self.request.user
-        model = SEARCH_MODEL_NAMES_REVERSE.get(content, None)
         # TODO: set by parameter for the "show only from my groups and projects"
         only_mine = True
+        ct = ContentType.objects.get_for_model(self.model)
+        model_name = '%s.%s' % (ct.app_label, ct.model_class().__name__)
         
         queryset = None
-        if "model" is "MEssage":
-            return HttpResponseBadRequest('Messages NYI')
-        elif BaseHierarchicalTaggableObjectModel in inspect.getmro(model):
-            queryset = model._default_manager.filter(is_container=False)
+        if BaseHierarchicalTaggableObjectModel in inspect.getmro(self.model):
+            queryset = self.model._default_manager.filter(is_container=False)
             queryset = exclude_special_folders(queryset)
-        elif BaseTaggableObjectModel in inspect.getmro(model):
-            queryset = model._default_manager.all()
-    
+        elif model_name == 'cosinnus_event.Event':
+            queryset = self.model.objects.all_upcoming()
+        elif BaseTaggableObjectModel in inspect.getmro(self.model):
+            queryset = self.model._default_manager.all()
+        elif "model" is "MEssage":
+            return {'items':[], 'widget_title': '(error: %s)' % self.model.__name__}
         else:
-            return HttpResponseBadRequest('Unknown content type supplied: "%s"' % content)
+            return {'items':[], 'widget_title': '(error: %s)' % self.model.__name__}
     
-        ct = ContentType.objects.get_for_model(model)
-        model_name = '%s.%s' % (ct.app_label, ct.model_class().__name__)
     
         items = []
         
         if queryset:
             # mix in reflected objects
             if model_name.lower() in settings.COSINNUS_REFLECTABLE_OBJECTS and \
-                        BaseTaggableObjectModel in inspect.getmro(model):
+                        BaseTaggableObjectModel in inspect.getmro(self.model):
                 mixin = MixReflectedObjectsMixin()
-                queryset = mixin.mix_queryset(queryset, model, None, user)
+                queryset = mixin.mix_queryset(queryset, self.model, None, user)
             
             # always filter for all portals in pool
             portal_list = [CosinnusPortal.get_current().id] + getattr(settings, 'COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS', [])
@@ -220,15 +238,14 @@ class TypedContentWidgetView(BaseUserDashboardWidgetView):
             # TODO "last-visited" ordering!
             queryset = queryset.order_by('-created')
             
-            
             # TODO real limiting
             queryset = queryset[:5]
             
             items = [DashboardItem(item) for item in queryset]
-        
+            
         return {
             'items': items,
-            'widget_title': model._meta.verbose_name_plural,
+            'widget_title': self.model._meta.verbose_name_plural,
         }
 
 api_user_typed_content = TypedContentWidgetView.as_view()

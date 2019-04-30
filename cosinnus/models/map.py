@@ -522,7 +522,7 @@ except:
     FileEntry = None
     
 try:
-    from cosinnus_message.models import Message #noqa
+    from postman.models import Message #noqa
     SEARCH_MODEL_NAMES.update({
         Message: 'messages',                           
     })
@@ -533,7 +533,7 @@ try:
     #    'messages': NYI,
     #})
 except:
-    FileEntry = None
+    Message = None
 
 try:
     from cosinnus_todo.models import TodoEntry #noqa

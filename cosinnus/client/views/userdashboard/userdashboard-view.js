@@ -81,6 +81,7 @@ module.exports = BaseView.extend({
     		self.$leftBar.show();
     	});
     	Promise.all(rightBarPromises).then(function(){
+        	$.cosinnus.renderMomentDataDate();
     		self.$rightBar.show();
     	});
     	

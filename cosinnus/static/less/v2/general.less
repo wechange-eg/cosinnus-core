@@ -74,19 +74,28 @@
 				color: @navbar-active-text-color;
 				font-size: 16px;
 			}
-			div {
+			&>div {
 				z-index: 3;
-				margin: 0 5px;
+				margin: 0 8px;
+			}
+			.item-icon.item-icon-offset i.fa {
+				vertical-align: middle;
 			}
 			.item-text {
 				overflow: hidden;
 				text-overflow: ellipsis;
 				flex-grow: 2;
+				/** height 36 **/
 			}
-			.item-subtitle {
-				display: inline-block;
-				color: red;
-				/** TODO: navbar. make this push the item-text up and make a new line in gray under the title. */
+			.item-text.item-text-dual {
+				line-height: 18px;
+				padding: 4px 0;
+				div {
+					display: inline-block;
+				}
+			}
+			.text-bold {
+				font-weight: bold;
 			}
 			.right-side-annotation {
 				margin-right: 15px;
