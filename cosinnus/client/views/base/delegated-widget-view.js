@@ -46,7 +46,10 @@ module.exports = BaseView.extend({
     load: function() {
     	var self = this;
     	return new Promise(function(resolve, reject) {
-    		self.loadData().then(self.thisContext(self.render)).then(resolve);
+    		self.loadData().then(self.thisContext(self.render)).then(function(){
+    			util.log('# ### loaded and resolving widget ' + self.widgetId);
+    			resolve();
+    		});
     	});
     },
     
@@ -66,9 +69,9 @@ module.exports = BaseView.extend({
 			$.ajax(url, {
                 type: 'GET',
                 success: function (response, textStatus, xhr) {
-                    util.log('Fetched data for group-widget!')
+                    util.log('# # Fetched data for widget ' + self.widgetId);
+    			
                     if (xhr.status == 200) {
-                    	util.log(response)
                     	self.widgetData = response['data'];
                     } else {
                     	self.state['hadErrors'] = true;

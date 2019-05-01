@@ -132,7 +132,6 @@ module.exports = ContentControlView.extend({
         'click .reset-type-and-topic-filters': 'resetAllClicked', // use this to only reset the filters box: 'resetTypeAndTopicFiltersClicked',
         'click .active-filters': 'showFilterPanel',
         'click .check-ignore-location': 'markSearchBoxSearchable',
-        'click .onoffswitch-text-label': 'onOffSwitchLabelClicked',
         
         'keyup .q': 'handleTyping',
         'keydown .q': 'handleKeyDown',
@@ -648,11 +647,6 @@ module.exports = ContentControlView.extend({
         // publish the opening intent for the detail view (it does not need to be in our collection)
         this.detailResult = result;
         Backbone.mediator.publish('result:detail-opened', result);
-    },
-    
-    /** Trigger for state button elements */
-    onOffSwitchLabelClicked: function (event) {
-        $(event.target).next().find('input[type="checkbox"]').click()
     },
     
     /** State switcher for the filter frame */

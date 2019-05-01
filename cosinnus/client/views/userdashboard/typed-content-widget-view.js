@@ -32,8 +32,9 @@ module.exports = DelegatedWidgetView.extend({
     initialize: function (options, app) {
         var self = this;
         self.app = app;
-        DelegatedWidgetView.prototype.initialize.call(self, options);
         self.type = options.type; // would have happened in initialize already but let's be explicit
+        DelegatedWidgetView.prototype.initialize.call(self, options);
+        self.state.sortIndex = options.sortIndex;
     },
     
     /** Overriding base function for unique widget ID. */
@@ -51,7 +52,8 @@ module.exports = DelegatedWidgetView.extend({
         var self = this;
         DelegatedWidgetView.prototype.render.call(self);
         
-        util.log('*** Rendered group-widget! ***')
+        util.log('# ## Rendered widget ' + self.widgetId);
+    			
         return self;
     },
     

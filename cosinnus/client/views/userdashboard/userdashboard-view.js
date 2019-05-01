@@ -67,44 +67,44 @@ module.exports = BaseView.extend({
     		self.groupWidgetView.load(),
     		self.ideasWidgetView.load(),
     	];
-    	var rightBarPromises = [];
-    	// for each content type, initialize the widget on that type and load its contents
-    	$.each(self.typedContentWidgetTypes, function(i, type){
-    		self.typedContentWidgets[type] = new TypedContentWidgetView({
-        		elParent: self.$el.find('.typed-widgets-root'),
-        		type: type,
-        	}, self.app);
-    		rightBarPromises.push(self.typedContentWidgets[type].load());
-    	});
-    	
     	Promise.all(leftBarPromises).then(function(){
     		self.$leftBar.show();
     	});
-    	Promise.all(rightBarPromises).then(function(){
-        	$.cosinnus.renderMomentDataDate();
-    		self.$rightBar.show();
-    	});
-    	
-    },
-    
-    /** Receives completed-events from all sub-views in the left bar 
-     * and shows the left bar once all of them are complete */
-    leftBarLoadingReceiver: function() {
-    	
     	
     },
     
     /** Loads all widgets on the right bar and only then displays it */
     loadRightBar: function () {
     	var self = this;
-    	// todo: load widgets
+
+    	var rightBarPromises = [];
+    	// for each content type, initialize the widget on that type and load its contents
+    	$.each(self.typedContentWidgetTypes, function(i, type){
+    		self.typedContentWidgets[type] = new TypedContentWidgetView({
+        		elParent: self.$el.find('.typed-widgets-root'),
+        		type: type,
+        		sortIndex: i,
+        	}, self.app);
+    		rightBarPromises.push(self.typedContentWidgets[type].load());
+    	});
+    	Promise.all(rightBarPromises).then(function(){
+        	$.cosinnus.renderMomentDataDate();
+        	self.sortRightBarWidgets();
+    		self.$rightBar.show();
+    		util.log('# #### showing right bar.')
+    	});
+    },
+    
+    sortRightBarWidgets: function () {
+    	this.$rightBar.find('div.widget-content').sortElements(function(a, b){
+    		return $(a).attr('data-sort-index') > $(b).attr('data-sort-index') ? 1 : -1;
+    	});
     },
     
     loadTimeline: function () {
     	var self = this;
     	// todo: load timeline
     	
-    	self.$rightBar.show();
     },
     
     

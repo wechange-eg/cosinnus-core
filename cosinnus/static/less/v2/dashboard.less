@@ -1,9 +1,10 @@
 .v2-dashboard-body {
 	background: @background-color-secondary;
-	padding-top: 50px;
+	padding: 0;
 }
 
 .v2-dashboard {
+	margin-top: 50px;
 	width: 100%;
 	background-color: @background-color-secondary;
 	overflow: auto;
@@ -11,22 +12,50 @@
 	.dashboard-left-bar, .dashboard-right-bar {
 		background-color: @background-color-secondary;
 	}
-	.widget-content {
-		border-bottom: 1px solid @pale-border-color;
-		padding: 10px 0px;
+	.dashboard-left-bar {
+		border-right: 1px solid @border-color;
+		margin-right: -1px;
 	}
-	
+	.dashboard-right-bar {
+		border-left: 1px solid @border-color;
+		margin-left: -1px;
+	}
 	.dashboard-center-bar {
 		background-color: @background-color;
 		border-right: 1px solid @border-color;
 		border-left: 1px solid @border-color;
 		height: 100vh;
 	}
+	
+	.widget-content {
+		border-bottom: 1px solid @pale-border-color;
+		padding: 10px 0px;
+	}
 	.dashboard-news-create-frame {
-		padding: 10px 0;
+		padding-top: 10px;
+		border-bottom: 1px solid @border-color;
+		
+		.news-textbox-frame {
+			margin: 0 20px 20px 20px;
+		}
+		.news-textbox {
+			width: 100%;
+			height: 58px;
+			padding: 20px;
+			border: 1px solid @text-color;
+			cursor: text;
+		}
+		.news-textbox-icon {
+			float: right;
+			font-size: 20px;
+			margin-top: -3px;
+		}
 	}
 	.timeline-controls {
 		background-color: @background-color-secondary;
+		border-bottom: 1px solid @pale-border-color;
+		padding: 17px 20px;
+		color: @text-color-pale;
 	}
 	
 }

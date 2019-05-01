@@ -1277,66 +1277,6 @@
     bottom: 10px;
 }
 
-.onoffswitch {
-    position: relative; width: 28px;
-    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
-}
-.onoffswitch-checkbox {
-    display: none;
-}
-.onoffswitch-label {
-    display: block; overflow: hidden; cursor: pointer;
-    border: 1px solid @map-action-button-color; border-radius: 16px;
-}
-.onoffswitch-inner {
-    display: block; width: 200%; margin-left: -100%;
-    transition: margin 0.3s ease-in 0s;
-}
-.onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 15px; padding: 0; line-height: 15px;
-    font-size: 16px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
-    box-sizing: border-box;
-}
-.onoffswitch-inner:before {
-    content: "";
-    padding-left: 10px;
-    background-color: @map-action-button-color; color: #FFFFFF;
-}
-.onoffswitch-inner:after {
-    content: "";
-    padding-right: 10px;
-    background-color: #FFFFFF; color: #666666;
-    text-align: right;
-}
-.onoffswitch-switch {
-    display: block; width: 10px; margin: 3px;
-    background: #FFFFFF;
-    position: absolute; top: 0; bottom: 0;
-    right: 12px;
-    border: 1px solid @map-action-button-color; border-radius: 16px;
-    transition: all 0.3s ease-in 0s; 
-}
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    border: 1px solid #FFF; 
-}
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
-    margin-left: 0;
-}
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px; 
-}
-.onoffswitch-text-label {
-    vertical-align: top;
-    font-size: 14px;
-    padding: 2px 10px 0 0;
-    cursor: pointer;
-    
-    -webkit-user-select: none; /* Safari */        
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+/Edge */
-    user-select: none; /* Standard */
-}
-
 
 /** Mobile Styles, mostly hiding stuff or making it larger */
 /** Declare a container visible-by-current view by giving it a class like this:

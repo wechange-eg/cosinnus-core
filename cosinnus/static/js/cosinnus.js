@@ -551,7 +551,13 @@
                 }
             });
         },
-
+        
+        /** Click triggers for labels of onoffSwitches */
+        onoffSwitch: function() {
+        	$('body').on('click', '.onoffswitch-text-label', function(event){
+        		$(event.target).parent().find('input[type="checkbox"]').click();
+        	});
+        },
 
         todosSelect : function() {
             $('body').on('click','.fa-star-o',function() {
@@ -1592,6 +1598,7 @@ if (!String.prototype.format) {
 
 $(function() {
     $.cosinnus.checkBox();
+    $.cosinnus.onoffSwitch();
     $.cosinnus.fadedown();
     $.cosinnus.selectors();
     $.cosinnus.fullcalendar();
