@@ -29,7 +29,7 @@ from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety, \
 from cosinnus.utils.urls import group_aware_reverse, get_non_cms_root_url
 from django.views.generic.base import View
 from django.http.response import JsonResponse, HttpResponseForbidden,\
-    HttpResponseBadRequest
+    HttpResponseBadRequest, HttpResponse
 from cosinnus.views.mixins.group import RequireLoggedInMixin
 from cosinnus.models.group import CosinnusGroup, CosinnusPortal
 from cosinnus.utils.group import get_cosinnus_group_model
@@ -44,6 +44,8 @@ from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from django.db.models.query_utils import Q
 from cosinnus.models.user_dashboard import DashboardItem
+import itertools
+from numpy import sort
 
 logger = logging.getLogger('cosinnus')
 
@@ -141,7 +143,68 @@ class LikedIdeasWidgetView(BaseUserDashboardWidgetView):
 api_user_liked_ideas = LikedIdeasWidgetView.as_view()
 
 
-class TypedContentWidgetView(BaseUserDashboardWidgetView):
+class ModelRetrievalMixin(object):
+    """ Mixin for all dashboard views requiring content data """
+    
+    def fetch_queryset_for_user(self, model, user, sort_key=None, only_mine=True):
+        """ Retrieves a queryset of sorted content items for a user, for a given model.
+            @param model: An actual model. Supported are all `BaseTaggableObjectModel`s,
+                `CosinnusIdea`, and `postman.Message`
+            @param user: Querysets are filtered by view permission for this user
+            @param sort_key: (optional) the key for the `order_by` clause for the queryset
+            @param only_mine: if True, will only show objects that belong to groups or projects
+                the `user` is a member of. 
+                If False, will include all visible items in this portal for the user. 
+        """
+        
+        ct = ContentType.objects.get_for_model(model)
+        model_name = '%s.%s' % (ct.app_label, ct.model_class().__name__)
+        
+        queryset = None
+        skip_filters = False
+        if BaseHierarchicalTaggableObjectModel in inspect.getmro(model):
+            queryset = model._default_manager.filter(is_container=False)
+            queryset = exclude_special_folders(queryset)
+        elif model_name == 'cosinnus_event.Event':
+            queryset = model.objects.all_upcoming()
+        elif model is CosinnusIdea or BaseTaggableObjectModel in inspect.getmro(model):
+            queryset = model._default_manager.all()
+        elif model_name == "postman.Message":
+            queryset = model.objects.inbox(user)
+            skip_filters = True
+        else:
+            return None
+    
+        assert queryset is not None
+        if not skip_filters:
+            # mix in reflected objects
+            if model_name.lower() in settings.COSINNUS_REFLECTABLE_OBJECTS and \
+                        BaseTaggableObjectModel in inspect.getmro(model):
+                mixin = MixReflectedObjectsMixin()
+                queryset = mixin.mix_queryset(queryset, model, None, user)
+            
+            # always filter for all portals in pool
+            portal_list = [CosinnusPortal.get_current().id] + getattr(settings, 'COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS', [])
+            if model is CosinnusIdea:
+                queryset = queryset.filter(portal__id__in=portal_list)
+            else:
+                queryset = queryset.filter(group__portal__id__in=portal_list)
+                user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
+                filter_q = Q(group__pk__in=user_group_ids)
+                # if the switch is on, also include public posts from all portals
+                if not only_mine:
+                    filter_q = filter_q | Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
+                queryset = queryset.filter(filter_q)
+    
+                # filter for read permissions for user
+                queryset = filter_tagged_object_queryset_for_user(queryset, user)
+            
+            if sort_key:
+                queryset = queryset.order_by('-created')
+        return queryset
+    
+
+class TypedContentWidgetView(ModelRetrievalMixin, BaseUserDashboardWidgetView):
     """ Shows all unlimited (for now) ideas the user likes. """
     
     model = None 
@@ -157,54 +220,15 @@ class TypedContentWidgetView(BaseUserDashboardWidgetView):
         return super(TypedContentWidgetView, self).get(request, *args, **kwargs)
     
     def get_data(self, **kwargs):
-        user = self.request.user
         # TODO: set by parameter for the "show only from my groups and projects"
         only_mine = True
-        ct = ContentType.objects.get_for_model(self.model)
-        model_name = '%s.%s' % (ct.app_label, ct.model_class().__name__)
+        # TODO "last-visited" ordering!
+        sort_key = '-created' 
         
-        queryset = None
-        skip_filters = False
-        if BaseHierarchicalTaggableObjectModel in inspect.getmro(self.model):
-            queryset = self.model._default_manager.filter(is_container=False)
-            queryset = exclude_special_folders(queryset)
-        elif model_name == 'cosinnus_event.Event':
-            queryset = self.model.objects.all_upcoming()
-        elif BaseTaggableObjectModel in inspect.getmro(self.model):
-            queryset = self.model._default_manager.all()
-        elif model_name == "postman.Message":
-            queryset = self.model.objects.inbox(self.request.user)
-            skip_filters = True
-        else:
+        queryset = self.fetch_queryset_for_user(self.model, self.request.user, sort_key=sort_key, only_mine=only_mine)
+        if queryset is None:
             return {'items':[], 'widget_title': '(error: %s)' % self.model.__name__}
-    
-        assert queryset is not None
-        items = []
-        if not skip_filters:
-            # mix in reflected objects
-            if model_name.lower() in settings.COSINNUS_REFLECTABLE_OBJECTS and \
-                        BaseTaggableObjectModel in inspect.getmro(self.model):
-                mixin = MixReflectedObjectsMixin()
-                queryset = mixin.mix_queryset(queryset, self.model, None, user)
-            
-            # always filter for all portals in pool
-            portal_list = [CosinnusPortal.get_current().id] + getattr(settings, 'COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS', [])
-            queryset = queryset.filter(group__portal__id__in=portal_list)
-            
-            user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
-            filter_q = Q(group__pk__in=user_group_ids)
-            # if the switch is on, also include public posts from all portals
-            if not only_mine:
-                filter_q = filter_q | Q(media_tag__visibility=BaseTagObject.VISIBILITY_ALL)
-            queryset = queryset.filter(filter_q)
-
-            
-            # filter for read permissions for user
-            queryset = filter_tagged_object_queryset_for_user(queryset, user)
-            
-            # TODO "last-visited" ordering!
-            queryset = queryset.order_by('-created')
-            
+        
         # TODO real limiting
         queryset = queryset[:3]
         
@@ -219,5 +243,112 @@ api_user_typed_content = TypedContentWidgetView.as_view()
 
 
 
+class TimelineView(ModelRetrievalMixin, View):
+    """ Timeline view for a user.
+        Returns items as rendered HTML. 
+        Accepts content type filters and pagination parameters. """
+    
+    http_method_names = ['get',]
+    
+    # which models can be displaed, as found in `SEARCH_MODEL_NAMES_REVERSE`
+    content_types = ['polls', 'todos', 'files', 'pads', 'ideas', 'events', 'notes',]
+    # the key by which the timeline stream is ordered. must be present on *all* models
+    sort_key = '-created' # TODO: add "last_activity" to BaseTaggableModel!
+    # how many items from a queryset can be retrieved for a single stream
+    
+    page_size = None
+    default_page_size = 5
+    max_page_size = 20
+    
+    offset = None
+    default_offset = 0
+    max_offset = 100
+    
+    only_mine = None
+    only_mine_default = False
+    
+    filter_model = None # if set, only show items of this model
+    user = None # set at initialization
+    
+    
+    def get(self, request, *args, **kwargs):
+        # require authenticated user
+        self.user = request.user
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden('Not authenticated.')
+        content = kwargs.pop('content', None)
+        if content:
+            self.filter_model = SEARCH_MODEL_NAMES_REVERSE.get(content, None)
+            if not self.filter_model:
+                return HttpResponseBadRequest('Unknown content type supplied: "%s"' % content)
+        
+        self.page_size = min(request.GET.get('page_size', self.default_page_size), self.max_page_size)
+        self.offset = min(request.GET.get('offset', self.default_offset), self.max_offset)
+        self.only_mine = request.GET.get('only_mine', self.only_mine_default)
+        
+        items = self.get_items()
+        rendered_items = [self.render_item(item) for item in items]
+        response = {
+            'items': rendered_items,
+            'count': len(rendered_items),
+            'has_more': len(rendered_items) == self.page_size,
+            'only_mine': self.only_mine,
+        }
+        return JsonResponse(response)
+    
+    def get_items(self):
+        """ Returns a paginated list of items as mixture of different models, in sorted order """
+        if self.filter_model:
+            single_querysets = [self._get_queryset_for_model(self.filter_model)]
+        else:
+            single_querysets = []
+            for content_type in self.content_types:
+                content_model = SEARCH_MODEL_NAMES_REVERSE.get(content_type, None)
+                if content_model is None:
+                    if settings.DEBUG:
+                        raise ImproperlyConfigured('Could not find content model for timeline content type "%s"' % content_type)
+                    continue
+                single_querysets.append(self._get_queryset_for_model(content_model))
+                
+        items = self._mix_items_from_querysets(*single_querysets)
+        return items
+    
+    def render_item(self, item):
+        """ Renders an item using the template defined in its model's `timeline_template` attribute """
+        template = getattr(item, 'timeline_template', None)
+        if template:
+            html = render_to_string(template, {'item'}, self.request) 
+        else:
+            if settings.DEBUG:
+                raise ImproperlyConfigured('No `timeline_template` attribute found for item model "%s"' % item._meta.model)
+            html = '<!-- Error: Timeline content for model "%s" could not be rendered.' % item._meta.model
+        return html
+    
+    def _get_queryset_for_model(self, model):
+        """ Returns a *sorted* queryset of items of a model for a user """
+        queryset = self.fetch_queryset_for_user(model, self.user, sort_key=self.sort_key, only_mine=self.only_mine)
+        if queryset is None:
+            if settings.DEBUG:
+                raise ImproperlyConfigured('No queryset could be matched for model "%s"' % model)
+            return []
+        return queryset
+    
+    def _mix_items_from_querysets(self, *streams):
+        """ Will zip items from multiple querysts (each for a single model)
+            into a single item list, while retainining an overall sort-order.
+            Will peek all of the querysets and pick the next lowest-sorted item
+            (honoring the given offset), until enough items for the page size are collected,
+            or all querysets are exhausted. """
+        # TODO
+        # (we can assume each qs is sorted)
+        
+        # placeholder, just takes the first 10 of all qs
+        cut_streams = [stream[:10] for stream in streams]
+        reverse = '-' in self.sort_key
+        sort_key = self.sort_key.replace('-', '')
+        items = sorted(itertools.chain(*cut_streams), key=lambda item: getattr(item, sort_key), reverse=reverse) # placeholder
+        return items
+    
+api_timeline = TimelineView.as_view()
 
 

@@ -563,6 +563,20 @@ try:
 except:
     Poll = None
     
+
+try:
+    from cosinnus_note.models import Note #noqa
+    SEARCH_MODEL_NAMES.update({
+        Note: 'notes',                           
+    })
+    SHORT_MODEL_MAP.update({
+        11: Note,
+    })
+    #SEARCH_RESULT_DETAIL_TYPE_MAP.update({
+    #    'notes': NYI,
+    #})
+except:
+    Note = None
     
     
     
