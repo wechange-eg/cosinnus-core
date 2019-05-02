@@ -46,6 +46,8 @@ from django.db.models.query_utils import Q
 from cosinnus.models.user_dashboard import DashboardItem
 import itertools
 from numpy import sort
+from cosinnus.utils.dates import timestamp_from_datetime,\
+    datetime_from_timestamp
 
 logger = logging.getLogger('cosinnus')
 
@@ -252,17 +254,18 @@ class TimelineView(ModelRetrievalMixin, View):
     
     # which models can be displaed, as found in `SEARCH_MODEL_NAMES_REVERSE`
     content_types = ['polls', 'todos', 'files', 'pads', 'ideas', 'events', 'notes',]
+    
     # the key by which the timeline stream is ordered. must be present on *all* models
     sort_key = '-created' # TODO: add "last_activity" to BaseTaggableModel!
-    # how many items from a queryset can be retrieved for a single stream
     
     page_size = None
     default_page_size = 5
+    min_page_size = 1
     max_page_size = 20
     
-    offset = None
-    default_offset = 0
-    max_offset = 100
+    # if given, will only return items *older* than the given timestamp!
+    offset_timestamp = None
+    default_offset_timestamp = None
     
     only_mine = None
     only_mine_default = False
@@ -272,6 +275,18 @@ class TimelineView(ModelRetrievalMixin, View):
     
     
     def get(self, request, *args, **kwargs):
+        """ Accepted GET-params: 
+            `page_size` int (optional): Number of items to be returned. If a value larger than
+                `self.max_page_size` is supplied, `self.max_page_size`is used instead.
+                Default: `self.default_page_size`
+            `offset_timestamp` float (optional): If supplied, only items older than the given 
+                timestamp are returned. Items with the exact timestamp are excluded.
+                Use this parameter in conjunction with the return value `last_timestamp` for 
+                pagination.
+            `only_mine` bool (optional): if True, will only show objects that belong to groups 
+                or projects the `user` is a member of.  If False, will include all visible items 
+                in this portal for the user.
+        """
         # require authenticated user
         self.user = request.user
         if not request.user.is_authenticated:
@@ -282,19 +297,39 @@ class TimelineView(ModelRetrievalMixin, View):
             if not self.filter_model:
                 return HttpResponseBadRequest('Unknown content type supplied: "%s"' % content)
         
-        self.page_size = min(request.GET.get('page_size', self.default_page_size), self.max_page_size)
-        self.offset = min(request.GET.get('offset', self.default_offset), self.max_offset)
+        self.page_size = max(self.min_page_size, min(self.max_page_size, request.GET.get('page_size', self.default_page_size)))
+        self.offset_timestamp = request.GET.get('offset_timestamp', self.default_offset_timestamp)
+        if self.offset_timestamp is not None and isinstance(self.offset_timestamp, six.string_types):
+            self.offset_timestamp = float(self.offset_timestamp)
         self.only_mine = request.GET.get('only_mine', self.only_mine_default)
         
         items = self.get_items()
+        response = self.render_to_response(items)
+        return response
+    
+    def render_to_response(self, items):
+        """ Renders a list of items and returns a JsonResponse with the items 
+            and additional meta info.
+            Returned data:
+            @return: 
+                `items`: list[str]: a list of rendered html items
+                `count` int: count of the number of rendered items
+                `has_more` bool: if more items are potentially available
+                `last_timestamp` float: the timestamp of the oldest returned item. 
+                    used as offset for the next paginated request. Will be None
+                    if 0 items were returned. 
+             """
         rendered_items = [self.render_item(item) for item in items]
+        last_timestamp = None
+        if len(items) > 0:
+            last_timestamp = timestamp_from_datetime(getattr(items[-1], self.sort_key_natural))
         response = {
             'items': rendered_items,
             'count': len(rendered_items),
             'has_more': len(rendered_items) == self.page_size,
-            'only_mine': self.only_mine,
+            'last_timestamp': last_timestamp,
         }
-        return JsonResponse(response)
+        return JsonResponse(response)        
     
     def get_items(self):
         """ Returns a paginated list of items as mixture of different models, in sorted order """
@@ -317,7 +352,8 @@ class TimelineView(ModelRetrievalMixin, View):
         """ Renders an item using the template defined in its model's `timeline_template` attribute """
         template = getattr(item, 'timeline_template', None)
         if template:
-            html = render_to_string(template, {'item'}, self.request) 
+            context = {'item': item}
+            html = render_to_string(template, context, self.request) 
         else:
             if settings.DEBUG:
                 raise ImproperlyConfigured('No `timeline_template` attribute found for item model "%s"' % item._meta.model)
@@ -339,15 +375,27 @@ class TimelineView(ModelRetrievalMixin, View):
             Will peek all of the querysets and pick the next lowest-sorted item
             (honoring the given offset), until enough items for the page size are collected,
             or all querysets are exhausted. """
-        # TODO
-        # (we can assume each qs is sorted)
-        
-        # placeholder, just takes the first 10 of all qs
-        cut_streams = [stream[:10] for stream in streams]
+            
         reverse = '-' in self.sort_key
-        sort_key = self.sort_key.replace('-', '')
-        items = sorted(itertools.chain(*cut_streams), key=lambda item: getattr(item, sort_key), reverse=reverse) # placeholder
+        # apply timestamp offset
+        if self.offset_timestamp:
+            offset_datetime = datetime_from_timestamp(self.offset_timestamp)
+            streams = [stream.filter(**{'%s__lt' % self.sort_key_natural: offset_datetime}) for stream in streams]
+            
+        # TODO: implement peeking and picking from querysets!
+        logger.warn('NYI: Proper queryset picking is not implemented! Performance will suffer in production!')
+        
+        # placeholder, just takes all items
+        cut_streams = [list(stream) for stream in streams]
+        items = sorted(itertools.chain(*cut_streams), key=lambda item: getattr(item, self.sort_key_natural), reverse=reverse) # placeholder
+        # placeholder: apply pagination
+        items = items[:self.page_size]
         return items
+    
+    @property
+    def sort_key_natural(self):
+        """ Returns the sort_key without '-' """
+        return self.sort_key.replace('-', '')
     
 api_timeline = TimelineView.as_view()
 
