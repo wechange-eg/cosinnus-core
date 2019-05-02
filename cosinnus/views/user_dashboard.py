@@ -48,6 +48,8 @@ import itertools
 from numpy import sort
 from cosinnus.utils.dates import timestamp_from_datetime,\
     datetime_from_timestamp
+from cosinnus.utils.pagination import QuerysetLazyCombiner
+from cosinnus.utils.functions import is_number
 
 logger = logging.getLogger('cosinnus')
 
@@ -261,7 +263,7 @@ class TimelineView(ModelRetrievalMixin, View):
     page_size = None
     default_page_size = 5
     min_page_size = 1
-    max_page_size = 20
+    max_page_size = 200
     
     # if given, will only return items *older* than the given timestamp!
     offset_timestamp = None
@@ -297,10 +299,17 @@ class TimelineView(ModelRetrievalMixin, View):
             if not self.filter_model:
                 return HttpResponseBadRequest('Unknown content type supplied: "%s"' % content)
         
-        self.page_size = max(self.min_page_size, min(self.max_page_size, request.GET.get('page_size', self.default_page_size)))
+        self.page_size = int(request.GET.get('page_size', self.default_page_size))
+        if not is_number(self.page_size):
+            return HttpResponseBadRequest('Malformed parameter: "page_size": %s' % self.page_size)
+        self.page_size = max(self.min_page_size, min(self.max_page_size, self.page_size))
+        
         self.offset_timestamp = request.GET.get('offset_timestamp', self.default_offset_timestamp)
+        if self.offset_timestamp is not None and not is_number(self.offset_timestamp):
+            return HttpResponseBadRequest('Malformed parameter: "offset_timestamp"')
         if self.offset_timestamp is not None and isinstance(self.offset_timestamp, six.string_types):
             self.offset_timestamp = float(self.offset_timestamp)
+            
         self.only_mine = request.GET.get('only_mine', self.only_mine_default)
         
         items = self.get_items()
@@ -381,15 +390,18 @@ class TimelineView(ModelRetrievalMixin, View):
         if self.offset_timestamp:
             offset_datetime = datetime_from_timestamp(self.offset_timestamp)
             streams = [stream.filter(**{'%s__lt' % self.sort_key_natural: offset_datetime}) for stream in streams]
-            
-        # TODO: implement peeking and picking from querysets!
-        logger.warn('NYI: Proper queryset picking is not implemented! Performance will suffer in production!')
         
-        # placeholder, just takes all items
-        cut_streams = [list(stream) for stream in streams]
-        items = sorted(itertools.chain(*cut_streams), key=lambda item: getattr(item, self.sort_key_natural), reverse=reverse) # placeholder
-        # placeholder: apply pagination
-        items = items[:self.page_size]
+        if not getattr(settings, 'COSINNUS_V2_DASHBOARD_USE_NAIVE_FETCHING', False):
+            queryset_iterator = QuerysetLazyCombiner(streams, self.sort_key_natural, self.page_size, reverse=reverse)
+            items = list(itertools.islice(queryset_iterator, self.page_size)) 
+        else:    
+            logger.warn('Using naive queryset picking! Performance may suffer in production!')
+            # placeholder, just takes all items
+            cut_streams = [stream[:self.page_size] for stream in streams]
+            items = sorted(itertools.chain(*cut_streams), key=lambda item: getattr(item, self.sort_key_natural), reverse=reverse) # placeholder
+            # placeholder: apply pagination
+            items = items[:self.page_size]
+            
         return items
     
     @property
