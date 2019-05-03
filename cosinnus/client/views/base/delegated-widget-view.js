@@ -33,7 +33,7 @@ module.exports = BaseView.extend({
      *  Stub to be overridden.
      *  */
     getParamsForFetchRequest: function() {
-    	return {urlSuffix: null, urlParams: []}
+    	return {urlSuffix: null, urlParams: {}}
     },
        
     /**

@@ -50,6 +50,7 @@ from cosinnus.utils.dates import timestamp_from_datetime,\
     datetime_from_timestamp
 from cosinnus.utils.pagination import QuerysetLazyCombiner
 from cosinnus.utils.functions import is_number
+import math
 
 logger = logging.getLogger('cosinnus')
 
@@ -261,7 +262,7 @@ class TimelineView(ModelRetrievalMixin, View):
     sort_key = '-created' # TODO: add "last_activity" to BaseTaggableModel!
     
     page_size = None
-    default_page_size = 5
+    default_page_size = 10
     min_page_size = 1
     max_page_size = 200
     
@@ -311,6 +312,8 @@ class TimelineView(ModelRetrievalMixin, View):
             self.offset_timestamp = float(self.offset_timestamp)
             
         self.only_mine = request.GET.get('only_mine', self.only_mine_default)
+        if isinstance(self.only_mine, six.string_types):
+            self.only_mine = bool(json.loads(self.only_mine))
         
         items = self.get_items()
         response = self.render_to_response(items)
@@ -338,7 +341,7 @@ class TimelineView(ModelRetrievalMixin, View):
             'has_more': len(rendered_items) == self.page_size,
             'last_timestamp': last_timestamp,
         }
-        return JsonResponse(response)        
+        return JsonResponse({'data': response})        
     
     def get_items(self):
         """ Returns a paginated list of items as mixture of different models, in sorted order """
@@ -392,14 +395,13 @@ class TimelineView(ModelRetrievalMixin, View):
             streams = [stream.filter(**{'%s__lt' % self.sort_key_natural: offset_datetime}) for stream in streams]
         
         if not getattr(settings, 'COSINNUS_V2_DASHBOARD_USE_NAIVE_FETCHING', False):
-            queryset_iterator = QuerysetLazyCombiner(streams, self.sort_key_natural, self.page_size, reverse=reverse)
+            queryset_iterator = QuerysetLazyCombiner(streams, self.sort_key_natural, math.ceil(self.page_size/2.0), reverse=reverse)
             items = list(itertools.islice(queryset_iterator, self.page_size)) 
         else:    
             logger.warn('Using naive queryset picking! Performance may suffer in production!')
-            # placeholder, just takes all items
+            # naive just takes `page_size` items from each stream, then sorts and takes first `page_size` items
             cut_streams = [stream[:self.page_size] for stream in streams]
             items = sorted(itertools.chain(*cut_streams), key=lambda item: getattr(item, self.sort_key_natural), reverse=reverse) # placeholder
-            # placeholder: apply pagination
             items = items[:self.page_size]
             
         return items

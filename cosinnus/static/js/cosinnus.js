@@ -554,7 +554,7 @@
         
         /** Click triggers for labels of onoffSwitches */
         onoffSwitch: function() {
-        	$('body').on('click', '.onoffswitch-text-label', function(event){
+        	$('body').on('click', '.onoffswitch-frame', function(event){
         		$(event.target).parent().find('input[type="checkbox"]').click();
         	});
         },

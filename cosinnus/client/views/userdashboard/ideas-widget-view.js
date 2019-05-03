@@ -30,7 +30,7 @@ module.exports = DelegatedWidgetView.extend({
     
     /** Overriding params for request */
     getParamsForFetchRequest: function() {
-    	return {urlSuffix: null, urlParams: []}
+    	return {urlSuffix: null, urlParams: {}}
     },
     
 

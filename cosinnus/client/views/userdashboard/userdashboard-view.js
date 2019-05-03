@@ -1,9 +1,12 @@
 'use strict';
 
 var BaseView = require('views/base/view');
+
+var TimelineView = require('views/userdashboard/timeline-view');
 var GroupWidgetView = require('views/userdashboard/group-widget-view');
 var IdeasWidgetView = require('views/userdashboard/ideas-widget-view');
 var TypedContentWidgetView = require('views/userdashboard/typed-content-widget-view');
+
 var util = require('lib/util');
 
 module.exports = BaseView.extend({
@@ -18,6 +21,8 @@ module.exports = BaseView.extend({
     $rightBar: null,
     timeline: '.timeline-root',
     $timeline: null,
+    
+    timelineView: null,
     
     groupWidgetView: null,
     ideasWidgetView: null,
@@ -103,8 +108,10 @@ module.exports = BaseView.extend({
     
     loadTimeline: function () {
     	var self = this;
-    	// todo: load timeline
-    	
+    	self.timelineView = new TimelineView({
+    		el: self.$el.find('.timeline-root'),
+    	}, self.app);
+    	self.timelineView.load();
     },
     
     
