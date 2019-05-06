@@ -29,13 +29,20 @@
 <div class="timeline-loading-placeholder" style="display: none;">
 	<span style="color: green">TODO: loading placeholder</span>
 </div>
+
 <div class="timeline-error-message" style="display: none;">
-	<span style="color: red">TODO: error message</span>
-	<a class="retry-load">
-        {# Translators: __INCLUDE_JS_PO__ #}
-        {% trans "Retry" %}
-    </a>
+	<div>
+		{# Translators: __INCLUDE_JS_PO__ #}
+        {% trans "We could not load more data at this time." %}
+		<a href="#" class="retry-load">
+	        {# Translators: __INCLUDE_JS_PO__ #}
+	        {% trans "Retry" %}
+	    </a>
+    </div>
 </div>
+
 <div class="timeline-final-dot" style="display: none;">
-	<span style="color: blue">TODO: final dot</span>
+	<div>
+		<i class="fa fa-fw fa-circle"></i>
+	</div>
 </div>

@@ -49,6 +49,8 @@ module.exports = BaseView.extend({
         BaseView.prototype.initialize.call(self, options);
         self.el = '.v2-dashboard';
         self.$el = $(self.el);
+        self.$el.removeClass('loading');
+        
         self.$leftBar = self.$el.find(self.leftBar);
         self.$rightBar = self.$el.find(self.rightBar);
         self.$timeline = self.$el.find(self.timeline);

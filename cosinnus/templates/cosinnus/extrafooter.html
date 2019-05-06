@@ -1,6 +1,6 @@
 {% if not request.GET.disableextrascripts %}
 
-{% if SETTINGS.PIWIK_SERVER_URL and SETTINGS.PIWIK_SITE_ID %}
+{% if SETTINGS.PIWIK_SERVER_URL and SETTINGS.PIWIK_SITE_ID and not SETTINGS.DEBUG %}
 <!-- Piwik -->
 <script type="text/javascript">
   var _paq = _paq || [];

@@ -4,6 +4,11 @@
 }
 
 .v2-dashboard {
+	/** dashboard is hidden until all html is loaded to stop flickering */
+	&.loading {
+		opacity: 0; 
+	}
+	
 	margin-top: 50px;
 	width: 100%;
 	background-color: @background-color-secondary;
@@ -12,6 +17,7 @@
 	.dashboard-left-bar, .dashboard-right-bar {
 		background-color: @background-color-secondary;
 	}
+	/**
 	.dashboard-left-bar {
 		border-right: 1px solid @border-color;
 		margin-right: -1px;
@@ -20,6 +26,7 @@
 		border-left: 1px solid @border-color;
 		margin-left: -1px;
 	}
+	*/
 	.dashboard-center-bar {
 		background-color: @background-color;
 		border-right: 1px solid @border-color;
@@ -57,11 +64,30 @@
 		color: @text-color-pale;
 	}
 	.timeline {
+		
+	
 		.timeline-item {
 			padding: 20px;
 			border-bottom: 1px solid green;
 		}
-	
+	}
+	.timeline-error-message {
+		color: @text-color-pale;
+		a {
+			color: @text-highlight-color;
+		}
+		
+		text-align: center;
+		padding: 10px 20px;
+	}
+	.timeline-final-dot {
+		color: @pale-border-color;
+		padding: 10px 20px;
+		text-align: center;
+		
+		i.fa {
+			font-size: 10px;
+		}
 	}
 }
 

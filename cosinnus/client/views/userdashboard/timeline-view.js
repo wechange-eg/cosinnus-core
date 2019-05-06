@@ -103,8 +103,8 @@ module.exports = BaseView.extend({
 	    		self.hideErrorMessage();
 	    		self.loadData().then(function(data){
 	    			util.log('# timeline received data and will handle them');
-	    			self.handleData(data);
 	    			self.enableInfiniteScroll();
+	    			self.handleData(data);
 	    		}).catch(function(message){
 	    			self.handleError(message);
 	    		}).finally(function(){
@@ -203,17 +203,27 @@ module.exports = BaseView.extend({
     },
     
     enableInfiniteScroll: function () {
-    	
+    	var self = this;
+        $(window).off('scroll').on('scroll', self.thisContext(this.onScroll));
     },
     
     disableInfiniteScroll: function () {
-    	
+        $(window).off('scroll');
     },
     
     toggleOnlyMineClicked: function (event) {
     	var self = this;
     	self.options.onlyMine = event.target.checked;
     	self.resetAndLoad();
+    },
+    
+    /** Handles events for infinite scroll */
+    onScroll: function (event) {
+    	var self = this;
+    	var $window = $(window);
+    	if ($window.height() + $window.scrollTop() >= $(document).height() - 250) {
+        	self.load();  // load() handles state checks itself so it's safe to call multiple times.
+    	}
     },
 
 });
