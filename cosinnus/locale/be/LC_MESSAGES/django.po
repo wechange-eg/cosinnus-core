@@ -1,0 +1,5141 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-25 12:15+0100\n"
+"PO-Revision-Date: 2019-05-06 16:53+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: be\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#, python-format
+msgid "1 %(object)s was deleted successfully"
+msgstr "1 %(object)s паспяхова выдалены"
+
+#, python-format
+msgid "%(number)d %(objects)s were deleted successfully"
+msgstr "%(number)d %(objects)s паспяхова выдаленыя"
+
+msgid "Delete selected entries"
+msgstr "Выдаліць абраныя запісы"
+
+msgid ""
+"A token with the same code already exists! Please choose a different string "
+"for your token."
+msgstr ""
+"Маркер з такім жа кодам ужо існуе! Калі ласка, абярыце іншы радок для вашага "
+"маркера."
+
+msgid "The following Projects were converted to Groups:"
+msgstr "Наступныя праекты былі ператвораныя ў групы:"
+
+msgid "Convert selected Projects to Groups"
+msgstr "Ператварыць выбраныя праекты ў групы"
+
+msgid "The following Users were added to this portal:"
+msgstr "Наступныя карыстальнікі(-цы) былі дададзены да гэтага партала:"
+
+msgid "Add all members to current Portal"
+msgstr "Дадаць усіх чальцоў да бягучага партала"
+
+msgid "Move selected teams to current portal"
+msgstr "Перамясціць выбраныя каманды на бягучы партал"
+
+msgid "Move selected teams to current portal and message members"
+msgstr ""
+"Перамясціць выбраныя каманды на бягучы партал і даслаць чальцам паведамленне"
+
+msgid "In addition, the members were removed from all other Portals."
+msgstr "Акрамя таго, чальцы былі выдаленыя з усіх іншых парталаў."
+
+msgid "Move all members to current Portal (removes all other memberships!)"
+msgstr ""
+"Перамясціць усіх чальцоў на бягучы партал (адмяняе ўсе іншыя членствы!)"
+
+msgid "Move selected groups and their subprojects to current portal"
+msgstr "Перамясціць выбраныя групы і іх падпраекты на бягучы партал"
+
+msgid ""
+"Move selected groups and their subprojects to current portal and message "
+"members"
+msgstr ""
+"Перамясціць выбраныя групы і іх падпраекты на бягучы партал і даслаць "
+"чальцам паведамленне"
+
+msgid "The following Groups were converted to Projects:"
+msgstr "Наступныя групы былі ператвораныя ў праекты:"
+
+msgid "Convert selected Groups to Projects"
+msgstr "Ператварыць выбраныя групы ў праекты"
+
+msgid "ToS Accepted"
+msgstr "Умовы карыстання прынятыя"
+
+msgid "ToS not Accepted"
+msgstr "Умовы карыстання не прынятыя"
+
+msgid "User Logged In"
+msgstr "Карыстальнік(-ца) увайшоў(-ла)"
+
+msgid "Logged in before"
+msgstr "Раней уваходзіў(-ла)"
+
+msgid "Never logged in"
+msgstr "Ніколі не ўваходзіў(-ла)"
+
+msgid "Has Logged In"
+msgstr "Увайшоў(-ла)"
+
+msgid "ToS accepted?"
+msgstr "Умовы карыстання прынятыя?"
+
+#, python-format
+msgid "%d Users were deactivated successfully."
+msgstr "%d карыстальнікаў(-ц) паспяхова дэактывавана."
+
+msgid "Deactivate users (will keep all all items they created on the site)"
+msgstr ""
+"Дэактываваць карыстальнікаў(-ц) (усе запісы, якія яны стварылі на сайце, "
+"застануцца)"
+
+#, python-format
+msgid ""
+"%(sender_name)s would like you to come join the project \"%(team_name)s\" on "
+"%(portal_name)s! Click the project's name below to check it out and "
+"collaborate!"
+msgstr ""
+"%(sender_name)s жадае, каб Вы далучыліся да праекта \"%(team_name)s\" на "
+"%(portal_name)s! Націсніце на імя праекта ніжэй, каб паглядзець запрашэнне і "
+"пачаць супрацоўніцтва!"
+
+msgid "Mobilität"
+msgstr "Мабільнасць"
+
+msgid "Energie"
+msgstr "Энергія"
+
+msgid "Umwelt"
+msgstr "Навакольнае асяроддзе"
+
+msgid "Bildung"
+msgstr "Адукацыя"
+
+msgid "Gesundheit"
+msgstr "Здароўе"
+
+msgid "Ernährung und Konsum"
+msgstr "Харчаванне і спажыванне"
+
+msgid "Kunst und Kultur"
+msgstr "Мастацтва і культура"
+
+msgid "Geld und Finanzen"
+msgstr "Грошы і фінансы"
+
+msgid "Arbeit und Recht"
+msgstr "Праца і права"
+
+msgid "Bauen und Wohnen"
+msgstr "Будаўніцтва і жыллё"
+
+msgid "Klimaschutz"
+msgstr "Абарона клімату"
+
+msgid ""
+"Only team members can see the content you requested. Apply to become a "
+"member now!"
+msgstr ""
+"Толькі чальцы каманды могуць бачыць матэрыялы, якія Вы запыталі. Падайце "
+"запыт на членства!"
+
+msgid ""
+"Only registered members can see the content you requested! Log in or create "
+"an account now!"
+msgstr ""
+"Толькі зарэгістраваныя чальцы могуць бачыць матэрыялы, якія Вы запыталі! "
+"Увайдзіце або стварыце акаўнт!"
+
+msgid "Please log in to access this page."
+msgstr "Калі ласка, увайдзіце для атрымання доступу да гэтай старонкі."
+
+#, python-format
+msgid ""
+"The page you tried to access belongs to an app that has been deactivated for "
+"this %(team_type)s. If you feel this is in error, ask the %(team_type)s's "
+"administrator to reactivate the app."
+msgstr ""
+"Старонка, да якой вы хацелі атрымаць доступ, належыць да прыкладання, якое "
+"было дэактывавана для гэтай %(team_type)s. Калі Вы лічыце, што гэта памылка, "
+"папрасіце адміністратара %(team_type)s зноў актываваць прыкладанне."
+
+msgid "No team provided"
+msgstr "Каманда не вызначана"
+
+msgid ""
+"This team no longer resides under the URL you entered. You have been "
+"redirected automatically to the current location."
+msgstr ""
+"Гэта каманда больш не знаходзіцца па ўведзенай Вамі спасылцы. Вы аўтаматычна "
+"перанакіраваны ў яе бягучае месцазнаходжанне."
+
+msgid "This account is no longer active. You have been logged out."
+msgstr "Гэта акаўнт ужо не актыўны. Вы выйшлі з акаўнту."
+
+#, python-format
+msgid ""
+"You have tried to log in too many times. You may try to log in again in: "
+"%(duration)s."
+msgstr ""
+"Вы спрабавалі ўвайсці зашмат разоў. Вы можаце паспрабаваць увайсці зноў "
+"праз: %(duration)s."
+
+msgid "A user requested to become a member of this team (admins only)"
+msgstr ""
+"Карыстальнік(-ца) даслаў(-ла) запыт на членства ў гэтай камандзе (толькі для "
+"адміністратараў)"
+
+msgid "New membership request"
+msgstr "Новы запыт на членства"
+
+#, python-format
+msgid "\"%(sender_name)s\" requested to become a member of %(team_name)s."
+msgstr "\"%(sender_name)s\" даслаў(-ла) запыт на членства ў %(team_name)s."
+
+msgid "Membership request accepted"
+msgstr "Запыт на членства прыняты"
+
+#, python-format
+msgid "Your membership request for %(team_name)s was accepted!"
+msgstr "Ваш запыт на членства ў %(team_name)s прыняты!"
+
+msgid "Membership request declined"
+msgstr "Запыт на членства адхілены"
+
+#, python-format
+msgid ""
+"We're sorry, but your membership request for %(team_name)s was declined."
+msgstr "На жаль, Ваш запыт на членства ў %(team_name)s адхілены."
+
+#, python-format
+msgid "Your membership request for %(team_name)s was declined."
+msgstr "Ваш запыт на членства ў %(team_name)s адхілены."
+
+msgid "A user has accepted the invitation to this team (admins only)"
+msgstr ""
+"Карыстальнік(-ца) прыняў(-ла) запрашэнне ў гэту каманду (толькі для "
+"адміністратараў)"
+
+#, python-format
+msgid "%(sender_name)s accepted the invitation"
+msgstr "%(sender_name)s прыняў(-ла) запрашэнне"
+
+#, python-format
+msgid "\"%(sender_name)s\" has accepted the invitation to %(team_name)s."
+msgstr "\"%(sender_name)s\" прыняў(-ла) запрашэнне ў %(team_name)s."
+
+msgid "A user has declined the invitation to this team (admins only)"
+msgstr ""
+"Карыстальнік(-ца) адхіліў(-ла) запрашэнне ў гэту каманду (толькі для "
+"адміністратараў)"
+
+#, python-format
+msgid "%(sender_name)s declined the invitation"
+msgstr "%(sender_name)s адхіліў(-ла) запрашэнне"
+
+#, python-format
+msgid "\"%(sender_name)s\" has declined the invitation to %(team_name)s."
+msgstr "\"%(sender_name)s\" адхіліў(-ла) запрашэнне ў %(team_name)s."
+
+msgid "You were made an admin of this team"
+msgstr "Вас зрабілі адміністратарам гэтай каманды"
+
+msgid "Made you an admin"
+msgstr "Зрабіў(-ла) Вас адміністратарам"
+
+#, python-format
+msgid ""
+"%(sender_name)s made you an admin of \"%(team_name)s\" on %(portal_name)s!"
+msgstr ""
+"%(sender_name)s зрабіў(-ла) Вас адміністратарам \"%(team_name)s\" на "
+"%(portal_name)s!"
+
+msgid "Your admin status for this team was revoked"
+msgstr "Ваш статус адміністратара ў гэтай камандзе адкліканы"
+
+msgid "Revoked your admin status"
+msgstr "Адклікаў(-ла) Ваш статус адміністратара"
+
+#, python-format
+msgid ""
+"%(sender_name)s revoked your admin status of \"%(team_name)s\" on "
+"%(portal_name)s!"
+msgstr ""
+"%(sender_name)s адклікаў Ваш статус адміністратара \"%(team_name)s\" на "
+"%(portal_name)s!"
+
+msgid "You were tagged in a post, document or other item"
+msgstr "Вас пазначылі ў публікацыі, дакуменце або іншым элеменце"
+
+#, python-format
+msgid "%(sender_name)s tagged you in"
+msgstr "%(sender_name)s пазначыў(-ла) Вас у"
+
+#, python-format
+msgid "You were tagged by %(sender_name)s"
+msgstr "Вас пазначыў(-ла) %(sender_name)s"
+
+#, python-format
+msgid "You were tagged in \"%(object_name)s\" in %(team_name)s."
+msgstr "Вас пазначылі ў \"%(object_name)s\" у %(team_name)s."
+
+msgid "Invited you"
+msgstr "Запрасіў(-ла) Вас"
+
+#, python-format
+msgid ""
+"%(sender_name)s invited you to join \"%(team_name)s\" on %(portal_name)s! "
+"<br/><br/> To join, please click on the link below. You will be redirected "
+"to the portal, where you can view and accept the invitation."
+msgstr ""
+"%(sender_name)s запрасіў(-ла) Вас далучыцца да \"%(team_name)s\" на "
+"%(portal_name)s! <br/><br/> Каб далучыцца, калі ласка, націсніце на спасылку "
+"ніжэй. Вы будзеце перанакіраваны на партал, дзе можна прагледзець і прыняць "
+"запрашэнне."
+
+#, python-format
+msgid ""
+"%(sender_name)s has invited you to join \"%(team_name)s\" on %(portal_name)s!"
+msgstr ""
+"%(sender_name)s запрасіў(-ла) Вас далучыцца да \"%(team_name)s\" на "
+"%(portal_name)s!"
+
+msgid "Accept invitation"
+msgstr "Прынять запрашэнне"
+
+msgid "View invitation"
+msgstr "Прагледзець запрашэнне"
+
+msgid "New link to the moved project/group"
+msgstr "Новая спасылка на перамешчаны праект/групу"
+
+#, python-format
+msgid ""
+"One of your projects/groups were moved to the portal \"%(portal_name)s\"! "
+"<br/><br/> Your user account for this portal is the same as for the old one "
+"- you do not need to register a new account! <br/><br/>All of your old URLs "
+"will continue to work and redirect you to the correct page on the new portal."
+msgstr ""
+"Адзін з Вашых праектаў/груп быў перамешчаны на партал \"%(portal_name)s\"! "
+"<br/><br/> Ваш акаўнт для гэтага парталу супадае з Вашым старым акаўнтам - "
+"Вам не трэба рэгістравацца зноў!  <br/><br/> Усе Вашы старыя URL-адрасы "
+"будуць па-ранейшаму працаваць і перанакіруюць Вас на правільную старонку на "
+"новым партале."
+
+#, python-format
+msgid "\"%(team_name)s\" was moved to %(portal_name)s!"
+msgstr "\"%(team_name)s\" была перамешчаная на %(portal_name)s!"
+
+msgid "Created"
+msgstr "Створана"
+
+#, python-format
+msgid ""
+"%(sender_name)s just created the project/group \"%(team_name)s\" on "
+"%(portal_name)s!"
+msgstr ""
+"%(sender_name)s толькі што стварыў праект/групу \"%(team_name)s\" на "
+"%(portal_name)s!"
+
+msgid "Has created"
+msgstr "Стварыў(-ла)"
+
+#, python-format
+msgid ""
+"%(sender_name)s just created the idea \"%(object_name)s\" on %(portal_name)s!"
+msgstr ""
+"%(sender_name)s толькі што стварыў(-ла) ідэю \"%(object_name)s\" на "
+"%(portal_name)s!"
+
+#, python-format
+msgid "%(sender_name)s just created the idea \"%(object_name)s\"!"
+msgstr "%(sender_name)s толькі што стварыў(-ла) ідэю \"%(object_name)s\"!"
+
+#, python-format
+msgid ""
+"%(sender_name)s just created the project \"%(team_name)s\" on "
+"%(portal_name)s from an idea you follow! <br/><br/> To check it out, please "
+"click on the link below. There you can see if you would like to join the "
+"project."
+msgstr ""
+"%(sender_name)s толькі што стварыў(-ла) праект \"%(team_name)s\" на "
+"%(portal_name)s з ідэі, за якой Вы сочыце! <br/><br/>Каб яго прагледзець, "
+"калі ласка, прайдзіце па спасылцы ніжэй. Так Вы зразумееце, ці хочаце "
+"далучыцца да праекта."
+
+#, python-format
+msgid ""
+"%(sender_name)s just created the project \"%(team_name)s\" from an idea you "
+"follow!"
+msgstr ""
+"%(sender_name)s толькі што стварыў(-ла) праект \"%(team_name)s\" з ідэі, за "
+"якой Вы сочыце!"
+
+msgid "Deutsch--NATIVE-LANGUAGE"
+msgstr "Deutsch"
+
+msgid "English--NATIVE-LANGUAGE"
+msgstr "English"
+
+msgid "Russian--NATIVE-LANGUAGE"
+msgstr "Русский"
+
+msgid "Ukrainian--NATIVE-LANGUAGE"
+msgstr "Українська"
+
+msgid "French--NATIVE-LANGUAGE"
+msgstr "Français"
+
+msgid "Polish--NATIVE-LANGUAGE"
+msgstr "Polski"
+
+msgid "Attachments"
+msgstr "Далучэнні"
+
+msgid "Type the title and/or type of attachment"
+msgstr "Надрукуйце назву і/або тып далучэння"
+
+msgid "Sort_field"
+msgstr "Поле сартавання"
+
+msgid "Enter a number for sort order"
+msgstr "Увядзіце нумар для парадку сартавання"
+
+msgid "Widget label"
+msgstr "Метка віджэта"
+
+msgid "Enter a title for the widget"
+msgstr "Увядзіце назву віджэта"
+
+msgid "Widget icon"
+msgstr "Іконка віджэта"
+
+msgid "A font-awesome icon for the widget"
+msgstr "Font Awesome іконка віджэта"
+
+msgid "Link label"
+msgstr "Метка спасылкі"
+
+msgid "Enter a label for the widget-button"
+msgstr "Увядзіце метку для кнопкі віджэта"
+
+msgid "Text"
+msgstr "Тэкст"
+
+msgid "Enter a description"
+msgstr "Дадайце апісанне"
+
+msgid "All"
+msgstr "Усе"
+
+msgid "Not assigned"
+msgstr "Не прызначана"
+
+msgid "Any date"
+msgstr "Любая дата"
+
+msgid "Today"
+msgstr "Сёння"
+
+msgid "This week"
+msgstr "На гэтым тыдні"
+
+msgid "Next week"
+msgstr "На наступным тыдні"
+
+msgid "Next month"
+msgstr "У наступным месяцы"
+
+msgid "This doesn't seem to be a valid Youtube or Vimeo link!"
+msgstr "Выглядае, что гэта несапраўдная спасылка на Youtube або Vimeo!"
+
+msgid "This doesn't seem to be a Twitter username!"
+msgstr "Выглядае, што гэта не імя карыстальніка(-цы) Twitter!"
+
+msgid ""
+"This doesn't seem to be a valid widget ID or embed HTML code from Twitter!"
+msgstr ""
+"Выглядае, што гэта несапраўдны ідэнтыфікатар віджэта ці HTML-код для ўстаўкі "
+"з Twitter!"
+
+msgid ""
+"This doesn't seem to be a valid Flickr Gallery link! It should be in the "
+"form of \"https://www.flickr.com/photos/username/sets/1234567890\"!"
+msgstr ""
+"Выглядае, што гэта несапраўдная спасылка на галерэю Flickr! Яна павінна быць "
+"наступнага фармату: \"https://www.flickr.com/photos/username/"
+"sets/1234567890\"!"
+
+msgid "Name"
+msgstr "Імя"
+
+msgid "Limit to teams"
+msgstr "Абмежаваць камандамі"
+
+msgid "My teams"
+msgstr "Мае каманды"
+
+msgid "Other teams"
+msgstr "Іншыя каманды"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Like"
+msgstr "Упадабаць"
+
+msgid "Persons"
+msgstr "Асобы"
+
+msgid "email address"
+msgstr "адрас электроннай пошты"
+
+msgid "first name"
+msgstr "імя"
+
+msgid "This email address already has a registered user!"
+msgstr ""
+"Гэты адрас электроннай пошты ўжо выкарыстоўваецца зарэгістраваным(-ай) "
+"карыстальнікам(-цай)!"
+
+msgid ""
+"Please enter a correct email and password. Note that both fields may be case-"
+"sensitive."
+msgstr ""
+"Калі ласка, увядзіце сапраўдныя адрас электроннай пошты і пароль. Звярніце "
+"ўвагу, што абодва палі могуць быць рэгістраадчувальнымі."
+
+msgid ""
+"Your Web browser doesn't appear to have cookies enabled. Cookies are "
+"required for logging in."
+msgstr ""
+"Выглядае, што ў Вашым аглядальніку не ўключаныя кукі. Кукі патрэбныя для "
+"ўваходу на сайт."
+
+msgid "This account is inactive."
+msgstr "Гэты акаўнт неактыўны."
+
+msgid "Hi,"
+msgstr "Вітаем,"
+
+msgid "Click the following link to change which emails you receive:"
+msgstr ""
+"Перайдзіце па наступнай спасылцы, каб наладзіць, якія электронныя лісты Вы "
+"атрымліваеце:"
+
+msgid "Notification Preferences"
+msgstr "Налады апавяшчэнняў"
+
+msgid "Click the following link to never receive any more emails from us:"
+msgstr "Націсніце на спасылку, каб ніколі больш атрымліваць ад нас лістоў:"
+
+msgid "Unsubscribe"
+msgstr "Адпісацца"
+
+msgid "Tiny (50 x *)"
+msgstr "Драбнюткая (50 х *)"
+
+msgid "Very Small (100 x *)"
+msgstr "Вельмі маленькая (100 х *)"
+
+msgid "Smaller (150 x *)"
+msgstr "Меншая (150 X *)"
+
+msgid "Small (200 x *)"
+msgstr "Малая (200 х *)"
+
+msgid "Medium-small (250 x *)"
+msgstr "Сярэдне-малая (250 х *)"
+
+msgid "Medium (300 x *)"
+msgstr "Сярэдняя (300 х *)"
+
+msgid "Large (400 x *)"
+msgstr "Вялікая (400 x *)"
+
+msgid "Larger (500 x *)"
+msgstr "Большая (500 x *)"
+
+msgid "Very large (650 x *)"
+msgstr "Вельмі вялікая (650 x *)"
+
+msgid "Extra large (800 x *)"
+msgstr "Велізарная (800 x *)"
+
+msgid "XXL (1200 x *)"
+msgstr "XXL (1200 x *)"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Title"
+msgstr "Назва"
+
+msgid "Last edited"
+msgstr "Апошні раз адрэдагавана"
+
+msgid "Last edited by"
+msgstr "Апошні раз адрэдагавана карыстальнікам(-цай)"
+
+msgid "Cosinnus CMS Micropage"
+msgstr "Мікрастаронка Cosinnus CMS"
+
+msgid "Cosinnus Micropages"
+msgstr "Мікрастаронкі Cosinnus"
+
+msgid "Complaint Text"
+msgstr "Тэкст скаргі"
+
+msgid "Creator"
+msgstr "Стваральнік(-ца)"
+
+msgid "Reported object"
+msgstr "Аб'ект, пра які паведамляецца"
+
+msgid "Reported objects"
+msgstr "Аб'екты, пра якія паведамляецца"
+
+msgid "Email"
+msgstr "Электронная пошта"
+
+msgid "Notification ID"
+msgstr "Ідэнтыфікатар апавяшчэння"
+
+msgid "Portal"
+msgstr "Партал"
+
+msgid "Enter a valid name. Forward slash is not allowed."
+msgstr "Увядзіце сапраўднае імя. Касыя рыскі забаронены."
+
+msgid "Portals"
+msgstr "Парталы"
+
+msgid "Slug"
+msgstr "Загаловак для URL-адраса"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Description"
+msgstr "Апісанне"
+
+msgid "Website"
+msgstr "Вэбсайт"
+
+msgid "Welcome-Email Text"
+msgstr "Тэкст вітальнага ліста"
+
+msgid ""
+"If set, this text overrides the default welcome e-mail text which will be "
+"sent on portals with \"Users Need Activation\" enabled."
+msgstr ""
+"Калі гэта функцыя абраная, гэты тэкст замяшчае стандартны тэкст вітальнага "
+"ліста, які будзе адпраўлены на парталы, дзе ўключана опцыя \"Карыстальнікі(-"
+"цы) патрабуюць актывацыі\"."
+
+msgid "Public"
+msgstr "Публічны"
+
+msgid "Associated Site"
+msgstr "Асацыяваны сайт"
+
+msgid "Http/Https Protocol (overrides settings)"
+msgstr "Пратакол Http/Https (замяшчае налады)"
+
+msgid "Users Need Activation"
+msgstr "Карыстальнікі(-цы) патрабуюць актывацыі"
+
+msgid ""
+"If activated, newly registered users need to be approved by a portal admin "
+"before being able to log in."
+msgstr ""
+"Калі актыўна, новыя зарэгістраваныя карыстальнікі(-цы) мусяць быць ухваленыя "
+"адміністратарам партала перш чым атрымаюць магчымасць увайсці."
+
+msgid "Emails Need Verification"
+msgstr "Адрасы электроннай пошты патрабуюць пацвярджэння"
+
+msgid ""
+"If activated, newly registered users and users who change their email "
+"address will need to confirm their email by clicking a link in a mail sent "
+"to them."
+msgstr ""
+"Калі актыўна, новыя зарэгістраваныя карыстальнікі(-цы), якія мяняюць свой "
+"адрас электроннай пошты, мусяць пацвердзіць свой новы адрас, перайшоўшы па "
+"спасылцы, дасланай ім электронным лістом."
+
+msgid "Background Image"
+msgstr "Фонавая выява"
+
+msgid "Used for the background of the landing and CMS-pages"
+msgstr "Выкарыстоўваецца як фон мэтавых і CMS-старонак"
+
+msgid "Logo Image"
+msgstr "Выява лагатыпа"
+
+msgid ""
+"Used as a small logo in the navigation bar and for external links to this "
+"portal"
+msgstr ""
+"Выкарыстоўваецца як маленькі лагатып ў панэлі навігацыі і для знешніх "
+"спасылак на гэты партал"
+
+msgid "Main color"
+msgstr "Галоўны колер"
+
+msgid "Main background color (css hex value, with or without \"#\")"
+msgstr "Галоўны фонавы колер (шаснаццатковае значэнне css, з ці без \"#\")"
+
+msgid "Gradient color"
+msgstr "Колер градыенту"
+
+msgid "Bottom color for the gradient (css hex value, with or without \"#\")"
+msgstr "Ніжні колер градыенту (шаснаццатковае значэнне CSS, з або без «#»)"
+
+msgid "Extra CSS"
+msgstr "Дадатковая CSS"
+
+msgid "Extra CSS for this portal, will be applied after all other styles."
+msgstr ""
+"Дадатковая CSS для гэтага партала, будзе прымяняцца пасля ўсіх іншых стыляў."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Project"
+msgstr "Праект"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Group"
+msgstr "Група"
+
+msgid ""
+"Be extremely careful when changing this slug manually! There can be many "
+"side-effects (redirects breaking e.g.)!"
+msgstr ""
+"Будзьце вельмі асцярожныя пры змене гэтага загалоўка для URL-адраса ўручную! "
+"Можа з'явіцца шмат пабочных эфектаў (напрыклад, парушэнне пераадрасацый)!"
+
+msgid "Project Type"
+msgstr "Тып праекта"
+
+msgid "Last modified"
+msgstr "Апошняя змена"
+
+msgid "Short Description"
+msgstr "Кароткае апісанне"
+
+msgid "Short Description. Internal, will not be shown publicly."
+msgstr "Кароткае апісанне. Для унутранага карыстання, не паказваецца публічна."
+
+msgid "Detailed Description"
+msgstr "Падрабязнае апісанне"
+
+msgid "Detailed, public description."
+msgstr "Падрабязнае публічнае апісанне."
+
+msgid "Contact Information"
+msgstr "Кантактныя даныя"
+
+msgid "How you can be contacted - addresses, social media, etc."
+msgstr "Як з Вамі можна звязацца - адрасы, сацыяльныя сеткі і інш."
+
+msgid "Avatar"
+msgstr "Аватар"
+
+msgid "Wallpaper image"
+msgstr "Фонавая выява"
+
+msgid "Shown as large banner image on the Microsite (1140 x 240 px)"
+msgstr "Паказваецца як вялікая банарная выява на мікрасайце (1140 x 240 px)"
+
+msgid "Microsite Video"
+msgstr "Відэа мікрасайта"
+
+msgid "Microsite Twitter Timeline Username"
+msgstr "Імя карыстальніка(-цы) для Twitter-хронікі на мікрасайце"
+
+msgid "Microsite Twitter Timeline Custom Widget ID"
+msgstr "Унікальны ідэнтыфікатар віджэта для Twitter-хронікі на мікрасайце"
+
+msgid "Flickr Gallery URL"
+msgstr "URL галерэі Flickr"
+
+msgid "Call to Action Microsite Box active"
+msgstr "Рамка закліку да дзеяння на мікрасайце актыўная"
+
+msgid "If this is active, a Call to Action box will be shown on the microsite."
+msgstr ""
+"Калі актыўна, на мікрасайце будзе адлюстроўвацца рамка закліку да дзеяння."
+
+msgid "Call to Action Box title"
+msgstr "Назва рамкі закліку да дзеяння"
+
+msgid "Call to Action Box Description"
+msgstr "Апісанне рамкі закліку да дзеяння"
+
+msgid "Deactivated Apps"
+msgstr "Неактыўныя прыкладанні"
+
+msgid "Microsite Public Apps"
+msgstr "Публічныя прыкладанні мікрасайта"
+
+msgid "Is active"
+msgstr "Актыўная"
+
+msgid ""
+"If a team is not active, it counts as non-existent for all purposes and "
+"views on the website."
+msgstr ""
+"Калі каманда неактыўная, яна лічыцца неіснуючай для ўсіх задач і праглядаў "
+"на вэбсайце."
+
+msgid "Facebook Group ID"
+msgstr "Ідэнтыфікатар Facebook-групы"
+
+msgid "Facebook Page ID"
+msgstr "Ідэнтыфікатар Facebook-старонкі"
+
+msgid "Parent Group"
+msgstr "Бацькоўская група"
+
+msgid "Related Teams"
+msgstr "Роднасныя тэрміны"
+
+msgid "Cosinnus project"
+msgstr "Праект Cosinnus"
+
+msgid "Cosinnus projects"
+msgstr "Праекты Cosinnus"
+
+msgid "Slug must not be empty."
+msgstr "Загаловак для URL-адраса не можа быць пусты."
+
+msgid ""
+"The URL for this team has changed. A redirect from all existing URLs has "
+"automatically been created!"
+msgstr ""
+"URL-спасылка на гэту каманду змянілася. Перанакіраванне з усіх існуючых URL "
+"было аўтаматычна створана!"
+
+#, python-format
+msgid "Request about your project \"%(group_name)s\""
+msgstr "Запыт наконт Вашага праекта \"%(group_name)s\""
+
+#, python-format
+msgid "Request about your group \"%(group_name)s\""
+msgstr "Запыт наконт Вашай групы \"%(group_name)s\""
+
+msgid "Is Moderator"
+msgstr "З'яўляецца мадэратарам"
+
+msgid "Team membership"
+msgstr "Членства ў камандзе"
+
+msgid "Team memberships"
+msgstr "Членства ў камандах"
+
+msgid "Portal membership"
+msgstr "Членства на партале"
+
+msgid "Portal memberships"
+msgstr "Членства на парталах"
+
+msgid "Team Invite for Unregistered User"
+msgstr "Запрашэнне ў каманду для незарэгістраванага(-ай) карыстальніка(-цы)"
+
+msgid "Team Invites for Unregistered Users"
+msgstr "Запрашэнні ў каманду для незарэгістраваных карыстальнікаў(-ц)"
+
+msgid "Token"
+msgstr "Маркер"
+
+msgid ""
+"The token string. It will be displayed as it is, but when users enter it, "
+"upper/lower-case do not matter. Can contain letters and numbers, but no "
+"spaces, and can be as long or short as you want."
+msgstr ""
+"Маркёрны радок. Ён будзе адлюстроўвацца як ёсць, але калі карыстальнік(-ца) "
+"ўводзіць яго, верхні/ніжні рэгістр не мае значэння. Можа ўтрымліваць літары "
+"і лічбы, але без прабелаў, можа быць наколькі Вы жадаеце доўгім або кароткім."
+
+msgid "Short Description (optional). Will be shown on the token page."
+msgstr ""
+"Кароткае апісанне (неабавязкова). Будзе адлюстроўвацца на старонцы маркера."
+
+msgid "Valid until"
+msgstr "Сапраўдны да"
+
+msgid "Invite-Groups"
+msgstr "Запрошаныя групы"
+
+msgid "Cosinnus Group Invite Token"
+msgstr "Маркер запрашэння ў Cosinnus-групу"
+
+msgid "Cosinnus Group Invite Tokens"
+msgstr "Маркеры запрашэння ў Cosinnus-групу"
+
+msgid "Token must not be empty."
+msgstr "Маркер не можа быць пусты."
+
+msgid "From Portal"
+msgstr "З партала"
+
+msgid "From Team Type"
+msgstr "З тыпу каманды"
+
+msgid "From Slug"
+msgstr "З загалоўка для URL-адраса"
+
+msgid "Permanent Team Redirects"
+msgstr "Нязменныя перанакіраванні на каманду"
+
+msgid "Permanent Team Redirect"
+msgstr "Нязменнае перанакіраванне на групу"
+
+msgid "Location"
+msgstr "Месцазнаходжанне"
+
+msgid "Latitude"
+msgstr "Шырата"
+
+msgid "Longitude"
+msgstr "Даўгата"
+
+msgid "Team"
+msgstr "Каманда"
+
+msgid "CosinnusLocation"
+msgstr "CosinnusМесцазнаходжанне"
+
+msgid "CosinnusLocations"
+msgstr "CosinnusМесцазнаходжанні"
+
+msgid "Group Image"
+msgstr "Выява групы"
+
+msgid "CosinnusGroup GalleryImage"
+msgstr "ВыяваГалерэі CosinnusГрупы"
+
+msgid "CosinnusGroup GalleryImages"
+msgstr "ВыявыГалерэі CosinnusГрупы"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "CosinnusGroup CallToAction Button"
+msgstr "Кнопка ЗаклікуДаДзеяння CosinnusГрупы"
+
+msgid "CosinnusGroup CallToAction Buttons"
+msgstr "Кнопкі ЗаклікуДаДзеяння CosinnusГрупы"
+
+msgid "Cosinnus group"
+msgstr "Cosinnus-група"
+
+msgid "Cosinnus groups"
+msgstr "Cosinnus-групы"
+
+msgid "Image"
+msgstr "Выява"
+
+msgid "Created Projects"
+msgstr "Створаныя праекты"
+
+msgid "Cosinnus Idea"
+msgstr "Cosinnus-ідэя"
+
+msgid "Cosinnus Ideas"
+msgstr "Cosinnus-ідэі"
+
+msgid "Language"
+msgstr "Мова"
+
+msgid "Terms of Service"
+msgstr "Умовы карыстання"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "Never (we will not send you any emails)"
+msgstr "Ніколі (мы не будзем дасылаць Вам лістоў)"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "Immediately (an individual email per event)"
+msgstr "Імгненна (асобны ліст для кожнай падзеі)"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "In a Daily Report"
+msgstr "У штодзённай справаздачы"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "In a Weekly Report"
+msgstr "У штотыднёвай справаздачы"
+
+msgctxt "answer to \"i wish to receive notification emails:\""
+msgid "Individual settings for each Project/Group..."
+msgstr "Індывідуальныя налады для кожнага праекта/групы..."
+
+msgid "Name (EN)"
+msgstr "Назва (EN)"
+
+msgid "Name (RU)"
+msgstr "Назва (RU)"
+
+msgid "Name (UK)"
+msgstr "Назва (BE)"
+
+msgid "Only me"
+msgstr "Толькі я"
+
+msgid "Team members only"
+msgstr "Толькі чальцы каманды"
+
+msgid "Public (visible without login)"
+msgstr "Публічны (бачна без ўваходу на сайт)"
+
+msgid "Tags"
+msgstr "Цэтлікі"
+
+msgid "Permissions"
+msgstr "Дазволы"
+
+msgid "Place"
+msgstr "Месца"
+
+msgid "Valid from"
+msgstr "Сапраўдны з"
+
+msgid "Valid to"
+msgstr "Сапраўдны да"
+
+msgid "Approach"
+msgstr "Падыход"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Topics"
+msgstr "Тэмы"
+
+msgid "Text Topics"
+msgstr "Тэкставыя тэмы"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Likes"
+msgstr "Упадабанні"
+
+msgid "Attached object"
+msgstr "Далучаны аб'ект"
+
+msgid "Attached objects"
+msgstr "Далучаныя аб'екты"
+
+msgid "Path"
+msgstr "Шлях"
+
+msgid "Reflected Object"
+msgstr "Адлюстраваны аб'ект"
+
+msgid "Reflected Objects"
+msgstr "Адлюстраваныя аб'екты"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Карыстальнік(-ца)"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Liked"
+msgstr "Упадабаныя"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Following"
+msgstr "Сачу"
+
+msgid "Create-Project or Group Button"
+msgstr "Кнопка \"Стварыць праект або групу\""
+
+msgid "Users"
+msgstr "Карыстальнікі(-цы)"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Events"
+msgstr "Падзеі"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Projects"
+msgstr "Праекты"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups"
+msgstr "Групы"
+
+msgid "At least one type of Map object must be chosen!"
+msgstr "Трэба абраць хаця б адзін тып аб'екта на карце!"
+
+msgid "Proportions"
+msgstr "Прапорцыі"
+
+msgid "1/2 + 1/2"
+msgstr "1/2 + 1/2"
+
+msgid "2/3 + 1/3"
+msgstr "2/3 + 1/3"
+
+msgid "1/3 + 2/3"
+msgstr "1/3 + 2/3"
+
+msgid "1/3 + 1/3 + 1/3"
+msgstr "1/3 + 1/3 + 1/3"
+
+msgid "1/2 + 1/4 + 1/4"
+msgstr "1/2 + 1/4 + 1/4"
+
+msgid "1/4 + 1/2 + 1/4"
+msgstr "1/4 + 1/2 + 1/4"
+
+msgid "1/4 + 1/4 + 1/2"
+msgstr "1/4 + 1/4 + 1/2"
+
+msgid "Medium News Widget"
+msgstr "Сярэдні віджэт навін"
+
+msgid "Large News Widget"
+msgstr "Вялікі віджэт навін"
+
+msgid "4 Random Projects Widget"
+msgstr "4 выпадковыя віджэты праектаў"
+
+msgid "8 Random Projects Widget"
+msgstr "8 выпадковых віджэтаў праектаў"
+
+msgid "Content"
+msgstr "Змесціва"
+
+msgid "Portal Root Page"
+msgstr "Каранёвая папка партала"
+
+msgid "Assigned Portal"
+msgstr "Прызначаны партал"
+
+msgid "Footer"
+msgstr "Падвал"
+
+msgid ""
+"Will be displayed as a footer on EVERY page on this website (not only "
+"dashboard pages!)"
+msgstr ""
+"Будзе адлюстроўвацца як падвал на КОЖНАЙ старонцы гэтага вэбсайта (не толькі "
+"на старонках лічбавай панэлі!)"
+
+msgid "Show Register Button"
+msgstr "Паказать кнопку рэгістрацыі"
+
+msgid "Redirect Logged in Users"
+msgstr "Перанакіроўваць увайшоўшых карыстальнікаў(-ц)"
+
+msgid ""
+"If active, this page will only be visible to non-logged-in users. All others "
+"will be redirected to the activities page."
+msgstr ""
+"Калі актыўна, гэта старонка будзе бачная толькі неўвайшоўшым карыстальнікам(-"
+"цам). Усе іншыя будуць перанакіроўвацца на старонку стужкі падзей."
+
+msgid "Left banner (top)"
+msgstr "Левы банар (верхні)"
+
+msgid "Right banner (top)"
+msgstr "Правы банар (верхні)"
+
+msgid "Header"
+msgstr "Шапка"
+
+msgid "Left footer"
+msgstr "Левы падвал"
+
+msgid "Right footer"
+msgstr "Правы падвал"
+
+msgid "1-Column Dashboard Page"
+msgstr "Аднаслупковая старонка лічбавай панэлі"
+
+msgid "2-Column Dashboard Page"
+msgstr "Двухслупковая старонка лічбавай панэлі"
+
+msgid "Content (left column)"
+msgstr "Змесціва (левы слупок)"
+
+msgid "Content (right column)"
+msgstr "Змесціва (правы слупок)"
+
+msgid "3-Column Dashboard Page"
+msgstr "Трохслупковая старонка лічбавай панэлі"
+
+msgid "Content (center column)"
+msgstr "Змесціва (цэнтральны слупок)"
+
+msgid "Simple One-Column Page"
+msgstr "Простая аднаслупковая старонка"
+
+msgid "Simple Page with Left Navigation"
+msgstr "Простая старонка з левай навігацыяй"
+
+msgid "Left Sidebar"
+msgstr "Левая бакавая панэль"
+
+msgid "1-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
+msgstr ""
+"Аднаслупковая старонка лічбавай панэлі (модульная, БОЛЬШ НЕ ВЫКАРЫСТОЎВАЙЦЕ!)"
+
+msgid "2-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
+msgstr ""
+"Двухслупковая старонка лічбавай панэлі (модульная, БОЛЬШ НЕ ВЫКАРЫСТОЎВАЙЦЕ!)"
+
+msgid "3-Column Dashboard Page (Modular, DO NOT USE ANYMORE!)"
+msgstr ""
+"Трохслупковая старонка лічбавай панэлі (модульная, БОЛЬШ НЕ ВЫКАРЫСТОЎВАЙЦЕ!)"
+
+msgid "Simple One-Column Page (Modular)"
+msgstr "Простая аднаслупковая старонка (модульная)"
+
+msgid "Simple Page with Left Navigation (Modular)"
+msgstr "Простая старонка з левай навігацыяй (модульная)"
+
+msgid "Start Page (Modular)"
+msgstr "Пачатковая старонка (модульная)"
+
+msgid "Header image"
+msgstr "Выява шапкі"
+
+msgid "Header Title"
+msgstr "Загаловак шапкі"
+
+msgid "Header Text"
+msgstr "Тэкст шапкі"
+
+msgid "Additional Header content"
+msgstr "Дадатковае змесціва шапкі"
+
+msgid "Site Widgets"
+msgstr "Віджэты сайта"
+
+msgid "Bottom content (gray background)"
+msgstr "Змесціва ніжняй часткі (шэры фон)"
+
+msgid "Dashboard"
+msgstr "Старонка лічбавай панэлі"
+
+msgid "Microsite"
+msgstr "Мікрасайт"
+
+msgid "Application name"
+msgstr "Імя прыкладання"
+
+msgid "Widget name"
+msgstr "Імя віджэта"
+
+msgid "Widget Type"
+msgstr "Тып віджэта"
+
+msgid "Sort field"
+msgstr "Поле сартавання"
+
+msgid "Widget configuration"
+msgstr "Канфігурацыя віджэта"
+
+msgid "Widget configurations"
+msgstr "Канфігурацыі віджэта"
+
+msgid "Either team or user must be defined."
+msgstr "Трэба вызначыць каманду або карыстальніка(-цу)."
+
+msgid "key"
+msgstr "ключ"
+
+msgid "value"
+msgstr "значэнне"
+
+msgid "Widget configuration item"
+msgstr "Элемент канфігурацыі віджэта"
+
+msgid "Widget configuration items"
+msgstr "Элементы канфігурацыі віджэта"
+
+msgid "select this page"
+msgstr "выбраць гэтую старонку"
+
+msgid "edit this page"
+msgstr "рэдагаваць гэтую старонку"
+
+msgid "edit"
+msgstr "рэдагаваць"
+
+msgid "insert above"
+msgstr "уставіць вышэй"
+
+msgid "insert below"
+msgstr "уставіць ніжэй"
+
+msgid "insert inside"
+msgstr "уставіць усярэдзіну"
+
+msgid "softroot"
+msgstr "праграмны доступ да правоў адміністратара"
+
+msgid "home"
+msgstr "галоўная"
+
+#, python-format
+msgid "Edit this page in %(language)s "
+msgstr "Рэдагаваць гэту старонку на %(language)s "
+
+msgid "Cut"
+msgstr "Выразаць"
+
+msgid "cut"
+msgstr "выразаць"
+
+msgid "Copy"
+msgstr "Капіраваць"
+
+msgid "copy"
+msgstr "капіраваць"
+
+msgid "Add Child"
+msgstr "Дадаць даччыны элемент"
+
+msgid "add"
+msgstr "дадаць"
+
+msgid "Delete"
+msgstr "Выдаліць"
+
+msgid "delete"
+msgstr "выдаліць"
+
+msgid "Unpublish"
+msgstr "Адмяніць публікацыю"
+
+msgid "Publish"
+msgstr "Апублікаваць"
+
+msgid "View on page"
+msgstr "Прагледзець на старонцы"
+
+msgid "view"
+msgstr "прагледзець"
+
+msgid "View reported item..."
+msgstr "Прагледзець элемент, на які паскардзіліся..."
+
+msgid "Edit reported item..."
+msgstr "Рэдагаваць элемент, на які паскардзіліся..."
+
+msgid "Delete reported item..."
+msgstr "Выдаліць элемент, на які паскардзіліся..."
+
+msgid "(The reported item has been deleted.)"
+msgstr "(Элемент, на які паскардзіліся, выдалены.)"
+
+msgid "Enter the 4 capital letters in the scrambled image"
+msgstr "Увядзіце 4 вялікія літары з зашыфраванай выявы"
+
+msgid ""
+"This page is a preview of many good things to come! It is heavily under "
+"development and many features are incomplete or may not work properly yet!"
+msgstr ""
+"Гэта старонка - папярэдняя версія мноства добрых рэчаў, якія тут будуць! "
+"Зараз ідзе старанная распрацоўка, многія функцыі яшчэ недапрацаваныя і "
+"могуць працаваць некарэктна!"
+
+msgid "Done"
+msgstr "Гатова"
+
+msgid "Configure"
+msgstr "Сканфігураваць"
+
+msgid "Withdraw request"
+msgstr "Адклікаць запыт"
+
+msgid "Join"
+msgstr "Далучыцца"
+
+#, python-format
+msgid "Do you really want to withdraw your join request to „%(title)s“?"
+msgstr "Вы сапраўды хочаце адклікаць свой запыт на далучэнне да „%(title)s“?"
+
+msgid "Withdraw Join Request"
+msgstr "Адклікаць запыт на далучэнне"
+
+#, python-format
+msgid "Do you wish to request to join „%(title)s“?"
+msgstr "Жадаеце даслаць запыт на далучэнне да „%(title)s“?"
+
+msgid "Add widget"
+msgstr "Дадаць віджэт"
+
+msgid "Informations"
+msgstr "Інфармацыя"
+
+msgid "No informations set"
+msgstr "Інфармацыя не прызначана"
+
+msgid "Back to Project Overview"
+msgstr "Вярнуцца да агульнага апісання праекту"
+
+msgid "Settings"
+msgstr "Налады"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Members"
+msgstr "Чальцы"
+
+msgid "Choose App"
+msgstr "Выбраць прыкладанне"
+
+msgid "Attach existing Files..."
+msgstr "Далучыць існуючыя файлы..."
+
+msgid "Drag and Drop files here..."
+msgstr "Перацягніце файлы сюды..."
+
+msgid "Drag and Drop files or folders here..."
+msgstr "Перацягніце файлы ці папкі сюды..."
+
+msgid ""
+"Click to upload a new file/image. You can also drag & drop a file from your "
+"computer."
+msgstr ""
+"Націсніце, каб зацягнуць новы файл/выяву. Вы можаце таксама перацягнуць файл "
+"з Вашага камп'ютара."
+
+msgid "Browse..."
+msgstr "Шукаць..."
+
+msgid ""
+"Drag and drop one or more files into this area to upload them to this folder."
+msgstr ""
+"Перацягніце адзін або больш файлаў у гэтую вобласць, каб зацягнуць іх у "
+"гэтую папку."
+
+msgid ""
+"You can also upload a whole folder, including all files and subfolders, by "
+"dragging it here. The new folders will be created automatically, with the "
+"same folder structure as on your computer."
+msgstr ""
+"Вы таксама можаце зацягнуць цэлую папку, што змяшчае файлы і ўкладзеныя "
+"папкі, перацягнуўшы яе сюды. Новыя папкі будуць аўтаматычна створаныя з "
+"такой жа структурай, як і ў папцы на Вашым камп'ютары."
+
+msgid ""
+"Unfortunately, the folder upload feature is only available on some browsers. "
+"This is because some browsers will not provide the file path information "
+"that is needed for the upload. If your browser doesn't support this, you may "
+"wish to switch to a different browser for your upload."
+msgstr ""
+"На жаль, функцыя зацягвання папкі даступная толькі ў некаторых "
+"аглядальніках. Гэта адбываецца таму, што некаторыя аглядальнікі не падаюць "
+"інфармацыю пра шлях да файла, неабходную для зацягвання. Калі ваш "
+"аглядальнік не падтрымлівае такую функцыю, вы можаце перайсці на іншы "
+"аглядальнік для зацягвання."
+
+msgid "Currently, the Browsers supporting folder upload are:"
+msgstr ""
+"На дадзены момант зацягванне папак падтрымліваюць наступныя аглядальнікі:"
+
+msgid "File and Folder Upload"
+msgstr "Зацягванне файлаў і папак"
+
+msgid "Services"
+msgstr "Сервісы"
+
+msgid "Access denied!"
+msgstr "Доступ забаронены!"
+
+msgid "You don't have permission to access this site."
+msgstr "Вы не маеце дазволу на доступ да гэтага сайта."
+
+msgid "Page expired!"
+msgstr "Старонка састарэла!"
+
+msgid ""
+"Your request seems to have come from an outdated version of this page. "
+"Please reload the page and try again!"
+msgstr ""
+"Выглядае, што Ваш запыт прыйшоў з састарэлай версіі гэтай старонкі. Калі "
+"ласка, перазагрузіце старонку і паспрабуйце яшчэ раз!"
+
+msgid "Page not found!"
+msgstr "Старонка не знойдзена!"
+
+msgid "The page you requested was not found on the server."
+msgstr "Запытаная Вамі старонка не знойдзена на серверы."
+
+msgid "Server Error"
+msgstr "Памылка сервера"
+
+msgid "Sorry! Something went wrong..."
+msgstr "Прабачце! Нешта пайшло не так..."
+
+msgid ""
+"Looks like we had an internal problem while processing your request. The "
+"error has been recorded, and we will try to fix it as soon as possible!"
+msgstr ""
+"Здаецца, у нас здарылася ўнутраная памылка падчас апрацоўкі Вашага запыту. "
+"Памылка была запісаная, і мы пастараемся выправіць яе як мага хутчэй!"
+
+#, python-format
+msgid "+%(num_pictures)s more..."
+msgstr "+%(num_pictures)s больш..."
+
+msgid "Mark All"
+msgstr "Пазначыць усе"
+
+msgid "Deselect All"
+msgstr "Адмяніць пазначэнне ўсіх"
+
+msgid "Delete elements"
+msgstr "Выдаліць элементы"
+
+msgid "Are you sure you want to delete all selected elements?"
+msgstr "Вы сапраўды хочаце выдаліць абраныя элементы?"
+
+msgid ""
+"There was an error while trying to submit your report. Please try again in a "
+"moment."
+msgstr ""
+"Падчас спробы адправіць Вашу справаздачу здарылася памылка. Калі ласка, "
+"паспрабуйце зноў праз хвіліну."
+
+msgid "Cancel"
+msgstr "Скасаваць"
+
+msgid "Deleting..."
+msgstr "Выдаляецца..."
+
+msgid "Error embedding a Flickr gallery"
+msgstr "Памылка падчас убудавання галерэі Flickr"
+
+msgid "Error embedding a twitter timeline"
+msgstr "Памылка падчас убудавання Twitter-хронікі"
+
+msgid "Click to activate video"
+msgstr "Націсніце, каб актываваць відэа"
+
+msgid "Error embedding a video"
+msgstr "Памылка падчас убудавання відэа"
+
+msgid "Help and Assistance for this page"
+msgstr "Дапамога і падтрымка для гэтай старонкі"
+
+msgid "Help"
+msgstr "Дапамога"
+
+msgid "Help for this page"
+msgstr "Дапамога для гэтай старонкі"
+
+msgid "Root Folder"
+msgstr "Каранёвая папка"
+
+msgid "We're sorry. The Map is not supported in Internet Explorer."
+msgstr "Прабачце, карта не падтрымліваецца ў Internet Explorer."
+
+msgid "Consider using an alternate browser!"
+msgstr "Разгледзьце магчымасць выкарыстання іншага аглядальніка!"
+
+msgid "I want to like this"
+msgstr "Я хачу гэта ўпадабаць"
+
+msgid "I want to follow this"
+msgstr "Я хачу за гэтым сачыць"
+
+msgid "Yes"
+msgstr "Так"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Follow"
+msgstr "Сачыць"
+
+msgid ""
+"You will now receive notifications for comments or when this content is "
+"updated."
+msgstr ""
+"Цяпер Вы будзеце атрымліваць апавяшчэнні пра каментары, або калі гэта "
+"змесціва будзе абнаўляцца."
+
+msgid "You are following this item"
+msgstr "Вы сочыце за гэтым элементам"
+
+msgid "Expand"
+msgstr "Разгарнуць"
+
+msgid "Shrink"
+msgstr "Згарнуць"
+
+msgid ""
+"Check the projects/groups where you wish to show this item in. It will be "
+"shown in all lists, but will still remain in this group."
+msgstr ""
+"Адзначце праекты/групы, у якіх Вы жадаеце адлюстроўваць гэты запіс. Ён будзе "
+"паказвацца ва ўсіх спісах, але Вы застанецеся ў гэтай групе."
+
+msgid "Items from the Forum can be shown in any of your projects/groups."
+msgstr "Запісы з форума могуць адлюстроўвацца ў любым з Вашых праектаў/груп."
+
+msgid "Items from this group can be shown in any of the group's subprojects."
+msgstr "Запісы з гэтай групы могуць адлюстроўвацца ва ўсіх падпраектах групы."
+
+msgid "Show in other projects/groups"
+msgstr "Паказваць у іншых праектах/групах"
+
+msgid "Apply"
+msgstr "Прымяніць"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_1_group"
+msgstr "helptext_1_група"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_2_project"
+msgstr "helptext_1_праект"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_3_marketplace"
+msgstr "helptext_1_дошка_аб'яў"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_4_profile"
+msgstr "helptext_1_профіль"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_5_password"
+msgstr "helptext_1_пароль"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_6_microsite"
+msgstr "helptext_1_мікрасайт"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_7_notes"
+msgstr "helptext_1_нататкі"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_8_poll"
+msgstr "helptext_1_апытанне"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_9_todo"
+msgstr "helptext_1_задача"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_10_documentsetting"
+msgstr "helptext_1_налады_дакумента"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_11_document"
+msgstr "helptext_1_дакумент"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_12_projectadministration"
+msgstr "helptext_1_адміністрацыя_праекта"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_13_groupadministration"
+msgstr "helptext_1_адміністрацыя_групы"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_50_profileprivacy"
+msgstr "helptext_1_прыватнасць_профіля"
+
+msgctxt "Look up this ID in the help text register for the translation text!"
+msgid "helptext_51_objectprivacy"
+msgstr "helptext_1_прыватнасць_аб'екта"
+
+msgid ""
+"Enter the email addresses of people you wish to invite to join the platform."
+msgstr ""
+"Увядзіце адрасы электроннай пошты людзей, якіх Вы жадаеце запрасіць "
+"далучыцца да платформы."
+
+#, python-format
+msgid ""
+"We will send them an email asking them to sign up and join %(group_name)s."
+msgstr ""
+"Мы адправім ім электронны ліст з прапановай зарэгістравацца і далучыцца да "
+"%(group_name)s."
+
+msgid "E-Mail Addresses"
+msgstr "Адрасы электроннай пошты"
+
+msgid "(one per line or comma-seperated)"
+msgstr "(па аднаму на радок або праз коску)"
+
+msgid "Personal Message (optional)"
+msgstr "Асабістае паведамленне (неабавязкова)"
+
+msgid "Include a personal message (optional)"
+msgstr "Дадаць асабістае паведамленне (неабавязкова)"
+
+msgid "Invite new Members"
+msgstr "Запрасіць новых чальцоў"
+
+msgid "Invite"
+msgstr "Запрасіць"
+
+msgid "Shown in my projects..."
+msgstr "Паказваюцца ў маіх праектах..."
+
+msgid "Show in my projects..."
+msgstr "Паказваць у маіх праектах..."
+
+msgid "Rearrange"
+msgstr "Змяніць парадак"
+
+msgid "Save"
+msgstr "Захаваць"
+
+msgid "Saving..."
+msgstr "Захоўваецца..."
+
+msgid "You are now editing the dashboard's layout"
+msgstr "Зараз Вы рэдагуеце макет старонкі лічбавай панэлі"
+
+#, python-format
+msgid ""
+"The layout you choose will be the layout for all members of %(team_name)s! "
+"Click save to apply your changes."
+msgstr ""
+"Макет, які Вы абярэце, будзе макетам усіх чальцоў %(team_name)s! Націсніце "
+"\"Захаваць\", каб прымяніць свае змены."
+
+msgid ""
+"Drag and drop individual widgets to rearrange their order. Please note that "
+"the order you give is only an approximate prioritization for the widgets. "
+"After saving, the actual order on the page might differ depending on the "
+"widgets' current size and the overall page layout."
+msgstr ""
+"Перацягніце асобныя віджэты, каб змяніць іх парадак. Звярніце ўвагу, што "
+"прызначаны Вамі парадак з'яўляецца толькі прыкладнай прыярытызацыяй "
+"віджэтаў. Пасля захавання фактычны парадак на старонцы можа адрознівацца ў "
+"залежнасці ад бягучых памераў віджэтаў і агульнай структуры старонкі."
+
+msgid "Your Microsite needs some love!"
+msgstr "Ваш мікрасайт патрабуе ўвагі!"
+
+msgid ""
+"The Microsite is your projects's welcome page for everyone checking it out. "
+"Make it awesome so they want to join you!"
+msgstr ""
+"Мікрасайт - гэта вітальная старонка вашых праектаў для ўсіх, хто на яе "
+"заходзіць. Зрабіце яе цудоўнай, каб карыстальнікі(-цы) захацелі да Вас "
+"далучыцца!"
+
+msgid ""
+"The Microsite is your group's welcome page for everyone checking it out. "
+"Make it awesome so they want to join you!"
+msgstr ""
+"Мікрасайт - гэта вітальная старонка вашай групы для ўсіх, хто на яе "
+"заходзіць. Зрабіце яе цудоўнай, каб карыстальнікі(-цы) захацелі да Вас "
+"далучыцца!"
+
+msgid "Access it from the top menu or"
+msgstr "Перайдзіце на яго з верхняга меню або"
+
+msgid "get started here..."
+msgstr "пачніце адсюль..."
+
+msgid "Marketplace"
+msgstr "Дошка аб'яў"
+
+msgid "Poll"
+msgstr "Апытанне"
+
+msgid "Polls"
+msgstr "Апытанні"
+
+msgid "File"
+msgstr "Файл"
+
+msgid "Files"
+msgstr "Файлы"
+
+msgid "Etherpad"
+msgstr "Etherpad"
+
+msgid "Etherpads"
+msgstr "Нататнікі Etherpad"
+
+msgid "Todo"
+msgstr "Задача"
+
+msgid "Todos"
+msgstr "Задачы"
+
+msgctxt "Calendar"
+msgid "Event"
+msgstr "Падзея"
+
+msgctxt "Calendar"
+msgid "Events"
+msgstr "Падзеі"
+
+msgid "News"
+msgstr "Навіны"
+
+msgctxt "withdraw join team button first item"
+msgid "Withdraw"
+msgstr "Адклікаць"
+
+msgctxt "withdraw join team button second item"
+msgid "Request"
+msgstr "запыт"
+
+msgctxt "join request pending team button first item"
+msgid "Join"
+msgstr "Запыт на далучэнне"
+
+msgctxt "join request pending team button second item"
+msgid "Requested"
+msgstr "адпраўлены"
+
+msgctxt "join team button first item"
+msgid "Join"
+msgstr "Далучыцца"
+
+msgctxt "join team button second item"
+msgid "Now"
+msgstr "зараз"
+
+msgid "View on Facebook"
+msgstr "Паглядзець на Facebook"
+
+msgid "Group:"
+msgstr "Група:"
+
+msgid "No Description set"
+msgstr "Апісанне не прызначана"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid ""
+"You will now receive notifications whenever public content is posted in this "
+"project."
+msgstr ""
+"Цяпер Вы будзеце атрымліваць апавяшчэнні, калі ў гэтым праекце будзе "
+"публікавацца публічнае змесціва."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid ""
+"You will now receive notifications whenever public content is posted in this "
+"group."
+msgstr ""
+"Цяпер Вы будзеце атрымліваць апавяшчэнні, калі ў гэтай групе будзе "
+"публікавацца публічнае змесціва."
+
+msgid "more"
+msgstr "больш"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Report offensive content"
+msgstr "Паскардзіцца на абразлівае змесціва"
+
+msgid "Please enter a description of why you are reporting this content!"
+msgstr "Калі ласка, дадайце апісанне, чаму Вы скардзіцеся на гэтае змесціва!"
+
+msgid "(required)"
+msgstr "(абавязкова)"
+
+msgid ""
+"Thank you! Your report has been received and we will review the items in "
+"question as soon as possible."
+msgstr ""
+"Дзякуем! Ваша скарга атрыманая, мы прагледзім элементы, пра якія ідзе "
+"гаворка, як мага хутчэй."
+
+msgid "Send"
+msgstr "Адправіць"
+
+msgid "Submitting..."
+msgstr "Адпраўляецца..."
+
+msgid "Close"
+msgstr "Закрыць"
+
+msgid "Avatar will be deleted once you save."
+msgstr "Аватар будзе выдалены, як толькі вы захаваеце."
+
+msgctxt "written next to optional form fields"
+msgid "optional"
+msgstr "неабавязкова"
+
+msgid "Call to Action Button"
+msgstr "Кнопка закліку да дзеяння"
+
+msgid "Label of the Button"
+msgstr "Метка кнопкі"
+
+msgid "Link URL"
+msgstr "URL-адрас спасылкі"
+
+msgid "Enter a place or address."
+msgstr "Дадайце месца ці адрас."
+
+msgid "Choose and upload a gallery image"
+msgstr "Выберыце і зацягніце выяву галерэі"
+
+msgid "Re-Activate Project/Group"
+msgstr "Узнавіць праект/групу"
+
+msgid "Deactivate Project/Group"
+msgstr "Пазначыць праект/групу як неактыўны"
+
+msgid "Warning!"
+msgstr "Увага!"
+
+msgid "You are about to deactivate this project/group!"
+msgstr "Вы збіраецеся пазначыць гэты праект/групу як неактыўны!"
+
+msgid ""
+"You are about to re-activate this project/group. It and all of its content "
+"will be visible on the website again."
+msgstr ""
+"Вы збіраецеся ўзнавіць гэты праект/групу. Праект/група і ўсё яго змесціва "
+"будзе зноў бачна на вэбсайце."
+
+msgid ""
+"You are about to deactivate this project/group. It and all of its content "
+"will be hidden on the website and invisible to everyone, including you."
+msgstr ""
+"Вы збіраецеся пазначыць гэты праект/групу як неактыўны. Ён/яна і ўсё яго/яе "
+"змесціва будзе схаванае на вэбсайце і нябачнае для ўсіх, у тым ліку для Вас."
+
+msgid ""
+"This process is reversible. You can reactivate the project/group from the "
+"project/group list page at any time."
+msgstr ""
+"Гэты працэс абарачальны. Вы можаце ўзнавіць праект/групу на старонцы спісу "
+"праектаў/груп у любы момант."
+
+msgid "Re-Activate"
+msgstr "Узнавіць"
+
+msgid "Deactivate"
+msgstr "Пазначыць як неактыўны"
+
+#, python-format
+msgid "Delete team “%(team_name)s”"
+msgstr "Выдаліць каманду “%(team_name)s”"
+
+msgid "Are you sure you want to delete this team?"
+msgstr "Вы сапраўды хочаце выдаліць гэту каманду?"
+
+#, python-format
+msgid "%(team_name)s - Members"
+msgstr "%(team_name)s - чальцы"
+
+msgid "Invite a member"
+msgstr "Запрасіць чальца"
+
+msgid "Invite user"
+msgstr "Запрасіць карыстальніка(-цу)"
+
+msgid "Invited Members"
+msgstr "Запрошаныя чальцы"
+
+msgid "Invited to be a member"
+msgstr "Запрошаны стаць чальцом"
+
+msgid "Revoke Invitation"
+msgstr "Адклікаць запрашэнне"
+
+msgid "Decline Invitation"
+msgstr "Адхіліць запрашэнне"
+
+msgid "Accept Invitation"
+msgstr "Прынять запрашэнне"
+
+#, python-format
+msgid "Do you really want to revoke the invitation for member „%(name)s“?"
+msgstr "Вы сапраўды хочаце адклікаць запрашэнне чальца „%(name)s“?"
+
+msgid "Revoke Invitation for Member"
+msgstr "Адклікаць запрашэнне чальца"
+
+msgid "Do you really want to decline the invitation?"
+msgstr "Вы сапраўды хочаце адхіліць запрашэнне?"
+
+msgid "There are no pending invitations."
+msgstr "Няма запрашэнняў, што чакаюць рашэння."
+
+msgid "Membership requests"
+msgstr "Запыты на членства"
+
+msgid "Membership requested"
+msgstr "Адпраўлены запыт на членства"
+
+msgid "Decline User"
+msgstr "Адмовіць карыстальніку(-цы)"
+
+msgid "Accept User"
+msgstr "Прыняць карыстальніка(-цу)"
+
+#, python-format
+msgid "Do you really want to accept user „%(name)s“ as a member?"
+msgstr "Вы сапраўды хочаце прыняць карыстальніка(-цу) „%(name)s“ у чальцы?"
+
+msgid "Accept Member"
+msgstr "Прыняць чальца"
+
+#, python-format
+msgid "Do you really want to decline member „%(name)s“?"
+msgstr "Вы сапраўды хочаце адмовіць кандыдату(-цы) ў чальцы „%(name)s“?"
+
+msgid "Decline Member"
+msgstr "Адмовіць кандыдату(-цы)"
+
+msgid "There are no new membership requests."
+msgstr "Больш няма запытаў на членства."
+
+msgid "Invite People to Register and Join"
+msgstr "Запрасіць людзей зарэгістравацца і далучыцца"
+
+msgid "Invite people"
+msgstr "Запрасіць людзей"
+
+msgid "All currently invited people"
+msgstr "Усе запрошаныя людзі на дадзены момант"
+
+msgid "People currently invited by you"
+msgstr "Людзі, запрошаныя Вамі, на дадзены момант"
+
+msgid "Delete invitation"
+msgstr "Выдаліць запрашэнне"
+
+msgctxt "an action done *by* <username>"
+msgid "by"
+msgstr "карыстальнікам(-цай)"
+
+#, python-format
+msgid "Do you really want to delete the invitation for \"%(title)s\"?"
+msgstr "Вы сапраўды хочаце выдаліць запрашэнне для \"%(title)s\"?"
+
+msgid "Message all members"
+msgstr "Даслаць паведамленне ўсім чальцам"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Send Message"
+msgstr "Даслаць паведамленне"
+
+msgid "Admin"
+msgstr "Адміністратар"
+
+msgid "Member"
+msgstr "Чалец"
+
+msgid "Kick"
+msgstr "Выгнаць"
+
+msgid "Make Member"
+msgstr "Зрабіць чальцом"
+
+msgid "Make Admin"
+msgstr "Зрабіць адміністратарам"
+
+#, python-format
+msgid "Do you really want to demote administrator „%(name)s“ to member?"
+msgstr "Вы сапраўды хочаце разжалаваць адміністратара „%(name)s“ да чальца?"
+
+msgid "Demote Admin"
+msgstr "Разжалаваць адміністратара"
+
+#, python-format
+msgid "Do you really want to promote member „%(name)s“ to administrator?"
+msgstr "Вы сапраўды хочаце павысіць чальца „%(name)s“ да адміністратара?"
+
+msgid "Promote Member"
+msgstr "Павысіць чальца"
+
+#, python-format
+msgid "Do you really want to remove member „%(name)s“ from the team?"
+msgstr "Вы сапраўды хочаце выдаліць чальца „%(name)s“ з каманды?"
+
+msgid "Remove Member"
+msgstr "Выдаліць чальца"
+
+#, python-format
+msgid "And %(hidden_count)s private users..."
+msgstr "Дадаць %(hidden_count)s прыватных карыстальнікаў(-ц)..."
+
+#, python-format
+msgid "Show all of the other %(more_count)s users..."
+msgstr "Паказаць усіх іншых %(more_count)s карыстальнікаў(-ц)..."
+
+#, python-format
+msgid "Export Team “%(team_name)s”"
+msgstr "Экспартаваць каманду “%(team_name)s”"
+
+#, python-format
+msgid "Export %(app_label)s"
+msgstr "Экспартаваць %(app_label)s"
+
+msgctxt "the verb"
+msgid "Export"
+msgstr "Экспартаваць"
+
+#, python-format
+msgid "Edit “%(team_name)s”"
+msgstr "Рэдагаваць “%(team_name)s”"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Group"
+msgstr "Стварыць групу"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Project"
+msgstr "Стварыць праект"
+
+msgid "Help about groups"
+msgstr "Дапамога па групах"
+
+msgid "Help about projects"
+msgstr "Дапамога па праектах"
+
+msgid "Help about the microsite"
+msgstr "Дапамога па мікрасайце"
+
+msgid "Edit Group"
+msgstr "Рэдагаваць групу"
+
+msgid "Edit Project"
+msgstr "Рэдагаваць праект"
+
+msgid "Let's bring this idea to life!"
+msgstr "Давайце ўвасобім гэту ідэю ў жыццё!"
+
+#, python-format
+msgid "Great to see you're creating a project from the idea \"%(idea_name)s\"!"
+msgstr "Мы рады бачыць, што Вы ствараеце праект з ідэі \"%(idea_name)s\"!"
+
+msgid ""
+"Once you have created your project, everyone who liked (and followed) the "
+"idea will receive a notification! They can then jump in and become a member "
+"of your new project. Don't worry - you still have to approve who may join "
+"and who can't when they request a membership."
+msgstr ""
+"Як толькі вы створыце свой праект, кожны, хто ўпадабаў гэту ідэю або сочыць "
+"за ёй, атрымае апавяшчэнне! Тады яны змогуць далучыцца і стаць чальцамі "
+"Вашага новага праекта. Не турбуйцеся - Вам спатрэбіцца зацвердзіць, хто можа "
+"і не можа далучыцца, калі Вы атрымаеце запыты на членства."
+
+msgid ""
+"Your new project will also be displayed on the idea itself, so that everyone "
+"can see it and join in later on."
+msgstr ""
+"Ваш новы праект будзе таксама адлюстроўвацца на старонцы ідэі, так што кожны "
+"зможа ўбачыць яго і далучыцца пазней."
+
+msgid ""
+"Of course you can also create a project without a connection to the idea - "
+"just click \"Create Project\" on the left side to do so."
+msgstr ""
+"Вядома, вы таксама можаце стварыць праект без прывязвання да ідэі - каб гэта "
+"зрабіць, проста націсніце \"Стварыць праект\" злева."
+
+msgid ""
+"There was an error in one of the fields you entered. Please correct it "
+"before saving!"
+msgstr ""
+"У адным з палёў, якія вы запоўнілі, ёсць памылка. Калі ласка, выпраўце яе "
+"перш чым захаваць старонку!"
+
+msgid "General"
+msgstr "Агульныя"
+
+msgid "Facebook-Integration"
+msgstr "Інтэграцыя з Facebook"
+
+msgid "Group name"
+msgstr "Імя групы"
+
+msgid "Project name"
+msgstr "Імя праекта"
+
+msgid "Enter a name for the group."
+msgstr "Увядзіце назву групы."
+
+msgid "Enter a name for the project."
+msgstr "Увядзіце назву праекта."
+
+msgid "Short description"
+msgstr "Кароткае апісанне"
+
+msgid "Describe the group in a few sentences."
+msgstr "Апішыце групу ў некалькіх сказах."
+
+msgid "This description will be publicly visible."
+msgstr "Гэта апісанне будзе бачна ўсім."
+
+msgid "Describe the project in a few sentences."
+msgstr "Апішыце праект у некалькіх сказах."
+
+msgid "A picture for better recognition."
+msgstr "Выява для лепшай пазнавальнасці."
+
+msgid "File Size"
+msgstr "Памер файла"
+
+msgid "max. 10 MB"
+msgstr "максімальна 10 MB"
+
+msgid "Example: http://mywebsite.com"
+msgstr "Прыклад: http://mywebsite.com"
+
+msgid "Where are you active?"
+msgstr "У якой мясцовасці вы дзейнічаеце?"
+
+msgid "Remove location"
+msgstr "Выдаліць месцазнаходжанне"
+
+msgid "Add location"
+msgstr "Дадаць месцазнаходжанне"
+
+msgid "Which Group does the group belong to?"
+msgstr "Да якой Групы належыць гэта група?"
+
+msgid "Select Group"
+msgstr "Выбраць Групу"
+
+msgid "Are there any projects/groups related to this one?"
+msgstr "Ці ёсць іншыя праекты/групы, звязаныя з гэтай?"
+
+msgid "Select related Projects/Groups"
+msgstr "Выбраць звязаныя праекты/групы"
+
+msgid "Privacy settings"
+msgstr "Налады прыватнасці"
+
+msgid "This will be the default setting for all content created by members."
+msgstr ""
+"Гэта будуць стандартныя налады для ўсяго змесціва, створанага чальцамі."
+
+msgid "This group will be set to be publicly visible!"
+msgstr "Гэта група будзе пазначаная як бачная ўсім!"
+
+msgid "This project will be set to be publicly visible!"
+msgstr "Гэты праект будзе пазначаны як бачны ўсім!"
+
+msgid ""
+"This means that any registered user can access and see it, although only "
+"members can create content. In addition, all content will be set to be "
+"publicly visible by default (this can be changed for each item on creation). "
+"Publicly visible content can be seen by ANYONE on the internet and it may "
+"potentially be included in search engine results!"
+msgstr ""
+"Гэта значыць, што кожны(-ая) зарэгістраваны(-ая) карыстальнік(-ца) зможа "
+"атрымаць доступ і бачыць яе, пры гэтым толькі чальцы змогуць ствараць "
+"змесціва. Акрамя таго, усё змесціва будзе па змаўчанні публічна бачнае (гэта "
+"можна змяніць для кожнага элемента падчас стварэння). Публічна дастунае "
+"змесціва можа праглядацца КОЖНЫМ(-АЙ) карыстальнікам(-цай) Інтэрнэту і "
+"патэнцыйна адлюстроўвацца ў выніках пошукавых сістэм!"
+
+msgid ""
+"As administrator of a group or project, it is your responsibility to ensure "
+"that the content posted by its members does not infringe any copyright or "
+"other laws. Please keep this in mind, especially when enabling the public "
+"visibility setting!"
+msgstr ""
+"Ваш абавязак як адміністратара групы або праекта - сачыць, каб змесціва, "
+"якое публікуецца чальцамі, не парушала ніякіх законаў аб аўтарскіх правах ці "
+"іншых законаў. Калі ласка, майце гэта на ўвазе, асабліва калі ўключаеце "
+"наладу бачнасці!"
+
+msgid "If you do not wish this, you can change the visibility setting above."
+msgstr "Калі Вам гэта не падабаецца, Вы можаце змяніць налады бачнасці вышэй."
+
+msgid "Which apps should be activated?"
+msgstr "Якія прыкладанні трэба актываваць?"
+
+msgid "This App can only be activated for a Group, but not for a Project!"
+msgstr "Гэта прыкладанне можна актываваць толькі для групы, а не для праекта!"
+
+msgid "Microsite Wallpaper"
+msgstr "Фонавая выява мікрасайта"
+
+msgid "Upload an image."
+msgstr "Зацягніце выяву."
+
+msgid "Reset"
+msgstr "Скінуць"
+
+msgid "Description and Infos"
+msgstr "Апісанне і інфармацыя"
+
+msgid ""
+"This is a public description that can be seen by anyone and will be shown on "
+"the microsite."
+msgstr ""
+"Гэта публічнае апісанне, якое можа бачыць кожны і якое будзе адлюстроўвацца "
+"на мікрасайце."
+
+msgid "Contact info"
+msgstr "Кантактныя даныя"
+
+msgid "How you can be reached, addresses, social media, etc..."
+msgstr "Як з Вамі можна звязацца - адрасы, сацыяльныя сеткі і інш."
+
+msgid "From which apps should public items be shown on the microsite?"
+msgstr ""
+"Публічныя элементы з якіх прыкладанняў павінны адлюстроўвацца на мікрасайце?"
+
+msgid "Video"
+msgstr "Відэа"
+
+msgid "Youtube or Vimeo URL"
+msgstr "URL-адрас Youtube або Vimeo"
+
+msgid "https://www.youtube.com/watch?v=example-video"
+msgstr "https://www.youtube.com/watch?v=example-video"
+
+msgid "Twitter: Embedded User Timeline"
+msgstr "Twitter: убудаваная хроніка карыстальніка(-цы)"
+
+msgid "Twitter Username (example: @username)"
+msgstr "Імя карыстальніка(-цы) Twitter (прыклад: @username)"
+
+msgid "Twitter: Embedded Hashtag or Custom Timeline"
+msgstr "Twitter: убудаваная хэштэг- або персаналізаваная хроніка"
+
+msgid "You can create a custom twitter timeline here:"
+msgstr "Вы можаце стварыць персаналізаваную Twitter-хроніку тут:"
+
+msgid "Widget-id (example: 744907261810618721) or embed-code (HTML)"
+msgstr ""
+"Ідэнтыфікатар віджэта: (прыклад: 744907261810618721) або код убудавання "
+"(HTML)"
+
+msgid "Embed Flickr Gallery"
+msgstr "Убудаваць галерэю Flickr"
+
+msgid ""
+"Flickr Gallery URL (example: \"https://www.flickr.com/photos/username/"
+"sets/1234567890\")"
+msgstr ""
+"URL галерэі Flickr (прыклад: \"https://www.flickr.com/photos/username/"
+"sets/1234567890\")"
+
+msgid "Microsite Gallery Images"
+msgstr "Выявы галерэі мікрасайта"
+
+msgid "Remove gallery image"
+msgstr "Выдаліць выяву галерэі"
+
+msgid "Add gallery image"
+msgstr "Дадаць выяву галерэі"
+
+msgid "Show Microsite Call to Action Box"
+msgstr "Паказать рамку закліку да дзеяння на мікрасайце"
+
+msgid ""
+"A box shown on the microsite that contains buttons to your external "
+"campaigns or websites"
+msgstr ""
+"Рамка, якая адлюстроўваецца на мікрасайце і ўтрымлівае кнопкі Вашых знешніх "
+"кампаній або вэбсайтаў"
+
+msgid "Show Call to Action Box"
+msgstr "Паказать рамку закліку да дзеяння"
+
+msgid "Call to Action Box Title"
+msgstr "Назва рамкі закліку да дзеяння"
+
+msgid "Title of the box header"
+msgstr "Назва загалоўка рамкі"
+
+msgid "Description text inside the box"
+msgstr "Тэкст апісання ўсярэдзіне рамкі"
+
+msgid "Remove button"
+msgstr "Выдаліць кнопку"
+
+msgid "Add button"
+msgstr "Дадаць кнопку"
+
+msgid "Facebook integration is available after you created the group!"
+msgstr "Інтэграцыя з Facebook стане даступнай пасля стварэння групы!"
+
+msgid "Facebook integration is available after you created the project!"
+msgstr "Інтэграцыя з Facebook стане даступнай пасля стварэння праекта!"
+
+msgid "Invitations"
+msgstr "Запрашэнні"
+
+msgid "Related to"
+msgstr "Звязана з"
+
+msgid "Overview"
+msgstr "Агульная інфармацыя"
+
+msgid "To the Forum"
+msgstr "Да форума"
+
+msgctxt "Group"
+msgid "Public"
+msgstr "Публічная"
+
+msgid "Not a member"
+msgstr "Не з'яўляецца чальцом"
+
+msgid "(Inactive)"
+msgstr "(Неактыўная)"
+
+msgid "Leave"
+msgstr "Выйсці"
+
+msgid "Withdraw"
+msgstr "Адклікаць"
+
+msgid "Edit"
+msgstr "Рэдагаваць"
+
+msgid "Details"
+msgstr "Падрабязнасці"
+
+#, python-format
+msgid "Do you really want to leave „%(title)s“?"
+msgstr "Вы сапраўды хочаце выйсці з „%(title)s“?"
+
+msgid "There are no groups."
+msgstr "Груп няма."
+
+msgid "There are no projects."
+msgstr "Праектаў няма."
+
+msgid "There are no invitations."
+msgstr "Запрашэнняў няма."
+
+msgid "Map"
+msgstr "Карта"
+
+msgid "Not happy with how your Microsite looks?"
+msgstr "Не задаволеныя тым, як выглядае Ваш мікрасайт?"
+
+msgid "Change it here..."
+msgstr "Змяніце яго тут..."
+
+msgid "You have been invited to collaborate!"
+msgstr "Вас запрасілі да супрацоўніцтва!"
+
+msgid "Register and join!"
+msgstr "Зарэгіструйцеся і далучыцеся!"
+
+msgid "Join now and collaborate!"
+msgstr "Далучыцеся зараз і супрацоўнічайце!"
+
+msgid "Register"
+msgstr "Зарэгістравацца"
+
+msgid "Login"
+msgstr "Увайсці"
+
+msgid "You are a member!"
+msgstr "Вы з'яўляецеся чальцом!"
+
+msgid "View Project"
+msgstr "Прагледзець праект"
+
+msgid "View Group"
+msgstr "Прагледзець групу"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Membership request pending..."
+msgstr "Запыт на членства чакае прыняцця рашэння..."
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are invited!"
+msgstr "Вы атрымалі запрашэнне!"
+
+msgid "Collaborate!"
+msgstr "Супрацоўнічайце!"
+
+msgid "Join now!"
+msgstr "Далучыцеся зараз!"
+
+msgid "Browse"
+msgstr "Шукаць"
+
+msgid "Public Project"
+msgstr "Публічны праект"
+
+msgid "Public Group"
+msgstr "Публічная група"
+
+msgid "News posts"
+msgstr "Новыя публікацыі"
+
+msgid "About the Project"
+msgstr "Пра праект"
+
+msgid "About the Group"
+msgstr "Пра групу"
+
+msgid "There is no description for this project yet."
+msgstr "У гэтага праекта яшчэ няма апісання."
+
+msgid "There is no description for this group yet."
+msgstr "У гэтай групы яшчэ няма апісання."
+
+msgid "Related Projects/Groups"
+msgstr "Звязаныя праекты/групы"
+
+msgid "Share"
+msgstr "Падзяліцца"
+
+msgid "Share on Facebook"
+msgstr "Падзяліцца на Facebook"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Contact"
+msgstr "Звязацца"
+
+msgid "No contact data has been added yet."
+msgstr "Кантактныя даныя яшчэ не дададзеныя."
+
+msgid "Project Administrator"
+msgstr "Адміністратар праекта"
+
+msgid "Group Administrator"
+msgstr "Адміністратар групы"
+
+msgid "Tweets"
+msgstr "Твіты"
+
+msgid "Flickr Gallery"
+msgstr "Галерэя Flickr"
+
+msgid "Call to Action"
+msgstr "Заклік да дзеяння"
+
+#, python-format
+msgid "Users in team %(group)s"
+msgstr "Карыстальнікі(-цы) ў камандзе %(group)s"
+
+msgid "Add user"
+msgstr "Дадаць карыстальніка(-цу)"
+
+msgid "There are no visible users."
+msgstr "Бачных карыстальнікаў(-ц) няма."
+
+msgid "All projects"
+msgstr "Усе праекты"
+
+msgid "All groups"
+msgstr "Усе групы"
+
+msgid "All users"
+msgstr "Усе карыстальнікі(-цы)"
+
+msgid "Portal Administrators"
+msgstr "Адміністратары партала"
+
+msgid "All societies"
+msgstr "Усе аб'яднанні"
+
+msgid "Re-activate Group"
+msgstr "Узнавіць групу"
+
+msgid "Deactivate Group"
+msgstr "Пазначыць групу як неактыўную"
+
+msgid "Activate Project"
+msgstr "Актываваць праект"
+
+msgid "Deactivate Project"
+msgstr "Пазначыць праект як неактыўны"
+
+msgid "Withdraw Request"
+msgstr "Адклікаць запыт"
+
+msgid "Add container"
+msgstr "Дадаць кантэйнер"
+
+msgid "Add"
+msgstr "Дадаць"
+
+msgid "Move to another Folder"
+msgstr "Перамясціць у іншую папку"
+
+msgid "Move"
+msgstr "Перамясціць"
+
+#, python-format
+msgid "A message from %(sender_full_name)s"
+msgstr "Паведамленне ад %(sender_full_name)s"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Idea"
+msgstr "Стварыць ідэю"
+
+msgid "Delete this idea"
+msgstr "Выдаліць гэту ідэю"
+
+#, python-format
+msgid "Do you really want to delete idea „%(title)s“?"
+msgstr "Вы сапраўды хочаце выдаліць ідэю \"%(title)s\"?"
+
+msgid "Delete Idea"
+msgstr "Выдаліць ідэю"
+
+msgid "Edit Idea"
+msgstr "Рэдагаваць ідэю"
+
+msgid "We make your ideas heard!"
+msgstr "З нашай дапамогай Вашы ідэі пачуюць!"
+
+# EN > people
+msgid ""
+"Ideas are a great way to inspire poeple and start a project in your region!"
+msgstr "Ідэі - выдатны спосаб натхніць людзей і пачаць праект у Вашым рэгіёне!"
+
+msgid ""
+"Anyone can create a project based on your idea and there is no limit on how "
+"many projects can be created. Your idea will remain visible and will even "
+"show a list of all the projects inspired by it!"
+msgstr ""
+"Любы чалавек можа стварыць праект, грунтуючыся на Вашай ідэі; няма ніякіх "
+"абмежаванняў па колькасці створаных праектаў. Ваша ідэя застанецца бачнай і "
+"нават будзе адлюстроўвацца ў спісе ўсіх праектаў, якія ёй натхніліся!"
+
+msgid ""
+"You and anyone who like (and follow) your idea will be notified when a new "
+"project gets created from it. This way, everyone who is interested can jump "
+"right into it and become active in the new project (they still have to ask "
+"permission to become a member)."
+msgstr ""
+"Вы і кожны, хто ўпадабае Вашу ідэю і стане сачыць за ёй, будзе атрымліваць "
+"апавяшчэнні, калі з яе ствараецца новы праект. Такім чынам кожны зацікаўлены "
+"зможа наўпрост далучыцца і дзейнічаць на карысць новага праекта (але яму "
+"(ёй) ўсё ж прыйдзецца папрасіць дазволу стаць чальцом)."
+
+msgid "Enter a descriptive title for your idea"
+msgstr "Увядзіце апісальную назву Вашай ідэі"
+
+msgid "The description for your idea. Explain your vision and your goals."
+msgstr "Апісанне Вашай ідэі. Растлумачце Ваша бачанне і мэты."
+
+msgid ""
+"We could not find an address for your location. Please enter an address "
+"manually!"
+msgstr ""
+"Мы не змаглі знайсці адрас для вашага месцазнаходжання. Калі ласка, увядзіце "
+"адрас уручную!"
+
+msgid "This will determine who can see your idea."
+msgstr "Гэта вызначыць, хто зможа бачыць Вашу ідэю."
+
+msgid "This idea will be set to be publicly visible!"
+msgstr "Гэта ідэя будзе публічна даступная!"
+
+msgid ""
+"Publicly visible content can be seen by ANYONE on the internet and it may "
+"potentially be included in search engine results!"
+msgstr ""
+"Публічна дастунае змесціва можа праглядацца КОЖНЫМ(-АЙ) карыстальнікам(-цай) "
+"Інтэрнэту і патэнцыйна быць ўключана ў вынікі пошукавых сістэм!"
+
+msgid "Registered users only"
+msgstr "Толькі для зарэгістраваных карыстальнікаў(-ц)"
+
+msgid "Edit folder"
+msgstr "Рэдагаваць папку"
+
+msgid "Folder name"
+msgstr "Імя папкі"
+
+msgid "Delete folder"
+msgstr "Выдаліць папку"
+
+msgid "Download"
+msgstr "Сцягнуць"
+
+# EN > action
+msgid ""
+"Do you really want to delete this folder and ALL folders and items it "
+"contains? This actions CANNOT be reversed!"
+msgstr ""
+"Вы сапраўды хочаце выдаліць гэту папку і ЎСЕ папкі і элементы, якія яна "
+"ўтрымлівае? Гэта дзеянне НЕЛЬГА адмяніць!"
+
+msgid "Gesendet"
+msgstr "Адпраўленыя"
+
+msgid "Archiv"
+msgstr "Архіў"
+
+msgid "Papierkorb"
+msgstr "Сметніца"
+
+msgid "Verfassen"
+msgstr "Напісаць"
+
+msgid "Back"
+msgstr "Вярнуцца"
+
+msgid "Back to"
+msgstr "Вярнуцца да"
+
+msgid "New folder name"
+msgstr "Новае імя папкі"
+
+msgid "Create folder"
+msgstr "Стварыць папку"
+
+#, python-format
+msgid ""
+"%(site_name)s CSV import failed!\n"
+"\n"
+"Here is a summary: %(msg)s"
+msgstr ""
+"CSV-імпарт %(site_name)s завяршыўся памылкай!\n"
+"\n"
+"Справаздача тут: %(msg)s"
+
+#, python-format
+msgid ""
+"The CSV import on %(site_name)s failed.\n"
+"\n"
+"Here is why: %(msg)s"
+msgstr ""
+"CSV-імпарт на %(site_name)s завяршыўся памылкай!\n"
+"\n"
+"Прычыны тут: %(msg)s"
+
+#, python-format
+msgid ""
+"The CSV import on %(site_name)s was successful.\n"
+"\n"
+"Here is a summary: %(msg)s"
+msgstr ""
+"CSV-імпарт на %(site_name)s паспяхова завяршыўся!\n"
+"\n"
+"Справаздача тут: %(msg)s"
+
+#, python-format
+msgid "%(site_name)s CSV import was successful"
+msgstr "%(site_name)s CSV-імпарт завяршыўся паспяхова"
+
+#, python-format
+msgid ""
+"User \"%(sender_name)s\" has reported the item \"%(object_name)s\" to be "
+"offensive.\n"
+"\n"
+"The reason, as written by the reporter:\n"
+"\"%(report_text)s\"\n"
+"\n"
+"\n"
+"You can view the item in question here:\n"
+"%(object_url)s\n"
+"\n"
+"Please go to the following page to respond to the report:\n"
+"%(domain_url)s%(report_admin_url)s\n"
+"\n"
+"\n"
+"(You're receiving this email because you are an administrator of this "
+"portal.)\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"Карыстальнік(-ца) \"%(sender_name)s\" паведаміў(-ла), што элемент "
+"\"%(object_name)s\" абразлівы.\n"
+"\n"
+"Прычына, пазначаная карыстальнікам(-цай):\n"
+"\"%(report_text)s\"\n"
+"\n"
+"\n"
+"Вы можаце прагледзець дадзены элемент тут:\n"
+"%(object_url)s\n"
+"\n"
+"Калі ласка, зайдзіце на наступную старонку, каб адказать на скаргу:\n"
+"%(domain_url)s%(report_admin_url)s\n"
+"\n"
+"\n"
+"(Вы атрымалі гэты ліст, таму што Вы з'яўляецеся адміністратарам гэтага "
+"партала.)\n"
+"\n"
+"\n"
+"Ваша каманда %(site_name)s"
+
+#, python-format
+msgid "Offensive item reported: \"%(object_name)s\" on %(site_name)s!"
+msgstr ""
+"Атрыманая скарга на абразлівы элемент: \"%(object_name)s\" на %(site_name)s!"
+
+# EN > link in
+#, python-format
+msgid ""
+"Hi %(user_name)s,\n"
+"\n"
+"you have just registered an account at %(site_name)s. We're happy to see "
+"you!\n"
+"\n"
+"You will need to verify your email %(user_email)s before you can log in. \n"
+"\n"
+"\n"
+"Please click on the following link to verify your email address (or copy and "
+"paste the link it in your browser):\n"
+"%(domain_url)s%(user_verification_url)s%(next)s\n"
+"\n"
+"\n"
+"\n"
+"Thank you and see you soon!\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"Вітаем, %(user_name)s,\n"
+"\n"
+"вы толькі што зарэгістравалі акаўнт на %(site_name)s. Мы рады Вас тут "
+"бачыць!\n"
+"\n"
+"Вам трэба пацвердзіць свой адрас электроннай пошты %(user_email)s перш чым "
+"Вы зможаце ўвайсці.\n"
+"\n"
+"\n"
+"Калі ласка, націсніце на наступную спасылку, каб пацвердзіць свой адрас "
+"электроннай пошты (або скапіруйце і ўстаўце спасылку ў Ваш аглядальнік):\n"
+"%(domain_url)s%(user_verification_url)s%(next)s\n"
+"\n"
+"\n"
+"\n"
+"Дзякуем і да пабачэння!\n"
+"\n"
+"Ваша каманда %(site_name)s"
+
+# EN > link in
+#, python-format
+msgid ""
+"Hi %(user_name)s,\n"
+"\n"
+"you have just changed your email address at %(site_name)s.\n"
+"\n"
+"You will need to verify your email %(user_email)s before the changes take "
+"effect. \n"
+"\n"
+"\n"
+"Please click on the following link to verify your email address (or copy and "
+"paste the link it in your browser):\n"
+"%(domain_url)s%(user_verification_url)s\n"
+"\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"Вітаем, %(user_name)s,\n"
+"\n"
+"Вы толькі што змянілі свой адрас электроннай пошты на %(site_name)s.\n"
+"\n"
+"Вам трэба пацвердзіць адрас электроннай пошты %(user_email)s перш чым гэта "
+"змена набудзе моц.\n"
+"\n"
+"\n"
+"Калі ласка, націсніце на наступную спасылку, каб пацвердзіць свой адрас "
+"электроннай пошты (або скапіруйце і ўстаўце спасылку ў Ваш аглядальнік):\n"
+"%(domain_url)s%(user_verification_url)s\n"
+"\n"
+"\n"
+"\n"
+"Ваша каманда %(site_name)s"
+
+#, python-format
+msgid "Please verify your email address for %(site_name)s!"
+msgstr ""
+"Калі ласка, пацвердзіце свой адрас электроннай пошты для %(site_name)s!"
+
+#, python-format
+msgid ""
+"User \"%(sender_name)s\" has accepted the invitation to join \"%(team_name)s"
+"\".\n"
+"\n"
+"You're receiving this email because you are an administrator of this team.\n"
+"\n"
+"(Follow this link to edit your notification preferences: "
+"%(notification_settings_url)s )\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"Карыстальнік(-ца) \"%(sender_name)s\" прыняў(-ла) запрашэнне далучыцца да "
+"\"%(team_name)s\".\n"
+"\n"
+"Вы атрымалі гэты ліст, таму што з'яўляецеся адміністратарам гэтай каманды.\n"
+"\n"
+"(Перайдзіце па гэтай спасылцы, каб змяніць свае налады апавяшчэнняў: "
+"%(notification_settings_url)s )\n"
+"\n"
+"\n"
+"Ваша каманда %(site_name)s"
+
+#, python-format
+msgid ""
+"%(sender_name)s has accepted the invitation to %(team_name)s on "
+"%(site_name)s!"
+msgstr ""
+"%(sender_name)s прыняў(-ла) запрашэнне ў %(team_name)s на %(site_name)s!"
+
+#, python-format
+msgid ""
+"User \"%(sender_name)s\" has declined the invitation to join \"%(team_name)s"
+"\".\n"
+"\n"
+"You're receiving this email because you are an administrator of this team.\n"
+"\n"
+"(Follow this link to edit your notification preferences: "
+"%(notification_settings_url)s )\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"Карыстальнік(-ца) \"%(sender_name)s\" адхіліў(-ла) запрашэнне далучыцца да "
+"\"%(team_name)s\".\n"
+"\n"
+"Вы атрымалі гэты ліст, таму што з'яўляецеся адміністратарам гэтай каманды.\n"
+"\n"
+"(Перайдзіце па гэтай спасылцы, каб змяніць свае налады апавяшчэнняў: "
+"%(notification_settings_url)s )\n"
+"\n"
+"\n"
+"Ваша каманда %(site_name)s"
+
+#, python-format
+msgid ""
+"%(sender_name)s has declined the invitation to %(team_name)s on "
+"%(site_name)s!"
+msgstr ""
+"%(sender_name)s адхіліў(-ла) запрашэнне ў %(team_name)s на %(site_name)s!"
+
+#, python-format
+msgid ""
+"Hi, %(user_name)s!\n"
+"\n"
+"\n"
+"You have been invited to join \"%(team_name)s\"! Follow the link below to "
+"join and get active!"
+msgstr ""
+"Вітаем, %(user_name)s!\n"
+"\n"
+"\n"
+"Вас запрасілі далучыцца да \"%(team_name)s\"! Перайдзіце па спасылцы ніжэй і "
+"дзейнічайце!"
+
+#, python-format
+msgid "The %(site_name)s team"
+msgstr "Каманда %(site_name)s"
+
+#, python-format
+msgid ""
+"Hi, %(user_name)s!\n"
+"\n"
+"Your membership request for %(team_name)s has been accepted!"
+msgstr ""
+"Вітаем, %(user_name)s!\n"
+"\n"
+"Ваш запыт на членства ў %(team_name)s прыняты!"
+
+msgid "Follow this link to get active:"
+msgstr "Перайдзіце па гэтай спасылцы, каб пачаць дзейнасць:"
+
+#, python-format
+msgid ""
+"Hi, %(user_name)s!\n"
+"\n"
+"We're sorry, but your membership request for %(team_name)s has been declined."
+msgstr ""
+"Вітаем, %(user_name)s!\n"
+"\n"
+"Нажаль, Ваш запыт на членства ў %(team_name)s адхілены."
+
+msgid ""
+"If you feel this is unfair, we suggest you contact one of the team's "
+"administrators for further information:"
+msgstr ""
+"Калі Вы лічыце, што гэта несправядліва, прапануем Вам звязацца з адным з "
+"адміністратараў каманды і атрымаць больш падрабязнасцей:"
+
+#, python-format
+msgid ""
+"User \"%(sender_name)s\" has requested to join %(team_name)s.\n"
+"\n"
+"Please go to the following page to accept or decline the request:\n"
+"%(domain_url)s%(group_page_url)s\n"
+"\n"
+"You're receiving this email because you are an administrator of this team.\n"
+"\n"
+"(Follow this link to edit your notification preferences: "
+"%(notification_settings_url)s )\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"Карыстальнік(-ца) \"%(sender_name)s\" даслаў(-ла) запыт на далучэнне да "
+"%(team_name)s.\n"
+"\n"
+"Калі ласка, перайдзіце на наступную старонку, каб прыняць або адхіліць "
+"запыт:\n"
+"%(domain_url)s%(group_page_url)s\n"
+"\n"
+"Вы атрымалі гэты ліст, таму што з'яўляецеся адміністратарам гэтай каманды.\n"
+"\n"
+"(Перайдзіце па гэтай спасылцы, каб змяніць свае налады апавяшчэнняў: "
+"%(notification_settings_url)s )\n"
+"\n"
+"\n"
+"Ваша каманда %(site_name)s"
+
+#, python-format
+msgid "%(sender_name)s wants to join %(team_name)s on %(site_name)s!"
+msgstr "%(sender_name)s жадае далучыцца да %(team_name)s на %(site_name)s!"
+
+#, python-format
+msgid ""
+"User \"%(user_name)s\" (%(user_mail)s) has requested to join %(site_name)s.\n"
+"\n"
+"The user won't be able to log in until you (or another Portal-Admin) "
+"approves of his request.\n"
+"\n"
+"If you wish to approve the user's join request click the following link:\n"
+"%(domain_url)s%(user_approve_url)s\n"
+"\n"
+"\n"
+"Click here to deny the request: %(domain_url)s%(user_deny_url)s\n"
+"\n"
+"\n"
+"You're receiving this email because you are a portal-administrator.\n"
+"\n"
+"\n"
+"Your %(site_name)s Team"
+msgstr ""
+"Карыстальнік(-ца) \"%(user_name)s\" (%(user_mail)s) даслаў(-ла) запыт на "
+"далучэнне да %(site_name)s.\n"
+"\n"
+"Карыстальнік(-ца) не зможа ўвайсці, пакуль Вы (ці іншы адміністратар "
+"партала) не ўхваліце гэты запыт.\n"
+"\n"
+"Калі Вы жадаеце ўхваліць запыт на далучэнне гэтага(-й) карыстальніка(-цы), "
+"націсніце на наступную спасылку:\n"
+"%(domain_url)s%(user_approve_url)s\n"
+"\n"
+"\n"
+"Націсніце тут, каб адхіліць гэты запыт: %(domain_url)s%(user_deny_url)s\n"
+"\n"
+"\n"
+"Вы атрымалі гэты ліст, таму што з'яўляецеся адміністратарам партала.\n"
+"\n"
+"\n"
+"Ваша каманда %(site_name)s"
+
+#, python-format
+msgid "New user request: %(user_name)s wants to join %(site_name)s!"
+msgstr ""
+"Новы запыт ад карыстальніка(-цы): %(user_name)s хоча далучыцца да "
+"%(site_name)s!"
+
+#, python-format
+msgid ""
+"Hallo, %(user_name)s! Herzlich willkommen bei %(site_name)s! \n"
+"\n"
+"Du kannst dich ab sofort unter %(domain_url)s einloggen.\n"
+"\n"
+"Wir freuen uns, dass du die Plattform nutzen möchtest. Um die wichtigsten "
+"Funktionen kennenzulernen, schau dir gern, falls noch nicht geschehen, das "
+"Video auf unserer Frontseite an. Dahin kommst du per Klick auf das "
+"Portallogo links oben.\n"
+"\n"
+"Eine Information schon vorab: durch deine Registrierung bist du automatisch "
+"Mitglied in der Gruppe \"Blog\", wo alle Informaionen des Portals "
+"zusammenlaufen. Damit du einen Überblick erhältst, was hier alles so "
+"passiert, kannst du unter \"Benachrichtigungseinstellungen\" entsprechend "
+"deines Informationsbedürfnisses individuell einstellen, auf welche "
+"Aktivitäten du per Mail hingewiesen werden willst (Klick rechts oben auf "
+"deinen Namen). Damit du nicht zu viele ungewünschte Emails bekommst, ist die "
+"Standardeinstellung bei der Option aus \"keine Benachrichtigungen\" "
+"gesetzt.\n"
+"\n"
+"Für alle Gruppen und Projekte, denen du selbstständig beitrittst, ist die "
+"Standardeinstellung bei dieser Option \"alle Benachrichtigungen\". Das "
+"kannst du dann natürlich ebenso anpassen.\n"
+"\n"
+"Und noch etwas Wissenswertes: Das Portal hier ist nur eines von vielen auf "
+"wechange.de. Wenn du dich auch in den weiteren Portalen umschauen möchtest, "
+"kannst du dich einfach mit deinem Login von hier einloggen. Wenn du in "
+"mehreren Portalen registriert bist, werden dir unter der Rubrik \"Aktivitäten"
+"\" (links oben im Menü) jeweils alle Neuigkeiten aus den Gruppen und "
+"Projekten angezeigt, in denen du Mitglied bist. Durch Klick auf die "
+"verschiedenen Logos kannst du zwischen den Portalen wechseln. Wenn du in "
+"weiteren Portalen auch Mitglied in der Blog-Gruppe sein willst, musst du "
+"hierzu einfach die Mitgliedschaft beantragen.\n"
+"\n"
+"Wenn du Fragen, technische Anregungen, Fehlermeldungen oder Wünsche hast, "
+"melde dich gern den Portaladministrator_innen. \n"
+"\n"
+"Viele Grüße und viel Spaß hier,\n"
+"das %(site_name)s Team"
+msgstr ""
+"Добры дзень,%(user_name)s! Сардэчна вітаем на %(site_name)s!\n"
+"\n"
+"Цяпер Вы можаце ўвайсці па спасылцы %(domain_url)s.\n"
+"\n"
+"Мы рады, што Вы вырашылі скарыстацца нашай платформай. Каб азнаёміцца ​​з яе "
+"найважнейшымі функцыямі, можаце паглядзець відэа на нашай галоўнай старонцы, "
+"калі Вы яшчэ не паспелі гэтага зрабіць. Трапіць на яе можна, націснуўшы на "
+"лагатып партала ў левай верхняй частцы экрана.\n"
+"\n"
+"Загадзя паведамляем, што зарэгістраваўшыся тут, Вы аўтаматычна сталі чальцом "
+"групы \"Блог\", куды паступае ўся інфармацыя з партала. Каб Вам лягчэй было "
+"зразумець, што тут адбываецца, Вы можаце змяніць налады апавяшчэнняў у "
+"адпаведнасці з Вашымі індывідуальнымі патрэбамі, у залежнасці ад таго, пра "
+"якія падзеі Вы хочаце атрымліваць апавяшчэнні на электронную пошту "
+"(націсніце на сваё імя ў правай верхняй частцы экрана). Каб Вы не "
+"атрымлівалі шмат непажаданых паведамленняў на электронную пошту, па "
+"змаўчанні ўключаны параметр \"Ніякіх апавяшчэнняў\". \n"
+" \n"
+"\n"
+"Для ўсіх груп і праектаў, да якіх Вы далучаецеся самастойна, прадвызначаныя "
+"налады ўсталяваны на \"Усе апавяшчэнні\". Вядома, Вы можаце іх "
+"адрэдагаваць.\n"
+"\n"
+"Карысна ведаць таксама наступнае: дадзены партал - адзін з многіх на "
+"wechange.de. Калі Вам хочацца азнаёміцца ​​з іншымі парталамі, гэта можна "
+"зрабіць з дапамогай вашага ўліковага запісу. Калі Вы зарэгістраваныя на "
+"некалькіх парталах, у рубрыцы \"Стужка\" (у левым верхнім куце меню), Вы "
+"будзеце атрымліваць усе абнаўленні груп і праектаў, чальцом якіх "
+"з'яўляецеся. Перамяшчацца з аднаго партала на іншы можна націскаючы на ​​іх "
+"лагатыпы. Калі Вы хочаце стаць чальцом групы \"Блог\" на іншым партале, Вам "
+"трэба будзе проста падаць запыт на членства.\n"
+"\n"
+"Калі ў Вас з'явяцца пытанні, тэхнічныя рэкамендацыі, Вы захочаце паведаміць "
+"пра памылку або падзяліцца сваімі пажаданнямі, звяртайцеся да "
+"адміністратараў партала.\n"
+"\n"
+"Поспехаў і прыемнай супрацы,\n"
+"Ваша каманда %(site_name)s"
+
+#, python-format
+msgid "Your request to join %(site_name)s was approved!"
+msgstr "Ваш запыт на далучэнне да %(site_name)s ухвалены!"
+
+# EN > : at the end is wrong?
+#, python-format
+msgid ""
+"Your request to become a member of %(site_name)s was denied.\n"
+"\n"
+"If you have any questions, please contact one of your site administrators, "
+"as listed below.\n"
+"\n"
+"Your %(site_name)s Team:"
+msgstr ""
+"Ваш запыт членства на %(site_name)s адхілены.\n"
+"\n"
+"Калі ў Вас ёсць пытанні, калі ласка, звяжыцеся з адным з адміністратараў "
+"сайта, пералічаных ніжэй.\n"
+"\n"
+"Ваша каманда %(site_name)s."
+
+#, python-format
+msgid "Your request to join %(site_name)s was denied."
+msgstr "Ваш запыт на далучэнне да %(site_name)s адхілены."
+
+# EN > Our
+#, python-format
+msgid ""
+"Hi! We're happy to know you wish to become a member of %(site_name)s. \n"
+"\n"
+"Out administrators will review your request and approve your user account "
+"soon!\n"
+"\n"
+"Until then, with warm greetings, \n"
+"your %(site_name)s Team"
+msgstr ""
+"Вітаем! Мы рады даведацца, што Вы жадаеце стаць чальцом %(site_name)s.\n"
+"\n"
+"Нашы адміністратары прагледзяць Ваш запыт і ў хуткім часе ўхваляць Ваш "
+"уліковы запіс!\n"
+"\n"
+"А пакуль што дасылаем цёплыя прывітанні,\n"
+"Ваша каманда %(site_name)s"
+
+#, python-format
+msgid "You have requested to become a member of %(site_name)s!"
+msgstr "Вы даслалі запыт на членства на %(site_name)s!"
+
+#, python-format
+msgid ""
+"Hi %(receiver_name)s,\n"
+"\n"
+"you were tagged in \"%(object_name)s\" in %(team_name)s by "
+"%(sender_name)s. \n"
+"\n"
+"You can find it by following this link: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Follow this link to edit your notification preferences: "
+"%(notification_settings_url)s )\n"
+"\n"
+"Your %(site_name)s Team."
+msgstr ""
+"Вітаем, %(receiver_name)s,\n"
+"\n"
+"Карыстальнік(-ца) %(sender_name)s пазначыў(-ла) Вас ў \"%(object_name)s\" у "
+"%(team_name)s.\n"
+"\n"
+"Вы можаце прагледзець пазнаку па наступнай спасылцы: %(object_url)s\n"
+"\n"
+"\n"
+"\n"
+"(Перайдзіце па гэтай спасылцы, каб змяніць свае налады апавяшчэнняў: "
+"%(notification_settings_url)s )\n"
+"\n"
+"Ваша каманда %(site_name)s."
+
+#, python-format
+msgid "You were tagged in: \"%(object_name)s\", in %(team_name)s"
+msgstr "Вас пазначылі ў \"%(object_name)s\" у %(team_name)s"
+
+#, python-format
+msgid ""
+"Hi %(user_name)s,\n"
+"\n"
+"you have just accepted the Terms of Services at %(site_name)s. Here is a "
+"copy for your records.\n"
+"\n"
+"\n"
+"%(tos_content)s\n"
+"\n"
+"\n"
+"Your %(site_name)s Team \n"
+"\n"
+"%(domain_url)s"
+msgstr ""
+"Вітаем, %(user_name)s,\n"
+"\n"
+"вы толькі што прынялі Умовы карыстання на %(site_name)s. Вось копія для "
+"Вас.\n"
+"\n"
+"\n"
+"\n"
+"%(tos_content)s\n"
+"\n"
+"\n"
+"Ваша каманда %(site_name)s\n"
+"\n"
+"%(domain_url)s"
+
+msgid "Additional options"
+msgstr "Дадатковыя параметры"
+
+msgid ""
+"Attach files, add a location, mark topics and adjust visibility settings"
+msgstr ""
+"Далучыць файлы, дадаць месцазнаходжанне, пазначыць тэмы і змяніць налады "
+"бачнасці"
+
+msgid "Tag persons"
+msgstr "Пазначыць асоб"
+
+msgid "Select tags"
+msgstr "Выбраць цэтлікі"
+
+msgid "Place or adress"
+msgstr "Месца або адрас"
+
+msgid "Upload a file or image or attach an existing one"
+msgstr "Зацягніце файл ці выяву або далучыце ўжо існуючыя"
+
+msgid "Select topic"
+msgstr "Выбраць тэму"
+
+msgid "Visibility"
+msgstr "Бачнасць"
+
+msgid ""
+"This item will be posted as publicly visible! This means that anyone on the "
+"internet can access and see it, and it may potentially be included in search "
+"engine results."
+msgstr ""
+"Гэты элемент будзе публічна даступны! Гэта значыць, што кожны ў Інтэрнэце "
+"зможа атрымаць да яго доступ і прагледзець яго, і цалкам верагодна, што ён "
+"будзе адлюстраваны ў выніках пошукавых сістэм."
+
+msgid ""
+"If you do not wish this, you can change this item's visibility setting below."
+msgstr ""
+"Калі Вы не жадаеце, каб гэта здарылася, можаце змяніць налады бачнасці ніжэй."
+
+msgid "Show more options..."
+msgstr "Паказаць больш параметраў..."
+
+msgid "Which topics are you involved with?"
+msgstr "З якімі тэмамі Вы працуеце?"
+
+msgid "Select topics"
+msgstr "Выбраць тэмы"
+
+msgid "Which tags further describe your activities?"
+msgstr "Якія цэтлікі дадаткова апісваюць вашу дзейнасць?"
+
+msgid "Select or create tags"
+msgstr "Абярыце або стварыце цэтлікі"
+
+msgid "Topics we are involved with"
+msgstr "Тэмы, якімі Вы займаецеся"
+
+msgid "Activities and interests"
+msgstr "Віды дзейнасці і інтарэсы"
+
+msgid "Where would your idea be realized?"
+msgstr "Дзе, па Вашай задумцы, павінна рэалізоўвацца ідэя?"
+
+msgid "Enter a place or address and then choose a point on the map."
+msgstr "Увядзіце месца або адрас, а пасля выберыце кропку на карце."
+
+msgid "Which topics fit your idea?"
+msgstr "Якія тэмы падыходзяць да Вашай ідэі?"
+
+msgid "Where do you live?"
+msgstr "Дзе Вы жывяце?"
+
+msgid "Which topics are you interested in?"
+msgstr "Якія тэмы Вас цікавяць?"
+
+msgid "What would you like to learn?"
+msgstr "Чаму б Вы хацелі навучыцца?"
+
+# EN > platform
+msgid "Who may see your plattform profile?"
+msgstr "Хто можа бачыць Ваш профіль на платформе?"
+
+msgid "Your profile will be set to be publicly visible!"
+msgstr "Ваш профіль будзе публічна даступны!"
+
+msgid ""
+"This means that your name, avatar and user profile can be seen by ANYONE on "
+"the internet and may potentially be included in search engine results!"
+msgstr ""
+"Гэта значыць, што Ваша імя, аватар і профіль карыстальніка(-цы) можа ўбачыць "
+"кожны ў Інтэрнэце, і цалкам верагодна, што ён будзе адлюстроўвацца ў выніках "
+"пошукавых сістэм!"
+
+msgid ""
+"Please note that changes in this setting will not have an immediate effect "
+"on search engine results! Depending on the search provider, it might take "
+"days or weeks until this setting is reflected in their results."
+msgstr ""
+"Звярніце ўвагу, што змены гэтай налады не імгненна набудуць моц у пошукавых "
+"сістэмах! У залежнасці ад службы пошуку, можа прайсці некалькі дзён або "
+"тыдняў перш чым гэта налада адлюструецца ў выніках пошуку."
+
+msgid "Privacy"
+msgstr "Прыватнасць"
+
+msgid "My location"
+msgstr "Маё месцазнаходжанне"
+
+msgid "Topics I am interested in"
+msgstr "Тэмы, якія мяне цікавяць"
+
+msgid "What I wish to learn"
+msgstr "Чаму я хачу навучыцца"
+
+msgid "Logged in Members only"
+msgstr "Толькі для ўвайшоўшых чальцоў"
+
+msgid "Everybody"
+msgstr "Усе"
+
+msgid "OK"
+msgstr "ОК"
+
+msgid "Toggle navigation"
+msgstr "Пераключыць навігацыю"
+
+msgid "My Profile"
+msgstr "Мой профіль"
+
+msgid "Logout"
+msgstr "Выйсці"
+
+msgid "Forum"
+msgstr "Форум"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "People"
+msgstr "Людзі"
+
+msgid "Invited Groups"
+msgstr "Запрошаныя групы"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Groups"
+msgstr "Мае групы"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Groups"
+msgstr "Усе групы"
+
+msgid "Invited Projects"
+msgstr "Запрошаныя праекты"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Projects"
+msgstr "Мае праекты"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Projects"
+msgstr "Усе праекты"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Ideas"
+msgstr "Ідэі"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Ideas"
+msgstr "Мае ідэі"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Ideas"
+msgstr "Усе ідэі"
+
+msgid "Search..."
+msgstr "Пошук..."
+
+msgid "Search"
+msgstr "Пошук"
+
+msgid "Messages"
+msgstr "Паведамленні"
+
+msgid "My Stream"
+msgstr "Мая стужка"
+
+msgid "Not logged in."
+msgstr "Вы не ўвайшлі ў сістэму."
+
+msgid "You cannot create or edit events until you are logged in!"
+msgstr "Вы не можаце ствараць ці рэдагаваць падзеі, пакуль не ўвойдзеце!"
+
+msgid "No anonymous access!"
+msgstr "Ананімны доступ забаронены!"
+
+msgid "This website allows no anonymous access."
+msgstr "Гэты вэбсайт не дазваляе ананімнага доступу."
+
+msgid "Log in..."
+msgstr "Увайсці..."
+
+msgctxt "read and accept the [Terms of Services]"
+msgid "I have read and accept the"
+msgstr "Я прачытаў(-ла) і прымаю"
+
+msgid "Terms and Services"
+msgstr "Умовы карыстання"
+
+msgid "Forgot password?"
+msgstr "Забылі пароль?"
+
+msgid "Logged out"
+msgstr "Вы выйшлі"
+
+msgid "Log in"
+msgstr "Увайсці"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Password change"
+msgstr "Змена пароля"
+
+msgid "Your Profile"
+msgstr "Ваш профіль"
+
+msgid "Change password"
+msgstr "Змяніць пароль"
+
+msgid "Password cannot be changed!"
+msgstr "Пароль нельга змяніць!"
+
+msgid ""
+"Sorry, but your account is associated with an integrated Portal! This means "
+"that neither your email, nor your password cannot be changed."
+msgstr ""
+"Прабачце, але Ваш акаўнт звязаны з інтэграваным парталам! Гэта значыць, што "
+"Вашы адрас электроннай пошты і пароль нельга змяніць."
+
+msgid "Please contact an administrator if this is an issue for you."
+msgstr "Калі ласка, звяжыцеся з адміністратарам, калі для Вас гэта праблема."
+
+msgid "Password reset"
+msgstr "Скіданне пароля"
+
+msgid "Your password has been changed successfully!"
+msgstr "Ваш пароль паспяхова зменены!"
+
+msgid "Enter old password"
+msgstr "Увядзіце стары пароль"
+
+msgid "We need to make sure it's really you"
+msgstr "Нам трэба пераканацца, што гэта сапраўды Вы"
+
+msgid "Old password"
+msgstr "Стары пароль"
+
+msgid "New Password"
+msgstr "Новы пароль"
+
+msgid "Enter a password you don't use anywhere else. The longer the better!"
+msgstr ""
+"Увядзіце пароль, які Вы больш нідзе не выкарыстоўваеце. Чым ён даўжэй, тым "
+"лепш!"
+
+msgid "Repeat your password just to make sure"
+msgstr "Паўтарыце свой пароль, каб пераканацца"
+
+msgid "Repeat new Password"
+msgstr "Паўтарыце новы пароль"
+
+msgid "Change my password"
+msgstr "Змяніць мой пароль"
+
+msgid "Password reset complete"
+msgstr "Скіданне пароля завершанае"
+
+msgid "Reset password"
+msgstr "Скінуць пароль"
+
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr "Ваш пароль зададзены. Цяпер можна ўвайсці на сайт."
+
+msgid "Enter new password"
+msgstr "Увядзіце новы пароль"
+
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+"Калі ласка, увядзіце новы пароль двойчы, каб мы маглі пераканацца, што вы "
+"ўвялі яго правільна."
+
+msgid "New password"
+msgstr "Новы пароль"
+
+msgid "New password confirmation"
+msgstr "Пацверджанне новага пароля"
+
+msgid "Password reset unsuccessful"
+msgstr "Скіданне пароля прайшло няўдала"
+
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+"Спасылка на скіданне пароля несапраўдная, магчыма, таму што яна ўжо была "
+"скарыстаная. Калі ласка, дашліце запыт на новае скіданне пароля."
+
+msgid "Password reset successful"
+msgstr "Скіданне пароля прайшло паспяхова"
+
+msgid ""
+"We've emailed you instructions for setting your password. You should be "
+"receiving them shortly."
+msgstr ""
+"Мы даслалі Вам інструкцыі па заданні пароля электронным лістом. Вы хутка іх "
+"атрымаеце."
+
+msgid ""
+"If you don't receive an email, please make sure you've entered the address "
+"you registered with, and check your spam folder."
+msgstr ""
+"Калі Вы не атрымаеце гэта ліст, калі ласка, пераканайцеся, што Вы ўвялі "
+"электронны адрас, з якім праходзілі рэгістрацыю, і праверце папку са спамам."
+
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+"Вы атрымалі гэты электронны ліст, таму што даслалі запыт на скіданне пароля "
+"для Вашага акаўнта на %(site_name)s."
+
+msgid "Please go to the following page and choose a new password:"
+msgstr "Калі ласка, перайдзіце на наступную старонку і абярыце новы пароль:"
+
+msgid "Your username, in case you've forgotten:"
+msgstr "Ваша імя карыстальніка(-цы), калі вы яго забыліся:"
+
+msgid "Thanks for using our site!"
+msgstr "Дзякуем за карыстанне нашым сайтам!"
+
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll email "
+"instructions for setting a new one."
+msgstr ""
+"Забыліся пароль? Увядзіце свой адрас электроннай пошты ніжэй, і мы дашлем "
+"інструкцыі па заданні новага пароля."
+
+msgid ""
+"The email you used to register your account. This is the one you receive "
+"email notifications on"
+msgstr ""
+"Адрас электроннай пошты, які вы выкарысталі падчас рэгістрацыі свайго "
+"акаўнта. На гэты адрас вы атрымліваеце апавяшчэнні"
+
+msgid "Example: mymail@example.com"
+msgstr "Напрыклад: mymail@example.com"
+
+msgid "Sign up"
+msgstr "Загэгістравацца"
+
+msgid "Create account"
+msgstr "Стварыць акаўнт"
+
+msgid "Welcome to the Community!"
+msgstr "Сардэчна вітаем у супольнасці!"
+
+msgid "You need a user account to join projects and become active!"
+msgstr ""
+"Вам неабходны ўліковы запіс карыстальніка, каб далучацца да праектаў і "
+"дзейнічаць!"
+
+msgid "You need a user account to continue!"
+msgstr "Каб працягнуць, Вам неабходны ўліковы запіс карыстальніка!"
+
+msgid ""
+"Signing up is easy and fast. Just fill out these fields and you're all set!"
+msgstr "Рэгістрацыя простая і хуткая. Проста запоўніце гэтыя палі, і гатова!"
+
+msgid "Already have an account?"
+msgstr "У Вас ужо ёсць акаўнт?"
+
+msgid "Log in here"
+msgstr "Увайдзіце тут"
+
+msgid "You are signing up using this invite token:"
+msgstr "Вы рэгіструецеся з выкарыстаннем гэтага маркера запрашэння:"
+
+msgid ""
+"After signup, you will automatically become a member of the associated "
+"projects and groups."
+msgstr ""
+"Пасля рэгістрацыі Вы аўтаматычна станеце чальцом звязаных праектаў і груп."
+
+msgid "Email address"
+msgstr "Адрас электроннай пошты"
+
+msgid ""
+"This will be used as your login. Notification emails will be sent to this "
+"address (if you want to receive them)."
+msgstr ""
+"Ён будзе выкарыстоўвацца ў якасці логіна. Лісты з апавяшчэннямі будуць "
+"дасылацца на гэты адрас (калі Вы жадаеце іх атрымліваць)."
+
+msgid "Repeat Password"
+msgstr "Паўтарыце пароль"
+
+msgid "Your name"
+msgstr "Ваша імя"
+
+msgid "This name will be displayed to other users on the site"
+msgstr "Гэта імя будзе бачна іншым карыстальнікам(-цам) сайта"
+
+msgid "First name"
+msgstr "Імя"
+
+msgid "Last name"
+msgstr "Прозвішча"
+
+msgid "You can supply your last name to be displayed as well"
+msgstr "Можаце дадаць сваё прозвішча, каб яно таксама адлюстроўвалася"
+
+msgid "Captcha"
+msgstr "Капча"
+
+msgid "We need to make sure you are a real person (sorry!)"
+msgstr "Нам трэба пераканацца, што Вы сапраўды чалавек (прабачце!)"
+
+msgid "Search options..."
+msgstr "Параметры пошуку..."
+
+msgid "Search in Apps"
+msgstr "Шукаць у прыкладаннях"
+
+msgid "Ethercalcs"
+msgstr "Нататнікі Ethercalc"
+
+msgid "Offers"
+msgstr "Прапановы"
+
+msgid "Search in teams"
+msgstr "Шукаць ў камандах"
+
+msgid "All Projects and Groups"
+msgstr "Усе праекты і групы"
+
+msgid "My Projects and Groups"
+msgstr "Мае праекты і групы"
+
+msgid "Other Projects and Groups"
+msgstr "Іншыя праекты і групы"
+
+msgid "Search for Users"
+msgstr "Шукаць карыстальнікаў(-ц)"
+
+msgid "Ordering"
+msgstr "Парадак размяшчэння"
+
+msgid "Newest"
+msgstr "Спачатку найноўшыя"
+
+msgid "Relevance"
+msgstr "Па рэлевантнасці"
+
+#, python-format
+msgid ""
+"Showing %(end)s of %(total)s results for your query \"%(query)s\" with "
+"topics:"
+msgstr ""
+"Паказваецца %(end)s з %(total)s вынікаў па Вашым запыце \"%(query)s\" з "
+"тэмамі:"
+
+#, python-format
+msgid "Showing %(end)s of %(total)s results for your query \"%(query)s\""
+msgstr "Паказваецца %(end)s з %(total)s вынікаў па Вашым запыце \"%(query)s\""
+
+#, python-format
+msgid "Showing %(end)s of %(total)s results with topics:"
+msgstr "Паказваецца %(end)s з %(total)s вынікаў з тэмамі:"
+
+msgid "or"
+msgstr "або"
+
+msgid "We could not find any results matching your search query."
+msgstr "Мы не змаглі знайсці нічога адпаведнага Вашаму пошукаваму запыту."
+
+msgid "previous"
+msgstr "папярэдняя"
+
+msgid "next"
+msgstr "наступная"
+
+msgid "Enter one or more search terms or select a topic to search."
+msgstr ""
+"Увядзіце адзін ці больш ключавых слоў для пошуку або абярыце тэму для пошуку."
+
+msgid "Simple Statistics"
+msgstr "Простая статыстыка"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "From"
+msgstr "З"
+
+msgid "Start date."
+msgstr "Дата пачатку."
+
+msgid "Time"
+msgstr "Час"
+
+msgid "Until"
+msgstr "Да"
+
+msgid "End date."
+msgstr "Дата заканчэння."
+
+msgid "Ok"
+msgstr "OK"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Users"
+msgstr "Мае карыстальнікі(-цы)"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "My Events"
+msgstr "Мае падзеі"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Users"
+msgstr "Усе карыстальнікі(-цы)"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "All Events"
+msgstr "Усе падзеі"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Event"
+msgstr "Падзея"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Idea"
+msgstr "Ідэя"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create User"
+msgstr "Стварыць карыстальніка(-цу)"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Event"
+msgstr "Стварыць падзею"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search for Names, Topics and Places..."
+msgstr "Пошук імёнаў, тэм і месцаў..."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search for Names and Topics..."
+msgstr "Пошук імёнаў і тэм..."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Where"
+msgstr "Дзе"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "In map area"
+msgstr "У вобласці на карце"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "If active, searching will be restricted to the visible map area."
+msgstr "Калі актыўна, пошук будзе абмежаваны бачнай вобласцю карты."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Apply Filters"
+msgstr "Ужыць фільтры"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Clear Filters"
+msgstr "Ачысціць фільтры"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Street"
+msgstr "Вуліца"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create idea"
+msgstr "Стварыць ідэю"
+
+#. Translators: __INCLUDE_JS_PO__
+#. Translators: __INCLUDE_JS_PO__
+msgid "Next"
+msgstr "Далей"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Choose a location for your idea by dragging the marker!"
+msgstr "Выберыце месцазнаходжанне Вашай ідэі, перацягнуўшы маркер!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "of"
+msgstr "з"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Results"
+msgstr "Вынікі"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "No results found."
+msgstr "Нічога не знойдзена."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not complete the search due to an error."
+msgstr "Пошук не завершаны з-за памылкі."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search when moving the map"
+msgstr "Шукаць падчас перасоўвання карты"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search this area"
+msgstr "Шукаць ў гэтай вобласці"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Participants"
+msgstr "Удзельнікі(-цы)"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Projects/Groups"
+msgstr "Праекты/групы"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "No info."
+msgstr "Няма інфармацыі."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Administrator"
+msgstr "Адміністратар"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Administrators"
+msgstr "Адміністратары"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Administrators unknown"
+msgstr "Адміністратары невядомыя"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "No description yet."
+msgstr "Апісання яшчэ няма."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid ""
+"Choose a location for your idea by dragging & dropping the marker. You can "
+"still change this location later on."
+msgstr ""
+"Выберыце месцазнаходжанне для Вашай ідэі, перацягваючы маркер. Вы зможаце "
+"змяніць месцазнаходжанне пазней."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Back to location selection"
+msgstr "Вярнуцца да выбару месцазнаходжання"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Protected Content"
+msgstr "Абароненае змесціва"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Sorry, but you cannot view details for this content."
+msgstr "Прабачце, але Вы не можаце прагледзець дэталі гэтага змесціва."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "This can happen when its visibility settings have changed recently."
+msgstr "Гэта можа адбывацца ў выпадку, калі былі змененыя налады бачнасці."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Please register or log in to continue!"
+msgstr "Калі ласка, зарэгіструйцеся або ўвайдзіце, каб працягнуць!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Error!"
+msgstr "Памылка!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid ""
+"Sorry, but the requested content could not be retrieved from the server."
+msgstr "На жаль, запытанае змесціва не атрымалася выняць з сервера."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Visit Event Page"
+msgstr "Зайсці на старонку падзеі"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid ""
+"You will now receive notifications for comments or when this event is "
+"updated or its details change."
+msgstr ""
+"Вы будзеце атрымліваць апавяшчэнні пра каментары, або калі гэта падзея будзе "
+"абнаўляцца ці зменяцца яе дэталі."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "If you do not want notifications, click the unfollow button!"
+msgstr ""
+"Калі Вы не жадаеце атрымліваць апавяшчэнні, націсніце на кнопку \"Перастаць "
+"сачыць\"!"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your like setting because of an error."
+msgstr "Не атрымалася захаваць Вашу наладу падабання з-за памылкі."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Could not save your follow setting because of an error."
+msgstr "Не атрымалася захаваць Вашу наладу сачэння з-за памылкі."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Hidden Users"
+msgstr "Схаваныя карыстальнікі(-цы)"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Hidden User"
+msgstr "Схаваны карыстальнік(-ца)"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are a Member"
+msgstr "Вы з'яўляецеся чальцом"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Join Group"
+msgstr "Далучыцца да групы"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Message Group"
+msgstr "Адправіць групе паведамленне"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Author"
+msgstr "Аўтар(-ка)"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create Project from Idea"
+msgstr "Стварыць праект з ідэі"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Edit your Idea"
+msgstr "Рэдагаваць Вашу ідэю"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid ""
+"You will receive a notification when a project is created from your liked "
+"idea."
+msgstr ""
+"Вы будзеце атрымліваць апавяшчэнні, калі з упадабанай Вамі ідэі будзе "
+"створаны праект."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Projects - Created from this Idea"
+msgstr "Праекты, створаныя з гэтай ідэі"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Join Project"
+msgstr "Далучыцца да праекта"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Message Project"
+msgstr "Даслаць паведамленне праекту"
+
+msgid "Quick Join"
+msgstr "Хуткае далучэнне"
+
+msgid ""
+"Using this token, you can automatically join the following projects and "
+"groups"
+msgstr ""
+"З дапамогай гэтага маркера вы можаце аўтаматычна далучыцца да наступных "
+"праектаў і груп"
+
+msgid "Team up quickly using an invite token"
+msgstr "Хутка збярыце каманду, выкарыстоўваючы маркер запрашэння"
+
+msgid "Join all now!"
+msgstr "Далучыцеся да ўсіх зараз!"
+
+msgid "Create account and join"
+msgstr "Стварыць акаўнт і далучыцца"
+
+msgid ""
+"If you know an invite token, you can automatically join groups and projects, "
+"no matter if you have a user account yet or not."
+msgstr ""
+"Калі ў Вас ёсць маркер запрашэння, Вы можаце аўтаматычна далучацца да груп і "
+"праектаў, для гэтага неабавязкова мець уліковы запіс карыстальніка(-цы)."
+
+msgid "Enter a token:"
+msgstr "Увядзіце маркер:"
+
+msgid "For example"
+msgstr "Напрыклад"
+
+msgid "About me"
+msgstr "Пра мяне"
+
+msgid "Edit Profile"
+msgstr "Рэдагаваць профіль"
+
+#, python-format
+msgid ""
+"Your account is currently connected with the Facebook account \"%(name)s\". "
+"Do you really want to disconnect your Facebook account? This will also "
+"revoke all permissions you granted us to your Facebook account."
+msgstr ""
+"Ваш акаўнт на дадзены момант злучаны з Facebook-акаўнтам \"%(name)s\". Вы "
+"сапраўды хочаце адлучыць Ваш Facebook-акаўнт? Гэта адменіць усе дазволы, "
+"якія Вы нам перадалі ў межах Вашага Facebook-акаўнта."
+
+msgid "Disconnect Facebook Account"
+msgstr "Адлучыць Facebook-акаўнт"
+
+msgid "Disconnect Facebook"
+msgstr "Адлучыць Facebook"
+
+msgid "Delete profile"
+msgstr "Выдаліць профіль"
+
+msgid "User overview"
+msgstr "Агульная інфармацыя пра карыстальніка(-цу)"
+
+msgid "Members of your projects and groups only"
+msgstr "Толькі чальцы Вашых праектаў і груп"
+
+msgid "Everybody (public profile)"
+msgstr "Усе (публічны профіль)"
+
+msgid "Delete user profile"
+msgstr "Выдаліць профіль карыстальніка(-цы)"
+
+msgid "Delete Profile"
+msgstr "Выдаліць профіль"
+
+msgid "You are about to delete your user account from the site!"
+msgstr "Вы збіраецеся выдаліць свой профіль карыстальніка(-цы) з сайта!"
+
+msgid ""
+"By clicking the button below, you will irrevocably delete your user account, "
+"profile and personal information from this site."
+msgstr ""
+"Начіснуўцы на кнопку ўнізе, Вы беззваротна выдаліце свой уліковы запіс "
+"карыстальніка(-цы), профіль і асабістую інфармацыю з гэтага сайта."
+
+msgid ""
+"Your created documents, news posts, uploaded files, and other content will "
+"be retained on the site. However this content will no longer bear your name "
+"or be connected to you."
+msgstr ""
+"Створаныя Вамі дакументы, нататкі, зацягнутыя файлы і іншае змесціва "
+"застанецца на сайце. Аднак гэта змесціва больш не будзе падпісана Вашым "
+"іменем ці звязана з Вамі."
+
+msgid ""
+"If you wish to delete any of your content, please go back and do so now. "
+"Once you delete your profile, you will no longer have any access to anything "
+"you have created with this account."
+msgstr ""
+"Калі Вы жадаеце выдаліць штосьці з Вашага змесціва, калі ласка, вярніцеся і "
+"зрабіце гэта зараз. Як толькі вы выдаліце свой профіль, Вы згубіце доступ да "
+"любога змесціва, якое Вы стварылі пад гэтым акаўнтам."
+
+msgid "Delete Account"
+msgstr "Выдаліць акаўнт"
+
+msgid ""
+"I have understood that any content created by me will be retained on the "
+"website. I wish to irrevocably delete my user account:"
+msgstr ""
+"Я разумею, што любое створанае мной змесціва застанецца на сайце. Я хачу "
+"беззваротна выдаліць свой уліковы запіс карыстальніка(-цы):"
+
+msgid "Delete user account"
+msgstr "Выдаліць уліковы запіс карыстальніка(-цы)"
+
+#, python-format
+msgid "User profile: %(username)s"
+msgstr "Профіль карыстальніка(-цы): %(username)s"
+
+msgid "My Website"
+msgstr "Мой вэбсайт"
+
+msgid "Edit Your Profile"
+msgstr "Рэдагаваць Ваш профіль"
+
+msgid "Basic data"
+msgstr "Асноўная інфармацыя"
+
+msgid "E-Mail"
+msgstr "Адрас электроннай пошты"
+
+msgid "Profile avatar"
+msgstr "Аватар профіля"
+
+msgid "Who are you and what motivates you?"
+msgstr "Хто Вы, і што Вас матывуе?"
+
+msgid "Tell others something about you!"
+msgstr "Распавядзіце іншым штосьці пра сябе!"
+
+msgid "Welcome!"
+msgstr "Сардэчна вітаем!"
+
+msgid ""
+"We give you full control over what people can see of you on the platform and "
+"what you hear from us!"
+msgstr ""
+"Мы даем Вам поўны кантроль над тым, якую інфармацыю пра Вас людзі бачаць на "
+"гэтай платформе, і што Вы ад нас атрымліваеце!"
+
+msgid "Who is allowed to see you on the platform?"
+msgstr "Каму дазволена бачыць Вас на платформе?"
+
+msgid "You can change this setting later in your profile settings"
+msgstr "Вы можаце змяніць гэтую наладу пазней у Вашых наладах профіля"
+
+msgid "in the top right menu"
+msgstr "у верхнім правым меню"
+
+msgid "When may we send you email notifications?"
+msgstr "Калі мы можам дасылаць Вам апавяшчэнні па электроннай пошце?"
+
+msgid ""
+"You can change or customize this setting later in your notification settings"
+msgstr ""
+"Вы можаце персаналізаваць гэтую наладу пазней у Вашых наладах апавяшчэнняў"
+
+msgid "Your privacy: You are in control!"
+msgstr "Ваша прыватнасць: Вы ўсё кантралюеце!"
+
+msgid "User Dashboard"
+msgstr "Панэль карыстальніка(-цы)"
+
+msgid "Enable posting to Facebook"
+msgstr "Уключыць публікацыі на Facebook"
+
+msgid "Loading Facebook-Scripts..."
+msgstr "Загружаюцца Facebook-сцэнары..."
+
+msgid ""
+"If nothing happens please disable any addons like Ghostery or NoScript..."
+msgstr ""
+"Калі нічога не адбываецца, калі ласка, адключыце ўсе дадаткі тыпу Ghostery "
+"або NoScript..."
+
+msgid "Connect Facebook Account"
+msgstr "Падлучыць Facebook-акаўнт"
+
+msgctxt "Facebook connect explanation box"
+msgid "Why connect?"
+msgstr "Навошта яго падлучаць?"
+
+msgctxt "Facebook connect explanation box"
+msgid ""
+"When you connect your Facebook account you can easily publish your news "
+"posts on your Facebook timeline. You can also connect your projects/groups "
+"to a Facebook Group or Fan-Site to enable members to publish their news "
+"posts there, too."
+msgstr ""
+"Падлучыўшы свой Facebook-акаўнт, Вы зможаце лёгка публікаваць допісы ў сваёй "
+"Facebook-хроніцы. Вы таксама можаце падлучыць свае праекты/групы да Facebook-"
+"групы або фан-старонкі, каб чальцы групы маглі таксама публікаваць там свае "
+"допісы."
+
+msgctxt "Facebook connect explanation box"
+msgid "For that, we need your permission to publish on Facebook in your name."
+msgstr ""
+"Для гэтага нам патрэбны Ваш дазвол на публікацыі на Facebook ад Вашага імя."
+
+msgctxt "Facebook connect explanation box list header"
+msgid "We guarantee:"
+msgstr "Мы гарантуем:"
+
+msgctxt "Facebook connect explanation box list items"
+msgid "We will only post exactly what you have written"
+msgstr "Мы будзем бачыць толькі тое, што Вы напісалі"
+
+msgctxt "Facebook connect explanation box list items"
+msgid ""
+"We will only post with your explicit consent for every news post, and never "
+"automatically"
+msgstr ""
+"Мы будзем заўседы запытваць Вашу згоду на публікацыю кожнага допіса, яны не "
+"будуць публікавацца аўтаматычна"
+
+msgctxt "Facebook connect explanation box list items"
+msgid ""
+"Except for your name and profile picture, we will obtain absolutely no other "
+"data from your Facebook account"
+msgstr ""
+"Акрамя Вашага імя і выявы профіля, мы не атрымаем абсалютна ніякай "
+"інфармацыі з Вашага Facebook-акаўнта"
+
+#, python-format
+msgctxt "Facebook connect explanation box list items"
+msgid ""
+"You can revoke your permission at any time from your %(site_name)s profile "
+"settings"
+msgstr ""
+"Вы зможаце адклікаць свой дазвол у любы момант у Вашых наладах профіля на "
+"%(site_name)s"
+
+msgid "Log in with Facebook"
+msgstr "Увайсці праз Facebook"
+
+msgid "Also post this to my Facebook timeline"
+msgstr "Таксама апублікаваць гэта ў маей Facebook-хроніцы"
+
+msgid ""
+"When you submit this post, it will be posted on your Facebook timeline "
+"exactly as seen."
+msgstr ""
+"Калі Вы адправіце гэты допіс, ён будзе апублікаваны ў Вашай Facebook-хроніцы "
+"ў такім выглядзе, як зараз."
+
+msgid "Also post this to this project/group's Facebook Fan-Page"
+msgstr ""
+"Таксама апублікаваць гэта на фан-старонцы гэтага праекта/групы на Facebook"
+
+msgid ""
+"Also post this as a visitor's post to this project/group's Facebook Fan-Page"
+msgstr ""
+"Таксама апублікаваць гэта як гасцявы допіс на фан-старонцы гэтага праекта/"
+"групы на Facebook"
+
+msgid ""
+"If you are an Editor of the Fan-Page on Facebook, confirm your Editor access "
+"to post in the voice of that Fan-Page!"
+msgstr ""
+"Калі Вы з'яўляецеся рэдактарам фан-старонкі на Facebook, пацвердзіце свой "
+"доступ рэдактара да публікацыі допісаў на гэтай старонцы!"
+
+msgctxt "a link to click on"
+msgid "You can do this here"
+msgstr "Можаце зрабіць гэта тут"
+
+msgid "Also post this to this project/group's Facebook Group"
+msgstr "Таксама апублікаваць гэта ў Facebook-групе гэтага праекта/групы"
+
+msgid ""
+"When you submit this post, it will be posted to the Facebook Fan-Page of "
+"this project/group, in the voice of that Fan-Page."
+msgstr ""
+"Калі Вы адправіце гэты допіс, ён будзе апублікаваны на фан-старонцы гэтага "
+"праекта/групы на Facebook."
+
+msgid ""
+"When you submit this post, it will be posted from your Facebook Account as a "
+"visitor's post to the Facebook Fan-Page of this project/group."
+msgstr ""
+"Калі вы адправіце гэты допіс, ён будзе апублікаваны з Вашага Facebook-"
+"акаўнта як гасцявы допіс на фан-старонцы гэтага праекта/групы на Facebook."
+
+msgid ""
+"When you submit this post, it will be posted from your Facebook Account, "
+"exactly as seen, on the Facebook Group of this project/group."
+msgstr ""
+"Калі вы адправіце гэты допіс, ён будзе апублікаваны з Вашага Facebook-"
+"акаўнта ў цяперашнім выглядзе ў Facebook-групе гэтага праекта/групы."
+
+msgid ""
+"Connect a Facebook Group or Fan-Page to enable members to publish their news "
+"posts there, too!"
+msgstr ""
+"Падлучыце Facebook-групу або фан-старонку, каб чальцы маглі таксама "
+"публікаваць там свае допісы!"
+
+msgid ""
+"You need to connect your user account to Facebook before you can link this "
+"group/project!"
+msgstr ""
+"Вы мусіце падлучыць свой уліковы запіс карыстальніка(-цы) да Facebook перш "
+"чым падлучыць гэты праект/групу!"
+
+msgid "Connect a Facebook Group"
+msgstr "Падлучыць Facebook-групу"
+
+#, python-format
+msgid ""
+"You can connect your projects and groups to a Facebook Group. Once "
+"connected, your members can choose to share the news posts they write on "
+"%(site_name)s to the Facebook Group. (They need to connect their accounts to "
+"Facebook, as well!)"
+msgstr ""
+"Вы можаце падлучыць Вашы праекты і групы да Facebook-групы. Пасля падлучэння "
+"Вашы чальцы змогуць дзяліцца сваімі запісамі, якія яны пішуць на "
+"%(site_name)s, у гэтай Facebook-групе. (Ім таксама трэба будзе падлучыць "
+"іхнія акаўнты да Facebook!)."
+
+msgid ""
+"Please be aware that users can only post to your Group if they would also be "
+"permitted post in it on Facebook!"
+msgstr ""
+"Майце на ўвазе, што карыстальнікі(-цы) змогуць публікаваць допісы ў Вашай "
+"групе толькі калі ім будзе дазволена публікаваць іх і на Facebook!"
+
+msgid ""
+"You can find the ID of your Facebook Group on the Info-page in the About tab "
+"of the Group on Facebook."
+msgstr ""
+"Вы можаце знайсці ідэнтыфікатар Вашай Facebook-групы на інфа-старонцы гэтай "
+"групы на Facebook ва ўкладцы \"Звесткі\"."
+
+msgid "Facebook Group to link to"
+msgstr "Facebook-група, якую трэба падлучыць"
+
+msgid "Group Id or name (example: 1172392116092353)"
+msgstr "Ідэнтыфікатар або імя групы (прыклад: 1172392116092353)"
+
+msgid "Connect a Facebook Fan-Page"
+msgstr "Падлучыць фан-старонку на Facebook"
+
+#, python-format
+msgid ""
+"You can connect your projects and groups to a Facebook Fan-Page. Once "
+"connected, you can publish the posts you write on %(site_name)s directly on "
+"that Fan-Page, if you are one of its administrators on Facebook."
+msgstr ""
+"Вы можаце падлучыць свае праекты і групы да фан-старонкі на Facebook. Пасля "
+"гэтага Вы зможаце публікаваць допісы, якія пішаце на %(site_name)s, проста "
+"на фан-старонцы, калі Вы ўваходзіце ў лік адміністратараў на Facebook."
+
+msgid ""
+"All other members of your project/group can publish their posts as visitor's "
+"posts on the Fan-Page. (They need to connect their accounts to Facebook, as "
+"well!)"
+msgstr ""
+"Усе іншыя чальцы Вашага праекта/групы могуць публікаваць свае допісы як "
+"гасцявыя допісы на фан-старонцы. (Ім таксама спатрэбіцца падлучыць свае "
+"акаўнты да Facebook!)"
+
+msgid ""
+"If you wish for other members to be able to post directly to the Fan-Page, "
+"you can make them co-administrators of your project/group (and you must make "
+"them Editors of the Fan-Page on Facebook!). They will be asked to confirm "
+"their Editor access of the Fan-Page, and then will be able to publish to it."
+msgstr ""
+"Калі Вы жадаеце, каб іншыя чальцы маглі наўпрост публікаваць допісы на фан-"
+"старонцы, можаце зрабіць іх суадмінстратарамі Вашага праекта/групы (таксама "
+"Вы павінны зрабіць іх рэдактарамі фан-старонкі на Facebook!). Яны павінны "
+"будуць пацвердзіць свой рэдактарскі доступ да фан-старонкі, і тады змогуць "
+"пакідаць на ёй публікацыі."
+
+msgid ""
+"The unique name of your Fan-Page is the name of the Fan-Page in the URL on "
+"Facebook (example: https://www.facebook.com/myfanpage/)"
+msgstr ""
+"Унікальнае імя Вашай фан-старонкі - гэта імя фан-старонкі ў URL-адрасе на "
+"Facebook (напрыклад: https://www.facebook.com/myfanpage/)"
+
+msgid "Facebook Fan-Page link to"
+msgstr "Фан-старонка на Facebook, да якой трэба падлучыцца"
+
+msgid "Fan-Page unique name (example: myfanpage)"
+msgstr "Унікальнае імя фан-старонкі (прыклад: myfanpage)"
+
+msgid "Choose from your Pages..."
+msgstr "Выбраць з Вашых старонак..."
+
+msgid ""
+"You have Editor access to this Fan-Page and can publish your posts directly "
+"to it."
+msgstr ""
+"Вы маеце рэдактарскі доступ да гэтай фан-старонкі і можаце наўпрост "
+"публікаваць свае допісы на ёй."
+
+msgid ""
+"Editor access of your Facebook-account for this Fan-Page has not been "
+"confirmed. This is required before you can publish your posts in the voice "
+"of the Fan-Page!"
+msgstr ""
+"Рэдактарскі доступ Вашага Facebook-акаўнта да гэтай фан-старонкі не "
+"пацверджаны. Гэта неабходная ўмова для публікацыі допісаў на гэтай фан-"
+"старонцы!"
+
+msgid "Confirm now!"
+msgstr "Пацвердзіць!"
+
+msgid "Select one of your Facebook pages to connect to"
+msgstr "Абярыце адну з Вашых Facebook-старонак, якую трэба падлучыць"
+
+msgid "You do not seem to be Editor or Admin of any pages."
+msgstr ""
+"Выглядае, што вы не з'яўляецеся рэдактарам або адміністратарам ніводнай "
+"старонкі."
+
+msgid ""
+"We could not retrieve your groups from Facebook because of an error. Please "
+"contact an administrator!"
+msgstr ""
+"У нас не атрымалася выняць Вашы групы з Facebook з-за памылкі. Калі ласка, "
+"звярніцеся да адміністратара!"
+
+msgid "Jetzt anmelden und mitgestalten"
+msgstr "Зарэгістравацца і пачаць супрацоўніцтва"
+
+msgid "Show more Projects"
+msgstr "Паказаць больш праектаў"
+
+msgid "Add Widget"
+msgstr "Дадаць віджэт"
+
+msgid "Edit Widget"
+msgstr "Рэдагаваць віджэт"
+
+msgid "More"
+msgstr "Больш"
+
+msgid "Widget title"
+msgstr "Назва віджэта"
+
+msgid "Widget Icon (FA)"
+msgstr "Іконка віджэта (FA)"
+
+msgid "Font-awesome Widget Icon"
+msgstr "Font Awesome іконка віджэта"
+
+msgid "Delete widget"
+msgstr "Выдаліць віджэт"
+
+msgid "(This widget has no additional options)"
+msgstr "(Гэты віджэт не мае дадатковых параметраў)"
+
+msgid "All members"
+msgstr "Усе чальцы"
+
+msgid "There are no projects in this group yet."
+msgstr "У гэтай групе яшчэ няма праектаў."
+
+msgid "Add project"
+msgstr "Дадаць праект"
+
+msgid "Attach Images/Files"
+msgstr "Далучыць выявы/файлы"
+
+msgid "Attach image/file"
+msgstr "Далучыць выяву/файл"
+
+msgid "You cannot put this widget on a team dashboard."
+msgstr "Вы не можаце памясціць гэты віджэт на панэль каманды."
+
+msgid "You cannot put this widget on a user dashboard."
+msgstr "Вы не можаце памясціць гэты віджэт на панэль карыстальніка(-цы)."
+
+msgid "Widget not found."
+msgstr "Віджэт не знойдзены."
+
+msgid "No related projects/groups"
+msgstr "Няма звязаных праектаў/груп"
+
+msgid "Assign"
+msgstr "Прызначыць"
+
+msgid "Bitte akzeptieren Sie unsere  Nutzungsbedingungen"
+msgstr "Калі ласка, прыміце Умовы карыстання сайтам"
+
+msgid "Ich erkläre mich mit den Nutzungsbedingungen einverstanden"
+msgstr "Я згодзен(-на) з Умовамі карыстання"
+
+#, python-format
+msgid ""
+"Hi %(admin_name)s,\n"
+"\n"
+"The user %(user_name)s wants to join %(team_name)s."
+msgstr ""
+"Вітаем, %(admin_name)s,\n"
+"\n"
+"Карыстальнік(-ца) %(user_name)s хоча далучыцца да %(team_name)s."
+
+msgid "Nutzungsbedingungen"
+msgstr "Умовы карыстання сайтам"
+
+msgid "(Deleted User)"
+msgstr "(Выдалены(-ая) карыстальнік(-ца))"
+
+#, python-format
+msgid "<i>Renderer for %(model_name)s not found!</i>"
+msgstr "<i>Сродак візуалізацыі для %(model_name)s не знойдзены!</i>"
+
+msgid "Team Description"
+msgstr "Апісанне каманды"
+
+msgid "About Us"
+msgstr "Пра нас"
+
+msgid "Question about"
+msgstr "Пытанне пра"
+
+#, python-format
+msgid "The language \"%s\" is not supported"
+msgstr "Мова \"%s\" не падтрымліваецца"
+
+msgid "No model given to export data from."
+msgstr "Для экспарту даных не прызначана мадэль."
+
+msgid "Your news post was also posted on your Facebook timeline."
+msgstr "Ваш допіс таксама апублікаваны ў Вашай Facebook-хроніцы."
+
+msgid ""
+"We could not post this news post on your Facebook timeline. If this problem "
+"persists, please make sure you have granted us all required Facebook "
+"permissions, or try disconnecting and re-connecting your Facebook account!"
+msgstr ""
+"У нас не атрымалася апублікаваць гэты допіс у Вашай Facebook-хроніцы. Калі "
+"гэта праблема не знікае, калі ласка, упэўніцеся, што Вы перадалі нам усе "
+"неабходныя дазволы на Facebook, або паспрабуйце адлучыць і зноў падлучыць "
+"Ваш Facebook-акаўнт!"
+
+msgid "Your news post was also posted to the Facebook Fan-Page."
+msgstr "Ваш допіс таксама апублікаваны на Вашай фан-старонцы на Facebook."
+
+msgid ""
+"Your news post was also posted on the Facebook Fan-Page as a visitor's post."
+msgstr ""
+"Ваш допіс таксама апублікаваны на Вашай фан-старонцы на Facebook як гасцявы "
+"допіс."
+
+msgid "Your news post was also posted in the Facebook Group."
+msgstr "Ваш допіс таксама апублікаваны ў Facebook-групе."
+
+msgid ""
+"We could not post this news post on the Facebook Group/Fan-Page. If this "
+"problem persists, please try disconnecting and re-connecting your Facebook "
+"account and make sure you allow us to post with a visibility of at least "
+"\"Friends\". If you are trying to post as a Fan-Page, make sure you accept "
+"the necessary permissions for us to post there, and make sure you are an "
+"Editor of the Fan-Page! If this doesn't work, contact this project/group's "
+"administrator!"
+msgstr ""
+"У нас не атрымалася апублікаваць гэты допіс у Facebook-групе/на фан-"
+"старонцы. Калі гэта праблема не знікае, калі ласка, паспрабуйце адлучыць і "
+"зноў падлучыць Ваш Facebook-акаўнт і ўпэўніцеся, што вы дазволілі нам "
+"публікаваць допісы, якія могуць бачыць хоць бы \"Сябры\". Калі Вы "
+"намагаецеся апублікаваць допіс на фан-старонцы, упэўніцеся, што Вы "
+"пацвердзілі ўсе неабходныя дазволы для таго, каб мы маглі там публікаваць "
+"допісы, а таксама ў тым, што Вы з'яўляецеся рэдактарам фан-старонкі! Калі "
+"гэта не дапаможа, звяжыцеся з адміністратарам гэтага праекта/групы!"
+
+msgid ""
+"You can only connect to either a Facebook Group or a Fan-Page, but not both!"
+msgstr ""
+"Вы можаце падлучыць або Facebook-групу, або фан-старонку, але не абедзве!"
+
+msgid "Please enter a numeric Facebook Group-ID only!"
+msgstr "Калі ласка, увядзіце толькі лікавы ідэнтыфікатар Facebook-групы!"
+
+msgid ""
+"The Facebook Fan-Page ID or Group ID could not be found on Facebook! Make "
+"sure you have entered the correct ID for your Group/Fan-Page!"
+msgstr ""
+"Такі ідэнтыфікатар фан-старонкі або Facebook-групы не знойдзены на Facebook! "
+"Упэўніцеся, што Вы ўвялі правільны ідэнтыфікатар Вашай групы/фан-старонкі!"
+
+msgid ""
+"We could not obtain access to the Fan-Page for your connected Facebook "
+"Account. Please check that you entered the correct Fan-Page name, and that "
+"you are an Editor of that Fan-Page!"
+msgstr ""
+"Мы не змаглі атрымаць доступ да фан-старонкі з Вашага падлучанага Facebook-"
+"акаўнта. Калі ласка, пераканайцеся, што Вы ўвялі правільнае імя фан-"
+"старонкі, і што Вы з'яўляецеся рэдактарам гэтай фан-старонкі!"
+
+msgid "This group does not have a Facebook Fan-Page associated with it!"
+msgstr "З гэтай групай не звязаная ніводная фан-старонка на Facebook!"
+
+msgid "Your Editor access for the linked Facebook Fan-Page was confirmed!"
+msgstr ""
+"Ваш доступ рэдактара да падлучанай фан-старонкі на Facebook пацверджаны!"
+
+msgid ""
+"An error occured when trying to disconnect your facebook account! Please "
+"contact an administrator!"
+msgstr ""
+"Падчас спробы адлучыць Ваш Facebook-акаўнт здарылася памылка! Калі ласка, "
+"звяжыцеся з адміністратарам!"
+
+msgid "Your Facebook account was successfully disconnected from this account."
+msgstr "Ваш Facebook-акаўнт паспяхова адлучаны ад гэтага акаўнта."
+
+msgid ""
+"Sorry, only portal administrators can create Groups! You can either create a "
+"Project, or write a message to one of the administrators to create a Group "
+"for you. Below you can find a listing of all administrators."
+msgstr ""
+"На жаль, толькі адміністратар партала можа ствараць групы! Вы можаце "
+"стварыць праект або напісаць паведамленне аднаму з адміністратараў, каб той "
+"стварыў для Вас групу. Ніжэй Вы знойдзеце спіс адміністратараў."
+
+#, python-format
+msgid "%(team_type)s \"%(group)s\" was created successfully."
+msgstr "%(team_type)s \"%(group)s\" паспяхова створаная."
+
+msgid "Create"
+msgstr "Стварыць"
+
+#, python-format
+msgid "The %(team_type)s was changed successfully."
+msgstr "%(team_type)s паспяхова змененая."
+
+msgid "This action is not available directly!"
+msgstr "Гэта дзеянне наўпрост недаступна!"
+
+#, python-format
+msgid ""
+"You have requested to join the %(team_type)s “%(team_name)s”. You will "
+"receive an email as soon as a team administrator responds to your request."
+msgstr ""
+"Вы даслалі запыт на далучэнне да %(team_type)s “%(team_name)s”. Вы атрымаеце "
+"электронны ліст, як толькі адміністратар каманды адкажа на Ваш запыт."
+
+#, python-format
+msgid ""
+"You had already been invited to \"%(team_name)s\" and have now been made a "
+"member immediately!"
+msgstr ""
+"Вы ўжо былі запрошаны ў \"%(team_name)s\", і цяпер адразу сталі чальцом!"
+
+#, python-format
+msgid "You are now a member of %(team_type)s “%(team_name)s”. Welcome!"
+msgstr "Цяпер Вы чалец %(team_type)s “%(team_name)s”. Сардэчна вітаем!"
+
+#, python-format
+msgid "You are no longer a member of the %(team_type)s “%(team_name)s”."
+msgstr "Вы больш не з'яўляецеся чальцом %(team_type)s “%(team_name)s”."
+
+#, python-format
+msgid ""
+"You cannot leave this %(team_type)s. You are the only administrator left."
+msgstr "Вы не можаце выйсці з гэтай %(team_type)s. Вы - адзіны адміністратар."
+
+#, python-format
+msgid ""
+"Your join request was withdrawn from %(team_type)s “%(team_name)s” "
+"successfully."
+msgstr ""
+"Ваш запыт на далучэнне да %(team_type)s “%(team_name)s” паспяхова адкліканы."
+
+#, python-format
+msgid ""
+"Your invitation to %(team_type)s “%(team_name)s” was declined successfully."
+msgstr "Ваша запрашэнне ў %(team_type)s “%(team_name)s” паспяхова адхілена."
+
+#, python-format
+msgid ""
+"User %(username)s had already requested membership and has now been made a "
+"member immediately!"
+msgstr ""
+"Карыстальнік(-ца) %(username)s ужо даслаў(-ла) запыт на членства і цяпер "
+"адразу стаў(-ла) чальцом!"
+
+#, python-format
+msgid "I invited you to join \"%(team_name)s\"!"
+msgstr "Я запрасіў(-ла) Вас далучыцца да \"%(team_name)s\"!"
+
+#, python-format
+msgid "User %(username)s was successfully invited!"
+msgstr "Карыстальнік(-ца) %(username)s паспяхова запрошаны(-ая)!"
+
+msgid "You cannot change your own admin status."
+msgstr "Вы не можаце змяніць свой статус адміністратара."
+
+#, python-format
+msgid "You cannot remove “%(username)s” form this team. Only one admin left."
+msgstr ""
+"Вы не можаце выдаліць \"%(username)s\" з гэтай каманды. Застаўся толькі "
+"адзін адміністратар."
+
+#, python-format
+msgid "You cannot remove yourself from a %(team_type)s."
+msgstr "Вы не можаце выдаліць сябе з %(team_type)s."
+
+#, python-format
+msgid "You cannot remove \"%(username)s\" form this team. Only one admin left."
+msgstr ""
+"Вы не можаце выдаліць \"%(username)s\" з гэтай каманды. Застаўся толькі "
+"адзін адміністратар."
+
+#, python-format
+msgid ""
+"Your join request was withdrawn from %(team_type)s \"%(team_name)s\" "
+"successfully."
+msgstr ""
+"Ваш запыт на далучэнне да %(team_type)s “%(team_name)s” паспяхова адкліканы."
+
+#, python-format
+msgid "Your invitation to user \"%(username)s\" was withdrawn successfully."
+msgstr ""
+"Ваша запрашэнне карыстальніка(-цы) \"%(username)s\" паспяхова адклікана."
+
+#, python-format
+msgid "User \"%(username)s\" is no longer a member."
+msgstr "Карыстальнік(-ца) \"%(username)s\" больш не з'яўляецца чальцом."
+
+#, python-format
+msgid "%(team_name)s was re-activated successfully!"
+msgstr "%(team_name)s паспяхова ўзноўленая!"
+
+#, python-format
+msgid "%(team_name)s was deactivated successfully!"
+msgstr "%(team_name)s паспяхова дэактываваная!"
+
+msgid ""
+"Sorry, only portal administrators can deactivate Groups! You can write a "
+"message to one of the administrators to deactivate it for you. Below you can "
+"find a listing of all administrators."
+msgstr ""
+"На жаль, толькі адміністратары партала могуць дэактываваць групы! Вы можаце "
+"напісаць паведамленне аднаму з адміністратараў, каб той дэактываваў групу. "
+"Ніжэй знаходзіцца спіс адміністратараў."
+
+msgid "This project/group is already active!"
+msgstr "Гэты праект/група ўжо актыўны!"
+
+msgid "This project/group is already inactive!"
+msgstr "Гэты праект/група ўжо неактыўны!"
+
+msgid "Only group/project members have permission to do this!"
+msgstr "Толькі чальцы групы/праекта маюць дазвол на гэта дзеянне!"
+
+#, python-format
+msgid ""
+"You may only invite %(maximum_number)d people at once. Any emails above that "
+"number have been ignored."
+msgstr ""
+"Вы можаце запрасіць толькі %(maximum_number)d за раз. Усе лісты, дасланыя "
+"звыш гэтай лічбы, будуць праігнараваныя."
+
+#, python-format
+msgid "Sorry, these did not seem to be valid email addresses: %s"
+msgstr "На жаль, выглядае, што гэта несапраўдныя адрасы электроннай пошты: %s"
+
+#, python-format
+msgid ""
+"These people have been sent an email invite only recently. You can send them "
+"an invite again tomorrow: %s"
+msgstr ""
+"Гэтым людзям зусім нядаўна ўжо дасылаліся лісты з запрашэннямі. Можаце "
+"адправіць ім новае запрашэнне заўтра: %s"
+
+#, python-format
+msgid "Good news! The people with these addresses are already members: %s"
+msgstr ""
+"Добрая навіна! Людзі, якім належаць гэтыя адрасы, ужо з'яўляюцца чальцамі: %s"
+
+#, python-format
+msgid ""
+"The people with these addresses already have a user account and already have "
+"a pending invitation: %s"
+msgstr ""
+"Людзі, якім належаць гэтыя адрасы, ужо маюць уліковы запіс карыстальніка і "
+"запрашэнне, якое чакае іх рашэння: %s"
+
+#, python-format
+msgid ""
+"The people with these addresses already have a registered user account and "
+"have been invited directly: %s"
+msgstr ""
+"Людзі, якім належаць гэтыя адрасы, ужо маюць уліковы запіс карыстальніка і "
+"былі запрошаныя наўпрост: %s"
+
+#, python-format
+msgid ""
+"Success! We are now sending out invitations to these email addresses: %s"
+msgstr ""
+"Поспех! Мы зараз дашлем запрашэнні на гэтыя адрасы электроннай пошты: %s"
+
+msgid "There was an error when trying to delete the invitation."
+msgstr "Падчас спробы выдаліць гэта запрашэнне здарылася памылка."
+
+msgid "The invitation was successfully deleted."
+msgstr "Запрашэнне паспяхова выдаленае."
+
+msgid "Your selection for showing this item in projects/groups was updated."
+msgstr ""
+"Ваш выбар датычна адлюстравання гэтага элемента ў праектах/групах абноўлены."
+
+#, python-format
+msgid "This item is now being shown in these projects/groups: %(group_names)s"
+msgstr ""
+"Гэты элемент цяпер адлюстроўваецца ў гэтых праектах/групах: %(group_names)s"
+
+msgid "No appname given for adding containers."
+msgstr "Для дабаўлення кантэйнераў не пазначана імя прыкладання."
+
+msgid "Your idea was deleted successfully."
+msgstr "Ваша ідэя паспяхова выдаленая."
+
+msgid ""
+"There was an error while processing your avatar. Please make sure you "
+"selected a large enough part of the image!"
+msgstr ""
+"Падчас апрацоўкі Вашага аватара здарылася памылка. Калі ласка, "
+"пераканайцеся, што Вы вылучылі дастаткова вялікую частку выявы!"
+
+msgid ""
+"There was an error while processing your avatar. The image file might be "
+"broken or the file transfer was interrupted."
+msgstr ""
+"Падчас апрацоўкі Вашага аватара здарылася памылка. Прычынай можа быць "
+"няспраўны файл выявы або перарваная перадача файла."
+
+msgid "<Root folder>"
+msgstr "<Root folder>"
+
+#, python-format
+msgid ""
+"You are now located in %(group_name)s.<br/>You were redirected here from "
+"another project or group that links to this item."
+msgstr ""
+"Вы зараз знаходзіцеся ў %(group_name)s.<br/> Вы перанакіраваны сюды з іншага "
+"праекта або групы, якія маюць спасылку на гэты элемент."
+
+#, python-format
+msgid ""
+"Container \"%(title)s\" could not be deleted because it contained objects "
+"that could not be deleted."
+msgstr ""
+"Кантэйнер \"%(title)s\" не атрымалася выдаліць, таму што ён утрымлівае "
+"аб'екты, якія не могуць быць выдаленыя."
+
+#, python-format
+msgid "You do not have permissions to delete \"%(title)s\"."
+msgstr "У Вас няма дазволу на выдаленне \"%(title)s\"."
+
+#, python-format
+msgid "Object \"%(title)s\" could not be deleted."
+msgstr "Аб'ект \"%(title)s\" не атрымалася выдаліць."
+
+#, python-format
+msgid "%(numobjects)d objects were deleted successfully."
+msgstr "%(numobjects)d аб'ектаў(-ы) паспяхова выдалена(-ыя)."
+
+#, python-format
+msgid "Object \"%(title)s\" was deleted successfully."
+msgstr "Аб'ект \"%(title)s\" паспяхова выдалены."
+
+#, python-format
+msgid "%(numobjects)d other objects were deleted."
+msgstr "%(numobjects)d іншых(-я) аб'ектаў(-ы) выдалена(-ыя)."
+
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr "%(verbose_name)s, адпавядаючых гэтаму запыту, не знойдзена"
+
+msgid "Your profile was edited successfully."
+msgstr "Ваш профіль паспяхова адрэдагаваны."
+
+msgid ""
+"Your user account is associated with an integrated Portal. This account's "
+"email address is fixed and therefore was left unchanged."
+msgstr ""
+"Ваш уліковы запіс карыстальніка звязаны з інтэгральным парталам. Адрас "
+"электроннай пошты гэтага ўліковага запісу фіксаваны і таму не быў зменены."
+
+msgid ""
+"You have changed your email address. We will soon send you an email to that "
+"address with a confirmation link. Until you click on that link, your profile "
+"will retain your old email address!"
+msgstr ""
+"Вы змянілі свой адрас электроннай пошты. У бліжэйшы час мы адправім Вам ліст "
+"на гэты адрас са спасылкай для пацверджання. Пакуль Вы не націснеце на гэтую "
+"спасылку, у Вашым профілі захаваецца стары адрас электроннай пошты!"
+
+msgid ""
+"Sorry, your profile could not be saved because there was an error while "
+"processing the avatar!"
+msgstr ""
+"На жаль, Ваш профіль не атрымалася захаваць, таму што падчас апрацоўкі "
+"аватара здарылася памылка!"
+
+msgid "Sorry, something went wrong while saving your profile!"
+msgstr "На жаль, нешта пайшло не так падчас захавання Вашага профіля!"
+
+msgid ""
+"Your profile was deleted successfully. We're sorry you are no longer with us."
+msgstr "Ваш профіль паспяхова выдалены. Нам шкада, што вы больш не з намі."
+
+#, python-format
+msgid ""
+"You are the only administrator left for \"%s\". Please appoint a different "
+"administrator or delete it first."
+msgstr ""
+"Вы адзіны адміністратар у \"%s\". Калі ласка, прызначце іншага "
+"адміністратара або спачатку выдаліце праект."
+
+msgid ""
+"Sorry, we could not connect your user account because of an internal error. "
+"Please contact a system administrator!"
+msgstr ""
+"На жаль, мы не змаглі падлучыць Ваш уліковы запіс карыстальніка з-за "
+"ўнутранай памылкі. Калі ласка, звярніцеся да сістэмнага адміністратара!"
+
+msgid ""
+"Sorry, we could not connect your user account, because we could not retrieve "
+"important user account infos. Please contact a system administrator!"
+msgstr ""
+"На жаль, мы не змаглі падлучыць Ваш уліковы запіс карыстальніка, таму што не "
+"атрымалася выняць важныя даныя ўліковага запісу карыстальніка. Калі ласка, "
+"звярніцеся да сістэмнага адміністратара!"
+
+msgid ""
+"Sorry, you cannot log in because your account is suspended. Please contact a "
+"system administrator!"
+msgstr ""
+"На жаль, вы не можаце ўвайсці, таму што Ваш акаўнт заблакаваны. Калі ласка, "
+"звярніцеся да сістэмнага адміністратара!"
+
+#, python-format
+msgid ""
+"Your account \"%(user)s\" was registered successfully. Welcome to the "
+"community!"
+msgstr ""
+"Ваш акаўнт \"%(user)s\" паспяхова зарэгістраваны. Сардэчна вітаем у "
+"супольнасці!"
+
+#, python-format
+msgid ""
+"User \"%(user)s\" was registered successfully. The account will need to be "
+"approved before you can log in. We will send an email to your address "
+"\"%(email)s\" when this happens."
+msgstr ""
+"Карыстальнік(-ца) \"%(user)s\" паспяхова зарэгістраваны. Акаўнт павінен быць "
+"зацверджаны, перш чым Вы зможаце ўвайсці. Калі гэта адбудзецца, мы вышлем "
+"ліст на Ваш адрас \"%(email)s\"."
+
+# EN > missed " in address
+#, python-format
+msgid ""
+"User \"%(user)s\" was registered successfully. We will send an email to your "
+"address %(email)s\" soon. You need to confirm the email address before you "
+"can log in."
+msgstr ""
+"Карыстальнік(-ца) \"%(user)s\" паспяхова зарэгістраваны. У бліжэйшы час мы "
+"дашлем ліст на Ваш адрас \"%(email)s\". Вы павінны пацвердзіць адрас "
+"электроннай пошты, перш чым увайсці."
+
+msgid "The invite token you have used does not exist!"
+msgstr "Маркер запрашэння, які Вы выкарысталі, не існуе!"
+
+msgid ""
+"Sorry, but the invite token you have used is not active yet or not active "
+"anymore!"
+msgstr ""
+"На жаль, маркер запрашэння, які Вы выкарысталі, яшчэ або ўжо не актыўны!"
+
+msgid ""
+"Token invitations applied. You are now a member of the associated projects/"
+"groups!"
+msgstr "Маркер запрашэння прыменены. Цяпер Вы чалец звязаных праектаў/груп!"
+
+msgid ""
+"There was an error while processing your invites. Some of your invites may "
+"not have been applied."
+msgstr ""
+"Падчас апрацоўкі Вашых запрашэнняў здарылася памылка. Некаторыя з "
+"запрашэнняў не атрымалася прымяніць."
+
+msgid "You are already logged in!"
+msgstr "Вы ўжо ўвайшлі ў сістэму!"
+
+msgid "Your privacy settings were saved. Welcome!"
+msgstr "Вашы налады прыватнасці захаваныя. Сардэчна вітаем!"
+
+msgid "Please enter a token!"
+msgstr "Калі ласка, увядзіце маркер!"
+
+msgid "Sorry, but the invite token you have used does not seem to be valid!"
+msgstr "На жаль, маркер запрашэння, які Вы выкарысталі, выглядае несапраўдным!"
+
+msgid ""
+"The user account you were looking for does not exist! Their registration was "
+"probably already denied."
+msgstr ""
+"Уліковы запіс карыстальніка, які Вы шукалі, не існуе! Верагодна, у "
+"рэгістрацыі карыстальніка(-цы) ўжо адмоўлена."
+
+msgid "The user account was already approved, but thank you anyway!"
+msgstr ""
+"Гэты ўліковы запіс карыстальніка ўжо ўхвалены, але дзякуем у любым выпадку!"
+
+#, python-format
+msgid ""
+"Thank you for approving user %(username)s (%(email)s)! An introduction-email "
+"was sent out to them and they can now log in to the site."
+msgstr ""
+"Дзякуем за ўхваленне карыстальніка(-цы) %(username)s (%(email)s)! Яму/ёй "
+"дасланы азнаямленчы ліст, і цяпер ён/яна можа ўвайсці на сайт."
+
+#, python-format
+msgid ""
+"The user account %(username)s (%(email)s) was already approved, so you "
+"cannot deny the registration! If this is a problem, you may want to "
+"deactivate the user manually from the admin interface."
+msgstr ""
+"Уліковы запіс карыстальніка(-цы) %(username)s (%(email)s) ужо ўхвалены, таму "
+"Вы не можаце адмовіць у рэгістрацыі! Калі гэта для Вас праблема, можаце "
+"дэактываваць карыстальніка(-цу) ўручную з інтэрфейса адміністратара."
+
+#, python-format
+msgid ""
+"You have denied the join request of %(username)s (%(email)s)! An email was "
+"sent to let them know."
+msgstr ""
+"Вы адхілілі запыт на далучэнне ад %(username)s (%(email)s)! Яму/ёй дасланы "
+"ліст, які пра гэта паведамляе."
+
+msgid ""
+"The user account you were looking for does not exist! Your registration was "
+"probably already denied or the email token has expired."
+msgstr ""
+"Уліковы запіс карыстальніка, які Вы шукалі, не існуе! Верагодна, Ваша "
+"рэгістрацыя была адхіленая, або маркер адраса электроннай пошты "
+"пратэрмінаваўся."
+
+msgid "The email for this account seems to already have been confirmed!"
+msgstr ""
+"Выглядае, што адрас электроннай пошты для гэтага акаўнта ўжо пацверджаны!"
+
+msgid "The link you supplied for the email confirmation is no longer valid!"
+msgstr ""
+"Спасылка, якую Вы падалі для пацверджання адраса электроннай пошты, ужо "
+"несапраўдная!"
+
+msgid ""
+"The email you are trying to confirm has already been confirmed or belongs to "
+"another user!"
+msgstr ""
+"Адрас электроннай пошты, які вы спрабуеце пацвердзіць, ужо пацверджаны або "
+"належыць іншаму(-й) карыстальніку(-цы)!"
+
+#, python-format
+msgid ""
+"Your email address %(email)s was successfully confirmed! Welcome to the "
+"community!"
+msgstr ""
+"Ваш адрас электроннай пошты %(email)s паспяхова пацверджаны! Сардэчна вітаем "
+"у супольнасці!"
+
+#, python-format
+msgid ""
+"Your email address %(email)s was successfully confirmed! However, you "
+"account is not active yet and will have to be approved by an administrator "
+"before you can log in. We will send you an email as soon as that happens!"
+msgstr ""
+"Ваш адрас электроннай пошты %(email)s паспяхова пацверджаны! Тым не менш, "
+"Ваш акаўнт яшчэ не актыўны і павінен быць зацверджаны адміністратарам, перш "
+"чым Вы зможаце ўвайсці. Мы дашлем Вам электронны ліст, як толькі гэта "
+"адбудзецца!"
+
+msgid ""
+"Welcome! You were invited to the following projects and groups. Please click "
+"the dropdown button to accept or decline the invitation for each of them!"
+msgstr ""
+"Сардэчна вітаем! Вас запрасілі ў наступныя праекты і групы. Калі ласка, "
+"націсніце на кнопку выпаднога спісу, каб прыняць або адхіліць запрашэнне ў "
+"кожны(-ую) з іх!"
+
+msgid "The unsubscribe link you have clicked does not seem to be valid!"
+msgstr ""
+"Спасылка для скасавання падпіскі, на якую Вы націснулі, выглядае "
+"несапраўднай!"
+
+#, python-format
+msgid ""
+"We have unsubscribed your email \"%(email)s\" from our mailing list. You "
+"will not receive any more emails from us!"
+msgstr ""
+"Мы скасавалі падпіску Вашага адраса электроннай пошты \"%(email)s\" на спіс "
+"рассылкі. Вы больш не будзеце атрымліваць ад нас лістоў!"
+
+#, python-format
+msgid ""
+"You are not currently a member of %s! If you wish you can request to become "
+"a member below."
+msgstr ""
+"Вы не з'яўляецеся чальцом %s! Пры жаданні Вы можаце даслаць запыт на "
+"членства ніжэй."
+
+msgid "Your changes have been saved."
+msgstr "Вашы змены захаваныя."
