@@ -5,7 +5,7 @@ var base = path.resolve('.');
 var collectPO = require('../cosinnus/client/lib/collect-po.js');
 
 // add languages for the map here!
-var LANGUAGES = ['en', 'de', 'ru', 'uk', 'fr', 'pl'];
+var LANGUAGES = ['en', 'de', 'ru', 'uk', 'fr', 'pl', 'be'];
 
 module.exports = {
     entry: path.join(base, 'cosinnus/client/app.js'),
