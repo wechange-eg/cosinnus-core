@@ -71,15 +71,21 @@
 			border-bottom: 1px solid @medium-border-color;
 			
 			/** Colors */
-			a, .highlighted-text {
+			
+			.highlighted-text {
 				color: @text-highlight-color;
 			}
 			a {
+				color: @text-highlight-color;
 				font-weight: bold;
 				
 				&:hover, &:active {
 					text-decoration: underline;
 				}
+			}
+			.plain-links a {
+				color: @text-color;
+				font-weight: normal;
 			}
 			.pale-color, .pale-color a {
 				color: @text-color-pale;
@@ -89,11 +95,20 @@
 			.timeline-item-row {
 				padding: 7px;
 				margin: 0 30px;
-				
 			}
 			hr.seperator {
 				border-top: 1px solid @pale-border-color;
-				margin: 0;
+				margin: 1px 37px;
+				
+				&:last-child {
+					margin-bottom: 8px;
+				}
+				& + hr {
+					display: none;
+				}
+			}
+			.spacer {
+				margin-top: 7px;
 			}
 			
 			.header {
@@ -119,6 +134,11 @@
 						line-height: 14px;
 					}
 				}
+				.header-context {
+					i.fa {
+						margin-right: 5px;
+					}
+				}
 			}
 			
 			.icon {
@@ -127,11 +147,41 @@
 				margin-top: 10px;
 			}
 			.body {
+				margin-bottom: 10px;
 				.title {
 					font-weight: bold;
 				}
 			}
-			
+			.meta-row {
+				display: flex;
+				flex-direction: row;
+			}
+			.timeline-tags {
+				flex-grow: 2;
+				span {
+					margin-right: 10px;
+				}
+			}
+			a.action-button {
+				font-size: 10px;
+				color: @label-color;
+				border: 1px solid @label-color;
+				border-radius: 3px;
+				height: 18px;
+				display: inline-block;
+			    padding: 0 4px;
+			    text-transform: uppercase;
+			    font-weight: bolder;
+				
+				&:hover, &:active {
+					color: @text-highlight-color;
+					text-decoration: none;
+					border: 1px solid @text-highlight-color;
+				}
+				&:not(:last-of-type) {
+					margin-right: 6px;
+				}
+			}
 		}
 	}
 	
