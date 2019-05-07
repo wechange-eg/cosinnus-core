@@ -1,0 +1,13 @@
+{% load i18n cosinnus_tags %}
+
+{% comment %} 
+	This template is only meant to be loaded from inside a timeline item template,
+	and from there inside the action_buttons block, as such:
+	{% block action_buttons %}
+		{% include 'cosinnus/v2/dashboard/timeline_button_follow.html' with item=item %}
+	{% endblock %}
+{% endcomment %}
+
+<div>
+(follow-button)
+</div>

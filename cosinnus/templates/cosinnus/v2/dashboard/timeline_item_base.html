@@ -1,0 +1,78 @@
+{% load i18n cosinnus_tags %}
+
+<div class="timeline-item {% block container_class %}{% endblock %}">
+	<div class="header-dropdown dropdown">
+	</div>
+	
+	<div class="timeline-item-row header">
+		<div class="header-avatar">
+			<a href="{{ item.creator|profile_url }}">
+				{% include "cosinnus/user/user_avatar_image.html" with user=item.creator %}
+			</a>
+		</div>
+		<div class="header-info">
+			<div class="item-info">
+				<a href="{{ item.creator|profile_url }}">
+					{{ item.creator|full_name }}
+				</a>
+				<span class="highlighted-text">
+					{% block creation_label %}{% endblock %}
+				</span>
+			</div>
+			<div class="item-date pale-color">
+				date
+			</div>
+		</div>
+		<div class="header-context pale-color">
+			<a href="#">
+				<i class="fa fa-fw fa-question">
+				</i><span>group or portal</span>
+			</a>
+		</div>
+	</div>
+	
+	<div class="icon">
+		<i class="fa fa-fw {% block icon %}{% endblock %}"></i>
+	</div>
+	
+	<div class="timeline-item-row body">
+		<div class="v2-textfield truncated-textfield truncated-textfield-large">
+			{% block title_frame %}
+				<p class="title">
+					{% block title %}{% endblock %}
+				</p>
+			{% endblock %}
+			{% block body %}{% endblock %}
+		</div>
+	</div>
+	
+	{% block attached_objects %}
+		<div class="timeline-item-row attachments">
+			
+		</div>
+	{% endblock %}
+	
+	{% block tags %}
+		<hr class="seperator" />
+		<div class="timeline-item-row meta-info">
+			<div class="timeline-tags">
+				<span>
+					<i class="fa fa-fw fa-tag"></i>
+					topics
+				</span>
+				<span>
+					<i class="fa fa-fw fa-hashtag"></i>
+					tags
+				</span>
+			</div>
+			<div class="action-buttons">
+				{% block action_buttons %}{% endblock %}
+			</div>
+		</div>
+	{% endblock %}
+	
+	{% block comments %}
+		{% comment %} Include 'cosinnus/v2/dashboard/timeline_item_comments.html' in your implementing template! {% endcomment %}
+	{% endblock %}
+	
+</div>

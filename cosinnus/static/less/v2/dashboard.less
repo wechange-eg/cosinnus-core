@@ -48,6 +48,7 @@
 			width: 100%;
 			height: 58px;
 			padding: 20px;
+			background-color: @background-color-secondary;
 			border: 1px solid @text-color;
 			cursor: text;
 		}
@@ -63,14 +64,77 @@
 		padding: 17px 20px;
 		color: @text-color-pale;
 	}
-	.timeline {
-		
 	
+	.timeline {
 		.timeline-item {
 			padding: 20px;
-			border-bottom: 1px solid green;
+			border-bottom: 1px solid @medium-border-color;
+			
+			/** Colors */
+			a, .highlighted-text {
+				color: @text-highlight-color;
+			}
+			a {
+				font-weight: bold;
+				
+				&:hover, &:active {
+					text-decoration: underline;
+				}
+			}
+			.pale-color, .pale-color a {
+				color: @text-color-pale;
+				font-weight: normal;
+			}
+			
+			.timeline-item-row {
+				padding: 7px;
+				margin: 0 30px;
+				
+			}
+			hr.seperator {
+				border-top: 1px solid @pale-border-color;
+				margin: 0;
+			}
+			
+			.header {
+				display: flex;
+				flex-direction: row;
+				&, i {
+					font-size: 12px;
+				}
+				
+				&> div:not(:last-of-type)  {
+					margin-right: 8px;
+				}
+				
+				.header-avatar {
+					img {
+						height: 27px;
+						width: 27px;
+					}
+				}
+				.header-info {
+					flex-grow: 2;
+					.item-info {
+						line-height: 14px;
+					}
+				}
+			}
+			
+			.icon {
+				position: absolute;
+				font-size: 16px;
+				margin-top: 10px;
+			}
+			.body {
+				.title {
+					font-weight: bold;
+				}
+			}
+			
 		}
 	}
+	
 	.timeline-error-message {
 		color: @text-color-pale;
 		a {

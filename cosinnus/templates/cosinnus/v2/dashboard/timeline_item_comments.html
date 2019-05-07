@@ -1,0 +1,37 @@
+{% load i18n cosinnus_tags %}
+
+{% comment %} 
+	This template is only meant to be loaded from inside a timeline item template,
+	and from there inside the comments block, as such:
+	{% block comments %}{% include 'cosinnus/v2/dashboard/timeline_item_comments.html' with item=item %}{% endblock %}
+{% endcomment %}
+
+<hr class="seperator" />
+<div class="timeline-item-row comments-header">
+	(comments-header)
+</div>
+
+<hr class="seperator" />
+<div class="timeline-item-row comment">
+	<div class="comment-dropdown dropdown">
+	</div>	
+	<div class="comment-header">
+		{% include "cosinnus/user/user_avatar_image.html" with user=comment.creator %}
+		<a href="{{ comment.creator|profile_url }}">
+			{{ comment.creator|full_name }}
+		</a>
+		<span>
+			(comment date)
+		</span>
+	</div>
+	<div class="comment-body">
+		(comment text)
+	</div>
+</div>
+
+<hr class="seperator" />
+<div class="timeline-item-row comment-form">
+	<input type="text" placeholder="Write comment">
+</div>
+
+

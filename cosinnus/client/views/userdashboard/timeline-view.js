@@ -173,6 +173,9 @@ module.exports = BaseView.extend({
     	$.each(items, function(i, item){
     		timeline.append(item);
     	});
+
+    	$.cosinnus.renderMomentDataDate();
+		$.cosinnus.truncatedTextfield();
     },
     
     handleError: function (message) {
