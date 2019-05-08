@@ -14,7 +14,8 @@ from cosinnus.templatetags.cosinnus_tags import is_integrated_portal, is_sso_por
 from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
     OrganisationViewSet, UserView
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group,\
-    statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication
+    statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication,\
+    user_dashboard
 from cosinnus_event.api.views import EventViewSet
 from django_otp.views import LoginView
 
@@ -101,11 +102,21 @@ urlpatterns = [
     url(r'^select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
 ]
 
+if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False):
+    urlpatterns += [
+        url(r'^home/$', user_dashboard.user_dashboard_view, name='user-dashboard'),
+        url(r'^home/api/user_groups/$', user_dashboard.api_user_groups, name='user-dashboard-api-groups'),
+        url(r'^home/api/user_liked_ideas/$', user_dashboard.api_user_liked_ideas, name='user-dashboard-api-liked-ideas'),
+        url(r'^home/api/user_typed_content/(?P<content>[^/]+)/$', user_dashboard.api_user_typed_content, name='user-dashboard-api-typed-content'),
+        url(r'^home/api/timeline/(?P<content>[^/]+)/$', user_dashboard.api_timeline, name='user-dashboard-api-timeline-filtered'),
+        url(r'^home/api/timeline/$', user_dashboard.api_timeline, name='user-dashboard-api-timeline'),
+        
+    ]
+
 
 # some user management not allowed in integrated mode and sso-mode
 if not is_integrated_portal() and not is_sso_portal():
     urlpatterns += [
-        url(r'^profile/dashboard/$', widget.user_dashboard, name='user-dashboard'),
         url(r'^profile/edit/$', profile.update_view, name='profile-edit'),
         url(r'^signup/$', user.user_create, name='user-add'),
     ]

@@ -1,0 +1,9 @@
+{% extends 'userdashboard/base-widget' %}
+{% import "include/macros.html" as macros %}
+
+{% block attrs %}data-sort-index="{{ sortIndex }}" data-content-type="{{ type }}"{% endblock %}
+
+{% block title %}
+    {{ widget_title }}
+{% endblock %}
+

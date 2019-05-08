@@ -1,0 +1,51 @@
+<div class="timeline-controls">
+    
+	<table class="onoffswitch-frame">
+        <tr>
+            <td>
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch-group-content-only"
+                    	 class="onoffswitch-checkbox toggle-group-content-only" id="check-group-content-only" 
+                    	 {% if onlyMine %}checked{% endif %}>
+                    <label class="onoffswitch-label" for="check-group-content-only">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </td>
+            <td class="onoffswitch-text-label text-bold text-small">
+                {# Translators: __INCLUDE_JS_PO__ #}
+                {% trans "Only content from my Groups and Projects" %}
+            </td>
+        </tr>
+    </table>
+    		
+</div>
+
+<div class="timeline">
+	{# Timeline items get appended here #}
+</div>
+
+
+<div class="timeline-error-message" style="display: none;">
+	<div>
+		{# Translators: __INCLUDE_JS_PO__ #}
+        {% trans "We could not load more data at this time." %}
+		<a href="#" class="retry-load">
+	        {# Translators: __INCLUDE_JS_PO__ #}
+	        {% trans "Retry" %}
+	    </a>
+    </div>
+</div>
+
+<div class="timeline-final-dot" style="display: none;">
+	<div>
+		<i class="fa fa-fw fa-circle"></i>
+	</div>
+</div>
+
+<div class="timeline-placeholder-frame" style="display: none;">
+	{% include 'userdashboard/timeline-item-placeholder' %}
+	{% include 'userdashboard/timeline-item-placeholder' %}
+	{% include 'userdashboard/timeline-item-placeholder' %}
+</div>

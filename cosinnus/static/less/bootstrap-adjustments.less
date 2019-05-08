@@ -210,8 +210,12 @@ p.transparent, .white-content.transparent, .transparent-p p, .textfield.transpar
 .truncated-textfield {
 	max-height: 250px;
     overflow: hidden;
+	&.truncated-textfield-large {
+		max-height: 400px;
+	}
 }
 .truncated-textfield-applied {
+    position: relative;
 	cursor: pointer;
 }
 .truncated-textfield-applied:after {
@@ -221,7 +225,9 @@ p.transparent, .white-content.transparent, .transparent-p p, .textfield.transpar
 	-moz-box-shadow: inset 0px -65px 90px -10px rgba(255,255,255,1);
 	box-shadow: inset 0px -65px 90px -10px rgba(255,255,255,1);
 }
-
+.truncated-textfield-applied:hover:after {
+	background-color: rgba(0, 0, 0, 0.05);
+}
 
 /**
 }

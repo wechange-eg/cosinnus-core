@@ -491,6 +491,95 @@ if settings.COSINNUS_IDEAS_ENABLED:
         'ideas': DetailedIdeaMapResult,
     })
     
+    
+""" pads, files, messages, todos, polls """
+try:
+    from cosinnus_etherpad.models import Etherpad #noqa
+    SEARCH_MODEL_NAMES.update({
+        Etherpad: 'pads',                           
+    })
+    SHORT_MODEL_MAP.update({
+        6: Etherpad,
+    })
+    #SEARCH_RESULT_DETAIL_TYPE_MAP.update({
+    #    'pads': NYI,
+    #})
+except:
+    Etherpad = None
+
+try:
+    from cosinnus_file.models import FileEntry #noqa
+    SEARCH_MODEL_NAMES.update({
+        FileEntry: 'files',                           
+    })
+    SHORT_MODEL_MAP.update({
+        7: FileEntry,
+    })
+    #SEARCH_RESULT_DETAIL_TYPE_MAP.update({
+    #    'pads': NYI,
+    #})
+except:
+    FileEntry = None
+    
+try:
+    from postman.models import Message #noqa
+    SEARCH_MODEL_NAMES.update({
+        Message: 'messages',                           
+    })
+    SHORT_MODEL_MAP.update({
+        8: Message,
+    })
+    #SEARCH_RESULT_DETAIL_TYPE_MAP.update({
+    #    'messages': NYI,
+    #})
+except:
+    Message = None
+
+try:
+    from cosinnus_todo.models import TodoEntry #noqa
+    SEARCH_MODEL_NAMES.update({
+        TodoEntry: 'todos',                           
+    })
+    SHORT_MODEL_MAP.update({
+        9: TodoEntry,
+    })
+    #SEARCH_RESULT_DETAIL_TYPE_MAP.update({
+    #    'todos': NYI,
+    #})
+except:
+    TodoEntry = None
+
+try:
+    from cosinnus_poll.models import Poll #noqa
+    SEARCH_MODEL_NAMES.update({
+        Poll: 'polls',                           
+    })
+    SHORT_MODEL_MAP.update({
+        10: Poll,
+    })
+    #SEARCH_RESULT_DETAIL_TYPE_MAP.update({
+    #    'polls': NYI,
+    #})
+except:
+    Poll = None
+    
+
+try:
+    from cosinnus_note.models import Note #noqa
+    SEARCH_MODEL_NAMES.update({
+        Note: 'notes',                           
+    })
+    SHORT_MODEL_MAP.update({
+        11: Note,
+    })
+    #SEARCH_RESULT_DETAIL_TYPE_MAP.update({
+    #    'notes': NYI,
+    #})
+except:
+    Note = None
+    
+    
+    
 SEARCH_MODEL_NAMES_REVERSE = dict([(val, key) for key, val in list(SEARCH_MODEL_NAMES.items())])
 # these can always be read by any user (returned fields still vary)
 SEARCH_MODEL_TYPES_ALWAYS_READ_PERMISSIONS = [

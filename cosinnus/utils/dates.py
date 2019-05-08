@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from datetime import datetime
 
 # http://momentjs.com/docs/#/parsing/string-format/
 # http://docs.python.org/2/library/datetime.html#strftime-strptime-behavior
@@ -39,3 +40,15 @@ def datetime_format_js2py(format):
     for js, py in FORMAT_MAP:
         format = format.replace(js, py)
     return format
+
+
+def timestamp_from_datetime(datetime_obj=None):
+    """ Creates a float timestamp from a datetime.
+        @param datetime_obj: A datetime. If none is given, uses the current time instead. """
+    datetime_obj = datetime_obj or datetime.today()
+    return datetime_obj.timestamp()
+    
+    
+def datetime_from_timestamp(timestamp):
+    """ Creates a datetime from a float timestamp """
+    return datetime.fromtimestamp(timestamp)

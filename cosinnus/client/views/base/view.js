@@ -51,6 +51,8 @@ module.exports = Backbone.View.extend({
             } else {
                 this.$el.html(rendered);
             }
+
+            $.cosinnus.titledby(this.$el);
         }
         // After a repaint (to allow further rendering in #afterRender),
         // call the after render method if it exists.

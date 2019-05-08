@@ -1,0 +1,51 @@
+{% import "include/macros.html" as macros %}
+
+<div class="widget-content" {% block attrs %}{% endblock %}>
+	<h2 class="headline">
+		{% block title %}{% endblock %}
+	</h2>
+	
+	{% if isMovable or isHidable %}
+		<div class="widget-options">
+			TODO: widg options
+		</div>
+	{% endif %}
+	
+	{% if hadErrors %}
+		<ul class="item-list">
+			<li>
+				<span class="list-item list-item-link list-item-center no-select" href="#" role="button" titledby=".item-text"> 
+		    		<div class="item-text">
+		                {# Translators: __INCLUDE_JS_PO__ #}
+						{% trans "There was an error loading the widget" %}
+		    		</div>
+				</span>
+			</li>
+		</ul>
+	{% else %}
+	
+		{% block content %}
+			<ul class="item-list">
+				{% if items|length > 0 %}
+					{% for item in items %}
+						{{ macros.listItem(item.text, item.url, item.icon, item.subtext, is_emphasized=item.is_emphasized) }}
+					{% endfor %}
+				{% else %}
+					{% block empty_content %}
+						<li>
+							<span class="list-item list-item-link list-item-center no-select" href="#" role="button" titledby=".item-text"> 
+					    		<div class="item-text">
+					                {% block empty_message %}
+						                {# Translators: __INCLUDE_JS_PO__ #}
+										{% trans "There are no items yet" %}
+									{% endblock %}
+					    		</div>
+							</span>
+						</li>
+					{% endblock %}
+				{% endif %}
+			</ul>
+		{% endblock %}
+		
+	{% endif %}
+</div>

@@ -1025,7 +1025,14 @@ class CosinnusBaseGroup(LikeableObjectMixin, IndexingUtilsMixin, FlickrEmbedFiel
             cache.set(CosinnusGroupManager._GROUP_LOCATIONS_CACHE_KEY % (CosinnusPortal.get_current().id, self.id),
                   locations, settings.COSINNUS_GROUP_LOCATIONS_CACHE_TIMEOUT)
         return locations
-        
+    
+    @property
+    def is_default_user_group(self):
+        return self.slug in getattr(settings, 'NEWW_DEFAULT_USER_GROUPS', [])
+    
+    @property
+    def is_forum_group(self):
+        return self.slug == getattr(settings, 'NEWW_FORUM_GROUP_SLUG', None)
         
     def _get_media_image_path(self, file_field, filename_modifier=None):
         """Gets the unique path for each image file in the media directory"""

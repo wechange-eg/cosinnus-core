@@ -1,0 +1,105 @@
+{% load i18n cosinnus_tags %}
+
+<div class="timeline-item {% block container_class %}{% endblock %}">
+	<div class="header-dropdown dropdown">
+	</div>
+	
+	<div class="timeline-item-row header">
+		<div class="header-avatar">
+			<a href="{{ item.creator|profile_url }}">
+				{% include "cosinnus/user/user_avatar_image.html" with user=item.creator %}
+			</a>
+		</div>
+		<div class="header-info">
+			<div class="item-info">
+				<a href="{{ item.creator|profile_url }}">
+					{{ item.creator|full_name }}
+				</a>
+				<span class="highlighted-text">
+					{% block creation_label %}{% endblock %}
+				</span>
+			</div>
+			<div class="item-date pale-color">
+				<a href="{{ item.get_absolute_url }}">
+					<span class="moment-data-date" data-date="{{ item.created|date:'c' }}" title="{{ item.created|date:'r' }}"></span>
+				</a>
+			</div>
+		</div>
+		<div class="header-context pale-color">
+			{% if item.group and item.group.is_default_user_group %}
+				<a href="{{ item.group.portal.get_absolute_url }}">
+					</i><span>{{ item.group.portal.name }}</span>
+				</a>
+			{% elif item.group %}
+				<a href="{{ item.group.get_absolute_url }}">
+					<i class="fa fa-fw {% if item.group.type == 0 %}fa-group{% else %}fa-sitemap{% endif %}">
+					</i><span>{{ item.group.name }}</span>
+				</a>
+			{% else %}
+				<a href="{{ item.portal.get_absolute_url }}">
+					</i><span>{{ item.portal.name }}</span>
+				</a>
+			{% endif %}
+		</div>
+	</div>
+	
+	<div class="icon">
+		<i class="fa fa-fw {% block icon %}{% endblock %}"></i>
+	</div>
+	
+	<div class="timeline-item-row body">
+		<div class="v2-textfield truncated-textfield truncated-textfield-large">
+			{% block title_frame %}
+				<p class="title">
+					{% block title %}{% endblock %}
+				</p>
+			{% endblock %}
+			{% block body %}{% endblock %}
+		</div>
+	</div>
+	
+	{% block attached_objects %}
+		<div class="timeline-item-row attachments" style="display: none;">
+			
+		</div>
+	{% endblock %}
+	
+	{% block tags %}
+		{% with topics=item.media_tag.topics tags=item.media_tag.tags.all %}
+			<hr class="seperator" />
+			<div class="timeline-item-row meta-row text-small plain-links">
+				<div class="timeline-tags">
+					{% if topics %}
+						<span>
+							<i class="fa fa-fw fa-lightbulb-o"></i>
+							{% render_cosinnus_topics topics %}
+						</span>
+					{% endif %}
+					{% if tags %}
+						<span>
+							<i class="fa fa-fw fa-tag"></i>
+							{% for tag in tags %}
+								{{ tag }}{% if not forloop.last %}, {% endif %}
+							{% endfor %}
+						</span>
+					{% endif %}
+				</div>
+				<div class="action-buttons">
+					{% block action_buttons %}{% endblock %}
+				</div>
+			</div>
+			{% if tags or topics %}
+				<hr class="seperator" />
+			{% endif %}
+		{% endwith %}
+	{% endblock %}
+	
+	{% block comments %}
+		{% comment %} Include 'cosinnus/v2/dashboard/timeline_item_comments.html' in your implementing template! {% endcomment %}
+		{% comment %}  
+		
+		<div class="spacer"></div>
+		{% endcomment %}
+	{% endblock %}
+	
+</div>

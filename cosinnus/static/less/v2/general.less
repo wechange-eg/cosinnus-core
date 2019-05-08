@@ -1,0 +1,298 @@
+.v2-navbar, .v2-dashboard {
+	
+	font-family: @font-regular;
+	font-size: 14px;
+	color: @color-black;
+	text-align: left;
+	line-height: 18px;
+	
+	p {
+		margin: 9px 0;
+	} 
+	
+	.headline {
+		margin: 10px 20px 20px 20px;
+		font-size: 14px;
+		font-weight: bold;
+		color: @color-primary;
+		letter-spacing: 1px;
+		line-height: 21px;
+		text-transform: uppercase;
+		
+		/** no text select */
+		-webkit-touch-callout: none; /* iOS Safari */
+		-webkit-user-select: none;   /* Chrome/Safari/Opera */
+		-khtml-user-select: none;    /* Konqueror */
+		-moz-user-select: none;      /* Firefox */
+		-ms-user-select: none;       /* IE/Edge */
+		user-select: none;           /* non-prefixed version, currently not supported by any browser */
+		cursor: default;
+		
+		&.headline-big {
+			margin: 15px 15px;
+			font-size: 20px;
+			line-height: 26px;
+		}
+	}
+	.text-bold {
+		font-weight: bold;
+	}
+	.text-small {
+		font-size: 12px;
+	}
+	.label {
+		color: @color-dark-gray;
+		font-size: 12px;
+		line-height: 18px;
+	}
+	.button {
+		/** TODO */
+	}
+	
+	/** **** Lists of highlighted links **** */
+	
+	/** reset list styles */
+	ul.item-list, ul.item-list li {  
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		text-indent: 0;
+		width: 100%;
+	}
+	
+	ul.item-list {
+		font-size: 14px;
+		line-height: 35px;
+		
+		hr {
+			border-top: 1px solid @pale-border-color;
+			margin: 10px 20px;
+		}
+		.list-item {
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			white-space: nowrap;
+			color: @navbar-active-text-color;
+			padding: 0 15px;
+			
+			i.fa {
+				color: @navbar-active-text-color;
+				font-size: 16px;
+			}
+			&>div {
+				z-index: 3;
+				margin: 0 8px;
+			}
+			.item-icon.item-icon-offset i.fa {
+				vertical-align: middle;
+			}
+			.item-text {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				flex-grow: 2;
+				/** height 36 **/
+			}
+			.item-text.item-text-dual {
+				line-height: 18px;
+				padding: 4px 0;
+				div {
+					display: inline-block;
+				}
+			}
+			.right-side-annotation {
+				margin-right: 15px;
+			}
+			/** 
+				Full width li with aligned items.
+				Underdrop is a full-screen-width background, while the other elements still retain their alignment 
+			*/
+			.li-underdrop {
+				position: fixed;
+				left: 0;
+				width: 100%;
+				background-color: @background-color-secondary;
+				z-index: 2;
+				&:after {
+				    content: '.';
+				    visibility: hidden;
+				}
+			}
+			&.list-item-link {
+				color: @text-color-pale;
+				font-size: 12px;
+			}
+			&.list-item-center {
+				text-align: center;
+			}
+		}
+		a.list-item.list-item-link {
+			&:hover, :active {
+				color: @text-highlight-color;
+				text-decoration: none;
+			}
+		}
+		a.list-item:not(.list-item-link) {
+			&:hover, &:hover .li-underdrop {
+				background-color: @text-highlight-color;
+				text-decoration: none;
+				&, i.fa {
+					color: @background-color;
+				}
+			}
+		}
+	
+	}
+}
+
+/** Used in the wrapper for markdown and any other kind 
+	of user-generated text */
+.v2-textfield {
+	
+    font-size: 14px;
+	line-height: 18px;
+    word-break: break-word;
+    white-space: normal;
+	
+	h1, h2, h3, h4, h5, h6 {
+		font-size: 14px;
+		font-weight: bold;
+		margin: 18px 0 9px 0;
+	}
+	h1 {
+		margin-top: 36px;
+	}
+	
+	p {
+		padding: 0;
+		margin: 0;
+	}
+	p:not(:last-of-type) {
+		margin-bottom: 9px;
+	}
+
+	ul, ol {
+		padding-left: 26px;
+		ul, ol {
+			padding-left: 22px;
+		}
+	}
+	img {
+        display: inline-block;
+        max-width: 100%;
+        height: auto;
+        margin: 0 9px 9px 0;
+    }
+	
+	/* Hide linebreaks in sublists (those linebreaks are some markdown glitch) */
+	ul br, ol br, ul br {
+	    display: none;
+	}
+}
+
+
+/** Used with bootstrap rows and cols to override their padding */
+.narrow-container {
+	display: table;
+	box-sizing: border-box;
+}
+.narrow-row {
+	display: table-row;
+	margin: 0;
+	height: 100%;
+}
+.narrow-column {
+	display: table-cell;
+	float: none;
+	padding: 0;
+}
+
+
+
+.onoffswitch {
+    position: relative; width: 28px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid @color-primary; border-radius: 16px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 13px; padding: 0; line-height: 13px;
+    font-size: 16px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "";
+    padding-left: 10px;
+    background-color: @color-primary; 
+    color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "";
+    padding-right: 10px;
+    background-color: #FFFFFF; color: #666666;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 17px; margin: 0;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 12px;
+    border: 2px solid @color-primary; border-radius: 16px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label { 
+	.onoffswitch-switch {
+	}
+    .onoffswitch-inner {
+    	margin-left: 0;
+	}
+    .onoffswitch-switch {
+	    right: 0px; 
+	}
+}
+.onoffswitch-checkbox:not(:checked) + .onoffswitch-label {
+	border-color: @text-color-pale;
+	
+	.onoffswitch-switch {
+		border-color: @text-color-pale;
+	}
+}
+.onoffswitch-frame:hover .onoffswitch-label {
+	border-color: @color-primary;
+	
+	.onoffswitch-switch {
+		border-color: @color-primary;
+	}
+}
+.onoffswitch-text-label {
+    vertical-align: top;
+    font-size: 14px;
+    padding-top: 3px;
+    cursor: pointer;
+    
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+.onoffswitch-frame {
+	cursor: pointer;
+	
+	td:first-of-type {
+		padding-right: 10px;
+	}
+}
+
+
+
+
+

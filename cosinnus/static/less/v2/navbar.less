@@ -1,0 +1,178 @@
+/** The main, top-fixated, always visible navbar */
+.v2-navbar {
+	/** Dimensions */
+	height: 50px;
+	border-bottom: 1px solid @border-color;
+	box-sizing: border-box;
+	line-height: 50px;
+	
+	/** Fixation to top */
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 5;
+	
+	/** Flexbox */
+	display: flex;
+	flex-direction: row;
+	
+	/** Colors and font */
+	background-color: @background-color;
+	color: @navbar-text-color;
+	font-family: @font-regular;
+	font-size: 14px;
+	a, a:visited, i.fa {
+		color: @navbar-text-color;
+		text-decoration: none;
+	}
+	a:hover, a:active, a:hover i.fa, a:active i.fa {
+		color: @text-highlight-color;
+	}
+	i.fa {
+		font-size: 17px;
+	}
+	
+	.nav-section {
+		height: 49px;
+		margin: auto;
+		padding: 0 10px;
+	} 
+	.nav-search {
+		flex-grow: 2;
+		display: flex;
+		align-content: center;
+		position: relative;
+		
+		/** Focused search box with open result dropdown */
+		&.active {
+			border-right: 1px solid @border-color;
+			border-left: 1px solid @border-color;
+			
+			&, & input {
+				background-color: @background-color-secondary;
+			}
+		}
+		/** The closed state search icon slides up to the other icons */
+		&:not(.active) {
+			padding-right: 0;
+			margin-right: -5px;
+		}
+		
+		&.active .show-inactive,
+		&:not(.active) .show-active {
+			display: none;
+		}
+		
+		/** Highlight search button on hover and when active */
+		&.active .nav-button-search i.fa,
+		.nav-search-box:hover + div .nav-button-search i.fa {
+			color: @text-highlight-color; 	
+		}
+		
+		input.nav-search-box {
+			flex-grow: 2;
+			height: 49px;
+			font-size: 16px;
+			color: @navbar-text-color;
+			border: none;
+			outline: none;
+			padding: 0 10px;
+			
+			&:active, &:focus {
+				color: @navbar-active-text-color;
+			}
+			
+		}
+		
+		/** The dropdown frame of search results shown as the user is typing */
+		.dropdown-underdrop {
+			position: fixed;
+			background-color: @background-color-secondary;
+			width: 100%;
+			/** height is dynamically set in JS! */
+			top: 50px;
+			left: 0;
+			z-index: 1;
+			&:after {
+			    content: '.';
+			    visibility: hidden;
+			}
+		}
+		.nav-quicksearch-results {
+			position: absolute;
+			top: 50px;
+			right: 0;
+			left: 0;
+			z-index: 10;
+			background-color: @background-color-secondary;
+			display: none;
+			padding: 10px 0 5px 0;
+			
+		}
+		&.active .nav-quicksearch-results {
+			display: inherit;
+		}
+		
+		
+	}
+	.nav-buttons {
+	}
+	
+	.nav-brand {
+		img {
+			height: 30px;
+			width: auto;
+		}
+		height: 50px;
+	}
+	
+	.nav-button {
+		padding: 10px 5px;
+	}
+	.nav-button-search {
+		&.active {
+			color: @text-highlight-color;
+		}
+	}
+	.nav-header-textlink {
+		text-transform: uppercase;
+		font-weight: bold;
+		letter-spacing: 1px;
+	}
+	
+	/** The left-side flyout containing a user's items of interest */
+	.nav-flyout {
+		position: absolute;
+		top: 50px;
+		left: 0;
+		z-index: 9;
+		width: 100%;
+		background-color: @background-color-secondary;
+		
+		.nav-column {
+			&:not(:nth-child(3n)) {
+				border-right: 1px solid @border-color;
+			}
+		}
+		.nav-column-footer {
+			border-top: 1px solid @pale-border-color;
+		}
+	}
+	
+	
+}
+
+
+
+/** Desktop only */
+@media (min-width: 768px) {
+	.seperator-left {
+		border-left: 1px solid @border-color;
+	}
+}
+
+/** Mobile only */
+@media (max-width: 767px) {
+	
+}

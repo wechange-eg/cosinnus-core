@@ -118,7 +118,11 @@
         {% block body_header %}{% endblock body_header %}
 
         {% block cosinnus_navbar %}
-        	{% cosinnus_menu "cosinnus/navbar.html" %}
+        	{% if SETTINGS.COSINNUS_USE_V2_NAVBAR %}
+        		{% cosinnus_menu_v2 "cosinnus/v2/navbar.html" %}
+        	{% else %}
+        		{% cosinnus_menu "cosinnus/navbar.html" %}
+        	{% endif %}
         {% endblock cosinnus_navbar %}
 
 

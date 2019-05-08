@@ -1,0 +1,14 @@
+{% load i18n cosinnus_tags %}
+
+{% comment %} 
+	This template is only meant to be loaded from inside a timeline item template,
+	and from there inside the action_buttons block, as such:
+	{% block action_buttons %}
+		{% include 'cosinnus/v2/dashboard/timeline_button_like.html' with item=item %}
+	{% endblock %}
+{% endcomment %}
+
+<a href="#" class="action-button">
+	<i class="fa fa-fw fa-heart"></i>
+	12
+</a>
