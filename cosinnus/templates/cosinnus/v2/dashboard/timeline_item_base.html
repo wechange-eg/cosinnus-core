@@ -60,13 +60,12 @@
 				
 				<div class="subtitle plain-links">
 					{% block subtitle %}
-						<span class="spacer-if-not-first"></span>
+						<span class="spacer-if-inbetween"></span>
 						{% with location=item.media_tag.location %}
 							{% if location %}
 								<a href="{{ item.media_tag.location_url }}" target="_blank">{{ location }}</a>
 							{% endif %}
 						{% endwith %}
-						<span class="spacer-if-not-last"></span>
 					{% endblock %}
 				</div>
 			</div>

@@ -30,6 +30,17 @@
 		border-bottom: 1px solid @pale-border-color;
 		padding: 10px 0px;
 	}
+	.legal-links {
+		padding: 20px;
+		
+		div {
+			margin-bottom: 10px;
+		}
+		a {
+			color: @text-color;
+			text-decoration: underline;
+		}
+	}
 	.dashboard-news-create-frame {
 		padding-top: 10px;
 		border-bottom: 1px solid @border-color;
@@ -108,18 +119,11 @@
 		.spacerUNUSED {
 			margin-top: 7px;
 		}
-		.spacer-if-not-first:not(:first-child) {
+		.spacer-if-inbetween:not(:first-child):not(:last-child) {
 			margin-left: 2px;
 			&:after {
 				content: "\00B7";
 				margin-right: 2px;
-			}
-		}
-		.spacer-if-not-last:not(:last-child) {
-			margin-right: 2px;
-			&:before {
-				content: "\00B7";
-				margin-left: 2px;
 			}
 		}
 		
