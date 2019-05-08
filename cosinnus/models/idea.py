@@ -214,7 +214,7 @@ class CosinnusIdea(IndexingUtilsMixin, LikeableObjectMixin, models.Model):
     
     objects = IdeaManager()
     
-    timeline_template = 'cosinnus/v2/idea/timeline_item.html'
+    timeline_template = 'cosinnus/v2/idea/dashboard/timeline_item.html'
     
     class Meta(object):
         ordering = ('created',)
