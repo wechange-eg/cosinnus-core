@@ -55,7 +55,7 @@ import math
 logger = logging.getLogger('cosinnus')
 
 
-class UserDashboardView(TemplateView):
+class UserDashboardView(RequireLoggedInMixin, TemplateView):
     
     template_name = 'cosinnus/user_dashboard/user_dashboard.html'
     
@@ -119,7 +119,7 @@ class GroupWidgetView(BaseUserDashboardWidgetView):
                 continue
             
             items = [DashboardItem(society, is_emphasized=True)]
-            for i in range(len(projects)-1, 0, -1):
+            for i in range(len(projects)-1, -1, -1):
                 project = projects[i]
                 if project.parent == society:
                     items.append(DashboardItem(project))

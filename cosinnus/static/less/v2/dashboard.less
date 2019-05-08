@@ -9,6 +9,7 @@
 		opacity: 0; 
 	}
 	
+	display: flex;
 	margin-top: 50px;
 	width: 100%;
 	background-color: @background-color-secondary;
@@ -16,18 +17,10 @@
 	
 	.dashboard-left-bar, .dashboard-right-bar {
 		background-color: @background-color-secondary;
+		width: 25%;
 	}
-	/**
-	.dashboard-left-bar {
-		border-right: 1px solid @border-color;
-		margin-right: -1px;
-	}
-	.dashboard-right-bar {
-		border-left: 1px solid @border-color;
-		margin-left: -1px;
-	}
-	*/
 	.dashboard-center-bar {
+		width: 50%;
 		background-color: @background-color;
 		border-right: 1px solid @border-color;
 		border-left: 1px solid @border-color;
