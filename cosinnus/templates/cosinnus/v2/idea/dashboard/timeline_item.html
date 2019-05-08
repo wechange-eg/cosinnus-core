@@ -1,9 +1,21 @@
+{% extends 'cosinnus/v2/dashboard/timeline_item_base.html' %}
 {% load i18n cosinnus_tags %}
 
-<div class="timeline-item timeline-item-idea">
-	Timeline Item: Idea.
-	<br/>
-	{{ item.title }}
-	<br/>
-	{{ item.description }}
-</div>
+{% block container_class %}timeline-item-idea{% endblock %}
+
+{% block creation_label %}{% trans "has created an idea" %}{% endblock %}
+
+{% block icon %}fa-lightbulb-o{% endblock %}
+
+{% block title %}{{ item.title }}{% endblock %}
+
+{% block body %}
+	{{ item.description|textfield }}
+{% endblock %}
+
+{% block action_buttons %}
+	{% include 'cosinnus/v2/dashboard/timeline_button_like.html' with item=item %}
+	{% include 'cosinnus/v2/dashboard/timeline_button_follow.html' with item=item %}
+{% endblock %}
+
+

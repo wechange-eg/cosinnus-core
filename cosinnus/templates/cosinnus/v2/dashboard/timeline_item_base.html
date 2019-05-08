@@ -44,29 +44,52 @@
 	</div>
 	
 	<div class="icon">
-		<i class="fa fa-fw {% block icon %}{% endblock %}"></i>
+		<a href="{{ item.get_absolute_url }}">
+			<i class="fa fa-fw {% block icon %}{% endblock %}"></i>
+		</a>
 	</div>
 	
 	<div class="timeline-item-row body">
-		<div class="v2-textfield truncated-textfield truncated-textfield-large">
-			{% block title_frame %}
-				<p class="title">
-					{% block title %}{% endblock %}
-				</p>
-			{% endblock %}
-			{% block body %}{% endblock %}
-		</div>
+		{% block title_frame %}
+			<div class="title-frame">
+				<div class="title">
+					<a href="{{ item.get_absolute_url }}"> 
+						{% block title %}{% endblock %}
+					</a>
+				</div>
+				
+				<div class="subtitle plain-links">
+					{% block subtitle %}
+						<span class="spacer-if-not-first"></span>
+						{% with location=item.media_tag.location %}
+							{% if location %}
+								<a href="{{ item.media_tag.location_url }}" target="_blank">{{ location }}</a>
+							{% endif %}
+						{% endwith %}
+						<span class="spacer-if-not-last"></span>
+					{% endblock %}
+				</div>
+			</div>
+		{% endblock %}
+		{% block body_frame %}
+			<div class="v2-textfield truncated-textfield truncated-textfield-large">
+				{% block body %}{% endblock %}
+			</div>
+		{% endblock %}
 	</div>
 	
 	{% block attached_objects %}
-		<div class="timeline-item-row attachments" style="display: none;">
-			
-		</div>
+		{% if attached_objects %}
+			<div class="timeline-item-row attachments">
+			</div>
+		{% endif %}
 	{% endblock %}
 	
 	{% block tags %}
 		{% with topics=item.media_tag.topics tags=item.media_tag.tags.all %}
-			<hr class="seperator" />
+			{% block upper_seperator %}
+				<hr class="seperator" />
+			{% endblock %}
 			<div class="timeline-item-row meta-row text-small plain-links">
 				<div class="timeline-tags">
 					{% if topics %}
@@ -98,7 +121,6 @@
 		{% comment %} Include 'cosinnus/v2/dashboard/timeline_item_comments.html' in your implementing template! {% endcomment %}
 		{% comment %}  
 		
-		<div class="spacer"></div>
 		{% endcomment %}
 	{% endblock %}
 	
