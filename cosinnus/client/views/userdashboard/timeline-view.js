@@ -194,11 +194,12 @@ module.exports = BaseView.extend({
     },
     
     showLoadingPlaceholder: function () {
-    	this.$el.find('.timeline-loading-placeholder').show();
+    	var topHeight = this.$el.height();
+    	this.$el.find('.timeline-placeholder-frame').css({'top': topHeight}).show();
     },
     
     hideLoadingPlaceholder: function () {
-    	this.$el.find('.timeline-loading-placeholder').hide();
+    	this.$el.find('.timeline-placeholder-frame').hide();
     },
     
     showFinalDot: function () {

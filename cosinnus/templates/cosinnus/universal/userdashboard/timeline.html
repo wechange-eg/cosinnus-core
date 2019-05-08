@@ -26,9 +26,6 @@
 	{# Timeline items get appended here #}
 </div>
 
-<div class="timeline-loading-placeholder" style="display: none;">
-	<span style="color: green">TODO: loading placeholder</span>
-</div>
 
 <div class="timeline-error-message" style="display: none;">
 	<div>
@@ -45,4 +42,10 @@
 	<div>
 		<i class="fa fa-fw fa-circle"></i>
 	</div>
+</div>
+
+<div class="timeline-placeholder-frame" style="display: none;">
+	{% include 'userdashboard/timeline-item-placeholder' %}
+	{% include 'userdashboard/timeline-item-placeholder' %}
+	{% include 'userdashboard/timeline-item-placeholder' %}
 </div>
