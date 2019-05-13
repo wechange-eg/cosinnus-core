@@ -444,7 +444,7 @@ class CosinnusConf(AppConf):
     MICROSITE_RENDER_EMPTY_APPS = True
     
     # how many public items per type should be shown on the microsite?
-    MICROSITE_PUBLIC_APPS_NUMBER_OF_ITEMS = 5
+    MICROSITE_PUBLIC_APPS_NUMBER_OF_ITEMS = 10
     
     # should twitter and flickr embed fields and display be active for microsites?
     MICROSITE_SOCIAL_MEDIA_FIELDS_ACTIVE = False
