@@ -48,6 +48,17 @@
 	.button {
 		/** TODO */
 	}
+	.flex-row {
+		display: flex;
+		flex-direction: row;
+		
+		&> div:not(:last-of-type)  {
+			margin-right: 8px;
+		}
+	}
+	.flex-grow {
+		flex-grow: 2;
+	}
 	
 	/** **** Lists of highlighted links **** */
 	

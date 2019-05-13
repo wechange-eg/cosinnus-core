@@ -33,6 +33,9 @@ module.exports = BaseView.extend({
     	// todo: onlyMine button
     	'click .toggle-group-content-only': 'toggleOnlyMineClicked',
     	'click .retry-load': 'retryLoadAfterErrors',
+    	'click .show-all-comments': 'showAllCommentsForItem',
+    	'click .comment-form :not(textarea)': 'delegateTextInputClick',
+    	'keypress .comment-form textarea': 'commentTextboxKeyPressed',
     },
 
     initialize: function (options, app) {
@@ -92,6 +95,27 @@ module.exports = BaseView.extend({
 		self.load();
     },
     
+    /** Called from a "show all comments" link from an item */
+    showAllCommentsForItem: function (event) {
+    	var self = this;
+		var $target = $(event.target);
+		$target.hide();
+		$target.parents('.timeline-item-comments').find('.comment-hidden').fadeIn();
+    },
+    
+    /** Makes the i.fa icon clickable as if it were the textarea */
+    delegateTextInputClick: function (event) {
+    	$(event.target).parents('.comment-form').find('textarea').focus();
+    },
+    
+    /** Pressing enter (unless with shift or ctrl) sends the form */
+    commentTextboxKeyPressed: function (event) {
+    	if (event.keyCode == 13 && !event.shiftKey && !event.ctrlKey) {
+    	    $(event.target).parents('form')[0].submit();
+    	    event.preventDefault();
+    	}
+    },
+    
     /** Call to load a new page of items from the current offset,
      *  will only fire a request if no other request is currently running */
     load: function () {
@@ -101,16 +125,20 @@ module.exports = BaseView.extend({
 	    		self.state.loading = true;
 	    		self.showLoadingPlaceholder();
 	    		self.hideErrorMessage();
+	    		// using this instead of .finally() for backwards compatibility in browsers
+	    		var finally_compat = function() {
+	    			self.state.loading = false;
+	    			self.hideLoadingPlaceholder();
+	    			resolve();
+	    		};
 	    		self.loadData().then(function(data){
 	    			util.log('# timeline received data and will handle them');
 	    			self.enableInfiniteScroll();
 	    			self.handleData(data);
+	    			finally_compat();
 	    		}).catch(function(message){
 	    			self.handleError(message);
-	    		}).finally(function(){
-	    			self.state.loading = false;
-	    			self.hideLoadingPlaceholder();
-	    			resolve();
+	    			finally_compat();
 	    		});
 	    	});
     	}
@@ -171,6 +199,7 @@ module.exports = BaseView.extend({
     	var self = this;
     	var timeline = self.$el.find('.timeline');
     	$.each(items, function(i, item){
+    		
     		timeline.append(item);
     	});
 

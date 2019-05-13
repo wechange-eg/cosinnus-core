@@ -13,7 +13,6 @@
 	margin-top: 50px;
 	width: 100%;
 	background-color: @background-color-secondary;
-	overflow: auto;
 	
 	.dashboard-left-bar, .dashboard-right-bar {
 		background-color: @background-color-secondary;
@@ -93,7 +92,6 @@
 			}
 		}
 		.plain-links a {
-			color: @text-color;
 			font-weight: normal;
 		}
 		.pale-color, .pale-color a {
@@ -116,14 +114,26 @@
 				display: none;
 			}
 		}
-		.spacerUNUSED {
-			margin-top: 7px;
+		.spacer-largeUNUSED {
+			margin-bottom: 20px;
 		}
 		.spacer-if-inbetween:not(:first-child):not(:last-child) {
 			margin-left: 2px;
 			&:after {
 				content: "\00B7";
 				margin-right: 2px;
+			}
+		}
+		.avatar {
+			img {
+				height: 27px;
+				width: 27px;
+			}
+		}
+		.avatar-small {
+			img {
+				height: 18px;
+				width: 18px;
 			}
 		}
 		
@@ -133,19 +143,7 @@
 			&, i {
 				font-size: 12px;
 			}
-			
-			&> div:not(:last-of-type)  {
-				margin-right: 8px;
-			}
-			
-			.header-avatar {
-				img {
-					height: 27px;
-					width: 27px;
-				}
-			}
 			.header-info {
-				flex-grow: 2;
 				.item-info {
 					line-height: 14px;
 					 a {
@@ -180,14 +178,54 @@
 			.subtitle {
 			}
 		}
-		.meta-row {
-			display: flex;
-			flex-direction: row;
-		}
+		
 		.timeline-tags {
-			flex-grow: 2;
 			span {
 				margin-right: 10px;
+			}
+		}
+		.timeline-item-comments {
+			font-size: 12px;
+			.comment {
+				margin-top: 10px;
+				margin-bottom: 10px;
+				
+				.comment-header {
+					margin-bottom: 18px;
+					
+					/** Cheap-cheated text alignment */
+					.comment-creator-label {
+						padding-top: 2px;
+						margin-bottom: -1px;
+					}
+				}
+			}
+			.comment-hidden {
+				display: none;
+			}
+			.comment-form {
+				cursor: text;
+				padding: 0;
+				margin: 0 37px -20px 37px;
+				
+				textarea {
+					border: none;
+					width: 100%;
+					padding-left: 0;
+					padding-right: 0;
+					line-height: 18px;
+					height: 38px;
+					&:focus {
+						outline: none;
+					}
+				}
+				i.fa {
+					padding-top: 13px;
+					color: @text-color-pale;
+				}
+				&:focus-within i.fa {
+					color: @text-color;
+				}
 			}
 		}
 		a.action-button {

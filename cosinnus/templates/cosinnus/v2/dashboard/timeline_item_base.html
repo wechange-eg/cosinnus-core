@@ -4,19 +4,21 @@
 	<div class="header-dropdown dropdown">
 	</div>
 	
-	<div class="timeline-item-row header">
-		<div class="header-avatar">
+	<div class="timeline-item-row header flex-row">
+		<div class="avatar">
 			<a href="{{ item.creator|profile_url }}">
 				{% include "cosinnus/user/user_avatar_image.html" with user=item.creator %}
 			</a>
 		</div>
-		<div class="header-info">
+		<div class="header-info flex-grow">
 			<div class="item-info">
 				<a href="{{ item.creator|profile_url }}">
 					{{ item.creator|full_name }}
 				</a>
-				<span class="highlighted-text">
-					{% block creation_label %}{% endblock %}
+				<span class="highlighted-text plain-links">
+					<a href="{{ item.get_absolute_url }}">
+						{% block creation_label %}{% endblock %}
+					</a>
 				</span>
 			</div>
 			<div class="item-date pale-color">
@@ -89,8 +91,8 @@
 			{% block upper_seperator %}
 				<hr class="seperator" />
 			{% endblock %}
-			<div class="timeline-item-row meta-row text-small plain-links">
-				<div class="timeline-tags">
+			<div class="timeline-item-row meta-row text-small flex-row plain-links">
+				<div class="timeline-tags flex-grow">
 					{% if topics %}
 						<span>
 							<i class="fa fa-fw fa-lightbulb-o"></i>
