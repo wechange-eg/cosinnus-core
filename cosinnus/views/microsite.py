@@ -22,7 +22,7 @@ class GroupMicrositeView(DipatchGroupURLMixin, GroupObjectCountMixin, DisplayTag
     
     def get_public_objects(self):
         """ Returns a dict {'<app_name': [<app_items>], ...} """
-        querysets = self.get_object_querysets(group=self.group, cosinnus_apps=self.group.get_microsite_public_apps(), user=self.request.user)
+        querysets = self.get_object_querysets(group=self.group, cosinnus_apps=self.group.get_microsite_public_apps())
         
         public_objects = defaultdict(list)
         for queryset in querysets:
