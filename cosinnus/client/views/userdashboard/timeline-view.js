@@ -199,12 +199,12 @@ module.exports = BaseView.extend({
     	var self = this;
     	var timeline = self.$el.find('.timeline');
     	$.each(items, function(i, item){
-    		
     		timeline.append(item);
     	});
 
     	$.cosinnus.renderMomentDataDate();
 		$.cosinnus.truncatedTextfield();
+		self.removeEmptyDivs();
     },
     
     handleError: function (message) {
@@ -248,6 +248,16 @@ module.exports = BaseView.extend({
     	var self = this;
     	self.options.onlyMine = event.target.checked;
     	self.resetAndLoad();
+    },
+    
+    removeEmptyDivs: function () {
+    	var self = this;
+    	self.$el.find('.remove-if-empty').each(function(){
+			var $item = $(this);
+			if ($item.text().replace(/\s/g, '').length == 0) {
+				$item.remove();
+			}
+		});
     },
     
     /** Handles events for infinite scroll */

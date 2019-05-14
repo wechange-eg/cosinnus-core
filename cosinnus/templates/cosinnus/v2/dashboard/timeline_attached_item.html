@@ -1,0 +1,45 @@
+{% load i18n cosinnus_tags %}
+
+{% comment %}  
+	Attached item. Variables:
+		- text
+		- subtext
+		- subtext_is_date (bool)
+		- icon
+		- url
+		- download_url
+		- image_url
+{% endcomment %}
+
+<a class="timeline-attached-item flex-row" href="{{ url }}" >
+	{% if icon %}
+		<div class="attached-icon">
+			<i class="fa fa-fw {{ icon }}"></i>
+		</div>
+	{% endif %}
+	{% if image_url %}
+		<div class="image">
+			<img src="{{ image_url }}" style="width: 20px; height: 20px;" />
+		</div>
+	{% endif %}
+	{% if subtext %}
+		<div class="text text-dual flex-grow">
+			<div class="item-text-primary text-bold">{{ text }}</div>
+			<br/>
+			{% if subtext_is_date %}
+				<div class="moment-data-date" data-date="{{ subtext }}" data-date-style="short"></div>
+			{% else %}
+				<div>{{ subtext }}</div>
+			{% endif %}
+		</div>
+	{% else %}
+		<div class="text text-bold">
+			{{ text }} 
+		</div>
+	{% endif %}
+	{% if download_url %}
+		<div class="attached-icon download-icon" onclick="window.location='{{ download_url }}';return false;" title="{% trans "Download" %}">
+			<i class="fa fa-fw fa-download"></i>
+		</div>
+	{% endif %}
+</a>

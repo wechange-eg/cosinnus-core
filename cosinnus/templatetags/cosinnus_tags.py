@@ -352,7 +352,7 @@ def cosinnus_render_widget(context, widget):
     return mark_safe(widget.render(**flat))
 
 @register.simple_tag(takes_context=True)
-def cosinnus_render_attached_objects(context, source, filter=None, skipImages=False):
+def cosinnus_render_attached_objects(context, source, filter=None, skipImages=True, v2Style=False):
     """
     Renders all attached files on a given source cosinnus object. This will
     collect and group all attached objects (`source.attached_objects`) by their
@@ -374,7 +374,7 @@ def cosinnus_render_attached_objects(context, source, filter=None, skipImages=Fa
         content_model = att.model_name
         if filter and content_model not in allowed_types:
             continue
-        if getattr(attobj, 'is_image', False):
+        if getattr(attobj, 'is_image', False) and skipImages:
             continue
         if attobj is not None:
             typed_objects[content_model].append(attobj)
@@ -385,7 +385,7 @@ def cosinnus_render_attached_objects(context, source, filter=None, skipImages=Fa
         Renderer = attached_object_registry.get(model_name)  # Renderer is a class
         if Renderer:
             # pass the list to that manager and expect a rendered html string
-            rendered_output.append(Renderer.render(context, objects))
+            rendered_output.append(Renderer.render(context, objects, v2Style=v2Style))
         elif settings.DEBUG:
             rendered_output.append(_('<i>Renderer for %(model_name)s not found!</i>') % {
                 'model_name': model_name

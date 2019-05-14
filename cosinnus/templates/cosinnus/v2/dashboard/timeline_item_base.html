@@ -79,9 +79,21 @@
 		{% endblock %}
 	</div>
 	
-	{% block attached_objects %}
-		{% if attached_objects %}
+	{% block attached_images %}
+		{% if item.attached_images %}
 			<div class="timeline-item-row attachments">
+				<span style="color:red">TODO: images!!!!!</span>
+				{% comment %}  
+				{% include 'cosinnus/v2/dashboard/timeline_attached_image_gallery.html'  %}
+				{% endcomment %}
+			</div>
+		{% endif %}
+	{% endblock %}
+	
+	{% block attached_objects %}
+		{% if item.attached_objects.exists %}
+			<div class="timeline-item-row attachments">
+			    {% cosinnus_render_attached_objects item v2Style=True %}
 			</div>
 		{% endif %}
 	{% endblock %}
@@ -89,9 +101,11 @@
 	{% block tags %}
 		{% with topics=item.media_tag.topics tags=item.media_tag.tags.all %}
 			{% block upper_seperator %}
-				<hr class="seperator" />
+				{% if tags or topics %}
+					<hr class="seperator" />
+				{% endif %}
 			{% endblock %}
-			<div class="timeline-item-row meta-row text-small flex-row plain-links">
+			<div class="timeline-item-row meta-row text-small flex-row plain-links remove-if-empty">
 				<div class="timeline-tags flex-grow">
 					{% if topics %}
 						<span>

@@ -28,6 +28,14 @@ class BaseRenderer(object):
         return cls.template
     
     @classmethod
+    def get_template_v2(cls):
+        if not hasattr(cls, 'template_v2'):
+            from django.core.exceptions import ImproperlyConfigured
+            raise ImproperlyConfigured('Missing template_v2 definition for '
+                'renderer %s' % cls.__name__)
+        return cls.template_v2
+    
+    @classmethod
     def get_template_single(cls):
         if not hasattr(cls, 'template_single'):
             from django.core.exceptions import ImproperlyConfigured
@@ -46,9 +54,15 @@ class BaseRenderer(object):
     
     @classmethod
     def render(cls, context, objects=[], **kwargs):
+        template = None
+        if kwargs.get('v2Style', False):
+            kwargs.pop('v2Style')
+            template = cls.get_template_v2()
+        else:
+            template = cls.get_template()
         context.update(kwargs)
         context.update({'objects': objects})
-        return render_to_string(cls.get_template(), context.flatten())
+        return render_to_string(template, context.flatten())
     
     
     def get_context_data(self, *args, **kwargs):
