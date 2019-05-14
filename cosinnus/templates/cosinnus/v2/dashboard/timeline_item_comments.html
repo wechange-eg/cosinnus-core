@@ -1,64 +1,50 @@
 {% load i18n cosinnus_tags %}
 
-{% comment %} 
-	This template is only meant to be loaded from inside a timeline item template,
-	and from there inside the comments block, as such:
-	{% block comments %}{% include 'cosinnus/v2/dashboard/timeline_item_comments.html' with item=item %}{% endblock %}
-{% endcomment %}
 
 <div class="timeline-item-comments">
-	{% with comments=item.comments.all %}
-		 {% with comment_count=comments|length %}
-		 
-			<hr class="seperator" />
-			<div class="timeline-item-row comments-header text-small flex-row">
-				<div class="flex-grow">
-					<i class="fa fa-fw fa-comments"></i>
-					<span class="comments-count">{{ comment_count }}</span>
-				</div>
-				<div class="plain-links pale-color">
-					{% comment %} onclick functionality is in timeline-view.js {% endcomment %}
-					{% if comment_count > 3 %}
-						<a href="#" class="show-all-comments">
-							{% blocktrans with count=comment_count %}Show all {{ count }} comments{% endblocktrans %}
+	 {% with comment_count=comments|length %}
+	 	
+	 	{% if comment_count > 3 %}
+			<div class="timeline-item-row comments-header text-small plain-links pale-color shown-when-more">
+				{% comment %} onclick functionality is in timeline-view.js {% endcomment %}
+				<a href="#" class="show-all-comments">
+					{% blocktrans with count=comment_count %}Show all {{ count }} comments{% endblocktrans %}
+				</a>
+			</div>
+			<hr class="seperator shown-when-more" />
+		{% endif %}
+		
+		{% for comment in comments %}
+			<div class="timeline-item-row comment {% if comment_count > 3 and forloop.counter <= comment_count|subtract:3 %}comment-hidden{% endif %}">
+				<div class="comment-header text-small flex-row">
+					<div class="avatar-small">
+						<a href="{{ comment.creator|profile_url }}">
+							{% include "cosinnus/user/user_avatar_image.html" with user=comment.creator %}
 						</a>
-					{% endif %}
+					</div>
+					<div class="comment-creator-label">
+						<span>
+							<a href="{{ comment.creator|profile_url }}">
+								{{ comment.creator|full_name }}
+							</a>
+						</span>
+						<span class="plain-links">
+							<a href="{{ comment.get_absolute_url }}"><span class="annotation moment-data-date" data-date="{{ comment.created_on|date:'c' }}" ></span></a>
+						</span>
+					</div>
+					<div class="comment-dropdown dropdown">
+						{% comment %} TODO {% endcomment %}
+					</div>	
+				</div>
+				<div class="comment-body v2-textfield ">
+					{{ comment.text|textfield }}
 				</div>
 			</div>
-			
-			{% for comment in comments %}
-				<hr class="seperator {% if comment_count > 3 and forloop.counter <= comment_count|subtract:3 %}comment-hidden{% endif %}" />
-				<div class="timeline-item-row comment {% if comment_count > 3 and forloop.counter <= comment_count|subtract:3 %}comment-hidden{% endif %}">
-					<div class="comment-header text-small flex-row">
-						<div class="avatar-small">
-							<a href="{{ comment.creator|profile_url }}">
-								{% include "cosinnus/user/user_avatar_image.html" with user=comment.creator %}
-							</a>
-						</div>
-						<div class="comment-creator-label">
-							<span>
-								<a href="{{ comment.creator|profile_url }}">
-									{{ comment.creator|full_name }}
-								</a>
-							</span>
-							<span class="plain-links">
-								<a href="{{ comment.get_absolute_url }}"><span class="annotation moment-data-date" data-date="{{ comment.created_on|date:'c' }}" ></span></a>
-							</span>
-						</div>
-						<div class="comment-dropdown dropdown">
-							{% comment %} TODO {% endcomment %}
-						</div>	
-					</div>
-					<div class="comment-body v2-textfield ">
-						{{ comment.text|textfield }}
-					</div>
-				</div>
-			{% endfor %}
-			
-		{% endwith %}
+			<hr class="seperator {% if comment_count > 3 and forloop.counter <= comment_count|subtract:3 %}comment-hidden{% endif %}" />
+		{% endfor %}
+		
 	{% endwith %}
 	
-	<hr class="seperator" />
 	<div class="timeline-item-row comment-form flex-row">
 		<div class="">
 			<i class="fa fa-fw fa-pencil"></i>

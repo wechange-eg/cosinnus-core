@@ -99,14 +99,22 @@
 	{% endblock %}
 	
 	{% block tags %}
-		{% with topics=item.media_tag.topics tags=item.media_tag.tags.all %}
-			{% block upper_seperator %}
-				{% if tags or topics %}
-					<hr class="seperator" />
-				{% endif %}
-			{% endblock %}
+		{% with topics=item.media_tag.topics tags=item.media_tag.tags.all comments=item.comments %}
+		
+			<hr class="seperator remove-if-next-empty" />
+			
 			<div class="timeline-item-row meta-row text-small flex-row plain-links remove-if-empty">
 				<div class="timeline-tags flex-grow">
+					{% if comments %}
+						{% with comment_count=comments.count %}
+							{% if comment_count > 0 %}
+								<span>
+									<i class="fa fa-fw fa-comments"></i>
+									{{ comment_count }}
+								</span>
+							{% endif %}
+						{% endwith %}
+					{% endif %}
 					{% if topics %}
 						<span>
 							<i class="fa fa-fw fa-lightbulb-o"></i>
@@ -126,17 +134,14 @@
 					{% block action_buttons %}{% endblock %}
 				</div>
 			</div>
-			{% if tags or topics %}
-				<hr class="seperator" />
+			
+			<hr class="seperator {% if not comments %}remove-if-prev-empty{% endif %}" />
+		
+			{% if comments %}
+				{% include 'cosinnus/v2/dashboard/timeline_item_comments.html' with item=item comments=comments.all %}
 			{% endif %}
 		{% endwith %}
-	{% endblock %}
-	
-	{% block comments %}
-		{% comment %} Include 'cosinnus/v2/dashboard/timeline_item_comments.html' in your implementing template! {% endcomment %}
-		{% comment %}  
 		
-		{% endcomment %}
 	{% endblock %}
 	
 </div>

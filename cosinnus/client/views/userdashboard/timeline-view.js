@@ -99,7 +99,7 @@ module.exports = BaseView.extend({
     showAllCommentsForItem: function (event) {
     	var self = this;
 		var $target = $(event.target);
-		$target.hide();
+		$target.parents('.timeline-item-comments').find('.shown-when-more').hide();
 		$target.parents('.timeline-item-comments').find('.comment-hidden').fadeIn();
     },
     
@@ -252,6 +252,18 @@ module.exports = BaseView.extend({
     
     removeEmptyDivs: function () {
     	var self = this;
+    	self.$el.find('.remove-if-prev-empty').each(function(){
+			var $item = $(this);
+			if ($item.prev().text().replace(/\s/g, '').length == 0) {
+				$item.remove();
+			}
+		});
+    	self.$el.find('.remove-if-next-empty').each(function(){
+			var $item = $(this);
+			if ($item.next().text().replace(/\s/g, '').length == 0) {
+				$item.remove();
+			}
+		});
     	self.$el.find('.remove-if-empty').each(function(){
 			var $item = $(this);
 			if ($item.text().replace(/\s/g, '').length == 0) {
