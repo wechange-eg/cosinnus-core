@@ -1,7 +1,35 @@
 {% load i18n cosinnus_tags %}
 
 <div class="timeline-item {% block container_class %}{% endblock %}">
-	<div class="header-dropdown dropdown">
+
+	<div class="header-dropdown v2-dropdown dropdown">
+    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <i class="fa fa-ellipsis-h"></i>
+        </a>
+        <ul class="dropdown-menu">
+        	{% if user|has_write_access:item %}
+        		{% block edit_button_frame %}
+		        	<li>
+		        		<a href="{{ item.get_edit_url }}">
+		        			{% trans "Edit" %}
+		    			</a>
+					</li>
+				{% endblock %}
+	        	<li>
+	        		<a href="#" onclick="if(window.confirm('{% trans "Are you sure you want to delete the item?" %}')){$('#delete_item_form_{{ item.pk }}').submit();} return false;">
+	        			{% trans "Delete" %}
+	    			</a>
+				</li>
+        	{% endif %}
+			<li>
+				<a href="#" {% cosinnus_report_object_action item %}>
+					{% trans "Report offensive content" %}
+				</a>
+			</li>
+        </ul>
+        <form id="delete_item_form_{{ item.pk }}" action="{{ item.get_delete_url }}" method="post">
+            {% csrf_token %}
+        </form>
 	</div>
 	
 	<div class="timeline-item-row header flex-row">

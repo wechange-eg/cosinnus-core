@@ -16,6 +16,37 @@
 		
 		{% for comment in comments %}
 			<div class="timeline-item-row comment {% if comment_count > 3 and forloop.counter <= comment_count|subtract:3 %}comment-hidden{% endif %}">
+				
+				<div class="comment-dropdown v2-dropdown dropdown">
+			    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			            <i class="fa fa-ellipsis-h"></i>
+			        </a>
+			        <ul class="dropdown-menu">
+			        	{% if user|has_write_access:comment %}
+			        		{% comment %}  
+				        	<li>
+				        		<a href="#">
+				        			{% trans "Edit comment" %} (NOT YET SUPPORTED)
+				    			</a>
+							</li>
+			        		{% endcomment %}
+				        	<li>
+				        		<a href="#" onclick="if(window.confirm('{% trans "Are you sure you want to delete the item?" %}')){$('#delete_comment_form_{{ comment.pk }}').submit();} return false;">
+				        			{% trans "Delete comment" %}
+				    			</a>
+							</li>
+			        	{% endif %}
+						<li>
+							<a href="#" {% cosinnus_report_object_action comment %}>
+								{% trans "Report offensive comment" %}
+							</a>
+						</li>
+			        </ul>
+    				<form id="delete_comment_form_{{ comment.pk }}" action="{{ comment.get_delete_url }}" method="post">
+                        {% csrf_token %}
+                    </form>
+				</div>
+			
 				<div class="comment-header text-small flex-row">
 					<div class="avatar-small">
 						<a href="{{ comment.creator|profile_url }}">

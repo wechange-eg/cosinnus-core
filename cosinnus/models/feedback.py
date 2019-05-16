@@ -76,10 +76,16 @@ class CosinnusReportedObject(models.Model):
             return self.content_type.model
     
     def get_target_edit_url(self):
-        return reverse('admin:%s_%s_change' % (self.content_type.app_label, self.get_target_model_name()), args=(self.target_object.id,))
+        try:
+            return reverse('admin:%s_%s_change' % (self.content_type.app_label, self.get_target_model_name()), args=(self.target_object.id,))
+        except:
+            return ''
     
     def get_target_delete_url(self):
-        return reverse('admin:%s_%s_delete' % (self.content_type.app_label, self.get_target_model_name()), args=(self.target_object.id,))
+        try:
+            return reverse('admin:%s_%s_delete' % (self.content_type.app_label, self.get_target_model_name()), args=(self.target_object.id,))
+        except:
+            return ''
     
      
 class CosinnusSentEmailLog(models.Model):

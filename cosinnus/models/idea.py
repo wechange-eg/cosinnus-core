@@ -315,5 +315,10 @@ class CosinnusIdea(IndexingUtilsMixin, LikeableObjectMixin, models.Model):
     def get_absolute_url(self):
         item_id = '%d.ideas.%s' % (self.portal_id, self.slug)
         return get_domain_for_portal(self.portal) + reverse('cosinnus:map') + '?item=' + item_id
-
+    
+    def get_edit_url(self):
+        return reverse('cosinnus:idea-edit', kwargs={'slug': self.slug})
+    
+    def get_delete_url(self):
+        return reverse('cosinnus:idea-delete', kwargs={'slug': self.slug})
     

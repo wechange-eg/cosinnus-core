@@ -206,6 +206,40 @@
 }
 
 
+.v2-dropdown {
+	z-index: 4;
+	
+	&, i.fa {
+		color: @text-color-extra-pale;
+	}
+	a.dropdown-toggle {
+		padding: 10px;
+		&:hover, &:hover i.fa {
+			color: @text-highlight-color;
+		}
+	}
+	
+	ul.dropdown-menu {
+		padding: 0;
+		
+		li a {
+			padding: 5px 10px;
+			font-weight: normal;			
+			
+			&:hover, &:active {
+				text-decoration: none;
+				color: @background-color;
+				background-color: @text-highlight-color;
+			}
+		}
+		
+		li:not(:last-of-type) {
+			border-bottom: 1px solid @border-color;
+		}
+	}
+	
+}
+
 
 .onoffswitch {
     position: relative; width: 28px;
