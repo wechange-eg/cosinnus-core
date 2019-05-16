@@ -103,7 +103,7 @@ module.exports = BaseView.extend({
     checkQuickSearchFocusOut: function (event) {
     	if (this.$el.hasClass('active') && !this.el.contains(event.target)) {
     		this.$el.removeClass('active');
-    		document.addEventListener('click', this.thisContext(this.checkQuickSearchFocusOut));
+    		document.removeEventListener('click', this.thisContext(this.checkQuickSearchFocusOut));
     	}
     },
     

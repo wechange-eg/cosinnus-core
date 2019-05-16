@@ -154,9 +154,9 @@ $.cosinnus.Feedback = {
 		  var $button = $('.'+type+'-button[data-ct="'+ct+'"][data-id="'+id+'"]')
 		  $button.toggleClass('selected', selected);
 		  if (selected) {
-			  $button.next('.likefollow-button-success-message').fadeIn();
+			  $button.next('.likefollow-button-success-message').fadeIn(function(){ $(this).addClass('hide-on-click'); });
 		  } else {
-			  $button.next('.likefollow-button-success-message').hide();
+			  $button.next('.likefollow-button-success-message').hide().removeClass('hide-on-click');
 		  }
 		  
 		  var params = {};

@@ -300,8 +300,9 @@
 		    padding: 0 4px;
 		    text-transform: uppercase;
 		    font-weight: bolder;
+		    cursor: pointer;
 			
-			&:hover, &:active {
+			&:hover, &:active, &.selected {
 				color: @text-highlight-color;
 				text-decoration: none;
 				border: 1px solid @text-highlight-color;
@@ -309,6 +310,22 @@
 			&:not(:last-of-type) {
 				margin-right: 6px;
 			}
+		}
+		a.action-button-toggleable {
+		    .show-selected {
+		        display: none;
+		    }
+		    &.selected {
+		        .show-unselected {
+		            display: none;
+		        }
+		        .show-selected {
+		            display: inherit;
+		        }
+		    }
+		}
+		.action-button-wrapper {
+			display: inline-block;
 		}
 	}
 	

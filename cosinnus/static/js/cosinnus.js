@@ -558,6 +558,13 @@
         		$(event.target).parent().find('input[type="checkbox"]').click();
         	});
         },
+        
+        /** Click triggers for the .hide-on-click class */
+        hideOnClick: function() {
+        	$('body').on('click', function(event){
+        		$('.hide-on-click:visible').hide();
+        	});
+        },
 
         todosSelect : function() {
             $('body').on('click','.fa-star-o',function() {
@@ -1599,6 +1606,7 @@ if (!String.prototype.format) {
 $(function() {
     $.cosinnus.checkBox();
     $.cosinnus.onoffSwitch();
+    $.cosinnus.hideOnClick();
     $.cosinnus.fadedown();
     $.cosinnus.selectors();
     $.cosinnus.fullcalendar();

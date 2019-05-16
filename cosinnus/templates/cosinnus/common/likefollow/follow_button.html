@@ -4,7 +4,7 @@
     Expects an `object` context variable for the object to like/follow.
 {% endcomment %}
 
-<a class="likefollow-button follow-button {% if user|can_likefollow:object %}action-do-likefollow{% endif %} {% if user.id in object.get_followed_user_ids %}selected{% endif %}" 
+<a class="likefollow-button likefollow-button-style follow-button {% if user|can_likefollow:object %}action-do-likefollow{% endif %} {% if user.id in object.get_followed_user_ids %}selected{% endif %}" 
         data-type="follow" data-ct="{{ object.get_content_type }}" data-id="{{ object.id }}"
         {% if not user|can_likefollow:object %}href="{% url 'login' %}?next={{ object.get_absolute_follow_url|urlencode }}"{% endif %}>
     <span class="show-unselected">
@@ -24,7 +24,7 @@
         {% trans "Following" %}
     </span>
 </a>
-<span class="likefollow-button-success-message" style="display:none;">
+<span class="likefollow-button-success-message likefollow-button-success-message-style" style="display:none;">
     {% if success_message %}
         {{ success_message }}
     {% else %}

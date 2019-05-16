@@ -4,7 +4,7 @@
     Expects an `object` context variable for the object to like/follow.
 {% endcomment %}
 
-<a class="likefollow-button like-button {% if user|can_likefollow:object %}action-do-likefollow{% endif %} {% if user.id in object.get_liked_user_ids %}selected{% endif %}" 
+<a class="likefollow-button likefollow-button-style like-button {% if user|can_likefollow:object %}action-do-likefollow{% endif %} {% if user.id in object.get_liked_user_ids %}selected{% endif %}" 
         data-type="like" data-ct="{{ object.get_content_type }}" data-id="{{ object.id }}"
         {% if not user|can_likefollow:object %}href="{% url 'login' %}?next={{ object.get_absolute_like_url|urlencode }}"{% endif %}>
     {# We add/subtract 1 here, because that number is for the already-pre-calculated future state of when the current user likes/unlikes the object #}

@@ -291,6 +291,40 @@
 }
 
 
+.arrow-box {
+	background-color: @background-color-secondary;
+	border: 1px solid @border-color;
+	
+    position: absolute;
+	z-index: 10;
+    margin-left: -150px;
+    width: 300px;
+    white-space: normal;
+    padding: 5px;
+    margin-top: 15px;
+}
+.arrow-box:after, .arrow-box:before {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
 
+.arrow-box:after {
+	border-color: rgba(0, 0, 0, 0);
+	border-bottom-color: @background-color-secondary;
+	border-width: 10px;
+	margin-left: -10px;
+}
+.arrow-box:before {
+	border-color: rgba(0, 0, 0, 0);
+	border-bottom-color: @border-color;
+	border-width: 11px;
+	margin-left: -11px;
+}
 
 
