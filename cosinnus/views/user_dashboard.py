@@ -1,56 +1,41 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import logging
+import inspect
+import itertools
 import json
-import six
+import logging
+import math
 
 from annoying.functions import get_object_or_None
-from django.contrib import messages
-from django.contrib.auth import get_user_model
-from django.contrib.auth.decorators import login_required
-from django.core.exceptions import ImproperlyConfigured, ValidationError, \
-    PermissionDenied
-from django.http import HttpResponseRedirect
+from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ImproperlyConfigured
+from django.db.models.query_utils import Q
+from django.http.response import JsonResponse, HttpResponseForbidden, \
+    HttpResponseBadRequest
 from django.template.loader import render_to_string
-from django.urls import reverse, reverse_lazy
-from django.utils.encoding import force_text
-from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext_lazy as _, pgettext_lazy
-from django.views.generic import (CreateView, DeleteView, DetailView,
-    ListView, UpdateView, TemplateView)
+from django.views.generic import TemplateView
+from django.views.generic.base import View
+import six
 
 from cosinnus.conf import settings
-from cosinnus.core import signals
-from cosinnus.core.registries import app_registry
-from cosinnus.core.registries.group_models import group_model_registry
-from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety, \
-    ensure_group_type
-from cosinnus.utils.urls import group_aware_reverse, get_non_cms_root_url
-from django.views.generic.base import View
-from django.http.response import JsonResponse, HttpResponseForbidden,\
-    HttpResponseBadRequest, HttpResponse
-from cosinnus.views.mixins.group import RequireLoggedInMixin
-from cosinnus.models.group import CosinnusGroup, CosinnusPortal
-from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.models.group import CosinnusPortal
+from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.idea import CosinnusIdea
-from django.contrib.contenttypes.models import ContentType
-from cosinnus.models.tagged import LikeObject, BaseTaggableObjectModel,\
-    BaseHierarchicalTaggableObjectModel, BaseTagObject
 from cosinnus.models.map import SEARCH_MODEL_NAMES_REVERSE
-import inspect
-from cosinnus.utils.filters import exclude_special_folders
-from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
-from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
-from django.db.models.query_utils import Q
+from cosinnus.models.tagged import LikeObject, BaseTaggableObjectModel, \
+    BaseHierarchicalTaggableObjectModel, BaseTagObject
 from cosinnus.models.user_dashboard import DashboardItem
-import itertools
-from numpy import sort
-from cosinnus.utils.dates import timestamp_from_datetime,\
+from cosinnus.utils.dates import timestamp_from_datetime, \
     datetime_from_timestamp
-from cosinnus.utils.pagination import QuerysetLazyCombiner
+from cosinnus.utils.filters import exclude_special_folders
 from cosinnus.utils.functions import is_number
-import math
+from cosinnus.utils.group import get_cosinnus_group_model
+from cosinnus.utils.pagination import QuerysetLazyCombiner
+from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
+from cosinnus.views.mixins.group import RequireLoggedInMixin
+from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
+
 
 logger = logging.getLogger('cosinnus')
 
@@ -188,8 +173,12 @@ class ModelRetrievalMixin(object):
                 mixin = MixReflectedObjectsMixin()
                 queryset = mixin.mix_queryset(queryset, model, None, user)
             
-            # always filter for all portals in pool
-            portal_list = [CosinnusPortal.get_current().id] + getattr(settings, 'COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS', [])
+            
+            portal_list = [CosinnusPortal.get_current().id]
+            if False:
+                # include all other portals in pool
+                portal_list += getattr(settings, 'COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS', [])
+            
             if model is CosinnusIdea:
                 queryset = queryset.filter(portal__id__in=portal_list)
             else:
@@ -225,7 +214,6 @@ class TypedContentWidgetView(ModelRetrievalMixin, BaseUserDashboardWidgetView):
         return super(TypedContentWidgetView, self).get(request, *args, **kwargs)
     
     def get_data(self, **kwargs):
-        # TODO: set by parameter for the "show only from my groups and projects"
         only_mine = True
         # TODO "last-visited" ordering!
         sort_key = '-created' 

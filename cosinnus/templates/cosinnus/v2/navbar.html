@@ -10,7 +10,7 @@
 		    		<i class="fa fa-fw fa-bars"></i>
 	    		</a>
     		{% endif %}
-            <a class="nav-button" href="/home/" title="{% trans "Home" %}">
+            <a class="nav-button" href="{% url "cosinnus:user-dashboard" %}" title="{% trans "Home" %}">
             	{# {% include 'cosinnus/brand.html' %} #}
             	<img src="{% static 'img/mokwi_logo.svg' %}">
             </a>

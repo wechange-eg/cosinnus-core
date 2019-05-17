@@ -8,7 +8,7 @@ module.exports = DelegatedWidgetView.extend({
 	app: null,
     template: require('userdashboard/typed-content-widget'),
     
-    fetchURL: '/home/api/user_typed_content/', // overridden for subview
+    fetchURL: '/dashboard/api/user_typed_content/', // overridden for subview
     
     // will be set to self.options during initialization
     defaults: {

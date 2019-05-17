@@ -8,7 +8,7 @@ module.exports = BaseView.extend({
 	app: null,
     template: require('userdashboard/timeline'),
     
-    fetchURL: '/home/api/timeline/',
+    fetchURL: '/dashboard/api/timeline/',
     
     // will be set to self.options during initialization
     defaults: {

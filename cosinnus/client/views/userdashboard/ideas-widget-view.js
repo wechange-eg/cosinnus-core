@@ -8,7 +8,7 @@ module.exports = DelegatedWidgetView.extend({
 	app: null,
     template: require('userdashboard/ideas-widget'),
     
-    fetchURL: '/home/api/user_liked_ideas/', // overridden for subview
+    fetchURL: '/dashboard/api/user_liked_ideas/', // overridden for subview
     
     // will be set to self.options during initialization
     defaults: {
