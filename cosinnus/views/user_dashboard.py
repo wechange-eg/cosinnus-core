@@ -35,6 +35,7 @@ from cosinnus.utils.pagination import QuerysetLazyCombiner
 from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from cosinnus.views.mixins.group import RequireLoggedInMixin
 from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
+from django.shortcuts import redirect
 
 
 logger = logging.getLogger('cosinnus')
@@ -43,6 +44,11 @@ logger = logging.getLogger('cosinnus')
 class UserDashboardView(RequireLoggedInMixin, TemplateView):
     
     template_name = 'cosinnus/user_dashboard/user_dashboard.html'
+    
+    def get(self, request, *args, **kwargs):
+        if not(getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or (getattr(settings, 'COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY', False) and request.user.is_superuser)):
+            return redirect('cosinnus:map')
+        return super(UserDashboardView, self).get(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):
         forum_group = None

@@ -118,7 +118,7 @@
         {% block body_header %}{% endblock body_header %}
 
         {% block cosinnus_navbar %}
-        	{% if SETTINGS.COSINNUS_USE_V2_NAVBAR %}
+        	{% if SETTINGS.COSINNUS_USE_V2_NAVBAR or SETTINGS.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and user.is_superuser %}
         		{% cosinnus_menu_v2 "cosinnus/v2/navbar.html" %}
         	{% else %}
         		{% cosinnus_menu "cosinnus/navbar.html" %}

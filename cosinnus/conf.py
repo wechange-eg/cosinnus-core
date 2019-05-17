@@ -553,8 +553,16 @@ class CosinnusConf(AppConf):
     # whether to use the new style navbar
     USE_V2_NAVBAR = False
     
+    # whether to use the new style navbar ONLY for admins
+    # does not need `USE_V2_NAVBAR` to be enabled
+    USE_V2_NAVBAR_ADMIN_ONLY = False
+    
     # whether to use the new style user-dashboard
     USE_V2_DASHBOARD = False    
+    
+    # whether to use the new style user-dashboard ONLY for admins 
+    # does not need `USE_V2_DASHBOARD` to be enabled
+    USE_V2_DASHBOARD_ADMIN_ONLY = False    
     
     # Debug: enable naive queryset picking for dashboard timeline
     V2_DASHBOARD_USE_NAIVE_FETCHING = False

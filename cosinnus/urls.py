@@ -102,7 +102,7 @@ urlpatterns = [
     url(r'^select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
 ]
 
-if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False):
+if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(settings, 'COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY', False):
     urlpatterns += [
         url(r'^dashboard/$', user_dashboard.user_dashboard_view, name='user-dashboard'),
         url(r'^dashboard/api/user_groups/$', user_dashboard.api_user_groups, name='user-dashboard-api-groups'),
