@@ -1,0 +1,16 @@
+/** 
+	This CSS exists to remove the height gap difference of the v2 Navbar (50px)
+	versus the old Navbar (55px), while both CSS are in use.
+	It is loaded conditionally if the v2 navbar is enabled.
+ */
+.app-root, .app-fullscreen, .map-fullscreen, .tile-list-fullscreen {
+    top: 50px; 
+    height: calc(100% - 50px);
+}
+.app-fullscreen .tile-detail {
+    margin-top: 50px;
+    height: calc(100% - 50px);
+}
+.app-root .tile-detail {
+    height: calc(100% - 50px);
+}

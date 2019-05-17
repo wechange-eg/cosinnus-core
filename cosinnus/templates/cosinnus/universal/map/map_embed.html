@@ -38,6 +38,10 @@
         {% else %}
         <link href="{% static 'css/cosinnus.css' %}?v=0.51" rel="stylesheet">
         {% endif %}
+        
+        {% if SETTINGS.COSINNUS_USE_V2_NAVBAR or SETTINGS.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and user.is_superuser %}
+	        <link href="{% static 'css/v2_map_corrections.css' %}" rel="stylesheet">
+		{% endif %}
     </head>
     
     <body>
