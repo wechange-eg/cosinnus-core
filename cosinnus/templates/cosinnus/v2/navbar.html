@@ -14,6 +14,11 @@
             	{# {% include 'cosinnus/brand.html' %} #}
             	<img src="{% static 'img/mokwi_logo.svg' %}">
             </a>
+            {% if not SETTINGS.COSINNUS_USE_V2_NAVBAR and SETTINGS.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and user.is_superuser %}
+	            <a class="nav-button nav-header-textlink" href="#">
+	            	***ADMIN-ONLY TEST PHASE***
+	            </a>
+        	{% endif %}
             <a class="nav-button nav-header-textlink" href="{% url "cosinnus:map" %}" title="{% trans "Discover" %}">
             	{% trans "Discover" %}
             </a>
@@ -61,7 +66,7 @@
     
 	<div class="collapse nav-flyout" id="main-collapse">
 		<div class="row narrow-row">
-			<div class="nav-column narrow-column col-xs-12 col-md-4">
+			<div class="nav-column col-xs-12 col-md-4">
 			
 				<h2 class="headline">{% trans "My Groups and Projects" %}</h2>
 				

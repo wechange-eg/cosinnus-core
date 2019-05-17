@@ -110,10 +110,7 @@
 	{% block attached_images %}
 		{% if item.attached_images %}
 			<div class="timeline-item-row attachments">
-				<span style="color:red">TODO: images!!!!!</span>
-				{% comment %}  
-				{% include 'cosinnus/v2/dashboard/timeline_attached_image_gallery.html'  %}
-				{% endcomment %}
+				{% include 'cosinnus/v2/dashboard/timeline_attached_image_gallery.html' with object=item max_images=3 %}
 			</div>
 		{% endif %}
 	{% endblock %}
