@@ -43,7 +43,7 @@ logger = logging.getLogger('cosinnus')
 
 class UserDashboardView(RequireLoggedInMixin, TemplateView):
     
-    template_name = 'cosinnus/user_dashboard/user_dashboard.html'
+    template_name = 'cosinnus/v2/dashboard/user_dashboard.html'
     
     def get(self, request, *args, **kwargs):
         if not(getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or (getattr(settings, 'COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY', False) and request.user.is_superuser)):

@@ -36,14 +36,16 @@
 			</div>
 			<div class="ideas-widget-root">
 			</div>
-			<div class="map-widget-root" style="display: none;">
-				TODO: map
+			<div class="map-widget square-widget">
+					<div class="widget-content square-content">
+						<h2 class="headline">{% trans "Close to me" %}</h2>
+					</div>
+					<a href="/map/" class="square-content hover-link">
+						{% trans "Show large map" %} 
+					</a>
 			</div>
 			<div class="legal-links">
-				<div><a href="#">Hilfe & FAQ</a></div>
-				<div><a href="#">Datenschutzerklärung</a></div>
-				<div><a href="#">Nutzungsbedingungen</a></div>
-				<div><a href="#">Impressum</a></div>
+				{% include 'cosinnus/v2/dashboard/tos_links.html' %}
 			</div>
 		</div>
 	</div>

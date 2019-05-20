@@ -29,6 +29,49 @@
 		border-bottom: 1px solid @pale-border-color;
 		padding: 10px 0px;
 	}
+	.square-widget {
+		position: relative;
+		.square-content {
+			position:  absolute;
+			display: block;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+		}
+	}
+	.square-widget:before {
+		content: "";
+		display: block;
+		padding-top: 100%;
+	}
+	.map-widget {
+		background-image: url("/static/img/map-widget-background.png");
+		background-repeat: no-repeat; 
+  		background-size: cover;
+  		
+  		.hover-link {
+  			opacity: 0;
+  			color: @background-color;
+			background-color: rgba(0, 0, 0, 0.4);
+			text-decoration: none;
+			font-size: 16px;
+			font-weight: bold;
+			-webkit-transition: opacity 0.33s; /* Safari, Chrome and Opera > 12.1 */
+		       -moz-transition: opacity 0.33s; /* Firefox < 16 */
+		        -ms-transition: opacity 0.33s; /* Internet Explorer */
+		         -o-transition: opacity 0.33s; /* Opera < 12.1 */
+		            transition: opacity 0.33s;
+			
+			display: flex;
+			justify-content: center;
+			align-items: center; 
+  		}
+  		&:hover .hover-link {
+  			opacity: 1;
+  		}
+	}
+	
 	.legal-links {
 		padding: 20px;
 		
