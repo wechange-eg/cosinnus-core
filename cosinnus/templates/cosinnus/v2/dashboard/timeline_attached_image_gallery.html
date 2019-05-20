@@ -7,18 +7,20 @@
 {% endcomment %}
 
 <div class="row">
-    {% with images=object.attached_images %}
+    {% with images=object.attached_images uuid=""|add_uuid %}
         {% for image in images %}
             <div class="col-sm-4" {% if max_images and forloop.counter > max_images %}style="display: none"{% endif %}>
-                <a href="{{ image.static_image_url }}" data-lightbox="image-detailed-{{ object.slug }}" data-lightbox-download="{{ image.static_image_url }}" data-title="{{ image.title }}" class="thumbnail cursor-zoom">
-                    <img src="{% thumbnail image.file 263x263 crop=1 upscale=1 %}" title='{{ image.title }}'/>
-                    
-                    {% if max_images and forloop.counter == max_images and max_images|intify < images|length %}
-                    	<div class="gallery-image-more-overlay">
-                    		+{{ forloop.counter|subtract:max_images|intify }}
-                    	</div>
-                    {% endif %}
-                </a>
+            	<div class="attached-image">
+	                <a href="{{ image.static_image_url }}" data-lightbox="attached-image-{{ uuid }}" data-lightbox-download="{{ image.static_image_url }}" data-title="{{ image.title }}" class="thumbnail cursor-zoom no-margin no-padding">
+	                    <img src="{% thumbnail image.file 263x263 crop=1 upscale=1 %}" title='{{ image.title }}'/>
+	                    
+	                    {% if max_images and forloop.counter == max_images and max_images|intify < images|length %}
+	                    	<div class="gallery-image-more-overlay">
+	                    		+{{ images|length|subtract:max_images|intify }}
+	                    	</div>
+	                    {% endif %}
+	                </a>
+                </div>
             </div>
             {% if forloop.counter|divisibleby:3 and not max_images or forloop.counter|divisibleby:3 and forloop.counter < max_images|intify %}
                 <div class="clearfix"></div>

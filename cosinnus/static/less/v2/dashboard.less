@@ -244,7 +244,28 @@
 			}
 		}
 		.attachments {
-			margin-bottom: 10px;
+			
+			&.attached-objects {
+				margin-bottom: 10px;
+			}
+			.attached-image {
+				position: relative;
+				
+				.gallery-image-more-overlay {
+					position: absolute;
+					width: 100%;
+					height: 100%;
+					top: 0;
+					left: 0;
+					font-size: 28px;
+					color: @background-color;
+					background-color: rgba(0, 0, 0, 0.4);
+					
+					display: flex;
+					justify-content: center;
+					align-items: center; 
+				}
+			}
 		}
 		.timeline-attached-item {
 			font-size: 14px;

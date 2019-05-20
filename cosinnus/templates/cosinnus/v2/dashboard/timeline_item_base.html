@@ -109,7 +109,7 @@
 	
 	{% block attached_images %}
 		{% if item.attached_images %}
-			<div class="timeline-item-row attachments">
+			<div class="timeline-item-row attachments attached-images">
 				{% include 'cosinnus/v2/dashboard/timeline_attached_image_gallery.html' with object=item max_images=3 %}
 			</div>
 		{% endif %}
@@ -117,7 +117,7 @@
 	
 	{% block attached_objects %}
 		{% if item.attached_objects.exists %}
-			<div class="timeline-item-row attachments">
+			<div class="timeline-item-row attachments attached-objects">
 			    {% cosinnus_render_attached_objects item v2Style=True %}
 			</div>
 		{% endif %}
