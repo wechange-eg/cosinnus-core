@@ -38,7 +38,9 @@
 		{# This is the backbone App 'module-navbar-quicksearch!' #}
     </div>
     <div class="nav-section nav-buttons">
-		<a class="nav-button" href="#(toggles create-content dropdown) rel="toggle" role="button" title="{% trans "Create content" %}"> 
+		<a class="nav-button" href="#" rel="toggle" role="button" title="{% trans "Create content" %}" 
+		    		aria-expanded="false" aria-controls="create-menu-collapse"
+		    		data-toggle="collapse" data-target="#create-menu-collapse"> 
     		<i class="fa fa-fw fa-plus"></i>
 		</a>
 		<a class="nav-button" href="#(leads to mokwi event group calendar)" role="button" title="{% trans "Events" %}"> 
@@ -122,6 +124,51 @@
 		<div class="nav-flyout-backdrop"></div>
 	</div>
 	
+	<div class="collapse nav-flyout create-menu" id="create-menu-collapse">
+	
+		<div class="nav-flyout-section flex-row">
+			<a href="{% url 'cosinnus:group__group-add' %}" class="create-menu-link flex-grow">
+				<h2 class="headline">{% trans "Group" %}</h2>
+				<div class="description">
+					TODO: Beschreibung des Erstellitems, was es tut, und warum es toll ist das zu machen.
+				</div>
+				<div class="action text-bold">
+					{% trans "Create new Group" %} 
+				</div>
+			</a>
+			<a href="{% url 'cosinnus:group-add' %}" class="create-menu-link flex-grow">
+				<h2 class="headline margin-regular">{% trans "Project" %}</h2>
+				<div class="description">
+					TODO: Beschreibung des Erstellitems, was es tut, und warum es toll ist das zu machen.
+				</div>
+				<div class="action text-bold">
+					{% trans "Create new Project" %} 
+				</div>
+			</a>
+			{% if SETTINGS.COSINNUS_IDEAS_ENABLED %}
+			<a href="{% url "cosinnus:idea-create" %}" class="create-menu-link flex-grow">
+				<h2 class="headline margin-regular">{% trans "Idea" %}</h2>
+				<div class="description">
+					TODO: Beschreibung des Erstellitems, was es tut, und warum es toll ist das zu machen.
+				</div>
+				<div class="action text-bold">
+					{% trans "Post new Idea" %} 
+				</div>
+			</a>
+			{% endif %}
+			<a href="{% group_url "cosinnus:event:event-add" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" class="create-menu-link flex-grow">
+				<h2 class="headline margin-regular">{% trans "Event" %}</h2>
+				<div class="description">
+					TODO: Beschreibung des Erstellitems, was es tut, und warum es toll ist das zu machen.
+				</div>
+				<div class="action text-bold">
+					{% trans "Add Event" %} 
+				</div>
+			</a>
+			
+		</div>
+		<div class="nav-flyout-backdrop"></div>
+	</div>
 	
 	<div class="collapse nav-flyout user-menu" id="user-menu-collapse">
 	

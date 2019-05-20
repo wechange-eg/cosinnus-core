@@ -672,7 +672,7 @@ class GroupURLNode(URLNode):
                 view_name = group_aware_url_name(view_name, group_slug, portal_id)
             except CosinnusGroup.DoesNotExist:
                 # ignore errors if the group doesn't exist if it is inactive (return empty link)
-                if ignoreErrors or (not group_arg.is_active):
+                if ignoreErrors or isinstance(group_arg, six.string_types) or (not group_arg.is_active):
                     return ''
                 
                 logger.error(u'Cosinnus__group_url_tag: Could not find group for: group_arg: %s, view_name: %s, group_slug: %s, portal_id: %s' % (str(group_arg), view_name, group_slug, portal_id))
