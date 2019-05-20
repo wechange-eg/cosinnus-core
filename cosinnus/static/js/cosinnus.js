@@ -559,10 +559,32 @@
         	});
         },
         
-        /** Click triggers for the .hide-on-click class */
+        /** Click triggers for the .hide-on-click class and
+         * 	other elements that disappear when an element is clicked. */
         hideOnClick: function() {
         	$('body').on('click', function(event){
+        		var $target = $(event.target);
+        		
+        		// hide all .hide-on-click
         		$('.hide-on-click:visible').hide();
+        		// hide all .hide-on-click-outside if clicked outside them
+        		$('.hide-on-click-outside').each(function(){
+        			var item = this;
+        			var $item = $(item);
+        			if (!item.contains(event.target)) {
+        				$item.hide();
+        			}
+        		});
+        		// hide nav-flyouts that are expanded if clicked outside them, except for their menu button
+        		$('.nav-flyout').each(function(){
+        			var item = this;
+        			var $item = $(item);
+        			if ((!item.contains(event.target) || $target.hasClass('nav-flyout-backdrop')) 
+        					&& $item.hasClass('in') && '#'+item.id != $target.parents('a').attr('data-target')
+        					&& '#'+item.id != $target.attr('data-target')) {
+        				$item.removeClass('in').addClass('collapse');
+        			}
+        		});
         	});
         },
 

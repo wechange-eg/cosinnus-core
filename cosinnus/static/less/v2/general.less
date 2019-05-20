@@ -10,6 +10,7 @@
 		margin: 9px 0;
 	} 
 	
+	
 	.headline {
 		margin: 10px 20px 20px 20px;
 		font-size: 14px;
@@ -44,6 +45,22 @@
 		color: @color-dark-gray;
 		font-size: 12px;
 		line-height: 18px;
+	}
+	
+	.margin-small {
+		margin-bottom: 7px;
+	}
+	.margin-regular {
+		margin-bottom: 10px;
+	}
+	.margin-large {
+		margin-bottom: 20px;
+	}
+	.no-margin {
+		margin: 0;
+	}
+	.no-padding {
+		padding: 0;
 	}
 	.button {
 		/** TODO */
@@ -136,14 +153,17 @@
 			&.list-item-center {
 				text-align: center;
 			}
+			&.inactive {
+				color: @text-color-pale;
+			}
 		}
-		a.list-item.list-item-link {
+		a.list-item.list-item-link:not(.inactive) {
 			&:hover, :active {
 				color: @text-highlight-color;
 				text-decoration: none;
 			}
 		}
-		a.list-item:not(.list-item-link) {
+		a.list-item:not(.list-item-link):not(.inactive) {
 			&:hover, &:hover .li-underdrop {
 				background-color: @text-highlight-color;
 				text-decoration: none;
@@ -156,21 +176,6 @@
 	}
 }
 
-.margin-small {
-	margin-bottom: 7px;
-}
-.margin-regular {
-	margin-bottom: 10px;
-}
-.margin-large {
-	margin-bottom: 20px;
-}
-.no-margin {
-	margin: 0;
-}
-.no-padding {
-	padding: 0;
-}
 
 
 /** Used in the wrapper for markdown and any other kind 

@@ -1,0 +1,171 @@
+{% load i18n static cosinnus_tags thumbnail %}
+
+<nav id="v2-navbar" class="v2-navbar" role="navigation">
+    <div class="nav-content">
+    	<div class="nav-section nav-brand">
+    		{% if request.user.is_authenticated %}
+	            <a class="nav-button" href="#" rel="toggle" role="button" title="{% trans "Menu" %}" 
+			    		aria-expanded="false" aria-controls="main-collapse"
+			    		data-toggle="collapse" data-target="#main-collapse"> 
+		    		<i class="fa fa-fw fa-bars"></i>
+	    		</a>
+    		{% endif %}
+            <a class="nav-button" href="{% url "cosinnus:user-dashboard" %}" title="{% trans "Home" %}">
+            	{# {% include 'cosinnus/brand.html' %} #}
+            	<img src="{% static 'img/mokwi_logo.svg' %}">
+            </a>
+            {% if not SETTINGS.COSINNUS_USE_V2_NAVBAR and SETTINGS.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and user.is_superuser %}
+	            <a class="nav-button nav-header-textlink" href="#">
+	            	***ADMIN-ONLY TEST PHASE***
+	            </a>
+        	{% endif %}
+            <a class="nav-button nav-header-textlink" href="{% url "cosinnus:map" %}" title="{% trans "Discover" %}">
+            	{% trans "Discover" %}
+            </a>
+    	</div>
+    </div>
+    
+    {# TODO: consolidate this, should be loaded exactly once in every template! #}
+	{% include 'cosinnus/map/static_dependencies.html' %}
+	<script>
+	    $('html').on('init:client', function () {
+	        Backbone.mediator.publish('init:module-navbar-quicksearch', {
+            	el: '#nav-quicksearch',
+	        });
+	    });
+	</script>
+    <div class="nav-section nav-search" id="nav-quicksearch">
+		{# This is the backbone App 'module-navbar-quicksearch!' #}
+    </div>
+    <div class="nav-section nav-buttons">
+		<a class="nav-button" href="#(toggles create-content dropdown) rel="toggle" role="button" title="{% trans "Create content" %}"> 
+    		<i class="fa fa-fw fa-plus"></i>
+		</a>
+		<a class="nav-button" href="#(leads to mokwi event group calendar)" role="button" title="{% trans "Events" %}"> 
+    		<i class="fa fa-fw fa-calendar"></i>
+		</a>
+		{% if request.user.is_authenticated %}
+			<a class="nav-button" href="{% url 'postman:inbox' %}" rel="toggle" role="button" title="{% trans "Button-Title" %}"> 
+	    		<i class="fa fa-fw fa-envelope"></i>
+			</a>
+			<a class="nav-button" href="#" rel="toggle" role="button" title="{% trans "Menu" %}" 
+			    		aria-expanded="false" aria-controls="user-menu-collapse"
+			    		data-toggle="collapse" data-target="#user-menu-collapse"> 
+	    		<i class="fa fa-fw fa-user"></i>
+			</a>
+		{% else %}
+			<a class="nav-button nav-header-textlink" href="#" title="{% trans "Change language" %}">
+            	DE
+            </a>
+            <a class="nav-button nav-header-textlink" href="{% url 'login' %}" title="{% trans "Log in" %}">
+            	{% trans "Log in" %}
+            </a>
+            <a class="nav-button nav-header-textlink" href="{% url "cosinnus:user-add" %}" title="{% trans "Register a new account" %}">
+            	{% trans "Register" %}
+            </a>
+		{% endif %}
+    </div>
+    
+	<div class="collapse nav-flyout" id="main-collapse">
+		<div class="nav-flyout-section">
+			<div class="row narrow-row">
+				<div class="nav-column col-xs-12 col-md-4">
+				
+					<h2 class="headline">{% trans "My Groups and Projects" %}</h2>
+					
+					<ul class="item-list">
+						<li>
+							<a class="list-item" href="#" role="button" titledby=".item-text"> 
+								<div>
+					    			<i class="fa fa-fw fa-sitemap"></i>
+					    		</div>
+					    		<div class="item-text">
+					    			Group Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text 
+					    		</div>
+							</a>
+						</li>
+						<li>
+							<a class="list-item" href="#" role="button" titledby=".item-text"> 
+								<div>
+					    			<i class="fa fa-fw fa-group"></i>
+					    		</div>
+					    		<div class="item-text">
+					    			Project Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text 
+					    		</div>
+							</a>
+						</li>
+						<li>
+							<hr>
+						</li>
+						<li>
+							<a class="list-item" href="#" role="button" titledby=".item-text"> 
+								<div>
+					    			<i class="fa fa-fw fa-calendar"></i>
+					    		</div>
+					    		<div class="item-text">
+					    			Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text 
+						    		<span class="item-subtext">
+						    			Subtitle subtitle 
+						    			TODO: navbar. make this push the item-text up and make a new line in gray under the title.
+						    		</span>
+					    		</div>
+							</a>
+						</li>
+					</ul>
+					
+					<div class="nav-column-footer">
+						TODO: navbar. continue here with the footer.
+					</div>
+				</div>	
+			</div>
+		</div>
+		<div class="nav-flyout-backdrop"></div>
+	</div>
+	
+	
+	<div class="collapse nav-flyout user-menu" id="user-menu-collapse">
+	
+		<div class="nav-flyout-section">
+			<h2 class="headline margin-regular">{% trans "Switch Portal" %} (soll das rein?)</h2>
+			
+			{% include 'cosinnus/v2/navbar/portal_list.html' %}
+		</div>
+		
+		<div class="nav-flyout-section">
+			<ul class="item-list">
+				<li>
+					<a href="{% url 'cosinnus:profile-detail' %}" class="list-item" role="button" titledby=".item-text"> 
+			    		<div class="item-text">
+			    			{% trans "My Profile" %} 
+			    		</div>
+					</a>
+				</li>
+				<li>
+					<a href="{% url 'cosinnus:profile-edit' %}" class="list-item" role="button" titledby=".item-text"> 
+			    		<div class="item-text">
+			    			{% trans "Edit My Profile" %} 
+			    		</div>
+					</a>
+				</li>
+				<li>
+					<a href="{% url 'cosinnus:notifications' %}" class="list-item" role="button" titledby=".item-text"> 
+			    		<div class="item-text">
+			    			{% trans "Notification Preferences" %} 
+			    		</div>
+					</a>
+				</li>
+				<li>
+					<a href="{% url 'logout' %}" class="list-item" role="button" titledby=".item-text"> 
+			    		<div class="item-text">
+			    			{% trans "Logout" %} 
+			    		</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="nav-flyout-backdrop"></div>
+	</div>
+	
+    
+</nav>
+

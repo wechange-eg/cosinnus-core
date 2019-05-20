@@ -150,6 +150,13 @@
 		width: 100%;
 		background-color: @background-color-secondary;
 		
+		.nav-flyout-section {
+			position: relative;
+		    z-index: 9;
+			padding: 10px 0;
+			border-bottom: 1px solid @border-color;
+		    background: @background-color;
+		}
 		.nav-column {
 			&:not(:nth-child(3n)) {
 				border-right: 1px solid @border-color;
@@ -158,6 +165,25 @@
 		.nav-column-footer {
 			border-top: 1px solid @pale-border-color;
 		}
+		.nav-flyout-backdrop {
+			display: block;
+			opacity: 0;
+			position: fixed;
+			top: 50px;
+			left: 0;
+			z-index: 4; 
+			background-color: #000;
+			transition: opacity .2s;
+			width: 100%;
+			height: ~"calc(100% - 50px)"; 
+		}
+		&.collapsing .nav-flyout-backdrop,
+		&.in .nav-flyout-backdrop {
+			opacity: .5;
+		}
+	}
+	.user-menu {
+		text-align: right;
 	}
 	
 	

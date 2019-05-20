@@ -322,7 +322,7 @@ def cosinnus_menu(context, template="cosinnus/navbar.html"):
 
 
 @register.simple_tag(takes_context=True)
-def cosinnus_menu_v2(context, template="cosinnus/v2/navbar.html"):
+def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
     """ Renders the new style navbar """
     if 'request' not in context:
         raise ImproperlyConfigured("Current request missing in rendering "
