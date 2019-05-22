@@ -5,9 +5,9 @@
   {% blocktrans with team_name=object.name %}{{ team_name }} - Members{% endblocktrans %}
 {% endblock %}
 
-{% block extrahead %}
+{% block js_app_dependencies %}
 	{% include 'cosinnus/map/static_dependencies.html' %}
-{% endblock extrahead %}
+{% endblock js_app_dependencies %}
 
 {% block og_meta_attributes %}
 	{% include 'cosinnus/group/group_og_meta_attributes.html' with group=group %}

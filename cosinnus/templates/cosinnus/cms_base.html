@@ -1,13 +1,13 @@
 {% extends "cosinnus/base.html" %}
 {% load wagtailuserbar %}
 
-{% block extrahead %}
+{% block js_app_dependencies %}
 	{% comment %} 
 		We load all the map dependencies here for any CMS page, 
 		because we cannot load them with sekizai (thus unique) when we load them in the wagtail block template.
 	{% endcomment %}
 	{% include 'cosinnus/map/static_dependencies.html' %}
-{% endblock extrahead %}
+{% endblock js_app_dependencies %}
 
 {% block page_title %}{{ page.title }}{{ block.super }}{% endblock %}
 

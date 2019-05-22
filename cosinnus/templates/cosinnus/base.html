@@ -100,7 +100,12 @@
             <script src="{% localized_js 'cosinnus_formats.js' %}"></script>
             <script src="{% static 'js/cosinnus.feedback.js' %}?v=0.1"></script>
         {% endblock cosinnus_jshead %}
-
+        
+        {% block js_app_dependencies %}
+			{% if SETTINGS.COSINNUS_USE_V2_NAVBAR or SETTINGS.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and user.is_superuser %}
+				{% include 'cosinnus/map/static_dependencies.html' %}
+			{% endif %}
+		{% endblock js_app_dependencies %}
 
         {% captureas cosinnus_css_class %}{% if COSINNUS_CURRENT_APP == 'todo' %}app-todos{% elif COSINNUS_CURRENT_APP == 'note' %}app-main{% elif COSINNUS_CURRENT_APP == 'file' %}app-files{% elif COSINNUS_CURRENT_APP == 'event' %}app-calendar{% elif COSINNUS_CURRENT_APP %}app-{{ COSINNUS_CURRENT_APP }}{% else %}app-main{% endif %} {% if request.path == '/' %}landing{% endif %}{% endcaptureas %}
 

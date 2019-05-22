@@ -12,11 +12,6 @@
     {{ block.super }}
 {% endblock %}
 
-{% block extrahead %}
-    {{ block.super }}
-	{% include 'cosinnus/map/static_dependencies.html' %}
-{% endblock extrahead %}
-
 {% block body_attributes %}class="v2-dashboard-body"{% endblock body_attributes %}
 
 {% block container_classes %}v2-dashboard loading{% endblock container_classes %}

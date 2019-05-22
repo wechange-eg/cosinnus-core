@@ -25,8 +25,7 @@
     	</div>
     </div>
     
-    {# TODO: consolidate this, should be loaded exactly once in every template! #}
-	{% include 'cosinnus/map/static_dependencies.html' %}
+    
 	<script>
 	    $('html').on('init:client', function () {
 	        Backbone.mediator.publish('init:module-navbar-quicksearch', {

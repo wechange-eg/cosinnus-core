@@ -3,6 +3,10 @@
 
 {% block page_title %}{% trans "Users" %}{% endblock %}
 
+{% block js_app_dependencies %}
+	{% include 'cosinnus/map/static_dependencies.html' %}
+{% endblock js_app_dependencies %}
+
 {% block extrahead %}
     {{ block.super }}
     <script src="{% static 'el_pagination/js/el-pagination.js' %}"></script>
@@ -13,7 +17,6 @@
 				});
 			});
 	</script>
-	{% include 'cosinnus/map/static_dependencies.html' %}
 {% endblock extrahead %}
 
 {% block leftnav %}
