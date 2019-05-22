@@ -11,7 +11,7 @@
 	    		</a>
     		{% endif %}
             <a class="nav-button" href="{% url "cosinnus:user-dashboard" %}" title="{% trans "Home" %}">
-            	{# {% include 'cosinnus/brand.html' %} #}
+            	{% comment %} {% include 'cosinnus/brand.html' %} {% endcomment %}
             	<img src="{% static 'img/mokwi_logo.svg' %}">
             </a>
             {% if not SETTINGS.COSINNUS_USE_V2_NAVBAR and SETTINGS.COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY and user.is_superuser %}
@@ -25,7 +25,6 @@
     	</div>
     </div>
     
-    
 	<script>
 	    $('html').on('init:client', function () {
 	        Backbone.mediator.publish('init:module-navbar-quicksearch', {
@@ -34,8 +33,9 @@
 	    });
 	</script>
     <div class="nav-section nav-search" id="nav-quicksearch">
-		{# This is the backbone App 'module-navbar-quicksearch!' #}
+    	{% comment %} This is the backbone App 'module-navbar-quicksearch! {% endcomment %}
     </div>
+    
     <div class="nav-section nav-buttons">
 		<a class="nav-button" href="#" rel="toggle" role="button" title="{% trans "Create content" %}" 
 		    		aria-expanded="false" aria-controls="create-menu-collapse"
@@ -68,7 +68,7 @@
     </div>
     
 	<div class="collapse nav-flyout" id="main-collapse">
-		<div class="nav-flyout-section">
+		<div class="nav-flyout-section padded">
 			<div class="row narrow-row">
 				<div class="nav-column col-xs-12 col-md-4">
 				
@@ -125,7 +125,7 @@
 	
 	<div class="collapse nav-flyout create-menu" id="create-menu-collapse">
 	
-		<div class="nav-flyout-section flex-row">
+		<div class="nav-flyout-section padded flex-row">
 			<a href="{% url 'cosinnus:group__group-add' %}" class="create-menu-link flex-grow">
 				<h2 class="headline">{% trans "Group" %}</h2>
 				<div class="description">
@@ -171,13 +171,13 @@
 	
 	<div class="collapse nav-flyout user-menu" id="user-menu-collapse">
 	
-		<div class="nav-flyout-section">
+		<div class="nav-flyout-section padded">
 			<h2 class="headline margin-regular">{% trans "Switch Portal" %} (soll das rein?)</h2>
 			
 			{% include 'cosinnus/v2/navbar/portal_list.html' %}
 		</div>
 		
-		<div class="nav-flyout-section">
+		<div class="nav-flyout-section padded">
 			<ul class="item-list">
 				<li>
 					<a href="{% url 'cosinnus:profile-detail' %}" class="list-item" role="button" titledby=".item-text"> 

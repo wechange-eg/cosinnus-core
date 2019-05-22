@@ -14,31 +14,29 @@
 </div>
 <div class="nav-quicksearch-results nav-dropdown">
 	<ul class="item-list">
-		<li>
-			<a class="list-item" href="#" role="button" aria-labelledby="searchresult-1"> 
-				<div>
-	    			<i class="fa fa-fw fa-star"></i>
-	    		</div>
-	    		<div class="item-text" id="searchresult-1">
-	    			Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text 
-	    		</div>
-	    		<div class="right-side-annotation">
-	    			in Projects
-	    		</div>
-	    		<div class="li-underdrop"></div>
-			</a>
-		</li>
-		<li>
-			<a class="list-item" href="#" role="button" aria-labelledby="searchresult-2"> 
-				<div>
-	    			<i class="fa fa-fw fa-star"></i>
-	    		</div>
-	    		<div class="item-text" id="searchresult-2">
-	    			Item text
-	    		</div>
-	    		<div class="li-underdrop"></div>
-			</a>
-		</li>
+		{% if query %}
+			{% set default_annotation %}
+				MokWi-
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "Network" %}
+			{% endset %}
+			{% set map_annotation %}
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "On the Map" %}
+			{% endset %}
+			{% set groups_annotation %}
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "In my Groups and Projects" %}
+			{% endset %}
+			
+			{{ macros.listItem(query, searchMethods['default'], 'fa-search', annotation=default_annotation, includeUnderdrop=true) }}
+			{{ macros.listItem(query, searchMethods['map'], 'fa-search', annotation=map_annotation, includeUnderdrop=true) }}
+			{{ macros.listItem(query, searchMethods['groups'], 'fa-search', annotation=groups_annotation, includeUnderdrop=true) }}
+		{% endif %}
+		{{ macros.listItem("TODO: refactor the textbox outside", searchMethods['groups'], 'fa-search', annotation=groups_annotation, includeUnderdrop=true) }}
+		{{ macros.listItem("TODO: add topic links items!", searchMethods['groups'], 'fa-search', annotation=groups_annotation, includeUnderdrop=true) }}
+		
 	</ul>
 </div>
 <div class="dropdown-underdrop show-active"></div>
+<div class="nav-search-backdrop"></div>
