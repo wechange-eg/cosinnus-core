@@ -13,6 +13,9 @@ module.exports = BaseView.extend({
     // QuicksearchResult collection
     collection: null,
     
+    // the parent el, containing the search textbox and button
+    $searchBarEl: null,
+    
     // will be set to self.options during initialization
     defaults: {
     	query: null,
@@ -29,15 +32,18 @@ module.exports = BaseView.extend({
     
     // The DOM events specific to an item.
     events: {
-    	'focus .nav-search-box': 'onSearchBoxFocusIn',
-    	'keyup .nav-search-box': 'onSearchBoxTyped',
-    	'click .nav-button-search': 'onSearchIconClicked',
     },
     
     initialize: function (options, app) {
         var self = this;
         self.app = app;
         BaseView.prototype.initialize.call(self, options);
+        
+        self.$searchBarEl = $('#nav-quicksearch');
+        // events that have to be defined here because they happen in the searchBarEl:
+        self.$searchBarEl.on('focus', '.nav-search-box', self.thisContext(self.onSearchBoxFocusIn));
+        self.$searchBarEl.on('input', '.nav-search-box', self.thisContext(self.onSearchBoxTyped));
+        self.$searchBarEl.on('click', '.nav-button-search', self.thisContext(self.onSearchIconClicked));
         
         // TODO!
         return;
@@ -58,6 +64,7 @@ module.exports = BaseView.extend({
         BaseView.prototype.render.call(self);
         
         util.log('*** Rendered quicksearch! ***')
+    	this.$searchBarEl.find('.dropdown-underdrop').height(this.$el.outerHeight());
         return self;
     },
     
@@ -79,6 +86,7 @@ module.exports = BaseView.extend({
     	if (event.keyCode == 13) {
     		this.fireSearch();
     	} else if (!event.shiftKey && !event.ctrlKey) {
+    		console.log(event)
     		this.updateSearchSuggestions();
     	}
     },
@@ -100,7 +108,7 @@ module.exports = BaseView.extend({
 
     /** Get the text from the search box */
     getCurrentQuery: function() {
-    	return this.$el.find('.nav-search-box').val().trim();
+    	return this.$searchBarEl.find('.nav-search-box').val().trim();
     },
     
     /** Fire off a search. If no arguments given, fires the default search
@@ -122,32 +130,30 @@ module.exports = BaseView.extend({
     /** Shows the quicksearch result list */
     showDropdown: function () {
     	util.log('*** Showing quicksearch results ***')
-    	var dropdown = this.$el.find('.nav-quicksearch-results');
-    	this.$el.find('.dropdown-underdrop').height(dropdown.outerHeight());
     	document.addEventListener('click', this.thisContext(this.checkQuickSearchFocusOut));
-    	this.$el.addClass('active');
+    	this.$searchBarEl.addClass('active');
     },
     
     /** Hides the quicksearch result list */
     hideDropdown: function () {
     	util.log('*** Hiding quicksearch results ***')
-    	this.$el.find('.nav-quicksearch-results').hide();
+    	this.$el.hide();
     },
     
     /** While we are focused, check for clicks outside to trigger closing the menu */
     checkQuickSearchFocusOut: function (event) {
-    	if ((this.$el.hasClass('active') && !this.el.contains(event.target)) 
+    	if ((this.$searchBarEl.hasClass('active') && !this.$searchBarEl[0].contains(event.target)) 
 				|| $(event.target).hasClass('nav-search-backdrop')) {
-    		this.$el.removeClass('active');
+    		this.$searchBarEl.removeClass('active');
     		document.removeEventListener('click', this.thisContext(this.checkQuickSearchFocusOut));
     	}
     },
     
     onSearchIconClicked: function (event) {
-    	if (this.$el.hasClass('active') && 0 == 1) { // todo check for has text
+    	if (this.$searchBarEl.hasClass('active') && 0 == 1) { // todo check for has text
     		this.fireSearch();
     	} else {
-    		this.$el.find('.nav-search-box').focus();
+    		this.$searchBarEl.find('.nav-search-box').focus();
     	}
     },
     

@@ -1,42 +1,26 @@
 {% load i18n %}
 {% import "include/macros.html" as macros %}
 
-<div class="">
-	<a class="nav-button nav-button-search show-active" href="#" title="{% trans "Search" %}"> 
-		<i class="fa fa-fw fa-search"></i>
-	</a>
-</div>
-<input id="search" class="nav-search-box" name="search" title="{% trans "Quick Search" %}" autocomplete="off">
-<div class="">
-	<a class="nav-button nav-button-search show-inactive" href="#" title="{% trans "Search" %}"> 
-		<i class="fa fa-fw fa-search"></i>
-	</a>
-</div>
-<div class="nav-quicksearch-results nav-dropdown">
-	<ul class="item-list">
-		{% if query %}
-			{% set default_annotation %}
-				MokWi-
-				{# Translators: __INCLUDE_JS_PO__ #}
-				{% trans "Network" %}
-			{% endset %}
-			{% set map_annotation %}
-				{# Translators: __INCLUDE_JS_PO__ #}
-				{% trans "On the Map" %}
-			{% endset %}
-			{% set groups_annotation %}
-				{# Translators: __INCLUDE_JS_PO__ #}
-				{% trans "In my Groups and Projects" %}
-			{% endset %}
-			
-			{{ macros.listItem(query, searchMethods['default'], 'fa-search', annotation=default_annotation, includeUnderdrop=true) }}
-			{{ macros.listItem(query, searchMethods['map'], 'fa-search', annotation=map_annotation, includeUnderdrop=true) }}
-			{{ macros.listItem(query, searchMethods['groups'], 'fa-search', annotation=groups_annotation, includeUnderdrop=true) }}
-		{% endif %}
-		{{ macros.listItem("TODO: refactor the textbox outside", searchMethods['groups'], 'fa-search', annotation=groups_annotation, includeUnderdrop=true) }}
-		{{ macros.listItem("TODO: add topic links items!", searchMethods['groups'], 'fa-search', annotation=groups_annotation, includeUnderdrop=true) }}
+
+<ul class="item-list">
+	{% if query %}
+		{% set default_annotation %}
+			MokWi-
+			{# Translators: __INCLUDE_JS_PO__ #}
+			{% trans "Network" %}
+		{% endset %}
+		{% set map_annotation %}
+			{# Translators: __INCLUDE_JS_PO__ #}
+			{% trans "On the Map" %}
+		{% endset %}
+		{% set groups_annotation %}
+			{# Translators: __INCLUDE_JS_PO__ #}
+			{% trans "In my Groups and Projects" %}
+		{% endset %}
 		
-	</ul>
-</div>
-<div class="dropdown-underdrop show-active"></div>
-<div class="nav-search-backdrop"></div>
+		{{ macros.listItem(query, searchMethods['default'], 'fa-search', annotation=default_annotation, includeUnderdrop=true) }}
+		{{ macros.listItem(query, searchMethods['map'], 'fa-search', annotation=map_annotation, includeUnderdrop=true) }}
+		{{ macros.listItem(query, searchMethods['groups'], 'fa-search', annotation=groups_annotation, includeUnderdrop=true) }}
+	{% endif %}
+	{{ macros.listItem("TODO: add topic links items!", searchMethods['groups'], 'fa-search', annotation=groups_annotation, includeUnderdrop=true) }}
+</ul>

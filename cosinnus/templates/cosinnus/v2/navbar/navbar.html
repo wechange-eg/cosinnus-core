@@ -25,16 +25,33 @@
     	</div>
     </div>
     
+    
+    <div class="nav-section nav-search" id="nav-quicksearch">
+    	<div class="">
+			<a class="nav-button nav-button-search show-active" href="#" title="{% trans "Search" %}"> 
+				<i class="fa fa-fw fa-search"></i>
+			</a>
+		</div>
+		<input id="search" class="nav-search-box" name="search" title="{% trans "Quick Search" %}" autocomplete="off">
+		<div class="">
+			<a class="nav-button nav-button-search show-inactive" href="#" title="{% trans "Search" %}"> 
+				<i class="fa fa-fw fa-search"></i>
+			</a>
+		</div>
+		<div class="nav-quicksearch-results nav-dropdown" id="nav-quicksearch-results">
+	    	{% comment %} This is the backbone App 'module-navbar-quicksearch! {% endcomment %}
+		</div>
+		<div class="dropdown-underdrop show-active"></div>
+		<div class="nav-search-backdrop"></div>
+    </div>
 	<script>
 	    $('html').on('init:client', function () {
 	        Backbone.mediator.publish('init:module-navbar-quicksearch', {
-            	el: '#nav-quicksearch',
+            	el: '#nav-quicksearch-results',
 	        });
 	    });
 	</script>
-    <div class="nav-section nav-search" id="nav-quicksearch">
-    	{% comment %} This is the backbone App 'module-navbar-quicksearch! {% endcomment %}
-    </div>
+	
     
     <div class="nav-section nav-buttons">
 		<a class="nav-button" href="#" rel="toggle" role="button" title="{% trans "Create content" %}" 
