@@ -89,6 +89,8 @@ module.exports = BaseView.extend({
     onSearchBoxKeyDown: function (event) {
     	if (event.keyCode == 13) {
     		this.fireSearch();
+    	} else if (event.keyCode == 27) {
+    		this.$searchBarEl.removeClass('active').find('.nav-search-box').blur();
     	}
     },
     

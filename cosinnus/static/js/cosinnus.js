@@ -582,7 +582,7 @@
         			if ((!item.contains(event.target) || $target.hasClass('nav-flyout-backdrop')) 
         					&& $item.hasClass('in') && '#'+item.id != $target.parents('a').attr('data-target')
         					&& '#'+item.id != $target.attr('data-target')) {
-        				$item.removeClass('in').addClass('collapse');
+        				$item.collapse('hide');
         			}
         		});
         	});
