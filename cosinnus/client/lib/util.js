@@ -118,4 +118,11 @@ module.exports = {
     	}
     	return apiData;
     },
+    
+    /** Case insensitive string replace */
+    iReplace: function (strSouce, strReplace, strWith) {
+        var esc = strReplace.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+        var reg = new RegExp('(' + esc + ')', 'ig');
+        return strSouce.replace(reg, strWith);
+    },
 };

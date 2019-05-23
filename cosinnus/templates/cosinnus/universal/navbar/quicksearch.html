@@ -1,9 +1,8 @@
 {% load i18n %}
 {% import "include/macros.html" as macros %}
 
-
 <ul class="item-list">
-	{% if query %}
+	{% if query and query|length >= 2 %}
 		{% set default_annotation %}
 			MokWi-
 			{# Translators: __INCLUDE_JS_PO__ #}
@@ -21,6 +20,19 @@
 		{{ macros.listItem(query, searchMethods['default'], 'fa-search', annotation=default_annotation, includeUnderdrop=true) }}
 		{{ macros.listItem(query, searchMethods['map'], 'fa-search', annotation=map_annotation, includeUnderdrop=true) }}
 		{{ macros.listItem(query, searchMethods['groups'], 'fa-search', annotation=groups_annotation, includeUnderdrop=true) }}
+		
+		{% for topic_title, topic_url in topicsSearchMethods %}
+			{% set topic_label %}
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "Topic" %}: {{ topic_title|safe }}
+			{% endset %}
+			{{ macros.listItem(topic_label|safe, topic_url, 'fa-filter', includeUnderdrop=true) }}
+		{% endfor %} 
+	{% else %}
+		{% set placeholder_label %}
+			{# Translators: __INCLUDE_JS_PO__ #}
+			{% trans "Search for Names, Topics and Places..." %}
+		{% endset %}
+		{{ macros.listItem(placeholder_label, "#", '', includeUnderdrop=true, inactive=true) }}
 	{% endif %}
-	{{ macros.listItem("TODO: add topic links items!", searchMethods['groups'], 'fa-search', annotation=groups_annotation, includeUnderdrop=true) }}
 </ul>

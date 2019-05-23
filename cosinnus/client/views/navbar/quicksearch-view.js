@@ -24,6 +24,11 @@ module.exports = BaseView.extend({
     		'map': '/map/?q={{q}}',
     		'groups': '/search/?groups=mine&q={{q}}',
     	},
+    	topicsSearchMethods: {
+    		// <title>: <url>,
+    	},
+    	// this will be added to the state.topicsSearchMethods for matching topics
+    	topicsUrl: '/map/?topics={{t}}',
         
         state: {
             
@@ -42,10 +47,11 @@ module.exports = BaseView.extend({
         self.$searchBarEl = $('#nav-quicksearch');
         // events that have to be defined here because they happen in the searchBarEl:
         self.$searchBarEl.on('focus', '.nav-search-box', self.thisContext(self.onSearchBoxFocusIn));
+        self.$searchBarEl.on('keydown', '.nav-search-box', self.thisContext(self.onSearchBoxKeyDown));
         self.$searchBarEl.on('input', '.nav-search-box', self.thisContext(self.onSearchBoxTyped));
         self.$searchBarEl.on('click', '.nav-button-search', self.thisContext(self.onSearchIconClicked));
         
-        // TODO!
+        // TODO: add a collection for quicksearch DB results!
         return;
         
         // result events
@@ -64,6 +70,7 @@ module.exports = BaseView.extend({
         BaseView.prototype.render.call(self);
         
         util.log('*** Rendered quicksearch! ***')
+        console.log(self.options.topicsJson)
     	this.$searchBarEl.find('.dropdown-underdrop').height(this.$el.outerHeight());
         return self;
     },
@@ -72,7 +79,6 @@ module.exports = BaseView.extend({
     getTemplateData: function () {
         var self = this;
         var data = BaseView.prototype.getTemplateData.call(self);
-        data['more'] = 'lol';
         return data;
     },
     
@@ -81,12 +87,16 @@ module.exports = BaseView.extend({
     	this.showDropdown();
     },
     
-    /** Searchbox text input */
-    onSearchBoxTyped: function (event) {
+    /** Searchbox key downs, for special keys */
+    onSearchBoxKeyDown: function (event) {
     	if (event.keyCode == 13) {
     		this.fireSearch();
-    	} else if (!event.shiftKey && !event.ctrlKey) {
-    		console.log(event)
+    	}
+    },
+    
+    /** Searchbox text input */
+    onSearchBoxTyped: function (event) {
+    	if (!event.shiftKey && !event.ctrlKey) {
     		this.updateSearchSuggestions();
     	}
     },
@@ -102,6 +112,18 @@ module.exports = BaseView.extend({
     		searchMethods[method] = searchMethods[method].replace('{{q}}', encodeURIComponent(query));
     	}
     	self.state.searchMethods = searchMethods;
+    	// match topics to the current query and generate topic search suggestions
+    	var topicsSearchMethods = {};
+    	for (var topicId in self.options.topicsJson) {
+    		var topic = self.options.topicsJson[topicId];
+    		if (topic.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+    			var title = util.iReplace(topic, query, '<b>$1</b>');
+    			var url = self.options.topicsUrl.replace('{{t}}', topicId);
+    			topicsSearchMethods[title] = url;
+    		}
+    	}
+    	self.state.topicsSearchMethods = topicsSearchMethods
+    	
     	self.state.query = query || null;
     	self.render();
     },
