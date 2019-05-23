@@ -11,6 +11,7 @@ var MapView = require('views/map-view');
 var TileListView = require('views/tile-list-view');
 var TileDetailView = require('views/tile-detail-view');
 var NavbarQuickSearchView = require('views/navbar/quicksearch-view');
+var NavbarMainMenuView = require('views/navbar/main-menu-view');
 var UserDashboardView = require('views/userdashboard/userdashboard-view');
 
 
@@ -30,6 +31,7 @@ var App = function App () {
     
     // other views
     self.navbarQuickSearchView = null;
+    self.navbarMainMenuView = null;
     self.userDashboardView = null;
 
     self.router = null;
@@ -85,6 +87,7 @@ var App = function App () {
         Backbone.mediator.subscribe('init:module-full-routed', self.initModuleFullRouted, self);
         Backbone.mediator.subscribe('init:module-embed', self.initAppFromOptions, self);
         Backbone.mediator.subscribe('init:module-navbar-quicksearch', self.initNavbarQuicksearchFromOptions, self);
+        Backbone.mediator.subscribe('init:module-navbar-main-menu', self.initNavbarMainMenuFromOptions, self);
         Backbone.mediator.subscribe('init:module-user-dashboard', self.initUserDashboardFromOptions, self);
         
         // - the 'init:client' signal is the marker for all pages using this client.js to now
@@ -292,6 +295,29 @@ var App = function App () {
         }
     };
     
+    
+    self.initNavbarMainMenuFromOptions = function (options) {
+        // add passed options into params extended over the default options
+    	var el = options.el ? options.el : '#nav-main-menu';
+        var topicsJson = typeof COSINNUS_MAP_TOPICS_JSON !== 'undefined' ? COSINNUS_MAP_TOPICS_JSON : {};
+        var portalInfo = typeof COSINNUS_PORTAL_INFOS !== 'undefined' ? COSINNUS_PORTAL_INFOS : {};
+        var contextData = options.contextData ? options.contextData : {};
+        var contextDataJSON = options.contextDataJSON ? options.contextDataJSON : {};
+        
+        if (self.navbarMainMenuView == null) {
+        	self.navbarMainMenuView = new NavbarMainMenuView({
+        		model: null,
+        		el: el,
+        		contextData: contextData,
+        		contextDataJSON: contextDataJSON,
+        		topicsJson: topicsJson,
+        		portalInfo: portalInfo,
+        	}, 
+        	self
+        	).render();
+        	Backbone.mediator.publish('navbar-main-manu:ready');
+        }
+    };
 
     self.initUserDashboardFromOptions = function (options) {
         // add passed options into params extended over the default options

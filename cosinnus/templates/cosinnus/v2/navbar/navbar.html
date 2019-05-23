@@ -4,7 +4,7 @@
     <div class="nav-content">
     	<div class="nav-section nav-brand">
     		{% if request.user.is_authenticated %}
-	            <a class="nav-button" href="#" rel="toggle" role="button" title="{% trans "Menu" %}" 
+	            <a class="nav-button" rel="toggle" role="button" title="{% trans "Menu" %}" 
 			    		aria-expanded="false" aria-controls="main-collapse"
 			    		data-toggle="collapse" data-target="#main-collapse"> 
 		    		<i class="fa fa-fw fa-bars"></i>
@@ -54,7 +54,7 @@
 	
     
     <div class="nav-section nav-buttons">
-		<a class="nav-button" href="#" rel="toggle" role="button" title="{% trans "Create content" %}" 
+		<a class="nav-button" rel="toggle" role="button" title="{% trans "Create content" %}" 
 		    		aria-expanded="false" aria-controls="create-menu-collapse"
 		    		data-toggle="collapse" data-target="#create-menu-collapse"> 
     		<i class="fa fa-fw fa-plus"></i>
@@ -63,16 +63,16 @@
     		<i class="fa fa-fw fa-calendar"></i>
 		</a>
 		{% if request.user.is_authenticated %}
-			<a class="nav-button" href="{% url 'postman:inbox' %}" rel="toggle" role="button" title="{% trans "Button-Title" %}"> 
+			<a class="nav-button" href="{% url 'postman:inbox' %}" role="button" title="{% trans "Button-Title" %}"> 
 	    		<i class="fa fa-fw fa-envelope"></i>
 			</a>
-			<a class="nav-button" href="#" rel="toggle" role="button" title="{% trans "Menu" %}" 
+			<a class="nav-button" rel="toggle" role="button" title="{% trans "Menu" %}" 
 			    		aria-expanded="false" aria-controls="user-menu-collapse"
 			    		data-toggle="collapse" data-target="#user-menu-collapse"> 
 	    		<i class="fa fa-fw fa-user"></i>
 			</a>
 		{% else %}
-			<a class="nav-button nav-header-textlink" href="#" rel="toggle" role="button" title="{% trans "Change language" %}" 
+			<a class="nav-button nav-header-textlink" rel="toggle" role="button" title="{% trans "Change language" %}" 
 		    		aria-expanded="false" aria-controls="language-menu-collapse"
 		    		data-toggle="collapse" data-target="#language-menu-collapse"> 
             	{{ request.LANGUAGE_CODE|upper }}
@@ -86,65 +86,43 @@
 		{% endif %}
     </div>
     
-	<div class="collapse nav-flyout" id="main-collapse">
-		<div class="nav-flyout-section padded">
-			<div class="row narrow-row">
-				<div class="nav-column col-xs-12 col-md-4">
-				
-					<h2 class="headline">{% trans "My Groups and Projects" %}</h2>
-					
-					<ul class="item-list">
-						<li>
-							<a class="list-item" href="#" role="button" titledby=".item-text"> 
-								<div>
-					    			<i class="fa fa-fw fa-sitemap"></i>
-					    		</div>
-					    		<div class="item-text">
-					    			Group Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text 
-					    		</div>
-							</a>
-						</li>
-						<li>
-							<a class="list-item" href="#" role="button" titledby=".item-text"> 
-								<div>
-					    			<i class="fa fa-fw fa-group"></i>
-					    		</div>
-					    		<div class="item-text">
-					    			Project Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text 
-					    		</div>
-							</a>
-						</li>
-						<li>
-							<hr>
-						</li>
-						<li>
-							<a class="list-item" href="#" role="button" titledby=".item-text"> 
-								<div>
-					    			<i class="fa fa-fw fa-calendar"></i>
-					    		</div>
-					    		<div class="item-text">
-					    			Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text Item text 
-						    		<span class="item-subtext">
-						    			Subtitle subtitle 
-						    			TODO: navbar. make this push the item-text up and make a new line in gray under the title.
-						    		</span>
-					    		</div>
-							</a>
-						</li>
-					</ul>
-					
-					<div class="nav-column-footer">
-						TODO: navbar. continue here with the footer.
-					</div>
-				</div>	
+    {% if request.user.is_authenticated %}
+		<div class="collapse nav-flyout" id="main-collapse">
+			<div class="nav-flyout-section main-menu-flyout " id="nav-main-menu">
+				{% comment %} This is the backbone App 'module-navbar-main-menu! {% endcomment %}
 			</div>
+			<div class="nav-flyout-backdrop"></div>
 		</div>
-		<div class="nav-flyout-backdrop"></div>
-	</div>
+		
+		{% comment %} The JSON data passed here is unsafe and passed as a HTML encoded string!  {% endcomment %}
+		<script>
+		    $('html').on('init:client', function () {
+		        Backbone.mediator.publish('init:module-navbar-main-menu', {
+	            	el: '#nav-main-menu',
+	            	contextDataJSON: {
+	            		'group_clusters': "{{ group_clusters_json_encoded }}",
+	            		'groups_invited': "{{ groups_invited_json_encoded }}",
+	            		'followed_ideas': "{{ followed_ideas_json_encoded }}",
+	            		'my_ideas': "{{ my_ideas_json_encoded }}",
+	            		'attending_events': "{{ attending_events_json_encoded }}",
+	            	},
+	            	contextData: {
+	            		'group_add_url': '{% url 'cosinnus:group__group-add' %}',
+	            		'project_add_url': '{% url 'cosinnus:group-add' %}',
+	            		{% if SETTINGS.COSINNUS_IDEAS_ENABLED %}
+	            		'idea_add_url': '{% url "cosinnus:idea-create" %}',
+	            		{% endif %}
+	            		'event_add_url': '{% group_url "cosinnus:event:event-add" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}',
+	            		'event_calendar_url': '{% group_url "cosinnus:event:list" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}',
+	            	}
+		        });
+		    });
+		</script>
+	{% endif %}		
 	
 	<div class="collapse nav-flyout create-menu" id="create-menu-collapse">
 	
-		<div class="nav-flyout-section padded flex-row">
+		<div class="nav-flyout-section flex-row">
 			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url 'cosinnus:group__group-add' %}"
 					class="create-menu-link flex-grow">
 				<h2 class="headline">{% trans "Group" %}</h2>
@@ -250,7 +228,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#" rel="toggle" class="list-item" role="button" titledby=".item-text" title="{% trans "Change language" %}
+					<a rel="toggle" class="list-item" role="button" titledby=".item-text" title="{% trans "Change language" %}
 							aria-expanded="false" aria-controls="language-menu-collapse"
 		    				data-toggle="collapse" data-target="#language-menu-collapse"
 		    				onclick="$('#user-menu-collapse').removeClass('in').addClass('collapse');"> 

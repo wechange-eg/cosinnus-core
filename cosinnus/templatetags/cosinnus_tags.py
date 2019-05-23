@@ -25,9 +25,10 @@ from cosinnus.utils.permissions import (check_ug_admin, check_ug_membership,
     check_ug_pending, check_object_write_access,
     check_group_create_objects_access, check_object_read_access, get_user_token,
     check_user_portal_admin, check_user_superuser,
-    check_object_likefollow_access)
+    check_object_likefollow_access, filter_tagged_object_queryset_for_user)
 from cosinnus.forms.select2 import CommaSeparatedSelect2MultipleChoiceField,  CommaSeparatedSelect2MultipleWidget
-from cosinnus.models.tagged import get_tag_object_model, BaseTagObject
+from cosinnus.models.tagged import get_tag_object_model, BaseTagObject,\
+    LikeObject
 from django.template.base import TemplateSyntaxError
 from cosinnus.core.registries.group_models import group_model_registry
 from django.core.cache import cache
@@ -51,6 +52,8 @@ from cosinnus.utils.functions import ensure_list_of_ints
 from django.db.models.query import QuerySet
 from django.core.serializers import serialize
 from cosinnus.models.idea import CosinnusIdea
+from django.db.models.functions import Lower
+from django.contrib.contenttypes.models import ContentType
 
 
 logger = logging.getLogger('cosinnus')
@@ -332,13 +335,40 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
     request = context['request']
     user = request.user
     if user.is_authenticated:
-        context['groups'] = CosinnusProject.objects.get_for_user(request.user)
-        context['societies'] = CosinnusSociety.objects.get_for_user(request.user)
-        context['groups_invited'] = CosinnusProject.objects.get_for_user_invited(request.user)
-        context['societies_invited'] = CosinnusSociety.objects.get_for_user_invited(request.user)
+        from cosinnus.views.user_dashboard import MyGroupsClusteredMixin
+        from cosinnus.models.user_dashboard import DashboardItem
+        
         if settings.COSINNUS_IDEAS_ENABLED:
-            # TODO: cache
-            context['my_ideas_count'] = CosinnusIdea.objects.all_in_portal().filter(creator=user).count()
+            # "My Ideas"
+            my_ideas = CosinnusIdea.objects.all_in_portal().filter(creator=user).order_by(Lower('title'))
+            context['my_ideas_json_encoded'] = _json.dumps([DashboardItem(idea) for idea in my_ideas])
+            # "Followed Ideas"
+            idea_content_type = ContentType.objects.get_for_model(CosinnusIdea)
+            my_followed_ids = LikeObject.objects.filter(content_type=idea_content_type, user=user, followed=True).values_list('object_id', flat=True)
+            my_followed_ideas = CosinnusIdea.objects.all_in_portal().filter(id__in=my_followed_ids).order_by(Lower('title'))
+            my_followed_ideas = my_followed_ideas.exclude(creator=user)
+            context['followed_ideas_json_encoded'] = _json.dumps([DashboardItem(idea) for idea in my_followed_ideas])
+            
+        # "My Groups and Projects"
+        context['group_clusters_json_encoded'] = _json.dumps(MyGroupsClusteredMixin().get_group_clusters(user))
+        # "Invitations"
+        societies_invited = CosinnusSociety.objects.get_for_user_invited(request.user)
+        projects_invited = CosinnusProject.objects.get_for_user_invited(request.user)
+        groups_invited = [DashboardItem(group) for group in societies_invited]
+        groups_invited += [DashboardItem(group) for group in projects_invited]
+        context['groups_invited_json_encoded'] = _json.dumps(groups_invited)
+        
+        attending_events = []
+        try:
+            from cosinnus_event.models import Event, EventAttendance
+            my_attendances_ids = EventAttendance.objects.filter(user=user, state__gt=EventAttendance.ATTENDANCE_NOT_GOING).values_list('event_id', flat=True)
+            attending_events = Event.get_current_for_portal().filter(id__in=my_attendances_ids)
+            attending_events = filter_tagged_object_queryset_for_user(attending_events, user)
+        except:
+            if settings.DEBUG:
+                raise
+        context['attending_events_json_encoded'] = _json.dumps([DashboardItem(event) for event in attending_events])
+        
     
     return render_to_string(template, context.flatten())
 

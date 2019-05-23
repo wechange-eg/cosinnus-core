@@ -90,19 +90,14 @@ class BaseUserDashboardWidgetView(View):
             'data': self.get_data(**kwargs),
         }
         return JsonResponse(response)
-    
 
-class GroupWidgetView(BaseUserDashboardWidgetView):
-    """ Shows (for now) unlimited, all projects clustered by groups of a user.
-        TODO: implement sorting by last accessed
-        TODO: implement limiting to 3 projects per group and n total items.
-        TODO: use clever caching """
-        
+
+class MyGroupsClusteredMixin(object):
     
-    def get_data(self, *kwargs):
+    def get_group_clusters(self, user):
         clusters = []
-        projects = list(CosinnusProject.objects.get_for_user(self.request.user))
-        societies = list(CosinnusSociety.objects.get_for_user(self.request.user))
+        projects = list(CosinnusProject.objects.get_for_user(user))
+        societies = list(CosinnusSociety.objects.get_for_user(user))
         
         filter_group_slugs = getattr(settings, 'NEWW_DEFAULT_USER_GROUPS', [])
         for society in societies:
@@ -119,7 +114,17 @@ class GroupWidgetView(BaseUserDashboardWidgetView):
             
         # add unclustered projects as own cluster
         clusters.extend([[DashboardItem(proj)] for proj in projects])
+        return clusters
+
+
+class GroupWidgetView(MyGroupsClusteredMixin, BaseUserDashboardWidgetView):
+    """ Shows (for now) unlimited, all projects clustered by groups of a user.
+        TODO: implement sorting by last accessed
+        TODO: implement limiting to 3 projects per group and n total items.
+        TODO: use clever caching """
         
+    def get_data(self, *kwargs):
+        clusters = self.get_group_clusters(self.request.user)
         return {'group_clusters': clusters}
 
 api_user_groups = GroupWidgetView.as_view()
@@ -130,9 +135,9 @@ class LikedIdeasWidgetView(BaseUserDashboardWidgetView):
     
     def get_data(self, *kwargs):
         idea_ct = ContentType.objects.get_for_model(CosinnusIdea)
-        likeobjects = LikeObject.objects.filter(user=self.request.user, content_type=idea_ct) 
+        likeobjects = LikeObject.objects.filter(user=self.request.user, content_type=idea_ct, liked=True) 
         liked_ideas_ids = likeobjects.values_list('object_id', flat=True)
-        liked_ideas = CosinnusIdea.objects.filter(id__in=liked_ideas_ids)
+        liked_ideas = CosinnusIdea.objects.all_in_portal().filter(id__in=liked_ideas_ids)
         ideas = [DashboardItem(idea) for idea in liked_ideas]
         return {'items': ideas}
 

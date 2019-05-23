@@ -134,6 +134,7 @@
 	}
 	
 	.nav-button {
+		cursor: pointer;
 		padding: 10px 5px;
 	}
 	.nav-button-search {
@@ -159,17 +160,11 @@
 		.nav-flyout-section {
 			position: relative;
 		    z-index: 9;
-			padding: 10px 0;
-			border-bottom: 1px solid @border-color;
 		    background: @background-color;
-		}
-		.nav-column {
-			&:not(:nth-child(3n)) {
-				border-right: 1px solid @border-color;
-			}
-		}
-		.nav-column-footer {
-			border-top: 1px solid @pale-border-color;
+			border-bottom: 1px solid @border-color;
+		    &.padded {
+				padding: 10px 0;
+		    }
 		}
 	}
 	.nav-flyout-backdrop,
@@ -188,6 +183,46 @@
 	.nav-flyout.in .nav-flyout-backdrop,
 	.nav-search.active .nav-search-backdrop {
 		display: block;
+	}
+	.nav-column {
+		flex: 1 1 0;
+		&:not(:last-of-type) {
+			border-right: 1px solid @border-color;
+		}
+	}
+	.main-menu-flyout {
+		max-height: ~"calc(100vh - 50px)"; 
+		overflow-y: auto;
+	}
+	.main-menu {
+		display: flex;
+		flex-direction: row;
+		background-color: @background-color-secondary;
+		
+		.main-menu-links {
+			line-height: 18px;
+			padding: 0 20px 10px 20px;
+			div {
+				margin-bottom: 10px;
+			}
+			a {
+				color: @text-color;
+				&:hover, &:active {
+					color: @text-highlight-color;
+				}
+			}
+		}
+		
+		hr {
+			border-top: 1px solid @pale-border-color;
+		}
+		.list-item .item-icon {
+			margin-left: 3px;
+		}
+		.item-list li hr {
+			margin-left: 0;
+			margin-right: 0;
+		}
 	}
 	.create-menu {
 		cursor: pointer;

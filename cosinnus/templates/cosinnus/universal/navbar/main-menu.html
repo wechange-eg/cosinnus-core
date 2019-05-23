@@ -1,0 +1,173 @@
+{% load i18n %}
+{% import "include/macros.html" as macros %}
+
+<div class="main-menu">
+	<div class="nav-column">
+		
+		{% if groups_invited|length > 0 %}
+			<h2 class="headline headline-condensed">
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "Invitations" %} ({{ groups_invited|length }})
+			</h2>
+		
+			<ul class="item-list">
+				{% for item in groups_invited %}
+					{{ macros.listItem(item.text, item.url, item.icon, is_emphasized=item.is_emphasized) }}
+				{% endfor %}
+			</ul>
+			
+			<hr>
+		{% endif %}
+		
+		<h2 class="headline headline-condensed">
+			{# Translators: __INCLUDE_JS_PO__ #}
+			{% trans "My Groups and Projects" %}
+		</h2>
+		
+		<ul class="item-list">
+			{% if group_clusters|length > 0 %}
+				{% for cluster in group_clusters %}
+					{% for item in cluster %}
+						{% if item.hasmorelink %}
+							<li>
+								<a class="list-item list-item-link" href="#" role="button" titledby=".item-text"> 
+									<div id="more-link1" class="item-text">
+						                {# Translators: __INCLUDE_JS_PO__ #}
+										{% trans "Show more Projects of this Group" %}
+									</div>
+								<a>
+							</li>
+						{% else %}
+							{{ macros.listItem(item.text, item.url, item.icon, is_emphasized=item.is_emphasized) }}
+						{% endif %}
+					{% endfor %}
+				
+					{% if not loop.last %}
+						<li>
+							<hr>
+						</li>
+					{% endif %}
+				{% endfor %}
+				
+			{% else %}
+				<li>
+					<span class="list-item list-item-link no-select" href="#" role="button" titledby=".item-text"> 
+			    		<div class="item-text">
+			                {# Translators: __INCLUDE_JS_PO__ #}
+							{% trans "You are not in any groups or projects yet" %}
+			    		</div>
+					</span>
+				</li>
+			{% endif %}
+		</ul>
+		
+		<hr>
+		
+		<div class="main-menu-links">
+			<div><a href="{{ group_add_url }}">
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "Create new Group" %}
+			</a></div>
+			<div><a href="{{ project_add_url }}">
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "Create new Project" %} 
+			</a></div>
+		</div>
+	</div>
+	
+	{% if COSINNUS_IDEAS_ENABLED %}
+	<div class="nav-column">
+		
+		<h2 class="headline headline-condensed">
+			{# Translators: __INCLUDE_JS_PO__ #}
+			{% trans "Ideas I am following" %}
+		</h2>
+		
+		<ul class="item-list">
+			{% if followed_ideas|length > 0 %}
+				{% for item in followed_ideas %}
+					{{ macros.listItem(item.text, item.url, item.icon, is_emphasized=item.is_emphasized) }}
+				{% endfor %}
+			{% else %}
+				<li>
+					<span class="list-item list-item-link no-select" href="#" role="button" titledby=".item-text"> 
+			    		<div class="item-text">
+			                {# Translators: __INCLUDE_JS_PO__ #}
+							{% trans "You are not following any ideas yet." %}
+			    		</div>
+					</span>
+				</li>
+			{% endif %}
+		</ul>
+		
+		<hr>
+		
+		{% if my_ideas|length %}
+			<h2 class="headline headline-condensed">
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "My Ideas" %}
+			</h2>
+			<ul class="item-list">
+				{% for item in my_ideas %}
+					{{ macros.listItem(item.text, item.url, item.icon, is_emphasized=item.is_emphasized) }}
+				{% endfor %}
+			</ul>
+			<hr>
+		{% endif %}
+		
+		<div class="main-menu-links">
+			<div><a href="{{ idea_add_url }}">
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "Post new Idea" %} 
+			</a></div>
+			<div><a href="/map/?people=false&events=false&projects=false&groups=false&ideas=true">
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "Search for Ideas" %} 
+			</a></div>
+		</div>
+	</div>
+	{% endif %}
+	
+	<div class="nav-column">
+		<h2 class="headline headline-condensed">
+			{# Translators: __INCLUDE_JS_PO__ #}
+			{% trans "My Events" %}
+		</h2>
+		
+		<ul class="item-list">
+			{% if attending_events|length > 0 %}
+				{% for item in attending_events %}
+					{{ macros.listItem(item.text, item.url, item.icon, subtext=item.subtext, is_emphasized=item.is_emphasized) }}
+				{% endfor %}
+			{% else %}
+				<li>
+					<span class="list-item list-item-link no-select" href="#" role="button" titledby=".item-text"> 
+			    		<div class="item-text">
+			                {# Translators: __INCLUDE_JS_PO__ #}
+							{% trans "You have not RSVPed to any Events." %}
+			    		</div>
+					</span>
+				</li>
+			{% endif %}
+		</ul>
+		
+		<hr>
+		
+		<div class="main-menu-links">
+			<div><a href="{{ event_add_url }}">
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "Add Event" %} 
+			</a></div>
+			<div><a href="{{ event_calendar_url }}">
+				{# Translators: __INCLUDE_JS_PO__ #}
+				{% trans "Go to Calendar" %} 
+			</a></div>
+		</div>
+		
+		TODO: overflows
+		<br>
+		TODO: caching
+		<br>
+		TODO: activities data collection remove
+	</div>
+</div>

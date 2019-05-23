@@ -1,7 +1,6 @@
 'use strict';
 
 var BaseView = require('views/base/view');
-var QuicksearchResultView = require('views/navbar/quicksearch-result-view');
 var util = require('lib/util');
 
 module.exports = BaseView.extend({
@@ -70,7 +69,6 @@ module.exports = BaseView.extend({
         BaseView.prototype.render.call(self);
         
         util.log('*** Rendered quicksearch! ***')
-        console.log(self.options.topicsJson)
     	this.$searchBarEl.find('.dropdown-underdrop').height(this.$el.outerHeight());
         return self;
     },
