@@ -103,6 +103,80 @@
 			font-size: 20px;
 			margin-top: -3px;
 		}
+		
+		/** Overriding styles for the old-style formfields only.
+			TODO: Remove these styles when the note-form has been done
+			specifically for the dashboard.
+		*/
+		.modal {
+			&, i.fa {
+				color: @text-color
+			}
+			a.pull-left {
+				background-color: @background-color;
+			}
+		
+			.modal-header {
+				color: @text-highlight-color;
+				padding: 20px 15px 15px 15px;
+				h4 {
+					font-size: 14px;
+					font-weight: bold;
+					text-transform: uppercase;
+				}
+			}
+			.cosinnus-field, .cosinnus-media-field {
+				&> label, .field-description {
+					display: none;
+				}
+			}
+			.cosinnus-field-input input {
+				padding: 10px 20px 5px 20px;
+			}
+			.select2-choices {
+				display: flex;
+    			flex-direction: row;
+    			.select2-search-field {
+    				flex: 1 1 0;
+    			}
+			}
+			.modal-body {
+				padding: 0;
+			}
+			.modal-footer button {
+				text-align: left;
+				float: left;
+				font-weight: bold;
+				text-transform: uppercase;
+				background-color: @background-color;
+				color: @text-color-pale;
+				&[type="submit"] {
+					color: @text-highlight-color;
+					text-align: right;
+					float: right;
+				}
+				a.pull-left {
+					display: none;
+				}
+				.media-body {
+					font-size: 14px;
+				}
+				&:hover {
+					background-color: @pale-border-color;
+				}
+			}
+			.modal.fade .modal-dialog {
+			    -webkit-transform: none;
+			    -ms-transform: none;
+			    -o-transform: none;
+			    transform: none;
+			    -webkit-transition: none;
+			    -moz-transition: none;
+			    -o-transition: none;
+			    transition: none;
+			}
+		}
+		
 	}
 	.timeline-controls {
 		background-color: @background-color-secondary;
@@ -493,6 +567,17 @@
 
 /** Desktop only */
 @media (min-width: 768px) {
+	
+	.v2-dashboard {
+		.dashboard-news-create-frame {
+			/** Fast cheat to center the modal like a pop-in */
+			.modal-dialog {
+				width: 53%;
+    			padding: 20px 5px 0 10px;
+			}
+		}
+	
+	}
 }
 
 /** Mobile only */
