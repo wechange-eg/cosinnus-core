@@ -133,7 +133,7 @@
 
 		{% include 'announcements/announcements.html' %}
 
-        <div class="{% block container_classes %}container {{ cosinnus_css_class }}{% endblock container_classes %}">
+        <div class="{% block container_classes %}container {{ cosinnus_css_class }}{% endblock container_classes %}" {% block container_attributes %}{% endblock container_attributes %}>
 
             {% block main_page_header %}{% endblock main_page_header %}
 

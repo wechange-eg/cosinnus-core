@@ -172,7 +172,7 @@ module.exports = BaseView.extend({
     },
     
     onSearchIconClicked: function (event) {
-    	if (this.$searchBarEl.hasClass('active') && 0 == 1) { // todo check for has text
+    	if (this.$searchBarEl.hasClass('active')) {
     		this.fireSearch();
     	} else {
     		this.$searchBarEl.find('.nav-search-box').focus();

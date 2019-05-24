@@ -275,9 +275,12 @@ module.exports = BaseView.extend({
     /** Handles events for infinite scroll */
     onScroll: function (event) {
     	var self = this;
-    	var $window = $(window);
-    	if ($window.height() + $window.scrollTop() >= $(document).height() - 250) {
-        	self.load();  // load() handles state checks itself so it's safe to call multiple times.
+    	// only check scrolling if the timeline is visible
+    	if (self.$el.is(':visible')) {
+    		var $window = $(window);
+    		if ($window.height() + $window.scrollTop() >= $(document).height() - 250) {
+    			self.load();  // load() handles state checks itself so it's safe to call multiple times.
+    		}
     	}
     },
 

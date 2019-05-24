@@ -19,7 +19,7 @@
 	            	***ADMIN-ONLY TEST PHASE***
 	            </a>
         	{% endif %}
-            <a class="nav-button nav-header-textlink" href="{% url "cosinnus:map" %}" title="{% trans "Discover" %}">
+            <a class="nav-button nav-header-textlink mobile-hidden" href="{% url "cosinnus:map" %}" title="{% trans "Discover" %}">
             	{% trans "Discover" %}
             </a>
     	</div>
@@ -28,13 +28,13 @@
     
     <div class="nav-section nav-search" id="nav-quicksearch">
     	<div class="">
-			<a class="nav-button nav-button-search show-active" href="#" title="{% trans "Search" %}"> 
+			<a class="nav-button nav-button-search show-active" title="{% trans "Search" %}"> 
 				<i class="fa fa-fw fa-search"></i>
 			</a>
 		</div>
 		<input id="search" class="nav-search-box" name="search" title="{% trans "Quick Search" %}" autocomplete="off">
 		<div class="">
-			<a class="nav-button nav-button-search show-inactive" href="#" title="{% trans "Search" %}"> 
+			<a class="nav-button nav-button-search show-inactive" title="{% trans "Search" %}"> 
 				<i class="fa fa-fw fa-search"></i>
 			</a>
 		</div>
@@ -80,7 +80,7 @@
             <a class="nav-button nav-header-textlink" href="{% url 'login' %}" title="{% trans "Log in" %}">
             	{% trans "Log in" %}
             </a>
-            <a class="nav-button nav-header-textlink" href="{% url "cosinnus:user-add" %}" title="{% trans "Register a new account" %}">
+            <a class="nav-button nav-header-textlink mobile-hidden" href="{% url "cosinnus:user-add" %}" title="{% trans "Register a new account" %}">
             	{% trans "Register" %}
             </a>
 		{% endif %}
@@ -122,7 +122,7 @@
 	
 	<div class="collapse nav-flyout create-menu" id="create-menu-collapse">
 	
-		<div class="nav-flyout-section flex-row">
+		<div class="nav-flyout-section flex-row mobile-flex-column">
 			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url 'cosinnus:group__group-add' %}"
 					class="create-menu-link flex-grow">
 				<h2 class="headline">{% trans "Group" %}</h2>

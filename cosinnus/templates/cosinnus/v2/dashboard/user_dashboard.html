@@ -15,6 +15,7 @@
 {% block body_attributes %}class="v2-dashboard-body"{% endblock body_attributes %}
 
 {% block container_classes %}v2-dashboard loading{% endblock container_classes %}
+{% block container_attributes %}data-active-panel="2"{% endblock container_attributes %}
 
 {% block main_page %}
 	{% include 'cosinnus/common/internet_explorer_not_supported.html' %}
@@ -23,9 +24,20 @@
                    the default settings defined in map.js.  
                   We don't pass a `settings param here because we use all the default ones.`      
     {% endcomment %}
+    
+    <div class="dashboard-mobile-header mobile-only">
+    	<a class="active-panel-1" onclick="$('.v2-dashboard').attr('data-active-panel', 1);">
+    		{% trans "Overview" %}
+		</a>
+    	<a class="active-panel-2" onclick="$('.v2-dashboard').attr('data-active-panel', 2);">
+    		{% trans "Timeline" %}
+		</a>
+    	<a class="active-panel-3" onclick="$('.v2-dashboard').attr('data-active-panel', 3);">
+    		{% trans "Contents" %}
+		</a>
+    </div>
         
-		
-	<div class="dashboard-left-bar dashboard-column">
+	<div class="dashboard-left-bar dashboard-column visible-panel-1">
 		<div class="dashboard-left-bar-content" style="display: none;">
 			<div class="group-widget-root">
 			</div>
@@ -45,7 +57,7 @@
 		</div>
 	</div>
 		
-	<div class="dashboard-center-bar dashboard-column">
+	<div class="dashboard-center-bar dashboard-column visible-panel-2">
 		
 		<div class="dashboard-news-create-frame">
 			<h2 class="headline">{% trans "News" %}</h2>
@@ -67,7 +79,7 @@
 		
 	</div>
 		
-	<div class="dashboard-right-bar dashboard-column">
+	<div class="dashboard-right-bar dashboard-column visible-panel-3">
 		<div class="dashboard-right-bar-content" style="display: none;">
 			<div class="typed-widgets-root">
 			</div>

@@ -487,6 +487,88 @@
 			font-size: 10px;
 		}
 	}
+	
 }
 
 
+/** Desktop only */
+@media (min-width: 768px) {
+}
+
+/** Mobile only */
+@media (max-width: 767px) {
+	
+	
+	.v2-dashboard {
+		margin-top: 100px;
+		
+		.visible-panel-1,
+		.visible-panel-2,
+		.visible-panel-3 {
+			display: none;
+		}
+		&[data-active-panel="1"] {
+			.visible-panel-1 {
+				display: block;
+			}
+			.active-panel-1 {
+				color: @text-highlight-color;
+			}
+		}
+		&[data-active-panel="2"] {
+			.visible-panel-2 {
+				display: block;
+			}
+			.active-panel-2 {
+				color: @text-highlight-color;
+			}
+		}
+		&[data-active-panel="3"] {
+			.visible-panel-3 {
+				display: block;
+			}
+			.active-panel-3 {
+				color: @text-highlight-color;
+			}
+		}
+		
+		.dashboard-left-bar, .dashboard-right-bar, .dashboard-center-bar {
+			width: 100%;
+		}
+		
+		
+		.dashboard-mobile-header {
+			position: fixed;
+			top: 50px;
+			left: 0;
+			z-index: 4;
+			height: 50px;
+			width: 100%;
+			
+			display: flex;
+			flex-direction: row;
+			
+			font-size: 14px;
+			line-height: 50px;
+			background-color: @background-color-secondary;
+			border-bottom: 1px solid @border-color;
+			
+			a {
+				display: block;
+				flex: 1 1 0;
+				
+				color: @text-color-pale;
+				text-transform: uppercase;
+				font-weight: bold;
+				text-decoration: none;
+				text-align: center;
+				
+				&:hover, &:active {
+					color: @text-highlight-color;
+				}
+			}
+		}
+		
+	}
+	
+}

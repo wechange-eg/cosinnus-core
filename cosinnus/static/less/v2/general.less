@@ -9,7 +9,9 @@
 	p {
 		margin: 9px 0;
 	} 
-	
+	a {
+		cursor: pointer;
+	}
 	
 	.headline {
 		margin: 10px 20px 20px 20px;
@@ -389,4 +391,37 @@
 	margin-left: -11px;
 }
 
+
+/** Desktop only */
+@media (min-width: 768px) {
+	.v2-navbar, .v2-dashboard {
+		.mobile-only {
+		    display: none;
+		}
+	}
+}
+
+/** Mobile only */
+@media (max-width: 767px) {
+	
+	.v2-navbar, .v2-dashboard {
+		.mobile-hidden {
+            display: none;
+        }
+        .mobile-only {
+            display: inherit;
+        }
+	
+		.mobile-flex-column {
+			display: flex;
+			flex-direction: column;
+			
+			&> div:not(:last-of-type)  {
+				margin-bottom: 8px;
+			}
+		}
+		
+	}
+	
+}
 
