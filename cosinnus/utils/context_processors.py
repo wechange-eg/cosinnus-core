@@ -64,11 +64,17 @@ def cosinnus(request):
     user = request.user
     if user.is_authenticated:
         user_json = json.dumps(UserSimpleSerializer(user).data)
-        unread_count = Message.objects.inbox_unread_count(user)
-        from cosinnus_stream.models import Stream
-        stream_unseen_count = Stream.objects.my_stream_unread_count(user)
     else:
         user_json = json.dumps(False)
+    
+    # we only need these expensive metrics for the old-style navbar
+    if user.is_authenticated and not \
+            (getattr(SETTINGS, 'COSINNUS_USE_V2_DASHBOARD', False) or \
+                (getattr(SETTINGS, 'COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY', False) and user.is_superuser)):
+        from cosinnus_stream.models import Stream
+        stream_unseen_count = Stream.objects.my_stream_unread_count(user)
+        unread_count = Message.objects.inbox_unread_count(user)
+    else:
         unread_count = 0
         stream_unseen_count = 0
 

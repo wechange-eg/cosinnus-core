@@ -360,7 +360,7 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
         
         attending_events = []
         try:
-            from cosinnus_event.models import Event, EventAttendance
+            from cosinnus_event.models import Event, EventAttendance # noqa
             my_attendances_ids = EventAttendance.objects.filter(user=user, state__gt=EventAttendance.ATTENDANCE_NOT_GOING).values_list('event_id', flat=True)
             attending_events = Event.get_current_for_portal().filter(id__in=my_attendances_ids)
             attending_events = filter_tagged_object_queryset_for_user(attending_events, user)
@@ -369,7 +369,8 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
                 raise
         context['attending_events_json_encoded'] = _json.dumps([DashboardItem(event) for event in attending_events])
         
-    
+        # TODO cache the dumped JSON strings?
+        
     return render_to_string(template, context.flatten())
 
 
