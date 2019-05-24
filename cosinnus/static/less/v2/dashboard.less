@@ -150,6 +150,9 @@
 				text-transform: uppercase;
 				background-color: @background-color;
 				color: @text-color-pale;
+				border-radius: 5px;
+    			width: auto;
+				
 				&[type="submit"] {
 					color: @text-highlight-color;
 					text-align: right;
@@ -165,16 +168,17 @@
 					background-color: @pale-border-color;
 				}
 			}
-			.modal.fade .modal-dialog {
-			    -webkit-transform: none;
-			    -ms-transform: none;
-			    -o-transform: none;
-			    transform: none;
-			    -webkit-transition: none;
-			    -moz-transition: none;
-			    -o-transition: none;
-			    transition: none;
-			}
+			
+		}
+		.modal.fade .modal-dialog {
+		    -webkit-transform: none;
+		    -ms-transform: none;
+		    -o-transform: none;
+		    transform: none;
+		    -webkit-transition: none;
+		    -moz-transition: none;
+		    -o-transition: none;
+		    transition: none;
 		}
 		
 	}
