@@ -1054,7 +1054,7 @@ class ActivateOrDeactivateGroupView(TemplateView):
                 messages.warning(self.request, _('This project/group is already active!'))
             else:
                 messages.warning(self.request, _('This project/group is already inactive!'))
-            return redirect(get_non_cms_root_url())
+            return redirect(get_non_cms_root_url(self.request))
             
         self.group = group
         return super(ActivateOrDeactivateGroupView, self).dispatch(request, *args, **kwargs)
@@ -1078,7 +1078,7 @@ class ActivateOrDeactivateGroupView(TemplateView):
             return redirect(self.group.get_absolute_url())
         else:
             messages.success(request, self.message_success_deactivate % {'team_name': self.group.name})
-            return redirect(get_non_cms_root_url())
+            return redirect(get_non_cms_root_url(self.request))
     
     def get_context_data(self, **kwargs):
         context = super(ActivateOrDeactivateGroupView, self).get_context_data(**kwargs)

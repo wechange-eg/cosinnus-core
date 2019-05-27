@@ -138,7 +138,7 @@ class BaseDashboardPage(Page):
     def serve(self, request):
         """ If the redirect flag is set, and the user is logged in, redirect to streams, otherwise, show CMS page """
         if request.user.is_authenticated and self.redirect_if_logged_in and not request.GET.get('preview', False):
-            return redirect(get_non_cms_root_url())
+            return redirect(get_non_cms_root_url(request))
         return super(BaseDashboardPage, self).serve(request)
 
 
@@ -348,7 +348,7 @@ class BaseStreamDashboardPage(Page):
     def serve(self, request):
         """ If the redirect flag is set, and the user is logged in, redirect to streams, otherwise, show CMS page """
         if request.user.is_authenticated and self.redirect_if_logged_in and not request.GET.get('preview', False):
-            return redirect(get_non_cms_root_url())
+            return redirect(get_non_cms_root_url(request))
         return super(BaseStreamDashboardPage, self).serve(request)
 
 
@@ -562,7 +562,7 @@ class StreamStartPage(Page):
     def serve(self, request):
         """ If the redirect flag is set, and the user is logged in, redirect to streams, otherwise, show CMS page """
         if request.user.is_authenticated and self.redirect_if_logged_in and not request.GET.get('preview', False):
-            return redirect(get_non_cms_root_url())
+            return redirect(get_non_cms_root_url(request))
         return super(StreamStartPage, self).serve(request)
 
 

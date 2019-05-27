@@ -75,12 +75,13 @@ def get_domain_for_portal(portal):
     return domain
 
 
-def get_non_cms_root_url():
+def get_non_cms_root_url(request=None):
     """ Tries to get a safe non-cms root URL to redirect to.
         If the new user dashboard is enabled, will use that.
         Else, will attempt the stream activity page. If cosinnus_stream is not installed,
         will redirect to the projects page. """
-    if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False):
+    if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or \
+        (getattr(settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False) and request and request.user.is_superuser):
         return reverse('cosinnus:user-dashboard')
     else:
         try:
@@ -93,7 +94,7 @@ def safe_redirect(url, request):
     """ Will return the supplied URL if it is safe or a safe wechange root URL """
     # Ensure the user-originating redirection url is safe.
     if not is_safe_url(url=url, allowed_hosts=[request.get_host()]):
-        url = get_non_cms_root_url()
+        url = get_non_cms_root_url(request)
     return url
 
 

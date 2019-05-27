@@ -22,7 +22,7 @@
 	background-color: @background-color;
 	color: @navbar-text-color;
 	font-family: @font-regular;
-	font-size: 14px;
+	font-size: 12px;
 	a, a:visited, i.fa {
 		color: @navbar-text-color;
 		text-decoration: none;
@@ -31,7 +31,7 @@
 		color: @text-highlight-color;
 	}
 	i.fa {
-		font-size: 17px;
+		font-size: 15px;
 	}
 	
 	.nav-section {
@@ -74,11 +74,12 @@
 		input.nav-search-box {
 			flex-grow: 2;
 			height: 49px;
-			font-size: 16px;
+			font-size: 14px;
+			font-weight: bold;
 			color: @navbar-text-color;
 			border: none;
 			outline: none;
-			padding: 0 10px;
+			padding: 0 12px;
 			
 			&:active, &:focus {
 				color: @navbar-active-text-color;
@@ -161,7 +162,7 @@
 		.nav-flyout-section {
 			position: relative;
 		    z-index: 9;
-		    background: @background-color;
+		    background: @background-color-secondary;
 			border-bottom: 1px solid @border-color;
 		    &.padded {
 				padding: 10px 0;
@@ -191,7 +192,7 @@
 			border-right: 1px solid @border-color;
 		}
 	}
-	.main-menu-flyout {
+	.nav-flyout.in {
 		max-height: ~"calc(100vh - 50px)"; 
 		overflow-y: auto;
 	}
