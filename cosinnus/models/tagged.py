@@ -295,6 +295,19 @@ class BaseTaggableObjectModel(IndexingUtilsMixin, AttachableObjectModel):
         verbose_name=_('Last modified'),
         editable=False,
         auto_now=True)
+    
+    last_action = models.DateTimeField(
+        verbose_name=_('Last action happened'),
+        auto_now_add=True,
+        help_text='A datetime for when a significant action last happened for this object, '\
+            'which users might be interested in. I.e. new comments, special edits, etc.')
+    last_action_user = models.ForeignKey(settings.AUTH_USER_MODEL,
+        verbose_name=_('Last action user'),
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='+',
+        help_text='The user which caused the last significant action to update the `last_action` datetime.')
+
 
     class Meta(object):
         abstract = True
