@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-18 18:40+0200\n"
+"POT-Creation-Date: 2019-05-27 16:45+0200\n"
 "PO-Revision-Date: 2018-08-30 04:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2148,6 +2148,7 @@ msgstr "Integracja z Facebookiem dostępna jest dopiero po utworzeniu grupy!"
 msgid "Facebook integration is available after you created the project!"
 msgstr "Integracja z Facebookiem dostępna jest dopiero po utworzeniu projektu!"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
 msgstr "Zaproszenia"
 
@@ -3447,6 +3448,90 @@ msgid "Search this area"
 msgstr "Przeszukaj ten obszar"
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "My Projects"
+msgid "My Groups and Projects"
+msgstr "Moje Projekty"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Show more Projects"
+msgid "Show more Projects of this Group"
+msgstr "Pokaż więcej projektów"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are not in any groups or projects yet"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create Group"
+msgid "Create new Group"
+msgstr "Utwórz Grupę"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create Project"
+msgid "Create new Project"
+msgstr "Utwórz Projekt"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Ideas I am following"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "You are invited!"
+msgid "You are not following any ideas yet."
+msgstr "Zostałeś/aś zaproszony/a!"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Cosinnus Idea"
+msgid "Post new Idea"
+msgstr "Idea Projektu Cosinnus"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Search for Users"
+msgid "Search for Ideas"
+msgstr "Wyszukiwanie Użytkowników"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You have not RSVPed to any Events."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "All Events"
+msgid "Add Event"
+msgstr "Wszystkie Wydarzenia"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Go to Calendar"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Network"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "On the Map"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Convert selected Groups to Projects"
+msgid "In my Groups and Projects"
+msgstr "Konwertuj zaznaczone Grupy na Projekty"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Topics"
+msgid "Topic"
+msgstr "Tematy"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You"
 msgstr ""
 
@@ -3594,6 +3679,44 @@ msgstr "Dołącz do Projektu"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Message Project"
 msgstr "Wyślij wiadomość do Projektu"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "There was an error when trying to delete the invitation."
+msgid "There was an error loading the widget"
+msgstr "Podczas usuwania zaproszenia wystąpił błąd."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "There are no visible users."
+msgid "There are no items yet"
+msgstr "Nie ma widocznych użytkowników."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Created Projects"
+msgid "Groups and Projects"
+msgstr "Utworzone Projekty"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Ideas I like"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You have not liked any ideas yet"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Only content from my Groups and Projects"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "We could not load more data at this time."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Retry"
+msgstr ""
 
 msgid "Quick Join"
 msgstr ""
@@ -3748,9 +3871,6 @@ msgstr "Możesz zmienić to ustawienie później w ustawieniach powiadomień"
 msgid "Your privacy: You are in control!"
 msgstr "Twoja prywatność: Ty masz nad nią kontrolę!"
 
-msgid "User Dashboard"
-msgstr "Panel Użytkownika"
-
 msgid "Enable posting to Facebook"
 msgstr "Włącz udostępnianie na Facebooku"
 
@@ -3897,6 +4017,106 @@ msgstr "Nie jesteś Edytorem ani Administratorem żadnej strony."
 
 msgid "We could not retrieve your groups from Facebook because of an error. Please contact an administrator!"
 msgstr "Nie mogliśmy uzyskać dostępu do Twoich Grup na Facebooku z powodu błędu. Skontaktuj się z administratorem!"
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete the item?"
+msgstr "Czy na pewno chcesz usunąć ten zespół?"
+
+#, python-format
+msgid "Show all %(count)s comments"
+msgstr ""
+
+#, fuzzy
+#| msgid "Delete Account"
+msgid "Delete comment"
+msgstr "Usuń Konto"
+
+#, fuzzy
+#| msgid "Report offensive content"
+msgid "Report offensive comment"
+msgstr "Zgłoś niedozwoloną treść"
+
+msgid "Write comment..."
+msgstr ""
+
+#, fuzzy
+#| msgid "Title"
+msgid "Timeline"
+msgstr "Tytuł"
+
+#, fuzzy
+#| msgid "Content"
+msgid "Contents"
+msgstr "Treść"
+
+#, fuzzy
+#| msgid "Close"
+msgid "Close to me"
+msgstr "Zamknij"
+
+msgid "Show large map"
+msgstr ""
+
+msgid "What's the latest news?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create idea"
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created an idea"
+msgstr "Utwórz ideę"
+
+msgid "Menu"
+msgstr ""
+
+msgid "Discover"
+msgstr ""
+
+#, fuzzy
+#| msgid "Search"
+msgid "Quick Search"
+msgstr "Szukaj"
+
+#, fuzzy
+#| msgid "Create account"
+msgid "Create content"
+msgstr "Stwórz konto"
+
+msgid "Nachrichten"
+msgstr ""
+
+#, fuzzy
+#| msgid "Language"
+msgid "Change language"
+msgstr "Język"
+
+#, fuzzy
+#| msgid "Register and join!"
+msgid "Register a new account"
+msgstr "Zarejestruj się i dołącz!"
+
+msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
+msgstr ""
+
+msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgstr ""
+
+msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
+msgstr ""
+
+msgid "What's happening where and when? What's to discover? Where to meet?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Portal"
+msgid "Switch Portal"
+msgstr "Portal"
+
+#, fuzzy
+#| msgid "Edit Profile"
+msgid "Edit My Profile"
+msgstr "Edytuj Profil"
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Zaloguj się teraz i działaj"
@@ -4372,6 +4592,9 @@ msgstr "Obecnie nie jesteś członkiem %s! Jeśli chcesz nim zostać, możesz wy
 
 msgid "Your changes have been saved."
 msgstr "Twoje zmiany zostały zapisane."
+
+#~ msgid "User Dashboard"
+#~ msgstr "Panel Użytkownika"
 
 #~ msgid "Microsite Wallpaper"
 #~ msgstr "Tapeta Mikrostrony"

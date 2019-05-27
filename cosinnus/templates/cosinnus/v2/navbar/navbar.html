@@ -10,7 +10,7 @@
 		    		<i class="fa fa-fw fa-bars"></i>
 	    		</a>
     		{% endif %}
-            <a class="nav-button" href="{% url "cosinnus:user-dashboard" %}" title="{% trans "Home" %}">
+            <a class="nav-button" href="{% url "cosinnus:user-dashboard" %}" title="{% trans "Dashboard" %}">
             	{% comment %} {% include 'cosinnus/brand.html' %} {% endcomment %}
             	<img src="{% static 'img/mokwi_logo.svg' %}">
             </a>
@@ -123,24 +123,24 @@
 	<div class="collapse nav-flyout create-menu" id="create-menu-collapse">
 	
 		<div class="nav-flyout-section flex-row mobile-flex-column">
-			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url 'cosinnus:group__group-add' %}"
-					class="create-menu-link flex-grow">
-				<h2 class="headline">{% trans "Group" %}</h2>
-				<div class="description">
-					TODO: Beschreibung des Erstellitems, was es tut, und warum es toll ist das zu machen.
-				</div>
-				<div class="action text-bold">
-					{% trans "Create new Group" %} 
-				</div>
-			</a>
 			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url 'cosinnus:group-add' %}" 
 					class="create-menu-link flex-grow">
 				<h2 class="headline margin-regular">{% trans "Project" %}</h2>
 				<div class="description">
-					TODO: Beschreibung des Erstellitems, was es tut, und warum es toll ist das zu machen.
+					{% trans "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more." %}
 				</div>
 				<div class="action text-bold">
 					{% trans "Create new Project" %} 
+				</div>
+			</a>
+			<a href="{% if not user.is_authenticated %}{% url 'cosinnus:user-add' %}?acc_req_msg=1&next={% endif %}{% url 'cosinnus:group__group-add' %}"
+					class="create-menu-link flex-grow">
+				<h2 class="headline">{% trans "Group" %}</h2>
+				<div class="description">
+					{% trans "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups." %}
+				</div>
+				<div class="action text-bold">
+					{% trans "Create new Group" %} 
 				</div>
 			</a>
 			{% if SETTINGS.COSINNUS_IDEAS_ENABLED %}
@@ -148,7 +148,7 @@
 					class="create-menu-link flex-grow">
 				<h2 class="headline margin-regular">{% trans "Idea" %}</h2>
 				<div class="description">
-					TODO: Beschreibung des Erstellitems, was es tut, und warum es toll ist das zu machen.
+					{% trans "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas." %}
 				</div>
 				<div class="action text-bold">
 					{% trans "Post new Idea" %} 
@@ -159,7 +159,7 @@
 					class="create-menu-link flex-grow">
 				<h2 class="headline margin-regular">{% trans "Event" %}</h2>
 				<div class="description">
-					TODO: Beschreibung des Erstellitems, was es tut, und warum es toll ist das zu machen.
+					{% trans "What's happening where and when? What's to discover? Where to meet?" %}
 				</div>
 				<div class="action text-bold">
 					{% trans "Add Event" %} 

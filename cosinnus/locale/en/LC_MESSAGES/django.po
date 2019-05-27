@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-18 18:40+0200\n"
+"POT-Creation-Date: 2019-05-27 16:45+0200\n"
 "PO-Revision-Date: 2018-06-23 17:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -2177,6 +2177,7 @@ msgstr ""
 msgid "Facebook integration is available after you created the project!"
 msgstr ""
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
 msgstr ""
 
@@ -3373,6 +3374,86 @@ msgid "Search this area"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "My Projects"
+msgid "My Groups and Projects"
+msgstr "My Projects"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Other Projects"
+msgid "Show more Projects of this Group"
+msgstr "Other Projects"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are not in any groups or projects yet"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create Group"
+msgid "Create new Group"
+msgstr "Create Group"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create Project"
+msgid "Create new Project"
+msgstr "Create Project"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Ideas I am following"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are not following any ideas yet."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Cosinnus project"
+msgid "Post new Idea"
+msgstr "Project"
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "Create Project"
+msgid "Search for Ideas"
+msgstr "Create Project"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You have not RSVPed to any Events."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "All projects"
+msgid "Add Event"
+msgstr "All projects"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Go to Calendar"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Network"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "On the Map"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "My Projects"
+msgid "In my Groups and Projects"
+msgstr "My Projects"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Topic"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You"
 msgstr ""
 
@@ -3526,6 +3607,46 @@ msgstr "Edit Project"
 msgid "Message Project"
 msgstr "Create Project"
 
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "There are no groups."
+msgid "There was an error loading the widget"
+msgstr "There are no groups."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "There are no groups."
+msgid "There are no items yet"
+msgstr "There are no groups."
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "My Projects"
+msgid "Groups and Projects"
+msgstr "My Projects"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Ideas I like"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You have not liked any ideas yet"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+#, fuzzy
+#| msgid "My Projects"
+msgid "Only content from my Groups and Projects"
+msgstr "My Projects"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "We could not load more data at this time."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Retry"
+msgstr ""
+
 msgid "Quick Join"
 msgstr ""
 
@@ -3671,9 +3792,6 @@ msgid "You can change or customize this setting later in your notification setti
 msgstr ""
 
 msgid "Your privacy: You are in control!"
-msgstr ""
-
-msgid "User Dashboard"
 msgstr ""
 
 msgid "Enable posting to Facebook"
@@ -3823,6 +3941,88 @@ msgstr ""
 
 msgid "We could not retrieve your groups from Facebook because of an error. Please contact an administrator!"
 msgstr ""
+
+#, fuzzy
+#| msgid "Are you sure you want to delete this team?"
+msgid "Are you sure you want to delete the item?"
+msgstr "Are you sure you want to delete this prject?"
+
+#, python-format
+msgid "Show all %(count)s comments"
+msgstr ""
+
+msgid "Delete comment"
+msgstr ""
+
+msgid "Report offensive comment"
+msgstr ""
+
+msgid "Write comment..."
+msgstr ""
+
+msgid "Timeline"
+msgstr ""
+
+msgid "Contents"
+msgstr ""
+
+msgid "Close to me"
+msgstr ""
+
+msgid "Show large map"
+msgstr ""
+
+msgid "What's the latest news?"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create Project"
+msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
+msgid "created an idea"
+msgstr "Create Project"
+
+msgid "Menu"
+msgstr ""
+
+msgid "Discover"
+msgstr ""
+
+msgid "Quick Search"
+msgstr ""
+
+#, fuzzy
+#| msgid "Create Project"
+msgid "Create content"
+msgstr "Create Project"
+
+msgid "Nachrichten"
+msgstr ""
+
+msgid "Change language"
+msgstr ""
+
+msgid "Register a new account"
+msgstr ""
+
+msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
+msgstr ""
+
+msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgstr ""
+
+msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
+msgstr ""
+
+msgid "What's happening where and when? What's to discover? Where to meet?"
+msgstr ""
+
+msgid "Switch Portal"
+msgstr ""
+
+#, fuzzy
+#| msgid "Edit Project"
+msgid "Edit My Profile"
+msgstr "Edit Project"
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Join now and collaborate"
@@ -4330,11 +4530,6 @@ msgstr ""
 #~| msgid "Group"
 #~ msgid "Gruppen"
 #~ msgstr "Group"
-
-#, fuzzy
-#~| msgid "My Projects"
-#~ msgid "My Groups and Projects"
-#~ msgstr "My Projects"
 
 #, fuzzy
 #~| msgid "Enter a name for the group."

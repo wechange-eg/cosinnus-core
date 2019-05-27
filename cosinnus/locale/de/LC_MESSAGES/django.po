@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-18 18:40+0200\n"
-"PO-Revision-Date: 2019-04-18 18:41+0100\n"
+"POT-Creation-Date: 2019-05-27 16:45+0200\n"
+"PO-Revision-Date: 2019-05-27 16:46+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -2083,9 +2083,6 @@ msgstr ""
 "Du bist dabei dieses Projekt/Gruppe zu deaktivieren. Es und all sein Inhalt  "
 "wird auf der Webseite unsichtbar sein."
 
-#| msgid ""
-#| "This process is reversible. You can reactivate the project/group from the "
-#| "project/group list page at any time."
 msgid ""
 "This process is reversible. You can reactivate the project/group from your "
 "user profile at any time."
@@ -2551,6 +2548,7 @@ msgid "Facebook integration is available after you created the project!"
 msgstr ""
 "Die Facebook-Integration wird verfügbar sobald du das Projekt erstellt hast!"
 
+#. Translators: __INCLUDE_JS_PO__
 msgid "Invitations"
 msgstr "Einladungen"
 
@@ -4061,6 +4059,71 @@ msgid "Search this area"
 msgstr "In diesem Ausschnitt suchen"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "My Groups and Projects"
+msgstr "Meine Gruppen und Projekte"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Show more Projects of this Group"
+msgstr "Weitere Projekte dieser Gruppe anzeigen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are not in any groups or projects yet"
+msgstr "Du bist noch in keinen Gruppen oder Projekten Mitglied"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create new Group"
+msgstr "Neue Gruppe anlegen"
+
+#
+#. Translators: __INCLUDE_JS_PO__
+msgid "Create new Project"
+msgstr "Neues Projekt anlegen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Ideas I am following"
+msgstr "Ideen, die mir gefallen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You are not following any ideas yet."
+msgstr "Du folgst noch keinen Ideen."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Post new Idea"
+msgstr "Neue Idee eintragen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Search for Ideas"
+msgstr "Nach Ideen suchen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You have not RSVPed to any Events."
+msgstr "Du hast bei keinen aktuellen Veranstaltungen zugesagt"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Add Event"
+msgstr "Veranstaltung hinzufügen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Go to Calendar"
+msgstr "Zum Kalender"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Network"
+msgstr "Netzwerk"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "On the Map"
+msgstr "Auf der Karte"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "In my Groups and Projects"
+msgstr "In meinen Gruppen und Projekten"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Topic"
+msgstr "Thema"
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "You"
 msgstr "Du"
 
@@ -4221,6 +4284,39 @@ msgstr "Projekt beitreten"
 #. Translators: __INCLUDE_JS_PO__
 msgid "Message Project"
 msgstr "Projekt anschreiben"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "There was an error loading the widget"
+msgstr "Es gab einen Fehler beim Laden der Inhalte"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "There are no items yet"
+msgstr "Noch keine Inhalte vorhanden."
+
+#
+#. Translators: __INCLUDE_JS_PO__
+msgid "Groups and Projects"
+msgstr "Gruppen und Projekte"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Ideas I like"
+msgstr "Ideen, die mir gefallen"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You have not liked any ideas yet"
+msgstr "Du hast noch keine Ideen geliked"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Only content from my Groups and Projects"
+msgstr "Nur Beiträge aus meinen Gruppen und Projekten"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "We could not load more data at this time."
+msgstr "Wir konnten leider keine weiteren Daten laden."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Retry"
+msgstr "Erneut versuchen"
 
 msgid "Quick Join"
 msgstr "Schnellstart"
@@ -4418,9 +4514,6 @@ msgstr ""
 
 msgid "Your privacy: You are in control!"
 msgstr "Deine Privatsphäre: Du hast die Kontrolle!"
-
-msgid "User Dashboard"
-msgstr "Mein Dashboard"
 
 msgid "Enable posting to Facebook"
 msgstr "Posten auf Facebook aktivieren"
@@ -4683,6 +4776,103 @@ msgid ""
 msgstr ""
 "Wir konnten aufgrund eines Fehlers deine Gruppen nicht von Facebook lesen. "
 "Bitte kontaktiere einen Administrator!"
+
+msgid "Are you sure you want to delete the item?"
+msgstr "Bist du sicher dass du diesen Inhalt löschen willt?"
+
+#, python-format
+msgid "Show all %(count)s comments"
+msgstr "Zeige alle %(count)s comments"
+
+#
+msgid "Delete comment"
+msgstr "Kommentar löschen"
+
+msgid "Report offensive comment"
+msgstr "Anstößigen Kommentar melden"
+
+msgid "Write comment..."
+msgstr "Kommentar schreiben..."
+
+msgid "Timeline"
+msgstr "Timeline"
+
+msgid "Contents"
+msgstr "Inhalte"
+
+msgid "Close to me"
+msgstr "In meiner Nähe"
+
+msgid "Show large map"
+msgstr "Große Karte anzeigen"
+
+msgid "What's the latest news?"
+msgstr "Was gibt's neues?"
+
+#| msgid "created an idea"
+msgctxt ""
+"This appears next to new items in the timeline, as in '<Jane> created a new "
+"item'"
+msgid "created an idea"
+msgstr "hat eine Idee erstellt"
+
+msgid "Menu"
+msgstr "Menü"
+
+msgid "Discover"
+msgstr "Entdecken"
+
+msgid "Quick Search"
+msgstr "Schnellsuche"
+
+#
+msgid "Create content"
+msgstr "Inhalt erstellen"
+
+msgid "Nachrichten"
+msgstr "Messages"
+
+msgid "Change language"
+msgstr "Sprache ändern"
+
+msgid "Register a new account"
+msgstr "Neues Konto registrieren"
+
+msgid ""
+"Organize your projects or initiatives efficiently with your fellow "
+"campaigners. All important tools for collaborating in one place: News, Pads, "
+"Events, Todos, and more."
+msgstr ""
+"Organisier dich effizient mit deinen MitstreiterInnen aus deinem Projekt "
+"oder deiner Initiative. Alle wichtigen Tools für eine gute Zusammenarbeit, "
+"wie Neuigkeiten, Pads, Kalender, Aufageben, etc. an einem Ort."
+
+msgid ""
+"Groups help improve communication and collaboration in large networks or "
+"organisations. Within a Group you can bring together several smaller "
+"projects or workgroups."
+msgstr ""
+"Mit Gruppen kannst du die Kommunikation und Zusammenarbeit in großen "
+"Netzwerken oder Orgaisationen vereinfachen. Unter einer Gruppe könnt ihr "
+"mehrere kleine Projekte, Arbeitsgruppen oder -kreise abbilden."
+
+msgid ""
+"What will our region look like in the future? What is your idea for an "
+"environmentally friendly and sustainable region? Find co-campaigners for "
+"your project ideas."
+msgstr ""
+"Wie sieht unsere Region in der Zukunft aus? Was ist deine Idee für eine "
+"klimafreundliche und nachhaltige Region? Finde MitstreiterInnen für deine "
+"Projektideen."
+
+msgid "What's happening where and when? What's to discover? Where to meet?"
+msgstr "Was ist wann wo los? Was gibt's zu erleben? Wo trifft man sich?"
+
+msgid "Switch Portal"
+msgstr "Portal wechseln"
+
+msgid "Edit My Profile"
+msgstr "Profil-Einstellungen"
 
 msgid "Jetzt anmelden und mitgestalten"
 msgstr "Jetzt anmelden und mitgestalten"
@@ -5405,6 +5595,9 @@ msgstr ""
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "User Dashboard"
+#~ msgstr "Mein Dashboard"
 
 #~ msgid "Microsite Wallpaper"
 #~ msgstr "Microsite Hintergrundbild"
