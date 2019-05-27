@@ -287,7 +287,13 @@
 		.icon {
 			position: absolute;
 			font-size: 16px;
-			margin-top: 10px;
+			margin-top: 8px;
+			&.icon-padded {
+				margin-top: 15px;
+			}
+			&.icon-extra-padded {
+				margin-top: 20px;
+			}
 		}
 		.body {
 			&:not(:last-of-type) {
@@ -385,6 +391,15 @@
 					display: flex;
 					justify-content: center;
 					align-items: center; 
+				}
+				.thumbnail {
+					border: none;
+					/** For images non-centered:
+					img {
+						margin-left: inherit;
+						margin-right: inherit;
+					}
+					*/
 				}
 			}
 		}

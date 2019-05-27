@@ -73,7 +73,7 @@
 		</div>
 	</div>
 	
-	<div class="icon">
+	<div class="icon {% block icon_class %}{% if item.media_tag.location %}icon-padded{% endif %} {% endblock %}">
 		<a href="{{ item.get_absolute_url }}">
 			<i class="fa fa-fw {% block icon %}{% endblock %}"></i>
 		</a>
