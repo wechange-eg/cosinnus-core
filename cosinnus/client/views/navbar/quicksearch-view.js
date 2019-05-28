@@ -8,9 +8,8 @@ module.exports = BaseView.extend({
 	app: null,
 	
     template: require('navbar/quicksearch'),
-    
-    // QuicksearchResult collection
-    collection: null,
+
+    fetchURL: '/search/api/quicksearch/',
     
     // the parent el, containing the search textbox and button
     $searchBarEl: null,
@@ -30,6 +29,11 @@ module.exports = BaseView.extend({
     	topicsUrl: '/map/?topics={{t}}',
         
         state: {
+        	loading: false, // if true, a request is currently loading
+            currentRequest: null, // the XMLHttpRequest that is currently loading
+            hadErrors: false,
+            
+            quicksearchResults: [],
             
         }
     },
@@ -117,6 +121,7 @@ module.exports = BaseView.extend({
     	for (var topicId in self.options.topicsJson) {
     		var topic = self.options.topicsJson[topicId];
     		if (topic.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+    			// highlight the topic occurence
     			var title = util.iReplace(topic, query, '<b>$1</b>');
     			var url = self.options.topicsUrl.replace('{{t}}', topicId);
     			topicsSearchMethods[title] = url;
@@ -125,7 +130,12 @@ module.exports = BaseView.extend({
     	self.state.topicsSearchMethods = topicsSearchMethods
     	
     	self.state.query = query || null;
+    	self.state.quicksearchResults = [];
     	self.render();
+    	
+    	if (self.state.query && self.state.query.length > 2) {
+    		self.loadQuickResults(self.state.query);
+    	}
     },
 
     /** Get the text from the search box */
@@ -179,65 +189,89 @@ module.exports = BaseView.extend({
     	}
     },
     
+    /** Quicksearch results data fetch logic */
     
-    // ResultCollection Event handlers
-    // --------------
-
-    tileAdd: function(result) {
-        // adding a tile that is already there? impossibru! but best be sure.
-        if (result.id in this.tiles) {
-            this.tileRemove(result);
-        }
-
-        var tile = new TileView({
-	            model: result,
-	            elParent: '#tile-container',
-	        }, 
-	        this.App).render();
-        this.tiles[result.id] = tile;
-    },
-
-    tileRemove: function(result) {
-        if (result.get('selected')) {
-            util.log('tile-list-view.js: TODO:: was ordered to remove a tile that is currently selected. NOT DOING ANYTHING RN!')
-            return;
-        }
-        if (result.id in this.tiles) {
-            var tile = this.tiles[result.id];
-            
-            tile.remove();
-            
-            delete this.tiles[result.id];
-            util.log('Removed tile at ' + result.id);
-        }
-    },
-
-    tileUpdate: function(result) {
-        // don't use this trigger when only hovered/selected state was changed - they have their own handlers
-        var attrs = result.changedAttributes();
-        if (attrs && ('selected' in attrs || 'hovered' in attrs)) {
-            return;
-        }
-        if (result.id in this.tiles) {
-            var tile = this.tiles[result.id];
-            tile.render();
-        }
+    /** Loads a new set of quicksearch results for the given query.
+     *  Calling this will cancel the currently running request, if existing. */
+    loadQuickResults: function (query) {
+    	var self = this;
+    	if (self.state.loading) {
+    		self.state.currentRequest.abort();
+    		self.state.currentRequest = null;
+    		self.state.loading = false;
+    	}
+    	
+		self.state.loading = true;
+		//self.showLoadingPlaceholder();
+		//self.hideErrorMessage();
+		// using this instead of .finally() for backwards compatibility in browsers
+		
+		var finally_compat = function() {
+			self.state.loading = false;
+			//self.hideLoadingPlaceholder();
+		};
+		self.loadData(query).then(function(data){
+			util.log('# quicksearch received data and is now handling it');
+			self.handleData(data);
+			finally_compat();
+		})/**.catch(function(message){
+			self.handleError(message);
+			finally_compat();
+		})*/;
     },
     
-    /** Handler for when tiles have been added to the collection, like after an infinite scroll event */
-    tilesUpdate: function(resultCollection, options) {
-        var self = this;
 
-        self.gridRefresh();
-        self.enableInput(true);
+    /** Loads a set of data from the server. Returns a promise
+     *  whose resolve function gets passed the data */
+    loadData: function(query) {
+    	var self = this;
+		return new Promise(function(resolve, reject) {
+			// build URL
+			var url = self.fetchURL + '?' + $.param({'q': query});
+			self.state.currentRequest = $.ajax(url, {
+                type: 'GET',
+                success: function (response, textStatus, xhr) {
+                    if (xhr.status == 200) {
+                    	resolve(response['data']);
+                    } else {
+                    	reject(xhr.statusText);
+                    }
+                },
+                error: function (xhr, textStatus) {
+                	reject(textStatus);
+                },
+                complete: function() {
+                	self.state.currentRequest = null;
+                }
+            });
+    	});
     },
     
-    /** Handler for when the entire collection changes */
-    tilesReset: function(resultCollection, options) {
-        // options.previousModels contains the old models if we need them
-        this.swapTileset(resultCollection.models);
+    handleData: function (data) {
+    	var self = this;
+        util.log('# # Fetched data for quicksearch');
+        util.log(data)
+        
+        // display items if any
+        if (data['count'] > 0) {
+        	self.state.quicksearchResults = data['items'];
+        	$.each(self.state.quicksearchResults, function(itemIdx, item) {
+        		console.log(item)
+        		// make text safe by escaping it
+        		var text = $('<div>').text(item['text']).html();
+        		$.each(self.state.query.split(' '), function(queryTermIdx, queryTerm) {
+        			text = util.iReplace(text, queryTerm, '<b>$1</b>');
+        		});
+    			item['text'] = text;
+        	});
+			self.render();
+        }
     },
     
-    
+    handleError: function (message) {
+    	var self = this;
+    	util.log('# Error during quicksearch request!');
+    	//self.showErrorMessage();
+    },
 
 });

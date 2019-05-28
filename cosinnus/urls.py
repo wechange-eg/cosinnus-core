@@ -102,7 +102,7 @@ urlpatterns = [
     url(r'^select2/', include(('cosinnus.urls_select2', 'select2'), namespace='select2')),
 ]
 
-if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(settings, 'COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY', False):
+if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False):
     urlpatterns += [
         url(r'^dashboard/$', user_dashboard.user_dashboard_view, name='user-dashboard'),
         url(r'^dashboard/api/user_groups/$', user_dashboard.api_user_groups, name='user-dashboard-api-groups'),
@@ -110,8 +110,13 @@ if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(settings, 'C
         url(r'^dashboard/api/user_typed_content/(?P<content>[^/]+)/$', user_dashboard.api_user_typed_content, name='user-dashboard-api-typed-content'),
         url(r'^dashboard/api/timeline/(?P<content>[^/]+)/$', user_dashboard.api_timeline, name='user-dashboard-api-timeline-filtered'),
         url(r'^dashboard/api/timeline/$', user_dashboard.api_timeline, name='user-dashboard-api-timeline'),
-        
     ]
+
+if getattr(settings, 'COSINNUS_USE_V2_NAVBAR', False) or getattr(settings, 'COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY', False):
+    urlpatterns += [
+        url(r'^search/api/quicksearch/$', search.api_quicksearch, name='quicksearch-api'),
+    ]
+
 
 
 # some user management not allowed in integrated mode and sso-mode

@@ -9,7 +9,7 @@
 	p {
 		margin: 9px 0;
 	} 
-	a {
+	a:not(.no-select) {
 		cursor: pointer;
 	}
 	
@@ -139,6 +139,10 @@
 			}
 			.right-side-annotation {
 				margin-right: 15px;
+				i.fas {
+					margin-right: 4px;
+					font-size: 14px;
+				}
 			}
 			/** 
 				Full width li with aligned items.

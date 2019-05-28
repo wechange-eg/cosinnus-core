@@ -147,15 +147,17 @@ api_user_liked_ideas = LikedIdeasWidgetView.as_view()
 class ModelRetrievalMixin(object):
     """ Mixin for all dashboard views requiring content data """
     
-    def fetch_queryset_for_user(self, model, user, sort_key=None, only_mine=True):
+    def fetch_queryset_for_user(self, model, user, sort_key=None, only_mine=True, current_only=True):
         """ Retrieves a queryset of sorted content items for a user, for a given model.
-            @param model: An actual model. Supported are all `BaseTaggableObjectModel`s,
+            @param model: An actual model class. Supported are all `BaseTaggableObjectModel`s,
                 `CosinnusIdea`, and `postman.Message`
             @param user: Querysets are filtered by view permission for this user
             @param sort_key: (optional) the key for the `order_by` clause for the queryset
             @param only_mine: if True, will only show objects that belong to groups or projects
                 the `user` is a member of. 
                 If False, will include all visible items in this portal for the user. 
+            @param current_only: if True, will only retrieve current items (ie, upcoming events) 
+                TODO: is this correct?
         """
         
         ct = ContentType.objects.get_for_model(model)
@@ -166,13 +168,15 @@ class ModelRetrievalMixin(object):
         if BaseHierarchicalTaggableObjectModel in inspect.getmro(model):
             queryset = model._default_manager.filter(is_container=False)
             queryset = exclude_special_folders(queryset)
-        elif model_name == 'cosinnus_event.Event':
+        elif model_name == 'cosinnus_event.Event' and current_only:
             queryset = model.objects.all_upcoming()
         elif model is CosinnusIdea or BaseTaggableObjectModel in inspect.getmro(model):
             queryset = model._default_manager.all()
         elif model_name == "postman.Message":
             queryset = model.objects.inbox(user)
             skip_filters = True
+        elif model is get_cosinnus_group_model() or issubclass(model, get_cosinnus_group_model()):
+            queryset = model.objects.get_queryset()
         else:
             return None
     
@@ -190,7 +194,7 @@ class ModelRetrievalMixin(object):
                 # include all other portals in pool
                 portal_list += getattr(settings, 'COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS', [])
             
-            if model is CosinnusIdea:
+            if model is CosinnusIdea or model is get_cosinnus_group_model() or issubclass(model, get_cosinnus_group_model()):
                 queryset = queryset.filter(portal__id__in=portal_list)
             else:
                 queryset = queryset.filter(group__portal__id__in=portal_list)

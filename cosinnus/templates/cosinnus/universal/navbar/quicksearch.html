@@ -2,7 +2,7 @@
 {% import "include/macros.html" as macros %}
 
 <ul class="item-list">
-	{% if query and query|length >= 2 %}
+	{% if query and query|length > 2 %}
 		{% set default_annotation %}
 			MokWi-
 			{# Translators: __INCLUDE_JS_PO__ #}
@@ -28,6 +28,13 @@
 			{% endset %}
 			{{ macros.listItem(topic_label|safe, topic_url, 'fa-filter', includeUnderdrop=true) }}
 		{% endfor %} 
+		
+		{# We use makeSafe here because we escape results' text in handleDate() #}
+		{% for item in quicksearchResults %}
+			{{ macros.listItem(item.text, item.url, item.icon, annotation=item.group, annotationIcon=item.group_icon, includeUnderdrop=true, makeSafe=true) }}
+		{% endfor %} 
+		
+		
 	{% else %}
 		{% set placeholder_label %}
 			{# Translators: __INCLUDE_JS_PO__ #}
