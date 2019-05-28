@@ -205,6 +205,8 @@ class ModelRetrievalMixin(object):
                 queryset = filter_tagged_object_queryset_for_user(queryset, user)
             
             if sort_key:
+                queryset = queryset.order_by(sort_key)
+            else:
                 queryset = queryset.order_by('-created')
         return queryset
     
@@ -258,7 +260,7 @@ class TimelineView(ModelRetrievalMixin, View):
     content_types = ['polls', 'todos', 'files', 'pads', 'ideas', 'events', 'notes',]
     
     # the key by which the timeline stream is ordered. must be present on *all* models
-    sort_key = '-created' # TODO: add "last_activity" to BaseTaggableModel!
+    sort_key = '-last_action'
     
     page_size = None
     default_page_size = 10

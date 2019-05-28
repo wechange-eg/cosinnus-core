@@ -264,9 +264,15 @@ class CosinnusIdea(IndexingUtilsMixin, LikeableObjectMixin, models.Model):
             media_tag = get_tag_object_model()._default_manager.create()
             self.media_tag = media_tag
         
+        # set portal to current
         if created and not self.portal:
-            # set portal to current
             self.portal = CosinnusPortal.get_current()
+            
+        # set last action timestamp
+        if not self.last_action:
+            self.last_action = self.created
+        if not self.last_action_user:
+            self.last_action_user = self.creator
         
         super(CosinnusIdea, self).save(*args, **kwargs)
         
@@ -292,6 +298,15 @@ class CosinnusIdea(IndexingUtilsMixin, LikeableObjectMixin, models.Model):
     def delete(self, *args, **kwargs):
         self._clear_cache(slug=self.slug)
         super(CosinnusIdea, self).delete(*args, **kwargs)
+        
+    def update_last_action(self, last_action_dt, last_action_user=None, save=True):
+        """ Sets the `last_action` timestamp which is used for sorting items for
+            timely relevance to show the users in their timelines or similar. """
+        self.last_action = last_action_dt
+        if last_action_user:
+            self.last_action_user = last_action_user
+        if save:
+            self.save()
 
     @classmethod
     def _clear_cache(self, slug=None, slugs=None):

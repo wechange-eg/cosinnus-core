@@ -326,7 +326,14 @@ class BaseTaggableObjectModel(IndexingUtilsMixin, AttachableObjectModel):
         self.title = clean_single_line_text(self.title)
         if hasattr(self, '_media_tag_cache'):
             del self._media_tag_cache
+        # set last action timestamp
+        if not self.last_action:
+            self.last_action = self.created
+        if not self.last_action_user:
+            self.last_action_user = self.creator
+            
         super(BaseTaggableObjectModel, self).save(*args, **kwargs)
+        
         if not getattr(self, 'media_tag', None):
             self.media_tag = get_tag_object_model().objects.create()
             self.save()
@@ -399,7 +406,16 @@ class BaseTaggableObjectModel(IndexingUtilsMixin, AttachableObjectModel):
                                              {'tag_object': tag_object, 'domain': CosinnusPortal.get_current().get_domain()})
             content_snippets.append(mark_safe(location_html))
         return content_snippets
-
+    
+    def update_last_action(self, last_action_dt, last_action_user=None, save=True):
+        """ Sets the `last_action` timestamp which is used for sorting items for
+            timely relevance to show the users in their timelines or similar. """
+        self.last_action = last_action_dt
+        if last_action_user:
+            self.last_action_user = last_action_user
+        if save:
+            self.save()
+        
 
 class BaseHierarchicalTaggableObjectModel(BaseTaggableObjectModel):
     """
