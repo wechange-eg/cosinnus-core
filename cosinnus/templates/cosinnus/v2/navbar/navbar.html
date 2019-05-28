@@ -7,7 +7,7 @@
 	            <a class="nav-button" rel="toggle" role="button" title="{% trans "Menu" %}" 
 			    		aria-expanded="false" aria-controls="main-collapse"
 			    		data-toggle="collapse" data-target="#main-collapse"> 
-		    		<i class="fa fa-fw fa-bars"></i>
+		    		<i class="fas fa-fw fa-bars"></i>
 	    		</a>
     		{% endif %}
             <a class="nav-button" href="{% url "cosinnus:user-dashboard" %}" title="{% trans "Dashboard" %}">
@@ -29,13 +29,13 @@
     <div class="nav-section nav-search" id="nav-quicksearch">
     	<div class="">
 			<a class="nav-button nav-button-search show-active" title="{% trans "Search" %}"> 
-				<i class="fa fa-fw fa-search"></i>
+				<i class="fas fa-fw fa-search"></i>
 			</a>
 		</div>
 		<input id="search" class="nav-search-box" name="search" title="{% trans "Quick Search" %}" autocomplete="off">
 		<div class="">
 			<a class="nav-button nav-button-search show-inactive" title="{% trans "Search" %}"> 
-				<i class="fa fa-fw fa-search"></i>
+				<i class="fas fa-fw fa-search"></i>
 			</a>
 		</div>
 		<div class="nav-quicksearch-results nav-dropdown" id="nav-quicksearch-results">
@@ -57,19 +57,19 @@
 		<a class="nav-button" rel="toggle" role="button" title="{% trans "Create content" %}" 
 		    		aria-expanded="false" aria-controls="create-menu-collapse"
 		    		data-toggle="collapse" data-target="#create-menu-collapse"> 
-    		<i class="fa fa-fw fa-plus"></i>
+    		<i class="fas fa-fw fa-plus"></i>
 		</a>
 		<a class="nav-button" href="{% group_url "cosinnus:event:list" group=SETTINGS.NEWW_EVENTS_GROUP_SLUG %}" role="button" title="{% trans "Events" %}"> 
-    		<i class="fa fa-fw fa-calendar"></i>
+    		<i class="fas fa-fw fa-calendar"></i>
 		</a>
 		{% if request.user.is_authenticated %}
 			<a class="nav-button" href="{% url 'postman:inbox' %}" role="button" title="{% trans "Nachrichten" %}"> 
-	    		<i class="fa fa-fw fa-envelope"></i>
+	    		<i class="fas fa-fw fa-envelope"></i>
 			</a>
 			<a class="nav-button" rel="toggle" role="button" title="{% trans "Menu" %}" 
 			    		aria-expanded="false" aria-controls="user-menu-collapse"
 			    		data-toggle="collapse" data-target="#user-menu-collapse"> 
-	    		<i class="fa fa-fw fa-user"></i>
+	    		<i class="fas fa-fw fa-user"></i>
 			</a>
 		{% else %}
 			<a class="nav-button nav-header-textlink" rel="toggle" role="button" title="{% trans "Change language" %}" 

@@ -19,7 +19,7 @@
 				
 				<div class="comment-dropdown v2-dropdown dropdown">
 			    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-			            <i class="fa fa-ellipsis-h"></i>
+			            <i class="fas fa-ellipsis-h"></i>
 			        </a>
 			        <ul class="dropdown-menu">
 			        	{% if user|has_write_access:comment %}
@@ -78,7 +78,7 @@
 	
 	<div class="timeline-item-row comment-form flex-row">
 		<div class="">
-			<i class="fa fa-fw fa-pencil"></i>
+			<i class="fas fa-fw fa-pencil-alt"></i>
 		</div>
 		<div class="flex-grow">
 			<form action="{{ item.get_comment_post_url }}" method="post">

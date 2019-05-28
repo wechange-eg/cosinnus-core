@@ -113,7 +113,7 @@
 			color: @navbar-active-text-color;
 			padding: 0 15px;
 			
-			i.fa {
+			i.fas {
 				color: @navbar-active-text-color;
 				font-size: 16px;
 			}
@@ -121,7 +121,7 @@
 				z-index: 3;
 				margin: 0 8px;
 			}
-			.item-icon.item-icon-offset i.fa {
+			.item-icon.item-icon-offset i.fas {
 				vertical-align: middle;
 			}
 			.item-text {
@@ -148,6 +148,7 @@
 				position: fixed;
 				left: 0;
 				width: 100%;
+				margin: 0;
 				background-color: @background-color-secondary;
 				z-index: 2;
 				&:after {
@@ -176,7 +177,7 @@
 			&:hover, &:hover .li-underdrop {
 				background-color: @text-highlight-color;
 				text-decoration: none;
-				&, i.fa {
+				&, i.fas {
 					color: @background-color;
 				}
 			}
@@ -240,12 +241,12 @@
 .v2-dropdown {
 	z-index: 4;
 	
-	&, i.fa {
+	&, i.fas {
 		color: @text-color-extra-pale;
 	}
 	a.dropdown-toggle {
 		padding: 10px;
-		&:hover, &:hover i.fa {
+		&:hover, &:hover i.fas {
 			color: @text-highlight-color;
 		}
 	}

@@ -4,7 +4,7 @@
 
 	<div class="header-dropdown v2-dropdown dropdown">
     	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-ellipsis-h"></i>
+            <i class="fas fa-ellipsis-h"></i>
         </a>
         <ul class="dropdown-menu">
         	{% if user|has_write_access:item %}
@@ -62,7 +62,7 @@
 				</a>
 			{% elif item.group %}
 				<a href="{{ item.group.get_absolute_url }}">
-					<i class="fa fa-fw {% if item.group.type == 0 %}fa-group{% else %}fa-sitemap{% endif %}">
+					<i class="fas fa-fw {% if item.group.type == 0 %}fa-group{% else %}fa-sitemap{% endif %}">
 					</i><span>{{ item.group.name }}</span>
 				</a>
 			{% else %}
@@ -75,7 +75,7 @@
 	
 	<div class="icon {% block icon_class %}{% if item.media_tag.location %}icon-padded{% endif %} {% endblock %}">
 		<a href="{{ item.get_absolute_url }}">
-			<i class="fa fa-fw {% block icon %}{% endblock %}"></i>
+			<i class="fas fa-fw {% block icon %}{% endblock %}"></i>
 		</a>
 	</div>
 	
@@ -134,7 +134,7 @@
 						{% with comment_count=comments.count %}
 							{% if comment_count > 0 %}
 								<span>
-									<i class="fa fa-fw fa-comments"></i>
+									<i class="fas fa-fw fa-comments"></i>
 									{{ comment_count }}
 								</span>
 							{% endif %}
@@ -142,13 +142,13 @@
 					{% endif %}
 					{% if topics %}
 						<span>
-							<i class="fa fa-fw fa-lightbulb-o"></i>
+							<i class="fas fa-fw fa-lightbulb-o"></i>
 							{% render_cosinnus_topics topics %}
 						</span>
 					{% endif %}
 					{% if tags %}
 						<span>
-							<i class="fa fa-fw fa-tag"></i>
+							<i class="fas fa-fw fa-tag"></i>
 							{% for tag in tags %}
 								{{ tag }}{% if not forloop.last %}, {% endif %}
 							{% endfor %}
