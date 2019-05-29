@@ -21,6 +21,7 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.utils.deprecation import MiddlewareMixin
 from django.utils.http import is_safe_url
+from django.contrib.redirects.middleware import RedirectFallbackMiddleware
 
 
 logger = logging.getLogger('cosinnus')
@@ -230,3 +231,11 @@ class ConditionalRedirectMiddleware(MiddlewareMixin):
                     if settings_redirect[1]:
                         messages.success(request, _(settings_redirect[1]))
                     return HttpResponseRedirect(settings_redirect[0])
+                
+                
+class MovedTemporarilyRedirectFallbackMiddleware(RedirectFallbackMiddleware):
+    """ The default django redirect middleware, but using 302 Temporary instead
+        of 301 Permanent redirects. """
+    
+    response_redirect_class = HttpResponseRedirect
+    

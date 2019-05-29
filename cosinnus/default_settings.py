@@ -83,6 +83,7 @@ STATICFILES_FINDERS = (
 MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'cosinnus.core.middleware.cosinnus_middleware.MovedTemporarilyRedirectFallbackMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -153,6 +154,7 @@ def compile_installed_apps(internal_apps=[]):
         'django.contrib.contenttypes',
         'django.contrib.humanize',
         'django.contrib.messages',
+        'django.contrib.redirects',
         'django.contrib.sessions',
         'django.contrib.sites',
         'django.contrib.staticfiles',

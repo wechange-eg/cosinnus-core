@@ -104,7 +104,7 @@ setup(
         'six==1.11.0',
         'sqlparse==0.1.10',
         'python-dateutil==2.4.1',
-        'urllib3==1.24.1',
+        'urllib3==1.24.2',
         'pytz==2018.5',
         'python-memcached==1.59',
         'qrcode==6.1',
