@@ -262,7 +262,11 @@ class WelcomeSettingsView(RequireLoggedInMixin, TemplateView):
                 self.media_tag.save()
         
         messages.success(request, self.message_success)
-        redirect_url = get_cosinnus_group_model().objects.get(slug=getattr(settings, 'NEWW_FORUM_GROUP_SLUG')).get_absolute_url() if hasattr(settings, 'NEWW_FORUM_GROUP_SLUG') else '/'
+        if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or \
+            (getattr(settings, 'COSINNUS_USE_V2_DASHBOARD_ADMIN_ONLY', False) and self.request.user.is_superuser):
+            redirect_url = reverse('cosinnus:user-dashboard')
+        else:
+            redirect_url = get_cosinnus_group_model().objects.get(slug=getattr(settings, 'NEWW_FORUM_GROUP_SLUG')).get_absolute_url() if hasattr(settings, 'NEWW_FORUM_GROUP_SLUG') else '/'
         redirect_url = redirect_next_or(self.request, redirect_url)
         return HttpResponseRedirect(redirect_url)
     

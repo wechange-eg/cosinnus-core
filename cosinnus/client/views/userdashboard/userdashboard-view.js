@@ -97,6 +97,7 @@ module.exports = BaseView.extend({
     	Promise.all(rightBarPromises).then(function(){
         	$.cosinnus.renderMomentDataDate();
         	self.sortRightBarWidgets();
+        	self.manageWidgetConditions();
     		self.$rightBar.show();
     		util.log('# #### showing right bar.')
     	});
@@ -106,6 +107,15 @@ module.exports = BaseView.extend({
     	this.$rightBar.find('div.widget-content').sortElements(function(a, b){
     		return $(a).attr('data-sort-index') > $(b).attr('data-sort-index') ? 1 : -1;
     	});
+    },
+    
+    /** After empty widgets have removed themselves, will display the "new users"
+     *  info box if too or none few are shown */
+    manageWidgetConditions: function () {
+    	var $widgets = this.$rightBar.find('div.widget-content');
+    	if ($widgets.length < 3) {
+    		this.$rightBar.find('.widget-info-box').show();
+    	}
     },
     
     loadTimeline: function () {

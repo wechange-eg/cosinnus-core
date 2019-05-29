@@ -46,10 +46,12 @@ module.exports = BaseView.extend({
     load: function() {
     	var self = this;
     	return new Promise(function(resolve, reject) {
-    		self.loadData().then(self.thisContext(self.render)).then(function(){
-    			util.log('# ### loaded and resolving widget ' + self.widgetId);
-    			resolve();
-    		});
+    		self.loadData()
+	    		.then(self.thisContext(self.render))
+	    		.then(function(){
+	    			util.log('# ### loaded and resolving widget ' + self.widgetId);
+	    			resolve();
+	    		});
     	});
     },
     

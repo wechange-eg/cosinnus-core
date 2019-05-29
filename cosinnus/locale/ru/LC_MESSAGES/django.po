@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-27 16:45+0200\n"
+"POT-Creation-Date: 2019-05-29 16:46+0200\n"
 "PO-Revision-Date: 2019-04-11 17:13+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -919,6 +919,25 @@ msgstr "Прикрепленный объект"
 msgid "Attached objects"
 msgstr "Прикрепленные объекты"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Пользователь"
+
+#, fuzzy
+#| msgid "Microsite"
+msgid "Visited"
+msgstr "Микросайт"
+
+#, fuzzy
+#| msgid "Last edited"
+msgid "LastVisited"
+msgstr "В последний раз отредактировано"
+
+#, fuzzy
+#| msgid "Last edited"
+msgid "LastVisiteds"
+msgstr "В последний раз отредактировано"
+
 msgid "Path"
 msgstr "Путь"
 
@@ -927,10 +946,6 @@ msgstr "Отраженный объект"
 
 msgid "Reflected Objects"
 msgstr "Отраженные объекты"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Пользователь"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Liked"
@@ -3664,11 +3679,27 @@ msgid "Groups and Projects"
 msgstr "Созданные проекты"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid "Here you can find an overview of your Groups and Projects once you become active in one or more of them."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You can create Groups or Projects via the '+' button in the header."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I like"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You have not liked any ideas yet"
+msgid "Here you can find an overview of Ideas you have liked."
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here"
+msgstr ""
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Discover"
 msgstr ""
 
 #. Translators: __INCLUDE_JS_PO__
@@ -4018,6 +4049,9 @@ msgstr ""
 msgid "What's the latest news?"
 msgstr ""
 
+msgid "Once you get started, your recently visited Pads, Files, Events, Todos and other content will be shown here."
+msgstr ""
+
 #, fuzzy
 #| msgid "Create idea"
 msgctxt "This appears next to new items in the timeline, as in '<Jane> created a new item'"
@@ -4025,9 +4059,6 @@ msgid "created an idea"
 msgstr "Создать идею"
 
 msgid "Menu"
-msgstr ""
-
-msgid "Discover"
 msgstr ""
 
 #, fuzzy

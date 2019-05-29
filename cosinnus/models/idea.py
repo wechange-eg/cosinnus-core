@@ -190,12 +190,12 @@ class CosinnusIdea(IndexingUtilsMixin, LikeableObjectMixin, models.Model):
         auto_now=True)
     
     last_action = models.DateTimeField(
-        verbose_name=_('Last action happened'),
+        verbose_name='Last action happened',
         auto_now_add=True,
         help_text='A datetime for when a significant action last happened for this object, '\
             'which users might be interested in. I.e. new comments, special edits, etc.')
     last_action_user = models.ForeignKey(settings.AUTH_USER_MODEL,
-        verbose_name=_('Last action user'),
+        verbose_name='Last action user',
         on_delete=models.SET_NULL,
         null=True,
         related_name='+',

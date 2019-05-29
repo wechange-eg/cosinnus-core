@@ -6,7 +6,17 @@
 	{% trans "Ideas I like" %}
 {% endblock %}
 
-{% block empty_message %}
-	{# Translators: __INCLUDE_JS_PO__ #}
-	{% trans "You have not liked any ideas yet" %}
+{% block empty_content %}
+	<div class="widget-info-box no-select">
+        {# Translators: __INCLUDE_JS_PO__ #}
+		{% trans "Here you can find an overview of Ideas you have liked." %}
+		<br/>
+		<br/>
+        {# Translators: __INCLUDE_JS_PO__ #}
+		{% trans "You can create your own Ideas via the '+' button in the header or you can discover existing Ideas here" %}:
+		<a href="/map/?people=false&events=false&projects=false&groups=false&ideas=true">
+		    {# Translators: __INCLUDE_JS_PO__ #}
+			{% trans "Discover" %}
+		</a>
+	</div>
 {% endblock %}

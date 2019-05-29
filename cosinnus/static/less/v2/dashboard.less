@@ -29,6 +29,20 @@
 		border-bottom: 1px solid @pale-border-color;
 		padding: 10px 0px;
 	}
+	.widget-info-box {
+		padding: 0 20px 20px 20px;
+		line-height: 20px;
+		&.no-header {
+			padding: 20px;
+		}
+		a {
+			color: @text-color;
+			text-decoration: underline;
+			&:hover, &:active {
+				color: @text-highlight-color;
+			}
+		}
+	}
 	.square-widget {
 		position: relative;
 		.square-content {

@@ -8,7 +8,7 @@ module.exports = DelegatedWidgetView.extend({
 	app: null,
     template: require('userdashboard/typed-content-widget'),
     
-    fetchURL: '/dashboard/api/user_typed_content/', // overridden for subview
+    fetchURL: '/dashboard/api/user_typed_content/recent/', // overridden for subview
     
     // will be set to self.options during initialization
     defaults: {
@@ -53,7 +53,12 @@ module.exports = DelegatedWidgetView.extend({
         DelegatedWidgetView.prototype.render.call(self);
         
         util.log('# ## Rendered widget ' + self.widgetId);
-    			
+    	
+        // remove widget if empty
+        if (self.widgetData && self.widgetData.items.length == 0) {
+        	self.$el.remove()
+        }
+        
         return self;
     },
     

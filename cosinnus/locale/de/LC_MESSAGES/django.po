@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-27 16:45+0200\n"
-"PO-Revision-Date: 2019-05-27 16:46+0100\n"
+"POT-Creation-Date: 2019-05-29 16:46+0200\n"
+"PO-Revision-Date: 2019-05-29 16:50+0100\n"
 "Last-Translator: Sebastian Henschel <sh@sinnwerkstatt.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -1080,6 +1080,22 @@ msgstr "Verknüpftes Objekt"
 msgid "Attached objects"
 msgstr "Verknüpftes Objekt"
 
+#. Translators: __INCLUDE_JS_PO__
+msgid "User"
+msgstr "Benutzer_in"
+
+#| msgid "Microsite"
+msgid "Visited"
+msgstr "Besucht"
+
+#| msgid "Last edited"
+msgid "LastVisited"
+msgstr "ZuletztBesucht"
+
+#| msgid "Last edited"
+msgid "LastVisiteds"
+msgstr "ZuletztBesuchte"
+
 msgid "Path"
 msgstr "Pfad"
 
@@ -1088,10 +1104,6 @@ msgstr "Reflected Object"
 
 msgid "Reflected Objects"
 msgstr "Reflected Objects"
-
-#. Translators: __INCLUDE_JS_PO__
-msgid "User"
-msgstr "Benutzer_in"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Liked"
@@ -4299,12 +4311,37 @@ msgid "Groups and Projects"
 msgstr "Gruppen und Projekte"
 
 #. Translators: __INCLUDE_JS_PO__
+msgid ""
+"Here you can find an overview of your Groups and Projects once you become "
+"active in one or more of them."
+msgstr ""
+"Hier findest du eine Übersicht über deine Gruppen und Projekte. Noch bist du "
+"in keiner Gruppe oder einem Projekt aktiv."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "You can create Groups or Projects via the '+' button in the header."
+msgstr ""
+"Du kannst eigene Gruppen oder Projekte über den '+'-Button im Header anlegen."
+
+#. Translators: __INCLUDE_JS_PO__
 msgid "Ideas I like"
 msgstr "Ideen, die mir gefallen"
 
 #. Translators: __INCLUDE_JS_PO__
-msgid "You have not liked any ideas yet"
-msgstr "Du hast noch keine Ideen geliked"
+msgid "Here you can find an overview of Ideas you have liked."
+msgstr "Hier findest du eine Übersicht über Ideen, die dir gefallen."
+
+#. Translators: __INCLUDE_JS_PO__
+msgid ""
+"You can create your own Ideas via the '+' button in the header or you can "
+"discover existing Ideas here"
+msgstr ""
+"Du kannst eigene Ideen über den '+'-Button im Header anlegen oder bestehende "
+"Ideen hier entdecken"
+
+#. Translators: __INCLUDE_JS_PO__
+msgid "Discover"
+msgstr "Entdecken"
 
 #. Translators: __INCLUDE_JS_PO__
 msgid "Only content from my Groups and Projects"
@@ -4809,7 +4846,14 @@ msgstr "Große Karte anzeigen"
 msgid "What's the latest news?"
 msgstr "Was gibt's neues?"
 
-#| msgid "created an idea"
+msgid ""
+"Once you get started, your recently visited Pads, Files, Events, Todos and "
+"other content will be shown here."
+msgstr ""
+"Hier findest du in Zukunft eine Übersicht über die von dir zuletzt genutzten "
+"Pads, Dateien, Termine, Aufgaben und andere Inhalte aus deinen Projekten und "
+"Gruppen."
+
 msgctxt ""
 "This appears next to new items in the timeline, as in '<Jane> created a new "
 "item'"
@@ -4818,9 +4862,6 @@ msgstr "hat eine Idee erstellt"
 
 msgid "Menu"
 msgstr "Menü"
-
-msgid "Discover"
-msgstr "Entdecken"
 
 msgid "Quick Search"
 msgstr "Schnellsuche"
@@ -5595,6 +5636,9 @@ msgstr ""
 
 msgid "Your changes have been saved."
 msgstr "Deine Änderungen wurden übernommen."
+
+#~ msgid "You have not liked any ideas yet"
+#~ msgstr "Du hast noch keine Ideen geliked"
 
 #~ msgid "User Dashboard"
 #~ msgstr "Mein Dashboard"

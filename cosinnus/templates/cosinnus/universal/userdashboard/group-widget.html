@@ -8,8 +8,8 @@
 
 {% block content %}
 	
-	<ul class="item-list">
-		{% if group_clusters|length > 0 %}
+	{% if group_clusters|length > 0 %}
+		<ul class="item-list">
 			{% for cluster in group_clusters %}
 				{% for item in cluster %}
 					{% if item.hasmorelink %}
@@ -32,15 +32,16 @@
 					</li>
 				{% endif %}
 			{% endfor %}
-		{% else %}
-			<li>
-				<span class="list-item list-item-link list-item-center no-select" href="#" role="button" titledby=".item-text"> 
-		    		<div class="item-text">
-		                {# Translators: __INCLUDE_JS_PO__ #}
-						{% trans "You are not in any groups or projects yet" %}
-		    		</div>
-				</span>
-			</li>
-		{% endif %}
-	</ul>
+		</ul>
+	{% else %}
+		<div class="widget-info-box no-select">
+            {# Translators: __INCLUDE_JS_PO__ #}
+			{% trans "Here you can find an overview of your Groups and Projects once you become active in one or more of them." %}
+			<br/>
+			<br/>
+            {# Translators: __INCLUDE_JS_PO__ #}
+			{% trans "You can create Groups or Projects via the '+' button in the header." %}
+		</div>
+	{% endif %}
+	
 {% endblock %}

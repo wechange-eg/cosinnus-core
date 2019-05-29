@@ -34,7 +34,8 @@ from django.core.cache import cache
 from django.contrib.contenttypes.fields import GenericRelation, GenericForeignKey
 from django.utils.http import urlencode
 from django.core.validators import validate_comma_separated_integer_list
-
+from django.contrib.postgres.fields.jsonb import JSONField
+from annoying.functions import get_object_or_None
 
 
 
@@ -264,8 +265,64 @@ class AttachableObjectModel(models.Model):
             Usuable to compare equality of attached files to objects. """
         return tuple(sorted(list(self.attached_objects.all().values_list('id', flat=True))))
 
+
 @python_2_unicode_compatible
-class BaseTaggableObjectModel(IndexingUtilsMixin, AttachableObjectModel):
+class LastVisitedObject(models.Model):
+    """
+    A generic object to serve as a datastore for an object a user has visited recently.
+    """
+
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    target_object = GenericForeignKey('content_type', 'object_id')
+    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+        verbose_name=_('User'),
+        on_delete=models.CASCADE,
+        null=True,
+        related_name='lastvisited')
+    
+    visited = models.DateTimeField(
+        verbose_name=_('Visited'),
+        auto_now_add=True)
+    
+    item_data = JSONField(
+        'Data',
+        help_text='Stores a JSON representation of the target object, as converted by a `DashboardItem`.')
+
+    class Meta(object):
+        app_label = 'cosinnus'
+        ordering = ('visited',)
+        unique_together = (('content_type', 'object_id', 'user'),)
+        verbose_name = _('LastVisited')
+        verbose_name_plural = _('LastVisiteds')
+
+    def __str__(self):
+        return '<LastVisited: %s::%s::%s>' % (self.content_type, self.object_id, self.user.username)
+
+    
+class LastVisitedMixin(object):
+    """ Mixin for models that can be marked as last-visited """
+    
+    def mark_visited(self, user):
+        """ Creates or updates a `LastVisited` object for this object and the given user """
+        if not user.is_authenticated:
+            return now
+        
+        from cosinnus.models.user_dashboard import DashboardItem
+        ct = ContentType.objects.get_for_model(self)
+        visit = get_object_or_None(LastVisitedObject, content_type=ct, object_id=self.id, user=user)
+        if visit is None:
+            visit = LastVisitedObject(content_type=ct, object_id=self.id, user=user)
+        
+        visit.visited = now()
+        visit.item_data = DashboardItem(self)
+        visit.save()
+        return visit
+
+
+@python_2_unicode_compatible
+class BaseTaggableObjectModel(LastVisitedMixin, IndexingUtilsMixin, AttachableObjectModel):
     """
     Represents the base for all cosinnus main models. Each inheriting model
     has a set of simple ``tags`` which are just strings. Additionally each
@@ -297,12 +354,12 @@ class BaseTaggableObjectModel(IndexingUtilsMixin, AttachableObjectModel):
         auto_now=True)
     
     last_action = models.DateTimeField(
-        verbose_name=_('Last action happened'),
+        verbose_name='Last action date',
         auto_now_add=True,
         help_text='A datetime for when a significant action last happened for this object, '\
             'which users might be interested in. I.e. new comments, special edits, etc.')
     last_action_user = models.ForeignKey(settings.AUTH_USER_MODEL,
-        verbose_name=_('Last action user'),
+        verbose_name='Last action user',
         on_delete=models.SET_NULL,
         null=True,
         related_name='+',
@@ -658,7 +715,7 @@ class LikeableObjectMixin(models.Model):
             the automatic follow modal popup `confirm_likefollow_modal.html` """
         return self.get_absolute_url() + '?%s' % urlencode(self._get_likefollow_url_params('follow'))
     
-
+    
 def ensure_container(sender, **kwargs):
     """ Creates a root container instance for all hierarchical objects in a newly created group """
     created = kwargs.get('created', False)

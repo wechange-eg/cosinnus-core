@@ -24,7 +24,7 @@ from cosinnus.models.group_extra import CosinnusProject, CosinnusSociety
 from cosinnus.models.idea import CosinnusIdea
 from cosinnus.models.map import SEARCH_MODEL_NAMES_REVERSE
 from cosinnus.models.tagged import LikeObject, BaseTaggableObjectModel, \
-    BaseHierarchicalTaggableObjectModel, BaseTagObject
+    BaseHierarchicalTaggableObjectModel, BaseTagObject, LastVisitedObject
 from cosinnus.models.user_dashboard import DashboardItem
 from cosinnus.utils.dates import timestamp_from_datetime, \
     datetime_from_timestamp
@@ -216,11 +216,16 @@ class ModelRetrievalMixin(object):
     
 
 class TypedContentWidgetView(ModelRetrievalMixin, BaseUserDashboardWidgetView):
-    """ Shows all unlimited (for now) ideas the user likes. """
+    """ Shows BaseTaggable content for the user """
     
-    model = None 
+    model = None
+    # if True: will show only content that the user has recently visited
+    # if False: will show all of the users content, sorted by creation date
+    show_recent = False
     
     def get(self, request, *args, **kwargs):
+        self.show_recent = kwargs.pop('show_recent', False)
+        
         content = kwargs.pop('content', None)
         if not content:
             return HttpResponseBadRequest('No content type supplied')
@@ -231,18 +236,27 @@ class TypedContentWidgetView(ModelRetrievalMixin, BaseUserDashboardWidgetView):
         return super(TypedContentWidgetView, self).get(request, *args, **kwargs)
     
     def get_data(self, **kwargs):
-        only_mine = True
-        # TODO "last-visited" ordering!
-        sort_key = '-created' 
-        
-        queryset = self.fetch_queryset_for_user(self.model, self.request.user, sort_key=sort_key, only_mine=only_mine)
-        if queryset is None:
-            return {'items':[], 'widget_title': '(error: %s)' % self.model.__name__}
-        
-        # TODO real limiting
-        queryset = queryset[:3]
-        
-        items = [DashboardItem(item, user=self.request.user) for item in queryset]
+        if self.show_recent:
+            # showing "last-visited" content, ordering by visit datetime
+            ct = ContentType.objects.get_for_model(self.model)
+            queryset = LastVisitedObject.objects.filter(content_type=ct, user=self.request.user)
+            queryset = queryset.order_by('-visited')
+            
+            # TODO real limiting
+            queryset = queryset[:3]
+            # the `item_data` field already contains the JSON of `DashboardItem`
+            items = list(queryset.values_list('item_data', flat=True))
+        else:
+            # all content, ordered by creation date
+            only_mine = True
+            sort_key = '-created' 
+            queryset = self.fetch_queryset_for_user(self.model, self.request.user, sort_key=sort_key, only_mine=only_mine)
+            if queryset is None:
+                return {'items':[], 'widget_title': '(error: %s)' % self.model.__name__}
+            
+            # TODO real limiting
+            queryset = queryset[:3]
+            items = [DashboardItem(item, user=self.request.user) for item in queryset]
             
         return {
             'items': items,

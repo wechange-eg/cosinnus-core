@@ -25,26 +25,26 @@
 	{% else %}
 	
 		{% block content %}
-			<ul class="item-list">
-				{% if items|length > 0 %}
+			{% if items|length > 0 %}
+				<ul class="item-list">
 					{% for item in items %}
 						{{ macros.listItem(item.text, item.url, item.icon, item.subtext, is_emphasized=item.is_emphasized) }}
 					{% endfor %}
-				{% else %}
-					{% block empty_content %}
-						<li>
-							<span class="list-item list-item-link list-item-center no-select" href="#" role="button" titledby=".item-text"> 
-					    		<div class="item-text">
-					                {% block empty_message %}
-						                {# Translators: __INCLUDE_JS_PO__ #}
-										{% trans "There are no items yet" %}
-									{% endblock %}
-					    		</div>
-							</span>
-						</li>
-					{% endblock %}
-				{% endif %}
-			</ul>
+				</ul>
+			{% else %}
+				{% block empty_content %}
+					<li>
+						<span class="list-item list-item-link list-item-center no-select" href="#" role="button" titledby=".item-text"> 
+				    		<div class="item-text">
+				                {% block empty_message %}
+					                {# Translators: __INCLUDE_JS_PO__ #}
+									{% trans "There are no items yet" %}
+								{% endblock %}
+				    		</div>
+						</span>
+					</li>
+				{% endblock %}
+			{% endif %}
 		{% endblock %}
 		
 	{% endif %}

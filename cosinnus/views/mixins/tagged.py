@@ -8,7 +8,7 @@ from os.path import basename, dirname
 import urllib.request, urllib.parse, urllib.error
 
 from django.apps import apps
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ImproperlyConfigured
 from django.contrib import messages
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseRedirect
@@ -24,6 +24,10 @@ from cosinnus.utils.permissions import check_object_write_access, filter_tagged_
 from cosinnus.models.tagged import BaseHierarchicalTaggableObjectModel
 from django.contrib.auth.models import AnonymousUser
 from cosinnus.utils.functions import resolve_attributes
+from cosinnus.conf import settings
+
+import logging
+logger = logging.getLogger('cosinnus')
 
 
 class TaggedListMixin(object):
@@ -499,4 +503,22 @@ class EditViewWatchChangesMixin():
         ret = super(EditViewWatchChangesMixin, self).forms_invalid(form, inlines)
         self.edit_successful = False
         return ret
+
+
+class RecordLastVisitedMixin(object):
+    """ Mixin for views of models that use the `LastVisitedMixin`.
+        While this view is used, any successful call to `render_to_response`
+        will cause a LastVisited record to be created for the  """
+    
+    def render_to_response(self, *args, **kwargs):
+        response = super(RecordLastVisitedMixin, self).render_to_response(*args, **kwargs)
+        self.mark_visited()
+        return response
+    
+    def mark_visited(self):
+        if settings.DEBUG and getattr(self, 'object', None) is None:
+            raise ImproperlyConfigured('A view with `RecordLastVisitedMixin`' +\
+                'was trying to log a LastVisit, but no `self.object` could be found!')
+        if self.request.user.is_authenticated and getattr(self, 'object', None) is not None:
+            self.object.mark_visited(self.request.user)
     
