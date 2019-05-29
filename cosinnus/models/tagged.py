@@ -281,6 +281,8 @@ class LastVisitedObject(models.Model):
         on_delete=models.CASCADE,
         null=True,
         related_name='lastvisited')
+    portal = models.ForeignKey('cosinnus.CosinnusPortal', verbose_name=_('Portal'), related_name='visits', 
+        null=False, blank=False, default=1, on_delete=models.CASCADE) # port_id 1 is created in a datamigration!
     
     visited = models.DateTimeField(
         verbose_name=_('Visited'),
@@ -310,10 +312,11 @@ class LastVisitedMixin(object):
             return now
         
         from cosinnus.models.user_dashboard import DashboardItem
+        from cosinnus.models.group import CosinnusPortal
         ct = ContentType.objects.get_for_model(self)
-        visit = get_object_or_None(LastVisitedObject, content_type=ct, object_id=self.id, user=user)
+        visit = get_object_or_None(LastVisitedObject, content_type=ct, object_id=self.id, user=user, portal=CosinnusPortal.get_current())
         if visit is None:
-            visit = LastVisitedObject(content_type=ct, object_id=self.id, user=user)
+            visit = LastVisitedObject(content_type=ct, object_id=self.id, user=user, portal=CosinnusPortal.get_current())
         
         visit.visited = now()
         visit.item_data = DashboardItem(self)

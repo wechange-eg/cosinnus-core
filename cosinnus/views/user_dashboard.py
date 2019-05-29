@@ -239,7 +239,7 @@ class TypedContentWidgetView(ModelRetrievalMixin, BaseUserDashboardWidgetView):
         if self.show_recent:
             # showing "last-visited" content, ordering by visit datetime
             ct = ContentType.objects.get_for_model(self.model)
-            queryset = LastVisitedObject.objects.filter(content_type=ct, user=self.request.user)
+            queryset = LastVisitedObject.objects.filter(content_type=ct, user=self.request.user, portal=CosinnusPortal.get_current())
             queryset = queryset.order_by('-visited')
             
             # TODO real limiting
