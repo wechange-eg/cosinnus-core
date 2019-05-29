@@ -147,21 +147,28 @@ api_user_liked_ideas = LikedIdeasWidgetView.as_view()
 class ModelRetrievalMixin(object):
     """ Mixin for all dashboard views requiring content data """
     
-    def fetch_queryset_for_user(self, model, user, sort_key=None, only_mine=True, current_only=True):
+    def fetch_queryset_for_user(self, model, user, sort_key=None, only_mine=True, only_mine_strict=True, current_only=True):
         """ Retrieves a queryset of sorted content items for a user, for a given model.
             @param model: An actual model class. Supported are all `BaseTaggableObjectModel`s,
                 `CosinnusIdea`, and `postman.Message`
             @param user: Querysets are filtered by view permission for this user
             @param sort_key: (optional) the key for the `order_by` clause for the queryset
             @param only_mine: if True, will only show objects that belong to groups or projects
-                the `user` is a member of. 
+                the `user` is a member of, including the Forum, and including Ideas.
                 If False, will include all visible items in this portal for the user. 
+            @param only_mine_strict: If set to True along with `only_mine`, really only objects
+                from the user's groups and projects will be returned, *excluding* the Forum and
+                Ideas.
             @param current_only: if True, will only retrieve current items (ie, upcoming events) 
                 TODO: is this correct?
         """
         
         ct = ContentType.objects.get_for_model(model)
         model_name = '%s.%s' % (ct.app_label, ct.model_class().__name__)
+        
+        # ideas are excluded in strict mode
+        if model is CosinnusIdea and only_mine and only_mine_strict:
+            return model.objects.none()
         
         queryset = None
         skip_filters = False
@@ -188,8 +195,8 @@ class ModelRetrievalMixin(object):
                 mixin = MixReflectedObjectsMixin()
                 queryset = mixin.mix_queryset(queryset, model, None, user)
             
-            
-            portal_list = [CosinnusPortal.get_current().id]
+            portal_id = CosinnusPortal.get_current().id
+            portal_list = [portal_id]
             if False:
                 # include all other portals in pool
                 portal_list += getattr(settings, 'COSINNUS_SEARCH_DISPLAY_FOREIGN_PORTALS', [])
@@ -199,6 +206,14 @@ class ModelRetrievalMixin(object):
             else:
                 queryset = queryset.filter(group__portal__id__in=portal_list)
                 user_group_ids = get_cosinnus_group_model().objects.get_for_user_pks(user)
+                
+                # in strict mode, filter any content from the default groups as well
+                if only_mine and only_mine_strict:
+                    exclude_slugs = getattr(settings, 'NEWW_DEFAULT_USER_GROUPS', [])
+                    if exclude_slugs:
+                        exclude_groups = get_cosinnus_group_model().objects.get_cached(slugs=exclude_slugs, portal_id=portal_id)
+                        exclude_group_ids = [group.id for group in exclude_groups]
+                        user_group_ids = [group_id for group_id in user_group_ids if group_id not in exclude_group_ids]
                 filter_q = Q(group__pk__in=user_group_ids)
                 # if the switch is on, also include public posts from all portals
                 if not only_mine:
@@ -393,7 +408,8 @@ class TimelineView(ModelRetrievalMixin, View):
     
     def _get_queryset_for_model(self, model):
         """ Returns a *sorted* queryset of items of a model for a user """
-        queryset = self.fetch_queryset_for_user(model, self.user, sort_key=self.sort_key, only_mine=self.only_mine)
+        # the only_mine mode here is a only_mine_strict!
+        queryset = self.fetch_queryset_for_user(model, self.user, sort_key=self.sort_key, only_mine=self.only_mine, only_mine_strict=self.only_mine)
         if queryset is None:
             if settings.DEBUG:
                 raise ImproperlyConfigured('No queryset could be matched for model "%s"' % model)
