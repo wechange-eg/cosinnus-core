@@ -5,14 +5,14 @@
 
 .v2-dashboard {
 	/** dashboard is hidden until all html is loaded to stop flickering */
-	&.loading {
-		opacity: 0; 
-	}
-	
 	display: flex;
 	margin-top: 50px;
 	width: 100%;
 	background-color: @background-color-secondary;
+	
+	&.loading {
+		opacity: 0; 
+	}
 	
 	.dashboard-left-bar, .dashboard-right-bar {
 		background-color: @background-color-secondary;
@@ -95,6 +95,19 @@
 		a {
 			color: @text-color;
 			text-decoration: underline;
+		}
+	}
+	.dashboard-welcome-frame {
+		padding: 15px 30px 10px 30px;
+		border-bottom: 1px solid @border-color;
+		position: relative;
+		.description {
+			cursor: default;
+		}
+		.aside-link {
+			position: absolute;
+		    right: 30px;
+		    margin-top: 15px;
 		}
 	}
 	.dashboard-news-create-frame {
@@ -206,18 +219,7 @@
 	.timeline-root {
 		position: relative;
 	}
-	.timeline {
-	
-	}
-	.timeline-item {
-		padding: 20px;
-		border-bottom: 1px solid @medium-border-color;
-		
-		/** Colors */
-		
-		.highlighted-text {
-			color: @text-highlight-color;
-		}
+	.dashboard-center-bar {
 		a {
 			color: @text-color;
 			font-weight: bold;
@@ -232,6 +234,24 @@
 		.pale-color, .pale-color a {
 			color: @text-color-pale;
 			font-weight: normal;
+		}
+		a.pale-with-highlight:hover,
+		a.pale-with-highlight:active {
+			text-decoration: none;
+			color: @text-highlight-color;
+		}
+	}
+	.timeline {
+	
+	}
+	.timeline-item {
+		padding: 20px;
+		border-bottom: 1px solid @medium-border-color;
+		
+		/** Colors */
+		
+		.highlighted-text {
+			color: @text-highlight-color;
 		}
 		
 		.timeline-item-row {
