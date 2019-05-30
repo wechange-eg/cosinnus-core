@@ -187,7 +187,10 @@
 		display: block;
 	}
 	.nav-column {
-		flex: 1 1 0;
+		width: 33%;
+		&:nth-child(2) {
+			width: 34%;
+		}
 		&:not(:last-of-type) {
 			border-right: 1px solid @border-color;
 		}
@@ -285,6 +288,7 @@
 			flex-direction: column;
 		}
 		.nav-column {
+			width: 100%;
 			&:not(:last-of-type) {
 				border-right: none;
 				border-bottom: 1px solid @border-color;

@@ -1157,7 +1157,8 @@
 		truncatedTextfield : function() {
 			$('.truncated-textfield:not(.truncated-textfield-applied)').each(function() {
 				var field = this; 
-				if (field.scrollHeight > field.offsetHeight) {
+				// if the field overflows its bounds (plus a little buffer for browser-weirdness)
+				if (field.scrollHeight > field.offsetHeight + 5) { 
 					$(field).addClass('truncated-textfield-applied');
 				}
 			});
