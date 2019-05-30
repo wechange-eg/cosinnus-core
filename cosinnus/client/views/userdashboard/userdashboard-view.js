@@ -6,6 +6,7 @@ var TimelineView = require('views/userdashboard/timeline-view');
 var GroupWidgetView = require('views/userdashboard/group-widget-view');
 var IdeasWidgetView = require('views/userdashboard/ideas-widget-view');
 var TypedContentWidgetView = require('views/userdashboard/typed-content-widget-view');
+var UiPrefsView = require('views/userdashboard/ui-prefs-view');
 
 var util = require('lib/util');
 
@@ -26,6 +27,7 @@ module.exports = BaseView.extend({
     
     groupWidgetView: null,
     ideasWidgetView: null,
+    uiPrefsView: null,
     
     typedContentWidgetTypes: ['pads', 'files', 'messages', 'events', 'todos', 'polls'],
     typedContentWidgets: {},
@@ -47,6 +49,9 @@ module.exports = BaseView.extend({
         var self = this;
         self.app = app;
         BaseView.prototype.initialize.call(self, options);
+        
+        self.uiPrefsView = new UiPrefsView(self.options.uiPrefs);
+        
         self.el = '.v2-dashboard';
         self.$el = $(self.el);
         self.$el.removeClass('loading');
@@ -122,12 +127,10 @@ module.exports = BaseView.extend({
     	var self = this;
     	self.timelineView = new TimelineView({
     		el: self.$el.find('.timeline-root'),
-    	}, self.app);
+    	}, self.app, self.uiPrefsView);
     	self.timelineView.load();
     },
     
-    
-
     
     /** While we are focused, check for clicks outside to trigger closing the menu */
     checkQuickSearchFocusOut: function (event) {

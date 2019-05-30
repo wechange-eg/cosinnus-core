@@ -225,7 +225,7 @@ module.exports = BaseView.extend({
      *  whose resolve function gets passed the data */
     loadData: function(query) {
     	var self = this;
-		return new Promise(function(resolve, reject) {
+    	return new Promise(function(resolve, reject) {
 			// build URL
 			var url = self.fetchURL + '?' + $.param({'q': query});
 			self.state.currentRequest = $.ajax(url, {

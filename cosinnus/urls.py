@@ -15,7 +15,7 @@ from cosinnus.api.views import CosinnusSocietyViewSet, CosinnusProjectViewSet, \
     OrganisationViewSet, UserView
 from cosinnus.views import map, map_api, user, profile, common, widget, search, feedback, group,\
     statistics, housekeeping, facebook_integration, microsite, idea, attached_object, authentication,\
-    user_dashboard
+    user_dashboard, ui_prefs
 from cosinnus_event.api.views import EventViewSet
 from django_otp.views import LoginView
 
@@ -111,6 +111,7 @@ if getattr(settings, 'COSINNUS_USE_V2_DASHBOARD', False) or getattr(settings, 'C
         url(r'^dashboard/api/user_typed_content/recent/(?P<content>[^/]+)/$', user_dashboard.api_user_typed_content, name='user-dashboard-api-typed-content', kwargs={'show_recent':True}),
         url(r'^dashboard/api/timeline/(?P<content>[^/]+)/$', user_dashboard.api_timeline, name='user-dashboard-api-timeline-filtered'),
         url(r'^dashboard/api/timeline/$', user_dashboard.api_timeline, name='user-dashboard-api-timeline'),
+        url(r'^dashboard/api/save_ui_prefs/$', ui_prefs.api_ui_prefs, name='user-dashboard-api-ui-prefs'),
     ]
 
 if getattr(settings, 'COSINNUS_USE_V2_NAVBAR', False) or getattr(settings, 'COSINNUS_USE_V2_NAVBAR_ADMIN_ONLY', False):

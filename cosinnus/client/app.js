@@ -330,6 +330,7 @@ var App = function App () {
         		el: null,
         		topicsJson: topicsJson,
         		portalInfo: portalInfo,
+        		uiPrefs: options.ui_prefs,
         	}, 
         	self
         	).render();

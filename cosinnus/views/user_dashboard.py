@@ -36,6 +36,7 @@ from cosinnus.utils.permissions import filter_tagged_object_queryset_for_user
 from cosinnus.views.mixins.group import RequireLoggedInMixin
 from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
 from django.shortcuts import redirect
+from cosinnus.views.ui_prefs import get_ui_prefs_for_user
 
 
 logger = logging.getLogger('cosinnus')
@@ -64,7 +65,7 @@ class UserDashboardView(RequireLoggedInMixin, TemplateView):
                     raise
             
         options = {
-            
+            'ui_prefs': get_ui_prefs_for_user(self.request.user),
         }
         ctx = {
             'user_dashboard_options_json': json.dumps(options),

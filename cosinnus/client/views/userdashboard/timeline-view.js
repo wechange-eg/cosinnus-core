@@ -10,10 +10,12 @@ module.exports = BaseView.extend({
     
     fetchURL: '/dashboard/api/timeline/',
     
+    uiPrefsView: null, // set during initialization
+    
     // will be set to self.options during initialization
     defaults: {
         
-    	onlyMine: false, // todo: init from uiPrefs
+    	onlyMine: false, // inited from uiPrefs
     	
         state: {
         	loading: false, // if true, a request is currently loading
@@ -38,13 +40,13 @@ module.exports = BaseView.extend({
     	'keypress .comment-form textarea': 'commentTextboxKeyPressed',
     },
 
-    initialize: function (options, app) {
+    initialize: function (options, app, uiPrefsView) {
         var self = this;
         self.app = app;
         BaseView.prototype.initialize.call(self, options);
         
-        // TODO: load from uiPrefs
-        //self.options.onlyMine = uiPrefs...    
+        self.uiPrefsView = uiPrefsView;
+        self.options.onlyMine = self.uiPrefsView.getUiPref('timeline__only_mine');
         self.initializeParams();
         self.render();
     },
@@ -247,6 +249,8 @@ module.exports = BaseView.extend({
     toggleOnlyMineClicked: function (event) {
     	var self = this;
     	self.options.onlyMine = event.target.checked;
+    	// save ui pref
+    	self.uiPrefsView.saveUiPrefs({'timeline__only_mine': self.options.onlyMine});
     	self.resetAndLoad();
     },
     
