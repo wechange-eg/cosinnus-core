@@ -10,6 +10,7 @@ module.exports = Backbone.View.extend({
     initialize: function (uiPrefs) {
         var self = this;
         Backbone.View.prototype.initialize.call(self);
+        $('body').on('click', '[data-target="ui-pref"]', self.onUiPrefLinkClicked.bind(this));
         self.uiPrefs = uiPrefs;
     },
     
@@ -46,6 +47,29 @@ module.exports = Backbone.View.extend({
             });
     	});
     	
+    },
+    
+    /** A listener for clicks on links that cause ui pref changes. 
+     * 	Required attributes on the link are:
+     * 		- `data-target="ui-pref"`: as identifier
+     * 		- `data-ui-pref`: set to the name of the ui pref
+     * 		- `data-ui-pref-value`: set to the value the ui pref should take
+     * 		- `data-hide-after`: (optional) a selector for an element that should be hidden 
+     * 				after the ui pref was saved
+     *  */
+    onUiPrefLinkClicked: function(event) {
+    	var self = this;
+    	var prefs = {};
+    	var $link = $(event.target);
+    	
+    	prefs[$link.attr('data-ui-pref')] = $link.attr('data-ui-pref-value');
+    	this.saveUiPrefs(prefs);
+    	
+    	// if an element is given in `data-hide-after`, hide that element
+    	var hideAfter = $link.attr('data-hide-after');
+    	if (hideAfter) {
+    		$(hideAfter).fadeOut();
+    	}
     },
     
 });

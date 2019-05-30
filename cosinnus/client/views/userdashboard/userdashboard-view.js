@@ -125,6 +125,15 @@ module.exports = BaseView.extend({
     
     loadTimeline: function () {
     	var self = this;
+    	
+    	// show welcome screen if ui pref is set
+    	var $welcomeFrame = self.$el.find('.dashboard-welcome-frame');
+    	if (self.uiPrefsView.getUiPref('timeline__hide_welcome_screen')) {
+    		$welcomeFrame.remove();
+    	} else {
+    		$welcomeFrame.show();
+    	}
+    	
     	self.timelineView = new TimelineView({
     		el: self.$el.find('.timeline-root'),
     	}, self.app, self.uiPrefsView);

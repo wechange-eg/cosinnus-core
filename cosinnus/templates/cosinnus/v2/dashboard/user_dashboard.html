@@ -58,9 +58,11 @@
 	</div>
 		
 	<div class="dashboard-center-bar dashboard-column visible-panel-2">
-		<div class="dashboard-welcome-frame">
+		<div class="dashboard-welcome-frame" style="display: none">
 			<div class="aside-link text-small">
-				<a class="pale-color pale-with-highlight hide-welcome-screen">
+				<a class="pale-color pale-with-highlight hide-welcome-screen"
+					data-target="ui-pref" data-ui-pref="timeline__hide_welcome_screen"
+					data-ui-pref-value="1" data-hide-after=".dashboard-welcome-frame">
 					{% trans "Do not show this again" %}
 				</a>
 			</div>
