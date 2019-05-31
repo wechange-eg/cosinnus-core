@@ -25,7 +25,7 @@ UI_PREF_DASHBOARD_WIDGET_SORT_KEY_OFFERS = 'dashboard_widgets_sort_key__offers'
 
 ALL_UI_PREFS = {
     UI_PREF_DASHBOARD_TIMELINE_HIDE_WELCOME_SCREEN: forms.BooleanField(initial=False, required=False),
-    UI_PREF_DASHBOARD_TIMELINE_MINE_ONLY: forms.BooleanField(initial=True, required=False),
+    UI_PREF_DASHBOARD_TIMELINE_MINE_ONLY: forms.BooleanField(initial=False, required=False),
     UI_PREF_DASHBOARD_WIDGET_SORT_KEY_PADS: forms.IntegerField(initial=1, validators=[MinValueValidator(0), MaxValueValidator(100)]),
     UI_PREF_DASHBOARD_WIDGET_SORT_KEY_FILES: forms.IntegerField(initial=2, validators=[MinValueValidator(0), MaxValueValidator(100)]),
     UI_PREF_DASHBOARD_WIDGET_SORT_KEY_MESSAGES: forms.IntegerField(initial=3, validators=[MinValueValidator(0), MaxValueValidator(100)]),
