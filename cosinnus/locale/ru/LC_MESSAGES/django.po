@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wechange RU\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-29 16:46+0200\n"
+"POT-Creation-Date: 2019-05-31 15:37+0200\n"
 "PO-Revision-Date: 2019-04-11 17:13+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -4046,6 +4046,37 @@ msgstr "Закрыть"
 msgid "Show large map"
 msgstr ""
 
+msgid "Do not show this again"
+msgstr ""
+
+#, fuzzy
+#| msgid "Welcome!"
+msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+msgid "Welcome"
+msgstr "Добро пожаловать!"
+
+#, fuzzy, python-format
+#| msgid "Edit “%(team_name)s”"
+msgctxt "this is a two-line text that says 'Welcome to <WebsiteName>'"
+msgid "to %(portal_name)s"
+msgstr "Редактировать проект  “%(team_name)s”"
+
+#, python-format
+msgid "Good to see you! At %(portal_name)s you can collaborate with others in Projects and Groups. Whether Initiative, Organisation, or Network - %(portal_name)s offers all the necessary tools for your online collaboration."
+msgstr ""
+
+msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
+msgstr ""
+
+msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
+msgstr ""
+
+msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
+msgstr ""
+
+msgid "What's happening where and when? What's to discover? Where to meet?"
+msgstr ""
+
 msgid "What's the latest news?"
 msgstr ""
 
@@ -4083,18 +4114,6 @@ msgstr "Язык"
 #| msgid "Register and join!"
 msgid "Register a new account"
 msgstr "Зарегистрируйтесь и присоединитесь!"
-
-msgid "Organize your projects or initiatives efficiently with your fellow campaigners. All important tools for collaborating in one place: News, Pads, Events, Todos, and more."
-msgstr ""
-
-msgid "Groups help improve communication and collaboration in large networks or organisations. Within a Group you can bring together several smaller projects or workgroups."
-msgstr ""
-
-msgid "What will our region look like in the future? What is your idea for an environmentally friendly and sustainable region? Find co-campaigners for your project ideas."
-msgstr ""
-
-msgid "What's happening where and when? What's to discover? Where to meet?"
-msgstr ""
 
 #, fuzzy
 #| msgid "Portal"
