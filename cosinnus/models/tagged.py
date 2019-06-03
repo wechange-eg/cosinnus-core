@@ -313,7 +313,7 @@ class LastVisitedMixin(object):
         
         from cosinnus.models.user_dashboard import DashboardItem
         from cosinnus.models.group import CosinnusPortal
-        ct = ContentType.objects.get_for_model(self)
+        ct = self.get_content_type_for_last_visited()
         visit = get_object_or_None(LastVisitedObject, content_type=ct, object_id=self.id, user=user, portal=CosinnusPortal.get_current())
         if visit is None:
             visit = LastVisitedObject(content_type=ct, object_id=self.id, user=user, portal=CosinnusPortal.get_current())
@@ -322,6 +322,9 @@ class LastVisitedMixin(object):
         visit.item_data = DashboardItem(self)
         visit.save()
         return visit
+    
+    def get_content_type_for_last_visited(self):
+        return ContentType.objects.get_for_model(self)
 
 
 @python_2_unicode_compatible

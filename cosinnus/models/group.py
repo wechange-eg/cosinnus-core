@@ -56,6 +56,7 @@ from cosinnus.core.registries.attached_objects import attached_object_registry
 from django.apps import apps
 from cosinnus.models.tagged import LikeableObjectMixin, LastVisitedMixin
 import datetime
+from django.contrib.contenttypes.models import ContentType
 
 logger = logging.getLogger('cosinnus')
 
@@ -1151,6 +1152,10 @@ class CosinnusBaseGroup(LastVisitedMixin, LikeableObjectMixin, IndexingUtilsMixi
             return []
         parents_children = self.get_children(for_parent_id=self.parent_id)
         return [child for child in parents_children if not child.id == self.id]
+    
+    def get_content_type_for_last_visited(self):
+        """ Overriding from `LastVisitedMixin` to always use the same group ct """
+        return ContentType.objects.get_for_model(get_cosinnus_group_model())
     
 
 class CosinnusGroup(CosinnusBaseGroup):

@@ -37,6 +37,8 @@ from cosinnus.views.mixins.group import RequireLoggedInMixin
 from cosinnus.views.mixins.reflected_objects import MixReflectedObjectsMixin
 from django.shortcuts import redirect
 from cosinnus.views.ui_prefs import get_ui_prefs_for_user
+from django.utils.timezone import now
+from dateutil.relativedelta import relativedelta
 
 
 logger = logging.getLogger('cosinnus')
@@ -95,26 +97,51 @@ class BaseUserDashboardWidgetView(View):
 
 class MyGroupsClusteredMixin(object):
     
-    def get_group_clusters(self, user):
+    def get_group_clusters(self, user, sort_by_activity=False):
         clusters = []
         projects = list(CosinnusProject.objects.get_for_user(user))
         societies = list(CosinnusSociety.objects.get_for_user(user))
+        group_ct = ContentType.objects.get_for_model(get_cosinnus_group_model())
+        if sort_by_activity:
+            group_last_visited_qs = LastVisitedObject.objects.filter(user=user, content_type=group_ct, portal=CosinnusPortal.get_current())
+            # a dict of group-id -> datetime
+            group_last_visited = dict(group_last_visited_qs.values_list('object_id', 'visited'))
+        else:
+            group_last_visited = {}
+        default_date = now() - relativedelta(years=100)
+        
+        class AttrList(list):
+            last_visited = None
         
         filter_group_slugs = getattr(settings, 'NEWW_DEFAULT_USER_GROUPS', [])
         for society in societies:
             if society.slug in filter_group_slugs:
                 continue
             
-            items = [DashboardItem(society, is_emphasized=True)]
+            # the most recent visit time to any project or society in the cluster
+            most_recent_dt = group_last_visited.get(society.id, default_date)
+            items = AttrList([DashboardItem(society, is_emphasized=True)])
             for i in range(len(projects)-1, -1, -1):
                 project = projects[i]
                 if project.parent == society:
                     items.append(DashboardItem(project))
                     projects.pop(i)
+                    project_dt = group_last_visited.get(project.id, default_date)
+                    logger.warn('Checking %s ' % project.id)
+                    most_recent_dt = project_dt if project_dt > most_recent_dt else most_recent_dt
+            items.last_visited = most_recent_dt
             clusters.append(items)
             
         # add unclustered projects as own cluster
-        clusters.extend([[DashboardItem(proj)] for proj in projects])
+        for proj in projects:
+            items = AttrList([DashboardItem(proj)])
+            items.last_visited = group_last_visited.get(proj.id, default_date)
+            clusters.append(items)
+        
+        # sort clusters by last_visited
+        if sort_by_activity:
+            clusters = sorted(clusters, key=lambda cluster: cluster.last_visited, reverse=True)
+        
         return clusters
 
 
@@ -125,7 +152,7 @@ class GroupWidgetView(MyGroupsClusteredMixin, BaseUserDashboardWidgetView):
         TODO: use clever caching """
         
     def get_data(self, *kwargs):
-        clusters = self.get_group_clusters(self.request.user)
+        clusters = self.get_group_clusters(self.request.user, sort_by_activity=True)
         return {'group_clusters': clusters}
 
 api_user_groups = GroupWidgetView.as_view()

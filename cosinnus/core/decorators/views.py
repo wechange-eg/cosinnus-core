@@ -282,6 +282,9 @@ def require_read_access(group_url_kwarg='group', group_attr='group'):
             # this is why almost every BaseTaggableObject's View has a .group attribute:
             setattr(self, group_attr, group)
             
+            # record visit to group for this user
+            if user.is_authenticated:
+                group.mark_visited(user)
             
             requested_object = None
             try:
