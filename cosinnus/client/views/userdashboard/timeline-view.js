@@ -113,7 +113,10 @@ module.exports = BaseView.extend({
     /** Pressing enter (unless with shift or ctrl) sends the form */
     commentTextboxKeyPressed: function (event) {
     	if (event.keyCode == 13 && !event.shiftKey && !event.ctrlKey) {
-    	    $(event.target).parents('form')[0].submit();
+    	    var $form = $(event.target).parents('form');
+    	    if (!$form.hasClass('disabled')) {
+    	    	$form.submit();
+    	    }
     	    event.preventDefault();
     	}
     },

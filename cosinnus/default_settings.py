@@ -200,6 +200,7 @@ def compile_installed_apps(internal_apps=[]):
         'cosinnus_stream',
         'cosinnus_todo',
         'announcements',
+        'ajax_forms',
         
         # 'django_extensions',
         'django_filters',
