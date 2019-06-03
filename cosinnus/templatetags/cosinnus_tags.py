@@ -338,25 +338,28 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
         from cosinnus.views.user_dashboard import MyGroupsClusteredMixin
         from cosinnus.models.user_dashboard import DashboardItem
         
+        def _escape_quotes(text):
+            return text.replace('"', '\\"').replace("'", "\\'")
+        
         if settings.COSINNUS_IDEAS_ENABLED:
             # "My Ideas"
             my_ideas = CosinnusIdea.objects.all_in_portal().filter(creator=user).order_by(Lower('title'))
-            context['my_ideas_json_encoded'] = _json.dumps([DashboardItem(idea) for idea in my_ideas])
+            context['my_ideas_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(idea) for idea in my_ideas]))
             # "Followed Ideas"
             idea_content_type = ContentType.objects.get_for_model(CosinnusIdea)
             my_followed_ids = LikeObject.objects.filter(content_type=idea_content_type, user=user, followed=True).values_list('object_id', flat=True)
             my_followed_ideas = CosinnusIdea.objects.all_in_portal().filter(id__in=my_followed_ids).order_by(Lower('title'))
             my_followed_ideas = my_followed_ideas.exclude(creator=user)
-            context['followed_ideas_json_encoded'] = _json.dumps([DashboardItem(idea) for idea in my_followed_ideas])
+            context['followed_ideas_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(idea) for idea in my_followed_ideas]))
             
         # "My Groups and Projects"
-        context['group_clusters_json_encoded'] = _json.dumps(MyGroupsClusteredMixin().get_group_clusters(user))
+        context['group_clusters_json_encoded'] = _escape_quotes(_json.dumps(MyGroupsClusteredMixin().get_group_clusters(user)))
         # "Invitations"
         societies_invited = CosinnusSociety.objects.get_for_user_invited(request.user)
         projects_invited = CosinnusProject.objects.get_for_user_invited(request.user)
         groups_invited = [DashboardItem(group) for group in societies_invited]
         groups_invited += [DashboardItem(group) for group in projects_invited]
-        context['groups_invited_json_encoded'] = _json.dumps(groups_invited)
+        context['groups_invited_json_encoded'] = _escape_quotes(_json.dumps(groups_invited))
         
         attending_events = []
         try:
@@ -367,7 +370,7 @@ def cosinnus_menu_v2(context, template="cosinnus/v2/navbar/navbar.html"):
         except:
             if settings.DEBUG:
                 raise
-        context['attending_events_json_encoded'] = _json.dumps([DashboardItem(event) for event in attending_events])
+        context['attending_events_json_encoded'] = _escape_quotes(_json.dumps([DashboardItem(event) for event in attending_events]))
         
         # TODO cache the dumped JSON strings?
         
